@@ -92,8 +92,8 @@ class Generator : public QObject
  */
 struct PixmapRequest
 {
-    PixmapRequest( int rId, int n, int w, int h, int p, bool a = false )
-        : id( rId ), pageNumber( n ), width( w ), height( h ),
+    PixmapRequest( int rId, int n, int w, int h, int p, bool a = false, int r = 0 )
+        : id( rId ), pageNumber( n ), width( w ), height( h ), rotation( r ),
         priority( p ), async( a ), page( 0 )  {};
 
     // observer id
@@ -102,6 +102,7 @@ struct PixmapRequest
     int pageNumber;
     int width;
     int height;
+    int rotation;
     // asyncronous request priority (less is better, 0 is max)
     int priority;
     // generate the pixmap in a thread and notify observer when done

@@ -46,7 +46,7 @@ optionDialogSpecialWidget::optionDialogSpecialWidget( QWidget* parent,  const ch
   editorDescriptionString += i18n("Kile works very well");
   
   editorNameString        += "NEdit";
-  editorCommandString     += "ncl -noask -line %l %f || nc -noask -line %l %f";
+  editorCommandString     += "nedit-nc -noask -line %l %f";
   editorDescriptionString += i18n("NEdit perfectly supports inverse search.");
   
   editorNameString        += "VIM - Vi IMproved / GUI";

@@ -78,5 +78,5 @@ Icon=kpdf
 Type=Application
 DocPath=kpdf/index.html
 InitialPreference=7
-Categories=Qt;KDE;Graphics;Viewer;
+Categories=Qt;KDE;Office;Viewer;
 

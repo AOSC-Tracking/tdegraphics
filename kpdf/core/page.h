@@ -120,6 +120,9 @@ class KPDFPage
         void deletePixmapsAndRects();
         void deleteHighlights( int s_id = -1 );
 
+        void setRotation( int r );
+        void rotate90degrees();
+
     private:
         friend class PagePainter;
         int m_number, m_rotation;

@@ -135,6 +135,8 @@ class PageView : public QScrollView, public DocumentObserver
         void slotFitToWidthToggled( bool );
         void slotFitToPageToggled( bool );
         void slotFitToTextToggled( bool );
+        void slotRotateRight();
+        void slotRotateLeft();
         void slotTwoPagesToggled( bool );
         void slotContinuousToggled( bool );
         void slotSetMouseNormal();

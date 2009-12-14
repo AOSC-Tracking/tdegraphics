@@ -316,7 +316,8 @@ void PDFGenerator::generatePixmap( PixmapRequest * request )
     // 1. Set OutputDev parameters and Generate contents
     // note: thread safety is set on 'false' for the GUI (this) thread
     kpdfOutputDev->setParams( request->width, request->height, genObjectRects, genObjectRects, false );
-    pdfdoc->displayPage( kpdfOutputDev, page->number() + 1, fakeDpiX, fakeDpiY, 0, false, true, false );
+    pdfdoc->displayPage( kpdfOutputDev, page->number() + 1, fakeDpiX, fakeDpiY, request->rotation,
+                         false, true, false );
     if ( genObjectRects )
         pdfdoc->processLinks( kpdfOutputDev, page->number() + 1 );
 
@@ -1225,7 +1226,7 @@ void PDFPixmapGeneratorThread::run()
     d->generator->kpdfOutputDev->setParams( width, height, 
                                             genObjectRects, genObjectRects, TRUE /*thread safety*/ );
     d->generator->pdfdoc->displayPage( d->generator->kpdfOutputDev, page->number() + 1,
-                                       fakeDpiX, fakeDpiY, 0, false, true, false );
+                                       fakeDpiX, fakeDpiY, d->currentRequest->rotation, false, true, false );
     if ( genObjectRects )
         d->generator->pdfdoc->processLinks( d->generator->kpdfOutputDev, page->number() + 1 );
 

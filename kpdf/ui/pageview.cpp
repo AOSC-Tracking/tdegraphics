@@ -71,6 +71,7 @@ public:
     // view layout (columns and continuous in Settings), zoom and mouse
     PageView::ZoomMode zoomMode;
     float zoomFactor;
+    int rotation;
     PageView::MouseMode mouseMode;
     QPoint mouseGrabPos;
     QPoint mousePressPos;
@@ -185,6 +186,7 @@ PageView::PageView( QWidget *parent, KPDFDocument *document )
     d->document = document;
     d->zoomMode = (PageView::ZoomMode)KpdfSettings::zoomMode();
     d->zoomFactor = KpdfSettings::zoomFactor();
+    d->rotation = 0;
     d->mouseMode = MouseNormal;
     d->mouseMidStartY = -1;
     d->mouseOnRect = false;
@@ -262,6 +264,14 @@ void PageView::setupActions( KActionCollection * ac )
 
     d->aZoomFitText = new KToggleAction( i18n("Fit to &Text"), "viewmagfit", 0, ac, "zoom_fit_text" );
     connect( d->aZoomFitText, SIGNAL( toggled( bool ) ), SLOT( slotFitToTextToggled( bool ) ) );
+
+    // rotate actions
+    KAction *action;
+    action = new KAction( i18n("Rotate Right"), "rotate_cw", KShortcut( "Ctrl+Shift++" ),
+                          this, SLOT( slotRotateRight() ), ac, "rotate_right" );
+
+    action = new KAction( i18n("Rotate Left"), "rotate_ccw", KShortcut( "Ctrl+Shift+-" ),
+                          this, SLOT( slotRotateLeft() ), ac, "rotate_left" );
 
     // View-Layout actions
     d->aViewTwoPages = new KToggleAction( i18n("&Two Pages"), "view_left_right", 0, ac, "view_twopages" );
@@ -1867,7 +1877,7 @@ void PageView::slotRequestVisiblePixmaps( int newLeft, int newTop )
         if ( !i->page()->hasPixmap( PAGEVIEW_ID, i->width(), i->height() ) )
         {
             PixmapRequest * p = new PixmapRequest(
-                    PAGEVIEW_ID, i->pageNumber(), i->width(), i->height(), PAGEVIEW_PRIO, true );
+                    PAGEVIEW_ID, i->pageNumber(), i->width(), i->height(), PAGEVIEW_PRIO, true, d->rotation );
             requestedPixmaps.push_back( p );
         }
 
@@ -1907,7 +1917,7 @@ void PageView::slotRequestVisiblePixmaps( int newLeft, int newTop )
             // request the pixmap if not already present
             if ( !i->page()->hasPixmap( PAGEVIEW_ID, i->width(), i->height() ) && i->width() > 0 )
                 requestedPixmaps.push_back( new PixmapRequest(
-                        PAGEVIEW_ID, i->pageNumber(), i->width(), i->height(), PAGEVIEW_PRELOAD_PRIO, true ) );
+                        PAGEVIEW_ID, i->pageNumber(), i->width(), i->height(), PAGEVIEW_PRELOAD_PRIO, true, d->rotation ) );
         }
 
         // add the page before the 'visible series' in preload
@@ -1918,7 +1928,7 @@ void PageView::slotRequestVisiblePixmaps( int newLeft, int newTop )
             // request the pixmap if not already present
             if ( !i->page()->hasPixmap( PAGEVIEW_ID, i->width(), i->height() ) && i->width() > 0 )
                 requestedPixmaps.push_back( new PixmapRequest(
-                        PAGEVIEW_ID, i->pageNumber(), i->width(), i->height(), PAGEVIEW_PRELOAD_PRIO, true ) );
+                        PAGEVIEW_ID, i->pageNumber(), i->width(), i->height(), PAGEVIEW_PRELOAD_PRIO, true, d->rotation ) );
         }
     }
 
@@ -2042,6 +2052,52 @@ void PageView::slotFitToPageToggled( bool on )
 void PageView::slotFitToTextToggled( bool on )
 {
     if ( on ) updateZoom( ZoomFitText );
+}
+
+void PageView::slotRotateRight()
+{
+    d->rotation = ( d->rotation + 90 ) % 360;
+
+    QValueVector< PageViewItem * >::iterator iIt = d->items.begin(), iEnd = d->items.end();
+    for ( ; iIt != iEnd; ++iIt )
+    {
+        int r = const_cast<KPDFPage*>((*iIt)->page())->rotation();
+        r = ( r + 90 ) % 360;
+
+        const_cast<KPDFPage*>((*iIt)->page())->rotate90degrees();
+    }
+
+    // be sure to block updates to document's viewport
+    bool prevState = d->blockViewport;
+    d->blockViewport = true;
+    slotRelayoutPages();
+    d->blockViewport = prevState;
+    // request pixmaps
+    slotRequestVisiblePixmaps();
+}
+
+void PageView::slotRotateLeft()
+{
+    d->rotation -= 90;
+    if ( d->rotation < 0 ) d->rotation += 360;
+
+    QValueVector< PageViewItem * >::iterator iIt = d->items.begin(), iEnd = d->items.end();
+    for ( ; iIt != iEnd; ++iIt )
+    {
+        int r = const_cast<KPDFPage*>((*iIt)->page())->rotation();
+        r -= 90;
+        if ( r < 0 ) r += 360;
+
+        const_cast<KPDFPage*>((*iIt)->page())->rotate90degrees();
+    }
+
+    // be sure to block updates to document's viewport
+    bool prevState = d->blockViewport;
+    d->blockViewport = true;
+    slotRelayoutPages();
+    d->blockViewport = prevState;
+    // request pixmaps
+    slotRequestVisiblePixmaps();
 }
 
 void PageView::slotTwoPagesToggled( bool on )

@@ -1,6 +1,6 @@
 INCLUDES = -I$(top_srcdir) $(all_includes)
 
-kde_module_LTLIBRARIES = libdjvu.la
+lib_LTLIBRARIES = libdjvu.la
 libdjvu_la_LDFLAGS = -avoid-version $(all_libraries)
 libdjvu_la_LIBADD = $(LIBJPEG)
 libdjvu_la_SOURCES = Arrays.cpp DjVuDocEditor.cpp DjVuMessageLite.cpp GOS.cpp IW44Image.cpp \

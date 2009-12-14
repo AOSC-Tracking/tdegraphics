@@ -27,17 +27,7 @@ KPDFPage::KPDFPage( uint page, float w, float h, int r )
     : m_number( page ), m_rotation( r ), m_width( w ), m_height( h ),
     m_bookmarked( false ), m_text( 0 ), m_transition( 0 )
 {
-    // if landscape swap width <-> height (rotate 90deg CCW)
-    if ( r == 90 || r == 270 )
-    {
-        m_width = h;
-        m_height = w;
-    }
-    // avoid Division-By-Zero problems in the program
-    if ( m_width <= 0 )
-        m_width = 1;
-    if ( m_height <= 0 )
-        m_height = 1;
+    setRotation( r );
 }
 
 KPDFPage::~KPDFPage()
@@ -48,6 +38,39 @@ KPDFPage::~KPDFPage()
     delete m_transition;
 }
 
+void KPDFPage::rotate90degrees()
+    {
+        float w = m_width;
+        m_width = m_height;
+        m_height = w;
+
+        // avoid Division-By-Zero problems in the program
+
+        if ( m_width <= 0 )
+        m_width = 1;
+        if ( m_height <= 0 )
+        m_height = 1;
+
+        deletePixmapsAndRects();
+    }
+
+void KPDFPage::setRotation( int r )
+{
+    // if landscape swap width <-> height (rotate 90deg CCW)
+    if ( r == 90 || r == 270 )
+    {
+        float w = m_width;
+        m_width = m_height;
+        m_height = w;
+    }
+    // avoid Division-By-Zero problems in the program
+    if ( m_width <= 0 )
+        m_width = 1;
+    if ( m_height <= 0 )
+        m_height = 1;
+
+    deletePixmapsAndRects();
+}
 
 bool KPDFPage::hasPixmap( int id, int width, int height ) const
 {
