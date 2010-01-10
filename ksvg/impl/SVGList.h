@@ -94,11 +94,7 @@ public:
 
 	T *insertItemBefore(T *newItem, unsigned int index)
 	{
-		if (index < m_vector.size()) {
-			m_vector.insert(index, newItem);
-		} else {
-			m_vector.append(newItem);
-		}
+		m_impl.insert(index, newItem);
 		return newItem;
 	}
 
