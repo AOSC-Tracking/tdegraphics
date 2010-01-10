@@ -46,9 +46,9 @@ kdvi_LDADD = ../kviewshell/libifaces.la ../kviewshell/libkviewshell.la -lkparts
 noinst_HEADERS = dvi.h dviRenderer.h xdvi.h
 
 messages: rc.cpp
-	$(PREPARETIPS) > tips.cpp
-	$(XGETTEXT) *.cpp -o $(podir)/kdvi.pot
-	rm -f tips.cpp
+	$(PREPARETIPS) > tips.txt
+	$(XGETTEXT) *.cpp *.txt -o $(podir)/kdvi.pot
+	rm -f tips.txt
 
 xdg_apps_DATA = kdvi.desktop
 
