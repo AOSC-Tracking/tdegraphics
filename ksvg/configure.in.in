@@ -187,6 +187,9 @@ if test -n "$FRIBIDI_CONFIG"; then
 
      AC_DEFINE_UNQUOTED(HAVE_FRIBIDI, 1, [Defines if your system has the fribidi library])
   fi
+else
+  FRIBIDI_LIBS=`$PKG_CONFIG --libs fribidi`
+  FRIBIDI_CFLAGS="`$PKG_CONFIG --cflags fribidi`"
 fi
 
 AC_SUBST(FRIBIDI_LIBS)
