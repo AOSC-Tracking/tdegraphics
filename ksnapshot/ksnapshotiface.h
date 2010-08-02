@@ -19,7 +19,7 @@ class KSnapshotIface : virtual public DCOPObject
         k_dcop:
 	/** the current filename (as a URL) that will
 	    be used to save to */
-	virtual QString url() const = 0;
+	virtual TQString url() const = 0;
 
         /** Grab an image **/
         virtual void slotGrab() = 0;
@@ -31,7 +31,7 @@ class KSnapshotIface : virtual public DCOPObject
         virtual void slotSave() = 0;
 
 	/** Save the image to the specified filename */
-        virtual bool save(const QString &filename) = 0;
+        virtual bool save(const TQString &filename) = 0;
 
         /** Saves image as **/
         virtual void slotSaveAs() = 0;
@@ -46,7 +46,7 @@ class KSnapshotIface : virtual public DCOPObject
 	virtual int timeout() = 0;
 
         /** Set the URL to the file to save **/
-        virtual void setURL(const QString &newURL) = 0;
+        virtual void setURL(const TQString &newURL) = 0;
 
         /** Set the ability to grab the entire screen, just the window
                 containing the mouse, or a region */

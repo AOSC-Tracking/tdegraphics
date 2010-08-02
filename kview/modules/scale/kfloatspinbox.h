@@ -21,13 +21,13 @@
 #ifndef __kfloatspinbox_h_
 #define __kfloatspinbox_h_
 
-#include <qspinbox.h>
+#include <tqspinbox.h>
 
 class KFloatSpinBox : public QSpinBox
 {
 	Q_OBJECT
 	public:
-		KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, QWidget * parent = 0, const char * name = 0 );
+		KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, TQWidget * parent = 0, const char * name = 0 );
 		virtual ~KFloatSpinBox();
 
 		void setRange( float minValue, float maxValue, float step, unsigned int precision );
@@ -43,7 +43,7 @@ class KFloatSpinBox : public QSpinBox
 		virtual void setValueBlocking( float value );
 
 	protected:
-		virtual QString mapValueToText( int value );
+		virtual TQString mapValueToText( int value );
 		virtual int mapTextToValue( bool * ok );
 		virtual void valueChange();
 

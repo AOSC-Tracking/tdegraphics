@@ -20,31 +20,31 @@
 #ifndef PREVIEWER_H
 #define PREVIEWER_H
 
-#include <qwidget.h>
-#include <qimage.h>
-#include <qrect.h>
-#include <qbuttongroup.h>
-#include <qpoint.h>
+#include <tqwidget.h>
+#include <tqimage.h>
+#include <tqrect.h>
+#include <tqbuttongroup.h>
+#include <tqpoint.h>
 
 #include <kruler.h>
-#include <qmemarray.h>
+#include <tqmemarray.h>
 
 /**
   *@author Klaas Freitag
   */
 class ImageCanvas;
-class QCheckBox;
-class QSlider;
+class TQCheckBox;
+class TQSlider;
 class KScanDevice;
-class QComboBox;
-class QRadioButton;
-class QHBoxLayout;
+class TQComboBox;
+class TQRadioButton;
+class TQHBoxLayout;
 
 class Previewer : public QWidget
 {
     Q_OBJECT
 public:
-    Previewer(QWidget *parent=0, const char *name=0);
+    Previewer(TQWidget *parent=0, const char *name=0);
     ~Previewer();
 
     ImageCanvas *getImageCanvas( void ){ return( img_canvas ); }
@@ -52,18 +52,18 @@ public:
     /**
      * Static function that returns the image gallery base dir.
      */
-    static QString galleryRoot();
-    bool setPreviewImage( const QImage &image );
+    static TQString galleryRoot();
+    bool setPreviewImage( const TQImage &image );
     void findSelection();
 
 public slots:
-    void newImage( QImage* );
+    void newImage( TQImage* );
     void slFormatChange( int id );
     void slOrientChange(int);
     void slSetDisplayUnit( KRuler::MetricStyle unit );
     void setScanSize( int w, int h, KRuler::MetricStyle unit );
     void slCustomChange( void );
-    void slNewDimen(QRect r);
+    void slNewDimen(TQRect r);
     void slNewScanResolutions( int, int );
     void recalcFileSize( void );
     void slSetAutoSelThresh(int);
@@ -77,27 +77,27 @@ protected slots:
     void slScanBackgroundChanged(int);
 
 signals:
-    void newRect( QRect );
+    void newRect( TQRect );
     void noRect( void );
-    void setScanWidth(const QString&);
-    void setScanHeight(const QString&);
+    void setScanWidth(const TQString&);
+    void setScanHeight(const TQString&);
     void setSelectionSize( long );
 
 private:
     void checkForScannerBg();
 
-    QPoint calcPercent( int, int );
+    TQPoint calcPercent( int, int );
 
-    QHBoxLayout *layout;
+    TQHBoxLayout *layout;
     ImageCanvas *img_canvas;
-    QComboBox   *pre_format_combo;
-    QMemArray<QCString> format_ids;
-    QButtonGroup * bgroup;
-    QRadioButton * rb1;
-    QRadioButton * rb2;
-    QImage       m_previewImage;
+    TQComboBox   *pre_format_combo;
+    TQMemArray<TQCString> format_ids;
+    TQButtonGroup * bgroup;
+    TQRadioButton * rb1;
+    TQRadioButton * rb2;
+    TQImage       m_previewImage;
 
-    bool imagePiece( QMemArray<long> src,
+    bool imagePiece( TQMemArray<long> src,
                      int& start,
                      int& end );
 

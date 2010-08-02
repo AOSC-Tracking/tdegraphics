@@ -21,7 +21,7 @@
 #include "pmmatrix.h"
 #include "pmdebug.h"
 
-#include <qtextstream.h>
+#include <tqtextstream.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -528,10 +528,10 @@ PMVector PMVector::orthogonal( ) const
    return result / rl;
 }
 
-QString PMVector::serialize( ) const
+TQString PMVector::serialize( ) const
 {
-   QString result;
-   QTextStream str( &result, IO_WriteOnly );
+   TQString result;
+   TQTextStream str( &result, IO_WriteOnly );
    unsigned int i;
 
    if( m_size > 0 )
@@ -551,10 +551,10 @@ QString PMVector::serialize( ) const
    return result;
 }
 
-QString PMVector::serializeXML( ) const
+TQString PMVector::serializeXML( ) const
 {
-   QString result;
-   QTextStream str( &result, IO_WriteOnly );
+   TQString result;
+   TQTextStream str( &result, IO_WriteOnly );
    unsigned int i;
 
    if( m_size > 0 )
@@ -572,13 +572,13 @@ QString PMVector::serializeXML( ) const
    return result;
 }
 
-bool PMVector::loadXML( const QString& str )
+bool PMVector::loadXML( const TQString& str )
 {
    int i;
    int size = str.contains( ' ' ) + 1;
-   QString tmp( str );
-   QTextStream s( &tmp, IO_ReadOnly );
-   QString val;
+   TQString tmp( str );
+   TQTextStream s( &tmp, IO_ReadOnly );
+   TQString val;
    bool ok;
    
    resize( size );

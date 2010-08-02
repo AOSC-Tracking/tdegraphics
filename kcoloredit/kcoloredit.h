@@ -22,8 +22,8 @@
 #include <config.h>
 
 // include files for Qt
-#include <qevent.h>
-#include <qstringlist.h>
+#include <tqevent.h>
+#include <tqstringlist.h>
 
 // include files for KDE
 #include <kapplication.h>
@@ -109,7 +109,7 @@ class KColorEditApp : public KMainWindow
      */
     virtual bool queryExit();
 
-	void mouseReleaseEvent(QMouseEvent* event);
+	void mouseReleaseEvent(TQMouseEvent* event);
 
   public slots:
 

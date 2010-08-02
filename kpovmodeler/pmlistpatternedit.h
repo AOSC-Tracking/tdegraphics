@@ -28,9 +28,9 @@
 
 class PMListPattern;
 class PMVectorEdit;
-class QComboBox;
+class TQComboBox;
 class PMFloatEdit;
-class QLabel;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMListPattern.
@@ -43,7 +43,7 @@ public:
    /**
     * Creates a PMListPatternEdit with parent and name
     */
-   PMListPatternEdit( QWidget* parent, const char* name = 0 );
+   PMListPatternEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -64,13 +64,13 @@ protected slots:
 
 private:
    PMListPattern*  m_pDisplayedObject;
-   QComboBox*      m_pTypeCombo;
+   TQComboBox*      m_pTypeCombo;
    PMFloatEdit*    m_pMortar;
    PMVectorEdit*   m_pBrickSize;
-   QLabel*         m_pBrickSizeLabel;
-   QLabel*         m_pMortarLabel;
+   TQLabel*         m_pBrickSizeLabel;
+   TQLabel*         m_pMortarLabel;
 
-   QLabel*         m_pDepthLabel;
+   TQLabel*         m_pDepthLabel;
    PMFloatEdit*    m_pDepth;
 };
 

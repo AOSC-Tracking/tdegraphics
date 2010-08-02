@@ -154,12 +154,12 @@ void PMMedia::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMMedia::description( ) const
+TQString PMMedia::description( ) const
 {
    return i18n( "media" );
 }
 
-void PMMedia::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMMedia::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
    e.setAttribute( "enable_absorption", m_enableAbsorption );
@@ -399,7 +399,7 @@ void PMMedia::enableScattering( bool c )
    }
 }
 
-PMDialogEditBase* PMMedia::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMMedia::editWidget( TQWidget* parent ) const
 {
    return new PMMediaEdit( parent );
 }

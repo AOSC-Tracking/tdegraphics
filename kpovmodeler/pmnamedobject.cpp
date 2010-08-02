@@ -60,7 +60,7 @@ void PMNamedObject::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMNamedObject::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMNamedObject::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "name", m_name );
    Base::serialize( e, doc );
@@ -72,7 +72,7 @@ void PMNamedObject::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-void PMNamedObject::setName( const QString& newName )
+void PMNamedObject::setName( const TQString& newName )
 {
    if( newName != m_name )
    {

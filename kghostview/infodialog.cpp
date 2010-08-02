@@ -17,11 +17,11 @@
  *
  */
 
-#include <qframe.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qdatetime.h>
-#include <qregexp.h>
+#include <tqframe.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqdatetime.h>
+#include <tqregexp.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -32,28 +32,28 @@
 //
 // Using KDialogBase in message box mode (gives centered action button)
 //
-InfoDialog::InfoDialog( QWidget *parent, const char *name, bool modal )
+InfoDialog::InfoDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( i18n("Document Information"), Yes, Yes, Yes, parent,
 		name, modal, true, KStdGuiItem::ok() )
 {
-  QFrame *page = makeMainWidget();
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
-  QGridLayout *glay = new QGridLayout( topLayout, 3, 2 );
+  TQFrame *page = makeMainWidget();
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
+  TQGridLayout *glay = new TQGridLayout( topLayout, 3, 2 );
   glay->setColStretch(1,1);
 
-  QLabel *label = new QLabel( i18n("File name:" ), page );
+  TQLabel *label = new TQLabel( i18n("File name:" ), page );
   glay->addWidget( label, 0, 0, AlignRight|AlignVCenter );
-  mFileLabel = new QLabel( page );
+  mFileLabel = new TQLabel( page );
   glay->addWidget( mFileLabel, 0, 1 );
 
-  label = new QLabel( i18n("Document title:" ), page );
+  label = new TQLabel( i18n("Document title:" ), page );
   glay->addWidget( label, 1, 0, AlignRight|AlignVCenter );
-  mTitleLabel = new QLabel( page );
+  mTitleLabel = new TQLabel( page );
   glay->addWidget( mTitleLabel, 1, 1 );
 
-  label = new QLabel( i18n("Publication date:" ), page );
+  label = new TQLabel( i18n("Publication date:" ), page );
   glay->addWidget( label, 2, 0, AlignRight|AlignVCenter );
-  mDateLabel = new QLabel( page );
+  mDateLabel = new TQLabel( page );
   glay->addWidget( mDateLabel, 2, 1 );
 
   topLayout->addStretch(1);
@@ -81,17 +81,17 @@ namespace {
      * For PS files, there is no such standard and dates appear
      * in any format they desire.
      */
-    QString parseDate( const QString& dateStr ) {
+    TQString parseDate( const TQString& dateStr ) {
 	kdDebug( 4500 ) << "parseDate( \"" << dateStr << "\" )" << endl;
-	QRegExp exp( "\\((?:D:)?"
+	TQRegExp exp( "\\((?:D:)?"
 		    "(\\d\\d\\d\\d)"
 		    "(\\d\\d)?(\\d\\d)?(\\d\\d)?.*"
 		    "(\\d\\d)?(\\d\\d)?.*"
 		    "(?:(\\+|\\-)(\\d\\d)\'?(\\d\\d)\'?)?"
 		    "\\)" );
 	if ( exp.exactMatch( dateStr ) ) {
-	    QStringList list = exp.capturedTexts();
-	    QStringList::iterator iter = list.begin();
+	    TQStringList list = exp.capturedTexts();
+	    TQStringList::iterator iter = list.begin();
 	    ++iter; // whole string!
 #undef GET
 #define GET( variable, def ) \
@@ -108,18 +108,18 @@ namespace {
 	    GET( sec, 0 )
 #undef GET
 	    // FIXME: this ignores the timezone
-	    QDate date( year, month, day );
-	    QTime time( hour, min, sec );
+	    TQDate date( year, month, day );
+	    TQTime time( hour, min, sec );
 	    KLocale locale( "kghostview" );
-	    return locale.formatDateTime( QDateTime( date, time ) );
+	    return locale.formatDateTime( TQDateTime( date, time ) );
 	}
 	kdDebug( 4500 ) << "parseDate failed." << endl;
 	return dateStr;
     }
 }
 
-void InfoDialog::setup( const QString &fileName, const QString &documentTitle,
-			const QString &publicationDate )
+void InfoDialog::setup( const TQString &fileName, const TQString &documentTitle,
+			const TQString &publicationDate )
 {
   mFileLabel->setText( fileName );
   mTitleLabel->setText( documentTitle );

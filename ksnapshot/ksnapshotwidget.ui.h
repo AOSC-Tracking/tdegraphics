@@ -32,21 +32,21 @@ void KSnapshotWidget::slotModeChanged( int mode )
 }
 
 
-void KSnapshotWidget::setPreview( const QPixmap &pm )
+void KSnapshotWidget::setPreview( const TQPixmap &pm )
 {
-    QImage img = pm.convertToImage();
+    TQImage img = pm.convertToImage();
     double r1 = ( ( double ) pm.height() ) / pm.width();
     if ( r1 * previewWidth()  < previewHeight() )
         img = img.smoothScale(  previewWidth(),
 				int( previewWidth() * r1 ),
-				QImage::ScaleMin );
+				TQImage::ScaleMin );
     else
         img = img.smoothScale( ( int ) ( ( ( double )previewHeight() ) / r1 ),
-			       previewHeight(), QImage::ScaleMin );
+			       previewHeight(), TQImage::ScaleMin );
 
-    QToolTip::remove( lblImage );
-    QToolTip::add( lblImage,
-        QString( "Preview of the snapshot image (%1 x %2)" )
+    TQToolTip::remove( lblImage );
+    TQToolTip::add( lblImage,
+        TQString( "Preview of the snapshot image (%1 x %2)" )
         .arg( pm.width() ).arg( pm.height() ) );
 
     lblImage->setPixmap( img );
@@ -115,7 +115,7 @@ void KSnapshotWidget::slotStartDrag()
 }
 
 
-QPixmap KSnapshotWidget::preview()
+TQPixmap KSnapshotWidget::preview()
 {
     return *lblImage->pixmap();
 }

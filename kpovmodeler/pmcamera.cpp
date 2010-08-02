@@ -114,12 +114,12 @@ PMCamera::~PMCamera( )
 {
 }
 
-QString PMCamera::description( ) const
+TQString PMCamera::description( ) const
 {
    return i18n( "camera" );
 }
 
-void PMCamera::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMCamera::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "camera_type", cameraTypeToString( m_cameraType ) );
    e.setAttribute( "cylinder_type", m_cylinderType );
@@ -443,7 +443,7 @@ void PMCamera::setExportPovray( bool ex )
    }
 }
 
-PMDialogEditBase* PMCamera::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMCamera::editWidget( TQWidget* parent ) const
 {
    return new PMCameraEdit( parent );
 }
@@ -699,9 +699,9 @@ void PMCamera::calculateLookAtAngle( PMVector& right, PMVector& up, PMVector& di
    up *= upLen;
 }
 
-QString PMCamera::cameraTypeToString( PMCamera::CameraType t )
+TQString PMCamera::cameraTypeToString( PMCamera::CameraType t )
 {
-   QString str( "perspective" );
+   TQString str( "perspective" );
    switch( t )
    {
       case Perspective:
@@ -728,7 +728,7 @@ QString PMCamera::cameraTypeToString( PMCamera::CameraType t )
    return str;
 }
 
-PMCamera::CameraType PMCamera::stringToCameraType( const QString& str )
+PMCamera::CameraType PMCamera::stringToCameraType( const TQString& str )
 {
    CameraType t = Perspective;
 

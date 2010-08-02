@@ -129,7 +129,7 @@ void SVGGradientElementImpl::putValueProperty(ExecState *exec, int token, const 
 			break;
 		case SpreadMethod:
 		{
-			QString spreadMethod = value.toString(exec).qstring();
+			TQString spreadMethod = value.toString(exec).qstring();
 
 			if(spreadMethod == "repeat")
 				m_spreadMethod->setBaseVal(SVG_SPREADMETHOD_REPEAT);
@@ -160,7 +160,7 @@ void SVGGradientElementImpl::setAttributes()
 
 void SVGGradientElementImpl::setAttributesFromHref()
 {
-	QString _href = SVGURIReferenceImpl::getTarget(href()->baseVal().string());
+	TQString _href = SVGURIReferenceImpl::getTarget(href()->baseVal().string());
 
 	if(!_href.isEmpty())
 	{
@@ -168,12 +168,12 @@ void SVGGradientElementImpl::setAttributesFromHref()
 
 		if(refGradient)
 		{
-			QMap<QString, DOM::DOMString> refAttributes = refGradient->gradientAttributes();
-			QMap<QString, DOM::DOMString>::iterator it;
+			TQMap<TQString, DOM::DOMString> refAttributes = refGradient->gradientAttributes();
+			TQMap<TQString, DOM::DOMString>::iterator it;
 
 			for(it = refAttributes.begin(); it != refAttributes.end(); ++it)
 			{
-				QString name = it.key();
+				TQString name = it.key();
 				DOM::DOMString value = it.data();
 
 				if(!hasAttribute(name))
@@ -210,7 +210,7 @@ SVGGradientElementImpl *SVGGradientElementImpl::stopsSource()
 
 	if(!haveStops)
 	{
-		QString _href = SVGURIReferenceImpl::getTarget(href()->baseVal().string());
+		TQString _href = SVGURIReferenceImpl::getTarget(href()->baseVal().string());
 		
 		if(!_href.isEmpty())
 		{

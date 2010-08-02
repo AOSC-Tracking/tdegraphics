@@ -18,9 +18,9 @@
 #ifndef PALETTE_H
 #define PALETTE_H
 
-#include <qstring.h>
-#include <qtextstream.h>
-#include <qfile.h>
+#include <tqstring.h>
+#include <tqtextstream.h>
+#include <tqfile.h>
 
 #include "color.h"
 
@@ -35,11 +35,11 @@ public:
 	Palette(const Palette& palette);
 	~Palette();
 	/** @return A list of KDE palettes */
-	static QStringList kdePalettes();
+	static TQStringList kdePalettes();
 	/** sets palette name */
-	void setName(const QString& name);
+	void setName(const TQString& name);
 	/** @return palette name */
-	const QString& name() const;
+	const TQString& name() const;
 	/** inserts a color at a given position */
 	void insert(const int index, Color* const color);
 	/** appends a color */
@@ -61,32 +61,32 @@ public:
 	/** Loads a palette from a text stream
 	 *  @return whether the load was succesfull
 	 */
-	bool load(QTextStream& stream, bool loadName = true);
+	bool load(TQTextStream& stream, bool loadName = true);
 	/** Loads a palette from a file.
 	 *  If loadName is true, palette name is expected.
 	 *  @return whether the load was succesfull
 	 */
-	bool load(const QString& fileName);
+	bool load(const TQString& fileName);
 	/** Saves a palette into a text stream.
 	 *  If file is given, it is checked for IO errors.
 	 *  If saveName is true, palette name is saved.
 	 *  @return whether save was succesfull
 	 */
-	bool save(QTextStream& stream, const QFile* file = 0, bool saveName = true);
+	bool save(TQTextStream& stream, const TQFile* file = 0, bool saveName = true);
 	/** Saves a palette to a file
 	 *  @return whether save was succesfull
 	 */
-	bool save(const QString& fileName);
+	bool save(const TQString& fileName);
 	/** Deletes contents of the palette */
 	void deleteContents();
 	/** @return A possible error description from the last unsuccessfull
 	 *  IO operation
 	 */
-	const QString& errorString() const;
+	const TQString& errorString() const;
 
 private:
 	/** The palette name */
-	QString m_name;
+	TQString m_name;
 
 private:
 	/** Initialization method called by constructors */
@@ -94,9 +94,9 @@ private:
 
 protected:
 	/** A list of palette colors */
-	QPtrList<Color> colors;
+	TQPtrList<Color> colors;
 	/** An IO error description */
-	QString m_errorString;
+	TQString m_errorString;
 };
 
 #endif

@@ -18,28 +18,28 @@
 #ifndef PALETTEVIEWSCROLLEDAREA_H
 #define PALETTEVIEWSCROLLEDAREA_H
 
-#include <qframe.h>
-#include <qevent.h>
+#include <tqframe.h>
+#include <tqevent.h>
 
 #include "palette.h"
 
 class KColorEditDoc;
 class KColorEditView;
-class QScrollBar;
+class TQScrollBar;
 
 /** This widget draws the palette view scrolled area.
  *  It has paste and cut features.
  *  @author Artur Rataj
  */
-class PaletteViewScrolledArea : public QFrame {
+class PaletteViewScrolledArea : public TQFrame {
 	Q_OBJECT
 
 public:
 	/** Constructs the widget */
 	PaletteViewScrolledArea(const int defaultCellWidth, const int defaultCellHeight,
-		const int cellSpacing, QScrollBar* scrollBar,
-		QScrollBar* hScrollBar, KColorEditView* view,
-		QWidget* parent = 0, const char* name = 0);
+		const int cellSpacing, TQScrollBar* scrollBar,
+		TQScrollBar* hScrollBar, KColorEditView* view,
+		TQWidget* parent = 0, const char* name = 0);
 	~PaletteViewScrolledArea();
 	/** Sets cells sizes and then calls repaintPalette() */
 	void redraw();
@@ -52,9 +52,9 @@ public slots:
 
 protected:
 	/** The scrollbar widget */
-	QScrollBar* scrollBar;
+	TQScrollBar* scrollBar;
 	/** The horizontal scrollbar widget */
-	QScrollBar* hScrollBar;
+	TQScrollBar* hScrollBar;
 	/** Pointer to the document view */
 	KColorEditView* view;
 	/** Default cell width */
@@ -82,7 +82,7 @@ protected:
 	/** A position at which selection ended */
 	int selectionEnd;
 	/** Auto scroll timeout timer */
-	QTimer* scrollTimeoutTimer;
+	TQTimer* scrollTimeoutTimer;
 	/** Whether there is auto scroll timeout */
 	bool scrollTimeout;
 	/** Whether a mouse has been pressed over the palette and not yet released */
@@ -90,7 +90,7 @@ protected:
 	/** Whether the cursor is being positioned */
 	bool cursorPositioning;
 	/** A color drag point */
-	QPoint colorDragPoint;
+	TQPoint colorDragPoint;
 	/** Whether a color has been chosen and it is not dragged */
 	bool colorChosen;
 	/** Whether the cursor follows a chosen color */
@@ -108,9 +108,9 @@ protected:
 	/** repaints the palette */
 	void repaintPalette();
 	/** @return A color index at a given position, -1 if none */
-	int colorIndex(const QPoint& point) const;
+	int colorIndex(const TQPoint& point) const;
 	/** @return A color at a given position */
-	QColor color(const QPoint& point) const;
+	TQColor color(const TQPoint& point) const;
 	/** sets a palette cursor position */
 	void setCursorPos(const int pos);
 	/** Sets a cursor position due to a mouse position.
@@ -136,13 +136,13 @@ protected:
 	 */
 	void checkSelectionAutoScroll(const int mousePosY);
 	/** The widget painting */
-	void paintEvent(QPaintEvent* event);
+	void paintEvent(TQPaintEvent* event);
 	/** Used to get mouse press events coordinates */
-	void mousePressEvent(QMouseEvent* event);
+	void mousePressEvent(TQMouseEvent* event);
 	/** Used to get mouse move events coordinates */
-	void mouseMoveEvent(QMouseEvent* event);
+	void mouseMoveEvent(TQMouseEvent* event);
 	/** Used to get mouse release events coordinates */
-	void mouseReleaseEvent(QMouseEvent* event);
+	void mouseReleaseEvent(TQMouseEvent* event);
 	/** If there is a scroll timeout, scrolls palette,
 	 *  sets scrollTimeout to false and resets scroll timeout timer
 	 */

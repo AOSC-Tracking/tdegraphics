@@ -52,12 +52,12 @@ PMQuickColor::~PMQuickColor( )
 {
 }
 
-QString PMQuickColor::description( ) const
+TQString PMQuickColor::description( ) const
 {
    return i18n( "quick color" );
 }
 
-void PMQuickColor::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
+void PMQuickColor::serialize( TQDomElement& e, TQDomDocument& /*doc*/ ) const
 {
    e.setAttribute( "quickcolor", m_color.serializeXML( ) );
 }
@@ -102,7 +102,7 @@ void PMQuickColor::setColor( const PMColor& c )
    }
 }
 
-PMDialogEditBase* PMQuickColor::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMQuickColor::editWidget( TQWidget* parent ) const
 {
    return new PMQuickColorEdit( parent );
 }

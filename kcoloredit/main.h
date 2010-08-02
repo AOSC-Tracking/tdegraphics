@@ -18,8 +18,8 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-#include <qstring.h>
-#include <qdir.h>
+#include <tqstring.h>
+#include <tqdir.h>
 
 /** The maximum red, green or blue component value in RGB scheme
  */
@@ -39,14 +39,14 @@ const int HSV_MAX_V_VALUE = 255;
 
 /** name of KDE config directories containing palette files
  */
-static const QString palettesDir("colors");
+static const TQString palettesDir("colors");
 
 /** last open file dialog path
  */
-static QString lastOpenPaletteFileDir = QDir::homeDirPath();
+static TQString lastOpenPaletteFileDir = TQDir::homeDirPath();
 
 /** last save file as dialog path
  */
-static QString lastSavePaletteAsFileDir = QDir::homeDirPath();
+static TQString lastSavePaletteAsFileDir = TQDir::homeDirPath();
 
 #endif /* !defined( __MAIN_H__ ) */

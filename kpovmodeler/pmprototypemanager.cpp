@@ -180,9 +180,9 @@ void PMPrototypeManager::addPrototype( PMObject* obj )
    delete obj;
 }
 
-void PMPrototypeManager::addDeclarationType( const QString& className,
-                                             const QString& description,
-                                             const QString& pixmap )
+void PMPrototypeManager::addDeclarationType( const TQString& className,
+                                             const TQString& description,
+                                             const TQString& pixmap )
 {
    PMMetaObject* m = metaObject( className );
    if( !m )
@@ -191,17 +191,17 @@ void PMPrototypeManager::addDeclarationType( const QString& className,
       m_declareDescriptions.push_back( PMDeclareDescription( m, description, pixmap ) );
 }
 
-QPtrListIterator<PMMetaObject> PMPrototypeManager::prototypeIterator( ) const
+TQPtrListIterator<PMMetaObject> PMPrototypeManager::prototypeIterator( ) const
 {
-   return QPtrListIterator<PMMetaObject>( m_prototypes );
+   return TQPtrListIterator<PMMetaObject>( m_prototypes );
 }
 
-const QValueList<PMDeclareDescription>& PMPrototypeManager::declarationTypes( ) const
+const TQValueList<PMDeclareDescription>& PMPrototypeManager::declarationTypes( ) const
 {
    return m_declareDescriptions;
 }
 
-PMObject* PMPrototypeManager::newObject( const QString& name ) const
+PMObject* PMPrototypeManager::newObject( const TQString& name ) const
 {
    if( name.isEmpty( ) )
       return 0;
@@ -212,21 +212,21 @@ PMObject* PMPrototypeManager::newObject( const QString& name ) const
    return meta->newObject( m_pPart );
 }
 
-PMMetaObject* PMPrototypeManager::metaObject( const QString& name ) const
+PMMetaObject* PMPrototypeManager::metaObject( const TQString& name ) const
 {
    if( name.isNull( ) )
       return 0;
    return m_metaDict.find( name );
 }
 
-bool PMPrototypeManager::isA( const QString& className,
-                              const QString& baseClass ) const
+bool PMPrototypeManager::isA( const TQString& className,
+                              const TQString& baseClass ) const
 {
    return isA( metaObject( className ), baseClass );
 }
 
 bool PMPrototypeManager::isA( PMMetaObject* c,
-                              const QString& baseClass ) const
+                              const TQString& baseClass ) const
 {
    PMMetaObject* bc = metaObject( baseClass );
    while( c && c != bc )
@@ -234,10 +234,10 @@ bool PMPrototypeManager::isA( PMMetaObject* c,
    return( c && ( c == bc ) );
 }
 
-QString PMPrototypeManager::className( const QString& lowercase ) const
+TQString PMPrototypeManager::className( const TQString& lowercase ) const
 {
-   QMap<QString, QString>::const_iterator it = m_lowerCaseDict.find( lowercase );
+   TQMap<TQString, TQString>::const_iterator it = m_lowerCaseDict.find( lowercase );
    if( it != m_lowerCaseDict.end( ) )
       return *it;
-   return QString::null;
+   return TQString::null;
 }

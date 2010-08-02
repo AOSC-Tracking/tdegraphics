@@ -19,8 +19,8 @@
 #ifndef __KGV_VIEW_H
 #define __KGV_VIEW_H
 
-#include <qcstring.h> // QByteArray
-#include <qfile.h>
+#include <tqcstring.h> // QByteArray
+#include <tqfile.h>
 
 #include <kio/job.h>
 #include <kparts/browserextension.h>
@@ -28,8 +28,8 @@
 
 #include "displayoptions.h"
 
-class QFrame;
-class QWidget;
+class TQFrame;
+class TQWidget;
 
 class KAboutData;
 class KAction;
@@ -56,9 +56,9 @@ class KGVPart: public KParts::ReadOnlyPart
 {
   Q_OBJECT
 public:
-    KGVPart( QWidget* parentWidget, const char* widgetName,
-             QObject* parent, const char* name,
-             const QStringList& args = QStringList() );
+    KGVPart( TQWidget* parentWidget, const char* widgetName,
+             TQObject* parent, const char* name,
+             const TQStringList& args = TQStringList() );
 
     virtual ~KGVPart();
 
@@ -94,7 +94,7 @@ public slots:
 
     void updateFullScreen( bool );
 
-    void showPopup( int, int, const QPoint &pos );
+    void showPopup( int, int, const TQPoint &pos );
 
     void slotScrollLeft();
     void slotScrollRight();
@@ -120,7 +120,7 @@ public slots:
     void slotZoomIn();
     void slotZoomOut();
 
-    void slotZoom( const QString& );
+    void slotZoom( const TQString& );
 
     void slotConfigure();
     void slotConfigurationChanged();
@@ -134,13 +134,13 @@ public slots:
     void setDisplayOptions( const DisplayOptions& opts );
 
 protected slots:
-    void slotData( KIO::Job*, const QByteArray& );
+    void slotData( KIO::Job*, const TQByteArray& );
     void slotJobFinished( KIO::Job* );
 
-    void slotMimetypeFinished( const QString& );
+    void slotMimetypeFinished( const TQString& );
     void slotMimetypeError();
 
-    void slotFileDirty( const QString& );
+    void slotFileDirty( const TQString& );
     void slotDoFileDirty();
 
     void slotOrientation (int);
@@ -166,25 +166,25 @@ protected:
 
 private slots:
     void slotGhostscriptOutput( char* data, int len );
-    void slotGhostscriptError( const QString& );
+    void slotGhostscriptError( const TQString& );
 
 private:
     KGVBrowserExtension* _extension;
 
     KGVDocument* _document;
 
-    QWidget*	      _mainWidget;
+    TQWidget*	      _mainWidget;
     KGVPageView*      _pageView;
     KGVPageDecorator* _pageDecorator;
     KPSWidget*        _psWidget;
     ScrollBox*	      _scrollBox;
-    QFrame*	      _divider;
+    TQFrame*	      _divider;
     MarkList*	      _markList;
     KGVMiniWidget*    _docManager;
 
     LogWindow*       _logWindow;
 
-    QTimer*		_fitTimer;
+    TQTimer*		_fitTimer;
 
     KSelectAction* _selectOrientation;
     KSelectAction* _selectMedia;
@@ -207,13 +207,13 @@ private:
     KToggleAction* _showPageLabels;
     KPopupMenu*    _popup;
 
-    QFile             _tmpFile;
+    TQFile             _tmpFile;
     KIO::TransferJob* _job;
     KDirWatch*        _fileWatcher;
     KGVRun*           _mimetypeScanner;
-    QTimer*           _dirtyHandler;
+    TQTimer*           _dirtyHandler;
 
-    QString _mimetype;
+    TQString _mimetype;
 
     bool _isGuiInitialized : 1;
     bool _isFileDirty      : 1;
@@ -251,16 +251,16 @@ public:
     virtual ~KGVRun();
 
 signals:
-    void finished( const QString& mimetype );
+    void finished( const TQString& mimetype );
 
 protected:
-    void foundMimeType( const QString& mimetype );
+    void foundMimeType( const TQString& mimetype );
 
 protected slots:
     void emitFinishedWithMimetype() { emit finished( _mimetype ); }
 
 private:
-    QString _mimetype;
+    TQString _mimetype;
 };
 
 #endif

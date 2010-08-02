@@ -24,16 +24,16 @@
 #endif
 
 #include <kdialogbase.h>
-#include <qvaluelist.h>
-#include <qvaluevector.h>
+#include <tqvaluelist.h>
+#include <tqvaluevector.h>
 
-class QFrame;
-class QCheckBox;
-class QLineEdit;
-class QListBox;
-class QListView;
-class QButtonGroup;
-class QComboBox;
+class TQFrame;
+class TQCheckBox;
+class TQLineEdit;
+class TQListBox;
+class TQListView;
+class TQButtonGroup;
+class TQComboBox;
 class KColorButton;
 class KConfig;
 class PMIntEdit;
@@ -56,7 +56,7 @@ public:
    /**
     * Constructor
     */
-   PMSettingsDialogPage( QWidget* parent, const char* name = 0 );
+   PMSettingsDialogPage( TQWidget* parent, const char* name = 0 );
    /**
     * Display the settings here.
     *
@@ -108,14 +108,14 @@ public:
       page = 0;
       index = 0;
    }
-   PMRegisteredSettingsPage( QWidget* top, PMSettingsDialogPage* p,
+   PMRegisteredSettingsPage( TQWidget* top, PMSettingsDialogPage* p,
                              int i )
    {
       topPage = top;
       page = p;
       index = i;
    }
-   QWidget* topPage;
+   TQWidget* topPage;
    PMSettingsDialogPage* page;
    int index;
 };
@@ -130,20 +130,20 @@ public:
    /**
     * Standard constructor
     */
-   PMSettingsDialog( PMPart* part, QWidget* parent = 0, const char* name = 0 );
+   PMSettingsDialog( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
    /**
     * Registers a new settings page.
     *
     * @param topPage The page created with addVBoxPage
     * @param page The internal settings page
     */
-   void registerPage( QWidget* topPage, PMSettingsDialogPage* page );
+   void registerPage( TQWidget* topPage, PMSettingsDialogPage* page );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );
 
 protected:
-   virtual void resizeEvent( QResizeEvent* ev );
+   virtual void resizeEvent( TQResizeEvent* ev );
 
 protected slots:
    /**
@@ -178,10 +178,10 @@ private:
    void saveSettings( );
    int findPage( const PMSettingsDialogPage* page );
    bool m_repaint;
-   QValueList<PMRegisteredSettingsPage> m_pages;
+   TQValueList<PMRegisteredSettingsPage> m_pages;
    PMPart* m_pPart;
    
-   static QSize s_size;
+   static TQSize s_size;
 };
 
 #endif

@@ -23,8 +23,8 @@
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <qfileinfo.h>
-#include <qpainter.h>
+#include <tqfileinfo.h>
+#include <tqpainter.h>
 
 #include "documentWidget.h"
 #include "faxrenderer.h"
@@ -32,7 +32,7 @@
 
 //#define KF_DEBUG
 
-FaxRenderer::FaxRenderer(QWidget* par)
+FaxRenderer::FaxRenderer(TQWidget* par)
   : DocumentRenderer(par)
 {
 #ifdef KF_DEBUG
@@ -81,11 +81,11 @@ void FaxRenderer::drawPage(double resolution, RenderedDocumentPage* page)
     return;
   }
 
-  QImage img = fax.page(page->getPageNumber() - 1);
+  TQImage img = fax.page(page->getPageNumber() - 1);
 
   SimplePageSize psize = pageSizes[page->getPageNumber() - 1];
   if (psize.isValid()) {
-    QPainter *foreGroundPaint = page->getPainter();
+    TQPainter *foreGroundPaint = page->getPainter();
     if (foreGroundPaint != 0) {
       // Compute an image for the page.
 
@@ -113,7 +113,7 @@ void FaxRenderer::drawPage(double resolution, RenderedDocumentPage* page)
 }
 
 
-bool FaxRenderer::setFile(const QString &fname, const KURL &)
+bool FaxRenderer::setFile(const TQString &fname, const KURL &)
 {
 #ifdef KF_DEBUG
   kdDebug() << "FaxRenderer::setFile(" << fname << ") called" << endl;
@@ -132,8 +132,8 @@ bool FaxRenderer::setFile(const QString &fname, const KURL &)
   // Paranoid saftey checks: make sure the file actually exists, and
   // that it is a file, not a directory. Otherwise, show an error
   // message and exit..
-  QFileInfo fi(fname);
-  QString   filename = fi.absFilePath();
+  TQFileInfo fi(fname);
+  TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
     KMessageBox::error( parentWidget,
 			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").arg(filename),
@@ -179,8 +179,8 @@ bool FaxRenderer::setFile(const QString &fname, const KURL &)
 
   if (numPages != 0) {
     for(Q_UINT16 pg=0; pg < numPages; pg++) {
-      QSize pageSize = fax.page_size(pg);
-      QPoint dpi = fax.page_dpi(pg);
+      TQSize pageSize = fax.page_size(pg);
+      TQPoint dpi = fax.page_dpi(pg);
       double dpix = dpi.x();
       double dpiy = dpi.y();
 

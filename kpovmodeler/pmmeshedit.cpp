@@ -20,12 +20,12 @@
 #include "pmmesh.h"
 #include "pmvectoredit.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
 
 #include <klocale.h>
 
-PMMeshEdit::PMMeshEdit( QWidget* parent, const char* name )
+PMMeshEdit::PMMeshEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -35,21 +35,21 @@ void PMMeshEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout;
-   m_pHierarchy = new QCheckBox( i18n( "Hierarchy" ), this );
-   m_pEnableInsideVector = new QCheckBox( i18n( "Inside vector:" ), this );
+   TQHBoxLayout* layout;
+   m_pHierarchy = new TQCheckBox( i18n( "Hierarchy" ), this );
+   m_pEnableInsideVector = new TQCheckBox( i18n( "Inside vector:" ), this );
    m_pInsideVector = new PMVectorEdit( "x", "y", "z", this );
-   layout = new QHBoxLayout( topLayout( ) );
+   layout = new TQHBoxLayout( topLayout( ) );
    layout->addWidget( m_pHierarchy );
    layout->addStretch( 1 );
-   layout = new QHBoxLayout( topLayout( ) );
+   layout = new TQHBoxLayout( topLayout( ) );
    layout->addWidget( m_pEnableInsideVector );
    layout->addWidget( m_pInsideVector );
    layout->addStretch( 1 );
 
-   connect( m_pHierarchy, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableInsideVector, SIGNAL( clicked( ) ), SLOT( slotInsideVectorClicked( ) ) );
-   connect( m_pInsideVector, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pHierarchy, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableInsideVector, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotInsideVectorClicked( ) ) );
+   connect( m_pInsideVector, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMMeshEdit::displayObject( PMObject* o )

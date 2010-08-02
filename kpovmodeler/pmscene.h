@@ -58,13 +58,13 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMScene( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmscene" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmscene" ); }
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 

@@ -28,7 +28,7 @@
 
 class PMBlob;
 class PMFloatEdit;
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMBlob
@@ -41,7 +41,7 @@ public:
    /**
     * Creates a PMBlobEdit with parent and name
     */
-   PMBlobEdit( QWidget* parent, const char* name = 0 );
+   PMBlobEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -57,8 +57,8 @@ protected:
 private:
    PMBlob* m_pDisplayedObject;
    PMFloatEdit* m_pThreshold;
-   QCheckBox* m_pSturm;
-   QCheckBox* m_pHierarchy;
+   TQCheckBox* m_pSturm;
+   TQCheckBox* m_pHierarchy;
 };
 
 

@@ -25,14 +25,14 @@
 #include "pmsettingsdialog.h"
 #include "pmviewlayoutmanager.h"
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 class PMIntEdit;
 class PMViewOptionsWidget;
-class QComboBox;
-class QListBox;
-class QPushButton;
-class QLabel;
+class TQComboBox;
+class TQListBox;
+class TQPushButton;
+class TQLabel;
 
 /**
  * View layout configuration dialog page
@@ -44,7 +44,7 @@ public:
    /**
     * Default constructor
     */
-   PMLayoutSettings( QWidget* parent, const char* name = 0 );
+   PMLayoutSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -70,11 +70,11 @@ protected slots:
    /**
     * Called when the layout name changes
     */
-   void slotLayoutNameChanged( const QString& text );
+   void slotLayoutNameChanged( const TQString& text );
    /**
     * Called when the selected view entry changes
     */
-   void slotViewEntrySelected( QListViewItem* text );
+   void slotViewEntrySelected( TQListViewItem* text );
    /**
     * Called when the view type field changes value
     */
@@ -90,27 +90,27 @@ protected slots:
    /**
     * Called when the view height field changes value
     */
-   void slotViewHeightChanged( const QString& text );
+   void slotViewHeightChanged( const TQString& text );
    /**
     * Called when the column width field changes value
     */
-   void slotColumnWidthChanged( const QString& text );
+   void slotColumnWidthChanged( const TQString& text );
    /**
     * Called when the floating height changes value
     */
-   void slotFloatingHeightChanged( const QString& text );
+   void slotFloatingHeightChanged( const TQString& text );
    /**
     * Called when the floating width changes value
     */
-   void slotFloatingWidthChanged( const QString& text );
+   void slotFloatingWidthChanged( const TQString& text );
    /**
     * Called when the floating position x changes value
     */
-   void slotFloatingPosXChanged( const QString& text );
+   void slotFloatingPosXChanged( const TQString& text );
    /**
     * Called when the floating position y changes value
     */
-   void slotFloatingPosYChanged( const QString& text );
+   void slotFloatingPosYChanged( const TQString& text );
    /**
     * Called when the add view entry button is clicked
     */
@@ -136,39 +136,39 @@ private:
    void displayLayoutList( );
    void displayCustomOptions( );
    
-   QComboBox* m_pDefaultLayout;
-   QListBox* m_pViewLayouts;
-   QPushButton* m_pAddLayout;
-   QPushButton* m_pRemoveLayout;
-   QLineEdit* m_pViewLayoutName;
-   QListView* m_pViewEntries;
-   QPushButton* m_pAddEntry;
-   QPushButton* m_pRemoveEntry;
-   QPushButton* m_pMoveUpEntry;
-   QPushButton* m_pMoveDownEntry;
-   QComboBox* m_pViewTypeEdit;
-   QComboBox* m_pDockPositionEdit;
+   TQComboBox* m_pDefaultLayout;
+   TQListBox* m_pViewLayouts;
+   TQPushButton* m_pAddLayout;
+   TQPushButton* m_pRemoveLayout;
+   TQLineEdit* m_pViewLayoutName;
+   TQListView* m_pViewEntries;
+   TQPushButton* m_pAddEntry;
+   TQPushButton* m_pRemoveEntry;
+   TQPushButton* m_pMoveUpEntry;
+   TQPushButton* m_pMoveDownEntry;
+   TQComboBox* m_pViewTypeEdit;
+   TQComboBox* m_pDockPositionEdit;
    PMIntEdit* m_pColumnWidthEdit;
-   QLabel* m_pColumnWidthLabel;
+   TQLabel* m_pColumnWidthLabel;
    PMIntEdit* m_pViewHeightEdit;
-   QLabel* m_pViewHeightLabel;
+   TQLabel* m_pViewHeightLabel;
    
    PMIntEdit* m_pFloatingHeight;
    PMIntEdit* m_pFloatingWidth;
-   QLabel* m_pFloatingHeightLabel;
-   QLabel* m_pFloatingWidthLabel;
+   TQLabel* m_pFloatingHeightLabel;
+   TQLabel* m_pFloatingWidthLabel;
    PMIntEdit* m_pFloatingPosX;
    PMIntEdit* m_pFloatingPosY;
-   QLabel* m_pFloatingPosXLabel;
-   QLabel* m_pFloatingPosYLabel;
+   TQLabel* m_pFloatingPosXLabel;
+   TQLabel* m_pFloatingPosYLabel;
 
    PMViewOptionsWidget* m_pCustomOptionsWidget;
-   QWidget* m_pCustomOptionsHolder;
+   TQWidget* m_pCustomOptionsHolder;
    
-   QValueList<PMViewLayout> m_viewLayouts;
-   QValueListIterator<PMViewLayout> m_currentViewLayout;
-   QValueListIterator<PMViewLayout> m_defaultViewLayout;
-   QValueListIterator<PMViewLayoutEntry> m_currentViewEntry;
+   TQValueList<PMViewLayout> m_viewLayouts;
+   TQValueListIterator<PMViewLayout> m_currentViewLayout;
+   TQValueListIterator<PMViewLayout> m_defaultViewLayout;
+   TQValueListIterator<PMViewLayoutEntry> m_currentViewEntry;
 };
 
 #endif

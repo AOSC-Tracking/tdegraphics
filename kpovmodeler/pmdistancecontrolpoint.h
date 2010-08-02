@@ -38,7 +38,7 @@ public:
     * The base point of the vector is given by the control point location.
     */
    PMDistanceControlPoint( PMControlPoint* location, const PMVector& direction,
-                           double distance, int id, const QString& description,
+                           double distance, int id, const TQString& description,
                            bool extraLine = false );
    /**
     * Creates a PMDistanceControlPoint with id.
@@ -46,7 +46,7 @@ public:
     * The base point of the vector is given by the vector p.
     */
    PMDistanceControlPoint( const PMVector& location, const PMVector& direction,
-                           double distance, int id, const QString& description,
+                           double distance, int id, const TQString& description,
                            bool extraLine = false );
    
    /**

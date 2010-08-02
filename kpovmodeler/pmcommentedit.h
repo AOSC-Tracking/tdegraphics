@@ -27,7 +27,7 @@
 #include "pmdialogeditbase.h"
 
 class PMComment;
-class QMultiLineEdit;
+class TQMultiLineEdit;
 
 /**
  * Dialog edit class for @ref PMComment.
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMCommentEdit with parent and name
     */
-   PMCommentEdit( QWidget* parent, const char* name = 0 );
+   PMCommentEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -55,7 +55,7 @@ protected:
 
 private:
    PMComment* m_pDisplayedObject;
-   QMultiLineEdit* m_pEdit;
+   TQMultiLineEdit* m_pEdit;
 };
 
 

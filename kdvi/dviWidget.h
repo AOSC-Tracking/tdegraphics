@@ -14,9 +14,9 @@
 
 class PageView;
 class DocumentPageCache;
-class QPaintEvent;
-class QMouseEvent;
-class QWidget;
+class TQPaintEvent;
+class TQMouseEvent;
+class TQWidget;
 class textSelection;
 
 
@@ -25,14 +25,14 @@ class DVIWidget : public DocumentWidget
   Q_OBJECT
 
 public: 
-  DVIWidget(QWidget* parent, PageView* sv, DocumentPageCache* cache, const char* name);
+  DVIWidget(TQWidget* parent, PageView* sv, DocumentPageCache* cache, const char* name);
 
 signals:
-  void SRCLink(const QString&, QMouseEvent* e, DocumentWidget*);
+  void SRCLink(const TQString&, TQMouseEvent* e, DocumentWidget*);
 
 private:
-  virtual void mousePressEvent(QMouseEvent* e);
-  virtual void mouseMoveEvent(QMouseEvent* e);
+  virtual void mousePressEvent(TQMouseEvent* e);
+  virtual void mouseMoveEvent(TQMouseEvent* e);
 };
 
 #endif

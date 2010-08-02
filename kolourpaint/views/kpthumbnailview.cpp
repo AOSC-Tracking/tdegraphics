@@ -39,7 +39,7 @@ kpThumbnailView::kpThumbnailView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        QWidget *parent, const char *name)
+        TQWidget *parent, const char *name)
 
     : kpView (document, toolToolBar, viewManager,
               buddyView,
@@ -64,13 +64,13 @@ void kpThumbnailView::setMaskToCoverDocument ()
                << endl;
 #endif
 
-    setMask (QRegion (QRect (origin ().x (), origin ().y (),
+    setMask (TQRegion (TQRect (origin ().x (), origin ().y (),
                       zoomedDocWidth (), zoomedDocHeight ())));
 }
 
 
 // protected virtual [base kpView]
-void kpThumbnailView::resizeEvent (QResizeEvent *e)
+void kpThumbnailView::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_THUMBNAIL_VIEW
     kdDebug () << "kpThumbnailView(" << name () << ")::resizeEvent()"

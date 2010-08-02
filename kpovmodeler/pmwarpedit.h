@@ -30,9 +30,9 @@ class PMWarp;
 class PMVectorEdit;
 class PMIntEdit;
 class PMFloatEdit;
-class QComboBox;
-class QCheckBox;
-class QLabel;
+class TQComboBox;
+class TQCheckBox;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMWarp.
@@ -45,7 +45,7 @@ public:
    /**
     * Creates a PMWarpEdit with parent and name
     */
-   PMWarpEdit( QWidget* parent, const char* name = 0 );
+   PMWarpEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -64,46 +64,46 @@ protected slots:
 
 private:
    PMWarp* m_pDisplayedObject;
-   QComboBox*    m_pWarpTypeEdit;
+   TQComboBox*    m_pWarpTypeEdit;
    PMVectorEdit* m_pDirectionEdit;
-   QLabel*       m_pDirectionLabel;
+   TQLabel*       m_pDirectionLabel;
    PMVectorEdit* m_pOffsetEdit;
-   QLabel*       m_pOffsetLabel;
+   TQLabel*       m_pOffsetLabel;
    PMVectorEdit* m_pFlipEdit;
-   QLabel*       m_pFlipLabel;
+   TQLabel*       m_pFlipLabel;
 
    PMVectorEdit* m_pLocationEdit;
-   QLabel*       m_pLocationLabel;
+   TQLabel*       m_pLocationLabel;
    PMFloatEdit*  m_pRadiusEdit;
-   QLabel*       m_pRadiusLabel;
+   TQLabel*       m_pRadiusLabel;
    PMFloatEdit*  m_pStrengthEdit;
-   QLabel*       m_pStrengthLabel;
+   TQLabel*       m_pStrengthLabel;
    PMFloatEdit*  m_pFalloffEdit;
-   QLabel*       m_pFalloffLabel;
-   QCheckBox*    m_pInverseEdit;
+   TQLabel*       m_pFalloffLabel;
+   TQCheckBox*    m_pInverseEdit;
    PMVectorEdit* m_pRepeatEdit;
-   QLabel*       m_pRepeatLabel;
+   TQLabel*       m_pRepeatLabel;
    PMVectorEdit* m_pTurbulenceEdit;
-   QLabel*       m_pTurbulenceLabel;
+   TQLabel*       m_pTurbulenceLabel;
 
    PMVectorEdit* m_pValueVectorEdit;
-   QLabel*       m_pValueVectorLabel;
+   TQLabel*       m_pValueVectorLabel;
    PMIntEdit*    m_pOctavesEdit;
-   QLabel*       m_pOctavesLabel;
+   TQLabel*       m_pOctavesLabel;
    PMFloatEdit*  m_pOmegaEdit;
-   QLabel*       m_pOmegaLabel;
+   TQLabel*       m_pOmegaLabel;
    PMFloatEdit*  m_pLambdaEdit;
-   QLabel*       m_pLambdaLabel;
+   TQLabel*       m_pLambdaLabel;
 
    PMVectorEdit* m_pOrientationEdit;
    PMFloatEdit*  m_pDistExpEdit;
    PMFloatEdit*  m_pMajorRadiusEdit;
-   QLabel*       m_pMajorRadiusLabel;
+   TQLabel*       m_pMajorRadiusLabel;
 
-   QWidget* m_pRepeatWidget;
-   QWidget* m_pBlackHoleWidget;
-   QWidget* m_pTurbulenceWidget;
-   QWidget* m_pMappingWidget;
+   TQWidget* m_pRepeatWidget;
+   TQWidget* m_pBlackHoleWidget;
+   TQWidget* m_pTurbulenceWidget;
+   TQWidget* m_pMappingWidget;
 };
 
 

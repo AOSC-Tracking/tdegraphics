@@ -27,28 +27,28 @@
 #ifndef _OCR_WORD_
 #define _OCR_WORD_
 
-#include <qstringlist.h>
-#include <qvaluevector.h>
-#include <qvaluelist.h>
-#include <qrect.h>
+#include <tqstringlist.h>
+#include <tqvaluevector.h>
+#include <tqvaluelist.h>
+#include <tqrect.h>
 
-class QString;
-class QRect;
+class TQString;
+class TQRect;
 
 
 /* ==== ocrWord ====================================== */
 class ocrWord : public QString
 {
 public:
-    ocrWord(const QString& s);
+    ocrWord(const TQString& s);
     ocrWord();
-    QStringList getAlternatives()
+    TQStringList getAlternatives()
         { return m_alternatives; }
 
-    void setAlternatives( const QString& s )
+    void setAlternatives( const TQString& s )
         { m_alternatives.append(s); }
 
-    // QRect boundingRect();
+    // TQRect boundingRect();
 
     void setKnode( int k )
         { m_startKnode = k; }
@@ -58,16 +58,16 @@ public:
     int getLine() const { return m_line; }
     int getKnode() const { return m_startKnode; }
 
-    void setRect( const QRect& r )
+    void setRect( const TQRect& r )
         { m_position = r; }
-    QRect rect()
+    TQRect rect()
         { return m_position; }
 
 private:
-    QStringList m_alternatives;
+    TQStringList m_alternatives;
     int         m_startKnode;
     int         m_line;
-    QRect       m_position;
+    TQRect       m_position;
 };
 
 /* ==== ocrWordList ====================================== */
@@ -75,17 +75,17 @@ private:
 /**
  * This represents a line of words in an ocr'ed document
  */
-class ocrWordList : public QValueList<ocrWord>
+class ocrWordList : public TQValueList<ocrWord>
 {
 public:
     ocrWordList();
-    QStringList stringList();
+    TQStringList stringList();
 
-    bool updateOCRWord( const QString& from, const QString& to );
+    bool updateOCRWord( const TQString& from, const TQString& to );
 
-    bool findFuzzyIndex( const QString& word, ocrWord& resWord );
+    bool findFuzzyIndex( const TQString& word, ocrWord& resWord );
 
-    QRect wordListRect( );
+    TQRect wordListRect( );
 
     void setBlock( int b );
     int block() const { return m_block; }
@@ -98,14 +98,14 @@ private:
  * All lines of a block: A value vector containing as much as entries
  * as lines are available in a block. Needs to be resized acordingly.
  */
-typedef QValueVector<ocrWordList> ocrBlock;
+typedef TQValueVector<ocrWordList> ocrBlock;
 
 /**
  * Blocks taken together form the page.
  * Attention: Needs to be resized to the amount of blocks !!
  */
-typedef QValueVector<ocrBlock> ocrBlockPage;
+typedef TQValueVector<ocrBlock> ocrBlockPage;
 
-typedef QValueVector<QRect> rectList;
+typedef TQValueVector<TQRect> rectList;
 
 #endif

@@ -25,7 +25,7 @@
 #endif
 
 #include "pmvector.h"
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 /**
  * Helper class for splines
@@ -116,7 +116,7 @@ private:
    double m_a[2], m_b[2], m_c[2], m_d[2];
 };
 
-typedef QValueList<PMSplineSegment> PMSegmentList;
-typedef QValueList<PMSegmentList> PMSegmentListList;
+typedef TQValueList<PMSplineSegment> PMSegmentList;
+typedef TQValueList<PMSegmentList> PMSegmentListList;
 
 #endif

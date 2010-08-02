@@ -14,19 +14,19 @@
 #include "pageSize.h"
 #include "pageSizeWidget_base.h"
 
-class QDoubleValidator;
+class TQDoubleValidator;
 
 class pageSizeWidget : public pageSizeWidget_base
 {
   Q_OBJECT
 
 public:
-  pageSizeWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  pageSizeWidget( TQWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 
   // Sets the page size. If the dialog is already shown, updates all
   // the GUI. Accepts the same strings as input as the setPageSize()
   // method of the pageSize() class.
-  void setPageSize(const QString&);
+  void setPageSize(const TQString&);
 
   void setOrientation(int ori);
 
@@ -40,13 +40,13 @@ protected slots:
   // the fillTextFields() slot.
   void unitsChanged(int);
   void orientationChanged(int = 0);
-  void input(const QString &);
+  void input(const TQString &);
 
 private:
   pageSize           chosenSize;
 
-  QDoubleValidator  *widthValidator;
-  QDoubleValidator  *heightValidator;
+  TQDoubleValidator  *widthValidator;
+  TQDoubleValidator  *heightValidator;
 };
 
 #endif // PAGESIZEWIDGET_H

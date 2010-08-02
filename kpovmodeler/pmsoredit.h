@@ -26,15 +26,15 @@
 
 #include "pmsolidobjectedit.h"
 #include "pmvectoredit.h"
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 
 class PMSurfaceOfRevolution;
-class QVBoxLayout;
-class QComboBox;
-class QCheckBox;
-class QPushButton;
-class QLabel;
+class TQVBoxLayout;
+class TQComboBox;
+class TQCheckBox;
+class TQPushButton;
+class TQLabel;
 class PMVectorListEdit;
 
 /**
@@ -48,7 +48,7 @@ public:
    /**
     * Creates a PMSurfaceOfRevolutionEdit with parent and name
     */
-   PMSurfaceOfRevolutionEdit( QWidget* parent, const char* name = 0 );
+   PMSurfaceOfRevolutionEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -75,11 +75,11 @@ private:
    
    PMSurfaceOfRevolution* m_pDisplayedObject;
    PMVectorListEdit* m_pPoints;
-   QCheckBox* m_pOpen;
-   QCheckBox* m_pSturm;
-   QPushButton* m_pAddAbove;
-   QPushButton* m_pAddBelow;
-   QPushButton* m_pRemove;   
+   TQCheckBox* m_pOpen;
+   TQCheckBox* m_pSturm;
+   TQPushButton* m_pAddAbove;
+   TQPushButton* m_pAddBelow;
+   TQPushButton* m_pRemove;   
 };
 
 

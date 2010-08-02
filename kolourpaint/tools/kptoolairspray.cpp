@@ -30,14 +30,14 @@
 
 #include <stdlib.h>
 
-#include <qbitmap.h>
-#include <qpainter.h>
-#include <qpen.h>
-#include <qpixmap.h>
-#include <qpoint.h>
-#include <qpointarray.h>
-#include <qrect.h>
-#include <qtimer.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
+#include <tqpen.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
+#include <tqpointarray.h>
+#include <tqrect.h>
+#include <tqtimer.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -64,8 +64,8 @@ kpToolAirSpray::kpToolAirSpray (kpMainWindow *mainWindow)
               mainWindow, "tool_spraycan"),
       m_currentCommand (0)
 {
-    m_timer = new QTimer (this);
-    connect (m_timer, SIGNAL (timeout ()), this, SLOT (actuallyDraw ()));
+    m_timer = new TQTimer (this);
+    connect (m_timer, TQT_SIGNAL (timeout ()), this, TQT_SLOT (actuallyDraw ()));
 }
 
 kpToolAirSpray::~kpToolAirSpray ()
@@ -75,7 +75,7 @@ kpToolAirSpray::~kpToolAirSpray ()
 
 
 // private
-QString kpToolAirSpray::haventBegunDrawUserMessage () const
+TQString kpToolAirSpray::haventBegunDrawUserMessage () const
 {
     return i18n ("Click or drag to spray graffiti.");
 }
@@ -95,8 +95,8 @@ void kpToolAirSpray::begin ()
         if (m_toolWidgetSpraycanSize)
         {
             m_size = m_toolWidgetSpraycanSize->spraycanSize ();
-            connect (m_toolWidgetSpraycanSize, SIGNAL (spraycanSizeChanged (int)),
-                     this, SLOT (slotSpraycanSizeChanged (int)));
+            connect (m_toolWidgetSpraycanSize, TQT_SIGNAL (spraycanSizeChanged (int)),
+                     this, TQT_SLOT (slotSpraycanSizeChanged (int)));
 
             m_toolWidgetSpraycanSize->show ();
         }
@@ -110,8 +110,8 @@ void kpToolAirSpray::end ()
 {
     if (m_toolWidgetSpraycanSize)
     {
-        disconnect (m_toolWidgetSpraycanSize, SIGNAL (spraycanSizeChanged (int)),
-                    this, SLOT (slotSpraycanSizeChanged (int)));
+        disconnect (m_toolWidgetSpraycanSize, TQT_SIGNAL (spraycanSizeChanged (int)),
+                    this, TQT_SLOT (slotSpraycanSizeChanged (int)));
         m_toolWidgetSpraycanSize = 0;
     }
 
@@ -141,7 +141,7 @@ void kpToolAirSpray::beginDraw ()
     setUserMessage (cancelUserMessage ());
 }
 
-void kpToolAirSpray::draw (const QPoint &thisPoint, const QPoint &, const QRect &)
+void kpToolAirSpray::draw (const TQPoint &thisPoint, const TQPoint &, const TQRect &)
 {
     // if the user is moving the spray, make the spray line continuous
     if (thisPoint != m_lastPoint)
@@ -155,10 +155,10 @@ void kpToolAirSpray::draw (const QPoint &thisPoint, const QPoint &, const QRect 
 
 void kpToolAirSpray::actuallyDraw ()
 {
-    QPointArray pArray (10);
+    TQPointArray pArray (10);
     int numPoints = 0;
 
-    QPoint p = m_currentPoint;
+    TQPoint p = m_currentPoint;
 
 #if DEBUG_KP_TOOL_SPRAYCAN
     kdDebug () << "kpToolAirSpray::actuallyDraw() currentPoint=" << p
@@ -178,7 +178,7 @@ void kpToolAirSpray::actuallyDraw ()
         // make it look circular
         // OPT: can be done better
         if (dx * dx + dy * dy <= radius * radius)
-            pArray [numPoints++] = QPoint (p.x () + dx, p.y () + dy);
+            pArray [numPoints++] = TQPoint (p.x () + dx, p.y () + dy);
     }
 
     pArray.resize (numPoints);
@@ -194,7 +194,7 @@ void kpToolAirSpray::actuallyDraw ()
 void kpToolAirSpray::cancelShape ()
 {
 #if 0
-    endDraw (QPoint (), QRect ());
+    endDraw (TQPoint (), TQRect ());
     mainWindow ()->commandHistory ()->undo ();
 #else
     m_timer->stop ();
@@ -215,7 +215,7 @@ void kpToolAirSpray::releasedAllButtons ()
 }
 
 // virtual
-void kpToolAirSpray::endDraw (const QPoint &, const QRect &)
+void kpToolAirSpray::endDraw (const TQPoint &, const TQRect &)
 {
     m_timer->stop ();
 
@@ -250,7 +250,7 @@ kpToolAirSprayCommand::~kpToolAirSprayCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolAirSprayCommand::name () const
+TQString kpToolAirSprayCommand::name () const
 {
     return i18n ("Spraycan");
 }
@@ -289,7 +289,7 @@ void kpToolAirSprayCommand::unexecute ()
     if (!m_newPixmapPtr)
     {
         // the ultimate in laziness - figure out Redo info only if we Undo
-        m_newPixmapPtr = new QPixmap (m_boundingRect.width (), m_boundingRect.height ());
+        m_newPixmapPtr = new TQPixmap (m_boundingRect.width (), m_boundingRect.height ());
         *m_newPixmapPtr = document ()->getPixmapAt (m_boundingRect);
     }
     else
@@ -300,9 +300,9 @@ void kpToolAirSprayCommand::unexecute ()
 
 
 // public
-void kpToolAirSprayCommand::addPoints (const QPointArray &points)
+void kpToolAirSprayCommand::addPoints (const TQPointArray &points)
 {
-    QRect docRect = points.boundingRect ();
+    TQRect docRect = points.boundingRect ();
 
 #if DEBUG_KP_TOOL_SPRAYCAN
     kdDebug () << "kpToolAirSprayCommand::addPoints() docRect=" << docRect
@@ -311,10 +311,10 @@ void kpToolAirSprayCommand::addPoints (const QPointArray &points)
         kdDebug () << "\t" << i << ": " << points [i] << endl;
 #endif
 
-    QPixmap pixmap = document ()->getPixmapAt (docRect);
-    QBitmap mask;
+    TQPixmap pixmap = document ()->getPixmapAt (docRect);
+    TQBitmap mask;
 
-    QPainter painter, maskPainter;
+    TQPainter painter, maskPainter;
 
     if (m_color.isOpaque ())
     {
@@ -331,7 +331,7 @@ void kpToolAirSprayCommand::addPoints (const QPointArray &points)
 
     for (int i = 0; i < (int) points.count (); i++)
     {
-        QPoint pt (points [i].x () - docRect.x (),
+        TQPoint pt (points [i].x () - docRect.x (),
                    points [i].y () - docRect.y ());
 
         if (painter.isActive ())

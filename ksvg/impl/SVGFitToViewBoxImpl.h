@@ -23,7 +23,7 @@
 
 #include "ksvg_lookup.h"
 
-class QString;
+class TQString;
 
 namespace KSVG
 {
@@ -40,7 +40,7 @@ public:
 	SVGAnimatedRectImpl *viewBox() const;
 	SVGAnimatedPreserveAspectRatioImpl *preserveAspectRatio() const;
 
-	void parseViewBox(const QString &);
+	void parseViewBox(const TQString &);
 
 	SVGMatrixImpl *viewBoxToViewTransform(float viewWidth, float viewHeight) const;
 

@@ -100,7 +100,7 @@ void PMGraphicalObject::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMGraphicalObject::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMGraphicalObject::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "no_shadow", m_noShadow );
    e.setAttribute( "no_image", m_noImage );

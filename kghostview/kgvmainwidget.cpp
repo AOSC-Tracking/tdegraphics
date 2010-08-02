@@ -20,10 +20,10 @@
 #include <kurl.h>
 #include <kurldrag.h>
 
-KGVMainWidget::KGVMainWidget( QWidget* parent, const char* name )
-  : QWidget( parent, name ) {}
+KGVMainWidget::KGVMainWidget( TQWidget* parent, const char* name )
+  : TQWidget( parent, name ) {}
 
-void KGVMainWidget::keyPressEvent( QKeyEvent* event )
+void KGVMainWidget::keyPressEvent( TQKeyEvent* event )
 {
     if( event->key() == Key_Space && event->state() != ShiftButton ) {
 	event->accept();
@@ -31,7 +31,7 @@ void KGVMainWidget::keyPressEvent( QKeyEvent* event )
     }
 }
 
-void KGVMainWidget::dropEvent( QDropEvent* ev )
+void KGVMainWidget::dropEvent( TQDropEvent* ev )
 {
     KURL::List lst;
     if (  KURLDrag::decode(  ev, lst ) ) {
@@ -40,7 +40,7 @@ void KGVMainWidget::dropEvent( QDropEvent* ev )
 }
 
 
-void KGVMainWidget::dragEnterEvent( QDragEnterEvent * ev )
+void KGVMainWidget::dragEnterEvent( TQDragEnterEvent * ev )
 {
     ev->accept();
 }

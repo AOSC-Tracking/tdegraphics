@@ -28,9 +28,9 @@
 #include <kdebug.h>
 #include <ktempfile.h>
 #include <kimageio.h>
-#include <qfile.h>
-#include <qimage.h>
-#include <qwmatrix.h>
+#include <tqfile.h>
+#include <tqimage.h>
+#include <tqwmatrix.h>
 #include <cstdio>
 
 
@@ -49,10 +49,10 @@ extern "C" {
   extern char model[];
 }
 
-bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
+bool KCameraRawPlugin::createPreview(const TQString &path, TQImage &img)
 {
   /* Open file and extract thumbnail */
-  FILE* input = fopen( QFile::encodeName(path), "rb" );
+  FILE* input = fopen( TQFile::encodeName(path), "rb" );
   if( !input ) return false;
   KTempFile output;
   output.setAutoDelete(true);
@@ -66,8 +66,8 @@ bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
   if( !img.load( output.name() ) ) return false;
   
   if(orientation) {
-    QWMatrix M;
-    QWMatrix flip= QWMatrix(-1,0,0,1,0,0);
+    TQWMatrix M;
+    TQWMatrix flip= TQWMatrix(-1,0,0,1,0,0);
     switch(orientation+1) {  // notice intentional fallthroughs
     case 2: M = flip; break;
     case 4: M = flip;
@@ -83,8 +83,8 @@ bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
   return true;	
 }
 
-KCameraRawPlugin::KCameraRawPlugin(QObject *parent, const char *name,
-				   const QStringList &args )
+KCameraRawPlugin::KCameraRawPlugin(TQObject *parent, const char *name,
+				   const TQStringList &args )
     : KFilePlugin(parent, name, args)
 {
   kdDebug(7034) << "KCameraRawPlugin c'tor" << endl;
@@ -98,11 +98,11 @@ KCameraRawPlugin::KCameraRawPlugin(QObject *parent, const char *name,
   KFileMimeTypeInfo::ItemInfo* item;
   
   item = addItemInfo( group, "Manufacturer", i18n("Camera Manufacturer"),
-		      QVariant::String );
+		      TQVariant::String );
   item = addItemInfo( group, "Model", i18n("Camera Model"),
-		      QVariant::String );
+		      TQVariant::String );
   item = addItemInfo( group, "Thumbnail", i18n("Thumbnail"),
-                      QVariant::Image );
+                      TQVariant::Image );
   setHint( item, KFileMimeTypeInfo::Thumbnail );
 }
 
@@ -110,20 +110,20 @@ bool KCameraRawPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
     kdDebug(7034) << "KCameraRawPlugin::readInfo()" << endl;
     
-    const QString path( info.path() );
+    const TQString path( info.path() );
     if ( path.isEmpty() ) // remote file
         return false;
     
     KFileMetaInfoGroup group = appendGroup( info, "Info" );
     if ( what & KFileMetaInfo::Thumbnail ){
-      QImage img;
+      TQImage img;
       if( createPreview( path,img ) ) {
 	appendItem( group, "Thumbnail", img );
 	kdDebug(7034) << "thumbnail " << path << " created" << endl;
       }
     } else {
       // HACK: We have to extract thumbnail to get any info...
-      QImage img;
+      TQImage img;
       createPreview( path,img );      
     }
     kdDebug(7034) << "make=" << make << endl;

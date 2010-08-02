@@ -47,7 +47,7 @@ using namespace KSVG;
 #include "ksvg_bridge.h"
 #include "ksvg_ecma.h"
 
-QValueList<SVGPatternElementImpl *> SVGPatternElementImpl::m_patternElements;
+TQValueList<SVGPatternElementImpl *> SVGPatternElementImpl::m_patternElements;
 
 SVGPatternElementImpl::SVGPatternElementImpl(DOM::ElementImpl *impl) : SVGElementImpl(impl), SVGURIReferenceImpl(), SVGTestsImpl(), SVGLangSpaceImpl(), SVGExternalResourcesRequiredImpl(), SVGStylableImpl(this), SVGFitToViewBoxImpl(), SVGPaintServerImpl()
 {
@@ -293,7 +293,7 @@ void SVGPatternElementImpl::setAttributes()
 
 void SVGPatternElementImpl::flushCachedTiles()
 {
-	QValueList<SVGPatternElementImpl *>::iterator it;
+	TQValueList<SVGPatternElementImpl *>::iterator it;
 
 	for(it = m_patternElements.begin(); it != m_patternElements.end(); it++)
 	{
@@ -304,11 +304,11 @@ void SVGPatternElementImpl::flushCachedTiles()
 	}
 }
 
-QImage SVGPatternElementImpl::createTile(SVGShapeImpl *referencingElement, int imageWidth, int imageHeight)
+TQImage SVGPatternElementImpl::createTile(SVGShapeImpl *referencingElement, int imageWidth, int imageHeight)
 {
 	converter()->finalize(referencingElement, ownerSVGElement(), patternUnits()->baseVal());
 
-	QImage image(imageWidth, imageHeight, 32);
+	TQImage image(imageWidth, imageHeight, 32);
 	image.setAlphaBuffer(true);
 
 	if(m_canvas == 0)
@@ -376,15 +376,15 @@ QImage SVGPatternElementImpl::createTile(SVGShapeImpl *referencingElement, int i
 
 	if(getOverflow())
 	{
-		QPtrList<CanvasItem> items = m_canvas->allItems();
-		QRect allItemsBBox;
+		TQPtrList<CanvasItem> items = m_canvas->allItems();
+		TQRect allItemsBBox;
 
-		QPtrListIterator<CanvasItem> it(items);
+		TQPtrListIterator<CanvasItem> it(items);
 		CanvasItem *item;
 
 		while((item = *it) != 0)
 		{
-			QRect bbox = item->bbox();
+			TQRect bbox = item->bbox();
 			allItemsBBox |= bbox;
 			++it;
 		}
@@ -404,7 +404,7 @@ QImage SVGPatternElementImpl::createTile(SVGShapeImpl *referencingElement, int i
 				{
 					if(tileX != 0 || tileY !=0)
 					{
-						QPoint panPoint(-(tileX * imageWidth), -(tileY * imageHeight));
+						TQPoint panPoint(-(tileX * imageWidth), -(tileY * imageHeight));
 						m_canvas->update(panPoint, false);
 					}
 				}
@@ -423,7 +423,7 @@ QImage SVGPatternElementImpl::createTile(SVGShapeImpl *referencingElement, int i
 	return image;
 }
 
-void SVGPatternElementImpl::reference(const QString &href)
+void SVGPatternElementImpl::reference(const TQString &href)
 {
 	// Copy attributes
 	SVGElementImpl *src = ownerSVGElement()->getElementById(href);
@@ -445,7 +445,7 @@ void SVGPatternElementImpl::finalizePaintServer()
 	// inside a pattern has finished loading.
 	m_tileCache.clear();
 
-	QString _href = SVGURIReferenceImpl::getTarget(href()->baseVal().string());
+	TQString _href = SVGURIReferenceImpl::getTarget(href()->baseVal().string());
 	if(!_href.isEmpty())
 		reference(_href);
 }
@@ -483,8 +483,8 @@ SVGPatternElementImpl::Tile SVGPatternElementImpl::createTile(SVGShapeImpl *refe
 
 	if(imageWidth > 0 && imageHeight > 0)
 	{
-		QSize size(imageWidth, imageHeight);
-		QImage image;
+		TQSize size(imageWidth, imageHeight);
+		TQImage image;
 
 		if(!m_tileCache.find(size, image))
 		{
@@ -497,7 +497,7 @@ SVGPatternElementImpl::Tile SVGPatternElementImpl::createTile(SVGShapeImpl *refe
 		double adjustYScale = tileHeight / imageHeight;
 
 		matrix->scaleNonUniform(adjustXScale, adjustYScale);
-		QWMatrix screenToTile = matrix->qmatrix().invert();
+		TQWMatrix screenToTile = matrix->qmatrix().invert();
 
 		tile = Tile(image, screenToTile);
 	}

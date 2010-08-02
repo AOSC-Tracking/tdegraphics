@@ -21,15 +21,15 @@
 #include "pmlineedits.h"
 #include "pmcoloredit.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 #include <kdialog.h>
 
 
-PMFinishEdit::PMFinishEdit( QWidget* parent, const char* name )
+PMFinishEdit::PMFinishEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,44 +37,44 @@ PMFinishEdit::PMFinishEdit( QWidget* parent, const char* name )
 
 void PMFinishEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
+   TQHBoxLayout* hl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   QGridLayout* layout = new QGridLayout( hl, 2, 2 );
-   m_pEnableAmbientEdit = new QCheckBox( i18n( "Ambient color" ), this );
-   m_pAmbientColorLabel = new QLabel( i18n( "Color:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   TQGridLayout* layout = new TQGridLayout( hl, 2, 2 );
+   m_pEnableAmbientEdit = new TQCheckBox( i18n( "Ambient color" ), this );
+   m_pAmbientColorLabel = new TQLabel( i18n( "Color:" ), this );
    m_pAmbientColorEdit = new PMColorEdit( true, this );
    layout->addMultiCellWidget( m_pEnableAmbientEdit, 0, 0, 0, 1 );
    layout->addWidget( m_pAmbientColorLabel, 1, 0, AlignTop );
    layout->addWidget( m_pAmbientColorEdit, 1, 1 );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   layout = new QGridLayout( hl, 4, 2 );
-   m_pEnableDiffuseEdit = new QCheckBox( i18n( "Diffuse:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   layout = new TQGridLayout( hl, 4, 2 );
+   m_pEnableDiffuseEdit = new TQCheckBox( i18n( "Diffuse:" ), this );
    m_pDiffuseEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableDiffuseEdit, 0, 0 );
    layout->addWidget( m_pDiffuseEdit, 0, 1 );
-   m_pEnableBrillianceEdit = new QCheckBox( i18n( "Brilliance:" ), this );
+   m_pEnableBrillianceEdit = new TQCheckBox( i18n( "Brilliance:" ), this );
    m_pBrillianceEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableBrillianceEdit, 1, 0 );
    layout->addWidget( m_pBrillianceEdit, 1, 1 );
-   m_pEnableCrandEdit = new QCheckBox( i18n( "Crand:" ), this );
+   m_pEnableCrandEdit = new TQCheckBox( i18n( "Crand:" ), this );
    m_pCrandEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableCrandEdit, 2, 0 );
    layout->addWidget( m_pCrandEdit, 2, 1 );
-   m_pConserveEnergyEdit = new QCheckBox(
+   m_pConserveEnergyEdit = new TQCheckBox(
       i18n( "Conserve energy for reflection" ), this );
    layout->addMultiCellWidget( m_pConserveEnergyEdit, 3, 3, 0, 1 );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   layout = new QGridLayout( hl, 2, 2 );
-   m_pEnablePhongEdit = new QCheckBox( i18n( "Phong:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   layout = new TQGridLayout( hl, 2, 2 );
+   m_pEnablePhongEdit = new TQCheckBox( i18n( "Phong:" ), this );
    m_pPhongEdit = new PMFloatEdit( this );
-   m_pEnablePhongSizeEdit = new QCheckBox( i18n( "Phong size:" ), this );
+   m_pEnablePhongSizeEdit = new TQCheckBox( i18n( "Phong size:" ), this );
    m_pPhongSizeEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnablePhongEdit, 0, 0 );
    layout->addWidget( m_pPhongEdit, 0, 1 );
@@ -82,70 +82,70 @@ void PMFinishEdit::createTopWidgets( )
    layout->addWidget( m_pPhongSizeEdit, 1, 1 );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   layout = new QGridLayout( hl, 3, 2 );
-   m_pEnableSpecularEdit = new QCheckBox( i18n( "Specular:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   layout = new TQGridLayout( hl, 3, 2 );
+   m_pEnableSpecularEdit = new TQCheckBox( i18n( "Specular:" ), this );
    m_pSpecularEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableSpecularEdit, 0, 0 );
    layout->addWidget( m_pSpecularEdit, 0, 1 );
-   m_pEnableRoughnessEdit = new QCheckBox( i18n( "Roughness:" ), this );
+   m_pEnableRoughnessEdit = new TQCheckBox( i18n( "Roughness:" ), this );
    m_pRoughnessEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableRoughnessEdit, 1, 0 );
    layout->addWidget( m_pRoughnessEdit, 1, 1 );
-   m_pEnableMetallicEdit = new QCheckBox( i18n( "Metallic:" ), this );
+   m_pEnableMetallicEdit = new TQCheckBox( i18n( "Metallic:" ), this );
    m_pMetallicEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableMetallicEdit, 2, 0 );
    layout->addWidget( m_pMetallicEdit, 2, 1 );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   layout = new QGridLayout( hl, 6, 2 );
-   m_pIridEdit = new QCheckBox( i18n( "Iridiscence" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   layout = new TQGridLayout( hl, 6, 2 );
+   m_pIridEdit = new TQCheckBox( i18n( "Iridiscence" ), this );
    layout->addMultiCellWidget( m_pIridEdit, 0, 0, 0, 1 );
-   m_pIridAmountLabel = new QLabel( i18n( "Amount:" ), this );
+   m_pIridAmountLabel = new TQLabel( i18n( "Amount:" ), this );
    m_pIridAmountEdit = new PMFloatEdit( this );
    layout->addWidget( m_pIridAmountLabel, 1, 0 );
    layout->addWidget( m_pIridAmountEdit, 1, 1 );
-   m_pIridThicknessLabel = new QLabel( i18n( "Thickness:" ), this );
+   m_pIridThicknessLabel = new TQLabel( i18n( "Thickness:" ), this );
    m_pIridThicknessEdit = new PMFloatEdit( this );
    layout->addWidget( m_pIridThicknessLabel, 2, 0 );
    layout->addWidget( m_pIridThicknessEdit, 2, 1 );
    m_pIridTurbulenceEdit = new PMFloatEdit( this );
-   m_pIridTurbulenceLabel = new QLabel( i18n( "Turbulence:" ), this );
+   m_pIridTurbulenceLabel = new TQLabel( i18n( "Turbulence:" ), this );
    layout->addWidget( m_pIridTurbulenceLabel, 3, 0 );
    layout->addWidget( m_pIridTurbulenceEdit, 3, 1 );
-   m_pEnableReflectionEdit = new QCheckBox( i18n( "Reflection" ), this );
+   m_pEnableReflectionEdit = new TQCheckBox( i18n( "Reflection" ), this );
    layout->addMultiCellWidget( m_pEnableReflectionEdit, 4, 4, 0, 1 );
    hl->addStretch( 1 );
 
-   m_pReflectionWidget = new QWidget( this );
-   QVBoxLayout* vl = new QVBoxLayout( m_pReflectionWidget, 0, KDialog::spacingHint( ) );
-   QGridLayout* gl = new QGridLayout( vl, 2, 2 );
-   m_pEnableReflectionMinEdit = new QCheckBox( i18n( "Minimum:" ),
+   m_pReflectionWidget = new TQWidget( this );
+   TQVBoxLayout* vl = new TQVBoxLayout( m_pReflectionWidget, 0, KDialog::spacingHint( ) );
+   TQGridLayout* gl = new TQGridLayout( vl, 2, 2 );
+   m_pEnableReflectionMinEdit = new TQCheckBox( i18n( "Minimum:" ),
                                                m_pReflectionWidget );
    m_pReflectionMinColorEdit = new PMColorEdit( false, m_pReflectionWidget );
    gl->addWidget( m_pEnableReflectionMinEdit, 0, 0, AlignTop );
    gl->addWidget( m_pReflectionMinColorEdit, 0, 1 );
-   QLabel* label = new QLabel( i18n( "Maximum:" ), m_pReflectionWidget );
+   TQLabel* label = new TQLabel( i18n( "Maximum:" ), m_pReflectionWidget );
    m_pReflectionColorEdit = new PMColorEdit( false, m_pReflectionWidget );
    gl->addWidget( label, 1, 0, AlignTop );
    gl->addWidget( m_pReflectionColorEdit, 1, 1 );
 
-   gl = new QGridLayout( vl, 4, 2 );
-   m_pReflectionFresnelEdit = new QCheckBox( i18n( "Fresnel reflectivity" ),
+   gl = new TQGridLayout( vl, 4, 2 );
+   m_pReflectionFresnelEdit = new TQCheckBox( i18n( "Fresnel reflectivity" ),
                                              m_pReflectionWidget );
    gl->addMultiCellWidget( m_pReflectionFresnelEdit, 0, 0, 0, 1 );
-   m_pEnableRefFalloffEdit = new QCheckBox( i18n( "Falloff:" ),
+   m_pEnableRefFalloffEdit = new TQCheckBox( i18n( "Falloff:" ),
                                             m_pReflectionWidget );
    m_pReflectionFalloffEdit = new PMFloatEdit( m_pReflectionWidget );
    gl->addWidget( m_pEnableRefFalloffEdit, 1, 0 );
    gl->addWidget( m_pReflectionFalloffEdit, 1, 1 );
-   m_pEnableRefExponentEdit = new QCheckBox( i18n( "Exponent:" ),
+   m_pEnableRefExponentEdit = new TQCheckBox( i18n( "Exponent:" ),
                                              m_pReflectionWidget );
    m_pReflectionExponentEdit = new PMFloatEdit( m_pReflectionWidget );
    gl->addWidget( m_pEnableRefExponentEdit, 2, 0 );
    gl->addWidget( m_pReflectionExponentEdit, 2, 1 );
-   m_pEnableRefMetallicEdit = new QCheckBox( i18n( "Metallic:" ),
+   m_pEnableRefMetallicEdit = new TQCheckBox( i18n( "Metallic:" ),
                                              m_pReflectionWidget );
    m_pReflectionMetallicEdit = new PMFloatEdit( m_pReflectionWidget );
    gl->addWidget( m_pEnableRefMetallicEdit, 3, 0 );
@@ -154,41 +154,41 @@ void PMFinishEdit::createTopWidgets( )
    layout->addMultiCellWidget( m_pReflectionWidget, 5, 5, 0, 1 );
 
 
-   connect( m_pAmbientColorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDiffuseEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pBrillianceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCrandEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pConserveEnergyEdit, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPhongEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPhongSizeEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMetallicEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSpecularEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRoughnessEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pIridAmountEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pIridThicknessEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pIridTurbulenceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pIridEdit, SIGNAL( clicked( ) ), SLOT( slotIridClicked( ) ) );
-   connect( m_pReflectionColorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionMinColorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionFresnelEdit, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionFalloffEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionExponentEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionMetallicEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pAmbientColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDiffuseEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pBrillianceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrandEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pConserveEnergyEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPhongEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPhongSizeEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMetallicEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSpecularEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRoughnessEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridAmountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridThicknessEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridTurbulenceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotIridClicked( ) ) );
+   connect( m_pReflectionColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionMinColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionFresnelEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionFalloffEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionExponentEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionMetallicEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    
-   connect( m_pEnableAmbientEdit, SIGNAL( clicked( ) ), SLOT( slotAmbientClicked( ) ) );
-   connect( m_pEnablePhongEdit, SIGNAL( clicked( ) ), SLOT( slotPhongClicked( ) ) );
-   connect( m_pEnablePhongSizeEdit, SIGNAL( clicked( ) ), SLOT( slotPhongSizeClicked( ) ) );
-   connect( m_pEnableDiffuseEdit, SIGNAL( clicked( ) ), SLOT( slotDiffuseClicked( ) ) );
-   connect( m_pEnableBrillianceEdit, SIGNAL( clicked( ) ), SLOT( slotBrillianceClicked( ) ) );
-   connect( m_pEnableCrandEdit, SIGNAL( clicked( ) ), SLOT( slotCrandClicked( ) ) );
-   connect( m_pEnableSpecularEdit, SIGNAL( clicked( ) ), SLOT( slotSpecularClicked( ) ) );
-   connect( m_pEnableRoughnessEdit, SIGNAL( clicked( ) ), SLOT( slotRoughnessClicked( ) ) );
-   connect( m_pEnableMetallicEdit, SIGNAL( clicked( ) ), SLOT( slotMetallicClicked( ) ) );
-   connect( m_pEnableReflectionEdit, SIGNAL( clicked( ) ), SLOT( slotReflectionClicked( ) ) );
-   connect( m_pEnableReflectionMinEdit, SIGNAL( clicked( ) ), SLOT( slotReflectionMinClicked( ) ) );
-   connect( m_pEnableRefFalloffEdit, SIGNAL( clicked( ) ), SLOT( slotRefFalloffClicked( ) ) );
-   connect( m_pEnableRefExponentEdit, SIGNAL( clicked( ) ), SLOT( slotRefExponentClicked( ) ) );
-   connect( m_pEnableRefMetallicEdit, SIGNAL( clicked( ) ), SLOT( slotRefMetallicClicked( ) ) );
+   connect( m_pEnableAmbientEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAmbientClicked( ) ) );
+   connect( m_pEnablePhongEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPhongClicked( ) ) );
+   connect( m_pEnablePhongSizeEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPhongSizeClicked( ) ) );
+   connect( m_pEnableDiffuseEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDiffuseClicked( ) ) );
+   connect( m_pEnableBrillianceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotBrillianceClicked( ) ) );
+   connect( m_pEnableCrandEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCrandClicked( ) ) );
+   connect( m_pEnableSpecularEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSpecularClicked( ) ) );
+   connect( m_pEnableRoughnessEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRoughnessClicked( ) ) );
+   connect( m_pEnableMetallicEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotMetallicClicked( ) ) );
+   connect( m_pEnableReflectionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotReflectionClicked( ) ) );
+   connect( m_pEnableReflectionMinEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotReflectionMinClicked( ) ) );
+   connect( m_pEnableRefFalloffEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRefFalloffClicked( ) ) );
+   connect( m_pEnableRefExponentEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRefExponentClicked( ) ) );
+   connect( m_pEnableRefMetallicEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRefMetallicClicked( ) ) );
 }
 
 void PMFinishEdit::displayObject( PMObject* o )

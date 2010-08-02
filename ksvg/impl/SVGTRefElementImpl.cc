@@ -46,9 +46,9 @@ void SVGTRefElementImpl::setAttributes()
 		href()->setBaseVal(DOM::DOMString(SVGURIReferenceImpl::getTarget(_href.string())));
 
 	// get the text of the referenced element
-	QString text;
+	TQString text;
 
-	QString url = _href.string().stripWhiteSpace(), filename, id;
+	TQString url = _href.string().stripWhiteSpace(), filename, id;
 	if(!SVGURIReferenceImpl::parseURIReference(url, filename, id))
 		return;
 

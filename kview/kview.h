@@ -31,13 +31,13 @@ namespace KImageViewer {
 	class Canvas;
 	class Viewer;
 }
-class QSize;
-class QRect;
+class TQSize;
+class TQRect;
 class KAction;
 class KToggleAction;
 class KRecentFilesAction;
 class KWinModule;
-class QStringList;
+class TQStringList;
 class KProgress;
 
 class KView : public KParts::MainWindow
@@ -48,7 +48,7 @@ class KView : public KParts::MainWindow
 		virtual ~KView();
 		void load( const KURL & url );
 		void loadFromStdin();
-		QSize sizeForCentralWidgetSize( QSize );
+		TQSize sizeForCentralWidgetSize( TQSize );
 		KImageViewer::Viewer * viewer() const { return m_pViewer; }
 
 	protected:
@@ -57,13 +57,13 @@ class KView : public KParts::MainWindow
 		void readProperties( KConfig * );
 		void saveSettings( KConfig * );
 
-		virtual bool eventFilter( QObject *, QEvent * );
+		virtual bool eventFilter( TQObject *, TQEvent * );
 
 	protected slots:
 		void readSettings(); //KConfig * );
-		void imageSizeChanged( const QSize & );
-		void selectionChanged( const QRect & );
-		void contextPress( const QPoint & );
+		void imageSizeChanged( const TQSize & );
+		void selectionChanged( const TQRect & );
+		void contextPress( const TQPoint & );
 		void slotOpenFile();
 		void slotOpenRecent( const KURL & );
 		void slotClose();
@@ -81,11 +81,11 @@ class KView : public KParts::MainWindow
 		void jobStarted( KIO::Job * );
 		void jobCompleted();
 		void jobCompleted( bool );
-		void jobCanceled( const QString & );
+		void jobCanceled( const TQString & );
 		void loadingProgress( KIO::Job *, unsigned long );
 		void speedProgress( KIO::Job *, unsigned long );
-		void slotSetStatusBarText( const QString & );
-		void cursorPos( const QPoint & ); // write the cursor pos to the statusbar
+		void slotSetStatusBarText( const TQString & );
+		void cursorPos( const TQPoint & ); // write the cursor pos to the statusbar
 		void loadPlugins();
 		void statusbarToggled( bool );
 
@@ -93,11 +93,11 @@ class KView : public KParts::MainWindow
 		enum BarSizeFrom { FromImageSize, FromWidgetSize };
 		enum ResizeMode { ResizeWindow = 0, ResizeImage = 1, NoResize = 2, BestFit = 3 };
 		enum StatusBarItem { STATUSBAR_SPEED_ID, STATUSBAR_CURSOR_ID, STATUSBAR_SIZE_ID, STATUSBAR_SELECTION_ID };
-		void setupActions( QObject * );
+		void setupActions( TQObject * );
 		void handleResize();
 		void fitWindowToImage();
-		QSize barSize( int, BarSizeFrom );
-		QSize maxCanvasSize();
+		TQSize barSize( int, BarSizeFrom );
+		TQSize maxCanvasSize();
 
 		KImageViewer::Viewer * m_pViewer;
 		KImageViewer::Canvas * m_pCanvas;

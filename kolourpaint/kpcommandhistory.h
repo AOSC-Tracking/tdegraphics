@@ -29,9 +29,9 @@
 #ifndef KP_COMMAND_HISTORY_H
 #define KP_COMMAND_HISTORY_H
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 
 
 class KActionCollection;
@@ -50,7 +50,7 @@ public:
     virtual ~kpCommand ();
 
 public:
-    virtual QString name () const = 0;
+    virtual TQString name () const = 0;
 
     // Returns the estimated size in bytes.
     //
@@ -82,20 +82,20 @@ protected:
 class kpNamedCommand : public kpCommand
 {
 public:
-    kpNamedCommand (const QString &name, kpMainWindow *mainWindow);
+    kpNamedCommand (const TQString &name, kpMainWindow *mainWindow);
     virtual ~kpNamedCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
 protected:
-    QString m_name;
+    TQString m_name;
 };
 
 
 class kpMacroCommand : public kpNamedCommand
 {
 public:
-    kpMacroCommand (const QString &name, kpMainWindow *mainWindow);
+    kpMacroCommand (const TQString &name, kpMainWindow *mainWindow);
     virtual ~kpMacroCommand ();
 
 
@@ -116,7 +116,7 @@ public:
     void addCommand (kpCommand *command);
 
 protected:
-    QValueList <kpCommand *> m_commandList;
+    TQValueList <kpCommand *> m_commandList;
 
 private:
     class kpMacroCommandPrivate *d;
@@ -176,11 +176,11 @@ public slots:
     virtual void redoUpToNumber (int which);
 
 protected:
-    QString undoActionText () const;
-    QString redoActionText () const;
+    TQString undoActionText () const;
+    TQString redoActionText () const;
 
     void trimCommandListsUpdateActions ();
-    void trimCommandList (QValueList <kpCommand *> *commandList);
+    void trimCommandList (TQValueList <kpCommand *> *commandList);
     void trimCommandLists ();
     void updateActions ();
 
@@ -200,8 +200,8 @@ protected:
     KToolBarPopupAction *m_actionUndo, *m_actionRedo;
 
     // (Front element is the next one)
-    QValueList <kpCommand *> m_undoCommandList;
-    QValueList <kpCommand *> m_redoCommandList;
+    TQValueList <kpCommand *> m_undoCommandList;
+    TQValueList <kpCommand *> m_redoCommandList;
 
     int m_undoMinLimit, m_undoMaxLimit, m_undoMaxLimitSizeLimit;
 

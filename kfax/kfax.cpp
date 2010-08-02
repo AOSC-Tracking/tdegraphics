@@ -31,13 +31,13 @@
 #include <time.h>
 #include <unistd.h>
 
-#include <qfile.h>
-#include <qstrlist.h>
-#include <qtimer.h>
-#include <qpopupmenu.h>
-#include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qbitmap.h>
+#include <tqfile.h>
+#include <tqstrlist.h>
+#include <tqtimer.h>
+#include <tqpopupmenu.h>
+#include <tqpainter.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqbitmap.h>
 
 #include <klocale.h>
 #include <kaboutdata.h>
@@ -187,7 +187,7 @@ bool MyApp::x11EventFilter( XEvent * ev)
 
 }
 
-TopLevel::TopLevel (QWidget *, const char *name)
+TopLevel::TopLevel (TQWidget *, const char *name)
     : KMainWindow (0, name)
 {
   setMinimumSize (100, 100);
@@ -203,21 +203,21 @@ TopLevel::TopLevel (QWidget *, const char *name)
 
   readSettings();
 
-  faxqtwin = new QFrame(this);
+  faxqtwin = new TQFrame(this);
 
   qtwin = faxqtwin->winId();
-  faxqtwin->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+  faxqtwin->setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
 
   // Create a Vertical scroll bar
 
-  vsb = new QScrollBar( QScrollBar::Vertical,faxqtwin,"scrollBar" );
+  vsb = new TQScrollBar( TQScrollBar::Vertical,faxqtwin,"scrollBar" );
   vsb->hide();
-  connect( vsb, SIGNAL(valueChanged(int)), SLOT(scrollVert(int)) );
+  connect( vsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollVert(int)) );
 
   // Create a Horizontal scroll bar
 
-  hsb = new QScrollBar( QScrollBar::Horizontal,faxqtwin,"scrollBar" );
-  connect( hsb, SIGNAL(valueChanged(int)), SLOT(scrollHorz(int)) );
+  hsb = new TQScrollBar( TQScrollBar::Horizontal,faxqtwin,"scrollBar" );
+  connect( hsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollHorz(int)) );
   hsb->hide();
 
   setCentralWidget(faxqtwin);
@@ -235,43 +235,43 @@ TopLevel::~TopLevel()
 void TopLevel::setupMenuBar()
 {
   // File menu
-  KStdAction::open( this, SLOT( faxOpen() ), actionCollection() );
-  actRecent =  KStdAction::openRecent( this, SLOT( faxOpen( const KURL & ) ),
+  KStdAction::open( this, TQT_SLOT( faxOpen() ), actionCollection() );
+  actRecent =  KStdAction::openRecent( this, TQT_SLOT( faxOpen( const KURL & ) ),
           actionCollection() );
-  actSave = KStdAction::save( this, SLOT( faxSave() ), actionCollection() );
-  actSaveAs = KStdAction::saveAs( this, SLOT( faxSaveAs() ),
+  actSave = KStdAction::save( this, TQT_SLOT( faxSave() ), actionCollection() );
+  actSaveAs = KStdAction::saveAs( this, TQT_SLOT( faxSaveAs() ),
           actionCollection() );
-  actPrint = KStdAction::print( this, SLOT( print() ), actionCollection() );
-  KStdAction::quit( this, SLOT( close() ), actionCollection() );
+  actPrint = KStdAction::print( this, TQT_SLOT( print() ), actionCollection() );
+  KStdAction::quit( this, TQT_SLOT( close() ), actionCollection() );
   actAdd = new KAction( i18n( "A&dd..." ), "filenew", KShortcut(), this,
-      SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
+      TQT_SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
 
   actRecent->setMaxItems( 5 );
 
   // View Menu
-  actSize = KStdAction::actualSize( this, SLOT( actualSize() ),
+  actSize = KStdAction::actualSize( this, TQT_SLOT( actualSize() ),
       actionCollection() );
-  actZoomIn = KStdAction::zoomIn( this, SLOT( zoomin() ), actionCollection() );
-  actZoomOut = KStdAction::zoomOut( this, SLOT( zoomout() ),
+  actZoomIn = KStdAction::zoomIn( this, TQT_SLOT( zoomin() ), actionCollection() );
+  actZoomOut = KStdAction::zoomOut( this, TQT_SLOT( zoomout() ),
       actionCollection() );
 
   actRotate = new KAction( i18n( "&Rotate Page" ), "rotate", KShortcut(), this,
-      SLOT( rotatePage() ), actionCollection(), "view_rotate" );
+      TQT_SLOT( rotatePage() ), actionCollection(), "view_rotate" );
   actMirror = new KAction( i18n( "Mirror Page" ), KShortcut(), this,
-      SLOT( mirrorPage() ), actionCollection(), "view_mirror" );
+      TQT_SLOT( mirrorPage() ), actionCollection(), "view_mirror" );
   actFlip = new KAction( i18n( "&Flip Page" ), KShortcut(), this,
-      SLOT( flipPage() ), actionCollection(), "view_flip" );
+      TQT_SLOT( flipPage() ), actionCollection(), "view_flip" );
 
   // Go menu
-  actNext = KStdAction::next( this, SLOT( nextPage() ), actionCollection() );
-  actPrev = KStdAction::prior( this, SLOT( prevPage() ), actionCollection() );
-  actFirst = KStdAction::firstPage( this, SLOT( firstPage() ),
+  actNext = KStdAction::next( this, TQT_SLOT( nextPage() ), actionCollection() );
+  actPrev = KStdAction::prior( this, TQT_SLOT( prevPage() ), actionCollection() );
+  actFirst = KStdAction::firstPage( this, TQT_SLOT( firstPage() ),
       actionCollection() );
-  actLast = KStdAction::lastPage( this, SLOT( lastPage() ),
+  actLast = KStdAction::lastPage( this, TQT_SLOT( lastPage() ),
       actionCollection() );
 
   // Settings menu
-  KStdAction::preferences( this, SLOT( faxoptions() ), actionCollection() );
+  KStdAction::preferences( this, TQT_SLOT( faxoptions() ), actionCollection() );
 }
 
 void TopLevel::setupStatusBar()
@@ -282,14 +282,14 @@ void TopLevel::setupStatusBar()
   statusbar->insertFixedItem(i18n("Res: XXXXX"), ID_GENERAL);
   statusbar->insertFixedItem(i18n("Type: XXXXXXX"), ID_TYPE);
   statusbar->insertFixedItem(i18n("Page: XX of XX"), ID_PAGE_NO);
-  statusbar->insertItem(QString::null, ID_FNAME, 1);
+  statusbar->insertItem(TQString::null, ID_FNAME, 1);
   statusbar->setItemAlignment( ID_FNAME, AlignLeft );
 
-  statusbar->changeItem(QString::null, ID_INS_OVR);
-  statusbar->changeItem(QString::null, ID_GENERAL);
-  statusbar->changeItem(QString::null, ID_TYPE);
-  statusbar->changeItem(QString::null, ID_PAGE_NO);
-  statusbar->changeItem(QString::null, ID_FNAME);
+  statusbar->changeItem(TQString::null, ID_INS_OVR);
+  statusbar->changeItem(TQString::null, ID_GENERAL);
+  statusbar->changeItem(TQString::null, ID_TYPE);
+  statusbar->changeItem(TQString::null, ID_PAGE_NO);
+  statusbar->changeItem(TQString::null, ID_FNAME);
 }
 
 void TopLevel::readSettings()
@@ -378,7 +378,7 @@ void TopLevel::writeSettings()
 
 void TopLevel::faxOpen()
 {
-  KURL url = KFileDialog::getOpenURL(QString::null, KFAX_FILETYPES);
+  KURL url = KFileDialog::getOpenURL(TQString::null, KFAX_FILETYPES);
 
   faxOpen( url );
 
@@ -400,7 +400,7 @@ void TopLevel::faxOpen( const KURL & url )
 
 void TopLevel::faxAdd()
 {
-  KURL url = KFileDialog::getOpenURL(QString::null, KFAX_FILETYPES);
+  KURL url = KFileDialog::getOpenURL(TQString::null, KFAX_FILETYPES);
 
   faxAdd( url );
 
@@ -424,7 +424,7 @@ void TopLevel::faxSave()
 
 void TopLevel::faxSaveAs()
 {
-  fileURL = KFileDialog::getSaveURL(QString::null, KFAX_FILETYPES);
+  fileURL = KFileDialog::getSaveURL(TQString::null, KFAX_FILETYPES);
 
   if (fileURL.isEmpty())
     return;
@@ -509,24 +509,24 @@ void TopLevel::actualSize()
   zoom( oz );
 }
 
-void loadfile(QString filename)
+void loadfile(TQString filename)
 {
   // Typical FAX resolutions are:
   // Standard: 203 dpi x 98 dpi
   // Fine: 203 dpi x 196 lpi
   // Super Fine: 203 dpi y 392 lpi,  or
   //             406 dpi x 392 lpi
-  QSize dpi(203,196);
+  TQSize dpi(203,196);
 
   KFileMetaInfo metaInfo(filename);
   if (metaInfo.isValid() && metaInfo.item("Resolution").isValid())
   {
-    QSize s = metaInfo.item("Resolution").value().toSize();
+    TQSize s = metaInfo.item("Resolution").value().toSize();
     if (s.width() >= 100 && s.height() >= 100)
 	dpi = s;
   }
 
-  (void) notetiff(QFile::encodeName(filename));
+  (void) notetiff(TQFile::encodeName(filename));
 
   struct pagenode *pn;
   for(pn = firstpage; pn; pn = pn->next) 
@@ -536,7 +536,7 @@ void loadfile(QString filename)
    }
 }
 
-void TopLevel::openadd(QString filename)
+void TopLevel::openadd(TQString filename)
 {
   auxpage = lastpage;
 
@@ -557,14 +557,14 @@ void TopLevel::openadd(QString filename)
   putImage();
 }
 
-void TopLevel::resizeEvent(QResizeEvent *e)
+void TopLevel::resizeEvent(TQResizeEvent *e)
 {
   KMainWindow::resizeEvent(e);
 
   resizeView();
 }
 
-void TopLevel::wheelEvent( QWheelEvent *e )
+void TopLevel::wheelEvent( TQWheelEvent *e )
 {
   e->accept();
 
@@ -577,7 +577,7 @@ void TopLevel::wheelEvent( QWheelEvent *e )
   }
   else
   {
-    int offset = QApplication::wheelScrollLines()*vsb->lineStep();
+    int offset = TQApplication::wheelScrollLines()*vsb->lineStep();
     if ( e->state() & ControlButton )
       offset = vsb->pageStep();
     offset = -e->delta()*offset/120;
@@ -697,11 +697,11 @@ void TopLevel::print(){
   int pages, currentpage;
   loadAllPages(pages, currentpage);
 
-  KPrinter printer(true, QPrinter::HighResolution);
+  KPrinter printer(true, TQPrinter::HighResolution);
   printer.setFullPage( true );
   printer.setUsePrinterResolution( true );
   printer.setCreator( i18n("KFax") + " " KFAXVERSION );
-  printer.setDocName( QString("%1 - %2").arg(firstpage->name).arg(i18n("KFax")));
+  printer.setDocName( TQString("%1 - %2").arg(firstpage->name).arg(i18n("KFax")));
   printer.setDocFileName( firstpage->name );
   printer.setPageSelection( KPrinter::ApplicationSide );
   printer.setMinMax( 1, pages ); 
@@ -710,18 +710,18 @@ void TopLevel::print(){
   if ( !printer.setup( this ) )
 	return;
 
-  QPainter painter;
+  TQPainter painter;
   painter.begin( &printer );
   printIt(printer, painter);
   painter.end();
 }
 
 
-void TopLevel::printIt( KPrinter &printer, QPainter &painter )
+void TopLevel::printIt( KPrinter &printer, TQPainter &painter )
 {
-  QPaintDeviceMetrics dm(painter.device());
+  TQPaintDeviceMetrics dm(painter.device());
 
-  QApplication::setOverrideCursor( waitCursor );
+  TQApplication::setOverrideCursor( waitCursor );
   kapp->processEvents();
 
   const bool fullpage = printer.option(APP_KFAX_SCALE_FULLPAGE) == "true";
@@ -743,7 +743,7 @@ void TopLevel::printIt( KPrinter &printer, QPainter &painter )
 	continue;
 
     // byte-swapping the image
-    QByteArray bytes( Image->height*Image->bytes_per_line );
+    TQByteArray bytes( Image->height*Image->bytes_per_line );
     for (int y=Image->height-1; y>=0; --y) {
       Q_UINT32 offset  = y*Image->bytes_per_line;
       Q_UINT32 *source = (Q_UINT32 *) (Image->data + offset);
@@ -761,17 +761,17 @@ void TopLevel::printIt( KPrinter &printer, QPainter &painter )
       }
     }
 
-    QImage image( (uchar *)bytes.data(), Image->bytes_per_line*8, Image->height, 1, NULL, 2, QImage::LittleEndian);
+    TQImage image( (uchar *)bytes.data(), Image->bytes_per_line*8, Image->height, 1, NULL, 2, TQImage::LittleEndian);
 
     if (first_page_printed)
 	printer.newPage();
     first_page_printed = true;
 
-    const QSize printersize( dm.width(), dm.height() );
+    const TQSize printersize( dm.width(), dm.height() );
     kdDebug() << "Printersize = " << printersize << endl;
     // print Image in original size if possible, else scale it.
 
-    const QSize size(  // logical size of the image
+    const TQSize size(  // logical size of the image
 			Image->width  * dm.logicalDpiX() / pn->dpiX,
 			Image->height * dm.logicalDpiY() / pn->dpiY
 		);
@@ -788,15 +788,15 @@ void TopLevel::printIt( KPrinter &printer, QPainter &painter )
        printer.margins( &top, &left, &bottom, &right );
     kdDebug() << "Margins = " << top << " " << left << " " << bottom << " " << right << endl;
 
-    const QSize maxSize( printersize.width()-left-right, printersize.height()-top-bottom );
-    QSize scaledImageSize = size;
+    const TQSize maxSize( printersize.width()-left-right, printersize.height()-top-bottom );
+    TQSize scaledImageSize = size;
     if (size.width() > maxSize.width() || size.height() > maxSize.height() ) {
 	// Image does not fit - scale it and print centered
-	scaledImageSize.scale( maxSize, QSize::ScaleMin );
+	scaledImageSize.scale( maxSize, TQSize::ScaleMin );
 	kdDebug() << "Image does not fit - scaling to " << maxSize << endl;
     } else {
 	// Image does fit - print it in original size, but centered
-	scaledImageSize.scale( size, QSize::ScaleMin );
+	scaledImageSize.scale( size, TQSize::ScaleMin );
 	kdDebug() << "Image does fit - scaling to " << size << endl;
     }
     kdDebug() << "Final image size " << scaledImageSize << endl;
@@ -809,11 +809,11 @@ void TopLevel::printIt( KPrinter &printer, QPainter &painter )
 	y = (maxSize.height()-scaledImageSize.height())/2 + top;
     else
 	y = top;
-    painter.drawImage( QRect(x,y,scaledImageSize.width(), scaledImageSize.height()), image );
+    painter.drawImage( TQRect(x,y,scaledImageSize.width(), scaledImageSize.height()), image );
 
   }
 
-  QApplication::restoreOverrideCursor();
+  TQApplication::restoreOverrideCursor();
 }
 
 void TopLevel::saveNetFile( const KURL& dest)
@@ -846,7 +846,7 @@ void TopLevel::openNetFile( const KURL &u)
 
   if ( u.isLocalFile() )
   {
-    QString string = i18n("Loading '%1'").arg(u.path());
+    TQString string = i18n("Loading '%1'").arg(u.path());
     statusbar->message(string);
     openadd( u.path());
     statusbar->clear();
@@ -854,7 +854,7 @@ void TopLevel::openNetFile( const KURL &u)
   else
   {
     statusbar->message(i18n("Downloading..."));
-    QString tmpFile = QString::null;
+    TQString tmpFile = TQString::null;
     if ( KIO::NetAccess::download( u, tmpFile, this ) )
     {
       openadd( tmpFile );
@@ -865,12 +865,12 @@ void TopLevel::openNetFile( const KURL &u)
   }
 }
 
-void TopLevel::dragEnterEvent( QDragEnterEvent * event)
+void TopLevel::dragEnterEvent( TQDragEnterEvent * event)
 {
   event->accept(KURLDrag::canDecode(event));
 }
 
-void TopLevel::dropEvent( QDropEvent * event)
+void TopLevel::dropEvent( TQDropEvent * event)
 {
 
   KURL::List list;
@@ -1355,7 +1355,7 @@ void TopLevel::newPage(){
 
   Image =  Images[0] = Pimage(thispage);
 
-  setCaption(QFile::decodeName(thispage->name));
+  setCaption(TQFile::decodeName(thispage->name));
 
   Image = generateZoomImages(oz);
   
@@ -1382,7 +1382,7 @@ void TopLevel::faxClose()
   vsb->hide();
   hsb->hide();
 
-  fileURL = QString::null;
+  fileURL = TQString::null;
 
   updateActions();
 }
@@ -1441,22 +1441,22 @@ void TopLevel::uiUpdate(){
 	currentpage = pages;
     }
 
-    QString pagestr = i18n("Page: %1 of %2").arg(currentpage).arg(pages);
+    TQString pagestr = i18n("Page: %1 of %2").arg(currentpage).arg(pages);
 
     statusbar->changeItem(pagestr, ID_PAGE_NO);
 
     if(Image){
-      QString wh = i18n("W: %1 H: %2").arg(Image->width).arg(Image->height);
+      TQString wh = i18n("W: %1 H: %2").arg(Image->width).arg(Image->height);
       statusbar->changeItem(wh, ID_INS_OVR);
     }
 
-    QString resolution = i18n("Res: %1").arg(thispage->vres?i18n("Fine"):i18n("Normal"));
-    // TODO: resolution += QString("%1x%2").arg(thispage->dpiX).arg(thispage->dpiY);
+    TQString resolution = i18n("Res: %1").arg(thispage->vres?i18n("Fine"):i18n("Normal"));
+    // TODO: resolution += TQString("%1x%2").arg(thispage->dpiX).arg(thispage->dpiY);
     statusbar->changeItem(resolution, ID_GENERAL);
 
     statusbar->changeItem(thispage->name, ID_FNAME);
 
-    QString typestring;
+    TQString typestring;
 
     if(thispage->type == FAX_TIFF){
       typestring = i18n("Type: Tiff ");
@@ -1479,7 +1479,7 @@ void TopLevel::uiUpdate(){
   }
 }
 
-void kfaxerror(const QString& title, const QString& error){
+void kfaxerror(const TQString& title, const TQString& error){
   KMessageBox::error(toplevel, error, title);
 }
 

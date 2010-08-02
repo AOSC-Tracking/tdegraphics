@@ -18,22 +18,22 @@
 */
 
 #include <sane/saneopts.h>
-#include <qcstring.h>
-#include <qfile.h>
-#include <qframe.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qcombobox.h>
-#include <qimage.h>
-#include <qtooltip.h>
-#include <qmessagebox.h>
-#include <qlayout.h>
-#include <qdict.h>
-#include <qprogressdialog.h>
-#include <qscrollview.h>
-#include <qsizepolicy.h>
-#include <qcheckbox.h>
-#include <qbuttongroup.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqframe.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqcombobox.h>
+#include <tqimage.h>
+#include <tqtooltip.h>
+#include <tqmessagebox.h>
+#include <tqlayout.h>
+#include <tqdict.h>
+#include <tqprogressdialog.h>
+#include <tqscrollview.h>
+#include <tqsizepolicy.h>
+#include <tqcheckbox.h>
+#include <tqbuttongroup.h>
 
 
 #include <kfiledialog.h>
@@ -53,8 +53,8 @@
 
 
 
-ScanParams::ScanParams( QWidget *parent, const char *name )
-   : QVBox( parent, name ),
+ScanParams::ScanParams( TQWidget *parent, const char *name )
+   : TQVBox( parent, name ),
      m_firstGTEdit( true )
 {
    /* first some initialisation and debug messages */
@@ -94,17 +94,17 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    }
    sane_device = newScanDevice;
 
-   QStrList strl = sane_device->getCommonOptions();
-   QString emp;
+   TQStrList strl = sane_device->getCommonOptions();
+   TQString emp;
    for ( emp=strl.first(); strl.current(); emp=strl.next() )
       kdDebug(29000) << "Common: " << strl.current() << endl;
 
    /* Start path for virual scanner */
-   last_virt_scan_path = QDir::home();
+   last_virt_scan_path = TQDir::home();
    adf = ADF_OFF;
 
    /* Frame stuff for toplevel of scanparams - beautification */
-   setFrameStyle( QFrame::Panel | QFrame::Raised );
+   setFrameStyle( TQFrame::Panel | TQFrame::Raised );
    setLineWidth( 1 );
 
 
@@ -112,21 +112,21 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    cb_gray_preview = 0;
 
    /* A top layout box */
-   // QVBoxLayout *top = new QVBoxLayout(this, 6);
-   QHBox *hb = new QHBox( this );
+   // TQVBoxLayout *top = new TQVBoxLayout(this, 6);
+   TQHBox *hb = new TQHBox( this );
    hb->setSpacing( KDialog::spacingHint() );
-   QString cap = i18n("<B>Scanner Settings</B>") + " : ";
+   TQString cap = i18n("<B>Scanner Settings</B>") + " : ";
    cap += sane_device->getScannerName();
-   (void ) new QLabel( cap, hb );
+   (void ) new TQLabel( cap, hb );
    m_led = new KLed( hb );
    m_led->setState( KLed::Off );
-   m_led->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed ));
+   m_led->setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ));
 
 
    (void) new KSeparator( KSeparator::HLine, this);
 
    /* Now create Widgets for the important scan settings */
-   QScrollView *sv = 0;
+   TQScrollView *sv = 0;
 
    if( sane_device->optionExists( SANE_NAME_FILE ) )
    {
@@ -156,25 +156,25 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    /* Create a Start-Scan-Button */
    (void) new KSeparator( KSeparator::HLine, this);
    KButtonBox *kbb = new KButtonBox( this );
-   QPushButton* pb = kbb->addButton( KGuiItem( i18n( "Final S&can" ), "scanner" ) );
-   connect( pb, SIGNAL(clicked()), this, SLOT(slStartScan()) );
+   TQPushButton* pb = kbb->addButton( KGuiItem( i18n( "Final S&can" ), "scanner" ) );
+   connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slStartScan()) );
    pb = kbb->addButton( i18n( "&Preview Scan" ));
-   connect( pb, SIGNAL(clicked()), this, SLOT(slAcquirePreview()) );
+   connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slAcquirePreview()) );
    kbb->layout();
 
    /* Initialise the progress dialog */
-   progressDialog = new QProgressDialog( i18n("Scanning in progress"),
+   progressDialog = new TQProgressDialog( i18n("Scanning in progress"),
 					 i18n("Stop"), 100, 0L,
 					 "SCAN_PROGRESS", true, 0  );
    progressDialog->setAutoClose( true );
    progressDialog->setAutoReset( true );
 
-   connect( sane_device, SIGNAL(sigScanProgress(int)),
-	    progressDialog, SLOT(setProgress(int)));
+   connect( sane_device, TQT_SIGNAL(sigScanProgress(int)),
+	    progressDialog, TQT_SLOT(setProgress(int)));
 
    /* Connect the Progress Dialogs cancel-Button */
-   connect( progressDialog, SIGNAL( cancelled() ), sane_device,
-	    SLOT( slStopScanning() ) );
+   connect( progressDialog, TQT_SIGNAL( cancelled() ), sane_device,
+	    TQT_SLOT( slStopScanning() ) );
 
    return( true );
 }
@@ -202,9 +202,9 @@ void ScanParams::initialise( KScanOption *so )
 
    if( startupOptset )
    {
-      QCString name = so->getName();
+      TQCString name = so->getName();
       if( ! name.isEmpty() ){
-	 QCString val = startupOptset->getValue( name );
+	 TQCString val = startupOptset->getValue( name );
 	 kdDebug( 29000) << "Initialising <" << name << "> with value <" << val << ">" << endl;
 	 so->set( val );
 	 sane_device->apply(so);
@@ -218,19 +218,19 @@ void ScanParams::initialise( KScanOption *so )
    }
 }
 
-QScrollView *ScanParams::scannerParams( )
+TQScrollView *ScanParams::scannerParams( )
 {
    KScanOption *so = 0;
 
    /* Its a real scanner */
-   QScrollView *sv = new QScrollView( this );
-   sv->setHScrollBarMode( QScrollView::AlwaysOff );
-   sv->setResizePolicy( QScrollView::AutoOneFit );
-   QVBox *pbox = new QVBox( sv->viewport());
+   TQScrollView *sv = new TQScrollView( this );
+   sv->setHScrollBarMode( TQScrollView::AlwaysOff );
+   sv->setResizePolicy( TQScrollView::AutoOneFit );
+   TQVBox *pbox = new TQVBox( sv->viewport());
    pbox->setSpacing( KDialog::spacingHint() );
-   sv->setFrameStyle( QFrame::NoFrame );
+   sv->setFrameStyle( TQFrame::NoFrame );
 
-   QHBox *hb = new QHBox(pbox);
+   TQHBox *hb = new TQHBox(pbox);
 
    /* Mode setting */
    so = sane_device->getGuiElement( SANE_NAME_SCAN_MODE, hb,
@@ -260,24 +260,24 @@ QScrollView *ScanParams::scannerParams( )
       hb->setStretchFactor( cb, 5 );
 
       initialise( so );
-      connect( so, SIGNAL(guiChange(KScanOption*)),
-	       this, SLOT(slReloadAllGui( KScanOption* )));
+      connect( so, TQT_SIGNAL(guiChange(KScanOption*)),
+	       this, TQT_SLOT(slReloadAllGui( KScanOption* )));
    }
 
    /* Add a button for Source-Selection */
    if( sane_device->optionExists( SANE_NAME_SCAN_SOURCE ))
    {
       KScanOption source( SANE_NAME_SCAN_SOURCE );
-      QStrList l = source.getList();
+      TQStrList l = source.getList();
 
-      QWidget *spacer = new QWidget(hb);
+      TQWidget *spacer = new TQWidget(hb);
       hb->setStretchFactor( spacer, 1 );
       kdDebug(29000) << "Source list size: " << l.count() << endl;
 
       if( l.count() > 1 )
       {
-	 pb_source_sel = new QPushButton( i18n("Source..."), hb );
-	 connect( pb_source_sel, SIGNAL(clicked()), this, SLOT(slSourceSelect()));
+	 pb_source_sel = new TQPushButton( i18n("Source..."), hb );
+	 connect( pb_source_sel, TQT_SIGNAL(clicked()), this, TQT_SLOT(slSourceSelect()));
 	 initialise( &source );
 	 hb->setStretchFactor( pb_source_sel, 3 );
 
@@ -302,8 +302,8 @@ QScrollView *ScanParams::scannerParams( )
       if( so )
       {
 	 initialise(so);
-	 connect( so,   SIGNAL(guiChange(KScanOption*)),
-		  this, SLOT(slReloadAllGui( KScanOption* )));
+	 connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
+		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
       }
    }
 
@@ -316,8 +316,8 @@ QScrollView *ScanParams::scannerParams( )
       if( so )
       {
 	 initialise(so);
-	 connect( so,   SIGNAL(guiChange(KScanOption*)),
-		  this, SLOT(slReloadAllGui( KScanOption* )));
+	 connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
+		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
       }
    }
 
@@ -330,8 +330,8 @@ QScrollView *ScanParams::scannerParams( )
       if( so )
       {
 	 initialise(so);
-	 connect( so,   SIGNAL(guiChange(KScanOption*)),
-		  this, SLOT(slReloadAllGui( KScanOption* )));
+	 connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
+		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
       }
    }
 
@@ -349,11 +349,11 @@ QScrollView *ScanParams::scannerParams( )
       so->slRedrawWidget( so );
 
       /* connect to slot that passes the resolution to the previewer */
-      connect( so, SIGNAL(guiChange(KScanOption*)),
-	       this, SLOT( slNewXResolution(KScanOption*)));
+      connect( so, TQT_SIGNAL(guiChange(KScanOption*)),
+	       this, TQT_SLOT( slNewXResolution(KScanOption*)));
 
-      connect( so, SIGNAL(guiChange(KScanOption*)),
-	       this, SLOT(slReloadAllGui( KScanOption* )));
+      connect( so, TQT_SIGNAL(guiChange(KScanOption*)),
+	       this, TQT_SLOT(slReloadAllGui( KScanOption* )));
 
       xy_resolution_bind =
 	 sane_device->getGuiElement(SANE_NAME_RESOLUTION_BIND, pbox,
@@ -364,8 +364,8 @@ QScrollView *ScanParams::scannerParams( )
 	 initialise( xy_resolution_bind );
 	 xy_resolution_bind->slRedrawWidget( xy_resolution_bind );
 	 /* Connect to Gui-change-Slot */
-	 connect( xy_resolution_bind, SIGNAL(guiChange(KScanOption*)),
-		  this, SLOT(slReloadAllGui( KScanOption* )));
+	 connect( xy_resolution_bind, TQT_SIGNAL(guiChange(KScanOption*)),
+		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
       }
 
       /* Resolution Setting -> Y-Resolution Setting */
@@ -443,7 +443,7 @@ QScrollView *ScanParams::scannerParams( )
 
 
    /* The gamma table can be used - add  a button for editing */
-   QHBox *hb1 = new QHBox(pbox);
+   TQHBox *hb1 = new TQHBox(pbox);
 
    if( sane_device->optionExists( SANE_NAME_CUSTOM_GAMMA ) )
    {
@@ -451,28 +451,28 @@ QScrollView *ScanParams::scannerParams( )
 				       SANE_TITLE_CUSTOM_GAMMA,
 				       SANE_DESC_CUSTOM_GAMMA );
       initialise( so );
-      connect( so,   SIGNAL(guiChange(KScanOption*)),
-	       this, SLOT(slReloadAllGui( KScanOption* )));
+      connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
+	       this, TQT_SLOT(slReloadAllGui( KScanOption* )));
    }
    else
    {
-      (void) new QLabel( i18n("Custom Gamma Table"), hb1 );
+      (void) new TQLabel( i18n("Custom Gamma Table"), hb1 );
    }
 
    /* Connect a signal to refresh activity of the gamma tables */
-   (void) new QWidget( hb1 ); /* dummy widget to eat space */
+   (void) new TQWidget( hb1 ); /* dummy widget to eat space */
 
-   pb_edit_gtable = new QPushButton( i18n("Edit..."), hb1 );
+   pb_edit_gtable = new TQPushButton( i18n("Edit..."), hb1 );
    Q_CHECK_PTR(pb_edit_gtable);
 
-   connect( pb_edit_gtable, SIGNAL( clicked () ),
-	    this, SLOT( slEditCustGamma () ) );
+   connect( pb_edit_gtable, TQT_SIGNAL( clicked () ),
+	    this, TQT_SLOT( slEditCustGamma () ) );
    setEditCustomGammaTableState();
 
    /* This connection cares for enabling/disabling the edit-Button */
    if(so )
-	   connect( so,   SIGNAL(guiChange(KScanOption*)),
-		    this, SLOT(slOptionNotify(KScanOption*)));
+	   connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
+		    this, TQT_SLOT(slOptionNotify(KScanOption*)));
 
    /* my Epson Perfection backends offer a list of user defined gamma values */
 
@@ -496,12 +496,12 @@ QScrollView *ScanParams::scannerParams( )
 				      SANE_TITLE_GRAY_PREVIEW,
 				      SANE_DESC_GRAY_PREVIEW );
      initialise( so );
-     cb_gray_preview = (QCheckBox*) so->widget();
-     QToolTip::add( cb_gray_preview, i18n("Acquire a gray preview even in color mode (faster)") );
+     cb_gray_preview = (TQCheckBox*) so->widget();
+     TQToolTip::add( cb_gray_preview, i18n("Acquire a gray preview even in color mode (faster)") );
    }
 
-   QWidget *spacer = new QWidget( pbox );
-   spacer->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+   TQWidget *spacer = new TQWidget( pbox );
+   spacer->setSizePolicy(TQSizePolicy::Minimum, TQSizePolicy::Expanding);
 
    pbox->setMinimumWidth( pbox->sizeHint().width() );
    sv->setMinimumWidth( pbox->minimumWidth() );
@@ -514,10 +514,10 @@ QScrollView *ScanParams::scannerParams( )
 void ScanParams::createNoScannerMsg( void )
 {
    /* Mode setting */
-   QString cap;
+   TQString cap;
    cap = i18n( "<B>Problem: No Scanner was found</B><P>Your system does not provide a SANE <I>(Scanner Access Now Easy)</I> installation, which is required by the KDE scan support.<P>Please install and configure SANE correctly on your system.<P>Visit the SANE homepage under http://www.sane-project.org to find out more about SANE installation and configuration. " );
 
-   (void) new QLabel( cap, this );
+   (void) new TQLabel( cap, this );
 
 }
 
@@ -538,9 +538,9 @@ void ScanParams::slSourceSelect( void )
    KScanOption so( SANE_NAME_SCAN_SOURCE );
    ADF_BEHAVE adf = ADF_OFF;
 
-   const QCString& currSource = so.get();
+   const TQCString& currSource = so.get();
    kdDebug(29000) << "Current Source is <" << currSource << ">" << endl;
-   QStrList sources;
+   TQStrList sources;
 
    if( so.valid() )
    {
@@ -554,13 +554,13 @@ void ScanParams::slSourceSelect( void )
       ScanSourceDialog d( this, sources, adf );
       d.slSetSource( currSource );
 
-      if( d.exec() == QDialog::Accepted  )
+      if( d.exec() == TQDialog::Accepted  )
       {
-	 QString sel_source = d.getText();
+	 TQString sel_source = d.getText();
 	 adf = d.getAdfBehave();
 
 	 /* set the selected Document source, the behavior is stored in a membervar */
-	 so.set( QCString(sel_source.latin1()) ); // FIX in ScanSourceDialog, then here
+	 so.set( TQCString(sel_source.latin1()) ); // FIX in ScanSourceDialog, then here
 	 sane_device->apply( &so );
 
 	 kdDebug(29000) << "Dialog finished OK: " << sel_source << ", " << adf << endl;
@@ -580,18 +580,18 @@ void ScanParams::slSourceSelect( void )
 void ScanParams::slFileSelect( void )
 {
    kdDebug(29000) << "File Selector" << endl;
-   QString filter;
-   QCString prefix = "\n*.";
+   TQString filter;
+   TQCString prefix = "\n*.";
 
    if( scan_mode == ID_QT_IMGIO )
    {
-      QStrList filterList = QImage::inputFormats();
+      TQStrList filterList = TQImage::inputFormats();
       filter = i18n( "*|All Files (*)");
-      for( QCString fi_item = filterList.first(); !fi_item.isEmpty();
+      for( TQCString fi_item = filterList.first(); !fi_item.isEmpty();
 	   fi_item = filterList.next() )
       {
 
-	 filter.append( QString::fromLatin1( prefix + fi_item.lower()) );
+	 filter.append( TQString::fromLatin1( prefix + fi_item.lower()) );
       }
    }
    else
@@ -604,11 +604,11 @@ void ScanParams::slFileSelect( void )
    KFileDialog fd(last_virt_scan_path.path(), filter, this, "FileDialog",true);
    fd.setCaption( i18n("Select Input File") );
    /* Read the filename and remind it */
-   QString fileName;
-   if ( fd.exec() == QDialog::Accepted ) {
+   TQString fileName;
+   if ( fd.exec() == TQDialog::Accepted ) {
       fileName = fd.selectedFile();
-      QFileInfo ppath( fileName );
-      last_virt_scan_path = QDir(ppath.dirPath(true));
+      TQFileInfo ppath( fileName );
+      last_virt_scan_path = TQDir(ppath.dirPath(true));
    } else {
       return;
    }
@@ -616,7 +616,7 @@ void ScanParams::slFileSelect( void )
    if ( !fileName.isNull() && virt_filename ) { // got a file name
       kdDebug(29000) << "Got fileName: " << fileName << endl;
       // write Value to SANEOption, it updates itself.
-      virt_filename->set( QFile::encodeName( fileName ) );
+      virt_filename->set( TQFile::encodeName( fileName ) );
    }
 }
 
@@ -634,12 +634,12 @@ void ScanParams::slVirtScanModeSelect( int id )
 
       /* Check if the entered filename to delete */
       if( virt_filename ) {
-	 QString vf = virt_filename->get();
+	 TQString vf = virt_filename->get();
 	 kdDebug(29000) << "Found File in Filename-Option: " << vf << endl;
 
-	 QFileInfo fi( vf );
-	 if( fi.extension() != QString::fromLatin1("pnm") )
-	    virt_filename->set(QCString(""));
+	 TQFileInfo fi( vf );
+	 if( fi.extension() != TQString::fromLatin1("pnm") )
+	    virt_filename->set(TQCString(""));
       }
    } else {
       scan_mode = ID_QT_IMGIO;
@@ -659,20 +659,20 @@ void ScanParams::virtualScannerParams( void )
 {
 #if 0
    KScanOption *so = 0;
-   QWidget     *w = 0;
+   TQWidget     *w = 0;
 
    /* Selection if virt. Scanner or SANE Debug */
-   bg_virt_scan_mode = new QButtonGroup( 2, Qt::Horizontal,
+   bg_virt_scan_mode = new TQButtonGroup( 2, Qt::Horizontal,
 					 this, "GroupBoxVirtScanner" );
-   connect( bg_virt_scan_mode, SIGNAL(clicked(int)),
-	    this, SLOT( slVirtScanModeSelect(int)));
+   connect( bg_virt_scan_mode, TQT_SIGNAL(clicked(int)),
+	    this, TQT_SLOT( slVirtScanModeSelect(int)));
 
-   QRadioButton *rb1 = new QRadioButton( i18n("SANE debug (pnm only)"),
+   TQRadioButton *rb1 = new TQRadioButton( i18n("SANE debug (pnm only)"),
 					 bg_virt_scan_mode, "VirtScanSANEDebug" );
 
 
 
-   QRadioButton *rb2 = new QRadioButton( i18n("virt. Scan (all Qt modes)"),
+   TQRadioButton *rb2 = new TQRadioButton( i18n("virt. Scan (all Qt modes)"),
 					 bg_virt_scan_mode, "VirtScanQtModes" );
 
    rb1->setChecked( true );
@@ -692,20 +692,20 @@ void ScanParams::virtualScannerParams( void )
 					       SANE_DESC_FILE );
    if( virt_filename )
    {
-      QHBoxLayout *hb = new QHBoxLayout();
+      TQHBoxLayout *hb = new TQHBoxLayout();
       top->addLayout( hb );
       w = virt_filename->widget();
       w->setMinimumHeight( (w->sizeHint()).height());
-      connect( w, SIGNAL(returnPressed()), this,
-	       SLOT( slCheckGlob()));
+      connect( w, TQT_SIGNAL(returnPressed()), this,
+	       TQT_SLOT( slCheckGlob()));
 
       hb->addWidget( w, 12 );
 
-      QPushButton *pb_file_sel = new QPushButton( this );
+      TQPushButton *pb_file_sel = new TQPushButton( this );
       pb_file_sel->setPixmap(miniFloppyPixmap);
       //hb->addStretch( 1 );
       hb->addWidget( pb_file_sel, 1 );
-      connect( pb_file_sel, SIGNAL(clicked()), this, SLOT(slFileSelect()));
+      connect( pb_file_sel, TQT_SIGNAL(clicked()), this, TQT_SLOT(slFileSelect()));
 
    }
 
@@ -764,7 +764,7 @@ void ScanParams::slStartScan( void )
    KScanStat stat = KSCAN_OK;
 
    kdDebug(29000) << "Called start-scan-Slot!" << endl;
-   QString q;
+   TQString q;
 
    if( scan_mode == ID_SANE_DEBUG || scan_mode == ID_QT_IMGIO )
    {
@@ -772,7 +772,7 @@ void ScanParams::slStartScan( void )
 	 q = virt_filename->get();
       if( q.isEmpty() )
       {
-	 QMessageBox::information( this, i18n("KSANE"),
+	 TQMessageBox::information( this, i18n("KSANE"),
 				   i18n("The filename for virtual scanning is not set.\n"
 					"Please set the filename first.") );
 	 stat = KSCAN_ERR_PARAM;
@@ -863,12 +863,12 @@ void ScanParams::slEditCustGamma( void )
     kdDebug(29000) << "Old gamma table: " << old_gt.getGamma() << ", " << old_gt.getBrightness() << ", " << old_gt.getContrast() << endl;
 
     GammaDialog gdiag( this );
-    connect( &gdiag, SIGNAL( gammaToApply(KGammaTable*) ),
-	     this,     SLOT( slApplyGamma(KGammaTable*) ) );
+    connect( &gdiag, TQT_SIGNAL( gammaToApply(KGammaTable*) ),
+	     this,     TQT_SLOT( slApplyGamma(KGammaTable*) ) );
 
     gdiag.setGt( old_gt );
 
-    if( gdiag.exec() == QDialog::Accepted  )
+    if( gdiag.exec() == TQDialog::Accepted  )
     {
        slApplyGamma( gdiag.getGt() );
        kdDebug(29000) << "Fine, applied new Gamma Table !" << endl;
@@ -1013,10 +1013,10 @@ void ScanParams::slAcquirePreview( void )
 }
 
 /* Custom Scan size setting.
- * The custom scan size is given in the QRect parameter. It must contain values
+ * The custom scan size is given in the TQRect parameter. It must contain values
  * from 0..1000 which are interpreted as tenth of percent of the overall dimension.
  */
-void ScanParams::slCustomScanSize( QRect sel)
+void ScanParams::slCustomScanSize( TQRect sel)
 {
    kdDebug(29000) << "Custom-Size: " << sel.x() << ", " << sel.y() << " - " << sel.width() << "x" << sel.height() << endl;
 
@@ -1069,7 +1069,7 @@ void ScanParams::slCustomScanSize( QRect sel)
 void ScanParams::slMaximalScanSize( void )
 {
    kdDebug(29000) << "Setting to default" << endl;
-   slCustomScanSize(QRect( 0,0,1000,1000));
+   slCustomScanSize(TQRect( 0,0,1000,1000));
 }
 
 

@@ -31,14 +31,14 @@
 #include "dwmenuaction.moc"
 //-------------------------------------
 
-dwMenuAction::dwMenuAction( const QString& text, const KShortcut& cut,
-			    KDockWidget *dw,QObject* parent,
+dwMenuAction::dwMenuAction( const TQString& text, const KShortcut& cut,
+			    KDockWidget *dw,TQObject* parent,
 			    KDockMainWindow *mw, const char* name )
     :KToggleAction(text,cut,parent,name),m_dw(dw),m_mw(mw)
 {
-    connect(this,SIGNAL(toggled(bool)),this,SLOT(slotToggled(bool)));
-    connect(m_dw->dockManager(),SIGNAL(change()),this,SLOT(anDWChanged()));
-    connect(m_dw,SIGNAL(destroyed()),this,SLOT(slotWidgetDestroyed()));
+    connect(this,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotToggled(bool)));
+    connect(m_dw->dockManager(),TQT_SIGNAL(change()),this,TQT_SLOT(anDWChanged()));
+    connect(m_dw,TQT_SIGNAL(destroyed()),this,TQT_SLOT(slotWidgetDestroyed()));
     setChecked(m_dw->mayBeHide());
 }
 

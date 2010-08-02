@@ -16,7 +16,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qkeycode.h>
+#include <tqkeycode.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -26,7 +26,7 @@
 
 #include "filefinder.h"
 
-FileFinder::FileFinder( QWidget *parent, const char *name )
+FileFinder::FileFinder( TQWidget *parent, const char *name )
     : KLineEdit( parent, name )
 {
     // make this widget just as large, as the font is + 8 Pixels
@@ -37,12 +37,12 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     setHandleSignals( true ); // we want the completionbox signals
     completionBox()->setTabHandling( true );
 
-    connect( completionBox(), SIGNAL( userCancelled(const QString&) ),
-             SLOT( hide() ));
-    connect( completionBox(), SIGNAL( activated( const QString& ) ),
-             SLOT( slotAccept( const QString& )));
-    connect( this, SIGNAL( returnPressed( const QString& )),
-             SLOT( slotAccept( const QString& ) ));
+    connect( completionBox(), TQT_SIGNAL( userCancelled(const TQString&) ),
+             TQT_SLOT( hide() ));
+    connect( completionBox(), TQT_SIGNAL( activated( const TQString& ) ),
+             TQT_SLOT( slotAccept( const TQString& )));
+    connect( this, TQT_SIGNAL( returnPressed( const TQString& )),
+             TQT_SLOT( slotAccept( const TQString& ) ));
 
     KURLCompletion *comp = new KURLCompletion();
     comp->setReplaceHome( true );
@@ -65,13 +65,13 @@ FileFinder::~FileFinder()
     config->writeEntry( "FileFinderCompletionMode", completionMode() );
 }
 
-void FileFinder::focusOutEvent( QFocusEvent *e )
+void FileFinder::focusOutEvent( TQFocusEvent *e )
 {
-    if ( e->reason() != QFocusEvent::Popup )
+    if ( e->reason() != TQFocusEvent::Popup )
         hide();
 }
 
-void FileFinder::keyPressEvent( QKeyEvent *e )
+void FileFinder::keyPressEvent( TQKeyEvent *e )
 {
     int key = e->key();
     if ( key == Key_Escape ) {
@@ -90,7 +90,7 @@ void FileFinder::hide()
     parentWidget()->setFocus();
 }
 
-void FileFinder::slotAccept( const QString& dir )
+void FileFinder::slotAccept( const TQString& dir )
 {
     hide();
     emit enterDir( dir );

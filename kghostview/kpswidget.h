@@ -20,10 +20,10 @@
 #define __KPSWIDGET_H__
 
 #include <queue>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qwidget.h>
-#include <qpixmap.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqwidget.h>
+#include <tqpixmap.h>
 
 #include "dscparse_adapter.h"
 #include "configuration.h"
@@ -48,7 +48,7 @@ class KPSWidget : public QWidget
     Q_OBJECT
 
 public:
-    KPSWidget( QWidget* parent = 0, const char* name = 0 );
+    KPSWidget( TQWidget* parent = 0, const char* name = 0 );
     ~KPSWidget();
 
     /**
@@ -100,7 +100,7 @@ public:
      * @p usePipe indicates whether we use a pipe for
      * communication or let ghoscript read the file itself.
      */
-    void setFileName( const QString&, bool usePipe );
+    void setFileName( const TQString&, bool usePipe );
 
     /**
      * Set the bounding box of the drawable. See my comment in the source
@@ -154,7 +154,7 @@ signals:
      *
      * Don't change the pixmap or bad things will happen. This is the backing pixmap of the display.
      */
-    void newPageImage( QPixmap image );
+    void newPageImage( TQPixmap image );
 
     /**
      * This signal is emitted whenever the ghostscript process has
@@ -167,7 +167,7 @@ signals:
      *
      * @param msg a <strong>translated</strong> error message to display the user which may be null if we cannot tell anything important
      */
-    void ghostscriptError( const QString& mgs );
+    void ghostscriptError( const TQString& mgs );
 
 protected:
     struct Record 
@@ -180,7 +180,7 @@ protected:
 	unsigned int len;
     };
 
-    // void resizeEvent( QResizeEvent* );
+    // void resizeEvent( TQResizeEvent* );
     bool x11Event( XEvent* );
 
     /**
@@ -195,8 +195,8 @@ protected:
      */
     void setupWidget();
     
-    void setGhostscriptPath( const QString& );
-    void setGhostscriptArguments( const QStringList& );
+    void setGhostscriptPath( const TQString& );
+    void setGhostscriptArguments( const TQStringList& );
     void setPalette( Configuration::EnumPalette::type );
 
 protected slots:
@@ -211,15 +211,15 @@ private:
     enum AtomName { GHOSTVIEW = 0, GHOSTVIEW_COLORS, NEXT, PAGE, DONE };
     Atom _atoms[5];
 
-    QPixmap _backgroundPixmap;
+    TQPixmap _backgroundPixmap;
 
     /**
      * The following properties determine how Ghostscript is started.
      * If any of these is changed, Ghostscript needs to be restarted.
      */
-    QString     _ghostscriptPath;
-    QStringList _ghostscriptArguments;
-    QString     _fileName;
+    TQString     _ghostscriptPath;
+    TQStringList _ghostscriptArguments;
+    TQString     _fileName;
     bool        _usePipe;
     bool        _doubleBuffer;
 

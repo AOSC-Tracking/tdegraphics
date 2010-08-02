@@ -17,11 +17,11 @@
 
 #include <string.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqpushbutton.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kpalette.h>
@@ -31,22 +31,22 @@
 #include "palette.h"
 #include "loadpalettedlg.h"
 
-LoadPaletteDlg::LoadPaletteDlg(QWidget *parent, const char *name) 
+LoadPaletteDlg::LoadPaletteDlg(TQWidget *parent, const char *name) 
         : KDialogBase(parent, name, true, i18n( "Load Palette" ), 
           Ok|Cancel, Ok, true) {
 	fileName = "";
-    QWidget *mainWidget = new QWidget( this );
+    TQWidget *mainWidget = new TQWidget( this );
     setMainWidget( mainWidget );
-	QVBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
-	QLabel* label = new QLabel(i18n( "Select a palette:" ), mainWidget);
+	TQVBoxLayout* topLayout = new TQVBoxLayout(mainWidget, 0, spacingHint());
+	TQLabel* label = new TQLabel(i18n( "Select a palette:" ), mainWidget);
 	topLayout->addWidget(label);
-	paletteBox = new QComboBox(false, mainWidget);
+	paletteBox = new TQComboBox(false, mainWidget);
 	browseFileNameInserted = false;
-	QStringList palettesList = Palette::kdePalettes();
-	for(QStringList::Iterator palette = palettesList.begin();
+	TQStringList palettesList = Palette::kdePalettes();
+	for(TQStringList::Iterator palette = palettesList.begin();
 		palette != palettesList.end(); ++palette) {
 		bool prepend = (*palette).contains( "colors/Custom_Colors" );
-		QString fileName = locate("config", (*palette));
+		TQString fileName = locate("config", (*palette));
 		if(prepend) {
 			palettesFileNames.prepend(fileName);
 			setFileName(&fileName);
@@ -55,7 +55,7 @@ LoadPaletteDlg::LoadPaletteDlg(QWidget *parent, const char *name)
 			if(palette == palettesList.begin())
 				setFileName(&fileName);
 		}
-		QString paletteName = (*palette).mid(palettesDir.length() + 1);
+		TQString paletteName = (*palette).mid(palettesDir.length() + 1);
 		if(paletteName == "Custom_Colors")
 			paletteName = i18n("Custom Colors");
 		else if(paletteName == "Recent_Colors")
@@ -65,12 +65,12 @@ LoadPaletteDlg::LoadPaletteDlg(QWidget *parent, const char *name)
 		else
 			paletteBox->insertItem(paletteName);
 	}
-	connect(paletteBox, SIGNAL( activated(int) ), SLOT( setFileName(int) ));
+	connect(paletteBox, TQT_SIGNAL( activated(int) ), TQT_SLOT( setFileName(int) ));
 	topLayout->addWidget(paletteBox);
-	QHBoxLayout* browseLayout = new QHBoxLayout( mainWidget );
-	QPushButton* browseButton = new QPushButton(i18n( "Browse..." ), 
+	TQHBoxLayout* browseLayout = new TQHBoxLayout( mainWidget );
+	TQPushButton* browseButton = new TQPushButton(i18n( "Browse..." ), 
         mainWidget);
-	connect(browseButton, SIGNAL( clicked() ), SLOT( browseFileNames() ));
+	connect(browseButton, TQT_SIGNAL( clicked() ), TQT_SLOT( browseFileNames() ));
 	browseLayout->addWidget(browseButton);
 	browseLayout->addStretch(10);
 	topLayout->addLayout(browseLayout);
@@ -80,7 +80,7 @@ LoadPaletteDlg::LoadPaletteDlg(QWidget *parent, const char *name)
 LoadPaletteDlg::~LoadPaletteDlg() {
 }
 	
-void LoadPaletteDlg::setFileName(QString* fileName) {
+void LoadPaletteDlg::setFileName(TQString* fileName) {
 	this->fileName = *fileName;
 }
 
@@ -89,7 +89,7 @@ void LoadPaletteDlg::setFileName(int index) {
 }
 
 void LoadPaletteDlg::browseFileNames() {
-	QString fileToOpen = KFileDialog::getOpenFileName(lastOpenPaletteFileDir,
+	TQString fileToOpen = KFileDialog::getOpenFileName(lastOpenPaletteFileDir,
 		i18n("*|All Files"), this, i18n("Open File"));
 	if(!fileToOpen.isEmpty()) {
 		fileName = fileToOpen;
@@ -105,7 +105,7 @@ void LoadPaletteDlg::browseFileNames() {
 	}
 }
 
-QString LoadPaletteDlg::getFileName() {
+TQString LoadPaletteDlg::getFileName() {
 	return fileName;
 }
 #include "loadpalettedlg.moc"

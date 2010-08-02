@@ -69,10 +69,10 @@
 #include <errno.h>
 #include <kdemacros.h>
 
-#include <qcolor.h>
-#include <qfile.h>
-#include <qimage.h>
-#include <qregexp.h>
+#include <tqcolor.h>
+#include <tqfile.h>
+#include <tqimage.h>
+#include <tqregexp.h>
 
 
 #include "gscreator.h"
@@ -161,7 +161,7 @@ static const char *dvipsargs[] = {
     0
 };
 
-static bool correctDVI(const QString& filename);
+static bool correctDVI(const TQString& filename);
 
 
 namespace {
@@ -172,7 +172,7 @@ namespace {
 }
 
 
-bool GSCreator::create(const QString &path, int width, int height, QImage &img)
+bool GSCreator::create(const TQString &path, int width, int height, TQImage &img)
 {
 // The code in the loop (when testing whether got_sig_term got set)
 // should read some variation of:
@@ -194,7 +194,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
   int output[2];
   int dvipipe[2]; 
 
-  QByteArray data(1024);
+  TQByteArray data(1024);
 
   bool ok = false;
 
@@ -216,7 +216,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
 
   if (no_dvi)
   {
-    FILE* fp = fopen(QFile::encodeName(path), "r");
+    FILE* fp = fopen(TQFile::encodeName(path), "r");
     if (fp == 0) return false;
 
     char buf[4096];
@@ -234,7 +234,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
   }
 
   const bool is_encapsulated = no_dvi &&
-    (path.find(QRegExp("\\.epsi?$", false, false)) > 0) &&
+    (path.find(TQRegExp("\\.epsi?$", false, false)) > 0) &&
     (dsc.bbox()->width() > 0) && (dsc.bbox()->height() > 0) && 
     (dsc.page_count() <= 1);
 
@@ -246,7 +246,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     // GhostScript's rendering at the extremely low resolutions
     // required for thumbnails leaves something to be desired. To
     // get nicer images, we render to four times the required
-    // resolution and let QImage scale the result.
+    // resolution and let TQImage scale the result.
     const int hres = (width * 72) / bbox->width();
     const int vres = (height * 72) / bbox->height();
     const int resolution = (hres > vres ? vres : hres) * 4;
@@ -317,7 +317,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     }
 
     // find next zero entry and put the filename there    
-    QCString fname = QFile::encodeName( path );
+    TQCString fname = TQFile::encodeName( path );
     while (*arg)
       ++arg;
     if( no_dvi )
@@ -478,9 +478,9 @@ void GSCreator::comment(Name name)
 // Quick function to check if the filename corresponds to a valid DVI
 // file. Returns true if <filename> is a DVI file, false otherwise.
 
-static bool correctDVI(const QString& filename)
+static bool correctDVI(const TQString& filename)
 {
-  QFile f(filename);
+  TQFile f(filename);
   if (!f.open(IO_ReadOnly))
     return FALSE;
 
@@ -501,11 +501,11 @@ static bool correctDVI(const QString& filename)
   return TRUE;
 }
 
-bool GSCreator::getEPSIPreview(const QString &path, long start, long
-			       end, QImage &outimg, int imgwidth, int imgheight)
+bool GSCreator::getEPSIPreview(const TQString &path, long start, long
+			       end, TQImage &outimg, int imgwidth, int imgheight)
 {
   FILE *fp;
-  fp = fopen(QFile::encodeName(path), "r");
+  fp = fopen(TQFile::encodeName(path), "r");
   if (fp == 0) return false;
 
   const long previewsize = end - start + 1;
@@ -521,7 +521,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
     return false;
   }
 
-  QString previewstr = QString::fromLatin1(buf);
+  TQString previewstr = TQString::fromLatin1(buf);
   free(buf);
 
   int offset = 0;
@@ -560,7 +560,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
   }
 
   unsigned int colors = (1U << depth);
-  QImage img(width, height, imagedepth, colors);
+  TQImage img(width, height, imagedepth, colors);
   img.setAlphaBuffer(false);
 
   if (imagedepth <= 8) {
@@ -575,7 +575,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
   unsigned int bytes_per_scan_line = bits_per_scan_line / 8;
   if (bits_per_scan_line % 8) bytes_per_scan_line++;
   const unsigned int bindatabytes = height * bytes_per_scan_line;
-  QMemArray<unsigned char> bindata(bindatabytes);
+  TQMemArray<unsigned char> bindata(bindatabytes);
 
   for (unsigned int i = 0; i < bindatabytes; i++) {
     if (offset >= previewsize)

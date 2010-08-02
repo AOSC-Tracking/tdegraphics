@@ -27,14 +27,14 @@ class GSCreator : public ThumbCreator, public KDSCCommentHandler
 {
 public:
     GSCreator() {};
-    virtual bool create(const QString &path, int, int, QImage &img);
+    virtual bool create(const TQString &path, int, int, TQImage &img);
     virtual Flags flags() const;
     void comment(Name name);
 
 private:
-    static bool getEPSIPreview(const QString &path,
+    static bool getEPSIPreview(const TQString &path,
                                long start, long end,
-                               QImage &outimg,
+                               TQImage &outimg,
                                int imgwidth, int imgheight);
     bool endComments;
 };

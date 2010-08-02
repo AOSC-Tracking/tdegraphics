@@ -74,12 +74,12 @@ PMCylinder::~PMCylinder( )
 {
 }
 
-QString PMCylinder::description( ) const
+TQString PMCylinder::description( ) const
 {
    return i18n( "cylinder" );
 }
 
-void PMCylinder::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMCylinder::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "end_a", m_end1.serializeXML( ) );
    e.setAttribute( "end_b", m_end2.serializeXML( ) );
@@ -160,7 +160,7 @@ void PMCylinder::setOpen( bool op )
    }
 }
 
-PMDialogEditBase* PMCylinder::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMCylinder::editWidget( TQWidget* parent ) const
 {
    return new PMCylinderEdit( parent );
 }

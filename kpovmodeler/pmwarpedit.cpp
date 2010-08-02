@@ -21,15 +21,15 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 #include <kdialog.h>
 
 
-PMWarpEdit::PMWarpEdit( QWidget* parent, const char* name )
+PMWarpEdit::PMWarpEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,14 +37,14 @@ PMWarpEdit::PMWarpEdit( QWidget* parent, const char* name )
 
 void PMWarpEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
-   QVBoxLayout* vl;
-   QGridLayout* gl;
+   TQHBoxLayout* hl;
+   TQVBoxLayout* vl;
+   TQGridLayout* gl;
 
    Base::createTopWidgets( );
 
-   QLabel* label = new QLabel( i18n( "Warp type:" ), this );
-   m_pWarpTypeEdit = new QComboBox( false, this );
+   TQLabel* label = new TQLabel( i18n( "Warp type:" ), this );
+   m_pWarpTypeEdit = new TQComboBox( false, this );
    m_pWarpTypeEdit->insertItem( i18n( "Repeat" ) );
    m_pWarpTypeEdit->insertItem( i18n( "Black Hole" ) );
    m_pWarpTypeEdit->insertItem( i18n( "Turbulence" ) );
@@ -52,44 +52,44 @@ void PMWarpEdit::createTopWidgets( )
    m_pWarpTypeEdit->insertItem( i18n( "Spherical" ) );
    m_pWarpTypeEdit->insertItem( i18n( "Toroidal" ) );
    m_pWarpTypeEdit->insertItem( i18n( "Planar" ) );
-   hl = new QHBoxLayout( topLayout( ) );
+   hl = new TQHBoxLayout( topLayout( ) );
    hl->addWidget( label );
    hl->addWidget( m_pWarpTypeEdit );
    hl->addStretch( 1 );
    
    /* Repeat Warp Objects */
-   m_pRepeatWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pRepeatWidget, 0, KDialog::spacingHint( ) );
-   gl = new QGridLayout( vl, 3, 2 );
-   m_pDirectionLabel = new QLabel( i18n( "Direction:" ), m_pRepeatWidget );
+   m_pRepeatWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pRepeatWidget, 0, KDialog::spacingHint( ) );
+   gl = new TQGridLayout( vl, 3, 2 );
+   m_pDirectionLabel = new TQLabel( i18n( "Direction:" ), m_pRepeatWidget );
    m_pDirectionEdit = new PMVectorEdit( "x", "y", "z", m_pRepeatWidget );
    gl->addWidget( m_pDirectionLabel, 0, 0 );
    gl->addWidget( m_pDirectionEdit, 0, 1 );
-   m_pOffsetLabel = new QLabel( i18n( "Offset:" ), m_pRepeatWidget );
+   m_pOffsetLabel = new TQLabel( i18n( "Offset:" ), m_pRepeatWidget );
    m_pOffsetEdit = new PMVectorEdit( "x", "y", "z", m_pRepeatWidget );
    gl->addWidget( m_pOffsetLabel, 1, 0 );
    gl->addWidget( m_pOffsetEdit, 1, 1 );
-   m_pFlipLabel = new QLabel( i18n( "Flip:" ), m_pRepeatWidget );
+   m_pFlipLabel = new TQLabel( i18n( "Flip:" ), m_pRepeatWidget );
    m_pFlipEdit = new PMVectorEdit( "x", "y", "z", m_pRepeatWidget );
    gl->addWidget( m_pFlipLabel, 2, 0 );
    gl->addWidget( m_pFlipEdit, 2, 1 );
    
    /* Black Hole Warp Objects */
-   m_pBlackHoleWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pBlackHoleWidget, 0, KDialog::spacingHint( ) );
-   m_pLocationLabel = new QLabel( i18n( "Location:" ), m_pBlackHoleWidget );
+   m_pBlackHoleWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pBlackHoleWidget, 0, KDialog::spacingHint( ) );
+   m_pLocationLabel = new TQLabel( i18n( "Location:" ), m_pBlackHoleWidget );
    m_pLocationEdit = new PMVectorEdit( "x", "y", "z", m_pBlackHoleWidget );
-   hl = new QHBoxLayout( vl );
+   hl = new TQHBoxLayout( vl );
    hl->addWidget( m_pLocationLabel );
    hl->addWidget( m_pLocationEdit );
-   m_pRadiusLabel = new QLabel( i18n( "Radius:" ), m_pBlackHoleWidget );
+   m_pRadiusLabel = new TQLabel( i18n( "Radius:" ), m_pBlackHoleWidget );
    m_pRadiusEdit = new PMFloatEdit( m_pBlackHoleWidget );
-   m_pStrengthLabel = new QLabel( i18n( "Strength:" ), m_pBlackHoleWidget );
+   m_pStrengthLabel = new TQLabel( i18n( "Strength:" ), m_pBlackHoleWidget );
    m_pStrengthEdit = new PMFloatEdit( m_pBlackHoleWidget );
-   m_pFalloffLabel = new QLabel( i18n( "Falloff:" ), m_pBlackHoleWidget );
+   m_pFalloffLabel = new TQLabel( i18n( "Falloff:" ), m_pBlackHoleWidget );
    m_pFalloffEdit = new PMFloatEdit( m_pBlackHoleWidget );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 3, 2 );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 3, 2 );
    gl->addWidget( m_pRadiusLabel, 0, 0 );
    gl->addWidget( m_pRadiusEdit, 0, 1 );
    gl->addWidget( m_pStrengthLabel, 1, 0 );
@@ -98,88 +98,88 @@ void PMWarpEdit::createTopWidgets( )
    gl->addWidget( m_pFalloffEdit, 2, 1 );
    hl->addStretch( 1 );
    
-   m_pRepeatLabel = new QLabel( i18n( "Repeat:" ), m_pBlackHoleWidget );
+   m_pRepeatLabel = new TQLabel( i18n( "Repeat:" ), m_pBlackHoleWidget );
    m_pRepeatEdit = new PMVectorEdit( "x", "y", "z", m_pBlackHoleWidget );
-   hl = new QHBoxLayout( vl );
+   hl = new TQHBoxLayout( vl );
    hl->addWidget( m_pRepeatLabel );
    hl->addWidget( m_pRepeatEdit );
-   m_pTurbulenceLabel = new QLabel( i18n( "Turbulence:" ), m_pBlackHoleWidget );
+   m_pTurbulenceLabel = new TQLabel( i18n( "Turbulence:" ), m_pBlackHoleWidget );
    m_pTurbulenceEdit = new PMVectorEdit( "x", "y", "z", m_pBlackHoleWidget );
-   hl = new QHBoxLayout( vl );
+   hl = new TQHBoxLayout( vl );
    hl->addWidget( m_pTurbulenceLabel );
    hl->addWidget( m_pTurbulenceEdit );
-   m_pInverseEdit = new QCheckBox( i18n( "Inverse" ), m_pBlackHoleWidget );
+   m_pInverseEdit = new TQCheckBox( i18n( "Inverse" ), m_pBlackHoleWidget );
    vl->addWidget( m_pInverseEdit );
 
    /* Turbulence Warp Objects */
-   m_pTurbulenceWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pTurbulenceWidget, 0, KDialog::spacingHint( ) );
-   m_pValueVectorLabel = new QLabel( i18n( "Value:" ), m_pTurbulenceWidget );
+   m_pTurbulenceWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pTurbulenceWidget, 0, KDialog::spacingHint( ) );
+   m_pValueVectorLabel = new TQLabel( i18n( "Value:" ), m_pTurbulenceWidget );
    m_pValueVectorEdit = new PMVectorEdit( "x", "y", "z", m_pTurbulenceWidget );
-   hl = new QHBoxLayout( vl );
+   hl = new TQHBoxLayout( vl );
    hl->addWidget( m_pValueVectorLabel );
    hl->addWidget( m_pValueVectorEdit );
 
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 3, 2 );
-   m_pOctavesLabel = new QLabel( i18n( "Octaves:" ), m_pTurbulenceWidget );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 3, 2 );
+   m_pOctavesLabel = new TQLabel( i18n( "Octaves:" ), m_pTurbulenceWidget );
    m_pOctavesEdit = new PMIntEdit( m_pTurbulenceWidget );
    gl->addWidget( m_pOctavesLabel, 0, 0 );
    gl->addWidget( m_pOctavesEdit, 0, 1 );
-   m_pOmegaLabel = new QLabel( i18n( "Omega:" ), m_pTurbulenceWidget );
+   m_pOmegaLabel = new TQLabel( i18n( "Omega:" ), m_pTurbulenceWidget );
    m_pOmegaEdit = new PMFloatEdit( m_pTurbulenceWidget );
    gl->addWidget( m_pOmegaLabel, 1, 0 );
    gl->addWidget( m_pOmegaEdit, 1, 1 );
-   m_pLambdaLabel = new QLabel( i18n( "Lambda:" ), m_pTurbulenceWidget );
+   m_pLambdaLabel = new TQLabel( i18n( "Lambda:" ), m_pTurbulenceWidget );
    m_pLambdaEdit = new PMFloatEdit( m_pTurbulenceWidget );
    gl->addWidget( m_pLambdaLabel, 2, 0 );
    gl->addWidget( m_pLambdaEdit, 2, 1 );
    hl->addStretch( 1 );
 
    /* Mapping Warp Objects */
-   m_pMappingWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pMappingWidget, 0, KDialog::spacingHint( ) );
-   label = new QLabel( i18n( "Orientation:" ), m_pMappingWidget );
+   m_pMappingWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pMappingWidget, 0, KDialog::spacingHint( ) );
+   label = new TQLabel( i18n( "Orientation:" ), m_pMappingWidget );
    m_pOrientationEdit = new PMVectorEdit( "x", "y", "z", m_pMappingWidget );
-   hl = new QHBoxLayout( vl );
+   hl = new TQHBoxLayout( vl );
    hl->addWidget( label );
    hl->addWidget( m_pOrientationEdit );
 
-   gl = new QGridLayout( vl, 2, 2 );
-   label = new QLabel( i18n( "Distance exponent:" ), m_pMappingWidget );
+   gl = new TQGridLayout( vl, 2, 2 );
+   label = new TQLabel( i18n( "Distance exponent:" ), m_pMappingWidget );
    m_pDistExpEdit = new PMFloatEdit( m_pMappingWidget );
    gl->addWidget( label, 0, 0 );
    gl->addWidget( m_pDistExpEdit, 0, 1 );
-   m_pMajorRadiusLabel = new QLabel( i18n( "Major radius:" ), m_pMappingWidget );
+   m_pMajorRadiusLabel = new TQLabel( i18n( "Major radius:" ), m_pMappingWidget );
    m_pMajorRadiusEdit = new PMFloatEdit( m_pMappingWidget );
    gl->addWidget( m_pMajorRadiusLabel, 1, 0 );
    gl->addWidget( m_pMajorRadiusEdit, 1, 1 );
 
-   vl = new QVBoxLayout( topLayout( ) );
+   vl = new TQVBoxLayout( topLayout( ) );
    vl->addSpacing( 0 );
    vl->addWidget( m_pRepeatWidget );
    vl->addWidget( m_pBlackHoleWidget );
    vl->addWidget( m_pTurbulenceWidget );
    vl->addWidget( m_pMappingWidget );
    
-   connect( m_pWarpTypeEdit, SIGNAL( activated( int ) ), SLOT( slotComboChanged( int ) ) );
-   connect( m_pDirectionEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOffsetEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFlipEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pLocationEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRadiusEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pStrengthEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFalloffEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pInverseEdit, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRepeatEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pTurbulenceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pValueVectorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOctavesEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOmegaEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pLambdaEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOrientationEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDistExpEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMajorRadiusEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pWarpTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotComboChanged( int ) ) );
+   connect( m_pDirectionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOffsetEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFlipEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLocationEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadiusEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pStrengthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFalloffEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pInverseEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRepeatEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pTurbulenceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pValueVectorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOctavesEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOmegaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLambdaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOrientationEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDistExpEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMajorRadiusEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMWarpEdit::displayObject( PMObject* o )

@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include <qlabel.h>
+#include <tqlabel.h>
 #include "pmviewbase.h"
 
 /**
@@ -34,14 +34,14 @@ public:
    /**
     * Default constructor
     */
-   PMUnknownView( const QString& viewType, QWidget* parent,
+   PMUnknownView( const TQString& viewType, TQWidget* parent,
                   const char* name = 0 );
    /** */
-   virtual QString viewType( ) const { return m_viewType; }
+   virtual TQString viewType( ) const { return m_viewType; }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 private:
-   QString m_viewType;
+   TQString m_viewType;
 };
 
 #endif

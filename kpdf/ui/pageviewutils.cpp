@@ -8,10 +8,10 @@
  ***************************************************************************/
 
 // qt/kde includes
-#include <qbitmap.h>
-#include <qpainter.h>
-#include <qimage.h>
-#include <qtimer.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
+#include <tqimage.h>
+#include <tqtimer.h>
 #include <kapplication.h>
 #include <kimageeffect.h>
 #include <kiconloader.h>
@@ -21,20 +21,20 @@
 #include "core/page.h"
 #include "conf/settings.h"
 
-PageViewMessage::PageViewMessage( QWidget * parent )
-    : QWidget( parent, "pageViewMessage" ), m_timer( 0 )
+PageViewMessage::PageViewMessage( TQWidget * parent )
+    : TQWidget( parent, "pageViewMessage" ), m_timer( 0 )
 {
     setFocusPolicy( NoFocus );
     setBackgroundMode( NoBackground );
-    setPaletteBackgroundColor(kapp->palette().color(QPalette::Active, QColorGroup::Background));
+    setPaletteBackgroundColor(kapp->palette().color(TQPalette::Active, TQColorGroup::Background));
     // if the layout is LtR, we can safely place it in the right position
-    if ( !QApplication::reverseLayout() )
+    if ( !TQApplication::reverseLayout() )
         move( 10, 10 );
     resize( 0, 0 );
     hide();
 }
 
-void PageViewMessage::display( const QString & message, Icon icon, int durationMs )
+void PageViewMessage::display( const TQString & message, Icon icon, int durationMs )
 // give to Caesar what Caesar owns: code taken from Amarok's osd.h/.cpp
 // "redde (reddite, pl.) cesari quae sunt cesaris", just btw. ;)
 {
@@ -45,7 +45,7 @@ void PageViewMessage::display( const QString & message, Icon icon, int durationM
     }
 
     // determine text rectangle
-    QRect textRect = fontMetrics().boundingRect( message );
+    TQRect textRect = fontMetrics().boundingRect( message );
     textRect.moveBy( -textRect.left(), -textRect.top() );
     textRect.addCoords( 0, 0, 2, 2 );
     int width = textRect.width(),
@@ -55,7 +55,7 @@ void PageViewMessage::display( const QString & message, Icon icon, int durationM
         shadowOffset = 1;
 
     // load icon (if set) and update geometry
-    QPixmap symbol;
+    TQPixmap symbol;
     if ( icon != None )
     {
         switch ( icon )
@@ -73,7 +73,7 @@ void PageViewMessage::display( const QString & message, Icon icon, int durationM
                 symbol = SmallIcon( "messagebox_info" );
                 break;
         }
-        if ( QApplication::reverseLayout() )
+        if ( TQApplication::reverseLayout() )
         {
             iconXOffset = 2 + textRect.width();
         }
@@ -84,23 +84,23 @@ void PageViewMessage::display( const QString & message, Icon icon, int durationM
         width += 2 + symbol.width();
         height = QMAX( height, symbol.height() );
     }
-    QRect geometry( 0, 0, width + 10, height + 8 );
+    TQRect geometry( 0, 0, width + 10, height + 8 );
 
     // resize pixmap, mask and widget
-    static QBitmap mask;
+    static TQBitmap mask;
     mask.resize( geometry.size() );
     m_pixmap.resize( geometry.size() );
     resize( geometry.size() );
 
     // create and set transparency mask
-    QPainter maskPainter( &mask);
+    TQPainter maskPainter( &mask);
     mask.fill( Qt::black );
     maskPainter.setBrush( Qt::white );
     maskPainter.drawRoundRect( geometry, 1600 / geometry.width(), 1600 / geometry.height() );
     setMask( mask );
 
     // draw background
-    QPainter bufferPainter( &m_pixmap );
+    TQPainter bufferPainter( &m_pixmap );
     bufferPainter.setPen( Qt::black );
     bufferPainter.setBrush( paletteBackgroundColor() );
     bufferPainter.drawRoundRect( geometry, 1600 / geometry.width(), 1600 / geometry.height() );
@@ -118,7 +118,7 @@ void PageViewMessage::display( const QString & message, Icon icon, int durationM
 
     // if the layout is RtL, we can move it to the right place only after we
     // know how much size it will take
-    if ( QApplication::reverseLayout() )
+    if ( TQApplication::reverseLayout() )
         move( parentWidget()->width() - geometry.width() - 10, 10 );
 
     // show widget and schedule a repaint
@@ -130,21 +130,21 @@ void PageViewMessage::display( const QString & message, Icon icon, int durationM
     {
         if ( !m_timer )
         {
-            m_timer = new QTimer( this );
-            connect( m_timer, SIGNAL( timeout() ), SLOT( hide() ) );
+            m_timer = new TQTimer( this );
+            connect( m_timer, TQT_SIGNAL( timeout() ), TQT_SLOT( hide() ) );
         }
         m_timer->start( durationMs, true );
     } else if ( m_timer )
         m_timer->stop();
 }
 
-void PageViewMessage::paintEvent( QPaintEvent * e )
+void PageViewMessage::paintEvent( TQPaintEvent * e )
 {
-    QPainter p( this );
+    TQPainter p( this );
     p.drawPixmap( e->rect().topLeft(), m_pixmap, e->rect() );
 }
 
-void PageViewMessage::mousePressEvent( QMouseEvent * /*e*/ )
+void PageViewMessage::mousePressEvent( TQMouseEvent * /*e*/ )
 {
     if ( m_timer )
         m_timer->stop();
@@ -168,7 +168,7 @@ int PageViewItem::pageNumber() const
     return m_page->number();
 }
 
-const QRect& PageViewItem::geometry() const
+const TQRect& PageViewItem::geometry() const
 {
     return m_geometry;
 }

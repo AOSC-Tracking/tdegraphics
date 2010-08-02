@@ -57,34 +57,34 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMIsoSurface( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMIsoSurfaceEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmisosurface" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmisosurface" ); }
 
 
    /**
     * Sets the isosurface function
     */
-   void setFunction( const QString& f );
+   void setFunction( const TQString& f );
    /**
     * Returns the isosurface function
     */
-   QString function( ) const { return m_function; }
+   TQString function( ) const { return m_function; }
    /**
     * Sets the type of the contained_by object
     */
@@ -214,7 +214,7 @@ private:
                                 Evaluate0ID, Evaluate1ID, Evaluate2ID,
                                 OpenID, MaxTraceID, AllIntersectionsID };
 
-   QString m_function;
+   TQString m_function;
    ContainedByType m_containedBy;
    PMVector m_corner1, m_corner2, m_center;
    double m_radius, m_threshold, m_accuracy, m_maxGradient;

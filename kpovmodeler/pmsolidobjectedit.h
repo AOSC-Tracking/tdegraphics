@@ -27,7 +27,7 @@
 #include "pmgraphicalobjectedit.h"
 
 class PMSolidObject;
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMSolidObject.
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMSolidObjectEdit with parent and name
     */
-   PMSolidObjectEdit( QWidget* parent, const char* name = 0 );
+   PMSolidObjectEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -55,8 +55,8 @@ protected:
 
 private:
    PMSolidObject* m_pDisplayedObject;
-   QCheckBox* m_pHollowButton;
-   QCheckBox* m_pInverseButton;
+   TQCheckBox* m_pHollowButton;
+   TQCheckBox* m_pInverseButton;
 };
 
 

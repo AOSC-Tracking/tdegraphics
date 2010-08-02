@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMPovrayMatrixEdit with parent and name
     */
-   PMPovrayMatrixEdit( QWidget* parent, const char* name = 0 );
+   PMPovrayMatrixEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

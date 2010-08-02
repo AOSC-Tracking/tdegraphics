@@ -47,7 +47,7 @@ void History::add(Q_UINT32 page, Q_UINT32 ypos)
       currentItem = historyList.insert(currentItem, item);
     }
     // Delete items starting after currentItem to the end of the list.
-    QValueList<HistoryItem>::iterator deleteItemsStart = currentItem;
+    TQValueList<HistoryItem>::iterator deleteItemsStart = currentItem;
     deleteItemsStart++;
     historyList.erase(deleteItemsStart, historyList.end()); 
 

@@ -86,7 +86,7 @@ PMImageMap::~PMImageMap( )
 {
 }
 
-void PMImageMap::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMImageMap::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    switch( m_bitmapType )
    {
@@ -125,12 +125,12 @@ void PMImageMap::serialize( QDomElement& e, QDomDocument& doc ) const
    e.setAttribute( "transmit_all", m_transmitAll );
    e.setAttribute( "once", m_once );
 
-   QDomElement extra_data = doc.createElement( "extra_data" );
+   TQDomElement extra_data = doc.createElement( "extra_data" );
 
-   QDomElement data = doc.createElement( "indexed_filters" );
-   QDomElement p;
+   TQDomElement data = doc.createElement( "indexed_filters" );
+   TQDomElement p;
 
-   QValueList<PMPaletteValue>::ConstIterator it;
+   TQValueList<PMPaletteValue>::ConstIterator it;
    for( it = m_filters.begin( ); it != m_filters.end( ); ++it )
    {
       p = doc.createElement( "index_filter" );
@@ -182,7 +182,7 @@ void PMImageMap::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMImageMap::readAttributes( const PMXMLHelper& h )
 {
-   QString str;
+   TQString str;
 
    str = h.stringAttribute( "bitmap_type", "sys" );
    if( str == "gif" )
@@ -211,19 +211,19 @@ void PMImageMap::readAttributes( const PMXMLHelper& h )
    m_transmitAll = h.doubleAttribute( "transmit_all", transmitAllDefault );
    m_once = h.boolAttribute( "once", onceDefault );
 
-   QDomElement e = h.extraData( );
+   TQDomElement e = h.extraData( );
    if( !e.isNull( ) )
    {
-      QDomNode c = e.firstChild( );
+      TQDomNode c = e.firstChild( );
       while( !c.isNull( ) )
       {
          if( c.isElement( ) )
          {
-            QDomElement ce = c.toElement( );
+            TQDomElement ce = c.toElement( );
             if( ce.tagName( ) == "indexed_filters" )
             {
                m_filters.clear( );
-               QDomNode cd = ce.firstChild( );
+               TQDomNode cd = ce.firstChild( );
                while( !cd.isNull( ) )
                {
                   if( cd.isElement( ) )
@@ -238,7 +238,7 @@ void PMImageMap::readAttributes( const PMXMLHelper& h )
             if( ce.tagName( ) == "indexed_transmits" )
             {
                m_transmits.clear( );
-               QDomNode cd = ce.firstChild( );
+               TQDomNode cd = ce.firstChild( );
                while( !cd.isNull( ) )
                {
                   if( cd.isElement( ) )
@@ -344,7 +344,7 @@ void PMImageMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMImageMap::description( ) const
+TQString PMImageMap::description( ) const
 {
    return i18n( "imagemap" );
 }
@@ -359,7 +359,7 @@ void PMImageMap::setBitmapType( PMBitmapType c )
    }
 }
 
-void PMImageMap::setBitmapFileName( const QString& c )
+void PMImageMap::setBitmapFileName( const TQString& c )
 {
    if( c != m_bitmapFile )
    {
@@ -439,7 +439,7 @@ void PMImageMap::setInterpolateType( PMInterpolateType c )
    }
 }
 
-void PMImageMap::setFilters( const QValueList<PMPaletteValue>& c )
+void PMImageMap::setFilters( const TQValueList<PMPaletteValue>& c )
 {
    if( m_filters != c )
    {
@@ -449,7 +449,7 @@ void PMImageMap::setFilters( const QValueList<PMPaletteValue>& c )
    }
 }
 
-void PMImageMap::setTransmits( const QValueList<PMPaletteValue>& c )
+void PMImageMap::setTransmits( const TQValueList<PMPaletteValue>& c )
 {
    if( m_transmits != c )
    {
@@ -459,7 +459,7 @@ void PMImageMap::setTransmits( const QValueList<PMPaletteValue>& c )
    }
 }
 
-PMDialogEditBase* PMImageMap::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMImageMap::editWidget( TQWidget* parent ) const
 {
    return new PMImageMapEdit( parent );
 }

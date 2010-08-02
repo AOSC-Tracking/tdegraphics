@@ -22,8 +22,8 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qstring.h>
+#include <tqwidget.h>
+#include <tqstring.h>
 
 /**
  * This class implements a widget that exposes a signal for drag
@@ -35,14 +35,14 @@ class PMDragWidget : public QWidget
 {
    Q_OBJECT
 public:
-   PMDragWidget( QWidget* parent = 0, const char* name = 0, WFlags f = 0 );
+   PMDragWidget( TQWidget* parent = 0, const char* name = 0, WFlags f = 0 );
    
    virtual void startDrag( );
 
 protected:
-   void mousePressEvent( QMouseEvent* );
-   void mouseReleaseEvent( QMouseEvent* );
-   void mouseMoveEvent( QMouseEvent* );
+   void mousePressEvent( TQMouseEvent* );
+   void mouseReleaseEvent( TQMouseEvent* );
+   void mouseMoveEvent( TQMouseEvent* );
 
 private:
    bool dragging;

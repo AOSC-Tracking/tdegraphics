@@ -9,12 +9,12 @@
 
 #include <kdialogbase.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 class dvifile;
 class fontPool;
-class QTextView;
-class QWidget;
+class TQTextView;
+class TQWidget;
 
 
 class infoDialog : public KDialogBase
@@ -22,21 +22,21 @@ class infoDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    infoDialog( QWidget* parent = 0 );
+    infoDialog( TQWidget* parent = 0 );
 
     /** This method is used to set the data coming from the DVI
         file. Note that 0 is a permissible argument, that just means:
         "no file loaded" */
     void setDVIData(dvifile *dviFile);
 
-    QTextView* TextLabel1;
-    QTextView* TextLabel2;
-    QTextView* TextLabel3;
+    TQTextView* TextLabel1;
+    TQTextView* TextLabel2;
+    TQTextView* TextLabel3;
 
 public slots:
     /** This slot is called when Output from the MetaFont programm
         is received via the fontpool/kpsewhich */
-    void       outputReceiver(const QString&);
+    void       outputReceiver(const TQString&);
 
     /** This slot is called whenever anything in the fontpool has
         changed. If the infoDialog is shown, the dialog could then
@@ -47,12 +47,12 @@ public slots:
 	headline. The next time output is received via the
 	outputReceiver, the headline is displayed in bold on top of
 	the text view. */
-    void       clear(const QString&);
+    void       clear(const TQString&);
 
 protected:
  bool     MFOutputReceived;
- QString  headline;
- QString  pool;
+ TQString  headline;
+ TQString  pool;
 };
 
 #endif // INFO_KDVI_H

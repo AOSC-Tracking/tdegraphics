@@ -19,15 +19,15 @@
 
 #include <config.h>
 
-#include <qcheckbox.h>
-#include <qimage.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qlabel.h>
-#include <qwhatsthis.h>
-#include <qpainter.h>
-#include <qtimer.h>
+#include <tqcheckbox.h>
+#include <tqimage.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqlabel.h>
+#include <tqwhatsthis.h>
+#include <tqpainter.h>
+#include <tqtimer.h>
 
 #include <kapplication.h>
 #include <kglobalsettings.h>
@@ -47,7 +47,7 @@
 namespace {
 
 /** Holds the icon used as a overlay on pages which are not drawn yet. */
-QPixmap* waitIcon = 0;
+TQPixmap* waitIcon = 0;
 
 } // namespace anon
 
@@ -55,7 +55,7 @@ QPixmap* waitIcon = 0;
 /****** ThumbnailWidget ******/
 
 ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pageNumber, DocumentPageCache* _pageCache)
-  : QWidget(_parent), pageNumber(_pageNumber), pageCache(_pageCache), parent(_parent)
+  : TQWidget(_parent), pageNumber(_pageNumber), pageCache(_pageCache), parent(_parent)
 {
   setBackgroundMode(Qt::NoBackground);
 
@@ -63,11 +63,11 @@ ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pag
 
   if (!waitIcon)
   {
-    waitIcon = new QPixmap(KGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
+    waitIcon = new TQPixmap(KGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
   }
 }
 
-void ThumbnailWidget::paintEvent(QPaintEvent* e)
+void ThumbnailWidget::paintEvent(TQPaintEvent* e)
 {
   // Only repaint if the widget is really visible. We need to check this because Qt
   // sends paintEvents to all widgets that have ever been visible in the Scrollview
@@ -79,7 +79,7 @@ void ThumbnailWidget::paintEvent(QPaintEvent* e)
     return;
   }
 
-  QPainter p(this);
+  TQPainter p(this);
   p.setClipRect(e->rect());
 
   // Paint a black border around the widget
@@ -90,7 +90,7 @@ void ThumbnailWidget::paintEvent(QPaintEvent* e)
 
   // Remove 1 pixel from all sides of the rectangle, to eliminate overdraw with
   // the black border.
-  QRect thumbRect = rect();
+  TQRect thumbRect = rect();
   thumbRect.addCoords(1,1,-1,-1);
 
   // If the thumbnail is empty or has been marked for updating generate a new thumbnail.
@@ -108,7 +108,7 @@ void ThumbnailWidget::paintEvent(QPaintEvent* e)
     // TODO: Disable or find something less distractiong.
     p.drawPixmap(10, 10, *waitIcon);
 
-    QTimer::singleShot(50, this, SLOT(setThumbnail()));
+    TQTimer::singleShot(50, this, TQT_SLOT(setThumbnail()));
     return;
   }
 
@@ -122,14 +122,14 @@ void ThumbnailWidget::paintEvent(QPaintEvent* e)
 
   // The actual page starts at point (1,1) because of the outline.
   // Therefore we need to shift the destination rectangle.
-  QRect pixmapRect = thumbRect;
+  TQRect pixmapRect = thumbRect;
   pixmapRect.moveBy(-1,-1);
 
   // Paint widget
   bitBlt (this, thumbRect.topLeft(), &thumbnail, pixmapRect, CopyROP);
 }
 
-void ThumbnailWidget::resizeEvent(QResizeEvent*)
+void ThumbnailWidget::resizeEvent(TQResizeEvent*)
 {
   thumbnail.resize(width(), height());
   // Generate a new thumbnail in the next paintEvent.
@@ -164,12 +164,12 @@ void ThumbnailWidget::setThumbnail()
 /****** MarkListWidget ******/
 
 
-MarkListWidget::MarkListWidget(QWidget* _parent, MarkList* _markList, const PageNumber& _pageNumber,
+MarkListWidget::MarkListWidget(TQWidget* _parent, MarkList* _markList, const PageNumber& _pageNumber,
                                DocumentPageCache* _pageCache, bool _showThumbnail)
-  : QWidget(_parent), showThumbnail(_showThumbnail), pageNumber(_pageNumber),
+  : TQWidget(_parent), showThumbnail(_showThumbnail), pageNumber(_pageNumber),
     pageCache(_pageCache), markList(_markList)
 {
-  QBoxLayout* layout = new QVBoxLayout(this, margin);
+  TQBoxLayout* layout = new TQVBoxLayout(this, margin);
 
   thumbnailWidget = 0;
   if (showThumbnail)
@@ -178,14 +178,14 @@ MarkListWidget::MarkListWidget(QWidget* _parent, MarkList* _markList, const Page
     layout->addWidget(thumbnailWidget, 1, Qt::AlignTop);
   }
 
-  QBoxLayout* bottomLayout = new QHBoxLayout(layout);
+  TQBoxLayout* bottomLayout = new TQHBoxLayout(layout);
 
-  checkBox = new QCheckBox(QString::null, this );
-  checkBox->setFocusPolicy(QWidget::NoFocus);
-  QToolTip::add(checkBox, i18n("Select for printing"));
+  checkBox = new TQCheckBox(TQString::null, this );
+  checkBox->setFocusPolicy(TQWidget::NoFocus);
+  TQToolTip::add(checkBox, i18n("Select for printing"));
   bottomLayout->addWidget(checkBox, 0, Qt::AlignAuto);
 
-  pageLabel = new QLabel(QString("%1").arg(pageNumber), this);
+  pageLabel = new TQLabel(TQString("%1").arg(pageNumber), this);
   bottomLayout->addWidget(pageLabel, 1);
 
   _backgroundColor = KGlobalSettings::baseColor();
@@ -217,7 +217,7 @@ void MarkListWidget::setChecked( bool checked )
 void MarkListWidget::setSelected( bool selected )
 {
     if (selected)
-      setPaletteBackgroundColor( QApplication::palette().active().highlight() );
+      setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
     else
       setPaletteBackgroundColor( _backgroundColor );
 }
@@ -232,7 +232,7 @@ int MarkListWidget::setNewWidth(int width)
     int thumbnailHeight = (int)((thumbnailWidth - 2*margin - 2) / pageCache->sizeOfPage(pageNumber).aspectRatio() + 0.5) + 2;
 
     // Resize Thumbnail if necessary
-    if (thumbnailWidget->size() != QSize(thumbnailWidth, thumbnailHeight))
+    if (thumbnailWidget->size() != TQSize(thumbnailWidth, thumbnailHeight))
       thumbnailWidget->setFixedSize(thumbnailWidth - 2*margin, thumbnailHeight);
 
     height += thumbnailHeight + 2*margin;
@@ -244,9 +244,9 @@ int MarkListWidget::setNewWidth(int width)
 
 bool MarkListWidget::isVisible()
 {
-  QRect visibleRect(markList->contentsX(), markList->contentsY(),
+  TQRect visibleRect(markList->contentsX(), markList->contentsY(),
                    markList->visibleWidth(), markList->visibleHeight());
-  QRect widgetRect(markList->childX(this), markList->childY(this), width(), height());
+  TQRect widgetRect(markList->childX(this), markList->childY(this), width(), height());
 
   if (widgetRect.intersects(visibleRect))
     return true;
@@ -255,7 +255,7 @@ bool MarkListWidget::isVisible()
 }
 
 
-void MarkListWidget::mousePressEvent(QMouseEvent* e)
+void MarkListWidget::mousePressEvent(TQMouseEvent* e)
 {
   // Select Page
   if (e->button() == LeftButton)
@@ -272,19 +272,19 @@ void MarkListWidget::mousePressEvent(QMouseEvent* e)
 /****** MarkList ******/
 
 
-MarkList::MarkList(QWidget* parent, const char* name)
-  : QScrollView(parent, name), clickedThumbnail(0), showThumbnails(true), contextMenu(0)
+MarkList::MarkList(TQWidget* parent, const char* name)
+  : TQScrollView(parent, name), clickedThumbnail(0), showThumbnails(true), contextMenu(0)
 {
   currentPage = PageNumber::invalidPage;
   widgetList.setAutoDelete(true);
-  setFocusPolicy( QWidget::StrongFocus );
-  //viewport()->setFocusPolicy( QWidget::WheelFocus );
-  setResizePolicy(QScrollView::Manual);
+  setFocusPolicy( TQWidget::StrongFocus );
+  //viewport()->setFocusPolicy( TQWidget::WheelFocus );
+  setResizePolicy(TQScrollView::Manual);
 
-  setVScrollBarMode(QScrollView::AlwaysOn);
-  setHScrollBarMode(QScrollView::AlwaysOff);
+  setVScrollBarMode(TQScrollView::AlwaysOn);
+  setHScrollBarMode(TQScrollView::AlwaysOff);
 
-  setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
 
   viewport()->setBackgroundMode(Qt::PaletteBase);
   enableClipper(true);
@@ -300,9 +300,9 @@ void MarkList::setPageCache(DocumentPageCache* _pageCache)
   pageCache = _pageCache;
 }
 
-QValueList<int> MarkList::selectedPages() const
+TQValueList<int> MarkList::selectedPages() const
 {
-  QValueList<int> list;
+  TQValueList<int> list;
   MarkListWidget* item;
   for(unsigned int i = 0; i < widgetList.count(); i++)
   {
@@ -325,8 +325,8 @@ void MarkList::setNumberOfPages(int numberOfPages, bool _showThumbnails)
   {
     MarkListWidget* item = new MarkListWidget(viewport(), this, page, pageCache, showThumbnails);
 
-    connect(item, SIGNAL(selected(const PageNumber&)), this, SLOT(thumbnailSelected(const PageNumber&)));
-    connect(item, SIGNAL(showPopupMenu(const PageNumber&, const QPoint&)), this, SLOT(showPopupMenu(const PageNumber&, const QPoint&)));
+    connect(item, TQT_SIGNAL(selected(const PageNumber&)), this, TQT_SLOT(thumbnailSelected(const PageNumber&)));
+    connect(item, TQT_SIGNAL(showPopupMenu(const PageNumber&, const TQPoint&)), this, TQT_SLOT(showPopupMenu(const PageNumber&, const TQPoint&)));
 
     widgetList.insert(page - 1, item);
 
@@ -438,7 +438,7 @@ void MarkList::removeSelection()
   }
 }
 
-void MarkList::viewportResizeEvent(QResizeEvent*)
+void MarkList::viewportResizeEvent(TQResizeEvent*)
 {
   MarkListWidget* item;
 
@@ -500,7 +500,7 @@ void MarkList::updateWidgetSize(const PageNumber& pageNumber)
   viewport()->update();
 }
 
-void MarkList::mousePressEvent(QMouseEvent* e)
+void MarkList::mousePressEvent(TQMouseEvent* e)
 {
   if (e->button() == RightButton)
   {
@@ -523,7 +523,7 @@ void MarkList::slotShowThumbnails(bool show)
     PageNumber _currentPage = currentPage;
 
     // Save page selections.
-    QValueVector<bool> selections;
+    TQValueVector<bool> selections;
     selections.resize(widgetList.count());
     for (unsigned int i = 0; i < widgetList.count(); i++)
       selections[i] = widgetList[i]->isChecked();
@@ -553,7 +553,7 @@ void MarkList::repaintThumbnails()
 }
 
 
-void MarkList::showPopupMenu(const PageNumber& pageNumber, const QPoint& position)
+void MarkList::showPopupMenu(const PageNumber& pageNumber, const TQPoint& position)
 {
   if (contextMenu == 0)
   {

@@ -23,94 +23,94 @@
 #include "pmresourcelocator.h"
 #include "pmtext.h"
 
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qlistbox.h>
-#include <qcombobox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
+#include <tqpushbutton.h>
+#include <tqlistbox.h>
+#include <tqcombobox.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
-PMPovraySettings::PMPovraySettings( QWidget* parent, const char* name )
+PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
    m_selectionIndex = 0;
 
-   QHBoxLayout* hlayout;
-   QVBoxLayout* vlayout;
-   QVBoxLayout* gvl;
-   QGroupBox* gb;
+   TQHBoxLayout* hlayout;
+   TQVBoxLayout* vlayout;
+   TQVBoxLayout* gvl;
+   TQGroupBox* gb;
 
-   vlayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
-   gb = new QGroupBox( i18n( "Povray Command" ), this );
-   gvl = new QVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   gb = new TQGroupBox( i18n( "Povray Command" ), this );
+   gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
-   hlayout = new QHBoxLayout( gvl );
-   hlayout->addWidget( new QLabel( i18n( "Command:" ), gb ) );
-   m_pPovrayCommand = new QLineEdit( gb );
+   hlayout = new TQHBoxLayout( gvl );
+   hlayout->addWidget( new TQLabel( i18n( "Command:" ), gb ) );
+   m_pPovrayCommand = new TQLineEdit( gb );
    hlayout->addWidget( m_pPovrayCommand );
-   m_pBrowsePovrayCommand = new QPushButton( gb );
+   m_pBrowsePovrayCommand = new TQPushButton( gb );
    m_pBrowsePovrayCommand->setPixmap( SmallIcon( "fileopen" ) );
-   connect( m_pBrowsePovrayCommand, SIGNAL( clicked( ) ),
-            SLOT( slotBrowsePovrayCommand( ) ) );
+   connect( m_pBrowsePovrayCommand, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotBrowsePovrayCommand( ) ) );
    hlayout->addWidget( m_pBrowsePovrayCommand );
    vlayout->addWidget( gb );
 
-   gb = new QGroupBox( i18n( "Povray User Documentation" ), this );
-   gvl = new QVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   gb = new TQGroupBox( i18n( "Povray User Documentation" ), this );
+   gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
-   hlayout = new QHBoxLayout( gvl );
-   hlayout->addWidget( new QLabel( i18n( "Path:" ), gb ) );
-   m_pDocumentationPath = new QLineEdit( gb );
+   hlayout = new TQHBoxLayout( gvl );
+   hlayout->addWidget( new TQLabel( i18n( "Path:" ), gb ) );
+   m_pDocumentationPath = new TQLineEdit( gb );
    hlayout->addWidget( m_pDocumentationPath );
-   m_pBrowseDocumentationPath = new QPushButton( gb );
+   m_pBrowseDocumentationPath = new TQPushButton( gb );
    m_pBrowseDocumentationPath->setPixmap( SmallIcon( "fileopen" ) );
-   connect( m_pBrowseDocumentationPath, SIGNAL( clicked( ) ),
-            SLOT( slotBrowsePovrayDocumentation( ) ) );
+   connect( m_pBrowseDocumentationPath, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotBrowsePovrayDocumentation( ) ) );
    hlayout->addWidget( m_pBrowseDocumentationPath );
    vlayout->addWidget( gb );
-   hlayout = new QHBoxLayout( gvl );
-   hlayout->addWidget( new QLabel( i18n( "Version:" ), gb ) );
-   m_pDocumentationVersion = new QComboBox( false, gb );
-   QValueList<QString> versions = PMDocumentationMap::theMap( )->availableVersions( );
-   QValueListIterator<QString> it;
+   hlayout = new TQHBoxLayout( gvl );
+   hlayout->addWidget( new TQLabel( i18n( "Version:" ), gb ) );
+   m_pDocumentationVersion = new TQComboBox( false, gb );
+   TQValueList<TQString> versions = PMDocumentationMap::theMap( )->availableVersions( );
+   TQValueListIterator<TQString> it;
    for( it = versions.begin( ); it != versions.end( ); ++it )
       m_pDocumentationVersion->insertItem( *it );
    hlayout->addWidget( m_pDocumentationVersion );
    hlayout->addStretch( );
 
-   gb = new QGroupBox( i18n( "Library Paths" ), this );
-   gvl = new QVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   gb = new TQGroupBox( i18n( "Library Paths" ), this );
+   gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
-   hlayout = new QHBoxLayout( gvl );
-   m_pLibraryPaths = new QListBox( gb );
-   connect( m_pLibraryPaths, SIGNAL( highlighted( int ) ),
-            SLOT( slotPathSelected( int ) ) );
+   hlayout = new TQHBoxLayout( gvl );
+   m_pLibraryPaths = new TQListBox( gb );
+   connect( m_pLibraryPaths, TQT_SIGNAL( highlighted( int ) ),
+            TQT_SLOT( slotPathSelected( int ) ) );
    hlayout->addWidget( m_pLibraryPaths );
 
-   QVBoxLayout* bl = new QVBoxLayout( hlayout );
-   m_pAddLibraryPath = new QPushButton( i18n( "Add..." ), gb );
-   connect( m_pAddLibraryPath, SIGNAL( clicked( ) ), SLOT( slotAddPath( ) ) );
+   TQVBoxLayout* bl = new TQVBoxLayout( hlayout );
+   m_pAddLibraryPath = new TQPushButton( i18n( "Add..." ), gb );
+   connect( m_pAddLibraryPath, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPath( ) ) );
    bl->addWidget( m_pAddLibraryPath );
-   m_pRemoveLibraryPath = new QPushButton( i18n( "Remove" ), gb );
-   connect( m_pRemoveLibraryPath, SIGNAL( clicked( ) ),
-            SLOT( slotRemovePath( ) ) );
+   m_pRemoveLibraryPath = new TQPushButton( i18n( "Remove" ), gb );
+   connect( m_pRemoveLibraryPath, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotRemovePath( ) ) );
    bl->addWidget( m_pRemoveLibraryPath );
-   m_pChangeLibraryPath = new QPushButton( i18n( "Edit..." ), gb );
-   connect( m_pChangeLibraryPath, SIGNAL( clicked( ) ),
-            SLOT( slotEditPath( ) ) );
+   m_pChangeLibraryPath = new TQPushButton( i18n( "Edit..." ), gb );
+   connect( m_pChangeLibraryPath, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotEditPath( ) ) );
    bl->addWidget( m_pChangeLibraryPath );
-   m_pLibraryPathUp = new QPushButton( i18n( "Up" ), gb );
-   connect( m_pLibraryPathUp, SIGNAL( clicked( ) ), SLOT( slotPathUp( ) ) );
+   m_pLibraryPathUp = new TQPushButton( i18n( "Up" ), gb );
+   connect( m_pLibraryPathUp, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPathUp( ) ) );
    bl->addWidget( m_pLibraryPathUp );
-   m_pLibraryPathDown = new QPushButton( i18n( "Down" ), gb );
-   connect( m_pLibraryPathDown, SIGNAL( clicked( ) ),
-            SLOT( slotPathDown( ) ) );
+   m_pLibraryPathDown = new TQPushButton( i18n( "Down" ), gb );
+   connect( m_pLibraryPathDown, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotPathDown( ) ) );
    bl->addWidget( m_pLibraryPathDown );
    bl->addStretch( 1 );
    vlayout->addWidget( gb );
@@ -123,7 +123,7 @@ void PMPovraySettings::displaySettings( )
    m_pPovrayCommand->setText( PMPovrayRenderWidget::povrayCommand( ) );
    m_pDocumentationPath->setText( PMDocumentationMap::theMap( )->povrayDocumentationPath( ) );
    int c = m_pDocumentationVersion->count( );
-   QString s = PMDocumentationMap::theMap( )->documentationVersion( );
+   TQString s = PMDocumentationMap::theMap( )->documentationVersion( );
    int i;
    for( i = 0; i < c; i++ )
       if( m_pDocumentationVersion->text( i ) == s )
@@ -132,8 +132,8 @@ void PMPovraySettings::displaySettings( )
    bool sb = m_pLibraryPaths->signalsBlocked( );
    m_pLibraryPaths->blockSignals( true );
    m_pLibraryPaths->clear( );
-   QStringList plist = PMPovrayRenderWidget::povrayLibraryPaths( );
-   QStringList::ConstIterator it = plist.begin( );
+   TQStringList plist = PMPovrayRenderWidget::povrayLibraryPaths( );
+   TQStringList::ConstIterator it = plist.begin( );
    m_selectionIndex = -1;
    for( ; it != plist.end( ); ++it )
    {
@@ -152,7 +152,7 @@ void PMPovraySettings::displayDefaults( )
 {
    m_pPovrayCommand->setText( c_defaultPovrayCommand );
    m_pDocumentationVersion->setCurrentItem( 0 );
-   m_pDocumentationPath->setText( QString::null );
+   m_pDocumentationPath->setText( TQString::null );
    m_pLibraryPaths->clear();
 
 }
@@ -169,7 +169,7 @@ void PMPovraySettings::applySettings( )
       m_pDocumentationPath->text( ) );
    PMDocumentationMap::theMap( )->setDocumentationVersion(
       m_pDocumentationVersion->currentText( ) );
-   QStringList plist;
+   TQStringList plist;
    int num = ( signed ) m_pLibraryPaths->count( );
    int i;
    for( i = 0; i < num; i++ )
@@ -190,13 +190,13 @@ void PMPovraySettings::slotAddPath( )
       KMessageBox::error( this, i18n( "Povray only supports up to 20 library paths." ) );
    else
    {
-      QString path = KFileDialog::getExistingDirectory( QString::null, this );
+      TQString path = KFileDialog::getExistingDirectory( TQString::null, this );
       if( !path.isEmpty( ) )
       {
 #if ( QT_VERSION >= 300 )
-         QListBoxItem* item = m_pLibraryPaths->findItem( path, ExactMatch );
+         TQListBoxItem* item = m_pLibraryPaths->findItem( path, ExactMatch );
 #else
-         QListBoxItem* item = 0;
+         TQListBoxItem* item = 0;
 #endif
          if( !item )
          {
@@ -219,10 +219,10 @@ void PMPovraySettings::slotRemovePath( )
 
 void PMPovraySettings::slotPathUp( )
 {
-   QListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
+   TQListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
    if( lbi )
    {
-      QString text = lbi->text( );
+      TQString text = lbi->text( );
       m_pLibraryPaths->removeItem( m_selectionIndex );
       if( m_selectionIndex > 0 )
          m_selectionIndex--;
@@ -233,10 +233,10 @@ void PMPovraySettings::slotPathUp( )
 
 void PMPovraySettings::slotPathDown( )
 {
-   QListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
+   TQListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
    if( lbi )
    {
-      QString text = lbi->text( );
+      TQString text = lbi->text( );
       m_pLibraryPaths->removeItem( m_selectionIndex );
       if( ( unsigned ) m_selectionIndex < m_pLibraryPaths->count( ) )
          m_selectionIndex++;
@@ -247,17 +247,17 @@ void PMPovraySettings::slotPathDown( )
 
 void PMPovraySettings::slotEditPath( )
 {
-   QListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
+   TQListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
    if( lbi )
    {
-      QString text = lbi->text( );
-      QString path = KFileDialog::getExistingDirectory( text, this );
+      TQString text = lbi->text( );
+      TQString path = KFileDialog::getExistingDirectory( text, this );
       if( !path.isEmpty( ) )
       {
 #if ( QT_VERSION >= 300 )
-         QListBoxItem* item = m_pLibraryPaths->findItem( path, ExactMatch );
+         TQListBoxItem* item = m_pLibraryPaths->findItem( path, ExactMatch );
 #else
-         QListBoxItem* item = 0;
+         TQListBoxItem* item = 0;
 #endif
          if( !item )
             m_pLibraryPaths->changeItem( path, m_selectionIndex );
@@ -270,7 +270,7 @@ void PMPovraySettings::slotEditPath( )
 void PMPovraySettings::slotPathSelected( int index )
 {
    m_selectionIndex = index;
-   QListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
+   TQListBoxItem* lbi = m_pLibraryPaths->item( m_selectionIndex );
    if( lbi )
    {
       m_pRemoveLibraryPath->setEnabled( true );
@@ -289,7 +289,7 @@ void PMPovraySettings::slotPathSelected( int index )
 
 void PMPovraySettings::slotBrowsePovrayCommand( )
 {
-   QString str = KFileDialog::getOpenFileName( QString::null, QString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
 
    if( !str.isEmpty() )
    {
@@ -299,7 +299,7 @@ void PMPovraySettings::slotBrowsePovrayCommand( )
 
 void PMPovraySettings::slotBrowsePovrayDocumentation( )
 {
-   QString str = KFileDialog::getExistingDirectory( );
+   TQString str = KFileDialog::getExistingDirectory( );
 
    if( !str.isEmpty( ) )
       m_pDocumentationPath->setText( str );

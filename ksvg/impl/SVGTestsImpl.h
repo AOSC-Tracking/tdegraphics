@@ -35,9 +35,9 @@ public:
 	SVGTestsImpl();
 	~SVGTestsImpl();
 
-	void parseRequiredFeatures(const QString &value);
-	void parseRequiredExtensions(const QString &value);
-	void parseSystemLanguage(const QString &value);
+	void parseRequiredFeatures(const TQString &value);
+	void parseRequiredExtensions(const TQString &value);
+	void parseSystemLanguage(const TQString &value);
 
 	SVGStringListImpl *requiredFeatures() const;
 	SVGStringListImpl *requiredExtensions() const;

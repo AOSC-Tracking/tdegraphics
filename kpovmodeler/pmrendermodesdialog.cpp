@@ -18,15 +18,15 @@
 
 #include "pmrendermodesdialog.h"
 
-#include <qlistbox.h>
-#include <qpushbutton.h>
-#include <qcheckbox.h>
-#include <qlineedit.h>
-#include <qtabwidget.h>
-#include <qvbox.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
+#include <tqlistbox.h>
+#include <tqpushbutton.h>
+#include <tqcheckbox.h>
+#include <tqlineedit.h>
+#include <tqtabwidget.h>
+#include <tqvbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -35,9 +35,9 @@
 
 #include "pmlineedits.h"
 
-QSize PMRenderModesDialog::s_size = QSize( 300, 200 );
+TQSize PMRenderModesDialog::s_size = TQSize( 300, 200 );
 
-PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, QWidget* parent, const char* name )
+PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, TQWidget* parent, const char* name )
       : KDialogBase( parent, name, true, i18n( "Render Modes" ),
                      Ok | Cancel, Ok )
 {
@@ -48,22 +48,22 @@ PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, QWidget* pare
       m_workingModes.append( new PMRenderMode( *( it.current( ) ) ) );
    m_workingModes.setAutoDelete( true );
 
-   QVBox* mainPage = makeVBoxMainWidget( );
-   m_pListBox = new QListBox( mainPage );
-   connect( m_pListBox, SIGNAL( highlighted( int ) ), SLOT( slotModeSelected( int ) ) );
+   TQVBox* mainPage = makeVBoxMainWidget( );
+   m_pListBox = new TQListBox( mainPage );
+   connect( m_pListBox, TQT_SIGNAL( highlighted( int ) ), TQT_SLOT( slotModeSelected( int ) ) );
 
-   QHBox* buttons = new QHBox( mainPage );
+   TQHBox* buttons = new TQHBox( mainPage );
    buttons->setSpacing( KDialog::spacingHint( ) );
-   m_pAddButton = new QPushButton( i18n( "Add" ), buttons );
-   connect( m_pAddButton, SIGNAL( clicked( ) ), SLOT( slotAdd( ) ) );
-   m_pRemoveButton = new QPushButton( i18n( "Remove" ), buttons );
-   connect( m_pRemoveButton, SIGNAL( clicked( ) ), SLOT( slotRemove( ) ) );
-   m_pEditButton = new QPushButton( i18n( "Edit..." ), buttons );
-   connect( m_pEditButton, SIGNAL( clicked( ) ), SLOT( slotEdit( ) ) );
-   m_pUpButton = new QPushButton( i18n( "Up" ), buttons );
-   connect( m_pUpButton, SIGNAL( clicked( ) ), SLOT( slotUp( ) ) );
-   m_pDownButton = new QPushButton( i18n( "Down" ), buttons );
-   connect( m_pDownButton, SIGNAL( clicked( ) ), SLOT( slotDown( ) ) );
+   m_pAddButton = new TQPushButton( i18n( "Add" ), buttons );
+   connect( m_pAddButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAdd( ) ) );
+   m_pRemoveButton = new TQPushButton( i18n( "Remove" ), buttons );
+   connect( m_pRemoveButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemove( ) ) );
+   m_pEditButton = new TQPushButton( i18n( "Edit..." ), buttons );
+   connect( m_pEditButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotEdit( ) ) );
+   m_pUpButton = new TQPushButton( i18n( "Up" ), buttons );
+   connect( m_pUpButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUp( ) ) );
+   m_pDownButton = new TQPushButton( i18n( "Down" ), buttons );
+   connect( m_pDownButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDown( ) ) );
 
    m_pRemoveButton->setEnabled( false );
    m_pUpButton->setEnabled( false );
@@ -73,7 +73,7 @@ PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, QWidget* pare
 
    resize( s_size );
    displayList( );
-   connect( m_pListBox,  SIGNAL( doubleClicked ( QListBoxItem *) ), this, SLOT(slotEdit( ) ) );
+   connect( m_pListBox,  TQT_SIGNAL( doubleClicked ( TQListBoxItem *) ), this, TQT_SLOT(slotEdit( ) ) );
 }
 
 void PMRenderModesDialog::slotChanged( )
@@ -134,11 +134,11 @@ void PMRenderModesDialog::restoreConfig( KConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
-   QSize defaultSize( 300, 200 );
+   TQSize defaultSize( 300, 200 );
    s_size = cfg->readSizeEntry( "RenderModesDialogSize", &defaultSize );
 }
 
-void PMRenderModesDialog::resizeEvent( QResizeEvent* ev )
+void PMRenderModesDialog::resizeEvent( TQResizeEvent* ev )
 {
    s_size = ev->size( );
 }
@@ -197,7 +197,7 @@ void PMRenderModesDialog::slotEdit( )
     if (  m_selectionIndex==-1 )
         return;
    PMRenderModeDialog dlg( m_workingModes.at( m_selectionIndex ) );
-   bool changed = ( dlg.exec( ) == QDialog::Accepted );
+   bool changed = ( dlg.exec( ) == TQDialog::Accepted );
    if( changed )
    {
       slotChanged( );
@@ -220,7 +220,7 @@ void PMRenderModesDialog::slotOk( )
 }
 
 
-QSize PMRenderModeDialog::s_size = QSize( 300, 200 );
+TQSize PMRenderModeDialog::s_size = TQSize( 300, 200 );
 
 const int numQuality = 9;
 const char* qualityString[numQuality] =
@@ -239,7 +239,7 @@ const char* qualityString[numQuality] =
 const int c_qualityToIndex[12] = { 0, 0, 1, 1, 2, 3, 4, 4, 5, 6, 7, 8 };
 const int c_indexToQuality[numQuality] = { 0, 2, 4, 5, 6, 8, 9, 10, 11 };
 
-PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, QWidget* parent, const char* name )
+PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent, const char* name )
       : KDialogBase( parent, name, true, i18n( "Render Modes" ),
                      Ok | Cancel, Ok )
 {
@@ -247,58 +247,58 @@ PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, QWidget* parent, con
    int i;
 
    // main page
-   QWidget* page = new QWidget( this );
+   TQWidget* page = new TQWidget( this );
    setMainWidget( page );
-   QVBoxLayout* topLayout = new QVBoxLayout( page, 0, spacingHint( ) );
+   TQVBoxLayout* topLayout = new TQVBoxLayout( page, 0, spacingHint( ) );
 
-   QHBoxLayout* descrLayout = new QHBoxLayout( topLayout );
-   QLabel* descrLabel = new QLabel( i18n( "Description:" ), page );
+   TQHBoxLayout* descrLayout = new TQHBoxLayout( topLayout );
+   TQLabel* descrLabel = new TQLabel( i18n( "Description:" ), page );
    descrLayout->addWidget( descrLabel );
 
-   m_pDescriptionEdit = new QLineEdit( page );
+   m_pDescriptionEdit = new TQLineEdit( page );
    descrLayout->addWidget( m_pDescriptionEdit );
 
-   m_pTabWidget = new QTabWidget( page );
+   m_pTabWidget = new TQTabWidget( page );
    topLayout->addWidget( m_pTabWidget );
 
-   QWidget* tab;
-   QVBoxLayout* tabLayout;
+   TQWidget* tab;
+   TQVBoxLayout* tabLayout;
 
    // size tab
-   tab = new QWidget( );
+   tab = new TQWidget( );
    m_pTabWidget->addTab( tab, i18n( "Size" ) );
-   tabLayout = new QVBoxLayout( tab, marginHint( ), spacingHint( ) );
+   tabLayout = new TQVBoxLayout( tab, marginHint( ), spacingHint( ) );
 
-   QHBoxLayout* sizeHelpLayout = new QHBoxLayout( tabLayout );
-   QGridLayout* sizeLayout = new QGridLayout( sizeHelpLayout, 2, 2 );
-   sizeLayout->addWidget( new QLabel( i18n( "Width:" ), tab ), 0, 0 );
+   TQHBoxLayout* sizeHelpLayout = new TQHBoxLayout( tabLayout );
+   TQGridLayout* sizeLayout = new TQGridLayout( sizeHelpLayout, 2, 2 );
+   sizeLayout->addWidget( new TQLabel( i18n( "Width:" ), tab ), 0, 0 );
    m_pWidthEdit = new PMIntEdit( tab );
    m_pWidthEdit->setValidation( true, 1, false, 0 );
    sizeLayout->addWidget( m_pWidthEdit, 0, 1 );
-   sizeLayout->addWidget( new QLabel( i18n( "Height:" ), tab ), 1, 0 );
+   sizeLayout->addWidget( new TQLabel( i18n( "Height:" ), tab ), 1, 0 );
    m_pHeightEdit = new PMIntEdit( tab );
    m_pHeightEdit->setValidation( true, 1, false, 0 );
    sizeLayout->addWidget( m_pHeightEdit, 1, 1 );
    sizeHelpLayout->addStretch( 1 );
 
-   m_pSubsectionBox = new QCheckBox( i18n( "Subsection" ), tab );
+   m_pSubsectionBox = new TQCheckBox( i18n( "Subsection" ), tab );
    tabLayout->addWidget( m_pSubsectionBox );
 
-   QHBoxLayout* ssHelpLayout = new QHBoxLayout( tabLayout );
-   QGridLayout* ssLayout = new QGridLayout( ssHelpLayout, 4, 2 );
-   ssLayout->addWidget( new QLabel( i18n( "Start column:" ), tab ), 0, 0 );
+   TQHBoxLayout* ssHelpLayout = new TQHBoxLayout( tabLayout );
+   TQGridLayout* ssLayout = new TQGridLayout( ssHelpLayout, 4, 2 );
+   ssLayout->addWidget( new TQLabel( i18n( "Start column:" ), tab ), 0, 0 );
    m_pStartColumnEdit = new PMFloatEdit( tab );
    m_pStartColumnEdit->setValidation( true, 0.0, false, 0.0 );
    ssLayout->addWidget( m_pStartColumnEdit, 0, 1 );
-   ssLayout->addWidget( new QLabel( i18n( "End column:" ), tab ), 1, 0 );
+   ssLayout->addWidget( new TQLabel( i18n( "End column:" ), tab ), 1, 0 );
    m_pEndColumnEdit = new PMFloatEdit( tab );
    m_pEndColumnEdit->setValidation( true, 0.0, false, 0.0 );
    ssLayout->addWidget( m_pEndColumnEdit, 1, 1 );
-   ssLayout->addWidget( new QLabel( i18n( "Start row:" ), tab ), 2, 0 );
+   ssLayout->addWidget( new TQLabel( i18n( "Start row:" ), tab ), 2, 0 );
    m_pStartRowEdit = new PMFloatEdit( tab );
    m_pStartRowEdit->setValidation( true, 0.0, false, 0.0 );
    ssLayout->addWidget( m_pStartRowEdit, 2, 1 );
-   ssLayout->addWidget( new QLabel( i18n( "End row:" ), tab ), 3, 0 );
+   ssLayout->addWidget( new TQLabel( i18n( "End row:" ), tab ), 3, 0 );
    m_pEndRowEdit = new PMFloatEdit( tab );
    m_pEndRowEdit->setValidation( true, 0.0, false, 0.0 );
    ssLayout->addWidget( m_pEndRowEdit, 3, 1 );
@@ -307,57 +307,57 @@ PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, QWidget* parent, con
    tabLayout->addStretch( 1 );
 
    // quality tab
-   tab = new QWidget( );
+   tab = new TQWidget( );
    m_pTabWidget->addTab( tab, i18n( "Quality" ) );
-   tabLayout = new QVBoxLayout( tab, marginHint( ), spacingHint( ) );
+   tabLayout = new TQVBoxLayout( tab, marginHint( ), spacingHint( ) );
 
-   QHBoxLayout* quHelpLayout = new QHBoxLayout( tabLayout );
-   quHelpLayout->addWidget( new QLabel( i18n( "Quality:" ), tab ) );
-   m_pQualityCombo = new QComboBox( tab );
+   TQHBoxLayout* quHelpLayout = new TQHBoxLayout( tabLayout );
+   quHelpLayout->addWidget( new TQLabel( i18n( "Quality:" ), tab ) );
+   m_pQualityCombo = new TQComboBox( tab );
    quHelpLayout->addWidget( m_pQualityCombo );
    for( i = 0; i < numQuality; i++ )
       m_pQualityCombo->insertItem( i18n( qualityString[i] ) );
 
-   m_pAntialiasingBox = new QCheckBox( i18n( "Antialiasing" ), tab );
+   m_pAntialiasingBox = new TQCheckBox( i18n( "Antialiasing" ), tab );
    tabLayout->addWidget( m_pAntialiasingBox );
 
-   QHBoxLayout* aaHelpLayout = new QHBoxLayout( tabLayout );
-   QGridLayout* aaGridLayout = new QGridLayout( aaHelpLayout, 5, 2 );
-   aaGridLayout->addWidget( new QLabel( i18n( "Method:" ), tab ), 0, 0 );
-   m_pSamplingCombo = new QComboBox( tab );
+   TQHBoxLayout* aaHelpLayout = new TQHBoxLayout( tabLayout );
+   TQGridLayout* aaGridLayout = new TQGridLayout( aaHelpLayout, 5, 2 );
+   aaGridLayout->addWidget( new TQLabel( i18n( "Method:" ), tab ), 0, 0 );
+   m_pSamplingCombo = new TQComboBox( tab );
    aaGridLayout->addWidget( m_pSamplingCombo, 0, 1 );
    m_pSamplingCombo->insertItem( i18n( "Non Recursive" ) );
    m_pSamplingCombo->insertItem( i18n( "Recursive" ) );
 
-   aaGridLayout->addWidget( new QLabel( i18n( "Threshold:" ), tab ), 1, 0 );
+   aaGridLayout->addWidget( new TQLabel( i18n( "Threshold:" ), tab ), 1, 0 );
    m_pThresholdEdit = new PMFloatEdit( tab );
    aaGridLayout->addWidget( m_pThresholdEdit, 1, 1 );
 
-   aaGridLayout->addWidget( new QLabel( i18n( "Depth:" ), tab ), 2, 0 );
+   aaGridLayout->addWidget( new TQLabel( i18n( "Depth:" ), tab ), 2, 0 );
    m_pAntialiasDepthEdit = new PMIntEdit( tab );
    m_pAntialiasDepthEdit->setValidation( true, 1, true, 9 );
    aaGridLayout->addWidget( m_pAntialiasDepthEdit, 2, 1 );
 
-   m_pJitterBox = new QCheckBox( i18n( "Jitter" ), tab );
+   m_pJitterBox = new TQCheckBox( i18n( "Jitter" ), tab );
    aaGridLayout->addMultiCellWidget( m_pJitterBox, 3, 3, 0, 1 );
 
-   aaGridLayout->addWidget( new QLabel( i18n( "Amount:" ), tab ), 4, 0 );
+   aaGridLayout->addWidget( new TQLabel( i18n( "Amount:" ), tab ), 4, 0 );
    m_pJitterAmountEdit = new PMFloatEdit( tab );
    aaGridLayout->addWidget( m_pJitterAmountEdit, 4, 1 );
 
    aaHelpLayout->addStretch( 1 );
 
-   m_pRadiosityBox = new QCheckBox( i18n( "Radiosity" ), tab );
+   m_pRadiosityBox = new TQCheckBox( i18n( "Radiosity" ), tab );
    tabLayout->addWidget( m_pRadiosityBox );
 
    tabLayout->addStretch( 1 );
 
    // output options tab
-   tab = new QWidget( );
+   tab = new TQWidget( );
    m_pTabWidget->addTab( tab, i18n( "Output" ) );
-   tabLayout = new QVBoxLayout( tab, marginHint( ), spacingHint( ) );
+   tabLayout = new TQVBoxLayout( tab, marginHint( ), spacingHint( ) );
 
-   m_pAlphaBox = new QCheckBox( i18n( "Alpha" ), tab );
+   m_pAlphaBox = new TQCheckBox( i18n( "Alpha" ), tab );
    tabLayout->addWidget( m_pAlphaBox );
 
    tabLayout->addStretch( 1 );
@@ -371,23 +371,23 @@ PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, QWidget* parent, con
    enableButtonOK( false );
 
    // connect signals
-   connect( m_pDescriptionEdit, SIGNAL( textChanged( const QString& ) ), SLOT( slotTextChanged( const QString& ) ) );
-   connect( m_pHeightEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pWidthEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pSubsectionBox, SIGNAL( toggled( bool ) ), SLOT( slotSubsectionToggled( bool ) ) );
-   connect( m_pStartRowEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pEndRowEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pStartColumnEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pEndColumnEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pQualityCombo, SIGNAL( activated( int ) ), SLOT( slotActivated( int ) ) );
-   connect( m_pRadiosityBox, SIGNAL( clicked( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pAntialiasingBox, SIGNAL( toggled( bool ) ), SLOT( slotAntialiasingToggled( bool ) ) );
-   connect( m_pSamplingCombo, SIGNAL( activated( int ) ), SLOT( slotActivated( int ) ) );
-   connect( m_pThresholdEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pJitterBox, SIGNAL( toggled( bool ) ), SLOT( slotJitterToggled( bool ) ) );
-   connect( m_pJitterAmountEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pAntialiasDepthEdit, SIGNAL( dataChanged( ) ), SLOT( slotChanged( ) ) );
-   connect( m_pAlphaBox, SIGNAL( toggled( bool ) ), SLOT( slotToggled( bool ) ) );
+   connect( m_pDescriptionEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pHeightEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pWidthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pSubsectionBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotSubsectionToggled( bool ) ) );
+   connect( m_pStartRowEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pEndRowEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pStartColumnEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pEndColumnEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pQualityCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotActivated( int ) ) );
+   connect( m_pRadiosityBox, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pAntialiasingBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotAntialiasingToggled( bool ) ) );
+   connect( m_pSamplingCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotActivated( int ) ) );
+   connect( m_pThresholdEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pJitterBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotJitterToggled( bool ) ) );
+   connect( m_pJitterAmountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pAntialiasDepthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
+   connect( m_pAlphaBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotToggled( bool ) ) );
 }
 
 void PMRenderModeDialog::saveConfig( KConfig* cfg )
@@ -400,11 +400,11 @@ void PMRenderModeDialog::restoreConfig( KConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
-   QSize defaultSize( 400, 400 );
+   TQSize defaultSize( 400, 400 );
    s_size = cfg->readSizeEntry( "RenderModeDialogSize", &defaultSize );
 }
 
-void PMRenderModeDialog::resizeEvent( QResizeEvent* ev )
+void PMRenderModeDialog::resizeEvent( TQResizeEvent* ev )
 {
    s_size = ev->size( );
 }
@@ -574,7 +574,7 @@ void PMRenderModeDialog::slotChanged( )
    enableButtonOK( true );
 }
 
-void PMRenderModeDialog::slotTextChanged( const QString& )
+void PMRenderModeDialog::slotTextChanged( const TQString& )
 {
    slotChanged( );
 }

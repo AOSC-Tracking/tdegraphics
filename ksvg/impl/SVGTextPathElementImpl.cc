@@ -75,7 +75,7 @@ SVGAnimatedEnumerationImpl *SVGTextPathElementImpl::spacing() const
 	return m_spacing;
 }
 
-QString SVGTextPathElementImpl::text()
+TQString SVGTextPathElementImpl::text()
 {
 	// Otherwhise some js scripts which require a child, don't work (Niko)
 	if(!hasChildNodes())
@@ -161,11 +161,11 @@ void SVGTextPathElementImpl::putValueProperty(ExecState *exec, int token, const 
 	{
 		case StartOffset:
 		{
-			QString param = value.toString(exec).qstring();
+			TQString param = value.toString(exec).qstring();
 
 			if(param.endsWith("%"))
 			{
-				QString value = param.left(param.length() - 1);
+				TQString value = param.left(param.length() - 1);
 				bool ok = false;
 				double dValue = value.toDouble(&ok);
 				if(ok)
@@ -182,7 +182,7 @@ void SVGTextPathElementImpl::putValueProperty(ExecState *exec, int token, const 
 		}
 		case Method:
 		{
-			QString param = value.toString(exec).qstring();
+			TQString param = value.toString(exec).qstring();
 
 			if(param == "align")
 				method()->setBaseVal(TEXTPATH_METHODTYPE_ALIGN);
@@ -195,7 +195,7 @@ void SVGTextPathElementImpl::putValueProperty(ExecState *exec, int token, const 
 		}
 		case Spacing:
 		{
-			QString param = value.toString(exec).qstring();
+			TQString param = value.toString(exec).qstring();
 
 			if(param == "auto")
 				spacing()->setBaseVal(TEXTPATH_SPACINGTYPE_AUTO);

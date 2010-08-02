@@ -51,12 +51,12 @@ PMPovrayMatrix::~PMPovrayMatrix( )
 {
 }
 
-QString PMPovrayMatrix::description( ) const
+TQString PMPovrayMatrix::description( ) const
 {
    return i18n( "matrix" );
 }
 
-void PMPovrayMatrix::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
+void PMPovrayMatrix::serialize( TQDomElement& e, TQDomDocument& /*doc*/ ) const
 {
    e.setAttribute( "value", m_values.serializeXML( ) );
 }
@@ -108,7 +108,7 @@ void PMPovrayMatrix::setValues( const PMVector& v )
    }
 }
 
-PMDialogEditBase* PMPovrayMatrix::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMPovrayMatrix::editWidget( TQWidget* parent ) const
 {
    return new PMPovrayMatrixEdit( parent );
 }

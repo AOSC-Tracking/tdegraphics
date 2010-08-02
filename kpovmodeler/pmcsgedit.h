@@ -27,7 +27,7 @@
 #include "pmsolidobjectedit.h"
 
 class PMCSG;
-class QComboBox;
+class TQComboBox;
 
 /**
  * Dialog edit class for @ref PMCSG
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMCSGEdit with parent and name
     */
-   PMCSGEdit( QWidget* parent, const char* name = 0 );
+   PMCSGEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -56,7 +56,7 @@ protected slots:
    void slotTypeSelected( int index );
 private:
    PMCSG* m_pDisplayedObject;
-   QComboBox* m_pTypeCombo;
+   TQComboBox* m_pTypeCombo;
 };
 
 

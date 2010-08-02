@@ -21,14 +21,14 @@
 #ifndef SVGStylableImpl_H
 #define SVGStylableImpl_H
 
-#include <qstring.h>
-#include <qstringlist.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
 
 #include <dom/dom_string.h>
 
 #include "ksvg_lookup.h"
 
-class QRect;
+class TQRect;
 
 // from libart, but now no dependency
 typedef enum
@@ -210,7 +210,7 @@ public:
 	SVGStylableImpl(SVGElementImpl *object);
 	virtual ~SVGStylableImpl();
 	
-	static void setColor(const QString &, SVGColorImpl *);
+	static void setColor(const TQString &, SVGColorImpl *);
 
 	STYLE_GET(SVGAnimatedLengthImpl *, DashOffset, m_dashOffset)
 	STYLE_GET(SVGAnimatedLengthListImpl *, DashArray, m_dashArray)
@@ -221,17 +221,17 @@ public:
 	STYLE_GET(SVGAnimatedLengthImpl *, StrokeWidth, m_strokeWidth)
 	STYLE_GET(SVGStringListImpl *, FontFamily, m_fontFamily);
 	STYLE_GET(float, FontSize, m_fontSize)
-	STYLE_GET(QString, LetterSpacing, m_letterSpacing)
-	STYLE_GET(QString, WordSpacing, m_wordSpacing)
-	STYLE_GET(QString, FontWeight, m_fontWeight)
-	STYLE_GET(QString, ClipPath, m_clipPath)
-	STYLE_GET(QString, Mask, m_mask)
-	STYLE_GET(QString, StartMarker, m_startMarker)
-	STYLE_GET(QString, MidMarker, m_midMarker)
-	STYLE_GET(QString, EndMarker, m_endMarker)
-	STYLE_GET(QString, BaselineShift, m_baselineShift)
-	STYLE_GET(QString, GlyphOrientationVertical, m_glyphOrientationVertical)
-	STYLE_GET(QString, GlyphOrientationHorizontal, m_glyphOrientationHorizontal)
+	STYLE_GET(TQString, LetterSpacing, m_letterSpacing)
+	STYLE_GET(TQString, WordSpacing, m_wordSpacing)
+	STYLE_GET(TQString, FontWeight, m_fontWeight)
+	STYLE_GET(TQString, ClipPath, m_clipPath)
+	STYLE_GET(TQString, Mask, m_mask)
+	STYLE_GET(TQString, StartMarker, m_startMarker)
+	STYLE_GET(TQString, MidMarker, m_midMarker)
+	STYLE_GET(TQString, EndMarker, m_endMarker)
+	STYLE_GET(TQString, BaselineShift, m_baselineShift)
+	STYLE_GET(TQString, GlyphOrientationVertical, m_glyphOrientationVertical)
+	STYLE_GET(TQString, GlyphOrientationHorizontal, m_glyphOrientationHorizontal)
 	STYLE_GET(float, Opacity, m_opacity)
 	STYLE_GET(float, FillOpacity, m_fillOpacity)
 	STYLE_GET(float, StrokeOpacity, m_strokeOpacity)
@@ -261,10 +261,10 @@ public:
 	STYLE_HAS(EndMarker, m_endMarker)
 
 	// Special "set" cases
-	void setStartMarker(const QString &);
-	void setMidMarker(const QString &);
-	void setEndMarker(const QString &);
-	void setMarkers(const QString &);
+	void setStartMarker(const TQString &);
+	void setMidMarker(const TQString &);
+	void setEndMarker(const TQString &);
+	void setMarkers(const TQString &);
 
 	// Special "has" cases
 	bool hasMarkers() const;
@@ -277,17 +277,17 @@ public:
 	void processStyle();
 	
 	// Special virtual functions
-	virtual void setClip(const QString &clip);
-	virtual QRect clip();
+	virtual void setClip(const TQString &clip);
+	virtual TQRect clip();
 
 protected:
-	float fontSizeForText(const QString &);
+	float fontSizeForText(const TQString &);
 
 	SVGElementImpl *m_object;
 
 private:
-	void setPaint(const QString &, SVGPaintImpl *);
-	QString extractUrlId(const QString& string);
+	void setPaint(const TQString &, SVGPaintImpl *);
+	TQString extractUrlId(const TQString& string);
 
 	unsigned long long m_flags;
 

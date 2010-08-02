@@ -25,7 +25,7 @@
 
 #include "SVGAnimationElementImpl.h"
 
-class QTimer;
+class TQTimer;
 
 namespace KSVG
 {

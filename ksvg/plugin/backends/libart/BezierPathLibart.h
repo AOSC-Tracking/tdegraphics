@@ -22,7 +22,7 @@
 #define T2P_BEZIERPATH_LIBART_H
 
 #include "BezierPath.h"
-#include <qmemarray.h>
+#include <tqmemarray.h>
 
 class _ArtBpath;
 
@@ -42,7 +42,7 @@ namespace T2P
 		virtual void boundingBox(Point *topLeft, Point *bottomRight);
 
 		// Don't make those private members, these are all internal anyway...
-		QMemArray<_ArtBpath> m_array;
+		TQMemArray<_ArtBpath> m_array;
 		double m_length;
 	};
 }

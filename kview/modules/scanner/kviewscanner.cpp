@@ -20,8 +20,8 @@
 
 #include "kviewscanner.h"
 
-#include <qimage.h>
-#include <qobjectlist.h>
+#include <tqimage.h>
+#include <tqobjectlist.h>
 
 #include <kaction.h>
 #include <kinstance.h>
@@ -35,19 +35,19 @@
 typedef KGenericFactory<KViewScanner> KViewScannerFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_scannerplugin, KViewScannerFactory( "kviewscannerplugin" ) )
 
-KViewScanner::KViewScanner( QObject* parent, const char* name,
-	                                  const QStringList & )
+KViewScanner::KViewScanner( TQObject* parent, const char* name,
+	                                  const TQStringList & )
   : Plugin( parent, name ),
   m_pScandlg( 0 ),
   m_pViewer( 0 )
 {
-	QObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )
 	{
 		(void) new KAction( i18n( "&Scan Image..." ), "scanner", 0,
-							this, SLOT( slotScan() ),
+							this, TQT_SLOT( slotScan() ),
 							actionCollection(), "plugin_scan" );
 	}
 	else
@@ -67,8 +67,8 @@ void KViewScanner::slotScan()
 		{
 			m_pScandlg->setMinimumSize( 300, 300 );
 
-			connect( m_pScandlg, SIGNAL( finalImage( const QImage &, int ) ),
-					this, SLOT( slotImgScanned( const QImage & ) ) );
+			connect( m_pScandlg, TQT_SIGNAL( finalImage( const TQImage &, int ) ),
+					this, TQT_SLOT( slotImgScanned( const TQImage & ) ) );
 		}
 		else
 		{
@@ -86,7 +86,7 @@ void KViewScanner::slotScan()
 		m_pScandlg->show();
 }
 
-void KViewScanner::slotImgScanned( const QImage & img )
+void KViewScanner::slotImgScanned( const TQImage & img )
 {
 	kdDebug( 4630 ) << "received an image from the scanner" << endl;
 	m_pViewer->newImage( img );

@@ -69,7 +69,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMMaterialMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -77,17 +77,17 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmmaterialmap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmmaterialmap" ); }
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMMaterialMapEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /**
     * Gets the bitmap type
@@ -96,7 +96,7 @@ public:
    /**
     * Gets the bitmap file name
     */
-   QString bitmapFile( ) const { return m_bitmapFile; }
+   TQString bitmapFile( ) const { return m_bitmapFile; }
    /**
     * Returns true if once is enabled
     */
@@ -117,7 +117,7 @@ public:
    void setBitmapType( PMBitmapType c );
    /**
     * Sets the bitmap file name*/
-   void setBitmapFileName( const QString& c );
+   void setBitmapFileName( const TQString& c );
    /**
     * Sets if the bitmap should be mapped once
     */
@@ -142,7 +142,7 @@ private:
     * MaterialMap type
     */
    PMBitmapType m_bitmapType;
-   QString m_bitmapFile;
+   TQString m_bitmapFile;
    bool m_once;
    PMMapType m_mapType;
    PMInterpolateType m_interpolateType;

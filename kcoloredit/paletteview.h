@@ -18,8 +18,8 @@
 #ifndef PALETTEVIEW_H
 #define PALETTEVIEW_H
 
-#include <qframe.h>
-#include <qscrollbar.h>
+#include <tqframe.h>
+#include <tqscrollbar.h>
 
 #include "paletteviewscrolledarea.h"
 
@@ -29,7 +29,7 @@ class KColorEditView;
   * Its parent is KColorEditView
   * @author Artur Rataj
   */
-class PaletteView : public QFrame {
+class PaletteView : public TQFrame {
 	Q_OBJECT
 
 public:
@@ -37,7 +37,7 @@ public:
 	 *  The effective cell sizes may be adjusted to fit the widget sizes.
 	 */
 	PaletteView(const int defaultCellWidth, const int defaultCellHeight, const int cellSpacing,
-			KColorEditView* view, QWidget *parent = 0, const char *name=0);
+			KColorEditView* view, TQWidget *parent = 0, const char *name=0);
 	~PaletteView();
 	/** Calls redraw() in scrolledArea */
 	void redraw();
@@ -56,9 +56,9 @@ protected:
 	/** The scrolled area */
 	PaletteViewScrolledArea* scrolledArea;
 	/** The scroll bar widget */
-	QScrollBar* scrollBar;
+	TQScrollBar* scrollBar;
 	/** The horizontal scroll bar widget */
-	QScrollBar* hScrollBar;
+	TQScrollBar* hScrollBar;
 };
 
 #endif

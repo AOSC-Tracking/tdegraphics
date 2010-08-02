@@ -21,10 +21,10 @@
 #ifndef __KNEWICON_H__
 #define __KNEWICON_H__
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qimage.h>
-#include <qlistbox.h>
+#include <tqwidget.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
+#include <tqlistbox.h>
 
 #include <kwizard.h>
 
@@ -32,46 +32,46 @@
 
 class KIconListBox;
 class KIconTemplateContainer;
-class QButtonGroup;
-class QRadioButton;
-class QGroupBox;
+class TQButtonGroup;
+class TQRadioButton;
+class TQGroupBox;
 
 struct KIconTemplate
 {
-  QString path;
-  QString title;
+  TQString path;
+  TQString title;
 };
 
-class KIconListBoxItem : public QListBoxItem    
+class KIconListBoxItem : public TQListBoxItem    
 {
 public:
   KIconListBoxItem( KIconTemplate ); 
 
 
-  const QString path() { return icontemplate.path; }
+  const TQString path() { return icontemplate.path; }
   KIconTemplate& iconTemplate() { return icontemplate; }
   void reloadIcon();
 
 protected:
-  virtual void paint( QPainter * );      
-  virtual int height( const QListBox * ) const;      
-  virtual int width( const QListBox * ) const;      
+  virtual void paint( TQPainter * );      
+  virtual int height( const TQListBox * ) const;      
+  virtual int width( const TQListBox * ) const;      
 private:
-  QPixmap pm;
+  TQPixmap pm;
   KIconTemplate icontemplate;
 };
 
-class KIconListBox : public QListBox    
+class KIconListBox : public TQListBox    
 {
   Q_OBJECT
 public:
-  KIconListBox( QWidget *parent ) : QListBox(parent) {} ;
-  const QString path(int idx) { return ((KIconListBoxItem*)item(idx))->path(); }
+  KIconListBox( TQWidget *parent ) : TQListBox(parent) {} ;
+  const TQString path(int idx) { return ((KIconListBoxItem*)item(idx))->path(); }
   KIconTemplate& iconTemplate(int idx) { return ((KIconListBoxItem*)item(idx))->iconTemplate(); }
 
 };
 
-class KIconTemplateContainer : public QValueList<KIconTemplate>
+class KIconTemplateContainer : public TQValueList<KIconTemplate>
 {
 public:
    static KIconTemplateContainer* self()
@@ -97,7 +97,7 @@ class NewSelect : public QWidget
 {
   Q_OBJECT
 public:
-  NewSelect(QWidget *parent);
+  NewSelect(TQWidget *parent);
   ~NewSelect();
 
 signals:
@@ -108,18 +108,18 @@ protected slots:
 
 protected:
   KWizard *wiz;
-  QButtonGroup *grp;
-  QRadioButton *rbscratch, *rbtempl;
+  TQButtonGroup *grp;
+  TQRadioButton *rbscratch, *rbtempl;
 };
 
 class NewFromTemplate : public QWidget
 {
   Q_OBJECT
 public:
-  NewFromTemplate(QWidget *parent);
+  NewFromTemplate(TQWidget *parent);
   ~NewFromTemplate();
 
-  const QString path() { return QString(templates->path(templates->currentItem())); }
+  const TQString path() { return TQString(templates->path(templates->currentItem())); }
 
 public slots:
   void checkSelection(int);
@@ -127,37 +127,37 @@ public slots:
 protected:
   KIconListBox *templates;
   KWizard *wiz;
-  QGroupBox *grp;
+  TQGroupBox *grp;
 };
 
 class KNewIcon : public KWizard
 {
   Q_OBJECT
 public:
-  KNewIcon(QWidget *parent);
+  KNewIcon(TQWidget *parent);
   ~KNewIcon();
 
   enum { Blank = 0, Template = 1};
   int openStyle() { return openstyle; }
-  const QString templatePath() { return QString(templ->path()); }
-  const QSize templateSize() { return scratch->getSize(); }
+  const TQString templatePath() { return TQString(templ->path()); }
+  const TQSize templateSize() { return scratch->getSize(); }
 
 protected slots:
   void okClicked();
   void cancelClicked();
   void iconOpenStyle(int);
   void checkPage(bool);
-  void checkPage(const QString &);
+  void checkPage(const TQString &);
 
 signals:
-  void newicon(const QSize);
-  void newicon(const QString);
+  void newicon(const TQSize);
+  void newicon(const TQString);
 
 protected:
   NewSelect       *select;
   KResizeWidget   *scratch;
   NewFromTemplate *templ;
-  QWidget         *act;
+  TQWidget         *act;
   int              openstyle;
 };
 

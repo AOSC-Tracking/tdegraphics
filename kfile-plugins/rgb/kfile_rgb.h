@@ -22,19 +22,19 @@
 
 #include <kfilemetainfo.h>
 
-class QStringList;
+class TQStringList;
 
 class KRgbPlugin : public KFilePlugin
 {
 	Q_OBJECT
 
 public:
-	KRgbPlugin(QObject *parent, const char *name, const QStringList& args);
+	KRgbPlugin(TQObject *parent, const char *name, const TQStringList& args);
 	virtual bool readInfo(KFileMetaInfo& info, uint what);
 	virtual bool writeInfo(const KFileMetaInfo& info) const;
-	virtual QValidator* createValidator(const QString& mimetype,
-			const QString &group, const QString &key,
-			QObject* parent, const char* name) const;
+	virtual TQValidator* createValidator(const TQString& mimetype,
+			const TQString &group, const TQString &key,
+			TQObject* parent, const char* name) const;
 
 };
 

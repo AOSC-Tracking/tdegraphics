@@ -23,8 +23,8 @@
 #define DEFAULT_CRITICAL (3*1024*1024)
 #define DEFAULT_THRESHOLD (1*1024*1024)
 
-class QPainter;
-#include <qlabel.h>
+class TQPainter;
+#include <tqlabel.h>
 
 /**
  *  @short  small size indication widget for file sizes
@@ -49,7 +49,7 @@ public:
     *  @param crit: Critical value, not yet used.
 
     */
-   SizeIndicator( QWidget *parent, long thres = DEFAULT_THRESHOLD,
+   SizeIndicator( TQWidget *parent, long thres = DEFAULT_THRESHOLD,
 		  long crit = DEFAULT_CRITICAL );
    /**
     *  destructor does not really do much yet.
@@ -82,7 +82,7 @@ protected:
    /**
     *  reimplemented to display the color
     */
-   virtual void drawContents( QPainter* );
+   virtual void drawContents( TQPainter* );
 
 private:
 

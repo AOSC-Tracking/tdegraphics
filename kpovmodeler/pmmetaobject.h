@@ -19,10 +19,10 @@
 #ifndef PMMETAOBJECT_H
 #define PMMETAOBJECT_H
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qptrlist.h>
-#include <qdict.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqptrlist.h>
+#include <tqdict.h>
 #include "pmvariant.h"
 
 class PMPart;
@@ -36,7 +36,7 @@ public:
    /**
     * Default constructor
     */
-   PMPropertyBase( const QString& name, PMVariant::PMVariantDataType t,
+   PMPropertyBase( const TQString& name, PMVariant::PMVariantDataType t,
                    bool readOnly = false, bool writeOnly = false );
    /**
     * Copy constructor
@@ -50,7 +50,7 @@ public:
    /**
     * Returns the properties name
     */
-   QString name( ) const { return m_name; }
+   TQString name( ) const { return m_name; }
    /**
     * Returns the data type
     */
@@ -95,7 +95,7 @@ public:
    /**
     * Returns the list of enum values
     */
-   virtual QStringList enumValues( ) const { return QStringList( ); }
+   virtual TQStringList enumValues( ) const { return TQStringList( ); }
 
    /**
     * Returns true if the property is read-only. False by default
@@ -121,15 +121,15 @@ protected:
 
 private:
    PMVariant::PMVariantDataType m_type;
-   QString m_name;
-   QStringList* m_pEnumList;
+   TQString m_name;
+   TQStringList* m_pEnumList;
    bool m_readOnly;
    bool m_writeOnly;
 };
 
-typedef QPtrList<PMPropertyBase> PMPropertyList;
-typedef QDict<PMPropertyBase> PMPropertyDict;
-typedef QDictIterator<PMPropertyBase> PMPropertyIterator;
+typedef TQPtrList<PMPropertyBase> PMPropertyList;
+typedef TQDict<PMPropertyBase> PMPropertyDict;
+typedef TQDictIterator<PMPropertyBase> PMPropertyIterator;
 
 /**
  * Macro that defines a property class for a PMObject class
@@ -150,7 +150,7 @@ public: \
    typedef void ( ObjectClass::*SetDoublePtr ) ( double ); \
    typedef void ( ObjectClass::*SetBoolPtr ) ( bool ); \
    typedef void ( ObjectClass::*SetThreeStatePtr )( PMThreeState ); \
-   typedef void ( ObjectClass::*SetStringPtr ) ( const QString& ); \
+   typedef void ( ObjectClass::*SetStringPtr ) ( const TQString& ); \
    typedef void ( ObjectClass::*SetVectorPtr ) ( const PMVector& ); \
    typedef void ( ObjectClass::*SetColorPtr ) ( const PMColor& ); \
    typedef void ( ObjectClass::*SetObjectPtr ) ( PMObject* ); \
@@ -160,68 +160,68 @@ public: \
    typedef double ( ObjectClass::*GetDoublePtr ) ( void ) const; \
    typedef bool ( ObjectClass::*GetBoolPtr ) ( void ) const; \
    typedef PMThreeState ( ObjectClass::*GetThreeStatePtr ) ( void ) const; \
-   typedef QString ( ObjectClass::*GetStringPtr ) ( void ) const; \
+   typedef TQString ( ObjectClass::*GetStringPtr ) ( void ) const; \
    typedef PMVector ( ObjectClass::*GetVectorPtr ) ( void ) const; \
    typedef PMColor ( ObjectClass::*GetColorPtr ) ( void ) const; \
    typedef PMObject* ( ObjectClass::*GetObjectPtr ) ( void ) const; \
    \
-   PropertyClass( const QString& name, SetIntPtr setFktn, GetIntPtr getFktn ) \
+   PropertyClass( const TQString& name, SetIntPtr setFktn, GetIntPtr getFktn ) \
          : PMPropertyBase( name, PMVariant::Integer, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setInt = setFktn; \
       m_getFunction.getInt = getFktn; \
    } \
-   PropertyClass( const QString& name, SetUnsignedPtr setFktn, GetUnsignedPtr getFktn ) \
+   PropertyClass( const TQString& name, SetUnsignedPtr setFktn, GetUnsignedPtr getFktn ) \
          : PMPropertyBase( name, PMVariant::Unsigned, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setUnsigned = setFktn; \
       m_getFunction.getUnsigned = getFktn; \
    } \
-   PropertyClass( const QString& name, SetDoublePtr setFktn, GetDoublePtr getFktn ) \
+   PropertyClass( const TQString& name, SetDoublePtr setFktn, GetDoublePtr getFktn ) \
          : PMPropertyBase( name, PMVariant::Double, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setDouble = setFktn; \
       m_getFunction.getDouble = getFktn; \
    } \
-   PropertyClass( const QString& name, SetBoolPtr setFktn, GetBoolPtr getFktn ) \
+   PropertyClass( const TQString& name, SetBoolPtr setFktn, GetBoolPtr getFktn ) \
          : PMPropertyBase( name, PMVariant::Bool, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setBool = setFktn; \
       m_getFunction.getBool = getFktn; \
    } \
-   PropertyClass( const QString& name, SetThreeStatePtr setFktn, GetThreeStatePtr getFktn ) \
+   PropertyClass( const TQString& name, SetThreeStatePtr setFktn, GetThreeStatePtr getFktn ) \
          : PMPropertyBase( name, PMVariant::ThreeState, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setThreeState = setFktn; \
       m_getFunction.getThreeState = getFktn; \
    } \
-   PropertyClass( const QString& name, SetStringPtr setFktn, GetStringPtr getFktn ) \
+   PropertyClass( const TQString& name, SetStringPtr setFktn, GetStringPtr getFktn ) \
          : PMPropertyBase( name, PMVariant::String, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setString = setFktn; \
       m_getFunction.getString = getFktn; \
    } \
-   PropertyClass( const QString& name, SetVectorPtr setFktn, GetVectorPtr getFktn ) \
+   PropertyClass( const TQString& name, SetVectorPtr setFktn, GetVectorPtr getFktn ) \
          : PMPropertyBase( name, PMVariant::Vector, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setVector = setFktn; \
       m_getFunction.getVector = getFktn; \
    } \
-   PropertyClass( const QString& name, SetColorPtr setFktn, GetColorPtr getFktn ) \
+   PropertyClass( const TQString& name, SetColorPtr setFktn, GetColorPtr getFktn ) \
          : PMPropertyBase( name, PMVariant::Color, \
                            setFktn == 0, getFktn == 0 ) \
    { \
       m_setFunction.setColor = setFktn; \
       m_getFunction.getColor = getFktn; \
    } \
-   PropertyClass( const QString& name, SetObjectPtr setFktn, GetObjectPtr getFktn ) \
+   PropertyClass( const TQString& name, SetObjectPtr setFktn, GetObjectPtr getFktn ) \
          : PMPropertyBase( name, PMVariant::ObjectPointer, \
                            setFktn == 0, getFktn == 0 ) \
    { \
@@ -358,7 +358,7 @@ public:
     * a new object of that type. factoryMethod may be 0 for
     * abstract classes.
     */
-   PMMetaObject( const QString& className, PMMetaObject* superClass = 0,
+   PMMetaObject( const TQString& className, PMMetaObject* superClass = 0,
                  PMObjectFactoryMethod factoryMethod = 0 );
    /**
     * Destructor
@@ -368,7 +368,7 @@ public:
    /**
     * Returns the class name
     */
-   QString className( ) const { return m_className; }
+   TQString className( ) const { return m_className; }
    /**
     * Returns the meta object of the super class
     */
@@ -400,13 +400,13 @@ public:
     * Returns a property by name or 0 if a property with the name
     * doesn't exist.
     */
-   PMPropertyBase* property( const QString& name ) const
+   PMPropertyBase* property( const TQString& name ) const
    {
       return m_propertiesDict.find( name );
    }
 
 private:
-   QString m_className;
+   TQString m_className;
    PMMetaObject* m_pSuperClass;
    PMPropertyList m_properties;
    PMPropertyDict m_propertiesDict;

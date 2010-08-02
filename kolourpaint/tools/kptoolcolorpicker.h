@@ -34,8 +34,8 @@
 #include <kpcolor.h>
 #include <kptool.h>
 
-class QPoint;
-class QRect;
+class TQPoint;
+class TQRect;
 
 class kpColorToolBar;
 
@@ -52,18 +52,18 @@ public:
     virtual bool returnToPreviousToolAfterEndDraw () const { return true; }
 
 private:
-    QString haventBegunDrawUserMessage () const;
+    TQString haventBegunDrawUserMessage () const;
 
 public:
     virtual void begin ();
     virtual void beginDraw ();
-    virtual void draw (const QPoint &thisPoint, const QPoint &, const QRect &);
+    virtual void draw (const TQPoint &thisPoint, const TQPoint &, const TQRect &);
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
-    virtual void endDraw (const QPoint &thisPoint, const QRect &);
+    virtual void endDraw (const TQPoint &thisPoint, const TQRect &);
 
 private:
-    kpColor colorAtPixel (const QPoint &p);
+    kpColor colorAtPixel (const TQPoint &p);
 
     kpColor m_oldColor;
 };
@@ -76,7 +76,7 @@ public:
                               kpMainWindow *mainWindow);
     virtual ~kpToolColorPickerCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
 

@@ -31,7 +31,7 @@
 
 #include <kpcolor.h>
 
-#include <qdatastream.h>
+#include <tqdatastream.h>
 
 #include <kdebug.h>
 
@@ -100,7 +100,7 @@ kpColor::kpColor (const kpColor &rhs)
 }
 
 // friend
-QDataStream &operator<< (QDataStream &stream, const kpColor &color)
+TQDataStream &operator<< (TQDataStream &stream, const kpColor &color)
 {
     stream << int (color.m_rgbaIsValid) << int (color.m_rgba);
 
@@ -108,7 +108,7 @@ QDataStream &operator<< (QDataStream &stream, const kpColor &color)
 }
 
 // friend
-QDataStream &operator>> (QDataStream &stream, kpColor &color)
+TQDataStream &operator>> (TQDataStream &stream, kpColor &color)
 {
     int a, b;
     stream >> a >> b;
@@ -321,7 +321,7 @@ QRgb kpColor::toQRgb () const
 }
 
 // public
-const QColor &kpColor::toQColor () const
+const TQColor &kpColor::toQColor () const
 {
     if (!m_rgbaIsValid)
     {
@@ -340,10 +340,10 @@ const QColor &kpColor::toQColor () const
         return Qt::black;
     }
 
-    m_colorCache = QColor (m_rgba);
+    m_colorCache = TQColor (m_rgba);
     if (!m_colorCache.isValid ())
     {
-        kdError () << "kpColor::toQColor () internal error - could not return valid QColor"
+        kdError () << "kpColor::toQColor () internal error - could not return valid TQColor"
                    << endl;
         return Qt::black;
     }
@@ -354,7 +354,7 @@ const QColor &kpColor::toQColor () const
 }
 
 // public
-QColor kpColor::maskColor () const
+TQColor kpColor::maskColor () const
 {
     return isTransparent () ? Qt::color0 : Qt::color1;
 }

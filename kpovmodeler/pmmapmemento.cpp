@@ -28,7 +28,7 @@ PMMapMemento::~PMMapMemento( )
 {
 }
 
-void PMMapMemento::setMapValues( const QValueList<double>& v )
+void PMMapMemento::setMapValues( const TQValueList<double>& v )
 {
    if( !m_bMapValuesSaved )
    {
@@ -38,7 +38,7 @@ void PMMapMemento::setMapValues( const QValueList<double>& v )
    }
 }
 
-void PMMapMemento::setRemovedValues( const QValueList<double>& v )
+void PMMapMemento::setRemovedValues( const TQValueList<double>& v )
 {
    if( !m_bRemovedValuesSaved )
    {

@@ -30,9 +30,9 @@
 #include <kpmainwindow.h>
 #include <kpmainwindow_p.h>
 
-#include <qdatetime.h>
-#include <qpainter.h>
-#include <qtimer.h>
+#include <tqdatetime.h>
+#include <tqpainter.h>
+#include <tqtimer.h>
 
 #include <kactionclasses.h>
 #include <kapplication.h>
@@ -67,18 +67,18 @@ void kpMainWindow::setupViewMenuActions ()
     m_actionFullScreen->setEnabled (false);*/
 
 
-    m_actionActualSize = KStdAction::actualSize (this, SLOT (slotActualSize ()), ac);
-    /*m_actionFitToPage = KStdAction::fitToPage (this, SLOT (slotFitToPage ()), ac);
-    m_actionFitToWidth = KStdAction::fitToWidth (this, SLOT (slotFitToWidth ()), ac);
-    m_actionFitToHeight = KStdAction::fitToHeight (this, SLOT (slotFitToHeight ()), ac);*/
+    m_actionActualSize = KStdAction::actualSize (this, TQT_SLOT (slotActualSize ()), ac);
+    /*m_actionFitToPage = KStdAction::fitToPage (this, TQT_SLOT (slotFitToPage ()), ac);
+    m_actionFitToWidth = KStdAction::fitToWidth (this, TQT_SLOT (slotFitToWidth ()), ac);
+    m_actionFitToHeight = KStdAction::fitToHeight (this, TQT_SLOT (slotFitToHeight ()), ac);*/
 
 
-    m_actionZoomIn = KStdAction::zoomIn (this, SLOT (slotZoomIn ()), ac);
-    m_actionZoomOut = KStdAction::zoomOut (this, SLOT (slotZoomOut ()), ac);
+    m_actionZoomIn = KStdAction::zoomIn (this, TQT_SLOT (slotZoomIn ()), ac);
+    m_actionZoomOut = KStdAction::zoomOut (this, TQT_SLOT (slotZoomOut ()), ac);
 
 
     m_actionZoom = new KSelectAction (i18n ("&Zoom"), 0,
-        this, SLOT (slotZoom ()), actionCollection (), "view_zoom_to");
+        this, TQT_SLOT (slotZoom ()), actionCollection (), "view_zoom_to");
     m_actionZoom->setEditable (true);
 
     // create the zoom list for the 1st call to zoomTo() below
@@ -91,7 +91,7 @@ void kpMainWindow::setupViewMenuActions ()
 
 
     m_actionShowGrid = new KToggleAction (i18n ("Show &Grid"), CTRL + Key_G,
-        this, SLOT (slotShowGridToggled ()), actionCollection (), "view_show_grid");
+        this, TQT_SLOT (slotShowGridToggled ()), actionCollection (), "view_show_grid");
     m_actionShowGrid->setCheckedState (i18n ("Hide &Grid"));
 
 
@@ -99,12 +99,12 @@ void kpMainWindow::setupViewMenuActions ()
     //       Testcase: Press CTRL+H twice on a fresh KolourPaint.
     //                 The second CTRL+H doesn't close the thumbnail.
     m_actionShowThumbnail = new KToggleAction (i18n ("Show T&humbnail"), CTRL + Key_H,
-        this, SLOT (slotShowThumbnailToggled ()), actionCollection (), "view_show_thumbnail");
+        this, TQT_SLOT (slotShowThumbnailToggled ()), actionCollection (), "view_show_thumbnail");
     m_actionShowThumbnail->setCheckedState (i18n ("Hide T&humbnail"));
 
     // Please do not use setCheckedState() here - it wouldn't make sense
     m_actionZoomedThumbnail = new KToggleAction (i18n ("Zoo&med Thumbnail Mode"), 0,
-        this, SLOT (slotZoomedThumbnailToggled ()), actionCollection (), "view_zoomed_thumbnail");
+        this, TQT_SLOT (slotZoomedThumbnailToggled ()), actionCollection (), "view_zoomed_thumbnail");
 
     // For consistency with the above action, don't use setCheckedState()
     //
@@ -114,7 +114,7 @@ void kpMainWindow::setupViewMenuActions ()
     d->m_actionShowThumbnailRectangle = new KToggleAction (
         i18n ("Enable Thumbnail &Rectangle"),
         0,
-        this, SLOT (slotThumbnailShowRectangleToggled ()),
+        this, TQT_SLOT (slotThumbnailShowRectangleToggled ()),
         actionCollection (), "view_show_thumbnail_rectangle");
 
 
@@ -176,10 +176,10 @@ void kpMainWindow::actionShowGridUpdate ()
 // private
 void kpMainWindow::sendZoomListToActionZoom ()
 {
-    QStringList items;
+    TQStringList items;
 
-    const QValueVector <int>::ConstIterator zoomListEnd (m_zoomList.end ());
-    for (QValueVector <int>::ConstIterator it = m_zoomList.begin ();
+    const TQValueVector <int>::ConstIterator zoomListEnd (m_zoomList.end ());
+    for (TQValueVector <int>::ConstIterator it = m_zoomList.begin ();
          it != zoomListEnd;
          it++)
     {
@@ -196,7 +196,7 @@ void kpMainWindow::sendZoomListToActionZoom ()
 }
 
 // private
-int kpMainWindow::zoomLevelFromString (const QString &string)
+int kpMainWindow::zoomLevelFromString (const TQString &string)
 {
     // loop until not digit
     int i;
@@ -214,7 +214,7 @@ int kpMainWindow::zoomLevelFromString (const QString &string)
 }
 
 // private
-QString kpMainWindow::zoomLevelToString (int zoomLevel)
+TQString kpMainWindow::zoomLevelToString (int zoomLevel)
 {
     return i18n ("%1%").arg (zoomLevel);
 }
@@ -238,7 +238,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
                   "results in imprecise editing and redraw glitches.\n"
                   "Do you really want to set to zoom level to %1%?")
                 .arg (zoomLevel),
-            QString::null/*caption*/,
+            TQString::null/*caption*/,
             i18n ("Set Zoom Level to %1%").arg (zoomLevel),
             "DoNotAskAgain_ZoomLevelNotMultipleOf100") != KMessageBox::Continue)
         {
@@ -248,7 +248,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
 #endif
 
     int index = 0;
-    QValueVector <int>::Iterator it = m_zoomList.begin ();
+    TQValueVector <int>::Iterator it = m_zoomList.begin ();
 
     while (index < (int) m_zoomList.count () && zoomLevel > *it)
         it++, index++;
@@ -287,7 +287,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
         if (m_scrollView && m_scrollView->viewport ())
         {
             // Ordinary flicker is better than the whole view moving
-            QPainter p (m_mainView);
+            TQPainter p (m_mainView);
             p.fillRect (m_mainView->rect (),
                         m_scrollView->viewport ()->colorGroup ().background ());
         }
@@ -327,9 +327,9 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
             m_viewManager && m_viewManager->viewUnderCursor ())
         {
             kpView *const vuc = m_viewManager->viewUnderCursor ();
-            QPoint viewPoint = vuc->mouseViewPoint ();
+            TQPoint viewPoint = vuc->mouseViewPoint ();
         
-            // vuc->transformViewToDoc() returns QPoint which only has int
+            // vuc->transformViewToDoc() returns TQPoint which only has int
             // accuracy so we do X and Y manually.
             targetDocX = vuc->transformViewToDocX (viewPoint.x ());
             targetDocY = vuc->transformViewToDocY (viewPoint.y ());
@@ -358,7 +358,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: just setZoomLevel" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 1000)
             ;
     }
@@ -376,7 +376,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: just centred" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 2000)
             ;
     }
@@ -397,7 +397,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
             const double viewY = vuc->transformDocToViewY (targetDocY);
             // Rounding error from zooming in and out :(
             // TODO: do everything in terms of tool doc points in type "double".
-            const QPoint viewPoint ((int) viewX, (int) viewY);
+            const TQPoint viewPoint ((int) viewX, (int) viewY);
         #if DEBUG_KP_MAIN_WINDOW
             kdDebug () << "\t\tdoc: (" << targetDocX << "," << targetDocY << ")"
                        << " viewUnderCursor: (" << viewX << "," << viewY << ")"
@@ -406,7 +406,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
         
             if (vuc->clipRegion ().contains (viewPoint))
             {
-                const QPoint globalPoint =
+                const TQPoint globalPoint =
                     kpWidgetMapper::toGlobal (vuc, viewPoint);
             #if DEBUG_KP_MAIN_WINDOW
                 kdDebug () << "\t\tglobalPoint=" << globalPoint << endl;
@@ -415,11 +415,11 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
                 // TODO: Determine some sane cursor flashing indication -
                 //       cursor movement is convenient but not conventional.
                 //
-                //       Major problem: if using QApplication::setOverrideCursor()
+                //       Major problem: if using TQApplication::setOverrideCursor()
                 //           and in some stage of flash and window quits.
                 //
                 //           Or if using kpView::setCursor() and change tool.
-                QCursor::setPos (globalPoint);
+                TQCursor::setPos (globalPoint);
             }
             // e.g. Zoom to 200%, scroll mainView to bottom-right.
             // Unzoomed Thumbnail shows top-left portion of bottom-right of
@@ -459,7 +459,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: updated grid action" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 1000)
             ;
     }
@@ -470,7 +470,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: just updated grid" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 1000)
             ;
     }
@@ -484,7 +484,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: just set focus to mainview" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 1000)
             ;
     }
@@ -498,7 +498,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: signalled something below cursor" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 1000)
             ;
     }
@@ -511,7 +511,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     //       caused mainly by m_scrollView->center()
     //
     // TODO: remove flicker completely
-    //QTimer::singleShot (0, this, SLOT (finishZoomTo ()));
+    //TQTimer::singleShot (0, this, TQT_SLOT (finishZoomTo ()));
 
     // Later: I don't think there is an update() that needs to be queued
     //        - let's reduce latency instead.
@@ -528,7 +528,7 @@ void kpMainWindow::finishZoomTo ()
 #if DEBUG_ZOOM_FLICKER
 {
     kdDebug () << "FLICKER: inside finishZoomTo" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
     while (timer.elapsed () < 2000)
         ;
 }
@@ -546,7 +546,7 @@ void kpMainWindow::finishZoomTo ()
 #if DEBUG_ZOOM_FLICKER
 {
     kdDebug () << "FLICKER: just updated mainView" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
     while (timer.elapsed () < 1000)
         ;
 }
@@ -562,7 +562,7 @@ void kpMainWindow::finishZoomTo ()
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: just updated scrollView::viewport()" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 1000)
             ;
     }
@@ -573,7 +573,7 @@ void kpMainWindow::finishZoomTo ()
     #if DEBUG_ZOOM_FLICKER
     {
         kdDebug () << "FLICKER: just updated scrollView" << endl;
-        QTime timer; timer.start ();
+        TQTime timer; timer.start ();
         while (timer.elapsed () < 1000)
             ;
     }
@@ -587,7 +587,7 @@ void kpMainWindow::finishZoomTo ()
 #if DEBUG_ZOOM_FLICKER
 {
     kdDebug () << "FLICKER: restored vm queued updates" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
     while (timer.elapsed () < 1000)
         ;
 }
@@ -602,7 +602,7 @@ void kpMainWindow::finishZoomTo ()
 #if DEBUG_ZOOM_FLICKER
 {
     kdDebug () << "FLICKER: finishZoomTo done" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
     while (timer.elapsed () < 1000)
         ;
 }
@@ -749,13 +749,13 @@ void kpMainWindow::updateMainViewGrid ()
 
 
 // private
-QRect kpMainWindow::mapToGlobal (const QRect &rect) const
+TQRect kpMainWindow::mapToGlobal (const TQRect &rect) const
 {
     return kpWidgetMapper::toGlobal (this, rect);
 }
 
 // private
-QRect kpMainWindow::mapFromGlobal (const QRect &rect) const
+TQRect kpMainWindow::mapFromGlobal (const TQRect &rect) const
 {
     return kpWidgetMapper::fromGlobal (this, rect);
 }
@@ -821,9 +821,9 @@ void kpMainWindow::notifyThumbnailGeometryChanged ()
 
     if (!m_thumbnailSaveConfigTimer)
     {
-        m_thumbnailSaveConfigTimer = new QTimer (this);
-        connect (m_thumbnailSaveConfigTimer, SIGNAL (timeout ()),
-                 this, SLOT (slotSaveThumbnailGeometry ()));
+        m_thumbnailSaveConfigTimer = new TQTimer (this);
+        connect (m_thumbnailSaveConfigTimer, TQT_SIGNAL (timeout ()),
+                 this, TQT_SLOT (slotSaveThumbnailGeometry ()));
     }
 
     m_thumbnailSaveConfigTimer->start (500/*msec*/, true/*single shot*/);
@@ -839,7 +839,7 @@ void kpMainWindow::slotSaveThumbnailGeometry ()
     if (!m_thumbnail)
         return;
 
-    QRect rect (m_thumbnail->x (), m_thumbnail->y (),
+    TQRect rect (m_thumbnail->x (), m_thumbnail->y (),
                 m_thumbnail->width (), m_thumbnail->height ());
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\tthumbnail relative geometry=" << rect << endl;
@@ -1069,7 +1069,7 @@ void kpMainWindow::updateThumbnail ()
 
         // Read last saved geometry before creating thumbnail & friends
         // in case they call notifyThumbnailGeometryChanged()
-        QRect thumbnailGeometry = m_configThumbnailGeometry;
+        TQRect thumbnailGeometry = m_configThumbnailGeometry;
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\t\tlast used geometry=" << thumbnailGeometry << endl;
     #endif
@@ -1082,9 +1082,9 @@ void kpMainWindow::updateThumbnail ()
         kdDebug () << "\t\tmoving thumbnail to right place" << endl;
     #endif
         if (!thumbnailGeometry.isEmpty () &&
-            QRect (0, 0, width (), height ()).intersects (thumbnailGeometry))
+            TQRect (0, 0, width (), height ()).intersects (thumbnailGeometry))
         {
-            const QRect geometry = mapToGlobal (thumbnailGeometry);
+            const TQRect geometry = mapToGlobal (thumbnailGeometry);
             m_thumbnail->resize (geometry.size ());
             m_thumbnail->move (geometry.topLeft ());
         }
@@ -1095,7 +1095,7 @@ void kpMainWindow::updateThumbnail ()
                 const int margin = 20;
                 const int initialWidth = 160, initialHeight = 120;
 
-                QRect geometryRect (width () - initialWidth - margin * 2,
+                TQRect geometryRect (width () - initialWidth - margin * 2,
                                     m_scrollView->y () + margin,
                                     initialWidth,
                                     initialHeight);
@@ -1121,8 +1121,8 @@ void kpMainWindow::updateThumbnail ()
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\t\tconnecting thumbnail::visibilityChange to destroy slot" << endl;
     #endif
-        connect (m_thumbnail, SIGNAL (visibilityChanged (bool)),
-                 this, SLOT (slotDestroyThumbnailIfNotVisible (bool)));
+        connect (m_thumbnail, TQT_SIGNAL (visibilityChanged (bool)),
+                 this, TQT_SLOT (slotDestroyThumbnailIfNotVisible (bool)));
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\t\tDONE" << endl;
     #endif
@@ -1143,8 +1143,8 @@ void kpMainWindow::updateThumbnail ()
         destroyThumbnailView ();
 
 
-        disconnect (m_thumbnail, SIGNAL (visibilityChanged (bool)),
-                    this, SLOT (slotDestroyThumbnailIfNotVisible (bool)));
+        disconnect (m_thumbnail, TQT_SIGNAL (visibilityChanged (bool)),
+                    this, TQT_SLOT (slotDestroyThumbnailIfNotVisible (bool)));
 
         m_thumbnail->deleteLater (); m_thumbnail = 0;
     }

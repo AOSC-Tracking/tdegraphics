@@ -30,9 +30,9 @@ class PMMedia;
 class PMIntEdit;
 class PMFloatEdit;
 class PMColorEdit;
-class QCheckBox;
-class QLabel;
-class QComboBox;
+class TQCheckBox;
+class TQLabel;
+class TQComboBox;
 
 /**
  * Dialog edit class for @ref PMMedia
@@ -45,7 +45,7 @@ public:
    /**
     * Creates a PMMediaEdit with parent and name
     */
-   PMMediaEdit( QWidget* parent, const char* name = 0 );
+   PMMediaEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -68,32 +68,32 @@ protected slots:
 private:
    PMMedia* m_pDisplayedObject;
 
-   QComboBox* m_pMethodEdit;
+   TQComboBox* m_pMethodEdit;
    PMIntEdit* m_pIntervalsEdit;
    PMIntEdit* m_pSamplesMinEdit;
-   QLabel* m_pSamplesMaxLabel;
+   TQLabel* m_pSamplesMaxLabel;
    PMIntEdit* m_pSamplesMaxEdit;
    PMFloatEdit* m_pConfidenceEdit;
    PMFloatEdit* m_pVarianceEdit;
    PMFloatEdit* m_pRatioEdit;
 
-   QWidget* m_pAAWidget;
+   TQWidget* m_pAAWidget;
    PMIntEdit* m_pAALevelEdit;
    PMFloatEdit* m_pAAThresholdEdit;
 
-   QCheckBox* m_pEnableAbsorptionEdit;
+   TQCheckBox* m_pEnableAbsorptionEdit;
    PMColorEdit* m_pAbsorptionEdit;
-   QLabel* m_pAbsorptionLabel;
+   TQLabel* m_pAbsorptionLabel;
 
-   QCheckBox* m_pEnableEmissionEdit;
+   TQCheckBox* m_pEnableEmissionEdit;
    PMColorEdit* m_pEmissionEdit;
-   QLabel* m_pEmissionLabel;
+   TQLabel* m_pEmissionLabel;
 
-   QCheckBox* m_pEnableScatteringEdit;
-   QWidget* m_pScatteringWidget;
-   QComboBox* m_pScatteringTypeEdit;
+   TQCheckBox* m_pEnableScatteringEdit;
+   TQWidget* m_pScatteringWidget;
+   TQComboBox* m_pScatteringTypeEdit;
    PMColorEdit* m_pScatteringColorEdit;
-   QLabel* m_pScatteringEccentricityLabel;
+   TQLabel* m_pScatteringEccentricityLabel;
    PMFloatEdit* m_pScatteringEccentricityEdit;
    PMFloatEdit* m_pScatteringExtinctionEdit;
 };

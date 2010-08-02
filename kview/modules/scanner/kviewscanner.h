@@ -32,14 +32,14 @@ class KViewScanner : public KParts::Plugin
 {
 	Q_OBJECT
 public:
-	KViewScanner( QObject* parent, const char* name, const QStringList & );
+	KViewScanner( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewScanner();
 
 //public slots:
 
 private slots:
 	void slotScan();
-	void slotImgScanned( const QImage & );
+	void slotImgScanned( const TQImage & );
 
 private:
 	KScanDialog * m_pScandlg;

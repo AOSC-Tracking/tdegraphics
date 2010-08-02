@@ -11,8 +11,8 @@
 #define _KPDF_PAGEPAINTER_H_
 
 class KPDFPage;
-class QPainter;
-class QRect;
+class TQPainter;
+class TQRect;
 
 /**
  * @short Paints a KPDFPage to an open painter using given flags.
@@ -30,7 +30,7 @@ class PagePainter
         // 'width' and 'height' the expected size of page contents (used only
         // to pick up an alternative pixmap if the pixmap of 'id' is missing.
         static void paintPageOnPainter( const KPDFPage * page, int id, int flags,
-            QPainter * p, const QRect & limits, int width = -1, int height = -1 );
+            TQPainter * p, const TQRect & limits, int width = -1, int height = -1 );
 };
 
 #endif

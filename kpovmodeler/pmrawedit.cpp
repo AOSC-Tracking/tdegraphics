@@ -19,13 +19,13 @@
 #include "pmrawedit.h"
 #include "pmraw.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qmultilineedit.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqmultilineedit.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 
-PMRawEdit::PMRawEdit( QWidget* parent, const char* name )
+PMRawEdit::PMRawEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -35,16 +35,16 @@ void PMRawEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   topLayout( )->addWidget( new QLabel( i18n( "Povray code:" ), this ) );
-   m_pEdit = new QMultiLineEdit( this );
+   topLayout( )->addWidget( new TQLabel( i18n( "Povray code:" ), this ) );
+   m_pEdit = new TQMultiLineEdit( this );
 #if ( QT_VERSION >= 300 )
    m_pEdit->setTextFormat( Qt::PlainText );
-   m_pEdit->setWordWrap( QTextEdit::NoWrap );
+   m_pEdit->setWordWrap( TQTextEdit::NoWrap );
 #endif
    m_pEdit->setFont( KGlobalSettings::fixedFont( ) );
    topLayout( )->addWidget( m_pEdit, 2 );
    
-   connect( m_pEdit, SIGNAL( textChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pEdit, TQT_SIGNAL( textChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMRawEdit::displayObject( PMObject* o )

@@ -120,12 +120,12 @@ void PMInterior::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMInterior::description( ) const
+TQString PMInterior::description( ) const
 {
    return i18n( "interior" );
 }
 
-void PMInterior::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMInterior::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
    e.setAttribute( "enable_ior", m_enableIor );
@@ -281,7 +281,7 @@ void PMInterior::enableFadePower( bool c )
    }
 }
 
-PMDialogEditBase* PMInterior::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMInterior::editWidget( TQWidget* parent ) const
 {
    return new PMInteriorEdit( parent );
 }

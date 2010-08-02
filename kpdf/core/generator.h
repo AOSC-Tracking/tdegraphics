@@ -10,9 +10,9 @@
 #ifndef _KPDF_GENERATOR_H_
 #define _KPDF_GENERATOR_H_
 
-#include <qobject.h>
-#include <qvaluevector.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqvaluevector.h>
+#include <tqstring.h>
 #include "core/document.h"
 class KListView;
 class KPrinter;
@@ -24,7 +24,7 @@ class PixmapRequest;
  * Many observers may want to request data syncronously or asyncronously.
  * - Sync requests. These should be done in-place.
  * - Async request must be done in real background. That usually means a
- *   thread, such as QThread derived classes.
+ *   thread, such as TQThread derived classes.
  * Once contents are available, they must be immediately stored in the
  * KPDFPage they refer to, and a signal is emitted as soon as storing
  * (even for sync or async queries) has been done.
@@ -45,7 +45,7 @@ class Generator : public QObject
     public:
         /** virtual methods to reimplement **/
         // load a document and fill up the pagesVector
-        virtual bool loadDocument( const QString & fileName, QValueVector< KPDFPage * > & pagesVector ) = 0;
+        virtual bool loadDocument( const TQString & fileName, TQValueVector< KPDFPage * > & pagesVector ) = 0;
 
         // Document description and Table of contents
         virtual const DocumentInfo * generateDocumentInfo() { return 0L; }
@@ -69,7 +69,7 @@ class Generator : public QObject
         // print document using already configured kprinter
         virtual bool print( KPrinter& /*printer*/ ) { return false; }
         // access meta data of the generator
-        virtual QString getMetaData( const QString &/*key*/, const QString &/*option*/ ) { return QString(); }
+        virtual TQString getMetaData( const TQString &/*key*/, const TQString &/*option*/ ) { return TQString(); }
         // tell generator to re-parse configuration and return true if something changed
         virtual bool reparseConfig() { return false; }
 

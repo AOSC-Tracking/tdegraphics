@@ -11,24 +11,24 @@
 #include <klocale.h>
 #include <kprocio.h>
 #include <kprogress.h>
-#include <qapplication.h>
-#include <qframe.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqapplication.h>
+#include <tqframe.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqvariant.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
-#include <qvbox.h>
+#include <tqvbox.h>
 
 /* 
  *  Constructs a fontProgressDialog which is a child of 'parent', with the 
  *  name 'name' and widget flags set to 'f' 
  */
-fontProgressDialog::fontProgressDialog(const QString& helpIndex, const QString& label, const QString& abortTip, const QString& whatsThis, const QString& ttip, QWidget* parent, const QString& name, bool progressbar)
+fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip, TQWidget* parent, const TQString& name, bool progressbar)
   : KDialogBase( parent, "Font Generation Progress Dialog", true, name, Cancel, Cancel, true )
 {
-  setCursor( QCursor( 3 ) );
+  setCursor( TQCursor( 3 ) );
 
   setButtonCancel(KGuiItem(i18n("Abort"), "stop", abortTip));
 
@@ -39,29 +39,29 @@ fontProgressDialog::fontProgressDialog(const QString& helpIndex, const QString& 
   } else
     enableLinkedHelp(false);
 
-  QVBox *page = makeVBoxMainWidget();
+  TQVBox *page = makeVBoxMainWidget();
 
-  TextLabel1   = new QLabel( label, page, "TextLabel2" );
-  TextLabel1->setAlignment( int( QLabel::AlignCenter ) );
-  QWhatsThis::add( TextLabel1, whatsThis );
-  QToolTip::add( TextLabel1, ttip );
+  TextLabel1   = new TQLabel( label, page, "TextLabel2" );
+  TextLabel1->setAlignment( int( TQLabel::AlignCenter ) );
+  TQWhatsThis::add( TextLabel1, whatsThis );
+  TQToolTip::add( TextLabel1, ttip );
 
   if (progressbar) {
     ProgressBar1 = new KProgress( page, "ProgressBar1" );
     ProgressBar1->setFormat(i18n("%v of %m"));
-    QWhatsThis::add( ProgressBar1, whatsThis );
-    QToolTip::add( ProgressBar1, ttip );
+    TQWhatsThis::add( ProgressBar1, whatsThis );
+    TQToolTip::add( ProgressBar1, ttip );
   } else 
     ProgressBar1 = NULL;
   
-  TextLabel2   = new QLabel( "", page, "TextLabel2" );
-  TextLabel2->setAlignment( int( QLabel::AlignCenter ) );
-  QWhatsThis::add( TextLabel2, whatsThis );
-  QToolTip::add( TextLabel2, ttip );
+  TextLabel2   = new TQLabel( "", page, "TextLabel2" );
+  TextLabel2->setAlignment( int( TQLabel::AlignCenter ) );
+  TQWhatsThis::add( TextLabel2, whatsThis );
+  TQToolTip::add( TextLabel2, ttip );
 
   progress = 0;
   procIO = 0;
-  qApp->connect(this, SIGNAL(finished()), this, SLOT(killProcIO()));
+  qApp->connect(this, TQT_SIGNAL(finished()), this, TQT_SLOT(killProcIO()));
 }
 
 
@@ -75,7 +75,7 @@ fontProgressDialog::~fontProgressDialog()
 }
 
 
-void fontProgressDialog::increaseNumSteps(const QString& explanation)
+void fontProgressDialog::increaseNumSteps(const TQString& explanation)
 {
   if (ProgressBar1 != 0)
     ProgressBar1->setProgress(progress++);

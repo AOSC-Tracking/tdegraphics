@@ -25,7 +25,7 @@
 
 #include <kio/jobclasses.h>
 
-#include <qobject.h>
+#include <tqobject.h>
 
 #include "SVGElementImpl.h"
 #include "SVGURIReferenceImpl.h"
@@ -36,7 +36,7 @@
 namespace KSVG
 {
 
-class SVGScriptElementImpl : public QObject,
+class SVGScriptElementImpl : public TQObject,
 							 public SVGElementImpl,
 							 public SVGURIReferenceImpl,
 							 public SVGExternalResourcesRequiredImpl
@@ -54,16 +54,16 @@ public:
 	bool canExecuteScript();
 	bool executeScript(DOM::Node node);
 
-	static bool executeScript(DOM::Node node, SVGDocumentImpl *document, const QString &text);
+	static bool executeScript(DOM::Node node, SVGDocumentImpl *document, const TQString &text);
 
 private slots:
-	void slotData(KIO::Job *, const QByteArray &);
+	void slotData(KIO::Job *, const TQByteArray &);
 	void slotResult(KIO::Job *);
 
 private:
 	KIO::TransferJob *m_job;
-	QByteArray m_data;
-	QString m_text;
+	TQByteArray m_data;
+	TQString m_text;
 	bool m_added;
 
 public:

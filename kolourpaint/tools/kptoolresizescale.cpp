@@ -33,22 +33,22 @@
 
 #include <math.h>
 
-#include <qaccel.h>
-#include <qapplication.h>
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpoint.h>
-#include <qpointarray.h>
-#include <qpushbutton.h>
-#include <qrect.h>
-#include <qsize.h>
-#include <qtoolbutton.h>
-#include <qwhatsthis.h>
-#include <qwmatrix.h>
+#include <tqaccel.h>
+#include <tqapplication.h>
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqgroupbox.h>
+#include <tqhbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqpoint.h>
+#include <tqpointarray.h>
+#include <tqpushbutton.h>
+#include <tqrect.h>
+#include <tqsize.h>
+#include <tqtoolbutton.h>
+#include <tqwhatsthis.h>
+#include <tqwmatrix.h>
 
 #include <kapplication.h>
 #include <kcombobox.h>
@@ -108,7 +108,7 @@ kpToolResizeScaleCommand::~kpToolResizeScaleCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolResizeScaleCommand::name () const
+TQString kpToolResizeScaleCommand::name () const
 {
     if (m_actOnSelection)
     {
@@ -138,7 +138,7 @@ QString kpToolResizeScaleCommand::name () const
         }
     }
 
-    return QString::null;
+    return TQString::null;
 }
 
 // public virtual [base kpCommand]
@@ -178,9 +178,9 @@ void kpToolResizeScaleCommand::setNewHeight (int height)
 
 
 // public
-QSize kpToolResizeScaleCommand::newSize () const
+TQSize kpToolResizeScaleCommand::newSize () const
 {
-    return QSize (newWidth (), newHeight ());
+    return TQSize (newWidth (), newHeight ());
 }
 
 // public virtual
@@ -232,14 +232,14 @@ void kpToolResizeScaleCommand::scaleSelectionRegionWithDocument ()
     const int newY = (int) (m_oldSelection->y () * vertScale);
 
 
-    QPointArray currentPoints = m_oldSelection->points ();
+    TQPointArray currentPoints = m_oldSelection->points ();
     currentPoints.detach ();
 
     currentPoints.translate (-currentPoints.boundingRect ().x (),
                              -currentPoints.boundingRect ().y ());
 
     // TODO: refactor into kpPixmapFX
-    QWMatrix scaleMatrix;
+    TQWMatrix scaleMatrix;
     scaleMatrix.scale (horizScale, vertScale);
     currentPoints = scaleMatrix.map (currentPoints);
 
@@ -247,7 +247,7 @@ void kpToolResizeScaleCommand::scaleSelectionRegionWithDocument ()
         -currentPoints.boundingRect ().x () + newX,
         -currentPoints.boundingRect ().y () + newY);
 
-    document ()->setSelection (kpSelection (currentPoints, QPixmap (),
+    document ()->setSelection (kpSelection (currentPoints, TQPixmap (),
                                             m_oldSelection->transparency ()));
 
 
@@ -283,25 +283,25 @@ void kpToolResizeScaleCommand::execute ()
             }
             else
             {
-                QApplication::setOverrideCursor (Qt::waitCursor);
+                TQApplication::setOverrideCursor (Qt::waitCursor);
                 document ()->selection ()->textResize (m_newWidth, m_newHeight);
 
                 if (m_mainWindow->tool ())
                     m_mainWindow->tool ()->somethingBelowTheCursorChanged ();
 
-                QApplication::restoreOverrideCursor ();
+                TQApplication::restoreOverrideCursor ();
             }
         }
         else
         {
-            QApplication::setOverrideCursor (Qt::waitCursor);
+            TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
             if (m_newWidth < m_oldWidth)
             {
                 m_oldRightPixmap = kpPixmapFX::getPixmapAt (
                     *document ()->pixmap (),
-                    QRect (m_newWidth, 0,
+                    TQRect (m_newWidth, 0,
                         m_oldWidth - m_newWidth, m_oldHeight));
             }
 
@@ -309,27 +309,27 @@ void kpToolResizeScaleCommand::execute ()
             {
                 m_oldBottomPixmap = kpPixmapFX::getPixmapAt (
                     *document ()->pixmap (),
-                    QRect (0, m_newHeight,
+                    TQRect (0, m_newHeight,
                         m_newWidth, m_oldHeight - m_newHeight));
             }
 
             document ()->resize (m_newWidth, m_newHeight, m_backgroundColor);
 
 
-            QApplication::restoreOverrideCursor ();
+            TQApplication::restoreOverrideCursor ();
         }
     }
     else
     {
-        QApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
-        QPixmap oldPixmap = *document ()->pixmap (m_actOnSelection);
+        TQPixmap oldPixmap = *document ()->pixmap (m_actOnSelection);
 
         if (!m_isLosslessScale)
             m_oldPixmap = oldPixmap;
 
-        QPixmap newPixmap = kpPixmapFX::scale (oldPixmap, m_newWidth, m_newHeight,
+        TQPixmap newPixmap = kpPixmapFX::scale (oldPixmap, m_newWidth, m_newHeight,
                                                m_type == SmoothScale);
 
 
@@ -337,12 +337,12 @@ void kpToolResizeScaleCommand::execute ()
         {
             // Save sel border
             m_oldSelection = new kpSelection (*document ()->selection ());
-            m_oldSelection->setPixmap (QPixmap ());
+            m_oldSelection->setPixmap (TQPixmap ());
         }
 
         if (m_actOnSelection)
         {
-            QRect newRect = QRect (m_oldSelection->x (), m_oldSelection->y (),
+            TQRect newRect = TQRect (m_oldSelection->x (), m_oldSelection->y (),
                                    newPixmap.width (), newPixmap.height ());
 
             // Not possible to retain non-rectangular selection borders on scale
@@ -365,7 +365,7 @@ void kpToolResizeScaleCommand::execute ()
         }
 
 
-        QApplication::restoreOverrideCursor ();
+        TQApplication::restoreOverrideCursor ();
     }
 }
 
@@ -395,51 +395,51 @@ void kpToolResizeScaleCommand::unexecute ()
             }
             else
             {
-                QApplication::setOverrideCursor (Qt::waitCursor);
+                TQApplication::setOverrideCursor (Qt::waitCursor);
                 document ()->selection ()->textResize (m_oldWidth, m_oldHeight);
 
                 if (m_mainWindow->tool ())
                     m_mainWindow->tool ()->somethingBelowTheCursorChanged ();
 
-                QApplication::restoreOverrideCursor ();
+                TQApplication::restoreOverrideCursor ();
             }
         }
         else
         {
-            QApplication::setOverrideCursor (Qt::waitCursor);
+            TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
-            QPixmap newPixmap (m_oldWidth, m_oldHeight);
+            TQPixmap newPixmap (m_oldWidth, m_oldHeight);
 
-            kpPixmapFX::setPixmapAt (&newPixmap, QPoint (0, 0),
+            kpPixmapFX::setPixmapAt (&newPixmap, TQPoint (0, 0),
                                     *doc->pixmap ());
 
             if (m_newWidth < m_oldWidth)
             {
                 kpPixmapFX::setPixmapAt (&newPixmap,
-                                        QPoint (m_newWidth, 0),
+                                        TQPoint (m_newWidth, 0),
                                         m_oldRightPixmap);
             }
 
             if (m_newHeight < m_oldHeight)
             {
                 kpPixmapFX::setPixmapAt (&newPixmap,
-                                        QPoint (0, m_newHeight),
+                                        TQPoint (0, m_newHeight),
                                         m_oldBottomPixmap);
             }
 
             doc->setPixmap (newPixmap);
 
 
-            QApplication::restoreOverrideCursor ();
+            TQApplication::restoreOverrideCursor ();
         }
     }
     else
     {
-        QApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
-        QPixmap oldPixmap;
+        TQPixmap oldPixmap;
 
         if (!m_isLosslessScale)
             oldPixmap = m_oldPixmap;
@@ -471,7 +471,7 @@ void kpToolResizeScaleCommand::unexecute ()
         }
 
 
-        QApplication::restoreOverrideCursor ();
+        TQApplication::restoreOverrideCursor ();
     }
 }
 
@@ -505,7 +505,7 @@ double kpToolResizeScaleDialog::s_lastPercentWidth = 100,
 
 
 kpToolResizeScaleDialog::kpToolResizeScaleDialog (kpMainWindow *mainWindow)
-    : KDialogBase ((QWidget *) mainWindow,
+    : KDialogBase ((TQWidget *) mainWindow,
                    0/*name*/,
                    true/*modal*/,
                    i18n ("Resize / Scale")/*caption*/,
@@ -517,7 +517,7 @@ kpToolResizeScaleDialog::kpToolResizeScaleDialog (kpMainWindow *mainWindow)
     s_lastPercentWidth = 100, s_lastPercentHeight = 100;
 
 
-    QWidget *baseWidget = new QWidget (this);
+    TQWidget *baseWidget = new TQWidget (this);
     setMainWidget (baseWidget);
 
 
@@ -526,7 +526,7 @@ kpToolResizeScaleDialog::kpToolResizeScaleDialog (kpMainWindow *mainWindow)
     createDimensionsGroupBox (baseWidget);
 
 
-    QVBoxLayout *baseLayout = new QVBoxLayout (baseWidget, 0/*margin*/, spacingHint ());
+    TQVBoxLayout *baseLayout = new TQVBoxLayout (baseWidget, 0/*margin*/, spacingHint ());
     baseLayout->addWidget (m_actOnBox);
     baseLayout->addWidget (m_operationGroupBox);
     baseLayout->addWidget (m_dimensionsGroupBox);
@@ -558,13 +558,13 @@ kpSelection *kpToolResizeScaleDialog::selection () const
 
 
 // private
-void kpToolResizeScaleDialog::createActOnBox (QWidget *baseWidget)
+void kpToolResizeScaleDialog::createActOnBox (TQWidget *baseWidget)
 {
-    m_actOnBox = new QHBox (baseWidget);
+    m_actOnBox = new TQHBox (baseWidget);
     m_actOnBox->setSpacing (spacingHint () * 2);
 
 
-    m_actOnLabel = new QLabel (i18n ("Ac&t on:"), m_actOnBox);
+    m_actOnLabel = new TQLabel (i18n ("Ac&t on:"), m_actOnBox);
     m_actOnCombo = new KComboBox (m_actOnBox);
 
 
@@ -573,7 +573,7 @@ void kpToolResizeScaleDialog::createActOnBox (QWidget *baseWidget)
     m_actOnCombo->insertItem (i18n ("Entire Image"), Image);
     if (selection ())
     {
-        QString selName = i18n ("Selection");
+        TQString selName = i18n ("Selection");
 
         if (selection ()->isText ())
             selName = i18n ("Text Box");
@@ -591,29 +591,29 @@ void kpToolResizeScaleDialog::createActOnBox (QWidget *baseWidget)
     m_actOnBox->setStretchFactor (m_actOnCombo, 1);
 
 
-    connect (m_actOnCombo, SIGNAL (activated (int)),
-             this, SLOT (slotActOnChanged ()));
+    connect (m_actOnCombo, TQT_SIGNAL (activated (int)),
+             this, TQT_SLOT (slotActOnChanged ()));
 }
 
 
-static QIconSet toolButtonIconSet (const QString &iconName)
+static TQIconSet toolButtonIconSet (const TQString &iconName)
 {
-    QIconSet iconSet = UserIconSet (iconName);
+    TQIconSet iconSet = UserIconSet (iconName);
 
 
     // No "disabled" pixmap is generated by UserIconSet() so generate it
     // ourselves:
 
-    QPixmap disabledIcon = KGlobal::iconLoader ()->iconEffect ()->apply (
+    TQPixmap disabledIcon = KGlobal::iconLoader ()->iconEffect ()->apply (
         UserIcon (iconName),
         KIcon::Toolbar, KIcon::DisabledState);
 
-    const QPixmap iconSetNormalIcon = iconSet.pixmap (QIconSet::Small,
-                                                      QIconSet::Normal);
+    const TQPixmap iconSetNormalIcon = iconSet.pixmap (TQIconSet::Small,
+                                                      TQIconSet::Normal);
 
     // I bet past or future versions of KIconEffect::apply() resize the
     // disabled icon if we claim it's in group KIcon::Toolbar.  So resize
-    // it to match the QIconSet::Normal icon, just in case.
+    // it to match the TQIconSet::Normal icon, just in case.
     disabledIcon = kpPixmapFX::scale (disabledIcon,
                                       iconSetNormalIcon.width (),
                                       iconSetNormalIcon.height (),
@@ -621,29 +621,29 @@ static QIconSet toolButtonIconSet (const QString &iconName)
 
 
     iconSet.setPixmap (disabledIcon,
-                       QIconSet::Small, QIconSet::Disabled);
+                       TQIconSet::Small, TQIconSet::Disabled);
 
     return iconSet;
 }
 
-static void toolButtonSetLook (QToolButton *button,
-                               const QString &iconName,
-                               const QString &name)
+static void toolButtonSetLook (TQToolButton *button,
+                               const TQString &iconName,
+                               const TQString &name)
 {
     button->setIconSet (toolButtonIconSet (iconName));
     button->setUsesTextLabel (true);
     button->setTextLabel (name, false/*no tooltip*/);
-    button->setAccel (QAccel::shortcutKey (name));
-    button->setFocusPolicy (QWidget::StrongFocus);
+    button->setAccel (TQAccel::shortcutKey (name));
+    button->setFocusPolicy (TQWidget::StrongFocus);
     button->setToggleButton (true);
 }
 
 
 // private
-void kpToolResizeScaleDialog::createOperationGroupBox (QWidget *baseWidget)
+void kpToolResizeScaleDialog::createOperationGroupBox (TQWidget *baseWidget)
 {
-    m_operationGroupBox = new QGroupBox (i18n ("Operation"), baseWidget);
-    QWhatsThis::add (m_operationGroupBox,
+    m_operationGroupBox = new TQGroupBox (i18n ("Operation"), baseWidget);
+    TQWhatsThis::add (m_operationGroupBox,
         i18n ("<qt>"
               "<ul>"
                   "<li><b>Resize</b>: The size of the picture will be"
@@ -663,25 +663,25 @@ void kpToolResizeScaleDialog::createOperationGroupBox (QWidget *baseWidget)
               "</qt>"));
 
     // TODO: ALT+R doesn't select the button.
-    m_resizeButton = new QToolButton (m_operationGroupBox);
+    m_resizeButton = new TQToolButton (m_operationGroupBox);
     toolButtonSetLook (m_resizeButton,
-                       QString::fromLatin1 ("resize"),
+                       TQString::fromLatin1 ("resize"),
                        i18n ("&Resize"));
 
-    m_scaleButton = new QToolButton (m_operationGroupBox);
+    m_scaleButton = new TQToolButton (m_operationGroupBox);
     toolButtonSetLook (m_scaleButton,
-                       QString::fromLatin1 ("scale"),
+                       TQString::fromLatin1 ("scale"),
                        i18n ("&Scale"));
 
-    m_smoothScaleButton = new QToolButton (m_operationGroupBox);
+    m_smoothScaleButton = new TQToolButton (m_operationGroupBox);
     toolButtonSetLook (m_smoothScaleButton,
-                       QString::fromLatin1 ("smooth_scale"),
+                       TQString::fromLatin1 ("smooth_scale"),
                        i18n ("S&mooth Scale"));
 
 
-    //m_resizeLabel = new QLabel (i18n ("&Resize"), m_operationGroupBox);
-    //m_scaleLabel = new QLabel (i18n ("&Scale"), m_operationGroupBox);
-    //m_smoothScaleLabel = new QLabel (i18n ("S&mooth scale"), m_operationGroupBox);
+    //m_resizeLabel = new TQLabel (i18n ("&Resize"), m_operationGroupBox);
+    //m_scaleLabel = new TQLabel (i18n ("&Scale"), m_operationGroupBox);
+    //m_smoothScaleLabel = new TQLabel (i18n ("S&mooth scale"), m_operationGroupBox);
 
 
     //m_resizeLabel->setAlignment (m_resizeLabel->alignment () | Qt::ShowPrefix);
@@ -689,7 +689,7 @@ void kpToolResizeScaleDialog::createOperationGroupBox (QWidget *baseWidget)
     //m_smoothScaleLabel->setAlignment (m_smoothScaleLabel->alignment () | Qt::ShowPrefix);
 
 
-    QButtonGroup *resizeScaleButtonGroup = new QButtonGroup (baseWidget);
+    TQButtonGroup *resizeScaleButtonGroup = new TQButtonGroup (baseWidget);
     resizeScaleButtonGroup->setExclusive (true);
     resizeScaleButtonGroup->hide ();
 
@@ -698,7 +698,7 @@ void kpToolResizeScaleDialog::createOperationGroupBox (QWidget *baseWidget)
     resizeScaleButtonGroup->insert (m_smoothScaleButton);
 
 
-    QGridLayout *operationLayout = new QGridLayout (m_operationGroupBox,
+    TQGridLayout *operationLayout = new TQGridLayout (m_operationGroupBox,
                                                     1, 2,
                                                     marginHint () * 2/*don't overlap groupbox title*/,
                                                     spacingHint ());
@@ -713,52 +713,52 @@ void kpToolResizeScaleDialog::createOperationGroupBox (QWidget *baseWidget)
     //operationLayout->addWidget (m_smoothScaleLabel, 1, 2, Qt::AlignCenter);
 
 
-    connect (m_resizeButton, SIGNAL (toggled (bool)),
-             this, SLOT (slotTypeChanged ()));
-    connect (m_scaleButton, SIGNAL (toggled (bool)),
-             this, SLOT (slotTypeChanged ()));
-    connect (m_smoothScaleButton, SIGNAL (toggled (bool)),
-             this, SLOT (slotTypeChanged ()));
+    connect (m_resizeButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotTypeChanged ()));
+    connect (m_scaleButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotTypeChanged ()));
+    connect (m_smoothScaleButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotTypeChanged ()));
 }
 
 // private
-void kpToolResizeScaleDialog::createDimensionsGroupBox (QWidget *baseWidget)
+void kpToolResizeScaleDialog::createDimensionsGroupBox (TQWidget *baseWidget)
 {
-    m_dimensionsGroupBox = new QGroupBox (i18n ("Dimensions"), baseWidget);
+    m_dimensionsGroupBox = new TQGroupBox (i18n ("Dimensions"), baseWidget);
 
-    QLabel *widthLabel = new QLabel (i18n ("Width:"), m_dimensionsGroupBox);
+    TQLabel *widthLabel = new TQLabel (i18n ("Width:"), m_dimensionsGroupBox);
     widthLabel->setAlignment (widthLabel->alignment () | Qt::AlignHCenter);
-    QLabel *heightLabel = new QLabel (i18n ("Height:"), m_dimensionsGroupBox);
+    TQLabel *heightLabel = new TQLabel (i18n ("Height:"), m_dimensionsGroupBox);
     heightLabel->setAlignment (heightLabel->alignment () | Qt::AlignHCenter);
 
-    QLabel *originalLabel = new QLabel (i18n ("Original:"), m_dimensionsGroupBox);
+    TQLabel *originalLabel = new TQLabel (i18n ("Original:"), m_dimensionsGroupBox);
     m_originalWidthInput = new KIntNumInput (
         document ()->width ((bool) selection ()),
         m_dimensionsGroupBox);
-    QLabel *xLabel0 = new QLabel (i18n ("x"), m_dimensionsGroupBox);
+    TQLabel *xLabel0 = new TQLabel (i18n ("x"), m_dimensionsGroupBox);
     m_originalHeightInput = new KIntNumInput (
         document ()->height ((bool) selection ()),
         m_dimensionsGroupBox);
 
-    QLabel *newLabel = new QLabel (i18n ("&New:"), m_dimensionsGroupBox);
+    TQLabel *newLabel = new TQLabel (i18n ("&New:"), m_dimensionsGroupBox);
     m_newWidthInput = new KIntNumInput (m_dimensionsGroupBox);
-    QLabel *xLabel1 = new QLabel (i18n ("x"), m_dimensionsGroupBox);
+    TQLabel *xLabel1 = new TQLabel (i18n ("x"), m_dimensionsGroupBox);
     m_newHeightInput = new KIntNumInput (m_dimensionsGroupBox);
 
-    QLabel *percentLabel = new QLabel (i18n ("&Percent:"), m_dimensionsGroupBox);
+    TQLabel *percentLabel = new TQLabel (i18n ("&Percent:"), m_dimensionsGroupBox);
     m_percentWidthInput = new KDoubleNumInput (0.01/*lower*/, 1000000/*upper*/,
                                                100/*value*/, 1/*step*/,
                                                2/*precision*/,
                                                m_dimensionsGroupBox);
     m_percentWidthInput->setSuffix (i18n ("%"));
-    QLabel *xLabel2 = new QLabel (i18n ("x"), m_dimensionsGroupBox);
+    TQLabel *xLabel2 = new TQLabel (i18n ("x"), m_dimensionsGroupBox);
     m_percentHeightInput = new KDoubleNumInput (0.01/*lower*/, 1000000/*upper*/,
                                                 100/*value*/, 1/*step*/,
                                                 2/*precision*/,
                                                 m_dimensionsGroupBox);
     m_percentHeightInput->setSuffix (i18n ("%"));
 
-    m_keepAspectRatioCheckBox = new QCheckBox (i18n ("Keep &aspect ratio"),
+    m_keepAspectRatioCheckBox = new TQCheckBox (i18n ("Keep &aspect ratio"),
                                                m_dimensionsGroupBox);
 
 
@@ -771,7 +771,7 @@ void kpToolResizeScaleDialog::createDimensionsGroupBox (QWidget *baseWidget)
     percentLabel->setBuddy (m_percentWidthInput);
 
 
-    QGridLayout *dimensionsLayout = new QGridLayout (m_dimensionsGroupBox,
+    TQGridLayout *dimensionsLayout = new TQGridLayout (m_dimensionsGroupBox,
                                                      5, 4, marginHint () * 2, spacingHint ());
     dimensionsLayout->setColStretch (1/*column*/, 1);
     dimensionsLayout->setColStretch (3/*column*/, 1);
@@ -800,18 +800,18 @@ void kpToolResizeScaleDialog::createDimensionsGroupBox (QWidget *baseWidget)
     dimensionsLayout->setRowSpacing (4/*row*/, dimensionsLayout->rowSpacing (4) * 2);
 
 
-    connect (m_newWidthInput, SIGNAL (valueChanged (int)),
-             this, SLOT (slotWidthChanged (int)));
-    connect (m_newHeightInput, SIGNAL (valueChanged (int)),
-             this, SLOT (slotHeightChanged (int)));
+    connect (m_newWidthInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SLOT (slotWidthChanged (int)));
+    connect (m_newHeightInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SLOT (slotHeightChanged (int)));
 
-    connect (m_percentWidthInput, SIGNAL (valueChanged (double)),
-             this, SLOT (slotPercentWidthChanged (double)));
-    connect (m_percentHeightInput, SIGNAL (valueChanged (double)),
-             this, SLOT (slotPercentHeightChanged (double)));
+    connect (m_percentWidthInput, TQT_SIGNAL (valueChanged (double)),
+             this, TQT_SLOT (slotPercentWidthChanged (double)));
+    connect (m_percentHeightInput, TQT_SIGNAL (valueChanged (double)),
+             this, TQT_SLOT (slotPercentHeightChanged (double)));
 
-    connect (m_keepAspectRatioCheckBox, SIGNAL (toggled (bool)),
-             this, SLOT (setKeepAspectRatio (bool)));
+    connect (m_keepAspectRatioCheckBox, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (setKeepAspectRatio (bool)));
 }
 
 
@@ -1100,7 +1100,7 @@ void kpToolResizeScaleDialog::slotOk ()
     }
 
 
-    QString message, caption, continueButtonText;
+    TQString message, caption, continueButtonText;
 
     // Note: If eText, can't Scale nor SmoothScale.
     //       If eSelection, can't Resize.

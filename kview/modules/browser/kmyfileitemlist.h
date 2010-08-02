@@ -20,18 +20,18 @@
 #ifndef __kmyfileitemlist_h__
 #define __kmyfileitemlist_h__
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 class KFileItem;
 
-class KMyFileItemList : public QPtrList<KFileItem>
+class KMyFileItemList : public TQPtrList<KFileItem>
 {
 	public:
 		KMyFileItemList();
-		KMyFileItemList( const QPtrList<KFileItem> & );
-		KMyFileItemList & operator=( const QPtrList<KFileItem> & );
+		KMyFileItemList( const TQPtrList<KFileItem> & );
+		KMyFileItemList & operator=( const TQPtrList<KFileItem> & );
 		
 	protected:
-		virtual int compareItems( QPtrCollection::Item item1, QPtrCollection::Item item2 );
+		virtual int compareItems( TQPtrCollection::Item item1, TQPtrCollection::Item item2 );
 };
 
 // vim:sw=4:ts=4

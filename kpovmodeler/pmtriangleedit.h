@@ -28,9 +28,9 @@
 
 class PMTriangle;
 class PMVectorEdit;
-class QCheckBox;
-class QLabel;
-class QPushButton;
+class TQCheckBox;
+class TQLabel;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMTriangle
@@ -43,7 +43,7 @@ public:
    /**
     * Creates a PMTriangleEdit with parent and name
     */
-   PMTriangleEdit( QWidget* parent, const char* name = 0 );
+   PMTriangleEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -65,12 +65,12 @@ private:
    PMTriangle* m_pDisplayedObject;
    PMVectorEdit* m_pPoint[3];
    PMVectorEdit* m_pNormal[3];
-   QLabel* m_pNormalLabel[3];
-   QCheckBox* m_pSmooth;
-   QLabel* m_pUVVectorLabel[3];
+   TQLabel* m_pNormalLabel[3];
+   TQCheckBox* m_pSmooth;
+   TQLabel* m_pUVVectorLabel[3];
    PMVectorEdit* m_pUVVector[3];
-   QCheckBox* m_pUVEnabled;
-   QPushButton* m_pMirror;
+   TQCheckBox* m_pUVEnabled;
+   TQPushButton* m_pMirror;
 };
 
 

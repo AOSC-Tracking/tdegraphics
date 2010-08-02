@@ -36,7 +36,7 @@
 
 
 kpTempPixmap::kpTempPixmap (bool isBrush, RenderMode renderMode,
-                            const QPoint &topLeft, const QPixmap &pixmap)
+                            const TQPoint &topLeft, const TQPixmap &pixmap)
     : m_isBrush (isBrush),
       m_renderMode (renderMode),
       m_topLeft (topLeft),
@@ -83,13 +83,13 @@ kpTempPixmap::RenderMode kpTempPixmap::renderMode () const
 }
 
 // public
-QPoint kpTempPixmap::topLeft () const
+TQPoint kpTempPixmap::topLeft () const
 {
     return m_topLeft;
 }
 
 // public
-QPixmap kpTempPixmap::pixmap () const
+TQPixmap kpTempPixmap::pixmap () const
 {
     return m_pixmap;
 }
@@ -102,9 +102,9 @@ bool kpTempPixmap::isVisible (const kpViewManager *vm) const
 }
 
 // public
-QRect kpTempPixmap::rect () const
+TQRect kpTempPixmap::rect () const
 {
-    return QRect (m_topLeft.x (), m_topLeft.y (),
+    return TQRect (m_topLeft.x (), m_topLeft.y (),
                   m_pixmap.width (), m_pixmap.height ());
 }
 
@@ -129,7 +129,7 @@ bool kpTempPixmap::mayChangeDocumentMask () const
 }
 
 // public
-void kpTempPixmap::paint (QPixmap *destPixmap, const QRect &docRect) const
+void kpTempPixmap::paint (TQPixmap *destPixmap, const TQRect &docRect) const
 {
 #define PARAMS destPixmap, m_topLeft - docRect.topLeft (), m_pixmap
     switch (m_renderMode)

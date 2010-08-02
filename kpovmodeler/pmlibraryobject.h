@@ -23,16 +23,16 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqmap.h>
+#include <tqvaluelist.h>
 #include <kstaticdeleter.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 class KURL;
 class KArchive;
 class KTar;
-class QImage;
+class TQImage;
 
 /**
  * This class implements a library object.
@@ -67,19 +67,19 @@ public:
    /** 
     * Name of the library object. 
     */
-   QString name( ) const { return m_name; }
+   TQString name( ) const { return m_name; }
    /** 
     * Textual description of the library object. 
     */
-   QString description( ) const { return m_description; }
+   TQString description( ) const { return m_description; }
    /** 
     * List of keywords for search of the library object. 
     */
-   QString keywords( ) const { return m_keywords; }
+   TQString keywords( ) const { return m_keywords; }
    /** 
     * Graphical Preview. 
     */
-   QImage* preview( );
+   TQImage* preview( );
    /**
     * True is the preview has been loaded.
     */
@@ -87,34 +87,34 @@ public:
    /** 
     * Objects for the scene 
     */
-   QByteArray* objects( );
+   TQByteArray* objects( );
    bool areObjectsLoaded( ) const { return m_objectsLoaded; }
 
    /** 
     * Set the library object name 
     */
-   void setName( const QString& str );
+   void setName( const TQString& str );
    /** 
     * Set the library object description 
     */
-   void setDescription( const QString& str );
+   void setDescription( const TQString& str );
    /** 
     * Set the library object keywords 
     */
-   void setKeywords( const QString& str );
+   void setKeywords( const TQString& str );
    /** 
     * Set the preview image 
     */
-   void setPreview( const QImage& img );
+   void setPreview( const TQImage& img );
    /** 
     * Set the object data 
     */
-   void setObjects( const QByteArray& obj );
+   void setObjects( const TQByteArray& obj );
 
    /** 
     * Save the library object to a file 
     */
-   void save( const QString& fileName );
+   void save( const TQString& fileName );
 
 private:
    void loadLibraryInfo( );
@@ -124,13 +124,13 @@ private:
 
    bool        m_previewLoaded;
    bool        m_objectsLoaded;
-   QString     m_name;
-   QString     m_description;
-   QString     m_keywords;
+   TQString     m_name;
+   TQString     m_description;
+   TQString     m_keywords;
    KTar*       m_data;
-   QImage*     m_preview;
-   QByteArray* m_objects;
-   QStringList m_extraFiles;
+   TQImage*     m_preview;
+   TQByteArray* m_objects;
+   TQStringList m_extraFiles;
 };
 
 #endif

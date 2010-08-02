@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmviewstructure.h"
 
-#include <qdom.h>
+#include <tqdom.h>
 
 PMMetaObject* PMCompositeObject::s_pMetaObject = 0;
 
@@ -279,7 +279,7 @@ bool PMCompositeObject::takeChild( uint i )
    return false;
 }
 
-void PMCompositeObject::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMCompositeObject::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    PMObject* tmp;
 

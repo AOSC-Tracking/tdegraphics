@@ -29,14 +29,14 @@
 #ifndef __kptoolpen_h__
 #define __kptoolpen_h__
 
-#include <qpixmap.h>
-#include <qrect.h>
+#include <tqpixmap.h>
+#include <tqrect.h>
 
 #include <kpcommandhistory.h>
 #include <kptool.h>
 
-class QPoint;
-class QString;
+class TQPoint;
+class TQString;
 
 class kpColor;
 class kpMainWindow;
@@ -71,7 +71,7 @@ public:
         ColorWasher = WashesPixmaps | SquareBrushes | SwappedColors
     };
 
-    kpToolPen (Mode mode, const QString &text, const QString &description,
+    kpToolPen (Mode mode, const TQString &text, const TQString &description,
                int key,
                kpMainWindow *mainWindow, const char *name);
     kpToolPen (kpMainWindow *mainWindow);
@@ -80,45 +80,45 @@ public:
     void setMode (Mode mode);
 
 private:
-    QString haventBegunDrawUserMessage () const;
+    TQString haventBegunDrawUserMessage () const;
     
 public:
     virtual void begin ();
     virtual void end ();
 
     virtual void beginDraw ();
-    virtual void hover (const QPoint &point);
+    virtual void hover (const TQPoint &point);
     virtual void globalDraw ();
-    virtual void draw (const QPoint &thisPoint, const QPoint &lastPoint, const QRect &);
+    virtual void draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const TQRect &);
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
-    virtual void endDraw (const QPoint &, const QRect &);
+    virtual void endDraw (const TQPoint &, const TQRect &);
 
 private slots:
     virtual void slotForegroundColorChanged (const kpColor &col);
     virtual void slotBackgroundColorChanged (const kpColor &col);
 
-    void slotBrushChanged (const QPixmap &pixmap, bool isDiagonalLine);
+    void slotBrushChanged (const TQPixmap &pixmap, bool isDiagonalLine);
     void slotEraserSizeChanged (int size);
 
 private:
-    bool wash (QPainter *painter, QPainter *maskPainter,
-               const QImage &image,
+    bool wash (TQPainter *painter, TQPainter *maskPainter,
+               const TQImage &image,
                const kpColor &colorToReplace,
-               const QRect &imageRect, int plotx, int ploty);
-    bool wash (QPainter *painter, QPainter *maskPainter,
-               const QImage &image,
+               const TQRect &imageRect, int plotx, int ploty);
+    bool wash (TQPainter *painter, TQPainter *maskPainter,
+               const TQImage &image,
                const kpColor &colorToReplace,
-               const QRect &imageRect, const QRect &drawRect);
+               const TQRect &imageRect, const TQRect &drawRect);
 
     kpColor color (int which);
 
-    QPoint hotPoint () const;
-    QPoint hotPoint (int x, int y) const;
-    QPoint hotPoint (const QPoint &point) const;
-    QRect hotRect () const;
-    QRect hotRect (int x, int y) const;
-    QRect hotRect (const QPoint &point) const;
+    TQPoint hotPoint () const;
+    TQPoint hotPoint (int x, int y) const;
+    TQPoint hotPoint (const TQPoint &point) const;
+    TQRect hotRect () const;
+    TQRect hotRect (int x, int y) const;
+    TQRect hotRect (const TQPoint &point) const;
 
     Mode m_mode;
 
@@ -126,8 +126,8 @@ private:
 
     kpToolWidgetBrush *m_toolWidgetBrush;
     kpToolWidgetEraserSize *m_toolWidgetEraserSize;
-    QPixmap m_brushPixmap [2];
-    QPixmap m_cursorPixmap;
+    TQPixmap m_brushPixmap [2];
+    TQPixmap m_cursorPixmap;
     bool m_brushIsDiagonalLine;
 
     kpToolPenCommand *m_currentCommand;
@@ -136,7 +136,7 @@ private:
 class kpToolPenCommand : public kpNamedCommand
 {
 public:
-    kpToolPenCommand (const QString &name, kpMainWindow *mainWindow);
+    kpToolPenCommand (const TQString &name, kpMainWindow *mainWindow);
     virtual ~kpToolPenCommand ();
 
     virtual int size () const;
@@ -145,16 +145,16 @@ public:
     virtual void unexecute ();
 
     // interface for KToolPen
-    void updateBoundingRect (const QPoint &point);
-    void updateBoundingRect (const QRect &rect);
+    void updateBoundingRect (const TQPoint &point);
+    void updateBoundingRect (const TQRect &rect);
     void finalize ();
     void cancel ();
 
 private:
     void swapOldAndNew ();
 
-    QPixmap m_pixmap;
-    QRect m_boundingRect;
+    TQPixmap m_pixmap;
+    TQRect m_boundingRect;
 };
 
 #endif  // __kptoolpen_h__

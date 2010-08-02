@@ -30,11 +30,11 @@
 
 #include <kpeffectflatten.h>
 
-#include <qcheckbox.h>
-#include <qimage.h>
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qvbox.h>
+#include <tqcheckbox.h>
+#include <tqimage.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
+#include <tqvbox.h>
 
 #include <kcolorbutton.h>
 #include <kconfig.h>
@@ -52,8 +52,8 @@
 // kpEffectFlattenCommand
 //
 
-kpEffectFlattenCommand::kpEffectFlattenCommand (const QColor &color1,
-                                                const QColor &color2,
+kpEffectFlattenCommand::kpEffectFlattenCommand (const TQColor &color1,
+                                                const TQColor &color2,
                                                 bool actOnSelection,
                                                 kpMainWindow *mainWindow)
     : kpColorEffectCommand (i18n ("Flatten"), actOnSelection, mainWindow),
@@ -67,29 +67,29 @@ kpEffectFlattenCommand::~kpEffectFlattenCommand ()
 
 
 // public static
-void kpEffectFlattenCommand::apply (QPixmap *destPixmapPtr,
-                                    const QColor &color1, const QColor &color2)
+void kpEffectFlattenCommand::apply (TQPixmap *destPixmapPtr,
+                                    const TQColor &color1, const TQColor &color2)
 {
     if (!destPixmapPtr)
         return;
 
-    QImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
+    TQImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
     apply (&image, color1, color2);
     *destPixmapPtr = kpPixmapFX::convertToPixmap (image);
 }
 
 // public static
-QPixmap kpEffectFlattenCommand::apply (const QPixmap &pm,
-                                       const QColor &color1, const QColor &color2)
+TQPixmap kpEffectFlattenCommand::apply (const TQPixmap &pm,
+                                       const TQColor &color1, const TQColor &color2)
 {
-    QImage image = kpPixmapFX::convertToImage (pm);
+    TQImage image = kpPixmapFX::convertToImage (pm);
     apply (&image, color1, color2);
     return kpPixmapFX::convertToPixmap (image);
 }
 
 // public static
-void kpEffectFlattenCommand::apply (QImage *destImagePtr,
-                                    const QColor &color1, const QColor &color2)
+void kpEffectFlattenCommand::apply (TQImage *destImagePtr,
+                                    const TQColor &color1, const TQColor &color2)
 {
     if (!destImagePtr)
         return;
@@ -98,10 +98,10 @@ void kpEffectFlattenCommand::apply (QImage *destImagePtr,
 }
 
 // public static
-QImage kpEffectFlattenCommand::apply (const QImage &img,
-                                      const QColor &color1, const QColor &color2)
+TQImage kpEffectFlattenCommand::apply (const TQImage &img,
+                                      const TQColor &color1, const TQColor &color2)
 {
-    QImage retImage = img;
+    TQImage retImage = img;
     apply (&retImage, color1, color2);
     return retImage;
 }
@@ -112,7 +112,7 @@ QImage kpEffectFlattenCommand::apply (const QImage &img,
 //
 
 // protected virtual [base kpColorEffectCommand]
-QPixmap kpEffectFlattenCommand::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectFlattenCommand::applyColorEffect (const TQPixmap &pixmap)
 {
     return apply (pixmap, m_color1, m_color2);
 }
@@ -126,12 +126,12 @@ QPixmap kpEffectFlattenCommand::applyColorEffect (const QPixmap &pixmap)
 // Don't initialise globally when we probably don't have a colour
 // allocation context.  This way, the colours aren't sometimes invalid
 // (e.g. at 8-bit).
-QColor kpEffectFlattenWidget::s_lastColor1;
-QColor kpEffectFlattenWidget::s_lastColor2;
+TQColor kpEffectFlattenWidget::s_lastColor1;
+TQColor kpEffectFlattenWidget::s_lastColor2;
 
 kpEffectFlattenWidget::kpEffectFlattenWidget (bool actOnSelection,
                                               kpMainWindow *mainWindow,
-                                              QWidget *parent,
+                                              TQWidget *parent,
                                               const char *name)
     : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
@@ -150,9 +150,9 @@ kpEffectFlattenWidget::kpEffectFlattenWidget (bool actOnSelection,
     }
 
 
-    m_enableCheckBox = new QCheckBox (i18n ("E&nable"), this);
+    m_enableCheckBox = new TQCheckBox (i18n ("E&nable"), this);
 
-    QVBox *colorButtonContainer = new QVBox (this);
+    TQVBox *colorButtonContainer = new TQVBox (this);
     colorButtonContainer->setMargin (KDialog::marginHint () / 2);
     colorButtonContainer->setSpacing (spacingHint ());
     m_color1Button = new KColorButton (s_lastColor1, colorButtonContainer);
@@ -163,18 +163,18 @@ kpEffectFlattenWidget::kpEffectFlattenWidget (bool actOnSelection,
     m_color2Button->setEnabled (false);
 
 
-    QVBoxLayout *lay = new QVBoxLayout (this, marginHint (), spacingHint ());
+    TQVBoxLayout *lay = new TQVBoxLayout (this, marginHint (), spacingHint ());
     lay->addWidget (m_enableCheckBox);
     lay->addWidget (colorButtonContainer);
 
 
-    connect (m_enableCheckBox, SIGNAL (toggled (bool)),
-             this, SLOT (slotEnableChanged (bool)));
+    connect (m_enableCheckBox, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotEnableChanged (bool)));
 
-    connect (m_color1Button, SIGNAL (changed (const QColor &)),
-             this, SIGNAL (settingsChanged ()));
-    connect (m_color2Button, SIGNAL (changed (const QColor &)),
-             this, SIGNAL (settingsChanged ()));
+    connect (m_color1Button, TQT_SIGNAL (changed (const TQColor &)),
+             this, TQT_SIGNAL (settingsChanged ()));
+    connect (m_color2Button, TQT_SIGNAL (changed (const TQColor &)),
+             this, TQT_SIGNAL (settingsChanged ()));
 }
 
 kpEffectFlattenWidget::~kpEffectFlattenWidget ()
@@ -193,13 +193,13 @@ kpEffectFlattenWidget::~kpEffectFlattenWidget ()
 
 
 // public
-QColor kpEffectFlattenWidget::color1 () const
+TQColor kpEffectFlattenWidget::color1 () const
 {
     return m_color1Button->color ();
 }
 
 // public
-QColor kpEffectFlattenWidget::color2 () const
+TQColor kpEffectFlattenWidget::color2 () const
 {
     return m_color2Button->color ();
 }
@@ -210,7 +210,7 @@ QColor kpEffectFlattenWidget::color2 () const
 //
 
 // public virtual [base kpColorEffectWidget]
-QString kpEffectFlattenWidget::caption () const
+TQString kpEffectFlattenWidget::caption () const
 {
     return i18n ("Colors");
 }
@@ -223,7 +223,7 @@ bool kpEffectFlattenWidget::isNoOp () const
 }
 
 // public virtual [base kpColorEffectWidget]
-QPixmap kpEffectFlattenWidget::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectFlattenWidget::applyColorEffect (const TQPixmap &pixmap)
 {
 #if DEBUG_KP_EFFECT_FLATTEN
     kdDebug () << "kpEffectFlattenWidget::applyColorEffect() nop="

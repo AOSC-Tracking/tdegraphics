@@ -24,8 +24,8 @@
 #include <map>
 #include <string>
 
-#include <qdict.h>
-#include <qptrlist.h>
+#include <tqdict.h>
+#include <tqptrlist.h>
 
 #include <dom/dom_string.h>
 
@@ -33,8 +33,8 @@
 
 #include "ksvg_lookup.h"
 
-class QKeyEvent;
-class QXmlAttributes;
+class TQKeyEvent;
+class TQXmlAttributes;
 
 namespace KJS
 {
@@ -70,8 +70,8 @@ public:
 	bool hasAttribute(const DOM::DOMString &name);
 	bool hasAttributes();
 
-	QDict<DOM::DOMString> &attributes();
-	void setApplyAttribute(const QString &name, const QString &value);
+	TQDict<DOM::DOMString> &attributes();
+	void setApplyAttribute(const TQString &name, const TQString &value);
 
 	void setId(DOM::DOMString);
 	DOM::DOMString id() const;
@@ -85,11 +85,11 @@ public:
 	SVGSVGElementImpl *ownerSVGElement() const;
 	SVGElementImpl *viewportElement() const;
 
-	void setAttributes(const QXmlAttributes &);
+	void setAttributes(const TQXmlAttributes &);
 	virtual void setAttributes();
 	void setAttributes(bool deep);
 
-	QString collectText();
+	TQString collectText();
 
 	void setOwnerDoc(SVGDocumentImpl *doc);
 	SVGDocumentImpl *ownerDoc() const;
@@ -101,7 +101,7 @@ public:
 	bool dispatchEvent(int id, bool canBubbleArg, bool cancelableArg);
 	bool dispatchEvent(SVGEventImpl *evt, bool tempEvent);
 	bool dispatchMouseEvent(int id, bool canBubbleArg, bool cancelableArg, long detailArg, long screenXArg, long screenYArg, long clientXArg, long clientYArg, bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, unsigned short buttonArg, SVGElementImpl *relatedTargetArg);
-	bool dispatchKeyEvent(QKeyEvent *ke);
+	bool dispatchKeyEvent(TQKeyEvent *ke);
 
 	void setEventListener(int id, SVGEventListener *listener);
 	bool hasEventListener(int id, bool local);
@@ -110,7 +110,7 @@ public:
 	void setupEventListeners(SVGDocumentImpl *doc, SVGDocumentImpl *newDoc);
 
 	// Use with care! Internal only.
-	const QPtrList<SVGRegisteredEventListener> &eventListeners() { return m_eventListeners; }
+	const TQPtrList<SVGRegisteredEventListener> &eventListeners() { return m_eventListeners; }
 	
 	void handleLocalEvents(SVGEventImpl *evt, bool useCapture);
 	virtual void defaultEventHandler(SVGEventImpl *evt);
@@ -121,7 +121,7 @@ public:
 	bool focus() { return m_focus; }
 	void setFocus(bool v) { m_focus = v; }
 
-	virtual bool prepareMouseEvent(const QPoint &, const QPoint &, SVGMouseEventImpl *);
+	virtual bool prepareMouseEvent(const TQPoint &, const TQPoint &, SVGMouseEventImpl *);
 
 	virtual void createItem(KSVGCanvas *c = 0) { Q_UNUSED(c); }
 	virtual void removeItem(KSVGCanvas *c) { Q_UNUSED(c); }
@@ -183,7 +183,7 @@ public:
 	static SVGElementImpl::Registrar<Class> Class##Registrar(Tag);
 
 protected:
-	void gotError(const QString &errorDesc);
+	void gotError(const TQString &errorDesc);
 
 private:
 	SVGSVGElementImpl *m_ownerSVGElement;
@@ -193,8 +193,8 @@ private:
 	bool m_mouseOver : 1;
 	bool m_focus : 1;
 
-	QPtrList<SVGRegisteredEventListener> m_eventListeners;
-	QDict<DOM::DOMString> m_attributes;
+	TQPtrList<SVGRegisteredEventListener> m_eventListeners;
+	TQDict<DOM::DOMString> m_attributes;
 
 public:
 	KSVG_BASECLASS_GET

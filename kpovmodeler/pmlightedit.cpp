@@ -22,14 +22,14 @@
 #include "pmlineedits.h"
 #include "pmcoloredit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
 
 #include <klocale.h>
 
-PMLightEdit::PMLightEdit( QWidget* parent, const char* name )
+PMLightEdit::PMLightEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -41,7 +41,7 @@ void PMLightEdit::createTopWidgets( )
    
    m_pLocation = new PMVectorEdit( "x", "y", "z", this );
    m_pColor = new PMColorEdit( false, this );
-   m_pType = new QComboBox( false, this );
+   m_pType = new TQComboBox( false, this );
    m_pType->insertItem( i18n( "Point Light" ) );
    m_pType->insertItem( i18n( "Spot Light" ) );
    m_pType->insertItem( i18n( "Cylindrical Light" ) );
@@ -49,74 +49,74 @@ void PMLightEdit::createTopWidgets( )
 
    m_pRadius = new PMFloatEdit( this );
    m_pRadius->setValidation( false, 0, true, 90 );
-   m_pRadiusLabel = new QLabel( i18n( "Radius:" ), this );
+   m_pRadiusLabel = new TQLabel( i18n( "Radius:" ), this );
    
    m_pFalloff = new PMFloatEdit( this );
    m_pFalloff->setValidation( false, 0, true, 90 );
-   m_pFalloffLabel = new QLabel( i18n( "Falloff:" ), this );
+   m_pFalloffLabel = new TQLabel( i18n( "Falloff:" ), this );
    
    m_pTightness = new PMFloatEdit( this );
    m_pTightness->setValidation( false, 0, true, 90 );
-   m_pTightnessLabel = new QLabel( i18n( "Tightness:" ), this );
+   m_pTightnessLabel = new TQLabel( i18n( "Tightness:" ), this );
 
    m_pPointAt = new PMVectorEdit( "x", "y", "z", this );
-   m_pPointAtLabel = new QLabel( i18n( "Point at:" ), this );
+   m_pPointAtLabel = new TQLabel( i18n( "Point at:" ), this );
 
-   m_pParallel = new QCheckBox( i18n( "Parallel" ), this );
+   m_pParallel = new TQCheckBox( i18n( "Parallel" ), this );
 
-   m_pAreaLight = new QCheckBox( i18n( "Area light" ), this );
+   m_pAreaLight = new TQCheckBox( i18n( "Area light" ), this );
 
-   m_pAreaTypeLabel = new QLabel( i18n ( "Area type:" ), this );
-   m_pAreaType = new QComboBox( false, this );
+   m_pAreaTypeLabel = new TQLabel( i18n ( "Area type:" ), this );
+   m_pAreaType = new TQComboBox( false, this );
    m_pAreaType->insertItem( i18n( "Rectangular" ) );
    m_pAreaType->insertItem( i18n( "Circular" ) );
 
    m_pAxis1 = new PMVectorEdit( "x", "y", "z", this );
-   m_pAxis1Label = new QLabel( i18n( "Axis 1:" ), this );
+   m_pAxis1Label = new TQLabel( i18n( "Axis 1:" ), this );
    m_pAxis2 = new PMVectorEdit( "x", "y", "z", this );
-   m_pAxis2Label = new QLabel( i18n( "Axis 2:" ), this );
+   m_pAxis2Label = new TQLabel( i18n( "Axis 2:" ), this );
    
    m_pSize1 = new PMIntEdit( this );
    m_pSize1->setValidation( true, 1, true, 50 );
-   m_pSize1Label = new QLabel( i18n( "Size 1:" ), this );
+   m_pSize1Label = new TQLabel( i18n( "Size 1:" ), this );
    m_pSize2 = new PMIntEdit( this );
    m_pSize2->setValidation( true, 1, true, 50 );
-   m_pSize2Label = new QLabel( i18n( "Size 2:" ), this );
+   m_pSize2Label = new TQLabel( i18n( "Size 2:" ), this );
 
    m_pAdaptive = new PMIntEdit( this );
    m_pAdaptive->setValidation( true, 0, false, 0 );
-   m_pAdaptiveLabel = new QLabel( i18n( "Adaptive:" ), this );
-   m_pOrient = new QCheckBox( i18n( "Orient" ), this );
-   m_pJitter = new QCheckBox( i18n( "Jitter" ), this );
+   m_pAdaptiveLabel = new TQLabel( i18n( "Adaptive:" ), this );
+   m_pOrient = new TQCheckBox( i18n( "Orient" ), this );
+   m_pJitter = new TQCheckBox( i18n( "Jitter" ), this );
 
-   m_pFading = new QCheckBox( i18n( "Fading" ), this );
+   m_pFading = new TQCheckBox( i18n( "Fading" ), this );
    
    m_pFadeDistance = new PMFloatEdit( this );
    m_pFadeDistance->setValidation( true, 0, false, 0 );
-   m_pFadeDistanceLabel = new QLabel( i18n( "Fade distance:" ), this );
+   m_pFadeDistanceLabel = new TQLabel( i18n( "Fade distance:" ), this );
 
    m_pFadePower = new PMIntEdit( this );
    m_pFadePower->setValidation( true, 0, false, 0 );
-   m_pFadePowerLabel = new QLabel( i18n( "Fade power:" ), this );
+   m_pFadePowerLabel = new TQLabel( i18n( "Fade power:" ), this );
 
-   m_pMediaInteraction = new QCheckBox( i18n( "Media interaction" ), this );
-   m_pMediaAttenuation = new QCheckBox( i18n( "Media attenuation" ), this );
+   m_pMediaInteraction = new TQCheckBox( i18n( "Media interaction" ), this );
+   m_pMediaAttenuation = new TQCheckBox( i18n( "Media attenuation" ), this );
 
-   QHBoxLayout* hl;
-   QGridLayout* gl;
+   TQHBoxLayout* hl;
+   TQGridLayout* gl;
 
-   gl = new QGridLayout( topLayout( ), 3, 2 );
-   gl->addWidget( new QLabel( i18n( "Location:" ), this ), 0, 0 );
+   gl = new TQGridLayout( topLayout( ), 3, 2 );
+   gl->addWidget( new TQLabel( i18n( "Location:" ), this ), 0, 0 );
    gl->addWidget( m_pLocation, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Color:" ), this ), 1, 0, AlignTop );
+   gl->addWidget( new TQLabel( i18n( "Color:" ), this ), 1, 0, AlignTop );
    gl->addWidget( m_pColor, 1, 1 );
-   gl->addWidget( new QLabel( i18n( "Type:" ), this ), 2, 0 );
-   hl = new QHBoxLayout( );
+   gl->addWidget( new TQLabel( i18n( "Type:" ), this ), 2, 0 );
+   hl = new TQHBoxLayout( );
    gl->addLayout( hl, 2, 1 );
    hl->addWidget( m_pType );
    hl->addStretch( 1 );
 
-   gl = new QGridLayout( topLayout( ), 4, 2 ); 
+   gl = new TQGridLayout( topLayout( ), 4, 2 ); 
    gl->addWidget( m_pRadiusLabel, 0, 0 );
    gl->addWidget( m_pRadius, 0, 1, AlignLeft );
    gl->addWidget( m_pFalloffLabel, 1, 0 );
@@ -128,8 +128,8 @@ void PMLightEdit::createTopWidgets( )
 
    topLayout( )->addWidget( m_pParallel );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 7, 2 );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 7, 2 );
    gl->addMultiCellWidget( m_pAreaLight, 0, 0, 0, 1 );
    gl->addWidget( m_pAreaTypeLabel, 1, 0 );
    gl->addWidget( m_pAreaType, 1, 1 );
@@ -148,8 +148,8 @@ void PMLightEdit::createTopWidgets( )
    topLayout( )->addWidget( m_pOrient );
    topLayout( )->addWidget( m_pJitter );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 3, 2 );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 3, 2 );
    gl->addMultiCellWidget( m_pFading, 0, 0, 0, 1 );
    gl->addWidget( m_pFadeDistanceLabel, 1, 0 );
    gl->addWidget( m_pFadeDistance, 1, 1 );
@@ -160,33 +160,33 @@ void PMLightEdit::createTopWidgets( )
    topLayout( )->addWidget( m_pMediaInteraction );
    topLayout( )->addWidget( m_pMediaAttenuation );
    
-   connect( m_pLocation, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pColor, SIGNAL( dataChanged( ) ),
-            SIGNAL( dataChanged( ) ) );
-   connect( m_pType, SIGNAL( activated( int ) ),
-            SLOT( slotTypeActivated( int ) ) );
-   connect( m_pRadius, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFalloff, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pTightness, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPointAt, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pParallel, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAreaLight, SIGNAL( clicked( ) ), SLOT( slotAreaClicked( ) ) );
-   connect( m_pAreaType, SIGNAL( activated ( int ) ), SLOT( slotOrientCheck( ) ) );
-   connect( m_pAxis1, SIGNAL( dataChanged( ) ), SLOT( slotOrientCheck( ) ) );
-   connect( m_pAxis2, SIGNAL( dataChanged( ) ), SLOT( slotOrientCheck( ) ) );
-   connect( m_pSize1, SIGNAL( dataChanged( ) ), SLOT( slotOrientCheck( ) ) );
-   connect( m_pSize2, SIGNAL( dataChanged( ) ), SLOT( slotOrientCheck( ) ) );
-   connect( m_pAdaptive, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOrient, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pJitter, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFading, SIGNAL( clicked( ) ), SLOT( slotFadingClicked( ) ) );
-   connect( m_pFadeDistance, SIGNAL( dataChanged( ) ),
-            SIGNAL( dataChanged( ) ) );
-   connect( m_pFadePower, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaInteraction, SIGNAL( clicked( ) ),
-            SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaAttenuation, SIGNAL( clicked( ) ),
-            SIGNAL( dataChanged( ) ) );
+   connect( m_pLocation, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pColor, TQT_SIGNAL( dataChanged( ) ),
+            TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotTypeActivated( int ) ) );
+   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFalloff, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pTightness, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPointAt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pParallel, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAreaLight, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAreaClicked( ) ) );
+   connect( m_pAreaType, TQT_SIGNAL( activated ( int ) ), TQT_SLOT( slotOrientCheck( ) ) );
+   connect( m_pAxis1, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
+   connect( m_pAxis2, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
+   connect( m_pSize1, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
+   connect( m_pSize2, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
+   connect( m_pAdaptive, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOrient, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pJitter, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFading, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFadingClicked( ) ) );
+   connect( m_pFadeDistance, TQT_SIGNAL( dataChanged( ) ),
+            TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFadePower, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaInteraction, TQT_SIGNAL( clicked( ) ),
+            TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaAttenuation, TQT_SIGNAL( clicked( ) ),
+            TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMLightEdit::displayObject( PMObject* o )

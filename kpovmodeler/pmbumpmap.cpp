@@ -82,7 +82,7 @@ PMBumpMap::~PMBumpMap( )
 {
 }
 
-void PMBumpMap::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMBumpMap::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    switch( m_bitmapType )
    {
@@ -151,7 +151,7 @@ void PMBumpMap::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMBumpMap::readAttributes( const PMXMLHelper& h )
 {
-   QString str;
+   TQString str;
 
    str = h.stringAttribute( "bitmap_type", "sys" );
    if( str == "gif" )
@@ -261,7 +261,7 @@ void PMBumpMap::cleanUp( ) const
 }
 
 
-QString PMBumpMap::description( ) const
+TQString PMBumpMap::description( ) const
 {
    return i18n( "bump map" );
 }
@@ -276,7 +276,7 @@ void PMBumpMap::setBitmapType( PMBitmapType c )
    }
 }
 
-void PMBumpMap::setBitmapFileName( const QString& c )
+void PMBumpMap::setBitmapFileName( const TQString& c )
 {
    if( c != m_bitmapFile )
    {
@@ -336,7 +336,7 @@ void PMBumpMap::setBumpSize( double c )
    }
 }
 
-PMDialogEditBase* PMBumpMap::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBumpMap::editWidget( TQWidget* parent ) const
 {
    return new PMBumpMapEdit( parent );
 }

@@ -18,7 +18,7 @@
 #ifndef KXYCOLORSELECTOR_H
 #define KXYCOLORSELECTOR_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include <kselect.h>
 
 #include "main.h"
@@ -46,7 +46,7 @@ public:
 	/** Constructs a two-dimensional color component selector widget,
 	 *  with a type TYPE_NONE and ranges 0 .. MAX_COLOR_COMPONENT_VALUE
 	 */
-	KXYColorSelector(QWidget *parent=0, const char *name=0);
+	KXYColorSelector(TQWidget *parent=0, const char *name=0);
 	~KXYColorSelector();
 	/** Set the type of the selector */
 	void setType(const int type);
@@ -72,26 +72,26 @@ protected:
   /** Draws the contents of the widget on a pixmap,
    *  which is used for buffering.
    */
-  virtual void drawPalette( QPixmap *pixmap );
+  virtual void drawPalette( TQPixmap *pixmap );
   /** @reimplemented */
-  virtual void resizeEvent( QResizeEvent * );
+  virtual void resizeEvent( TQResizeEvent * );
   /** Reimplemented from KXYSelector. This drawing is
    *  buffered in a pixmap here. As real drawing
    *  routine, drawPalette() is used.
    */
-  virtual void drawContents( QPainter *painter );
+  virtual void drawContents( TQPainter *painter );
   /** Draws the cursor */
-  virtual void  drawCursor(QPainter* painter, int x, int y);
+  virtual void  drawCursor(TQPainter* painter, int x, int y);
   /** set a color at a given coordinate */
-	virtual void setColor(QColor* const color, const int x, const int y);
+	virtual void setColor(TQColor* const color, const int x, const int y);
 	/** @return STANDARD_PALETTE_SIZE colors used to dither the
 	 *  pixmap if number of color planes <= 8
 	 */
-	QColor* standardColorsPalette();
+	TQColor* standardColorsPalette();
 
 private:
 	/* The buffering pixmap */
-  QPixmap pixmap;
+  TQPixmap pixmap;
 };
 
 #endif

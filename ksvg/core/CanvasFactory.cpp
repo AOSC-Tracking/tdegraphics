@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <kdebug.h>
 #include <ksimpleconfig.h>
@@ -57,14 +57,14 @@ void CanvasFactory::queryCanvas()
 {
 	m_canvasList.clear();
 
-	QValueList<KService::Ptr> traderList = KTrader::self()->query("KSVG/Renderer", "(Type == 'Service')");
+	TQValueList<KService::Ptr> traderList = KTrader::self()->query("KSVG/Renderer", "(Type == 'Service')");
 	KTrader::OfferList::Iterator it(traderList.begin());
 	for( ; it != traderList.end(); ++it)
 	{
 		KService::Ptr ptr = (*it);
 			
-		QString name = ptr->property("Name").toString();
-		QString internal = ptr->property("X-KSVG-InternalName").toString();
+		TQString name = ptr->property("Name").toString();
+		TQString internal = ptr->property("X-KSVG-InternalName").toString();
 		if(name.isEmpty() || internal.isEmpty())
 			continue;
 
@@ -90,20 +90,20 @@ KSVGCanvas *CanvasFactory::loadCanvas(int width, int height)
 
 	KSimpleConfig *config = new KSimpleConfig("ksvgpluginrc", false);
 	config->setGroup("Canvas");
-	QString load = config->readEntry("ActiveCanvas", "libart");
+	TQString load = config->readEntry("ActiveCanvas", "libart");
 	delete config;
 
-	QPtrListIterator<CanvasInfo> it(m_canvasList);
+	TQPtrListIterator<CanvasInfo> it(m_canvasList);
 	CanvasInfo *info = it.current();
 	while((info = it.current()) != 0)
 	{
 		if(info->internal == load)
 		{
-			QStringList args;
-			args.prepend(QString::number(width));
-			args.prepend(QString::number(height));
+			TQStringList args;
+			args.prepend(TQString::number(width));
+			args.prepend(TQString::number(height));
 		
-			info->canvas = KParts::ComponentFactory::createInstanceFromLibrary<KSVGCanvas>(QFile::encodeName(info->service->library()), 0, 0, args);
+			info->canvas = KParts::ComponentFactory::createInstanceFromLibrary<KSVGCanvas>(TQFile::encodeName(info->service->library()), 0, 0, args);
 
 			if(info->canvas)
 				return info->canvas;
@@ -122,7 +122,7 @@ KSVGCanvas *CanvasFactory::loadCanvas(int width, int height)
 
 int CanvasFactory::itemInList(KSVGCanvas *canvas)
 {
-	QPtrListIterator<CanvasInfo> it(m_canvasList);
+	TQPtrListIterator<CanvasInfo> it(m_canvasList);
 	CanvasInfo *info = it.current();
 	unsigned int i = 0;
 	while((info = it.current()) != 0)
@@ -137,9 +137,9 @@ int CanvasFactory::itemInList(KSVGCanvas *canvas)
 	return 0;
 }
 
-QString CanvasFactory::internalNameFor(const QString &name)
+TQString CanvasFactory::internalNameFor(const TQString &name)
 {
-	QPtrListIterator<CanvasInfo> it(m_canvasList);
+	TQPtrListIterator<CanvasInfo> it(m_canvasList);
 	CanvasInfo *info = it.current();
 	while((info = it.current()) != 0)
 	{
@@ -149,12 +149,12 @@ QString CanvasFactory::internalNameFor(const QString &name)
 		++it;
 	}
 
-	return QString::null;
+	return TQString::null;
 }	
 
 void CanvasFactory::deleteCanvas(KSVGCanvas *canvas)
 {
-	QPtrListIterator<CanvasInfo> it(m_canvasList);
+	TQPtrListIterator<CanvasInfo> it(m_canvasList);
 	CanvasInfo *info = it.current();
 	while((info = it.current()) != 0)
 	{
@@ -168,7 +168,7 @@ void CanvasFactory::deleteCanvas(KSVGCanvas *canvas)
 	}
 }
 	
-QPtrList<CanvasInfo> CanvasFactory::canvasList()
+TQPtrList<CanvasInfo> CanvasFactory::canvasList()
 {
 	return m_canvasList;
 }

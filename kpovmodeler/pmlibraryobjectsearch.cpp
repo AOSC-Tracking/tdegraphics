@@ -21,45 +21,45 @@
 #include "pmlibraryobjectsearch.h"
 #include "pmdialogeditbase.h"
 
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qimage.h>
-#include <qframe.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
+#include <tqframe.h>
 
 #include <kurl.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <klistview.h>
 
-PMLibraryObjectSearch::PMLibraryObjectSearch( QWidget* parent ) :
-   QWidget( parent, "" )
+PMLibraryObjectSearch::PMLibraryObjectSearch( TQWidget* parent ) :
+   TQWidget( parent, "" )
 {
    setMinimumSize( 780, 300 );
    setMaximumSize( 800, 400 );
-   QVBoxLayout* vl = new QVBoxLayout( this, KDialog::spacingHint( ) );
+   TQVBoxLayout* vl = new TQVBoxLayout( this, KDialog::spacingHint( ) );
 
    // Search parameters
-   QFrame* frame = new QFrame( this );
-   QHBoxLayout* fhl = new QHBoxLayout( frame, KDialog::spacingHint( ) );
-   QGridLayout* grid = new QGridLayout( fhl, 3, 2 );
-   QLabel *lbl = new QLabel( i18n( "Search for:" ), frame );
-   m_pSearch = new QLineEdit( frame );
+   TQFrame* frame = new TQFrame( this );
+   TQHBoxLayout* fhl = new TQHBoxLayout( frame, KDialog::spacingHint( ) );
+   TQGridLayout* grid = new TQGridLayout( fhl, 3, 2 );
+   TQLabel *lbl = new TQLabel( i18n( "Search for:" ), frame );
+   m_pSearch = new TQLineEdit( frame );
    grid->addWidget( lbl, 0, 0 );
    grid->addWidget( m_pSearch, 0, 1 );
 
-   QVBoxLayout* fvl = new QVBoxLayout( fhl );
-   m_pSearchButton = new QPushButton( i18n( "&Search" ), frame );
+   TQVBoxLayout* fvl = new TQVBoxLayout( fhl );
+   m_pSearchButton = new TQPushButton( i18n( "&Search" ), frame );
    fvl->addWidget( m_pSearchButton );
    fvl->addStretch( 1 );
 
    vl->addWidget( frame );
 
    // Search results
-   frame = new QFrame( this );
-   QHBoxLayout* hl = new QHBoxLayout( frame, KDialog::spacingHint( ) );
+   frame = new TQFrame( this );
+   TQHBoxLayout* hl = new TQHBoxLayout( frame, KDialog::spacingHint( ) );
    m_pFileList = new KListView( frame );
    m_pFileList->addColumn( i18n( "File" ) );
    m_pFileList->addColumn( i18n( "Path" ) );
@@ -70,12 +70,12 @@ PMLibraryObjectSearch::PMLibraryObjectSearch( QWidget* parent ) :
    vl->addWidget( frame );
 
    // Connect signals and slots
-   connect( m_pSearchButton, SIGNAL( clicked( ) ), SLOT( slotSearchButtonPressed( ) ) );
+   connect( m_pSearchButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSearchButtonPressed( ) ) );
 }
 
 void PMLibraryObjectSearch::slotSearchButtonPressed( )
 {
-//   QStringList::Iterator it( s_libraryPath );
+//   TQStringList::Iterator it( s_libraryPath );
    // For each of the defined libraries
    //
    // Open recursively each library file

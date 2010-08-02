@@ -20,8 +20,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 */
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 
 #include <kgenericfactory.h>
 #include <ksimpleconfig.h>
@@ -41,14 +41,14 @@
 #include "kamera.h"
 #include "kamera.moc"
 
-typedef KGenericFactory<KKameraConfig, QWidget> KKameraConfigFactory;
+typedef KGenericFactory<KKameraConfig, TQWidget> KKameraConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kamera, KKameraConfigFactory( "kcmkamera" ) )
 
 // --------------- Camera control center module widget ---
 
 KKameraConfig *KKameraConfig::m_instance = NULL;
 
-KKameraConfig::KKameraConfig(QWidget *parent, const char *name, const QStringList &)
+KKameraConfig::KKameraConfig(TQWidget *parent, const char *name, const TQStringList &)
 	: KCModule(KKameraConfigFactory::instance(), parent, name)
 {
 	m_devicePopup = new KPopupMenu(this);
@@ -88,7 +88,7 @@ void KKameraConfig::defaults()
 
 void KKameraConfig::displayGPFailureDialogue(void)
 {
-	new QLabel(i18n("Unable to initialize the gPhoto2 libraries."), this);
+	new TQLabel(i18n("Unable to initialize the gPhoto2 libraries."), this);
 }
 
 void KKameraConfig::displayGPSuccessDialogue(void)
@@ -97,7 +97,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	setButtons(Help | Apply | Cancel | Ok);
 
 	// create a layout with two vertical boxes
-	QVBoxLayout *topLayout = new QVBoxLayout(this, 0, 0);
+	TQVBoxLayout *topLayout = new TQVBoxLayout(this, 0, 0);
 	topLayout->setAutoAdd(true);
 	
 	m_toolbar = new KToolBar(this, "ToolBar");
@@ -106,36 +106,36 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	// create list of devices
 	m_deviceSel = new KIconView(this);
 
-	connect(m_deviceSel, SIGNAL(rightButtonClicked(QIconViewItem *, const QPoint &)),
-		SLOT(slot_deviceMenu(QIconViewItem *, const QPoint &)));
-	connect(m_deviceSel, SIGNAL(doubleClicked(QIconViewItem *)),
-		SLOT(slot_configureCamera()));
-	connect(m_deviceSel, SIGNAL(selectionChanged(QIconViewItem *)),
-		SLOT(slot_deviceSelected(QIconViewItem *)));
+	connect(m_deviceSel, TQT_SIGNAL(rightButtonClicked(TQIconViewItem *, const TQPoint &)),
+		TQT_SLOT(slot_deviceMenu(TQIconViewItem *, const TQPoint &)));
+	connect(m_deviceSel, TQT_SIGNAL(doubleClicked(TQIconViewItem *)),
+		TQT_SLOT(slot_configureCamera()));
+	connect(m_deviceSel, TQT_SIGNAL(selectionChanged(TQIconViewItem *)),
+		TQT_SLOT(slot_deviceSelected(TQIconViewItem *)));
 
-	m_deviceSel->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+	m_deviceSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
 	
 	// create actions
 	KAction *act;
 	
-	act = new KAction(i18n("Add"), "camera", 0, this, SLOT(slot_addCamera()), m_actions, "camera_add");
+	act = new KAction(i18n("Add"), "camera", 0, this, TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
 	act->setWhatsThis(i18n("Click this button to add a new camera."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new KAction(i18n("Test"), "camera_test", 0, this, SLOT(slot_testCamera()), m_actions, "camera_test");
+	act = new KAction(i18n("Test"), "camera_test", 0, this, TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Remove"), "edittrash", 0, this, SLOT(slot_removeCamera()), m_actions, "camera_remove");
+	act = new KAction(i18n("Remove"), "edittrash", 0, this, TQT_SLOT(slot_removeCamera()), m_actions, "camera_remove");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Configure..."), "configure", 0, this, SLOT(slot_configureCamera()), m_actions, "camera_configure");
+	act = new KAction(i18n("Configure..."), "configure", 0, this, TQT_SLOT(slot_configureCamera()), m_actions, "camera_configure");
 	act->setWhatsThis(i18n("Click this button to change the configuration of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Information"), "hwinfo", 0, this, SLOT(slot_cameraSummary()), m_actions, "camera_summary");
+	act = new KAction(i18n("Information"), "hwinfo", 0, this, TQT_SLOT(slot_cameraSummary()), m_actions, "camera_summary");
 	act->setWhatsThis(i18n("Click this button to view a summary of the current status of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new KAction(i18n("Cancel"), "stop", 0, this, SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
+	act = new KAction(i18n("Cancel"), "stop", 0, this, TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
 	act->setWhatsThis(i18n("Click this button to cancel the current camera operation."));
 	act->setEnabled(false);
 	act->plug(m_toolbar);
@@ -147,7 +147,7 @@ void KKameraConfig::populateDeviceListView(void)
 	CameraDevicesMap::Iterator it;
 	for (it = m_devices.begin(); it != m_devices.end(); it++) {
 		if (it.data()) {
-			new QIconViewItem(m_deviceSel, it.key(), DesktopIcon("camera"));
+			new TQIconViewItem(m_deviceSel, it.key(), DesktopIcon("camera"));
 		}
 	}
 	slot_deviceSelected(m_deviceSel->currentItem());
@@ -172,8 +172,8 @@ void KKameraConfig::load(void)
 void KKameraConfig::load(bool useDefaults )
 {
 	m_config->setReadDefaults( useDefaults );
-	QStringList groupList = m_config->groupList();
-	QStringList::Iterator it;
+	TQStringList groupList = m_config->groupList();
+	TQStringList::Iterator it;
         int i, count;
         CameraList *list;
         CameraAbilitiesList *al;
@@ -188,8 +188,8 @@ void KKameraConfig::load(bool useDefaults )
 				continue;
 
 			kcamera = new KCamera(*it,m_config->readEntry("Path"));
-			connect(kcamera, SIGNAL(error(const QString &)), SLOT(slot_error(const QString &)));
-			connect(kcamera, SIGNAL(error(const QString &, const QString &)), SLOT(slot_error(const QString &, const QString &)));
+			connect(kcamera, TQT_SIGNAL(error(const TQString &)), TQT_SLOT(slot_error(const TQString &)));
+			connect(kcamera, TQT_SIGNAL(error(const TQString &, const TQString &)), TQT_SLOT(slot_error(const TQString &, const TQString &)));
 			kcamera->load(m_config);
 			m_devices[*it] = kcamera;
 		}
@@ -208,7 +208,7 @@ void KKameraConfig::load(bool useDefaults )
 
         count = gp_list_count (list);
 
-	QMap<QString,QString>	ports, names;
+	TQMap<TQString,TQString>	ports, names;
 	
 	for (i = 0 ; i<count ; i++) {
 		gp_list_get_name  (list, i, &model);
@@ -221,14 +221,14 @@ void KKameraConfig::load(bool useDefaults )
 	if (ports.contains("usb:") && names[ports["usb:"]]!="usb:")
 		ports.remove("usb:");
 
-	QMap<QString,QString>::iterator portit;
+	TQMap<TQString,TQString>::iterator portit;
 
 	for (portit = ports.begin() ; portit != ports.end(); portit++) {
 		/* kdDebug() << "Adding USB camera: " << portit.data() << " at " << portit.key() << endl; */
 
 		kcamera = new KCamera(portit.data(),portit.key());
-		connect(kcamera, SIGNAL(error(const QString &)), SLOT(slot_error(const QString &)));
-		connect(kcamera, SIGNAL(error(const QString &, const QString &)), SLOT(slot_error(const QString &, const QString &)));
+		connect(kcamera, TQT_SIGNAL(error(const TQString &)), TQT_SLOT(slot_error(const TQString &)));
+		connect(kcamera, TQT_SIGNAL(error(const TQString &, const TQString &)), TQT_SLOT(slot_error(const TQString &, const TQString &)));
 		m_devices[portit.data()] = kcamera;
 	}
 	populateDeviceListView();
@@ -265,9 +265,9 @@ void KKameraConfig::afterCameraOperation(void)
 	slot_deviceSelected(m_deviceSel->currentItem());
 }
 
-QString KKameraConfig::suggestName(const QString &name)
+TQString KKameraConfig::suggestName(const TQString &name)
 {
-	QString new_name = name;
+	TQString new_name = name;
 	new_name.replace("/", ""); // we cannot have a slash in a URI's host
 
 	if (!m_devices.contains(new_name)) return new_name;
@@ -275,20 +275,20 @@ QString KKameraConfig::suggestName(const QString &name)
 	// try new names with a number appended until we find a free one
 	int i = 1;
 	while (i++ < 0xffff) {
-		new_name = name + " (" + QString::number(i) + ")";
+		new_name = name + " (" + TQString::number(i) + ")";
 		if (!m_devices.contains(new_name)) return new_name;
 	}
 
-	return QString::null;
+	return TQString::null;
 }
 
 void KKameraConfig::slot_addCamera()
 {
-	KCamera *m_device = new KCamera(QString::null,QString::null);
-	connect(m_device, SIGNAL(error(const QString &)), SLOT(slot_error(const QString &)));
-	connect(m_device, SIGNAL(error(const QString &, const QString &)), SLOT(slot_error(const QString &, const QString &)));
+	KCamera *m_device = new KCamera(TQString::null,TQString::null);
+	connect(m_device, TQT_SIGNAL(error(const TQString &)), TQT_SLOT(slot_error(const TQString &)));
+	connect(m_device, TQT_SIGNAL(error(const TQString &, const TQString &)), TQT_SLOT(slot_error(const TQString &, const TQString &)));
 	KameraDeviceSelectDialog dialog(this, m_device);
-	if (dialog.exec() == QDialog::Accepted) {
+	if (dialog.exec() == TQDialog::Accepted) {
 		dialog.save();
 		m_device->setName(suggestName(m_device->model()));
 		m_devices.insert(m_device->name(), m_device);
@@ -301,7 +301,7 @@ void KKameraConfig::slot_addCamera()
 
 void KKameraConfig::slot_removeCamera()
 {
-	QString name = m_deviceSel->currentItem()->text();
+	TQString name = m_deviceSel->currentItem()->text();
 	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		m_devices.remove(name);
@@ -316,7 +316,7 @@ void KKameraConfig::slot_testCamera()
 {
 	beforeCameraOperation();
 
-	QString name = m_deviceSel->currentItem()->text();
+	TQString name = m_deviceSel->currentItem()->text();
 	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		if (m_device->test())
@@ -328,7 +328,7 @@ void KKameraConfig::slot_testCamera()
 
 void KKameraConfig::slot_configureCamera()
 {
-	QString name = m_deviceSel->currentItem()->text();
+	TQString name = m_deviceSel->currentItem()->text();
 	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		m_device->configure();
@@ -337,8 +337,8 @@ void KKameraConfig::slot_configureCamera()
 
 void KKameraConfig::slot_cameraSummary()
 {
-	QString summary;
-	QString name = m_deviceSel->currentItem()->text();
+	TQString summary;
+	TQString name = m_deviceSel->currentItem()->text();
 	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		summary = m_device->summary();
@@ -357,7 +357,7 @@ void KKameraConfig::slot_cancelOperation()
 	qApp->setOverrideCursor(Qt::WaitCursor);
 }
 
-void KKameraConfig::slot_deviceMenu(QIconViewItem *item, const QPoint &point)
+void KKameraConfig::slot_deviceMenu(TQIconViewItem *item, const TQPoint &point)
 {
 	if (item) {
 		m_devicePopup->clear();
@@ -369,7 +369,7 @@ void KKameraConfig::slot_deviceMenu(QIconViewItem *item, const QPoint &point)
 	}
 }
 
-void KKameraConfig::slot_deviceSelected(QIconViewItem *item)
+void KKameraConfig::slot_deviceSelected(TQIconViewItem *item)
 {
 	m_actions->action("camera_test")->setEnabled(item);
 	m_actions->action("camera_remove")->setEnabled(item);
@@ -399,7 +399,7 @@ GPContextFeedback KKameraConfig::cbGPCancel(GPContext * /*context*/, void *data)
 		return GP_CONTEXT_FEEDBACK_OK;
 }
 
-QString KKameraConfig::quickHelp() const
+TQString KKameraConfig::quickHelp() const
 {
 	return i18n("<h1>Digital Camera</h1>\n"
 	  "This module allows you to configure support for your digital camera.\n"
@@ -411,12 +411,12 @@ QString KKameraConfig::quickHelp() const
 	  "<a href=\"camera:/\">camera:/</a> in Konqueror and other KDE applications.");
 }
 
-void KKameraConfig::slot_error(const QString &message)
+void KKameraConfig::slot_error(const TQString &message)
 {
 	KMessageBox::error(this, message);
 }
 
-void KKameraConfig::slot_error(const QString &message, const QString &details)
+void KKameraConfig::slot_error(const TQString &message, const TQString &details)
 {
 	KMessageBox::detailedError(this, message, details);
 }

@@ -29,7 +29,7 @@
 #ifndef __IMGSELECTLINE_H__
 #define __IMGSELECTLINE_H__
 
-#include <qhbox.h>
+#include <tqhbox.h>
 
 /**
  *
@@ -37,18 +37,18 @@
 
 class KURL;
 class KURLComboBox;
-class QPushButton;
-class QStringList;
+class TQPushButton;
+class TQStringList;
 
 class ImageSelectLine:public QHBox
 {
    Q_OBJECT
 public:
-   ImageSelectLine( QWidget *parent, const QString& text );
+   ImageSelectLine( TQWidget *parent, const TQString& text );
 
    KURL selectedURL() const;
    void setURL( const KURL& );
-   void setURLs( const QStringList& );
+   void setURLs( const TQStringList& );
 
 protected slots:
    void slSelectFile();
@@ -58,7 +58,7 @@ private:
 
    KURL m_currUrl;
    KURLComboBox *m_urlCombo;
-   QPushButton  *m_buttFileSelect;
+   TQPushButton  *m_buttFileSelect;
 
 };
 

@@ -70,13 +70,13 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
-#include <qpainter.h>
-#include <qbitmap.h> 
-#include <qimage.h> 
-#include <qpainter.h>
-#include <qfileinfo.h>
+#include <tqpainter.h>
+#include <tqbitmap.h> 
+#include <tqimage.h> 
+#include <tqpainter.h>
+#include <tqfileinfo.h>
 
-extern QPainter *foreGroundPainter;
+extern TQPainter *foreGroundPainter;
 
 
 /** Routine to print characters.  */
@@ -97,7 +97,7 @@ void dviRenderer::set_char(unsigned int cmd, unsigned int ch)
 
   long dvi_h_sav = currinf.data.dvi_h;
 
-  QPixmap pix = g->shrunkenCharacter;
+  TQPixmap pix = g->shrunkenCharacter;
   int x = ((int) ((currinf.data.dvi_h) / (shrinkfactor * 65536))) - g->x2;
   int y = currinf.data.pxl_v - g->y2;
   
@@ -117,7 +117,7 @@ void dviRenderer::set_char(unsigned int cmd, unsigned int ch)
       dhl.linkText = *HTML_href;
       currentlyDrawnPage->hyperLinkList.push_back(dhl);
     } else {
-      QRect dshunion = currentlyDrawnPage->hyperLinkList[currentlyDrawnPage->hyperLinkList.size()-1].box.unite(QRect(x, y, pix.width(), pix.height())) ;
+      TQRect dshunion = currentlyDrawnPage->hyperLinkList[currentlyDrawnPage->hyperLinkList.size()-1].box.unite(TQRect(x, y, pix.width(), pix.height())) ;
       currentlyDrawnPage->hyperLinkList[currentlyDrawnPage->hyperLinkList.size()-1].box = dshunion;
     }
   }
@@ -141,7 +141,7 @@ void dviRenderer::set_char(unsigned int cmd, unsigned int ch)
         dhl.linkText = "";
       currentDVIPage->sourceHyperLinkList.push_back(dhl);
     } else {
-      QRect dshunion = currentDVIPage->sourceHyperLinkList[currentDVIPage->sourceHyperLinkList.size()-1].box.unite(QRect(x, y, pix.width(), pix.height())) ;
+      TQRect dshunion = currentDVIPage->sourceHyperLinkList[currentDVIPage->sourceHyperLinkList.size()-1].box.unite(TQRect(x, y, pix.width(), pix.height())) ;
       currentDVIPage->sourceHyperLinkList[currentDVIPage->sourceHyperLinkList.size()-1].box = dshunion;
     }
   }
@@ -188,7 +188,7 @@ void dviRenderer::set_char(unsigned int cmd, unsigned int ch)
     
   default:
     if ((ch >= 0x21) && (ch <= 0x7a))
-      currentlyDrawnPage->textBoxList[currentlyDrawnPage->textBoxList.size()-1].text += QChar(ch);
+      currentlyDrawnPage->textBoxList[currentlyDrawnPage->textBoxList.size()-1].text += TQChar(ch);
     else
       currentlyDrawnPage->textBoxList[currentlyDrawnPage->textBoxList.size()-1].text += "?";
     break;

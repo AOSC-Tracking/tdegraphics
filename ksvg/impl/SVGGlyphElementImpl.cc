@@ -35,7 +35,7 @@ SVGGlyphElementImpl::~SVGGlyphElementImpl()
 {
 }
 
-QString SVGGlyphElementImpl::d() const
+TQString SVGGlyphElementImpl::d() const
 {
 	return m_d;
 }

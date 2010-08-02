@@ -26,14 +26,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA. *
 #include <sys/time.h>
 #include <fcntl.h>
 #include "faxexpand.h"
-#include <qstring.h>
-#include <qfile.h>
+#include <tqstring.h>
+#include <tqfile.h>
 #include <kapplication.h>
 #include <klocale.h>
 #include <kdebug.h>
 
 void statusbarupdate(char* name,int width,int height,char* res);
-extern void kfaxerror(const QString& title, const QString& error);
+extern void kfaxerror(const TQString& title, const TQString& error);
 
 #define	FAXMAGIC	"\000PC Research, Inc\000\000\000\000\000\000"
 
@@ -106,11 +106,11 @@ notetiff(const char *name)
     int endian;
     t32bits IFDoff;
     struct pagenode *pn = NULL;
-    QString str;
+    TQString str;
 
 
     if ((tf = fopen(name, "r")) == NULL) {
-        QString mesg = i18n("Unable to open:\n%1\n").arg(QFile::decodeName(name));
+        TQString mesg = i18n("Unable to open:\n%1\n").arg(TQFile::decodeName(name));
 	kfaxerror(i18n("Sorry"), mesg);
 	return 0;
     }
@@ -147,7 +147,7 @@ notetiff(const char *name)
 
 	if (fseek(tf, IFDoff, SEEK_SET) < 0) {
 	realbad:
-	  str = i18n("Invalid tiff file:\n%1\n").arg(QFile::decodeName(name));
+	  str = i18n("Invalid tiff file:\n%1\n").arg(TQFile::decodeName(name));
 	  kfaxerror(i18n("Sorry"),str);
 	bad:
 	    if (strips)
@@ -249,7 +249,7 @@ notetiff(const char *name)
 	    case 279:		/* StripByteCounts */
 		if (count != nstrips) {
 		  str = i18n("In file %1\nStripsPerImage tag 273=%2,tag279=%3\n")
-			      .arg(QFile::decodeName(name)).arg(nstrips).arg(count);
+			      .arg(TQFile::decodeName(name)).arg(nstrips).arg(count);
 		  kfaxerror(i18n("Message"),str);
 		  goto realbad;
 		}
@@ -395,7 +395,7 @@ getstrip(struct pagenode *pn, int strip)
     struct stat sbuf;
     unsigned char *Data;
     union { t16bits s; unsigned char b[2]; } so;
-    QString str;
+    TQString str;
 
 #define ShortOrder	so.b[1]
 
@@ -419,7 +419,7 @@ getstrip(struct pagenode *pn, int strip)
 	pn->length = pn->strips[strip].size;
     }
     else {
-      str = i18n("Trying to expand too many strips\n%1%n").arg(QFile::decodeName(pn->pathname));
+      str = i18n("Trying to expand too many strips\n%1%n").arg(TQFile::decodeName(pn->pathname));
       kfaxerror(i18n("Warning"),str);
       return NULL;
     }
@@ -448,7 +448,7 @@ getstrip(struct pagenode *pn, int strip)
 	/* handle ghostscript / PC Research fax file */
       if (Data[24] != 1 || Data[25] != 0){
 	str = i18n("Only the first page of the PC Research multipage file\n%1\nwill be shown\n")
-		.arg(QFile::decodeName(pn->pathname));
+		.arg(TQFile::decodeName(pn->pathname));
 	kfaxerror(i18n("Message"),str);
       }
 	pn->length -= 64;
@@ -462,7 +462,7 @@ getstrip(struct pagenode *pn, int strip)
 	pn->height = G3count(pn, pn->expander == g32expand);
     if (pn->height == 0) {
 
-      str = i18n("No fax found in file:\n%1\n").arg(QFile::decodeName(pn->pathname));
+      str = i18n("No fax found in file:\n%1\n").arg(TQFile::decodeName(pn->pathname));
       kfaxerror(i18n("Sorry"),str);
       errno = 0;
       badfile(pn);

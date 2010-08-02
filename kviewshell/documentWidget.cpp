@@ -17,11 +17,11 @@
 #include <kglobalsettings.h>
 #include <kiconloader.h>
 #include <klocale.h>
-#include <qclipboard.h>
-#include <qcursor.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <tqclipboard.h>
+#include <tqcursor.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
 
 #include "documentWidget.h"
 #include "pageView.h"
@@ -49,24 +49,24 @@ const int DocumentWidget::bottom_left_corner[16] =
 const int DocumentWidget::shadow_strip[4] =
   { 56, 67, 83, 94 };
 
-QColor DocumentWidget::backgroundColorForCorners;
+TQColor DocumentWidget::backgroundColorForCorners;
 
 namespace {
 
 /** Holds the icon used as a overlay on pages which are not drawn yet. */
-QPixmap* busyIcon = 0;
+TQPixmap* busyIcon = 0;
 
 /** Internal storages used in the shadow drawing routines in the
     drawContents method.*/
-QPixmap* URShadow = 0;
-QPixmap* BRShadow = 0;
-QPixmap* BLShadow = 0;
+TQPixmap* URShadow = 0;
+TQPixmap* BRShadow = 0;
+TQPixmap* BLShadow = 0;
 
 } // namespace anon
 
 
-DocumentWidget::DocumentWidget(QWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name )
-  : QWidget( parent, name ), indexOfUnderlinedLink(-1)
+DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name )
+  : TQWidget( parent, name ), indexOfUnderlinedLink(-1)
 {
   moveTool = true;
 
@@ -83,18 +83,18 @@ DocumentWidget::DocumentWidget(QWidget *parent, PageView *sv, DocumentPageCache 
   scrollGuide = -1;
 
   setMouseTracking(true);
-  setFocusPolicy(QWidget::ClickFocus);
+  setFocusPolicy(TQWidget::ClickFocus);
 
-  connect(&clearStatusBarTimer, SIGNAL(timeout()), this, SLOT(clearStatusBar()));
+  connect(&clearStatusBarTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(clearStatusBar()));
   setBackgroundMode(Qt::NoBackground);
 
   if (!busyIcon)
   {
-    busyIcon = new QPixmap(KGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
+    busyIcon = new TQPixmap(KGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
 
-    URShadow = new QPixmap();
-    BRShadow = new QPixmap();
-    BLShadow = new QPixmap();
+    URShadow = new TQPixmap();
+    BRShadow = new TQPixmap();
+    BLShadow = new TQPixmap();
 
     URShadow->resize(4,4);
     BRShadow->resize(4,4);
@@ -114,7 +114,7 @@ void DocumentWidget::setPageNumber(Q_UINT16 nr)
   indexOfUnderlinedLink = -1;
 
   // Resize Widget if the size of the new page is different than the size of the old page.
-  QSize _pageSize = documentCache->sizeOfPageInPixel(pageNr);
+  TQSize _pageSize = documentCache->sizeOfPageInPixel(pageNr);
   if (_pageSize != pageSize())
   {
     setPageSize(_pageSize);
@@ -122,14 +122,14 @@ void DocumentWidget::setPageNumber(Q_UINT16 nr)
   update();
 }
 
-QRect DocumentWidget::linkFlashRect()
+TQRect DocumentWidget::linkFlashRect()
 {
   int width = pageSize().width()/(11 - animationCounter);
   int height = pageSize().height()/(60 - 4 * animationCounter);
-  return QRect((pageSize().width()-width)/2, flashOffset - height/2, width, height);
+  return TQRect((pageSize().width()-width)/2, flashOffset - height/2, width, height);
 }
 
-void DocumentWidget::timerEvent( QTimerEvent *e )
+void DocumentWidget::timerEvent( TQTimerEvent *e )
 {
   if (animationCounter == 0) {
     killTimer(e->timerId());
@@ -138,7 +138,7 @@ void DocumentWidget::timerEvent( QTimerEvent *e )
 
   animationCounter++;
 
-  QRect flashRect = linkFlashRect();
+  TQRect flashRect = linkFlashRect();
   flashRect.addCoords(-1, -1, 1, 1);
 
   if (animationCounter >= 10) {
@@ -158,7 +158,7 @@ void DocumentWidget::flash(int fo)
     killTimer(timerIdent);
     // Delete old flash rectangle
     animationCounter = 10;
-    QRect flashRect = linkFlashRect();
+    TQRect flashRect = linkFlashRect();
     flashRect.addCoords(-1, -1, 1, 1);
     repaint(flashRect, false);
   }
@@ -168,7 +168,7 @@ void DocumentWidget::flash(int fo)
 }
 
 
-void DocumentWidget::paintEvent(QPaintEvent *e)
+void DocumentWidget::paintEvent(TQPaintEvent *e)
 {
 #ifdef DEBUG_DOCUMENTWIDGET
   kdDebug(1223) << "DocumentWidget::paintEvent() called" << endl;
@@ -191,25 +191,25 @@ void DocumentWidget::paintEvent(QPaintEvent *e)
     return;
   }
 
-  QPainter p(this);
+  TQPainter p(this);
   p.setClipRegion(e->region());
 
   // Paint a black border around the widget
   p.setRasterOp(Qt::CopyROP);
   p.setBrush(NoBrush);
   p.setPen(Qt::black);
-  QRect outlineRect = pageRect();
+  TQRect outlineRect = pageRect();
   outlineRect.addCoords(-1, -1, 1, 1);
   p.drawRect(outlineRect);
 
   // Paint page shadow
-  QColor backgroundColor = colorGroup().mid();
+  TQColor backgroundColor = colorGroup().mid();
 
   // (Re-)generate the Pixmaps for the shadow corners, if necessary
   if (backgroundColor != backgroundColorForCorners)
   {
     backgroundColorForCorners = backgroundColor;
-    QImage tmp(4, 4, 32);
+    TQImage tmp(4, 4, 32);
     for(int x=0; x<4; x++)
       for(int y=0; y<4; y++)
         tmp.setPixel(x, y, backgroundColor.light(bottom_right_corner[x+4*y]).rgb() );
@@ -243,7 +243,7 @@ void DocumentWidget::paintEvent(QPaintEvent *e)
 
   if (!documentCache->isPageCached(pageNr, pageSize()))
   {
-    QRect destRect = e->rect().intersect(pageRect());
+    TQRect destRect = e->rect().intersect(pageRect());
     if (KVSPrefs::changeColors() && KVSPrefs::renderMode() == KVSPrefs::EnumRenderMode::Paper)
       p.fillRect(destRect, KVSPrefs::paperColor());
     else
@@ -260,7 +260,7 @@ void DocumentWidget::paintEvent(QPaintEvent *e)
     {
       // Request page pixmap.
       pixmapRequested = true;
-      QTimer::singleShot(50, this, SLOT(delayedRequestPage()));
+      TQTimer::singleShot(50, this, TQT_SLOT(delayedRequestPage()));
     }
     return;
   }
@@ -273,15 +273,15 @@ void DocumentWidget::paintEvent(QPaintEvent *e)
     return;
   }
 
-  QMemArray<QRect> damagedRects = e->region().rects();
+  TQMemArray<TQRect> damagedRects = e->region().rects();
   for (unsigned int i = 0; i < damagedRects.count(); i++)
   {
     // Paint the page where it intersects with the damaged area.
-    QRect destRect = damagedRects[i].intersect(pageRect());
+    TQRect destRect = damagedRects[i].intersect(pageRect());
 
     // The actual page starts at point (1,1) because of the outline.
     // Therefore we need to shift the destination rectangle.
-    QRect pixmapRect = destRect;
+    TQRect pixmapRect = destRect;
     pixmapRect.moveBy(-1,-1);
 
     if (KVSPrefs::changeColors() && KVSPrefs::renderMode() != KVSPrefs::EnumRenderMode::Paper)
@@ -309,7 +309,7 @@ void DocumentWidget::paintEvent(QPaintEvent *e)
       int w = pageData->hyperLinkList[i].box.width();
       int y = pageData->hyperLinkList[i].baseline;
 
-      QRect hyperLinkRect(x, y, w, h);
+      TQRect hyperLinkRect(x, y, w, h);
       if (hyperLinkRect.intersects(e->rect()))
       {
 #ifdef DEBUG_DOCUMENTWIDGET
@@ -324,7 +324,7 @@ void DocumentWidget::paintEvent(QPaintEvent *e)
   if (animationCounter > 0 && animationCounter < 10)
   {
     int gbChannel = 255 - (9-animationCounter)*28;
-    p.setPen(QPen(QColor(255, gbChannel, gbChannel), 3));
+    p.setPen(TQPen(TQColor(255, gbChannel, gbChannel), 3));
     p.drawRect(linkFlashRect());
   }
 
@@ -344,7 +344,7 @@ void DocumentWidget::paintEvent(QPaintEvent *e)
     p.setBrush(white);
     p.setRasterOp(Qt::XorROP);
 
-    QMemArray<QRect> selectionRects = selectedRegion.rects();
+    TQMemArray<TQRect> selectionRects = selectedRegion.rects();
 
     for (unsigned int i = 0; i < selectionRects.count(); i++)
       p.drawRect(selectionRects[i]);
@@ -365,8 +365,8 @@ void DocumentWidget::drawScrollGuide(int ycoord)
 {
   //kdDebug() << "draw scroll guide for page " << pageNr << " at y = " << ycoord << endl;
   scrollGuide = ycoord;
-  update(QRect(1, scrollGuide, pageSize().width(), 1));
-  QTimer::singleShot(1000, this, SLOT(clearScrollGuide()));
+  update(TQRect(1, scrollGuide, pageSize().width(), 1));
+  TQTimer::singleShot(1000, this, TQT_SLOT(clearScrollGuide()));
 }
 
 void DocumentWidget::clearScrollGuide()
@@ -374,7 +374,7 @@ void DocumentWidget::clearScrollGuide()
   //kdDebug() << "clear scroll guide for page " << pageNr << " at y = " << scrollGuide << endl;
   int temp = scrollGuide;
   scrollGuide = -1;
-  update(QRect(1, temp, pageSize().width(), 1));
+  update(TQRect(1, temp, pageSize().width(), 1));
 }
 
 void DocumentWidget::select(const TextSelection& newSelection)
@@ -410,7 +410,7 @@ void DocumentWidget::selectAll()
 
   TextSelection selection;
   // mark everything as selected
-  QString selectedText("");
+  TQString selectedText("");
   for(unsigned int i = 0; i < pageData->textBoxList.size(); i++) {
     selectedText += pageData->textBoxList[i].text;
     selectedText += "\n";
@@ -426,7 +426,7 @@ void DocumentWidget::selectAll()
 }
 
 
-void DocumentWidget::mousePressEvent ( QMouseEvent * e )
+void DocumentWidget::mousePressEvent ( TQMouseEvent * e )
 {
 #ifdef DEBUG_DOCUMENTWIDGET
   kdDebug(1223) << "DocumentWidget::mousePressEvent(...) called" << endl;
@@ -471,15 +471,15 @@ void DocumentWidget::mousePressEvent ( QMouseEvent * e )
     if (!(e->state() & ShiftButton))
     {
       firstSelectedPoint = e->pos();
-      selectedRectangle = QRect();
-      selectedRegion = QRegion();
+      selectedRectangle = TQRect();
+      selectedRegion = TQRegion();
       emit clearSelection();
     }
   }
 }
 
 
-void DocumentWidget::mouseReleaseEvent ( QMouseEvent *e )
+void DocumentWidget::mouseReleaseEvent ( TQMouseEvent *e )
 {
   // Make sure the event is passed on to the higher-level widget;
   // otherwise the mouse cursor in the centeringScrollview is wrong
@@ -512,7 +512,7 @@ void DocumentWidget::mouseReleaseEvent ( QMouseEvent *e )
 }
 
 
-void DocumentWidget::mouseMoveEvent ( QMouseEvent * e )
+void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
 {
 #ifdef DEBUG_DOCUMENTWIDGET
   kdDebug(1223) << "DocumentWidget::mouseMoveEvent(...) called" << endl;
@@ -540,7 +540,7 @@ void DocumentWidget::mouseMoveEvent ( QMouseEvent * e )
       if (pageData->hyperLinkList[i].box.contains(e->pos())) {
         clearStatusBarTimer.stop();
         setCursor(pointingHandCursor);
-        QString link = pageData->hyperLinkList[i].linkText;
+        TQString link = pageData->hyperLinkList[i].linkText;
         if ( link.startsWith("#") )
           link = link.remove(0,1);
 
@@ -550,7 +550,7 @@ void DocumentWidget::mouseMoveEvent ( QMouseEvent * e )
         if (KVSPrefs::underlineLinks() == KVSPrefs::EnumUnderlineLinks::OnlyOnHover &&
             indexOfUnderlinedLink != lastUnderlinedLink)
         {
-          QRect newUnderline = pageData->hyperLinkList[i].box;
+          TQRect newUnderline = pageData->hyperLinkList[i].box;
           // Increase Rectangle so that the whole line really lines in it.
           newUnderline.addCoords(0, 0, 0, 2);
           // Redraw widget
@@ -559,7 +559,7 @@ void DocumentWidget::mouseMoveEvent ( QMouseEvent * e )
           if (lastUnderlinedLink != -1 && lastUnderlinedLink < pageData->hyperLinkList.size())
           {
             // Erase old underline
-            QRect oldUnderline = pageData->hyperLinkList[lastUnderlinedLink].box;
+            TQRect oldUnderline = pageData->hyperLinkList[lastUnderlinedLink].box;
             oldUnderline.addCoords(0, 0, 0, 2);
             update(oldUnderline);
           }
@@ -573,7 +573,7 @@ void DocumentWidget::mouseMoveEvent ( QMouseEvent * e )
         lastUnderlinedLink != -1 && lastUnderlinedLink < pageData->hyperLinkList.size())
     {
       // Erase old underline
-      QRect oldUnderline = pageData->hyperLinkList[lastUnderlinedLink].box;
+      TQRect oldUnderline = pageData->hyperLinkList[lastUnderlinedLink].box;
       // Increase Rectangle so that the whole line really lines in it.
       oldUnderline.addCoords(0, 0, 0, 2);
       // Redraw widget
@@ -626,8 +626,8 @@ void DocumentWidget::updateSelection(const TextSelection& newTextSelection)
     {
       // Clear selection
       documentCache->deselectText();
-      selectedRectangle = QRect();
-      selectedRegion = QRegion();
+      selectedRectangle = TQRect();
+      selectedRegion = TQRegion();
       update();
     }
     else
@@ -645,10 +645,10 @@ void DocumentWidget::updateSelection(const TextSelection& newTextSelection)
 
       documentCache->selectText(newTextSelection);
 
-      QRegion newlySelectedRegion = pageData->selectedRegion(documentCache->selectedText());
+      TQRegion newlySelectedRegion = pageData->selectedRegion(documentCache->selectedText());
 
       // Compute the region that needs to be updated
-      QRegion updateRegion;
+      TQRegion updateRegion;
       if(!selectedRegion.isEmpty())
       {
         updateRegion = newlySelectedRegion.eor(selectedRegion);
@@ -660,7 +660,7 @@ void DocumentWidget::updateSelection(const TextSelection& newTextSelection)
 
       selectedRegion = newlySelectedRegion;
 
-      QMemArray<QRect> rectangles = updateRegion.rects();
+      TQMemArray<TQRect> rectangles = updateRegion.rects();
       for (unsigned int i = 0; i < rectangles.count(); i++)
       {
         repaint(rectangles[i]);
@@ -672,7 +672,7 @@ void DocumentWidget::updateSelection(const TextSelection& newTextSelection)
 
 void DocumentWidget::clearStatusBar()
 {
-  emit setStatusBarText( QString::null );
+  emit setStatusBarText( TQString::null );
 }
 
 
@@ -701,21 +701,21 @@ void DocumentWidget::delayedRequestPage()
   kapp->processEvents();
 }
 
-QSize DocumentWidget::pageSize() const
+TQSize DocumentWidget::pageSize() const
 {
   // Substract size of the shadow.
-  return size() - QSize(6, 6);
+  return size() - TQSize(6, 6);
 }
 
-QRect DocumentWidget::pageRect() const
+TQRect DocumentWidget::pageRect() const
 {
-  QRect boundingRect = rect();
+  TQRect boundingRect = rect();
   // Substract the shadow.
   boundingRect.addCoords(1,1,-5,-5);
   return boundingRect;
 }
 
-void DocumentWidget::setPageSize(const QSize& pageSize)
+void DocumentWidget::setPageSize(const TQSize& pageSize)
 {
   // When the page size changes this means either the paper size
   // has been changed, or the zoomlevel has been changed.
@@ -724,12 +724,12 @@ void DocumentWidget::setPageSize(const QSize& pageSize)
   selectionNeedsUpdating = true;
 
   // Add size of the shadow.
-  resize(pageSize + QSize(6,6));
+  resize(pageSize + TQSize(6,6));
 }
 
 void DocumentWidget::setPageSize(int width, int height)
 {
-  setPageSize(QSize(width, height));
+  setPageSize(TQSize(width, height));
 }
 
 
@@ -756,8 +756,8 @@ void DocumentWidget::setStandardCursor()
 
 bool DocumentWidget::isVisible()
 {
-  QRect visibleRect(scrollView->contentsX(), scrollView->contentsY(), scrollView->visibleWidth(), scrollView->visibleHeight());
-  QRect widgetRect(scrollView->childX(this), scrollView->childY(this), width(), height());
+  TQRect visibleRect(scrollView->contentsX(), scrollView->contentsY(), scrollView->visibleWidth(), scrollView->visibleHeight());
+  TQRect widgetRect(scrollView->childX(this), scrollView->childY(this), width(), height());
   return widgetRect.intersects(visibleRect);
 }
 

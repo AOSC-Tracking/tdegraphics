@@ -19,7 +19,7 @@
 #include "browser.h"
 #include "mrml_part.h"
 
-#include <qscrollview.h>
+#include <tqscrollview.h>
 
 using namespace KMrml;
 
@@ -35,14 +35,14 @@ Browser::~Browser()
 
 }
 
-void Browser::saveState( QDataStream& stream )
+void Browser::saveState( TQDataStream& stream )
 {
 //     BrowserExtension::saveState( stream );
 
     m_part->saveState( stream );
 }
 
-void Browser::restoreState( QDataStream& stream )
+void Browser::restoreState( TQDataStream& stream )
 {
 //     BrowserExtension::restoreState( stream );
     // ### BrowserExtension::restoreState() calls openURL() at the end (arghh).
@@ -52,12 +52,12 @@ void Browser::restoreState( QDataStream& stream )
 
 int Browser::xOffset()
 {
-    return static_cast<QScrollView*>( m_part->widget())->contentsX();
+    return static_cast<TQScrollView*>( m_part->widget())->contentsX();
 }
 
 int Browser::yOffset()
 {
-    return static_cast<QScrollView*>( m_part->widget())->contentsY();
+    return static_cast<TQScrollView*>( m_part->widget())->contentsY();
 }
 
 #include "browser.moc"

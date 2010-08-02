@@ -22,7 +22,7 @@
 #include "pmxmlhelper.h"
 #include "pmmapmemento.h"
 
-#include <qtextstream.h>
+#include <tqtextstream.h>
 #include <klocale.h>
 
 class PMValueProperty : public PMPropertyBase
@@ -46,8 +46,8 @@ protected:
    virtual bool setProtected( PMObject* obj, const PMVariant& var )
    {
       PMTextureMapBase* m = ( PMTextureMapBase* ) obj;
-      QValueList<double> list = m->mapValues( );
-      QValueList<double>::Iterator it = list.at( m_index );
+      TQValueList<double> list = m->mapValues( );
+      TQValueList<double>::Iterator it = list.at( m_index );
 
       if( it == list.end( ) )
       {
@@ -63,8 +63,8 @@ protected:
    virtual PMVariant getProtected( const PMObject* obj )
    {
       PMTextureMapBase* m = ( PMTextureMapBase* ) obj;
-      QValueList<double> list = m->mapValues( );
-      QValueList<double>::ConstIterator it = list.at( m_index );
+      TQValueList<double> list = m->mapValues( );
+      TQValueList<double>::ConstIterator it = list.at( m_index );
 
       if( it == list.end( ) )
       {
@@ -96,7 +96,7 @@ PMTextureMapBase::~PMTextureMapBase( )
 {
 }
 
-void PMTextureMapBase::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMTextureMapBase::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "map_values", valuesToString( ) );
    Base::serialize( e, doc );
@@ -108,10 +108,10 @@ void PMTextureMapBase::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-QString PMTextureMapBase::valuesToString( ) const
+TQString PMTextureMapBase::valuesToString( ) const
 {
-   QString str;
-   QValueList<double>::ConstIterator it;
+   TQString str;
+   TQValueList<double>::ConstIterator it;
 
    it = m_mapValues.begin( );
    if( it != m_mapValues.end( ) )
@@ -119,16 +119,16 @@ QString PMTextureMapBase::valuesToString( ) const
       str.setNum( *it );
       ++it;
       for( ; it != m_mapValues.end( ); ++it )
-         str += QString( " %1" ).arg( *it );
+         str += TQString( " %1" ).arg( *it );
    }
    return str;
 }
 
-void PMTextureMapBase::stringToValues( const QString& str )
+void PMTextureMapBase::stringToValues( const TQString& str )
 {
    m_mapValues.clear( );
-   QString tstr = str;
-   QTextIStream s( &tstr );
+   TQString tstr = str;
+   TQTextIStream s( &tstr );
    double d;
 
    while( !s.atEnd( ) )
@@ -158,7 +158,7 @@ void PMTextureMapBase::cleanUp( ) const
    Base::cleanUp( );
 }
 
-PMDialogEditBase* PMTextureMapBase::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMTextureMapBase::editWidget( TQWidget* parent ) const
 {
    return new PMTextureMapEdit( parent );
 }
@@ -189,10 +189,10 @@ void PMTextureMapBase::createMemento( )
    m_pMemento = new PMMapMemento( this );
 }
 
-QValueList<double>::Iterator PMTextureMapBase::valueForChild( PMObject* obj )
+TQValueList<double>::Iterator PMTextureMapBase::valueForChild( PMObject* obj )
 {
    PMObject* o = firstChild( );
-   QValueList<double>::Iterator it = m_mapValues.begin( );
+   TQValueList<double>::Iterator it = m_mapValues.begin( );
 
    while( o && ( o != obj ) )
    {
@@ -206,7 +206,7 @@ QValueList<double>::Iterator PMTextureMapBase::valueForChild( PMObject* obj )
 double PMTextureMapBase::mapValue( const PMObject* obj ) const
 {
    PMObject* o = firstChild( );
-   QValueList<double>::ConstIterator it = m_mapValues.begin( );
+   TQValueList<double>::ConstIterator it = m_mapValues.begin( );
 
    while( o && ( o != obj ) )
    {
@@ -226,7 +226,7 @@ void PMTextureMapBase::childAdded( PMObject* ao )
       ( ( PMMapMemento* ) m_pMemento )->setMapValues( m_mapValues );
    if( m_removedValues.isEmpty( ) )
    {
-      QValueList<double>::Iterator it = valueForChild( ao );
+      TQValueList<double>::Iterator it = valueForChild( ao );
       if( it == m_mapValues.end( ) )
       {
          --it;
@@ -254,7 +254,7 @@ void PMTextureMapBase::childAdded( PMObject* ao )
       if( m_pMemento )
          ( ( PMMapMemento* ) m_pMemento )->setRemovedValues( m_removedValues );
 
-      QValueList<double>::Iterator it = m_mapValues.begin( );
+      TQValueList<double>::Iterator it = m_mapValues.begin( );
       bool stop = false;
       double v = m_removedValues.last( );
       m_removedValues.remove( m_removedValues.fromLast( ) );
@@ -278,7 +278,7 @@ bool PMTextureMapBase::takeChild( PMObject* o )
       ( ( PMMapMemento* ) m_pMemento )->setRemovedValues( m_removedValues );
    }
 
-   QValueList<double>::Iterator it = valueForChild( o );
+   TQValueList<double>::Iterator it = valueForChild( o );
    if( it != m_mapValues.end( ) )
    {
       m_removedValues.append( *it );
@@ -288,7 +288,7 @@ bool PMTextureMapBase::takeChild( PMObject* o )
    return Base::takeChild( o );
 }
 
-void PMTextureMapBase::setMapValues( const QValueList<double>& v )
+void PMTextureMapBase::setMapValues( const TQValueList<double>& v )
 {
    if( m_pMemento )
    {
@@ -362,7 +362,7 @@ void PMTextureMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMTextureMap::description( ) const
+TQString PMTextureMap::description( ) const
 {
    return i18n( "texture map" );
 }
@@ -408,7 +408,7 @@ void PMPigmentMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMPigmentMap::description( ) const
+TQString PMPigmentMap::description( ) const
 {
    return i18n( "pigment map" );
 }
@@ -454,7 +454,7 @@ void PMColorMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMColorMap::description( ) const
+TQString PMColorMap::description( ) const
 {
    return i18n( "color map" );
 }
@@ -500,7 +500,7 @@ void PMNormalMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMNormalMap::description( ) const
+TQString PMNormalMap::description( ) const
 {
    return i18n( "normal map" );
 }
@@ -546,7 +546,7 @@ void PMSlopeMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMSlopeMap::description( ) const
+TQString PMSlopeMap::description( ) const
 {
    return i18n( "slope map" );
 }
@@ -592,7 +592,7 @@ void PMDensityMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMDensityMap::description( ) const
+TQString PMDensityMap::description( ) const
 {
    return i18n( "density map" );
 }

@@ -20,8 +20,8 @@
 #ifndef GAMMADIALOG_H
 #define GAMMADIALOG_H
 
-#include <qwidget.h>
-#include <qlayout.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
 
 #include <kgammatable.h>
 #include <kdialogbase.h>
@@ -45,7 +45,7 @@ class GammaDialog : public KDialogBase
 //   Q_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )
       
 public:
-   GammaDialog ( QWidget *parent );
+   GammaDialog ( TQWidget *parent );
    ~GammaDialog( );
 
    KGammaTable *getGt( ) const { return gt; }
@@ -61,8 +61,8 @@ private:
    KGammaTable *gt;
    DispGamma   *gtDisp;
 
-   QHBoxLayout *lhMiddle;
-   QVBoxLayout *lvSliders;
+   TQHBoxLayout *lhMiddle;
+   TQVBoxLayout *lvSliders;
 
    KScanSlider *wGamma;
    KScanSlider *wBright;

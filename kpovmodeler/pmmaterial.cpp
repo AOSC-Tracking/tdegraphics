@@ -63,12 +63,12 @@ void PMMaterial::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMMaterial::description( ) const
+TQString PMMaterial::description( ) const
 {
    return i18n( "material" );
 }
 
-PMDialogEditBase* PMMaterial::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMMaterial::editWidget( TQWidget* parent ) const
 {
    return new PMMaterialEdit( parent );
 }

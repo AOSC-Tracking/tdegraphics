@@ -66,7 +66,7 @@ PMSphere::~PMSphere( )
 }
 
 
-QString PMSphere::description( ) const
+TQString PMSphere::description( ) const
 {
    return i18n( "sphere" );
 }
@@ -85,7 +85,7 @@ PMMetaObject* PMSphere::metaObject( ) const
    return s_pMetaObject;
 }
 
-void PMSphere::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMSphere::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "centre", m_centre.serializeXML( ) );
    e.setAttribute( "radius", m_radius );
@@ -99,7 +99,7 @@ void PMSphere::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMSphere::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMSphere::editWidget( TQWidget* parent ) const
 {
 
  return new PMSphereEdit( parent );

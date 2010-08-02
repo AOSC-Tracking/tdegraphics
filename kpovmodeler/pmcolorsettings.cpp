@@ -20,64 +20,64 @@
 #include "pmrendermanager.h"
 #include "pmdefaults.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <kcolorbutton.h>
 #include <klocale.h>
 
-PMColorSettings::PMColorSettings( QWidget* parent, const char* name )
+PMColorSettings::PMColorSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   QHBoxLayout* hlayout;
-   QVBoxLayout* vlayout;
-   QGridLayout* grid;
+   TQHBoxLayout* hlayout;
+   TQVBoxLayout* vlayout;
+   TQGridLayout* grid;
 
-   vlayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
-   grid = new QGridLayout( vlayout, 6, 3 );
+   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   grid = new TQGridLayout( vlayout, 6, 3 );
    
-   grid->addWidget( new QLabel( i18n( "Background:" ), this ), 0, 0 );
-   hlayout = new QHBoxLayout( );
+   grid->addWidget( new TQLabel( i18n( "Background:" ), this ), 0, 0 );
+   hlayout = new TQHBoxLayout( );
    grid->addLayout( hlayout, 0, 2 );
    m_pBackgroundColor = new KColorButton( this );
    hlayout->addWidget( m_pBackgroundColor );
    hlayout->addStretch( 1 );
 
-   grid->addWidget( new QLabel( i18n( "Wire frame:" ), this ), 1, 0 );
-   hlayout = new QHBoxLayout( );
+   grid->addWidget( new TQLabel( i18n( "Wire frame:" ), this ), 1, 0 );
+   hlayout = new TQHBoxLayout( );
    grid->addLayout( hlayout, 1, 2 );
    m_pGraphicalObjectsColor[0] = new KColorButton( this );
    hlayout->addWidget( m_pGraphicalObjectsColor[0] );
-   hlayout->addWidget( new QLabel( i18n( "Selected:" ), this ) );
+   hlayout->addWidget( new TQLabel( i18n( "Selected:" ), this ) );
    m_pGraphicalObjectsColor[1] = new KColorButton( this );
    hlayout->addWidget( m_pGraphicalObjectsColor[1] );
    hlayout->addStretch( 1 );
    
-   grid->addWidget( new QLabel( i18n( "Control points:" ), this ), 2, 0 );
-   hlayout = new QHBoxLayout( );
+   grid->addWidget( new TQLabel( i18n( "Control points:" ), this ), 2, 0 );
+   hlayout = new TQHBoxLayout( );
    grid->addLayout( hlayout, 2, 2 );
    m_pControlPointsColor[0] = new KColorButton( this );
    hlayout->addWidget( m_pControlPointsColor[0] );
-   hlayout->addWidget( new QLabel( i18n( "Selected:" ), this ) );
+   hlayout->addWidget( new TQLabel( i18n( "Selected:" ), this ) );
    m_pControlPointsColor[1] = new KColorButton( this );
    hlayout->addWidget( m_pControlPointsColor[1] );
    hlayout->addStretch( 1 );
 
-   grid->addWidget( new QLabel( i18n( "Axes:" ), this ), 3, 0 );
-   hlayout = new QHBoxLayout( );
+   grid->addWidget( new TQLabel( i18n( "Axes:" ), this ), 3, 0 );
+   hlayout = new TQHBoxLayout( );
    grid->addLayout( hlayout, 3, 2 );
-   grid->addWidget( new QLabel( "x", this ), 3, 1 );
+   grid->addWidget( new TQLabel( "x", this ), 3, 1 );
    m_pAxesColor[0] = new KColorButton( this );
    hlayout->addWidget( m_pAxesColor[0] );
-   hlayout->addWidget( new QLabel( "y", this ) );
+   hlayout->addWidget( new TQLabel( "y", this ) );
    m_pAxesColor[1] = new KColorButton( this );
    hlayout->addWidget( m_pAxesColor[1] );
-   hlayout->addWidget( new QLabel( "z", this ) );
+   hlayout->addWidget( new TQLabel( "z", this ) );
    m_pAxesColor[2] = new KColorButton( this );
    hlayout->addWidget( m_pAxesColor[2] );
    hlayout->addStretch( 1 );
 
-   grid->addWidget( new QLabel( i18n( "Field of view:" ), this ), 4, 0 );
-   hlayout = new QHBoxLayout( );
+   grid->addWidget( new TQLabel( i18n( "Field of view:" ), this ), 4, 0 );
+   hlayout = new TQHBoxLayout( );
    grid->addLayout( hlayout, 4, 2 );
    m_pFieldOfViewColor = new KColorButton( this );
    hlayout->addWidget( m_pFieldOfViewColor );

@@ -31,8 +31,8 @@
 
 #include <kpcommandhistory.h>
 
-class QPixmap;
-class QString;
+class TQPixmap;
+class TQString;
 
 class kpMainWindow;
 
@@ -43,7 +43,7 @@ public:
                                      kpMainWindow *mainWindow);
     virtual ~kpToolConvertToGrayscaleCommand ();
     
-    virtual QString name () const;
+    virtual TQString name () const;
     virtual int size () const;
 
     virtual void execute ();
@@ -51,7 +51,7 @@ public:
 
 private:
     bool m_actOnSelection;
-    QPixmap *m_oldPixmapPtr;
+    TQPixmap *m_oldPixmapPtr;
 };
 
 #endif  // __kptoolconverttograyscale_h__

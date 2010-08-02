@@ -26,7 +26,7 @@
 
 #include "pmsolidobjectedit.h"
 
-class QCheckBox;
+class TQCheckBox;
 
 class PMVectorEdit;
 class PMFloatEdit;
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMConeEdit with parent and name
     */
-   PMConeEdit( QWidget* parent, const char* name = 0 );
+   PMConeEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -59,6 +59,6 @@ private:
    PMVectorEdit* m_pEnd2;
    PMFloatEdit* m_pRadius1;
    PMFloatEdit* m_pRadius2;
-   QCheckBox* m_pOpen;
+   TQCheckBox* m_pOpen;
 };	
 #endif

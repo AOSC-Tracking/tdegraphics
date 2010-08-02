@@ -17,13 +17,13 @@
 
 #include "pmlibraryhandleedit.h"
 
-#include <qpushbutton.h>
-#include <qcheckbox.h>
-#include <qlineedit.h>
-#include <qtextedit.h>
-#include <qvbox.h>
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqpushbutton.h>
+#include <tqcheckbox.h>
+#include <tqlineedit.h>
+#include <tqtextedit.h>
+#include <tqvbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -34,38 +34,38 @@
 #include "pmdialogeditbase.h"
 #include "pmlibraryhandle.h"
 
-QSize PMLibraryHandleEdit::s_size = QSize( 600, 400 );
+TQSize PMLibraryHandleEdit::s_size = TQSize( 600, 400 );
 
-PMLibraryHandleEdit::PMLibraryHandleEdit( PMLibraryHandle* lib, QWidget* parent, const char* name )
+PMLibraryHandleEdit::PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget* parent, const char* name )
       : KDialogBase( parent, name, true, i18n( "Create Library" ),
                      Ok | Cancel, Ok )
 {
    m_pLibrary = lib;
 
    resize( s_size );
-   QWidget* page = new QWidget( this );
+   TQWidget* page = new TQWidget( this );
    setMainWidget( page );
-   QVBoxLayout* vl = new QVBoxLayout( page, KDialog::spacingHint( ) );
+   TQVBoxLayout* vl = new TQVBoxLayout( page, KDialog::spacingHint( ) );
 
-   QGridLayout* grid = new QGridLayout( vl, 5, 2 );
-   QLabel* lbl = new QLabel( i18n( "Name: " ), page );
-   m_pNameEdit = new QLineEdit( page );
+   TQGridLayout* grid = new TQGridLayout( vl, 5, 2 );
+   TQLabel* lbl = new TQLabel( i18n( "Name: " ), page );
+   m_pNameEdit = new TQLineEdit( page );
    grid->addWidget( lbl, 0, 0 );
    grid->addWidget( m_pNameEdit, 0, 1 );
 
-   lbl = new QLabel( i18n( "Author: " ), page );
-   m_pAuthorEdit = new QLineEdit( page );
+   lbl = new TQLabel( i18n( "Author: " ), page );
+   m_pAuthorEdit = new TQLineEdit( page );
    grid->addWidget( lbl, 1, 0 );
    grid->addWidget( m_pAuthorEdit, 1, 1 );
 
-   lbl = new QLabel( i18n( "Description: " ), page );
-   m_pDescriptionEdit = new QTextEdit( page );
+   lbl = new TQLabel( i18n( "Description: " ), page );
+   m_pDescriptionEdit = new TQTextEdit( page );
    m_pDescriptionEdit->setMaximumHeight( 120 );
    grid->addWidget( lbl, 2, 0 );
    grid->addMultiCellWidget( m_pDescriptionEdit, 2, 3, 1, 1 );
    grid->setRowStretch( 3, 1 );
    
-   m_pReadOnlyEdit = new QCheckBox( i18n( "Allow changes to the library?" ), page );
+   m_pReadOnlyEdit = new TQCheckBox( i18n( "Allow changes to the library?" ), page );
    grid->addMultiCellWidget( m_pReadOnlyEdit, 4, 4, 0, 1 );
 
    // Load the fields with values
@@ -75,10 +75,10 @@ PMLibraryHandleEdit::PMLibraryHandleEdit( PMLibraryHandle* lib, QWidget* parent,
    m_pReadOnlyEdit->setChecked( !lib->isReadOnly( ) ); 
    
    // Setup the signals
-   connect( m_pNameEdit, SIGNAL( textChanged( const QString& ) ), SLOT( slotEditsChanged( const QString& ) ) );
-   connect( m_pAuthorEdit, SIGNAL( textChanged( const QString& ) ), SLOT( slotEditsChanged( const QString& ) ) );
-   connect( m_pDescriptionEdit, SIGNAL( textChanged( ) ), SLOT( slotDescriptionChanged( ) ) );
-   connect( m_pReadOnlyEdit, SIGNAL( clicked( ) ), SLOT( slotReadOnlyChanged( ) ) );
+   connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotEditsChanged( const TQString& ) ) );
+   connect( m_pAuthorEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotEditsChanged( const TQString& ) ) );
+   connect( m_pDescriptionEdit, TQT_SIGNAL( textChanged( ) ), TQT_SLOT( slotDescriptionChanged( ) ) );
+   connect( m_pReadOnlyEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotReadOnlyChanged( ) ) );
 
    // On startup you can only cancel
    enableButtonOK( false );
@@ -89,7 +89,7 @@ void PMLibraryHandleEdit::slotReadOnlyChanged( )
    enableButtonOK( true );
 }
 
-void PMLibraryHandleEdit::slotEditsChanged( const QString& /*str*/ )
+void PMLibraryHandleEdit::slotEditsChanged( const TQString& /*str*/ )
 {
    enableButtonOK( true );
 }
@@ -109,11 +109,11 @@ void PMLibraryHandleEdit::restoreConfig( KConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
-   QSize defaultSize( 300, 200 );
+   TQSize defaultSize( 300, 200 );
    s_size = cfg->readSizeEntry( "LibraryHandleEditSize", &defaultSize );
 }
 
-void PMLibraryHandleEdit::resizeEvent( QResizeEvent* ev )
+void PMLibraryHandleEdit::resizeEvent( TQResizeEvent* ev )
 {
    s_size = ev->size( );
 }

@@ -29,11 +29,11 @@
 
 #include <kptoolpreviewdialog.h>
 
-#include <qapplication.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
+#include <tqapplication.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -48,8 +48,8 @@
 
 kpToolPreviewDialog::kpToolPreviewDialog (Features features,
                                           bool reserveTopRow,
-                                          const QString &caption,
-                                          const QString &afterActionText,
+                                          const TQString &caption,
+                                          const TQString &afterActionText,
                                           bool actOnSelection,
                                           kpMainWindow *parent,
                                           const char *name)
@@ -65,7 +65,7 @@ kpToolPreviewDialog::kpToolPreviewDialog (Features features,
       m_previewPixmapLabel (0),
       m_gridLayout (0)
 {
-    QWidget *baseWidget = new QWidget (this);
+    TQWidget *baseWidget = new TQWidget (this);
     setMainWidget (baseWidget);
 
 
@@ -87,7 +87,7 @@ kpToolPreviewDialog::kpToolPreviewDialog (Features features,
         createPreviewGroupBox ();
 
 
-    m_gridLayout = new QGridLayout (baseWidget, 4, 2,
+    m_gridLayout = new TQGridLayout (baseWidget, 4, 2,
                                     0/*margin*/, spacingHint ());
     m_gridNumRows = reserveTopRow ? 1 : 0;
     if (m_dimensionsGroupBox || m_previewGroupBox)
@@ -123,10 +123,10 @@ kpToolPreviewDialog::~kpToolPreviewDialog ()
 // private
 void kpToolPreviewDialog::createDimensionsGroupBox ()
 {
-    m_dimensionsGroupBox = new QGroupBox (i18n ("Dimensions"), mainWidget ());
+    m_dimensionsGroupBox = new TQGroupBox (i18n ("Dimensions"), mainWidget ());
 
-    QLabel *originalLabel = new QLabel (i18n ("Original:"), m_dimensionsGroupBox);
-    QString originalDimensions;
+    TQLabel *originalLabel = new TQLabel (i18n ("Original:"), m_dimensionsGroupBox);
+    TQString originalDimensions;
     if (document ())
     {
          originalDimensions = i18n ("%1 x %2")
@@ -134,18 +134,18 @@ void kpToolPreviewDialog::createDimensionsGroupBox ()
                                   .arg (m_oldHeight);
 
          // Stop the Dimensions Group Box from resizing so often
-         const QString minimumLengthString ("100000 x 100000");
+         const TQString minimumLengthString ("100000 x 100000");
          const int padLength = minimumLengthString.length ();
          for (int i = originalDimensions.length (); i < padLength; i++)
              originalDimensions += " ";
     }
-    QLabel *originalDimensionsLabel = new QLabel (originalDimensions, m_dimensionsGroupBox);
+    TQLabel *originalDimensionsLabel = new TQLabel (originalDimensions, m_dimensionsGroupBox);
 
-    QLabel *afterTransformLabel = new QLabel (m_afterActionText, m_dimensionsGroupBox);
-    m_afterTransformDimensionsLabel = new QLabel (m_dimensionsGroupBox);
+    TQLabel *afterTransformLabel = new TQLabel (m_afterActionText, m_dimensionsGroupBox);
+    m_afterTransformDimensionsLabel = new TQLabel (m_dimensionsGroupBox);
 
 
-    QGridLayout *dimensionsLayout = new QGridLayout (m_dimensionsGroupBox,
+    TQGridLayout *dimensionsLayout = new TQGridLayout (m_dimensionsGroupBox,
                                                      2, 2,
                                                      marginHint () * 2, spacingHint ());
 
@@ -158,20 +158,20 @@ void kpToolPreviewDialog::createDimensionsGroupBox ()
 // private
 void kpToolPreviewDialog::createPreviewGroupBox ()
 {
-    m_previewGroupBox = new QGroupBox (i18n ("Preview"), mainWidget ());
+    m_previewGroupBox = new TQGroupBox (i18n ("Preview"), mainWidget ());
 
     m_previewPixmapLabel = new kpResizeSignallingLabel (m_previewGroupBox);
     m_previewPixmapLabel->setMinimumSize (150, 110);
-    connect (m_previewPixmapLabel, SIGNAL (resized ()),
-             this, SLOT (updatePreview ()));
+    connect (m_previewPixmapLabel, TQT_SIGNAL (resized ()),
+             this, TQT_SLOT (updatePreview ()));
 
-    QPushButton *updatePushButton = new QPushButton (i18n ("&Update"),
+    TQPushButton *updatePushButton = new TQPushButton (i18n ("&Update"),
                                                      m_previewGroupBox);
-    connect (updatePushButton, SIGNAL (clicked ()),
-             this, SLOT (slotUpdateWithWaitCursor ()));
+    connect (updatePushButton, TQT_SIGNAL (clicked ()),
+             this, TQT_SLOT (slotUpdateWithWaitCursor ()));
 
 
-    QVBoxLayout *previewLayout = new QVBoxLayout (m_previewGroupBox,
+    TQVBoxLayout *previewLayout = new TQVBoxLayout (m_previewGroupBox,
                                                   marginHint () * 2,
                                                   QMAX (1, spacingHint () / 2));
 
@@ -188,13 +188,13 @@ kpDocument *kpToolPreviewDialog::document () const
 
 
 // protected
-void kpToolPreviewDialog::addCustomWidgetToFront (QWidget *w)
+void kpToolPreviewDialog::addCustomWidgetToFront (TQWidget *w)
 {
     m_gridLayout->addMultiCellWidget (w, 0, 0, 0, 1);
 }
 
 // protected
-void kpToolPreviewDialog::addCustomWidget (QWidget *w)
+void kpToolPreviewDialog::addCustomWidget (TQWidget *w)
 {
     m_gridLayout->addMultiCellWidget (w, m_gridNumRows, m_gridNumRows, 0, 1);
     m_gridNumRows++;
@@ -211,12 +211,12 @@ void kpToolPreviewDialog::updateDimensions ()
     if (!doc)
         return;
 
-    QSize newDim = newDimensions ();
+    TQSize newDim = newDimensions ();
 #if DEBUG_KP_TOOL_PREVIEW_DIALOG
     kdDebug () << "kpToolPreviewDialog::updateDimensions(): newDim=" << newDim << endl;
 #endif
 
-    QString newDimString = i18n ("%1 x %2")
+    TQString newDimString = i18n ("%1 x %2")
                                .arg (newDim.width ())
                                .arg (newDim.height ());
     m_afterTransformDimensionsLabel->setText (newDimString);
@@ -283,7 +283,7 @@ void kpToolPreviewDialog::updateShrukenDocumentPixmap ()
                                                m_oldWidth,
                                                m_oldHeight);
 
-        QPixmap pixmap;
+        TQPixmap pixmap;
 
         if (m_actOnSelection)
         {
@@ -337,7 +337,7 @@ void kpToolPreviewDialog::updatePreview ()
 
     if (!m_shrunkenDocumentPixmap.isNull ())
     {
-        QSize newDim = newDimensions ();
+        TQSize newDim = newDimensions ();
         double keepsAspectScale = aspectScale (m_previewPixmapLabel->width (),
                                                m_previewPixmapLabel->height (),
                                                newDim.width (),
@@ -352,12 +352,12 @@ void kpToolPreviewDialog::updatePreview ()
                                            1,  // min
                                            m_previewPixmapLabel->height ());  // max
 
-        // TODO: Some effects work directly on QImage; so could cache the
-        //       QImage so that transformPixmap() is faster
-        QPixmap transformedShrunkenDocumentPixmap =
+        // TODO: Some effects work directly on TQImage; so could cache the
+        //       TQImage so that transformPixmap() is faster
+        TQPixmap transformedShrunkenDocumentPixmap =
             transformPixmap (m_shrunkenDocumentPixmap, targetWidth, targetHeight);
 
-        QPixmap previewPixmap (m_previewPixmapLabel->width (),
+        TQPixmap previewPixmap (m_previewPixmapLabel->width (),
                                m_previewPixmapLabel->height ());
         kpPixmapFX::fill (&previewPixmap, kpColor::transparent);
         kpPixmapFX::setPixmapAt (&previewPixmap,
@@ -392,7 +392,7 @@ void kpToolPreviewDialog::updatePreview ()
         m_previewPixmapLabel->repaint (false/*no erase*/);
 
 #if DEBUG_KP_TOOL_PREVIEW_DIALOG
-    kdDebug () << "\tafter QLabel::setPixmap() previewPixmapLabel: w="
+    kdDebug () << "\tafter TQLabel::setPixmap() previewPixmapLabel: w="
                << m_previewPixmapLabel->width ()
                << " h="
                << m_previewPixmapLabel->height ()
@@ -420,11 +420,11 @@ void kpToolPreviewDialog::slotUpdateWithWaitCursor ()
                << endl;
 #endif
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     slotUpdate ();
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 

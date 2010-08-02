@@ -31,13 +31,13 @@
 
 #include <kptooltoolbar.h>
 
-#include <qbuttongroup.h>
-#include <qlayout.h>
-#include <qdatetime.h>
-#include <qtoolbutton.h>
-#include <qtooltip.h>
-#include <qwidget.h>
-#include <qwhatsthis.h>
+#include <tqbuttongroup.h>
+#include <tqlayout.h>
+#include <tqdatetime.h>
+#include <tqtoolbutton.h>
+#include <tqtooltip.h>
+#include <tqwidget.h>
+#include <tqwhatsthis.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -58,8 +58,8 @@
 class kpToolButton : public QToolButton
 {
 public:
-    kpToolButton (kpTool *tool, QWidget *parent)
-        : QToolButton (parent),
+    kpToolButton (kpTool *tool, TQWidget *parent)
+        : TQToolButton (parent),
           m_tool (tool)
     {
     }
@@ -70,7 +70,7 @@ public:
 
 protected:
     // virtual [base QWidget]
-    void mouseDoubleClickEvent (QMouseEvent *e)
+    void mouseDoubleClickEvent (TQMouseEvent *e)
     {
         if (e->button () == Qt::LeftButton && m_tool)
             m_tool->globalDraw ();
@@ -80,8 +80,8 @@ protected:
 };
 
 
-kpToolToolBar::kpToolToolBar (const QString &label, kpMainWindow *mainWindow, int colsOrRows, const char *name)
-    : KToolBar ((QWidget *) mainWindow, name, false/*don't use global toolBar settings*/, true/*readConfig*/),
+kpToolToolBar::kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, int colsOrRows, const char *name)
+    : KToolBar ((TQWidget *) mainWindow, name, false/*don't use global toolBar settings*/, true/*readConfig*/),
       m_vertCols (colsOrRows),
       m_buttonGroup (0),
       m_baseWidget (0),
@@ -102,10 +102,10 @@ kpToolToolBar::kpToolToolBar (const QString &label, kpMainWindow *mainWindow, in
     //setVerticallyStretchable (false);
 
 
-    m_baseWidget = new QWidget (this);
+    m_baseWidget = new TQWidget (this);
 
 #if DEBUG_KP_TOOL_TOOL_BAR
-    QTime timer;
+    TQTime timer;
     timer.start ();
 #endif
 
@@ -127,12 +127,12 @@ kpToolToolBar::kpToolToolBar (const QString &label, kpMainWindow *mainWindow, in
                << timer.restart () << endl;
 #endif
 
-    for (QValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
+    for (TQValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
          it != m_toolWidgets.end ();
          it++)
     {
-        connect (*it, SIGNAL (optionSelected (int, int)),
-                 this, SIGNAL (toolWidgetOptionSelected ()));
+        connect (*it, TQT_SIGNAL (optionSelected (int, int)),
+                 this, TQT_SIGNAL (toolWidgetOptionSelected ()));
     }
 
 #if DEBUG_KP_TOOL_TOOL_BAR
@@ -148,10 +148,10 @@ kpToolToolBar::kpToolToolBar (const QString &label, kpMainWindow *mainWindow, in
                << timer.elapsed () << endl;
 #endif
 
-    m_buttonGroup = new QButtonGroup ();  // invisible
+    m_buttonGroup = new TQButtonGroup ();  // invisible
     m_buttonGroup->setExclusive (true);
 
-    connect (m_buttonGroup, SIGNAL (clicked (int)), SLOT (slotToolButtonClicked ()));
+    connect (m_buttonGroup, TQT_SIGNAL (clicked (int)), TQT_SLOT (slotToolButtonClicked ()));
 
     hideAllToolWidgets ();
 }
@@ -200,7 +200,7 @@ int kpToolToolBar::defaultIconSize ()
     if (m_defaultIconSize <= 0)
     {
         // Adapt according to screen geometry
-        const QRect desktopSize = KGlobalSettings::desktopGeometry (this);
+        const TQRect desktopSize = KGlobalSettings::desktopGeometry (this);
     #if DEBUG_KP_TOOL_TOOL_BAR
         kdDebug () << "\tadapting to screen size=" << desktopSize << endl;
     #endif
@@ -221,7 +221,7 @@ int kpToolToolBar::defaultIconSize ()
 // public
 void kpToolToolBar::registerTool (kpTool *tool)
 {
-    for (QValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
          it != m_buttonToolPairs.end ();
          it++)
     {
@@ -230,7 +230,7 @@ void kpToolToolBar::registerTool (kpTool *tool)
     }
     int num = m_buttonToolPairs.count ();
 
-    QToolButton *b = new kpToolButton (tool, m_baseWidget);
+    TQToolButton *b = new kpToolButton (tool, m_baseWidget);
     b->setAutoRaise (true);
     b->setUsesBigPixmap (false);
     b->setUsesTextLabel (false);
@@ -238,8 +238,8 @@ void kpToolToolBar::registerTool (kpTool *tool)
 
     b->setText (tool->text ());
     b->setIconSet (tool->iconSet (defaultIconSize ()));
-    QToolTip::add (b, tool->toolTip ());
-    QWhatsThis::add (b, tool->description ());
+    TQToolTip::add (b, tool->toolTip ());
+    TQWhatsThis::add (b, tool->description ());
 
     m_buttonGroup->insert (b);
     addButton (b, orientation (), num);
@@ -247,16 +247,16 @@ void kpToolToolBar::registerTool (kpTool *tool)
     m_buttonToolPairs.append (kpButtonToolPair (b, tool));
 
 
-    connect (tool, SIGNAL (actionActivated ()),
-             this, SLOT (slotToolActionActivated ()));
-    connect (tool, SIGNAL (actionToolTipChanged (const QString &)),
-             this, SLOT (slotToolActionToolTipChanged ()));
+    connect (tool, TQT_SIGNAL (actionActivated ()),
+             this, TQT_SLOT (slotToolActionActivated ()));
+    connect (tool, TQT_SIGNAL (actionToolTipChanged (const TQString &)),
+             this, TQT_SLOT (slotToolActionToolTipChanged ()));
 }
 
 // public
 void kpToolToolBar::unregisterTool (kpTool *tool)
 {
-    for (QValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
          it != m_buttonToolPairs.end ();
          it++)
     {
@@ -265,10 +265,10 @@ void kpToolToolBar::unregisterTool (kpTool *tool)
             delete ((*it).m_button);
             m_buttonToolPairs.erase (it);
 
-            disconnect (tool, SIGNAL (actionActivated ()),
-                        this, SLOT (slotToolActionActivated ()));
-            disconnect (tool, SIGNAL (actionToolTipChanged (const QString &)),
-                        this, SLOT (slotToolActionToolTipChanged ()));
+            disconnect (tool, TQT_SIGNAL (actionActivated ()),
+                        this, TQT_SLOT (slotToolActionActivated ()));
+            disconnect (tool, TQT_SIGNAL (actionToolTipChanged (const TQString &)),
+                        this, TQT_SLOT (slotToolActionToolTipChanged ()));
             break;
         }
     }
@@ -277,7 +277,7 @@ void kpToolToolBar::unregisterTool (kpTool *tool)
 // public
 void kpToolToolBar::unregisterAllTools ()
 {
-    for (QValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
          it != m_buttonToolPairs.end ();
          it++)
     {
@@ -308,7 +308,7 @@ void kpToolToolBar::selectTool (const kpTool *tool, bool reselectIfSameTool)
 
     if (tool)
     {
-        for (QValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
+        for (TQValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
             it != m_buttonToolPairs.end ();
             it++)
         {
@@ -322,7 +322,7 @@ void kpToolToolBar::selectTool (const kpTool *tool, bool reselectIfSameTool)
     }
     else
     {
-        QButton *b = m_buttonGroup->selected ();
+        TQButton *b = m_buttonGroup->selected ();
     #if DEBUG_KP_TOOL_TOOL_BAR
         kdDebug () << "\twant to select no tool - button selected=" << b << endl;
     #endif
@@ -351,7 +351,7 @@ void kpToolToolBar::selectPreviousTool ()
 // public
 void kpToolToolBar::hideAllToolWidgets ()
 {
-    for (QValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
+    for (TQValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
          it != m_toolWidgets.end ();
          it++)
     {
@@ -368,7 +368,7 @@ int kpToolToolBar::numShownToolWidgets () const
 
     int ret = 0;
 
-    for (QValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
+    for (TQValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
          it != m_toolWidgets.end ();
          it++)
     {
@@ -389,7 +389,7 @@ kpToolWidgetBase *kpToolToolBar::shownToolWidget (int which) const
 {
     int uptoVisibleWidget = 0;
 
-    for (QValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
+    for (TQValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
          it != m_toolWidgets.end ();
          it++)
     {
@@ -409,7 +409,7 @@ kpToolWidgetBase *kpToolToolBar::shownToolWidget (int which) const
 // public
 bool kpToolToolBar::toolsSingleKeyTriggersEnabled () const
 {
-    for (QValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
          it != m_buttonToolPairs.end ();
          it++)
     {
@@ -427,7 +427,7 @@ void kpToolToolBar::enableToolsSingleKeyTriggers (bool enable)
     kdDebug () << "kpToolToolBar::enableToolsSingleKeyTriggers(" << enable << ")" << endl;
 #endif
 
-    for (QValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
         it != m_buttonToolPairs.end ();
         it++)
     {
@@ -439,14 +439,14 @@ void kpToolToolBar::enableToolsSingleKeyTriggers (bool enable)
 // private slot
 void kpToolToolBar::slotToolButtonClicked ()
 {
-    QButton *b = m_buttonGroup->selected ();
+    TQButton *b = m_buttonGroup->selected ();
 
 #if DEBUG_KP_TOOL_TOOL_BAR
     kdDebug () << "kpToolToolBar::slotToolButtonClicked() button=" << b << endl;
 #endif
 
     kpTool *tool = 0;
-    for (QValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
          it != m_buttonToolPairs.end ();
          it++)
     {
@@ -534,13 +534,13 @@ void kpToolToolBar::slotToolActionToolTipChanged ()
     if (!tool)
         return;
 
-    for (QValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::const_iterator it = m_buttonToolPairs.begin ();
         it != m_buttonToolPairs.end ();
         it++)
     {
         if (tool == (*it).m_tool)
         {
-            QToolTip::add ((*it).m_button, tool->toolTip ());
+            TQToolTip::add ((*it).m_button, tool->toolTip ());
             return;
         }
     }
@@ -556,8 +556,8 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
                << ") called!" << endl;
 #endif
 
-    // (QDockWindow::undock() calls us)
-    bool isOutsideDock = (place () == QDockWindow::OutsideDock);
+    // (TQDockWindow::undock() calls us)
+    bool isOutsideDock = (place () == TQDockWindow::OutsideDock);
 
     if (!m_lastDockedOrientationSet || !isOutsideDock)
     {
@@ -577,10 +577,10 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
     delete m_baseLayout;
     if (o == Qt::Vertical)
     {
-        m_baseLayout = new QBoxLayout (m_baseWidget, QBoxLayout::TopToBottom,
+        m_baseLayout = new TQBoxLayout (m_baseWidget, TQBoxLayout::TopToBottom,
                                        5/*margin*/,
                                        10/*spacing*/);
-        m_toolLayout = new QGridLayout (m_baseLayout,
+        m_toolLayout = new TQGridLayout (m_baseLayout,
                                         5/*arbitrary rows since toolBar auto-expands*/,
                                         m_vertCols,
                                         0/*margin*/,
@@ -588,10 +588,10 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
     }
     else // if (o == Qt::Horizontal)
     {
-        m_baseLayout = new QBoxLayout (m_baseWidget, QBoxLayout::LeftToRight,
+        m_baseLayout = new TQBoxLayout (m_baseWidget, TQBoxLayout::LeftToRight,
                                        5/*margin*/,
                                        10/*spacing*/);
-        m_toolLayout = new QGridLayout (m_baseLayout,
+        m_toolLayout = new TQGridLayout (m_baseLayout,
                                         m_vertCols/*rows in this case, since horiz*/,
                                         5/*arbitrary cols since toolBar auto-expands*/,
                                         0/*margin*/,
@@ -600,7 +600,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
 
     int num = 0;
 
-    for (QValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
+    for (TQValueVector <kpButtonToolPair>::iterator it = m_buttonToolPairs.begin ();
          it != m_buttonToolPairs.end ();
          it++)
     {
@@ -608,7 +608,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
         num++;
     }
 
-    for (QValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
+    for (TQValueVector <kpToolWidgetBase *>::const_iterator it = m_toolWidgets.begin ();
          it != m_toolWidgets.end ();
          it++)
     {
@@ -624,7 +624,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
 }
 
 // private
-void kpToolToolBar::addButton (QButton *button, Qt::Orientation o, int num)
+void kpToolToolBar::addButton (TQButton *button, Qt::Orientation o, int num)
 {
     if (o == Qt::Vertical)
         m_toolLayout->addWidget (button, num / m_vertCols, num % m_vertCols);

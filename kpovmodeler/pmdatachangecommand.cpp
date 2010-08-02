@@ -25,7 +25,7 @@
 PMDataChangeCommand::PMDataChangeCommand( PMMemento* memento )
       : PMCommand( )
 {
-   QString text = memento->originator( )->name( );
+   TQString text = memento->originator( )->name( );
    if( text.isEmpty( ) )
       text = memento->originator( )->description( );
    setText( i18n( "Change %1" ).arg( text ) );

@@ -20,7 +20,7 @@
 #include <math.h>
 
 PM3DControlPoint::PM3DControlPoint( const PMVector& point, int id,
-                                    const QString& description )
+                                    const TQString& description )
       : PMControlPoint( id, description )
 {
    m_point = point;

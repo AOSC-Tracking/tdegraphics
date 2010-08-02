@@ -24,11 +24,11 @@
 #include <config.h>
 #endif
 
-#include <qlistview.h>
+#include <tqlistview.h>
 class PMObject;
 
 /**
- * QListViewItem for a @ref PMObject
+ * TQListViewItem for a @ref PMObject
  *
  * Each PMListViewItem is connected to a PMObject.
  */
@@ -36,25 +36,25 @@ class PMTreeViewItem : public QListViewItem
 {
 public:
    /**
-    * Constructs a new top-level list view item in the QListView parent.
+    * Constructs a new top-level list view item in the TQListView parent.
     */
-   PMTreeViewItem( PMObject* object, QListView* parent );
+   PMTreeViewItem( PMObject* object, TQListView* parent );
    /**
     * Constructs a new list view item which is a child of parent and
     * first in the parent's list of children.
     */
-   PMTreeViewItem( PMObject* object, QListViewItem* parent );
+   PMTreeViewItem( PMObject* object, TQListViewItem* parent );
    /**
     * Constructs a list view item which is a child of parent
     * and is after after in the parent's list of children.
     */
-   PMTreeViewItem( PMObject* object, QListView* parent, QListViewItem* after );
+   PMTreeViewItem( PMObject* object, TQListView* parent, TQListViewItem* after );
    /**
     * Constructs a list view item which is a child of parent
     * and is after after in the parent's list of children.
     */
-   PMTreeViewItem( PMObject* object, QListViewItem* parent,
-                   QListViewItem* after );
+   PMTreeViewItem( PMObject* object, TQListViewItem* parent,
+                   TQListViewItem* after );
    /**
     * Returns the connected @ref PMObject
     */
@@ -63,13 +63,13 @@ public:
     * Returns a key that can be used for sorting, here the index in the
     * parents list of children
     */
-   virtual QString key( int column, bool ascending ) const;
+   virtual TQString key( int column, bool ascending ) const;
    /**
     * Returns a pointer to the parent item
     */
    PMTreeViewItem* parent( )
    {
-      return ( PMTreeViewItem* ) QListViewItem::parent( );
+      return ( PMTreeViewItem* ) TQListViewItem::parent( );
    }
    void setSelected( bool select );
    

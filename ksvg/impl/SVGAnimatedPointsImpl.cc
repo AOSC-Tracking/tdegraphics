@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include "CanvasItem.h"
 #include "SVGPointListImpl.h"
@@ -62,7 +62,7 @@ SVGPointListImpl *SVGAnimatedPointsImpl::animatedPoints() const
 	return m_animatedPoints;
 }
 
-void SVGAnimatedPointsImpl::parsePoints(QString _points, SVGPointListImpl *points)
+void SVGAnimatedPointsImpl::parsePoints(TQString _points, SVGPointListImpl *points)
 {
 	if(_points.isEmpty())
 		return;
@@ -73,13 +73,13 @@ void SVGAnimatedPointsImpl::parsePoints(QString _points, SVGPointListImpl *point
 		return;
 
 	_points.replace(',', ' ');
-	_points.replace('\r', QString::null);
-	_points.replace('\n', QString::null);
+	_points.replace('\r', TQString::null);
+	_points.replace('\n', TQString::null);
 
 	_points = _points.simplifyWhiteSpace();
 
-	QStringList pointList = QStringList::split(' ', _points);
-	for(QStringList::Iterator it = pointList.begin(); it != pointList.end(); it++)
+	TQStringList pointList = TQStringList::split(' ', _points);
+	for(TQStringList::Iterator it = pointList.begin(); it != pointList.end(); it++)
 	{
 		SVGPointImpl *point = SVGSVGElementImpl::createSVGPoint();
 		point->setX((*(it++)).toFloat());

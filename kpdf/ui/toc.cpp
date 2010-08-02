@@ -8,8 +8,8 @@
  ***************************************************************************/
 
 // qt/kde includes
-#include <qheader.h>
-#include <qvariant.h>
+#include <tqheader.h>
+#include <tqvariant.h>
 #include <klocale.h>
 
 // local includes
@@ -25,7 +25,7 @@
 class TOCItem : public KListViewItem
 {
     public:
-        TOCItem( KListView *parent, TOCItem *after, const QDomElement & e )
+        TOCItem( KListView *parent, TOCItem *after, const TQDomElement & e )
             : KListViewItem( parent, after, e.tagName() ), m_element( e )
         {
 #ifdef TOC_ENABLE_PAGE_COLUMN
@@ -35,7 +35,7 @@ class TOCItem : public KListViewItem
             setMultiLinesEnabled(true);
         }
 
-        TOCItem( KListViewItem *parent, TOCItem *after, const QDomElement & e )
+        TOCItem( KListViewItem *parent, TOCItem *after, const TQDomElement & e )
             : KListViewItem( parent, after, e.tagName() ), m_element( e )
         {
 #ifdef TOC_ENABLE_PAGE_COLUMN
@@ -45,16 +45,16 @@ class TOCItem : public KListViewItem
             setMultiLinesEnabled(true);
         }
 
-        const QDomElement & element() const
+        const TQDomElement & element() const
         {
             return m_element;
         }
 
     private:
-        QDomElement m_element;
+        TQDomElement m_element;
 };
 
-TOC::TOC(QWidget *parent, KPDFDocument *document) : KListView(parent), m_document(document)
+TOC::TOC(TQWidget *parent, KPDFDocument *document) : KListView(parent), m_document(document)
 {
     addColumn( i18n("Topic") );
 #ifdef TOC_ENABLE_PAGE_COLUMN
@@ -67,8 +67,8 @@ TOC::TOC(QWidget *parent, KPDFDocument *document) : KListView(parent), m_documen
     // the next line causes bug:147233
 //    setResizeMode(AllColumns);
     setAllColumnsShowFocus(true);
-    connect(this, SIGNAL(clicked(QListViewItem *)), this, SLOT(slotExecuted(QListViewItem *)));
-    connect(this, SIGNAL(returnPressed(QListViewItem *)), this, SLOT(slotExecuted(QListViewItem *)));
+    connect(this, TQT_SIGNAL(clicked(TQListViewItem *)), this, TQT_SLOT(slotExecuted(TQListViewItem *)));
+    connect(this, TQT_SIGNAL(returnPressed(TQListViewItem *)), this, TQT_SLOT(slotExecuted(TQListViewItem *)));
 }
 
 TOC::~TOC()
@@ -81,7 +81,7 @@ uint TOC::observerId() const
     return TOC_ID;
 }
 
-void TOC::notifySetup( const QValueVector< KPDFPage * > & /*pages*/, bool documentChanged )
+void TOC::notifySetup( const TQValueVector< KPDFPage * > & /*pages*/, bool documentChanged )
 {
     if ( !documentChanged )
         return;
@@ -104,15 +104,15 @@ void TOC::notifySetup( const QValueVector< KPDFPage * > & /*pages*/, bool docume
     emit hasTOC( true );
 }
 
-void TOC::addChildren( const QDomNode & parentNode, KListViewItem * parentItem )
+void TOC::addChildren( const TQDomNode & parentNode, KListViewItem * parentItem )
 {
     // keep track of the current listViewItem
     TOCItem * currentItem = 0;
-    QDomNode n = parentNode.firstChild();
+    TQDomNode n = parentNode.firstChild();
     while( !n.isNull() )
     {
         // convert the node to an element (sure it is)
-        QDomElement e = n.toElement();
+        TQDomElement e = n.toElement();
 
         // insert the entry as top level (listview parented) or 2nd+ level
         if ( !parentItem )
@@ -127,22 +127,22 @@ void TOC::addChildren( const QDomNode & parentNode, KListViewItem * parentItem )
         // open/keep close the item
         bool isOpen = false;
         if ( e.hasAttribute( "Open" ) )
-            isOpen = QVariant( e.attribute( "Open" ) ).toBool();
+            isOpen = TQVariant( e.attribute( "Open" ) ).toBool();
         currentItem->setOpen( isOpen );
 
         n = n.nextSibling();
     }
 }
 
-void TOC::slotExecuted( QListViewItem *i )
+void TOC::slotExecuted( TQListViewItem *i )
 {
     TOCItem* tocItem = dynamic_cast<TOCItem*>( i );
     // that filters clicks on [+] that for a strange reason don't seem to be TOCItem*
     if (tocItem == NULL)
         return;
-    const QDomElement & e = tocItem->element();
+    const TQDomElement & e = tocItem->element();
 
-    QString externalFileName = e.attribute( "ExternalFileName" );
+    TQString externalFileName = e.attribute( "ExternalFileName" );
     if ( !externalFileName.isEmpty() )
     {
         KPDFLinkGoto link( externalFileName, getViewport( e ) );
@@ -154,7 +154,7 @@ void TOC::slotExecuted( QListViewItem *i )
     }
 }
 
-DocumentViewport TOC::getViewport( const QDomElement &e ) const
+DocumentViewport TOC::getViewport( const TQDomElement &e ) const
 {
     if ( e.hasAttribute( "Viewport" ) )
     {
@@ -164,8 +164,8 @@ DocumentViewport TOC::getViewport( const QDomElement &e ) const
     else if ( e.hasAttribute( "ViewportName" ) )
     {
         // if the node references a viewport, get the reference and set it
-        const QString & page = e.attribute( "ViewportName" );
-        const QString & viewport = m_document->getMetaData( "NamedViewport", page );
+        const TQString & page = e.attribute( "ViewportName" );
+        const TQString & viewport = m_document->getMetaData( "NamedViewport", page );
         if ( !viewport.isNull() )
             return DocumentViewport( viewport );
     }

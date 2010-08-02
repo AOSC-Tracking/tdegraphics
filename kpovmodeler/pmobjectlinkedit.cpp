@@ -22,9 +22,9 @@
 #include "pmobjectselect.h"
 #include "pmlinkedit.h"
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
-PMObjectLinkEdit::PMObjectLinkEdit( QWidget* parent, const char* name )
+PMObjectLinkEdit::PMObjectLinkEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -35,12 +35,12 @@ void PMObjectLinkEdit::createTopWidgets( )
    Base::createTopWidgets( );
 
    m_pLinkEdit = new PMLinkEdit( this );
-   QStringList l;
+   TQStringList l;
    l.append( "GraphicalObject" );
    l.append( "Light" );
    m_pLinkEdit->setLinkPossibilities( l );
    topLayout( )->addWidget( m_pLinkEdit );
-   connect( m_pLinkEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pLinkEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMObjectLinkEdit::displayObject( PMObject* o )

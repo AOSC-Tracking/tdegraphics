@@ -23,17 +23,17 @@
 #endif
 
 #include <kdialog.h>
-#include <qcstring.h>
-#include <qdatetime.h>
+#include <tqcstring.h>
+#include <tqdatetime.h>
 
 class PMPovrayRenderWidget;
 class PMPovrayOutputWidget;
 class PMRenderMode;
 
-class QProgressBar;
-class QPushButton;
-class QLabel;
-class QScrollView;
+class TQProgressBar;
+class TQPushButton;
+class TQLabel;
+class TQScrollView;
 class KURL;
 
 /**
@@ -46,7 +46,7 @@ public:
    /**
     * Standard constructor
     */
-   PMPovrayWidget( QWidget* parent = 0, const char* name = 0 );
+   PMPovrayWidget( TQWidget* parent = 0, const char* name = 0 );
    /**
     * Destructor
     */
@@ -57,7 +57,7 @@ public:
     * render mode m.
     * @see PMRenderMode
     */
-   bool render( const QByteArray& scene, const PMRenderMode& m,
+   bool render( const TQByteArray& scene, const PMRenderMode& m,
                 const KURL& documentURL );
 
 public slots:
@@ -80,18 +80,18 @@ protected:
 private:
    PMPovrayRenderWidget* m_pRenderWidget;
    PMPovrayOutputWidget* m_pPovrayOutputWidget;
-   QPushButton* m_pStopButton;
-   QPushButton* m_pSuspendButton;
-   QPushButton* m_pResumeButton;
-   QPushButton* m_pSaveButton;
-   QPushButton* m_pPovrayOutputButton;
-   QProgressBar* m_pProgressBar;
-   QLabel* m_pProgressLabel;
-   QScrollView* m_pScrollView;
+   TQPushButton* m_pStopButton;
+   TQPushButton* m_pSuspendButton;
+   TQPushButton* m_pResumeButton;
+   TQPushButton* m_pSaveButton;
+   TQPushButton* m_pPovrayOutputButton;
+   TQProgressBar* m_pProgressBar;
+   TQLabel* m_pProgressLabel;
+   TQScrollView* m_pScrollView;
    int m_height, m_width;
    bool m_bRunning;
-   QTime m_lastSpeedTime;
-   QTimer* m_pProgressTimer;
+   TQTime m_lastSpeedTime;
+   TQTimer* m_pProgressTimer;
    bool m_speedInfo;
    bool m_immediateUpdate;
    float m_speed;

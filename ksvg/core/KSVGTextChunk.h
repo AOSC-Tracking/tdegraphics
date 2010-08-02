@@ -21,7 +21,7 @@
 #ifndef KSVGTEXTCHUNK_H
 #define KSVGTEXTCHUNK_H
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 namespace KSVG
 {
@@ -35,16 +35,16 @@ public:
 	~KSVGTextChunk();
 
 	unsigned int count() const;
-	QString getText(unsigned int index) const;
+	TQString getText(unsigned int index) const;
 	SVGTextPositioningElementImpl *getTextElement(unsigned int index);
 	SVGTextContentElementImpl *getTextContentElement(unsigned int index);
 
 	void clear();
-	void addText(const QString &text, SVGTextContentElementImpl *textElement);
+	void addText(const TQString &text, SVGTextContentElementImpl *textElement);
 	
 private:
-	QStringList m_text;
-	QPtrList<SVGTextContentElementImpl>	m_textElements;
+	TQStringList m_text;
+	TQPtrList<SVGTextContentElementImpl>	m_textElements;
 };
 
 }

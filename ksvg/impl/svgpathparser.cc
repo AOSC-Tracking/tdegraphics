@@ -18,7 +18,7 @@
 */
 
 #include "svgpathparser.h"
-#include <qstring.h>
+#include <tqstring.h>
 #include <math.h>
 
 // parses the number into parameter number
@@ -95,11 +95,11 @@ SVGPathParser::getCoord( const char *ptr, double &number )
 }
 
 void
-SVGPathParser::parseSVG( const QString &s, bool process )
+SVGPathParser::parseSVG( const TQString &s, bool process )
 {
 	if(!s.isEmpty())
 	{
-		QString d = s;
+		TQString d = s;
 		d = d.replace(',', ' ');
 		d = d.simplifyWhiteSpace();
 		const char *ptr = d.latin1();

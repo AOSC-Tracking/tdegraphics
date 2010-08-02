@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */  
 
-#include <qpainter.h>
+#include <tqpainter.h>
 
 #include <kdebug.h>
 
@@ -69,8 +69,8 @@ uint KColorArray::closestMatch(uint color)
   return c|OPAQUE_MASK;
 }
 
-KColorGrid::KColorGrid(QWidget *parent, const char *name, int space)
- : QWidget(parent, name, Qt::WResizeNoErase|Qt::WRepaintNoErase)
+KColorGrid::KColorGrid(TQWidget *parent, const char *name, int space)
+ : TQWidget(parent, name, Qt::WResizeNoErase|Qt::WRepaintNoErase)
 {
   //kdDebug(4640) << "KColorGrid - constructor" << endl;
   s = space;
@@ -87,17 +87,17 @@ KColorGrid::KColorGrid(QWidget *parent, const char *name, int space)
 void KColorGrid::show()
 {
   //updateScrollBars();
-  QWidget::show();
+  TQWidget::show();
 }
 */
-void KColorGrid::paintEvent(QPaintEvent *e)
+void KColorGrid::paintEvent(TQPaintEvent *e)
 {
   //kdDebug(4640) << "KColorGrid::paintEvent" << endl;
 
   //updateScrollBars();
-  //QWidget::paintEvent(e);
+  //TQWidget::paintEvent(e);
 
-  const QRect urect = e->rect();
+  const TQRect urect = e->rect();
 
   //kdDebug(4640) << "Update rect = ( " << //urect.left() << ", " << urect.top() << ", " << urect.width() << ", " << urect.height() << " )" << endl;
 
@@ -107,10 +107,10 @@ void KColorGrid::paintEvent(QPaintEvent *e)
   int lastcol  = getX(urect.right())+1;
   int lastrow  = getY(urect.bottom())+1;
 
-  QWMatrix matrix;
-  QPixmap pm(urect.width(),urect.height());
+  TQWMatrix matrix;
+  TQPixmap pm(urect.width(),urect.height());
   pm.fill(paletteBackgroundColor());
-  QPainter p;
+  TQPainter p;
   p.begin( &pm );
 
   firstrow = (firstrow < 0) ? 0 : firstrow;
@@ -147,25 +147,25 @@ void KColorGrid::paintEvent(QPaintEvent *e)
   
   p.end();
 
-  bitBlt(this,urect.topLeft(),&pm,QRect(0,0,pm.width(),pm.height()));
+  bitBlt(this,urect.topLeft(),&pm,TQRect(0,0,pm.width(),pm.height()));
 
 }
 
-void KColorGrid::paintForeground(QPainter* , QPaintEvent* )
+void KColorGrid::paintForeground(TQPainter* , TQPaintEvent* )
 {
 }
 
 /*
-void KColorGrid::resizeEvent(QResizeEvent *)
+void KColorGrid::resizeEvent(TQResizeEvent *)
 {
   //kdDebug(4640) << "resize: width:  " << width() << " - total: " << totalwidth << endl;
   //kdDebug(4640) << "resize: height: " << height() << " - total: " << totalheight << endl;
 }
 */
 
-QSize KColorGrid::sizeHint() const
+TQSize KColorGrid::sizeHint() const
 {
-  return QSize(totalwidth, totalheight);
+  return TQSize(totalwidth, totalheight);
 }
 
 int KColorGrid::getY( int y )
@@ -186,10 +186,10 @@ int KColorGrid::getX( int x )
   return (x/cellsize);
 }
 
-const QRect KColorGrid::viewRect()
+const TQRect KColorGrid::viewRect()
 {
   //kdDebug(4640) << "viewRect" << endl;
-  const QRect r(0, 0, width(), height());
+  const TQRect r(0, 0, width(), height());
   //kdDebug(4640) << "viewRect - " << x << " x " << y << " - " << w << " x " << h << endl;
   return r;
 }
@@ -301,8 +301,8 @@ void KColorGrid::setColor( int colNum, uint col, bool update )
 void KColorGrid::updateCell( int row, int col, bool  )
 {
     //kdDebug(4640) << "updateCell - before repaint" << endl;
-  QWMatrix matrix;
-  QPainter p;
+  TQWMatrix matrix;
+  TQPainter p;
   p.begin( this );
   matrix.translate( (col*cellsize), (row*cellsize) );
   p.setWorldMatrix( matrix );

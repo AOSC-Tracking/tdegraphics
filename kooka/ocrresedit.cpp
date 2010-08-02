@@ -23,7 +23,7 @@
  *  without including the source code for Qt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
-#include <qcolor.h>
+#include <tqcolor.h>
 
 #include "ocrresedit.h"
 #include "ocrword.h"
@@ -31,13 +31,13 @@
 #include <kfiledialog.h>
 #include <klocale.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 /* -------------------- ocrResEdit -------------------- */
 
-ocrResEdit::ocrResEdit( QWidget *parent )
-    : QTextEdit(parent)
+ocrResEdit::ocrResEdit( TQWidget *parent )
+    : TQTextEdit(parent)
 {
     m_updateColor.setNamedColor( "SeaGreen");
     m_ignoreColor.setNamedColor( "CadetBlue4" );
@@ -52,8 +52,8 @@ void ocrResEdit::slMarkWordWrong( int line, const ocrWord& word )
 }
 
 
-void ocrResEdit::slUpdateOCRResult( int line, const QString& wordFrom,
-                                   const QString& wordTo )
+void ocrResEdit::slUpdateOCRResult( int line, const TQString& wordFrom,
+                                   const TQString& wordTo )
 {
     /* the index is quite useless here, since  the text could have had been
      * changed by corrections before. Thus better search the word and update
@@ -74,7 +74,7 @@ void ocrResEdit::slSelectWord( int line, const ocrWord& word )
 {
    if( line < paragraphs() )
    {
-      QString editLine = text(line);
+      TQString editLine = text(line);
       int cnt = editLine.contains( word);
 
       if( cnt > 0 )
@@ -86,8 +86,8 @@ void ocrResEdit::slSelectWord( int line, const ocrWord& word )
    }
 }
 
-void ocrResEdit::slReplaceWord( int line, const QString& wordFrom,
-                               const QString& wordTo, const QColor& color )
+void ocrResEdit::slReplaceWord( int line, const TQString& wordFrom,
+                               const TQString& wordTo, const TQColor& color )
 {
     kdDebug(28000) << "Updating word " << wordFrom << " in line " << line << endl;
 
@@ -95,7 +95,7 @@ void ocrResEdit::slReplaceWord( int line, const QString& wordFrom,
 
     if( line < paragraphs() )
     {
-        QString editLine = text(line);
+        TQString editLine = text(line);
         int cnt = editLine.contains( wordFrom );
 
         if( cnt > 0 )
@@ -103,7 +103,7 @@ void ocrResEdit::slReplaceWord( int line, const QString& wordFrom,
             int pos = editLine.find(wordFrom);
             setSelection( line, pos, line, pos+wordFrom.length());
 
-            QColor saveCol = this->color();
+            TQColor saveCol = this->color();
             setColor( color );
             if( isRO ) {
                 setReadOnly(false);
@@ -129,16 +129,16 @@ void ocrResEdit::slReplaceWord( int line, const QString& wordFrom,
 
 void ocrResEdit::slSaveText()
 {
-    QString fileName = KFileDialog::getSaveFileName( (QDir::home()).path(),
+    TQString fileName = KFileDialog::getSaveFileName( (TQDir::home()).path(),
                                                  "*.txt",
                                                  this,
                                                  i18n("Save OCR Result Text") );
     if( fileName.isEmpty() )
       return;
-    QFile file( fileName );
+    TQFile file( fileName );
     if ( file.open( IO_WriteOnly ) )
     {
-        QTextStream stream( &file );
+        TQTextStream stream( &file );
         stream << text();
         file.close();
     }

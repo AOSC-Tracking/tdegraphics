@@ -23,8 +23,8 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qcache.h>
+#include <tqstring.h>
+#include <tqcache.h>
 #include <kstaticdeleter.h>
 
 /**
@@ -41,7 +41,7 @@ public:
     * Returns the full path for the file or a null string if the file
     * was not found. The file can be a relative or absolute path.
     */
-   static QString findFile( const QString& file );
+   static TQString findFile( const TQString& file );
    /**
     * Clears the resource cache. Call this if the library paths are changed
     */
@@ -55,11 +55,11 @@ private:
    /**
     * File lookup function
     */
-   QString lookUp( const QString& file );
+   TQString lookUp( const TQString& file );
    static PMResourceLocator* s_pInstance;
    static KStaticDeleter<PMResourceLocator> s_staticDeleter;
 
-   QCache<QString> m_cache;
+   TQCache<TQString> m_cache;
 };
 
 #endif

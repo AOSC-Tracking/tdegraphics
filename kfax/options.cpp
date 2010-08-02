@@ -27,142 +27,142 @@
 
 #include <stdio.h>
 
-#include <qlayout.h>
+#include <tqlayout.h>
 #include <klocale.h>
 #include <knuminput.h>
-#include <qdir.h>
-#include <qprinter.h>
-#include <qframe.h>
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qlistbox.h>
-#include <qpushbutton.h>
-#include <qradiobutton.h>
-#include <qscrollbar.h>
-#include <qtooltip.h>
+#include <tqdir.h>
+#include <tqprinter.h>
+#include <tqframe.h>
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqlistbox.h>
+#include <tqpushbutton.h>
+#include <tqradiobutton.h>
+#include <tqscrollbar.h>
+#include <tqtooltip.h>
 
 #include "kfax.h"
 #include "options.h"
 
-OptionsDialog::OptionsDialog( QWidget *parent, const char *name)
+OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
     : KDialogBase( parent, name, true, i18n("Configure"), Ok|Cancel)
 {
-  QWidget *mainWidget = new QWidget(this);
+  TQWidget *mainWidget = new TQWidget(this);
   setMainWidget(mainWidget);
 
-  QVBoxLayout *mainLayout = new QVBoxLayout(mainWidget, 0, spacingHint());
+  TQVBoxLayout *mainLayout = new TQVBoxLayout(mainWidget, 0, spacingHint());
 
-  bg = new QGroupBox(mainWidget,"bg");
+  bg = new TQGroupBox(mainWidget,"bg");
   bg->setColumnLayout( 0, Qt::Horizontal );
   mainLayout->addWidget( bg );
 
-  QVBoxLayout *vbl = new QVBoxLayout(bg->layout());
+  TQVBoxLayout *vbl = new TQVBoxLayout(bg->layout());
 
-  QHBoxLayout *hbl1 = new QHBoxLayout();
+  TQHBoxLayout *hbl1 = new TQHBoxLayout();
 
   vbl->addLayout( hbl1 );
 
-  displaylabel = new QLabel(i18n("Display options:"), bg,"displaylabel");
+  displaylabel = new TQLabel(i18n("Display options:"), bg,"displaylabel");
   displaylabel->setFixedSize( displaylabel->sizeHint() );
   hbl1->addWidget( displaylabel );
 
-  landscape = new QCheckBox(i18n("Landscape"), bg,"Landscape");
+  landscape = new TQCheckBox(i18n("Landscape"), bg,"Landscape");
   landscape->setFixedSize( landscape->sizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( landscape );
 
-  flip = new QCheckBox(i18n("Upside down"), bg,"upsidedown");
+  flip = new TQCheckBox(i18n("Upside down"), bg,"upsidedown");
   flip->setFixedSize( flip->sizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( flip );
 
-  invert = new QCheckBox(i18n("Invert"), bg,"invert");
+  invert = new TQCheckBox(i18n("Invert"), bg,"invert");
   invert->setFixedSize( invert->sizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( invert );
 
   vbl->addSpacing( 20 );
 
-  QHBoxLayout *hbl8 = new QHBoxLayout();
+  TQHBoxLayout *hbl8 = new TQHBoxLayout();
   vbl->addLayout( hbl8 );
   hbl8->addSpacing( 10 );
 
-  resgroup = new QButtonGroup(bg,"resgroup");
-  resgroup->setFrameStyle(QFrame::NoFrame);
+  resgroup = new TQButtonGroup(bg,"resgroup");
+  resgroup->setFrameStyle(TQFrame::NoFrame);
   hbl8->addWidget( resgroup );
 
-  QHBoxLayout *hbl2 = new QHBoxLayout(resgroup);
+  TQHBoxLayout *hbl2 = new TQHBoxLayout(resgroup);
 
-  reslabel = new QLabel(i18n("Raw fax resolution:"),resgroup,"relabel");
+  reslabel = new TQLabel(i18n("Raw fax resolution:"),resgroup,"relabel");
   hbl2->addWidget( reslabel );
 
-  resauto = new QRadioButton(i18n("Auto"),resgroup,"resauto");
+  resauto = new TQRadioButton(i18n("Auto"),resgroup,"resauto");
   hbl2->addSpacing( 20 );
   hbl2->addWidget( resauto );
 
-  fine = new QRadioButton(i18n("Fine"),resgroup,"fine");
+  fine = new TQRadioButton(i18n("Fine"),resgroup,"fine");
   hbl2->addSpacing( 30 );
   hbl2->addWidget( fine );
 
-  normal = new QRadioButton(i18n("Normal"),resgroup,"normal");
+  normal = new TQRadioButton(i18n("Normal"),resgroup,"normal");
   hbl2->addSpacing( 30 );
   hbl2->addWidget( normal );
 
   vbl->addSpacing( 20 );
 
-  QHBoxLayout *hbl3 = new QHBoxLayout();
+  TQHBoxLayout *hbl3 = new TQHBoxLayout();
   vbl->addLayout( hbl3 );
 
-  lsblabel = new QLabel(i18n("Raw fax data are:"), bg,"lsblabel");
+  lsblabel = new TQLabel(i18n("Raw fax data are:"), bg,"lsblabel");
   hbl3->addSpacing( 10 );
   hbl3->addWidget( lsblabel );
 
-  lsb = new QCheckBox(i18n("LS-Bit first"), bg,"lsbitfirst");
+  lsb = new TQCheckBox(i18n("LS-Bit first"), bg,"lsbitfirst");
   hbl3->addSpacing( 10 );
   hbl3->addWidget( lsb );
 
   vbl->addSpacing( 15 );
 
-  QHBoxLayout *hbl9 = new QHBoxLayout();
+  TQHBoxLayout *hbl9 = new TQHBoxLayout();
   vbl->addLayout( hbl9 );
   hbl9->addSpacing( 10 );
 
-  rawgroup = new QButtonGroup(bg,"rawgroup");
+  rawgroup = new TQButtonGroup(bg,"rawgroup");
   hbl9->addWidget( rawgroup );
 
-  QHBoxLayout *hbl4 = new QHBoxLayout( rawgroup );
+  TQHBoxLayout *hbl4 = new TQHBoxLayout( rawgroup );
 
-  rawgroup->setFrameStyle(QFrame::NoFrame);
+  rawgroup->setFrameStyle(TQFrame::NoFrame);
 
-  rawlabel = new QLabel(i18n("Raw fax format:"),rawgroup,"rawlabel");
+  rawlabel = new TQLabel(i18n("Raw fax format:"),rawgroup,"rawlabel");
   rawlabel->setFixedSize( rawlabel->sizeHint() );
   hbl4->addWidget( rawlabel );
 
-  g3 = new QRadioButton("G3",rawgroup,"g3");
-  connect(g3,SIGNAL(clicked()), this, SLOT(g3toggled()));
+  g3 = new TQRadioButton("G3",rawgroup,"g3");
+  connect(g3,TQT_SIGNAL(clicked()), this, TQT_SLOT(g3toggled()));
   hbl4->addSpacing( 20 );
   hbl4->addWidget( g3 );
 
-  g32d = new QRadioButton("G32d",rawgroup,"g32d");
-  connect(g32d,SIGNAL(clicked()), this,SLOT(g32toggled()));
+  g32d = new TQRadioButton("G32d",rawgroup,"g32d");
+  connect(g32d,TQT_SIGNAL(clicked()), this,TQT_SLOT(g32toggled()));
   hbl4->addSpacing( 30 );
   hbl4->addWidget( g32d );
 
-  g4 = new QRadioButton("G4",rawgroup,"g4");
-  connect(g4,SIGNAL(clicked()), this, SLOT(g4toggled()));
+  g4 = new TQRadioButton("G4",rawgroup,"g4");
+  connect(g4,TQT_SIGNAL(clicked()), this, TQT_SLOT(g4toggled()));
   hbl4->addSpacing( 30 );
   hbl4->addWidget( g4 );
 
   vbl->addSpacing( 20 );
 
-  QHBoxLayout *hbl5 = new QHBoxLayout();
+  TQHBoxLayout *hbl5 = new TQHBoxLayout();
   vbl->addLayout( hbl5 );
 
-  widthlabel = new QLabel(i18n("Raw fax width:"),bg,"widthlabel");
+  widthlabel = new TQLabel(i18n("Raw fax width:"),bg,"widthlabel");
   hbl5->addSpacing( 10 );
   hbl5->addWidget( widthlabel );
 
@@ -170,7 +170,7 @@ OptionsDialog::OptionsDialog( QWidget *parent, const char *name)
   widthedit->setRange(1, 10000, 1, false);
   hbl5->addWidget( widthedit );
 
-  heightlabel = new QLabel(i18n("Height:"),bg,"heightlabel");
+  heightlabel = new TQLabel(i18n("Height:"),bg,"heightlabel");
   hbl5->addSpacing( 10 );
   hbl5->addWidget( heightlabel );
 
@@ -178,8 +178,8 @@ OptionsDialog::OptionsDialog( QWidget *parent, const char *name)
   heightedit->setRange(0, 100000, 1, false);
   hbl5->addWidget( heightedit );
 
-  geomauto = new QCheckBox(i18n("Auto"),bg,"geomauto");
-  connect(geomauto,SIGNAL(clicked()),this,SLOT(geomtoggled()));
+  geomauto = new TQCheckBox(i18n("Auto"),bg,"geomauto");
+  connect(geomauto,TQT_SIGNAL(clicked()),this,TQT_SLOT(geomtoggled()));
   hbl5->addSpacing( 10 );
   hbl5->addWidget( geomauto );
 }

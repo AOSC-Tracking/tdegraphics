@@ -17,7 +17,7 @@
 
 #include "pmxmlparser.h"
 
-#include <qbuffer.h>
+#include <tqbuffer.h>
 #include <klocale.h>
 
 #include "pmpart.h"
@@ -27,13 +27,13 @@
 #include "pmdocumentformat.h"
 #include "pmdebug.h"
 
-PMXMLParser::PMXMLParser( PMPart* part, QIODevice* dev )
+PMXMLParser::PMXMLParser( PMPart* part, TQIODevice* dev )
       : PMParser( part, dev )
 {
    init( );
 }
 
-PMXMLParser::PMXMLParser( PMPart* part, const QByteArray& array )
+PMXMLParser::PMXMLParser( PMPart* part, const TQByteArray& array )
       : PMParser( part, array )
 {
    init( );
@@ -56,7 +56,7 @@ bool PMXMLParser::initDocument( )
 {
    if( !m_pDoc )
    {
-      m_pDoc = new QDomDocument( "KPOVMODELER" );
+      m_pDoc = new TQDomDocument( "KPOVMODELER" );
       if( m_pDoc->setContent( m_pDevice ) )
          return true;
       else
@@ -73,10 +73,10 @@ void PMXMLParser::topParse( )
 {
    if( initDocument( ) )
    {
-      QDomElement e = m_pDoc->documentElement( );
+      TQDomElement e = m_pDoc->documentElement( );
       // read the format number
       // assume 1.0 on error
-      QString fstring = e.attribute( "majorFormat", "1" );
+      TQString fstring = e.attribute( "majorFormat", "1" );
       bool ok = true;
       int format = fstring.toInt( &ok );
       if( !ok || ( format < 1 ) )
@@ -117,14 +117,14 @@ void PMXMLParser::topParse( )
    }
 }
 
-void PMXMLParser::parseChildObjects( QDomElement& e, PMObject* parent )
+void PMXMLParser::parseChildObjects( TQDomElement& e, PMObject* parent )
 {
-   QDomNode c = e.firstChild( );
+   TQDomNode c = e.firstChild( );
    while( !c.isNull( ) )
    {
       if( c.isElement( ) )
       {
-         QDomElement ce = c.toElement( );
+         TQDomElement ce = c.toElement( );
          PMPrototypeManager* m = m_pPart->prototypeManager( );
          PMObject* obj = m->newObject( m->className( ce.tagName( ) ) );
          if( obj )
@@ -150,21 +150,21 @@ void PMXMLParser::parseChildObjects( QDomElement& e, PMObject* parent )
 }
 
 
-void PMXMLParser::quickParse( QStringList& list )
+void PMXMLParser::quickParse( TQStringList& list )
 {
    if( initDocument( ) )
    {
-      QDomElement e = m_pDoc->documentElement( );
+      TQDomElement e = m_pDoc->documentElement( );
       if( ( e.tagName( ) == "objects" ) || ( e.tagName( ) == "scene" ) )
       {
-         QDomNode c = e.firstChild( );
+         TQDomNode c = e.firstChild( );
 
          while( !c.isNull( ) )
          {
             if( c.isElement( ) )
             {
-               QDomElement ce = c.toElement( );
-               QString type = m_pPart->prototypeManager( )->className( ce.tagName( ) );
+               TQDomElement ce = c.toElement( );
+               TQString type = m_pPart->prototypeManager( )->className( ce.tagName( ) );
                if( !type.isNull( ) )
                   list.append( type );
             }

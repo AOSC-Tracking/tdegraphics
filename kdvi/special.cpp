@@ -12,11 +12,11 @@
 #include <klocale.h>
 #include <kmimetype.h>
 #include <kprocio.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qimage.h>
-#include <qstringlist.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqimage.h>
+#include <tqstringlist.h>
 
 #include "dviFile.h"
 #include "dviRenderer.h"
@@ -28,9 +28,9 @@
 
 //#define DEBUG_SPECIAL
 
-extern QPainter *foreGroundPainter;
+extern TQPainter *foreGroundPainter;
 
-void dviRenderer::printErrorMsgForSpecials(const QString& msg)
+void dviRenderer::printErrorMsgForSpecials(const TQString& msg)
 {
   if (dviFile->errorCounter < 25) {
     kdError(4300) << msg << endl;
@@ -44,98 +44,98 @@ void dviRenderer::printErrorMsgForSpecials(const QString& msg)
 // dvips. If the spec could not be parsed, an invalid color will be
 // returned.
 
-QColor dviRenderer::parseColorSpecification(const QString& colorSpec)
+TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
 {
   // Initialize the map of known colors, if that is not done yet.
   if (namedColors.isEmpty()) {
-    namedColors["Red"] = QColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*0));
-    namedColors["Tan"] = QColor( (int)(255.0*0.86), (int)(255.0*0.58), (int)(255.0*0.44));
-    namedColors["Blue"] = QColor( (int)(255.0*0), (int)(255.0*0), (int)(255.0*1));
-    namedColors["Cyan"] = QColor( (int)(255.0*0), (int)(255.0*1), (int)(255.0*1));
-    namedColors["Gray"] = QColor( (int)(255.0*0.5), (int)(255.0*0.5), (int)(255.0*0.5));
-    namedColors["Plum"] = QColor( (int)(255.0*0.5), (int)(255.0*0), (int)(255.0*1));
-    namedColors["Black"] = QColor( (int)(255.0*0), (int)(255.0*0), (int)(255.0*0));
-    namedColors["Brown"] = QColor( (int)(255.0*0.4), (int)(255.0*0), (int)(255.0*0));
-    namedColors["Green"] = QColor( (int)(255.0*0), (int)(255.0*1), (int)(255.0*0));
-    namedColors["Melon"] = QColor( (int)(255.0*1), (int)(255.0*0.54), (int)(255.0*0.5));
-    namedColors["Peach"] = QColor( (int)(255.0*1), (int)(255.0*0.5), (int)(255.0*0.3));
-    namedColors["Sepia"] = QColor( (int)(255.0*0.3), (int)(255.0*0), (int)(255.0*0));
-    namedColors["White"] = QColor( (int)(255.0*1), (int)(255.0*1), (int)(255.0*1));
-    namedColors["Maroon"] = QColor( (int)(255.0*0.68), (int)(255.0*0), (int)(255.0*0));
-    namedColors["Orange"] = QColor( (int)(255.0*1), (int)(255.0*0.39), (int)(255.0*0.13));
-    namedColors["Orchid"] = QColor( (int)(255.0*0.68), (int)(255.0*0.36), (int)(255.0*1));
-    namedColors["Purple"] = QColor( (int)(255.0*0.55), (int)(255.0*0.14), (int)(255.0*1));
-    namedColors["Salmon"] = QColor( (int)(255.0*1), (int)(255.0*0.47), (int)(255.0*0.62));
-    namedColors["Violet"] = QColor( (int)(255.0*0.21), (int)(255.0*0.12), (int)(255.0*1));
-    namedColors["Yellow"] = QColor( (int)(255.0*1), (int)(255.0*1), (int)(255.0*0));
-    namedColors["Apricot"] = QColor( (int)(255.0*1), (int)(255.0*0.68), (int)(255.0*0.48));
-    namedColors["Emerald"] = QColor( (int)(255.0*0), (int)(255.0*1), (int)(255.0*0.5));
-    namedColors["Fuchsia"] = QColor( (int)(255.0*0.45), (int)(255.0*0.01), (int)(255.0*0.92));
-    namedColors["Magenta"] = QColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*1));
-    namedColors["SkyBlue"] = QColor( (int)(255.0*0.38), (int)(255.0*1), (int)(255.0*0.88));
-    namedColors["Thistle"] = QColor( (int)(255.0*0.88), (int)(255.0*0.41), (int)(255.0*1));
-    namedColors["BrickRed"] = QColor( (int)(255.0*0.72), (int)(255.0*0), (int)(255.0*0));
-    namedColors["Cerulean"] = QColor( (int)(255.0*0.06), (int)(255.0*0.89), (int)(255.0*1));
-    namedColors["Lavender"] = QColor( (int)(255.0*1), (int)(255.0*0.52), (int)(255.0*1));
-    namedColors["Mahogany"] = QColor( (int)(255.0*0.65), (int)(255.0*0), (int)(255.0*0));
-    namedColors["Mulberry"] = QColor( (int)(255.0*0.64), (int)(255.0*0.08), (int)(255.0*0.98));
-    namedColors["NavyBlue"] = QColor( (int)(255.0*0.06), (int)(255.0*0.46), (int)(255.0*1));
-    namedColors["SeaGreen"] = QColor( (int)(255.0*0.31), (int)(255.0*1), (int)(255.0*0.5));
-    namedColors["TealBlue"] = QColor( (int)(255.0*0.12), (int)(255.0*0.98), (int)(255.0*0.64));
-    namedColors["BlueGreen"] = QColor( (int)(255.0*0.15), (int)(255.0*1), (int)(255.0*0.67));
-    namedColors["CadetBlue"] = QColor( (int)(255.0*0.38), (int)(255.0*0.43), (int)(255.0*0.77));
-    namedColors["Dandelion"] = QColor( (int)(255.0*1), (int)(255.0*0.71), (int)(255.0*0.16));
-    namedColors["Goldenrod"] = QColor( (int)(255.0*1), (int)(255.0*0.9), (int)(255.0*0.16));
-    namedColors["LimeGreen"] = QColor( (int)(255.0*0.5), (int)(255.0*1), (int)(255.0*0));
-    namedColors["OrangeRed"] = QColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*0.5));
-    namedColors["PineGreen"] = QColor( (int)(255.0*0), (int)(255.0*0.75), (int)(255.0*0.16));
-    namedColors["RawSienna"] = QColor( (int)(255.0*0.55), (int)(255.0*0), (int)(255.0*0));
-    namedColors["RedOrange"] = QColor( (int)(255.0*1), (int)(255.0*0.23), (int)(255.0*0.13));
-    namedColors["RedViolet"] = QColor( (int)(255.0*0.59), (int)(255.0*0), (int)(255.0*0.66));
-    namedColors["Rhodamine"] = QColor( (int)(255.0*1), (int)(255.0*0.18), (int)(255.0*1));
-    namedColors["RoyalBlue"] = QColor( (int)(255.0*0), (int)(255.0*0.5), (int)(255.0*1));
-    namedColors["RubineRed"] = QColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*0.87));
-    namedColors["Turquoise"] = QColor( (int)(255.0*0.15), (int)(255.0*1), (int)(255.0*0.8));
-    namedColors["VioletRed"] = QColor( (int)(255.0*1), (int)(255.0*0.19), (int)(255.0*1));
-    namedColors["Aquamarine"] = QColor( (int)(255.0*0.18), (int)(255.0*1), (int)(255.0*0.7));
-    namedColors["BlueViolet"] = QColor( (int)(255.0*0.1), (int)(255.0*0.05), (int)(255.0*0.96));
-    namedColors["DarkOrchid"] = QColor( (int)(255.0*0.6), (int)(255.0*0.2), (int)(255.0*0.8));
-    namedColors["OliveGreen"] = QColor( (int)(255.0*0), (int)(255.0*0.6), (int)(255.0*0));
-    namedColors["Periwinkle"] = QColor( (int)(255.0*0.43), (int)(255.0*0.45), (int)(255.0*1));
-    namedColors["Bittersweet"] = QColor( (int)(255.0*0.76), (int)(255.0*0.01), (int)(255.0*0));
-    namedColors["BurntOrange"] = QColor( (int)(255.0*1), (int)(255.0*0.49), (int)(255.0*0));
-    namedColors["ForestGreen"] = QColor( (int)(255.0*0), (int)(255.0*0.88), (int)(255.0*0));
-    namedColors["GreenYellow"] = QColor( (int)(255.0*0.85), (int)(255.0*1), (int)(255.0*0.31));
-    namedColors["JungleGreen"] = QColor( (int)(255.0*0.01), (int)(255.0*1), (int)(255.0*0.48));
-    namedColors["ProcessBlue"] = QColor( (int)(255.0*0.04), (int)(255.0*1), (int)(255.0*1));
-    namedColors["RoyalPurple"] = QColor( (int)(255.0*0.25), (int)(255.0*0.1), (int)(255.0*1));
-    namedColors["SpringGreen"] = QColor( (int)(255.0*0.74), (int)(255.0*1), (int)(255.0*0.24));
-    namedColors["YellowGreen"] = QColor( (int)(255.0*0.56), (int)(255.0*1), (int)(255.0*0.26));
-    namedColors["MidnightBlue"] = QColor( (int)(255.0*0), (int)(255.0*0.44), (int)(255.0*0.57));
-    namedColors["YellowOrange"] = QColor( (int)(255.0*1), (int)(255.0*0.58), (int)(255.0*0));
-    namedColors["CarnationPink"] = QColor( (int)(255.0*1), (int)(255.0*0.37), (int)(255.0*1));
-    namedColors["CornflowerBlue"] = QColor( (int)(255.0*0.35), (int)(255.0*0.87), (int)(255.0*1));
-    namedColors["WildStrawberry"] = QColor( (int)(255.0*1), (int)(255.0*0.04), (int)(255.0*0.61));
+    namedColors["Red"] = TQColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*0));
+    namedColors["Tan"] = TQColor( (int)(255.0*0.86), (int)(255.0*0.58), (int)(255.0*0.44));
+    namedColors["Blue"] = TQColor( (int)(255.0*0), (int)(255.0*0), (int)(255.0*1));
+    namedColors["Cyan"] = TQColor( (int)(255.0*0), (int)(255.0*1), (int)(255.0*1));
+    namedColors["Gray"] = TQColor( (int)(255.0*0.5), (int)(255.0*0.5), (int)(255.0*0.5));
+    namedColors["Plum"] = TQColor( (int)(255.0*0.5), (int)(255.0*0), (int)(255.0*1));
+    namedColors["Black"] = TQColor( (int)(255.0*0), (int)(255.0*0), (int)(255.0*0));
+    namedColors["Brown"] = TQColor( (int)(255.0*0.4), (int)(255.0*0), (int)(255.0*0));
+    namedColors["Green"] = TQColor( (int)(255.0*0), (int)(255.0*1), (int)(255.0*0));
+    namedColors["Melon"] = TQColor( (int)(255.0*1), (int)(255.0*0.54), (int)(255.0*0.5));
+    namedColors["Peach"] = TQColor( (int)(255.0*1), (int)(255.0*0.5), (int)(255.0*0.3));
+    namedColors["Sepia"] = TQColor( (int)(255.0*0.3), (int)(255.0*0), (int)(255.0*0));
+    namedColors["White"] = TQColor( (int)(255.0*1), (int)(255.0*1), (int)(255.0*1));
+    namedColors["Maroon"] = TQColor( (int)(255.0*0.68), (int)(255.0*0), (int)(255.0*0));
+    namedColors["Orange"] = TQColor( (int)(255.0*1), (int)(255.0*0.39), (int)(255.0*0.13));
+    namedColors["Orchid"] = TQColor( (int)(255.0*0.68), (int)(255.0*0.36), (int)(255.0*1));
+    namedColors["Purple"] = TQColor( (int)(255.0*0.55), (int)(255.0*0.14), (int)(255.0*1));
+    namedColors["Salmon"] = TQColor( (int)(255.0*1), (int)(255.0*0.47), (int)(255.0*0.62));
+    namedColors["Violet"] = TQColor( (int)(255.0*0.21), (int)(255.0*0.12), (int)(255.0*1));
+    namedColors["Yellow"] = TQColor( (int)(255.0*1), (int)(255.0*1), (int)(255.0*0));
+    namedColors["Apricot"] = TQColor( (int)(255.0*1), (int)(255.0*0.68), (int)(255.0*0.48));
+    namedColors["Emerald"] = TQColor( (int)(255.0*0), (int)(255.0*1), (int)(255.0*0.5));
+    namedColors["Fuchsia"] = TQColor( (int)(255.0*0.45), (int)(255.0*0.01), (int)(255.0*0.92));
+    namedColors["Magenta"] = TQColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*1));
+    namedColors["SkyBlue"] = TQColor( (int)(255.0*0.38), (int)(255.0*1), (int)(255.0*0.88));
+    namedColors["Thistle"] = TQColor( (int)(255.0*0.88), (int)(255.0*0.41), (int)(255.0*1));
+    namedColors["BrickRed"] = TQColor( (int)(255.0*0.72), (int)(255.0*0), (int)(255.0*0));
+    namedColors["Cerulean"] = TQColor( (int)(255.0*0.06), (int)(255.0*0.89), (int)(255.0*1));
+    namedColors["Lavender"] = TQColor( (int)(255.0*1), (int)(255.0*0.52), (int)(255.0*1));
+    namedColors["Mahogany"] = TQColor( (int)(255.0*0.65), (int)(255.0*0), (int)(255.0*0));
+    namedColors["Mulberry"] = TQColor( (int)(255.0*0.64), (int)(255.0*0.08), (int)(255.0*0.98));
+    namedColors["NavyBlue"] = TQColor( (int)(255.0*0.06), (int)(255.0*0.46), (int)(255.0*1));
+    namedColors["SeaGreen"] = TQColor( (int)(255.0*0.31), (int)(255.0*1), (int)(255.0*0.5));
+    namedColors["TealBlue"] = TQColor( (int)(255.0*0.12), (int)(255.0*0.98), (int)(255.0*0.64));
+    namedColors["BlueGreen"] = TQColor( (int)(255.0*0.15), (int)(255.0*1), (int)(255.0*0.67));
+    namedColors["CadetBlue"] = TQColor( (int)(255.0*0.38), (int)(255.0*0.43), (int)(255.0*0.77));
+    namedColors["Dandelion"] = TQColor( (int)(255.0*1), (int)(255.0*0.71), (int)(255.0*0.16));
+    namedColors["Goldenrod"] = TQColor( (int)(255.0*1), (int)(255.0*0.9), (int)(255.0*0.16));
+    namedColors["LimeGreen"] = TQColor( (int)(255.0*0.5), (int)(255.0*1), (int)(255.0*0));
+    namedColors["OrangeRed"] = TQColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*0.5));
+    namedColors["PineGreen"] = TQColor( (int)(255.0*0), (int)(255.0*0.75), (int)(255.0*0.16));
+    namedColors["RawSienna"] = TQColor( (int)(255.0*0.55), (int)(255.0*0), (int)(255.0*0));
+    namedColors["RedOrange"] = TQColor( (int)(255.0*1), (int)(255.0*0.23), (int)(255.0*0.13));
+    namedColors["RedViolet"] = TQColor( (int)(255.0*0.59), (int)(255.0*0), (int)(255.0*0.66));
+    namedColors["Rhodamine"] = TQColor( (int)(255.0*1), (int)(255.0*0.18), (int)(255.0*1));
+    namedColors["RoyalBlue"] = TQColor( (int)(255.0*0), (int)(255.0*0.5), (int)(255.0*1));
+    namedColors["RubineRed"] = TQColor( (int)(255.0*1), (int)(255.0*0), (int)(255.0*0.87));
+    namedColors["Turquoise"] = TQColor( (int)(255.0*0.15), (int)(255.0*1), (int)(255.0*0.8));
+    namedColors["VioletRed"] = TQColor( (int)(255.0*1), (int)(255.0*0.19), (int)(255.0*1));
+    namedColors["Aquamarine"] = TQColor( (int)(255.0*0.18), (int)(255.0*1), (int)(255.0*0.7));
+    namedColors["BlueViolet"] = TQColor( (int)(255.0*0.1), (int)(255.0*0.05), (int)(255.0*0.96));
+    namedColors["DarkOrchid"] = TQColor( (int)(255.0*0.6), (int)(255.0*0.2), (int)(255.0*0.8));
+    namedColors["OliveGreen"] = TQColor( (int)(255.0*0), (int)(255.0*0.6), (int)(255.0*0));
+    namedColors["Periwinkle"] = TQColor( (int)(255.0*0.43), (int)(255.0*0.45), (int)(255.0*1));
+    namedColors["Bittersweet"] = TQColor( (int)(255.0*0.76), (int)(255.0*0.01), (int)(255.0*0));
+    namedColors["BurntOrange"] = TQColor( (int)(255.0*1), (int)(255.0*0.49), (int)(255.0*0));
+    namedColors["ForestGreen"] = TQColor( (int)(255.0*0), (int)(255.0*0.88), (int)(255.0*0));
+    namedColors["GreenYellow"] = TQColor( (int)(255.0*0.85), (int)(255.0*1), (int)(255.0*0.31));
+    namedColors["JungleGreen"] = TQColor( (int)(255.0*0.01), (int)(255.0*1), (int)(255.0*0.48));
+    namedColors["ProcessBlue"] = TQColor( (int)(255.0*0.04), (int)(255.0*1), (int)(255.0*1));
+    namedColors["RoyalPurple"] = TQColor( (int)(255.0*0.25), (int)(255.0*0.1), (int)(255.0*1));
+    namedColors["SpringGreen"] = TQColor( (int)(255.0*0.74), (int)(255.0*1), (int)(255.0*0.24));
+    namedColors["YellowGreen"] = TQColor( (int)(255.0*0.56), (int)(255.0*1), (int)(255.0*0.26));
+    namedColors["MidnightBlue"] = TQColor( (int)(255.0*0), (int)(255.0*0.44), (int)(255.0*0.57));
+    namedColors["YellowOrange"] = TQColor( (int)(255.0*1), (int)(255.0*0.58), (int)(255.0*0));
+    namedColors["CarnationPink"] = TQColor( (int)(255.0*1), (int)(255.0*0.37), (int)(255.0*1));
+    namedColors["CornflowerBlue"] = TQColor( (int)(255.0*0.35), (int)(255.0*0.87), (int)(255.0*1));
+    namedColors["WildStrawberry"] = TQColor( (int)(255.0*1), (int)(255.0*0.04), (int)(255.0*0.61));
   }
   
-  QString specType = colorSpec.section(' ', 0, 0);
+  TQString specType = colorSpec.section(' ', 0, 0);
 
   if (specType.find("rgb", false) == 0) {
     bool ok;
 
     double r = colorSpec.section(' ', 1, 1).toDouble(&ok);
     if ((ok == false) || (r < 0.0) || (r > 1.0))
-      return QColor();
+      return TQColor();
     
     double g = colorSpec.section(' ', 2, 2).toDouble(&ok);
     if ((ok == false) || (g < 0.0) || (g > 1.0))
-      return QColor();
+      return TQColor();
     
     double b = colorSpec.section(' ', 3, 3).toDouble(&ok);
     if ((ok == false) || (b < 0.0) || (b > 1.0))
-      return QColor();
+      return TQColor();
 
-    return QColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
+    return TQColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
   }
 
   if (specType.find("hsb", false) == 0) {
@@ -143,17 +143,17 @@ QColor dviRenderer::parseColorSpecification(const QString& colorSpec)
 
     double h = colorSpec.section(' ', 1, 1).toDouble(&ok);
     if ((ok == false) || (h < 0.0) || (h > 1.0))
-      return QColor();
+      return TQColor();
     
     double s = colorSpec.section(' ', 2, 2).toDouble(&ok);
     if ((ok == false) || (s < 0.0) || (s > 1.0))
-      return QColor();
+      return TQColor();
     
     double b = colorSpec.section(' ', 3, 3).toDouble(&ok);
     if ((ok == false) || (b < 0.0) || (b > 1.0))
-      return QColor();
+      return TQColor();
 
-    return QColor((int)(h*359.0+0.5), (int)(s*255.0+0.5), (int)(b*255.0+0.5), QColor::Hsv);
+    return TQColor((int)(h*359.0+0.5), (int)(s*255.0+0.5), (int)(b*255.0+0.5), TQColor::Hsv);
   }
 
   if (specType.find("cmyk", false) == 0) {
@@ -161,19 +161,19 @@ QColor dviRenderer::parseColorSpecification(const QString& colorSpec)
 
     double c = colorSpec.section(' ', 1, 1).toDouble(&ok);
     if ((ok == false) || (c < 0.0) || (c > 1.0))
-      return QColor();
+      return TQColor();
     
     double m = colorSpec.section(' ', 2, 2).toDouble(&ok);
     if ((ok == false) || (m < 0.0) || (m > 1.0))
-      return QColor();
+      return TQColor();
     
     double y = colorSpec.section(' ', 3, 3).toDouble(&ok);
     if ((ok == false) || (y < 0.0) || (y > 1.0))
-      return QColor();
+      return TQColor();
     
     double k = colorSpec.section(' ', 3, 3).toDouble(&ok);
     if ((ok == false) || (k < 0.0) || (k > 1.0))
-      return QColor();
+      return TQColor();
 
     // Convert cmyk coordinates to rgb.
     double r = 1.0 - c - k;
@@ -186,7 +186,7 @@ QColor dviRenderer::parseColorSpecification(const QString& colorSpec)
     if (b < 0.0)
       b = 0.0;
 
-    return QColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
+    return TQColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
   }
 
   if (specType.find("gray", false) == 0) {
@@ -194,17 +194,17 @@ QColor dviRenderer::parseColorSpecification(const QString& colorSpec)
 
     double g = colorSpec.section(' ', 1, 1).toDouble(&ok);
     if ((ok == false) || (g < 0.0) || (g > 1.0))
-      return QColor();
+      return TQColor();
     
-    return QColor((int)(g*255.0+0.5), (int)(g*255.0+0.5), (int)(g*255.0+0.5));
+    return TQColor((int)(g*255.0+0.5), (int)(g*255.0+0.5), (int)(g*255.0+0.5));
   }
 
   // Check if the color is one of the known named colors.
-  QMap<QString, QColor>::Iterator f = namedColors.find(specType);
+  TQMap<TQString, TQColor>::Iterator f = namedColors.find(specType);
   if (f != namedColors.end())
     return *f;
   
-  return QColor(specType);
+  return TQColor(specType);
 }
 
 
@@ -212,11 +212,11 @@ QColor dviRenderer::parseColorSpecification(const QString& colorSpec)
 
 
 
-void dviRenderer::color_special(const QString& _cp)
+void dviRenderer::color_special(const TQString& _cp)
 {
-  QString const cp = _cp.stripWhiteSpace();
+  TQString const cp = _cp.stripWhiteSpace();
   
-  QString command = cp.section(' ', 0, 0);
+  TQString command = cp.section(' ', 0, 0);
   
   if (command == "pop") {
     // Take color off the stack
@@ -230,7 +230,7 @@ void dviRenderer::color_special(const QString& _cp)
   
   if (command == "push") {
     // Get color specification
-    QColor const col = parseColorSpecification(cp.section(' ', 1));
+    TQColor const col = parseColorSpecification(cp.section(' ', 1));
     // Set color
     if (col.isValid()) 
       colorStack.push(col); 
@@ -241,7 +241,7 @@ void dviRenderer::color_special(const QString& _cp)
   
   // Get color specification and set the color for the rest of this
   // page
-  QColor col = parseColorSpecification(cp);
+  TQColor col = parseColorSpecification(cp);
   // Set color
   if (col.isValid()) 
     globalColor = col;
@@ -251,15 +251,15 @@ void dviRenderer::color_special(const QString& _cp)
 }
 
 
-void dviRenderer::html_href_special(const QString& _cp)
+void dviRenderer::html_href_special(const TQString& _cp)
 {
-  QString cp = _cp;
+  TQString cp = _cp;
   cp.truncate(cp.find('"'));
   
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "HTML-special, href " << cp.latin1() << endl;
 #endif
-  HTML_href = new QString(cp);
+  HTML_href = new TQString(cp);
 }
 
 
@@ -276,7 +276,7 @@ void dviRenderer::html_anchor_end()
 }
 
 
-void dviRenderer::source_special(const QString& cp)
+void dviRenderer::source_special(const TQString& cp)
 {
   // only when rendering really takes place: set source_href to the
   // current special string. When characters are rendered, the
@@ -286,15 +286,15 @@ void dviRenderer::source_special(const QString& cp)
   if (source_href)
     *source_href = cp;
   else
-    source_href = new QString(cp);
+    source_href = new TQString(cp);
 }
 
 
-void parse_special_argument(const QString& strg, const char* argument_name, int* variable)
+void parse_special_argument(const TQString& strg, const char* argument_name, int* variable)
 {
   int index = strg.find(argument_name);
   if (index >= 0) {
-    QString tmp = strg.mid(index + strlen(argument_name));
+    TQString tmp = strg.mid(index + strlen(argument_name));
     index = tmp.find(' ');
     if (index >= 0)
       tmp.truncate(index);
@@ -313,20 +313,20 @@ void parse_special_argument(const QString& strg, const char* argument_name, int*
 }
 
 
-void dviRenderer::epsf_special(const QString& cp)
+void dviRenderer::epsf_special(const TQString& cp)
 {
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "epsf-special: psfile=" << cp <<endl;
 #endif
 
-  QString include_command = cp.simplifyWhiteSpace();
+  TQString include_command = cp.simplifyWhiteSpace();
 
   // The line is supposed to start with "..ile=", and then comes the
   // filename. Figure out what the filename is and stow it away. Of
   // course, this does not work if the filename contains spaces
   // (already the simplifyWhiteSpace() above is wrong). If you have
   // files like this, go away.
-  QString EPSfilename_orig = include_command;
+  TQString EPSfilename_orig = include_command;
   EPSfilename_orig.truncate(EPSfilename_orig.find(' '));
 
   // Strip enclosing quotation marks which are included by some LaTeX
@@ -336,7 +336,7 @@ void dviRenderer::epsf_special(const QString& cp)
   if ((EPSfilename_orig.at(0) == '\"') && (EPSfilename_orig.at(EPSfilename_orig.length()-1) == '\"')) {
     EPSfilename_orig = EPSfilename_orig.mid(1,EPSfilename_orig.length()-2);
   }
-  QString EPSfilename = ghostscript_interface::locateEPSfile(EPSfilename_orig, baseURL);
+  TQString EPSfilename = ghostscript_interface::locateEPSfile(EPSfilename_orig, baseURL);
   
   // Now parse the arguments. 
   int  llx     = 0; 
@@ -360,7 +360,7 @@ void dviRenderer::epsf_special(const QString& cp)
 
   // If we have a png, gif, jpeg or mng file, we need to draw it here.
   KMimeType::Ptr const mime_type = KMimeType::findByFileContent(EPSfilename);
-  QString const & mime_type_name = mime_type->name();
+  TQString const & mime_type_name = mime_type->name();
   bool const isGFX = (mime_type_name == "image/png" ||
                       mime_type_name == "image/gif" ||
                       mime_type_name == "image/jpeg" ||
@@ -368,7 +368,7 @@ void dviRenderer::epsf_special(const QString& cp)
 
   // So, if we do not have a PostScript file, but a graphics file, and
   // if that file exists, we draw it here.
-  if (isGFX && QFile::exists(EPSfilename)) {
+  if (isGFX && TQFile::exists(EPSfilename)) {
     // Don't show PostScript, just draw the bounding box. For this,
     // calculate the size of the bounding box in Pixels. 
     double bbox_width  = urx - llx;
@@ -388,13 +388,13 @@ void dviRenderer::epsf_special(const QString& cp)
     bbox_width  *= 0.1 * 65536.0*fontPixelPerDVIunit / shrinkfactor;
     bbox_height *= 0.1 * 65536.0*fontPixelPerDVIunit / shrinkfactor;
     
-    QImage image(EPSfilename);
+    TQImage image(EPSfilename);
     image = image.smoothScale((int)(bbox_width), (int)(bbox_height));
     foreGroundPainter->drawImage( ((int) ((currinf.data.dvi_h) / (shrinkfactor * 65536))), currinf.data.pxl_v - (int)bbox_height, image);
     return;
   }
 
-  if (!_postscript || !QFile::exists(EPSfilename)) {
+  if (!_postscript || !TQFile::exists(EPSfilename)) {
     // Don't show PostScript, just draw the bounding box. For this,
     // calculate the size of the bounding box in Pixels. 
     double bbox_width  = urx - llx;
@@ -414,21 +414,21 @@ void dviRenderer::epsf_special(const QString& cp)
     bbox_width  *= 0.1 * 65536.0*fontPixelPerDVIunit / shrinkfactor;
     bbox_height *= 0.1 * 65536.0*fontPixelPerDVIunit / shrinkfactor;
     
-    QRect bbox(((int) ((currinf.data.dvi_h) / (shrinkfactor * 65536))), currinf.data.pxl_v - (int)bbox_height,
+    TQRect bbox(((int) ((currinf.data.dvi_h) / (shrinkfactor * 65536))), currinf.data.pxl_v - (int)bbox_height,
 	       (int)bbox_width, (int)bbox_height);
 
     foreGroundPainter->save();
 
-    if (QFile::exists(EPSfilename))
+    if (TQFile::exists(EPSfilename))
       foreGroundPainter->setBrush(Qt::lightGray);
     else
       foreGroundPainter->setBrush(Qt::red);
     foreGroundPainter->setPen(Qt::black);
     foreGroundPainter->drawRoundRect(bbox, 2, 2);
-    QFont f = foreGroundPainter->font();
+    TQFont f = foreGroundPainter->font();
     f.setPointSize(8);
     foreGroundPainter->setFont(f);
-    if (QFile::exists(EPSfilename))
+    if (TQFile::exists(EPSfilename))
       foreGroundPainter->drawText (bbox, (int)(Qt::AlignCenter), EPSfilename_orig, -1);
     else
       foreGroundPainter->drawText (bbox, (int)(Qt::AlignCenter), 
@@ -451,30 +451,30 @@ void dviRenderer::TPIC_flushPath_special()
     return;
   }
 
-  QPen pen(Qt::black, (int)(penWidth_in_mInch*resolutionInDPI/1000.0 + 0.5));  // Sets the pen size in milli-inches
+  TQPen pen(Qt::black, (int)(penWidth_in_mInch*resolutionInDPI/1000.0 + 0.5));  // Sets the pen size in milli-inches
   foreGroundPainter->setPen(pen);
   foreGroundPainter->drawPolyline(TPIC_path, 0, number_of_elements_in_path);
   number_of_elements_in_path = 0;
 }
 
 
-void dviRenderer::TPIC_addPath_special(const QString& cp)
+void dviRenderer::TPIC_addPath_special(const TQString& cp)
 {
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "TPIC special addPath: " << cp << endl;
 #endif
 
   // Adds a point to the path list
-  QString cp_noWhiteSpace = cp.stripWhiteSpace();
+  TQString cp_noWhiteSpace = cp.stripWhiteSpace();
   bool ok;
   float xKoord = cp_noWhiteSpace.section(' ', 0, 0).toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( QString("TPIC special; cannot parse first argument in 'pn %1'.").arg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse first argument in 'pn %1'.").arg(cp) );
     return;
   }
   float yKoord = cp_noWhiteSpace.section(' ', 1, 1).toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( QString("TPIC special; cannot parse second argument in 'pn %1'.").arg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse second argument in 'pn %1'.").arg(cp) );
     return;
   }
   
@@ -492,7 +492,7 @@ void dviRenderer::TPIC_addPath_special(const QString& cp)
 }
 
 
-void dviRenderer::TPIC_setPen_special(const QString& cp)
+void dviRenderer::TPIC_setPen_special(const TQString& cp)
 {
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "TPIC special setPen: " << cp << endl;
@@ -502,7 +502,7 @@ void dviRenderer::TPIC_setPen_special(const QString& cp)
   bool ok;
   penWidth_in_mInch = cp.stripWhiteSpace().toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( QString("TPIC special; cannot parse argument in 'pn %1'.").arg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse argument in 'pn %1'.").arg(cp) );
     penWidth_in_mInch = 0.0;
     return;
   }
@@ -511,7 +511,7 @@ void dviRenderer::TPIC_setPen_special(const QString& cp)
 
 void dviRenderer::applicationDoSpecial(char *cp)
 {
-  QString special_command(cp);
+  TQString special_command(cp);
 
   // First come specials which is only interpreted during rendering,
   // and NOT during the prescan phase
@@ -572,7 +572,7 @@ void dviRenderer::applicationDoSpecial(char *cp)
     // Hyperref: start of hyperref rectangle. At this stage it is not
     // yet clear if the rectangle will conain a hyperlink, an anchor,
     // or another type of object. We suspect that this rectangle will
-    // define a hyperlink, allocate a QString and set HTML_href to
+    // define a hyperlink, allocate a TQString and set HTML_href to
     // point to this string. The string contains the name of the
     // destination which ---due to the nature of the PostScript
     // language--- will be defined only after characters are drawn and
@@ -595,7 +595,7 @@ void dviRenderer::applicationDoSpecial(char *cp)
 	else
 	  break;
 
-      HTML_href = new QString("glopglyph");
+      HTML_href = new TQString("glopglyph");
       return;
     }
     
@@ -656,8 +656,8 @@ void dviRenderer::applicationDoSpecial(char *cp)
         // - Sec. 3.2.2. The specification is implemented completely:
         // balanced parentheses and all escape sequences are
         // considered.
-        QString tmpTargetName = special_command.section('(', 1);
-        QString targetName;
+        TQString tmpTargetName = special_command.section('(', 1);
+        TQString targetName;
         int parencount = 1;
         for(int i=0; i<tmpTargetName.length(); i++) {
           if (tmpTargetName[i] == '(')
@@ -672,7 +672,7 @@ void dviRenderer::applicationDoSpecial(char *cp)
         }
         targetName = PDFencodingToQString(targetName);
 	
-	QValueVector<Hyperlink>::iterator it;
+	TQValueVector<Hyperlink>::iterator it;
         for( it = currentlyDrawnPage->hyperLinkList.begin(); it != currentlyDrawnPage->hyperLinkList.end(); ++it ) 
 	  if (it->linkText == "glopglyph")
 	    it->linkText = targetName;

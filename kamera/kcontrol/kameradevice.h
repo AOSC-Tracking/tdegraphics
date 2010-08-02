@@ -23,52 +23,52 @@
 #ifndef __kameradevice_h__
 #define __kameradevice_h__
 
-#include <qmap.h>
+#include <tqmap.h>
 #include <kdialogbase.h>
 #include <config.h>
 
 class KConfig;
-class QString;
+class TQString;
 class KListView;
-class QWidgetStack;
-class QVButtonGroup;
-class QVGroupBox;
-class QComboBox;
-class QLineEdit;
-class QRadioButton;
+class TQWidgetStack;
+class TQVButtonGroup;
+class TQVGroupBox;
+class TQComboBox;
+class TQLineEdit;
+class TQRadioButton;
 
-class KCamera : public QObject {
+class KCamera : public TQObject {
 	friend class KameraDeviceSelectDialog;
 	Q_OBJECT
 public:
-	KCamera(const QString &name, const QString &path);
+	KCamera(const TQString &name, const TQString &path);
 	~KCamera();
 	void invalidateCamera();
 	bool configure();
 	void load(KConfig *m_config);
 	void save(KConfig *m_config);
 	bool test();
-	QStringList supportedPorts();
+	TQStringList supportedPorts();
 
 	Camera* camera();
-	QString name() const { return m_name ; }
-	QString model() const { return m_model; }
-	QString path() const { return m_path; }
-	QString portName();
+	TQString name() const { return m_name ; }
+	TQString model() const { return m_model; }
+	TQString path() const { return m_path; }
+	TQString portName();
 
-	QString summary();
+	TQString summary();
 	CameraAbilities abilities();
 
-	void setName(const QString &name);
-	void setModel(const QString &model);
-	void setPath(const QString &path);
+	void setName(const TQString &name);
+	void setModel(const TQString &model);
+	void setPath(const TQString &path);
 
 	bool isTestable() const;
 	bool isConfigurable();
 
 signals:
-	void error(const QString &message);
-	void error(const QString &message, const QString &details);
+	void error(const TQString &message);
+	void error(const TQString &message, const TQString &details);
 	
 protected:
 	bool initInformation();
@@ -78,9 +78,9 @@ protected:
 
 	Camera *m_camera;
 //	KConfig *m_config;
-	QString m_name; // the camera's real name
-	QString m_model;
-	QString m_path;
+	TQString m_name; // the camera's real name
+	TQString m_model;
+	TQString m_path;
 	CameraAbilities m_abilities;
 	CameraAbilitiesList *m_abilitylist;
 };
@@ -89,13 +89,13 @@ class KameraDeviceSelectDialog : public KDialogBase
 {
 	Q_OBJECT
 public:
-	KameraDeviceSelectDialog(QWidget *parent, KCamera *device);
+	KameraDeviceSelectDialog(TQWidget *parent, KCamera *device);
 	void save();
 	void load();
 protected slots:
-	void slot_setModel(QListViewItem *item);
-	void slot_error(const QString &message);
-	void slot_error(const QString &message, const QString &details);
+	void slot_setModel(TQListViewItem *item);
+	void slot_error(const TQString &message);
+	void slot_error(const TQString &message, const TQString &details);
 protected:
 	KCamera *m_device;
 	
@@ -104,14 +104,14 @@ protected:
 
 	// port settings widgets
 	KListView *m_modelSel;
-	QLineEdit *m_nameEdit;
-	QWidgetStack *m_settingsStack;
-	QVButtonGroup *m_portSelectGroup;
-	QVGroupBox *m_portSettingsGroup;
-	QComboBox *m_serialPortCombo;
+	TQLineEdit *m_nameEdit;
+	TQWidgetStack *m_settingsStack;
+	TQVButtonGroup *m_portSelectGroup;
+	TQVGroupBox *m_portSettingsGroup;
+	TQComboBox *m_serialPortCombo;
 	// port selection radio buttons
-	QRadioButton *m_serialRB;
-	QRadioButton *m_USBRB;
+	TQRadioButton *m_serialRB;
+	TQRadioButton *m_USBRB;
 };
 
 #endif

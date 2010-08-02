@@ -30,11 +30,11 @@
 
 #include <kpeffectblursharpen.h>
 
-#include <qimage.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qpushbutton.h>
+#include <tqimage.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
+#include <tqpushbutton.h>
 
 #include <kdebug.h>
 #include <kimageeffect.h>
@@ -45,14 +45,14 @@
 #include <kppixmapfx.h>
 
 
-static QString nameForType (kpEffectBlurSharpenCommand::Type type)
+static TQString nameForType (kpEffectBlurSharpenCommand::Type type)
 {
     if (type == kpEffectBlurSharpenCommand::Blur)
         return i18n ("Soften");
     else if (type == kpEffectBlurSharpenCommand::Sharpen)
         return i18n ("Sharpen");
     else
-        return QString::null;
+        return TQString::null;
 }
 
 
@@ -74,7 +74,7 @@ kpEffectBlurSharpenCommand::~kpEffectBlurSharpenCommand ()
 
 
 // public static
-QPixmap kpEffectBlurSharpenCommand::apply (const QPixmap &pixmap,
+TQPixmap kpEffectBlurSharpenCommand::apply (const TQPixmap &pixmap,
                                            Type type, double radius, double sigma,
                                            int repeat)
 {
@@ -89,12 +89,12 @@ QPixmap kpEffectBlurSharpenCommand::apply (const QPixmap &pixmap,
 #endif
 
     // (KImageEffect::(blur|sharpen)() ignores mask)
-    QPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
+    TQPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
         pixmap,
         Qt::white/*arbitrarily chosen*/);
 
 
-    QImage image = kpPixmapFX::convertToImage (usePixmap);
+    TQImage image = kpPixmapFX::convertToImage (usePixmap);
 
     for (int i = 0; i < repeat; i++)
     {
@@ -104,7 +104,7 @@ QPixmap kpEffectBlurSharpenCommand::apply (const QPixmap &pixmap,
             image = KImageEffect::sharpen (image, radius, sigma);
     }
 
-    QPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
+    TQPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
 
 
     // KImageEffect::(blur|sharpen)() nukes mask - restore it
@@ -116,7 +116,7 @@ QPixmap kpEffectBlurSharpenCommand::apply (const QPixmap &pixmap,
 }
 
 // protected virtual [base kpColorEffectCommand]
-QPixmap kpEffectBlurSharpenCommand::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectBlurSharpenCommand::applyColorEffect (const TQPixmap &pixmap)
 {
     return apply (pixmap, m_type, m_radius, m_sigma, m_repeat);
 }
@@ -125,17 +125,17 @@ QPixmap kpEffectBlurSharpenCommand::applyColorEffect (const QPixmap &pixmap)
 
 kpEffectBlurSharpenWidget::kpEffectBlurSharpenWidget (bool actOnSelection,
                                                       kpMainWindow *mainWindow,
-                                                      QWidget *parent, const char *name)
+                                                      TQWidget *parent, const char *name)
     : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
-    QGridLayout *lay = new QGridLayout (this, 4, 2, marginHint (), spacingHint ());
+    TQGridLayout *lay = new TQGridLayout (this, 4, 2, marginHint (), spacingHint ());
 
 
-    QLabel *amountLabel = new QLabel (i18n ("&Amount:"), this);
+    TQLabel *amountLabel = new TQLabel (i18n ("&Amount:"), this);
     m_amountInput = new KIntNumInput (this);
     m_amountInput->setRange (-10, 10, 1/*step*/, true/*slider*/);
 
-    m_typeLabel = new QLabel (this);
+    m_typeLabel = new TQLabel (this);
 
 
     amountLabel->setBuddy (m_amountInput);
@@ -149,11 +149,11 @@ kpEffectBlurSharpenWidget::kpEffectBlurSharpenWidget (bool actOnSelection,
     lay->setColStretch (1, 1);
 
 
-    connect (m_amountInput, SIGNAL (valueChanged (int)),
-             this, SIGNAL (settingsChangedDelayed ()));
+    connect (m_amountInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SIGNAL (settingsChangedDelayed ()));
 
-    connect (m_amountInput, SIGNAL (valueChanged (int)),
-             this, SLOT (slotUpdateTypeLabel ()));
+    connect (m_amountInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SLOT (slotUpdateTypeLabel ()));
 }
 
 kpEffectBlurSharpenWidget::~kpEffectBlurSharpenWidget ()
@@ -162,9 +162,9 @@ kpEffectBlurSharpenWidget::~kpEffectBlurSharpenWidget ()
 
 
 // public virtual [base kpColorEffectWidget]
-QString kpEffectBlurSharpenWidget::caption () const
+TQString kpEffectBlurSharpenWidget::caption () const
 {
-    return QString::null;
+    return TQString::null;
 }
 
 
@@ -175,7 +175,7 @@ bool kpEffectBlurSharpenWidget::isNoOp () const
 }
 
 // public virtual [base kpColorEffectWidget]
-QPixmap kpEffectBlurSharpenWidget::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectBlurSharpenWidget::applyColorEffect (const TQPixmap &pixmap)
 {
     return kpEffectBlurSharpenCommand::apply (pixmap,
                                               type (), radius (), sigma (), repeat ());
@@ -193,7 +193,7 @@ kpColorEffectCommand *kpEffectBlurSharpenWidget::createCommand () const
 // protected slot
 void kpEffectBlurSharpenWidget::slotUpdateTypeLabel ()
 {
-    QString text = ::nameForType (type ());
+    TQString text = ::nameForType (type ());
 
 #if DEBUG_KP_EFFECT_BLUR_SHARPEN
     kdDebug () << "kpEffectBlurSharpenWidget::slotUpdateTypeLabel() text="

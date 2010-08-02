@@ -53,7 +53,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 

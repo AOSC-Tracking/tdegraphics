@@ -81,7 +81,7 @@ void SVGAnimateElementImpl::handleTimerEvent()
 	else
 	{
 		m_animVal += m_addStep;
-		applyAttribute(getAttributeName(), QString::number(m_animVal));
+		applyAttribute(getAttributeName(), TQString::number(m_animVal));
 	}
 
 	if(m_step < m_steps)
@@ -130,7 +130,7 @@ void SVGAnimateElementImpl::handleTimerEvent()
 		if(m_additive == "replace" && needCombine)
 			needCombine = false;
 		
-		applyAttribute(m_attributeName, QString::number(m_from), needCombine);
+		applyAttribute(m_attributeName, TQString::number(m_from), needCombine);
 
 		m_step++;
 

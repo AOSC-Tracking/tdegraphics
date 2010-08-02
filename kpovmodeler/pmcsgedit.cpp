@@ -19,12 +19,12 @@
 #include "pmcsgedit.h"
 #include "pmcsg.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
 #include <klocale.h>
 
-PMCSGEdit::PMCSGEdit( QWidget* parent, const char* name )
+PMCSGEdit::PMCSGEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -34,19 +34,19 @@ void PMCSGEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   QHBoxLayout* layout;
-   m_pTypeCombo = new QComboBox( false, this );
+   TQHBoxLayout* layout;
+   m_pTypeCombo = new TQComboBox( false, this );
    m_pTypeCombo->insertItem( i18n( "Union" ) );
    m_pTypeCombo->insertItem( i18n( "Intersection" ) );
    m_pTypeCombo->insertItem( i18n( "Difference" ) );
    m_pTypeCombo->insertItem( i18n( "Merge" ) );
    
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Type:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Type:" ), this ) );
    layout->addWidget( m_pTypeCombo );
    layout->addStretch( 1 );
 
-   connect( m_pTypeCombo, SIGNAL( activated( int ) ), SLOT( slotTypeSelected( int ) ) );
+   connect( m_pTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotTypeSelected( int ) ) );
 }
 
 void PMCSGEdit::displayObject( PMObject* o )

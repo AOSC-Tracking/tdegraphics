@@ -21,7 +21,7 @@
 
 class KConfig;
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 #include <kurl.h>
 
 namespace KMrml
@@ -30,18 +30,18 @@ namespace KMrml
     {
     public:
         ServerSettings();
-        ServerSettings(const QString& host, unsigned short int port,
+        ServerSettings(const TQString& host, unsigned short int port,
                        bool autoPort, bool useAuth, const
-                       QString& user, const QString& pass);
+                       TQString& user, const TQString& pass);
 
         // does NOT set the port in the KURL object, if autoPort is selected
         // kio_mrml is going to determine itself (via ServerSettings::port()).
         // This deuglifies the mrml:/ url a bit (no port is shown)
         KURL getUrl() const;
 
-        QString host;
-        QString user;
-        QString pass;
+        TQString host;
+        TQString user;
+        TQString pass;
         unsigned short int configuredPort;
         bool autoPort :1; // only possible with host == localhost
         bool useAuth  :1;
@@ -68,52 +68,52 @@ namespace KMrml
         }
 
         ServerSettings settingsForLocalHost() const;
-        ServerSettings settingsForHost( const QString& host ) const;
+        ServerSettings settingsForHost( const TQString& host ) const;
 
-        void setDefaultHost( const QString& host );
+        void setDefaultHost( const TQString& host );
 
         /**
          * Indexed by the hostname -- ensures there are no dupes
          */
         void addSettings( const ServerSettings& settings );
 
-        bool removeSettings( const QString& host );
+        bool removeSettings( const TQString& host );
 
-        QStringList hosts() const { return m_hostList; }
+        TQStringList hosts() const { return m_hostList; }
 
         /**
          * The list of indexable directories -- only applicable to "localhost"
          */
-        QStringList indexableDirectories() const;
-        void setIndexableDirectories( const QStringList& dirs );
+        TQStringList indexableDirectories() const;
+        void setIndexableDirectories( const TQStringList& dirs );
 
-        QString addCollectionCommandLine() const;
-        void setAddCollectionCommandLine( const QString& cmd );
+        TQString addCollectionCommandLine() const;
+        void setAddCollectionCommandLine( const TQString& cmd );
 
-        QString removeCollectionCommandLine() const;
-        void setRemoveCollectionCommandLine( const QString& cmd );
+        TQString removeCollectionCommandLine() const;
+        void setRemoveCollectionCommandLine( const TQString& cmd );
 
-        void setMrmldCommandLine( const QString& cmd );
-        QString mrmldCommandline() const;
+        void setMrmldCommandLine( const TQString& cmd );
+        TQString mrmldCommandline() const;
 
         // e.g. Wolfgang needs this :)
         bool serverStartedIndividually() const { 
             return m_serverStartedIndividually; 
         }
         
-        static QString mrmldDataDir();
+        static TQString mrmldDataDir();
 
     private:
         void init();
 
-        QString settingsGroup( const QString& host ) const
+        TQString settingsGroup( const TQString& host ) const
         {
-            return QString::fromLatin1( "SettingsFor: " ).append( host );
+            return TQString::fromLatin1( "SettingsFor: " ).append( host );
         }
 
         bool m_serverStartedIndividually;
-        QString m_defaultHost;
-        QStringList m_hostList;
+        TQString m_defaultHost;
+        TQStringList m_hostList;
 
         KConfig *m_config;
         KConfig *m_ownConfig;

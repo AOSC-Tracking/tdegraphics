@@ -32,11 +32,11 @@ public:
    PMFactory( );
    virtual ~PMFactory( );
 
-   virtual KParts::Part* createPartObject( QWidget* parentWidget,
+   virtual KParts::Part* createPartObject( TQWidget* parentWidget,
                                      const char* widgetName,
-                                     QObject* parent, const char* name,
+                                     TQObject* parent, const char* name,
                                      const char* classname,
-                                     const QStringList& args );
+                                     const TQStringList& args );
    
    static KInstance* instance( );
    static const KAboutData* aboutData( );

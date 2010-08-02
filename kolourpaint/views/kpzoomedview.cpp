@@ -43,7 +43,7 @@ kpZoomedView::kpZoomedView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        QWidget *parent, const char *name)
+        TQWidget *parent, const char *name)
 
     : kpView (document, toolToolBar, viewManager,
               buddyView,

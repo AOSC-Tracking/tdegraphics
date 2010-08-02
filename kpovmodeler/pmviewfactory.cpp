@@ -61,8 +61,8 @@ void PMViewFactory::addViewType( PMViewTypeFactory* vt )
    }
 }
 
-PMViewBase* PMViewFactory::newViewInstance( const QString& viewType,
-                                            QWidget* parent, PMPart* part ) const
+PMViewBase* PMViewFactory::newViewInstance( const TQString& viewType,
+                                            TQWidget* parent, PMPart* part ) const
 {
    PMViewTypeFactory* f = m_dict.find( viewType );
    if( f )
@@ -72,7 +72,7 @@ PMViewBase* PMViewFactory::newViewInstance( const QString& viewType,
    return 0;
 }
 
-PMViewOptions* PMViewFactory::newOptionsInstance( const QString& viewType ) const
+PMViewOptions* PMViewFactory::newOptionsInstance( const TQString& viewType ) const
 {
    PMViewTypeFactory* f = m_dict.find( viewType );
    if( f )
@@ -82,12 +82,12 @@ PMViewOptions* PMViewFactory::newOptionsInstance( const QString& viewType ) cons
    return 0;
 }
 
-PMViewTypeFactory* PMViewFactory::viewFactory( const QString& viewType ) const
+PMViewTypeFactory* PMViewFactory::viewFactory( const TQString& viewType ) const
 {
    return m_dict.find( viewType );
 }
 
-const QPtrList<PMViewTypeFactory>& PMViewFactory::viewTypes( ) const
+const TQPtrList<PMViewTypeFactory>& PMViewFactory::viewTypes( ) const
 {
    return m_viewTypes;
 }

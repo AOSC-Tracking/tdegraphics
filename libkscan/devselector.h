@@ -23,10 +23,10 @@
 
 #include <kdialogbase.h>
 
-class QButtonGroup;
-class QStrList;
-class QStringList;
-class QCheckBox;
+class TQButtonGroup;
+class TQStrList;
+class TQStringList;
+class TQCheckBox;
 
 /**
   *@author Klaas Freitag
@@ -57,11 +57,11 @@ class DeviceSelector: public KDialogBase
 public:
    /**
     *  constructs the dialog class
-    *  @param QWidget *parent - the parent
-    *  @param QStrList backends - a list of device names retrieved from the scan device
-    *  @param QStrList scannerNames - a list of corresponding human readable sanner names.
+    *  @param TQWidget *parent - the parent
+    *  @param TQStrList backends - a list of device names retrieved from the scan device
+    *  @param TQStrList scannerNames - a list of corresponding human readable sanner names.
     */
-   DeviceSelector( QWidget *parent, QStrList&, const QStringList& );
+   DeviceSelector( TQWidget *parent, TQStrList&, const TQStringList& );
    ~DeviceSelector();
 
    /**
@@ -69,7 +69,7 @@ public:
     *  @return a CString containing the technical name of the selected device (taken from
     *          the backends-list from the constructor)
     */
-   QCString getSelectedDevice( void ) const;
+   TQCString getSelectedDevice( void ) const;
 
    /**
     *  returns the users selection if the dialog should be skipped in future.
@@ -85,15 +85,15 @@ public:
     *  @return a string containing the device to open or null if no device is specified or the
     *  one specified is not valid.
     */
-   QCString getDeviceFromConfig( void ) const;
+   TQCString getDeviceFromConfig( void ) const;
 
 public slots:
-   void setScanSources( const QStrList&, const QStringList& );
+   void setScanSources( const TQStrList&, const TQStringList& );
 
 private:
-   QButtonGroup *selectBox;
-   mutable QStrList devices;
-   QCheckBox   *cbSkipDialog;
+   TQButtonGroup *selectBox;
+   mutable TQStrList devices;
+   TQCheckBox   *cbSkipDialog;
    bool        configDevValid;
    
    class DeviceSelectorPrivate;

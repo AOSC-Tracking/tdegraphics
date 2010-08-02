@@ -19,31 +19,31 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
 
 #include <klocale.h>
 #include <knuminput.h>
 
 #include "kresize.h"
 
-KResizeWidget::KResizeWidget( QWidget* parent, const char* name, 
-    const QSize& size ) : QWidget( parent, name )
+KResizeWidget::KResizeWidget( TQWidget* parent, const char* name, 
+    const TQSize& size ) : TQWidget( parent, name )
 {
-  QHBoxLayout* genLayout = new QHBoxLayout( this );
+  TQHBoxLayout* genLayout = new TQHBoxLayout( this );
 
-  QGroupBox* group = new QGroupBox( i18n( "Size" ), this );
+  TQGroupBox* group = new TQGroupBox( i18n( "Size" ), this );
   group->setColumnLayout( 0, Qt::Horizontal );
   genLayout->addWidget( group );
 
-  QHBoxLayout* layout = new QHBoxLayout( group->layout(), 6 );
+  TQHBoxLayout* layout = new TQHBoxLayout( group->layout(), 6 );
 
   m_width = new KIntSpinBox( 1, 200, 1, 1, 10, group );
   m_width->setValue( size.width() );
   layout->addWidget( m_width, 1 );
 
-  QLabel* label = new QLabel( "X", group );
+  TQLabel* label = new TQLabel( "X", group );
   layout->addWidget( label );
 
   m_height = new KIntSpinBox( 1, 200, 1, 1, 10, group);
@@ -57,13 +57,13 @@ KResizeWidget::~KResizeWidget()
 {
 }
 
-const QSize KResizeWidget::getSize()
+const TQSize KResizeWidget::getSize()
 {
-  return QSize( m_width->value(), m_height->value() );
+  return TQSize( m_width->value(), m_height->value() );
 }
 
-KResizeDialog::KResizeDialog( QWidget* parent, const char* name, 
-    const QSize size )
+KResizeDialog::KResizeDialog( TQWidget* parent, const char* name, 
+    const TQSize size )
     : KDialogBase( parent, name, true, i18n( "Select Size" ), Ok|Cancel )
 {
   m_resize = new KResizeWidget( this, "resize widget", size );
@@ -75,7 +75,7 @@ KResizeDialog::~KResizeDialog()
 {
 }
 
-const QSize KResizeDialog::getSize()
+const TQSize KResizeDialog::getSize()
 {
   return m_resize->getSize();
 }

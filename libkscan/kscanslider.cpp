@@ -17,49 +17,49 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
-#include <qtooltip.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qslider.h>
-#include <qlineedit.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
+#include <tqspinbox.h>
+#include <tqtooltip.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
+#include <tqslider.h>
+#include <tqlineedit.h>
 
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include "kscanslider.h"
 
-KScanSlider::KScanSlider( QWidget *parent, const QString& text,
+KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
 			  double min, double max, bool haveStdButt,
 			  int stdValue )
-   : QFrame( parent ),
+   : TQFrame( parent ),
      m_stdValue( stdValue ),
      m_stdButt(0)
 {
-    QHBoxLayout *hb = new QHBoxLayout( this );
-    l1 = new QLabel( text, this, "AUTO_SLIDER_LABEL" );
+    TQHBoxLayout *hb = new TQHBoxLayout( this );
+    l1 = new TQLabel( text, this, "AUTO_SLIDER_LABEL" );
     hb->addWidget( l1,20 );
 
     if( haveStdButt )
     {
        KIconLoader *loader = KGlobal::iconLoader();
-       m_stdButt = new QPushButton( this );
+       m_stdButt = new TQPushButton( this );
        m_stdButt->setPixmap( loader->loadIcon( "undo",KIcon::Small ));
 
        /* connect the button click to setting the value */
-       connect( m_stdButt, SIGNAL(clicked()),
-		this, SLOT(slRevertValue()));
+       connect( m_stdButt, TQT_SIGNAL(clicked()),
+		this, TQT_SLOT(slRevertValue()));
 
-       QToolTip::add( m_stdButt,
+       TQToolTip::add( m_stdButt,
 		      i18n( "Revert value back to its standard value %1" ).arg( stdValue ));
        hb->addWidget( m_stdButt, 0 );
        hb->addSpacing( 4 );
     }
 
-    slider = new QSlider( (int) min, (int)max, 1, (int)min, QSlider::Horizontal, this, "AUTO_SLIDER_" );
-    slider->setTickmarks( QSlider::Below );
+    slider = new TQSlider( (int) min, (int)max, 1, (int)min, TQSlider::Horizontal, this, "AUTO_SLIDER_" );
+    slider->setTickmarks( TQSlider::Below );
     slider->setTickInterval( int(QMAX( (max-min)/10, 1 )) );
     slider->setSteps( int(QMAX( (max-min)/20, 1) ), int(QMAX( (max-min)/10, 1) ) );
     slider->setMinimumWidth( 140 );
@@ -67,17 +67,17 @@ KScanSlider::KScanSlider( QWidget *parent, const QString& text,
     l1->setBuddy( slider );
 
     /* create a spinbox for displaying the values */
-    m_spin = new QSpinBox( (int) min, (int) max,
+    m_spin = new TQSpinBox( (int) min, (int) max,
 			   1, // step
 			   this );
 
 
     /* make spin box changes change the slider */
-    connect( m_spin, SIGNAL(valueChanged(int)), this, SLOT(slSliderChange(int)));
+    connect( m_spin, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(slSliderChange(int)));
 
     /* Handle internal number display */
-    // connect(slider, SIGNAL(valueChanged(int)), numdisp, SLOT( setNum(int) ));
-    connect(slider, SIGNAL(valueChanged(int)), this, SLOT( slSliderChange(int) ));
+    // connect(slider, TQT_SIGNAL(valueChanged(int)), numdisp, TQT_SLOT( setNum(int) ));
+    connect(slider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT( slSliderChange(int) ));
 
     /* set Value 0 to the widget */
     slider->setValue( (int) min -1 );
@@ -149,28 +149,28 @@ KScanSlider::~KScanSlider()
 
 /* ====================================================================== */
 
-KScanEntry::KScanEntry( QWidget *parent, const QString& text )
- : QFrame( parent )
+KScanEntry::KScanEntry( TQWidget *parent, const TQString& text )
+ : TQFrame( parent )
 {
-    QHBoxLayout *hb = new QHBoxLayout( this );
+    TQHBoxLayout *hb = new TQHBoxLayout( this );
 
-    QLabel *l1 = new QLabel( text, this, "AUTO_ENTRYFIELD" );
+    TQLabel *l1 = new TQLabel( text, this, "AUTO_ENTRYFIELD" );
     hb->addWidget( l1,1 );
 
-    entry = new QLineEdit( this, "AUTO_ENTRYFIELD_E" );
+    entry = new TQLineEdit( this, "AUTO_ENTRYFIELD_E" );
     l1->setBuddy( entry );
-    connect( entry, SIGNAL( textChanged(const QString& )),
-	     this, SLOT( slEntryChange(const QString&)));
-    connect( entry, SIGNAL( returnPressed()),
-	     this,  SLOT( slReturnPressed()));
+    connect( entry, TQT_SIGNAL( textChanged(const TQString& )),
+	     this, TQT_SLOT( slEntryChange(const TQString&)));
+    connect( entry, TQT_SIGNAL( returnPressed()),
+	     this,  TQT_SLOT( slReturnPressed()));
 
     hb->addWidget( entry,3 );
     hb->activate();
 }
 
-QString  KScanEntry::text( void ) const
+TQString  KScanEntry::text( void ) const
 {
-   QString str = QString::null;
+   TQString str = TQString::null;
    // kdDebug(29000) << "entry is "<< entry << endl;
    if(entry)
    {
@@ -191,7 +191,7 @@ QString  KScanEntry::text( void ) const
    return ( str );
 }
 
-void KScanEntry::slSetEntry( const QString& t )
+void KScanEntry::slSetEntry( const TQString& t )
 {
     if( t == entry->text() )
 	return;
@@ -200,22 +200,22 @@ void KScanEntry::slSetEntry( const QString& t )
     entry->setText( t );
 }
 
-void KScanEntry::slEntryChange( const QString& t )
+void KScanEntry::slEntryChange( const TQString& t )
 {
-    emit valueChanged( QCString( t.latin1() ) );
+    emit valueChanged( TQCString( t.latin1() ) );
 }
 
 void KScanEntry::slReturnPressed( void )
 {
-   QString t = text();
-   emit returnPressed( QCString( t.latin1()));
+   TQString t = text();
+   emit returnPressed( TQCString( t.latin1()));
 }
 
 
 
-KScanCombo::KScanCombo( QWidget *parent, const QString& text,
-			const QStrList& list )
-    : QHBox( parent ),
+KScanCombo::KScanCombo( TQWidget *parent, const TQString& text,
+			const TQStrList& list )
+    : TQHBox( parent ),
       combo(0)
 {
     createCombo( text );
@@ -224,40 +224,40 @@ KScanCombo::KScanCombo( QWidget *parent, const QString& text,
     combolist = list;
 }
 
-KScanCombo::KScanCombo( QWidget *parent, const QString& text,
-			const QStringList& list )
-    : QHBox( parent ),
+KScanCombo::KScanCombo( TQWidget *parent, const TQString& text,
+			const TQStringList& list )
+    : TQHBox( parent ),
       combo(0)
 {
     createCombo( text );
     if( combo )
         combo->insertStringList( list );
 
-    for ( QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
+    for ( TQStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
         combolist.append( (*it).local8Bit() );
     }
 }
 
 
-void KScanCombo::createCombo( const QString& text )
+void KScanCombo::createCombo( const TQString& text )
 {
     setSpacing( 12 );
     setMargin( 2 );
 
 
-    (void) new QLabel( text, this, "AUTO_COMBOLABEL" );
+    (void) new TQLabel( text, this, "AUTO_COMBOLABEL" );
 
-    combo = new QComboBox( this, "AUTO_COMBO" );
+    combo = new TQComboBox( this, "AUTO_COMBO" );
 
-    connect( combo, SIGNAL(activated( const QString &)), this,
-             SLOT( slComboChange( const QString &)));
-    connect( combo, SIGNAL(activated( int )),
-	     this,  SLOT(slFireActivated(int)));
+    connect( combo, TQT_SIGNAL(activated( const TQString &)), this,
+             TQT_SLOT( slComboChange( const TQString &)));
+    connect( combo, TQT_SIGNAL(activated( int )),
+	     this,  TQT_SLOT(slFireActivated(int)));
 
 }
 
 
-void KScanCombo::slSetEntry( const QString &t )
+void KScanCombo::slSetEntry( const TQString &t )
 {
     if( t.isNull() ) 	return;
     int i = combolist.find( t.local8Bit() );
@@ -272,13 +272,13 @@ void KScanCombo::slSetEntry( const QString &t )
 	kdDebug(29000) << "Combo item not in list !" << endl;
 }
 
-void KScanCombo::slComboChange( const QString &t )
+void KScanCombo::slComboChange( const TQString &t )
 {
-    emit valueChanged( QCString( t.latin1() ) );
+    emit valueChanged( TQCString( t.latin1() ) );
     kdDebug(29000) << "Combo: valueChanged emitted!" << endl;
 }
 
-void KScanCombo::slSetIcon( const QPixmap& pix, const QString& str)
+void KScanCombo::slSetIcon( const TQPixmap& pix, const TQString& str)
 {
    for( int i=0; i < combo->count(); i++ )
    {
@@ -290,13 +290,13 @@ void KScanCombo::slSetIcon( const QPixmap& pix, const QString& str)
    }
 }
 
-QString KScanCombo::currentText( void ) const
+TQString KScanCombo::currentText( void ) const
 {
    return( combo->currentText() );
 }
 
 
-QString KScanCombo::text( int i ) const
+TQString KScanCombo::text( int i ) const
 {
    return( combo->text(i) );
 }

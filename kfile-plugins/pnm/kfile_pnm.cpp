@@ -21,8 +21,8 @@
 
 #include <math.h>
 #include <kgenericfactory.h>
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 static const char* formats[] = {
 	I18N_NOOP("plain"),
@@ -33,14 +33,14 @@ typedef KGenericFactory<KPnmPlugin> PnmFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pnm, PnmFactory("kfile_pnm"))
 
-KPnmPlugin::KPnmPlugin(QObject *parent, const char *name, const QStringList &args) : KFilePlugin(parent, name, args) 
+KPnmPlugin::KPnmPlugin(TQObject *parent, const char *name, const TQStringList &args) : KFilePlugin(parent, name, args) 
 {
 	makeMimeTypeInfo( "image/x-portable-bitmap" );
 	makeMimeTypeInfo( "image/x-portable-greymap" );
 	makeMimeTypeInfo( "image/x-portable-pixmap" );
 }
 
-void KPnmPlugin::makeMimeTypeInfo(const QString& mimetype)
+void KPnmPlugin::makeMimeTypeInfo(const TQString& mimetype)
 {
 	KFileMimeTypeInfo* info = addMimeTypeInfo( mimetype );
 
@@ -49,26 +49,26 @@ void KPnmPlugin::makeMimeTypeInfo(const QString& mimetype)
 
 	group = addGroupInfo(info, "General", i18n("General"));
 
-	addItemInfo(group, "Format", i18n("Format"), QVariant::String);
+	addItemInfo(group, "Format", i18n("Format"), TQVariant::String);
 
-	item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+	item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
 	setUnit(item, KFileMimeTypeInfo::Pixels);
 
-	item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+	item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
 	setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-	addItemInfo(group, "Comment", i18n("Comment"), QVariant::String);
+	addItemInfo(group, "Comment", i18n("Comment"), TQVariant::String);
 }
 
 
 bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 {
-	QFile f(info.path());
+	TQFile f(info.path());
 	if(!f.open(IO_ReadOnly))
 		return false;
 	if(f.size() <= 2)
 		return false;
-	QTextStream stream(&f);
+	TQTextStream stream(&f);
 
 	char c;
 	stream >> c;
@@ -83,7 +83,7 @@ bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 		return false;
 	int type = (n - 1) % 3;
 
-	QString comments, buffer;
+	TQString comments, buffer;
 	while(!stream.atEnd()) {
 		stream >> c;
 		// comment
@@ -94,11 +94,11 @@ bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 		}
 		// image size
 		// unfortunately Qt doesn't have some kind of push-back method for 
-		// QTextStream, so we need to manually decode the first part of the 
+		// TQTextStream, so we need to manually decode the first part of the 
 		// image size.
 		if( c >= '0' && c <= '9' ) {
 			buffer = "";
-			QChar tmp(c);
+			TQChar tmp(c);
 			while(!stream.atEnd() && tmp.isDigit()) {
 				buffer += tmp;
 				stream >> tmp;
@@ -125,7 +125,7 @@ bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 
 	KFileMetaInfoGroup group = appendGroup(info, "General");
 	appendItem(group, "Format", formats[format]);
-	appendItem(group, "Dimensions", QSize(x, y));
+	appendItem(group, "Dimensions", TQSize(x, y));
 	if(!comments.isEmpty())
 		appendItem(group, "Comment", comments.stripWhiteSpace());
 	appendItem(group, "BitDepth", bpp);

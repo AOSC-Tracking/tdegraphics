@@ -29,15 +29,15 @@
 #ifndef __kpselection_h__
 #define __kpselection_h__
 
-#include <qbitmap.h>
-#include <qdatastream.h>
-#include <qobject.h>
-#include <qpixmap.h>
-#include <qpoint.h>
-#include <qpointarray.h>
-#include <qvaluevector.h>
-#include <qrect.h>
-#include <qstring.h>
+#include <tqbitmap.h>
+#include <tqdatastream.h>
+#include <tqobject.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
+#include <tqpointarray.h>
+#include <tqvaluevector.h>
+#include <tqrect.h>
+#include <tqstring.h>
 
 #include <kpcolor.h>
 #include <kppixmapfx.h>
@@ -45,7 +45,7 @@
 #include <kptextstyle.h>
 
 
-class QSize;
+class TQSize;
 
 
 /*
@@ -69,23 +69,23 @@ public:
     kpSelection (const kpSelectionTransparency &transparency = kpSelectionTransparency ());
 
     // (for Rectangle & Ellipse)
-    kpSelection (Type type, const QRect &rect, const QPixmap &pixmap = QPixmap (),
+    kpSelection (Type type, const TQRect &rect, const TQPixmap &pixmap = TQPixmap (),
                  const kpSelectionTransparency &transparency = kpSelectionTransparency ());
-    kpSelection (Type type, const QRect &rect, const kpSelectionTransparency &transparency);
+    kpSelection (Type type, const TQRect &rect, const kpSelectionTransparency &transparency);
 
     // (for Text)
-    kpSelection (const QRect &rect, const QValueVector <QString> &textLines_, const kpTextStyle &textStyle_);
+    kpSelection (const TQRect &rect, const TQValueVector <TQString> &textLines_, const kpTextStyle &textStyle_);
 
     // (for Points)
-    kpSelection (const QPointArray &points, const QPixmap &pixmap = QPixmap (),
+    kpSelection (const TQPointArray &points, const TQPixmap &pixmap = TQPixmap (),
                  const kpSelectionTransparency &transparency = kpSelectionTransparency ());
-    kpSelection (const QPointArray &points, const kpSelectionTransparency &transparency);
+    kpSelection (const TQPointArray &points, const kpSelectionTransparency &transparency);
 
     kpSelection (const kpSelection &rhs);
     kpSelection &operator= (const kpSelection &rhs);
-    friend QDataStream &operator<< (QDataStream &stream, const kpSelection &selection);
-    friend QDataStream &operator>> (QDataStream &stream, kpSelection &selection);
-    void readFromStream (QDataStream &stream,
+    friend TQDataStream &operator<< (TQDataStream &stream, const kpSelection &selection);
+    friend TQDataStream &operator>> (TQDataStream &stream, kpSelection &selection);
+    void readFromStream (TQDataStream &stream,
                          const kpPixmapFX::WarnAboutLossInfo &wali =
                              kpPixmapFX::WarnAboutLossInfo ());
     ~kpSelection ();
@@ -98,67 +98,67 @@ public:
     bool isRectangular () const;
     bool isText () const;
     // returns either i18n ("Selection") or i18n ("Text")
-    QString name () const;
+    TQString name () const;
 
     int size () const;
 
-    QBitmap maskForOwnType (bool nullForRectangular = false) const;
+    TQBitmap maskForOwnType (bool nullForRectangular = false) const;
 
     // synonyms
-    QPoint topLeft () const;
-    QPoint point () const;
+    TQPoint topLeft () const;
+    TQPoint point () const;
 
     int x () const;
     int y () const;
 
     void moveBy (int dx, int dy);
     void moveTo (int dx, int dy);
-    void moveTo (const QPoint &topLeftPoint);
+    void moveTo (const TQPoint &topLeftPoint);
 
     // synonyms
-    QPointArray points () const;
-    QPointArray pointArray () const;
+    TQPointArray points () const;
+    TQPointArray pointArray () const;
 
-    QRect boundingRect () const;
+    TQRect boundingRect () const;
     int width () const;
     int height () const;
 
 
     // (for non-rectangular selections, may return false even if
     //  kpView::onSelectionResizeHandle())
-    bool contains (const QPoint &point) const;
+    bool contains (const TQPoint &point) const;
     bool contains (int x, int y);
 
 
     // (Avoid using for text selections since text selection may
     //  require a background for antialiasing purposes - use paint()
     //  instead, else no antialising)
-    QPixmap *pixmap () const;
-    void setPixmap (const QPixmap &pixmap);
+    TQPixmap *pixmap () const;
+    void setPixmap (const TQPixmap &pixmap);
 
     bool usesBackgroundPixmapToPaint () const;
 
 private:
-    void paintOpaqueText (QPixmap *destPixmap, const QRect &docRect) const;
-    QPixmap transparentForegroundTextPixmap () const;
+    void paintOpaqueText (TQPixmap *destPixmap, const TQRect &docRect) const;
+    TQPixmap transparentForegroundTextPixmap () const;
 
 public:
     // (<docRect> is the document rectangle that <*destPixmap> represents)
-    void paint (QPixmap *destPixmap, const QRect &docRect) const;
+    void paint (TQPixmap *destPixmap, const TQRect &docRect) const;
 
 private:
     void calculateTextPixmap ();
 
 public:
-    static QString textForTextLines (const QValueVector <QString> &textLines_);
-    QString text () const;  // textLines() as one long string
-    QValueVector <QString> textLines () const;
-    void setTextLines (const QValueVector <QString> &textLines_);
+    static TQString textForTextLines (const TQValueVector <TQString> &textLines_);
+    TQString text () const;  // textLines() as one long string
+    TQValueVector <TQString> textLines () const;
+    void setTextLines (const TQValueVector <TQString> &textLines_);
 
     static int textBorderSize ();
-    QRect textAreaRect () const;
-    bool pointIsInTextBorderArea (const QPoint &globalPoint) const;
-    bool pointIsInTextArea (const QPoint &globalPoint) const;
+    TQRect textAreaRect () const;
+    bool pointIsInTextBorderArea (const TQPoint &globalPoint) const;
+    bool pointIsInTextArea (const TQPoint &globalPoint) const;
 
 
     void textResize (int width, int height);
@@ -168,33 +168,33 @@ public:
     //       Be more robust when external enforcement fails.
     static int minimumWidthForTextStyle (const kpTextStyle &);
     static int minimumHeightForTextStyle (const kpTextStyle &);
-    static QSize minimumSizeForTextStyle (const kpTextStyle &);
+    static TQSize minimumSizeForTextStyle (const kpTextStyle &);
 
     static int preferredMinimumWidthForTextStyle (const kpTextStyle &textStyle);
     static int preferredMinimumHeightForTextStyle (const kpTextStyle &textStyle);
-    static QSize preferredMinimumSizeForTextStyle (const kpTextStyle &textStyle);
+    static TQSize preferredMinimumSizeForTextStyle (const kpTextStyle &textStyle);
 
     int minimumWidth () const;
     int minimumHeight () const;
-    QSize minimumSize () const;
+    TQSize minimumSize () const;
 
-    int textRowForPoint (const QPoint &globalPoint) const;
-    int textColForPoint (const QPoint &globalPoint) const;
-    QPoint pointForTextRowCol (int row, int col);
+    int textRowForPoint (const TQPoint &globalPoint) const;
+    int textColForPoint (const TQPoint &globalPoint) const;
+    TQPoint pointForTextRowCol (int row, int col);
 
     kpTextStyle textStyle () const;
     void setTextStyle (const kpTextStyle &textStyle);
 
     // TODO: ret val inconstent with pixmap()
     //       - fix when merge with kpTempPixmap
-    QPixmap opaquePixmap () const;  // same as pixmap()
+    TQPixmap opaquePixmap () const;  // same as pixmap()
 
 private:
     void calculateTransparencyMask ();
 
 public:
     // Returns opaquePixmap() after applying kpSelectionTransparency
-    QPixmap transparentPixmap () const;
+    TQPixmap transparentPixmap () const;
 
     kpSelectionTransparency transparency () const;
     // Returns whether or not the selection changed due to setting the
@@ -211,21 +211,21 @@ public:
     void flip (bool horiz, bool vert);
 
 signals:
-    void changed (const QRect &docRect);
+    void changed (const TQRect &docRect);
 
 private:
     // OPT: use implicit sharing
 
     Type m_type;
-    QRect m_rect;
-    QPointArray m_points;
-    QPixmap *m_pixmap;
+    TQRect m_rect;
+    TQPointArray m_points;
+    TQPixmap *m_pixmap;
 
-    QValueVector <QString> m_textLines;
+    TQValueVector <TQString> m_textLines;
     kpTextStyle m_textStyle;
 
     kpSelectionTransparency m_transparency;
-    QBitmap m_transparencyMask;
+    TQBitmap m_transparencyMask;
 
 private:
     // There is no need to maintain binary compatibility at this stage.

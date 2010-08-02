@@ -17,7 +17,7 @@
 
 #include "textselection.h"
 
-TextSelection::TextSelection(QWidget *parent, const char *name ) : QWidget(parent,name) {
+TextSelection::TextSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
 	
 }
 TextSelection::~TextSelection(){

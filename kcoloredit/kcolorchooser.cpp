@@ -57,13 +57,13 @@ int main(int argc, char *argv[])
 
   dlg.setColor(Qt::blue); // Just a color
 
-  app.connect(&dlg, SIGNAL(finished()), SLOT(quit()));
+  app.connect(&dlg, TQT_SIGNAL(finished()), TQT_SLOT(quit()));
 
   dlg.show();
   app.exec();
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  const  QColor c = dlg.color();
+  const  TQColor c = dlg.color();
   if ( args->isSet("print") && c.isValid() ) {
       std::cout << c.name().utf8().data() << std::endl;
   }

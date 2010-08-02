@@ -30,13 +30,13 @@
 #define KP_EFFECT_FLATTEN_H
 
 
-#include <qcolor.h>
+#include <tqcolor.h>
 
 #include <kpcoloreffect.h>
 
 
-class QCheckBox;
-class QImage;
+class TQCheckBox;
+class TQImage;
 
 class KColorButton;
 
@@ -46,20 +46,20 @@ class kpMainWindow;
 class kpEffectFlattenCommand : public kpColorEffectCommand
 {
 public:
-    kpEffectFlattenCommand (const QColor &color1, const QColor &color2,
+    kpEffectFlattenCommand (const TQColor &color1, const TQColor &color2,
                             bool actOnSelection,
                             kpMainWindow *mainWindow);
     virtual ~kpEffectFlattenCommand ();
 
 
-    static void apply (QPixmap *destPixmapPtr,
-                       const QColor &color1, const QColor &color2);
-    static QPixmap apply (const QPixmap &pm,
-                          const QColor &color1, const QColor &color2);
-    static void apply (QImage *destImagePtr,
-                       const QColor &color1, const QColor &color2);
-    static QImage apply (const QImage &img,
-                         const QColor &color1, const QColor &color2);
+    static void apply (TQPixmap *destPixmapPtr,
+                       const TQColor &color1, const TQColor &color2);
+    static TQPixmap apply (const TQPixmap &pm,
+                          const TQColor &color1, const TQColor &color2);
+    static void apply (TQImage *destImagePtr,
+                       const TQColor &color1, const TQColor &color2);
+    static TQImage apply (const TQImage &img,
+                         const TQColor &color1, const TQColor &color2);
 
 
     //
@@ -67,9 +67,9 @@ public:
     //
 
 protected:
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
-    QColor m_color1, m_color2;
+    TQColor m_color1, m_color2;
 };
 
 
@@ -80,25 +80,25 @@ Q_OBJECT
 public:
     kpEffectFlattenWidget (bool actOnSelection,
                            kpMainWindow *mainWindow,
-                           QWidget *parent, const char *name = 0);
+                           TQWidget *parent, const char *name = 0);
     virtual ~kpEffectFlattenWidget ();
 
 
-    static QColor s_lastColor1, s_lastColor2;
+    static TQColor s_lastColor1, s_lastColor2;
 
 
-    QColor color1 () const;
-    QColor color2 () const;
+    TQColor color1 () const;
+    TQColor color2 () const;
 
 
     //
     // kpColorEffectWidget interface
     //
 
-    virtual QString caption () const;
+    virtual TQString caption () const;
 
     virtual bool isNoOp () const;
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     virtual kpColorEffectCommand *createCommand () const;
 
@@ -106,7 +106,7 @@ protected slots:
     void slotEnableChanged (bool enable);
 
 protected:
-    QCheckBox *m_enableCheckBox;
+    TQCheckBox *m_enableCheckBox;
     KColorButton *m_color1Button, *m_color2Button;
 };
 

@@ -26,16 +26,16 @@
 
 #include "pmsolidobjectedit.h"
 #include "pmvectoredit.h"
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 
 class PMLathe;
 class PMVectorListEdit;
-class QVBoxLayout;
-class QComboBox;
-class QCheckBox;
-class QPushButton;
-class QLabel;
+class TQVBoxLayout;
+class TQComboBox;
+class TQCheckBox;
+class TQPushButton;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMLathe
@@ -48,7 +48,7 @@ public:
    /**
     * Creates a PMLatheEdit with parent and name
     */
-   PMLatheEdit( QWidget* parent, const char* name = 0 );
+   PMLatheEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -77,12 +77,12 @@ private:
    void updatePointButtons( );
    
    PMLathe* m_pDisplayedObject;
-   QComboBox* m_pSplineType;
-   QCheckBox* m_pSturm;
+   TQComboBox* m_pSplineType;
+   TQCheckBox* m_pSturm;
    PMVectorListEdit* m_pPoints;
-   QPushButton* m_pAddAbove;
-   QPushButton* m_pAddBelow;
-   QPushButton* m_pRemove;   
+   TQPushButton* m_pAddAbove;
+   TQPushButton* m_pAddBelow;
+   TQPushButton* m_pRemove;   
 };
 
 

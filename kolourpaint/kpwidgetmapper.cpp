@@ -28,16 +28,16 @@
 
 #include <kpwidgetmapper.h>
 
-#include <qpoint.h>
-#include <qrect.h>
-#include <qwidget.h>
+#include <tqpoint.h>
+#include <tqrect.h>
+#include <tqwidget.h>
 
 
 namespace kpWidgetMapper
 {
 
 
-QPoint fromGlobal (const QWidget *widget, const QPoint &point)
+TQPoint fromGlobal (const TQWidget *widget, const TQPoint &point)
 {
     if (!widget)
         return point;
@@ -45,17 +45,17 @@ QPoint fromGlobal (const QWidget *widget, const QPoint &point)
     return widget->mapFromGlobal (point);
 }
 
-QRect fromGlobal (const QWidget *widget, const QRect &rect)
+TQRect fromGlobal (const TQWidget *widget, const TQRect &rect)
 {
     if (!widget || !rect.isValid ())
         return rect;
 
-    QPoint topLeft = fromGlobal (widget, rect.topLeft ());
-    return QRect (topLeft.x (), topLeft.y (), rect.width (), rect.height ());
+    TQPoint topLeft = fromGlobal (widget, rect.topLeft ());
+    return TQRect (topLeft.x (), topLeft.y (), rect.width (), rect.height ());
 }
 
 
-QPoint toGlobal (const QWidget *widget, const QPoint &point)
+TQPoint toGlobal (const TQWidget *widget, const TQPoint &point)
 {
     if (!widget)
         return point;
@@ -63,13 +63,13 @@ QPoint toGlobal (const QWidget *widget, const QPoint &point)
     return widget->mapToGlobal (point);
 }
 
-QRect toGlobal (const QWidget *widget, const QRect &rect)
+TQRect toGlobal (const TQWidget *widget, const TQRect &rect)
 {
     if (!widget || !rect.isValid ())
         return rect;
 
-    QPoint topLeft = toGlobal (widget, rect.topLeft ());
-    return QRect (topLeft.x (), topLeft.y (), rect.width (), rect.height ());
+    TQPoint topLeft = toGlobal (widget, rect.topLeft ());
+    return TQRect (topLeft.x (), topLeft.y (), rect.width (), rect.height ());
 }
 
 

@@ -33,13 +33,13 @@
 #include <kpcoloreffect.h>
 
 
-class QRadioButton;
-class QImage;
+class TQRadioButton;
+class TQImage;
 
 class kpMainWindow;
 
 
-QImage convertImageDepth (const QImage &image, int depth, bool dither);
+TQImage convertImageDepth (const TQImage &image, int depth, bool dither);
 
 
 class kpEffectReduceColorsCommand : public kpColorEffectCommand
@@ -51,11 +51,11 @@ public:
                                  kpMainWindow *mainWindow);
     virtual ~kpEffectReduceColorsCommand ();
 
-    QString commandName (int depth, int dither) const;
+    TQString commandName (int depth, int dither) const;
 
     // (always preserves mask)
-    static void apply (QPixmap *destPixmapPtr, int depth, bool dither);
-    static QPixmap apply (const QPixmap &pm, int depth, bool dither);
+    static void apply (TQPixmap *destPixmapPtr, int depth, bool dither);
+    static TQPixmap apply (const TQPixmap &pm, int depth, bool dither);
 
 
     //
@@ -63,7 +63,7 @@ public:
     //
 
 protected:
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     int m_depth;
     bool m_dither;
@@ -77,7 +77,7 @@ Q_OBJECT
 public:
     kpEffectReduceColorsWidget (bool actOnSelection,
                                 kpMainWindow *mainWindow,
-                                QWidget *parent, const char *name = 0);
+                                TQWidget *parent, const char *name = 0);
     virtual ~kpEffectReduceColorsWidget ();
 
 
@@ -89,20 +89,20 @@ public:
     // kpColorEffectWidget interface
     //
 
-    virtual QString caption () const;
+    virtual TQString caption () const;
 
     virtual bool isNoOp () const;
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     virtual kpColorEffectCommand *createCommand () const;
 
 protected:
-    QRadioButton *m_blackAndWhiteRadioButton,
+    TQRadioButton *m_blackAndWhiteRadioButton,
                  *m_blackAndWhiteDitheredRadioButton,
                  *m_8BitRadioButton,
                  *m_8BitDitheredRadioButton,
                  *m_24BitRadioButton;
-    QRadioButton *m_defaultRadioButton;
+    TQRadioButton *m_defaultRadioButton;
 };
 
 

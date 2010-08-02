@@ -45,7 +45,7 @@ public:
     *              of PMIFirstChild, PMILastChild, PMISibling.
     * @param name Internal name of the popup menu
     */
-   PMInsertPopup( QWidget* parent, bool multipleObjects,
+   PMInsertPopup( TQWidget* parent, bool multipleObjects,
                   int items = PMIFirstChild | PMILastChild | PMISibling,
                   bool canInsertAllAsFirstChildren = true,
                   bool canInsertAllAsLastChildren = true,
@@ -70,7 +70,7 @@ public:
     *
     * Returns the selected item or 0 if no item was selected.
     */
-   static int choosePlace( QWidget* parent, bool multipleObjects,
+   static int choosePlace( TQWidget* parent, bool multipleObjects,
                            int items = PMIFirstChild | PMILastChild
                            | PMISibling, 
                            bool canInsertAllAsFirstChildren = true,

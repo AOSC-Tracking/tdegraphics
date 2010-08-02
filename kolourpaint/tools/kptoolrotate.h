@@ -29,8 +29,8 @@
 #ifndef __kptoolrotate_h__
 #define __kptoolrotate_h__
 
-#include <qpixmap.h>
-#include <qpoint.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
 
 #include <kdialogbase.h>
 
@@ -40,9 +40,9 @@
 #include <kptoolpreviewdialog.h>
 
 
-class QButtonGroup;
-class QRadioButton;
-class QString;
+class TQButtonGroup;
+class TQRadioButton;
+class TQString;
 
 class KIntNumInput;
 
@@ -59,7 +59,7 @@ public:
                          kpMainWindow *mainWindow);
     virtual ~kpToolRotateCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
 
@@ -73,7 +73,7 @@ private:
     kpColor m_backgroundColor;
 
     bool m_losslessRotation;
-    QPixmap m_oldPixmap;
+    TQPixmap m_oldPixmap;
     kpSelection m_oldSelection;
 };
 
@@ -102,8 +102,8 @@ public:
     int angle () const;  // 0 <= angle < 360 (clockwise);
 
 private:
-    virtual QSize newDimensions () const;
-    virtual QPixmap transformPixmap (const QPixmap &pixmap,
+    virtual TQSize newDimensions () const;
+    virtual TQPixmap transformPixmap (const TQPixmap &pixmap,
                                      int targetWidth, int targetHeight) const;
 
 private slots:
@@ -114,11 +114,11 @@ private slots:
     virtual void slotOk ();
 
 private:
-    QRadioButton *m_antiClockwiseRadioButton,
+    TQRadioButton *m_antiClockwiseRadioButton,
                  *m_clockwiseRadioButton;
 
-    QButtonGroup *m_angleButtonGroup;
-    QRadioButton *m_angle90RadioButton,
+    TQButtonGroup *m_angleButtonGroup;
+    TQRadioButton *m_angle90RadioButton,
                  *m_angle180RadioButton,
                  *m_angle270RadioButton,
                  *m_angleCustomRadioButton;

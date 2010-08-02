@@ -41,7 +41,7 @@ public:
    /**
     * Creates a PMSphereEdit with parent and name
     */
-   PMSphereEdit( QWidget* parent, const char* name = 0 );
+   PMSphereEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -35,7 +35,7 @@ LibartCanvasFactory::~LibartCanvasFactory()
 {
 }
 
-QObject *LibartCanvasFactory::createObject(QObject *, const char *, const char *, const QStringList &args)
+TQObject *LibartCanvasFactory::createObject(TQObject *, const char *, const char *, const TQStringList &args)
 {
 	int width = (*args.at(1)).toInt();
 	int height = (*args.at(0)).toInt();

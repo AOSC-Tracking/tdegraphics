@@ -67,17 +67,17 @@ void PMTexture::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMTexture::description( ) const
+TQString PMTexture::description( ) const
 {
    return i18n( "texture" );
 }
 
-PMDialogEditBase* PMTexture::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMTexture::editWidget( TQWidget* parent ) const
 {
    return new PMTextureEdit( parent );
 }
 
-void PMTexture::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMTexture::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "uv_mapping", m_uvMapping );
    Base::serialize( e, doc );

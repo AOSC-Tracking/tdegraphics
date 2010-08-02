@@ -42,7 +42,7 @@
 #include "KSVGCanvas.h"
 #include "CanvasItem.h"
 
-#include <qpaintdevicemetrics.h>
+#include <tqpaintdevicemetrics.h>
 
 using namespace KSVG;
 
@@ -53,7 +53,7 @@ using namespace KSVG;
 
 // A sequence of prime numbers that sets the m_elemDict's hash table size as the
 // number of elements in the dictionary passes each level. This keeps the lookup
-// performance high as the number of elements grows. See the QDict documentation.
+// performance high as the number of elements grows. See the TQDict documentation.
 unsigned int SVGDocumentImpl::elemDictHashSizes [] =
 {
 	101,
@@ -74,7 +74,7 @@ unsigned int SVGDocumentImpl::elemDictHashSizes [] =
 
 const int SVGDocumentImpl::numElemDictHashSizes = sizeof(elemDictHashSizes) / sizeof(elemDictHashSizes[0]);
 
-SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *parentImage) : QObject(), DOM::DomShared(), DOM::Document(), SVGDOMNodeBridge(static_cast<DOM::Node>(*this))
+SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *parentImage) : TQObject(), DOM::DomShared(), DOM::Document(), SVGDOMNodeBridge(static_cast<DOM::Node>(*this))
 {
 	m_animations = anim;
 
@@ -107,7 +107,7 @@ SVGDocumentImpl::~SVGDocumentImpl()
 	if(rootElement() && rootElement()->hasEventListener(SVGEvent::UNLOAD_EVENT, true))
 		rootElement()->dispatchEvent(SVGEvent::UNLOAD_EVENT, false, false);
 
-	QPtrList<SVGShapeImpl> killList;
+	TQPtrList<SVGShapeImpl> killList;
 
 	DOM::Node node = firstChild();
 	for(; !node.isNull(); node = node.nextSibling())
@@ -148,7 +148,7 @@ float SVGDocumentImpl::screenPixelsPerMillimeterX() const
 {
 	if(canvas() && canvas()->drawWindow())
 	{
-		QPaintDeviceMetrics metrics(canvas()->drawWindow());
+		TQPaintDeviceMetrics metrics(canvas()->drawWindow());
 		return float(metrics.width()) / float(metrics.widthMM());
 	}
 	else
@@ -159,7 +159,7 @@ float SVGDocumentImpl::screenPixelsPerMillimeterY() const
 {
 	if(canvas() && canvas()->drawWindow())
 	{
-		QPaintDeviceMetrics metrics(canvas()->drawWindow());
+		TQPaintDeviceMetrics metrics(canvas()->drawWindow());
 		return float(metrics.height()) / float(metrics.heightMM());
 	}
 	else
@@ -231,7 +231,7 @@ bool SVGDocumentImpl::open(const ::KURL &url)
 		if(!m_loader)
 			m_loader = new KSVGLoader();
 
-		connect(m_loader, SIGNAL(gotResult(QIODevice *)), this, SLOT(slotSVGContent(QIODevice *)));
+		connect(m_loader, TQT_SIGNAL(gotResult(TQIODevice *)), this, TQT_SLOT(slotSVGContent(TQIODevice *)));
 		m_loader->getSVGContent(url);
 	}
 	else
@@ -240,9 +240,9 @@ bool SVGDocumentImpl::open(const ::KURL &url)
 	return true;
 }
 
-void SVGDocumentImpl::slotSVGContent(QIODevice *dev)
+void SVGDocumentImpl::slotSVGContent(TQIODevice *dev)
 {
-	QXmlInputSource *inputSource = new QXmlInputSource(dev);
+	TQXmlInputSource *inputSource = new TQXmlInputSource(dev);
 
 	if(m_reader)
 		delete m_reader;
@@ -251,13 +251,13 @@ void SVGDocumentImpl::slotSVGContent(QIODevice *dev)
 	args.fit = m_fit;
 	args.getURLMode = false;
 
-	QString url = m_baseURL.prettyURL();
+	TQString url = m_baseURL.prettyURL();
 	int pos = url.find('#'); // url can become like this.svg#svgView(viewBox(63,226,74,74)), get part after '#'
 	if(pos > -1)
 		args.SVGFragmentId = url.mid(pos + 1);
 		
 	m_reader = new KSVGReader(this, m_canvas, args);
-	connect(m_reader, SIGNAL(finished(bool, const QString &)), this, SLOT(slotFinishedParsing(bool, const QString &)));
+	connect(m_reader, TQT_SIGNAL(finished(bool, const TQString &)), this, TQT_SLOT(slotFinishedParsing(bool, const TQString &)));
 	m_t.start();
 	
 #if USE_VALGRIND
@@ -268,7 +268,7 @@ void SVGDocumentImpl::slotSVGContent(QIODevice *dev)
 	delete dev;
 }
 
-void SVGDocumentImpl::parseSVG(QXmlInputSource *inputSource, bool getURLMode)
+void SVGDocumentImpl::parseSVG(TQXmlInputSource *inputSource, bool getURLMode)
 {
 	if(m_reader)
 		delete m_reader;
@@ -277,7 +277,7 @@ void SVGDocumentImpl::parseSVG(QXmlInputSource *inputSource, bool getURLMode)
 	args.fit = m_fit;
 	args.getURLMode = getURLMode;
 	m_reader = new KSVGReader(this, 0, args);
-	connect(m_reader, SIGNAL(finished(bool, const QString &)), this, SLOT(slotFinishedParsing(bool, const QString &)));
+	connect(m_reader, TQT_SIGNAL(finished(bool, const TQString &)), this, TQT_SLOT(slotFinishedParsing(bool, const TQString &)));
 	
 #if USE_VALGRIND
 	CALLTREE_ZERO_STATS();
@@ -286,13 +286,13 @@ void SVGDocumentImpl::parseSVG(QXmlInputSource *inputSource, bool getURLMode)
 	m_reader->parse(inputSource);
 }
 
-void SVGDocumentImpl::finishParsing(bool error, const QString &errorDesc)
+void SVGDocumentImpl::finishParsing(bool error, const TQString &errorDesc)
 {
 	if(m_reader)
 		m_reader->finishParsing(error, errorDesc);
 }
 
-void SVGDocumentImpl::slotFinishedParsing(bool error, const QString &errorDesc)
+void SVGDocumentImpl::slotFinishedParsing(bool error, const TQString &errorDesc)
 {
 	kdDebug(26000) << k_funcinfo << "total time : " << m_t.elapsed() << endl;
 
@@ -454,7 +454,7 @@ void SVGDocumentImpl::executeScripts()
 	bool test = executeScriptsRecursiveCheck(*rootElement());
 	
 	if(!test)
-		QTimer::singleShot(50, this, SLOT(executeScripts()));
+		TQTimer::singleShot(50, this, TQT_SLOT(executeScripts()));
 	else
 	{
 		executeScriptsRecursive(*rootElement());
@@ -690,7 +690,7 @@ SVGElementImpl *SVGDocumentImpl::getElementByIdRecursive(SVGSVGElementImpl *star
 	// #3 Search in other documents
 	if(!dontSearch)
 	{
-		QPtrDictIterator<SVGDocumentImpl> it(m_documentDict);
+		TQPtrDictIterator<SVGDocumentImpl> it(m_documentDict);
 		for(; it.current(); ++it)
 		{
 			SVGElementImpl *temp = it.current()->getElementByIdRecursive(0, elementId, true);

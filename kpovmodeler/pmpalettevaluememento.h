@@ -26,7 +26,7 @@
 
 #include "pmmemento.h"
 #include "pmpalettevalue.h"
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 
 /**
@@ -47,11 +47,11 @@ public:
    /**
     * Saves the filter palette values
     */
-   void setFilterPaletteValues( const QValueList<PMPaletteValue>& v );
+   void setFilterPaletteValues( const TQValueList<PMPaletteValue>& v );
    /**
     * Returns the filter palette values
     */
-   QValueList<PMPaletteValue> filterPaletteValues( ) const;
+   TQValueList<PMPaletteValue> filterPaletteValues( ) const;
    /**
     * Returns true if the filter palette values were saved
     */
@@ -59,11 +59,11 @@ public:
    /**
     * Saves the transmit palette values
     */
-   void setTransmitPaletteValues( const QValueList<PMPaletteValue>& v );
+   void setTransmitPaletteValues( const TQValueList<PMPaletteValue>& v );
    /**
     * Returns the transmit palette values
     */
-   QValueList<PMPaletteValue> transmitPaletteValues( ) const;
+   TQValueList<PMPaletteValue> transmitPaletteValues( ) const;
    /**
     * Returns true if the transmit palette values were saved
     */
@@ -73,12 +73,12 @@ private:
    /**
     * The stored values for filter
     */
-   QValueList<PMPaletteValue> m_filterPaletteValues;
+   TQValueList<PMPaletteValue> m_filterPaletteValues;
    bool m_bFilterPaletteValuesSaved;
    /**
     * The stored values for transmit
     */
-   QValueList<PMPaletteValue> m_transmitPaletteValues;
+   TQValueList<PMPaletteValue> m_transmitPaletteValues;
    bool m_bTransmitPaletteValuesSaved;
 };
 

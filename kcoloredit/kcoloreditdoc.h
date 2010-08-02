@@ -23,9 +23,9 @@
 #endif
 
 // include files for QT
-#include <qobject.h>
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 // application specific includes
 #include "palette.h"
@@ -50,7 +50,7 @@ class KColorEditDoc : public QObject
 
   public:
     /** Constructor for the fileclass of the application */
-    KColorEditDoc(QWidget *parent, const char *name=0);
+    KColorEditDoc(TQWidget *parent, const char *name=0);
     /** Destructor for the fileclass of the application */
     ~KColorEditDoc();
 
@@ -71,19 +71,19 @@ class KColorEditDoc : public QObject
     /** closes the actual document */
     void closeDocument();
     /** loads the document */
-    bool openDocument(const QString& filename);
+    bool openDocument(const TQString& filename);
     /** saves the document */
-    bool saveDocument(const QString& filename);
+    bool saveDocument(const TQString& filename);
     /** sets the path to the file connected with the document */
-    void setAbsFilePath(const QString &filename);
+    void setAbsFilePath(const TQString &filename);
     /** returns the pathname of the current document file*/
-    const QString& absFilePath() const;
+    const TQString& absFilePath() const;
     /** sets the filename of the document */
-    void setTitle(const QString &_t);
+    void setTitle(const TQString &_t);
     /** returns the title of the document */
-    const QString& title() const;
+    const TQString& title() const;
 		/** @return a description of a possible unsuccessfull IO operation */
-		const QString& errorString() const;
+		const TQString& errorString() const;
 		/** returns a pointer to paletteHistory */
 		PaletteHistory* paletteHistory();
 		/** sets a palette cursor position */
@@ -115,7 +115,7 @@ class KColorEditDoc : public QObject
 
 	protected:
 		/** Sets an error string if an IO operation was unsuccesfull */
-		void setErrorString(const QString& string);
+		void setErrorString(const TQString& string);
 		/** Copies a palette to clipboard */
 		void copyToClipboard(Palette& palette);
 
@@ -136,14 +136,14 @@ class KColorEditDoc : public QObject
 
   public:
     /** the list of the views currently connected to the document */
-    QPtrList<KColorEditView> *m_pViewList;
+    TQPtrList<KColorEditView> *m_pViewList;
 
   private:
     /** the modified flag of the current document */
     bool m_modified;
-    QString m_title;
-    QString m_absFilePath;
-    QString m_errorString;
+    TQString m_title;
+    TQString m_absFilePath;
+    TQString m_errorString;
 
 	protected:
 		Palette m_palette;

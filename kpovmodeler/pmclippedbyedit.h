@@ -27,7 +27,7 @@
 #include "pmdialogeditbase.h"
 
 class PMClippedBy;
-class QLabel;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMClippedBy
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMClippedByEdit with parent and name
     */
-   PMClippedByEdit( QWidget* parent, const char* name = 0 );
+   PMClippedByEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -51,8 +51,8 @@ protected:
    
 private:
    PMClippedBy* m_pDisplayedObject;
-   QLabel* m_pChildLabel;
-   QLabel* m_pBoundedByLabel;
+   TQLabel* m_pChildLabel;
+   TQLabel* m_pBoundedByLabel;
 };
 
 

@@ -21,12 +21,12 @@
 #ifndef KSVGCANVAS_H
 #define KSVGCANVAS_H
 
-#include <qmap.h>
-#include <qdict.h>
-#include <qcolor.h>
-#include <qobject.h>
-#include <qptrlist.h>
-#include <qdict.h>
+#include <tqmap.h>
+#include <tqdict.h>
+#include <tqcolor.h>
+#include <tqobject.h>
+#include <tqptrlist.h>
+#include <tqdict.h>
 
 #include <Converter.h>
 
@@ -55,7 +55,7 @@ class CanvasItemList;
 class CanvasClipPath;
 class CanvasPaintServer;
 
-// Must be a QObject to be able to be loaded by KLibLoader...
+// Must be a TQObject to be able to be loaded by KLibLoader...
 class KSVGCanvas : public QObject
 {
 Q_OBJECT
@@ -65,25 +65,25 @@ public:
 
 	void setViewportDimension(unsigned int w, unsigned int h);
 
-	void setup(QPaintDevice *drawWidget, QPaintDevice *directWindow);
+	void setup(TQPaintDevice *drawWidget, TQPaintDevice *directWindow);
 	void setup(unsigned char *buffer, unsigned int width = 0, unsigned int height = 0);
 
 	void reset();
 	void update();
 	void update(float zoomFactor);
-	void update(const QPoint &panPoint, bool erase = true);
+	void update(const TQPoint &panPoint, bool erase = true);
 	void resize(unsigned int w, unsigned int h);
 	void retune(unsigned int csh, unsigned int csv);
 	void invalidate(CanvasItem *item, bool recalc = true);
-	CanvasItemList collisions(const QPoint &p, bool exact = false) const;
+	CanvasItemList collisions(const TQPoint &p, bool exact = false) const;
 
-	void setBackgroundColor(const QColor &c) { m_backgroundColor = c; }
+	void setBackgroundColor(const TQColor &c) { m_backgroundColor = c; }
 	void blit();
-	void blit(const QRect &rect, bool direct);
+	void blit(const TQRect &rect, bool direct);
 
 	float zoom() const { return m_zoom; }
-	QPoint pan() const { return m_pan; }
-	void setPan(const QPoint &pan) { m_pan = pan; }
+	TQPoint pan() const { return m_pan; }
+	void setPan(const TQPoint &pan) { m_pan = pan; }
 
 	int width() const { return m_width; }
 	int height() const { return m_height; }
@@ -112,15 +112,15 @@ public:
 	void setImmediateUpdate(bool immediateUpdate) { m_immediateUpdate = immediateUpdate; }
 	bool immediateUpdate() const { return m_immediateUpdate; }
 
-	QPtrList<CanvasItem> allItems() const { return m_items; }
+	TQPtrList<CanvasItem> allItems() const { return m_items; }
 
 	unsigned char *renderingBuffer() const { return m_buffer; }
 	unsigned int nrChannels() const { return m_nrChannels; }
 	unsigned int rowStride() const { return m_nrChannels * m_width; }
 
 	T2P::Converter *fontContext() { return m_fontContext; }
-	QPaintDevice *drawWindow() { return m_drawWindow; }
-	QPaintDevice *directWindow() { return m_directWindow; }
+	TQPaintDevice *drawWindow() { return m_drawWindow; }
+	TQPaintDevice *directWindow() { return m_directWindow; }
 
 	T2P::FontVisualParams *fontVisualParams(SVGStylableImpl *style) const;
 	virtual T2P::BezierPath *toBezierPath(CanvasItem *item) const { Q_UNUSED(item); return 0; }
@@ -136,7 +136,7 @@ protected:
 	void initVars();
 
 	void fill();
-	void clear(const QRect &r);
+	void clear(const TQRect &r);
 
 	virtual void setBuffer(unsigned char *buffer);
 
@@ -151,25 +151,25 @@ protected:
 		void clear();
 
 	private:
-		QDict<CanvasChunk> m_chunks;
+		TQDict<CanvasChunk> m_chunks;
 	} m_chunkManager;
 
-	QValueList<CanvasChunk *> m_dirtyChunks;
+	TQValueList<CanvasChunk *> m_dirtyChunks;
 
-	QMap<CanvasItem *, QPtrList<CanvasChunk> > m_chunksByItem;
-	QPtrList<CanvasItem> m_items;
+	TQMap<CanvasItem *, TQPtrList<CanvasChunk> > m_chunksByItem;
+	TQPtrList<CanvasItem> m_items;
 
-	QDict<CanvasClipPath> m_clipPaths;
+	TQDict<CanvasClipPath> m_clipPaths;
 
 	unsigned int m_viewportWidth, m_viewportHeight;
 	int m_width, m_height;
 	int m_chunkSizeHor, m_chunkSizeVer;
 
-	QPaintDevice *m_drawWindow;
-	QPaintDevice *m_directWindow;
+	TQPaintDevice *m_drawWindow;
+	TQPaintDevice *m_directWindow;
 
 	float m_zoom;
-	QPoint m_pan;
+	TQPoint m_pan;
 
 	GC m_gc;
 
@@ -178,7 +178,7 @@ protected:
 	unsigned char *m_buffer;
 	unsigned int m_nrChannels;
 
-	QColor m_backgroundColor;
+	TQColor m_backgroundColor;
 
 	bool m_immediateUpdate;
 };

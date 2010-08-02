@@ -16,9 +16,9 @@
 #include "renderedDocumentPage.h"
 
 
-DocumentRenderer::DocumentRenderer(QWidget* par)
+DocumentRenderer::DocumentRenderer(TQWidget* par)
   : mutex(true), parentWidget(par), accessibilityBackground(false),
-    accessibilityBackgroundColor(QColor(255,255,255))
+    accessibilityBackgroundColor(TQColor(255,255,255))
 {
   numPages = 0;
   _isModified = false;
@@ -28,7 +28,7 @@ DocumentRenderer::DocumentRenderer(QWidget* par)
 DocumentRenderer::~DocumentRenderer()
 {
   // Wait for all access to this DocumentRenderer to finish
-  QMutexLocker lock(&mutex);
+  TQMutexLocker lock(&mutex);
   
   clear();
 }
@@ -37,7 +37,7 @@ DocumentRenderer::~DocumentRenderer()
 void DocumentRenderer::clear()
 {
   // Wait for all access to this DocumentRenderer to finish
-  QMutexLocker lock(&mutex);
+  TQMutexLocker lock(&mutex);
 
   numPages = 0;
   pageSizes.clear();
@@ -46,10 +46,10 @@ void DocumentRenderer::clear()
   _isModified = false;
 }
 
-void DocumentRenderer::setAccessibleBackground(bool accessibleMode, const QColor& background)
+void DocumentRenderer::setAccessibleBackground(bool accessibleMode, const TQColor& background)
 {
   // Wait for all access to this DocumentRenderer to finish
-  QMutexLocker lock(&mutex);
+  TQMutexLocker lock(&mutex);
   
   accessibilityBackground = accessibleMode;
   accessibilityBackgroundColor = background;
@@ -58,7 +58,7 @@ void DocumentRenderer::setAccessibleBackground(bool accessibleMode, const QColor
 SimplePageSize DocumentRenderer::sizeOfPage(const PageNumber& page)
 {
   // Wait for all access to this DocumentRenderer to finish
-  QMutexLocker locker(&mutex);
+  TQMutexLocker locker(&mutex);
   
   if (!page.isValid())
     return SimplePageSize();
@@ -74,7 +74,7 @@ SimplePageSize DocumentRenderer::sizeOfPage(const PageNumber& page)
 void DocumentRenderer::drawThumbnail(double resolution, RenderedDocumentPage* page)
 {
   // Wait for all access to this DocumentRenderer to finish
-  QMutexLocker locker(&mutex);
+  TQMutexLocker locker(&mutex);
 
   drawPage(resolution, page);
 }
@@ -85,16 +85,16 @@ void DocumentRenderer::getText(RenderedDocumentPage* page)
   drawPage(100.0, page);
 }
 
-bool DocumentRenderer::isValidFile(const QString&) const
+bool DocumentRenderer::isValidFile(const TQString&) const
 {
   return true;
 }
 
 
-Anchor DocumentRenderer::parseReference(const QString &reference)
+Anchor DocumentRenderer::parseReference(const TQString &reference)
 {
   // Wait for all access to this documentRenderer to finish
-  QMutexLocker locker(&mutex);
+  TQMutexLocker locker(&mutex);
 
   if (isEmpty())
     return Anchor();
@@ -117,12 +117,12 @@ Anchor DocumentRenderer::parseReference(const QString &reference)
   return Anchor();
 }
 
-Anchor DocumentRenderer::findAnchor(const QString &locallink)
+Anchor DocumentRenderer::findAnchor(const TQString &locallink)
 {
   // Wait for all access to this DocumentRenderer to finish
-  QMutexLocker locker(&mutex);
+  TQMutexLocker locker(&mutex);
 
-  QMap<QString,Anchor>::Iterator it = anchorList.find(locallink);
+  TQMap<TQString,Anchor>::Iterator it = anchorList.find(locallink);
   if (it != anchorList.end()) 
     return *it;
   else 

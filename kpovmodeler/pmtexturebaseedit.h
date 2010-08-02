@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMTextureBaseEdit with parent and name
     */
-   PMTextureBaseEdit( QWidget* parent, const char* name = 0 );
+   PMTextureBaseEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

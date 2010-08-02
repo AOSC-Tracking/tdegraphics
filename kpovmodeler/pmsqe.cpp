@@ -61,12 +61,12 @@ PMSuperquadricEllipsoid::~PMSuperquadricEllipsoid( )
 {
 }
 
-QString PMSuperquadricEllipsoid::description( ) const
+TQString PMSuperquadricEllipsoid::description( ) const
 {
    return i18n( "superquadric ellipsoid" );
 }
 
-void PMSuperquadricEllipsoid::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMSuperquadricEllipsoid::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "value_e", m_eastWestExponent );
    e.setAttribute( "value_n", m_northSouthExponent );
@@ -133,7 +133,7 @@ void PMSuperquadricEllipsoid::setNorthSouthExponent( double n )
    }
 }
 
-PMDialogEditBase* PMSuperquadricEllipsoid::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMSuperquadricEllipsoid::editWidget( TQWidget* parent ) const
 {
    return new PMSuperquadricEllipsoidEdit( parent );
 }

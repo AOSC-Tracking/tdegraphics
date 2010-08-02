@@ -29,14 +29,14 @@
 #define __kp_tool_preview_dialog_h__
 
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include <kdialogbase.h>
 
 
-class QLabel;
-class QGridLayout;
-class QGroupBox;
+class TQLabel;
+class TQGridLayout;
+class TQGroupBox;
 
 class kpDocument;
 class kpMainWindow;
@@ -58,9 +58,9 @@ public:
     kpToolPreviewDialog (Features features,
                          bool reserveTopRow,
                          // e.g. "Skew (Image|Selection)"
-                         const QString &caption,
+                         const TQString &caption,
                          // (in the Dimensions Group Box) e.g. "After Skew:"
-                         const QString &afterActionText,
+                         const TQString &afterActionText,
                          bool actOnSelection,
                          kpMainWindow *parent,
                          const char *name = 0);
@@ -77,15 +77,15 @@ protected:
     kpDocument *document () const;
 
     // All widgets must have mainWidget() as their parent
-    void addCustomWidgetToFront (QWidget *w);  // see <reserveTopRow> in ctor
-    void addCustomWidget (QWidget *w);
-    void addCustomWidgetToBack (QWidget *w)
+    void addCustomWidgetToFront (TQWidget *w);  // see <reserveTopRow> in ctor
+    void addCustomWidget (TQWidget *w);
+    void addCustomWidgetToBack (TQWidget *w)
     {
         addCustomWidget (w);
     }
 
-    virtual QSize newDimensions () const = 0;
-    virtual QPixmap transformPixmap (const QPixmap &pixmap,
+    virtual TQSize newDimensions () const = 0;
+    virtual TQPixmap transformPixmap (const TQPixmap &pixmap,
                                      int targetWidth, int targetHeight) const = 0;
 
 private:
@@ -109,21 +109,21 @@ protected slots:
     virtual void slotUpdateWithWaitCursor ();
 
 protected:
-    QString m_afterActionText;
+    TQString m_afterActionText;
     bool m_actOnSelection;
     kpMainWindow *m_mainWindow;
 
     int m_oldWidth, m_oldHeight;
 
-    QGroupBox *m_dimensionsGroupBox;
-    QLabel *m_afterTransformDimensionsLabel;
+    TQGroupBox *m_dimensionsGroupBox;
+    TQLabel *m_afterTransformDimensionsLabel;
 
-    QGroupBox *m_previewGroupBox;
+    TQGroupBox *m_previewGroupBox;
     kpResizeSignallingLabel *m_previewPixmapLabel;
-    QSize m_previewPixmapLabelSizeWhenUpdatedPixmap;
-    QPixmap m_shrunkenDocumentPixmap;
+    TQSize m_previewPixmapLabelSizeWhenUpdatedPixmap;
+    TQPixmap m_shrunkenDocumentPixmap;
 
-    QGridLayout *m_gridLayout;
+    TQGridLayout *m_gridLayout;
     int m_gridNumRows;
 };
 

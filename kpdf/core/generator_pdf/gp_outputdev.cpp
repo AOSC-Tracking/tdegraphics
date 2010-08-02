@@ -20,8 +20,8 @@
 #endif
 
 #include <kdebug.h>
-#include <qpixmap.h>
-#include <qimage.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
 
 #include "gp_outputdev.h"
 #include "generator_pdf.h"
@@ -66,25 +66,25 @@ void KPDFOutputDev::setParams( int width, int height, bool genL, bool genI, bool
     m_generateImages = genI;
 }
 
-QPixmap * KPDFOutputDev::takePixmap()
+TQPixmap * KPDFOutputDev::takePixmap()
 {
-    QPixmap * pix = m_pixmap;
+    TQPixmap * pix = m_pixmap;
     m_pixmap = 0;
     return pix;
 }
 
-QImage * KPDFOutputDev::takeImage()
+TQImage * KPDFOutputDev::takeImage()
 {
-    QImage * img = m_image;
+    TQImage * img = m_image;
     m_image = 0;
     return img;
 }
 
-QValueList< ObjectRect * > KPDFOutputDev::takeObjectRects()
+TQValueList< ObjectRect * > KPDFOutputDev::takeObjectRects()
 {
     if ( m_rects.isEmpty() )
         return m_rects;
-    QValueList< ObjectRect * > rectsCopy( m_rects );
+    TQValueList< ObjectRect * > rectsCopy( m_rects );
     m_rects.clear();
     return rectsCopy;
 }
@@ -101,8 +101,8 @@ void KPDFOutputDev::endPage()
     // does not work
 /*    SplashColorPtr dataPtr = getBitmap()->getDataPtr();
     // construct a qimage SHARING the raw bitmap data in memory
-    QImage * img = new QImage( dataPtr, bw, bh, 32, 0, 0, QImage::IgnoreEndian );*/
-    QImage * img = new QImage( bw, bh, 32 );
+    TQImage * img = new TQImage( dataPtr, bw, bh, 32, 0, 0, TQImage::IgnoreEndian );*/
+    TQImage * img = new TQImage( bw, bh, 32 );
     SplashColorPtr pixel = new Guchar[4];
     for (int i = 0; i < bw; i++)
     {
@@ -114,26 +114,26 @@ void KPDFOutputDev::endPage()
     }
     delete [] pixel;
 
-    // use the QImage or convert it immediately to QPixmap for better
+    // use the TQImage or convert it immediately to TQPixmap for better
     // handling and memory unloading
     if ( m_qtThreadSafety )
     {
         delete m_image;
         // it may happen (in fact it doesn't) that we need a rescaling
         if ( bw != m_pixmapWidth && bh != m_pixmapHeight )
-            m_image = new QImage( img->smoothScale( m_pixmapWidth, m_pixmapHeight ) );
+            m_image = new TQImage( img->smoothScale( m_pixmapWidth, m_pixmapHeight ) );
         else
             // dereference image from the xpdf memory
-            m_image = new QImage( img->copy() );
+            m_image = new TQImage( img->copy() );
     }
     else
     {
         delete m_pixmap;
         // it may happen (in fact it doesn't) that we need a rescaling
         if ( bw != m_pixmapWidth || bh != m_pixmapHeight )
-            m_pixmap = new QPixmap( img->smoothScale( m_pixmapWidth, m_pixmapHeight ) );
+            m_pixmap = new TQPixmap( img->smoothScale( m_pixmapWidth, m_pixmapHeight ) );
         else
-            m_pixmap = new QPixmap( *img );
+            m_pixmap = new TQPixmap( *img );
     }
 
     // destroy the shared descriptor and (###) unload underlying xpdf bitmap
@@ -217,7 +217,7 @@ void KPDFOutputDev::clear()
     // delete rects
     if ( m_rects.count() )
     {
-        QValueList< ObjectRect * >::iterator it = m_rects.begin(), end = m_rects.end();
+        TQValueList< ObjectRect * >::iterator it = m_rects.begin(), end = m_rects.end();
         for ( ; it != end; ++it )
             delete *it;
         m_rects.clear();
@@ -246,7 +246,7 @@ KPDFLink * KPDFOutputDev::generateLink( LinkAction * a )
             {
             LinkGoTo * g = (LinkGoTo *) a;
             // ceate link: no ext file, namedDest, object pointer
-            link = new KPDFLinkGoto( QString::null, decodeViewport( g->getNamedDest(), g->getDest() ) );
+            link = new KPDFLinkGoto( TQString::null, decodeViewport( g->getNamedDest(), g->getDest() ) );
             }
             break;
 
@@ -256,7 +256,7 @@ KPDFLink * KPDFOutputDev::generateLink( LinkAction * a )
             // copy link file
             const char * fileName = g->getFileName()->getCString();
             // ceate link: fileName, namedDest, object pointer
-            link = new KPDFLinkGoto( (QString)fileName, decodeViewport( g->getNamedDest(), g->getDest() ) );
+            link = new KPDFLinkGoto( (TQString)fileName, decodeViewport( g->getNamedDest(), g->getDest() ) );
             }
             break;
 

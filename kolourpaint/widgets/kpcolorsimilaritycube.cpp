@@ -32,9 +32,9 @@
 
 #include <math.h>
 
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qwhatsthis.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqwhatsthis.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -49,14 +49,14 @@ const double kpColorSimilarityCube::colorCubeDiagonalDistance =
 
 kpColorSimilarityCube::kpColorSimilarityCube (int look,
                                               kpMainWindow *mainWindow,
-                                              QWidget *parent,
+                                              TQWidget *parent,
                                               const char *name)
-    : QFrame (parent, name, Qt::WNoAutoErase/*no flicker*/),
+    : TQFrame (parent, name, Qt::WNoAutoErase/*no flicker*/),
       m_mainWindow (mainWindow),
       m_colorSimilarity (-1)
 {
     if (look & Depressed)
-        setFrameStyle (QFrame::Panel | QFrame::Sunken);
+        setFrameStyle (TQFrame::Panel | TQFrame::Sunken);
 
     setColorSimilarity (0);
 
@@ -66,7 +66,7 @@ kpColorSimilarityCube::kpColorSimilarityCube (int look,
 
     if (look & DoubleClickInstructions)
     {
-        QWhatsThis::add (this,
+        TQWhatsThis::add (this,
             i18n ("<qt><p><b>Color Similarity</b> is how close "
                   "colors must be in the RGB Color Cube "
                   "to be considered the same.</p>"
@@ -87,7 +87,7 @@ kpColorSimilarityCube::kpColorSimilarityCube (int look,
     }
     else
     {
-        QWhatsThis::add (this,
+        TQWhatsThis::add (this,
             i18n ("<qt><p><b>Color Similarity</b> is how close "
                   "colors must be in the RGB Color Cube "
                   "to be considered the same.</p>"
@@ -138,14 +138,14 @@ void kpColorSimilarityCube::setColorSimilarity (double similarity)
 
 
 // protected virtual [base QWidget]
-QSize kpColorSimilarityCube::sizeHint () const
+TQSize kpColorSimilarityCube::sizeHint () const
 {
-    return QSize (52, 52);
+    return TQSize (52, 52);
 }
 
 
 // protected
-QColor kpColorSimilarityCube::color (int redOrGreenOrBlue,
+TQColor kpColorSimilarityCube::color (int redOrGreenOrBlue,
                                      int baseBrightness,
                                      int similarityDirection) const
 {
@@ -161,26 +161,26 @@ QColor kpColorSimilarityCube::color (int redOrGreenOrBlue,
     switch (redOrGreenOrBlue)
     {
     default:
-    case 0: return QColor (brightness, 0, 0);
-    case 1: return QColor (0, brightness, 0);
-    case 2: return QColor (0, 0, brightness);
+    case 0: return TQColor (brightness, 0, 0);
+    case 1: return TQColor (0, brightness, 0);
+    case 2: return TQColor (0, 0, brightness);
     }
 }
 
-static QPoint pointBetween (const QPoint &p, const QPoint &q)
+static TQPoint pointBetween (const TQPoint &p, const TQPoint &q)
 {
-    return QPoint ((p.x () + q.x ()) / 2, (p.y () + q.y ()) / 2);
+    return TQPoint ((p.x () + q.x ()) / 2, (p.y () + q.y ()) / 2);
 }
 
-static void drawQuadrant (QPainter *p,
-                          const QColor &col,
-                          const QPoint &p1, const QPoint &p2, const QPoint &p3,
-                          const QPoint pointNotOnOutline)
+static void drawQuadrant (TQPainter *p,
+                          const TQColor &col,
+                          const TQPoint &p1, const TQPoint &p2, const TQPoint &p3,
+                          const TQPoint pointNotOnOutline)
 {
     p->save ();
 
 
-    QPointArray points (4);
+    TQPointArray points (4);
     points [0] = p1;
     points [1] = p2;
     points [2] = p3;
@@ -202,10 +202,10 @@ static void drawQuadrant (QPainter *p,
 }
 
 // protected
-void kpColorSimilarityCube::drawFace (QPainter *p,
+void kpColorSimilarityCube::drawFace (TQPainter *p,
                                       int redOrGreenOrBlue,
-                                      const QPoint &tl, const QPoint &tr,
-                                      const QPoint &bl, const QPoint &br)
+                                      const TQPoint &tl, const TQPoint &tr,
+                                      const TQPoint &bl, const TQPoint &br)
 {
 #if DEBUG_KP_COLOR_SIMILARITY_CUBE
     kdDebug () << "kpColorSimilarityCube(RorGorB=" << redOrGreenOrBlue
@@ -225,18 +225,18 @@ void kpColorSimilarityCube::drawFace (QPainter *p,
     //  |      |       |
     //  bl --- bm --- br
 
-    const QPoint tm (::pointBetween (tl, tr));
-    const QPoint bm (::pointBetween (bl, br));
+    const TQPoint tm (::pointBetween (tl, tr));
+    const TQPoint bm (::pointBetween (bl, br));
 
-    const QPoint ml (::pointBetween (tl, bl));
-    const QPoint mr (::pointBetween (tr, br));
-    const QPoint mm (::pointBetween (ml, mr));
+    const TQPoint ml (::pointBetween (tl, bl));
+    const TQPoint mr (::pointBetween (tr, br));
+    const TQPoint mm (::pointBetween (ml, mr));
 
 
     const int baseBrightness = QMAX (127,
                                      255 - int (kpColorSimilarityDialog::maximumColorSimilarity *
                                                 kpColorSimilarityCube::colorCubeDiagonalDistance / 2));
-    QColor colors [2] =
+    TQColor colors [2] =
     {
         color (redOrGreenOrBlue, baseBrightness, -1),
         color (redOrGreenOrBlue, baseBrightness, +1)
@@ -269,14 +269,14 @@ void kpColorSimilarityCube::drawFace (QPainter *p,
 }
 
 // protected virtual [base QFrame]
-void kpColorSimilarityCube::drawContents (QPainter *p)
+void kpColorSimilarityCube::drawContents (TQPainter *p)
 {
-    QRect cr (contentsRect ());
+    TQRect cr (contentsRect ());
 
-    QPixmap backBuffer (cr.width (), cr.height ());
+    TQPixmap backBuffer (cr.width (), cr.height ());
     backBuffer.fill (colorGroup ().background ());
 
-    QPainter backBufferPainter (&backBuffer);
+    TQPainter backBufferPainter (&backBuffer);
 
     int cubeRectSize = QMIN (cr.width () * 6 / 8, cr.height () * 6 / 8);
     int dx = (cr.width () - cubeRectSize) / 2,
@@ -304,13 +304,13 @@ void kpColorSimilarityCube::drawContents (QPainter *p)
     const double side = double (cubeRectSize) / (1 + sin (angle));
 
 
-    const QPoint pointP ((int) (side * cos (angle)), 0);
-    const QPoint pointQ ((int) (side * cos (angle) + side), 0);
-    const QPoint pointR (0, (int) (side * sin (angle)));
-    const QPoint pointS ((int) (side), (int) (side * sin (angle)));
-    const QPoint pointU (0, (int) (side * sin (angle) + side));
-    const QPoint pointT ((int) (side + side * cos (angle)), (int) (side));
-    const QPoint pointV ((int) (side), (int) (side * sin (angle) + side));
+    const TQPoint pointP ((int) (side * cos (angle)), 0);
+    const TQPoint pointQ ((int) (side * cos (angle) + side), 0);
+    const TQPoint pointR (0, (int) (side * sin (angle)));
+    const TQPoint pointS ((int) (side), (int) (side * sin (angle)));
+    const TQPoint pointU (0, (int) (side * sin (angle) + side));
+    const TQPoint pointT ((int) (side + side * cos (angle)), (int) (side));
+    const TQPoint pointV ((int) (side), (int) (side * sin (angle) + side));
 
 
     // Top Face

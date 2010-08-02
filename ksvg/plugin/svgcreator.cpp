@@ -21,8 +21,8 @@
 
 #include <time.h>
 
-#include <qpixmap.h>
-#include <qimage.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
 
 #include "KSVGCanvas.h"
 #include "CanvasFactory.h"
@@ -50,19 +50,19 @@ SVGCreator::~SVGCreator()
 {
 }
 
-bool SVGCreator::create(const QString &path, int width, int height, QImage &img)
+bool SVGCreator::create(const TQString &path, int width, int height, TQImage &img)
 {
 	KSVG::SVGDocumentImpl *doc = new KSVG::SVGDocumentImpl(false, true);
 	doc->ref();
        
-	QPixmap pix(width, height);
+	TQPixmap pix(width, height);
 	pix.fill(Qt::white);
 
 	KSVG::KSVGCanvas *c = KSVG::CanvasFactory::self()->loadCanvas(width, height);
 	c->setup(&pix, &pix);
 
 	doc->attach(c);
-	connect(doc, SIGNAL(finishedRendering()), SLOT(slotFinished()));
+	connect(doc, TQT_SIGNAL(finishedRendering()), TQT_SLOT(slotFinished()));
 	doc->open( KURL::fromPathOrURL(path));
 
 	m_finished = false;

@@ -42,7 +42,7 @@ public:
    /**
     * Creates a PMQuickColorEdit with parent and name
     */
-   PMQuickColorEdit( QWidget* parent, const char* name = 0 );
+   PMQuickColorEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

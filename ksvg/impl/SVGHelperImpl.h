@@ -30,8 +30,8 @@
 
 #include "ksvg_lookup.h"
 
-class QRect;
-class QString;
+class TQRect;
+class TQString;
 
 namespace KSVG
 {
@@ -47,7 +47,7 @@ public:
 
 	// Dynamic attribute updating
 	template<class T>
-	static void applyContainer(T *obj, int token, const QString &value)
+	static void applyContainer(T *obj, int token, const TQString &value)
 	{
 		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(obj);
 		if(!element || !element->hasChildNodes())
@@ -67,18 +67,18 @@ public:
 	static void copyAttributes(SVGElementImpl *src, SVGElementImpl *dst);
 
 	// SVGAnimatedLengthList
-	static void parseLengthList(SVGAnimatedLengthListImpl *list, const QString &lengths, LengthMode mode = LENGTHMODE_UNKNOWN, SVGElementImpl *object = 0);
+	static void parseLengthList(SVGAnimatedLengthListImpl *list, const TQString &lengths, LengthMode mode = LENGTHMODE_UNKNOWN, SVGElementImpl *object = 0);
 
 	// SVGStringList
-	static void parseList(SVGStringListImpl *list, char seperator, const QString &data);
-	static void parseCommaSeperatedList(SVGStringListImpl *list, const QString &data);
-	static void parseSemicolonSeperatedList(SVGStringListImpl *list, const QString &data);
+	static void parseList(SVGStringListImpl *list, char seperator, const TQString &data);
+	static void parseCommaSeperatedList(SVGStringListImpl *list, const TQString &data);
+	static void parseSemicolonSeperatedList(SVGStringListImpl *list, const TQString &data);
 
 	// SVGTransformList
-	static void parseTransformAttribute(SVGTransformListImpl *list, const QString &transform);
+	static void parseTransformAttribute(SVGTransformListImpl *list, const TQString &transform);
 
 	// Tools
-	static QRect fromUserspace(SVGElementImpl *, const QRect &);
+	static TQRect fromUserspace(SVGElementImpl *, const TQRect &);
 };
 
 }

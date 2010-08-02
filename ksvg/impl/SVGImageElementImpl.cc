@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qimage.h>
-#include <qtimer.h>
+#include <tqimage.h>
+#include <tqtimer.h>
 
 #include <kdebug.h>
 
@@ -51,7 +51,7 @@ using namespace KSVG;
 #include "ksvg_bridge.h"
 #include "ksvg_ecma.h"
 
-SVGImageElementImpl::SVGImageElementImpl(DOM::ElementImpl *impl) : QObject(), SVGShapeImpl(impl), SVGURIReferenceImpl(), SVGTestsImpl(), SVGLangSpaceImpl(), SVGExternalResourcesRequiredImpl(), SVGStylableImpl(this), SVGTransformableImpl()
+SVGImageElementImpl::SVGImageElementImpl(DOM::ElementImpl *impl) : TQObject(), SVGShapeImpl(impl), SVGURIReferenceImpl(), SVGTestsImpl(), SVGLangSpaceImpl(), SVGExternalResourcesRequiredImpl(), SVGStylableImpl(this), SVGTransformableImpl()
 {
 	KSVG_EMPTY_FLAGS
 
@@ -240,7 +240,7 @@ void SVGImageElementImpl::setAttributes()
 	}
 }
 
-void SVGImageElementImpl::slotParsingFinished(bool error, const QString &errorDesc)
+void SVGImageElementImpl::slotParsingFinished(bool error, const TQString &errorDesc)
 {
 	if(error)
 		kdDebug(26003) << "Finished with error : " << errorDesc << endl;
@@ -273,8 +273,8 @@ void SVGImageElementImpl::createItem(KSVGCanvas *c)
 				m_doc->ref();
 				m_doc->attach(c);
 
-				connect(m_doc, SIGNAL(finishedParsing(bool, const QString &)), this, SLOT(slotParsingFinished(bool, const QString &)));
-				connect(m_doc, SIGNAL(finishedLoading()), this, SLOT(slotLoadingFinished()));
+				connect(m_doc, TQT_SIGNAL(finishedParsing(bool, const TQString &)), this, TQT_SLOT(slotParsingFinished(bool, const TQString &)));
+				connect(m_doc, TQT_SIGNAL(finishedLoading()), this, TQT_SLOT(slotLoadingFinished()));
 
 				KURL file;
 
@@ -320,12 +320,12 @@ void SVGImageElementImpl::removeItem(KSVGCanvas *c)
 void SVGImageElementImpl::setupSVGElement(SVGSVGElementImpl *svg)
 {
 	// Set up the root svg for an svg image.
-	svg->setAttributeInternal("x", QString("%1").arg(x()->baseVal()->value()));
-	svg->setAttributeInternal("y", QString("%1").arg(y()->baseVal()->value()));
-	svg->setAttributeInternal("width", QString("%1").arg(width()->baseVal()->value()));
-	svg->setAttributeInternal("height", QString("%1").arg(height()->baseVal()->value()));
+	svg->setAttributeInternal("x", TQString("%1").arg(x()->baseVal()->value()));
+	svg->setAttributeInternal("y", TQString("%1").arg(y()->baseVal()->value()));
+	svg->setAttributeInternal("width", TQString("%1").arg(width()->baseVal()->value()));
+	svg->setAttributeInternal("height", TQString("%1").arg(height()->baseVal()->value()));
 
-	QString par = getAttribute("preserveAspectRatio").string().stripWhiteSpace();
+	TQString par = getAttribute("preserveAspectRatio").string().stripWhiteSpace();
 
 	if(par.startsWith("defer"))
 	{
@@ -358,7 +358,7 @@ void SVGImageElementImpl::onScreenCTMUpdated()
 	}
 }
 
-bool SVGImageElementImpl::prepareMouseEvent(const QPoint &p, const QPoint &, SVGMouseEventImpl *mev)
+bool SVGImageElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &, SVGMouseEventImpl *mev)
 {
 	// TODO : pointer-events should be stored here, not in SVGStylableImpl.
 	SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(this);
@@ -390,7 +390,7 @@ bool SVGImageElementImpl::prepareMouseEvent(const QPoint &p, const QPoint &, SVG
 	return false;
 }
 
-void SVGImageElementImpl::setImage(QImage *image)
+void SVGImageElementImpl::setImage(TQImage *image)
 {
 	m_image = image;
 
@@ -416,7 +416,7 @@ void SVGImageElementImpl::setImage(QImage *image)
 	ownerDoc()->notifyImageLoaded(this);
 }
 
-QImage SVGImageElementImpl::scaledImage()
+TQImage SVGImageElementImpl::scaledImage()
 {
 	SVGMatrixImpl *matrix = imageMatrix();
 	double sx, sy;
@@ -424,7 +424,7 @@ QImage SVGImageElementImpl::scaledImage()
 	matrix->removeScale(&sx, &sy);
 	matrix->deref();
 
-	QImage img;
+	TQImage img;
 
 	if(sx != 1 || sy != 1)
 	{
@@ -488,7 +488,7 @@ KSVGPolygon SVGImageElementImpl::clippingShape()
 	return p;
 }
 
-QString SVGImageElementImpl::fileName() const
+TQString SVGImageElementImpl::fileName() const
 {
 	return href()->baseVal().string();
 }

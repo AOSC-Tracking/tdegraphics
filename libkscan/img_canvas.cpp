@@ -17,16 +17,16 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qapplication.h>
-#include <qfiledialog.h>
-#include <qstring.h>
-#include <qmessagebox.h>
-#include <qscrollview.h>
+#include <tqapplication.h>
+#include <tqfiledialog.h>
+#include <tqstring.h>
+#include <tqmessagebox.h>
+#include <tqscrollview.h>
 #include <kpopupmenu.h>
-#include <qlabel.h>
-#include <qdict.h>
-#include <qimage.h>
-#include <qpainter.h>
+#include <tqlabel.h>
+#include <tqdict.h>
+#include <tqimage.h>
+#include <tqpainter.h>
 
 #include <klocale.h>
 #include <kstyle.h>
@@ -36,7 +36,7 @@
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kcmenumngr.h>
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #define __IMG_CANVAS_CPP__
 
@@ -48,7 +48,7 @@
 #define MIN(x,y) (x<y?x:y)
 
 
-inline void debug_rect( const char *name, QRect *r )
+inline void debug_rect( const char *name, TQRect *r )
 {
 	kdDebug(29000) << (name ? name: "NONAME") << ": " << r->x() << ", " << r->y() << ", " << r->width() << ", " << r->height() << endl;
 }
@@ -69,20 +69,20 @@ public:
     ScaleKinds   scaleKind;
     ScaleKinds   defaultScaleKind;
 
-    QValueList<QRect> highlightRects;
+    TQValueList<TQRect> highlightRects;
 };
 
-ImageCanvas::ImageCanvas(QWidget *parent,
-			 const QImage *start_image,
+ImageCanvas::ImageCanvas(TQWidget *parent,
+			 const TQImage *start_image,
 			 const char *name 	):
-   QScrollView( parent, name ),
+   TQScrollView( parent, name ),
    m_contextMenu(0)
 {
     d = new ImageCanvasPrivate();
 
     scale_factor     = 100; // means original size
     maintain_aspect  = true;
-    selected         = new QRect;
+    selected         = new TQRect;
     selected->setWidth(0);
     selected->setHeight(0);
 
@@ -92,12 +92,12 @@ ImageCanvas::ImageCanvas(QWidget *parent,
     image            = start_image;
     moving 	   = MOVE_NONE;
 
-    QSize img_size;
+    TQSize img_size;
 
     if( image && ! image->isNull() )
     {
         img_size = image->size();
-        pmScaled = new QPixmap( img_size );
+        pmScaled = new TQPixmap( img_size );
 
 #ifdef USE_KPIXMAPIO
         *pmScaled = pixIO.convertToPixmap(*image);
@@ -114,8 +114,8 @@ ImageCanvas::ImageCanvas(QWidget *parent,
     update_scaled_pixmap();
 
     // timer-Start and stop
-    connect( this, SIGNAL( newRect()), SLOT( newRectSlot()));
-    connect( this, SIGNAL( noRect()),  SLOT( noRectSlot()));
+    connect( this, TQT_SIGNAL( newRect()), TQT_SLOT( newRectSlot()));
+    connect( this, TQT_SIGNAL( noRect()),  TQT_SLOT( noRectSlot()));
 
     //zoomOut();scrollview/scrollview
     viewport()->setCursor( crossCursor );
@@ -138,9 +138,9 @@ ImageCanvas::~ImageCanvas()
     delete d;
 }
 
-void ImageCanvas::deleteView( QImage *delimage )
+void ImageCanvas::deleteView( TQImage *delimage )
 {
-   const QImage *img = rootImage();
+   const TQImage *img = rootImage();
 
    if( delimage == img )
    {
@@ -151,7 +151,7 @@ void ImageCanvas::deleteView( QImage *delimage )
 
 }
 
-void ImageCanvas::newImageHoldZoom( QImage *new_image )
+void ImageCanvas::newImageHoldZoom( TQImage *new_image )
 {
     bool holdZ = d->keepZoom;
 
@@ -160,7 +160,7 @@ void ImageCanvas::newImageHoldZoom( QImage *new_image )
     d->keepZoom = holdZ;
 }
 
-void ImageCanvas::newImage( QImage *new_image )
+void ImageCanvas::newImage( TQImage *new_image )
 {
 
     /** do cleanups **/
@@ -190,10 +190,10 @@ void ImageCanvas::newImage( QImage *new_image )
    if( image )
    {
       if( image->depth() == 1 ) {
-	 pmScaled = new QPixmap( image->size(), 1 );
+	 pmScaled = new TQPixmap( image->size(), 1 );
       } else {
-	 int i = QPixmap::defaultDepth();
-	 pmScaled = new QPixmap( image->size(), i);
+	 int i = TQPixmap::defaultDepth();
+	 pmScaled = new TQPixmap( image->size(), i);
       }
 
       // image->convertDepth(32);
@@ -231,9 +231,9 @@ void ImageCanvas::newImage( QImage *new_image )
    kdDebug(29000) << "repaint ok" << endl;
 }
 
-QSize ImageCanvas::sizeHint() const
+TQSize ImageCanvas::sizeHint() const
 {
-   return( QSize( 2, 2 ));
+   return( TQSize( 2, 2 ));
 }
 
 void ImageCanvas::enableContextMenu( bool wantContextMenu )
@@ -304,9 +304,9 @@ void ImageCanvas::handle_popup( int item )
  *   sizes, eg. 500 means 50.0 % of original width/height.
  *   That makes it easier to work with different scales and units
  */
-QRect ImageCanvas::sel( void )
+TQRect ImageCanvas::sel( void )
 {
-    QRect retval;
+    TQRect retval;
     retval.setCoords(0, 0, 0, 0);
 
     if( selected && image && selected->width()>MIN_AREA_WIDTH
@@ -315,7 +315,7 @@ QRect ImageCanvas::sel( void )
 	/* Get the size in real image pixels */
 
 	// debug_rect( "PRE map", selected );
-   	QRect mapped = inv_scale_matrix.map( (const QRect) *selected );
+   	TQRect mapped = inv_scale_matrix.map( (const TQRect) *selected );
    	// debug_rect( "Postmap", &mapped );
    	if( mapped.x() > 0 )
 	    retval.setLeft((int) (1000.0/( (double)image->width() / (double)mapped.x())));
@@ -335,16 +335,16 @@ QRect ImageCanvas::sel( void )
 
 }
 
-bool ImageCanvas::selectedImage( QImage *retImg )
+bool ImageCanvas::selectedImage( TQImage *retImg )
 {
-   QRect r = sel();
+   TQRect r = sel();
    bool  result  = false;
 
-   const QImage* entireImg = this->rootImage();
+   const TQImage* entireImg = this->rootImage();
 
    if( entireImg )
    {
-      QSize s = entireImg->size();
+      TQSize s = entireImg->size();
 
       int x = (s.width()  * r.x())/1000;
       int y = (s.height() * r.y())/1000;
@@ -361,7 +361,7 @@ bool ImageCanvas::selectedImage( QImage *retImg )
 }
 
 
-void ImageCanvas::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph )
+void ImageCanvas::drawContents( TQPainter * p, int clipx, int clipy, int clipw, int cliph )
 {
     if( !pmScaled ) return;
     int x1 = 0;
@@ -388,19 +388,19 @@ void ImageCanvas::drawContents( QPainter * p, int clipx, int clipy, int clipw, i
 
 }
 
-void ImageCanvas::timerEvent(QTimerEvent *)
+void ImageCanvas::timerEvent(TQTimerEvent *)
 {
    if(moving!=MOVE_NONE || !acquired ) return;
    cr1++;
-   QPainter p(viewport());
+   TQPainter p(viewport());
    // p.setWindow( contentsX(), contentsY(), contentsWidth(), contentsHeight());
    drawAreaBorder(&p);
 }
 
-void ImageCanvas::newRectSlot( QRect newSel )
+void ImageCanvas::newRectSlot( TQRect newSel )
 {
-   QRect to_map;
-   QPainter p(viewport());
+   TQRect to_map;
+   TQPainter p(viewport());
    drawAreaBorder(&p,TRUE);
    selected->setWidth(0);
    selected->setHeight(0);
@@ -453,7 +453,7 @@ void ImageCanvas::noRectSlot( void )
       selected->setCoords( 0,0,0,0 );
 }
 
-void ImageCanvas::viewportMousePressEvent(QMouseEvent *ev)
+void ImageCanvas::viewportMousePressEvent(TQMouseEvent *ev)
 {
    if( ! acquired || ! image ) return;
 
@@ -469,7 +469,7 @@ void ImageCanvas::viewportMousePressEvent(QMouseEvent *ev)
 
      	if( moving == MOVE_NONE )
      	{
-		QPainter p( viewport());
+		TQPainter p( viewport());
 		drawAreaBorder(&p,TRUE);
 		moving = classifyPoint( x+cx ,y+cy);
 
@@ -484,13 +484,13 @@ void ImageCanvas::viewportMousePressEvent(QMouseEvent *ev)
 }
 
 
-void ImageCanvas::viewportMouseReleaseEvent(QMouseEvent *ev)
+void ImageCanvas::viewportMouseReleaseEvent(TQMouseEvent *ev)
 {
   if(ev->button()!=LeftButton || !acquired ) return;
 
   //// debug( "Mouse Release at %d/%d", ev->x(), ev->y());
   if(moving!=MOVE_NONE) {
-    QPainter p(viewport());
+    TQPainter p(viewport());
     drawAreaBorder(&p,TRUE);
     moving = MOVE_NONE;
     *selected = selected->normalize();
@@ -511,7 +511,7 @@ void ImageCanvas::viewportMouseReleaseEvent(QMouseEvent *ev)
 }
 
 
-void ImageCanvas::viewportMouseMoveEvent(QMouseEvent *ev)
+void ImageCanvas::viewportMouseMoveEvent(TQMouseEvent *ev)
 {
    if( ! acquired || !image) return;
 
@@ -580,7 +580,7 @@ void ImageCanvas::viewportMouseMoveEvent(QMouseEvent *ev)
   //At ButtonRelease : normalize + clip
   if( moving!=MOVE_NONE ) {
   	 int mx, my;
-    QPainter p(viewport());
+    TQPainter p(viewport());
     drawAreaBorder(&p,TRUE);
     switch(moving) {
     case MOVE_NONE: //Just to make compiler happy
@@ -653,9 +653,9 @@ void ImageCanvas::setScaleFactor( int i )
 }
 
 
-void ImageCanvas::resizeEvent( QResizeEvent * event )
+void ImageCanvas::resizeEvent( TQResizeEvent * event )
 {
-	QScrollView::resizeEvent( event );
+	TQScrollView::resizeEvent( event );
 	update_scaled_pixmap();
 
 }
@@ -669,13 +669,13 @@ void ImageCanvas::update_scaled_pixmap( void )
 	return;
     }
 
-    QApplication::setOverrideCursor(waitCursor);
+    TQApplication::setOverrideCursor(waitCursor);
 
     kdDebug(28000) << "Updating scaled_pixmap" << endl;
     if( scaleKind() == DYNAMIC )
         kdDebug(28000) << "Scaling DYNAMIC" << endl;
-    QSize noSBSize( visibleWidth(), visibleHeight());
-    const int sbWidth = kapp->style().pixelMetric( QStyle::PM_ScrollBarExtent );
+    TQSize noSBSize( visibleWidth(), visibleHeight());
+    const int sbWidth = kapp->style().pixelMetric( TQStyle::PM_ScrollBarExtent );
 
     // if( verticalScrollBar()->visible() ) noSBSize.width()+=sbWidth;
     // if( horizontalScrollBar()->visible() ) noSBSize.height()+=sbWidth;
@@ -729,7 +729,7 @@ void ImageCanvas::update_scaled_pixmap( void )
 
     // reconvert the selection to orig size
     if( selected ) {
-        *selected = inv_scale_matrix.map( (const QRect) *selected );
+        *selected = inv_scale_matrix.map( (const TQRect) *selected );
     }
 
     scale_matrix.reset();                         // transformation matrix
@@ -747,7 +747,7 @@ void ImageCanvas::update_scaled_pixmap( void )
     inv_scale_matrix = scale_matrix.invert();	// for redraw of selection
 
     if( selected ) {
-        *selected = scale_matrix.map( (const QRect )*selected );
+        *selected = scale_matrix.map( (const TQRect )*selected );
     }
 
 #ifdef USE_KPIXMAPIO
@@ -764,11 +764,11 @@ void ImageCanvas::update_scaled_pixmap( void )
     resizeContents( static_cast<int>(image->width() * used_xscaler),
                     static_cast<int>(image->height() * used_yscaler ) );
 
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
 }
 
 
-void ImageCanvas::drawHAreaBorder(QPainter &p,int x1,int x2,int y,int r)
+void ImageCanvas::drawHAreaBorder(TQPainter &p,int x1,int x2,int y,int r)
 {
 	if( ! acquired || !image ) return;
 
@@ -780,17 +780,17 @@ void ImageCanvas::drawHAreaBorder(QPainter &p,int x1,int x2,int y,int r)
   if(!r) {
     if(cr2 & 4) p.setPen(black);
     else p.setPen(white);
-  } else if(!acquired) p.setPen(QPen(QColor(150,150,150)));
+  } else if(!acquired) p.setPen(TQPen(TQColor(150,150,150)));
 
   for(;;) {
-    if(rect().contains(QPoint(x1,y))) {
+    if(rect().contains(TQPoint(x1,y))) {
       if( r && acquired ) {
 	int re_x1, re_y;
 	inv_scale_matrix.map( x1+cx, y+cy, &re_x1, &re_y );
 	re_x1 = MIN( image->width()-1, re_x1 );
 	re_y = MIN( image->height()-1, re_y );
 
-	p.setPen( QPen( QColor( image->pixel(re_x1, re_y))));
+	p.setPen( TQPen( TQColor( image->pixel(re_x1, re_y))));
       }
       p.drawPoint(x1,y);
     }
@@ -808,7 +808,7 @@ void ImageCanvas::drawHAreaBorder(QPainter &p,int x1,int x2,int y,int r)
 
 }
 
-void ImageCanvas::drawVAreaBorder(QPainter &p, int x, int y1, int y2, int r )
+void ImageCanvas::drawVAreaBorder(TQPainter &p, int x, int y1, int y2, int r )
 {
 	if( ! acquired || !image ) return;
   if( moving!=MOVE_NONE ) cr2 = 0;
@@ -823,17 +823,17 @@ void ImageCanvas::drawVAreaBorder(QPainter &p, int x, int y1, int y2, int r )
     else
       p.setPen(white);
   } else
-    if( !acquired ) p.setPen( QPen( QColor(150,150,150) ) );
+    if( !acquired ) p.setPen( TQPen( TQColor(150,150,150) ) );
 
   for(;;) {
-    if(rect().contains( QPoint(x,y1) )) {
+    if(rect().contains( TQPoint(x,y1) )) {
       if( r && acquired ) {
 	int re_y1, re_x;
 	inv_scale_matrix.map( x+cx, y1+cy, &re_x, &re_y1 );
 	re_x = MIN( image->width()-1, re_x );
 	re_y1 = MIN( image->height()-1, re_y1 );
 
-	p.setPen( QPen( QColor( image->pixel( re_x, re_y1) )));
+	p.setPen( TQPen( TQColor( image->pixel( re_x, re_y1) )));
       }
       p.drawPoint(x,y1);
     }
@@ -852,7 +852,7 @@ void ImageCanvas::drawVAreaBorder(QPainter &p, int x, int y1, int y2, int r )
 
 }
 
-void ImageCanvas::drawAreaBorder(QPainter *p,int r )
+void ImageCanvas::drawAreaBorder(TQPainter *p,int r )
 {
    if(selected->isNull()) return;
 
@@ -890,7 +890,7 @@ preview_state ImageCanvas::classifyPoint(int x,int y)
 {
   if(selected->isEmpty()) return MOVE_NONE;
 
-  QRect a = selected->normalize();
+  TQRect a = selected->normalize();
 
   int top = 0,left = 0,right = 0,bottom = 0;
   int lx = a.left()-x, rx = x-a.right();
@@ -921,7 +921,7 @@ preview_state ImageCanvas::classifyPoint(int x,int y)
   if(x>=a.left()&&x<=a.right()) {
     if(top) return MOVE_TOP;
     if(bottom) return MOVE_BOTTOM;
-    if(selected->contains(QPoint(x,y))) return MOVE_WHOLE;
+    if(selected->contains(TQPoint(x,y))) return MOVE_WHOLE;
   }
   return MOVE_NONE;
 }
@@ -947,7 +947,7 @@ int ImageCanvas::getScaleFactor() const
    return( scale_factor );
 }
 
-const QImage *ImageCanvas::rootImage( )
+const TQImage *ImageCanvas::rootImage( )
 {
    return( image );
 }
@@ -1009,7 +1009,7 @@ void ImageCanvas::setDefaultScaleKind( ScaleKinds k )
     d->defaultScaleKind = k;
 }
 
-const QString ImageCanvas::imageInfoString( int w, int h, int d )
+const TQString ImageCanvas::imageInfoString( int w, int h, int d )
 {
     if( w == 0 && h == 0 && d == 0 )
     {
@@ -1020,13 +1020,13 @@ const QString ImageCanvas::imageInfoString( int w, int h, int d )
             d = image->depth();
         }
         else
-            return QString("-");
+            return TQString("-");
     }
     return i18n("%1x%2 pixel, %3 bit").arg(w).arg(h).arg(d);
 }
 
 
-const QString ImageCanvas::scaleKindString()
+const TQString ImageCanvas::scaleKindString()
 {
     switch( scaleKind() )
     {
@@ -1043,7 +1043,7 @@ const QString ImageCanvas::scaleKindString()
         return i18n("Fit Height");
         break;
     case ZOOM:
-        return i18n("Zoom to %1 %%").arg( QString::number(getScaleFactor()));
+        return i18n("Zoom to %1 %%").arg( TQString::number(getScaleFactor()));
         break;
     default:
         return i18n("Unknown scaling!");
@@ -1052,17 +1052,17 @@ const QString ImageCanvas::scaleKindString()
 }
 
 
-int ImageCanvas::highlight( const QRect& rect, const QPen& pen, const QBrush&, bool ensureVis  )
+int ImageCanvas::highlight( const TQRect& rect, const TQPen& pen, const TQBrush&, bool ensureVis  )
 {
-    QRect saveRect;
+    TQRect saveRect;
     saveRect.setRect( rect.x()-2, rect.y()-2, rect.width()+4, rect.height()+4 );
     d->highlightRects.append( saveRect );
 
     int idx = d->highlightRects.findIndex(saveRect);
 
-    QRect targetRect = scale_matrix.map( rect );
+    TQRect targetRect = scale_matrix.map( rect );
 
-    QPainter p( pmScaled );
+    TQPainter p( pmScaled );
 
     p.setPen(pen);
     p.drawLine( targetRect.x(), targetRect.y()+targetRect.height(),
@@ -1074,7 +1074,7 @@ int ImageCanvas::highlight( const QRect& rect, const QPen& pen, const QBrush&, b
 
     if( ensureVis )
     {
-        QPoint p = targetRect.center();
+        TQPoint p = targetRect.center();
         ensureVisible( p.x(), p.y(), 10+targetRect.width()/2, 10+targetRect.height()/2 );
     }
 
@@ -1090,17 +1090,17 @@ void ImageCanvas::removeHighlight( int idx )
     }
 
     /* take the rectangle from the stored highlight rects and map it to the viewer scaling */
-    QRect r = d->highlightRects[idx];
+    TQRect r = d->highlightRects[idx];
     d->highlightRects.remove(r);
-    QRect targetRect = scale_matrix.map( r );
+    TQRect targetRect = scale_matrix.map( r );
 
     /* create a small pixmap with a copy of the region in question of the original image */
-    QPixmap origPix;
+    TQPixmap origPix;
     origPix.convertFromImage( image->copy(r) );
     /* and scale it */
-    QPixmap scaledPix = origPix.xForm( scale_matrix );
+    TQPixmap scaledPix = origPix.xForm( scale_matrix );
     /* and finally draw it */
-    QPainter p( pmScaled );
+    TQPainter p( pmScaled );
     p.drawPixmap( targetRect, scaledPix );
     p.flush();
 

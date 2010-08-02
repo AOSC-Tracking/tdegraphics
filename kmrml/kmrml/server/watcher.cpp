@@ -28,7 +28,7 @@
 
 using namespace KMrml;
 
-Watcher::Watcher( const QCString& name )
+Watcher::Watcher( const TQCString& name )
     : KDEDModule( name )
 {
     m_daemons.setAutoDelete( true );
@@ -36,8 +36,8 @@ Watcher::Watcher( const QCString& name )
     // safety, for clients that die without unregistering
     KApplication::dcopClient()->setNotifications( true );
     connect( KApplication::dcopClient(),
-             SIGNAL( applicationRemoved( const QCString& )),
-             SLOT( slotAppUnregistered( const QCString& )));
+             TQT_SIGNAL( applicationRemoved( const TQCString& )),
+             TQT_SLOT( slotAppUnregistered( const TQCString& )));
 }
 
 Watcher::~Watcher()
@@ -45,9 +45,9 @@ Watcher::~Watcher()
     KApplication::dcopClient()->setNotifications( false );
 }
 
-bool Watcher::requireDaemon( const QCString& clientAppId,
-                             const QString& daemonKey,
-                             const QString& commandline,
+bool Watcher::requireDaemon( const TQCString& clientAppId,
+                             const TQString& daemonKey,
+                             const TQString& commandline,
                              uint timeout /* seconds */,
                              int restartOnFailure )
 {
@@ -84,20 +84,20 @@ bool Watcher::requireDaemon( const QCString& clientAppId,
         daemon->process->setEnvironment( "LANG", "C" );
         daemon->process->setEnvironment( "LANGUAGE", "C" );
         *daemon->process << commandline;
-        connect( daemon->process, SIGNAL( processExited( KProcess * ) ),
-                 SLOT( slotProcExited( KProcess * )));
+        connect( daemon->process, TQT_SIGNAL( processExited( KProcess * ) ),
+                 TQT_SLOT( slotProcExited( KProcess * )));
         return startDaemon( daemon );
     }
 }
 
-void Watcher::unrequireDaemon( const QCString& clientAppId,
-                               const QString& daemonKey )
+void Watcher::unrequireDaemon( const TQCString& clientAppId,
+                               const TQString& daemonKey )
 {
     unrequireDaemon( m_daemons.find( daemonKey ), clientAppId );
 }
 
 void Watcher::unrequireDaemon( DaemonData *daemon,
-                               const QCString& clientAppId )
+                               const TQCString& clientAppId )
 {
     if ( daemon )
     {
@@ -106,9 +106,9 @@ void Watcher::unrequireDaemon( DaemonData *daemon,
         {
             if ( !daemon->timer )
             {
-                daemon->timer = new QTimer();
-                connect( daemon->timer, SIGNAL( timeout() ),
-                         SLOT( slotTimeout() ));
+                daemon->timer = new TQTimer();
+                connect( daemon->timer, TQT_SIGNAL( timeout() ),
+                         TQT_SLOT( slotTimeout() ));
             }
             daemon->timer->start( daemon->timeout * 1000, true );
         }
@@ -118,10 +118,10 @@ void Watcher::unrequireDaemon( DaemonData *daemon,
                     << clientAppId << endl;
 }
 
-QStringList Watcher::runningDaemons() const
+TQStringList Watcher::runningDaemons() const
 {
-    QStringList result;
-    QDictIterator<DaemonData> it( m_daemons );
+    TQStringList result;
+    TQDictIterator<DaemonData> it( m_daemons );
     for ( ; it.current(); ++it )
         result.append( it.current()->commandline );
 
@@ -188,7 +188,7 @@ bool Watcher::startDaemon( DaemonData *daemon )
 
 void Watcher::slotTimeout()
 {
-    QTimer *timer = static_cast<QTimer*>( const_cast<QObject *>( sender() ) );
+    TQTimer *timer = static_cast<TQTimer*>( const_cast<TQObject *>( sender() ) );
     DaemonData *daemon = findDaemonFromTimer( timer );
     if ( daemon )
     {
@@ -197,7 +197,7 @@ void Watcher::slotTimeout()
             // the daemon and KProcess might get deleted by killing the
             // KProcess (through slotProcExited()), so don't dereference
             // daemon after proc->kill()
-            QString key = daemon->daemonKey;
+            TQString key = daemon->daemonKey;
 
             // noone registered during the timeout, so kill the daemon
             if ( !daemon->process->kill() )
@@ -211,7 +211,7 @@ void Watcher::slotTimeout()
 DaemonData * Watcher::findDaemonFromProcess( KProcess *proc )
 {
     DaemonData *daemon;
-    QDictIterator<DaemonData> it( m_daemons );
+    TQDictIterator<DaemonData> it( m_daemons );
     for ( ; (daemon = it.current()); ++it )
     {
         if ( daemon->process == proc )
@@ -221,10 +221,10 @@ DaemonData * Watcher::findDaemonFromProcess( KProcess *proc )
     return 0L;
 }
 
-DaemonData * Watcher::findDaemonFromTimer( QTimer *timer )
+DaemonData * Watcher::findDaemonFromTimer( TQTimer *timer )
 {
     DaemonData *daemon;
-    QDictIterator<DaemonData> it( m_daemons );
+    TQDictIterator<DaemonData> it( m_daemons );
     for ( ; (daemon = it.current()); ++it )
     {
         if ( daemon->timer == timer )
@@ -234,13 +234,13 @@ DaemonData * Watcher::findDaemonFromTimer( QTimer *timer )
     return 0L;
 }
 
-void Watcher::slotAppUnregistered( const QCString& appId )
+void Watcher::slotAppUnregistered( const TQCString& appId )
 {
     if ( m_daemons.isEmpty() )
         return;
 
     DaemonData *daemon;
-    QDictIterator<DaemonData> it( m_daemons );
+    TQDictIterator<DaemonData> it( m_daemons );
     for ( ; (daemon = it.current()); ++it )
     {
         if ( daemon->apps.find( appId ) != -1 )
@@ -270,7 +270,7 @@ void Watcher::emitFailure( DaemonData *daemon )
 }
 
 extern "C" {
-    KDE_EXPORT KDEDModule *create_daemonwatcher(const QCString & obj )
+    KDE_EXPORT KDEDModule *create_daemonwatcher(const TQCString & obj )
     {
         return new Watcher( obj );
     }

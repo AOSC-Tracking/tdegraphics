@@ -28,7 +28,7 @@
 
 #include <kptoolclear.h>
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -66,9 +66,9 @@ kpToolClearCommand::~kpToolClearCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolClearCommand::name () const
+TQString kpToolClearCommand::name () const
 {
-    QString opName = i18n ("Clear");
+    TQString opName = i18n ("Clear");
 
     if (m_actOnSelection)
         return i18n ("Selection: %1").arg (opName);
@@ -95,7 +95,7 @@ void kpToolClearCommand::execute ()
     }
 
 
-    m_oldPixmapPtr = new QPixmap ();
+    m_oldPixmapPtr = new TQPixmap ();
     *m_oldPixmapPtr = *doc->pixmap (m_actOnSelection);
 
 
@@ -104,7 +104,7 @@ void kpToolClearCommand::execute ()
         // OPT: could just edit pixmap directly and signal change
         kpSelection *sel = doc->selection ();
 
-        QPixmap newPixmap (sel->width (), sel->height ());
+        TQPixmap newPixmap (sel->width (), sel->height ());
         kpPixmapFX::fill (&newPixmap, m_newColor);
         // TODO: maybe disable Image/Clear if transparent colour
         if (m_newColor.isOpaque ())

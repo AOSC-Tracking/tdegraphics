@@ -24,17 +24,17 @@
 #ifndef KDOCKWIDGET_PRIVATE_H
 #define KDOCKWIDGET_PRIVATE_H
 
-#include <qwidget.h>
-#include <qpushbutton.h>
+#include <tqwidget.h>
+#include <tqpushbutton.h>
 
 #ifndef NO_KDE2
 #include <netwm_def.h>
 #endif
 
-class QFrame;
+class TQFrame;
 
 /**
- * Like QSplitter but specially designed for dockwidgets stuff.
+ * Like TQSplitter but specially designed for dockwidgets stuff.
  * @internal
  *
  * @author Max Judin.
@@ -43,21 +43,21 @@ class PMDockSplitter : public QWidget
 {
   Q_OBJECT
 public:
-  PMDockSplitter(QWidget *parent= 0, const char *name= 0, Orientation orient= Vertical, int pos= 50, bool highResolution=false);  
+  PMDockSplitter(TQWidget *parent= 0, const char *name= 0, Orientation orient= Vertical, int pos= 50, bool highResolution=false);  
   virtual ~PMDockSplitter(){};
 
-  void activate(QWidget *c0, QWidget *c1 = 0L);
+  void activate(TQWidget *c0, TQWidget *c1 = 0L);
   void deactivate();
 
   int separatorPos() const;
   void setSeparatorPos(int pos, bool do_resize = true);
 
-  virtual bool eventFilter(QObject *, QEvent *);
-  virtual bool event( QEvent * );
+  virtual bool eventFilter(TQObject *, TQEvent *);
+  virtual bool event( TQEvent * );
 
-  QWidget* getFirst() const { return child0; }
-  QWidget* getLast() const { return child1; }
-  QWidget* getAnother( QWidget* ) const;
+  TQWidget* getFirst() const { return child0; }
+  TQWidget* getLast() const { return child1; }
+  TQWidget* getAnother( TQWidget* ) const;
   void updateName();
 
   void setOpaqueResize(bool b=true);
@@ -74,15 +74,15 @@ public:
 
 protected:
   int checkValue( int ) const;
-  virtual void resizeEvent(QResizeEvent *);
+  virtual void resizeEvent(TQResizeEvent *);
 
 private:
   void setupMinMaxSize();
 
-  QWidget *child0, *child1;
+  TQWidget *child0, *child1;
   Orientation orientation;
   bool initialised;
-  QFrame* divider;
+  TQFrame* divider;
   int xpos;
   bool mOpaqueResize, mKeepSize, mHighResolution;
 };
@@ -97,13 +97,13 @@ class PMDockButton_Private : public QPushButton
 {
   Q_OBJECT
 public:
-  PMDockButton_Private( QWidget *parent=0, const char *name=0 );
+  PMDockButton_Private( TQWidget *parent=0, const char *name=0 );
   ~PMDockButton_Private();
 
 protected:
-  virtual void drawButton( QPainter * );
-  virtual void enterEvent( QEvent * );
-  virtual void leaveEvent( QEvent * );
+  virtual void drawButton( TQPainter * );
+  virtual void enterEvent( TQEvent * );
+  virtual void leaveEvent( TQEvent * );
 
 private:
   bool moveMouse;
@@ -123,7 +123,7 @@ public slots:
   /**
    * Especially used for Tab page docking. Switching the pages requires additional setFocus() for the embedded widget.
    */
-  void slotFocusEmbeddedWidget(QWidget* w = 0L);
+  void slotFocusEmbeddedWidget(TQWidget* w = 0L);
 
 public:
   int index;
@@ -135,7 +135,7 @@ public:
   NET::WindowType windowType;
 #endif
 
-  QWidget *_parent;
+  TQWidget *_parent;
   bool transient;
 };
 

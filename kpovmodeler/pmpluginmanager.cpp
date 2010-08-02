@@ -21,8 +21,8 @@
 #include "pmfactory.h"
 #include "pmdebug.h"
 
-#include <qmap.h>
-#include <qapplication.h>
+#include <tqmap.h>
+#include <tqapplication.h>
 
 #include <kparts/plugin.h>
 #include <kxmlguifactory.h>
@@ -38,7 +38,7 @@ class PMPluginWorkaround : public Plugin
 {
 public:
    PMPluginWorkaround( ) : Plugin( 0, 0 ) { };
-   static QValueList<Plugin::PluginInfo> installedPlugins( const KInstance* instance )
+   static TQValueList<Plugin::PluginInfo> installedPlugins( const KInstance* instance )
    {
       return pluginInfos( instance );
    }
@@ -49,16 +49,16 @@ PMPluginManager::PMPluginManager( )
    // find installed plugins
    KConfigGroup cfgGroup( PMFactory::instance( )->config( ),
                           "KParts Plugins" );
-   QValueList<Plugin::PluginInfo> plugins
+   TQValueList<Plugin::PluginInfo> plugins
       = PMPluginWorkaround::installedPlugins( PMFactory::instance( ) );
-   QValueList<Plugin::PluginInfo>::ConstIterator pIt = plugins.begin( );
-   QValueList<Plugin::PluginInfo>::ConstIterator pEnd = plugins.end( );
+   TQValueList<Plugin::PluginInfo>::ConstIterator pIt = plugins.begin( );
+   TQValueList<Plugin::PluginInfo>::ConstIterator pEnd = plugins.end( );
    
    for( ; pIt != pEnd; ++pIt )
    {
-      QDomElement docElem = ( *pIt ).m_document.documentElement( );
-      QString name = docElem.attribute( "name" );
-      QString description = docElem.attribute( "description" );
+      TQDomElement docElem = ( *pIt ).m_document.documentElement( );
+      TQString name = docElem.attribute( "name" );
+      TQString description = docElem.attribute( "description" );
       if( !description.isEmpty( ) )
          description = i18n( description.latin1( ) );
       bool enabled = cfgGroup.readBoolEntry( name + "Enabled", false );
@@ -97,13 +97,13 @@ void PMPluginManager::updatePlugins( )
 {
    KConfigGroup cfgGroup( PMFactory::instance( )->config( ),
                           "KParts Plugins" );
-   QPtrListIterator<PMPluginInfo> pit( m_plugins );
+   TQPtrListIterator<PMPluginInfo> pit( m_plugins );
    for( ; *pit; ++pit )
       cfgGroup.writeEntry( ( *pit )->name( ) + "Enabled",
                            ( *pit )->enabled( ) );
    cfgGroup.sync( );
 
-   QPtrListIterator<PMPart> it( m_parts );
+   TQPtrListIterator<PMPart> it( m_parts );
    for( ; *it; ++it )
    {
       Plugin::loadPlugins( *it, *it, PMFactory::instance( ), false );

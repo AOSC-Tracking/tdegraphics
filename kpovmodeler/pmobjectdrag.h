@@ -20,8 +20,8 @@
 #ifndef PMOBJECTDRAG_H
 #define PMOBJECTDRAG_H
 
-#include <qdragobject.h>
-#include <qstringlist.h>
+#include <tqdragobject.h>
+#include <tqstringlist.h>
 
 #include "pmobject.h"
 class PMParser;
@@ -41,12 +41,12 @@ public:
     * by the part.
     * @see PMIOManager
     */
-   PMObjectDrag( PMPart* part, PMObject* object, QWidget* dragSource = 0,
+   PMObjectDrag( PMPart* part, PMObject* object, TQWidget* dragSource = 0,
                  const char* name = 0 );
    /**
     * Creates a drag object for all objects in objList
     */
-   PMObjectDrag( PMPart* part, const PMObjectList& objList, QWidget* dragSource = 0,
+   PMObjectDrag( PMPart* part, const PMObjectList& objList, TQWidget* dragSource = 0,
                  const char* name = 0 );
    /**
     * Deletes the drag object
@@ -56,7 +56,7 @@ public:
     * Returns the encoded payload of this object, in the
     * specified MIME format.
     */
-   virtual QByteArray encodedData( const char* ) const;
+   virtual TQByteArray encodedData( const char* ) const;
    /**
     * Returns the ith format, or NULL.
     */
@@ -64,18 +64,18 @@ public:
    /**
     * Returns true if the information in e can be decoded
     */
-   static bool canDecode( const QMimeSource* e, PMPart* part );
+   static bool canDecode( const TQMimeSource* e, PMPart* part );
    /**
     * Returns a pointer to a parser for this drag object or 0, if the data
     * can't be decoded.
     *
     * The caller is responsible to delete the parser.
     */
-   static PMParser* newParser( const QMimeSource* e, PMPart* part );
+   static PMParser* newParser( const TQMimeSource* e, PMPart* part );
 
 private:
-   QValueList<QByteArray> m_data;
-   QStringList m_mimeTypes;
+   TQValueList<TQByteArray> m_data;
+   TQStringList m_mimeTypes;
 };
 
 #endif

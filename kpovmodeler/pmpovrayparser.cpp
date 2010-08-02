@@ -19,7 +19,7 @@
 #include "pmpovrayparser.h"
 
 #include <klocale.h>
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 #include "pmpart.h"
 #include "pmscanner.h"
@@ -31,13 +31,13 @@
 #include "pmxmlhelper.h"
 
 
-PMPovrayParser::PMPovrayParser( PMPart* part, QIODevice* dev )
+PMPovrayParser::PMPovrayParser( PMPart* part, TQIODevice* dev )
       : PMParser( part, dev )
 {
    init( );
 }
 
-PMPovrayParser::PMPovrayParser( PMPart* part, const QByteArray& array )
+PMPovrayParser::PMPovrayParser( PMPart* part, const TQByteArray& array )
       : PMParser( part, array )
 {
    init( );
@@ -70,7 +70,7 @@ void PMPovrayParser::nextToken( )
       // create the objects (string) only if necessary
       PMComment* c;
       int lastCommentLine = -2;
-      QString commentText;
+      TQString commentText;
 
       while( ( m_token == SCANNER_ERROR_TOK ) || ( m_token == COMMENT_TOK )
              || ( m_token == LINE_COMMENT_TOK ) || ( m_token == PMNAME_TOK ) )
@@ -697,7 +697,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                nextToken( );
                if( m_token == ID_TOK )
                {
-                  QString id( m_pScanner->sValue( ) );
+                  TQString id( m_pScanner->sValue( ) );
                   nextToken( );
 
                   if( !parseToken( '=' ) )
@@ -825,7 +825,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
    return finished;
 }
 
-bool PMPovrayParser::parseToken( int t, const QString& tokenName )
+bool PMPovrayParser::parseToken( int t, const TQString& tokenName )
 {
    if( t == ',' )
    {
@@ -2871,7 +2871,7 @@ bool PMPovrayParser::parseLathe( PMLathe* pNewLathe )
    if( !parseInt( nump ) )
       return false;
 
-   QValueList<PMVector> points;
+   TQValueList<PMVector> points;
    for( i = 0; i < nump; i++ )
    {
       parseToken( ',' );
@@ -2976,7 +2976,7 @@ bool PMPovrayParser::parsePrism( PMPrism* pNewPrism )
    if( !parseInt( nump ) )
       return false;
 
-   QValueList<PMVector> allPoints;
+   TQValueList<PMVector> allPoints;
    for( i = 0; i < nump; i++ )
    {
       parseToken( ',' );
@@ -2986,9 +2986,9 @@ bool PMPovrayParser::parsePrism( PMPrism* pNewPrism )
       allPoints.append( vector );
    }
 
-   QValueList< QValueList<PMVector> > points;
-   QValueList<PMVector> subPoints;
-   QValueList<PMVector>::Iterator it = allPoints.begin( );
+   TQValueList< TQValueList<PMVector> > points;
+   TQValueList<PMVector> subPoints;
+   TQValueList<PMVector>::Iterator it = allPoints.begin( );
    int pnr = 0, pmod4;
    PMVector ref( 2 ), ref2( 2 );
    bool error = false;
@@ -3205,7 +3205,7 @@ bool PMPovrayParser::parseSor( PMSurfaceOfRevolution* pNewSor )
    if( !parseInt( nump ) )
       return false;
 
-   QValueList<PMVector> points;
+   TQValueList<PMVector> points;
    for( i = 0; i < nump; i++ )
    {
       parseToken( ',' );
@@ -3219,9 +3219,9 @@ bool PMPovrayParser::parseSor( PMSurfaceOfRevolution* pNewSor )
       printError( i18n( "At least 4 points are needed for the surface of revolution" ) );
    else
    {
-      QValueList<PMVector>::Iterator it1 = points.begin( );
-      QValueList<PMVector>::Iterator it2 = it1; ++it2;
-      QValueList<PMVector>::Iterator it3 = it2; ++it3;
+      TQValueList<PMVector>::Iterator it1 = points.begin( );
+      TQValueList<PMVector>::Iterator it2 = it1; ++it2;
+      TQValueList<PMVector>::Iterator it3 = it2; ++it3;
       int pnr = 0;
 
       for( ; it3 != points.end( ); ++it1, ++it2, ++it3, pnr++ )
@@ -3740,7 +3740,7 @@ bool PMPovrayParser::parseTexture( PMTexture* texture, bool parseOuter )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -4396,7 +4396,7 @@ bool PMPovrayParser::parsePigment( PMPigment* pigment, bool parseOuter )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMSymbol* s = getSymbol( id );
       bool skipID = false;
 
@@ -4477,7 +4477,7 @@ bool PMPovrayParser::parseNormal( PMNormal* normal )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -4526,7 +4526,7 @@ bool PMPovrayParser::parseTextureMap( PMTextureMap* textureMap )
    int oldConsumed;
    double f_number1;
    PMTexture* texture;
-   QValueList<double> mapValues;
+   TQValueList<double> mapValues;
 
    if( !parseToken( TEXTURE_MAP_TOK, "texture_map" ) )
       return false;
@@ -4535,7 +4535,7 @@ bool PMPovrayParser::parseTextureMap( PMTextureMap* textureMap )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -4582,7 +4582,7 @@ bool PMPovrayParser::parsePigmentMap( PMPigmentMap* pigmentMap )
    int oldConsumed;
    double f_number1;
    PMPigment* pigment;
-   QValueList<double> mapValues;
+   TQValueList<double> mapValues;
 
    if( !parseToken( PIGMENT_MAP_TOK, "pigment_map" ) )
       return false;
@@ -4591,7 +4591,7 @@ bool PMPovrayParser::parsePigmentMap( PMPigmentMap* pigmentMap )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -4635,7 +4635,7 @@ bool PMPovrayParser::parseNormalMap( PMNormalMap* normalMap )
    int oldConsumed;
    double f_number1;
    PMNormal* normal;
-   QValueList<double> mapValues;
+   TQValueList<double> mapValues;
 
    if( !parseToken( NORMAL_MAP_TOK, "normal_map" ) )
       return false;
@@ -4644,7 +4644,7 @@ bool PMPovrayParser::parseNormalMap( PMNormalMap* normalMap )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -4935,7 +4935,7 @@ bool PMPovrayParser::parseSlopeMap( PMSlopeMap* slopeMap )
    int oldConsumed;
    double f_number1;
    PMSlope* slope;
-   QValueList<double> mapValues;
+   TQValueList<double> mapValues;
 
    if( !parseToken( SLOPE_MAP_TOK, "slope_map" ) )
       return false;
@@ -4944,7 +4944,7 @@ bool PMPovrayParser::parseSlopeMap( PMSlopeMap* slopeMap )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -4991,7 +4991,7 @@ bool PMPovrayParser::parseDensityMap( PMDensityMap* densityMap )
    int oldConsumed;
    double f_number1;
    PMDensity* density;
-   QValueList<double> mapValues;
+   TQValueList<double> mapValues;
 
    if( !parseToken( DENSITY_MAP_TOK, "density_map" ) )
       return false;
@@ -5000,7 +5000,7 @@ bool PMPovrayParser::parseDensityMap( PMDensityMap* densityMap )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -5048,8 +5048,8 @@ bool PMPovrayParser::parseImageMap( PMImageMap* imageMap )
    int i_number;
    double f_number;
    PMPaletteValue newPaletteValue;
-   QValueList<PMPaletteValue> l_valuesFilter;
-   QValueList<PMPaletteValue> l_valuesTransmit;
+   TQValueList<PMPaletteValue> l_valuesFilter;
+   TQValueList<PMPaletteValue> l_valuesTransmit;
 
    if( !parseToken( IMAGE_MAP_TOK, "image_map" ) )
       return false;
@@ -5353,7 +5353,7 @@ bool PMPovrayParser::parseColorMap( PMColorMap* colorMap )
    PMColor color1, color2;
    PMSolidColor* solidColor;
    PMSolidColor* lastColor = 0;
-   QValueList<double> mapValues;
+   TQValueList<double> mapValues;
    bool newEntry;
    bool twoColors;
 
@@ -5365,7 +5365,7 @@ bool PMPovrayParser::parseColorMap( PMColorMap* colorMap )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -5482,7 +5482,7 @@ bool PMPovrayParser::parseSkySphere( PMSkySphere* sky )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -5518,7 +5518,7 @@ bool PMPovrayParser::parseRainbow( PMRainbow* rainbow )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -5626,7 +5626,7 @@ bool PMPovrayParser::parseFog( PMFog* fog )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -5752,7 +5752,7 @@ bool PMPovrayParser::parseMedia( PMMedia* media )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -5880,7 +5880,7 @@ bool PMPovrayParser::parseDensity( PMDensity* density )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -5916,7 +5916,7 @@ bool PMPovrayParser::parseInterior( PMInterior* interior )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -6004,7 +6004,7 @@ bool PMPovrayParser::parseMaterial( PMMaterial* material )
 
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -6150,7 +6150,7 @@ bool PMPovrayParser::parseFinish( PMFinish* finish )
    //  Parse a possible declare link identifier
    if( m_token == ID_TOK )
    {
-      QString id( m_pScanner->sValue( ) );
+      TQString id( m_pScanner->sValue( ) );
       PMDeclare* decl = checkLink( id );
       if( decl )
       {
@@ -6640,7 +6640,7 @@ bool PMPovrayParser::parseObjectLink( PMObjectLink* link )
       return false;
    }
 
-   QString id( m_pScanner->sValue( ) );
+   TQString id( m_pScanner->sValue( ) );
    PMDeclare* decl = checkLink( id );
    if( decl )
    {
@@ -6692,7 +6692,7 @@ bool PMPovrayParser::parseIsoSurface( PMIsoSurface* iso )
             nextToken( );
             if( m_token != FUNCTION_TOK )
                return false;
-            iso->setFunction( QString( m_pScanner->sValue( ) ).simplifyWhiteSpace( ) );
+            iso->setFunction( TQString( m_pScanner->sValue( ) ).simplifyWhiteSpace( ) );
 
             nextToken( );
             parseToken( '}' );
@@ -7105,8 +7105,8 @@ bool PMPovrayParser::parseInteriorTexture( PMInteriorTexture* it )
 bool PMPovrayParser::parseSphereSweep( PMSphereSweep* ss )
 {
    int oldConsumed, numspheres;
-   QValueList<PMVector> points;
-   QValueList<double> radii;
+   TQValueList<PMVector> points;
+   TQValueList<double> radii;
    PMVector point;
    double f;
 

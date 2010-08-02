@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include <kapplication.h>
 #include <kdebug.h>
@@ -63,9 +63,9 @@ int orientation2angle( CDSC_ORIENTATION_ENUM orientation )
     return angle;
 }
 
-QCString palette2String( Configuration::EnumPalette::type palette )
+TQCString palette2String( Configuration::EnumPalette::type palette )
 {
-    QCString str;
+    TQCString str;
 
     switch( palette )
     {
@@ -80,8 +80,8 @@ QCString palette2String( Configuration::EnumPalette::type palette )
 }
 
 
-KPSWidget::KPSWidget( QWidget* parent, const char* name ) : 
-    QWidget           ( parent, name ),
+KPSWidget::KPSWidget( TQWidget* parent, const char* name ) : 
+    TQWidget           ( parent, name ),
     _gsWindow         ( None ),
     _usePipe          ( false ),
     _doubleBuffer     ( false ),
@@ -178,7 +178,7 @@ bool KPSWidget::sendPS( FILE* fp, unsigned int begin, unsigned int end )
     return true;
 }
 
-void KPSWidget::setGhostscriptPath( const QString& path )
+void KPSWidget::setGhostscriptPath( const TQString& path )
 {
     kdDebug() << "KPSWidget::setGhostscriptPath( " << path << " )" << endl;
     if( _ghostscriptPath != path )
@@ -189,7 +189,7 @@ void KPSWidget::setGhostscriptPath( const QString& path )
     }
 }
 
-void KPSWidget::setGhostscriptArguments( const QStringList& arguments )
+void KPSWidget::setGhostscriptArguments( const TQStringList& arguments )
 {
     if( _ghostscriptArguments != arguments )
     {
@@ -199,7 +199,7 @@ void KPSWidget::setGhostscriptArguments( const QStringList& arguments )
     }
 }
 
-void KPSWidget::setFileName( const QString& fileName, bool usePipe )
+void KPSWidget::setFileName( const TQString& fileName, bool usePipe )
 {
     if(( _fileName != fileName ) || (_usePipe != usePipe))
     {
@@ -304,7 +304,7 @@ void KPSWidget::setupWidget()
 	_backgroundPixmap.fill( white );
 	// The line below is needed to work around certain "features" of styles such as liquid
 	// see bug:61711 for more info (LPC, 20 Aug '03)
-	setBackgroundOrigin( QWidget::WidgetOrigin );
+	setBackgroundOrigin( TQWidget::WidgetOrigin );
 	setErasePixmap( _backgroundPixmap );
     }
 
@@ -343,8 +343,8 @@ bool KPSWidget::startInterpreter()
     setupWidget();
 
     _process = new KProcess;
-    if ( _doubleBuffer ) _process->setEnvironment( "GHOSTVIEW", QString(  "%1 %2" ).arg( winId() ).arg( _backgroundPixmap.handle() ) );
-    else _process->setEnvironment( "GHOSTVIEW", QString::number( winId() ) );
+    if ( _doubleBuffer ) _process->setEnvironment( "GHOSTVIEW", TQString(  "%1 %2" ).arg( winId() ).arg( _backgroundPixmap.handle() ) );
+    else _process->setEnvironment( "GHOSTVIEW", TQString::number( winId() ) );
 
     *_process << _ghostscriptPath.local8Bit();
     *_process << _ghostscriptArguments;
@@ -358,14 +358,14 @@ bool KPSWidget::startInterpreter()
     else
 	*_process << _fileName << "-c" << "quit";
 
-    connect( _process, SIGNAL( processExited( KProcess* ) ),
-             this, SLOT( slotProcessExited( KProcess* ) ) );
-    connect( _process, SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-             this, SLOT( gs_output( KProcess*, char*, int ) ) );
-    connect( _process, SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-             this, SLOT( gs_output( KProcess*, char*, int ) ) );
-    connect( _process, SIGNAL( wroteStdin( KProcess*) ),
-             this, SLOT( gs_input( KProcess* ) ) );
+    connect( _process, TQT_SIGNAL( processExited( KProcess* ) ),
+             this, TQT_SLOT( slotProcessExited( KProcess* ) ) );
+    connect( _process, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
+             this, TQT_SLOT( gs_output( KProcess*, char*, int ) ) );
+    connect( _process, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
+             this, TQT_SLOT( gs_output( KProcess*, char*, int ) ) );
+    connect( _process, TQT_SIGNAL( wroteStdin( KProcess*) ),
+             this, TQT_SLOT( gs_input( KProcess* ) ) );
 
     kapp->flushX();
 
@@ -420,9 +420,9 @@ void KPSWidget::slotProcessExited( KProcess* process )
     {
 	kdDebug( 4500 ) << "KPSWidget::slotProcessExited(): looks like it was not a clean exit." << endl;
 	if ( process->normalExit() ) {
-	    emit ghostscriptError( QString( i18n( "Exited with error code %1." ).arg( process->exitStatus() ) ) );
+	    emit ghostscriptError( TQString( i18n( "Exited with error code %1." ).arg( process->exitStatus() ) ) );
 	} else {
-	    emit ghostscriptError( QString( i18n( "Process killed or crashed." ) ) );
+	    emit ghostscriptError( TQString( i18n( "Process killed or crashed." ) ) );
 	}
 	_process = 0;
 	stopInterpreter();
@@ -483,12 +483,12 @@ void KPSWidget::readSettings()
 {
     setGhostscriptPath( Configuration::interpreter() );
 
-    QStringList arguments;
+    TQStringList arguments;
 
     if( Configuration::antialiasing() )
-	arguments = QStringList::split( " ", Configuration::antialiasingArguments() );
+	arguments = TQStringList::split( " ", Configuration::antialiasingArguments() );
     else
-	arguments = QStringList::split( " ", Configuration::nonAntialiasingArguments() );
+	arguments = TQStringList::split( " ", Configuration::nonAntialiasingArguments() );
 
     if( !Configuration::platformFonts() )
 	arguments << "-dNOPLATFONTS";
@@ -522,7 +522,7 @@ bool KPSWidget::x11Event( XEvent* e )
 	    return true;
 	}
     }
-    return QWidget::x11Event( e );
+    return TQWidget::x11Event( e );
 }
 
 #include "kpswidget.moc"

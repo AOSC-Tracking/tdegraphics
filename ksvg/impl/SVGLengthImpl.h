@@ -64,7 +64,7 @@ public:
 
 	operator float();
 
-	static void convertPercentageToFloat(const QString &perc, float &result);
+	static void convertPercentageToFloat(const TQString &perc, float &result);
 
 	// This method converts the value val to percentage notation ("xxx%").
 	//  If the value string ends with the percentage sign it is returned,
@@ -72,7 +72,7 @@ public:
 	// for benchmark 1.0. This method should be useful in contexts that
 	// know the values should be in percentages up front, like bbox
 	// calculations.
-	static QString convertValToPercentage(const QString &val, float benchmark = 1.0);
+	static TQString convertValToPercentage(const TQString &val, float benchmark = 1.0);
 
 	SVGElementImpl *context() const;
 	void setContext(SVGElementImpl *context);
@@ -84,7 +84,7 @@ private:
 
 	float percentageOfViewport();
 
-	void convertStringToPx(QString s);
+	void convertStringToPx(TQString s);
 	void convertNumToPx();
 	bool getValFromPx();
 

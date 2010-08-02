@@ -32,12 +32,12 @@
 
 #include <math.h>
 
-#include <qfontmetrics.h>
-#include <qimage.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qpushbutton.h>
+#include <tqfontmetrics.h>
+#include <tqimage.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
+#include <tqpushbutton.h>
 
 #include <kcombobox.h>
 #include <kdebug.h>
@@ -49,7 +49,7 @@
 
 
 #if DEBUG_KP_EFFECT_BALANCE
-    #include <qdatetime.h>
+    #include <tqdatetime.h>
 #endif
 
 
@@ -127,7 +127,7 @@ static inline QRgb brightnessContrastGammaForRGB (QRgb rgb,
 
 
 // public static
-QPixmap kpEffectBalanceCommand::applyColorEffect (const QPixmap &pixmap,
+TQPixmap kpEffectBalanceCommand::applyColorEffect (const TQPixmap &pixmap,
     int channels,
     int brightness, int contrast, int gamma)
 {
@@ -138,10 +138,10 @@ QPixmap kpEffectBalanceCommand::applyColorEffect (const QPixmap &pixmap,
                << ",contrast=" << contrast
                << ",gamma=" << gamma
                << ")" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
 #endif
 
-    QImage image = kpPixmapFX::convertToImage (pixmap);
+    TQImage image = kpPixmapFX::convertToImage (pixmap);
 #if DEBUG_KP_EFFECT_BALANCE
     kdDebug () << "\tconvertToImage=" << timer.restart () << endl;
 #endif
@@ -234,7 +234,7 @@ QPixmap kpEffectBalanceCommand::applyColorEffect (const QPixmap &pixmap,
     kdDebug () << "\teffect=" << timer.restart () << endl;
 #endif
 
-    const QPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
+    const TQPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
 #if DEBUG_KP_EFFECT_BALANCE
     kdDebug () << "\tconvertToPixmap=" << timer.restart () << endl;
 #endif
@@ -243,7 +243,7 @@ QPixmap kpEffectBalanceCommand::applyColorEffect (const QPixmap &pixmap,
 }
 
 // protected virtual [base kpColorEffectCommand]
-QPixmap kpEffectBalanceCommand::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectBalanceCommand::applyColorEffect (const TQPixmap &pixmap)
 {
     return applyColorEffect (pixmap, m_channels,
                              m_brightness, m_contrast, m_gamma);
@@ -253,39 +253,39 @@ QPixmap kpEffectBalanceCommand::applyColorEffect (const QPixmap &pixmap)
 
 kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
                                               kpMainWindow *mainWindow,
-                                              QWidget *parent, const char *name)
+                                              TQWidget *parent, const char *name)
     : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
-    QGridLayout *lay = new QGridLayout (this, 5, 5, marginHint (), spacingHint ());
+    TQGridLayout *lay = new TQGridLayout (this, 5, 5, marginHint (), spacingHint ());
 
 
-    QLabel *brightnessLabel = new QLabel (i18n ("&Brightness:"), this);
+    TQLabel *brightnessLabel = new TQLabel (i18n ("&Brightness:"), this);
     m_brightnessInput = new KIntNumInput (0/*value*/, this);
     m_brightnessInput->setRange (-50, 50, 1/*step*/, true/*slider*/);
-    QPushButton *brightnessResetPushButton = new QPushButton (i18n ("Re&set"), this);
+    TQPushButton *brightnessResetPushButton = new TQPushButton (i18n ("Re&set"), this);
 
-    QLabel *contrastLabel = new QLabel (i18n ("Co&ntrast:"), this);
+    TQLabel *contrastLabel = new TQLabel (i18n ("Co&ntrast:"), this);
     m_contrastInput = new KIntNumInput (0/*value*/, this);
     m_contrastInput->setRange (-50, 50, 1/*step*/, true/*slider*/);
-    QPushButton *contrastResetPushButton = new QPushButton (i18n ("&Reset"), this);
+    TQPushButton *contrastResetPushButton = new TQPushButton (i18n ("&Reset"), this);
 
-    QLabel *gammaLabel = new QLabel (i18n ("&Gamma:"), this);
+    TQLabel *gammaLabel = new TQLabel (i18n ("&Gamma:"), this);
     m_gammaInput = new KIntNumInput (0/*value*/, this);
     m_gammaInput->setRange (-50, 50, 1/*step*/, true/*slider*/);
     // TODO: This is what should be shown in the m_gammaInput spinbox
-    m_gammaLabel = new QLabel (this);
+    m_gammaLabel = new TQLabel (this);
     // TODO: This doesn't seem to be wide enough with some fonts so the
     //       whole layout moves when we drag the gamma slider.
     m_gammaLabel->setMinimumWidth (m_gammaLabel->fontMetrics ().width (" 10.00 "));
     m_gammaLabel->setAlignment (m_gammaLabel->alignment () | Qt::AlignRight);
-    QPushButton *gammaResetPushButton = new QPushButton (i18n ("Rese&t"), this);
+    TQPushButton *gammaResetPushButton = new TQPushButton (i18n ("Rese&t"), this);
 
 
-    QWidget *spaceWidget = new QLabel (this);
+    TQWidget *spaceWidget = new TQLabel (this);
     spaceWidget->setFixedSize (1, spacingHint ());
 
 
-    QLabel *channelLabel = new QLabel (i18n ("C&hannels:"), this);
+    TQLabel *channelLabel = new TQLabel (i18n ("C&hannels:"), this);
     m_channelsComboBox = new KComboBox (this);
     m_channelsComboBox->insertItem (i18n ("All"));
     m_channelsComboBox->insertItem (i18n ("Red"));
@@ -293,7 +293,7 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
     m_channelsComboBox->insertItem (i18n ("Blue"));
 
 
-    QPushButton *resetPushButton = new QPushButton (i18n ("Reset &All Values"), this);
+    TQPushButton *resetPushButton = new TQPushButton (i18n ("Reset &All Values"), this);
 
 
     brightnessLabel->setBuddy (m_brightnessInput);
@@ -327,28 +327,28 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
 
 
     // (no need for settingsChangedDelayed() since BCG effect is so fast :))
-    connect (m_brightnessInput, SIGNAL (valueChanged (int)),
-             this, SIGNAL (settingsChangedNoWaitCursor ()));
-    connect (m_contrastInput, SIGNAL (valueChanged (int)),
-             this, SIGNAL (settingsChangedNoWaitCursor ()));
+    connect (m_brightnessInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SIGNAL (settingsChangedNoWaitCursor ()));
+    connect (m_contrastInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SIGNAL (settingsChangedNoWaitCursor ()));
 
-    connect (m_gammaInput, SIGNAL (valueChanged (int)),
-             this, SLOT (recalculateGammaLabel ()));
-    connect (m_gammaInput, SIGNAL (valueChanged (int)),
-             this, SIGNAL (settingsChangedNoWaitCursor ()));
+    connect (m_gammaInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SLOT (recalculateGammaLabel ()));
+    connect (m_gammaInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SIGNAL (settingsChangedNoWaitCursor ()));
 
-    connect (m_channelsComboBox, SIGNAL (activated (int)),
-             this, SIGNAL (settingsChanged ()));
+    connect (m_channelsComboBox, TQT_SIGNAL (activated (int)),
+             this, TQT_SIGNAL (settingsChanged ()));
 
-    connect (brightnessResetPushButton, SIGNAL (clicked ()),
-             this, SLOT (resetBrightness ()));
-    connect (contrastResetPushButton, SIGNAL (clicked ()),
-             this, SLOT (resetContrast ()));
-    connect (gammaResetPushButton, SIGNAL (clicked ()),
-             this, SLOT (resetGamma ()));
+    connect (brightnessResetPushButton, TQT_SIGNAL (clicked ()),
+             this, TQT_SLOT (resetBrightness ()));
+    connect (contrastResetPushButton, TQT_SIGNAL (clicked ()),
+             this, TQT_SLOT (resetContrast ()));
+    connect (gammaResetPushButton, TQT_SIGNAL (clicked ()),
+             this, TQT_SLOT (resetGamma ()));
 
-    connect (resetPushButton, SIGNAL (clicked ()),
-             this, SLOT (resetAll ()));
+    connect (resetPushButton, TQT_SIGNAL (clicked ()),
+             this, TQT_SLOT (resetAll ()));
 
 
     recalculateGammaLabel ();
@@ -360,7 +360,7 @@ kpEffectBalanceWidget::~kpEffectBalanceWidget ()
 
 
 // public virtual [base kpColorEffectWidget]
-QString kpEffectBalanceWidget::caption () const
+TQString kpEffectBalanceWidget::caption () const
 {
     return i18n ("Settings");
 }
@@ -373,7 +373,7 @@ bool kpEffectBalanceWidget::isNoOp () const
 }
 
 // public virtual [base kpColorEffectWidget]
-QPixmap kpEffectBalanceWidget::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectBalanceWidget::applyColorEffect (const TQPixmap &pixmap)
 {
     return kpEffectBalanceCommand::applyColorEffect (pixmap,
                channels (), brightness (), contrast (), gamma ());
@@ -434,7 +434,7 @@ void kpEffectBalanceWidget::recalculateGammaLabel ()
 {
     m_gammaLabel->setText (
         " " +
-        QString::number (pow (10, gamma () / 50.0),
+        TQString::number (pow (10, gamma () / 50.0),
                          'f'/*[-]9.9*/,
                          2/*precision*/) +
         " ");

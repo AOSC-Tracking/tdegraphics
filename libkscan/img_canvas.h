@@ -20,22 +20,22 @@
 #ifndef __IMG_CANVAS_H__
 #define __IMG_CANVAS_H__
 
-#include <qwidget.h>
-#include <qrect.h>
+#include <tqwidget.h>
+#include <tqrect.h>
 #include <stdlib.h>
-#include <qsize.h>
-#include <qwmatrix.h>
-#include <qscrollview.h>
-#include <qstrlist.h>
+#include <tqsize.h>
+#include <tqwmatrix.h>
+#include <tqscrollview.h>
+#include <tqstrlist.h>
 
 #ifdef USE_KPIXMAPIO
 #include <kpixmapio.h>
 #endif
 
-class QPopupMenu;
-class QPixmap;
-class QImage;
-class QPainter;
+class TQPopupMenu;
+class TQPixmap;
+class TQImage;
+class TQPainter;
 
 enum preview_state {
 	MOVE_NONE,
@@ -81,8 +81,8 @@ class ImageCanvas: public QScrollView
     Q_PROPERTY( int scale_factor READ getScaleFactor WRITE setScaleFactor )
 
 public:
-    ImageCanvas( QWidget *parent = 0,
-                 const QImage *start_image = 0,
+    ImageCanvas( TQWidget *parent = 0,
+                 const TQImage *start_image = 0,
                  const char *name = 0);
     ~ImageCanvas( );
 
@@ -92,25 +92,25 @@ public:
 
     int getScaleFactor() const;
 
-    const QImage *rootImage();
+    const TQImage *rootImage();
 
     bool hasImage( void ) 	{ return acquired; }
-    QPopupMenu* contextMenu() { return m_contextMenu; }
-    QRect sel( void );
+    TQPopupMenu* contextMenu() { return m_contextMenu; }
+    TQRect sel( void );
 
     enum ScaleKinds { UNSPEC, DYNAMIC, FIT_ORIG, FIT_WIDTH, FIT_HEIGHT, ZOOM };
 
     enum PopupIDs { ID_POP_ZOOM, ID_POP_CLOSE, ID_FIT_WIDTH,
                     ID_FIT_HEIGHT, ID_ORIG_SIZE };
 
-    bool selectedImage( QImage* );
+    bool selectedImage( TQImage* );
 
     ScaleKinds scaleKind();
-    const QString scaleKindString();
+    const TQString scaleKindString();
 
     ScaleKinds defaultScaleKind();
 
-    const QString imageInfoString( int w=0, int h=0, int d=0 );
+    const TQString imageInfoString( int w=0, int h=0, int d=0 );
 
 public slots:
     void setBrightness(int);
@@ -122,12 +122,12 @@ public slots:
             maintain_aspect = aspect_in_mind;
             repaint();
         }
-    virtual QSize sizeHint() const;
-    void newImage( QImage* );
-    void newImageHoldZoom( QImage* );
-    void deleteView( QImage *);
+    virtual TQSize sizeHint() const;
+    void newImage( TQImage* );
+    void newImageHoldZoom( TQImage* );
+    void deleteView( TQImage *);
     void newRectSlot();
-    void newRectSlot( QRect newSel );
+    void newRectSlot( TQRect newSel );
     void noRectSlot( void );
     void setScaleFactor( int i );
     void handle_popup(int item );
@@ -141,7 +141,7 @@ public slots:
      * and pen.
      * The function returns a id that needs to be given to the remove method.
      */
-    int highlight( const QRect&, const QPen&, const QBrush&, bool ensureVis=false );
+    int highlight( const TQRect&, const TQPen&, const TQBrush&, bool ensureVis=false );
 
     /**
      * reverts the highlighted region back to normal view.
@@ -158,10 +158,10 @@ public slots:
 signals:
     void noRect( void );
     void newRect( void );
-    void newRect( QRect );
+    void newRect( TQRect );
     void scalingRequested();
     void closingRequested();
-    void scalingChanged( const QString& );
+    void scalingChanged( const TQString& );
     /**
      * signal emitted if the permission of the currently displayed image changed,
      * ie. if it goes from writeable to readable.
@@ -170,20 +170,20 @@ signals:
     void imageReadOnly( bool isRO );
     
 protected:
-    void drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph );
+    void drawContents( TQPainter * p, int clipx, int clipy, int clipw, int cliph );
 
-    void timerEvent(QTimerEvent *);
-    void viewportMousePressEvent(QMouseEvent *);
-    void viewportMouseReleaseEvent(QMouseEvent *);
-    void viewportMouseMoveEvent(QMouseEvent *);
+    void timerEvent(TQTimerEvent *);
+    void viewportMousePressEvent(TQMouseEvent *);
+    void viewportMouseReleaseEvent(TQMouseEvent *);
+    void viewportMouseMoveEvent(TQMouseEvent *);
 
-    void resizeEvent( QResizeEvent * event );
+    void resizeEvent( TQResizeEvent * event );
 
 private:
-    QStrList      urls;
+    TQStrList      urls;
 
     int           scale_factor;
-    const QImage        *image;
+    const TQImage        *image;
     int           brightness, contrast, gamma;
 
 
@@ -193,23 +193,23 @@ private:
 
     QWMatrix	 scale_matrix;
     QWMatrix	 inv_scale_matrix;
-    QPixmap       *pmScaled;
+    TQPixmap       *pmScaled;
     float	 used_yscaler;
     float	 used_xscaler;
-    QPopupMenu    *m_contextMenu;
+    TQPopupMenu    *m_contextMenu;
     bool		 maintain_aspect;
 
     int	         timer_id;
-    QRect 	 *selected;
+    TQRect 	 *selected;
     preview_state moving;
     int 		 cr1,cr2;
     int 		 lx,ly;
     bool 	 acquired;
 
     /* private functions for the running ant */
-    void drawHAreaBorder(QPainter &p,int x1,int x2,int y,int r = FALSE);
-    void drawVAreaBorder(QPainter &p,int x,int y1,int y2,int r = FALSE);
-    void drawAreaBorder(QPainter *p,int r = FALSE);
+    void drawHAreaBorder(TQPainter &p,int x1,int x2,int y,int r = FALSE);
+    void drawVAreaBorder(TQPainter &p,int x,int y1,int y2,int r = FALSE);
+    void drawAreaBorder(TQPainter *p,int r = FALSE);
     void update_scaled_pixmap( void );
 
     preview_state classifyPoint(int x,int y);

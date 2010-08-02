@@ -33,11 +33,11 @@
 #include <kpcolor.h>
 #include <kptool.h>
 
-class QPixmap;
-class QPoint;
-class QRect;
-class QString;
-class QTimer;
+class TQPixmap;
+class TQPoint;
+class TQRect;
+class TQString;
+class TQTimer;
 
 class kpMainWindow;
 class kpToolAirSprayCommand;
@@ -53,7 +53,7 @@ public:
     virtual ~kpToolAirSpray ();
 
 private:
-    QString haventBegunDrawUserMessage () const;
+    TQString haventBegunDrawUserMessage () const;
 
 public:
     virtual void begin ();
@@ -64,10 +64,10 @@ private slots:
     
 public:
     virtual void beginDraw ();
-    virtual void draw (const QPoint &thisPoint, const QPoint &, const QRect &);
+    virtual void draw (const TQPoint &thisPoint, const TQPoint &, const TQRect &);
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
-    virtual void endDraw (const QPoint &, const QRect &);
+    virtual void endDraw (const TQPoint &, const TQRect &);
 
 public slots:
     void actuallyDraw ();
@@ -75,7 +75,7 @@ public slots:
 private:
     kpToolWidgetSpraycanSize *m_toolWidgetSpraycanSize;
     kpToolAirSprayCommand *m_currentCommand;
-    QTimer *m_timer;
+    TQTimer *m_timer;
     int m_size;
 };
 
@@ -86,7 +86,7 @@ public:
                            kpMainWindow *mainWindow);
     virtual ~kpToolAirSprayCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
     
@@ -94,7 +94,7 @@ public:
     virtual void unexecute ();
 
     // interface for KToolAirSpray
-    void addPoints (const QPointArray &points);
+    void addPoints (const TQPointArray &points);
     void finalize ();
     void cancel ();
 
@@ -102,9 +102,9 @@ private:
     kpColor m_color;
     int m_size;
 
-    QPixmap *m_newPixmapPtr;
-    QPixmap m_oldPixmap;
-    QRect m_boundingRect;
+    TQPixmap *m_newPixmapPtr;
+    TQPixmap m_oldPixmap;
+    TQRect m_boundingRect;
 };
 
 #endif  // __kptoolairspray_h__

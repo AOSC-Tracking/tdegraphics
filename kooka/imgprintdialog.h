@@ -27,8 +27,8 @@
 #ifndef __IMGPRINTDIALOG_H__
 #define __IMGPRINTDIALOG_H__
 
-#include <qmap.h>
-#include <qcheckbox.h>
+#include <tqmap.h>
+#include <tqcheckbox.h>
 #include <kdeprint/kprintdialogpage.h>
 
 #include "kookaimage.h"
@@ -41,24 +41,24 @@
 #define OPT_PSGEN_DRAFT  "kde-kooka-psdraft"
 #define OPT_RATIO    "kde-kooka-ratio"
 #define OPT_FITPAGE  "kde-kooka-fitpage"
-class QWidget;
-class QString;
-class QLabel;
+class TQWidget;
+class TQString;
+class TQLabel;
 class KIntNumInput;
 class KookaImage;
-class QVButtonGroup;
-class QRadioButton;
-class QCheckBox;
+class TQVButtonGroup;
+class TQRadioButton;
+class TQCheckBox;
 
 class ImgPrintDialog: public KPrintDialogPage
 {
     Q_OBJECT
 public:
-    ImgPrintDialog( KookaImage *img, QWidget *parent=0L, const char* name=0L );
+    ImgPrintDialog( KookaImage *img, TQWidget *parent=0L, const char* name=0L );
 
-    void setOptions(const QMap<QString,QString>& opts);
-    void getOptions(QMap<QString,QString>& opts, bool include_def = false);
-    bool isValid(QString& msg);
+    void setOptions(const TQMap<TQString,TQString>& opts);
+    void getOptions(TQMap<TQString,TQString>& opts, bool include_def = false);
+    bool isValid(TQString& msg);
 
     void setImage( KookaImage *img );
 
@@ -68,21 +68,21 @@ protected slots:
     void slCustomHeightChanged(int);
 
 private:
-    QButtonGroup  *m_scaleRadios;
-    QRadioButton  *m_rbOrigSize;
-    QRadioButton  *m_rbScale;
-    QRadioButton  *m_rbScreen;
-    QRadioButton  *m_rbFitPage;
+    TQButtonGroup  *m_scaleRadios;
+    TQRadioButton  *m_rbOrigSize;
+    TQRadioButton  *m_rbScale;
+    TQRadioButton  *m_rbScreen;
+    TQRadioButton  *m_rbFitPage;
     
     KIntNumInput *m_sizeW;
     KIntNumInput *m_sizeH;
     KIntNumInput *m_dpi;
 
-    QCheckBox    *m_psDraft;
-    QCheckBox    *m_ratio;
+    TQCheckBox    *m_psDraft;
+    TQCheckBox    *m_ratio;
 
     KookaImage *m_image;
-    QLabel     *m_screenRes;
+    TQLabel     *m_screenRes;
     bool        m_ignoreSignal;
 };
 

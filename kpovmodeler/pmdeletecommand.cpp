@@ -24,7 +24,7 @@
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <qptrdict.h>
+#include <tqptrdict.h>
 
 PMDeleteCommand::PMDeleteCommand( PMObject* obj )
       : PMCommand( i18n( "Delete %1" ).arg( obj->name( ) ) )
@@ -140,7 +140,7 @@ void PMDeleteCommand::execute( PMCommandManager* theManager )
          }
       }
 
-      QPtrListIterator<PMMemento> mit( m_dataChanges );
+      TQPtrListIterator<PMMemento> mit( m_dataChanges );
       for( ; mit.current( ); ++mit )
       {
          PMObjectChangeListIterator change = mit.current( )->changedObjects( );
@@ -182,7 +182,7 @@ void PMDeleteCommand::undo( PMCommandManager* theManager )
       for( ; dit.current( ); ++dit )
          theManager->cmdObjectChanged( dit.current( ), PMCData );
       
-      QPtrListIterator<PMMemento> mit( m_dataChanges );
+      TQPtrListIterator<PMMemento> mit( m_dataChanges );
       for( ; mit.current( ); ++mit )
       {
          mit.current( )->originator( )->restoreMemento( mit.current( ) );
@@ -206,7 +206,7 @@ int PMDeleteCommand::errorFlags( PMPart* )
    bool error = false;
    
    // dictionary of deleted objects
-   QPtrDict<bool> m_deletedObjects( 1009 );
+   TQPtrDict<bool> m_deletedObjects( 1009 );
    m_deletedObjects.setAutoDelete( true );
    PMDeleteInfoListIterator it( m_infoList );
    for( ; it.current( ); ++it )

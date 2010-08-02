@@ -6,7 +6,7 @@
 #define KVIEWEFFECTS_H
 
 #include <kparts/plugin.h>
-#include <qcolor.h>
+#include <tqcolor.h>
 
 namespace KImageViewer { class Viewer; }
 
@@ -14,7 +14,7 @@ class KViewEffects : public KParts::Plugin
 {
 	Q_OBJECT
 public:
-	KViewEffects( QObject* parent, const char* name, const QStringList & );
+	KViewEffects( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewEffects();
 
 private slots:
@@ -24,7 +24,7 @@ private slots:
 
 	void blend();
 	void setOpacity( int );
-	void setColor( const QColor & );
+	void setColor( const TQColor & );
 	void applyBlend();
 
 	void gamma();
@@ -32,14 +32,14 @@ private slots:
 	void applyGammaCorrection();
 
 private:
-	QImage * workImage();
+	TQImage * workImage();
 
 	KImageViewer::Viewer * m_pViewer;
 	double m_gamma, m_lastgamma;
 	int m_opacity, m_lastopacity;
 	int m_intensity, m_lastintensity;
-	QColor m_color;
-	QImage * m_image;
+	TQColor m_color;
+	TQImage * m_image;
 };
 
 // vim:sw=4:ts=4:cindent

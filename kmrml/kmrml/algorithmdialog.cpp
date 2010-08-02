@@ -20,12 +20,12 @@
 #include "algorithmcombo.h"
 #include "collectioncombo.h"
 
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qscrollview.h>
-#include <qvbox.h>
-#include <qvgroupbox.h>
+#include <tqhbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqscrollview.h>
+#include <tqvbox.h>
+#include <tqvgroupbox.h>
 
 #include <klocale.h>
 
@@ -34,45 +34,45 @@ using namespace KMrml;
 class ScrollView : public QScrollView
 {
 public:
-    ScrollView(QWidget* parent = 0, const char* name = 0)
-        : QScrollView(parent, name)
+    ScrollView(TQWidget* parent = 0, const char* name = 0)
+        : TQScrollView(parent, name)
     {
-        setFrameStyle(QFrame::NoFrame);
-        m_frame = new QFrame(viewport(), "ScrollView::m_frame");
-        m_frame->setFrameStyle(QFrame::NoFrame);
+        setFrameStyle(TQFrame::NoFrame);
+        m_frame = new TQFrame(viewport(), "ScrollView::m_frame");
+        m_frame->setFrameStyle(TQFrame::NoFrame);
         addChild(m_frame, 0, 0);
     };
 
-    QFrame* frame() {return m_frame;};
+    TQFrame* frame() {return m_frame;};
 
 protected:
-    virtual void viewportResizeEvent(QResizeEvent* ev)
+    virtual void viewportResizeEvent(TQResizeEvent* ev)
     {
-      QScrollView::viewportResizeEvent(ev);
+      TQScrollView::viewportResizeEvent(ev);
       m_frame->resize( kMax(m_frame->sizeHint().width(), ev->size().width()),
                        kMax(m_frame->sizeHint().height(), ev->size().height()));
     };
 
 private:
-      QFrame* m_frame;
+      TQFrame* m_frame;
 };
 
 AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
                                   const CollectionList& collections,
                                   const Collection& currentColl,
-                                  QWidget *parent, const char *name )
+                                  TQWidget *parent, const char *name )
     : KDialogBase( parent, name, false, i18n("Configure Query Algorithms"),
                    Ok | Cancel, Ok, false ),
       m_allAlgorithms( algorithms ),
       m_collections( collections )
 {
-    QWidget *box = makeMainWidget();
+    TQWidget *box = makeMainWidget();
 
-    QVBoxLayout *mainLayout = new QVBoxLayout( box, 0, KDialog::spacingHint(),
+    TQVBoxLayout *mainLayout = new TQVBoxLayout( box, 0, KDialog::spacingHint(),
                                                 "mainLayout");
 
-    QHBoxLayout *collectionLayout = new QHBoxLayout( 0L, 0, 0, "coll layout");
-    collectionLayout->addWidget( new QLabel( i18n("Collection: "), box ));
+    TQHBoxLayout *collectionLayout = new TQHBoxLayout( 0L, 0, 0, "coll layout");
+    collectionLayout->addWidget( new TQLabel( i18n("Collection: "), box ));
 
     m_collectionCombo = new CollectionCombo( box, "collection combo" );
     m_collectionCombo->setCollections( &m_collections );
@@ -81,26 +81,26 @@ AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
     mainLayout->addLayout( collectionLayout );
     mainLayout->addSpacing( 14 );
 
-    QHBox *algoHLayout = new QHBox( box );
-    (void) new QLabel( i18n("Algorithm: "), algoHLayout);
+    TQHBox *algoHLayout = new TQHBox( box );
+    (void) new TQLabel( i18n("Algorithm: "), algoHLayout);
     m_algoCombo = new AlgorithmCombo( algoHLayout, "algo combo" );
 
-    QVGroupBox *groupBox = new QVGroupBox( box, "groupBox" );
+    TQVGroupBox *groupBox = new TQVGroupBox( box, "groupBox" );
     mainLayout->addWidget( groupBox );
     algoHLayout->raise();
 
     ScrollView *scrollView = new ScrollView( groupBox, "scroll view" );
     m_view = scrollView->frame();
-    QVBoxLayout *viewLayout = new QVBoxLayout( scrollView );
+    TQVBoxLayout *viewLayout = new TQVBoxLayout( scrollView );
     viewLayout->setSpacing( KDialog::spacingHint() );
     
     
     collectionChanged( currentColl );
     
-    connect( m_algoCombo, SIGNAL( selected( const Algorithm& ) ),
-             SLOT( initGUI( const Algorithm& ) ));
-    connect( m_collectionCombo, SIGNAL( selected( const Collection& ) ),
-             SLOT( collectionChanged( const Collection& ) ));
+    connect( m_algoCombo, TQT_SIGNAL( selected( const Algorithm& ) ),
+             TQT_SLOT( initGUI( const Algorithm& ) ));
+    connect( m_collectionCombo, TQT_SIGNAL( selected( const Collection& ) ),
+             TQT_SLOT( collectionChanged( const Collection& ) ));
 
     algoHLayout->adjustSize();
     mainLayout->activate();

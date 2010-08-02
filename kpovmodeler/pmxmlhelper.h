@@ -23,8 +23,8 @@
 #include <config.h>
 #endif
 
-#include <qdom.h>
-#include <qstring.h>
+#include <tqdom.h>
+#include <tqstring.h>
 
 #include "pmobject.h"
 #include "pmcolor.h"
@@ -41,57 +41,57 @@ class PMXMLHelper
 {
 public:
    /**
-    * Creates a PMXMLHelper for the QDomElement& e
+    * Creates a PMXMLHelper for the TQDomElement& e
     */
-   PMXMLHelper( const QDomElement& e, PMPart* p, PMParser* par,
+   PMXMLHelper( const TQDomElement& e, PMPart* p, PMParser* par,
                 int majorDocumentFormat, int minorDocumentFormat );
    /**
     * Returns the QDomElement
     */
-   QDomElement element( ) const { return m_e; }
+   TQDomElement element( ) const { return m_e; }
 
    /**
     * Returns true if the element contains the attribute
     */
-   bool hasAttribute( const QString& name ) const;
+   bool hasAttribute( const TQString& name ) const;
    /**
     * Reads an integer attribute
     */
-   int intAttribute( const QString& name, int def ) const;
+   int intAttribute( const TQString& name, int def ) const;
    /**
     * Reads a double attribute
     */
-   double doubleAttribute( const QString& name, double def ) const;
+   double doubleAttribute( const TQString& name, double def ) const;
    /**
     * Reads a bool attribute
     */
-   bool boolAttribute( const QString& name, bool def ) const;
+   bool boolAttribute( const TQString& name, bool def ) const;
    /**
     * Reads a PMThreeState attribute
     */
-   PMThreeState threeStateAttribute( const QString& name ) const;
+   PMThreeState threeStateAttribute( const TQString& name ) const;
    /**
     * Reads a string attribute
     */
-   QString stringAttribute( const QString& name, const QString& def ) const;
+   TQString stringAttribute( const TQString& name, const TQString& def ) const;
    /**
     * Reads a vector attribute
     */
-   PMVector vectorAttribute( const QString& name, const PMVector& def ) const;
+   PMVector vectorAttribute( const TQString& name, const PMVector& def ) const;
    /**
     * Reads a matrix attribute
     */
-   PMMatrix matrixAttribute( const QString& name, const PMMatrix& def ) const;
+   PMMatrix matrixAttribute( const TQString& name, const PMMatrix& def ) const;
    /**
     * Reads a color attribute
     */
-   PMColor colorAttribute( const QString& name, const PMColor& def ) const;
+   PMColor colorAttribute( const TQString& name, const PMColor& def ) const;
 
    /**
     * Returns the "extra_data" child element or a null element, if there
     * is no child element with tag name "extra_data"
     */
-   QDomElement extraData( ) const;
+   TQDomElement extraData( ) const;
        
    /**
     * Returns a pointer to the part
@@ -111,7 +111,7 @@ public:
    int minorDocumentFormat( ) const { return m_minor; }
    
 private:
-   QDomElement m_e;
+   TQDomElement m_e;
    PMPart* m_pPart;
    PMParser* m_pParser;
    int m_major;

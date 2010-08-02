@@ -1,12 +1,12 @@
 #ifndef KGV_H
 #define KGV_H
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 namespace KGV
 {
 
-typedef QValueList<int> PageList;
+typedef TQValueList<int> PageList;
 
 }
 

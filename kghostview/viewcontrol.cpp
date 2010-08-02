@@ -9,12 +9,12 @@
 **
 *****************************************************************************/
 
-#include <qcombobox.h>
-#include <qframe.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
+#include <tqcombobox.h>
+#include <tqframe.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
 
 
 #include "viewcontrol.h"
@@ -25,22 +25,22 @@
 #include <kbuttonbox.h>
 #include <kseparator.h>
 
-ViewControl::ViewControl( QWidget *parent, const char *name )
-	: QDialog( parent, name )
+ViewControl::ViewControl( TQWidget *parent, const char *name )
+	: TQDialog( parent, name )
 {
-	setFocusPolicy(QWidget::StrongFocus);
+	setFocusPolicy(TQWidget::StrongFocus);
 
-	QBoxLayout *topLayout = new QVBoxLayout( this, 10 );
+	TQBoxLayout *topLayout = new TQVBoxLayout( this, 10 );
 
-	QGroupBox* vcGroupBox;
-	vcGroupBox = new QGroupBox(  this );
-	vcGroupBox->setFrameStyle( QFrame::NoFrame );
+	TQGroupBox* vcGroupBox;
+	vcGroupBox = new TQGroupBox(  this );
+	vcGroupBox->setFrameStyle( TQFrame::NoFrame );
 	//vcGroupBox->setTitle( i18n("Force Changes To") );
 	//vcGroupBox->setAlignment( 1 );
 
 	topLayout->addWidget( vcGroupBox, 10 );
 
-	QGridLayout *grid = new QGridLayout( vcGroupBox, 3, 2, 10 );
+	TQGridLayout *grid = new TQGridLayout( vcGroupBox, 3, 2, 10 );
 
 	grid->setRowStretch(0,0);
 	grid->setRowStretch(1,10);
@@ -50,41 +50,41 @@ ViewControl::ViewControl( QWidget *parent, const char *name )
 	grid->setColStretch(1,10);
 
 
-	magComboBox = new QComboBox( FALSE, vcGroupBox );
+	magComboBox = new TQComboBox( FALSE, vcGroupBox );
 	magComboBox->setFixedHeight( magComboBox->sizeHint().height() );
 
 
 	//magComboBox->hide();
 
-	connect ( magComboBox, SIGNAL (activated (int)),
-		  this, SLOT (slotMagSelection (int)) );
+	connect ( magComboBox, TQT_SIGNAL (activated (int)),
+		  this, TQT_SLOT (slotMagSelection (int)) );
 	grid->addWidget( magComboBox, 0, 1 );
 
 
 
-	mediaComboBox = new QComboBox( FALSE, vcGroupBox );
+	mediaComboBox = new TQComboBox( FALSE, vcGroupBox );
 	mediaComboBox->setFixedHeight( magComboBox->sizeHint().height() );
 
-	connect ( mediaComboBox, SIGNAL (activated (int)),
-		  this, SLOT (slotMediaSelection (int)) );
+	connect ( mediaComboBox, TQT_SIGNAL (activated (int)),
+		  this, TQT_SLOT (slotMediaSelection (int)) );
 
 	grid->addWidget( mediaComboBox, 1, 1 );
 
-	orientComboBox = new QComboBox( FALSE, vcGroupBox );
+	orientComboBox = new TQComboBox( FALSE, vcGroupBox );
 	orientComboBox->insertItem(i18n("Portrait"));
 	orientComboBox->insertItem(i18n("Landscape"));
 	orientComboBox->insertItem(i18n("Seascape"));
 	orientComboBox->insertItem(i18n("Upside Down"));
 	orientComboBox->setFixedHeight( magComboBox->sizeHint().height() );
 
-	connect ( orientComboBox, SIGNAL (activated (int)),
-		  this, SLOT (slotOrientSelection (int)) );
+	connect ( orientComboBox, TQT_SIGNAL (activated (int)),
+		  this, TQT_SLOT (slotOrientSelection (int)) );
 	grid->addWidget( orientComboBox, 2, 1 );
 
 	int labelWidth = 0;
 
-	QLabel* vcLabel;
-	vcLabel = new QLabel( magComboBox, i18n("&Magnification"), vcGroupBox );
+	TQLabel* vcLabel;
+	vcLabel = new TQLabel( magComboBox, i18n("&Magnification"), vcGroupBox );
 	vcLabel->setAlignment( AlignRight | AlignVCenter | ShowPrefix );
 	if ( vcLabel->sizeHint().width() > labelWidth )
 		labelWidth = vcLabel->sizeHint().width();
@@ -95,7 +95,7 @@ ViewControl::ViewControl( QWidget *parent, const char *name )
 	grid->addWidget( vcLabel, 0, 0 );
 
 
-	vcLabel = new QLabel( mediaComboBox, i18n("M&edia"), vcGroupBox );
+	vcLabel = new TQLabel( mediaComboBox, i18n("M&edia"), vcGroupBox );
 	vcLabel->setAlignment( AlignRight | AlignVCenter | ShowPrefix );
 	if ( vcLabel->sizeHint().width() > labelWidth )
 		labelWidth = vcLabel->sizeHint().width();
@@ -103,7 +103,7 @@ ViewControl::ViewControl( QWidget *parent, const char *name )
 
 	grid->addWidget( vcLabel, 1, 0 );
 
-	vcLabel = new QLabel( orientComboBox, i18n("&Orientation"), vcGroupBox );
+	vcLabel = new TQLabel( orientComboBox, i18n("&Orientation"), vcGroupBox );
 	vcLabel->setAlignment( AlignRight | AlignVCenter | ShowPrefix );
 	if ( vcLabel->sizeHint().width() > labelWidth )
 		labelWidth = vcLabel->sizeHint().width();
@@ -124,10 +124,10 @@ ViewControl::ViewControl( QWidget *parent, const char *name )
 	bbox->addStretch( 10 );
 
 	apply = bbox->addButton( KStdGuiItem::apply() );
-	connect( apply, SIGNAL(clicked()), SLOT(slotApplyClicked()) );
+	connect( apply, TQT_SIGNAL(clicked()), TQT_SLOT(slotApplyClicked()) );
 
-	QPushButton *closebtn = bbox->addButton( KStdGuiItem::close() );
-	connect( closebtn, SIGNAL(clicked()), SLOT(reject()) );
+	TQPushButton *closebtn = bbox->addButton( KStdGuiItem::close() );
+	connect( closebtn, TQT_SIGNAL(clicked()), TQT_SLOT(reject()) );
 
 
 	bbox->layout();

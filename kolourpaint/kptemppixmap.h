@@ -32,8 +32,8 @@
 #define __kp_temp_pixmap_h__
 
 
-#include <qpoint.h>
-#include <qpixmap.h>
+#include <tqpoint.h>
+#include <tqpixmap.h>
 
 class kpViewManager;
 
@@ -53,18 +53,18 @@ public:
      *              not the mouse cursor is inside a view.  If false, the
      *              pixmap is always displayed.
      */
-    kpTempPixmap (bool isBrush, RenderMode renderMode, const QPoint &topLeft, const QPixmap &pixmap);
+    kpTempPixmap (bool isBrush, RenderMode renderMode, const TQPoint &topLeft, const TQPixmap &pixmap);
     kpTempPixmap (const kpTempPixmap &rhs);
     kpTempPixmap &operator= (const kpTempPixmap &rhs);
     ~kpTempPixmap ();
 
     bool isBrush () const;
     RenderMode renderMode () const;
-    QPoint topLeft () const;
-    QPixmap pixmap () const;
+    TQPoint topLeft () const;
+    TQPixmap pixmap () const;
 
     bool isVisible (const kpViewManager *vm) const;
-    QRect rect () const;
+    TQRect rect () const;
     int width () const;
     int height () const;
 
@@ -77,13 +77,13 @@ public:
      * the unzoomed <docRect> of the kpDocument.  You should check for
      * visibility before calling this function.
      */
-    void paint (QPixmap *destPixmap, const QRect &docRect) const;
+    void paint (TQPixmap *destPixmap, const TQRect &docRect) const;
 
 private:
     bool m_isBrush;
     RenderMode m_renderMode;
-    QPoint m_topLeft;
-    QPixmap m_pixmap;
+    TQPoint m_topLeft;
+    TQPixmap m_pixmap;
 };
 
 

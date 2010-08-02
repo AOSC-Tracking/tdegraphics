@@ -29,7 +29,7 @@
 #ifndef __kptoolwidgeterasersize_h__
 #define __kptoolwidgeterasersize_h__
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 #include <kptoolwidgetbase.h>
 
 
@@ -40,11 +40,11 @@ class kpToolWidgetEraserSize : public kpToolWidgetBase
 Q_OBJECT
 
 public:
-    kpToolWidgetEraserSize (QWidget *parent, const char *name);
+    kpToolWidgetEraserSize (TQWidget *parent, const char *name);
     virtual ~kpToolWidgetEraserSize ();
 
     int eraserSize () const;
-    QPixmap cursorPixmap (const kpColor &color) const;
+    TQPixmap cursorPixmap (const kpColor &color) const;
 
 signals:
     void eraserSizeChanged (int size);
@@ -53,7 +53,7 @@ protected slots:
     virtual bool setSelected (int row, int col, bool saveAsDefault);
 
 private:
-    QPixmap *m_cursorPixmaps;
+    TQPixmap *m_cursorPixmaps;
 };
 
 #endif  // __kptoolwidgeterasersize_h__

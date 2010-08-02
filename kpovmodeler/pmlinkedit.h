@@ -18,18 +18,18 @@
 #ifndef PMLINKEDIT_H
 #define PMLINKEDIT_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include "pmobject.h"
 #include "pmdeclare.h"
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
-class QString;
-class QLineEdit;
-class QPushButton;
+class TQString;
+class TQLineEdit;
+class TQPushButton;
 
 /**
- * Edit widget for links with a QLineEdit, a select and a clear button.
+ * Edit widget for links with a TQLineEdit, a select and a clear button.
  */
 class PMLinkEdit : public QWidget
 {
@@ -40,17 +40,17 @@ public:
     *
     * Allows the selection of declares of type declareType.
     */
-   PMLinkEdit( const QString& declareType, QWidget* parent, const char* name = 0 );
+   PMLinkEdit( const TQString& declareType, TQWidget* parent, const char* name = 0 );
    /**
     * Creates a link edit widget with parent and name.
     *
     * Allows the selection of declares of type declares.
     */
-   PMLinkEdit( const QStringList& declares, QWidget* parent, const char* name = 0 );
+   PMLinkEdit( const TQStringList& declares, TQWidget* parent, const char* name = 0 );
    /**
     * Creates a link edit widget with parent and name.
     */
-   PMLinkEdit( QWidget* parent, const char* name = 0 );
+   PMLinkEdit( TQWidget* parent, const char* name = 0 );
 
    /**
     * Sets the displayed object and displays the link
@@ -64,11 +64,11 @@ public:
    /**
     * Sets the selection possibilities
     */
-   void setLinkPossibility( const QString& t );
+   void setLinkPossibility( const TQString& t );
    /**
     * Sets the selection possibilities
     */
-   void setLinkPossibilities( const QStringList& t );
+   void setLinkPossibilities( const TQStringList& t );
    
    /**
     * Enables or disables read only mode
@@ -94,11 +94,11 @@ private:
    void init( );
    PMDeclare* m_pDeclare;
    PMObject* m_pDisplayedObject;
-   QStringList m_declareTypes;
+   TQStringList m_declareTypes;
 
-   QLineEdit* m_pIDEdit;
-   QPushButton* m_pSelectButton;
-   QPushButton* m_pClearButton;
+   TQLineEdit* m_pIDEdit;
+   TQPushButton* m_pSelectButton;
+   TQPushButton* m_pClearButton;
    bool m_bReadOnly;
 };
 

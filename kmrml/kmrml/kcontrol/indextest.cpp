@@ -12,9 +12,9 @@ IndexTest::IndexTest()
 {
     KMrml::Config *config = new KMrml::Config( KGlobal::config() );
     Indexer *indexer = new Indexer( *config, this );
-    connect( indexer, SIGNAL( finished( bool )), SLOT( slotFinished( bool )));
-    connect( indexer, SIGNAL( progress( int, const QString& )),
-             SLOT( slotProgress( int, const QString& )));
+    connect( indexer, TQT_SIGNAL( finished( bool )), TQT_SLOT( slotFinished( bool )));
+    connect( indexer, TQT_SIGNAL( progress( int, const TQString& )),
+             TQT_SLOT( slotProgress( int, const TQString& )));
 
     indexer->startIndexing( "/home/gis/testcoll" );
 }
@@ -29,7 +29,7 @@ void IndexTest::slotFinished( bool success )
     qDebug("##### FINISHED: %i", success );
 }
 
-void IndexTest::slotProgress( int percent, const QString& message )
+void IndexTest::slotProgress( int percent, const TQString& message )
 {
     qDebug("--- progress: %i: %s", percent, message.latin1());
 }

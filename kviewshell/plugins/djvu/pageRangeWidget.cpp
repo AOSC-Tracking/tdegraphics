@@ -23,7 +23,7 @@
 #include "pageRangeWidget.h"
 
 
-PageRangeWidget::PageRangeWidget( Q_UINT16 _from, Q_UINT16 _to, Q_UINT16 _current, QWidget *parent, const char *name) : PageRangeWidget_base(parent, name)
+PageRangeWidget::PageRangeWidget( Q_UINT16 _from, Q_UINT16 _to, Q_UINT16 _current, TQWidget *parent, const char *name) : PageRangeWidget_base(parent, name)
 {
   // Paranoid security checks
   if ((from == 0) || (to == 0))
@@ -41,8 +41,8 @@ PageRangeWidget::PageRangeWidget( Q_UINT16 _from, Q_UINT16 _to, Q_UINT16 _curren
     _current = _to;
   }
 
-  connect(from, SIGNAL(valueChanged(int)), this, SLOT(fromValueChanged(int)));
-  connect(to, SIGNAL(valueChanged(int)), this, SLOT(toValueChanged(int)));
+  connect(from, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(fromValueChanged(int)));
+  connect(to, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(toValueChanged(int)));
 
   from->setRange(_from, _to);
   from->setValue(_current);

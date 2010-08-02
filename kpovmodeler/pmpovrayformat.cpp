@@ -29,7 +29,7 @@ PMPovrayFormat::~PMPovrayFormat( )
 
 }
 
-void PMPovrayFormat::registerMethod( const QString& className,
+void PMPovrayFormat::registerMethod( const TQString& className,
                                      PMPovraySerializeMethod method )
 {
    PMPovraySerializeMethodInfo* info = m_methodDict.find( className );
@@ -40,13 +40,13 @@ void PMPovrayFormat::registerMethod( const QString& className,
    m_methodDict.insert( className, info );
 }
 
-void PMPovrayFormat::removeMethod( const QString& className )
+void PMPovrayFormat::removeMethod( const TQString& className )
 {
    m_methodDict.remove( className );
 }
 
 const PMPovraySerializeMethodInfo* PMPovrayFormat::serializationMethod(
-   const QString& className )
+   const TQString& className )
 {
    return m_methodDict.find( className );
 }

@@ -28,8 +28,8 @@
 #include "pmvector.h"
 #include "pmcolor.h"
 
-#include <qvaluelist.h>
-#include <qvaluestack.h>
+#include <tqvaluelist.h>
+#include <tqvaluestack.h>
 
 /**
  * Class for povray patterns.
@@ -71,9 +71,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMPattern( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString pixmap( ) const { return QString( "pmpattern" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmpattern" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -81,14 +81,14 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /**
     * Gets the pattern type
@@ -116,7 +116,7 @@ public:
    /**
     * Gets the desity file name
     */
-   QString densityFile( ) const { return m_densityFile; }
+   TQString densityFile( ) const { return m_densityFile; }
    /**
     * Gets the density interpolation
     */
@@ -257,7 +257,7 @@ public:
    /**
     * Sets the Density File Name
     */
-   void setDensityFile( const QString& v );
+   void setDensityFile( const TQString& v );
    /**
     * Sets the density interpolation
     */
@@ -402,7 +402,7 @@ private:
    double m_crackleOffset;
    bool m_crackleSolid;
    // density
-   QString m_densityFile;
+   TQString m_densityFile;
    int m_densityInterpolate;
    // gradient
    PMVector m_gradient;

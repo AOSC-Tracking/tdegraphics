@@ -44,7 +44,7 @@ PMLooksLike::~PMLooksLike( )
 }
 
 
-QString PMLooksLike::description( ) const
+TQString PMLooksLike::description( ) const
 {
    return i18n( "looks like" );
 }
@@ -70,7 +70,7 @@ void PMLooksLike::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMLooksLike::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMLooksLike::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
 }
@@ -80,7 +80,7 @@ void PMLooksLike::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMLooksLike::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMLooksLike::editWidget( TQWidget* parent ) const
 {
    return new PMNamedObjectEdit( parent );
 }

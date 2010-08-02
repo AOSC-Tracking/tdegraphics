@@ -53,18 +53,18 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns the name of the object. This is the name that helps
     * the user to identify a object (like "south_wall", "floor" ...) */
-   virtual QString name( ) const { return m_name; }
+   virtual TQString name( ) const { return m_name; }
    /**
     * Sets the name of the object.
     */
-   virtual void setName( const QString& newName );
+   virtual void setName( const TQString& newName );
    /**
     * Returns true if the object can have a name
     */
@@ -81,7 +81,7 @@ private:
    /**
     * Name of the object
     */
-   QString m_name;
+   TQString m_name;
 
    static PMMetaObject* s_pMetaObject;
 };

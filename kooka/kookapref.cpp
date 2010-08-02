@@ -36,12 +36,12 @@
 #include <kcolorbutton.h>
 #include <kstandarddirs.h>
 
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qvgroupbox.h>
-#include <qgrid.h>
-#include <qcheckbox.h>
-#include <qstringlist.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqvgroupbox.h>
+#include <tqgrid.h>
+#include <tqcheckbox.h>
+#include <tqstringlist.h>
 
 #include <devselector.h>
 #include "config.h"
@@ -51,8 +51,8 @@
 #include "ksaneocr.h"
 
 #include <kmessagebox.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqradiobutton.h>
 #include <kurlrequester.h>
 
 KookaPreferences::KookaPreferences()
@@ -74,10 +74,10 @@ void KookaPreferences::setupOCRPage()
 {
     konf->setGroup( CFG_GROUP_OCR_DIA );
 
-    QFrame *page = addPage( i18n("OCR"), i18n("Optical Character Recognition" ),
+    TQFrame *page = addPage( i18n("OCR"), i18n("Optical Character Recognition" ),
 			    BarIcon("ocrImage", KIcon::SizeMedium ) );
 
-    QVBoxLayout *top = new QVBoxLayout( page, 0, spacingHint() );
+    TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
     bool haveGocr = false;
     bool haveOcrad = false;
@@ -86,10 +86,10 @@ void KookaPreferences::setupOCRPage()
     /*
      * Switch ocr engines
      */
-    QButtonGroup *engGroup = new QButtonGroup( 1, Qt::Horizontal, i18n("OCR Engine to Use"), page );
-    m_gocrBut   = new QRadioButton( i18n("GOCR engine")  , engGroup );
-    m_kadmosBut = new QRadioButton( i18n("KADMOS engine"), engGroup );
-    m_ocradBut  = new QRadioButton( i18n("OCRAD engine"), engGroup );
+    TQButtonGroup *engGroup = new TQButtonGroup( 1, Qt::Horizontal, i18n("OCR Engine to Use"), page );
+    m_gocrBut   = new TQRadioButton( i18n("GOCR engine")  , engGroup );
+    m_kadmosBut = new TQRadioButton( i18n("KADMOS engine"), engGroup );
+    m_ocradBut  = new TQRadioButton( i18n("OCRAD engine"), engGroup );
     m_kadmosBut->setChecked(false);
     m_gocrBut->setChecked(false);
     m_ocradBut->setChecked(false);
@@ -98,11 +98,11 @@ void KookaPreferences::setupOCRPage()
     /*
      * GOCR Option Box
      */
-    QVGroupBox *gp = new QVGroupBox( i18n("GOCR OCR"), page );
+    TQVGroupBox *gp = new TQVGroupBox( i18n("GOCR OCR"), page );
     m_urlReqGocr = binaryCheckBox( gp, "gocr" );
-    connect( m_urlReqGocr, SIGNAL( textChanged( const QString& )),
-             this, SLOT( slCheckOnGOCR( const QString& )));
-    QString cmdGocr = tryFindBinary( "gocr", CFG_GOCR_BINARY );
+    connect( m_urlReqGocr, TQT_SIGNAL( textChanged( const TQString& )),
+             this, TQT_SLOT( slCheckOnGOCR( const TQString& )));
+    TQString cmdGocr = tryFindBinary( "gocr", CFG_GOCR_BINARY );
     kdDebug(28000) << "Found gocr command: " << cmdGocr << endl;
     m_gocrBut->setEnabled(false);
     if( !cmdGocr.isEmpty() )
@@ -117,11 +117,11 @@ void KookaPreferences::setupOCRPage()
     /*
      * OCRAD Option Box
      */
-    gp = new QVGroupBox( i18n("OCRAD OCR"), page );
+    gp = new TQVGroupBox( i18n("OCRAD OCR"), page );
     m_urlReqOcrad = binaryCheckBox( gp, "ocrad" );
-    connect( m_urlReqOcrad, SIGNAL( textChanged( const QString& )),
-             this, SLOT( slCheckOnOCRAD( const QString& )));
-    QString cmdOcrad = tryFindBinary( "ocrad", CFG_OCRAD_BINARY );
+    connect( m_urlReqOcrad, TQT_SIGNAL( textChanged( const TQString& )),
+             this, TQT_SLOT( slCheckOnOCRAD( const TQString& )));
+    TQString cmdOcrad = tryFindBinary( "ocrad", CFG_OCRAD_BINARY );
     kdDebug(28000) << "Found ocrad command: " << cmdOcrad << endl;
     m_ocradBut->setEnabled(false);
     if( !cmdOcrad.isEmpty() )
@@ -136,26 +136,26 @@ void KookaPreferences::setupOCRPage()
     /*
      * Global Kadmos Options
      */
-    QVGroupBox *kgp = new QVGroupBox( i18n("KADMOS OCR"), page );
+    TQVGroupBox *kgp = new TQVGroupBox( i18n("KADMOS OCR"), page );
 
 #ifdef HAVE_KADMOS
-    (void) new QLabel( i18n("The KADMOS OCR engine is available"), kgp);
+    (void) new TQLabel( i18n("The KADMOS OCR engine is available"), kgp);
     m_kadmosBut->setChecked(true);
     m_kadmosBut->setEnabled(true);
     haveKadmos = true;
 #else
-    (void) new QLabel( i18n("The KADMOS OCR engine is not available in this version of Kooka"), kgp );
+    (void) new TQLabel( i18n("The KADMOS OCR engine is not available in this version of Kooka"), kgp );
     m_kadmosBut->setEnabled(false);
 #endif
     top->addWidget( kgp );
-    QWidget *spaceEater = new QWidget( page );
-    spaceEater->setSizePolicy( QSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored ));
+    TQWidget *spaceEater = new TQWidget( page );
+    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     top->addWidget( spaceEater );
 
     /*
      *  Now read the config value CFG_OCR_ENGINE and set the radios to the value if available
      */
-    QString useEngine = konf->readEntry( CFG_OCR_ENGINE, "ocrad" );
+    TQString useEngine = konf->readEntry( CFG_OCR_ENGINE, "ocrad" );
     if( useEngine != "notFound" )
     {
         if( useEngine == "gocr" && haveGocr )
@@ -176,56 +176,56 @@ void KookaPreferences::setupOCRPage()
     }
 }
 
-KURLRequester* KookaPreferences::binaryCheckBox( QWidget *parent, const QString& program )
+KURLRequester* KookaPreferences::binaryCheckBox( TQWidget *parent, const TQString& program )
 {
-    QHBox *hbox = new QHBox( parent );
+    TQHBox *hbox = new TQHBox( parent );
 
-    (void) new QLabel( i18n("Select the %1 binary to use:").arg( program ), hbox );
+    (void) new TQLabel( i18n("Select the %1 binary to use:").arg( program ), hbox );
     KURLRequester* urlRequester = new KURLRequester( parent );
     urlRequester->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
 
-    QToolTip::add( urlRequester,
+    TQToolTip::add( urlRequester,
                    i18n( "Enter the path to %1, the optical-character-recognition "
 			 "command line tool.").arg(program));
     return urlRequester;
 }
 
 
-QString KookaPreferences::tryFindGocr( void )
+TQString KookaPreferences::tryFindGocr( void )
 {
    return( tryFindBinary( "gocr", CFG_GOCR_BINARY ) );
 }
 
-QString KookaPreferences::tryFindBinary( const QString& bin, const QString& configKey )
+TQString KookaPreferences::tryFindBinary( const TQString& bin, const TQString& configKey )
 {
 
     /* First check the config files for an entry */
     KConfig *cfg = KGlobal::config();
     cfg->setGroup(CFG_GROUP_OCR_DIA);
-    QString res = cfg->readPathEntry( configKey /* CFG_GOCR_BINARY */, "notFound" );
+    TQString res = cfg->readPathEntry( configKey /* CFG_GOCR_BINARY */, "notFound" );
 
     if( res != "notFound" )
     {
-        QFileInfo fi( res );
+        TQFileInfo fi( res );
         if( fi.exists() && fi.isExecutable() && !fi.isDir() && res.contains(bin) )
         {
             return res;
         }
     }
 
-    res = QString();
+    res = TQString();
 
-    QStringList locations;
+    TQStringList locations;
     locations.append( "/usr/bin/" + bin );
     locations.append( "/bin/" + bin );
     locations.append( "/usr/X11R6/bin/"+bin );
     locations.append( "/usr/local/bin/"+bin );
 
-    for ( QStringList::Iterator it = locations.begin(); it != locations.end(); ++it )
+    for ( TQStringList::Iterator it = locations.begin(); it != locations.end(); ++it )
     {
-        QString cmd = *it;
+        TQString cmd = *it;
         kdDebug(28000) << "checking command " << cmd << endl;
-        QFileInfo fi( cmd );
+        TQFileInfo fi( cmd );
         if( fi.exists() && fi.isExecutable() && !fi.isDir())
         {
             res  = cmd;
@@ -238,7 +238,7 @@ QString KookaPreferences::tryFindBinary( const QString& bin, const QString& conf
 }
 
 
-void KookaPreferences::slCheckOnGOCR( const QString& cmd )
+void KookaPreferences::slCheckOnGOCR( const TQString& cmd )
 {
     if( checkOCRBinIntern( cmd, "gocr", false ))
     {
@@ -251,7 +251,7 @@ void KookaPreferences::slCheckOnGOCR( const QString& cmd )
     }
 }
 
-void KookaPreferences::slCheckOnOCRAD( const QString& cmd )
+void KookaPreferences::slCheckOnOCRAD( const TQString& cmd )
 {
     if( checkOCRBinIntern( cmd, "ocrad", false ))
     {
@@ -265,17 +265,17 @@ void KookaPreferences::slCheckOnOCRAD( const QString& cmd )
 }
 
 #if 0
-void KookaPreferences::checkOCRBinarySilent( const QString& cmd )
+void KookaPreferences::checkOCRBinarySilent( const TQString& cmd )
 {
     // checkOCRBinIntern( cmd, this->sender(), false);
 }
 #endif
-bool KookaPreferences::checkOCRBinIntern( const QString& cmd, const QString& tool, bool show_msg )
+bool KookaPreferences::checkOCRBinIntern( const TQString& cmd, const TQString& tool, bool show_msg )
 {
    if( ! cmd.contains( tool )) return false;
 
    bool ret = true;
-   QFileInfo fi( cmd );
+   TQFileInfo fi( cmd );
    if( ! fi.exists() )
    {
       if( show_msg )
@@ -308,32 +308,32 @@ void KookaPreferences::setupStartupPage()
     /* startup options */
     konf->setGroup( GROUP_STARTUP );
 
-    QFrame *page = addPage( i18n("Startup"), i18n("Kooka Startup Preferences" ),
+    TQFrame *page = addPage( i18n("Startup"), i18n("Kooka Startup Preferences" ),
 			    BarIcon("gear", KIcon::SizeMedium ) );
-    QVBoxLayout *top = new QVBoxLayout( page, 0, spacingHint() );
+    TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
     /* Description-Label */
-    top->addWidget( new QLabel( i18n("Note that changing these options will affect Kooka's next start!"), page ));
+    top->addWidget( new TQLabel( i18n("Note that changing these options will affect Kooka's next start!"), page ));
 
     /* Query for network scanner (Checkbox) */
-    cbNetQuery = new QCheckBox( i18n("Query network for available scanners"),
+    cbNetQuery = new TQCheckBox( i18n("Query network for available scanners"),
 				page,  "CB_NET_QUERY" );
-    QToolTip::add( cbNetQuery,
+    TQToolTip::add( cbNetQuery,
 		   i18n( "Check this if you want a network query for available scanners.\nNote that this does not mean a query over the entire network but only the stations configured for SANE!" ));
     cbNetQuery->setChecked( ! (konf->readBoolEntry( STARTUP_ONLY_LOCAL, false )) );
 
 
     /* Show scanner selection box on startup (Checkbox) */
-    cbShowScannerSelection = new QCheckBox( i18n("Show the scanner selection box on next startup"),
+    cbShowScannerSelection = new TQCheckBox( i18n("Show the scanner selection box on next startup"),
 					    page,  "CB_SHOW_SELECTION" );
-    QToolTip::add( cbShowScannerSelection,
+    TQToolTip::add( cbShowScannerSelection,
 		   i18n( "Check this if you once checked 'do not show the scanner selection on startup',\nbut you want to see it again." ));
 
     cbShowScannerSelection->setChecked( !konf->readBoolEntry( STARTUP_SKIP_ASK, false ));
 
     /* Read startup image on startup (Checkbox) */
-    cbReadStartupImage = new QCheckBox( i18n("Load the last image into the viewer on startup"),
+    cbReadStartupImage = new TQCheckBox( i18n("Load the last image into the viewer on startup"),
 					    page,  "CB_LOAD_ON_START" );
-    QToolTip::add( cbReadStartupImage,
+    TQToolTip::add( cbReadStartupImage,
 		   i18n( "Check this if you want Kooka to load the last selected image into the viewer on startup.\nIf your images are large, that might slow down Kooka's start." ));
     cbReadStartupImage->setChecked( konf->readBoolEntry( STARTUP_READ_IMAGE, true));
 
@@ -350,21 +350,21 @@ void KookaPreferences::setupStartupPage()
 void KookaPreferences::setupSaveFormatPage( )
 {
    konf->setGroup( OP_FILE_GROUP );
-   QFrame *page = addPage( i18n("Image Saving"), i18n("Configure Image Save Assistant" ),
+   TQFrame *page = addPage( i18n("Image Saving"), i18n("Configure Image Save Assistant" ),
 			    BarIcon("filesave", KIcon::SizeMedium ) );
-   QVBoxLayout *top = new QVBoxLayout( page, 0, spacingHint() );
+   TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
    /* Skip the format asking if a format entry  exists */
-   cbSkipFormatAsk = new QCheckBox( i18n("Always display image save assistant"),
+   cbSkipFormatAsk = new TQCheckBox( i18n("Always display image save assistant"),
 				     page,  "CB_IMGASSIST_QUERY" );
    cbSkipFormatAsk->setChecked( konf->readBoolEntry( OP_FILE_ASK_FORMAT, true  ));
-   QToolTip::add( cbSkipFormatAsk, i18n("Check this if you want to see the image save assistant even if there is a default format for the image type." ));
+   TQToolTip::add( cbSkipFormatAsk, i18n("Check this if you want to see the image save assistant even if there is a default format for the image type." ));
    top->addWidget( cbSkipFormatAsk );
 
-   cbFilenameAsk = new QCheckBox( i18n("Ask for filename when saving file"),
+   cbFilenameAsk = new TQCheckBox( i18n("Ask for filename when saving file"),
                     page,  "CB_ASK_FILENAME" );
    cbFilenameAsk->setChecked( konf->readBoolEntry( OP_ASK_FILENAME, false));
-   QToolTip::add( cbFilenameAsk, i18n("Check this if you want to enter a filename when an image has been scanned." ));
+   TQToolTip::add( cbFilenameAsk, i18n("Check this if you want to enter a filename when an image has been scanned." ));
    top->addWidget( cbFilenameAsk );
 
 
@@ -376,20 +376,20 @@ void KookaPreferences::setupThumbnailPage()
 {
    konf->setGroup( THUMB_GROUP );
 
-   QFrame *page = addPage( i18n("Thumbnail View"), i18n("Thumbnail Gallery View" ),
+   TQFrame *page = addPage( i18n("Thumbnail View"), i18n("Thumbnail Gallery View" ),
 			    BarIcon("thumbnail", KIcon::SizeMedium ) );
-   QVBoxLayout *top = new QVBoxLayout( page, 0, spacingHint() );
+   TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
-   top->addWidget( new QLabel( i18n("Here you can configure the appearance of the thumbnail view of your scan picture gallery."),page ));
+   top->addWidget( new TQLabel( i18n("Here you can configure the appearance of the thumbnail view of your scan picture gallery."),page ));
 
    /* Backgroundimage */
    KStandardDirs stdDir;
-   QString bgImg = konf->readPathEntry( BG_WALLPAPER );
+   TQString bgImg = konf->readPathEntry( BG_WALLPAPER );
    if( bgImg.isEmpty() )
       bgImg = stdDir.findResource( "data", STD_TILE_IMG );
 
    /* image file selector */
-   QVGroupBox *hgb1 = new QVGroupBox( i18n("Thumbview Background" ), page );
+   TQVGroupBox *hgb1 = new TQVGroupBox( i18n("Thumbview Background" ), page );
    m_tileSelector = new ImageSelectLine( hgb1, i18n("Select background image:"));
    kdDebug(28000) << "Setting tile url " << bgImg << endl;
    m_tileSelector->setURL( KURL(bgImg) );
@@ -397,42 +397,42 @@ void KookaPreferences::setupThumbnailPage()
    top->addWidget( hgb1 );
 
    /* Add the Boxes to configure size, framestyle and background */
-   QVGroupBox *hgb2 = new QVGroupBox( i18n("Thumbnail Size" ), page );
-   QVGroupBox *hgb3 = new QVGroupBox( i18n("Thumbnail Frame" ), page );
+   TQVGroupBox *hgb2 = new TQVGroupBox( i18n("Thumbnail Size" ), page );
+   TQVGroupBox *hgb3 = new TQVGroupBox( i18n("Thumbnail Frame" ), page );
 
    /* Thumbnail size */
    int w = konf->readNumEntry( PIXMAP_WIDTH, 100);
    int h = konf->readNumEntry( PIXMAP_HEIGHT, 120 );
-   QGrid *lGrid = new QGrid( 2, hgb2 );
+   TQGrid *lGrid = new TQGrid( 2, hgb2 );
    lGrid->setSpacing( 2 );
-   QLabel *l1 = new QLabel( i18n("Thumbnail maximum &width:"), lGrid );
+   TQLabel *l1 = new TQLabel( i18n("Thumbnail maximum &width:"), lGrid );
    m_thumbWidth = new KIntNumInput( w, lGrid );
    m_thumbWidth->setMinValue(1);
    l1->setBuddy( m_thumbWidth );
 
    lGrid->setSpacing( 4 );
-   l1 = new QLabel( i18n("Thumbnail maximum &height:"), lGrid );
+   l1 = new TQLabel( i18n("Thumbnail maximum &height:"), lGrid );
    m_thumbHeight = new KIntNumInput( m_thumbWidth, h, lGrid );
    m_thumbHeight->setMinValue(1);
    l1->setBuddy( m_thumbHeight );
 
    /* Frame Stuff */
    int frameWidth = konf->readNumEntry( THUMB_MARGIN, 3 );
-   QColor col1    = konf->readColorEntry( MARGIN_COLOR1, &(colorGroup().base()));
-   QColor col2    = konf->readColorEntry( MARGIN_COLOR2, &(colorGroup().foreground()));
+   TQColor col1    = konf->readColorEntry( MARGIN_COLOR1, &(colorGroup().base()));
+   TQColor col2    = konf->readColorEntry( MARGIN_COLOR2, &(colorGroup().foreground()));
 
-   QGrid *fGrid = new QGrid( 2, hgb3 );
+   TQGrid *fGrid = new TQGrid( 2, hgb3 );
    fGrid->setSpacing( 2 );
-   l1 = new QLabel(i18n("Thumbnail &frame width:"), fGrid );
+   l1 = new TQLabel(i18n("Thumbnail &frame width:"), fGrid );
    m_frameWidth = new KIntNumInput( frameWidth, fGrid );
    m_frameWidth->setMinValue(0);
    l1->setBuddy( m_frameWidth );
 
-   l1 = new QLabel(i18n("Frame color &1: "), fGrid );
+   l1 = new TQLabel(i18n("Frame color &1: "), fGrid );
    m_colButt1 = new KColorButton( col1, fGrid );
    l1->setBuddy( m_colButt1 );
 
-   l1 = new QLabel(i18n("Frame color &2: "), fGrid );
+   l1 = new TQLabel(i18n("Frame color &2: "), fGrid );
    m_colButt2 = new KColorButton( col2, fGrid );
    l1->setBuddy( m_colButt2 );
    /* TODO: Gradient type */
@@ -457,7 +457,7 @@ void KookaPreferences::slotApply( void )
     /* ** startup options ** */
 
    /** write the global one, to read from libkscan also */
-   konf->setGroup(QString::fromLatin1(GROUP_STARTUP));
+   konf->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool cbVal = !(cbShowScannerSelection->isChecked());
    kdDebug(28000) << "Writing for " << STARTUP_SKIP_ASK << ": " << cbVal << endl;
    konf->writeEntry( STARTUP_SKIP_ASK, cbVal, true, true ); /* global flag goes to kdeglobals */
@@ -490,7 +490,7 @@ void KookaPreferences::slotApply( void )
 
     /* ** OCR Options ** */
     konf->setGroup( CFG_GROUP_OCR_DIA );
-    QString eng( "gocr" );
+    TQString eng( "gocr" );
 
     if( m_ocradBut->isChecked() )
         eng = "ocrad";
@@ -508,7 +508,7 @@ void KookaPreferences::slotApply( void )
 
     konf->writeEntry(CFG_OCR_ENGINE, eng );
 
-    QString path = m_urlReqGocr->url();
+    TQString path = m_urlReqGocr->url();
     if( ! path.isEmpty() )
         konf->writePathEntry( CFG_GOCR_BINARY, path );
 
@@ -528,12 +528,12 @@ void KookaPreferences::slotDefault( void )
     cbReadStartupImage->setChecked( true);
     cbSkipFormatAsk->setChecked( true  );
     KStandardDirs stdDir;
-    QString bgImg = stdDir.findResource( "data", STD_TILE_IMG );
+    TQString bgImg = stdDir.findResource( "data", STD_TILE_IMG );
     m_tileSelector->setURL( KURL(bgImg) );
     m_thumbWidth->setValue( 100 );
     m_thumbHeight->setValue( 120 );
-    QColor col1    = QColor( colorGroup().base());
-    QColor col2    = QColor( colorGroup().foreground());
+    TQColor col1    = TQColor( colorGroup().base());
+    TQColor col2    = TQColor( colorGroup().foreground());
 
     m_frameWidth->setValue( 3 );
     m_colButt1->setColor( col1 );

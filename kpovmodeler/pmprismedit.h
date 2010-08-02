@@ -26,18 +26,18 @@
 
 #include "pmsolidobjectedit.h"
 #include "pmvectoredit.h"
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 
 
 class PMPrism;
 class PMFloatEdit;
 class PMVectorListEdit;
-class QVBoxLayout;
-class QComboBox;
-class QCheckBox;
-class QPushButton;
-class QLabel;
+class TQVBoxLayout;
+class TQComboBox;
+class TQCheckBox;
+class TQPushButton;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMPrism
@@ -50,7 +50,7 @@ public:
    /**
     * Creates a PMPrismEdit with parent and name
     */
-   PMPrismEdit( QWidget* parent, const char* name = 0 );
+   PMPrismEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Destructor
     */
@@ -75,11 +75,11 @@ private:
    /**
     * Displays the spline points
     */
-   void displayPoints( const QValueList< QValueList<PMVector> >& list );
+   void displayPoints( const TQValueList< TQValueList<PMVector> >& list );
    /**
     * Returns the spline points from the vector edits
     */
-   QValueList< QValueList<PMVector> > splinePoints( );
+   TQValueList< TQValueList<PMVector> > splinePoints( );
    /**
     * Deletes the spline point edits
     */
@@ -87,7 +87,7 @@ private:
    /**
     * Creates the edits for the points
     */
-   void createEdits( const QValueList< QValueList<PMVector> >& points );
+   void createEdits( const TQValueList< TQValueList<PMVector> >& points );
 
 protected slots:
    void slotTypeChanged( int );
@@ -101,18 +101,18 @@ protected slots:
    
 private:   
    PMPrism* m_pDisplayedObject;
-   QPtrList< QLabel > m_labels;
-   QPtrList< QPushButton > m_subPrismAddButtons;
-   QPtrList< QPushButton > m_subPrismRemoveButtons;
-   QPtrList< QPushButton > m_addAboveButtons;
-   QPtrList< QPushButton > m_addBelowButtons;
-   QPtrList< QPushButton > m_removeButtons;
-   QPtrList< PMVectorListEdit> m_points;
-   QWidget* m_pEditWidget;
-   QComboBox* m_pSplineType;
-   QComboBox* m_pSweepType;
-   QCheckBox* m_pSturm;
-   QCheckBox* m_pOpen;
+   TQPtrList< TQLabel > m_labels;
+   TQPtrList< TQPushButton > m_subPrismAddButtons;
+   TQPtrList< TQPushButton > m_subPrismRemoveButtons;
+   TQPtrList< TQPushButton > m_addAboveButtons;
+   TQPtrList< TQPushButton > m_addBelowButtons;
+   TQPtrList< TQPushButton > m_removeButtons;
+   TQPtrList< PMVectorListEdit> m_points;
+   TQWidget* m_pEditWidget;
+   TQComboBox* m_pSplineType;
+   TQComboBox* m_pSweepType;
+   TQCheckBox* m_pSturm;
+   TQCheckBox* m_pOpen;
    PMFloatEdit* m_pHeight1;
    PMFloatEdit* m_pHeight2;
    int m_lastSplineType;

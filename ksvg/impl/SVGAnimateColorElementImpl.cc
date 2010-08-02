@@ -75,14 +75,14 @@ void SVGAnimateColorElementImpl::handleTimerEvent()
 	}
 	else
 	{
-		QColor fromColor(m_fromColor->rgbColor().color());
-		QColor toColor(m_toColor->rgbColor().color());
+		TQColor fromColor(m_fromColor->rgbColor().color());
+		TQColor toColor(m_toColor->rgbColor().color());
 	
 		int red = (int) rint(((toColor.red() - fromColor.red()) / static_cast<double>(m_steps)) * m_step + fromColor.red());
 		int green = (int) rint(((toColor.green() - fromColor.green()) / static_cast<double>(m_steps)) * m_step + fromColor.green());
 		int blue = (int) rint(((toColor.blue() - fromColor.blue()) / static_cast<double>(m_steps)) * m_step + fromColor.blue());
 
-		QString color = "rgb(" + QString::number(red) + "," + QString::number(green) + "," + QString::number(blue) + ")";
+		TQString color = "rgb(" + TQString::number(red) + "," + TQString::number(green) + "," + TQString::number(blue) + ")";
 		applyAttribute(getAttributeName(), color);
 	}
 

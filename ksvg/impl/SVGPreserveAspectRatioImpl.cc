@@ -20,8 +20,8 @@
 
 #include <kdebug.h>
 
-#include <qstring.h>
-#include <qstringlist.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
 
 #include "SVGPreserveAspectRatio.h"
 
@@ -68,13 +68,13 @@ unsigned short SVGPreserveAspectRatioImpl::meetOrSlice() const
 	return m_meetOrSlice;
 }
 
-void SVGPreserveAspectRatioImpl::parsePreserveAspectRatio(const QString &str)
+void SVGPreserveAspectRatioImpl::parsePreserveAspectRatio(const TQString &str)
 {
 	// Spec: set the defaults
 	setAlign(SVG_PRESERVEASPECTRATIO_NONE);
 	setMeetOrSlice(SVG_MEETORSLICE_MEET);
 
-	QStringList params = QStringList::split(' ', str.simplifyWhiteSpace());
+	TQStringList params = TQStringList::split(' ', str.simplifyWhiteSpace());
 
 	if(params[0].compare("none") == 0)
 		m_align = SVG_PRESERVEASPECTRATIO_NONE;

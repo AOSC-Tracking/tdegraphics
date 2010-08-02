@@ -28,10 +28,10 @@
 
 class PMHeightField;
 class PMFloatEdit;
-class QCheckBox;
-class QComboBox;
-class QLineEdit;
-class QPushButton;
+class TQCheckBox;
+class TQComboBox;
+class TQLineEdit;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMHeightField
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMHeightFieldEdit with parent and name
     */
-   PMHeightFieldEdit( QWidget* parent, const char* name = 0 );
+   PMHeightFieldEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -60,7 +60,7 @@ protected slots:
    /**
     * Slot called when the file name is changed
     */
-   void slotFileNameChanged( const QString& s );
+   void slotFileNameChanged( const TQString& s );
    /**
     * Slot called when the choose file button is pressed
     */
@@ -74,11 +74,11 @@ protected:
 
 private:
    PMHeightField* m_pDisplayedObject;
-   QComboBox* m_pHeightFieldType;
-   QLineEdit* m_pFileName;
-   QPushButton* m_pChooseFileName;
-   QCheckBox* m_pSmooth;
-   QCheckBox* m_pHierarchy;
+   TQComboBox* m_pHeightFieldType;
+   TQLineEdit* m_pFileName;
+   TQPushButton* m_pChooseFileName;
+   TQCheckBox* m_pSmooth;
+   TQCheckBox* m_pHierarchy;
    PMFloatEdit* m_pWaterLevel;
 
 };

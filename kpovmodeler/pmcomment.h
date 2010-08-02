@@ -21,7 +21,7 @@
 #define PMCOMMENT_H
 
 #include "pmobject.h"
-#include <qstring.h>
+#include <tqstring.h>
 
 
 /**
@@ -39,7 +39,7 @@ public:
    /**
     * Creates a comment with text t
     */
-   PMComment( PMPart* part, const QString& t );
+   PMComment( PMPart* part, const TQString& t );
    /**
     * Copy constructor
     */
@@ -52,11 +52,11 @@ public:
    /**
     * Sets the comment text
     */
-   void setText( const QString& text );
+   void setText( const TQString& text );
    /**
     * Returns the comment text
     */
-   QString text( ) const { return m_text; }
+   TQString text( ) const { return m_text; }
 
    /** */
    virtual PMObject* copy( ) const { return new PMComment( *this ); }
@@ -67,17 +67,17 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /** */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
-   virtual QString pixmap( ) const { return QString( "pmcomment" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmcomment" ); }
    /** */
    virtual void restoreMemento( PMMemento* s );
 private:
@@ -85,7 +85,7 @@ private:
     * IDs for @ref PMMementoData
     */
    enum PMCommentMementoID { PMTextID };
-   QString m_text;
+   TQString m_text;
    static PMMetaObject* s_pMetaObject;
 };
 

@@ -24,8 +24,8 @@
 #include <config.h>
 #endif
 
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 
 /**
  * Helper class for the @ref PMPolynomBaseEdit widget
@@ -117,13 +117,13 @@ public:
    /**
     * Returns the exponents for a polynom with order n ( 2 <= n <= 7 )
     */
-   static QValueList<PMPolynomExponents>& polynom( int n );
+   static TQValueList<PMPolynomExponents>& polynom( int n );
    
 private:
-   static QValueList<PMPolynomExponents> //...
+   static TQValueList<PMPolynomExponents> //...
    recPolynom( const PMPolynomExponents& base, int xyz, int n, int rem );
    static bool m_created[6];
-   static QValueList<PMPolynomExponents> m_lists[6];
+   static TQValueList<PMPolynomExponents> m_lists[6];
 };
 
 #endif

@@ -26,10 +26,10 @@
 #include <kconfig.h>
 #include <kurl.h>
 #include <ktempfile.h>
-#include <qcolor.h>
-#include <qpainter.h>
-#include <qtextstream.h>
-#include <qdragobject.h>
+#include <tqcolor.h>
+#include <tqpainter.h>
+#include <tqtextstream.h>
+#include <tqdragobject.h>
 
 #ifdef KDE_NO_COMPAT
 #undef KDE_NO_COMPAT
@@ -37,10 +37,10 @@
 
 #include <kapplication.h>
 
-QString PMPovrayRenderWidget::s_povrayCommand = c_defaultPovrayCommand;
-QStringList PMPovrayRenderWidget::s_libraryPaths;
+TQString PMPovrayRenderWidget::s_povrayCommand = c_defaultPovrayCommand;
+TQStringList PMPovrayRenderWidget::s_libraryPaths;
 
-PMPovrayRenderWidget::PMPovrayRenderWidget( QWidget* parent, const char* name )
+PMPovrayRenderWidget::PMPovrayRenderWidget( TQWidget* parent, const char* name )
       : PMDragWidget( parent, name )
 {
    m_pProcess = 0;
@@ -50,7 +50,7 @@ PMPovrayRenderWidget::PMPovrayRenderWidget( QWidget* parent, const char* name )
    m_bPixmapUpToDate = false;
    m_pTempFile = 0;
 
-   setBackgroundColor( QColor( 0, 0, 0 ) );
+   setBackgroundColor( TQColor( 0, 0, 0 ) );
 }
 
 PMPovrayRenderWidget::~PMPovrayRenderWidget( )
@@ -58,7 +58,7 @@ PMPovrayRenderWidget::~PMPovrayRenderWidget( )
    cleanup( );
 }
 
-bool PMPovrayRenderWidget::render( const QByteArray& scene,
+bool PMPovrayRenderWidget::render( const TQByteArray& scene,
                                    const PMRenderMode& m,
                                    const KURL& documentURL )
 {
@@ -74,8 +74,8 @@ bool PMPovrayRenderWidget::render( const QByteArray& scene,
    }
 
    // output to tmp file
-   m_pTempFile = new KTempFile( QString::null, ".pov" );
-   QDataStream* dstr = m_pTempFile->dataStream( );
+   m_pTempFile = new KTempFile( TQString::null, ".pov" );
+   TQDataStream* dstr = m_pTempFile->dataStream( );
 
    if( ( m_pTempFile->status( ) != 0 ) || !dstr )
    {
@@ -87,29 +87,29 @@ bool PMPovrayRenderWidget::render( const QByteArray& scene,
    m_pTempFile->close( );
 
    m_pProcess = new KProcess( );
-   connect( m_pProcess, SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-            SLOT( slotPovrayImage( KProcess*, char*, int ) ) );
-   connect( m_pProcess, SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-            SLOT( slotPovrayMessage( KProcess*, char*, int ) ) );
-   connect( m_pProcess, SIGNAL( processExited( KProcess* ) ),
-            SLOT( slotRenderingFinished( KProcess* ) ) );
+   connect( m_pProcess, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
+            TQT_SLOT( slotPovrayImage( KProcess*, char*, int ) ) );
+   connect( m_pProcess, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
+            TQT_SLOT( slotPovrayMessage( KProcess*, char*, int ) ) );
+   connect( m_pProcess, TQT_SIGNAL( processExited( KProcess* ) ),
+            TQT_SLOT( slotRenderingFinished( KProcess* ) ) );
 
    *m_pProcess << s_povrayCommand;
 
-   QStringList::ConstIterator it;
-   QStringList args = m_renderMode.commandLineSwitches( );
+   TQStringList::ConstIterator it;
+   TQStringList args = m_renderMode.commandLineSwitches( );
    for( it = args.begin( ); it != args.end( ); ++it )
       *m_pProcess << *it;
 
    for( it = s_libraryPaths.begin( ); it != s_libraryPaths.end( ); ++it )
    {
-      QString path = *it;
-      if( path != QString( "/" ) )
-         if( path.right( 1 ) == QString( "/" ) )
+      TQString path = *it;
+      if( path != TQString( "/" ) )
+         if( path.right( 1 ) == TQString( "/" ) )
             path.truncate( path.length( ) - 1 );
-      *m_pProcess << ( QString( "+L" ) + path );
+      *m_pProcess << ( TQString( "+L" ) + path );
    }
-   *m_pProcess << QString( "+I" ) + m_pTempFile->name( ) << "+O-" << "+FT"
+   *m_pProcess << TQString( "+I" ) + m_pTempFile->name( ) << "+O-" << "+FT"
                << "+K0.0" << "+KFI1" << "+KFF1" << "+KI0.0" << "+KF0.0"
                << "+SF1" << "+EF1" << "-KC" << "-D";
 
@@ -182,7 +182,7 @@ void PMPovrayRenderWidget::resumeRendering( )
 void PMPovrayRenderWidget::slotPovrayMessage( KProcess*,
                                               char* buffer, int buflen )
 {
-   QString str;
+   TQString str;
    str.setLatin1( buffer, buflen );
    m_povrayOutput += str;
    emit povrayMessage( str );
@@ -289,7 +289,7 @@ void PMPovrayRenderWidget::slotPovrayImage( KProcess*, char* buffer, int buflen 
 
    if( m_line != oldLine )
    {
-      QPainter paint( this );
+      TQPainter paint( this );
       int offset = 0;
       if( m_renderMode.subSection( ) )
       {
@@ -367,7 +367,7 @@ void PMPovrayRenderWidget::slotRenderingFinished( KProcess* )
    cleanup( );
 }
 
-void PMPovrayRenderWidget::paintEvent( QPaintEvent* ev )
+void PMPovrayRenderWidget::paintEvent( TQPaintEvent* ev )
 {
    if( !m_bPixmapUpToDate )
    {
@@ -393,11 +393,11 @@ void PMPovrayRenderWidget::cleanup( )
    m_pTempFile = 0;
 }
 
-QSize PMPovrayRenderWidget::sizeHint( ) const
+TQSize PMPovrayRenderWidget::sizeHint( ) const
 {
-   QSize s;
+   TQSize s;
    if( m_image.isNull( ) )
-      s = QSize( 200, 200 );
+      s = TQSize( 200, 200 );
    else
       s = m_image.size( );
 
@@ -430,7 +430,7 @@ void PMPovrayRenderWidget::restoreConfig( KConfig* cfg )
 
 void PMPovrayRenderWidget::startDrag( )
 {
-   QImageDrag* d = new QImageDrag( m_image, this );
+   TQImageDrag* d = new TQImageDrag( m_image, this );
    d->dragCopy( );
 }
 

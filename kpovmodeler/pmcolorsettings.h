@@ -36,7 +36,7 @@ public:
    /**
     * Default constructor
     */
-   PMColorSettings( QWidget* parent, const char* name = 0 );
+   PMColorSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

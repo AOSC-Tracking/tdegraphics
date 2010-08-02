@@ -10,12 +10,12 @@
 #ifndef _PAGEVIEW_UTILS_H
 #define _PAGEVIEW_UTILS_H
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qrect.h>
+#include <tqwidget.h>
+#include <tqpixmap.h>
+#include <tqpainter.h>
+#include <tqrect.h>
 
-class QTimer;
+class TQTimer;
 
 class PageView;
 class KPDFPage;
@@ -33,7 +33,7 @@ class PageViewItem
 
         const KPDFPage * page() const;
         int pageNumber() const;
-        const QRect& geometry() const;
+        const TQRect& geometry() const;
         int width() const;
         int height() const;
         double zoomFactor() const;
@@ -45,7 +45,7 @@ class PageViewItem
     private:
         const KPDFPage * m_page;
         double m_zoomFactor;
-        QRect m_geometry;
+        TQRect m_geometry;
 };
 
 
@@ -55,18 +55,18 @@ class PageViewItem
 class PageViewMessage : public QWidget
 {
     public:
-        PageViewMessage( QWidget * parent );
+        PageViewMessage( TQWidget * parent );
 
         enum Icon { None, Info, Warning, Error, Find };
-        void display( const QString & message, Icon icon = Info, int durationMs = 4000 );
+        void display( const TQString & message, Icon icon = Info, int durationMs = 4000 );
 
     protected:
-        void paintEvent( QPaintEvent * e );
-        void mousePressEvent( QMouseEvent * e );
+        void paintEvent( TQPaintEvent * e );
+        void mousePressEvent( TQMouseEvent * e );
 
     private:
-        QPixmap m_pixmap;
-        QTimer * m_timer;
+        TQPixmap m_pixmap;
+        TQTimer * m_timer;
 };
 
 #endif

@@ -29,11 +29,11 @@
 class PMLight;
 class PMVectorEdit;
 class PMColorEdit;
-class QComboBox;
+class TQComboBox;
 class PMFloatEdit;
 class PMIntEdit;
-class QLabel;
-class QCheckBox;
+class TQLabel;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMLight
@@ -46,7 +46,7 @@ public:
    /**
     * Creates a PMLightEdit with parent and name
     */
-   PMLightEdit( QWidget* parent, const char* name = 0 );
+   PMLightEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -73,42 +73,42 @@ private:
    PMLight* m_pDisplayedObject;
    PMVectorEdit* m_pLocation;
    PMColorEdit* m_pColor;
-   QComboBox* m_pType;
+   TQComboBox* m_pType;
    
    PMFloatEdit* m_pRadius;
-   QLabel* m_pRadiusLabel;
+   TQLabel* m_pRadiusLabel;
    PMFloatEdit* m_pFalloff;
-   QLabel* m_pFalloffLabel;
+   TQLabel* m_pFalloffLabel;
    PMFloatEdit* m_pTightness;
-   QLabel* m_pTightnessLabel;
+   TQLabel* m_pTightnessLabel;
    
    PMVectorEdit* m_pPointAt;
-   QLabel* m_pPointAtLabel;
-   QCheckBox* m_pParallel;
+   TQLabel* m_pPointAtLabel;
+   TQCheckBox* m_pParallel;
 
-   QCheckBox* m_pAreaLight;
-   QLabel* m_pAreaTypeLabel;
-   QComboBox* m_pAreaType;
+   TQCheckBox* m_pAreaLight;
+   TQLabel* m_pAreaTypeLabel;
+   TQComboBox* m_pAreaType;
    PMVectorEdit* m_pAxis1;
    PMIntEdit* m_pSize1;
    PMVectorEdit* m_pAxis2;
    PMIntEdit* m_pSize2;
-   QLabel* m_pAxis1Label;
-   QLabel* m_pAxis2Label;
-   QLabel* m_pSize1Label;
-   QLabel* m_pSize2Label;
+   TQLabel* m_pAxis1Label;
+   TQLabel* m_pAxis2Label;
+   TQLabel* m_pSize1Label;
+   TQLabel* m_pSize2Label;
    PMIntEdit* m_pAdaptive;
-   QLabel* m_pAdaptiveLabel;
-   QCheckBox* m_pOrient;
-   QCheckBox* m_pJitter;
+   TQLabel* m_pAdaptiveLabel;
+   TQCheckBox* m_pOrient;
+   TQCheckBox* m_pJitter;
 
-   QCheckBox* m_pFading;
+   TQCheckBox* m_pFading;
    PMFloatEdit* m_pFadeDistance;
-   QLabel* m_pFadeDistanceLabel;
+   TQLabel* m_pFadeDistanceLabel;
    PMIntEdit* m_pFadePower;
-   QLabel* m_pFadePowerLabel;
-   QCheckBox* m_pMediaInteraction;
-   QCheckBox* m_pMediaAttenuation;
+   TQLabel* m_pFadePowerLabel;
+   TQCheckBox* m_pMediaInteraction;
+   TQCheckBox* m_pMediaAttenuation;
 };
 
 

@@ -161,12 +161,12 @@ PMBicubicPatch::~PMBicubicPatch( )
 {
 }
 
-QString PMBicubicPatch::description( ) const
+TQString PMBicubicPatch::description( ) const
 {
    return i18n( "bicubic patch" );
 }
 
-void PMBicubicPatch::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMBicubicPatch::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    int i;
 
@@ -177,10 +177,10 @@ void PMBicubicPatch::serialize( QDomElement& e, QDomDocument& doc ) const
    e.setAttribute( "uvEnabled", m_uvEnabled );
 
    for( i = 0; i < 16; i++ )
-      e.setAttribute( QString( "cp%1" ).arg( i ), m_point[i].serializeXML( ) );
+      e.setAttribute( TQString( "cp%1" ).arg( i ), m_point[i].serializeXML( ) );
 
    for( i = 0; i < 4; ++i )
-      e.setAttribute( QString( "uv%1" ).arg( i ), m_uvVectors[i].serializeXML( ) );
+      e.setAttribute( TQString( "uv%1" ).arg( i ), m_uvVectors[i].serializeXML( ) );
 
    Base::serialize( e, doc );
 }
@@ -198,7 +198,7 @@ void PMBicubicPatch::readAttributes( const PMXMLHelper& h )
 
    for( v = 0; v < 4; v++ )
       for( u = 0; u < 4; u++ )
-         m_point[u+v*4] = h.vectorAttribute( QString( "cp%1" ).arg( u+v*4 ),
+         m_point[u+v*4] = h.vectorAttribute( TQString( "cp%1" ).arg( u+v*4 ),
                                       PMVector( o + s * u, 0, o + s * v ) );
 
    m_uvVectors[0] = h.vectorAttribute( "uv0", c_defaultUVVector0 );
@@ -365,7 +365,7 @@ PMVector PMBicubicPatch::uvVector( int i ) const
    return PMVector( 0.0, 0.0 );
 }
 
-PMDialogEditBase* PMBicubicPatch::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBicubicPatch::editWidget( TQWidget* parent ) const
 {
    return new PMBicubicPatchEdit( parent );
 }

@@ -23,7 +23,7 @@
 
 #include <dom/dom_string.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
 #include "SVGTestsImpl.h"
 #include "SVGElementImpl.h"
@@ -91,7 +91,7 @@ public:
 	float currentScale() const;
 
 	SVGPointImpl *currentTranslate();
-	void setCurrentTranslate(const QPoint &p);
+	void setCurrentTranslate(const TQPoint &p);
 
 	unsigned long suspendRedraw(unsigned long max_wait_milliseconds);
 	void unsuspendRedraw(unsigned long suspend_handle_id);
@@ -122,19 +122,19 @@ public:
 	static SVGTransformImpl *createSVGTransformFromMatrix(SVGMatrixImpl *matrix);
 
 	SVGElementImpl *getElementById(const DOM::DOMString &elementId);
-	void addToIdMap(const QString &id, SVGElementImpl *obj);
+	void addToIdMap(const TQString &id, SVGElementImpl *obj);
 
 	virtual SVGMatrixImpl *getCTM();
 	virtual const SVGMatrixImpl *localMatrix();
 
 	void setAttributes();
 
-	bool prepareMouseEvent(const QPoint &p, const QPoint &a, SVGMouseEventImpl *event);
+	bool prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *event);
 
 	virtual bool isContainer() const { return true; }
 
-	virtual void setClip(const QString &clip);
-	virtual QRect clip();
+	virtual void setClip(const TQString &clip);
+	virtual TQRect clip();
 
 	void setRootParentScreenCTM(SVGMatrixImpl *screenCTM);
 
@@ -156,7 +156,7 @@ private:
 
 	SVGLengthImpl *m_clip[4];
 
-	QMap<QString, SVGElementImpl *> m_map;
+	TQMap<TQString, SVGElementImpl *> m_map;
 
 	// Transformation provided by the 'parent' of the outermost svg element
 	SVGMatrixImpl *m_rootParentScreenCTM;

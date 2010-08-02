@@ -29,7 +29,7 @@
 #ifndef __kp_thumbnail_h__
 #define __kp_thumbnail_h__
 
-#include <qdockwindow.h>
+#include <tqdockwindow.h>
 
 class kpMainWindow;
 class kpThumbnailView;
@@ -56,8 +56,8 @@ protected slots:
     void slotViewDestroyed ();
 
 protected:
-    virtual void resizeEvent (QResizeEvent *e);
-    virtual void moveEvent (QMoveEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
+    virtual void moveEvent (TQMoveEvent *e);
 
 private:
     kpMainWindow *m_mainWindow;

@@ -40,16 +40,16 @@ class kpToolAction : public KToggleAction,
 Q_OBJECT
 
 public:
-    kpToolAction (const QString &text,
-        const QString &pic, const KShortcut &shortcut,
-        const QObject *receiver, const char *slot,
-        QObject *parent, const char *name);
+    kpToolAction (const TQString &text,
+        const TQString &pic, const KShortcut &shortcut,
+        const TQObject *receiver, const char *slot,
+        TQObject *parent, const char *name);
     virtual ~kpToolAction ();
 
 
 signals:
     // Not emitted when toolTip is manually overriden by setToolTip()
-    void toolTipChanged (const QString &string);
+    void toolTipChanged (const TQString &string);
 
 protected:
     void updateToolTip ();
@@ -60,7 +60,7 @@ protected:
     //
 
 public slots:
-    virtual void setText (const QString &text);
+    virtual void setText (const TQString &text);
     virtual bool setShortcut (const KShortcut &shortcut);
 
 

@@ -20,9 +20,9 @@
 #ifndef PMSCANNER_H
 #define PMSCANNER_H
 
-#include <qiodevice.h>
-#include <qstring.h>
-#include <qasciidict.h>
+#include <tqiodevice.h>
+#include <tqstring.h>
+#include <tqasciidict.h>
 
 /**
  * Dictionary of reserved words for fast lookup
@@ -30,7 +30,7 @@
  * The class @ref PMScanner has two static dictionaries: one for reserved
  * words and one for directives. The constructor will insert the items.
  */
-class PMReservedWordDict : protected QAsciiDict<int>
+class PMReservedWordDict : protected TQAsciiDict<int>
 {
 public:
    /**
@@ -55,7 +55,7 @@ public:
     */
    int find( const char* key ) const
    {
-      int* result = QAsciiDict<int>::find( key );
+      int* result = TQAsciiDict<int>::find( key );
       if( result )
          return *result;
       return -1;
@@ -70,9 +70,9 @@ class PMScanner
 {
 public:
    /**
-    * Creates a scanner that scans the QIODevice device
+    * Creates a scanner that scans the TQIODevice device
     */
-   PMScanner( QIODevice* device );
+   PMScanner( TQIODevice* device );
    /**
     * Deletes the scanner
     */
@@ -110,7 +110,7 @@ public:
    /**
     * Returns the error string if current token is SCANNER_ERROR_TOK
     */
-   QString error( ) const { return m_error; }
+   TQString error( ) const { return m_error; }
    /**
     * Special parse method for a function statement
     */
@@ -168,7 +168,7 @@ private:
       TOKEN_END_ST
    };
 
-   QIODevice* m_pDevice;
+   TQIODevice* m_pDevice;
 
    int m_char;
    int m_token;
@@ -184,7 +184,7 @@ private:
    bool m_bFunctionMode;
 
    int m_line;
-   QString m_error;
+   TQString m_error;
 };
 
 

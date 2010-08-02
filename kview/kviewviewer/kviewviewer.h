@@ -23,7 +23,7 @@
 #include "kimageviewer/viewer.h"
 #include "kviewkonqextension.h"
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 #include "kviewvieweriface.h"
 #include <kdemacros.h>
 
@@ -36,11 +36,11 @@ class KActionMenu;
 class KToggleAction;
 class KSelectAction;
 class KAboutData;
-class QBuffer;
-class QSize;
+class TQBuffer;
+class TQSize;
 class KDirWatch;
 template<class T>
-class QCache;
+class TQCache;
 
 class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIface
 {
@@ -48,8 +48,8 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 	friend class KViewKonqExtension;
 
 	public:
-		KViewViewer( QWidget * parentWidget, const char * widgetName,
-				QObject * parent, const char * name, const QStringList & );
+		KViewViewer( TQWidget * parentWidget, const char * widgetName,
+				TQObject * parent, const char * name, const TQStringList & );
 		virtual ~KViewViewer();
 
 		KImageViewer::Canvas * canvas() const { return m_pCanvas; }
@@ -63,11 +63,11 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 	public slots:
 		virtual bool openURL( const KURL & );
 		virtual bool closeURL();
-		virtual void newImage( const QImage & );
+		virtual void newImage( const TQImage & );
 		virtual void reload();
 
 	protected:
-		bool eventFilter( QObject *, QEvent * ); // for DnD
+		bool eventFilter( TQObject *, TQEvent * ); // for DnD
 		void abortLoad();
 		virtual bool openFile();
 		virtual bool saveFile();
@@ -81,13 +81,13 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		void readSettings();
 		void zoomChanged( double );
 		void slotJobFinished( KIO::Job * );
-		void slotData( KIO::Job *, const QByteArray & );
+		void slotData( KIO::Job *, const TQByteArray & );
 
 		void slotSave();
 		void slotSaveAs();
 		void slotZoomIn();
 		void slotZoomOut();
-		void setZoom( const QString & );
+		void setZoom( const TQString & );
 		void updateZoomMenu( double zoom );
 		void slotFlipH();
 		void slotFlipV();
@@ -96,10 +96,10 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		void slotFitToWin();
 		void slotDel();
 
-		void slotPopupMenu( const QPoint & );
+		void slotPopupMenu( const TQPoint & );
 		void slotResultSaveAs( KIO::Job * );
 
-		void slotFileDirty( const QString & );
+		void slotFileDirty( const TQString & );
 		void slotReloadUnmodified();
 
 		void slotToggleScrollbars();
@@ -110,12 +110,12 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		void hasImage( bool );
 
 	private:
-		QWidget * m_pParentWidget;
+		TQWidget * m_pParentWidget;
 		KIO::Job * m_pJob;
 		KViewKonqExtension * m_pExtension;
 		KImageViewer::Canvas * m_pCanvas;
 		KTempFile * m_pTempFile;
-		QBuffer * m_pBuffer;
+		TQBuffer * m_pBuffer;
 		KDirWatch * m_pFileWatch;
 
 		// Actions:
@@ -132,12 +132,12 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		KAction * m_paFitToWin;
 		KToggleAction * m_paShowScrollbars;
 
-		QString m_popupDoc;
-		QString m_mimeType;
-		QString m_newMimeType;
-		QString m_sCaption;
+		TQString m_popupDoc;
+		TQString m_mimeType;
+		TQString m_newMimeType;
+		TQString m_sCaption;
 		
-		QValueVector<unsigned int> m_vEffects;
+		TQValueVector<unsigned int> m_vEffects;
 };
 
 // vim:sw=4:ts=4

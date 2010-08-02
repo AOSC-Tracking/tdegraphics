@@ -21,22 +21,22 @@
 
 #include <kdeprint/kprintdialogpage.h>
 
-class QCheckBox;
+class TQCheckBox;
 
 class ImageSettings : public KPrintDialogPage
 {
 	Q_OBJECT
 	public:
-		ImageSettings( QWidget * parent = 0, const char * name = 0 );
+		ImageSettings( TQWidget * parent = 0, const char * name = 0 );
 		~ImageSettings();
 
-		void setOptions( const QMap<QString, QString> & opts );
-		void getOptions( QMap<QString, QString> & opts, bool include_def = false );
-		bool isValid( QString & msg );
+		void setOptions( const TQMap<TQString, TQString> & opts );
+		void getOptions( TQMap<TQString, TQString> & opts, bool include_def = false );
+		bool isValid( TQString & msg );
 
 	private:
-		QCheckBox * m_pFitImage;
-		QCheckBox * m_pCenter;
+		TQCheckBox * m_pFitImage;
+		TQCheckBox * m_pCenter;
 };
 
 // vim:sw=4:ts=4

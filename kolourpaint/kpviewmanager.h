@@ -29,15 +29,15 @@
 #ifndef __kpviewmanager_h__
 #define __kpviewmanager_h__
 
-#include <qcursor.h>
-#include <qobject.h>
-#include <qptrlist.h>
-#include <qrect.h>
+#include <tqcursor.h>
+#include <tqobject.h>
+#include <tqptrlist.h>
+#include <tqrect.h>
 
 
-class QPixmap;
-class QRect;
-class QTimer;
+class TQPixmap;
+class TQRect;
+class TQTimer;
 
 class kpDocument;
 class kpView;
@@ -99,7 +99,7 @@ public:
 protected:
     void updateTextCursor ();
 
-    QTimer *m_textCursorBlinkTimer;
+    TQTimer *m_textCursorBlinkTimer;
     int m_textCursorRow, m_textCursorCol;
     bool m_textCursorBlinkState;
 
@@ -112,7 +112,7 @@ public:
     // Cursors
     //
 
-    void setCursor (const QCursor &cursor);
+    void setCursor (const TQCursor &cursor);
     void unsetCursor ();
 
 
@@ -123,9 +123,9 @@ public:
     kpView *viewUnderCursor (bool usingQt = false) const;
 
     //
-    // QWidget::hasMouse() is unreliable:
+    // TQWidget::hasMouse() is unreliable:
     //
-    // "bool QWidget::hasMouse () const
+    // "bool TQWidget::hasMouse () const
     //  ... See the "underMouse" property for details.
     //         .
     //         .
@@ -154,7 +154,7 @@ public:
     // before multiple, big, non-interactive changes to the
     // document to eliminate virtually all flicker.
     //
-    // This is better than QWidget::setUpdatesEnabled() because
+    // This is better than TQWidget::setUpdatesEnabled() because
     // restoreQueueUpdates() automatically restores only the regions
     // of the views that need to be repainted, per view.
     bool queueUpdates () const;
@@ -163,7 +163,7 @@ public:
 
     // Controls behaviour of updateViews():
     //
-    // Slow: Let Qt buffer paint events via QWidget::update().
+    // Slow: Let Qt buffer paint events via TQWidget::update().
     //       Results in less flicker.  Paint events are probably merged
     //       so long-term efficiency is increased at the expense of
     //       reduced responsiveness (default).
@@ -183,13 +183,13 @@ private:
 public slots:
     // updating views
     void updateView (kpView *v);
-    void updateView (kpView *v, const QRect &viewRect);
+    void updateView (kpView *v, const TQRect &viewRect);
     void updateView (kpView *v, int x, int y, int w, int h);
-    void updateView (kpView *v, const QRegion &viewRegion);
-    void updateViewRectangleEdges (kpView *v, const QRect &viewRect);
+    void updateView (kpView *v, const TQRegion &viewRegion);
+    void updateViewRectangleEdges (kpView *v, const TQRect &viewRect);
 
     void updateViews ();
-    void updateViews (const QRect &docRect);
+    void updateViews (const TQRect &docRect);
     void updateViews (int x, int y, int w, int h);
 
     void adjustViewsToEnvironment ();
@@ -202,8 +202,8 @@ private:
     kpDocument *document () const;
 
     kpMainWindow *m_mainWindow;
-    QPtrList <kpView> m_views;
-    QCursor m_cursor;
+    TQPtrList <kpView> m_views;
+    TQCursor m_cursor;
 
     kpTempPixmap *m_tempPixmap;
     kpView *m_viewUnderCursor;

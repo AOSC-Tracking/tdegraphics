@@ -32,15 +32,15 @@ class KSimpleConfig;
 class KameraProtocol : public KIO::SlaveBase
 {
 public:
-	KameraProtocol(const QCString &pool, const QCString &app);
+	KameraProtocol(const TQCString &pool, const TQCString &app);
 	virtual ~KameraProtocol();
 
 	virtual void get(const KURL &url);
 	virtual void stat(const KURL &url);
 	virtual void del(const KURL &url, bool isFile);
-	virtual void setHost(const QString& host, int port, const QString& user, const QString& pass );
+	virtual void setHost(const TQString& host, int port, const TQString& user, const TQString& pass );
 	virtual void listDir(const KURL &url);
-	virtual void special(const QByteArray &data);
+	virtual void special(const TQByteArray &data);
 
 	CameraFile *getFile() { return m_file; }
 	int getFileSize() { return m_fileSize; }
@@ -54,24 +54,24 @@ private:
 	GPContext	*m_context;
 
 	void reparseConfiguration(void);
-	bool openCamera(QString& str);
+	bool openCamera(TQString& str);
 	bool openCamera(void ) {
-		QString errstr;
+		TQString errstr;
 		return openCamera(errstr);
 	}
 	void closeCamera(void);
 
 	void statRoot(void);
 	void statRegular(const KURL &url);
-	void translateTextToUDS(KIO::UDSEntry &udsEntry, const QString &info, const char *txt);
-	void translateFileToUDS(KIO::UDSEntry &udsEntry, const CameraFileInfo &info, QString name);
-	void translateDirectoryToUDS(KIO::UDSEntry &udsEntry, const QString &dirname);
+	void translateTextToUDS(KIO::UDSEntry &udsEntry, const TQString &info, const char *txt);
+	void translateFileToUDS(KIO::UDSEntry &udsEntry, const CameraFileInfo &info, TQString name);
+	void translateDirectoryToUDS(KIO::UDSEntry &udsEntry, const TQString &dirname);
 	bool cameraSupportsPreview(void);
 	bool cameraSupportsDel(void);
 	bool cameraSupportsPut(void);
-	int readCameraFolder(const QString &folder, CameraList *dirList, CameraList *fileList);
+	int readCameraFolder(const TQString &folder, CameraList *dirList, CameraList *fileList);
 
-	QString m_lockfile;
+	TQString m_lockfile;
 	int	idletime;
 
 	int m_fileSize;

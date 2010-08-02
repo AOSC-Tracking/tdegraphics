@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMBoxEdit with parent and name
     */
-   PMBoxEdit( QWidget* parent, const char* name = 0 );
+   PMBoxEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

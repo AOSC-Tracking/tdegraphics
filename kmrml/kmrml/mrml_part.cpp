@@ -16,16 +16,16 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qcursor.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qgrid.h>
-#include <qhgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
-#include <qvbox.h>
+#include <tqcheckbox.h>
+#include <tqcursor.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqgrid.h>
+#include <tqhgroupbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
+#include <tqvbox.h>
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -90,12 +90,12 @@ KInstance * PartFactory::instance()
     return s_instance;
 }
 
-KParts::Part * PartFactory::createPartObject( QWidget *parentWidget,
+KParts::Part * PartFactory::createPartObject( TQWidget *parentWidget,
                                               const char *widgetName,
-                                              QObject *parent,
+                                              TQObject *parent,
                                               const char *name,
                                               const char *,
-                                              const QStringList& args )
+                                              const TQStringList& args )
 {
     return new MrmlPart( parentWidget, widgetName, parent, name, args );
 }
@@ -111,14 +111,14 @@ KParts::Part * PartFactory::createPartObject( QWidget *parentWidget,
 
 uint MrmlPart::s_sessionId = 0;
 
-MrmlPart::MrmlPart( QWidget *parentWidget, const char * /* widgetName */,
-                    QObject *parent, const char *name,
-                    const QStringList& /* args */ )
+MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
+                    TQObject *parent, const char *name,
+                    const TQStringList& /* args */ )
     : KParts::ReadOnlyPart( parent, name ),
       m_job( 0L ),
       m_status( NeedCollection )
 {
-    m_sessionId = QString::number( s_sessionId++ ).prepend("kmrml_");
+    m_sessionId = TQString::number( s_sessionId++ ).prepend("kmrml_");
 
     setName( "MRML Part" );
     m_browser = new Browser( this, "mrml browserextension");
@@ -126,59 +126,59 @@ MrmlPart::MrmlPart( QWidget *parentWidget, const char * /* widgetName */,
     KConfig *config = PartFactory::instance()->config();
     config->setGroup("MRML Settings");
 
-    QVBox *box = new QVBox( parentWidget, "main mrml box" );
+    TQVBox *box = new TQVBox( parentWidget, "main mrml box" );
     m_view = new MrmlView( box, "MrmlView" );
-    connect( m_view, SIGNAL( activated( const KURL&, ButtonState )),
-             this, SLOT( slotActivated( const KURL&, ButtonState )));
-    connect( m_view, SIGNAL( onItem( const KURL& )),
-             this, SLOT( slotSetStatusBar( const KURL& )));
+    connect( m_view, TQT_SIGNAL( activated( const KURL&, ButtonState )),
+             this, TQT_SLOT( slotActivated( const KURL&, ButtonState )));
+    connect( m_view, TQT_SIGNAL( onItem( const KURL& )),
+             this, TQT_SLOT( slotSetStatusBar( const KURL& )));
 
-    m_panel = new QHGroupBox( box, "buttons box" );
+    m_panel = new TQHGroupBox( box, "buttons box" );
 
-    QGrid *comboGrid = new QGrid( 2, m_panel, "combo grid" );
+    TQGrid *comboGrid = new TQGrid( 2, m_panel, "combo grid" );
     comboGrid->setSpacing( KDialog::spacingHint() );
 
-    (void) new QLabel( i18n("Server to query:"), comboGrid );
+    (void) new TQLabel( i18n("Server to query:"), comboGrid );
 
     m_hostCombo = new KComboBox( false, comboGrid, "host combo" );
     initHostCombo();
-    connect( m_hostCombo, SIGNAL( activated( const QString& ) ),
-             SLOT( slotHostComboActivated( const QString& )));
+    connect( m_hostCombo, TQT_SIGNAL( activated( const TQString& ) ),
+             TQT_SLOT( slotHostComboActivated( const TQString& )));
 
-    (void) new QLabel( i18n("Search in collection:"), comboGrid );
+    (void) new TQLabel( i18n("Search in collection:"), comboGrid );
     m_collectionCombo = new CollectionCombo( comboGrid, "collection-combo" );
     // will be re-set in initCollections(), but we need to set it here to
     // prevent crashes when the connection to the server fails
     m_collectionCombo->setCollections( &m_collections );
 
-    m_algoButton = new QPushButton( QString::null, m_panel );
+    m_algoButton = new TQPushButton( TQString::null, m_panel );
     m_algoButton->setPixmap( SmallIcon("configure") );
     m_algoButton->setFixedSize( m_algoButton->sizeHint() );
-    connect( m_algoButton, SIGNAL( clicked() ),
-             SLOT( slotConfigureAlgorithm() ));
-    QToolTip::add( m_algoButton, i18n("Configure algorithm") );
+    connect( m_algoButton, TQT_SIGNAL( clicked() ),
+             TQT_SLOT( slotConfigureAlgorithm() ));
+    TQToolTip::add( m_algoButton, i18n("Configure algorithm") );
 
-    QWidget *spacer = new QWidget( m_panel );
-    spacer->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
-                                        QSizePolicy::Minimum ) );
+    TQWidget *spacer = new TQWidget( m_panel );
+    spacer->setSizePolicy( TQSizePolicy( TQSizePolicy::MinimumExpanding,
+                                        TQSizePolicy::Minimum ) );
 
     int resultSize = config->readNumEntry( "Result-size", 20 );
     m_resultSizeInput = new KIntNumInput( resultSize, m_panel );
     m_resultSizeInput->setRange( 1, 100 );
     m_resultSizeInput->setLabel( i18n("Maximum result images:") );
 
-    QVBox *tmp = new QVBox( m_panel );
-    m_random = new QCheckBox( i18n("Random search"), tmp );
+    TQVBox *tmp = new TQVBox( m_panel );
+    m_random = new TQCheckBox( i18n("Random search"), tmp );
 
-    m_startButton = new QPushButton( QString::null, tmp );
-    connect( m_startButton, SIGNAL( clicked() ), SLOT( slotStartClicked() ));
+    m_startButton = new TQPushButton( TQString::null, tmp );
+    connect( m_startButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotStartClicked() ));
     setStatus( NeedCollection );
 
     setWidget( box );
 
     // setXMLFile( "mrml_part.rc" );
 
-    slotSetStatusBar( QString::null );
+    slotSetStatusBar( TQString::null );
 
     enableServerDependentWidgets( false );
 }
@@ -194,7 +194,7 @@ void MrmlPart::enableServerDependentWidgets( bool enable )
     m_algoButton->setEnabled( enable && false ); // ### re-enable!!!
 }
 
-void MrmlPart::initCollections( const QDomElement& elem )
+void MrmlPart::initCollections( const TQDomElement& elem )
 {
     m_collections.initFromDOM( elem );
 
@@ -212,7 +212,7 @@ void MrmlPart::initCollections( const QDomElement& elem )
         m_collectionCombo->updateGeometry(); // adjust the entire grid
 }
 
-void MrmlPart::initAlgorithms( const QDomElement& elem )
+void MrmlPart::initAlgorithms( const TQDomElement& elem )
 {
     m_algorithms.initFromDOM( elem );
 }
@@ -228,8 +228,8 @@ bool MrmlPart::openURL( const KURL& url )
     }
 
     m_url = url;
-    QString host = url.host().isEmpty() ?
-                   QString::fromLatin1("localhost") : url.host();
+    TQString host = url.host().isEmpty() ?
+                   TQString::fromLatin1("localhost") : url.host();
 
     m_hostCombo->setCurrentItem( host );
 
@@ -237,8 +237,8 @@ bool MrmlPart::openURL( const KURL& url )
     KURL::List downloadList;
 
     m_queryList.clear();
-    QString param = url.queryItem( "relevant" );
-    QStringList list = QStringList::split( ';', param );
+    TQString param = url.queryItem( "relevant" );
+    TQStringList list = TQStringList::split( ';', param );
 
     // we can only search by example on localhost
     if ( host != "localhost" )
@@ -252,7 +252,7 @@ bool MrmlPart::openURL( const KURL& url )
 
     else // localhost query
     {
-        for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+        for( TQStringList::Iterator it = list.begin(); it != list.end(); ++it )
         {
             KURL u;
             if ( (*it).at(0) == '/' )
@@ -272,7 +272,7 @@ bool MrmlPart::openURL( const KURL& url )
 
         // ### we need a real solution for this!
         // gift refuses to start when no config file is available.
-        if ( !QFile::exists( m_config.mrmldDataDir() + "/gift-config.mrml" ) )
+        if ( !TQFile::exists( m_config.mrmldDataDir() + "/gift-config.mrml" ) )
         {
             if ( KMessageBox::questionYesNo(0L,
                              i18n("There are no indexable folders "
@@ -285,7 +285,7 @@ bool MrmlPart::openURL( const KURL& url )
                  == KMessageBox::Yes )
             {
                 KApplication::kdeinitExec( "kcmshell",
-                                           QString::fromLatin1("kcmkmrml"));
+                                           TQString::fromLatin1("kcmkmrml"));
                 setStatus( NeedCollection );
                 return false;
             }
@@ -307,8 +307,8 @@ void MrmlPart::contactServer( const KURL& url )
 
     m_job->addMetaData( MrmlShared::kio_task(), MrmlShared::kio_initialize() );
 
-    QString host = url.host().isEmpty() ?
-                   QString::fromLatin1("localhost") : url.host();
+    TQString host = url.host().isEmpty() ?
+                   TQString::fromLatin1("localhost") : url.host();
 
     slotSetStatusBar( i18n("Connecting to indexing server at %1...").arg( host ));
 }
@@ -324,12 +324,12 @@ void MrmlPart::downloadReferenceFiles( const KURL::List& downloadList )
     KURL::List::ConstIterator it = downloadList.begin();
     for ( ; it != downloadList.end(); it++ )
     {
-        QString extension;
+        TQString extension;
         int index = (*it).fileName().findRev( '.' );
         if ( index != -1 )
             extension = (*it).fileName().mid( index );
 
-        KTempFile tmpFile( QString::null, extension );
+        KTempFile tmpFile( TQString::null, extension );
         if ( tmpFile.status() != 0 )
         {
             kdWarning() << "Can't create temporary file, skipping: " << *it << endl;
@@ -343,8 +343,8 @@ void MrmlPart::downloadReferenceFiles( const KURL::List& downloadList )
 
         KIO::FileCopyJob *job = KIO::file_copy( *it, destURL, -1,
                                                 true /* overwrite tmpfile */ );
-        connect( job, SIGNAL( result( KIO::Job * ) ),
-                 SLOT( slotDownloadResult( KIO::Job * ) ));
+        connect( job, TQT_SIGNAL( result( KIO::Job * ) ),
+                 TQT_SLOT( slotDownloadResult( KIO::Job * ) ));
         m_downloadJobs.append( job );
         // ### should this be only called for one job?
         emit started( job );
@@ -361,14 +361,14 @@ bool MrmlPart::closeURL()
     m_view->stopDownloads();
     m_view->clear();
 
-    QPtrListIterator<KIO::FileCopyJob> it( m_downloadJobs );
+    TQPtrListIterator<KIO::FileCopyJob> it( m_downloadJobs );
     for ( ; it.current(); ++it )
         it.current()->kill();
     m_downloadJobs.clear();
 
-    QStringList::Iterator tit = m_tempFiles.begin();
+    TQStringList::Iterator tit = m_tempFiles.begin();
     for ( ; tit != m_tempFiles.end(); ++tit )
-        QFile::remove( *tit );
+        TQFile::remove( *tit );
     m_tempFiles.clear();
 
     if ( m_job ) {
@@ -385,14 +385,14 @@ KIO::TransferJob * MrmlPart::transferJob( const KURL& url )
 {
     KIO::TransferJob *job = KIO::get( url, true, false ); // reload, no gui
     job->setAutoErrorHandlingEnabled( true, m_view );
-    connect( job, SIGNAL( result( KIO::Job * )),
-             SLOT( slotResult( KIO::Job * )));
-    connect( job, SIGNAL( data( KIO::Job *, const QByteArray& )),
-             SLOT( slotData( KIO::Job *, const QByteArray& )));
+    connect( job, TQT_SIGNAL( result( KIO::Job * )),
+             TQT_SLOT( slotResult( KIO::Job * )));
+    connect( job, TQT_SIGNAL( data( KIO::Job *, const TQByteArray& )),
+             TQT_SLOT( slotData( KIO::Job *, const TQByteArray& )));
 
 // ###
-//     connect( job, SIGNAL( infoMessage( KIO::Job *, const QString& )),
-//              SLOT( slotResult( KIO::Job *, const QString& )));
+//     connect( job, TQT_SIGNAL( infoMessage( KIO::Job *, const TQString& )),
+//              TQT_SLOT( slotResult( KIO::Job *, const TQString& )));
 
     job->setWindow( widget() );
     if ( !m_sessionId.isEmpty() )
@@ -410,7 +410,7 @@ void MrmlPart::slotResult( KIO::Job *job )
     if ( job == m_job )
         m_job = 0L;
 
-    slotSetStatusBar( QString::null );
+    slotSetStatusBar( TQString::null );
 
     if ( !job->error() )
         emit completed();
@@ -457,29 +457,29 @@ void MrmlPart::slotDownloadResult( KIO::Job *job )
 }
 
 // mrml-document in the bytearray
-void MrmlPart::slotData( KIO::Job *, const QByteArray& data )
+void MrmlPart::slotData( KIO::Job *, const TQByteArray& data )
 {
     if ( data.isEmpty() )
         return;
 
-    QDomDocument doc;
+    TQDomDocument doc;
     doc.setContent( data );
 
     if ( !doc.isNull() )
         parseMrml( doc );
 }
 
-void MrmlPart::parseMrml( QDomDocument& doc )
+void MrmlPart::parseMrml( TQDomDocument& doc )
 {
-    QDomNode mrml = doc.documentElement(); // root element
+    TQDomNode mrml = doc.documentElement(); // root element
     if ( !mrml.isNull() ) {
-        QDomNode child = mrml.firstChild();
+        TQDomNode child = mrml.firstChild();
         for ( ; !child.isNull(); child = child.nextSibling() ) {
 //             qDebug("**** HERE %s", child.nodeName().latin1());
             if ( child.isElement() ) {
-                QDomElement elem = child.toElement();
+                TQDomElement elem = child.toElement();
 
-                QString tagName = elem.tagName();
+                TQString tagName = elem.tagName();
 
                 if ( tagName == "acknowledge-session-op" )
                     m_sessionId = elem.attribute( MrmlShared::sessionId() );
@@ -510,22 +510,22 @@ void MrmlPart::parseMrml( QDomDocument& doc )
     } // !mrml.isNull()
 }
 
-void MrmlPart::parseQueryResult( QDomElement& queryResult )
+void MrmlPart::parseQueryResult( TQDomElement& queryResult )
 {
-    QDomNode child = queryResult.firstChild();
+    TQDomNode child = queryResult.firstChild();
     for ( ; !child.isNull(); child = child.nextSibling() ) {
         if ( child.isElement() ) {
-            QDomElement elem = child.toElement();
-            QString tagName = elem.tagName();
+            TQDomElement elem = child.toElement();
+            TQString tagName = elem.tagName();
 
             if ( tagName == "query-result-element-list" ) {
-                QValueList<QDomElement> list =
+                TQValueList<TQDomElement> list =
                     KMrml::directChildElements( elem, "query-result-element" );
 
-                QValueListConstIterator<QDomElement> it = list.begin();
+                TQValueListConstIterator<TQDomElement> it = list.begin();
                 for ( ; it != list.end(); ++it )
                 {
-                    QDomNamedNodeMap a = (*it).attributes();
+                    TQDomNamedNodeMap a = (*it).attributes();
                     m_view->addItem( KURL( (*it).attribute("image-location" ) ),
                                      KURL( (*it).attribute("thumbnail-location" ) ),
                                      (*it).attribute("calculated-similarity"));
@@ -560,8 +560,8 @@ void MrmlPart::slotStartClicked()
     // cut off an eventual query and reference from the url, when the user
     // performs a real query (otherwise restoreState() would restore and
     // re-do the query from the URL
-    m_url.setRef( QString::null );
-    m_url.setQuery( QString::null );
+    m_url.setRef( TQString::null );
+    m_url.setQuery( TQString::null );
 
     createQuery();
     m_browser->openURLNotify();
@@ -576,8 +576,8 @@ void MrmlPart::createQuery( const KURL::List * relevantItems )
     if ( relevantItems && relevantItems->isEmpty() )
         return;
 
-    QDomDocument doc( "mrml" );
-    QDomElement mrml = MrmlCreator::createMrml( doc,
+    TQDomDocument doc( "mrml" );
+    TQDomElement mrml = MrmlCreator::createMrml( doc,
                                                 sessionId(),
                                                 transactionId() );
 
@@ -591,7 +591,7 @@ void MrmlPart::createQuery( const KURL::List * relevantItems )
         MrmlCreator::configureSession( mrml, algo, sessionId() );
     }
 
-    QDomElement query = MrmlCreator::addQuery( mrml,
+    TQDomElement query = MrmlCreator::addQuery( mrml,
                                                m_resultSizeInput->value() );
     if ( algo.isValid() )
         query.setAttribute( MrmlShared::algorithmId(), algo.id() );
@@ -601,7 +601,7 @@ void MrmlPart::createQuery( const KURL::List * relevantItems )
     // start-up with/without urls on the commandline via mrmlsearch
     if ( relevantItems )
     {
-        QDomElement elem = MrmlCreator::addRelevanceList( query );
+        TQDomElement elem = MrmlCreator::addRelevanceList( query );
         KURL::List::ConstIterator it = relevantItems->begin();
         for ( ; it != relevantItems->end(); ++it )
             MrmlCreator::createRelevanceElement( doc, elem, (*it).url(),
@@ -611,7 +611,7 @@ void MrmlPart::createQuery( const KURL::List * relevantItems )
     // get relevant items from the view? Only do this when relevantItems is 0L
     else if ( !m_random->isChecked() )
     {
-        QDomElement relevants = MrmlCreator::addRelevanceList( query );
+        TQDomElement relevants = MrmlCreator::addRelevanceList( query );
         m_view->addRelevanceToQuery( doc, relevants );
     }
 
@@ -645,26 +645,26 @@ Algorithm MrmlPart::firstAlgorithmForCollection( const Collection& coll ) const
     return algo;
 }
 
-// emits the given QDomDocument for eventual plugins, checks after that
+// emits the given TQDomDocument for eventual plugins, checks after that
 // if there are any relevance elements. If there are none, random search is
 // implied and performed.
 // finally, the search is actually started
-void MrmlPart::performQuery( QDomDocument& doc )
+void MrmlPart::performQuery( TQDomDocument& doc )
 {
-    QDomElement mrml = doc.documentElement();
+    TQDomElement mrml = doc.documentElement();
 
     emit aboutToStartQuery( doc ); // let plugins play with it :)
 
     // no items available? All "neutral"? -> random search
 
-    QDomElement queryStep = KMrml::firstChildElement( mrml, "query-step" );
+    TQDomElement queryStep = KMrml::firstChildElement( mrml, "query-step" );
     bool randomSearch = false;
 
     if ( !queryStep.isNull() )
     {
-        QDomElement relevanceList =
+        TQDomElement relevanceList =
             KMrml::firstChildElement(queryStep, "user-relevance-element-list");
-        QValueList<QDomElement> relevanceElements =
+        TQValueList<TQDomElement> relevanceElements =
             KMrml::directChildElements( relevanceList,
                                         "user-relevance-element" );
 
@@ -695,7 +695,7 @@ void MrmlPart::performQuery( QDomDocument& doc )
     m_job->addMetaData( MrmlShared::mrml_data(), doc.toString() );
 }
 
-void MrmlPart::slotSetStatusBar( const QString& text )
+void MrmlPart::slotSetStatusBar( const TQString& text )
 {
     if ( text.isEmpty() )
         emit setStatusBarText( i18n("Ready.") );
@@ -711,7 +711,7 @@ void MrmlPart::slotActivated( const KURL& url, ButtonState button )
         emit m_browser->createNewWindow( url );
     else if ( button == RightButton ) {
         // enableExtensionActions( url, true ); // for now
-        emit m_browser->popupMenu( QCursor::pos(), url, QString::null );
+        emit m_browser->popupMenu( TQCursor::pos(), url, TQString::null );
         // enableExtensionActions( url, false );
     }
 }
@@ -741,10 +741,10 @@ void MrmlPart::slotConfigureAlgorithm()
     m_algoConfig = new AlgorithmDialog( m_algorithms, m_collections,
                                         currentCollection(),
                                         m_view, "algorithm configuration" );
-    connect( m_algoConfig, SIGNAL( applyClicked() ),
-             SLOT( slotApplyAlgoConfig() ));
-    connect( m_algoConfig, SIGNAL( finished() ),
-             SLOT( slotAlgoConfigFinished() ));
+    connect( m_algoConfig, TQT_SIGNAL( applyClicked() ),
+             TQT_SLOT( slotApplyAlgoConfig() ));
+    connect( m_algoConfig, TQT_SIGNAL( finished() ),
+             TQT_SLOT( slotAlgoConfigFinished() ));
 
     m_algoConfig->show();
 }
@@ -756,7 +756,7 @@ void MrmlPart::slotApplyAlgoConfig()
 
 void MrmlPart::slotAlgoConfigFinished()
 {
-    if ( m_algoConfig->result() == QDialog::Accepted )
+    if ( m_algoConfig->result() == TQDialog::Accepted )
         slotApplyAlgoConfig();
 
     m_algoButton->setEnabled( true );
@@ -770,7 +770,7 @@ void MrmlPart::initHostCombo()
     m_hostCombo->insertStringList( m_config.hosts() );
 }
 
-void MrmlPart::slotHostComboActivated( const QString& host )
+void MrmlPart::slotHostComboActivated( const TQString& host )
 {
     ServerSettings settings = m_config.settingsForHost( host );
     openURL( settings.getUrl() );
@@ -795,7 +795,7 @@ void MrmlPart::setStatus( Status status )
 }
 
 
-void MrmlPart::saveState( QDataStream& stream )
+void MrmlPart::saveState( TQDataStream& stream )
 {
     stream << url();
     stream << m_sessionId;
@@ -809,7 +809,7 @@ void MrmlPart::saveState( QDataStream& stream )
     m_view->saveState( stream );
 }
 
-void MrmlPart::restoreState( QDataStream& stream )
+void MrmlPart::restoreState( TQDataStream& stream )
 {
     KURL url;
     stream >> url;

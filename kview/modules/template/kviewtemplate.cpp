@@ -4,7 +4,7 @@
 
 #include "kviewtemplate.h"
 
-#include <qobjectlist.h>
+#include <tqobjectlist.h>
 
 #include <kaction.h>
 /*#include <klocale.h>*/
@@ -15,16 +15,16 @@
 typedef KGenericFactory<KViewTemplate> KViewTemplateFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_templateplugin, KViewTemplateFactory( "kviewtemplateplugin" ) )
 
-KViewTemplate::KViewTemplate( QObject* parent, const char* name, const QStringList & )
+KViewTemplate::KViewTemplate( TQObject* parent, const char* name, const TQStringList & )
 	: Plugin( parent, name )
 {
-	QObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )
 	{
 		(void) new KAction( /*i18n(*/ "&Do Something" /*)*/, 0, 0,
-							this, SLOT( yourSlot() ),
+							this, TQT_SLOT( yourSlot() ),
 							actionCollection(), "plugin_template" );
 	}
 	else

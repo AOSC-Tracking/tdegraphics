@@ -16,9 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qtextedit.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqtextedit.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -46,26 +46,26 @@ KDSCErrorHandler::Response KDSCErrorThreshold::error( const KDSCError& err )
 	return Cancel;
 }
     
-KDSCErrorDialog::KDSCErrorDialog( QWidget* parent ) :
+KDSCErrorDialog::KDSCErrorDialog( TQWidget* parent ) :
     KDialog( parent, "dscerrordialog", true ),
     _response( Ok )
 {
-    QVBoxLayout* vbox = new QVBoxLayout( this, marginHint(), spacingHint() );
+    TQVBoxLayout* vbox = new TQVBoxLayout( this, marginHint(), spacingHint() );
     
-    _lineNumberLabel = new QLabel( this );
+    _lineNumberLabel = new TQLabel( this );
     vbox->addWidget( _lineNumberLabel );
     
-    _lineLabel = new QTextEdit( this );
+    _lineLabel = new TQTextEdit( this );
     _lineLabel->setReadOnly( true );
     vbox->addWidget( _lineLabel );
     
-    _descriptionLabel = new QLabel( this );
+    _descriptionLabel = new TQLabel( this );
     vbox->addWidget( _descriptionLabel );
 
     KSeparator* sep = new KSeparator( KSeparator::HLine, this );
     vbox->addWidget( sep );
 
-    QHBoxLayout* hbox = new QHBoxLayout( vbox );
+    TQHBoxLayout* hbox = new TQHBoxLayout( vbox );
 
     hbox->addStretch();
     
@@ -73,13 +73,13 @@ KDSCErrorDialog::KDSCErrorDialog( QWidget* parent ) :
     hbox->addWidget( _okButton );
     _cancelButton = new KPushButton( KStdGuiItem::cancel(), this );
     hbox->addWidget( _cancelButton );
-    _ignoreAllButton = new QPushButton( i18n("Ignore All"), this );
+    _ignoreAllButton = new TQPushButton( i18n("Ignore All"), this );
     hbox->addWidget( _ignoreAllButton );
 
-    connect( _okButton,     SIGNAL( clicked() ), this, SLOT( slotOk()     ) );
-    connect( _cancelButton, SIGNAL( clicked() ), this, SLOT( slotCancel() ) );
-    connect( _ignoreAllButton, SIGNAL( clicked() ), 
-             this, SLOT( slotIgnoreAll() ) );
+    connect( _okButton,     TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotOk()     ) );
+    connect( _cancelButton, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotCancel() ) );
+    connect( _ignoreAllButton, TQT_SIGNAL( clicked() ), 
+             this, TQT_SLOT( slotIgnoreAll() ) );
 }
 
 KDSCErrorHandler::Response KDSCErrorDialog::error( const KDSCError& err )
@@ -108,7 +108,7 @@ KDSCErrorHandler::Response KDSCErrorDialog::error( const KDSCError& err )
     return _response;
 }
 
-QString KDSCErrorDialog::description( KDSCError::Type type ) const
+TQString KDSCErrorDialog::description( KDSCError::Type type ) const
 {
     switch( type )
     {

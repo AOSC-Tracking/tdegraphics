@@ -27,8 +27,8 @@
 #include "SVGDocumentImpl.h"
 #include "SVGSVGElementImpl.h"
 
-KSVGWidget::KSVGWidget(KSVGPlugin *part, QWidget *parent, const char *name)
-: QWidget(parent, name), m_part(part)
+KSVGWidget::KSVGWidget(KSVGPlugin *part, TQWidget *parent, const char *name)
+: TQWidget(parent, name), m_part(part)
 {
 	setMouseTracking(true);	
 	setFocusPolicy(WheelFocus);
@@ -55,12 +55,12 @@ void KSVGWidget::reset()
 	m_panningPos.setY(0);
 }
 
-void KSVGWidget::paintEvent(QPaintEvent *e)
+void KSVGWidget::paintEvent(TQPaintEvent *e)
 {
 	emit redraw(e->rect());
 }
 
-KSVG::SVGMouseEventImpl *KSVGWidget::newMouseEvent(KSVG::SVGEvent::EventId id, QMouseEvent *event)
+KSVG::SVGMouseEventImpl *KSVGWidget::newMouseEvent(KSVG::SVGEvent::EventId id, TQMouseEvent *event)
 {
 	DOM::AbstractView temp;
 
@@ -102,9 +102,9 @@ KSVG::SVGMouseEventImpl *KSVGWidget::newMouseEvent(KSVG::SVGEvent::EventId id, Q
 	return mev;
 }
 
-void KSVGWidget::mouseMoveEvent(QMouseEvent *event)
+void KSVGWidget::mouseMoveEvent(TQMouseEvent *event)
 {
-	if(event->state() & QMouseEvent::ControlButton && event->state() & QMouseEvent::LeftButton)
+	if(event->state() & TQMouseEvent::ControlButton && event->state() & TQMouseEvent::LeftButton)
 	{
 		if(m_panningPos.isNull())
 			m_panningPos = event->pos();
@@ -113,7 +113,7 @@ void KSVGWidget::mouseMoveEvent(QMouseEvent *event)
 
 		return;
 	}
-	else if(event->state() & QMouseEvent::ControlButton)
+	else if(event->state() & TQMouseEvent::ControlButton)
 		return;
 
 	KSVG::SVGMouseEventImpl *mev = newMouseEvent(KSVG::SVGEvent::MOUSEMOVE_EVENT, event);
@@ -181,16 +181,16 @@ void KSVGWidget::mouseMoveEvent(QMouseEvent *event)
 	mev->deref();
 }
 
-void KSVGWidget::mousePressEvent(QMouseEvent *event)
+void KSVGWidget::mousePressEvent(TQMouseEvent *event)
 {
-	if(event->state() & QMouseEvent::ControlButton)
+	if(event->state() & TQMouseEvent::ControlButton)
 		return;
 
 	if(event->button() == RightButton)
 	{
 		if(part() && part()->factory())
 		{
-			QPopupMenu *popup = static_cast<QPopupMenu *>(part()->factory()->container("popupmenu", part()));
+			TQPopupMenu *popup = static_cast<TQPopupMenu *>(part()->factory()->container("popupmenu", part()));
 			if(popup)	
 				popup->popup(event->globalPos());
 		}
@@ -204,7 +204,7 @@ void KSVGWidget::mousePressEvent(QMouseEvent *event)
 	mev->deref();
 }
 
-void KSVGWidget::mouseReleaseEvent(QMouseEvent *event)
+void KSVGWidget::mouseReleaseEvent(TQMouseEvent *event)
 {
 	if(!m_panningPos.isNull())
 	{
@@ -213,7 +213,7 @@ void KSVGWidget::mouseReleaseEvent(QMouseEvent *event)
 		m_panningPos.setY(0);
 	}
 
-	if(event->state() & QMouseEvent::ControlButton)
+	if(event->state() & TQMouseEvent::ControlButton)
 		return;
 
 	KSVG::SVGMouseEventImpl *mev = newMouseEvent(KSVG::SVGEvent::MOUSEUP_EVENT, event);
@@ -223,7 +223,7 @@ void KSVGWidget::mouseReleaseEvent(QMouseEvent *event)
 
 	if(!mev->url().string().isEmpty())
 	{
-		QString url = mev->url().string();
+		TQString url = mev->url().string();
 		if(url.startsWith("#")) 
 			url.prepend(part()->docImpl()->baseUrl().prettyURL());
 		emit browseURL(url);
@@ -232,9 +232,9 @@ void KSVGWidget::mouseReleaseEvent(QMouseEvent *event)
  	mev->deref();
 }
 
-void KSVGWidget::keyPressEvent(QKeyEvent *ke)
+void KSVGWidget::keyPressEvent(TQKeyEvent *ke)
 {
-	if(ke->stateAfter() & QMouseEvent::ControlButton)
+	if(ke->stateAfter() & TQMouseEvent::ControlButton)
 	{
 		setCursor(KCursor::sizeAllCursor());
 		return;
@@ -244,9 +244,9 @@ void KSVGWidget::keyPressEvent(QKeyEvent *ke)
 		part()->docImpl()->lastTarget()->dispatchKeyEvent(ke);
 }
 
-void KSVGWidget::keyReleaseEvent(QKeyEvent *ke)
+void KSVGWidget::keyReleaseEvent(TQKeyEvent *ke)
 {
-	if(ke->state() & QMouseEvent::ControlButton)
+	if(ke->state() & TQMouseEvent::ControlButton)
 	{
 		setCursor(KCursor::arrowCursor());
 		return;
@@ -256,12 +256,12 @@ void KSVGWidget::keyReleaseEvent(QKeyEvent *ke)
 		part()->docImpl()->lastTarget()->dispatchKeyEvent(ke);
 }
 
-void KSVGWidget::resizeEvent(QResizeEvent *e)
+void KSVGWidget::resizeEvent(TQResizeEvent *e)
 {
 	if(part()->docImpl() && part()->docImpl()->rootElement())
 		part()->docImpl()->rootElement()->dispatchEvent(KSVG::SVGEvent::RESIZE_EVENT, true, false);
 
-	emit redraw(QRect(0, 0, e->size().width(), e->size().height()));
+	emit redraw(TQRect(0, 0, e->size().width(), e->size().height()));
 }
 
 // vim:ts=4:noet

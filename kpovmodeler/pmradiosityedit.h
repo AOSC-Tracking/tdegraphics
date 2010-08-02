@@ -29,7 +29,7 @@
 class PMRadiosity;
 class PMFloatEdit;
 class PMIntEdit;
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMRadiosity.
@@ -42,7 +42,7 @@ public:
    /**
     * Creates a PMRadiosityEdit with parent and name
     */
-   PMRadiosityEdit( QWidget* parent, const char* name = 0 );
+   PMRadiosityEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -61,17 +61,17 @@ private:
    PMRadiosity* m_pDisplayedObject;
 
    PMFloatEdit* m_pAdcBailout;
-   QCheckBox* m_pAlwaysSample;
+   TQCheckBox* m_pAlwaysSample;
    PMFloatEdit* m_pBrightness;
    PMIntEdit* m_pCount;
    PMFloatEdit* m_pErrorBound;
    PMFloatEdit* m_pGrayThreshold;
    PMFloatEdit* m_pLowErrorFactor;
    PMFloatEdit* m_pMaxSample;
-   QCheckBox* m_pMedia;
+   TQCheckBox* m_pMedia;
    PMFloatEdit* m_pMinimumReuse;
    PMIntEdit* m_pNearestCount;
-   QCheckBox* m_pNormal;
+   TQCheckBox* m_pNormal;
    PMFloatEdit* m_pPretraceStart;
    PMFloatEdit* m_pPretraceEnd;
    PMIntEdit* m_pRecursionLimit;

@@ -18,11 +18,11 @@
 
 #include "pmlibraryobject.h"
 
-#include <qstring.h>
-#include <qvaluelist.h>
-#include <qdom.h>
-#include <qbuffer.h>
-#include <qimage.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
+#include <tqdom.h>
+#include <tqbuffer.h>
+#include <tqimage.h>
 
 #include <karchive.h>
 #include <kurl.h>
@@ -40,9 +40,9 @@ PMLibraryObject::PMLibraryObject( )
    m_preview = NULL;
    m_objects = NULL;
    m_data = NULL;
-   m_name = QString::null;
-   m_description = QString::null;
-   m_keywords = QString::null;
+   m_name = TQString::null;
+   m_description = TQString::null;
+   m_keywords = TQString::null;
 }
 
 PMLibraryObject::PMLibraryObject( KURL u )
@@ -78,40 +78,40 @@ void PMLibraryObject::loadLibraryInfo( )
       const KArchiveEntry* entry = root->entry( "objectinfo.xml" );
       if( entry && entry->isFile( ) )
       {
-         QBuffer buffer( ( ( KArchiveFile* )entry )->data( ) );
+         TQBuffer buffer( ( ( KArchiveFile* )entry )->data( ) );
          buffer.open( IO_ReadOnly );
 
-         QDomDocument doc( "OBJECTINFO" );
+         TQDomDocument doc( "OBJECTINFO" );
          doc.setContent( &buffer );
 
-         QDomElement e = doc.documentElement( );
+         TQDomElement e = doc.documentElement( );
          m_name = e.attribute( "name", "empty" );
 
-         QDomNode c = e.firstChild( );
+         TQDomNode c = e.firstChild( );
          while( !c.isNull( ) )
          {
             if( c.isElement( ) )
             {
-               QDomElement ce = c.toElement( );
+               TQDomElement ce = c.toElement( );
                // Description information
                if( ce.tagName( ) == "description" )
                {
-                  QDomText te = ce.firstChild( ).toText( );
+                  TQDomText te = ce.firstChild( ).toText( );
                   m_description = te.nodeValue( );
                }
                // Keywords information
                else if( ce.tagName( ) == "keywords" )
                {
-                  QDomText te = ce.firstChild( ).toText( );
+                  TQDomText te = ce.firstChild( ).toText( );
                   m_keywords = te.nodeValue( );
                }
                // Extra files list
                else if( ce.tagName( ) == "file_entries" )
                {
-                  QDomNode entry = ce.firstChild( );
+                  TQDomNode entry = ce.firstChild( );
                   while( !entry.isNull( ) )
                   {
-                     QDomElement entryElement = entry.toElement( );
+                     TQDomElement entryElement = entry.toElement( );
                      if( entryElement.tagName( ) == "file" )
                         m_extraFiles.append( entryElement.attribute( "name", "" ) );
                      entry = entry.nextSibling( );
@@ -125,7 +125,7 @@ void PMLibraryObject::loadLibraryInfo( )
    }
 }
 
-QImage* PMLibraryObject::preview( )
+TQImage* PMLibraryObject::preview( )
 {
    if( !m_previewLoaded )
    {
@@ -141,9 +141,9 @@ QImage* PMLibraryObject::preview( )
          const KArchiveEntry* entry = root->entry( "preview.png" );
          if( entry && entry->isFile( ) )
          {
-            QBuffer buffer( ( ( KArchiveFile* )entry )->data( ) );
+            TQBuffer buffer( ( ( KArchiveFile* )entry )->data( ) );
             buffer.open( IO_ReadOnly );
-            m_preview = new QImage( buffer.readAll( ) );
+            m_preview = new TQImage( buffer.readAll( ) );
             m_previewLoaded = true;
          }
 
@@ -153,7 +153,7 @@ QImage* PMLibraryObject::preview( )
    return m_preview;
 }
 
-QByteArray* PMLibraryObject::objects( )
+TQByteArray* PMLibraryObject::objects( )
 {
    if( !m_objectsLoaded )
    {
@@ -169,14 +169,14 @@ QByteArray* PMLibraryObject::objects( )
          const KArchiveEntry* entry = root->entry( "objectdata.kpm" );
          if( entry && entry->isFile( ) )
          {
-            // Transfer the file contents to a QByteArray.
+            // Transfer the file contents to a TQByteArray.
             // TODO Maybe there is a smarter way of doing this.
             char buf[256];
             int nbytes;
-            QIODevice* aux_in = ( ( KArchiveFile* )entry )->device( );
+            TQIODevice* aux_in = ( ( KArchiveFile* )entry )->device( );
 
-            m_objects = new QByteArray( );
-            QBuffer aux_out( *m_objects );
+            m_objects = new TQByteArray( );
+            TQBuffer aux_out( *m_objects );
 
             aux_in->open( IO_ReadOnly );
             aux_out.open( IO_WriteOnly );
@@ -199,41 +199,41 @@ QByteArray* PMLibraryObject::objects( )
    return m_objects;
 }
 
-void PMLibraryObject::setName( const QString& str )
+void PMLibraryObject::setName( const TQString& str )
 {
    m_name = str;
 }
 
-void PMLibraryObject::setDescription( const QString& str )
+void PMLibraryObject::setDescription( const TQString& str )
 {
    m_description = str;
 }
 
-void PMLibraryObject::setKeywords( const QString& str )
+void PMLibraryObject::setKeywords( const TQString& str )
 {
    m_keywords = str;
 }
 
-void PMLibraryObject::setPreview( const QImage& img )
+void PMLibraryObject::setPreview( const TQImage& img )
 {
    if( m_previewLoaded )
       delete m_preview;
 
-   m_preview = new QImage( img );
+   m_preview = new TQImage( img );
    m_previewLoaded = true;
 }
 
-void PMLibraryObject::setObjects( const QByteArray& obj )
+void PMLibraryObject::setObjects( const TQByteArray& obj )
 {
    if( m_objectsLoaded )
       delete m_objects;
 
-   m_objects = new QByteArray( obj );
+   m_objects = new TQByteArray( obj );
    m_objects->detach( );
    m_objectsLoaded = true;
 }
 
-void PMLibraryObject::save( const QString& fileName )
+void PMLibraryObject::save( const TQString& fileName )
 {
    // create the library file
    m_data = new KTar( fileName, "application/x-gzip" );
@@ -256,41 +256,41 @@ void PMLibraryObject::saveLibraryInfo( )
       exit( 1 );
    }
 
-   QBuffer buf;
+   TQBuffer buf;
 
    // Document type
-   QDomDocument doc( "OBJECTINFO" );
+   TQDomDocument doc( "OBJECTINFO" );
    
    // The root element for the document has one attribute: name 
-   QDomElement root = doc.createElement( "object" );
+   TQDomElement root = doc.createElement( "object" );
    doc.appendChild( root );
    root.setAttribute( "name", m_name );
 
    // Inside the root element we add the description node ...
-   QDomElement description = doc.createElement( "description" );
+   TQDomElement description = doc.createElement( "description" );
    root.appendChild( description );
    description.appendChild( doc.createTextNode( m_description ) );
 
    // ... and the keywords node ...
-   QDomElement keywords = doc.createElement( "keywords" );
+   TQDomElement keywords = doc.createElement( "keywords" );
    root.appendChild( keywords );
    keywords.appendChild( doc.createTextNode( m_keywords ) );
 
    // ... and finally the extra files information
-   QDomElement file_list = doc.createElement( "file_list" );
+   TQDomElement file_list = doc.createElement( "file_list" );
    root.appendChild( file_list );
-   QStringList::Iterator it = m_extraFiles.begin( );
+   TQStringList::Iterator it = m_extraFiles.begin( );
    for( ; it != m_extraFiles.end( ); ++it )
    {
-      QDomElement entry = doc.createElement( "file" );
+      TQDomElement entry = doc.createElement( "file" );
       entry.setAttribute( "name", *it );
       file_list.appendChild( entry );
    }
 
    // Write the document to the buffer
-   QByteArray array;
-   QTextStream str( array, IO_WriteOnly );
-   str.setEncoding( QTextStream::UnicodeUTF8 );
+   TQByteArray array;
+   TQTextStream str( array, IO_WriteOnly );
+   str.setEncoding( TQTextStream::UnicodeUTF8 );
    str << doc.toString( );
    m_data->writeFile( "objectinfo.xml", "user", "group", array.size( ), array.data( ) );
 }
@@ -304,9 +304,9 @@ void PMLibraryObject::savePreview( )
       exit( 1 );
    }
 
-   QByteArray array;
-   QBuffer iods( array );
-   QImageIO img_io( &iods, "PNG" );
+   TQByteArray array;
+   TQBuffer iods( array );
+   TQImageIO img_io( &iods, "PNG" );
 
    if( m_previewLoaded )
    {

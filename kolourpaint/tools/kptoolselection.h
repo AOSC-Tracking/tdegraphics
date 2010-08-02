@@ -30,10 +30,10 @@
 #define __kp_tool_selection_h__
 
 
-#include <qpixmap.h>
-#include <qpoint.h>
-#include <qpointarray.h>
-#include <qrect.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
+#include <tqpointarray.h>
+#include <tqrect.h>
 
 #include <kpcolor.h>
 #include <kpcommandhistory.h>
@@ -42,9 +42,9 @@
 #include <kptool.h>
 
 
-class QPoint;
-class QRect;
-class QTimer;
+class TQPoint;
+class TQRect;
+class TQTimer;
 
 class kpMainWindow;
 class kpSelection;
@@ -64,7 +64,7 @@ public:
     enum Mode {Rectangle, Ellipse, FreeForm, Text};
 
     kpToolSelection (Mode mode,
-                     const QString &text, const QString &description,
+                     const TQString &text, const TQString &description,
                      int key,
                      kpMainWindow *mainWindow, const char *name);
     virtual ~kpToolSelection ();
@@ -80,7 +80,7 @@ protected:
     bool onSelectionToSelectText () const;
 
 public:
-    QString haventBegunDrawUserMessage () const;
+    TQString haventBegunDrawUserMessage () const;
 
     virtual void begin ();
     virtual void end ();
@@ -91,9 +91,9 @@ public:
 
     virtual void beginDraw ();
 protected:
-    const QCursor &cursor () const;
+    const TQCursor &cursor () const;
 public:
-    virtual void hover (const QPoint &point);
+    virtual void hover (const TQPoint &point);
 protected:
     void popupRMBMenu ();
     void setSelectionBorderForMove ();
@@ -101,17 +101,17 @@ protected slots:
     void slotRMBMoveUpdateGUI ();
     void delayedDraw ();
 public:
-    virtual void draw (const QPoint &thisPoint, const QPoint &lastPoint,
-                       const QRect &normalizedRect);
+    virtual void draw (const TQPoint &thisPoint, const TQPoint &lastPoint,
+                       const TQRect &normalizedRect);
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
-    virtual void endDraw (const QPoint &thisPoint, const QRect &normalizedRect);
+    virtual void endDraw (const TQPoint &thisPoint, const TQRect &normalizedRect);
 
 protected:
-    virtual void keyPressEvent (QKeyEvent *e);
+    virtual void keyPressEvent (TQKeyEvent *e);
 
 protected:
-    void selectionTransparencyChanged (const QString &name);
+    void selectionTransparencyChanged (const TQString &name);
 
 protected slots:
     virtual void slotIsOpaqueChanged ();
@@ -121,7 +121,7 @@ protected slots:
 protected:
     Mode m_mode;
 
-    QPoint m_startDragFromSelectionTopLeft;
+    TQPoint m_startDragFromSelectionTopLeft;
     enum DragType
     {
         Unknown, Create, Move, SelectText, ResizeScale
@@ -140,14 +140,14 @@ protected:
     kpToolSelectionCreateCommand *m_currentCreateTextCommand;
     bool m_cancelledShapeButStillHoldingButtons;
 
-    QTimer *m_createNOPTimer, *m_RMBMoveUpdateGUITimer;
+    TQTimer *m_createNOPTimer, *m_RMBMoveUpdateGUITimer;
 };
 
 class kpToolSelectionCreateCommand : public kpNamedCommand
 {
 public:
     // (if fromSelection doesn't have a pixmap, it will only recreate the region)
-    kpToolSelectionCreateCommand (const QString &name, const kpSelection &fromSelection,
+    kpToolSelectionCreateCommand (const TQString &name, const kpSelection &fromSelection,
                                   kpMainWindow *mainWindow);
     virtual ~kpToolSelectionCreateCommand ();
 
@@ -170,7 +170,7 @@ private:
 class kpToolSelectionPullFromDocumentCommand : public kpNamedCommand
 {
 public:
-    kpToolSelectionPullFromDocumentCommand (const QString &name, kpMainWindow *mainWindow);
+    kpToolSelectionPullFromDocumentCommand (const TQString &name, kpMainWindow *mainWindow);
     virtual ~kpToolSelectionPullFromDocumentCommand ();
 
     virtual int size () const;
@@ -186,7 +186,7 @@ private:
 class kpToolSelectionTransparencyCommand : public kpNamedCommand
 {
 public:
-    kpToolSelectionTransparencyCommand (const QString &name,
+    kpToolSelectionTransparencyCommand (const TQString &name,
         const kpSelectionTransparency &st,
         const kpSelectionTransparency &oldST,
         kpMainWindow *mainWindow);
@@ -204,7 +204,7 @@ private:
 class kpToolSelectionMoveCommand : public kpNamedCommand
 {
 public:
-    kpToolSelectionMoveCommand (const QString &name, kpMainWindow *mainWindow);
+    kpToolSelectionMoveCommand (const TQString &name, kpMainWindow *mainWindow);
     virtual ~kpToolSelectionMoveCommand ();
 
     kpSelection originalSelection () const;
@@ -214,20 +214,20 @@ public:
     virtual void execute ();
     virtual void unexecute ();
 
-    void moveTo (const QPoint &point, bool moveLater = false);
+    void moveTo (const TQPoint &point, bool moveLater = false);
     void moveTo (int x, int y, bool moveLater = false);
     void copyOntoDocument ();
     void finalize ();
 
 private:
-    QPoint m_startPoint, m_endPoint;
+    TQPoint m_startPoint, m_endPoint;
 
-    QPixmap m_oldDocumentPixmap;
+    TQPixmap m_oldDocumentPixmap;
 
     // area of document affected (not the bounding rect of the sel)
-    QRect m_documentBoundingRect;
+    TQRect m_documentBoundingRect;
 
-    QPointArray m_copyOntoDocumentPoints;
+    TQPointArray m_copyOntoDocumentPoints;
 };
 
 // You could subclass kpToolResizeScaleCommand and/or
@@ -238,7 +238,7 @@ private:
 // 2. This is designed for the size and position to change several times
 //    before execute().
 //
-class kpToolSelectionResizeScaleCommand : public QObject,
+class kpToolSelectionResizeScaleCommand : public TQObject,
                                           public kpNamedCommand
 {
 Q_OBJECT
@@ -252,15 +252,15 @@ public:
 public:
     kpSelection originalSelection () const;
 
-    QPoint topLeft () const;
-    void moveTo (const QPoint &point);
+    TQPoint topLeft () const;
+    void moveTo (const TQPoint &point);
 
     int width () const;
     int height () const;
     void resize (int width, int height, bool delayed = false);
 
     // (equivalent to resize() followed by moveTo() but faster)
-    void resizeAndMoveTo (int width, int height, const QPoint &point,
+    void resizeAndMoveTo (int width, int height, const TQPoint &point,
                           bool delayed = false);
 
 protected:
@@ -284,16 +284,16 @@ public:
 protected:
     kpSelection m_originalSelection;
 
-    QPoint m_newTopLeft;
+    TQPoint m_newTopLeft;
     int m_newWidth, m_newHeight;
 
-    QTimer *m_smoothScaleTimer;
+    TQTimer *m_smoothScaleTimer;
 };
 
 class kpToolSelectionDestroyCommand : public kpNamedCommand
 {
 public:
-    kpToolSelectionDestroyCommand (const QString &name, bool pushOntoDocument,
+    kpToolSelectionDestroyCommand (const TQString &name, bool pushOntoDocument,
                                    kpMainWindow *mainWindow);
     virtual ~kpToolSelectionDestroyCommand ();
 
@@ -304,7 +304,7 @@ public:
 
 private:
     bool m_pushOntoDocument;
-    QPixmap m_oldDocPixmap;
+    TQPixmap m_oldDocPixmap;
     kpSelection *m_oldSelection;
 
     int m_textRow, m_textCol;

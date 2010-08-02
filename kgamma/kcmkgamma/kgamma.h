@@ -20,8 +20,8 @@
 #include <kcmodule.h>
 
 class GammaCtrl;
-class QCheckBox;
-class QComboBox;
+class TQCheckBox;
+class TQComboBox;
 class XVidExtWrap;
 class KProcess;
 
@@ -29,7 +29,7 @@ class KGamma: public KCModule
 {
    Q_OBJECT
    public:
-      KGamma(QWidget *parent, const char *name, const QStringList&);
+      KGamma(TQWidget *parent, const char *name, const TQStringList&);
       virtual ~KGamma();
 
       void load();
@@ -37,7 +37,7 @@ class KGamma: public KCModule
       void save();
       void defaults();
       int buttons();
-      QString quickHelp() const;
+      TQString quickHelp() const;
 
     protected: // Protected methods
       /** The user interface */
@@ -64,12 +64,12 @@ class KGamma: public KCModule
     private:
       bool saved, GammaCorrection;
       int ScreenCount, currentScreen;
-      QStringList rgamma, ggamma, bgamma;
-      QValueList<int> assign;
-      QValueList<float> rbak, gbak, bbak;
+      TQStringList rgamma, ggamma, bgamma;
+      TQValueList<int> assign;
+      TQValueList<float> rbak, gbak, bbak;
       GammaCtrl *gctrl, *rgctrl, *ggctrl, *bgctrl;
-      QCheckBox *xf86cfgbox, *syncbox;
-      QComboBox *screenselect;
+      TQCheckBox *xf86cfgbox, *syncbox;
+      TQComboBox *screenselect;
       KProcess *rootProcess;
       XVidExtWrap *xv;
 };

@@ -23,14 +23,14 @@
 #include "pmpalettevalueedit.h"
 #include "pmvector.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
 #include <ktabctl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -38,7 +38,7 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 
-PMImageMapEdit::PMImageMapEdit( QWidget* parent, const char* name )
+PMImageMapEdit::PMImageMapEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -46,14 +46,14 @@ PMImageMapEdit::PMImageMapEdit( QWidget* parent, const char* name )
 
 void PMImageMapEdit::createTopWidgets( )
 {
-   QLabel* lbl;
-   QHBoxLayout* hl;
+   TQLabel* lbl;
+   TQHBoxLayout* hl;
    
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "File type:" ), this );
-   m_pImageFileTypeEdit = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "File type:" ), this );
+   m_pImageFileTypeEdit = new TQComboBox( this );
    m_pImageFileTypeEdit->insertItem( "gif" );
    m_pImageFileTypeEdit->insertItem( "tga" );
    m_pImageFileTypeEdit->insertItem( "iff" );
@@ -66,44 +66,44 @@ void PMImageMapEdit::createTopWidgets( )
    hl->addWidget( lbl );
    hl->addWidget( m_pImageFileTypeEdit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "File name:" ), this );
-   m_pImageFileNameEdit = new QLineEdit( this );
-   m_pImageFileNameBrowse = new QPushButton( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "File name:" ), this );
+   m_pImageFileNameEdit = new TQLineEdit( this );
+   m_pImageFileNameBrowse = new TQPushButton( this );
    m_pImageFileNameBrowse->setPixmap( SmallIcon( "fileopen" ) );
    hl->addWidget( lbl );
    hl->addWidget( m_pImageFileNameEdit );
    hl->addWidget( m_pImageFileNameBrowse );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pEnableFilterAllEdit = new QCheckBox( i18n( "Filter all" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pEnableFilterAllEdit = new TQCheckBox( i18n( "Filter all" ), this );
    m_pFilterAllEdit = new PMFloatEdit( this );
    hl->addWidget( m_pEnableFilterAllEdit );
    hl->addWidget( m_pFilterAllEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pEnableTransmitAllEdit = new QCheckBox( i18n( "Transmit all" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pEnableTransmitAllEdit = new TQCheckBox( i18n( "Transmit all" ), this );
    m_pTransmitAllEdit = new PMFloatEdit( this );
    hl->addWidget( m_pEnableTransmitAllEdit );
    hl->addWidget( m_pTransmitAllEdit );
    hl->addStretch( 1 );
 
-   m_pOnceEdit = new QCheckBox( i18n( "Once" ), this );
+   m_pOnceEdit = new TQCheckBox( i18n( "Once" ), this );
    topLayout( )->addWidget( m_pOnceEdit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Interpolate:" ), this );
-   m_pInterpolateTypeEdit = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Interpolate:" ), this );
+   m_pInterpolateTypeEdit = new TQComboBox( this );
    m_pInterpolateTypeEdit->insertItem( i18n( "None" ) );
    m_pInterpolateTypeEdit->insertItem( i18n( "Bilinear" ) );
    m_pInterpolateTypeEdit->insertItem( i18n( "Normalized" ) );
    hl->addWidget( lbl );
    hl->addWidget( m_pInterpolateTypeEdit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Map type:" ), this );
-   m_pMapTypeEdit = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Map type:" ), this );
+   m_pMapTypeEdit = new TQComboBox( this );
    m_pMapTypeEdit->insertItem( i18n( "Planar" ) );
    m_pMapTypeEdit->insertItem( i18n( "Spherical" ) );
    m_pMapTypeEdit->insertItem( i18n( "Cylindrical" ) );
@@ -111,25 +111,25 @@ void PMImageMapEdit::createTopWidgets( )
    hl->addWidget( lbl );
    hl->addWidget( m_pMapTypeEdit );
 
-   connect( m_pImageFileTypeEdit, SIGNAL( activated( int ) ), SLOT( slotImageFileTypeChanged( int ) ) );
-   connect( m_pMapTypeEdit, SIGNAL( activated( int ) ), SLOT( slotMapTypeChanged( int ) ) );
-   connect( m_pInterpolateTypeEdit, SIGNAL( activated( int ) ), SLOT( slotInterpolateTypeChanged( int ) ) );
-   connect( m_pImageFileNameBrowse, SIGNAL( clicked( ) ), SLOT( slotImageFileBrowseClicked( ) ) );
-   connect( m_pImageFileNameEdit, SIGNAL( textChanged( const QString& ) ), SLOT( slotImageFileNameChanged( const QString& ) ) );
-   connect( m_pEnableFilterAllEdit, SIGNAL( clicked( ) ), SLOT( slotFilterAllClicked( ) ) );
-   connect( m_pEnableTransmitAllEdit, SIGNAL( clicked( ) ), SLOT( slotTransmitAllClicked( ) ) );
-   connect( m_pFilterAllEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pTransmitAllEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOnceEdit, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pImageFileTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotImageFileTypeChanged( int ) ) );
+   connect( m_pMapTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotMapTypeChanged( int ) ) );
+   connect( m_pInterpolateTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotInterpolateTypeChanged( int ) ) );
+   connect( m_pImageFileNameBrowse, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotImageFileBrowseClicked( ) ) );
+   connect( m_pImageFileNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotImageFileNameChanged( const TQString& ) ) );
+   connect( m_pEnableFilterAllEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFilterAllClicked( ) ) );
+   connect( m_pEnableTransmitAllEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotTransmitAllClicked( ) ) );
+   connect( m_pFilterAllEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pTransmitAllEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOnceEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMImageMapEdit::createBottomWidgets( )
 {
-   topLayout( )->addWidget( new QLabel( i18n( "Indexed filters" ), this ) );
-   m_pFiltersWidget = new QWidget( this );
+   topLayout( )->addWidget( new TQLabel( i18n( "Indexed filters" ), this ) );
+   m_pFiltersWidget = new TQWidget( this );
    topLayout( )->addWidget( m_pFiltersWidget );
-   topLayout( )->addWidget( new QLabel( i18n( "Indexed transmits" ), this ) );
-   m_pTransmitsWidget = new QWidget( this );
+   topLayout( )->addWidget( new TQLabel( i18n( "Indexed transmits" ), this ) );
+   m_pTransmitsWidget = new TQWidget( this );
    topLayout( )->addWidget( m_pTransmitsWidget );
    
    
@@ -231,8 +231,8 @@ void PMImageMapEdit::displayObject( PMObject* o )
     
 }
 
-void PMImageMapEdit::displayPaletteEntries( const QValueList<PMPaletteValue>& filters,
-                                            const QValueList<PMPaletteValue>& transmits )
+void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& filters,
+                                            const TQValueList<PMPaletteValue>& transmits )
 {
    bool readOnly = m_pDisplayedObject->isReadOnly( );
 
@@ -241,10 +241,10 @@ void PMImageMapEdit::displayPaletteEntries( const QValueList<PMPaletteValue>& fi
 
    int i;
    PMPaletteValueEdit* edit;
-   QPushButton* button;
-   QGridLayout* gl;
-   QPixmap addButtonPixmap = SmallIcon( "pmaddpoint" );
-   QPixmap removeButtonPixmap = SmallIcon( "pmremovepoint" );
+   TQPushButton* button;
+   TQGridLayout* gl;
+   TQPixmap addButtonPixmap = SmallIcon( "pmaddpoint" );
+   TQPixmap removeButtonPixmap = SmallIcon( "pmremovepoint" );
 
    // First let's deal with the filter entries...
    if( m_pFiltersWidget->layout( ) )
@@ -260,45 +260,45 @@ void PMImageMapEdit::displayPaletteEntries( const QValueList<PMPaletteValue>& fi
    m_filterAddButtons.setAutoDelete( false );
    m_filterRemoveButtons.setAutoDelete( false );
 
-   gl = new QGridLayout( m_pFiltersWidget, nfilters + 1, 3, 0, KDialog::spacingHint( ) );
+   gl = new TQGridLayout( m_pFiltersWidget, nfilters + 1, 3, 0, KDialog::spacingHint( ) );
 
-   button = new QPushButton( m_pFiltersWidget );
+   button = new TQPushButton( m_pFiltersWidget );
    button->setPixmap( addButtonPixmap );
    m_filterAddButtons.append( button );
-   connect( button, SIGNAL( clicked( ) ), SLOT( slotAddFilterEntry( ) ) );
+   connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddFilterEntry( ) ) );
    gl->addWidget( button, 0, 1 );
    button->show( );
    button->setEnabled( !readOnly );
-   QToolTip::add( button, i18n( "Add new filter" ) );
+   TQToolTip::add( button, i18n( "Add new filter" ) );
 
    for( i = 0; i < nfilters; i ++ )
    {
       edit = new PMPaletteValueEdit( m_pFiltersWidget );
       m_filterEntries.append( edit );
-      connect( edit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+      connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
       gl->addWidget( edit, i+1, 0 );
       edit->setIndex( filters[ i ].index( ) );
       edit->setValue( filters[ i ].value( ) );
       edit->show( );
       edit->setReadOnly( readOnly );
 
-      button = new QPushButton( m_pFiltersWidget );
+      button = new TQPushButton( m_pFiltersWidget );
       button->setPixmap( addButtonPixmap );
       m_filterAddButtons.append( button );
-      connect( button, SIGNAL( clicked( ) ), SLOT( slotAddFilterEntry( ) ) );
+      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddFilterEntry( ) ) );
       gl->addWidget( button, i+1, 1 );
       button->show( );
       button->setEnabled( !readOnly );
-      QToolTip::add( button, i18n( "Add new filter" ) );
+      TQToolTip::add( button, i18n( "Add new filter" ) );
 
-      button = new QPushButton( m_pFiltersWidget );
+      button = new TQPushButton( m_pFiltersWidget );
       button->setPixmap( removeButtonPixmap );
       m_filterRemoveButtons.append( button );
-      connect( button, SIGNAL( clicked( ) ), SLOT( slotRemoveFilterEntry( ) ) );
+      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveFilterEntry( ) ) );
       gl->addWidget( button, i+1, 2 );
       button->show( );
       button->setEnabled( !readOnly );
-      QToolTip::add( button, i18n( "Remove filter" ) );
+      TQToolTip::add( button, i18n( "Remove filter" ) );
    }
 
    // ...next the transmit entries
@@ -316,45 +316,45 @@ void PMImageMapEdit::displayPaletteEntries( const QValueList<PMPaletteValue>& fi
    if( m_pTransmitsWidget->layout( ) )
       delete m_pTransmitsWidget->layout( );
 
-   gl = new QGridLayout( m_pTransmitsWidget, ntransmits + 1, 3, 0, KDialog::spacingHint( ) );
+   gl = new TQGridLayout( m_pTransmitsWidget, ntransmits + 1, 3, 0, KDialog::spacingHint( ) );
 
-   button = new QPushButton( m_pTransmitsWidget );
+   button = new TQPushButton( m_pTransmitsWidget );
    button->setPixmap( addButtonPixmap );
    m_transmitAddButtons.append( button );
-   connect( button, SIGNAL( clicked( ) ), SLOT( slotAddTransmitEntry( ) ) );
+   connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddTransmitEntry( ) ) );
    gl->addWidget( button, 0, 1 );
    button->show( );
    button->setEnabled( !readOnly );
-   QToolTip::add( button, i18n( "Add new transmit" ) );
+   TQToolTip::add( button, i18n( "Add new transmit" ) );
 
    for( i = 0; i < ntransmits; i ++ )
    {
       edit = new PMPaletteValueEdit( m_pTransmitsWidget );
       m_transmitEntries.append( edit );
-      connect( edit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+      connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
       gl->addWidget( edit, i+1, 0 );
       edit->setIndex( transmits[ i ].index( ) );
       edit->setValue( transmits[ i ].value( ) );
       edit->show( );
       edit->setReadOnly( readOnly );
 
-      button = new QPushButton( m_pTransmitsWidget );
+      button = new TQPushButton( m_pTransmitsWidget );
       button->setPixmap( addButtonPixmap );
       m_transmitAddButtons.append( button );
-      connect( button, SIGNAL( clicked( ) ), SLOT( slotAddTransmitEntry( ) ) );
+      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddTransmitEntry( ) ) );
       gl->addWidget( button, i+1, 1 );
       button->show( );
       button->setEnabled( !readOnly );
-      QToolTip::add( button, i18n( "Add new transmit" ) );
+      TQToolTip::add( button, i18n( "Add new transmit" ) );
 
-      button = new QPushButton( m_pTransmitsWidget );
+      button = new TQPushButton( m_pTransmitsWidget );
       button->setPixmap( removeButtonPixmap );
       m_transmitRemoveButtons.append( button );
-      connect( button, SIGNAL( clicked( ) ), SLOT( slotRemoveTransmitEntry( ) ) );
+      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveTransmitEntry( ) ) );
       gl->addWidget( button, i+1, 2 );
       button->show( );
       button->setEnabled( !readOnly );
-      QToolTip::add( button, i18n( "Remove transmit" ) );
+      TQToolTip::add( button, i18n( "Remove transmit" ) );
    }
 }
 
@@ -440,12 +440,12 @@ bool PMImageMapEdit::isDataValid( )
    if( !m_pFilterAllEdit->isDataValid( ) ) return false;
    if( !m_pTransmitAllEdit->isDataValid( ) ) return false;
 
-   QPtrListIterator<PMPaletteValueEdit> it_filters( m_filterEntries );
+   TQPtrListIterator<PMPaletteValueEdit> it_filters( m_filterEntries );
    for( ; it_filters.current( ); ++it_filters )
       if( !( it_filters.current( )->isDataValid( ) ) )
          return false;
 
-   QPtrListIterator<PMPaletteValueEdit> it_transmits( m_transmitEntries );
+   TQPtrListIterator<PMPaletteValueEdit> it_transmits( m_transmitEntries );
    for( ; it_transmits.current( ); ++it_transmits )
       if( !( it_transmits.current( )->isDataValid( ) ) )
          return false;
@@ -468,14 +468,14 @@ void PMImageMapEdit::slotMapTypeChanged( const int /*a*/ )
    emit dataChanged( );
 }
 
-void PMImageMapEdit::slotImageFileNameChanged( const QString& /*a*/ )
+void PMImageMapEdit::slotImageFileNameChanged( const TQString& /*a*/ )
 {
    emit dataChanged( );
 }
 
 void PMImageMapEdit::slotImageFileBrowseClicked( )
 {
-   QString str = KFileDialog::getOpenFileName( QString::null, QString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
 
    if( !str.isEmpty() )
    {
@@ -504,10 +504,10 @@ void PMImageMapEdit::slotTransmitAllClicked( )
    emit dataChanged( );
 }
 
-QValueList<PMPaletteValue> PMImageMapEdit::filters( )
+TQValueList<PMPaletteValue> PMImageMapEdit::filters( )
 {
-   QValueList<PMPaletteValue> entries;
-   QPtrListIterator<PMPaletteValueEdit> it( m_filterEntries );
+   TQValueList<PMPaletteValue> entries;
+   TQPtrListIterator<PMPaletteValueEdit> it( m_filterEntries );
 
    for( ; it.current( ); ++it )
       entries.append( PMPaletteValue( it.current( )->index( ), it.current( )->value( ) ) );
@@ -515,10 +515,10 @@ QValueList<PMPaletteValue> PMImageMapEdit::filters( )
    return entries;
 }
 
-QValueList<PMPaletteValue> PMImageMapEdit::transmits( )
+TQValueList<PMPaletteValue> PMImageMapEdit::transmits( )
 {
-   QValueList<PMPaletteValue> entries;
-   QPtrListIterator<PMPaletteValueEdit> it( m_transmitEntries );
+   TQValueList<PMPaletteValue> entries;
+   TQPtrListIterator<PMPaletteValueEdit> it( m_transmitEntries );
 
    for( ; it.current( ); ++it )
       entries.append( PMPaletteValue( it.current( )->index( ), it.current( )->value( ) ) );
@@ -528,10 +528,10 @@ QValueList<PMPaletteValue> PMImageMapEdit::transmits( )
 
 void PMImageMapEdit::slotAddFilterEntry( )
 {
-   QValueList<PMPaletteValue> entriesFilters;
-   QValueListIterator<PMPaletteValue> it;
+   TQValueList<PMPaletteValue> entriesFilters;
+   TQValueListIterator<PMPaletteValue> it;
    PMPaletteValue newEntry;
-   QPushButton* button = ( QPushButton* ) sender( );
+   TQPushButton* button = ( TQPushButton* ) sender( );
 
    if( button )
    {
@@ -555,9 +555,9 @@ void PMImageMapEdit::slotAddFilterEntry( )
 
 void PMImageMapEdit::slotRemoveFilterEntry( )
 {
-   QValueList<PMPaletteValue> entriesFilters;
-   QValueListIterator<PMPaletteValue> it;
-   QPushButton* button = ( QPushButton* ) sender( );
+   TQValueList<PMPaletteValue> entriesFilters;
+   TQValueListIterator<PMPaletteValue> it;
+   TQPushButton* button = ( TQPushButton* ) sender( );
 
    if( button )
    {
@@ -576,10 +576,10 @@ void PMImageMapEdit::slotRemoveFilterEntry( )
 
 void PMImageMapEdit::slotAddTransmitEntry( )
 {
-   QValueList<PMPaletteValue> entriesTransmits;
-   QValueListIterator<PMPaletteValue> it;
+   TQValueList<PMPaletteValue> entriesTransmits;
+   TQValueListIterator<PMPaletteValue> it;
    PMPaletteValue newEntry;
-   QPushButton* button = ( QPushButton* ) sender( );
+   TQPushButton* button = ( TQPushButton* ) sender( );
 
    if( button )
    {
@@ -603,9 +603,9 @@ void PMImageMapEdit::slotAddTransmitEntry( )
 
 void PMImageMapEdit::slotRemoveTransmitEntry( )
 {
-   QValueList<PMPaletteValue> entriesTransmits;
-   QValueListIterator<PMPaletteValue> it;
-   QPushButton* button = ( QPushButton* ) sender( );
+   TQValueList<PMPaletteValue> entriesTransmits;
+   TQValueListIterator<PMPaletteValue> it;
+   TQPushButton* button = ( TQPushButton* ) sender( );
 
    if( button )
    {

@@ -23,16 +23,16 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqmap.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 #include <kstaticdeleter.h>
 
 #include "pmlibraryhandle.h"
 
 class KConfig;
-class QDomElement;
+class TQDomElement;
 
 /**
  * Class that maintains the list of available libraries for kpovmodeler
@@ -63,12 +63,12 @@ public:
    /**
     * Returns the list of available libraries
     */
-   QValueList<QString> availableLibraries( );
+   TQValueList<TQString> availableLibraries( );
 
    /**
     * Returns the handle for the indicated library
     */
-   PMLibraryHandle* getLibraryHandle( const QString& libraryName );
+   PMLibraryHandle* getLibraryHandle( const TQString& libraryName );
 
    /**
     * Refreshes the list of libraries.
@@ -88,7 +88,7 @@ private:
 
    void scanLibraries( );
 
-   QPtrList< PMLibraryHandle > m_libraries;
+   TQPtrList< PMLibraryHandle > m_libraries;
 
    static PMLibraryManager* s_pInstance;
    static KStaticDeleter<PMLibraryManager> s_staticDeleter;   

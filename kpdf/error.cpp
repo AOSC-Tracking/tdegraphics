@@ -18,13 +18,13 @@
 #include "xpdf/GlobalParams.h"
 #include "xpdf/Error.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kdebug.h>
 
 void CDECL error(int pos, char *msg, ...) {
   va_list args;
-  QString emsg, tmsg;
+  TQString emsg, tmsg;
   char buffer[1024]; // should be big enough
 
   // NB: this can be called before the globalParams object is created
@@ -32,7 +32,7 @@ void CDECL error(int pos, char *msg, ...) {
     return;
   }
   if (pos >= 0) {
-    emsg = QString("Error (%1): ").arg(pos);
+    emsg = TQString("Error (%1): ").arg(pos);
   } else {
     emsg = "Error: ";
   }

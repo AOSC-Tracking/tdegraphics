@@ -28,8 +28,8 @@
 
 #include <klocale.h>
 
-const QString c_defaultFont = QString( "" );
-const QString c_defaultText = QString( "" );
+const TQString c_defaultFont = TQString( "" );
+const TQString c_defaultText = TQString( "" );
 const double c_defaultThickness = 1.0;
 const PMVector c_defaultOffset = PMVector( 0.0, 0.0 );
 
@@ -66,12 +66,12 @@ PMText::~PMText( )
 {
 }
 
-QString PMText::description( ) const
+TQString PMText::description( ) const
 {
    return i18n( "text" );
 }
 
-void PMText::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMText::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "font", m_font );
    e.setAttribute( "text", m_text );
@@ -117,7 +117,7 @@ void PMText::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMText::setFont( const QString& f )
+void PMText::setFont( const TQString& f )
 {
    if( f != m_font )
    {
@@ -128,7 +128,7 @@ void PMText::setFont( const QString& f )
    }
 }
 
-void PMText::setText( const QString& t )
+void PMText::setText( const TQString& t )
 {
    if( t != m_text )
    {
@@ -162,7 +162,7 @@ void PMText::setOffset( const PMVector& o )
    }
 }
 
-PMDialogEditBase* PMText::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMText::editWidget( TQWidget* parent ) const
 {
    return new PMTextEdit( parent );
 }
@@ -205,13 +205,13 @@ void PMText::createViewStructure( )
    // calculate needed points and lines
    int nlines = 0, npoints = 0;
 
-   QString file = PMResourceLocator::findFile( m_font );
+   TQString file = PMResourceLocator::findFile( m_font );
    PMTrueTypeFont* font = PMTrueTypeCache::font( file );
 
    if( font && font->isValid( ) )
    {
-      QTextStream str( &m_text, IO_ReadOnly );
-      QChar c;
+      TQTextStream str( &m_text, IO_ReadOnly );
+      TQChar c;
       PMTrueTypeOutline* ol;
 
       while( !str.atEnd( ) )
@@ -239,8 +239,8 @@ void PMText::createViewStructure( )
    if( ( nlines > 0 ) && ( npoints > 0 ) && font )
    {
       // create the view structure
-      QTextStream str( &m_text, IO_ReadOnly );
-      QChar c, oldc;
+      TQTextStream str( &m_text, IO_ReadOnly );
+      TQChar c, oldc;
       PMTrueTypeOutline* ol;
       double dp = 1.0 / s_steps;
       int i;

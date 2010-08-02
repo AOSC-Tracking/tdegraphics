@@ -50,7 +50,7 @@ kpUnzoomedThumbnailView::kpUnzoomedThumbnailView (
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        QWidget *parent, const char *name)
+        TQWidget *parent, const char *name)
 
     : kpThumbnailView (document, toolToolBar, viewManager,
                        buddyView,
@@ -61,9 +61,9 @@ kpUnzoomedThumbnailView::kpUnzoomedThumbnailView (
     if (buddyViewScrollableContainer ())
     {
         connect (buddyViewScrollableContainer (),
-                SIGNAL (contentsMovingSoon (int, int)),
+                TQT_SIGNAL (contentsMovingSoon (int, int)),
                 this,
-                SLOT (adjustToEnvironment ()));
+                TQT_SLOT (adjustToEnvironment ()));
     }
 
     // Call to virtual function - this is why the class is sealed
@@ -78,7 +78,7 @@ kpUnzoomedThumbnailView::~kpUnzoomedThumbnailView ()
 
 
 // public virtual [base kpThumbnailView]
-QString kpUnzoomedThumbnailView::caption () const
+TQString kpUnzoomedThumbnailView::caption () const
 {
     return i18n ("Unzoomed Mode - Thumbnail");
 }
@@ -160,8 +160,8 @@ void kpUnzoomedThumbnailView::adjustToEnvironment ()
     if (!buddyViewScrollableContainer ())
         return;
 
-    QRect docRect = buddyView ()->transformViewToDoc (
-        QRect (buddyViewScrollableContainer ()->contentsXSoon (),
+    TQRect docRect = buddyView ()->transformViewToDoc (
+        TQRect (buddyViewScrollableContainer ()->contentsXSoon (),
                buddyViewScrollableContainer ()->contentsYSoon (),
                QMIN (buddyView ()->width (), buddyViewScrollableContainer ()->visibleWidth ()),
                QMIN (buddyView ()->height (), buddyViewScrollableContainer ()->visibleHeight ())));
@@ -192,7 +192,7 @@ void kpUnzoomedThumbnailView::adjustToEnvironment ()
 
     {
         // OPT: scrollView impl would be much, much faster
-        setOrigin (QPoint (-x, -y));
+        setOrigin (TQPoint (-x, -y));
         setMaskToCoverDocument ();
 
         // Above might be a NOP even if e.g. doc size changed so force

@@ -24,7 +24,7 @@
 #include "ksvg_lookup.h"
 #include "SVGAnimationElementImpl.h"
 
-class QTimer;
+class TQTimer;
 
 namespace KSVG
 {
@@ -40,7 +40,7 @@ public:
 
 private:
 	double m_addStep, m_animVal;
-	QTimer *m_timer;
+	TQTimer *m_timer;
 	
 	int m_steps, m_step;
 

@@ -40,25 +40,25 @@ public:
    virtual ~PMPovray31Format( );
 
    /** */
-   virtual QString name( ) const { return "povray31"; };
+   virtual TQString name( ) const { return "povray31"; };
    /** */
-   virtual QString description( ) const { return "POV-Ray 3.1"; }
+   virtual TQString description( ) const { return "POV-Ray 3.1"; }
    /** */
    virtual int services( ) const { return AllServices; }
    /** */
-   virtual PMParser* newParser( PMPart*, QIODevice* ) const;
+   virtual PMParser* newParser( PMPart*, TQIODevice* ) const;
    /** */
-   virtual PMParser* newParser( PMPart*, const QByteArray& ) const;
+   virtual PMParser* newParser( PMPart*, const TQByteArray& ) const;
    /** */
-   virtual PMSerializer* newSerializer( QIODevice* );
+   virtual PMSerializer* newSerializer( TQIODevice* );
    /** */
    virtual PMRenderer* newRenderer( PMPart* ) const;
    /** */
-   virtual QString mimeType( ) const;
+   virtual TQString mimeType( ) const;
    /** */
-   virtual QStringList importPatterns( ) const;
+   virtual TQStringList importPatterns( ) const;
    /** */
-   virtual QStringList exportPatterns( ) const;
+   virtual TQStringList exportPatterns( ) const;
 };
 
 #endif

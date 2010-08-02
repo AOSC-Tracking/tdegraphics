@@ -61,19 +61,19 @@ const bool c_defaultIsoAllIntersections = false;
 void PMPov35SerIsoSurface( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
 {
    PMIsoSurface* o = ( PMIsoSurface* ) object;
-   QString str;
+   TQString str;
 
    dev->objectBegin( "isosurface" );
    dev->writeName( object->name( ) );
 
    if( o->containedBy( ) == PMIsoSurface::Box )
    {
-      dev->writeLine( QString( "function { " ) + o->function( ) + " }" );
+      dev->writeLine( TQString( "function { " ) + o->function( ) + " }" );
 
       if( o->corner1( ) != c_defaultIsoCorner1 ||
           o->corner2( ) != c_defaultIsoCorner2 )
       {
-         dev->writeLine( QString( "contained_by { box { " ) +
+         dev->writeLine( TQString( "contained_by { box { " ) +
                          o->corner1( ).serialize( ) + ", " +
                          o->corner2( ).serialize( ) + " } }" );
       }
@@ -81,7 +81,7 @@ void PMPov35SerIsoSurface( const PMObject* object, const PMMetaObject* metaObjec
    else
    {
       str.setNum( o->radius( ) );
-      dev->writeLine( QString( "contained_by { sphere { " ) +
+      dev->writeLine( TQString( "contained_by { sphere { " ) +
                       o->center( ).serialize( ) + ", " + str + " } }" );
    }
 
@@ -102,7 +102,7 @@ void PMPov35SerIsoSurface( const PMObject* object, const PMMetaObject* metaObjec
    }
    if( o->evaluate( ) )
    {
-      str = QString( "%1, %2, %3" ).arg( o->evaluateValue( 0 ) )
+      str = TQString( "%1, %2, %3" ).arg( o->evaluateValue( 0 ) )
             .arg( o->evaluateValue( 1 ) ).arg( o->evaluateValue( 2 ) );
       dev->writeLine( "evaluate " + str );
    }
@@ -127,56 +127,56 @@ void PMPov35SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
 {
    PMLight* o = ( PMLight* ) object;
 
-   dev->objectBegin( QString( "light_source" ) );
+   dev->objectBegin( TQString( "light_source" ) );
 
    dev->writeName( object->name( ) );
    dev->writeLine( o->location( ).serialize( ) + ", " + o->color( ).serialize( ) );
 
    if( o->lightType( ) == PMLight::SpotLight )
-      dev->writeLine( QString( "spotlight" ) );
+      dev->writeLine( TQString( "spotlight" ) );
    else if( o->lightType( ) == PMLight::CylinderLight )
-      dev->writeLine( QString( "cylinder" ) );
+      dev->writeLine( TQString( "cylinder" ) );
    else if( o->lightType( ) == PMLight::ShadowlessLight )
-      dev->writeLine( QString( "shadowless" ) );
+      dev->writeLine( TQString( "shadowless" ) );
 
    if( o->parallel( ) )
-      dev->writeLine( QString( "parallel" ) );
+      dev->writeLine( TQString( "parallel" ) );
 
    if( ( o->lightType( ) == PMLight::SpotLight ) ||
        ( o->lightType( ) == PMLight::CylinderLight ) )
    {
-      dev->writeLine( QString( "radius %1" ).arg( o->radius( ) ) );
-      dev->writeLine( QString( "falloff %1" ).arg( o->falloff( ) ) );
+      dev->writeLine( TQString( "radius %1" ).arg( o->radius( ) ) );
+      dev->writeLine( TQString( "falloff %1" ).arg( o->falloff( ) ) );
       if( o->tightness( ) != c_defaultLightTightness )
-         dev->writeLine( QString( "tightness %1" ).arg( o->tightness( ) ) );
-      dev->writeLine( QString( "point_at " ) + o->pointAt( ).serialize( ) );
+         dev->writeLine( TQString( "tightness %1" ).arg( o->tightness( ) ) );
+      dev->writeLine( TQString( "point_at " ) + o->pointAt( ).serialize( ) );
    }
 
    if( o->isAreaLight( ) )
    {
-      dev->writeLine( QString( "area_light " ) + o->axis1( ).serialize( )
-                     + QString( ", " ) + o->axis2( ).serialize( )
-                     + QString( ", %1, %2" ).arg( o->size1( ) ).arg( o->size2( ) ) );
+      dev->writeLine( TQString( "area_light " ) + o->axis1( ).serialize( )
+                     + TQString( ", " ) + o->axis2( ).serialize( )
+                     + TQString( ", %1, %2" ).arg( o->size1( ) ).arg( o->size2( ) ) );
       if( o->adaptive( ) != c_defaultLightAdaptive )
-         dev->writeLine( QString( "adaptive %1" ).arg( o->adaptive( ) ) );
+         dev->writeLine( TQString( "adaptive %1" ).arg( o->adaptive( ) ) );
       if( o->jitter( ) )
-         dev->writeLine( QString( "jitter" ) );
+         dev->writeLine( TQString( "jitter" ) );
       if ( o->areaType( ) == PMLight::Circular )
-         dev->writeLine( QString( "circular" ) );
+         dev->writeLine( TQString( "circular" ) );
       if ( o->orient( ) )
-         dev->writeLine( QString( "orient" ) );
+         dev->writeLine( TQString( "orient" ) );
    }
 
    if( o->fading( ) )
    {
-      dev->writeLine( QString( "fade_distance %1" ).arg( o->fadeDistance( ) ) );
-      dev->writeLine( QString( "fade_power %1" ).arg( o->fadePower( ) ) );
+      dev->writeLine( TQString( "fade_distance %1" ).arg( o->fadeDistance( ) ) );
+      dev->writeLine( TQString( "fade_power %1" ).arg( o->fadePower( ) ) );
    }
 
    if( !o->mediaInteraction( ) )
-      dev->writeLine( QString( "media_interaction off" ) );
+      dev->writeLine( TQString( "media_interaction off" ) );
    if( !o->mediaAttenuation( ) )
-      dev->writeLine( QString( "media_attenuation off" ) );
+      dev->writeLine( TQString( "media_attenuation off" ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
    dev->objectEnd( );
@@ -213,7 +213,7 @@ void PMPov35SerGlobalSettings( const PMObject* object, const PMMetaObject* metaO
 {
    PMGlobalSettings* o = ( PMGlobalSettings* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "global_settings" );
 
@@ -254,11 +254,11 @@ void PMPov35SerGlobalSettings( const PMObject* object, const PMMetaObject* metaO
       dev->writeLine( "number_of_waves " + str1 );
    }
    if ( o->noiseGenerator( ) == PMGlobalSettings::Original )
-      dev->writeLine( QString( "noise_generator 1" ) );
+      dev->writeLine( TQString( "noise_generator 1" ) );
    else if ( o->noiseGenerator( ) == PMGlobalSettings::RangeCorrected )
-      dev->writeLine( QString( "noise_generator 2" ) );
+      dev->writeLine( TQString( "noise_generator 2" ) );
    else
-      dev->writeLine( QString( "noise_generator 3" ) );
+      dev->writeLine( TQString( "noise_generator 3" ) );
    if( o->isRadiosityEnabled( ) )
    {
       dev->objectBegin( "radiosity" );
@@ -331,7 +331,7 @@ void PMPov35SerRadiosity( const PMObject* object, const PMMetaObject*, PMOutputD
 {
    PMRadiosity* o = ( PMRadiosity* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "radiosity" );
 
@@ -434,7 +434,7 @@ void PMPov35SerGlobalPhotons( const PMObject* object, const PMMetaObject*, PMOut
 {
    PMGlobalPhotons* o = ( PMGlobalPhotons* ) object;
 
-   QString str1, str2;
+   TQString str1, str2;
 
    dev->objectBegin( "photons" );
 
@@ -506,7 +506,7 @@ void PMPov35SerGlobalPhotons( const PMObject* object, const PMMetaObject*, PMOut
         o->radiusMedia( ) != c_defaultGlobalPhotonsRadiusMedia ||
         o->radiusMediaMulti( ) != c_defaultGlobalPhotonsRadiusMediaMulti )
    {
-      QString str3, str4;
+      TQString str3, str4;
       str1.setNum( o->radiusGather( ) );
       str2.setNum( o->radiusGatherMulti( ) );
       str3.setNum( o->radiusMedia( ) );
@@ -522,18 +522,18 @@ void PMPov35SerPhotons( const PMObject* object, const PMMetaObject*, PMOutputDev
 {
    PMPhotons* o = ( PMPhotons* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "photons" );
 
    if( o->parent( ) && ( o->parent( )->type( ) == "Light" ) )
    {
       if( o->refraction( ) )
-         dev->writeLine( QString( "refraction on" ) );
+         dev->writeLine( TQString( "refraction on" ) );
       if( o->reflection( ) )
-         dev->writeLine( QString( "reflection on" ) );
+         dev->writeLine( TQString( "reflection on" ) );
       if( o->areaLight( ) )
-         dev->writeLine( QString( "area_light" ) );
+         dev->writeLine( TQString( "area_light" ) );
    }
    else
    {
@@ -545,16 +545,16 @@ void PMPov35SerPhotons( const PMObject* object, const PMMetaObject*, PMOutputDev
             dev->writeLine( "target " + str1 );
          }
          else
-            dev->writeLine( QString( "target" ) );
+            dev->writeLine( TQString( "target" ) );
       }
       if( o->refraction( ) )
-         dev->writeLine( QString( "refraction on" ) );
+         dev->writeLine( TQString( "refraction on" ) );
       if( o->reflection( ) )
-         dev->writeLine( QString( "reflection on" ) );
+         dev->writeLine( TQString( "reflection on" ) );
       if( !o->collect( ) )
-         dev->writeLine( QString( "collect off" ) );
+         dev->writeLine( TQString( "collect off" ) );
       if( o->passThrough( ) )
-         dev->writeLine( QString( "pass_through" ) );
+         dev->writeLine( TQString( "pass_through" ) );
    }
    dev->objectEnd( );
 }
@@ -563,7 +563,7 @@ void PMPov35SerInterior( const PMObject* object, const PMMetaObject* metaObject,
 {
    PMInterior* o = ( PMInterior* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "interior" );
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -639,7 +639,7 @@ void PMPov35SerPattern( const PMObject* object, const PMMetaObject*, PMOutputDev
 {
    PMPattern* o = ( PMPattern* ) object;
 
-   QString str, str2;
+   TQString str, str2;
 
    // pattern type
    switch( o->patternType( ) )
@@ -849,13 +849,13 @@ void PMPov35SerPattern( const PMObject* object, const PMMetaObject*, PMOutputDev
          switch( o->noiseGenerator( ) )
          {
             case PMPattern::Original:
-               dev->writeLine( QString( "noise_generator 1" ) );
+               dev->writeLine( TQString( "noise_generator 1" ) );
                break;
             case PMPattern::RangeCorrected:
-               dev->writeLine( QString( "noise_generator 2" ) );
+               dev->writeLine( TQString( "noise_generator 2" ) );
                break;
             case PMPattern::Perlin:
-               dev->writeLine( QString( "noise_generator 3" ) );
+               dev->writeLine( TQString( "noise_generator 3" ) );
                break;
             default:
             break;
@@ -891,7 +891,7 @@ void PMPov35SerNormal( const PMObject* object, const PMMetaObject* metaObject, P
 {
    PMNormal* o = ( PMNormal* ) object;
 
-   QString str1;
+   TQString str1;
    bool bObject = true;
 
    if( o->parent( ) )
@@ -954,7 +954,7 @@ void PMPov35SerWarp( const PMObject* object, const PMMetaObject* , PMOutputDevic
 {
    PMWarp* o = ( PMWarp* ) object;
 
-   QString str1, str2;
+   TQString str1, str2;
 
    dev->objectBegin( "warp" );
    switch( o->warpType( ) )
@@ -1061,23 +1061,23 @@ void PMPov35SerSphereSweep( const PMObject* object, const PMMetaObject* metaObje
 {
    PMSphereSweep* o = ( PMSphereSweep* ) object;
 
-   QString str1;
+   TQString str1;
    int numSpheres;
-   QValueList<PMVector> points;
-   QValueList<double> radii;
+   TQValueList<PMVector> points;
+   TQValueList<double> radii;
 
    dev->objectBegin( "sphere_sweep" );
 
    switch( o->splineType( ) )
    {
       case PMSphereSweep::LinearSpline:
-         dev->writeLine( QString( "linear_spline," ) );
+         dev->writeLine( TQString( "linear_spline," ) );
          break;
       case PMSphereSweep::BSpline:
-         dev->writeLine( QString( "b_spline," ) );
+         dev->writeLine( TQString( "b_spline," ) );
          break;
       case PMSphereSweep::CubicSpline:
-         dev->writeLine( QString( "cubic_spline," ) );
+         dev->writeLine( TQString( "cubic_spline," ) );
          break;
    }
 
@@ -1107,7 +1107,7 @@ void PMPov35SerFinish( const PMObject* object, const PMMetaObject* metaObject, P
 {
    PMFinish* o = ( PMFinish* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "finish" );
 
@@ -1249,8 +1249,8 @@ void PMPov35SerMedia( const PMObject* object, const PMMetaObject* metaObject, PM
 {
    PMMedia* o = ( PMMedia* ) object;
 
-   QString str1;
-   QString str2;
+   TQString str1;
+   TQString str2;
 
    dev->objectBegin( "media" );
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -1398,7 +1398,7 @@ void PMPov35SerBicubicPatch( const PMObject* object, const PMMetaObject* metaObj
    PMBicubicPatch* o = ( PMBicubicPatch* ) object;
 
    int u, v;
-   QString str, line;
+   TQString str, line;
    dev->objectBegin( "bicubic_patch" );
 
    dev->writeName( object->name( ) );
@@ -1427,7 +1427,7 @@ void PMPov35SerBicubicPatch( const PMObject* object, const PMMetaObject* metaObj
    {
       line = o->controlPoint( v*4 ).serialize( );
       for( u = 1; u < 4; u++ )
-         line += QString( ", " ) + o->controlPoint( u+4*v ).serialize( );
+         line += TQString( ", " ) + o->controlPoint( u+4*v ).serialize( );
       if( v != 3 )
          line += ",";
       dev->writeLine( line );

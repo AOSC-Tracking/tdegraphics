@@ -25,7 +25,7 @@
 
 #include "ksvg_lookup.h"
 
-class QRect;
+class TQRect;
 
 namespace KSVG
 {
@@ -34,7 +34,7 @@ class SVGRectImpl : public DOM::DomShared
 {
 public:
 	SVGRectImpl();
-	SVGRectImpl(const QRect &);
+	SVGRectImpl(const TQRect &);
 	virtual ~SVGRectImpl();
 
 	void setX(float x);
@@ -49,9 +49,9 @@ public:
 	void setHeight(float height);
 	float height() const;
 
-	QRect qrect() const;
+	TQRect qrect() const;
 
-	SVGRectImpl &operator=(const QRect &);
+	SVGRectImpl &operator=(const TQRect &);
 
 private:
 	float m_x;

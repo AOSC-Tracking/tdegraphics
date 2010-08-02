@@ -33,8 +33,8 @@
 
 #include <kpcolor.h>
 
-class QPixmap;
-class QString;
+class TQPixmap;
+class TQString;
 
 class kpDocument;
 class kpMainWindow;
@@ -50,7 +50,7 @@ public:
         kpMainWindow *mainWindow);
     virtual ~kpToolClearCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
 
@@ -61,7 +61,7 @@ private:
     bool m_actOnSelection;
 
     kpColor m_newColor;
-    QPixmap *m_oldPixmapPtr;
+    TQPixmap *m_oldPixmapPtr;
 };
 
 

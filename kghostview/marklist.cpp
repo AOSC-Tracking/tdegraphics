@@ -20,11 +20,11 @@
 
 #include <cassert>
 
-#include <qimage.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qlabel.h>
-#include <qwhatsthis.h>
+#include <tqimage.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqlabel.h>
+#include <tqwhatsthis.h>
 
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -32,23 +32,23 @@
 
 #include "kgv_miniwidget.h"
 
-MarkListItem::MarkListItem(QWidget *parent, const QString &text, const QString &tip, const QColor &color, KGVMiniWidget* miniW, int pageNum)
-    : QWidget( parent ),
+MarkListItem::MarkListItem(TQWidget *parent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget* miniW, int pageNum)
+    : TQWidget( parent ),
     _miniWidget( miniW ),
     _pageNum( pageNum ),
     _requested( false )
 {
     //kdDebug( 4500 ) << "MarkListItem::MarkListItem( _ , "  << text <<" , " << tip << " , " <<  color << ", _ ," << pageNum << " )" << endl;
-    QBoxLayout *l = new QVBoxLayout( this, 5, 0 );
-    _thumbnailW = new QWidget( this );
-    _checkBox = new QCheckBox( text, this );
+    TQBoxLayout *l = new TQVBoxLayout( this, 5, 0 );
+    _thumbnailW = new TQWidget( this );
+    _checkBox = new TQCheckBox( text, this );
     l->addWidget( _thumbnailW, 1 );
     l->addWidget( _checkBox, 0, Qt::AlignHCenter );
-    QWhatsThis::add( _checkBox, i18n( "Using this checkbox you can select pages for printing." ) );
+    TQWhatsThis::add( _checkBox, i18n( "Using this checkbox you can select pages for printing." ) );
     setFixedHeight( 100 );
     _backgroundColor = color;
     setPaletteBackgroundColor( _backgroundColor );
-    QToolTip::add(this, tip);
+    TQToolTip::add(this, tip);
     // TODO: Put a little page number or other place-holder when there is no thumbnail to display.
 }
 
@@ -67,11 +67,11 @@ void MarkListItem::setChecked( bool checked )
     _checkBox->setChecked(checked);
 }
 
-void MarkListItem::setPixmap( QPixmap thumbnail )
+void MarkListItem::setPixmap( TQPixmap thumbnail )
 {
     // The line below is needed to work around certain "features" of styles such as liquid
     // see bug:61711 for more info (LPC, 20 Aug '03)
-    _thumbnailW->setBackgroundOrigin( QWidget::WidgetOrigin );
+    _thumbnailW->setBackgroundOrigin( TQWidget::WidgetOrigin );
     _thumbnailW->setPaletteBackgroundPixmap( thumbnail.convertToImage().smoothScale( _thumbnailW->size() ) );
     _requested = false;
 }
@@ -79,18 +79,18 @@ void MarkListItem::setPixmap( QPixmap thumbnail )
 void MarkListItem::setSelected( bool selected )
 {
     if (selected)
-	setPaletteBackgroundColor( QApplication::palette().active().highlight() );
+	setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
     else
 	setPaletteBackgroundColor( _backgroundColor );
 }
 
-void MarkListItem::resizeEvent( QResizeEvent * )
+void MarkListItem::resizeEvent( TQResizeEvent * )
 {
     if ( _thumbnailW->paletteBackgroundPixmap() )
 	_thumbnailW->setPaletteBackgroundPixmap( _thumbnailW->paletteBackgroundPixmap()->convertToImage().smoothScale( _thumbnailW->size() ) );
 }
 
-void MarkListItem::paintEvent( QPaintEvent* )
+void MarkListItem::paintEvent( TQPaintEvent* )
 {
     /* TODO:
      * We should cancel things which flipped into view and then flipped out.
@@ -100,7 +100,7 @@ void MarkListItem::paintEvent( QPaintEvent* )
      */
     if ( _requested ) return;
     if ( !_thumbnailW->paletteBackgroundPixmap() ||  _thumbnailW->paletteBackgroundPixmap()->isNull() ) {
-	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, this, SLOT( setPixmap( QPixmap ) ) );
+	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, this, TQT_SLOT( setPixmap( TQPixmap ) ) );
 	_requested = true;
     }
 }
@@ -108,8 +108,8 @@ void MarkListItem::paintEvent( QPaintEvent* )
 
 /* MarkList */
 
-MarkList::MarkList( QWidget* parent, const char* name, KGVMiniWidget* mini)
-    : QTable( parent, name ),
+MarkList::MarkList( TQWidget* parent, const char* name, KGVMiniWidget* mini)
+    : TQTable( parent, name ),
     _selected ( -1 ),
 _miniWidget( mini )
 {
@@ -117,13 +117,13 @@ _miniWidget( mini )
     setLeftMargin( 0 ); // we don't want the vertical header
     horizontalHeader()->setLabel( 0, i18n("Page") );
 
-    connect( this, SIGNAL( currentChanged( int, int ) ),
-	    this, SIGNAL( selected( int ) ) );
+    connect( this, TQT_SIGNAL( currentChanged( int, int ) ),
+	    this, TQT_SIGNAL( selected( int ) ) );
 }
 
-QValueList<int> MarkList::markList() const
+TQValueList<int> MarkList::markList() const
 {
-    QValueList<int> list;
+    TQValueList<int> list;
     MarkListItem *_item;
     for(int i = 0; i < numRows(); i++)
     {
@@ -134,7 +134,7 @@ QValueList<int> MarkList::markList() const
     return list;
 }
 
-void MarkList::insertItem( const QString& text, int index, const QString& tip)
+void MarkList::insertItem( const TQString& text, int index, const TQString& tip)
 {
     MarkListItem *_item;
     _item = new MarkListItem( this, text, tip, viewport()->paletteBackgroundColor(), _miniWidget, index );
@@ -224,7 +224,7 @@ void MarkList::removeMarks()
     }
 }
 
-void MarkList::viewportResizeEvent ( QResizeEvent * )
+void MarkList::viewportResizeEvent ( TQResizeEvent * )
 {
     MarkListItem *_item;
     if( visibleWidth() != columnWidth( 0 ) )

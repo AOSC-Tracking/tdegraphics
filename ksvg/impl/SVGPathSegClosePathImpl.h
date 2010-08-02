@@ -36,7 +36,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_CLOSEPATH; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "Z"; }
-	virtual QString toString() const { return "Z"; }
+	virtual TQString toString() const { return "Z"; }
 
 	void setX(double x) { m_x = x; }
 	void setY(double y) { m_y = y; }

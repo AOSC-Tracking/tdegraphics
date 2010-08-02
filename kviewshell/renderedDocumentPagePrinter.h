@@ -12,7 +12,7 @@
 #define _rendereddocumentpageprinter_h_
 
 #include "renderedDocumentPage.h"
-#include <qpainter.h>
+#include <tqpainter.h>
 
 class KPrinter;
 
@@ -25,21 +25,21 @@ public:
   virtual ~RenderedDocumentPagePrinter() { delete printerPainter; }
 
   /** Returns a pointer to the paintDevice, in this implementation
-      either a QPrinter. The pointer returned is valid as long as
+      either a TQPrinter. The pointer returned is valid as long as
       *this RenderedDocumentPage exists. This method is used by the
       renderer to draw on the page. */
-  virtual QPainter *getPainter() { return printerPainter; }
+  virtual TQPainter *getPainter() { return printerPainter; }
 
-  virtual QSize size();
+  virtual TQSize size();
 
   /** This method does nothing. In particular, it does NOT delete the
-      QPainter. The QPainter is deleted automatically when this
+      TQPainter. The TQPainter is deleted automatically when this
       RenderedDocumentPagePrinter is destructed. */
-  virtual void returnPainter(QPainter *) {;}
+  virtual void returnPainter(TQPainter *) {;}
 
 private:
   KPrinter *printer;
-  QPainter *printerPainter;
+  TQPainter *printerPainter;
 };
 
 

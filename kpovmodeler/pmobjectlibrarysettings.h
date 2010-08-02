@@ -26,8 +26,8 @@
 
 #include "pmsettingsdialog.h"
 
-class QPushButton;
-class QListBox;
+class TQPushButton;
+class TQListBox;
 
 /**
  * Object library configuration dialog page
@@ -39,7 +39,7 @@ public:
    /**
     * Default constructor
     */
-   PMObjectLibrarySettings( QWidget* parent, const char* name = 0 );
+   PMObjectLibrarySettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -62,16 +62,16 @@ protected slots:
 private:
    int m_objectLibraryIndex;
    int m_selectionIndex;
-   QListBox* m_pObjectLibraries;
-   QPushButton* m_pCreateObjectLibrary;
-   QPushButton* m_pModifyObjectLibrary;
-   QPushButton* m_pRemoveObjectLibrary;
-   QPushButton* m_pImportObjectLibrary;
+   TQListBox* m_pObjectLibraries;
+   TQPushButton* m_pCreateObjectLibrary;
+   TQPushButton* m_pModifyObjectLibrary;
+   TQPushButton* m_pRemoveObjectLibrary;
+   TQPushButton* m_pImportObjectLibrary;
 
-   QLabel* m_pLibraryPath;
-   QLabel* m_pLibraryAuthor;
-   QLabel* m_pLibraryDescription;
-   QLabel* m_pReadOnlyText;
+   TQLabel* m_pLibraryPath;
+   TQLabel* m_pLibraryAuthor;
+   TQLabel* m_pLibraryDescription;
+   TQLabel* m_pReadOnlyText;
 };
 
 

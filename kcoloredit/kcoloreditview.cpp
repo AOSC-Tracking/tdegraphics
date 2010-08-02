@@ -16,13 +16,13 @@
  ***************************************************************************/
 
 // include files for Qt
-#include <qpainter.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qvgroupbox.h>
-#include <qlineedit.h>
-#include <qcolor.h>
-#include <qprinter.h>
+#include <tqpainter.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
+#include <tqvgroupbox.h>
+#include <tqlineedit.h>
+#include <tqcolor.h>
+#include <tqprinter.h>
 
 // include files for KDE
 #include <kseparator.h>
@@ -35,28 +35,28 @@
 #include "kcoloredit.h"
 #include "palette.h"
 
-KColorEditView::KColorEditView(QWidget *parent, const char *name) : QSplitter(parent, name) {
+KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(parent, name) {
 	colorSelector = new ColorSelector(this);
 	colorSelector->slotSetColor(
 		Color( RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, "" ));
-	QWidget* paletteViewArea = new QWidget(this);
-	QVBoxLayout* paletteLayout = new QVBoxLayout(paletteViewArea);
+	TQWidget* paletteViewArea = new TQWidget(this);
+	TQVBoxLayout* paletteLayout = new TQVBoxLayout(paletteViewArea);
 	paletteView = new PaletteView(16, 16, 2, this, paletteViewArea);
 	paletteLayout->addWidget(paletteView, 10);
-	QHBoxLayout* layout = new QHBoxLayout();
-	QVBoxLayout* addColorLayout = new QVBoxLayout(4);
+	TQHBoxLayout* layout = new TQHBoxLayout();
+	TQVBoxLayout* addColorLayout = new TQVBoxLayout(4);
 	addColorLayout->setMargin(8);
-	QHBoxLayout* buttonsLayout = new QHBoxLayout(4);
-	QPushButton* addColorButton = new QPushButton(i18n( "Add Color" ), paletteViewArea);
-	connect(addColorButton, SIGNAL( clicked() ), SLOT( slotAddColor() ));
+	TQHBoxLayout* buttonsLayout = new TQHBoxLayout(4);
+	TQPushButton* addColorButton = new TQPushButton(i18n( "Add Color" ), paletteViewArea);
+	connect(addColorButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotAddColor() ));
 	buttonsLayout->addWidget(addColorButton);
 	buttonsLayout->addStretch(10);
 	addColorLayout->addLayout(buttonsLayout);
-	QCheckBox* atCursorCheckBox = new QCheckBox(i18n( "At cursor" ), paletteViewArea);
-	connect(atCursorCheckBox, SIGNAL( toggled(bool) ), SLOT( slotAddColorAtCursor(bool) ));
+	TQCheckBox* atCursorCheckBox = new TQCheckBox(i18n( "At cursor" ), paletteViewArea);
+	connect(atCursorCheckBox, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( slotAddColorAtCursor(bool) ));
 	addColorLayout->addWidget(atCursorCheckBox);
-	overwriteCheckBox = new QCheckBox(i18n( "Overwrite" ), paletteViewArea);
-	connect(overwriteCheckBox, SIGNAL( toggled(bool) ), SLOT( slotAddColorOverwrite(bool) ));
+	overwriteCheckBox = new TQCheckBox(i18n( "Overwrite" ), paletteViewArea);
+	connect(overwriteCheckBox, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( slotAddColorOverwrite(bool) ));
 	slotAddColorAtCursor(false);
 	slotAddColorOverwrite(false);
 	addColorLayout->addWidget(overwriteCheckBox);
@@ -64,66 +64,66 @@ KColorEditView::KColorEditView(QWidget *parent, const char *name) : QSplitter(pa
 	//KSeparator* hLine = new KSeparator(KSeparator::HLine, paletteViewArea);
 	//addColorLayout->addWidget(hLine);
 	//addColorLayout->addStretch(10);
-	//QCheckBox* cursorFollowsChosenColor = new QCheckBox(i18n( "Cursor follows" ), paletteViewArea);
+	//TQCheckBox* cursorFollowsChosenColor = new TQCheckBox(i18n( "Cursor follows" ), paletteViewArea);
 	//addColorLayout->addWidget(cursorFollowsChosenColor);
-	//connect(cursorFollowsChosenColor, SIGNAL( toggled(bool) ),
-	//	paletteView, SLOT( slotCursorFollowsChosenColor(bool) ));
+	//connect(cursorFollowsChosenColor, TQT_SIGNAL( toggled(bool) ),
+	//	paletteView, TQT_SLOT( slotCursorFollowsChosenColor(bool) ));
 	//cursorFollowsChosenColor->toggle();
 	paletteView->slotCursorFollowsChosenColor(true);
 	layout->addLayout(addColorLayout, 0);
-	QVGroupBox* colorAtCursorFrame = new QVGroupBox(i18n("Color at Cursor"), paletteViewArea);
-	QWidget* colorAtCursorFrameArea = new QWidget(colorAtCursorFrame);
-	QVBoxLayout* colorAtCursorLayout = new QVBoxLayout(colorAtCursorFrameArea, 4);
-	QHBoxLayout* colorNameLayout = new QHBoxLayout(0);
-	QLabel* nameLabel = new QLabel(i18n( "Name" ) + ": ", colorAtCursorFrameArea);
+	TQVGroupBox* colorAtCursorFrame = new TQVGroupBox(i18n("Color at Cursor"), paletteViewArea);
+	TQWidget* colorAtCursorFrameArea = new TQWidget(colorAtCursorFrame);
+	TQVBoxLayout* colorAtCursorLayout = new TQVBoxLayout(colorAtCursorFrameArea, 4);
+	TQHBoxLayout* colorNameLayout = new TQHBoxLayout(0);
+	TQLabel* nameLabel = new TQLabel(i18n( "Name" ) + ": ", colorAtCursorFrameArea);
 	colorNameLayout->addWidget(nameLabel, 0);
-	colorName = new QLineEdit(colorAtCursorFrameArea);
-	connect(colorName, SIGNAL( textChanged(const QString&) ), SLOT( slotSetColorName(const QString&) ));
+	colorName = new TQLineEdit(colorAtCursorFrameArea);
+	connect(colorName, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotSetColorName(const TQString&) ));
 	colorNameLayout->addWidget(colorName, 10);
 	colorAtCursorLayout->addLayout(colorNameLayout);
-	QGridLayout* colorAtCursorComponentsLayout = new QGridLayout(3, 6, 4);
+	TQGridLayout* colorAtCursorComponentsLayout = new TQGridLayout(3, 6, 4);
 	colorAtCursorLayout->addLayout(colorAtCursorComponentsLayout);
 	colorAtCursorComponentsLayout->setColStretch(1, 10);
 	colorAtCursorComponentsLayout->addColSpacing(2, 8);
 	colorAtCursorComponentsLayout->setColStretch(4, 10);
 	colorAtCursorComponentsLayout->setColStretch(5, 10);
-	QLabel* hLabel = new QLabel("H: ", colorAtCursorFrameArea);
+	TQLabel* hLabel = new TQLabel("H: ", colorAtCursorFrameArea);
 	colorAtCursorComponentsLayout->addWidget(hLabel, 0, 0);
-	colorAtCursorHValueLabel = new QLabel("", colorAtCursorFrameArea);
+	colorAtCursorHValueLabel = new TQLabel("", colorAtCursorFrameArea);
 	setColorAtCursorComponentValueLabelSizes(colorAtCursorHValueLabel);
 	colorAtCursorComponentsLayout->addWidget(colorAtCursorHValueLabel, 0, 1);
-	QLabel* sLabel = new QLabel("S: ", colorAtCursorFrameArea);
+	TQLabel* sLabel = new TQLabel("S: ", colorAtCursorFrameArea);
 	colorAtCursorComponentsLayout->addWidget(sLabel, 1, 0);
-	colorAtCursorSValueLabel = new QLabel("", colorAtCursorFrameArea);
+	colorAtCursorSValueLabel = new TQLabel("", colorAtCursorFrameArea);
 	setColorAtCursorComponentValueLabelSizes(colorAtCursorSValueLabel);
 	colorAtCursorComponentsLayout->addWidget(colorAtCursorSValueLabel, 1, 1);
-	QLabel* vLabel = new QLabel("V: ", colorAtCursorFrameArea);
+	TQLabel* vLabel = new TQLabel("V: ", colorAtCursorFrameArea);
 	colorAtCursorComponentsLayout->addWidget(vLabel, 2, 0);
-	colorAtCursorVValueLabel = new QLabel("", colorAtCursorFrameArea);
+	colorAtCursorVValueLabel = new TQLabel("", colorAtCursorFrameArea);
 	setColorAtCursorComponentValueLabelSizes(colorAtCursorVValueLabel);
 	colorAtCursorComponentsLayout->addWidget(colorAtCursorVValueLabel, 2, 1);
-	QLabel* rLabel = new QLabel("R: ", colorAtCursorFrameArea);
+	TQLabel* rLabel = new TQLabel("R: ", colorAtCursorFrameArea);
 	colorAtCursorComponentsLayout->addWidget(rLabel, 0, 3);
-	colorAtCursorRValueLabel = new QLabel("", colorAtCursorFrameArea);
+	colorAtCursorRValueLabel = new TQLabel("", colorAtCursorFrameArea);
 	setColorAtCursorComponentValueLabelSizes(colorAtCursorRValueLabel);
 	colorAtCursorComponentsLayout->addWidget(colorAtCursorRValueLabel, 0, 4);
-	QLabel* gLabel = new QLabel("G: ", colorAtCursorFrameArea);
+	TQLabel* gLabel = new TQLabel("G: ", colorAtCursorFrameArea);
 	colorAtCursorComponentsLayout->addWidget(gLabel, 1, 3);
-	colorAtCursorGValueLabel = new QLabel("", colorAtCursorFrameArea);
+	colorAtCursorGValueLabel = new TQLabel("", colorAtCursorFrameArea);
 	setColorAtCursorComponentValueLabelSizes(colorAtCursorGValueLabel);
 	colorAtCursorComponentsLayout->addWidget(colorAtCursorGValueLabel, 1, 4);
-	QLabel* bLabel = new QLabel("B: ", colorAtCursorFrameArea);
+	TQLabel* bLabel = new TQLabel("B: ", colorAtCursorFrameArea);
 	colorAtCursorComponentsLayout->addWidget(bLabel, 2, 3);
-	colorAtCursorBValueLabel = new QLabel("", colorAtCursorFrameArea);
+	colorAtCursorBValueLabel = new TQLabel("", colorAtCursorFrameArea);
 	setColorAtCursorComponentValueLabelSizes(colorAtCursorBValueLabel);
 	colorAtCursorComponentsLayout->addWidget(colorAtCursorBValueLabel, 2, 4);
-	QHBoxLayout* colorAtCursorRgbStringLayout = new QHBoxLayout();
-	QLabel* colorAtCursorRgbStringLabel =
-		new QLabel("RGB " + i18n( "hex." ) + ": ", colorAtCursorFrameArea);
+	TQHBoxLayout* colorAtCursorRgbStringLayout = new TQHBoxLayout();
+	TQLabel* colorAtCursorRgbStringLabel =
+		new TQLabel("RGB " + i18n( "hex." ) + ": ", colorAtCursorFrameArea);
 	colorAtCursorRgbStringLayout->addWidget(colorAtCursorRgbStringLabel);
-	colorAtCursorRgbStringValueLabel = new QLabel("", colorAtCursorFrameArea);
+	colorAtCursorRgbStringValueLabel = new TQLabel("", colorAtCursorFrameArea);
 	colorAtCursorRgbStringValueLabel->setFixedWidth(
-		colorAtCursorRgbStringValueLabel->fontMetrics().width( QString("8888888") ));
+		colorAtCursorRgbStringValueLabel->fontMetrics().width( TQString("8888888") ));
 	colorAtCursorRgbStringLayout->addWidget(colorAtCursorRgbStringValueLabel);
 	colorAtCursorRgbStringLayout->addStretch();
 	colorAtCursorLayout->addLayout(colorAtCursorRgbStringLayout);
@@ -139,9 +139,9 @@ KColorEditView::KColorEditView(QWidget *parent, const char *name) : QSplitter(pa
 KColorEditView::~KColorEditView() {
 }
 
-void KColorEditView::setColorAtCursorComponentValueLabelSizes(QLabel* const label) {
-	label->setMinimumWidth(label->fontMetrics().width( QString("888") ));
-	label->setMaximumWidth(label->fontMetrics().width( QString("88888") ));
+void KColorEditView::setColorAtCursorComponentValueLabelSizes(TQLabel* const label) {
+	label->setMinimumWidth(label->fontMetrics().width( TQString("888") ));
+	label->setMaximumWidth(label->fontMetrics().width( TQString("88888") ));
 }
 
 KColorEditDoc *KColorEditView::document() const {
@@ -150,8 +150,8 @@ KColorEditDoc *KColorEditView::document() const {
   return theApp->document();
 }
 
-void KColorEditView::print(QPrinter *pPrinter) {
-  QPainter printpainter;
+void KColorEditView::print(TQPrinter *pPrinter) {
+  TQPainter printpainter;
   printpainter.begin(pPrinter);
 
   // TODO: add your printing code here
@@ -167,7 +167,7 @@ void KColorEditView::slotCursorPosChanged(int position) {
 	Palette* palette = document()->paletteHistory()->editableStream();
 	if(position < palette->length()) {
 		Color* color = palette->color(position);
-		QString string;
+		TQString string;
 		inColorNameChanging = true;
 		colorName->setText(color->name());
 		colorName->setEnabled(true);
@@ -178,7 +178,7 @@ void KColorEditView::slotCursorPosChanged(int position) {
 		colorAtCursorRValueLabel->setText(string.setNum( rComponent ));
 		colorAtCursorGValueLabel->setText(string.setNum( gComponent ));
 		colorAtCursorBValueLabel->setText(string.setNum( bComponent ));
-		QColor hsvColor(rComponent, gComponent, bComponent);
+		TQColor hsvColor(rComponent, gComponent, bComponent);
 		int hComponent;
 		int sComponent;
 		int vComponent;
@@ -254,7 +254,7 @@ void KColorEditView::slotAddColorOverwrite(bool overwrite) {
 		addColorMode = INSERT_COLOR;
 }
 
-void KColorEditView::slotSetColorName(const QString& name) {
+void KColorEditView::slotSetColorName(const TQString& name) {
 	if(!inColorNameChanging) {
 		/*
 		Palette* palette = getDocument()->getPaletteHistory()->getEditableStream();

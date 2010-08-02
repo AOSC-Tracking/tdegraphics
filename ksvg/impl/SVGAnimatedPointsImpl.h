@@ -25,7 +25,7 @@
 
 #include "ksvg_lookup.h"
 
-class QString;
+class TQString;
 
 namespace KSVG
 {
@@ -40,7 +40,7 @@ public:
 	SVGPointListImpl *points() const;
 	SVGPointListImpl *animatedPoints() const;
 
-	static void parsePoints(QString _points, SVGPointListImpl *points);
+	static void parsePoints(TQString _points, SVGPointListImpl *points);
 
 protected:
 	SVGPointListImpl *m_points;

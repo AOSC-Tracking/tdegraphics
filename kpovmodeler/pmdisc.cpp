@@ -73,12 +73,12 @@ PMDisc::~PMDisc( )
 {
 }
 
-QString PMDisc::description( ) const
+TQString PMDisc::description( ) const
 {
    return i18n( "disc" );
 }
 
-void PMDisc::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMDisc::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "center", m_center.serializeXML( ) );
    e.setAttribute( "normal", m_normal.serializeXML( ) );
@@ -176,7 +176,7 @@ void PMDisc::setHoleRadius( double hradius )
    }
 }
 
-PMDialogEditBase* PMDisc::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMDisc::editWidget( TQWidget* parent ) const
 {
    return new PMDiscEdit( parent );
 }

@@ -21,7 +21,7 @@
 
 #include <kdatastream.h>
 
-#include <qdom.h>
+#include <tqdom.h>
 
 using namespace KMrml;
 
@@ -31,9 +31,9 @@ using namespace KMrml;
 // <query-paradigm> elements as children.
 //
 
-MrmlElement::MrmlElement( const QDomElement& elem )
+MrmlElement::MrmlElement( const TQDomElement& elem )
 {
-    QValueList<QDomElement> list =
+    TQValueList<TQDomElement> list =
         KMrml::directChildElements( elem, MrmlShared::queryParadigmList() );
 
     Q_ASSERT( list.count() < 2 ); // There can be only one.
@@ -43,9 +43,9 @@ MrmlElement::MrmlElement( const QDomElement& elem )
 }
 
 
-void MrmlElement::setOtherAttributes( QDomElement& elem ) const
+void MrmlElement::setOtherAttributes( TQDomElement& elem ) const
 {
-    QMapConstIterator<QString,QString> it = m_attributes.begin();
+    TQMapConstIterator<TQString,TQString> it = m_attributes.begin();
     for ( ; it != m_attributes.end(); ++it )
     {
         elem.setAttribute( it.key(), it.data() );
@@ -79,14 +79,14 @@ AlgorithmList AlgorithmList::algorithmsForCollection( const Collection& coll ) c
 ///////////////////////////////////////////////////////////////////
 
 
-Collection::Collection( const QDomElement& elem )
+Collection::Collection( const TQDomElement& elem )
     : MrmlElement( elem )
 {
-    QDomNamedNodeMap attrs = elem.attributes();
+    TQDomNamedNodeMap attrs = elem.attributes();
     for ( uint i = 0; i < attrs.length(); i++ )
     {
-        QDomAttr attribute = attrs.item( i ).toAttr();
-        QString name = attribute.name();
+        TQDomAttr attribute = attrs.item( i ).toAttr();
+        TQString name = attribute.name();
 
         if ( name == MrmlShared::collectionName() )
             m_name = attribute.value();
@@ -103,15 +103,15 @@ Collection::Collection( const QDomElement& elem )
 ///////////////////////////////////////////////////////////////////
 
 
-Algorithm::Algorithm( const QDomElement& elem )
+Algorithm::Algorithm( const TQDomElement& elem )
     : MrmlElement( elem )
 {
-    QDomNamedNodeMap attrs = elem.attributes();
+    TQDomNamedNodeMap attrs = elem.attributes();
 
     for ( uint i = 0; i < attrs.length(); i++ )
     {
-        QDomAttr attribute = attrs.item( i ).toAttr();
-        QString name = attribute.name();
+        TQDomAttr attribute = attrs.item( i ).toAttr();
+        TQString name = attribute.name();
 
         if ( name == MrmlShared::algorithmName() )
             m_name = attribute.value();
@@ -128,7 +128,7 @@ Algorithm::Algorithm( const QDomElement& elem )
             m_attributes.insert( name, attribute.value() );
     }
 
-    QDomElement propsElem = firstChildElement(elem, MrmlShared::propertySheet());
+    TQDomElement propsElem = firstChildElement(elem, MrmlShared::propertySheet());
     m_propertySheet.initFromDOM( propsElem );
 
     qDebug("############# new algorithm: name: %s, id: %s, type: %s", m_name.latin1(), m_id.latin1(), m_type.latin1());
@@ -144,10 +144,10 @@ Algorithm Algorithm::defaultAlgorithm()
     return algo;
 }
 
-QDomElement Algorithm::toElement( QDomElement& parent ) const
+TQDomElement Algorithm::toElement( TQDomElement& parent ) const
 {
-    QDomDocument doc = parent.ownerDocument();
-    QDomElement algorithm = doc.createElement( MrmlShared::algorithm() );
+    TQDomDocument doc = parent.ownerDocument();
+    TQDomElement algorithm = doc.createElement( MrmlShared::algorithm() );
     parent.appendChild( algorithm );
     setOtherAttributes( algorithm );
 
@@ -167,12 +167,12 @@ QDomElement Algorithm::toElement( QDomElement& parent ) const
 ///////////////////////////////////////////////////////////////////
 
 
-QueryParadigm::QueryParadigm( const QDomElement& elem )
+QueryParadigm::QueryParadigm( const TQDomElement& elem )
 {
-    QDomNamedNodeMap attrs = elem.attributes();
+    TQDomNamedNodeMap attrs = elem.attributes();
     for ( uint i = 0; i < attrs.count(); i++ )
     {
-        QDomAttr attr = attrs.item( i ).toAttr();
+        TQDomAttr attr = attrs.item( i ).toAttr();
         m_attributes.insert( attr.name(), attr.value() );
         if ( attr.name() == "type" )
             m_type = attr.value();
@@ -185,16 +185,16 @@ bool QueryParadigm::matches( const QueryParadigm& other ) const
         equalMaps( m_attributes, other.m_attributes );
 }
 
-bool QueryParadigm::equalMaps( const QMap<QString,QString> m1,
-                               const QMap<QString,QString> m2 )
+bool QueryParadigm::equalMaps( const TQMap<TQString,TQString> m1,
+                               const TQMap<TQString,TQString> m2 )
 {
     if ( m1.count() != m2.count() )
         return false;
 
-    QMapConstIterator<QString,QString> it = m1.begin();
+    TQMapConstIterator<TQString,TQString> it = m1.begin();
     for ( ; it != m1.end(); ++it )
     {
-        QMapConstIterator<QString,QString> it2 = m2.find( it.key() );
+        TQMapConstIterator<TQString,TQString> it2 = m2.find( it.key() );
         if ( it2 == m2.end() || it.data() != it2.data() )
             return false;
     }
@@ -206,14 +206,14 @@ bool QueryParadigm::equalMaps( const QMap<QString,QString> m1,
 ///////////////////////////////////////////////////////////////////
 
 
-void QueryParadigmList::initFromDOM( const QDomElement& elem )
+void QueryParadigmList::initFromDOM( const TQDomElement& elem )
 {
     clear();
 
-    QValueList<QDomElement> list =
+    TQValueList<TQDomElement> list =
         KMrml::directChildElements( elem, MrmlShared::queryParadigm() );
 
-    QValueListConstIterator<QDomElement> it = list.begin();
+    TQValueListConstIterator<TQDomElement> it = list.begin();
     for ( ; it != list.end(); ++it )
     {
         append( QueryParadigm( *it ));
@@ -242,12 +242,12 @@ bool QueryParadigmList::matches( const QueryParadigmList& other ) const
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 
-QValueList<QDomElement> KMrml::directChildElements( const QDomElement& parent,
-                                                    const QString& tagName )
+TQValueList<TQDomElement> KMrml::directChildElements( const TQDomElement& parent,
+                                                    const TQString& tagName )
 {
-    QValueList<QDomElement> list;
+    TQValueList<TQDomElement> list;
 
-    QDomNode node = parent.firstChild();
+    TQDomNode node = parent.firstChild();
     while ( !node.isNull() )
     {
         if ( node.isElement() && node.nodeName() == tagName )
@@ -259,10 +259,10 @@ QValueList<QDomElement> KMrml::directChildElements( const QDomElement& parent,
     return list;
 }
 
-QDomElement KMrml::firstChildElement( const QDomElement& parent,
-                                      const QString& tagName )
+TQDomElement KMrml::firstChildElement( const TQDomElement& parent,
+                                      const TQString& tagName )
 {
-    QDomNode node = parent.firstChild();
+    TQDomNode node = parent.firstChild();
     while ( !node.isNull() )
     {
         if ( node.isElement() && node.nodeName() == tagName )
@@ -271,86 +271,86 @@ QDomElement KMrml::firstChildElement( const QDomElement& parent,
         node = node.nextSibling();
     }
 
-    return QDomElement();
+    return TQDomElement();
 }
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 
 
-QDataStream& KMrml::operator<<( QDataStream& stream, const QueryParadigm& )
+TQDataStream& KMrml::operator<<( TQDataStream& stream, const QueryParadigm& )
 {
 
     return stream;
 }
-QDataStream& KMrml::operator>>( QDataStream& stream, QueryParadigm& )
-{
-
-    return stream;
-}
-
-QDataStream& KMrml::operator<<( QDataStream& stream, const QueryParadigmList& )
-{
-
-    return stream;
-}
-QDataStream& KMrml::operator>>( QDataStream& stream, QueryParadigmList& )
+TQDataStream& KMrml::operator>>( TQDataStream& stream, QueryParadigm& )
 {
 
     return stream;
 }
 
-QDataStream& KMrml::operator<<( QDataStream& stream, const MrmlElement& )
+TQDataStream& KMrml::operator<<( TQDataStream& stream, const QueryParadigmList& )
 {
 
     return stream;
 }
-QDataStream& KMrml::operator>>( QDataStream& stream, MrmlElement& )
-{
-
-    return stream;
-}
-
-QDataStream& KMrml::operator<<( QDataStream& stream, const Algorithm& )
-{
-
-    return stream;
-}
-QDataStream& KMrml::operator>>( QDataStream& stream, Algorithm& )
+TQDataStream& KMrml::operator>>( TQDataStream& stream, QueryParadigmList& )
 {
 
     return stream;
 }
 
-QDataStream& KMrml::operator<<( QDataStream& stream, const Collection& )
+TQDataStream& KMrml::operator<<( TQDataStream& stream, const MrmlElement& )
 {
 
     return stream;
 }
-QDataStream& KMrml::operator>>( QDataStream& stream, Collection& )
+TQDataStream& KMrml::operator>>( TQDataStream& stream, MrmlElement& )
+{
+
+    return stream;
+}
+
+TQDataStream& KMrml::operator<<( TQDataStream& stream, const Algorithm& )
+{
+
+    return stream;
+}
+TQDataStream& KMrml::operator>>( TQDataStream& stream, Algorithm& )
+{
+
+    return stream;
+}
+
+TQDataStream& KMrml::operator<<( TQDataStream& stream, const Collection& )
+{
+
+    return stream;
+}
+TQDataStream& KMrml::operator>>( TQDataStream& stream, Collection& )
 {
     return stream;
 }
 
-template <class t> QDataStream& KMrml::operator<<( QDataStream& stream,
+template <class t> TQDataStream& KMrml::operator<<( TQDataStream& stream,
                                                    const MrmlElementList<t>& )
 {
 
     return stream;
 }
-template <class t> QDataStream& KMrml::operator>>( QDataStream& stream,
+template <class t> TQDataStream& KMrml::operator>>( TQDataStream& stream,
                                                    MrmlElementList<t>& )
 {
 
     return stream;
 }
 
-QDataStream& KMrml::operator<<( QDataStream& stream, const AlgorithmList& )
+TQDataStream& KMrml::operator<<( TQDataStream& stream, const AlgorithmList& )
 {
 
     return stream;
 }
-QDataStream& KMrml::operator>>( QDataStream& stream, AlgorithmList& )
+TQDataStream& KMrml::operator>>( TQDataStream& stream, AlgorithmList& )
 {
 
     return stream;

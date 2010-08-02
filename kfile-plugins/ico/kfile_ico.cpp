@@ -26,11 +26,11 @@
 #include <kstringvalidator.h>
 #include <kdebug.h>
 
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
 
 #if !defined(__osf__)
 #include <inttypes.h>
@@ -44,8 +44,8 @@ typedef KGenericFactory<KIcoPlugin> IcoFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_ico, IcoFactory( "kfile_ico" ))
 
-KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
-                       const QStringList &args)
+KIcoPlugin::KIcoPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args)
 
     : KFilePlugin(parent, name, args)
 {
@@ -57,13 +57,13 @@ KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Number", i18n("Number of Icons"), QVariant::Int);
+    item = addItemInfo(group, "Number", i18n("Number of Icons"), TQVariant::Int);
 
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
-    item = addItemInfo(group, "Colors", i18n("Colors"), QVariant::Int);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
+    item = addItemInfo(group, "Colors", i18n("Colors"), TQVariant::Int);
 
-    item = addItemInfo(group, "DimensionsM", i18n("Dimensions (1st icon)"), QVariant::Size);
-    item = addItemInfo(group, "ColorsM", i18n("Colors (1st icon)"), QVariant::Int);
+    item = addItemInfo(group, "DimensionsM", i18n("Dimensions (1st icon)"), TQVariant::Size);
+    item = addItemInfo(group, "ColorsM", i18n("Colors (1st icon)"), TQVariant::Int);
 }
 
 
@@ -71,18 +71,18 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
 {
 
 
-    QFile file(info.path());
+    TQFile file(info.path());
 
     if (!file.open(IO_ReadOnly))
     {
-        kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
         return false;
     }
 
-    QDataStream dstream(&file);
+    TQDataStream dstream(&file);
 
     // ICO files are little-endian
-    dstream.setByteOrder(QDataStream::LittleEndian);
+    dstream.setByteOrder(TQDataStream::LittleEndian);
 
 
     // read the beginning of the file and make sure it looks ok
@@ -124,7 +124,7 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
     appendItem(group, "Number", ico_count);
 
     if (ico_count == 1) {
-        appendItem(group, "Dimensions", QSize(icoe_width, icoe_height));
+        appendItem(group, "Dimensions", TQSize(icoe_width, icoe_height));
 
         if (icoe_colorcount > 0)
             appendItem(group, "Colors", icoe_colorcount);
@@ -133,7 +133,7 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     } else {
 
-        appendItem(group, "DimensionsM", QSize(icoe_width, icoe_height));
+        appendItem(group, "DimensionsM", TQSize(icoe_width, icoe_height));
 
         if (icoe_colorcount > 0)
             appendItem(group, "ColorsM", icoe_colorcount);

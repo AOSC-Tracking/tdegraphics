@@ -23,11 +23,11 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
-class QLineEdit;
-class QListBox;
-class QPushButton;
+class TQLineEdit;
+class TQListBox;
+class TQPushButton;
 class PMLibraryEntryPreview;
 class KListView;
 
@@ -40,14 +40,14 @@ class PMLibraryObjectSearch: public QWidget
 {
    Q_OBJECT
 public:
-   PMLibraryObjectSearch( QWidget *parent );
+   PMLibraryObjectSearch( TQWidget *parent );
 
 private slots:
    void slotSearchButtonPressed( );
 
 private:
-   QLineEdit*   m_pSearch;
-   QPushButton* m_pSearchButton;
+   TQLineEdit*   m_pSearch;
+   TQPushButton* m_pSearchButton;
    KListView* m_pFileList;
    PMLibraryEntryPreview* m_pPreview;
 };

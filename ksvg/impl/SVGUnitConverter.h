@@ -21,7 +21,7 @@
 #ifndef SVGUnitConverter_H
 #define SVGUnitConverter_H
 
-#include <qptrdict.h>
+#include <tqptrdict.h>
 
 #include <dom/dom_string.h>
 
@@ -41,12 +41,12 @@ public:
 	void add(SVGAnimatedLengthImpl *obj)
 	{
 		UnitData *data = new UnitData();
-		data->valueAsString = QString::null;
+		data->valueAsString = TQString::null;
 
 		m_dict.insert(obj, data);
 	}
 
-	void modify(SVGAnimatedLengthImpl *obj, const QString &value)
+	void modify(SVGAnimatedLengthImpl *obj, const TQString &value)
 	{
 		UnitData *data = m_dict.find(obj);
 
@@ -62,7 +62,7 @@ public:
 		if(!user && !bbox) // Invalid unit type
 			return;
 
-		QPtrDictIterator<UnitData> it(m_dict);
+		TQPtrDictIterator<UnitData> it(m_dict);
 		for(; it.current(); ++it)
 		{
 			UnitData *data = it.current();
@@ -87,10 +87,10 @@ public:
 private:
 	typedef struct
 	{
-		QString valueAsString; // Original value
+		TQString valueAsString; // Original value
 	} UnitData;
 
-	QPtrDict<UnitData> m_dict;
+	TQPtrDict<UnitData> m_dict;
 };
 
 }

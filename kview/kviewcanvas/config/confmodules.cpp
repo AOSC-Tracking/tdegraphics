@@ -20,9 +20,9 @@
 #include "generalconfigwidget.h"
 #include "defaults.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qframe.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqframe.h>
 
 #include <klocale.h>
 #include <ksimpleconfig.h>
@@ -31,14 +31,14 @@
 #include <knuminput.h>
 #include <kgenericfactory.h>
 
-typedef KGenericFactory<KViewCanvasConfig, QWidget> KViewCanvasConfigFactory;
+typedef KGenericFactory<KViewCanvasConfig, TQWidget> KViewCanvasConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewcanvasconfig, KViewCanvasConfigFactory( "kcm_kviewcanvasconfig" ) )
 
-KViewCanvasConfig::KViewCanvasConfig( QWidget * parent, const char *, const QStringList & args )
+KViewCanvasConfig::KViewCanvasConfig( TQWidget * parent, const char *, const TQStringList & args )
 	: KCModule( KViewCanvasConfigFactory::instance(), parent, args )
 	, m_config( new KConfig( "kviewcanvasrc" ) )
 {
-	QBoxLayout * layout = new QVBoxLayout( this );
+	TQBoxLayout * layout = new TQVBoxLayout( this );
 	layout->setAutoAdd( true );
 
 	m_pWidget = new GeneralConfigWidget( this );
@@ -52,21 +52,21 @@ KViewCanvasConfig::KViewCanvasConfig( QWidget * parent, const char *, const QStr
 
 	for( unsigned int i = 1; i <= Defaults::numOfBlendEffects; ++i )
 	{
-		QCheckListItem * item = new QCheckListItem( m_pWidget->m_pListView, i18n( Defaults::blendEffectDescription[ i ] ), QCheckListItem::CheckBox );
+		TQCheckListItem * item = new TQCheckListItem( m_pWidget->m_pListView, i18n( Defaults::blendEffectDescription[ i ] ), TQCheckListItem::CheckBox );
 		m_items.append( item );
 	}
 
-	connect( m_pWidget->m_pListView, SIGNAL( clicked( QListViewItem * ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_pListView, SIGNAL( spacePressed( QListViewItem * ) ), this, SLOT( configChanged() ) );
+	connect( m_pWidget->m_pListView, TQT_SIGNAL( clicked( TQListViewItem * ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pListView, TQT_SIGNAL( spacePressed( TQListViewItem * ) ), this, TQT_SLOT( configChanged() ) );
 
-	connect( m_pWidget->m_pSmoothScaling, SIGNAL( toggled( bool ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_pKeepRatio, SIGNAL( toggled( bool ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_pCenterImage, SIGNAL( toggled( bool ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_bgColor, SIGNAL( changed( const QColor & ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMinWidth, SIGNAL( valueChanged( int ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMaxWidth, SIGNAL( valueChanged( int ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMinHeight, SIGNAL( valueChanged( int ) ), this, SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMaxHeight, SIGNAL( valueChanged( int ) ), this, SLOT( configChanged() ) );
+	connect( m_pWidget->m_pSmoothScaling, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pKeepRatio, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pCenterImage, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_bgColor, TQT_SIGNAL( changed( const TQColor & ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMinWidth, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMaxWidth, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMinHeight, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMaxHeight, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
 
 	load();
 }
@@ -90,9 +90,9 @@ void KViewCanvasConfig::save()
 	cfgGroup.writeEntry( "Maximum Height", m_pWidget->m_pMaxHeight->value() );
 
 	KConfigGroup cfgGroup2( m_config, "Blend Effects" );
-	QCheckListItem *item = m_items.first();
+	TQCheckListItem *item = m_items.first();
 	for( int i = 1; item; item = m_items.next(), ++i )
-		cfgGroup2.writeEntry( QString::number( i ), item->isOn() );
+		cfgGroup2.writeEntry( TQString::number( i ), item->isOn() );
 	m_config->sync();
 }
 
@@ -111,9 +111,9 @@ void KViewCanvasConfig::load()
 	m_pWidget->m_pMaxHeight->setValue( cfgGroup.readNumEntry( "Maximum Height", Defaults::maxSize.height() ) );
 
 	KConfigGroup cfgGroup2( m_config, "Blend Effects" );
-	QCheckListItem * item = m_items.first();
+	TQCheckListItem * item = m_items.first();
 	for( int i = 1; item; item = m_items.next(), ++i )
-		item->setOn( cfgGroup2.readBoolEntry( QString::number( i ), false ) );
+		item->setOn( cfgGroup2.readBoolEntry( TQString::number( i ), false ) );
 }
 
 void KViewCanvasConfig::defaults()
@@ -129,7 +129,7 @@ void KViewCanvasConfig::defaults()
 	m_pWidget->m_pMaxWidth ->setValue( Defaults::maxSize.width() );
 	m_pWidget->m_pMaxHeight->setValue( Defaults::maxSize.height() );
 
-	QCheckListItem * item = m_items.first();
+	TQCheckListItem * item = m_items.first();
 	for( int i = 1; item; item = m_items.next(), ++i )
 		item->setOn( false );
 	emit changed( true );

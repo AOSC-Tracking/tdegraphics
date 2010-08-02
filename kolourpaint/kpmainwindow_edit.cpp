@@ -27,13 +27,13 @@
 
 #include <kpmainwindow.h>
 
-#include <qapplication.h>
-#include <qclipboard.h>
-#include <qdatetime.h>
-#include <qfontmetrics.h>
-#include <qimage.h>
-#include <qpixmap.h>
-#include <qvaluevector.h>
+#include <tqapplication.h>
+#include <tqclipboard.h>
+#include <tqdatetime.h>
+#include <tqfontmetrics.h>
+#include <tqimage.h>
+#include <tqpixmap.h>
+#include <tqvaluevector.h>
 
 #include <kaction.h>
 #include <kdebug.h>
@@ -103,25 +103,25 @@ void kpMainWindow::setupEditMenuActions ()
     }
 
 
-    m_actionCut = KStdAction::cut (this, SLOT (slotCut ()), ac);
-    m_actionCopy = KStdAction::copy (this, SLOT (slotCopy ()), ac);
-    m_actionPaste = KStdAction::paste (this, SLOT (slotPaste ()), ac);
+    m_actionCut = KStdAction::cut (this, TQT_SLOT (slotCut ()), ac);
+    m_actionCopy = KStdAction::copy (this, TQT_SLOT (slotCopy ()), ac);
+    m_actionPaste = KStdAction::paste (this, TQT_SLOT (slotPaste ()), ac);
     m_actionPasteInNewWindow = new KAction (i18n ("Paste in &New Window"),
         Qt::CTRL + Qt::SHIFT + Qt::Key_V,
-        this, SLOT (slotPasteInNewWindow ()), ac, "edit_paste_in_new_window");
+        this, TQT_SLOT (slotPasteInNewWindow ()), ac, "edit_paste_in_new_window");
 
-    //m_actionDelete = KStdAction::clear (this, SLOT (slotDelete ()), ac);
+    //m_actionDelete = KStdAction::clear (this, TQT_SLOT (slotDelete ()), ac);
     m_actionDelete = new KAction (i18n ("&Delete Selection"), 0,
-        this, SLOT (slotDelete ()), ac, "edit_clear");
+        this, TQT_SLOT (slotDelete ()), ac, "edit_clear");
 
-    m_actionSelectAll = KStdAction::selectAll (this, SLOT (slotSelectAll ()), ac);
-    m_actionDeselect = KStdAction::deselect (this, SLOT (slotDeselect ()), ac);
+    m_actionSelectAll = KStdAction::selectAll (this, TQT_SLOT (slotSelectAll ()), ac);
+    m_actionDeselect = KStdAction::deselect (this, TQT_SLOT (slotDeselect ()), ac);
 
 
     m_actionCopyToFile = new KAction (i18n ("C&opy to File..."), 0,
-        this, SLOT (slotCopyToFile ()), ac, "edit_copy_to_file");
+        this, TQT_SLOT (slotCopyToFile ()), ac, "edit_copy_to_file");
     m_actionPasteFromFile = new KAction (i18n ("Paste &From File..."), 0,
-        this, SLOT (slotPasteFromFile ()), ac, "edit_paste_from_file");
+        this, TQT_SLOT (slotPasteFromFile ()), ac, "edit_paste_from_file");
 
 
     m_editMenuDocumentActionsEnabled = false;
@@ -129,8 +129,8 @@ void kpMainWindow::setupEditMenuActions ()
 
     // Paste should always be enabled, as long as there is something paste
     // (independent of whether we have a document or not)
-    connect (QApplication::clipboard (), SIGNAL (dataChanged ()),
-             this, SLOT (slotEnablePaste ()));
+    connect (TQApplication::clipboard (), TQT_SIGNAL (dataChanged ()),
+             this, TQT_SLOT (slotEnablePaste ()));
     slotEnablePaste ();
 }
 
@@ -158,9 +158,9 @@ void kpMainWindow::enableEditMenuDocumentActions (bool enable)
 
 
 // public
-QPopupMenu *kpMainWindow::selectionToolRMBMenu ()
+TQPopupMenu *kpMainWindow::selectionToolRMBMenu ()
 {
-    return (QPopupMenu *) guiFactory ()->container ("selectionToolRMBMenu", this);
+    return (TQPopupMenu *) guiFactory ()->container ("selectionToolRMBMenu", this);
 }
 
 
@@ -180,7 +180,7 @@ void kpMainWindow::slotCut ()
     }
 
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     if (toolHasBegunShape ())
         tool ()->endShapeInternal ();
@@ -188,7 +188,7 @@ void kpMainWindow::slotCut ()
     slotCopy ();
     slotDelete ();
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 
 }
 
@@ -208,7 +208,7 @@ void kpMainWindow::slotCopy ()
     }
 
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     if (toolHasBegunShape ())
         tool ()->endShapeInternal ();
@@ -223,7 +223,7 @@ void kpMainWindow::slotCopy ()
     {
         if (!sel.text ().isEmpty ())
         {
-            QApplication::clipboard ()->setData (new QTextDrag (sel.text ()),
+            TQApplication::clipboard ()->setData (new TQTextDrag (sel.text ()),
                                                  QClipboard::Clipboard);
 
             // SYNC: Normally, users highlight text and press CTRL+C.
@@ -237,19 +237,19 @@ void kpMainWindow::slotCopy ()
             //       mouse button" clipboard.  We don't do this for images
             //       as no one ever middle-mouse-pastes images.
             //
-            //       Note that we don't share the QTextDrag pointer with
+            //       Note that we don't share the TQTextDrag pointer with
             //       the above in case Qt doesn't expect it.
             //
             //       Once we change KolourPaint to support highlighted text
             //       and CTRL+C to copy only the highlighted text, delete
             //       this code.
-            QApplication::clipboard ()->setData (new QTextDrag (sel.text ()),
+            TQApplication::clipboard ()->setData (new TQTextDrag (sel.text ()),
                                                  QClipboard::Selection);
         }
     }
     else
     {
-        QPixmap rawPixmap;
+        TQPixmap rawPixmap;
 
         if (sel.pixmap ())
             rawPixmap = *sel.pixmap ();
@@ -268,11 +268,11 @@ void kpMainWindow::slotCopy ()
                 rawPixmap,
                 Qt::white));  // CONFIG
         
-        QApplication::clipboard ()->setData (new kpSelectionDrag (sel),
+        TQApplication::clipboard ()->setData (new kpSelectionDrag (sel),
                                              QClipboard::Clipboard);
     }
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 
@@ -280,7 +280,7 @@ static bool HasSomethingToPaste (kpMainWindow *mw)
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow(" << mw->name () << "):HasSomethingToPaste()" << endl;
-    QTime timer;
+    TQTime timer;
     timer.start ();
 #else
     (void) mw;
@@ -288,12 +288,12 @@ static bool HasSomethingToPaste (kpMainWindow *mw)
 
     bool hasSomething = false;
 
-    QMimeSource *ms = QApplication::clipboard ()->data (QClipboard::Clipboard);
+    TQMimeSource *ms = TQApplication::clipboard ()->data (QClipboard::Clipboard);
     if (ms)
     {
-        // It's faster to test for QTextDrag::canDecode() first due to the
+        // It's faster to test for TQTextDrag::canDecode() first due to the
         // lazy evaluation of the '||' operator.
-        hasSomething = (QTextDrag::canDecode (ms) ||
+        hasSomething = (TQTextDrag::canDecode (ms) ||
                         kpSelectionDrag::canDecode (ms));
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\t" << mw->name () << "***canDecode=" << timer.restart () << endl;
@@ -311,7 +311,7 @@ static bool HasSomethingToPaste (kpMainWindow *mw)
     return hasSomething;
 }
 
-// HACK: SYNC: Non-Qt apps do not cause QApplication::clipboard() to
+// HACK: SYNC: Non-Qt apps do not cause TQApplication::clipboard() to
 //             emit dataChanged().  We don't want to have our paste
 //             action disabled when we can actually paste something.
 //
@@ -332,13 +332,13 @@ static bool HasSomethingToPasteWithDialogIfNot (kpMainWindow *mw)
 #if 1
     (void) mw;
 #else
-    QApplication::setOverrideCursor (Qt::arrowCursor);
+    TQApplication::setOverrideCursor (Qt::arrowCursor);
 
     KMessageBox::sorry (mw,
         STRING_FREEZE_i18n ("<qt><p>There is nothing in the clipboard to paste.</p></qt>"),
         STRING_FREEZE_i18n ("Cannot Paste"));
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 #endif
 
     return false;
@@ -378,7 +378,7 @@ void kpMainWindow::slotEnablePaste ()
 
 
 // private
-QRect kpMainWindow::calcUsefulPasteRect (int pixmapWidth, int pixmapHeight)
+TQRect kpMainWindow::calcUsefulPasteRect (int pixmapWidth, int pixmapHeight)
 {
 #if DEBUG_KP_MAIN_WINDOW && 1
     kdDebug () << "kpMainWindow::calcUsefulPasteRect("
@@ -389,29 +389,29 @@ QRect kpMainWindow::calcUsefulPasteRect (int pixmapWidth, int pixmapHeight)
     if (!m_document)
     {
         kdError () << "kpMainWindow::calcUsefulPasteRect() without doc" << endl;
-        return QRect ();
+        return TQRect ();
     }
 
     // TODO: 1st choice is to paste sel near but not overlapping last deselect point
 
     if (m_mainView && m_scrollView)
     {
-        const QPoint viewTopLeft (m_scrollView->contentsX (),
+        const TQPoint viewTopLeft (m_scrollView->contentsX (),
                                   m_scrollView->contentsY ());
 
-        const QPoint docTopLeft = m_mainView->transformViewToDoc (viewTopLeft);
+        const TQPoint docTopLeft = m_mainView->transformViewToDoc (viewTopLeft);
 
         if ((docTopLeft.x () + pixmapWidth <= m_document->width () &&
              docTopLeft.y () + pixmapHeight <= m_document->height ()) ||
             pixmapWidth <= docTopLeft.x () ||
             pixmapHeight <= docTopLeft.y ())
         {
-            return QRect (docTopLeft.x (), docTopLeft.y (),
+            return TQRect (docTopLeft.x (), docTopLeft.y (),
                           pixmapWidth, pixmapHeight);
         }
     }
 
-    return QRect (0, 0, pixmapWidth, pixmapHeight);
+    return TQRect (0, 0, pixmapWidth, pixmapHeight);
 }
 
 // private
@@ -428,7 +428,7 @@ void kpMainWindow::paste (const kpSelection &sel, bool forceTopLeft)
         return;
     }
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     if (toolHasBegunShape ())
         tool ()->endShapeInternal ();
@@ -464,9 +464,9 @@ void kpMainWindow::paste (const kpSelection &sel, bool forceTopLeft)
 
 
 #if DEBUG_KP_MAIN_WINDOW && 1
-    kdDebug () << "sel.size=" << QSize (sel.width (), sel.height ())
+    kdDebug () << "sel.size=" << TQSize (sel.width (), sel.height ())
                << " document.size="
-               << QSize (m_document->width (), m_document->height ())
+               << TQSize (m_document->width (), m_document->height ())
                << endl;
 #endif
 
@@ -489,13 +489,13 @@ void kpMainWindow::paste (const kpSelection &sel, bool forceTopLeft)
     }
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // public
-void kpMainWindow::pasteText (const QString &text,
+void kpMainWindow::pasteText (const TQString &text,
                               bool forceNewTextSelection,
-                              const QPoint &newTextSelectionTopLeft)
+                              const TQPoint &newTextSelectionTopLeft)
 {
 #if DEBUG_KP_MAIN_WINDOW && 1
     kdDebug () << "kpMainWindow::pasteText(" << text
@@ -509,18 +509,18 @@ void kpMainWindow::pasteText (const QString &text,
 
 
     // sync: restoreOverrideCursor() in all exit paths
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     if (toolHasBegunShape ())
         tool ()->endShapeInternal ();
 
 
-    QValueVector <QString> textLines (1, QString::null);
+    TQValueVector <TQString> textLines (1, TQString::null);
 
     for (int i = 0; i < (int) text.length (); i++)
     {
         if (text [i] == '\n')
-            textLines.push_back (QString::null);
+            textLines.push_back (TQString::null);
         else
             textLines [textLines.size () - 1].append (text [i]);
     }
@@ -544,7 +544,7 @@ void kpMainWindow::pasteText (const QString &text,
             {
                 macroCmd->addCommand (
                     new kpToolTextEnterCommand (
-                        QString::null/*uninteresting child of macroCmd*/,
+                        TQString::null/*uninteresting child of macroCmd*/,
                         m_viewManager->textCursorRow (),
                         m_viewManager->textCursorCol (),
                         this));
@@ -552,7 +552,7 @@ void kpMainWindow::pasteText (const QString &text,
 
             macroCmd->addCommand (
                 new kpToolTextInsertCommand (
-                    QString::null/*uninteresting child of macroCmd*/,
+                    TQString::null/*uninteresting child of macroCmd*/,
                     m_viewManager->textCursorRow (),
                     m_viewManager->textCursorCol (),
                     textLines [i],
@@ -568,14 +568,14 @@ void kpMainWindow::pasteText (const QString &text,
     #endif
 
         const kpTextStyle ts = textStyle ();
-        const QFontMetrics fontMetrics = ts.fontMetrics ();
+        const TQFontMetrics fontMetrics = ts.fontMetrics ();
 
         int height = textLines.size () * fontMetrics.height ();
         if (textLines.size () >= 1)
             height += (textLines.size () - 1) * fontMetrics.leading ();
 
         int width = 0;
-        for (QValueVector <QString>::const_iterator it = textLines.begin ();
+        for (TQValueVector <TQString>::const_iterator it = textLines.begin ();
              it != textLines.end ();
              it++)
         {
@@ -589,7 +589,7 @@ void kpMainWindow::pasteText (const QString &text,
                                    width + kpSelection::textBorderSize () * 2);
         const int selHeight = QMAX (kpSelection::minimumHeightForTextStyle (ts),
                                     height + kpSelection::textBorderSize () * 2);
-        kpSelection sel (QRect (0, 0, selWidth, selHeight),
+        kpSelection sel (TQRect (0, 0, selWidth, selHeight),
                          textLines,
                          ts);
 
@@ -605,11 +605,11 @@ void kpMainWindow::pasteText (const QString &text,
     }
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // public
-void kpMainWindow::pasteTextAt (const QString &text, const QPoint &point,
+void kpMainWindow::pasteTextAt (const TQString &text, const TQPoint &point,
                                 bool allowNewTextSelectionPointShift)
 {
 #if DEBUG_KP_MAIN_WINDOW && 1
@@ -620,7 +620,7 @@ void kpMainWindow::pasteTextAt (const QString &text, const QPoint &point,
                << ")" << endl;
 #endif
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     if (toolHasBegunShape ())
         tool ()->endShapeInternal ();
@@ -642,20 +642,20 @@ void kpMainWindow::pasteTextAt (const QString &text, const QPoint &point,
     }
     else
     {
-        QPoint pointToUse = point;
+        TQPoint pointToUse = point;
 
         if (allowNewTextSelectionPointShift)
         {
             // TODO: In terms of doc pixels, would be inconsistent behaviour
             //       based on zoomLevel of view.
-            // pointToUse -= QPoint (-view->selectionResizeHandleAtomicSize (),
+            // pointToUse -= TQPoint (-view->selectionResizeHandleAtomicSize (),
             //                       -view->selectionResizeHandleAtomicSize ());
         }
 
         pasteText (text, true/*force new text selection*/, pointToUse);
     }
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // public slot
@@ -666,7 +666,7 @@ void kpMainWindow::slotPaste ()
 #endif
 
     // sync: restoreOverrideCursor() in all exit paths
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     if (toolHasBegunShape ())
         tool ()->endShapeInternal ();
@@ -674,7 +674,7 @@ void kpMainWindow::slotPaste ()
 
     if (!::HasSomethingToPasteWithDialogIfNot (this))
     {
-        QApplication::restoreOverrideCursor ();
+        TQApplication::restoreOverrideCursor ();
         return;
     }
 
@@ -683,28 +683,28 @@ void kpMainWindow::slotPaste ()
     // Acquire the pixmap
     //
 
-    QMimeSource *ms = QApplication::clipboard ()->data (QClipboard::Clipboard);
+    TQMimeSource *ms = TQApplication::clipboard ()->data (QClipboard::Clipboard);
     if (!ms)
     {
         kdError () << "kpMainWindow::slotPaste() without mimeSource" << endl;
-        QApplication::restoreOverrideCursor ();
+        TQApplication::restoreOverrideCursor ();
         return;
     }
 
     kpSelection sel;
-    QString text;
+    TQString text;
     if (kpSelectionDrag::decode (ms, sel/*ref*/, pasteWarnAboutLossInfo ()))
     {
         sel.setTransparency (selectionTransparency ());
         paste (sel);
     }
-    else if (QTextDrag::decode (ms, text/*ref*/))
+    else if (TQTextDrag::decode (ms, text/*ref*/))
     {
         pasteText (text);
     }
     else
     {
-        QApplication::restoreOverrideCursor ();
+        TQApplication::restoreOverrideCursor ();
 
         kdDebug () << "kpMainWindow::slotPaste() could not decode selection" << endl;
         kdDebug () << "\tFormats supported:" << endl;
@@ -730,7 +730,7 @@ void kpMainWindow::slotPaste ()
             kdDebug () << "\thave memberList" << endl;
         #endif
 
-            for (QPtrList <KMainWindow>::const_iterator it = KMainWindow::memberList->begin ();
+            for (TQPtrList <KMainWindow>::const_iterator it = KMainWindow::memberList->begin ();
                  it != KMainWindow::memberList->end ();
                  it++)
             {
@@ -752,7 +752,7 @@ void kpMainWindow::slotPaste ()
         return;
     }
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // private slot
@@ -763,7 +763,7 @@ void kpMainWindow::slotPasteInNewWindow ()
 #endif
 
     // sync: restoreOverrideCursor() in all exit paths
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     if (toolHasBegunShape ())
         tool ()->endShapeInternal ();
@@ -771,7 +771,7 @@ void kpMainWindow::slotPasteInNewWindow ()
 
     if (!::HasSomethingToPasteWithDialogIfNot (this))
     {
-        QApplication::restoreOverrideCursor ();
+        TQApplication::restoreOverrideCursor ();
         return;
     }
 
@@ -812,7 +812,7 @@ void kpMainWindow::slotPasteInNewWindow ()
     win->slotCrop ();
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // public slot
@@ -976,7 +976,7 @@ void kpMainWindow::slotCopyToFile ()
 
     kpSelection sel = *m_document->selection ();
 
-    QPixmap pixmapToSave;
+    TQPixmap pixmapToSave;
 
     if (!sel.pixmap ())
     {
@@ -1050,7 +1050,7 @@ void kpMainWindow::slotPasteFromFile ()
     m_lastPasteFromURL = url;
 
 
-    QPixmap pixmap = kpDocument::getPixmapFromFile (url,
+    TQPixmap pixmap = kpDocument::getPixmapFromFile (url,
         false/*show error message if doesn't exist*/,
         this);
 
@@ -1062,7 +1062,7 @@ void kpMainWindow::slotPasteFromFile ()
     addRecentURL (url);
 
     paste (kpSelection (kpSelection::Rectangle,
-                        QRect (0, 0, pixmap.width (), pixmap.height ()),
+                        TQRect (0, 0, pixmap.width (), pixmap.height ()),
                         pixmap,
                         selectionTransparency ()));
 }

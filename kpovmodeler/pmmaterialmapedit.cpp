@@ -23,14 +23,14 @@
 #include "pmpalettevalueedit.h"
 #include "pmvector.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
 #include <ktabctl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -38,7 +38,7 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 
-PMMaterialMapEdit::PMMaterialMapEdit( QWidget* parent, const char* name )
+PMMaterialMapEdit::PMMaterialMapEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -46,14 +46,14 @@ PMMaterialMapEdit::PMMaterialMapEdit( QWidget* parent, const char* name )
 
 void PMMaterialMapEdit::createTopWidgets( )
 {
-   QLabel* lbl;
-   QHBoxLayout* hl;
+   TQLabel* lbl;
+   TQHBoxLayout* hl;
    
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "File type:" ), this );
-   m_pImageFileTypeEdit = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "File type:" ), this );
+   m_pImageFileTypeEdit = new TQComboBox( this );
    m_pImageFileTypeEdit->insertItem( "gif" );
    m_pImageFileTypeEdit->insertItem( "tga" );
    m_pImageFileTypeEdit->insertItem( "iff" );
@@ -66,22 +66,22 @@ void PMMaterialMapEdit::createTopWidgets( )
    hl->addWidget( lbl );
    hl->addWidget( m_pImageFileTypeEdit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "File name:" ), this );
-   m_pImageFileNameEdit = new QLineEdit( this );
-   m_pImageFileNameBrowse = new QPushButton( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "File name:" ), this );
+   m_pImageFileNameEdit = new TQLineEdit( this );
+   m_pImageFileNameBrowse = new TQPushButton( this );
    m_pImageFileNameBrowse->setPixmap( SmallIcon( "fileopen" ) );
    hl->addWidget( lbl );
    hl->addWidget( m_pImageFileNameEdit );
    hl->addWidget( m_pImageFileNameBrowse );
    hl->addStretch( 1 );
 
-   m_pOnceEdit = new QCheckBox( i18n( "Once" ), this );
+   m_pOnceEdit = new TQCheckBox( i18n( "Once" ), this );
    topLayout( )->addWidget( m_pOnceEdit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Interpolate:" ), this );
-   m_pInterpolateTypeEdit = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Interpolate:" ), this );
+   m_pInterpolateTypeEdit = new TQComboBox( this );
    m_pInterpolateTypeEdit->insertItem( i18n( "None" ) );
    m_pInterpolateTypeEdit->insertItem( i18n( "Bilinear" ) );
    m_pInterpolateTypeEdit->insertItem( i18n( "Normalized" ) );
@@ -89,9 +89,9 @@ void PMMaterialMapEdit::createTopWidgets( )
    hl->addWidget( m_pInterpolateTypeEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Map type:" ), this );
-   m_pMapTypeEdit = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Map type:" ), this );
+   m_pMapTypeEdit = new TQComboBox( this );
    m_pMapTypeEdit->insertItem( i18n( "Planar" ) );
    m_pMapTypeEdit->insertItem( i18n( "Spherical" ) );
    m_pMapTypeEdit->insertItem( i18n( "Cylindrical" ) );
@@ -100,12 +100,12 @@ void PMMaterialMapEdit::createTopWidgets( )
    hl->addWidget( m_pMapTypeEdit );
    hl->addStretch( 1 );
 
-   connect( m_pImageFileTypeEdit, SIGNAL( activated( int ) ), SLOT( slotImageFileTypeChanged( int ) ) );
-   connect( m_pMapTypeEdit, SIGNAL( activated( int ) ), SLOT( slotMapTypeChanged( int ) ) );
-   connect( m_pInterpolateTypeEdit, SIGNAL( activated( int ) ), SLOT( slotInterpolateTypeChanged( int ) ) );
-   connect( m_pImageFileNameBrowse, SIGNAL( clicked( ) ), SLOT( slotImageFileBrowseClicked( ) ) );
-   connect( m_pImageFileNameEdit, SIGNAL( textChanged( const QString& ) ), SLOT( slotImageFileNameChanged( const QString& ) ) );
-   connect( m_pOnceEdit, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pImageFileTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotImageFileTypeChanged( int ) ) );
+   connect( m_pMapTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotMapTypeChanged( int ) ) );
+   connect( m_pInterpolateTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotInterpolateTypeChanged( int ) ) );
+   connect( m_pImageFileNameBrowse, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotImageFileBrowseClicked( ) ) );
+   connect( m_pImageFileNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotImageFileNameChanged( const TQString& ) ) );
+   connect( m_pOnceEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMMaterialMapEdit::displayObject( PMObject* o )
@@ -280,14 +280,14 @@ void PMMaterialMapEdit::slotMapTypeChanged( const int /*a*/ )
    emit dataChanged( );
 }
 
-void PMMaterialMapEdit::slotImageFileNameChanged( const QString& /*a*/ )
+void PMMaterialMapEdit::slotImageFileNameChanged( const TQString& /*a*/ )
 {
    emit dataChanged( );
 }
 
 void PMMaterialMapEdit::slotImageFileBrowseClicked( )
 {
-   QString str = KFileDialog::getOpenFileName( QString::null, QString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
 
    if( !str.isEmpty() )
    {

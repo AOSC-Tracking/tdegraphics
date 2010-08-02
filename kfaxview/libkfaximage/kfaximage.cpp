@@ -24,8 +24,8 @@
 
 #include <stdlib.h>
 
-#include <qimage.h>
-#include <qfile.h>
+#include <tqimage.h>
+#include <tqfile.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -38,22 +38,22 @@ static const char FAXMAGIC[]   = "\000PC Research, Inc\000\000\000\000\000\000";
 static const char littleTIFF[] = "\x49\x49\x2a\x00";
 static const char bigTIFF[]    = "\x4d\x4d\x00\x2a";
 
-KFaxImage::KFaxImage( const QString &filename, QObject *parent, const char *name )
-   : QObject(parent,name)
+KFaxImage::KFaxImage( const TQString &filename, TQObject *parent, const char *name )
+   : TQObject(parent,name)
 {
-  KGlobal::locale()->insertCatalogue( QString::fromLatin1("libkfaximage") );
+  KGlobal::locale()->insertCatalogue( TQString::fromLatin1("libkfaximage") );
   loadImage(filename);
 }
 
 KFaxImage::~KFaxImage()
 { }
 
-bool KFaxImage::loadImage( const QString &filename )
+bool KFaxImage::loadImage( const TQString &filename )
 {
   reset();
 
   m_filename = filename;
-  m_errorString = QString::null;
+  m_errorString = TQString::null;
 
   if (m_filename.isEmpty())
 	return false;
@@ -74,33 +74,33 @@ void KFaxImage::reset()
   // they may be needed by calling application 
 }
 
-QImage KFaxImage::page( unsigned int pageNr )
+TQImage KFaxImage::page( unsigned int pageNr )
 {
   if (pageNr >= numPages()) {
     kdDebug() << "KFaxImage::page() called with invalid page number\n";
-    return QImage();
+    return TQImage();
   }
   pagenode *pn = m_pagenodes.at(pageNr);
   GetImage(pn);
   return pn->image;
 }
 
-QPoint KFaxImage::page_dpi( unsigned int pageNr )
+TQPoint KFaxImage::page_dpi( unsigned int pageNr )
 {
   if (pageNr >= numPages()) {
     kdDebug() << "KFaxImage::page_dpi() called with invalid page number\n";
-    return QPoint(0,0);
+    return TQPoint(0,0);
   }
   pagenode *pn = m_pagenodes.at(pageNr);
   GetImage(pn);
   return pn->dpi;
 }
 
-QSize KFaxImage::page_size( unsigned int pageNr )
+TQSize KFaxImage::page_size( unsigned int pageNr )
 {
   if (pageNr >= numPages()) {
     kdDebug() << "KFaxImage::page_size() called with invalid page number\n";
-    return QSize(0,0);
+    return TQSize(0,0);
   }
   pagenode *pn = m_pagenodes.at(pageNr);
   GetImage(pn);
@@ -115,7 +115,7 @@ pagenode *KFaxImage::AppendImageNode(int type)
 	pn->type = type;
         pn->expander = g31expand;
 	pn->strips = NULL;
-	pn->size = QSize(1728,2339);
+	pn->size = TQSize(1728,2339);
 	pn->vres = -1;
 	pn->dpi = KFAX_DPI_FINE;
 	m_pagenodes.append(pn);
@@ -125,7 +125,7 @@ pagenode *KFaxImage::AppendImageNode(int type)
 
 bool KFaxImage::NewImage(pagenode *pn, int w, int h)
 {
-    pn->image = QImage( w, h, 1, 2, QImage::systemByteOrder() );
+    pn->image = TQImage( w, h, 1, 2, TQImage::systemByteOrder() );
     pn->image.setColor(0, qRgb(255,255,255));
     pn->image.setColor(1, qRgb(0,0,0));
     pn->data = (Q_UINT16*) pn->image.bits();
@@ -137,12 +137,12 @@ bool KFaxImage::NewImage(pagenode *pn, int w, int h)
 
 void KFaxImage::FreeImage(pagenode *pn)
 {
-    pn->image = QImage();
+    pn->image = TQImage();
     pn->data = NULL;
     pn->bytes_per_line = 0;
 }
 
-void KFaxImage::kfaxerror(const QString& error)
+void KFaxImage::kfaxerror(const TQString& error)
 {
     m_errorString = error;
     kdError() << "kfaxerror: " << error << endl;
@@ -155,22 +155,22 @@ KFaxImage::notefile(int type)
 {
     pagenode *newnode = new pagenode();
     newnode->type = type;
-    newnode->size = QSize(1728,0);
+    newnode->size = TQSize(1728,0);
     return newnode;
 }
 
 static t32bits
-get4(unsigned char *p, QImage::Endian endian)
+get4(unsigned char *p, TQImage::Endian endian)
 {
-    return (endian == QImage::BigEndian) 
+    return (endian == TQImage::BigEndian) 
 	? (p[0]<<24)|(p[1]<<16)|(p[2]<<8)|p[3] :
 	   p[0]|(p[1]<<8)|(p[2]<<16)|(p[3]<<24);
 }
 
 static int
-get2(unsigned char *p, QImage::Endian endian)
+get2(unsigned char *p, TQImage::Endian endian)
 {
-    return (endian == QImage::BigEndian) ? (p[0]<<8)|p[1] : p[0]|(p[1]<<8);
+    return (endian == TQImage::BigEndian) ? (p[0]<<8)|p[1] : p[0]|(p[1]<<8);
 }
 
 /* generate pagenodes for the images in a tiff file */
@@ -179,12 +179,12 @@ KFaxImage::notetiff()
 {
 #define SC(x) (char *)(x)
     unsigned char header[8];
-    QImage::Endian endian;
+    TQImage::Endian endian;
     t32bits IFDoff;
     pagenode *pn = NULL;
-    QString str;
+    TQString str;
 
-    QFile file(filename());
+    TQFile file(filename());
     if (!file.open(IO_ReadOnly)) {
 	kfaxerror(i18n("Unable to open file for reading."));
 	return 0;
@@ -195,9 +195,9 @@ KFaxImage::notetiff()
 	return 0;
     }
     if (memcmp(header, &littleTIFF, 4) == 0)
-	endian = QImage::LittleEndian;
+	endian = TQImage::LittleEndian;
     else if (memcmp(header, &bigTIFF, 4) == 0)
-	endian = QImage::BigEndian;
+	endian = TQImage::BigEndian;
     else {
  maybe_RAW_FAX:
         kfaxerror(i18n("This is not a TIFF FAX file."));
@@ -381,7 +381,7 @@ KFaxImage::notetiff()
 	pn->nstrips = nstrips;
 	pn->rowsperstrip = nstrips > 1 ? rowsperstrip : iheight;
 	pn->strips = strips;
-	pn->size = QSize(iwidth,iheight);
+	pn->size = TQSize(iwidth,iheight);
 	pn->inverse = inverse;
 	pn->lsbfirst = lsbfirst;
 	pn->orient = orient;
@@ -454,7 +454,7 @@ KFaxImage::getstrip(pagenode *pn, int strip)
 #define ShortOrder	so.b[1]
     so.s = 1;  /* XXX */
 
-    QFile file(filename());
+    TQFile file(filename());
     if (!file.open(IO_ReadOnly)) {
 	badfile(pn);
 	return NULL;

@@ -27,7 +27,7 @@
 
 class PMTorus;
 class PMFloatEdit ;
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMTorus
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMSphereEdit with parent and name
     */
-   PMTorusEdit( QWidget* parent, const char* name = 0 );
+   PMTorusEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -57,7 +57,7 @@ private:
    PMTorus* m_pDisplayedObject;
    PMFloatEdit* m_pMinorRadius;
    PMFloatEdit* m_pMajorRadius;
-   QCheckBox * m_pSturm;
+   TQCheckBox * m_pSturm;
 
 };
 

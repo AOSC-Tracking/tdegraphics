@@ -18,25 +18,25 @@
 
 #include "pminserterrordialog.h"
 #include <klocale.h>
-#include <qlabel.h>
-#include <qlistbox.h>
-#include <qvbox.h>
+#include <tqlabel.h>
+#include <tqlistbox.h>
+#include <tqvbox.h>
 
 PMInsertErrorDialog::PMInsertErrorDialog(
    int numObj, int numErrors,
-   const QStringList& details,
-   QWidget* parent /*= 0*/, const char* name /*= 0*/ )
+   const TQStringList& details,
+   TQWidget* parent /*= 0*/, const char* name /*= 0*/ )
       : KDialogBase( parent, name, true, i18n( "Insert Errors" ),
                      Help | Ok | User1, Ok, false, i18n( "Details" ) )
 {
-   QVBox* page = makeVBoxMainWidget( );
-   new QLabel( i18n( "%1 of %2 objects couldn't be inserted." )
+   TQVBox* page = makeVBoxMainWidget( );
+   new TQLabel( i18n( "%1 of %2 objects couldn't be inserted." )
                .arg( numErrors ).arg( numObj ), page );
    
-   m_pDetailsLabel = new QLabel( i18n( "Objects not inserted:" ), page );
+   m_pDetailsLabel = new TQLabel( i18n( "Objects not inserted:" ), page );
    m_pDetailsLabel->hide( );
    
-   m_pDetails = new QListBox( page );
+   m_pDetails = new TQListBox( page );
    m_pDetails->insertStringList( details, 0 );
    m_pDetails->setMinimumHeight( 150 );
    m_pDetails->hide( );

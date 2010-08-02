@@ -29,18 +29,18 @@
 #define KP_WIDGET_MAPPER
 
 
-class QWidget;
-class QPoint;
-class QRect;
+class TQWidget;
+class TQPoint;
+class TQRect;
 
 
 namespace kpWidgetMapper
 {
-    QPoint fromGlobal (const QWidget *widget, const QPoint &point);
-    QRect fromGlobal (const QWidget *widget, const QRect &rect);
+    TQPoint fromGlobal (const TQWidget *widget, const TQPoint &point);
+    TQRect fromGlobal (const TQWidget *widget, const TQRect &rect);
 
-    QPoint toGlobal (const QWidget *widget, const QPoint &point);
-    QRect toGlobal (const QWidget *widget, const QRect &rect);
+    TQPoint toGlobal (const TQWidget *widget, const TQPoint &point);
+    TQRect toGlobal (const TQWidget *widget, const TQRect &rect);
 }
 
 

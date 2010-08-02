@@ -22,12 +22,12 @@
 
 using namespace KMrml;
 
-CollectionCombo::CollectionCombo( QWidget *parent, const char *name )
+CollectionCombo::CollectionCombo( TQWidget *parent, const char *name )
     : KComboBox( false, parent, name ),
       m_collections( 0L )
 {
-    connect( this, SIGNAL( activated( const QString& ) ),
-             SLOT( slotActivated( const QString& ) ));
+    connect( this, TQT_SIGNAL( activated( const TQString& ) ),
+             TQT_SLOT( slotActivated( const TQString& ) ));
 }
 
 CollectionCombo::~CollectionCombo()
@@ -54,13 +54,13 @@ Collection CollectionCombo::current() const
     return m_collections->findByName( currentText() );
 }
 
-void CollectionCombo::slotActivated( const QString& name )
+void CollectionCombo::slotActivated( const TQString& name )
 {
     Collection coll = m_collections->findByName( name );
     emit selected( coll );
 }
 
-QDataStream& KMrml::operator<<( QDataStream& stream,
+TQDataStream& KMrml::operator<<( TQDataStream& stream,
                                 const CollectionCombo& combo )
 {
     int count = combo.count();
@@ -72,13 +72,13 @@ QDataStream& KMrml::operator<<( QDataStream& stream,
     return stream;
 }
 
-QDataStream& KMrml::operator>>( QDataStream& stream, CollectionCombo& combo )
+TQDataStream& KMrml::operator>>( TQDataStream& stream, CollectionCombo& combo )
 {
     combo.clear();
 
     int count;
     stream >> count;
-    QString text;
+    TQString text;
     for ( int i = 0; i < count; i++ )
     {
         stream >> text;

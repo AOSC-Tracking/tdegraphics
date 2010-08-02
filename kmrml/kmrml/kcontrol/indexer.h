@@ -19,7 +19,7 @@
 #ifndef INDEXER_H
 #define INDEXER_H
 
-#include <qobject.h>
+#include <tqobject.h>
 
 #include <kmrml_config.h>
 
@@ -34,14 +34,14 @@ namespace KMrmlConfig
 
     public:
         Indexer( const KMrml::Config *config,
-                 QObject *parent = 0L, const char *name = 0 );
+                 TQObject *parent = 0L, const char *name = 0 );
         ~Indexer();
 
-        void startIndexing( const QStringList& dirs );
+        void startIndexing( const TQStringList& dirs );
         void stop();
 
     signals:
-        void progress( int percent, const QString& text );
+        void progress( int percent, const TQString& text );
         void finished( int returnCode );
 
 
@@ -56,8 +56,8 @@ namespace KMrmlConfig
         const KMrml::Config *m_config;
 
         uint m_dirCount;
-        QStringList m_dirs;
-        QString m_currentDir;
+        TQStringList m_dirs;
+        TQString m_currentDir;
 
     };
 

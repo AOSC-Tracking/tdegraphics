@@ -77,7 +77,7 @@ SVGRectImpl *SVGShapeImpl::getBBoxInternal()
 	SVGRectImpl *ret = SVGSVGElementImpl::createSVGRect();
 	if(m_item)
 	{
-		QRect r = m_item->bbox();
+		TQRect r = m_item->bbox();
 		ret->setX(r.x());
 		ret->setY(r.y());
 		ret->setWidth(r.width());
@@ -86,7 +86,7 @@ SVGRectImpl *SVGShapeImpl::getBBoxInternal()
 	return ret;
 }
 
-bool SVGShapeImpl::prepareMouseEvent(const QPoint &p, const QPoint &, SVGMouseEventImpl *mev)
+bool SVGShapeImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &, SVGMouseEventImpl *mev)
 {
 	// TODO : pointer-events should be stored here, not in SVGStylableImpl.
 	SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(this);

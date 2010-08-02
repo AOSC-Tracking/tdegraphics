@@ -43,7 +43,7 @@ SVGEventImpl::SVGEventImpl()
 	m_defaultPrevented = false;
 	m_id = SVGEvent::UNKNOWN_EVENT;
 	m_eventPhase = 0;
-	m_createTime = QDateTime::currentDateTime();
+	m_createTime = TQDateTime::currentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;
@@ -62,7 +62,7 @@ SVGEventImpl::SVGEventImpl(SVGEvent::EventId _id, bool canBubbleArg, bool cancel
 	m_defaultPrevented = false;
 	m_id = _id;
 	m_eventPhase = 0;
-	m_createTime = QDateTime::currentDateTime();
+	m_createTime = TQDateTime::currentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;
@@ -120,7 +120,7 @@ bool SVGEventImpl::cancelable() const
 
 DOM::DOMTimeStamp SVGEventImpl::timeStamp()
 {
-	QDateTime epoch(QDate(1970, 1, 1), QTime(0, 0));
+	TQDateTime epoch(TQDate(1970, 1, 1), TQTime(0, 0));
 
 	// ### kjs does not yet support long long (?) so the value wraps around
 	return epoch.secsTo(m_createTime) * 1000 + m_createTime.time().msec();
@@ -341,9 +341,9 @@ SVGKeyEventImpl::SVGKeyEventImpl() : SVGUIEventImpl()
 	qKeyEvent = 0;
 }
 
-SVGKeyEventImpl::SVGKeyEventImpl(QKeyEvent *key, DOM::AbstractView &view, SVGEvent::EventId _id) : SVGUIEventImpl(_id, true, true, view, 0)
+SVGKeyEventImpl::SVGKeyEventImpl(TQKeyEvent *key, DOM::AbstractView &view, SVGEvent::EventId _id) : SVGUIEventImpl(_id, true, true, view, 0)
 {
-	qKeyEvent = new QKeyEvent(key->type(), key->key(), key->ascii(), key->state(), key->text(), key->isAutoRepeat(), key->count());
+	qKeyEvent = new TQKeyEvent(key->type(), key->key(), key->ascii(), key->state(), key->text(), key->isAutoRepeat(), key->count());
 
 	// Events are supposed to be accepted by default in Qt!
 	// This line made QLineEdit's keyevents be ignored, so they were sent to the khtmlview

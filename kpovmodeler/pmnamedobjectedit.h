@@ -27,7 +27,7 @@
 #include "pmdialogeditbase.h"
 
 class PMNamedObject;
-class QLineEdit;
+class TQLineEdit;
 
 /**
  * Dialog edit class for @ref PMNamedObject.
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMNamedObjectEdit with parent and name
     */
-   PMNamedObjectEdit( QWidget* parent, const char* name = 0 );
+   PMNamedObjectEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -54,10 +54,10 @@ protected:
    virtual void saveContents( );
 
 private slots:
-   void slotNameChanged( const QString& );
+   void slotNameChanged( const TQString& );
 private:
    PMNamedObject* m_pDisplayedObject;
-   QLineEdit* m_pNameEdit;
+   TQLineEdit* m_pNameEdit;
 };
 
 

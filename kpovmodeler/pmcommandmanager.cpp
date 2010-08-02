@@ -45,7 +45,7 @@ void PMCommandManager::execute( PMCommand* cmd )
       m_commands.removeFirst( );
    m_redoCommands.clear( );
 
-   emit updateUndoRedo( cmd->text( ), QString::null );
+   emit updateUndoRedo( cmd->text( ), TQString::null );
 }
 
 void PMCommandManager::undo( )
@@ -58,7 +58,7 @@ void PMCommandManager::undo( )
       m_redoCommands.append( m_commands.take( ) );
 
       if( m_commands.isEmpty( ) )
-         emit updateUndoRedo( QString::null, last->text( ) );
+         emit updateUndoRedo( TQString::null, last->text( ) );
       else
          emit updateUndoRedo( m_commands.last( )->text( ), last->text( ) );
    }
@@ -74,7 +74,7 @@ void PMCommandManager::redo( )
       m_commands.append( m_redoCommands.take( ) );
       
       if( m_redoCommands.isEmpty( ) )
-         emit updateUndoRedo( last->text( ), QString::null );
+         emit updateUndoRedo( last->text( ), TQString::null );
       else
          emit updateUndoRedo( last->text( ), m_redoCommands.last( )->text( ) );
    }
@@ -84,7 +84,7 @@ void PMCommandManager::clear( )
 {
    m_redoCommands.clear( );
    m_commands.clear( );
-   emit updateUndoRedo( QString::null, QString::null );
+   emit updateUndoRedo( TQString::null, TQString::null );
 }
 
 void PMCommandManager::cmdObjectChanged( PMObject* obj, const int mode )
@@ -92,7 +92,7 @@ void PMCommandManager::cmdObjectChanged( PMObject* obj, const int mode )
    emit objectChanged( obj, mode, this );
 }
 
-void PMCommandManager::cmdIDChanged( PMObject* obj, const QString& oldID )
+void PMCommandManager::cmdIDChanged( PMObject* obj, const TQString& oldID )
 {
    emit idChanged( obj, oldID );
 }

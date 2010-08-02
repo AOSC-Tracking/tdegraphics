@@ -36,7 +36,7 @@ public:
 
 	CanvasPaintServer *paintServer() { return m_paintServer; }
 	
-	static CanvasPaintServer *paintServer(SVGDocumentImpl *doc, const QString& id);
+	static CanvasPaintServer *paintServer(SVGDocumentImpl *doc, const TQString& id);
 
 protected:
 	CanvasPaintServer *m_paintServer;

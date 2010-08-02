@@ -21,14 +21,14 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 
-PMIsoSurfaceEdit::PMIsoSurfaceEdit( QWidget* parent, const char* name )
+PMIsoSurfaceEdit::PMIsoSurfaceEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,13 +37,13 @@ PMIsoSurfaceEdit::PMIsoSurfaceEdit( QWidget* parent, const char* name )
 void PMIsoSurfaceEdit::createTopWidgets( )
 {
    int i;
-   QGridLayout* gl;
-   QHBoxLayout* hl;
+   TQGridLayout* gl;
+   TQHBoxLayout* hl;
 
    Base::createTopWidgets( );
 
-   m_pFunction = new QLineEdit( this );
-   m_pContainedBy = new QComboBox( false, this );
+   m_pFunction = new TQLineEdit( this );
+   m_pContainedBy = new TQComboBox( false, this );
    m_pContainedBy->insertItem( i18n( "Box" ) );
    m_pContainedBy->insertItem( i18n( "Sphere" ) );
 
@@ -51,28 +51,28 @@ void PMIsoSurfaceEdit::createTopWidgets( )
    m_pCorner2 = new PMVectorEdit( "x", "y", "z", this );
    m_pCenter = new PMVectorEdit( "x", "y", "z", this );
    m_pRadius = new PMFloatEdit( this );
-   m_pCorner1Label = new QLabel( i18n( "Corner1:" ), this );
-   m_pCorner2Label = new QLabel( i18n( "Corner2:" ), this );
-   m_pCenterLabel = new QLabel( i18n( "Center:" ), this );
-   m_pRadiusLabel = new QLabel( i18n( "Radius:" ), this );
+   m_pCorner1Label = new TQLabel( i18n( "Corner1:" ), this );
+   m_pCorner2Label = new TQLabel( i18n( "Corner2:" ), this );
+   m_pCenterLabel = new TQLabel( i18n( "Center:" ), this );
+   m_pRadiusLabel = new TQLabel( i18n( "Radius:" ), this );
 
    m_pThreshold = new PMFloatEdit( this );
    m_pAccuracy = new PMFloatEdit( this );
    m_pAccuracy->setValidation( true, 1e-8, false, 0 );
    m_pMaxGradient = new PMFloatEdit( this );
    m_pMaxGradient->setValidation( true, 1e-8, false, 0 );
-   m_pEvaluate = new QCheckBox( i18n( "Adapt maximum gradient" ), this );
+   m_pEvaluate = new TQCheckBox( i18n( "Adapt maximum gradient" ), this );
    for( i = 0; i < 3; i++ )
       m_pEvaluateValue[i] = new PMFloatEdit( this );
    m_pMaxTrace = new PMIntEdit( this );
    m_pMaxTrace->setValidation( true, 1, false, 0 );
-   m_pAllIntersections = new QCheckBox( i18n( "All intersections" ), this );
-   m_pOpen = new QCheckBox( i18n( "type of the object", "Open" ), this );
+   m_pAllIntersections = new TQCheckBox( i18n( "All intersections" ), this );
+   m_pOpen = new TQCheckBox( i18n( "type of the object", "Open" ), this );
 
-   gl = new QGridLayout( topLayout( ), 8, 2 );
-   gl->addWidget( new QLabel( i18n( "Function:" ), this ), 0, 0 );
+   gl = new TQGridLayout( topLayout( ), 8, 2 );
+   gl->addWidget( new TQLabel( i18n( "Function:" ), this ), 0, 0 );
    gl->addWidget( m_pFunction, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Container:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Container:" ), this ), 1, 0 );
    gl->addWidget( m_pContainedBy, 1, 1 );
    gl->addWidget( m_pCorner1Label, 2, 0 );
    gl->addWidget( m_pCorner1, 2, 1 );
@@ -82,49 +82,49 @@ void PMIsoSurfaceEdit::createTopWidgets( )
    gl->addWidget( m_pCenter, 4, 1 );
    gl->addWidget( m_pRadiusLabel, 5, 0 );
    gl->addWidget( m_pRadius, 5, 1 );
-   gl->addWidget( new QLabel( i18n( "Threshold:" ), this ), 6, 0 );
+   gl->addWidget( new TQLabel( i18n( "Threshold:" ), this ), 6, 0 );
    gl->addWidget( m_pThreshold, 6, 1 );
-   gl->addWidget( new QLabel( i18n( "Accuracy:" ), this ), 7, 0 );
+   gl->addWidget( new TQLabel( i18n( "Accuracy:" ), this ), 7, 0 );
    gl->addWidget( m_pAccuracy, 7, 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Maximum gradient:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Maximum gradient:" ), this ) );
    hl->addWidget( m_pMaxGradient );
 
    topLayout( )->addWidget( m_pEvaluate );
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Values:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Values:" ), this ) );
    for( i = 0; i < 3; i++ )
    {
-      hl->addWidget( new QLabel( QString( "P%1" ).arg( i ), this ) );
+      hl->addWidget( new TQLabel( TQString( "P%1" ).arg( i ), this ) );
       hl->addWidget( m_pEvaluateValue[i] );
    }
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Maximum traces:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Maximum traces:" ), this ) );
    hl->addWidget( m_pMaxTrace );
    topLayout( )->addWidget( m_pAllIntersections );
    topLayout( )->addWidget( m_pOpen );
 
-   connect( m_pFunction, SIGNAL( textChanged( const QString& ) ),
-            SLOT( textChanged( const QString& ) ) );
-   connect( m_pContainedBy, SIGNAL( activated( int ) ),
-            SLOT( currentChanged( int ) ) );
-   connect( m_pCorner1, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCorner2, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCenter, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRadius, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pThreshold, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAccuracy, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxGradient, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEvaluate, SIGNAL( toggled( bool ) ),
-            SLOT( evaluateToggled( bool ) ) );
-   connect( m_pMaxTrace, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pFunction, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( textChanged( const TQString& ) ) );
+   connect( m_pContainedBy, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( currentChanged( int ) ) );
+   connect( m_pCorner1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCorner2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCenter, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pThreshold, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAccuracy, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxGradient, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEvaluate, TQT_SIGNAL( toggled( bool ) ),
+            TQT_SLOT( evaluateToggled( bool ) ) );
+   connect( m_pMaxTrace, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    for( i = 0; i < 3; i++ )
-      connect( m_pEvaluateValue[i], SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOpen, SIGNAL( toggled( bool ) ), SLOT( toggled( bool ) ) );
-   connect( m_pAllIntersections, SIGNAL( toggled( bool ) ),
-            SLOT( allToggled( bool ) ) );
+      connect( m_pEvaluateValue[i], TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOpen, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( toggled( bool ) ) );
+   connect( m_pAllIntersections, TQT_SIGNAL( toggled( bool ) ),
+            TQT_SLOT( allToggled( bool ) ) );
 }
 
 void PMIsoSurfaceEdit::displayObject( PMObject* o )
@@ -272,7 +272,7 @@ bool PMIsoSurfaceEdit::isDataValid( )
    return Base::isDataValid( );
 }
 
-void PMIsoSurfaceEdit::textChanged( const QString& )
+void PMIsoSurfaceEdit::textChanged( const TQString& )
 {
    emit dataChanged( );
 }

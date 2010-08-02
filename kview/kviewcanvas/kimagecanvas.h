@@ -22,16 +22,16 @@
 
 #include "kimageviewer/canvas.h"
 
-#include <qscrollview.h>
-#include <qwmatrix.h>
-#include <qcursor.h>
-#include <qrect.h>
+#include <tqscrollview.h>
+#include <tqwmatrix.h>
+#include <tqcursor.h>
+#include <tqrect.h>
 
 #include <kdemacros.h>
 
 class KImageHolder;
-class QColor;
-class QImage;
+class TQColor;
+class TQImage;
 class KPixmap;
 
 /**
@@ -39,14 +39,14 @@ class KPixmap;
  * @author Matthias Kretz <kretz@kde.org>
  * @version $Id$
  */
-class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
+class KDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
 {
 	Q_OBJECT
 	public:
 		/**
 		 * KImageCanvas Constructor
 		 */
-		KImageCanvas( QWidget * parent, const char * name, const QStringList & args );
+		KImageCanvas( TQWidget * parent, const char * name, const TQStringList & args );
 
 		/**
 		 * KImageCanvas Destructor
@@ -56,12 +56,12 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * set the background color of the canvas
 		 */
-		void setBgColor( const QColor & );
+		void setBgColor( const TQColor & );
 
 		/**
 		 * returns the current background color
 		 */
-		const QColor & bgColor() const;
+		const TQColor & bgColor() const;
 
 		/**
 		 * the depth of the contained image
@@ -71,12 +71,12 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * the size of the unzoomed image
 		 */
-		QSize imageSize() const;
+		TQSize imageSize() const;
 
 		/**
 		 * the size of the zoomed (current) image
 		 */
-		QSize currentSize() const;
+		TQSize currentSize() const;
 
 		/**
 		 * returns the zoom factor
@@ -86,7 +86,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * returns the current (unzoomed) image
 		 */
-		const QImage * image() const;
+		const TQImage * image() const;
 
 		/**
 		 * Scrolls the content so that the point (x, y) is in the top-left corner.
@@ -116,7 +116,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * Return the selected rectangle
 		 */
-		QRect selection() const;
+		TQRect selection() const;
 
 		/**
 		 * Returns whether the aspect ratio of the image is kept
@@ -131,30 +131,30 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * @return the description of the blend effect
 		 */
-		QString blendEffectDescription( unsigned int ) const;
+		TQString blendEffectDescription( unsigned int ) const;
 
 		/**
 		 * @return the current maximum image size
 		 */
-		const QSize & maximumImageSize() const { return m_maxsize; }
+		const TQSize & maximumImageSize() const { return m_maxsize; }
 
 		/**
 		 * @return the current minimum image size
 		 */
-		const QSize & minimumImageSize() const { return m_minsize; }
+		const TQSize & minimumImageSize() const { return m_minsize; }
 
 		/**
-		 * @return a pointer to the QWidget interface of this object
+		 * @return a pointer to the TQWidget interface of this object
 		 */
-		QWidget * widget() { return static_cast<QWidget *>( this ); }
+		TQWidget * widget() { return static_cast<TQWidget *>( this ); }
 
-		bool eventFilter( QObject *, QEvent * );
+		bool eventFilter( TQObject *, TQEvent * );
 
 	signals:
 		/**
 		 * a mouse button was pressed and a context menu should be openend
 		 */
-		void contextPress( const QPoint& );
+		void contextPress( const TQPoint& );
 
 		/**
 		 * the size of the image has changed (a new image was loaded, or the
@@ -162,7 +162,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		 *
 		 * it passes the new size of the image
 		 */
-		void imageSizeChanged( const QSize & );
+		void imageSizeChanged( const TQSize & );
 
 		/**
 		 * The zoom of the image has changed.
@@ -173,7 +173,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		 * The selection has changed. Connect to this signal if you want to
 		 * do something with a selection of the image (e.g. crop).
 		 */
-		void selectionChanged( const QRect & );
+		void selectionChanged( const TQRect & );
 
 		/**
 		 * Emitted when an image is finished being shown. If a blend effect is being used
@@ -199,7 +199,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * The current mouse cursor position on the image.
 		 */
-		void cursorPos( const QPoint & );
+		void cursorPos( const TQPoint & );
 
 	public slots:
 		/**
@@ -211,7 +211,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * give the canvas a new image to show. The zoom level is kept.
 		 */
-		void setImage( const QImage & );
+		void setImage( const TQImage & );
 
 		/**
 		 * Give the canvas a new image to show.
@@ -219,7 +219,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		 * You have to pass the size the image should have when it appears
 		 * on screen.
 		 */
-		void setImage( const QImage &, const QSize & );
+		void setImage( const TQImage &, const TQSize & );
 
 		/**
 		 * set the zoom to be used when showing the image
@@ -229,7 +229,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		/**
 		 * Fit the image into the requested width and height.
 		 */
-		void boundImageTo( const QSize & size );
+		void boundImageTo( const TQSize & size );
 
 		/**
 		 * Set the maximum size of the image. If this is set the image will
@@ -237,7 +237,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		 *
 		 * If you set this to 0x0 the image size may be as big as possible
 		 */
-		void setMaximumImageSize( const QSize & );
+		void setMaximumImageSize( const TQSize & );
 
 		/**
 		 * Set the minimum size of the image. If this is set the image will
@@ -245,14 +245,14 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		 *
 		 * If you set this to 0x0 the image size can be as small as possible
 		 */
-		void setMinimumImageSize( const QSize & );
+		void setMinimumImageSize( const TQSize & );
 
 		/**
 		 * Resize the image to the given size. It will keep the aspect ratio
 		 * as long as keepAspectRatio is true (default). The image will be as
 		 * large as possible within the given constraints.
 		 */
-		void resizeImage( const QSize & );
+		void resizeImage( const TQSize & );
 
 		/**
 		 * Hides the scrollbars of the canvas. It's still possible to scroll
@@ -295,17 +295,17 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		void rotate( double a, bool change = false );
 
 	protected:
-		void checkBounds( QSize & newsize );
-		void zoomFromSize( const QSize & );
+		void checkBounds( TQSize & newsize );
+		void zoomFromSize( const TQSize & );
 		void sizeFromZoom( double );
 		void updateImage();
 
-		void mouseMoveEvent( QMouseEvent * );
-		void resizeEvent( QResizeEvent * );
-		void contentsMousePressEvent( QMouseEvent * );
-		void contentsWheelEvent( QWheelEvent * );
-		void keyPressEvent( QKeyEvent * );
-		void timerEvent( QTimerEvent * );
+		void mouseMoveEvent( TQMouseEvent * );
+		void resizeEvent( TQResizeEvent * );
+		void contentsMousePressEvent( TQMouseEvent * );
+		void contentsWheelEvent( TQWheelEvent * );
+		void keyPressEvent( TQKeyEvent * );
+		void timerEvent( TQTimerEvent * );
 
 	protected slots:
 		void slotUpdateImage();
@@ -314,8 +314,8 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		void loadSettings();
 
 	private slots:
-		void selected( const QRect & ); // map rect to unzoomed rect
-		void mapCursorPos( const QPoint & );
+		void selected( const TQRect & ); // map rect to unzoomed rect
+		void mapCursorPos( const TQPoint & );
 
 	private:
 		enum BlendEffect {
@@ -335,16 +335,16 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 
 		KImageHolder * m_client;
 		KImageHolder * m_oldClient;
-		QImage * m_image; //unzoomed copy of the current image
-		QImage * m_imageTransformed; //xForm( m_matrix ) copy of the current image
+		TQImage * m_image; //unzoomed copy of the current image
+		TQImage * m_imageTransformed; //xForm( m_matrix ) copy of the current image
 		KPixmap * m_pixmap; //copy of the current pixmap (if ( m_fastscale ) it's unzoomed else it's m_imageTransformed.smoothScale()d)
 
-		QTimer * m_pTimer; // timer for single shot to hide the cursor
-		QCursor m_cursor; // the cursor show in the canvas (for auto-hiding)
+		TQTimer * m_pTimer; // timer for single shot to hide the cursor
+		TQCursor m_cursor; // the cursor show in the canvas (for auto-hiding)
 
-		QWMatrix m_matrix; // the current transformation matrix
-		QSize m_maxsize, m_minsize;
-		QSize m_currentsize;
+		TQWMatrix m_matrix; // the current transformation matrix
+		TQSize m_maxsize, m_minsize;
+		TQSize m_currentsize;
 
 		double m_zoom;
 		bool m_fastscale;
@@ -358,7 +358,7 @@ class KDE_EXPORT KImageCanvas : public QScrollView, public KImageViewer::Canvas
 		bool m_bNewImage;
 		int m_iBlendTimerId;
 
-		QRect m_selection; //unzoomed selection rect
+		TQRect m_selection; //unzoomed selection rect
 };
 
 // vim:sw=4:ts=4

@@ -22,7 +22,7 @@ PMMessage::PMMessage( )
    m_pObject = 0;
 }
 
-PMMessage::PMMessage( const QString& text, PMObject* object )
+PMMessage::PMMessage( const TQString& text, PMObject* object )
 {
    m_sText = text;
    m_pObject = object;

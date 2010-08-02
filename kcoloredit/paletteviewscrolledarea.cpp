@@ -16,18 +16,18 @@
  ***************************************************************************/
 
 #include <stdlib.h>
-#include <qptrlist.h>
-#include <qcolor.h>
-#include <qcursor.h>
-#include <qbrush.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qpen.h>
-#include <qfontmetrics.h>
-#include <qtimer.h>
+#include <tqptrlist.h>
+#include <tqcolor.h>
+#include <tqcursor.h>
+#include <tqbrush.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqpen.h>
+#include <tqfontmetrics.h>
+#include <tqtimer.h>
 #include <kglobal.h>
 #include <kcolordrag.h>
-#include <qscrollbar.h>
+#include <tqscrollbar.h>
 
 #include "palette.h"
 #include "palettehistory.h"
@@ -37,9 +37,9 @@
 #include "paletteviewscrolledarea.moc"
 
 PaletteViewScrolledArea::PaletteViewScrolledArea(const int defaultCellWidth,
-	const int defaultCellHeight, const int cellSpacing, QScrollBar* scrollBar,
-	QScrollBar* hScrollBar, KColorEditView* view, QWidget* parent, const char* name)
-	: QFrame(parent, name) {
+	const int defaultCellHeight, const int cellSpacing, TQScrollBar* scrollBar,
+	TQScrollBar* hScrollBar, KColorEditView* view, TQWidget* parent, const char* name)
+	: TQFrame(parent, name) {
 	this->defaultCellWidth = defaultCellWidth;
 	this->defaultCellHeight = defaultCellHeight;
 	this->cellSpacing = cellSpacing;
@@ -47,8 +47,8 @@ PaletteViewScrolledArea::PaletteViewScrolledArea(const int defaultCellWidth,
 	this->hScrollBar = hScrollBar;
 	this->view = view;
 	setBackgroundMode(NoBackground);
-	scrollTimeoutTimer = new QTimer(this);
-	connect(scrollTimeoutTimer, SIGNAL( timeout() ), SLOT( slotScrollTimeout() ));
+	scrollTimeoutTimer = new TQTimer(this);
+	connect(scrollTimeoutTimer, TQT_SIGNAL( timeout() ), TQT_SLOT( slotScrollTimeout() ));
 	scrollTimeout = true;
 	mousePressed = false;
 	cursorPositioning = false;
@@ -98,7 +98,7 @@ void PaletteViewScrolledArea::scrollPalette(const int amount, const int timeout)
 void PaletteViewScrolledArea::slotScrollTimeout() {
 	scrollTimeout = true;
 	if(mousePressed) {
-		QPoint cursorPoint = mapFromGlobal(QCursor::pos());
+		TQPoint cursorPoint = mapFromGlobal(TQCursor::pos());
 		setCursorPos(cursorPoint.x(), cursorPoint.y());
 		selectionEnd = cursorPos();
 		if(selectionEnd >= selectionBegin)
@@ -166,7 +166,7 @@ void PaletteViewScrolledArea::setCellsSizes() {
 	cellWidth = defaultCellWidth;
 	cellHeight = defaultCellHeight;
 	if(viewColorNames) {
-		QPainter painter;
+		TQPainter painter;
 		painter.begin(this);
 		if(cellHeight < painter.fontMetrics().height()) {
 			int prevCellHeight = cellHeight;
@@ -216,12 +216,12 @@ int PaletteViewScrolledArea::selectionMax() const {
 	return document()->paletteSelectionEnd();
 }
 
-void PaletteViewScrolledArea::paintEvent(QPaintEvent* /*event*/) {
+void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	setCellsSizes();
-	QPixmap pixmap(size());
-	QPainter painter;
+	TQPixmap pixmap(size());
+	TQPainter painter;
 	painter.begin(&pixmap, this);
-	QFontMetrics fontMetrics = painter.fontMetrics();
+	TQFontMetrics fontMetrics = painter.fontMetrics();
 	int maxLineWidth;
 	if(viewColorNames) {
 		int maxTextLength = 0;
@@ -249,12 +249,12 @@ void PaletteViewScrolledArea::paintEvent(QPaintEvent* /*event*/) {
 	int lastRow = (posY + height() - 1 + rowHeight - 1)/rowHeight;
 	if(viewColorNames)
 		painter.fillRect(0, 0, rowWidth, height(),
-        QBrush( QFrame::palette().active().base() ));
-	QBrush normalBackgroundBrush(QFrame::palette().active().background());
-	QBrush selectedBackgroundBrush(QFrame::palette().active().highlight());
-	QBrush foregroundBrush;
-	QBrush cursorBrush(QFrame::palette().active().foreground());
-	QPen backgroundPen(QFrame::palette().active().foreground());
+        TQBrush( TQFrame::palette().active().base() ));
+	TQBrush normalBackgroundBrush(TQFrame::palette().active().background());
+	TQBrush selectedBackgroundBrush(TQFrame::palette().active().highlight());
+	TQBrush foregroundBrush;
+	TQBrush cursorBrush(TQFrame::palette().active().foreground());
+	TQPen backgroundPen(TQFrame::palette().active().foreground());
 	int min = selectionMin();
 	int max = selectionMax();
 	int fontAscent = fontMetrics.ascent();
@@ -270,14 +270,14 @@ void PaletteViewScrolledArea::paintEvent(QPaintEvent* /*event*/) {
 		for(int y = firstRow; y <= lastRow; ++y) {
 			int yBegin = y*rowHeight - posY;
 			int currCellNum = y*cellsInRow + x;
-			QBrush* backgroundBrush;
+			TQBrush* backgroundBrush;
 			if(currCellNum >= min && currCellNum < max)
 				backgroundBrush = &selectedBackgroundBrush;
 			else
 				backgroundBrush = &normalBackgroundBrush;
 			if(currCellNum < palette()->length()) {
 				Color* color = palette()->color(currCellNum);
-				QBrush foregroundBrush(QColor(
+				TQBrush foregroundBrush(TQColor(
 					color->component(Color::RED_INDEX),
 					color->component(Color::GREEN_INDEX),
 					color->component(Color::BLUE_INDEX) ));
@@ -285,7 +285,7 @@ void PaletteViewScrolledArea::paintEvent(QPaintEvent* /*event*/) {
 					*backgroundBrush);
 				painter.fillRect(xBegin, yBegin + rowHeight - cellSpacing, cellWithSpacingWidth, cellSpacing,
 					*backgroundBrush);
-				QBrush* backgroundOrCursorBrush;
+				TQBrush* backgroundOrCursorBrush;
 				if(cursorPos() == currCellNum)
 					backgroundOrCursorBrush = &cursorBrush;
 				else
@@ -325,7 +325,7 @@ void PaletteViewScrolledArea::paintEvent(QPaintEvent* /*event*/) {
 	painter.end();
 }
 
-int PaletteViewScrolledArea::colorIndex(const QPoint& point) const {
+int PaletteViewScrolledArea::colorIndex(const TQPoint& point) const {
 	int colorColumn = point.x()*cellsInRow/rowWidth;
 	int colorRow = (point.y() + scrollBar->value())/rowHeight;
 	int colorIndex = colorRow*cellsInRow + colorColumn;
@@ -335,14 +335,14 @@ int PaletteViewScrolledArea::colorIndex(const QPoint& point) const {
 	return colorIndex;
 }
 
-QColor PaletteViewScrolledArea::color(const QPoint& point) const {
+TQColor PaletteViewScrolledArea::color(const TQPoint& point) const {
 	Color* color = palette()->color(colorIndex( point ));
-	return QColor(color->component( Color::RED_INDEX ),
+	return TQColor(color->component( Color::RED_INDEX ),
 		color->component( Color::GREEN_INDEX ),
 		color->component( Color::BLUE_INDEX ));
 }
 
-void PaletteViewScrolledArea::mousePressEvent(QMouseEvent* event) {
+void PaletteViewScrolledArea::mousePressEvent(TQMouseEvent* event) {
 	cursorPositioning = false;
 	if(( cursorPositioning = setCursorPos(event->x(), event->y()) )) {
 		selectionBegin = cursorPos();
@@ -356,7 +356,7 @@ void PaletteViewScrolledArea::mousePressEvent(QMouseEvent* event) {
 	mousePressed = true;
 }
 
-void PaletteViewScrolledArea::mouseMoveEvent(QMouseEvent* event) {
+void PaletteViewScrolledArea::mouseMoveEvent(TQMouseEvent* event) {
 	if(cursorPositioning) {
 		setCursorPos(event->x(), event->y());
 		selectionEnd = cursorPos();
@@ -371,7 +371,7 @@ void PaletteViewScrolledArea::mouseMoveEvent(QMouseEvent* event) {
 		if(colorIndex( colorDragPoint ) != -1) {
 			if(abs( event->x() - colorDragPoint.x() ) > 2 ||
 				abs( event->y() - colorDragPoint.y() ) > 2) {
-				QColor draggedColor = color(colorDragPoint);
+				TQColor draggedColor = color(colorDragPoint);
 				KColorDrag* colorDrag = KColorDrag::makeDrag(draggedColor, this);
 				colorDrag->dragCopy();
 			} else
@@ -380,7 +380,7 @@ void PaletteViewScrolledArea::mouseMoveEvent(QMouseEvent* event) {
 	}
 }
 
-void PaletteViewScrolledArea::mouseReleaseEvent(QMouseEvent* /*event*/) {
+void PaletteViewScrolledArea::mouseReleaseEvent(TQMouseEvent* /*event*/) {
 	if(colorChosen) {
 		if(colorIndex( colorDragPoint ) != -1) {
 			int index = colorIndex(colorDragPoint);

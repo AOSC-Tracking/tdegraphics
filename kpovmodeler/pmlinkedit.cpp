@@ -16,9 +16,9 @@
 **************************************************************************/
 
 #include "pmlinkedit.h"
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqlineedit.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kpushbutton.h>
@@ -27,24 +27,24 @@
 #include "pmdeclare.h"
 #include "pmobjectselect.h"
 
-PMLinkEdit::PMLinkEdit( const QString& declareType,
-                        QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMLinkEdit::PMLinkEdit( const TQString& declareType,
+                        TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_declareTypes.append( declareType );
    init( );
 }
 
-PMLinkEdit::PMLinkEdit( const QStringList& declareTypes,
-                        QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMLinkEdit::PMLinkEdit( const TQStringList& declareTypes,
+                        TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_declareTypes = declareTypes;
    init( );
 }
 
-PMLinkEdit::PMLinkEdit( QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMLinkEdit::PMLinkEdit( TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    init( );
 }
@@ -55,24 +55,24 @@ void PMLinkEdit::init( )
    m_pDisplayedObject = 0;
    m_bReadOnly = false;
 
-   QGridLayout* grid = new QGridLayout( this, 2, 2, 0, KDialog::spacingHint( ) );
+   TQGridLayout* grid = new TQGridLayout( this, 2, 2, 0, KDialog::spacingHint( ) );
 
-   grid->addWidget( new QLabel( i18n( "Prototype:" ), this ), 0, 0 );
+   grid->addWidget( new TQLabel( i18n( "Prototype:" ), this ), 0, 0 );
    grid->setColStretch( 0, 0 );
    grid->setColStretch( 1, 1 );
-   m_pIDEdit = new QLineEdit( this );
+   m_pIDEdit = new TQLineEdit( this );
    m_pIDEdit->setReadOnly( true );
    grid->addWidget( m_pIDEdit, 0, 1 );
 
-   QHBoxLayout* layout = new QHBoxLayout( );
+   TQHBoxLayout* layout = new TQHBoxLayout( );
    grid->addLayout( layout, 1, 1 );
-   m_pSelectButton = new QPushButton( i18n( "Select..." ), this );
+   m_pSelectButton = new TQPushButton( i18n( "Select..." ), this );
    layout->addWidget( m_pSelectButton );
    m_pClearButton = new KPushButton( KStdGuiItem::clear(), this );
    layout->addWidget( m_pClearButton );
 
-   connect( m_pSelectButton, SIGNAL( clicked( ) ), SLOT( slotSelectClicked( ) ) );
-   connect( m_pClearButton, SIGNAL( clicked( ) ), SLOT( slotClearClicked( ) ) );
+   connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelectClicked( ) ) );
+   connect( m_pClearButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotClearClicked( ) ) );
 }
 
 void PMLinkEdit::setDisplayedObject( PMObject* obj )
@@ -93,14 +93,14 @@ void PMLinkEdit::setDisplayedObject( PMObject* obj )
    }
 }
 
-void PMLinkEdit::setLinkPossibility( const QString& t )
+void PMLinkEdit::setLinkPossibility( const TQString& t )
 {
    m_declareTypes.clear( );
    m_declareTypes.append( t );
 }
 
 
-void PMLinkEdit::setLinkPossibilities( const QStringList& t )
+void PMLinkEdit::setLinkPossibilities( const TQStringList& t )
 {
    m_declareTypes = t;
 }
@@ -126,7 +126,7 @@ void PMLinkEdit::slotSelectClicked( )
          result = PMObjectSelect::selectDeclare(
             m_pDisplayedObject, m_declareTypes, obj, this );
 
-      if( ( result == QDialog::Accepted ) && obj )
+      if( ( result == TQDialog::Accepted ) && obj )
       {
          m_pDeclare = ( PMDeclare* ) obj;
          m_pIDEdit->setText( m_pDeclare->id( ) );

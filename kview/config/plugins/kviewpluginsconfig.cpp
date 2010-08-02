@@ -25,14 +25,14 @@
 #include <ksimpleconfig.h>
 #include <kplugininfo.h>
 
-typedef KGenericFactory<KViewPluginsConfig, QWidget> KViewPluginsConfigFactory;
+typedef KGenericFactory<KViewPluginsConfig, TQWidget> KViewPluginsConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewpluginsconfig, KViewPluginsConfigFactory( "kcm_kviewpluginsconfig" ) )
 
-KViewPluginsConfig::KViewPluginsConfig( QWidget * parent, const char *, const QStringList & args )
+KViewPluginsConfig::KViewPluginsConfig( TQWidget * parent, const char *, const TQStringList & args )
 	: KSettings::PluginPage( KViewPluginsConfigFactory::instance(), parent, args )
 {
 	m_config = new KSimpleConfig( "kviewrc" );
-	pluginSelector()->addPlugins( QString::fromAscii( "kview" ), i18n( "Application" ), QString::null, m_config );
+	pluginSelector()->addPlugins( TQString::fromAscii( "kview" ), i18n( "Application" ), TQString::null, m_config );
 	pluginSelector()->setShowEmptyConfigPage( false );
 }
 

@@ -24,11 +24,11 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qpoint.h>
-#include <qdatetime.h>
-#include <qtimer.h>
-#include <qpixmap.h>
+#include <tqwidget.h>
+#include <tqpoint.h>
+#include <tqdatetime.h>
+#include <tqtimer.h>
+#include <tqpixmap.h>
 
 #include "pmviewbase.h"
 #include "pmviewfactory.h"
@@ -43,7 +43,7 @@ class PMObject;
 class PMPart;
 class PMCamera;
 class KConfig;
-class QComboBox;
+class TQComboBox;
 
 /**
  * Widget for rendering the scene with OpenGL
@@ -61,16 +61,16 @@ public:
     * Constructor
     */
    PMGLView( PMPart* part, PMViewType t,
-             QWidget* parent = 0, const char* name = 0, WFlags f = 0 );
+             TQWidget* parent = 0, const char* name = 0, WFlags f = 0 );
    /**
     * Destructor
     */
    ~PMGLView( );
 
    /** */
-   virtual QString viewType( ) const { return QString( "glview" ); }
+   virtual TQString viewType( ) const { return TQString( "glview" ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
    virtual void restoreViewConfig( PMViewOptions* );
    /** */
@@ -122,7 +122,7 @@ public:
    /**
     * Returns the 2D control points position in the view
     */
-   const QPtrList<PMVector>& controlPointsPosition( ) const
+   const TQPtrList<PMVector>& controlPointsPosition( ) const
    {
       return m_controlPointsPosition;
    }
@@ -173,7 +173,7 @@ public:
    /**
     * Returns the view type as string
     */
-   static QString viewTypeAsString( PMViewType t );
+   static TQString viewTypeAsString( PMViewType t );
    /**
     * Sets the direct rendering flag
     */
@@ -212,7 +212,7 @@ public slots:
     * Called when an object is changed.
     * @see PMPart::objectChanged( )
     */
-   void slotObjectChanged( PMObject* obj, const int mode, QObject* sender );
+   void slotObjectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Restarts rendering
     */
@@ -272,11 +272,11 @@ signals:
    /**
     * Emitted when an object is changed
     */
-   void objectChanged( PMObject* obj, const int mode, QObject* sender );
+   void objectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Emitted when the mouse is over a control point
     */
-   void controlPointMessage( const QString& msg );
+   void controlPointMessage( const TQString& msg );
    /**
     * Emitted in the destructor
     */
@@ -284,7 +284,7 @@ signals:
    /**
     * Emitted when the view type changes
     */
-   void viewTypeChanged( const QString& str );
+   void viewTypeChanged( const TQString& str );
 
 protected:
    /**
@@ -292,21 +292,21 @@ protected:
     */
    virtual void initializeGL( );
    /** */
-   virtual void resizeEvent( QResizeEvent* e );
+   virtual void resizeEvent( TQResizeEvent* e );
    /** */
-   virtual void paintEvent( QPaintEvent* e );
+   virtual void paintEvent( TQPaintEvent* e );
    /** */
-   virtual void mousePressEvent( QMouseEvent* e );
+   virtual void mousePressEvent( TQMouseEvent* e );
    /** */
-   virtual void mouseReleaseEvent( QMouseEvent* e );
+   virtual void mouseReleaseEvent( TQMouseEvent* e );
    /** */
-   virtual void mouseMoveEvent( QMouseEvent* e );
+   virtual void mouseMoveEvent( TQMouseEvent* e );
    /** */
-   virtual void keyPressEvent( QKeyEvent* e );
+   virtual void keyPressEvent( TQKeyEvent* e );
    /**
     * Event to zoom in / zoom out the viewport by mouse wheel
     */
-   virtual void wheelEvent( QWheelEvent* e );
+   virtual void wheelEvent( TQWheelEvent* e );
 
 private:
    /**
@@ -339,11 +339,11 @@ private:
    /**
     * Starts a graphical change
     */
-   void startChange( const QPoint& mousePos );
+   void startChange( const TQPoint& mousePos );
    /**
     * Graphical Change
     */
-   void graphicalChange( const QPoint& mousePos );
+   void graphicalChange( const TQPoint& mousePos );
    /**
     * Selects/deselecs the control point. If cp is 0, all control points are
     * selected/deselected.
@@ -421,19 +421,19 @@ private:
    /**
     * The old mouse position
     */
-   QPoint m_mousePos;
-   QPoint m_changeStartPos;
-   QPoint m_currentMousePos;
-   QTimer m_startTimer;
-   QTime m_changeStartTime;
+   TQPoint m_mousePos;
+   TQPoint m_changeStartPos;
+   TQPoint m_currentMousePos;
+   TQTimer m_startTimer;
+   TQTime m_changeStartTime;
    bool m_bDeselectUnderMouse;
    bool m_bSelectUnderMouse;
 
    /**
     * Member variables for multiple selection mode
     */
-   QPixmap m_selectionPixmap[4];
-   QPoint m_selectionStart, m_selectionEnd;
+   TQPixmap m_selectionPixmap[4];
+   TQPoint m_selectionStart, m_selectionEnd;
    bool m_bMultipleSelectionMode;
    bool m_bSelectionStarted;
 
@@ -442,8 +442,8 @@ private:
     */
    bool m_bAutoScroll;
    double m_autoScrollSpeed;
-   QTimer m_autoScrollTimer;
-   QTime m_lastAutoScrollUpdate;
+   TQTimer m_autoScrollTimer;
+   TQTime m_lastAutoScrollUpdate;
    int m_autoScrollDirectionX, m_autoScrollDirectionY;
    /**
     * Rendering
@@ -474,7 +474,7 @@ private:
    /**
     * Position of the control points on the screen
     */
-   QPtrList<PMVector> m_controlPointsPosition;
+   TQPtrList<PMVector> m_controlPointsPosition;
    /**
     * Position of the last right mouse click
     */
@@ -518,7 +518,7 @@ private:
    /**
     * The current object actions
     */
-   QPtrList<PMObjectAction> m_objectActions;
+   TQPtrList<PMObjectAction> m_objectActions;
    static bool s_bDirect;
 };
 
@@ -537,11 +537,11 @@ public:
       m_glViewType = t;
    }
    virtual PMViewOptions* copy( ) const { return new PMGLViewOptions( *this ); }
-   virtual QString viewType( ) const { return QString( "glview" ); }
+   virtual TQString viewType( ) const { return TQString( "glview" ); }
    PMGLView::PMViewType glViewType( ) const { return m_glViewType; }
    void setGLViewType( PMGLView::PMViewType t ) { m_glViewType = t; }
-   virtual void loadData( QDomElement& e );
-   virtual void saveData( QDomElement& e );
+   virtual void loadData( TQDomElement& e );
+   virtual void saveData( TQDomElement& e );
 
 private:
    PMGLView::PMViewType m_glViewType;
@@ -554,16 +554,16 @@ class PMGLViewFactory : public PMViewTypeFactory
 {
 public:
    PMGLViewFactory( ) { }
-   virtual QString viewType( ) const { return QString( "glview" ); }
-   virtual QString description( ) const;
-   virtual QString description( PMViewOptions* ) const;
-   virtual QString iconName( ) const { return QString( "pmglview" ); }
-   virtual PMViewBase* newInstance( QWidget* parent, PMPart* part ) const
+   virtual TQString viewType( ) const { return TQString( "glview" ); }
+   virtual TQString description( ) const;
+   virtual TQString description( PMViewOptions* ) const;
+   virtual TQString iconName( ) const { return TQString( "pmglview" ); }
+   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
    {
       return new PMGLView( part, PMGLView::PMViewPosX, parent );
    }
    virtual PMViewOptions* newOptionsInstance( ) const;
-   virtual PMViewOptionsWidget* newOptionsWidget( QWidget*, PMViewOptions* );
+   virtual PMViewOptionsWidget* newOptionsWidget( TQWidget*, PMViewOptions* );
 };
 
 /**
@@ -576,14 +576,14 @@ public:
    /**
     * Default constructor
     */
-   PMGLViewOptionsWidget( QWidget* parent, PMViewOptions* o );
+   PMGLViewOptionsWidget( TQWidget* parent, PMViewOptions* o );
 
 protected slots:
    void slotGLViewTypeChanged( int );
 
 private:
    PMGLViewOptions* m_pOptions;
-   QComboBox* m_pGLViewType;
+   TQComboBox* m_pGLViewType;
 };
 
 #endif

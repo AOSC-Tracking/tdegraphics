@@ -16,18 +16,18 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qtooltip.h>
+#include <tqtooltip.h>
 
 #include <kurl.h>
 #include <krun.h>
 
 #include "kurlwidget.h"
 
-KURLWidget::KURLWidget(const QString& text, QWidget *parent, const char *name)
+KURLWidget::KURLWidget(const TQString& text, TQWidget *parent, const char *name)
     : KURLLabel( parent, name )
 {
     setText( text );
-    connect( this, SIGNAL( leftClickedURL() ), SLOT( run() ));
+    connect( this, TQT_SIGNAL( leftClickedURL() ), TQT_SLOT( run() ));
     setUseTips( true );
 }
 

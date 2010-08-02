@@ -9,7 +9,7 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <qapplication.h>
+#include <tqapplication.h>
 
 #include "documentPageCache.h"
 #include "documentRenderer.h"
@@ -79,16 +79,16 @@ void DocumentPageCache::setResolution(double res)
   resolutionInDPI = res;
 }
 
-QSize DocumentPageCache::sizeOfPageInPixel(const PageNumber& pg) const
+TQSize DocumentPageCache::sizeOfPageInPixel(const PageNumber& pg) const
 {
   // Paranoid safety checks
   if (renderer.isNull()) {
     kdError(1223) << "DocumentPageCache::sizeOfPageInPixel( " << pg << " ) called but no renderer was set" << endl;
-    return QSize();
+    return TQSize();
   }
   if (!pg.isValid()) {
     kdError(1223) << "DocumentPageCache::sizeOfPageInPixel( " << pg << " ) called with invalid argument" << endl;
-    return QSize();
+    return TQSize();
   }
 
   SimplePageSize ps = sizeOfPage(pg);
@@ -98,7 +98,7 @@ QSize DocumentPageCache::sizeOfPageInPixel(const PageNumber& pg) const
 }
 
 
-bool DocumentPageCache::isPageCached(const PageNumber& pageNumber, const QSize& size)
+bool DocumentPageCache::isPageCached(const PageNumber& pageNumber, const TQSize& size)
 {
   // Paranoid checks
   if (renderer.isNull()) {
@@ -115,7 +115,7 @@ bool DocumentPageCache::isPageCached(const PageNumber& pageNumber, const QSize& 
     return false;
   }
 
-  QString key = createKey(pageNumber, size);
+  TQString key = createKey(pageNumber, size);
 
   // Check if the page that we are looking for is in the cache.
   // We are not accessing the page, so we don't want it to be moved into the front.
@@ -127,24 +127,24 @@ bool DocumentPageCache::isPageCached(const PageNumber& pageNumber, const QSize& 
     return false;
 }
 
-QString DocumentPageCache::createKey(const PageNumber& pageNumber, const QSize& size)
+TQString DocumentPageCache::createKey(const PageNumber& pageNumber, const TQSize& size)
 {
-  QString key;
+  TQString key;
 
-  key = QString::number(pageNumber) + ":" +
-        QString::number(size.width()) + ":" + QString::number(size.height());
+  key = TQString::number(pageNumber) + ":" +
+        TQString::number(size.width()) + ":" + TQString::number(size.height());
 
   return key;
 }
 
-QString DocumentPageCache::createKey(const PageNumber& pageNumber)
+TQString DocumentPageCache::createKey(const PageNumber& pageNumber)
 {
-  QSize pageSize = sizeOfPageInPixel(pageNumber);
+  TQSize pageSize = sizeOfPageInPixel(pageNumber);
 
-  QString key;
+  TQString key;
 
-  key = QString::number(pageNumber) + ":" +
-        QString::number(pageSize.width()) + ":" + QString::number(pageSize.height());
+  key = TQString::number(pageNumber) + ":" +
+        TQString::number(pageSize.width()) + ":" + TQString::number(pageSize.height());
 
   return key;
 }
@@ -214,9 +214,9 @@ RenderedDocumentPagePixmap* DocumentPageCache::getPage(const PageNumber& pageNr)
     if (resolutionInDPI > 0.0)
     {
       page->resize(sizeOfPageInPixel(pageNr));
-      QApplication::setOverrideCursor( waitCursor );
+      TQApplication::setOverrideCursor( waitCursor );
       renderer->drawPage(resolutionInDPI, page);
-      QApplication::restoreOverrideCursor();
+      TQApplication::restoreOverrideCursor();
 
       // We always set the cache capacity to be at least n times the cost of the page we want to insert.
       // Where n is the number of pages that can be visible at the same time at very high zoomlevels.
@@ -284,7 +284,7 @@ void DocumentPageCache::setUseDocumentSpecifiedSize(bool b)
 }
 
 
-QPixmap DocumentPageCache::createThumbnail(const PageNumber& pageNr, int width)
+TQPixmap DocumentPageCache::createThumbnail(const PageNumber& pageNr, int width)
 {
   // Paranoid checks
   if (renderer.isNull()) {

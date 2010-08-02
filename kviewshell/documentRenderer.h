@@ -16,11 +16,11 @@
 #include "pageNumber.h"
 #include "pageSize.h"
 
-#include <qguardedptr.h>
-#include <qcolor.h>
-#include <qmutex.h>
-#include <qobject.h>
-#include <qvaluevector.h>
+#include <tqguardedptr.h>
+#include <tqcolor.h>
+#include <tqmutex.h>
+#include <tqobject.h>
+#include <tqvaluevector.h>
 
 class Anchor;
 class KURL;
@@ -54,7 +54,7 @@ class DocumentRenderer : public QObject
 
 public:
   /** \brief default constructor */
-  DocumentRenderer(QWidget* parent);
+  DocumentRenderer(TQWidget* parent);
 
   virtual ~DocumentRenderer();
 
@@ -123,7 +123,7 @@ public:
   method returns 'false' the class must act reasonably, i.e. by
   clear()ing the document
   */
-  virtual bool setFile(const QString &fname, const KURL &base) = 0;
+  virtual bool setFile(const TQString &fname, const KURL &base) = 0;
 
 
   /** \brief clearing the document renderer
@@ -162,7 +162,7 @@ public:
      current document is empty. */
   PageNumber totalPages() const {return numPages; }
 
-  QPtrList<Bookmark> getBookmarks() const { return bookmarks; }
+  TQPtrList<Bookmark> getBookmarks() const { return bookmarks; }
 
   /* Returns the size of page 'page'. If the document is empty, if the
      page specified is not a page of the document or if the document
@@ -190,10 +190,10 @@ public:
 
   and the do all of the following, in no particular order
 
-  - obtain the pointer to the QPaintDevice from the documentPage using
+  - obtain the pointer to the TQPaintDevice from the documentPage using
     the documentPage::getPaintDevice() method and draw a graphical
     representation of the page number page->getPageNumber() into the
-    QPaintDevice, using the given resolution. If the member
+    TQPaintDevice, using the given resolution. If the member
     accessibilityBackground is true, the accessibilityBackgroundColor
     should be used for a background color, if possible. Otherwise,
     white should be used, if possible. If you need to compute the size
@@ -321,12 +321,12 @@ public:
      section of the DVI file can be found. If so, it returns an anchor
      to that section. If not, it returns an invalid anchor. 
   */
-  virtual Anchor        parseReference(const QString &reference);
+  virtual Anchor        parseReference(const TQString &reference);
   
   /* Looks up a anchor in the "anchorList". Returns the anchor found,
      or an invalid anchor otherwise. 
   */
-  Anchor findAnchor(const QString &);
+  Anchor findAnchor(const TQString &);
   
   /* Quick file validity check
 
@@ -352,9 +352,9 @@ public:
   true otherwise. The default implementation always returns
   'true'. 
   */
-  virtual bool isValidFile(const QString& fileName) const;
+  virtual bool isValidFile(const TQString& fileName) const;
 
-  void setAccessibleBackground(bool accessibleMode, const QColor& background = QColor(255, 255, 255));
+  void setAccessibleBackground(bool accessibleMode, const TQColor& background = TQColor(255, 255, 255));
 
 signals:
   /** signals that the document is changed
@@ -377,7 +377,7 @@ signals:
   via the status bar. Since the status bar is not always visible, and
   since the duration that the message is shown is not quite specified,
   this should not be used for important information. */
-  void setStatusBarText( const QString& );
+  void setStatusBarText( const TQString& );
 
 protected:
   /** mutex used to make method thread-safe
@@ -389,7 +389,7 @@ protected:
   implementation is THREAD-SAFE, if not, this can result in infrequent
   and very hard-to-find crashes of your programm.
   */
-  QMutex mutex;
+  TQMutex mutex;
 
 
   /** number of pages in the document
@@ -417,7 +417,7 @@ protected:
   @warning Only the constructor and the methods setFile() and clear()
   may write to this member.
   */
-  QValueVector<SimplePageSize> pageSizes;
+  TQValueVector<SimplePageSize> pageSizes;
   
   /** bookmarks
 
@@ -428,7 +428,7 @@ protected:
   @warning Only the constructor and the methods setFile() and clear()
   may write to this member.
   */
-  QPtrList<Bookmark> bookmarks;
+  TQPtrList<Bookmark> bookmarks;
 
   /** map of anchors in a document. 
 
@@ -439,14 +439,14 @@ protected:
   @warning Only the constructor and the methods setFile() and clear()
   may write to this member.
   */
-  QMap<QString, Anchor> anchorList;
+  TQMap<TQString, Anchor> anchorList;
 
   /** pointer to the parent widget
 
   This pointer can be used by implementations e.g. to display error
   messages. This pointer can well be zero.
   */
-  QGuardedPtr<QWidget> parentWidget;
+  TQGuardedPtr<TQWidget> parentWidget;
 
   /** specifies if accessibilityBackgroundColor should be used
 
@@ -462,7 +462,7 @@ protected:
   drawThumbnail() methods should use this color as the backgroundcolor
   of the pages.
   */
-  QColor accessibilityBackgroundColor;
+  TQColor accessibilityBackgroundColor;
 
   /** Flag if document is modified 
 

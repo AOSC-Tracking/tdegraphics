@@ -14,7 +14,7 @@
 
 void DlgPerformance::init()
 {
-    QFont labelFont = descLabel->font();
+    TQFont labelFont = descLabel->font();
     labelFont.setBold( true );
     descLabel->setFont( labelFont );
 }

@@ -25,7 +25,7 @@
 
 #include "ksvg_lookup.h"
 
-class QString;
+class TQString;
 
 namespace KSVG
 {
@@ -43,7 +43,7 @@ public:
 	void setMeetOrSlice(unsigned short);
 	unsigned short meetOrSlice() const;
 
-	void parsePreserveAspectRatio(const QString &);
+	void parsePreserveAspectRatio(const TQString &);
 	SVGMatrixImpl *getCTM(float logicX, float logicY, float logicWidth, float logicHeight,
 						  float physX, float physY, float physWidth, float physHeight);
 

@@ -19,11 +19,11 @@
 #include "pmdockwidget.h"
 #include "pmdockwidget_private.h"
 
-#include <qpainter.h>
-#include <qcursor.h>
+#include <tqpainter.h>
+#include <tqcursor.h>
 
-PMDockSplitter::PMDockSplitter(QWidget *parent, const char *name, Orientation orient, int pos, bool highResolution)
-: QWidget(parent, name)
+PMDockSplitter::PMDockSplitter(TQWidget *parent, const char *name, Orientation orient, int pos, bool highResolution)
+: TQWidget(parent, name)
 {
   divider = 0L;
   child0 = 0L;
@@ -36,7 +36,7 @@ PMDockSplitter::PMDockSplitter(QWidget *parent, const char *name, Orientation or
   initialised = false;
 }
 
-void PMDockSplitter::activate(QWidget *c0, QWidget *c1)
+void PMDockSplitter::activate(TQWidget *c0, TQWidget *c1)
 {
   if ( c0 ) child0 = c0;
   if ( c1 ) child1 = c1;
@@ -44,15 +44,15 @@ void PMDockSplitter::activate(QWidget *c0, QWidget *c1)
   setupMinMaxSize();
 
   if (divider) delete divider;
-  divider = new QFrame(this, "pannerdivider");
-  divider->setFrameStyle(QFrame::Panel | QFrame::Raised);
+  divider = new TQFrame(this, "pannerdivider");
+  divider->setFrameStyle(TQFrame::Panel | TQFrame::Raised);
   divider->setLineWidth(1);
   divider->raise();
 
   if (orientation == Horizontal)
-    divider->setCursor(QCursor(sizeVerCursor));
+    divider->setCursor(TQCursor(sizeVerCursor));
   else
-    divider->setCursor(QCursor(sizeHorCursor));
+    divider->setCursor(TQCursor(sizeHorCursor));
 
   divider->installEventFilter(this);
 
@@ -112,7 +112,7 @@ int PMDockSplitter::separatorPos() const
   return xpos;
 }
 
-void PMDockSplitter::resizeEvent(QResizeEvent *ev)
+void PMDockSplitter::resizeEvent(TQResizeEvent *ev)
 {
   if (initialised){
     int factor = (mHighResolution)? 10000:100;
@@ -165,15 +165,15 @@ int PMDockSplitter::checkValue( int position ) const
   return position;
 }
 
-bool PMDockSplitter::eventFilter(QObject *o, QEvent *e)
+bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
 {
-  QMouseEvent *mev;
+  TQMouseEvent *mev;
   bool handled = false;
   int factor = (mHighResolution)? 10000:100;
 
   switch (e->type()) {
-    case QEvent::MouseMove:
-      mev= (QMouseEvent*)e;
+    case TQEvent::MouseMove:
+      mev= (TQMouseEvent*)e;
       child0->setUpdatesEnabled(mOpaqueResize);
       child1->setUpdatesEnabled(mOpaqueResize);
       if (orientation == Horizontal) {
@@ -187,7 +187,7 @@ bool PMDockSplitter::eventFilter(QObject *o, QEvent *e)
         }
       } else {
         if (!mOpaqueResize) {
-          int position = checkValue( mapFromGlobal(QCursor::pos()).x() );
+          int position = checkValue( mapFromGlobal(TQCursor::pos()).x() );
           divider->move( position, 0 );
         } else {
           xpos = factor * checkValue( mapFromGlobal( mev->globalPos()).x() ) / width();
@@ -197,10 +197,10 @@ bool PMDockSplitter::eventFilter(QObject *o, QEvent *e)
       }
       handled= true;
       break;
-    case QEvent::MouseButtonRelease:
+    case TQEvent::MouseButtonRelease:
       child0->setUpdatesEnabled(true);
       child1->setUpdatesEnabled(true);
-      mev= (QMouseEvent*)e;
+      mev= (TQMouseEvent*)e;
       if (orientation == Horizontal){
         xpos = factor* checkValue( mapFromGlobal(mev->globalPos()).y() ) / height();
         resizeEvent(0);
@@ -215,20 +215,20 @@ bool PMDockSplitter::eventFilter(QObject *o, QEvent *e)
     default:
       break;
   }
-  return (handled) ? true : QWidget::eventFilter( o, e );
+  return (handled) ? true : TQWidget::eventFilter( o, e );
 }
 
-bool PMDockSplitter::event( QEvent* e )
+bool PMDockSplitter::event( TQEvent* e )
 {
-  if ( e->type() == QEvent::LayoutHint ){
+  if ( e->type() == TQEvent::LayoutHint ){
     // change children min/max size
     setupMinMaxSize();
     setSeparatorPos(xpos);
   }
-  return QWidget::event(e);
+  return TQWidget::event(e);
 }
 
-QWidget* PMDockSplitter::getAnother( QWidget* w ) const
+TQWidget* PMDockSplitter::getAnother( TQWidget* w ) const
 {
   return ( w == child0 ) ? child1 : child0;
 }
@@ -237,7 +237,7 @@ void PMDockSplitter::updateName()
 {
   if ( !initialised ) return;
 
-  QString new_name = QString( child0->name() ) + "," + child1->name();
+  TQString new_name = TQString( child0->name() ) + "," + child1->name();
   parentWidget()->setName( new_name.latin1() );
   parentWidget()->setCaption( child0->caption() + "," + child1->caption() );
   parentWidget()->repaint( false );
@@ -246,7 +246,7 @@ void PMDockSplitter::updateName()
   ((PMDockWidget*)parentWidget())->lastName = child1->name();
   ((PMDockWidget*)parentWidget())->splitterOrientation = orientation;
 
-  QWidget* p = parentWidget()->parentWidget();
+  TQWidget* p = parentWidget()->parentWidget();
   if ( p != 0L && p->inherits("PMDockSplitter" ) )
     ((PMDockSplitter*)p)->updateName();
 }
@@ -288,8 +288,8 @@ bool PMDockSplitter::highResolution() const
 
 
 /*************************************************************************/
-PMDockButton_Private::PMDockButton_Private( QWidget *parent, const char * name )
-:QPushButton( parent, name )
+PMDockButton_Private::PMDockButton_Private( TQWidget *parent, const char * name )
+:TQPushButton( parent, name )
 {
   moveMouse = false;
   setFocusPolicy( NoFocus );
@@ -299,9 +299,9 @@ PMDockButton_Private::~PMDockButton_Private()
 {
 }
 
-void PMDockButton_Private::drawButton( QPainter* p )
+void PMDockButton_Private::drawButton( TQPainter* p )
 {
-  p->fillRect( 0,0, width(), height(), QBrush(colorGroup().brush(QColorGroup::Background)) );
+  p->fillRect( 0,0, width(), height(), TQBrush(colorGroup().brush(TQColorGroup::Background)) );
   p->drawPixmap( (width() - pixmap()->width()) / 2, (height() - pixmap()->height()) / 2, *pixmap() );
   if ( moveMouse && !isDown() ){
     p->setPen( white );
@@ -325,13 +325,13 @@ void PMDockButton_Private::drawButton( QPainter* p )
   }
 }
 
-void PMDockButton_Private::enterEvent( QEvent * )
+void PMDockButton_Private::enterEvent( TQEvent * )
 {
   moveMouse = true;
   repaint();
 }
 
-void PMDockButton_Private::leaveEvent( QEvent * )
+void PMDockButton_Private::leaveEvent( TQEvent * )
 {
   moveMouse = false;
   repaint();
@@ -339,7 +339,7 @@ void PMDockButton_Private::leaveEvent( QEvent * )
 
 /*************************************************************************/
 PMDockWidgetPrivate::PMDockWidgetPrivate()
-  : QObject()
+  : TQObject()
   ,index(-1)
   ,splitPosInPercent(50)
   ,pendingFocusInEvent(false)
@@ -357,11 +357,11 @@ PMDockWidgetPrivate::~PMDockWidgetPrivate()
 {
 }
 
-void PMDockWidgetPrivate::slotFocusEmbeddedWidget(QWidget* w)
+void PMDockWidgetPrivate::slotFocusEmbeddedWidget(TQWidget* w)
 {
    if (w) {
-      QWidget* embeddedWdg = ((PMDockWidget*)w)->getWidget();
-      if (embeddedWdg && ((embeddedWdg->focusPolicy() == QWidget::ClickFocus) || (embeddedWdg->focusPolicy() == QWidget::StrongFocus))) {
+      TQWidget* embeddedWdg = ((PMDockWidget*)w)->getWidget();
+      if (embeddedWdg && ((embeddedWdg->focusPolicy() == TQWidget::ClickFocus) || (embeddedWdg->focusPolicy() == TQWidget::StrongFocus))) {
          embeddedWdg->setFocus();
       }
    }

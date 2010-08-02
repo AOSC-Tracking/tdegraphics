@@ -30,8 +30,8 @@ class PMJuliaFractal;
 class PMVectorEdit;
 class PMIntEdit;
 class PMFloatEdit;
-class QComboBox;
-class QLabel;
+class TQComboBox;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMJuliaFractal
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMJuliaFractalEdit with parent and name
     */
-   PMJuliaFractalEdit( QWidget* parent, const char* name = 0 );
+   PMJuliaFractalEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -65,10 +65,10 @@ protected slots:
 private:
    PMJuliaFractal* m_pDisplayedObject;
    PMVectorEdit* m_pJuliaParameter;
-   QComboBox* m_pAlgebraType;
-   QComboBox* m_pFunctionType;
+   TQComboBox* m_pAlgebraType;
+   TQComboBox* m_pFunctionType;
    PMVectorEdit* m_pExponents;
-   QLabel* m_pExponentsLabel;
+   TQLabel* m_pExponentsLabel;
    PMIntEdit* m_pMaxIterations;
    PMFloatEdit* m_pPrecision;
    PMVectorEdit* m_pSliceNormal;

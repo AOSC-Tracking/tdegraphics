@@ -1,4 +1,4 @@
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <kdebug.h>
 #include <kdeversion.h>
@@ -13,7 +13,7 @@
 #include "kuickfile.h"
 
 KuickFile::KuickFile(const KURL& url)
-    : QObject(),
+    : TQObject(),
       m_url( url ),
       m_job( 0L ),
       m_progress( 0L ),
@@ -33,15 +33,15 @@ KuickFile::~KuickFile()
     delete m_job;
 
     if ( hasDownloaded() )
-        QFile::remove( m_localFile );
+        TQFile::remove( m_localFile );
 }
 
-QString KuickFile::localFile() const
+TQString KuickFile::localFile() const
 {
     // Note: never call isAvailable() from here, directly or indirectly
 
     if ( isDownloading() )
-        return QString::null;
+        return TQString::null;
 
     return m_localFile;
 }
@@ -61,17 +61,17 @@ bool KuickFile::download()
         return true;
 
     // reinitialize
-    m_localFile = QString::null;
+    m_localFile = TQString::null;
     m_currentProgress = 0;
     
 
-    QString ext;
-    QString fileName = m_url.fileName();
+    TQString ext;
+    TQString fileName = m_url.fileName();
     int extIndex = fileName.findRev('.');
     if ( extIndex > 0 )
         ext = fileName.mid( extIndex + 1 );
 
-    QString tempDir = FileCache::self()->tempDir();
+    TQString tempDir = FileCache::self()->tempDir();
     KTempFile tempFile( tempDir, ext );
     tempFile.setAutoDelete( tempDir.isNull() ); // in case there is no proper tempdir, make sure to delete those files!
     if ( tempFile.status() != 0 )
@@ -86,15 +86,15 @@ bool KuickFile::download()
 
     m_job = KIO::file_copy( m_url, destURL, -1, true, false, false ); // handling progress ourselves
     m_job->setAutoErrorHandlingEnabled( true );
-    connect( m_job, SIGNAL( result( KIO::Job * )), SLOT( slotResult( KIO::Job * ) ));
-    connect( m_job, SIGNAL( percent( KIO::Job *, unsigned long )), SLOT( slotProgress( KIO::Job *, unsigned long ) ));
+    connect( m_job, TQT_SIGNAL( result( KIO::Job * )), TQT_SLOT( slotResult( KIO::Job * ) ));
+    connect( m_job, TQT_SIGNAL( percent( KIO::Job *, unsigned long )), TQT_SLOT( slotProgress( KIO::Job *, unsigned long ) ));
 
     // TODO: generify background/foreground downloading?
 
     return m_job != 0L;
 }
 
-KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
+KuickFile::DownloadStatus KuickFile::waitForDownload( TQWidget *parent )
 {
     if ( isAvailable() )
         return OK;
@@ -150,8 +150,8 @@ void KuickFile::slotResult( KIO::Job *job )
         if ( job->error() != KIO::ERR_USER_CANCELED )
             kdWarning() << "ERROR: KuickFile::slotResult: " << job->errorString() << endl;
 
-        QString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
-        QFile::remove( canceledFile );
+        TQString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
+        TQFile::remove( canceledFile );
         m_progress->topLevelWidget()->hide();
     }
     else {

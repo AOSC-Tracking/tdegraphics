@@ -30,10 +30,10 @@
 
 #include <kpeffectinvert.h>
 
-#include <qcheckbox.h>
-#include <qimage.h>
-#include <qlayout.h>
-#include <qpixmap.h>
+#include <tqcheckbox.h>
+#include <tqimage.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -68,23 +68,23 @@ kpEffectInvertCommand::~kpEffectInvertCommand ()
 
 
 // public static
-void kpEffectInvertCommand::apply (QPixmap *destPixmapPtr, int channels)
+void kpEffectInvertCommand::apply (TQPixmap *destPixmapPtr, int channels)
 {
-    QImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
+    TQImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
     apply (&image, channels);
     *destPixmapPtr = kpPixmapFX::convertToPixmap (image);
 }
 
 // public static
-QPixmap kpEffectInvertCommand::apply (const QPixmap &pm, int channels)
+TQPixmap kpEffectInvertCommand::apply (const TQPixmap &pm, int channels)
 {
-    QImage image = kpPixmapFX::convertToImage (pm);
+    TQImage image = kpPixmapFX::convertToImage (pm);
     apply (&image, channels);
     return kpPixmapFX::convertToPixmap (image);
 }
 
 // public static
-void kpEffectInvertCommand::apply (QImage *destImagePtr, int channels)
+void kpEffectInvertCommand::apply (TQImage *destImagePtr, int channels)
 {
     QRgb mask = qRgba ((channels & Red) ? 0xFF : 0,
                        (channels & Green) ? 0xFF : 0,
@@ -124,9 +124,9 @@ void kpEffectInvertCommand::apply (QImage *destImagePtr, int channels)
 }
 
 // public static
-QImage kpEffectInvertCommand::apply (const QImage &img, int channels)
+TQImage kpEffectInvertCommand::apply (const TQImage &img, int channels)
 {
-    QImage retImage = img;
+    TQImage retImage = img;
     apply (&retImage, channels);
     return retImage;
 }
@@ -137,7 +137,7 @@ QImage kpEffectInvertCommand::apply (const QImage &img, int channels)
 //
 
 // protected virtual [base kpColorEffectCommand]
-QPixmap kpEffectInvertCommand::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectInvertCommand::applyColorEffect (const TQPixmap &pixmap)
 {
     return apply (pixmap, m_channels);
 }
@@ -149,30 +149,30 @@ QPixmap kpEffectInvertCommand::applyColorEffect (const QPixmap &pixmap)
 
 kpEffectInvertWidget::kpEffectInvertWidget (bool actOnSelection,
                                             kpMainWindow *mainWindow,
-                                            QWidget *parent,
+                                            TQWidget *parent,
                                             const char *name)
     : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
-    QVBoxLayout *topLevelLay = new QVBoxLayout (this, marginHint (), spacingHint ());
+    TQVBoxLayout *topLevelLay = new TQVBoxLayout (this, marginHint (), spacingHint ());
 
 
-    QWidget *centerWidget = new QWidget (this);
+    TQWidget *centerWidget = new TQWidget (this);
     topLevelLay->addWidget (centerWidget, 0/*stretch*/, Qt::AlignCenter);
 
 
-    QVBoxLayout *centerWidgetLay = new QVBoxLayout (centerWidget,
+    TQVBoxLayout *centerWidgetLay = new TQVBoxLayout (centerWidget,
                                                     0/*margin*/,
                                                     spacingHint ());
 
 
-    m_redCheckBox = new QCheckBox (i18n ("&Red"), centerWidget);
-    m_greenCheckBox = new QCheckBox (i18n ("&Green"), centerWidget);
-    m_blueCheckBox = new QCheckBox (i18n ("&Blue"), centerWidget);
+    m_redCheckBox = new TQCheckBox (i18n ("&Red"), centerWidget);
+    m_greenCheckBox = new TQCheckBox (i18n ("&Green"), centerWidget);
+    m_blueCheckBox = new TQCheckBox (i18n ("&Blue"), centerWidget);
 
-    QWidget *spaceWidget = new QWidget (centerWidget);
+    TQWidget *spaceWidget = new TQWidget (centerWidget);
     spaceWidget->setFixedSize (1, spacingHint ());
 
-    m_allCheckBox = new QCheckBox (i18n ("&All"), centerWidget);
+    m_allCheckBox = new TQCheckBox (i18n ("&All"), centerWidget);
 
 
     m_redCheckBox->setChecked (false);
@@ -192,15 +192,15 @@ kpEffectInvertWidget::kpEffectInvertWidget (bool actOnSelection,
 
 
     m_inSignalHandler = false;
-    connect (m_redCheckBox, SIGNAL (toggled (bool)),
-             this, SLOT (slotRGBCheckBoxToggled ()));
-    connect (m_greenCheckBox, SIGNAL (toggled (bool)),
-             this, SLOT (slotRGBCheckBoxToggled ()));
-    connect (m_blueCheckBox, SIGNAL (toggled (bool)),
-             this, SLOT (slotRGBCheckBoxToggled ()));
+    connect (m_redCheckBox, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotRGBCheckBoxToggled ()));
+    connect (m_greenCheckBox, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotRGBCheckBoxToggled ()));
+    connect (m_blueCheckBox, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotRGBCheckBoxToggled ()));
 
-    connect (m_allCheckBox, SIGNAL (toggled (bool)),
-             this, SLOT (slotAllCheckBoxToggled ()));
+    connect (m_allCheckBox, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SLOT (slotAllCheckBoxToggled ()));
 }
 
 kpEffectInvertWidget::~kpEffectInvertWidget ()
@@ -244,7 +244,7 @@ int kpEffectInvertWidget::channels () const
 //
 
 // public virtual [base kpColorEffectWidget]
-QString kpEffectInvertWidget::caption () const
+TQString kpEffectInvertWidget::caption () const
 {
     return i18n ("Channels");
 }
@@ -257,7 +257,7 @@ bool kpEffectInvertWidget::isNoOp () const
 }
 
 // public virtual [base kpColorEffectWidget]
-QPixmap kpEffectInvertWidget::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectInvertWidget::applyColorEffect (const TQPixmap &pixmap)
 {
     return kpEffectInvertCommand::apply (pixmap, channels ());
 }

@@ -22,17 +22,17 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qptrlist.h>
-#include <qdict.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqptrlist.h>
+#include <tqdict.h>
 
 class PMParser;
 class PMSerializer;
 class PMRenderer;
 class PMPart;
 
-class QIODevice;
+class TQIODevice;
 
 /**
  * Description class for input and output formats.
@@ -68,11 +68,11 @@ public:
    /**
     * Returns an unique name of this format.
     */
-   virtual QString name( ) const = 0;
+   virtual TQString name( ) const = 0;
    /**
     * Returns a translated description of this format
     */
-   virtual QString description( ) const = 0;
+   virtual TQString description( ) const = 0;
    /**
     * Returns the supported services
     * (a bitwise combination of the Services enum values)
@@ -83,7 +83,7 @@ public:
     *
     * The caller is responsible to delete the returned parser.
     */
-   virtual PMParser* newParser( PMPart*, QIODevice* ) const
+   virtual PMParser* newParser( PMPart*, TQIODevice* ) const
    {
       return 0;
    };
@@ -92,7 +92,7 @@ public:
     *
     * The caller is responsible to delete the returned parser.
     */
-   virtual PMParser* newParser( PMPart*, const QByteArray& ) const
+   virtual PMParser* newParser( PMPart*, const TQByteArray& ) const
    {
       return 0;
    };
@@ -102,7 +102,7 @@ public:
     *
     * The caller is responsible to delete the returned device
     */
-   virtual PMSerializer* newSerializer( QIODevice* )
+   virtual PMSerializer* newSerializer( TQIODevice* )
    {
       return 0;
    }
@@ -116,23 +116,23 @@ public:
    /**
     * Returns the mime type for this format
     */
-   virtual QString mimeType( ) const
+   virtual TQString mimeType( ) const
    {
-      return QString::null;
+      return TQString::null;
    }
    /**
     * Returns a list of patterns for the import file dialog
     */
-   virtual QStringList importPatterns( ) const
+   virtual TQStringList importPatterns( ) const
    {
-      return QStringList( );
+      return TQStringList( );
    }
    /**
     * Returns a list of patterns for the export file dialog
     */
-   virtual QStringList exportPatterns( ) const
+   virtual TQStringList exportPatterns( ) const
    {
-      return QStringList( );
+      return TQStringList( );
    }
 };
 
@@ -159,25 +159,25 @@ public:
    /**
     * Removes a format by name
     */
-   void removeFormat( const QString& name );
+   void removeFormat( const TQString& name );
 
    /**
     * Returns the list of registered io formats
     */
-   const QPtrList<PMIOFormat>& formats( ) const { return m_formats; }
+   const TQPtrList<PMIOFormat>& formats( ) const { return m_formats; }
    /**
     * Returns a view type by name
     */
-   PMIOFormat* format( const QString& name ) const;
+   PMIOFormat* format( const TQString& name ) const;
    /**
     * Returns the first io format that can handle the mime type
     * or 0 if there is none
     */
-   PMIOFormat* formatForMimeType( const QString& mime ) const;
+   PMIOFormat* formatForMimeType( const TQString& mime ) const;
 
 private:
-   QPtrList<PMIOFormat> m_formats;
-   QDict<PMIOFormat> m_dict;
+   TQPtrList<PMIOFormat> m_formats;
+   TQDict<PMIOFormat> m_dict;
    PMPart* m_pPart;
 };
 

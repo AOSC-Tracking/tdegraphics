@@ -70,7 +70,7 @@ void PMDetailObject::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMDetailObject::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMDetailObject::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "global_detail", m_globalDetail );
    e.setAttribute( "local_detail_level", m_localDetailLevel );

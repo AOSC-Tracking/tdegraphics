@@ -18,8 +18,8 @@
 #ifndef KZCOLORSELECTOR_H
 #define KZCOLORSELECTOR_H
 
-#include "qcolor.h"
-#include "qpixmap.h"
+#include "tqcolor.h"
+#include "tqpixmap.h"
 #include "kselect.h"
 
 #include "color.h"
@@ -37,14 +37,14 @@ public:
 	       TYPE_V = 2 };
 
 	/** Constructs the widget */
-	KZColorSelector(Orientation o, QWidget *parent=0, const char *name=0);
+	KZColorSelector(Orientation o, TQWidget *parent=0, const char *name=0);
 	~KZColorSelector();
 	/** Sets the selector type */
 	void setType(const int type);
 	/** Update the pixmap */
 	void updateContents();
 	/** Set the global components */
-	void setBaseColor(const QColor& color);
+	void setBaseColor(const TQColor& color);
 	/** Set the global components using HSV components */
 	void setBaseColorHsv(const int colorH, const int colorS, const int colorV);
 	/** Updates a pointer position due to the base color */
@@ -69,21 +69,21 @@ protected:
   /** Draws the contents of the widget on a pixmap,
    *  which is used for buffering.
    */
-  virtual void drawPalette( QPixmap *pixmap );
+  virtual void drawPalette( TQPixmap *pixmap );
   /** @reimplemented */
-  virtual void resizeEvent( QResizeEvent * );
+  virtual void resizeEvent( TQResizeEvent * );
 	/** Draws a color gradient in the selector */
-  virtual void drawContents( QPainter *painter );
+  virtual void drawContents( TQPainter *painter );
   /** Sets a color at a given coordinate */
-	virtual void setColor(QColor* const color, const int y);
+	virtual void setColor(TQColor* const color, const int y);
 	/** @return STANDARD_PALETTE_SIZE colors used to dither the
 	 *  pixmap if number of color planes <= 8
 	 */
-	QColor* getStandardColorsPalette();
+	TQColor* getStandardColorsPalette();
 
 private:
 	/* The buffering pixmap */
-  QPixmap pixmap;
+  TQPixmap pixmap;
 };
 
 #endif

@@ -16,8 +16,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -26,16 +26,16 @@
 #include "slideshowwidget.h"
 
 
-SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
-    : QWidget( parent, name )
+SlideShowWidget::SlideShowWidget( TQWidget *parent, const char *name )
+    : TQWidget( parent, name )
 {
 //     setTitle( i18n("Slideshow") );
 
-    QVBoxLayout *layout = new QVBoxLayout( this );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
     layout->setSpacing( KDialog::spacingHint() );
 
-    m_fullScreen = new QCheckBox( i18n("Switch to &full-screen"), this );
-    m_startWithCurrent = new QCheckBox( i18n("S&tart with current image"), this);
+    m_fullScreen = new TQCheckBox( i18n("Switch to &full-screen"), this );
+    m_startWithCurrent = new TQCheckBox( i18n("S&tart with current image"), this);
 
     m_delayTime = new KIntNumInput( this, "delay time" );
     m_delayTime->setLabel( i18n("De&lay between slides:") );

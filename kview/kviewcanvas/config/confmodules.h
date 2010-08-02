@@ -20,17 +20,17 @@
 #define CONFMODULES_H
 
 #include <kcmodule.h>
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 class GeneralConfigWidget;
-class QCheckListItem;
+class TQCheckListItem;
 class KConfig;
 
 class KViewCanvasConfig : public KCModule
 {
 	Q_OBJECT
 	public:
-		KViewCanvasConfig( QWidget * parent, const char * name = 0, const QStringList & args = QStringList() );
+		KViewCanvasConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );
 		~KViewCanvasConfig();
 
 		void load();
@@ -43,7 +43,7 @@ class KViewCanvasConfig : public KCModule
 	private:
 		KConfig * m_config;
 		GeneralConfigWidget * m_pWidget;
-		QPtrList<QCheckListItem> m_items;
+		TQPtrList<TQCheckListItem> m_items;
 };
 
 // vim:sw=4:ts=4

@@ -50,12 +50,12 @@ PMSolidColor::~PMSolidColor( )
 {
 }
 
-QString PMSolidColor::description( ) const
+TQString PMSolidColor::description( ) const
 {
    return i18n( "solid color" );
 }
 
-void PMSolidColor::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
+void PMSolidColor::serialize( TQDomElement& e, TQDomDocument& /*doc*/ ) const
 {
    e.setAttribute( "color", m_color.serializeXML( ) );
 }
@@ -97,7 +97,7 @@ void PMSolidColor::setColor( const PMColor& c )
    }
 }
 
-PMDialogEditBase* PMSolidColor::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMSolidColor::editWidget( TQWidget* parent ) const
 {
    return new PMSolidColorEdit( parent );
 }

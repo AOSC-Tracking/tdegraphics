@@ -26,7 +26,7 @@
 */
 
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <dcopclient.h>
 #include <kaboutdata.h>
@@ -192,8 +192,8 @@ int main (int argc, char *argv [])
 
 
     // Qt says this is necessary but I don't think it is...
-    QObject::connect (&app, SIGNAL (lastWindowClosed ()),
-                      &app, SLOT (quit ()));
+    TQObject::connect (&app, TQT_SIGNAL (lastWindowClosed ()),
+                      &app, TQT_SLOT (quit ()));
 
 
     if (app.isRestored ())

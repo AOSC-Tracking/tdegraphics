@@ -10,7 +10,7 @@
 #include <config.h>
 
 #include <math.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include <klocale.h>
 
@@ -28,16 +28,16 @@ Zoom::Zoom()
   _zoomValue = 1.0;
   valNo      = 6; // 1.0 is 6rd entry in the list
   for(int i=0; zoomVals[i] != 0; i++) 
-    valueNames << QString("%1%").arg(zoomVals[i]);
+    valueNames << TQString("%1%").arg(zoomVals[i]);
 }
 
 
-void Zoom::setZoomValue(const QString &cval)
+void Zoom::setZoomValue(const TQString &cval)
 {
   float fval;
 
   // Remove a trailing '%', if any
-  QString val = cval.stripWhiteSpace();
+  TQString val = cval.stripWhiteSpace();
   if (val.right(1) == "%")
     val = val.left(val.length()-1).stripWhiteSpace();
 
@@ -49,7 +49,7 @@ void Zoom::setZoomValue(const QString &cval)
   else {
     emit(zoomNamesChanged(valueNames));
     emit(valNoChanged(valNo));
-    emit(zoomNameChanged(QString("%1%").arg((int)(_zoomValue*100.0+0.5))));
+    emit(zoomNameChanged(TQString("%1%").arg((int)(_zoomValue*100.0+0.5))));
   }
 }
 
@@ -64,7 +64,7 @@ void Zoom::setZoomFitWidth(float zoom)
 
   valNo = 0;
   emit(valNoChanged(valNo));
-  emit(zoomNameChanged(QString("%1%").arg((int)(_zoomValue*100.0+0.5))));
+  emit(zoomNameChanged(TQString("%1%").arg((int)(_zoomValue*100.0+0.5))));
 }
 
 void Zoom::setZoomFitHeight(float zoom)
@@ -78,7 +78,7 @@ void Zoom::setZoomFitHeight(float zoom)
 
   valNo = 1;
   emit(valNoChanged(valNo));
-  emit(zoomNameChanged(QString("%1%").arg((int)(_zoomValue*100.0+0.5))));
+  emit(zoomNameChanged(TQString("%1%").arg((int)(_zoomValue*100.0+0.5))));
 }
 
 void Zoom::setZoomFitPage(float zoom)
@@ -92,7 +92,7 @@ void Zoom::setZoomFitPage(float zoom)
 
   valNo = 2;
   emit(valNoChanged(valNo));
-  emit(zoomNameChanged(QString("%1%").arg((int)(_zoomValue*100.0+0.5))));
+  emit(zoomNameChanged(TQString("%1%").arg((int)(_zoomValue*100.0+0.5))));
 }
 
 void Zoom::setZoomValue(float f)
@@ -117,19 +117,19 @@ void Zoom::setZoomValue(float f)
       flag  = true;
       valNo = i + 3;
       if (fabs(_zoomValue-zoomVals[i]) > 0.01)
-        valueNames << QString("%1%").arg((int)(_zoomValue*100.0+0.5));
+        valueNames << TQString("%1%").arg((int)(_zoomValue*100.0+0.5));
     }
-    valueNames << QString("%1%").arg((int)(zoomVals[i]*100.0+0.5));
+    valueNames << TQString("%1%").arg((int)(zoomVals[i]*100.0+0.5));
   }
 
   if (flag == false) {
     valNo = valueNames.size();
-    valueNames << QString("%1%").arg((int)(_zoomValue*100.0+0.5));
+    valueNames << TQString("%1%").arg((int)(_zoomValue*100.0+0.5));
   }
 
   emit(zoomNamesChanged(valueNames));
   emit(valNoChanged(valNo));
-  emit(zoomNameChanged(QString("%1%").arg((int)(_zoomValue*100.0+0.5))));
+  emit(zoomNameChanged(TQString("%1%").arg((int)(_zoomValue*100.0+0.5))));
 }
 
 float Zoom::zoomIn()

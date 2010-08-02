@@ -13,10 +13,10 @@
 
 using namespace KMrmlConfig;
 
-IndexCleaner::IndexCleaner( const QStringList& dirs,
+IndexCleaner::IndexCleaner( const TQStringList& dirs,
                             const KMrml::Config *config,
-                            QObject *parent, const char *name )
-    : QObject( parent, name ),
+                            TQObject *parent, const char *name )
+    : TQObject( parent, name ),
       m_dirs( dirs ),
       m_config( config ),
       m_process( 0L )
@@ -66,19 +66,19 @@ void IndexCleaner::startNext()
     m_process = new KProcess();
     m_process->setUseShell( true );
 #endif
-    connect( m_process, SIGNAL( processExited( KProcess * )),
-             SLOT( slotExited( KProcess * ) ));
+    connect( m_process, TQT_SIGNAL( processExited( KProcess * )),
+             TQT_SLOT( slotExited( KProcess * ) ));
 
-    QString cmd = m_config->removeCollectionCommandLine();
+    TQString cmd = m_config->removeCollectionCommandLine();
 
-    QString dir = m_dirs.first();
+    TQString dir = m_dirs.first();
     m_dirs.pop_front();
 
     int index = cmd.find( "%d" );
     if ( index != -1 )
         cmd.replace( index, 2, QUOTE( dir ) );
     else // no %d? What else can we do?
-        cmd.append( QString::fromLatin1(" ") + QUOTE( dir ) );
+        cmd.append( TQString::fromLatin1(" ") + QUOTE( dir ) );
 
     *m_process << cmd;
 

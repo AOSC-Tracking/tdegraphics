@@ -24,13 +24,13 @@
 #include "pmlineedits.h"
 #include "pmvector.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
 #include <ktabctl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -38,7 +38,7 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 
-PMPatternEdit::PMPatternEdit( QWidget* parent, const char* name )
+PMPatternEdit::PMPatternEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -48,15 +48,15 @@ void PMPatternEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QGridLayout* layout;
-   QHBoxLayout* hl;
-   QVBoxLayout* vl;
-   QGridLayout* gl;
+   TQGridLayout* layout;
+   TQHBoxLayout* hl;
+   TQVBoxLayout* vl;
+   TQGridLayout* gl;
 
-   layout = new QGridLayout( topLayout( ), 12, 2 );
-   hl = new QHBoxLayout( KDialog::spacingHint( ) );
-   hl->addWidget( new QLabel( i18n( "Type:" ), this ) );
-   m_pTypeCombo = new QComboBox( false, this );
+   layout = new TQGridLayout( topLayout( ), 12, 2 );
+   hl = new TQHBoxLayout( KDialog::spacingHint( ) );
+   hl->addWidget( new TQLabel( i18n( "Type:" ), this ) );
+   m_pTypeCombo = new TQComboBox( false, this );
    m_pTypeCombo->insertItem( i18n( "Agate" ) );
    m_pTypeCombo->insertItem( i18n( "Average" ) );
    m_pTypeCombo->insertItem( i18n( "Boxed" ) );
@@ -90,86 +90,86 @@ void PMPatternEdit::createTopWidgets( )
    hl->addStretch( 1 );
    layout->addMultiCellLayout( hl, 0, 0, 0, 1 );
 
-   m_pAgateTurbulenceLabel = new QLabel( i18n( "Turbulence:" ), this );
+   m_pAgateTurbulenceLabel = new TQLabel( i18n( "Turbulence:" ), this );
    layout->addWidget( m_pAgateTurbulenceLabel, 1, 0 );
    m_pAgateTurbulenceEdit = new PMFloatEdit( this );
    layout->addWidget( m_pAgateTurbulenceEdit, 1, 1, AlignLeft );
 
-   m_pCrackleWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pCrackleWidget, 0, KDialog::spacingHint( ) );
-   hl = new QHBoxLayout( vl );
-   hl->addWidget( new QLabel( i18n( "Form:" ), m_pCrackleWidget ) );
+   m_pCrackleWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pCrackleWidget, 0, KDialog::spacingHint( ) );
+   hl = new TQHBoxLayout( vl );
+   hl->addWidget( new TQLabel( i18n( "Form:" ), m_pCrackleWidget ) );
    m_pCrackleForm = new PMVectorEdit( "x", "y", "z", m_pCrackleWidget );
    hl->addWidget( m_pCrackleForm );
    hl->addStretch( 1 );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 3, 2 );
-   gl->addWidget( new QLabel( i18n( "Metric:" ), m_pCrackleWidget ), 0, 0 );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 3, 2 );
+   gl->addWidget( new TQLabel( i18n( "Metric:" ), m_pCrackleWidget ), 0, 0 );
    m_pCrackleMetric = new PMIntEdit( m_pCrackleWidget );
    m_pCrackleMetric->setValidation( true, 1, false, 0 );
    gl->addWidget( m_pCrackleMetric, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Offset:" ), m_pCrackleWidget ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Offset:" ), m_pCrackleWidget ), 1, 0 );
    m_pCrackleOffset = new PMFloatEdit( m_pCrackleWidget );
    gl->addWidget( m_pCrackleOffset, 1, 1 );
-   m_pCrackleSolid = new QCheckBox( i18n( "Solid:" ), m_pCrackleWidget );
+   m_pCrackleSolid = new TQCheckBox( i18n( "Solid:" ), m_pCrackleWidget );
    gl->addMultiCellWidget( m_pCrackleSolid, 2, 2, 0, 1 );
    hl->addStretch( 1 );
    layout->addMultiCellWidget( m_pCrackleWidget, 2, 2, 0, 1 );
 
-   m_pDensityWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pDensityWidget, 0, KDialog::spacingHint( ) );
-   hl = new QHBoxLayout( vl );
-   hl->addWidget( new QLabel( i18n( "File:" ), m_pDensityWidget ) );
-   m_pDensityFile = new QLineEdit( m_pDensityWidget );
+   m_pDensityWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pDensityWidget, 0, KDialog::spacingHint( ) );
+   hl = new TQHBoxLayout( vl );
+   hl->addWidget( new TQLabel( i18n( "File:" ), m_pDensityWidget ) );
+   m_pDensityFile = new TQLineEdit( m_pDensityWidget );
    hl->addWidget( m_pDensityFile, 1 );
-   m_pDensityFileBrowse = new QPushButton( m_pDensityWidget );
+   m_pDensityFileBrowse = new TQPushButton( m_pDensityWidget );
    m_pDensityFileBrowse->setPixmap( SmallIcon( "fileopen" ) );
    hl->addWidget( m_pDensityFileBrowse );
-   hl = new QHBoxLayout( vl );
-   hl->addWidget( new QLabel( i18n( "Interpolation:" ), m_pDensityWidget ) );
-   m_pDensityInterpolate = new QComboBox( false, m_pDensityWidget );
+   hl = new TQHBoxLayout( vl );
+   hl->addWidget( new TQLabel( i18n( "Interpolation:" ), m_pDensityWidget ) );
+   m_pDensityInterpolate = new TQComboBox( false, m_pDensityWidget );
    m_pDensityInterpolate->insertItem( i18n( "None" ) );
    m_pDensityInterpolate->insertItem( i18n( "Trilinear" ) );
    hl->addWidget( m_pDensityInterpolate );
    hl->addStretch( 1 );
    layout->addMultiCellWidget( m_pDensityWidget, 3, 3, 0, 1 );
 
-   m_pGradientLabel = new QLabel( i18n( "Gradient:" ), this );
+   m_pGradientLabel = new TQLabel( i18n( "Gradient:" ), this );
    layout->addWidget( m_pGradientLabel, 4, 0 );
    m_pGradientEdit = new PMVectorEdit( "x", "y", "z", this );
    layout->addWidget( m_pGradientEdit, 4, 1 );
 
-   m_pJuliaComplexLabel = new QLabel( i18n( "Complex number:" ), this );
+   m_pJuliaComplexLabel = new TQLabel( i18n( "Complex number:" ), this );
    layout->addWidget( m_pJuliaComplexLabel, 5, 0 );
    m_pJuliaComplex = new PMVectorEdit( "Real", "Imaginary", this );
    layout->addWidget( m_pJuliaComplex, 5, 1 );
 
-   m_pFractalWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pFractalWidget, 0, KDialog::spacingHint( ) );
-   hl = new QHBoxLayout( vl );
-   m_pFractalMagnet = new QCheckBox( i18n( "Magnet" ), m_pFractalWidget );
+   m_pFractalWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pFractalWidget, 0, KDialog::spacingHint( ) );
+   hl = new TQHBoxLayout( vl );
+   m_pFractalMagnet = new TQCheckBox( i18n( "Magnet" ), m_pFractalWidget );
    hl->addWidget( m_pFractalMagnet );
-   m_pFractalMagnetType = new QComboBox( false, m_pFractalWidget );
+   m_pFractalMagnetType = new TQComboBox( false, m_pFractalWidget );
    m_pFractalMagnetType->insertItem( i18n( "Type 1" ) );
    m_pFractalMagnetType->insertItem( i18n( "Type 2" ) );
    hl->addWidget( m_pFractalMagnetType );
    hl->addStretch( 1 );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 2, 2 );
-   gl->addWidget( new QLabel( i18n( "Maximum iterations:" ), m_pFractalWidget ), 0, 0 );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "Maximum iterations:" ), m_pFractalWidget ), 0, 0 );
    m_pMaxIterationsEdit = new PMIntEdit( m_pFractalWidget );
    m_pMaxIterationsEdit->setValidation( true, 1, false, 0 );
    gl->addWidget( m_pMaxIterationsEdit, 0, 1 );
-   m_pFractalExponentLabel = new QLabel( i18n( "Exponent:" ), m_pFractalWidget );
+   m_pFractalExponentLabel = new TQLabel( i18n( "Exponent:" ), m_pFractalWidget );
    gl->addWidget( m_pFractalExponentLabel, 1, 0 );
    m_pFractalExponent = new PMIntEdit( m_pFractalWidget );
    m_pFractalExponent->setValidation( true, 2, true, 33 );
    gl->addWidget( m_pFractalExponent, 1, 1 );
    hl->addStretch( 1 );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 2, 4 );
-   gl->addWidget( new QLabel( i18n( "Exterior type:" ), m_pFractalWidget ), 0, 0 );
-   m_pFractalExtType = new QComboBox( false, m_pFractalWidget );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 2, 4 );
+   gl->addWidget( new TQLabel( i18n( "Exterior type:" ), m_pFractalWidget ), 0, 0 );
+   m_pFractalExtType = new TQComboBox( false, m_pFractalWidget );
    m_pFractalExtType->insertItem( i18n( "0: Returns Just 1" ) );
    m_pFractalExtType->insertItem( i18n( "1: Iterations Until Bailout" ) );
    m_pFractalExtType->insertItem( i18n( "2: Real Part" ) );
@@ -178,11 +178,11 @@ void PMPatternEdit::createTopWidgets( )
    m_pFractalExtType->insertItem( i18n( "5: Squared Imaginary Part" ) );
    m_pFractalExtType->insertItem( i18n( "6: Absolute Value" ) );
    gl->addWidget( m_pFractalExtType, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Factor:" ), m_pFractalWidget ), 0, 2 );
+   gl->addWidget( new TQLabel( i18n( "Factor:" ), m_pFractalWidget ), 0, 2 );
    m_pFractalExtFactor = new PMFloatEdit( m_pFractalWidget );
    gl->addWidget( m_pFractalExtFactor, 0, 3 );
-   gl->addWidget( new QLabel( i18n( "Interior type:" ), m_pFractalWidget ), 1, 0 );
-   m_pFractalIntType = new QComboBox( false, m_pFractalWidget );
+   gl->addWidget( new TQLabel( i18n( "Interior type:" ), m_pFractalWidget ), 1, 0 );
+   m_pFractalIntType = new TQComboBox( false, m_pFractalWidget );
    m_pFractalIntType->insertItem( i18n( "0: Returns Just 1" ) );
    m_pFractalIntType->insertItem( i18n( "1: Absolute Value Smallest" ) );
    m_pFractalIntType->insertItem( i18n( "2: Real Part" ) );
@@ -191,69 +191,69 @@ void PMPatternEdit::createTopWidgets( )
    m_pFractalIntType->insertItem( i18n( "5: Squared Imaginary Part" ) );
    m_pFractalIntType->insertItem( i18n( "6: Absolute Value Last" ) );
    gl->addWidget( m_pFractalIntType, 1, 1 );
-   gl->addWidget( new QLabel( i18n( "Factor:" ), m_pFractalWidget ), 1, 2 );
+   gl->addWidget( new TQLabel( i18n( "Factor:" ), m_pFractalWidget ), 1, 2 );
    m_pFractalIntFactor = new PMFloatEdit( m_pFractalWidget );
    gl->addWidget( m_pFractalIntFactor, 1, 3 );
    hl->addStretch( 1 );
    layout->addMultiCellWidget( m_pFractalWidget, 6, 6, 0, 1 );
 
-   m_pQuiltControlsLabel = new QLabel( i18n( "Quilt controls:" ), this );
+   m_pQuiltControlsLabel = new TQLabel( i18n( "Quilt controls:" ), this );
    m_pQuiltControl0Edit = new PMFloatEdit( this );
    m_pQuiltControl1Edit = new PMFloatEdit( this );
-   hl = new QHBoxLayout( );
+   hl = new TQHBoxLayout( );
    hl->addWidget( m_pQuiltControl0Edit );
    hl->addWidget( m_pQuiltControl1Edit );
    hl->addStretch( 1 );
    layout->addWidget( m_pQuiltControlsLabel, 7, 0 );
    layout->addLayout( hl, 7, 1 );
 
-   m_pSlopeWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pSlopeWidget, 0, KDialog::spacingHint( ) );
-   hl = new QHBoxLayout( vl );
-   hl->addWidget( new QLabel( i18n( "Direction:" ), m_pSlopeWidget ) );
+   m_pSlopeWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pSlopeWidget, 0, KDialog::spacingHint( ) );
+   hl = new TQHBoxLayout( vl );
+   hl->addWidget( new TQLabel( i18n( "Direction:" ), m_pSlopeWidget ) );
    m_pSlopeDirection = new PMVectorEdit( "x", "y", "z", m_pSlopeWidget );
    hl->addWidget( m_pSlopeDirection );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 2, 2 );
-   gl->addWidget( new QLabel( i18n( "Low slope:" ), m_pSlopeWidget ), 0, 0 );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "Low slope:" ), m_pSlopeWidget ), 0, 0 );
    m_pSlopeLoSlope = new PMFloatEdit( m_pSlopeWidget );
    m_pSlopeLoSlope->setValidation( true, 0.0, true, 1.0 );
    gl->addWidget( m_pSlopeLoSlope, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "High slope:" ), m_pSlopeWidget ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "High slope:" ), m_pSlopeWidget ), 1, 0 );
    m_pSlopeHiSlope = new PMFloatEdit( m_pSlopeWidget );
    m_pSlopeHiSlope->setValidation( true, 0.0, true, 1.0 );
    gl->addWidget( m_pSlopeHiSlope, 1, 1 );
    hl->addStretch( 1 );
-   hl = new QHBoxLayout( vl );
-   m_pSlopeAltFlag = new QCheckBox( i18n( "Altitiude" ), m_pSlopeWidget );
+   hl = new TQHBoxLayout( vl );
+   m_pSlopeAltFlag = new TQCheckBox( i18n( "Altitiude" ), m_pSlopeWidget );
    hl->addWidget( m_pSlopeAltFlag );
    m_pSlopeAltitude = new PMVectorEdit( "x", "y", "z", m_pSlopeWidget );
    hl->addWidget( m_pSlopeAltitude );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 2, 2 );
-   m_pSlopeLoAltLabel = new QLabel( i18n( "Low altitude:" ), m_pSlopeWidget );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 2, 2 );
+   m_pSlopeLoAltLabel = new TQLabel( i18n( "Low altitude:" ), m_pSlopeWidget );
    gl->addWidget( m_pSlopeLoAltLabel, 0, 0 );
    m_pSlopeLoAlt = new PMFloatEdit( m_pSlopeWidget );
    gl->addWidget( m_pSlopeLoAlt, 0, 1 );
-   m_pSlopeHiAltLabel = new QLabel( i18n( "High altitude:" ), m_pSlopeWidget );
+   m_pSlopeHiAltLabel = new TQLabel( i18n( "High altitude:" ), m_pSlopeWidget );
    gl->addWidget( m_pSlopeHiAltLabel, 1, 0 );
    m_pSlopeHiAlt = new PMFloatEdit( m_pSlopeWidget );
    gl->addWidget( m_pSlopeHiAlt, 1, 1 );
    hl->addStretch( 1 );
    layout->addMultiCellWidget( m_pSlopeWidget, 8, 8, 0, 1 );
 
-   m_pSpiralNumberLabel = new QLabel( i18n( "Spiral number:" ), this );
+   m_pSpiralNumberLabel = new TQLabel( i18n( "Spiral number:" ), this );
    m_pSpiralNumberEdit = new PMIntEdit( this );
    layout->addWidget( m_pSpiralNumberLabel, 9, 0 );
    layout->addWidget( m_pSpiralNumberEdit, 9, 1, AlignLeft );
 
-   m_pDepthLabel = new QLabel( i18n( "Depth:" ), this );
+   m_pDepthLabel = new TQLabel( i18n( "Depth:" ), this );
    m_pDepthEdit = new PMFloatEdit( this );
    layout->addWidget( m_pDepthLabel, 10, 0 );
    layout->addWidget( m_pDepthEdit, 10, 1, AlignLeft );
 
-   m_pNoiseGeneratorLabel = new QLabel( i18n( "Noise generator:" ), this );
-   m_pNoiseGenerator = new QComboBox( false, this );
+   m_pNoiseGeneratorLabel = new TQLabel( i18n( "Noise generator:" ), this );
+   m_pNoiseGenerator = new TQComboBox( false, this );
    m_pNoiseGenerator->insertItem( i18n( "Use Global Setting" ) );
    m_pNoiseGenerator->insertItem( i18n( "Original" ) );
    m_pNoiseGenerator->insertItem( i18n( "Range Corrected" ) );
@@ -261,80 +261,80 @@ void PMPatternEdit::createTopWidgets( )
    layout->addWidget( m_pNoiseGeneratorLabel, 11, 0 );
    layout->addWidget( m_pNoiseGenerator, 11, 1 );
 
-   m_pEnableTurbulenceEdit = new QCheckBox( i18n( "Turbulence" ), this );
+   m_pEnableTurbulenceEdit = new TQCheckBox( i18n( "Turbulence" ), this );
    topLayout( )->addWidget( m_pEnableTurbulenceEdit );
-   m_pTurbulenceWidget = new QWidget( this );
-   vl = new QVBoxLayout( m_pTurbulenceWidget, 0, KDialog::spacingHint( ) );
-   hl = new QHBoxLayout( vl );
-   hl->addWidget(  new QLabel( i18n( "Value:" ), m_pTurbulenceWidget ) );
+   m_pTurbulenceWidget = new TQWidget( this );
+   vl = new TQVBoxLayout( m_pTurbulenceWidget, 0, KDialog::spacingHint( ) );
+   hl = new TQHBoxLayout( vl );
+   hl->addWidget(  new TQLabel( i18n( "Value:" ), m_pTurbulenceWidget ) );
    m_pValueVectorEdit = new PMVectorEdit( "x", "y", "z", m_pTurbulenceWidget );
    hl->addWidget( m_pValueVectorEdit );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 3, 2 );
-   gl->addWidget( new QLabel( i18n( "Octaves:" ), m_pTurbulenceWidget ), 0, 0 );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 3, 2 );
+   gl->addWidget( new TQLabel( i18n( "Octaves:" ), m_pTurbulenceWidget ), 0, 0 );
    m_pOctavesEdit = new PMIntEdit( m_pTurbulenceWidget );
    gl->addWidget( m_pOctavesEdit, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Omega:" ), m_pTurbulenceWidget ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Omega:" ), m_pTurbulenceWidget ), 1, 0 );
    m_pOmegaEdit = new PMFloatEdit( m_pTurbulenceWidget );
    gl->addWidget( m_pOmegaEdit, 1, 1 );
-   gl->addWidget( new QLabel( i18n( "Lambda:" ), m_pTurbulenceWidget ), 2, 0 );
+   gl->addWidget( new TQLabel( i18n( "Lambda:" ), m_pTurbulenceWidget ), 2, 0 );
    m_pLambdaEdit = new PMFloatEdit( m_pTurbulenceWidget );
    gl->addWidget( m_pLambdaEdit, 2, 1 );
    hl->addStretch( 1 );
    topLayout( )->addWidget( m_pTurbulenceWidget );
 
    /* connect all signals to slots/signals */
-   connect( m_pTypeCombo, SIGNAL( activated( int ) ), SLOT( slotComboChanged( int ) ) );
+   connect( m_pTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotComboChanged( int ) ) );
 
-   connect( m_pAgateTurbulenceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pAgateTurbulenceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pCrackleForm, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCrackleMetric, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCrackleOffset, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCrackleSolid, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleForm, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleMetric, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleOffset, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleSolid, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pDensityInterpolate, SIGNAL( activated( int ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDensityFile, SIGNAL( textChanged( const QString& ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDensityFileBrowse, SIGNAL( clicked( ) ), SLOT( slotDensityFileBrowseClicked( ) ) );
+   connect( m_pDensityInterpolate, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDensityFile, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDensityFileBrowse, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDensityFileBrowseClicked( ) ) );
 
-   connect( m_pGradientEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pGradientEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pJuliaComplex, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalMagnet, SIGNAL( clicked( ) ), SLOT( slotFractalMagnetClicked( ) ) );
-   connect( m_pFractalMagnetType, SIGNAL( activated( int ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxIterationsEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalExponent, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalExtType, SIGNAL( activated( int ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalExtFactor, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalIntType, SIGNAL( activated( int ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalIntFactor, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pJuliaComplex, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalMagnet, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFractalMagnetClicked( ) ) );
+   connect( m_pFractalMagnetType, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxIterationsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalExponent, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalExtType, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalExtFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalIntType, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalIntFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pQuiltControl0Edit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pQuiltControl1Edit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pQuiltControl0Edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pQuiltControl1Edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pSlopeDirection, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeLoSlope, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeHiSlope, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeAltFlag, SIGNAL( clicked( ) ), SLOT( slotSlopeAltFlagClicked( ) ) );
-   connect( m_pSlopeAltitude, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeLoAlt, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeHiAlt, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeDirection, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeLoSlope, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeHiSlope, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeAltFlag, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSlopeAltFlagClicked( ) ) );
+   connect( m_pSlopeAltitude, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeLoAlt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeHiAlt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pSpiralNumberEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pSpiralNumberEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pNoiseGenerator, SIGNAL( activated( int ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pNoiseGenerator, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pEnableTurbulenceEdit, SIGNAL( clicked( ) ), SLOT( slotTurbulenceClicked( ) ) );
-   connect( m_pValueVectorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOctavesEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pOmegaEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pLambdaEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDepthEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableTurbulenceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotTurbulenceClicked( ) ) );
+   connect( m_pValueVectorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOctavesEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOmegaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLambdaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDepthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPatternEdit::displayObject( PMObject* o )
 {
-   QString str;
+   TQString str;
    bool readOnly;
 
    if( o->isA( "Pattern" ) )
@@ -1008,7 +1008,7 @@ void PMPatternEdit::slotComboChanged( int c )
 
 void PMPatternEdit::slotDensityFileBrowseClicked( )
 {
-   QString str = KFileDialog::getOpenFileName( QString::null, QString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
 
    if( !str.isEmpty() )
    {

@@ -356,7 +356,7 @@ void SVGMarkerElementImpl::putValueProperty(ExecState *exec, int token, const Va
 			break;
 		case Orient:
 		{
-			QString param = value.toString(exec).qstring();
+			TQString param = value.toString(exec).qstring();
 			
 			if(param == "auto")
 				orientType()->setBaseVal(SVG_MARKER_ORIENT_AUTO);

@@ -16,11 +16,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qvgroupbox.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqvgroupbox.h>
 
 #include <kapplication.h>
 #include <kcolorbutton.h>
@@ -33,13 +33,13 @@
 
 #include "generalwidget.h"
 
-GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
-  : QWidget( parent, name )
+GeneralWidget::GeneralWidget( TQWidget *parent, const char *name )
+  : TQWidget( parent, name )
 {
-  QVBoxLayout *layout = new QVBoxLayout( this );
+  TQVBoxLayout *layout = new TQVBoxLayout( this );
   layout->setSpacing( KDialog::spacingHint() );
 
-  QPixmap pixmap = UserIcon( "logo" );
+  TQPixmap pixmap = UserIcon( "logo" );
   KURLLabel *logo = new KURLLabel( this );
   logo->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
   logo->setPixmap( pixmap );
@@ -47,22 +47,22 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   logo->setTipText( i18n( "Open KuickShow Website" ) );
   logo->setUseTips( true );
 
-  connect( logo, SIGNAL( leftClickedURL( const QString & ) ),
-            SLOT( slotURLClicked( const QString & ) ) );
+  connect( logo, TQT_SIGNAL( leftClickedURL( const TQString & ) ),
+            TQT_SLOT( slotURLClicked( const TQString & ) ) );
 
   layout->addWidget( logo, 0, AlignRight );
 
-  cbFullscreen = new QCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
+  cbFullscreen = new TQCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
 
-  cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
-  cbLastdir = new QCheckBox( i18n("Remember last folder"), this, "restart_lastdir");
+  cbPreload = new TQCheckBox( i18n("Preload next image"), this, "preload");
+  cbLastdir = new TQCheckBox( i18n("Remember last folder"), this, "restart_lastdir");
 
-  QGridLayout *gridLayout = new QGridLayout( 2, 2 );
+  TQGridLayout *gridLayout = new TQGridLayout( 2, 2 );
   gridLayout->setSpacing( KDialog::spacingHint() );
-  QLabel *l0 = new QLabel( i18n("Background color:"), this );
+  TQLabel *l0 = new TQLabel( i18n("Background color:"), this );
   colorButton = new KColorButton( this );
 
-  QLabel *l1 = new QLabel( i18n("Show only files with extension: "), this, "label" );
+  TQLabel *l1 = new TQLabel( i18n("Show only files with extension: "), this, "label" );
   editFilter = new KLineEdit( this, "filteredit" );
 
   gridLayout->addWidget( l0, 0, 0 );
@@ -77,24 +77,24 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   ////////////////////////////////////////////////////////////////////////
 
-  QVGroupBox *gbox2 = new QVGroupBox( i18n("Quality/Speed"),
+  TQVGroupBox *gbox2 = new TQVGroupBox( i18n("Quality/Speed"),
 				     this, "qualitybox" );
   layout->addWidget( gbox2 );
   layout->addStretch();
 
-  cbSmoothScale = new QCheckBox( i18n("Smooth scaling"), gbox2, "smoothscale" );
-  cbFastRender = new QCheckBox( i18n("Fast rendering"), gbox2, "fastrender" );
-  cbDither16bit = new QCheckBox( i18n("Dither in HiColor (15/16bit) modes"),
+  cbSmoothScale = new TQCheckBox( i18n("Smooth scaling"), gbox2, "smoothscale" );
+  cbFastRender = new TQCheckBox( i18n("Fast rendering"), gbox2, "fastrender" );
+  cbDither16bit = new TQCheckBox( i18n("Dither in HiColor (15/16bit) modes"),
 				 gbox2, "dither16bit" );
 
-  cbDither8bit = new QCheckBox( i18n("Dither in LowColor (<=8bit) modes"),
+  cbDither8bit = new TQCheckBox( i18n("Dither in LowColor (<=8bit) modes"),
 				gbox2, "dither8bit" );
 
-  cbOwnPalette = new QCheckBox( i18n("Use own color palette"),
+  cbOwnPalette = new TQCheckBox( i18n("Use own color palette"),
                                 gbox2, "pal");
-  connect( cbOwnPalette, SIGNAL( clicked() ), this, SLOT( useOwnPalette() ) );
+  connect( cbOwnPalette, TQT_SIGNAL( clicked() ), this, TQT_SLOT( useOwnPalette() ) );
 
-  cbFastRemap = new QCheckBox( i18n("Fast palette remapping"), gbox2, "remap");
+  cbFastRemap = new TQCheckBox( i18n("Fast palette remapping"), gbox2, "remap");
 
   maxCacheSpinBox = new KIntNumInput( gbox2, "editmaxcache" );
   maxCacheSpinBox->setLabel( i18n("Maximum cache size: "), AlignVCenter );
@@ -110,7 +110,7 @@ GeneralWidget::~GeneralWidget()
 {
 }
 
-void GeneralWidget::slotURLClicked( const QString & url )
+void GeneralWidget::slotURLClicked( const TQString & url )
 {
   kapp->invokeBrowser( url );
 }

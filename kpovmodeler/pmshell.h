@@ -26,7 +26,7 @@
 #include "pmglview.h"
 #include "version.h"
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 //class KHelpMenu;
 class KStatusBar;
@@ -113,9 +113,9 @@ public slots:
    void saveOptions( );
    void restoreOptions( );
 
-   void setCaption( const QString& caption = QString::null );
-   void statusMsg( const QString& text = QString::null );
-   void slotControlPointMsg( const QString& msg = QString::null );
+   void setCaption( const TQString& caption = TQString::null );
+   void statusMsg( const TQString& text = TQString::null );
+   void slotControlPointMsg( const TQString& msg = TQString::null );
 
    void slotModified( );
    void slotDockWidgetClosed( );
@@ -126,7 +126,7 @@ public slots:
 
 protected:
    virtual bool queryClose( );
-	virtual void showEvent( QShowEvent* );
+	virtual void showEvent( TQShowEvent* );
 	void saveAs( );
 
 public:
@@ -135,7 +135,7 @@ public:
     *
     * If initPosition is true, the widget is docked to the desktop.
     */
-   PMDockWidget* createView( const QString& t, PMViewOptions* c = 0,
+   PMDockWidget* createView( const TQString& t, PMViewOptions* c = 0,
                              bool initPosition = true );
    //PMDockWidget* createTreeView( );
    //PMDockWidget* createDialogView( );
@@ -165,7 +165,7 @@ private:
    PMPart* m_pPart;
    KURL m_openRecentURL;
 
-   QPtrList<QObject> m_objectsToDelete;
+   TQPtrList<TQObject> m_objectsToDelete;
    int m_viewNumber;
 };
 

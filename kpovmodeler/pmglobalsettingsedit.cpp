@@ -21,15 +21,15 @@
 #include "pmlineedits.h"
 #include "pmcoloredit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
 
-PMGlobalSettingsEdit::PMGlobalSettingsEdit( QWidget* parent, const char* name )
+PMGlobalSettingsEdit::PMGlobalSettingsEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,58 +37,58 @@ PMGlobalSettingsEdit::PMGlobalSettingsEdit( QWidget* parent, const char* name )
 
 void PMGlobalSettingsEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
-   QLabel* lbl;
+   TQHBoxLayout* hl;
+   TQLabel* lbl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Adc bailout:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Adc bailout:" ), this );
    m_pAdcBailoutEdit = new PMFloatEdit( this );
    hl->addWidget( lbl );
    hl->addWidget( m_pAdcBailoutEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Ambient light:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Ambient light:" ), this );
    m_pAmbientLightEdit = new PMColorEdit( false, this );
    topLayout( )->addWidget( lbl );
    topLayout( )->addWidget( m_pAmbientLightEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Assumed gamma:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Assumed gamma:" ), this );
    m_pAssumedGammaEdit = new PMFloatEdit( this );
    hl->addWidget( lbl );
    hl->addWidget( m_pAssumedGammaEdit );
    hl->addStretch( 1 );
 
-   m_pHfGray16Edit = new QCheckBox( i18n( "Hf gray 16" ), this );
+   m_pHfGray16Edit = new TQCheckBox( i18n( "Hf gray 16" ), this );
    topLayout( )->addWidget( m_pHfGray16Edit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Iridiscence wave length:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Iridiscence wave length:" ), this );
    m_pIridWaveLengthEdit = new PMColorEdit( false, this );
    topLayout( )->addWidget( lbl );
    topLayout( )->addWidget( m_pIridWaveLengthEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   QGridLayout* layout = new QGridLayout( hl, 4, 2 );
-   lbl = new QLabel( i18n( "Maximum intersections:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   TQGridLayout* layout = new TQGridLayout( hl, 4, 2 );
+   lbl = new TQLabel( i18n( "Maximum intersections:" ), this );
    m_pMaxIntersectionsEdit = new PMIntEdit( this );
    layout->addWidget( lbl, 0, 0 );
    layout->addWidget( m_pMaxIntersectionsEdit, 0, 1 );
-   lbl = new QLabel( i18n( "Maximum trace level:" ), this );
+   lbl = new TQLabel( i18n( "Maximum trace level:" ), this );
    m_pMaxTraceLevelEdit = new PMIntEdit( this );
    layout->addWidget( lbl, 1, 0 );
    layout->addWidget( m_pMaxTraceLevelEdit, 1, 1 );
-   lbl = new QLabel( i18n( "Number of waves:" ), this );
+   lbl = new TQLabel( i18n( "Number of waves:" ), this );
    m_pNumberWavesEdit = new PMIntEdit( this );
    layout->addWidget( lbl, 2, 0 );
    layout->addWidget( m_pNumberWavesEdit, 2, 1 );
-   lbl = new QLabel( i18n( "Noise generator:" ), this );
-   m_pNoiseGeneratorEdit = new QComboBox( false, this );
+   lbl = new TQLabel( i18n( "Noise generator:" ), this );
+   m_pNoiseGeneratorEdit = new TQComboBox( false, this );
    m_pNoiseGeneratorEdit->insertItem( i18n( "Original" ) );
    m_pNoiseGeneratorEdit->insertItem( i18n( "Range Corrected" ) );
    m_pNoiseGeneratorEdit->insertItem( i18n( "Perlin" ) );
@@ -96,45 +96,45 @@ void PMGlobalSettingsEdit::createTopWidgets( )
    layout->addWidget( m_pNoiseGeneratorEdit, 3, 1 );
    hl->addStretch( 1 );
 
-   m_pRadiosityEdit = new QCheckBox( i18n( "Radiosity (Povray 3.1)" ), this );
+   m_pRadiosityEdit = new TQCheckBox( i18n( "Radiosity (Povray 3.1)" ), this );
    topLayout( )->addWidget( m_pRadiosityEdit );
 
-   m_pRadiosityWidget = new QWidget( this );
-   hl = new QHBoxLayout( m_pRadiosityWidget, 0, KDialog::spacingHint( ) );
-   layout = new QGridLayout( hl, 7, 2 );
-   lbl = new QLabel( i18n( "Brightness:" ), m_pRadiosityWidget );
+   m_pRadiosityWidget = new TQWidget( this );
+   hl = new TQHBoxLayout( m_pRadiosityWidget, 0, KDialog::spacingHint( ) );
+   layout = new TQGridLayout( hl, 7, 2 );
+   lbl = new TQLabel( i18n( "Brightness:" ), m_pRadiosityWidget );
    m_pBrightnessEdit = new PMFloatEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 0, 0 );
    layout->addWidget( m_pBrightnessEdit, 0, 1 );
-   lbl = new QLabel( i18n( "Count:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Count:" ), m_pRadiosityWidget );
    m_pCountEdit = new PMIntEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 1, 0 );
    layout->addWidget( m_pCountEdit, 1, 1 );
-   lbl = new QLabel( i18n( "Maximum distance:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Maximum distance:" ), m_pRadiosityWidget );
    m_pDistanceMaximumEdit = new PMFloatEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 2, 0 );
    layout->addWidget( m_pDistanceMaximumEdit, 2, 1 );
-   lbl = new QLabel( i18n( "Error boundary:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Error boundary:" ), m_pRadiosityWidget );
    m_pErrorBoundEdit = new PMFloatEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 3, 0 );
    layout->addWidget( m_pErrorBoundEdit, 3, 1 );
-   lbl = new QLabel( i18n( "Gray threshold:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Gray threshold:" ), m_pRadiosityWidget );
    m_pGrayThresholdEdit = new PMFloatEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 4, 0 );
    layout->addWidget( m_pGrayThresholdEdit, 4, 1 );
-   lbl = new QLabel( i18n( "Low error factor:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Low error factor:" ), m_pRadiosityWidget );
    m_pLowErrorFactorEdit = new PMFloatEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 5, 0 );
    layout->addWidget( m_pLowErrorFactorEdit, 5, 1 );
-   lbl = new QLabel( i18n( "Minimum reuse:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Minimum reuse:" ), m_pRadiosityWidget );
    m_pMinimumReuseEdit = new PMFloatEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 6, 0 );
    layout->addWidget( m_pMinimumReuseEdit, 6, 1 );
-   lbl = new QLabel( i18n( "Nearest count:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Nearest count:" ), m_pRadiosityWidget );
    m_pNearestCountEdit = new PMIntEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 7, 0 );
    layout->addWidget( m_pNearestCountEdit, 7, 1 );
-   lbl = new QLabel( i18n( "Recursion limit:" ), m_pRadiosityWidget );
+   lbl = new TQLabel( i18n( "Recursion limit:" ), m_pRadiosityWidget );
    m_pRecursionLimitEdit = new PMIntEdit( m_pRadiosityWidget );
    layout->addWidget( lbl, 8, 0 );
    layout->addWidget( m_pRecursionLimitEdit, 8, 1 );
@@ -142,25 +142,25 @@ void PMGlobalSettingsEdit::createTopWidgets( )
 
    topLayout( )->addWidget( m_pRadiosityWidget );
 
-   connect( m_pAdcBailoutEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAmbientLightEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAssumedGammaEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pHfGray16Edit, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pIridWaveLengthEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxIntersectionsEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxTraceLevelEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pNumberWavesEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pNoiseGeneratorEdit, SIGNAL( activated( int ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRadiosityEdit, SIGNAL( clicked( ) ), SLOT( slotRadiosityClicked( ) ) );
-   connect( m_pBrightnessEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCountEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDistanceMaximumEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pErrorBoundEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pGrayThresholdEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pLowErrorFactorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMinimumReuseEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pNearestCountEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRecursionLimitEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pAdcBailoutEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAmbientLightEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAssumedGammaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHfGray16Edit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridWaveLengthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxIntersectionsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxTraceLevelEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNumberWavesEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoiseGeneratorEdit, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadiosityEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRadiosityClicked( ) ) );
+   connect( m_pBrightnessEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDistanceMaximumEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pErrorBoundEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pGrayThresholdEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLowErrorFactorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMinimumReuseEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNearestCountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRecursionLimitEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMGlobalSettingsEdit::displayObject( PMObject* o )

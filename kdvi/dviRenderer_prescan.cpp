@@ -24,17 +24,17 @@
 #include <kprocess.h>
 #include <kprocio.h>
 #include <kprogress.h>
-#include <qapplication.h>
-#include <qbitmap.h>
-#include <qdir.h> 
-#include <qfileinfo.h>
-#include <qimage.h> 
-#include <qpainter.h>
-#include <qpaintdevice.h>
+#include <tqapplication.h>
+#include <tqbitmap.h>
+#include <tqdir.h> 
+#include <tqfileinfo.h>
+#include <tqimage.h> 
+#include <tqpainter.h>
+#include <tqpaintdevice.h>
 
 
-extern QPainter foreGroundPaint;
-extern void parse_special_argument(const QString& strg, const char* argument_name, int* variable);
+extern TQPainter foreGroundPaint;
+extern void parse_special_argument(const TQString& strg, const char* argument_name, int* variable);
 
 
 //#define DEBUG_PRESCAN
@@ -50,16 +50,16 @@ void dviRenderer::prescan_embedPS(char *cp, Q_UINT8 *beginningOfSpecialCommand)
   if (strncasecmp(cp, "PSfile=", 7) != 0) 
     return;
 
-  QString command(cp+7);
+  TQString command(cp+7);
   
-  QString include_command = command.simplifyWhiteSpace();
+  TQString include_command = command.simplifyWhiteSpace();
   
   // The line is supposed to start with "..ile=", and then comes the
   // filename. Figure out what the filename is and stow it away. Of
   // course, this does not work if the filename contains spaces
   // (already the simplifyWhiteSpace() above is wrong). If you have
   // files like this, go away.
-  QString EPSfilename = include_command;
+  TQString EPSfilename = include_command;
   EPSfilename.truncate(EPSfilename.find(' '));
 
   // Strip enclosing quotation marks which are included by some LaTeX
@@ -73,7 +73,7 @@ void dviRenderer::prescan_embedPS(char *cp, Q_UINT8 *beginningOfSpecialCommand)
   // The graphic file is later read when the page is rendered.
   KMimeType::Ptr const mime_type =
     KMimeType::findByFileContent(EPSfilename);
-  QString const & mime_type_name = mime_type->name();
+  TQString const & mime_type_name = mime_type->name();
 
   bool const is_ps_file  = (mime_type_name == "application/postscript" ||
                             mime_type_name == "image/x-eps");
@@ -82,7 +82,7 @@ void dviRenderer::prescan_embedPS(char *cp, Q_UINT8 *beginningOfSpecialCommand)
   if (!(is_ps_file || is_pdf_file))
     return;
 
-  QString originalFName = EPSfilename;
+  TQString originalFName = EPSfilename;
 
   embedPS_progress->setLabel(i18n("Embedding %1").arg(EPSfilename));  
   qApp->processEvents();
@@ -95,7 +95,7 @@ void dviRenderer::prescan_embedPS(char *cp, Q_UINT8 *beginningOfSpecialCommand)
   if (is_pdf_file)
     EPSfilename = dviFile->convertPDFtoPS(EPSfilename);
 
-  if (!QFile::exists(EPSfilename)) {
+  if (!TQFile::exists(EPSfilename)) {
     // Find the number of the page
     Q_UINT32 currentOffset = beginningOfSpecialCommand - dviFile->dvi_Data();
     Q_UINT16 page;
@@ -131,20 +131,20 @@ void dviRenderer::prescan_embedPS(char *cp, Q_UINT8 *beginningOfSpecialCommand)
   int clip=include_command.find(" clip"); // -1 if clip keyword is not present, >= 0 otherwise
 
   // Generate the PostScript commands to be included
-  QString PS = QString("ps: @beginspecial %1 @llx %2 @lly %3 @urx %4 @ury").arg(llx).arg(lly).arg(urx).arg(ury);
+  TQString PS = TQString("ps: @beginspecial %1 @llx %2 @lly %3 @urx %4 @ury").arg(llx).arg(lly).arg(urx).arg(ury);
   if (rwi != 0)
-    PS.append( QString(" %1 @rwi").arg(rwi) );
+    PS.append( TQString(" %1 @rwi").arg(rwi) );
   if (rhi != 0)
-    PS.append( QString(" %1 @rhi").arg(rhi) );
+    PS.append( TQString(" %1 @rhi").arg(rhi) );
   if (angle != 0)
-    PS.append( QString(" %1 @angle").arg(angle) );
+    PS.append( TQString(" %1 @angle").arg(angle) );
   if (clip != -1)
     PS.append(" @clip");
   PS.append( " @setspecial\n" );
   
-  QFile file( EPSfilename );
+  TQFile file( EPSfilename );
   if ( file.open( IO_ReadOnly ) ) {
-    QTextStream stream( &file );
+    TQTextStream stream( &file );
     while ( !stream.atEnd() ) {
       PS += stream.readLine().section( '%', 0, 0);
       PS += "\n";
@@ -159,7 +159,7 @@ void dviRenderer::prescan_embedPS(char *cp, Q_UINT8 *beginningOfSpecialCommand)
   Q_UINT32 lengthOfOldSpecial = command_pointer - beginningOfSpecialCommand;
   Q_UINT32 lengthOfNewSpecial = PS.length()+5;
   
-  QMemArray<Q_UINT8> newDVI(dviFile->size_of_file + lengthOfNewSpecial-lengthOfOldSpecial);
+  TQMemArray<Q_UINT8> newDVI(dviFile->size_of_file + lengthOfNewSpecial-lengthOfOldSpecial);
   
   Q_UINT8 *commandPtrSav = command_pointer;
   Q_UINT8 *endPtrSav = end_pointer;
@@ -239,13 +239,13 @@ void dviRenderer::prescan_removePageSizeInfo(char *cp, Q_UINT8 *beginningOfSpeci
 }
 
 
-void dviRenderer::prescan_ParsePapersizeSpecial(const QString& _cp)
+void dviRenderer::prescan_ParsePapersizeSpecial(const TQString& _cp)
 {
 #ifdef DEBUG_PRESCAN
   kdDebug(4300) << "Papersize-Special : papersize" << cp << endl;
 #endif
 
-  QString cp = _cp.simplifyWhiteSpace();
+  TQString cp = _cp.simplifyWhiteSpace();
 
   if (cp[0] == '=') {
     cp = cp.mid(1);
@@ -258,9 +258,9 @@ void dviRenderer::prescan_ParsePapersizeSpecial(const QString& _cp)
 }
 
 
-void dviRenderer::prescan_ParseBackgroundSpecial(const QString& cp)
+void dviRenderer::prescan_ParseBackgroundSpecial(const TQString& cp)
 {
-  QColor col = parseColorSpecification(cp.stripWhiteSpace());
+  TQColor col = parseColorSpecification(cp.stripWhiteSpace());
   if (col.isValid())
     for(Q_UINT16 page=current_page; page < dviFile->total_pages; page++)
       PS_interface->setBackgroundColor(page, col);
@@ -268,9 +268,9 @@ void dviRenderer::prescan_ParseBackgroundSpecial(const QString& cp)
 }
 
 
-void dviRenderer::prescan_ParseHTMLAnchorSpecial(const QString& _cp)
+void dviRenderer::prescan_ParseHTMLAnchorSpecial(const TQString& _cp)
 {
-  QString cp = _cp;
+  TQString cp = _cp;
   cp.truncate(cp.find('"'));
   Length l;
   l.setLength_in_inch(currinf.data.dvi_v/(resolutionInDPI*shrinkfactor));
@@ -278,17 +278,17 @@ void dviRenderer::prescan_ParseHTMLAnchorSpecial(const QString& _cp)
 }
 
 
-void dviRenderer::prescan_ParsePSHeaderSpecial(const QString& cp)
+void dviRenderer::prescan_ParsePSHeaderSpecial(const TQString& cp)
 {
 #ifdef DEBUG_PRESCAN
   kdDebug(4300) << "PostScript-special, header " << cp.latin1() << endl;
 #endif
 
-  QString _file = cp;
+  TQString _file = cp;
   
   // If the file is not found in the current directory, use kpsewhich
   // to find it.
-  if (!QFile::exists(_file)) {
+  if (!TQFile::exists(_file)) {
     // Otherwise, use kpsewhich to find the eps file.
     KProcIO proc;
     proc << "kpsewhich" << cp;
@@ -296,12 +296,12 @@ void dviRenderer::prescan_ParsePSHeaderSpecial(const QString& cp)
     proc.readln(_file);
   }
   
-  if (QFile::exists(_file))
-    PS_interface->PostScriptHeaderString->append( QString(" (%1) run\n").arg(_file) );
+  if (TQFile::exists(_file))
+    PS_interface->PostScriptHeaderString->append( TQString(" (%1) run\n").arg(_file) );
 }
 
 
-void dviRenderer::prescan_ParsePSBangSpecial(const QString& cp)
+void dviRenderer::prescan_ParsePSBangSpecial(const TQString& cp)
 {
 #ifdef DEBUG_PRESCAN
   kdDebug(4300) << "PostScript-special, literal header " << cp.latin1() << endl;
@@ -313,7 +313,7 @@ void dviRenderer::prescan_ParsePSBangSpecial(const QString& cp)
 }
 
 
-void dviRenderer::prescan_ParsePSQuoteSpecial(const QString& cp)
+void dviRenderer::prescan_ParsePSQuoteSpecial(const TQString& cp)
 {
 #ifdef DEBUG_PRESCAN
   kdError(4300) << "PostScript-special, literal PostScript " << cp.latin1() << endl;
@@ -321,14 +321,14 @@ void dviRenderer::prescan_ParsePSQuoteSpecial(const QString& cp)
   
   double PS_H = (currinf.data.dvi_h*300.0)/(65536*1200)-300;
   double PS_V = (currinf.data.dvi_v*300.0)/1200 - 300;
-  PostScriptOutPutString->append( QString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
+  PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
   PostScriptOutPutString->append( " @beginspecial @setspecial \n" );
   PostScriptOutPutString->append( cp );
   PostScriptOutPutString->append( " @endspecial \n" );
 }
 
 
-void dviRenderer::prescan_ParsePSSpecial(const QString& cp)
+void dviRenderer::prescan_ParsePSSpecial(const TQString& cp)
 {
 #ifdef DEBUG_PRESCAN
   kdDebug(4300) << "PostScript-special, direct PostScript " << cp << endl;
@@ -356,7 +356,7 @@ void dviRenderer::prescan_ParsePSSpecial(const QString& cp)
       return; // hyperref tries to work around Distiller bug
     if (cp.startsWith("ps:SDict begin [") && cp.endsWith(" pdfmark end")) {  // hyperref definition of link/anchor/bookmark/etc
       if (cp.contains("/DEST")) { // The PostScript code defines an anchor
-	QString anchorName = cp.section('(', 1, 1).section(')', 0, 0);
+	TQString anchorName = cp.section('(', 1, 1).section(')', 0, 0);
 	Length l;
 	l.setLength_in_inch(currinf.data.dvi_v/(resolutionInDPI*shrinkfactor));
 	anchorList[anchorName] = Anchor(current_page+1, l);
@@ -375,37 +375,37 @@ void dviRenderer::prescan_ParsePSSpecial(const QString& cp)
   double PS_V = (currinf.data.dvi_v*300.0)/1200 - 300;
   
   if (cp.find("ps::[begin]", 0, false) == 0) {
-    PostScriptOutPutString->append( QString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
-    PostScriptOutPutString->append( QString(" %1\n").arg(cp.mid(11)) );
+    PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
+    PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(11)) );
   } else {
     if (cp.find("ps::[end]", 0, false) == 0) {
-      PostScriptOutPutString->append( QString(" %1\n").arg(cp.mid(9)) );
+      PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(9)) );
     } else {
       if (cp.find("ps::", 0, false) == 0) {
-	PostScriptOutPutString->append( QString(" %1\n").arg(cp.mid(4)) );
+	PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(4)) );
       } else {
-	PostScriptOutPutString->append( QString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
-	PostScriptOutPutString->append( QString(" %1\n").arg(cp.mid(3)) );
+	PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
+	PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(3)) );
       }
     }
   }
 }
 
 
-void dviRenderer::prescan_ParsePSFileSpecial(const QString& cp)
+void dviRenderer::prescan_ParsePSFileSpecial(const TQString& cp)
 {
 #ifdef DEBUG_PRESCAN
   kdDebug(4300) << "epsf-special: psfile=" << cp <<endl;
 #endif
 
-  QString include_command = cp.simplifyWhiteSpace();
+  TQString include_command = cp.simplifyWhiteSpace();
 
   // The line is supposed to start with "..ile=", and then comes the
   // filename. Figure out what the filename is and stow it away. Of
   // course, this does not work if the filename contains spaces
   // (already the simplifyWhiteSpace() above is wrong). If you have
   // files like this, go away.
-  QString EPSfilename = include_command;
+  TQString EPSfilename = include_command;
   EPSfilename.truncate(EPSfilename.find(' '));
 
   // Strip enclosing quotation marks which are included by some LaTeX
@@ -418,7 +418,7 @@ void dviRenderer::prescan_ParsePSFileSpecial(const QString& cp)
 
   // If the file name ends in 'png', 'gif', 'jpg' or 'jpeg', we assume
   // that this is NOT a PostScript file, and we exit here.
-  QString ending = EPSfilename.section('.', -1).lower();
+  TQString ending = EPSfilename.section('.', -1).lower();
   if ((ending == "png") || (ending == "gif") || (ending == "jpg") || (ending == "jpeg")) {
     dviFile->numberOfExternalNONPSFiles++;  
     return;
@@ -456,25 +456,25 @@ void dviRenderer::prescan_ParsePSFileSpecial(const QString& cp)
   
   int clip=include_command.find(" clip"); // -1 if clip keyword is not present, >= 0 otherwise
   
-  if (QFile::exists(EPSfilename)) {
+  if (TQFile::exists(EPSfilename)) {
     double PS_H = (currinf.data.dvi_h*300.0)/(65536*1200)-300;
     double PS_V = (currinf.data.dvi_v*300.0)/1200 - 300;
-    PostScriptOutPutString->append( QString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
+    PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
     PostScriptOutPutString->append( "@beginspecial " );
-    PostScriptOutPutString->append( QString(" %1 @llx").arg(llx) );
-    PostScriptOutPutString->append( QString(" %1 @lly").arg(lly) );
-    PostScriptOutPutString->append( QString(" %1 @urx").arg(urx) );
-    PostScriptOutPutString->append( QString(" %1 @ury").arg(ury) );
+    PostScriptOutPutString->append( TQString(" %1 @llx").arg(llx) );
+    PostScriptOutPutString->append( TQString(" %1 @lly").arg(lly) );
+    PostScriptOutPutString->append( TQString(" %1 @urx").arg(urx) );
+    PostScriptOutPutString->append( TQString(" %1 @ury").arg(ury) );
     if (rwi != 0)
-      PostScriptOutPutString->append( QString(" %1 @rwi").arg(rwi) );
+      PostScriptOutPutString->append( TQString(" %1 @rwi").arg(rwi) );
     if (rhi != 0)
-      PostScriptOutPutString->append( QString(" %1 @rhi").arg(rhi) );
+      PostScriptOutPutString->append( TQString(" %1 @rhi").arg(rhi) );
     if (angle != 0)
-      PostScriptOutPutString->append( QString(" %1 @angle").arg(angle) );
+      PostScriptOutPutString->append( TQString(" %1 @angle").arg(angle) );
     if (clip != -1)
       PostScriptOutPutString->append(" @clip");
     PostScriptOutPutString->append( " @setspecial \n" );
-    PostScriptOutPutString->append( QString(" (%1) run\n").arg(EPSfilename) );
+    PostScriptOutPutString->append( TQString(" (%1) run\n").arg(EPSfilename) );
     PostScriptOutPutString->append( "@endspecial \n" );
   }
   
@@ -482,7 +482,7 @@ void dviRenderer::prescan_ParsePSFileSpecial(const QString& cp)
 }
 
 
-void dviRenderer::prescan_ParseSourceSpecial(const QString& cp)
+void dviRenderer::prescan_ParseSourceSpecial(const TQString& cp)
 {
   // if no rendering takes place, i.e. when the DVI file is first
   // loaded, generate a DVI_SourceFileAnchor. These anchors are used
@@ -495,8 +495,8 @@ void dviRenderer::prescan_ParseSourceSpecial(const QString& cp)
     if (!cp.at(j).isNumber())
       break;
   Q_UINT32 sourceLineNumber = cp.left(j).toUInt();
-  QFileInfo fi1(dviFile->filename);
-  QString  sourceFileName   = QFileInfo(fi1.dir(), cp.mid(j).stripWhiteSpace()).absFilePath();
+  TQFileInfo fi1(dviFile->filename);
+  TQString  sourceFileName   = TQFileInfo(fi1.dir(), cp.mid(j).stripWhiteSpace()).absFilePath();
   Length l;
   l.setLength_in_inch(currinf.data.dvi_v/(resolutionInDPI*shrinkfactor));
   DVI_SourceFileAnchor sfa(sourceFileName, sourceLineNumber, current_page+1, l);
@@ -506,7 +506,7 @@ void dviRenderer::prescan_ParseSourceSpecial(const QString& cp)
 
 void dviRenderer::prescan_parseSpecials(char *cp, Q_UINT8 *)
 {
-  QString special_command(cp);
+  TQString special_command(cp);
 
   // Now to those specials which are only interpreted during the
   // prescan phase, and NOT during rendering.

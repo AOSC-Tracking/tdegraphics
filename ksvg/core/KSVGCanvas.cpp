@@ -32,10 +32,10 @@
 #include <kdebug.h>
 #include <kglobal.h>
 
-#include <qstring.h>
-#include <qdatetime.h>
-#include <qpaintdevicemetrics.h>
-#include <qwmatrix.h>
+#include <tqstring.h>
+#include <tqdatetime.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqwmatrix.h>
 
 #include <X11/Xlib.h>
 
@@ -63,12 +63,12 @@ KSVGCanvas::KSVGCanvas(unsigned int width, unsigned int height) : m_viewportWidt
 
 	m_buffer = 0;
 
-	m_backgroundColor = QColor(250, 250, 250);
+	m_backgroundColor = TQColor(250, 250, 250);
 
 	m_immediateUpdate = false;
 }
 
-void KSVGCanvas::setup(QPaintDevice *drawWindow, QPaintDevice *directWindow)
+void KSVGCanvas::setup(TQPaintDevice *drawWindow, TQPaintDevice *directWindow)
 {
 	m_drawWindow = drawWindow;
 	m_directWindow = directWindow;
@@ -151,10 +151,10 @@ void KSVGCanvas::resize(unsigned int w, unsigned int h)
 		int diffw = w - m_width;
 		int diffh = h - m_height;
 
-		QRect r(m_width, 0, diffw, m_height + diffh);
-		QRect r3(0, m_height, m_width + diffw, diffh);
+		TQRect r(m_width, 0, diffw, m_height + diffh);
+		TQRect r3(0, m_height, m_width + diffw, diffh);
 
-		QWMatrix mtx;
+		TQWMatrix mtx;
 		mtx.translate(m_pan.x(), m_pan.y());
 		mtx.scale(m_zoom, m_zoom);
 
@@ -169,7 +169,7 @@ void KSVGCanvas::resize(unsigned int w, unsigned int h)
 			CanvasItemList drawables;
 			if(diffw > 0)
 			{
-				QRect r2 = mtx.invert().map(r);
+				TQRect r2 = mtx.invert().map(r);
 
 				// Recalc items
 				for(int j = r2.top() / int(m_chunkSizeVer); j <= r2.bottom() / int(m_chunkSizeVer); j++)
@@ -191,7 +191,7 @@ void KSVGCanvas::resize(unsigned int w, unsigned int h)
 
 			if(diffh > 0)
 			{
-				QRect r4 = mtx.invert().map(r3);
+				TQRect r4 = mtx.invert().map(r3);
 
 				// Recalc items
 				for(int j = r4.top() / int(m_chunkSizeVer); j <= r4.bottom() / int(m_chunkSizeVer); j++)
@@ -234,7 +234,7 @@ void KSVGCanvas::setRenderBufferSize(int w, int h)
 
 		if(needsRedraw)
 		{
-			QPaintDeviceMetrics metrics(m_drawWindow);
+			TQPaintDeviceMetrics metrics(m_drawWindow);
 			m_width = kMin(int(w), metrics.width());
 			m_height = kMin(int(h), metrics.height());
 
@@ -248,9 +248,9 @@ void KSVGCanvas::setRenderBufferSize(int w, int h)
 	fill();
 }
 
-void KSVGCanvas::clear(const QRect &r)
+void KSVGCanvas::clear(const TQRect &r)
 {
-	QRect r2 = r & QRect(0, 0, m_width, m_height);
+	TQRect r2 = r & TQRect(0, 0, m_width, m_height);
 	if(!r2.isEmpty() && m_buffer)
 	{
 		for(int i = 0; i < r2.height(); i++)
@@ -322,7 +322,7 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 	// Calc weight & slant
 	int weight = 0, slant = 0;
 	EFontStyle fontStyle = style->getFontStyle();
-	QString fontWeight = style->getFontWeight();
+	TQString fontWeight = style->getFontWeight();
 
 	if(fontWeight.contains("bold"))
 		weight |= FC_WEIGHT_DEMIBOLD;
@@ -372,7 +372,7 @@ void KSVGCanvas::invalidate(CanvasItem *item, bool recalc)
 			addToChunks(item);
 		}
 
-		QPtrListIterator<CanvasChunk> it = m_chunksByItem[item];
+		TQPtrListIterator<CanvasChunk> it = m_chunksByItem[item];
 		for(it.toFirst(); it.current(); ++it)
 		{
 			(*it)->setDirty();
@@ -389,7 +389,7 @@ void KSVGCanvas::insert(CanvasItem *item, int z)
 	if(z == -1)
 	{
 		item->setZIndex(m_chunksByItem.size());
-		m_chunksByItem[item] = QPtrList<CanvasChunk>();
+		m_chunksByItem[item] = TQPtrList<CanvasChunk>();
 		addToChunks(item);
 		m_items.append(item);
 
@@ -402,7 +402,7 @@ void KSVGCanvas::insert(CanvasItem *item, int z)
 			if(visible)
 			{
 				item->draw();
-				QRect bbox = item->bbox();
+				TQRect bbox = item->bbox();
 				blit(bbox, true);
 			}
 		}
@@ -425,7 +425,7 @@ void KSVGCanvas::removeItem(CanvasItem *item)
 
 void KSVGCanvas::removeFromChunks(CanvasItem *item)
 {
-	QPtrListIterator<CanvasChunk> it = m_chunksByItem[item];
+	TQPtrListIterator<CanvasChunk> it = m_chunksByItem[item];
 	for(it.toFirst(); it.current(); ++it)
 	{
 		(*it)->remove(item);
@@ -437,8 +437,8 @@ void KSVGCanvas::removeFromChunks(CanvasItem *item)
 
 void KSVGCanvas::addToChunks(CanvasItem *item)
 {
-	QRect bbox = item->bbox();
-	QWMatrix mtx;
+	TQRect bbox = item->bbox();
+	TQWMatrix mtx;
 	mtx.translate(m_pan.x(), m_pan.y());
 	mtx.scale(m_zoom, m_zoom);
 
@@ -498,10 +498,10 @@ unsigned int KSVGCanvas::setElementItemZIndexRecursive(SVGElementImpl *element, 
 	return z;
 }
 
-void KSVGCanvas::update(const QPoint &panPoint, bool erase)
+void KSVGCanvas::update(const TQPoint &panPoint, bool erase)
 {
 #ifdef USE_TIMER
-	QTime t;
+	TQTime t;
 	t.start();
 #endif
 
@@ -513,16 +513,16 @@ void KSVGCanvas::update(const QPoint &panPoint, bool erase)
 		fill();
 
 	// reset clip paths
-	QDictIterator<CanvasClipPath> itr(m_clipPaths);
+	TQDictIterator<CanvasClipPath> itr(m_clipPaths);
 	for(; itr.current(); ++itr)
 		(*itr)->update(UPDATE_TRANSFORM);
 
-	QWMatrix mtx;
+	TQWMatrix mtx;
 	mtx.translate(m_pan.x(), m_pan.y());
 	mtx.scale(m_zoom, m_zoom);
 
-	QRect r(0, 0, m_width, m_height);
-	QRect r2 = mtx.invert().map(r);
+	TQRect r(0, 0, m_width, m_height);
+	TQRect r2 = mtx.invert().map(r);
 
 	// pan all items
 	for(unsigned int i = 0; i < m_items.count(); i++)
@@ -530,7 +530,7 @@ void KSVGCanvas::update(const QPoint &panPoint, bool erase)
 
 	// recalc items
 	CanvasItemList drawables;
-	QPtrListIterator<CanvasItem> it = m_items;
+	TQPtrListIterator<CanvasItem> it = m_items;
 	for(int j = r2.top() / m_chunkSizeVer; j <= (r2.bottom() / m_chunkSizeVer); j++)
 	{
 		for(int i = r2.left() / m_chunkSizeHor; i <= (r2.right() / m_chunkSizeHor); i++)
@@ -552,7 +552,7 @@ void KSVGCanvas::update(const QPoint &panPoint, bool erase)
 		(*it)->draw();
 
 	if(m_drawWindow)
-		blit(QRect(0, 0, m_width, m_height), false);
+		blit(TQRect(0, 0, m_width, m_height), false);
 
 	m_dirtyChunks.clear();
 
@@ -564,7 +564,7 @@ void KSVGCanvas::update(const QPoint &panPoint, bool erase)
 void KSVGCanvas::update(float zoomFactor)
 {
 #ifdef USE_TIMER
-	QTime t;
+	TQTime t;
 	t.start();
 #endif
 
@@ -578,18 +578,18 @@ void KSVGCanvas::update(float zoomFactor)
 		fill();
 
 	// reset clip paths
-	QDictIterator<CanvasClipPath> itr(m_clipPaths);
+	TQDictIterator<CanvasClipPath> itr(m_clipPaths);
 	for(; itr.current(); ++itr)
 		(*itr)->update(UPDATE_TRANSFORM);
 
 	m_zoom = zoomFactor;
 
-	QWMatrix mtx;
+	TQWMatrix mtx;
 	mtx.translate(m_pan.x(), m_pan.y());
 	mtx.scale(m_zoom, m_zoom);
 
-	QRect r(0, 0, m_width, m_height);
-	QRect r2 = mtx.invert().map(r);
+	TQRect r(0, 0, m_width, m_height);
+	TQRect r2 = mtx.invert().map(r);
 
 	// zoom all items
 	for(unsigned int i = 0; i < m_items.count(); i++)
@@ -597,7 +597,7 @@ void KSVGCanvas::update(float zoomFactor)
 
 	// recalc items
 	CanvasItemList drawables;
-	QPtrListIterator<CanvasItem> it = m_items;
+	TQPtrListIterator<CanvasItem> it = m_items;
 	for(int j = r2.top() / m_chunkSizeVer; j <= (r2.bottom() / m_chunkSizeVer); j++)
 	{
 		for(int i = r2.left() / m_chunkSizeHor; i <= (r2.right() / m_chunkSizeHor); i++)
@@ -619,7 +619,7 @@ void KSVGCanvas::update(float zoomFactor)
 		(*it)->draw();
 
 	if(m_drawWindow)
-		blit(QRect(0, 0, m_width, m_height), false);
+		blit(TQRect(0, 0, m_width, m_height), false);
 
 	m_dirtyChunks.clear();
 
@@ -642,24 +642,24 @@ void KSVGCanvas::reset()
 void KSVGCanvas::update()
 {
 #ifdef USE_TIMER
-	QTime t;
+	TQTime t;
 	t.start();
 #endif
 
-	QWMatrix mtx;
+	TQWMatrix mtx;
 	mtx.translate(m_pan.x(), m_pan.y());
 	mtx.scale(m_zoom, m_zoom);
 
 	// Process dirty chunks
-	QPtrList<CanvasChunk> chunkList;
+	TQPtrList<CanvasChunk> chunkList;
 	CanvasItemList drawables;
 	for(unsigned int i = 0; i < m_dirtyChunks.count(); i++)
 	{
 		CanvasChunk *chunk = m_dirtyChunks[i];
 		Q_ASSERT(chunk->isDirty());
 
-		QRect r = chunk->bbox();
-		QRect chunkbox(mtx.map(r.topLeft()), mtx.map(r.bottomRight()));
+		TQRect r = chunk->bbox();
+		TQRect chunkbox(mtx.map(r.topLeft()), mtx.map(r.bottomRight()));
 		clear(chunkbox);
 		chunkList.append(chunk);
 
@@ -686,11 +686,11 @@ void KSVGCanvas::update()
 	}
 
 	// Blit dirty chunks
-	QPtrListIterator<CanvasChunk> it = chunkList;
+	TQPtrListIterator<CanvasChunk> it = chunkList;
 	for(it.toFirst(); it.current(); ++it)
 	{
-		QRect r = (*it)->bbox();
-		QRect chunkbox(mtx.map(r.topLeft()), mtx.map(r.bottomRight()));
+		TQRect r = (*it)->bbox();
+		TQRect chunkbox(mtx.map(r.topLeft()), mtx.map(r.bottomRight()));
 		blit(chunkbox, false);
 	}
 
@@ -701,13 +701,13 @@ void KSVGCanvas::update()
 #endif
 }
 
-CanvasItemList KSVGCanvas::collisions(const QPoint &p, bool exact) const
+CanvasItemList KSVGCanvas::collisions(const TQPoint &p, bool exact) const
 {
-	QWMatrix mtx;
+	TQWMatrix mtx;
 	mtx.translate(m_pan.x(), m_pan.y());
 	mtx.scale(m_zoom, m_zoom);
 
-	QPoint p2 = mtx.invert().map(p);
+	TQPoint p2 = mtx.invert().map(p);
 	if(p2.x() < 0 || p2.y() < 0)
 		return CanvasItemList();
 
@@ -734,7 +734,7 @@ CanvasItemList KSVGCanvas::collisions(const QPoint &p, bool exact) const
 		return list;
 }
 
-void KSVGCanvas::blit(const QRect &rect, bool direct)
+void KSVGCanvas::blit(const TQRect &rect, bool direct)
 {
 	if(m_drawWindow && m_width && m_height)
 	{
@@ -761,12 +761,12 @@ void KSVGCanvas::blit(const QRect &rect, bool direct)
 
 void KSVGCanvas::blit()
 {
-	return blit(QRect(0, 0, m_width, m_height), false);
+	return blit(TQRect(0, 0, m_width, m_height), false);
 }
 
 void KSVGCanvas::ChunkManager::addChunk(CanvasChunk *chunk)
 {
-	QString key = QString("%1 %2").arg(chunk->x()).arg(chunk->y());
+	TQString key = TQString("%1 %2").arg(chunk->x()).arg(chunk->y());
 //	kdDebug(26005) << k_funcinfo << "Adding chunk : " << chunk << endl;
 	m_chunks.insert(key, chunk);
 }
@@ -774,7 +774,7 @@ void KSVGCanvas::ChunkManager::addChunk(CanvasChunk *chunk)
 CanvasChunk *KSVGCanvas::ChunkManager::getChunk(short x, short y) const
 {
 //	kdDebug(26005) << k_funcinfo << "getting chunk from : " << x << ", " << y << endl;
-	QString key = QString("%1 %2").arg(x).arg(y);
+	TQString key = TQString("%1 %2").arg(x).arg(y);
 	return m_chunks[key];
 }
 

@@ -27,11 +27,11 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
-#include <qdict.h>
-#include <qvalidator.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
 #include <zlib.h>
 
 // some defines to make it easier
@@ -87,8 +87,8 @@ typedef KGenericFactory<KPngPlugin> PngFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"))
 
-KPngPlugin::KPngPlugin(QObject *parent, const char *name,
-                       const QStringList &args)
+KPngPlugin::KPngPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args)
     : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "png plugin\n";
@@ -101,32 +101,32 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
 
     // comment group
     group = addGroupInfo(info, "Comment", i18n("Comment"));
-    addVariableInfo(group, QVariant::String, 0);
+    addVariableInfo(group, TQVariant::String, 0);
 
     // technical group
     group = addGroupInfo(info, "Technical", i18n("Technical Details"));
 
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
     setHint( item, KFileMimeTypeInfo::Size );
     setUnit(item, KFileMimeTypeInfo::Pixels);
 
-    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-    addItemInfo(group, "ColorMode", i18n("Color Mode"), QVariant::String);
-    addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
-    addItemInfo(group, "InterlaceMode", i18n("Interlace Mode"),QVariant::String);
+    addItemInfo(group, "ColorMode", i18n("Color Mode"), TQVariant::String);
+    addItemInfo(group, "Compression", i18n("Compression"), TQVariant::String);
+    addItemInfo(group, "InterlaceMode", i18n("Interlace Mode"),TQVariant::String);
 }
 
 bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 {
     if ( info.path().isEmpty() ) // remote file
         return false;
-    QFile f(info.path());
+    TQFile f(info.path());
     if ( !f.open(IO_ReadOnly) )
         return false;
 
-    QIODevice::Offset fileSize = f.size();
+    TQIODevice::Offset fileSize = f.size();
 
     if (fileSize < 29) return false;
     // the technical group will be read from the first 29 bytes. If the file
@@ -176,7 +176,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
             KFileMetaInfoGroup techgroup = appendGroup(info, "Technical");
 
-            appendItem(techgroup, "Dimensions", QSize(x, y));
+            appendItem(techgroup, "Dimensions", TQSize(x, y));
             appendItem(techgroup, "BitDepth", bpp);
             appendItem(techgroup, "ColorMode",
                        (type < sizeof(colors)/sizeof(colors[0]))
@@ -227,7 +227,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                         if (8+index+keysize>=fileSize)
                             goto end;
 
-		    QByteArray arr;
+		    TQByteArray arr;
 		    if(!strncmp((char*)CHUNK_TYPE(data,index), "zTXt", 4)) {
 			kdDebug(7034) << "We found a zTXt field\n";
 			// we get the compression method after the key
@@ -288,7 +288,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 			    goto end;
 
 			arr.resize(textsize);
-			arr = QByteArray(textsize).duplicate((const char*)text,
+			arr = TQByteArray(textsize).duplicate((const char*)text,
 							     textsize);
 			
 		    } else {
@@ -296,11 +296,11 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 			goto end;
 		    }
 		    appendItem(commentGroup,
-			       QString(reinterpret_cast<char*>(key)),
-			       QString(arr));
+			       TQString(reinterpret_cast<char*>(key)),
+			       TQString(arr));
 		    
 		    kdDebug(7034) << "adding " << key << " / "
-				  << QString(arr) << endl;
+				  << TQString(arr) << endl;
 
 		    index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
                 }

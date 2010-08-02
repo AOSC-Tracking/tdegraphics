@@ -63,12 +63,12 @@ void PMInteriorTexture::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMInteriorTexture::description( ) const
+TQString PMInteriorTexture::description( ) const
 {
    return i18n( "interior texture" );
 }
 
-PMDialogEditBase* PMInteriorTexture::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMInteriorTexture::editWidget( TQWidget* parent ) const
 {
    return new PMInteriorTextureEdit( parent );
 }

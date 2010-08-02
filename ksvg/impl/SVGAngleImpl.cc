@@ -89,7 +89,7 @@ void SVGAngleImpl::setValueAsString(const DOM::DOMString &valueAsString)
 {
 	m_valueAsString = valueAsString;
 
-	QString s = valueAsString.string();
+	TQString s = valueAsString.string();
 	
 	bool bOK;
 	m_valueInSpecifiedUnits = s.toFloat(&bOK);

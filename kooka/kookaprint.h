@@ -27,24 +27,24 @@
 #ifndef __KOOKA_PRINT_H__
 #define __KOOKA_PRINT_H__
 
-#include <qobject.h>
-#include <qmap.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqmap.h>
+#include <tqstring.h>
 #include <kprinter.h>
 #include <kdeprint/kprintdialogpage.h>
 
 class KookaImage;
 class KPrinter;
-class QPainter;
+class TQPainter;
 class KLineEdit;
 
 
 class ImageSettings : public KPrintDialogPage
 {
 public:
-    void setOptions( const QMap<QString, QString>& opts );
-    void getOptions( QMap<QString, QString>& opts, bool include_def = false );
-    bool isValid( QString& msg );
+    void setOptions( const TQMap<TQString, TQString>& opts );
+    void getOptions( TQMap<TQString, TQString>& opts, bool include_def = false );
+    bool isValid( TQString& msg );
 
 private:
     KLineEdit *m_width, *m_height;
@@ -61,10 +61,10 @@ public:
     /**
      * The top left edge of the required print position
      */
-    virtual QPoint printPosTopLeft(const QSize&) const;
-    virtual QPoint printPosTopRight(const QSize&) const;
-    virtual QPoint printPosBottomLeft(const QSize&) const;
-    virtual QPoint printPosBottomRight(const QSize&) const;
+    virtual TQPoint printPosTopLeft(const TQSize&) const;
+    virtual TQPoint printPosTopRight(const TQSize&) const;
+    virtual TQPoint printPosBottomLeft(const TQSize&) const;
+    virtual TQPoint printPosBottomRight(const TQSize&) const;
 
     virtual int extraMarginPix() const;
 
@@ -72,7 +72,7 @@ public:
      * The maximum pixel size of the image (or imagepart) on
      * the current page
      */
-    virtual QSize maxPageSize( int extraShrinkPercent = 0 ) const;
+    virtual TQSize maxPageSize( int extraShrinkPercent = 0 ) const;
 
 public slots:
 
@@ -81,14 +81,14 @@ public slots:
 protected:
     typedef enum { SW, NW, NO, SO } MarkerDirection;
 
-    virtual void drawMarkerAroundPoint( const QPoint& );
-    virtual void drawCutSign( const QPoint&, int, MarkerDirection );
-    virtual void drawCornerMarker( const QSize&, int, int, int, int );
+    virtual void drawMarkerAroundPoint( const TQPoint& );
+    virtual void drawCutSign( const TQPoint&, int, MarkerDirection );
+    virtual void drawCornerMarker( const TQSize&, int, int, int, int );
 
 private:
 
     KPrinter 	*m_printer;
-    QPainter    *m_painter;
+    TQPainter    *m_painter;
     int          m_extraMarginPercent;
 };
 

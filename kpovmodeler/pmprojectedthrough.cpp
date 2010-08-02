@@ -44,7 +44,7 @@ PMProjectedThrough::~PMProjectedThrough( )
 }
 
 
-QString PMProjectedThrough::description( ) const
+TQString PMProjectedThrough::description( ) const
 {
    return i18n( "projected through" );
 }
@@ -70,7 +70,7 @@ void PMProjectedThrough::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMProjectedThrough::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMProjectedThrough::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
 }
@@ -80,7 +80,7 @@ void PMProjectedThrough::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMProjectedThrough::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMProjectedThrough::editWidget( TQWidget* parent ) const
 {
    return new PMNamedObjectEdit( parent );
 }

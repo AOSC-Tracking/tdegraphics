@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include "SVGColor.h"
 
@@ -83,7 +83,7 @@ SVGICCColorImpl *SVGColorImpl::iccColor() const
 	return m_iccColor;
 }
 
-void SVGColorImpl::setRGBColor(QColor color)
+void SVGColorImpl::setRGBColor(TQColor color)
 {
 	m_colorType = SVG_COLORTYPE_RGBCOLOR;
 	m_rgbColor = DOM::RGBColor(color.rgb());
@@ -92,7 +92,7 @@ void SVGColorImpl::setRGBColor(QColor color)
 void SVGColorImpl::setRGBColor(int r, int g, int b)
 {
 	m_colorType = SVG_COLORTYPE_RGBCOLOR;
-	m_rgbColor = DOM::RGBColor(QColor(r, g, b).rgb());
+	m_rgbColor = DOM::RGBColor(TQColor(r, g, b).rgb());
 }
 
 void SVGColorImpl::setRGBColor(const DOM::DOMString &rgbColor)
@@ -395,15 +395,15 @@ void SVGColorImpl::setRGBColor(const DOM::DOMString &rgbColor)
 
 void SVGColorImpl::setRGBColorICCColor(const DOM::DOMString &rgbColor, const DOM::DOMString &iccColor)
 {
-	QColor color;
+	TQColor color;
 
-	QString content = iccColor.string().right(iccColor.string().length() - 10);
-	QString iccTarget = content.mid(0, content.find(','));
+	TQString content = iccColor.string().right(iccColor.string().length() - 10);
+	TQString iccTarget = content.mid(0, content.find(','));
 
-	QStringList colors = QStringList::split(',', content);
-	QString r = colors[1];
-	QString g = colors[2];
-	QString b = colors[3].left(colors[3].length() - 1);
+	TQStringList colors = TQStringList::split(',', content);
+	TQString r = colors[1];
+	TQString g = colors[2];
+	TQString b = colors[3].left(colors[3].length() - 1);
 
 	iccTarget = SVGURIReferenceImpl::getTarget(iccTarget);
 

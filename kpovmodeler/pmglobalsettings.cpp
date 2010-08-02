@@ -168,12 +168,12 @@ void PMGlobalSettings::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMGlobalSettings::description( ) const
+TQString PMGlobalSettings::description( ) const
 {
    return i18n( "global settings" );
 }
 
-void PMGlobalSettings::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMGlobalSettings::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "adc_bailout", m_adcBailout );
    e.setAttribute( "ambient_light", m_ambientLight.serializeXML( ) );
@@ -211,7 +211,7 @@ void PMGlobalSettings::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMGlobalSettings::readAttributes( const PMXMLHelper& h )
 {
-   QString str;
+   TQString str;
 
    m_adcBailout = h.doubleAttribute( "adc_bailout", adcBailoutDefault );
    m_ambientLight = h.colorAttribute( "ambient_light", ambientLightDefault );
@@ -432,7 +432,7 @@ void PMGlobalSettings::setRecursionLimit( int c )
    }
 }
 
-PMDialogEditBase* PMGlobalSettings::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMGlobalSettings::editWidget( TQWidget* parent ) const
 {
    return new PMGlobalSettingsEdit( parent );
 }

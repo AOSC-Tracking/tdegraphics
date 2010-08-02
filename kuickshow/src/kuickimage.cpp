@@ -1,7 +1,7 @@
 #include "kuickimage.h"
 
 KuickImage::KuickImage( const KuickFile * file, ImlibImage *im, ImlibData *id)
-    : QObject( 0L, 0L )
+    : TQObject( 0L, 0L )
 {
     myFile     = file;
     myOrigIm   = 0L;
@@ -212,9 +212,9 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 {
 //	qDebug("-- smoothResize: %i x %i", newWidth, newHeight);
 	
-	QImage *image = newQImage();
-	// Note: QImage::ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
-	QImage scaledImage = image->smoothScale(newWidth, newHeight, QImage::ScaleFree);
+	TQImage *image = newQImage();
+	// Note: TQImage::ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
+	TQImage scaledImage = image->smoothScale(newWidth, newHeight, TQImage::ScaleFree);
 		
 	delete image;
 	
@@ -235,7 +235,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	return false;
 }
 
-QImage * KuickImage::newQImage() const
+TQImage * KuickImage::newQImage() const
 {
 	ImlibImage *im;
 
@@ -255,7 +255,7 @@ QImage * KuickImage::newQImage() const
 	int w = im->rgb_width;
 	int h = im->rgb_height;
 	
-	QImage *image = new QImage( w, h, 32 );
+	TQImage *image = new TQImage( w, h, 32 );
 	uchar *rgb = im->rgb_data;
 	QRgb **destImageData = reinterpret_cast<QRgb**>( image->jumpTable() );
 	
@@ -282,7 +282,7 @@ QImage * KuickImage::newQImage() const
 	return image;	
 }
 
-ImlibImage * KuickImage::toImage( ImlibData *id, QImage& image )
+ImlibImage * KuickImage::toImage( ImlibData *id, TQImage& image )
 {
 	if ( image.isNull() )
 		return 0L;
@@ -339,7 +339,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 //	int w = myOrigWidth; //myViewport.width();
 	//int h = myOrigHeight; //myViewport.height();
 
-	//QImage dst(w, h, myIm->depth(), myIm->numColors(), myIm->bitOrder());
+	//TQImage dst(w, h, myIm->depth(), myIm->numColors(), myIm->bitOrder());
 	
 	//QRgb *scanline;
 	

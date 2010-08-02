@@ -25,13 +25,13 @@
 #endif
 
 #include "pmsolidobjectedit.h"
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 class PMPolynom;
 class PMFloatEdit;
 class PMFormulaLabel;
-class QSpinBox;
-class QCheckBox;
+class TQSpinBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMPolynom
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMPolynomEdit with parent and name
     */
-   PMPolynomEdit( QWidget* parent, const char* name = 0 );
+   PMPolynomEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -68,11 +68,11 @@ private:
    
    int m_currentOrder;
    
-   QWidget* m_pPolyWidget;
-   QPtrList<QWidget> m_labels;
-   QPtrList<PMFloatEdit> m_edits;
-   QCheckBox* m_pSturm;
-   QSpinBox* m_pOrder;
+   TQWidget* m_pPolyWidget;
+   TQPtrList<TQWidget> m_labels;
+   TQPtrList<PMFloatEdit> m_edits;
+   TQCheckBox* m_pSturm;
+   TQSpinBox* m_pOrder;
    bool m_readOnly;
 };
 

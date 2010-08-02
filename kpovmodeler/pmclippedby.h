@@ -45,7 +45,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMClippedBy( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -56,19 +56,19 @@ public:
    virtual bool dataChangeOnInsertRemove( ) const { return true; }
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMClippedByEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmclippedby" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmclippedby" ); }
 
    /** */
    virtual void childRemoved( PMObject* );

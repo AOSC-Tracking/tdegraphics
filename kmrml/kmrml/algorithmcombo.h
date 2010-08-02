@@ -31,7 +31,7 @@ namespace KMrml
         Q_OBJECT
 
     public:
-        AlgorithmCombo( QWidget *parent, const char *name = 0 );
+        AlgorithmCombo( TQWidget *parent, const char *name = 0 );
         ~AlgorithmCombo();
 
         void setAlgorithms( const AlgorithmList * algorithms );
@@ -43,7 +43,7 @@ namespace KMrml
         void selected( const Algorithm& );
 
     private slots:
-        void slotActivated( const QString& );
+        void slotActivated( const TQString& );
 
     private:
         const AlgorithmList *m_algorithms;

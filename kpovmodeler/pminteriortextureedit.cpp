@@ -20,12 +20,12 @@
 #include "pminteriortexture.h"
 #include "pmlinkedit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
 
-PMInteriorTextureEdit::PMInteriorTextureEdit( QWidget* parent, const char* name )
+PMInteriorTextureEdit::PMInteriorTextureEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;

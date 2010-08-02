@@ -10,13 +10,13 @@
 #ifndef _KPDF_THUMBNAILLIST_H_
 #define _KPDF_THUMBNAILLIST_H_
 
-#include <qscrollview.h>
-#include <qvaluevector.h>
-#include <qvbox.h>
+#include <tqscrollview.h>
+#include <tqvaluevector.h>
+#include <tqvbox.h>
 #include <ktoolbar.h>
 #include "core/observer.h"
 
-class QTimer;
+class TQTimer;
 class KActionCollection;
 
 class KPDFDocument;
@@ -27,17 +27,17 @@ class ThumbnailWidget;
  *
  * ...
  */
-class ThumbnailList : public QScrollView, public DocumentObserver
+class ThumbnailList : public TQScrollView, public DocumentObserver
 {
 Q_OBJECT
 	public:
-		ThumbnailList(QWidget *parent, KPDFDocument *document);
+		ThumbnailList(TQWidget *parent, KPDFDocument *document);
 		~ThumbnailList();
 
         // inherited: return thumbnails observer id
         uint observerId() const { return THUMBNAILS_ID; }
         // inherited: create thumbnails ( inherited as a DocumentObserver )
-        void notifySetup( const QValueVector< KPDFPage * > & pages, bool documentChanged );
+        void notifySetup( const TQValueVector< KPDFPage * > & pages, bool documentChanged );
         // inherited: hilihght current thumbnail ( inherited as DocumentObserver )
         void notifyViewportChanged( bool smoothMove );
         // inherited: redraw thumbnail ( inherited as DocumentObserver )
@@ -51,9 +51,9 @@ Q_OBJECT
         void updateWidgets();
 
         // called by ThumbnailWidgets to send (forward) rightClick signals
-        void forwardRightClick( const KPDFPage *, const QPoint & );
+        void forwardRightClick( const KPDFPage *, const TQPoint & );
         // called by ThumbnailWidgets to get the overlay bookmark pixmap
-        const QPixmap * getBookmarkOverlay() const;
+        const TQPixmap * getBookmarkOverlay() const;
 
     public slots:
         // these are connected to ThumbnailController buttons
@@ -61,30 +61,30 @@ Q_OBJECT
 
 	protected:
 		// scroll up/down the view
-		void keyPressEvent( QKeyEvent * e );
+		void keyPressEvent( TQKeyEvent * e );
 
 		// select a thumbnail by clicking on it
-		void contentsMousePressEvent( QMouseEvent * );
+		void contentsMousePressEvent( TQMouseEvent * );
 
 		// resize thumbnails to fit the width
-		void viewportResizeEvent( QResizeEvent * );
+		void viewportResizeEvent( TQResizeEvent * );
 
 		// file drop related events (an url may be dropped even here)
-		void dragEnterEvent( QDragEnterEvent* );
-		void dropEvent( QDropEvent* );
+		void dragEnterEvent( TQDragEnterEvent* );
+		void dropEvent( TQDropEvent* );
 
 	signals:
 		void urlDropped( const KURL& );
-		void rightClick( const KPDFPage *, const QPoint & );
+		void rightClick( const KPDFPage *, const TQPoint & );
 
 	private:
 		void delayedRequestVisiblePixmaps( int delayMs = 0 );
 		KPDFDocument *m_document;
 		ThumbnailWidget *m_selected;
-		QTimer *m_delayTimer;
-		QPixmap *m_bookmarkOverlay;
-		QValueVector<ThumbnailWidget *> m_thumbnails;
-		QValueList<ThumbnailWidget *> m_visibleThumbnails;
+		TQTimer *m_delayTimer;
+		TQPixmap *m_bookmarkOverlay;
+		TQValueVector<ThumbnailWidget *> m_thumbnails;
+		TQValueList<ThumbnailWidget *> m_visibleThumbnails;
 		int m_vectorIndex;
 
 	private slots:
@@ -100,8 +100,8 @@ Q_OBJECT
 class ThumbnailsBox : public QVBox
 {
 	public:
-		ThumbnailsBox( QWidget * parent ) : QVBox( parent ) {};
-		QSize sizeHint() const { return QSize(); }
+		ThumbnailsBox( TQWidget * parent ) : TQVBox( parent ) {};
+		TQSize sizeHint() const { return TQSize(); }
 };
 
 /**
@@ -115,7 +115,7 @@ class ThumbnailsBox : public QVBox
 class ThumbnailController : public KToolBar
 {
     public:
-        ThumbnailController( QWidget * parent, ThumbnailList * thumbnailList );
+        ThumbnailController( TQWidget * parent, ThumbnailList * thumbnailList );
 };
 
 #endif

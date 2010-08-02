@@ -57,7 +57,7 @@ void kpMainWindow::setupHelpMenuActions ()
     // -- Thurston
     d->m_actionHelpTakingScreenshots = new KAction (
         i18n ("Acquiring &Screenshots"), 0,
-        this, SLOT (slotHelpTakingScreenshots ()),
+        this, TQT_SLOT (slotHelpTakingScreenshots ()),
         ac, "help_taking_screenshots");
 
 
@@ -71,18 +71,18 @@ void kpMainWindow::enableHelpMenuDocumentActions (bool /*enable*/)
 
 
 // SYNC: kdebase/kwin/kwinbindings.cpp
-static QString printScreenShortcutString ()
+static TQString printScreenShortcutString ()
 {
     KConfigGroupSaver cfgGroupSaver (KGlobal::config (), "Global Shortcuts");
     KConfigBase *cfg = cfgGroupSaver.config ();
 
     // TODO: i18n() entry name?  kwinbindings.cpp seems to but it doesn't
     //       make sense.
-    const QString cfgEntryString = cfg->readEntry ("Desktop Screenshot");
+    const TQString cfgEntryString = cfg->readEntry ("Desktop Screenshot");
 
 
     // (only use 1st key sequence, if it exists)
-    const QString humanReadableShortcut =
+    const TQString humanReadableShortcut =
         KShortcut (cfgEntryString).seq (0).toString ();
 
     if (!humanReadableShortcut.isEmpty ())
@@ -125,7 +125,7 @@ void kpMainWindow::slotHelpTakingScreenshots ()
 }
 #endif
 
-    QString message;
+    TQString message;
     if (isRunningKDE)
     {
         message = i18n
@@ -185,10 +185,10 @@ void kpMainWindow::slotHelpTakingScreenshots ()
         true/*separator line*/);
 
     KActiveLabel *messageLabel = new KActiveLabel (message, &dlg);
-    disconnect (messageLabel, SIGNAL (linkClicked (const QString &)),
-                messageLabel, SLOT (openLink (const QString &)));
-    connect (messageLabel, SIGNAL (linkClicked (const QString &)),
-             this, SLOT (slotHelpTakingScreenshotsFollowLink (const QString &)));
+    disconnect (messageLabel, TQT_SIGNAL (linkClicked (const TQString &)),
+                messageLabel, TQT_SLOT (openLink (const TQString &)));
+    connect (messageLabel, TQT_SIGNAL (linkClicked (const TQString &)),
+             this, TQT_SLOT (slotHelpTakingScreenshotsFollowLink (const TQString &)));
 
     dlg.setMainWidget (messageLabel);
 
@@ -196,7 +196,7 @@ void kpMainWindow::slotHelpTakingScreenshots ()
 }
 
 // private
-void kpMainWindow::slotHelpTakingScreenshotsFollowLink (const QString &link)
+void kpMainWindow::slotHelpTakingScreenshotsFollowLink (const TQString &link)
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow::slotHelpTakingScreenshotsFollowLink("

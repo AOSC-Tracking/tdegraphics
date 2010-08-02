@@ -33,10 +33,10 @@
 #include <kptoolpreviewdialog.h>
 
 
-class QGroupBox;
-class QStringList;
-class QTimer;
-class QVBoxLayout;
+class TQGroupBox;
+class TQStringList;
+class TQTimer;
+class TQVBoxLayout;
 
 class KComboBox;
 
@@ -59,8 +59,8 @@ public:
     kpColorEffectCommand *createCommand () const;
 
 protected:
-    virtual QSize newDimensions () const;
-    virtual QPixmap transformPixmap (const QPixmap &pixmap,
+    virtual TQSize newDimensions () const;
+    virtual TQPixmap transformPixmap (const TQPixmap &pixmap,
                                      int targetWidth, int targetHeight) const;
 
 public:
@@ -77,11 +77,11 @@ protected slots:
 protected:
     static int s_lastWidth, s_lastHeight;
 
-    QTimer *m_delayedUpdateTimer;
+    TQTimer *m_delayedUpdateTimer;
 
     KComboBox *m_effectsComboBox;
-    QGroupBox *m_settingsGroupBox;
-    QVBoxLayout *m_settingsLayout;
+    TQGroupBox *m_settingsGroupBox;
+    TQVBoxLayout *m_settingsLayout;
 
     kpColorEffectWidget *m_colorEffectWidget;
 };

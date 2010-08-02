@@ -25,7 +25,7 @@
 #endif
 
 #include "pmcommand.h"
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "pmobject.h"
 
@@ -79,8 +79,8 @@ private:
    bool m_insertError;
 };
 
-typedef QPtrList<PMDeleteInfo> PMDeleteInfoList;
-typedef QPtrListIterator<PMDeleteInfo> PMDeleteInfoListIterator;
+typedef TQPtrList<PMDeleteInfo> PMDeleteInfoList;
+typedef TQPtrListIterator<PMDeleteInfo> PMDeleteInfoListIterator;
 
 /**
  * Command class for removing PMObjects
@@ -120,7 +120,7 @@ private:
    PMObjectList m_links;
    PMObjectList m_linkedDeclares;
    bool m_linksCreated;
-   QPtrList<PMMemento> m_dataChanges;
+   TQPtrList<PMMemento> m_dataChanges;
 };
 
 #endif

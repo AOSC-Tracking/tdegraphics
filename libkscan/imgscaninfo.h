@@ -20,7 +20,7 @@
 #ifndef __IMGSCANINFO_H__
 #define __IMGSCANINFO_H__
 
-#include <qstring.h>
+#include <tqstring.h>
 
 /* ----------------------------------------------------------------------
  *
@@ -32,18 +32,18 @@ public:
 
     int getXResolution();
     int getYResolution();
-    QString getMode();
-    QString getScannerName();
+    TQString getMode();
+    TQString getScannerName();
 
     void setXResolution( int );
     void setYResolution( int );
-    void setMode( const QString& );
-    void setScannerName( const QString& );
+    void setMode( const TQString& );
+    void setScannerName( const TQString& );
 private:
     int m_xRes;
     int m_yRes;
-    QString m_mode;
-    QString m_scanner;
+    TQString m_mode;
+    TQString m_scanner;
 
    class ImgScanInfoPrivate;
    ImgScanInfoPrivate *d;

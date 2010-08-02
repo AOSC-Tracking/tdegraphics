@@ -62,7 +62,7 @@ void PMBoundedBy::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMBoundedBy::description( ) const
+TQString PMBoundedBy::description( ) const
 {
    return i18n( "bounded by" );
 }
@@ -79,7 +79,7 @@ bool PMBoundedBy::clippedBy( ) const
    return cb;
 }
 
-void PMBoundedBy::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMBoundedBy::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    // no extra data at the moment
    Base::serialize( e, doc );
@@ -91,7 +91,7 @@ void PMBoundedBy::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMBoundedBy::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBoundedBy::editWidget( TQWidget* parent ) const
 {
    return new PMBoundedByEdit( parent );
 }

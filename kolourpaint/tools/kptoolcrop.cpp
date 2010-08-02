@@ -30,7 +30,7 @@
 
 #include <kptoolcrop.h>
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -50,8 +50,8 @@ kpSelection selectionBorderAndMovedTo0_0 (const kpSelection &sel)
 {
     kpSelection borderSel = sel;
 
-    borderSel.setPixmap (QPixmap ());  // only interested in border
-    borderSel.moveTo (QPoint (0, 0));
+    borderSel.setPixmap (TQPixmap ());  // only interested in border
+    borderSel.moveTo (TQPoint (0, 0));
 
     return borderSel;
 }
@@ -68,7 +68,7 @@ public:
     virtual ~kpToolCropSetImageCommand ();
 
     /* (uninteresting child of macro cmd) */
-    virtual QString name () const { return QString::null; }
+    virtual TQString name () const { return TQString::null; }
 
     virtual int size () const
     {
@@ -82,9 +82,9 @@ public:
 
 protected:
     kpColor m_backgroundColor;
-    QPixmap m_oldPixmap;
+    TQPixmap m_oldPixmap;
     kpSelection m_fromSelection;
-    QPixmap m_pixmapIfFromSelectionDoesntHaveOne;
+    TQPixmap m_pixmapIfFromSelectionDoesntHaveOne;
 };
 
 
@@ -94,7 +94,7 @@ kpToolCropSetImageCommand::kpToolCropSetImageCommand (kpMainWindow *mainWindow)
       m_fromSelection (*mainWindow->document ()->selection ()),
       m_pixmapIfFromSelectionDoesntHaveOne (
         m_fromSelection.pixmap () ?
-            QPixmap () :
+            TQPixmap () :
             mainWindow->document ()->getSelectedPixmap ())
 {
 }
@@ -114,7 +114,7 @@ void kpToolCropSetImageCommand::execute ()
     viewManager ()->setQueueUpdates ();
     {
         m_oldPixmap = kpPixmapFX::getPixmapAt (*document ()->pixmap (),
-            QRect (0, 0, m_fromSelection.width (), m_fromSelection.height ()));
+            TQRect (0, 0, m_fromSelection.width (), m_fromSelection.height ()));
 
 
         //
@@ -136,7 +136,7 @@ void kpToolCropSetImageCommand::execute ()
         //       any transparent pixels.
         //
 
-        QPixmap newDocPixmap (m_fromSelection.width (), m_fromSelection.height ());
+        TQPixmap newDocPixmap (m_fromSelection.width (), m_fromSelection.height ());
         kpPixmapFX::fill (&newDocPixmap, m_backgroundColor);
 
     #if DEBUG_KP_TOOL_CROP
@@ -144,7 +144,7 @@ void kpToolCropSetImageCommand::execute ()
                    << " pm=" << m_fromSelection.pixmap ()
                    << endl;
     #endif
-        QPixmap selTransparentPixmap;
+        TQPixmap selTransparentPixmap;
 
         if (m_fromSelection.pixmap ())
         {
@@ -166,15 +166,15 @@ void kpToolCropSetImageCommand::execute ()
         }
 
         kpPixmapFX::paintMaskTransparentWithBrush (&newDocPixmap,
-            QPoint (0, 0),
+            TQPoint (0, 0),
             m_fromSelection.maskForOwnType ());
 
         kpPixmapFX::paintPixmapAt (&newDocPixmap,
-            QPoint (0, 0),
+            TQPoint (0, 0),
             selTransparentPixmap);
 
 
-        document ()->setPixmapAt (newDocPixmap, QPoint (0, 0));
+        document ()->setPixmapAt (newDocPixmap, TQPoint (0, 0));
         document ()->selectionDelete ();
 
 
@@ -193,7 +193,7 @@ void kpToolCropSetImageCommand::unexecute ()
 
     viewManager ()->setQueueUpdates ();
     {
-        document ()->setPixmapAt (m_oldPixmap, QPoint (0, 0));
+        document ()->setPixmapAt (m_oldPixmap, TQPoint (0, 0));
         m_oldPixmap.resize (0, 0);
 
     #if DEBUG_KP_TOOL_CROP
@@ -274,9 +274,9 @@ kpToolCropCommand::kpToolCropCommand (kpMainWindow *mainWindow)
     #endif
         kpToolSelectionMoveCommand *moveCmd =
             new kpToolSelectionMoveCommand (
-                QString::null/*uninteresting child of macro cmd*/,
+                TQString::null/*uninteresting child of macro cmd*/,
                 mainWindow);
-        moveCmd->moveTo (QPoint (0, 0), true/*move on exec, not now*/);
+        moveCmd->moveTo (TQPoint (0, 0), true/*move on exec, not now*/);
         moveCmd->finalize ();
         addCommand (moveCmd);
     }
@@ -291,7 +291,7 @@ kpToolCropCommand::kpToolCropCommand (kpMainWindow *mainWindow)
     #if 0
         addCommand (
             new kpToolSelectionCreateCommand (
-                QString::null/*uninteresting child of macro cmd*/,
+                TQString::null/*uninteresting child of macro cmd*/,
                 selectionBorderAndMovedTo0_0 (*sel),
                 mainWindow));
     #endif

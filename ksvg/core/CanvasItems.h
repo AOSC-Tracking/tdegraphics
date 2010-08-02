@@ -21,7 +21,7 @@
 #ifndef CANVASITEMS_H
 #define CANVASITEMS_H
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 #include "CanvasItem.h"
 #include "SVGTextElementImpl.h"
 #include "SVGTextPathElementImpl.h"
@@ -85,7 +85,7 @@ protected:
 	void doEndMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle = 0.0);
 
 private:
-	void doMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle, const QString &marker);
+	void doMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle, const TQString &marker);
 };
 
 class CanvasText : public CanvasItem
@@ -120,7 +120,7 @@ public:
 	bool finalized() { return m_finalized; }
 
 	virtual void finalizePaintServer() = 0;
-	virtual void reference(const QString &href) = 0;
+	virtual void reference(const TQString &href) = 0;
 
 private:
 	bool m_finalized;

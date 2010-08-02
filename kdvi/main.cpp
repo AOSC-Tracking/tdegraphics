@@ -8,7 +8,7 @@
 #include <kurl.h>
 #include <klocale.h>
 #include <kaboutdata.h>
-#include <qdir.h>
+#include <tqdir.h>
 
 #include <stdlib.h>
 
@@ -77,22 +77,22 @@ int main(int argc, char** argv)
 
       if (!url.isValid()) 
       {
-        kdError(4300) << QString(I18N_NOOP("The URL %1 is not well-formed.")).arg(args->arg(0)) << endl;
+        kdError(4300) << TQString(I18N_NOOP("The URL %1 is not well-formed.")).arg(args->arg(0)) << endl;
         return -1;
       }
 
       if (!url.isLocalFile()) 
       {
-        kdError(4300) << QString(I18N_NOOP("The URL %1 does not point to a local file. You can only specify local "
+        kdError(4300) << TQString(I18N_NOOP("The URL %1 does not point to a local file. You can only specify local "
              "files if you are using the '--unique' option.")).arg(args->arg(0)) << endl;
         return -1;
       }
 
-      QString qualPath = QFileInfo(url.path()).absFilePath();
+      TQString qualPath = TQFileInfo(url.path()).absFilePath();
 
       app.dcopClient()->attach();
       // We need to register as "kviewshell" to stay compatible with existing DCOP-skripts.
-      QCString id = app.dcopClient()->registerAs("unique-kviewshell");
+      TQCString id = app.dcopClient()->registerAs("unique-kviewshell");
       if (id.isNull())
         kdError(4300) << "There was an error using dcopClient()->registerAs()." << endl;
       QCStringList apps = app.dcopClient()->registeredApplications();
@@ -100,22 +100,22 @@ int main(int argc, char** argv)
       {
         if ((*it).find("kviewshell") == 0) 
         {
-          QByteArray data, replyData;
-          QCString replyType;
-          QDataStream arg(data, IO_WriteOnly);
+          TQByteArray data, replyData;
+          TQCString replyType;
+          TQDataStream arg(data, IO_WriteOnly);
           bool result;
           arg << qualPath.stripWhiteSpace();
-          if (!app.dcopClient()->call( *it, "kmultipage", "is_file_loaded(QString)", data, replyType, replyData))
+          if (!app.dcopClient()->call( *it, "kmultipage", "is_file_loaded(TQString)", data, replyType, replyData))
             kdError(4300) << "There was an error using DCOP." << endl;
           else 
           {
-            QDataStream reply(replyData, IO_ReadOnly);
+            TQDataStream reply(replyData, IO_ReadOnly);
             if (replyType == "bool") 
             {
               reply >> result;
               if (result == true) 
               {
-                if (app.dcopClient()->send( *it, "kmultipage", "jumpToReference(QString)", url.ref()) == true)
+                if (app.dcopClient()->send( *it, "kmultipage", "jumpToReference(TQString)", url.ref()) == true)
                 {
                   app.dcopClient()->detach();
                   return 0;
@@ -143,7 +143,7 @@ int main(int argc, char** argv)
         // If the url doesn't already has a reference part, add the
         // argument of --goto to the url as reference, to make the
         // KViewShell jump to this page.
-        QString reference = args->getOption("goto");
+        TQString reference = args->getOption("goto");
         url.setHTMLRef(reference);
       }
       shell->openURL(url);

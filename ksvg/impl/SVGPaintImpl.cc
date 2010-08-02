@@ -77,7 +77,7 @@ void SVGPaintImpl::setPaint(unsigned short paintType, const DOM::DOMString &/*ur
 	m_paintType = paintType;
 }
 
-void SVGPaintImpl::setRGBColor(QColor color)
+void SVGPaintImpl::setRGBColor(TQColor color)
 {
 	m_paintType = SVG_PAINTTYPE_RGBCOLOR;
 	SVGColorImpl::setRGBColor(color);

@@ -19,19 +19,19 @@
 #ifndef IMAGEWINDOW_H
 #define IMAGEWINDOW_H
 
-#include <qevent.h>
+#include <tqevent.h>
 
 #include <kaction.h>
 #include <kurl.h>
 
 #include "imlibwidget.h"
 
-class QCursor;
-class QPopupMenu;
-class QRect;
-class QString;
-class QTimer;
-class QWidget;
+class TQCursor;
+class TQPopupMenu;
+class TQRect;
+class TQString;
+class TQTimer;
+class TQWidget;
 
 class KuickFile;
 
@@ -40,9 +40,9 @@ class ImageWindow : public ImlibWidget
   Q_OBJECT
 
 public:
-  ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent=0,
+  ImageWindow( ImData *_idata, ImlibData *id, TQWidget *parent=0,
 	       const char *name=0 );
-  ImageWindow( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
+  ImageWindow( ImData *_idata=0, TQWidget *parent=0, const char *name=0 );
 
   bool 		showNextImage( KuickFile * file );
   bool 		showNextImage( const KURL& url );
@@ -105,17 +105,17 @@ protected:
   virtual bool  canZoomTo( int newWidth, int newHeight );
   virtual void  rotated( KuickImage *kuim, int rotation );
 
-  virtual void  wheelEvent( QWheelEvent * );
-  virtual void	keyPressEvent( QKeyEvent * );
-  virtual void 	keyReleaseEvent( QKeyEvent * );
-  virtual void 	mousePressEvent( QMouseEvent * );
-  virtual void 	mouseReleaseEvent( QMouseEvent * );
-  virtual void 	mouseMoveEvent( QMouseEvent * );
-  virtual void 	focusInEvent( QFocusEvent * );
-  virtual void 	resizeEvent( QResizeEvent * );
-  virtual void 	dragEnterEvent( QDragEnterEvent * );
-  virtual void 	dropEvent( QDropEvent * );
-  virtual void  contextMenuEvent( QContextMenuEvent * );
+  virtual void  wheelEvent( TQWheelEvent * );
+  virtual void	keyPressEvent( TQKeyEvent * );
+  virtual void 	keyReleaseEvent( TQKeyEvent * );
+  virtual void 	mousePressEvent( TQMouseEvent * );
+  virtual void 	mouseReleaseEvent( TQMouseEvent * );
+  virtual void 	mouseMoveEvent( TQMouseEvent * );
+  virtual void 	focusInEvent( TQFocusEvent * );
+  virtual void 	resizeEvent( TQResizeEvent * );
+  virtual void 	dragEnterEvent( TQDragEnterEvent * );
+  virtual void 	dropEvent( TQDropEvent * );
+  virtual void  contextMenuEvent( TQContextMenuEvent * );
 
   void 			showWindow();
   enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };
@@ -138,8 +138,8 @@ protected:
   uint 		xposPress, yposPress;
 
 
-  QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
-  QWidget       *transWidget;
+  TQPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
+  TQWidget       *transWidget;
 
 
 protected slots:
@@ -165,11 +165,11 @@ private:
 
   bool 		myIsFullscreen;
   int           m_numHeads;
-  QString   m_saveDirectory;
+  TQString   m_saveDirectory;
 
   KActionCollection *m_actions;
 
-  static QCursor * s_handCursor;
+  static TQCursor * s_handCursor;
 };
 
 

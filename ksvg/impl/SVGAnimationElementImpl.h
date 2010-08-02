@@ -81,7 +81,7 @@ public:
 	SVGElementImpl *targetElement() const;
 	void setTargetElement(SVGElementImpl *target);
 
-	void applyAttribute(const QString &name, const QString &value);
+	void applyAttribute(const TQString &name, const TQString &value);
 
 	virtual void handleTimerEvent() { } //= 0;
 	virtual void setAttributes();
@@ -90,16 +90,16 @@ public:
 	double getCurrentTime() const;
 	double getSimpleDuration() const;
 
-	QString getRepeatCount() const { return m_repeatCount; }
-	QString getRepeatDuration() const { return m_repeatDur; }
+	TQString getRepeatCount() const { return m_repeatCount; }
+	TQString getRepeatDuration() const { return m_repeatDur; }
 
-	QString getAttributeName() const { return m_attributeName; }
-	QString getFrom() const { return m_from; }
-	QString getTo() const { return m_to; }
-	QString getBy() const { return m_by; }
+	TQString getAttributeName() const { return m_attributeName; }
+	TQString getFrom() const { return m_from; }
+	TQString getTo() const { return m_to; }
+	TQString getBy() const { return m_by; }
 
 protected:
-	double parseClockValue(const QString &data) const;
+	double parseClockValue(const TQString &data) const;
 
 	bool m_connected;
 	EFillMode m_fill : 1;
@@ -110,13 +110,13 @@ protected:
 	EAttributeType m_attributeType : 2;
 	SVGElementImpl *m_targetElement;
 
-	QString m_href;
-	QString m_attributeName;
-	QString m_from, m_to, m_by;
+	TQString m_href;
+	TQString m_attributeName;
+	TQString m_from, m_to, m_by;
 
 	double m_begin, m_end, m_duration;
 
-	QString m_repeatCount, m_repeatDur;
+	TQString m_repeatCount, m_repeatDur;
 
 	SVGStringListImpl *m_values, *m_keyTimes, *m_keySplines;
 

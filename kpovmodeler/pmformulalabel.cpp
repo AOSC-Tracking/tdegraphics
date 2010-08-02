@@ -18,36 +18,36 @@
 #include "pmformulalabel.h"
 #include "pmpolynomexponents.h"
 
-#include <qapplication.h>
-#include <qsimplerichtext.h>
-#include <qpainter.h>
+#include <tqapplication.h>
+#include <tqsimplerichtext.h>
+#include <tqpainter.h>
 
 const int c_indent = 3;
 const int c_dotSize = 3;
 
-QString PMFormulaLabel::s_xyz[3] =
+TQString PMFormulaLabel::s_xyz[3] =
 {
-   QString( "x" ), QString( "y" ), QString( "z" )
+   TQString( "x" ), TQString( "y" ), TQString( "z" )
 };
 
-QString PMFormulaLabel::s_digit[10] =
+TQString PMFormulaLabel::s_digit[10] =
 {
-   QString( "0" ),
-   QString( "1" ),
-   QString( "2" ),
-   QString( "3" ),
-   QString( "4" ),
-   QString( "5" ),
-   QString( "6" ),
-   QString( "7" ),
-   QString( "8" ),
-   QString( "9" )
+   TQString( "0" ),
+   TQString( "1" ),
+   TQString( "2" ),
+   TQString( "3" ),
+   TQString( "4" ),
+   TQString( "5" ),
+   TQString( "6" ),
+   TQString( "7" ),
+   TQString( "8" ),
+   TQString( "9" )
 };
 
-QString PMFormulaLabel::s_nullString = QString( "= 0" );
+TQString PMFormulaLabel::s_nullString = TQString( "= 0" );
 
-PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_exponents[0] = exp.exponent( 0 );
    m_exponents[1] = exp.exponent( 1 );
@@ -56,8 +56,8 @@ PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, QWidget* parent, 
    calculateSizeHint( );
 }
 
-PMFormulaLabel::PMFormulaLabel( int x, int y, int z, QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMFormulaLabel::PMFormulaLabel( int x, int y, int z, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_exponents[0] = x;
    m_exponents[1] = y;
@@ -70,9 +70,9 @@ PMFormulaLabel::~PMFormulaLabel( )
 {
 }
 
-void PMFormulaLabel::drawContents( QPainter* p )
+void PMFormulaLabel::drawContents( TQPainter* p )
 {
-   QRect cr = rect( );
+   TQRect cr = rect( );
    int i;
    cr.setLeft( cr.left( ) + c_indent );
    
@@ -84,13 +84,13 @@ void PMFormulaLabel::drawContents( QPainter* p )
       // draw dot
       int center = ( cr.top( ) + cr.bottom( ) ) / 2;
       int rad = c_dotSize / 2;
-      p->setBrush( QBrush( colorGroup( ).text( ) ) );
+      p->setBrush( TQBrush( colorGroup( ).text( ) ) );
       p->drawEllipse( cr.left( ), center - rad, c_dotSize, c_dotSize );
       cr.setLeft( cr.left( ) + c_dotSize + c_indent );
 
-      QFontMetrics m1( font( ) );
-      QFont f2 = exponentFont( );
-      QFontMetrics m2( f2 );
+      TQFontMetrics m1( font( ) );
+      TQFont f2 = exponentFont( );
+      TQFontMetrics m2( f2 );
       int up = m1.height( ) / 2;
       
       for( i = 0; i < 3; i++ )
@@ -115,9 +115,9 @@ void PMFormulaLabel::drawContents( QPainter* p )
    }
 }
 
-void PMFormulaLabel::paintEvent( QPaintEvent* ev )
+void PMFormulaLabel::paintEvent( TQPaintEvent* ev )
 {
-   QPainter paint( this );
+   TQPainter paint( this );
    if( ev->rect( ).intersects( rect( ) ) )
    {
       paint.setClipRegion( ev->region( ).intersect( rect( ) ) );
@@ -129,12 +129,12 @@ void PMFormulaLabel::calculateSizeHint( )
 {
    int sum = m_exponents[0] + m_exponents[1] + m_exponents[2];
 
-   QFontMetrics m1( font( ) );
+   TQFontMetrics m1( font( ) );
    if( sum == 0 )
       m_sizeHint.setWidth( m1.width( s_nullString ) );
    else
    {
-      QFontMetrics m2( exponentFont( ) );
+      TQFontMetrics m2( exponentFont( ) );
       int width = c_indent * 3 + c_dotSize;
       int i;
       for( i = 0; i < 3; i++ )
@@ -151,25 +151,25 @@ void PMFormulaLabel::calculateSizeHint( )
    m_sizeHint.setHeight( m1.height( ) + 7 );
 }
 
-QSize PMFormulaLabel::sizeHint( ) const
+TQSize PMFormulaLabel::sizeHint( ) const
 {
    return minimumSizeHint( );
 }
 
-QSize PMFormulaLabel::minimumSizeHint( ) const
+TQSize PMFormulaLabel::minimumSizeHint( ) const
 {
    return m_sizeHint;
 }
 
-void PMFormulaLabel::fontChange( const QFont& )
+void PMFormulaLabel::fontChange( const TQFont& )
 {
    calculateSizeHint( );
 }
 
 
-QFont PMFormulaLabel::exponentFont( ) const
+TQFont PMFormulaLabel::exponentFont( ) const
 {
-   QFont small = font( );
+   TQFont small = font( );
    int fs = small.pointSize( );
    if( fs > 0 )
    {

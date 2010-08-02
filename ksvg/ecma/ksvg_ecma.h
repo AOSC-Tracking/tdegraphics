@@ -21,7 +21,7 @@
 #ifndef KSVGEcma_H
 #define KSVGEcma_H
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 #include "ksvg_bridge.h"
 
@@ -49,7 +49,7 @@ namespace KSVG
 	class SVGDOMNodeBridge;
 }
 
-class QVariant;
+class TQVariant;
 
 class KSVGEcmaEventListener;
 class KSVGScriptInterpreter;
@@ -63,7 +63,7 @@ namespace KSVG
 	KJS::Value getDOMEvent(KJS::ExecState *, KSVG::SVGEventImpl *);
 	KJS::Value getString(DOM::DOMString);
 	
-	QVariant valueToVariant(KJS::ExecState *, const KJS::Value &);
+	TQVariant valueToVariant(KJS::ExecState *, const KJS::Value &);
 	
 	DOM::Node toNode(const KJS::Value &);
 	
@@ -88,7 +88,7 @@ public:
 	KSVGScriptInterpreter *interpreter() { return m_interpreter; }
 
 	KSVG::SVGEventListener *createEventListener(DOM::DOMString type);
-	QString valueOfEventListener(KSVG::SVGEventListener *listener) const;
+	TQString valueOfEventListener(KSVG::SVGEventListener *listener) const;
 	void addEventListener(KSVGEcmaEventListener *listener);
 	void removeEventListener(KSVGEcmaEventListener *listener);
 	bool hasEventListeners();
@@ -96,7 +96,7 @@ public:
 	void finishedWithEvent(KSVG::SVGEventImpl *event);
 
 	KJS::Value getUrl(KJS::ExecState *exec, ::KURL url);
-	void postUrl(KJS::ExecState *exec, ::KURL url, const QString &data, const QString &mimeType, const QString &contentEncoding, KJS::Object &callBackFunction);
+	void postUrl(KJS::ExecState *exec, ::KURL url, const TQString &data, const TQString &mimeType, const TQString &contentEncoding, KJS::Object &callBackFunction);
 
 private:
 	bool m_init, m_hasListeners;
@@ -105,7 +105,7 @@ private:
 
 	KSVG::Window *m_window;
 	KSVGScriptInterpreter *m_interpreter;
-	QPtrList<KSVGEcmaEventListener> m_ecmaEventListeners;
+	TQPtrList<KSVGEcmaEventListener> m_ecmaEventListeners;
 
 };
 

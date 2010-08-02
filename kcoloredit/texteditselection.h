@@ -18,9 +18,9 @@
 #ifndef TEXTEDITSELECTION_H
 #define TEXTEDITSELECTION_H
 
-#include <qwidget.h>
-#include <qlineedit.h>
-#include <qlayout.h>
+#include <tqwidget.h>
+#include <tqlineedit.h>
+#include <tqlayout.h>
 
 #include "color.h"
 
@@ -28,12 +28,12 @@
   * can be set.
   * @author Artur Rataj
   */
-class TextEditSelection : public QWidget  {
+class TextEditSelection : public TQWidget  {
    Q_OBJECT
 
 public:
 	/** Constructs the widget */
-	TextEditSelection(QWidget *parent=0, const char *name=0);
+	TextEditSelection(TQWidget *parent=0, const char *name=0);
 	~TextEditSelection();
 	
 signals:
@@ -46,8 +46,8 @@ public slots:
 	
 protected:
 	/** Adds a component line edit */
-	void addComponent(const int index, QLineEdit* lineEdit, const int maxValue, const QString& labelString,
-		const int row, const int column, QGridLayout* layout);
+	void addComponent(const int index, TQLineEdit* lineEdit, const int maxValue, const TQString& labelString,
+		const int row, const int column, TQGridLayout* layout);
 	/** sets RGB string in rgbStringLineEdit */
 	void setRgbString(const int red, const int green, const int blue);
 		
@@ -77,9 +77,9 @@ protected:
 	       COMPONENTS_NUM = 6 };
 	
 	/** Line edit widgets table */
-	QLineEdit* lineEditTable[COMPONENTS_NUM];
+	TQLineEdit* lineEditTable[COMPONENTS_NUM];
 	/** RGB hex string line edit widgets table */
-	QLineEdit* rgbStringLineEdit;
+	TQLineEdit* rgbStringLineEdit;
 	/** The selected color */
 	Color color;	
 	/** A flag that components are matched */

@@ -25,7 +25,7 @@
 
 
 #include <kdialog.h>
-class QTextEdit;
+class TQTextEdit;
 class KConfig;
 
 /**
@@ -38,7 +38,7 @@ public:
    /**
     * Standard constructor
     */
-   PMPovrayOutputWidget( QWidget* parent = 0, const char* name = 0 );
+   PMPovrayOutputWidget( TQWidget* parent = 0, const char* name = 0 );
    /**
     * Destructor
     */
@@ -55,7 +55,7 @@ public slots:
    /**
     * Adds the text to the output
     */
-   void slotText( const QString& output );
+   void slotText( const TQString& output );
 
 protected slots:
    /**
@@ -64,13 +64,13 @@ protected slots:
    void slotClose( );
 
 protected:
-   virtual void resizeEvent( QResizeEvent* ev );
+   virtual void resizeEvent( TQResizeEvent* ev );
 
 private:
-   QTextEdit* m_pTextView;
+   TQTextEdit* m_pTextView;
    int m_startOfLastLine;
-   QString m_output;
-   static QSize s_size;
+   TQString m_output;
+   static TQSize s_size;
 };
 
 

@@ -22,7 +22,7 @@
 #include "pmprototypemanager.h"
 #include "pmpart.h"
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 #include <klocale.h>
 
 PMDefinePropertyClass( PMDeclare, PMDeclareProperty );
@@ -73,16 +73,16 @@ PMDeclare::~PMDeclare( )
 {
 }
 
-QString PMDeclare::description( ) const
+TQString PMDeclare::description( ) const
 {
    PMPart* pPart = part( );
-   QString d = i18n( "declaration" );
+   TQString d = i18n( "declaration" );
 
    if( m_pDeclareType && pPart )
    {
-      const QValueList<PMDeclareDescription>& descriptions
+      const TQValueList<PMDeclareDescription>& descriptions
          = pPart->prototypeManager( )->declarationTypes( );
-      QValueList<PMDeclareDescription>::const_iterator it;
+      TQValueList<PMDeclareDescription>::const_iterator it;
       bool found = false;
       for( it = descriptions.begin( ); it != descriptions.end( ) && !found; ++it )
       {
@@ -96,16 +96,16 @@ QString PMDeclare::description( ) const
    return d;
 }
 
-QString PMDeclare::pixmap( ) const
+TQString PMDeclare::pixmap( ) const
 {
    PMPart* pPart = part( );
-   QString d = "pmdeclare";
+   TQString d = "pmdeclare";
 
    if( m_pDeclareType && pPart )
    {
-      const QValueList<PMDeclareDescription>& descriptions
+      const TQValueList<PMDeclareDescription>& descriptions
          = pPart->prototypeManager( )->declarationTypes( );
-      QValueList<PMDeclareDescription>::const_iterator it;
+      TQValueList<PMDeclareDescription>::const_iterator it;
       bool found = false;
       for( it = descriptions.begin( ); it != descriptions.end( ) && !found; ++it )
       {
@@ -119,7 +119,7 @@ QString PMDeclare::pixmap( ) const
    return d;
 }
 
-void PMDeclare::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMDeclare::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "id", m_id );
    Base::serialize( e, doc );
@@ -131,12 +131,12 @@ void PMDeclare::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMDeclare::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMDeclare::editWidget( TQWidget* parent ) const
 {
    return new PMDeclareEdit( parent );
 }
 
-void PMDeclare::setID( const QString& newID )
+void PMDeclare::setID( const TQString& newID )
 {
    if( newID != m_id )
    {
@@ -150,10 +150,10 @@ void PMDeclare::setID( const QString& newID )
    }
 }
 
-QString PMDeclare::declareType( ) const
+TQString PMDeclare::declareType( ) const
 {
    if( !m_pDeclareType )
-      return QString( "None" );
+      return TQString( "None" );
    return m_pDeclareType->className( );
 }
 

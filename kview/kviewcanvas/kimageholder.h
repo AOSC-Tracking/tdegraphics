@@ -20,13 +20,13 @@
 #ifndef _KIMAGEHOLDER_H
 #define _KIMAGEHOLDER_H
 
-#include <qwidget.h>
-class QRect;
-class QPainter;
-class QPen;
-class QPixmap;
+#include <tqwidget.h>
+class TQRect;
+class TQPainter;
+class TQPen;
+class TQPixmap;
 class KPixmap;
-class QPoint;
+class TQPoint;
 
 /**
  * @short Image widget
@@ -36,15 +36,15 @@ class KImageHolder : public QWidget
 {
 	Q_OBJECT
 	public:
-		KImageHolder( QWidget *parent = 0, const char * name = 0 );
+		KImageHolder( TQWidget *parent = 0, const char * name = 0 );
 
 		virtual ~KImageHolder();
 
 		void clearSelection();
 
 		void setImage( const KPixmap & );
-		void setImage( const QImage & );
-		void setImage( const QMovie & );
+		void setImage( const TQImage & );
+		void setImage( const TQMovie & );
 
 		/**
 		 * clears the ImageHolder
@@ -54,37 +54,37 @@ class KImageHolder : public QWidget
 		/**
 		 * the selected rect
 		 */
-		QRect selection() const;
+		TQRect selection() const;
 
-		QSize sizeHint() const;
+		TQSize sizeHint() const;
 
-		void setDrawRect( const QRect & rect ) { m_drawRect = rect; }
-		const QRect & drawRect() const { return m_drawRect; }
+		void setDrawRect( const TQRect & rect ) { m_drawRect = rect; }
+		const TQRect & drawRect() const { return m_drawRect; }
 
 	signals:
-		void contextPress( const QPoint& );
-		void selected( const QRect & );
+		void contextPress( const TQPoint& );
+		void selected( const TQRect & );
 		void wannaScroll( int dx, int dy );
-		void cursorPos( const QPoint & );
+		void cursorPos( const TQPoint & );
 
 	protected:
-		void mousePressEvent( QMouseEvent * );
-		void mouseMoveEvent( QMouseEvent * );
-		void mouseReleaseEvent( QMouseEvent * );
-		void paintEvent( QPaintEvent * );
-		virtual void timerEvent( QTimerEvent * );
+		void mousePressEvent( TQMouseEvent * );
+		void mouseMoveEvent( TQMouseEvent * );
+		void mouseReleaseEvent( TQMouseEvent * );
+		void paintEvent( TQPaintEvent * );
+		virtual void timerEvent( TQTimerEvent * );
 
 	private:
-		void drawSelect( QPainter & );
+		void drawSelect( TQPainter & );
 		void eraseSelect();
 
 		void setPixmap( const KPixmap & );
 
 	private:
-		QRect m_selection;
-		QRect m_drawRect;
-		QPoint m_scrollpos;
-		QPoint m_selectionStartPoint;
+		TQRect m_selection;
+		TQRect m_drawRect;
+		TQPoint m_scrollpos;
+		TQPoint m_selectionStartPoint;
 
 		const KPixmap & checkboardPixmap();
 
@@ -93,7 +93,7 @@ class KImageHolder : public QWidget
 		int m_scrollTimerId;
 		int m_xOffset, m_yOffset;
 
-		QPen *m_pen;
+		TQPen *m_pen;
 
 		KPixmap * m_pPixmap;
 		KPixmap * m_pDoubleBuffer;

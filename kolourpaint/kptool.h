@@ -28,17 +28,17 @@
 #ifndef __kp_tool_h__
 #define __kp_tool_h__
 
-#include <qobject.h>
-#include <qpoint.h>
-#include <qrect.h>
-#include <qsize.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqpoint.h>
+#include <tqrect.h>
+#include <tqsize.h>
+#include <tqstring.h>
 
 #include <kpdefs.h>
 
 
-class QIconSet;
-class QPixmap;
+class TQIconSet;
+class TQPixmap;
 
 class KKeySequence;
 class KShortcut;
@@ -60,13 +60,13 @@ class kpTool : public QObject
 Q_OBJECT
 
 public:
-    kpTool (const QString &text, const QString &description,
+    kpTool (const TQString &text, const TQString &description,
             int key,
             kpMainWindow *mainWindow, const char *name);
     virtual ~kpTool ();
 
 private:
-    void init (const QString &text, const QString &description,
+    void init (const TQString &text, const TQString &description,
                int key,
                kpMainWindow *mainWindow, const char *name);
 
@@ -78,21 +78,21 @@ protected:
     kpToolAction *m_action;
 
 signals:
-    void actionToolTipChanged (const QString &string);
+    void actionToolTipChanged (const TQString &string);
 
 protected slots:
-    void slotActionToolTipChanged (const QString &string);
+    void slotActionToolTipChanged (const TQString &string);
 
 public:
-    QString text () const;
-    void setText (const QString &text);
+    TQString text () const;
+    void setText (const TQString &text);
 
-    static QString toolTipForTextAndShortcut (const QString &text,
+    static TQString toolTipForTextAndShortcut (const TQString &text,
         const KShortcut &shortcut);
-    QString toolTip () const;
+    TQString toolTip () const;
 
-    QString description () const;
-    void setDescription (const QString &description);
+    TQString description () const;
+    void setDescription (const TQString &description);
 
     int key () const;
     void setKey (int key);
@@ -114,8 +114,8 @@ public:
     const char *name () const;
 
 
-    static QRect neededRect (const QRect &rect, int lineWidth);
-    static QPixmap neededPixmap (const QPixmap &pixmap, const QRect &boundingRect);
+    static TQRect neededRect (const TQRect &rect, int lineWidth);
+    static TQPixmap neededPixmap (const TQPixmap &pixmap, const TQRect &boundingRect);
 
     bool hasCurrentPoint () const;
     // Returns the position of the cursor relative to the topleft point of
@@ -134,7 +134,7 @@ public:
     //
     // Keep in mind that if viewUnderStartPoint(), this can return coordinates
     // outside of the document/view.
-    QPoint currentPoint (bool zoomToDoc = true) const;
+    TQPoint currentPoint (bool zoomToDoc = true) const;
 
 public slots:
     // Call this when something below the mouse cursor may have changed
@@ -151,8 +151,8 @@ public slots:
 
 private:
     // Same as above except that you claim you know better than currentPoint()
-    void somethingBelowTheCursorChanged (const QPoint &currentPoint_,
-                                         const QPoint &currentViewPoint_);
+    void somethingBelowTheCursorChanged (const TQPoint &currentPoint_,
+                                         const TQPoint &currentViewPoint_);
 
 public:
     // called when the tool is selected
@@ -177,25 +177,25 @@ public:
 
 signals:
     // emitted after beginDraw() has been called
-    void beganDraw (const QPoint &point);
+    void beganDraw (const TQPoint &point);
 
     // Emitted just before draw() is called in mouseMoveEvent().  Slots
     // connected to this signal should return in <scrolled> whether the
     // mouse pos may have changed.  Used by drag scrolling.
-    void movedAndAboutToDraw (const QPoint &currentPoint, const QPoint &lastPoint,
+    void movedAndAboutToDraw (const TQPoint &currentPoint, const TQPoint &lastPoint,
                               int zoomLevel,
                               bool *scrolled);
 
     // emitted after endDraw() has been called
-    void endedDraw (const QPoint &point);
+    void endedDraw (const TQPoint &point);
 
     // emitted after cancelShape() has been called
-    void cancelledShape (const QPoint &point);
+    void cancelledShape (const TQPoint &point);
 
 
 public:
-    QIconSet iconSet (int forceSize = 0) const;
-    QString iconName () const;
+    TQIconSet iconSet (int forceSize = 0) const;
+    TQString iconName () const;
     kpToolAction *action ();
 
 signals:
@@ -215,20 +215,20 @@ protected:
 
     // mouse move without button pressed
     // (only m_currentPoint & m_currentViewPoint is defined)
-    virtual void hover (const QPoint &point);
+    virtual void hover (const TQPoint &point);
 
     // this is useful for "instant" tools like the Pen & Eraser
-    virtual void draw (const QPoint &thisPoint, const QPoint &lastPoint,
-                        const QRect &normalizedRect);
+    virtual void draw (const TQPoint &thisPoint, const TQPoint &lastPoint,
+                        const TQRect &normalizedRect);
 
     // (m_mouseButton will not change from beginDraw())
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
 
-    virtual void endDraw (const QPoint &thisPoint, const QRect &normalizedRect);
+    virtual void endDraw (const TQPoint &thisPoint, const TQRect &normalizedRect);
 
-    virtual void endShape (const QPoint &thisPoint = QPoint (),
-                           const QRect &normalizedRect = QRect ())
+    virtual void endShape (const TQPoint &thisPoint = TQPoint (),
+                           const TQRect &normalizedRect = TQRect ())
     {
         endDraw (thisPoint, normalizedRect);
     }
@@ -280,7 +280,7 @@ protected:
     int m_mouseButton;  /* 0 = left, 1 = right */
     bool m_shiftPressed, m_controlPressed, m_altPressed;  // m_altPressed is unreliable
     bool m_beganDraw;  // set after beginDraw() is called, unset before endDraw() is called
-    QPoint m_startPoint,
+    TQPoint m_startPoint,
            m_currentPoint, m_currentViewPoint,
            m_lastPoint;
 
@@ -292,45 +292,45 @@ protected:
     void endInternal ();
 
     void beginDrawInternal ();
-    void endDrawInternal (const QPoint &thisPoint, const QRect &normalizedRect,
+    void endDrawInternal (const TQPoint &thisPoint, const TQRect &normalizedRect,
                           bool wantEndShape = false);
     void cancelShapeInternal ();
-    void endShapeInternal (const QPoint &thisPoint = QPoint (),
-                           const QRect &normalizedRect = QRect ());
+    void endShapeInternal (const TQPoint &thisPoint = TQPoint (),
+                           const TQRect &normalizedRect = TQRect ());
 
     friend class kpView;
 
     // If you're reimplementing any of these, you probably don't know what
     // you're doing - reimplement begin(),beginDraw(),draw(),cancelShape(),
     // endDraw() etc. instead.
-    virtual void mousePressEvent (QMouseEvent *e);
-    virtual void mouseMoveEvent (QMouseEvent *e);
-    virtual void mouseReleaseEvent (QMouseEvent *e);
-    virtual void wheelEvent (QWheelEvent *e);
+    virtual void mousePressEvent (TQMouseEvent *e);
+    virtual void mouseMoveEvent (TQMouseEvent *e);
+    virtual void mouseReleaseEvent (TQMouseEvent *e);
+    virtual void wheelEvent (TQWheelEvent *e);
     
-    virtual void keyPressEvent (QKeyEvent *e);
-    virtual void keyReleaseEvent (QKeyEvent *e);
+    virtual void keyPressEvent (TQKeyEvent *e);
+    virtual void keyReleaseEvent (TQKeyEvent *e);
     
-    virtual void imStartEvent(QIMEvent *){}
-    virtual void imComposeEvent(QIMEvent *){}
-    virtual void imEndEvent(QIMEvent *){}
+    virtual void imStartEvent(TQIMEvent *){}
+    virtual void imComposeEvent(TQIMEvent *){}
+    virtual void imEndEvent(TQIMEvent *){}
     
 private:
-    void keyUpdateModifierState (QKeyEvent *e);
+    void keyUpdateModifierState (TQKeyEvent *e);
     void notifyModifierStateChanged ();
 protected:
     virtual void setShiftPressed (bool pressed);
     virtual void setControlPressed (bool pressed);
     virtual void setAltPressed (bool pressed);
-    virtual void focusInEvent (QFocusEvent *e);
-    virtual void focusOutEvent (QFocusEvent *e);
-    virtual void enterEvent (QEvent *e);
-    virtual void leaveEvent (QEvent *e);
+    virtual void focusInEvent (TQFocusEvent *e);
+    virtual void focusOutEvent (TQFocusEvent *e);
+    virtual void enterEvent (TQEvent *e);
+    virtual void leaveEvent (TQEvent *e);
 
     // 0 = left, 1 = right, -1 = other (none, left+right, mid)
     static int mouseButton (const Qt::ButtonState &buttonState);
 
-    QString m_text, m_description;
+    TQString m_text, m_description;
     const char *m_name;
 
     kpMainWindow *m_mainWindow;
@@ -346,36 +346,36 @@ protected:
 public:
     // Returns "(Left|Right) click to cancel." where Left or Right is chosen
     // depending on which one is the _opposite_ of <mouseButton>
-    static QString cancelUserMessage (int mouseButton);
-    QString cancelUserMessage () const;
+    static TQString cancelUserMessage (int mouseButton);
+    TQString cancelUserMessage () const;
 
-    QString userMessage () const;
-    void setUserMessage (const QString &userMessage = QString::null);
+    TQString userMessage () const;
+    void setUserMessage (const TQString &userMessage = TQString::null);
 
-    QPoint userShapeStartPoint () const;
-    QPoint userShapeEndPoint () const;
+    TQPoint userShapeStartPoint () const;
+    TQPoint userShapeEndPoint () const;
     static int calculateLength (int start, int end);
-    void setUserShapePoints (const QPoint &startPoint = KP_INVALID_POINT,
-                             const QPoint &endPoint = KP_INVALID_POINT,
+    void setUserShapePoints (const TQPoint &startPoint = KP_INVALID_POINT,
+                             const TQPoint &endPoint = KP_INVALID_POINT,
                              bool setSize = true);
 
-    QSize userShapeSize () const;
+    TQSize userShapeSize () const;
     int userShapeWidth () const;
     int userShapeHeight () const;
-    void setUserShapeSize (const QSize &size = KP_INVALID_SIZE);
+    void setUserShapeSize (const TQSize &size = KP_INVALID_SIZE);
     void setUserShapeSize (int width, int height);
 
 signals:
-    void userMessageChanged (const QString &userMessage);
-    void userShapePointsChanged (const QPoint &startPoint = KP_INVALID_POINT,
-                                 const QPoint &endPoint = KP_INVALID_POINT);
-    void userShapeSizeChanged (const QSize &size);
+    void userMessageChanged (const TQString &userMessage);
+    void userShapePointsChanged (const TQPoint &startPoint = KP_INVALID_POINT,
+                                 const TQPoint &endPoint = KP_INVALID_POINT);
+    void userShapeSizeChanged (const TQSize &size);
     void userShapeSizeChanged (int width, int height);
 
 protected:
-    QString m_userMessage;
-    QPoint m_userShapeStartPoint, m_userShapeEndPoint;
-    QSize m_userShapeSize;
+    TQString m_userMessage;
+    TQPoint m_userShapeStartPoint, m_userShapeEndPoint;
+    TQSize m_userShapeSize;
 
 
 public:
@@ -406,10 +406,10 @@ public:
     // continueButtonText = i18n ("Rotat&e (Image|Selection)");
     static bool warnIfBigImageSize (int oldWidth, int oldHeight,
                                     int newWidth, int newHeight,
-                                    const QString &text,
-                                    const QString &caption,
-                                    const QString &continueButtonText,
-                                    QWidget *parent);
+                                    const TQString &text,
+                                    const TQString &caption,
+                                    const TQString &continueButtonText,
+                                    TQWidget *parent);
 
 
 protected:

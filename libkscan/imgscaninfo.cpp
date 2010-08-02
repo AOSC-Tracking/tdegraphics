@@ -54,22 +54,22 @@ int ImgScanInfo::getYResolution()
     return m_yRes;
 }
 
-void ImgScanInfo::setMode( const QString& smode )
+void ImgScanInfo::setMode( const TQString& smode )
 {
     m_mode = smode;
 }
 
-QString ImgScanInfo::getMode()
+TQString ImgScanInfo::getMode()
 {
     return m_mode;
 }
 
-void ImgScanInfo::setScannerName( const QString& name )
+void ImgScanInfo::setScannerName( const TQString& name )
 {
     m_scanner = name;
 }
 
-QString ImgScanInfo::getScannerName()
+TQString ImgScanInfo::getScannerName()
 {
     return m_scanner;
 }

@@ -101,12 +101,12 @@ PMWarp::~PMWarp( )
 {
 }
 
-QString PMWarp::description( ) const
+TQString PMWarp::description( ) const
 {
    return i18n( "warp" );
 }
 
-void PMWarp::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
+void PMWarp::serialize( TQDomElement& e, TQDomDocument& /*doc*/ ) const
 {
    bool mapping = false;
 
@@ -164,7 +164,7 @@ void PMWarp::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
 void PMWarp::readAttributes( const PMXMLHelper& h )
 {
    bool mapping = false;
-   QString str = h.stringAttribute( "warp_type", "repeat" );
+   TQString str = h.stringAttribute( "warp_type", "repeat" );
 
    if( str == "repeat" )
    {
@@ -467,7 +467,7 @@ void PMWarp::setMajorRadius( const double c )
    }
 }
 
-PMDialogEditBase* PMWarp::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMWarp::editWidget( TQWidget* parent ) const
 {
    return new PMWarpEdit( parent );
 }

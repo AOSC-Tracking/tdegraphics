@@ -192,12 +192,12 @@ void SVGRadialGradientElementImpl::setAttributes()
 		KSVG_SET_ALT_ATTRIBUTE(R, "50%")
 }
 
-QMap<QString, DOM::DOMString> SVGRadialGradientElementImpl::gradientAttributes()
+TQMap<TQString, DOM::DOMString> SVGRadialGradientElementImpl::gradientAttributes()
 {
 	setAttributes();
 
-	QMap<QString, DOM::DOMString> gradAttributes;
-	QDictIterator<DOM::DOMString> it(attributes());
+	TQMap<TQString, DOM::DOMString> gradAttributes;
+	TQDictIterator<DOM::DOMString> it(attributes());
 
 	for(; it.current(); ++it)
 	{

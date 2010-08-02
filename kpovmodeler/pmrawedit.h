@@ -27,7 +27,7 @@
 #include "pmnamedobjectedit.h"
 
 class PMRaw;
-class QMultiLineEdit;
+class TQMultiLineEdit;
 
 /**
  * Dialog edit class for @ref PMRaw.
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMRawEdit with parent and name
     */
-   PMRawEdit( QWidget* parent, const char* name = 0 );
+   PMRawEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -55,7 +55,7 @@ protected:
 
 private:
    PMRaw* m_pDisplayedObject;
-   QMultiLineEdit* m_pEdit;
+   TQMultiLineEdit* m_pEdit;
 };
 
 

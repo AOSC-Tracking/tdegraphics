@@ -9,7 +9,7 @@
 
 
 #include "exif.h"
-#include <qwmatrix.h>
+#include <tqwmatrix.h>
 #include <kglobal.h>
 
 
@@ -214,7 +214,7 @@ static int BytesPerFormat[] = {0,1,1,2,4,8,1,1,2,4,8,4,8};
 //--------------------------------------------------------------------------
 // Parse the marker stream until SOS or EOI is seen;
 //--------------------------------------------------------------------------
-int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
+int ExifData::ReadJpegSections (TQFile & infile, ReadMode_t ReadMode)
 {
     int a;
 
@@ -525,11 +525,11 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
         switch(Tag){
 
             case TAG_MAKE:
-                ExifData::CameraMake = QString::fromLatin1((const char*)ValuePtr, 31);
+                ExifData::CameraMake = TQString::fromLatin1((const char*)ValuePtr, 31);
                 break;
 
             case TAG_MODEL:
-                ExifData::CameraModel = QString::fromLatin1((const char*)ValuePtr, 39);
+                ExifData::CameraModel = TQString::fromLatin1((const char*)ValuePtr, 39);
 		break;
 
             case TAG_ORIENTATION:
@@ -537,7 +537,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 break;
 
             case TAG_DATETIME_ORIGINAL:
-		DateTime = QString::fromLatin1((const char*)ValuePtr, 19);
+		DateTime = TQString::fromLatin1((const char*)ValuePtr, 19);
                 break;
 
             case TAG_USERCOMMENT:
@@ -558,12 +558,12 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                         int c;
                         c = (ValuePtr)[a];
                         if (c != '\0' && c != ' '){
-                            UserComment = QString::fromLatin1((const char*)(a+ValuePtr), 199);
+                            UserComment = TQString::fromLatin1((const char*)(a+ValuePtr), 199);
                             break;
                         }
                     }
                 }else{
-                    UserComment = QString::fromLatin1((const char*)ValuePtr, 199);
+                    UserComment = TQString::fromLatin1((const char*)ValuePtr, 199);
                 }
                 break;
 
@@ -740,7 +740,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
 //--------------------------------------------------------------------------
 void ExifData::process_COM (const uchar * Data, int length)
 {
-    Comment = QString::fromUtf8((char *)Data+2, (length-2));
+    Comment = TQString::fromUtf8((char *)Data+2, (length-2));
 }
 
 
@@ -880,11 +880,11 @@ ExifData::ExifData()
 //--------------------------------------------------------------------------
 // process a EXIF jpeg file
 //--------------------------------------------------------------------------
-bool ExifData::scan(const QString & path)
+bool ExifData::scan(const TQString & path)
 {
     int ret;
 
-    QFile f(path);
+    TQFile f(path);
     if ( !f.open(IO_ReadOnly) )
         return false;
 
@@ -940,13 +940,13 @@ bool ExifData::isThumbnailSane() {
 // return a thumbnail that respects the orientation flag
 // only if it seems sane
 //--------------------------------------------------------------------------
-QImage ExifData::getThumbnail() {
+TQImage ExifData::getThumbnail() {
   if (!isThumbnailSane()) return NULL;
   if (!Orientation || Orientation == 1) return Thumbnail;
 
   // now fix orientation
-  QWMatrix M;
-  QWMatrix flip= QWMatrix(-1,0,0,1,0,0);
+  TQWMatrix M;
+  TQWMatrix flip= TQWMatrix(-1,0,0,1,0,0);
   switch (Orientation) {  // notice intentional fallthroughs
     case 2: M = flip; break;
     case 4: M = flip;

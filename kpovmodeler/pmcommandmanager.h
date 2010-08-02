@@ -25,8 +25,8 @@
 #endif
 
 #include "pmcommand.h"
-#include <qptrstack.h>
-#include <qobject.h>
+#include <tqptrstack.h>
+#include <tqobject.h>
 
 class PMPart;
 
@@ -80,7 +80,7 @@ public:
    /**
     * Called by an executed command. Will emit idChanged( )
     */
-   void cmdIDChanged( PMObject* obj, const QString& oldID );
+   void cmdIDChanged( PMObject* obj, const TQString& oldID );
    /**
     * Returns a pointer to the part. For commands that need to access the
     * part directly.
@@ -90,16 +90,16 @@ signals:
    /**
     * emmited, when the undo and redo command texts change
     */
-   void updateUndoRedo( const QString& undo, const QString& redo );
+   void updateUndoRedo( const TQString& undo, const TQString& redo );
    /**
     * Signal that is emitted when an object is changed.
     * Mode is a bit combination of @ref PMChange constants.
     */
-   void objectChanged( PMObject* obj, const int mode, QObject* sender );
+   void objectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Signal that is emitted when the id of the object is changed
     */
-   void idChanged( PMObject* obj, const QString& oldID );
+   void idChanged( PMObject* obj, const TQString& oldID );
 private:
    /**
     * The executed commands.

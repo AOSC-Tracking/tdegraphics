@@ -7,8 +7,8 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
 #include <kprinter.h>
 
 #include "core/page.h"
@@ -23,9 +23,9 @@ KIMGIOGenerator::~KIMGIOGenerator()
     delete m_pix;
 }
 
-bool KIMGIOGenerator::loadDocument( const QString & fileName, QValueVector<KPDFPage*> & pagesVector )
+bool KIMGIOGenerator::loadDocument( const TQString & fileName, TQValueVector<KPDFPage*> & pagesVector )
 {
-    m_pix = new QPixmap(fileName);
+    m_pix = new TQPixmap(fileName);
 
     pagesVector.resize( 1 );
 
@@ -42,7 +42,7 @@ bool KIMGIOGenerator::canGeneratePixmap()
 
 void KIMGIOGenerator::generatePixmap( PixmapRequest * request )
 {
-    QPixmap *p = new QPixmap(*m_pix);
+    TQPixmap *p = new TQPixmap(*m_pix);
     request->page->setPixmap(request->id, p);
 }
 
@@ -66,7 +66,7 @@ void KIMGIOGenerator::putFontInfo( KListView * )
 
 bool KIMGIOGenerator::print( KPrinter& printer )
 {
-    QPainter p(&printer);
+    TQPainter p(&printer);
     p.drawPixmap(0, 0, *m_pix);
     return true;
 }

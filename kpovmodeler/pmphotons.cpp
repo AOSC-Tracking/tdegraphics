@@ -95,12 +95,12 @@ void PMPhotons::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMPhotons::description( ) const
+TQString PMPhotons::description( ) const
 {
    return i18n( "photons" );
 }
 
-void PMPhotons::serialize( QDomElement& e, QDomDocument& ) const
+void PMPhotons::serialize( TQDomElement& e, TQDomDocument& ) const
 {
    e.setAttribute( "target", m_target );
    e.setAttribute( "spacing_multi", m_spacingMulti );
@@ -192,7 +192,7 @@ void PMPhotons::setAreaLight( bool al )
    }
 }
 
-PMDialogEditBase* PMPhotons::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMPhotons::editWidget( TQWidget* parent ) const
 {
    return new PMPhotonsEdit( parent );
 }

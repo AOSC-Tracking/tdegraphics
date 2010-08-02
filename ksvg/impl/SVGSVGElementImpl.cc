@@ -20,9 +20,9 @@
 
 #include <kdebug.h>
 
-#include <qtimer.h>
-#include <qstringlist.h>
-#include <qdatetime.h>
+#include <tqtimer.h>
+#include <tqstringlist.h>
+#include <tqdatetime.h>
 
 #define USE_VALGRIND 0
 
@@ -283,7 +283,7 @@ float SVGSVGElementImpl::currentScale() const
 	return m_currentScale;
 }
 
-void SVGSVGElementImpl::setCurrentTranslate(const QPoint &p)
+void SVGSVGElementImpl::setCurrentTranslate(const TQPoint &p)
 {
 	if(m_currentTranslate->x() != p.x() || m_currentTranslate->y() != p.y())
 	{
@@ -319,7 +319,7 @@ void SVGSVGElementImpl::forceRedraw()
 	CALLTREE_ZERO_STATS();
 #endif
 
-	QTime timer;
+	TQTime timer;
 	timer.start();
 
 	if(ownerDoc() && ownerDoc()->canvas())
@@ -461,7 +461,7 @@ SVGMatrixImpl *SVGSVGElementImpl::createSVGMatrix()
 {
 	// Spec: Creates an SVGMatrix object outside of any document
 	// trees. The object is initialized to the identity matrix.
-	SVGMatrixImpl *ret = new SVGMatrixImpl(QWMatrix(1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F));
+	SVGMatrixImpl *ret = new SVGMatrixImpl(TQWMatrix(1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F));
 	ret->ref();
 	return ret;
 }
@@ -503,7 +503,7 @@ SVGElementImpl *SVGSVGElementImpl::getElementById(const DOM::DOMString &elementI
 	return m_map[elementId.string()];
 }
 
-void SVGSVGElementImpl::addToIdMap(const QString &id, SVGElementImpl *obj)
+void SVGSVGElementImpl::addToIdMap(const TQString &id, SVGElementImpl *obj)
 {
 	m_map.insert(id, obj);
 }
@@ -542,15 +542,15 @@ const SVGMatrixImpl *SVGSVGElementImpl::localMatrix()
 	return m_localMatrix;
 }
 
-void SVGSVGElementImpl::setClip(const QString &clip)
+void SVGSVGElementImpl::setClip(const TQString &clip)
 {
 	// TODO : this routine should probably be shared between all classes that establish new viewports (Rob)
 	if(!clip.startsWith("rect(") || !clip.endsWith(")"))
 		return;
 
-	QString work = clip.mid(5, clip.length() - 6);
-	QStringList substrings = QStringList::split(',', clip);
-	QStringList::ConstIterator it = substrings.begin();
+	TQString work = clip.mid(5, clip.length() - 6);
+	TQStringList substrings = TQStringList::split(',', clip);
+	TQStringList::ConstIterator it = substrings.begin();
 
 	if(m_clip[0])
 		m_clip[0]->deref();
@@ -584,13 +584,13 @@ void SVGSVGElementImpl::setClip(const QString &clip)
 		m_clip[3]->setValueAsString(*it);
 }
 
-QRect SVGSVGElementImpl::clip()
+TQRect SVGSVGElementImpl::clip()
 {
 	// Get viewport in user coordinates.
-	QRect v(0, 0, m_viewport->qrect().width(), m_viewport->qrect().height());
+	TQRect v(0, 0, m_viewport->qrect().width(), m_viewport->qrect().height());
 
 	SVGMatrixImpl *ctm = getCTM();
-	QRect r = ctm->qmatrix().invert().mapRect(v);
+	TQRect r = ctm->qmatrix().invert().mapRect(v);
 	ctm->deref();
 
 	if(m_clip[0])
@@ -614,14 +614,14 @@ void SVGSVGElementImpl::setRootParentScreenCTM(SVGMatrixImpl *screenCTM)
 	screenCTM->ref();
 }
 
-bool SVGSVGElementImpl::prepareMouseEvent(const QPoint &p, const QPoint &a, SVGMouseEventImpl *mev)
+bool SVGSVGElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *mev)
 {
 	// mop: central bool var which turns to true once the current "mouseover" element has been found
 	bool ret = false, dorerender = false;
 	SVGElementImpl *elem = 0;
 	
 	SVGMatrixImpl *ctm = getCTM();
-	QPoint userA = ctm->qmatrix().invert().map(a);
+	TQPoint userA = ctm->qmatrix().invert().map(a);
 	ctm->deref();
 
 	// Just check the lastTarget once (mop)

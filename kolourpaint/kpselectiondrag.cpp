@@ -30,7 +30,7 @@
 
 #include <kpselectiondrag.h>
 
-#include <qdatastream.h>
+#include <tqdatastream.h>
 
 #include <kdebug.h>
 
@@ -42,18 +42,18 @@
 const char * const kpSelectionDrag::selectionMimeType = "application/x-kolourpaint-selection";
 
 
-kpSelectionDrag::kpSelectionDrag (QWidget *dragSource, const char *name)
-    : QImageDrag (dragSource, name)
+kpSelectionDrag::kpSelectionDrag (TQWidget *dragSource, const char *name)
+    : TQImageDrag (dragSource, name)
 {
 }
 
-kpSelectionDrag::kpSelectionDrag (const QImage &image, QWidget *dragSource, const char *name)
-    : QImageDrag (image, dragSource, name)
+kpSelectionDrag::kpSelectionDrag (const TQImage &image, TQWidget *dragSource, const char *name)
+    : TQImageDrag (image, dragSource, name)
 {
 }
 
-kpSelectionDrag::kpSelectionDrag (const kpSelection &sel, QWidget *dragSource, const char *name)
-    : QImageDrag (dragSource, name)
+kpSelectionDrag::kpSelectionDrag (const kpSelection &sel, TQWidget *dragSource, const char *name)
+    : TQImageDrag (dragSource, name)
 {
     setSelection (sel);
 }
@@ -76,7 +76,7 @@ void kpSelectionDrag::setSelection (const kpSelection &sel)
 
     // OPT: an awful waste of memory storing image in both selection and QImage
 
-    // HACK: need to set image else QImageDrag::format() lies
+    // HACK: need to set image else TQImageDrag::format() lies
     setImage (kpPixmapFX::convertToImage (*m_selection.pixmap ()));
 }
 
@@ -93,7 +93,7 @@ const char *kpSelectionDrag::format (int which) const
 #if DEBUG_KP_SELECTION_DRAG && 0
     kdDebug () << "kpSelectionDrag::format(" << which << ")" << endl;
 #endif
-    const char *ret = QImageDrag::format (which);
+    const char *ret = TQImageDrag::format (which);
     if (ret)
     {
     #if DEBUG_KP_SELECTION_DRAG && 0
@@ -103,11 +103,11 @@ const char *kpSelectionDrag::format (int which) const
     }
 
     int i;
-    for (i = 0; QImageDrag::format (i); i++)
+    for (i = 0; TQImageDrag::format (i); i++)
         ;
 
 #if DEBUG_KP_SELECTION_DRAG && 0
-    kdDebug () << "\tend of QImageDrag format list at " << i << endl;
+    kdDebug () << "\tend of TQImageDrag format list at " << i << endl;
 #endif
 
     if (i == which)
@@ -127,8 +127,8 @@ const char *kpSelectionDrag::format (int which) const
 }
 
 // public virtual [base QMimeSource]
-// Don't need to override in Qt 3.2 (the QMimeSource base will work)
-// but we do so just in case QImageDrag later decides to override it.
+// Don't need to override in Qt 3.2 (the TQMimeSource base will work)
+// but we do so just in case TQImageDrag later decides to override it.
 bool kpSelectionDrag::provides (const char *mimeType) const
 {
 #if DEBUG_KP_SELECTION_DRAG
@@ -139,26 +139,26 @@ bool kpSelectionDrag::provides (const char *mimeType) const
         return false;
 
     return (!strcmp (mimeType, kpSelectionDrag::selectionMimeType) ||
-            QImageDrag::provides (mimeType));
+            TQImageDrag::provides (mimeType));
 }
 
 // public virtual [base QMimeSource]
-QByteArray kpSelectionDrag::encodedData (const char *mimeType) const
+TQByteArray kpSelectionDrag::encodedData (const char *mimeType) const
 {
 #if DEBUG_KP_SELECTION_DRAG
     kdDebug () << "kpSelectionDrag::encodedData(" << mimeType << ")" << endl;
 #endif
 
     if (!mimeType)
-        return QByteArray ();
+        return TQByteArray ();
 
     if (!strcmp (mimeType, kpSelectionDrag::selectionMimeType))
     {
-        QByteArray ba;
-        QDataStream stream (ba, IO_WriteOnly);
+        TQByteArray ba;
+        TQDataStream stream (ba, IO_WriteOnly);
 
     #if DEBUG_KP_SELECTION_DRAG
-        kdDebug () << "\twant it as kpSelection in QByteArray" << endl;
+        kdDebug () << "\twant it as kpSelection in TQByteArray" << endl;
     #endif
 
         if (holdsSelection ())
@@ -171,9 +171,9 @@ QByteArray kpSelectionDrag::encodedData (const char *mimeType) const
         else
         {
         #if DEBUG_KP_SELECTION_DRAG
-            kdDebug () << "\t\thave image - call kpSelectionDrag::decode(QImage)" << endl;
+            kdDebug () << "\t\thave image - call kpSelectionDrag::decode(TQImage)" << endl;
         #endif
-            QImage image;
+            TQImage image;
             if (kpSelectionDrag::decode (this, image/*ref*/))
             {
             #if DEBUG_KP_SELECTION_DRAG
@@ -184,16 +184,16 @@ QByteArray kpSelectionDrag::encodedData (const char *mimeType) const
                            << endl;
             #endif
 
-                QPixmap pixmap = kpPixmapFX::convertToPixmapAsLosslessAsPossible (image);
+                TQPixmap pixmap = kpPixmapFX::convertToPixmapAsLosslessAsPossible (image);
 
                 stream << kpSelection (kpSelection::Rectangle,
-                                       QRect (0, 0, pixmap.width (), pixmap.height ()),
+                                       TQRect (0, 0, pixmap.width (), pixmap.height ()),
                                        pixmap);
             }
             else
             {
                 kdError () << "kpSelectionDrag::encodedData(" << mimeType << ")"
-                           << " kpSelectionDrag(QImage) could not decode data into QImage"
+                           << " kpSelectionDrag(TQImage) could not decode data into TQImage"
                            << endl;
                 stream << kpSelection ();
             }
@@ -204,16 +204,16 @@ QByteArray kpSelectionDrag::encodedData (const char *mimeType) const
     else
     {
     #if DEBUG_KP_SELECTION_DRAG
-        kdDebug () << "\twant it as QImage in QByteArray" << endl;
+        kdDebug () << "\twant it as TQImage in TQByteArray" << endl;
     #endif
 
-        return QImageDrag::encodedData (mimeType);
+        return TQImageDrag::encodedData (mimeType);
     }
 }
 
 
 // public static
-bool kpSelectionDrag::canDecode (const QMimeSource *e)
+bool kpSelectionDrag::canDecode (const TQMimeSource *e)
 {
 #if DEBUG_KP_SELECTION_DRAG
     kdDebug () << "kpSelectionDrag::canDecode()" << endl;
@@ -223,25 +223,25 @@ bool kpSelectionDrag::canDecode (const QMimeSource *e)
         return false;
 
     return (e->provides (kpSelectionDrag::selectionMimeType) ||
-            QImageDrag::canDecode (e));
+            TQImageDrag::canDecode (e));
 }
 
 
 // public static
-bool kpSelectionDrag::decode (const QMimeSource *e, QImage &img)
+bool kpSelectionDrag::decode (const TQMimeSource *e, TQImage &img)
 {
 #if DEBUG_KP_SELECTION_DRAG
-    kdDebug () << "kpSelectionDrag::decode(QImage)" << endl;
+    kdDebug () << "kpSelectionDrag::decode(TQImage)" << endl;
 #endif
     if (!e)
         return false;
 
-    return (QImageDrag::canDecode (e) &&  // prevents X errors, jumps based on unitialised values...
-            QImageDrag::decode (e, img/*ref*/));
+    return (TQImageDrag::canDecode (e) &&  // prevents X errors, jumps based on unitialised values...
+            TQImageDrag::decode (e, img/*ref*/));
 }
 
 // public static
-bool kpSelectionDrag::decode (const QMimeSource *e, kpSelection &sel,
+bool kpSelectionDrag::decode (const TQMimeSource *e, kpSelection &sel,
                               const kpPixmapFX::WarnAboutLossInfo &wali)
 {
 #if DEBUG_KP_SELECTION_DRAG
@@ -253,10 +253,10 @@ bool kpSelectionDrag::decode (const QMimeSource *e, kpSelection &sel,
     if (e->provides (kpSelectionDrag::selectionMimeType))
     {
     #if DEBUG_KP_SELECTION_DRAG
-        kdDebug () << "\tmimeSource provides selection - just return it in QByteArray" << endl;
+        kdDebug () << "\tmimeSource provides selection - just return it in TQByteArray" << endl;
     #endif
-        QByteArray data = e->encodedData (kpSelectionDrag::selectionMimeType);
-        QDataStream stream (data, IO_ReadOnly);
+        TQByteArray data = e->encodedData (kpSelectionDrag::selectionMimeType);
+        TQDataStream stream (data, IO_ReadOnly);
 
         // (no need for wali as kpSelection's by definition only support QPixmap's)
         stream >> sel;
@@ -267,7 +267,7 @@ bool kpSelectionDrag::decode (const QMimeSource *e, kpSelection &sel,
         kdDebug () << "\tmimeSource doesn't provide selection - try image" << endl;
     #endif
 
-        QImage image;
+        TQImage image;
         if (kpSelectionDrag::decode (e, image/*ref*/))
         {
         #if DEBUG_KP_SELECTION_DRAG
@@ -275,7 +275,7 @@ bool kpSelectionDrag::decode (const QMimeSource *e, kpSelection &sel,
         #endif
 
             sel = kpSelection (kpSelection::Rectangle,
-                               QRect (0, 0, image.width (), image.height ()),
+                               TQRect (0, 0, image.width (), image.height ()),
                                kpPixmapFX::convertToPixmapAsLosslessAsPossible (image, wali));
         }
         else

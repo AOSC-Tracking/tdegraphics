@@ -22,10 +22,10 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qstring.h>
+#include <tqwidget.h>
+#include <tqstring.h>
 
-class QDomElement;
+class TQDomElement;
 
 /**
  * This class stores the view configuration for one view.
@@ -47,15 +47,15 @@ public:
     * Returns the identifier for the view type. Has to be equal
     * to @ref PMViewBase::viewType for the corresponding view type.
     */
-   virtual QString viewType( ) const = 0;
+   virtual TQString viewType( ) const = 0;
    /**
     * Loads the data from the xml element
     */
-   virtual void loadData( QDomElement& e ) = 0;
+   virtual void loadData( TQDomElement& e ) = 0;
    /**
     * Saves the data from to xml element
     */
-   virtual void saveData( QDomElement& e ) = 0;
+   virtual void saveData( TQDomElement& e ) = 0;
 };
 
 /**
@@ -69,8 +69,8 @@ public:
    /**
     * Default constructor
     */
-   PMViewOptionsWidget( QWidget* parent, const char* name = 0 )
-         : QWidget( parent, name )
+   PMViewOptionsWidget( TQWidget* parent, const char* name = 0 )
+         : TQWidget( parent, name )
    {
    }
 
@@ -94,19 +94,19 @@ public:
    /**
     * Default constructor
     */
-   PMViewBase( QWidget* parent, const char* name = 0, WFlags f = 0 )
-         : QWidget( parent, name, f )
+   PMViewBase( TQWidget* parent, const char* name = 0, WFlags f = 0 )
+         : TQWidget( parent, name, f )
    {
    }
    /**
     * Returns the identifier for the view type. Has to be unique
     * for all view types.
     */
-   virtual QString viewType( ) const = 0;
+   virtual TQString viewType( ) const = 0;
    /**
     * Returns a i18n'ed description
     */
-   virtual QString description( ) const = 0;
+   virtual TQString description( ) const = 0;
    /**
     * Restores the view configuration
     *

@@ -21,7 +21,7 @@
 #define PMPOINT_H
 
 #include "GL/gl.h"
-#include <qmemarray.h>
+#include <tqmemarray.h>
 
 class PMVector;
 class PMMatrix;
@@ -114,9 +114,9 @@ private:
 };
 
 /**
- * @ref QMemArray of PMPoints
+ * @ref TQMemArray of PMPoints
  */
-typedef QMemArray<PMPoint> PMPointArray;
+typedef TQMemArray<PMPoint> PMPointArray;
 
 
 #endif

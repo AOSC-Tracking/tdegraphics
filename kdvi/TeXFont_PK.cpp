@@ -54,10 +54,10 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <math.h>
-#include <qbitmap.h>
-#include <qfile.h>
-#include <qimage.h>
-#include <qpainter.h>
+#include <tqbitmap.h>
+#include <tqfile.h>
+#include <tqimage.h>
+#include <tqpainter.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -76,7 +76,7 @@
 #define	PK_MAGIC	(PK_PRE << 8) + PK_ID
 
 
-extern void oops(QString message);
+extern void oops(TQString message);
 
 
 
@@ -89,7 +89,7 @@ TeXFont_PK::TeXFont_PK(TeXFontDefinition *parent)
 
   for(unsigned int i=0; i<TeXFontDefinition::max_num_of_chars_in_font; i++)
     characterBitmaps[i] = 0;
-  file = fopen(QFile::encodeName(parent->filename), "r");
+  file = fopen(TQFile::encodeName(parent->filename), "r");
   if (file == 0) 
     kdError(4300) << i18n("Cannot open font file %1.").arg(parent->filename) << endl;
 #ifdef DEBUG_PK
@@ -116,7 +116,7 @@ TeXFont_PK::~TeXFont_PK()
 }
 
 
-glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QColor& color)
+glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const TQColor& color)
 {
 #ifdef DEBUG_PK
   kdDebug(4300) << "TeXFont_PK::getGlyph( ch=" << ch << ", generateCharacterPixmap=" << generateCharacterPixmap << " )" << endl;
@@ -158,7 +158,7 @@ glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QCo
   }
 
   // At this point, g points to a properly loaded character. Generate
-  // a smoothly scaled QPixmap if the user asks for it.
+  // a smoothly scaled TQPixmap if the user asks for it.
   if ((generateCharacterPixmap == true) && 
       ((g->shrunkenCharacter.isNull()) || (color != g->color)) &&
       (characterBitmaps[ch]->w != 0)) {
@@ -208,7 +208,7 @@ glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QCo
     int shrunk_height = (int)ceil( (characterBitmaps[ch]->h - srcYTrans)/shrinkFactor );
     
     // Turn the image into 8 bit
-    QByteArray translated(characterBitmaps[ch]->w * characterBitmaps[ch]->h);
+    TQByteArray translated(characterBitmaps[ch]->w * characterBitmaps[ch]->h);
     Q_UINT8 *data = (Q_UINT8 *)translated.data();
     for(int x=0; x<characterBitmaps[ch]->w; x++)
       for(int y=0; y<characterBitmaps[ch]->h; y++) {
@@ -219,7 +219,7 @@ glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QCo
       }
     
     // Now shrink the image. We shrink the X-direction first
-    QByteArray xshrunk(shrunk_width*characterBitmaps[ch]->h);
+    TQByteArray xshrunk(shrunk_width*characterBitmaps[ch]->h);
     Q_UINT8 *xdata = (Q_UINT8 *)xshrunk.data();
     
     // Do the shrinking. The pixel (x,y) that we want to calculate
@@ -247,7 +247,7 @@ glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QCo
       }
     
     // Now shrink the Y-direction
-    QByteArray xyshrunk(shrunk_width*shrunk_height);
+    TQByteArray xyshrunk(shrunk_width*shrunk_height);
     Q_UINT8 *xydata = (Q_UINT8 *)xyshrunk.data();
     for(int x=0; x<shrunk_width; x++)
       for(int y=0; y<shrunk_height; y++) {
@@ -266,7 +266,7 @@ glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QCo
 	xydata[shrunk_width*y + x] = (int)(value/shrinkFactor);
       }
     
-    QImage im32(shrunk_width, shrunk_height, 32);
+    TQImage im32(shrunk_width, shrunk_height, 32);
     im32.setAlphaBuffer(true);
     // Do QPixmaps fully support the alpha channel? If yes, we use
     // that. Otherwise, use other routines as a fallback
@@ -284,7 +284,7 @@ glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QCo
     } else {
       // If the alpha channel is not supported... QT seems to turn the
       // alpha channel into a crude bitmap which is used to mask the
-      // resulting QPixmap. In this case, we define the character
+      // resulting TQPixmap. In this case, we define the character
       // outline using the image data, and use the alpha channel only
       // to store "maximally opaque" or "completely transparent"
       // values. When characters are rendered, overlapping characters
@@ -313,7 +313,7 @@ glyph* TeXFont_PK::getGlyph(Q_UINT16 ch, bool generateCharacterPixmap, const QCo
     }
     
     g->shrunkenCharacter.convertFromImage(im32,0);
-    g->shrunkenCharacter.setOptimization(QPixmap::BestOptim);
+    g->shrunkenCharacter.setOptimization(TQPixmap::BestOptim);
   }
   return g;
 }

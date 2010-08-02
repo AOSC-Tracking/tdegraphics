@@ -24,34 +24,34 @@
 #include "pmfactory.h"
 #include "pmtexturemap.h"
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, QListView* parent )
-      : QListViewItem( parent )
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListView* parent )
+      : TQListViewItem( parent )
 {
    m_pObject = object;
    setDescriptions( );
    initSelection( );
 }
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, QListViewItem* parent )
-      : QListViewItem( parent )
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListViewItem* parent )
+      : TQListViewItem( parent )
 {
    m_pObject = object;
    setDescriptions( );
    initSelection( );
 }
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, QListView* parent,
-                                QListViewItem* after )
-      : QListViewItem( parent, after )
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListView* parent,
+                                TQListViewItem* after )
+      : TQListViewItem( parent, after )
 {
    m_pObject = object;
    setDescriptions( );
    initSelection( );
 }
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, QListViewItem* parent,
-                   QListViewItem* after )
-      : QListViewItem( parent, after )
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListViewItem* parent,
+                   TQListViewItem* after )
+      : TQListViewItem( parent, after )
 {
    m_pObject = object;
    setDescriptions( );
@@ -60,7 +60,7 @@ PMTreeViewItem::PMTreeViewItem( PMObject* object, QListViewItem* parent,
 
 void PMTreeViewItem::setDescriptions( )
 {
-   QString text;
+   TQString text;
    setPixmap( 0, SmallIcon( m_pObject->pixmap( ), PMFactory::instance( ) ) );
    
    if( m_pObject->canHaveName( ) )
@@ -78,15 +78,15 @@ void PMTreeViewItem::setDescriptions( )
       {
          PMTextureMapBase* tm = ( PMTextureMapBase* ) m_pObject->parent( );
          if( m_pObject->type( ) == tm->mapType( ) )
-            text = QString( "[%1] " ).arg( tm->mapValue( m_pObject ), 4, 'f', 2 ) + text;
+            text = TQString( "[%1] " ).arg( tm->mapValue( m_pObject ), 4, 'f', 2 ) + text;
       }
    }
    setText( 0, text );
 }
 
-QString PMTreeViewItem::key( int, bool ) const
+TQString PMTreeViewItem::key( int, bool ) const
 {
-   QString result;
+   TQString result;
    if( m_pObject->parent( ) )
       result.sprintf( "%06i", m_pObject->parent( )->findChild( m_pObject ) );
    else
@@ -102,7 +102,7 @@ void PMTreeViewItem::setSelected( bool select )
    // ignore selections during a move event
    if( treeview->acceptSelect( ) )
    {
-      QListViewItem::setSelected( select );
+      TQListViewItem::setSelected( select );
 
       if( ws != isSelected( ) )
          treeview->itemSelected( this, isSelected( ) );
@@ -111,7 +111,7 @@ void PMTreeViewItem::setSelected( bool select )
 
 void PMTreeViewItem::initSelection( )
 {
-   QListViewItem::setSelected( m_pObject->isSelected( ) );
+   TQListViewItem::setSelected( m_pObject->isSelected( ) );
 //   if( m_pObject->isSelected( ) )
 //      repaint( );
 }

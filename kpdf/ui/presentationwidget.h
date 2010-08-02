@@ -10,17 +10,17 @@
 #ifndef _KPDF_PRESENTATIONWIDGET_H_
 #define _KPDF_PRESENTATIONWIDGET_H_
 
-#include <qdialog.h>
-#include <qpixmap.h>
-#include <qstringlist.h>
-#include <qvaluevector.h>
+#include <tqdialog.h>
+#include <tqpixmap.h>
+#include <tqstringlist.h>
+#include <tqvaluevector.h>
 #include "core/observer.h"
 #include "core/pagetransition.h"
 
 class KAccel;
 class KActionCollection;
 class KToolBar;
-class QTimer;
+class TQTimer;
 
 class KPDFDocument;
 class KPDFPage;
@@ -32,40 +32,40 @@ class PresentationFrame;
  *
  * This is a fullscreen widget that displays 
  */
-class PresentationWidget : public QDialog, public DocumentObserver
+class PresentationWidget : public TQDialog, public DocumentObserver
 {
     Q_OBJECT
     public:
-        PresentationWidget( QWidget * parent, KPDFDocument * doc );
+        PresentationWidget( TQWidget * parent, KPDFDocument * doc );
         ~PresentationWidget();
 
         void setupActions( KActionCollection * ac );
 
         // inherited from DocumentObserver
         uint observerId() const { return PRESENTATION_ID; }
-        void notifySetup( const QValueVector< KPDFPage * > & pages, bool documentChanged );
+        void notifySetup( const TQValueVector< KPDFPage * > & pages, bool documentChanged );
         void notifyViewportChanged( bool smoothMove );
         void notifyPageChanged( int pageNumber, int changedFlags );
         bool canUnloadPixmap( int pageNumber );
 
     protected:
         // widget events
-//        bool event( QEvent * e );
-        void keyPressEvent( QKeyEvent * e );
-        void wheelEvent( QWheelEvent * e );
-        void mousePressEvent( QMouseEvent * e );
-        void mouseReleaseEvent( QMouseEvent * e );
-        void mouseMoveEvent( QMouseEvent * e );
-        void paintEvent( QPaintEvent * e );
+//        bool event( TQEvent * e );
+        void keyPressEvent( TQKeyEvent * e );
+        void wheelEvent( TQWheelEvent * e );
+        void mousePressEvent( TQMouseEvent * e );
+        void mouseReleaseEvent( TQMouseEvent * e );
+        void mouseMoveEvent( TQMouseEvent * e );
+        void paintEvent( TQPaintEvent * e );
 
     private:
-        const KPDFLink * getLink( int x, int y, QRect * geometry = 0 ) const;
+        const KPDFLink * getLink( int x, int y, TQRect * geometry = 0 ) const;
         void testCursorOnLink( int x, int y );
-        void overlayClick( const QPoint & position );
+        void overlayClick( const TQPoint & position );
         void changePage( int newPage );
         void generatePage();
-        void generateIntroPage( QPainter & p );
-        void generateContentsPage( int page, QPainter & p );
+        void generateIntroPage( TQPainter & p );
+        void generateContentsPage( int page, TQPainter & p );
         void generateOverlay();
         void initTransition( const KPDFPageTransition *transition );
         const KPDFPageTransition defaultTransition() const;
@@ -74,25 +74,25 @@ class PresentationWidget : public QDialog, public DocumentObserver
         // cache stuff
         int m_width;
         int m_height;
-        QPixmap m_lastRenderedPixmap;
-        QPixmap m_lastRenderedOverlay;
-        QRect m_overlayGeometry;
+        TQPixmap m_lastRenderedPixmap;
+        TQPixmap m_lastRenderedOverlay;
+        TQRect m_overlayGeometry;
         const KPDFLink * m_pressedLink;
         bool m_handCursor;
 
         // transition related
-        QTimer * m_transitionTimer;
-        QTimer * m_overlayHideTimer;
-        QTimer * m_nextPageTimer;
+        TQTimer * m_transitionTimer;
+        TQTimer * m_overlayHideTimer;
+        TQTimer * m_nextPageTimer;
         int m_transitionDelay;
         int m_transitionMul;
-        QValueList< QRect > m_transitionRects;
+        TQValueList< TQRect > m_transitionRects;
 
         // misc stuff
         KPDFDocument * m_document;
-        QValueVector< PresentationFrame * > m_frames;
+        TQValueVector< PresentationFrame * > m_frames;
         int m_frameIndex;
-        QStringList m_metaStrings;
+        TQStringList m_metaStrings;
         KToolBar * m_topBar;
         KAccel * m_accel;
 

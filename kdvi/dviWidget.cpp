@@ -22,13 +22,13 @@
 #include "renderedDviPagePixmap.h"
 #include "selection.h"
 
-DVIWidget::DVIWidget(QWidget* parent, PageView* sv, DocumentPageCache* cache, const char* name)
+DVIWidget::DVIWidget(TQWidget* parent, PageView* sv, DocumentPageCache* cache, const char* name)
   : DocumentWidget(parent, sv, cache, name)
 {
 }
 
 
-void DVIWidget::mousePressEvent(QMouseEvent* e)
+void DVIWidget::mousePressEvent(TQMouseEvent* e)
 {
   // pageNr == 0 indicated an invalid page (e.g. page number not yet set)
   if (pageNr == 0)
@@ -60,7 +60,7 @@ void DVIWidget::mousePressEvent(QMouseEvent* e)
         return;
       }
       // Remember the closest source link
-      QPoint center = pageData->sourceHyperLinkList[i].box.center();
+      TQPoint center = pageData->sourceHyperLinkList[i].box.center();
       int dx = center.x() - e->pos().x();
       int dy = center.y() - e->pos().y();
       if (dx*dx + dy*dy < minimum || i == 0)
@@ -79,7 +79,7 @@ void DVIWidget::mousePressEvent(QMouseEvent* e)
 }
 
 
-void DVIWidget::mouseMoveEvent(QMouseEvent* e)
+void DVIWidget::mouseMoveEvent(TQMouseEvent* e)
 {
   // pageNr == 0 indicated an invalid page (e.g. page number not yet set)
   if (pageNr == 0)
@@ -105,7 +105,7 @@ void DVIWidget::mouseMoveEvent(QMouseEvent* e)
 	// The macro-package srcltx gives a special like "src:99 test.tex"
 	// while MikTeX gives "src:99test.tex". KDVI tries
 	// to understand both.
-	QString cp = pageData->sourceHyperLinkList[i].linkText;
+	TQString cp = pageData->sourceHyperLinkList[i].linkText;
 	int max = cp.length();
 	int i;
 	for(i=0; i<max; i++)

@@ -20,12 +20,12 @@
 #include "pmpovraymatrix.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
 
-PMPovrayMatrixEdit::PMPovrayMatrixEdit( QWidget* parent, const char* name )
+PMPovrayMatrixEdit::PMPovrayMatrixEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,21 +36,21 @@ void PMPovrayMatrixEdit::createTopWidgets( )
    Base::createTopWidgets( );
 
    int i, r, c;
-   QGridLayout* gl = new QGridLayout( topLayout( ), 4, 4 );
+   TQGridLayout* gl = new TQGridLayout( topLayout( ), 4, 4 );
 
    for( i = 0; i < 12; i++ )
    {
       m_pValue[i] = new PMFloatEdit( this );
-      connect( m_pValue[i], SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+      connect( m_pValue[i], TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    }
 
    for( r = 0; r < 4; r++ )
       for( c = 0; c < 3; c++ )
          gl->addWidget( m_pValue[r*3+c], r, c );
-   gl->addWidget( new QLabel( "0.0", this ), 0, 3 );
-   gl->addWidget( new QLabel( "0.0", this ), 1, 3 );
-   gl->addWidget( new QLabel( "0.0", this ), 2, 3 );
-   gl->addWidget( new QLabel( "1.0", this ), 3, 3 );
+   gl->addWidget( new TQLabel( "0.0", this ), 0, 3 );
+   gl->addWidget( new TQLabel( "0.0", this ), 1, 3 );
+   gl->addWidget( new TQLabel( "0.0", this ), 2, 3 );
+   gl->addWidget( new TQLabel( "1.0", this ), 3, 3 );
 }
 
 void PMPovrayMatrixEdit::displayObject( PMObject* o )

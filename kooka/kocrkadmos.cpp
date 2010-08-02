@@ -24,16 +24,16 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qfileinfo.h>
-#include <qtooltip.h>
-#include <qvbox.h>
-#include <qdict.h>
-#include <qdir.h>
-#include <qmap.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqfileinfo.h>
+#include <tqtooltip.h>
+#include <tqvbox.h>
+#include <tqdict.h>
+#include <tqdir.h>
+#include <tqmap.h>
+#include <tqbuttongroup.h>
+#include <tqradiobutton.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -50,9 +50,9 @@
 #include "kocrkadmos.moc"
 
 #include <kscanslider.h>
-#include <qcheckbox.h>
+#include <tqcheckbox.h>
 #include <kstandarddirs.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 
 /* defines for konfig-reading */
@@ -64,7 +64,7 @@
 #define CNTRY_CZ i18n( "Czech Republic, Slovakia")
 #define CNTRY_GB i18n( "Great Britain, USA" )
 
-KadmosDialog::KadmosDialog( QWidget *parent, KSpellConfig *spellConfig )
+KadmosDialog::KadmosDialog( TQWidget *parent, KSpellConfig *spellConfig )
     :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
      m_cbNoise(0),
      m_cbAutoscale(0),
@@ -75,17 +75,17 @@ KadmosDialog::KadmosDialog( QWidget *parent, KSpellConfig *spellConfig )
    findClassifiers();
 }
 
-QString KadmosDialog::ocrEngineLogo() const
+TQString KadmosDialog::ocrEngineLogo() const
 {
     return "kadmoslogo.png";
 }
 
-QString KadmosDialog::ocrEngineName() const
+TQString KadmosDialog::ocrEngineName() const
 {
     return i18n("KADMOS OCR/ICR");
 }
 
-QString KadmosDialog::ocrEngineDesc() const
+TQString KadmosDialog::ocrEngineDesc() const
 {
     return i18n("This version of Kooka was linked with the <I>KADMOS OCR/ICR engine</I>, a "
                 "commercial engine for optical character recognition.<P>"
@@ -101,8 +101,8 @@ EngineError KadmosDialog::findClassifiers()
     findClassifierPath();
 
     KLocale *locale = KGlobal::locale();
-    QStringList allCountries = locale->allLanguagesTwoAlpha ();
-    for ( QStringList::Iterator it = allCountries.begin();
+    TQStringList allCountries = locale->allLanguagesTwoAlpha ();
+    for ( TQStringList::Iterator it = allCountries.begin();
           it != allCountries.end(); ++it )
     {
         m_longCountry2short[locale->twoAlphaToCountryName(*it)] = *it;
@@ -111,30 +111,30 @@ EngineError KadmosDialog::findClassifiers()
     m_longCountry2short[ CNTRY_CZ ] = "cz";
     m_longCountry2short[ CNTRY_GB ] = "us";
 
-    QStringList lst;
+    TQStringList lst;
 
     /* custom Path */
     if( ! m_customClassifierPath.isEmpty() )
     {
-        QDir dir( m_customClassifierPath );
+        TQDir dir( m_customClassifierPath );
 
-        QStringList lst1 = dir.entryList( "ttf*.rec" );
+        TQStringList lst1 = dir.entryList( "ttf*.rec" );
 
-        for ( QStringList::Iterator it = lst1.begin(); it != lst1.end(); ++it )
+        for ( TQStringList::Iterator it = lst1.begin(); it != lst1.end(); ++it )
         {
             lst << m_customClassifierPath + *it;
         }
 
         lst1 = dir.entryList( "hand*.rec" );
 
-        for ( QStringList::Iterator it = lst1.begin(); it != lst1.end(); ++it )
+        for ( TQStringList::Iterator it = lst1.begin(); it != lst1.end(); ++it )
         {
             lst << m_customClassifierPath + *it;
         }
 
         lst1 = dir.entryList( "norm*.rec" );
 
-        for ( QStringList::Iterator it = lst1.begin(); it != lst1.end(); ++it )
+        for ( TQStringList::Iterator it = lst1.begin(); it != lst1.end(); ++it )
         {
             lst << m_customClassifierPath + *it;
         }
@@ -153,19 +153,19 @@ EngineError KadmosDialog::findClassifiers()
 
 
     /* no go through lst and sort out hand-, ttf- and norm classifier */
-    for ( QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
+    for ( TQStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
     {
-        QFileInfo fi( *it);
-        QString name = fi.fileName().lower();
+        TQFileInfo fi( *it);
+        TQString name = fi.fileName().lower();
 
         kdDebug(28000) << "Checking file " << *it << endl;
 
         if( name.startsWith( "ttf" ) )
         {
-            QString lang = name.mid(3,2);
+            TQString lang = name.mid(3,2);
             if( allCountries.contains(lang) )
             {
-                QString lngCountry = locale->twoAlphaToCountryName(lang);
+                TQString lngCountry = locale->twoAlphaToCountryName(lang);
                 if( lngCountry.isEmpty() )
                     lngCountry = name;
                 m_ttfClassifier << lngCountry;
@@ -187,10 +187,10 @@ EngineError KadmosDialog::findClassifiers()
         }
         else if( name.startsWith( "hand" ) )
         {
-            QString lang = name.mid(4,2);
+            TQString lang = name.mid(4,2);
             if( allCountries.contains(lang) )
             {
-                QString lngCountry = locale->twoAlphaToCountryName(lang);
+                TQString lngCountry = locale->twoAlphaToCountryName(lang);
                 if( lngCountry.isEmpty() )
                     lngCountry = name;
                 m_handClassifier << lngCountry;
@@ -269,43 +269,43 @@ EngineError KadmosDialog::setupGui()
     // setupClassification( addVBoxPage( i18n("Classification")));
 
     /* continue page setup on the first page */
-    QVBox *page = ocrPage();
+    TQVBox *page = ocrPage();
 
     // Horizontal line
     (void) new KSeparator( KSeparator::HLine, page);
 
     // FIXME: dynamic classifier reading.
 
-    (void) new QLabel( i18n("Please classify the font type and language of the text on the image:"),
+    (void) new TQLabel( i18n("Please classify the font type and language of the text on the image:"),
 		       page );
-    QHBox *locBox = new QHBox( page );
-    m_bbFont = new QButtonGroup(1, Qt::Horizontal, i18n("Font Type Selection"), locBox);
+    TQHBox *locBox = new TQHBox( page );
+    m_bbFont = new TQButtonGroup(1, Qt::Horizontal, i18n("Font Type Selection"), locBox);
 
-    m_rbMachine = new QRadioButton( i18n("Machine print"), m_bbFont );
-    m_rbHand    = new QRadioButton( i18n("Hand writing"),  m_bbFont );
-    m_rbNorm    = new QRadioButton( i18n("Norm font"),     m_bbFont );
+    m_rbMachine = new TQRadioButton( i18n("Machine print"), m_bbFont );
+    m_rbHand    = new TQRadioButton( i18n("Hand writing"),  m_bbFont );
+    m_rbNorm    = new TQRadioButton( i18n("Norm font"),     m_bbFont );
 
-    m_gbLang = new QGroupBox(1, Qt::Horizontal, i18n("Country"), locBox);
+    m_gbLang = new TQGroupBox(1, Qt::Horizontal, i18n("Country"), locBox);
 
 
-    m_cbLang = new QComboBox( m_gbLang );
+    m_cbLang = new TQComboBox( m_gbLang );
     m_cbLang->setCurrentText( KLocale::defaultCountry() );
 
-    connect( m_bbFont, SIGNAL(clicked(int)), this, SLOT(slFontChanged(int) ));
+    connect( m_bbFont, TQT_SIGNAL(clicked(int)), this, TQT_SLOT(slFontChanged(int) ));
     m_rbMachine->setChecked(true);
 
     /* --- */
-    QHBox *innerBox = new QHBox( page );
+    TQHBox *innerBox = new TQHBox( page );
     innerBox->setSpacing( KDialog::spacingHint());
 
-    QButtonGroup *cbGroup = new QButtonGroup( 1, Qt::Horizontal, i18n("OCR Modifier"), innerBox );
+    TQButtonGroup *cbGroup = new TQButtonGroup( 1, Qt::Horizontal, i18n("OCR Modifier"), innerBox );
     Q_CHECK_PTR(cbGroup);
 
-    m_cbNoise = new QCheckBox( i18n( "Enable automatic noise reduction" ), cbGroup );
-    m_cbAutoscale = new QCheckBox( i18n( "Enable automatic scaling"), cbGroup );
+    m_cbNoise = new TQCheckBox( i18n( "Enable automatic noise reduction" ), cbGroup );
+    m_cbAutoscale = new TQCheckBox( i18n( "Enable automatic scaling"), cbGroup );
 
     getAnimation(innerBox);
-    // (void) new QWidget ( page );
+    // (void) new TQWidget ( page );
 
     if( err != ENG_OK )
     {
@@ -366,17 +366,17 @@ void KadmosDialog::slFontChanged( int id )
 }
 
 
-void KadmosDialog::setupPreprocessing( QVBox*  )
+void KadmosDialog::setupPreprocessing( TQVBox*  )
 {
 
 }
 
-void KadmosDialog::setupSegmentation(  QVBox* )
+void KadmosDialog::setupSegmentation(  TQVBox* )
 {
 
 }
 
-void KadmosDialog::setupClassification( QVBox* )
+void KadmosDialog::setupClassification( TQVBox* )
 {
 
 }
@@ -386,19 +386,19 @@ void KadmosDialog::setupClassification( QVBox* )
  * was one found.
  */
 
-bool KadmosDialog::getSelClassifier( QString& path ) const
+bool KadmosDialog::getSelClassifier( TQString& path ) const
 {
-    QString classifier = getSelClassifierName();
+    TQString classifier = getSelClassifierName();
 
-    QString cmplPath;
+    TQString cmplPath;
     /*
      * Search the complete path for the classifier file name
      * returned from the getSelClassifierName method
      */
-    for ( QStringList::ConstIterator it = m_classifierPath.begin();
+    for ( TQStringList::ConstIterator it = m_classifierPath.begin();
           it != m_classifierPath.end(); ++it )
     {
-        QFileInfo fi( *it );
+        TQFileInfo fi( *it );
         if( fi.fileName() == classifier )
         {
             cmplPath = *it;
@@ -417,7 +417,7 @@ bool KadmosDialog::getSelClassifier( QString& path ) const
     else
     {
         /* Check if the classifier exists on the HD. If not, return an empty string */
-        QFileInfo fi(cmplPath);
+        TQFileInfo fi(cmplPath);
 
         if( res && ! fi.exists() )
         {
@@ -439,11 +439,11 @@ bool KadmosDialog::getSelClassifier( QString& path ) const
     return res;
 }
 
-QString KadmosDialog::getSelClassifierName() const
+TQString KadmosDialog::getSelClassifierName() const
 {
-     QButton *butt = m_bbFont->selected();
+     TQButton *butt = m_bbFont->selected();
 
-     QString fType, rType;
+     TQString fType, rType;
 
      if( butt )
      {
@@ -459,11 +459,11 @@ QString KadmosDialog::getSelClassifierName() const
      }
 
      /* Get the long text from the combo box */
-     QString selLang = m_cbLang->currentText();
-     QString trans;
+     TQString selLang = m_cbLang->currentText();
+     TQString trans;
      if( fType != "norm" && m_longCountry2short.contains( selLang ))
      {
-         QString langType = m_longCountry2short[selLang];
+         TQString langType = m_longCountry2short[selLang];
          trans = fType+langType+".rec";
      }
      else

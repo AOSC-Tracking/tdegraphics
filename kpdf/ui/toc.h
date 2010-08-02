@@ -10,7 +10,7 @@
 #ifndef _KPDF_TOC_H_
 #define _KPDF_TOC_H_
 
-#include <qdom.h>
+#include <tqdom.h>
 #include <klistview.h>
 #include "core/document.h"
 #include "core/observer.h"
@@ -21,22 +21,22 @@ class TOC : public KListView, public DocumentObserver
 {
 Q_OBJECT
     public:
-        TOC(QWidget *parent, KPDFDocument *document);
+        TOC(TQWidget *parent, KPDFDocument *document);
         ~TOC();
 
         // inherited from DocumentObserver
         uint observerId() const;
-        void notifySetup( const QValueVector< KPDFPage * > & pages, bool documentChanged );
+        void notifySetup( const TQValueVector< KPDFPage * > & pages, bool documentChanged );
 
     signals:
         void hasTOC(bool has);
 
     private slots:
-        void slotExecuted(QListViewItem *i);
+        void slotExecuted(TQListViewItem *i);
 
     private:
-        void addChildren( const QDomNode & parentNode, KListViewItem * parentItem = 0 );
-        DocumentViewport getViewport( const QDomElement &e ) const;
+        void addChildren( const TQDomNode & parentNode, KListViewItem * parentItem = 0 );
+        DocumentViewport getViewport( const TQDomElement &e ) const;
         KPDFDocument *m_document;
 };
 

@@ -26,11 +26,11 @@
 
 using namespace KSVG;
 
-SVGTimer::SVGTimer(QObject *scheduler, unsigned int ms, bool singleShot)
+SVGTimer::SVGTimer(TQObject *scheduler, unsigned int ms, bool singleShot)
 {
 	m_ms = ms;
 	m_singleShot = singleShot;
-	m_timer = new QTimer(scheduler);
+	m_timer = new TQTimer(scheduler);
 }
 
 SVGTimer::~SVGTimer()
@@ -38,19 +38,19 @@ SVGTimer::~SVGTimer()
 	delete m_timer;
 }
 
-bool SVGTimer::operator==(const QTimer *timer)
+bool SVGTimer::operator==(const TQTimer *timer)
 {
 	return (m_timer == timer);
 }
 
-const QTimer *SVGTimer::qtimer() const
+const TQTimer *SVGTimer::qtimer() const
 {
 	return m_timer;
 }
 
-void SVGTimer::start(QObject *receiver, const char *member)
+void SVGTimer::start(TQObject *receiver, const char *member)
 {
-	QObject::connect(m_timer, SIGNAL(timeout()), receiver, member);
+	TQObject::connect(m_timer, TQT_SIGNAL(timeout()), receiver, member);
 	m_timer->start(m_ms, m_singleShot);
 }
 
@@ -79,7 +79,7 @@ void SVGTimer::notifyAll()
 	if(m_notifyList.isEmpty())
 		return;
 
-	QValueList<SVGElementImpl *> elements;
+	TQValueList<SVGElementImpl *> elements;
 	for(unsigned int i = m_notifyList.count();i > 0; i--)
 	{
 		SVGElementImpl *element = m_notifyList[i - 1];
@@ -98,7 +98,7 @@ void SVGTimer::notifyAll()
 	}
 
 	// Optimized update logic (to avoid 4 updates, on the same element)
-	QValueList<SVGElementImpl *>::iterator it2;
+	TQValueList<SVGElementImpl *>::iterator it2;
 	for(it2 = elements.begin(); it2 != elements.end(); ++it2)
 	{
 		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(*it2);
@@ -122,7 +122,7 @@ void SVGTimer::removeNotify(SVGElementImpl *element)
 
 const unsigned int SVGTimeScheduler::staticTimerInterval = 15; // milliseconds
 
-SVGTimeScheduler::SVGTimeScheduler(SVGDocumentImpl *doc) : QObject(), m_doc(doc)
+SVGTimeScheduler::SVGTimeScheduler(SVGDocumentImpl *doc) : TQObject(), m_doc(doc)
 {
 	// Create static interval timers but don't start it yet!
 	m_intervalTimer = new SVGTimer(this, staticTimerInterval, false);	
@@ -165,7 +165,7 @@ void SVGTimeScheduler::startAnimations()
 	{
 		SVGTimer *svgTimer = *it;
 		if(svgTimer && !svgTimer->isActive())
-			svgTimer->start(this, SLOT(slotTimerNotify()));
+			svgTimer->start(this, TQT_SLOT(slotTimerNotify()));
 	}
 }
 
@@ -174,7 +174,7 @@ void SVGTimeScheduler::toggleAnimations()
 	if(m_intervalTimer->isActive())
 		m_intervalTimer->stop();
 	else
-		m_intervalTimer->start(this, SLOT(slotTimerNotify()));
+		m_intervalTimer->start(this, TQT_SLOT(slotTimerNotify()));
 }
 
 bool SVGTimeScheduler::animationsPaused() const
@@ -184,7 +184,7 @@ bool SVGTimeScheduler::animationsPaused() const
 
 void SVGTimeScheduler::slotTimerNotify()
 {
-	QTimer *senderTimer = const_cast<QTimer *>(static_cast<const QTimer *>(sender()));
+	TQTimer *senderTimer = const_cast<TQTimer *>(static_cast<const TQTimer *>(sender()));
 
 	SVGTimer *svgTimer = 0;
 	SVGTimerList::iterator it;
@@ -223,7 +223,7 @@ void SVGTimeScheduler::slotTimerNotify()
 	// by the previous call, and now all connections to the interval timer
 	// are created and now we just need to fire that timer (Niko)
 	if(svgTimer != m_intervalTimer && !m_intervalTimer->isActive())
-		m_intervalTimer->start(this, SLOT(slotTimerNotify()));
+		m_intervalTimer->start(this, TQT_SLOT(slotTimerNotify()));
 }
 
 float SVGTimeScheduler::elapsed() const

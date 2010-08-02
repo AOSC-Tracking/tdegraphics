@@ -19,7 +19,7 @@
 #ifndef __KGV_MINIWIDGET_H
 #define __KGV_MINIWIDGET_H
 
-#include <qprinter.h>
+#include <tqprinter.h>
 
 #include "dscparse_adapter.h"
 #include "kgv.h"
@@ -28,7 +28,7 @@
 
 #include "thumbnailservice.h"
 
-#include <qobject.h>
+#include <tqobject.h>
 
 class InfoDialog;
 class KGVPart;
@@ -44,7 +44,7 @@ public:
 
     void setDocument( KGVDocument* document );
 
-    static QString pageSizeToString( QPrinter::PageSize );
+    static TQString pageSizeToString( TQPrinter::PageSize );
 
     void setPSWidget( KPSWidget* psWidget );
 
@@ -55,7 +55,7 @@ public:
     void setOverrideOrientation( CDSC_ORIENTATION_ENUM );
 
     void restoreOverridePageMedia();
-    void setOverridePageMedia( const QString& mediaName );
+    void setOverridePageMedia( const TQString& mediaName );
 
     ThumbnailService* getThumbnailService() { return _thumbnailService; }
     
@@ -113,9 +113,9 @@ signals:
      */
     void newPageShown( int pageNumber );  // Should this one be under DOCUMENT?
 
-    void newPageImage( QPixmap image );
+    void newPageImage( TQPixmap image );
 
-    void setStatusBarText( const QString& );
+    void setStatusBarText( const TQString& );
 
 protected:
     void showPage( int pageNumber );
@@ -133,8 +133,8 @@ private:
     CDSC_ORIENTATION_ENUM orientation() const;
     CDSC_ORIENTATION_ENUM orientation( int pageNo ) const;
 
-    QString pageMedia() const;
-    QString pageMedia( int pageNo ) const;
+    TQString pageMedia() const;
+    TQString pageMedia( int pageNo ) const;
 
     KDSCBBOX boundingBox() const;
     KDSCBBOX boundingBox( int pageNo ) const;
@@ -165,7 +165,7 @@ private:
     int _visiblePage;
 
     DisplayOptions _options;
-    QString        _fallBackPageMedia;
+    TQString        _fallBackPageMedia;
 };
 
 #endif

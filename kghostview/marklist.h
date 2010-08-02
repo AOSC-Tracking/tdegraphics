@@ -19,8 +19,8 @@
 #ifndef MARKLIST_H
 #define MARKLIST_H
 
-#include <qcheckbox.h>
-#include <qtable.h>
+#include <tqcheckbox.h>
+#include <tqtable.h>
 
 class KGVMiniWidget;
 
@@ -28,24 +28,24 @@ class MarkListItem : public QWidget
 {
     Q_OBJECT
 public:
-    MarkListItem( QWidget *parent, const QString &text, const QString &tip, const QColor &color, KGVMiniWidget*, int );
+    MarkListItem( TQWidget *parent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget*, int );
 
     bool isChecked() const;
 
 public slots:
     void toggle();
     void setChecked( bool checked );
-    void setPixmap( QPixmap thumbnail );
+    void setPixmap( TQPixmap thumbnail );
 
     void setSelected( bool selected );
 
 private:
-    void resizeEvent( QResizeEvent * );
-    void paintEvent( QPaintEvent* );
+    void resizeEvent( TQResizeEvent * );
+    void paintEvent( TQPaintEvent* );
 private:
-    QWidget *_thumbnailW;
-    QCheckBox *_checkBox;
-    QColor _backgroundColor;
+    TQWidget *_thumbnailW;
+    TQCheckBox *_checkBox;
+    TQColor _backgroundColor;
     KGVMiniWidget* _miniWidget;
     const int _pageNum;
     bool _requested;
@@ -56,11 +56,11 @@ class MarkList: public QTable
     Q_OBJECT
 
 public:
-    MarkList( QWidget* parent = 0, const char* name = 0, KGVMiniWidget* = 0 );
+    MarkList( TQWidget* parent = 0, const char* name = 0, KGVMiniWidget* = 0 );
 
-    QValueList<int> markList() const;
-    void insertItem( const QString& text, int index = -1,
-                     const QString& tip = QString::null );
+    TQValueList<int> markList() const;
+    void insertItem( const TQString& text, int index = -1,
+                     const TQString& tip = TQString::null );
 
 public slots:
     void select( int index );
@@ -73,7 +73,7 @@ public slots:
     void clear();
 
 protected:
-    virtual void viewportResizeEvent ( QResizeEvent * );
+    virtual void viewportResizeEvent ( TQResizeEvent * );
 
 signals:
     void selected( int );

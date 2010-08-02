@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qobject.h>
+#include <tqobject.h>
 
 #include <kdebug.h>
 #include <kstaticdeleter.h>
@@ -42,7 +42,7 @@ namespace KSVG
 		SVGDocumentImpl *doc() const { return m_docs.current(); }
 
 	private:
-		QPtrList<SVGDocumentImpl> m_docs;
+		TQPtrList<SVGDocumentImpl> m_docs;
 	};
 }
 
@@ -65,10 +65,10 @@ DocumentFactory *DocumentFactory::self()
 	return s_factory;
 }
 
-SVGDocument *DocumentFactory::requestDocument(QObject *notifyObject, const char *notifySlot) const
+SVGDocument *DocumentFactory::requestDocument(TQObject *notifyObject, const char *notifySlot) const
 {
 	SVGDocumentImpl *impl = requestDocumentImpl(false);
-	QObject::connect(impl, SIGNAL(finishedParsing(bool, const QString &)), notifyObject, notifySlot);
+	TQObject::connect(impl, TQT_SIGNAL(finishedParsing(bool, const TQString &)), notifyObject, notifySlot);
 	
 	return new SVGDocument(impl);
 }

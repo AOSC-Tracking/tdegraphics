@@ -30,9 +30,9 @@
 #define __kp_color_h__
 
 
-#include <qcolor.h>
+#include <tqcolor.h>
 
-class QDataStream;
+class TQDataStream;
 
 
 //
@@ -42,10 +42,10 @@ class QDataStream;
 // error handling, reporting (noisy kdError()'s) and recovery.
 //
 // In general, you should pass around kpColor objects instead of QRgb
-// and QColor.  Only convert an opaque kpColor to a QColor (using toQColor())
+// and TQColor.  Only convert an opaque kpColor to a TQColor (using toQColor())
 // if you need to draw something onscreen.  Constructing a kpColor object
-// from QColor is probably wrong since onscreen representations of color
-// are not guaranteed to be faithful (due to QColor color allocation).
+// from TQColor is probably wrong since onscreen representations of color
+// are not guaranteed to be faithful (due to TQColor color allocation).
 //
 class kpColor
 {
@@ -54,8 +54,8 @@ public:
     kpColor (int red, int green, int blue, bool isTransparent = false);
     kpColor (const QRgb &rgba);
     kpColor (const kpColor &rhs);
-    friend QDataStream &operator<< (QDataStream &stream, const kpColor &color);
-    friend QDataStream &operator>> (QDataStream &stream, kpColor &color);
+    friend TQDataStream &operator<< (TQDataStream &stream, const kpColor &color);
+    friend TQDataStream &operator>> (TQDataStream &stream, kpColor &color);
     kpColor &operator= (const kpColor &rhs);
     bool operator== (const kpColor &rhs) const;
     bool operator!= (const kpColor &rhs) const;
@@ -84,17 +84,17 @@ public:
     QRgb toQRgb () const;
 
     // (only valid if isOpaque())
-    // (const QColor & return results in fewer color reallocations)
-    const QColor &toQColor () const;
+    // (const TQColor & return results in fewer color reallocations)
+    const TQColor &toQColor () const;
 
-    QColor maskColor () const;
+    TQColor maskColor () const;
 
 private:
     bool m_rgbaIsValid;
     QRgb m_rgba;
 
     mutable bool m_colorCacheIsValid;
-    mutable QColor m_colorCache;
+    mutable TQColor m_colorCache;
 };
 
 

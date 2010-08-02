@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kdebug.h>
 #include <kstandarddirs.h>
@@ -41,7 +41,7 @@ FileCache * FileCache::self()
 
 KuickFile * FileCache::getFile( const KURL& url )
 {
-    QString urlString = url.prettyURL();
+    TQString urlString = url.prettyURL();
     KuickFile *file = m_files.find( urlString );
     if ( !file ) {
         file = new KuickFile( url );
@@ -51,14 +51,14 @@ KuickFile * FileCache::getFile( const KURL& url )
     return file;
 }
 
-QString FileCache::tempDir()
+TQString FileCache::tempDir()
 {
     if ( !m_tempDir ) {
         m_tempDir = createTempDir();
 
         if ( !m_tempDir ) {
             kdWarning() << "Unable to create temporary directory for KuickShow" << endl;
-            return QString::null;
+            return TQString::null;
         }
     }
     
@@ -68,9 +68,9 @@ QString FileCache::tempDir()
 
 KTempDir * FileCache::createTempDir()
 {
-    QString tmpName = QString::fromLatin1( KGlobal::instance()->instanceName() );
-    tmpName.append( QString::number( getpid() ) );
-    QString dirName = locateLocal( "tmp", tmpName );
+    TQString tmpName = TQString::fromLatin1( KGlobal::instance()->instanceName() );
+    tmpName.append( TQString::number( getpid() ) );
+    TQString dirName = locateLocal( "tmp", tmpName );
     KTempDir *dir = new KTempDir( dirName );
     dir->setAutoDelete( true );
     if ( dir->status() != 0L )

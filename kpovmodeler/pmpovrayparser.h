@@ -117,11 +117,11 @@ public:
    /**
     * Parser that parses the device
     */
-   PMPovrayParser( PMPart* part, QIODevice* device );
+   PMPovrayParser( PMPart* part, TQIODevice* device );
    /**
     * Parser that parses the byte array
     */
-   PMPovrayParser( PMPart* part, const QByteArray& array );
+   PMPovrayParser( PMPart* part, const TQByteArray& array );
    /**
     * Deletes the parser
     */
@@ -179,7 +179,7 @@ private:
     * If t is not a single character token, set tokenName to the token
     * name (like "box", "sphere" ...)
     */
-   bool parseToken( int t, const QString& tokenName = QString::null );
+   bool parseToken( int t, const TQString& tokenName = TQString::null );
 
    /**
     * Parses an item of a vector, float or color expression
@@ -520,10 +520,10 @@ private:
    /**
     * All comments are skipped during parsing and stored here
     */
-   QPtrList<PMComment> m_skippedComments;
+   TQPtrList<PMComment> m_skippedComments;
    /**
     * The last skipped comment text with special kpovmodeler tags*/
-   QString m_lastPMComment;
+   TQString m_lastPMComment;
    /**
     * true if m_lastPMComment is empty
     */

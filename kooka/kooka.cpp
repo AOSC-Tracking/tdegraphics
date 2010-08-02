@@ -30,11 +30,11 @@
 #include "kookapref.h"
 #include "imgprintdialog.h"
 
-#include <qlineedit.h>
-#include <qprinter.h>
-#include <qprintdialog.h>
-#include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <tqlineedit.h>
+#include <tqprinter.h>
+#include <tqprintdialog.h>
+#include <tqpainter.h>
+#include <tqpaintdevicemetrics.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -49,7 +49,7 @@
 #include <kstatusbar.h>
 #include <kurl.h>
 #include <kurlrequesterdlg.h>
-#include <qstrlist.h>
+#include <tqstrlist.h>
 #include <kedittoolbar.h>
 #include <kmessagebox.h>
 #include <kdockwidget.h>
@@ -57,13 +57,13 @@
 #include <kstdaccel.h>
 #include <kaction.h>
 #include <kstdaction.h>
-#include <qiconset.h>
+#include <tqiconset.h>
 #include <kurldrag.h>
 
 #define DOCK_SIZES "DockSizes"
 
 
-Kooka::Kooka( const QCString& deviceToUse)
+Kooka::Kooka( const TQCString& deviceToUse)
    : KParts::DockMainWindow( 0, "Kooka" ),
       m_printer(0),
       m_prefDialogIndex(0)
@@ -83,20 +83,20 @@ Kooka::Kooka( const QCString& deviceToUse)
 
     createGUI(0L); // m_view->ocrResultPart());
     // and a status bar
-    statusBar()->insertItem( QString(), KookaView::StatusTemp );
+    statusBar()->insertItem( TQString(), KookaView::StatusTemp );
     statusBar()->show();
 
     // allow the view to change the statusbar and caption
-    connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
-            this,   SLOT(changeStatusbar(const QString&)));
-    connect(m_view, SIGNAL(signalCleanStatusbar(void)),
-            this, SLOT(cleanStatusbar()));
-    connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
-            this,   SLOT(changeCaption(const QString&)));
+    connect(m_view, TQT_SIGNAL(signalChangeStatusbar(const TQString&)),
+            this,   TQT_SLOT(changeStatusbar(const TQString&)));
+    connect(m_view, TQT_SIGNAL(signalCleanStatusbar(void)),
+            this, TQT_SLOT(cleanStatusbar()));
+    connect(m_view, TQT_SIGNAL(signalChangeCaption(const TQString&)),
+            this,   TQT_SLOT(changeCaption(const TQString&)));
 
     changeCaption( i18n( "KDE Scanning" ));
 
-    setAutoSaveSettings(  QString::fromLatin1("General Options"),
+    setAutoSaveSettings(  TQString::fromLatin1("General Options"),
                           true );
 }
 
@@ -125,47 +125,47 @@ void Kooka::startup( void )
 void Kooka::setupActions()
 {
 
-    KStdAction::print(this, SLOT(filePrint()), actionCollection());
-    KStdAction::quit(this , SLOT(close()), actionCollection());
+    KStdAction::print(this, TQT_SLOT(filePrint()), actionCollection());
+    KStdAction::quit(this , TQT_SLOT(close()), actionCollection());
 
-    KStdAction::keyBindings(guiFactory(), SLOT(configureShortcuts()), 
+    KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
-    KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()),
+    KStdAction::configureToolbars(this, TQT_SLOT(optionsConfigureToolbars()),
 				  actionCollection());
-    KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
+    KStdAction::preferences(this, TQT_SLOT(optionsPreferences()), actionCollection());
 
     m_view->createDockMenu(actionCollection(), this, "settings_show_docks" );
 
     /* Image Viewer action Toolbar - OCR, Scaling etc. */
     (void) new KAction(i18n("&OCR Image..."), "ocr", CTRL+Key_O,
-		       m_view, SLOT(doOCR()),
+		       m_view, TQT_SLOT(doOCR()),
 		       actionCollection(), "ocrImage" );
 
     (void) new KAction(i18n("O&CR on Selection..."), "ocr-select", CTRL+Key_C,
-		       m_view, SLOT(doOCRonSelection()),
+		       m_view, TQT_SLOT(doOCRonSelection()),
 		       actionCollection(), "ocrImageSelect" );
 
     KAction *act;
     act =  new KAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
-		       m_view, SLOT( slIVScaleToWidth()),
+		       m_view, TQT_SLOT( slIVScaleToWidth()),
 		       actionCollection(), "scaleToWidth" );
     m_view->connectViewerAction( act );
 
     act = new KAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
-		       m_view, SLOT( slIVScaleToHeight()),
+		       m_view, TQT_SLOT( slIVScaleToHeight()),
 		       actionCollection(), "scaleToHeight" );
     m_view->connectViewerAction( act );
 
     act = new KAction(i18n("Original &Size"), "scaleorig", CTRL+Key_S,
-                      m_view, SLOT( slIVScaleOriginal()),
+                      m_view, TQT_SLOT( slIVScaleOriginal()),
                       actionCollection(), "scaleOriginal" );
     m_view->connectViewerAction( act );
 
 #ifdef QICONSET_HONOUR_ON_OFF
-    /* The Toggleaction does not seem to handle the on/off icon from QIconSet */
-    QIconSet lockSet;
-    lockSet.setPixmap(BarIcon("lock")  , QIconSet::Automatic, QIconSet::Normal, QIconSet::On );
-    lockSet.setPixmap(BarIcon("unlock"), QIconSet::Automatic, QIconSet::Normal, QIconSet::Off);
+    /* The Toggleaction does not seem to handle the on/off icon from TQIconSet */
+    TQIconSet lockSet;
+    lockSet.setPixmap(BarIcon("lock")  , TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::On );
+    lockSet.setPixmap(BarIcon("unlock"), TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::Off);
     act = new KToggleAction ( i18n("Keep &Zoom Setting"), lockSet, CTRL+Key_Z,
                               actionCollection(), "keepZoom" );
 #else
@@ -173,100 +173,100 @@ actionCollection());
                              actionCollection(), "keepZoom" );
 #endif
 
-    connect( act, SIGNAL( toggled( bool ) ), m_view->getImageViewer(),
-             SLOT(setKeepZoom(bool)));
+    connect( act, TQT_SIGNAL( toggled( bool ) ), m_view->getImageViewer(),
+             TQT_SLOT(setKeepZoom(bool)));
 
     m_view->connectViewerAction( act );
 
     /* thumbview and gallery actions */
     act = new KAction(i18n("Set Zoom..."), "viewmag", 0,
-		       m_view, SLOT( slIVShowZoomDialog()),
+		       m_view, TQT_SLOT( slIVShowZoomDialog()),
 		       actionCollection(), "showZoomDialog" );
     m_view->connectViewerAction( act );
 
     (void) new KAction(i18n("Create From Selectio&n"), "crop", CTRL+Key_N,
-		       m_view, SLOT( slCreateNewImgFromSelection() ),
+		       m_view, TQT_SLOT( slCreateNewImgFromSelection() ),
 		       actionCollection(), "createFromSelection" );
 
     (void) new KAction(i18n("Mirror Image &Vertically"), "mirror-vert", CTRL+Key_V,
-		       this, SLOT( slMirrorVertical() ),
+		       this, TQT_SLOT( slMirrorVertical() ),
 		       actionCollection(), "mirrorVertical" );
 
     (void) new KAction(i18n("&Mirror Image Horizontally"), "mirror-horiz", CTRL+Key_M,
-		       this, SLOT( slMirrorHorizontal() ),
+		       this, TQT_SLOT( slMirrorHorizontal() ),
 		       actionCollection(), "mirrorHorizontal" );
 
     (void) new KAction(i18n("Mirror Image &Both Directions"), "mirror-both", CTRL+Key_B,
-		       this, SLOT( slMirrorBoth() ),
+		       this, TQT_SLOT( slMirrorBoth() ),
 		       actionCollection(), "mirrorBoth" );
 
     (void) new KAction(i18n("Open Image in &Graphic Application..."), "fileopen", CTRL+Key_G,
-		       m_view, SLOT( slOpenCurrInGraphApp() ),
+		       m_view, TQT_SLOT( slOpenCurrInGraphApp() ),
 		       actionCollection(), "openInGraphApp" );
 
     act = new KAction(i18n("&Rotate Image Clockwise"), "rotate_cw", CTRL+Key_R,
-		      this, SLOT( slRotateClockWise() ),
+		      this, TQT_SLOT( slRotateClockWise() ),
 		       actionCollection(), "rotateClockwise" );
     m_view->connectViewerAction( act );
 
     act = new KAction(i18n("Rotate Image Counter-Clock&wise"), "rotate_ccw", CTRL+Key_W,
-		       this, SLOT( slRotateCounterClockWise() ),
+		       this, TQT_SLOT( slRotateCounterClockWise() ),
 		       actionCollection(), "rotateCounterClockwise" );
     m_view->connectViewerAction( act );
 
     act = new KAction(i18n("Rotate Image 180 &Degrees"), "rotate", CTRL+Key_D,
-		       this, SLOT( slRotate180() ),
+		       this, TQT_SLOT( slRotate180() ),
 		       actionCollection(), "upsitedown" );
     m_view->connectViewerAction( act );
 
     /* Gallery actions */
     act = new KAction(i18n("&Create Folder..."), "folder_new", 0,
-		      m_view->gallery(), SLOT( slotCreateFolder() ),
+		      m_view->gallery(), TQT_SLOT( slotCreateFolder() ),
 		       actionCollection(), "foldernew" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Save Image..."), "filesave", 0,
-		      m_view->gallery(), SLOT( slotExportFile() ),
+		      m_view->gallery(), TQT_SLOT( slotExportFile() ),
 		       actionCollection(), "saveImage" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Import Image..."), "inline_image", 0,
-		      m_view->gallery(), SLOT( slotImportFile() ),
+		      m_view->gallery(), TQT_SLOT( slotImportFile() ),
 		       actionCollection(), "importImage" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Delete Image"), "edittrash", 0,
-		      m_view->gallery(), SLOT( slotDeleteItems() ),
+		      m_view->gallery(), TQT_SLOT( slotDeleteItems() ),
 		       actionCollection(), "deleteImage" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Unload Image"), "fileclose", 0,
-		      m_view->gallery(), SLOT( slotUnloadItems() ),
+		      m_view->gallery(), TQT_SLOT( slotUnloadItems() ),
 		       actionCollection(), "unloadImage" );
     m_view->connectGalleryAction( act );
 
 #if 0
     /* not yet supported actions - coming post 3.1 */
     (void) new KAction(i18n("&Load Scan Parameters"), "bookmark_add", CTRL+Key_L,
-                       m_view, SLOT(slLoadScanParams()),
+                       m_view, TQT_SLOT(slLoadScanParams()),
                        actionCollection(), "loadscanparam" );
 
     (void) new KAction(i18n("Save &Scan Parameters"), "bookmark_add", CTRL+Key_S,
-		       m_view, SLOT(slSaveScanParams()),
+		       m_view, TQT_SLOT(slSaveScanParams()),
 		       actionCollection(), "savescanparam" );
 #endif
 
     (void) new KAction(i18n("Select Scan Device"), "scanner", 0,
-		       m_view, SLOT( slSelectDevice()),
+		       m_view, TQT_SLOT( slSelectDevice()),
 		       actionCollection(), "selectsource" );
 
     (void) new KAction( i18n("Enable All Warnings && Messages"), 0,
-			this,  SLOT(slEnableWarnings()),
+			this,  TQT_SLOT(slEnableWarnings()),
 			actionCollection(), "enable_msgs");
 
 
     m_saveOCRTextAction = new KAction( i18n("Save OCR Res&ult Text"), "filesaveas", CTRL+Key_U,
-                                       m_view, SLOT(slSaveOCRResult()),
+                                       m_view, TQT_SLOT(slSaveOCRResult()),
                                        actionCollection(), "saveOCRResult");
 }
 
@@ -294,18 +294,18 @@ void Kooka::readProperties(KConfig *config)
     // in 'saveProperties'
    config->setGroup( KOOKA_STATE_GROUP );
    m_prefDialogIndex = config->readNumEntry( PREFERENCE_DIA_TAB, 0 );
-   // QString url = config->readPathEntry("lastURL");
+   // TQString url = config->readPathEntry("lastURL");
 
 }
 
-void Kooka::dragEnterEvent(QDragEnterEvent *event)
+void Kooka::dragEnterEvent(TQDragEnterEvent *event)
 {
     // accept uri drops only
     event->accept(KURLDrag::canDecode(event));
 }
 
 #if 0
-void Kooka::dropEvent(QDropEvent *event)
+void Kooka::dropEvent(TQDropEvent *event)
 {
     // this is a very simplistic implementation of a drop event.  we
     // will only accept a dropped URL.  the Qt dnd code can do *much*
@@ -354,7 +354,7 @@ void Kooka::fileSave()
 void Kooka::fileSaveAs()
 {
     // this slot is called whenever the File->Save As menu is selected,
-   QStrList strlist;
+   TQStrList strlist;
    strlist.append( "BMP" );
    strlist.append( "JPEG" );
    FormatDialog fd( 0, "FormatDialog", &strlist );
@@ -387,7 +387,7 @@ void Kooka::optionsConfigureToolbars()
     // use the standard toolbar editor
     saveMainWindowSettings(KGlobal::config(), autoSaveGroup());
     KEditToolbar dlg(factory());
-    connect(&dlg, SIGNAL(newToolbarConfig()), SLOT(newToolbarConfig()));
+    connect(&dlg, TQT_SIGNAL(newToolbarConfig()), TQT_SLOT(newToolbarConfig()));
     dlg.exec();
 }
 
@@ -402,7 +402,7 @@ void Kooka::optionsPreferences()
     // popup some sort of preference dialog, here
     KookaPreferences dlg;
     dlg.showPage( m_prefDialogIndex );
-    connect( &dlg, SIGNAL( dataSaved() ), m_view, SLOT(slFreshUpThumbView()));
+    connect( &dlg, TQT_SIGNAL( dataSaved() ), m_view, TQT_SLOT(slFreshUpThumbView()));
 
     if (dlg.exec())
     {
@@ -412,13 +412,13 @@ void Kooka::optionsPreferences()
     }
 }
 
-void Kooka::changeStatusbar(const QString& text)
+void Kooka::changeStatusbar(const TQString& text)
 {
     // display the text on the statusbar
     statusBar()->changeItem( text, KookaView::StatusTemp );
 }
 
-void Kooka::changeCaption(const QString& text)
+void Kooka::changeCaption(const TQString& text)
 {
     // display the text on the caption
     setCaption(text);

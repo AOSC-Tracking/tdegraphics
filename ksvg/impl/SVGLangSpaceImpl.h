@@ -40,7 +40,7 @@ public:
 	void setXmlspace(const DOM::DOMString &xmlspace);
 	DOM::DOMString xmlspace() const;
 
-	QString handleText(const QString &data) const;
+	TQString handleText(const TQString &data) const;
 
 private:
 	DOM::DOMString m_xmllang;

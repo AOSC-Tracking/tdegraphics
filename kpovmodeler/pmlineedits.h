@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <qlineedit.h>
+#include <tqlineedit.h>
 
 /**
  * Lineedit for float input
@@ -38,7 +38,7 @@ public:
    /**
     * Simple constructor
     */
-   PMFloatEdit( QWidget* parent, const char* name = 0 );
+   PMFloatEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Sets the validation for the lineedit.
     *
@@ -75,7 +75,7 @@ signals:
     */
    void dataChanged( );
 public slots:
-   void slotEditTextChanged( const QString& t );
+   void slotEditTextChanged( const TQString& t );
 private:
    bool m_bCheckLower, m_bCheckUpper;
    double m_lowerValue, m_upperValue;
@@ -94,7 +94,7 @@ public:
    /**
     * Simple constructor
     */
-   PMIntEdit( QWidget* parent, const char* name = 0 );
+   PMIntEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Sets the validation for the lineedit.
     *
@@ -124,7 +124,7 @@ signals:
     */
    void dataChanged( );
 public slots:
-   void slotEditTextChanged( const QString& t );
+   void slotEditTextChanged( const TQString& t );
 private:
    bool m_bCheckLower, m_bCheckUpper;
    int m_lowerValue, m_upperValue;

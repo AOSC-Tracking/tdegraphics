@@ -15,9 +15,9 @@
 #include <string.h>
 #include <strings.h>
 // KPDF: additional includes for Qt and Xft
-#include <qstring.h>
-#include <qregexp.h>
-#include <qwindowdefs.h>
+#include <tqstring.h>
+#include <tqregexp.h>
+#include <tqwindowdefs.h>
 // -- gentoo compile fix (XFree 4.3.0, FC 2.2.3, FreeType 2.1.9) --
 // on other distros these 2 lines should't harm
 #include <ft2build.h>
@@ -57,8 +57,8 @@
 #endif
 #include "GlobalParams.h"
 
-#include <qstring.h>
-#include <qregexp.h>
+#include <tqstring.h>
+#include <tqregexp.h>
 #include <fontconfig/fontconfig.h>
 
 #ifdef WIN32
@@ -699,7 +699,7 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   psPreload = gFalse;
   psOPI = gFalse;
   psASCIIHex = gFalse;
-  // KPDF: use always UTF-8 and QString::fromUtf
+  // KPDF: use always UTF-8 and TQString::fromUtf
   textEncoding = new GString("UTF-8");
 #if defined(WIN32)
   textEOL = eolDOS;
@@ -1057,7 +1057,7 @@ void GlobalParams::parseLine(char *buf, GString *fileName, int line) {
     } else if (!cmd->cmp("psASCIIHex")) {
       parseYesNo("psASCIIHex", &psASCIIHex, tokens, fileName, line);
     } else if (!cmd->cmp("textEncoding")) {
-//      Always use UTF-8 and allow QString do the magic
+//      Always use UTF-8 and allow TQString do the magic
 //      parseTextEncoding(tokens, fileName, line);
     } else if (!cmd->cmp("textEOL")) {
       parseTextEOL(tokens, fileName, line);
@@ -2055,13 +2055,13 @@ FILE *GlobalParams::findToUnicodeFile(GString *name) {
 // KPDF: parse xpdf font name into family and style
 // Helvetica-BoldOblique => name=Helvetica, weight=Bold, slant=Oblique
 
-void parseStyle(QString& name, int& weight, int& slant, int& width)
+void parseStyle(TQString& name, int& weight, int& slant, int& width)
 {
   if (name.find("MS-") == 0) name = "MS " + name.remove(0,3);
 
   if (!name.contains('-') && !name.contains(',')) return;
-  QString type = name.section(QRegExp("[-,]"),-1);
-  name = name.section(QRegExp("[-,]"),0,-2);
+  TQString type = name.section(TQRegExp("[-,]"),-1);
+  name = name.section(TQRegExp("[-,]"),0,-2);
   if (type.contains("Oblique")) slant=FC_SLANT_OBLIQUE;
   if (type.contains("Italic")) slant=FC_SLANT_ITALIC;
   if (type.contains("Bold")) weight=FC_WEIGHT_BOLD;
@@ -2081,7 +2081,7 @@ DisplayFontParam *GlobalParams::getDisplayFont(GString *fontName) {
   // KPDF: try to find font using Xft
   if (!dfp) {
   	int weight=FC_WEIGHT_MEDIUM, slant=FC_SLANT_ROMAN, width=FC_WIDTH_NORMAL;
-	QString name(fontName->getCString());
+	TQString name(fontName->getCString());
 	
 	parseStyle(name,weight,slant,width);
 	p = FcPatternBuild(0,FC_FAMILY,FcTypeString, name.ascii(), 

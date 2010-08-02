@@ -33,7 +33,7 @@
 
 #include "ksvg_lookup.h"
 
-class QImage;
+class TQImage;
 
 namespace KSVG
 {
@@ -54,7 +54,7 @@ public:
 	void setRenderingIntent(unsigned short renderingIntent);
 	unsigned short renderingIntent() const;
 
-	QImage *correctImage(QImage *input);
+	TQImage *correctImage(TQImage *input);
 	QRgb correctPixel(float r, float g, float b);
 
 private:
@@ -62,7 +62,7 @@ private:
 	void closeColorProfile();
 
 	bool canLoad();
-	bool canLoad(bool remote, bool &tempFile, QString &open, bool verbose);	
+	bool canLoad(bool remote, bool &tempFile, TQString &open, bool verbose);	
 
 	DOM::DOMString m_local;
 	DOM::DOMString m_name;

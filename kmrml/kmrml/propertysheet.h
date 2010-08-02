@@ -19,11 +19,11 @@
 #ifndef PROPERTYSHEET_H
 #define PROPERTYSHEET_H
 
-#include <qdom.h>
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqdom.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
-class QWidget;
+class TQWidget;
 
 namespace KMrml
 {
@@ -59,7 +59,7 @@ namespace KMrml
         };
 
         PropertySheet();
-        PropertySheet( const QDomElement& elem );
+        PropertySheet( const TQDomElement& elem );
         PropertySheet( const PropertySheet& ps );
         ~PropertySheet() {};
 
@@ -69,32 +69,32 @@ namespace KMrml
             // required mrml attributes
             return !m_id.isNull() && m_type != 0 && m_sendType != 0;
         }
-        void initFromDOM( const QDomElement& elem );
+        void initFromDOM( const TQDomElement& elem );
 
-        void toElement( QDomElement& parent );
+        void toElement( TQDomElement& parent );
 
-        QWidget * createWidget( QWidget *parent, const char *name = 0 );
+        TQWidget * createWidget( TQWidget *parent, const char *name = 0 );
 
     private:
-        static Visibility getVisibility( const QString& value );
-        static Type getType( const QString& value );
-        static SendType getSendType( const QString& value );
-        static int toInt( const QString& value, int defaultValue = 0 );
+        static Visibility getVisibility( const TQString& value );
+        static Type getType( const TQString& value );
+        static SendType getSendType( const TQString& value );
+        static int toInt( const TQString& value, int defaultValue = 0 );
 
         void init();
 
 
         // update operator=() when adding data members!
 
-        QPtrList<PropertySheet> m_subSheets;
+        TQPtrList<PropertySheet> m_subSheets;
         Visibility m_visibility;
         Type m_type;
-        QString m_caption;
-        QString m_id;
+        TQString m_caption;
+        TQString m_id;
 
         SendType m_sendType;
-        QString m_sendName;
-        QString m_sendValue;
+        TQString m_sendName;
+        TQString m_sendValue;
 
         int m_minRange;
         int m_maxRange;

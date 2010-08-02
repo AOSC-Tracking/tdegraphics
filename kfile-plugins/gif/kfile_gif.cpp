@@ -31,19 +31,19 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qimage.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqimage.h>
 
 typedef KGenericFactory<KGifPlugin> GifFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_gif, GifFactory("kfile_gif"))
 
-KGifPlugin::KGifPlugin(QObject *parent, const char *name,
-                       const QStringList &args)
+KGifPlugin::KGifPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args)
     : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "gif KFileMetaInfo plugin\n";
@@ -56,13 +56,13 @@ KGifPlugin::KGifPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Version", i18n("Version"), QVariant::String);
+    item = addItemInfo(group, "Version", i18n("Version"), TQVariant::String);
 
-    item = addItemInfo( group, "Dimensions", i18n("Dimensions"), QVariant::Size );
+    item = addItemInfo( group, "Dimensions", i18n("Dimensions"), TQVariant::Size );
     setHint( item, KFileMimeTypeInfo::Size );
     setUnit( item, KFileMimeTypeInfo::Pixels );
 
-    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
 }
@@ -73,14 +73,14 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     kdDebug(7034) << "gif KFileMetaInfo readInfo\n";
 
-    QFile file(info.path());
+    TQFile file(info.path());
 
     if (!file.open(IO_ReadOnly)) {
-	kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+	kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
 	return false;
     }
 
-    QDataStream fstream(&file);
+    TQDataStream fstream(&file);
 
     bool isGIF87a = false;
     char magic[7];
@@ -92,7 +92,7 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
     magic[6] = 0x00; // null terminate
 
     // I have special requirements...
-    fstream.setByteOrder( QDataStream::LittleEndian );
+    fstream.setByteOrder( TQDataStream::LittleEndian );
     fstream >> width;
     fstream >> height;
     fstream >> miscInfo;
@@ -108,7 +108,7 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 	appendItem( group, "Version", i18n("Unknown") );
     }
 
-    appendItem( group, "Dimensions", QSize(width, height) );
+    appendItem( group, "Dimensions", TQSize(width, height) );
 
     if ( isGIF87a ) {
 	appendItem( group, "BitDepth", ( (miscInfo & 0x07) + 1) );

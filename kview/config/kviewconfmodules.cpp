@@ -18,34 +18,34 @@
 
 #include "kviewconfmodules.h"
 
-#include <qlayout.h>
-#include <qvbuttongroup.h>
-#include <qradiobutton.h>
+#include <tqlayout.h>
+#include <tqvbuttongroup.h>
+#include <tqradiobutton.h>
 
 #include <klocale.h>
 #include <kdialog.h>
 #include <kglobal.h>
 #include <kconfig.h>
 #include <kgenericfactory.h>
-#include <qwhatsthis.h>
+#include <tqwhatsthis.h>
 
-typedef KGenericFactory<KViewGeneralConfig, QWidget> KViewGeneralConfigFactory;
+typedef KGenericFactory<KViewGeneralConfig, TQWidget> KViewGeneralConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewgeneralconfig, KViewGeneralConfigFactory( "kcm_kviewgeneralconfig" ) )
 
-KViewGeneralConfig::KViewGeneralConfig( QWidget * parent, const char * /*name*/, const QStringList & args )
+KViewGeneralConfig::KViewGeneralConfig( TQWidget * parent, const char * /*name*/, const TQStringList & args )
 	: KCModule( KViewGeneralConfigFactory::instance(), parent, args )
 {
-	QBoxLayout * layout = new QVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 
-	m_pResizeGroup = new QVButtonGroup( i18n( "Resizing" ), this );
-	m_pResizeGroup->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed ) );
-	connect( m_pResizeGroup, SIGNAL( clicked( int ) ), this, SLOT( resizeChanged( int ) ) );
+	m_pResizeGroup = new TQVButtonGroup( i18n( "Resizing" ), this );
+	m_pResizeGroup->setSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
+	connect( m_pResizeGroup, TQT_SIGNAL( clicked( int ) ), this, TQT_SLOT( resizeChanged( int ) ) );
 	layout->addWidget( m_pResizeGroup );
 
-	( void )new QRadioButton( i18n( "Only resize window" ), m_pResizeGroup );
-	( void )new QRadioButton( i18n( "Resize image to fit window" ), m_pResizeGroup );
-	( void )new QRadioButton( i18n( "Don't resize anything" ), m_pResizeGroup );
-	QWhatsThis::add( new QRadioButton( i18n( "Best fit" ), m_pResizeGroup ),
+	( void )new TQRadioButton( i18n( "Only resize window" ), m_pResizeGroup );
+	( void )new TQRadioButton( i18n( "Resize image to fit window" ), m_pResizeGroup );
+	( void )new TQRadioButton( i18n( "Don't resize anything" ), m_pResizeGroup );
+	TQWhatsThis::add( new TQRadioButton( i18n( "Best fit" ), m_pResizeGroup ),
 			i18n( "<p>KView will resize the window to fit the image. The image will never be scaled up but if it is too large for the screen the image will be scaled down.</p>" ) );
 
 	load();

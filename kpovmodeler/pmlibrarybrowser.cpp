@@ -18,12 +18,12 @@
 
 #include "pmlibrarybrowser.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qsplitter.h>
-#include <qtimer.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqsplitter.h>
+#include <tqtimer.h>
+#include <tqpushbutton.h>
 
 #include <kio/job.h>
 #include <kurl.h>
@@ -47,39 +47,39 @@
 
 // ************** PMLibraryBrowser **************************
 
-PMLibraryBrowserView::PMLibraryBrowserView( PMPart* /*part*/, QWidget* parent /*= 0*/,
+PMLibraryBrowserView::PMLibraryBrowserView( PMPart* /*part*/, TQWidget* parent /*= 0*/,
                                     const char* name /*=0*/ )
       : PMViewBase( parent, name )
 {
-   QHBoxLayout* hl = new QHBoxLayout( this );
+   TQHBoxLayout* hl = new TQHBoxLayout( this );
    PMLibraryBrowserViewWidget* tv = new PMLibraryBrowserViewWidget( this );
    hl->addWidget( tv );
 }
 
-QString PMLibraryBrowserView::description( ) const
+TQString PMLibraryBrowserView::description( ) const
 {
    return i18n( "Library View" );
 }
 
-PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    setCaption( i18n( "Library Objects" ) );
 
-   QVBoxLayout* vl = new QVBoxLayout( this, KDialog::spacingHint( ) );
+   TQVBoxLayout* vl = new TQVBoxLayout( this, KDialog::spacingHint( ) );
 
-   QHBoxLayout* hl = new QHBoxLayout( vl );
+   TQHBoxLayout* hl = new TQHBoxLayout( vl );
 
-   m_pUpButton = new QPushButton( this );
+   m_pUpButton = new TQPushButton( this );
    m_pUpButton->setPixmap( SmallIcon( "up" ) );
-   m_pNewSubLibraryButton = new QPushButton( this );
+   m_pNewSubLibraryButton = new TQPushButton( this );
    m_pNewSubLibraryButton->setPixmap( SmallIcon( "folder_new" ) );
-   m_pNewObjectButton = new QPushButton( this );
+   m_pNewObjectButton = new TQPushButton( this );
    m_pNewObjectButton->setPixmap( SmallIcon( "filenew" ) );
-   m_pDeleteObjectButton = new QPushButton( this );
+   m_pDeleteObjectButton = new TQPushButton( this );
    m_pDeleteObjectButton->setPixmap( SmallIcon( "editdelete" ) );
-   QLabel* lbl = new QLabel( i18n( "Library: " ), this );
-   m_pLibraryComboBox = new QComboBox( this );
+   TQLabel* lbl = new TQLabel( i18n( "Library: " ), this );
+   m_pLibraryComboBox = new TQComboBox( this );
    m_pLibraryComboBox->insertStringList( PMLibraryManager::theManager( )->availableLibraries( ) );
    m_pLibraryComboBox->setDuplicatesEnabled( false );
    m_pLibraryComboBox->setCurrentItem( 0 );
@@ -91,34 +91,34 @@ PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( QWidget* parent, const c
    hl->addWidget( m_pLibraryComboBox );
    hl->addStretch( 1 );
 
-   QSplitter *splitv = new QSplitter( this );
+   TQSplitter *splitv = new TQSplitter( this );
    m_pLibraryIconView = new PMLibraryIconView( splitv );
    m_pLibraryIconView->setMinimumSize( PMDialogEditBase::previewSize( )+20, PMDialogEditBase::previewSize( ) );
    m_pLibraryEntryPreview = new PMLibraryEntryPreview( splitv );
    vl->addWidget( splitv, 99 );
 
    // Connect all the objects
-   connect( m_pUpButton, SIGNAL( clicked( ) ), SLOT( slotUpButtonClicked( ) ) );
-   connect( m_pNewSubLibraryButton, SIGNAL( clicked( ) ), SLOT( slotNewSubLibraryClicked( ) ) );
-   connect( m_pNewObjectButton,  SIGNAL( clicked( ) ), SLOT( slotNewObjectClicked( ) ) );
-   connect( m_pDeleteObjectButton, SIGNAL( clicked( ) ), SLOT( slotDeleteClicked( ) ) );
-   connect( m_pLibraryComboBox, SIGNAL( highlighted( const QString& ) ),
-                                SLOT( slotPathSelected( const QString& ) ) );
-   connect( m_pLibraryIconView, SIGNAL( selectionChanged( QIconViewItem* ) ),
-                                SLOT( slotSelectionChanged( QIconViewItem* ) ) );
-   connect( m_pLibraryIconView, SIGNAL( executed( QIconViewItem* ) ),
-                                SLOT( slotSelectionExecuted( QIconViewItem* ) ) );
-   connect( m_pLibraryEntryPreview, SIGNAL( objectChanged( ) ), SLOT( slotIconViewRefresh( ) ) );
+   connect( m_pUpButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUpButtonClicked( ) ) );
+   connect( m_pNewSubLibraryButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotNewSubLibraryClicked( ) ) );
+   connect( m_pNewObjectButton,  TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotNewObjectClicked( ) ) );
+   connect( m_pDeleteObjectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDeleteClicked( ) ) );
+   connect( m_pLibraryComboBox, TQT_SIGNAL( highlighted( const TQString& ) ),
+                                TQT_SLOT( slotPathSelected( const TQString& ) ) );
+   connect( m_pLibraryIconView, TQT_SIGNAL( selectionChanged( TQIconViewItem* ) ),
+                                TQT_SLOT( slotSelectionChanged( TQIconViewItem* ) ) );
+   connect( m_pLibraryIconView, TQT_SIGNAL( executed( TQIconViewItem* ) ),
+                                TQT_SLOT( slotSelectionExecuted( TQIconViewItem* ) ) );
+   connect( m_pLibraryEntryPreview, TQT_SIGNAL( objectChanged( ) ), TQT_SLOT( slotIconViewRefresh( ) ) );
 
    // Set the selected library
    slotPathSelected( m_pLibraryComboBox->currentText( ) );
 }
 
-void PMLibraryBrowserViewWidget::resizeEvent( QResizeEvent* /*ev*/ )
+void PMLibraryBrowserViewWidget::resizeEvent( TQResizeEvent* /*ev*/ )
 {
 }
 
-void PMLibraryBrowserViewWidget::slotPathSelected( const QString& str )
+void PMLibraryBrowserViewWidget::slotPathSelected( const TQString& str )
 {
    PMLibraryHandle* h = PMLibraryManager::theManager( )->getLibraryHandle( str );
    if( h )
@@ -154,28 +154,28 @@ void PMLibraryBrowserViewWidget::slotIconViewSetLibrary( )
    m_pFutureLibrary = NULL;
 }
 
-void PMLibraryBrowserViewWidget::slotSelectionChanged( QIconViewItem* item )
+void PMLibraryBrowserViewWidget::slotSelectionChanged( TQIconViewItem* item )
 {
    PMLibraryIconViewItem* sel = static_cast<PMLibraryIconViewItem*>( item );
    m_pLibraryIconView->setCurrentItem( sel );
    if( sel->isSubLibrary( ) )
    {
       if( m_pLibraryEntryPreview->saveIfNeeded( ) )
-         QTimer::singleShot( 100, this, SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
       else
          m_pLibraryEntryPreview->showPreview( sel->path( ), m_topLibraryReadOnly, true );
    }
    else
    {
       if( m_pLibraryEntryPreview->saveIfNeeded( ) )
-         QTimer::singleShot( 100, this, SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
       else
          m_pLibraryEntryPreview->showPreview( sel->path( ), m_topLibraryReadOnly, false );
    }
    m_pLibraryIconView->setFocus();
 }
 
-void PMLibraryBrowserViewWidget::slotSelectionExecuted( QIconViewItem* item )
+void PMLibraryBrowserViewWidget::slotSelectionExecuted( TQIconViewItem* item )
 {
    PMLibraryIconViewItem* sel = static_cast<PMLibraryIconViewItem*>( item );
    m_pLibraryIconView->setCurrentItem( sel );
@@ -184,14 +184,14 @@ void PMLibraryBrowserViewWidget::slotSelectionExecuted( QIconViewItem* item )
       // It's a sub library
       m_pFutureLibrary = new PMLibraryHandle( sel->path( ) );
       m_pLibraryEntryPreview->clearPreview( );
-      QTimer::singleShot( 100, this, SLOT( slotIconViewSetLibrary( ) ) );
+      TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewSetLibrary( ) ) );
       m_pUpButton->setEnabled( true );
    }
    else
    {
       // It's an object
       if( m_pLibraryEntryPreview->saveIfNeeded( ) )
-         QTimer::singleShot( 100, this, SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
       else
          m_pLibraryEntryPreview->showPreview( sel->path( ), m_topLibraryReadOnly, false );
    }
@@ -200,13 +200,13 @@ void PMLibraryBrowserViewWidget::slotSelectionExecuted( QIconViewItem* item )
 
 void PMLibraryBrowserViewWidget::slotUpButtonClicked( )
 {
-  QDir pathManipulator( m_pCurrentLibrary->path( ) );
+  TQDir pathManipulator( m_pCurrentLibrary->path( ) );
 
   pathManipulator.cdUp( );
   m_pFutureLibrary = new PMLibraryHandle( pathManipulator.path( ) );
   if( !m_pFutureLibrary->isSubLibrary( ) )
      m_pUpButton->setEnabled( false );
-  QTimer::singleShot( 100, this, SLOT( slotIconViewSetLibrary( ) ) );
+  TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewSetLibrary( ) ) );
 
   // Release the current Library
   delete m_pCurrentLibrary;
@@ -228,7 +228,7 @@ void PMLibraryBrowserViewWidget::slotDeleteClicked( )
       case PMLibraryHandle::Ok:
       {
          KIO::Job *job = KIO::del( sel->path() );
-         connect( job, SIGNAL( result( KIO::Job * ) ), SLOT( slotJobResult( KIO::Job * ) ) );
+         connect( job, TQT_SIGNAL( result( KIO::Job * ) ), TQT_SLOT( slotJobResult( KIO::Job * ) ) );
       }
       break;
       case PMLibraryHandle::ReadOnlyLib:
@@ -250,7 +250,7 @@ void PMLibraryBrowserViewWidget::slotNewObjectClicked( )
    switch( m_pCurrentLibrary->createNewObject( ) )
    {
       case PMLibraryHandle::Ok:
-         QTimer::singleShot( 100, this, SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
          break;
       case PMLibraryHandle::ReadOnlyLib:
          KMessageBox::error( this, i18n( "This library is read only." ), i18n( "Error" ) );
@@ -265,7 +265,7 @@ void PMLibraryBrowserViewWidget::slotNewSubLibraryClicked( )
    bool result = false;
 
    m_pLibraryEntryPreview->saveIfNeeded( );
-   QString subLibraryName = KInputDialog::getText( i18n( "Create Sub-Library" ),
+   TQString subLibraryName = KInputDialog::getText( i18n( "Create Sub-Library" ),
                                                    i18n( "Enter the sub-library name: " ),
                                                    i18n( "Unknown" ),
                                                    &result );
@@ -293,10 +293,10 @@ void PMLibraryBrowserViewWidget::slotJobResult( KIO::Job * job )
 {
    if( job->error( ) )
       job->showErrorDialog( this );
-   QTimer::singleShot( 100, this, SLOT( slotIconViewRefresh( ) ) );
+   TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
 }
 
-QString PMLibraryBrowserViewFactory::description( ) const
+TQString PMLibraryBrowserViewFactory::description( ) const
 {
    return i18n( "Library View" );
 }

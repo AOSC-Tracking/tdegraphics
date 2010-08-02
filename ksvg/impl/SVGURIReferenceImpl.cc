@@ -48,7 +48,7 @@ SVGAnimatedStringImpl *SVGURIReferenceImpl::href() const
 	return m_href;
 }
 
-bool SVGURIReferenceImpl::parseURIReference(const QString &urireference, QString &uri, QString &elementreference)
+bool SVGURIReferenceImpl::parseURIReference(const TQString &urireference, TQString &uri, TQString &elementreference)
 {
 	int seperator = urireference.find("#");
 
@@ -61,13 +61,13 @@ bool SVGURIReferenceImpl::parseURIReference(const QString &urireference, QString
 	return true;
 }
 
-bool SVGURIReferenceImpl::isUrl(const QString &url)
+bool SVGURIReferenceImpl::isUrl(const TQString &url)
 {
-	QString temp = url.stripWhiteSpace();
+	TQString temp = url.stripWhiteSpace();
 	return temp.startsWith("url(#") && temp.endsWith(")");
 }
 
-QString SVGURIReferenceImpl::getTarget(const QString &url)
+TQString SVGURIReferenceImpl::getTarget(const TQString &url)
 {
 	if(url.startsWith("url(")) // URI References, ie. fill:url(#target)
 	{

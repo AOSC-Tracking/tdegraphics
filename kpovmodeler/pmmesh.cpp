@@ -52,11 +52,11 @@ public:
    /**
     * Saves the triangles memento data
     */
-   void setTriangleMementos( const QPtrList<PMMemento>& list )
+   void setTriangleMementos( const TQPtrList<PMMemento>& list )
    {
       if ( !m_bTriangleMementosSaved )
       {
-         QPtrListIterator<PMMemento> Itr( list );
+         TQPtrListIterator<PMMemento> Itr( list );
          PMMemento* m;
          while( ( m = Itr.current( ) ) != 0 )
          {
@@ -71,7 +71,7 @@ public:
    /**
     * Returns the triangles memento data
     */
-   QPtrList<PMMemento> triangleMementos( ) const
+   TQPtrList<PMMemento> triangleMementos( ) const
    {
       if ( !m_bTriangleMementosSaved )
          kdError( PMArea ) << "Triangles mementos not saved in PMMeshMemento::triangleMementos\n";
@@ -82,7 +82,7 @@ public:
     */
    bool triangleMementosSaved( ) const { return m_bTriangleMementosSaved; }
 private:
-   QPtrList<PMMemento> m_triangleMementos;
+   TQPtrList<PMMemento> m_triangleMementos;
    bool m_bTriangleMementosSaved;
 };
 
@@ -112,12 +112,12 @@ PMMesh::~PMMesh( )
 {
 }
 
-QString PMMesh::description( ) const
+TQString PMMesh::description( ) const
 {
    return i18n( "mesh" );
 }
 
-void PMMesh::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMMesh::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "hierarchy", m_hierarchy );
    e.setAttribute( "enable_inside_vector", m_enableInsideVector );
@@ -189,7 +189,7 @@ void PMMesh::setInsideVector( const PMVector& iv )
    }
 }
 
-PMDialogEditBase* PMMesh::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMMesh::editWidget( TQWidget* parent ) const
 {
    return new PMMeshEdit( parent );
 }
@@ -233,8 +233,8 @@ void PMMesh::restoreMemento( PMMemento* s )
    {
       int numChildren = countChildren( );
       PMMemento* tm;
-      QPtrList<PMMemento> list = m->triangleMementos( );
-      QPtrListIterator<PMMemento> Itr( list );
+      TQPtrList<PMMemento> list = m->triangleMementos( );
+      TQPtrListIterator<PMMemento> Itr( list );
       for ( int i = 0; i < numChildren && ( tm = Itr.current( ) ) != 0; ++i, ++Itr )
          childAt( i )->restoreMemento( tm );
    }
@@ -331,8 +331,8 @@ void PMMesh::controlPointsChangedList( PMControlPointList& list, PMObjectList& o
 {
    int numChildren = countChildren( );
    PMControlPoint* p;
-   QValueList<pointToPoint>::ConstIterator ptpItr = m_pointToPointList.begin( );
-   QPtrList<PMMemento> mementoList;
+   TQValueList<pointToPoint>::ConstIterator ptpItr = m_pointToPointList.begin( );
+   TQPtrList<PMMemento> mementoList;
    PMTriangle *obj;
    PMVector p0, p1, p2;
    PM3DControlPoint* cp0, * cp1, * cp2;
@@ -346,7 +346,7 @@ void PMMesh::controlPointsChangedList( PMControlPointList& list, PMObjectList& o
    int listID, pointID, numCP;
 
    // have to cache changed values because checking once changes them to false
-   QMemArray<bool> changed( list.count( ) );
+   TQMemArray<bool> changed( list.count( ) );
    p = list.first( );
    for ( int i = 0; p; ++i, p = list.next( ) )
       changed[i] = p->changed( );

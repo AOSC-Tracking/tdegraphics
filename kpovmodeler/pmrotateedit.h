@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMRotateEdit with parent and name
     */
-   PMRotateEdit( QWidget* parent, const char* name = 0 );
+   PMRotateEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

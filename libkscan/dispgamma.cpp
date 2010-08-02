@@ -17,12 +17,12 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
 
 #include "dispgamma.h"
 
-DispGamma::DispGamma( QWidget *parent ) : QWidget( parent )
+DispGamma::DispGamma( TQWidget *parent ) : TQWidget( parent )
 {
     vals = 0;
     margin = 10;
@@ -33,14 +33,14 @@ DispGamma::~DispGamma()
 
 }
 
-void DispGamma::resizeEvent (QResizeEvent* )
+void DispGamma::resizeEvent (TQResizeEvent* )
 {
     repaint();
 }
 
-void DispGamma::paintEvent( QPaintEvent *ev )
+void DispGamma::paintEvent( TQPaintEvent *ev )
 {
-    QPainter p(this);
+    TQPainter p(this);
     int w = vals->size() +1;
 
     // Viewport auf margin setzen.
@@ -53,7 +53,7 @@ void DispGamma::paintEvent( QPaintEvent *ev )
     p.setBrush( colorGroup().base() );
     // Backgrond
     p.drawRect( 0,0, w, 256 );
-    p.setPen( QPen(colorGroup().midlight(), 1, DotLine));
+    p.setPen( TQPen(colorGroup().midlight(), 1, DotLine));
     // horizontal Grid
     for( int l = 1; l < 5; l++ )
             p.drawLine( 1, l*51, 255, l*51 );
@@ -73,13 +73,13 @@ void DispGamma::paintEvent( QPaintEvent *ev )
 }
 
 
-QSize DispGamma::sizeHint( void )
+TQSize DispGamma::sizeHint( void )
 {
-    return QSize( 256 + 2*margin,256 + 2 * margin );
+    return TQSize( 256 + 2*margin,256 + 2 * margin );
 }
 
-QSizePolicy DispGamma::sizePolicy( void )
+TQSizePolicy DispGamma::sizePolicy( void )
 {
-    return QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding );
+    return TQSizePolicy( TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding );
 }
 #include "dispgamma.moc"

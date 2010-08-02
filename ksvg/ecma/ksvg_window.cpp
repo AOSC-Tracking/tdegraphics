@@ -42,7 +42,7 @@
 #include <kparts/part.h>
 #include <assert.h>
 #include <kdebug.h>
-#include <qstylesheet.h>
+#include <tqstylesheet.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kinputdialog.h>
@@ -303,7 +303,7 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 	Window *window = static_cast<Window *>(thisObj.imp());
 	Value v = args[0];
 	UString s = v.toString(exec);
-	QString str = s.qstring();
+	TQString str = s.qstring();
 
 	switch(id)
 	{
@@ -342,9 +342,9 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 		case KSVG::Window::_PostURL:
 		{
 			KURL url((const_cast<Window *>(window))->doc()->baseUrl(), args[0].toString(exec).qstring());
-			QString data = args[1].toString(exec).qstring();
-			QString mimeType = args[3].toString(exec).qstring();
-			QString contentEncoding = args[4].toString(exec).qstring();
+			TQString data = args[1].toString(exec).qstring();
+			TQString mimeType = args[3].toString(exec).qstring();
+			TQString contentEncoding = args[4].toString(exec).qstring();
 			Object callBackFunction = Object::dynamicCast(args[2]);
 			
 			(const_cast<Window *>(window))->doc()->ecmaEngine()->postUrl(exec, url, data, mimeType, contentEncoding, callBackFunction);
@@ -364,7 +364,7 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 			SVGDocumentImpl *curDoc = (const_cast<Window *>(window))->doc();
 			doc->addToDocumentDict(curDoc->handle(), curDoc);
 
-			QXmlInputSource *svgFragment = new QXmlInputSource();
+			TQXmlInputSource *svgFragment = new TQXmlInputSource();
 			svgFragment->setData(args[0].toString(exec).qstring());
 
 			doc->parseSVG(svgFragment, true);
@@ -384,15 +384,15 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 		    // mop: from khtml. do we need that?
 		    // part->xmlDocImpl()->updateRendering();
 		    bool ok;
-		    QString str2;
+		    TQString str2;
 		    if (args.size() >= 2)
 			str2 = KInputDialog::getText(i18n("Prompt"),
-				QStyleSheet::convertFromPlainText(str),
+				TQStyleSheet::convertFromPlainText(str),
 				args[1].toString(exec).qstring(), &ok);
 		    else
 			str2 = KInputDialog::getText(i18n("Prompt"),
-				QStyleSheet::convertFromPlainText(str),
-				QString::null, &ok);
+				TQStyleSheet::convertFromPlainText(str),
+				TQString::null, &ok);
 		    if ( ok )
 			return String(str2);
 		    else
@@ -455,7 +455,7 @@ ScheduledAction::ScheduledAction(Object _func, List _args, bool _singleShot)
 	singleShot = _singleShot;
 }
 
-ScheduledAction::ScheduledAction(QString _code, bool _singleShot)
+ScheduledAction::ScheduledAction(TQString _code, bool _singleShot)
 {
 	code = _code;
 	isFunction = false;
@@ -503,7 +503,7 @@ void WindowQObject::parentDestroyed()
 {
 	killTimers();
 	
-	QMapIterator<int, ScheduledAction *> it;
+	TQMapIterator<int, ScheduledAction *> it;
 	for(it = scheduledActions.begin(); it != scheduledActions.end(); ++it)
 	{
 		ScheduledAction *action = *it;
@@ -535,7 +535,7 @@ void WindowQObject::clearTimeout(int timerId, bool delAction)
 	
 	if(delAction)
 	{
-		QMapIterator<int, ScheduledAction *> it = scheduledActions.find(timerId);
+		TQMapIterator<int, ScheduledAction *> it = scheduledActions.find(timerId);
 		if(it != scheduledActions.end())
 		{
 			ScheduledAction *action = *it;
@@ -545,9 +545,9 @@ void WindowQObject::clearTimeout(int timerId, bool delAction)
 	}
 }
 
-void WindowQObject::timerEvent(QTimerEvent *e)
+void WindowQObject::timerEvent(TQTimerEvent *e)
 {
-	QMapIterator<int, ScheduledAction *> it = scheduledActions.find(e->timerId());
+	TQMapIterator<int, ScheduledAction *> it = scheduledActions.find(e->timerId());
 	if(it != scheduledActions.end())
 	{
 		ScheduledAction *action = *it;

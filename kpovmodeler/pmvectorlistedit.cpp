@@ -18,10 +18,10 @@
 #include "pmvectorlistedit.h"
 #include "pmdebug.h"
 
-#include <qheader.h>
-#include <qapplication.h>
-#include <qpalette.h>
-#include <qpainter.h>
+#include <tqheader.h>
+#include <tqapplication.h>
+#include <tqpalette.h>
+#include <tqpainter.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 
@@ -29,19 +29,19 @@ const int c_columnWidth = 65;
 
 
 /*
-PMTableItem::PMTableItem( QTable* table )
-      : QTableItem( table, QTableItem::OnTyping, QString( "" ) )
+PMTableItem::PMTableItem( TQTable* table )
+      : TQTableItem( table, TQTableItem::OnTyping, TQString( "" ) )
 {
    m_readOnly = false;
 }
 
-void PMTableItem::paint( QPainter* p, const QColorGroup& cg,
-                         const QRect& cr, bool selected )
+void PMTableItem::paint( TQPainter* p, const TQColorGroup& cg,
+                         const TQRect& cr, bool selected )
 {
    p->fillRect( 0, 0, cr.width( ), cr.height( ),
-                selected ? cg.brush( QColorGroup::Highlight )
-                : ( m_readOnly ? cg.brush( QColorGroup::Background ) :
-                    cg.brush( QColorGroup::Base ) ) );
+                selected ? cg.brush( TQColorGroup::Highlight )
+                : ( m_readOnly ? cg.brush( TQColorGroup::Background ) :
+                    cg.brush( TQColorGroup::Base ) ) );
 
    int w = cr.width( );
    int h = cr.height( );
@@ -57,51 +57,51 @@ void PMTableItem::paint( QPainter* p, const QColorGroup& cg,
 }
 */
 
-PMVectorListEdit::PMVectorListEdit( QWidget* parent, const char* name )
-      : QTable( 1, 3, parent, name )
+PMVectorListEdit::PMVectorListEdit( TQWidget* parent, const char* name )
+      : TQTable( 1, 3, parent, name )
 {
    init( 3 );
 
-   QHeader* header = horizontalHeader( );
+   TQHeader* header = horizontalHeader( );
    header->setLabel( 0, "x" );
    header->setLabel( 1, "y" );
    header->setLabel( 2, "z" );
 }
 
-PMVectorListEdit::PMVectorListEdit( const QString& c1, const QString& c2,
-                                    const QString& c3, const QString& c4,
-                                    QWidget* parent, const char* name )
-      : QTable( 1, 4, parent, name )
+PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
+                                    const TQString& c3, const TQString& c4,
+                                    TQWidget* parent, const char* name )
+      : TQTable( 1, 4, parent, name )
 {
    init( 4 );
 
-   QHeader* header = horizontalHeader( );
+   TQHeader* header = horizontalHeader( );
    header->setLabel( 0, c1 );
    header->setLabel( 1, c2 );
    header->setLabel( 2, c3 );
    header->setLabel( 3, c4 );
 }
 
-PMVectorListEdit::PMVectorListEdit( const QString& c1, const QString& c2,
-                                    const QString& c3, QWidget* parent,
+PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
+                                    const TQString& c3, TQWidget* parent,
                                     const char* name )
-      : QTable( 1, 3, parent, name )
+      : TQTable( 1, 3, parent, name )
 {
    init( 3 );
 
-   QHeader* header = horizontalHeader( );
+   TQHeader* header = horizontalHeader( );
    header->setLabel( 0, c1 );
    header->setLabel( 1, c2 );
    header->setLabel( 2, c3 );
 }
 
-PMVectorListEdit::PMVectorListEdit( const QString& c1, const QString& c2,
-                                    QWidget* parent, const char* name )
-      : QTable( 1, 2, parent, name )
+PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
+                                    TQWidget* parent, const char* name )
+      : TQTable( 1, 2, parent, name )
 {
    init( 2 );
 
-   QHeader* header = horizontalHeader( );
+   TQHeader* header = horizontalHeader( );
    header->setLabel( 0, c1 );
    header->setLabel( 1, c2 );
 }
@@ -116,18 +116,18 @@ void PMVectorListEdit::init( int dimensions )
    horizontalHeader( )->setResizeEnabled( false );
    verticalHeader( )->setResizeEnabled( false );
 
-   setSelectionMode( QTable::MultiRow );
+   setSelectionMode( TQTable::MultiRow );
    for( i = 0; i < m_dimension; ++i )
       setColumnStretchable( i, true );
-   connect( this, SIGNAL( valueChanged( int, int ) ),
-            SLOT( slotTextChanged( int, int ) ) );
-   setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
+   connect( this, TQT_SIGNAL( valueChanged( int, int ) ),
+            TQT_SLOT( slotTextChanged( int, int ) ) );
+   setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
 }
 
-void PMVectorListEdit::setVectors( const QValueList<PMVector>& l,
+void PMVectorListEdit::setVectors( const TQValueList<PMVector>& l,
                                    bool resize, int prec )
 {
-   QValueList<PMVector>::ConstIterator it;
+   TQValueList<PMVector>::ConstIterator it;
    int r, nl = 0;
 
    for( r = 0; r < ( signed ) m_links.size( ); ++r )
@@ -158,9 +158,9 @@ void PMVectorListEdit::setVectors( const QValueList<PMVector>& l,
       kdError( PMArea ) << "Wrong size of vector list in PMVectorListEdit::setVectors" << endl;
 }
 
-QValueList<PMVector> PMVectorListEdit::vectors( ) const
+TQValueList<PMVector> PMVectorListEdit::vectors( ) const
 {
-   QValueList<PMVector> l;
+   TQValueList<PMVector> l;
    int i;
 
    for( i = 0; i < m_size; ++i )
@@ -183,7 +183,7 @@ void PMVectorListEdit::setVector( int r, const PMVector& v, int precision )
    blockSignals( true );
 
    int i;
-   QString str;
+   TQString str;
 
    for( i = 0; i < m_dimension && i <= ( signed ) v.size( ); ++i )
    {
@@ -218,8 +218,8 @@ void PMVectorListEdit::setSize( int s )
 
    setNumRows( s );
    int i;
-   QHeader* h = verticalHeader( );
-   QString str;
+   TQHeader* h = verticalHeader( );
+   TQString str;
 
    for( i = 0; i < s; ++i )
    {
@@ -240,8 +240,8 @@ void PMVectorListEdit::setLink( int p1, int p2 )
    if( p1 < 0 || p1 >= m_size || p2 >= m_size )
       return;
 
-   QHeader* h = verticalHeader( );
-   QString str;
+   TQHeader* h = verticalHeader( );
+   TQString str;
 
    // remove old link
    if( m_links[p1] >= 0 )
@@ -256,7 +256,7 @@ void PMVectorListEdit::setLink( int p1, int p2 )
    if( p2 >= 0 )
    {
       m_disabled[p2] = true;
-      str = QString( "%1 (=%2)" ).arg( p2 + 1 ).arg( p1 + 1 );
+      str = TQString( "%1 (=%2)" ).arg( p2 + 1 ).arg( p1 + 1 );
       h->setLabel( p2, str );
       if( !isReadOnly( ) )
          setRowReadOnly( p2, true );
@@ -285,7 +285,7 @@ void PMVectorListEdit::select( int i )
 
 void PMVectorListEdit::select( int i, int j )
 {
-   QTableSelection sel( i, 0, j, m_dimension - 1 );
+   TQTableSelection sel( i, 0, j, m_dimension - 1 );
    addSelection( sel );
 
 }
@@ -315,9 +315,9 @@ bool PMVectorListEdit::isDataValid( )
    return valid;
 }
 
-QSize PMVectorListEdit::sizeHint( ) const
+TQSize PMVectorListEdit::sizeHint( ) const
 {
-   return QSize( c_columnWidth * m_dimension + frameWidth( ) * 2,
+   return TQSize( c_columnWidth * m_dimension + frameWidth( ) * 2,
                  frameWidth( ) * 2 + horizontalHeader( )->height( )
                  + verticalHeader( )->sizeHint( ).height( ) );
 }
@@ -340,18 +340,18 @@ void PMVectorListEdit::blockSelectionUpdates( bool block )
    }
 }
 
-bool PMVectorListEdit::eventFilter( QObject* o, QEvent* e )
+bool PMVectorListEdit::eventFilter( TQObject* o, TQEvent* e )
 {
-   if( e->type( ) == QEvent::Wheel && parent( ) )
-      return QApplication::sendEvent( parent( ), e );
-   if( e->type( ) == QEvent::MouseButtonPress
-       && ( ( QMouseEvent* ) e )->button( ) == RightButton )
+   if( e->type( ) == TQEvent::Wheel && parent( ) )
+      return TQApplication::sendEvent( parent( ), e );
+   if( e->type( ) == TQEvent::MouseButtonPress
+       && ( ( TQMouseEvent* ) e )->button( ) == RightButton )
    {
-      bool b = QTable::eventFilter( o, e );
+      bool b = TQTable::eventFilter( o, e );
       emit showContextMenu( );
       return b;
    }
-   return QTable::eventFilter( o, e );
+   return TQTable::eventFilter( o, e );
 }
 
 #include "pmvectorlistedit.moc"

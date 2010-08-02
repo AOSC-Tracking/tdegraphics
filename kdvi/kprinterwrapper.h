@@ -16,7 +16,7 @@
 class KDVIPrinterWrapper : public KPrinter
 {
 public:
-  KDVIPrinterWrapper() : KPrinter(true, QPrinter::ScreenResolution) {; };
+  KDVIPrinterWrapper() : KPrinter(true, TQPrinter::ScreenResolution) {; };
 
   void doPreparePrinting() { preparePrinting(); };
 };

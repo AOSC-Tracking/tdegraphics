@@ -10,7 +10,7 @@
 #ifndef UNITS_H
 #define UNITS_H
 
-class QString;
+class TQString;
 
 class distance {
  public:
@@ -28,7 +28,7 @@ class distance {
   // although the string is malformed.
   //
   // It is fine to set ok to 0.
-  static float convertToMM(const QString &distance, bool *ok=0);
+  static float convertToMM(const TQString &distance, bool *ok=0);
 };
 
 #endif

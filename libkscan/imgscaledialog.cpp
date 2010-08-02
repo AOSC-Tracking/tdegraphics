@@ -19,15 +19,15 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqradiobutton.h>
 #include <knumvalidator.h>
 #include "imgscaledialog.h"
 
 /* ############################################################################## */
 
 
-ImgScaleDialog::ImgScaleDialog( QWidget *parent, int curr_sel,
+ImgScaleDialog::ImgScaleDialog( TQWidget *parent, int curr_sel,
 				const char *name )
    :KDialogBase( parent,  name , true, i18n("Zoom"),
                  Ok|Cancel, Ok, true )
@@ -37,88 +37,88 @@ ImgScaleDialog::ImgScaleDialog( QWidget *parent, int curr_sel,
    int        one_is_selected = false;
    enableButtonSeparator( false );
 
-   // (void) new QLabel( , main, "Page");
+   // (void) new TQLabel( , main, "Page");
    //
    // makeMainWidget();
-   QButtonGroup *radios = new QButtonGroup ( 2, Qt::Horizontal, this );
+   TQButtonGroup *radios = new TQButtonGroup ( 2, Qt::Horizontal, this );
    setMainWidget(radios);
    Q_CHECK_PTR(radios);
    radios->setTitle( i18n("Select Image Zoom") );
 
-   connect( radios, SIGNAL( clicked( int )),
-	    this, SLOT( setSelValue( int )));
+   connect( radios, TQT_SIGNAL( clicked( int )),
+	    this, TQT_SLOT( setSelValue( int )));
 
    // left gap: smaller Image
-   QRadioButton *rb25 = new QRadioButton (i18n ("25 %"), radios);
+   TQRadioButton *rb25 = new TQRadioButton (i18n ("25 %"), radios);
    if( curr_sel == 25 ){
       rb25->setChecked( true );
       one_is_selected = true;
    }
 
-   QRadioButton *rb50 = new QRadioButton (i18n ("50 %"), radios );
+   TQRadioButton *rb50 = new TQRadioButton (i18n ("50 %"), radios );
    if( curr_sel == 50 ){
       rb50->setChecked( true );
       one_is_selected = true;
    }
 
-   QRadioButton *rb75 = new QRadioButton (i18n ("75 %"), radios );
+   TQRadioButton *rb75 = new TQRadioButton (i18n ("75 %"), radios );
    if( curr_sel == 75 ) {
       rb75->setChecked( true );
       one_is_selected = true;
    }
 
-   QRadioButton *rb100 = new QRadioButton (i18n ("100 %"), radios);
+   TQRadioButton *rb100 = new TQRadioButton (i18n ("100 %"), radios);
    if( curr_sel == 100 ) {
       rb100->setChecked( true );
       one_is_selected = true;
    }
 
-   QRadioButton *rb150 = new QRadioButton (i18n ("150 %"), radios);
+   TQRadioButton *rb150 = new TQRadioButton (i18n ("150 %"), radios);
    if( curr_sel == 150 ) {
       rb150->setChecked( true );
       one_is_selected = true;
    }
 
-   QRadioButton *rb200 = new QRadioButton (i18n ("200 %"), radios );
+   TQRadioButton *rb200 = new TQRadioButton (i18n ("200 %"), radios );
    if( curr_sel == 200 ) {
       rb200->setChecked( true );
       one_is_selected = true;
    }
 
-   QRadioButton *rb300 = new QRadioButton (i18n ("300 %"), radios );
+   TQRadioButton *rb300 = new TQRadioButton (i18n ("300 %"), radios );
    if( curr_sel == 300 ) {
       rb300->setChecked( true );
       one_is_selected = true;
    }
 
-   QRadioButton *rb400 = new QRadioButton (i18n ("400 %"), radios);
+   TQRadioButton *rb400 = new TQRadioButton (i18n ("400 %"), radios);
    if( curr_sel == 400 ) {
       rb400->setChecked( true );
       one_is_selected = true;
    }
 
    // Custom Scaler at the bottom
-   QRadioButton *rbCust = new QRadioButton (i18n ("Custom scale factor:"),
+   TQRadioButton *rbCust = new TQRadioButton (i18n ("Custom scale factor:"),
 					    radios);
    if( ! one_is_selected )
       rbCust->setChecked( true );
 
 
-   leCust = new QLineEdit( radios );
-   QString sn;
+   leCust = new TQLineEdit( radios );
+   TQString sn;
    sn.setNum(curr_sel );
    leCust->setValidator( new KIntValidator( leCust ) );
    leCust->setText(sn );
-   connect( leCust, SIGNAL( textChanged( const QString& )),
-	    this, SLOT( customChanged( const QString& )));
-   connect( rbCust, SIGNAL( toggled( bool )),
-	    this, SLOT(enableAndFocus(bool)));
+   connect( leCust, TQT_SIGNAL( textChanged( const TQString& )),
+	    this, TQT_SLOT( customChanged( const TQString& )));
+   connect( rbCust, TQT_SIGNAL( toggled( bool )),
+	    this, TQT_SLOT(enableAndFocus(bool)));
    leCust->setEnabled( rbCust->isChecked());
 
 
 }
 
-void ImgScaleDialog::customChanged( const QString& s )
+void ImgScaleDialog::customChanged( const TQString& s )
 {
    bool ok;
    int  okval = s.toInt( &ok );
@@ -148,7 +148,7 @@ void ImgScaleDialog::setSelValue( int val )
 
       // Custom size selected
       if( selected == -1 ) {
-	 QString s = leCust->text();
+	 TQString s = leCust->text();
 
 	 bool ok;
 	 int  okval = s.toInt( &ok );

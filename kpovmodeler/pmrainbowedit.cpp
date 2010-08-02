@@ -23,14 +23,14 @@
 #include "pmvector.h"
 #include "pmmath.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
 
-PMRainbowEdit::PMRainbowEdit( QWidget* parent, const char* name )
+PMRainbowEdit::PMRainbowEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -38,76 +38,76 @@ PMRainbowEdit::PMRainbowEdit( QWidget* parent, const char* name )
 
 void PMRainbowEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
-   QGridLayout* gl;
+   TQHBoxLayout* hl;
+   TQGridLayout* gl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pEnableDirectionEdit = new QCheckBox( i18n( "Direction:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pEnableDirectionEdit = new TQCheckBox( i18n( "Direction:" ), this );
    m_pDirectionEdit = new PMVectorEdit( "x", "y", "z", this );
    hl->addWidget( m_pEnableDirectionEdit );
    hl->addWidget( m_pDirectionEdit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 4, 2 );
-   m_pEnableAngleEdit = new QCheckBox( i18n( "Angle:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 4, 2 );
+   m_pEnableAngleEdit = new TQCheckBox( i18n( "Angle:" ), this );
    m_pAngleEdit = new PMFloatEdit( this );
    gl->addWidget( m_pEnableAngleEdit, 0, 0 );
    gl->addWidget( m_pAngleEdit, 0, 1 );
 
-   m_pEnableWidthEdit = new QCheckBox( i18n( "Width:" ), this );
+   m_pEnableWidthEdit = new TQCheckBox( i18n( "Width:" ), this );
    m_pWidthEdit = new PMFloatEdit( this );
    gl->addWidget( m_pEnableWidthEdit, 1, 0 );
    gl->addWidget( m_pWidthEdit, 1, 1 );
    
-   m_pEnableDistanceEdit = new QCheckBox( i18n( "Distance:" ), this );
+   m_pEnableDistanceEdit = new TQCheckBox( i18n( "Distance:" ), this );
    m_pDistanceEdit = new PMFloatEdit( this );
    gl->addWidget( m_pEnableDistanceEdit, 2, 0 );
    gl->addWidget( m_pDistanceEdit, 2, 1 );
    
-   m_pEnableJitterEdit = new QCheckBox( i18n( "Jitter:" ), this );
+   m_pEnableJitterEdit = new TQCheckBox( i18n( "Jitter:" ), this );
    m_pJitterEdit = new PMFloatEdit( this );
    gl->addWidget( m_pEnableJitterEdit, 3, 0 );
    gl->addWidget( m_pJitterEdit, 3, 1 );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pEnableUpEdit = new QCheckBox( i18n( "Up:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pEnableUpEdit = new TQCheckBox( i18n( "Up:" ), this );
    m_pUpEdit = new PMVectorEdit( "x", "y", "z", this );
    hl->addWidget( m_pEnableUpEdit );
    hl->addWidget( m_pUpEdit );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 2, 2 );
-   m_pEnableArcAngleEdit = new QCheckBox( i18n( "Arc angle:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 2, 2 );
+   m_pEnableArcAngleEdit = new TQCheckBox( i18n( "Arc angle:" ), this );
    m_pArcAngleEdit = new PMFloatEdit( this );
    m_pArcAngleEdit->setValidation( true, 0, true, 360 );
    gl->addWidget( m_pEnableArcAngleEdit, 0, 0 );
    gl->addWidget( m_pArcAngleEdit, 0, 1 );
-   m_pEnableFalloffAngleEdit = new QCheckBox( i18n( "Falloff angle:" ), this );
+   m_pEnableFalloffAngleEdit = new TQCheckBox( i18n( "Falloff angle:" ), this );
    m_pFalloffAngleEdit = new PMFloatEdit( this );
    m_pFalloffAngleEdit->setValidation( true, 0, true, 360 );
    gl->addWidget( m_pEnableFalloffAngleEdit, 1, 0 );
    gl->addWidget( m_pFalloffAngleEdit, 1, 1 );
    hl->addStretch( 1 );
 
-   connect( m_pDirectionEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAngleEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pWidthEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDistanceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pJitterEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pUpEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pArcAngleEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFalloffAngleEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableDirectionEdit, SIGNAL( clicked( ) ), SLOT( slotDirectionClicked( ) ) );
-   connect( m_pEnableAngleEdit, SIGNAL( clicked( ) ), SLOT( slotAngleClicked( ) ) );
-   connect( m_pEnableWidthEdit, SIGNAL( clicked( ) ), SLOT( slotWidthClicked( ) ) );
-   connect( m_pEnableDistanceEdit, SIGNAL( clicked( ) ), SLOT( slotDistanceClicked( ) ) );
-   connect( m_pEnableJitterEdit, SIGNAL( clicked( ) ), SLOT( slotJitterClicked( ) ) );
-   connect( m_pEnableUpEdit, SIGNAL( clicked( ) ), SLOT( slotUpClicked( ) ) );
-   connect( m_pEnableArcAngleEdit, SIGNAL( clicked( ) ), SLOT( slotArcAngleClicked( ) ) );
-   connect( m_pEnableFalloffAngleEdit, SIGNAL( clicked( ) ), SLOT( slotFalloffAngleClicked( ) ) );
+   connect( m_pDirectionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAngleEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pWidthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDistanceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pJitterEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pUpEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pArcAngleEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFalloffAngleEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableDirectionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDirectionClicked( ) ) );
+   connect( m_pEnableAngleEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAngleClicked( ) ) );
+   connect( m_pEnableWidthEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotWidthClicked( ) ) );
+   connect( m_pEnableDistanceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDistanceClicked( ) ) );
+   connect( m_pEnableJitterEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotJitterClicked( ) ) );
+   connect( m_pEnableUpEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUpClicked( ) ) );
+   connect( m_pEnableArcAngleEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotArcAngleClicked( ) ) );
+   connect( m_pEnableFalloffAngleEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFalloffAngleClicked( ) ) );
 }
 
 void PMRainbowEdit::displayObject( PMObject* o )

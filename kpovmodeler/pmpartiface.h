@@ -52,7 +52,7 @@ k_dcop:
    /**
     * Inserts a new PMObject of type type
     */
-   virtual void slotNewObject( const QString& type, const QString& pos ) = 0;
+   virtual void slotNewObject( const TQString& type, const TQString& pos ) = 0;
    /**
     * initializes the documents contents
     */
@@ -84,36 +84,36 @@ k_dcop:
    /**
     * returns the currently selected object
     */
-   virtual QString activeObjectName( ) = 0;
+   virtual TQString activeObjectName( ) = 0;
    /**
     * set the current selected object.
     * returns true if successful or false otherwise
     */
-   virtual bool setActiveObject( const QString& name ) = 0;
+   virtual bool setActiveObject( const TQString& name ) = 0;
    /**
     * Get known properties of the currently active object
     */
-   virtual QStringList getProperties( ) = 0;
+   virtual TQStringList getProperties( ) = 0;
    /**
     * set a property on the currently active object
     */
-   virtual bool setProperty( const QString& property, const PMVariant& value ) = 0;
+   virtual bool setProperty( const TQString& property, const PMVariant& value ) = 0;
    /**
     * set a property on the currently active object
     */
-   virtual bool setProperty( const QString& property, const QString& value ) = 0;
+   virtual bool setProperty( const TQString& property, const TQString& value ) = 0;
    /**
     * Get the value of the given property
     */
-   virtual const PMVariant getProperty( const QString& property ) = 0;
+   virtual const PMVariant getProperty( const TQString& property ) = 0;
    /**
     * Get the value of the given property
     */
-   virtual const QString getPropertyStr( const QString& property ) = 0;
+   virtual const TQString getPropertyStr( const TQString& property ) = 0;
    /**
     * Get a list of known object types.
     */
-   virtual QStringList getObjectTypes( ) = 0;
+   virtual TQStringList getObjectTypes( ) = 0;
 };
 
 #endif

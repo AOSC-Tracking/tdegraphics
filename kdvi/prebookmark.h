@@ -23,7 +23,7 @@
 #ifndef _PREBOOKMARK_H_
 #define _PREBOOKMARK_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 
 /*! \brief Bookmark representation
   
@@ -34,14 +34,14 @@ the DVI prescan routines.
 class PreBookmark
 {
  public:
-  PreBookmark(const QString& t, const QString& a, Q_UINT16 n) {title=t; anchorName=a; noOfChildren=n;}
-  PreBookmark() {title=QString::null; anchorName=QString::null; noOfChildren=0;}
+  PreBookmark(const TQString& t, const TQString& a, Q_UINT16 n) {title=t; anchorName=a; noOfChildren=n;}
+  PreBookmark() {title=TQString::null; anchorName=TQString::null; noOfChildren=0;}
 
   // Title of the bookmark
-  QString title;
+  TQString title;
 
   // Name of the anchor
-  QString anchorName;
+  TQString anchorName;
 
   // Number of subordinate bookmarks
   Q_UINT16 noOfChildren;

@@ -30,19 +30,19 @@
 #define KP_PIXMAP_FX_H
 
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
-class QBitmap;
-class QColor;
-class QImage;
-class QPointArray;
-class QPixmap;
-class QPoint;
-class QRect;
-class QString;
-class QWidget;
-class QWMatrix;
+class TQBitmap;
+class TQColor;
+class TQImage;
+class TQPointArray;
+class TQPixmap;
+class TQPoint;
+class TQRect;
+class TQString;
+class TQWidget;
+class TQWMatrix;
 
 class kpColor;
 class kpSelection;
@@ -61,56 +61,56 @@ public:
 
 
     //
-    // QPixmap Statistics
+    // TQPixmap Statistics
     //
 
     // Returns the width * height.
-    static int pixmapArea (const QPixmap &pixmap);
-    static int pixmapArea (const QPixmap *pixmap);
+    static int pixmapArea (const TQPixmap &pixmap);
+    static int pixmapArea (const TQPixmap *pixmap);
     static int pixmapArea (int width, int height);
 
     // Returns the estimated size of <pixmap> in pixmap memory.
-    static int pixmapSize (const QPixmap &pixmap);
-    static int pixmapSize (const QPixmap *pixmap);
+    static int pixmapSize (const TQPixmap &pixmap);
+    static int pixmapSize (const TQPixmap *pixmap);
     static int pixmapSize (int width, int height, int depth);
 
-    static int imageSize (const QImage &image);
-    static int imageSize (const QImage *image);
+    static int imageSize (const TQImage &image);
+    static int imageSize (const TQImage *image);
     static int imageSize (int width, int height, int depth);
 
     static int selectionSize (const kpSelection &sel);
     static int selectionSize (const kpSelection *sel);
 
-    static int stringSize (const QString &string);
+    static int stringSize (const TQString &string);
 
-    static int pointArraySize (const QPointArray &points);
+    static int pointArraySize (const TQPointArray &points);
 
-
-    //
-    // QPixmap/QImage Conversion Functions
-    //
 
     //
-    // Converts <pixmap> to a QImage and returns it.
+    // QPixmap/TQImage Conversion Functions
+    //
+
+    //
+    // Converts <pixmap> to a TQImage and returns it.
     //
     // WARNING: On an 8-bit screen:
     //
-    //              QPixmap result = convertToPixmap (convertToImage (pixmap));
+    //              TQPixmap result = convertToPixmap (convertToImage (pixmap));
     //
     //          <result> is slightly differently colored to <pixmap>.
     //
-    //          KolourPaint needs to convert to QImage occasionally as
-    //          QImage allows KolourPaint to read pixels and because the QImage
+    //          KolourPaint needs to convert to TQImage occasionally as
+    //          TQImage allows KolourPaint to read pixels and because the QImage
     //          methods give reliable results and pixel-identical results on
-    //          all platforms.  The QPixmap paint engine has no such guarantee
+    //          all platforms.  The TQPixmap paint engine has no such guarantee
     //          and even depends on the quality of the video driver.
     //
     //          As a result, KolourPaint should not be used on an 8-bit screen.
     //          HITODO: Add warning on startup, like in KolourPaint/KDE4.
     //
     //          This bug will be fixed when KolourPaint gets a proper image library,
-    //          where QPixmap -> QImage -> QPixmap transitions will be not be needed.
-    static QImage convertToImage (const QPixmap &pixmap);
+    //          where TQPixmap -> TQImage -> TQPixmap transitions will be not be needed.
+    static TQImage convertToImage (const TQPixmap &pixmap);
 
     //
     // Dialog info for warning about data loss with convertToPixmap().
@@ -150,11 +150,11 @@ public:
         //
         //     Dialog parent
         //
-        WarnAboutLossInfo (const QString &moreColorsThanDisplayAndHasAlphaChannelMessage,
-                const QString &moreColorsThanDisplayMessage,
-                const QString &hasAlphaChannelMessage,
-                const QString &dontAskAgainPrefix,
-                QWidget *parent)
+        WarnAboutLossInfo (const TQString &moreColorsThanDisplayAndHasAlphaChannelMessage,
+                const TQString &moreColorsThanDisplayMessage,
+                const TQString &hasAlphaChannelMessage,
+                const TQString &dontAskAgainPrefix,
+                TQWidget *parent)
             :
                 m_moreColorsThanDisplayAndHasAlphaChannelMessage (
                     moreColorsThanDisplayAndHasAlphaChannelMessage),
@@ -183,16 +183,16 @@ public:
         bool isValid () const { return m_isValid; }
 
 
-        QString m_moreColorsThanDisplayAndHasAlphaChannelMessage,
+        TQString m_moreColorsThanDisplayAndHasAlphaChannelMessage,
                 m_moreColorsThanDisplayMessage,
                 m_hasAlphaChannelMessage;
-        QString m_dontAskAgainPrefix;
-        QWidget *m_parent;
+        TQString m_dontAskAgainPrefix;
+        TQWidget *m_parent;
         bool m_isValid;
     };
 
     //
-    // Converts <image> to a QPixmap of the current display's depth and
+    // Converts <image> to a TQPixmap of the current display's depth and
     // returns it.
     //
     // If the flag <pretty> is set, it will dither the image making the
@@ -202,14 +202,14 @@ public:
     //
     // This will automatically call ensureNoAlphaChannel().
     //
-    // Never use a foreign QPixmap that is offered to you - always get the
-    // foreign QImage and use this function to convert it to a sane QPixmap.
+    // Never use a foreign TQPixmap that is offered to you - always get the
+    // foreign TQImage and use this function to convert it to a sane TQPixmap.
     //
     // <wali>, if specified, describes parameters for the dialog that comes
     // up warning the user of data loss if the <image> contains translucency
     // and/or more colors than the current display.
     //
-    static QPixmap convertToPixmap (const QImage &image, bool pretty = false,
+    static TQPixmap convertToPixmap (const TQImage &image, bool pretty = false,
                                     const WarnAboutLossInfo &wali = WarnAboutLossInfo ());
 
     // Same as convertToPixmap() but tries as hard as possible to make the
@@ -221,15 +221,15 @@ public:
     // instead.  If you know for sure that <image> cannot be displayed
     // losslessly, then call convertToPixmap() with <pretty> = true.
     //
-    static QPixmap convertToPixmapAsLosslessAsPossible (const QImage &image,
+    static TQPixmap convertToPixmapAsLosslessAsPossible (const TQImage &image,
         const WarnAboutLossInfo &wali = WarnAboutLossInfo ());
 
 
     // Sets the RGB values of the pixels where <pixmap> is transparent to
     // <transparentColor>.  This has visually no effect on the <pixmap>
     // unless the mask is lost.
-    static QPixmap pixmapWithDefinedTransparentPixels (const QPixmap &pixmap,
-        const QColor &transparentColor);
+    static TQPixmap pixmapWithDefinedTransparentPixels (const TQPixmap &pixmap,
+        const TQColor &transparentColor);
 
 
     //
@@ -240,50 +240,50 @@ public:
     //
     // Returns the pixel and mask data found at the <rect> in <pm>.
     //
-    static QPixmap getPixmapAt (const QPixmap &pm, const QRect &rect);
+    static TQPixmap getPixmapAt (const TQPixmap &pm, const TQRect &rect);
 
     //
     // Sets the pixel and mask data at <destRect> in <*destPixmapPtr>
     // to <srcPixmap>.
     //
-    static void setPixmapAt (QPixmap *destPixmapPtr, const QRect &destRect,
-                             const QPixmap &srcPixmap);
+    static void setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
+                             const TQPixmap &srcPixmap);
 
     //
     // Sets the pixel and mask data at the rectangle in <*destPixmapPtr>,
     // with the top-left <destAt> and dimensions <srcPixmap.rect()>,
     // to <srcPixmap>.
     //
-    static void setPixmapAt (QPixmap *destPixmapPtr, const QPoint &destAt,
-                             const QPixmap &srcPixmap);
-    static void setPixmapAt (QPixmap *destPixmapPtr, int destX, int destY,
-                             const QPixmap &srcPixmap);
+    static void setPixmapAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
+                             const TQPixmap &srcPixmap);
+    static void setPixmapAt (TQPixmap *destPixmapPtr, int destX, int destY,
+                             const TQPixmap &srcPixmap);
 
     //
     // Draws <srcPixmap> on top of <*destPixmapPtr> at <destAt>.
     // The mask of <*destPixmapPtr> is adjusted so that all opaque
     // pixels in <srcPixmap> will be opaque in <*destPixmapPtr>.
     //
-    static void paintPixmapAt (QPixmap *destPixmapPtr, const QPoint &destAt,
-                               const QPixmap &srcPixmap);
-    static void paintPixmapAt (QPixmap *destPixmapPtr, int destX, int destY,
-                               const QPixmap &srcPixmap);
+    static void paintPixmapAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
+                               const TQPixmap &srcPixmap);
+    static void paintPixmapAt (TQPixmap *destPixmapPtr, int destX, int destY,
+                               const TQPixmap &srcPixmap);
 
     //
     // Returns the colour of the pixel at <at> in <pm>.
     // If the pixel is transparent, a value is returned such that
     // kpTool::isColorTransparent(<return_value>) will return true.
     //
-    static kpColor getColorAtPixel (const QPixmap &pm, const QPoint &at);
-    static kpColor getColorAtPixel (const QPixmap &pm, int x, int y);
+    static kpColor getColorAtPixel (const TQPixmap &pm, const TQPoint &at);
+    static kpColor getColorAtPixel (const TQPixmap &pm, int x, int y);
 
     //
     // Returns the color of the pixel at <at> in <img>.
     // If the pixel is transparent, a value is returned such that
     // kpTool::isColorTransparent(<return_value>) will return true.
     //
-    static kpColor getColorAtPixel (const QImage &img, const QPoint &at);
-    static kpColor getColorAtPixel (const QImage &img, int x, int y);
+    static kpColor getColorAtPixel (const TQImage &img, const TQPoint &at);
+    static kpColor getColorAtPixel (const TQImage &img, int x, int y);
 
 
     //
@@ -293,49 +293,49 @@ public:
 
     //
     // Removes <*destPixmapPtr>'s Alpha Channel and attempts to convert it
-    // to a mask.  KolourPaint - and QPixmap to a great extent - does not
+    // to a mask.  KolourPaint - and TQPixmap to a great extent - does not
     // support Alpha Channels - only masks.  Call this whenever you get
     // a pixmap from a foreign source; else all KolourPaint code will
     // exhibit "undefined behaviour".
     //
-    static void ensureNoAlphaChannel (QPixmap *destPixmapPtr);
+    static void ensureNoAlphaChannel (TQPixmap *destPixmapPtr);
 
     //
     // Returns <pm>'s mask or a fully opaque mask (with <pm>'s dimensions)
     // if <pm> does not have a mask.
     //
-    static QBitmap getNonNullMask (const QPixmap &pm);
+    static TQBitmap getNonNullMask (const TQPixmap &pm);
 
     //
     // Ensures that <*destPixmapPtr> is transparent at <rect>.
     //
-    static void ensureTransparentAt (QPixmap *destPixmapPtr, const QRect &destRect);
+    static void ensureTransparentAt (TQPixmap *destPixmapPtr, const TQRect &destRect);
 
     //
     // Sets the mask of <*destPixmapPtr> at the rectangle, with the
     // top-left <destAt> and dimensions <srcMaskBitmap.rect()>,
     // to transparent where <brushBitmap> is opaque.
     //
-    // <brushPixmap> must be a QPixmap of depth 1 (or a QBitmap).
+    // <brushPixmap> must be a TQPixmap of depth 1 (or a TQBitmap).
     //
-    static void paintMaskTransparentWithBrush (QPixmap *destPixmapPtr, const QPoint &destAt,
-                                               const QPixmap &brushBitmap);
-    static void paintMaskTransparentWithBrush (QPixmap *destPixmapPtr, int destX, int destY,
-                                               const QPixmap &brushBitmap);
+    static void paintMaskTransparentWithBrush (TQPixmap *destPixmapPtr, const TQPoint &destAt,
+                                               const TQPixmap &brushBitmap);
+    static void paintMaskTransparentWithBrush (TQPixmap *destPixmapPtr, int destX, int destY,
+                                               const TQPixmap &brushBitmap);
 
     //
     // Ensures that <*destPixmapPtr> is opaque at <rect>.
     //
-    static void ensureOpaqueAt (QPixmap *destPixmapPtr, const QRect &destRect);
+    static void ensureOpaqueAt (TQPixmap *destPixmapPtr, const TQRect &destRect);
 
     //
     // Ensures that <srcPixmap>'s opaque pixels will be opaque if
     // painted onto <*destPixmapPtr> at <destAt>.
     //
-    static void ensureOpaqueAt (QPixmap *destPixmapPtr, const QPoint &destAt,
-                                const QPixmap &srcPixmap);
-    static void ensureOpaqueAt (QPixmap *destPixmapPtr, int destX, int destY,
-                                const QPixmap &srcPixmap);
+    static void ensureOpaqueAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
+                                const TQPixmap &srcPixmap);
+    static void ensureOpaqueAt (TQPixmap *destPixmapPtr, int destX, int destY,
+                                const TQPixmap &srcPixmap);
 
 
     //
@@ -346,32 +346,32 @@ public:
     //
     // Converts the image to grayscale.
     //
-    static void convertToGrayscale (QPixmap *destPixmapPtr);
-    static QPixmap convertToGrayscale (const QPixmap &pm);
-    static void convertToGrayscale (QImage *destImagePtr);
-    static QImage convertToGrayscale (const QImage &img);
+    static void convertToGrayscale (TQPixmap *destPixmapPtr);
+    static TQPixmap convertToGrayscale (const TQPixmap &pm);
+    static void convertToGrayscale (TQImage *destImagePtr);
+    static TQImage convertToGrayscale (const TQImage &img);
 
     //
     // Fills an image in the given color.
     //
-    static void fill (QPixmap *destPixmapPtr, const kpColor &color);
-    static QPixmap fill (const QPixmap &pm, const kpColor &color);
+    static void fill (TQPixmap *destPixmapPtr, const kpColor &color);
+    static TQPixmap fill (const TQPixmap &pm, const kpColor &color);
 
     //
     // Resizes an image to the given width and height,
     // filling any new areas with <backgroundColor> if <fillNewAreas> is set.
     //
-    static void resize (QPixmap *destPixmapPtr, int w, int h,
+    static void resize (TQPixmap *destPixmapPtr, int w, int h,
                         const kpColor &backgroundColor, bool fillNewAreas = true);
-    static QPixmap resize (const QPixmap &pm, int w, int h,
+    static TQPixmap resize (const TQPixmap &pm, int w, int h,
                            const kpColor &backgroundColor, bool fillNewAreas = true);
 
     //
     // Scales an image to the given width and height.
     // If <pretty> is true, a smooth scale will be used.
     //
-    static void scale (QPixmap *destPixmapPtr, int w, int h, bool pretty = false);
-    static QPixmap scale (const QPixmap &pm, int w, int h, bool pretty = false);
+    static void scale (TQPixmap *destPixmapPtr, int w, int h, bool pretty = false);
+    static TQPixmap scale (const TQPixmap &pm, int w, int h, bool pretty = false);
 
 
     // The minimum difference between 2 angles (in degrees) such that they are
@@ -395,13 +395,13 @@ public:
     // Using <targetWidth> & <targetHeight> to generate preview pixmaps is
     // significantly more efficient than skewing and then scaling yourself.
     //
-    static QWMatrix skewMatrix (int width, int height, double hangle, double vangle);
-    static QWMatrix skewMatrix (const QPixmap &pixmap, double hangle, double vangle);
+    static TQWMatrix skewMatrix (int width, int height, double hangle, double vangle);
+    static TQWMatrix skewMatrix (const TQPixmap &pixmap, double hangle, double vangle);
 
-    static void skew (QPixmap *destPixmapPtr, double hangle, double vangle,
+    static void skew (TQPixmap *destPixmapPtr, double hangle, double vangle,
                       const kpColor &backgroundColor,
                       int targetWidth = -1, int targetHeight = -1);
-    static QPixmap skew (const QPixmap &pm, double hangle, double vangle,
+    static TQPixmap skew (const TQPixmap &pm, double hangle, double vangle,
                          const kpColor &backgroundColor,
                          int targetWidth = -1, int targetHeight = -1);
 
@@ -416,15 +416,15 @@ public:
     // Using <targetWidth> & <targetHeight> to generate preview pixmaps is
     // significantly more efficient than rotating and then scaling yourself.
     //
-    static QWMatrix rotateMatrix (int width, int height, double angle);
-    static QWMatrix rotateMatrix (const QPixmap &pixmap, double angle);
+    static TQWMatrix rotateMatrix (int width, int height, double angle);
+    static TQWMatrix rotateMatrix (const TQPixmap &pixmap, double angle);
 
     static bool isLosslessRotation (double angle);
 
-    static void rotate (QPixmap *destPixmapPtr, double angle,
+    static void rotate (TQPixmap *destPixmapPtr, double angle,
                         const kpColor &backgroundColor,
                         int targetWidth = -1, int targetHeight = -1);
-    static QPixmap rotate (const QPixmap &pm, double angle,
+    static TQPixmap rotate (const TQPixmap &pm, double angle,
                            const kpColor &backgroundColor,
                            int targetWidth = -1, int targetHeight = -1);
 
@@ -432,18 +432,18 @@ public:
     //
     // Flips an image in the given directions.
     //
-    static QWMatrix flipMatrix (int width, int height, bool horz, bool vert);
-    static QWMatrix flipMatrix (const QPixmap &pixmap, bool horz, bool vert);
+    static TQWMatrix flipMatrix (int width, int height, bool horz, bool vert);
+    static TQWMatrix flipMatrix (const TQPixmap &pixmap, bool horz, bool vert);
 
     // TODO: this kind of overloading is error prone
-    //       e.g. QPixmap pixmap;
+    //       e.g. TQPixmap pixmap;
     //            kpPixmapFX::flip (pixmap, false, true);
     //       looks like it will flip vertically but does absolutely nothing!
     //       (should be &pixmap)
-    static void flip (QPixmap *destPixmapPtr, bool horz, bool vert);
-    static QPixmap flip (const QPixmap &pm, bool horz, bool vert);
-    static void flip (QImage *destImagePtr, bool horz, bool vert);
-    static QImage flip (const QImage &img, bool horz, bool vert);
+    static void flip (TQPixmap *destPixmapPtr, bool horz, bool vert);
+    static TQPixmap flip (const TQPixmap &pm, bool horz, bool vert);
+    static void flip (TQImage *destImagePtr, bool horz, bool vert);
+    static TQImage flip (const TQImage &img, bool horz, bool vert);
 };
 
 

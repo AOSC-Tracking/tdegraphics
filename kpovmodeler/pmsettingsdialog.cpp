@@ -32,27 +32,27 @@
 #include "pmrendermanager.h"
 #include "pmdebug.h"
 
-#include <qvbox.h>
-#include <qlistview.h>
+#include <tqvbox.h>
+#include <tqlistview.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kiconloader.h>
 
 //#define KPM_WITH_OBJECT_LIBRARY
 
-PMSettingsDialogPage::PMSettingsDialogPage( QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMSettingsDialogPage::PMSettingsDialogPage( TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
 }
 
-QSize PMSettingsDialog::s_size = QSize( 640, 400 );
+TQSize PMSettingsDialog::s_size = TQSize( 640, 400 );
 
-PMSettingsDialog::PMSettingsDialog( PMPart* part, QWidget* parent, const char* name )
+PMSettingsDialog::PMSettingsDialog( PMPart* part, TQWidget* parent, const char* name )
       : KDialogBase( TreeList, i18n( "Configure" ), Ok | Apply | Cancel | Default, Ok,
                      parent, name )
 {
-   QStringList sl;
-   QWidget* w = 0;
+   TQStringList sl;
+   TQWidget* w = 0;
    PMSettingsDialogPage* p = 0;
 
    m_pPart = part;
@@ -139,14 +139,14 @@ PMSettingsDialog::PMSettingsDialog( PMPart* part, QWidget* parent, const char* n
 
 void PMSettingsDialog::displaySettings( )
 {
-   QValueList<PMRegisteredSettingsPage>::const_iterator it;
+   TQValueList<PMRegisteredSettingsPage>::const_iterator it;
    for( it = m_pages.begin( ); it != m_pages.end( ); ++it )
       ( *it ).page->displaySettings( );
 }
 
 void PMSettingsDialog::slotCancel( )
 {
-   QDialog::reject( );
+   TQDialog::reject( );
 }
 
 void PMSettingsDialog::slotApply( )
@@ -160,7 +160,7 @@ void PMSettingsDialog::slotOk( )
    if( validateData( ) )
    {
       saveSettings( );
-      QDialog::accept( );
+      TQDialog::accept( );
    }
 }
 
@@ -168,7 +168,7 @@ void PMSettingsDialog::slotDefault( )
 {
    int currentPage = activePageIndex( );
    PMSettingsDialogPage* page = 0;
-   QValueList<PMRegisteredSettingsPage>::const_iterator it;
+   TQValueList<PMRegisteredSettingsPage>::const_iterator it;
    for( it = m_pages.begin( ); it != m_pages.end( ) && !page; ++it )
       if( ( *it ).index == currentPage )
          page = ( *it ).page;
@@ -179,7 +179,7 @@ void PMSettingsDialog::slotDefault( )
 bool PMSettingsDialog::validateData( )
 {
    bool valid = true;
-   QValueList<PMRegisteredSettingsPage>::const_iterator it;
+   TQValueList<PMRegisteredSettingsPage>::const_iterator it;
    for( it = m_pages.begin( ); it != m_pages.end( ) && valid; ++it )
       valid = ( *it ).page->validateData( );
    return valid;
@@ -189,7 +189,7 @@ void PMSettingsDialog::saveSettings( )
 {
    m_repaint = false;
 
-   QValueList<PMRegisteredSettingsPage>::const_iterator it;
+   TQValueList<PMRegisteredSettingsPage>::const_iterator it;
    for( it = m_pages.begin( ); it != m_pages.end( ); ++it )
       ( *it ).page->applySettings( );
 
@@ -210,16 +210,16 @@ void PMSettingsDialog::restoreConfig( KConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
-   QSize defaultSize( 640, 400 );
+   TQSize defaultSize( 640, 400 );
    s_size = cfg->readSizeEntry( "SettingsDialogSize", &defaultSize );
 }
 
-void PMSettingsDialog::resizeEvent( QResizeEvent* ev )
+void PMSettingsDialog::resizeEvent( TQResizeEvent* ev )
 {
    s_size = ev->size( );
 }
 
-void PMSettingsDialog::registerPage( QWidget* topPage,
+void PMSettingsDialog::registerPage( TQWidget* topPage,
                                      PMSettingsDialogPage* page )
 {
    int i = pageIndex( topPage );
@@ -229,8 +229,8 @@ void PMSettingsDialog::registerPage( QWidget* topPage,
    else
    {
       m_pages.push_back( PMRegisteredSettingsPage( topPage, page, i ) );
-      connect( page, SIGNAL( repaintViews( ) ), SLOT( slotRepaint( ) ) );
-      connect( page, SIGNAL( showMe( ) ), SLOT( slotShowPage( ) ) );
+      connect( page, TQT_SIGNAL( repaintViews( ) ), TQT_SLOT( slotRepaint( ) ) );
+      connect( page, TQT_SIGNAL( showMe( ) ), TQT_SLOT( slotShowPage( ) ) );
    }
 }
 
@@ -241,7 +241,7 @@ void PMSettingsDialog::slotRepaint( )
 
 void PMSettingsDialog::slotShowPage( )
 {
-   const QObject* w = sender( );
+   const TQObject* w = sender( );
    if( w )
    {
       int index = findPage( ( const PMSettingsDialogPage* ) w );
@@ -253,7 +253,7 @@ void PMSettingsDialog::slotShowPage( )
 int PMSettingsDialog::findPage( const PMSettingsDialogPage* p )
 {
    int index = -1;
-   QValueList<PMRegisteredSettingsPage>::const_iterator it;
+   TQValueList<PMRegisteredSettingsPage>::const_iterator it;
    for( it = m_pages.begin( ); it != m_pages.end( ) && index < 0; ++it )
       if( ( *it ).page == p )
          index = ( *it ).index;

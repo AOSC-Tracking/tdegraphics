@@ -55,11 +55,11 @@ public:
    /**
     * Serializes the palette entry into a XML document.
     */
-   void serialize( QDomElement& e, QDomDocument& doc ) const;
+   void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /**
     * Reads the palette entry from a XML document.
     */
-   void readAttributes( const QDomElement& h );
+   void readAttributes( const TQDomElement& h );
 
    /**
     * Returns true if both values have the same index and value

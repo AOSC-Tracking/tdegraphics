@@ -19,10 +19,10 @@
 #ifndef MRML_ELEMENTS_H
 #define MRML_ELEMENTS_H
 
-#include <qdom.h>
-#include <qmap.h>
-#include <qstringlist.h>
-#include <qvaluelist.h>
+#include <tqdom.h>
+#include <tqmap.h>
+#include <tqstringlist.h>
+#include <tqvaluelist.h>
 
 #include "mrml_shared.h"
 #include "propertysheet.h"
@@ -37,27 +37,27 @@ namespace KMrml
     {
     public:
         QueryParadigm() {}
-        QueryParadigm( const QDomElement& elem );
+        QueryParadigm( const TQDomElement& elem );
         bool matches( const QueryParadigm& other ) const;
-        QString type() const { return m_type; }
+        TQString type() const { return m_type; }
 
 //         bool operator== ( const QueryParadigm& p1, const QueryParadigm& p2 )
 
     private:
-        QString m_type;
-        QMap<QString,QString> m_attributes;
+        TQString m_type;
+        TQMap<TQString,TQString> m_attributes;
 
-        static bool equalMaps( const QMap<QString,QString>,
-                               const QMap<QString,QString> );
+        static bool equalMaps( const TQMap<TQString,TQString>,
+                               const TQMap<TQString,TQString> );
     };
 
-    class QueryParadigmList : protected QValueList<QueryParadigm>
+    class QueryParadigmList : protected TQValueList<QueryParadigm>
     {
     public:
-        typedef QValueListIterator<QueryParadigm> Iterator;
-        typedef QValueListConstIterator<QueryParadigm> ConstIterator;
+        typedef TQValueListIterator<QueryParadigm> Iterator;
+        typedef TQValueListConstIterator<QueryParadigm> ConstIterator;
 
-        void initFromDOM( const QDomElement& elem );
+        void initFromDOM( const TQDomElement& elem );
         bool matches( const QueryParadigmList& other ) const;
     };
 
@@ -65,106 +65,106 @@ namespace KMrml
     {
     public:
         MrmlElement() {}
-        MrmlElement( const QDomElement& elem );
+        MrmlElement( const TQDomElement& elem );
         virtual ~MrmlElement() {}
 
-        QString id() const      { return m_id;   }
-        QString name() const    { return m_name; }
-        QString attribute( const QString& name ) const { return m_attributes[ name ]; }
+        TQString id() const      { return m_id;   }
+        TQString name() const    { return m_name; }
+        TQString attribute( const TQString& name ) const { return m_attributes[ name ]; }
         QueryParadigmList paradigms() const { return m_paradigms; }
 
 
-        QMapConstIterator<QString,QString> attributeIterator() const {
+        TQMapConstIterator<TQString,TQString> attributeIterator() const {
             return m_attributes.begin();
         }
-        QMapConstIterator<QString,QString> end() const { return m_attributes.end(); }
+        TQMapConstIterator<TQString,TQString> end() const { return m_attributes.end(); }
 
         bool isValid() const { return !m_name.isNull() && !m_id.isNull(); }
 
     protected:
-        QString m_id;
-        QString m_name;
+        TQString m_id;
+        TQString m_name;
         QueryParadigmList m_paradigms;
-        QMap<QString,QString> m_attributes;
+        TQMap<TQString,TQString> m_attributes;
 
-        void setOtherAttributes( QDomElement& elem ) const;
+        void setOtherAttributes( TQDomElement& elem ) const;
     };
 
     class Algorithm : public MrmlElement
     {
     public:
         Algorithm() { m_collectionId = "adefault"; }
-        Algorithm( const QDomElement& elem );
-        QString type() const { return m_type; }
+        Algorithm( const TQDomElement& elem );
+        TQString type() const { return m_type; }
 
-        QString collectionId() const
+        TQString collectionId() const
         {
             return m_collectionId;
         }
-        void setCollectionId( const QString& id )
+        void setCollectionId( const TQString& id )
         {
             m_collectionId = id;
         }
 
-        QDomElement toElement( QDomElement& parent ) const;
+        TQDomElement toElement( TQDomElement& parent ) const;
         const PropertySheet& propertySheet() const;
 
         static Algorithm defaultAlgorithm();
 
     private:
-        QString m_type;
+        TQString m_type;
         PropertySheet m_propertySheet;
 
-        QString m_collectionId;
+        TQString m_collectionId;
     };
 
     class Collection : public MrmlElement
     {
     public:
         Collection() {}
-        Collection( const QDomElement& elem );
+        Collection( const TQDomElement& elem );
     };
 
-    template <class t> class MrmlElementList : public QValueList<t>
+    template <class t> class MrmlElementList : public TQValueList<t>
     {
     public:
-        typedef QValueListIterator<t> Iterator;
-        typedef QValueListConstIterator<t> ConstIterator;
+        typedef TQValueListIterator<t> Iterator;
+        typedef TQValueListConstIterator<t> ConstIterator;
 
         /**
          * Creates an invalid element.
          */
-        MrmlElementList( const QString& tagName ) :
-            QValueList<t>(),
+        MrmlElementList( const TQString& tagName ) :
+            TQValueList<t>(),
             m_tagName( tagName ) {}
-        MrmlElementList( const QDomElement& elem, const QString& tagName ) :
-            QValueList<t>(),
+        MrmlElementList( const TQDomElement& elem, const TQString& tagName ) :
+            TQValueList<t>(),
             m_tagName( tagName )
         {
             initFromDOM( elem );
         }
         virtual ~MrmlElementList() {};
 
-        void initFromDOM( const QDomElement& elem )
+        void initFromDOM( const TQDomElement& elem )
         {
             assert( !m_tagName.isEmpty() );
 
-            QValueList<t>::clear();
+            TQValueList<t>::clear();
 
-            QDomNodeList list = elem.elementsByTagName( m_tagName );
+            TQDomNodeList list = elem.elementsByTagName( m_tagName );
             for ( uint i = 0; i < list.length(); i++ )
             {
-                QDomElement elem = list.item( i ).toElement();
+                TQDomElement elem = list.item( i ).toElement();
                 t item( elem );
                 if ( item.isValid() )
                     append( item );
             }
         }
 
-        t findByName( const QString& name ) const
+        t findByName( const TQString& name ) const
         {
-            QValueListConstIterator<t> it = QValueList<t>::begin();
-            for ( ; it != QValueList<t>::end(); ++it )
+            TQValueListConstIterator<t> it = TQValueList<t>::begin();
+            for ( ; it != TQValueList<t>::end(); ++it )
             {
                 if ( (*it).name() == name )
                     return *it;
@@ -173,10 +173,10 @@ namespace KMrml
             return t();
         }
 
-        t findById( const QString& id ) const
+        t findById( const TQString& id ) const
         {
-            QValueListConstIterator<t> it = QValueList<t>::begin();
-            for ( ; it != QValueList<t>::end(); ++it )
+            TQValueListConstIterator<t> it = TQValueList<t>::begin();
+            for ( ; it != TQValueList<t>::end(); ++it )
             {
                 if ( (*it).id() == id )
                     return *it;
@@ -185,20 +185,20 @@ namespace KMrml
             return MrmlElement();
         }
 
-        QStringList itemNames() const {
-            QStringList list;
-            QValueListConstIterator<t> it = QValueList<t>::begin();
-            for ( ; it != QValueList<t>::end(); ++it )
+        TQStringList itemNames() const {
+            TQStringList list;
+            TQValueListConstIterator<t> it = TQValueList<t>::begin();
+            for ( ; it != TQValueList<t>::end(); ++it )
                 list.append( (*it).name() );
 
             return list;
         }
 
-        void setItemName( const QString& tagName ) { m_tagName = tagName; }
-        QString tagName() const { return m_tagName; }
+        void setItemName( const TQString& tagName ) { m_tagName = tagName; }
+        TQString tagName() const { return m_tagName; }
 
     private:
-        QString m_tagName;
+        TQString m_tagName;
         MrmlElementList();
     };
 
@@ -221,34 +221,34 @@ namespace KMrml
     };
 
 
-    QValueList<QDomElement> directChildElements( const QDomElement& parent,
-                                                 const QString& tagName);
-    QDomElement firstChildElement( const QDomElement& parent,
-                                   const QString& tagName );
+    TQValueList<TQDomElement> directChildElements( const TQDomElement& parent,
+                                                 const TQString& tagName);
+    TQDomElement firstChildElement( const TQDomElement& parent,
+                                   const TQString& tagName );
 
 
-    QDataStream& operator<<( QDataStream& stream, const QueryParadigm& );
-    QDataStream& operator>>( QDataStream& stream, QueryParadigm& );
+    TQDataStream& operator<<( TQDataStream& stream, const QueryParadigm& );
+    TQDataStream& operator>>( TQDataStream& stream, QueryParadigm& );
 
-    QDataStream& operator<<( QDataStream& stream, const QueryParadigmList& );
-    QDataStream& operator>>( QDataStream& stream, QueryParadigmList& );
+    TQDataStream& operator<<( TQDataStream& stream, const QueryParadigmList& );
+    TQDataStream& operator>>( TQDataStream& stream, QueryParadigmList& );
 
-    QDataStream& operator<<( QDataStream& stream, const MrmlElement& );
-    QDataStream& operator>>( QDataStream& stream, MrmlElement& );
+    TQDataStream& operator<<( TQDataStream& stream, const MrmlElement& );
+    TQDataStream& operator>>( TQDataStream& stream, MrmlElement& );
 
-    QDataStream& operator<<( QDataStream& stream, const Algorithm& );
-    QDataStream& operator>>( QDataStream& stream, Algorithm& );
+    TQDataStream& operator<<( TQDataStream& stream, const Algorithm& );
+    TQDataStream& operator>>( TQDataStream& stream, Algorithm& );
 
-    QDataStream& operator<<( QDataStream& stream, const Collection& );
-    QDataStream& operator>>( QDataStream& stream, Collection& );
+    TQDataStream& operator<<( TQDataStream& stream, const Collection& );
+    TQDataStream& operator>>( TQDataStream& stream, Collection& );
 
-    template <class t> QDataStream& operator<<( QDataStream&,
+    template <class t> TQDataStream& operator<<( TQDataStream&,
                                                 const MrmlElementList<t>& );
-    template <class t> QDataStream& operator>>( QDataStream&,
+    template <class t> TQDataStream& operator>>( TQDataStream&,
                                                 MrmlElementList<t>& );
 
-    QDataStream& operator<<( QDataStream&, const AlgorithmList& );
-    QDataStream& operator>>( QDataStream&, AlgorithmList& );
+    TQDataStream& operator<<( TQDataStream&, const AlgorithmList& );
+    TQDataStream& operator>>( TQDataStream&, AlgorithmList& );
 
 }
 

@@ -18,7 +18,7 @@
 
 #include <math.h>
 
-#include <qlistbox.h>
+#include <tqlistbox.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -32,8 +32,8 @@
 #if KDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
   #include <kinputdialog.h>
 #else
-  #include <qvalidator.h>
-  #include <qwidget.h>
+  #include <tqvalidator.h>
+  #include <tqwidget.h>
   #include <klineeditdlg.h>
 #endif
 
@@ -54,7 +54,7 @@
 using namespace KGV;
 
 KGVMiniWidget::KGVMiniWidget( KGVPart* part, const char* name ) : 
-    QObject( part, name ),
+    TQObject( part, name ),
     _document( 0 ),
     _part( part ),
     _psWidget( 0 ),
@@ -63,32 +63,32 @@ KGVMiniWidget::KGVMiniWidget( KGVPart* part, const char* name ) :
 {
     KLocale locale( "kghostview" );
     _fallBackPageMedia = pageSizeToString( 
-              static_cast< QPrinter::PageSize >( locale.pageSize() ) );
+              static_cast< TQPrinter::PageSize >( locale.pageSize() ) );
     _thumbnailService = new ThumbnailService( this );
 
-    connect( this, SIGNAL( newPageShown( int ) ), 
-             SLOT( updateStatusBarText( int ) ) );
+    connect( this, TQT_SIGNAL( newPageShown( int ) ), 
+             TQT_SLOT( updateStatusBarText( int ) ) );
 }
 
 void KGVMiniWidget::setDocument( KGVDocument* document )
 {
     _document = document;
     if( _document )
-	connect( _document, SIGNAL( completed() ), 
-	         SLOT( slotDocumentOpened() ) );
+	connect( _document, TQT_SIGNAL( completed() ), 
+	         TQT_SLOT( slotDocumentOpened() ) );
 }
 
-QString KGVMiniWidget::pageSizeToString( QPrinter::PageSize pageSize )
+TQString KGVMiniWidget::pageSizeToString( TQPrinter::PageSize pageSize )
 {
     switch( pageSize )
     {
-    case QPrinter::A3:     return "A3";
-    case QPrinter::A4:     return "A4";
-    case QPrinter::A5:     return "A5";
-    case QPrinter::B4:     return "B4";
-    case QPrinter::Ledger: return "Ledger";
-    case QPrinter::Legal:  return "Legal";
-    case QPrinter::Letter: return "Letter";
+    case TQPrinter::A3:     return "A3";
+    case TQPrinter::A4:     return "A4";
+    case TQPrinter::A5:     return "A5";
+    case TQPrinter::B4:     return "B4";
+    case TQPrinter::Ledger: return "Ledger";
+    case TQPrinter::Legal:  return "Legal";
+    case TQPrinter::Letter: return "Letter";
     default:               return "Unknown";
     }
 }
@@ -109,8 +109,8 @@ void KGVMiniWidget::setPSWidget( KPSWidget* psWidget )
 {
     _psWidget = psWidget;
     // setMagnification( _magnification );
-    connect( _psWidget, SIGNAL( newPageImage( QPixmap ) ), 
-             this, SLOT( sendPage() ) );
+    connect( _psWidget, TQT_SIGNAL( newPageImage( TQPixmap ) ), 
+             this, TQT_SLOT( sendPage() ) );
 }
 
 void KGVMiniWidget::goToPage()
@@ -122,9 +122,9 @@ void KGVMiniWidget::goToPage()
 		1, dsc()->page_count(), 1, 10, &ok, _part->widget());
 	if (ok) goToPage( num-1 );
 #else
-    QString num;
+    TQString num;
     bool b = false;
-    num = KLineEditDlg::getText(i18n("Go to Page"), i18n("Page:"), QString::null, &b, _part->widget(), new QIntValidator(1, dsc()->page_count(), this));
+    num = KLineEditDlg::getText(i18n("Go to Page"), i18n("Page:"), TQString::null, &b, _part->widget(), new TQIntValidator(1, dsc()->page_count(), this));
     if (b) goToPage( num.toInt() - 1 );
 #endif
 }
@@ -172,29 +172,29 @@ bool KGVMiniWidget::atMinZoom() const
 void KGVMiniWidget::fitWidth( unsigned int width )
 {
     if ( (orientation() == CDSC_LANDSCAPE) || (orientation() == CDSC_SEASCAPE) )
-        setMagnification( ( (double)width / QPaintDevice::x11AppDpiY()) /
+        setMagnification( ( (double)width / TQPaintDevice::x11AppDpiY()) /
                       ( (double)boundingBox().height() / 72) );
     else // default
-        setMagnification( ( (double)width / QPaintDevice::x11AppDpiX() ) /
+        setMagnification( ( (double)width / TQPaintDevice::x11AppDpiX() ) /
                       ( (double)boundingBox().width() / 72) );
 }
 
 void KGVMiniWidget::fitHeight( unsigned int height )
 {
     if ( (orientation() == CDSC_LANDSCAPE) || (orientation() == CDSC_SEASCAPE) )
-        setMagnification( ( (double)height / QPaintDevice::x11AppDpiY()) /
+        setMagnification( ( (double)height / TQPaintDevice::x11AppDpiY()) /
                       ( (double)boundingBox().width() / 72) );
     else  //default
-        setMagnification( ( (double)height / QPaintDevice::x11AppDpiY()) /
+        setMagnification( ( (double)height / TQPaintDevice::x11AppDpiY()) /
                       ( (double)boundingBox().height() / 72) );
 }
 
 void KGVMiniWidget::fitWidthHeight( unsigned int w, unsigned int h )
 {
     double magnification = std::min<double>( 
-	    ( ( double )h / QPaintDevice::x11AppDpiY() ) /
+	    ( ( double )h / TQPaintDevice::x11AppDpiY() ) /
 	    ( ( double )boundingBox().height() / 72.0 ),
-	    ( ( double )w / QPaintDevice::x11AppDpiX() ) /
+	    ( ( double )w / TQPaintDevice::x11AppDpiX() ) /
 	    ( ( double )boundingBox().width() / 72.0 ) );
     setMagnification( magnification );
 }
@@ -310,25 +310,25 @@ void KGVMiniWidget::restoreOverridePageMedia()
 	showPage( _options.page() );
 }
 
-void KGVMiniWidget::setOverridePageMedia( const QString& mediaName )
+void KGVMiniWidget::setOverridePageMedia( const TQString& mediaName )
 {
     _options.setOverridePageMedia( mediaName );
 	showPage( _options.page() );
 }
 
-QString KGVMiniWidget::pageMedia() const
+TQString KGVMiniWidget::pageMedia() const
 {
     if( !_options.overridePageMedia().isNull() )
 	return _options.overridePageMedia();
     else if( dsc()->page_media() != 0 )
-	return QString( dsc()->page_media()->name );
+	return TQString( dsc()->page_media()->name );
     else if( dsc()->bbox().get() != 0 )
-	return QString( "BoundingBox" );
+	return TQString( "BoundingBox" );
     else
 	return _fallBackPageMedia;
 }
 
-QString KGVMiniWidget::pageMedia( int pagenumber ) const
+TQString KGVMiniWidget::pageMedia( int pagenumber ) const
 {
     kdDebug( 4500 ) << "KGVMiniWidget::pageMedia( " <<  pagenumber << " )" << endl;
     if ( !dsc() ) return pageMedia();
@@ -336,33 +336,33 @@ QString KGVMiniWidget::pageMedia( int pagenumber ) const
     if( !_options.overridePageMedia().isNull() )
 	return _options.overridePageMedia();
     else if( dsc()->page()[ pagenumber ].media != 0 )
-	return QString( dsc()->page()[ pagenumber ].media->name );
+	return TQString( dsc()->page()[ pagenumber ].media->name );
     else if( dsc()->page_media() != 0 )
-	return QString( dsc()->page_media()->name );
+	return TQString( dsc()->page_media()->name );
     else if( dsc()->bbox().get() != 0 )
-	return QString( "BoundingBox" );
+	return TQString( "BoundingBox" );
     else
 	return _fallBackPageMedia;
 }
 
 KDSCBBOX KGVMiniWidget::boundingBox() const
 {
-    QString currentMedia = pageMedia();
+    TQString currentMedia = pageMedia();
     if( currentMedia == "BoundingBox" )
 	return KDSCBBOX( *dsc()->bbox().get() );
     else {
-	QSize size = document()->computePageSize( currentMedia );
+	TQSize size = document()->computePageSize( currentMedia );
 	return KDSCBBOX( 0, 0, size.width(), size.height() );
     }
 }
 
 KDSCBBOX KGVMiniWidget::boundingBox( int pageNo ) const
 {
-    QString currentMedia = pageMedia( pageNo );
+    TQString currentMedia = pageMedia( pageNo );
     if( currentMedia == "BoundingBox" )
 	return KDSCBBOX( *dsc()->bbox().get() );
     else {
-	QSize size = document()->computePageSize( currentMedia );
+	TQSize size = document()->computePageSize( currentMedia );
 	return KDSCBBOX( 0, 0, size.width(), size.height() );
     }
 }
@@ -384,7 +384,7 @@ void KGVMiniWidget::showPage( int pagenumber )
 
     kdDebug(4500) << "KGVMiniWidget::showPage( " << pagenumber << " )" << endl;
 
-    static_cast< QWidget* >( _psWidget->parent() )->show();
+    static_cast< TQWidget* >( _psWidget->parent() )->show();
 
     _psWidget->setFileName(_document->fileName(), dsc()->isStructured() );
     _psWidget->clear();
@@ -452,8 +452,8 @@ void KGVMiniWidget::showPage( int pagenumber )
 	}
     }
     // Do this after ajusting pagenumber above
-    _thumbnailService->cancelRequests( -1 , _part->scrollBox(), SLOT( setThumbnail( QPixmap ) ) );
-    _thumbnailService->delayedGetThumbnail( pagenumber, _part->scrollBox(), SLOT( setThumbnail( QPixmap ) ), true );
+    _thumbnailService->cancelRequests( -1 , _part->scrollBox(), TQT_SLOT( setThumbnail( TQPixmap ) ) );
+    _thumbnailService->delayedGetThumbnail( pagenumber, _part->scrollBox(), TQT_SLOT( setThumbnail( TQPixmap ) ), true );
 
     emit newPageShown( pagenumber );
 }
@@ -479,7 +479,7 @@ void KGVMiniWidget::updateStatusBarText( int pageNumber )
 
     if( dsc()->isStructured() ) 
     {
-	QString text;
+	TQString text;
 	
 	if( pageNumber == -1 )
 	    text = i18n( "Page 1" );
@@ -520,10 +520,10 @@ void KGVMiniWidget::buildTOC()
 	    }
 
 	// finally set marked list
-	QString s;
+	TQString s;
 	for( unsigned i = 0; i < dsc()->page_count(); ++i ) {
 	    const char * label = dsc()->page()[ i ].label;
-	    QString tip = QString::fromLocal8Bit( label ? label : "" );
+	    TQString tip = TQString::fromLocal8Bit( label ? label : "" );
 
 	    if( !_usePageLabels )
 		s.setNum( i + 1 );
@@ -534,7 +534,7 @@ void KGVMiniWidget::buildTOC()
 	}
     }
     else {
-	marklist->insertItem( QString::fromLatin1( "1" ), 0 );
+	marklist->insertItem( TQString::fromLatin1( "1" ), 0 );
     }
 }
 

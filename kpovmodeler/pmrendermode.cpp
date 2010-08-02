@@ -53,7 +53,7 @@ void PMRenderMode::init( )
    m_alpha = false;
 }
 
-PMRenderMode::PMRenderMode( const QDomElement& e )
+PMRenderMode::PMRenderMode( const TQDomElement& e )
 {
    init( );
 
@@ -77,7 +77,7 @@ PMRenderMode::PMRenderMode( const QDomElement& e )
    m_alpha = hlp.boolAttribute( "alpha", m_alpha );
 }
 
-void PMRenderMode::serialize( QDomElement& e ) const
+void PMRenderMode::serialize( TQDomElement& e ) const
 {
    e.setAttribute( "description", m_description );
    e.setAttribute( "height", m_height );
@@ -155,47 +155,47 @@ void PMRenderMode::setSamplingMethod( int method )
       m_samplingMethod = AntialiasingNonRecursive;
 }
 
-QStringList PMRenderMode::commandLineSwitches( ) const
+TQStringList PMRenderMode::commandLineSwitches( ) const
 {
-   QStringList cl;
-   QString tmp;
+   TQStringList cl;
+   TQString tmp;
 
-   cl.append( QString( "+W%1" ).arg( m_width ) );
-   cl.append( QString( "+H%1" ).arg( m_height ) );
+   cl.append( TQString( "+W%1" ).arg( m_width ) );
+   cl.append( TQString( "+H%1" ).arg( m_height ) );
    if( m_subSection )
    {
       if( m_startRow < 1.0 )
          tmp.sprintf( "+SR%4.2f", m_startRow );
       else
-         tmp = QString( "+SR%1" ).arg( ( int ) ( m_startRow + 0.5 ) );
+         tmp = TQString( "+SR%1" ).arg( ( int ) ( m_startRow + 0.5 ) );
       cl.append( tmp );
       if( m_endRow < 1.0 )
          tmp.sprintf( "+ER%4.2f", m_endRow );
       else
-         tmp = QString( "+ER%1" ).arg( ( int ) ( m_endRow + 0.5 ) );
+         tmp = TQString( "+ER%1" ).arg( ( int ) ( m_endRow + 0.5 ) );
       cl.append( tmp );
       
       if( m_startColumn < 1.0 )
          tmp.sprintf( "+SC%4.2f", m_startColumn );
       else
-         tmp = QString( "+SC%1" ).arg( ( int ) ( m_startColumn + 0.5 ) );
+         tmp = TQString( "+SC%1" ).arg( ( int ) ( m_startColumn + 0.5 ) );
       cl.append( tmp );
       if( m_endColumn < 1.0 )
          tmp.sprintf( "+EC%4.2f", m_endColumn );
       else
-         tmp = QString( "+EC%1" ).arg( ( int ) ( m_endColumn + 0.5 ) );
+         tmp = TQString( "+EC%1" ).arg( ( int ) ( m_endColumn + 0.5 ) );
       cl.append( tmp );
    }
-   cl.append( QString( "+Q%1" ).arg( m_quality ) );
+   cl.append( TQString( "+Q%1" ).arg( m_quality ) );
    if( m_radiosity )
-      cl.append( QString( "+QR" ) );
+      cl.append( TQString( "+QR" ) );
    else
-      cl.append( QString( "-QR" ) );
+      cl.append( TQString( "-QR" ) );
 
    if( m_antialiasing )
    {
-      cl.append( QString( "+A" ) );
-      cl.append( QString( "+AM%1" ).arg( m_samplingMethod ) );
+      cl.append( TQString( "+A" ) );
+      cl.append( TQString( "+AM%1" ).arg( m_samplingMethod ) );
       tmp.sprintf( "+A%5.3f", m_antialiasThreshold );
       cl.append( tmp );
       if( m_antialiasJitter )
@@ -204,16 +204,16 @@ QStringList PMRenderMode::commandLineSwitches( ) const
          cl.append( tmp );
       }
       else
-         cl.append( QString( "-J" ) );
-      cl.append( QString( "+R%1" ).arg( m_antialiasDepth ) );
+         cl.append( TQString( "-J" ) );
+      cl.append( TQString( "+R%1" ).arg( m_antialiasDepth ) );
    }
    else
-      cl.append( QString( "-A" ) );
+      cl.append( TQString( "-A" ) );
 
    if( m_alpha )
-      cl.append( QString( "+UA" ) );
+      cl.append( TQString( "+UA" ) );
    else
-      cl.append( QString( "-UA" ) );
+      cl.append( TQString( "-UA" ) );
 
    return cl;
 }

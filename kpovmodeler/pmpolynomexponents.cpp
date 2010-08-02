@@ -20,7 +20,7 @@
 
 bool PMPolynomExponents::m_created[6] = { false, false, false,
                                           false, false, false };
-QValueList<PMPolynomExponents> PMPolynomExponents::m_lists[6];
+TQValueList<PMPolynomExponents> PMPolynomExponents::m_lists[6];
 
 PMPolynomExponents operator+ ( const PMPolynomExponents& p1,
                                const PMPolynomExponents& p2 )
@@ -30,7 +30,7 @@ PMPolynomExponents operator+ ( const PMPolynomExponents& p1,
                               p1.m_exponents[2] + p2.m_exponents[2] );
 }
 
-QValueList<PMPolynomExponents>& PMPolynomExponents::polynom( int n )
+TQValueList<PMPolynomExponents>& PMPolynomExponents::polynom( int n )
 {
    if( ( n < 2 ) || ( n > 7 ) )
    {
@@ -48,11 +48,11 @@ QValueList<PMPolynomExponents>& PMPolynomExponents::polynom( int n )
    return m_lists[n-2];
 }
 
-QValueList<PMPolynomExponents>
+TQValueList<PMPolynomExponents>
 PMPolynomExponents::recPolynom( const PMPolynomExponents& base,
                                int xyz, int n, int rem )
 {
-   QValueList<PMPolynomExponents> res;
+   TQValueList<PMPolynomExponents> res;
 
    if( n >= 0 )
    {

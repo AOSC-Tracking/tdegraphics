@@ -25,12 +25,12 @@
 #endif 
 
 // include files for Qt
-#include <qwidget.h>
+#include <tqwidget.h>
 
 class PMTreeView;
 class PMDialogView;
 class PMPart;
-class QSplitter;
+class TQSplitter;
 class KConfig;
 
 /**
@@ -43,7 +43,7 @@ public:
    /**
     * Constructor for the main view
     */
-   PMView( PMPart* part, QWidget* parent = 0, const char* name = 0 );
+   PMView( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
    /**
     * Destructor for the main view
     */
@@ -56,7 +56,7 @@ public:
 
    /**
     * contains the implementation for printing functionality TODO*/
-   void print( QPrinter* pPrinter );
+   void print( TQPrinter* pPrinter );
    /**
     * saves settings
     */
@@ -69,8 +69,8 @@ private:
    PMTreeView* m_pTreeView;
    PMPart* m_pPart;
    PMDialogView* m_pDialogView;
-   QSplitter* m_pMainSplitter;
-   QSplitter* m_pTreeEditSplitter;
+   TQSplitter* m_pMainSplitter;
+   TQSplitter* m_pTreeEditSplitter;
 };
 
 #endif

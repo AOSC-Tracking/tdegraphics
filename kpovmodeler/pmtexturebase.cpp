@@ -128,7 +128,7 @@ void PMTextureBase::setLinkedObjectProperty( PMObject* o )
       setLinkedObject( ( PMDeclare* ) o );
 }
 
-void PMTextureBase::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMTextureBase::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    if( m_pLinkedObject )
       e.setAttribute( "prototype", m_pLinkedObject->id( ) );
@@ -137,7 +137,7 @@ void PMTextureBase::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMTextureBase::readAttributes( const PMXMLHelper& h )
 {
-   QString id = h.stringAttribute( "prototype", "" );
+   TQString id = h.stringAttribute( "prototype", "" );
    if( !id.isEmpty( ) )
    {
       PMDeclare* link = h.parser( )->checkLink( id );

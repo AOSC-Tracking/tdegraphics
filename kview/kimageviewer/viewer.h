@@ -49,7 +49,7 @@ class KDE_EXPORT Viewer : public KParts::ReadWritePart
 {
 	Q_OBJECT
 	public:
-		Viewer( QObject * parent = 0, const char * name = 0 );
+		Viewer( TQObject * parent = 0, const char * name = 0 );
 
 		virtual ~Viewer();
 
@@ -77,7 +77,7 @@ class KDE_EXPORT Viewer : public KParts::ReadWritePart
 		 * So if you want to display a new image (not change the one shown) this
 		 * is the method to use. Else take a look at Canvas::setImage().
 		 */
-		virtual void newImage( const QImage & ) = 0;
+		virtual void newImage( const TQImage & ) = 0;
 
 		/**
 		 * Tell the view to reload the current image. The host for this view

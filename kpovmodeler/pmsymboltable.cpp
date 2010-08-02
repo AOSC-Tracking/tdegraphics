@@ -21,7 +21,7 @@
 
 #include <string.h>
 
-PMSymbol::PMSymbol( const QString& id, PMDeclare* o )
+PMSymbol::PMSymbol( const TQString& id, PMDeclare* o )
 {
    setId( id );
    m_type = Object;
@@ -30,7 +30,7 @@ PMSymbol::PMSymbol( const QString& id, PMDeclare* o )
    m_pRenamedSymbol = 0;
 }
 
-PMSymbol::PMSymbol( const QString& id, const PMValue& v )
+PMSymbol::PMSymbol( const TQString& id, const PMValue& v )
 {
    setId( id );
    m_type = Value;
@@ -45,7 +45,7 @@ PMSymbol::~PMSymbol( )
       delete m_pVal;
 }
 
-void PMSymbol::setId( const QString& id )
+void PMSymbol::setId( const TQString& id )
 {
    m_id = id.left( MaxIDLength );
 }
@@ -68,7 +68,7 @@ PMValue PMSymbol::value( ) const
 
 
 PMSymbolTable::PMSymbolTable( )
-      : QDict<PMSymbol>( 1009 ), m_lastID( 47 )
+      : TQDict<PMSymbol>( 1009 ), m_lastID( 47 )
 {
    setAutoDelete( true );
    m_lastID.setAutoDelete( true );
@@ -79,10 +79,10 @@ PMSymbolTable::~PMSymbolTable( )
    clear( );
 }
 
-QString PMSymbolTable::findNewID( const QString& prefix )
+TQString PMSymbolTable::findNewID( const TQString& prefix )
 {
    PMSymbol* symbol;
-   QString testID;
+   TQString testID;
    unsigned int number;
    
    int* lastNumber = m_lastID.find( prefix );
@@ -94,7 +94,7 @@ QString PMSymbolTable::findNewID( const QString& prefix )
    // find next free id
    do
    {
-      testID = prefix + QString( "%1" ).arg( number );
+      testID = prefix + TQString( "%1" ).arg( number );
       symbol = find( testID );
       if( symbol )
          number++;
@@ -109,9 +109,9 @@ QString PMSymbolTable::findNewID( const QString& prefix )
    return testID;
 }
 
-PMSymbol* PMSymbolTable::findNewID( const QString& prefix, PMDeclare* obj )
+PMSymbol* PMSymbolTable::findNewID( const TQString& prefix, PMDeclare* obj )
 {
-   QString newID = findNewID( prefix );
+   TQString newID = findNewID( prefix );
    obj->setID( newID );
 
    PMSymbol* s = new PMSymbol( newID, obj );

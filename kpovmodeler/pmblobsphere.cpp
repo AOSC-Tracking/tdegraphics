@@ -67,7 +67,7 @@ PMBlobSphere::~PMBlobSphere( )
 }
 
 
-QString PMBlobSphere::description( ) const
+TQString PMBlobSphere::description( ) const
 {
    return i18n( "blob sphere" );
 }
@@ -91,7 +91,7 @@ PMMetaObject* PMBlobSphere::metaObject( ) const
    return s_pMetaObject;
 }
 
-void PMBlobSphere::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMBlobSphere::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "centre", m_centre.serializeXML( ) );
    e.setAttribute( "radius", m_radius );
@@ -107,7 +107,7 @@ void PMBlobSphere::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMBlobSphere::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBlobSphere::editWidget( TQWidget* parent ) const
 {
    return new PMBlobSphereEdit( parent );
 }

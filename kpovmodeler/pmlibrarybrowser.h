@@ -23,15 +23,15 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qdict.h>
+#include <tqwidget.h>
+#include <tqdict.h>
 
 #include "pmviewbase.h"
 #include "pmviewfactory.h"
 
-class QComboBox;
-class QIconViewItem;
-class QPushButton;
+class TQComboBox;
+class TQIconViewItem;
+class TQPushButton;
 class KConfig;
 class KDirOperator;
 class PMLibraryIconView;
@@ -40,7 +40,7 @@ class PMLibraryHandle;
 class PMPart;
 namespace KIO{ class Job; }
 
-typedef QDict<QString> QStringDict;
+typedef TQDict<TQString> QStringDict;
 
 /**
  * Wrapper class for the treeview/dock widget
@@ -52,12 +52,12 @@ public:
    /**
     * Default constructor
     */
-   PMLibraryBrowserView( PMPart* part, QWidget* parent, const char* name = 0 );
+   PMLibraryBrowserView( PMPart* part, TQWidget* parent, const char* name = 0 );
 
    /** */
-   virtual QString viewType( ) const { return QString( "librarybrowserview" ); }
+   virtual TQString viewType( ) const { return TQString( "librarybrowserview" ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 };
 
 /**
@@ -67,13 +67,13 @@ class PMLibraryBrowserViewWidget: public QWidget
 {
    Q_OBJECT
 public:
-   PMLibraryBrowserViewWidget( QWidget *parent, const char* name = NULL );
+   PMLibraryBrowserViewWidget( TQWidget *parent, const char* name = NULL );
 
 private slots:
-   void resizeEvent( QResizeEvent* ev );
-   void slotPathSelected( const QString& str );
-   void slotSelectionChanged( QIconViewItem* item );
-   void slotSelectionExecuted( QIconViewItem* item );
+   void resizeEvent( TQResizeEvent* ev );
+   void slotPathSelected( const TQString& str );
+   void slotSelectionChanged( TQIconViewItem* item );
+   void slotSelectionExecuted( TQIconViewItem* item );
    void slotUpButtonClicked( );
    void slotDeleteClicked( );
    void slotNewObjectClicked( );
@@ -88,11 +88,11 @@ private slots:
 private:
 
 
-   QPushButton*           m_pUpButton;
-   QPushButton*           m_pNewSubLibraryButton;
-   QPushButton*           m_pNewObjectButton;
-   QPushButton*           m_pDeleteObjectButton;
-   QComboBox*             m_pLibraryComboBox;
+   TQPushButton*           m_pUpButton;
+   TQPushButton*           m_pNewSubLibraryButton;
+   TQPushButton*           m_pNewObjectButton;
+   TQPushButton*           m_pDeleteObjectButton;
+   TQComboBox*             m_pLibraryComboBox;
    PMLibraryIconView*     m_pLibraryIconView;
    PMLibraryEntryPreview* m_pLibraryEntryPreview;
    PMLibraryHandle*       m_pCurrentLibrary;
@@ -107,10 +107,10 @@ class PMLibraryBrowserViewFactory : public PMViewTypeFactory
 {
 public:
    PMLibraryBrowserViewFactory( ) { }
-   virtual QString viewType( ) const { return QString( "librarybrowserview" ); }
-   virtual QString description( ) const;
-   virtual QString iconName( ) const { return QString( "pmlibrarybrowserview" ); }
-   virtual PMViewBase* newInstance( QWidget* parent, PMPart* part ) const
+   virtual TQString viewType( ) const { return TQString( "librarybrowserview" ); }
+   virtual TQString description( ) const;
+   virtual TQString iconName( ) const { return TQString( "pmlibrarybrowserview" ); }
+   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
    {
       return new PMLibraryBrowserView( part, parent );
    }

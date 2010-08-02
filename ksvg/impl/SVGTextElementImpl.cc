@@ -49,7 +49,7 @@ long SVGTextElementImpl::getNumberOfChars()
 	return text().length();
 }
 
-QString SVGTextElementImpl::text()
+TQString SVGTextElementImpl::text()
 {
 	// Otherwhise some js scripts which require a child, don't work (Niko)
 	if(!hasChildNodes())
@@ -80,7 +80,7 @@ void SVGTextElementImpl::createItem(KSVGCanvas *c )
 	{
 		m_item = c->createText(this);
 		// Set up bbox before insert(), as that may render the item
-		QRect rect = m_item->bbox();
+		TQRect rect = m_item->bbox();
 		m_bboxX = rect.x();
 		m_bboxY = rect.y();
 		m_bboxWidth = rect.width();
@@ -89,7 +89,7 @@ void SVGTextElementImpl::createItem(KSVGCanvas *c )
 	}
 }
 
-bool SVGTextElementImpl::prepareMouseEvent(const QPoint &p, const QPoint &, SVGMouseEventImpl *mev)
+bool SVGTextElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &, SVGMouseEventImpl *mev)
 {
 	// TODO : pointer-events should be stored here, not in SVGStylableImpl.
 	SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(this);

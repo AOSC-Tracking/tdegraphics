@@ -28,18 +28,18 @@
 
 #include <kpcursorprovider.h>
 
-#include <qcursor.h>
+#include <tqcursor.h>
 
 #include <kstaticdeleter.h>
 
 #include <kpcursorlightcross.h>
 
 
-static const QCursor *theLightCursor = 0;
+static const TQCursor *theLightCursor = 0;
 
 
 // public static
-QCursor kpCursorProvider::lightCross ()
+TQCursor kpCursorProvider::lightCross ()
 {
     // TODO: don't leak (although it's cleaned up on exit by OS anyway)
     if (!theLightCursor)

@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMSolidColorEdit with parent and name
     */
-   PMSolidColorEdit( QWidget* parent, const char* name = 0 );
+   PMSolidColorEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

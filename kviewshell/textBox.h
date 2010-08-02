@@ -10,8 +10,8 @@
 #ifndef _textbox_h_
 #define _textbox_h_
 
-#include <qrect.h>
-#include <qstring.h>
+#include <tqrect.h>
+#include <tqstring.h>
 
 /** Represents a rectangular region in a RenderedDocumentPage that contains text
     
@@ -41,7 +41,7 @@ public:
   @param re value for the box
   @param lT valus for the text field
   */
-  TextBox(const QRect& re, const QString& lT): box(re), text(lT) {}
+  TextBox(const TQRect& re, const TQString& lT): box(re), text(lT) {}
 
   /** \brief Bounding box of the text or hyperlink
 
@@ -51,13 +51,13 @@ public:
   documentRenderer.drawPage() method. The contents of the box is
   graphically inverted to indicate marked text.
   */
-  QRect    box;
+  TQRect    box;
 
   /** \brief Name of the region
 
   The text associated with the box is stored here.
   */
-  QString  text;
+  TQString  text;
 };
 
 

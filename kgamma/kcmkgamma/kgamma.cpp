@@ -17,15 +17,15 @@
 
 #include <unistd.h>
 
-#include <qlabel.h>
-#include <qpixmap.h>
-#include <qstring.h>
-#include <qlayout.h>
-#include <qstringlist.h>
-#include <qdir.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qwidgetstack.h>
+#include <tqlabel.h>
+#include <tqpixmap.h>
+#include <tqstring.h>
+#include <tqlayout.h>
+#include <tqstringlist.h>
+#include <tqdir.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqwidgetstack.h>
 
 #include <kstandarddirs.h>
 #include <kconfig.h>
@@ -42,7 +42,7 @@
 #include "kgamma.h"
 #include "kgamma.moc"
 
-typedef KGenericFactory<KGamma, QWidget> KGammaFactory;
+typedef KGenericFactory<KGamma, TQWidget> KGammaFactory;
 K_EXPORT_COMPONENT_FACTORY ( kcm_kgamma, KGammaFactory( "kgamma" ) )
 
 extern "C"
@@ -55,7 +55,7 @@ extern "C"
 	}
 }
 
-KGamma::KGamma(QWidget *parent, const char *name, const QStringList&)
+KGamma::KGamma(TQWidget *parent, const char *name, const TQStringList&)
     :KCModule(parent,name)
 {
   bool ok;
@@ -123,15 +123,15 @@ KGamma::~KGamma() {
 
 /** User interface */
 void KGamma::setupUI() {
-  QBoxLayout *topLayout = new QVBoxLayout(this, 0, KDialog::spacingHint());
+  TQBoxLayout *topLayout = new TQVBoxLayout(this, 0, KDialog::spacingHint());
 
   if (GammaCorrection) {
-    QHBoxLayout *hbox = new QHBoxLayout( topLayout );
-    QLabel *label = new QLabel( i18n( "&Select test picture:" ) , this);
-    QComboBox *combo = new QComboBox( this );
+    TQHBoxLayout *hbox = new TQHBoxLayout( topLayout );
+    TQLabel *label = new TQLabel( i18n( "&Select test picture:" ) , this);
+    TQComboBox *combo = new TQComboBox( this );
     label->setBuddy( combo );
 
-    QStringList list;
+    TQStringList list;
     list << i18n( "Gray Scale" )
          << i18n( "RGB Scale" )
          << i18n( "CMY Scale" )
@@ -144,100 +144,100 @@ void KGamma::setupUI() {
     hbox->addWidget( combo );
     hbox->addStretch();
 
-    QWidgetStack *stack = new QWidgetStack( this );
-    stack->setFrameStyle( QFrame::Box | QFrame::Raised );
+    TQWidgetStack *stack = new TQWidgetStack( this );
+    stack->setFrameStyle( TQFrame::Box | TQFrame::Raised );
 
-    connect( combo, SIGNAL( activated( int ) ),
-             stack, SLOT( raiseWidget( int ) ) );
+    connect( combo, TQT_SIGNAL( activated( int ) ),
+             stack, TQT_SLOT( raiseWidget( int ) ) );
 
-    QPixmap background;
+    TQPixmap background;
     background.load(locate("data", "kgamma/pics/background.png"));
 
-    QLabel *pic1 = new QLabel(stack);
+    TQLabel *pic1 = new TQLabel(stack);
     pic1->setMinimumSize(530, 171);
     pic1->setBackgroundPixmap(background);
-    pic1->setPixmap(QPixmap(locate("data", "kgamma/pics/greyscale.png")));
+    pic1->setPixmap(TQPixmap(locate("data", "kgamma/pics/greyscale.png")));
     pic1->setAlignment(AlignCenter);
     stack->addWidget( pic1, 0 );
 
-    QLabel *pic2 = new QLabel(stack);
+    TQLabel *pic2 = new TQLabel(stack);
     pic2->setBackgroundPixmap(background);
-    pic2->setPixmap(QPixmap(locate("data", "kgamma/pics/rgbscale.png")));
+    pic2->setPixmap(TQPixmap(locate("data", "kgamma/pics/rgbscale.png")));
     pic2->setAlignment(AlignCenter);
     stack->addWidget( pic2, 1 );
 
-    QLabel *pic3 = new QLabel(stack);
+    TQLabel *pic3 = new TQLabel(stack);
     pic3->setBackgroundPixmap(background);
-    pic3->setPixmap(QPixmap(locate("data", "kgamma/pics/cmyscale.png")));
+    pic3->setPixmap(TQPixmap(locate("data", "kgamma/pics/cmyscale.png")));
     pic3->setAlignment(AlignCenter);
     stack->addWidget( pic3, 2 );
 
-    QLabel *pic4 = new QLabel(stack);
+    TQLabel *pic4 = new TQLabel(stack);
     pic4->setBackgroundPixmap(background);
-    pic4->setPixmap(QPixmap(locate("data", "kgamma/pics/darkgrey.png")));
+    pic4->setPixmap(TQPixmap(locate("data", "kgamma/pics/darkgrey.png")));
     pic4->setAlignment(AlignCenter);
     stack->addWidget( pic4, 3 );
 
-    QLabel *pic5 = new QLabel(stack);
+    TQLabel *pic5 = new TQLabel(stack);
     pic5->setBackgroundPixmap(background);
-    pic5->setPixmap(QPixmap(locate("data", "kgamma/pics/midgrey.png")));
+    pic5->setPixmap(TQPixmap(locate("data", "kgamma/pics/midgrey.png")));
     pic5->setAlignment(AlignCenter);
     stack->addWidget( pic5, 4 );
 
-    QLabel *pic6 = new QLabel(stack);
+    TQLabel *pic6 = new TQLabel(stack);
     pic6->setBackgroundPixmap(background);
-    pic6->setPixmap(QPixmap(locate("data", "kgamma/pics/lightgrey.png")));
+    pic6->setPixmap(TQPixmap(locate("data", "kgamma/pics/lightgrey.png")));
     pic6->setAlignment(AlignCenter);
     stack->addWidget( pic6, 5 );
 
     topLayout->addWidget(stack, 10);
 
     //Sliders for gamma correction
-    QFrame *frame1 = new QFrame(this);
-    frame1->setFrameStyle( QFrame::GroupBoxPanel | QFrame::Plain );
+    TQFrame *frame1 = new TQFrame(this);
+    frame1->setFrameStyle( TQFrame::GroupBoxPanel | TQFrame::Plain );
 
-    QFrame *frame2 = new QFrame(this);
-    frame2->setFrameStyle( QFrame::GroupBoxPanel | QFrame::Plain );
+    TQFrame *frame2 = new TQFrame(this);
+    frame2->setFrameStyle( TQFrame::GroupBoxPanel | TQFrame::Plain );
 
-    QLabel *gammalabel = new QLabel(this);
+    TQLabel *gammalabel = new TQLabel(this);
     gammalabel->setText(i18n("Gamma:"));
 
-    QLabel *redlabel = new QLabel(this);
+    TQLabel *redlabel = new TQLabel(this);
     redlabel->setText(i18n("Red:"));
 
-    QLabel *greenlabel = new QLabel(this);
+    TQLabel *greenlabel = new TQLabel(this);
     greenlabel->setText(i18n("Green:"));
 
-    QLabel *bluelabel = new QLabel(this);
+    TQLabel *bluelabel = new TQLabel(this);
     bluelabel->setText(i18n("Blue:"));
 
     gctrl = new GammaCtrl(this, xv);
-    connect(gctrl, SIGNAL(gammaChanged(int)), SLOT(Changed()));
-    connect(gctrl, SIGNAL(gammaChanged(int)), SLOT(SyncScreens()));
+    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
+    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
     gammalabel->setBuddy( gctrl );
 
     rgctrl = new GammaCtrl(this, xv, XVidExtWrap::Red);
-    connect(rgctrl, SIGNAL(gammaChanged(int)), SLOT(Changed()));
-    connect(rgctrl, SIGNAL(gammaChanged(int)), SLOT(SyncScreens()));
-    connect(gctrl, SIGNAL(gammaChanged(int)), rgctrl, SLOT(setCtrl(int)));
-    connect(rgctrl, SIGNAL(gammaChanged(int)), gctrl, SLOT(suspend()));
+    connect(rgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
+    connect(rgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
+    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), rgctrl, TQT_SLOT(setCtrl(int)));
+    connect(rgctrl, TQT_SIGNAL(gammaChanged(int)), gctrl, TQT_SLOT(suspend()));
     redlabel->setBuddy( rgctrl );
 
     ggctrl = new GammaCtrl(this, xv, XVidExtWrap::Green);
-    connect(ggctrl, SIGNAL(gammaChanged(int)), SLOT(Changed()));
-    connect(ggctrl, SIGNAL(gammaChanged(int)), SLOT(SyncScreens()));
-    connect(gctrl, SIGNAL(gammaChanged(int)), ggctrl, SLOT(setCtrl(int)));
-    connect(ggctrl, SIGNAL(gammaChanged(int)), gctrl, SLOT(suspend()));
+    connect(ggctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
+    connect(ggctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
+    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), ggctrl, TQT_SLOT(setCtrl(int)));
+    connect(ggctrl, TQT_SIGNAL(gammaChanged(int)), gctrl, TQT_SLOT(suspend()));
     greenlabel->setBuddy( ggctrl );
 
     bgctrl = new GammaCtrl(this, xv, XVidExtWrap::Blue);
-    connect(bgctrl, SIGNAL(gammaChanged(int)), SLOT(Changed()));
-    connect(bgctrl, SIGNAL(gammaChanged(int)), SLOT(SyncScreens()));
-    connect(gctrl, SIGNAL(gammaChanged(int)), bgctrl, SLOT(setCtrl(int)));
-    connect(bgctrl, SIGNAL(gammaChanged(int)), gctrl, SLOT(suspend()));
+    connect(bgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
+    connect(bgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
+    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), bgctrl, TQT_SLOT(setCtrl(int)));
+    connect(bgctrl, TQT_SIGNAL(gammaChanged(int)), gctrl, TQT_SLOT(suspend()));
     bluelabel->setBuddy( bgctrl );
 
-    QGridLayout *grid = new QGridLayout(4, 9);
+    TQGridLayout *grid = new TQGridLayout(4, 9);
     grid->setSpacing(8);
     grid->addMultiCellWidget(frame1, 0, 2, 0, 3);
     grid->addMultiCellWidget(frame2, 4, 8, 0, 3);
@@ -253,20 +253,20 @@ void KGamma::setupUI() {
     topLayout->addLayout(grid);
 
     //Options
-    QHBox *options = new QHBox(this);
+    TQHBox *options = new TQHBox(this);
 
-    xf86cfgbox = new QCheckBox( i18n("Save settings to XF86Config"), options );
-    connect(xf86cfgbox, SIGNAL(clicked()), SLOT(changeConfig()));
+    xf86cfgbox = new TQCheckBox( i18n("Save settings to XF86Config"), options );
+    connect(xf86cfgbox, TQT_SIGNAL(clicked()), TQT_SLOT(changeConfig()));
 
-    syncbox = new QCheckBox( i18n("Sync screens"), options );
-    connect(syncbox, SIGNAL(clicked()), SLOT(SyncScreens()));
-    connect(syncbox, SIGNAL(clicked()), SLOT(Changed()));
+    syncbox = new TQCheckBox( i18n("Sync screens"), options );
+    connect(syncbox, TQT_SIGNAL(clicked()), TQT_SLOT(SyncScreens()));
+    connect(syncbox, TQT_SIGNAL(clicked()), TQT_SLOT(Changed()));
 
-    screenselect = new QComboBox( options );
+    screenselect = new TQComboBox( options );
     for ( int i = 0; i < ScreenCount; i++ )
       screenselect->insertItem( i18n("Screen %1").arg(i+1) );
     screenselect->setCurrentItem(currentScreen);
-    connect(screenselect, SIGNAL(activated(int)), SLOT(changeScreen(int)));
+    connect(screenselect, TQT_SIGNAL(activated(int)), TQT_SLOT(changeScreen(int)));
 
     options->setSpacing( 10 );
     options->setStretchFactor( xf86cfgbox, 10 );
@@ -276,7 +276,7 @@ void KGamma::setupUI() {
     topLayout->addWidget(options);
   }
   else {
-    QLabel *error = new QLabel(this);
+    TQLabel *error = new TQLabel(this);
     error->setText(i18n("Gamma correction is not supported by your"
     " graphics hardware or driver."));
     error->setAlignment(AlignCenter);
@@ -351,7 +351,7 @@ void KGamma::save() {
 
     if ( !xf86cfgbox->isChecked() ) { //write gamma settings to the users config
       for (int i = 0; i < ScreenCount; i++) {
-        config->setGroup( QString("Screen %1").arg(i) );
+        config->setGroup( TQString("Screen %1").arg(i) );
         config->writeEntry("rgamma", rgamma[i]);
         config->writeEntry("ggamma", ggamma[i]);
         config->writeEntry("bgamma", bgamma[i]);
@@ -364,7 +364,7 @@ void KGamma::save() {
       config->writeEntry("use", "XF86Config");
 
       if ( !rootProcess->isRunning() ) {
-        QString Arguments = "xf86gammacfg ";
+        TQString Arguments = "xf86gammacfg ";
         for (int i = 0; i < ScreenCount; i++)
           Arguments += rgamma[assign[i]] + " " + ggamma[assign[i]] + " " + \
           bgamma[assign[i]] + " ";
@@ -387,7 +387,7 @@ void KGamma::defaults() {
 bool KGamma::loadSettings() {
   KConfig *config = new KConfig("kgammarc");
   config->setGroup("ConfigFile");
-  QString ConfigFile( config->readEntry("use") );
+  TQString ConfigFile( config->readEntry("use") );
   config->setGroup("SyncBox");
   if ( config->readEntry("sync") == "yes" ) syncbox->setChecked(true);
   delete config;
@@ -405,7 +405,7 @@ bool KGamma::loadUserSettings() {
   KConfig *config = new KConfig("kgammarc");
 
   for (int i = 0; i < ScreenCount; i++) {
-    config->setGroup(QString( "Screen %1" ).arg(i) );
+    config->setGroup(TQString( "Screen %1" ).arg(i) );
     rgamma[i] = config->readEntry("rgamma");
     ggamma[i] = config->readEntry("ggamma");
     bgamma[i] = config->readEntry("bgamma");
@@ -416,22 +416,22 @@ bool KGamma::loadUserSettings() {
 }
 
 bool KGamma::loadSystemSettings() {
-  QStringList Monitor, Screen, ScreenLayout, ScreenMonitor, Gamma;
-  QValueList<int> ScreenNr;
-  QString Section;
+  TQStringList Monitor, Screen, ScreenLayout, ScreenMonitor, Gamma;
+  TQValueList<int> ScreenNr;
+  TQString Section;
   XF86ConfigPath Path;
 
-  QFile f( Path.get() );
+  TQFile f( Path.get() );
   if ( f.open(IO_ReadOnly) ) {
-    QTextStream t( &f );
-    QString s;
+    TQTextStream t( &f );
+    TQString s;
     int sn = 0;
     bool gm = false;
 
     // Analyse Screen<->Monitor assignments of multi-head configurations
     while ( !t.eof() ) {
       s = (t.readLine()).simplifyWhiteSpace();
-      QStringList words = QStringList::split(' ', s);
+      TQStringList words = TQStringList::split(' ', s);
 
       if ( !words.empty() ) {
         if ( words[0] == "Section" && words.size() > 1 ) {
@@ -491,8 +491,8 @@ bool KGamma::loadSystemSettings() {
     for ( int i = 0; i < ScreenCount; i++) {
       rgamma[i] = ggamma[i] = bgamma[i] = "";
 
-      QStringList words = QStringList::split(' ', Gamma[assign[i]]);
-      QStringList::ConstIterator it = words.begin();
+      TQStringList words = TQStringList::split(' ', Gamma[assign[i]]);
+      TQStringList::ConstIterator it = words.begin();
       if ( words.size() < 4 )
         rgamma[i] = ggamma[i] = bgamma[i] = *(++it);   // single gamma value
       else  {
@@ -560,7 +560,7 @@ void KGamma::SyncScreens() {
 }
 
 void KGamma::changeScreen(int sn) {
-  QString red, green, blue;
+  TQString red, green, blue;
 
   xv->setScreen(sn);
   currentScreen = sn;
@@ -580,7 +580,7 @@ int KGamma::buttons () {
   return Default|Apply|Help;
 }
 
-QString KGamma::quickHelp() const
+TQString KGamma::quickHelp() const
 {
   return i18n("<h1>Monitor Gamma</h1> This is a tool for changing monitor gamma"
     " correction. Use the four sliders to define the gamma correction either"
@@ -610,7 +610,7 @@ extern "C"
 
       for (int i = 0; i < xv._ScreenCount(); i++) {
         xv.setScreen(i);
-        config->setGroup( QString("Screen %1").arg(i) );
+        config->setGroup( TQString("Screen %1").arg(i) );
 
         if ((rgamma = config->readEntry("rgamma").toFloat()))
           xv.setGamma(XVidExtWrap::Red, rgamma);

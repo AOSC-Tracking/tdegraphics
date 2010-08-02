@@ -21,8 +21,8 @@
 #include "kview_scale.h"
 #include "scaledlg.h"
 
-#include <qimage.h>
-#include <qvbox.h>
+#include <tqimage.h>
+#include <tqvbox.h>
 
 #include <kaction.h>
 #include <klocale.h>
@@ -35,7 +35,7 @@
 typedef KGenericFactory<KViewScale> KViewScaleFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_scale, KViewScaleFactory( "kview_scale" ) )
 
-KViewScale::KViewScale( QObject* parent, const char* name, const QStringList & )
+KViewScale::KViewScale( TQObject* parent, const char* name, const TQStringList & )
 	: Plugin( parent, name )
 	, m_pViewer( 0 )
 	, m_pCanvas( 0 )
@@ -47,7 +47,7 @@ KViewScale::KViewScale( QObject* parent, const char* name, const QStringList & )
 		m_pCanvas = m_pViewer->canvas();
 
 		(void) new KAction( i18n( "&Scale Image..." ), 0, 0,
-							this, SLOT( slotScaleDlg() ),
+							this, TQT_SLOT( slotScaleDlg() ),
 							actionCollection(), "plugin_scale" );
 	}
 	else
@@ -64,36 +64,36 @@ void KViewScale::slotScaleDlg()
 	KDialogBase dlg( m_pViewer->widget(), "KView scale dialog", true, i18n( "Scale Image" ), KDialogBase::Ok|KDialogBase::Cancel );
 	ScaleDlg widget( m_pCanvas->imageSize(), dlg.makeVBoxMainWidget() );
 #if 0
-	QVBox * layout = dlg.makeVBoxMainWidget();
+	TQVBox * layout = dlg.makeVBoxMainWidget();
 
-	QGroupBox * pixelgroup = new QGroupBox( i18n( "Pixel Dimensions" ), layout );
-	QGridLayout * pixelgroupgrid = new QGridLayout( pixelgroup, 1, 1, 0, KDialog::spacingHint() );
+	TQGroupBox * pixelgroup = new TQGroupBox( i18n( "Pixel Dimensions" ), layout );
+	TQGridLayout * pixelgroupgrid = new TQGridLayout( pixelgroup, 1, 1, 0, KDialog::spacingHint() );
 	pixelgroupgrid->setSpacing( KDialog::spacingHint() );
 	pixelgroupgrid->setMargin( KDialog::marginHint() );
-	QLabel * label;
-	QSize imagesize = m_pCanvas->imageSize();
+	TQLabel * label;
+	TQSize imagesize = m_pCanvas->imageSize();
 
 	// show original width
-	label = new QLabel( i18n( "Original width:" ), pixelgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "Original width:" ), pixelgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 0, 0 );
-	pixelgroupgrid->addWidget( new QLabel( QString::number( imagesize.width() ), pixelgroup ), 0, 1 );
-	label = new QLabel( i18n( "Height:" ), pixelgroup );
-	label->setAlignment( QLabel::AlignRight );
+	pixelgroupgrid->addWidget( new TQLabel( TQString::number( imagesize.width() ), pixelgroup ), 0, 1 );
+	label = new TQLabel( i18n( "Height:" ), pixelgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 1, 0 );
-	pixelgroupgrid->addWidget( new QLabel( QString::number( imagesize.height() ), pixelgroup ), 1, 1 );
+	pixelgroupgrid->addWidget( new TQLabel( TQString::number( imagesize.height() ), pixelgroup ), 1, 1 );
 
 	pixelgroupgrid->addRowSpacing( 2, KDialog::spacingHint() );
 
-	label = new QLabel( i18n( "New width:" ), pixelgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "New width:" ), pixelgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 3, 0 );
-	label = new QLabel( i18n( "Height:" ), pixelgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "Height:" ), pixelgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 4, 0 );
-	QSpinBox * newwidth = new QSpinBox( 1, 100000, 1, pixelgroup );
+	TQSpinBox * newwidth = new TQSpinBox( 1, 100000, 1, pixelgroup );
 	pixelgroupgrid->addWidget( newwidth, 3, 1 );
-	QSpinBox * newheight = new QSpinBox( 1, 100000, 1, pixelgroup );
+	TQSpinBox * newheight = new TQSpinBox( 1, 100000, 1, pixelgroup );
 	pixelgroupgrid->addWidget( newheight, 4, 1 );
 	KComboBox * newsizeunit = new KComboBox( pixelgroup );
 	newsizeunit->insertItem( i18n( "px" ) );
@@ -102,34 +102,34 @@ void KViewScale::slotScaleDlg()
 
 	pixelgroupgrid->addRowSpacing( 5, KDialog::spacingHint() );
 
-	label = new QLabel( i18n( "Ratio X:" ), pixelgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "Ratio X:" ), pixelgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 6, 0 );
-	label = new QLabel( i18n( "Y:" ), pixelgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "Y:" ), pixelgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 7, 0 );
-	QSpinBox * ratiox = new QSpinBox( pixelgroup );
-	ratiox->setValidator( new QDoubleValidator( 0.0001, 10000, 4, ratiox ) );
+	TQSpinBox * ratiox = new TQSpinBox( pixelgroup );
+	ratiox->setValidator( new TQDoubleValidator( 0.0001, 10000, 4, ratiox ) );
 	pixelgroupgrid->addWidget( ratiox, 6, 1 );
-	QSpinBox * ratioy = new QSpinBox( pixelgroup );
-	ratioy->setValidator( new QDoubleValidator( 0.0001, 10000, 4, ratioy ) );
+	TQSpinBox * ratioy = new TQSpinBox( pixelgroup );
+	ratioy->setValidator( new TQDoubleValidator( 0.0001, 10000, 4, ratioy ) );
 	pixelgroupgrid->addWidget( ratioy, 7, 1 );
-	pixelgroupgrid->addMultiCellWidget( new QCheckBox( i18n( "Link" ), pixelgroup ), 6, 7, 2, 2, Qt::AlignVCenter );
+	pixelgroupgrid->addMultiCellWidget( new TQCheckBox( i18n( "Link" ), pixelgroup ), 6, 7, 2, 2, Qt::AlignVCenter );
 
-	QGroupBox * printgroup = new QGroupBox( i18n( "Print Size && Display Units" ), layout );
-	QGridLayout * printgroupgrid = new QGridLayout( printgroup, 1, 1, 0, KDialog::spacingHint() );
+	TQGroupBox * printgroup = new TQGroupBox( i18n( "Print Size && Display Units" ), layout );
+	TQGridLayout * printgroupgrid = new TQGridLayout( printgroup, 1, 1, 0, KDialog::spacingHint() );
 	printgroupgrid->setSpacing( KDialog::spacingHint() );
 	printgroupgrid->setMargin( KDialog::marginHint() );
 
-	label = new QLabel( i18n( "New width:" ), printgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "New width:" ), printgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 0, 0 );
-	label = new QLabel( i18n( "Height:" ), printgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "Height:" ), printgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 1, 0 );
-	QSpinBox * newwidth2 = new QSpinBox( printgroup );
+	TQSpinBox * newwidth2 = new TQSpinBox( printgroup );
 	printgroupgrid->addWidget( newwidth2, 0, 1 );
-	QSpinBox * newheight2 = new QSpinBox( printgroup );
+	TQSpinBox * newheight2 = new TQSpinBox( printgroup );
 	printgroupgrid->addWidget( newheight2, 1, 1 );
 	KComboBox * newsizeunit2 = new KComboBox( printgroup );
 	newsizeunit2->insertItem( i18n( "in" ) );
@@ -138,17 +138,17 @@ void KViewScale::slotScaleDlg()
 
 	printgroupgrid->addRowSpacing( 2, KDialog::spacingHint() );
 
-	label = new QLabel( i18n( "Resolution X:" ), printgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "Resolution X:" ), printgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 3, 0 );
-	label = new QLabel( i18n( "Y:" ), printgroup );
-	label->setAlignment( QLabel::AlignRight );
+	label = new TQLabel( i18n( "Y:" ), printgroup );
+	label->setAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 4, 0 );
-	QSpinBox * resx = new QSpinBox( printgroup );
+	TQSpinBox * resx = new TQSpinBox( printgroup );
 	printgroupgrid->addWidget( resx, 3, 1 );
-	QSpinBox * resy = new QSpinBox( printgroup );
+	TQSpinBox * resy = new TQSpinBox( printgroup );
 	printgroupgrid->addWidget( resy, 4, 1 );
-	printgroupgrid->addMultiCellWidget( new QCheckBox( i18n( "Link" ), printgroup ), 3, 4, 2, 2, Qt::AlignVCenter );
+	printgroupgrid->addMultiCellWidget( new TQCheckBox( i18n( "Link" ), printgroup ), 3, 4, 2, 2, Qt::AlignVCenter );
 	//KComboBox * newsizeunit2 = new KComboBox( printgroup );
 	//newsizeunit2->insertItem( i18n( "in" ) );
 	//newsizeunit2->insertItem( i18n( "mm" ) );
@@ -162,12 +162,12 @@ void KViewScale::slotScale()
 {
 	// retrieve current image
 	kdDebug( 4630 ) << "m_pCanvas = " <<  m_pCanvas << endl;
-	const QImage * image = m_pCanvas->image();
+	const TQImage * image = m_pCanvas->image();
 	kdDebug( 4630 ) << "image pointer retrieved" << endl;
 	if( image )
 	{
 		// scale
-		QImage newimage = image->smoothScale( 50, 50 );
+		TQImage newimage = image->smoothScale( 50, 50 );
 		// put back (modified)
 		m_pCanvas->setImage( newimage );
 		m_pViewer->setModified( true );

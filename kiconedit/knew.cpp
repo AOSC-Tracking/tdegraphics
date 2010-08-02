@@ -18,11 +18,11 @@
     Boston, MA 02110-1301, USA.
 */  
 
-#include <qlayout.h>
-#include <qpainter.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqpainter.h>
+#include <tqbuttongroup.h>
+#include <tqradiobutton.h>
+#include <tqpushbutton.h>
 
 #include <kconfig.h>
 #include <klocale.h>
@@ -74,8 +74,8 @@ void KIconTemplateContainer::save()
   KConfig *k = kapp->config();
   k->setGroup("Templates");
   
-  QStringList names;
-  for (QValueListIterator<KIconTemplate> iter = begin(); iter != end(); iter++)
+  TQStringList names;
+  for (TQValueListIterator<KIconTemplate> iter = begin(); iter != end(); iter++)
   {
       names.append((*iter).title);
   }
@@ -88,9 +88,9 @@ void KIconTemplateContainer::save()
   }
 }
 
-KIconTemplateContainer::KIconTemplateContainer() : QValueList<KIconTemplate>()
+KIconTemplateContainer::KIconTemplateContainer() : TQValueList<KIconTemplate>()
 {  
-  QStrList names;
+  TQStrList names;
   KConfig *k = kapp->config();
   k->setGroup("Templates");
   k->readListEntry("Names", names);
@@ -115,7 +115,7 @@ KIconTemplateContainer::~KIconTemplateContainer()
 }
 
 KIconListBoxItem::KIconListBoxItem( KIconTemplate t )
-   : QListBoxItem(), icontemplate(t)
+   : TQListBoxItem(), icontemplate(t)
 {
   //kdDebug(4640) << "KIconListBoxItem - " << t->path.data() << ", " << t->title.data() << endl;
  
@@ -131,10 +131,10 @@ void KIconListBoxItem::reloadIcon()
  
 
 
-void KIconListBoxItem::paint( QPainter *p )
+void KIconListBoxItem::paint( TQPainter *p )
 {
   p->drawPixmap( 3, 0, pm );
-  QFontMetrics fm = p->fontMetrics();
+  TQFontMetrics fm = p->fontMetrics();
   int yPos;                       // vertical text position
   if ( pm.height() < fm.height() )
     yPos = fm.ascent() + fm.leading()/2;
@@ -143,33 +143,33 @@ void KIconListBoxItem::paint( QPainter *p )
   p->drawText( pm.width() + 5, yPos, text() );
 }
 
-int KIconListBoxItem::height(const QListBox *lb ) const
+int KIconListBoxItem::height(const TQListBox *lb ) const
 {
   return QMAX( pm.height(), lb->fontMetrics().lineSpacing() + 1 );
 }
     
-int KIconListBoxItem::width(const QListBox *lb ) const
+int KIconListBoxItem::width(const TQListBox *lb ) const
 {
   return pm.width() + lb->fontMetrics().width( text() ) + 6;
 }
 
-NewSelect::NewSelect(QWidget *parent) : QWidget( parent )
+NewSelect::NewSelect(TQWidget *parent) : TQWidget( parent )
 {
   wiz = (KWizard*) parent;
-  grp = new QButtonGroup( this );
-  connect( grp, SIGNAL( clicked( int ) ), SLOT( buttonClicked( int ) ) );
+  grp = new TQButtonGroup( this );
+  connect( grp, TQT_SIGNAL( clicked( int ) ), TQT_SLOT( buttonClicked( int ) ) );
   grp->setExclusive( true );
   
-  QVBoxLayout* ml = new QVBoxLayout( this );
+  TQVBoxLayout* ml = new TQVBoxLayout( this );
   ml->addWidget( grp, 1 );
   //ml->addWidget(grp, 10, AlignLeft);
-  QVBoxLayout* l = new QVBoxLayout( grp, 10 );
+  TQVBoxLayout* l = new TQVBoxLayout( grp, 10 );
   
-  rbscratch = new QRadioButton( i18n( "Create from scratch" ), grp );
+  rbscratch = new TQRadioButton( i18n( "Create from scratch" ), grp );
   l->addWidget( rbscratch, 1 );
   //l->addWidget(rbscratch, 5, AlignLeft);
   
-  rbtempl = new QRadioButton( i18n( "Create from template" ), grp );
+  rbtempl = new TQRadioButton( i18n( "Create from template" ), grp );
   l->addWidget( rbtempl, 1 );
   //l->addWidget(rbtempl, 5, AlignLeft);
   
@@ -189,21 +189,21 @@ void NewSelect::buttonClicked(int id)
   emit iconopenstyle(id);
 }
 
-NewFromTemplate::NewFromTemplate( QWidget* parent )
-  : QWidget( parent )
+NewFromTemplate::NewFromTemplate( TQWidget* parent )
+  : TQWidget( parent )
 {
   wiz = (KWizard*) parent;
   
-  QVBoxLayout* ml = new QVBoxLayout(this);
+  TQVBoxLayout* ml = new TQVBoxLayout(this);
   
-  grp = new QGroupBox( i18n( "Templates" ), this );
+  grp = new TQGroupBox( i18n( "Templates" ), this );
   ml->addWidget( grp, 1 );
   //ml->addWidget(grp, 10, AlignLeft);
   
-  QHBoxLayout* l = new QHBoxLayout( grp, 15 );
+  TQHBoxLayout* l = new TQHBoxLayout( grp, 15 );
   
   templates = new KIconListBox( grp );
-  connect( templates, SIGNAL( highlighted( int ) ), SLOT( checkSelection( int ) ) );
+  connect( templates, TQT_SIGNAL( highlighted( int ) ), TQT_SLOT( checkSelection( int ) ) );
   l->addWidget( templates );
     
   for( int i = 0; i < (int) KIconTemplateContainer::self()->count(); i++ )
@@ -223,7 +223,7 @@ void NewFromTemplate::checkSelection( int )
     wiz->finishButton()->setEnabled( false );
 }
 
-KNewIcon::KNewIcon( QWidget* parent )
+KNewIcon::KNewIcon( TQWidget* parent )
   : KWizard( parent, 0, true )
 {
   //kdDebug(4640) << "KNewIcon" << endl;
@@ -237,14 +237,14 @@ KNewIcon::KNewIcon( QWidget* parent )
   nextButton()->setEnabled( false );
 
   select = new NewSelect( this );
-  connect( select, SIGNAL( iconopenstyle( int ) ), SLOT( iconOpenStyle( int ) ) );
+  connect( select, TQT_SIGNAL( iconopenstyle( int ) ), TQT_SLOT( iconOpenStyle( int ) ) );
 
-  scratch = new KResizeWidget( this, 0, QSize( 32, 32 ) );
+  scratch = new KResizeWidget( this, 0, TQSize( 32, 32 ) );
   // this doesn't accept default valid size, besides spin buttons won't allow 
   // an invalid size to be set by the user - forces user to change valid default 
   // size to create the new icon object -
-  connect( scratch, SIGNAL( validSize( bool ) ), SLOT( checkPage( bool ) ) );
-  connect(this, SIGNAL(selected(const QString &)), this, SLOT(checkPage(const QString &)));
+  connect( scratch, TQT_SIGNAL( validSize( bool ) ), TQT_SLOT( checkPage( bool ) ) );
+  connect(this, TQT_SIGNAL(selected(const TQString &)), this, TQT_SLOT(checkPage(const TQString &)));
   templ = new NewFromTemplate(this);
   templ->hide();
 
@@ -311,7 +311,7 @@ void KNewIcon::checkPage( bool b)
         templ->checkSelection(0);
 }
 
-void KNewIcon::checkPage(const QString &)
+void KNewIcon::checkPage(const TQString &)
 {
   if(currentPage() == select || openstyle == Blank)
     finishButton()->setEnabled(true);

@@ -19,15 +19,15 @@
 #include "pminsertpopup.h"
 #include <klocale.h>
 #include <kiconloader.h>
-#include <qcursor.h>
+#include <tqcursor.h>
 
-PMInsertPopup::PMInsertPopup( QWidget* parent, bool multipleObjects,
+PMInsertPopup::PMInsertPopup( TQWidget* parent, bool multipleObjects,
                               int items, bool canInsertAllAsFirstChildren,
                               bool canInsertAllAsLastChildren,
                               bool canInsertAllAsSiblings, const char* name )
       : KPopupMenu( parent, name )
 {
-   QString itemText;
+   TQString itemText;
    if( multipleObjects )
    {
       insertTitle( i18n( "Insert Objects As" ) );
@@ -71,7 +71,7 @@ PMInsertPopup::PMInsertPopup( QWidget* parent, bool multipleObjects,
    }
 }
 
-int PMInsertPopup::choosePlace( QWidget* parent, bool multipleObjects,
+int PMInsertPopup::choosePlace( TQWidget* parent, bool multipleObjects,
                                 int items, bool canInsertAllAsFirstChildren,
                                 bool canInsertAllAsLastChildren,
                                 bool canInsertAllAsSiblings )
@@ -81,7 +81,7 @@ int PMInsertPopup::choosePlace( QWidget* parent, bool multipleObjects,
                                              canInsertAllAsFirstChildren,
                                              canInsertAllAsLastChildren,
                                              canInsertAllAsSiblings );
-   result = popup->exec( QCursor::pos( ) );
+   result = popup->exec( TQCursor::pos( ) );
    if( result < 0 )
       result = 0;
    delete popup;

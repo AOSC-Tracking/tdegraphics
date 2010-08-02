@@ -30,7 +30,7 @@
 #ifndef __DW_MENU_ACTION
 #define __DW_MENU_ACTION
 #include <kdockwidget.h>
-#include <qstring.h>
+#include <tqstring.h>
 #include <kaction.h>
 
 /**
@@ -44,9 +44,9 @@ class dwMenuAction:public KToggleAction
 {
    Q_OBJECT
 public:
-   dwMenuAction( const QString& text,
+   dwMenuAction( const TQString& text,
 		 const KShortcut& cut = KShortcut(),
-		 KDockWidget *dw=0, QObject* parent = 0,
+		 KDockWidget *dw=0, TQObject* parent = 0,
 		 KDockMainWindow * mw=0, const char* name = 0 );
    virtual ~dwMenuAction();
 

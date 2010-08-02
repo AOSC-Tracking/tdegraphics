@@ -8,7 +8,7 @@
 
 #include <config.h>
 
-#include <qdir.h>
+#include <tqdir.h>
 #include <kdebug.h>
 
 #include "dvisourcesplitter.h"
@@ -16,9 +16,9 @@
 //#define DEBUG_SOURCESPLITTER
 
 
-DVI_SourceFileSplitter::DVI_SourceFileSplitter(const QString &srclink, const QString &dviFile)
+DVI_SourceFileSplitter::DVI_SourceFileSplitter(const TQString &srclink, const TQString &dviFile)
 {
-  QString filepart = srclink, linepart;
+  TQString filepart = srclink, linepart;
   bool possibleNumberMixUp = false; //if sourcefilename starts with a number 
                                     //then there could be a mix up, i.e. src:123file.tex 
                                     //line 123 and file.tex or line 12 and 3file.tex?
@@ -48,11 +48,11 @@ DVI_SourceFileSplitter::DVI_SourceFileSplitter(const QString &srclink, const QSt
 #endif
 
   //test if the file exists
-  m_fileInfo.setFile(QFileInfo(dviFile).dir(true), filepart);
+  m_fileInfo.setFile(TQFileInfo(dviFile).dir(true), filepart);
   bool fiExists = m_fileInfo.exists();
   
   //if it doesn't exist, but adding ".tex" 
-  if ( !fiExists && QFileInfo(m_fileInfo.absFilePath() + ".tex").exists() )
+  if ( !fiExists && TQFileInfo(m_fileInfo.absFilePath() + ".tex").exists() )
     m_fileInfo.setFile(m_fileInfo.absFilePath() + ".tex");
     
   //if that doesn't help either, perhaps the file started with a 
@@ -60,8 +60,8 @@ DVI_SourceFileSplitter::DVI_SourceFileSplitter(const QString &srclink, const QSt
   //one by one (also try to add .tex repeatedly)
   if ( possibleNumberMixUp && !fiExists )
   {
-    QFileInfo tempInfo(m_fileInfo);
-    QString tempFileName = tempInfo.fileName();
+    TQFileInfo tempInfo(m_fileInfo);
+    TQString tempFileName = tempInfo.fileName();
     Q_UINT32 index, maxindex = linepart.length();
     bool found = false;
     for ( index = 1; index < maxindex; ++index)

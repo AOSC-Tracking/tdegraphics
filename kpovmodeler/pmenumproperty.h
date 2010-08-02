@@ -20,10 +20,10 @@
 #define PMENUMPROPERTY_H
 
 #include "pmmetaobject.h"
-#include <qmap.h>
+#include <tqmap.h>
 
-typedef QMap<int, QString> PMEnumValueStringMap;
-typedef QMap<QString, int> PMEnumStringValueMap;
+typedef TQMap<int, TQString> PMEnumValueStringMap;
+typedef TQMap<TQString, int> PMEnumStringValueMap;
 
 /**
  * Base class for enum properties
@@ -41,7 +41,7 @@ public:
     * Adds the string to the list of enum values and sets the enum flag
     * to true
     */
-   void addEnumValue( const QString& str, int value );
+   void addEnumValue( const TQString& str, int value );
    
    /**
     * Returns true if the property is an enum
@@ -50,7 +50,7 @@ public:
    /**
     * Returns the list of enum values
     */
-   virtual QStringList enumValues( ) const;
+   virtual TQStringList enumValues( ) const;
 
 protected:
    /**

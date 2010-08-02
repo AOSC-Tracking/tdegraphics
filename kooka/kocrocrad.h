@@ -29,8 +29,8 @@
 #define KOCROCRAD_H
 
 #include <kdialogbase.h>
-#include <qimage.h>
-#include <qstring.h>
+#include <tqimage.h>
+#include <tqstring.h>
 
 #include <kscanslider.h>
 #include <kanimwidget.h>
@@ -49,26 +49,26 @@
 class KSpellConfig;
 class KURLRequester;
 class KProcess;
-class QLabel;
-class QComboBox;
+class TQLabel;
+class TQComboBox;
 
 class ocradDialog: public KOCRBase
 {
     Q_OBJECT
 public:
-    ocradDialog( QWidget*, KSpellConfig* );
+    ocradDialog( TQWidget*, KSpellConfig* );
     ~ocradDialog();
 
-    QString getOCRCmd( void ) const
+    TQString getOCRCmd( void ) const
         { return m_ocrCmd;}
 
     EngineError setupGui();
 
-    QString ocrEngineName() const;
-    QString ocrEngineDesc() const;
-    QString ocrEngineLogo() const;
+    TQString ocrEngineName() const;
+    TQString ocrEngineDesc() const;
+    TQString ocrEngineLogo() const;
 
-    QString orfUrl() const;
+    TQString orfUrl() const;
 
     int layoutDetectionMode() const;
 
@@ -88,17 +88,17 @@ protected:
 
 
 private:
-    void version( const QString& exe );
+    void version( const TQString& exe );
 
 private slots:
     void slReceiveStdIn( KProcess *proc, char *buffer, int buflen);
 
 private:
 
-    QString      m_ocrCmd;
+    TQString      m_ocrCmd;
     KURLRequester *m_orfUrlRequester;
-    QComboBox      *m_layoutMode;
-    QLabel         *m_binaryLabel;
+    TQComboBox      *m_layoutMode;
+    TQLabel         *m_binaryLabel;
     KProcess       *m_proc;
     int             m_version;
 };

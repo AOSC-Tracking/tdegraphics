@@ -22,58 +22,58 @@
 #include "pmcontrolpoint.h"
 #include "pmdefaults.h"
 
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
 #include <kcolorbutton.h>
 #include <klocale.h>
 
-PMGridSettings::PMGridSettings( QWidget* parent, const char* name )
+PMGridSettings::PMGridSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   QHBoxLayout* hlayout;
-   QVBoxLayout* vlayout;
-   QVBoxLayout* gvl;
-   QGridLayout* grid;
-   QGroupBox* gb;
+   TQHBoxLayout* hlayout;
+   TQVBoxLayout* vlayout;
+   TQVBoxLayout* gvl;
+   TQGridLayout* grid;
+   TQGroupBox* gb;
 
-   vlayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
-   gb = new QGroupBox( i18n( "Displayed Grid" ), this );
+   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   gb = new TQGroupBox( i18n( "Displayed Grid" ), this );
    vlayout->addWidget( gb );
-   gvl = new QVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
 
-   hlayout = new QHBoxLayout( gvl );
-   hlayout->addWidget( new QLabel( i18n( "Color:" ), gb ) );
+   hlayout = new TQHBoxLayout( gvl );
+   hlayout->addWidget( new TQLabel( i18n( "Color:" ), gb ) );
    m_pGridColor = new KColorButton( gb );
    hlayout->addWidget( m_pGridColor );
    hlayout->addStretch( 1 );
 
-   hlayout = new QHBoxLayout( gvl );
-   hlayout->addWidget( new QLabel( i18n( "Distance:" ), gb ) );
+   hlayout = new TQHBoxLayout( gvl );
+   hlayout->addWidget( new TQLabel( i18n( "Distance:" ), gb ) );
    m_pGridDistance = new PMIntEdit( gb );
    m_pGridDistance->setValidation( true, 20, false, 0 );
    hlayout->addWidget( m_pGridDistance );
    hlayout->addStretch( 1 );
 
-   gb = new QGroupBox( i18n( "Control Point Grid" ), this );
+   gb = new TQGroupBox( i18n( "Control Point Grid" ), this );
    vlayout->addWidget( gb );
-   gvl = new QVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
 
-   hlayout = new QHBoxLayout( gvl );
-   grid = new QGridLayout( hlayout, 3, 2 );
-   grid->addWidget( new QLabel( i18n( "2D/3D movement:" ), gb ), 0, 0 );
+   hlayout = new TQHBoxLayout( gvl );
+   grid = new TQGridLayout( hlayout, 3, 2 );
+   grid->addWidget( new TQLabel( i18n( "2D/3D movement:" ), gb ), 0, 0 );
    m_pMoveGrid = new PMFloatEdit( gb );
    m_pMoveGrid->setValidation( true, 0.001, true, 100 );
    grid->addWidget( m_pMoveGrid, 0, 1 );
    
-   grid->addWidget( new QLabel( i18n( "Scale:" ), gb ), 1, 0 );
+   grid->addWidget( new TQLabel( i18n( "Scale:" ), gb ), 1, 0 );
    m_pScaleGrid = new PMFloatEdit( gb );
    m_pScaleGrid->setValidation( true, 0.001, true, 100 );
    grid->addWidget( m_pScaleGrid, 1, 1 );
    
-   grid->addWidget( new QLabel( i18n( "Rotation:" ), gb ), 2, 0 );
+   grid->addWidget( new TQLabel( i18n( "Rotation:" ), gb ), 2, 0 );
    m_pRotateGrid = new PMFloatEdit( gb );
    m_pRotateGrid->setValidation( true, 0.001, true, 180 );
    grid->addWidget( m_pRotateGrid, 2, 1 );

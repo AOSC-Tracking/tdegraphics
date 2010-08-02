@@ -18,36 +18,36 @@
 
 #include "pmvectoredit.h"
 #include "pmdebug.h"
-#include <qstring.h>
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqstring.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 
 
-PMVectorEdit::PMVectorEdit( const QString& descriptionX,
-                            const QString& descriptionY,
-                            QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
+                            const TQString& descriptionY,
+                            TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    unsigned int i;
-   QHBoxLayout* layout;
-   QLabel* label;
+   TQHBoxLayout* layout;
+   TQLabel* label;
 
    m_edits.resize( 2 );
    for( i = 0; i < 2; i++ )
    {
-      m_edits.insert( i, new QLineEdit( this ) );
-      connect( m_edits[i], SIGNAL( textChanged( const QString& ) ),
-               SLOT( slotTextChanged( const QString& ) ) );
+      m_edits.insert( i, new TQLineEdit( this ) );
+      connect( m_edits[i], TQT_SIGNAL( textChanged( const TQString& ) ),
+               TQT_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
-   layout = new QHBoxLayout( this );
+   layout = new TQHBoxLayout( this );
 
    if( !descriptionX.isEmpty( ) )
    {
-      label = new QLabel( descriptionX, this );
+      label = new TQLabel( descriptionX, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
@@ -56,36 +56,36 @@ PMVectorEdit::PMVectorEdit( const QString& descriptionX,
 
    if( !descriptionY.isEmpty( ) )
    {
-      label = new QLabel( descriptionY, this );
+      label = new TQLabel( descriptionY, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
    layout->addWidget( m_edits[1] );
 }
 
-PMVectorEdit::PMVectorEdit( const QString& descriptionX,
-                            const QString& descriptionY,
-                            const QString& descriptionZ,
-                            QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
+                            const TQString& descriptionY,
+                            const TQString& descriptionZ,
+                            TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    unsigned int i;
-   QHBoxLayout* layout;
-   QLabel* label;
+   TQHBoxLayout* layout;
+   TQLabel* label;
 
    m_edits.resize( 3 );
    for( i = 0; i < 3; i++ )
    {
-      m_edits.insert( i, new QLineEdit( this ) );
-      connect( m_edits[i], SIGNAL( textChanged( const QString& ) ),
-               SLOT( slotTextChanged( const QString& ) ) );
+      m_edits.insert( i, new TQLineEdit( this ) );
+      connect( m_edits[i], TQT_SIGNAL( textChanged( const TQString& ) ),
+               TQT_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
-   layout = new QHBoxLayout( this );
+   layout = new TQHBoxLayout( this );
 
    if( !descriptionX.isEmpty( ) )
    {
-      label = new QLabel( descriptionX, this );
+      label = new TQLabel( descriptionX, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
@@ -94,7 +94,7 @@ PMVectorEdit::PMVectorEdit( const QString& descriptionX,
 
    if( !descriptionY.isEmpty( ) )
    {
-      label = new QLabel( descriptionY, this );
+      label = new TQLabel( descriptionY, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
@@ -103,37 +103,37 @@ PMVectorEdit::PMVectorEdit( const QString& descriptionX,
 
    if( !descriptionZ.isEmpty( ) )
    {
-      label = new QLabel( descriptionZ, this );
+      label = new TQLabel( descriptionZ, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
    layout->addWidget( m_edits[2] );
 }
 
-PMVectorEdit::PMVectorEdit( const QString& descriptionA,
-                            const QString& descriptionB,
-                            const QString& descriptionC,
-                            const QString& descriptionD,
-                            QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMVectorEdit::PMVectorEdit( const TQString& descriptionA,
+                            const TQString& descriptionB,
+                            const TQString& descriptionC,
+                            const TQString& descriptionD,
+                            TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    unsigned int i;
-   QHBoxLayout* layout;
-   QLabel* label;
+   TQHBoxLayout* layout;
+   TQLabel* label;
 
    m_edits.resize( 4 );
    for( i = 0; i < 4; i++ )
    {
-      m_edits.insert( i, new QLineEdit( this ) );
-      connect( m_edits[i], SIGNAL( textChanged( const QString& ) ),
-               SLOT( slotTextChanged( const QString& ) ) );
+      m_edits.insert( i, new TQLineEdit( this ) );
+      connect( m_edits[i], TQT_SIGNAL( textChanged( const TQString& ) ),
+               TQT_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
-   layout = new QHBoxLayout( this );
+   layout = new TQHBoxLayout( this );
 
    if( !descriptionA.isEmpty( ) )
    {
-      label = new QLabel( descriptionA, this );
+      label = new TQLabel( descriptionA, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
@@ -142,7 +142,7 @@ PMVectorEdit::PMVectorEdit( const QString& descriptionA,
 
    if( !descriptionB.isEmpty( ) )
    {
-      label = new QLabel( descriptionB, this );
+      label = new TQLabel( descriptionB, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
@@ -151,7 +151,7 @@ PMVectorEdit::PMVectorEdit( const QString& descriptionA,
 
    if( !descriptionC.isEmpty( ) )
    {
-      label = new QLabel( descriptionC, this );
+      label = new TQLabel( descriptionC, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
@@ -160,7 +160,7 @@ PMVectorEdit::PMVectorEdit( const QString& descriptionA,
 
    if( !descriptionD.isEmpty( ) )
    {
-      label = new QLabel( descriptionD, this );
+      label = new TQLabel( descriptionD, this );
       layout->addWidget( label );
       layout->addSpacing( KDialog::spacingHint( ) );
    }
@@ -170,7 +170,7 @@ PMVectorEdit::PMVectorEdit( const QString& descriptionA,
 void PMVectorEdit::setVector( const PMVector& v, int precision )
 {
    unsigned int i;
-   QString str;
+   TQString str;
 
    if( v.size( ) != m_edits.size( ) )
       kdError( PMArea ) << "Vector has wrong size in PMVectorEdit::setVector\n";
@@ -213,7 +213,7 @@ bool PMVectorEdit::isDataValid( )
    return ok;
 }
 
-void PMVectorEdit::slotTextChanged( const QString& )
+void PMVectorEdit::slotTextChanged( const TQString& )
 {
    emit dataChanged( );
 }

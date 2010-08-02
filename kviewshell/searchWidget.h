@@ -22,24 +22,24 @@
 #ifndef SEARCHWIDGET_H
 #define SEARCHWIDGET_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
-class QHBoxLayout;
-class QLabel;
+class TQHBoxLayout;
+class TQLabel;
 class KLineEdit;
-class QPushButton;
-class QCheckBox;
-class QString;
+class TQPushButton;
+class TQCheckBox;
+class TQString;
 
 class SearchWidget : public QWidget
 {
   Q_OBJECT
 
 public:
-  SearchWidget(QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  SearchWidget(TQWidget* parent = 0, const char* name = 0, WFlags fl = 0);
   ~SearchWidget();
 
-  QString getText() const;
+  TQString getText() const;
   bool caseSensitive() const;
 
 public slots:
@@ -54,20 +54,20 @@ signals:
   void stopSearch();
 
 protected:
-  virtual void keyPressEvent(QKeyEvent*);
+  virtual void keyPressEvent(TQKeyEvent*);
 
 private slots:
   void textChanged();
 
 private:
-  QPushButton* stopButton;
-  QLabel* searchLabel;
+  TQPushButton* stopButton;
+  TQLabel* searchLabel;
   KLineEdit* searchText;
-  QPushButton* findNextButton;
-  QPushButton* findPrevButton;
-  QCheckBox* caseSensitiveCheckBox;
+  TQPushButton* findNextButton;
+  TQPushButton* findPrevButton;
+  TQCheckBox* caseSensitiveCheckBox;
 
-  QHBoxLayout* layout;
+  TQHBoxLayout* layout;
 };
 
 #endif

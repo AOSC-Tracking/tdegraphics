@@ -27,21 +27,21 @@ PMPrismMemento::~PMPrismMemento( )
 {
 }
 
-void PMPrismMemento::setPrismPoints( const QValueList< QValueList<PMVector> >& v )
+void PMPrismMemento::setPrismPoints( const TQValueList< TQValueList<PMVector> >& v )
 {
    if( !m_bPrismPointsSaved )
    {
       // Direct assignment does not work with Qt 2.3.x
       // The list will be changed later in a graphical
-      // change because QValueList::detach( ) is called
+      // change because TQValueList::detach( ) is called
       // too late!
       // Copy the list by hand.
 
-      QValueList< QValueList< PMVector > >::ConstIterator sit = v.begin( );
+      TQValueList< TQValueList< PMVector > >::ConstIterator sit = v.begin( );
       for( ; sit != v.end( ); ++sit )
       {
-         QValueList<PMVector> list;
-         QValueList<PMVector>::ConstIterator it = ( *sit ).begin( );
+         TQValueList<PMVector> list;
+         TQValueList<PMVector>::ConstIterator it = ( *sit ).begin( );
          for( ; it != ( *sit ).end( ); ++it )
             list.append( *it );
          m_prismPoints.append( list );

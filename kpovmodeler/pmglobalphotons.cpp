@@ -164,12 +164,12 @@ void PMGlobalPhotons::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMGlobalPhotons::description( ) const
+TQString PMGlobalPhotons::description( ) const
 {
    return i18n( "global photons" );
 }
 
-void PMGlobalPhotons::serialize( QDomElement& e, QDomDocument& ) const
+void PMGlobalPhotons::serialize( TQDomElement& e, TQDomDocument& ) const
 {
    if( m_numberType == Spacing )
    {
@@ -202,7 +202,7 @@ void PMGlobalPhotons::serialize( QDomElement& e, QDomDocument& ) const
 
 void PMGlobalPhotons::readAttributes( const PMXMLHelper& h )
 {
-   QString str;
+   TQString str;
 
    str = h.stringAttribute( "number_type", "spacing" );
    if( str == "count" )
@@ -437,7 +437,7 @@ void PMGlobalPhotons::setRadiusMediaMulti( double rmm )
    }
 }
 
-PMDialogEditBase* PMGlobalPhotons::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMGlobalPhotons::editWidget( TQWidget* parent ) const
 {
    return new PMGlobalPhotonsEdit( parent );
 }

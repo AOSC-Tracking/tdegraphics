@@ -32,8 +32,8 @@
 #include "thumbview.h"
 #include "thumbviewitem.h"
 
-ThumbViewItem::ThumbViewItem(QIconView *parent, const QString &text,
-			     const QPixmap &pixmap,
+ThumbViewItem::ThumbViewItem(TQIconView *parent, const TQString &text,
+			     const TQPixmap &pixmap,
 			     KFileItem *fi )
    :KFileIconViewItem( parent, text, pixmap,fi )
 {

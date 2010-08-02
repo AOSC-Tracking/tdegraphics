@@ -27,17 +27,17 @@
 #define KOOKAPREF_H
 
 #include <kdialogbase.h>
-#include <qframe.h>
+#include <tqframe.h>
 
 class KConfig;
-class QLabel;
+class TQLabel;
 class KIntNumInput;
 class KColorButton;
 class ImageSelectLine;
 class KScanEntry;
-class QRadioButton;
+class TQRadioButton;
 class KURLRequester;
-class QCheckBox;
+class TQCheckBox;
 
 #define STARTUP_READ_IMAGE "ReadImageOnStart"
 #define CFG_GROUP_OCR_DIA  "ocrDialog"
@@ -49,8 +49,8 @@ class KookaPreferences : public KDialogBase
     Q_OBJECT
 public:
     KookaPreferences();
-    static QString tryFindGocr( void );
-    static QString tryFindBinary( const QString&, const QString& );
+    static TQString tryFindGocr( void );
+    static TQString tryFindBinary( const TQString&, const TQString& );
 
 public slots:
     void slotOk( void );
@@ -58,10 +58,10 @@ public slots:
     void slotDefault( void );
 
 private slots:
-    bool checkOCRBinIntern( const QString&, const QString&, bool );
+    bool checkOCRBinIntern( const TQString&, const TQString&, bool );
 
-    void slCheckOnGOCR( const QString& );
-    void slCheckOnOCRAD( const QString& );
+    void slCheckOnGOCR( const TQString& );
+    void slCheckOnOCRAD( const TQString& );
 
 signals:
     void dataSaved();
@@ -71,14 +71,14 @@ private:
     void setupSaveFormatPage();
     void setupThumbnailPage();
     void setupOCRPage();
-    KURLRequester* binaryCheckBox( QWidget *, const QString& );
+    KURLRequester* binaryCheckBox( TQWidget *, const TQString& );
 
-    QCheckBox *cbNetQuery;
-    QCheckBox *cbSkipFormatAsk;
-    QCheckBox *cbFilenameAsk;
-    QCheckBox *cbShowScannerSelection;
+    TQCheckBox *cbNetQuery;
+    TQCheckBox *cbSkipFormatAsk;
+    TQCheckBox *cbFilenameAsk;
+    TQCheckBox *cbShowScannerSelection;
     KConfig   *konf;
-    QCheckBox *cbReadStartupImage;
+    TQCheckBox *cbReadStartupImage;
 
     KIntNumInput *m_thumbWidth;
     KIntNumInput *m_thumbHeight;
@@ -90,10 +90,10 @@ private:
     KURLRequester *m_urlReqGocr;
     KURLRequester *m_urlReqOcrad;
 
-    QRadioButton *m_gocrBut;
-    QRadioButton *m_kadmosBut;
-    QRadioButton *m_ocradBut;
-    QString       m_prevOCREngine;
+    TQRadioButton *m_gocrBut;
+    TQRadioButton *m_kadmosBut;
+    TQRadioButton *m_ocradBut;
+    TQString       m_prevOCREngine;
 };
 
 

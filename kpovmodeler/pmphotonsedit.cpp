@@ -20,15 +20,15 @@
 #include "pmphotons.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
 
 
-PMPhotonsEdit::PMPhotonsEdit( QWidget* parent, const char* name )
+PMPhotonsEdit::PMPhotonsEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,45 +36,45 @@ PMPhotonsEdit::PMPhotonsEdit( QWidget* parent, const char* name )
 
 void PMPhotonsEdit::createTopWidgets( )
 {
-   QGridLayout* gl;
-	QHBoxLayout* hl;
+   TQGridLayout* gl;
+	TQHBoxLayout* hl;
 
    Base::createTopWidgets( );
 
-   m_pLayoutWidget = new QWidget( this );
-   m_pTarget = new QCheckBox( i18n( "Target" ), m_pLayoutWidget );
-   m_pSpacingMultiLabel = new QLabel( i18n( "Spacing multiplier:" ), m_pLayoutWidget );
+   m_pLayoutWidget = new TQWidget( this );
+   m_pTarget = new TQCheckBox( i18n( "Target" ), m_pLayoutWidget );
+   m_pSpacingMultiLabel = new TQLabel( i18n( "Spacing multiplier:" ), m_pLayoutWidget );
    m_pSpacingMulti = new PMFloatEdit( m_pLayoutWidget );
    m_pSpacingMulti->setValidation( true, 0, false, 0 );
 
-   m_pRefraction = new QCheckBox( i18n( "Refraction" ), this );
-   m_pReflection = new QCheckBox( i18n( "Reflection" ), this );
-   m_pCollect = new QCheckBox( i18n( "Collect" ), this );
-   m_pPassThrough = new QCheckBox( i18n( "Pass through" ), this );
-   m_pAreaLight = new QCheckBox( i18n( "Area light" ), this );
+   m_pRefraction = new TQCheckBox( i18n( "Refraction" ), this );
+   m_pReflection = new TQCheckBox( i18n( "Reflection" ), this );
+   m_pCollect = new TQCheckBox( i18n( "Collect" ), this );
+   m_pPassThrough = new TQCheckBox( i18n( "Pass through" ), this );
+   m_pAreaLight = new TQCheckBox( i18n( "Area light" ), this );
 
-	hl = new QHBoxLayout( m_pLayoutWidget, 0, KDialog::spacingHint( ) );
-   gl = new QGridLayout( hl, 2, 2 );
+	hl = new TQHBoxLayout( m_pLayoutWidget, 0, KDialog::spacingHint( ) );
+   gl = new TQGridLayout( hl, 2, 2 );
    gl->addMultiCellWidget( m_pTarget, 0, 0, 0, 1 );
    gl->addWidget( m_pSpacingMultiLabel, 1, 0 );
    gl->addWidget( m_pSpacingMulti, 1, 1 );
 	hl->addStretch( 1 );
    topLayout( )->addWidget( m_pLayoutWidget );
 
-   gl = new QGridLayout( topLayout( ), 2, 2 );
+   gl = new TQGridLayout( topLayout( ), 2, 2 );
    gl->addWidget( m_pRefraction, 0, 0 );
    gl->addWidget( m_pReflection, 0, 1 );
    gl->addWidget( m_pCollect, 1, 0 );
    gl->addWidget( m_pPassThrough, 1, 1 );
    gl->addWidget( m_pAreaLight, 1, 0 );
 
-   connect( m_pTarget, SIGNAL( clicked( ) ), SLOT( slotTargetClicked( ) ) );
-   connect( m_pSpacingMulti, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRefraction, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pReflection, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCollect, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPassThrough, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAreaLight, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pTarget, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotTargetClicked( ) ) );
+   connect( m_pSpacingMulti, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRefraction, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflection, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCollect, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPassThrough, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAreaLight, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPhotonsEdit::displayObject( PMObject* o )

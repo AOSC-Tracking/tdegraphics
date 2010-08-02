@@ -45,20 +45,20 @@
 #include <ktempfile.h>
 #include <kinputdialog.h>
 
-#include <qdir.h>
-#include <qlayout.h>
-#include <qfileinfo.h>
-#include <qimage.h>
-#include <qmessagebox.h>
-#include <qvbox.h>
-#include <qbuttongroup.h>
+#include <tqdir.h>
+#include <tqlayout.h>
+#include <tqfileinfo.h>
+#include <tqimage.h>
+#include <tqmessagebox.h>
+#include <tqvbox.h>
+#include <tqbuttongroup.h>
 
 #include "resource.h"
 #include "img_saver.h"
 #include "previewer.h"
 #include "kookaimage.h"
 
-FormatDialog::FormatDialog( QWidget *parent, const QString&, const char *name )
+FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name )
    :KDialogBase( parent, name, true,
                  /* Tabbed,*/ i18n( "Kooka Save Assistant" ),
 		 Ok|Cancel, Ok )
@@ -66,17 +66,17 @@ FormatDialog::FormatDialog( QWidget *parent, const QString&, const char *name )
 {
    buildHelp();
    // readConfig();
-   // QFrame *page = addPage( QString( "Save the image") );
-   QFrame *page = new QFrame( this );
-   page->setFrameStyle( QFrame::Box | QFrame::Sunken );
+   // TQFrame *page = addPage( TQString( "Save the image") );
+   TQFrame *page = new TQFrame( this );
+   page->setFrameStyle( TQFrame::Box | TQFrame::Sunken );
    Q_CHECK_PTR( page );
    setMainWidget( page );
 
-   QVBoxLayout *bigdad = new QVBoxLayout( page, marginHint(), spacingHint());
+   TQVBoxLayout *bigdad = new TQVBoxLayout( page, marginHint(), spacingHint());
    Q_CHECK_PTR(bigdad);
 
    // some nice words
-   QLabel *l0 = new QLabel( page );
+   TQLabel *l0 = new TQLabel( page );
    Q_CHECK_PTR(l0);
    l0->setText( i18n( "<B>Save Assistant</B><P>Select an image format to save the scanned image." ));
    bigdad->addWidget( l0 );
@@ -85,55 +85,55 @@ FormatDialog::FormatDialog( QWidget *parent, const QString&, const char *name )
    bigdad->addWidget( sep );
 
    // Layout-Boxes
-   // QHBoxLayout *hl1= new QHBoxLayout( );  // Caption
-   QHBoxLayout *lhBigMiddle = new QHBoxLayout( spacingHint() );  // Big middle
+   // TQHBoxLayout *hl1= new TQHBoxLayout( );  // Caption
+   TQHBoxLayout *lhBigMiddle = new TQHBoxLayout( spacingHint() );  // Big middle
    Q_CHECK_PTR(lhBigMiddle);
    bigdad->addLayout( lhBigMiddle );
-   QVBoxLayout *lvFormatSel = new QVBoxLayout( spacingHint() );  // Selection List
+   TQVBoxLayout *lvFormatSel = new TQVBoxLayout( spacingHint() );  // Selection List
    Q_CHECK_PTR(lvFormatSel);
    lhBigMiddle->addLayout( lvFormatSel );
 
    // Insert Scrolled List for formats
-   QLabel *l1 = new QLabel( page );
+   TQLabel *l1 = new TQLabel( page );
    Q_CHECK_PTR(l1);
    l1->setText( i18n( "Available image formats:" ));
 
-   lb_format = new QListBox( page, "ListBoxFormats" );
+   lb_format = new TQListBox( page, "ListBoxFormats" );
    Q_CHECK_PTR(lb_format);
 
 #ifdef USE_KIMAGEIO
-   QStringList fo = KImageIO::types();
+   TQStringList fo = KImageIO::types();
 #else
-   QStringList fo = QImage::outputFormatList();
+   TQStringList fo = TQImage::outputFormatList();
 #endif
    kdDebug(28000) << "#### have " << fo.count() << " image types" << endl;
    lb_format->insertStringList( fo );
-   connect( lb_format, SIGNAL( highlighted(const QString&)),
-	    SLOT( showHelp(const QString&)));
+   connect( lb_format, TQT_SIGNAL( highlighted(const TQString&)),
+	    TQT_SLOT( showHelp(const TQString&)));
 
    // Insert label for helptext
-   l_help = new QLabel( page );
+   l_help = new TQLabel( page );
    Q_CHECK_PTR(l_help);
-   l_help->setFrameStyle( QFrame::Panel|QFrame::Sunken );
+   l_help->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
    l_help->setText( i18n("-No format selected-" ));
    l_help->setAlignment( AlignVCenter | AlignHCenter );
    l_help->setMinimumWidth(230);
 
    // Insert Selbox for subformat
-   l2 = new QLabel( page );
+   l2 = new TQLabel( page );
    Q_CHECK_PTR(l2);
    l2->setText( i18n( "Select the image sub-format" ));
-   cb_subf = new QComboBox( page, "ComboSubFormat" );
+   cb_subf = new TQComboBox( page, "ComboSubFormat" );
    Q_CHECK_PTR( cb_subf );
 
    // Checkbox to store setting
-   cbDontAsk  = new QCheckBox(i18n("Don't ask again for the save format if it is defined."),
+   cbDontAsk  = new TQCheckBox(i18n("Don't ask again for the save format if it is defined."),
 			      page );
    Q_CHECK_PTR( cbDontAsk );
 
-   QFrame *hl = new QFrame(page);
+   TQFrame *hl = new TQFrame(page);
    Q_CHECK_PTR( hl );
-   hl->setFrameStyle( QFrame::HLine|QFrame::Sunken );
+   hl->setFrameStyle( TQFrame::HLine|TQFrame::Sunken );
 
    // bigdad->addWidget( l_caption, 1 );
    lvFormatSel->addWidget( l1, 1 );
@@ -150,9 +150,9 @@ FormatDialog::FormatDialog( QWidget *parent, const QString&, const char *name )
 
 }
 
-void FormatDialog::showHelp( const QString& item )
+void FormatDialog::showHelp( const TQString& item )
 {
-   QString helptxt = format_help[ item ];
+   TQString helptxt = format_help[ item ];
 
    if( !helptxt.isEmpty() ) {
       // Set the hint
@@ -165,7 +165,7 @@ void FormatDialog::showHelp( const QString& item )
    }
 }
 
-void FormatDialog::check_subformat( const QString & format )
+void FormatDialog::check_subformat( const TQString & format )
 {
    // not yet implemented
    kdDebug(28000) << "This is format in check_subformat: " << format << endl;
@@ -174,9 +174,9 @@ void FormatDialog::check_subformat( const QString & format )
    l2->setEnabled( false );
 }
 
-void FormatDialog::setSelectedFormat( QString fo )
+void FormatDialog::setSelectedFormat( TQString fo )
 {
-   QListBoxItem *item = lb_format->findItem( fo );
+   TQListBoxItem *item = lb_format->findItem( fo );
 
    if( item )
    {
@@ -186,20 +186,20 @@ void FormatDialog::setSelectedFormat( QString fo )
 }
 
 
-QString FormatDialog::getFormat( ) const
+TQString FormatDialog::getFormat( ) const
 {
    int item = lb_format->currentItem();
 
    if( item > -1 )
    {
-      const QString f = lb_format->text( item );
+      const TQString f = lb_format->text( item );
       return( f );
    }
    return( "BMP" );
 }
 
 
-QCString FormatDialog::getSubFormat( ) const
+TQCString FormatDialog::getSubFormat( ) const
 {
    // Not yet...
    return( "" );
@@ -208,18 +208,18 @@ QCString FormatDialog::getSubFormat( ) const
 #include "formathelp.h"
 void FormatDialog::buildHelp( void )
 {
-   format_help.insert( QString::fromLatin1("BMP"), HELP_BMP );
-   format_help.insert( QString::fromLatin1("PNM"), HELP_PNM );
-   format_help.insert( QString::fromLatin1("JPEG"), HELP_JPG );
-   format_help.insert( QString::fromLatin1("JPG"), HELP_JPG );
-   format_help.insert( QString::fromLatin1("EPS"), HELP_EPS );
+   format_help.insert( TQString::fromLatin1("BMP"), HELP_BMP );
+   format_help.insert( TQString::fromLatin1("PNM"), HELP_PNM );
+   format_help.insert( TQString::fromLatin1("JPEG"), HELP_JPG );
+   format_help.insert( TQString::fromLatin1("JPG"), HELP_JPG );
+   format_help.insert( TQString::fromLatin1("EPS"), HELP_EPS );
 }
 
 
 /* ********************************************************************** */
 
-ImgSaver::ImgSaver(  QWidget *parent, const KURL dir_name )
-   : QObject( parent )
+ImgSaver::ImgSaver(  TQWidget *parent, const KURL dir_name )
+   : TQObject( parent )
 {
 
    if( dir_name.isEmpty() || dir_name.protocol() != "file" )
@@ -250,8 +250,8 @@ ImgSaver::ImgSaver(  QWidget *parent, const KURL dir_name )
 }
 
 
-ImgSaver::ImgSaver( QWidget *parent )
-   :QObject( parent )
+ImgSaver::ImgSaver( TQWidget *parent )
+   :TQObject( parent )
 {
    directory = Previewer::galleryRoot();
    createDir( directory );
@@ -265,14 +265,14 @@ ImgSaver::ImgSaver( QWidget *parent )
 
 
 /* Needs a full qualified directory name */
-void ImgSaver::createDir( const QString& dir )
+void ImgSaver::createDir( const TQString& dir )
 {
    KURL url( dir );
 
    if( ! KIO::NetAccess::exists(url, false, 0) )
    {
       kdDebug(28000) << "Wrn: Directory <" << dir << "> does not exist -> try to create  !" << endl;
-      // if( mkdir( QFile::encodeName( dir ), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH ) != 0 )
+      // if( mkdir( TQFile::encodeName( dir ), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH ) != 0 )
       if( KIO::mkdir( KURL(dir)))
       {
         KMessageBox::sorry(0, i18n("The folder\n%1\n does not exist and could not be created;\n"
@@ -292,7 +292,7 @@ void ImgSaver::createDir( const QString& dir )
  *   This function asks the user for a filename or creates
  *   one by itself, depending on the settings
  **/
-ImgSaveStat ImgSaver::saveImage( QImage *image )
+ImgSaveStat ImgSaver::saveImage( TQImage *image )
 {
    ImgSaveStat stat;
    picType imgType;
@@ -322,8 +322,8 @@ ImgSaveStat ImgSaver::saveImage( QImage *image )
    }
 
 
-   QString format = findFormat( imgType );
-   QString subformat = findSubFormat( format );
+   TQString format = findFormat( imgType );
+   TQString subformat = findSubFormat( format );
    // Call save-Function with this params
 
    if( format.isEmpty() )
@@ -333,7 +333,7 @@ ImgSaveStat ImgSaver::saveImage( QImage *image )
    }
 
    kdDebug(28000) << "saveImage: Directory is " << directory << endl;
-   QString filename = createFilename( format );
+   TQString filename = createFilename( format );
 
    KConfig *konf = KGlobal::config ();
    konf->setGroup( OP_FILE_GROUP );
@@ -341,7 +341,7 @@ ImgSaveStat ImgSaver::saveImage( QImage *image )
    if( konf->readBoolEntry( OP_ASK_FILENAME, false ) )
    {
        bool ok;
-       QString text = KInputDialog::getText( i18n( "Filename" ), i18n("Enter filename:"),
+       TQString text = KInputDialog::getText( i18n( "Filename" ), i18n("Enter filename:"),
 					     filename, &ok );
 
        if(ok)
@@ -350,7 +350,7 @@ ImgSaveStat ImgSaver::saveImage( QImage *image )
        }
    }
        
-   QString fi = directory + "/" + filename;
+   TQString fi = directory + "/" + filename;
 
    if( extension(fi).isEmpty() )
    {
@@ -374,17 +374,17 @@ ImgSaveStat ImgSaver::saveImage( QImage *image )
  *  This is done by numbering all existing files and adding
  *  one
  **/
-QString ImgSaver::createFilename( QString format )
+TQString ImgSaver::createFilename( TQString format )
 {
     if( format.isNull() || format.isEmpty() ) return( 0 );
 
-    QString s = "kscan_*." + format.lower();
-    QDir files( directory, s );
+    TQString s = "kscan_*." + format.lower();
+    TQDir files( directory, s );
     long c = 1;
 
-    QString num;
+    TQString num;
     num.setNum(c);
-    QString fname = "kscan_" + num.rightJustify(4, '0') + "." + format.lower();
+    TQString fname = "kscan_" + num.rightJustify(4, '0') + "." + format.lower();
 
     while( files.exists( fname ) ) {
         num.setNum(++c);
@@ -397,9 +397,9 @@ QString ImgSaver::createFilename( QString format )
 /**
  *   This function gets a filename from the parent. The filename must not be relative.
  **/
-ImgSaveStat ImgSaver::saveImage( QImage *image, const KURL& filename, const QString& imgFormat )
+ImgSaveStat ImgSaver::saveImage( TQImage *image, const KURL& filename, const TQString& imgFormat )
 {
-    QString format = imgFormat;
+    TQString format = imgFormat;
 
     /* Check if the filename is local */
     if( !filename.isLocalFile())
@@ -408,7 +408,7 @@ ImgSaveStat ImgSaver::saveImage( QImage *image, const KURL& filename, const QStr
 	return( ISS_ERR_PROTOCOL );
     }
 
-    QString localFilename;
+    TQString localFilename;
     localFilename = filename.directory( false, true) + filename.fileName();
 
     kdDebug(28000) << "saveImage: Saving "<< localFilename << " in format " << format << endl;
@@ -422,9 +422,9 @@ ImgSaveStat ImgSaver::saveImage( QImage *image, const KURL& filename, const QStr
 /*
  * findFormat does all the stuff with the dialog.
  */
-QString ImgSaver::findFormat( picType type )
+TQString ImgSaver::findFormat( picType type )
 {
-   QString format;
+   TQString format;
    KConfig *konf = KGlobal::config ();
    konf->setGroup( OP_FILE_GROUP );
 
@@ -478,9 +478,9 @@ QString ImgSaver::findFormat( picType type )
 
 }
 
-QString ImgSaver::picTypeAsString( picType type ) const
+TQString ImgSaver::picTypeAsString( picType type ) const
 {
-   QString res;
+   TQString res;
 
    switch( type )
    {
@@ -504,7 +504,7 @@ QString ImgSaver::picTypeAsString( picType type ) const
 }
 
 
-QString ImgSaver::startFormatDialog( picType type)
+TQString ImgSaver::startFormatDialog( picType type)
 {
 
    FormatDialog fd( 0, picTypeAsString( type ), "FormatDialog" );
@@ -512,11 +512,11 @@ QString ImgSaver::startFormatDialog( picType type)
    // set default values
    if( type != PT_PREVIEW )
    {
-      QString defFormat = getFormatForType( type );
+      TQString defFormat = getFormatForType( type );
       fd.setSelectedFormat( defFormat );
    }
 
-   QString format;
+   TQString format;
    if( fd.exec() )
    {
       format = fd.getFormat();
@@ -534,7 +534,7 @@ QString ImgSaver::startFormatDialog( picType type)
  *  This method returns true if the image format given in format is remembered
  *  for that image type.
  */
-bool ImgSaver::isRememberedFormat( picType type, QString format ) const
+bool ImgSaver::isRememberedFormat( picType type, TQString format ) const
 {
    if( getFormatForType( type ) == format )
    {
@@ -550,13 +550,13 @@ bool ImgSaver::isRememberedFormat( picType type, QString format ) const
 
 
 
-QString ImgSaver::getFormatForType( picType type ) const
+TQString ImgSaver::getFormatForType( picType type ) const
 {
    KConfig *konf = KGlobal::config ();
    Q_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
 
-   QString f;
+   TQString f;
 
    switch( type )
    {
@@ -580,7 +580,7 @@ QString ImgSaver::getFormatForType( picType type ) const
 }
 
 
-void ImgSaver::storeFormatForType( picType type, QString format, bool ask )
+void ImgSaver::storeFormatForType( picType type, TQString format, bool ask )
 {
    KConfig *konf = KGlobal::config ();
    Q_CHECK_PTR( konf );
@@ -611,7 +611,7 @@ void ImgSaver::storeFormatForType( picType type, QString format, bool ask )
 }
 
 
-QString ImgSaver::findSubFormat( QString format )
+TQString ImgSaver::findSubFormat( TQString format )
 {
    kdDebug(28000) << "Searching Subformat for " << format << endl;
    return( subformat );
@@ -622,9 +622,9 @@ QString ImgSaver::findSubFormat( QString format )
    private save() does the work to save the image.
    the filename must be complete and local.
 **/
-ImgSaveStat ImgSaver::save( QImage *image, const QString &filename,
-			    const QString &format,
-			    const QString &subformat )
+ImgSaveStat ImgSaver::save( TQImage *image, const TQString &filename,
+			    const TQString &format,
+			    const TQString &subformat )
 {
 
    bool result = false;
@@ -638,9 +638,9 @@ ImgSaveStat ImgSaver::save( QImage *image, const QString &filename,
    if( image )
    {
       // remember the last processed file - only the filename - no path
-      QFileInfo fi( filename );
-      QString dirPath = fi.dirPath();
-      QDir dir = QDir( dirPath );
+      TQFileInfo fi( filename );
+      TQString dirPath = fi.dirPath();
+      TQDir dir = TQDir( dirPath );
 
       if( ! dir.exists() )
       {
@@ -696,16 +696,16 @@ void ImgSaver::readConfig( void )
    konf->setGroup( OP_FILE_GROUP );
    ask_for_format = konf->readBoolEntry( OP_FILE_ASK_FORMAT, true );
 
-   QDir home = QDir::home();
+   TQDir home = TQDir::home();
 }
 
 
 
 
 
-QString ImgSaver::errorString( ImgSaveStat stat )
+TQString ImgSaver::errorString( ImgSaveStat stat )
 {
-   QString re;
+   TQString re;
 
    switch( stat ) {
       case ISS_OK:           re = i18n( " image save OK      " ); break;
@@ -724,9 +724,9 @@ QString ImgSaver::errorString( ImgSaveStat stat )
 
 }
 
-QString ImgSaver::extension( const KURL& url )
+TQString ImgSaver::extension( const KURL& url )
 {
-   QString extension = url.fileName();
+   TQString extension = url.fileName();
 
    int dotPos = extension.findRev( '.' );
    if( dotPos > 0 )
@@ -737,24 +737,24 @@ QString ImgSaver::extension( const KURL& url )
    else
    {
       /* No extension was supplied */
-      extension = QString();
+      extension = TQString();
    }
    return extension;
 }
 
 
-bool ImgSaver::renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt,  QWidget *overWidget )
+bool ImgSaver::renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt,  TQWidget *overWidget )
 {
    /* Check if the provided filename has a extension */
-   QString extTo = extension( toUrl );
-   QString extFrom = extension( fromUrl );
+   TQString extTo = extension( toUrl );
+   TQString extFrom = extension( fromUrl );
    KURL targetUrl( toUrl );
 
    if( extTo.isEmpty() && !extFrom.isEmpty() )
    {
       /* Ask if the extension should be added */
       int result = KMessageBox::Yes;
-      QString fName = toUrl.fileName();
+      TQString fName = toUrl.fileName();
       if( ! fName.endsWith( "." )  )
       {
 	 fName += ".";
@@ -764,7 +764,7 @@ bool ImgSaver::renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt,  QWid
       if( askExt )
       {
 
-	 QString s;
+	 TQString s;
 	 s = i18n("The filename you supplied has no file extension.\nShould the correct one be added automatically? ");
 	 s += i18n( "That would result in the new filename: %1" ).arg( fName);
 
@@ -809,10 +809,10 @@ bool ImgSaver::renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt,  QWid
 }
 
 
-QString ImgSaver::tempSaveImage( KookaImage *img, const QString& format, int colors )
+TQString ImgSaver::tempSaveImage( KookaImage *img, const TQString& format, int colors )
 {
 
-    KTempFile *tmpFile = new KTempFile( QString(), "."+format.lower());
+    KTempFile *tmpFile = new KTempFile( TQString(), "."+format.lower());
     tmpFile->setAutoDelete( false );
     tmpFile->close();
 
@@ -833,35 +833,35 @@ QString ImgSaver::tempSaveImage( KookaImage *img, const QString& format, int col
 	}
     }
 
-    QString name;
+    TQString name;
     if( img )
     {
 	name = tmpFile->name();
 
-	if( ! img->save( name, format.latin1() ) ) name = QString();
+	if( ! img->save( name, format.latin1() ) ) name = TQString();
     }
     delete tmpFile;
     return name;
 }
 
-bool ImgSaver::copyImage( const KURL& fromUrl, const KURL& toUrl, QWidget *overWidget )
+bool ImgSaver::copyImage( const KURL& fromUrl, const KURL& toUrl, TQWidget *overWidget )
 {
 
    /* Check if the provided filename has a extension */
-   QString extTo = extension( toUrl );
-   QString extFrom = extension( fromUrl );
+   TQString extTo = extension( toUrl );
+   TQString extFrom = extension( fromUrl );
    KURL targetUrl( toUrl );
 
    if( extTo.isEmpty() && !extFrom.isEmpty())
    {
       /* Ask if the extension should be added */
       int result = KMessageBox::Yes;
-      QString fName = toUrl.fileName();
+      TQString fName = toUrl.fileName();
       if( ! fName.endsWith( "." ))
 	 fName += ".";
       fName += extFrom;
 
-      QString s;
+      TQString s;
       s = i18n("The filename you supplied has no file extension.\nShould the correct one be added automatically? ");
       s += i18n( "That would result in the new filename: %1" ).arg( fName);
 

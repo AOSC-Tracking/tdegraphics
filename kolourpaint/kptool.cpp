@@ -33,13 +33,13 @@
 
 #include <limits.h>
 
-#include <qapplication.h>
-#include <qclipboard.h>
-#include <qcursor.h>
-#include <qevent.h>
-#include <qlayout.h>
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <tqapplication.h>
+#include <tqclipboard.h>
+#include <tqcursor.h>
+#include <tqevent.h>
+#include <tqlayout.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
 
 #include <kapplication.h>
 #include <kdebug.h>
@@ -68,7 +68,7 @@ struct kpToolPrivate
 };
 
 
-kpTool::kpTool (const QString &text, const QString &description,
+kpTool::kpTool (const TQString &text, const TQString &description,
                 int key,
                 kpMainWindow *mainWindow, const char *name)
 {
@@ -94,7 +94,7 @@ kpTool::~kpTool ()
 
 
 // private
-void kpTool::init (const QString &text, const QString &description,
+void kpTool::init (const TQString &text, const TQString &description,
                    int key,
                    kpMainWindow *mainWindow, const char *name)
 {
@@ -151,31 +151,31 @@ void kpTool::createAction ()
 
 
     m_action = new kpToolAction (text (), iconName (), shortcutForKey (m_key),
-                                 this, SLOT (slotActionActivated ()),
+                                 this, TQT_SLOT (slotActionActivated ()),
                                  m_mainWindow->actionCollection (), name ());
-    m_action->setExclusiveGroup (QString::fromLatin1 ("Tool Box Actions"));
+    m_action->setExclusiveGroup (TQString::fromLatin1 ("Tool Box Actions"));
     m_action->setWhatsThis (description ());
 
-    connect (m_action, SIGNAL (toolTipChanged (const QString &)),
-             this, SLOT (slotActionToolTipChanged (const QString &)));
+    connect (m_action, TQT_SIGNAL (toolTipChanged (const TQString &)),
+             this, TQT_SLOT (slotActionToolTipChanged (const TQString &)));
 }
 
 
 // protected slot
-void kpTool::slotActionToolTipChanged (const QString &string)
+void kpTool::slotActionToolTipChanged (const TQString &string)
 {
     emit actionToolTipChanged (string);
 }
 
 
 // public
-QString kpTool::text () const
+TQString kpTool::text () const
 {
     return m_text;
 }
 
 // public
-void kpTool::setText (const QString &text)
+void kpTool::setText (const TQString &text)
 {
     m_text = text;
 
@@ -187,7 +187,7 @@ void kpTool::setText (const QString &text)
 
 
 // public static
-QString kpTool::toolTipForTextAndShortcut (const QString &text,
+TQString kpTool::toolTipForTextAndShortcut (const TQString &text,
                                            const KShortcut &shortcut)
 {
     for (int i = 0; i < (int) shortcut.count (); i++)
@@ -205,7 +205,7 @@ QString kpTool::toolTipForTextAndShortcut (const QString &text,
 }
 
 // public static
-QString kpTool::toolTip () const
+TQString kpTool::toolTip () const
 {
     return toolTipForTextAndShortcut (text (), shortcut ());
 }
@@ -255,7 +255,7 @@ KShortcut kpTool::shortcut () const
 // public static
 bool kpTool::keyIsText (int key)
 {
-    // TODO: should work like !QKeyEvent::text().isEmpty()
+    // TODO: should work like !TQKeyEvent::text().isEmpty()
     return !(key & (Qt::MODIFIER_MASK ^ Qt::SHIFT));
 }
 
@@ -332,13 +332,13 @@ void kpTool::enableSingleKeyTriggers (bool enable)
 
 
 // public
-QString kpTool::description () const
+TQString kpTool::description () const
 {
     return m_description;
 }
 
 // public
-void kpTool::setDescription (const QString &description)
+void kpTool::setDescription (const TQString &description)
 {
     m_description = description;
 
@@ -357,7 +357,7 @@ const char *kpTool::name () const
 
 
 // static
-QRect kpTool::neededRect (const QRect &rect, int lineWidth)
+TQRect kpTool::neededRect (const TQRect &rect, int lineWidth)
 {
     int x1, y1, x2, y2;
     rect.coords (&x1, &y1, &x2, &y2);
@@ -365,12 +365,12 @@ QRect kpTool::neededRect (const QRect &rect, int lineWidth)
     if (lineWidth < 1)
         lineWidth = 1;
 
-    return QRect (QPoint (x1 - lineWidth + 1, y1 - lineWidth + 1),
-                  QPoint (x2 + lineWidth - 1, y2 + lineWidth - 1));
+    return TQRect (TQPoint (x1 - lineWidth + 1, y1 - lineWidth + 1),
+                  TQPoint (x2 + lineWidth - 1, y2 + lineWidth - 1));
 }
 
 // static
-QPixmap kpTool::neededPixmap (const QPixmap &pixmap, const QRect &boundingRect)
+TQPixmap kpTool::neededPixmap (const TQPixmap &pixmap, const TQRect &boundingRect)
 {
     return kpPixmapFX::getPixmapAt (pixmap, boundingRect);
 }
@@ -383,7 +383,7 @@ bool kpTool::hasCurrentPoint () const
 }
 
 // public
-QPoint kpTool::currentPoint (bool zoomToDoc) const
+TQPoint kpTool::currentPoint (bool zoomToDoc) const
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::currentPoint(zoomToDoc=" << zoomToDoc << ")" << endl;
@@ -408,8 +408,8 @@ QPoint kpTool::currentPoint (bool zoomToDoc) const
     }
 
 
-    const QPoint globalPos = QCursor::pos ();
-    const QPoint viewPos = v->mapFromGlobal (globalPos);
+    const TQPoint globalPos = TQCursor::pos ();
+    const TQPoint viewPos = v->mapFromGlobal (globalPos);
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "\tglobalPos=" << globalPos
                << " viewPos=" << viewPos
@@ -419,7 +419,7 @@ QPoint kpTool::currentPoint (bool zoomToDoc) const
         return viewPos;
 
 
-    const QPoint docPos = v->transformViewToDoc (viewPos);
+    const TQPoint docPos = v->transformViewToDoc (viewPos);
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "\tdocPos=" << docPos << endl;
 #endif
@@ -436,8 +436,8 @@ void kpTool::somethingBelowTheCursorChanged ()
 
 // private
 // TODO: don't dup code from mouseMoveEvent()
-void kpTool::somethingBelowTheCursorChanged (const QPoint &currentPoint_,
-        const QPoint &currentViewPoint_)
+void kpTool::somethingBelowTheCursorChanged (const TQPoint &currentPoint_,
+        const TQPoint &currentViewPoint_)
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::somethingBelowTheCursorChanged(docPoint="
@@ -460,7 +460,7 @@ void kpTool::somethingBelowTheCursorChanged (const QPoint &currentPoint_,
     {
         if (m_currentPoint != KP_INVALID_POINT)
         {
-            draw (m_currentPoint, m_lastPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            draw (m_currentPoint, m_lastPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
             m_lastPoint = m_currentPoint;
         }
     }
@@ -516,7 +516,7 @@ void kpTool::endInternal ()
     {
         // before we can stop using the tool, we must stop the current drawing operation (if any)
         if (hasBegunShape ())
-            endShapeInternal (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            endShapeInternal (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         // call user virtual func
         end ();
@@ -576,7 +576,7 @@ void kpTool::beginDraw ()
 }
 
 // virtual
-void kpTool::hover (const QPoint &point)
+void kpTool::hover (const TQPoint &point)
 {
 #if DEBUG_KP_TOOL
     kdDebug () << "kpTool::hover" << point
@@ -602,7 +602,7 @@ void kpTool::reselect ()
 
 
 // public
-QIconSet kpTool::iconSet (int forceSize) const
+TQIconSet kpTool::iconSet (int forceSize) const
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool(" << name () << ")::iconSet(forceSize=" << forceSize << ")" << endl;
@@ -615,7 +615,7 @@ QIconSet kpTool::iconSet (int forceSize) const
 }
 
 // public
-QString kpTool::iconName () const
+TQString kpTool::iconName () const
 {
     return name ();
 }
@@ -638,7 +638,7 @@ void kpTool::slotActionActivated ()
 
 
 // virtual
-void kpTool::draw (const QPoint &, const QPoint &, const QRect &)
+void kpTool::draw (const TQPoint &, const TQPoint &, const TQRect &)
 {
 }
 
@@ -687,7 +687,7 @@ void kpTool::releasedAllButtons ()
 {
 }
 
-void kpTool::endDrawInternal (const QPoint &thisPoint, const QRect &normalizedRect,
+void kpTool::endDrawInternal (const TQPoint &thisPoint, const TQRect &normalizedRect,
                               bool wantEndShape)
 {
 #if DEBUG_KP_TOOL && 1
@@ -742,13 +742,13 @@ void kpTool::endDrawInternal (const QPoint &thisPoint, const QRect &normalizedRe
 }
 
 // private
-void kpTool::endShapeInternal (const QPoint &thisPoint, const QRect &normalizedRect)
+void kpTool::endShapeInternal (const TQPoint &thisPoint, const TQRect &normalizedRect)
 {
     endDrawInternal (thisPoint, normalizedRect, true/*end shape*/);
 }
 
 // virtual
-void kpTool::endDraw (const QPoint &, const QRect &)
+void kpTool::endDraw (const TQPoint &, const TQRect &)
 {
 }
 
@@ -904,7 +904,7 @@ void kpTool::slotColorSimilarityChangedInternal (double similarity, int processe
 
 bool kpTool::currentPointNextToLast () const
 {
-    if (m_lastPoint == QPoint (-1, -1))
+    if (m_lastPoint == TQPoint (-1, -1))
         return true;
 
     int dx = kAbs (m_currentPoint.x () - m_lastPoint.x ());
@@ -915,7 +915,7 @@ bool kpTool::currentPointNextToLast () const
 
 bool kpTool::currentPointCardinallyNextToLast () const
 {
-    if (m_lastPoint == QPoint (-1, -1))
+    if (m_lastPoint == TQPoint (-1, -1))
         return true;
 
     int dx = kAbs (m_currentPoint.x () - m_lastPoint.x ());
@@ -929,7 +929,7 @@ kpCommandHistory *kpTool::commandHistory () const
     return m_mainWindow ? m_mainWindow->commandHistory () : 0;
 }
 
-void kpTool::mousePressEvent (QMouseEvent *e)
+void kpTool::mousePressEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_TOOL && 1
     kdDebug () << "kpTool::mousePressEvent pos=" << e->pos ()
@@ -944,7 +944,7 @@ void kpTool::mousePressEvent (QMouseEvent *e)
 
     if (m_mainWindow && e->button () == Qt::MidButton)
     {
-        const QString text = QApplication::clipboard ()->text (QClipboard::Selection);
+        const TQString text = TQApplication::clipboard ()->text (QClipboard::Selection);
     #if DEBUG_KP_TOOL && 1
         kdDebug () << "\tMMB pasteText='" << text << "'" << endl;
     #endif
@@ -956,7 +956,7 @@ void kpTool::mousePressEvent (QMouseEvent *e)
                 kdDebug () << "\t\thasBegunShape - end" << endl;
             #endif
                 endShapeInternal (m_currentPoint,
-                                  QRect (m_startPoint, m_currentPoint).normalize ());
+                                  TQRect (m_startPoint, m_currentPoint).normalize ());
             }
 
             if (viewUnderCursor ())
@@ -994,8 +994,8 @@ void kpTool::mousePressEvent (QMouseEvent *e)
 
             // if we get a mousePressEvent when we're drawing, then the other
             // mouse button must have been pressed
-            m_currentPoint = view ? view->transformViewToDoc (e->pos ()) : QPoint (-1, -1);
-            m_currentViewPoint = view ? e->pos () : QPoint (-1, -1);
+            m_currentPoint = view ? view->transformViewToDoc (e->pos ()) : TQPoint (-1, -1);
+            m_currentViewPoint = view ? e->pos () : TQPoint (-1, -1);
             cancelShapeInternal ();
         }
 
@@ -1019,10 +1019,10 @@ void kpTool::mousePressEvent (QMouseEvent *e)
     m_shiftPressed = (buttonState & Qt::ShiftButton);
     m_controlPressed = (buttonState & Qt::ControlButton);
     m_altPressed = (buttonState & Qt::AltButton);
-    m_startPoint = m_currentPoint = view ? view->transformViewToDoc (e->pos ()) : QPoint (-1, -1);
-    m_currentViewPoint = view ? e->pos () : QPoint (-1, -1);
+    m_startPoint = m_currentPoint = view ? view->transformViewToDoc (e->pos ()) : TQPoint (-1, -1);
+    m_currentViewPoint = view ? e->pos () : TQPoint (-1, -1);
     m_viewUnderStartPoint = view;
-    m_lastPoint = QPoint (-1, -1);
+    m_lastPoint = TQPoint (-1, -1);
 
 #if DEBUG_KP_TOOL && 1
     kdDebug () << "\tBeginning draw @ " << m_currentPoint << endl;
@@ -1030,11 +1030,11 @@ void kpTool::mousePressEvent (QMouseEvent *e)
 
     beginDrawInternal ();
 
-    draw (m_currentPoint, m_lastPoint, QRect (m_currentPoint, m_currentPoint));
+    draw (m_currentPoint, m_lastPoint, TQRect (m_currentPoint, m_currentPoint));
     m_lastPoint = m_currentPoint;
 }
 
-void kpTool::mouseMoveEvent (QMouseEvent *e)
+void kpTool::mouseMoveEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::mouseMoveEvent pos=" << e->pos ()
@@ -1087,7 +1087,7 @@ void kpTool::mouseMoveEvent (QMouseEvent *e)
             viewManager ()->setFastUpdates ();
         }
 
-        draw (m_currentPoint, m_lastPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+        draw (m_currentPoint, m_lastPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         if (dragScrolled)
             viewManager ()->restoreFastUpdates ();
@@ -1110,7 +1110,7 @@ void kpTool::mouseMoveEvent (QMouseEvent *e)
     }
 }
 
-void kpTool::mouseReleaseEvent (QMouseEvent *e)
+void kpTool::mouseReleaseEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_TOOL && 1
     kdDebug () << "kpTool::mouseReleaseEvent pos=" << e->pos ()
@@ -1128,9 +1128,9 @@ void kpTool::mouseReleaseEvent (QMouseEvent *e)
             return;
         }
 
-        m_currentPoint = view ? view->transformViewToDoc (e->pos ()) : QPoint (-1, -1);
-        m_currentViewPoint = view ? e->pos () : QPoint (-1, -1);
-        endDrawInternal (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+        m_currentPoint = view ? view->transformViewToDoc (e->pos ()) : TQPoint (-1, -1);
+        m_currentViewPoint = view ? e->pos () : TQPoint (-1, -1);
+        endDrawInternal (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
     }
 
     if ((e->stateAfter () & Qt::MouseButtonMask) == 0)
@@ -1139,7 +1139,7 @@ void kpTool::mouseReleaseEvent (QMouseEvent *e)
     }
 }
 
-void kpTool::wheelEvent (QWheelEvent *e)
+void kpTool::wheelEvent (TQWheelEvent *e)
 {
 #if DEBUG_KP_TOOL
     kdDebug () << "kpTool::wheelEvent() state=" << e->state ()
@@ -1183,7 +1183,7 @@ void kpTool::wheelEvent (QWheelEvent *e)
 }
 
 
-void kpTool::keyPressEvent (QKeyEvent *e)
+void kpTool::keyPressEvent (TQKeyEvent *e)
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::keyPressEvent() e->key=" << e->key () << endl;
@@ -1214,7 +1214,7 @@ void kpTool::keyPressEvent (QKeyEvent *e)
         break;
 
     /*
-     * QCursor::setPos conveniently causes mouseMoveEvents :)
+     * TQCursor::setPos conveniently causes mouseMoveEvents :)
      */
 
     case Qt::Key_Home:     dx = -1, dy = -1;    break;
@@ -1237,8 +1237,8 @@ void kpTool::keyPressEvent (QKeyEvent *e)
         if (view)
         {
             // TODO: what about the modifiers
-            QMouseEvent me (QEvent::MouseButtonPress,
-                            view->mapFromGlobal (QCursor::pos ()),
+            TQMouseEvent me (TQEvent::MouseButtonPress,
+                            view->mapFromGlobal (TQCursor::pos ()),
                             Qt::LeftButton,
                             0);
             mousePressEvent (&me);
@@ -1251,7 +1251,7 @@ void kpTool::keyPressEvent (QKeyEvent *e)
     kpView *view = viewUnderCursor ();
     if (view && (dx || dy))
     {
-        QPoint oldPoint = view->mapFromGlobal (QCursor::pos ());
+        TQPoint oldPoint = view->mapFromGlobal (TQCursor::pos ());
     #if DEBUG_KP_TOOL && 0
         kdDebug () << "\toldPoint=" << oldPoint
                    << " dx=" << dx << " dy=" << dy << endl;
@@ -1266,17 +1266,17 @@ void kpTool::keyPressEvent (QKeyEvent *e)
 
 
     #if DEBUG_KP_TOOL && 0
-        kdDebug () << "\tnewPoint=" << QPoint (newViewX, newViewY) << endl;
+        kdDebug () << "\tnewPoint=" << TQPoint (newViewX, newViewY) << endl;
     #endif
 
-        if (view->transformViewToDoc (QPoint (newViewX, newViewY)) ==
+        if (view->transformViewToDoc (TQPoint (newViewX, newViewY)) ==
             view->transformViewToDoc (oldPoint))
         {
             newViewX += viewIncX, newViewY += viewIncY;
 
         #if DEBUG_KP_TOOL && 0
             kdDebug () << "\tneed adjust for doc - newPoint="
-                       << QPoint (newViewX, newViewY) << endl;
+                       << TQPoint (newViewX, newViewY) << endl;
         #endif
         }
 
@@ -1285,12 +1285,12 @@ void kpTool::keyPressEvent (QKeyEvent *e)
         int x = QMIN (QMAX (newViewX, 0), view->width () - 1);
         int y = QMIN (QMAX (newViewY, 0), view->height () - 1);
 
-        QCursor::setPos (view->mapToGlobal (QPoint (x, y)));
+        TQCursor::setPos (view->mapToGlobal (TQPoint (x, y)));
         e->accept ();
     }
 }
 
-void kpTool::keyReleaseEvent (QKeyEvent *e)
+void kpTool::keyReleaseEvent (TQKeyEvent *e)
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::keyReleaseEvent() e->key=" << e->key () << endl;
@@ -1334,8 +1334,8 @@ void kpTool::keyReleaseEvent (QKeyEvent *e)
         kpView *view = viewUnderCursor ();
         if (view)
         {
-            QMouseEvent me (QEvent::MouseButtonRelease,
-                            view->mapFromGlobal (QCursor::pos ()),
+            TQMouseEvent me (TQEvent::MouseButtonRelease,
+                            view->mapFromGlobal (TQCursor::pos ()),
                             Qt::LeftButton,
                             Qt::LeftButton);
             mouseReleaseEvent (&me);
@@ -1346,7 +1346,7 @@ void kpTool::keyReleaseEvent (QKeyEvent *e)
 }
 
 // private
-void kpTool::keyUpdateModifierState (QKeyEvent *e)
+void kpTool::keyUpdateModifierState (TQKeyEvent *e)
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::updateModifierState() e->key=" << e->key () << endl;
@@ -1389,7 +1389,7 @@ void kpTool::notifyModifierStateChanged ()
     if (careAboutModifierState ())
     {
         if (m_beganDraw)
-            draw (m_currentPoint, m_lastPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            draw (m_currentPoint, m_lastPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
         else
         {
             m_currentPoint = currentPoint ();
@@ -1429,28 +1429,28 @@ void kpTool::setAltPressed (bool pressed)
     notifyModifierStateChanged ();
 }
 
-void kpTool::focusInEvent (QFocusEvent *)
+void kpTool::focusInEvent (TQFocusEvent *)
 {
 }
 
-void kpTool::focusOutEvent (QFocusEvent *)
+void kpTool::focusOutEvent (TQFocusEvent *)
 {
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::focusOutEvent() beganDraw=" << m_beganDraw << endl;
 #endif
 
     if (m_beganDraw)
-        endDrawInternal (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+        endDrawInternal (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 }
 
-void kpTool::enterEvent (QEvent *)
+void kpTool::enterEvent (TQEvent *)
 {
 #if DEBUG_KP_TOOL && 1
     kdDebug () << "kpTool::enterEvent() beganDraw=" << m_beganDraw << endl;
 #endif
 }
 
-void kpTool::leaveEvent (QEvent *)
+void kpTool::leaveEvent (TQEvent *)
 {
 #if DEBUG_KP_TOOL && 1
     kdDebug () << "kpTool::leaveEvent() beganDraw=" << m_beganDraw << endl;
@@ -1492,7 +1492,7 @@ int kpTool::mouseButton (const Qt::ButtonState &buttonState)
 
 
 // public static
-QString kpTool::cancelUserMessage (int mouseButton)
+TQString kpTool::cancelUserMessage (int mouseButton)
 {
     if (mouseButton == 0)
         return i18n ("Right click to cancel.");
@@ -1501,20 +1501,20 @@ QString kpTool::cancelUserMessage (int mouseButton)
 }
 
 // public
-QString kpTool::cancelUserMessage () const
+TQString kpTool::cancelUserMessage () const
 {
     return cancelUserMessage (m_mouseButton);
 }
 
 
 // public
-QString kpTool::userMessage () const
+TQString kpTool::userMessage () const
 {
     return m_userMessage;
 }
 
 // public
-void kpTool::setUserMessage (const QString &userMessage)
+void kpTool::setUserMessage (const TQString &userMessage)
 {
     m_userMessage = userMessage;
 
@@ -1528,13 +1528,13 @@ void kpTool::setUserMessage (const QString &userMessage)
 
 
 // public
-QPoint kpTool::userShapeStartPoint () const
+TQPoint kpTool::userShapeStartPoint () const
 {
     return m_userShapeStartPoint;
 }
 
 // public
-QPoint kpTool::userShapeEndPoint () const
+TQPoint kpTool::userShapeEndPoint () const
 {
     return m_userShapeEndPoint;
 }
@@ -1553,8 +1553,8 @@ int kpTool::calculateLength (int start, int end)
 }
 
 // public
-void kpTool::setUserShapePoints (const QPoint &startPoint,
-                                 const QPoint &endPoint,
+void kpTool::setUserShapePoints (const TQPoint &startPoint,
+                                 const TQPoint &endPoint,
                                  bool setSize)
 {
     m_userShapeStartPoint = startPoint;
@@ -1578,7 +1578,7 @@ void kpTool::setUserShapePoints (const QPoint &startPoint,
 
 
 // public
-QSize kpTool::userShapeSize () const
+TQSize kpTool::userShapeSize () const
 {
     return m_userShapeSize;
 }
@@ -1596,7 +1596,7 @@ int kpTool::userShapeHeight () const
 }
 
 // public
-void kpTool::setUserShapeSize (const QSize &size)
+void kpTool::setUserShapeSize (const TQSize &size)
 {
     m_userShapeSize = size;
 
@@ -1608,17 +1608,17 @@ void kpTool::setUserShapeSize (const QSize &size)
 // public
 void kpTool::setUserShapeSize (int width, int height)
 {
-    setUserShapeSize (QSize (width, height));
+    setUserShapeSize (TQSize (width, height));
 }
 
 
 // public static
 bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
                                  int newWidth, int newHeight,
-                                 const QString &text,
-                                 const QString &caption,
-                                 const QString &continueButtonText,
-                                 QWidget *parent)
+                                 const TQString &text,
+                                 const TQString &caption,
+                                 const TQString &continueButtonText,
+                                 TQWidget *parent)
 {
 #if DEBUG_KP_TOOL
     kdDebug () << "kpTool::warnIfBigImageSize()"
@@ -1627,7 +1627,7 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
                << " pixmapSize="
                << kpPixmapFX::pixmapSize (newWidth,
                                           newHeight,
-                                          QPixmap::defaultDepth ())
+                                          TQPixmap::defaultDepth ())
                << " vs BigImageSize=" << KP_BIG_IMAGE_SIZE
                << endl;
 #endif
@@ -1639,20 +1639,20 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
     }
 
     // Was already large - user was warned before, don't annoy him/her again
-    if (kpPixmapFX::pixmapSize (oldWidth, oldHeight, QPixmap::defaultDepth ()) >=
+    if (kpPixmapFX::pixmapSize (oldWidth, oldHeight, TQPixmap::defaultDepth ()) >=
         KP_BIG_IMAGE_SIZE)
     {
         return true;
     }
 
-    if (kpPixmapFX::pixmapSize (newWidth, newHeight, QPixmap::defaultDepth ()) >=
+    if (kpPixmapFX::pixmapSize (newWidth, newHeight, TQPixmap::defaultDepth ()) >=
         KP_BIG_IMAGE_SIZE)
     {
         int accept = KMessageBox::warningContinueCancel (parent,
             text,
             caption,
             continueButtonText,
-            QString::fromLatin1 ("BigImageDontAskAgain"));
+            TQString::fromLatin1 ("BigImageDontAskAgain"));
 
         return (accept == KMessageBox::Continue);
     }

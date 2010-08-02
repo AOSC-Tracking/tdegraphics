@@ -19,8 +19,8 @@
 #ifndef KUICKDATA_H
 #define KUICKDATA_H
 
-#include <qcolor.h>
-#include <qstring.h>
+#include <tqcolor.h>
+#include <tqstring.h>
 
 #include "imdata.h"
 
@@ -44,7 +44,7 @@ public:
 
     ImData 	*idata;
 
-    QString 	fileFilter;
+    TQString 	fileFilter;
     uint 	slideDelay;
     uint        slideshowCycles;
     bool        slideshowFullscreen :1;
@@ -75,7 +75,7 @@ public:
     uint        maxCachedImages;
     Rotation 	rotation;
 
-    QColor      backgroundColor;
+    TQColor      backgroundColor;
 
 
 };

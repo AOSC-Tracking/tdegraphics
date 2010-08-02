@@ -10,14 +10,14 @@
 
 #include <kdebug.h>
 #include <kprocio.h>
-#include <qfile.h>
-#include <qstringlist.h>
+#include <tqfile.h>
+#include <tqstringlist.h>
 
 #include "fontEncoding.h"
 
 //#define DEBUG_FONTENC
 
-fontEncoding::fontEncoding(const QString &encName)
+fontEncoding::fontEncoding(const TQString &encName)
 {
 #ifdef DEBUG_FONTENC
   kdDebug(4300) << "fontEncoding( " << encName << " )" << endl;
@@ -26,7 +26,7 @@ fontEncoding::fontEncoding(const QString &encName)
   _isValid = false;
   // Use kpsewhich to find the encoding file.
   KProcIO proc;
-  QString encFileName;
+  TQString encFileName;
   proc << "kpsewhich" << encName;
   if (proc.start(KProcess::Block) == false) {
     kdError(4300) << "fontEncoding::fontEncoding(...): kpsewhich could not be started." << endl;
@@ -36,7 +36,7 @@ fontEncoding::fontEncoding(const QString &encName)
   encFileName = encFileName.stripWhiteSpace();
 
   if (encFileName.isEmpty()) {
-    kdError(4300) << QString("fontEncoding::fontEncoding(...): The file '%1' could not be found by kpsewhich.").arg(encName) << endl;
+    kdError(4300) << TQString("fontEncoding::fontEncoding(...): The file '%1' could not be found by kpsewhich.").arg(encName) << endl;
     return;
   }
 
@@ -44,12 +44,12 @@ fontEncoding::fontEncoding(const QString &encName)
   kdDebug(4300) << "FileName of the encoding: " << encFileName << endl;
 #endif  
 
-  QFile file( encFileName );
+  TQFile file( encFileName );
   if ( file.open( IO_ReadOnly ) ) {
-    // Read the file (excluding comments) into the QString variable
+    // Read the file (excluding comments) into the TQString variable
     // 'fileContent'
-    QTextStream stream( &file );
-    QString fileContent;
+    TQTextStream stream( &file );
+    TQString fileContent;
     while ( !stream.atEnd() ) 
       fileContent += stream.readLine().section('%', 0, 0); // line of text excluding '\n' until first '%'-sign
     file.close();
@@ -63,10 +63,10 @@ fontEncoding::fontEncoding(const QString &encName)
 #endif
     
     fileContent = fileContent.section('[', 1, 1).section(']',0,0).simplifyWhiteSpace();
-    QStringList glyphNameList = QStringList::split( '/', fileContent );
+    TQStringList glyphNameList = TQStringList::split( '/', fileContent );
     
     int i = 0;
-    for ( QStringList::Iterator it = glyphNameList.begin(); (it != glyphNameList.end())&&(i<256); ++it ) {
+    for ( TQStringList::Iterator it = glyphNameList.begin(); (it != glyphNameList.end())&&(i<256); ++it ) {
       glyphNameVector[i] = (*it).simplifyWhiteSpace();
 #ifdef DEBUG_FONTENC
       kdDebug(4300) << i << ": " << glyphNameVector[i] << endl;
@@ -76,7 +76,7 @@ fontEncoding::fontEncoding(const QString &encName)
     for(; i<256; i++)
       glyphNameVector[i] = ".notdef";
   } else {
-    kdError(4300) << QString("fontEncoding::fontEncoding(...): The file '%1' could not be opened.").arg(encFileName) << endl;
+    kdError(4300) << TQString("fontEncoding::fontEncoding(...): The file '%1' could not be opened.").arg(encFileName) << endl;
     return;
   }
 

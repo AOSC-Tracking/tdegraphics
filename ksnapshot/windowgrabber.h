@@ -20,8 +20,8 @@
 #ifndef WINDOWGRABBER_H
 #define WINDOWGRABBER_H
 
-#include <qdialog.h>
-#include <qpixmap.h>
+#include <tqdialog.h>
+#include <tqpixmap.h>
 #include <vector>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -34,23 +34,23 @@ public:
     WindowGrabber();
     ~WindowGrabber();
 
-    static QPixmap grabCurrent( bool includeDecorations = true );
+    static TQPixmap grabCurrent( bool includeDecorations = true );
 
 signals:
-    void windowGrabbed( const QPixmap & );
+    void windowGrabbed( const TQPixmap & );
 
 protected:
-    void mousePressEvent( QMouseEvent * );
-    void mouseReleaseEvent( QMouseEvent * );
-    void mouseMoveEvent( QMouseEvent * );
-    void wheelEvent( QWheelEvent * );
+    void mousePressEvent( TQMouseEvent * );
+    void mouseReleaseEvent( TQMouseEvent * );
+    void mouseMoveEvent( TQMouseEvent * );
+    void wheelEvent( TQWheelEvent * );
 
 private:
     void drawBorder();
-    void increaseScope( const QPoint & );
-    void decreaseScope( const QPoint & );
-    int windowIndex( const QPoint & ) const;
-    std::vector<QRect> windows;
+    void increaseScope( const TQPoint & );
+    void decreaseScope( const TQPoint & );
+    int windowIndex( const TQPoint & ) const;
+    std::vector<TQRect> windows;
     int current;
     int yPos;
 };

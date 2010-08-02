@@ -19,16 +19,16 @@
 #ifndef MRML_VIEW_H
 #define MRML_VIEW_H
 
-#include <qevent.h>
-#include <qframe.h>
-#include <qptrlist.h>
-#include <qpixmap.h>
-#include <qpixmapcache.h>
-#include <qscrollview.h>
+#include <tqevent.h>
+#include <tqframe.h>
+#include <tqptrlist.h>
+#include <tqpixmap.h>
+#include <tqpixmapcache.h>
+#include <tqscrollview.h>
 
-class QDomDocument;
-class QDomElement;
-class QTimer;
+class TQDomDocument;
+class TQDomElement;
+class TQTimer;
 
 class KComboBox;
 
@@ -38,11 +38,11 @@ namespace KMrml
 class MrmlViewItem;
 
 
-class MrmlViewItemList : public QPtrList<MrmlViewItem>
+class MrmlViewItemList : public TQPtrList<MrmlViewItem>
 {
 protected:
     // sort by similarity
-    virtual int compareItems( QPtrCollection::Item, QPtrCollection::Item );
+    virtual int compareItems( TQPtrCollection::Item, TQPtrCollection::Item );
 
 };
 
@@ -54,16 +54,16 @@ class MrmlView : public QScrollView
     Q_OBJECT
 
 public:
-    MrmlView( QWidget *parent = 0L, const char *name = 0L );
+    MrmlView( TQWidget *parent = 0L, const char *name = 0L );
     ~MrmlView();
 
     MrmlViewItem * addItem( const KURL& url, const KURL& thumbURL,
-                            const QString& similarity );
+                            const TQString& similarity );
     MrmlViewItem * addItem( const KURL& url, const KURL& thumbURL,
                             double similarity );
 
 
-    void addRelevanceToQuery( QDomDocument&, QDomElement& parent );
+    void addRelevanceToQuery( TQDomDocument&, TQDomElement& parent );
 
     void clear();
 
@@ -71,30 +71,30 @@ public:
 
     void stopDownloads();
 
-    void saveState( QDataStream& stream );
-    void restoreState( QDataStream& stream );
+    void saveState( TQDataStream& stream );
+    void restoreState( TQDataStream& stream );
 
 signals:
     void activated( const KURL& url, ButtonState button );
     void onItem( const KURL& url );
 
 protected:
-    virtual void resizeEvent( QResizeEvent * );
+    virtual void resizeEvent( TQResizeEvent * );
 
 private slots:
     void slotLayout();
-    void slotDownloadFinished( const KURL&, const QByteArray& );
+    void slotDownloadFinished( const KURL&, const TQByteArray& );
 
 private:
     /**
      * @returns a _temporary_ pointer to a pixmap. Copy it!
      */
-    QPixmap * getPixmap( const KURL& url );
+    TQPixmap * getPixmap( const KURL& url );
 
     MrmlViewItemList m_items;
-    QTimer *m_timer;
-    QPixmapCache m_pixmapCache;
-    QPixmap m_unavailablePixmap;
+    TQTimer *m_timer;
+    TQPixmapCache m_pixmapCache;
+    TQPixmap m_unavailablePixmap;
 
 
 };
@@ -116,15 +116,15 @@ public:
                   MrmlView *view, const char *name=0L );
     virtual ~MrmlViewItem();
 
-    void setPixmap( const QPixmap& pixmap );
+    void setPixmap( const TQPixmap& pixmap );
 
-    void createRelevanceElement( QDomDocument& document, QDomElement& parent );
+    void createRelevanceElement( TQDomDocument& document, TQDomElement& parent );
 
     double similarity() const { return m_similarity; }
 
     void setSimilarity( double value );
 
-    virtual QSize sizeHint() const;
+    virtual TQSize sizeHint() const;
 
     const KURL& url() const { return m_url; }
     const KURL& thumbURL() const { return m_thumbURL; }
@@ -135,15 +135,15 @@ public:
     void setRelevance( Relevance relevance );
 
 protected:
-    virtual void paintEvent( QPaintEvent * );
-    virtual void resizeEvent( QResizeEvent * );
+    virtual void paintEvent( TQPaintEvent * );
+    virtual void resizeEvent( TQResizeEvent * );
 
-    virtual void mousePressEvent( QMouseEvent * );
-    virtual void mouseMoveEvent( QMouseEvent * );
-    virtual void mouseReleaseEvent( QMouseEvent * );
+    virtual void mousePressEvent( TQMouseEvent * );
+    virtual void mouseMoveEvent( TQMouseEvent * );
+    virtual void mouseReleaseEvent( TQMouseEvent * );
 
 private:
-    bool hitsPixmap( const QPoint& ) const;
+    bool hitsPixmap( const TQPoint& ) const;
     MrmlView * view() const { return m_view; }
 
     inline int pixmapX() const {
@@ -159,13 +159,13 @@ private:
     KURL m_url;
     KURL m_thumbURL;
 
-    QPixmap m_pixmap;
+    TQPixmap m_pixmap;
 
     double m_similarity;
     const int similarityFullWidth;
     bool m_hasRemotePixmap;
 
-    QPoint pressedPos;
+    TQPoint pressedPos;
 
     static const int spacing = 3;
     static const int margin = 5;
@@ -173,7 +173,7 @@ private:
 
 };
 
-QDataStream& operator <<( QDataStream& stream, const KMrml::MrmlViewItem& );
+TQDataStream& operator <<( TQDataStream& stream, const KMrml::MrmlViewItem& );
 
 }
 

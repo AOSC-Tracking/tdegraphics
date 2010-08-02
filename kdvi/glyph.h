@@ -3,8 +3,8 @@
 #ifndef _GLYPH_H
 #define _GLYPH_H
 
-#include <qcolor.h>
-#include <qpixmap.h>
+#include <tqcolor.h>
+#include <tqpixmap.h>
 
 
 struct bitmap {
@@ -21,7 +21,7 @@ class glyph {
   // address of bitmap in font file
   long    addr;
 
-  QColor color;
+  TQColor color;
 
   // DVI units to move reference point
   Q_INT32 dvi_advance_in_units_of_design_size_by_2e20;
@@ -29,7 +29,7 @@ class glyph {
   // x and y offset in pixels 
   short   x, y;
 
-  QPixmap shrunkenCharacter;
+  TQPixmap shrunkenCharacter;
 
   short   x2, y2;	/* x and y offset in pixels (shrunken bitmap) */
 };

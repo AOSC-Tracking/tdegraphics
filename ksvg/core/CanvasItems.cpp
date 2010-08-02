@@ -104,7 +104,7 @@ void CanvasText::handleTSpan(KSVGCanvas *canvas, const SVGMatrixImpl *screenCTM,
 				usey = int(tspan->y()->baseVal()->getItem(0)->value());
 			}
 
-			QString text = tspan->text();
+			TQString text = tspan->text();
 			if(!text.isEmpty())
 			{
 				T2P::GlyphLayoutParams *params = tspan->layoutParams();
@@ -118,7 +118,7 @@ void CanvasText::handleTSpan(KSVGCanvas *canvas, const SVGMatrixImpl *screenCTM,
 						if(bMultipleY && i < tspan->y()->baseVal()->numberOfItems())
 							usey = int(tspan->y()->baseVal()->getItem(i)->value());
 
-						textChunk->addText(QString(text.at(i)), tspan);
+						textChunk->addText(TQString(text.at(i)), tspan);
 						createGlyphs(textChunk, canvas, screenCTM, usex, usey, endx, endy, bpath);
 						textChunk->clear();
 
@@ -159,7 +159,7 @@ void CanvasText::handleTSpan(KSVGCanvas *canvas, const SVGMatrixImpl *screenCTM,
  			if(tspanFound)
 			{
 				DOM::Text text = node;
-				QString temp = text.data().string();
+				TQString temp = text.data().string();
 				textChunk->addText(temp, tspan);
 			}
 		}
@@ -199,13 +199,13 @@ KSVGTextChunk *CanvasText::createTextChunk(KSVGCanvas *canvas, const SVGMatrixIm
 			if(node.nodeType() == DOM::Node::TEXT_NODE)
 			{
 				DOM::Text text = node;
-				QString temp = text.data().string();
+				TQString temp = text.data().string();
 
 				if(!temp.isEmpty())
 				{
 					if(m_text->getTextDirection() != LTR)
 					{
-						QString convert = temp;
+						TQString convert = temp;
 
 						for(int i = temp.length(); i > 0; i--)
 							convert[temp.length() - i] = temp[i - 1];
@@ -229,7 +229,7 @@ KSVGTextChunk *CanvasText::createTextChunk(KSVGCanvas *canvas, const SVGMatrixIm
 					}
 					
 					SVGTextPathElementImpl *tpath = dynamic_cast<SVGTextPathElementImpl *>(element);
-					QString target = SVGURIReferenceImpl::getTarget(tpath->href()->baseVal().string());
+					TQString target = SVGURIReferenceImpl::getTarget(tpath->href()->baseVal().string());
 					SVGPathElementImpl *path = dynamic_cast<SVGPathElementImpl *>(tpath->ownerSVGElement()->getElementById(target));
 
 					T2P::BezierPath *bpath = 0;
@@ -242,7 +242,7 @@ KSVGTextChunk *CanvasText::createTextChunk(KSVGCanvas *canvas, const SVGMatrixIm
 						if(iterate.nodeType() == DOM::Node::TEXT_NODE)
 						{
 							DOM::Text text = iterate;
-							QString temp = text.data().string();
+							TQString temp = text.data().string();
 
 							if(!temp.isEmpty())
 								textChunk->addText(temp, tpath);
@@ -287,7 +287,7 @@ KSVGTextChunk *CanvasText::createTextChunk(KSVGCanvas *canvas, const SVGMatrixIm
 void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, const SVGMatrixImpl *screenCTM, int curx, int cury, int &endx, int &endy, T2P::BezierPath *bpath) const
 {
 	double _curx = double(curx);
-	QMemArray<double> _cury(1);
+	TQMemArray<double> _cury(1);
 	_cury[0] = double(cury);
 
 	T2P::GlyphLayoutParams *params = m_text->layoutParams();
@@ -296,8 +296,8 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 	SVGTextContentElementImpl *tc0 = tc;
 
 	T2P::SharedFont font;
-	QString text;
-	QPtrList<T2P::GlyphSet> glyphs;
+	TQString text;
+	TQPtrList<T2P::GlyphSet> glyphs;
 	glyphs.setAutoDelete(true);
 
 	double pathAdvance = 0;
@@ -323,7 +323,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 
 		text = textChunk->getText(i);
 		if(i != textChunk->count() - 1)
-			text += QChar(' ');
+			text += TQChar(' ');
 
 		if(!canvas->fontContext()->ready())
 			canvas->fontContext()->init();
@@ -380,7 +380,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 				params->setTextPathStartOffset(pathAdvance);
 				if(tp && tp->dy()->baseVal()->numberOfItems() > 0)
 					pathDy += tp->dy()->baseVal()->getItem(0)->value();
-				QString shift = QString("%1%%").arg((pathDy / font->fontParams()->size()) * -100.0);
+				TQString shift = TQString("%1%%").arg((pathDy / font->fontParams()->size()) * -100.0);
 				params->setBaselineShift(shift.latin1());
 			}
 
@@ -484,7 +484,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 
 // #####
 
-void MarkerHelper::doMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle, const QString &markerId)
+void MarkerHelper::doMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle, const TQString &markerId)
 {
 	SVGMarkerElementImpl *marker = dynamic_cast<SVGMarkerElementImpl *>(shape->ownerSVGElement()->getElementById(markerId));
 	if(marker)

@@ -20,12 +20,12 @@
 #ifndef _KSCANOPTION_H_
 #define _KSCANOPTION_H_
 
-#include <qwidget.h>
-#include <qdict.h>
-#include <qobject.h>
-#include <qstrlist.h>
-#include <qsocketnotifier.h>
-#include <qdatastream.h>
+#include <tqwidget.h>
+#include <tqdict.h>
+#include <tqobject.h>
+#include <tqstrlist.h>
+#include <tqsocketnotifier.h>
+#include <tqdatastream.h>
 
 extern "C" {
 #include <sane/sane.h>
@@ -67,7 +67,7 @@ public:
    * option is valid and contains the correct value retrieved from the
    * scanner.
    **/
-  KScanOption( const QCString& new_name );
+  KScanOption( const TQCString& new_name );
 
   /**
    * creates a KScanOption from another
@@ -122,7 +122,7 @@ public:
   bool set( int val );
   bool set( double val );
   bool set( int *p_val, int size );
-  bool set( const QCString& );
+  bool set( const TQCString& );
   bool set( bool b ){ if( b ) return(set( (int)(1==1) )); else return( set( (int) (1==0) )); }
   bool set( KGammaTable  *gt );
 
@@ -131,7 +131,7 @@ public:
     **/
   bool get( int* ) const;
   bool get( KGammaTable* ) const;
-  QCString get( void ) const;
+  TQCString get( void ) const;
 
    /**
     * This function creates a widget for the scanner option depending
@@ -148,24 +148,24 @@ public:
     *
     **/
 
-  QWidget *createWidget( QWidget *parent,
-			 const QString& w_desc = QString::null,
-			 const QString& tooltip = QString::null );
+  TQWidget *createWidget( TQWidget *parent,
+			 const TQString& w_desc = TQString::null,
+			 const TQString& tooltip = TQString::null );
 
   /* Operators */
   const KScanOption& operator= (const KScanOption& so );
 
-   const QString configLine( void );
+   const TQString configLine( void );
 
    
   // Possible Values
-  QStrList    getList() const;
+  TQStrList    getList() const;
   bool        getRangeFromList( double*, double*, double* ) const;
   bool        getRange( double*, double*, double* ) const;
 
-  QCString    getName() const { return( name ); }
+  TQCString    getName() const { return( name ); }
   void *      getBuffer() const { return( buffer ); }
-  QWidget     *widget( ) const { return( internal_widget ); }
+  TQWidget     *widget( ) const { return( internal_widget ); }
   /**
    *  returns the type of the selected option.
    *  This might be SINGLE_VAL, VAL_LIST, STR_LIST, GAMMA_TABLE,
@@ -185,7 +185,7 @@ public:
 
    ### not implemented at all?
    **/
-  KSANE_Type typeToSet( const QCString& name );
+  KSANE_Type typeToSet( const TQCString& name );
 
   /**
    *  returns a string describing the unit of given the option.
@@ -194,7 +194,7 @@ public:
 
    ###  not implemented at all?
    **/
-  QString unitOf( const QCString& name );
+  TQString unitOf( const TQCString& name );
 
 public slots:
   void       slRedrawWidget( KScanOption *so );
@@ -210,7 +210,7 @@ protected slots:
    *  This is an internal slot.
    **/
   void		  slWidgetChange( void );
-  void		  slWidgetChange( const QCString& );
+  void		  slWidgetChange( const TQCString& );
   void		  slWidgetChange( int );
 	
   signals:
@@ -234,17 +234,17 @@ protected slots:
 
 private:
   bool       applyVal( void );
-  bool       initOption( const QCString& new_name );
+  bool       initOption( const TQCString& new_name );
   void       *allocBuffer( long );
 
-  QWidget    *entryField ( QWidget *parent, const QString& text );
-  QWidget    *KSaneSlider( QWidget *parent, const QString& text );
-  QWidget    *comboBox   ( QWidget *parent, const QString& text );
+  TQWidget    *entryField ( TQWidget *parent, const TQString& text );
+  TQWidget    *KSaneSlider( TQWidget *parent, const TQString& text );
+  TQWidget    *comboBox   ( TQWidget *parent, const TQString& text );
 	
   const      SANE_Option_Descriptor *desc;
-  QCString    name;
+  TQCString    name;
   void       *buffer;
-  QWidget    *internal_widget;
+  TQWidget    *internal_widget;
   bool       buffer_untouched;
   size_t     buffer_size;
 

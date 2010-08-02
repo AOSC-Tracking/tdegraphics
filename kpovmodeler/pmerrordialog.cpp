@@ -20,24 +20,24 @@
 #include "pmerrorflags.h"
 
 #include <klocale.h>
-#include <qlabel.h>
-#include <qtextedit.h>
+#include <tqlabel.h>
+#include <tqtextedit.h>
 
 #include <kconfig.h>
 
 
-QSize PMErrorDialog::s_size = QSize( 150, 200 );
+TQSize PMErrorDialog::s_size = TQSize( 150, 200 );
 
 PMErrorDialog::PMErrorDialog( const PMMessageList& messages, int errorFlags,
-                              QWidget* parent, const char* name )
+                              TQWidget* parent, const char* name )
       : KDialogBase( parent, name, true, i18n( "Messages" ),
                      Ok | Cancel, Cancel )
 {
-   QVBox* page = makeVBoxMainWidget( );
-   QLabel* text = new QLabel( QString( "" ), ( QWidget* )page );
+   TQVBox* page = makeVBoxMainWidget( );
+   TQLabel* text = new TQLabel( TQString( "" ), ( TQWidget* )page );
 
    
-   m_pTextView = new QTextEdit( ( QWidget* )page );
+   m_pTextView = new TQTextEdit( ( TQWidget* )page );
    m_pTextView->setReadOnly( true );
 
    m_messageDict.setAutoDelete( true );
@@ -47,16 +47,16 @@ PMErrorDialog::PMErrorDialog( const PMMessageList& messages, int errorFlags,
    for( it = messages.begin( ); it != messages.end( ); ++it )
       m_messages.append( new PMMessage( *it ) );
 
-   QPtrListIterator<PMMessage> pit( m_messages );
+   TQPtrListIterator<PMMessage> pit( m_messages );
    for( ; pit.current( ); ++pit )
    {
       PMObject* obj = pit.current( )->linkedObject( );
       for( ; obj; obj = obj->parent( ) )
       {
-         QPtrList<PMMessage>* pList = m_messageDict.find( obj );
+         TQPtrList<PMMessage>* pList = m_messageDict.find( obj );
          if( !pList )
          {
-            pList = new QPtrList<PMMessage>;
+            pList = new TQPtrList<PMMessage>;
             m_messageDict.insert( obj, pList );
          }
          pList->append( pit.current( ) );
@@ -95,15 +95,15 @@ PMErrorDialog::PMErrorDialog( const PMMessageList& messages, int errorFlags,
    if( errorFlags & PMEFatal )
       showButtonOK( false );
    else
-      new QLabel( i18n( "Still try to proceed?" ), ( QWidget* )page );
+      new TQLabel( i18n( "Still try to proceed?" ), ( TQWidget* )page );
 
    resize( s_size );
 }
 
 void PMErrorDialog::displayMessages( )
 {
-   QPtrListIterator<PMMessage> pit( m_messages );
-   QString text;
+   TQPtrListIterator<PMMessage> pit( m_messages );
+   TQString text;
 
    text = "<qt>\n";
    
@@ -125,11 +125,11 @@ void PMErrorDialog::restoreConfig( KConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
-   QSize defaultSize( 150, 200 );
+   TQSize defaultSize( 150, 200 );
    s_size = cfg->readSizeEntry( "ErrorDialogSize", &defaultSize );
 }
 
-void PMErrorDialog::resizeEvent( QResizeEvent* ev )
+void PMErrorDialog::resizeEvent( TQResizeEvent* ev )
 {
    s_size = ev->size( );
 }

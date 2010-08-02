@@ -30,25 +30,25 @@
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 
-#include <qlayout.h>
-#include <qprogressbar.h>
-#include <qlabel.h>
-#include <qscrollview.h>
-#include <qtimer.h>
-#include <qapplication.h>
+#include <tqlayout.h>
+#include <tqprogressbar.h>
+#include <tqlabel.h>
+#include <tqscrollview.h>
+#include <tqtimer.h>
+#include <tqapplication.h>
 
 const int timerIntervall = 1000;
 bool PMPovrayWidget::s_imageFormatsRegistered = false;
 
-PMPovrayWidget::PMPovrayWidget( QWidget* parent, const char* name )
+PMPovrayWidget::PMPovrayWidget( TQWidget* parent, const char* name )
       : KDialog( parent, name )
 {
-   QVBoxLayout* topLayout = new QVBoxLayout( this, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   TQVBoxLayout* topLayout = new TQVBoxLayout( this, KDialog::marginHint( ), KDialog::spacingHint( ) );
    topLayout->addStretch( );
 
-   QHBoxLayout* renderLayout = new QHBoxLayout( );
+   TQHBoxLayout* renderLayout = new TQHBoxLayout( );
    topLayout->addLayout( renderLayout, 2 );
-   m_pScrollView = new QScrollView( this );
+   m_pScrollView = new TQScrollView( this );
    m_pScrollView->setBackgroundMode( PaletteBase );
    renderLayout->addWidget( m_pScrollView, 2 );
    m_pRenderWidget = new PMPovrayRenderWidget( m_pScrollView->viewport( ) );
@@ -56,54 +56,54 @@ PMPovrayWidget::PMPovrayWidget( QWidget* parent, const char* name )
    m_pScrollView->addChild( m_pRenderWidget );
    topLayout->addStretch( );
 
-   QHBoxLayout* progressLayout = new QHBoxLayout( topLayout );
-   m_pProgressBar = new QProgressBar( this );
+   TQHBoxLayout* progressLayout = new TQHBoxLayout( topLayout );
+   m_pProgressBar = new TQProgressBar( this );
    m_pProgressBar->hide( );
    progressLayout->addWidget( m_pProgressBar, 1 );
-   m_pProgressLabel = new QLabel( this );
+   m_pProgressLabel = new TQLabel( this );
    progressLayout->addWidget( m_pProgressLabel, 2 );
 
-   QHBoxLayout* buttonLayout = new QHBoxLayout( topLayout );
-   m_pStopButton = new QPushButton( i18n( "Stop" ), this );
+   TQHBoxLayout* buttonLayout = new TQHBoxLayout( topLayout );
+   m_pStopButton = new TQPushButton( i18n( "Stop" ), this );
    m_pStopButton->setEnabled( false );
    buttonLayout->addWidget( m_pStopButton );
-   m_pSuspendButton = new QPushButton( i18n( "Suspend" ), this );
+   m_pSuspendButton = new TQPushButton( i18n( "Suspend" ), this );
    m_pSuspendButton->setEnabled( false );
    buttonLayout->addWidget( m_pSuspendButton );
-   m_pResumeButton = new QPushButton( i18n( "Resume" ), this );
+   m_pResumeButton = new TQPushButton( i18n( "Resume" ), this );
    m_pResumeButton->setEnabled( false );
    buttonLayout->addWidget( m_pResumeButton );
    buttonLayout->addStretch( 1 );
-   m_pPovrayOutputButton = new QPushButton( i18n( "Povray Output" ), this );
+   m_pPovrayOutputButton = new TQPushButton( i18n( "Povray Output" ), this );
    buttonLayout->addWidget( m_pPovrayOutputButton );
 
-   buttonLayout = new QHBoxLayout( topLayout );
+   buttonLayout = new TQHBoxLayout( topLayout );
    m_pSaveButton = new KPushButton( KStdGuiItem::saveAs(), this );
    m_pSaveButton->setEnabled( false );
    buttonLayout->addWidget( m_pSaveButton );
    buttonLayout->addStretch( 1 );
-   QPushButton* closeButton = new KPushButton( KStdGuiItem::close(), this );
+   TQPushButton* closeButton = new KPushButton( KStdGuiItem::close(), this );
    buttonLayout->addWidget( closeButton );
 
-   connect( m_pRenderWidget, SIGNAL( finished( int ) ),
-            SLOT( slotRenderingFinished( int ) ) );
-   connect( m_pRenderWidget, SIGNAL( progress( int ) ),
-            SLOT( slotProgress( int ) ) );
-   connect( m_pRenderWidget, SIGNAL( lineFinished( int ) ),
-            SLOT( slotLineFinished( int ) ) );
+   connect( m_pRenderWidget, TQT_SIGNAL( finished( int ) ),
+            TQT_SLOT( slotRenderingFinished( int ) ) );
+   connect( m_pRenderWidget, TQT_SIGNAL( progress( int ) ),
+            TQT_SLOT( slotProgress( int ) ) );
+   connect( m_pRenderWidget, TQT_SIGNAL( lineFinished( int ) ),
+            TQT_SLOT( slotLineFinished( int ) ) );
 
-   connect( m_pStopButton, SIGNAL( clicked( ) ), SLOT( slotStop( ) ) );
-   connect( m_pSuspendButton, SIGNAL( clicked( ) ), SLOT( slotSuspend( ) ) );
-   connect( m_pResumeButton, SIGNAL( clicked( ) ), SLOT( slotResume( ) ) );
-   connect( m_pSaveButton, SIGNAL( clicked( ) ), SLOT( slotSave( ) ) );
-   connect( closeButton, SIGNAL( clicked( ) ), SLOT( slotClose( ) ) );
-   connect( m_pPovrayOutputButton, SIGNAL( clicked( ) ),
-            SLOT( slotPovrayOutput( ) ) );
+   connect( m_pStopButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotStop( ) ) );
+   connect( m_pSuspendButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSuspend( ) ) );
+   connect( m_pResumeButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotResume( ) ) );
+   connect( m_pSaveButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSave( ) ) );
+   connect( closeButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotClose( ) ) );
+   connect( m_pPovrayOutputButton, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotPovrayOutput( ) ) );
 
    m_bRunning = false;
-   m_pProgressTimer = new QTimer( this );
-   connect( m_pProgressTimer, SIGNAL( timeout( ) ),
-            SLOT( slotUpdateSpeed( ) ) );
+   m_pProgressTimer = new TQTimer( this );
+   connect( m_pProgressTimer, TQT_SIGNAL( timeout( ) ),
+            TQT_SLOT( slotUpdateSpeed( ) ) );
 
    setCaption( i18n( "Render Window" ) );
 
@@ -111,8 +111,8 @@ PMPovrayWidget::PMPovrayWidget( QWidget* parent, const char* name )
    m_stopped = false;
 
    m_pPovrayOutputWidget = new PMPovrayOutputWidget( );
-   connect( m_pRenderWidget, SIGNAL( povrayMessage( const QString& ) ),
-            m_pPovrayOutputWidget, SLOT( slotText( const QString& ) ) );
+   connect( m_pRenderWidget, TQT_SIGNAL( povrayMessage( const TQString& ) ),
+            m_pPovrayOutputWidget, TQT_SLOT( slotText( const TQString& ) ) );
 }
 
 PMPovrayWidget::~PMPovrayWidget( )
@@ -120,7 +120,7 @@ PMPovrayWidget::~PMPovrayWidget( )
    delete m_pPovrayOutputWidget;
 }
 
-bool PMPovrayWidget::render( const QByteArray& scene, const PMRenderMode& m,
+bool PMPovrayWidget::render( const TQByteArray& scene, const PMRenderMode& m,
                              const KURL& documentURL )
 {
    bool updateSize = ( m_height != m.height( ) ) || ( m_width != m.width( ) );
@@ -131,7 +131,7 @@ bool PMPovrayWidget::render( const QByteArray& scene, const PMRenderMode& m,
    m_stopped = false;
 
    m_pRenderWidget->setFixedSize( m_width, m_height );
-   QSize maxSize( m_width + m_pScrollView->frameWidth( ) * 2,
+   TQSize maxSize( m_width + m_pScrollView->frameWidth( ) * 2,
                   m_height + m_pScrollView->frameWidth( ) * 2 );
    m_pScrollView->setMaximumSize( maxSize );
 
@@ -152,13 +152,13 @@ bool PMPovrayWidget::render( const QByteArray& scene, const PMRenderMode& m,
       h += 16;
 
 #if ( ( KDE_VERSION_MAJOR == 3 ) && ( KDE_VERSION_MINOR <= 1 ) )
-      QWidget* dw = QApplication::desktop( );
+      TQWidget* dw = TQApplication::desktop( );
       if( w > dw->width( ) )
          w = dw->width( );
       if( h > dw->height( ) )
          h = dw->height( );
 #else
-      QRect dw = KGlobalSettings::desktopGeometry(this);
+      TQRect dw = KGlobalSettings::desktopGeometry(this);
       if( w > dw.width() )
          w = dw.width();
       if( h > dw.height() )
@@ -178,7 +178,7 @@ bool PMPovrayWidget::render( const QByteArray& scene, const PMRenderMode& m,
       m_pResumeButton->setEnabled( false );
       m_pSaveButton->setEnabled( false );
 
-      m_lastSpeedTime = QTime( );
+      m_lastSpeedTime = TQTime( );
       m_pProgressTimer->start( timerIntervall, true );
       m_speedInfo = false;
       m_speed = 0;
@@ -205,7 +205,7 @@ void PMPovrayWidget::slotSuspend( )
    m_pSaveButton->setEnabled( true );
 
    m_pProgressTimer->stop( );
-   m_lastSpeedTime = QTime( );
+   m_lastSpeedTime = TQTime( );
    m_speedInfo = false;
    m_immediateUpdate = false;
    m_pProgressLabel->setText( i18n( "suspended" ) );
@@ -230,7 +230,7 @@ void PMPovrayWidget::slotClose( )
 void PMPovrayWidget::slotSave( )
 {
    KTempFile* tempFile = 0;
-   QFile* file = 0;
+   TQFile* file = 0;
    bool ok = true;
 
    if( !s_imageFormatsRegistered )
@@ -239,7 +239,7 @@ void PMPovrayWidget::slotSave( )
       s_imageFormatsRegistered = true;
    }
 
-   KURL url = KFileDialog::getSaveURL( QString::null, KImageIO::pattern( KImageIO::Writing ) );
+   KURL url = KFileDialog::getSaveURL( TQString::null, KImageIO::pattern( KImageIO::Writing ) );
    if( url.isEmpty( ) )
       return;
    if( !PMShell::overwriteURL( url ) )
@@ -251,7 +251,7 @@ void PMPovrayWidget::slotSave( )
       return;
    }
 
-   QString format = KImageIO::type( url.fileName( ) );
+   TQString format = KImageIO::type( url.fileName( ) );
    if( format.isEmpty( ) )
    {
       KMessageBox::error( this, i18n( "Unknown image format.\n"
@@ -268,7 +268,7 @@ void PMPovrayWidget::slotSave( )
    if( url.isLocalFile( ) )
    {
       // Local file
-      file = new QFile( url.path( ) );
+      file = new TQFile( url.path( ) );
       if( !file->open( IO_WriteOnly ) )
          ok = false;
    }
@@ -285,7 +285,7 @@ void PMPovrayWidget::slotSave( )
 
    if( ok )
    {
-      QImageIO iio( file, format.latin1( ) );
+      TQImageIO iio( file, format.latin1( ) );
       iio.setImage( m_pRenderWidget->image( ) );
       ok = iio.write( );
 
@@ -352,7 +352,7 @@ void PMPovrayWidget::slotProgress( int i )
 void PMPovrayWidget::slotLineFinished( int line )
 {
    m_speedInfo = true;
-   QTime ct = QTime::currentTime( );
+   TQTime ct = TQTime::currentTime( );
 
    if( !m_lastSpeedTime.isNull( ) )
    {
@@ -391,7 +391,7 @@ void PMPovrayWidget::slotUpdateSpeed( )
 
 void PMPovrayWidget::showSpeed( double pps )
 {
-   QString num;
+   TQString num;
    if( pps >= 1000000 )
    {
       num.setNum( pps / 100000, 'g', 3 );

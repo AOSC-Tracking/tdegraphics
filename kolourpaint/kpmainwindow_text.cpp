@@ -50,22 +50,22 @@ void kpMainWindow::setupTextToolBarActions ()
     KActionCollection *ac = actionCollection ();
 
     m_actionTextFontFamily = new KFontAction (i18n ("Font Family"), 0/*shortcut*/,
-        this, SLOT (slotTextFontFamilyChanged ()), ac, "text_font_family");
+        this, TQT_SLOT (slotTextFontFamilyChanged ()), ac, "text_font_family");
     m_actionTextFontSize = new KFontSizeAction (i18n ("Font Size"), 0/*shortcut*/,
-        this, SLOT (slotTextFontSizeChanged ()), ac, "text_font_size");
+        this, TQT_SLOT (slotTextFontSizeChanged ()), ac, "text_font_size");
 
     m_actionTextBold = new KToggleAction (i18n ("Bold"),
         "text_bold"/*icon*/, 0/*shortcut*/,
-        this, SLOT (slotTextBoldChanged ()), ac, "text_bold");
+        this, TQT_SLOT (slotTextBoldChanged ()), ac, "text_bold");
     m_actionTextItalic = new KToggleAction (i18n ("Italic"),
         "text_italic"/*icon*/, 0/*shortcut*/,
-        this, SLOT (slotTextItalicChanged ()), ac, "text_italic");
+        this, TQT_SLOT (slotTextItalicChanged ()), ac, "text_italic");
     m_actionTextUnderline = new KToggleAction (i18n ("Underline"),
         "text_under"/*icon*/, 0/*shortcut*/,
-        this, SLOT (slotTextUnderlineChanged ()), ac, "text_underline");
+        this, TQT_SLOT (slotTextUnderlineChanged ()), ac, "text_underline");
     m_actionTextStrikeThru = new KToggleAction (i18n ("Strike Through"),
         "text_strike"/*icon*/, 0/*shortcut*/,
-        this, SLOT (slotTextStrikeThruChanged ()), ac, "text_strike_thru");
+        this, TQT_SLOT (slotTextStrikeThruChanged ()), ac, "text_strike_thru");
 
 
     readAndApplyTextSettings ();
@@ -80,7 +80,7 @@ void kpMainWindow::readAndApplyTextSettings ()
     KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupText);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
-    m_actionTextFontFamily->setFont (cfg->readEntry (kpSettingFontFamily, QString::fromLatin1 ("Times")));
+    m_actionTextFontFamily->setFont (cfg->readEntry (kpSettingFontFamily, TQString::fromLatin1 ("Times")));
     m_actionTextFontSize->setFontSize (cfg->readNumEntry (kpSettingFontSize, 14));
     m_actionTextBold->setChecked (cfg->readBoolEntry (kpSettingBold, false));
     m_actionTextItalic->setChecked (cfg->readBoolEntry (kpSettingItalic, false));

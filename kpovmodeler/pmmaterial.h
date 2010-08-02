@@ -49,7 +49,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMMaterial( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -59,9 +59,9 @@ public:
    /**
     * Returns a new @ref PMMaterialEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
-   virtual QString pixmap( ) const { return QString( "pmmaterial" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmmaterial" ); }
 
 private:
    /**

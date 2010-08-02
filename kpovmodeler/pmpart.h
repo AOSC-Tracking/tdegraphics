@@ -30,9 +30,9 @@
 #include <kurl.h>
 #include <kparts/part.h>
 #include <kparts/browserextension.h>
-#include <qstringlist.h>
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqstringlist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 #include <kglobal.h>
 #include <klocale.h>
 
@@ -56,7 +56,7 @@ class PMPrototypeManager;
 class PMInsertRuleSystem;
 class PMIOManager;
 
-class QMimeSource;
+class TQMimeSource;
 class KAction;
 class KSelectAction;
 class PMComboAction;
@@ -75,16 +75,16 @@ public:
     * construtor of PMPart, calls all init functions to create the
     * application.
     */
-   PMPart( QWidget* parentWidget, const char* widgetName,
-           QObject* parent, const char* name, bool readWrite,
+   PMPart( TQWidget* parentWidget, const char* widgetName,
+           TQObject* parent, const char* name, bool readWrite,
            PMShell* shell = 0 );
 
    /**
     * construtor of PMPart, calls all init functions to create the
     * application. It does not create the main widget.
     */
-   PMPart( QWidget* parentWidget, const char* widgetName,
-           QObject* parent, const char* name, bool readWrite,
+   PMPart( TQWidget* parentWidget, const char* widgetName,
+           TQObject* parent, const char* name, bool readWrite,
            bool onlyCutPaste, PMShell* shell = 0 );
 
    /**
@@ -157,7 +157,7 @@ public:
     *
     * Returns PMIFirstChild, PMILastChild, PMISibling or 0, if the objects
     * should not be inserted.*/
-   int whereToInsert( PMObject* obj, const QStringList& list );
+   int whereToInsert( PMObject* obj, const TQStringList& list );
    /**
     * Asks the user, where to insert new objects.
     *
@@ -176,7 +176,7 @@ public:
    /**
     * Returns an iterator to the list of cameras
     */
-   QPtrListIterator<PMCamera> cameras( );
+   TQPtrListIterator<PMCamera> cameras( );
    /**
     * The active object
     */
@@ -184,31 +184,31 @@ public:
    /**
     * The active object's name
     */
-   virtual QString activeObjectName( );
+   virtual TQString activeObjectName( );
    /**
     * Set the active object
     */
-   virtual bool setActiveObject( const QString& name );
+   virtual bool setActiveObject( const TQString& name );
    /**
     * Get the valid properties of the currently active object
     */
-   virtual QStringList getProperties( );
+   virtual TQStringList getProperties( );
    /**
     * set a property on the active object
     */
-   virtual bool setProperty( const QString& name, const PMVariant& value );
+   virtual bool setProperty( const TQString& name, const PMVariant& value );
    /**
     * set a property on the active object
     */
-   virtual bool setProperty( const QString& name, const QString& value );
+   virtual bool setProperty( const TQString& name, const TQString& value );
    /**
     * get a property on the active object
     */
-   virtual const PMVariant getProperty( const QString& name );
+   virtual const PMVariant getProperty( const TQString& name );
    /**
     * get a property on the active object
     */
-   virtual const QString getPropertyStr( const QString& name );
+   virtual const TQString getPropertyStr( const TQString& name );
    /**
     * List of control points of the active object
     */
@@ -226,14 +226,14 @@ public:
     *
     * Returns true if successful.
     */
-   bool drop( PMObject* obj, QMimeSource* e );
+   bool drop( PMObject* obj, TQMimeSource* e );
    /**
     * Tries to parse the data and insert the parsed objects
     * as child or siblings of object obj
     *
     * Type is the actions description for the undo/redo menu.
     */
-   bool insertFromParser( const QString& type, PMParser* parser, PMObject* obj );
+   bool insertFromParser( const TQString& type, PMParser* parser, PMObject* obj );
 
    /**
     * Returns a pointer to the prototype manager
@@ -287,16 +287,16 @@ public slots:
     * Called when an object is changed.
     * Mode is a bit combination of @ref PMChange constants
     */
-   void slotObjectChanged( PMObject* obj, const int mode, QObject* sender );
+   void slotObjectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Called when an id is changed
     */
-   void slotIDChanged( PMObject* obj, const QString& oldID );
+   void slotIDChanged( PMObject* obj, const TQString& oldID );
 
    /**
     * Inserts a new PMObject of type type
     */
-   void slotNewObject( const QString& type );
+   void slotNewObject( const TQString& type );
    /**
     * Inserts a new PMObject of type type at position pos.
     * pos can be one of:
@@ -304,7 +304,7 @@ public slots:
     *     LastChild
     *     Sibling
     */
-   void slotNewObject( const QString& type, const QString& pos );
+   void slotNewObject( const TQString& type, const TQString& pos );
    /**
     * Inserts the new PMObject. The object will be deleted if it can't be
     * inserted or the user aborts the action
@@ -314,7 +314,7 @@ public slots:
    /**
     * List the known object types
     */
-   virtual QStringList getObjectTypes( );
+   virtual TQStringList getObjectTypes( );
 
    /**
     * Adds transformations to the object and calls slotNewObject
@@ -654,7 +654,7 @@ public slots:
    /**
     * updates the undo/redo menu items
     */
-   void slotUpdateUndoRedo( const QString& undo, const QString& redo );
+   void slotUpdateUndoRedo( const TQString& undo, const TQString& redo );
 
    /**
     * Starts rendering with povray
@@ -712,7 +712,7 @@ signals:
     * Signal that is emitted when an object is changed.
     * Mode is a bit combination of @ref PMChange constants.
     */
-   void objectChanged( PMObject* obj, const int mode, QObject* sender );
+   void objectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Signal that is emitted when the views have to be refreshed.
     * Usually on newDocument or openDocument
@@ -729,7 +729,7 @@ signals:
    /**
     * Emitted when the mouse is over a control point
     */
-   void controlPointMessage( const QString& msg );
+   void controlPointMessage( const TQString& msg );
    /**
     * Emitted when the active render mode has changed
     */
@@ -770,7 +770,7 @@ protected:
     * creates the widget of the part instance and sets
     * it as the view
     */
-   void initView( QWidget* parent, const char* name );
+   void initView( TQWidget* parent, const char* name );
    /**
     * initializes the documents contents
     */
@@ -796,7 +796,7 @@ private:
     *
     * Returns the number.
     */
-   unsigned int findNewID( const QString& prefix, unsigned int firstNumber,
+   unsigned int findNewID( const TQString& prefix, unsigned int firstNumber,
                            PMDeclare* obj );
    /**
     * Updates the list of cameras
@@ -806,11 +806,11 @@ private:
    /**
     * Generic drop/paste function
     */
-   bool pasteOrDrop( const QString& type, QMimeSource* mime, PMObject* obj );
+   bool pasteOrDrop( const TQString& type, TQMimeSource* mime, PMObject* obj );
    /**
     * Generic cut/delete/remove function
     */
-   bool removeSelection( const QString& type );
+   bool removeSelection( const TQString& type );
    /**
     * Updates the render mode combo action
     */
@@ -851,7 +851,7 @@ private:
    /**
     * List of all cameras
     */
-   QPtrList<PMCamera> m_cameras;
+   TQPtrList<PMCamera> m_cameras;
    /**
     * true if the m_cameras list is up to date
     */
@@ -879,7 +879,7 @@ private:
    /**
     * Details of insert errors
     */
-   QStringList m_insertErrorDetails;
+   TQStringList m_insertErrorDetails;
    /**
     * The symbol table for this document
     */
@@ -1015,7 +1015,7 @@ private:
    KSelectAction* m_pGlobalDetailAction;
    PMLabelAction* m_pGlobalDetailLabelAction;
 
-   QPtrList<KAction> m_readWriteActions;
+   TQPtrList<KAction> m_readWriteActions;
 
    PMPrototypeManager* m_pPrototypeManager;
    PMInsertRuleSystem* m_pInsertRuleSystem;

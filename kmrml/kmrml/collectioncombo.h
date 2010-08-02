@@ -31,7 +31,7 @@ namespace KMrml
         Q_OBJECT
 
     public:
-        CollectionCombo( QWidget *parent, const char *name = 0 );
+        CollectionCombo( TQWidget *parent, const char *name = 0 );
         ~CollectionCombo();
 
         void setCollections( const CollectionList * collections );
@@ -43,14 +43,14 @@ namespace KMrml
         void selected( const Collection& );
 
     private slots:
-        void slotActivated( const QString& );
+        void slotActivated( const TQString& );
 
     private:
         const CollectionList *m_collections;
     };
 
-    QDataStream& operator<<( QDataStream& stream, const CollectionCombo& );
-    QDataStream& operator>>( QDataStream& stream, CollectionCombo& );
+    TQDataStream& operator<<( TQDataStream& stream, const CollectionCombo& );
+    TQDataStream& operator>>( TQDataStream& stream, CollectionCombo& );
 
 }
 

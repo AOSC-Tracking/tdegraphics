@@ -16,8 +16,8 @@
 #include <klineedit.h>
 #include <klocale.h>
 #include <kurllabel.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
 
 #include "optionDialogSpecialWidget.h"
 #include "prefs.h"
@@ -25,7 +25,7 @@
 
 // Constructs a optionDialogWidget_base which is a child of 'parent', with
 // the name 'name' and widget flags set to 'f'.
-optionDialogSpecialWidget::optionDialogSpecialWidget( QWidget* parent,  const char* name, WFlags fl )
+optionDialogSpecialWidget::optionDialogSpecialWidget( TQWidget* parent,  const char* name, WFlags fl )
     : optionDialogSpecialWidget_base( parent,  name, fl )
 {
   // Set up the list of known and supported editors
@@ -64,7 +64,7 @@ optionDialogSpecialWidget::optionDialogSpecialWidget( QWidget* parent,  const ch
   // not recognized, switch to "User defined editor". That way, kdvi
   // stays compatible even if the EditorCommands[] change between
   // different versions of kdvi.
-  QString currentEditorCommand = Prefs::editorCommand();
+  TQString currentEditorCommand = Prefs::editorCommand();
   int i;
   for(i = editorCommandString.count()-1; i>0; i--)
     if (editorCommandString[i] == currentEditorCommand)
@@ -73,28 +73,28 @@ optionDialogSpecialWidget::optionDialogSpecialWidget( QWidget* parent,  const ch
     usersEditorCommand = currentEditorCommand;
   slotComboBox(i);
 
-  connect(urll, SIGNAL(leftClickedURL(const QString&)), this, SLOT(slotExtraHelpButton(const QString&)));
-  connect(editorChoice, SIGNAL( activated( int ) ), this, SLOT( slotComboBox( int ) ) );
+  connect(urll, TQT_SIGNAL(leftClickedURL(const TQString&)), this, TQT_SLOT(slotExtraHelpButton(const TQString&)));
+  connect(editorChoice, TQT_SIGNAL( activated( int ) ), this, TQT_SLOT( slotComboBox( int ) ) );
 
   // Editor description strings (and their translations) vary in
   // size. Find the longest description string available to make sure
   // that the page is always large enough.
   int maximumWidth = 0;
-  for ( QStringList::Iterator it = editorDescriptionString.begin(); it != editorDescriptionString.end(); ++it ) {
+  for ( TQStringList::Iterator it = editorDescriptionString.begin(); it != editorDescriptionString.end(); ++it ) {
     int width = editorDescription->fontMetrics().width(*it);
     if (width > maximumWidth)
       maximumWidth = width;
   }
   editorDescription->setMinimumWidth(maximumWidth+10);
 
-  connect(kcfg_EditorCommand, SIGNAL( textChanged (const QString &) ), this, SLOT( slotUserDefdEditorCommand( const QString & ) ) );
+  connect(kcfg_EditorCommand, TQT_SIGNAL( textChanged (const TQString &) ), this, TQT_SLOT( slotUserDefdEditorCommand( const TQString & ) ) );
 }
 
 optionDialogSpecialWidget::~optionDialogSpecialWidget()
 {
 }
 
-void optionDialogSpecialWidget::slotUserDefdEditorCommand( const QString &text )
+void optionDialogSpecialWidget::slotUserDefdEditorCommand( const TQString &text )
 {
   if (isUserDefdEditor == true)
     EditorCommand = usersEditorCommand = text;
@@ -121,7 +121,7 @@ void optionDialogSpecialWidget::slotComboBox(int item)
   }
 }
 
-void optionDialogSpecialWidget::slotExtraHelpButton( const QString & )
+void optionDialogSpecialWidget::slotExtraHelpButton( const TQString & )
 {
   kapp->invokeHelp( "inv-search", "kdvi" );
 }

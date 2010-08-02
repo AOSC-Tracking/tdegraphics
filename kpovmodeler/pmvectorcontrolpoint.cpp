@@ -21,7 +21,7 @@
 
 PMVectorControlPoint::PMVectorControlPoint( PMControlPoint* base,
                                             const PMVector& v, int id,
-                                            const QString& description,
+                                            const TQString& description,
                                             bool extraLine, bool normalize )
       : PMControlPoint( id, description )
 {
@@ -33,7 +33,7 @@ PMVectorControlPoint::PMVectorControlPoint( PMControlPoint* base,
 
 PMVectorControlPoint::PMVectorControlPoint( const PMVector& base,
                                             const PMVector& v, int id,
-                                            const QString& description,
+                                            const TQString& description,
                                             bool extraLine, bool normalize )
       : PMControlPoint( id, description )
 {

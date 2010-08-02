@@ -20,16 +20,16 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 */
-#include <qlayout.h>
-#include <qwidgetstack.h>
-#include <qvbuttongroup.h>
-#include <qvgroupbox.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qradiobutton.h>
-#include <qwhatsthis.h>
-#include <qlabel.h>
-#include <qgrid.h>
+#include <tqlayout.h>
+#include <tqwidgetstack.h>
+#include <tqvbuttongroup.h>
+#include <tqvgroupbox.h>
+#include <tqcombobox.h>
+#include <tqlineedit.h>
+#include <tqradiobutton.h>
+#include <tqwhatsthis.h>
+#include <tqlabel.h>
+#include <tqgrid.h>
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -54,7 +54,7 @@ static const int INDEX_SERIAL = 1;
 static const int INDEX_USB= 3;
 static GPContext *glob_context = 0;
 
-KCamera::KCamera(const QString &name, const QString &path)
+KCamera::KCamera(const TQString &name, const TQString &path)
 {
 	m_name	= name;
 	m_model	= name;
@@ -143,7 +143,7 @@ Camera* KCamera::camera()
 	return m_camera;
 }
 
-QString KCamera::summary()
+TQString KCamera::summary()
 {
 	int result;
 	CameraText	summary;
@@ -153,7 +153,7 @@ QString KCamera::summary()
 	result = gp_camera_get_summary(m_camera, &summary, glob_context);
 	if (result != GP_OK)
 		return i18n("No camera summary information is available.\n");
-	return QString(summary.text);
+	return TQString(summary.text);
 }
 
 bool KCamera::configure()
@@ -207,27 +207,27 @@ void KCamera::save(KConfig *config)
 	config->writeEntry("Path", m_path);
 }
 
-QString KCamera::portName()
+TQString KCamera::portName()
 {
-	QString port = m_path.left(m_path.find(":")).lower();
+	TQString port = m_path.left(m_path.find(":")).lower();
 	if (port == "serial") return i18n("Serial");
 	if (port == "usb") return i18n("USB");
 	return i18n("Unknown port");
 }
 
-void KCamera::setName(const QString &name)
+void KCamera::setName(const TQString &name)
 {
 	m_name = name;
 }
 
-void KCamera::setModel(const QString &model)
+void KCamera::setModel(const TQString &model)
 {
 	m_model = model;
 	invalidateCamera();
 	initInformation();
 }
 
-void KCamera::setPath(const QString &path)
+void KCamera::setPath(const TQString &path)
 {
 	m_path = path;
 	invalidateCamera();
@@ -252,10 +252,10 @@ bool KCamera::isConfigurable()
 	return m_abilities.operations & GP_OPERATION_CONFIG;
 }
 
-QStringList KCamera::supportedPorts()
+TQStringList KCamera::supportedPorts()
 {
 	initInformation();
-	QStringList ports;
+	TQStringList ports;
 	if (m_abilities.port & GP_PORT_SERIAL)
 		ports.append("serial");
 	if (m_abilities.port & GP_PORT_USB)
@@ -270,70 +270,70 @@ CameraAbilities KCamera::abilities()
 
 // ---------- KameraSelectCamera ------------
 
-KameraDeviceSelectDialog::KameraDeviceSelectDialog(QWidget *parent, KCamera *device)
+KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *device)
 	: KDialogBase(parent, "kkameradeviceselect", true, i18n("Select Camera Device"), Ok | Cancel, Ok, true)
 {
 	m_device = device;
-	connect(m_device, SIGNAL(error(const QString &)),
-		SLOT(slot_error(const QString &)));
-	connect(m_device, SIGNAL(error(const QString &, const QString &)),
-		SLOT(slot_error(const QString &, const QString &)));
+	connect(m_device, TQT_SIGNAL(error(const TQString &)),
+		TQT_SLOT(slot_error(const TQString &)));
+	connect(m_device, TQT_SIGNAL(error(const TQString &, const TQString &)),
+		TQT_SLOT(slot_error(const TQString &, const TQString &)));
 
-	QWidget *page = new QWidget( this );
+	TQWidget *page = new TQWidget( this );
 	setMainWidget(page);
 
 	// a layout with vertical boxes
-	QHBoxLayout *topLayout = new QHBoxLayout(page, 0, KDialog::spacingHint());
+	TQHBoxLayout *topLayout = new TQHBoxLayout(page, 0, KDialog::spacingHint());
 
 	// the models list
 	m_modelSel = new KListView(page);
 	topLayout->addWidget( m_modelSel );
 	m_modelSel->addColumn(i18n("Supported Cameras"));
-	m_modelSel->setColumnWidthMode(0, QListView::Maximum);
-	connect(m_modelSel, SIGNAL(selectionChanged(QListViewItem *)),
-        SLOT(slot_setModel(QListViewItem *)));
+	m_modelSel->setColumnWidthMode(0, TQListView::Maximum);
+	connect(m_modelSel, TQT_SIGNAL(selectionChanged(TQListViewItem *)),
+        TQT_SLOT(slot_setModel(TQListViewItem *)));
 	// make sure listview only as wide as it needs to be
-	m_modelSel->setSizePolicy(QSizePolicy(QSizePolicy::Maximum,
-		QSizePolicy::Preferred));
+	m_modelSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Maximum,
+		TQSizePolicy::Preferred));
 
-	QVBoxLayout *rightLayout = new QVBoxLayout(0L, 0, KDialog::spacingHint());
+	TQVBoxLayout *rightLayout = new TQVBoxLayout(0L, 0, KDialog::spacingHint());
 	topLayout->addLayout( rightLayout );
 
-	m_portSelectGroup = new QVButtonGroup(i18n("Port"), page);
+	m_portSelectGroup = new TQVButtonGroup(i18n("Port"), page);
 	rightLayout->addWidget(m_portSelectGroup);
-	m_portSettingsGroup = new QVGroupBox(i18n("Port Settings"), page);
+	m_portSettingsGroup = new TQVGroupBox(i18n("Port Settings"), page);
 	rightLayout->addWidget(m_portSettingsGroup);
 
 	// Create port type selection radiobuttons.
-	m_serialRB = new QRadioButton(i18n("Serial"), m_portSelectGroup);
+	m_serialRB = new TQRadioButton(i18n("Serial"), m_portSelectGroup);
 	m_portSelectGroup->insert(m_serialRB, INDEX_SERIAL);
-	QWhatsThis::add(m_serialRB, i18n("If this option is checked, the camera would have to be connected one of the serial ports (known as COM in Microsoft Windows) in your computer."));
-	m_USBRB = new QRadioButton(i18n("USB"), m_portSelectGroup);
+	TQWhatsThis::add(m_serialRB, i18n("If this option is checked, the camera would have to be connected one of the serial ports (known as COM in Microsoft Windows) in your computer."));
+	m_USBRB = new TQRadioButton(i18n("USB"), m_portSelectGroup);
 	m_portSelectGroup->insert(m_USBRB, INDEX_USB);
-	QWhatsThis::add(m_USBRB, i18n("If this option is checked, the camera would have to be connected to one of the USB slots in your computer or USB hub."));
+	TQWhatsThis::add(m_USBRB, i18n("If this option is checked, the camera would have to be connected to one of the USB slots in your computer or USB hub."));
 	// Create port settings widget stack
-	m_settingsStack = new QWidgetStack(m_portSettingsGroup);
-	connect(m_portSelectGroup, SIGNAL(clicked(int)),
-		m_settingsStack, SLOT(raiseWidget(int)));
+	m_settingsStack = new TQWidgetStack(m_portSettingsGroup);
+	connect(m_portSelectGroup, TQT_SIGNAL(clicked(int)),
+		m_settingsStack, TQT_SLOT(raiseWidget(int)));
 
 	// none tab
-	m_settingsStack->addWidget(new QLabel(i18n("No port type selected."),
+	m_settingsStack->addWidget(new TQLabel(i18n("No port type selected."),
 		m_settingsStack), INDEX_NONE);
 
 	// serial tab
-	QGrid *grid = new QGrid(2, m_settingsStack);
+	TQGrid *grid = new TQGrid(2, m_settingsStack);
 	grid->setSpacing(KDialog::spacingHint());
-	new QLabel(i18n("Port:"), grid);
-	m_serialPortCombo = new QComboBox(TRUE, grid);
-	QWhatsThis::add(m_serialPortCombo, i18n("Here you should choose the serial port you connect the camera to."));
+	new TQLabel(i18n("Port:"), grid);
+	m_serialPortCombo = new TQComboBox(TRUE, grid);
+	TQWhatsThis::add(m_serialPortCombo, i18n("Here you should choose the serial port you connect the camera to."));
 	m_settingsStack->addWidget(grid, INDEX_SERIAL);
 
-	grid = new QGrid(2, m_settingsStack);
+	grid = new TQGrid(2, m_settingsStack);
 	grid->setSpacing(KDialog::spacingHint());
-	new QLabel(i18n("Port"), grid);
+	new TQLabel(i18n("Port"), grid);
 
 	m_settingsStack->addWidget(new
-		QLabel(i18n("No further configuration is required for USB."),
+		TQLabel(i18n("No further configuration is required for USB."),
 		m_settingsStack), INDEX_USB);
 
 	// query gphoto2 for existing serial ports
@@ -347,7 +347,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(QWidget *parent, KCamera *dev
 	for (int i = 0; i < gphoto_ports; i++) {
 		if (gp_port_info_list_get_info(list, i, &info) >= 0) {
 			if (strncmp(info.path, "serial:", 7) == 0)
-				m_serialPortCombo->insertItem(QString::fromLatin1(info.path).mid(7));
+				m_serialPortCombo->insertItem(TQString::fromLatin1(info.path).mid(7));
 		}
 	}
 	gp_port_info_list_free(list);
@@ -376,7 +376,7 @@ bool KameraDeviceSelectDialog::populateCameraListView()
 	} else {
 		for(int x = 0; x < numCams; ++x) {
 			if(gp_abilities_list_get_abilities(m_device->m_abilitylist, x, &a) == GP_OK) {
-				new QListViewItem(m_modelSel, a.model);
+				new TQListViewItem(m_modelSel, a.model);
 			}
 		}
 		return true;
@@ -388,7 +388,7 @@ void KameraDeviceSelectDialog::save()
 	m_device->setModel(m_modelSel->currentItem()->text(0));
 
 	if (m_portSelectGroup->selected()) {
-		QString type = m_portSelectGroup->selected()->text();
+		TQString type = m_portSelectGroup->selected()->text();
 
 		if(type == i18n("Serial"))
 			m_device->setPath("serial:" + m_serialPortCombo->currentText());
@@ -402,13 +402,13 @@ void KameraDeviceSelectDialog::save()
 
 void KameraDeviceSelectDialog::load()
 {
-	QString path = m_device->path();
-	QString port = path.left(path.find(":")).lower();
+	TQString path = m_device->path();
+	TQString port = path.left(path.find(":")).lower();
 
 	if (port == "serial") setPortType(INDEX_SERIAL);
 	if (port == "usb") setPortType(INDEX_USB);
 
-	QListViewItem *modelItem = m_modelSel->firstChild();
+	TQListViewItem *modelItem = m_modelSel->firstChild();
 	if( modelItem)
 	{
 	do {
@@ -420,13 +420,13 @@ void KameraDeviceSelectDialog::load()
 	}
 }
 
-void KameraDeviceSelectDialog::slot_setModel(QListViewItem *item)
+void KameraDeviceSelectDialog::slot_setModel(TQListViewItem *item)
 {
     enableButtonOK(true);
     m_portSelectGroup->setEnabled(true);
     m_portSettingsGroup->setEnabled(true);
 
-    QString model = item->text(0);
+    TQString model = item->text(0);
 
 	CameraAbilities abilities;
 	int index = gp_abilities_list_lookup_model(m_device->m_abilitylist, model.local8Bit().data());
@@ -441,7 +441,7 @@ void KameraDeviceSelectDialog::slot_setModel(QListViewItem *item)
 		m_USBRB->setEnabled(abilities.port & GP_PORT_USB);
 
 		// turn off any selected port
-		QButton *selected = m_portSelectGroup->selected();
+		TQButton *selected = m_portSelectGroup->selected();
 		if(selected != NULL)
 			selected->toggle();
 
@@ -465,12 +465,12 @@ void KameraDeviceSelectDialog::setPortType(int type)
 	m_settingsStack->raiseWidget(type);
 }
 
-void KameraDeviceSelectDialog::slot_error(const QString &message)
+void KameraDeviceSelectDialog::slot_error(const TQString &message)
 {
 	KMessageBox::error(this, message);
 }
 
-void KameraDeviceSelectDialog::slot_error(const QString &message, const QString &details)
+void KameraDeviceSelectDialog::slot_error(const TQString &message, const TQString &details)
 {
 	KMessageBox::detailedError(this, message, details);
 }

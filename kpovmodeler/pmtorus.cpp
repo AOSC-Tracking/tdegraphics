@@ -69,7 +69,7 @@ PMTorus::~PMTorus( )
 }
 
 
-QString PMTorus::description( ) const
+TQString PMTorus::description( ) const
 {
    return i18n( "torus" );
 }
@@ -92,7 +92,7 @@ PMMetaObject* PMTorus::metaObject( ) const
    return s_pMetaObject;
 }
 
-void PMTorus::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMTorus::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "minor_radius", m_minorRadius );
    e.setAttribute( "major_radius", m_majorRadius );
@@ -110,7 +110,7 @@ void PMTorus::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMTorus::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMTorus::editWidget( TQWidget* parent ) const
 {
 
  return new PMTorusEdit( parent );

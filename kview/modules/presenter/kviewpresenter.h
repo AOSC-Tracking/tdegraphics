@@ -24,14 +24,14 @@
 #include <kparts/plugin.h>
 #include <kurl.h>
 
-#include <qsortedlist.h>
+#include <tqsortedlist.h>
 
 namespace KImageViewer { class Viewer; }
 
 class ImageListDialog;
 class ImageListItem;
-class QListViewItem;
-class QTimer;
+class TQListViewItem;
+class TQTimer;
 class KToggleAction;
 class KAction;
 
@@ -39,7 +39,7 @@ class KViewPresenter : public KParts::Plugin
 {
 	Q_OBJECT
 public:
-	KViewPresenter( QObject* parent, const char* name, const QStringList & );
+	KViewPresenter( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewPresenter();
 
 protected:
@@ -67,14 +67,14 @@ protected:
 			return url.prettyURL() < i1.url.prettyURL();
 		}
 	};
-	bool eventFilter( QObject *, QEvent * );
+	bool eventFilter( TQObject *, TQEvent * );
 
 private slots:
 	void slotImageOpened( const KURL & );
 	void slotImageList();
 	void slotOpenFiles();
 	void slotClose();
-	void changeItem( QListViewItem * );
+	void changeItem( TQListViewItem * );
 	void prev();
 	void next();
 	void slideshow( bool );
@@ -85,7 +85,7 @@ private slots:
 	void saveList();
 
 private:
-	void makeCurrent( QListViewItem * );
+	void makeCurrent( TQListViewItem * );
 
 	KImageViewer::Viewer * m_pViewer;
 	ImageListDialog * m_pImageList;
@@ -93,10 +93,10 @@ private:
 	KAction * m_paFileOpen;
 	KAction * m_paFileClose;
 
-	QSortedList<ImageInfo> m_imagelist;
+	TQSortedList<ImageInfo> m_imagelist;
 	bool m_bDontAdd;
 	ImageListItem * m_pCurrentItem;
-	QTimer * m_pSlideshowTimer;
+	TQTimer * m_pSlideshowTimer;
 };
 
 // vim:sw=4:ts=4:cindent

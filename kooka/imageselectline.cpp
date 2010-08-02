@@ -25,11 +25,11 @@
  *  without including the source code for Qt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
-#include <qhbox.h>
-#include <qvbox.h>
-#include <qbutton.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
+#include <tqhbox.h>
+#include <tqvbox.h>
+#include <tqbutton.h>
+#include <tqpushbutton.h>
+#include <tqlabel.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -47,22 +47,22 @@
  * together in a row. The button opens a file selector box to pick a file.
  */
 
-ImageSelectLine::ImageSelectLine( QWidget *parent, const QString& text )
-   : QHBox( parent )
+ImageSelectLine::ImageSelectLine( TQWidget *parent, const TQString& text )
+   : TQHBox( parent )
 {
    setSpacing( 5 );
-   (void) new QLabel( text, this );
+   (void) new TQLabel( text, this );
    m_urlCombo       = new KURLComboBox( KURLComboBox::Files, this );
-   m_buttFileSelect = new QPushButton( this );
+   m_buttFileSelect = new TQPushButton( this );
    m_buttFileSelect->setPixmap( SmallIcon( "fileopen" ) );
 
    m_urlCombo->setMaxItems(5);
 
-   connect( m_urlCombo, SIGNAL( urlActivated( const KURL& )),
-	    this, SLOT( slUrlActivated( const KURL& )));
+   connect( m_urlCombo, TQT_SIGNAL( urlActivated( const KURL& )),
+	    this, TQT_SLOT( slUrlActivated( const KURL& )));
 
-   connect( m_buttFileSelect, SIGNAL( clicked() ),
-	    this, SLOT( slSelectFile()));
+   connect( m_buttFileSelect, TQT_SIGNAL( clicked() ),
+	    this, TQT_SLOT( slSelectFile()));
 }
 
 void ImageSelectLine::slSelectFile()
@@ -70,7 +70,7 @@ void ImageSelectLine::slSelectFile()
    KURL newUrl;
    newUrl = KFileDialog::getImageOpenURL();
 
-   QStringList l = m_urlCombo->urls();
+   TQStringList l = m_urlCombo->urls();
 
    if( ! newUrl.isEmpty())
    {
@@ -97,7 +97,7 @@ void ImageSelectLine::setURL( const KURL& url )
    m_currUrl = url;
 }
 
-void ImageSelectLine::setURLs( const QStringList& list )
+void ImageSelectLine::setURLs( const TQStringList& list )
 {
    if( m_urlCombo ) m_urlCombo->setURLs( list );
 }

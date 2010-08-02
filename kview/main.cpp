@@ -56,7 +56,7 @@ extern "C" KDE_EXPORT int kdemain( int argc, char ** argv )
 		// to tell the presenter plugin to add those urls to it's list
 		if( args->count() > 0 )
 		{
-			if( args->url( 0 ) == QString( "-" ) )
+			if( args->url( 0 ) == TQString( "-" ) )
 				kview->loadFromStdin();
 			else
 				kview->load( args->url( 0 ) );

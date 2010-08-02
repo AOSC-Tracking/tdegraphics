@@ -35,7 +35,7 @@ public:
 	AggCanvasFactory();
 	virtual ~AggCanvasFactory();
 
-	virtual QObject *createObject(QObject *parent = 0, const char *pname = 0, const char *name = "QObject", const QStringList &args = QStringList());
+	virtual TQObject *createObject(TQObject *parent = 0, const char *pname = 0, const char *name = "TQObject", const TQStringList &args = TQStringList());
 };
 
 };

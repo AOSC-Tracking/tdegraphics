@@ -16,8 +16,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -40,10 +40,10 @@ using namespace KMrmlConfig;
 
 static const int COL_FILENAME = 1;
 
-typedef KGenericFactory<KCMKMrml, QWidget> MrmlFactory;
+typedef KGenericFactory<KCMKMrml, TQWidget> MrmlFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kmrml, MrmlFactory("kmrml") )
 
-KCMKMrml::KCMKMrml(QWidget *parent, const char *name, const QStringList & ):
+KCMKMrml::KCMKMrml(TQWidget *parent, const char *name, const TQStringList & ):
     KCModule(MrmlFactory::instance(), parent, name)
 {
     KAboutData* ab = new KAboutData(
@@ -58,13 +58,13 @@ KCMKMrml::KCMKMrml(QWidget *parent, const char *name, const QStringList & ):
     ab->addAuthor( "Carsten Pfeiffer", 0, "pfeiffer@kde.org" );
     setAboutData( ab );
 
-    QVBoxLayout *layout = new QVBoxLayout( this );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
     layout->setSpacing( KDialog::spacingHint() );
     m_mainPage = new MainPage( this, "main page" );
 
     layout->addWidget( m_mainPage );
 
-    connect( m_mainPage, SIGNAL( changed( bool ) ), SIGNAL( changed( bool )));
+    connect( m_mainPage, TQT_SIGNAL( changed( bool ) ), TQT_SIGNAL( changed( bool )));
 
     checkGiftInstallation();
 }
@@ -75,26 +75,26 @@ KCMKMrml::~KCMKMrml()
 
 void KCMKMrml::checkGiftInstallation()
 {
-    QString giftExe = KGlobal::dirs()->findExe( "gift" );
-    QString giftAddCollectionExe = KGlobal::dirs()->findExe( "gift-add-collection.pl" );
+    TQString giftExe = KGlobal::dirs()->findExe( "gift" );
+    TQString giftAddCollectionExe = KGlobal::dirs()->findExe( "gift-add-collection.pl" );
 
     if ( giftExe.isEmpty() || giftAddCollectionExe.isEmpty() )
     {
-        QString errorMessage = 
+        TQString errorMessage = 
             i18n("Cannot find executables \"gift\" and/or \"gift-add-collection.pl\" in the PATH.\n"
                  "Please install the \"GNU Image Finding Tool\".");
         KMessageBox::error( this, errorMessage );
         m_mainPage->hide();
-        QLabel *errorLabel = new QLabel( errorMessage, this );
-        errorLabel->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed ) );
-        KURLLabel *urlLabel = new KURLLabel( "http://www.gnu.org/software/gift", QString::null, this ); 
-        urlLabel->setSizePolicy( QSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed ) );
-        connect( urlLabel, SIGNAL( leftClickedURL( const QString& )), kapp, SLOT( invokeBrowser( const QString& )) );
-        QLayout *l = layout();
-        l->addItem( new QSpacerItem( 0, 10, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
+        TQLabel *errorLabel = new TQLabel( errorMessage, this );
+        errorLabel->setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
+        KURLLabel *urlLabel = new KURLLabel( "http://www.gnu.org/software/gift", TQString::null, this ); 
+        urlLabel->setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ) );
+        connect( urlLabel, TQT_SIGNAL( leftClickedURL( const TQString& )), kapp, TQT_SLOT( invokeBrowser( const TQString& )) );
+        TQLayout *l = layout();
+        l->addItem( new TQSpacerItem( 0, 10, TQSizePolicy::Minimum, TQSizePolicy::Expanding ) );
         l->add( errorLabel );
         l->add( urlLabel );
-        l->addItem( new QSpacerItem( 0, 10, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
+        l->addItem( new TQSpacerItem( 0, 10, TQSizePolicy::Minimum, TQSizePolicy::Expanding ) );
         errorLabel->show();
     }
     else
@@ -128,7 +128,7 @@ void KCMKMrml::save()
     emit changed( false );
 }
 
-QString KCMKMrml::quickHelp() const
+TQString KCMKMrml::quickHelp() const
 {
     return i18n("<h1>Image Index</h1>"
                 "KDE can make use of the GNU Image Finding Tool (GIFT) to "

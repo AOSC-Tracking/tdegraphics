@@ -20,7 +20,7 @@
 #ifndef PMLINES_H
 #define PMLINES_H
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 #include <GL/gl.h>
 #include "pmdebug.h"
 
@@ -88,7 +88,7 @@ private:
    GLuint m_start, m_end;
 };
 
-typedef QPtrListIterator<PMLine> PMLineListIterator;
+typedef TQPtrListIterator<PMLine> PMLineListIterator;
 
 /**
  * A list of @ref PMLine objects.
@@ -97,6 +97,6 @@ typedef QPtrListIterator<PMLine> PMLineListIterator;
  * described by a start and end point. Only the indices in a @ref PMPointArray
  * are stored.
  */
-typedef QMemArray<PMLine> PMLineArray;
+typedef TQMemArray<PMLine> PMLineArray;
 
 #endif

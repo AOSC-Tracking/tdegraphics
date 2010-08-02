@@ -21,17 +21,17 @@
 #include <kstandarddirs.h>
 #include <kglobal.h>
 
-#include <qfile.h>
-#include <qdir.h>
+#include <tqfile.h>
+#include <tqdir.h>
 
 #include "pmdebug.h"
 
 PMLibraryManager* PMLibraryManager::s_pInstance = 0;
 KStaticDeleter<PMLibraryManager> PMLibraryManager::s_staticDeleter;
 
-PMLibraryHandle* PMLibraryManager::getLibraryHandle( const QString& libraryName ) 
+PMLibraryHandle* PMLibraryManager::getLibraryHandle( const TQString& libraryName ) 
 {
-   QPtrListIterator<PMLibraryHandle> it( m_libraries );
+   TQPtrListIterator<PMLibraryHandle> it( m_libraries );
 
    for( ; it.current( ); ++it )
       if( it.current( )->name( ) == libraryName )
@@ -59,10 +59,10 @@ void PMLibraryManager::restoreConfig( KConfig* /*cfg*/ )
 {
 }
 
-QValueList<QString> PMLibraryManager::availableLibraries( )
+TQValueList<TQString> PMLibraryManager::availableLibraries( )
 {
-   QValueList<QString> result;
-   QPtrListIterator<PMLibraryHandle> it( m_libraries );
+   TQValueList<TQString> result;
+   TQPtrListIterator<PMLibraryHandle> it( m_libraries );
 
    for( ; it.current( ); ++it )
       result.push_back( it.current( )->name( ) );
@@ -79,24 +79,24 @@ PMLibraryManager* PMLibraryManager::theManager( )
 
 void PMLibraryManager::scanLibraries( )
 {
-   QStringList libraryDirectories;
+   TQStringList libraryDirectories;
    
    // Search for sub directories in /usr/share/kpovmodeler/library
    libraryDirectories = KGlobal::dirs( )->findDirs( "data", "kpovmodeler/library" );
 
-   for( QStringList::Iterator i = libraryDirectories.begin( ); i != libraryDirectories.end( ); ++i )
+   for( TQStringList::Iterator i = libraryDirectories.begin( ); i != libraryDirectories.end( ); ++i )
    {
-      QDir curDir( *i );
-      curDir.setFilter( QDir::Dirs );
+      TQDir curDir( *i );
+      curDir.setFilter( TQDir::Dirs );
       QFileInfoListIterator it( *( curDir.entryInfoList( ) ) );
 
       // For each sub directory
-      QFileInfo* fi;
+      TQFileInfo* fi;
       for( ; ( fi = it.current( ) ) != NULL; ++it ) 
       {
          // check for the existance of library_index.xml
          // If it's there it's a library
-         if( QFile::exists( fi->absFilePath( ) + "/library_index.xml" ) )
+         if( TQFile::exists( fi->absFilePath( ) + "/library_index.xml" ) )
          {
             // Create the corresponding PMLibraryHandle
             PMLibraryHandle* h;

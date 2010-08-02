@@ -19,7 +19,7 @@
 #ifndef FILEFINDER_H
 #define FILEFINDER_H
 
-#include <qevent.h>
+#include <tqevent.h>
 
 #include <klineedit.h>
 
@@ -30,7 +30,7 @@ class FileFinder : public KLineEdit
     Q_OBJECT
 
 public:
-    FileFinder( QWidget *parent=0, const char *name=0 );
+    FileFinder( TQWidget *parent=0, const char *name=0 );
     ~FileFinder();
 
     KURLCompletion *completion() {
@@ -40,14 +40,14 @@ public:
     virtual void hide();
 
 signals:
-    void enterDir( const QString& );
+    void enterDir( const TQString& );
 
 protected:
-    virtual void focusOutEvent( QFocusEvent * );
-    virtual void keyPressEvent( QKeyEvent * );
+    virtual void focusOutEvent( TQFocusEvent * );
+    virtual void keyPressEvent( TQKeyEvent * );
 
 private slots:
-    void slotAccept( const QString& );
+    void slotAccept( const TQString& );
 
 };
 

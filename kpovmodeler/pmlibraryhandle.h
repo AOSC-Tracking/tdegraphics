@@ -23,10 +23,10 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qdict.h>
+#include <tqstring.h>
+#include <tqdict.h>
 
-class QDomElement;
+class TQDomElement;
 
 /**
  * Class that holds all the information about a specific library.
@@ -49,7 +49,7 @@ public:
    /**
     * Iterator for the objects in the library
     */
-   typedef QDictIterator<QString> EntryIterator;
+   typedef TQDictIterator<TQString> EntryIterator;
 
    /**
     * Constructor for an empty library
@@ -59,7 +59,7 @@ public:
    /**
     * Constructor for a given directory.
     */
-   PMLibraryHandle( const QString& path );
+   PMLibraryHandle( const TQString& path );
 
    /**
     * Destructor
@@ -68,42 +68,42 @@ public:
    /**
     * Returns the library's name
     */
-   QString name( ) const { return m_name; }
+   TQString name( ) const { return m_name; }
 
    /**
     * Returns the library's path
     */
-   QString path( ) const { return m_path; }
+   TQString path( ) const { return m_path; }
 
    /**
     * Returns the library's author
     */
-   QString author( ) const { return m_author; }
+   TQString author( ) const { return m_author; }
 
    /**
     * Returns the library's description
     */
-   QString description( ) const { return m_description; }
+   TQString description( ) const { return m_description; }
 
    /**
     * Sets the library's name
     */
-   void setName( const QString& name );
+   void setName( const TQString& name );
 
    /**
     * Sets the library's path
     */
-   void setPath( const QString& path );
+   void setPath( const TQString& path );
 
    /**
     * Sets the library's author
     */
-   void setAuthor( const QString& author );
+   void setAuthor( const TQString& author );
 
    /**
     * Sets the library's description
     */
-   void setDescription( const QString& description );
+   void setDescription( const TQString& description );
 
    /**
     * Sets the library's erad only status
@@ -131,33 +131,33 @@ public:
     * @param name The name of the object
     * @return PMLibraryHandle::Ok if successful or the reason of failure
     */
-   PMLibraryHandle::PMResult addObject( const QString& path, const QString& name );
+   PMLibraryHandle::PMResult addObject( const TQString& path, const TQString& name );
    /**
     * Deletes an object out of the library. Only removes the entry from the library
     * doesn't delete the objects file
     * @param objectName The name of the object ( or objects path ) to delete
     * @return PMLibraryHandle::Ok if successul or the reason of failure
     */
-   PMLibraryHandle::PMResult deleteObject( const QString& objectName );
+   PMLibraryHandle::PMResult deleteObject( const TQString& objectName );
 
    /**
     * Create a new sub library.
     */
-   PMLibraryHandle::PMResult createNewSubLibrary( const QString subLibName );
+   PMLibraryHandle::PMResult createNewSubLibrary( const TQString subLibName );
    /**
     * Adds an already existing sub-library to the library
     * @param path The path for the sub library
     * @param subLibName The name of the sub library
     * @return PMLibraryHandle::Ok if successful or the reason of failure
     */
-   PMLibraryHandle::PMResult addSubLibrary( const QString& path, const QString& name );
+   PMLibraryHandle::PMResult addSubLibrary( const TQString& path, const TQString& name );
    /**
     * Deletes a sub library. Only removes the entry from the library
     * doesn't delete the objects file
     * @param subLibName The name of the sub library ( or sub libraries path ) to delete
     * @return PMLibraryHandle::Ok if successul or the reason of failure
     */
-   PMLibraryHandle::PMResult deleteSubLibrary( const QString& subLibName );
+   PMLibraryHandle::PMResult deleteSubLibrary( const TQString& subLibName );
 
    /**
     * Returns true if the library is set read-only
@@ -184,7 +184,7 @@ public:
     * @param parentPath The new parent path for this library
     * @return PMLibraryHandle::Ok if successful or the reason for failure
     */
-   PMLibraryHandle::PMResult changeParentLibrary( const QString& parentPath );
+   PMLibraryHandle::PMResult changeParentLibrary( const TQString& parentPath );
 
 private:
 
@@ -196,15 +196,15 @@ private:
 
    void loadLibraryInfo( );
 
-   QString m_name;
-   QString m_path;
-   QString m_author;
-   QString m_description;
+   TQString m_name;
+   TQString m_path;
+   TQString m_author;
+   TQString m_description;
    bool    m_readOnly;
    bool    m_subLibrary;
 
-   QDict<QString> m_objects;
-   QDict<QString> m_libraries;
+   TQDict<TQString> m_objects;
+   TQDict<TQString> m_libraries;
 };
 
 #endif

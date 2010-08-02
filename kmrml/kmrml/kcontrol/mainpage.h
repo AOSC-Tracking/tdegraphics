@@ -19,11 +19,11 @@
 #ifndef MAINPAGE_H
 #define MAINPAGE_H
 
-#include <qvbox.h>
+#include <tqvbox.h>
 
 #include <kmrml_config.h>
 
-class QCheckBox;
+class TQCheckBox;
 class KComboBox;
 class KEditListBox;
 class KIntNumInput;
@@ -48,7 +48,7 @@ namespace KMrmlConfig
         Q_OBJECT
 
     public:
-        MainPage( QWidget *parent, const char *name );
+        MainPage( TQWidget *parent, const char *name );
         ~MainPage();
 
         void resetDefaults();
@@ -63,20 +63,20 @@ namespace KMrmlConfig
         void slotRequesterClicked( KURLRequester * );
         void slotHostChanged();
         void slotUseAuthChanged( bool );
-        void slotUserChanged( const QString& );
-        void slotPassChanged( const QString& );
+        void slotUserChanged( const TQString& );
+        void slotPassChanged( const TQString& );
         void slotPortChanged( int );
         void slotAutoPortChanged( bool );
 
         void slotAddClicked();
         void slotRemoveClicked();
 
-        void slotHostActivated( const QString& );
+        void slotHostActivated( const TQString& );
 
         void slotDirectoriesChanged();
 
         void slotMaybeIndex();
-        void slotIndexingProgress( int percent, const QString& message );
+        void slotIndexingProgress( int percent, const TQString& message );
         void slotIndexingFinished( int returnCode );
         void slotCancelIndexing();
 
@@ -85,10 +85,10 @@ namespace KMrmlConfig
         void enableWidgetsFor( const KMrml::ServerSettings& settings );
         void initFromSettings( const KMrml::ServerSettings& settings );
 
-        void processIndexDirs( const QStringList& removedDirs );
+        void processIndexDirs( const TQStringList& removedDirs );
         
-        QStringList difference( const QStringList& oldIndexDirs,
-                                const QStringList& newIndexDirs ) const;
+        TQStringList difference( const TQStringList& oldIndexDirs,
+                                const TQStringList& newIndexDirs ) const;
 
         ServerConfigWidget *m_serverWidget;
         KEditListBox *m_listBox;

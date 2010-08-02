@@ -18,7 +18,7 @@
 // reimplementing this
 #include "preferencesdialog.h"
 
-PreferencesDialog::PreferencesDialog( QWidget * parent, KConfigSkeleton * skeleton )
+PreferencesDialog::PreferencesDialog( TQWidget * parent, KConfigSkeleton * skeleton )
     : KConfigDialog( parent, "preferences", skeleton )
 {
     m_general = new DlgGeneral(0);

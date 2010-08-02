@@ -23,13 +23,13 @@
 #include "pmvectorlistedit.h"
 #include "pmpart.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 
-PMBicubicPatchEdit::PMBicubicPatchEdit( QWidget* parent, const char* name )
+PMBicubicPatchEdit::PMBicubicPatchEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -39,54 +39,54 @@ void PMBicubicPatchEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout;
+   TQHBoxLayout* layout;
 
-   m_pType = new QComboBox( false, this );
+   m_pType = new TQComboBox( false, this );
    m_pType->insertItem( i18n( "Normal (type 0)" ) );
    m_pType->insertItem( i18n( "Preprocessed (type 1)" ) );
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Type:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Type:" ), this ) );
    layout->addWidget( m_pType );
    layout->addStretch( 1 );
 
    m_pUSteps = new PMIntEdit( this );
    m_pUSteps->setValidation( true, 0, false, 0 );
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Steps:" ) + " u", this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Steps:" ) + " u", this ) );
    layout->addWidget( m_pUSteps );
    m_pVSteps = new PMIntEdit( this );
    m_pVSteps->setValidation( true, 0, false, 0 );
-   layout->addWidget( new QLabel( "v", this ) );
+   layout->addWidget( new TQLabel( "v", this ) );
    layout->addWidget( m_pVSteps );
 
    m_pFlatness = new PMFloatEdit( this );
    m_pFlatness->setValidation( true, 0.0, false, 0.0 );
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Flatness:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Flatness:" ), this ) );
    layout->addWidget( m_pFlatness );
    layout->addStretch( 1 );
 
-   topLayout( )->addWidget( new QLabel( i18n( "Points:" ), this ) );
+   topLayout( )->addWidget( new TQLabel( i18n( "Points:" ), this ) );
 
    m_pPoints = new PMVectorListEdit( "x", "y", "z", this );
    m_pPoints->setSize( 16 );
    topLayout( )->addWidget( m_pPoints );
 
-   m_pUVEnabled = new QCheckBox( i18n( "UV vectors" ), this );
+   m_pUVEnabled = new TQCheckBox( i18n( "UV vectors" ), this );
    topLayout( )->addWidget( m_pUVEnabled );
    m_pUVVectors = new PMVectorListEdit( "u", "v", this );
    m_pUVVectors->setSize( 4 );
    topLayout( )->addWidget( m_pUVVectors );
 
-   connect( m_pType, SIGNAL( highlighted( int ) ), SLOT( slotTypeSelected( int ) ) );
-   connect( m_pUSteps, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pVSteps, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFlatness, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPoints, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPoints, SIGNAL( selectionChanged( ) ),
-            SLOT( slotSelectionChanged( ) ) );
-   connect( m_pUVEnabled, SIGNAL( clicked( ) ), SLOT( slotUVEnabledClicked( ) ) );
-   connect( m_pUVVectors, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pType, TQT_SIGNAL( highlighted( int ) ), TQT_SLOT( slotTypeSelected( int ) ) );
+   connect( m_pUSteps, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pVSteps, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFlatness, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPoints, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPoints, TQT_SIGNAL( selectionChanged( ) ),
+            TQT_SLOT( slotSelectionChanged( ) ) );
+   connect( m_pUVEnabled, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUVEnabledClicked( ) ) );
+   connect( m_pUVVectors, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBicubicPatchEdit::displayObject( PMObject* o )

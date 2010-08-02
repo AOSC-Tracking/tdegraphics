@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include <config.h>
-#include <qimage.h>
+#include <tqimage.h>
 #include "kfile_xpm.h"
 
 #include <kgenericfactory.h>
@@ -32,7 +32,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_xpm, xpmFactory( "kfile_xpm" ))
 
 //--------------------------------------------------------------------------------
 
-xpmPlugin::xpmPlugin(QObject *parent, const char *name, const QStringList &args)
+xpmPlugin::xpmPlugin(TQObject *parent, const char *name, const TQStringList &args)
   : KFilePlugin(parent, name, args)
 {
   KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xpm" );
@@ -44,11 +44,11 @@ xpmPlugin::xpmPlugin(QObject *parent, const char *name, const QStringList &args)
   KFileMimeTypeInfo::ItemInfo* item;
 
   // our new items in the group
-  item = addItemInfo(group, "Dimension", i18n("Dimension"), QVariant::Size);
+  item = addItemInfo(group, "Dimension", i18n("Dimension"), TQVariant::Size);
   setHint(item, KFileMimeTypeInfo::Size);
   setUnit(item, KFileMimeTypeInfo::Pixels);
 
-  item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+  item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
   setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 }
 
@@ -56,7 +56,7 @@ xpmPlugin::xpmPlugin(QObject *parent, const char *name, const QStringList &args)
 
 bool xpmPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 {
-  QImage pix;
+  TQImage pix;
 
   if ( ! pix.load(info.path(), "XPM") ) return false;
 

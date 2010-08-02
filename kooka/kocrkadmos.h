@@ -29,7 +29,7 @@
 #define KOCRKADMOS_H
 
 #include <kdialogbase.h>
-#include <qmap.h>
+#include <tqmap.h>
 
 #include "kocrbase.h"
 /**
@@ -39,27 +39,27 @@
 
 
 class KScanCombo;
-class QWidget;
-class QButtonGroup;
+class TQWidget;
+class TQButtonGroup;
 class KConfig;
-class QCheckBox;
+class TQCheckBox;
 class KSpellConfig;
-class QRadioButton;
+class TQRadioButton;
 
 class KadmosClassifier   /* Not yet used FIXME */
 {
 public:
-   KadmosClassifier( QString lang, QString filename );
-   QString getCmplFilename() const { return path+filename; }
-   QString getFilename()     const { return filename; }
-   QString language()        const { return languagesName; }
+   KadmosClassifier( TQString lang, TQString filename );
+   TQString getCmplFilename() const { return path+filename; }
+   TQString getFilename()     const { return filename; }
+   TQString language()        const { return languagesName; }
 
-   void setPath( const QString& p ) { path=p; }
+   void setPath( const TQString& p ) { path=p; }
 private:
 
-   QString filename;
-   QString path;
-   QString languagesName;
+   TQString filename;
+   TQString path;
+   TQString languagesName;
 };
 
 
@@ -67,20 +67,20 @@ class KadmosDialog: public KOCRBase
 {
     Q_OBJECT
 public:
-    KadmosDialog( QWidget *, KSpellConfig *spellConfig );
+    KadmosDialog( TQWidget *, KSpellConfig *spellConfig );
     ~KadmosDialog();
 
-    typedef QMap<QString, QString> StrMap;
+    typedef TQMap<TQString, TQString> StrMap;
 
     EngineError setupGui();
     bool getAutoScale();
     bool getNoiseReduction();
-    bool getSelClassifier(QString&) const;
-    QString getSelClassifierName() const;
+    bool getSelClassifier(TQString&) const;
+    TQString getSelClassifierName() const;
 
-    QString ocrEngineName() const;
-    QString ocrEngineDesc() const;
-    QString ocrEngineLogo() const;
+    TQString ocrEngineName() const;
+    TQString ocrEngineDesc() const;
+    TQString ocrEngineLogo() const;
 
 public slots:
     void enableFields(bool);
@@ -88,9 +88,9 @@ public slots:
 protected:
     void writeConfig();
 
-    void setupPreprocessing( QVBox *box );
-    void setupSegmentation(  QVBox *box );
-    void setupClassification( QVBox *box );
+    void setupPreprocessing( TQVBox *box );
+    void setupSegmentation(  TQVBox *box );
+    void setupClassification( TQVBox *box );
 
     EngineError findClassifiers();
     EngineError findClassifierPath();
@@ -101,27 +101,27 @@ private slots:
 private:
     StrMap                m_classifierTranslate;
 
-    QCheckBox             *m_cbNoise;
-    QCheckBox             *m_cbAutoscale;
-    QString                m_customClassifierPath;
+    TQCheckBox             *m_cbNoise;
+    TQCheckBox             *m_cbAutoscale;
+    TQString                m_customClassifierPath;
 
     QButtonGroup	  *m_bbFont;
 
-    QRadioButton          *m_rbMachine;
-    QRadioButton          *m_rbHand;
-    QRadioButton          *m_rbNorm;
+    TQRadioButton          *m_rbMachine;
+    TQRadioButton          *m_rbHand;
+    TQRadioButton          *m_rbNorm;
 
-    QGroupBox      	  *m_gbLang;
+    TQGroupBox      	  *m_gbLang;
 
-    QComboBox             *m_cbLang;
+    TQComboBox             *m_cbLang;
 
-    QStringList            m_ttfClassifier;
-    QStringList            m_handClassifier;
-    QStringList            m_classifierPath;
+    TQStringList            m_ttfClassifier;
+    TQStringList            m_handClassifier;
+    TQStringList            m_classifierPath;
 
     bool                   m_haveNorm;
 
-    typedef QMap<QString, QString> StringMap;
+    typedef TQMap<TQString, TQString> StringMap;
     StringMap m_longCountry2short;
 };
 

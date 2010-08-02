@@ -29,8 +29,8 @@
 #define KOCRGOCR_H
 
 #include <kdialogbase.h>
-#include <qimage.h>
-#include <qstring.h>
+#include <tqimage.h>
+#include <tqstring.h>
 
 #include <kscanslider.h>
 #include <kanimwidget.h>
@@ -46,10 +46,10 @@ class KGOCRDialog: public KOCRBase
 {
     Q_OBJECT
 public:
-    KGOCRDialog( QWidget*, KSpellConfig* );
+    KGOCRDialog( TQWidget*, KSpellConfig* );
     ~KGOCRDialog();
 
-    QString getOCRCmd( void ) const
+    TQString getOCRCmd( void ) const
         { return m_ocrCmd;}
 
     int getGraylevel( void ) const
@@ -61,9 +61,9 @@ public:
 
     EngineError setupGui();
 
-    QString ocrEngineName() const;
-    QString ocrEngineDesc() const;
-    QString ocrEngineLogo() const;
+    TQString ocrEngineName() const;
+    TQString ocrEngineDesc() const;
+    TQString ocrEngineLogo() const;
 
 public slots:
     void enableFields(bool);
@@ -80,7 +80,7 @@ private:
     KScanSlider *sliderDustSize;
     KScanSlider *sliderSpace;
 
-    QString      m_ocrCmd;
+    TQString      m_ocrCmd;
 };
 
 #endif

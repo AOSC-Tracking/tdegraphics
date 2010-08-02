@@ -20,18 +20,18 @@
 #include "pmglview.h"
 #include "pmdefaults.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
-PMOpenGLSettings::PMOpenGLSettings( QWidget* parent, const char* name )
+PMOpenGLSettings::PMOpenGLSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   QVBoxLayout* vlayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
-   m_pDirect = new QCheckBox( i18n( "Direct rendering" ), this );
-   vlayout->addWidget( new QLabel( i18n( "Changes take only effect after a restart!" ), this ) );
+   m_pDirect = new TQCheckBox( i18n( "Direct rendering" ), this );
+   vlayout->addWidget( new TQLabel( i18n( "Changes take only effect after a restart!" ), this ) );
    vlayout->addWidget( m_pDirect );
    vlayout->addStretch( 1 );
 }

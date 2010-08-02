@@ -21,15 +21,15 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqpushbutton.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
 
-PMTextEdit::PMTextEdit( QWidget* parent, const char* name )
+PMTextEdit::PMTextEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -39,40 +39,40 @@ void PMTextEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Font:" ), this ) );
-   m_pFont = new QLineEdit( this );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Font:" ), this ) );
+   m_pFont = new TQLineEdit( this );
    hl->addWidget( m_pFont );
-   m_pChooseFont = new QPushButton( this );
+   m_pChooseFont = new TQPushButton( this );
    m_pChooseFont->setPixmap( SmallIcon( "fileopen" ) );
    hl->addWidget( m_pChooseFont );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Text:" ), this ) );
-   m_pText = new QLineEdit( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Text:" ), this ) );
+   m_pText = new TQLineEdit( this );
    hl->addWidget( m_pText );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Thickness:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Thickness:" ), this ) );
    m_pThickness = new PMFloatEdit( this );
    hl->addWidget( m_pThickness );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Offset:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Offset:" ), this ) );
    m_pOffset = new PMVectorEdit( "x", "y", this );
    hl->addWidget( m_pOffset );
    
-   connect( m_pFont, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotTextChanged( const QString& ) ) );
-   connect( m_pChooseFont, SIGNAL( clicked( ) ),
-            SLOT( slotChooseFont( ) ) );
-   connect( m_pText, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotTextChanged( const QString& ) ) );
-   connect( m_pThickness, SIGNAL( dataChanged( ) ),
-            SIGNAL( dataChanged( ) ) );
-   connect( m_pOffset, SIGNAL( dataChanged( ) ),
-            SIGNAL( dataChanged( ) ) );
+   connect( m_pFont, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pChooseFont, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotChooseFont( ) ) );
+   connect( m_pText, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pThickness, TQT_SIGNAL( dataChanged( ) ),
+            TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pOffset, TQT_SIGNAL( dataChanged( ) ),
+            TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMTextEdit::displayObject( PMObject* o )
@@ -119,14 +119,14 @@ bool PMTextEdit::isDataValid( )
    return false;
 }
 
-void PMTextEdit::slotTextChanged( const QString& )
+void PMTextEdit::slotTextChanged( const TQString& )
 {
    emit dataChanged( );
 }
 
 void PMTextEdit::slotChooseFont( )
 {
-   QString str = KFileDialog::getOpenFileName( QString::null, QString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
 
    if( !str.isEmpty() )
    {

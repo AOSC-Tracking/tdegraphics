@@ -53,7 +53,7 @@ PMObjectLink::~PMObjectLink( )
 {
 }
 
-QString PMObjectLink::description( ) const
+TQString PMObjectLink::description( ) const
 {
    return i18n( "object link" );
 }
@@ -139,7 +139,7 @@ void PMObjectLink::setLinkedObjectProperty( PMObject* o )
       setLinkedObject( ( PMDeclare* ) o );
 }
 
-void PMObjectLink::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMObjectLink::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    if( m_pLinkedObject )
       e.setAttribute( "prototype", m_pLinkedObject->id( ) );
@@ -148,7 +148,7 @@ void PMObjectLink::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMObjectLink::readAttributes( const PMXMLHelper& h )
 {
-   QString id = h.stringAttribute( "prototype", "" );
+   TQString id = h.stringAttribute( "prototype", "" );
    if( !id.isEmpty( ) )
    {
       PMDeclare* link = h.parser( )->checkLink( id );
@@ -167,7 +167,7 @@ void PMObjectLink::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMObjectLink::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMObjectLink::editWidget( TQWidget* parent ) const
 {
    return new PMObjectLinkEdit( parent );
 }

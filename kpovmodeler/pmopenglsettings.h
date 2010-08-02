@@ -24,7 +24,7 @@
 
 #include "pmsettingsdialog.h"
 
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * OpenGL configuration dialog page
@@ -36,7 +36,7 @@ public:
    /**
     * Default constructor
     */
-   PMOpenGLSettings( QWidget* parent, const char* name = 0 );
+   PMOpenGLSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -47,7 +47,7 @@ public:
    virtual void displayDefaults( );
 
 private:
-   QCheckBox* m_pDirect;
+   TQCheckBox* m_pDirect;
 };
 
 

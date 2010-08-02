@@ -20,11 +20,11 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
-PMBlobSphereEdit::PMBlobSphereEdit( QWidget* parent, const char* name )
+PMBlobSphereEdit::PMBlobSphereEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -34,27 +34,27 @@ void PMBlobSphereEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout;
+   TQHBoxLayout* layout;
 
    m_pCentre = new PMVectorEdit( "x", "y", "z", this );
    m_pRadius = new PMFloatEdit( this );
    m_pStrength = new PMFloatEdit( this );
 
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Center:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Center:" ), this ) );
    layout->addWidget( m_pCentre );
 
-   layout = new QHBoxLayout( topLayout( ) );
-   QGridLayout* gl = new QGridLayout( layout, 2, 2 );
-   gl->addWidget( new QLabel( i18n( "Radius:" ), this ), 0, 0 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   TQGridLayout* gl = new TQGridLayout( layout, 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "Radius:" ), this ), 0, 0 );
    gl->addWidget( m_pRadius, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Strength:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Strength:" ), this ), 1, 0 );
    gl->addWidget( m_pStrength, 1, 1 );
    layout->addStretch( 1 );
 
-   connect( m_pCentre, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRadius, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pStrength, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pCentre, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pStrength, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBlobSphereEdit::displayObject( PMObject* o )

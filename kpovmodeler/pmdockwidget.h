@@ -57,11 +57,11 @@
 
 #define _KDOCKWIDGET_2_2_
 
-#include <qpoint.h>
-#include <qptrlist.h>
-#include <qframe.h>
-#include <qdom.h>
-#include <qtabwidget.h>
+#include <tqpoint.h>
+#include <tqptrlist.h>
+#include <tqframe.h>
+#include <tqdom.h>
+#include <tqtabwidget.h>
 
 #ifndef NO_KDE2
 #include <kmainwindow.h>
@@ -69,7 +69,7 @@
 #undef  EXPORT_DOCKCLASS
 #define EXPORT_DOCKCLASS
 #else
-#include <qmainwindow.h>
+#include <tqmainwindow.h>
 #include "exportdockclass.h"
 #include "dummykmainwindow.h"
 #endif
@@ -86,17 +86,17 @@ class PMDockWidgetPrivate;
 class PMDockArea;
 class PMDockMainWindowPrivate;
 
-class QObjectList;
-class QPopupMenu;
-class QVBoxLayout;
-class QHBoxLayout;
-class QPixmap;
+class TQObjectList;
+class TQPopupMenu;
+class TQVBoxLayout;
+class TQHBoxLayout;
+class TQPixmap;
 
 #ifndef NO_KDE2
 class KToolBar;
 class KConfig;
 #else
-class QToolBar;
+class TQToolBar;
 #endif
 
 /**
@@ -225,7 +225,7 @@ protected:
   /**
    * Draws the drag panel (a double line)
    */
-  virtual void paintEvent( QPaintEvent* );
+  virtual void paintEvent( TQPaintEvent* );
 
 protected:
   virtual void virtual_hook( int id, void* data );
@@ -303,7 +303,7 @@ protected:
   /**
    * A layout manager for placing the embedded buttons (close and stay)
    */
-  QHBoxLayout* layout;
+  TQHBoxLayout* layout;
 
   /**
    * a little button for closing (undocking and hiding) the dockwidget
@@ -341,7 +341,7 @@ private:
 /**
  * It just hides the special implementation of a dockwidget tab groups (and is member of the dockwidget class set).
  * An abstraction what it is currently.
- * In general it is like @ref QTabWidget but is more useful for the dockwidget class set.
+ * In general it is like @ref TQTabWidget but is more useful for the dockwidget class set.
  * More or less a minor helper class for the dockwidget class set.
  *
  * @author Max Judin (documentation: Falk Brettschneider).
@@ -353,8 +353,8 @@ public:
   /**
    * Constructs this. It just calls the method of the base class.
    */
-  PMDockTabGroup( QWidget *parent = 0, const char *name = 0 )
-  :QTabWidget( parent, name ){};
+  PMDockTabGroup( TQWidget *parent = 0, const char *name = 0 )
+  :TQTabWidget( parent, name ){};
 
   /**
    * Destructs a PMDockTabGroup.
@@ -393,7 +393,7 @@ private:
  * ...
  * PMDockWidget* dock = 0L;
  * dock = mainWidget->createDockWidget( "Any window caption", nicePixmap, 0L, i18n("window caption")); // 0L==no parent
- * QWidget* actualWidget = new QWidget( dock);
+ * TQWidget* actualWidget = new TQWidget( dock);
  * dock->setWidget( actualWidget); // embed it
  * dock->setToolTipString(i18n("That's me")); // available when appearing as tab page
  * ...
@@ -428,8 +428,8 @@ public:
    * @param strTabPageLabel The title of the tab page (shown when in tab page mode), if it is "", only the icon will be shown, if it is 0L, the label is set to strCaption
    */
   PMDockWidget( PMDockManager* dockManager, const char* name,
-               const QPixmap &pixmap, QWidget* parent = 0L, const QString& strCaption = 0L,
-               const QString& strTabPageLabel = " ", WFlags f = 0);
+               const TQPixmap &pixmap, TQWidget* parent = 0L, const TQString& strCaption = 0L,
+               const TQString& strTabPageLabel = " ", WFlags f = 0);
 
   /**
    * Destructs a dockwidget.
@@ -473,7 +473,7 @@ public:
    * @param  tabIndex The position index of the tab widget (when in tab page mode), -1 (default) means append
    * @return result The group dockwidget that replaces the target dockwidget and will be grandparent of target and @p this.
    */
-  PMDockWidget* manualDock( PMDockWidget* target, DockPosition dockPos, int spliPos = 50, QPoint pos = QPoint(0,0), bool check = false, int tabIndex = -1);
+  PMDockWidget* manualDock( PMDockWidget* target, DockPosition dockPos, int spliPos = 50, TQPoint pos = TQPoint(0,0), bool check = false, int tabIndex = -1);
 
   /**
    * Specify where it is either possible or impossible for this to dock to another dockwidget.
@@ -508,23 +508,23 @@ public:
   /**
    * Sets the embedded widget.
    *
-   * A QLayout takes care about proper resizing, automatically.
+   * A TQLayout takes care about proper resizing, automatically.
    *
    * @param w The pointer to the dockwidget's child widget.
    */
-  void setWidget( QWidget* w);
+  void setWidget( TQWidget* w);
 
   /**
    * Get the embedded widget.
    *
    * @return The pointer to the dockwidget's child widget, 0L if there's no such child.
    */
-  QWidget* getWidget() const { return widget; };
+  TQWidget* getWidget() const { return widget; };
 
   /**
    * Sets the header of this dockwidget.
    *
-   * A @ref QLayout takes care about proper resizing, automatically.
+   * A @ref TQLayout takes care about proper resizing, automatically.
    * The header contains the drag panel, the close button and the stay button.
    *
    * @param ah A base class pointer to the dockwidget header
@@ -573,12 +573,12 @@ public:
    *
    * @param ttStr A string for the tooltip on the tab.
    */
-  void setToolTipString(const QString& ttStr) { toolTipStr = ttStr; };
+  void setToolTipString(const TQString& ttStr) { toolTipStr = ttStr; };
 
   /**
    * @return The tooltip string being shown on the appropriate tab page header when in dock-centered mode.
    */
-  const QString& toolTipString() const { return toolTipStr; };
+  const TQString& toolTipString() const { return toolTipStr; };
 
   /**
    * @return result @p true, if a dockback is possible, otherwise @p false.
@@ -589,20 +589,20 @@ public:
    * Sets a string that is used for the label of the tab page when in tab page mode
    * @param label The new tab page label.
    */
-  void setTabPageLabel( const QString& label) { tabPageTitle = label; };
+  void setTabPageLabel( const TQString& label) { tabPageTitle = label; };
 
   /**
    * @return A string that is used for the label of the tab page when in tab page mode.
    */
-  const QString& tabPageLabel() const { return tabPageTitle; };
+  const TQString& tabPageLabel() const { return tabPageTitle; };
 
   /**
-   * Catches and processes some @ref QWidget events that are interesting for dockwidgets.
+   * Catches and processes some @ref TQWidget events that are interesting for dockwidgets.
    */
-  virtual bool event( QEvent * );
+  virtual bool event( TQEvent * );
 
   /**
-   * Add dockwidget management actions to @ref QWidget::show.
+   * Add dockwidget management actions to @ref TQWidget::show.
    */
   virtual void show();
   /**
@@ -626,7 +626,7 @@ public:
    *
    * @param windowType is type of dock window
    */
-  void setDockWindowTransient (QWidget *parent, bool transientEnabled);
+  void setDockWindowTransient (TQWidget *parent, bool transientEnabled);
 
   // MODIFICATION (lpassos)
   /**
@@ -662,7 +662,7 @@ public slots:
    /**
     * Sets the caption and tab label
     */
-   void slotSetCaption( const QString& );
+   void slotSetCaption( const TQString& );
 
 protected:
 
@@ -733,11 +733,11 @@ protected:
   /**
    * a string used as tooltip for the tab page header when in dock-centered mode.
    */
-  QString toolTipStr;
+  TQString toolTipStr;
   /**
    * a string used as title of the tab page when in tab page mode
    */
-  QString tabPageTitle;
+  TQString tabPageTitle;
 
 private:
   /**
@@ -754,7 +754,7 @@ private:
    * @param s the target widget to reparent to
    * @param p the point to move to (if it doesn't reparent)
    */
-  void applyToWidget( QWidget* s, const QPoint& p  = QPoint(0,0) );
+  void applyToWidget( TQWidget* s, const TQPoint& p  = TQPoint(0,0) );
 
   /**
    * A base class pointer to the header of this dockwidget
@@ -764,12 +764,12 @@ private:
   /**
    * the embedded widget
    */
-  QWidget* widget;
+  TQWidget* widget;
 
   /**
    * the layout manager that takes care about proper resizing and moving the embedded widget and the header
    */
-  QVBoxLayout* layout;
+  TQVBoxLayout* layout;
 
   /**
    * the responsible dockmanager
@@ -779,7 +779,7 @@ private:
   /**
    * an icon for the tab widget header
    */
-  QPixmap* pix;
+  TQPixmap* pix;
 
   /**
    * Information about the ability for docking to another dockwidget.
@@ -797,8 +797,8 @@ private:
   PMDockWidget::DockPosition prevSideDockPosBeforeDrag;
 
   // GROUP data
-  QString firstName;
-  QString lastName;
+  TQString firstName;
+  TQString lastName;
   Orientation splitterOrientation;
   bool isGroup;
   bool isTabGroup;
@@ -838,7 +838,7 @@ public:
    * @param mainWindow the main window controlled by this
    * @param name the internal QOject name
    */
-  PMDockManager( QWidget* mainWindow, const char* name = 0L );
+  PMDockManager( TQWidget* mainWindow, const char* name = 0L );
 
   /**
    * Destructs a dockmanager.
@@ -855,14 +855,14 @@ public:
    * @param c the KDE configuration saver
    * @param group the name of the section in KConfig
    */
-  void writeConfig( KConfig* c = 0L, QString group = QString::null );
+  void writeConfig( KConfig* c = 0L, TQString group = TQString::null );
 
   /**
    * Like writeConfig but reads the whole stuff in.
    *
    * In order to restore a window configuration
    * from a config file, it looks up widgets by name
-   * (QObject::name) in the childDock variable of
+   * (TQObject::name) in the childDock variable of
    * PMDockManager. This list in turn contains all
    * PMDockWidgets (according to the PMDockWidget constructor).
    * So in principle, in order to restore a window layout,
@@ -873,17 +873,17 @@ public:
    * @param c the KDE configuration saver
    * @param group the name of the section in KConfig
    */
-  void readConfig ( KConfig* c = 0L, QString group = QString::null );
+  void readConfig ( KConfig* c = 0L, TQString group = TQString::null );
 #endif
 
   /**
    * Saves the current dock window layout into a DOM tree below the given element.
    */
-  void writeConfig(QDomElement &base);
+  void writeConfig(TQDomElement &base);
   /**
    * Reads the current dock window layout from a DOM tree below the given element.
    */
-  void readConfig(QDomElement &base);
+  void readConfig(TQDomElement &base);
 
   /**
    * Shows all encapsulated widgets of all controlled dockwidgets and shows all dockwidgets which are
@@ -899,7 +899,7 @@ public:
    * @param _ the event
    * @return the return value of the method call of the base class method
    */
-  virtual bool eventFilter( QObject *, QEvent * );
+  virtual bool eventFilter( TQObject *, TQEvent * );
 
   /**
    * This method finds out what a widgets' dockwidget is. That means the dockmanager has a look at all
@@ -908,25 +908,25 @@ public:
    * @param w any widget that is supposed to be encapsulated by one of the controlled dockwidgets
    * @return the dockwidget that encapsulates that widget, otherwise 0
    */
-  PMDockWidget* findWidgetParentDock( QWidget* w) const;
+  PMDockWidget* findWidgetParentDock( TQWidget* w) const;
 
   /**
    * Works like makeDockVisible() but can be called for widgets that covered by a dockwidget.
    *
    * @param w the widget that is encapsulated by a dockwidget that turns to visible.
    */
-  void makeWidgetDockVisible( QWidget* w ){ findWidgetParentDock(w)->makeDockVisible(); }
+  void makeWidgetDockVisible( TQWidget* w ){ findWidgetParentDock(w)->makeDockVisible(); }
 
   /**
    * @return the popupmenu for showing/hiding dockwidgets
    */
-  QPopupMenu* dockHideShowMenu() const { return menu; }
+  TQPopupMenu* dockHideShowMenu() const { return menu; }
 
   /**
-   * @param dockName an internal QObject name
-   * @return the dockwidget that has got that internal QObject name
+   * @param dockName an internal TQObject name
+   * @return the dockwidget that has got that internal TQObject name
    */
-  PMDockWidget* getDockWidgetFromName( const QString& dockName );
+  PMDockWidget* getDockWidgetFromName( const TQString& dockName );
 
   /**
    * Enables opaque resizing. Opaque resizing is initially turned off.
@@ -941,7 +941,7 @@ public:
 
   /**
    * Try to preserve the widget's size. Works like KeepSize resize mode
-   * of QSplitter. Off by default.
+   * of TQSplitter. Off by default.
    * Call this method before you create any dock widgets!
    */
   void setSplitterKeepSize(bool b=true);
@@ -967,7 +967,7 @@ public:
   /**
    * Returns the main dock widget
    */
-  QWidget* dockMainWidget( ) const { return main; }
+  TQWidget* dockMainWidget( ) const { return main; }
 
 signals:
 
@@ -1030,16 +1030,16 @@ private:
    * @param pos global (desktop) position of the wanted dockwidget
    * @return the dockwidget at that position
    */
-  PMDockWidget* findDockWidgetAt( const QPoint& pos );
+  PMDockWidget* findDockWidgetAt( const TQPoint& pos );
 
   /**
-   * Finds the QWidget recursively at the position given as parameter
+   * Finds the TQWidget recursively at the position given as parameter
    *
-   * @param w a variable where the method puts the QWidget at that position (instead of a return value)
+   * @param w a variable where the method puts the TQWidget at that position (instead of a return value)
    * @param p the parent widget where the recursive search should start from
    * @param pos global (desktop) position of the wanted dockwidget
    */
-  void findChildDockWidget( QWidget*& w, const QWidget* p, const QPoint& pos );
+  void findChildDockWidget( TQWidget*& w, const TQWidget* p, const TQPoint& pos );
   // MODIFICATION (lpassos)
   // Made findChildDockWidget public
 public:
@@ -1049,11 +1049,11 @@ public:
    * @param p the parent widget where the recursive search starts from
    * @param l the widget list that contains the search result after the return of this method
    */
-  void findChildDockWidget( const QWidget* p, QWidgetList& l);
+  void findChildDockWidget( const TQWidget* p, TQWidgetList& l);
   /**
    * Returns all floating dock widgets
    */
-  void findFloatingWidgets( QPtrList<PMDockWidget>& l );
+  void findFloatingWidgets( TQPtrList<PMDockWidget>& l );
 
 private:
   /**
@@ -1067,7 +1067,7 @@ private:
    * @param d the dockwidget which is dragged
    * @param pos the new position of the dragged dockwidget
    */
-  void dragMove( PMDockWidget* d, QPoint pos );
+  void dragMove( PMDockWidget* d, TQPoint pos );
 
   /**
    * Aborts the drag mode. Restores the cursor and hides the drag indicator.
@@ -1085,7 +1085,7 @@ private:
   /**
    * Usually the PMDockMainWindow but not necessarily.
    */
-  QWidget* main;
+  TQWidget* main;
 
   /**
    * The dockwidget that is being dragged at the moment
@@ -1100,7 +1100,7 @@ private:
   /**
    * It is of interest during the dock process. Then it contains all child dockwidgets.
    */
-  QWidgetList* childDockWidgetList;
+  TQWidgetList* childDockWidgetList;
 
   /**
    * The dockposition where the dockwidget would be docked to, if we dropped it here.
@@ -1111,12 +1111,12 @@ private:
    * A QList of all objects that are important for docking.
    * Some serve as group widgets of dockwidgets, others encapsulate normal widgets.
    */
-  QObjectList* childDock;
+  TQObjectList* childDock;
 
   /**
    * Contains dockwidgets that are created automatically by the dockmanager. For internal use.
    */
-  QObjectList* autoCreateDock;
+  TQObjectList* autoCreateDock;
 
   /**
    * For storing the width during the dragging of a dockwidget.
@@ -1148,12 +1148,12 @@ private:
    * A popup menu that contains one menuitem for each dockwidget that shows the current visibility state and
    * to show or hide the appropriate dockwidget.
    */
-  QPopupMenu* menu;
+  TQPopupMenu* menu;
 
   /**
    * An internal list containing data for the menuitems for the visibility popup menu.
    */
-  QPtrList<MenuDockData> *menuData;
+  TQPtrList<MenuDockData> *menuData;
 
 protected:
   virtual void virtual_hook( int id, void* data );
@@ -1223,7 +1223,7 @@ public:
    *
    * @param name object name
    */
-  PMDockMainWindow( QWidget* parent = 0L, const char *name = 0L, WFlags f = WType_TopLevel | WDestructiveClose );
+  PMDockMainWindow( TQWidget* parent = 0L, const char *name = 0L, WFlags f = WType_TopLevel | WDestructiveClose );
 
   /**
    * Destructs a dockmainwindow.
@@ -1256,23 +1256,23 @@ public:
    * The PMDockMainWindow creates a new dockwidget object here that usually should encapsulate the user's widget.
    * The new dockwidget is automatically taken under control by the dockmanager of the dockmainwindow.
    *
-   * @param name   QObject name (default dockwidget caption)
+   * @param name   TQObject name (default dockwidget caption)
    * @param pixmap window icon (for instance shown when docked as tabwidget entry)
    * @param parent parent widget for the new dockwidget
    * @param strCaption  window title (shown when toplevel)
    * @param strTabPageLabel title of the tab page (visible when in tab page mode), if it is "", only the icon will be shown; if it is 0L, the label is set to strCaption
    * @return    a pointer to the new created dockwidget
    */
-  PMDockWidget* createDockWidget( const QString& name, const QPixmap &pixmap, QWidget* parent = 0L, const QString& strCaption = 0L, const QString& strTabPageLabel = " ");
+  PMDockWidget* createDockWidget( const TQString& name, const TQPixmap &pixmap, TQWidget* parent = 0L, const TQString& strCaption = 0L, const TQString& strTabPageLabel = " ");
 
   /**
    * Saves the current dock window layout into a DOM tree below the given element.
    */
-  void writeDockConfig(QDomElement &base);
+  void writeDockConfig(TQDomElement &base);
   /**
    * Reads the current dock window layout from a DOM tree below the given element.
    */
-  void readDockConfig(QDomElement &base);
+  void readDockConfig(TQDomElement &base);
 
 #ifndef NO_KDE2
   /**
@@ -1281,7 +1281,7 @@ public:
    * @param c     KDE class for saving configurations
    * @param group name of section to write to
    */
-  void writeDockConfig( KConfig* c = 0L, QString group = QString::null );
+  void writeDockConfig( KConfig* c = 0L, TQString group = TQString::null );
 
   /**
    * It reads the current dock state from the given section of KConfig.
@@ -1289,13 +1289,13 @@ public:
    * @param c     KDE class for saving configurations
    * @param group name of section to read from
    */
-  void readDockConfig ( KConfig* c = 0L, QString group = QString::null );
+  void readDockConfig ( KConfig* c = 0L, TQString group = TQString::null );
 #endif
 
   /**
    * It runs through all dockwidgets which are under control of the dockmanager and calls show() for every
    * encapsulated widget and show() for the dockwidget itself if it is not in tab mode.
-   * Additionally, if the main dockwidget is not a QDialog, it will be shown.
+   * Additionally, if the main dockwidget is not a TQDialog, it will be shown.
    */
   void activateDock(){ dockManager->activate(); }
 
@@ -1305,7 +1305,7 @@ public:
    *
    * @return the wanted popup menu
    */
-  QPopupMenu* dockHideShowMenu() const { return dockManager->dockHideShowMenu(); }
+  TQPopupMenu* dockHideShowMenu() const { return dockManager->dockHideShowMenu(); }
 
   /**
    * This method shows the given dockwidget.
@@ -1327,7 +1327,7 @@ public:
    * This is an overloaded member function, provided for convenience.
    * It differs from the above function only in what argument(s) it accepts.
    */
-  void makeWidgetDockVisible( QWidget* widget );
+  void makeWidgetDockVisible( TQWidget* widget );
 
   /**
    * This method calls the base class method.
@@ -1335,7 +1335,7 @@ public:
    *
    * @param _ any widget that should become the main view
    */
-  void setView( QWidget* );
+  void setView( TQWidget* );
 
 signals:
   /**
@@ -1379,7 +1379,7 @@ protected slots:
    * Reimplement if your dock-mainwindow has a complex statusbar
    * (with several items)
    */
-  virtual void slotSetStatusBarText( const QString & );
+  virtual void slotSetStatusBarText( const TQString & );
 
 protected:
    virtual void createShellGUI( bool create = true );
@@ -1406,7 +1406,7 @@ private:
 
 
 #ifdef _JOWENN_EXPERIMENTAL_
-/* Joseph Wenninger jowenn@kde.org Experimental (Just all KMainWindow references changed to QWidget, otherwise nearly exactly the
+/* Joseph Wenninger jowenn@kde.org Experimental (Just all KMainWindow references changed to TQWidget, otherwise nearly exactly the
 same as PMDockMainWindow*/
 
 class EXPORT_DOCKCLASS PMDockArea : public QWidget
@@ -1418,7 +1418,7 @@ friend class PMDockManager;
 public:
 
 
-  PMDockArea( QWidget* parent = 0L, const char *name = 0L);
+  PMDockArea( TQWidget* parent = 0L, const char *name = 0L);
 
   virtual ~PMDockArea();
 
@@ -1428,24 +1428,24 @@ public:
   void setMainDockWidget( PMDockWidget* );
   PMDockWidget* getMainDockWidget(){ return mainDockWidget; }
 
-  PMDockWidget* createDockWidget( const QString& name, const QPixmap &pixmap, QWidget* parent = 0L, const QString& strCaption = 0L, const QString& strTabPageLabel = " ");
+  PMDockWidget* createDockWidget( const TQString& name, const TQPixmap &pixmap, TQWidget* parent = 0L, const TQString& strCaption = 0L, const TQString& strTabPageLabel = " ");
 
-  void writeDockConfig(QDomElement &base);
-  void readDockConfig(QDomElement &base);
+  void writeDockConfig(TQDomElement &base);
+  void readDockConfig(TQDomElement &base);
 
 #ifndef NO_KDE2
-  void writeDockConfig( KConfig* c = 0L, QString group = QString::null );
-  void readDockConfig ( KConfig* c = 0L, QString group = QString::null );
+  void writeDockConfig( KConfig* c = 0L, TQString group = TQString::null );
+  void readDockConfig ( KConfig* c = 0L, TQString group = TQString::null );
 #endif
 
 
 
   void activateDock(){ dockManager->activate(); }
-  QPopupMenu* dockHideShowMenu(){ return dockManager->dockHideShowMenu(); }
+  TQPopupMenu* dockHideShowMenu(){ return dockManager->dockHideShowMenu(); }
   void makeDockVisible( PMDockWidget* dock );
   void makeDockInvisible( PMDockWidget* dock );
-  void makeWidgetDockVisible( QWidget* widget );
-  //void setView( QWidget* );
+  void makeWidgetDockVisible( TQWidget* widget );
+  //void setView( TQWidget* );
 
 signals:
   /**
@@ -1462,7 +1462,7 @@ protected slots:
   void slotDockWidgetUndocked();
 
 public:
-	virtual void resizeEvent(QResizeEvent *);
+	virtual void resizeEvent(TQResizeEvent *);
 
 protected:
   virtual void virtual_hook( int id, void* data );

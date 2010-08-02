@@ -47,12 +47,12 @@ PMLightGroup::~PMLightGroup( )
 {
 }
 
-QString PMLightGroup::description( ) const
+TQString PMLightGroup::description( ) const
 {
-   return QString( i18n( "light group" ) );
+   return TQString( i18n( "light group" ) );
 }
 
-void PMLightGroup::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMLightGroup::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    if( m_globalLights )
       e.setAttribute( "global_lights", "1" );
@@ -103,7 +103,7 @@ void PMLightGroup::setGlobalLights( bool gl )
    }
 }
 
-PMDialogEditBase* PMLightGroup::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMLightGroup::editWidget( TQWidget* parent ) const
 {
    return new PMLightGroupEdit( parent );
 }

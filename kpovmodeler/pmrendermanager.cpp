@@ -30,11 +30,11 @@
 #include "pmgraphicalobject.h"
 #include "pmmath.h"
 
-#include <qptrstack.h>
-#include <qapplication.h>
-#include <qbitmap.h>
-#include <qimage.h>
-#include <qpainter.h>
+#include <tqptrstack.h>
+#include <tqapplication.h>
+#include <tqbitmap.h>
+#include <tqimage.h>
+#include <tqpainter.h>
 #include <kconfig.h>
 #include <klocale.h>
 
@@ -78,7 +78,7 @@ PMRenderManager* PMRenderManager::theManager( )
 }
 
 PMRenderManager::PMRenderManager( )
-      : QObject( qApp )
+      : TQObject( qApp )
 {
    int i;
 
@@ -213,40 +213,40 @@ bool PMRenderManager::containsTask( PMGLView* view ) const
    return contains;
 }
 
-QColor PMRenderManager::controlPointColor( int i ) const
+TQColor PMRenderManager::controlPointColor( int i ) const
 {
    if( ( i >= 0 ) && ( i <= 1 ) )
       return m_controlPointColor[i];
-   return QColor( 0, 0, 0 );
+   return TQColor( 0, 0, 0 );
 }
 
-void PMRenderManager::setControlPointColor( int i, const QColor& c )
+void PMRenderManager::setControlPointColor( int i, const TQColor& c )
 {
    if( ( i >= 0 ) && ( i <= 1 ) )
       m_controlPointColor[i] = c;
 }
 
-QColor PMRenderManager::graphicalObjectColor( int i ) const
+TQColor PMRenderManager::graphicalObjectColor( int i ) const
 {
    if( ( i >= 0 ) && ( i <= 1 ) )
       return m_graphicalObjectColor[i];
-   return QColor( 0, 0, 0 );
+   return TQColor( 0, 0, 0 );
 }
 
-void PMRenderManager::setGraphicalObjectColor( int i, const QColor& c )
+void PMRenderManager::setGraphicalObjectColor( int i, const TQColor& c )
 {
    if( ( i >= 0 ) && ( i <= 1 ) )
       m_graphicalObjectColor[i] = c;
 }
 
-QColor PMRenderManager::axesColor( int i ) const
+TQColor PMRenderManager::axesColor( int i ) const
 {
    if( ( i >= 0 ) && ( i <= 2 ) )
       return m_axesColor[i];
-   return QColor( 0, 0, 0 );
+   return TQColor( 0, 0, 0 );
 }
 
-void PMRenderManager::setAxesColor( int i, const QColor& c )
+void PMRenderManager::setAxesColor( int i, const TQColor& c )
 {
    if( ( i >= 0 ) && ( i <= 2 ) )
       m_axesColor[i] = c;
@@ -278,7 +278,7 @@ void PMRenderManager::slotStopRendering( )
    m_renderTasks.clear( );
 }
 
-void PMRenderManager::timerEvent( QTimerEvent* )
+void PMRenderManager::timerEvent( TQTimerEvent* )
 {
    killTimers( );
    renderTask( );
@@ -499,7 +499,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
                if( m_quickColorObjects.top( ) != it.current( ) )
                {
                   m_quickColorObjects.push( it.current( ) );
-                  m_quickColors.push( new QColor( m_currentColor ) );
+                  m_quickColors.push( new TQColor( m_currentColor ) );
                   m_currentColor = qc->color( ).toQColor( );
                }
             }
@@ -563,7 +563,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
       if( m_quickColorObjects.top( ) == objectToRender )
       {
          m_quickColorObjects.pop( );
-         QColor* col = m_quickColors.pop( );
+         TQColor* col = m_quickColors.pop( );
          if( col )
          {
             m_currentColor = *col;
@@ -1410,7 +1410,7 @@ void PMRenderManager::renderGrid( )
          glVertex2d( screenx, height/2 );
          glEnd( );
 
-         QString label = QString( "%1" ).arg( x * signx, 0, 'g', 4 );
+         TQString label = TQString( "%1" ).arg( x * signx, 0, 'g', 4 );
          if( approxZero( x ) && label.find( "e-" ) )
             label = "0";
 
@@ -1431,7 +1431,7 @@ void PMRenderManager::renderGrid( )
          glVertex2d( width/2, screeny );
          glEnd( );
 
-         QString label = QString( "%1" ).arg( y * signy, 0, 'g', 4 );
+         TQString label = TQString( "%1" ).arg( y * signy, 0, 'g', 4 );
          if( approxZero( y ) && label.find( "e-" ) )
             label = "0";
 
@@ -1536,7 +1536,7 @@ void PMRenderManager::renderDescription( )
          PMCamera* c = m_pCurrentGlView->camera( );
          if( c )
          {
-            QString name( "-" );
+            TQString name( "-" );
             if( !c->name( ).isEmpty( ) )
                name = c->name( );
             else
@@ -1559,27 +1559,27 @@ void PMRenderManager::renderDescription( )
    glPopMatrix( );
 }
 
-void PMRenderManager::renderString( const QString& str, double x, double y )
+void PMRenderManager::renderString( const TQString& str, double x, double y )
 {
    int width  = qApp->fontMetrics( ).boundingRect( str ).width( );
    int height = qApp->fontMetrics( ).height( );
 
    // GL wants word aligned bitmap
-   QBitmap bm( ( ( width + 32 ) % 32 ) * 32, height, true );
+   TQBitmap bm( ( ( width + 32 ) % 32 ) * 32, height, true );
 
-   QPainter p( &bm );
+   TQPainter p( &bm );
    p.setFont( qApp->font( ) );
    p.drawText( bm.rect( ), Qt::AlignLeft | Qt::AlignBottom, str );
    p.end();
 
    // Transform to GL bitmap
-   QImage img = bm.convertToImage( ).mirror( ).convertBitOrder( QImage::BigEndian );
+   TQImage img = bm.convertToImage( ).mirror( ).convertBitOrder( TQImage::BigEndian );
 
    glRasterPos2d( x, y );
    glBitmap( img.width( ), img.height( ), 0, 0, 0, 0, img.bits( ) );
 }
 
-void PMRenderManager::setGLColor( const QColor& c )
+void PMRenderManager::setGLColor( const TQColor& c )
 {
    int r, g, b;
 

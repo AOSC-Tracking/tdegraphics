@@ -68,11 +68,11 @@ Value SVGStringListImplProtoFunc::call(ExecState *exec, Object &thisObj, const L
 	return obj->call(exec, static_cast<SVGList<SharedString> *>(obj), args, id);
 }
 
-QString SVGStringListImpl::join(const QString &seperator) const
+TQString SVGStringListImpl::join(const TQString &seperator) const
 {
 	SVGStringListImpl *self = const_cast<SVGStringListImpl *>(this);
 
-	QString result;
+	TQString result;
 	
 	if(!self->getItem(0))
 		return result;

@@ -29,7 +29,7 @@
 #ifndef __kp_color_similarity_cube_h__
 #define __kp_color_similarity_cube_h__
 
-#include <qframe.h>
+#include <tqframe.h>
 
 class kpColor;
 class kpMainWindow;
@@ -46,7 +46,7 @@ public:
 
     kpColorSimilarityCube (int look,
                            kpMainWindow *mainWindow,
-                           QWidget *parent,
+                           TQWidget *parent,
                            const char *name = 0);
     virtual ~kpColorSimilarityCube ();
 
@@ -55,15 +55,15 @@ public:
     double colorSimilarity () const;
     void setColorSimilarity (double similarity);
 
-    virtual QSize sizeHint () const;
+    virtual TQSize sizeHint () const;
 
 protected:
-    QColor color (int redOrGreenOrBlue, int baseBrightness, int similarityDirection) const;
-    void drawFace (QPainter *p,
+    TQColor color (int redOrGreenOrBlue, int baseBrightness, int similarityDirection) const;
+    void drawFace (TQPainter *p,
                    int redOrGreenOrBlue,
-                   const QPoint &tl, const QPoint &tr,
-                   const QPoint &bl, const QPoint &br);
-    virtual void drawContents (QPainter *p);
+                   const TQPoint &tl, const TQPoint &tr,
+                   const TQPoint &bl, const TQPoint &br);
+    virtual void drawContents (TQPainter *p);
 
     kpMainWindow *m_mainWindow;
     double m_colorSimilarity;

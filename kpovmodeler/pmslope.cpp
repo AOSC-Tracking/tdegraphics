@@ -52,12 +52,12 @@ PMSlope::~PMSlope( )
 {
 }
 
-QString PMSlope::description( ) const
+TQString PMSlope::description( ) const
 {
    return i18n( "slope" );
 }
 
-void PMSlope::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
+void PMSlope::serialize( TQDomElement& e, TQDomDocument& /*doc*/ ) const
 {
    e.setAttribute( "height", m_height );
    e.setAttribute( "slope", m_slope );
@@ -113,7 +113,7 @@ void PMSlope::setSlope( const double c )
    }
 }
 
-PMDialogEditBase* PMSlope::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMSlope::editWidget( TQWidget* parent ) const
 {
    return new PMSlopeEdit( parent );
 }

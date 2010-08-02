@@ -17,7 +17,7 @@
 
 #include "pmmetaobject.h"
 
-PMPropertyBase::PMPropertyBase( const QString& name,
+PMPropertyBase::PMPropertyBase( const TQString& name,
                                 PMVariant::PMVariantDataType t,
                                 bool readOnly, bool writeOnly )
 {
@@ -36,7 +36,7 @@ PMPropertyBase::PMPropertyBase( const PMPropertyBase& p )
    m_writeOnly = p.m_writeOnly;
 
    if( p.m_pEnumList )
-      m_pEnumList = new QStringList( *( p.m_pEnumList ) );
+      m_pEnumList = new TQStringList( *( p.m_pEnumList ) );
    else
       m_pEnumList = 0;
 }
@@ -63,7 +63,7 @@ PMVariant PMPropertyBase::getProperty( const PMObject* obj )
    return getProtected( obj );
 }
 
-PMMetaObject::PMMetaObject( const QString& className, PMMetaObject* superClass,
+PMMetaObject::PMMetaObject( const TQString& className, PMMetaObject* superClass,
                             PMObjectFactoryMethod factory )
 {
    m_className = className;

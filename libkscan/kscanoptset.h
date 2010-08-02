@@ -20,10 +20,10 @@
 #ifndef KSCANOPTSET_H
 #define KSCANOPTSET_H
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qptrlist.h>
-#include <qasciidict.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
+#include <tqasciidict.h>
 
 
 #include "kscanoption.h"
@@ -33,7 +33,7 @@
   * about single scanner dependant options. It allows you to store a bunch
   * of options and accessing them via a iterator.
   *
-  * The class which is inherited from QAsciiDict does no deep copy of the options
+  * The class which is inherited from TQAsciiDict does no deep copy of the options
   * to store by with the standard method insert.
   * @see backupOption to get a deep copy.
   *
@@ -46,7 +46,7 @@
 
 
 
-class KScanOptSet: public QAsciiDict<KScanOption>
+class KScanOptSet: public TQAsciiDict<KScanOption>
 {
 
 public:
@@ -54,12 +54,12 @@ public:
     *  Constructor to create  a new Container. Takes a string as a name, which
     *  has no special meaning yet ;)
     */
-   KScanOptSet( const QCString& );
+   KScanOptSet( const TQCString& );
    ~KScanOptSet();
 
    /**
     *  function to store a deep copy of an option. Note that this class is inherited
-    *  from QAsciiDict and thus does no deep copies.  This method does.
+    *  from TQAsciiDict and thus does no deep copies.  This method does.
     *  @see insert
     */
    bool backupOption( const KScanOption& );
@@ -67,10 +67,10 @@ public:
    /**
     *  returns a pointer to a stored option given by name.
     */
-   KScanOption *get( const QCString name ) const;
-   QCString      getValue( const QCString name ) const;
+   KScanOption *get( const TQCString name ) const;
+   TQCString      getValue( const TQCString name ) const;
 
-   void backupOptionDict( const QAsciiDict<KScanOption>& ); 
+   void backupOptionDict( const TQAsciiDict<KScanOption>& ); 
 
    /**
     * saves a configuration set to the configuration file 'ScanSettings'
@@ -82,7 +82,7 @@ public:
     * @param configName: The name of the config, e.g. Black and White
     * @param descr : A description for the config.
     */
-   void saveConfig( const QString&, const QString&, const QString&);
+   void saveConfig( const TQString&, const TQString&, const TQString&);
 
    /**
     * allows to load a configuration. Simple create a optionSet with the
@@ -90,24 +90,24 @@ public:
     * load for the scanner you want.
     * @param scannerName: A scanner's name
     */
-   bool load( const QString& scannerName );
+   bool load( const TQString& scannerName );
 
-   QString  getDescription() const;
+   TQString  getDescription() const;
    
 public slots:
  
-    void slSetDescription( const QString& );
+    void slSetDescription( const TQString& );
    
 private:
-   QCString name;
+   TQCString name;
 
    /* List to collect objects for which memory was allocated and must be freed */
-   QPtrList<KScanOption> strayCatsList;
+   TQPtrList<KScanOption> strayCatsList;
 
    class KScanOptSetPrivate;
    KScanOptSetPrivate *d;
 
-   QString description;
+   TQString description;
 };
 
 #endif // KScanOptSet

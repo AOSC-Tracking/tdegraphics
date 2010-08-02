@@ -12,8 +12,8 @@
 #include <kcombobox.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <qlineedit.h>
-#include <qvalidator.h>
+#include <tqlineedit.h>
+#include <tqvalidator.h>
 
 #include "pageSize.h"
 #include "pageSizeWidget.h"
@@ -23,10 +23,10 @@
 
 // Constructs a pageSizeWidget_base which is a child of 'parent', with
 // the name 'name' and widget flags set to 'f'.
-pageSizeWidget::pageSizeWidget( QWidget* parent,  const char* name, WFlags fl )
+pageSizeWidget::pageSizeWidget( TQWidget* parent,  const char* name, WFlags fl )
     : pageSizeWidget_base( parent,  name, fl )
 {
-  connect(&chosenSize, SIGNAL(sizeChanged(const SimplePageSize&)), previewer, SLOT(setSize(const SimplePageSize&)));
+  connect(&chosenSize, TQT_SIGNAL(sizeChanged(const SimplePageSize&)), previewer, TQT_SLOT(setSize(const SimplePageSize&)));
 
   // Set up the formatChoice QComboBox
   formatChoice->insertItem(i18n("Custom Size"));
@@ -42,23 +42,23 @@ pageSizeWidget::pageSizeWidget( QWidget* parent,  const char* name, WFlags fl )
   }
   paperSize(formatChoice->currentItem());
 
-  connect(formatChoice, SIGNAL(activated(int)), this, SLOT(paperSize(int)));
-  connect(orientationChoice, SIGNAL(activated(int)), this, SLOT(orientationChanged(int)));
+  connect(formatChoice, TQT_SIGNAL(activated(int)), this, TQT_SLOT(paperSize(int)));
+  connect(orientationChoice, TQT_SIGNAL(activated(int)), this, TQT_SLOT(orientationChanged(int)));
 
   // Update the text fields when the user switches to a new unit, and
   // when the "custom format" is NOT selected.
-  connect(widthUnits, SIGNAL(activated(int)), this, SLOT(unitsChanged(int)));
-  connect(heightUnits, SIGNAL(activated(int)), this, SLOT(unitsChanged(int)));
+  connect(widthUnits, TQT_SIGNAL(activated(int)), this, TQT_SLOT(unitsChanged(int)));
+  connect(heightUnits, TQT_SIGNAL(activated(int)), this, TQT_SLOT(unitsChanged(int)));
 
   // Upate the chosen size whenever the user edits the input field. 
-  connect(widthInput, SIGNAL(textChanged(const QString &)), this, SLOT(input(const QString &)));
-  connect(heightInput, SIGNAL(textChanged(const QString &)), this, SLOT(input(const QString &)));
+  connect(widthInput, TQT_SIGNAL(textChanged(const TQString &)), this, TQT_SLOT(input(const TQString &)));
+  connect(heightInput, TQT_SIGNAL(textChanged(const TQString &)), this, TQT_SLOT(input(const TQString &)));
 
   // Allow entries between 0 and 1200. More filtering is done by the
   // pageSize class, which silently ignores values which are out of
   // range.
-  widthInput->setValidator(new QDoubleValidator(0.0, 1200.0, 1, this, "widthValidator"));
-  heightInput->setValidator(new QDoubleValidator(0.0, 1200.0, 1, this, "heightValidator"));
+  widthInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, this, "widthValidator"));
+  heightInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, this, "heightValidator"));
 }
 
 
@@ -81,7 +81,7 @@ void pageSizeWidget::paperSize(int index)
 }
 
 
-void pageSizeWidget::setPageSize(const QString& sizeName)
+void pageSizeWidget::setPageSize(const TQString& sizeName)
 {
   chosenSize.setPageSize(sizeName);
 
@@ -104,9 +104,9 @@ void pageSizeWidget::fillTextFields()
   // Warning! It is really necessary here to first generate both
   // strings, and then call setText() on the input widgets. Reason?
   // Calling setText() implicitly calls the input() method via the
-  // textChanged()-Signal of the QLineEdit widgets.
-  QString width  = chosenSize.widthString(widthUnits->currentText());
-  QString height = chosenSize.heightString(heightUnits->currentText());
+  // textChanged()-Signal of the TQLineEdit widgets.
+  TQString width  = chosenSize.widthString(widthUnits->currentText());
+  TQString height = chosenSize.heightString(heightUnits->currentText());
 
   widthInput->setText(width);
   heightInput->setText(height);
@@ -120,7 +120,7 @@ void pageSizeWidget::unitsChanged(int)
   if (formatChoice->currentItem() != 0)
     fillTextFields();
   else
-    input(QString::null);
+    input(TQString::null);
 }
 
 
@@ -138,7 +138,7 @@ void pageSizeWidget::orientationChanged(int orient)
 }
 
 
-void pageSizeWidget::input(const QString &)
+void pageSizeWidget::input(const TQString &)
 {
   chosenSize.setPageSize(widthInput->text(), widthUnits->currentText(), heightInput->text(), heightUnits->currentText());
 }

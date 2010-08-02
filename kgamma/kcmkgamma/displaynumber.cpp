@@ -15,18 +15,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qstring.h>
-#include <qfontmetrics.h>
+#include <tqstring.h>
+#include <tqfontmetrics.h>
 
 #include "displaynumber.h"
 
-DisplayNumber::DisplayNumber(QWidget *parent, int digits, \
-    int prec, const char *name) : QLabel(parent,name) {
+DisplayNumber::DisplayNumber(TQWidget *parent, int digits, \
+    int prec, const char *name) : TQLabel(parent,name) {
 
   setPrecision(prec);
   setWidth(digits);  
 
-  setFrameStyle(QFrame::Panel | QFrame::Sunken);
+  setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
   setBackgroundMode(Qt::PaletteBase);
   setAlignment(Qt::AlignCenter);
   setFocusPolicy(NoFocus);
@@ -35,14 +35,14 @@ DisplayNumber::DisplayNumber(QWidget *parent, int digits, \
 DisplayNumber::~DisplayNumber(){
 }
 
-void DisplayNumber::setFont( const QFont & f ) {
-  QLabel::setFont(f);
+void DisplayNumber::setFont( const TQFont & f ) {
+  TQLabel::setFont(f);
   setWidth(dg);
 }
 
 void DisplayNumber::setWidth(int digits) {
-  QFontMetrics fm(font());
-  QString s("0123456789.+-");
+  TQFontMetrics fm(font());
+  TQString s("0123456789.+-");
   int width = 0, charWidth=0;
 
   for (int i = 0; i < 11; i++, width = fm.width(s[i]))
@@ -53,7 +53,7 @@ void DisplayNumber::setWidth(int digits) {
 }
 
 void DisplayNumber::setNum(double num) {
-  QString text;
+  TQString text;
   setText(text.setNum(num, 'f', precision));
 }
     

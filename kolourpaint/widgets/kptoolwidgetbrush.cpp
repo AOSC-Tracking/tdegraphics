@@ -31,8 +31,8 @@
 
 #include <kptoolwidgetbrush.h>
 
-#include <qbitmap.h>
-#include <qpainter.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -52,12 +52,12 @@ static int brushSize [][3] =
 #define BRUSH_SIZE_NUM_COLS (int (sizeof (brushSize [0]) / sizeof (brushSize [0][0])))
 #define BRUSH_SIZE_NUM_ROWS (int (sizeof (brushSize) / sizeof (brushSize [0])))
 
-kpToolWidgetBrush::kpToolWidgetBrush (QWidget *parent, const char *name)
+kpToolWidgetBrush::kpToolWidgetBrush (TQWidget *parent, const char *name)
     : kpToolWidgetBase (parent, name)
 {
     setInvertSelectedPixmap ();
 
-    QPixmap *pm = m_brushBitmaps;
+    TQPixmap *pm = m_brushBitmaps;
     
     for (int shape = 0; shape < BRUSH_SIZE_NUM_ROWS; shape++)
     {
@@ -69,13 +69,13 @@ kpToolWidgetBrush::kpToolWidgetBrush (QWidget *parent, const char *name)
                         (h <= 0 ? height () : h));
 
             const int s = brushSize [shape][i];
-            QRect rect;
+            TQRect rect;
             
             if (s >= pm->width () || s >= pm->height ())
-                rect = QRect (0, 0, pm->width (), pm->height ());
+                rect = TQRect (0, 0, pm->width (), pm->height ());
             else
             {
-                rect = QRect ((pm->width () - s) / 2,
+                rect = TQRect ((pm->width () - s) / 2,
                               (pm->height () - s) / 2,
                               s,
                               s);
@@ -87,7 +87,7 @@ kpToolWidgetBrush::kpToolWidgetBrush (QWidget *parent, const char *name)
 
             pm->fill (Qt::white);
             
-            QPainter painter (pm);
+            TQPainter painter (pm);
             painter.setPen (Qt::black);
             painter.setBrush (Qt::black);
 
@@ -127,14 +127,14 @@ kpToolWidgetBrush::~kpToolWidgetBrush ()
 
 
 // private
-QString kpToolWidgetBrush::brushName (int shape, int whichSize)
+TQString kpToolWidgetBrush::brushName (int shape, int whichSize)
 {
     int s = brushSize [shape][whichSize];
     
     if (s == 1)
         return i18n ("1x1");
     
-    QString shapeName;
+    TQString shapeName;
 
     // sync: <brushes>
     switch (shape)
@@ -156,12 +156,12 @@ QString kpToolWidgetBrush::brushName (int shape, int whichSize)
     }
     
     if (shapeName.isEmpty ())
-        return QString::null;
+        return TQString::null;
     
     return i18n ("%1x%2 %3").arg (s).arg (s).arg (shapeName);
 }
 
-QPixmap kpToolWidgetBrush::brush () const
+TQPixmap kpToolWidgetBrush::brush () const
 {
     return m_brushBitmaps [selectedRow () * BRUSH_SIZE_NUM_COLS + selectedCol ()];
 }

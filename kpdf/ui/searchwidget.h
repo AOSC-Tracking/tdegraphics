@@ -31,18 +31,18 @@ class SearchWidget : public KToolBar
 {
     Q_OBJECT
     public:
-        SearchWidget( QWidget *parent, KPDFDocument *document );
+        SearchWidget( TQWidget *parent, KPDFDocument *document );
         void clearText();
 
     private:
         KPDFDocument * m_document;
         KPopupMenu * m_menu;
-        QTimer * m_inputDelayTimer;
+        TQTimer * m_inputDelayTimer;
         int m_searchType;
         bool m_caseSensitive;
 
     private slots:
-        void slotTextChanged( const QString & text );
+        void slotTextChanged( const TQString & text );
         void slotMenuChaged( int index );
         void startSearch();
 };

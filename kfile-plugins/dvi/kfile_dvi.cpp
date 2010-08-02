@@ -27,19 +27,19 @@
 #include <klocale.h>
 #include <kfilemetainfo.h>
 
-#include <qstring.h>
-#include <qvariant.h>
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qregexp.h>
+#include <tqstring.h>
+#include <tqvariant.h>
+#include <tqdatetime.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqregexp.h>
 
 
 // preprocessormacro K_EXPORT_COMPONENT_FACTORY loads shared library 'kfile_dvi.so' dynamic if necessary
 typedef KGenericFactory<KDviPlugin> DviFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_dvi, DviFactory("kfile_dvi"))
 
-KDviPlugin::KDviPlugin (QObject * parent, const char * name, const QStringList & preferredItems)
+KDviPlugin::KDviPlugin (TQObject * parent, const char * name, const TQStringList & preferredItems)
   : KFilePlugin(parent, name, preferredItems)
 {
   kdDebug(7034) << "dvi plugin" << endl;
@@ -50,9 +50,9 @@ KDviPlugin::KDviPlugin (QObject * parent, const char * name, const QStringList &
   
   KFileMimeTypeInfo::GroupInfo * group = this->addGroupInfo(info, "General", "General");
   
-  this->addItemInfo(group, "3_Created", i18n("Created"), QVariant::String);
-  this->addItemInfo(group, "6_Comment", i18n("Comment"), QVariant::String);
-  this->addItemInfo(group, "7_Pages", i18n("Pages"), QVariant::UInt);
+  this->addItemInfo(group, "3_Created", i18n("Created"), TQVariant::String);
+  this->addItemInfo(group, "6_Comment", i18n("Comment"), TQVariant::String);
+  this->addItemInfo(group, "7_Pages", i18n("Pages"), TQVariant::UInt);
 }
 
 bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this plugin) */)
@@ -60,11 +60,11 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   if ( info.path().isEmpty() )
     return false;
   KFileMetaInfoGroup GeneralGroup = appendGroup(info, "General");
-  QFile f(info.path());
-  QFileInfo f_info;
+  TQFile f(info.path());
+  TQFileInfo f_info;
   Q_UINT16 bytes_to_read;
   Q_UINT8 comment_length;
-  QString comment;
+  TQString comment;
   Q_UINT16 pages;
   Q_UINT8 buffer[270]; // buffer for reading data; no data is read with more than 270 bytes
   Q_UINT32 ptr;
@@ -134,14 +134,14 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   pages = buffer[0];
   pages = (pages << 8) | buffer[1];
   
-  appendItem(GeneralGroup, "7_Pages", QVariant(pages) );
+  appendItem(GeneralGroup, "7_Pages", TQVariant(pages) );
   
   f.close();
   
   // now get and set up some basic informations about the file (same informations would be displayed, if there is no dvi-plugin)
-  appendItem(GeneralGroup, "1_Type", QVariant( i18n("TeX Device Independent file") ) ); // set up type of file
+  appendItem(GeneralGroup, "1_Type", TQVariant( i18n("TeX Device Independent file") ) ); // set up type of file
   
-  appendItem(GeneralGroup, "4_Modified", QVariant(f_info.lastModified().toString("yyyy-MM-dd hh:mm")) );
+  appendItem(GeneralGroup, "4_Modified", TQVariant(f_info.lastModified().toString("yyyy-MM-dd hh:mm")) );
   // ISO 8601 date format (without seconds)
   
   return true;

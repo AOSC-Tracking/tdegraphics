@@ -19,17 +19,17 @@
 
 #include "pmpluginmanager.h"
 
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qlistview.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqlistview.h>
+#include <tqpushbutton.h>
 #include <klocale.h>
 
 class PMPluginListViewItem : public QListViewItem
 {
 public:
-   PMPluginListViewItem( QListView* parent, PMPluginInfo* info )
-         : QListViewItem( parent, info->name( ), info->description( ) )
+   PMPluginListViewItem( TQListView* parent, PMPluginInfo* info )
+         : TQListViewItem( parent, info->name( ), info->description( ) )
    {
       m_info = info;
       m_enabled = info->enabled( );
@@ -51,29 +51,29 @@ public:
    bool m_enabled;
 };
 
-PMPluginSettings::PMPluginSettings( QWidget* parent, const char* name )
+PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   QVBoxLayout* vlayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
-   QGroupBox* gb = new QGroupBox( i18n( "Installed Plugins" ), this );
+   TQGroupBox* gb = new TQGroupBox( i18n( "Installed Plugins" ), this );
    vlayout->addWidget( gb );
 
-   QVBoxLayout* gvl = new QVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   TQVBoxLayout* gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
 
-   m_pPluginsList = new QListView( gb );
-   connect( m_pPluginsList, SIGNAL( selectionChanged( ) ),
-            SLOT( slotSelectionChanged( ) ) );
+   m_pPluginsList = new TQListView( gb );
+   connect( m_pPluginsList, TQT_SIGNAL( selectionChanged( ) ),
+            TQT_SLOT( slotSelectionChanged( ) ) );
    m_pPluginsList->addColumn( i18n( "Name" ) );
    m_pPluginsList->addColumn( i18n( "Description" ) );
    m_pPluginsList->addColumn( i18n( "Status" ) );
    gvl->addWidget( m_pPluginsList, 1 );
 
-   QHBoxLayout* hl = new QHBoxLayout( gvl );
-   m_pToggle = new QPushButton( i18n( "Load" ), gb );
+   TQHBoxLayout* hl = new TQHBoxLayout( gvl );
+   m_pToggle = new TQPushButton( i18n( "Load" ), gb );
    m_pToggle->setEnabled( false );
-   connect( m_pToggle, SIGNAL( clicked( ) ), SLOT( slotToggle( ) ) );
+   connect( m_pToggle, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotToggle( ) ) );
    hl->addWidget( m_pToggle );
    hl->addStretch( 1 );
 
@@ -82,8 +82,8 @@ PMPluginSettings::PMPluginSettings( QWidget* parent, const char* name )
 
 void PMPluginSettings::displaySettings( )
 {
-   QPtrList<PMPluginInfo> plugins = PMPluginManager::theManager( )->plugins( );
-   QPtrListIterator<PMPluginInfo> it( plugins );
+   TQPtrList<PMPluginInfo> plugins = PMPluginManager::theManager( )->plugins( );
+   TQPtrListIterator<PMPluginInfo> it( plugins );
 
    m_pPluginsList->clear( );
    for( ; *it; ++it )

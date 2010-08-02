@@ -23,12 +23,12 @@
 
 #include "pageNumber.h"
 
-#include <qpixmap.h>
-#include <qptrvector.h>
-#include <qscrollview.h>
+#include <tqpixmap.h>
+#include <tqptrvector.h>
+#include <tqscrollview.h>
 
-class QCheckBox;
-class QLabel;
+class TQCheckBox;
+class TQLabel;
 class KPopupMenu;
 
 class DocumentPageCache;
@@ -48,8 +48,8 @@ public:
   ThumbnailWidget(MarkListWidget* parent_, const PageNumber& _pageNumber, DocumentPageCache*);
 
 private:
-  virtual void paintEvent(QPaintEvent*);
-  virtual void resizeEvent(QResizeEvent*);
+  virtual void paintEvent(TQPaintEvent*);
+  virtual void resizeEvent(TQResizeEvent*);
 
 private slots:
   void setThumbnail();
@@ -63,7 +63,7 @@ private:
 
   MarkListWidget* parent;
 
-  QPixmap thumbnail;
+  TQPixmap thumbnail;
 };
 
 
@@ -75,7 +75,7 @@ class MarkListWidget : public QWidget
   Q_OBJECT
 
 public:
-  MarkListWidget(QWidget* _parent, MarkList*, const PageNumber& _pageNumber, DocumentPageCache*, bool _showThumbnail = true);
+  MarkListWidget(TQWidget* _parent, MarkList*, const PageNumber& _pageNumber, DocumentPageCache*, bool _showThumbnail = true);
 
   bool isChecked() const;
 
@@ -94,19 +94,19 @@ signals:
   void selected(const PageNumber&);
 
   /** Emitted on right click. */
-  void showPopupMenu(const PageNumber& pageNumber, const QPoint& position);
+  void showPopupMenu(const PageNumber& pageNumber, const TQPoint& position);
 
 protected:
-  virtual void mousePressEvent(QMouseEvent*);
+  virtual void mousePressEvent(TQMouseEvent*);
 
 private:
 
   bool showThumbnail;
 
   ThumbnailWidget* thumbnailWidget;
-  QCheckBox* checkBox;
-  QLabel* pageLabel;
-  QColor _backgroundColor;
+  TQCheckBox* checkBox;
+  TQLabel* pageLabel;
+  TQColor _backgroundColor;
 
   const PageNumber pageNumber;
 
@@ -126,18 +126,18 @@ class MarkList: public QScrollView
     Q_OBJECT
 
 public:
-  MarkList(QWidget* parent = 0, const char* name = 0);
+  MarkList(TQWidget* parent = 0, const char* name = 0);
   virtual ~MarkList();
 
   void setPageCache(DocumentPageCache*);
 
-  QValueList<int> selectedPages() const;
+  TQValueList<int> selectedPages() const;
 
   PageNumber currentPageNumber() { return currentPage; }
 
   PageNumber numberOfPages() { return widgetList.count(); }
 
-  virtual QSize sizeHint() const { return QSize(); }
+  virtual TQSize sizeHint() const { return TQSize(); }
 
 public slots:
   void setNumberOfPages(int numberOfPages, bool showThumbnails = true);
@@ -153,15 +153,15 @@ public slots:
   void updateWidgetSize(const PageNumber&);
 
 protected:
-  virtual void viewportResizeEvent(QResizeEvent*);
+  virtual void viewportResizeEvent(TQResizeEvent*);
 
-  virtual void mousePressEvent(QMouseEvent*);
+  virtual void mousePressEvent(TQMouseEvent*);
 
 signals:
   void selected(const PageNumber&);
 
 private slots:
-  void showPopupMenu(const PageNumber& pageNumber, const QPoint& position);
+  void showPopupMenu(const PageNumber& pageNumber, const TQPoint& position);
 
   void selectAll();
   void selectEven();
@@ -170,7 +170,7 @@ private slots:
   void removeSelection();
 
 private:
-  QPtrVector<MarkListWidget> widgetList;
+  TQPtrVector<MarkListWidget> widgetList;
 
   PageNumber currentPage;
 

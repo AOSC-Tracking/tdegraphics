@@ -21,7 +21,7 @@
 #ifndef __KICONCONFIG_H__
 #define __KICONCONFIG_H__
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 #include <kdialogbase.h>
 
 #include "knew.h"
@@ -36,25 +36,25 @@ class KAccel;
 class KKeyChooser;
 class KColorButton;
 class KURLRequester;
-class QComboBox;
+class TQComboBox;
 
 class KTemplateEditDlg : public KDialogBase
 {
   Q_OBJECT
 public:
-  KTemplateEditDlg(QWidget *);
+  KTemplateEditDlg(TQWidget *);
   ~KTemplateEditDlg() {};
 
-  QString name();
-  QString path();
-  void setName(const QString &);
-  void setPath(const QString &);
+  TQString name();
+  TQString path();
+  void setName(const TQString &);
+  void setPath(const TQString &);
   
 public slots:
   void slotTextChanged();
 
 protected:
-  QLineEdit *ln_name;
+  TQLineEdit *ln_name;
   KURLRequester *ln_path;
 };
 
@@ -62,7 +62,7 @@ class KTemplateConfig : public QWidget
 {
   Q_OBJECT
 public:
-  KTemplateConfig(QWidget*);
+  KTemplateConfig(TQWidget*);
   ~KTemplateConfig();
 
   void saveSettings();
@@ -75,19 +75,19 @@ protected slots:
 
 protected:
   KIconListBox *templates;
-  QPushButton *btadd, *btedit, *btremove;
+  TQPushButton *btadd, *btedit, *btremove;
 };
 
 class KBackgroundConfig : public QWidget
 {
   Q_OBJECT
 public:
-  KBackgroundConfig(QWidget *parent);
+  KBackgroundConfig(TQWidget *parent);
   ~KBackgroundConfig();
 
 public slots:
   void saveSettings();
-  void selectColor(const QColor & newColor);
+  void selectColor(const TQColor & newColor);
   void selectPixmap();
 
 signals:
@@ -97,18 +97,18 @@ protected slots:
 
 protected:
   KColorButton *btcolor;
-  QPushButton *btpix;
-  QPixmap pix;
-  QString pixpath;
-  QWidget::BackgroundMode bgmode;
-  QLabel *lb_ex;
+  TQPushButton *btpix;
+  TQPixmap pix;
+  TQString pixpath;
+  TQWidget::BackgroundMode bgmode;
+  TQLabel *lb_ex;
 };
 
 class KMiscConfig : public QWidget
 {
   Q_OBJECT
 public:
-  KMiscConfig(QWidget *parent);
+  KMiscConfig(TQWidget *parent);
   ~KMiscConfig();
 
 public slots:
@@ -123,11 +123,11 @@ signals:
 
 protected:
   bool pastemode, showrulers;
-  QRadioButton *rbp;
+  TQRadioButton *rbp;
   KColorButton *m_solidColorButton;
   KColorButton *m_checkerboardColor1Button;
   KColorButton *m_checkerboardColor2Button;
-  QComboBox *m_checkerboardSizeCombo;
+  TQComboBox *m_checkerboardSizeCombo;
 };
 
 class KIconConfig : public KDialogBase
@@ -136,7 +136,7 @@ class KIconConfig : public KDialogBase
 
 public:
   
-  KIconConfig(QWidget *parent);
+  KIconConfig(TQWidget *parent);
   ~KIconConfig();
 
 protected slots:

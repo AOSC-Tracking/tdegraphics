@@ -57,12 +57,12 @@ PMBox::~PMBox( )
 {
 }
 
-QString PMBox::description( ) const
+TQString PMBox::description( ) const
 {
    return i18n( "box" );
 }
 
-void PMBox::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMBox::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "corner_a", m_corner1.serializeXML( ) );
    e.setAttribute( "corner_b", m_corner2.serializeXML( ) );
@@ -114,7 +114,7 @@ void PMBox::setCorner2( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMBox::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBox::editWidget( TQWidget* parent ) const
 {
    return new PMBoxEdit( parent );
 }

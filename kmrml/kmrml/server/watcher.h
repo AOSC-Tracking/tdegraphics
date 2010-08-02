@@ -19,11 +19,11 @@
 #ifndef LAUNCHER_H
 #define LAUNCHER_H
 
-#include <qdict.h>
-#include <qmap.h>
-#include <qstrlist.h>
-#include <qstringlist.h>
-#include <qtimer.h>
+#include <tqdict.h>
+#include <tqmap.h>
+#include <tqstrlist.h>
+#include <tqstringlist.h>
+#include <tqtimer.h>
 
 #include <kdedmodule.h>
 #include <kprocess.h>
@@ -33,7 +33,7 @@ namespace KMrml
     class DaemonData
     {
     public:
-        DaemonData( const QString& key, const QString& cmd,
+        DaemonData( const TQString& key, const TQString& cmd,
                     uint time, int numRestarts )
             : daemonKey( key ),
               commandline( cmd ),
@@ -49,13 +49,13 @@ namespace KMrml
             delete process;
             delete timer;
         }
-        QString daemonKey;
-        QString commandline;
+        TQString daemonKey;
+        TQString commandline;
         uint timeout;
-        QStrList apps;
+        TQStrList apps;
         int restartOnFailure;
         KProcess *process;
-        QTimer *timer;
+        TQTimer *timer;
     };
 
     class Watcher : public KDEDModule
@@ -64,22 +64,22 @@ namespace KMrml
         K_DCOP
 
     public:
-        Watcher( const QCString& name = "daemonwatcher" );
+        Watcher( const TQCString& name = "daemonwatcher" );
         ~Watcher();
 
     k_dcop:
-        virtual bool requireDaemon( const QCString& clientAppId,
-                                    const QString& daemonKey,
-                                    const QString& commandline,
+        virtual bool requireDaemon( const TQCString& clientAppId,
+                                    const TQString& daemonKey,
+                                    const TQString& commandline,
                                     uint timeout = 60 /* seconds */,
                                     int numRestarts = 5 );
-        virtual void unrequireDaemon( const QCString& clientAppId,
-                                      const QString& daemonKey );
-        virtual QStringList runningDaemons() const;
+        virtual void unrequireDaemon( const TQCString& clientAppId,
+                                      const TQString& daemonKey );
+        virtual TQStringList runningDaemons() const;
 
     k_dcop_signals:
-        void daemonExited(const QString& daemonKey, pid_t pid, int exitStatus);
-        void daemonDied( const QString& daemonKey, pid_t pid );
+        void daemonExited(const TQString& daemonKey, pid_t pid, int exitStatus);
+        void daemonDied( const TQString& daemonKey, pid_t pid );
 
     protected:
         bool startDaemon( DaemonData *daemon );
@@ -88,18 +88,18 @@ namespace KMrml
         virtual void slotTimeout();
 
     private:
-        void unrequireDaemon( DaemonData *daemon, const QCString& clientAppId);
+        void unrequireDaemon( DaemonData *daemon, const TQCString& clientAppId);
         DaemonData *findDaemonFromProcess( KProcess *proc );
-        DaemonData *findDaemonFromTimer( QTimer *timer );
+        DaemonData *findDaemonFromTimer( TQTimer *timer );
 
         void emitExited( DaemonData *daemon );
         void emitFailure( DaemonData *daemon );
 
     private slots:
         void slotProcExited( KProcess *proc );
-        void slotAppUnregistered( const QCString& appId );
+        void slotAppUnregistered( const TQCString& appId );
 
-        QDict<DaemonData> m_daemons;
+        TQDict<DaemonData> m_daemons;
     };
 
 }

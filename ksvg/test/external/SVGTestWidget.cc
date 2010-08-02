@@ -20,7 +20,7 @@ SVGTestWidget::SVGTestWidget(const KURL &url)
 	setMouseTracking(true);	
 	setFocusPolicy(WheelFocus);
 
-	m_doc = DocumentFactory::self()->requestDocument(this, SLOT(slotRenderingFinished()));
+	m_doc = DocumentFactory::self()->requestDocument(this, TQT_SLOT(slotRenderingFinished()));
 	if(!m_doc)
 		return;	
 
@@ -46,7 +46,7 @@ SVGTestWidget::~SVGTestWidget()
 
 void SVGTestWidget::slotRenderingFinished()
 {
-	QRect rect(0, 0, width(), height());
+	TQRect rect(0, 0, width(), height());
 	m_canvas->blit(rect, true);
 
 	SVGElement test = m_doc->rootElement().getElementById("test");
@@ -58,13 +58,13 @@ void SVGTestWidget::slotRenderingFinished()
 	}
 }
 
-void SVGTestWidget::paintEvent(QPaintEvent *event)
+void SVGTestWidget::paintEvent(TQPaintEvent *event)
 {
 	m_canvas->update();
 	m_canvas->blit(event->rect(), true);
 }
 
-void SVGTestWidget::resizeEvent(QResizeEvent *event)
+void SVGTestWidget::resizeEvent(TQResizeEvent *event)
 {
 	int w = event->size().width();
 	int h = event->size().height();
@@ -74,7 +74,7 @@ void SVGTestWidget::resizeEvent(QResizeEvent *event)
 	m_canvas->blit();
 }
 /*
-KSVG::SVGMouseEventImpl *newMouseEvent(SVGDocument *doc, KSVG::SVGEventImpl::EventId id, QMouseEvent *event)
+KSVG::SVGMouseEventImpl *newMouseEvent(SVGDocument *doc, KSVG::SVGEventImpl::EventId id, TQMouseEvent *event)
 {
 	DOM::AbstractView temp;
 
@@ -116,28 +116,28 @@ KSVG::SVGMouseEventImpl *newMouseEvent(SVGDocument *doc, KSVG::SVGEventImpl::Eve
 	return mev;
 }
 
-void SVGTestWidget::mouseMoveEvent(QMouseEvent *event)
+void SVGTestWidget::mouseMoveEvent(TQMouseEvent *event)
 {
-	if(event->state() & QMouseEvent::ControlButton && event->state() & QMouseEvent::LeftButton)
+	if(event->state() & TQMouseEvent::ControlButton && event->state() & TQMouseEvent::LeftButton)
 	{
 		if(m_panningPos.isNull())
 			m_panningPos = event->pos();
 		else
 		{
-			QPoint panPoint = m_oldPanningPos - (m_panningPos - event->pos());
+			TQPoint panPoint = m_oldPanningPos - (m_panningPos - event->pos());
 			m_doc->rootElement()->setCurrentTranslate(panPoint);
 //			m_doc->syncCachedMatrices(); FIXME
 			m_canvas->update(panPoint);
 		}
 		return;
 	}
-	else if(event->state() & QMouseEvent::ControlButton)
+	else if(event->state() & TQMouseEvent::ControlButton)
 		return;
 }
 
-void SVGTestWidget::mousePressEvent(QMouseEvent *event)
+void SVGTestWidget::mousePressEvent(TQMouseEvent *event)
 {
-	if(event->state() & QMouseEvent::ControlButton)
+	if(event->state() & TQMouseEvent::ControlButton)
 		return;
 
 	KSVG::SVGMouseEventImpl *mev = newMouseEvent(m_doc, KSVG::SVGEventImpl::MOUSEDOWN_EVENT, event);
@@ -147,7 +147,7 @@ void SVGTestWidget::mousePressEvent(QMouseEvent *event)
 	mev->deref();
 }
 
-void SVGTestWidget::mouseReleaseEvent(QMouseEvent *event)
+void SVGTestWidget::mouseReleaseEvent(TQMouseEvent *event)
 {
 	if(!m_panningPos.isNull())
 	{
@@ -156,7 +156,7 @@ void SVGTestWidget::mouseReleaseEvent(QMouseEvent *event)
 		m_panningPos.setY(0);
 	}
 
-	if(event->state() & QMouseEvent::ControlButton)
+	if(event->state() & TQMouseEvent::ControlButton)
 		return;
 
 	// only simulate mouse clicks for now
@@ -167,18 +167,18 @@ void SVGTestWidget::mouseReleaseEvent(QMouseEvent *event)
 	mev->deref();
 }
 
-void SVGTestWidget::keyPressEvent(QKeyEvent *event)
+void SVGTestWidget::keyPressEvent(TQKeyEvent *event)
 {
-	if(event->stateAfter() & QMouseEvent::ControlButton)
+	if(event->stateAfter() & TQMouseEvent::ControlButton)
 	{
 		setCursor(KCursor::sizeAllCursor());
 		return;
 	}
 }
 
-void SVGTestWidget::keyReleaseEvent(QKeyEvent *event)
+void SVGTestWidget::keyReleaseEvent(TQKeyEvent *event)
 {
-	if(event->state() & QMouseEvent::ControlButton)
+	if(event->state() & TQMouseEvent::ControlButton)
 	{
 		setCursor(KCursor::arrowCursor());
 		return;

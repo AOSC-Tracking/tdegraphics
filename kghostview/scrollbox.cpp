@@ -16,19 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qdrawutil.h>
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <tqdrawutil.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
 
 #include "scrollbox.h"
 
-ScrollBox::ScrollBox( QWidget* parent, const char* name )
-    : QFrame( parent, name )
+ScrollBox::ScrollBox( TQWidget* parent, const char* name )
+    : TQFrame( parent, name )
 {
     setFrameStyle( Panel | Sunken );
 }
 
-void ScrollBox::mousePressEvent( QMouseEvent* e )
+void ScrollBox::mousePressEvent( TQMouseEvent* e )
 {
     mouse = e->pos();
     if( e->button() == RightButton )
@@ -37,7 +37,7 @@ void ScrollBox::mousePressEvent( QMouseEvent* e )
 	emit button2Pressed();
 }
 
-void ScrollBox::mouseMoveEvent( QMouseEvent* e )
+void ScrollBox::mouseMoveEvent( TQMouseEvent* e )
 {
     if( e->state() != LeftButton )
 	return;
@@ -47,21 +47,21 @@ void ScrollBox::mouseMoveEvent( QMouseEvent* e )
 
     // Notify the word what the view position has changed
     // The word in turn will notify as that view position has changed
-    // Even if coordinates are out of range QScrollView handles
+    // Even if coordinates are out of range TQScrollView handles
     // this properly
-    emit valueChanged( QPoint( viewpos.x() + dx, viewpos.y() + dy ) );
+    emit valueChanged( TQPoint( viewpos.x() + dx, viewpos.y() + dy ) );
     emit valueChangedRelative( dx, dy );
 
     mouse = e->pos();
 }
 
-void ScrollBox::resizeEvent( QResizeEvent * )
+void ScrollBox::resizeEvent( TQResizeEvent * )
 {
     if ( paletteBackgroundPixmap() )
 	setPaletteBackgroundPixmap( paletteBackgroundPixmap()->convertToImage().smoothScale( size() ) );
 }
 
-void ScrollBox::drawContents( QPainter* paint )
+void ScrollBox::drawContents( TQPainter* paint )
 {
     if ( pagesize.isEmpty() )
 	return;
@@ -75,7 +75,7 @@ void ScrollBox::drawContents( QPainter* paint )
      *
      */
 
-    QRect c( contentsRect() );
+    TQRect c( contentsRect() );
 
     paint -> setPen( Qt::red );
 
@@ -92,30 +92,30 @@ void ScrollBox::drawContents( QPainter* paint )
     paint->drawRect( x, y, w, h );
 }
 
-void ScrollBox::setPageSize( const QSize& s )
+void ScrollBox::setPageSize( const TQSize& s )
 {
     pagesize = s;
     setFixedHeight( s.height() * width() / s.width() );
     repaint();
 }
 
-void ScrollBox::setViewSize( const QSize& s )
+void ScrollBox::setViewSize( const TQSize& s )
 {
     viewsize = s;
     repaint();
 }
 
-void ScrollBox::setViewPos( const QPoint& pos )
+void ScrollBox::setViewPos( const TQPoint& pos )
 {
     viewpos = pos;
     repaint();
 }
 
-void ScrollBox::setThumbnail( QPixmap img )
+void ScrollBox::setThumbnail( TQPixmap img )
 {
     // The line below is needed to work around certain "features" of styles such as liquid
     // see bug:61711 for more info (LPC, 20 Aug '03)
-    setBackgroundOrigin( QWidget::WidgetOrigin );
+    setBackgroundOrigin( TQWidget::WidgetOrigin );
     setPaletteBackgroundPixmap( img.convertToImage().smoothScale( size() ) );
 }
 

@@ -26,17 +26,17 @@
 
 #include "pmsolidobjectedit.h"
 #include "pmvectoredit.h"
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 
 class PMSphereSweep;
 class PMVectorListEdit;
 class PMFloatEdit;
-class QVBoxLayout;
-class QComboBox;
-class QCheckBox;
-class QPushButton;
-class QLabel;
+class TQVBoxLayout;
+class TQComboBox;
+class TQCheckBox;
+class TQPushButton;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMSphereSweep
@@ -49,7 +49,7 @@ public:
    /**
     * Creates a PMSphereSweepEdit with parent and name
     */
-   PMSphereSweepEdit( QWidget* parent, const char* name = 0 );
+   PMSphereSweepEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -78,12 +78,12 @@ private:
    void updatePointButtons( );
 
    PMSphereSweep* m_pDisplayedObject;
-   QComboBox* m_pSplineType;
+   TQComboBox* m_pSplineType;
    PMVectorListEdit* m_pPoints;
    PMFloatEdit* m_pTolerance;
-   QPushButton* m_pAddAbove;
-   QPushButton* m_pAddBelow;
-   QPushButton* m_pRemove;
+   TQPushButton* m_pAddAbove;
+   TQPushButton* m_pAddBelow;
+   TQPushButton* m_pRemove;
 };
 
 

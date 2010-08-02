@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qvariant.h>
+#include <tqvariant.h>
 
 #include <dom/dom2_events.h>
 
@@ -71,7 +71,7 @@ KSVGEcma::KSVGEcma(SVGDocumentImpl *doc) : m_doc(doc)
 KSVGEcma::~KSVGEcma()
 {
 	// We are 0 soon so event listeners may NOT call us
-	QPtrListIterator<KSVGEcmaEventListener> it(m_ecmaEventListeners);
+	TQPtrListIterator<KSVGEcmaEventListener> it(m_ecmaEventListeners);
 	for(; it.current(); ++it)
 		it.current()->forbidRemove();
 
@@ -129,7 +129,7 @@ ExecState *KSVGEcma::globalExec()
 
 SVGEventListener *KSVGEcma::createEventListener(DOM::DOMString type)
 {
-	QPtrListIterator<KSVGEcmaEventListener> it(m_ecmaEventListeners);
+	TQPtrListIterator<KSVGEcmaEventListener> it(m_ecmaEventListeners);
 
 	for(; it.current(); ++it)
 	{
@@ -159,11 +159,11 @@ SVGEventListener *KSVGEcma::createEventListener(DOM::DOMString type)
 	return event;
 }
 
-QString KSVGEcma::valueOfEventListener(SVGEventListener *listener) const
+TQString KSVGEcma::valueOfEventListener(SVGEventListener *listener) const
 {
 	KSVGEcmaEventListener *event = static_cast<KSVGEcmaEventListener *>(listener);
 	if(!event)
-		return QString::null;
+		return TQString::null;
 
 	return event->type();
 }
@@ -197,7 +197,7 @@ Value KSVGEcma::getUrl(ExecState *exec, ::KURL url)
 	Object *status = new Object(new AsyncStatus());
 
 	// FIXME: Security issue, allows local testing of getURL(), REMOVE BEFORE RELEASE! (Niko)
-	QString svgDocument = KSVGLoader::getUrl(url, true);
+	TQString svgDocument = KSVGLoader::getUrl(url, true);
 	if(svgDocument.length() > 0)
 	{
 		status->put(exec, Identifier("success"), Boolean(true));
@@ -212,14 +212,14 @@ Value KSVGEcma::getUrl(ExecState *exec, ::KURL url)
     return Value(*status);
 }
 
-void KSVGEcma::postUrl(ExecState *exec, ::KURL url, const QString &data, const QString &mimeType, const QString &contentEncoding, Object &callBackFunction)
+void KSVGEcma::postUrl(ExecState *exec, ::KURL url, const TQString &data, const TQString &mimeType, const TQString &contentEncoding, Object &callBackFunction)
 {
 	Object *status = new Object(new AsyncStatus());
 	status->put(exec, Identifier("content"), String(""));
     status->put(exec, Identifier("success"), Boolean(false));
 
-	QByteArray byteArray;
-	QDataStream ds(byteArray, IO_WriteOnly);
+	TQByteArray byteArray;
+	TQDataStream ds(byteArray, IO_WriteOnly);
 	ds << data;
 
 	// Support gzip compression
@@ -310,20 +310,20 @@ DOM::Node KSVG::toNode(const Value &val)
 	return DOM::Node();
 }
 
-QVariant KSVG::valueToVariant(ExecState *exec, const Value &val)
+TQVariant KSVG::valueToVariant(ExecState *exec, const Value &val)
 {
-	QVariant res;
+	TQVariant res;
 
 	switch(val.type())
 	{
 		case BooleanType:
-			res = QVariant(val.toBoolean(exec), 0);
+			res = TQVariant(val.toBoolean(exec), 0);
 			break;
 		case NumberType:
-			res = QVariant(val.toNumber(exec));
+			res = TQVariant(val.toNumber(exec));
 			break;
 		case StringType:
-			res = QVariant(val.toString(exec).qstring());
+			res = TQVariant(val.toString(exec).qstring());
 			break;
 		default:
 			// everything else will be 'invalid'

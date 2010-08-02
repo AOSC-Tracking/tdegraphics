@@ -31,8 +31,8 @@
 
 #include <kpviewmanager.h>
 
-#include <qapplication.h>
-#include <qtimer.h>
+#include <tqapplication.h>
+#include <tqtimer.h>
 
 #include <kdebug.h>
 
@@ -130,7 +130,7 @@ void kpViewManager::setTempPixmap (const kpTempPixmap &tempPixmap)
                << ")" << endl;
 #endif
 
-    QRect oldRect;
+    TQRect oldRect;
 
     if (m_tempPixmap)
     {
@@ -157,7 +157,7 @@ void kpViewManager::invalidateTempPixmap ()
     if (!m_tempPixmap)
         return;
 
-    QRect oldRect = m_tempPixmap->rect ();
+    TQRect oldRect = m_tempPixmap->rect ();
 
     delete m_tempPixmap;
     m_tempPixmap = 0;
@@ -228,9 +228,9 @@ void kpViewManager::setTextCursorEnabled (bool yes)
 
     if (yes)
     {
-        m_textCursorBlinkTimer = new QTimer (this);
-        connect (m_textCursorBlinkTimer, SIGNAL (timeout ()),
-                 this, SLOT (slotTextCursorBlink ()));
+        m_textCursorBlinkTimer = new TQTimer (this);
+        connect (m_textCursorBlinkTimer, TQT_SIGNAL (timeout ()),
+                 this, TQT_SLOT (slotTextCursorBlink ()));
         slotTextCursorBlink ();
     }
     // TODO: What if !yes - shouldn't it clear the cursor?
@@ -353,7 +353,7 @@ void kpViewManager::setTextCursorPosition (int row, int col, bool isUpdateMicroF
         if (m_viewUnderCursor)
         {
             // TODO: Fix code duplication: kpViewManager::{setTextCursorPosition,updateTextCursor}() & kpView::paintEventDrawSelection()
-            QPoint topLeft = sel->pointForTextRowCol (m_textCursorRow, m_textCursorCol);
+            TQPoint topLeft = sel->pointForTextRowCol (m_textCursorRow, m_textCursorCol);
             if (topLeft != KP_INVALID_POINT)
             {
                 // TODO: I think you need to consider zooming e.g. try editing
@@ -363,12 +363,12 @@ void kpViewManager::setTextCursorPosition (int row, int col, bool isUpdateMicroF
                 //       change size).
                 //
                 //       To fix it here, I think you should call
-                //       m_viewUnderCursor->transformDocToView(QRect).  However,
+                //       m_viewUnderCursor->transformDocToView(TQRect).  However,
                 //       the rest of the InputMethod support still needs to
                 //       audited for this.
                 //
                 //       [Bug #27]
-                m_viewUnderCursor->updateMicroFocusHint(QRect (topLeft.x (), topLeft.y (), 1, sel->textStyle ().fontMetrics ().height ())); 
+                m_viewUnderCursor->updateMicroFocusHint(TQRect (topLeft.x (), topLeft.y (), 1, sel->textStyle ().fontMetrics ().height ())); 
             }
         }
     }
@@ -410,11 +410,11 @@ void kpViewManager::updateTextCursor ()
         return;
 
     // TODO: Fix code duplication: kpViewManager::{setTextCursorPosition,updateTextCursor}() & kpView::paintEventDrawSelection()
-    QPoint topLeft = sel->pointForTextRowCol (m_textCursorRow, m_textCursorCol);
+    TQPoint topLeft = sel->pointForTextRowCol (m_textCursorRow, m_textCursorCol);
     if (topLeft != KP_INVALID_POINT)
     {
         setFastUpdates ();
-        updateViews (QRect (topLeft.x (), topLeft.y (), 1, sel->textStyle ().fontMetrics ().height ()));
+        updateViews (TQRect (topLeft.x (), topLeft.y (), 1, sel->textStyle ().fontMetrics ().height ()));
         restoreFastUpdates ();
     }
 }
@@ -429,7 +429,7 @@ void kpViewManager::slotTextCursorBlink ()
 
     if (m_textCursorBlinkTimer)
     {
-        m_textCursorBlinkTimer->start (QApplication::cursorFlashTime () / 2,
+        m_textCursorBlinkTimer->start (TQApplication::cursorFlashTime () / 2,
                                        true/*single shot*/);
     }
 
@@ -438,9 +438,9 @@ void kpViewManager::slotTextCursorBlink ()
 }
 
 
-void kpViewManager::setCursor (const QCursor &cursor)
+void kpViewManager::setCursor (const TQCursor &cursor)
 {
-    for (QPtrList <kpView>::const_iterator it = m_views.begin ();
+    for (TQPtrList <kpView>::const_iterator it = m_views.begin ();
          it != m_views.end ();
          it++)
     {
@@ -452,14 +452,14 @@ void kpViewManager::setCursor (const QCursor &cursor)
 
 void kpViewManager::unsetCursor ()
 {
-    for (QPtrList <kpView>::const_iterator it = m_views.begin ();
+    for (TQPtrList <kpView>::const_iterator it = m_views.begin ();
          it != m_views.end ();
          it++)
     {
         (*it)->unsetCursor ();
     }
 
-    m_cursor = QCursor ();
+    m_cursor = TQCursor ();
 }
 
 
@@ -480,7 +480,7 @@ kpView *kpViewManager::viewUnderCursor (bool usingQt) const
     }
     else
     {
-        for (QPtrList <kpView>::const_iterator it = m_views.begin ();
+        for (TQPtrList <kpView>::const_iterator it = m_views.begin ();
              it != m_views.end ();
              it++)
         {
@@ -532,7 +532,7 @@ void kpViewManager::setViewUnderCursor (kpView *view)
 // public
 kpView *kpViewManager::activeView () const
 {
-    for (QPtrList <kpView>::const_iterator it = m_views.begin ();
+    for (TQPtrList <kpView>::const_iterator it = m_views.begin ();
          it != m_views.end ();
          it++)
     {
@@ -576,7 +576,7 @@ void kpViewManager::restoreQueueUpdates ()
 
     if (m_queueUpdatesCounter <= 0)
     {
-        for (QPtrList <kpView>::const_iterator it = m_views.begin ();
+        for (TQPtrList <kpView>::const_iterator it = m_views.begin ();
              it != m_views.end ();
              it++)
         {
@@ -620,10 +620,10 @@ void kpViewManager::restoreFastUpdates ()
 
 void kpViewManager::updateView (kpView *v)
 {
-    updateView (v, QRect (0, 0, v->width (), v->height ()));
+    updateView (v, TQRect (0, 0, v->width (), v->height ()));
 }
 
-void kpViewManager::updateView (kpView *v, const QRect &viewRect)
+void kpViewManager::updateView (kpView *v, const TQRect &viewRect)
 {
     if (!queueUpdates ())
     {
@@ -638,10 +638,10 @@ void kpViewManager::updateView (kpView *v, const QRect &viewRect)
 
 void kpViewManager::updateView (kpView *v, int x, int y, int w, int h)
 {
-    updateView (v, QRect (x, y, w, h));
+    updateView (v, TQRect (x, y, w, h));
 }
 
-void kpViewManager::updateView (kpView *v, const QRegion &viewRegion)
+void kpViewManager::updateView (kpView *v, const TQRegion &viewRegion)
 {
     if (!queueUpdates ())
     {
@@ -654,31 +654,31 @@ void kpViewManager::updateView (kpView *v, const QRegion &viewRegion)
         v->addToQueuedArea (viewRegion);
 }
 
-void kpViewManager::updateViewRectangleEdges (kpView *v, const QRect &viewRect)
+void kpViewManager::updateViewRectangleEdges (kpView *v, const TQRect &viewRect)
 {
     if (viewRect.height () <= 0 || viewRect.width () <= 0)
         return;
 
     // Top line
-    updateView (v, QRect (viewRect.x (), viewRect.y (),
+    updateView (v, TQRect (viewRect.x (), viewRect.y (),
                           viewRect.width (), 1));
 
     if (viewRect.height () >= 2)
     {
         // Bottom line
-        updateView (v, QRect (viewRect.x (), viewRect.bottom (),
+        updateView (v, TQRect (viewRect.x (), viewRect.bottom (),
                               viewRect.width (), 1));
 
         if (viewRect.height () > 2)
         {
             // Left line
-            updateView (v, QRect (viewRect.x (), viewRect.y () + 1,
+            updateView (v, TQRect (viewRect.x (), viewRect.y () + 1,
                                   1, viewRect.height () - 2));
 
             if (viewRect.width () >= 2)
             {
                 // Right line
-                updateView (v, QRect (viewRect.right (), viewRect.y () + 1,
+                updateView (v, TQRect (viewRect.right (), viewRect.y () + 1,
                                       1, viewRect.height () - 2));
             }
         }
@@ -690,16 +690,16 @@ void kpViewManager::updateViews ()
 {
     kpDocument *doc = document ();
     if (doc)
-        updateViews (QRect (0, 0, doc->width (), doc->height ()));
+        updateViews (TQRect (0, 0, doc->width (), doc->height ()));
 }
 
-void kpViewManager::updateViews (const QRect &docRect)
+void kpViewManager::updateViews (const TQRect &docRect)
 {
 #if DEBUG_KP_VIEW_MANAGER && 0
     kdDebug () << "kpViewManager::updateViews (" << docRect << ")" << endl;
 #endif
 
-    for (QPtrList <kpView>::const_iterator it = m_views.begin ();
+    for (TQPtrList <kpView>::const_iterator it = m_views.begin ();
          it != m_views.end ();
          it++)
     {
@@ -717,15 +717,15 @@ void kpViewManager::updateViews (const QRect &docRect)
         }
         else
         {
-            QRect viewRect = view->transformDocToView (docRect);
+            TQRect viewRect = view->transformDocToView (docRect);
 
             int diff = qRound (double (QMAX (view->zoomLevelX (), view->zoomLevelY ())) / 100.0) + 1;
 
-            QRect newRect = QRect (viewRect.x () - diff,
+            TQRect newRect = TQRect (viewRect.x () - diff,
                                    viewRect.y () - diff,
                                    viewRect.width () + 2 * diff,
                                    viewRect.height () + 2 * diff)
-                                .intersect (QRect (0, 0, view->width (), view->height ()));
+                                .intersect (TQRect (0, 0, view->width (), view->height ()));
 
         #if DEBUG_KP_VIEW_MANAGER && 0
             kdDebug () << "\t\tviewRect (+compensate)=" << newRect << endl;
@@ -737,7 +737,7 @@ void kpViewManager::updateViews (const QRect &docRect)
 
 void kpViewManager::updateViews (int x, int y, int w, int h)
 {
-    updateViews (QRect (x, y, w, h));
+    updateViews (TQRect (x, y, w, h));
 }
 
 
@@ -748,7 +748,7 @@ void kpViewManager::adjustViewsToEnvironment ()
                << " numViews=" << m_views.count ()
                << endl;
 #endif
-    for (QPtrList <kpView>::const_iterator it = m_views.begin ();
+    for (TQPtrList <kpView>::const_iterator it = m_views.begin ();
          it != m_views.end ();
          it++)
     {

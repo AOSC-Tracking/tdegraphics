@@ -43,7 +43,7 @@ kpZoomedThumbnailView::kpZoomedThumbnailView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        QWidget *parent, const char *name)
+        TQWidget *parent, const char *name)
 
     : kpThumbnailView (document, toolToolBar, viewManager,
                        buddyView,
@@ -61,7 +61,7 @@ kpZoomedThumbnailView::~kpZoomedThumbnailView ()
 
 
 // public virtual [base kpThumbnailView]
-QString kpZoomedThumbnailView::caption () const
+TQString kpZoomedThumbnailView::caption () const
 {
     return i18n ("%1% - Thumbnail").arg (zoomLevelX ());
 }
@@ -124,7 +124,7 @@ void kpZoomedThumbnailView::adjustToEnvironment ()
     {
         setZoomLevel (hzoom, vzoom);
 
-        setOrigin (QPoint ((width () - zoomedDocWidth ()) / 2,
+        setOrigin (TQPoint ((width () - zoomedDocWidth ()) / 2,
                            (height () - zoomedDocHeight ()) / 2));
         setMaskToCoverDocument ();
 

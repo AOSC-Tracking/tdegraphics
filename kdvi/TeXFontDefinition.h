@@ -15,8 +15,8 @@
 #ifndef _FONT_H
 #define _FONT_H
 
-#include <qintdict.h>
-#include <qstring.h>
+#include <tqintdict.h>
+#include <tqstring.h>
 
 #include <stdio.h>
 
@@ -56,12 +56,12 @@ class TeXFontDefinition {
   };
   
 
-  TeXFontDefinition(QString nfontname, double _displayResolution_in_dpi, Q_UINT32 chk, Q_INT32 _scaled_size_in_DVI_units,
+  TeXFontDefinition(TQString nfontname, double _displayResolution_in_dpi, Q_UINT32 chk, Q_INT32 _scaled_size_in_DVI_units,
        class fontPool *pool, double _enlargement);
   ~TeXFontDefinition();
 
   void reset();
-  void fontNameReceiver(const QString&);
+  void fontNameReceiver(const TQString&);
 
   // Members for character fonts
   void           setDisplayResolution(double _displayResolution_in_dpi);
@@ -71,7 +71,7 @@ class TeXFontDefinition {
 
   void           mark_as_used();
   class fontPool *font_pool;    // Pointer to the pool that contains this font.
-  QString        fontname;	// name of font, such as "cmr10"
+  TQString        fontname;	// name of font, such as "cmr10"
   unsigned char  flags;		// flags byte (see values below)
   double         enlargement;
   Q_INT32        scaled_size_in_DVI_units;   // Scaled size from the font definition command; in DVI units
@@ -82,34 +82,34 @@ class TeXFontDefinition {
   double         displayResolution_in_dpi;
   
   FILE          *file;		// open font file or NULL
-  QString        filename;	// name of font file
+  TQString        filename;	// name of font file
   
   TeXFont       *font;
   macro         *macrotable;    // used by (loaded) virtual fonts
-  QIntDict<TeXFontDefinition> vf_table;      // used by (loaded) virtual fonts, list of fonts used by this vf, 
+  TQIntDict<TeXFontDefinition> vf_table;      // used by (loaded) virtual fonts, list of fonts used by this vf, 
   // acessible by number
   TeXFontDefinition  *first_font;	// used by (loaded) virtual fonts, list of fonts used by this vf
 
 #ifdef HAVE_FREETYPE
-  const QString &getFullFontName() const {return fullFontName;}
-  const QString &getFullEncodingName() const {return fullEncodingName;}
+  const TQString &getFullFontName() const {return fullFontName;}
+  const TQString &getFullEncodingName() const {return fullEncodingName;}
 #endif
-  const QString &getFontTypeName() const {return fontTypeName;}
+  const TQString &getFontTypeName() const {return fontTypeName;}
 
 #ifdef HAVE_FREETYPE
   /** For FREETYPE fonts, which use a map file, this field will
       contain the full name of the font (e.g. 'Computer Modern'). If
       the name does not exist, or cannot be found, this field will be
-      QString::null. Only subclasses of TeXFont should write into this
+      TQString::null. Only subclasses of TeXFont should write into this
       field. */
-  QString        fullFontName;
+  TQString        fullFontName;
 
   /** For FREETYPE fonts, which use a map file, this field will
       contain the full name of the font encoding (e.g. 'TexBase1'). If
       the encoding name does not exist, or cannot be found, this field
-      will be QString::null. Only subclasses of TeXFont should write
+      will be TQString::null. Only subclasses of TeXFont should write
       into this field. */
-  QString        fullEncodingName;
+  TQString        fullEncodingName;
 #endif
 
  private:
@@ -117,7 +117,7 @@ class TeXFontDefinition {
 
   /** This will be set to a human-readable description of the font,
       e.g. "virtual" or "TeX PK", or "Type 1" */
-  QString        fontTypeName;
+  TQString        fontTypeName;
   
   // Functions related to virtual fonts
   void          read_VF_index(void );

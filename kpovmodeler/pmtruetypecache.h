@@ -25,7 +25,7 @@
 
 #include "pmsplinesegment.h"
 
-#include <qcache.h>
+#include <tqcache.h>
 #include <kstaticdeleter.h>
 
 #ifdef HAVE_FREETYPE
@@ -49,7 +49,7 @@ public:
     *
     * Returns 0 if freetype is not available.
     */
-   static PMTrueTypeFont* font( const QString& file );
+   static PMTrueTypeFont* font( const TQString& file );
    
 #ifdef HAVE_FREETYPE
    
@@ -65,9 +65,9 @@ private:
    /**
     * Lookup function
     */
-   PMTrueTypeFont* lookUp( const QString& file );
+   PMTrueTypeFont* lookUp( const TQString& file );
    
-   QCache<PMTrueTypeFont> m_cache;
+   TQCache<PMTrueTypeFont> m_cache;
    FT_Library m_library;
 
 #endif //HAVE_FREETYPE
@@ -142,7 +142,7 @@ public:
     * Returns 0 if there is no glyph for the character or the font is
     * not a valid, scalable true type font.
     */
-   PMTrueTypeOutline* outline( QChar c );
+   PMTrueTypeOutline* outline( TQChar c );
    /**
     * Returns true if the font is a valid, scalable true type font
     */
@@ -150,7 +150,7 @@ public:
    /**
     * Returns the kerning offset for the two characters
     */
-   double kerning( QChar c1, QChar c2 );
+   double kerning( TQChar c1, TQChar c2 );
    
 #ifdef HAVE_FREETYPE
    
@@ -165,7 +165,7 @@ public:
    ~PMTrueTypeFont( );
 
 private:
-   FT_UInt findGlyphIndex( QChar c );
+   FT_UInt findGlyphIndex( TQChar c );
    
    FT_Library m_library;
    FT_Face m_face;
@@ -174,7 +174,7 @@ private:
    bool m_validChecked;
    bool m_useKerning;
 
-   QCache<PMTrueTypeOutline> m_cache;
+   TQCache<PMTrueTypeOutline> m_cache;
    
 #else //!HAVE_FREETYPE
    

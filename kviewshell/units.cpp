@@ -13,7 +13,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <math.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include "units.h"
 
@@ -53,7 +53,7 @@ unitOfDistance distanceUnitTable[] = {
 
 
 
-float distance::convertToMM(const QString &distance, bool *ok)
+float distance::convertToMM(const TQString &distance, bool *ok)
 {
   //  kdDebug() << "convertToMM( " << distance << " )" << endl;
 
@@ -78,6 +78,6 @@ float distance::convertToMM(const QString &distance, bool *ok)
     return 0.0;
   }
 
-  QString val = distance.left(unitPos).simplifyWhiteSpace();
+  TQString val = distance.left(unitPos).simplifyWhiteSpace();
   return MMperUnit*val.toFloat(ok);
 }

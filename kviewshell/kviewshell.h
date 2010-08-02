@@ -2,7 +2,7 @@
 #ifndef KVIEWSHELL_H
 #define KVIEWSHELL_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kparts/mainwindow.h>
 
@@ -11,7 +11,7 @@ class KURL;
 class KViewPart_Iface;
 
 
-class QLabel;
+class TQLabel;
 
 class KViewShell : public KParts::MainWindow
 {
@@ -21,7 +21,7 @@ public:
   KStatusBar *statusbar;
   KStatusBar *action;
 
-  KViewShell(const QString& defaultMimeType = QString::null);
+  KViewShell(const TQString& defaultMimeType = TQString::null);
   virtual ~KViewShell();
 
 public slots:
@@ -37,9 +37,9 @@ protected slots:
   void slotFileClose();
   void slotNewToolbarConfig();
 
-  void slotChangeZoomText(const QString &);
-  void slotChangePageText(const QString &);
-  void slotChangeSizeText(const QString &);
+  void slotChangeZoomText(const TQString &);
+  void slotChangePageText(const TQString &);
+  void slotChangeSizeText(const TQString &);
 
 signals:
   void restoreDocument(const KURL &url, int page);
@@ -64,15 +64,15 @@ protected:
 
   void checkActions();
 
-  void dragEnterEvent(QDragEnterEvent *event);
-  void dropEvent(QDropEvent *event);
-  void keyPressEvent(QKeyEvent * e);
+  void dragEnterEvent(TQDragEnterEvent *event);
+  void dropEvent(TQDropEvent *event);
+  void keyPressEvent(TQKeyEvent * e);
 
 private:
   KViewPart_Iface *view;
 
   KRecentFilesAction *recent;
-  QString cwd;
+  TQString cwd;
 
   KAction *closeAction, *reloadAction;
   KToggleAction *fullScreenAction;

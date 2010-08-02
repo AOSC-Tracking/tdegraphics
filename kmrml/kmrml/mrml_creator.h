@@ -19,7 +19,7 @@
 #ifndef MRML_CREATOR_H
 #define MRML_CREATOR_H
 
-#include <qdom.h>
+#include <tqdom.h>
 
 #include <kurl.h>
 
@@ -30,19 +30,19 @@ namespace MrmlCreator
 {
     enum Relevance { Relevant = 1, Irrelevant = -1 };
 
-    QDomElement createMrml( QDomDocument& doc,
-                            const QString& sessionId,
-                            const QString& transactionId = QString::null );
-    QDomElement configureSession( QDomElement& mrml,
+    TQDomElement createMrml( TQDomDocument& doc,
+                            const TQString& sessionId,
+                            const TQString& transactionId = TQString::null );
+    TQDomElement configureSession( TQDomElement& mrml,
                                   const KMrml::Algorithm& algo,
-                                  const QString& sessionId );
-    QDomElement addQuery( QDomElement& mrml, int resultSize );
-    QDomElement addRelevanceList( QDomElement& query );
+                                  const TQString& sessionId );
+    TQDomElement addQuery( TQDomElement& mrml, int resultSize );
+    TQDomElement addRelevanceList( TQDomElement& query );
     /**
      * Creates a <user-relevance-element> with the given attributes set.
      */
-    void createRelevanceElement( QDomDocument& doc, QDomElement& parent,
-                                 const QString& url, Relevance relevance );
+    void createRelevanceElement( TQDomDocument& doc, TQDomElement& parent,
+                                 const TQString& url, Relevance relevance );
 
 }
 

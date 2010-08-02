@@ -21,7 +21,7 @@ Color::Color(){
 	setComponents(0, 0, 0);
 	setName("");
 }
-Color::Color(const int red, const int green, const int blue, const QString& name) {
+Color::Color(const int red, const int green, const int blue, const TQString& name) {
 	setComponents(red, green, blue);
 	setName(name);
 }
@@ -38,7 +38,7 @@ void Color::setComponents(const int red, const int green, const int blue) {
 	setComponent(BLUE_INDEX, blue);
 }
 
-void Color::setName(const QString& name) {
+void Color::setName(const TQString& name) {
 	m_name = name;
 }
 
@@ -50,7 +50,7 @@ const int* Color::components() const{
 	return m_components;
 }
 
-const QString& Color::name() const {
+const TQString& Color::name() const {
 	return m_name;
 }
 

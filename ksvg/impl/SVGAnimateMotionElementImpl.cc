@@ -85,9 +85,9 @@ void SVGAnimateMotionElementImpl::handleTimerEvent(bool /*needCombine*/)
 
 		if(m_step <= m_pathArray->count() - 1)
 		{
-			QPoint p = m_pathArray->point(m_step - 50);
-			applyAttribute("x", QString::number(p.x()));
-			applyAttribute("y", QString::number(p.y()));
+			TQPoint p = m_pathArray->point(m_step - 50);
+			applyAttribute("x", TQString::number(p.x()));
+			applyAttribute("y", TQString::number(p.y()));
 			kdDebug() << " X " << p.x() << " Y " << p.y() << " (" << m_pathArray->count() << "; " << m_step << ")" <<endl;
 		}
 		

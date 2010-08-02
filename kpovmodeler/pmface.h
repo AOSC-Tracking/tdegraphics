@@ -18,8 +18,8 @@
 #ifndef PMFACE_H
 #define PMFACE_H
 
-#include <qptrlist.h>
-#include <qvaluevector.h>
+#include <tqptrlist.h>
+#include <tqvaluevector.h>
 #include <GL/gl.h>
 #include "pmdebug.h"
 #include "pmvector.h"
@@ -117,7 +117,7 @@ private:
    static GLuint s_dummy;
 };
 
-typedef QPtrListIterator<PMFace> PMFaceListIterator;
+typedef TQPtrListIterator<PMFace> PMFaceListIterator;
 
 /**
  * A list of @ref PMFace objects.
@@ -125,6 +125,6 @@ typedef QPtrListIterator<PMFace> PMFaceListIterator;
  * This class stores all faces of a @ref PMViewStructure. Only the indices
  * in a @ref PMPointArray are stored.
  */
-typedef QValueVector<PMFace> PMFaceArray;
+typedef TQValueVector<PMFace> PMFaceArray;
 
 #endif

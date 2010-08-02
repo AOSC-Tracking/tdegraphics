@@ -24,9 +24,9 @@
 
 #include "pmsettingsdialog.h"
 
-class QFrame;
-class QListView;
-class QPushButton;
+class TQFrame;
+class TQListView;
+class TQPushButton;
 
 /**
  * Plugins configuration dialog page
@@ -38,7 +38,7 @@ public:
    /**
     * Default constructor
     */
-   PMPluginSettings( QWidget* parent, const char* name = 0 );
+   PMPluginSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -53,9 +53,9 @@ protected slots:
    void slotSelectionChanged( );
    
 private:
-   QFrame* m_pPluginOptions;
-   QListView* m_pPluginsList;
-   QPushButton* m_pToggle;
+   TQFrame* m_pPluginOptions;
+   TQListView* m_pPluginsList;
+   TQPushButton* m_pToggle;
 };
 
 

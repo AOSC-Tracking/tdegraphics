@@ -31,7 +31,7 @@
 
 #include <kptoolwidgetbase.h>
 
-class QBrush;
+class TQBrush;
 
 class kpColor;
 
@@ -40,7 +40,7 @@ class kpToolWidgetFillStyle : public kpToolWidgetBase
 Q_OBJECT
 
 public:
-    kpToolWidgetFillStyle (QWidget *parent, const char *name);
+    kpToolWidgetFillStyle (TQWidget *parent, const char *name);
     virtual ~kpToolWidgetFillStyle ();
 
     enum FillStyle
@@ -52,22 +52,22 @@ public:
     };
 
 private:
-    QPixmap fillStylePixmap (FillStyle fs, int width, int height);
-    QString fillStyleName (FillStyle fs) const;
+    TQPixmap fillStylePixmap (FillStyle fs, int width, int height);
+    TQString fillStyleName (FillStyle fs) const;
 
 public:
     FillStyle fillStyle () const;
 
-    static QBrush maskBrushForFillStyle (FillStyle fs,
+    static TQBrush maskBrushForFillStyle (FillStyle fs,
                                          const kpColor &foregroundColor,
                                          const kpColor &backgroundColor);
-    QBrush maskBrush (const kpColor &foregroundColor,
+    TQBrush maskBrush (const kpColor &foregroundColor,
                       const kpColor &backgroundColor);
 
-    static QBrush brushForFillStyle (FillStyle fs,
+    static TQBrush brushForFillStyle (FillStyle fs,
                                      const kpColor &foregroundColor,
                                      const kpColor &backgroundColor);
-    QBrush brush (const kpColor &foregroundColor,
+    TQBrush brush (const kpColor &foregroundColor,
                   const kpColor &backgroundColor);
 
 signals:

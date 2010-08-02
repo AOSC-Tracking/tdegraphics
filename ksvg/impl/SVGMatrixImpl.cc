@@ -37,7 +37,7 @@ SVGMatrixImpl::SVGMatrixImpl()
 	KSVG_EMPTY_FLAGS
 }
 
-SVGMatrixImpl::SVGMatrixImpl(QWMatrix mat)
+SVGMatrixImpl::SVGMatrixImpl(TQWMatrix mat)
 {
 	m_mat = mat;
 }
@@ -118,7 +118,7 @@ void SVGMatrixImpl::copy(const SVGMatrixImpl *other)
 
 SVGMatrixImpl *SVGMatrixImpl::postMultiply(const SVGMatrixImpl *secondMatrix)
 {
-	QWMatrix temp(secondMatrix->a(), secondMatrix->b(), secondMatrix->c(), secondMatrix->d(), secondMatrix->e(), secondMatrix->f());
+	TQWMatrix temp(secondMatrix->a(), secondMatrix->b(), secondMatrix->c(), secondMatrix->d(), secondMatrix->e(), secondMatrix->f());
 	m_mat *= temp;
 	return this;
 }
@@ -132,7 +132,7 @@ SVGMatrixImpl *SVGMatrixImpl::inverse()
 SVGMatrixImpl *SVGMatrixImpl::postTranslate(const double &x,  const double &y)
 {
 	// Could optimise these.
-	QWMatrix temp;
+	TQWMatrix temp;
 	temp.translate(x, y);
 	m_mat *= temp;
 	return this;
@@ -140,7 +140,7 @@ SVGMatrixImpl *SVGMatrixImpl::postTranslate(const double &x,  const double &y)
 
 SVGMatrixImpl *SVGMatrixImpl::postScale(const double &scaleFactor)
 {
-	QWMatrix temp;
+	TQWMatrix temp;
 	temp.scale(scaleFactor, scaleFactor);
 	m_mat *= temp;
 	return this;
@@ -148,7 +148,7 @@ SVGMatrixImpl *SVGMatrixImpl::postScale(const double &scaleFactor)
 
 SVGMatrixImpl *SVGMatrixImpl::postScaleNonUniform(const double &scaleFactorX, const double &scaleFactorY)
 {
-	QWMatrix temp;
+	TQWMatrix temp;
 	temp.scale(scaleFactorX, scaleFactorY);
 	m_mat *= temp;
 	return this;
@@ -156,7 +156,7 @@ SVGMatrixImpl *SVGMatrixImpl::postScaleNonUniform(const double &scaleFactorX, co
 
 SVGMatrixImpl *SVGMatrixImpl::postRotate(const double &angle)
 {
-	QWMatrix temp;
+	TQWMatrix temp;
 	temp.rotate(angle);
 	m_mat *= temp;
 	return this;
@@ -164,7 +164,7 @@ SVGMatrixImpl *SVGMatrixImpl::postRotate(const double &angle)
 
 SVGMatrixImpl *SVGMatrixImpl::postRotateFromVector(const double &x, const double &y)
 {
-	QWMatrix temp;
+	TQWMatrix temp;
 	temp.rotate(SVGAngleImpl::todeg(atan2(y, x)));
 	m_mat *= temp;
 	return this;
@@ -172,21 +172,21 @@ SVGMatrixImpl *SVGMatrixImpl::postRotateFromVector(const double &x, const double
 
 SVGMatrixImpl *SVGMatrixImpl::postFlipX()
 {
-	QWMatrix temp(-1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F);
+	TQWMatrix temp(-1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F);
 	m_mat *= temp;
 	return this;
 }
 
 SVGMatrixImpl *SVGMatrixImpl::postFlipY()
 {
-	QWMatrix temp(1.0F, 0.0F, 0.0F, -1.0F, 0.0F, 0.0F);
+	TQWMatrix temp(1.0F, 0.0F, 0.0F, -1.0F, 0.0F, 0.0F);
 	m_mat *= temp;
 	return this;
 }
 
 SVGMatrixImpl *SVGMatrixImpl::postSkewX(const double &angle)
 {
-	QWMatrix temp;
+	TQWMatrix temp;
 	temp.shear(tan(SVGAngleImpl::torad(angle)), 0.0F);
 	m_mat *= temp;
 	return this;
@@ -194,7 +194,7 @@ SVGMatrixImpl *SVGMatrixImpl::postSkewX(const double &angle)
 
 SVGMatrixImpl *SVGMatrixImpl::postSkewY(const double &angle)
 {
-	QWMatrix temp;
+	TQWMatrix temp;
 	temp.shear(0.0F, tan(SVGAngleImpl::torad(angle)));
 	m_mat *= temp;
 	return this;
@@ -202,7 +202,7 @@ SVGMatrixImpl *SVGMatrixImpl::postSkewY(const double &angle)
 
 SVGMatrixImpl *SVGMatrixImpl::multiply(const SVGMatrixImpl *secondMatrix)
 {
-	QWMatrix temp(secondMatrix->a(), secondMatrix->b(), secondMatrix->c(), secondMatrix->d(), secondMatrix->e(), secondMatrix->f());
+	TQWMatrix temp(secondMatrix->a(), secondMatrix->b(), secondMatrix->c(), secondMatrix->d(), secondMatrix->e(), secondMatrix->f());
 	temp *= m_mat;
 	m_mat = temp;
 	return this;
@@ -262,17 +262,17 @@ SVGMatrixImpl *SVGMatrixImpl::skewY(const double &angle)
 	return this;
 }
 
-void SVGMatrixImpl::setMatrix(QWMatrix mat)
+void SVGMatrixImpl::setMatrix(TQWMatrix mat)
 {
 	m_mat = mat;
 }
 
-QWMatrix &SVGMatrixImpl::qmatrix()
+TQWMatrix &SVGMatrixImpl::qmatrix()
 {
 	return m_mat;
 }
 
-const QWMatrix &SVGMatrixImpl::qmatrix() const
+const TQWMatrix &SVGMatrixImpl::qmatrix() const
 {
 	return m_mat;
 }
@@ -315,7 +315,7 @@ KSVGPolygon SVGMatrixImpl::map(const KSVGPolygon& polygon) const
 
 KSVGPolygon SVGMatrixImpl::inverseMap(const KSVGPolygon& polygon) const
 {
-	QWMatrix inverse = m_mat.invert();
+	TQWMatrix inverse = m_mat.invert();
 	KSVGPolygon mapped;
 
 	for(unsigned int i = 0; i < polygon.numPoints(); i++)

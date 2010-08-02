@@ -28,8 +28,8 @@
 #include "ksvg_factory.moc"
 
 #include <kdebug.h>
-#include <qstringlist.h>
-#include <qregexp.h>
+#include <tqstringlist.h>
+#include <tqregexp.h>
 
 extern "C"
 {
@@ -43,7 +43,7 @@ extern "C"
 KInstance *KSVGPluginFactory::s_instance = 0;
 KAboutData *KSVGPluginFactory::s_about = 0;
 
-KSVGPluginFactory::KSVGPluginFactory(QObject *parent, const char *name) : KParts::Factory(parent, name)
+KSVGPluginFactory::KSVGPluginFactory(TQObject *parent, const char *name) : KParts::Factory(parent, name)
 {
 }
 
@@ -56,15 +56,15 @@ KSVGPluginFactory::~KSVGPluginFactory()
 	s_about = 0;
 }
 
-KParts::Part *KSVGPluginFactory::createPartObject(QWidget *parentWidget, const char *wname, QObject *parent, const char *name, const char *, const QStringList &args)
+KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *parentWidget, const char *wname, TQObject *parent, const char *name, const char *, const TQStringList &args)
 {
 	// Get the width and height of the <embed>
 	// TODO : <object>
 	unsigned int width = 0, height = 0;
 	bool dummy;
-	QRegExp r1("(WIDTH)(\\s*=\\s*\")(\\d+)(\\w*)(\")");
-	QRegExp r2("(HEIGHT)(\\s*=\\s*\")(\\d+)(\\w*)(\")");
-	for(QValueListConstIterator<QString> it = args.begin(); it != args.end(); ++it) 
+	TQRegExp r1("(WIDTH)(\\s*=\\s*\")(\\d+)(\\w*)(\")");
+	TQRegExp r2("(HEIGHT)(\\s*=\\s*\")(\\d+)(\\w*)(\")");
+	for(TQValueListConstIterator<TQString> it = args.begin(); it != args.end(); ++it) 
 	{
 		if(r1.search(*it) > -1)
 			width = r1.cap(3).toUInt(&dummy);

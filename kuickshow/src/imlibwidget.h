@@ -12,13 +12,13 @@
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
 
-#include <qvariant.h>
+#include <tqvariant.h>
 
-#include <qcursor.h>
-#include <qevent.h>
-#include <qptrlist.h>
-#include <qtimer.h>
-#include <qwidget.h>
+#include <tqcursor.h>
+#include <tqevent.h>
+#include <tqptrlist.h>
+#include <tqtimer.h>
+#include <tqwidget.h>
 
 #include <kurl.h>
 
@@ -48,12 +48,12 @@ public:
   KuickImage *		getKuimage( KuickFile * file, ImlibColorModifier  );
 
 private:
-  ImlibImage *		loadImageWithQt( const QString& filename ) const;
+  ImlibImage *		loadImageWithQt( const TQString& filename ) const;
 
   int 			myMaxImages;
-  QValueList<KuickFile*>fileList;
-  QPtrList<KuickImage>	kuickList;
-  //  QPtrList<ImlibImage>	imList;
+  TQValueList<KuickFile*>fileList;
+  TQPtrList<KuickImage>	kuickList;
+  //  TQPtrList<ImlibImage>	imList;
   ImlibData * 		myId;
   int 			idleCount;
 
@@ -70,7 +70,7 @@ signals:
 
 // ------------------------------------------
 
-class QColor;
+class TQColor;
 
 class ImlibWidget : public QWidget
 {
@@ -78,8 +78,8 @@ class ImlibWidget : public QWidget
 
 public:
 
-  ImlibWidget( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
-  ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0,
+  ImlibWidget( ImData *_idata=0, TQWidget *parent=0, const char *name=0 );
+  ImlibWidget( ImData *_idata, ImlibData *id, TQWidget *parent=0,
 	       const char *name=0 );
   virtual ~ImlibWidget();
 
@@ -108,8 +108,8 @@ public:
   bool 		isAutoRenderEnabled() 	const  { return isAutoRendering;  }
   void 		setMaxImageCache( int );
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
-  const QColor& backgroundColor() 	const;
-  void 		setBackgroundColor( const QColor& );
+  const TQColor& backgroundColor() 	const;
+  void 		setBackgroundColor( const TQColor& );
 
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
@@ -119,7 +119,7 @@ public:
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
-  virtual void  reparent( QWidget* parent, WFlags f, const QPoint& p, bool showIt = FALSE );
+  virtual void  reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt = FALSE );
 
 public slots:
   void	        rotate90();
@@ -142,7 +142,7 @@ protected:
   virtual bool  canZoomTo( int newWidth, int newHeight );
   virtual void  rotated( KuickImage *kuim, int rotation );
 
-  void 		closeEvent( QCloseEvent * );
+  void 		closeEvent( TQCloseEvent * );
 
   inline void	autoUpdate( bool geometryUpdate=false ) {
     if ( isAutoRendering )
@@ -160,7 +160,7 @@ protected:
   ImlibColorModifier mod;
 
   KuickFile *m_kuickFile;
-  QCursor m_oldCursor;
+  TQCursor m_oldCursor;
 
   static const int ImlibOffset;
 
@@ -169,7 +169,7 @@ private:
   void 		init();
   bool 		isAutoRendering;
   int 		myMaxImageCache;
-  QColor 	myBackgroundColor;
+  TQColor 	myBackgroundColor;
 
 
 protected slots:
@@ -179,7 +179,7 @@ protected slots:
 
 
 signals:
-  void 		sigImageError( const KuickFile * file, const QString& );
+  void 		sigImageError( const KuickFile * file, const TQString& );
 
 };
 

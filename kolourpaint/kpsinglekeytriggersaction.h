@@ -62,9 +62,9 @@ class kpSingleKeyTriggersAction : public KAction,
 Q_OBJECT
 
 public:
-    kpSingleKeyTriggersAction (const QString &text,
+    kpSingleKeyTriggersAction (const TQString &text,
                                const KShortcut &shortcut,
-                               const QObject *receiver, const char *slot,
+                               const TQObject *receiver, const char *slot,
                                KActionCollection *parent, const char *name);
     virtual ~kpSingleKeyTriggersAction ();
 

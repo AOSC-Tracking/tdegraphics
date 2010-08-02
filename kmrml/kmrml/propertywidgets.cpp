@@ -19,8 +19,8 @@
 #include "propertywidgets.h"
 
 IntegerWidget::IntegerWidget( const PropertySheet& sheet,
-                              QWidget *parent, const char *name )
-    : QHBox( parent, name )
+                              TQWidget *parent, const char *name )
+    : TQHBox( parent, name )
 {
     
 }
@@ -39,8 +39,8 @@ int IntegerWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 ComboWidget::ComboWidget( const PropertySheet& sheet,
-                              QWidget *parent, const char *name )
-    : QHBox( parent, name )
+                              TQWidget *parent, const char *name )
+    : TQHBox( parent, name )
 {
     
 }
@@ -50,7 +50,7 @@ ComboWidget::~ComboWidget()
     
 }
 
-QString ComboWidget::value() const
+TQString ComboWidget::value() const
 {
     
 }
@@ -60,8 +60,8 @@ QString ComboWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 CheckBoxWidget::CheckBoxWidget( const PropertySheet& sheet,
-                              QWidget *parent, const char *name )
-    : QHBox( parent, name )
+                              TQWidget *parent, const char *name )
+    : TQHBox( parent, name )
 {
     
 }
@@ -81,8 +81,8 @@ bool CheckBoxWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 LineEditWidget::LineEditWidget( const PropertySheet& sheet,
-                              QWidget *parent, const char *name )
-    : QHBox( parent, name )
+                              TQWidget *parent, const char *name )
+    : TQHBox( parent, name )
 {
     
 }
@@ -92,7 +92,7 @@ LineEditWidget::~LineEditWidget()
     
 }
 
-QString LineEditWidget::value() const
+TQString LineEditWidget::value() const
 {
     
 }
@@ -102,8 +102,8 @@ QString LineEditWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 ListBoxWidget::ListBoxWidget( const PropertySheet& sheet,
-                              QWidget *parent, const char *name )
-    : QHBox( parent, name )
+                              TQWidget *parent, const char *name )
+    : TQHBox( parent, name )
 {
     
 }
@@ -113,7 +113,7 @@ ListBoxWidget::~ListBoxWidget()
     
 }
 
-QStringList ListBoxWidget::value() const
+TQStringList ListBoxWidget::value() const
 {
     
 }

@@ -23,9 +23,9 @@
 #include <config.h>
 #endif
 
-#include <qtable.h>
-#include <qvaluelist.h>
-#include <qmemarray.h>
+#include <tqtable.h>
+#include <tqvaluelist.h>
+#include <tqmemarray.h>
 
 #include "pmvector.h"
 
@@ -35,10 +35,10 @@ const int c_pmTableRTTI = 14352;
 class PMTableItem : public QTableItem
 {
 public:
-   PMTableItem( QTable* table );
+   PMTableItem( TQTable* table );
 
-   virtual void paint( QPainter* p, const QColorGroup& cg,
-                       const QRect& cr, bool selected );
+   virtual void paint( TQPainter* p, const TQColorGroup& cg,
+                       const TQRect& cr, bool selected );
 
    int rtti( ) const { return c_pmTableRTTI; }
 
@@ -52,7 +52,7 @@ private:
 
 
 /**
- * Widget that displays a list of vectors, based on @ref QTable.
+ * Widget that displays a list of vectors, based on @ref TQTable.
  */
 class PMVectorListEdit : public QTable
 {
@@ -61,33 +61,33 @@ public:
    /**
     * Constructor for 3d vectors (x, y, z)
     */
-   PMVectorListEdit( QWidget* parent, const char* name = 0 );
+   PMVectorListEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Constructor for 3d vectors
     */
-   PMVectorListEdit( const QString& c1, const QString& c2, const QString& c3,
-                    QWidget* parent, const char* name = 0 );
+   PMVectorListEdit( const TQString& c1, const TQString& c2, const TQString& c3,
+                    TQWidget* parent, const char* name = 0 );
    /**
     * Constructor for 2d vectors
     */
-   PMVectorListEdit( const QString& c1, const QString& c2,
-                    QWidget* parent, const char* name = 0 );
+   PMVectorListEdit( const TQString& c1, const TQString& c2,
+                    TQWidget* parent, const char* name = 0 );
 
    /**
     * Constructor for 4d vectors
     */
-   PMVectorListEdit( const QString& c1, const QString& c2, const QString& c3,
-                     const QString& c4, QWidget* parent, const char* name = 0 );
+   PMVectorListEdit( const TQString& c1, const TQString& c2, const TQString& c3,
+                     const TQString& c4, TQWidget* parent, const char* name = 0 );
    /**
     * Sets and displays the vectors. The widget will automatically
     * resize if no link is set and resize is true.
     */
-   void setVectors( const QValueList<PMVector>& v, bool resize = false,
+   void setVectors( const TQValueList<PMVector>& v, bool resize = false,
                     int precision = 5 );
    /**
     * Returns the vectors
     */
-   QValueList<PMVector> vectors( ) const;
+   TQValueList<PMVector> vectors( ) const;
    /**
     * Sets the i-th vector
     */
@@ -146,9 +146,9 @@ public:
    bool isDataValid( );
 
    /** */
-   virtual QSize sizeHint( ) const;
+   virtual TQSize sizeHint( ) const;
    /** */
-   bool eventFilter( QObject* o, QEvent* e );
+   bool eventFilter( TQObject* o, TQEvent* e );
 
 protected slots:
    void slotTextChanged( int, int );
@@ -166,8 +166,8 @@ private:
    void init( int dimensions );
 
    int m_dimension, m_size;
-   QMemArray<int> m_links;
-   QMemArray<bool> m_disabled;
+   TQMemArray<int> m_links;
+   TQMemArray<bool> m_disabled;
 };
 
 

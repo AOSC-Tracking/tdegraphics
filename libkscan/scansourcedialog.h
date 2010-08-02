@@ -19,10 +19,10 @@
 
 #ifndef SCANSOURCEDIALOG_H
 #define SCANSOURCEDIALOG_H
-#include <qwidget.h>
+#include <tqwidget.h>
 #include <kdialogbase.h>
-#include <qstrlist.h>
-#include <qstring.h>
+#include <tqstrlist.h>
+#include <tqstring.h>
 
 /**
   *@author Klaas Freitag
@@ -31,18 +31,18 @@
 typedef enum { ADF_OFF, ADF_SCAN_ALONG, ADF_SCAN_ONCE } ADF_BEHAVE;
 
 class KScanCombo;
-class QRadioButton;
-class QButtonGroup;
+class TQRadioButton;
+class TQButtonGroup;
 
 class ScanSourceDialog : public KDialogBase
 {
    Q_OBJECT
 public:
-   ScanSourceDialog( QWidget *parent, const QStrList, ADF_BEHAVE );
+   ScanSourceDialog( TQWidget *parent, const TQStrList, ADF_BEHAVE );
    ~ScanSourceDialog();
 
-   // void 	fillWithSources( QStrList *list );
-   QString 	getText( void ) const;
+   // void 	fillWithSources( TQStrList *list );
+   TQString 	getText( void ) const;
 
    ADF_BEHAVE 	getAdfBehave( void ) const
       { return( adf ); }
@@ -52,13 +52,13 @@ public slots:
    void        	slNotifyADF( int );
    void    	slChangeSource( int );
    int          sourceAdfEntry( void ) const;
-   void         slSetSource( const QString source );
+   void         slSetSource( const TQString source );
 
 private:
 
    KScanCombo    *sources;
-   QButtonGroup  *bgroup;
-   QRadioButton  *rb0, *rb1;
+   TQButtonGroup  *bgroup;
+   TQRadioButton  *rb0, *rb1;
    ADF_BEHAVE    adf;
    bool          adf_enabled;
 

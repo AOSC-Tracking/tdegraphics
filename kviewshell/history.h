@@ -7,8 +7,8 @@
 // (C) 2001 Stefan Kebekus
 // Distributed under the GPL
 
-#include <qobject.h>
-#include <qvaluelist.h>
+#include <tqobject.h>
+#include <tqvaluelist.h>
 
 #define HISTORYLENGTH 10
 
@@ -50,9 +50,9 @@ signals:
 
 private:
   // List of history items. First item is the oldest.
-  QValueList<HistoryItem> historyList;
+  TQValueList<HistoryItem> historyList;
 
-  QValueList<HistoryItem>::iterator currentItem;
+  TQValueList<HistoryItem>::iterator currentItem;
 };
 
 #endif

@@ -80,12 +80,12 @@ public:
    virtual int size( PMObject* object, int dimension ) const
    {
       PMPrism* prism = ( PMPrism* ) object;
-      QValueList< QValueList<PMVector> > points = prism->points( );
+      TQValueList< TQValueList<PMVector> > points = prism->points( );
       if( dimension == 0 )
          return points.size( );
       else
       {
-         QValueList< QValueList<PMVector> >::ConstIterator it
+         TQValueList< TQValueList<PMVector> >::ConstIterator it
             = points.at( m_index[0] );
          if( it != points.end( ) )
             return ( *it ).size( );
@@ -96,8 +96,8 @@ protected:
    virtual bool setProtected( PMObject* obj, const PMVariant& var )
    {
       PMPrism* p = ( PMPrism* ) obj;
-      QValueList< QValueList<PMVector> > list = p->points( );
-      QValueList< QValueList<PMVector> >::Iterator sit = list.begin( );
+      TQValueList< TQValueList<PMVector> > list = p->points( );
+      TQValueList< TQValueList<PMVector> >::Iterator sit = list.begin( );
       int i;
       PMVector v = var.vectorData( );
       v.resize( 2 );
@@ -106,11 +106,11 @@ protected:
          ++sit;
       // expand the list if necessary
       for( ; i < m_index[0]; ++i )
-         list.insert( sit, QValueList< PMVector >( ) );
+         list.insert( sit, TQValueList< PMVector >( ) );
       if( sit == list.end( ) )
-         sit = list.insert( sit, QValueList< PMVector >( ) );
+         sit = list.insert( sit, TQValueList< PMVector >( ) );
 
-      QValueList<PMVector>::Iterator it = ( *sit ).begin( );
+      TQValueList<PMVector>::Iterator it = ( *sit ).begin( );
 
       for( i = 0; i < m_index[1] && it != ( *sit ).end( ); ++i )
          ++it;
@@ -128,15 +128,15 @@ protected:
    virtual PMVariant getProtected( const PMObject* obj )
    {
       PMPrism* p = ( PMPrism* ) obj;
-      QValueList< QValueList<PMVector> > list = p->points( );
-      QValueList< QValueList<PMVector> >::ConstIterator sit = list.at( m_index[0] );
+      TQValueList< TQValueList<PMVector> > list = p->points( );
+      TQValueList< TQValueList<PMVector> >::ConstIterator sit = list.at( m_index[0] );
       if( sit == list.end( ) )
       {
          kdError( PMArea ) << "Range error in PMPrism::PointProperty::get" << endl;
          return PMVariant( );
       }
 
-      QValueList<PMVector>::ConstIterator it = ( *sit ).at( m_index[1] );
+      TQValueList<PMVector>::ConstIterator it = ( *sit ).at( m_index[1] );
 
       if( it == ( *sit ).end( ) )
       {
@@ -155,7 +155,7 @@ PMPrism::PMPrism( PMPart* part )
       : Base( part )
 {
    int i;
-   QValueList<PMVector> p;
+   TQValueList<PMVector> p;
 
    for( i = 0; i < defaultNumberOfPoints; ++i )
       p.append( defaultPoint[i] );
@@ -184,15 +184,15 @@ PMPrism::~PMPrism( )
 {
 }
 
-QString PMPrism::description( ) const
+TQString PMPrism::description( ) const
 {
    return i18n( "prism" );
 }
 
-void PMPrism::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMPrism::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QDomElement data = doc.createElement( "extra_data" );
-   QDomElement p, p2;
+   TQDomElement data = doc.createElement( "extra_data" );
+   TQDomElement p, p2;
 
    e.setAttribute( "spline_type", m_splineType );
    e.setAttribute( "sweep_type", m_sweepType );
@@ -201,8 +201,8 @@ void PMPrism::serialize( QDomElement& e, QDomDocument& doc ) const
    e.setAttribute( "height1", m_height1 );
    e.setAttribute( "height2", m_height2 );
 
-   QValueList< QValueList<PMVector> >::ConstIterator it;
-   QValueList<PMVector>::ConstIterator it2;
+   TQValueList< TQValueList<PMVector> >::ConstIterator it;
+   TQValueList<PMVector>::ConstIterator it2;
    for( it = m_points.begin( ); it != m_points.end( ); ++it )
    {
       p = doc.createElement( "sub_prism" );
@@ -229,30 +229,30 @@ void PMPrism::readAttributes( const PMXMLHelper& h )
    m_height2 = h.doubleAttribute( "height2", defaultHeight2 );
 
    m_points.clear( );
-   QValueList<PMVector> list;
+   TQValueList<PMVector> list;
    PMVector v( 2 );
 
-   QDomElement e = h.extraData( );
+   TQDomElement e = h.extraData( );
    if( !e.isNull( ) )
    {
-      QDomNode sp = e.firstChild( );
+      TQDomNode sp = e.firstChild( );
       while( !sp.isNull( ) )
       {
          if( sp.isElement( ) )
          {
-            QDomElement spe = sp.toElement( );
+            TQDomElement spe = sp.toElement( );
             if( spe.tagName( ) == "sub_prism" )
             {
                list.clear( );
-               QDomNode c = spe.firstChild( );
+               TQDomNode c = spe.firstChild( );
                while( !c.isNull( ) )
                {
                   if( c.isElement( ) )
                   {
-                     QDomElement ce = c.toElement( );
+                     TQDomElement ce = c.toElement( );
                      if( ce.tagName( ) == "point" )
                      {
-                        QString str = ce.attribute( "vector" );
+                        TQString str = ce.attribute( "vector" );
                         if( !str.isNull( ) )
                         {
                            v.loadXML( str );
@@ -380,7 +380,7 @@ void PMPrism::setHeight2( double h )
    }
 }
 
-void PMPrism::setPoints( const QValueList< QValueList<PMVector> >& points )
+void PMPrism::setPoints( const TQValueList< TQValueList<PMVector> >& points )
 {
    if( m_points != points )
    {
@@ -392,7 +392,7 @@ void PMPrism::setPoints( const QValueList< QValueList<PMVector> >& points )
    }
 }
 
-PMDialogEditBase* PMPrism::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMPrism::editWidget( TQWidget* parent ) const
 {
    return new PMPrismEdit( parent );
 }
@@ -456,7 +456,7 @@ void PMPrism::createViewStructure( )
    int sSteps = (int)( ( (float)s_sSteps / 2 ) * ( displayDetail( ) + 1 ) );
 
    // calculate number of points and lines of the view structure
-   QValueList< QValueList<PMVector> >::ConstIterator spit = m_points.begin( );
+   TQValueList< TQValueList<PMVector> >::ConstIterator spit = m_points.begin( );
    int np = 0;
    for( ; spit != m_points.end( ); ++spit )
    {
@@ -499,8 +499,8 @@ void PMPrism::createViewStructure( )
 
    for( spit = m_points.begin( ); spit != m_points.end( ); ++spit )
    {
-      QValueList<PMSplineSegment> segments;
-      QValueList<PMVector> fullPoints = expandedPoints( *spit );
+      TQValueList<PMSplineSegment> segments;
+      TQValueList<PMVector> fullPoints = expandedPoints( *spit );
 
       int ns = fullPoints.count( );
       int i, j;
@@ -520,7 +520,7 @@ void PMPrism::createViewStructure( )
             ns = ns / 4;
             break;
       }
-      QValueList<PMVector>::Iterator it1, it2, it3, it4;
+      TQValueList<PMVector>::Iterator it1, it2, it3, it4;
 
       // create the spline segments
       it1 = fullPoints.begin( );
@@ -581,7 +581,7 @@ void PMPrism::createViewStructure( )
 
       // calculate the points
       PMVector point2( 2 ), point3;
-      QValueList<PMSplineSegment>::Iterator sit = segments.begin( );
+      TQValueList<PMSplineSegment>::Iterator sit = segments.begin( );
       int pi = 0;
       double poffset = 1.0 / sSteps;
 
@@ -616,8 +616,8 @@ void PMPrism::createViewStructure( )
 
 void PMPrism::controlPoints( PMControlPointList& list )
 {
-   QValueList< QValueList<PMVector> >::Iterator it1;
-   QValueList<PMVector>::Iterator it2;
+   TQValueList< TQValueList<PMVector> >::Iterator it1;
+   TQValueList<PMVector>::Iterator it2;
    int i1, i2;
 
    list.append( new PMDistanceControlPoint( PMVector( 0.0, 0.0, 0.0 ),
@@ -708,8 +708,8 @@ void PMPrism::controlPoints( PMControlPointList& list )
 void PMPrism::controlPointsChanged( PMControlPointList& list )
 {
    PMControlPointListIterator it( list );
-   QValueList< QValueList<PMVector> >::Iterator spit = m_points.begin( );
-   QValueList<PMVector>::Iterator pit = ( *spit ).begin( );
+   TQValueList< TQValueList<PMVector> >::Iterator spit = m_points.begin( );
+   TQValueList<PMVector>::Iterator pit = ( *spit ).begin( );
    PM2DControlPoint* p1;
    PMDistanceControlPoint* dcp;
    bool firstChange = true;
@@ -765,7 +765,7 @@ void PMPrism::controlPointsChanged( PMControlPointList& list )
 }
 
 void PMPrism::addObjectActions( const PMControlPointList& /*cp*/,
-                                QPtrList<PMObjectAction>& actions )
+                                TQPtrList<PMObjectAction>& actions )
 {
    PMObjectAction* a;
 
@@ -777,7 +777,7 @@ void PMPrism::addObjectActions( const PMControlPointList& /*cp*/,
                            i18n( "Remove Point" ) );
 
    bool enableJoin = false;
-   QValueList< QValueList<PMVector> >::ConstIterator spit = m_points.begin( );
+   TQValueList< TQValueList<PMVector> >::ConstIterator spit = m_points.begin( );
 
    int minp = 4;
    switch( m_splineType )
@@ -806,7 +806,7 @@ void PMPrism::addObjectActions( const PMControlPointList& /*cp*/,
 
 void PMPrism::objectActionCalled( const PMObjectAction* action,
                                   const PMControlPointList& cp,
-                                  const QPtrList<PMVector>& cpViewPosition,
+                                  const TQPtrList<PMVector>& cpViewPosition,
                                   const PMVector& clickPosition )
 {
    if( action->objectType( ) == s_pMetaObject )
@@ -829,7 +829,7 @@ void PMPrism::objectActionCalled( const PMObjectAction* action,
 }
 
 void PMPrism::splitSegment( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest segment
@@ -841,12 +841,12 @@ void PMPrism::splitSegment( const PMControlPointList& /*cp*/,
    PMVector mid( 3 ), dist( 2 );
    PMVector firstPoint( 3 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
-   QPtrListIterator<PMVector> it2( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it2( cpViewPosition );
    for( i = 0; i < 2; ++i ) ++it1;
    for( i = 0; i < 3; ++i ) ++it2;
 
-   QValueList< QValueList<PMVector> >::Iterator spit = m_points.begin( );
+   TQValueList< TQValueList<PMVector> >::Iterator spit = m_points.begin( );
    for( spnr = 0; spit != m_points.end( ); ++spit, ++spnr )
    {
       int nump = ( *spit ).count( );
@@ -901,18 +901,18 @@ void PMPrism::splitSegment( const PMControlPointList& /*cp*/,
    }
 
    // add a new segment
-   QValueList< QValueList<PMVector> > newPoints = m_points;
+   TQValueList< TQValueList<PMVector> > newPoints = m_points;
    spit = newPoints.at( nsp );
-   QValueList<PMVector> newSubPoints = *spit;
+   TQValueList<PMVector> newSubPoints = *spit;
 
    if( m_splineType == BezierSpline )
    {
       ns /= 3;
       ns *= 3;
    }
-   QValueList<PMVector>::Iterator it = newSubPoints.at( ( unsigned ) ns );
+   TQValueList<PMVector>::Iterator it = newSubPoints.at( ( unsigned ) ns );
    PMVector p[4];
-   QValueList<PMVector>::Iterator hit = it, eit = newSubPoints.end( );
+   TQValueList<PMVector>::Iterator hit = it, eit = newSubPoints.end( );
    --eit;
 
    // calculate the spline segment
@@ -1007,7 +1007,7 @@ void PMPrism::splitSegment( const PMControlPointList& /*cp*/,
 }
 
 void PMPrism::joinSegments( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest point
@@ -1018,7 +1018,7 @@ void PMPrism::joinSegments( const PMControlPointList& /*cp*/,
    int i;
    PMVector dist( 2 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
    for( i = 0; i < 2; ++i ) ++it1;
 
    int minp = 0;
@@ -1038,7 +1038,7 @@ void PMPrism::joinSegments( const PMControlPointList& /*cp*/,
          break;
    }
 
-   QValueList< QValueList<PMVector> >::Iterator spit = m_points.begin( );
+   TQValueList< TQValueList<PMVector> >::Iterator spit = m_points.begin( );
    for( spnr = 0; spit != m_points.end( ); ++spit, ++spnr )
    {
       int nump = ( *spit ).count( );
@@ -1088,10 +1088,10 @@ void PMPrism::joinSegments( const PMControlPointList& /*cp*/,
    }
 
    // remove the segment
-   QValueList< QValueList<PMVector> > newPoints = m_points;
+   TQValueList< TQValueList<PMVector> > newPoints = m_points;
    spit = newPoints.at( nsp );
-   QValueList<PMVector> newSubPoints = *spit;
-   QValueList<PMVector>::Iterator it;
+   TQValueList<PMVector> newSubPoints = *spit;
+   TQValueList<PMVector>::Iterator it;
 
    if( m_splineType != BezierSpline )
    {
@@ -1138,11 +1138,11 @@ void PMPrism::setSSteps( int s )
    ++s_parameterKey;
 }
 
-QValueList<PMVector> PMPrism::expandedPoints( const QValueList<PMVector>& p ) const
+TQValueList<PMVector> PMPrism::expandedPoints( const TQValueList<PMVector>& p ) const
 {
    // add the missing points
    int refa = 0, refb = p.count( );
-   QValueList<PMVector> result = p;
+   TQValueList<PMVector> result = p;
 
    switch( m_splineType )
    {
@@ -1159,7 +1159,7 @@ QValueList<PMVector> PMPrism::expandedPoints( const QValueList<PMVector>& p ) co
          refb = refb / 3 * 4;
          break;
    }
-   QValueList<PMVector>::Iterator it1, it2, it3;
+   TQValueList<PMVector>::Iterator it1, it2, it3;
    if( m_splineType != BezierSpline )
    {
       it1 = result.at( refa );

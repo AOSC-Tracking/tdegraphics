@@ -35,8 +35,8 @@
 #include <stdlib.h>
 #include <kspell.h>
 #include <kspelldlg.h>
-#include <qfile.h>
-#include <qcolor.h>
+#include <tqfile.h>
+#include <tqcolor.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -54,21 +54,21 @@
 #include "kookapref.h"
 #include "ocrword.h"
 
-#include <qtimer.h>
-#include <qregexp.h>
+#include <tqtimer.h>
+#include <tqregexp.h>
 #include <klocale.h>
-#include <qpaintdevice.h>
-#include <qpainter.h>
-#include <qpen.h>
-#include <qbrush.h>
-#include <qfileinfo.h>
+#include <tqpaintdevice.h>
+#include <tqpainter.h>
+#include <tqpen.h>
+#include <tqbrush.h>
+#include <tqfileinfo.h>
 
 /*
  * Thread support is disabled here because the kadmos lib seems not to be
  * thread save unfortunately. See slotKadmosResult-comments for more information
  */
 
-KSANEOCR::KSANEOCR( QWidget*, KConfig *cfg ):
+KSANEOCR::KSANEOCR( TQWidget*, KConfig *cfg ):
     m_ocrProcessDia(0L),
     daemon(0L),
     visibleOCRRunning(false),
@@ -102,7 +102,7 @@ KSANEOCR::KSANEOCR( QWidget*, KConfig *cfg ):
     {
         /* -- ocr dialog information -- */
         konf->setGroup( CFG_GROUP_OCR_DIA );
-        QString eng = konf->readEntry(CFG_OCR_ENGINE, "ocrad");
+        TQString eng = konf->readEntry(CFG_OCR_ENGINE, "ocrad");
 
         if( eng == "ocrad" )
         {
@@ -113,7 +113,7 @@ KSANEOCR::KSANEOCR( QWidget*, KConfig *cfg ):
             m_ocrEngine = GOCR;
         }
 #ifdef HAVE_KADMOS
-        else if( eng == QString("kadmos") ) m_ocrEngine = KADMOS;
+        else if( eng == TQString("kadmos") ) m_ocrEngine = KADMOS;
 #endif
         kdDebug(28000) << "OCR engine is " << eng << endl;
 
@@ -173,7 +173,7 @@ void KSANEOCR::slSetImage(KookaImage *img )
 /*
  * Request to visualise a line-box in the source image, KADMOS Engine
  */
-void KSANEOCR::slLineBox( const QRect& )
+void KSANEOCR::slLineBox( const TQRect& )
 {
     if( ! m_img ) return;
 }
@@ -183,7 +183,7 @@ void KSANEOCR::slLineBox( const QRect& )
  * starts visual ocr process. Depending on the ocr engine, this function creates
  * a new dialog, and shows it.
  */
-bool KSANEOCR::startOCRVisible( QWidget *parent )
+bool KSANEOCR::startOCRVisible( TQWidget *parent )
 {
    if( visibleOCRRunning ) return( false );
    bool res = true;
@@ -224,9 +224,9 @@ bool KSANEOCR::startOCRVisible( QWidget *parent )
        m_ocrProcessDia->introduceImage( m_img );
        visibleOCRRunning = true;
 
-      connect( m_ocrProcessDia, SIGNAL( user1Clicked()), this, SLOT( startOCRProcess() ));
-      connect( m_ocrProcessDia, SIGNAL( closeClicked()), this, SLOT( slotClose() ));
-      connect( m_ocrProcessDia, SIGNAL( user2Clicked()), this, SLOT( slotStopOCR() ));
+      connect( m_ocrProcessDia, TQT_SIGNAL( user1Clicked()), this, TQT_SLOT( startOCRProcess() ));
+      connect( m_ocrProcessDia, TQT_SIGNAL( closeClicked()), this, TQT_SLOT( slotClose() ));
+      connect( m_ocrProcessDia, TQT_SIGNAL( user2Clicked()), this, TQT_SLOT( slotStopOCR() ));
       m_ocrProcessDia->show();
 
    }
@@ -250,7 +250,7 @@ void KSANEOCR::finishedOCRVisible( bool success )
 
    if( success )
    {
-       QString goof = ocrResultText();
+       TQString goof = ocrResultText();
 
        emit newOCRResultText(goof);
 
@@ -258,7 +258,7 @@ void KSANEOCR::finishedOCRVisible( bool success )
        {
 	   if( m_resultImage != 0 ) delete m_resultImage;
 	   kdDebug(28000) << "Result image name: " << m_ocrResultImage << endl;
-	   m_resultImage = new QImage( m_ocrResultImage, "BMP" );
+	   m_resultImage = new TQImage( m_ocrResultImage, "BMP" );
 	   kdDebug(28000) << "New result image has dimensions: " << m_resultImage->width() << "x" << m_resultImage->height()<< endl;
            /* The image canvas is non-zero. Set it to our image */
            m_imgCanvas->newImageHoldZoom( m_resultImage );
@@ -279,9 +279,9 @@ void KSANEOCR::finishedOCRVisible( bool success )
             */
 
            connect( new KSpell( m_parent, i18n("Kooka OCR Dictionary Check"),
-                                this, SLOT( slSpellReady(KSpell*)),
+                                this, TQT_SLOT( slSpellReady(KSpell*)),
                                 m_ocrProcessDia->spellConfig() ),
-                    SIGNAL( death()), this, SLOT(slSpellDead()));
+                    TQT_SIGNAL( death()), this, TQT_SLOT(slSpellDead()));
        }
 
        delete m_ocrProcessDia;
@@ -369,7 +369,7 @@ void KSANEOCR::startOCRAD( )
     ocradDialog *ocrDia = static_cast<ocradDialog*>(m_ocrProcessDia);
 
     m_ocrResultImage = ocrDia->orfUrl();
-    const QString cmd = ocrDia->getOCRCmd();
+    const TQString cmd = ocrDia->getOCRCmd();
 
     // if( m_ocrResultImage.isEmpty() )
     {
@@ -381,10 +381,10 @@ void KSANEOCR::startOCRAD( )
     m_ocrImagePBM = ImgSaver::tempSaveImage( m_img, "PBM", 1 );
 
     /* temporar file for orf result */
-    KTempFile *tmpOrf = new KTempFile( QString(), ".orf" );
+    KTempFile *tmpOrf = new KTempFile( TQString(), ".orf" );
     tmpOrf->setAutoDelete( false );
     tmpOrf->close();
-    m_tmpOrfName = QFile::encodeName(tmpOrf->name());
+    m_tmpOrfName = TQFile::encodeName(tmpOrf->name());
 
 
     if( daemon )
@@ -397,25 +397,25 @@ void KSANEOCR::startOCRAD( )
     Q_CHECK_PTR(daemon);
 
     *daemon << cmd;
-    *daemon << QString("-x");
+    *daemon << TQString("-x");
     *daemon <<  m_tmpOrfName;                   // the orf result file
-    *daemon << QFile::encodeName( m_ocrImagePBM );      // The name of the image
-    *daemon << QString("-l");
-    *daemon << QString::number( ocrDia->layoutDetectionMode());
+    *daemon << TQFile::encodeName( m_ocrImagePBM );      // The name of the image
+    *daemon << TQString("-l");
+    *daemon << TQString::number( ocrDia->layoutDetectionMode());
 
     KConfig *konf = KGlobal::config ();
     KConfigGroupSaver( konf, CFG_GROUP_OCRAD );
 
-    QString format = konf->readEntry( CFG_OCRAD_FORMAT, "utf8");
-    *daemon << QString("-F");
+    TQString format = konf->readEntry( CFG_OCRAD_FORMAT, "utf8");
+    *daemon << TQString("-F");
     *daemon << format;
 
-    QString charset = konf->readEntry( CFG_OCRAD_CHARSET, "iso-8859-15");
-    *daemon << QString("-c");
+    TQString charset = konf->readEntry( CFG_OCRAD_CHARSET, "iso-8859-15");
+    *daemon << TQString("-c");
     *daemon << charset;
 
 
-    QString addArgs = konf->readEntry( CFG_OCRAD_EXTRA_ARGUMENTS, QString() );
+    TQString addArgs = konf->readEntry( CFG_OCRAD_EXTRA_ARGUMENTS, TQString() );
 
     if( !addArgs.isEmpty() )
     {
@@ -425,12 +425,12 @@ void KSANEOCR::startOCRAD( )
 
     m_ocrResultText = "";
 
-    connect(daemon, SIGNAL(processExited(KProcess *)),
-	    this,   SLOT(  ocradExited(KProcess*)));
-    connect(daemon, SIGNAL(receivedStdout(KProcess *, char*, int)),
-	    this,   SLOT(  ocradStdIn(KProcess*, char*, int)));
-    connect(daemon, SIGNAL(receivedStderr(KProcess *, char*, int)),
-	    this,   SLOT(  ocradStdErr(KProcess*, char*, int)));
+    connect(daemon, TQT_SIGNAL(processExited(KProcess *)),
+	    this,   TQT_SLOT(  ocradExited(KProcess*)));
+    connect(daemon, TQT_SIGNAL(receivedStdout(KProcess *, char*, int)),
+	    this,   TQT_SLOT(  ocradStdIn(KProcess*, char*, int)));
+    connect(daemon, TQT_SIGNAL(receivedStderr(KProcess *, char*, int)),
+	    this,   TQT_SLOT(  ocradStdErr(KProcess*, char*, int)));
 
     if (!daemon->start(KProcess::NotifyOnExit, KProcess::All))
     {
@@ -448,7 +448,7 @@ void KSANEOCR::startOCRAD( )
 void KSANEOCR::ocradExited(KProcess* )
 {
     kdDebug(28000) << "ocrad exit " << endl;
-    QString err;
+    TQString err;
     bool parseRes = true;
 
     if( ! readORF(m_tmpOrfName, err) )
@@ -464,14 +464,14 @@ void KSANEOCR::ocradExited(KProcess* )
 
 void KSANEOCR::ocradStdErr(KProcess*, char* buffer, int buflen)
 {
-   QString errorBuffer = QString::fromLocal8Bit(buffer, buflen);
+   TQString errorBuffer = TQString::fromLocal8Bit(buffer, buflen);
    kdDebug(28000) << "ocrad says on stderr: " << errorBuffer << endl;
 
 }
 
 void KSANEOCR::ocradStdIn(KProcess*, char* buffer, int buflen)
 {
-   QString errorBuffer = QString::fromLocal8Bit(buffer, buflen);
+   TQString errorBuffer = TQString::fromLocal8Bit(buffer, buflen);
    kdDebug(28000) << "ocrad says on stdin: " << errorBuffer << endl;
 }
 
@@ -503,7 +503,7 @@ void KSANEOCR::startOCRProcess( void )
 
        KGOCRDialog *gocrDia = static_cast<KGOCRDialog*>(m_ocrProcessDia);
 
-       const QString cmd = gocrDia->getOCRCmd();
+       const TQString cmd = gocrDia->getOCRCmd();
 
        /* Save the image to a temp file */
 
@@ -513,7 +513,7 @@ void KSANEOCR::startOCRProcess( void )
         * Gray:        PGM
         * Bunt:        PPM
         */
-       QString format;
+       TQString format;
        if( m_img->depth() == 1 )
            format = "PBM";
        else if( m_img->isGrayscale() )
@@ -521,7 +521,7 @@ void KSANEOCR::startOCRProcess( void )
        else
            format = "PPM";
 
-       QString tmpFile = ImgSaver::tempSaveImage( m_img, format ); // m_tmpFile->name();
+       TQString tmpFile = ImgSaver::tempSaveImage( m_img, format ); // m_tmpFile->name();
 
        kdDebug(28000) <<  "Starting GOCR-Command: " << cmd << " on file " << tmpFile
 		      << ", format " << format << endl;
@@ -535,15 +535,15 @@ void KSANEOCR::startOCRProcess( void )
        Q_CHECK_PTR(daemon);
        m_ocrResultText = "";
 
-       connect(daemon, SIGNAL(processExited(KProcess *)),
-               this,   SLOT(  gocrExited(KProcess*)));
-       connect(daemon, SIGNAL(receivedStdout(KProcess *, char*, int)),
-               this,   SLOT(  gocrStdIn(KProcess*, char*, int)));
-       connect(daemon, SIGNAL(receivedStderr(KProcess *, char*, int)),
-               this,   SLOT(  gocrStdErr(KProcess*, char*, int)));
+       connect(daemon, TQT_SIGNAL(processExited(KProcess *)),
+               this,   TQT_SLOT(  gocrExited(KProcess*)));
+       connect(daemon, TQT_SIGNAL(receivedStdout(KProcess *, char*, int)),
+               this,   TQT_SLOT(  gocrStdIn(KProcess*, char*, int)));
+       connect(daemon, TQT_SIGNAL(receivedStderr(KProcess *, char*, int)),
+               this,   TQT_SLOT(  gocrStdErr(KProcess*, char*, int)));
 
-       QString opt;
-       *daemon << QFile::encodeName(cmd);
+       TQString opt;
+       *daemon << TQFile::encodeName(cmd);
        *daemon << "-x";
        *daemon << "-";
        if( !( m_img->numColors() > 0 && m_img->numColors() <3 ))   /* not a bw-image */
@@ -566,7 +566,7 @@ void KSANEOCR::startOCRProcess( void )
        // Unfortunately this is fixed by gocr.
        m_ocrResultImage = "out30.bmp";
 
-       *daemon << QFile::encodeName(tmpFile);
+       *daemon << TQFile::encodeName(tmpFile);
 
        m_ocrCurrLine = 0;  // Important in gocrStdIn to store the results
 
@@ -587,7 +587,7 @@ void KSANEOCR::startOCRProcess( void )
 
        kdDebug(28000)  << "Starting Kadmos OCR Engine" << endl;
 
-       QString clasPath;  /* target where the clasPath is written in */
+       TQString clasPath;  /* target where the clasPath is written in */
        if( ! kadDia->getSelClassifier( clasPath ) )
        {
            KMessageBox::error( m_parent,
@@ -597,7 +597,7 @@ void KSANEOCR::startOCRProcess( void )
            finishedOCRVisible(false);
            return;
        }
-       QCString c = clasPath.latin1();
+       TQCString c = clasPath.latin1();
 
        kdDebug(28000) << "Using classifier " << c << endl;
        m_rep.Init( c );
@@ -618,10 +618,10 @@ void KSANEOCR::startOCRProcess( void )
 	   kdDebug(28000) << "Image depth " << m_img->depth() << ", colors: " << m_img->numColors() << endl;
 #define USE_KADMOS_FILEOP /* use a save-file for OCR instead of filling the reImage struct manually */
 #ifdef USE_KADMOS_FILEOP
-	   m_tmpFile = new KTempFile( QString(), QString("bmp"));
+	   m_tmpFile = new KTempFile( TQString(), TQString("bmp"));
 	   m_tmpFile->setAutoDelete( false );
 	   m_tmpFile->close();
-	   QString tmpFile = m_tmpFile->name();
+	   TQString tmpFile = m_tmpFile->name();
 	   kdDebug() << "Saving to file " << tmpFile << endl;
 	   m_img->save( tmpFile, "BMP" );
 	   m_rep.SetImage(tmpFile);
@@ -649,7 +649,7 @@ void KSANEOCR::startOCRProcess( void )
        }
 #ifdef QT_THREAD_SUPPORT
        /* start a timer and wait until it fires. */
-       QTimer::singleShot( 500, this, SLOT( slotKadmosResult() ));
+       TQTimer::singleShot( 500, this, TQT_SLOT( slotKadmosResult() ));
 #else
        slotKadmosResult();
 #endif
@@ -703,7 +703,7 @@ void KSANEOCR::slotKadmosResult()
     else
     {
         /* recognition thread is not yet finished. Wait another half a second. */
-        QTimer::singleShot( 500, this, SLOT( slotKadmosResult() ));
+        TQTimer::singleShot( 500, this, TQT_SLOT( slotKadmosResult() ));
         /* Never comes here if no threads exist on the system */
     }
 #endif /* HAVE_KADMOS */
@@ -724,7 +724,7 @@ void KSANEOCR::gocrExited(KProcess* d)
     * accordingly and than go through every line and create ocrwords for every
     * word.
     */
-   QStringList lines = QStringList::split( '\n', m_ocrResultText, true );
+   TQStringList lines = TQStringList::split( '\n', m_ocrResultText, true );
 
    m_ocrPage.clear();
    m_ocrPage.resize( lines.count() );
@@ -733,13 +733,13 @@ void KSANEOCR::gocrExited(KProcess* d)
 
    unsigned int lineCnt = 0;
 
-   for ( QStringList::Iterator it = lines.begin(); it != lines.end(); ++it )
+   for ( TQStringList::Iterator it = lines.begin(); it != lines.end(); ++it )
    {
        kdDebug(28000) << "Splitting up line " << *it << endl;
        ocrWordList ocrLine;
 
-       QStringList words = QStringList::split( QRegExp( "\\s+" ), *it, false );
-       for ( QStringList::Iterator itWord = words.begin(); itWord != words.end(); ++itWord )
+       TQStringList words = TQStringList::split( TQRegExp( "\\s+" ), *it, false );
+       for ( TQStringList::Iterator itWord = words.begin(); itWord != words.end(); ++itWord )
        {
            kdDebug(28000) << "Appending to results: " << *itWord << endl;
            ocrLine.append( ocrWord( *itWord ));
@@ -784,10 +784,10 @@ void KSANEOCR::gocrExited(KProcess* d)
  *
  */
 
-bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
+bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
 {
-    QFile file( fileName );
-    QRegExp rx;
+    TQFile file( fileName );
+    TQRegExp rx;
     bool error = false;
 
     /* use a global line number counter here, not the one from the orf. The orf one
@@ -811,7 +811,7 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
     kdDebug(28000) << "***** starting to analyse orf at " << fileName << " *****" << endl;
 
     /* some  checks on the orf */
-    QFileInfo fi( fileName );
+    TQFileInfo fi( fileName );
     if( ! fi.exists() ) {
         error = true;
         errStr = i18n("The orf %1 does not exist.").arg(fileName);
@@ -824,9 +824,9 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 
     if ( !error && file.open( IO_ReadOnly ) )
     {
-        QTextStream stream( &file );
-        QString line;
-	QString recLine; // recognised line
+        TQTextStream stream( &file );
+        TQString line;
+	TQString recLine; // recognised line
 
         while ( !stream.atEnd() )
 	{
@@ -838,13 +838,13 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 		kdDebug(28000) << "# Line check |" << line << "|" << endl;
 		if( line.startsWith( "total blocks " ) )  // total count fo blocks, must be first line
 		{
-		    blockCnt = line.right( len - 13 /* QString("total blocks ").length() */ ).toInt();
+		    blockCnt = line.right( len - 13 /* TQString("total blocks ").length() */ ).toInt();
 		    kdDebug(28000) << "Amount of blocks: " << blockCnt << endl;
 		    m_blocks.resize(blockCnt);
 		}
                 else if( line.startsWith( "total text blocks " ))
                 {
-		    blockCnt = line.right( len - 18 /* QString("total text blocks ").length() */ ).toInt();
+		    blockCnt = line.right( len - 18 /* TQString("total text blocks ").length() */ ).toInt();
 		    kdDebug(28000) << "Amount of blocks (V. 10): " << blockCnt << endl;
 		    m_blocks.resize(blockCnt);
                 }
@@ -855,7 +855,7 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 		    {
 			currBlock = (rx.cap(1).toInt())-1;
 			kdDebug(28000) << "Setting current block " << currBlock << endl;
-			QRect r( rx.cap(2).toInt(), rx.cap(3).toInt(), rx.cap(4).toInt(), rx.cap(5).toInt());
+			TQRect r( rx.cap(2).toInt(), rx.cap(3).toInt(), rx.cap(4).toInt(), rx.cap(5).toInt());
 			m_blocks[currBlock] = r;
 		    }
 		    else
@@ -866,7 +866,7 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 		}
 		else if( line.startsWith( "lines " ))
 		{
-		    int lineCnt = line.right( len - 6 /* QString("lines ").length() */).toInt();
+		    int lineCnt = line.right( len - 6 /* TQString("lines ").length() */).toInt();
 		    m_ocrPage.resize(m_ocrPage.size()+lineCnt);
 		    kdDebug(28000) << "Resized ocrPage to linecount " << lineCnt << endl;
 		}
@@ -879,7 +879,7 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 			kdDebug(28000) << "RegExp-Result: " << rx.cap(1) << " : " << rx.cap(2) << endl;
 			int charCount = rx.cap(2).toInt();
 			ocrWord word;
-			QRect   brect;
+			TQRect   brect;
 			ocrWordList ocrLine;
                         ocrLine.setBlock(currBlock);
 			/* Loop over all characters in the line. Every char has it's own line
@@ -889,7 +889,7 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 			for( int c=0; c < charCount && !stream.atEnd(); c++ )
 			{
 			    /* Read one line per character */
-			    QString charLine = stream.readLine();
+			    TQString charLine = stream.readLine();
 			    int semiPos = charLine.find(';');
 			    if( semiPos == -1 )
 			    {
@@ -897,8 +897,8 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 			    }
 			    else
 			    {
- 				QString rectStr = charLine.left( semiPos );
-				QString results = charLine.remove(0, semiPos+1 );
+ 				TQString rectStr = charLine.left( semiPos );
+				TQString results = charLine.remove(0, semiPos+1 );
                                 bool lineErr = false;
 
 				// rectStr contains the rectangle info of for the character
@@ -915,14 +915,14 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
                                     lineErr = true;
                                 }
                                 // kdDebug(28000) << "Results-line after cutting the alter: " << results << endl;
-                                QChar detectedChar = UndetectedChar;
+                                TQChar detectedChar = UndetectedChar;
                                 if( !lineErr )
                                 {
                                     /* take the first alternative only FIXME */
                                     if( altCount > 0 )
                                         detectedChar = results[1];
                                     // kdDebug(28000) << "Found " << altCount << " alternatives for "
-                                    //	       << QString(detectedChar) << endl;
+                                    //	       << TQString(detectedChar) << endl;
                                 }
 
                                 /* Analyse the rectangle */
@@ -933,7 +933,7 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
                                     if( rx.search( rectStr ) != -1 )
                                     {
                                         /* unite the rectangles */
-                                        QRect privRect( rx.cap(1).toInt(), rx.cap(2).toInt(),
+                                        TQRect privRect( rx.cap(1).toInt(), rx.cap(2).toInt(),
                                                         rx.cap(3).toInt(), rx.cap(4).toInt() );
                                         word.setRect( word.rect() | privRect );
                                     }
@@ -950,10 +950,10 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
                                     if( detectedChar == ' ' )
                                     {
 					/* add the block offset to the rect of the word */
-					QRect r = word.rect();
+					TQRect r = word.rect();
                                         if( ocradVersion < 10 )
                                         {
-                                            QRect blockRect = m_blocks[currBlock];
+                                            TQRect blockRect = m_blocks[currBlock];
                                             r.moveBy( blockRect.x(), blockRect.y());
                                         }
 
@@ -971,10 +971,10 @@ bool KSANEOCR::readORF( const QString& fileName, QString& errStr )
 			if( !word.isEmpty() )
 			{
 			    /* add the block offset to the rect of the word */
-			    QRect r = word.rect();
+			    TQRect r = word.rect();
                             if( ocradVersion < 10 )
                             {
-                                QRect blockRect = m_blocks[currBlock];
+                                TQRect blockRect = m_blocks[currBlock];
                                 r.moveBy( blockRect.x(), blockRect.y());
                             }
 			    word.setRect( r );
@@ -1022,23 +1022,23 @@ void KSANEOCR::cleanUpFiles( void )
    if( ! m_ocrResultImage.isEmpty())
    {
       kdDebug(28000) << "Unlinking OCR Result image file!" << endl;
-      unlink(QFile::encodeName(m_ocrResultImage));
-      m_ocrResultImage = QString();
+      unlink(TQFile::encodeName(m_ocrResultImage));
+      m_ocrResultImage = TQString();
    }
 
    if( ! m_ocrImagePBM.isEmpty())
    {
        kdDebug(28000) << "Unlinking OCR PBM file!" << endl;
-       unlink( QFile::encodeName(m_ocrImagePBM));
-       m_ocrImagePBM = QString();
+       unlink( TQFile::encodeName(m_ocrImagePBM));
+       m_ocrImagePBM = TQString();
    }
 
    if( ! m_tmpOrfName.isEmpty() )
    {
        if( m_unlinkORF )
    {
-      unlink(QFile::encodeName(m_tmpOrfName));
-      m_tmpOrfName = QString();
+      unlink(TQFile::encodeName(m_tmpOrfName));
+      m_tmpOrfName = TQString();
    }
        else
        {
@@ -1053,7 +1053,7 @@ void KSANEOCR::cleanUpFiles( void )
 
 void KSANEOCR::gocrStdErr(KProcess*, char* buffer, int buflen)
 {
-   QString errorBuffer = QString::fromLocal8Bit(buffer, buflen);
+   TQString errorBuffer = TQString::fromLocal8Bit(buffer, buflen);
    kdDebug(28000) << "gocr says: " << errorBuffer << endl;
 
 }
@@ -1061,9 +1061,9 @@ void KSANEOCR::gocrStdErr(KProcess*, char* buffer, int buflen)
 
 void KSANEOCR::gocrStdIn(KProcess*, char* buffer, int buflen)
 {
-    QString aux = QString::fromLocal8Bit(buffer, buflen);
+    TQString aux = TQString::fromLocal8Bit(buffer, buflen);
 
-    QRegExp rx( "^\\s*\\d+\\s+\\d+");
+    TQRegExp rx( "^\\s*\\d+\\s+\\d+");
     if( rx.search( aux ) > -1 )
     {
         /* calculate ocr progress for gocr */
@@ -1084,18 +1084,18 @@ void KSANEOCR::gocrStdIn(KProcess*, char* buffer, int buflen)
 /*
  * Assemble the result text
  */
-QString KSANEOCR::ocrResultText()
+TQString KSANEOCR::ocrResultText()
 {
-    QString res;
-    const QString space(" ");
+    TQString res;
+    const TQString space(" ");
 
     /* start from the back and search the original word to replace it */
-    QValueVector<ocrWordList>::iterator pageIt;
+    TQValueVector<ocrWordList>::iterator pageIt;
 
     for( pageIt = m_ocrPage.begin(); pageIt != m_ocrPage.end(); ++pageIt )
     {
         /* thats goes over all lines */
-        QValueList<ocrWord>::iterator lineIt;
+        TQValueList<ocrWord>::iterator lineIt;
         for( lineIt = (*pageIt).begin(); lineIt != (*pageIt).end(); ++lineIt )
         {
             res += space + *lineIt;
@@ -1119,15 +1119,15 @@ void KSANEOCR::setImageCanvas( ImageCanvas *canvas )
 }
 
 
-bool KSANEOCR::eventFilter( QObject *object, QEvent *event )
+bool KSANEOCR::eventFilter( TQObject *object, TQEvent *event )
 {
-    QWidget *w = (QWidget*) object;
+    TQWidget *w = (TQWidget*) object;
 
     if( m_applyFilter && m_imgCanvas && w == m_imgCanvas )
     {
-        if( event->type() == QEvent::MouseButtonDblClick )
+        if( event->type() == TQEvent::MouseButtonDblClick )
         {
-            QMouseEvent *mev = static_cast<QMouseEvent*>(event);
+            TQMouseEvent *mev = static_cast<TQMouseEvent*>(event);
 
             int x = mev->x();
             int y = mev->y();
@@ -1145,7 +1145,7 @@ bool KSANEOCR::eventFilter( QObject *object, QEvent *event )
                 x = int(double(x)*100/scale);
             }
             /* now search the word that was clicked on */
-            QValueVector<ocrWordList>::iterator pageIt;
+            TQValueVector<ocrWordList>::iterator pageIt;
 
 	    int line = 0;
 	    bool valid = false;
@@ -1153,7 +1153,7 @@ bool KSANEOCR::eventFilter( QObject *object, QEvent *event )
 
             for( pageIt = m_ocrPage.begin(); pageIt != m_ocrPage.end(); ++pageIt )
             {
-                QRect r = (*pageIt).wordListRect();
+                TQRect r = (*pageIt).wordListRect();
 
                 if( y > r.top() && y < r.bottom() )
                 {
@@ -1178,7 +1178,7 @@ bool KSANEOCR::eventFilter( QObject *object, QEvent *event )
 
 	       for( wordIt = words.begin(); wordIt != words.end() && !valid; ++wordIt )
 	       {
-		  QRect r = (*wordIt).rect();
+		  TQRect r = (*wordIt).rect();
 		  if( x > r.left() && x < r.right() )
 		  {
 		     wordToFind = *wordIt;
@@ -1215,8 +1215,8 @@ bool KSANEOCR::eventFilter( QObject *object, QEvent *event )
  * KSpell detects the correction by itself and delivers it in newword here.
  * To see all alternatives KSpell proposes, slMissspelling must be used.
  */
-void KSANEOCR::slSpellCorrected( const QString& originalword,
-                                 const QString& newword,
+void KSANEOCR::slSpellCorrected( const TQString& originalword,
+                                 const TQString& newword,
                                  unsigned int pos )
 {
     kdDebug(28000) << "Corrected: Original Word " << originalword << " was corrected to "
@@ -1240,7 +1240,7 @@ void KSANEOCR::slSpellCorrected( const QString& originalword,
 }
 
 
-void KSANEOCR::slSpellIgnoreWord( const QString& word )
+void KSANEOCR::slSpellIgnoreWord( const TQString& word )
 {
     ocrWord ignoreOCRWord;
 
@@ -1254,9 +1254,9 @@ void KSANEOCR::slSpellIgnoreWord( const QString& word )
             m_imgCanvas->removeHighlight( m_currHighlight );
 
             /* create a new highlight. That will never be removed */
-            QBrush brush;
-            QPen pen( gray, 1 );
-            QRect r = ignoreOCRWord.rect();
+            TQBrush brush;
+            TQPen pen( gray, 1 );
+            TQRect r = ignoreOCRWord.rect();
             r.moveBy(0,2);  // a bit offset to the top
 
             if( m_applyFilter )
@@ -1265,7 +1265,7 @@ void KSANEOCR::slSpellIgnoreWord( const QString& word )
     }
 }
 
-ocrWord KSANEOCR::ocrWordFromKSpellWord( int line, const QString& word )
+ocrWord KSANEOCR::ocrWordFromKSpellWord( int line, const TQString& word )
 {
     ocrWord resWord;
     if( lineValid(line) )
@@ -1289,7 +1289,7 @@ bool KSANEOCR::lineValid( int line )
     return ret;
 }
 
-void KSANEOCR::slMisspelling( const QString& originalword, const QStringList& suggestions,
+void KSANEOCR::slMisspelling( const TQString& originalword, const TQStringList& suggestions,
                               unsigned int pos )
 {
     /* for the first try, use the first suggestion */
@@ -1311,11 +1311,11 @@ void KSANEOCR::slMisspelling( const QString& originalword, const QStringList& su
 
     if( ! resWord.isEmpty() )
     {
-        QBrush brush;
-        brush.setColor( QColor(red)); // , "Dense4Pattern" );
+        TQBrush brush;
+        brush.setColor( TQColor(red)); // , "Dense4Pattern" );
         brush.setStyle( Qt::Dense4Pattern );
-        QPen pen( red, 2 );
-        QRect r = resWord.rect();
+        TQPen pen( red, 2 );
+        TQRect r = resWord.rect();
 
         r.moveBy(0,2);  // a bit offset to the top
 
@@ -1347,18 +1347,18 @@ void KSANEOCR::slMisspelling( const QString& originalword, const QStringList& su
 void KSANEOCR::slSpellReady( KSpell *spell )
 {
     m_spell = spell;
-    connect ( m_spell, SIGNAL( misspelling( const QString&, const QStringList&,
+    connect ( m_spell, TQT_SIGNAL( misspelling( const TQString&, const TQStringList&,
                                             unsigned int )),
-              this, SLOT( slMisspelling(const QString& ,
-                                        const QStringList& ,
+              this, TQT_SLOT( slMisspelling(const TQString& ,
+                                        const TQStringList& ,
                                         unsigned int  )));
-    connect( m_spell, SIGNAL( corrected ( const QString&, const QString&, unsigned int )),
-             this, SLOT( slSpellCorrected( const QString&, const QString&, unsigned int )));
+    connect( m_spell, TQT_SIGNAL( corrected ( const TQString&, const TQString&, unsigned int )),
+             this, TQT_SLOT( slSpellCorrected( const TQString&, const TQString&, unsigned int )));
 
-    connect( m_spell, SIGNAL( ignoreword( const QString& )),
-             this, SLOT( slSpellIgnoreWord( const QString& )));
+    connect( m_spell, TQT_SIGNAL( ignoreword( const TQString& )),
+             this, TQT_SLOT( slSpellIgnoreWord( const TQString& )));
 
-    connect( m_spell, SIGNAL( done(bool)), this, SLOT(slCheckListDone(bool)));
+    connect( m_spell, TQT_SIGNAL( done(bool)), this, TQT_SLOT(slCheckListDone(bool)));
 
     kdDebug(28000) << "Spellcheck available" << endl;
 
@@ -1460,8 +1460,8 @@ void KSANEOCR::slCheckListDone(bool)
  * The original word was origWord. This slot is called from slSpellCorrected
  *
  */
-bool KSANEOCR::slUpdateWord( int line, int spellWordIndx, const QString& origWord,
-                             const QString& newWord )
+bool KSANEOCR::slUpdateWord( int line, int spellWordIndx, const TQString& origWord,
+                             const TQString& newWord )
 {
     bool result = false;
 

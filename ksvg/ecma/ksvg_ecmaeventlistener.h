@@ -31,19 +31,19 @@ namespace KJS
 class KSVGEcmaEventListener : public KSVG::SVGEventListener
 {
 public:
-	KSVGEcmaEventListener(KJS::Object _listener, QString _type, KSVGEcma *_ecma);
+	KSVGEcmaEventListener(KJS::Object _listener, TQString _type, KSVGEcma *_ecma);
 	virtual ~KSVGEcmaEventListener();
 
 	virtual void handleEvent(KSVG::SVGEventImpl *evt);
 	virtual DOM::DOMString eventListenerType();
 
-	QString type() { return m_type; }
+	TQString type() { return m_type; }
 
 	void forbidRemove();
 	
 private:
 	KSVGEcma *m_ecma;
-	QString m_type;
+	TQString m_type;
 	bool m_remove;
 
 	KJS::Object m_listener;

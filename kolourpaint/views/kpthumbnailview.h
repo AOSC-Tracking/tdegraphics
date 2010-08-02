@@ -53,7 +53,7 @@ public:
                      kpViewManager *viewManager,
                      kpView *buddyView,
                      kpViewScrollableContainer *scrollableContainer,
-                     QWidget *parent, const char *name);
+                     TQWidget *parent, const char *name);
 
     /**
      * Destructs this thumbnail view.
@@ -64,7 +64,7 @@ public:
     /**
      * @returns the caption to display in an enclosing thumbnail window.
      */
-    virtual QString caption () const = 0;
+    virtual TQString caption () const = 0;
 
 
 protected:
@@ -83,7 +83,7 @@ protected:
      *
      * Extends @ref kpView.
      */
-    virtual void resizeEvent (QResizeEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
 };
 
 

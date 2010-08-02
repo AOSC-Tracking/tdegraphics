@@ -19,13 +19,13 @@
 #include <cstdlib>
 #include <new>
 
-#include <qstring.h>
-#include <qimage.h>
-#include <qcolor.h>
+#include <tqstring.h>
+#include <tqimage.h>
+#include <tqcolor.h>
 
 #include <kdebug.h>
 
-PMHeightFieldROAM::PMHeightFieldROAM( const QString &fileName )
+PMHeightFieldROAM::PMHeightFieldROAM( const TQString &fileName )
 {
    m_size = 0;
    m_numLines = m_usedPoints = 0;
@@ -142,10 +142,10 @@ bool PMHeightFieldROAM::lineExist( int x, int y, int line ) const
    else return false;
 }
 
-bool PMHeightFieldROAM::imageToData(const QString &fileName)
+bool PMHeightFieldROAM::imageToData(const TQString &fileName)
 {
-   QImage scaledMap;
-   QImage mapFile( fileName );
+   TQImage scaledMap;
+   TQImage mapFile( fileName );
 
    if ( mapFile.isNull( ) )
       return false;

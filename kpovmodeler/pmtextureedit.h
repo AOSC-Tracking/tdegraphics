@@ -27,7 +27,7 @@
 #include "pmtexturebaseedit.h"
 
 class PMTexture;
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMTexture
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMTextureEdit with parent and name
     */
-   PMTextureEdit( QWidget* parent, const char* name = 0 );
+   PMTextureEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -53,7 +53,7 @@ protected:
 
 private:
    PMTexture* m_pDisplayedObject;
-   QCheckBox* m_pUVMapping;
+   TQCheckBox* m_pUVMapping;
 };
 
 

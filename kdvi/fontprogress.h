@@ -9,11 +9,11 @@
 #define FONT_GENERATION_H
 
 #include <kdialogbase.h>
-#include <qguardedptr.h>
+#include <tqguardedptr.h>
 
 class KProcIO;
 class KProgress;
-class QLabel;
+class TQLabel;
 
 
 /**
@@ -33,13 +33,13 @@ class fontProgressDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    fontProgressDialog( const QString& helpIndex, const QString& label, const QString& abortTip, const QString& whatsThis, const QString& ttip,
-			QWidget* parent = 0, const QString &name = 0, bool progressbar=true );
+    fontProgressDialog( const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip,
+			TQWidget* parent = 0, const TQString &name = 0, bool progressbar=true );
     ~fontProgressDialog();
     
     /** The number of steps already done is increased, the text received
 	here is analyzed and presented to the user. */
-    void increaseNumSteps(const QString& explanation);
+    void increaseNumSteps(const TQString& explanation);
     
     /** Used to initialize the progress bar. If the argument proc is
 	non-zero, the associated process will be killed when the "abort"
@@ -47,7 +47,7 @@ public:
 	internally, so it is save to delete the KProcIO anytime. */
     void setTotalSteps(int, KProcIO *proc=0);
     
-   QLabel* TextLabel2;
+   TQLabel* TextLabel2;
 
 private slots:
     /** Calling this slot does nothing than to kill the process that is
@@ -55,10 +55,10 @@ private slots:
   void killProcIO();
 
 private:
-   QLabel* TextLabel1;
+   TQLabel* TextLabel1;
    KProgress* ProgressBar1;
    int progress;
-   QGuardedPtr<KProcIO> procIO;
+   TQGuardedPtr<KProcIO> procIO;
 };
 
 #endif // FONT_GENERATION_H

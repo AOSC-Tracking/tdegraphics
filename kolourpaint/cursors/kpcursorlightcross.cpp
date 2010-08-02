@@ -30,8 +30,8 @@
 
 #include <kpcursorlightcross.h>
 
-#include <qbitmap.h>
-#include <qcursor.h>
+#include <tqbitmap.h>
+#include <tqcursor.h>
 
 #include <kdebug.h>
 
@@ -81,7 +81,7 @@ static void setPixel (unsigned char *colorBitmap,
 }
 
 
-const QCursor *kpMakeCursorLightCross ()
+const TQCursor *kpMakeCursorLightCross ()
 {
 #if DEBUG_KP_CURSOR_LIGHT_CROSS
     kdDebug () << "kpMakeCursorLightCross() " << endl;
@@ -117,8 +117,8 @@ const QCursor *kpMakeCursorLightCross ()
     #undef X_
     }
 
-    QCursor *cursor = new QCursor (QBitmap (side, side, colorBitmap, true/*little endian bit order*/),
-                                   QBitmap (side, side, maskBitmap, true/*little endian bit order*/));
+    TQCursor *cursor = new TQCursor (TQBitmap (side, side, colorBitmap, true/*little endian bit order*/),
+                                   TQBitmap (side, side, maskBitmap, true/*little endian bit order*/));
 
     delete [] maskBitmap;
     delete [] colorBitmap;

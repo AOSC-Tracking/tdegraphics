@@ -35,7 +35,7 @@ public:
    /**
     * Creates a PM3DControlPoint with id.
     */
-   PM3DControlPoint( const PMVector& point, int id, const QString& description );
+   PM3DControlPoint( const PMVector& point, int id, const TQString& description );
    /**
     * Deletes the PM3DControlPoint
     */

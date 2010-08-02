@@ -29,8 +29,8 @@
 class PMText;
 class PMVectorEdit;
 class PMFloatEdit;
-class QLineEdit;
-class QPushButton;
+class TQLineEdit;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMText
@@ -43,7 +43,7 @@ public:
    /**
     * Creates a PMTextEdit with parent and name
     */
-   PMTextEdit( QWidget* parent, const char* name = 0 );
+   PMTextEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -52,7 +52,7 @@ public:
    virtual bool isDataValid( );
 
 protected slots:
-   void slotTextChanged( const QString& t );
+   void slotTextChanged( const TQString& t );
    void slotChooseFont( );
    
 protected:
@@ -63,9 +63,9 @@ protected:
 
 private:
    PMText* m_pDisplayedObject;
-   QLineEdit* m_pFont;
-   QPushButton* m_pChooseFont;
-   QLineEdit* m_pText;
+   TQLineEdit* m_pFont;
+   TQPushButton* m_pChooseFont;
+   TQLineEdit* m_pText;
    PMFloatEdit* m_pThickness;
    PMVectorEdit* m_pOffset;
 };

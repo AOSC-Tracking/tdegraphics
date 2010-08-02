@@ -29,18 +29,18 @@
 #ifndef __kpfloodfill_h__
 #define __kpfloodfill_h__
 
-#include <qimage.h>
-#include <qvaluelist.h>
-#include <qvaluevector.h>
+#include <tqimage.h>
+#include <tqvaluelist.h>
+#include <tqvaluevector.h>
 
 #include <kpcolor.h>
 
-class QPixmap;
+class TQPixmap;
 
 class kpFloodFill
 {
 public:
-    kpFloodFill (QPixmap *pixmap, int x, int y,
+    kpFloodFill (TQPixmap *pixmap, int x, int y,
                  const kpColor &color,
                  int processedColorSimilarity);
     ~kpFloodFill ();
@@ -57,19 +57,19 @@ public:
     kpColor colorToChange () const { return m_colorToChange; };
 
     bool prepare ();
-    QRect boundingRect () const;  // only valid after prepare()
+    TQRect boundingRect () const;  // only valid after prepare()
 
     bool fill ();
 
 private:
-    QPixmap *m_pixmapPtr;
+    TQPixmap *m_pixmapPtr;
     int m_x, m_y;
     kpColor m_color;
     int m_processedColorSimilarity;
 
     int m_initState;
 
-    QRect m_boundingRect;
+    TQRect m_boundingRect;
 
     struct FillLine
     {
@@ -86,7 +86,7 @@ private:
         int m_y, m_x1, m_x2;
     };
 
-    int fillLinesListSize (const QValueList <kpFloodFill::FillLine> &fillLines) const;
+    int fillLinesListSize (const TQValueList <kpFloodFill::FillLine> &fillLines) const;
     
     void addLine (int y, int x1, int x2);
     kpColor pixelColor (int x, int y, bool *beenHere = 0) const;
@@ -95,11 +95,11 @@ private:
     int findMinX (int y, int x) const;
     int findMaxX (int y, int x) const;
 
-    QValueList <FillLine> m_fillLines;
+    TQValueList <FillLine> m_fillLines;
 
     // Init info
-    QImage m_image;
-    QValueVector < QValueList <FillLine> > m_fillLinesCache;
+    TQImage m_image;
+    TQValueVector < TQValueList <FillLine> > m_fillLinesCache;
     kpColor m_colorToChange;
 };
 

@@ -19,10 +19,10 @@
 #ifndef LOADER_H
 #define LOADER_H
 
-#include <qbuffer.h>
-#include <qcstring.h>
-#include <qmap.h>
-#include <qobject.h>
+#include <tqbuffer.h>
+#include <tqcstring.h>
+#include <tqmap.h>
+#include <tqobject.h>
 
 #include <kio/job.h>
 #include <kurl.h>
@@ -34,7 +34,7 @@ public:
         if ( m_buffer.isOpen() )
             m_buffer.close();
     }
-    QBuffer m_buffer;
+    TQBuffer m_buffer;
     // add context of MrmlPart for progress?
 };
 
@@ -53,17 +53,17 @@ public:
     void removeDownload( const KURL& url );
 
 signals:
-    void finished( const KURL& url, const QByteArray& );
+    void finished( const KURL& url, const TQByteArray& );
 
 private slots:
-    void slotData( KIO::Job *, const QByteArray& );
+    void slotData( KIO::Job *, const TQByteArray& );
     void slotResult( KIO::Job * );
 
 private:
     Loader();
 
-    QMap<KIO::TransferJob*,Download*> m_downloads;
-    typedef QMapIterator<KIO::TransferJob*,Download*> DownloadIterator;
+    TQMap<KIO::TransferJob*,Download*> m_downloads;
+    typedef TQMapIterator<KIO::TransferJob*,Download*> DownloadIterator;
 
     static Loader *s_self;
 

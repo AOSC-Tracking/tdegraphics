@@ -20,12 +20,12 @@
 
 #include <config.h>
 
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 
 #include <kdebug.h>
 #include <kiconloader.h>
@@ -36,20 +36,20 @@
 
 #include "searchWidget.h"
 
-SearchWidget::SearchWidget(QWidget* parent, const char* name, WFlags fl)
-  : QWidget(parent, name, fl)
+SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
+  : TQWidget(parent, name, fl)
 {
   setName("SearchWidget");
 
-  setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed);
 
-  layout = new QHBoxLayout(this, 4, 6, "SearchWidgetLayout");
+  layout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
 
-  stopButton = new QPushButton(this, "stopButton");
+  stopButton = new TQPushButton(this, "stopButton");
   stopButton->setPixmap(KGlobal::iconLoader()->loadIcon("stop", KIcon::Small, KIcon::SizeSmall));
   layout->addWidget(stopButton);
 
-  searchLabel = new QLabel(this, "searchLabel");
+  searchLabel = new TQLabel(this, "searchLabel");
   searchLabel->setText(i18n("Search:"));
   layout->addWidget(searchLabel);
 
@@ -58,26 +58,26 @@ SearchWidget::SearchWidget(QWidget* parent, const char* name, WFlags fl)
 
   searchLabel->setBuddy(searchText);
 
-  findPrevButton = new QPushButton(this, "findPrevButton");
+  findPrevButton = new TQPushButton(this, "findPrevButton");
   findPrevButton->setPixmap(KGlobal::iconLoader()->loadIcon("back", KIcon::NoGroup, KIcon::SizeSmall));
-  QToolTip::add(findPrevButton, i18n("Find previous"));
+  TQToolTip::add(findPrevButton, i18n("Find previous"));
   layout->addWidget(findPrevButton);
 
-  findNextButton = new QPushButton(this, "findNextButton");
+  findNextButton = new TQPushButton(this, "findNextButton");
   findNextButton->setPixmap(KGlobal::iconLoader()->loadIcon("forward", KIcon::NoGroup, KIcon::SizeSmall));
-  QToolTip::add(findNextButton, i18n("Find next"));
+  TQToolTip::add(findNextButton, i18n("Find next"));
   layout->addWidget(findNextButton);
 
-  caseSensitiveCheckBox = new QCheckBox(this, "caseSensitiveCheckBox");
+  caseSensitiveCheckBox = new TQCheckBox(this, "caseSensitiveCheckBox");
   caseSensitiveCheckBox->setText(i18n("Case sensitive"));
   layout->addWidget(caseSensitiveCheckBox);
 
-  connect(stopButton, SIGNAL(clicked()), this, SIGNAL(stopSearch()));
+  connect(stopButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(stopSearch()));
 
-  connect(findNextButton, SIGNAL(clicked()), this, SIGNAL(findNextText()));
-  connect(findPrevButton, SIGNAL(clicked()), this, SIGNAL(findPrevText()));
+  connect(findNextButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(findNextText()));
+  connect(findPrevButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(findPrevText()));
 
-  connect(searchText, SIGNAL(textChanged(const QString&)), this, SLOT(textChanged()));
+  connect(searchText, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SLOT(textChanged()));
 
   textChanged();
 }
@@ -86,7 +86,7 @@ SearchWidget::~SearchWidget()
 {
 }
 
-QString SearchWidget::getText() const
+TQString SearchWidget::getText() const
 {
   return searchText->text();
 }
@@ -109,14 +109,14 @@ void SearchWidget::show()
 {
   searchText->setEnabled(true);
   searchText->selectAll();
-  QWidget::show();
+  TQWidget::show();
   emit searchEnabled(!searchText->text().isEmpty());
 }
 
 void SearchWidget::hide()
 {
   searchText->setEnabled(false);
-  QWidget::hide();
+  TQWidget::hide();
 }
 
 void SearchWidget::setFocus()
@@ -124,7 +124,7 @@ void SearchWidget::setFocus()
   searchText->setFocus();
 }
 
-void SearchWidget::keyPressEvent(QKeyEvent* e)
+void SearchWidget::keyPressEvent(TQKeyEvent* e)
 {
   if (e->key() == Qt::Key_Escape)
     emit stopSearch();

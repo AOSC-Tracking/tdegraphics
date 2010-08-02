@@ -16,11 +16,11 @@
 **************************************************************************/
 
 
-#include <qprinter.h>
-#include <qpainter.h>
-#include <qsplitter.h>
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqprinter.h>
+#include <tqpainter.h>
+#include <tqsplitter.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <kconfig.h>
 #include <kdialog.h>
 #include <klocale.h>
@@ -34,14 +34,14 @@
 #include "pmdialogview.h"
 #include "pmglview.h"
 
-PMView::PMView( PMPart* part, QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMView::PMView( PMPart* part, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    setBackgroundMode( PaletteBase );
 
-   QVBoxLayout* layout = new QVBoxLayout( this );
-   m_pMainSplitter = new QSplitter( Qt::Horizontal, this, "MainSplitter" );
-   m_pTreeEditSplitter = new QSplitter( Qt::Vertical, m_pMainSplitter,
+   TQVBoxLayout* layout = new TQVBoxLayout( this );
+   m_pMainSplitter = new TQSplitter( Qt::Horizontal, this, "MainSplitter" );
+   m_pTreeEditSplitter = new TQSplitter( Qt::Vertical, m_pMainSplitter,
                                         "TreeEditSplitter" );
 
    
@@ -52,11 +52,11 @@ PMView::PMView( PMPart* part, QWidget* parent, const char* name )
    m_pDialogView->show( );
 
    
-   QWidget* glArea = new QWidget( m_pMainSplitter, "GLArea" );
+   TQWidget* glArea = new TQWidget( m_pMainSplitter, "GLArea" );
    glArea->show( );
    PMGLView* gl;
    
-   QGridLayout* topLayout = new QGridLayout( glArea, 2, 2, 1, 1 );
+   TQGridLayout* topLayout = new TQGridLayout( glArea, 2, 2, 1, 1 );
    gl = new PMGLView( part, PMGLView::PMViewPosZ, glArea );
    topLayout->addWidget( gl, 0, 0 );
    gl = new PMGLView( part, PMGLView::PMViewPosX, glArea );
@@ -78,9 +78,9 @@ PMView::~PMView( )
 {
 }
 
-void PMView::print( QPrinter* pPrinter )
+void PMView::print( TQPrinter* pPrinter )
 {
-   QPainter printpainter;
+   TQPainter printpainter;
    printpainter.begin( pPrinter );
 	
    // TODO: add your printing code here

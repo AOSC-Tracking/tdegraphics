@@ -19,8 +19,8 @@
 #define PMGLOBALS_H
 
 #ifdef PMEnableSimpleProfiling
-#include <qdatetime.h>
-extern QTime PMDebugTime;
+#include <tqdatetime.h>
+extern TQTime PMDebugTime;
 #endif
 
 #define PMArea 0 // no area for debug messages yet

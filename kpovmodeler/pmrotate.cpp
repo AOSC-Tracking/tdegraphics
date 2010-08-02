@@ -24,7 +24,7 @@
 #include "pmrotatecontrolpoint.h"
 
 #include <klocale.h>
-#include <qdom.h>
+#include <tqdom.h>
 
 const PMVector rotateDefault = PMVector( 0, 0, 0 );
 
@@ -51,12 +51,12 @@ PMRotate::~PMRotate( )
 {
 }
 
-QString PMRotate::description( ) const
+TQString PMRotate::description( ) const
 {
    return i18n( "rotate" );
 }
 
-void PMRotate::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
+void PMRotate::serialize( TQDomElement& e, TQDomDocument& /*doc*/ ) const
 {
    e.setAttribute( "value", m_rotate.serializeXML( ) );
 }
@@ -102,7 +102,7 @@ void PMRotate::setRotation( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMRotate::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMRotate::editWidget( TQWidget* parent ) const
 {
    return new PMRotateEdit( parent );
 }

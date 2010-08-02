@@ -29,13 +29,13 @@
 #ifndef __kptoolpolygon_h__
 #define __kptoolpolygon_h__
 
-#include <qbrush.h>
-#include <qpen.h>
-#include <qobject.h>
-#include <qpixmap.h>
-#include <qpoint.h>
-#include <qpointarray.h>
-#include <qrect.h>
+#include <tqbrush.h>
+#include <tqpen.h>
+#include <tqobject.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
+#include <tqpointarray.h>
+#include <tqrect.h>
 
 #include <kpcommandhistory.h>
 
@@ -43,11 +43,11 @@
 #include <kptool.h>
 #include <kptoolwidgetfillstyle.h>
 
-class QMouseEvent;
-class QPen;
-class QPoint;
-class QRect;
-class QString;
+class TQMouseEvent;
+class TQPen;
+class TQPoint;
+class TQRect;
+class TQString;
 
 class kpView;
 class kpDocument;
@@ -67,7 +67,7 @@ public:
         Polygon, Polyline, Line, Curve
     };
 
-    kpToolPolygon (Mode mode, const QString &text, const QString &description,
+    kpToolPolygon (Mode mode, const TQString &text, const TQString &description,
                    int key,
                    kpMainWindow *mainWindow, const char *name);
     kpToolPolygon (kpMainWindow *mainWindow);
@@ -78,18 +78,18 @@ public:
     virtual bool careAboutModifierState () const { return true; }
 
 private:
-    QString haventBegunShapeUserMessage () const;
+    TQString haventBegunShapeUserMessage () const;
 
 public:
     virtual void begin ();
     virtual void end ();
 
     virtual void beginDraw ();
-    virtual void draw (const QPoint &, const QPoint &, const QRect &);
+    virtual void draw (const TQPoint &, const TQPoint &, const TQRect &);
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
-    virtual void endDraw (const QPoint &, const QRect &);
-    virtual void endShape (const QPoint & = QPoint (), const QRect & = QRect ());
+    virtual void endDraw (const TQPoint &, const TQRect &);
+    virtual void endShape (const TQPoint & = TQPoint (), const TQRect & = TQRect ());
 
     virtual bool hasBegunShape () const;
 
@@ -116,22 +116,22 @@ private:
 
     void applyModifiers ();
 
-    QPoint m_toolLineStartPoint, m_toolLineEndPoint;
-    QRect m_toolLineRect;
+    TQPoint m_toolLineStartPoint, m_toolLineEndPoint;
+    TQRect m_toolLineRect;
 
-    QPointArray m_points;
+    TQPointArray m_points;
 };
 
 class kpToolPolygonCommand : public kpNamedCommand
 {
 public:
-    kpToolPolygonCommand (const QString &name,
-                          const QPointArray &points,
-                          const QRect &normalizedRect,
+    kpToolPolygonCommand (const TQString &name,
+                          const TQPointArray &points,
+                          const TQRect &normalizedRect,
                           const kpColor &foregroundColor, const kpColor &backgroundColor,
                           int lineWidth, Qt::PenStyle lineStyle,
                           kpToolWidgetFillStyle *toolWidgetFillStyle,
-                          const QPixmap &originalArea,
+                          const TQPixmap &originalArea,
                           kpToolPolygon::Mode mode,
                           kpMainWindow *mainWindow);
     virtual ~kpToolPolygonCommand ();
@@ -142,15 +142,15 @@ public:
     virtual void unexecute ();
 
 private:
-    QPointArray m_points;
-    QRect m_normalizedRect;
+    TQPointArray m_points;
+    TQRect m_normalizedRect;
 
     kpColor m_foregroundColor, m_backgroundColor;
     int m_lineWidth;
     Qt::PenStyle m_lineStyle;
     kpToolWidgetFillStyle *m_toolWidgetFillStyle;
 
-    QPixmap m_originalArea;
+    TQPixmap m_originalArea;
     kpToolPolygon::Mode m_mode;
 };
 

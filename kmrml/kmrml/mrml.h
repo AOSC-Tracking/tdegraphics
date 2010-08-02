@@ -29,7 +29,7 @@
 class Mrml : public KIO::TCPSlaveBase
 {
 public:
-    Mrml( const QCString&, const QCString& );
+    Mrml( const TQCString&, const TQCString& );
     ~Mrml();
 
     virtual void get( const KURL& url );
@@ -37,13 +37,13 @@ public:
     virtual void mimetype( const KURL& url );
 
 private:
-    QCString readAll();
-    void emitData( const QCString& );
+    TQCString readAll();
+    void emitData( const TQCString& );
 
     bool startSession( const KURL& url );
 
     // helpers
-    inline QString sessionId() {
+    inline TQString sessionId() {
         return metaData( MrmlShared::sessionId() );
     }
 
@@ -55,18 +55,18 @@ private:
                               m_config.settingsForHost( url.host() ).port();
     }
 
-    static QString mrmlString( const QString& sessionId,
-                               const QString& transactionId = QString::null );
+    static TQString mrmlString( const TQString& sessionId,
+                               const TQString& transactionId = TQString::null );
 
-    static QCString loginString();
-    static QCString getConfigurationString();
-    static QCString getSessionsString( const QString& username,
-                                       const QString& password );
-    QString user( const KURL& url ) {
+    static TQCString loginString();
+    static TQCString getConfigurationString();
+    static TQCString getSessionsString( const TQString& username,
+                                       const TQString& password );
+    TQString user( const KURL& url ) {
         return url.hasUser() ?
             url.user() : m_config.defaultSettings().user;
     }
-    QString pass( const KURL& url ) {
+    TQString pass( const KURL& url ) {
         return url.hasPass() ?
             url.pass() : m_config.defaultSettings().pass;
     }
@@ -74,8 +74,8 @@ private:
     bool checkLocalServer( const KURL& url );
 
     static const int bufsize;
-    QString defaultUser;
-    QString defaultPass;
+    TQString defaultUser;
+    TQString defaultPass;
 
     KMrml::Config m_config;
 

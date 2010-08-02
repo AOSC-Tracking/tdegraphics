@@ -15,62 +15,62 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlabel.h>
-#include <qvalidator.h>
-#include <qcolor.h>
+#include <tqlabel.h>
+#include <tqvalidator.h>
+#include <tqcolor.h>
 
 #include <klocale.h>
 
 #include "main.h"
 #include "texteditselection.h"
 
-TextEditSelection::TextEditSelection(QWidget *parent, const char *name ) : QWidget(parent,name) {
+TextEditSelection::TextEditSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
 	inChangingComponents = false;
-	QVBoxLayout* topLayout = new QVBoxLayout(this, 4);
-	QGridLayout* componentsLayout = new QGridLayout(3, 5, 2);
+	TQVBoxLayout* topLayout = new TQVBoxLayout(this, 4);
+	TQGridLayout* componentsLayout = new TQGridLayout(3, 5, 2);
 	topLayout->addLayout(componentsLayout);
 	componentsLayout->setColStretch(1, 10);
 	componentsLayout->addColSpacing(2, 8);
 	componentsLayout->setColStretch(4, 10);
-	QLineEdit* lineEdit;
-	addComponent(H_INDEX, ( lineEdit = new QLineEdit(this) ), HSV_MAX_H_VALUE, "H:", 0, 0, componentsLayout);
-	connect(lineEdit, SIGNAL( textChanged(const QString&) ), SLOT( slotHsvComponentChanged() ));
-	addComponent(S_INDEX, ( lineEdit = new QLineEdit(this) ), HSV_MAX_S_VALUE, "S:", 1, 0, componentsLayout);
-	connect(lineEdit, SIGNAL( textChanged(const QString&) ), SLOT( slotHsvComponentChanged() ));
-	addComponent(V_INDEX, ( lineEdit = new QLineEdit(this) ), HSV_MAX_V_VALUE, "V:", 2, 0, componentsLayout);
-	connect(lineEdit, SIGNAL( textChanged(const QString&) ), SLOT( slotHsvComponentChanged() ));
-	addComponent(R_INDEX, ( lineEdit = new QLineEdit(this) ), RGB_MAX_COMPONENT_VALUE, "R:", 0, 1, componentsLayout);
-	connect(lineEdit, SIGNAL( textChanged(const QString&) ), SLOT( slotRgbComponentChanged() ));
-	addComponent(G_INDEX, ( lineEdit = new QLineEdit(this) ), RGB_MAX_COMPONENT_VALUE, "G:", 1, 1, componentsLayout);
-	connect(lineEdit, SIGNAL( textChanged(const QString&) ), SLOT( slotRgbComponentChanged() ));
-	addComponent(B_INDEX, ( lineEdit = new QLineEdit(this) ), RGB_MAX_COMPONENT_VALUE, "B:", 2, 1, componentsLayout);
-	connect(lineEdit, SIGNAL( textChanged(const QString&) ), SLOT( slotRgbComponentChanged() ));
-	QHBoxLayout* rgbStringLayout = new QHBoxLayout(2);
-	QLabel* rgbStringLabel = new QLabel("RGB " + i18n( "hex." ) + ": ", this);
+	TQLineEdit* lineEdit;
+	addComponent(H_INDEX, ( lineEdit = new TQLineEdit(this) ), HSV_MAX_H_VALUE, "H:", 0, 0, componentsLayout);
+	connect(lineEdit, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotHsvComponentChanged() ));
+	addComponent(S_INDEX, ( lineEdit = new TQLineEdit(this) ), HSV_MAX_S_VALUE, "S:", 1, 0, componentsLayout);
+	connect(lineEdit, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotHsvComponentChanged() ));
+	addComponent(V_INDEX, ( lineEdit = new TQLineEdit(this) ), HSV_MAX_V_VALUE, "V:", 2, 0, componentsLayout);
+	connect(lineEdit, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotHsvComponentChanged() ));
+	addComponent(R_INDEX, ( lineEdit = new TQLineEdit(this) ), RGB_MAX_COMPONENT_VALUE, "R:", 0, 1, componentsLayout);
+	connect(lineEdit, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotRgbComponentChanged() ));
+	addComponent(G_INDEX, ( lineEdit = new TQLineEdit(this) ), RGB_MAX_COMPONENT_VALUE, "G:", 1, 1, componentsLayout);
+	connect(lineEdit, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotRgbComponentChanged() ));
+	addComponent(B_INDEX, ( lineEdit = new TQLineEdit(this) ), RGB_MAX_COMPONENT_VALUE, "B:", 2, 1, componentsLayout);
+	connect(lineEdit, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotRgbComponentChanged() ));
+	TQHBoxLayout* rgbStringLayout = new TQHBoxLayout(2);
+	TQLabel* rgbStringLabel = new TQLabel("RGB " + i18n( "hex." ) + ": ", this);
 	rgbStringLayout->addWidget(rgbStringLabel);
-	rgbStringLineEdit = new QLineEdit(this);
-	rgbStringLineEdit->setMinimumWidth(lineEdit->fontMetrics().width( QString("8888888") ));
-	rgbStringLineEdit->setMaximumWidth(lineEdit->fontMetrics().width( QString("888888888") ));
-	connect(rgbStringLineEdit, SIGNAL( textChanged(const QString&) ), SLOT( slotRgbStringChanged() ));
+	rgbStringLineEdit = new TQLineEdit(this);
+	rgbStringLineEdit->setMinimumWidth(lineEdit->fontMetrics().width( TQString("8888888") ));
+	rgbStringLineEdit->setMaximumWidth(lineEdit->fontMetrics().width( TQString("888888888") ));
+	connect(rgbStringLineEdit, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotRgbStringChanged() ));
 	rgbStringLayout->addWidget(rgbStringLineEdit);
 	topLayout->addLayout(rgbStringLayout);
 }
 TextEditSelection::~TextEditSelection(){
 }
 
-void TextEditSelection::addComponent(const int index, QLineEdit* lineEdit, const int maxValue,
-	const QString& labelString, const int row, const int column, QGridLayout* layout) {
-	QLabel* label = new QLabel(labelString, this);
-	lineEdit->setValidator(new QIntValidator( 0, maxValue, lineEdit ));
+void TextEditSelection::addComponent(const int index, TQLineEdit* lineEdit, const int maxValue,
+	const TQString& labelString, const int row, const int column, TQGridLayout* layout) {
+	TQLabel* label = new TQLabel(labelString, this);
+	lineEdit->setValidator(new TQIntValidator( 0, maxValue, lineEdit ));
 	lineEditTable[index] = lineEdit;
-	lineEdit->setMinimumWidth(lineEdit->fontMetrics().width( QString("8888") ));
-	lineEdit->setMaximumWidth(lineEdit->fontMetrics().width( QString("8888888") ));
+	lineEdit->setMinimumWidth(lineEdit->fontMetrics().width( TQString("8888") ));
+	lineEdit->setMaximumWidth(lineEdit->fontMetrics().width( TQString("8888888") ));
 	layout->addWidget(label, row, column*3);
 	layout->addWidget(lineEdit, row, column*3 + 1);
 }
 
 void TextEditSelection::setRgbString(const int red, const int green, const int blue) {
-	QString string;
+	TQString string;
 	string.sprintf("%02x%02x%02x", red, green, blue);
 	rgbStringLineEdit->setText(string);
 }
@@ -81,12 +81,12 @@ void TextEditSelection::slotHsvComponentChanged() {
 		int hComponent = lineEditTable[H_INDEX]->text().toInt();
 		int sComponent = lineEditTable[S_INDEX]->text().toInt();
 		int vComponent = lineEditTable[V_INDEX]->text().toInt();
-		QColor color;
+		TQColor color;
 		color.setHsv(hComponent, sComponent, vComponent);
 		int rComponent = color.red();
 		int gComponent = color.green();
 		int bComponent = color.blue();
-		QString string;
+		TQString string;
 		lineEditTable[R_INDEX]->setText(string.setNum( rComponent ));
 		lineEditTable[G_INDEX]->setText(string.setNum( gComponent ));
 		lineEditTable[B_INDEX]->setText(string.setNum( bComponent ));
@@ -107,13 +107,13 @@ void TextEditSelection::slotRgbComponentChanged() {
 		int rComponent = lineEditTable[R_INDEX]->text().toInt();
 		int gComponent = lineEditTable[G_INDEX]->text().toInt();
 		int bComponent = lineEditTable[B_INDEX]->text().toInt();
-		QColor color;
+		TQColor color;
 		color.setRgb(rComponent, gComponent, bComponent);
 		int hComponent;
 		int sComponent;
 		int vComponent;
 		color.hsv(&hComponent, &sComponent, &vComponent);
-		QString string;
+		TQString string;
 		lineEditTable[H_INDEX]->setText(string.setNum( hComponent ));
 		lineEditTable[S_INDEX]->setText(string.setNum( sComponent ));
 		lineEditTable[V_INDEX]->setText(string.setNum( vComponent ));
@@ -131,7 +131,7 @@ void TextEditSelection::slotRgbComponentChanged() {
 void TextEditSelection::slotRgbStringChanged() {
 	if(!inChangingComponents) {
 		inChangingComponents = true;
-		QString string = rgbStringLineEdit->text().stripWhiteSpace();
+		TQString string = rgbStringLineEdit->text().stripWhiteSpace();
 		bool result;
 		int value = string.toInt(&result, 16);
 		if(result) {
@@ -144,7 +144,7 @@ void TextEditSelection::slotRgbStringChanged() {
 			int hComponent;
 			int sComponent;
 			int vComponent;
-			QColor hsvColor;
+			TQColor hsvColor;
 			hsvColor.hsv(&hComponent, &sComponent, &vComponent);
 			lineEditTable[H_INDEX]->setText(string.setNum( hComponent ));
 			lineEditTable[S_INDEX]->setText(string.setNum( sComponent ));
@@ -164,14 +164,14 @@ void TextEditSelection::slotSetValue(Color* color) {
 	if(!color->equals( this->color )) {
 		inChangingComponents = true;
 		this->color = *color;
-		QString string;
+		TQString string;
 		int rComponent = this->color.component(Color::RED_INDEX);
 		int gComponent = this->color.component(Color::GREEN_INDEX);
 		int bComponent = this->color.component(Color::BLUE_INDEX);
 		lineEditTable[R_INDEX]->setText(string.setNum( rComponent ));
 		lineEditTable[G_INDEX]->setText(string.setNum( gComponent ));
 		lineEditTable[B_INDEX]->setText(string.setNum( bComponent ));
-		QColor hsvColor(rComponent, gComponent, bComponent);
+		TQColor hsvColor(rComponent, gComponent, bComponent);
 		int hComponent;
 		int sComponent;
 		int vComponent;

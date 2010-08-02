@@ -11,7 +11,7 @@
 #ifndef _KPDF_MINIBAR_H_
 #define _KPDF_MINIBAR_H_
 
-#include <qframe.h>
+#include <tqframe.h>
 #include "core/observer.h"
 
 class KPDFDocument;
@@ -22,16 +22,16 @@ class ProgressWidget;
 /**
  * @short A widget to display page number and change current page.
  */
-class MiniBar : public QFrame, public DocumentObserver
+class MiniBar : public TQFrame, public DocumentObserver
 {
     Q_OBJECT
     public:
-        MiniBar( QWidget *parent, KPDFDocument * document );
+        MiniBar( TQWidget *parent, KPDFDocument * document );
         ~MiniBar();
 
         // [INHERITED] from DocumentObserver
         uint observerId() const { return MINIBAR_ID; }
-        void notifySetup( const QValueVector< KPDFPage * > & pages, bool );
+        void notifySetup( const TQValueVector< KPDFPage * > & pages, bool );
         void notifyViewportChanged( bool smoothMove );
 
     signals:
@@ -46,7 +46,7 @@ class MiniBar : public QFrame, public DocumentObserver
         void slotEmitPrevPage();
 
     protected:
-        void resizeEvent( QResizeEvent * );
+        void resizeEvent( TQResizeEvent * );
 
     private:
         KPDFDocument * m_document;

@@ -47,7 +47,7 @@ public:
 
 	virtual void setRGBColor(const DOM::DOMString &rgbColor);
 	virtual void setRGBColor(int r, int g, int b);
-	virtual void setRGBColor(QColor color);
+	virtual void setRGBColor(TQColor color);
 	virtual void setRGBColorICCColor(const DOM::DOMString &rgbColor, const DOM::DOMString &iccColor);
 	virtual void setColor(unsigned short colorType, const DOM::DOMString &rgbColor, const DOM::DOMString &iccColor);
 

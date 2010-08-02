@@ -23,22 +23,22 @@
 #include "kgv_view.h"
 
 #include <kdebug.h>
-#include <qtimer.h>
+#include <tqtimer.h>
 #include <algorithm>
 #include <cassert>
 #include <cstring>
 
 ThumbnailService::ThumbnailService( KGVMiniWidget* parent, const char* name ) :
-	QObject( parent, name ),
+	TQObject( parent, name ),
 	_mini( parent ),
-	timer_( new QTimer( this ) ),
+	timer_( new TQTimer( this ) ),
 	_busy( false ),
 	_enabled( false )
 {
 	_thumbnailDrawer = new KPSWidget( parent->_part->widget(), "thumbnail-drawer" );
 	_thumbnailDrawer->readSettings();
-	connect(  _thumbnailDrawer, SIGNAL(  newPageImage(  QPixmap ) ), SLOT( slotDone( QPixmap ) ) );
-	connect( timer_, SIGNAL( timeout() ), SLOT( processOne() ) );
+	connect(  _thumbnailDrawer, TQT_SIGNAL(  newPageImage(  TQPixmap ) ), TQT_SLOT( slotDone( TQPixmap ) ) );
+	connect( timer_, TQT_SIGNAL( timeout() ), TQT_SLOT( processOne() ) );
 	_thumbnailDrawer->hide();
 }
 
@@ -51,12 +51,12 @@ bool ThumbnailService::Request::operator < ( ThumbnailService::Request b ) const
 	if ( urgent != b.urgent ) return urgent;
 	if ( page != b.page ) return page < b.page;
 	// below is just so that == can be in terms of "<"
-	if ( receiver != b.receiver ) return std::less<QObject*>()( receiver, b.receiver );
+	if ( receiver != b.receiver ) return std::less<TQObject*>()( receiver, b.receiver );
 	if ( slot != b.slot ) return std::strcmp( slot, b.slot ) < 0;
 	return false;
 }
 
-void ThumbnailService::delayedGetThumbnail( const int page, QObject* rec, const char* slot, bool urgent )
+void ThumbnailService::delayedGetThumbnail( const int page, TQObject* rec, const char* slot, bool urgent )
 {
 	kdDebug( 4500 ) << "ThumbnailService::delayedGetThumbnail: request for page " << page << endl;
 	pending.insert( Request( page, rec, slot, urgent ) );
@@ -71,7 +71,7 @@ void ThumbnailService::delayedGetThumbnail( const int page, QObject* rec, const 
 	}
 }
 
-void ThumbnailService::cancelRequests( const int page, QObject* rec, const char* slot )
+void ThumbnailService::cancelRequests( const int page, TQObject* rec, const char* slot )
 {
 	std::set<Request>::iterator first = pending.begin(), last = pending.end();
 	while ( first != last ) {
@@ -106,7 +106,7 @@ void ThumbnailService::setEnabled( const bool e )
 	if ( _enabled && _busy ) processOne();
 }
 
-void ThumbnailService::slotDone( QPixmap pix )
+void ThumbnailService::slotDone( TQPixmap pix )
 {
 	kdDebug( 4500 ) << "ThumbnailService::slotDone(): got page" << endl;
 	pix.detach();
@@ -133,10 +133,10 @@ void ThumbnailService::processOne()
 	FILE* file = _mini->psFile();
 	Request req = *pending.begin();
 	kdDebug( 4500 ) << "ThumbnailService::processOne(): processing " << req.page << "(of " << pending.size() << " requests)" << endl;
-	disconnect( SIGNAL( relayPixmap( QPixmap ) ) );
+	disconnect( TQT_SIGNAL( relayPixmap( TQPixmap ) ) );
 	while ( !pending.empty() && req.page == pending.begin()->page ) {
 		req = *pending.begin();
-		connect( this, SIGNAL( relayPixmap( QPixmap ) ), req.receiver, req.slot );
+		connect( this, TQT_SIGNAL( relayPixmap( TQPixmap ) ), req.receiver, req.slot );
 		pending.erase( pending.begin() );
 	}
 	_thumbnailDrawer->setOrientation( _mini->orientation( req.page ) );

@@ -1,8 +1,8 @@
 #ifndef _SVGTESTWIDGET_H
 #define _SVGTESTWIDGET_H
 
-#include <qwidget.h>
-#include <qobject.h>
+#include <tqwidget.h>
+#include <tqobject.h>
 #include "SVGDocument.h"
 #include "KSVGCanvas.h"
 
@@ -17,17 +17,17 @@ private slots:
 	void slotRenderingFinished();
 
 protected:
-	virtual void paintEvent(QPaintEvent *event);
-	virtual void resizeEvent(QResizeEvent *event);
-/*	virtual void mousePressEvent(QMouseEvent *event);
-	virtual void mouseReleaseEvent(QMouseEvent *event);
-	virtual void keyPressEvent(QKeyEvent *event);
-	virtual void keyReleaseEvent(QKeyEvent *event);
-	virtual void mouseMoveEvent(QMouseEvent *event);
+	virtual void paintEvent(TQPaintEvent *event);
+	virtual void resizeEvent(TQResizeEvent *event);
+/*	virtual void mousePressEvent(TQMouseEvent *event);
+	virtual void mouseReleaseEvent(TQMouseEvent *event);
+	virtual void keyPressEvent(TQKeyEvent *event);
+	virtual void keyReleaseEvent(TQKeyEvent *event);
+	virtual void mouseMoveEvent(TQMouseEvent *event);
 */
 private:
-	QPoint m_panningPos;
-	QPoint m_oldPanningPos;
+	TQPoint m_panningPos;
+	TQPoint m_oldPanningPos;
 	
 	KSVG::SVGDocument *m_doc;
 	KSVG::KSVGCanvas *m_canvas;

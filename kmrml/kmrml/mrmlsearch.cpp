@@ -30,8 +30,8 @@
 
 #include <unistd.h>
 
-#include <qfile.h>
-#include <qstring.h>
+#include <tqfile.h>
+#include <tqstring.h>
 #include <kconfig.h>
 #include <kglobal.h>
 #include <kinstance.h>
@@ -41,12 +41,12 @@
 
 extern "C" KDE_EXPORT int kdemain( int argc, char **argv )
 {
-    QString query;
+    TQString query;
 
     for ( int i = 1; i < argc; i++ ) {
         if ( i > 1 )
             query += ';';
-        QString path = QFile::decodeName( argv[i] );
+        TQString path = TQFile::decodeName( argv[i] );
         if ( path.at( 0 ) == '/' ) {
             KURL u;
             u.setPath( path );
@@ -69,6 +69,6 @@ extern "C" KDE_EXPORT int kdemain( int argc, char **argv )
     qDebug("***** Query: %s ** URL: %s", query.latin1(), url.url().latin1());
 
     return execlp( "kfmclient",
-                   "kfmclient", "openURL", QFile::encodeName(url.url()).data(),
+                   "kfmclient", "openURL", TQFile::encodeName(url.url()).data(),
                    "text/mrml", (void *)0 );
 }

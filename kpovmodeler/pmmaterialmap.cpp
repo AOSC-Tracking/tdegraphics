@@ -74,7 +74,7 @@ PMMaterialMap::~PMMaterialMap( )
 {
 }
 
-void PMMaterialMap::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMMaterialMap::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    switch( m_bitmapType )
    {
@@ -140,7 +140,7 @@ void PMMaterialMap::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMMaterialMap::readAttributes( const PMXMLHelper& h )
 {
-   QString str;
+   TQString str;
 
    str = h.stringAttribute( "bitmap_type", "sys" );
    if( str == "gif" )
@@ -241,7 +241,7 @@ void PMMaterialMap::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMMaterialMap::description( ) const
+TQString PMMaterialMap::description( ) const
 {
    return i18n( "material map" );
 }
@@ -256,7 +256,7 @@ void PMMaterialMap::setBitmapType( PMBitmapType c )
    }
 }
 
-void PMMaterialMap::setBitmapFileName( const QString& c )
+void PMMaterialMap::setBitmapFileName( const TQString& c )
 {
    if( c != m_bitmapFile )
    {
@@ -296,7 +296,7 @@ void PMMaterialMap::enableOnce( bool c )
    }
 }
 
-PMDialogEditBase* PMMaterialMap::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMMaterialMap::editWidget( TQWidget* parent ) const
 {
    return new PMMaterialMapEdit( parent );
 }

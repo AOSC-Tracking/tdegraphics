@@ -24,7 +24,7 @@
 
 #include "renderedDocumentPagePixmap.h"
 
-#include <qobject.h>
+#include <tqobject.h>
 
 
 class RenderedDviPagePixmap : public RenderedDocumentPagePixmap
@@ -43,7 +43,7 @@ class RenderedDviPagePixmap : public RenderedDocumentPagePixmap
   List of source-hyperlinks in the current page. This vector is
   generated when the current page is drawn.
   */
-  QValueVector<Hyperlink> sourceHyperLinkList;
+  TQValueVector<Hyperlink> sourceHyperLinkList;
 };
 
 #endif

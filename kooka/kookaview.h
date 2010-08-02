@@ -26,14 +26,14 @@
 #ifndef KOOKAVIEW_H
 #define KOOKAVIEW_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include <kopenwith.h>
 #include "kookaiface.h"
 #include <kdockwidget.h>
-#include <qtabwidget.h>
-#include <qlayout.h>
-#include <qimage.h>
-#include <qsplitter.h>
+#include <tqtabwidget.h>
+#include <tqlayout.h>
+#include <tqimage.h>
+#include <tqsplitter.h>
 
 #include <kparts/dockmainwindow.h>
 #include <kparts/part.h>
@@ -46,7 +46,7 @@
 #include "img_canvas.h"
 
 class KDockWidget;
-class QPainter;
+class TQPainter;
 class KSANEOCR;
 class KConfig;
 class KPrinter;
@@ -55,7 +55,7 @@ class KAction;
 class KActionCollection;
 class ThumbView;
 class KookaImage;
-class QPixmap;
+class TQPixmap;
 class ocrResEdit;
 /**
  * This is the main view class for Kooka.  Most of the non-menu,
@@ -76,7 +76,7 @@ public:
     /**
      * Default constructor
      */
-    KookaView(KParts::DockMainWindow *parent, const QCString& deviceToUse);
+    KookaView(KParts::DockMainWindow *parent, const TQCString& deviceToUse);
 
     /**
      * Destructor
@@ -102,7 +102,7 @@ public:
 public slots:
     void slShowPreview()  {  }
     void slShowPackager() {  }
-    void slNewPreview( QImage *, ImgScanInfo * );
+    void slNewPreview( TQImage *, ImgScanInfo * );
 
     void slSetScanParamsVisible( bool v )
         { if( v ) scan_params->show(); else scan_params->hide(); }
@@ -137,7 +137,7 @@ public slots:
     void slLoadScanParams( );
     void slSaveScanParams( );
 
-    void slOCRResultImage( const QPixmap& );
+    void slOCRResultImage( const TQPixmap& );
 
     void slShowThumbnails( KFileTreeViewItem *dirKfi = 0, bool forceRedraw=false);
      void slFreshUpThumbView();
@@ -158,7 +158,7 @@ public slots:
      * slot to select the scanner device. Does all the work with selection
      * of scanner, disconnection of the old device and connecting the new.
      */
-    bool slSelectDevice(const QCString& useDevice=QCString());
+    bool slSelectDevice(const TQCString& useDevice=TQCString());
 
     void connectViewerAction( KAction *action );
     void connectGalleryAction( KAction *action );
@@ -175,9 +175,9 @@ protected slots:
 
     /**
      * called from the scandevice if a new Image was successfully scanned.
-     * Needs to convert the one-page-QImage to a KookaImage
+     * Needs to convert the one-page-TQImage to a KookaImage
      */
-    void slNewImageScanned(QImage*, ImgScanInfo*);
+    void slNewImageScanned(TQImage*, ImgScanInfo*);
 
     /**
      * called if an viewer image was set to read only or back to read write state.
@@ -187,7 +187,7 @@ signals:
     /**
      * Use this signal to change the content of the statusbar
      */
-    void signalChangeStatusbar(const QString& text);
+    void signalChangeStatusbar(const TQString& text);
 
     /**
      * Use this signal to clean up the statusbar
@@ -197,15 +197,15 @@ signals:
     /**
      * Use this signal to change the content of the caption
      */
-    void signalChangeCaption(const QString& text);
+    void signalChangeCaption(const TQString& text);
 
 private:
-    QImage rotateRight( QImage* );
-    QImage rotateLeft ( QImage* );
-    QImage rotate180  ( QImage* );
-    QCString userDeviceSelection( ) const;
+    TQImage rotateRight( TQImage* );
+    TQImage rotateLeft ( TQImage* );
+    TQImage rotate180  ( TQImage* );
+    TQCString userDeviceSelection( ) const;
 
-    void updateCurrImage( QImage& ) ;
+    void updateCurrImage( TQImage& ) ;
 
     ImageCanvas  *img_canvas;
     ThumbView    *m_thumbview;
@@ -217,9 +217,9 @@ private:
     KScanDevice  *sane;
     KComboBox    *recentFolder;
 
-    QCString     connectedDevice;
+    TQCString     connectedDevice;
 
-    QImage       *m_ocrResultImg;
+    TQImage       *m_ocrResultImg;
     int          image_pool_id;
     int 	 preview_id;
 

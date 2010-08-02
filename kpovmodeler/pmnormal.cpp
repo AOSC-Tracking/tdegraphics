@@ -86,12 +86,12 @@ void PMNormal::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMNormal::description( ) const
+TQString PMNormal::description( ) const
 {
    return i18n( "normal" );
 }
 
-void PMNormal::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMNormal::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
    e.setAttribute( "enable_bump_size", m_enableBumpSize );
@@ -109,7 +109,7 @@ void PMNormal::readAttributes( const PMXMLHelper& h )
    m_uvMapping = h.boolAttribute( "uv_mapping", false );
 }
 
-PMDialogEditBase* PMNormal::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMNormal::editWidget( TQWidget* parent ) const
 {
    return new PMNormalEdit( parent );
 }

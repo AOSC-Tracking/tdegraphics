@@ -70,12 +70,12 @@ PMBlobCylinder::~PMBlobCylinder( )
 {
 }
 
-QString PMBlobCylinder::description( ) const
+TQString PMBlobCylinder::description( ) const
 {
    return i18n( "blob cylinder" );
 }
 
-void PMBlobCylinder::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMBlobCylinder::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "end_a", m_end1.serializeXML( ) );
    e.setAttribute( "end_b", m_end2.serializeXML( ) );
@@ -160,7 +160,7 @@ void PMBlobCylinder::setStrength( double s )
    }
 }
 
-PMDialogEditBase* PMBlobCylinder::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBlobCylinder::editWidget( TQWidget* parent ) const
 {
    return new PMBlobCylinderEdit( parent );
 }

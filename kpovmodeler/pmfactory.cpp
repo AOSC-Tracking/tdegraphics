@@ -54,11 +54,11 @@ PMFactory::~PMFactory( )
    s_aboutData = 0L;
 }
 
-KParts::Part* PMFactory::createPartObject( QWidget* parentWidget,
+KParts::Part* PMFactory::createPartObject( TQWidget* parentWidget,
                                      const char* widgetName,
-                                     QObject* parent, const char* name,
+                                     TQObject* parent, const char* name,
                                      const char* classname,
-                                     const QStringList& /*args*/ )
+                                     const TQStringList& /*args*/ )
 {
    kdDebug( ) << "PMFactory: Created new part\n";
 

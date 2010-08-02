@@ -21,7 +21,7 @@
 #ifndef SVGMaskElementImpl_H
 #define SVGMaskElementImpl_H
 
-#include <qwmatrix.h>
+#include <tqwmatrix.h>
 
 #include "SVGTestsImpl.h"
 #include "SVGBBoxTarget.h"
@@ -56,20 +56,20 @@ public:
 	{
 	public:
 		Mask() : m_width(0), m_height(0) {}
-		Mask(const QByteArray& mask, const QWMatrix& screenToMask, int width, int height);
+		Mask(const TQByteArray& mask, const TQWMatrix& screenToMask, int width, int height);
 		~Mask() {}
 	
 		bool isEmpty() const { return m_width == 0; }
 		unsigned char value(int screenX, int screenY) const;
-		QByteArray rectangle(int screenX, int screenY, int width, int height);
-		QByteArray rectangle(const QRect& rect);
-		void setScreenToMask(const QWMatrix& matrix) { m_screenToMask = matrix; }
+		TQByteArray rectangle(int screenX, int screenY, int width, int height);
+		TQByteArray rectangle(const TQRect& rect);
+		void setScreenToMask(const TQWMatrix& matrix) { m_screenToMask = matrix; }
 
 	private:
 		int m_width;
 		int m_height;
-		QByteArray m_mask;
-		QWMatrix m_screenToMask;
+		TQByteArray m_mask;
+		TQWMatrix m_screenToMask;
 	};
 
 	SVGMaskElementImpl(DOM::ElementImpl *);
@@ -92,7 +92,7 @@ public:
 	// Compute the mask on a given shape, taking into account all masks defined
 	// on the shape's ancestors. This is a workaround for us not having a buffer
 	// for container elements, so we can't mask containers directly.
-	static QByteArray maskRectangle(SVGShapeImpl *shape, const QRect& screenRectangle);
+	static TQByteArray maskRectangle(SVGShapeImpl *shape, const TQRect& screenRectangle);
 
 private:
 	class CacheKey

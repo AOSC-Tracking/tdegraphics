@@ -10,7 +10,7 @@
 #include "marklist.h"
 
 #include <kparts/part.h>
-#include <qtimer.h>
+#include <tqtimer.h>
 
 class Anchor;
 class DocumentWidget;
@@ -18,9 +18,9 @@ class KConfigDialog;
 class KPrintDialogPage_PageOptions;
 class KPrinter;
 class PageView;
-class QPainter;
-class QSplitter;
-class QToolBox;
+class TQPainter;
+class TQSplitter;
+class TQToolBox;
 class simplePageSize;
 class TableOfContents;
 class PageNumber;
@@ -39,25 +39,25 @@ class KMultiPage : public KParts::ReadOnlyPart, virtual public kmultipageInterfa
   Q_OBJECT
 
 public:
-  KMultiPage(QWidget *parentWidget, const char *widgetName, QObject *parent, const char *name);
+  KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent, const char *name);
   virtual ~KMultiPage();
 
   /* returns the scrollview used for the display */
-  virtual QWidget* mainWidget() {return _scrollView;}
+  virtual TQWidget* mainWidget() {return _scrollView;}
 
   /* Methods which are associated with the DCOP functionality of the
      kmultipage. This method returns the file name (not the URL) of
      the currently loaded file. */
-  QString name_of_current_file();
+  TQString name_of_current_file();
 
   /* Methods which are associated with the DCOP functionality of the
      kmultipage. This method can be implemented by the multipage,
      e.g. to jump to a certain location. */
-  virtual ASYNC  jumpToReference(const QString& /*reference*/);
+  virtual ASYNC  jumpToReference(const TQString& /*reference*/);
 
   /* Methods which are associated with the DCOP functionality of the
      kmultipage. This method checks if a given file is loaded. */
-  bool   is_file_loaded(const QString& filename);
+  bool   is_file_loaded(const TQString& filename);
 
   /* Opens file and sets URL
 
@@ -78,7 +78,7 @@ public:
 
      @returns true on success, false on failure
   */
-  virtual bool openURL(const QString &filename, const KURL &base_url);
+  virtual bool openURL(const TQString &filename, const KURL &base_url);
 
   /** Prints a document
 
@@ -130,7 +130,7 @@ public:
   printer->pageList() gives a list of pages to be printed, where "1"
   denotes the first page, "2" the second, etc.> ...
 
-  printer->printFiles( QStringList(tmpPSFile), true );
+  printer->printFiles( TQStringList(tmpPSFile), true );
   delete printer;
   @endcode
 
@@ -173,7 +173,7 @@ public:
   printer->pageList() gives a list of pages to be printed, where "1"
   denotes the first page, "2" the second, etc.> ...
 
-  printer->printFiles( QStringList(tmpPSFile), true ); 
+  printer->printFiles( TQStringList(tmpPSFile), true ); 
   delete printer;
   @endcode 
 
@@ -214,7 +214,7 @@ public:
   kviewshell will not allow the user to see and select compressed
   dvi-files.
   */
-  virtual QStringList fileFormats() const = 0;
+  virtual TQStringList fileFormats() const = 0;
 
   /// closes a file
   virtual bool closeURL();
@@ -262,7 +262,7 @@ public:
 
       @returns a list with the numbers of the currently selected
       pages. */
-  virtual QValueList<int> selectedPages() {return markList()->selectedPages();}
+  virtual TQValueList<int> selectedPages() {return markList()->selectedPages();}
 
   virtual History* history() { return &document_history; }
 
@@ -361,7 +361,7 @@ protected:
   virtual void initializePageCache();
 
   /* Returns a pointer to the renderer. */
-  virtual QGuardedPtr<DocumentRenderer> getRenderer() const { return renderer; }
+  virtual TQGuardedPtr<DocumentRenderer> getRenderer() const { return renderer; }
 
   PageView* scrollView() { return _scrollView; }
 
@@ -496,7 +496,7 @@ protected slots:
   void gotoPage(const TextSelection&);
 
 private slots:
-   void         handleLocalLink(const QString &linkText);
+   void         handleLocalLink(const TQString &linkText);
 
 signals:
   /** Emitted with argument "true" when the move tool is selected, and
@@ -539,7 +539,7 @@ public slots:
      from the multipage/scrollview. This method calles scroll, a
      delta-value of 120 (i.e. one notch on a standard wheel mouse)
      scrolls by two 'lines'. */
-  void wheelEvent(QWheelEvent *);
+  void wheelEvent(TQWheelEvent *);
 
 protected:
   /** Allocates and initializes a KPrinter structure
@@ -568,9 +568,9 @@ protected:
 
   This pointer is automatically set by the constructor.
   */
-  QGuardedPtr<QWidget> parentWdg;
+  TQGuardedPtr<TQWidget> parentWdg;
 
-  QPtrVector<DocumentWidget> widgetList;
+  TQPtrVector<DocumentWidget> widgetList;
 
   History document_history;
 
@@ -614,7 +614,7 @@ private:
      timer. It may well happen that KDirWatch calls us several times
      while we are waiting for the file to become good, but that does
      not do any harm. */
-  void timerEvent( QTimerEvent *e );
+  void timerEvent( TQTimerEvent *e );
 
   /* This method opens a file and sets up the GUI when the file is
      loaded. It calls setFile() so that implementations of kmultipage
@@ -622,16 +622,16 @@ private:
   bool openFile();
 
   /* Is set by setRenderer. */
-  QGuardedPtr<DocumentRenderer> renderer;
+  TQGuardedPtr<DocumentRenderer> renderer;
 
   PageView *_scrollView;
   SearchWidget* searchWidget;
-  QToolBox* sideBar;
+  TQToolBox* sideBar;
 
   MarkList* _markList;
   TableOfContents* tableOfContents;
 
-  QSplitter* splitterWidget;
+  TQSplitter* splitterWidget;
 
   /* This timer is used to implement a brief delay when the user
      scrolls past the beginning or the end of the page before a the
@@ -639,7 +639,7 @@ private:
      the user to scroll with the mouse wheel or the keyboard without
      involuntarily moving to another page. The timer is used in the
      scroll() method. */
-  QTimer changePageDelayTimer;
+  TQTimer changePageDelayTimer;
 
   // This is set to true while a text search is performed.
   // If set to false the search is interrupted.

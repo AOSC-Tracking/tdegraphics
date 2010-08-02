@@ -25,8 +25,8 @@
 #endif
 
 #include "pmvector.h"
-#include <qptrlist.h>
-#include <qstring.h>
+#include <tqptrlist.h>
+#include <tqstring.h>
 
 class KConfig;
 
@@ -50,7 +50,7 @@ public:
    /**
     * Creates a PMControlPoint with an id and a description.
     */
-   PMControlPoint( int id, const QString& description );
+   PMControlPoint( int id, const TQString& description );
    /**
     * Deletes the PMControlPoint
     */
@@ -98,7 +98,7 @@ public:
    /**
     * Returns the description
     */
-   QString description( ) const { return m_description; }
+   TQString description( ) const { return m_description; }
    /**
     * Selects/deselects the control point
     */
@@ -177,14 +177,14 @@ private:
    PMVector m_normalVector;
    bool m_bChanged;
    bool m_bSelected;
-   QString m_description;
+   TQString m_description;
 
    static double s_moveGrid;
    static double s_rotateGrid;
    static double s_scaleGrid;
 };
 
-typedef QPtrList<PMControlPoint> PMControlPointList;
-typedef QPtrListIterator<PMControlPoint> PMControlPointListIterator;
+typedef TQPtrList<PMControlPoint> PMControlPointList;
+typedef TQPtrListIterator<PMControlPoint> PMControlPointListIterator;
 
 #endif

@@ -19,8 +19,8 @@
 #ifndef PMCOLOR_H
 #define PMCOLOR_H
 
-#include <qstring.h>
-#include <qcolor.h>
+#include <tqstring.h>
+#include <tqcolor.h>
 
 class PMVector;
 
@@ -48,10 +48,10 @@ public:
     */
    PMColor( const PMVector& v );
    /**
-    * Creates a color from a @ref QColor object.
+    * Creates a color from a @ref TQColor object.
     * filter and transmit are set to 0
     */
-   PMColor( const QColor& c );
+   PMColor( const TQColor& c );
 
    /**
     * Sets the red value
@@ -97,20 +97,20 @@ public:
    /**
     * Returns the rgb value as QColor
     */
-   QColor toQColor( ) const;
+   TQColor toQColor( ) const;
    
    /**
     * Returns a string for serialization
     */
-   QString serialize( bool addColorKeyword = false ) const;
+   TQString serialize( bool addColorKeyword = false ) const;
    /**
     * Returns a string for xml output
     */
-   QString serializeXML( ) const;
+   TQString serializeXML( ) const;
    /**
     * loads the color data from the xml string
     */
-   bool loadXML( const QString& str );
+   bool loadXML( const TQString& str );
 
    /**
     * Returns true if the colors are equal*/

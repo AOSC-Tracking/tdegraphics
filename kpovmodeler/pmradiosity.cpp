@@ -136,12 +136,12 @@ void PMRadiosity::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMRadiosity::description( ) const
+TQString PMRadiosity::description( ) const
 {
    return i18n( "radiosity" );
 }
 
-void PMRadiosity::serialize( QDomElement& e, QDomDocument& ) const
+void PMRadiosity::serialize( TQDomElement& e, TQDomDocument& ) const
 {
    e.setAttribute( "adc_bailout", m_adcBailout );
 
@@ -356,7 +356,7 @@ void PMRadiosity::setRecursionLimit( int c )
    }
 }
 
-PMDialogEditBase* PMRadiosity::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMRadiosity::editWidget( TQWidget* parent ) const
 {
    return new PMRadiosityEdit( parent );
 }

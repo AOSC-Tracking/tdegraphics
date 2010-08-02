@@ -24,8 +24,8 @@
 class ImlibWidget;
 class ImData;
 
-class QCheckBox;
-class QLabel;
+class TQCheckBox;
+class TQLabel;
 
 class KComboBox;
 class KIntNumInput;
@@ -35,7 +35,7 @@ class DefaultsWidget : public QWidget
   Q_OBJECT
 
 public:
-  DefaultsWidget( QWidget *parent, const char *name );
+  DefaultsWidget( TQWidget *parent, const char *name );
   ~DefaultsWidget();
 
   void 		loadSettings( const KuickData& data );
@@ -44,22 +44,22 @@ public:
 private:
   Rotation      currentRotation() const;
 
-  QCheckBox 	*cbEnableMods;
+  TQCheckBox 	*cbEnableMods;
 
-  QGroupBox 	*gbScale;
-  QCheckBox 	*cbUpScale, *cbDownScale;
+  TQGroupBox 	*gbScale;
+  TQCheckBox 	*cbUpScale, *cbDownScale;
   KIntNumInput 	*sbMaxUpScaleFactor;
 
-  QGroupBox 	*gbAdjust;
+  TQGroupBox 	*gbAdjust;
   KIntNumInput 	*sbBrightness, *sbContrast, *sbGamma;
 
-  QGroupBox 	*gbGeometry;
-  QLabel 	*lbRotate;
+  TQGroupBox 	*gbGeometry;
+  TQLabel 	*lbRotate;
   KComboBox 	*comboRotate;
-  QCheckBox 	*cbFlipVertically, *cbFlipHorizontally;
+  TQCheckBox 	*cbFlipVertically, *cbFlipHorizontally;
 
-  QGroupBox 	*gbPreview;
-  QLabel 	*lbImOrig, *lbImFiltered;
+  TQGroupBox 	*gbPreview;
+  TQLabel 	*lbImOrig, *lbImFiltered;
   ImlibWidget 	*imOrig, *imFiltered;
 
 

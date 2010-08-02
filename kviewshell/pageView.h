@@ -25,13 +25,13 @@
 
 #include "documentWidget.h"
 
-#include <qptrvector.h>
-#include <qscrollview.h>
+#include <tqptrvector.h>
+#include <tqscrollview.h>
 
 class PageNumber;
 
 /*
- * PageView is a customized QScrollView, which can hold one
+ * PageView is a customized TQScrollView, which can hold one
  * page. This page will be centered on the viewport.
  */
 class PageView : public QScrollView
@@ -39,10 +39,10 @@ class PageView : public QScrollView
     Q_OBJECT
 
 public:
-    PageView( QWidget* parent = 0, const char* name = 0 );
+    PageView( TQWidget* parent = 0, const char* name = 0 );
     ~PageView() {}
 
-    void addChild( QPtrVector<DocumentWidget> *wdgList );
+    void addChild( TQPtrVector<DocumentWidget> *wdgList );
 
     /** Sets the number of columns into which the widgets are
         aligned. If nothing is set, '2' is the default. */
@@ -85,7 +85,7 @@ public:
     int distanceBetweenPages() { return distanceBetweenWidgets; }
 
     /** Moves the viewport so that the widget is at the top left corner. */
-    void moveViewportToWidget(QWidget* widget, int y = 0);
+    void moveViewportToWidget(TQWidget* widget, int y = 0);
 
     bool isMoveToolEnabled() const { return moveTool; }
 
@@ -112,31 +112,31 @@ public slots:
     void slotEnableMoveTool(bool enable);
 
 signals:
-    void viewSizeChanged(const QSize& size);
-    void pageSizeChanged(const QSize& size);
+    void viewSizeChanged(const TQSize& size);
+    void pageSizeChanged(const TQSize& size);
 
     void currentPageChanged(const PageNumber&);
 
     /** This signal is emitted when the scrollView receives a mouse
         wheel event. */
-    void wheelEventReceived( QWheelEvent * );
+    void wheelEventReceived( TQWheelEvent * );
 
 protected:
-    void keyPressEvent( QKeyEvent* );
+    void keyPressEvent( TQKeyEvent* );
 
-    /** Reimplemented from QScrollView to make sure that the page is
+    /** Reimplemented from TQScrollView to make sure that the page is
         centered when it fits in the viewport. */
-    void viewportResizeEvent( QResizeEvent* );
-    void viewportPaintEvent(QPaintEvent*);
+    void viewportResizeEvent( TQResizeEvent* );
+    void viewportPaintEvent(TQPaintEvent*);
 
-    /** Reimplemented from QScrollView, because the kviepart needs to
+    /** Reimplemented from TQScrollView, because the kviepart needs to
         handle the wheel events itself. The wheel event is passed on by 
         emitting the singal "wheelEventReceived". Nothing else is done. */
-    void contentsWheelEvent ( QWheelEvent * );
+    void contentsWheelEvent ( TQWheelEvent * );
 
-    void contentsMousePressEvent(QMouseEvent*);
-    void contentsMouseReleaseEvent(QMouseEvent*);
-    void contentsMouseMoveEvent(QMouseEvent*);
+    void contentsMousePressEvent(TQMouseEvent*);
+    void contentsMouseReleaseEvent(TQMouseEvent*);
+    void contentsMouseMoveEvent(TQMouseEvent*);
 
 private slots:
     void calculateCurrentPageNumber(int x, int y);
@@ -144,9 +144,9 @@ private slots:
 private:
     /** Stores the mouse position between two mouse events. This is used
         to implement the "grab and drag the viewport contents" feature. */
-    QPoint   dragGrabPos;
+    TQPoint   dragGrabPos;
 
-    QPtrVector<DocumentWidget>* widgetList;
+    TQPtrVector<DocumentWidget>* widgetList;
 
     /** Used internally by the centerContents()-method. Set with the
         setNrColumns() method */
@@ -163,7 +163,7 @@ private:
 
     /** color of the viewport's background. This is also
         stored on entering the fullscreen mode. */
-    QColor backgroundColor;
+    TQColor backgroundColor;
 
     /** Distance between pages in pixels 
         (this is independent of the zoom level). */

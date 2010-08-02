@@ -2,7 +2,7 @@
 #define PRINTNODETEST_H
 
 #include <kurl.h>
-#include <qobject.h>
+#include <tqobject.h>
 	
 namespace KSVG
 {
@@ -16,7 +16,7 @@ public:
 	~Worker();
 
 private slots:
-	void slotParsingFinished(bool error, const QString &errorDesc);
+	void slotParsingFinished(bool error, const TQString &errorDesc);
 
 private:
 	// It's not allowed to store a m_doc object here,

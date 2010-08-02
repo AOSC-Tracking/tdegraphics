@@ -25,12 +25,12 @@
 #endif 
 
 #include <kdialogbase.h>
-#include <qvaluelist.h>
-#include <qptrdict.h>
-#include <qptrlist.h>
+#include <tqvaluelist.h>
+#include <tqptrdict.h>
+#include <tqptrlist.h>
 
 class KConfig;
-class QTextEdit;
+class TQTextEdit;
 class PMObject;
 
 #include "pmmessage.h"
@@ -49,25 +49,25 @@ public:
     * messages is the message list. If the list contains a message of type
     * FatalError, the 'Proceed" button will not be shown.
     *
-    * PMErrorDialog::exec( ) returns QDialog::Accepted if the command
+    * PMErrorDialog::exec( ) returns TQDialog::Accepted if the command
     * should be continued.
     */
    PMErrorDialog( const PMMessageList& messages, int errorFlags,
-                  QWidget* parent = 0, const char* name = 0 );
+                  TQWidget* parent = 0, const char* name = 0 );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );
 
 protected:
-   virtual void resizeEvent( QResizeEvent* ev );
+   virtual void resizeEvent( TQResizeEvent* ev );
    
 private:
    void displayMessages( );
    
-   static QSize s_size;
-   QTextEdit* m_pTextView;
-   QPtrDict< QPtrList<PMMessage> > m_messageDict;
-   QPtrList<PMMessage> m_messages;
+   static TQSize s_size;
+   TQTextEdit* m_pTextView;
+   TQPtrDict< TQPtrList<PMMessage> > m_messageDict;
+   TQPtrList<PMMessage> m_messages;
 };
 
 #endif

@@ -16,7 +16,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qkeycode.h>
+#include <tqkeycode.h>
 
 #include <kdeversion.h>
 #include <kglobal.h>
@@ -35,7 +35,7 @@
 #undef KeyPress
 #endif
 
-FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
+FileWidget::FileWidget( const KURL& url, TQWidget *parent, const char *name )
     : KDirOperator( url, parent, name ),
       m_validCompletion( false ),
       m_fileFinder( 0L )
@@ -55,21 +55,21 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
     dirCompletionObject()->setCompletionMode( KGlobalSettings::CompletionAuto);
 
     slotViewChanged();
-    connect( this, SIGNAL( viewChanged( KFileView * )),
-	     SLOT( slotViewChanged() ));
+    connect( this, TQT_SIGNAL( viewChanged( KFileView * )),
+	     TQT_SLOT( slotViewChanged() ));
 
-    connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
-    connect( dirLister(), SIGNAL( deleteItem( KFileItem * ) ),
-	     SLOT( slotItemDeleted( KFileItem *) ));
+    connect( dirLister(), TQT_SIGNAL( clear() ), TQT_SLOT( slotItemsCleared() ));
+    connect( dirLister(), TQT_SIGNAL( deleteItem( KFileItem * ) ),
+	     TQT_SLOT( slotItemDeleted( KFileItem *) ));
 
-    connect( this, SIGNAL( fileHighlighted( const KFileItem * )),
-	     SLOT( slotHighlighted( const KFileItem * )));
+    connect( this, TQT_SIGNAL( fileHighlighted( const KFileItem * )),
+	     TQT_SLOT( slotHighlighted( const KFileItem * )));
 
-    connect( this, SIGNAL(urlEntered(const KURL&)),
-             SLOT( slotURLEntered( const KURL& )));
+    connect( this, TQT_SIGNAL(urlEntered(const KURL&)),
+             TQT_SLOT( slotURLEntered( const KURL& )));
 
     // should actually be KDirOperator's job!
-    connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
+    connect( this, TQT_SIGNAL( finishedLoading() ), TQT_SLOT( slotFinishedLoading() ));
 }
 
 FileWidget::~FileWidget()
@@ -97,9 +97,9 @@ void FileWidget::initActions()
     // so we move it to the real bottom
     menu->remove( coll->action( "properties" ) );
 
-    QPopupMenu *pMenu = menu->popupMenu();
+    TQPopupMenu *pMenu = menu->popupMenu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
-    QMenuItem *mItem = pMenu->findItem( lastItemId );
+    TQMenuItem *mItem = pMenu->findItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )
         menu->insert( sep );
 
@@ -113,7 +113,7 @@ void FileWidget::reloadConfiguration()
 {
     if ( kdata->fileFilter != nameFilter() ) {
 	// At first, our list must have folders
-	QStringList mimes;
+	TQStringList mimes;
 	mimes.append("inode/directory");
 
 	// Then, all the images!
@@ -133,7 +133,7 @@ bool FileWidget::hasFiles() const
     return (numFiles() > 0);
 }
 
-void FileWidget::activatedMenu( const KFileItem *item, const QPoint& pos )
+void FileWidget::activatedMenu( const KFileItem *item, const TQPoint& pos )
 {
     bool image = isImage( item );
     actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
@@ -149,11 +149,11 @@ void FileWidget::activatedMenu( const KFileItem *item, const QPoint& pos )
     KDirOperator::activatedMenu( item, pos );
 }
 
-void FileWidget::findCompletion( const QString& text )
+void FileWidget::findCompletion( const TQString& text )
 {
     if ( text.at(0) == '/' || text.at(0) == '~' ||
 	 text.find('/') != -1 ) {
-	QString t = m_fileFinder->completion()->makeCompletion( text );
+	TQString t = m_fileFinder->completion()->makeCompletion( text );
 
 	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
             m_fileFinder->completionMode() == KGlobalSettings::CompletionPopupAuto)
@@ -166,7 +166,7 @@ void FileWidget::findCompletion( const QString& text )
 	return;
     }
 	
-    QString file = makeDirCompletion( text );
+    TQString file = makeDirCompletion( text );
     if ( file.isNull() )
 	file = makeCompletion( text );
 
@@ -176,10 +176,10 @@ void FileWidget::findCompletion( const QString& text )
 	KDirOperator::setCurrentItem( file );
 }
 
-bool FileWidget::eventFilter( QObject *o, QEvent *e )
+bool FileWidget::eventFilter( TQObject *o, TQEvent *e )
 {
-    if ( e->type() == QEvent::KeyPress ) {
-	QKeyEvent *k = static_cast<QKeyEvent*>( e );
+    if ( e->type() == TQEvent::KeyPress ) {
+	TQKeyEvent *k = static_cast<TQKeyEvent*>( e );
 	
 	if ( (k->state() & (ControlButton | AltButton)) == 0 ) {
 	    int key = k->key();
@@ -195,17 +195,17 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 		return true;
 	    }
 	
-	    const QString& text = k->text();
+	    const TQString& text = k->text();
 	    if ( !text.isEmpty() && text.unicode()->isPrint() ) {
                 k->accept();
 		
                 if ( !m_fileFinder ) {
 		    m_fileFinder = new FileFinder( this, "file finder" );
-		    connect( m_fileFinder, SIGNAL( completion(const QString&)),
-			     SLOT( findCompletion( const QString& )));
+		    connect( m_fileFinder, TQT_SIGNAL( completion(const TQString&)),
+			     TQT_SLOT( findCompletion( const TQString& )));
 		    connect( m_fileFinder,
-			     SIGNAL( enterDir( const QString& ) ),
-			     SLOT( slotReturnPressed( const QString& )));
+			     TQT_SIGNAL( enterDir( const TQString& ) ),
+			     TQT_SLOT( slotReturnPressed( const TQString& )));
 		    m_fileFinder->move( width()  - m_fileFinder->width(),
 					height() - m_fileFinder->height() );
 		}
@@ -360,7 +360,7 @@ void FileWidget::slotViewChanged()
 
 void FileWidget::slotItemsCleared()
 {
-    m_currentURL = QString::null;
+    m_currentURL = TQString::null;
 }
 
 void FileWidget::slotItemDeleted( KFileItem *item )
@@ -383,16 +383,16 @@ void FileWidget::slotHighlighted( const KFileItem *item )
     m_currentURL = item->url().url();
 }
 
-void FileWidget::slotReturnPressed( const QString& t )
+void FileWidget::slotReturnPressed( const TQString& t )
 {
     // we need a / at the end, otherwise replacedPath() will cut off the dir,
     // assuming it is a filename
-    QString text = t;
+    TQString text = t;
     if ( text.at( text.length()-1 ) != '/' )
 	text += '/';
 
     if ( text.at(0) == '/' || text.at(0) == '~' ) {
-	QString dir = m_fileFinder->completion()->replacedPath( text );
+	TQString dir = m_fileFinder->completion()->replacedPath( text );
 	
 	KURL url;
 	url.setPath( dir );
@@ -400,7 +400,7 @@ void FileWidget::slotReturnPressed( const QString& t )
     }
 
     else if ( text.find('/') != (int) text.length() -1 ) { // relative path
-	QString dir = m_fileFinder->completion()->replacedPath( text );
+	TQString dir = m_fileFinder->completion()->replacedPath( text );
 	KURL u( url(), dir );
 	setURL( u, true );
     }
@@ -425,7 +425,7 @@ void FileWidget::setCurrentItem( const KFileItem *item )
     }
 }
 
-void FileWidget::setInitialItem( const QString& filename )
+void FileWidget::setInitialItem( const TQString& filename )
 {
     m_initialName = filename;
 }
@@ -444,16 +444,16 @@ void FileWidget::slotFinishedLoading()
     else if ( !current )
 	setCurrentItem( view()->items()->getFirst() );
 
-    m_initialName = QString::null;
+    m_initialName = TQString::null;
     emit finished();
 }
 
-QSize FileWidget::sizeHint() const
+TQSize FileWidget::sizeHint() const
 {
-  return QSize( 300, 300 );
+  return TQSize( 300, 300 );
 }
    
-void FileWidget::resizeEvent( QResizeEvent *e )
+void FileWidget::resizeEvent( TQResizeEvent *e )
 {
     KDirOperator::resizeEvent( e );
     if ( m_fileFinder )

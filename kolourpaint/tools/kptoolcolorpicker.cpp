@@ -31,9 +31,9 @@
 
 #include <kptoolcolorpicker.h>
 
-#include <qimage.h>
-#include <qpixmap.h>
-#include <qpoint.h>
+#include <tqimage.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -61,7 +61,7 @@ kpToolColorPicker::~kpToolColorPicker ()
 {
 }
 
-kpColor kpToolColorPicker::colorAtPixel (const QPoint &p)
+kpColor kpToolColorPicker::colorAtPixel (const TQPoint &p)
 {
 #if DEBUG_KP_TOOL_COLOR_PICKER && 0
     kdDebug () << "kpToolColorPicker::colorAtPixel" << p << endl;
@@ -71,7 +71,7 @@ kpColor kpToolColorPicker::colorAtPixel (const QPoint &p)
 }
 
 
-QString kpToolColorPicker::haventBegunDrawUserMessage () const
+TQString kpToolColorPicker::haventBegunDrawUserMessage () const
 {
     return i18n ("Click to select a color.");
 }
@@ -90,7 +90,7 @@ void kpToolColorPicker::beginDraw ()
 }
 
 // virtual
-void kpToolColorPicker::draw (const QPoint &thisPoint, const QPoint &, const QRect &)
+void kpToolColorPicker::draw (const TQPoint &thisPoint, const TQPoint &, const TQRect &)
 {
     const kpColor color = colorAtPixel (thisPoint);
     
@@ -121,7 +121,7 @@ void kpToolColorPicker::releasedAllButtons ()
 }
 
 // virtual
-void kpToolColorPicker::endDraw (const QPoint &thisPoint, const QRect &)
+void kpToolColorPicker::endDraw (const TQPoint &thisPoint, const TQRect &)
 {
     const kpColor color = colorAtPixel (thisPoint);
 
@@ -162,7 +162,7 @@ kpToolColorPickerCommand::~kpToolColorPickerCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolColorPickerCommand::name () const
+TQString kpToolColorPickerCommand::name () const
 {
     return i18n ("Color Picker");
 }

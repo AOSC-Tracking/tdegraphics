@@ -24,13 +24,13 @@
 #include <kfilemetainfo.h>
 #include <poppler-qt.h>
 
-class QStringList;
+class TQStringList;
 
 class KPdfPlugin: public KFilePlugin
 {
 Q_OBJECT
 public:
-    KPdfPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+    KPdfPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 };

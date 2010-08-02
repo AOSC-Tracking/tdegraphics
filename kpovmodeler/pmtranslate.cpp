@@ -50,12 +50,12 @@ PMTranslate::~PMTranslate( )
 {
 }
 
-QString PMTranslate::description( ) const
+TQString PMTranslate::description( ) const
 {
    return i18n( "translate" );
 }
 
-void PMTranslate::serialize( QDomElement& e, QDomDocument& /*doc*/ ) const
+void PMTranslate::serialize( TQDomElement& e, TQDomDocument& /*doc*/ ) const
 {
    e.setAttribute( "value", m_move.serializeXML( ) );
 }
@@ -101,7 +101,7 @@ void PMTranslate::setTranslation( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMTranslate::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMTranslate::editWidget( TQWidget* parent ) const
 {
    return new PMTranslateEdit( parent );
 }

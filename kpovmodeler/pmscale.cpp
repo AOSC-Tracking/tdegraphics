@@ -51,12 +51,12 @@ PMScale::~PMScale( )
 {
 }
 
-QString PMScale::description( ) const
+TQString PMScale::description( ) const
 {
    return i18n( "scale" );
 }
 
-void PMScale::serialize( QDomElement& e, QDomDocument& /*d*/ ) const
+void PMScale::serialize( TQDomElement& e, TQDomDocument& /*d*/ ) const
 {
    e.setAttribute( "value", m_scale.serializeXML( ) );
 }
@@ -102,7 +102,7 @@ void PMScale::setScale( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMScale::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMScale::editWidget( TQWidget* parent ) const
 {
    return new PMScaleEdit( parent );
 }

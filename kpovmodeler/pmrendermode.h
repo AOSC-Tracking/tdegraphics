@@ -24,10 +24,10 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qptrlist.h>
-#include <qstringlist.h>
-#include <qdom.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
+#include <tqdom.h>
 
 /**
  * Class that represents the render options for povray
@@ -49,10 +49,10 @@ public:
    /**
     * Reads the attributes from the QDomElement
     */
-   PMRenderMode( const QDomElement& e );
+   PMRenderMode( const TQDomElement& e );
 
-   void setDescription( const QString& descr ) { m_description = descr; }
-   QString description( ) const { return m_description; }
+   void setDescription( const TQString& descr ) { m_description = descr; }
+   TQString description( ) const { return m_description; }
    
    void setHeight( int height );
    int height( ) const { return m_height; }
@@ -96,16 +96,16 @@ public:
    /**
     * Returns the settings as povray command line switches
     */
-   QStringList commandLineSwitches( ) const;
+   TQStringList commandLineSwitches( ) const;
    /**
     * Saves the data
     */
-   void serialize( QDomElement& e ) const;
+   void serialize( TQDomElement& e ) const;
    
 private:
    void init( );
    
-   QString m_description;
+   TQString m_description;
    int m_height, m_width;
    bool m_subSection;
    double m_startRow, m_endRow, m_startColumn, m_endColumn;
@@ -122,7 +122,7 @@ private:
    bool m_alpha;
 };
 
-typedef QPtrList<PMRenderMode> PMRenderModeList;
-typedef QPtrListIterator<PMRenderMode> PMRenderModeListIterator;
+typedef TQPtrList<PMRenderMode> PMRenderModeList;
+typedef TQPtrListIterator<PMRenderMode> PMRenderModeListIterator;
 
 #endif

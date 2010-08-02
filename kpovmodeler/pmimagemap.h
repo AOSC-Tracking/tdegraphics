@@ -68,7 +68,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMImageMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -76,17 +76,17 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmimagemap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmimagemap" ); }
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMImageMapEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /**
     * Gets the bitmap type
@@ -95,7 +95,7 @@ public:
    /**
     * Gets the bitmap file name
     */
-   QString bitmapFile( ) const { return m_bitmapFile; }
+   TQString bitmapFile( ) const { return m_bitmapFile; }
    /**
     * Returns true if filter all is enabled
     */
@@ -127,11 +127,11 @@ public:
    /**
     * Gets the list of indexed filters
     */
-   QValueList<PMPaletteValue> filters( ) const { return m_filters; }
+   TQValueList<PMPaletteValue> filters( ) const { return m_filters; }
    /**
     * Gets the list of indexed transmits
     */
-   QValueList<PMPaletteValue> transmits( ) const { return m_transmits; }
+   TQValueList<PMPaletteValue> transmits( ) const { return m_transmits; }
 
    /**
     * Sets the imagemap type
@@ -139,7 +139,7 @@ public:
    void setBitmapType( PMBitmapType c );
    /**
     * Sets the bitmap file name*/
-   void setBitmapFileName( const QString& c );
+   void setBitmapFileName( const TQString& c );
    /**
     * Enables/Disables Filter All
     */
@@ -171,11 +171,11 @@ public:
    /**
     * Set the list of indexed filters
     */
-   void setFilters( const QValueList<PMPaletteValue>& filters );
+   void setFilters( const TQValueList<PMPaletteValue>& filters );
    /**
     * Set the list of indexed transmits
     */
-   void setTransmits( const QValueList<PMPaletteValue>& transmits );
+   void setTransmits( const TQValueList<PMPaletteValue>& transmits );
    /** */
    virtual void restoreMemento( PMMemento* s );
 private:
@@ -192,7 +192,7 @@ private:
     * ImageMap type
     */
    PMBitmapType m_bitmapType;
-   QString m_bitmapFile;
+   TQString m_bitmapFile;
    bool m_enableFilterAll;
    float m_filterAll;
    bool m_enableTransmitAll;
@@ -200,8 +200,8 @@ private:
    bool m_once;
    PMMapType m_mapType;
    PMInterpolateType m_interpolateType;
-   QValueList<PMPaletteValue> m_filters;
-   QValueList<PMPaletteValue> m_transmits;
+   TQValueList<PMPaletteValue> m_filters;
+   TQValueList<PMPaletteValue> m_transmits;
 
    static PMMetaObject* s_pMetaObject;
 };

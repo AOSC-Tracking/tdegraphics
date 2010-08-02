@@ -19,7 +19,7 @@
 
 // Add header files alphabetically
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -43,14 +43,14 @@
 
 
 namespace {
-    QString getGSVersion( QString fullPathToExec )
+    TQString getGSVersion( TQString fullPathToExec )
     {
-	QString res;
-	QString chkVersion = KProcess::quote(fullPathToExec) + " --version";
-	FILE* p = popen( QFile::encodeName(chkVersion), "r" );
+	TQString res;
+	TQString chkVersion = KProcess::quote(fullPathToExec) + " --version";
+	FILE* p = popen( TQFile::encodeName(chkVersion), "r" );
 	if( p ) {
 	    // FIXME: a badly configured interpreter can hang us
-	    QFile qp;
+	    TQFile qp;
 	    qp.open( IO_ReadOnly, p );
 	    qp.readLine( res, 80 );
 	    qp.close();
@@ -96,18 +96,18 @@ namespace {
      *
      */
 
-    QString recommendSetSafe( QString version )
+    TQString recommendSetSafe( TQString version )
     {
-	if ( version < QString::number( 6.53 ) ) return QString::number( 6.53 );
-	if ( version[ 0 ] == '7' && version < QString::number( 7.04 ) ) return QString::number( 7.05 );
-	return QString::null;
+	if ( version < TQString::number( 6.53 ) ) return TQString::number( 6.53 );
+	if ( version[ 0 ] == '7' && version < TQString::number( 7.04 ) ) return TQString::number( 7.05 );
+	return TQString::null;
     }
     // This function should contain all the gs version specific workarounds.
     void redoGSDetection() 
     {
 	kdDebug(4500) << "kgvconfigdialog.cpp::{unnamed}::redoGSDetection()" << endl;
-	QString version = getGSVersion( Configuration::interpreter() );
-	QString recommended = recommendSetSafe( version );
+	TQString version = getGSVersion( Configuration::interpreter() );
+	TQString recommended = recommendSetSafe( version );
 	if ( !recommended.isNull() ) {
 	    KMessageBox::sorry( 0,
 		    i18n( "Your version of gs (version %1) is too old, since it has security issues "
@@ -117,11 +117,11 @@ namespace {
 		    .arg( version )
 		    .arg( recommended ) );
 	}
-	if ( version < QString::number( 7.00 ) ) 
+	if ( version < TQString::number( 7.00 ) ) 
 	{
-	    QStringList arguments = QStringList::split( ' ', Configuration::antialiasingArguments() );
-	    arguments.remove( QString::fromLatin1( "-dMaxBitmap=10000000" ) );
-	    QString antiAliasArgs = arguments.join( " " );
+	    TQStringList arguments = TQStringList::split( ' ', Configuration::antialiasingArguments() );
+	    arguments.remove( TQString::fromLatin1( "-dMaxBitmap=10000000" ) );
+	    TQString antiAliasArgs = arguments.join( " " );
 
 	    Configuration::setAntialiasingArguments( antiAliasArgs );
 	}
@@ -140,13 +140,13 @@ void  ConfigDialog::showSettings( KGVPart* main ) {
     KConfigDialog* dialog = new KConfigDialog( 0, name,
 	    Configuration::self(), KDialogBase::IconList );
     dialog->addPage( new GeneralSettingsWidget( 0, "general-settings" ),
-	    i18n( "General" ), QString::fromLatin1( "kghostview" ) );
+	    i18n( "General" ), TQString::fromLatin1( "kghostview" ) );
     GSSettingsWidget *gssw = new GSSettingsWidget( 0, "gs-settings" );
-    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), QString::fromLatin1( "pdf" ) );
+    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), TQString::fromLatin1( "pdf" ) );
 
     gssw->setDetectedVersion(Configuration::version());
 
-    QObject::connect( dialog, SIGNAL( settingsChanged() ), main, SLOT( slotConfigurationChanged() ) );
+    TQObject::connect( dialog, TQT_SIGNAL( settingsChanged() ), main, TQT_SLOT( slotConfigurationChanged() ) );
     dialog->show();
 }
 

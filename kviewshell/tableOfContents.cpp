@@ -33,13 +33,13 @@ TocItem::TocItem(TocItem* parent)
 {
 }
 
-TocItem::TocItem(QListView* parent)
+TocItem::TocItem(TQListView* parent)
   : KListViewItem(parent)
 {
 }
 
 
-TableOfContents::TableOfContents(QWidget* parent)
+TableOfContents::TableOfContents(TQWidget* parent)
   : KListView(parent)
 {
   addColumn(i18n("Topic"));
@@ -47,7 +47,7 @@ TableOfContents::TableOfContents(QWidget* parent)
 
   setSorting(-1);
   setRootIsDecorated(true);
-  setSelectionMode(QListView::NoSelection);
+  setSelectionMode(TQListView::NoSelection);
   setResizeMode(AllColumns);
   setColumnWidthMode(0, Manual);
   setColumnWidthMode(1, Manual);
@@ -55,7 +55,7 @@ TableOfContents::TableOfContents(QWidget* parent)
 
   readSettings();
 
-  connect(this, SIGNAL(executed(QListViewItem*)), this, SLOT(itemClicked(QListViewItem*)));
+  connect(this, TQT_SIGNAL(executed(TQListViewItem*)), this, TQT_SLOT(itemClicked(TQListViewItem*)));
 }
 
 TableOfContents::~TableOfContents()
@@ -73,21 +73,21 @@ void TableOfContents::readSettings()
   restoreLayout(KVSPrefs::self()->config(), "tocLayout");
 }
 
-void TableOfContents::setContents(const QPtrList<Bookmark>& bookmarks)
+void TableOfContents::setContents(const TQPtrList<Bookmark>& bookmarks)
 {
   clear();
   addItems(bookmarks);
 }
 
-void TableOfContents::addItems(const QPtrList<Bookmark>& _bookmarks, TocItem* parent)
+void TableOfContents::addItems(const TQPtrList<Bookmark>& _bookmarks, TocItem* parent)
 {
   kdDebug(1223) << "TableOfContents::setContents()" << endl;
   if (_bookmarks.isEmpty())
     return;
   kdDebug(1223) << "Bookmarks are not empty" << endl;
 
-  // Why isn't QPtrList const-correct?
-  QPtrList<Bookmark> bookmarks = _bookmarks;
+  // Why isn't TQPtrList const-correct?
+  TQPtrList<Bookmark> bookmarks = _bookmarks;
   for (Bookmark* current = bookmarks.last(); current; current = bookmarks.prev() ) {
     TocItem* item;
     if (!parent)
@@ -97,7 +97,7 @@ void TableOfContents::addItems(const QPtrList<Bookmark>& _bookmarks, TocItem* pa
     
     item->setText(0, current->bookmarkText);
     if (current->position.page != 0)
-      item->setText(1, QString().setNum(current->position.page));
+      item->setText(1, TQString().setNum(current->position.page));
     else
       item->setText(1, "--");
     item->setAnchor(current->position);
@@ -107,7 +107,7 @@ void TableOfContents::addItems(const QPtrList<Bookmark>& _bookmarks, TocItem* pa
   }
  }
 
-void TableOfContents::itemClicked(QListViewItem* _item)
+void TableOfContents::itemClicked(TQListViewItem* _item)
 {
   TocItem* item = static_cast<TocItem*>(_item);
 

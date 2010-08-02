@@ -139,12 +139,12 @@ void PMRainbow::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMRainbow::description( ) const
+TQString PMRainbow::description( ) const
 {
    return i18n( "rainbow" );
 }
 
-void PMRainbow::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMRainbow::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
    e.setAttribute( "enable_direction", m_enableDirection );
@@ -347,7 +347,7 @@ void PMRainbow::enableFalloffAngle( bool c )
    }
 }
 
-PMDialogEditBase* PMRainbow::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMRainbow::editWidget( TQWidget* parent ) const
 {
    return new PMRainbowEdit( parent );
 }

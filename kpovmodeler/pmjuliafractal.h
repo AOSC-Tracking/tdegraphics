@@ -58,7 +58,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMJuliaFractal( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -66,18 +66,18 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMJuliaFractalEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmjuliafractal" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmjuliafractal" ); }
    /** */
    virtual void restoreMemento( PMMemento* s );
 
@@ -146,10 +146,10 @@ public:
     */
    void setExponent( const PMVector& p );
 
-   static QString functionTypeToString( FunctionType t );
-   static FunctionType stringToFunctionType( const QString& str );
-   static QString algebraTypeToString( AlgebraType t );
-   static AlgebraType stringToAlgebraType( const QString& str );
+   static TQString functionTypeToString( FunctionType t );
+   static FunctionType stringToFunctionType( const TQString& str );
+   static TQString algebraTypeToString( AlgebraType t );
+   static AlgebraType stringToAlgebraType( const TQString& str );
 private:
 
    /**

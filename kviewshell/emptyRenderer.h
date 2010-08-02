@@ -31,9 +31,9 @@ class EmptyRenderer : public DocumentRenderer
   Q_OBJECT
 
 public:
-  EmptyRenderer(QWidget* parent);
+  EmptyRenderer(TQWidget* parent);
 
-  virtual bool setFile(const QString &, const KURL &) { return false; }
+  virtual bool setFile(const TQString &, const KURL &) { return false; }
 
   void drawPage(double res, RenderedDocumentPage* page) { Q_UNUSED(res); Q_UNUSED(page); }
 };

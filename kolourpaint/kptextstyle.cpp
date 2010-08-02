@@ -28,9 +28,9 @@
 
 #include <kptextstyle.h>
 
-#include <qdatastream.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
+#include <tqdatastream.h>
+#include <tqfont.h>
+#include <tqfontmetrics.h>
 
 
 kpTextStyle::kpTextStyle ()
@@ -41,7 +41,7 @@ kpTextStyle::kpTextStyle ()
 {
 }
 
-kpTextStyle::kpTextStyle (const QString &fontFamily,
+kpTextStyle::kpTextStyle (const TQString &fontFamily,
                           int fontSize,
                           bool isBold, bool isItalic,
                           bool isUnderline, bool isStrikeThru,
@@ -62,7 +62,7 @@ kpTextStyle::~kpTextStyle ()
 
 
 // friend
-QDataStream &operator<< (QDataStream &stream, const kpTextStyle &textStyle)
+TQDataStream &operator<< (TQDataStream &stream, const kpTextStyle &textStyle)
 {
     stream << textStyle.m_fontFamily;
     stream << textStyle.m_fontSize;
@@ -78,7 +78,7 @@ QDataStream &operator<< (QDataStream &stream, const kpTextStyle &textStyle)
 }
 
 // friend
-QDataStream &operator>> (QDataStream &stream, kpTextStyle &textStyle)
+TQDataStream &operator>> (TQDataStream &stream, kpTextStyle &textStyle)
 {
     stream >> textStyle.m_fontFamily;
     stream >> textStyle.m_fontSize;
@@ -121,13 +121,13 @@ bool kpTextStyle::operator!= (const kpTextStyle &rhs) const
 
 
 // public
-QString kpTextStyle::fontFamily () const
+TQString kpTextStyle::fontFamily () const
 {
     return m_fontFamily;
 }
 
 // public
-void kpTextStyle::setFontFamily (const QString &f)
+void kpTextStyle::setFontFamily (const TQString &f)
 {
     m_fontFamily = f;
 }
@@ -261,9 +261,9 @@ kpColor kpTextStyle::effectiveBackgroundColor () const
 
 
 // public
-QFont kpTextStyle::font () const
+TQFont kpTextStyle::font () const
 {
-    QFont fnt (m_fontFamily, m_fontSize);
+    TQFont fnt (m_fontFamily, m_fontSize);
     fnt.setBold (m_isBold);
     fnt.setItalic (m_isItalic);
     fnt.setUnderline (m_isUnderline);
@@ -273,7 +273,7 @@ QFont kpTextStyle::font () const
 }
 
 // public
-QFontMetrics kpTextStyle::fontMetrics () const
+TQFontMetrics kpTextStyle::fontMetrics () const
 {
-    return QFontMetrics (font ());
+    return TQFontMetrics (font ());
 }

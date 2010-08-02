@@ -21,13 +21,13 @@
 #ifndef __KCOLORGRID_H__
 #define __KCOLORGRID_H__
 
-#include <qwidget.h>
-#include <qsize.h>
-#include <qrect.h>
+#include <tqwidget.h>
+#include <tqsize.h>
+#include <tqrect.h>
 
 #include "utils.h"
 
-#define KArrayUint QMemArray<uint>
+#define KArrayUint TQMemArray<uint>
 
 class KColorArray : public KArrayUint
 {
@@ -42,7 +42,7 @@ class KColorGrid : public QWidget
 private:
     Q_OBJECT
 public:
-  KColorGrid( QWidget * parent = 0, const char *name = 0, int spacing = 0);
+  KColorGrid( TQWidget * parent = 0, const char *name = 0, int spacing = 0);
   virtual ~KColorGrid() {};
 
   enum GridState { Plain, Shaded };
@@ -64,9 +64,9 @@ public:
 
   virtual void setCellSize( int s );
   virtual int cellSize() { return cellsize; }
-  virtual QSize sizeHint() const;
+  virtual TQSize sizeHint() const;
 
-  void setSize(const QSize s) { setNumRows(s.height()); setNumCols(s.width()); }
+  void setSize(const TQSize s) { setNumRows(s.height()); setNumCols(s.width()); }
 
 public slots:
   //virtual void show();
@@ -77,10 +77,10 @@ signals:
 
 protected:
   void updateCell(int row, int col, bool f);
-  virtual void paintForeground( QPainter* p, QPaintEvent* e);
-  virtual void paintCell( QPainter *p, int row, int col) = 0;
-  virtual void paintEvent(QPaintEvent *);
-  //virtual void resizeEvent(QResizeEvent *);
+  virtual void paintForeground( TQPainter* p, TQPaintEvent* e);
+  virtual void paintCell( TQPainter *p, int row, int col) = 0;
+  virtual void paintEvent(TQPaintEvent *);
+  //virtual void resizeEvent(TQResizeEvent *);
   void setColor(int colNum, uint, bool update = true );
   void updateColors();
   virtual void setNumRows(int);
@@ -91,7 +91,7 @@ protected:
   int getY(int y);
   int findCol(int x) { return getX(x); }
   int getX(int x);
-  const QRect viewRect();
+  const TQRect viewRect();
 
 //private:
   int s, cellsize, totalwidth, totalheight;

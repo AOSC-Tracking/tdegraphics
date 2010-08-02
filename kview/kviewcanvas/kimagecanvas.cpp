@@ -21,11 +21,11 @@
 #include "version.h"
 #include "config/defaults.h"
 
-#include <qcolor.h>
-#include <qimage.h>
-#include <qapplication.h>
-#include <qwmatrix.h>
-#include <qtimer.h>
+#include <tqcolor.h>
+#include <tqimage.h>
+#include <tqapplication.h>
+#include <tqwmatrix.h>
+#include <tqtimer.h>
 
 #include <kpixmap.h>
 #include <kdebug.h>
@@ -43,14 +43,14 @@ typedef KGenericFactory<KImageCanvas> KImageCanvasFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewcanvas,
 		KImageCanvasFactory( "kviewcanvas" ) )
 
-KImageCanvas::KImageCanvas( QWidget * parent, const char * name, const QStringList & )
-	: QScrollView( parent, name, WResizeNoErase | WStaticContents )
+KImageCanvas::KImageCanvas( TQWidget * parent, const char * name, const TQStringList & )
+	: TQScrollView( parent, name, WResizeNoErase | WStaticContents )
 	, m_client( 0 )
 	, m_oldClient( 0 )
 	, m_image( 0 )
 	, m_imageTransformed( 0 )
 	, m_pixmap( 0 )
-	, m_pTimer( new QTimer( this, "KImageCanvas/Timer" ) )
+	, m_pTimer( new TQTimer( this, "KImageCanvas/Timer" ) )
 	, m_maxsize( Defaults::maxSize )
 	, m_minsize( Defaults::minSize )
 	, m_currentsize( 0, 0 )
@@ -66,22 +66,22 @@ KImageCanvas::KImageCanvas( QWidget * parent, const char * name, const QStringLi
 	, m_iBlendTimerId( 0 )
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
-	setFrameStyle( QFrame::NoFrame );
-	setResizePolicy( QScrollView::Manual );
+	setFrameStyle( TQFrame::NoFrame );
+	setResizePolicy( TQScrollView::Manual );
 	setMinimumSize( 0, 0 );
 	setBgColor( Defaults::bgColor );
 
-	connect( this, SIGNAL( imageChanged() ), this, SLOT( slotImageChanged() ) );
-	connect( m_pTimer, SIGNAL( timeout() ), this, SLOT( hideCursor() ) );
+	connect( this, TQT_SIGNAL( imageChanged() ), this, TQT_SLOT( slotImageChanged() ) );
+	connect( m_pTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( hideCursor() ) );
 
 	KSettings::Dispatcher::self()->registerInstance(
 			KImageCanvasFactory::instance(), this,
-			SLOT( loadSettings() ) );
+			TQT_SLOT( loadSettings() ) );
 
 	viewport()->setFocusProxy( this );
 	clear();
 
-	QWidget::setMouseTracking( true );
+	TQWidget::setMouseTracking( true );
 	viewport()->setMouseTracking( true );
 	m_cursor.setShape( Qt::CrossCursor );
 	viewport()->setCursor( m_cursor );
@@ -97,7 +97,7 @@ KImageCanvas::~KImageCanvas()
 	delete m_pixmap; m_pixmap = 0;
 }
 
-void KImageCanvas::setBgColor( const QColor & color )
+void KImageCanvas::setBgColor( const TQColor & color )
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	viewport()->setPaletteBackgroundColor( color );
@@ -105,7 +105,7 @@ void KImageCanvas::setBgColor( const QColor & color )
 		m_client->setPaletteBackgroundColor( color );
 }
 
-const QColor & KImageCanvas::bgColor() const
+const TQColor & KImageCanvas::bgColor() const
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	return viewport()->paletteBackgroundColor();
@@ -120,38 +120,38 @@ int KImageCanvas::imageDepth() const
 	return m_image->depth();
 }
 
-QSize KImageCanvas::imageSize() const
+TQSize KImageCanvas::imageSize() const
 {
 	//kdDebug( 4620 ) << k_funcinfo << endl;
 	if( ! m_image )
-		return QSize( 0, 0 );
+		return TQSize( 0, 0 );
 
-	return m_matrix.isIdentity() ? m_image->size() : m_matrix.mapRect( QRect( QPoint(), m_image->size() ) ).size();
+	return m_matrix.isIdentity() ? m_image->size() : m_matrix.mapRect( TQRect( TQPoint(), m_image->size() ) ).size();
 }
 
-QSize KImageCanvas::currentSize() const
+TQSize KImageCanvas::currentSize() const
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	if( ! m_image )
-		return QSize( 0, 0 );
+		return TQSize( 0, 0 );
 
 	return m_currentsize;
 }
 
-const QImage * KImageCanvas::image() const
+const TQImage * KImageCanvas::image() const
 {
 	if( m_imageTransformed )
 		return m_imageTransformed;
 	return m_image;
 }
 
-QRect KImageCanvas::selection() const
+TQRect KImageCanvas::selection() const
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	if( m_client )
 		return m_selection;
 	else
-		return QRect();
+		return TQRect();
 }
 
 void KImageCanvas::setCentered( bool centered )
@@ -164,13 +164,13 @@ void KImageCanvas::setCentered( bool centered )
 	}
 }
 
-void KImageCanvas::setImage( const QImage & newimage )
+void KImageCanvas::setImage( const TQImage & newimage )
 {
 	bool emitHasImage = m_image ? false : true;
 	m_matrix.reset();
 	matrixChanged();
 	delete m_image;
-	m_image = new QImage( newimage );
+	m_image = new TQImage( newimage );
 	m_bNewImage = true;
 	// don't emit the signal here - call the slot directly
 	slotImageChanged();
@@ -181,14 +181,14 @@ void KImageCanvas::setImage( const QImage & newimage )
 		emit hasImage( true );
 }
 
-void KImageCanvas::setImage( const QImage & newimage, const QSize & size )
+void KImageCanvas::setImage( const TQImage & newimage, const TQSize & size )
 {
 	kdDebug( 4620 ) << k_funcinfo << size << endl;
 	bool emitHasImage = m_image ? false : true;
 	m_matrix.reset();
 	matrixChanged();
 	delete m_image;
-	m_image = new QImage( newimage );
+	m_image = new TQImage( newimage );
 	m_bNewImage = true;
 	// don't emit the signal here - call the slot directly
 	slotImageChanged();
@@ -214,7 +214,7 @@ void KImageCanvas::setZoom( double zoom )
 	}
 }
 
-void KImageCanvas::boundImageTo( const QSize & size )
+void KImageCanvas::boundImageTo( const TQSize & size )
 {
 	bool keepAspectRatio = m_keepaspectratio;
 	m_keepaspectratio = true;
@@ -222,7 +222,7 @@ void KImageCanvas::boundImageTo( const QSize & size )
 	m_keepaspectratio = keepAspectRatio;
 }
 
-void KImageCanvas::setMaximumImageSize( const QSize & maxsize )
+void KImageCanvas::setMaximumImageSize( const TQSize & maxsize )
 {
 	kdDebug( 4620 ) << k_funcinfo << maxsize << endl;
 	if( ( ! m_minsize.isEmpty() ) &&
@@ -237,7 +237,7 @@ void KImageCanvas::setMaximumImageSize( const QSize & maxsize )
 	resizeImage( m_currentsize );
 }
 
-void KImageCanvas::setMinimumImageSize( const QSize & minsize )
+void KImageCanvas::setMinimumImageSize( const TQSize & minsize )
 {
 	kdDebug( 4620 ) << k_funcinfo << minsize << endl;
 	if( ( ! m_maxsize.isEmpty() ) &&
@@ -252,13 +252,13 @@ void KImageCanvas::setMinimumImageSize( const QSize & minsize )
 	resizeImage( m_currentsize );
 }
 
-void KImageCanvas::resizeImage( const QSize & newsize )
+void KImageCanvas::resizeImage( const TQSize & newsize )
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	if( m_image == 0 )
 		return;
 
-	QSize size = newsize;
+	TQSize size = newsize;
 
 	// check that it fits into min and max sizes
 	checkBounds( size );
@@ -301,7 +301,7 @@ unsigned int KImageCanvas::numOfBlendEffects() const
 	return Defaults::numOfBlendEffects;
 }
 
-QString KImageCanvas::blendEffectDescription( unsigned int idx ) const
+TQString KImageCanvas::blendEffectDescription( unsigned int idx ) const
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	switch( idx )
@@ -321,14 +321,14 @@ QString KImageCanvas::blendEffectDescription( unsigned int idx ) const
 			return i18n( Defaults::blendEffectDescription[ 4 ] );
 	}
 	kdError( 4620 ) << "Effect description for effect with index " << idx << " doesn't exist\n";
-	return QString::null;
+	return TQString::null;
 }
 
-bool KImageCanvas::eventFilter( QObject * obj, QEvent * ev )
+bool KImageCanvas::eventFilter( TQObject * obj, TQEvent * ev )
 {
-	if( ( obj == m_client || obj == m_oldClient ) && ev->type() == QEvent::MouseMove )
-		mouseMoveEvent( static_cast<QMouseEvent*>( ev ) );
-	return QScrollView::eventFilter( obj, ev );
+	if( ( obj == m_client || obj == m_oldClient ) && ev->type() == TQEvent::MouseMove )
+		mouseMoveEvent( static_cast<TQMouseEvent*>( ev ) );
+	return TQScrollView::eventFilter( obj, ev );
 }
 
 void KImageCanvas::setFastScale( bool fastscale )
@@ -370,7 +370,7 @@ void KImageCanvas::flipHorizontal( bool change )
 
 	if( change )
 	{
-		QWMatrix matrix( 1.0F, 0.0F, 0.0F, -1.0F, 0.0F, 0.0F );
+		TQWMatrix matrix( 1.0F, 0.0F, 0.0F, -1.0F, 0.0F, 0.0F );
 		*m_image = m_image->xForm( matrix );
 		emit imageChanged();
 	}
@@ -391,7 +391,7 @@ void KImageCanvas::flipVertical( bool change )
 
 	if( change )
 	{
-		QWMatrix matrix( -1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F );
+		TQWMatrix matrix( -1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F );
 		*m_image = m_image->xForm( matrix );
 		emit imageChanged();
 	}
@@ -412,7 +412,7 @@ void KImageCanvas::rotate( double a, bool change )
 
 	if( change )
 	{
-		QWMatrix matrix;
+		TQWMatrix matrix;
 		matrix.rotate( a );
 		*m_image = m_image->xForm( matrix );
 		emit imageChanged();
@@ -427,13 +427,13 @@ void KImageCanvas::rotate( double a, bool change )
 	updateImage();
 }
 
-void KImageCanvas::checkBounds( QSize & newsize )
+void KImageCanvas::checkBounds( TQSize & newsize )
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	if( m_keepaspectratio )
 	{
 		// check that the new size has the same aspect ratio the original image had
-		QSize origsize = imageSize();
+		TQSize origsize = imageSize();
 		double x1 = double( origsize.height() ) / double( newsize.height() );
 		double x2 = double( origsize.width() ) / double( newsize.width() );
 		if( ( newsize * x1 != origsize ) || ( newsize * x2 != origsize ) )
@@ -485,13 +485,13 @@ void KImageCanvas::checkBounds( QSize & newsize )
 	}
 }
 
-void KImageCanvas::zoomFromSize( const QSize & newsize )
+void KImageCanvas::zoomFromSize( const TQSize & newsize )
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	if( ! m_image )
 		return;
 
-	QSize originalsize = imageSize();
+	TQSize originalsize = imageSize();
 	double widthzoom = double( newsize.width() ) / double( originalsize.width() );
 	double heightzoom = double( newsize.height() ) / double( originalsize.height() );
 	double zoom = ( widthzoom + heightzoom ) / 2;
@@ -508,7 +508,7 @@ void KImageCanvas::sizeFromZoom( double zoom )
 	if( ! m_image )
 		return;
 
-	QSize newsize = zoom * imageSize();
+	TQSize newsize = zoom * imageSize();
 	kdDebug( 4620 ) << "change size from " << imageSize() << " to " << newsize << endl;
 	resizeImage( newsize );
 }
@@ -517,7 +517,7 @@ void KImageCanvas::updateImage()
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	if( ! m_bImageUpdateScheduled )
-		QTimer::singleShot( 0, this, SLOT( slotUpdateImage() ) );
+		TQTimer::singleShot( 0, this, TQT_SLOT( slotUpdateImage() ) );
 	m_bImageUpdateScheduled = true;
 }
 
@@ -532,7 +532,7 @@ void KImageCanvas::slotUpdateImage()
 	if( m_bImageChanged || m_bSizeChanged || m_bMatrixChanged )
 	{
 		kdDebug( 4620 ) << "actually updating the image now" << endl;
-		QApplication::setOverrideCursor( WaitCursor );
+		TQApplication::setOverrideCursor( WaitCursor );
 		if( m_bNewImage || ! m_client )
 		{
 			finishNewClient();
@@ -543,14 +543,14 @@ void KImageCanvas::slotUpdateImage()
 
 		if( m_bSizeChanged || m_bNewImage )
 		{
-			QSize sh = m_client->sizeHint();
+			TQSize sh = m_client->sizeHint();
 			if( ! sh.isValid() )
-				sh = QSize( 0, 0 );
+				sh = TQSize( 0, 0 );
 			m_client->resize( sh );
 			resizeContents( sh.width(), sh.height() );
 			center();
 		}
-		QRect drawRect = m_client->drawRect();
+		TQRect drawRect = m_client->drawRect();
 		switch( m_iBlendEffect )
 		{
 			case NoBlending:
@@ -576,7 +576,7 @@ void KImageCanvas::slotUpdateImage()
 		}
 		m_client->update();
 		m_iBlendTimerId = startTimer( 5 );
-		QApplication::restoreOverrideCursor();
+		TQApplication::restoreOverrideCursor();
 	}
 
 	m_bNewImage = false;
@@ -585,7 +585,7 @@ void KImageCanvas::slotUpdateImage()
 	m_bMatrixChanged = false;
 }
 
-void KImageCanvas::mouseMoveEvent( QMouseEvent * )
+void KImageCanvas::mouseMoveEvent( TQMouseEvent * )
 {
 	if( m_cursor.shape() == Qt::BlankCursor )
 	{
@@ -598,21 +598,21 @@ void KImageCanvas::mouseMoveEvent( QMouseEvent * )
 }
 
 
-void KImageCanvas::resizeEvent( QResizeEvent * ev )
+void KImageCanvas::resizeEvent( TQResizeEvent * ev )
 {
 	kdDebug( 4620 ) << "KImageCanvas resized to " << ev->size() << endl;
-	QScrollView::resizeEvent( ev );
+	TQScrollView::resizeEvent( ev );
 	center();
 }
 
-void KImageCanvas::contentsMousePressEvent( QMouseEvent * ev )
+void KImageCanvas::contentsMousePressEvent( TQMouseEvent * ev )
 {
 	if ( ev->button() == RightButton )
 		emit contextPress( ev->globalPos() );
-	QScrollView::contentsMousePressEvent( ev );
+	TQScrollView::contentsMousePressEvent( ev );
 }
 
-void KImageCanvas::contentsWheelEvent( QWheelEvent * ev )
+void KImageCanvas::contentsWheelEvent( TQWheelEvent * ev )
 {
 	//kdDebug( 4620 ) << k_funcinfo << endl;
     // Ctrl+Wheelmouse changes the zoom.
@@ -673,10 +673,10 @@ void KImageCanvas::contentsWheelEvent( QWheelEvent * ev )
 		setFastScale( oldscale );
     }
     else
-        QScrollView::contentsWheelEvent( ev );
+        TQScrollView::contentsWheelEvent( ev );
 }
 
-void KImageCanvas::keyPressEvent( QKeyEvent * ev )
+void KImageCanvas::keyPressEvent( TQKeyEvent * ev )
 {
 	//kdDebug( 4620 ) << k_funcinfo << endl;
 	switch( ev->key() )
@@ -711,11 +711,11 @@ void KImageCanvas::keyPressEvent( QKeyEvent * ev )
 	}
 }
 
-void KImageCanvas::timerEvent( QTimerEvent * ev )
+void KImageCanvas::timerEvent( TQTimerEvent * ev )
 {
 	if( ev->timerId() == m_iBlendTimerId )
 	{
-		QRect drawRect = m_client->drawRect();
+		TQRect drawRect = m_client->drawRect();
 		switch( m_iBlendEffect )
 		{
 			case NoBlending:
@@ -795,7 +795,7 @@ const KPixmap KImageCanvas::pixmap()
 		{
 			delete m_imageTransformed;
 			// we create a new image transformed by the matrix
-			m_imageTransformed = new QImage( m_matrix.isIdentity() ? *m_image : m_image->xForm( m_matrix ) );
+			m_imageTransformed = new TQImage( m_matrix.isIdentity() ? *m_image : m_image->xForm( m_matrix ) );
 			kdDebug( 4620 ) << "Size of m_image: " << m_image->size() << endl;
 			kdDebug( 4620 ) << "Size of m_imageTransformed: " << m_imageTransformed->size() << endl;
 		}
@@ -806,7 +806,7 @@ const KPixmap KImageCanvas::pixmap()
 	if( m_fastscale )
 	{
 		// fast scaling is needed so we need to scale now
-		QWMatrix matrix( m_matrix );
+		TQWMatrix matrix( m_matrix );
 		matrix.scale( m_zoom, m_zoom );
 		if( ! matrix.isIdentity() )
 			return m_pixmap->xForm( matrix );
@@ -832,10 +832,10 @@ void KImageCanvas::loadSettings()
 
 	setBgColor( cfgGroup.readColorEntry( "Background Color", &bgColor() ) );
 
-	setMinimumImageSize( QSize( cfgGroup.readNumEntry( "Minimum Width",
+	setMinimumImageSize( TQSize( cfgGroup.readNumEntry( "Minimum Width",
 					minimumImageSize().width() ), cfgGroup.readNumEntry(
 					"Minimum Height", minimumImageSize().height() ) ) );
-	setMaximumImageSize( QSize( cfgGroup.readNumEntry( "Maximum Width",
+	setMaximumImageSize( TQSize( cfgGroup.readNumEntry( "Maximum Width",
 					maximumImageSize().width() ), cfgGroup.readNumEntry(
 					"Maximum Height", maximumImageSize().height() ) ) );
 
@@ -845,7 +845,7 @@ void KImageCanvas::loadSettings()
 	m_vEffects.clear();
 	for( unsigned int i = 1; i <= numOfBlendEffects(); ++i )
 	{
-		if( blendConfig.readBoolEntry( QString::number( i ), false ) )
+		if( blendConfig.readBoolEntry( TQString::number( i ), false ) )
 			m_vEffects.push_back( i );
 	}
 	// and now tell the canvas what blend effect to use
@@ -853,7 +853,7 @@ void KImageCanvas::loadSettings()
 	*/
 }
 
-void KImageCanvas::selected( const QRect & rect )
+void KImageCanvas::selected( const TQRect & rect )
 {
 	//kdDebug( 4620 ) << k_funcinfo << rect << endl;
 	m_selection = rect;
@@ -868,9 +868,9 @@ void KImageCanvas::selected( const QRect & rect )
 	emit selectionChanged( m_selection );
 }
 
-void KImageCanvas::mapCursorPos( const QPoint & pos )
+void KImageCanvas::mapCursorPos( const TQPoint & pos )
 {
-	QPoint mapped( static_cast<int>( ( pos.x() + 0.5 ) / m_zoom ), static_cast<int>( ( pos.y() + 0.5 ) / m_zoom ) );
+	TQPoint mapped( static_cast<int>( ( pos.x() + 0.5 ) / m_zoom ), static_cast<int>( ( pos.y() + 0.5 ) / m_zoom ) );
 	//kdDebug( 4620 ) << k_funcinfo << pos << " -> " << mapped << endl;
 	emit cursorPos( mapped );
 }
@@ -935,15 +935,15 @@ KImageHolder * KImageCanvas::createNewClient()
 	client->setMouseTracking( true );
 	client->installEventFilter( this );
 	setFocusProxy( client );
-	client->setFocusPolicy( QWidget::StrongFocus );
+	client->setFocusPolicy( TQWidget::StrongFocus );
 	client->setFocus();
 
 	addChild( client, 0, 0 );
 
-	connect( client, SIGNAL( contextPress( const QPoint& ) ), SIGNAL( contextPress( const QPoint& ) ) );
-	connect( client, SIGNAL( cursorPos( const QPoint & ) ), SLOT( mapCursorPos( const QPoint & ) ) );
-	connect( client, SIGNAL( selected( const QRect & ) ), SLOT( selected( const QRect & ) ) );
-	connect( client, SIGNAL( wannaScroll( int, int ) ), SLOT( scrollBy( int, int ) ) );
+	connect( client, TQT_SIGNAL( contextPress( const TQPoint& ) ), TQT_SIGNAL( contextPress( const TQPoint& ) ) );
+	connect( client, TQT_SIGNAL( cursorPos( const TQPoint & ) ), TQT_SLOT( mapCursorPos( const TQPoint & ) ) );
+	connect( client, TQT_SIGNAL( selected( const TQRect & ) ), TQT_SLOT( selected( const TQRect & ) ) );
+	connect( client, TQT_SIGNAL( wannaScroll( int, int ) ), TQT_SLOT( scrollBy( int, int ) ) );
 
 	return client;
 }

@@ -13,7 +13,7 @@ class KViewTemplate : public KParts::Plugin
 {
 	Q_OBJECT
 public:
-	KViewTemplate( QObject* parent, const char* name, const QStringList & );
+	KViewTemplate( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewTemplate();
 
 private slots:

@@ -189,14 +189,14 @@ PMTriangle::~PMTriangle( )
 {
 }
 
-QString PMTriangle::description( ) const
+TQString PMTriangle::description( ) const
 {
    if( m_smooth )
       return i18n( "smooth triangle" );
    return i18n( "triangle" );
 }
 
-void PMTriangle::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMTriangle::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "point0", m_point[0].serializeXML( ) );
    e.setAttribute( "point1", m_point[1].serializeXML( ) );
@@ -345,7 +345,7 @@ void PMTriangle::enableUV( bool yes )
    }
 }
 
-PMDialogEditBase* PMTriangle::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMTriangle::editWidget( TQWidget* parent ) const
 {
    return new PMTriangleEdit( parent );
 }

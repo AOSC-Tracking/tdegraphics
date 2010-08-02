@@ -20,14 +20,14 @@
 #include "pmtriangle.h"
 #include "pmvectoredit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMTriangleEdit::PMTriangleEdit( QWidget* parent, const char* name )
+PMTriangleEdit::PMTriangleEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -39,47 +39,47 @@ void PMTriangleEdit::createTopWidgets( )
 
    int i;
 
-   QHBoxLayout *hl = new QHBoxLayout( topLayout( ) );
-   m_pSmooth = new QCheckBox( i18n( "Smooth" ), this );
+   TQHBoxLayout *hl = new TQHBoxLayout( topLayout( ) );
+   m_pSmooth = new TQCheckBox( i18n( "Smooth" ), this );
    hl->addWidget( m_pSmooth );
-   connect( m_pSmooth, SIGNAL( toggled( bool ) ),
-            SLOT( slotSmoothChecked( bool ) ) );
+   connect( m_pSmooth, TQT_SIGNAL( toggled( bool ) ),
+            TQT_SLOT( slotSmoothChecked( bool ) ) );
 
-   m_pUVEnabled = new QCheckBox( i18n( "UV vectors" ), this );
+   m_pUVEnabled = new TQCheckBox( i18n( "UV vectors" ), this );
    hl->addWidget( m_pUVEnabled );
-   connect( m_pUVEnabled, SIGNAL( toggled( bool ) ),
-            SLOT( slotUVVectorsChecked( bool ) ) );
+   connect( m_pUVEnabled, TQT_SIGNAL( toggled( bool ) ),
+            TQT_SLOT( slotUVVectorsChecked( bool ) ) );
 
-   QGridLayout* gl = new QGridLayout( topLayout( ), 9, 2 );
+   TQGridLayout* gl = new TQGridLayout( topLayout( ), 9, 2 );
 
    for( i = 0; i < 3; i++ )
    {
       m_pPoint[i] = new PMVectorEdit( "x", "y", "z", this );
-      gl->addWidget( new QLabel( i18n( "Point %1:" ).arg( i+1 ), this ),
+      gl->addWidget( new TQLabel( i18n( "Point %1:" ).arg( i+1 ), this ),
                      i * 3, 0 );
       gl->addWidget( m_pPoint[i], i * 3, 1 );
-      connect( m_pPoint[i], SIGNAL( dataChanged( ) ),
-               SIGNAL( dataChanged( ) ) );
+      connect( m_pPoint[i], TQT_SIGNAL( dataChanged( ) ),
+               TQT_SIGNAL( dataChanged( ) ) );
 
       m_pNormal[i] = new PMVectorEdit( "x", "y", "z", this );
-      m_pNormalLabel[i] = new QLabel( i18n( "Normal %1:" ).arg( i+1 ), this );
+      m_pNormalLabel[i] = new TQLabel( i18n( "Normal %1:" ).arg( i+1 ), this );
       gl->addWidget( m_pNormalLabel[i], i * 3 + 1, 0 );
       gl->addWidget( m_pNormal[i], i * 3 + 1, 1 );
-      connect( m_pNormal[i], SIGNAL( dataChanged( ) ),
-               SIGNAL( dataChanged( ) ) );
+      connect( m_pNormal[i], TQT_SIGNAL( dataChanged( ) ),
+               TQT_SIGNAL( dataChanged( ) ) );
 
       m_pUVVector[i] = new PMVectorEdit( "u", "v", this );
-      m_pUVVectorLabel[i] = new QLabel( i18n( "UV vector %1:" ).arg( i+1 ), this );
+      m_pUVVectorLabel[i] = new TQLabel( i18n( "UV vector %1:" ).arg( i+1 ), this );
       gl->addWidget( m_pUVVectorLabel[i], i * 3 + 2,  0 );
       gl->addWidget( m_pUVVector[i], i * 3 + 2, 1 );
-      connect( m_pUVVector[i], SIGNAL( dataChanged( ) ),
-               SIGNAL( dataChanged( ) ) );
+      connect( m_pUVVector[i], TQT_SIGNAL( dataChanged( ) ),
+               TQT_SIGNAL( dataChanged( ) ) );
    }
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pMirror = new QPushButton( i18n( "Invert Normal Vectors" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pMirror = new TQPushButton( i18n( "Invert Normal Vectors" ), this );
    hl->addWidget( m_pMirror );
    hl->addStretch( 1 );
-   connect( m_pMirror, SIGNAL( clicked( ) ), SLOT( slotInvertNormals( ) ) );
+   connect( m_pMirror, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotInvertNormals( ) ) );
 }
 
 void PMTriangleEdit::displayObject( PMObject* o )

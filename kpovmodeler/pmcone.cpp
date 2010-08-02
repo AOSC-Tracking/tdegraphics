@@ -75,12 +75,12 @@ PMCone::~PMCone( )
 {
 }
 
-QString PMCone::description( ) const
+TQString PMCone::description( ) const
 {
    return i18n( "cone" );
 }
 
-void PMCone::serialize( QDomElement & e, QDomDocument & doc ) const
+void PMCone::serialize( TQDomElement & e, TQDomDocument & doc ) const
 {
    e.setAttribute( "end_a", m_end1.serializeXML( ) );
    e.setAttribute( "end_b", m_end2.serializeXML( ) );
@@ -176,7 +176,7 @@ void PMCone::setOpen( bool op )
    }
 }
 
-PMDialogEditBase* PMCone::editWidget( QWidget * parent ) const
+PMDialogEditBase* PMCone::editWidget( TQWidget * parent ) const
 {
     return new PMConeEdit( parent );
 }

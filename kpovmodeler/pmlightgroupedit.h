@@ -27,7 +27,7 @@
 #include "pmsolidobjectedit.h"
 
 class PMLightGroup;
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMLightGroup
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMLightGroupEdit with parent and name
     */
-   PMLightGroupEdit( QWidget* parent, const char* name = 0 );
+   PMLightGroupEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -57,7 +57,7 @@ protected slots:
 private:
    PMLightGroup* m_pDisplayedObject;
 
-   QCheckBox* m_pGlobalLights;
+   TQCheckBox* m_pGlobalLights;
 };
 
 

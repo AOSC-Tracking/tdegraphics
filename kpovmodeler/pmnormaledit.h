@@ -27,7 +27,7 @@
 #include "pmtexturebaseedit.h"
 
 class PMNormal;
-class QCheckBox;
+class TQCheckBox;
 class PMFloatEdit;
 
 /**
@@ -41,7 +41,7 @@ public:
    /**
     * Creates a PMNormalEdit with parent and name
     */
-   PMNormalEdit( QWidget* parent, const char* name = 0 );
+   PMNormalEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -60,10 +60,10 @@ protected slots:
 private:
    PMNormal* m_pDisplayedObject;
 
-   QCheckBox* m_pBumpSizeCheck;
+   TQCheckBox* m_pBumpSizeCheck;
    PMFloatEdit* m_pBumpSizeEdit;
    PMFloatEdit* m_pAccuracy;
-   QCheckBox* m_pUVMapping;
+   TQCheckBox* m_pUVMapping;
 };
 
 

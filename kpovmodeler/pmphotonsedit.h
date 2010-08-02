@@ -28,8 +28,8 @@
 
 class PMPhotons;
 class PMFloatEdit;
-class QCheckBox;
-class QLabel;
+class TQCheckBox;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMPhotons.
@@ -42,7 +42,7 @@ public:
    /**
     * Creates a PMPhotonsEdit with parent and name
     */
-   PMPhotonsEdit( QWidget* parent, const char* name = 0 );
+   PMPhotonsEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -64,15 +64,15 @@ protected slots:
 private:
    PMPhotons* m_pDisplayedObject;
 
-   QWidget* m_pLayoutWidget;
-   QCheckBox* m_pTarget;
+   TQWidget* m_pLayoutWidget;
+   TQCheckBox* m_pTarget;
    PMFloatEdit* m_pSpacingMulti;
-   QLabel* m_pSpacingMultiLabel;
-   QCheckBox* m_pRefraction;
-   QCheckBox* m_pReflection;
-   QCheckBox* m_pCollect;
-   QCheckBox* m_pPassThrough;
-   QCheckBox* m_pAreaLight;
+   TQLabel* m_pSpacingMultiLabel;
+   TQCheckBox* m_pRefraction;
+   TQCheckBox* m_pReflection;
+   TQCheckBox* m_pCollect;
+   TQCheckBox* m_pPassThrough;
+   TQCheckBox* m_pAreaLight;
 };
 
 

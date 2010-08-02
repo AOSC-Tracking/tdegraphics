@@ -30,8 +30,8 @@ class PMInterior;
 class PMIntEdit;
 class PMFloatEdit;
 class PMColorEdit;
-class QCheckBox;
-class QLabel;
+class TQCheckBox;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMInterior
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMInteriorEdit with parent and name
     */
-   PMInteriorEdit( QWidget* parent, const char* name = 0 );
+   PMInteriorEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -73,12 +73,12 @@ private:
    PMIntEdit* m_pDispSamplesEdit;
    PMFloatEdit* m_pFadeDistanceEdit;
    PMFloatEdit* m_pFadePowerEdit;
-   QCheckBox* m_pEnableIorEdit;
-   QCheckBox* m_pEnableCausticsEdit;
-   QCheckBox* m_pEnableDispersionEdit;
-   QCheckBox* m_pEnableDispSamplesEdit;
-   QCheckBox* m_pEnableFadeDistanceEdit;
-   QCheckBox* m_pEnableFadePowerEdit;
+   TQCheckBox* m_pEnableIorEdit;
+   TQCheckBox* m_pEnableCausticsEdit;
+   TQCheckBox* m_pEnableDispersionEdit;
+   TQCheckBox* m_pEnableDispSamplesEdit;
+   TQCheckBox* m_pEnableFadeDistanceEdit;
+   TQCheckBox* m_pEnableFadePowerEdit;
 };
 
 

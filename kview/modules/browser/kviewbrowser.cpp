@@ -20,7 +20,7 @@
 #include "kviewbrowser.h"
 #include "kmyfileitemlist.h"
 
-#include <qcursor.h>
+#include <tqcursor.h>
 
 #include <kdirlister.h>
 #include <kaction.h>
@@ -36,7 +36,7 @@
 typedef KGenericFactory<KViewBrowser> KViewBrowserFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_browserplugin, KViewBrowserFactory( "kviewbrowserplugin" ) )
 
-KViewBrowser::KViewBrowser( QObject* parent, const char* name, const QStringList & )
+KViewBrowser::KViewBrowser( TQObject* parent, const char* name, const TQStringList & )
 	: Plugin( parent, name )
 	, m_pDirLister( 0 )
 	, m_pFileItemList( 0 )
@@ -45,9 +45,9 @@ KViewBrowser::KViewBrowser( QObject* parent, const char* name, const QStringList
 	m_pViewer = static_cast<KImageViewer::Viewer *>( parent );
 	if( m_pViewer )
 	{
-		m_paBack    = KStdAction::back   ( this, SLOT( slotBack()    ), actionCollection(), "previous_image" );
+		m_paBack    = KStdAction::back   ( this, TQT_SLOT( slotBack()    ), actionCollection(), "previous_image" );
 		m_paBack->setShortcut( SHIFT+Key_Left );
-		m_paForward = KStdAction::forward( this, SLOT( slotForward() ), actionCollection(), "next_image"     );
+		m_paForward = KStdAction::forward( this, TQT_SLOT( slotForward() ), actionCollection(), "next_image"     );
 		m_paForward->setShortcut( SHIFT+Key_Right );
 		m_pExtension = m_pViewer->browserExtension();
 	}
@@ -156,13 +156,13 @@ void KViewBrowser::setupDirLister()
 		m_pDirLister = new KDirLister();
 		m_pDirLister->setMimeFilter( KImageIO::mimeTypes( KImageIO::Reading ) );
 		m_pDirLister->setShowingDotFiles( true );
-		connect( m_pDirLister, SIGNAL( newItems( const KFileItemList & ) ), SLOT( slotNewItems( const KFileItemList & ) ) );
-		connect( m_pDirLister, SIGNAL( deleteItem( KFileItem * ) ), SLOT( slotDeleteItem( KFileItem * ) ) );
+		connect( m_pDirLister, TQT_SIGNAL( newItems( const KFileItemList & ) ), TQT_SLOT( slotNewItems( const KFileItemList & ) ) );
+		connect( m_pDirLister, TQT_SIGNAL( deleteItem( KFileItem * ) ), TQT_SLOT( slotDeleteItem( KFileItem * ) ) );
 	}
 	if( m_pDirLister->url() != KURL( m_pViewer->url().directory( true, false ) ) )
 	{
-		QApplication::setOverrideCursor( WaitCursor );
-		QString url = m_pViewer->url().prettyURL();
+		TQApplication::setOverrideCursor( WaitCursor );
+		TQString url = m_pViewer->url().prettyURL();
 		int pos = url.findRev( "/" );
 		url = url.left( (unsigned int)pos );
 		kdDebug( 4630 ) << "open KDirLister for " << url << endl;
@@ -171,7 +171,7 @@ void KViewBrowser::setupDirLister()
 			kapp->processEvents();
 		//while( ! m_pFileItemList )
 			//kapp->processEvents();
-		QApplication::restoreOverrideCursor();
+		TQApplication::restoreOverrideCursor();
 	}
 }
 

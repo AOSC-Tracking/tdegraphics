@@ -20,11 +20,11 @@
 #include "pmtranslate.h"
 #include "pmvectoredit.h"
 
-#include <qlayout.h>
+#include <tqlayout.h>
 #include <klocale.h>
 
 
-PMTranslateEdit::PMTranslateEdit( QWidget* parent, const char* name )
+PMTranslateEdit::PMTranslateEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,7 +37,7 @@ void PMTranslateEdit::createTopWidgets( )
    m_pVector = new PMVectorEdit( "x", "y", "z", this );
    topLayout( )->addWidget( m_pVector );
 
-   connect( m_pVector, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pVector, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMTranslateEdit::displayObject( PMObject* o )

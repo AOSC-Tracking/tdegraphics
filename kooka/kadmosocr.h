@@ -31,18 +31,18 @@
 #ifndef __KADMOS_OCR_
 #define __KADMOS_OCR_
 
-#include <qobject.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqstring.h>
 
 #include "config.h"
 
 #ifdef HAVE_KADMOS
 /* class declarations */
-class QImage;
-class QPixmap;
-class QColor;
-class QStringList;
-class QRect;
+class TQImage;
+class TQPixmap;
+class TQColor;
+class TQStringList;
+class TQRect;
 
 
 class ocrWord;
@@ -53,7 +53,7 @@ namespace Kadmos {
 /* include files */
 
 #include "kadmos.h"
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 /* ---------------------------------------- REP ---------------------------------------- */
 //! Maximum number of lines in a paragraph
@@ -91,8 +91,8 @@ namespace Kadmos {
         /**
           @param Image is an image object
         */
-        KADMOS_ERROR SetImage(QImage* Image);
-        KADMOS_ERROR SetImage( const QString );
+        KADMOS_ERROR SetImage(TQImage* Image);
+        KADMOS_ERROR SetImage( const TQString );
         int GetMaxLine();
 
         ocrWordList getLineWords( int line );
@@ -100,7 +100,7 @@ namespace Kadmos {
         const char* RepTextLine(int Line, unsigned char RejectLevel=128,
                                 int RejectChar='~', long Format=TEXT_FORMAT_ANSI);
 
-        void analyseLine(int, QPixmap* );
+        void analyseLine(int, TQPixmap* );
         /** Enable/disable noise reduction
           @param TRUE(enable)/FALSE(disable) noise reduction
         */
@@ -112,28 +112,28 @@ namespace Kadmos {
         void SetScaling(bool bScaling);
 
         /* draw graphic visualiser into the pixmap pointed to */
-        virtual void drawLineBox( QPixmap*, const QRect& );
-        virtual void drawCharBox( QPixmap*, const QRect& );
-        virtual void drawBox( QPixmap*, const QRect&, const QColor& );
+        virtual void drawLineBox( TQPixmap*, const TQRect& );
+        virtual void drawCharBox( TQPixmap*, const TQRect& );
+        virtual void drawBox( TQPixmap*, const TQRect&, const TQColor& );
 
-        int nextBestWord( int line, int knode, QString& theWord, QRect& brect );
+        int nextBestWord( int line, int knode, TQString& theWord, TQRect& brect );
 
-	/* Error text in QString */
-	QString getErrorText() const;
+	/* Error text in TQString */
+	TQString getErrorText() const;
 	bool    kadmosError();
     private:
-        void partStrings( int line, int graphKnode, QString soFar );
+        void partStrings( int line, int graphKnode, TQString soFar );
         void CheckError();
         
         RepData       m_RepData;
         KADMOS_ERROR  m_Error;
         char m_Line[2*CHAR_MAX_LEN];
         int  m_currLine;
-        QStringList m_parts;
-        QString m_theWord;
+        TQStringList m_parts;
+        TQString m_theWord;
         int m_recurse;
 
-        QChar m_undetectChar;
+        TQChar m_undetectChar;
     };
 
 } /* End of Kadmos namespace */

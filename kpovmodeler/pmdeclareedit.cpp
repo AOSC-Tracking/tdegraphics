@@ -23,17 +23,17 @@
 #include "pmscanner.h"
 #include "pmobjectselect.h"
 
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qtextstream.h>
-#include <qpushbutton.h>
-#include <qlistbox.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
+#include <tqlabel.h>
+#include <tqtextstream.h>
+#include <tqpushbutton.h>
+#include <tqlistbox.h>
 
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMDeclareEdit::PMDeclareEdit( QWidget* parent, const char* name )
+PMDeclareEdit::PMDeclareEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -44,34 +44,34 @@ void PMDeclareEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout = new QHBoxLayout( topLayout( ) );
-   m_pNameEdit = new QLineEdit( this );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   m_pNameEdit = new TQLineEdit( this );
    m_pNameEdit->setMaxLength( 40 );
-   QLabel* label = new QLabel( i18n( "Identifier:" ), this );
+   TQLabel* label = new TQLabel( i18n( "Identifier:" ), this );
 
    layout->addWidget( label );
    layout->addWidget( m_pNameEdit );
 
-   connect( m_pNameEdit, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotNameChanged( const QString& ) ) );
+   connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotNameChanged( const TQString& ) ) );
 }
 
 void PMDeclareEdit::createBottomWidgets( )
 {
-   QLabel* l = new QLabel( i18n( "Linked objects:" ), this );
+   TQLabel* l = new TQLabel( i18n( "Linked objects:" ), this );
    topLayout( )->addWidget( l );
 
-   m_pLinkedObjects = new QListBox( this );
+   m_pLinkedObjects = new TQListBox( this );
    m_pLinkedObjects->setMinimumHeight( 100 );
-   connect( m_pLinkedObjects, SIGNAL( highlighted( QListBoxItem* ) ),
-            SLOT( slotItemSelected( QListBoxItem* ) ) );
+   connect( m_pLinkedObjects, TQT_SIGNAL( highlighted( TQListBoxItem* ) ),
+            TQT_SLOT( slotItemSelected( TQListBoxItem* ) ) );
    topLayout( )->addWidget( m_pLinkedObjects, 1 );
 
-   QHBoxLayout* layout = new QHBoxLayout( topLayout( ) );
-   m_pSelectButton = new QPushButton( i18n( "Select..." ), this );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   m_pSelectButton = new TQPushButton( i18n( "Select..." ), this );
    m_pSelectButton->setEnabled( false );
 
-   connect( m_pSelectButton, SIGNAL( clicked( ) ), SLOT( slotSelect( ) ) );
+   connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelect( ) ) );
    layout->addStretch( );
    layout->addWidget( m_pSelectButton );
 
@@ -83,7 +83,7 @@ void PMDeclareEdit::displayObject( PMObject* o )
    if( o->isA( "Declare" ) )
    {
       m_pDisplayedObject = ( PMDeclare* ) o;
-      m_pNameEdit->setText( QString( m_pDisplayedObject->id( ) ) );
+      m_pNameEdit->setText( TQString( m_pDisplayedObject->id( ) ) );
 
       m_pNameEdit->setReadOnly( m_pDisplayedObject->isReadOnly( ) );
 
@@ -117,7 +117,7 @@ bool PMDeclareEdit::isDataValid( )
    if( !Base::isDataValid( ) )
       return false;
 
-   QString text = m_pNameEdit->text( );
+   TQString text = m_pNameEdit->text( );
    if( text.length( ) == 0 )
    {
       KMessageBox::error( this, i18n( "Please enter an identifier!" ),
@@ -128,8 +128,8 @@ bool PMDeclareEdit::isDataValid( )
    if( text == m_pDisplayedObject->id( ) )
       return true;
 
-   QTextStream str( &text, IO_ReadOnly );
-   QChar c;
+   TQTextStream str( &text, IO_ReadOnly );
+   TQChar c;
    int ac;
    bool ok = true;
    int i = 0;
@@ -137,7 +137,7 @@ bool PMDeclareEdit::isDataValid( )
    {
       str >> c;
       ac = c.latin1( );
-      // QChar::category can't be used because umlauts are not allowed
+      // TQChar::category can't be used because umlauts are not allowed
       if( i == 0 )
          ok = ( ( ( ac >= 'a' ) && ( ac <= 'z' ) ) ||
                 ( ( ac >= 'A' ) && ( ac <= 'Z' ) ) ||
@@ -187,12 +187,12 @@ bool PMDeclareEdit::isDataValid( )
    return true;
 }
 
-void PMDeclareEdit::slotNameChanged( const QString& )
+void PMDeclareEdit::slotNameChanged( const TQString& )
 {
    emit dataChanged( );
 }
 
-void PMDeclareEdit::slotItemSelected( QListBoxItem* item )
+void PMDeclareEdit::slotItemSelected( TQListBoxItem* item )
 {
    m_pSelectedObject = ( ( PMListBoxObject* ) item )->object( );
    m_pSelectButton->setEnabled( true );

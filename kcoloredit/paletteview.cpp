@@ -15,34 +15,34 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 #include "kcoloreditview.h"
 #include "paletteview.h"
 
 PaletteView::PaletteView(const int defaultCellWidth, const int defaultCellHeight, const int cellSpacing,
-	KColorEditView* view, QWidget *parent, const char *name) :
-	QFrame(parent, name, QWidget::WResizeNoErase*0) {
+	KColorEditView* view, TQWidget *parent, const char *name) :
+	TQFrame(parent, name, TQWidget::WResizeNoErase*0) {
 	setFrameStyle(StyledPanel|Sunken);
 	setLineWidth(2);
-	QGridLayout* topLayout = new QGridLayout(this, 2, 2);
+	TQGridLayout* topLayout = new TQGridLayout(this, 2, 2);
 	topLayout->setMargin(2);
 	topLayout->setRowStretch(0, 10);
 	topLayout->setRowStretch(1, 0);
 	topLayout->setColStretch(0, 10);
 	topLayout->setColStretch(1, 0);
-	scrollBar = new QScrollBar(this);
-	hScrollBar = new QScrollBar(0, 1, 1, 1, 0, QScrollBar::Horizontal, this);
+	scrollBar = new TQScrollBar(this);
+	hScrollBar = new TQScrollBar(0, 1, 1, 1, 0, TQScrollBar::Horizontal, this);
 	scrolledArea = new PaletteViewScrolledArea(defaultCellWidth,
 		defaultCellHeight, cellSpacing, scrollBar, hScrollBar, view, this);
-	connect(scrollBar, SIGNAL( valueChanged(int) ),
-		SLOT( slotRepaintScrolledArea() ));
+	connect(scrollBar, TQT_SIGNAL( valueChanged(int) ),
+		TQT_SLOT( slotRepaintScrolledArea() ));
 	topLayout->addWidget(scrolledArea, 0, 0);
-	connect(hScrollBar, SIGNAL( valueChanged(int) ),
-		SLOT( slotRepaintScrolledArea() ));
-	QHBoxLayout* hScrollBarLayout = new QHBoxLayout();
+	connect(hScrollBar, TQT_SIGNAL( valueChanged(int) ),
+		TQT_SLOT( slotRepaintScrolledArea() ));
+	TQHBoxLayout* hScrollBarLayout = new TQHBoxLayout();
 	hScrollBarLayout->addWidget(hScrollBar, 10);
-	hScrollBarLayout->addWidget(new QWidget(this), 0);
+	hScrollBarLayout->addWidget(new TQWidget(this), 0);
 	topLayout->addLayout(hScrollBarLayout, 1, 0);
 	topLayout->addWidget(scrollBar, 0, 1);
 }

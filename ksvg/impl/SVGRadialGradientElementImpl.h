@@ -43,7 +43,7 @@ public:
 
 	virtual void setAttributes();
 
-	virtual QMap<QString, DOM::DOMString> gradientAttributes();
+	virtual TQMap<TQString, DOM::DOMString> gradientAttributes();
 
 private:
 	SVGAnimatedLengthImpl *m_cx;

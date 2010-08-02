@@ -20,13 +20,13 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
-#include <qcheckbox.h>
+#include <tqcheckbox.h>
 
 
-PMTorusEdit::PMTorusEdit( QWidget* parent, const char* name )
+PMTorusEdit::PMTorusEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,27 +36,27 @@ void PMTorusEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QGridLayout* gl;
-   QHBoxLayout* hl;
+   TQGridLayout* gl;
+   TQHBoxLayout* hl;
 
    m_pMinorRadius = new PMFloatEdit( this );
    m_pMajorRadius = new PMFloatEdit( this );
-   m_pSturm = new QCheckBox( i18n( "Sturm" ), this );
+   m_pSturm = new TQCheckBox( i18n( "Sturm" ), this );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 2, 2 );
-   gl->addWidget( new QLabel( i18n( "Minor radius:" ), this ), 0, 0 );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "Minor radius:" ), this ), 0, 0 );
    gl->addWidget( m_pMinorRadius, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Major radius:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Major radius:" ), this ), 1, 0 );
    gl->addWidget( m_pMajorRadius, 1, 1 );
    hl->addStretch( 1 );
 
    topLayout( )->addWidget( m_pSturm );
 
 
-   connect( m_pMinorRadius, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMajorRadius, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSturm, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pMinorRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMajorRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMTorusEdit::displayObject( PMObject* o )

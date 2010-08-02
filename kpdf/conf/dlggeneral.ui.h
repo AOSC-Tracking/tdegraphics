@@ -14,7 +14,7 @@
 
 #include <config.h>
 
-void DlgGeneral::showEvent( QShowEvent * )
+void DlgGeneral::showEvent( TQShowEvent * )
 {
 #if KPDF_FORCE_DRM
     kcfg_ObeyDRM->hide();

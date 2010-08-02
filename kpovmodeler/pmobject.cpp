@@ -142,7 +142,7 @@ bool PMObject::takeChild( uint )
    return false;
 }
 
-PMDialogEditBase* PMObject::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMObject::editWidget( TQWidget* parent ) const
 {
    return new PMDialogEditBase( parent );
 //   return 0;
@@ -193,9 +193,9 @@ PMMatrix PMObject::transformedWith( ) const
    return result;
 }
 
-QDomElement PMObject::serialize( QDomDocument& doc ) const
+TQDomElement PMObject::serialize( TQDomDocument& doc ) const
 {
-   QDomElement e = doc.createElement( className( ).lower( ) );
+   TQDomElement e = doc.createElement( className( ).lower( ) );
    serialize( e, doc );
    return e;
 }
@@ -213,7 +213,7 @@ void PMObject::cleanUp( ) const
    }
 }
 
-bool PMObject::setProperty( const QString& name, const PMVariant& v )
+bool PMObject::setProperty( const TQString& name, const PMVariant& v )
 {
    PMPropertyBase* p = metaObject( )->property( name );
    if( !p )
@@ -221,9 +221,9 @@ bool PMObject::setProperty( const QString& name, const PMVariant& v )
    return p->setProperty( this, v );
 }
 
-QStringList PMObject::properties( ) const
+TQStringList PMObject::properties( ) const
 {
-   QStringList lst;
+   TQStringList lst;
    PMPropertyIterator it = metaObject( )->properties( );
    
    for( ; it.current( ); ++it )
@@ -232,7 +232,7 @@ QStringList PMObject::properties( ) const
    return lst;
 }
 
-PMVariant PMObject::property( const QString& name ) const
+PMVariant PMObject::property( const TQString& name ) const
 {
    PMPropertyBase* p = metaObject( )->property( name );
    if( !p )
@@ -240,19 +240,19 @@ PMVariant PMObject::property( const QString& name ) const
    return p->getProperty( this );
 }
 
-bool PMObject::isA( const QString& className ) const
+bool PMObject::isA( const TQString& className ) const
 {
    if( !m_pPart )
       return false;
    return m_pPart->prototypeManager( )->isA( metaObject( ), className );
 }
 
-QString PMObject::type( ) const
+TQString PMObject::type( ) const
 {
    return metaObject( )->className( );
 }
 
-bool PMObject::canInsert( const QString& className, const PMObject* after,
+bool PMObject::canInsert( const TQString& className, const PMObject* after,
                           const PMObjectList* objectsBetween ) const
 {
    if( !m_pPart )
@@ -275,7 +275,7 @@ int PMObject::canInsert( const PMObjectList& list, const PMObject* after ) const
    return m_pPart->insertRuleSystem( )->canInsert( this, list, after );
 }
 
-int PMObject::canInsert( const QStringList& classes, const PMObject* after ) const
+int PMObject::canInsert( const TQStringList& classes, const PMObject* after ) const
 {
    if( !m_pPart )
       return false;

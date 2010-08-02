@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qrect.h>
+#include <tqrect.h>
 
 #include "SVGRectImpl.h"
 
@@ -40,7 +40,7 @@ SVGRectImpl::SVGRectImpl()
 	m_height = 0;
 }
 
-SVGRectImpl::SVGRectImpl(const QRect &other)
+SVGRectImpl::SVGRectImpl(const TQRect &other)
 {
 	(*this) = other;
 }
@@ -89,13 +89,13 @@ float SVGRectImpl::height() const
 	return m_height;
 }
 
-QRect SVGRectImpl::qrect() const
+TQRect SVGRectImpl::qrect() const
 {
 	// ceil() so the integer rectangle contains the whole real one.
-	return QRect(int(m_x), int(m_y), int(ceil(m_width)), int(ceil(m_height)));
+	return TQRect(int(m_x), int(m_y), int(ceil(m_width)), int(ceil(m_height)));
 }
 
-SVGRectImpl &SVGRectImpl::operator=(const QRect &other)
+SVGRectImpl &SVGRectImpl::operator=(const TQRect &other)
 {
 	m_x = other.x();
 	m_y = other.y();

@@ -29,11 +29,11 @@
 #ifndef __THUMBVIEW_H__
 #define __THUMBVIEW_H__
 
-#include <qwidget.h>
-#include <qimage.h>
-#include <qpixmap.h>
-#include <qcolor.h>
-#include <qvbox.h>
+#include <tqwidget.h>
+#include <tqimage.h>
+#include <tqpixmap.h>
+#include <tqcolor.h>
+#include <tqvbox.h>
 
 #include <kiconview.h>
 #include <kurl.h>
@@ -51,18 +51,18 @@
 #define BG_WALLPAPER  "BackGroundTile"
 #define STD_TILE_IMG  "kooka/pics/thumbviewtile.png"
 
-class QPixmap;
-class QListViewItem;
+class TQPixmap;
+class TQListViewItem;
 class KProgress;
 class KIO::PreviewJob;
 
-class ThumbView: public QVBox /* KIconView */
+class ThumbView: public TQVBox /* KIconView */
 {
    Q_OBJECT
 
 public:
 
-   ThumbView( QWidget *parent, const char *name=0 );
+   ThumbView( TQWidget *parent, const char *name=0 );
    ~ThumbView();
 
    void setCurrentDir( const KURL& s)
@@ -70,9 +70,9 @@ public:
    KURL currentDir( ) const
       { return m_currentDir; }
 
-   QSize tumbSize( ) const
+   TQSize tumbSize( ) const
       {
-	 return( QSize( m_pixWidth, m_pixHeight ));
+	 return( TQSize( m_pixWidth, m_pixHeight ));
       }
 
    int thumbMargin() const
@@ -85,7 +85,7 @@ public slots:
 	 m_pixWidth  = w;
 	 m_pixHeight = h;
       }
-   void slSetThumbSize( const QSize& s )
+   void slSetThumbSize( const TQSize& s )
       {
 	 m_pixWidth  = s.width();
 	 m_pixHeight = s.height();
@@ -97,14 +97,14 @@ public slots:
       }
 
    void slNewFileItems( const KFileItemList& );
-   void slGotPreview( const KFileItem*, const QPixmap& );
+   void slGotPreview( const KFileItem*, const TQPixmap& );
    void slPreviewResult( KIO::Job* );
 
    /**
     *  This connects to the IconView's executed signal and tells the packager
     *  to select the image
     */
-   void slDoubleClicked( QIconViewItem* );
+   void slDoubleClicked( TQIconViewItem* );
 
    /**
     *  indication that a image changed, needs to be reloaded.
@@ -124,26 +124,26 @@ protected:
 
 signals:
    /**
-    * selects a QListViewItem from the thumbnail. This signal only makes
+    * selects a TQListViewItem from the thumbnail. This signal only makes
     * sense if connected to a ScanPackager.
     */
    void selectFromThumbnail( const KURL& );
 
 private:
-   QPixmap createPixmap( const QPixmap& ) const;
+   TQPixmap createPixmap( const TQPixmap& ) const;
 
    bool    deleteImage( KFileItem* );
    KIconView *m_iconView;
    KProgress *m_progress;
 
    KURL    m_currentDir;
-   QPixmap m_basePix;
+   TQPixmap m_basePix;
    int     m_pixWidth;
    int     m_pixHeight;
    int     m_thumbMargin;
-   QColor  m_marginColor1;
-   QColor  m_marginColor2;
-   QString m_bgImg;
+   TQColor  m_marginColor1;
+   TQColor  m_marginColor2;
+   TQString m_bgImg;
    int     m_cntJobsStarted;
    KIO::PreviewJob *m_job;
 

@@ -21,14 +21,14 @@
 
 #include "kuickdata.h"
 
-class QCheckBox;
+class TQCheckBox;
 class KIntNumInput;
 
 class SlideShowWidget : public QWidget
 {
     Q_OBJECT
 public:
-    SlideShowWidget( QWidget *parent, const char *name );
+    SlideShowWidget( TQWidget *parent, const char *name );
     ~SlideShowWidget();
 
     virtual void loadSettings( const KuickData& data );
@@ -37,8 +37,8 @@ public:
 private:
     KIntNumInput *m_delayTime;
     KIntNumInput *m_cycles;
-    QCheckBox    *m_fullScreen;
-    QCheckBox    *m_startWithCurrent;
+    TQCheckBox    *m_fullScreen;
+    TQCheckBox    *m_startWithCurrent;
 };
 
 #endif // SLIDESHOWWIDGET_H

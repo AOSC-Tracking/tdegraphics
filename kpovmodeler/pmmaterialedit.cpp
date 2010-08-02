@@ -20,12 +20,12 @@
 #include "pmmaterial.h"
 #include "pmlinkedit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
 
-PMMaterialEdit::PMMaterialEdit( QWidget* parent, const char* name )
+PMMaterialEdit::PMMaterialEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;

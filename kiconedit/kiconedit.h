@@ -21,9 +21,9 @@
 #ifndef __KICONEDIT_H__
 #define __KICONEDIT_H__
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qptrlist.h>
+#include <tqwidget.h>
+#include <tqpixmap.h>
+#include <tqptrlist.h>
 
 #include <kmainwindow.h>
 #include <kiconloader.h>
@@ -43,11 +43,11 @@
 
 class KIconEdit;
 class KCommandHistory;
-typedef QPtrList<KIconEdit> WindowList;
+typedef TQPtrList<KIconEdit> WindowList;
 
-class QWhatsThis;
-class QToolButton;
-class QLabel;
+class TQWhatsThis;
+class TQToolButton;
+class TQLabel;
 class PaletteToolBar;
 
 /**
@@ -61,14 +61,14 @@ class KIconEdit : public KMainWindow
     Q_OBJECT
 public:
   KIconEdit( KURL url = KURL(), const char *name = "kiconedit");
-  KIconEdit( const QImage image, const char *name = "kiconedit");
+  KIconEdit( const TQImage image, const char *name = "kiconedit");
   ~KIconEdit();
 
-  virtual QSize sizeHint() const;
+  virtual TQSize sizeHint() const;
   static WindowList windowList;
 
 signals:
-  void newname(const QString &);
+  void newname(const TQString &);
 
 public slots:
   virtual void saveProperties(KConfig*);
@@ -76,7 +76,7 @@ public slots:
   void updateProperties();
 
 protected slots:
-  void slotNewWin(const QString & url = 0);
+  void slotNewWin(const TQString & url = 0);
   void slotNew();
   void slotOpen();
   void slotClose();
@@ -118,17 +118,17 @@ protected slots:
   void slotUpdateStatusColors(uint, uint*);
   void slotUpdateStatusPos(int, int);
   void slotUpdateStatusSize(int, int);
-  void slotUpdateStatusMessage(const QString &);
-  void slotUpdateStatusName(const QString &);
+  void slotUpdateStatusMessage(const TQString &);
+  void slotUpdateStatusName(const TQString &);
   void slotUpdateStatusModified(bool);
   void slotUpdateStatusScaling(int);
   void slotUpdatePaste(bool);
   void slotUpdateCopy(bool);
-  void slotOpenBlank(const QSize);
-  void addRecent(const QString &);
+  void slotOpenBlank(const TQSize);
+  void addRecent(const TQString &);
 
-  virtual void dragEnterEvent(QDragEnterEvent* event);
-  virtual void dropEvent(QDropEvent *e);
+  virtual void dragEnterEvent(TQDragEnterEvent* event);
+  virtual void dropEvent(TQDropEvent *e);
 
 protected:
   void init();
@@ -138,7 +138,7 @@ protected:
   void updateAccels();
 
   virtual bool queryClose();
-  virtual QWidget *createContainer( QWidget*, int, const QDomElement&, int& );
+  virtual TQWidget *createContainer( TQWidget*, int, const TQDomElement&, int& );
 
   KCommandHistory* history;
   PaletteToolBar *m_paletteToolBar;
@@ -146,8 +146,8 @@ protected:
   KIconEditGrid *grid;
   KGridView *gridview;
   KIconEditIcon *icon;
-  QImage img;
-  QString m_name;
+  TQImage img;
+  TQString m_name;
 
   KAction *m_actCopy, *m_actPaste, *m_actCut, *m_actPasteNew;
   KAction *m_actZoomIn, *m_actZoomOut;

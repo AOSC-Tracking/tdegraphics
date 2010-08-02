@@ -19,8 +19,8 @@
 #include <kmessagebox.h>
 #include <klocale.h>
 
-PMFloatEdit::PMFloatEdit( QWidget* parent, const char* name /*= 0*/ )
-      : QLineEdit( parent, name )
+PMFloatEdit::PMFloatEdit( TQWidget* parent, const char* name /*= 0*/ )
+      : TQLineEdit( parent, name )
 {
    m_bCheckLower = false;
    m_bCheckUpper = false;
@@ -29,8 +29,8 @@ PMFloatEdit::PMFloatEdit( QWidget* parent, const char* name /*= 0*/ )
    m_lowerOp = OpGreaterEqual;
    m_upperOp = OpLessEqual;
 
-   connect( this, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotEditTextChanged( const QString& ) ) );
+   connect( this, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotEditTextChanged( const TQString& ) ) );
 }
 
 void PMFloatEdit::setValidation( bool checkLower, double lowerValue,
@@ -114,13 +114,13 @@ double PMFloatEdit::value( ) const
 
 void PMFloatEdit::setValue( double d, int precision )
 {
-   QString str;
+   TQString str;
 
    str.setNum( d, 'g', precision );
    setText( str );
 }
 
-void PMFloatEdit::slotEditTextChanged( const QString& /*t*/ )
+void PMFloatEdit::slotEditTextChanged( const TQString& /*t*/ )
 {
    emit dataChanged( );
 }
@@ -129,16 +129,16 @@ void PMFloatEdit::slotEditTextChanged( const QString& /*t*/ )
 
 
 
-PMIntEdit::PMIntEdit( QWidget* parent, const char* name /*= 0*/ )
-      : QLineEdit( parent, name )
+PMIntEdit::PMIntEdit( TQWidget* parent, const char* name /*= 0*/ )
+      : TQLineEdit( parent, name )
 {
    m_bCheckLower = false;
    m_bCheckUpper = false;
    m_lowerValue = 0;
    m_upperValue = 0;
 
-   connect( this, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotEditTextChanged( const QString& ) ) );
+   connect( this, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotEditTextChanged( const TQString& ) ) );
 }
 
 void PMIntEdit::setValidation( bool checkLower, int lowerValue,
@@ -163,7 +163,7 @@ bool PMIntEdit::isDataValid( )
       if( ok )
       {
          i = ( int ) d;
-         QString str;
+         TQString str;
          bool b = signalsBlocked( );
          blockSignals( true );
          str.setNum( i );
@@ -216,13 +216,13 @@ int PMIntEdit::value( ) const
 
 void PMIntEdit::setValue( int i )
 {
-   QString str;
+   TQString str;
 
    str.setNum( i );
    setText( str );
 }
 
-void PMIntEdit::slotEditTextChanged( const QString& /*t*/ )
+void PMIntEdit::slotEditTextChanged( const TQString& /*t*/ )
 {
    emit dataChanged( );
 }

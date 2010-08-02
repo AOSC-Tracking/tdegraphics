@@ -21,16 +21,16 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
 
 #include <klocale.h>
 #include <kmessagebox.h>
 
 
-PMCameraEdit::PMCameraEdit( QWidget* parent, const char* name )
+PMCameraEdit::PMCameraEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -40,10 +40,10 @@ void PMCameraEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QGridLayout* layout;
-   QLabel* label;
+   TQGridLayout* layout;
+   TQLabel* label;
 
-   m_pCameraType = new QComboBox( false, this );
+   m_pCameraType = new TQComboBox( false, this );
    m_pCameraType->insertItem( i18n( "Perspective" ) );
    m_pCameraType->insertItem( i18n( "Orthographic" ) );
    m_pCameraType->insertItem( i18n( "Fish Eye" ) );
@@ -52,7 +52,7 @@ void PMCameraEdit::createTopWidgets( )
    m_pCameraType->insertItem( i18n( "Panoramic" ) );
    m_pCameraType->insertItem( i18n( "Cylinder" ) );
 
-   m_pCylinderType = new QComboBox( false, this );
+   m_pCylinderType = new TQComboBox( false, this );
    m_pCylinderType->insertItem( i18n( "1: Vertical, Fixed Viewpoint" ) );
    m_pCylinderType->insertItem( i18n( "2: Horizontal, Fixed Viewpoint" ) );
    m_pCylinderType->insertItem( i18n( "3: Vertical, Variable Viewpoint" ) );
@@ -67,38 +67,38 @@ void PMCameraEdit::createTopWidgets( )
    m_pAngle = new PMFloatEdit( this );
    m_pAngle->setValidation( true, 0.0, true, 360.0 );
 
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Camera type:" ), this ) );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Camera type:" ), this ) );
    hl->addWidget( m_pCameraType );
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pCylinderTypeLabel = new QLabel( i18n( "Cylinder type:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pCylinderTypeLabel = new TQLabel( i18n( "Cylinder type:" ), this );
    hl->addWidget( m_pCylinderTypeLabel );
    hl->addWidget( m_pCylinderType );
 
-   layout = new QGridLayout( topLayout( ), 7, 2 );
-   layout->addWidget( new QLabel( i18n( "Location:" ), this ), 0, 0 );
+   layout = new TQGridLayout( topLayout( ), 7, 2 );
+   layout->addWidget( new TQLabel( i18n( "Location:" ), this ), 0, 0 );
    layout->addWidget( m_pLocation, 0, 1 );
 
-   layout->addWidget( new QLabel( i18n( "Sky:" ), this ), 1, 0 );
+   layout->addWidget( new TQLabel( i18n( "Sky:" ), this ), 1, 0 );
    layout->addWidget( m_pSky, 1, 1 );
 
-   layout->addWidget( new QLabel( i18n( "Direction:" ), this ), 2, 0 );
+   layout->addWidget( new TQLabel( i18n( "Direction:" ), this ), 2, 0 );
    layout->addWidget( m_pDirection, 2, 1 );
 
-   layout->addWidget( new QLabel( i18n( "Right:" ), this ), 3, 0 );
+   layout->addWidget( new TQLabel( i18n( "Right:" ), this ), 3, 0 );
    layout->addWidget( m_pRight, 3, 1 );
 
-   layout->addWidget( new QLabel( i18n( "Up:" ), this ), 4, 0 );
+   layout->addWidget( new TQLabel( i18n( "Up:" ), this ), 4, 0 );
    layout->addWidget( m_pUp, 4, 1 );
 
-   layout->addWidget( new QLabel( i18n( "Look at:" ), this ), 5, 0 );
+   layout->addWidget( new TQLabel( i18n( "Look at:" ), this ), 5, 0 );
    layout->addWidget( m_pLookAt, 5, 1 );
 
-   m_pEnableAngle = new QCheckBox( i18n( "Angle:" ), this );
+   m_pEnableAngle = new TQCheckBox( i18n( "Angle:" ), this );
    layout->addWidget( m_pEnableAngle, 6, 0 );
    layout->addWidget( m_pAngle, 6, 1, AlignLeft );
 
-   m_pFocalBlur = new QCheckBox( i18n( "Focal blur" ), this );
+   m_pFocalBlur = new TQCheckBox( i18n( "Focal blur" ), this );
    topLayout( )->addWidget( m_pFocalBlur );
 
    m_pAperture = new PMFloatEdit( this );
@@ -116,54 +116,54 @@ void PMCameraEdit::createTopWidgets( )
    m_pVariance->setValidation( true, 0, false, 0 );
    m_focalWidgets.append( m_pVariance );
 
-   layout = new QGridLayout( topLayout( ), 5, 2 );
-   label = new QLabel( i18n( "Aperture:" ), this );
+   layout = new TQGridLayout( topLayout( ), 5, 2 );
+   label = new TQLabel( i18n( "Aperture:" ), this );
    m_focalWidgets.append( label );
    layout->addWidget( label, 0, 0 );
    layout->addWidget( m_pAperture, 0, 1 );
-   label = new QLabel( i18n( "Blur samples:" ), this );
+   label = new TQLabel( i18n( "Blur samples:" ), this );
    m_focalWidgets.append( label );
    layout->addWidget( label, 1, 0 );
    layout->addWidget( m_pBlurSamples, 1, 1 );
-   label = new QLabel( i18n( "Focal point:" ), this );
+   label = new TQLabel( i18n( "Focal point:" ), this );
    m_focalWidgets.append( label );
    layout->addWidget( label, 2, 0 );
    layout->addWidget( m_pFocalPoint, 2, 1 );
-   label = new QLabel( i18n( "Confidence:" ), this );
+   label = new TQLabel( i18n( "Confidence:" ), this );
    m_focalWidgets.append( label );
    layout->addWidget( label, 3, 0 );
    layout->addWidget( m_pConfidence, 3, 1 );
-   label = new QLabel( i18n( "Variance:" ), this );
+   label = new TQLabel( i18n( "Variance:" ), this );
    m_focalWidgets.append( label );
    layout->addWidget( label, 4, 0 );
    layout->addWidget( m_pVariance, 4, 1 );
 
-   m_pExport = new QCheckBox( i18n( "Export to renderer" ), this );
+   m_pExport = new TQCheckBox( i18n( "Export to renderer" ), this );
    topLayout( )->addWidget( m_pExport );
 
-   connect( m_pLocation, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDirection, SIGNAL( dataChanged( ) ), SLOT( slotDirectionChanged( ) ) );
-   connect( m_pRight, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRight, SIGNAL( dataChanged( ) ), SLOT( slotRightChanged( ) ) );
-   connect( m_pUp, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSky, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pLookAt, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableAngle, SIGNAL( toggled( bool ) ),
-            SLOT( slotAngleToggled( bool ) ) );
-   connect( m_pAngle, SIGNAL( dataChanged( ) ), SLOT( slotAngleChanged( ) ) );
-   connect( m_pCameraType, SIGNAL( activated( int ) ),
-            SLOT( slotCameraTypeActivated( int ) ) );
-   connect( m_pCylinderType, SIGNAL( activated( int ) ),
-            SLOT( slotCylinderTypeActivated( int ) ) );
+   connect( m_pLocation, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDirection, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotDirectionChanged( ) ) );
+   connect( m_pRight, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRight, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotRightChanged( ) ) );
+   connect( m_pUp, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSky, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLookAt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableAngle, TQT_SIGNAL( toggled( bool ) ),
+            TQT_SLOT( slotAngleToggled( bool ) ) );
+   connect( m_pAngle, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotAngleChanged( ) ) );
+   connect( m_pCameraType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotCameraTypeActivated( int ) ) );
+   connect( m_pCylinderType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotCylinderTypeActivated( int ) ) );
 
-   connect( m_pFocalBlur, SIGNAL( toggled( bool ) ),
-            SLOT( slotFocalBlurToggled( bool ) ) );
-   connect( m_pAperture, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pBlurSamples, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFocalPoint, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pVariance, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pConfidence, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pExport, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pFocalBlur, TQT_SIGNAL( toggled( bool ) ),
+            TQT_SLOT( slotFocalBlurToggled( bool ) ) );
+   connect( m_pAperture, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pBlurSamples, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFocalPoint, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pVariance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pConfidence, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pExport, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMCameraEdit::displayObject( PMObject* o )
@@ -385,9 +385,9 @@ void PMCameraEdit::slotAngleChanged( )
    if( ( m_pCameraType->currentItem( ) == 0 ) && m_pEnableAngle->isChecked( ) )
    {
       // Only change direction's value in perspective and with an enabled angle
-      disconnect( m_pDirection, SIGNAL( dataChanged( ) ), 0, 0 );
+      disconnect( m_pDirection, TQT_SIGNAL( dataChanged( ) ), 0, 0 );
       m_pDirection->setVector( 0.5 * m_pRight->vector( ) / tan( 2 * deg2Rad( m_pAngle->value( ) ) ) );
-      connect( m_pDirection, SIGNAL( dataChanged( ) ), SLOT( slotDirectionChanged( ) ) );
+      connect( m_pDirection, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotDirectionChanged( ) ) );
    }
    */
    emit dataChanged( );
@@ -424,7 +424,7 @@ void PMCameraEdit::calculateCameraAngle( )
 
 void PMCameraEdit::enableFocalWidgets( bool on )
 {
-   QPtrListIterator<QWidget> it( m_focalWidgets );
+   TQPtrListIterator<TQWidget> it( m_focalWidgets );
 
    for( ; it.current( ); ++it )
    {

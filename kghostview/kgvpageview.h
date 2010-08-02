@@ -20,10 +20,10 @@
 #ifndef KGVPAGEVIEW_H
 #define KGVPAGEVIEW_H
 
-#include <qscrollview.h>
+#include <tqscrollview.h>
 
 /**
- * KGVPageView is a customized QScrollView, which can hold one page. This page
+ * KGVPageView is a customized TQScrollView, which can hold one page. This page
  * will be centered on the viewport. Furthermore it adds the ability to scroll
  * the page by dragging it using the mouse.
  */
@@ -32,11 +32,11 @@ class KGVPageView : public QScrollView
     Q_OBJECT
 
 public:
-    KGVPageView( QWidget* parent = 0, const char* name = 0 );
+    KGVPageView( TQWidget* parent = 0, const char* name = 0 );
     ~KGVPageView() { ; }
     
-    void setPage( QWidget* );
-    QWidget* page() const { return _page; }
+    void setPage( TQWidget* );
+    TQWidget* page() const { return _page; }
    
     /**
      * Return true if the top resp. bottom of the page is visible.
@@ -52,7 +52,7 @@ public:
     /**
      * @reimplemented
      */
-    bool eventFilter( QObject*, QEvent* );
+    bool eventFilter( TQObject*, TQEvent* );
     
 public slots:
     bool readUp();
@@ -65,8 +65,8 @@ public slots:
     void scrollTop();
   
 signals:
-    void viewSizeChanged( const QSize& );
-    void pageSizeChanged( const QSize& );
+    void viewSizeChanged( const TQSize& );
+    void pageSizeChanged( const TQSize& );
     void nextPage();
     void zoomOut();
     void zoomIn();
@@ -76,18 +76,18 @@ signals:
     void ReadDown();
 
 protected:
-    virtual void keyPressEvent( QKeyEvent* );
+    virtual void keyPressEvent( TQKeyEvent* );
 
     /**
-     * Reimplemented to from QScrollView to make sure that the page is centered
+     * Reimplemented to from TQScrollView to make sure that the page is centered
      * when it fits in the viewport.
      */
-    virtual void viewportResizeEvent( QResizeEvent* );
+    virtual void viewportResizeEvent( TQResizeEvent* );
 
-    virtual void mousePressEvent( QMouseEvent *e );
-    virtual void mouseReleaseEvent( QMouseEvent *e );
-    virtual void mouseMoveEvent( QMouseEvent *e );
-    virtual void wheelEvent( QWheelEvent * );
+    virtual void mousePressEvent( TQMouseEvent *e );
+    virtual void mouseReleaseEvent( TQMouseEvent *e );
+    virtual void mouseMoveEvent( TQMouseEvent *e );
+    virtual void wheelEvent( TQWheelEvent * );
 
     /**
      * If the viewport is larger than the page, center the page on the
@@ -96,8 +96,8 @@ protected:
     void centerContents();
 
 private:
-    QPoint   _dragGrabPos;
-    QWidget* _page;
+    TQPoint   _dragGrabPos;
+    TQWidget* _page;
 };
 
 #endif

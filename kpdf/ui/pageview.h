@@ -19,8 +19,8 @@
 #ifndef _KPDF_PAGEVIEW_H_
 #define _KPDF_PAGEVIEW_H_
 
-#include <qscrollview.h>
-#include <qvaluevector.h>
+#include <tqscrollview.h>
+#include <tqvaluevector.h>
 #include "core/observer.h"
 
 class KURL;
@@ -36,14 +36,14 @@ class PageViewTip;
  * @short display of course :-)
  * ...
  */
-class PageView : public QScrollView, public DocumentObserver
+class PageView : public TQScrollView, public DocumentObserver
 {
     Q_OBJECT
 
         friend class PageViewTip;
 
     public:
-        PageView( QWidget *parent, KPDFDocument *document );
+        PageView( TQWidget *parent, KPDFDocument *document );
         ~PageView();
 
         // Zoom mode ( last 4 are internally used only! )
@@ -60,44 +60,44 @@ class PageView : public QScrollView, public DocumentObserver
 
         // inherited from DocumentObserver
         uint observerId() const { return PAGEVIEW_ID; }
-        void notifySetup( const QValueVector< KPDFPage * > & pages, bool documentChanged );
+        void notifySetup( const TQValueVector< KPDFPage * > & pages, bool documentChanged );
         void notifyViewportChanged( bool smoothMove );
         void notifyPageChanged( int pageNumber, int changedFlags );
         void notifyContentsCleared( int changedFlags );
         bool canUnloadPixmap( int pageNum );
 
-        void showText( const QString &text, int ms );
+        void showText( const TQString &text, int ms );
 
     signals:
         void urlDropped( const KURL& );
-        void rightClick( const KPDFPage *, const QPoint & );
+        void rightClick( const KPDFPage *, const TQPoint & );
 
     protected:
         // main draw loop, draws pageViews on viewport
-        void viewportPaintEvent( QPaintEvent * pe );
-        void viewportResizeEvent( QResizeEvent* );
+        void viewportPaintEvent( TQPaintEvent * pe );
+        void viewportResizeEvent( TQResizeEvent* );
 
         // mouse / keyboard events
-        void keyPressEvent( QKeyEvent* );
-        void imEndEvent( QIMEvent * );
-        void contentsMouseMoveEvent( QMouseEvent* );
-        void contentsMousePressEvent( QMouseEvent* );
-        void contentsMouseReleaseEvent( QMouseEvent* );
-        void wheelEvent( QWheelEvent* );
+        void keyPressEvent( TQKeyEvent* );
+        void imEndEvent( TQIMEvent * );
+        void contentsMouseMoveEvent( TQMouseEvent* );
+        void contentsMousePressEvent( TQMouseEvent* );
+        void contentsMouseReleaseEvent( TQMouseEvent* );
+        void wheelEvent( TQWheelEvent* );
 
         // drag and drop related events
-        void dragEnterEvent( QDragEnterEvent* );
-        void dropEvent( QDropEvent* );
+        void dragEnterEvent( TQDragEnterEvent* );
+        void dropEvent( TQDropEvent* );
 
     private:
         // draw items on the opened qpainter
-        void paintItems( QPainter * p, const QRect & clipRect );
+        void paintItems( TQPainter * p, const TQRect & clipRect );
         // update item width and height using current zoom parameters
         void updateItemSize( PageViewItem * item, int columnWidth, int rowHeight );
         // return the widget placed on a certain point or 0 if clicking on empty space
         PageViewItem * pickItemOnPoint( int x, int y );
         // start / modify / clear selection rectangle
-        void selectionStart( int x, int y, const QColor & color, bool aboveAll = false );
+        void selectionStart( int x, int y, const TQColor & color, bool aboveAll = false );
         void selectionEndPoint( int x, int y );
         void selectionClear();
         // update internal zoom values and end in a slotRelayoutPages();
@@ -105,7 +105,7 @@ class PageView : public QScrollView, public DocumentObserver
         // update the text on the label using global zoom value or current page's one
         void updateZoomText();
         // updates cursor
-        void updateCursor( const QPoint &p );
+        void updateCursor( const TQPoint &p );
         // does the type ahead search
         void doTypeAheadSearch();
 
@@ -113,7 +113,7 @@ class PageView : public QScrollView, public DocumentObserver
         class PageViewPrivate * d;
 
     private slots:
-        // activated either directly or via QTimer on the viewportResizeEvent
+        // activated either directly or via TQTimer on the viewportResizeEvent
         void slotRelayoutPages();
         // activated either directly or via the contentsMoving(int,int) signal
         void slotRequestVisiblePixmaps( int left = -1, int top = -1 );

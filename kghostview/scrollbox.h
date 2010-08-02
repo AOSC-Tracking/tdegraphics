@@ -19,40 +19,40 @@
 #ifndef __SCROLLBOX_H__
 #define __SCROLLBOX_H__
 
-#include <qframe.h>
-#include <qimage.h>
+#include <tqframe.h>
+#include <tqimage.h>
 
 class ScrollBox: public QFrame
 {
     Q_OBJECT
 
 public:
-    ScrollBox( QWidget* parent = 0, const char* name = 0 );
+    ScrollBox( TQWidget* parent = 0, const char* name = 0 );
 
 public slots:
-    void setPageSize( const QSize& );
-    void setViewSize( const QSize& );
-    void setViewPos( const QPoint& );
-    void setViewPos( int x, int y ) { setViewPos( QPoint( x, y ) ); }
-    void setThumbnail( QPixmap img );
+    void setPageSize( const TQSize& );
+    void setViewSize( const TQSize& );
+    void setViewPos( const TQPoint& );
+    void setViewPos( int x, int y ) { setViewPos( TQPoint( x, y ) ); }
+    void setThumbnail( TQPixmap img );
     void clear();
 
 signals:
-    void valueChanged( const QPoint& );
+    void valueChanged( const TQPoint& );
     void valueChangedRelative( int dx, int dy );
     void button2Pressed();
     void button3Pressed();
 
 protected:
-    void mousePressEvent( QMouseEvent *);
-    void mouseMoveEvent( QMouseEvent *);
-    void drawContents( QPainter *);
-    void resizeEvent( QResizeEvent * );
+    void mousePressEvent( TQMouseEvent *);
+    void mouseMoveEvent( TQMouseEvent *);
+    void drawContents( TQPainter *);
+    void resizeEvent( TQResizeEvent * );
 
 private:
-    QPoint viewpos, mouse;
-    QSize  pagesize;
-    QSize  viewsize;
+    TQPoint viewpos, mouse;
+    TQSize  pagesize;
+    TQSize  viewsize;
 };
 
 #endif

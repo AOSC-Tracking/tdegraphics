@@ -17,7 +17,7 @@
 
 #include "pmxmlhelper.h"
 
-PMXMLHelper::PMXMLHelper( const QDomElement& e, PMPart* p, PMParser* par,
+PMXMLHelper::PMXMLHelper( const TQDomElement& e, PMPart* p, PMParser* par,
                           int majorDocumentFormat, int minorDocumentFormat )
 {
    m_e = e;
@@ -27,14 +27,14 @@ PMXMLHelper::PMXMLHelper( const QDomElement& e, PMPart* p, PMParser* par,
    m_minor = minorDocumentFormat;
 }
 
-bool PMXMLHelper::hasAttribute( const QString& name ) const
+bool PMXMLHelper::hasAttribute( const TQString& name ) const
 {
    return m_e.hasAttribute( name );
 }
 
-int PMXMLHelper::intAttribute( const QString& name, int def ) const
+int PMXMLHelper::intAttribute( const TQString& name, int def ) const
 {
-   QString str = m_e.attribute( name );
+   TQString str = m_e.attribute( name );
    bool ok;
    int res;
    
@@ -46,9 +46,9 @@ int PMXMLHelper::intAttribute( const QString& name, int def ) const
    return def;
 }
 
-double PMXMLHelper::doubleAttribute( const QString& name, double def ) const
+double PMXMLHelper::doubleAttribute( const TQString& name, double def ) const
 {
-   QString str = m_e.attribute( name );
+   TQString str = m_e.attribute( name );
    bool ok;
    double res;
    
@@ -60,9 +60,9 @@ double PMXMLHelper::doubleAttribute( const QString& name, double def ) const
    return def;
 }
 
-bool PMXMLHelper::boolAttribute( const QString& name, bool def ) const
+bool PMXMLHelper::boolAttribute( const TQString& name, bool def ) const
 {
-   QString str = m_e.attribute( name );
+   TQString str = m_e.attribute( name );
    bool ok;
    int res;
    
@@ -74,9 +74,9 @@ bool PMXMLHelper::boolAttribute( const QString& name, bool def ) const
    return def;
 }
 
-PMThreeState PMXMLHelper::threeStateAttribute( const QString& name ) const
+PMThreeState PMXMLHelper::threeStateAttribute( const TQString& name ) const
 {
-   QString str = m_e.attribute( name );
+   TQString str = m_e.attribute( name );
    bool ok;
    int res;
    
@@ -93,14 +93,14 @@ PMThreeState PMXMLHelper::threeStateAttribute( const QString& name ) const
    return PMUnspecified;
 }
 
-QString PMXMLHelper::stringAttribute( const QString& name, const QString& def ) const
+TQString PMXMLHelper::stringAttribute( const TQString& name, const TQString& def ) const
 {
    return m_e.attribute( name, def );
 }
 
-PMVector PMXMLHelper::vectorAttribute( const QString& name, const PMVector& def ) const
+PMVector PMXMLHelper::vectorAttribute( const TQString& name, const PMVector& def ) const
 {
-   QString str = m_e.attribute( name );
+   TQString str = m_e.attribute( name );
 
    if( str.isNull( ) )
       return def;
@@ -113,9 +113,9 @@ PMVector PMXMLHelper::vectorAttribute( const QString& name, const PMVector& def 
    return def;
 }
 
-PMMatrix PMXMLHelper::matrixAttribute( const QString& name, const PMMatrix& def ) const
+PMMatrix PMXMLHelper::matrixAttribute( const TQString& name, const PMMatrix& def ) const
 {
-   QString str = m_e.attribute( name );
+   TQString str = m_e.attribute( name );
 
    if( str.isNull( ) )
       return def;
@@ -128,9 +128,9 @@ PMMatrix PMXMLHelper::matrixAttribute( const QString& name, const PMMatrix& def 
    return def;
 }
 
-PMColor PMXMLHelper::colorAttribute( const QString& name, const PMColor& def ) const
+PMColor PMXMLHelper::colorAttribute( const TQString& name, const PMColor& def ) const
 {
-   QString str = m_e.attribute( name );
+   TQString str = m_e.attribute( name );
 
    if( str.isNull( ) )
       return def;
@@ -143,18 +143,18 @@ PMColor PMXMLHelper::colorAttribute( const QString& name, const PMColor& def ) c
    return def;
 }
 
-QDomElement PMXMLHelper::extraData( ) const
+TQDomElement PMXMLHelper::extraData( ) const
 {
-   QDomNode c = m_e.firstChild( );
+   TQDomNode c = m_e.firstChild( );
    while( !c.isNull( ) )
    {
       if( c.isElement( ) )
       {
-         QDomElement ce = c.toElement( );
+         TQDomElement ce = c.toElement( );
          if( ce.tagName( ) == "extra_data" )
             return ce;
       }
       c = c.nextSibling( );
    }
-   return QDomElement( );
+   return TQDomElement( );
 }

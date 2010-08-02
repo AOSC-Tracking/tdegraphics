@@ -52,19 +52,19 @@ KGVFactory *KGVFactory::s_self;
 KInstance *KGVFactory::s_instance;
 KAboutData *KGVFactory::s_aboutData;
 
-KParts::Part *KGVFactory::createPartObject( QWidget *parentWidget, const char *widgetName,
-        QObject *parent, const char *name,
+KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *widgetName,
+        TQObject *parent, const char *name,
         const char *className,
-        const QStringList &args_ )
+        const TQStringList &args_ )
 {
-    QStringList args = args_;
+    TQStringList args = args_;
     /* Below is the reason why we must
      * have our own factory instead of
      * typedef KParts::GenericFactory<KGVPart> KGVFactory
      *
      * as we did before.
      */
-    args << QString::fromLatin1( className );
+    args << TQString::fromLatin1( className );
     if ( !strcmp( className, "Browser/View" ) ) {
 	    className = "KParts::ReadOnlyPart";
     }

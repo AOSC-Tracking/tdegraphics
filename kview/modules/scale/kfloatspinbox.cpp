@@ -21,7 +21,7 @@
 #include "kfloatspinbox.h"
 
 #if defined(QT_ACCESSIBILITY_SUPPORT)
-#include <qaccessible.h>
+#include <tqaccessible.h>
 #endif
 
 #include <knumvalidator.h>
@@ -37,12 +37,12 @@ int pow( int a, int b )
 	return ret;
 }
 
-KFloatSpinBox::KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, QWidget * parent, const char * name )
-	: QSpinBox( parent, name )
+KFloatSpinBox::KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, TQWidget * parent, const char * name )
+	: TQSpinBox( parent, name )
 	, m_doselection( true )
 {
 	setRange( minValue, maxValue, step, precision );
-	connect( this, SIGNAL( valueChanged( int ) ), this, SLOT( slotValueChanged( int ) ) );
+	connect( this, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotValueChanged( int ) ) );
 }
 
 KFloatSpinBox::~KFloatSpinBox()
@@ -55,7 +55,7 @@ void KFloatSpinBox::setRange( float minValue, float maxValue, float step, unsign
 	m_min = (int)( minValue * m_factor );
 	m_max = (int)( maxValue * m_factor );
 	m_step = (int)( step * m_factor );
-	QSpinBox::setRange( m_min, m_max );
+	TQSpinBox::setRange( m_min, m_max );
 	setSteps( m_step, m_step * 10 );
 	if( precision == 0 )
 		setValidator( new KIntValidator( m_min, m_max, this, 10, "KFloatValidator::KIntValidator" ) );
@@ -65,14 +65,14 @@ void KFloatSpinBox::setRange( float minValue, float maxValue, float step, unsign
 
 float KFloatSpinBox::value() const
 {
-	float ret = (float)QSpinBox::value() / m_factor;
+	float ret = (float)TQSpinBox::value() / m_factor;
 	kdDebug( 4630 ) << ret << endl;
 	return ret;
 }
 
 void KFloatSpinBox::setValue( float value )
 {
-	QSpinBox::setValue( (int)( value * m_factor ) );
+	TQSpinBox::setValue( (int)( value * m_factor ) );
 }
 
 void KFloatSpinBox::setValueBlocking( float value )
@@ -84,7 +84,7 @@ void KFloatSpinBox::setValueBlocking( float value )
 	m_doselection = true;
 }
 
-QString KFloatSpinBox::mapValueToText( int value )
+TQString KFloatSpinBox::mapValueToText( int value )
 {
 	return KGlobal::locale()->formatNumber( (float)value / (float)m_factor, 4 );
 }
@@ -97,13 +97,13 @@ int KFloatSpinBox::mapTextToValue( bool * ok )
 void KFloatSpinBox::valueChange()
 {
 	if( m_doselection )
-		QSpinBox::valueChange();
+		TQSpinBox::valueChange();
 	else
 	{
 		updateDisplay();
 		emit valueChanged( value() );
 #if defined(QT_ACCESSIBILITY_SUPPORT)
-		QAccessible::updateAccessibility( this, 0, QAccessible::ValueChanged );
+		TQAccessible::updateAccessibility( this, 0, TQAccessible::ValueChanged );
 #endif
 	}
 }

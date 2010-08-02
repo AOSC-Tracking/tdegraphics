@@ -20,8 +20,8 @@
 
 #include <kstaticdeleter.h>
 
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 class PMPart;
 
@@ -34,7 +34,7 @@ public:
    /**
     * Default constructor
     */
-   PMPluginInfo( const QString& name, const QString& description,
+   PMPluginInfo( const TQString& name, const TQString& description,
                  bool enabled )
    {
       m_name = name;
@@ -44,11 +44,11 @@ public:
    /**
     * Returns the plugin name
     */
-   QString name( ) const { return m_name; }
+   TQString name( ) const { return m_name; }
    /**
     * Returns the plugin description (i18n'ed)
     */
-   QString description( ) const { return m_description; }
+   TQString description( ) const { return m_description; }
    /**
     * Returns true if the plugin is enabled
     */
@@ -58,7 +58,7 @@ public:
     */
    void enable( bool en ) { m_enabled = en; }
 private:
-   QString m_name, m_description;
+   TQString m_name, m_description;
    bool m_enabled;
 };
 
@@ -91,7 +91,7 @@ public:
    /**
     * Returns a list of available plugins
     */
-   QPtrList<PMPluginInfo> plugins( ) const { return m_plugins; }
+   TQPtrList<PMPluginInfo> plugins( ) const { return m_plugins; }
    /**
     * Loads and unloads plugins for all parts when plugins were activated or
     * deactivated
@@ -103,8 +103,8 @@ private:
     */
    PMPluginManager( );
 
-   QPtrList<PMPluginInfo> m_plugins;
-   QPtrList<PMPart> m_parts;
+   TQPtrList<PMPluginInfo> m_plugins;
+   TQPtrList<PMPart> m_parts;
 
    static PMPluginManager* s_pInstance;
    static KStaticDeleter<PMPluginManager> s_staticDeleter;

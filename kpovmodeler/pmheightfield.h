@@ -57,24 +57,24 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMHeightField( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMHeightFieldEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmheightfield" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmheightfield" ); }
 
    /**
     * Returns the height field type
@@ -87,11 +87,11 @@ public:
    /**
     * Returns the file name
     */
-   QString fileName( ) const { return m_fileName; }
+   TQString fileName( ) const { return m_fileName; }
    /**
     * Sets the file name
     */
-   void setFileName( const QString& name );
+   void setFileName( const TQString& name );
    /**
     * Returns the hierarchy flag
     */
@@ -133,8 +133,8 @@ public:
    /** */
    virtual void cleanUp( ) const;
 
-   static QString typeToString( HeightFieldType t );
-   static HeightFieldType stringToType( const QString &str );
+   static TQString typeToString( HeightFieldType t );
+   static HeightFieldType stringToType( const TQString &str );
 
 protected:
    /** */
@@ -159,7 +159,7 @@ private:
                                  PMHierarchyID, PMSmoothID, PMWaterLevelID };
 
    HeightFieldType m_hfType;
-   QString m_fileName;
+   TQString m_fileName;
    bool m_hierarchy;
    bool m_smooth;
    double m_waterLevel;

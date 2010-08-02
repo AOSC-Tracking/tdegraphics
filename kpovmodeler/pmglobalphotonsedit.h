@@ -29,8 +29,8 @@
 class PMGlobalPhotons;
 class PMFloatEdit;
 class PMIntEdit;
-class QComboBox;
-class QCheckBox;
+class TQComboBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMGlobalPhotons.
@@ -43,7 +43,7 @@ public:
    /**
     * Creates a PMGlobalPhotonsEdit with parent and name
     */
-   PMGlobalPhotonsEdit( QWidget* parent, const char* name = 0 );
+   PMGlobalPhotonsEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -73,7 +73,7 @@ protected slots:
 private:
    PMGlobalPhotons* m_pDisplayedObject;
 
-   QComboBox* m_pNumberType;
+   TQComboBox* m_pNumberType;
    PMFloatEdit* m_pSpacing;
    PMIntEdit* m_pCount;
    PMIntEdit* m_pGatherMin;
@@ -81,9 +81,9 @@ private:
    PMIntEdit* m_pMediaMaxSteps;
    PMFloatEdit* m_pMediaFactor;
    PMFloatEdit* m_pJitter;
-   QCheckBox* m_pMaxTraceLevelGlobal;
+   TQCheckBox* m_pMaxTraceLevelGlobal;
    PMIntEdit* m_pMaxTraceLevel;
-   QCheckBox* m_pAdcBailoutGlobal;
+   TQCheckBox* m_pAdcBailoutGlobal;
    PMFloatEdit* m_pAdcBailout;
    PMFloatEdit* m_pAutostop;
    PMFloatEdit* m_pExpandIncrease;

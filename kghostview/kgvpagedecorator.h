@@ -19,43 +19,43 @@
 #ifndef KGVPAGEDECORATOR_H
 #define KGVPAGEDECORATOR_H
 
-#include <qhbox.h>
+#include <tqhbox.h>
 
 class KGVPageDecorator : public QHBox
 {
 public:
-    KGVPageDecorator( QWidget* parent = 0, const char* name = 0 );
+    KGVPageDecorator( TQWidget* parent = 0, const char* name = 0 );
     ~KGVPageDecorator() { ; }
 
     unsigned int margin()      const;
     unsigned int borderWidth() const;
     
     /**
-     * Reimplemented from QObject to let mouse events from child widgets
+     * Reimplemented from TQObject to let mouse events from child widgets
      * appear to come from this widget.
      */
-    bool eventFilter( QObject*, QEvent* );
+    bool eventFilter( TQObject*, TQEvent* );
 
 protected:
     /**
-     * Reimplemented from QObject to automatically insert an event filter
+     * Reimplemented from TQObject to automatically insert an event filter
      * on child widgets.
      */
-    virtual void childEvent( QChildEvent* );
+    virtual void childEvent( TQChildEvent* );
 
     /**
-     * Reimplemented from QFrame to draw a pageshadow like frame.
+     * Reimplemented from TQFrame to draw a pageshadow like frame.
      */
-    virtual void drawFrame( QPainter* );
+    virtual void drawFrame( TQPainter* );
     
     /**
      * Draw the mask of both the frame and the contents in order to create a 
      * partially transparent frame.
      */ 
-    virtual void drawMask( QPainter* );
+    virtual void drawMask( TQPainter* );
     
     /**
-     * Reimplemented from QWidget. It uses @ref drawMask() to draw the mask
+     * Reimplemented from TQWidget. It uses @ref drawMask() to draw the mask
      * of the frame when transparency is required.
      */
     virtual void updateMask();
@@ -63,7 +63,7 @@ protected:
 private:
     unsigned int _margin;
     unsigned int _borderWidth;
-    QPoint _shadowOffset;
+    TQPoint _shadowOffset;
 };
 
 inline unsigned int KGVPageDecorator::margin() const

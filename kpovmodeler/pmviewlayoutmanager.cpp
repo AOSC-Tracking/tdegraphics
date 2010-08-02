@@ -27,13 +27,13 @@
 #include <kpopupmenu.h>
 #include <kiconloader.h>
 
-#include <qfile.h>
-#include <qdom.h>
-#include <qwidgetlist.h>
-#include <qlistbox.h>
-#include <qlineedit.h>
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqfile.h>
+#include <tqdom.h>
+#include <tqwidgetlist.h>
+#include <tqlistbox.h>
+#include <tqlineedit.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 
 #include "pmshell.h"
 #include "pmdebug.h"
@@ -80,9 +80,9 @@ PMViewLayoutEntry::~PMViewLayoutEntry( )
       delete m_pCustomOptions;
 }
 
-void PMViewLayoutEntry::loadData( QDomElement& e )
+void PMViewLayoutEntry::loadData( TQDomElement& e )
 {
-   QString s;
+   TQString s;
    bool ok;
 
    // Read the view type
@@ -129,9 +129,9 @@ void PMViewLayoutEntry::loadData( QDomElement& e )
       m_pCustomOptions->loadData( e );
 }
 
-void PMViewLayoutEntry::saveData( QDomElement& e ) const
+void PMViewLayoutEntry::saveData( TQDomElement& e ) const
 {
-   QString s;
+   TQString s;
    e.setTagName( m_viewType );
    switch( m_dockPosition )
    {
@@ -170,7 +170,7 @@ void PMViewLayoutEntry::saveData( QDomElement& e ) const
       m_pCustomOptions->saveData( e );
 }
 
-void PMViewLayoutEntry::setViewType( const QString& v )
+void PMViewLayoutEntry::setViewType( const TQString& v )
 {
    m_viewType = v;
 }
@@ -194,7 +194,7 @@ void PMViewLayoutEntry::setHeight( int i )
       m_height = 1;
 }
 
-const QString PMViewLayoutEntry::viewTypeAsString( )
+const TQString PMViewLayoutEntry::viewTypeAsString( )
 {
    PMViewTypeFactory* f = PMViewFactory::theFactory( )->viewFactory( m_viewType );
    if( f )
@@ -209,7 +209,7 @@ const QString PMViewLayoutEntry::viewTypeAsString( )
    return i18n( "Unknown" );
 }
 
-const QString PMViewLayoutEntry::dockPositionAsString( )
+const TQString PMViewLayoutEntry::dockPositionAsString( )
 {
    switch( m_dockPosition )
    {
@@ -255,17 +255,17 @@ PMViewLayout& PMViewLayout::operator = ( const PMViewLayout& vl )
    return *this;
 }
 
-void PMViewLayout::loadData( QDomElement& e )
+void PMViewLayout::loadData( TQDomElement& e )
 {
    m_entries.clear( );
    m_name = e.attribute( "name", "unnamed" );
 
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          PMViewLayoutEntry vle;
 
          vle.loadData( me );
@@ -276,21 +276,21 @@ void PMViewLayout::loadData( QDomElement& e )
    normalize( );
 }
 
-void PMViewLayout::saveData( QDomElement& e, QDomDocument& doc ) const
+void PMViewLayout::saveData( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QValueList< PMViewLayoutEntry>::const_iterator it;
+   TQValueList< PMViewLayoutEntry>::const_iterator it;
 
    e.setAttribute( "name", m_name );
    for( it = m_entries.begin( ); it != m_entries.end( ) ; ++it )
    {
-      QDomElement a;
+      TQDomElement a;
       a = doc.createElement( "unknown" );
       ( *it ).saveData( a );
       e.appendChild( a );
    }
 }
 
-void PMViewLayout::setName( const QString& n )
+void PMViewLayout::setName( const TQString& n )
 {
    m_name = n;
 }
@@ -311,7 +311,7 @@ void PMViewLayout::removeEntry( int index )
 void PMViewLayout::displayLayout( PMShell* shell )
 {
    PMDockWidget* lastWidget = 0;
-   QValueList< PMViewLayoutEntry>::const_iterator it;
+   TQValueList< PMViewLayoutEntry>::const_iterator it;
    bool isViewSet = false;
    int lastWidth = 0, width = 100;
    int lastHeight = 0, height = 100;
@@ -326,7 +326,7 @@ void PMViewLayout::displayLayout( PMShell* shell )
       {
          // the specified target is the desktop
          dock->manualDock( 0, PMDockWidget::DockDesktop, 50,
-                           QPoint( ( *it ).floatingPositionX( ),
+                           TQPoint( ( *it ).floatingPositionX( ),
                                    ( *it ).floatingPositionY( ) ) );
          dock->resize( ( *it ).floatingWidth( ), ( *it ).floatingHeight( ) );
          dock->show( );
@@ -445,35 +445,35 @@ PMViewLayout PMViewLayout::extractViewLayout( PMShell* shell )
 {
    PMViewLayout layout;
 
-   QValueList< QValueList< PMViewLayoutEntry > > cols;
-   cols.append( QValueList< PMViewLayoutEntry >( ) );
+   TQValueList< TQValueList< PMViewLayoutEntry > > cols;
+   cols.append( TQValueList< PMViewLayoutEntry >( ) );
 
    // find docked widgets
    recursiveExtractColumns( cols, cols.begin( ), 100,
                             shell->centralWidget( ) );
 
-   QValueListIterator< QValueList< PMViewLayoutEntry > > cit;
-   QValueListIterator< PMViewLayoutEntry > eit;
+   TQValueListIterator< TQValueList< PMViewLayoutEntry > > cit;
+   TQValueListIterator< PMViewLayoutEntry > eit;
 
    for( cit = cols.begin( ); cit != cols.end( ); ++cit )
       for( eit = ( *cit ).begin( ); eit != ( *cit ).end( ); ++eit )
          layout.addEntry( *eit );
 
    // find floating widgets
-   QPtrList<PMDockWidget> list;
+   TQPtrList<PMDockWidget> list;
    shell->manager( )->findFloatingWidgets( list );
-   QPtrListIterator<PMDockWidget> it( list );
+   TQPtrListIterator<PMDockWidget> it( list );
 
    for( ; it.current( ); ++it )
    {
       kdDebug( PMArea ) << it.current( ) << " " << it.current( )->isVisible( ) << endl;
-      QWidget* w = it.current( )->getWidget( );
+      TQWidget* w = it.current( )->getWidget( );
       if( w )
       {
          bool invalid = false;
          PMViewLayoutEntry e;
          e.setDockPosition( PMDockWidget::DockNone );
-         QPoint p = it.current( )->pos( );
+         TQPoint p = it.current( )->pos( );
          e.setFloatingPositionX( p.x( ) );
          e.setFloatingPositionY( p.y( ) );
          e.setFloatingWidth( it.current( )->width( ) );
@@ -503,9 +503,9 @@ PMViewLayout PMViewLayout::extractViewLayout( PMShell* shell )
 }
 
 void PMViewLayout::recursiveExtractColumns(
-   QValueList< QValueList< PMViewLayoutEntry > >& cols,
-   QValueList< QValueList< PMViewLayoutEntry > >::iterator cit,
-   int width, QWidget* widget )
+   TQValueList< TQValueList< PMViewLayoutEntry > >& cols,
+   TQValueList< TQValueList< PMViewLayoutEntry > >::iterator cit,
+   int width, TQWidget* widget )
 {
    if( !widget )
       return;
@@ -513,7 +513,7 @@ void PMViewLayout::recursiveExtractColumns(
    if( widget->inherits( "PMDockWidget" ) )
    {
       PMDockWidget* dw = ( PMDockWidget* ) widget;
-      QWidget* w = dw->getWidget( );
+      TQWidget* w = dw->getWidget( );
       if( w )
       {
          bool colStart = true;
@@ -529,8 +529,8 @@ void PMViewLayout::recursiveExtractColumns(
                if( w1 == 0 ) w1++;
                if( w2 == 0 ) w2++;
 
-               QValueList< QValueList< PMViewLayoutEntry > >::iterator cit1
-                  = cols.insert( cit, QValueList< PMViewLayoutEntry >( ) );
+               TQValueList< TQValueList< PMViewLayoutEntry > >::iterator cit1
+                  = cols.insert( cit, TQValueList< PMViewLayoutEntry >( ) );
 
                recursiveExtractColumns( cols, cit1, w1, sp->getFirst( ) );
                recursiveExtractColumns( cols, cit, w2, sp->getLast( ) );
@@ -550,9 +550,9 @@ void PMViewLayout::recursiveExtractColumns(
 }
 
 void PMViewLayout::recursiveExtractOneColumn(
-   QValueList< PMViewLayoutEntry >& entries,
-   QValueList< PMViewLayoutEntry >::iterator eit,
-   int height, QWidget* widget )
+   TQValueList< PMViewLayoutEntry >& entries,
+   TQValueList< PMViewLayoutEntry >::iterator eit,
+   int height, TQWidget* widget )
 {
    if( !widget )
       return;
@@ -560,7 +560,7 @@ void PMViewLayout::recursiveExtractOneColumn(
    if( widget->inherits( "PMDockWidget" ) )
    {
       PMDockWidget* dw = ( PMDockWidget* ) widget;
-      QWidget* w = dw->getWidget( );
+      TQWidget* w = dw->getWidget( );
       if( w )
       {
          if( w->inherits( "PMDockSplitter" ) )
@@ -578,7 +578,7 @@ void PMViewLayout::recursiveExtractOneColumn(
             PMViewLayoutEntry e;
             e.setHeight( h2 );
             e.setDockPosition( PMDockWidget::DockBottom );
-            QValueList< PMViewLayoutEntry >::iterator eit1 = eit;
+            TQValueList< PMViewLayoutEntry >::iterator eit1 = eit;
             eit1 = entries.insert( ++eit1, e );
 
             recursiveExtractOneColumn( entries, eit, h1, sp->getFirst( ) );
@@ -588,7 +588,7 @@ void PMViewLayout::recursiveExtractOneColumn(
          {
             PMDockTabGroup* g = ( PMDockTabGroup* ) w;
             int num = g->count( );
-            QWidget* tw;
+            TQWidget* tw;
             int i;
             for( i = 0; i < num; i++ )
             {
@@ -640,15 +640,15 @@ PMViewLayoutManager::~PMViewLayoutManager( )
 {
 }
 
-void PMViewLayoutManager::setDefaultLayout( const QString& name )
+void PMViewLayoutManager::setDefaultLayout( const TQString& name )
 {
    m_defaultLayout = name;
 }
 
-QStringList PMViewLayoutManager::availableLayouts( )
+TQStringList PMViewLayoutManager::availableLayouts( )
 {
-   QStringList result;
-   QValueListIterator<PMViewLayout> it;
+   TQStringList result;
+   TQValueListIterator<PMViewLayout> it;
 
    for( it = m_layouts.begin( ); it != m_layouts.end( ); ++it )
       result.push_back( ( *it ).name( ) );
@@ -663,7 +663,7 @@ void PMViewLayoutManager::loadData( )
 
    m_layoutsLoaded = true;
 
-   QString fileName = locate( "data", "kpovmodeler/viewlayouts.xml" );
+   TQString fileName = locate( "data", "kpovmodeler/viewlayouts.xml" );
    if( fileName.isEmpty( ) )
    {
       // Generate a default layout
@@ -707,7 +707,7 @@ void PMViewLayoutManager::loadData( )
       return;
    }
 
-   QFile file( fileName );
+   TQFile file( fileName );
    if( !file.open( IO_ReadOnly ) )
    {
       kdError( PMArea ) << i18n( "Could not open the view layouts file." )
@@ -715,21 +715,21 @@ void PMViewLayoutManager::loadData( )
       return;
    }
 
-   QDomDocument doc( "VIEWLAYOUTS" );
+   TQDomDocument doc( "VIEWLAYOUTS" );
    doc.setContent( &file );
 
-   QDomElement e = doc.documentElement( );
+   TQDomElement e = doc.documentElement( );
    m_defaultLayout = e.attribute( "default", "empty" );
 
-   QDomNode c = e.firstChild( );
+   TQDomNode c = e.firstChild( );
 
-   QString str;
+   TQString str;
 
    while( !c.isNull( ) )
    {
       if( c.isElement( ) )
       {
-         QDomElement ce = c.toElement( );
+         TQDomElement ce = c.toElement( );
          PMViewLayout v;
          v.loadData( ce );
          m_layouts.append( v );
@@ -740,36 +740,36 @@ void PMViewLayoutManager::loadData( )
 
 void PMViewLayoutManager::saveData( )
 {
-   QString fileName = locateLocal( "data", "kpovmodeler/viewlayouts.xml" );
+   TQString fileName = locateLocal( "data", "kpovmodeler/viewlayouts.xml" );
    if( fileName.isEmpty( ) )
    {
       kdError( PMArea ) << i18n( "View layouts not found." ) << endl;
       return;
    }
-   QFile file( fileName );
+   TQFile file( fileName );
    if( !file.open( IO_WriteOnly ) )
    {
       kdError( PMArea ) << i18n( "Could not open the view layouts file." )
                         << endl;
       return;
    }
-   QDomDocument doc( "VIEWLAYOUTS" );
-   QDomElement e = doc.createElement( "viewlist" );
+   TQDomDocument doc( "VIEWLAYOUTS" );
+   TQDomElement e = doc.createElement( "viewlist" );
    e.setAttribute( "default", m_defaultLayout );
 
-   QValueListIterator<PMViewLayout> it;
+   TQValueListIterator<PMViewLayout> it;
 
    for( it = m_layouts.begin( ); it != m_layouts.end( ); ++it )
    {
-      QDomElement l;
+      TQDomElement l;
 
       l = doc.createElement( "viewlayout" );
       ( *it ).saveData( l, doc );
       e.appendChild( l );
    }
    doc.appendChild( e );
-   QTextStream str( &file );
-   str.setEncoding( QTextStream::UnicodeUTF8 );
+   TQTextStream str( &file );
+   str.setEncoding( TQTextStream::UnicodeUTF8 );
    str << doc.toString( );
    file.close( );
 }
@@ -781,7 +781,7 @@ PMViewLayoutManager* PMViewLayoutManager::theManager( )
    return s_pInstance;
 }
 
-void PMViewLayoutManager::displayLayout( const QString& name, PMShell* shell )
+void PMViewLayoutManager::displayLayout( const TQString& name, PMShell* shell )
 {
    PMViewLayout* v_layout = findLayout( name );
 
@@ -790,7 +790,7 @@ void PMViewLayoutManager::displayLayout( const QString& name, PMShell* shell )
       // Destroy the existing dock widgets
       if( m_layoutDisplayed )
       {
-         QWidgetList lst;
+         TQWidgetList lst;
 
          if( shell->centralWidget( ) )
             shell->manager( )->findChildDockWidget( shell->centralWidget( ), lst );
@@ -801,7 +801,7 @@ void PMViewLayoutManager::displayLayout( const QString& name, PMShell* shell )
             lst.remove( );
          }
 
-         QPtrList<PMDockWidget> flist;
+         TQPtrList<PMDockWidget> flist;
          shell->manager( )->findFloatingWidgets( flist );
          while( flist.first( ) )
          {
@@ -821,9 +821,9 @@ void PMViewLayoutManager::displayDefaultLayout( PMShell* shell )
    displayLayout( m_defaultLayout, shell );
 }
 
-PMViewLayout* PMViewLayoutManager::findLayout( const QString& name )
+PMViewLayout* PMViewLayoutManager::findLayout( const TQString& name )
 {
-   QValueListIterator<PMViewLayout> it;
+   TQValueListIterator<PMViewLayout> it;
    for( it = m_layouts.begin( ); it != m_layouts.end( ) &&
         ( *it ).name( ) != name; ++it );
 
@@ -834,8 +834,8 @@ PMViewLayout* PMViewLayoutManager::findLayout( const QString& name )
 
 void PMViewLayoutManager::fillPopupMenu( KPopupMenu* pMenu )
 {
-   QStringList lst = availableLayouts( );
-   QStringList::ConstIterator it = lst.begin( );
+   TQStringList lst = availableLayouts( );
+   TQStringList::ConstIterator it = lst.begin( );
 
    pMenu->clear( );
    if( it != lst.end( ) )
@@ -845,7 +845,7 @@ void PMViewLayoutManager::fillPopupMenu( KPopupMenu* pMenu )
    }
 }
 
-void PMViewLayoutManager::addLayout( const QString& name )
+void PMViewLayoutManager::addLayout( const TQString& name )
 {
    PMViewLayout a;
 
@@ -855,9 +855,9 @@ void PMViewLayoutManager::addLayout( const QString& name )
    m_layouts.append( a );
 }
 
-void PMViewLayoutManager::removeLayout( const QString& name )
+void PMViewLayoutManager::removeLayout( const TQString& name )
 {
-   QValueListIterator<PMViewLayout> it;
+   TQValueListIterator<PMViewLayout> it;
    for( it = m_layouts.begin( ); it != m_layouts.end( ) &&
         ( *it ).name( ) != name; ++it );
 
@@ -876,26 +876,26 @@ PMSaveViewLayoutDialog::PMSaveViewLayoutDialog( PMShell* parent,
    setButtonOK( KStdGuiItem::save() );
    enableButtonOK( false );
 
-   QWidget* w = new QWidget( this );
-   QVBoxLayout* vl = new QVBoxLayout( w, 0, KDialog::spacingHint( ) );
+   TQWidget* w = new TQWidget( this );
+   TQVBoxLayout* vl = new TQVBoxLayout( w, 0, KDialog::spacingHint( ) );
 
-   QLabel* l = new QLabel( i18n( "Enter view layout name:" ), w );
+   TQLabel* l = new TQLabel( i18n( "Enter view layout name:" ), w );
    vl->addWidget( l );
 
-   m_pLayoutName = new QLineEdit( w );
+   m_pLayoutName = new TQLineEdit( w );
    vl->addWidget( m_pLayoutName );
-   connect( m_pLayoutName, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotNameChanged( const QString& ) ) );
+   connect( m_pLayoutName, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotNameChanged( const TQString& ) ) );
 
-   QListBox* lb = new QListBox( w );
+   TQListBox* lb = new TQListBox( w );
    vl->addWidget( lb );
-   connect( lb, SIGNAL( highlighted( const QString& ) ),
-            SLOT( slotNameSelected( const QString& ) ) );
+   connect( lb, TQT_SIGNAL( highlighted( const TQString& ) ),
+            TQT_SLOT( slotNameSelected( const TQString& ) ) );
    lb->insertStringList( PMViewLayoutManager::theManager( )
                          ->availableLayouts( ) );
 
    setMainWidget( w );
-   setInitialSize( QSize( 300, 200 ) );
+   setInitialSize( TQSize( 300, 200 ) );
 }
 
 PMSaveViewLayoutDialog::~PMSaveViewLayoutDialog( )
@@ -904,7 +904,7 @@ PMSaveViewLayoutDialog::~PMSaveViewLayoutDialog( )
 
 void PMSaveViewLayoutDialog::slotOk( )
 {
-   QString name = m_pLayoutName->text( );
+   TQString name = m_pLayoutName->text( );
 
    PMViewLayoutManager* m = PMViewLayoutManager::theManager( );
    PMViewLayout* layout = m->findLayout( name );
@@ -922,12 +922,12 @@ void PMSaveViewLayoutDialog::slotOk( )
    KDialogBase::slotOk( );
 }
 
-void PMSaveViewLayoutDialog::slotNameChanged( const QString& s )
+void PMSaveViewLayoutDialog::slotNameChanged( const TQString& s )
 {
    enableButtonOK( !s.isEmpty( ) );
 }
 
-void PMSaveViewLayoutDialog::slotNameSelected( const QString& s )
+void PMSaveViewLayoutDialog::slotNameSelected( const TQString& s )
 {
    m_pLayoutName->setText( s );
 }

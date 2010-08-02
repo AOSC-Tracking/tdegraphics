@@ -26,8 +26,8 @@
 
 #include "pmsolidobject.h"
 #include "pmvector.h"
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 #include <math.h>
 
 class PMViewStructure;
@@ -60,7 +60,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMSphereSweep( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -68,18 +68,18 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMSphereSweepEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmspheresweep" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmspheresweep" ); }
 
    /** */
    virtual void createMemento( );
@@ -93,29 +93,29 @@ public:
    virtual bool hasDisplayDetail( ) const { return true; }
    /** */
    virtual void addObjectActions( const PMControlPointList&,
-                                  QPtrList<PMObjectAction>& );
+                                  TQPtrList<PMObjectAction>& );
    /** */
    virtual void objectActionCalled( const PMObjectAction*,
                                     const PMControlPointList&,
-                                    const QPtrList<PMVector>&,
+                                    const TQPtrList<PMVector>&,
                                     const PMVector& );
 
    /**
     * Returns the spline points
     */
-   QValueList<PMVector> points( ) const { return m_points; }
+   TQValueList<PMVector> points( ) const { return m_points; }
    /**
     * Sets the spline points
     */
-   void setPoints( const QValueList<PMVector>& points );
+   void setPoints( const TQValueList<PMVector>& points );
    /**
     * Returns the radii
     */
-   QValueList<double> radii( ) const { return m_radii; }
+   TQValueList<double> radii( ) const { return m_radii; }
    /**
     * Sets the radii
     */
-   void setRadii( const QValueList<double>& radii );
+   void setRadii( const TQValueList<double>& radii );
    /**
     * Returns the number of spline points
     */
@@ -165,17 +165,17 @@ private:
     * Object action. Adds a spline point
     */
    void splitSegment( const PMControlPointList& cp,
-                      const QPtrList<PMVector>& cpViewPosition,
+                      const TQPtrList<PMVector>& cpViewPosition,
                       const PMVector& clickPosition );
    /**
     * Object action. Removes a spline point
     */
    void joinSegments( const PMControlPointList& cp,
-                      const QPtrList<PMVector>& cpViewPosition,
+                      const TQPtrList<PMVector>& cpViewPosition,
                       const PMVector& clickPosition );
 
-   void stringToValues( const QString& str );
-   QString valuesToString( ) const;
+   void stringToValues( const TQString& str );
+   TQString valuesToString( ) const;
 
    /**
     * IDs for @ref PMMementoData
@@ -186,8 +186,8 @@ private:
     */
    enum PMSphereSweepActionID { PMSplitSegmentID, PMJoinSegmentsID };
    SplineType m_splineType;
-   QValueList<PMVector> m_points;
-   QValueList<double> m_radii;
+   TQValueList<PMVector> m_points;
+   TQValueList<double> m_radii;
    double m_tolerance;
 
    static int s_rSteps;
@@ -201,12 +201,12 @@ private:
     * creating view structure
     */
    struct Segment{
-      QValueList<PMVector> points;
-      QValueList<double> radii;
-      QValueList<PMVector> direction;
+      TQValueList<PMVector> points;
+      TQValueList<double> radii;
+      TQValueList<PMVector> direction;
    };
 
-   QValueList<Segment> m_segments;
+   TQValueList<Segment> m_segments;
    int m_nextPoint;
    int m_nextLine;
    /**

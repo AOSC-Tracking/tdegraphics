@@ -46,7 +46,7 @@ public:
        This constructor simply prints a message (if debugging is
        enabled) and calls the default constructor.
    */
-   FaxRenderer(QWidget* parent);
+   FaxRenderer(TQWidget* parent);
 
    /** Destructor
 
@@ -67,7 +67,7 @@ public:
 
       @param fname the name of the file that should be opened. 
   */
-  virtual bool setFile(const QString& fname, const KURL &);
+  virtual bool setFile(const TQString& fname, const KURL &);
 
   /** Rendering a page
 

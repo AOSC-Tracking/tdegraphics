@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qrect.h>
+#include <tqrect.h>
 
 #include "CanvasItem.h"
 #include "KSVGCanvas.h"
@@ -484,7 +484,7 @@ void SVGStylableImpl::processStyle()
 		if(parentStyle)
 			m_startMarker = parentStyle->getStartMarker();
 		else
-			m_startMarker = QString::null;
+			m_startMarker = TQString::null;
 	}
 
 	// Spec: default "none"
@@ -493,7 +493,7 @@ void SVGStylableImpl::processStyle()
 		if(parentStyle)
 			m_midMarker = parentStyle->getMidMarker();
 		else
-			m_midMarker = QString::null;
+			m_midMarker = TQString::null;
 	}
 
 	// Spec: default "none"
@@ -502,7 +502,7 @@ void SVGStylableImpl::processStyle()
 		if(parentStyle)
 			m_endMarker = parentStyle->getEndMarker();
 		else
-			m_endMarker = QString::null;
+			m_endMarker = TQString::null;
 	}
 }
 
@@ -526,9 +526,9 @@ bool SVGStylableImpl::isFilled() const
 		   m_fillColor->paintType() != SVG_PAINTTYPE_URI_NONE;
 }
 
-QString SVGStylableImpl::extractUrlId(const QString &url)
+TQString SVGStylableImpl::extractUrlId(const TQString &url)
 {
-	QString id;
+	TQString id;
 
 	if(url.startsWith("url(#"))
 	{
@@ -541,14 +541,14 @@ QString SVGStylableImpl::extractUrlId(const QString &url)
 	return id;
 }
 
-void SVGStylableImpl::setMarkers(const QString &marker)
+void SVGStylableImpl::setMarkers(const TQString &marker)
 {
 	setStartMarker(marker);
 	setMidMarker(marker);
 	setEndMarker(marker);
 }
 
-void SVGStylableImpl::setStartMarker(const QString &startMarker)
+void SVGStylableImpl::setStartMarker(const TQString &startMarker)
 {
 	if(startMarker.startsWith("url(#"))
 	{
@@ -556,10 +556,10 @@ void SVGStylableImpl::setStartMarker(const QString &startMarker)
 		m_startMarker = startMarker.mid(idstart, startMarker.length() - idstart - 1);
 	}
 	else if(startMarker == "none")
-		m_startMarker = QString::null;
+		m_startMarker = TQString::null;
 }
 
-void SVGStylableImpl::setMidMarker(const QString &midMarker)
+void SVGStylableImpl::setMidMarker(const TQString &midMarker)
 {
 	if(midMarker.startsWith("url(#"))
 	{
@@ -567,10 +567,10 @@ void SVGStylableImpl::setMidMarker(const QString &midMarker)
 		m_midMarker = midMarker.mid(idstart, midMarker.length() - idstart - 1);
 	}
 	else if(midMarker == "none")
-		m_midMarker = QString::null;
+		m_midMarker = TQString::null;
 }
 
-void SVGStylableImpl::setEndMarker(const QString &endMarker)
+void SVGStylableImpl::setEndMarker(const TQString &endMarker)
 {
 	if(endMarker.startsWith("url(#"))
 	{
@@ -578,7 +578,7 @@ void SVGStylableImpl::setEndMarker(const QString &endMarker)
 		m_endMarker = endMarker.mid(idstart, endMarker.length() - idstart - 1);
 	}
 	else if(endMarker == "none")
-		m_endMarker = QString::null;
+		m_endMarker = TQString::null;
 }
 
 bool SVGStylableImpl::hasMarkers() const
@@ -586,7 +586,7 @@ bool SVGStylableImpl::hasMarkers() const
 	return !m_startMarker.isEmpty() || !m_midMarker.isEmpty() || !m_endMarker.isEmpty();
 }
 
-void SVGStylableImpl::setPaint(const QString &param, SVGPaintImpl *svgPaint)
+void SVGStylableImpl::setPaint(const TQString &param, SVGPaintImpl *svgPaint)
 {
 	if(param.stripWhiteSpace() == "none")
 		svgPaint->setPaint(SVG_PAINTTYPE_NONE, DOM::DOMString(""), DOM::DOMString(""));
@@ -596,48 +596,48 @@ void SVGStylableImpl::setPaint(const QString &param, SVGPaintImpl *svgPaint)
 		setColor(param, svgPaint);
 }
 
-void SVGStylableImpl::setColor(const QString &param, SVGColorImpl *svgColor)
+void SVGStylableImpl::setColor(const TQString &param, SVGColorImpl *svgColor)
 {
 	if(param.stripWhiteSpace().startsWith("#"))
 	{
 		if(param.contains("icc-color"))
 		{
-			QString first = param.left(7);
-			QString last = param.right(param.length() - 8);
+			TQString first = param.left(7);
+			TQString last = param.right(param.length() - 8);
 
 			svgColor->setRGBColorICCColor(first, last);
 		}
 		else
 		{
-			QColor color;
+			TQColor color;
 			color.setNamedColor(param.stripWhiteSpace());
 			svgColor->setRGBColor(color);
 		}
 	}
 	else if(param.stripWhiteSpace().startsWith("rgb("))
 	{
-		QString parse = param.stripWhiteSpace();
-		QStringList colors = QStringList::split(',', parse);
-		QString r = colors[0].right((colors[0].length() - 4));
-		QString g = colors[1];
-		QString b = colors[2].left((colors[2].length() - 1));
+		TQString parse = param.stripWhiteSpace();
+		TQStringList colors = TQStringList::split(',', parse);
+		TQString r = colors[0].right((colors[0].length() - 4));
+		TQString g = colors[1];
+		TQString b = colors[2].left((colors[2].length() - 1));
 
 		if(r.contains("%"))
 		{
 			r = r.left(r.length() - 1);
-			r = QString::number(int((double(255 * r.toDouble()) / 100.0)));
+			r = TQString::number(int((double(255 * r.toDouble()) / 100.0)));
 		}
 		
 		if(g.contains("%"))
 		{
 			g = g.left(g.length() - 1);
-			g = QString::number(int((double(255 * g.toDouble()) / 100.0)));
+			g = TQString::number(int((double(255 * g.toDouble()) / 100.0)));
 		}
 
 		if(b.contains("%"))
 		{
 			b = b.left(b.length() - 1);
-			b = QString::number(int((double(255 * b.toDouble()) / 100.0)));
+			b = TQString::number(int((double(255 * b.toDouble()) / 100.0)));
 		}
 
 		svgColor->setRGBColor(int(r.toFloat()), int(g.toFloat()), int(b.toFloat()));
@@ -651,16 +651,16 @@ void SVGStylableImpl::setColor(const QString &param, SVGColorImpl *svgColor)
 	}
 }
 
-QRect SVGStylableImpl::clip()
+TQRect SVGStylableImpl::clip()
 {
-	return QRect();
+	return TQRect();
 }
 
-void SVGStylableImpl::setClip(const QString &)
+void SVGStylableImpl::setClip(const TQString &)
 {
 }
 
-float SVGStylableImpl::fontSizeForText(const QString &value)
+float SVGStylableImpl::fontSizeForText(const TQString &value)
 {
 	float ret = -1;
 
@@ -772,7 +772,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 	if(!(attr & KJS::Internal))
 		return;
 
-	QString param = value.toString(exec).qstring();
+	TQString param = value.toString(exec).qstring();
 	
 	if (param.isEmpty())
 		return;
@@ -788,10 +788,10 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 			if(!m_object)
 				return;
 
-			QStringList substyles = QStringList::split(';', param);
-			for(QStringList::Iterator it = substyles.begin(); it != substyles.end(); ++it)
+			TQStringList substyles = TQStringList::split(';', param);
+			for(TQStringList::Iterator it = substyles.begin(); it != substyles.end(); ++it)
 			{
-				QStringList substyle = QStringList::split(':', (*it));
+				TQStringList substyle = TQStringList::split(':', (*it));
 				m_object->setAttributeInternal(substyle[0].stripWhiteSpace(), substyle[1].stripWhiteSpace());
 			}
 			break;
@@ -946,7 +946,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 
 			// Hacks
 			// #1 Replace "'" characters by ""
-			param = param.replace('\'', QString::null);
+			param = param.replace('\'', TQString::null);
 			// #2 Replace "MS-Gothic" by "MS Gothic"
 			param = param.replace("MS-Gothic", "MS Gothic");
 			// #3 Replace "Helvetica" by "Arial"
@@ -983,8 +983,8 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 			{
 				// CSS2 allows multiple decorations
 				m_textDecoration = TDNONE;
-				QStringList decorations = QStringList::split(' ', param);
-				for(QStringList::Iterator it = decorations.begin(); it != decorations.end(); ++it)
+				TQStringList decorations = TQStringList::split(' ', param);
+				for(TQStringList::Iterator it = decorations.begin(); it != decorations.end(); ++it)
 				{
 					if(*it == "underline")
 						m_textDecoration |= UNDERLINE;

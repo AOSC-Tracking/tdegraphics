@@ -31,8 +31,8 @@ typedef KParts::GenericFactory<FaxMultiPage> FaxMultiPageFactory;
 K_EXPORT_COMPONENT_FACTORY(kfaxviewpart, FaxMultiPageFactory)
 
 
-FaxMultiPage::FaxMultiPage(QWidget *parentWidget, const char *widgetName, QObject *parent,
-                             const char *name, const QStringList&)
+FaxMultiPage::FaxMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+                             const char *name, const TQStringList&)
   : KMultiPage(parentWidget, widgetName, parent, name), faxRenderer(parentWidget)
 {
   /* This is kparts wizardry that cannot be understood by man. Simply
@@ -72,11 +72,11 @@ KAboutData* FaxMultiPage::createAboutData()
 }
 
 
-QStringList FaxMultiPage::fileFormats() const
+TQStringList FaxMultiPage::fileFormats() const
 {
   /* This list is used in the file selection dialog when the file is
      saved */
-  QStringList r;
+  TQStringList r;
   r << i18n("*.g3|Fax (g3) file (*.g3)");
   return r;
 }

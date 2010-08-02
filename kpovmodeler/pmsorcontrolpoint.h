@@ -42,7 +42,7 @@ public:
     */
    PMSorControlPoint( PMSorControlPoint* prev,
                       const PMVector& point, CPType type,
-                      int id, const QString& description );
+                      int id, const TQString& description );
    /**
     * Deletes the PMSorControlPoint
     */

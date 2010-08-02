@@ -20,32 +20,32 @@
 
 #include <assert.h>
 
-#include <qcolor.h>
-#include <qwidget.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qpen.h>
-#include <qmovie.h>
-#include <qpixmap.h>
+#include <tqcolor.h>
+#include <tqwidget.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqpen.h>
+#include <tqmovie.h>
+#include <tqpixmap.h>
 
 #include <kpixmap.h>
 #include <kdebug.h>
 
 #include "kimageholder.h"
 
-KImageHolder::KImageHolder( QWidget * parent, const char * name )
-	: QWidget( parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase )
+KImageHolder::KImageHolder( TQWidget * parent, const char * name )
+	: TQWidget( parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase )
 	, m_selected( false )
 	, m_bSelecting( false )
 	, m_scrollTimerId( 0 )
 	, m_xOffset( 0 )
 	, m_yOffset( 0 )
-	, m_pen( new QPen( QColor( 255, 255, 255 ), 0, DashLine ) )
+	, m_pen( new TQPen( TQColor( 255, 255, 255 ), 0, DashLine ) )
 	, m_pPixmap( 0 )
 	, m_pDoubleBuffer( 0 )
 	, m_pCheckboardPixmap( 0 )
 {
-	setBackgroundMode( QWidget::NoBackground );
+	setBackgroundMode( TQWidget::NoBackground );
 }
 
 KImageHolder::~KImageHolder()
@@ -60,7 +60,7 @@ KImageHolder::~KImageHolder()
 	m_pCheckboardPixmap = 0;
 }
 
-void KImageHolder::mousePressEvent( QMouseEvent *ev )
+void KImageHolder::mousePressEvent( TQMouseEvent *ev )
 {
 	//kdDebug( 4620 ) << k_funcinfo << " ev->state() = " << ev->state() << endl;
 	// if the right mouse button is pressed emit the contextPress signal
@@ -80,7 +80,7 @@ void KImageHolder::mousePressEvent( QMouseEvent *ev )
 	}
 }
 
-void KImageHolder::mouseMoveEvent( QMouseEvent *ev )
+void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 {
 	//FIXME: when scrolling the cursorpos shouldn't change
 	if( this->rect().contains( ev->pos(), false ) )
@@ -91,12 +91,12 @@ void KImageHolder::mouseMoveEvent( QMouseEvent *ev )
 		// scroll when a modifier and left button or the middle button is pressed
 		if( ev->state() & AltButton || ev->state() & ControlButton || ev->state() & ShiftButton || ev->state() & MidButton )
 		{
-			QPoint difference = m_scrollpos - ev->globalPos();
+			TQPoint difference = m_scrollpos - ev->globalPos();
 			emit wannaScroll( difference.x(), difference.y() );
 		}
 		else // create a selection
 		{
-			QWidget * parentwidget = ( QWidget* )parent();
+			TQWidget * parentwidget = ( TQWidget* )parent();
 			if( ! m_bSelecting )
 			{
 				m_bSelecting = true;
@@ -161,7 +161,7 @@ void KImageHolder::mouseMoveEvent( QMouseEvent *ev )
 				m_selection.setBottom( b );
 				emit selected( m_selection.normalize() );
 
-				QPainter painter( this );
+				TQPainter painter( this );
 				drawSelect( painter );
 			}
 		}
@@ -170,7 +170,7 @@ void KImageHolder::mouseMoveEvent( QMouseEvent *ev )
 	}
 }
 
-void KImageHolder::mouseReleaseEvent( QMouseEvent * ev )
+void KImageHolder::mouseReleaseEvent( TQMouseEvent * ev )
 {
 	if( m_bSelecting )
 	{
@@ -188,7 +188,7 @@ void KImageHolder::mouseReleaseEvent( QMouseEvent * ev )
 			clearSelection();
 }
 
-void KImageHolder::drawSelect( QPainter & painter )
+void KImageHolder::drawSelect( TQPainter & painter )
 {
 	painter.save();
 	painter.setRasterOp( XorROP );
@@ -199,15 +199,15 @@ void KImageHolder::drawSelect( QPainter & painter )
 
 void KImageHolder::eraseSelect()
 {
-	QRegion r( m_selection.normalize() );
-	QRect inner = m_selection.normalize();
+	TQRegion r( m_selection.normalize() );
+	TQRect inner = m_selection.normalize();
 	inner.rLeft() += 1;
 	inner.rTop() += 1;
 	inner.rRight() -= 1;
 	inner.rBottom() -= 1;
 	r -= inner;
 
-	QMemArray<QRect> rects = r.rects();
+	TQMemArray<TQRect> rects = r.rects();
 
 	if( m_pDoubleBuffer )
 		for( unsigned int i = 0; i < rects.size(); ++i )
@@ -224,7 +224,7 @@ void KImageHolder::clearSelection()
 		eraseSelect();
 		m_selected = false;
 	}
-	m_selection.setSize( QSize( 0, 0 ) );
+	m_selection.setSize( TQSize( 0, 0 ) );
 	emit selected( m_selection );
 }
 
@@ -235,7 +235,7 @@ void KImageHolder::setImage( const KPixmap & pix )
 	setPixmap( pix );
 }
 
-void KImageHolder::setImage( const QImage & image )
+void KImageHolder::setImage( const TQImage & image )
 {
 	clearSelection();
 	kdDebug( 4620 ) << "converting Image to Pixmap" << endl;
@@ -244,11 +244,11 @@ void KImageHolder::setImage( const QImage & image )
 	setPixmap( pix );
 }
 
-void KImageHolder::setImage( const QMovie & /*movie*/ )
+void KImageHolder::setImage( const TQMovie & /*movie*/ )
 {
 	clearSelection();
 	//setMovie( movie );
-	kdWarning( 4620 ) << "setImage( QMovie ) not implemented" << endl;
+	kdWarning( 4620 ) << "setImage( TQMovie ) not implemented" << endl;
 }
 
 void KImageHolder::clear()
@@ -261,24 +261,24 @@ void KImageHolder::clear()
 	clearSelection();
 }
 
-QRect KImageHolder::selection() const
+TQRect KImageHolder::selection() const
 {
 	if( m_selected )
 		return m_selection.normalize();
 	else
-		return QRect();
+		return TQRect();
 }
 
-QSize KImageHolder::sizeHint() const
+TQSize KImageHolder::sizeHint() const
 {
 	if( m_pPixmap )
 		return m_pPixmap->size();
-	return QSize( 0, 0 );
+	return TQSize( 0, 0 );
 }
 
-void KImageHolder::paintEvent( QPaintEvent *ev )
+void KImageHolder::paintEvent( TQPaintEvent *ev )
 {
-	QPainter painter( this );
+	TQPainter painter( this );
 	painter.setClipRegion( ev->region().intersect( m_drawRect ) );
 	if( m_pPixmap )
 	{
@@ -287,10 +287,10 @@ void KImageHolder::paintEvent( QPaintEvent *ev )
 			if( ! m_pDoubleBuffer )
 			{
 				m_pDoubleBuffer = new KPixmap( m_pPixmap->size() );
-				QPainter p( m_pDoubleBuffer );
+				TQPainter p( m_pDoubleBuffer );
 				p.drawTiledPixmap( m_pDoubleBuffer->rect(), checkboardPixmap() );
 				p.end();
-				bitBlt( m_pDoubleBuffer, QPoint( 0, 0 ), m_pPixmap, m_pPixmap->rect() );
+				bitBlt( m_pDoubleBuffer, TQPoint( 0, 0 ), m_pPixmap, m_pPixmap->rect() );
 			}
 			painter.drawPixmap( 0, 0, *m_pDoubleBuffer );
 		}
@@ -301,7 +301,7 @@ void KImageHolder::paintEvent( QPaintEvent *ev )
 		drawSelect( painter );
 }
 
-void KImageHolder::timerEvent( QTimerEvent * ev )
+void KImageHolder::timerEvent( TQTimerEvent * ev )
 {
 	if( ev->timerId() != m_scrollTimerId )
 		return;

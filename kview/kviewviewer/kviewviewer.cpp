@@ -28,11 +28,11 @@
 #include <unistd.h>
 #include <assert.h>
 
-#include <qbuffer.h>
-#include <qlayout.h>
-#include <qvbox.h>
-#include <qlabel.h>
-#include <qregexp.h>
+#include <tqbuffer.h>
+#include <tqlayout.h>
+#include <tqvbox.h>
+#include <tqlabel.h>
+#include <tqregexp.h>
 
 #include <kpushbutton.h>
 #include <kpassivepopup.h>
@@ -55,8 +55,8 @@
 typedef KParts::GenericFactory<KViewViewer> KViewViewerFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewviewer, KViewViewerFactory )
 
-KViewViewer::KViewViewer( QWidget *parentWidget, const char * /*widgetName*/,
-		QObject *parent, const char *name, const QStringList & )
+KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
+		TQObject *parent, const char *name, const TQStringList & )
 	: KImageViewer::Viewer( parent, name )
 	, m_pParentWidget( parentWidget )
 	, m_pJob( 0 )
@@ -68,8 +68,8 @@ KViewViewer::KViewViewer( QWidget *parentWidget, const char * /*widgetName*/,
 {
 	KImageIO::registerFormats();
 
-	QWidget * widget =  KParts::ComponentFactory::createInstanceFromQuery<QWidget>(
-			"KImageViewer/Canvas", QString::null, m_pParentWidget );
+	TQWidget * widget =  KParts::ComponentFactory::createInstanceFromQuery<TQWidget>(
+			"KImageViewer/Canvas", TQString::null, m_pParentWidget );
 	m_pCanvas = static_cast<KImageViewer::Canvas *>( widget->qt_cast( "KImageViewer::Canvas" ) );
 	kdDebug( 4610 ) << "KImageViewer::Canvas at " << m_pCanvas << endl;
 	if( ! ( widget && m_pCanvas ) )
@@ -88,7 +88,7 @@ KViewViewer::KViewViewer( QWidget *parentWidget, const char * /*widgetName*/,
 		setInstance( KViewViewerFactory::instance() );
 
 		// m_url isn't set from ReadOnlyPart so we set it here to the CWD
-		m_url = QDir::currentDirPath() + "/";
+		m_url = TQDir::currentDirPath() + "/";
 		m_sCaption = i18n( "Title caption when no image loaded", "no image loaded" );
 
 		setWidget( widget );
@@ -104,21 +104,21 @@ KViewViewer::KViewViewer( QWidget *parentWidget, const char * /*widgetName*/,
 		else
 			setXMLFile( "kviewviewer_ro.rc" );
 
-		connect( widget, SIGNAL( contextPress( const QPoint & ) ),
-				this, SLOT( slotPopupMenu( const QPoint & ) ) );
-		connect( widget, SIGNAL( zoomChanged( double ) ),
-				this, SLOT( zoomChanged( double ) ) );
-		connect( widget, SIGNAL( showingImageDone() ),
-				this, SLOT( switchBlendEffect() ) );
-		connect( widget, SIGNAL( hasImage( bool ) ),
-				this, SLOT( hasImage( bool ) ) );
-		connect( widget, SIGNAL( imageChanged() ),
-				this, SLOT( setModified() ) );
+		connect( widget, TQT_SIGNAL( contextPress( const TQPoint & ) ),
+				this, TQT_SLOT( slotPopupMenu( const TQPoint & ) ) );
+		connect( widget, TQT_SIGNAL( zoomChanged( double ) ),
+				this, TQT_SLOT( zoomChanged( double ) ) );
+		connect( widget, TQT_SIGNAL( showingImageDone() ),
+				this, TQT_SLOT( switchBlendEffect() ) );
+		connect( widget, TQT_SIGNAL( hasImage( bool ) ),
+				this, TQT_SLOT( hasImage( bool ) ) );
+		connect( widget, TQT_SIGNAL( imageChanged() ),
+				this, TQT_SLOT( setModified() ) );
 
-		connect( m_pFileWatch, SIGNAL( dirty( const QString & ) ),
-				this, SLOT( slotFileDirty( const QString & ) ) );
+		connect( m_pFileWatch, TQT_SIGNAL( dirty( const TQString & ) ),
+				this, TQT_SLOT( slotFileDirty( const TQString & ) ) );
 
-		KSettings::Dispatcher::self()->registerInstance( instance(), this, SLOT( readSettings() ) );
+		KSettings::Dispatcher::self()->registerInstance( instance(), this, TQT_SLOT( readSettings() ) );
 
 		// by default disable progress info (so it won't open the dialog in Konqueror)
 		setProgressInfoEnabled( false );
@@ -148,10 +148,10 @@ KViewViewer::~KViewViewer()
 		int res = m_url.isEmpty() ?
 			KMessageBox::warningYesNo( widget(),
 				i18n( "This is a new document.\nDo you want to save it ?" ),
-				QString::null, KStdGuiItem::saveAs(), KStdGuiItem::discard() ):
+				TQString::null, KStdGuiItem::saveAs(), KStdGuiItem::discard() ):
 			KMessageBox::warningYesNo( widget(),
 				i18n( "The document has been modified.\nDo you want to save it ?" ),
-				QString::null, KStdGuiItem::saveAs(), KStdGuiItem::dontSave() );
+				TQString::null, KStdGuiItem::saveAs(), KStdGuiItem::dontSave() );
 
 		if( res == KMessageBox::Yes )
 		{
@@ -195,15 +195,15 @@ bool KViewViewer::saveAs( const KURL & kurl )
 		return KParts::ReadWritePart::saveAs( kurl ); // sets m_bClosing = false
 
 	// if the image wasn't modified and should be saved in the same format we just copy the file - no need
-	// to lose some quality or information by calling QImage::save()
+	// to lose some quality or information by calling TQImage::save()
 	if( ! ( isModified() && isReadWrite() ) && m_mimeType == m_newMimeType )
 	{
 		kdDebug( 4610 ) << "copy image from " << m_file << " to " << kurl.prettyURL() << endl;
 
 		KIO::Job * job = KIO::copy( KURL( m_file ), kurl, isProgressInfoEnabled() );
 		emit started( job );
-		connect( job, SIGNAL( result( KIO::Job * ) ),
-				this, SLOT( slotResultSaveAs( KIO::Job * ) ) );
+		connect( job, TQT_SIGNAL( result( KIO::Job * ) ),
+				this, TQT_SLOT( slotResultSaveAs( KIO::Job * ) ) );
 		return true;
 	}
 	kdDebug( 4610 ) << "call KParts::ReadWritePart::saveAs( " << kurl.prettyURL() << " )" << endl;
@@ -257,19 +257,19 @@ bool KViewViewer::openURL( const KURL & url )
 		emit setWindowCaption( m_sCaption );
 		m_bTemp = true;
 		// Use same extension as remote file. This is important for mimetype-determination (e.g. koffice)
-		QString extension;
-		QString fileName = url.fileName();
+		TQString extension;
+		TQString fileName = url.fileName();
 		int extensionPos = fileName.findRev( '.' );
 		if ( extensionPos != -1 )
 			extension = fileName.mid( extensionPos ); // keep the '.'
 		delete m_pTempFile;
-		m_pTempFile = new KTempFile( QString::null, extension );
+		m_pTempFile = new KTempFile( TQString::null, extension );
 		m_file = m_pTempFile->name();
 
 		m_pJob = KIO::get( m_url, m_pExtension->urlArgs().reload, isProgressInfoEnabled() );
 		emit started( m_pJob );
-		connect( m_pJob, SIGNAL( result( KIO::Job * ) ), SLOT( slotJobFinished ( KIO::Job * ) ) );
-		connect( m_pJob, SIGNAL( data( KIO::Job *, const QByteArray & ) ), SLOT( slotData( KIO::Job *, const QByteArray & ) ) );
+		connect( m_pJob, TQT_SIGNAL( result( KIO::Job * ) ), TQT_SLOT( slotJobFinished ( KIO::Job * ) ) );
+		connect( m_pJob, TQT_SIGNAL( data( KIO::Job *, const TQByteArray & ) ), TQT_SLOT( slotData( KIO::Job *, const TQByteArray & ) ) );
 		return true;
 	}
 }
@@ -278,7 +278,7 @@ bool KViewViewer::closeURL()
 {
 	kdDebug( 4610 ) << k_funcinfo << endl;
 	abortLoad();
-	QString file = m_file;
+	TQString file = m_file;
 	bool ret = KParts::ReadWritePart::closeURL();
 	if( ret )
 		if( ! file.isEmpty() )
@@ -289,12 +289,12 @@ bool KViewViewer::closeURL()
 	return ret;
 }
 
-void KViewViewer::newImage( const QImage & newimg )
+void KViewViewer::newImage( const TQImage & newimg )
 {
 	if( closeURL() )
 	{
 		m_url = "";
-		m_file = QString::null;
+		m_file = TQString::null;
 		m_sCaption = i18n( "Title caption when new image selected", "new image" );
 		m_pCanvas->setImage( newimg );
 		if( isReadWrite() )
@@ -311,12 +311,12 @@ void KViewViewer::reload()
 			return;
 
 	//load from file
-	QImage image( m_file );
+	TQImage image( m_file );
 	m_pCanvas->setImage( image );
 	setModified( false );
 }
 
-bool KViewViewer::eventFilter( QObject * o, QEvent * e )
+bool KViewViewer::eventFilter( TQObject * o, TQEvent * e )
 {
 	KImageViewer::Canvas * canvas = static_cast<KImageViewer::Canvas*>( o->qt_cast( "KImageViewer::Canvas" ) );
 	if( canvas )
@@ -324,24 +324,24 @@ bool KViewViewer::eventFilter( QObject * o, QEvent * e )
 		// intercept drops onto the Canvas
 		switch( e->type() )
 		{
-			case QEvent::DragEnter:
+			case TQEvent::DragEnter:
 			{
-				QDragEnterEvent * ev = static_cast<QDragEnterEvent*>( e );
+				TQDragEnterEvent * ev = static_cast<TQDragEnterEvent*>( e );
 				kdDebug( 4610 ) << "DragEnter Event in the Canvas: " << endl;
 				for( int i = 0; ev->format( i ); ++i )
 					kdDebug( 4610 ) << " - " << ev->format( i ) << endl;
-				ev->accept( KURLDrag::canDecode( ev ) || QImageDrag::canDecode( ev ) );
+				ev->accept( KURLDrag::canDecode( ev ) || TQImageDrag::canDecode( ev ) );
 				return true;
 			}
-			case QEvent::Drop:
+			case TQEvent::Drop:
 			{
-				QDropEvent * ev = static_cast<QDropEvent*>( e );
+				TQDropEvent * ev = static_cast<TQDropEvent*>( e );
 				kdDebug( 4610 ) << "Drop Event in the Canvas" << endl;
-				QStringList l;
-				QImage image;
+				TQStringList l;
+				TQImage image;
 				if( KURLDrag::decodeToUnicodeUris( ev, l ) )
 					openURL( KURL( l.first() ) );
-				else if( QImageDrag::decode( ev, image ) )
+				else if( TQImageDrag::decode( ev, image ) )
 					newImage( image );
 				return true;
 			}
@@ -363,7 +363,7 @@ void KViewViewer::abortLoad()
 
 bool KViewViewer::openFile()
 {
-	//m_pCanvas->setMaximumImageSize( QSize( widget()->width(), widget()->height() ) );
+	//m_pCanvas->setMaximumImageSize( TQSize( widget()->width(), widget()->height() ) );
 	if( m_pBuffer )
 	{
 		kdDebug( 4610 ) << k_funcinfo << " load from buffer\n";
@@ -387,12 +387,12 @@ bool KViewViewer::openFile()
 			}
 		}
 
-		QImage image( m_pBuffer->buffer() );
+		TQImage image( m_pBuffer->buffer() );
 		delete m_pBuffer;
 		m_pBuffer = 0;
 		if( ! image.isNull() )
 		{
-			QSize size = image.size();
+			TQSize size = image.size();
 			m_pCanvas->setImage( image, size );
 		}
 		else
@@ -404,12 +404,12 @@ bool KViewViewer::openFile()
 	else
 	{ //load from local file
 		kdDebug( 4610 ) << k_funcinfo << " load from file: " << m_file << endl;
-		if( ! QFile::exists( m_file ) )
+		if( ! TQFile::exists( m_file ) )
 		{
 			emit setStatusBarText( i18n( "No such file: %1" ).arg( m_file ) );
 			return false;
 		}
-		if( QImage::imageFormat( m_file ) == 0 )
+		if( TQImage::imageFormat( m_file ) == 0 )
 		{
 			emit setStatusBarText( i18n( "Unknown image format: %1" ).arg( m_file ) );
 			return false;
@@ -422,8 +422,8 @@ bool KViewViewer::openFile()
 		}
 
 		//load from file
-		QImage image( m_file );
-		QSize size = image.size();
+		TQImage image( m_file );
+		TQSize size = image.size();
 		m_pCanvas->setImage( image, size );
 	}
 	m_pFileWatch->addFile( m_file );
@@ -443,16 +443,16 @@ bool KViewViewer::saveFile()
 	// 2. The image should be saved in a different format or was modified, so
 	// that copying isn't possible anymore.
 
-	const QImage * image = m_pCanvas->image();
+	const TQImage * image = m_pCanvas->image();
 	if( ! image )
 		return false;
 
 	if( ! m_newMimeType.isNull() )
 	{
 		m_mimeType = m_newMimeType;
-		m_newMimeType = QString::null;
+		m_newMimeType = TQString::null;
 	}
-	QString type = KImageIO::typeForMime( m_mimeType );
+	TQString type = KImageIO::typeForMime( m_mimeType );
 	kdDebug( 4610 ) << "save m_pCanvas->image() to " << m_file << " as " << type << endl;
 	int quality = 100; // TODO: ask user for quality. Keep it at 100 so that our
 	// users don't lose quality when working with KView.
@@ -466,33 +466,33 @@ bool KViewViewer::saveFile()
 void KViewViewer::setupActions()
 {
 	m_paZoomIn = new KAction( i18n( "Zoom In" ), "viewmag+", KStdAccel::shortcut( KStdAccel::ZoomIn ), this,
-			SLOT( slotZoomIn() ), actionCollection(), "zoomin" );
+			TQT_SLOT( slotZoomIn() ), actionCollection(), "zoomin" );
 	m_paZoomOut = new KAction( i18n( "Zoom Out" ), "viewmag-", KStdAccel::shortcut( KStdAccel::ZoomOut ), this,
-			SLOT( slotZoomOut() ), actionCollection(), "zoomout" );
+			TQT_SLOT( slotZoomOut() ), actionCollection(), "zoomout" );
 
 	m_paZoom = new KSelectAction( i18n( "Zoom" ), "viewmag", 0, actionCollection(), "view_zoom" );
-	connect( m_paZoom, SIGNAL( activated( const QString & ) ), this, SLOT( setZoom( const QString & ) ) );
+	connect( m_paZoom, TQT_SIGNAL( activated( const TQString & ) ), this, TQT_SLOT( setZoom( const TQString & ) ) );
 	m_paZoom->setEditable( true );
 	m_paZoom->clear();
-	m_paZoom->setItems( QStringList::split( '|', "20%|25%|33%|50%|75%|100%|125%|150%|200%|250%|300%|350%|400%|450%|500%" ) );
+	m_paZoom->setItems( TQStringList::split( '|', "20%|25%|33%|50%|75%|100%|125%|150%|200%|250%|300%|350%|400%|450%|500%" ) );
 	m_paZoom->setCurrentItem( 5 );
 
 	m_paFlipMenu = new KActionMenu( i18n( "&Flip" ), actionCollection(), "flip" );
-	m_paFlipV = new KAction( i18n( "&Vertical" ), Key_V, this, SLOT( slotFlipV() ), actionCollection(), "flip_vertical" );
-	m_paFlipH = new KAction( i18n( "&Horizontal" ), Key_H, this, SLOT( slotFlipH() ), actionCollection(), "flip_horizontal" );
+	m_paFlipV = new KAction( i18n( "&Vertical" ), Key_V, this, TQT_SLOT( slotFlipV() ), actionCollection(), "flip_vertical" );
+	m_paFlipH = new KAction( i18n( "&Horizontal" ), Key_H, this, TQT_SLOT( slotFlipH() ), actionCollection(), "flip_horizontal" );
 	m_paFlipMenu->insert( m_paFlipV );
 	m_paFlipMenu->insert( m_paFlipH );
 
 	m_paRotateCCW = new KAction( i18n( "Ro&tate Counter-Clockwise" ), "rotate_ccw", 0, this,
-			SLOT( slotRotateCCW() ), actionCollection(), "rotateCCW" );
+			TQT_SLOT( slotRotateCCW() ), actionCollection(), "rotateCCW" );
 	m_paRotateCW = new KAction( i18n( "Rotate Clockwise" ), "rotate_cw", 0, this,
-			SLOT( slotRotateCW() ), actionCollection(), "rotateCW" );
-	m_paSave = KStdAction::save( this, SLOT( slotSave() ), actionCollection() );
+			TQT_SLOT( slotRotateCW() ), actionCollection(), "rotateCW" );
+	m_paSave = KStdAction::save( this, TQT_SLOT( slotSave() ), actionCollection() );
 	m_paSave->setEnabled( false );
-	m_paSaveAs = KStdAction::saveAs( this, SLOT( slotSaveAs() ), actionCollection() );
+	m_paSaveAs = KStdAction::saveAs( this, TQT_SLOT( slotSaveAs() ), actionCollection() );
 
 	m_paFitToWin = new KAction( i18n( "Fit Image to Window" ), 0, 0, this,
-			SLOT( slotFitToWin() ), actionCollection(), "fittowin" );
+			TQT_SLOT( slotFitToWin() ), actionCollection(), "fittowin" );
 	m_paZoomIn->setEnabled( false );
 	m_paZoomOut->setEnabled( false );
 	m_paZoom->setEnabled( false );
@@ -503,18 +503,18 @@ void KViewViewer::setupActions()
 	m_paFlipMenu->setEnabled( false );
 	m_paFlipV->setEnabled( false );
 	m_paFlipH->setEnabled( false );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paZoomIn, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paZoomOut, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paZoom, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paRotateCCW, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paRotateCW, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paSaveAs, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paFitToWin, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paFlipMenu, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paFlipV, SLOT( setEnabled( bool ) ) );
-	connect( widget(), SIGNAL( hasImage( bool ) ), m_paFlipH, SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paZoomIn, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paZoomOut, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paZoom, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paRotateCCW, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paRotateCW, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paSaveAs, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFitToWin, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipMenu, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipV, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipH, TQT_SLOT( setEnabled( bool ) ) );
 
-	m_paShowScrollbars = new KToggleAction( i18n( "Show Scrollbars" ), 0, this, SLOT( slotToggleScrollbars() ),
+	m_paShowScrollbars = new KToggleAction( i18n( "Show Scrollbars" ), 0, this, TQT_SLOT( slotToggleScrollbars() ),
 	 actionCollection(), "show_scrollbars" );
 	m_paShowScrollbars->setCheckedState(i18n("Hide Scrollbars"));
 }
@@ -541,16 +541,16 @@ void KViewViewer::readSettings()
 
 	m_pCanvas->setBgColor( cfgGroup.readColorEntry( "Background Color", &m_pCanvas->bgColor() ) );
 
-	m_pCanvas->setMinimumImageSize( QSize( cfgGroup.readNumEntry( "Minimum Width", m_pCanvas->minimumImageSize().width() ),
+	m_pCanvas->setMinimumImageSize( TQSize( cfgGroup.readNumEntry( "Minimum Width", m_pCanvas->minimumImageSize().width() ),
 				cfgGroup.readNumEntry( "Minimum Height", m_pCanvas->minimumImageSize().height() ) ) );
-	m_pCanvas->setMaximumImageSize( QSize( cfgGroup.readNumEntry( "Maximum Width", m_pCanvas->maximumImageSize().width() ),
+	m_pCanvas->setMaximumImageSize( TQSize( cfgGroup.readNumEntry( "Maximum Width", m_pCanvas->maximumImageSize().width() ),
 				cfgGroup.readNumEntry( "Maximum Height", m_pCanvas->maximumImageSize().height() ) ) );
 
 	KConfigGroup blendConfig( instance()->config(), "Blend Effects" );
 	m_vEffects.clear();
 	for( unsigned int i = 1; i <= m_pCanvas->numOfBlendEffects(); ++i )
 	{
-		if( blendConfig.readBoolEntry( QString::number( i ), false ) )
+		if( blendConfig.readBoolEntry( TQString::number( i ), false ) )
 			m_vEffects.push_back( i );
 	}
 	// and now tell the canvas what blend effect to use
@@ -567,7 +567,7 @@ void KViewViewer::writeSettings()
 void KViewViewer::zoomChanged( double zoom )
 {
 	kdDebug( 4610 ) << k_funcinfo << endl;
-	emit setWindowCaption( m_sCaption + QString( " (%1%)" ).arg( zoom * 100, 0, 'f', 0 ) );
+	emit setWindowCaption( m_sCaption + TQString( " (%1%)" ).arg( zoom * 100, 0, 'f', 0 ) );
 	updateZoomMenu( zoom );
 }
 
@@ -584,11 +584,11 @@ void KViewViewer::slotJobFinished( KIO::Job * job )
 	}
 }
 
-void KViewViewer::slotData( KIO::Job *, const QByteArray & data )
+void KViewViewer::slotData( KIO::Job *, const TQByteArray & data )
 {
 	if( ! m_pBuffer )
 	{
-		m_pBuffer = new QBuffer();
+		m_pBuffer = new TQBuffer();
 		m_pBuffer->open( IO_ReadWrite );
 	}
 	m_pBuffer->writeBlock( data.data(), data.size() );
@@ -597,7 +597,7 @@ void KViewViewer::slotData( KIO::Job *, const QByteArray & data )
 	//No. :) It takes forever like this.
 	//OK. So I really have to look at khtml...
 	//later...
-	//m_pCanvas->setImage( QImage( m_pBuffer->buffer() ) );
+	//m_pCanvas->setImage( TQImage( m_pBuffer->buffer() ) );
 }
 
 void KViewViewer::slotSave()
@@ -610,7 +610,7 @@ void KViewViewer::slotSave()
 void KViewViewer::slotSaveAs()
 {
 	kdDebug( 4610 ) << k_funcinfo << endl;
-	KFileDialog dlg( QString::null, QString::null, widget(), "filedialog", true );
+	KFileDialog dlg( TQString::null, TQString::null, widget(), "filedialog", true );
 	dlg.setMimeFilter( KImageIO::mimeTypes( KImageIO::Writing ) );
 	dlg.setSelection( m_url.fileName() );
 	dlg.setCaption( i18n( "Save As" ) );
@@ -640,11 +640,11 @@ void KViewViewer::slotZoomOut()
 	m_pCanvas->setZoom( zoom );
 }
 
-void KViewViewer::setZoom( const QString & newZoom )
+void KViewViewer::setZoom( const TQString & newZoom )
 {
 	kdDebug( 4610 ) << k_funcinfo << newZoom << endl;
 	double zoom;
-	QString z = newZoom;
+	TQString z = newZoom;
 	z.remove( z.find( '%' ), 1 );
 	if( newZoom == "33%" )
 		zoom = 1.0 / 3.0;
@@ -656,37 +656,37 @@ void KViewViewer::setZoom( const QString & newZoom )
 
 void KViewViewer::updateZoomMenu( double zoom )
 {
-	QStringList lst;
+	TQStringList lst;
 	if( zoom > 0.0 )
 	{
 		//lst << i18n( "Maxpect" );
-		QValueList<int> list;
-		QString z;
+		TQValueList<int> list;
+		TQString z;
 		int val;
 		bool ok;
-		QStringList itemsList = m_paZoom->items();
-		for( QStringList::Iterator it = itemsList.begin(); it != itemsList.end(); ++it )
+		TQStringList itemsList = m_paZoom->items();
+		for( TQStringList::Iterator it = itemsList.begin(); it != itemsList.end(); ++it )
 		{
-			z = ( *it ).replace( QRegExp( "%" ), "" );
+			z = ( *it ).replace( TQRegExp( "%" ), "" );
 			z = z.simplifyWhiteSpace();
 			val = z.toInt( &ok );
 			if( ok && val > 0 && list.contains( val ) == 0 )
 				list << val;
 		}
-		val = QString::number( zoom * 100, 'f', 0 ).toInt(); // round/lround from math.h doesn't work - dunno
+		val = TQString::number( zoom * 100, 'f', 0 ).toInt(); // round/lround from math.h doesn't work - dunno
 		if( list.contains( val ) == 0 )
 			list.append( val );
 
 		qHeapSort( list );
 
-		for( QValueList<int>::Iterator it = list.begin(); it != list.end(); ++it )
-			lst << QString::number( *it ) + '%';
+		for( TQValueList<int>::Iterator it = list.begin(); it != list.end(); ++it )
+			lst << TQString::number( *it ) + '%';
 		m_paZoom->setItems( lst );
 	}
 
 	// first look if it's a new value (not in the list yet)
-	QString z = QString( "%1%" ).arg( zoom * 100, 0, 'f', 0 );
-	QStringList items = m_paZoom->items();
+	TQString z = TQString( "%1%" ).arg( zoom * 100, 0, 'f', 0 );
+	TQStringList items = m_paZoom->items();
 	int idx = items.findIndex( z );
 	if( -1 == idx )
 	{
@@ -743,18 +743,18 @@ void KViewViewer::slotDel()
 class PopupGUIClient : public KXMLGUIClient
 {
 	public:
-		PopupGUIClient( KInstance *inst, const QString &doc )
+		PopupGUIClient( KInstance *inst, const TQString &doc )
 		{
 			setInstance( inst );
 			setXML( doc );
 		}
 };
 
-void KViewViewer::slotPopupMenu( const QPoint &pos )
+void KViewViewer::slotPopupMenu( const TQPoint &pos )
 {
 	KXMLGUIClient *popupGUIClient = new PopupGUIClient( instance(), m_popupDoc );
 
-	(void) new KAction( i18n( "Save Image As..." ), 0, this, SLOT( slotSaveAs() ),
+	(void) new KAction( i18n( "Save Image As..." ), 0, this, TQT_SLOT( slotSaveAs() ),
 						popupGUIClient->actionCollection(), "saveimageas" );
 
 	// ### HACK treat the image as dir to get the back/fwd/reload buttons (Simon)
@@ -791,36 +791,36 @@ void KViewViewer::slotResultSaveAs( KIO::Job *job )
 	{
 		if( m_bTemp )
 		{
-			unlink( QFile::encodeName( m_file ) );
+			unlink( TQFile::encodeName( m_file ) );
 			m_bTemp = false;
 		}
 		m_file = m_url.path();
 	}
 }
 
-void KViewViewer::slotFileDirty( const QString & )
+void KViewViewer::slotFileDirty( const TQString & )
 {
 	if( isModified() && isReadWrite() )
 	{
 		KPassivePopup * pop = new KPassivePopup( m_pParentWidget );
-		QVBox * vb = pop->standardView( i18n( "Load changed image? - %1" ).arg( kapp->aboutData()->programName() ),
-				QString::null, kapp->miniIcon() );
-		( void )new QLabel( i18n( "The image %1 which you have modified has changed on disk.\n"
+		TQVBox * vb = pop->standardView( i18n( "Load changed image? - %1" ).arg( kapp->aboutData()->programName() ),
+				TQString::null, kapp->miniIcon() );
+		( void )new TQLabel( i18n( "The image %1 which you have modified has changed on disk.\n"
 								  "Do you want to reload the file and lose your changes?\n"
 								  "If you don't and subsequently save the image, you will lose the\n"
 								  "changes that have already been saved." ).arg( url().fileName() ), vb );
-		QWidget * hb = new QWidget( vb );
-		QHBoxLayout * layout = new QHBoxLayout( hb );
-		layout->addItem( new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum ) );
+		TQWidget * hb = new TQWidget( vb );
+		TQHBoxLayout * layout = new TQHBoxLayout( hb );
+		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		KPushButton * yes = new KPushButton( i18n("Reload"), hb );
 		layout->addWidget( yes );
-		layout->addItem( new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum ) );
+		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		KPushButton * no = new KPushButton( i18n("Do Not Reload"), hb );
 		layout->addWidget( no );
-		layout->addItem( new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum ) );
-		connect( yes, SIGNAL( clicked() ), this, SLOT( slotReloadUnmodified() ) );
-		connect( yes, SIGNAL( clicked() ), pop, SLOT( hide() ) );
-		connect( no, SIGNAL( clicked() ), pop, SLOT( hide() ) );
+		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
+		connect( yes, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotReloadUnmodified() ) );
+		connect( yes, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );
+		connect( no, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );
 		pop->setView( vb );
 		pop->setTimeout( 0 );
 		pop->setAutoDelete( true );
@@ -848,7 +848,7 @@ void KViewViewer::loadPlugins()
 	KImageViewer::Viewer::loadPlugins( this, this, instance() );
 	if( factory() )
 	{
-		QPtrList<KParts::Plugin> plugins = KParts::Plugin::pluginObjects( this );
+		TQPtrList<KParts::Plugin> plugins = KParts::Plugin::pluginObjects( this );
 		KParts::Plugin * plugin;
 		for( plugin = plugins.first(); plugin; plugin = plugins.next() )
 			factory()->addClient( plugin );

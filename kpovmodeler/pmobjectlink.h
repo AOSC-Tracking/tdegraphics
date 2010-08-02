@@ -50,7 +50,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMObjectLink( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -74,15 +74,15 @@ public:
    void setLinkedObjectProperty( PMObject* o );
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMObjectLinkEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
-   virtual QString pixmap( ) const { return QString( "pmobjectlink" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmobjectlink" ); }
 
    /** */
    virtual void restoreMemento( PMMemento* s );

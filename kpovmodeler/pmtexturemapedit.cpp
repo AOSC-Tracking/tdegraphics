@@ -20,13 +20,13 @@
 #include "pmtexturemap.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
 
-PMTextureMapEdit::PMTextureMapEdit( QWidget* parent, const char* name )
+PMTextureMapEdit::PMTextureMapEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,27 +36,27 @@ PMTextureMapEdit::PMTextureMapEdit( QWidget* parent, const char* name )
 void PMTextureMapEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
-   topLayout( )->addWidget( new QLabel( i18n( "Map values:" ), this ) );
-   m_pNoChildLabel = new QLabel( i18n( "(No Child Objects)" ), this );
-   m_pPureLinkLabel = new QLabel( i18n( "(Pure Link)" ), this );
+   topLayout( )->addWidget( new TQLabel( i18n( "Map values:" ), this ) );
+   m_pNoChildLabel = new TQLabel( i18n( "(No Child Objects)" ), this );
+   m_pPureLinkLabel = new TQLabel( i18n( "(Pure Link)" ), this );
    topLayout( )->addWidget( m_pNoChildLabel );
    topLayout( )->addWidget( m_pPureLinkLabel );
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   m_pEditLayout = new QVBoxLayout( hl );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   m_pEditLayout = new TQVBoxLayout( hl );
    hl->addStretch( 1 );
 }
 
 void PMTextureMapEdit::displayObject( PMObject* o )
 {
-   QString str;
+   TQString str;
 
    if( o->isA( "TextureMapBase" ) )
    {
       bool readOnly = o->isReadOnly( );
       m_pDisplayedObject = ( PMTextureMapBase* ) o;
-      QValueList<double> mv = m_pDisplayedObject->mapValues( );
-      QValueList<double>::Iterator vit = mv.begin( );
-      QPtrListIterator<PMFloatEdit> eit( m_edits );
+      TQValueList<double> mv = m_pDisplayedObject->mapValues( );
+      TQValueList<double>::Iterator vit = mv.begin( );
+      TQPtrListIterator<PMFloatEdit> eit( m_edits );
       PMFloatEdit* edit;
 
       m_numValues = 0;
@@ -78,7 +78,7 @@ void PMTextureMapEdit::displayObject( PMObject* o )
             edit->setValue( *vit );
             edit->setValidation( true, 0.0, true, 1.0 );
             edit->setReadOnly( readOnly );
-            connect( edit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+            connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
          }
          m_numValues++;
       }
@@ -115,9 +115,9 @@ void PMTextureMapEdit::saveContents( )
    {
       if( m_numValues > 0 )
       {
-         QPtrListIterator<PMFloatEdit> it( m_edits );
+         TQPtrListIterator<PMFloatEdit> it( m_edits );
          int i = 0;
-         QValueList<double> values;
+         TQValueList<double> values;
          
          for( ; ( i < m_numValues ) && it.current( ); ++i, ++it )
             values.append( it.current( )->value( ) );
@@ -129,7 +129,7 @@ void PMTextureMapEdit::saveContents( )
 
 bool PMTextureMapEdit::isDataValid( )
 {
-   QPtrListIterator<PMFloatEdit> it( m_edits );
+   TQPtrListIterator<PMFloatEdit> it( m_edits );
    int i = 0;
    double last = 0.0;
 

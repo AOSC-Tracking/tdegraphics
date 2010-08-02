@@ -25,7 +25,7 @@
 #define _DJVURENDERER_H_
 
 #include <kprogress.h>
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include "DjVuImage.h"
 #include "DjVuDocEditor.h"
@@ -57,7 +57,7 @@ public:
 
        This constructor simply prints a message and calls the default constructor.
    */
-   DjVuRenderer(QWidget* parent);
+   DjVuRenderer(TQWidget* parent);
 
    /** Destructor
 
@@ -77,7 +77,7 @@ public:
 
       @param fname the name of the file that should be opened. 
   */
-  virtual bool setFile(const QString& fname, const KURL &);
+  virtual bool setFile(const TQString& fname, const KURL &);
 
   /** Rendering a page
       @param res resolution at which drawing should take place
@@ -110,13 +110,13 @@ public:
   wasn't. The conversion can fail, for example, when the user aborts
   the operation.
   */
-  bool convertToPSFile( DjVuToPS &converter, QString filename, QValueList<int> &pageList );
+  bool convertToPSFile( DjVuToPS &converter, TQString filename, TQValueList<int> &pageList );
 
   /** Deletes pages from the document */
   void deletePages(Q_UINT16 from, Q_UINT16 to);
 
   /** Saves the file */
-  bool save(const QString &filename);
+  bool save(const TQString &filename);
 
 private:
   /* This method is called after a document is loaded with
@@ -131,7 +131,7 @@ private:
 
   GP<DjVuTXT> getText(PageNumber pageNumber);
 
-  void fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& text, DjVuTXT::Zone& zone, QSize& djvuPageSize);
+  void fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& text, DjVuTXT::Zone& zone, TQSize& djvuPageSize);
 
   GP<DjVuDocEditor> document;
 
@@ -139,7 +139,7 @@ private:
       PostScript conversion */
   static void printerInfoCallBack(int page_num, int page_count, int tot_pages, DjVuToPS::Stage, void *);
 
-  QPixmap pixmap;
+  TQPixmap pixmap;
   GP<ByteStream> PPMstream;
 };
 

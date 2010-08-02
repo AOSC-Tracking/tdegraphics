@@ -7,7 +7,7 @@
 ** place of a destructor.
 *****************************************************************************/
 
-void GSSettingsWidget::setDetectedVersion( QString v)
+void GSSettingsWidget::setDetectedVersion( TQString v)
 {
     mDetectedVersion->setText(mDetectedVersion->text().arg( v ));
 }

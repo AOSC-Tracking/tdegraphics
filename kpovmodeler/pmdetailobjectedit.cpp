@@ -17,13 +17,13 @@
 #include "pmdetailobjectedit.h"
 #include "pmdetailobject.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
 #include <klocale.h>
 
-PMDetailObjectEdit::PMDetailObjectEdit( QWidget* parent, const char* name )
+PMDetailObjectEdit::PMDetailObjectEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -33,10 +33,10 @@ void PMDetailObjectEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout = new QHBoxLayout( topLayout( ) );
-   m_pGlobalDetail = new QCheckBox( i18n( "Global detail" ), this );
-   m_pLocalDetailLevelLabel = new QLabel( i18n( "Detail level:" ), this );
-   m_pLocalDetailLevel = new QComboBox( this );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   m_pGlobalDetail = new TQCheckBox( i18n( "Global detail" ), this );
+   m_pLocalDetailLevelLabel = new TQLabel( i18n( "Detail level:" ), this );
+   m_pLocalDetailLevel = new TQComboBox( this );
    m_pLocalDetailLevel->insertItem( i18n( "Very Low" ) );
    m_pLocalDetailLevel->insertItem( i18n( "Low" ) );
    m_pLocalDetailLevel->insertItem( i18n( "Medium" ) );
@@ -48,8 +48,8 @@ void PMDetailObjectEdit::createTopWidgets( )
    layout->addWidget( m_pLocalDetailLevel );
    layout->addStretch( );
 
-   connect( m_pGlobalDetail, SIGNAL( clicked( ) ), SLOT( slotGlobalDetailClicked( ) ) );
-   connect( m_pLocalDetailLevel, SIGNAL( activated( int ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pGlobalDetail, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotGlobalDetailClicked( ) ) );
+   connect( m_pLocalDetailLevel, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMDetailObjectEdit::displayObject( PMObject* o )

@@ -25,9 +25,9 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqmap.h>
+#include <tqvaluelist.h>
 #include <kstaticdeleter.h>
 
 #include <kdialogbase.h>
@@ -36,8 +36,8 @@
 #include "pmviewbase.h"
 
 class KConfig;
-class QDomElement;
-class QLineEdit;
+class TQDomElement;
+class TQLineEdit;
 class PMShell;
 
 /**
@@ -61,8 +61,8 @@ public:
     */
    ~PMViewLayoutEntry( );
 
-   QString viewType( ) const { return m_viewType; }
-   void setViewType( const QString& vt );
+   TQString viewType( ) const { return m_viewType; }
+   void setViewType( const TQString& vt );
 
    PMDockWidget::DockPosition dockPosition( ) const { return m_dockPosition; }
    void setDockPosition( PMDockWidget::DockPosition i );
@@ -84,17 +84,17 @@ public:
    int floatingPositionY( ) const { return m_floatingPositionY; }
    void setFloatingPositionY( int p ) { m_floatingPositionY = p; }
 
-   void loadData( QDomElement& e );
-   void saveData( QDomElement& e ) const;
+   void loadData( TQDomElement& e );
+   void saveData( TQDomElement& e ) const;
 
    PMViewOptions* customOptions( ) const { return m_pCustomOptions; }
    void setCustomOptions( PMViewOptions* o );
 
-   const QString dockPositionAsString( );
-   const QString viewTypeAsString( );
+   const TQString dockPositionAsString( );
+   const TQString viewTypeAsString( );
 
 private:
-   QString m_viewType;
+   TQString m_viewType;
    PMDockWidget::DockPosition m_dockPosition;
    int m_columnWidth;
    int m_height;
@@ -114,7 +114,7 @@ private:
 class PMViewLayout
 {
 public:
-   typedef QValueList< PMViewLayoutEntry >::iterator iterator;
+   typedef TQValueList< PMViewLayoutEntry >::iterator iterator;
    /**
     * Constructor
     */
@@ -133,11 +133,11 @@ public:
     */
    PMViewLayout& operator = ( const PMViewLayout& vl );
 
-   QString name( ) const { return m_name; }
+   TQString name( ) const { return m_name; }
 
-   void loadData( QDomElement& e );
+   void loadData( TQDomElement& e );
 
-   void saveData( QDomElement& e, QDomDocument& doc ) const;
+   void saveData( TQDomElement& e, TQDomDocument& doc ) const;
    /**
     * Destroy all dock widgets in PMShell and create the new ones
     */
@@ -145,7 +145,7 @@ public:
    /**
     * Sets the name of the layout
     */
-   void setName( const QString& n );
+   void setName( const TQString& n );
    /**
     *
     * Add a new entry to the layout. By default it adds the entry at the end
@@ -184,17 +184,17 @@ public:
    static PMViewLayout extractViewLayout( PMShell* shell );
 private:
    static void recursiveExtractColumns(
-      QValueList< QValueList< PMViewLayoutEntry > >& cols,
-      QValueList< QValueList< PMViewLayoutEntry > >::iterator cit,
-      int width, QWidget* widget );
+      TQValueList< TQValueList< PMViewLayoutEntry > >& cols,
+      TQValueList< TQValueList< PMViewLayoutEntry > >::iterator cit,
+      int width, TQWidget* widget );
 
    static void recursiveExtractOneColumn(
-      QValueList< PMViewLayoutEntry >& entries,
-      QValueList< PMViewLayoutEntry >::iterator eit,
-      int height, QWidget* widget );
+      TQValueList< PMViewLayoutEntry >& entries,
+      TQValueList< PMViewLayoutEntry >::iterator eit,
+      int height, TQWidget* widget );
 
-   QString m_name;
-   QValueList< PMViewLayoutEntry > m_entries;
+   TQString m_name;
+   TQValueList< PMViewLayoutEntry > m_entries;
 };
 
 /**
@@ -219,19 +219,19 @@ public:
    /**
     * Returns the list of available view layouts
     */
-   QStringList availableLayouts( );
+   TQStringList availableLayouts( );
    /**
     * Sets the default layout
     */
-   void setDefaultLayout( const QString& name );
+   void setDefaultLayout( const TQString& name );
    /**
     * Returns the default layout
     */
-   QString defaultLayout( ) const { return m_defaultLayout; }
+   TQString defaultLayout( ) const { return m_defaultLayout; }
    /**
     * Destroy all dock widgets in PMShell and create the new ones
     */
-   void displayLayout( const QString& name, PMShell* shell );
+   void displayLayout( const TQString& name, PMShell* shell );
    /**
     * Displays the layout indicated as default
     */
@@ -247,7 +247,7 @@ public:
    /**
     * Add a new empty layout
     */
-   void addLayout( const QString& name );
+   void addLayout( const TQString& name );
    /**
     * Add a new layout
     */
@@ -255,19 +255,19 @@ public:
    /**
     * Remove a layout
     */
-   void removeLayout( const QString& name );
+   void removeLayout( const TQString& name );
    /**
     * Get a known layout
     */
-   PMViewLayout* findLayout( const QString& name );
+   PMViewLayout* findLayout( const TQString& name );
    /**
     * Returns the list of available layouts
     */
-   QValueList<PMViewLayout> layouts( ) { return m_layouts; }
+   TQValueList<PMViewLayout> layouts( ) { return m_layouts; }
    /**
     * Sets the list of available layouts
     */
-   void setLayouts( const QValueList<PMViewLayout>& l ) { m_layouts = l; }
+   void setLayouts( const TQValueList<PMViewLayout>& l ) { m_layouts = l; }
    /**
     * Fill the available layouts menu
     */
@@ -280,8 +280,8 @@ private:
 
    bool m_layoutsLoaded;
    bool m_layoutDisplayed;
-   QString m_defaultLayout;
-   QValueList< PMViewLayout > m_layouts;
+   TQString m_defaultLayout;
+   TQValueList< PMViewLayout > m_layouts;
 
    static PMViewLayoutManager* s_pInstance;
    static KStaticDeleter<PMViewLayoutManager> s_staticDeleter;
@@ -296,10 +296,10 @@ public:
    ~PMSaveViewLayoutDialog( );
 protected slots:
    virtual void slotOk( );
-   void slotNameChanged( const QString& );
-   void slotNameSelected( const QString& );
+   void slotNameChanged( const TQString& );
+   void slotNameSelected( const TQString& );
 private:
-   QLineEdit* m_pLayoutName;
+   TQLineEdit* m_pLayoutName;
    PMShell* m_pShell;
 };
 

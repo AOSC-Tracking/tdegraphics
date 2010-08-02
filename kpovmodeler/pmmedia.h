@@ -50,7 +50,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMMedia( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -58,16 +58,16 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMMediaEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
-   virtual QString pixmap( ) const { return QString( "pmmedia" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmmedia" ); }
 
    /** */
    virtual void restoreMemento( PMMemento* s );

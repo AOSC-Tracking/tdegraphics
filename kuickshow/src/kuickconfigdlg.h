@@ -19,7 +19,7 @@
 #ifndef KUICKCONFIGDLG_H
 #define KUICKCONFIGDLG_H
 
-#include <qevent.h>
+#include <tqevent.h>
 
 #include <kkeydialog.h>
 
@@ -35,7 +35,7 @@ class KuickConfigDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    KuickConfigDialog( KActionCollection *coll, QWidget *parent=0,
+    KuickConfigDialog( KActionCollection *coll, TQWidget *parent=0,
 		       const char *name=0, bool modal=true);
     ~KuickConfigDialog();
 

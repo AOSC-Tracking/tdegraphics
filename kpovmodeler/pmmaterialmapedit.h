@@ -27,14 +27,14 @@
 #include "pmdialogeditbase.h"
 
 class PMMaterialMap;
-class QComboBox;
+class TQComboBox;
 class PMFloatEdit;
 class PMIntEdit;
-class QLabel;
-class QCheckBox;
-class QWidget;
-class QLineEdit;
-class QPushButton;
+class TQLabel;
+class TQCheckBox;
+class TQWidget;
+class TQLineEdit;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMMaterialMap.
@@ -47,7 +47,7 @@ public:
    /**
     * Creates a PMMaterialMapEdit with parent and name
     */
-   PMMaterialMapEdit( QWidget* parent, const char* name = 0 );
+   PMMaterialMapEdit( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displayObject( PMObject* o );
    /** */
@@ -65,17 +65,17 @@ private slots:
    /** */
    void slotInterpolateTypeChanged( int a );
    /** */
-   void slotImageFileNameChanged( const QString& a );
+   void slotImageFileNameChanged( const TQString& a );
    /** */
    void slotImageFileBrowseClicked( );
 private:
    PMMaterialMap*   m_pDisplayedObject;
-   QComboBox*   m_pImageFileTypeEdit;
-   QLineEdit*   m_pImageFileNameEdit;
-   QPushButton* m_pImageFileNameBrowse;
-   QCheckBox*   m_pOnceEdit;
-   QComboBox*   m_pMapTypeEdit;
-   QComboBox*   m_pInterpolateTypeEdit;
+   TQComboBox*   m_pImageFileTypeEdit;
+   TQLineEdit*   m_pImageFileNameEdit;
+   TQPushButton* m_pImageFileNameBrowse;
+   TQCheckBox*   m_pOnceEdit;
+   TQComboBox*   m_pMapTypeEdit;
+   TQComboBox*   m_pInterpolateTypeEdit;
 };
 
 #endif

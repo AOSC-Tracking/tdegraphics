@@ -57,22 +57,22 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMCamera( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMCameraEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
-   virtual QString pixmap( ) const { return QString( "pmcamera" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmcamera" ); }
 
    /**
     * Returns the location
@@ -243,11 +243,11 @@ public:
    /**
     * Converts the camera type to a string
     */
-   static QString cameraTypeToString( CameraType t );
+   static TQString cameraTypeToString( CameraType t );
    /**
     * Converts a string to the camera type
     */
-   static CameraType stringToCameraType( const QString& s );
+   static CameraType stringToCameraType( const TQString& s );
    /** */
    virtual void cleanUp( ) const;
 

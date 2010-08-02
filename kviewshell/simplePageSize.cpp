@@ -10,7 +10,7 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <qpaintdevice.h>
+#include <tqpaintdevice.h>
 
 #include "simplePageSize.h"
 
@@ -21,7 +21,7 @@ double SimplePageSize::zoomForHeight(Q_UINT32 height) const
     kdError(1223) << "SimplePageSize::zoomForHeight() called when paper height was invalid" << endl;
     return 0.1;
   }
-  return (double)(height)/(QPaintDevice::x11AppDpiY()*(pageHeight.getLength_in_inch()));
+  return (double)(height)/(TQPaintDevice::x11AppDpiY()*(pageHeight.getLength_in_inch()));
 }
 
 
@@ -31,7 +31,7 @@ double SimplePageSize::zoomForWidth(Q_UINT32 width) const
     kdError(1223) << "SimplePageSize::zoomForWidth() called when paper width was invalid" << endl;
     return 0.1;
   }
-  return (double)(width)/(QPaintDevice::x11AppDpiX()*(pageWidth.getLength_in_inch()));
+  return (double)(width)/(TQPaintDevice::x11AppDpiX()*(pageWidth.getLength_in_inch()));
 }
 
 

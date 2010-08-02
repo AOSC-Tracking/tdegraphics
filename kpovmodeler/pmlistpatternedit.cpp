@@ -21,17 +21,17 @@
 #include "pmvectoredit.h"
 #include "pmvector.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlabel.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
 #include "pmlineedits.h"
 #include <ktabctl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
 
-PMListPatternEdit::PMListPatternEdit( QWidget* parent, const char* name )
+PMListPatternEdit::PMListPatternEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -41,12 +41,12 @@ void PMListPatternEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QVBoxLayout* vlayout = new QVBoxLayout( topLayout( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( topLayout( ) );
 
    /* Field for Pattern List type */
-   QHBoxLayout* layout = new QHBoxLayout( vlayout );
-   QLabel* label = new QLabel( i18n( "Type:" ), this );
-   m_pTypeCombo = new QComboBox( false, this );
+   TQHBoxLayout* layout = new TQHBoxLayout( vlayout );
+   TQLabel* label = new TQLabel( i18n( "Type:" ), this );
+   m_pTypeCombo = new TQComboBox( false, this );
    m_pTypeCombo->insertItem( i18n( "Checkers" ) );
    m_pTypeCombo->insertItem( i18n( "Brick" ) );
    m_pTypeCombo->insertItem( i18n( "Hexagon" ) );
@@ -55,36 +55,36 @@ void PMListPatternEdit::createTopWidgets( )
    layout->addStretch( 1 );
 
    /* The depth field */
-   layout = new QHBoxLayout( vlayout );
-   m_pDepthLabel = new QLabel( i18n( "Depth:" ), this );
+   layout = new TQHBoxLayout( vlayout );
+   m_pDepthLabel = new TQLabel( i18n( "Depth:" ), this );
    m_pDepth = new PMFloatEdit( this );
    layout->addWidget( m_pDepthLabel );
    layout->addWidget( m_pDepth );
    layout->addStretch( 1 );
 
    /* The brick information */
-   QHBoxLayout* bricklayout = new QHBoxLayout( vlayout );
-   m_pBrickSizeLabel = new QLabel( i18n( "Brick size:" ), this );
+   TQHBoxLayout* bricklayout = new TQHBoxLayout( vlayout );
+   m_pBrickSizeLabel = new TQLabel( i18n( "Brick size:" ), this );
    m_pBrickSize = new PMVectorEdit( "x", "y", "z", this );
    bricklayout->addWidget( m_pBrickSizeLabel );
    bricklayout->addWidget( m_pBrickSize );
-   layout = new QHBoxLayout( vlayout );
-   m_pMortarLabel = new QLabel( i18n( "Mortar:" ), this );
+   layout = new TQHBoxLayout( vlayout );
+   m_pMortarLabel = new TQLabel( i18n( "Mortar:" ), this );
    m_pMortar = new PMFloatEdit( this );
    layout->addWidget( m_pMortarLabel );
    layout->addWidget( m_pMortar );
    layout->addStretch( 1 );
 
    /* connect all signals to slots/signals */
-   connect( m_pBrickSize, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pTypeCombo, SIGNAL( activated( int ) ), SLOT( slotComboChanged( int ) ) );
-   connect( m_pMortar, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDepth, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pBrickSize, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotComboChanged( int ) ) );
+   connect( m_pMortar, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDepth, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMListPatternEdit::displayObject( PMObject* o )
 {
-   QString str;
+   TQString str;
 
    if( o->isA( "ListPattern" ) )
    {

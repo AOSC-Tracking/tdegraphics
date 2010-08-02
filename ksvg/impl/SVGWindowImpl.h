@@ -54,12 +54,12 @@ public:
 	DOM::DOMString printNode(const DOM::Node &node, unsigned short level = 0);
 	long setInterval(const DOM::DOMString &code, const long &delay);
 	long setTimeout(const DOM::DOMString &code, const long &delay);
-	static void alert(const DOM::DOMString &message, const QString &title = "SVG Window");
-	static bool confirm(const DOM::DOMString &message, const QString &title = "SVG Window");
-	static DOM::DOMString prompt(const DOM::DOMString &message, const DOM::DOMString &_default, const QString &title = "SVG Window");
+	static void alert(const DOM::DOMString &message, const TQString &title = "SVG Window");
+	static bool confirm(const DOM::DOMString &message, const TQString &title = "SVG Window");
+	static DOM::DOMString prompt(const DOM::DOMString &message, const DOM::DOMString &_default, const TQString &title = "SVG Window");
 
 private:
-	void printIndentation(QString &ret, unsigned short level, unsigned short indent = 2);
+	void printIndentation(TQString &ret, unsigned short level, unsigned short indent = 2);
 
 private:
 	//StyleSheet m_defaultStyleSheet;

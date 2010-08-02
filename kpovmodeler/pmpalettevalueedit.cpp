@@ -21,42 +21,42 @@
 #include "pmlineedits.h"
 #include "pmdebug.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
 #include <ktabctl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
 #include <kfiledialog.h>
 
-PMPaletteValueEdit::PMPaletteValueEdit( QWidget* parent, const char* name ) 
-      : QWidget( parent, name )
+PMPaletteValueEdit::PMPaletteValueEdit( TQWidget* parent, const char* name ) 
+      : TQWidget( parent, name )
 {
-   QLabel* lbl;
-   QHBoxLayout* layout;
+   TQLabel* lbl;
+   TQHBoxLayout* layout;
 
    m_pIndexEdit = new PMIntEdit( this );
    m_pValueEdit = new PMFloatEdit( this );
 
-   layout = new QHBoxLayout( this );
-   lbl = new QLabel( i18n( "Index" ), this );
+   layout = new TQHBoxLayout( this );
+   lbl = new TQLabel( i18n( "Index" ), this );
    layout->addWidget( lbl );
    layout->addSpacing( KDialog::spacingHint( ) );
    layout->addWidget( m_pIndexEdit );
    layout->addSpacing( KDialog::spacingHint( ) );
-   lbl = new QLabel( i18n( "Value" ), this );
+   lbl = new TQLabel( i18n( "Value" ), this );
    layout->addWidget( lbl );
    layout->addSpacing( KDialog::spacingHint( ) );
    layout->addWidget( m_pValueEdit );
 
-   connect( m_pIndexEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pValueEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pIndexEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pValueEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPaletteValueEdit::setIndex( int idx )

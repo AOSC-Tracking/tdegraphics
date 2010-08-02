@@ -56,7 +56,7 @@ PMMementoData::PMMementoData( PMMetaObject* classType, int vID, PMThreeState dat
 }
 
 
-PMMementoData::PMMementoData( PMMetaObject* classType, int vID, const QString& data )
+PMMementoData::PMMementoData( PMMetaObject* classType, int vID, const TQString& data )
       : PMVariant( data )
 {
    m_objectType = classType;
@@ -149,13 +149,13 @@ void PMMemento::addData( PMMetaObject* classType, int vID, const PMThreeState da
       addData( new PMMementoData( classType, vID, data ) );
 }
 
-void PMMemento::addData( PMMetaObject* classType, int vID, const QString& data )
+void PMMemento::addData( PMMetaObject* classType, int vID, const TQString& data )
 {
    if( !findData( classType, vID ) )
       addData( new PMMementoData( classType, vID, data ) );
 }
 
-void PMMemento::addIDChange( PMMetaObject* classType, int vID, const QString& data )
+void PMMemento::addIDChange( PMMetaObject* classType, int vID, const TQString& data )
 {
    if( !findData( classType, vID ) )
    {
@@ -183,11 +183,11 @@ void PMMemento::addData( PMMetaObject* classType, int vID, PMObject* obj )
       addData( new PMMementoData( classType, vID, obj ) );
 }
 
-QString PMMemento::oldID( ) const
+TQString PMMemento::oldID( ) const
 {
    if( m_pIDData )
       return m_pIDData->stringData( );
-   return QString::null;
+   return TQString::null;
 }
 
 void PMMemento::addChangedObject( PMObject* obj, int mode )

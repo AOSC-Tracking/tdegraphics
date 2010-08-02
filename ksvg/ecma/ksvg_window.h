@@ -20,7 +20,7 @@
 #define KSVG_WINDOW_H
 
 #include <kjs/object.h>
-#include <qguardedptr.h>
+#include <tqguardedptr.h>
 
 namespace KSVG {
 
@@ -58,7 +58,7 @@ public:
      */
     static Window *retrieveActive(KJS::ExecState *exec);
 
-    QGuardedPtr<KSVG::SVGDocumentImpl> doc() const { return m_doc; }
+    TQGuardedPtr<KSVG::SVGDocumentImpl> doc() const { return m_doc; }
 
 	int installTimeout(const KJS::UString &handler, int t, bool singleShot);
 	void clearTimeout(int timerId);
@@ -82,23 +82,23 @@ public:
 
 private:
 	WindowQObject *winq;
-    QGuardedPtr<KSVG::SVGDocumentImpl> m_doc;
+    TQGuardedPtr<KSVG::SVGDocumentImpl> m_doc;
 };
 
 class ScheduledAction {
 public:
 	ScheduledAction(KJS::Object _func, KJS::List _args, bool _singleShot);
-	ScheduledAction(QString _code, bool _singleShot);
+	ScheduledAction(TQString _code, bool _singleShot);
 	~ScheduledAction();
 	void execute(Window *window);
 	KJS::Object func;
 	KJS::List args;
-	QString code;
+	TQString code;
 	bool isFunction;
 	bool singleShot;
 };
 
-class WindowQObject : public QObject {
+class WindowQObject : public TQObject {
 	Q_OBJECT
 public:
 	WindowQObject(Window *w);
@@ -111,11 +111,11 @@ public slots:
 protected slots:
 	void parentDestroyed();
 protected:
-	void timerEvent(QTimerEvent *e);
+	void timerEvent(TQTimerEvent *e);
 private:
 	Window *parent;
 	//KHTMLPart *part;        // not guarded, may be dangling
-	QMap<int, ScheduledAction*> scheduledActions;
+	TQMap<int, ScheduledAction*> scheduledActions;
 };
 
 }

@@ -38,7 +38,7 @@ public:
     * The base point of the vector is given by the control point location.
     */
    PMVectorControlPoint( PMControlPoint* location, const PMVector& v,
-                         int id, const QString& description,
+                         int id, const TQString& description,
                          bool extraLine = true, bool normalize = false );
    /**
     * Creates a PMVectorControlPoint with id.
@@ -46,7 +46,7 @@ public:
     * The base point of the vector is given by the vector p.
     */
    PMVectorControlPoint( const PMVector& location, const PMVector& v,
-                         int id, const QString& description,
+                         int id, const TQString& description,
                          bool extraLine = true, bool normalize = false );
    /**
     * Deletes the PMVectorControlPoint

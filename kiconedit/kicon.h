@@ -41,37 +41,37 @@
 #include <sys/stat.h>
 #include <sys/file.h>
 
-class QImage;
+class TQImage;
 
 class KIconEditIcon : public QObject
 {
   Q_OBJECT
 public:
-  KIconEditIcon(QObject*, const QImage*, KURL url = KURL() );
+  KIconEditIcon(TQObject*, const TQImage*, KURL url = KURL() );
   ~KIconEditIcon();
 
   bool isLocal() { return local; }
-  QString url() { return _url; }
-  void setUrl( const QString & u ) { _url = u; };
+  TQString url() { return _url; }
+  void setUrl( const TQString & u ) { _url = u; };
 
 public slots:
-  bool open(const QImage*, KURL url = KURL());
-  bool promptForFile(const QImage*);
-  bool save(const QImage*, const QString &filename=QString::null);
-  bool saveAs(const QImage*);
+  bool open(const TQImage*, KURL url = KURL());
+  bool promptForFile(const TQImage*);
+  bool save(const TQImage*, const TQString &filename=TQString::null);
+  bool saveAs(const TQImage*);
 
 signals:
-  void newmessage( const QString &);
-  void newname(const QString &);
-  void addrecent(const QString &);
-  void opennewwin(const QString &);
-  void loaded(QImage *);
+  void newmessage( const TQString &);
+  void newname(const TQString &);
+  void addrecent(const TQString &);
+  void opennewwin(const TQString &);
+  void loaded(TQImage *);
   void saved();
 
 protected:
     bool local;
-    QString _url;
-    QString _lastdir;
+    TQString _url;
+    TQString _lastdir;
     FILE *f;
 };
 

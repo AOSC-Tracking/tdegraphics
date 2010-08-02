@@ -22,18 +22,18 @@
 #include "mrml_shared.h"
 
 #include <knuminput.h>
-#include <qwidget.h>
+#include <tqwidget.h>
 
 using namespace KMrml;
 
-template class QValueList<QDomElement>;
+template class TQValueList<TQDomElement>;
 
 PropertySheet::PropertySheet()
 {
     init();
 }
 
-PropertySheet::PropertySheet( const QDomElement& elem )
+PropertySheet::PropertySheet( const TQDomElement& elem )
 {
     init();
 
@@ -67,7 +67,7 @@ PropertySheet& PropertySheet::operator= ( const PropertySheet& ps )
     m_maxSubsetSize = ps.m_maxSubsetSize;
 
     // deep copy of m_subSheets
-    QPtrListIterator<PropertySheet> it( ps.m_subSheets );
+    TQPtrListIterator<PropertySheet> it( ps.m_subSheets );
     for ( ; it.current(); ++it )
         m_subSheets.append( new PropertySheet( *it.current() ) );
 
@@ -80,7 +80,7 @@ void PropertySheet::init()
     m_visibility = Visible;
 }
 
-void PropertySheet::initFromDOM( const QDomElement& elem )
+void PropertySheet::initFromDOM( const TQDomElement& elem )
 {
     m_subSheets.clear();
 
@@ -98,16 +98,16 @@ void PropertySheet::initFromDOM( const QDomElement& elem )
     m_minSubsetSize = toInt( elem.attribute( MrmlShared::minSubsetSize() ));
     m_maxSubsetSize = toInt( elem.attribute( MrmlShared::maxSubsetSize() ));
 
-    QValueList<QDomElement> children =
+    TQValueList<TQDomElement> children =
         KMrml::directChildElements( elem, MrmlShared::propertySheet() );
-    QValueListConstIterator<QDomElement> it = children.begin();
+    TQValueListConstIterator<TQDomElement> it = children.begin();
     for ( ; it != children.end(); ++it )
         m_subSheets.append( new PropertySheet( *it ) );
 }
 
-QWidget * PropertySheet::createWidget( QWidget */*parent*/, const char */*name*/ )
+TQWidget * PropertySheet::createWidget( TQWidget */*parent*/, const char */*name*/ )
 {
-    QWidget *w = 0L;
+    TQWidget *w = 0L;
 
     switch ( m_type )
     {
@@ -138,7 +138,7 @@ QWidget * PropertySheet::createWidget( QWidget */*parent*/, const char */*name*/
 //
 // static methods
 //
-PropertySheet::Visibility PropertySheet::getVisibility( const QString& value )
+PropertySheet::Visibility PropertySheet::getVisibility( const TQString& value )
 {
     Visibility vis;
 
@@ -152,7 +152,7 @@ PropertySheet::Visibility PropertySheet::getVisibility( const QString& value )
     return vis;
 }
 
-PropertySheet::Type PropertySheet::getType( const QString& value )
+PropertySheet::Type PropertySheet::getType( const TQString& value )
 {
     Type type = (Type) 0;
 
@@ -178,7 +178,7 @@ PropertySheet::Type PropertySheet::getType( const QString& value )
     return type;
 }
 
-PropertySheet::SendType PropertySheet::getSendType( const QString& value )
+PropertySheet::SendType PropertySheet::getSendType( const TQString& value )
 {
     SendType type = (SendType) 0;
 
@@ -198,7 +198,7 @@ PropertySheet::SendType PropertySheet::getSendType( const QString& value )
     return type;
 }
 
-int PropertySheet::toInt( const QString& value, int defaultValue )
+int PropertySheet::toInt( const TQString& value, int defaultValue )
 {
     bool ok = false;
     int res = value.toInt( &ok );

@@ -19,7 +19,7 @@
 #include <algorithm>
 #include <memory>
 
-#include <qfileinfo.h>
+#include <tqfileinfo.h>
 
 #include <kconfig.h>
 #include <kfiledialog.h>
@@ -50,7 +50,7 @@ using namespace std;
 using namespace KGV;
 
 KGVDocument::KGVDocument( KGVPart* part, const char* name ) : 
-    QObject( part, name ),
+    TQObject( part, name ),
     _psFile( 0 ),
     _part( part ),
     _tmpUnzipped( 0 ),
@@ -63,8 +63,8 @@ KGVDocument::KGVDocument( KGVPart* part, const char* name ) :
     readSettings();
 
     _pdf2dsc = new Pdf2dsc( _interpreterPath, this );
-    connect( _pdf2dsc, SIGNAL( finished( bool ) ),
-             SLOT( openPDFFileContinue( bool ) ) );
+    connect( _pdf2dsc, TQT_SIGNAL( finished( bool ) ),
+             TQT_SLOT( openPDFFileContinue( bool ) ) );
 }
 
 KGVDocument::~KGVDocument()
@@ -79,7 +79,7 @@ void KGVDocument::readSettings()
 
 /*- OPENING and READING ---------------------------------------------------*/
 
-void KGVDocument::openFile( const QString& name, const QString& mimetype )
+void KGVDocument::openFile( const TQString& name, const TQString& mimetype )
 {
     kdDebug(4500) << "KGVDocument::openFile" << endl;
 
@@ -87,19 +87,19 @@ void KGVDocument::openFile( const QString& name, const QString& mimetype )
     _fileName = name;
     _mimetype = mimetype;
 
-    QTimer::singleShot( 0, this, SLOT( doOpenFile() ) );
+    TQTimer::singleShot( 0, this, TQT_SLOT( doOpenFile() ) );
 }
 
 void KGVDocument::doOpenFile()
 {
-    QFileInfo fileInfo( _fileName );
+    TQFileInfo fileInfo( _fileName );
     if( !fileInfo.exists() ) 
     {
 	KMessageBox::sorry( _part->widget(),
 		i18n( "<qt>Could not open <nobr><strong>%1</strong></nobr>: "
 		      "File does not exist.</qt>" )
 		.arg( _fileName ) );
-	emit canceled( QString() );
+	emit canceled( TQString() );
 	return;
     }
     if( !fileInfo.isReadable() )
@@ -108,7 +108,7 @@ void KGVDocument::doOpenFile()
 		i18n( "<qt>Could not open <nobr><strong>%1</strong></nobr>: "
 		      "Permission denied.</qt>" )
 		.arg( _fileName ) );
-	emit canceled( QString() );
+	emit canceled( TQString() );
 	return;
     }
    
@@ -127,13 +127,13 @@ void KGVDocument::doOpenFile()
     if( _mimetype == "application/pdf"
      || _mimetype == "application/x-pdf" ) // see bug:67474
     {
-	_tmpDSC = new KTempFile( QString::null, ".ps" );
+	_tmpDSC = new KTempFile( TQString::null, ".ps" );
 	Q_CHECK_PTR( _tmpDSC );
 	if( _tmpDSC->status() != 0 ) {
 	    KMessageBox::error( _part->widget(),
 		    i18n( "Could not create temporary file: %1" )
 		    .arg( strerror( _tmpDSC->status() ) ) );
-	    emit canceled( QString() );
+	    emit canceled( TQString() );
 	    return;
 	}
 	
@@ -161,7 +161,7 @@ void KGVDocument::doOpenFile()
 	              "Document Format (.pdf) files.</qt>" )
 		      .arg( _fileName )
 		      .arg( _mimetype ) );
-	emit canceled( QString() );
+	emit canceled( TQString() );
 	return;
     }
 }
@@ -171,7 +171,7 @@ bool KGVDocument::uncompressFile()
     // If the file is gzipped, gunzip it to the temporary file _tmpUnzipped.
     kdDebug(4500) << "KGVDocument::uncompressFile()" << endl;
 
-    auto_ptr<QIODevice> filterDev( KFilterDev::deviceForFile( _fileName, _mimetype, true ) );
+    auto_ptr<TQIODevice> filterDev( KFilterDev::deviceForFile( _fileName, _mimetype, true ) );
     if ( !filterDev.get() ) {
         KMimeType::Ptr mt = KMimeType::mimeType(_mimetype);
 	if ( (_fileName.right( 3 ) == ".gz") || mt->is("application/x-gzip") ) {
@@ -191,7 +191,7 @@ bool KGVDocument::uncompressFile()
 	KMessageBox::error( _part->widget(),
 		i18n( "<qt>Could not uncompress <nobr><strong>%1</strong></nobr>.</qt>" )
 		.arg( _fileName ) );
-	emit canceled( QString() );
+	emit canceled( TQString() );
 	return false;
     }
 
@@ -202,12 +202,12 @@ bool KGVDocument::uncompressFile()
 	KMessageBox::error( _part->widget(),
 		i18n( "Could not create temporary file: %2" )
 		.arg( strerror( _tmpUnzipped->status() ) ) );
-	emit canceled( QString() );
+	emit canceled( TQString() );
 	return false;
     }
 
 
-    QByteArray buf( 8192 );
+    TQByteArray buf( 8192 );
     int read = 0, wrtn = 0;
     while( ( read = filterDev->readBlock( buf.data(), buf.size() ) )
 	    > 0 ) 
@@ -222,7 +222,7 @@ bool KGVDocument::uncompressFile()
 	KMessageBox::error( _part->widget(),
 	    i18n( "<qt>Could not uncompress <nobr><strong>%1</strong></nobr>.</qt>" )
 	    .arg( _fileName ) );
-	emit canceled( QString() );
+	emit canceled( TQString() );
 	return false;
     }
 
@@ -240,7 +240,7 @@ void KGVDocument::openPDFFileContinue( bool pdf2dscResult )
 	KMessageBox::error( _part->widget(),
 		i18n( "<qt>Could not open file <nobr><strong>%1</strong></nobr>.</qt>" ) 
 		.arg( _part->url().url() ) );
-	emit canceled( QString() );
+	emit canceled( TQString() );
 	return;
     }
 
@@ -250,12 +250,12 @@ void KGVDocument::openPDFFileContinue( bool pdf2dscResult )
     openPSFile(_tmpDSC->name());
 }
 
-void KGVDocument::openPSFile(const QString &file)
+void KGVDocument::openPSFile(const TQString &file)
 {
-    QString fileName = file.isEmpty() ? _fileName : file;
+    TQString fileName = file.isEmpty() ? _fileName : file;
     kdDebug(4500) << "KGVDocument::openPSFile (" << fileName << ")" << endl;
     
-    FILE* fp = fopen( QFile::encodeName( fileName ), "r");
+    FILE* fp = fopen( TQFile::encodeName( fileName ), "r");
     if( fp == 0 ) 
     {
 	KMessageBox::error( _part->widget(),
@@ -274,7 +274,7 @@ void KGVDocument::openPSFile(const QString &file)
     }
 }
 
-void KGVDocument::fileChanged( const QString& name )
+void KGVDocument::fileChanged( const TQString& name )
 {
     kdDebug(4500) << "KGVDocument: fileChanged " << name << endl;
 
@@ -304,7 +304,7 @@ void KGVDocument::scanDSC()
     char buf[4096];
     int  count;
     /*
-    QTime clock;
+    TQTime clock;
     clock.start();
     */
     while( ( count = fread( buf, sizeof(char), sizeof( buf ), _psFile ) ) != 0 )
@@ -339,7 +339,7 @@ void KGVDocument::close()
     clearTemporaryFiles();
 }
 
-bool KGVDocument::convertFromPDF( const QString& saveFileName, 
+bool KGVDocument::convertFromPDF( const TQString& saveFileName, 
                                     unsigned int firstPage,
                                     unsigned int lastPage )
 {
@@ -353,17 +353,17 @@ bool KGVDocument::convertFromPDF( const QString& saveFileName,
             << "-dSAFER"
             << "-dPARANOIDSAFER"
             << "-sDEVICE=pswrite"
-            << ( QCString("-sOutputFile=")+QFile::encodeName(saveFileName) )
-            << ( QString("-dFirstPage=")+QString::number( firstPage ) )
-            << ( QString("-dLastPage=")+QString::number( lastPage ) )
+            << ( TQCString("-sOutputFile=")+TQFile::encodeName(saveFileName) )
+            << ( TQString("-dFirstPage=")+TQString::number( firstPage ) )
+            << ( TQString("-dLastPage=")+TQString::number( lastPage ) )
             << "-c"
             << "save"
             << "pop"
             << "-f"
-            << QFile::encodeName(_fileName);
+            << TQFile::encodeName(_fileName);
 
-    /*QValueList<QCString> args = process.args();
-    QValueList<QCString>::Iterator it = args.begin();
+    /*TQValueList<TQCString> args = process.args();
+    TQValueList<TQCString>::Iterator it = args.begin();
     for ( ; it != args.end() ; ++it )
         kdDebug(4500) << ( *it ) << endl;*/
 
@@ -405,9 +405,9 @@ void KGVDocument::clearTemporaryFiles()
 
 /*- DOCUMENT --------------------------------------------------------------*/
 
-QStringList KGVDocument::mediaNames() const
+TQStringList KGVDocument::mediaNames() const
 {   
-    QStringList names;
+    TQStringList names;
 
     const CDSCMEDIA* m = dsc_known_media;
     while( m->name ) {
@@ -425,7 +425,7 @@ QStringList KGVDocument::mediaNames() const
     return names;
 }
 
-const CDSCMEDIA* KGVDocument::findMediaByName( const QString& mediaName ) const
+const CDSCMEDIA* KGVDocument::findMediaByName( const TQString& mediaName ) const
 {
     if( !isOpen() )
 	return 0;
@@ -452,7 +452,7 @@ const CDSCMEDIA* KGVDocument::findMediaByName( const QString& mediaName ) const
     return 0;
 }
 
-QSize KGVDocument::computePageSize( const QString& mediaName ) const
+TQSize KGVDocument::computePageSize( const TQString& mediaName ) const
 {
     kdDebug(4500) << "KGVDocument::computePageSize( " << mediaName << " )" << endl;
 
@@ -460,20 +460,20 @@ QSize KGVDocument::computePageSize( const QString& mediaName ) const
 	if( dsc()->bbox().get() != 0 )
 	    return dsc()->bbox()->size();
 	else
-	    return QSize( 0, 0 );
+	    return TQSize( 0, 0 );
     }
 
     const CDSCMEDIA* m = findMediaByName( mediaName );
     Q_ASSERT( m );
-    return QSize( static_cast<int>( m->width ), static_cast<int>( m->height ) );
+    return TQSize( static_cast<int>( m->width ), static_cast<int>( m->height ) );
 }
 
 
 /*- PRINTING and SAVING ---------------------------------------------------*/
 
-QString KGVDocument::pageListToRange( const PageList& pageList )
+TQString KGVDocument::pageListToRange( const PageList& pageList )
 {
-    QString range;
+    TQString range;
 
     // Iterators marking the begin and end of a successive sequence 
     // of pages.
@@ -495,9 +495,9 @@ QString KGVDocument::pageListToRange( const PageList& pageList )
 		range += ",";
 
 	    if( bss == ess )
-		range += QString::number( *ess );
+		range += TQString::number( *ess );
 	    else
-		range += QString( "%1-%2" ).arg( *bss ).arg( *ess );
+		range += TQString( "%1-%2" ).arg( *bss ).arg( *ess );
 
 	    bss = it;
 	}
@@ -523,7 +523,7 @@ void KGVDocument::print()
 
 	if( printer.setup( _part->widget(), i18n("Print %1").arg(_part->url().fileName()) ) ) 
 	{
-	    KTempFile tf( QString::null, ".ps" );
+	    KTempFile tf( TQString::null, ".ps" );
 	    if( tf.status() == 0 ) 
 	    {
 		if ( printer.pageList().empty() ) { 
@@ -532,7 +532,7 @@ void KGVDocument::print()
 				"pages to be printed was empty." ),
 			    i18n( "Error Printing" ) );
 		} else if ( savePages( tf.name(), printer.pageList() ) ) {
-		    printer.printFiles( QStringList( tf.name() ), true );
+		    printer.printFiles( TQStringList( tf.name() ), true );
 		} else {
 		    KMessageBox::error( 0, i18n( "<qt><strong>Printing failure:</strong><br>Could not convert to PostScript</qt>" ) );
 		}
@@ -562,17 +562,17 @@ void KGVDocument::saveAs()
                           _part->url().isLocalFile() 
                               ? _part->url().url() 
                               : _part->url().fileName(), 
-                          QString::null, 
+                          TQString::null, 
                           _part->widget(), 
-                          QString::null );
+                          TQString::null );
     if( !KIO::NetAccess::upload( _fileName,
 				 saveURL,
-				 static_cast<QWidget*>( 0 ) ) ) {
+				 static_cast<TQWidget*>( 0 ) ) ) {
 	// TODO: Proper error dialog
     }
 }
 
-bool KGVDocument::savePages( const QString& saveFileName,
+bool KGVDocument::savePages( const TQString& saveFileName,
                                const PageList& pageList )
 {
     if( pageList.empty() )
@@ -580,7 +580,7 @@ bool KGVDocument::savePages( const QString& saveFileName,
     
     if( _format == PDF ) 
     {
-	KTempFile psSaveFile( QString::null, ".ps" );
+	KTempFile psSaveFile( TQString::null, ".ps" );
 	psSaveFile.setAutoDelete( true );
 	if( psSaveFile.status() != 0 )
 	    return false;
@@ -639,8 +639,8 @@ bool KGVDocument::savePages( const QString& saveFileName,
 
 // Copy the headers, marked pages, and trailer to fp
 
-bool KGVDocument::psCopyDoc( const QString& inputFile,
-	const QString& outputFile, const PageList& pageList )
+bool KGVDocument::psCopyDoc( const TQString& inputFile,
+	const TQString& outputFile, const PageList& pageList )
 {
     FILE* from;
     FILE* to;
@@ -665,8 +665,8 @@ bool KGVDocument::psCopyDoc( const QString& inputFile,
 	return false;
     }
 
-    from = fopen( QFile::encodeName( inputFile ), "r" );
-    to = fopen( QFile::encodeName( outputFile ), "w" );
+    from = fopen( TQFile::encodeName( inputFile ), "r" );
+    to = fopen( TQFile::encodeName( outputFile ), "w" );
 
     // Hack in order to make printing of PDF files work. FIXME
     CDSC* dsc;
@@ -674,7 +674,7 @@ bool KGVDocument::psCopyDoc( const QString& inputFile,
     if( _format == PS )
 	dsc = _dsc->cdsc();
     else {
-	FILE* fp = fopen( QFile::encodeName( inputFile ), "r");
+	FILE* fp = fopen( TQFile::encodeName( inputFile ), "r");
 	char buf[256];
 	int count;
 	dsc = dsc_init( 0 );
@@ -768,17 +768,17 @@ bool KGVDocument::psCopyDoc( const QString& inputFile,
 /*- Conversion stuff ------------------------------------------------------*/
 
 /*
-void KGVDocument::runPdf2ps( const QString& pdfName, 
-                               const QString& dscName )
+void KGVDocument::runPdf2ps( const TQString& pdfName, 
+                               const TQString& dscName )
 {
     KProcess process;
     process << _interpreterPath
 	    << "-dNODISPLAY"
 	    << "-dQUIET"
-	    << QString( "-sPDFname=%1" ).arg( pdfName )
-	    << QString( "-sDSCnamale locale( "kghostview" );
+	    << TQString( "-sPDFname=%1" ).arg( pdfName )
+	    << TQString( "-sDSCnamale locale( "kghostview" );
     _fallBackPageMedia = pageSizeToString( 
-              static_cast< QPrinter::PageSize >( locale.pageSize() ) );
+              static_cast< TQPrinter::PageSize >( locale.pageSize() ) );
     
     _usePageLabels = false;
 e=%1" ).arg( dscName )
@@ -786,8 +786,8 @@ e=%1" ).arg( dscName )
 	    << "-c"
 	    << "quit";
 
-    connect( &process, SIGNAL( processExited( KProcess* ) ),
-	     this, SLOT( pdf2psExited( KProcess* ) ) );
+    connect( &process, TQT_SIGNAL( processExited( KProcess* ) ),
+	     this, TQT_SLOT( pdf2psExited( KProcess* ) ) );
 
     kdDebug(4500) << "KGVDocument: pdf2ps started" << endl;
     process.start( KProcess::NotifyOnExit );
@@ -801,8 +801,8 @@ void KGVDocument::pdf2psExited( KProcess* process )
 }
 */
 
-Pdf2dsc::Pdf2dsc( const QString& ghostscriptPath, QObject* parent, const char* name ) :
-    QObject( parent, name ),
+Pdf2dsc::Pdf2dsc( const TQString& ghostscriptPath, TQObject* parent, const char* name ) :
+    TQObject( parent, name ),
     _process( 0 ),
     _ghostscriptPath( ghostscriptPath )
 {}
@@ -812,7 +812,7 @@ Pdf2dsc::~Pdf2dsc()
     kill();
 }
 
-void Pdf2dsc::run( const QString& pdfName, const QString& dscName )
+void Pdf2dsc::run( const TQString& pdfName, const TQString& dscName )
 {
     kill();
 
@@ -823,8 +823,8 @@ void Pdf2dsc::run( const QString& pdfName, const QString& dscName )
               << "-dDELAYSAFER"
               << "-dNODISPLAY"
               << "-dQUIET"
-              << QString( "-sPDFname=%1" ).arg( pdfName )
-              << QString( "-sDSCname=%1" ).arg( dscName )
+              << TQString( "-sPDFname=%1" ).arg( pdfName )
+              << TQString( "-sDSCname=%1" ).arg( dscName )
               << "-c"
               << "<< /PermitFileReading [ PDFname ] /PermitFileWriting [ DSCname ] /PermitFileControl [] >> setuserparams .locksafe"
               << "-f"
@@ -832,8 +832,8 @@ void Pdf2dsc::run( const QString& pdfName, const QString& dscName )
               << "-c"
               << "quit";
 
-    connect( _process, SIGNAL( processExited( KProcess* ) ),
-	     this, SLOT( processExited() ) );
+    connect( _process, TQT_SIGNAL( processExited( KProcess* ) ),
+	     this, TQT_SLOT( processExited() ) );
 
     kdDebug(4500) << "Pdf2dsc: started" << endl;
     _process->start( KProcess::NotifyOnExit );

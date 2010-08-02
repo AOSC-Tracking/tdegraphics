@@ -21,150 +21,150 @@
 #include "pmviewfactory.h"
 #include "pmdebug.h"
 
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlistbox.h>
-#include <qlistview.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
-#include <qgroupbox.h>
+#include <tqlayout.h>
+#include <tqcombobox.h>
+#include <tqlistbox.h>
+#include <tqlistview.h>
+#include <tqpushbutton.h>
+#include <tqlabel.h>
+#include <tqgroupbox.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMLayoutSettings::PMLayoutSettings( QWidget* parent, const char* name )
+PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   QHBoxLayout* hlayout;
-   QVBoxLayout* vlayout;
-   QVBoxLayout* gvl;
-   QGridLayout* grid;
-   QGroupBox* gb;
-   QGroupBox* gbe;
-   QHBoxLayout* ghe;
-   QVBoxLayout* gvle;
+   TQHBoxLayout* hlayout;
+   TQVBoxLayout* vlayout;
+   TQVBoxLayout* gvl;
+   TQGridLayout* grid;
+   TQGroupBox* gb;
+   TQGroupBox* gbe;
+   TQHBoxLayout* ghe;
+   TQVBoxLayout* gvle;
 
-   vlayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
-   hlayout = new QHBoxLayout( vlayout );
-   hlayout->addWidget( new QLabel( i18n( "Default view layout:" ), this ) );
-   m_pDefaultLayout = new QComboBox( this );
+   hlayout = new TQHBoxLayout( vlayout );
+   hlayout->addWidget( new TQLabel( i18n( "Default view layout:" ), this ) );
+   m_pDefaultLayout = new TQComboBox( this );
    hlayout->addWidget( m_pDefaultLayout, 1 );
    hlayout->addStretch( 1 );
 
-   gb = new QGroupBox( i18n( "Available View Layouts" ), this );
+   gb = new TQGroupBox( i18n( "Available View Layouts" ), this );
    vlayout->addWidget( gb );
-   gvl = new QVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    
-   grid = new QGridLayout( gvl, 3, 2 );
-   m_pViewLayouts = new QListBox( gb );
-   connect( m_pViewLayouts, SIGNAL( highlighted( int ) ), 
-                            SLOT( slotLayoutSelected( int ) ) );
+   grid = new TQGridLayout( gvl, 3, 2 );
+   m_pViewLayouts = new TQListBox( gb );
+   connect( m_pViewLayouts, TQT_SIGNAL( highlighted( int ) ), 
+                            TQT_SLOT( slotLayoutSelected( int ) ) );
    grid->addMultiCellWidget( m_pViewLayouts, 0, 2, 0, 0 );
-   m_pAddLayout = new QPushButton( i18n( "Add" ), gb );
-   connect( m_pAddLayout, SIGNAL( clicked( ) ), SLOT( slotAddLayout( ) ) );
+   m_pAddLayout = new TQPushButton( i18n( "Add" ), gb );
+   connect( m_pAddLayout, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddLayout( ) ) );
    grid->addWidget( m_pAddLayout, 0, 1 );
-   m_pRemoveLayout = new QPushButton( i18n( "Remove" ), gb );
-   connect( m_pRemoveLayout, SIGNAL( clicked( ) ), SLOT( slotRemoveLayout( ) ) );
+   m_pRemoveLayout = new TQPushButton( i18n( "Remove" ), gb );
+   connect( m_pRemoveLayout, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveLayout( ) ) );
    grid->addWidget( m_pRemoveLayout, 1, 1 );
    grid->setRowStretch( 2, 1 );
 
-   gbe = new QGroupBox( i18n( "View Layout" ), gb );
+   gbe = new TQGroupBox( i18n( "View Layout" ), gb );
    gvl->addWidget( gbe );
-   gvle = new QVBoxLayout( gbe, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   gvle = new TQVBoxLayout( gbe, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvle->addSpacing( 10 );
-   ghe = new QHBoxLayout( gvle );
-   ghe->addWidget( new QLabel( i18n( "Name:" ), gbe ) );
-   m_pViewLayoutName = new QLineEdit( gbe );
-   connect( m_pViewLayoutName, SIGNAL( textChanged( const QString& ) ), 
-                               SLOT( slotLayoutNameChanged( const QString& ) ) );
+   ghe = new TQHBoxLayout( gvle );
+   ghe->addWidget( new TQLabel( i18n( "Name:" ), gbe ) );
+   m_pViewLayoutName = new TQLineEdit( gbe );
+   connect( m_pViewLayoutName, TQT_SIGNAL( textChanged( const TQString& ) ), 
+                               TQT_SLOT( slotLayoutNameChanged( const TQString& ) ) );
    ghe->addWidget( m_pViewLayoutName );
-   grid = new QGridLayout( gvle, 4, 2 );
-   m_pViewEntries = new QListView( gbe );
+   grid = new TQGridLayout( gvle, 4, 2 );
+   m_pViewEntries = new TQListView( gbe );
    m_pViewEntries->setAllColumnsShowFocus( true );
    m_pViewEntries->addColumn( " " );  // This column is for the view entry number 
    m_pViewEntries->addColumn( i18n( "Type" ) );
    m_pViewEntries->addColumn( i18n( "Position" ) );
    m_pViewEntries->setSorting( -1 );
    m_pViewEntries->setMaximumHeight( 150 );
-   connect( m_pViewEntries, SIGNAL( selectionChanged( QListViewItem* ) ),
-                            SLOT( slotViewEntrySelected( QListViewItem* ) ) );
+   connect( m_pViewEntries, TQT_SIGNAL( selectionChanged( TQListViewItem* ) ),
+                            TQT_SLOT( slotViewEntrySelected( TQListViewItem* ) ) );
    grid->addMultiCellWidget( m_pViewEntries, 0, 3, 0, 0 );
-   m_pAddEntry = new QPushButton( i18n( "Add" ), gbe );
-   connect( m_pAddEntry, SIGNAL( clicked( ) ), SLOT( slotAddViewEntryClicked( ) ) );
+   m_pAddEntry = new TQPushButton( i18n( "Add" ), gbe );
+   connect( m_pAddEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddViewEntryClicked( ) ) );
    grid->addWidget( m_pAddEntry, 0, 1 );
-   m_pRemoveEntry = new QPushButton( i18n( "Remove" ), gbe );
-   connect( m_pRemoveEntry, SIGNAL( clicked( ) ), SLOT( slotRemoveViewEntryClicked( ) ) );
+   m_pRemoveEntry = new TQPushButton( i18n( "Remove" ), gbe );
+   connect( m_pRemoveEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveViewEntryClicked( ) ) );
    grid->addWidget( m_pRemoveEntry, 1, 1 );
    /* //TODO
-   m_pMoveUpEntry = new QPushButton( i18n( "Move Up" ), gbe );
-   connect( m_pMoveUpEntry, SIGNAL( clicked( ) ), SLOT( slotMoveUpViewEntryClicked( ) ) );
+   m_pMoveUpEntry = new TQPushButton( i18n( "Move Up" ), gbe );
+   connect( m_pMoveUpEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotMoveUpViewEntryClicked( ) ) );
    grid->addWidget( m_pMoveUpEntry, 2, 1 );
-   m_pMoveDownEntry = new QPushButton( i18n( "Move Down" ), gbe );
-   connect( m_pMoveDownEntry, SIGNAL( clicked( ) ), SLOT( slotMoveDownViewEntryClicked( ) ) );
+   m_pMoveDownEntry = new TQPushButton( i18n( "Move Down" ), gbe );
+   connect( m_pMoveDownEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotMoveDownViewEntryClicked( ) ) );
    grid->addWidget( m_pMoveDownEntry, 3, 1 );
    */
 
-   QHBoxLayout* ghl = new QHBoxLayout( gvle );
-   grid = new QGridLayout( ghl, 7, 4 );
-   grid->addWidget( new QLabel( i18n( "Type:" ), gbe ), 0, 0 );
-   grid->addWidget( new QLabel( i18n( "Dock position:" ), gbe ), 2, 0 );
-   m_pColumnWidthLabel = new QLabel( i18n( "Column width:" ), gbe );
+   TQHBoxLayout* ghl = new TQHBoxLayout( gvle );
+   grid = new TQGridLayout( ghl, 7, 4 );
+   grid->addWidget( new TQLabel( i18n( "Type:" ), gbe ), 0, 0 );
+   grid->addWidget( new TQLabel( i18n( "Dock position:" ), gbe ), 2, 0 );
+   m_pColumnWidthLabel = new TQLabel( i18n( "Column width:" ), gbe );
    grid->addWidget( m_pColumnWidthLabel, 3, 0 );
-   m_pViewHeightLabel = new QLabel( i18n( "View height:" ), gbe );
+   m_pViewHeightLabel = new TQLabel( i18n( "View height:" ), gbe );
    grid->addWidget( m_pViewHeightLabel, 4, 0 );
-   m_pViewTypeEdit = new QComboBox( gbe );
+   m_pViewTypeEdit = new TQComboBox( gbe );
 
    // insert all view types
-   const QPtrList<PMViewTypeFactory>& types =
+   const TQPtrList<PMViewTypeFactory>& types =
       PMViewFactory::theFactory( )->viewTypes( );
-   QPtrListIterator<PMViewTypeFactory> it( types );
+   TQPtrListIterator<PMViewTypeFactory> it( types );
    for( ; *it; ++it )
       m_pViewTypeEdit->insertItem( ( *it )->description( ) );
    
-   connect( m_pViewTypeEdit, SIGNAL( activated( int ) ),
-                             SLOT( slotViewTypeChanged( int ) ) );
+   connect( m_pViewTypeEdit, TQT_SIGNAL( activated( int ) ),
+                             TQT_SLOT( slotViewTypeChanged( int ) ) );
    grid->addWidget( m_pViewTypeEdit, 0, 1 );
-   m_pDockPositionEdit = new QComboBox( gbe );
+   m_pDockPositionEdit = new TQComboBox( gbe );
    m_pDockPositionEdit->insertItem( i18n( "New Column" ) );
    m_pDockPositionEdit->insertItem( i18n( "Below" ) );
    m_pDockPositionEdit->insertItem( i18n( "Tabbed" ) );
    m_pDockPositionEdit->insertItem( i18n( "Floating" ) );
-   connect( m_pDockPositionEdit, SIGNAL( activated( int ) ),
-            SLOT( slotDockPositionChanged( int ) ) );
+   connect( m_pDockPositionEdit, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotDockPositionChanged( int ) ) );
    grid->addWidget( m_pDockPositionEdit, 2, 1 );
    
    m_pColumnWidthEdit = new PMIntEdit( gbe );
-   connect( m_pColumnWidthEdit, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotColumnWidthChanged( const QString& ) ) );
+   connect( m_pColumnWidthEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotColumnWidthChanged( const TQString& ) ) );
    grid->addWidget( m_pColumnWidthEdit, 3, 1 );
    
    m_pViewHeightEdit = new PMIntEdit( gbe );
-   connect( m_pViewHeightEdit, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotViewHeightChanged( const QString& ) ) );
+   connect( m_pViewHeightEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotViewHeightChanged( const TQString& ) ) );
    grid->addWidget( m_pViewHeightEdit, 4, 1 );
 
-   m_pFloatingWidthLabel = new QLabel( i18n( "Width:" ), gbe );
-   m_pFloatingHeightLabel = new QLabel( i18n( "Height:" ), gbe );
-   m_pFloatingPosXLabel = new QLabel( i18n( "Position x:" ), gbe );
-   m_pFloatingPosYLabel = new QLabel( QString( "y:" ), gbe );
+   m_pFloatingWidthLabel = new TQLabel( i18n( "Width:" ), gbe );
+   m_pFloatingHeightLabel = new TQLabel( i18n( "Height:" ), gbe );
+   m_pFloatingPosXLabel = new TQLabel( i18n( "Position x:" ), gbe );
+   m_pFloatingPosYLabel = new TQLabel( TQString( "y:" ), gbe );
    grid->addWidget( m_pFloatingWidthLabel, 5, 0 );
    grid->addWidget( m_pFloatingHeightLabel, 5, 2 );
    grid->addWidget( m_pFloatingPosXLabel, 6, 0 );
    grid->addWidget( m_pFloatingPosYLabel, 6, 2 );
 
    m_pFloatingWidth = new PMIntEdit( gbe );
-   connect( m_pFloatingWidth, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotFloatingWidthChanged( const QString& ) ) );
+   connect( m_pFloatingWidth, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotFloatingWidthChanged( const TQString& ) ) );
    m_pFloatingHeight = new PMIntEdit( gbe );
-   connect( m_pFloatingHeight, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotFloatingHeightChanged( const QString& ) ) );
+   connect( m_pFloatingHeight, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotFloatingHeightChanged( const TQString& ) ) );
    m_pFloatingPosX = new PMIntEdit( gbe );
-   connect( m_pFloatingPosX, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotFloatingPosXChanged( const QString& ) ) );
+   connect( m_pFloatingPosX, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotFloatingPosXChanged( const TQString& ) ) );
    m_pFloatingPosY = new PMIntEdit( gbe );
-   connect( m_pFloatingPosY, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotFloatingPosYChanged( const QString& ) ) );
+   connect( m_pFloatingPosY, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotFloatingPosYChanged( const TQString& ) ) );
    grid->addWidget( m_pFloatingWidth, 5, 1 );
    grid->addWidget( m_pFloatingHeight, 5, 3 );
    grid->addWidget( m_pFloatingPosX, 6, 1 );
@@ -172,9 +172,9 @@ PMLayoutSettings::PMLayoutSettings( QWidget* parent, const char* name )
 
    // create a holder widget for custom options widgets
    m_pCustomOptionsWidget = 0;
-   m_pCustomOptionsHolder = new QWidget( gbe );
+   m_pCustomOptionsHolder = new TQWidget( gbe );
 
-   QVBoxLayout* covl = new QVBoxLayout( ghl );
+   TQVBoxLayout* covl = new TQVBoxLayout( ghl );
    covl->addWidget( m_pCustomOptionsHolder );
    covl->addStretch( 1 );
    
@@ -204,7 +204,7 @@ void PMLayoutSettings::displayDefaults( )
 
 bool PMLayoutSettings::validateData( )
 {
-   QValueListIterator<PMViewLayout> lit;
+   TQValueListIterator<PMViewLayout> lit;
    for( lit = m_viewLayouts.begin( ); lit != m_viewLayouts.end( ); ++lit )
    {
       if( ( *lit ).name( ).isEmpty( ) )
@@ -214,7 +214,7 @@ bool PMLayoutSettings::validateData( )
                              i18n( "Error" ) );
          return false;
       }
-      QValueListIterator<PMViewLayoutEntry> eit = ( *lit ).begin( );
+      TQValueListIterator<PMViewLayoutEntry> eit = ( *lit ).begin( );
       if( eit != ( *lit ).end( ) )
       {
          if( ( *eit ).dockPosition( ) != PMDockWidget::DockRight )
@@ -231,7 +231,7 @@ bool PMLayoutSettings::validateData( )
 
 void PMLayoutSettings::applySettings( )
 {
-   QValueListIterator<PMViewLayout> lit;
+   TQValueListIterator<PMViewLayout> lit;
    for( lit = m_viewLayouts.begin( ); lit != m_viewLayouts.end( ); ++lit )
       ( *lit ).normalize( );
    PMViewLayoutManager::theManager( )->setDefaultLayout( m_pDefaultLayout->currentText( ) );
@@ -241,7 +241,7 @@ void PMLayoutSettings::applySettings( )
 
 void PMLayoutSettings::displayLayoutList( )
 {
-   QValueListIterator<PMViewLayout> it;
+   TQValueListIterator<PMViewLayout> it;
    
    m_pViewLayouts->clear( );
    m_pDefaultLayout->clear( );
@@ -256,9 +256,9 @@ void PMLayoutSettings::displayLayoutList( )
 
 void PMLayoutSettings::slotAddLayout( )
 {
-   QString new_name;
+   TQString new_name;
    int i = 1;
-   QString str;
+   TQString str;
 
    new_name = i18n( "Unnamed" );
    str.setNum( i );
@@ -301,7 +301,7 @@ void PMLayoutSettings::slotRemoveLayout( )
 void PMLayoutSettings::slotLayoutSelected( int index )
 {
   int i;
-  QString str;
+  TQString str;
   bool sb;
 
   m_currentViewLayout = m_viewLayouts.at( index );
@@ -313,14 +313,14 @@ void PMLayoutSettings::slotLayoutSelected( int index )
   m_pViewLayoutName->blockSignals( sb );
   
   PMViewLayout::iterator it;
-  QListViewItem* previous = NULL;
+  TQListViewItem* previous = NULL;
   m_pViewEntries->clear( );
   i = 0;
   for( it = ( *m_currentViewLayout ).begin( );
        it != ( *m_currentViewLayout ).end( ); ++it )
   {
      i++; str.setNum( i );
-     previous = new QListViewItem( m_pViewEntries, previous, str,
+     previous = new TQListViewItem( m_pViewEntries, previous, str,
                                    ( *it ).viewTypeAsString( ),
                                    ( *it ).dockPositionAsString( ) );
      if( i == 1 )
@@ -330,7 +330,7 @@ void PMLayoutSettings::slotLayoutSelected( int index )
      slotViewEntrySelected( 0 );
 }
 
-void PMLayoutSettings::slotLayoutNameChanged( const QString& text )
+void PMLayoutSettings::slotLayoutNameChanged( const TQString& text )
 {
    int n_item = m_pViewLayouts->currentItem( );
    bool sb = m_pViewLayouts->signalsBlocked( );
@@ -342,7 +342,7 @@ void PMLayoutSettings::slotLayoutNameChanged( const QString& text )
 
    ( *m_currentViewLayout ).setName( text );
    
-   QValueListIterator<PMViewLayout> it;   
+   TQValueListIterator<PMViewLayout> it;   
    m_pDefaultLayout->clear( );
    for( it = m_viewLayouts.begin( ); it != m_viewLayouts.end( ); ++it )
    {
@@ -352,7 +352,7 @@ void PMLayoutSettings::slotLayoutNameChanged( const QString& text )
    }
 }
 
-void PMLayoutSettings::slotViewEntrySelected( QListViewItem *item )
+void PMLayoutSettings::slotViewEntrySelected( TQListViewItem *item )
 {
    if( item )
    {
@@ -362,14 +362,14 @@ void PMLayoutSettings::slotViewEntrySelected( QListViewItem *item )
       int n_item = item->text( 0 ).toInt( ) - 1;
 
       m_currentViewEntry = ( *m_currentViewLayout ).at( n_item );
-      QString vt = ( *m_currentViewEntry ).viewType( );
+      TQString vt = ( *m_currentViewEntry ).viewType( );
 
       // find the view type
       int index = 0;
       bool found = false;
-      const QPtrList<PMViewTypeFactory>& types =
+      const TQPtrList<PMViewTypeFactory>& types =
          PMViewFactory::theFactory( )->viewTypes( );
-      QPtrListIterator<PMViewTypeFactory> it( types );
+      TQPtrListIterator<PMViewTypeFactory> it( types );
 
       for( ; *it && !found; ++it )
       {
@@ -506,9 +506,9 @@ void PMLayoutSettings::slotViewEntrySelected( QListViewItem *item )
 
 void PMLayoutSettings::slotViewTypeChanged( int index )
 {
-   const QPtrList<PMViewTypeFactory>& types =
+   const TQPtrList<PMViewTypeFactory>& types =
       PMViewFactory::theFactory( )->viewTypes( );
-   QPtrListIterator<PMViewTypeFactory> it( types );
+   TQPtrListIterator<PMViewTypeFactory> it( types );
    it += index;
    const PMViewTypeFactory* factory = *it;
    PMViewLayoutEntry& ve = ( *m_currentViewEntry );
@@ -518,7 +518,7 @@ void PMLayoutSettings::slotViewTypeChanged( int index )
       ve.setViewType( factory->viewType( ) );
       ve.setCustomOptions( factory->newOptionsInstance( ) );
 
-      QListViewItem* item = m_pViewEntries->currentItem( );
+      TQListViewItem* item = m_pViewEntries->currentItem( );
       if( item )
       {
          if( ve.customOptions( ) )
@@ -595,37 +595,37 @@ void PMLayoutSettings::slotDockPositionChanged( int index )
          m_pFloatingPosYLabel->show( );
          break;
    }
-   QListViewItem* item = m_pViewEntries->currentItem( );
+   TQListViewItem* item = m_pViewEntries->currentItem( );
    if( item )
       item->setText( 2, ( *m_currentViewEntry ).dockPositionAsString( ) );
 }
 
-void PMLayoutSettings::slotViewHeightChanged( const QString& text )
+void PMLayoutSettings::slotViewHeightChanged( const TQString& text )
 {
    ( *m_currentViewEntry ).setHeight( text.toInt( ) );
 }
 
-void PMLayoutSettings::slotColumnWidthChanged( const QString& text )
+void PMLayoutSettings::slotColumnWidthChanged( const TQString& text )
 {
    ( *m_currentViewEntry ).setColumnWidth( text.toInt( ) );
 }
 
-void PMLayoutSettings::slotFloatingWidthChanged( const QString& text )
+void PMLayoutSettings::slotFloatingWidthChanged( const TQString& text )
 {
    ( *m_currentViewEntry ).setFloatingWidth( text.toInt( ) );
 }
 
-void PMLayoutSettings::slotFloatingHeightChanged( const QString& text )
+void PMLayoutSettings::slotFloatingHeightChanged( const TQString& text )
 {
    ( *m_currentViewEntry ).setFloatingHeight( text.toInt( ) );
 }
 
-void PMLayoutSettings::slotFloatingPosXChanged( const QString& text )
+void PMLayoutSettings::slotFloatingPosXChanged( const TQString& text )
 {
    ( *m_currentViewEntry ).setFloatingPositionX( text.toInt( ) );
 }
 
-void PMLayoutSettings::slotFloatingPosYChanged( const QString& text )
+void PMLayoutSettings::slotFloatingPosYChanged( const TQString& text )
 {
    ( *m_currentViewEntry ).setFloatingPositionY( text.toInt( ) );
 }
@@ -633,8 +633,8 @@ void PMLayoutSettings::slotFloatingPosYChanged( const QString& text )
 void PMLayoutSettings::slotAddViewEntryClicked( )
 {
    PMViewLayoutEntry p;
-   QString str;
-   QListViewItem* temp;
+   TQString str;
+   TQListViewItem* temp;
 
    temp = m_pViewEntries->currentItem( );
    if( temp )
@@ -643,7 +643,7 @@ void PMLayoutSettings::slotAddViewEntryClicked( )
       ( *m_currentViewLayout ).addEntry( p, n_item );
       n_item++;
       str.setNum( n_item );
-      QListViewItem* a = new QListViewItem( m_pViewEntries, temp,
+      TQListViewItem* a = new TQListViewItem( m_pViewEntries, temp,
                                             str, p.viewTypeAsString( ),
                                             p.dockPositionAsString( ) );
       m_pViewEntries->setSelected( a, true );
@@ -661,7 +661,7 @@ void PMLayoutSettings::slotAddViewEntryClicked( )
       // If there is no selected the list must be empty
       ( *m_currentViewLayout ).addEntry( p );
       str.setNum( 1 );
-      QListViewItem* a = new QListViewItem( m_pViewEntries, NULL,
+      TQListViewItem* a = new TQListViewItem( m_pViewEntries, NULL,
                                             str, p.viewTypeAsString( ),
                                             p.dockPositionAsString( ) );
       m_pViewEntries->setSelected( a, true );
@@ -670,10 +670,10 @@ void PMLayoutSettings::slotAddViewEntryClicked( )
 
 void PMLayoutSettings::slotRemoveViewEntryClicked( )
 {
-   QListViewItem* temp;
-   QString str;
+   TQListViewItem* temp;
+   TQString str;
 
-   QListViewItem* current = m_pViewEntries->currentItem( );
+   TQListViewItem* current = m_pViewEntries->currentItem( );
    if( current )
    {
       int n_item = current->text( 0 ).toInt( ) - 1;
@@ -741,9 +741,9 @@ void PMLayoutSettings::displayCustomOptions( )
                                   ( *m_currentViewEntry ).customOptions( ) );
          if( m_pCustomOptionsWidget )
          {
-            connect( m_pCustomOptionsWidget, SIGNAL( viewTypeDescriptionChanged( ) ),
-                     SLOT( slotViewTypeDescriptionChanged( ) ) );
-            QHBoxLayout* hl = new QHBoxLayout( m_pCustomOptionsHolder,
+            connect( m_pCustomOptionsWidget, TQT_SIGNAL( viewTypeDescriptionChanged( ) ),
+                     TQT_SLOT( slotViewTypeDescriptionChanged( ) ) );
+            TQHBoxLayout* hl = new TQHBoxLayout( m_pCustomOptionsHolder,
                                                0, KDialog::spacingHint( ) );
             hl->addWidget( m_pCustomOptionsWidget );
             m_pCustomOptionsWidget->show( );
@@ -760,7 +760,7 @@ void PMLayoutSettings::slotViewTypeDescriptionChanged( )
    
    if( factory )
    {
-      QListViewItem* item = m_pViewEntries->currentItem( );
+      TQListViewItem* item = m_pViewEntries->currentItem( );
       if( item )
       {
          if( ve.customOptions( ) )

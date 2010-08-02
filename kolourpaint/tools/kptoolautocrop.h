@@ -29,14 +29,14 @@
 #ifndef __kptoolautocrop_h__
 #define __kptoolautocrop_h__
 
-#include <qrect.h>
+#include <tqrect.h>
 
 #include <kpcommandhistory.h>
 
 #include <kpcolor.h>
 #include <kpselection.h>
 
-class QPixmap;
+class TQPixmap;
 class kpDocument;
 class kpMainWindow;
 class kpViewManager;
@@ -49,13 +49,13 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow);
 class kpToolAutoCropBorder
 {
 public:
-    kpToolAutoCropBorder (const QPixmap *pixmapPtr, int processedColorSimilarity);
+    kpToolAutoCropBorder (const TQPixmap *pixmapPtr, int processedColorSimilarity);
 
     int size () const;
 
-    const QPixmap *pixmap () const;
+    const TQPixmap *pixmap () const;
     int processedColorSimilarity () const;
-    QRect rect () const;
+    TQRect rect () const;
     int left () const;
     int right () const;
     int top () const;
@@ -72,10 +72,10 @@ public:
     void invalidate ();
 
 private:
-    const QPixmap *m_pixmapPtr;
+    const TQPixmap *m_pixmapPtr;
     int m_processedColorSimilarity;
 
-    QRect m_rect;
+    TQRect m_rect;
     kpColor m_referenceColor;
     int m_redSum, m_greenSum, m_blueSum;
     bool m_isSingleColor;
@@ -99,12 +99,12 @@ public:
         ShowAccel = 1
     };
 
-    static QString name (bool actOnSelection, int options);
+    static TQString name (bool actOnSelection, int options);
 
     virtual int size () const;
 
 private:
-    void getUndoPixmap (const kpToolAutoCropBorder &border, QPixmap **pixmap);
+    void getUndoPixmap (const kpToolAutoCropBorder &border, TQPixmap **pixmap);
     void getUndoPixmaps ();
     void deleteUndoPixmaps ();
 
@@ -113,13 +113,13 @@ public:
     virtual void unexecute ();
 
 private:
-    QRect contentsRect () const;
+    TQRect contentsRect () const;
 
     bool m_actOnSelection;
     kpToolAutoCropBorder m_leftBorder, m_rightBorder, m_topBorder, m_botBorder;
-    QPixmap *m_leftPixmap, *m_rightPixmap, *m_topPixmap, *m_botPixmap;
+    TQPixmap *m_leftPixmap, *m_rightPixmap, *m_topPixmap, *m_botPixmap;
 
-    QRect m_contentsRect;
+    TQRect m_contentsRect;
     int m_oldWidth, m_oldHeight;
     kpSelection m_oldSelection;
 };

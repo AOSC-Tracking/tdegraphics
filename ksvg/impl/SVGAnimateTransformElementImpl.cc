@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include "SVGLengthImpl.h"
 #include "SVGHelperImpl.h"
@@ -85,7 +85,7 @@ void SVGAnimateTransformElementImpl::setAttributes()
 
 			m_from = list->getFirst()->angle();
 			
-			QStringList stringList = QStringList::split(' ', list->getFirst()->toString());
+			TQStringList stringList = TQStringList::split(' ', list->getFirst()->toString());
 			m_rotateX = stringList[1].toInt();
 			m_rotateY = stringList[2].mid(0, stringList[2].length() - 1).toInt();
 			
@@ -127,13 +127,13 @@ void SVGAnimateTransformElementImpl::setAttributes()
 	DOM::DOMString _values = getAttribute("values");
 	if(!_values.isNull())
 	{
-		QString test = _values.string();
+		TQString test = _values.string();
 
 		if(test.contains(";"))
 		{
 			SVGLengthImpl *temp = SVGSVGElementImpl::createSVGLength();
 			
-			QStringList list = QStringList::split(';', test);
+			TQStringList list = TQStringList::split(';', test);
 			temp->setValueAsString(list[0]);
 			m_from = temp->value();
 			temp->setValueAsString(list[1]);
@@ -192,8 +192,8 @@ void SVGAnimateTransformElementImpl::handleTimerEvent(bool)
 		else if(m_type == "skewy")
 			transform->setSkewY(m_from);
 
-		QString trans = transform->toString();
-		QString last = trans;
+		TQString trans = transform->toString();
+		TQString last = trans;
 		
 		if(targetElement()->hasAttribute("transform"))
 		{
@@ -203,7 +203,7 @@ void SVGAnimateTransformElementImpl::handleTimerEvent(bool)
 			{
 				int pos = trans.find(m_lastTransform);
 				
-				QString extract;
+				TQString extract;
 				extract += trans.mid(0, pos);
 				extract += trans.mid(pos + m_lastTransform.length() + 1, trans.length());
 

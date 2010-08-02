@@ -30,8 +30,8 @@
 #define __kp_color_toolbar_h__
 
 
-#include <qframe.h>
-#include <qwidget.h>
+#include <tqframe.h>
+#include <tqwidget.h>
 
 #include <kcolordialog.h>
 #include <ktoolbar.h>
@@ -40,7 +40,7 @@
 #include <kpcolorsimilaritycube.h>
 
 
-class QGridLayout;
+class TQGridLayout;
 class KColorButton;
 
 class kpColorSimilarityCube;
@@ -62,7 +62,7 @@ Q_OBJECT
 
 public:
     kpDualColorButton (kpMainWindow *mainWindow,
-                       QWidget *parent, const char *name = 0);
+                       TQWidget *parent, const char *name = 0);
     virtual ~kpDualColorButton ();
 
     kpColor color (int which) const;
@@ -90,28 +90,28 @@ public:
     kpColor oldBackgroundColor () const;
 
 public:
-    virtual QSize sizeHint () const;
+    virtual TQSize sizeHint () const;
 
 protected:
-    QRect swapPixmapRect () const;
-    QRect foregroundBackgroundRect () const;
-    QRect foregroundRect () const;
-    QRect backgroundRect () const;
+    TQRect swapPixmapRect () const;
+    TQRect foregroundBackgroundRect () const;
+    TQRect foregroundRect () const;
+    TQRect backgroundRect () const;
 
-    //virtual void dragEnterEvent (QDragEnterEvent *e);
-    virtual void dragMoveEvent (QDragMoveEvent *e);
-    virtual void dropEvent (QDropEvent *e);
+    //virtual void dragEnterEvent (TQDragEnterEvent *e);
+    virtual void dragMoveEvent (TQDragMoveEvent *e);
+    virtual void dropEvent (TQDropEvent *e);
 
-    virtual void mousePressEvent (QMouseEvent *e);
-    virtual void mouseDoubleClickEvent (QMouseEvent *e);
-    virtual void mouseReleaseEvent (QMouseEvent *e);
+    virtual void mousePressEvent (TQMouseEvent *e);
+    virtual void mouseDoubleClickEvent (TQMouseEvent *e);
+    virtual void mouseReleaseEvent (TQMouseEvent *e);
 
-    virtual void drawContents (QPainter *p);
+    virtual void drawContents (TQPainter *p);
 
     kpMainWindow *m_mainWindow;
     kpColor m_color [2];
     kpColor m_oldColor [2];
-    QPixmap *m_backBuffer;
+    TQPixmap *m_backBuffer;
 };
 
 
@@ -120,7 +120,7 @@ class kpColorCells : public KColorCells
 Q_OBJECT
 
 public:
-    kpColorCells (QWidget *parent,
+    kpColorCells (TQWidget *parent,
                   Qt::Orientation o = Qt::Horizontal,
                   const char *name = 0);
     virtual ~kpColorCells ();
@@ -129,8 +129,8 @@ public:
     void setOrientation (Qt::Orientation o);
 
 signals:
-    void foregroundColorChanged (const QColor &color);
-    void backgroundColorChanged (const QColor &color);
+    void foregroundColorChanged (const TQColor &color);
+    void backgroundColorChanged (const TQColor &color);
 
     // lazy
     void foregroundColorChanged (const kpColor &color);
@@ -139,10 +139,10 @@ signals:
 protected:
     Qt::Orientation m_orientation;
 
-    virtual void dropEvent (QDropEvent *e);
-    virtual void paintCell (QPainter *painter, int row, int col);
-    virtual void mouseReleaseEvent (QMouseEvent *e);
-    virtual void resizeEvent (QResizeEvent *e);
+    virtual void dropEvent (TQDropEvent *e);
+    virtual void paintCell (TQPainter *painter, int row, int col);
+    virtual void mouseReleaseEvent (TQMouseEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
 
     int m_mouseButton;
 
@@ -157,10 +157,10 @@ class kpTransparentColorCell : public QFrame
 Q_OBJECT
 
 public:
-    kpTransparentColorCell (QWidget *parent, const char *name = 0);
+    kpTransparentColorCell (TQWidget *parent, const char *name = 0);
     virtual ~kpTransparentColorCell ();
 
-    virtual QSize sizeHint () const;
+    virtual TQSize sizeHint () const;
 
 signals:
     void transparentColorSelected (int mouseButton);
@@ -170,12 +170,12 @@ signals:
     void backgroundColorChanged (const kpColor &color);
 
 protected:
-    virtual void mousePressEvent (QMouseEvent *e);
-    virtual void mouseReleaseEvent (QMouseEvent *e);
+    virtual void mousePressEvent (TQMouseEvent *e);
+    virtual void mouseReleaseEvent (TQMouseEvent *e);
 
-    virtual void drawContents (QPainter *p);
+    virtual void drawContents (TQPainter *p);
 
-    QPixmap m_pixmap;
+    TQPixmap m_pixmap;
 };
 
 
@@ -184,7 +184,7 @@ class kpColorPalette : public QWidget
 Q_OBJECT
 
 public:
-    kpColorPalette (QWidget *parent,
+    kpColorPalette (TQWidget *parent,
                     Qt::Orientation o = Qt::Horizontal,
                     const char *name = 0);
     virtual ~kpColorPalette ();
@@ -199,7 +199,7 @@ signals:
 protected:
     Qt::Orientation m_orientation;
 
-    QBoxLayout *m_boxLayout;
+    TQBoxLayout *m_boxLayout;
     kpTransparentColorCell *m_transparentColorCell;
     kpColorCells *m_colorCells;
 };
@@ -211,7 +211,7 @@ Q_OBJECT
 
 public:
     kpColorSimilarityToolBarItem (kpMainWindow *mainWindow,
-                                  QWidget *parent,
+                                  TQWidget *parent,
                                   const char *name = 0);
     virtual ~kpColorSimilarityToolBarItem ();
 
@@ -229,8 +229,8 @@ public:
     double oldColorSimilarity () const;
 
 private:
-    virtual void mousePressEvent (QMouseEvent *e);
-    virtual void mouseDoubleClickEvent (QMouseEvent *e);
+    virtual void mousePressEvent (TQMouseEvent *e);
+    virtual void mouseDoubleClickEvent (TQMouseEvent *e);
 
 private:
     kpMainWindow *m_mainWindow;
@@ -245,7 +245,7 @@ class kpColorToolBar : public KToolBar
 Q_OBJECT
 
 public:
-    kpColorToolBar (const QString &label, kpMainWindow *mainWindow, const char *name = 0);
+    kpColorToolBar (const TQString &label, kpMainWindow *mainWindow, const char *name = 0);
     virtual ~kpColorToolBar ();
 
     kpColor color (int which) const;
@@ -288,7 +288,7 @@ private:
     bool m_lastDockedOrientationSet;
     virtual void setOrientation (Qt::Orientation o);
 
-    QBoxLayout *m_boxLayout;
+    TQBoxLayout *m_boxLayout;
     kpDualColorButton *m_dualColorButton;
     kpColorPalette *m_colorPalette;
     kpColorSimilarityToolBarItem *m_colorSimilarityToolBarItem;

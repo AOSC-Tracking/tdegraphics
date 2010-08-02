@@ -23,7 +23,7 @@
 
 #include "ksvg_lookup.h"
 
-class QString;
+class TQString;
 
 namespace KSVG
 {
@@ -36,9 +36,9 @@ public:
 	~SVGURIReferenceImpl();
 
 	SVGAnimatedStringImpl *href() const;
-	static QString getTarget(const QString &url);
-	static bool isUrl(const QString &url);
-	static bool parseURIReference(const QString &urireference, QString &uri, QString &elementreference);
+	static TQString getTarget(const TQString &url);
+	static bool isUrl(const TQString &url);
+	static bool parseURIReference(const TQString &urireference, TQString &uri, TQString &elementreference);
 
 protected:
 	SVGAnimatedStringImpl *m_href;

@@ -3,7 +3,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <qfile.h>
+#include <tqfile.h>
 
 #include "dviRenderer.h"
 #include "fontpool.h"
@@ -31,7 +31,7 @@ extern const int MFResolutions[];
 // #define DEBUG_FONT
 
 
-TeXFontDefinition::TeXFontDefinition(QString nfontname, double _displayResolution_in_dpi, Q_UINT32 chk, Q_INT32 _scaled_size_in_DVI_units,
+TeXFontDefinition::TeXFontDefinition(TQString nfontname, double _displayResolution_in_dpi, Q_UINT32 chk, Q_INT32 _scaled_size_in_DVI_units,
 	   class fontPool *pool, double _enlargement)
 {
 #ifdef DEBUG_FONT
@@ -46,7 +46,7 @@ TeXFontDefinition::TeXFontDefinition(QString nfontname, double _displayResolutio
   checksum                 = chk;
   flags                    = TeXFontDefinition::FONT_IN_USE;
   file                     = 0; 
-  filename                 = QString::null;
+  filename                 = TQString::null;
   scaled_size_in_DVI_units = _scaled_size_in_DVI_units;
   
   macrotable               = 0;
@@ -84,7 +84,7 @@ TeXFontDefinition::~TeXFontDefinition()
 }
 
 
-void TeXFontDefinition::fontNameReceiver(const QString& fname)
+void TeXFontDefinition::fontNameReceiver(const TQString& fname)
 {
 #ifdef DEBUG_FONT
   kdDebug(4300) << "void TeXFontDefinition::fontNameReceiver( " << fname << " )" << endl;
@@ -93,17 +93,17 @@ void TeXFontDefinition::fontNameReceiver(const QString& fname)
   flags |= TeXFontDefinition::FONT_LOADED;
   filename = fname;
 #ifdef HAVE_FREETYPE
-  fullFontName = QString::null;
-  fullEncodingName = QString::null;
+  fullFontName = TQString::null;
+  fullEncodingName = TQString::null;
 #endif
 
-  file = fopen(QFile::encodeName(filename), "r");
+  file = fopen(TQFile::encodeName(filename), "r");
   // Check if the file could be opened. If not, try to find the file
   // in the DVI file's directory. If that works, modify the filename
   // accordingly and go on.
   if (file == 0) {
-    QString filename_test(font_pool->getExtraSearchPath() + "/" + filename);
-    file = fopen( QFile::encodeName(filename_test), "r");
+    TQString filename_test(font_pool->getExtraSearchPath() + "/" + filename);
+    file = fopen( TQFile::encodeName(filename_test), "r");
     if (file == 0) {
       kdError(4300) << i18n("Cannot find font %1, file %2.").arg(fontname).arg(filename) << endl;
       return;
@@ -149,7 +149,7 @@ void TeXFontDefinition::fontNameReceiver(const QString& fname)
   file = 0;
 #ifdef HAVE_FREETYPE
   // Find the encoding for that font
-  const QString &enc = font_pool->fontsByTeXName.findEncoding(fontname);
+  const TQString &enc = font_pool->fontsByTeXName.findEncoding(fontname);
   
   if (enc.isEmpty() == false) {
 #ifdef DEBUG_FONT
@@ -195,7 +195,7 @@ void TeXFontDefinition::reset()
       vf_table.clear();
   }
   
-  filename   = QString::null;
+  filename   = TQString::null;
   flags      = TeXFontDefinition::FONT_IN_USE;
   set_char_p = &dviRenderer::set_empty_char;
 }
@@ -225,7 +225,7 @@ void TeXFontDefinition::mark_as_used()
 
   // For virtual fonts, also go through the list of referred fonts
   if (flags & TeXFontDefinition::FONT_VIRTUAL) {
-    QIntDictIterator<TeXFontDefinition> it(vf_table);
+    TQIntDictIterator<TeXFontDefinition> it(vf_table);
     while( it.current() ) {
       it.current()->mark_as_used();
       ++it;

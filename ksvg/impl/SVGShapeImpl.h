@@ -24,7 +24,7 @@
 #include "SVGElementImpl.h"
 #include "CanvasItem.h"
 
-class QPoint;
+class TQPoint;
 
 namespace KSVG
 {
@@ -43,7 +43,7 @@ public:
 	virtual SVGRectImpl *getBBox();
 	virtual SVGRectImpl *getBBoxInternal();
 
-	virtual bool prepareMouseEvent(const QPoint &p, const QPoint &a, SVGMouseEventImpl *mev);
+	virtual bool prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *mev);
 
 	virtual bool directRender();
 	virtual bool isContainer() const { return false; }

@@ -17,8 +17,8 @@
 
 #include "pmpovrayoutputwidget.h"
 
-#include <qtextedit.h>
-#include <qlayout.h>
+#include <tqtextedit.h>
+#include <tqlayout.h>
 
 #include <klocale.h>
 #include <kglobalsettings.h>
@@ -28,25 +28,25 @@
 
 #include "pmdebug.h"
 
-QSize PMPovrayOutputWidget::s_size = QSize( 400, 400 );
+TQSize PMPovrayOutputWidget::s_size = TQSize( 400, 400 );
 
-PMPovrayOutputWidget::PMPovrayOutputWidget( QWidget* parent, const char* name )
+PMPovrayOutputWidget::PMPovrayOutputWidget( TQWidget* parent, const char* name )
       : KDialog( parent, name )
 {
-   QVBoxLayout* topLayout = new QVBoxLayout( this, KDialog::marginHint( ), KDialog::spacingHint( ) );
+   TQVBoxLayout* topLayout = new TQVBoxLayout( this, KDialog::marginHint( ), KDialog::spacingHint( ) );
 
-   m_pTextView = new QTextEdit( this );
+   m_pTextView = new TQTextEdit( this );
    topLayout->addWidget( m_pTextView, 1 );
    m_pTextView->setFont( KGlobalSettings::fixedFont( ) );
    m_pTextView->setTextFormat( Qt::PlainText );
    m_pTextView->setReadOnly( true );
 
-   QHBoxLayout* buttonLayout = new QHBoxLayout( topLayout );
+   TQHBoxLayout* buttonLayout = new TQHBoxLayout( topLayout );
    buttonLayout->addStretch( 1 );
-   QPushButton* closeButton = new KPushButton( KStdGuiItem::close(), this );
+   TQPushButton* closeButton = new KPushButton( KStdGuiItem::close(), this );
    buttonLayout->addWidget( closeButton );
    closeButton->setDefault( true );
-   connect( closeButton, SIGNAL( clicked( ) ), SLOT( hide( ) ) );
+   connect( closeButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( hide( ) ) );
 
    setCaption( i18n( "Povray Output" ) );
    resize( s_size );
@@ -60,18 +60,18 @@ PMPovrayOutputWidget::~PMPovrayOutputWidget( )
 
 void PMPovrayOutputWidget::slotClear( )
 {
-   m_output = QString::null;
+   m_output = TQString::null;
    m_startOfLastLine = 0;
    m_pTextView->clear( );
 }
 
-void PMPovrayOutputWidget::slotText( const QString& output )
+void PMPovrayOutputWidget::slotText( const TQString& output )
 {
    unsigned int i;
 
    for( i = 0; i < output.length( ); i++ )
    {
-      QChar c = output[i];
+      TQChar c = output[i];
       if( c == '\r' )
          m_output.truncate( m_startOfLastLine );
       else if( c == '\n' )
@@ -103,11 +103,11 @@ void PMPovrayOutputWidget::restoreConfig( KConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
-   QSize defaultSize( 500, 400 );
+   TQSize defaultSize( 500, 400 );
    s_size = cfg->readSizeEntry( "PovrayOutputWidgetSize", &defaultSize );
 }
 
-void PMPovrayOutputWidget::resizeEvent( QResizeEvent* ev )
+void PMPovrayOutputWidget::resizeEvent( TQResizeEvent* ev )
 {
    s_size = ev->size( );
 }

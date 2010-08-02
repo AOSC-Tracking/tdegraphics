@@ -27,7 +27,7 @@
 #include "pmtexturebase.h"
 #include "pmvector.h"
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 /**
  * Base class for color, pigment, texture and normal maps
@@ -64,19 +64,19 @@ public:
    virtual bool takeChild( PMObject* o );
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns the map object type
     */
-   virtual QString mapType( ) const = 0;
+   virtual TQString mapType( ) const = 0;
 
    /**
     * Returns a new @ref PMTextureMapEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /** */
    virtual void createMemento( );
@@ -86,11 +86,11 @@ public:
    /**
     * Returns the map values
     */
-   QValueList<double> mapValues( ) const { return m_mapValues; }
+   TQValueList<double> mapValues( ) const { return m_mapValues; }
    /**
     * Sets the map values
     */
-   void setMapValues( const QValueList<double>& v );
+   void setMapValues( const TQValueList<double>& v );
    /**
     * Returns the map value for the object o
     */
@@ -102,9 +102,9 @@ public:
 
 private:
    PMObject* nextMapEntry( PMObject* o );
-   void stringToValues( const QString& str );
-   QString valuesToString( ) const;
-   QValueList<double>::Iterator valueForChild( PMObject* o );
+   void stringToValues( const TQString& str );
+   TQString valuesToString( ) const;
+   TQValueList<double>::Iterator valueForChild( PMObject* o );
 
    /**
     * IDs for @ref PMMementoData
@@ -114,11 +114,11 @@ private:
    /**
     * list of map values
     */
-   QValueList<double> m_mapValues;
+   TQValueList<double> m_mapValues;
    /**
     * removed map values
     */
-   QValueList<double> m_removedValues;
+   TQValueList<double> m_removedValues;
 
    static PMMetaObject* s_pMetaObject;
 };
@@ -148,9 +148,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMTextureMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString mapType( ) const { return QString( "Texture" ); }
+   virtual TQString mapType( ) const { return TQString( "Texture" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -158,7 +158,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmtexturemap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmtexturemap" ); }
 
 private:
    static PMMetaObject* s_pMetaObject;
@@ -188,9 +188,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMPigmentMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString mapType( ) const { return QString( "Pigment" ); }
+   virtual TQString mapType( ) const { return TQString( "Pigment" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -198,7 +198,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmpigmentmap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmpigmentmap" ); }
 
 private:
    static PMMetaObject* s_pMetaObject;
@@ -228,9 +228,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMColorMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString mapType( ) const { return QString( "SolidColor" ); }
+   virtual TQString mapType( ) const { return TQString( "SolidColor" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -238,7 +238,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmcolormap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmcolormap" ); }
 
 private:
    static PMMetaObject* s_pMetaObject;
@@ -269,9 +269,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMNormalMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString mapType( ) const { return QString( "Normal" ); }
+   virtual TQString mapType( ) const { return TQString( "Normal" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -279,7 +279,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmnormalmap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmnormalmap" ); }
 
 private:
    static PMMetaObject* s_pMetaObject;
@@ -309,9 +309,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMSlopeMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString mapType( ) const { return QString( "Slope" ); }
+   virtual TQString mapType( ) const { return TQString( "Slope" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -319,7 +319,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmslopemap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmslopemap" ); }
 
 private:
    static PMMetaObject* s_pMetaObject;
@@ -349,9 +349,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMDensityMap( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString mapType( ) const { return QString( "Density" ); }
+   virtual TQString mapType( ) const { return TQString( "Density" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -359,7 +359,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmdensitymap" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmdensitymap" ); }
 
 private:
    static PMMetaObject* s_pMetaObject;

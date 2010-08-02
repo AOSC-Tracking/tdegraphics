@@ -35,7 +35,7 @@
 #include <kpcoloreffect.h>
 
 
-class QCheckBox;
+class TQCheckBox;
 class KIntNumInput;
 
 class kpMainWindow;
@@ -50,12 +50,12 @@ public:
                            kpMainWindow *mainWindow);
     virtual ~kpEffectEmbossCommand ();
 
-    static QPixmap apply (const QPixmap &pixmap,
+    static TQPixmap apply (const TQPixmap &pixmap,
                           double radius, double sigma,
                           int repeat);
 
 protected:
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
 protected:
     double m_radius, m_sigma;
@@ -70,13 +70,13 @@ Q_OBJECT
 public:
     kpEffectEmbossWidget (bool actOnSelection,
                           kpMainWindow *mainWindow,
-                          QWidget *parent, const char *name = 0);
+                          TQWidget *parent, const char *name = 0);
     virtual ~kpEffectEmbossWidget ();
 
-    virtual QString caption () const;
+    virtual TQString caption () const;
 
     virtual bool isNoOp () const;
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     virtual kpColorEffectCommand *createCommand () const;
 
@@ -86,7 +86,7 @@ protected:
     int repeat () const;
 
     //KIntNumInput *m_amountInput;
-    QCheckBox *m_enableCheckBox;
+    TQCheckBox *m_enableCheckBox;
 };
 
 

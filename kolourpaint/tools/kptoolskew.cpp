@@ -31,12 +31,12 @@
 
 #include <kptoolskew.h>
 
-#include <qapplication.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qwmatrix.h>
+#include <tqapplication.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
+#include <tqwmatrix.h>
 
 #include <kdebug.h>
 #include <kiconloader.h>
@@ -73,9 +73,9 @@ kpToolSkewCommand::~kpToolSkewCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolSkewCommand::name () const
+TQString kpToolSkewCommand::name () const
 {
-    QString opName = i18n ("Skew");
+    TQString opName = i18n ("Skew");
 
     if (m_actOnSelection)
         return i18n ("Selection: %1").arg (opName);
@@ -100,14 +100,14 @@ void kpToolSkewCommand::execute ()
         return;
 
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
-    m_oldPixmapPtr = new QPixmap ();
+    m_oldPixmapPtr = new TQPixmap ();
     *m_oldPixmapPtr = *doc->pixmap (m_actOnSelection);
 
 
-    QPixmap newPixmap = kpPixmapFX::skew (*doc->pixmap (m_actOnSelection),
+    TQPixmap newPixmap = kpPixmapFX::skew (*doc->pixmap (m_actOnSelection),
                                           kpToolSkewDialog::horizontalAngleForPixmapFX (m_hangle),
                                           kpToolSkewDialog::verticalAngleForPixmapFX (m_vangle),
                                           m_backgroundColor);
@@ -121,10 +121,10 @@ void kpToolSkewCommand::execute ()
 
 
         // Calculate skewed points
-        QPointArray currentPoints = sel->points ();
+        TQPointArray currentPoints = sel->points ();
         currentPoints.translate (-currentPoints.boundingRect ().x (),
                                  -currentPoints.boundingRect ().y ());
-        QWMatrix skewMatrix = kpPixmapFX::skewMatrix (
+        TQWMatrix skewMatrix = kpPixmapFX::skewMatrix (
             *doc->pixmap (m_actOnSelection),
             kpToolSkewDialog::horizontalAngleForPixmapFX (m_hangle),
             kpToolSkewDialog::verticalAngleForPixmapFX (m_vangle));
@@ -153,7 +153,7 @@ void kpToolSkewCommand::execute ()
                        << endl;
         #endif
             doc->setSelection (kpSelection (kpSelection::Rectangle,
-                                            QRect (currentPoints.boundingRect ().x (),
+                                            TQRect (currentPoints.boundingRect ().x (),
                                                    currentPoints.boundingRect ().y (),
                                                    newPixmap.width (),
                                                    newPixmap.height ()),
@@ -170,7 +170,7 @@ void kpToolSkewCommand::execute ()
     }
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // public virtual [base kpCommand]
@@ -181,10 +181,10 @@ void kpToolSkewCommand::unexecute ()
         return;
 
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
-    QPixmap oldPixmap = *m_oldPixmapPtr;
+    TQPixmap oldPixmap = *m_oldPixmapPtr;
     delete m_oldPixmapPtr; m_oldPixmapPtr = 0;
 
 
@@ -200,7 +200,7 @@ void kpToolSkewCommand::unexecute ()
     }
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 
@@ -252,37 +252,37 @@ kpToolSkewDialog::~kpToolSkewDialog ()
 // private
 void kpToolSkewDialog::createAngleGroupBox ()
 {
-    QGroupBox *angleGroupBox = new QGroupBox (i18n ("Angle"), mainWidget ());
+    TQGroupBox *angleGroupBox = new TQGroupBox (i18n ("Angle"), mainWidget ());
     addCustomWidget (angleGroupBox);
 
 
-    QLabel *horizontalSkewPixmapLabel = new QLabel (angleGroupBox);
+    TQLabel *horizontalSkewPixmapLabel = new TQLabel (angleGroupBox);
     horizontalSkewPixmapLabel->setPixmap (UserIcon ("image_skew_horizontal"));
 
-    QLabel *horizontalSkewLabel = new QLabel (i18n ("&Horizontal:"), angleGroupBox);
+    TQLabel *horizontalSkewLabel = new TQLabel (i18n ("&Horizontal:"), angleGroupBox);
     m_horizontalSkewInput = new KIntNumInput (s_lastHorizontalAngle, angleGroupBox);
     m_horizontalSkewInput->setMinValue (-89);
     m_horizontalSkewInput->setMaxValue (+89);
 
-    QLabel *horizontalSkewDegreesLabel = new QLabel (i18n ("degrees"), angleGroupBox);
+    TQLabel *horizontalSkewDegreesLabel = new TQLabel (i18n ("degrees"), angleGroupBox);
 
 
-    QLabel *verticalSkewPixmapLabel = new QLabel (angleGroupBox);
+    TQLabel *verticalSkewPixmapLabel = new TQLabel (angleGroupBox);
     verticalSkewPixmapLabel->setPixmap (UserIcon ("image_skew_vertical"));
 
-    QLabel *verticalSkewLabel = new QLabel (i18n ("&Vertical:"), angleGroupBox);
+    TQLabel *verticalSkewLabel = new TQLabel (i18n ("&Vertical:"), angleGroupBox);
     m_verticalSkewInput = new KIntNumInput (s_lastVerticalAngle, angleGroupBox);
     m_verticalSkewInput->setMinValue (-89);
     m_verticalSkewInput->setMaxValue (+89);
 
-    QLabel *verticalSkewDegreesLabel = new QLabel (i18n ("degrees"), angleGroupBox);
+    TQLabel *verticalSkewDegreesLabel = new TQLabel (i18n ("degrees"), angleGroupBox);
 
 
     horizontalSkewLabel->setBuddy (m_horizontalSkewInput);
     verticalSkewLabel->setBuddy (m_verticalSkewInput);
 
 
-    QGridLayout *angleLayout = new QGridLayout (angleGroupBox, 4, 4,
+    TQGridLayout *angleLayout = new TQGridLayout (angleGroupBox, 4, 4,
                                                 marginHint () * 2, spacingHint ());
 
     angleLayout->addWidget (horizontalSkewPixmapLabel, 0, 0);
@@ -296,31 +296,31 @@ void kpToolSkewDialog::createAngleGroupBox ()
     angleLayout->addWidget (verticalSkewDegreesLabel, 1, 3);
 
 
-    connect (m_horizontalSkewInput, SIGNAL (valueChanged (int)),
-             this, SLOT (slotUpdate ()));
-    connect (m_verticalSkewInput, SIGNAL (valueChanged (int)),
-             this, SLOT (slotUpdate ()));
+    connect (m_horizontalSkewInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SLOT (slotUpdate ()));
+    connect (m_verticalSkewInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SLOT (slotUpdate ()));
 }
 
 
 // private virtual [base kpToolPreviewDialog]
-QSize kpToolSkewDialog::newDimensions () const
+TQSize kpToolSkewDialog::newDimensions () const
 {
     kpDocument *doc = document ();
     if (!doc)
-        return QSize ();
+        return TQSize ();
 
-    QWMatrix skewMatrix = kpPixmapFX::skewMatrix (*doc->pixmap (),
+    TQWMatrix skewMatrix = kpPixmapFX::skewMatrix (*doc->pixmap (),
                                                   horizontalAngleForPixmapFX (),
                                                   verticalAngleForPixmapFX ());
-    // TODO: Should we be using QWMatrix::Areas?
-    QRect skewRect = skewMatrix.mapRect (doc->rect (m_actOnSelection));
+    // TODO: Should we be using TQWMatrix::Areas?
+    TQRect skewRect = skewMatrix.mapRect (doc->rect (m_actOnSelection));
 
-    return QSize (skewRect.width (), skewRect.height ());
+    return TQSize (skewRect.width (), skewRect.height ());
 }
 
 // private virtual [base kpToolPreviewDialog]
-QPixmap kpToolSkewDialog::transformPixmap (const QPixmap &pixmap,
+TQPixmap kpToolSkewDialog::transformPixmap (const TQPixmap &pixmap,
                                            int targetWidth, int targetHeight) const
 {
     return kpPixmapFX::skew (pixmap,
@@ -396,7 +396,7 @@ bool kpToolSkewDialog::isNoOp () const
 // private slot virtual [base KDialogBase]
 void kpToolSkewDialog::slotOk ()
 {
-    QString message, caption, continueButtonText;
+    TQString message, caption, continueButtonText;
 
     if (document ()->selection ())
     {

@@ -55,21 +55,21 @@ public:
    /**
     * Returns the list pattern object type
     */
-   virtual QString listObjectType( ) const = 0;
+   virtual TQString listObjectType( ) const = 0;
    /** */
    virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMListPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /**
     * Returns the color list type
@@ -145,9 +145,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMTextureList( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString listObjectType( ) const { return QString( "Texture" ); }
+   virtual TQString listObjectType( ) const { return TQString( "Texture" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -155,7 +155,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmtexturelist" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmtexturelist" ); }
 
    static PMMetaObject* s_pMetaObject;
 };
@@ -184,9 +184,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMPigmentList( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString listObjectType( ) const { return QString( "Pigment" ); }
+   virtual TQString listObjectType( ) const { return TQString( "Pigment" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -194,7 +194,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmpigmentlist" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmpigmentlist" ); }
 
    static PMMetaObject* s_pMetaObject;
 };
@@ -223,9 +223,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMColorList( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString listObjectType( ) const { return QString( "SolidColor" ); }
+   virtual TQString listObjectType( ) const { return TQString( "SolidColor" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -233,7 +233,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmcolorlist" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmcolorlist" ); }
 
    static PMMetaObject* s_pMetaObject;
 };
@@ -262,9 +262,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMDensityList( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString listObjectType( ) const { return QString( "Density" ); }
+   virtual TQString listObjectType( ) const { return TQString( "Density" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -272,7 +272,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmdensitylist" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmdensitylist" ); }
 
    static PMMetaObject* s_pMetaObject;
 };
@@ -301,9 +301,9 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMNormalList( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString listObjectType( ) const { return QString( "Normal" ); }
+   virtual TQString listObjectType( ) const { return TQString( "Normal" ); }
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -313,13 +313,13 @@ public:
    /**
     * Returns a new @ref PMListPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /** */
-   virtual QString pixmap( ) const { return QString( "pmnormallist" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmnormallist" ); }
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 

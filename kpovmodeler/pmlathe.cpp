@@ -73,8 +73,8 @@ protected:
    virtual bool setProtected( PMObject* obj, const PMVariant& var )
    {
       PMLathe* p = ( PMLathe* ) obj;
-      QValueList<PMVector> list = p->points( );
-      QValueList<PMVector>::Iterator it = list.begin( );
+      TQValueList<PMVector> list = p->points( );
+      TQValueList<PMVector>::Iterator it = list.begin( );
       int i;
       PMVector v = var.vectorData( );
       v.resize( 2 );
@@ -95,8 +95,8 @@ protected:
    virtual PMVariant getProtected( const PMObject* obj )
    {
       PMLathe* p = ( PMLathe* ) obj;
-      QValueList<PMVector> list = p->points( );
-      QValueList<PMVector>::ConstIterator it = list.at( m_index );
+      TQValueList<PMVector> list = p->points( );
+      TQValueList<PMVector>::ConstIterator it = list.at( m_index );
 
       if( it == list.end( ) )
       {
@@ -139,20 +139,20 @@ PMLathe::~PMLathe( )
 {
 }
 
-QString PMLathe::description( ) const
+TQString PMLathe::description( ) const
 {
    return i18n( "lathe" );
 }
 
-void PMLathe::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMLathe::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QDomElement data = doc.createElement( "extra_data" );
-   QDomElement p;
+   TQDomElement data = doc.createElement( "extra_data" );
+   TQDomElement p;
 
    e.setAttribute( "spline_type", m_splineType );
    e.setAttribute( "sturm", m_sturm );
 
-   QValueList<PMVector>::ConstIterator it;
+   TQValueList<PMVector>::ConstIterator it;
    for( it = m_points.begin( ); it != m_points.end( ); ++it )
    {
       p = doc.createElement( "point" );
@@ -172,18 +172,18 @@ void PMLathe::readAttributes( const PMXMLHelper& h )
    m_points.clear( );
    PMVector v( 2 );
 
-   QDomElement e = h.extraData( );
+   TQDomElement e = h.extraData( );
    if( !e.isNull( ) )
    {
-      QDomNode c = e.firstChild( );
+      TQDomNode c = e.firstChild( );
       while( !c.isNull( ) )
       {
          if( c.isElement( ) )
          {
-            QDomElement ce = c.toElement( );
+            TQDomElement ce = c.toElement( );
             if( ce.tagName( ) == "point" )
             {
-               QString str = ce.attribute( "vector" );
+               TQString str = ce.attribute( "vector" );
                if( !str.isNull( ) )
                {
                   v.loadXML( str );
@@ -249,7 +249,7 @@ void PMLathe::setSturm( bool s )
    }
 }
 
-void PMLathe::setPoints( const QValueList<PMVector>& points )
+void PMLathe::setPoints( const TQValueList<PMVector>& points )
 {
    if( m_points != points )
    {
@@ -261,7 +261,7 @@ void PMLathe::setPoints( const QValueList<PMVector>& points )
    }
 }
 
-PMDialogEditBase* PMLathe::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMLathe::editWidget( TQWidget* parent ) const
 {
    return new PMLatheEdit( parent );
 }
@@ -363,8 +363,8 @@ void PMLathe::createViewStructure( )
 
 
    // calculate the spline segments
-   QValueList<PMSplineSegment> segments;
-   QValueList<PMVector>::Iterator it1, it2, it3, it4;
+   TQValueList<PMSplineSegment> segments;
+   TQValueList<PMVector>::Iterator it1, it2, it3, it4;
    it1 = m_points.begin( );
    it2 = it1; ++it2;
    it3 = it2; ++it3;
@@ -463,7 +463,7 @@ void PMLathe::createViewStructure( )
    }
    // calculate the points
    PMVector point2, point3;
-   QValueList<PMSplineSegment>::Iterator sit = segments.begin( );
+   TQValueList<PMSplineSegment>::Iterator sit = segments.begin( );
    int pi = 0;
 
    double poffset = 1.0 / sSteps;
@@ -531,11 +531,11 @@ void PMLathe::createViewStructure( )
 
 void PMLathe::controlPoints( PMControlPointList& list )
 {
-   QValueList<PMVector>::Iterator it;
+   TQValueList<PMVector>::Iterator it;
    int i, d;
 
    PM2DControlPoint* cp = 0;
-   QPtrList<PM2DControlPoint> tmp[2];
+   TQPtrList<PM2DControlPoint> tmp[2];
 
    for( d = 0; d < 2; ++d )
    {
@@ -600,7 +600,7 @@ void PMLathe::controlPoints( PMControlPointList& list )
       }
    }
 
-   QPtrListIterator<PM2DControlPoint> cit1( tmp[0] ), cit2( tmp[1] );
+   TQPtrListIterator<PM2DControlPoint> cit1( tmp[0] ), cit2( tmp[1] );
 
    for( ; cit1.current( ) && cit2.current( ); ++cit1, ++cit2 )
    {
@@ -616,7 +616,7 @@ void PMLathe::controlPoints( PMControlPointList& list )
 void PMLathe::controlPointsChanged( PMControlPointList& list )
 {
    PMControlPointListIterator it1( list ), it2( list );
-   QValueList<PMVector>::Iterator pit = m_points.begin( );
+   TQValueList<PMVector>::Iterator pit = m_points.begin( );
    PM2DControlPoint* p1;
    PM2DControlPoint* p2;
    bool firstChange = true;
@@ -662,7 +662,7 @@ void PMLathe::controlPointsChanged( PMControlPointList& list )
 }
 
 void PMLathe::addObjectActions( const PMControlPointList& /*cp*/,
-                                QPtrList<PMObjectAction>& actions )
+                                TQPtrList<PMObjectAction>& actions )
 {
    PMObjectAction* a;
 
@@ -697,7 +697,7 @@ void PMLathe::addObjectActions( const PMControlPointList& /*cp*/,
 
 void PMLathe::objectActionCalled( const PMObjectAction* action,
                                   const PMControlPointList& cp,
-                                  const QPtrList<PMVector>& cpViewPosition,
+                                  const TQPtrList<PMVector>& cpViewPosition,
                                   const PMVector& clickPosition )
 {
    if( action->objectType( ) == s_pMetaObject )
@@ -720,7 +720,7 @@ void PMLathe::objectActionCalled( const PMObjectAction* action,
 }
 
 void PMLathe::splitSegment( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest segment
@@ -730,8 +730,8 @@ void PMLathe::splitSegment( const PMControlPointList& /*cp*/,
    int i, j;
    PMVector mid( 3 ), dist( 2 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
-   QPtrListIterator<PMVector> it2( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it2( cpViewPosition );
    ++it2;
 
    for( j = 0; j < 2; ++j )
@@ -776,16 +776,16 @@ void PMLathe::splitSegment( const PMControlPointList& /*cp*/,
    }
 
    // add a new segment
-   QValueList<PMVector> newPoints = m_points;
+   TQValueList<PMVector> newPoints = m_points;
 
    if( m_splineType == BezierSpline )
    {
       ns /= 4;
       ns *= 4;
    }
-   QValueList<PMVector>::Iterator it = newPoints.at( ( unsigned ) ns );
+   TQValueList<PMVector>::Iterator it = newPoints.at( ( unsigned ) ns );
    PMVector p[4];
-   QValueList<PMVector>::Iterator hit = it;
+   TQValueList<PMVector>::Iterator hit = it;
 
    // calculate the spline segment
    PMSplineSegment segment;
@@ -844,7 +844,7 @@ void PMLathe::splitSegment( const PMControlPointList& /*cp*/,
 }
 
 void PMLathe::joinSegments( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest point
@@ -879,7 +879,7 @@ void PMLathe::joinSegments( const PMControlPointList& /*cp*/,
    PMVector* p;
    PMVector dist( 2 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
 
    for( j = 0; j < 2; ++j )
    {
@@ -901,8 +901,8 @@ void PMLathe::joinSegments( const PMControlPointList& /*cp*/,
    }
 
    // join two segments
-   QValueList<PMVector> newPoints = m_points;
-   QValueList<PMVector>::Iterator it;
+   TQValueList<PMVector> newPoints = m_points;
+   TQValueList<PMVector>::Iterator it;
 
    if( m_splineType != BezierSpline )
    {

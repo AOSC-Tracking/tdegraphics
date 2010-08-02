@@ -35,7 +35,7 @@ class SharedString : public DOM::DomShared,
 {
 public:
 	SharedString() : DOM::DomShared(), DOM::DOMString() { }
-	SharedString(const QString &string) : DOM::DomShared(), DOM::DOMString(string) { }
+	SharedString(const TQString &string) : DOM::DomShared(), DOM::DOMString(string) { }
 	SharedString(const SharedString &string) : DOM::DomShared(), DOM::DOMString(string) { }
 	SharedString(DOM::DOMString *string) : DOM::DomShared(), DOM::DOMString(string->implementation()) { }
 	virtual ~SharedString() { }
@@ -69,7 +69,7 @@ public:
 
 	KJS::Value getValueProperty(KJS::ExecState *exec, int token) const;
 
-	QString join(const QString &seperator) const;
+	TQString join(const TQString &seperator) const;
 };
 
 }

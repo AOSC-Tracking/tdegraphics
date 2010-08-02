@@ -20,16 +20,16 @@
 
 #include "kviewpresenterconfmodule.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qframe.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqframe.h>
 
 #include <klocale.h>
 #include <kdialog.h>
 #include <kglobal.h>
 #include <kconfig.h>
 
-KViewPresenterConfModule::KViewPresenterConfModule( QObject * parent )
+KViewPresenterConfModule::KViewPresenterConfModule( TQObject * parent )
 	: KPreferencesModule( "kviewpresenter", parent, "KView Presenter Config Module" )
 {
 }
@@ -47,12 +47,12 @@ void KViewPresenterConfModule::reset()
 {
 }
 
-void KViewPresenterConfModule::createPage( QFrame * page )
+void KViewPresenterConfModule::createPage( TQFrame * page )
 {
-	QBoxLayout * layout = new QVBoxLayout( page, KDialog::marginHint(), KDialog::spacingHint() );
+	TQBoxLayout * layout = new TQVBoxLayout( page, KDialog::marginHint(), KDialog::spacingHint() );
 	layout->setAutoAdd( true );
 
-	m_pCheckBox = new QCheckBox( "This is only for testing...", page );
+	m_pCheckBox = new TQCheckBox( "This is only for testing...", page );
 }
 
 // vim:sw=4:ts=4

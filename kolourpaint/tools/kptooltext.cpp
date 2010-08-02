@@ -30,7 +30,7 @@
 
 #include <kptooltext.h>
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -131,7 +131,7 @@ void kpToolText::cancelShape ()
 }
 
 // public virtual [base kpTool]
-void kpToolText::endShape (const QPoint &thisPoint, const QRect &normalizedRect)
+void kpToolText::endShape (const TQPoint &thisPoint, const TQRect &normalizedRect)
 {
 #if DEBUG_KP_TOOL_TEXT
     kdDebug () << "kpToolText::endShape()" << endl;
@@ -152,7 +152,7 @@ void kpToolText::endShape (const QPoint &thisPoint, const QRect &normalizedRect)
 
 
 // protected virtual [base kpTool]
-void kpToolText::keyPressEvent (QKeyEvent *e)
+void kpToolText::keyPressEvent (TQKeyEvent *e)
 {
 #if DEBUG_KP_TOOL_TEXT
     kdDebug () << "kpToolText::keyPressEvent(e->text='" << e->text () << "')" << endl;
@@ -180,14 +180,14 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
         kdDebug () << "\tno text sel - passing on event to kpTool" << endl;
     #endif
         //if (hasBegunShape ())
-        //    endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+        //    endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         kpToolSelection::keyPressEvent (e);
         return;
     }
 
 
-    const QValueVector <QString> textLines = sel->textLines ();
+    const TQValueVector <TQString> textLines = sel->textLines ();
     int cursorRow = viewManager ()->textCursorRow ();
     int cursorCol = viewManager ()->textCursorCol ();
 
@@ -202,7 +202,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
         {
             // TODO: why not endShapeInternal(); ditto for everywhere else in this file?
             if (hasBegunShape ())
-                endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
             m_enterCommand = new kpToolTextEnterCommand (i18n ("Text: New Line"),
                 viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -223,7 +223,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
         if (!m_backspaceCommand)
         {
             if (hasBegunShape ())
-                endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
             m_backspaceCommand = new kpToolTextBackspaceCommand (i18n ("Text: Backspace"),
                 viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -244,7 +244,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
         if (!m_deleteCommand)
         {
             if (hasBegunShape ())
-                endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
             m_deleteCommand = new kpToolTextDeleteCommand (i18n ("Text: Delete"),
                 viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -263,7 +263,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
     #endif
 
         if (hasBegunShape ())
-            endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         if (cursorRow > 0)
         {
@@ -281,7 +281,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
     #endif
 
         if (hasBegunShape ())
-            endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         if (cursorRow < (int) textLines.size () - 1)
         {
@@ -316,7 +316,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
     }
 
         if (hasBegunShape ())
-            endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         if ((e->state () & Qt::ControlButton) == 0)
         {
@@ -391,7 +391,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
     }
 
         if (hasBegunShape ())
-            endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         if ((e->state () & Qt::ControlButton) == 0)
         {
@@ -445,7 +445,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
     #endif
 
         if (hasBegunShape ())
-            endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         if (e->state () & Qt::ControlButton)
             cursorRow = 0;
@@ -463,7 +463,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
     #endif
 
         if (hasBegunShape ())
-            endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+            endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         if (e->state () & Qt::ControlButton)
             cursorRow = textLines.size () - 1;
@@ -479,7 +479,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\ttext='" << e->text () << "'" << endl;
     #endif
-        QString usableText;
+        TQString usableText;
         for (int i = 0; i < (int) e->text ().length (); i++)
         {
             if (e->text ().at (i).isPrint ())
@@ -494,7 +494,7 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
             if (!m_insertCommand)
             {
                 if (hasBegunShape ())
-                    endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                    endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
                 m_insertCommand = new kpToolTextInsertCommand (i18n ("Text: Write"),
                     viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -520,14 +520,14 @@ void kpToolText::keyPressEvent (QKeyEvent *e)
                    << endl;
     #endif
         //if (hasBegunShape ())
-        //    endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+        //    endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
         kpToolSelection::keyPressEvent (e);
         return;
     }
 }
 
-void kpToolText::imStartEvent (QIMEvent *e)
+void kpToolText::imStartEvent (TQIMEvent *e)
 {
 #if DEBUG_KP_TOOL_TEXT && 1
     kdDebug () << "kpToolText::imStartEvent() text='" << e->text ()
@@ -545,10 +545,10 @@ void kpToolText::imStartEvent (QIMEvent *e)
 
     m_IMStartCursorRow = viewManager ()->textCursorRow ();
     m_IMStartCursorCol = viewManager ()->textCursorCol ();
-    m_IMPreeditStr = QString::null;
+    m_IMPreeditStr = TQString::null;
 }
 
-void kpToolText::imComposeEvent (QIMEvent *e)
+void kpToolText::imComposeEvent (TQIMEvent *e)
 {
 #if DEBUG_KP_TOOL_TEXT && 1
     kdDebug () << "kpToolText::imComposeEvent() text='" << e->text ()
@@ -574,7 +574,7 @@ void kpToolText::imComposeEvent (QIMEvent *e)
             if (!m_deleteCommand)
             {
                 if (hasBegunShape ())
-                    endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                    endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
                 
                 m_deleteCommand = new kpToolTextDeleteCommand (i18n ("Text: Delete"),
                                                                viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -593,7 +593,7 @@ void kpToolText::imComposeEvent (QIMEvent *e)
         if (!m_insertCommand)
         {
             if (hasBegunShape ())
-                endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
             
             m_insertCommand = new kpToolTextInsertCommand (i18n ("Text: Write"),
                                                            viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -614,7 +614,7 @@ void kpToolText::imComposeEvent (QIMEvent *e)
     }
 }
 
-void kpToolText::imEndEvent (QIMEvent *e)
+void kpToolText::imEndEvent (TQIMEvent *e)
 {
 #if DEBUG_KP_TOOL_TEXT && 1
     kdDebug () << "kpToolText::imEndEvent() text='" << e->text ()
@@ -640,7 +640,7 @@ void kpToolText::imEndEvent (QIMEvent *e)
             if (!m_deleteCommand)
             {
                 if (hasBegunShape ())
-                    endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                    endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
                 
                 m_deleteCommand = new kpToolTextDeleteCommand (i18n ("Text: Delete"),
                                                                viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -651,16 +651,16 @@ void kpToolText::imEndEvent (QIMEvent *e)
                 m_deleteCommand->addDelete ();
         }
     }
-    m_IMPreeditStr = QString::null;
+    m_IMPreeditStr = TQString::null;
 
     // commit string
-    QString inputStr = e->text();
+    TQString inputStr = e->text();
     if (inputStr.length() > 0)
     {
         if (!m_insertCommand)
         {
             if (hasBegunShape ())
-                endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+                endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
             
             m_insertCommand = new kpToolTextInsertCommand (i18n ("Text: Write"),
                                                            viewManager ()->textCursorRow (), viewManager ()->textCursorCol (),
@@ -700,7 +700,7 @@ bool kpToolText::shouldChangeTextStyle () const
 }
 
 // protected
-void kpToolText::changeTextStyle (const QString &name,
+void kpToolText::changeTextStyle (const TQString &name,
                                   const kpTextStyle &newTextStyle,
                                   const kpTextStyle &oldTextStyle)
 {
@@ -709,7 +709,7 @@ void kpToolText::changeTextStyle (const QString &name,
 #endif
 
     if (hasBegunShape ())
-        endShape (m_currentPoint, QRect (m_startPoint, m_currentPoint).normalize ());
+        endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
     commandHistory ()->addCommand (
         new kpToolTextChangeStyleCommand (
@@ -809,8 +809,8 @@ void kpToolText::slotColorSimilarityChanged (double, int)
 
 
 // public slot
-void kpToolText::slotFontFamilyChanged (const QString &fontFamily,
-                                        const QString &oldFontFamily)
+void kpToolText::slotFontFamilyChanged (const TQString &fontFamily,
+                                        const TQString &oldFontFamily)
 {
 #if DEBUG_KP_TOOL_TEXT
     kdDebug () << "kpToolText::slotFontFamilyChanged() new="
@@ -941,7 +941,7 @@ void kpToolText::slotStrikeThruChanged (bool isStrikeThru)
  * kpToolTextChangeStyleCommand
  */
 
-kpToolTextChangeStyleCommand::kpToolTextChangeStyleCommand (const QString &name,
+kpToolTextChangeStyleCommand::kpToolTextChangeStyleCommand (const TQString &name,
     const kpTextStyle &newTextStyle, const kpTextStyle &oldTextStyle,
     kpMainWindow *mainWindow)
     : kpNamedCommand (name, mainWindow),
@@ -1009,8 +1009,8 @@ void kpToolTextChangeStyleCommand::unexecute ()
  * kpToolTextInsertCommand
  */
 
-kpToolTextInsertCommand::kpToolTextInsertCommand (const QString &name,
-    int row, int col, QString newText,
+kpToolTextInsertCommand::kpToolTextInsertCommand (const TQString &name,
+    int row, int col, TQString newText,
     kpMainWindow *mainWindow)
     : kpNamedCommand (name, mainWindow),
       m_row (row), m_col (col)
@@ -1025,14 +1025,14 @@ kpToolTextInsertCommand::~kpToolTextInsertCommand ()
 
 
 // public
-void kpToolTextInsertCommand::addText (const QString &moreText)
+void kpToolTextInsertCommand::addText (const TQString &moreText)
 {
     if (moreText.isEmpty ())
         return;
 
-    QValueVector <QString> textLines = selection ()->textLines ();
-    const QString leftHalf = textLines [m_row].left (m_col);
-    const QString rightHalf = textLines [m_row].mid (m_col);
+    TQValueVector <TQString> textLines = selection ()->textLines ();
+    const TQString leftHalf = textLines [m_row].left (m_col);
+    const TQString rightHalf = textLines [m_row].mid (m_col);
     textLines [m_row] = leftHalf + moreText + rightHalf;
     selection ()->setTextLines (textLines);
 
@@ -1046,7 +1046,7 @@ void kpToolTextInsertCommand::addText (const QString &moreText)
 // public virtual [base kpCommand]
 int kpToolTextInsertCommand::size () const
 {
-    return m_newText.length () * sizeof (QChar);
+    return m_newText.length () * sizeof (TQChar);
 }
 
 
@@ -1055,8 +1055,8 @@ void kpToolTextInsertCommand::execute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    QString text = m_newText;
-    m_newText = QString::null;
+    TQString text = m_newText;
+    m_newText = TQString::null;
     addText (text);
 }
 
@@ -1065,9 +1065,9 @@ void kpToolTextInsertCommand::unexecute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    QValueVector <QString> textLines = selection ()->textLines ();
-    const QString leftHalf = textLines [m_row].left (m_col - m_newText.length ());
-    const QString rightHalf = textLines [m_row].mid (m_col);
+    TQValueVector <TQString> textLines = selection ()->textLines ();
+    const TQString leftHalf = textLines [m_row].left (m_col - m_newText.length ());
+    const TQString rightHalf = textLines [m_row].mid (m_col);
     textLines [m_row] = leftHalf + rightHalf;
     selection ()->setTextLines (textLines);
 
@@ -1081,7 +1081,7 @@ void kpToolTextInsertCommand::unexecute ()
  * kpToolTextEnterCommand
  */
 
-kpToolTextEnterCommand::kpToolTextEnterCommand (const QString &name,
+kpToolTextEnterCommand::kpToolTextEnterCommand (const TQString &name,
     int row, int col,
     kpMainWindow *mainWindow)
     : kpNamedCommand (name, mainWindow),
@@ -1100,9 +1100,9 @@ kpToolTextEnterCommand::~kpToolTextEnterCommand ()
 // public
 void kpToolTextEnterCommand::addEnter ()
 {
-    QValueVector <QString> textLines = selection ()->textLines ();
+    TQValueVector <TQString> textLines = selection ()->textLines ();
 
-    const QString rightHalf = textLines [m_row].mid (m_col);
+    const TQString rightHalf = textLines [m_row].mid (m_col);
 
     textLines [m_row].truncate (m_col);
     textLines.insert (textLines.begin () + m_row + 1, rightHalf);
@@ -1141,7 +1141,7 @@ void kpToolTextEnterCommand::unexecute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    QValueVector <QString> textLines = selection ()->textLines ();
+    TQValueVector <TQString> textLines = selection ()->textLines ();
 
     for (int i = 0; i < m_numEnters; i++)
     {
@@ -1175,7 +1175,7 @@ void kpToolTextEnterCommand::unexecute ()
  * kpToolTextBackspaceCommand
  */
 
-kpToolTextBackspaceCommand::kpToolTextBackspaceCommand (const QString &name,
+kpToolTextBackspaceCommand::kpToolTextBackspaceCommand (const TQString &name,
     int row, int col,
     kpMainWindow *mainWindow)
     : kpNamedCommand (name, mainWindow),
@@ -1194,7 +1194,7 @@ kpToolTextBackspaceCommand::~kpToolTextBackspaceCommand ()
 // public
 void kpToolTextBackspaceCommand::addBackspace ()
 {
-    QValueVector <QString> textLines = selection ()->textLines ();
+    TQValueVector <TQString> textLines = selection ()->textLines ();
 
     if (m_col > 0)
     {
@@ -1233,7 +1233,7 @@ void kpToolTextBackspaceCommand::addBackspace ()
 // public virtual [base kpCommand]
 int kpToolTextBackspaceCommand::size () const
 {
-    return m_deletedText.length () * sizeof (QChar);
+    return m_deletedText.length () * sizeof (TQChar);
 }
 
 
@@ -1242,7 +1242,7 @@ void kpToolTextBackspaceCommand::execute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    m_deletedText = QString::null;
+    m_deletedText = TQString::null;
     int oldNumBackspaces = m_numBackspaces;
     m_numBackspaces = 0;
 
@@ -1255,13 +1255,13 @@ void kpToolTextBackspaceCommand::unexecute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    QValueVector <QString> textLines = selection ()->textLines ();
+    TQValueVector <TQString> textLines = selection ()->textLines ();
 
     for (int i = 0; i < (int) m_deletedText.length (); i++)
     {
         if (m_deletedText [i] == '\n')
         {
-            const QString rightHalf = textLines [m_row].mid (m_col);
+            const TQString rightHalf = textLines [m_row].mid (m_col);
 
             textLines [m_row].truncate (m_col);
             textLines.insert (textLines.begin () + m_row + 1, rightHalf);
@@ -1271,15 +1271,15 @@ void kpToolTextBackspaceCommand::unexecute ()
         }
         else
         {
-            const QString leftHalf = textLines [m_row].left (m_col);
-            const QString rightHalf = textLines [m_row].mid (m_col);
+            const TQString leftHalf = textLines [m_row].left (m_col);
+            const TQString rightHalf = textLines [m_row].mid (m_col);
 
             textLines [m_row] = leftHalf + m_deletedText [i] + rightHalf;
             m_col++;
         }
     }
 
-    m_deletedText = QString::null;
+    m_deletedText = TQString::null;
 
     selection ()->setTextLines (textLines);
 
@@ -1291,7 +1291,7 @@ void kpToolTextBackspaceCommand::unexecute ()
  * kpToolTextDeleteCommand
  */
 
-kpToolTextDeleteCommand::kpToolTextDeleteCommand (const QString &name,
+kpToolTextDeleteCommand::kpToolTextDeleteCommand (const TQString &name,
     int row, int col,
     kpMainWindow *mainWindow)
     : kpNamedCommand (name, mainWindow),
@@ -1310,7 +1310,7 @@ kpToolTextDeleteCommand::~kpToolTextDeleteCommand ()
 // public
 void kpToolTextDeleteCommand::addDelete ()
 {
-    QValueVector <QString> textLines = selection ()->textLines ();
+    TQValueVector <TQString> textLines = selection ()->textLines ();
 
     if (m_col < (int) textLines [m_row].length ())
     {
@@ -1341,7 +1341,7 @@ void kpToolTextDeleteCommand::addDelete ()
 // public virtual [base kpCommand]
 int kpToolTextDeleteCommand::size () const
 {
-    return m_deletedText.length () * sizeof (QChar);
+    return m_deletedText.length () * sizeof (TQChar);
 }
 
 
@@ -1350,7 +1350,7 @@ void kpToolTextDeleteCommand::execute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    m_deletedText = QString::null;
+    m_deletedText = TQString::null;
     int oldNumDeletes = m_numDeletes;
     m_numDeletes = 0;
 
@@ -1363,27 +1363,27 @@ void kpToolTextDeleteCommand::unexecute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    QValueVector <QString> textLines = selection ()->textLines ();
+    TQValueVector <TQString> textLines = selection ()->textLines ();
 
     for (int i = 0; i < (int) m_deletedText.length (); i++)
     {
         if (m_deletedText [i] == '\n')
         {
-            const QString rightHalf = textLines [m_row].mid (m_col);
+            const TQString rightHalf = textLines [m_row].mid (m_col);
 
             textLines [m_row].truncate (m_col);
             textLines.insert (textLines.begin () + m_row + 1, rightHalf);
         }
         else
         {
-            const QString leftHalf = textLines [m_row].left (m_col);
-            const QString rightHalf = textLines [m_row].mid (m_col);
+            const TQString leftHalf = textLines [m_row].left (m_col);
+            const TQString rightHalf = textLines [m_row].mid (m_col);
 
             textLines [m_row] = leftHalf + m_deletedText [i] + rightHalf;
         }
     }
 
-    m_deletedText = QString::null;
+    m_deletedText = TQString::null;
 
     selection ()->setTextLines (textLines);
 

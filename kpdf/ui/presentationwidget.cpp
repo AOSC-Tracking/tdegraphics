@@ -8,12 +8,12 @@
  ***************************************************************************/
 
 // qt/kde includes
-#include <qtimer.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qapplication.h>
-#include <qdesktopwidget.h>
-#include <qtooltip.h>
+#include <tqtimer.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqapplication.h>
+#include <tqdesktopwidget.h>
+#include <tqtooltip.h>
 #include <kaccel.h>
 #include <kactioncollection.h>
 #include <kapplication.h>
@@ -48,12 +48,12 @@
 struct PresentationFrame
 {
     const KPDFPage * page;
-    QRect geometry;
+    TQRect geometry;
 };
 
 
-PresentationWidget::PresentationWidget( QWidget * parent, KPDFDocument * doc )
-    : QDialog( parent, "presentationWidget", true, WDestructiveClose | WStyle_NoBorder),
+PresentationWidget::PresentationWidget( TQWidget * parent, KPDFDocument * doc )
+    : TQDialog( parent, "presentationWidget", true, WDestructiveClose | WStyle_NoBorder),
     m_pressedLink( 0 ), m_handCursor( false ), m_document( doc ), m_frameIndex( -1 )
 {
     // set look and geometry
@@ -68,12 +68,12 @@ PresentationWidget::PresentationWidget( QWidget * parent, KPDFDocument * doc )
 
     // misc stuff
     setMouseTracking( true );
-    m_transitionTimer = new QTimer( this );
-    connect( m_transitionTimer, SIGNAL( timeout() ), this, SLOT( slotTransitionStep() ) );
-    m_overlayHideTimer = new QTimer( this );
-    connect( m_overlayHideTimer, SIGNAL( timeout() ), this, SLOT( slotHideOverlay() ) );
-    m_nextPageTimer = new QTimer( this );
-    connect( m_nextPageTimer, SIGNAL( timeout() ), this, SLOT( slotNextPage() ) );
+    m_transitionTimer = new TQTimer( this );
+    connect( m_transitionTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotTransitionStep() ) );
+    m_overlayHideTimer = new TQTimer( this );
+    connect( m_overlayHideTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotHideOverlay() ) );
+    m_nextPageTimer = new TQTimer( this );
+    connect( m_nextPageTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotNextPage() ) );
 
     // handle cursor appearance as specified in configuration
     if ( KpdfSettings::slidesCursor() == KpdfSettings::EnumSlidesCursor::HiddenDelay )
@@ -93,24 +93,24 @@ PresentationWidget::~PresentationWidget()
     m_document->removeObserver( this );
 
     // delete frames
-    QValueVector< PresentationFrame * >::iterator fIt = m_frames.begin(), fEnd = m_frames.end();
+    TQValueVector< PresentationFrame * >::iterator fIt = m_frames.begin(), fEnd = m_frames.end();
     for ( ; fIt != fEnd; ++fIt )
         delete *fIt;
 }
 
 void PresentationWidget::setupActions( KActionCollection * ac )
 {
-    m_accel->insert( "previous_page", ac->action( "previous_page" )->shortcut(), this, SLOT( slotPrevPage() ), false, true );
-    m_accel->insert( "next_page", ac->action( "next_page" )->shortcut(), this, SLOT( slotNextPage() ), false, true );
-    m_accel->insert( "first_page", ac->action( "first_page" )->shortcut(), this, SLOT( slotFirstPage() ), false, true );
-    m_accel->insert( "last_page", ac->action( "last_page" )->shortcut(), this, SLOT( slotLastPage() ), false, true );
-    m_accel->insert( "presentation", ac->action( "presentation" )->shortcut(), this, SLOT( close() ), false, true );
+    m_accel->insert( "previous_page", ac->action( "previous_page" )->shortcut(), this, TQT_SLOT( slotPrevPage() ), false, true );
+    m_accel->insert( "next_page", ac->action( "next_page" )->shortcut(), this, TQT_SLOT( slotNextPage() ), false, true );
+    m_accel->insert( "first_page", ac->action( "first_page" )->shortcut(), this, TQT_SLOT( slotFirstPage() ), false, true );
+    m_accel->insert( "last_page", ac->action( "last_page" )->shortcut(), this, TQT_SLOT( slotLastPage() ), false, true );
+    m_accel->insert( "presentation", ac->action( "presentation" )->shortcut(), this, TQT_SLOT( close() ), false, true );
 }
 
-void PresentationWidget::notifySetup( const QValueVector< KPDFPage * > & pageSet, bool /*documentChanged*/ )
+void PresentationWidget::notifySetup( const TQValueVector< KPDFPage * > & pageSet, bool /*documentChanged*/ )
 {
     // delete previous frames (if any (shouldn't be))
-    QValueVector< PresentationFrame * >::iterator fIt = m_frames.begin(), fEnd = m_frames.end();
+    TQValueVector< PresentationFrame * >::iterator fIt = m_frames.begin(), fEnd = m_frames.end();
     for ( ; fIt != fEnd; ++fIt )
         delete *fIt;
     if ( !m_frames.isEmpty() )
@@ -118,7 +118,7 @@ void PresentationWidget::notifySetup( const QValueVector< KPDFPage * > & pageSet
     m_frames.clear();
 
     // create the new frames
-    QValueVector< KPDFPage * >::const_iterator setIt = pageSet.begin(), setEnd = pageSet.end();
+    TQValueVector< KPDFPage * >::const_iterator setIt = pageSet.begin(), setEnd = pageSet.end();
     float screenRatio = (float)m_height / (float)m_width;
     for ( ; setIt != setEnd; ++setIt )
     {
@@ -183,15 +183,15 @@ bool PresentationWidget::canUnloadPixmap( int pageNumber )
 
 // <widget events>
 /* This hack was here to fix 103718 but it's no longer necessary on KDE 3.5 and Lubos asked me to remove it
-bool PresentationWidget::event ( QEvent * e )
+bool PresentationWidget::event ( TQEvent * e )
 {
-    if (e -> type() == QEvent::WindowDeactivate) KWin::clearState(winId(), NET::StaysOnTop);
-    else if (e -> type() == QEvent::WindowActivate) KWin::setState(winId(), NET::StaysOnTop);
-    return QDialog::event(e);
+    if (e -> type() == TQEvent::WindowDeactivate) KWin::clearState(winId(), NET::StaysOnTop);
+    else if (e -> type() == TQEvent::WindowActivate) KWin::setState(winId(), NET::StaysOnTop);
+    return TQDialog::event(e);
 }
 */
 
-void PresentationWidget::keyPressEvent( QKeyEvent * e )
+void PresentationWidget::keyPressEvent( TQKeyEvent * e )
 {
     if (m_width == -1) return;
 	
@@ -212,7 +212,7 @@ void PresentationWidget::keyPressEvent( QKeyEvent * e )
     }
 }
 
-void PresentationWidget::wheelEvent( QWheelEvent * e )
+void PresentationWidget::wheelEvent( TQWheelEvent * e )
 {
     // performance note: don't remove the clipping
     int div = e->delta() / 120;
@@ -232,7 +232,7 @@ void PresentationWidget::wheelEvent( QWheelEvent * e )
     }
 }
 
-void PresentationWidget::mousePressEvent( QMouseEvent * e )
+void PresentationWidget::mousePressEvent( TQMouseEvent * e )
 {
     // pressing left button
     if ( e->button() == Qt::LeftButton )
@@ -256,7 +256,7 @@ void PresentationWidget::mousePressEvent( QMouseEvent * e )
         slotPrevPage();
 }
 
-void PresentationWidget::mouseReleaseEvent( QMouseEvent * e )
+void PresentationWidget::mouseReleaseEvent( TQMouseEvent * e )
 {
     // if releasing on the same link we pressed over, execute it
     if ( m_pressedLink && e->button() == Qt::LeftButton )
@@ -268,7 +268,7 @@ void PresentationWidget::mouseReleaseEvent( QMouseEvent * e )
     }
 }
 
-void PresentationWidget::mouseMoveEvent( QMouseEvent * e )
+void PresentationWidget::mouseMoveEvent( TQMouseEvent * e )
 {
     // safety check
     if ( m_width == -1 )
@@ -295,11 +295,11 @@ void PresentationWidget::mouseMoveEvent( QMouseEvent * e )
     }
 }
 
-void PresentationWidget::paintEvent( QPaintEvent * pe )
+void PresentationWidget::paintEvent( TQPaintEvent * pe )
 {
     if (m_width == -1)
     {
-        QRect d = KGlobalSettings::desktopGeometry(this);
+        TQRect d = KGlobalSettings::desktopGeometry(this);
         m_width = d.width();
         m_height = d.height();
 
@@ -307,16 +307,16 @@ void PresentationWidget::paintEvent( QPaintEvent * pe )
         m_topBar = new KToolBar( this, "presentationBar" );
         m_topBar->setIconSize( 32 );
         m_topBar->setMovingEnabled( false );
-        m_topBar->insertButton( QApplication::reverseLayout() ? "1rightarrow" : "1leftarrow", 2, SIGNAL( clicked() ), this, SLOT( slotPrevPage() ) );
-        m_topBar->insertButton( QApplication::reverseLayout() ? "1leftarrow" : "1rightarrow", 3, SIGNAL( clicked() ), this, SLOT( slotNextPage() ) );
-        m_topBar->insertButton( "exit", 1, SIGNAL( clicked() ), this, SLOT( close() ) );
+        m_topBar->insertButton( TQApplication::reverseLayout() ? "1rightarrow" : "1leftarrow", 2, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotPrevPage() ) );
+        m_topBar->insertButton( TQApplication::reverseLayout() ? "1leftarrow" : "1rightarrow", 3, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotNextPage() ) );
+        m_topBar->insertButton( "exit", 1, TQT_SIGNAL( clicked() ), this, TQT_SLOT( close() ) );
         m_topBar->setGeometry( 0, 0, m_width, 32 + 10 );
         m_topBar->alignItemRight( 1 );
         m_topBar->hide();
         // change topbar background color
-        QPalette p = m_topBar->palette();
-        p.setColor( QPalette::Active, QColorGroup::Button, Qt::gray );
-        p.setColor( QPalette::Active, QColorGroup::Background, Qt::darkGray );
+        TQPalette p = m_topBar->palette();
+        p.setColor( TQPalette::Active, TQColorGroup::Button, Qt::gray );
+        p.setColor( TQPalette::Active, TQColorGroup::Background, Qt::darkGray );
         m_topBar->setPalette( p );
 
         // register this observer in document. events will come immediately
@@ -326,34 +326,34 @@ void PresentationWidget::paintEvent( QPaintEvent * pe )
         if ( KpdfSettings::slidesShowSummary() )
             generatePage();
 
-        KMessageBox::information(this, i18n("There are two ways of exiting presentation mode, you can press either ESC key or click with the quit button that appears when placing the mouse in the top-right corner. Of course you can cycle windows (Alt+TAB by default)"), QString::null, "presentationInfo");
+        KMessageBox::information(this, i18n("There are two ways of exiting presentation mode, you can press either ESC key or click with the quit button that appears when placing the mouse in the top-right corner. Of course you can cycle windows (Alt+TAB by default)"), TQString::null, "presentationInfo");
     }
 
     // check painting rect consistancy
-    QRect r = pe->rect().intersect( geometry() );
+    TQRect r = pe->rect().intersect( geometry() );
     if ( r.isNull() || m_lastRenderedPixmap.isNull() )
         return;
 
     // blit the pixmap to the screen
-    QMemArray<QRect> allRects = pe->region().rects();
+    TQMemArray<TQRect> allRects = pe->region().rects();
     uint numRects = allRects.count();
     for ( uint i = 0; i < numRects; i++ )
     {
-        const QRect & r = allRects[i];
+        const TQRect & r = allRects[i];
         if ( !r.isValid() )
             continue;
 #ifdef ENABLE_PROGRESS_OVERLAY
         if ( KpdfSettings::slidesShowProgress() && r.intersects( m_overlayGeometry ) )
         {
             // backbuffer the overlay operation
-            QPixmap backPixmap( r.size() );
-            QPainter pixPainter( &backPixmap );
+            TQPixmap backPixmap( r.size() );
+            TQPainter pixPainter( &backPixmap );
 
             // first draw the background on the backbuffer
-            pixPainter.drawPixmap( QPoint(0,0), m_lastRenderedPixmap, r );
+            pixPainter.drawPixmap( TQPoint(0,0), m_lastRenderedPixmap, r );
 
             // then blend the overlay (a piece of) over the background
-            QRect ovr = m_overlayGeometry.intersect( r );
+            TQRect ovr = m_overlayGeometry.intersect( r );
             pixPainter.drawPixmap( ovr.left() - r.left(), ovr.top() - r.top(),
                 m_lastRenderedOverlay, ovr.left() - m_overlayGeometry.left(),
                 ovr.top() - m_overlayGeometry.top(), ovr.width(), ovr.height() );
@@ -370,7 +370,7 @@ void PresentationWidget::paintEvent( QPaintEvent * pe )
 // </widget events>
 
 
-const KPDFLink * PresentationWidget::getLink( int x, int y, QRect * geometry ) const
+const KPDFLink * PresentationWidget::getLink( int x, int y, TQRect * geometry ) const
 {
     // no links on invalid pages
     if ( geometry && !geometry->isNull() )
@@ -381,7 +381,7 @@ const KPDFLink * PresentationWidget::getLink( int x, int y, QRect * geometry ) c
     // get frame, page and geometry
     const PresentationFrame * frame = m_frames[ m_frameIndex ];
     const KPDFPage * page = frame->page;
-    const QRect & frameGeometry = frame->geometry;
+    const TQRect & frameGeometry = frame->geometry;
 
     // compute normalized x and y
     double nx = (double)(x - frameGeometry.left()) / (double)frameGeometry.width();
@@ -410,7 +410,7 @@ const KPDFLink * PresentationWidget::getLink( int x, int y, QRect * geometry ) c
 void PresentationWidget::testCursorOnLink( int x, int y )
 {
     // get rect
-    QRect linkRect;
+    TQRect linkRect;
     const KPDFLink * link = getLink( x, y, &linkRect );
 
     // only react on changes (in/out from a link)
@@ -421,13 +421,13 @@ void PresentationWidget::testCursorOnLink( int x, int y )
         setCursor( m_handCursor ? KCursor::handCursor() : KCursor::arrowCursor());
 
         // set tooltip over link's rect
-        QString tip = link ? link->linkTip() : QString::null;
+        TQString tip = link ? link->linkTip() : TQString::null;
         if ( m_handCursor && !tip.isEmpty() )
-            QToolTip::add( this, linkRect, tip );
+            TQToolTip::add( this, linkRect, tip );
     }
 }
 
-void PresentationWidget::overlayClick( const QPoint & position )
+void PresentationWidget::overlayClick( const TQPoint & position )
 {
     // clicking the progress indicator
     int xPos = position.x() - m_overlayGeometry.x() - m_overlayGeometry.width() / 2,
@@ -459,12 +459,12 @@ void PresentationWidget::changePage( int newPage )
     if ( !frame->page->hasPixmap( PRESENTATION_ID, pixW, pixH ) )
     {
         // operation will take long: set busy cursor
-        QApplication::setOverrideCursor( KCursor::workingCursor() );
+        TQApplication::setOverrideCursor( KCursor::workingCursor() );
         // request the pixmap
-        QValueList< PixmapRequest * > requests;
+        TQValueList< PixmapRequest * > requests;
         requests.push_back( new PixmapRequest( PRESENTATION_ID, m_frameIndex, pixW, pixH, PRESENTATION_PRIO ) );
         // restore cursor
-        QApplication::restoreOverrideCursor();
+        TQApplication::restoreOverrideCursor();
         // ask for next and previous page if not in low memory usage setting
         if (KpdfSettings::memoryLevel() != KpdfSettings::EnumMemoryLevel::Low && KpdfSettings::enableThreading()) {
             if (newPage + 1 < (int)m_document->pages())
@@ -503,7 +503,7 @@ void PresentationWidget::generatePage()
         m_lastRenderedPixmap.resize( m_width, m_height );
 
     // opens the painter over the pixmap
-    QPainter pixmapPainter;
+    TQPainter pixmapPainter;
     pixmapPainter.begin( &m_lastRenderedPixmap );
     // generate welcome page
     if ( m_frameIndex == -1 )
@@ -532,12 +532,12 @@ void PresentationWidget::generatePage()
     // update cursor + tooltip
     if ( KpdfSettings::slidesCursor() != KpdfSettings::EnumSlidesCursor::Hidden )
     {
-        QPoint p = mapFromGlobal( QCursor::pos() );
+        TQPoint p = mapFromGlobal( TQCursor::pos() );
         testCursorOnLink( p.x(), p.y() );
     }
 }
 
-void PresentationWidget::generateIntroPage( QPainter & p )
+void PresentationWidget::generateIntroPage( TQPainter & p )
 {
     // use a vertical gray gradient background
     int blend1 = m_height / 10,
@@ -550,11 +550,11 @@ void PresentationWidget::generateIntroPage( QPainter & p )
             k -= (int)( baseTint * (i-blend1)*(i-blend1) / (float)(blend1 * blend1) );
         if ( i > blend2 )
             k += (int)( (255-baseTint) * (i-blend2)*(i-blend2) / (float)(blend1 * blend1) );
-        p.fillRect( 0, i, m_width, 1, QColor( k, k, k ) );
+        p.fillRect( 0, i, m_width, 1, TQColor( k, k, k ) );
     }
 
     // draw kpdf logo in the four corners
-    QPixmap logo = DesktopIcon( "kpdf", 64 );
+    TQPixmap logo = DesktopIcon( "kpdf", 64 );
     if ( !logo.isNull() )
     {
         p.drawPixmap( 5, 5, logo );
@@ -567,14 +567,14 @@ void PresentationWidget::generateIntroPage( QPainter & p )
     int strNum = m_metaStrings.count(),
         strHeight = m_height / ( strNum + 4 ),
         fontHeight = 2 * strHeight / 3;
-    QFont font( p.font() );
+    TQFont font( p.font() );
     font.setPixelSize( fontHeight );
-    QFontMetrics metrics( font );
+    TQFontMetrics metrics( font );
     for ( int i = 0; i < strNum; i++ )
     {
         // set a font to fit text width
         float wScale = (float)metrics.boundingRect( m_metaStrings[i] ).width() / (float)m_width;
-        QFont f( font );
+        TQFont f( font );
         if ( wScale > 1.0 )
             f.setPixelSize( (int)( (float)fontHeight / (float)wScale ) );
         p.setFont( f );
@@ -590,12 +590,12 @@ void PresentationWidget::generateIntroPage( QPainter & p )
     }
 }
 
-void PresentationWidget::generateContentsPage( int pageNum, QPainter & p )
+void PresentationWidget::generateContentsPage( int pageNum, TQPainter & p )
 {
     PresentationFrame * frame = m_frames[ pageNum ];
 
     // translate painter and contents rect
-    QRect geom( frame->geometry );
+    TQRect geom( frame->geometry );
     p.translate( geom.left(), geom.top() );
     geom.moveBy( -geom.left(), -geom.top() );
 
@@ -608,11 +608,11 @@ void PresentationWidget::generateContentsPage( int pageNum, QPainter & p )
     p.translate( -frame->geometry.left(), -frame->geometry.top() );
 
     // fill unpainted areas with background color
-    QRegion unpainted( QRect( 0, 0, m_width, m_height ) );
-    QMemArray<QRect> rects = unpainted.subtract( frame->geometry ).rects();
+    TQRegion unpainted( TQRect( 0, 0, m_width, m_height ) );
+    TQMemArray<TQRect> rects = unpainted.subtract( frame->geometry ).rects();
     for ( uint i = 0; i < rects.count(); i++ )
     {
-        const QRect & r = rects[i];
+        const TQRect & r = rects[i];
         p.fillRect( r, KpdfSettings::slidesBackgroundColor() );
     }
 }
@@ -632,9 +632,9 @@ void PresentationWidget::generateOverlay()
     // and the resulting image is smoothly scaled down. So here we open a
     // painter on the double sized pixmap.
     side *= 2;
-    QPixmap doublePixmap( side, side );
+    TQPixmap doublePixmap( side, side );
     doublePixmap.fill( Qt::black );
-    QPainter pixmapPainter( &doublePixmap );
+    TQPainter pixmapPainter( &doublePixmap );
 
     // draw PIE SLICES in blue levels (the levels will then be the alpha component)
     int pages = m_document->pages();
@@ -667,16 +667,16 @@ void PresentationWidget::generateOverlay()
     pixmapPainter.drawEllipse( circleOut, circleOut, side - 2*circleOut, side - 2*circleOut );
 
     // draw TEXT using maximum opacity
-    QFont f( pixmapPainter.font() );
+    TQFont f( pixmapPainter.font() );
     f.setPixelSize( side / 4 );
     pixmapPainter.setFont( f );
     pixmapPainter.setPen( 0xFF );
     // use a little offset to prettify output
-    pixmapPainter.drawText( 2, 2, side, side, Qt::AlignCenter, QString::number( m_frameIndex + 1 ) );
+    pixmapPainter.drawText( 2, 2, side, side, Qt::AlignCenter, TQString::number( m_frameIndex + 1 ) );
 
     // end drawing pixmap and halve image
     pixmapPainter.end();
-    QImage image( doublePixmap.convertToImage().smoothScale( side / 2, side / 2 ) );
+    TQImage image( doublePixmap.convertToImage().smoothScale( side / 2, side / 2 ) );
     image.setAlphaBuffer( true );
 
     // draw circular shadow using the same technique
@@ -686,11 +686,11 @@ void PresentationWidget::generateOverlay()
     pixmapPainter.setBrush( 0x80 );
     pixmapPainter.drawEllipse( 0, 0, side, side );
     pixmapPainter.end();
-    QImage shadow( doublePixmap.convertToImage().smoothScale( side / 2, side / 2 ) );
+    TQImage shadow( doublePixmap.convertToImage().smoothScale( side / 2, side / 2 ) );
 
     // generate a 2 colors pixmap using mixing shadow (made with highlight color)
     // and image (made with highlightedText color)
-    QColor color = palette().active().highlightedText();
+    TQColor color = palette().active().highlightedText();
     int red = color.red(), green = color.green(), blue = color.blue();
     color = palette().active().highlight();
     int sRed = color.red(), sGreen = color.green(), sBlue = color.blue();
@@ -802,7 +802,7 @@ void PresentationWidget::slotLastPage()
 
 void PresentationWidget::slotHideOverlay()
 {
-    QRect geom( m_overlayGeometry );
+    TQRect geom( m_overlayGeometry );
     m_overlayGeometry.setCoords( 0, 0, -1, -1 );
     update( geom );
 }
@@ -990,8 +990,8 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int i = 0; i < steps; i++ )
                     {
                         int xNext = ((i + 1) * m_width) / (2 * steps);
-                        m_transitionRects.push_back( QRect( xPosition, 0, xNext - xPosition, m_height ) );
-                        m_transitionRects.push_back( QRect( m_width - xNext, 0, xNext - xPosition, m_height ) );
+                        m_transitionRects.push_back( TQRect( xPosition, 0, xNext - xPosition, m_height ) );
+                        m_transitionRects.push_back( TQRect( m_width - xNext, 0, xNext - xPosition, m_height ) );
                         xPosition = xNext;
                     }
                 }
@@ -1001,8 +1001,8 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int i = 0; i < steps; i++ )
                     {
                         int xNext = ((steps - (i + 1)) * m_width) / (2 * steps);
-                        m_transitionRects.push_back( QRect( xNext, 0, xPosition - xNext, m_height ) );
-                        m_transitionRects.push_back( QRect( m_width - xPosition, 0, xPosition - xNext, m_height ) );
+                        m_transitionRects.push_back( TQRect( xNext, 0, xPosition - xNext, m_height ) );
+                        m_transitionRects.push_back( TQRect( m_width - xPosition, 0, xPosition - xNext, m_height ) );
                         xPosition = xNext;
                     }
                 }
@@ -1015,8 +1015,8 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int i = 0; i < steps; i++ )
                     {
                         int yNext = ((i + 1) * m_height) / (2 * steps);
-                        m_transitionRects.push_back( QRect( 0, yPosition, m_width, yNext - yPosition ) );
-                        m_transitionRects.push_back( QRect( 0, m_height - yNext, m_width, yNext - yPosition ) );
+                        m_transitionRects.push_back( TQRect( 0, yPosition, m_width, yNext - yPosition ) );
+                        m_transitionRects.push_back( TQRect( 0, m_height - yNext, m_width, yNext - yPosition ) );
                         yPosition = yNext;
                     }
                 }
@@ -1026,8 +1026,8 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int i = 0; i < steps; i++ )
                     {
                         int yNext = ((steps - (i + 1)) * m_height) / (2 * steps);
-                        m_transitionRects.push_back( QRect( 0, yNext, m_width, yPosition - yNext ) );
-                        m_transitionRects.push_back( QRect( 0, m_height - yPosition, m_width, yPosition - yNext ) );
+                        m_transitionRects.push_back( TQRect( 0, yNext, m_width, yPosition - yNext ) );
+                        m_transitionRects.push_back( TQRect( 0, m_height - yPosition, m_width, yPosition - yNext ) );
                         yPosition = yNext;
                     }
                 }
@@ -1052,7 +1052,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     int stepOffset = (int)( ((float)i * (float)m_width) / ((float)blinds * (float)steps) );
                     for ( int b = 0; b < blinds; b++ )
                     {
-                        m_transitionRects.push_back( QRect( xPosition[ b ], 0, stepOffset, m_height ) );
+                        m_transitionRects.push_back( TQRect( xPosition[ b ], 0, stepOffset, m_height ) );
                         xPosition[ b ] = stepOffset + (b * m_width) / blinds;
                     }
                 }
@@ -1068,7 +1068,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     int stepOffset = (int)( ((float)i * (float)m_height) / ((float)blinds * (float)steps) );
                     for ( int b = 0; b < blinds; b++ )
                     {
-                        m_transitionRects.push_back( QRect( 0, yPosition[ b ], m_width, stepOffset ) );
+                        m_transitionRects.push_back( TQRect( 0, yPosition[ b ], m_width, stepOffset ) );
                         yPosition[ b ] = stepOffset + (b * m_height) / blinds;
                     }
                 }
@@ -1092,10 +1092,10 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     int newR = m_width - newL;
                     int newB = m_height - newT;
                     // add left, right, topcenter, bottomcenter rects
-                    m_transitionRects.push_back( QRect( L, T, newL - L, B - T ) );
-                    m_transitionRects.push_back( QRect( newR, T, R - newR, B - T ) );
-                    m_transitionRects.push_back( QRect( newL, T, newR - newL, newT - T ) );
-                    m_transitionRects.push_back( QRect( newL, newB, newR - newL, B - newB ) );
+                    m_transitionRects.push_back( TQRect( L, T, newL - L, B - T ) );
+                    m_transitionRects.push_back( TQRect( newR, T, R - newR, B - T ) );
+                    m_transitionRects.push_back( TQRect( newL, T, newR - newL, newT - T ) );
+                    m_transitionRects.push_back( TQRect( newL, newB, newR - newL, B - newB ) );
                     L = newL; T = newT; R = newR, B = newB;
                 }
             }
@@ -1110,10 +1110,10 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     int newR = m_width - newL;
                     int newB = m_height - newT;
                     // add left, right, topcenter, bottomcenter rects
-                    m_transitionRects.push_back( QRect( newL, newT, L - newL, newB - newT ) );
-                    m_transitionRects.push_back( QRect( R, newT, newR - R, newB - newT ) );
-                    m_transitionRects.push_back( QRect( L, newT, R - L, T - newT ) );
-                    m_transitionRects.push_back( QRect( L, B, R - L, newB - B ) );
+                    m_transitionRects.push_back( TQRect( newL, newT, L - newL, newB - newT ) );
+                    m_transitionRects.push_back( TQRect( R, newT, newR - R, newB - newT ) );
+                    m_transitionRects.push_back( TQRect( L, newT, R - L, T - newT ) );
+                    m_transitionRects.push_back( TQRect( L, B, R - L, newB - B ) );
                     L = newL; T = newT; R = newR, B = newB;
                 }
             }
@@ -1132,7 +1132,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                 for ( int i = 0; i < steps; i++ )
                 {
                     int xNext = ((i + 1) * m_width) / steps;
-                    m_transitionRects.push_back( QRect( xPosition, 0, xNext - xPosition, m_height ) );
+                    m_transitionRects.push_back( TQRect( xPosition, 0, xNext - xPosition, m_height ) );
                     xPosition = xNext;
                 }
             }
@@ -1142,7 +1142,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                 for ( int i = 0; i < steps; i++ )
                 {
                     int yNext = ((steps - (i + 1)) * m_height) / steps;
-                    m_transitionRects.push_back( QRect( 0, yNext, m_width, yPosition - yNext ) );
+                    m_transitionRects.push_back( TQRect( 0, yNext, m_width, yPosition - yNext ) );
                     yPosition = yNext;
                 }
             }
@@ -1152,7 +1152,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                 for ( int i = 0; i < steps; i++ )
                 {
                     int xNext = ((steps - (i + 1)) * m_width) / steps;
-                    m_transitionRects.push_back( QRect( xNext, 0, xPosition - xNext, m_height ) );
+                    m_transitionRects.push_back( TQRect( xNext, 0, xPosition - xNext, m_height ) );
                     xPosition = xNext;
                 }
             }
@@ -1162,7 +1162,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                 for ( int i = 0; i < steps; i++ )
                 {
                     int yNext = ((i + 1) * m_height) / steps;
-                    m_transitionRects.push_back( QRect( 0, yPosition, m_width, yNext - yPosition ) );
+                    m_transitionRects.push_back( TQRect( 0, yPosition, m_width, yNext - yPosition ) );
                     yPosition = yNext;
                 }
             }
@@ -1190,7 +1190,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                 for ( int x = 0; x < gridXsteps; x++ )
                 {
                     int newX = (int)( m_width * ((float)(x+1) / (float)gridXsteps) );
-                    m_transitionRects.push_back( QRect( oldX, oldY, newX - oldX, newY - oldY ) );
+                    m_transitionRects.push_back( TQRect( oldX, oldY, newX - oldX, newY - oldY ) );
                     oldX = newX;
                 }
                 oldX = 0;
@@ -1204,7 +1204,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                 // swap items if index differs
                 if ( n1 != n2 )
                 {
-                    QRect r = m_transitionRects[ n2 ];
+                    TQRect r = m_transitionRects[ n2 ];
                     m_transitionRects[ n2 ] = m_transitionRects[ n1 ];
                     m_transitionRects[ n1 ] = r;
                 }
@@ -1232,7 +1232,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int j = 0; j < gridXsteps; j++ )
                     {
                         int xNext = ((j + 1) * m_width) / gridXsteps;
-                        m_transitionRects.push_back( QRect( xPosition, yNext, xNext - xPosition, yPosition - yNext ) );
+                        m_transitionRects.push_back( TQRect( xPosition, yNext, xNext - xPosition, yPosition - yNext ) );
                         xPosition = xNext;
                     }
                     yPosition = yNext;
@@ -1248,7 +1248,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int j = 0; j < gridYsteps; j++ )
                     {
                         int yNext = ((j + 1) * m_height) / gridYsteps;
-                        m_transitionRects.push_back( QRect( xNext, yPosition, xPosition - xNext, yNext - yPosition ) );
+                        m_transitionRects.push_back( TQRect( xNext, yPosition, xPosition - xNext, yNext - yPosition ) );
                         yPosition = yNext;
                     }
                     xPosition = xNext;
@@ -1264,7 +1264,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int j = 0; j < gridXsteps; j++ )
                     {
                         int xNext = ((j + 1) * m_width) / gridXsteps;
-                        m_transitionRects.push_back( QRect( xPosition, yPosition, xNext - xPosition, yNext - yPosition ) );
+                        m_transitionRects.push_back( TQRect( xPosition, yPosition, xNext - xPosition, yNext - yPosition ) );
                         xPosition = xNext;
                     }
                     yPosition = yNext;
@@ -1280,7 +1280,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                     for ( int j = 0; j < gridYsteps; j++ )
                     {
                         int yNext = ((j + 1) * m_height) / gridYsteps;
-                        m_transitionRects.push_back( QRect( xPosition, yPosition, xNext - xPosition, yNext - yPosition ) );
+                        m_transitionRects.push_back( TQRect( xPosition, yPosition, xNext - xPosition, yNext - yPosition ) );
                         yPosition = yNext;
                     }
                     xPosition = xNext;
@@ -1295,7 +1295,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
                 // swap items if index differs
                 if ( n1 != n2 )
                 {
-                    QRect r = m_transitionRects[ n2 ];
+                    TQRect r = m_transitionRects[ n2 ];
                     m_transitionRects[ n2 ] = m_transitionRects[ n1 ];
                     m_transitionRects[ n1 ] = r;
                 }

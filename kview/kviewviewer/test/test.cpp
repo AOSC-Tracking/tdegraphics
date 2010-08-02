@@ -11,7 +11,7 @@
 #include <kparts/componentfactory.h>
 #include <kapplication.h>
 
-#include <qimage.h>
+#include <tqimage.h>
 
 Test::Test()
     : KParts::MainWindow( 0, "KView Viewer Test" ),

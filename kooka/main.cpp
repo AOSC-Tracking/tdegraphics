@@ -26,8 +26,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qdict.h>
-#include <qpixmap.h>
+#include <tqdict.h>
+#include <tqpixmap.h>
 
 #include <kapplication.h>
 #include <dcopclient.h>
@@ -90,7 +90,7 @@ int main( int argc, char *argv[] )
    KIconLoader *loader = KGlobal::iconLoader();
 
    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-   QCString  devToUse = args->getOption( "d" );
+   TQCString  devToUse = args->getOption( "d" );
    if( args->isSet("g") )
    {
       devToUse = "gallery";

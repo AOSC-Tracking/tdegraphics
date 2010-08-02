@@ -28,8 +28,8 @@
 
 #include <kpcoloreffect.h>
 
-#include <qapplication.h>
-#include <qpixmap.h>
+#include <tqapplication.h>
+#include <tqpixmap.h>
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -40,7 +40,7 @@
 #include <kpselection.h>
 
 
-kpColorEffectCommand::kpColorEffectCommand (const QString &name,
+kpColorEffectCommand::kpColorEffectCommand (const TQString &name,
                                             bool actOnSelection,
                                             kpMainWindow *mainWindow)
     : kpCommand (mainWindow),
@@ -57,7 +57,7 @@ kpColorEffectCommand::~kpColorEffectCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpColorEffectCommand::name () const
+TQString kpColorEffectCommand::name () const
 {
     if (m_actOnSelection)
         return i18n ("Selection: %1").arg (m_name);
@@ -80,24 +80,24 @@ void kpColorEffectCommand::execute ()
     if (!doc)
         return;
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
-    const QPixmap oldPixmap = *doc->pixmap (m_actOnSelection);
+    const TQPixmap oldPixmap = *doc->pixmap (m_actOnSelection);
 
     if (!isInvertible ())
     {
-        m_oldPixmapPtr = new QPixmap ();
+        m_oldPixmapPtr = new TQPixmap ();
         *m_oldPixmapPtr = oldPixmap;
     }
 
 
-    QPixmap newPixmap = /*pure virtual*/applyColorEffect (oldPixmap);
+    TQPixmap newPixmap = /*pure virtual*/applyColorEffect (oldPixmap);
 
     doc->setPixmap (m_actOnSelection, newPixmap);
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // public virtual [base kpCommand]
@@ -107,10 +107,10 @@ void kpColorEffectCommand::unexecute ()
     if (!doc)
         return;
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
 
-    QPixmap newPixmap;
+    TQPixmap newPixmap;
 
     if (!isInvertible ())
     {
@@ -127,14 +127,14 @@ void kpColorEffectCommand::unexecute ()
     delete m_oldPixmapPtr; m_oldPixmapPtr = 0;
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 
 kpColorEffectWidget::kpColorEffectWidget (bool actOnSelection,
                                           kpMainWindow *mainWindow,
-                                          QWidget *parent, const char *name)
-    : QWidget (parent, name),
+                                          TQWidget *parent, const char *name)
+    : TQWidget (parent, name),
       m_actOnSelection (actOnSelection),
       m_mainWindow (mainWindow)
 {
@@ -146,9 +146,9 @@ kpColorEffectWidget::~kpColorEffectWidget ()
 
 
 // public
-QString kpColorEffectWidget::caption () const
+TQString kpColorEffectWidget::caption () const
 {
-    return QString::null;
+    return TQString::null;
 }
 
 

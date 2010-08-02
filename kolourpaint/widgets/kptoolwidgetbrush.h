@@ -29,7 +29,7 @@
 #ifndef __kptoolwidgetbrush_h__
 #define __kptoolwidgetbrush_h__
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include <kptoolwidgetbase.h>
 
@@ -38,24 +38,24 @@ class kpToolWidgetBrush : public kpToolWidgetBase
 Q_OBJECT
 
 public:
-    kpToolWidgetBrush (QWidget *parent, const char *name);
+    kpToolWidgetBrush (TQWidget *parent, const char *name);
     virtual ~kpToolWidgetBrush ();
 
 private:
-    QString brushName (int shape, int whichSize);
+    TQString brushName (int shape, int whichSize);
     
 public:
-    QPixmap brush () const;
+    TQPixmap brush () const;
     bool brushIsDiagonalLine () const;
 
 signals:
-    void brushChanged (const QPixmap &pixmap, bool isDiagonalLine);
+    void brushChanged (const TQPixmap &pixmap, bool isDiagonalLine);
 
 protected slots:
     virtual bool setSelected (int row, int col, bool saveAsDefault);
 
 private:
-    QPixmap m_brushBitmaps [16];
+    TQPixmap m_brushBitmaps [16];
 };
 
 #endif  // __kptoolwidgetbrush_h__

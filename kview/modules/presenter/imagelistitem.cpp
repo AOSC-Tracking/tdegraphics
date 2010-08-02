@@ -20,14 +20,14 @@
 
 #include "imagelistitem.h"
 
-#include <qimage.h>
+#include <tqimage.h>
 
 #include <klistview.h>
 
 ImageListItem::ImageListItem( KListView * parent, const KURL & url )
 	: KListViewItem( parent, parent->lastItem(), url.prettyURL() )
 	, m_pImage( 0 )
-	, m_filename( QString::null )
+	, m_filename( TQString::null )
 	, m_url( url )
 {
 	setDragEnabled( true );
@@ -39,13 +39,13 @@ ImageListItem::ImageListItem( KListView * parent, const KURL & url )
 	{
 		// download file
 		/*
-		QString extension;
-		QString fileName = m_url.fileName();
+		TQString extension;
+		TQString fileName = m_url.fileName();
 		int extensionPos = fileName.findRev( '.' );
 		if ( extensionPos != -1 )
 			extension = fileName.mid( extensionPos ); // keep the '.'
 		delete m_pTempFile;
-		m_pTempFile = new KTempFile( QString::null, extension );
+		m_pTempFile = new KTempFile( TQString::null, extension );
 		m_filename = m_pTempFile->name();
 
 		m_pJob = KIO::get( m_url, m_pExtension->urlArgs().reload, false );
@@ -62,15 +62,15 @@ ImageListItem::~ImageListItem()
 	}
 }
 
-const QImage * ImageListItem::image() const
+const TQImage * ImageListItem::image() const
 {
 	return m_pImage;
 }
 
-const QString & ImageListItem::file() const
+const TQString & ImageListItem::file() const
 {
 	if( m_url.isLocalFile() )
-		return QString::null;
+		return TQString::null;
 	return m_filename;
 }
 

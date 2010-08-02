@@ -20,18 +20,18 @@
 #include "pmheightfield.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qslider.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqlineedit.h>
+#include <tqpushbutton.h>
+#include <tqslider.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
 
-PMHeightFieldEdit::PMHeightFieldEdit( QWidget* parent, const char* name )
+PMHeightFieldEdit::PMHeightFieldEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -41,9 +41,9 @@ void PMHeightFieldEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Type:" ), this ) );
-   m_pHeightFieldType = new QComboBox( false, this );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Type:" ), this ) );
+   m_pHeightFieldType = new TQComboBox( false, this );
    hl->addWidget( m_pHeightFieldType );
    hl->addStretch( 0 );
    m_pHeightFieldType->insertItem( "gif" );
@@ -54,36 +54,36 @@ void PMHeightFieldEdit::createTopWidgets( )
    m_pHeightFieldType->insertItem( "ppm" );
    m_pHeightFieldType->insertItem( "sys" );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "File name:" ), this ) );
-   m_pFileName = new QLineEdit( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "File name:" ), this ) );
+   m_pFileName = new TQLineEdit( this );
    hl->addWidget( m_pFileName );
-   m_pChooseFileName = new QPushButton( this );
+   m_pChooseFileName = new TQPushButton( this );
    m_pChooseFileName->setPixmap( SmallIcon( "fileopen" ) );
    hl->addWidget( m_pChooseFileName );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Water level:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Water level:" ), this ) );
    m_pWaterLevel = new PMFloatEdit( this );
    m_pWaterLevel->setValidation( true, 0.0, true, 1.0 );
    hl->addWidget( m_pWaterLevel );
    hl->addStretch( 1 );
 
-   m_pHierarchy = new QCheckBox( i18n( "Hierarchy" ), this );
+   m_pHierarchy = new TQCheckBox( i18n( "Hierarchy" ), this );
    topLayout( )->addWidget( m_pHierarchy );
 
-   m_pSmooth = new QCheckBox( i18n( "Smooth" ), this );
+   m_pSmooth = new TQCheckBox( i18n( "Smooth" ), this );
    topLayout( )->addWidget( m_pSmooth );
 
-   connect( m_pHeightFieldType, SIGNAL( activated( int ) ),
-            SLOT( slotTypeChanged( int ) ) );
-   connect( m_pFileName, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotFileNameChanged( const QString& ) ) );
-   connect( m_pChooseFileName, SIGNAL( clicked( ) ),
-            SLOT( slotFileNameClicked( ) ) );
-   connect( m_pWaterLevel, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pHierarchy, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSmooth, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pHeightFieldType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotTypeChanged( int ) ) );
+   connect( m_pFileName, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotFileNameChanged( const TQString& ) ) );
+   connect( m_pChooseFileName, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotFileNameClicked( ) ) );
+   connect( m_pWaterLevel, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHierarchy, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSmooth, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMHeightFieldEdit::displayObject( PMObject* o )
@@ -182,14 +182,14 @@ void PMHeightFieldEdit::slotTypeChanged( int )
    emit dataChanged( );
 }
 
-void PMHeightFieldEdit::slotFileNameChanged( const QString& )
+void PMHeightFieldEdit::slotFileNameChanged( const TQString& )
 {
    emit dataChanged( );
 }
 
 void PMHeightFieldEdit::slotFileNameClicked( )
 {
-   QString str = KFileDialog::getOpenFileName( QString::null, QString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
 
    if( !str.isEmpty() )
    {

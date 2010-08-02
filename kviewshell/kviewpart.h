@@ -7,7 +7,7 @@
 #include "zoom.h"
 
 #include <kparts/browserextension.h>
-#include <qtimer.h>
+#include <tqtimer.h>
 
 class KAboutData;
 class KAboutDialog;
@@ -23,9 +23,9 @@ class KTempFile;
 class KToggleAction;
 class KURL;
 class KViewPartExtension;
-class QHBoxLayout;
+class TQHBoxLayout;
 class pageSizeDialog;
-class QSize;
+class TQSize;
 
 
 class KViewPart : public KViewPart_Iface
@@ -33,8 +33,8 @@ class KViewPart : public KViewPart_Iface
   Q_OBJECT
 
 public:
-  KViewPart(QWidget *parentWidget, const char *widgetName, QObject *parent,
-            const char *name, const QStringList& args);
+  KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+            const char *name, const TQStringList& args);
   virtual ~KViewPart();
 
   static KAboutData* createAboutData();
@@ -48,15 +48,15 @@ public:
 
   /* Returns a description of the current page size, for use in the
      statusbar of the kviewshell that embeds this KViewPart. */
-  QString pageSizeDescription();
+  TQString pageSizeDescription();
 
   /** Returns a list of mimetypes supported by the installed KViewShell plugins. */
-  virtual QStringList supportedMimeTypes();
+  virtual TQStringList supportedMimeTypes();
 
 signals:
-  void zoomChanged(const QString &);
-  void pageChanged(const QString &);
-  void sizeChanged(const QString &);
+  void zoomChanged(const TQString &);
+  void pageChanged(const TQString &);
+  void sizeChanged(const TQString &);
   void scrollbarStatusChanged(bool);
   void fileOpened();
 
@@ -67,8 +67,8 @@ public slots:
 
   virtual void slotFileOpen();
   virtual bool closeURL();
-  virtual QStringList fileFormats() const;
-  void setStatusBarTextFromMultiPage(const QString &);
+  virtual TQStringList fileFormats() const;
+  void setStatusBarTextFromMultiPage(const TQString &);
 
   /** Calling this slot will cause the kmultipage to reload the file */
   void reload();
@@ -98,10 +98,10 @@ protected slots:
 
   void slotPrint();
 
-  void fileChanged(const QString&);
+  void fileChanged(const TQString&);
 
-  // Connected to the QLineEdit in the toolbar.
-  void setZoomValue(const QString &);
+  // Connected to the TQLineEdit in the toolbar.
+  void setZoomValue(const TQString &);
 
 
 protected:
@@ -207,17 +207,17 @@ private:
 
   KParts::PartManager* partManager;
 
-  QGuardedPtr<KMultiPage> multiPage;
+  TQGuardedPtr<KMultiPage> multiPage;
   // Name of the library of the currently loaded multiPage.
   // Is used to check if it is really necessary to load a new MultiPage.
-  QString multiPageLibrary;
+  TQString multiPageLibrary;
 
   KViewPartExtension *m_extension;
 
   bool pageChangeIsConnected;
 
-  QWidget *mainWidget;
-  QHBoxLayout* mainLayout;
+  TQWidget *mainWidget;
+  TQHBoxLayout* mainLayout;
 
   /** This entry stores the paper size that the user has requested in
       the preferences dialog. If that paper size is actually used or
@@ -230,7 +230,7 @@ private:
   Zoom _zoomVal;
   pageSizeDialog *_pageSizeDialog;
 
-  QTimer fitTimer;
+  TQTimer fitTimer;
 
   KAboutDialog* aboutDialog;
 };

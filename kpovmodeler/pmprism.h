@@ -26,8 +26,8 @@
 
 #include "pmsolidobject.h"
 #include "pmvector.h"
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 #include <math.h>
 
 class PMViewStructure;
@@ -64,7 +64,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMPrism( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -72,18 +72,18 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMPrismEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmprism" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmprism" ); }
 
    /** */
    virtual void createMemento( );
@@ -99,21 +99,21 @@ public:
    virtual bool hasDisplayDetail( ) const { return true; }
    /** */
    virtual void addObjectActions( const PMControlPointList&,
-                                  QPtrList<PMObjectAction>& );
+                                  TQPtrList<PMObjectAction>& );
    /** */
    virtual void objectActionCalled( const PMObjectAction*,
                                     const PMControlPointList&,
-                                    const QPtrList<PMVector>&,
+                                    const TQPtrList<PMVector>&,
                                     const PMVector& );
 
    /**
     * Returns the spline points
     */
-   QValueList< QValueList<PMVector> > points( ) const { return m_points; }
+   TQValueList< TQValueList<PMVector> > points( ) const { return m_points; }
    /**
     * Sets the spline points
     */
-   void setPoints( const QValueList< QValueList<PMVector> >& points );
+   void setPoints( const TQValueList< TQValueList<PMVector> >& points );
    /**
     * Returns the spline type
     */
@@ -174,7 +174,7 @@ public:
    /**
     * Returns the points for POV-Ray serialization (contains additional points)
     */
-   QValueList<PMVector> expandedPoints( const QValueList<PMVector>& p ) const;
+   TQValueList<PMVector> expandedPoints( const TQValueList<PMVector>& p ) const;
 
 protected:
    /** */
@@ -187,17 +187,17 @@ private:
     * Object action. Adds a spline point
     */
    void splitSegment( const PMControlPointList& cp,
-                      const QPtrList<PMVector>& cpViewPosition,
+                      const TQPtrList<PMVector>& cpViewPosition,
                       const PMVector& clickPosition );
    /**
     * Object action. Removes a spline point
     */
    void joinSegments( const PMControlPointList& cp,
-                      const QPtrList<PMVector>& cpViewPosition,
+                      const TQPtrList<PMVector>& cpViewPosition,
                       const PMVector& clickPosition );
 
-   void stringToValues( const QString& str );
-   QString valuesToString( ) const;
+   void stringToValues( const TQString& str );
+   TQString valuesToString( ) const;
 
    /**
     * IDs for @ref PMMementoData
@@ -210,7 +210,7 @@ private:
    enum PMPrismActionID { PMSplitSegmentID, PMJoinSegmentsID };
    SplineType m_splineType;
    SweepType m_sweepType;
-   QValueList< QValueList<PMVector> > m_points;
+   TQValueList< TQValueList<PMVector> > m_points;
    double m_height1, m_height2;
    bool m_sturm;
    bool m_open;

@@ -29,8 +29,8 @@
 #include <signal.h>
 #include <errno.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
 
 #include <kdebug.h>
 #include <kinstance.h>
@@ -79,7 +79,7 @@ int kdemain(int argc, char **argv)
 	return 0;
 }
 
-KameraProtocol::KameraProtocol(const QCString &pool, const QCString &app)
+KameraProtocol::KameraProtocol(const TQCString &pool, const TQCString &app)
 : SlaveBase("camera", pool, app),
 m_camera(NULL)
 {
@@ -104,7 +104,7 @@ m_camera(NULL)
 //
 // The existance of a lockfile is used to signify "please give up camera".
 //
-void KameraProtocol::special(const QByteArray&) {
+void KameraProtocol::special(const TQByteArray&) {
 	kdDebug(7123) << "KameraProtocol::special() at " << getpid() << endl;
 
 	if (!actiondone && cameraopen) {
@@ -136,7 +136,7 @@ KameraProtocol::~KameraProtocol()
 }
 
 // initializes the camera for usage - should be done before operations over the wire
-bool KameraProtocol::openCamera(QString &str) {
+bool KameraProtocol::openCamera(TQString &str) {
 	idletime = 0;
 	actiondone = true;
 	if (!m_camera) {
@@ -188,8 +188,8 @@ void KameraProtocol::closeCamera(void)
 	return;
 }
 
-static QString fix_foldername(QString ofolder) {
-	QString folder = ofolder;
+static TQString fix_foldername(TQString ofolder) {
+	TQString folder = ofolder;
 	if (folder.length() > 1) {
 		while ((folder.length()>1) && (folder.right(1) == "/"))
 			folder = folder.left(folder.length()-1);
@@ -227,7 +227,7 @@ void KameraProtocol::get(const KURL &url)
 			error(KIO::ERR_DOES_NOT_EXIST, url.path());	\
 			return;						\
 		}							\
-		QByteArray chunkDataBuffer;				\
+		TQByteArray chunkDataBuffer;				\
 		chunkDataBuffer.setRawData(xx.text, strlen(xx.text));	\
 		data(chunkDataBuffer);					\
 		processedSize(strlen(xx.text));				\
@@ -329,7 +329,7 @@ void KameraProtocol::get(const KURL &url)
 	// already.
 	if ((fileSize > 0)  && (fileSize - m_fileSize)>0) {
 		unsigned long written = 0;
-		QByteArray chunkDataBuffer;
+		TQByteArray chunkDataBuffer;
 
 		// We need to split it up here. Someone considered it funny
 		// to discard any data() larger than 16MB.
@@ -518,9 +518,9 @@ void KameraProtocol::listDir(const KURL &url)
 	if (url.host().isEmpty()) {
 		KURL xurl;
 		// List the available cameras
-		QStringList groupList = m_config->groupList();
+		TQStringList groupList = m_config->groupList();
 		kdDebug(7123) << "Found cameras: " << groupList.join(", ") << endl;
-		QStringList::Iterator it;
+		TQStringList::Iterator it;
 		UDSEntry entry;
 		UDSAtom atom;
 
@@ -531,8 +531,8 @@ void KameraProtocol::listDir(const KURL &url)
 		 * - List all saved and possible offline cameras.
 		 * - List all autodetected and not yet printed cameras.
 		 */
-		QMap<QString,QString>	ports, names;
-		QMap<QString,int>	modelcnt;
+		TQMap<TQString,TQString>	ports, names;
+		TQMap<TQString,int>	modelcnt;
 
 		/* Autodetect USB cameras ... */
 		GPContext *glob_context = NULL;
@@ -578,7 +578,7 @@ void KameraProtocol::listDir(const KURL &url)
 			ports.remove("usb:");
 
 		for (it = groupList.begin(); it != groupList.end(); it++) {
-			QString m_cfgPath;
+			TQString m_cfgPath;
 			if (*it == "<default>")
 				continue;
 
@@ -619,7 +619,7 @@ void KameraProtocol::listDir(const KURL &url)
 			listEntry(entry, false);
 		}
 	
-		QMap<QString,QString>::iterator portsit;
+		TQMap<TQString,TQString>::iterator portsit;
 
 		for (portsit = ports.begin(); portsit != ports.end(); portsit++) {
 			entry.clear();
@@ -699,7 +699,7 @@ void KameraProtocol::listDir(const KURL &url)
 
 	for(int i = 0; i < gp_list_count(dirList); ++i) {
 		gp_list_get_name(dirList, i, &name);
-		translateDirectoryToUDS(entry, QString::fromLocal8Bit(name));
+		translateDirectoryToUDS(entry, TQString::fromLocal8Bit(name));
 		listEntry(entry, false);
 	}
 
@@ -709,7 +709,7 @@ void KameraProtocol::listDir(const KURL &url)
 		gp_list_get_name(fileList, i, &name);
 		// we want to know more info about files (size, type...)
 		gp_camera_file_get_info(m_camera, tocstr(url.path()), name, &info, m_context);
-		translateFileToUDS(entry, info, QString::fromLocal8Bit(name));
+		translateFileToUDS(entry, info, TQString::fromLocal8Bit(name));
 		listEntry(entry, false);
 	}
 	if (!url.path().compare("/")) {
@@ -737,7 +737,7 @@ void KameraProtocol::listDir(const KURL &url)
 	finished();
 }
 
-void KameraProtocol::setHost(const QString& host, int port, const QString& user, const QString& pass )
+void KameraProtocol::setHost(const TQString& host, int port, const TQString& user, const TQString& pass )
 {
 	kdDebug(7123) << "KameraProtocol::setHost(" << host << ", " << port << ", " << user << ", " << pass << ")" << endl;
 	int gpr, idx;
@@ -805,7 +805,7 @@ void KameraProtocol::setHost(const QString& host, int port, const QString& user,
 		gp_camera_set_port_speed(m_camera, 0); // TODO: the value needs to be configurable
 		kdDebug(7123) << "Opening camera model " << user << " at " << host << endl;
 
-		QString errstr;
+		TQString errstr;
 		if (!openCamera(errstr)) {
 			kdDebug(7123) << "Unable to init camera: " << gp_result_as_string(gpr) << endl;
 			error(KIO::ERR_SERVICE_NOT_AVAILABLE, errstr);
@@ -821,7 +821,7 @@ void KameraProtocol::reparseConfiguration(void)
 }
 
 // translate a simple text to a UDS entry
-void KameraProtocol::translateTextToUDS(UDSEntry &udsEntry, const QString &fn,
+void KameraProtocol::translateTextToUDS(UDSEntry &udsEntry, const TQString &fn,
 	const char *text
 ) {
 	UDSAtom atom;
@@ -846,7 +846,7 @@ void KameraProtocol::translateTextToUDS(UDSEntry &udsEntry, const QString &fn,
 }
 
 // translate a CameraFileInfo to a UDSEntry which we can return as a directory listing entry
-void KameraProtocol::translateFileToUDS(UDSEntry &udsEntry, const CameraFileInfo &info, QString name)
+void KameraProtocol::translateFileToUDS(UDSEntry &udsEntry, const CameraFileInfo &info, TQString name)
 {
 	UDSAtom atom;
 
@@ -858,7 +858,7 @@ void KameraProtocol::translateFileToUDS(UDSEntry &udsEntry, const CameraFileInfo
 
 	atom.m_uds = UDS_NAME;
 	if (info.file.fields & GP_FILE_INFO_NAME)
-		atom.m_str = QString::fromLocal8Bit(info.file.name);
+		atom.m_str = TQString::fromLocal8Bit(info.file.name);
 	else
 		atom.m_str = name;
 	udsEntry.append(atom);
@@ -881,7 +881,7 @@ void KameraProtocol::translateFileToUDS(UDSEntry &udsEntry, const CameraFileInfo
 
 	if (info.file.fields & GP_FILE_INFO_TYPE) {
 		atom.m_uds = UDS_MIME_TYPE;
-		atom.m_str = QString::fromLatin1(info.file.type);
+		atom.m_str = TQString::fromLatin1(info.file.type);
 		udsEntry.append(atom);
 	}
 
@@ -903,7 +903,7 @@ void KameraProtocol::translateFileToUDS(UDSEntry &udsEntry, const CameraFileInfo
 }
 
 // translate a directory name to a UDSEntry which we can return as a directory listing entry
-void KameraProtocol::translateDirectoryToUDS(UDSEntry &udsEntry, const QString &dirname)
+void KameraProtocol::translateDirectoryToUDS(UDSEntry &udsEntry, const TQString &dirname)
 {
 	UDSAtom atom;
 
@@ -942,7 +942,7 @@ bool KameraProtocol::cameraSupportsPreview(void)
 	return (m_abilities.file_operations & GP_FILE_OPERATION_PREVIEW);
 }
 
-int KameraProtocol::readCameraFolder(const QString &folder, CameraList *dirList, CameraList *fileList)
+int KameraProtocol::readCameraFolder(const TQString &folder, CameraList *dirList, CameraList *fileList)
 {
 	kdDebug(7123) << "KameraProtocol::readCameraFolder(" << folder << ")" << endl;
 
@@ -975,7 +975,7 @@ void frontendProgressUpdate(
 	if (fileSize > 0) {
 		// XXX using assign() here causes segfault, prolly because
 		// gp_file_free is called before chunkData goes out of scope
-		QByteArray chunkDataBuffer;
+		TQByteArray chunkDataBuffer;
 		chunkDataBuffer.setRawData(fileData + object->getFileSize(), fileSize - object->getFileSize());
 		// Note: this will fail with sizes > 16MB ... 
 		object->data(chunkDataBuffer);
@@ -1021,7 +1021,7 @@ unsigned int frontendProgressStart(
 	vsnprintf(status, 300, format, args);
 #endif
 
-	object->infoMessage(QString::fromLocal8Bit(status));
+	object->infoMessage(TQString::fromLocal8Bit(status));
 	delete [] status;
 	object->totalSize((int)totalsize); // hack: call slot directly
 	return GP_OK;
@@ -1061,6 +1061,6 @@ static void frontendCameraStatus(GPContext * /*context*/, const char *format, va
 	status=new char[300];
 	vsnprintf(status, 300, format, args);
 #endif
-	object->infoMessage(QString::fromLocal8Bit(status));
+	object->infoMessage(TQString::fromLocal8Bit(status));
 	delete [] status;
 }

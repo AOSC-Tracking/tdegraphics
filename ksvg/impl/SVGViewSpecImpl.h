@@ -47,7 +47,7 @@ public:
 	DOM::DOMString transformString() const;
 	DOM::DOMString viewTargetString() const;
 
-	bool parseViewSpec(const QString &);
+	bool parseViewSpec(const TQString &);
 
 private:
 	SVGTransformListImpl *m_transform;

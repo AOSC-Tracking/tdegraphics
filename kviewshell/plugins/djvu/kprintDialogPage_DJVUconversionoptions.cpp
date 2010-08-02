@@ -19,22 +19,22 @@
  ***************************************************************************/
 
 #include <klocale.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 #include <kdebug.h>
 
 #include "kprintDialogPage_DJVUconversionoptions.h"
 #include "kprintDialogPage_DJVUconversionoptions_basewidget.h"
 
-KPrintDialogPage_DJVUConversionOptions::KPrintDialogPage_DJVUConversionOptions( QWidget *parent, const char *name )
+KPrintDialogPage_DJVUConversionOptions::KPrintDialogPage_DJVUConversionOptions( TQWidget *parent, const char *name )
   : KPrintDialogPage( parent, name )
 {
   setTitle( i18n("DJVU to PS Conversion") );
 
-  kprintDialogPage_pageoptions_baseLayout = new QVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout"); 
+  kprintDialogPage_pageoptions_baseLayout = new TQVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout"); 
   if (kprintDialogPage_pageoptions_baseLayout == 0) {
     kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create layout" << endl;
     return;
@@ -48,12 +48,12 @@ KPrintDialogPage_DJVUConversionOptions::KPrintDialogPage_DJVUConversionOptions( 
 
 
 
-void KPrintDialogPage_DJVUConversionOptions::getOptions( QMap<QString,QString>& opts, bool )
+void KPrintDialogPage_DJVUConversionOptions::getOptions( TQMap<TQString,TQString>& opts, bool )
 {
   if (wdg == 0) 
     return;
 
-  opts["kde-kdjvu-pslevel"] = QString::number(wdg->psLevel->currentItem() + 1);
+  opts["kde-kdjvu-pslevel"] = TQString::number(wdg->psLevel->currentItem() + 1);
 
   kdDebug() << "getOptions: renderMode = " << wdg->renderMode->currentItem() << endl;
   switch (wdg->renderMode->currentItem())
@@ -73,7 +73,7 @@ void KPrintDialogPage_DJVUConversionOptions::getOptions( QMap<QString,QString>& 
 }
 
 
-void KPrintDialogPage_DJVUConversionOptions::setOptions( const QMap<QString,QString>& opts )
+void KPrintDialogPage_DJVUConversionOptions::setOptions( const TQMap<TQString,TQString>& opts )
 {
   if (wdg == 0)
     return;
@@ -92,7 +92,7 @@ void KPrintDialogPage_DJVUConversionOptions::setOptions( const QMap<QString,QStr
   }
 
   // Set render mode, taking "color" as default
-  QString op = opts["kde-kdjvu-rendermode"];
+  TQString op = opts["kde-kdjvu-rendermode"];
   if (op == "black-and-white")
   {
     wdg->renderMode->setCurrentItem(1);
@@ -112,7 +112,7 @@ void KPrintDialogPage_DJVUConversionOptions::setOptions( const QMap<QString,QStr
 }
 
 
-bool KPrintDialogPage_DJVUConversionOptions::isValid( QString& )
+bool KPrintDialogPage_DJVUConversionOptions::isValid( TQString& )
 {
   return true;
 }

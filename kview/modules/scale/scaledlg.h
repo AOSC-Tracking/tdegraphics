@@ -21,20 +21,20 @@
 #ifndef __scaledlg_h_
 #define __scaledlg_h_
 
-#include <qobject.h>
+#include <tqobject.h>
 
-class QLabel;
+class TQLabel;
 class KFloatSpinBox;
 class KComboBox;
-class QCheckBox;
-class QVBox;
-class QSize;
+class TQCheckBox;
+class TQVBox;
+class TQSize;
 
 class ScaleDlg : public QObject
 {
 	Q_OBJECT
 	public:
-		ScaleDlg( const QSize & originalsize, QVBox * parent, const char * name = 0 );
+		ScaleDlg( const TQSize & originalsize, TQVBox * parent, const char * name = 0 );
 		~ScaleDlg();
 
 	private slots:
@@ -49,7 +49,7 @@ class ScaleDlg : public QObject
 		void slotChangeResolutionUnit( int );
 
 	private:
-		QSize m_origsize;
+		TQSize m_origsize;
 		int m_newsizeunit;
 		int m_newsizeunit2;
 		int m_resolutionunit;
@@ -57,21 +57,21 @@ class ScaleDlg : public QObject
 		float m_newwidth, m_newheight; // in Pixel
 		float m_resx, m_resy; // in dpi
 
-		QLabel * m_pOldWidth;
-		QLabel * m_pOldHeight;
+		TQLabel * m_pOldWidth;
+		TQLabel * m_pOldHeight;
 		KFloatSpinBox * m_pNewWidth;
 		KFloatSpinBox * m_pNewHeight;
 		KComboBox * m_pNewSizeUnit;
 		KFloatSpinBox * m_pRatioX;
 		KFloatSpinBox * m_pRatioY;
-		QCheckBox * m_pLinkRatio;
+		TQCheckBox * m_pLinkRatio;
 
 		KFloatSpinBox * m_pNewWidth2;
 		KFloatSpinBox * m_pNewHeight2;
 		KComboBox * m_pNewSizeUnit2;
 		KFloatSpinBox * m_pResolutionX;
 		KFloatSpinBox * m_pResolutionY;
-		QCheckBox * m_pLinkResolution;
+		TQCheckBox * m_pLinkResolution;
 		KComboBox * m_pResolutionUnit;
 };
 

@@ -20,7 +20,7 @@
 #ifndef __SVGPATHPARSER_H__
 #define __SVGPATHPARSER_H__
 
-class QString;
+class TQString;
 
 namespace KSVG
 {
@@ -41,7 +41,7 @@ namespace KSVG
 class SVGPathParser
 {
 public:
-	void parseSVG( const QString &d, bool process = false );
+	void parseSVG( const TQString &d, bool process = false );
 
 	static const char *getCoord( const char *, double & );
 

@@ -26,8 +26,8 @@
 
 #include "pmsolidobject.h"
 #include "pmvector.h"
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 #include <math.h>
 
 class PMViewStructure;
@@ -60,7 +60,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMLathe( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -68,18 +68,18 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMLatheEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmlathe" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmlathe" ); }
 
    /** */
    virtual void createMemento( );
@@ -95,21 +95,21 @@ public:
    virtual bool multipleSelectControlPoints( ) const { return true; }
    /** */
    virtual void addObjectActions( const PMControlPointList&,
-                                  QPtrList<PMObjectAction>& );
+                                  TQPtrList<PMObjectAction>& );
    /** */
    virtual void objectActionCalled( const PMObjectAction*,
                                     const PMControlPointList&,
-                                    const QPtrList<PMVector>&,
+                                    const TQPtrList<PMVector>&,
                                     const PMVector& );
 
    /**
     * Returns the spline points
     */
-   QValueList<PMVector> points( ) const { return m_points; }
+   TQValueList<PMVector> points( ) const { return m_points; }
    /**
     * Sets the spline points
     */
-   void setPoints( const QValueList<PMVector>& points );
+   void setPoints( const TQValueList<PMVector>& points );
    /**
     * Returns the number of spline points
     */
@@ -159,17 +159,17 @@ private:
     * Object action. Adds a spline point
     */
    void splitSegment( const PMControlPointList& cp,
-                      const QPtrList<PMVector>& cpViewPosition,
+                      const TQPtrList<PMVector>& cpViewPosition,
                       const PMVector& clickPosition );
    /**
     * Object action. Removes a spline point
     */
    void joinSegments( const PMControlPointList& cp,
-                      const QPtrList<PMVector>& cpViewPosition,
+                      const TQPtrList<PMVector>& cpViewPosition,
                       const PMVector& clickPosition );
 
-   void stringToValues( const QString& str );
-   QString valuesToString( ) const;
+   void stringToValues( const TQString& str );
+   TQString valuesToString( ) const;
 
    /**
     * IDs for @ref PMMementoData
@@ -180,7 +180,7 @@ private:
     */
    enum PMLatheActionID { PMSplitSegmentID, PMJoinSegmentsID };
    SplineType m_splineType;
-   QValueList<PMVector> m_points;
+   TQValueList<PMVector> m_points;
    bool m_sturm;
 
    static int s_rSteps;

@@ -22,8 +22,8 @@
 #endif
 #include "kuickconfigdlg.h"
 
-#include <qkeycode.h>
-#include <qvbox.h>
+#include <tqkeycode.h>
+#include <tqvbox.h>
 
 #include <kaccel.h>
 #include <kconfig.h>
@@ -38,14 +38,14 @@
 #include "kuickdata.h"
 
 
-KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
+KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, TQWidget *parent,
 				      const char *name, bool modal )
     : KDialogBase( Tabbed, i18n("Configure"),
 		     Help | Default | Ok | Apply | Cancel, Ok,
 		     parent, name, modal )
 {
     coll = _coll;
-    QVBox *box = addVBoxPage( i18n("&General") );
+    TQVBox *box = addVBoxPage( i18n("&General") );
     generalWidget = new GeneralWidget( box, "general widget" );
 
     box = addVBoxPage( i18n("&Modifications") );
@@ -64,7 +64,7 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     box = addVBoxPage( i18n("Bro&wser Shortcuts") );
     browserKeyChooser = new KKeyChooser( coll, box );
 
-    connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));
+    connect( this, TQT_SIGNAL( defaultClicked() ), TQT_SLOT( resetDefaults() ));
 }
 
 KuickConfigDialog::~KuickConfigDialog()

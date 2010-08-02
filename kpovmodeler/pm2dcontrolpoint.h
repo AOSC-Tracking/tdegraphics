@@ -25,7 +25,7 @@
 
 
 #include "pmcontrolpoint.h"
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 /**
  * Class for free moveable control points
@@ -41,7 +41,7 @@ public:
     * Creates a PM2DControlPoint with id. Point has to be a 2D vector.
     */
    PM2DControlPoint( const PMVector& point, CPType type,
-                     int id, const QString& description );
+                     int id, const TQString& description );
    /**
     * Deletes the PM2DControlPoint
     */
@@ -128,7 +128,7 @@ private:
    double m_thirdCoordinate;
    double m_scale;
    PM2DControlPoint* m_pBasePoint;
-   QPtrList<PM2DControlPoint> m_linkedPoints;
+   TQPtrList<PM2DControlPoint> m_linkedPoints;
    PM2DControlPoint* m_pLatheLink;
 };
 

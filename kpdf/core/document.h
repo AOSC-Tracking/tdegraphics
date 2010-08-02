@@ -11,10 +11,10 @@
 #ifndef _KPDF_DOCUMENT_H_
 #define _KPDF_DOCUMENT_H_
 
-#include <qobject.h>
-#include <qvaluevector.h>
-#include <qstring.h>
-#include <qdom.h>
+#include <tqobject.h>
+#include <tqvaluevector.h>
+#include <tqstring.h>
+#include <tqdom.h>
 
 #include <kmimetype.h>
 
@@ -51,11 +51,11 @@ class KPDFDocument : public QObject
 {
     Q_OBJECT
     public:
-        KPDFDocument( QWidget *widget );
+        KPDFDocument( TQWidget *widget );
         ~KPDFDocument();
 
         // document handling
-        bool openDocument( const QString & docFile, const KURL & url, const KMimeType::Ptr &mime );
+        bool openDocument( const TQString & docFile, const KURL & url, const KMimeType::Ptr &mime );
         void closeDocument();
 
         // misc methods
@@ -67,7 +67,7 @@ class KPDFDocument : public QObject
         enum Permission { AllowModify = 1, AllowCopy = 2, AllowPrint = 4, AllowNotes = 8 };
 
         // returns the widget where the document is shown
-        QWidget *widget() const;
+        TQWidget *widget() const;
 
         // query methods (const ones)
         bool isOpened() const;
@@ -81,7 +81,7 @@ class KPDFDocument : public QObject
         bool isAllowed( int /*Document::Permisison(s)*/ ) const;
         bool historyAtBegin() const;
         bool historyAtEnd() const;
-        QString getMetaData( const QString & key, const QString & option = QString() ) const;
+        TQString getMetaData( const TQString & key, const TQString & option = TQString() ) const;
         bool supportsSearching() const;
         bool hasFonts() const;
         void putFontInfo(KListView *list);
@@ -92,12 +92,12 @@ class KPDFDocument : public QObject
         void setPrevViewport();
         void setNextViewport();
         void setNextDocumentViewport( const DocumentViewport & viewport );
-        void requestPixmaps( const QValueList< PixmapRequest * > & requests );
+        void requestPixmaps( const TQValueList< PixmapRequest * > & requests );
         void requestTextPage( uint page );
 
         enum SearchType { NextMatch, PrevMatch, AllDoc, GoogleAll, GoogleAny };
-        bool searchText( int searchID, const QString & text, bool fromStart, bool caseSensitive,
-                         SearchType type, bool moveViewport, const QColor & color, bool noDialogs = false );
+        bool searchText( int searchID, const TQString & text, bool fromStart, bool caseSensitive,
+                         SearchType type, bool moveViewport, const TQColor & color, bool noDialogs = false );
         bool continueSearch( int searchID );
         void resetSearch( int searchID );
         bool continueLastSearch();
@@ -125,11 +125,11 @@ class KPDFDocument : public QObject
         int getFreeMemory();
         // more private functions
         void loadDocumentInfo();
-        QString giveAbsolutePath( const QString & fileName );
-        bool openRelativeFile( const QString & fileName );
+        TQString giveAbsolutePath( const TQString & fileName );
+        bool openRelativeFile( const TQString & fileName );
 
         Generator * generator;
-        QValueVector< KPDFPage * > pages_vector;
+        TQValueVector< KPDFPage * > pages_vector;
         class KPDFDocumentPrivate * d;
 
     private slots:
@@ -173,8 +173,8 @@ class DocumentViewport
         /** class methods **/
         // allowed constructors, don't use others
         DocumentViewport( int pageNumber = -1 );
-        DocumentViewport( const QString & xmlDesc );
-        QString toString() const;
+        DocumentViewport( const TQString & xmlDesc );
+        TQString toString() const;
         bool operator==( const DocumentViewport & vp ) const;
 };
 
@@ -193,14 +193,14 @@ class DocumentInfo : public QDomDocument
          * Sets a value for a special key. The title should be an i18n'ed
          * string, since it's used in the document information dialog.
          */
-        void set( const QString &key, const QString &value,
-                  const QString &title = QString() );
+        void set( const TQString &key, const TQString &value,
+                  const TQString &title = TQString() );
 
         /**
          * Returns the value for a given key or an empty string when the
          * key doesn't exist.
          */
-        QString get( const QString &key ) const;
+        TQString get( const TQString &key ) const;
 };
 
 /**

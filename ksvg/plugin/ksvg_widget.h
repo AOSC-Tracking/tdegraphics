@@ -21,7 +21,7 @@
 #ifndef KSVGWidget_H
 #define KSVGWidget_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 #include <kpopupmenu.h>
 
@@ -32,7 +32,7 @@ class KSVGWidget : public QWidget
 {
 Q_OBJECT
 public:
-	KSVGWidget(KSVGPlugin *part, QWidget *parent, const char *name);
+	KSVGWidget(KSVGPlugin *part, TQWidget *parent, const char *name);
 	virtual ~KSVGWidget();
 
 	KSVGPlugin *part() const;
@@ -40,26 +40,26 @@ public:
 	void reset();
 
 protected:
-	virtual void paintEvent(QPaintEvent *);
+	virtual void paintEvent(TQPaintEvent *);
 	
-	virtual void mouseMoveEvent(QMouseEvent *);
-	virtual void mousePressEvent(QMouseEvent *);
-	virtual void mouseReleaseEvent(QMouseEvent *);
+	virtual void mouseMoveEvent(TQMouseEvent *);
+	virtual void mousePressEvent(TQMouseEvent *);
+	virtual void mouseReleaseEvent(TQMouseEvent *);
 
-	virtual void keyPressEvent(QKeyEvent *);
-	virtual void keyReleaseEvent(QKeyEvent *);
+	virtual void keyPressEvent(TQKeyEvent *);
+	virtual void keyReleaseEvent(TQKeyEvent *);
 
-	virtual void resizeEvent(QResizeEvent *);
+	virtual void resizeEvent(TQResizeEvent *);
 
 signals:
-	void browseURL(const QString &);
-	void redraw(const QRect &);
+	void browseURL(const TQString &);
+	void redraw(const TQRect &);
 
 private:
-	KSVG::SVGMouseEventImpl *newMouseEvent(KSVG::SVGEvent::EventId id, QMouseEvent *event);
+	KSVG::SVGMouseEventImpl *newMouseEvent(KSVG::SVGEvent::EventId id, TQMouseEvent *event);
 
-	QPoint m_panningPos;
-	QPoint m_oldPanningPos;
+	TQPoint m_panningPos;
+	TQPoint m_oldPanningPos;
 	KSVGPlugin *m_part;
 };
 

@@ -21,7 +21,7 @@
 #ifndef __KDRAWCOLORS_H__
 #define __KDRAWCOLORS_H__
 
-#include <qpopupmenu.h>
+#include <tqpopupmenu.h>
 
 #include <kcolordialog.h>
 
@@ -32,7 +32,7 @@ class KDrawColors : public KColorGrid
 {
   Q_OBJECT
 public:
-  KDrawColors(QWidget *parent);
+  KDrawColors(TQWidget *parent);
 
   //bool hasColor(uint);
 
@@ -40,8 +40,8 @@ signals:
   void newColor(uint);
 
 protected:
-  virtual void paintCell( QPainter*, int, int );
-  virtual void mouseReleaseEvent(QMouseEvent*);
+  virtual void paintCell( TQPainter*, int, int );
+  virtual void mouseReleaseEvent(TQMouseEvent*);
 
   int selected;
 };
@@ -50,20 +50,20 @@ class KCustomColors : public KDrawColors
 {
   Q_OBJECT
 public:
-  KCustomColors(QWidget *parent);
+  KCustomColors(TQWidget *parent);
   ~KCustomColors();
 
   void addColor(uint);
   void clear();
 
 protected:
-  virtual void mouseDoubleClickEvent(QMouseEvent*);
+  virtual void mouseDoubleClickEvent(TQMouseEvent*);
   int getFreeCell();
   void freeAllCells();
 
 protected:
   bool *freecells;
-  QPopupMenu *popup;
+  TQPopupMenu *popup;
 };
 
 class KSysColors : public KDrawColors
@@ -71,7 +71,7 @@ class KSysColors : public KDrawColors
   Q_OBJECT
 public:
 
-  KSysColors(QWidget *parent);
+  KSysColors(TQWidget *parent);
 
 };
 

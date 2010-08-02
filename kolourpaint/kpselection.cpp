@@ -31,10 +31,10 @@
 
 #include <kpselection.h>
 
-#include <qfont.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qwmatrix.h>
+#include <tqfont.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqwmatrix.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -46,27 +46,27 @@
 
 
 kpSelection::kpSelection (const kpSelectionTransparency &transparency)
-    : QObject (),
+    : TQObject (),
       m_type (kpSelection::Rectangle),
       m_pixmap (0)
 {
     setTransparency (transparency);
 }
 
-kpSelection::kpSelection (Type type, const QRect &rect, const QPixmap &pixmap,
+kpSelection::kpSelection (Type type, const TQRect &rect, const TQPixmap &pixmap,
                           const kpSelectionTransparency &transparency)
-    : QObject (),
+    : TQObject (),
       m_type (type),
       m_rect (rect)
 {
     calculatePoints ();
-    m_pixmap = pixmap.isNull () ? 0 : new QPixmap (pixmap);
+    m_pixmap = pixmap.isNull () ? 0 : new TQPixmap (pixmap);
 
     setTransparency (transparency);
 }
 
-kpSelection::kpSelection (Type type, const QRect &rect, const kpSelectionTransparency &transparency)
-    : QObject (),
+kpSelection::kpSelection (Type type, const TQRect &rect, const kpSelectionTransparency &transparency)
+    : TQObject (),
       m_type (type),
       m_rect (rect),
       m_pixmap (0)
@@ -76,10 +76,10 @@ kpSelection::kpSelection (Type type, const QRect &rect, const kpSelectionTranspa
     setTransparency (transparency);
 }
 
-kpSelection::kpSelection (const QRect &rect,
-                          const QValueVector <QString> &textLines_,
+kpSelection::kpSelection (const TQRect &rect,
+                          const TQValueVector <TQString> &textLines_,
                           const kpTextStyle &textStyle_)
-    : QObject (),
+    : TQObject (),
       m_type (Text),
       m_rect (rect),
       m_pixmap (0),
@@ -90,21 +90,21 @@ kpSelection::kpSelection (const QRect &rect,
     setTextLines (textLines_);
 }
 
-kpSelection::kpSelection (const QPointArray &points, const QPixmap &pixmap,
+kpSelection::kpSelection (const TQPointArray &points, const TQPixmap &pixmap,
                           const kpSelectionTransparency &transparency)
-    : QObject (),
+    : TQObject (),
       m_type (Points),
       m_rect (points.boundingRect ()),
       m_points (points)
 {
-    m_pixmap = pixmap.isNull () ? 0 : new QPixmap (pixmap);
+    m_pixmap = pixmap.isNull () ? 0 : new TQPixmap (pixmap);
     m_points.detach ();
 
     setTransparency (transparency);
 }
 
-kpSelection::kpSelection (const QPointArray &points, const kpSelectionTransparency &transparency)
-    : QObject (),
+kpSelection::kpSelection (const TQPointArray &points, const kpSelectionTransparency &transparency)
+    : TQObject (),
       m_type (Points),
       m_rect (points.boundingRect ()),
       m_points (points),
@@ -116,11 +116,11 @@ kpSelection::kpSelection (const QPointArray &points, const kpSelectionTransparen
 }
 
 kpSelection::kpSelection (const kpSelection &rhs)
-    : QObject (),
+    : TQObject (),
       m_type (rhs.m_type),
       m_rect (rhs.m_rect),
       m_points (rhs.m_points),
-      m_pixmap (rhs.m_pixmap ? new QPixmap (*rhs.m_pixmap) : 0),
+      m_pixmap (rhs.m_pixmap ? new TQPixmap (*rhs.m_pixmap) : 0),
       m_textLines (rhs.m_textLines),
       m_textStyle (rhs.m_textStyle),
       m_transparency (rhs.m_transparency),
@@ -140,7 +140,7 @@ kpSelection &kpSelection::operator= (const kpSelection &rhs)
     m_points.detach ();
 
     delete m_pixmap;
-    m_pixmap = rhs.m_pixmap ? new QPixmap (*rhs.m_pixmap) : 0;
+    m_pixmap = rhs.m_pixmap ? new TQPixmap (*rhs.m_pixmap) : 0;
 
     m_textLines = rhs.m_textLines;
     m_textStyle = rhs.m_textStyle;
@@ -153,11 +153,11 @@ kpSelection &kpSelection::operator= (const kpSelection &rhs)
 
 
 // friend
-QDataStream &operator<< (QDataStream &stream, const kpSelection &selection)
+TQDataStream &operator<< (TQDataStream &stream, const kpSelection &selection)
 {
 #if DEBUG_KP_SELECTION && 1
     kdDebug () << "kpSelection::operator<<(sel: rect=" << selection.boundingRect ()
-               << " pixmap rect=" << (selection.pixmap () ? selection.pixmap ()->rect () : QRect ())
+               << " pixmap rect=" << (selection.pixmap () ? selection.pixmap ()->rect () : TQRect ())
                << endl;
 #endif
     stream << int (selection.m_type);
@@ -169,10 +169,10 @@ QDataStream &operator<< (QDataStream &stream, const kpSelection &selection)
 #endif
 
     // TODO: need for text?
-    //       For now we just use QTextDrag for Text Selections so this point is mute.
+    //       For now we just use TQTextDrag for Text Selections so this point is mute.
     if (selection.m_pixmap)
     {
-        const QImage image = kpPixmapFX::convertToImage (*selection.m_pixmap);
+        const TQImage image = kpPixmapFX::convertToImage (*selection.m_pixmap);
     #if DEBUG_KP_SELECTION && 1
         kdDebug () << "\twrote image rect=" << image.rect () << endl;
     #endif
@@ -183,7 +183,7 @@ QDataStream &operator<< (QDataStream &stream, const kpSelection &selection)
     #if DEBUG_KP_SELECTION && 1
         kdDebug () << "\twrote no image because no pixmap" << endl;
     #endif
-        stream << QImage ();
+        stream << TQImage ();
     }
 
     //stream << selection.m_textLines;
@@ -193,7 +193,7 @@ QDataStream &operator<< (QDataStream &stream, const kpSelection &selection)
 }
 
 // friend
-QDataStream &operator>> (QDataStream &stream, kpSelection &selection)
+TQDataStream &operator>> (TQDataStream &stream, kpSelection &selection)
 {
     selection.readFromStream (stream);
     return stream;
@@ -202,7 +202,7 @@ QDataStream &operator>> (QDataStream &stream, kpSelection &selection)
 // public
 // TODO: KolourPaint has not been tested against invalid or malicious
 //       clipboard data [Bug #28].
-void kpSelection::readFromStream (QDataStream &stream,
+void kpSelection::readFromStream (TQDataStream &stream,
                                   const kpPixmapFX::WarnAboutLossInfo &wali)
 {
 #if DEBUG_KP_SELECTION && 1
@@ -223,11 +223,11 @@ void kpSelection::readFromStream (QDataStream &stream,
     //kdDebug () << "\tpoints=" << m_points << endl;
 #endif
 
-    QImage image;
+    TQImage image;
     stream >> image;
     delete m_pixmap;
     if (!image.isNull ())
-        m_pixmap = new QPixmap (kpPixmapFX::convertToPixmap (image, false/*no dither*/, wali));
+        m_pixmap = new TQPixmap (kpPixmapFX::convertToPixmap (image, false/*no dither*/, wali));
     else
         m_pixmap = 0;
 #if DEBUG_KP_SELECTION && 1
@@ -276,19 +276,19 @@ void kpSelection::calculatePoints ()
 
         // top
         for (int x = 0; x < m_rect.width (); x++)
-            m_points [pointsUpto++] = QPoint (m_rect.x () + x, m_rect.top ());
+            m_points [pointsUpto++] = TQPoint (m_rect.x () + x, m_rect.top ());
 
         // right
         for (int y = 0; y < m_rect.height (); y++)
-            m_points [pointsUpto++] = QPoint (m_rect.right (), m_rect.y () + y);
+            m_points [pointsUpto++] = TQPoint (m_rect.right (), m_rect.y () + y);
 
         // bottom
         for (int x = m_rect.width () - 1; x >= 0; x--)
-            m_points [pointsUpto++] = QPoint (m_rect.x () + x, m_rect.bottom ());
+            m_points [pointsUpto++] = TQPoint (m_rect.x () + x, m_rect.bottom ());
 
         // left
         for (int y = m_rect.height () - 1; y >= 0; y--)
-            m_points [pointsUpto++] = QPoint (m_rect.left (), m_rect.y () + y);
+            m_points [pointsUpto++] = TQPoint (m_rect.left (), m_rect.y () + y);
 
         return;
     }
@@ -317,7 +317,7 @@ bool kpSelection::isText () const
 }
 
 // public
-QString kpSelection::name () const
+TQString kpSelection::name () const
 {
     if (m_type == Text)
         return i18n ("Text");
@@ -337,30 +337,30 @@ int kpSelection::size () const
 
 
 // public
-QBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
+TQBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
 {
     if (!m_rect.isValid ())
     {
         kdError () << "kpSelection::maskForOwnType() boundingRect invalid" << endl;
-        return QBitmap ();
+        return TQBitmap ();
     }
 
 
     if (isRectangular ())
     {
         if (nullForRectangular)
-            return QBitmap ();
+            return TQBitmap ();
 
-        QBitmap maskBitmap (m_rect.width (), m_rect.height ());
+        TQBitmap maskBitmap (m_rect.width (), m_rect.height ());
         maskBitmap.fill (Qt::color1/*opaque*/);
         return maskBitmap;
     }
 
 
-    QBitmap maskBitmap (m_rect.width (), m_rect.height ());
+    TQBitmap maskBitmap (m_rect.width (), m_rect.height ());
     maskBitmap.fill (Qt::color0/*transparent*/);
 
-    QPainter painter;
+    TQPainter painter;
     painter.begin (&maskBitmap);
     painter.setPen (Qt::color1)/*opaque*/;
     painter.setBrush (Qt::color1/*opaque*/);
@@ -369,7 +369,7 @@ QBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
         painter.drawEllipse (0, 0, m_rect.width (), m_rect.height ());
     else if (m_type == kpSelection::Points)
     {
-        QPointArray points = m_points;
+        TQPointArray points = m_points;
         points.detach ();
         points.translate (-m_rect.x (), -m_rect.y ());
 
@@ -384,13 +384,13 @@ QBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
 
 
 // public
-QPoint kpSelection::topLeft () const
+TQPoint kpSelection::topLeft () const
 {
     return m_rect.topLeft ();
 }
 
 // public
-QPoint kpSelection::point () const
+TQPoint kpSelection::point () const
 {
     return m_rect.topLeft ();
 }
@@ -419,7 +419,7 @@ void kpSelection::moveBy (int dx, int dy)
     if (dx == 0 && dy == 0)
         return;
 
-    QRect oldRect = boundingRect ();
+    TQRect oldRect = boundingRect ();
 
 #if DEBUG_KP_SELECTION && 1
     kdDebug () << "\toldRect=" << oldRect << endl;
@@ -438,41 +438,41 @@ void kpSelection::moveBy (int dx, int dy)
 // public
 void kpSelection::moveTo (int dx, int dy)
 {
-    moveTo (QPoint (dx, dy));
+    moveTo (TQPoint (dx, dy));
 }
 
 // public
-void kpSelection::moveTo (const QPoint &topLeftPoint)
+void kpSelection::moveTo (const TQPoint &topLeftPoint)
 {
 #if DEBUG_KP_SELECTION && 1
     kdDebug () << "kpSelection::moveTo(" << topLeftPoint << ")" << endl;
 #endif
-    QRect oldBoundingRect = boundingRect ();
+    TQRect oldBoundingRect = boundingRect ();
 #if DEBUG_KP_SELECTION && 1
     kdDebug () << "\toldBoundingRect=" << oldBoundingRect << endl;
 #endif
     if (topLeftPoint == oldBoundingRect.topLeft ())
         return;
 
-    QPoint delta (topLeftPoint - oldBoundingRect.topLeft ());
+    TQPoint delta (topLeftPoint - oldBoundingRect.topLeft ());
     moveBy (delta.x (), delta.y ());
 }
 
 
 // public
-QPointArray kpSelection::points () const
+TQPointArray kpSelection::points () const
 {
     return m_points;
 }
 
 // public
-QPointArray kpSelection::pointArray () const
+TQPointArray kpSelection::pointArray () const
 {
     return m_points;
 }
 
 // public
-QRect kpSelection::boundingRect () const
+TQRect kpSelection::boundingRect () const
 {
     return m_rect;
 }
@@ -490,9 +490,9 @@ int kpSelection::height () const
 }
 
 // public
-bool kpSelection::contains (const QPoint &point) const
+bool kpSelection::contains (const TQPoint &point) const
 {
-    QRect rect = boundingRect ();
+    TQRect rect = boundingRect ();
 
 #if DEBUG_KP_SELECTION && 1
     kdDebug () << "kpSelection::contains(" << point
@@ -504,7 +504,7 @@ bool kpSelection::contains (const QPoint &point) const
     if (!rect.contains (point))
         return false;
 
-    // OPT: QRegion is probably incredibly slow - cache
+    // OPT: TQRegion is probably incredibly slow - cache
     // We can't use the m_pixmap (if avail) and get the transparency of
     // the pixel at that point as it may be transparent but still within the
     // border
@@ -514,11 +514,11 @@ bool kpSelection::contains (const QPoint &point) const
     case kpSelection::Text:
         return true;
     case kpSelection::Ellipse:
-        return QRegion (m_rect, QRegion::Ellipse).contains (point);
+        return TQRegion (m_rect, TQRegion::Ellipse).contains (point);
     case kpSelection::Points:
         // TODO: make this always include the border
         //       (draw up a rect sel in this mode to see what I mean)
-        return QRegion (m_points, false/*even-odd algo*/).contains (point);
+        return TQRegion (m_points, false/*even-odd algo*/).contains (point);
     default:
         return false;
     }
@@ -527,25 +527,25 @@ bool kpSelection::contains (const QPoint &point) const
 // public
 bool kpSelection::contains (int x, int y)
 {
-    return contains (QPoint (x, y));
+    return contains (TQPoint (x, y));
 }
 
 
 // public
-QPixmap *kpSelection::pixmap () const
+TQPixmap *kpSelection::pixmap () const
 {
     return m_pixmap;
 }
 
 // public
-void kpSelection::setPixmap (const QPixmap &pixmap)
+void kpSelection::setPixmap (const TQPixmap &pixmap)
 {
     delete m_pixmap;
     // TODO: If isText(), setting pixmap() to 0 is unexpected (implies
     //       it's a border, not a text box) but saves memory when using
-    //       that kpSelection::setPixmap (QPixmap ()) hack.
-    m_pixmap = pixmap.isNull () ? 0 : new QPixmap (pixmap);
-    QRect changedRect = boundingRect ();
+    //       that kpSelection::setPixmap (TQPixmap ()) hack.
+    m_pixmap = pixmap.isNull () ? 0 : new TQPixmap (pixmap);
+    TQRect changedRect = boundingRect ();
 
     if (m_pixmap)
     {
@@ -572,11 +572,11 @@ void kpSelection::setPixmap (const QPixmap &pixmap)
             }
 
             m_type = kpSelection::Rectangle;
-            m_rect = QRect (m_rect.x (), m_rect.y (),
+            m_rect = TQRect (m_rect.x (), m_rect.y (),
                             m_pixmap->width (), m_pixmap->height ());
             calculatePoints ();
 
-            m_textLines = QValueVector <QString> ();
+            m_textLines = TQValueVector <TQString> ();
 
             changedRect = changedRect.unite (boundingRect ());
         }
@@ -615,9 +615,9 @@ static QRgb mostContrastingRGB (QRgb val)
 }
 
 // private
-static void drawTextLines (QPainter *painter, QPainter *maskPainter,
-                           const QRect &rect,
-                           const QValueVector <QString> &textLines)
+static void drawTextLines (TQPainter *painter, TQPainter *maskPainter,
+                           const TQRect &rect,
+                           const TQValueVector <TQString> &textLines)
 {
     if (!painter->clipRegion ().isEmpty () || !maskPainter->clipRegion ().isEmpty ())
     {
@@ -638,13 +638,13 @@ static void drawTextLines (QPainter *painter, QPainter *maskPainter,
 
 
     // Can't do this because the line heights become
-    // >QFontMetrics::height() if you type Chinese characters (!) and then
+    // >TQFontMetrics::height() if you type Chinese characters (!) and then
     // the cursor gets out of sync.
     // PAINTER_CALL (drawText (rect, 0/*flags*/, text ()));
 
     
 #if 0
-    const QFontMetrics fontMetrics (painter->fontMetrics ());
+    const TQFontMetrics fontMetrics (painter->fontMetrics ());
 
     kdDebug () << "height=" << fontMetrics.height ()
                << " leading=" << fontMetrics.leading ()
@@ -655,10 +655,10 @@ static void drawTextLines (QPainter *painter, QPainter *maskPainter,
 #endif
 
 
-    PAINTER_CALL (setClipRect (rect, QPainter::CoordPainter/*transform*/));
+    PAINTER_CALL (setClipRect (rect, TQPainter::CoordPainter/*transform*/));
 
     int baseLine = rect.y () + painter->fontMetrics ().ascent ();
-    for (QValueVector <QString>::const_iterator it = textLines.begin ();
+    for (TQValueVector <TQString>::const_iterator it = textLines.begin ();
          it != textLines.end ();
          it++)
     {
@@ -671,25 +671,25 @@ static void drawTextLines (QPainter *painter, QPainter *maskPainter,
 }
 
 // private
-void kpSelection::paintOpaqueText (QPixmap *destPixmap, const QRect &docRect) const
+void kpSelection::paintOpaqueText (TQPixmap *destPixmap, const TQRect &docRect) const
 {
     if (!isText () || !m_textStyle.foregroundColor ().isOpaque ())
         return;
 
 
-    const QRect modifyingRect = docRect.intersect (boundingRect ());
+    const TQRect modifyingRect = docRect.intersect (boundingRect ());
     if (modifyingRect.isEmpty ())
         return;
 
 
-    QBitmap destPixmapMask;
-    QPainter destPixmapPainter, destPixmapMaskPainter;
+    TQBitmap destPixmapMask;
+    TQPainter destPixmapPainter, destPixmapMaskPainter;
 
     if (destPixmap->mask ())
     {
         if (m_textStyle.effectiveBackgroundColor ().isTransparent ())
         {
-            QRect modifyingRectRelPixmap = modifyingRect;
+            TQRect modifyingRectRelPixmap = modifyingRect;
             modifyingRectRelPixmap.moveBy (-docRect.x (), -docRect.y ());
 
             // Set the RGB of transparent pixels to foreground colour to avoid
@@ -746,14 +746,14 @@ void kpSelection::paintOpaqueText (QPixmap *destPixmap, const QRect &docRect) co
 }
 
 // private
-QPixmap kpSelection::transparentForegroundTextPixmap () const
+TQPixmap kpSelection::transparentForegroundTextPixmap () const
 {
     if (!isText () || !m_textStyle.foregroundColor ().isTransparent ())
-        return QPixmap ();
+        return TQPixmap ();
 
 
-    QPixmap pixmap (m_rect.width (), m_rect.height ());
-    QBitmap pixmapMask (m_rect.width (), m_rect.height ());
+    TQPixmap pixmap (m_rect.width (), m_rect.height ());
+    TQBitmap pixmapMask (m_rect.width (), m_rect.height ());
 
 
     // Iron out stupid case first
@@ -768,12 +768,12 @@ QPixmap kpSelection::transparentForegroundTextPixmap () const
     // -- Foreground transparent, background opaque --
 
 
-    QFont font = m_textStyle.font ();
-    // TODO: why doesn't "font.setStyleStrategy (QFont::NoAntialias);"
+    TQFont font = m_textStyle.font ();
+    // TODO: why doesn't "font.setStyleStrategy (TQFont::NoAntialias);"
     //       let us avoid the hack below?
 
 
-    QPainter pixmapPainter, pixmapMaskPainter;
+    TQPainter pixmapPainter, pixmapMaskPainter;
 
     pixmap.fill (m_textStyle.effectiveBackgroundColor ().toQColor ());
     pixmapPainter.begin (&pixmap);
@@ -784,7 +784,7 @@ QPixmap kpSelection::transparentForegroundTextPixmap () const
     // we can identify the transparent pixels for manually creating
     // the mask.
     pixmapPainter.setPen (
-        QColor (mostContrastingRGB (m_textStyle.effectiveBackgroundColor ().toQRgb () & RGB_MASK)));
+        TQColor (mostContrastingRGB (m_textStyle.effectiveBackgroundColor ().toQRgb () & RGB_MASK)));
     pixmapPainter.setFont (font);
 
 
@@ -794,7 +794,7 @@ QPixmap kpSelection::transparentForegroundTextPixmap () const
     pixmapMaskPainter.setFont (font);
 
 
-    QRect rect (textAreaRect ());
+    TQRect rect (textAreaRect ());
     rect.moveBy (-m_rect.x (), -m_rect.y ());
     ::drawTextLines (&pixmapPainter, &pixmapMaskPainter,
                      rect,
@@ -811,7 +811,7 @@ QPixmap kpSelection::transparentForegroundTextPixmap () const
 #if DEBUG_KP_SELECTION
     kdDebug () << "\tinvoking foreground transparency hack" << endl;
 #endif
-    QImage image = kpPixmapFX::convertToImage (pixmap);
+    TQImage image = kpPixmapFX::convertToImage (pixmap);
     QRgb backgroundRGB = image.pixel (0, 0);  // on textBorderSize()
 
     pixmapMaskPainter.begin (&pixmapMask);
@@ -838,7 +838,7 @@ QPixmap kpSelection::transparentForegroundTextPixmap () const
 }
 
 // public
-void kpSelection::paint (QPixmap *destPixmap, const QRect &docRect) const
+void kpSelection::paint (TQPixmap *destPixmap, const TQRect &docRect) const
 {
     if (!isText ())
     {
@@ -895,7 +895,7 @@ void kpSelection::calculateTextPixmap ()
 
     if (m_textStyle.foregroundColor().isOpaque ())
     {
-        m_pixmap = new QPixmap (m_rect.width (), m_rect.height ());
+        m_pixmap = new TQPixmap (m_rect.width (), m_rect.height ());
 
         if (usesBackgroundPixmapToPaint ())
             kpPixmapFX::fill (m_pixmap, kpColor::transparent);
@@ -904,24 +904,24 @@ void kpSelection::calculateTextPixmap ()
     }
     else
     {
-        m_pixmap = new QPixmap (transparentForegroundTextPixmap ());
+        m_pixmap = new TQPixmap (transparentForegroundTextPixmap ());
     }
 }
 
 
 // public static
-QString kpSelection::textForTextLines (const QValueVector <QString> &textLines_)
+TQString kpSelection::textForTextLines (const TQValueVector <TQString> &textLines_)
 {
     if (textLines_.isEmpty ())
-        return QString::null;
+        return TQString::null;
 
-    QString bigString = textLines_ [0];
+    TQString bigString = textLines_ [0];
 
-    for (QValueVector <QString>::const_iterator it = textLines_.begin () + 1;
+    for (TQValueVector <TQString>::const_iterator it = textLines_.begin () + 1;
          it != textLines_.end ();
          it++)
     {
-        bigString += QString::fromLatin1 ("\n");
+        bigString += TQString::fromLatin1 ("\n");
         bigString += (*it);
     }
 
@@ -929,30 +929,30 @@ QString kpSelection::textForTextLines (const QValueVector <QString> &textLines_)
 }
 
 // public
-QString kpSelection::text () const
+TQString kpSelection::text () const
 {
     if (!isText ())
     {
-        return QString::null;
+        return TQString::null;
     }
 
     return textForTextLines (m_textLines);
 }
 
 // public
-QValueVector <QString> kpSelection::textLines () const
+TQValueVector <TQString> kpSelection::textLines () const
 {
     if (!isText ())
     {
         kdError () << "kpSelection::textLines() not a text selection" << endl;
-        return QValueVector <QString> ();
+        return TQValueVector <TQString> ();
     }
 
     return m_textLines;
 }
 
 // public
-void kpSelection::setTextLines (const QValueVector <QString> &textLines_)
+void kpSelection::setTextLines (const TQValueVector <TQString> &textLines_)
 {
     if (!isText ())
     {
@@ -964,7 +964,7 @@ void kpSelection::setTextLines (const QValueVector <QString> &textLines_)
     if (m_textLines.isEmpty ())
     {
         kdError () << "kpSelection::setTextLines() passed no lines" << endl;
-        m_textLines.push_back (QString::null);
+        m_textLines.push_back (TQString::null);
     }
     calculateTextPixmap ();
     emit changed (boundingRect ());
@@ -977,22 +977,22 @@ int kpSelection::textBorderSize ()
 }
 
 // public
-QRect kpSelection::textAreaRect () const
+TQRect kpSelection::textAreaRect () const
 {
     if (!isText ())
     {
         kdError () << "kpSelection::textAreaRect() not a text selection" << endl;
-        return QRect ();
+        return TQRect ();
     }
 
-    return QRect (m_rect.x () + textBorderSize (),
+    return TQRect (m_rect.x () + textBorderSize (),
                   m_rect.y () + textBorderSize (),
                   m_rect.width () - textBorderSize () * 2,
                   m_rect.height () - textBorderSize () * 2);
 }
 
 // public
-bool kpSelection::pointIsInTextBorderArea (const QPoint &globalPoint) const
+bool kpSelection::pointIsInTextBorderArea (const TQPoint &globalPoint) const
 {
     if (!isText ())
     {
@@ -1004,7 +1004,7 @@ bool kpSelection::pointIsInTextBorderArea (const QPoint &globalPoint) const
 }
 
 // public
-bool kpSelection::pointIsInTextArea (const QPoint &globalPoint) const
+bool kpSelection::pointIsInTextArea (const TQPoint &globalPoint) const
 {
     if (!isText ())
     {
@@ -1025,9 +1025,9 @@ void kpSelection::textResize (int width, int height)
         return;
     }
 
-    QRect oldRect = m_rect;
+    TQRect oldRect = m_rect;
 
-    m_rect = QRect (oldRect.x (), oldRect.y (), width, height);
+    m_rect = TQRect (oldRect.x (), oldRect.y (), width, height);
 
     calculatePoints ();
     calculateTextPixmap ();
@@ -1049,9 +1049,9 @@ int kpSelection::minimumHeightForTextStyle (const kpTextStyle &)
 }
 
 // public static
-QSize kpSelection::minimumSizeForTextStyle (const kpTextStyle &textStyle)
+TQSize kpSelection::minimumSizeForTextStyle (const kpTextStyle &textStyle)
 {
-    return QSize (minimumWidthForTextStyle (textStyle),
+    return TQSize (minimumWidthForTextStyle (textStyle),
                   minimumHeightForTextStyle (textStyle));
 }
 
@@ -1061,7 +1061,7 @@ int kpSelection::preferredMinimumWidthForTextStyle (const kpTextStyle &textStyle
 {
     const int about15CharsWidth =
         textStyle.fontMetrics ().width (
-            QString::fromLatin1 ("1234567890abcde"));
+            TQString::fromLatin1 ("1234567890abcde"));
 
     const int preferredMinWidth =
         QMAX (150,
@@ -1082,9 +1082,9 @@ int kpSelection::preferredMinimumHeightForTextStyle (const kpTextStyle &textStyl
 }
 
 // public static
-QSize kpSelection::preferredMinimumSizeForTextStyle (const kpTextStyle &textStyle)
+TQSize kpSelection::preferredMinimumSizeForTextStyle (const kpTextStyle &textStyle)
 {
-    return QSize (preferredMinimumWidthForTextStyle (textStyle),
+    return TQSize (preferredMinimumWidthForTextStyle (textStyle),
                   preferredMinimumHeightForTextStyle (textStyle));
 }
 
@@ -1108,14 +1108,14 @@ int kpSelection::minimumHeight () const
 }
 
 // public
-QSize kpSelection::minimumSize () const
+TQSize kpSelection::minimumSize () const
 {
-    return QSize (minimumWidth (), minimumHeight ());
+    return TQSize (minimumWidth (), minimumHeight ());
 }
 
 
 // public
-int kpSelection::textRowForPoint (const QPoint &globalPoint) const
+int kpSelection::textRowForPoint (const TQPoint &globalPoint) const
 {
     if (!isText ())
     {
@@ -1126,7 +1126,7 @@ int kpSelection::textRowForPoint (const QPoint &globalPoint) const
     if (!pointIsInTextArea (globalPoint))
         return -1;
 
-    const QFontMetrics fontMetrics (m_textStyle.fontMetrics ());
+    const TQFontMetrics fontMetrics (m_textStyle.fontMetrics ());
 
     int row = (globalPoint.y () - textAreaRect ().y ()) /
                fontMetrics.lineSpacing ();
@@ -1137,7 +1137,7 @@ int kpSelection::textRowForPoint (const QPoint &globalPoint) const
 }
 
 // public
-int kpSelection::textColForPoint (const QPoint &globalPoint) const
+int kpSelection::textColForPoint (const TQPoint &globalPoint) const
 {
     if (!isText ())
     {
@@ -1151,7 +1151,7 @@ int kpSelection::textColForPoint (const QPoint &globalPoint) const
 
     const int localX = globalPoint.x () - textAreaRect ().x ();
 
-    const QFontMetrics fontMetrics (m_textStyle.fontMetrics ());
+    const TQFontMetrics fontMetrics (m_textStyle.fontMetrics ());
 
     // (should be 0 but call just in case)
     int charLocalLeft = fontMetrics.width (m_textLines [row], 0);
@@ -1171,7 +1171,7 @@ int kpSelection::textColForPoint (const QPoint &globalPoint) const
 }
 
 // public
-QPoint kpSelection::pointForTextRowCol (int row, int col)
+TQPoint kpSelection::pointForTextRowCol (int row, int col)
 {
     if (!isText ())
     {
@@ -1194,13 +1194,13 @@ QPoint kpSelection::pointForTextRowCol (int row, int col)
         return KP_INVALID_POINT;
     }
 
-    const QFontMetrics fontMetrics (m_textStyle.fontMetrics ());
+    const TQFontMetrics fontMetrics (m_textStyle.fontMetrics ());
 
     const int x = fontMetrics.width (m_textLines [row], col);
     const int y = row * fontMetrics.height () +
                   (row >= 1 ? row * fontMetrics.leading () : 0);
 
-    return textAreaRect ().topLeft () + QPoint (x, y);
+    return textAreaRect ().topLeft () + TQPoint (x, y);
 }
 
 // public
@@ -1229,16 +1229,16 @@ void kpSelection::setTextStyle (const kpTextStyle &textStyle_)
 }
 
 // public
-QPixmap kpSelection::opaquePixmap () const
+TQPixmap kpSelection::opaquePixmap () const
 {
-    QPixmap *p = pixmap ();
+    TQPixmap *p = pixmap ();
     if (p)
     {
         return *p;
     }
     else
     {
-        return QPixmap ();
+        return TQPixmap ();
     }
 }
 
@@ -1278,8 +1278,8 @@ void kpSelection::calculateTransparencyMask ()
 
     m_transparencyMask.resize (m_pixmap->width (), m_pixmap->height ());
 
-    QImage image = kpPixmapFX::convertToImage (*m_pixmap);
-    QPainter transparencyMaskPainter (&m_transparencyMask);
+    TQImage image = kpPixmapFX::convertToImage (*m_pixmap);
+    TQPainter transparencyMaskPainter (&m_transparencyMask);
 
     bool hasTransparent = false;
     for (int y = 0; y < m_pixmap->height (); y++)
@@ -1314,13 +1314,13 @@ void kpSelection::calculateTransparencyMask ()
 }
 
 // public
-QPixmap kpSelection::transparentPixmap () const
+TQPixmap kpSelection::transparentPixmap () const
 {
-    QPixmap pixmap = opaquePixmap ();
+    TQPixmap pixmap = opaquePixmap ();
 
     if (!m_transparencyMask.isNull ())
     {
-        kpPixmapFX::paintMaskTransparentWithBrush (&pixmap, QPoint (0, 0),
+        kpPixmapFX::paintMaskTransparentWithBrush (&pixmap, TQPoint (0, 0),
                                                    m_transparencyMask);
     }
 
@@ -1344,7 +1344,7 @@ bool kpSelection::setTransparency (const kpSelectionTransparency &transparency,
 
     bool haveChanged = true;
 
-    QBitmap oldTransparencyMask = m_transparencyMask;
+    TQBitmap oldTransparencyMask = m_transparencyMask;
     calculateTransparencyMask ();
 
 
@@ -1360,8 +1360,8 @@ bool kpSelection::setTransparency (const kpSelectionTransparency &transparency,
         }
         else if (checkTransparentPixmapChanged)
         {
-            QImage oldTransparencyMaskImage = kpPixmapFX::convertToImage (oldTransparencyMask);
-            QImage newTransparencyMaskImage = kpPixmapFX::convertToImage (m_transparencyMask);
+            TQImage oldTransparencyMaskImage = kpPixmapFX::convertToImage (oldTransparencyMask);
+            TQImage newTransparencyMaskImage = kpPixmapFX::convertToImage (m_transparencyMask);
 
             bool changed = false;
             for (int y = 0; y < oldTransparencyMaskImage.height () && !changed; y++)
@@ -1372,7 +1372,7 @@ bool kpSelection::setTransparency (const kpSelectionTransparency &transparency,
                         kpPixmapFX::getColorAtPixel (newTransparencyMaskImage, x, y))
                     {
                     #if DEBUG_KP_SELECTION
-                        kdDebug () << "\tdiffer at " << QPoint (x, y)
+                        kdDebug () << "\tdiffer at " << TQPoint (x, y)
                                    << " old=" << (int *) kpPixmapFX::getColorAtPixel (oldTransparencyMaskImage, x, y).toQRgb ()
                                    << " new=" << (int *) kpPixmapFX::getColorAtPixel (newTransparencyMaskImage, x, y).toQRgb ()
                                    << endl;
@@ -1399,11 +1399,11 @@ bool kpSelection::setTransparency (const kpSelectionTransparency &transparency,
 // private
 void kpSelection::flipPoints (bool horiz, bool vert)
 {
-    QRect oldRect = boundingRect ();
+    TQRect oldRect = boundingRect ();
 
     m_points.translate (-oldRect.x (), -oldRect.y ());
 
-    const QWMatrix matrix = kpPixmapFX::flipMatrix (oldRect.width (), oldRect.height (),
+    const TQWMatrix matrix = kpPixmapFX::flipMatrix (oldRect.width (), oldRect.height (),
                                                     horiz, vert);
     m_points = matrix.map (m_points);
 

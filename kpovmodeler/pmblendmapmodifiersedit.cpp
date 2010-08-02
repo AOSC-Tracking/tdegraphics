@@ -24,20 +24,20 @@
 #include "pmlineedits.h"
 #include "pmvector.h"
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqcombobox.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
 #include <ktabctl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
 #include <kfiledialog.h>
 
-PMBlendMapModifiersEdit::PMBlendMapModifiersEdit( QWidget* parent, const char* name )
+PMBlendMapModifiersEdit::PMBlendMapModifiersEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -45,27 +45,27 @@ PMBlendMapModifiersEdit::PMBlendMapModifiersEdit( QWidget* parent, const char* n
 
 void PMBlendMapModifiersEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
+   TQHBoxLayout* hl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pEnableFrequencyEdit = new QCheckBox( i18n( "Frequency:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pEnableFrequencyEdit = new TQCheckBox( i18n( "Frequency:" ), this );
    m_pFrequencyEdit = new PMFloatEdit( this );
    hl->addWidget( m_pEnableFrequencyEdit );
    hl->addWidget( m_pFrequencyEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pEnablePhaseEdit = new QCheckBox( i18n( "Phase:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pEnablePhaseEdit = new TQCheckBox( i18n( "Phase:" ), this );
    m_pPhaseEdit = new PMFloatEdit( this );
    hl->addWidget( m_pEnablePhaseEdit );
    hl->addWidget( m_pPhaseEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pEnableWaveFormEdit = new QCheckBox( i18n( "Wave form:" ), this );
-   m_pWaveTypeCombo = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pEnableWaveFormEdit = new TQCheckBox( i18n( "Wave form:" ), this );
+   m_pWaveTypeCombo = new TQComboBox( this );
    m_pWaveTypeCombo->insertItem( i18n( "Ramp" ) );
    m_pWaveTypeCombo->insertItem( i18n( "Triangle" ) );
    m_pWaveTypeCombo->insertItem( i18n( "Sine" ) );
@@ -76,25 +76,25 @@ void PMBlendMapModifiersEdit::createTopWidgets( )
    hl->addWidget( m_pWaveTypeCombo );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pWaveExponentLabel = new QLabel( i18n( "Exponent:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pWaveExponentLabel = new TQLabel( i18n( "Exponent:" ), this );
    m_pWaveExponentEdit = new PMFloatEdit( this );
    hl->addWidget( m_pWaveExponentLabel );
    hl->addWidget( m_pWaveExponentEdit );
    hl->addStretch( 1 );
 
-   connect( m_pEnableFrequencyEdit, SIGNAL( clicked( ) ), SLOT( slotFrequencyClicked( ) ) );
-   connect( m_pFrequencyEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnablePhaseEdit, SIGNAL( clicked( ) ), SLOT( slotPhaseClicked( ) ) );
-   connect( m_pPhaseEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableWaveFormEdit, SIGNAL( clicked( ) ), SLOT( slotWaveFormClicked( ) ) );
-   connect( m_pWaveExponentEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pWaveTypeCombo, SIGNAL( activated( int ) ), SLOT( slotTypeComboChanged( int ) ) );
+   connect( m_pEnableFrequencyEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFrequencyClicked( ) ) );
+   connect( m_pFrequencyEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnablePhaseEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPhaseClicked( ) ) );
+   connect( m_pPhaseEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableWaveFormEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotWaveFormClicked( ) ) );
+   connect( m_pWaveExponentEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pWaveTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotTypeComboChanged( int ) ) );
 }
 
 void PMBlendMapModifiersEdit::displayObject( PMObject* o )
 {
-   QString str;
+   TQString str;
 
    if( o->isA( "BlendMapModifiers" ) )
    {

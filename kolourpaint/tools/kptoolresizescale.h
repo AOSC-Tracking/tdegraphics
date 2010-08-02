@@ -29,7 +29,7 @@
 #ifndef __kptoolresizescale_h__
 #define __kptoolresizescale_h__
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include <kpcommandhistory.h>
 #include <kdialogbase.h>
@@ -37,13 +37,13 @@
 #include <kpcolor.h>
 #include <kpselection.h>
 
-class QCheckBox;
-class QGroupBox;
-class QHBox;
-class QRadioButton;
-class QSize;
-class QString;
-class QToolButton;
+class TQCheckBox;
+class TQGroupBox;
+class TQHBox;
+class TQRadioButton;
+class TQSize;
+class TQString;
+class TQToolButton;
 
 class KComboBox;
 class KDoubleNumInput;
@@ -67,7 +67,7 @@ public:
                               kpMainWindow *mainWindow);
     virtual ~kpToolResizeScaleCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
     virtual int size () const;
 
 public:
@@ -77,7 +77,7 @@ public:
     int newHeight () const;
     void setNewHeight (int height);
 
-    QSize newSize () const;
+    TQSize newSize () const;
     virtual void resize (int width, int height);
 
 public:
@@ -100,7 +100,7 @@ protected:
 
     int m_oldWidth, m_oldHeight;
     bool m_actOnTextSelection;
-    QPixmap m_oldPixmap, m_oldRightPixmap, m_oldBottomPixmap;
+    TQPixmap m_oldPixmap, m_oldRightPixmap, m_oldBottomPixmap;
     kpSelection *m_oldSelection;
 };
 
@@ -125,9 +125,9 @@ private:
     kpDocument *document () const;
     kpSelection *selection () const;
 
-    void createActOnBox (QWidget *baseWidget);
-    void createOperationGroupBox (QWidget *baseWidget);
-    void createDimensionsGroupBox (QWidget *baseWidget);
+    void createActOnBox (TQWidget *baseWidget);
+    void createOperationGroupBox (TQWidget *baseWidget);
+    void createDimensionsGroupBox (TQWidget *baseWidget);
 
     void widthFitHeightToAspectRatio ();
     void heightFitWidthToAspectRatio ();
@@ -172,23 +172,23 @@ private slots:
 private:
     kpMainWindow *m_mainWindow;
 
-    QHBox *m_actOnBox;
-    QLabel *m_actOnLabel;
+    TQHBox *m_actOnBox;
+    TQLabel *m_actOnLabel;
     KComboBox *m_actOnCombo;
 
-    QGroupBox *m_operationGroupBox;
-    QToolButton *m_resizeButton,
+    TQGroupBox *m_operationGroupBox;
+    TQToolButton *m_resizeButton,
                 *m_scaleButton,
                 *m_smoothScaleButton;
-    QLabel *m_resizeLabel,
+    TQLabel *m_resizeLabel,
                  *m_scaleLabel,
                  *m_smoothScaleLabel;
 
-    QGroupBox *m_dimensionsGroupBox;
+    TQGroupBox *m_dimensionsGroupBox;
     KIntNumInput *m_originalWidthInput, *m_originalHeightInput,
                  *m_newWidthInput, *m_newHeightInput;
     KDoubleNumInput *m_percentWidthInput, *m_percentHeightInput;
-    QCheckBox *m_keepAspectRatioCheckBox;
+    TQCheckBox *m_keepAspectRatioCheckBox;
 
     int m_ignoreKeepAspectRatio;
 };

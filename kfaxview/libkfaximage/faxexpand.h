@@ -24,8 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA. *
 #include <sys/types.h>
 #include <unistd.h>
 
-#include <qglobal.h>
-#include <qimage.h>
+#include <tqglobal.h>
+#include <tqimage.h>
 
 #define t32bits Q_UINT32
 #define t16bits Q_UINT16
@@ -61,15 +61,15 @@ class pagenode {		/* compressed page descriptor */
     struct strip *strips;	/* array of strips containing fax data in file */
     t16bits *data;		/* in-memory copy of strip */
     size_t length;		/* length of data */
-    QSize size;			/* width & height of page in pixels */
+    TQSize size;			/* width & height of page in pixels */
     int inverse;		/* black <=> white */
     int lsbfirst;		/* bit order is lsb first */
     int type;	                /* Bernd: tiff vs no tiff*/
     int orient;			/* orientation - upsidedown, landscape, mirrored */
     int vres;			/* vertical resolution: 1 = fine  */
-    QPoint dpi;			/* DPI horz/vert */
+    TQPoint dpi;			/* DPI horz/vert */
     void (*expander)(class pagenode *, drawfunc);
-    QImage image;
+    TQImage image;
     unsigned int bytes_per_line;
 };
 

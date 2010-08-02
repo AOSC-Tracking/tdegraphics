@@ -24,8 +24,8 @@
 
 #include <ktoolbar.h>
 
-class QBoxLayout;
-class QLabel;
+class TQBoxLayout;
+class TQLabel;
 class KSysColors;
 class KCustomColors;
 
@@ -34,24 +34,24 @@ class PaletteToolBar : public KToolBar
   Q_OBJECT
 
   public:
-    PaletteToolBar( QWidget *parent, const char *name = 0L );
+    PaletteToolBar( TQWidget *parent, const char *name = 0L );
 
   signals:
     void newColor( uint c );
 
   public slots:
     virtual void setOrientation( Orientation o );
-    void previewChanged( const QPixmap &p );
+    void previewChanged( const TQPixmap &p );
     void addColors( uint n, uint *c );
     void addColor( uint color );
-    void setPreviewBackground( QPixmap pixmap );
-    void setPreviewBackground( const QColor& colour );
+    void setPreviewBackground( TQPixmap pixmap );
+    void setPreviewBackground( const TQColor& colour );
     void currentColorChanged(uint color);
 
   private:
-    QBoxLayout *m_layout;
-    QLabel *m_lblPreview;
-    QLabel *m_currentColorView;
+    TQBoxLayout *m_layout;
+    TQLabel *m_lblPreview;
+    TQLabel *m_currentColorView;
     KSysColors *m_sysColors;
     KCustomColors *m_customColors;
 };

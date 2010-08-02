@@ -23,11 +23,11 @@
 #include "kscandevice.h"
 #include "scansourcedialog.h"
 
-#include <qvbox.h>
-#include <qhbox.h>
+#include <tqvbox.h>
+#include <tqhbox.h>
 
-#include <qdir.h>
-#include <qpixmap.h>
+#include <tqdir.h>
+#include <tqpixmap.h>
 
 /**
   *@author Klaas Freitag
@@ -35,12 +35,12 @@
 
 class GammaDialog;
 class KScanOptSet;
-class QScrollView;
+class TQScrollView;
 class KLed;
-class QProgressDialog;
-class QPushButton;
-class QCheckBox;
-class QButtonGroup;
+class TQProgressDialog;
+class TQPushButton;
+class TQCheckBox;
+class TQButtonGroup;
 
 typedef enum { ID_SANE_DEBUG, ID_QT_IMGIO, ID_SCAN } ScanMode;
 
@@ -48,10 +48,10 @@ class ScanParams : public QVBox
 {
    Q_OBJECT
 public:
-   ScanParams( QWidget *parent, const char *name = 0);
+   ScanParams( TQWidget *parent, const char *name = 0);
    ~ScanParams();
 #if 0
-   QSize sizeHint( );
+   TQSize sizeHint( );
 #endif
    bool connectDevice( KScanDevice* );
 
@@ -64,7 +64,7 @@ public slots:
  * between 0 and 1000, which are interpreted as tenth of percent of the
  * whole image dimensions.
  **/
-void slCustomScanSize( QRect );
+void slCustomScanSize( TQRect );
 
    /**
     * sets the scan area to the default, which is the whole area.
@@ -147,7 +147,7 @@ void slSourceSelect( void );
 private:
 
 
-   QScrollView*  scannerParams( );
+   TQScrollView*  scannerParams( );
    void          virtualScannerParams( void );
    void          createNoScannerMsg( void );
    void          initialise( KScanOption* );
@@ -157,21 +157,21 @@ private:
 
    KScanDevice      *sane_device;
    KScanOption   *virt_filename;
-   QCheckBox     *cb_gray_preview;
-   QPushButton   *pb_edit_gtable;
-   QPushButton   *pb_source_sel;
+   TQCheckBox     *cb_gray_preview;
+   TQPushButton   *pb_edit_gtable;
+   TQPushButton   *pb_source_sel;
    ADF_BEHAVE	  adf;
-   QButtonGroup  *bg_virt_scan_mode;
+   TQButtonGroup  *bg_virt_scan_mode;
    ScanMode  	  scan_mode;
-   QDir          last_virt_scan_path;
+   TQDir          last_virt_scan_path;
 
    KScanOption   *xy_resolution_bind;
 
    KScanOptSet   *startupOptset;
 
-   QProgressDialog *progressDialog;
+   TQProgressDialog *progressDialog;
 
-   QPixmap       pixLineArt, pixGray, pixColor, pixHalftone, pixMiniFloppy;
+   TQPixmap       pixLineArt, pixGray, pixColor, pixHalftone, pixMiniFloppy;
    KLed          *m_led;
    bool          m_firstGTEdit;
 

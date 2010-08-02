@@ -16,11 +16,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qdatetime.h>
-#include <qevent.h>
-#include <qglobal.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
+#include <tqdatetime.h>
+#include <tqevent.h>
+#include <tqglobal.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
 
 #include <kwin.h>
 #include <kstandarddirs.h>
@@ -31,31 +31,31 @@
 
 #include "aboutwidget.h"
 
-AboutWidget::AboutWidget( QWidget *parent, const char *name )
-    : QVBox( parent, name, Qt::WShowModal )
+AboutWidget::AboutWidget( TQWidget *parent, const char *name )
+    : TQVBox( parent, name, Qt::WShowModal )
 {
     KWin::setType( winId(), NET::Override );
     KWin::setState( winId(), NET::SkipTaskbar );
 
     setFrameStyle( WinPanel | Raised );
 
-    QGroupBox *gBox = new QGroupBox( 1, Horizontal, this);
+    TQGroupBox *gBox = new TQGroupBox( 1, Horizontal, this);
     gBox->setGeometry( 10, 10, width()-20, height()-20 );
     gBox->setAlignment( AlignHCenter );
     gBox->installEventFilter( this );
 
-    gBox->setPalette( QPalette( QColor( white ) ) );
+    gBox->setPalette( TQPalette( TQColor( white ) ) );
     gBox->setBackgroundMode( PaletteBackground );
 
-    int hour = QTime::currentTime().hour();
-    QString file;
+    int hour = TQTime::currentTime().hour();
+    TQString file;
 
     if ( hour >= 10 && hour < 16 )
 	file = locate("appdata", "pics/kuickshow-day.jpg");
     else
 	file = locate("appdata", "pics/kuickshow-night.jpg");
 
-    QLabel *authors = new QLabel("Kuickshow " KUICKSHOWVERSION
+    TQLabel *authors = new TQLabel("Kuickshow " KUICKSHOWVERSION
 				 " was brought to you by", gBox);
     authors->setAlignment( AlignCenter );
 
@@ -63,7 +63,7 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
     m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
     m_homepage->setAlignment( AlignCenter );
 
-    QLabel *copy = new QLabel("(C) 1998-2006", gBox);
+    TQLabel *copy = new TQLabel("(C) 1998-2006", gBox);
     copy->setAlignment( AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
@@ -80,16 +80,16 @@ AboutWidget::~AboutWidget()
 {
 }
 
-bool AboutWidget::eventFilter( QObject *o, QEvent *e )
+bool AboutWidget::eventFilter( TQObject *o, TQEvent *e )
 {
-    if ( e->type() == QEvent::MouseButtonPress ) {
-        QMouseEvent *ev = static_cast<QMouseEvent*>( e );
+    if ( e->type() == TQEvent::MouseButtonPress ) {
+        TQMouseEvent *ev = static_cast<TQMouseEvent*>( e );
         if ( !m_homepage->geometry().contains( ev->pos() ) ) {
             deleteLater();
             return true;
         }
     }
 
-    return QVBox::eventFilter( o, e );
+    return TQVBox::eventFilter( o, e );
 }
 #include "aboutwidget.moc"

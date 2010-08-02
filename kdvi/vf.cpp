@@ -36,7 +36,7 @@
 #include "fontpool.h"
 #include "xdvi.h"
 
-extern void oops(QString message);
+extern void oops(TQString message);
 
 /***
  ***	VF font reading routines.

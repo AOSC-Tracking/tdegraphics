@@ -24,15 +24,15 @@
 #endif
 
 #include <kdialogbase.h>
-#include <qlistbox.h>
-#include <qsize.h>
-#include <qvaluelist.h>
-#include <qstringlist.h>
+#include <tqlistbox.h>
+#include <tqsize.h>
+#include <tqvaluelist.h>
+#include <tqstringlist.h>
 #include "pmobject.h"
 #include "pmdeclare.h"
 
 /**
- * QListBoxItem for @ref PMObject
+ * TQListBoxItem for @ref PMObject
  */
 class PMListBoxObject : public QListBoxPixmap
 {
@@ -41,11 +41,11 @@ public:
     * Constructs a list box item in listbox listbox showing the
     * object obj. The item gets inserted after the item after
     */
-   PMListBoxObject( QListBox* listbox, PMObject* obj, QListBoxItem* after );
+   PMListBoxObject( TQListBox* listbox, PMObject* obj, TQListBoxItem* after );
    /**
     * Constructs a list box item in listbox listbox showing the object obj
     */
-   PMListBoxObject( QListBox* listbox, PMObject* obj );
+   PMListBoxObject( TQListBox* listbox, PMObject* obj );
    /**
     * Constructs a list box item showing the object obj
     */
@@ -54,16 +54,16 @@ public:
     * Constructs a list box item in listbox listbox showing the
     * text text. The item gets inserted after the item after
     */
-   PMListBoxObject( QListBox* listbox, PMObject* obj, const QString& text,
-                    QListBoxItem* after );
+   PMListBoxObject( TQListBox* listbox, PMObject* obj, const TQString& text,
+                    TQListBoxItem* after );
    /**
     * Constructs a list box item in listbox listbox showing the text text
     */
-   PMListBoxObject( QListBox* listbox, PMObject* obj, const QString& text );
+   PMListBoxObject( TQListBox* listbox, PMObject* obj, const TQString& text );
    /**
     * Constructs a list box item showing the text text
     */
-   PMListBoxObject( PMObject* obj, const QString& text );
+   PMListBoxObject( PMObject* obj, const TQString& text );
    /**
     * Deletes the item
     */
@@ -74,7 +74,7 @@ public:
     */
    PMObject* object( ) const { return m_pObject; }
 private:
-   static QString checkName( const QString& text );
+   static TQString checkName( const TQString& text );
    PMObject* m_pObject;
 };
 
@@ -88,7 +88,7 @@ public:
    /**
     * Creates a selection widget with parent and name
     */
-   PMObjectSelect( QWidget* parent = 0, const char* name = 0,
+   PMObjectSelect( TQWidget* parent = 0, const char* name = 0,
                    bool modal = true );
    /**
     * Deletes the dialog
@@ -111,22 +111,22 @@ public:
     *
     * Only objects above the object link  are listed.
     */
-   static int selectObject( PMObject* link, const QString& t, PMObject* & obj,
-                            QWidget* parent = 0 );
-   static int selectObject( PMObject* link, const QStringList& t,
-                            PMObject* & obj, QWidget* parent = 0 );
-   static int selectDeclare( PMObject* link, const QString& declareType,
-                             PMObject* & obj, QWidget* parent = 0 );
-   static int selectDeclare( PMObject* link, const QStringList& dt,
-                             PMObject* & obj, QWidget* parent = 0 );
+   static int selectObject( PMObject* link, const TQString& t, PMObject* & obj,
+                            TQWidget* parent = 0 );
+   static int selectObject( PMObject* link, const TQStringList& t,
+                            PMObject* & obj, TQWidget* parent = 0 );
+   static int selectDeclare( PMObject* link, const TQString& declareType,
+                             PMObject* & obj, TQWidget* parent = 0 );
+   static int selectDeclare( PMObject* link, const TQStringList& dt,
+                             PMObject* & obj, TQWidget* parent = 0 );
    
 protected slots:
-   void slotHighlighted( QListBoxItem* lbi );
-   void slotSelected( QListBoxItem* lbi );
+   void slotHighlighted( TQListBoxItem* lbi );
+   void slotSelected( TQListBoxItem* lbi );
 private:
-   QListBox* m_pListBox;
+   TQListBox* m_pListBox;
    PMObject* m_pSelectedObject;
-   static QSize s_size;
+   static TQSize s_size;
 };
 
 #endif

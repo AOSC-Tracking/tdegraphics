@@ -23,20 +23,20 @@
 #include "kgvpageview.h"
 
 FullScreenFilter::FullScreenFilter( KGVShell& parent )
-	:QObject( &parent, "full-screen-filter" ),
+	:TQObject( &parent, "full-screen-filter" ),
 	 parent( parent )
 {
 }
 
-bool FullScreenFilter::eventFilter( QObject* /*object*/, QEvent* ev) {
-	if ( QKeyEvent* keyevent = dynamic_cast<QKeyEvent*>( ev ) ) {
+bool FullScreenFilter::eventFilter( TQObject* /*object*/, TQEvent* ev) {
+	if ( TQKeyEvent* keyevent = dynamic_cast<TQKeyEvent*>( ev ) ) {
 		if ( keyevent->key() == Key_Escape ) {
 			parent.setFullScreen( false );
 			keyevent->accept();
 			return true;
 		}
 	}
-	if ( QMouseEvent* mouseevent = dynamic_cast<QMouseEvent*>( ev ) ) {
+	if ( TQMouseEvent* mouseevent = dynamic_cast<TQMouseEvent*>( ev ) ) {
 		if ( mouseevent->stateAfter() & mouseevent->button() & LeftButton ) {
 			// if ( The whole image is visible at once )
 			if ( parent.m_gvpart->pageView()->contentsHeight() <= parent.m_gvpart->widget()->height() &&

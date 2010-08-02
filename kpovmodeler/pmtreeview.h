@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <qlistview.h>
+#include <tqlistview.h>
 #include "pmobject.h"
 #include "pmviewbase.h"
 #include "pmviewfactory.h"
@@ -41,12 +41,12 @@ public:
    /**
     * Default constructor
     */
-   PMTreeViewWidget( PMPart* pare, QWidget* parent, const char* name = 0 );
+   PMTreeViewWidget( PMPart* pare, TQWidget* parent, const char* name = 0 );
    
    /** */
-   virtual QString viewType( ) const { return QString( "treeview" ); }
+   virtual TQString viewType( ) const { return TQString( "treeview" ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 };
 
 /**
@@ -61,7 +61,7 @@ public:
     * Creates a PMTreeView with parent and name that displays the
     * document doc
     */
-   PMTreeView( PMPart* part, QWidget* parent = 0, const char* name = 0 );
+   PMTreeView( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
    /**
     * Deletes the PMTreeView
     */
@@ -80,7 +80,7 @@ public slots:
    /**
     * Called when an object is changed.
     * @see PMPart::objectChanged( ) */
-   void slotObjectChanged( PMObject* obj, const int mode, QObject* sender );
+   void slotObjectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Refreshes the whole csg tree
     */
@@ -94,30 +94,30 @@ signals:
    /**
     * Emitted, when an object is selected or deselected
     */
-   void objectChanged( PMObject* obj, const int mode, QObject* sender );
+   void objectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Emitted in the destructor
     */
    void destroyed( PMTreeView* v );
    
 protected:
-   void contentsMousePressEvent( QMouseEvent * e );
-   void contentsMouseMoveEvent( QMouseEvent * e );
+   void contentsMousePressEvent( TQMouseEvent * e );
+   void contentsMouseMoveEvent( TQMouseEvent * e );
    void itemSelected( PMTreeViewItem* item, bool selected );
    
-   void viewportMousePressEvent( QMouseEvent * e );
-   void viewportMouseReleaseEvent( QMouseEvent* e );
-   void viewportMouseMoveEvent( QMouseEvent* e );
+   void viewportMousePressEvent( TQMouseEvent * e );
+   void viewportMouseReleaseEvent( TQMouseEvent* e );
+   void viewportMouseMoveEvent( TQMouseEvent* e );
    
-   void viewportDragMoveEvent( QDragMoveEvent *e );
-   void viewportDragEnterEvent( QDragEnterEvent *e );
-   void viewportDragLeaveEvent( QDragLeaveEvent* e );
-   void viewportDropEvent( QDropEvent* e );
+   void viewportDragMoveEvent( TQDragMoveEvent *e );
+   void viewportDragEnterEvent( TQDragEnterEvent *e );
+   void viewportDragLeaveEvent( TQDragLeaveEvent* e );
+   void viewportDropEvent( TQDropEvent* e );
 
-   void focusOutEvent( QFocusEvent* e );
-   void focusInEvent( QFocusEvent* e );
+   void focusOutEvent( TQFocusEvent* e );
+   void focusInEvent( TQFocusEvent* e );
    
-   void keyPressEvent( QKeyEvent* e );
+   void keyPressEvent( TQKeyEvent* e );
    
 private:
    /**
@@ -131,11 +131,11 @@ private:
    /**
     * Selects the item. Expands the tree if necessary
     */
-   void selectItem( QListViewItem* item );
+   void selectItem( TQListViewItem* item );
    /**
     * Returns true if the drop target is a tree view for the same part
     */
-   bool targetDisplaysPart( QWidget* target );
+   bool targetDisplaysPart( TQWidget* target );
    
    /**
     * the displayed document
@@ -145,7 +145,7 @@ private:
    /**
     * the selected items
     */
-//   QPtrList<PMTreeViewItem> m_selectedItems;
+//   TQPtrList<PMTreeViewItem> m_selectedItems;
    PMTreeViewItem* m_pLastSelected;
    bool m_itemSelected;
    bool m_itemDeselected;
@@ -155,11 +155,11 @@ private:
    bool m_selectOnReleaseEvent;
    
    PMTreeViewItem* m_pDragOverItem;
-//   QStringList m_lstDropFormats;
+//   TQStringList m_lstDropFormats;
 
    // for drag and drop, copied from KonqBaseListViewWidget
    bool m_pressed;
-   QPoint m_pressedPos;
+   TQPoint m_pressedPos;
    PMTreeViewItem* m_pressedItem;
 };
 
@@ -170,10 +170,10 @@ class PMTreeViewFactory : public PMViewTypeFactory
 {
 public:
    PMTreeViewFactory( ) { }
-   virtual QString viewType( ) const { return QString( "treeview" ); }
-   virtual QString description( ) const;
-   virtual QString iconName( ) const { return QString( "pmtreeview" ); }
-   virtual PMViewBase* newInstance( QWidget* parent, PMPart* part ) const
+   virtual TQString viewType( ) const { return TQString( "treeview" ); }
+   virtual TQString description( ) const;
+   virtual TQString iconName( ) const { return TQString( "pmtreeview" ); }
+   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
    {
       return new PMTreeViewWidget( part, parent );
    }

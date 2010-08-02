@@ -26,7 +26,7 @@
 
 #include "ksvg_lookup.h"
 
-class QString;
+class TQString;
 
 namespace KSVG
 {
@@ -51,7 +51,7 @@ public:
 	void setSkewX(double);
 	void setSkewY(double);
 
-	QString toString() const;
+	TQString toString() const;
 
 private:
 	// mop: we have to store the optional rotate stuff :( anyone with a better solution please fix that ;)

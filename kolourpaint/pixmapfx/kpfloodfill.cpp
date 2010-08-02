@@ -31,10 +31,10 @@
 
 #include <kpfloodfill.h>
 
-#include <qapplication.h>
-#include <qbitmap.h>
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <tqapplication.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
 
 #include <kdebug.h>
 #include <kpdefs.h>
@@ -43,7 +43,7 @@
 #include <kptool.h>
 
 
-kpFloodFill::kpFloodFill (QPixmap *pixmap, int x, int y,
+kpFloodFill::kpFloodFill (TQPixmap *pixmap, int x, int y,
                          const kpColor &color, int processedColorSimilarity)
     : m_pixmapPtr (pixmap), m_x (x), m_y (y),
       m_color (color), m_processedColorSimilarity (processedColorSimilarity),
@@ -57,7 +57,7 @@ kpFloodFill::~kpFloodFill ()
 
 
 // private
-int kpFloodFill::fillLinesListSize (const QValueList <kpFloodFill::FillLine> &fillLines) const
+int kpFloodFill::fillLinesListSize (const TQValueList <kpFloodFill::FillLine> &fillLines) const
 {
     return (fillLines.size () * kpFloodFill::FillLine::size ());
 }
@@ -66,7 +66,7 @@ int kpFloodFill::fillLinesListSize (const QValueList <kpFloodFill::FillLine> &fi
 int kpFloodFill::size () const
 {
     int fillLinesCacheSize = 0;
-    for (QValueVector < QValueList <kpFloodFill::FillLine > >::const_iterator it = m_fillLinesCache.begin ();
+    for (TQValueVector < TQValueList <kpFloodFill::FillLine > >::const_iterator it = m_fillLinesCache.begin ();
          it != m_fillLinesCache.end ();
          it++)
     {
@@ -79,7 +79,7 @@ int kpFloodFill::size () const
 }
 
 
-QRect kpFloodFill::boundingRect () const
+TQRect kpFloodFill::boundingRect () const
 {
     return m_boundingRect;
 }
@@ -95,10 +95,10 @@ bool kpFloodFill::fill ()
     // not trying to do a NOP fill
     if (m_boundingRect.isValid ())
     {
-        QApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (Qt::waitCursor);
 
-        QPainter painter, maskPainter;
-        QBitmap maskBitmap;
+        TQPainter painter, maskPainter;
+        TQBitmap maskBitmap;
 
         if (m_pixmapPtr->mask () || m_color.isTransparent ())
         {
@@ -113,13 +113,13 @@ bool kpFloodFill::fill ()
             painter.setPen (m_color.toQColor ());
         }
 
-        const QValueList <FillLine>::ConstIterator fillLinesEnd = m_fillLines.end ();
-        for (QValueList <FillLine>::ConstIterator it = m_fillLines.begin ();
+        const TQValueList <FillLine>::ConstIterator fillLinesEnd = m_fillLines.end ();
+        for (TQValueList <FillLine>::ConstIterator it = m_fillLines.begin ();
              it != fillLinesEnd;
              it++)
         {
-            QPoint p1 = QPoint ((*it).m_x1, (*it).m_y);
-            QPoint p2 = QPoint ((*it).m_x2, (*it).m_y);
+            TQPoint p1 = TQPoint ((*it).m_x1, (*it).m_y);
+            TQPoint p2 = TQPoint ((*it).m_x2, (*it).m_y);
 
             if (painter.isActive ())
                 painter.drawLine (p1, p2);
@@ -137,7 +137,7 @@ bool kpFloodFill::fill ()
         if (!maskBitmap.isNull ())
             m_pixmapPtr->setMask (maskBitmap);
 
-        QApplication::restoreOverrideCursor ();
+        TQApplication::restoreOverrideCursor ();
     }
     else
     {
@@ -155,7 +155,7 @@ bool kpFloodFill::prepareColorToChange ()
     kdDebug () << "kpFloodFill::prepareColorToChange" << endl;
 #endif
 
-    m_colorToChange = kpPixmapFX::getColorAtPixel (*m_pixmapPtr, QPoint (m_x, m_y));
+    m_colorToChange = kpPixmapFX::getColorAtPixel (*m_pixmapPtr, TQPoint (m_x, m_y));
 
     if (m_colorToChange.isOpaque ())
     {
@@ -184,7 +184,7 @@ bool kpFloodFill::prepare ()
 #if DEBUG_KP_FLOOD_FILL && 1
     kdDebug () << "kpFloodFill::prepare()" << endl;
 #endif
-    m_boundingRect = QRect ();
+    m_boundingRect = TQRect ();
 
     if (m_initState < 1 && !prepareColorToChange ())
     {
@@ -213,7 +213,7 @@ bool kpFloodFill::prepare ()
     m_image = kpPixmapFX::convertToImage (*m_pixmapPtr);
     if (m_image.isNull ())
     {
-        kdError () << "kpFloodFill::prepare() could not convert to QImage" << endl;
+        kdError () << "kpFloodFill::prepare() could not convert to TQImage" << endl;
         return false;
     }
 
@@ -231,7 +231,7 @@ bool kpFloodFill::prepare ()
     // draw initial line
     addLine (m_y, findMinX (m_y, m_x), findMaxX (m_y, m_x));
 
-    for (QValueList <FillLine>::ConstIterator it = m_fillLines.begin ();
+    for (TQValueList <FillLine>::ConstIterator it = m_fillLines.begin ();
          it != m_fillLines.end ();
          it++)
     {
@@ -267,7 +267,7 @@ void kpFloodFill::addLine (int y, int x1, int x2)
 
     m_fillLines.append (FillLine (y, x1, x2));
     m_fillLinesCache [y].append (FillLine (y /* OPT */, x1, x2));
-    m_boundingRect = m_boundingRect.unite (QRect (QPoint (x1, y), QPoint (x2, y)));
+    m_boundingRect = m_boundingRect.unite (TQRect (TQPoint (x1, y), TQPoint (x2, y)));
 }
 
 kpColor kpFloodFill::pixelColor (int x, int y, bool *beenHere) const
@@ -283,8 +283,8 @@ kpColor kpFloodFill::pixelColor (int x, int y, bool *beenHere) const
         return kpColor::invalid;
     }
 
-    const QValueList <FillLine>::ConstIterator theEnd = m_fillLinesCache [y].end ();
-    for (QValueList <FillLine>::ConstIterator it = m_fillLinesCache [y].begin ();
+    const TQValueList <FillLine>::ConstIterator theEnd = m_fillLinesCache [y].end ();
+    for (TQValueList <FillLine>::ConstIterator it = m_fillLinesCache [y].begin ();
          it != theEnd;
          it++)
     {
@@ -296,7 +296,7 @@ kpColor kpFloodFill::pixelColor (int x, int y, bool *beenHere) const
         }
     }
 
-    return kpPixmapFX::getColorAtPixel (m_image, QPoint (x, y));
+    return kpPixmapFX::getColorAtPixel (m_image, TQPoint (x, y));
 }
 
 bool kpFloodFill::shouldGoTo (int x, int y) const

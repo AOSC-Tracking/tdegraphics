@@ -44,7 +44,7 @@ long SVGTSpanElementImpl::getNumberOfChars()
 	return text().length();
 }
 
-QString SVGTSpanElementImpl::text()
+TQString SVGTSpanElementImpl::text()
 {
 	// Otherwhise some js scripts which require a child, don't work (Niko)
 	if(!hasChildNodes())

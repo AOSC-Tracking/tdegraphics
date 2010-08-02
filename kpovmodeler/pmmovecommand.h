@@ -82,7 +82,7 @@ private:
    PMObjectList m_insertErrors;
    bool m_executed;
    bool m_firstExecution;
-   QPtrList<PMMemento> m_dataChanges;
+   TQPtrList<PMMemento> m_dataChanges;
 };
 
 #endif

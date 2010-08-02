@@ -26,10 +26,10 @@
 
 /* $Id$ */
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qfileinfo.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqfileinfo.h>
+#include <tqtooltip.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -47,8 +47,8 @@
 #include <kscanslider.h>
 #include "kookaimage.h"
 #include "kookapref.h"
-#include <qvbox.h>
-#include <qhbox.h>
+#include <tqvbox.h>
+#include <tqhbox.h>
 
 /* defines for konfig-reading */
 
@@ -58,25 +58,25 @@
 
 
 
-KGOCRDialog::KGOCRDialog( QWidget *parent, KSpellConfig *spellConfig )
+KGOCRDialog::KGOCRDialog( TQWidget *parent, KSpellConfig *spellConfig )
     :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
-     m_ocrCmd( QString())
+     m_ocrCmd( TQString())
 {
    kdDebug(28000) << "Starting KOCR-Start-Dialog!" << endl;
    // Layout-Boxes
 }
 
-QString KGOCRDialog::ocrEngineLogo() const
+TQString KGOCRDialog::ocrEngineLogo() const
 {
     return "gocr.png";
 }
 
-QString KGOCRDialog::ocrEngineName() const
+TQString KGOCRDialog::ocrEngineName() const
 {
     return i18n("GOCR" );
 }
 
-QString KGOCRDialog::ocrEngineDesc() const
+TQString KGOCRDialog::ocrEngineDesc() const
 {
     return i18n("GOCR is an Open Source project "
                 "for optical character recognition.<P>"
@@ -90,7 +90,7 @@ EngineError KGOCRDialog::setupGui()
 {
     KOCRBase::setupGui();
 
-    QVBox *page = ocrPage();
+    TQVBox *page = ocrPage();
     Q_CHECK_PTR( page );
 
     KConfig *conf = KGlobal::config ();
@@ -100,7 +100,7 @@ EngineError KGOCRDialog::setupGui()
     // (void) new  KSeparator( KSeparator::HLine, page);
 
     // Entry-Field.
-    QString res = conf->readPathEntry( CFG_GOCR_BINARY, "notFound" );
+    TQString res = conf->readPathEntry( CFG_GOCR_BINARY, "notFound" );
     if( res == "notFound" )
     {
         res = KookaPreferences::tryFindGocr();
@@ -118,12 +118,12 @@ EngineError KGOCRDialog::setupGui()
     else
         m_ocrCmd = res;
 
-    (void) new QLabel( i18n("Using GOCR binary: ") + res, page );
+    (void) new TQLabel( i18n("Using GOCR binary: ") + res, page );
     (void) new KSeparator( KSeparator::HLine, page);
 
-    QHBox *hb = new QHBox(page);
+    TQHBox *hb = new TQHBox(page);
     hb->setSpacing( KDialog::spacingHint());
-    QVBox *innerBox = new QVBox( hb );
+    TQVBox *innerBox = new TQVBox( hb );
     innerBox->setSpacing( KDialog::spacingHint());
     /* This is for a 'work-in-progress'-Animation */
     getAnimation(hb);
@@ -132,19 +132,19 @@ EngineError KGOCRDialog::setupGui()
     sliderGrayLevel = new KScanSlider( innerBox , i18n("&Gray level"), 0, 254, true, 160 );
     int numdefault = conf->readNumEntry( CFG_GOCR_GRAYLEVEL, 160 );
     sliderGrayLevel->slSetSlider( numdefault );
-    QToolTip::add( sliderGrayLevel,
+    TQToolTip::add( sliderGrayLevel,
                    i18n( "The numeric value gray pixels are \nconsidered to be black.\n\nDefault is 160"));
 
     sliderDustSize = new KScanSlider( innerBox, i18n("&Dust size" ), 0, 60, true, 10 );
     numdefault = conf->readNumEntry( CFG_GOCR_DUSTSIZE, 10 );
     sliderDustSize->slSetSlider( numdefault );
-    QToolTip::add( sliderDustSize,
+    TQToolTip::add( sliderDustSize,
                    i18n( "Clusters smaller than this value\nwill be considered to be dust and \nremoved from the image.\n\nDefault is 10"));
 
     sliderSpace = new KScanSlider( innerBox, i18n( "&Space width" ), 0, 60, true, 0 );
     numdefault = conf->readNumEntry( CFG_GOCR_SPACEWIDTH, 0 );
     sliderSpace->slSetSlider( numdefault );
-    QToolTip::add( sliderSpace, i18n("Spacing between characters.\n\nDefault is 0 what means autodetection"));
+    TQToolTip::add( sliderSpace, i18n("Spacing between characters.\n\nDefault is 0 what means autodetection"));
 
     return ENG_OK;
 }
@@ -182,7 +182,7 @@ void KGOCRDialog::writeConfig( void )
    KConfig *conf = KGlobal::config ();
    conf->setGroup( CFG_GROUP_OCR_DIA );
 
-   conf->writeEntry( CFG_GOCR_BINARY, QString(getOCRCmd()));
+   conf->writeEntry( CFG_GOCR_BINARY, TQString(getOCRCmd()));
    conf->writeEntry( CFG_GOCR_GRAYLEVEL, getGraylevel());
    conf->writeEntry( CFG_GOCR_DUSTSIZE, getDustsize());
    conf->writeEntry( CFG_GOCR_SPACEWIDTH, getSpaceWidth());

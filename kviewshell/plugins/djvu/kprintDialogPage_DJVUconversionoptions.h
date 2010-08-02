@@ -34,16 +34,16 @@ class kprintDialogPage_DJVUconversionoptions_basewidget;
 class KPrintDialogPage_DJVUConversionOptions : public KPrintDialogPage
 {
  public:
-  KPrintDialogPage_DJVUConversionOptions( QWidget *parent = 0, const char *name = 0 );
+  KPrintDialogPage_DJVUConversionOptions( TQWidget *parent = 0, const char *name = 0 );
   
-  void getOptions( QMap<QString,QString>& opts, bool incldef = false );
-  void setOptions( const QMap<QString,QString>& opts );
-  bool isValid( QString& msg );
+  void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false );
+  void setOptions( const TQMap<TQString,TQString>& opts );
+  bool isValid( TQString& msg );
 
   kprintDialogPage_DJVUconversionoptions_basewidget* wdg;
 
  private:
-  QVBoxLayout* kprintDialogPage_pageoptions_baseLayout;
+  TQVBoxLayout* kprintDialogPage_pageoptions_baseLayout;
 };
 
 

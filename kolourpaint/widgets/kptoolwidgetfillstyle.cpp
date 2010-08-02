@@ -30,9 +30,9 @@
 
 #include <kptoolwidgetfillstyle.h>
 
-#include <qbitmap.h>
-#include <qbrush.h>
-#include <qpainter.h>
+#include <tqbitmap.h>
+#include <tqbrush.h>
+#include <tqpainter.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -42,14 +42,14 @@
 #include <kptool.h>
 
 
-kpToolWidgetFillStyle::kpToolWidgetFillStyle (QWidget *parent, const char *name)
+kpToolWidgetFillStyle::kpToolWidgetFillStyle (TQWidget *parent, const char *name)
     : kpToolWidgetBase (parent, name)
 {
     setInvertSelectedPixmap ();
 
     for (int i = 0; i < (int) FillStyleNum; i++)
     {
-        QPixmap pixmap;
+        TQPixmap pixmap;
 
         pixmap = fillStylePixmap ((FillStyle) i,
                                   (width () - 2/*margin*/) * 3 / 4,
@@ -68,14 +68,14 @@ kpToolWidgetFillStyle::~kpToolWidgetFillStyle ()
 
 
 // private
-QPixmap kpToolWidgetFillStyle::fillStylePixmap (FillStyle fs, int w, int h)
+TQPixmap kpToolWidgetFillStyle::fillStylePixmap (FillStyle fs, int w, int h)
 {
-    QPixmap pixmap ((w <= 0 ? width () : w), (h <= 0 ? height () : h));
+    TQPixmap pixmap ((w <= 0 ? width () : w), (h <= 0 ? height () : h));
     pixmap.fill (Qt::white);
 
-    QPainter painter (&pixmap);
+    TQPainter painter (&pixmap);
 
-    painter.setPen (QPen (Qt::black, 2));
+    painter.setPen (TQPen (Qt::black, 2));
     painter.setBrush (brushForFillStyle (fs,
                                          kpColor (Qt::black.rgb ())/*foreground*/,
                                          kpColor (Qt::gray.rgb ())/*background*/));
@@ -85,11 +85,11 @@ QPixmap kpToolWidgetFillStyle::fillStylePixmap (FillStyle fs, int w, int h)
     painter.end ();
 
 
-    QBitmap mask (pixmap.width (), pixmap.height ());
+    TQBitmap mask (pixmap.width (), pixmap.height ());
     mask.fill (Qt::color0);
 
     painter.begin (&mask);
-    painter.setPen (QPen (Qt::color1, 2));
+    painter.setPen (TQPen (Qt::color1, 2));
 
     if (fs == FillWithBackground || fs == FillWithForeground)
         painter.setBrush (Qt::color1);
@@ -104,7 +104,7 @@ QPixmap kpToolWidgetFillStyle::fillStylePixmap (FillStyle fs, int w, int h)
 }
 
 // private
-QString kpToolWidgetFillStyle::fillStyleName (FillStyle fs) const
+TQString kpToolWidgetFillStyle::fillStyleName (FillStyle fs) const
 {
     // do not complain about the "useless" breaks
     // as the return statements might not be return statements one day
@@ -121,7 +121,7 @@ QString kpToolWidgetFillStyle::fillStyleName (FillStyle fs) const
         return i18n ("Fill with Foreground Color");
         break;
     default:
-        return QString::null;
+        return TQString::null;
         break;
     }
 }
@@ -139,7 +139,7 @@ kpToolWidgetFillStyle::FillStyle kpToolWidgetFillStyle::fillStyle () const
 }
 
 // public static
-QBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
+TQBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
                                                      const kpColor &foregroundColor,
                                                      const kpColor &backgroundColor)
 {
@@ -152,10 +152,10 @@ QBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
         return Qt::NoBrush;
         break;
     case FillWithBackground:
-        return QBrush (backgroundColor.maskColor ());
+        return TQBrush (backgroundColor.maskColor ());
         break;
     case FillWithForeground:
-        return QBrush (foregroundColor.maskColor ());
+        return TQBrush (foregroundColor.maskColor ());
         break;
     default:
         return Qt::NoBrush;
@@ -163,14 +163,14 @@ QBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
     }
 }
 
-QBrush kpToolWidgetFillStyle::maskBrush (const kpColor &foregroundColor,
+TQBrush kpToolWidgetFillStyle::maskBrush (const kpColor &foregroundColor,
                                          const kpColor &backgroundColor)
 {
     return maskBrushForFillStyle (fillStyle (), foregroundColor, backgroundColor);
 }
 
 // public static
-QBrush kpToolWidgetFillStyle::brushForFillStyle (FillStyle fs,
+TQBrush kpToolWidgetFillStyle::brushForFillStyle (FillStyle fs,
                                                  const kpColor &foregroundColor,
                                                  const kpColor &backgroundColor)
 {
@@ -186,13 +186,13 @@ QBrush kpToolWidgetFillStyle::brushForFillStyle (FillStyle fs,
         break;
     case FillWithBackground:
         if (backgroundColor.isOpaque ())
-            return QBrush (backgroundColor.toQColor ());
+            return TQBrush (backgroundColor.toQColor ());
         else
             return Qt::NoBrush;
         break;
     case FillWithForeground:
         if (foregroundColor.isOpaque ())
-            return QBrush (foregroundColor.toQColor ());
+            return TQBrush (foregroundColor.toQColor ());
         else
             return Qt::NoBrush;
         break;
@@ -203,7 +203,7 @@ QBrush kpToolWidgetFillStyle::brushForFillStyle (FillStyle fs,
 }
 
 // public
-QBrush kpToolWidgetFillStyle::brush (const kpColor &foregroundColor,
+TQBrush kpToolWidgetFillStyle::brush (const kpColor &foregroundColor,
                                      const kpColor &backgroundColor)
 {
     return brushForFillStyle (fillStyle (), foregroundColor, backgroundColor);

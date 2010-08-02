@@ -26,8 +26,8 @@
 */
 
 
-#include <qapplication.h>
-#include <qpixmap.h>
+#include <tqapplication.h>
+#include <tqpixmap.h>
 
 #include <klocale.h>
 
@@ -54,9 +54,9 @@ kpToolConvertToGrayscaleCommand::~kpToolConvertToGrayscaleCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolConvertToGrayscaleCommand::name () const
+TQString kpToolConvertToGrayscaleCommand::name () const
 {
-    QString opName = i18n ("Reduce to Grayscale");
+    TQString opName = i18n ("Reduce to Grayscale");
 
     if (m_actOnSelection)
         return i18n ("Selection: %1").arg (opName);
@@ -79,16 +79,16 @@ void kpToolConvertToGrayscaleCommand::execute ()
     if (!doc)
         return;
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
-    m_oldPixmapPtr = new QPixmap ();
+    m_oldPixmapPtr = new TQPixmap ();
     *m_oldPixmapPtr = *doc->pixmap (m_actOnSelection);
 
-    QPixmap newPixmap = kpPixmapFX::convertToGrayscale (*doc->pixmap (m_actOnSelection));
+    TQPixmap newPixmap = kpPixmapFX::convertToGrayscale (*doc->pixmap (m_actOnSelection));
 
     doc->setPixmap (m_actOnSelection, newPixmap);
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 // public virtual [base kpCommand]

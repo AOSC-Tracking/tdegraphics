@@ -30,9 +30,9 @@
 #define __kp_cursor_light_cross_h__
 
 
-class QCursor;
+class TQCursor;
 
-const QCursor *kpMakeCursorLightCross ();
+const TQCursor *kpMakeCursorLightCross ();
 
 
 #endif  // __kp_cursor_light_cross_h__

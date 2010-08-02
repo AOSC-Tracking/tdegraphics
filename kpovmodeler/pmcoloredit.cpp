@@ -19,13 +19,13 @@
 #include "pmlineedits.h"
 #include <kcolorbutton.h>
 #include <klocale.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qcolor.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqcolor.h>
 #include <kdialog.h>
 
-PMColorEdit::PMColorEdit( bool filterAndTransmit, QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMColorEdit::PMColorEdit( bool filterAndTransmit, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_bFilterAndTransmit = filterAndTransmit;
 
@@ -44,35 +44,35 @@ PMColorEdit::PMColorEdit( bool filterAndTransmit, QWidget* parent, const char* n
    }
    m_pButton = new KColorButton( this );
 
-   QVBoxLayout* topLayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
-   QHBoxLayout* l = new QHBoxLayout( topLayout );
+   TQVBoxLayout* topLayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQHBoxLayout* l = new TQHBoxLayout( topLayout );
    l->addWidget( m_pButton );
-   l = new QHBoxLayout( topLayout );
-   l->addWidget( new QLabel( i18n( "red:" ), this ) );
+   l = new TQHBoxLayout( topLayout );
+   l->addWidget( new TQLabel( i18n( "red:" ), this ) );
    l->addWidget( m_edits[0] );
-   l->addWidget( new QLabel( i18n( "green:" ), this ) );
+   l->addWidget( new TQLabel( i18n( "green:" ), this ) );
    l->addWidget( m_edits[1] );
-   l->addWidget( new QLabel( i18n( "blue:" ), this ) );
+   l->addWidget( new TQLabel( i18n( "blue:" ), this ) );
    l->addWidget( m_edits[2] );
    if( filterAndTransmit )
    {
-      l = new QHBoxLayout( topLayout );
-      l->addWidget( new QLabel( i18n( "filter" ), this ) );
+      l = new TQHBoxLayout( topLayout );
+      l->addWidget( new TQLabel( i18n( "filter" ), this ) );
       l->addWidget( m_edits[3] );
-      l->addWidget( new QLabel( i18n( "transmit" ), this ) );
+      l->addWidget( new TQLabel( i18n( "transmit" ), this ) );
       l->addWidget( m_edits[4] );
    }
 
-   connect( m_edits[0], SIGNAL( dataChanged( ) ), SLOT( slotEditChanged( ) ) );
-   connect( m_edits[1], SIGNAL( dataChanged( ) ), SLOT( slotEditChanged( ) ) );
-   connect( m_edits[2], SIGNAL( dataChanged( ) ), SLOT( slotEditChanged( ) ) );
+   connect( m_edits[0], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
+   connect( m_edits[1], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
+   connect( m_edits[2], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
    if( filterAndTransmit )
    {
-      connect( m_edits[3], SIGNAL( dataChanged( ) ), SLOT( slotEditChanged( ) ) );
-      connect( m_edits[4], SIGNAL( dataChanged( ) ), SLOT( slotEditChanged( ) ) );
+      connect( m_edits[3], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
+      connect( m_edits[4], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
    }
-   connect( m_pButton, SIGNAL( changed( const QColor& ) ),
-            SLOT( slotColorChanged( const QColor& ) ) );
+   connect( m_pButton, TQT_SIGNAL( changed( const TQColor& ) ),
+            TQT_SLOT( slotColorChanged( const TQColor& ) ) );
 }
 
 void PMColorEdit::setColor( const PMColor& c )
@@ -141,7 +141,7 @@ void PMColorEdit::setReadOnly( bool yes )
    m_pButton->setEnabled( !yes );
 }
 
-void PMColorEdit::slotColorChanged( const QColor& c )
+void PMColorEdit::slotColorChanged( const TQColor& c )
 {
    int i;
    bool blocked[3];

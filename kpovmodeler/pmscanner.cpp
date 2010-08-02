@@ -28,7 +28,7 @@
 //#define PMSCAN_DEBUG
 
 PMReservedWordDict::PMReservedWordDict( PMDictMode mode )
-      : QAsciiDict<int>( 353 )
+      : TQAsciiDict<int>( 353 )
 {
    switch( mode )
    {
@@ -479,7 +479,7 @@ const char* c_commentRawEnd = "//*PMRawEnd";
 const int c_commentRawEndLength = 11;
 
 
-PMScanner::PMScanner( QIODevice* device )
+PMScanner::PMScanner( TQIODevice* device )
 {
    m_svalueAlloc = 256;
    m_svalue = ( char* ) malloc( m_svalueAlloc );
@@ -704,7 +704,7 @@ int PMScanner::nextToken( )
 
 #ifdef PMSCAN_DEBUG
                   kdDebug( PMArea ) << "Line " << m_line << ": Single char '"
-                                    << QString( QChar( ( char ) m_char ) ) << "'\n";
+                                    << TQString( TQChar( ( char ) m_char ) ) << "'\n";
 #endif
                   break;
             }

@@ -32,8 +32,8 @@
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <qapplication.h>
-#include <qprogressdialog.h>
+#include <tqapplication.h>
+#include <tqprogressdialog.h>
 
 #include "kdvi_multipage.h"
 #include "dviFile.h"

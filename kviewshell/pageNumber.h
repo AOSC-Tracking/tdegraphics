@@ -12,7 +12,7 @@
 #ifndef PAGENUMBER_H
 #define PAGENUMBER_H
 
-#include <qglobal.h>
+#include <tqglobal.h>
 
 
 /** \brief Class to represent a page number

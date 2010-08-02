@@ -13,11 +13,11 @@
 #include <kcombobox.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qvalidator.h>
-#include <qhbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
+#include <tqvalidator.h>
+#include <tqhbox.h>
 
 
 
@@ -25,13 +25,13 @@
 #include "pageSizeWidget.h"
 
 
-pageSizeDialog::pageSizeDialog( QWidget *parent, pageSize *userPrefdPageSize, const char *name, bool modal)
+pageSizeDialog::pageSizeDialog( TQWidget *parent, pageSize *userPrefdPageSize, const char *name, bool modal)
   :KDialogBase( parent, name, modal, i18n("Page Size"), Ok|Apply|Cancel, Ok, 
 		true )
 {
   userPreferredPageSize = userPrefdPageSize;
   pageSizeW = new pageSizeWidget(this, "PageSizeWidget");
-  pageSizeW->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, 
+  pageSizeW->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)3, (TQSizePolicy::SizeType)3, 0, 0, 
 					 pageSizeW->sizePolicy().hasHeightForWidth() ) );
   setMainWidget(pageSizeW);
 }
@@ -52,7 +52,7 @@ void pageSizeDialog::slotApply()
 }
 
 
-void pageSizeDialog::setPageSize(const QString& name)
+void pageSizeDialog::setPageSize(const TQString& name)
 {
   if (pageSizeW == 0)
     return;

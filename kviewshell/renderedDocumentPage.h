@@ -13,14 +13,14 @@
 
 #include "pageNumber.h"
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qvaluevector.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqvaluevector.h>
 
 class Hyperlink;
-class QPainter;
-class QRect;
-class QRegion;
+class TQPainter;
+class TQRect;
+class TQRegion;
 class TextBox;
 class TextSelection;
 
@@ -44,9 +44,9 @@ class TextSelection;
     mouse or for the "export as text..." functionality
 
     - the implementations of the documentPage will also contain a
-    QPaintDevice, onto which the graphical representation of the page
-    is rendered. This could for instance be a QPixmap, if the page is
-    to be displayed on a computer screen, or a QPrinter for printing.
+    TQPaintDevice, onto which the graphical representation of the page
+    is rendered. This could for instance be a TQPixmap, if the page is
+    to be displayed on a computer screen, or a TQPrinter for printing.
 
     The kviewshell program uses the documentPage class in the
     following manner: first, it is constructed, the page number is
@@ -54,7 +54,7 @@ class TextSelection;
     the setPageNumber() method. After this, the
     documentRenderer.drawPage() method of an implementation of the
     documentRenderer is used to render a graphical representation into
-    the QPaintDevice at a given resolution, and to fill the
+    the TQPaintDevice at a given resolution, and to fill the
     (source-)hyperlink and text vectors, which are also
     resolution-dependent. After the data has been used, the
     documentPage is clear()ed, perhaps a new page number set, and
@@ -95,11 +95,11 @@ class RenderedDocumentPage : public QObject
   /** \brief Get paint device
 
   This method is used for instance by the documentRenderer.drawPage()
-  method to draw on the page. It returns a pointer to a QPainter (in
-  most implementation a painter on either a QPixmap, or a
-  QPrinter). The pointer returned points to an active QPainter and is
+  method to draw on the page. It returns a pointer to a TQPainter (in
+  most implementation a painter on either a TQPixmap, or a
+  TQPrinter). The pointer returned points to an active TQPainter and is
   valid as long as *this RenderedDocumentPage exists. The pointer
-  returned must not be deleted nor should QPainter::end() be
+  returned must not be deleted nor should TQPainter::end() be
   called. Instead, the method returnPainter() must be called as soon
   as drawing is finished.
 
@@ -107,7 +107,7 @@ class RenderedDocumentPage : public QObject
   @code
   RenderedDocumentPage rdp;
 
-  QPainter *paint = rdp.getPainter()
+  TQPainter *paint = rdp.getPainter()
   if (paint != 0) {
   
     <Do some painting, don't call paint->end() >
@@ -121,11 +121,11 @@ class RenderedDocumentPage : public QObject
   results. Do not delete a renderedDocumentPage when you still hold a
   pointer. Call returnPainter() first.
 
-  @returns A pointer to a QPainter (in most implementation a painter
-  on either a QPixmap, or a QPrinter), or NULL, if painting is not
-  possible. The QPainter object is owned by the RenderedDocumentPage.
+  @returns A pointer to a TQPainter (in most implementation a painter
+  on either a TQPixmap, or a TQPrinter), or NULL, if painting is not
+  possible. The TQPainter object is owned by the RenderedDocumentPage.
   */
-  virtual QPainter *getPainter() = 0;
+  virtual TQPainter *getPainter() = 0;
 
   
   /** \brief Returns a pointer to the paint device.
@@ -137,13 +137,13 @@ class RenderedDocumentPage : public QObject
   @warning Returning a pointer twice, or returning arbitrary pointers
   will lead to a segfault.
 
-  @param pt a pointer to a QPainter, as returned by the getPainter()
+  @param pt a pointer to a TQPainter, as returned by the getPainter()
   method
   */
-  virtual void returnPainter(QPainter *pt) = 0;
+  virtual void returnPainter(TQPainter *pt) = 0;
   
   /** \brief Returns the size of the page in pixel. */
-  virtual QSize size() = 0;
+  virtual TQSize size() = 0;
 
   /** \brief Returns the width of the page in pixel.
 
@@ -183,26 +183,26 @@ class RenderedDocumentPage : public QObject
   kviewshell e.g. for selecting text with the mouse or for the "export
   as text..." functionality.
   */
-  QValueVector<TextBox> textBoxList;
+  TQValueVector<TextBox> textBoxList;
 
   /** \brief Calculates the text selected by the given rectangle. */
-  TextSelection select(const QRect&);
+  TextSelection select(const TQRect&);
 
   /** \brief Selects the character which lies at the given point. */
-  TextSelection select(const QPoint&);
+  TextSelection select(const TQPoint&);
 
-  QRegion selectedRegion(const TextSelection& selection);
+  TQRegion selectedRegion(const TextSelection& selection);
 
   /** Finds the first occurence of str starting by the current index.
   If the text is found a corresponding TextSelection is returned.
   If the text is not found a empty selection is returned. */
-  TextSelection find(const QString& str, int index = 0, bool caseSensitive = true);
+  TextSelection find(const TQString& str, int index = 0, bool caseSensitive = true);
 
   /** Finds the first occurence of str starting by the current index searching backwards.
   If the text is found a corresponding TextSelection is returned.
   If the text is not found a empty selection is returned.
   If index < 0 start the search at the end of the page. */
-  TextSelection findRev(const QString& str, int index = 0, bool cs = true);
+  TextSelection findRev(const TQString& str, int index = 0, bool cs = true);
 
   /** \brief Hyperlinks on the document page
 
@@ -211,7 +211,7 @@ class RenderedDocumentPage : public QObject
   method. It is used in kviewshell so users can use the mouse to
   navigate in the document through hyperlinks.
   */
-  QValueVector<Hyperlink> hyperLinkList;
+  TQValueVector<Hyperlink> hyperLinkList;
 
   // set to 'false' in the constructor, set to 'true' by the renderer,
   // if something really has been rendered
@@ -234,7 +234,7 @@ class RenderedDocumentPage : public QObject
   */
   PageNumber  pageNr;
 
-  QString pageText;
+  TQString pageText;
 };
 
 

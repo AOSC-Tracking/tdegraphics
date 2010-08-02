@@ -23,15 +23,15 @@ PMEnumProperty::PMEnumProperty( const char* name, bool readOnly,
 {
 }
 
-void PMEnumProperty::addEnumValue( const QString& str, int value )
+void PMEnumProperty::addEnumValue( const TQString& str, int value )
 {
    m_valueMap[value] = str;
    m_stringMap[str] = value;
 }
 
-QStringList PMEnumProperty::enumValues( ) const
+TQStringList PMEnumProperty::enumValues( ) const
 {
-   QStringList l;
+   TQStringList l;
    PMEnumStringValueMap::const_iterator it;
    for( it = m_stringMap.begin( ); it != m_stringMap.end( ); ++it )
       l.append( it.key( ) );
@@ -52,6 +52,6 @@ PMVariant PMEnumProperty::getProtected( const PMObject* obj )
    int v = getEnum( obj );
    PMEnumValueStringMap::const_iterator it = m_valueMap.find( v );
    if( it == m_valueMap.end( ) )
-      return PMVariant( QString::null );
+      return PMVariant( TQString::null );
    return it.data( );
 }

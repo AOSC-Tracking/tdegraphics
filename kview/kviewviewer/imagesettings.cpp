@@ -18,23 +18,23 @@
 
 #include "imagesettings.h"
 
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
 
 #include <klocale.h>
 #include <kdialog.h>
 
-ImageSettings::ImageSettings( QWidget * parent, const char * name )
+ImageSettings::ImageSettings( TQWidget * parent, const char * name )
 	: KPrintDialogPage( parent, name )
 	, m_pFitImage( 0 )
 {
 	setTitle( i18n( "Image Settings" ) );
 
-	QBoxLayout * layout = new QVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
-	m_pFitImage = new QCheckBox( i18n( "Fit image to page size" ), this );
+	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	m_pFitImage = new TQCheckBox( i18n( "Fit image to page size" ), this );
 	m_pFitImage->setChecked( true );
 	layout->addWidget( m_pFitImage );
-	m_pCenter = new QCheckBox( i18n( "Center image on page" ), this );
+	m_pCenter = new TQCheckBox( i18n( "Center image on page" ), this );
 	m_pCenter->setChecked( true );
 	layout->addWidget( m_pCenter );
 	layout->insertStretch( -1, 0 );
@@ -44,13 +44,13 @@ ImageSettings::~ImageSettings()
 {
 }
 
-void ImageSettings::setOptions( const QMap<QString, QString> & opts )
+void ImageSettings::setOptions( const TQMap<TQString, TQString> & opts )
 {
 	m_pFitImage->setChecked( opts[ "app-kviewviewer-fitimage" ] == "1" );
 	m_pCenter->setChecked( opts[ "app-kviewviewer-center" ] == "1" );
 }
 
-void ImageSettings::getOptions( QMap<QString, QString> & opts, bool include_def )
+void ImageSettings::getOptions( TQMap<TQString, TQString> & opts, bool include_def )
 {
 	if( m_pFitImage->isChecked() )
 		opts[ "app-kviewviewer-fitimage" ] = "1";
@@ -63,7 +63,7 @@ void ImageSettings::getOptions( QMap<QString, QString> & opts, bool include_def 
 		opts[ "app-kviewviewer-center" ] = "0";
 }
 
-bool ImageSettings::isValid( QString & /*msg*/ )
+bool ImageSettings::isValid( TQString & /*msg*/ )
 {
 	return true;
 }

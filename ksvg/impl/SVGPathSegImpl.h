@@ -39,7 +39,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_UNKNOWN; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return ""; }
-	virtual QString toString() const { return ""; }
+	virtual TQString toString() const { return ""; }
 
 	virtual void getDeltasAndSlopes(double curx, double cury, double *dx, double *dy, double *startSlope, double *endSlope) const;
 

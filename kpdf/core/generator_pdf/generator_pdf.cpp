@@ -9,13 +9,13 @@
  ***************************************************************************/
 
 // qt/kde includes
-#include <qfile.h>
-#include <qevent.h>
-#include <qimage.h>
-#include <qapplication.h>
-#include <qpaintdevicemetrics.h>
-#include <qregexp.h>
-#include <qvariant.h>
+#include <tqfile.h>
+#include <tqevent.h>
+#include <tqimage.h>
+#include <tqapplication.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqregexp.h>
+#include <tqvariant.h>
 #include <kapplication.h>
 #include <klistview.h>
 #include <klocale.h>
@@ -95,7 +95,7 @@ PDFGenerator::~PDFGenerator()
 
 
 //BEGIN Generator inherited functions
-bool PDFGenerator::loadDocument( const QString & filePath, QValueVector<KPDFPage*> & pagesVector )
+bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPage*> & pagesVector )
 {
 #ifndef NDEBUG
     if ( pdfdoc )
@@ -105,7 +105,7 @@ bool PDFGenerator::loadDocument( const QString & filePath, QValueVector<KPDFPage
     }
 #endif
     // create PDFDoc for the given file
-    pdfdoc = new PDFDoc( new GString( QFile::encodeName( filePath ) ), 0, 0 );
+    pdfdoc = new PDFDoc( new GString( TQFile::encodeName( filePath ) ), 0, 0 );
 
     // if the file didn't open correctly it might be encrypted, so ask for a pass
     bool firstInput = true;
@@ -114,12 +114,12 @@ bool PDFGenerator::loadDocument( const QString & filePath, QValueVector<KPDFPage
     int keep = 1;
     while ( !pdfdoc->isOk() && pdfdoc->getErrorCode() == errEncrypted )
     {
-        QCString password;
+        TQCString password;
 
         // 1.A. try to retrieve the first password from the kde wallet system
         if ( !triedWallet )
         {
-            QString walletName = KWallet::Wallet::NetworkWallet();
+            TQString walletName = KWallet::Wallet::NetworkWallet();
             wallet = KWallet::Wallet::openWallet( walletName );
             if ( wallet )
             {
@@ -129,7 +129,7 @@ bool PDFGenerator::loadDocument( const QString & filePath, QValueVector<KPDFPage
                 wallet->setFolder( "KPdf" );
 
                 // look for the pass in that folder
-                QString retrievedPass;
+                TQString retrievedPass;
                 if ( !wallet->readPassword( filePath.section('/', -1, -1), retrievedPass ) )
                     password = retrievedPass.local8Bit();
             }
@@ -139,7 +139,7 @@ bool PDFGenerator::loadDocument( const QString & filePath, QValueVector<KPDFPage
         // 1.B. if not retrieved, ask the password using the kde password dialog
         if ( password.isNull() )
         {
-        QString prompt;
+        TQString prompt;
             if ( firstInput )
             prompt = i18n( "Please insert the password to read the document:" );
         else
@@ -152,15 +152,15 @@ bool PDFGenerator::loadDocument( const QString & filePath, QValueVector<KPDFPage
         }
 
         // 2. reopen the document using the password
-        GString * pwd2 = new GString( QString::fromLocal8Bit(password.data()).latin1() );
+        GString * pwd2 = new GString( TQString::fromLocal8Bit(password.data()).latin1() );
             delete pdfdoc;
-        pdfdoc = new PDFDoc( new GString( QFile::encodeName( filePath ) ), pwd2, pwd2 );
+        pdfdoc = new PDFDoc( new GString( TQFile::encodeName( filePath ) ), pwd2, pwd2 );
             delete pwd2;
 
         // 3. if the password is correct and the user chose to remember it, store it to the wallet
         if ( pdfdoc->isOk() && wallet && /*safety check*/ wallet->isOpen() && keep > 0 )
         {
-            QString goodPass = QString::fromLocal8Bit( password.data() );
+            TQString goodPass = TQString::fromLocal8Bit( password.data() );
             wallet->writePassword( filePath.section('/', -1, -1), goodPass );
         }
     }
@@ -209,12 +209,12 @@ const DocumentInfo * PDFGenerator::generateDocumentInfo()
         if ( pdfdoc )
         {
             docInfo.set( "format", i18n( "PDF v. <version>", "PDF v. %1" )
-                         .arg( QString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
+                         .arg( TQString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
             docInfo.set( "encryption", pdfdoc->isEncrypted() ? i18n( "Encrypted" ) : i18n( "Unencrypted" ),
                          i18n("Security") );
             docInfo.set( "optimization", pdfdoc->isLinearized() ? i18n( "Yes" ) : i18n( "No" ),
                          i18n("Optimized") );
-            docInfo.set( "pages", QString::number( pdfdoc->getCatalog()->getNumPages() ), i18n("Pages") );
+            docInfo.set( "pages", TQString::number( pdfdoc->getCatalog()->getNumPages() ), i18n("Pages") );
         }
         else
         {
@@ -381,7 +381,7 @@ void PDFGenerator::putFontInfo(KListView *list)
 
     fonts = NULL;
     fontsLen = fontsSize = 0;
-    QValueVector<Ref> visitedXObjects;
+    TQValueVector<Ref> visitedXObjects;
     for (pg = 1; pg <= pdfdoc->getNumPages(); ++pg)
     {
         page = pdfdoc->getCatalog()->getPage(pg);
@@ -414,7 +414,7 @@ void PDFGenerator::putFontInfo(KListView *list)
 bool PDFGenerator::print( KPrinter& printer )
 {
     // PageSize is a CUPS artificially created setting
-    QString ps = printer.option("PageSize");
+    TQString ps = printer.option("PageSize");
     int paperWidth, paperHeight;
     int marginTop, marginLeft, marginRight, marginBottom;
     marginTop = (int)printer.option("kde-margin-top").toDouble();
@@ -423,7 +423,7 @@ bool PDFGenerator::print( KPrinter& printer )
     marginBottom = (int)printer.option("kde-margin-bottom").toDouble();
     bool forceRasterize = printer.option("kde-kpdf-forceRaster").toInt();
 
-    if (ps.find(QRegExp("w\\d+h\\d+")) == 0)
+    if (ps.find(TQRegExp("w\\d+h\\d+")) == 0)
     {
         // size not supported by Qt, CUPS gives us the size as wWIDTHhHEIGHT, at least on the printers i tester
         // remove the w
@@ -440,19 +440,19 @@ bool PDFGenerator::print( KPrinter& printer )
         if (!ps.isEmpty()) qtPageSize = pageNameToPageSize(ps);
         else qtPageSize = printer.pageSize();
 
-        QPrinter dummy(QPrinter::PrinterResolution);
+        TQPrinter dummy(TQPrinter::PrinterResolution);
         dummy.setFullPage(true);
-        dummy.setPageSize((QPrinter::PageSize)qtPageSize);
+        dummy.setPageSize((TQPrinter::PageSize)qtPageSize);
 
-        QPaintDeviceMetrics metrics(&dummy);
+        TQPaintDeviceMetrics metrics(&dummy);
         paperWidth = metrics.width();
         paperHeight = metrics.height();
     }
 
-    KTempFile tf( QString::null, ".ps" );
+    KTempFile tf( TQString::null, ".ps" );
     globalParams->setPSPaperWidth(paperWidth);
     globalParams->setPSPaperHeight(paperHeight);
-    QString pstitle = getDocumentInfo("Title", true);
+    TQString pstitle = getDocumentInfo("Title", true);
     if ( pstitle.isEmpty() )
     {
         pstitle = m_document->currentDocument().fileName( false );
@@ -460,7 +460,7 @@ bool PDFGenerator::print( KPrinter& printer )
     // this looks non-unicode-safe and it is. anything other than ASCII is not specified
     // and some printers actually stop printing when they encounter non-ASCII characters in the
     // Postscript %%Title tag
-    QCString pstitle8Bit = pstitle.latin1();
+    TQCString pstitle8Bit = pstitle.latin1();
     const char* pstitlechar;
     if (!pstitle.isEmpty())
     {
@@ -492,7 +492,7 @@ bool PDFGenerator::print( KPrinter& printer )
             if (result == KMessageBox::Yes) psOut->setScale(xScale, yScale);
         }
 
-        QValueList<int> pageList;
+        TQValueList<int> pageList;
 
         if (!printer.previewOnly())
         {
@@ -503,7 +503,7 @@ bool PDFGenerator::print( KPrinter& printer )
             for(int i = 1; i <= pdfdoc->getNumPages(); i++) pageList.append(i);
         }
 
-        QValueList<int>::const_iterator pIt = pageList.begin(), pEnd = pageList.end();
+        TQValueList<int>::const_iterator pIt = pageList.begin(), pEnd = pageList.end();
         docLock.lock();
         for ( ; pIt != pEnd; ++pIt )
         {
@@ -524,7 +524,7 @@ bool PDFGenerator::print( KPrinter& printer )
     }
 }
 
-static GString *QStringToGString(const QString &s) {
+static GString *QStringToGString(const TQString &s) {
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
@@ -532,20 +532,20 @@ static GString *QStringToGString(const QString &s) {
     return new GString(cstring, len);
 }
 
-static QString unicodeToQString(Unicode* u, int len) {
-    QString ret;
+static TQString unicodeToQString(Unicode* u, int len) {
+    TQString ret;
     ret.setLength(len);
-    QChar* qch = (QChar*) ret.unicode();
+    TQChar* qch = (TQChar*) ret.unicode();
     for (;len;--len)
-      *qch++ = (QChar) *u++;
+      *qch++ = (TQChar) *u++;
     return ret;
 }
 
-static QString UnicodeParsedString(GString *s1) {
+static TQString UnicodeParsedString(GString *s1) {
     GBool isUnicode;
     int i;
     Unicode u;
-    QString result;
+    TQString result;
     if ( ( s1->getChar(0) & 0xff ) == 0xfe && ( s1->getChar(1) & 0xff ) == 0xff )
     {
         isUnicode = gTrue;
@@ -573,7 +573,7 @@ static QString UnicodeParsedString(GString *s1) {
     return result;
 }
 
-QString PDFGenerator::getMetaData( const QString & key, const QString & option )
+TQString PDFGenerator::getMetaData( const TQString & key, const TQString & option )
 {
     if ( key == "StartFullScreen" )
     {
@@ -603,13 +603,13 @@ QString PDFGenerator::getMetaData( const QString & key, const QString & option )
         if ( pdfdoc->getCatalog()->getPageMode() == Catalog::UseOutlines )
             return "yes";
     }
-    return QString();
+    return TQString();
 }
 
 bool PDFGenerator::reparseConfig()
 {
     // load paper color from Settings or use the white default color
-    QColor color = ( (KpdfSettings::renderMode() == KpdfSettings::EnumRenderMode::Paper ) &&
+    TQColor color = ( (KpdfSettings::renderMode() == KpdfSettings::EnumRenderMode::Paper ) &&
                      KpdfSettings::changeColors() ) ? KpdfSettings::paperColor() : Qt::white;
     // if paper color is changed we have to rebuild every visible pixmap in addition
     // to the outputDevice. it's the 'heaviest' case, other effect are just recoloring
@@ -634,7 +634,7 @@ bool PDFGenerator::reparseConfig()
 }
 //END Generator inherited functions
 
-void PDFGenerator::scanFonts(Dict *resDict, KListView *list, Ref **fonts, int &fontsLen, int &fontsSize, QValueVector<Ref> *visitedXObjects)
+void PDFGenerator::scanFonts(Dict *resDict, KListView *list, Ref **fonts, int &fontsLen, int &fontsSize, TQValueVector<Ref> *visitedXObjects)
 {
     Object obj1, obj2, xObjDict, xObj, xObj2, resObj;
     Ref r;
@@ -717,7 +717,7 @@ void PDFGenerator::scanFont(GfxFont *font, KListView *list, Ref **fonts, int &fo
     GBool emb;
     int i;
 
-    QString fontTypeNames[12] = {
+    TQString fontTypeNames[12] = {
         i18n("unknown"),
         i18n("Type 1"),
         i18n("Type 1C"),
@@ -750,7 +750,7 @@ void PDFGenerator::scanFont(GfxFont *font, KListView *list, Ref **fonts, int &fo
     if (font->getType() == fontType3) emb = gTrue;
     else emb = font->getEmbeddedFontID(&embRef);
 
-    QString sName, sEmb, sPath;
+    TQString sName, sEmb, sPath;
     if (name)
     {
         sName = name->getCString();
@@ -783,34 +783,34 @@ void PDFGenerator::scanFont(GfxFont *font, KListView *list, Ref **fonts, int &fo
     (*fonts)[fontsLen++] = *font->getID();
 }
 
-QString PDFGenerator::getDocumentInfo( const QString & data, bool canReturnNull ) const
+TQString PDFGenerator::getDocumentInfo( const TQString & data, bool canReturnNull ) const
 // note: MUTEX is LOCKED while calling this
 {
     // [Albert] Code adapted from pdfinfo.cc on xpdf
     Object info;
     if ( !pdfdoc )
-        return canReturnNull ? QString::null : i18n( "Unknown" );
+        return canReturnNull ? TQString::null : i18n( "Unknown" );
 
     pdfdoc->getDocInfo( &info );
     if ( !info.isDict() )
-        return canReturnNull ? QString::null : i18n( "Unknown" );
+        return canReturnNull ? TQString::null : i18n( "Unknown" );
 
     Object obj;
     Dict *infoDict = info.getDict();
 
     if ( infoDict->lookup( (char*)data.latin1(), &obj )->isString() )
     {
-        QString result = UnicodeParsedString(obj.getString());
+        TQString result = UnicodeParsedString(obj.getString());
         obj.free();
         info.free();
         return result;
     }
     obj.free();
     info.free();
-    return canReturnNull ? QString::null : i18n( "Unknown" );
+    return canReturnNull ? TQString::null : i18n( "Unknown" );
 }
 
-QString PDFGenerator::getDocumentDate( const QString & data ) const
+TQString PDFGenerator::getDocumentDate( const TQString & data ) const
 // note: MUTEX is LOCKED while calling this
 {
     // [Albert] Code adapted from pdfinfo.cc on xpdf
@@ -826,23 +826,23 @@ QString PDFGenerator::getDocumentDate( const QString & data ) const
     int year, mon, day, hour, min, sec;
     Dict *infoDict = info.getDict();
     UnicodeMap *uMap = globalParams->getTextEncoding();
-    QString result;
+    TQString result;
 
     if ( !uMap )
         return i18n( "Unknown Date" );
 
     if ( infoDict->lookup( (char*)data.latin1(), &obj )->isString() )
     {
-        QString s = UnicodeParsedString(obj.getString());
+        TQString s = UnicodeParsedString(obj.getString());
         if ( s[0] == 'D' && s[1] == ':' )
             s = s.mid(2);
 
         if ( !s.isEmpty() && sscanf( s.latin1(), "%4d%2d%2d%2d%2d%2d", &year, &mon, &day, &hour, &min, &sec ) == 6 )
         {
-            QDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
-            QTime t( hour, min, sec );
+            TQDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
+            TQTime t( hour, min, sec );
             if ( d.isValid() && t.isValid() )
-                result = KGlobal::locale()->formatDateTime( QDateTime(d, t), false, true );
+                result = KGlobal::locale()->formatDateTime( TQDateTime(d, t), false, true );
             else
                 result = s;
         }
@@ -856,7 +856,7 @@ QString PDFGenerator::getDocumentDate( const QString & data ) const
     return result;
 }
 
-void PDFGenerator::addSynopsisChildren( QDomNode * parent, GList * items )
+void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
 {
     int numItems = items->getLength();
     for ( int i = 0; i < numItems; ++i )
@@ -865,13 +865,13 @@ void PDFGenerator::addSynopsisChildren( QDomNode * parent, GList * items )
         OutlineItem * outlineItem = (OutlineItem *)items->get( i );
 
         // 1. create element using outlineItem's title as tagName
-        QString name;
+        TQString name;
         Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
         name = unicodeToQString(uniChar, titleLength);
         if ( name.isEmpty() )
             continue;
-        QDomElement item = docSyn.createElement( name );
+        TQDomElement item = docSyn.createElement( name );
         parent->appendChild( item );
 
         // 2. find the page the link refers to
@@ -888,9 +888,9 @@ void PDFGenerator::addSynopsisChildren( QDomNode * parent, GList * items )
                 // so better storing the reference and provide the viewport as metadata
                 // on demand
                 GString *s = g->getNamedDest();
-                QChar *charArray = new QChar[s->getLength()];
-                for (int i = 0; i < s->getLength(); ++i) charArray[i] = QChar(s->getCString()[i]);
-                QString option(charArray, s->getLength());
+                TQChar *charArray = new QChar[s->getLength()];
+                for (int i = 0; i < s->getLength(); ++i) charArray[i] = TQChar(s->getCString()[i]);
+                TQString option(charArray, s->getLength());
                 item.setAttribute( "ViewportName", option );
                 delete[] charArray;
             }
@@ -907,7 +907,7 @@ void PDFGenerator::addSynopsisChildren( QDomNode * parent, GList * items )
             }
         }
 
-        item.setAttribute( "Open", QVariant( (bool)outlineItem->isOpen() ).toString() );
+        item.setAttribute( "Open", TQVariant( (bool)outlineItem->isOpen() ).toString() );
 
         // 3. recursively descend over children
         outlineItem->open();
@@ -1042,7 +1042,7 @@ void PDFGenerator::addTransition( int pageNumber, KPDFPage * page )
 
 
 
-void PDFGenerator::customEvent( QCustomEvent * event )
+void PDFGenerator::customEvent( TQCustomEvent * event )
 {
     // catch generator 'ready events' only
     if ( event->type() != TGE_DATAREADY_ID )
@@ -1074,11 +1074,11 @@ void PDFGenerator::customEvent( QCustomEvent * event )
 
     // 2. put thread's generated data into the KPDFPage
     PixmapRequest * request = static_cast< PixmapRequest * >( event->data() );
-    QImage * outImage = generatorThread->takeImage();
+    TQImage * outImage = generatorThread->takeImage();
     TextPage * outTextPage = generatorThread->takeTextPage();
-    QValueList< ObjectRect * > outRects = generatorThread->takeObjectRects();
+    TQValueList< ObjectRect * > outRects = generatorThread->takeObjectRects();
 
-    request->page->setPixmap( request->id, new QPixmap( *outImage ) );
+    request->page->setPixmap( request->id, new TQPixmap( *outImage ) );
     delete outImage;
     if ( outTextPage )
         request->page->setSearchPage( outTextPage );
@@ -1105,9 +1105,9 @@ struct PPGThreadPrivate
     PixmapRequest * currentRequest;
 
     // internal temp stored items. don't delete this.
-    QImage * m_image;
+    TQImage * m_image;
     TextPage * m_textPage;
-    QValueList< ObjectRect * > m_rects;
+    TQValueList< ObjectRect * > m_rects;
     bool m_rectsTaken;
 };
 
@@ -1129,7 +1129,7 @@ PDFPixmapGeneratorThread::~PDFPixmapGeneratorThread()
     delete d->m_textPage;
     if ( !d->m_rectsTaken && d->m_rects.count() )
     {
-        QValueList< ObjectRect * >::iterator it = d->m_rects.begin(), end = d->m_rects.end();
+        TQValueList< ObjectRect * >::iterator it = d->m_rects.begin(), end = d->m_rects.end();
         for ( ; it != end; ++it )
             delete *it;
     }
@@ -1161,7 +1161,7 @@ void PDFPixmapGeneratorThread::startGeneration( PixmapRequest * request )
 #endif
     // set generation parameters and run thread
     d->currentRequest = request;
-    start( QThread::InheritPriority );
+    start( TQThread::InheritPriority );
 }
 
 void PDFPixmapGeneratorThread::endGeneration()
@@ -1179,9 +1179,9 @@ void PDFPixmapGeneratorThread::endGeneration()
     d->currentRequest = 0;
 }
 
-QImage * PDFPixmapGeneratorThread::takeImage() const
+TQImage * PDFPixmapGeneratorThread::takeImage() const
 {
-    QImage * img = d->m_image;
+    TQImage * img = d->m_image;
     d->m_image = 0;
     return img;
 }
@@ -1193,7 +1193,7 @@ TextPage * PDFPixmapGeneratorThread::takeTextPage() const
     return tp;
 }
 
-QValueList< ObjectRect * > PDFPixmapGeneratorThread::takeObjectRects() const
+TQValueList< ObjectRect * > PDFPixmapGeneratorThread::takeObjectRects() const
 {
     d->m_rectsTaken = true;
     return d->m_rects;
@@ -1253,7 +1253,7 @@ void PDFPixmapGeneratorThread::run()
     d->generator->docLock.unlock();
 
     // notify the GUI thread that data is pending and can be read
-    QCustomEvent * readyEvent = new QCustomEvent( TGE_DATAREADY_ID );
+    TQCustomEvent * readyEvent = new TQCustomEvent( TGE_DATAREADY_ID );
     readyEvent->setData( d->currentRequest );
-    QApplication::postEvent( d->generator, readyEvent );
+    TQApplication::postEvent( d->generator, readyEvent );
 }

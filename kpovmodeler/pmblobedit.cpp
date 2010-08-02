@@ -20,12 +20,12 @@
 #include "pmblob.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 
-PMBlobEdit::PMBlobEdit( QWidget* parent, const char* name )
+PMBlobEdit::PMBlobEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -35,8 +35,8 @@ void PMBlobEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Threshold:" ), this ) );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Threshold:" ), this ) );
    m_pThreshold = new PMFloatEdit( this );
    hl->addWidget( m_pThreshold );
    m_pThreshold->setValidation( true, 0.0, false, 0 );
@@ -44,14 +44,14 @@ void PMBlobEdit::createTopWidgets( )
                                         PMFloatEdit::OpLess );
    hl->addStretch( 1 );
 
-   m_pSturm = new QCheckBox( i18n( "Sturm" ), this );
+   m_pSturm = new TQCheckBox( i18n( "Sturm" ), this );
    topLayout( )->addWidget( m_pSturm );
-   m_pHierarchy = new QCheckBox( i18n( "Hierarchy" ), this );
+   m_pHierarchy = new TQCheckBox( i18n( "Hierarchy" ), this );
    topLayout( )->addWidget( m_pHierarchy );
    
-   connect( m_pThreshold, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pHierarchy, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSturm, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pThreshold, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHierarchy, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBlobEdit::displayObject( PMObject* o )

@@ -28,10 +28,10 @@
 #include <kprinter.h>
 #include <ktempfile.h>
 #include "kvsprefs.h"
-#include <qapplication.h>
-#include <qpaintdevicemetrics.h>
-#include <qprinter.h>
-#include <qtooltip.h>
+#include <tqapplication.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqprinter.h>
+#include <tqtooltip.h>
 
 #include "ByteStream.h"
 #include "DjVuToPS.h"
@@ -47,8 +47,8 @@ typedef KParts::GenericFactory<DjVuMultiPage> DjVuMultiPageFactory;
 K_EXPORT_COMPONENT_FACTORY(djvuviewpart, DjVuMultiPageFactory)
 
 
-DjVuMultiPage::DjVuMultiPage(QWidget *parentWidget, const char *widgetName, QObject *parent,
-                             const char *name, const QStringList&)
+DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+                             const char *name, const TQStringList&)
   : KMultiPage(parentWidget, widgetName, parent, name), djvuRenderer(parentWidget)
 {
   /* This is kparts wizardry that cannot be understood by man. Simply
@@ -57,7 +57,7 @@ DjVuMultiPage::DjVuMultiPage(QWidget *parentWidget, const char *widgetName, QObj
   djvuRenderer.setName("DjVu renderer");
 
   // Render modes
-  QStringList renderModes;
+  TQStringList renderModes;
   renderModes.append(i18n("Color"));
   renderModes.append(i18n("Black and White"));
   renderModes.append(i18n("Show foreground only"));
@@ -67,10 +67,10 @@ DjVuMultiPage::DjVuMultiPage(QWidget *parentWidget, const char *widgetName, QObj
 
   renderModeAction->setCurrentItem(Prefs::renderMode());
 
-  deletePagesAction = new KAction(i18n("Delete Pages..."), 0, this, SLOT(slotDeletePages()), actionCollection(), "delete_pages");
+  deletePagesAction = new KAction(i18n("Delete Pages..."), 0, this, TQT_SLOT(slotDeletePages()), actionCollection(), "delete_pages");
 
   // change the rendermode
-  connect(renderModeAction, SIGNAL(activated(int)), this, SLOT(setRenderMode(int)));
+  connect(renderModeAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(setRenderMode(int)));
 
   /* It is very important that this method is called in the
      constructor. Otherwise kmultipage does not know how to render
@@ -122,11 +122,11 @@ void DjVuMultiPage::setFile(bool r)
   enableActions(r);
 }
 
-QStringList DjVuMultiPage::fileFormats() const
+TQStringList DjVuMultiPage::fileFormats() const
 {
   /* This list is used in the file selection dialog when the file is
      saved */
-  QStringList r;
+  TQStringList r;
   r << i18n("*.djvu|DjVu file (*.djvu)");
   return r;
 }
@@ -164,10 +164,10 @@ void DjVuMultiPage::slotDeletePages()
   
   KDialogBase dialog( parentWdg, "urldialog", true, i18n("Delete Pages"), KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
   PageRangeWidget range( 1, numberOfPages(), currentPageNumber(), &dialog, "range widget" );
-  QToolTip::add( &range, i18n( "Select the pages you wish to delete." ) );
+  TQToolTip::add( &range, i18n( "Select the pages you wish to delete." ) );
   dialog.setButtonOK(i18n("Delete Pages"));
   dialog.setMainWidget(&range);
-  if (dialog.exec() != QDialog::Accepted)
+  if (dialog.exec() != TQDialog::Accepted)
     return;
 
   djvuRenderer.deletePages(range.getFrom(), range.getTo());
@@ -188,7 +188,7 @@ void DjVuMultiPage::slotDeletePages()
   //@@@@@@@@@@  tableOfContents->setContents(renderer->getBookmarks());
   
   // Clear Statusbar
-  emit setStatusBarText(QString::null);
+  emit setStatusBarText(TQString::null);
 }
 
 
@@ -222,7 +222,7 @@ void DjVuMultiPage::print()
   // initialize the printer using the print dialog
   if ( printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1))) ) {    
     // Now do the printing. 
-    QValueList<int> pageList = printer->pageList();
+    TQValueList<int> pageList = printer->pageList();
     if (pageList.isEmpty()) 
       printer->abort();
     else {
@@ -236,7 +236,7 @@ void DjVuMultiPage::print()
       
       // Set PostScript Language Level, taking 3 as the default
       options.set_format(DjVuToPS::Options::PS);
-      QString op = printer->option( "kde-kdjvu-pslevel" );
+      TQString op = printer->option( "kde-kdjvu-pslevel" );
       if (op == "1")
 	options.set_level(1);
       else
@@ -279,12 +279,12 @@ void DjVuMultiPage::print()
       else
 	options.set_zoom(100);
       
-      KTempFile tmpPSFile(QString::null, "ps");
+      KTempFile tmpPSFile(TQString::null, "ps");
       tmpPSFile.close();
       tmpPSFile.setAutoDelete(true);
       
       if (djvuRenderer.convertToPSFile(converter, tmpPSFile.name(), pageList ) == true)
-	printer->printFiles( QStringList(tmpPSFile.name()), true );
+	printer->printFiles( TQStringList(tmpPSFile.name()), true );
       else
 	printer->abort();
     }
@@ -312,18 +312,18 @@ void DjVuMultiPage::slotSave()
     return;
 
   // Try to guess the proper ending...
-  QString formats;
-  QString ending;
+  TQString formats;
+  TQString ending;
   int rindex = m_file.findRev(".");
   if (rindex == -1) {
-    ending = QString::null;
-    formats = QString::null;
+    ending = TQString::null;
+    formats = TQString::null;
   } else {
     ending = m_file.mid(rindex); // e.g. ".dvi"
     formats = fileFormats().grep(ending).join("\n");
   }
 
-  QString fileName = KFileDialog::getSaveFileName(QString::null, formats, 0, i18n("Save File As"));
+  TQString fileName = KFileDialog::getSaveFileName(TQString::null, formats, 0, i18n("Save File As"));
 
   if (fileName.isEmpty())
     return;
@@ -333,7 +333,7 @@ void DjVuMultiPage::slotSave()
   if (!ending.isEmpty() && fileName.find(ending) == -1)
     fileName = fileName+ending;
 
-  if (QFile(fileName).exists()) {
+  if (TQFile(fileName).exists()) {
     int r = KMessageBox::warningContinueCancel(parentWdg, i18n("The file %1\nalready exists. Do you want to overwrite it?").arg(fileName),
 					       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)

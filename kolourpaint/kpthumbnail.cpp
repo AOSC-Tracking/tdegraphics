@@ -30,9 +30,9 @@
 
 #include <kpthumbnail.h>
 
-#include <qdockarea.h>
-#include <qdockwindow.h>
-#include <qtimer.h>
+#include <tqdockarea.h>
+#include <tqdockwindow.h>
+#include <tqtimer.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -47,10 +47,10 @@
 // TODO: get out of the Alt+Tab list
 kpThumbnail::kpThumbnail (kpMainWindow *parent, const char *name)
 #if KP_IS_QT_3_3
-    : QDockWindow (QDockWindow::OutsideDock, parent, name),
+    : TQDockWindow (TQDockWindow::OutsideDock, parent, name),
 #else  // With Qt <3.3, OutsideDock requires parent = 0,
        // sync: make sure outside of dock
-    : QDockWindow (QDockWindow::InDock, parent, name),
+    : TQDockWindow (TQDockWindow::InDock, parent, name),
     #warning "Using Qt <3.3: the thumbnail will flicker more when appearing"
 #endif
       m_mainWindow (parent),
@@ -81,22 +81,22 @@ kpThumbnail::kpThumbnail (kpMainWindow *parent, const char *name)
     }
 
 
-    QSize layoutMinimumSize = layout () ? layout ()->minimumSize () : QSize ();
+    TQSize layoutMinimumSize = layout () ? layout ()->minimumSize () : TQSize ();
 #if DEBUG_KP_THUMBNAIL
     kdDebug () << "\tlayout=" << layout ()
-               << " minSize=" << (layout () ? layout ()->minimumSize () : QSize ()) << endl;
+               << " minSize=" << (layout () ? layout ()->minimumSize () : TQSize ()) << endl;
     kdDebug () << "\tboxLayout=" << boxLayout ()
-               << " minSize=" << (boxLayout () ? boxLayout ()->minimumSize () : QSize ())
+               << " minSize=" << (boxLayout () ? boxLayout ()->minimumSize () : TQSize ())
                << endl;
 #endif
     if (layout ())
-        layout ()->setResizeMode (QLayout::FreeResize);
+        layout ()->setResizeMode (TQLayout::FreeResize);
     setMinimumSize (QMAX (layoutMinimumSize.width (), 64),
                     QMAX (layoutMinimumSize.height (), 64));
 
 
     // Enable "X" Close Button
-    setCloseMode (QDockWindow::Always);
+    setCloseMode (TQDockWindow::Always);
 
     setResizeEnabled (true);
 
@@ -127,10 +127,10 @@ void kpThumbnail::setView (kpThumbnailView *view)
 
     if (m_view)
     {
-        disconnect (m_view, SIGNAL (destroyed ()),
-                    this, SLOT (slotViewDestroyed ()));
-        disconnect (m_view, SIGNAL (zoomLevelChanged (int, int)),
-                    this, SLOT (updateCaption ()));
+        disconnect (m_view, TQT_SIGNAL (destroyed ()),
+                    this, TQT_SLOT (slotViewDestroyed ()));
+        disconnect (m_view, TQT_SIGNAL (zoomLevelChanged (int, int)),
+                    this, TQT_SLOT (updateCaption ()));
 
         boxLayout ()->remove (m_view);
     }
@@ -139,10 +139,10 @@ void kpThumbnail::setView (kpThumbnailView *view)
 
     if (m_view)
     {
-        connect (m_view, SIGNAL (destroyed ()),
-                 this, SLOT (slotViewDestroyed ()));
-        connect (m_view, SIGNAL (zoomLevelChanged (int, int)),
-                 this, SLOT (updateCaption ()));
+        connect (m_view, TQT_SIGNAL (destroyed ()),
+                 this, TQT_SLOT (slotViewDestroyed ()));
+        connect (m_view, TQT_SIGNAL (zoomLevelChanged (int, int)),
+                 this, TQT_SLOT (updateCaption ()));
         updateCaption ();
 
         boxLayout ()->addWidget (m_view);
@@ -182,14 +182,14 @@ void kpThumbnail::slotViewDestroyed ()
 
 
 // protected virtual [base QWidget]
-void kpThumbnail::resizeEvent (QResizeEvent *e)
+void kpThumbnail::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_THUMBNAIL
     kdDebug () << "kpThumbnail::resizeEvent(" << width ()
                << "," << height () << ")" << endl;
 #endif
 
-    QDockWindow::resizeEvent (e);
+    TQDockWindow::resizeEvent (e);
 
     // updateVariableZoom ();  TODO: is below a good idea since this commented out
 
@@ -203,7 +203,7 @@ void kpThumbnail::resizeEvent (QResizeEvent *e)
 }
 
 // protected virtual [base QWidget]
-void kpThumbnail::moveEvent (QMoveEvent * /*e*/)
+void kpThumbnail::moveEvent (TQMoveEvent * /*e*/)
 {
     if (m_mainWindow)
         m_mainWindow->notifyThumbnailGeometryChanged ();

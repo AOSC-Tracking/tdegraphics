@@ -103,7 +103,7 @@ PMPolynom::~PMPolynom( )
 {
 }
 
-QString PMPolynom::description( ) const
+TQString PMPolynom::description( ) const
 {
    if( m_order == 2 )
       return i18n( "quadric" );
@@ -114,7 +114,7 @@ QString PMPolynom::description( ) const
    return i18n( "polynom" );
 }
 
-void PMPolynom::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMPolynom::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "order", m_order );
    e.setAttribute( "coefficients", m_coefficients.serializeXML( ) );
@@ -158,7 +158,7 @@ void PMPolynom::cleanUp( ) const
    Base::cleanUp( );
 }
 
-PMDialogEditBase* PMPolynom::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMPolynom::editWidget( TQWidget* parent ) const
 {
    return new PMPolynomEdit( parent );
 }

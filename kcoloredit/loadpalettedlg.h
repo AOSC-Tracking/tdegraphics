@@ -18,7 +18,7 @@
 #ifndef LOADPALETTEDLG_H
 #define LOADPALETTEDLG_H
 
-#include <qcombobox.h>
+#include <tqcombobox.h>
 #include <kdialog.h>
 
 /**A dialog showing a list of installed palettes, with a possibility
@@ -31,16 +31,16 @@ class LoadPaletteDlg : public KDialogBase  {
 public:
 	/** constructs the dialog
 	 */
-	LoadPaletteDlg(QWidget *parent = 0, const char *name = 0);
+	LoadPaletteDlg(TQWidget *parent = 0, const char *name = 0);
 	~LoadPaletteDlg();
 	/** @return the fetched file name
 	 */
-	QString getFileName();
+	TQString getFileName();
 	
 protected slots:
 	/** sets fileName
 	 */
-	void setFileName(QString* fileName);	
+	void setFileName(TQString* fileName);	
 	/** sets fileName to that at position index in palettesFileNames
 	 */
 	void setFileName(int index);	
@@ -51,13 +51,13 @@ protected slots:
 private:
 	/** A widget holding palettes names
 	 */
-	QComboBox* paletteBox;
+	TQComboBox* paletteBox;
 	/** A list of KDE palettes file names
 	 */
-	QStringList palettesFileNames;
+	TQStringList palettesFileNames;
 	/** A fetched palette file name
 	 */
-	QString fileName;
+	TQString fileName;
 	/** whether a browse file name hab already been inserted into
 	 *  palettesFilenames
 	 */

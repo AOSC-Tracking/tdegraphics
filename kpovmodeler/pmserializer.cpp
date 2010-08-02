@@ -25,7 +25,7 @@ unsigned int PMSerializer::s_maxErrors = 30;
 unsigned int PMSerializer::s_maxWarnings = 50;
 
 
-PMSerializer::PMSerializer( QIODevice* dev )
+PMSerializer::PMSerializer( TQIODevice* dev )
 {
    m_pDev = dev;
    m_errors = 0;
@@ -57,12 +57,12 @@ int PMSerializer::errorFlags( ) const
    return result;
 }
 
-void PMSerializer::printMessage( const QString& type, const QString& msg )
+void PMSerializer::printMessage( const TQString& type, const TQString& msg )
 {
    m_messages += PMMessage( type + ": " + msg );
 }
 
-void PMSerializer::printError( const QString& msg )
+void PMSerializer::printError( const TQString& msg )
 {
    if( m_errors < s_maxErrors )
    {
@@ -77,7 +77,7 @@ void PMSerializer::printError( const QString& msg )
    }
 }
 
-void PMSerializer::printWarning( const QString& msg )
+void PMSerializer::printWarning( const TQString& msg )
 {
    if( m_warnings < s_maxWarnings )
    {

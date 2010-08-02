@@ -24,16 +24,16 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qstring.h>
+#include <tqwidget.h>
+#include <tqstring.h>
 
 #include "pmobject.h"
 
-class QBoxLayout;
-class QCheckBox;
-class QLayout;
-class QPushButton;
-class QVBox;
+class TQBoxLayout;
+class TQCheckBox;
+class TQLayout;
+class TQPushButton;
+class TQVBox;
 class KConfig;
 class PMPart;
 class PMPovrayRenderWidget;
@@ -62,7 +62,7 @@ public:
     * No widgets are created within the constructor! You have to call
     * @ref createWidgets after creating a new edit widget.
     */
-   PMDialogEditBase( QWidget* parent, const char* name = 0 );
+   PMDialogEditBase( TQWidget* parent, const char* name = 0 );
    /**
     * Destructor
     */
@@ -108,7 +108,7 @@ public:
    /**
     * Returns the help topic
     */
-   const QString& helpTopic( ) { return m_helpTopic; }
+   const TQString& helpTopic( ) { return m_helpTopic; }
 
    /**
     * Discards changes and redisplays the object
@@ -123,11 +123,11 @@ public:
    /**
     * Sets the check box to state s
     */
-   static void setCheckBox( QCheckBox* box, PMThreeState s );
+   static void setCheckBox( TQCheckBox* box, PMThreeState s );
    /**
     * Gets the state of the checkbox
     */
-   static PMThreeState checkBoxState( QCheckBox* box );
+   static PMThreeState checkBoxState( TQCheckBox* box );
 
    /**
     * Sets the part
@@ -215,35 +215,35 @@ public:
    /**
     * Returns the first wall color
     */
-   static QColor previewWallColor1( ) { return s_wallColor1; }
+   static TQColor previewWallColor1( ) { return s_wallColor1; }
    /**
     * Sets the first wall color
     */
-   static void setPreviewWallColor1( const QColor& c ) { s_wallColor1 = c; }
+   static void setPreviewWallColor1( const TQColor& c ) { s_wallColor1 = c; }
    /**
     * Returns the second wall color
     */
-   static QColor previewWallColor2( ) { return s_wallColor2; }
+   static TQColor previewWallColor2( ) { return s_wallColor2; }
    /**
     * Sets the second wall color
     */
-   static void setPreviewWallColor2( const QColor& c ) { s_wallColor2 = c; }
+   static void setPreviewWallColor2( const TQColor& c ) { s_wallColor2 = c; }
    /**
     * Returns the first floor color
     */
-   static QColor previewFloorColor1( ) { return s_floorColor1; }
+   static TQColor previewFloorColor1( ) { return s_floorColor1; }
    /**
     * Sets the first floor color
     */
-   static void setPreviewFloorColor1( const QColor& c ) { s_floorColor1 = c; }
+   static void setPreviewFloorColor1( const TQColor& c ) { s_floorColor1 = c; }
    /**
     * Returns the second floor color
     */
-   static QColor previewFloorColor2( ) { return s_floorColor2; }
+   static TQColor previewFloorColor2( ) { return s_floorColor2; }
    /**
     * Sets the second floor color
     */
-   static void setPreviewFloorColor2( const QColor& c ) { s_floorColor2 = c; }
+   static void setPreviewFloorColor2( const TQColor& c ) { s_floorColor2 = c; }
    /**
     * Returns the local flag for texture preview
     */
@@ -268,7 +268,7 @@ protected:
     * Sets the help topic
     * @param anchor Defined anchor in your docbook sources
     */
-   void setHelp( const QString& anchor );
+   void setHelp( const TQString& anchor );
 
    /**
     * Create widgets here, that should be placed on top of the widgets
@@ -297,7 +297,7 @@ protected:
    /**
     * Returns a pointer to the top layout
     */
-   QBoxLayout* topLayout( ) const { return m_pTopLayout; }
+   TQBoxLayout* topLayout( ) const { return m_pTopLayout; }
 
 protected slots:
    void slotTexturePreview( );
@@ -326,16 +326,16 @@ private:
    void findTextures( PMObject*& global, PMObject*& local ) const;
    
    PMObject* m_pDisplayedObject;
-   QBoxLayout* m_pTopLayout;
-   QString m_helpTopic;
+   TQBoxLayout* m_pTopLayout;
+   TQString m_helpTopic;
    PMPart* m_pPart;
-   QWidget* m_pTexturePreviewWidget;
+   TQWidget* m_pTexturePreviewWidget;
    PMPovrayRenderWidget* m_pRenderWidget;
    PMPovrayOutputWidget* m_pOutputWidget;
-   QVBox* m_pRenderFrame;
-   QCheckBox* m_pPreviewLocalBox;
-   QPushButton* m_pPreviewButton;
-   QPushButton* m_pOutputButton;
+   TQVBox* m_pRenderFrame;
+   TQCheckBox* m_pPreviewLocalBox;
+   TQPushButton* m_pPreviewButton;
+   TQPushButton* m_pOutputButton;
 
    static int s_previewSize;
    static bool s_showSphere;
@@ -346,8 +346,8 @@ private:
    static double s_previewAAThreshold;
    static bool s_showFloor;
    static bool s_showWall;
-   static QColor s_wallColor1, s_wallColor2;
-   static QColor s_floorColor1, s_floorColor2;
+   static TQColor s_wallColor1, s_wallColor2;
+   static TQColor s_floorColor1, s_floorColor2;
    static bool s_previewLocal;
    static double s_previewGamma;
 };

@@ -42,7 +42,7 @@
 #include "SVGDocumentImpl.h"
 #include "SVGSVGElementImpl.h"
 
-#include <qimage.h>
+#include <tqimage.h>
 
 using namespace KSVG;
 
@@ -67,21 +67,21 @@ struct KSVGPlugin::Private
 	KToggleAction *progressiveAction;
 	KSelectAction *renderingBackendAction;
 
-	QString description;
+	TQString description;
 
-	QPoint panPoint;
+	TQPoint panPoint;
 	float zoomFactor;
 
 	SVGDocumentImpl *doc;
 	KSVGCanvas *canvas;
-	QPixmap *backgroundPixmap;
+	TQPixmap *backgroundPixmap;
 	KAboutApplication *aboutKSVG;
 
 	unsigned int width;
 	unsigned int height;
 };
 
-KSVGPlugin::KSVGPlugin(QWidget *wparent, const char *, QObject *parent, const char *name, unsigned int width, unsigned int height) : KParts::ReadOnlyPart(parent, name)
+KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const char *name, unsigned int width, unsigned int height) : KParts::ReadOnlyPart(parent, name)
 {
 	kdDebug(26003) << "KSVGPlugin::KSVGPlugin" << endl;
 	setInstance(KSVGPluginFactory::instance());
@@ -96,14 +96,14 @@ KSVGPlugin::KSVGPlugin(QWidget *wparent, const char *, QObject *parent, const ch
 	ksvgd->doc = 0;
 
 	ksvgd->window = new KSVGWidget(this, wparent, "Rendering Widget");
-	connect(ksvgd->window, SIGNAL(browseURL(const QString &)), this, SLOT(browseURL(const QString &)));
+	connect(ksvgd->window, TQT_SIGNAL(browseURL(const TQString &)), this, TQT_SLOT(browseURL(const TQString &)));
 	ksvgd->window->show();
 
 	KParts::Part::setWidget(ksvgd->window);
 
 	ksvgd->extension = new KSVGPluginBrowserExtension(this);
 
-	ksvgd->backgroundPixmap = new QPixmap(width > 0 ? width : DEFAULT_WIDTH, height > 0 ? height : DEFAULT_HEIGHT);
+	ksvgd->backgroundPixmap = new TQPixmap(width > 0 ? width : DEFAULT_WIDTH, height > 0 ? height : DEFAULT_HEIGHT);
 	ksvgd->backgroundPixmap->fill();
 
 	ksvgd->canvas = KSVG::CanvasFactory::self()->loadCanvas(width > 0 ? width : DEFAULT_WIDTH, height > 0 ? height : DEFAULT_HEIGHT);
@@ -112,28 +112,28 @@ KSVGPlugin::KSVGPlugin(QWidget *wparent, const char *, QObject *parent, const ch
 
 	ksvgd->canvas->setup(ksvgd->backgroundPixmap, ksvgd->window);
 
-	ksvgd->zoomInAction = KStdAction::zoomIn(this, SLOT(slotZoomIn()), actionCollection());
-	ksvgd->zoomOutAction = KStdAction::zoomOut(this, SLOT(slotZoomOut()), actionCollection());
-	ksvgd->zoomResetAction =  new KAction(i18n("Zoom &Reset"), "viewmag", this, SLOT(slotZoomReset()), actionCollection(), "zoom_reset");
-	ksvgd->stopAnimationsAction = new KAction(i18n("&Stop Animations"), "stop", Key_Escape, this, SLOT(slotStop()), actionCollection(), "stop_anims");
-	ksvgd->viewSourceAction = new KAction(i18n("View &Source"), "document2", Key_F6, this, SLOT(slotViewSource()), actionCollection(), "view_source");
-	ksvgd->viewMemoryAction = new KAction(i18n("View &Memory"), "document2", Key_F7, this, SLOT(slotViewMemory()), actionCollection(), "view_memory");
-	ksvgd->saveToPNG = new KAction(i18n("Save to PNG..."), "save", 0, this, SLOT(slotSaveToPNG()), actionCollection(), "save_to_png");
-//	ksvgd->aboutApp = KStdAction::aboutApp(this, SLOT(slotAboutKSVG()), actionCollection());//, "KSVG");
-	ksvgd->aboutApp = new KAction(i18n("About KSVG"), "vectorgfx", 0, this, SLOT(slotAboutKSVG()), actionCollection(), "help_about_app");
-	ksvgd->fontKerningAction = new KToggleAction(i18n("Use Font &Kerning"), "viewmagfit", Key_F8, this, SLOT(slotFontKerning()), actionCollection(), "font_kerning");
-	ksvgd->progressiveAction = new KToggleAction(i18n("Use &Progressive Rendering"), "", Key_F9, this, SLOT(slotProgressiveRendering()), actionCollection(), "progressive");
+	ksvgd->zoomInAction = KStdAction::zoomIn(this, TQT_SLOT(slotZoomIn()), actionCollection());
+	ksvgd->zoomOutAction = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()), actionCollection());
+	ksvgd->zoomResetAction =  new KAction(i18n("Zoom &Reset"), "viewmag", this, TQT_SLOT(slotZoomReset()), actionCollection(), "zoom_reset");
+	ksvgd->stopAnimationsAction = new KAction(i18n("&Stop Animations"), "stop", Key_Escape, this, TQT_SLOT(slotStop()), actionCollection(), "stop_anims");
+	ksvgd->viewSourceAction = new KAction(i18n("View &Source"), "document2", Key_F6, this, TQT_SLOT(slotViewSource()), actionCollection(), "view_source");
+	ksvgd->viewMemoryAction = new KAction(i18n("View &Memory"), "document2", Key_F7, this, TQT_SLOT(slotViewMemory()), actionCollection(), "view_memory");
+	ksvgd->saveToPNG = new KAction(i18n("Save to PNG..."), "save", 0, this, TQT_SLOT(slotSaveToPNG()), actionCollection(), "save_to_png");
+//	ksvgd->aboutApp = KStdAction::aboutApp(this, TQT_SLOT(slotAboutKSVG()), actionCollection());//, "KSVG");
+	ksvgd->aboutApp = new KAction(i18n("About KSVG"), "vectorgfx", 0, this, TQT_SLOT(slotAboutKSVG()), actionCollection(), "help_about_app");
+	ksvgd->fontKerningAction = new KToggleAction(i18n("Use Font &Kerning"), "viewmagfit", Key_F8, this, TQT_SLOT(slotFontKerning()), actionCollection(), "font_kerning");
+	ksvgd->progressiveAction = new KToggleAction(i18n("Use &Progressive Rendering"), "", Key_F9, this, TQT_SLOT(slotProgressiveRendering()), actionCollection(), "progressive");
 
 	KSimpleConfig config("ksvgpluginrc", true);
 	config.setGroup("Rendering");
 	ksvgd->fontKerningAction->setChecked(config.readBoolEntry("FontKerning", true));
 	ksvgd->progressiveAction->setChecked(config.readBoolEntry("ProgressiveRendering", true));
 
-	ksvgd->renderingBackendAction = new KSelectAction(i18n("Rendering &Backend"), 0, this, SLOT(slotRenderingBackend()), actionCollection(), "rendering_backend");
+	ksvgd->renderingBackendAction = new KSelectAction(i18n("Rendering &Backend"), 0, this, TQT_SLOT(slotRenderingBackend()), actionCollection(), "rendering_backend");
 
-	QStringList items;
-	QPtrList<KSVG::CanvasInfo> canvasList = KSVG::CanvasFactory::self()->canvasList();
-	QPtrListIterator<KSVG::CanvasInfo> it(canvasList);
+	TQStringList items;
+	TQPtrList<KSVG::CanvasInfo> canvasList = KSVG::CanvasFactory::self()->canvasList();
+	TQPtrListIterator<KSVG::CanvasInfo> it(canvasList);
 	KSVG::CanvasInfo *canvasInfo = 0;
 	while((canvasInfo = it.current()) != 0)
 	{
@@ -184,7 +184,7 @@ void KSVGPlugin::reset()
 
 	ksvgd->zoomFactor = 1;
 	ksvgd->window->reset();
-	ksvgd->panPoint = QPoint(0, 0);
+	ksvgd->panPoint = TQPoint(0, 0);
 }
 
 bool KSVGPlugin::openURL(const KURL &url)
@@ -204,12 +204,12 @@ bool KSVGPlugin::openURL(const KURL &url)
 		ksvgd->doc->addToDocumentDict(ksvgd->doc->handle(), ksvgd->doc);
 		ksvgd->doc->setReferrer(ksvgd->extension->urlArgs().metaData()["referrer"]);
 
-		connect(ksvgd->doc, SIGNAL(finishedParsing(bool, const QString &)), this, SLOT(slotParsingFinished(bool, const QString &)));
-		connect(ksvgd->doc, SIGNAL(finishedRendering()), this, SLOT(slotRenderingFinished()));
-		connect(ksvgd->doc, SIGNAL(gotDescription(const QString &)), this, SLOT(slotSetDescription(const QString &)));
-		connect(ksvgd->doc, SIGNAL(gotTitle(const QString &)), this, SLOT(slotSetTitle(const QString &)));
-		connect(ksvgd->doc, SIGNAL(gotURL(const QString &)), this, SLOT(slotGotURL(const QString &)));
-		connect(ksvgd->window, SIGNAL(redraw(const QRect &)), this, SLOT(slotRedraw(const QRect &)));
+		connect(ksvgd->doc, TQT_SIGNAL(finishedParsing(bool, const TQString &)), this, TQT_SLOT(slotParsingFinished(bool, const TQString &)));
+		connect(ksvgd->doc, TQT_SIGNAL(finishedRendering()), this, TQT_SLOT(slotRenderingFinished()));
+		connect(ksvgd->doc, TQT_SIGNAL(gotDescription(const TQString &)), this, TQT_SLOT(slotSetDescription(const TQString &)));
+		connect(ksvgd->doc, TQT_SIGNAL(gotTitle(const TQString &)), this, TQT_SLOT(slotSetTitle(const TQString &)));
+		connect(ksvgd->doc, TQT_SIGNAL(gotURL(const TQString &)), this, TQT_SLOT(slotGotURL(const TQString &)));
+		connect(ksvgd->window, TQT_SIGNAL(redraw(const TQRect &)), this, TQT_SLOT(slotRedraw(const TQRect &)));
 
 		ksvgd->backgroundPixmap->fill();
 		bitBlt(ksvgd->window, 0, 0, ksvgd->backgroundPixmap, 0, 0, ksvgd->backgroundPixmap->width(), ksvgd->backgroundPixmap->height());
@@ -225,7 +225,7 @@ bool KSVGPlugin::openURL(const KURL &url)
 	return true;
 }
 
-void KSVGPlugin::browseURL(const QString &url)
+void KSVGPlugin::browseURL(const TQString &url)
 {
 	ksvgd->doc->rootElement()->pauseAnimations();
 	KParts::URLArgs args;
@@ -233,7 +233,7 @@ void KSVGPlugin::browseURL(const QString &url)
 	emit ksvgd->extension->openURLRequest(KURL(m_url, url), args);
 }
 
-void KSVGPlugin::slotRedraw(const QRect &r)
+void KSVGPlugin::slotRedraw(const TQRect &r)
 {
 	if(ksvgd->window->width() != ksvgd->backgroundPixmap->width() ||
 	   ksvgd->window->height() != ksvgd->backgroundPixmap->height())
@@ -316,7 +316,7 @@ void KSVGPlugin::slotStop()
 		ksvgd->doc->rootElement()->pauseAnimations();
 }
 
-void KSVGPlugin::slotParsingFinished(bool error, const QString &errorDesc)
+void KSVGPlugin::slotParsingFinished(bool error, const TQString &errorDesc)
 {
 	emit completed();
 
@@ -356,14 +356,14 @@ void KSVGPlugin::slotSaveToPNG()
 {
 	if(ksvgd && ksvgd->backgroundPixmap)
 	{
-		QImage img = ksvgd->backgroundPixmap->convertToImage();
-		QString filename = KFileDialog::getSaveFileName();
+		TQImage img = ksvgd->backgroundPixmap->convertToImage();
+		TQString filename = KFileDialog::getSaveFileName();
 		if(!filename.isEmpty())
 			img.save(filename, "PNG");
 	}
 }
 
-void KSVGPlugin::setPanPoint(const QPoint &translate)
+void KSVGPlugin::setPanPoint(const TQPoint &translate)
 {
 	ksvgd->panPoint = translate;
 	update();
@@ -391,22 +391,22 @@ void KSVGPlugin::update()
 			ksvgd->doc->canvas()->update(ksvgd->panPoint);
 
 		// Fixes drawing glitches
-		slotRedraw(QRect(0, 0, ksvgd->backgroundPixmap->width(), ksvgd->backgroundPixmap->height()));
+		slotRedraw(TQRect(0, 0, ksvgd->backgroundPixmap->width(), ksvgd->backgroundPixmap->height()));
 	}
 }
 
-void KSVGPlugin::slotSetDescription(const QString &desc)
+void KSVGPlugin::slotSetDescription(const TQString &desc)
 {
 	ksvgd->description = desc;
 	emit setStatusBarText(i18n("Description: %1").arg(desc));
 }
 
-void KSVGPlugin::slotSetTitle(const QString &title)
+void KSVGPlugin::slotSetTitle(const TQString &title)
 {
 	emit setWindowCaption(title);
 }
 
-void KSVGPlugin::slotGotURL(const QString &text)
+void KSVGPlugin::slotGotURL(const TQString &text)
 {
 	if(text.isNull() && !ksvgd->description.isEmpty())
 		emit setStatusBarText(i18n("Description: %1").arg(ksvgd->description));

@@ -22,14 +22,14 @@
 #include "pmlineedits.h"
 #include "pmformulalabel.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
 #include <klocale.h>
 #include <kdialog.h>
 
-PMPolynomEdit::PMPolynomEdit( QWidget* parent, const char* name )
+PMPolynomEdit::PMPolynomEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -41,19 +41,19 @@ void PMPolynomEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Order" ), this ) );
-   m_pOrder = new QSpinBox( 2, 7, 1, this );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Order" ), this ) );
+   m_pOrder = new TQSpinBox( 2, 7, 1, this );
    hl->addWidget( m_pOrder );
    hl->addStretch( 1 );
-   connect( m_pOrder, SIGNAL( valueChanged( int ) ), SLOT( slotOrderChanged( int ) ) );
+   connect( m_pOrder, TQT_SIGNAL( valueChanged( int ) ), TQT_SLOT( slotOrderChanged( int ) ) );
    
-   topLayout( )->addWidget( new QLabel( i18n( "Formula:" ), this ) );
-   m_pPolyWidget = new QWidget( this );
+   topLayout( )->addWidget( new TQLabel( i18n( "Formula:" ), this ) );
+   m_pPolyWidget = new TQWidget( this );
    topLayout( )->addWidget( m_pPolyWidget );
-   m_pSturm = new QCheckBox( i18n( "Sturm" ), this );
+   m_pSturm = new TQCheckBox( i18n( "Sturm" ), this );
    topLayout( )->addWidget( m_pSturm );
-   connect( m_pSturm, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPolynomEdit::displayObject( PMObject* o )
@@ -89,7 +89,7 @@ void PMPolynomEdit::displayObject( PMObject* o )
 void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
                                          int dOrder )
 {
-   QValueList<PMPolynomExponents>& polynom
+   TQValueList<PMPolynomExponents>& polynom
       = PMPolynomExponents::polynom( dOrder );
       
    if( dOrder != m_currentOrder )
@@ -111,15 +111,15 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
       int nr = ( nedit + 2 ) / 3;
       int i;
       
-      QGridLayout* gl = new QGridLayout( m_pPolyWidget, nr * 2 - 1, 9, 0 );
-      QLabel* l = 0;
+      TQGridLayout* gl = new TQGridLayout( m_pPolyWidget, nr * 2 - 1, 9, 0 );
+      TQLabel* l = 0;
       PMFloatEdit* edit;
       PMFormulaLabel* fl;
       
-      QValueList<PMPolynomExponents>::ConstIterator it = polynom.begin( );
-      QString text;
+      TQValueList<PMPolynomExponents>::ConstIterator it = polynom.begin( );
+      TQString text;
       int row, col;
-      QString plus( "+" );
+      TQString plus( "+" );
       
       for( i = 0; it != polynom.end( ); i++, ++it )
       {
@@ -128,14 +128,14 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
 
          if( i != 0 )
          {
-            l = new QLabel( plus, m_pPolyWidget );
+            l = new TQLabel( plus, m_pPolyWidget );
             m_labels.append( l );
             gl->addWidget( l, row, col );
             l->show( );
          }
          
          edit = new PMFloatEdit( m_pPolyWidget );
-         connect( edit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+         connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
          m_edits.append( edit );
          gl->addWidget( edit, row, col + 1 );
          edit->show( );
@@ -157,18 +157,18 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
    
    if( dOrder == cOrder )
    {
-      QPtrListIterator<PMFloatEdit> eit( m_edits );
+      TQPtrListIterator<PMFloatEdit> eit( m_edits );
       int i;
       for( i = 0; *eit; ++eit, ++i )
          ( *eit )->setValue( co[i] );
    }
    else if( dOrder > cOrder )
    {
-      QValueList<PMPolynomExponents>::ConstIterator dit = polynom.begin( );
-      QValueList<PMPolynomExponents>& cpoly
+      TQValueList<PMPolynomExponents>::ConstIterator dit = polynom.begin( );
+      TQValueList<PMPolynomExponents>& cpoly
          = PMPolynomExponents::polynom( cOrder );
-      QValueList<PMPolynomExponents>::ConstIterator cit = cpoly.begin( );
-      QPtrListIterator<PMFloatEdit> eit( m_edits );
+      TQValueList<PMPolynomExponents>::ConstIterator cit = cpoly.begin( );
+      TQPtrListIterator<PMFloatEdit> eit( m_edits );
       int i = 0;
       
       for( ; ( dit != polynom.end( ) ) && ( cit != cpoly.end( ) ); ++dit, ++eit )
@@ -187,11 +187,11 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
    } 
    else // dOrder < cOrder
    {
-      QValueList<PMPolynomExponents>::ConstIterator dit = polynom.begin( );
-      QValueList<PMPolynomExponents>& cpoly
+      TQValueList<PMPolynomExponents>::ConstIterator dit = polynom.begin( );
+      TQValueList<PMPolynomExponents>& cpoly
          = PMPolynomExponents::polynom( cOrder );
-      QValueList<PMPolynomExponents>::ConstIterator cit = cpoly.begin( );
-      QPtrListIterator<PMFloatEdit> eit( m_edits );
+      TQValueList<PMPolynomExponents>::ConstIterator cit = cpoly.begin( );
+      TQPtrListIterator<PMFloatEdit> eit( m_edits );
       int i = 0;
       
       for( ; ( dit != polynom.end( ) ) && ( cit != cpoly.end( ) ); ++cit, ++i )
@@ -210,7 +210,7 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
 
 PMVector PMPolynomEdit::coefficients( ) const
 {
-   QPtrListIterator<PMFloatEdit> eit( m_edits );
+   TQPtrListIterator<PMFloatEdit> eit( m_edits );
    int num = m_edits.count( );
    PMVector v( num );
    int i;
@@ -235,7 +235,7 @@ void PMPolynomEdit::saveContents( )
 
 bool PMPolynomEdit::isDataValid( )
 {
-   QPtrListIterator<PMFloatEdit> eit( m_edits );
+   TQPtrListIterator<PMFloatEdit> eit( m_edits );
    for( ; *eit; ++eit )
       if( !( *eit )->isDataValid( ) )
          return false;

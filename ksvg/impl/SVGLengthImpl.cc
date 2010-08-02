@@ -20,10 +20,10 @@
 
 #include <kdebug.h>
 
-#include <qfont.h>
-#include <qregexp.h>
-#include <qwidget.h>
-#include <qpaintdevicemetrics.h>
+#include <tqfont.h>
+#include <tqregexp.h>
+#include <tqwidget.h>
+#include <tqpaintdevicemetrics.h>
 
 #include "SVGLength.h"
 
@@ -48,7 +48,7 @@ using namespace KSVG;
 #include "ksvg_cacheimpl.h"
 
 // keep track of textual description of the unit type
-QString UnitText[] =
+TQString UnitText[] =
 {
 	"", "", "%", "em", "ex", "px", "cm", "mm", "in", "pt", "pc"
 };
@@ -153,7 +153,7 @@ void SVGLengthImpl::setValueAsString(const DOM::DOMString &valueAsString)
 
 DOM::DOMString SVGLengthImpl::valueAsString() const
 {
-	DOM::DOMString valueAsString = QString::number(m_valueInSpecifiedUnits);
+	DOM::DOMString valueAsString = TQString::number(m_valueInSpecifiedUnits);
 	valueAsString += UnitText[m_unitType];
 	return valueAsString;
 }
@@ -209,7 +209,7 @@ bool SVGLengthImpl::getValFromPx()
 	return true;
 }
 
-void SVGLengthImpl::convertStringToPx(QString s)
+void SVGLengthImpl::convertStringToPx(TQString s)
 {
 	if(s.isEmpty())
 		return;
@@ -289,7 +289,7 @@ void SVGLengthImpl::convertNumToPx()
 				// Look up font-size in a SAFE way, because at this place
 				// processStyle() has NOT yet been called, so we need
 				// a different solution (Niko)
-				QString useFont = "Arial";
+				TQString useFont = "Arial";
 				double useSize = 12;
 				
 				if(sizeLocal)
@@ -307,10 +307,10 @@ void SVGLengthImpl::convertNumToPx()
 				else
 				{
 					// Easiest way, use qfont (Niko)
-					QFont font(useFont);
+					TQFont font(useFont);
 					font.setPixelSize(static_cast<int>(useSize));
 
-					QFontMetrics fm(font);
+					TQFontMetrics fm(font);
 					m_value = m_valueInSpecifiedUnits * fm.boundingRect('x').height();
 				}
 			}
@@ -318,7 +318,7 @@ void SVGLengthImpl::convertNumToPx()
 	};
 }
 
-void SVGLengthImpl::convertPercentageToFloat(const QString &perc, float &result)
+void SVGLengthImpl::convertPercentageToFloat(const TQString &perc, float &result)
 {
 	// TODO : more error checking ?
 	if(perc.endsWith("%"))
@@ -327,12 +327,12 @@ void SVGLengthImpl::convertPercentageToFloat(const QString &perc, float &result)
 		result = perc.toFloat();
 }
 
-QString SVGLengthImpl::convertValToPercentage(const QString &val, float benchmark)
+TQString SVGLengthImpl::convertValToPercentage(const TQString &val, float benchmark)
 {
 	if(val.endsWith("%"))
 		return val;
 
-	QString result;
+	TQString result;
 	float temp = val.toFloat();
 
 	temp = (temp / benchmark) * 100.0;
@@ -388,7 +388,7 @@ float SVGLengthImpl::percentageOfViewport()
 		if(!m_context->ownerDoc()->canvas()) // Happens when parsing <svg width="100%"> with printnodetest
 			return 0.0;
 				
-		QPaintDeviceMetrics metrics(m_context->ownerDoc()->canvas()->drawWindow());
+		TQPaintDeviceMetrics metrics(m_context->ownerDoc()->canvas()->drawWindow());
 
 		if(m_mode == LENGTHMODE_WIDTH)
 			return value * metrics.width();

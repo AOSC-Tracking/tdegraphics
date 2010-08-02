@@ -19,7 +19,7 @@
 #ifndef PROPERTYWIDGETS_H
 #define PROPERTYWIDGETS_H
 
-#include <qhbox.h>
+#include <tqhbox.h>
 
 #include "propertysheet.h"
 
@@ -31,7 +31,7 @@ namespace KMrml
         
     public:
         IntegerWidget( const PropertySheet& sheet, 
-                       QWidget *parent = parent, const char *name = 0L );
+                       TQWidget *parent = parent, const char *name = 0L );
         ~IntegerWidget();
 
         int value() const;
@@ -46,10 +46,10 @@ namespace KMrml
         
     public:
         ComboWidget( const PropertySheet& sheet, 
-                     QWidget *parent = parent, const char *name = 0L );
+                     TQWidget *parent = parent, const char *name = 0L );
         ~ComboWidget();
         
-        QString value() const;
+        TQString value() const;
         
     private:
         
@@ -61,7 +61,7 @@ namespace KMrml
         
     public:
         CheckBoxWidget( const PropertySheet& sheet, 
-                        QWidget *parent = parent, const char *name = 0L );
+                        TQWidget *parent = parent, const char *name = 0L );
         ~CheckBoxWidget();
         
         bool value();
@@ -78,10 +78,10 @@ namespace KMrml
         
     public:
         LineEditWidget( const PropertySheet& sheet, 
-                        QWidget *parent = parent, const char *name = 0L );
+                        TQWidget *parent = parent, const char *name = 0L );
         ~LineEditWidget();
         
-        QString value();
+        TQString value();
         
     private:
         
@@ -93,10 +93,10 @@ namespace KMrml
         
     public:
         ListBoxWidget( const PropertySheet& sheet, 
-                       QWidget *parent = parent, const char *name = 0L );
+                       TQWidget *parent = parent, const char *name = 0L );
         ~ListBoxWidget();
         
-        QStringList values();
+        TQStringList values();
         
     private:
         

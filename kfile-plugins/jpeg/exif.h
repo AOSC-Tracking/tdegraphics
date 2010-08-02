@@ -10,9 +10,9 @@
 #include <math.h>
 #include <time.h>
 
-#include "qstring.h"
-#include "qfile.h"
-#include "qimage.h"
+#include "tqstring.h"
+#include "tqfile.h"
+#include "tqimage.h"
 #include <kdebug.h>
 
 typedef enum {
@@ -42,9 +42,9 @@ typedef struct {
 class ExifData {
     Section_t Sections[MAX_SECTIONS];
 
-    QString CameraMake;
-    QString CameraModel;
-    QString DateTime;
+    TQString CameraMake;
+    TQString CameraModel;
+    TQString DateTime;
     int   Orientation;
     int   Height, Width;
     int   ExifImageLength, ExifImageWidth;
@@ -62,11 +62,11 @@ class ExifData {
     int   ExposureProgram;
     int   ISOequivalent;
     int   CompressionLevel;
-    QString UserComment;
-    QString Comment;
-    QImage Thumbnail;
+    TQString UserComment;
+    TQString Comment;
+    TQImage Thumbnail;
 
-    int ReadJpegSections (QFile & infile, ReadMode_t ReadMode);
+    int ReadJpegSections (TQFile & infile, ReadMode_t ReadMode);
     void DiscardData(void);
     int Get16u(void * Short);
     int Get32s(void * Long);
@@ -82,10 +82,10 @@ class ExifData {
 
 public:
     ExifData();
-    bool scan(const QString &);
-    QString getCameraMake() { return CameraMake; }
-    QString getCameraModel() { return CameraModel; }
-    QString getDateTime() { return DateTime; }
+    bool scan(const TQString &);
+    TQString getCameraMake() { return CameraMake; }
+    TQString getCameraModel() { return CameraModel; }
+    TQString getDateTime() { return DateTime; }
     int getOrientation() { return Orientation; }
     int getHeight() { return Height; }
     int getWidth() { return Width; }
@@ -103,9 +103,9 @@ public:
     int getExposureProgram() { return ExposureProgram; }
     int getISOequivalent() { return ISOequivalent; }
     int getCompressionLevel() { return CompressionLevel; }
-    QString getUserComment() { return UserComment; }
-    QString getComment() { return Comment; }
-    QImage getThumbnail();
+    TQString getUserComment() { return UserComment; }
+    TQString getComment() { return Comment; }
+    TQImage getThumbnail();
     bool isThumbnailSane();
     bool isNullThumbnail() { return !isThumbnailSane(); }
 };

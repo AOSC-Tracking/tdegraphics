@@ -21,13 +21,13 @@
 
 #include <kcmodule.h>
 
-class QVButtonGroup;
+class TQVButtonGroup;
 
 class KViewGeneralConfig : public KCModule
 {
 	Q_OBJECT
 	public:
-		KViewGeneralConfig( QWidget * parent, const char * name = 0, const QStringList & args = QStringList() );
+		KViewGeneralConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );
 		~KViewGeneralConfig();
 
 		virtual void load();
@@ -38,7 +38,7 @@ class KViewGeneralConfig : public KCModule
 		void resizeChanged( int );
 
 	private:
-		QVButtonGroup * m_pResizeGroup;
+		TQVButtonGroup * m_pResizeGroup;
 		int m_savedPosition;
 };
 

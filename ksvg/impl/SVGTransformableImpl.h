@@ -21,7 +21,7 @@
 #ifndef SVGTransformableImpl_H
 #define SVGTransformableImpl_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "SVGLocatableImpl.h"
 

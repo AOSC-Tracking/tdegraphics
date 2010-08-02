@@ -30,12 +30,12 @@
 
 #include <kpeffectreducecolors.h>
 
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qimage.h>
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqimage.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
+#include <tqradiobutton.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -43,7 +43,7 @@
 #include <kppixmapfx.h>
 
 
-QImage convertImageDepth (const QImage &image, int depth, bool dither)
+TQImage convertImageDepth (const TQImage &image, int depth, bool dither)
 {
 #if DEBUG_KP_EFFECT_REDUCE_COLORS
     kdDebug () << "::convertImageDepth() changing image (w=" << image.width ()
@@ -73,7 +73,7 @@ QImage convertImageDepth (const QImage &image, int depth, bool dither)
 #endif
 
 
-    // Hack around Qt's braindead QImage::convertDepth(1, ...) (with
+    // Hack around Qt's braindead TQImage::convertDepth(1, ...) (with
     // dithering off) which produces pathetic results with an image that
     // only has 2 colours - sometimes it just gives a completely black
     // result.  Instead, we simply preserve the 2 colours.  One use case
@@ -89,8 +89,8 @@ QImage convertImageDepth (const QImage &image, int depth, bool dither)
 
         bool moreThan2Colors = false;
 
-        QImage monoImage (image.width (), image.height (),
-                          1/*depth*/, 2/*numColors*/, QImage::LittleEndian);
+        TQImage monoImage (image.width (), image.height (),
+                          1/*depth*/, 2/*numColors*/, TQImage::LittleEndian);
     #if DEBUG_KP_EFFECT_REDUCE_COLORS
         kdDebug () << "\t\tinitialising output image w=" << monoImage.width ()
                    << ",h=" << monoImage.height ()
@@ -153,7 +153,7 @@ QImage convertImageDepth (const QImage &image, int depth, bool dither)
     }
 
 
-    QImage retImage = image.convertDepth (depth,
+    TQImage retImage = image.convertDepth (depth,
         Qt::AutoColor |
         (dither ? Qt::DiffuseDither : Qt::ThresholdDither) |
         Qt::ThresholdAlphaDither |
@@ -193,7 +193,7 @@ kpEffectReduceColorsCommand::~kpEffectReduceColorsCommand ()
 
 
 // public
-QString kpEffectReduceColorsCommand::commandName (int depth, int dither) const
+TQString kpEffectReduceColorsCommand::commandName (int depth, int dither) const
 {
     if (depth == 1)
     {
@@ -211,13 +211,13 @@ QString kpEffectReduceColorsCommand::commandName (int depth, int dither) const
     }
     else
     {
-        return QString::null;
+        return TQString::null;
     }
 }
 
 
 // public static
-void kpEffectReduceColorsCommand::apply (QPixmap *destPixmapPtr, int depth, bool dither)
+void kpEffectReduceColorsCommand::apply (TQPixmap *destPixmapPtr, int depth, bool dither)
 {
     if (!destPixmapPtr)
         return;
@@ -226,7 +226,7 @@ void kpEffectReduceColorsCommand::apply (QPixmap *destPixmapPtr, int depth, bool
         return;
 
 
-    QImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
+    TQImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
 
 
     image = ::convertImageDepth (image, depth, dither);
@@ -235,12 +235,12 @@ void kpEffectReduceColorsCommand::apply (QPixmap *destPixmapPtr, int depth, bool
         return;
 
 
-    QPixmap pixmap = kpPixmapFX::convertToPixmap (image, false/*no dither*/);
+    TQPixmap pixmap = kpPixmapFX::convertToPixmap (image, false/*no dither*/);
 
 
     // HACK: The above "image.convertDepth()" erases the Alpha Channel
     //       (at least for monochrome).
-    //       qpixmap.html says "alpha masks on monochrome images are ignored."
+    //       tqpixmap.html says "alpha masks on monochrome images are ignored."
     //
     //       Put the mask back.
     //
@@ -251,9 +251,9 @@ void kpEffectReduceColorsCommand::apply (QPixmap *destPixmapPtr, int depth, bool
 }
 
 // public static
-QPixmap kpEffectReduceColorsCommand::apply (const QPixmap &pm, int depth, bool dither)
+TQPixmap kpEffectReduceColorsCommand::apply (const TQPixmap &pm, int depth, bool dither)
 {
-    QPixmap ret = pm;
+    TQPixmap ret = pm;
     apply (&ret, depth, dither);
     return ret;
 }
@@ -264,7 +264,7 @@ QPixmap kpEffectReduceColorsCommand::apply (const QPixmap &pm, int depth, bool d
 //
 
 // protected virtual [base kpColorEffectCommand]
-QPixmap kpEffectReduceColorsCommand::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectReduceColorsCommand::applyColorEffect (const TQPixmap &pixmap)
 {
     return apply (pixmap, m_depth, m_dither);
 }
@@ -276,27 +276,27 @@ QPixmap kpEffectReduceColorsCommand::applyColorEffect (const QPixmap &pixmap)
 
 kpEffectReduceColorsWidget::kpEffectReduceColorsWidget (bool actOnSelection,
                                                         kpMainWindow *mainWindow,
-                                                        QWidget *parent,
+                                                        TQWidget *parent,
                                                         const char *name)
     : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
-    QVBoxLayout *lay = new QVBoxLayout (this, marginHint (), spacingHint ());
+    TQVBoxLayout *lay = new TQVBoxLayout (this, marginHint (), spacingHint ());
 
 
     m_blackAndWhiteRadioButton =
-        new QRadioButton (i18n ("&Monochrome"), this);
+        new TQRadioButton (i18n ("&Monochrome"), this);
 
     m_blackAndWhiteDitheredRadioButton =
-        new QRadioButton (i18n ("Mo&nochrome (dithered)"), this);
+        new TQRadioButton (i18n ("Mo&nochrome (dithered)"), this);
 
-    m_8BitRadioButton = new QRadioButton (i18n ("256 co&lor"), this);
+    m_8BitRadioButton = new TQRadioButton (i18n ("256 co&lor"), this);
 
-    m_8BitDitheredRadioButton = new QRadioButton (i18n ("256 colo&r (dithered)"), this);
+    m_8BitDitheredRadioButton = new TQRadioButton (i18n ("256 colo&r (dithered)"), this);
 
-    m_24BitRadioButton = new QRadioButton (i18n ("24-&bit color"), this);
+    m_24BitRadioButton = new TQRadioButton (i18n ("24-&bit color"), this);
 
 
-    QButtonGroup *buttonGroup = new QButtonGroup (this);
+    TQButtonGroup *buttonGroup = new TQButtonGroup (this);
     buttonGroup->hide ();
 
     buttonGroup->insert (m_blackAndWhiteRadioButton);
@@ -306,7 +306,7 @@ kpEffectReduceColorsWidget::kpEffectReduceColorsWidget (bool actOnSelection,
     buttonGroup->insert (m_24BitRadioButton);
 
 
-    const int screenDepth = QPixmap::defaultDepth ();
+    const int screenDepth = TQPixmap::defaultDepth ();
 #if DEBUG_KP_EFFECT_REDUCE_COLORS
     kdDebug () << "kpEffectReduceColorsWidget::<ctor> screenDepth="
                << screenDepth
@@ -361,16 +361,16 @@ kpEffectReduceColorsWidget::kpEffectReduceColorsWidget (bool actOnSelection,
     lay->addWidget (m_24BitRadioButton);
 
 
-    connect (m_blackAndWhiteRadioButton, SIGNAL (toggled (bool)),
-             this, SIGNAL (settingsChanged ()));
-    connect (m_blackAndWhiteDitheredRadioButton, SIGNAL (toggled (bool)),
-             this, SIGNAL (settingsChanged ()));
-    connect (m_8BitRadioButton, SIGNAL (toggled (bool)),
-             this, SIGNAL (settingsChanged ()));
-    connect (m_8BitDitheredRadioButton, SIGNAL (toggled (bool)),
-             this, SIGNAL (settingsChanged ()));
-    connect (m_24BitRadioButton, SIGNAL (toggled (bool)),
-             this, SIGNAL (settingsChanged ()));
+    connect (m_blackAndWhiteRadioButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SIGNAL (settingsChanged ()));
+    connect (m_blackAndWhiteDitheredRadioButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SIGNAL (settingsChanged ()));
+    connect (m_8BitRadioButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SIGNAL (settingsChanged ()));
+    connect (m_8BitDitheredRadioButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SIGNAL (settingsChanged ()));
+    connect (m_24BitRadioButton, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SIGNAL (settingsChanged ()));
 }
 
 kpEffectReduceColorsWidget::~kpEffectReduceColorsWidget ()
@@ -414,7 +414,7 @@ bool kpEffectReduceColorsWidget::dither () const
 //
 
 // public virtual [base kpColorEffectWidget]
-QString kpEffectReduceColorsWidget::caption () const
+TQString kpEffectReduceColorsWidget::caption () const
 {
     return i18n ("Reduce To");
 }
@@ -427,7 +427,7 @@ bool kpEffectReduceColorsWidget::isNoOp () const
 }
 
 // public virtual [base kpColorEffectWidget]
-QPixmap kpEffectReduceColorsWidget::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectReduceColorsWidget::applyColorEffect (const TQPixmap &pixmap)
 {
     return kpEffectReduceColorsCommand::apply (pixmap, depth (), dither ());
 }

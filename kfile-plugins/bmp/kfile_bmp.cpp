@@ -26,11 +26,11 @@
 #include <kstringvalidator.h>
 #include <kdebug.h>
 
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
 
 #if !defined(__osf__)
 #include <inttypes.h>
@@ -43,8 +43,8 @@ typedef KGenericFactory<KBmpPlugin> BmpFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_bmp, BmpFactory( "kfile_bmp" ))
 
-KBmpPlugin::KBmpPlugin(QObject *parent, const char *name,
-                       const QStringList &args)
+KBmpPlugin::KBmpPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args)
 
     : KFilePlugin(parent, name, args)
 {
@@ -56,16 +56,16 @@ KBmpPlugin::KBmpPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Type", i18n("Type"), QVariant::String);
+    item = addItemInfo(group, "Type", i18n("Type"), TQVariant::String);
 
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
     setHint( item, KFileMimeTypeInfo::Size );
     setUnit(item, KFileMimeTypeInfo::Pixels);
 
-    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-    item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
+    item = addItemInfo(group, "Compression", i18n("Compression"), TQVariant::String);
 
 }
 
@@ -79,18 +79,18 @@ bool KBmpPlugin::readInfo( KFileMetaInfo& info, uint what)
     const char * bmptype_ic = "IC";
     const char * bmptype_pt = "PT";
 
-    QFile file(info.path());
+    TQFile file(info.path());
 
     if (!file.open(IO_ReadOnly))
     {
-        kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
         return false;
     }
 
-    QDataStream dstream(&file);
+    TQDataStream dstream(&file);
 
     // BMP files are little-endian
-    dstream.setByteOrder(QDataStream::LittleEndian);
+    dstream.setByteOrder(TQDataStream::LittleEndian);
 
     // create this now because we output image type early on
     KFileMetaInfoGroup group = appendGroup(info, "Technical");
@@ -148,7 +148,7 @@ bool KBmpPlugin::readInfo( KFileMetaInfo& info, uint what)
 
 
     // output the useful bits
-    appendItem(group, "Dimensions", QSize(bmpi_width, bmpi_height));
+    appendItem(group, "Dimensions", TQSize(bmpi_width, bmpi_height));
     appendItem(group, "BitDepth", bmpi_bitcount);
 
     switch (bmpi_compression) {

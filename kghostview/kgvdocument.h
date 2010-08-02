@@ -19,9 +19,9 @@
 #ifndef __KGV_DOCUMENT_H__
 #define __KGV_DOCUMENT_H__
 
-#include <qprinter.h>
-#include <qsize.h>
-#include <qstring.h>
+#include <tqprinter.h>
+#include <tqsize.h>
+#include <tqstring.h>
 
 #include "kgv.h"
 #include "dscparse_adapter.h"
@@ -51,14 +51,14 @@ public:
     /**
      * Open the @em local file @p filename asynchronously.
      */
-    void openFile( const QString& filename, const QString& mimetype );
+    void openFile( const TQString& filename, const TQString& mimetype );
 
     /**
      * Close the document.
      */
     void close();
 
-    const QString& fileName() const { return _fileName; }
+    const TQString& fileName() const { return _fileName; }
     FILE* psFile() { return _psFile; }
 
     Format format() const { return _format; }
@@ -72,24 +72,24 @@ public:
     /**
      * A list of page media (sizes).
      */
-    QStringList mediaNames() const;
+    TQStringList mediaNames() const;
 
-    const CDSCMEDIA* findMediaByName( const QString& mediaName ) const;
+    const CDSCMEDIA* findMediaByName( const TQString& mediaName ) const;
 
-    QSize computePageSize( const QString& pageMedia ) const;
+    TQSize computePageSize( const TQString& pageMedia ) const;
 
-    static QString pageSizeToString( QPrinter::PageSize );
+    static TQString pageSizeToString( TQPrinter::PageSize );
 
     /**
-     * Returns a QString which contains a range representation of @p pageList.
+     * Returns a TQString which contains a range representation of @p pageList.
      * Examples: [1,3]       -> "1,3"
      *           [1,2,3]     -> "1-3"
      *           [1,3,4,5,8] -> "1,3-5,8"
      */
-    static QString pageListToRange( const KGV::PageList& );
+    static TQString pageListToRange( const KGV::PageList& );
 
 public slots:
-    void fileChanged( const QString& );
+    void fileChanged( const TQString& );
 
     void saveAs();
     void print();
@@ -101,7 +101,7 @@ signals:
     void fileChangeFailed();
 
     void completed();
-    void canceled( const QString& );
+    void canceled( const TQString& );
     
 protected:
     void scanDSC();
@@ -116,16 +116,16 @@ protected:
      * kdelibs installed. Generally it will work for .gz and .bz2
      */
     bool uncompressFile();
-    void openPSFile(const QString &file=QString::null);
+    void openPSFile(const TQString &file=TQString::null);
 
 protected:
-    bool savePages( const QString& saveFileName,
+    bool savePages( const TQString& saveFileName,
                     const KGV::PageList& pageList );
     
-    bool psCopyDoc( const QString& inputFile, const QString& outputFile,
+    bool psCopyDoc( const TQString& inputFile, const TQString& outputFile,
                     const KGV::PageList& pageList );
 
-    bool convertFromPDF( const QString& saveFileName, 
+    bool convertFromPDF( const TQString& saveFileName, 
                          unsigned int firstPage, unsigned int lastPage );
 
 protected slots:
@@ -135,8 +135,8 @@ protected slots:
 private:
     FILE* _psFile;
 
-    QString _fileName;
-    QString _mimetype;
+    TQString _fileName;
+    TQString _mimetype;
 
     KGVPart*   _part;
 
@@ -148,7 +148,7 @@ private:
 
     Pdf2dsc* _pdf2dsc;
 
-    QString _interpreterPath;
+    TQString _interpreterPath;
 
     bool _isFileOpen;
 
@@ -161,10 +161,10 @@ class Pdf2dsc : public QObject
     Q_OBJECT
 	
 public:
-    Pdf2dsc( const QString& ghostscriptPath, QObject* parent = 0, const char* name = 0 );
+    Pdf2dsc( const TQString& ghostscriptPath, TQObject* parent = 0, const char* name = 0 );
     ~Pdf2dsc();
     
-    void run( const QString& pdfName, const QString& dscName );
+    void run( const TQString& pdfName, const TQString& dscName );
     void kill();
     
 signals:
@@ -175,7 +175,7 @@ protected slots:
 
 private:
     KProcess* _process;
-    QString   _ghostscriptPath;
+    TQString   _ghostscriptPath;
 };
 
 

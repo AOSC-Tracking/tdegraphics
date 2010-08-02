@@ -200,7 +200,7 @@ namespace KSVG
 		virtual ~AggPaintServer() {}
 
 		virtual void finalizePaintServer() = 0;
-		virtual void reference(const QString &href) = 0;
+		virtual void reference(const TQString &href) = 0;
 
 		virtual void render(AggCanvas *c) = 0;
 	};
@@ -214,7 +214,7 @@ namespace KSVG
 		void parseGradientStops(SVGGradientElementImpl *gradient);
 
 		virtual void finalizePaintServer();
-		virtual void reference(const QString &href);
+		virtual void reference(const TQString &href);
 
 	protected:
 		SVGGradientElementImpl *m_gradient;
@@ -254,7 +254,7 @@ namespace KSVG
 		virtual ~AggPattern() {}
 
 		virtual void finalizePaintServer();
-		virtual void reference(const QString &);
+		virtual void reference(const TQString &);
 
 		virtual void render(AggCanvas *c);
 
@@ -307,9 +307,9 @@ namespace KSVG
 		AggShape(AggCanvas *c, SVGStylableImpl *style);
 		virtual ~AggShape();
 
-		virtual QRect bbox() const;
-		virtual bool fillContains(const QPoint &p);
-		virtual bool strokeContains(const QPoint &p);
+		virtual TQRect bbox() const;
+		virtual bool fillContains(const TQPoint &p);
+		virtual bool strokeContains(const TQPoint &p);
 		virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0);
 		void draw(SVGShapeImpl *shape);
 		void calcSVPs(const SVGMatrixImpl *matrix);
@@ -416,9 +416,9 @@ namespace KSVG
 		AggMarker(AggCanvas *c, SVGMarkerElementImpl *marker);
 		virtual ~AggMarker();
 
-		virtual QRect bbox() const { return QRect(); }
-		virtual bool fillContains(const QPoint &) { return true; }
-		virtual bool strokeContains(const QPoint &) { return true; }
+		virtual TQRect bbox() const { return TQRect(); }
+		virtual bool fillContains(const TQPoint &) { return true; }
+		virtual bool strokeContains(const TQPoint &) { return true; }
 		virtual void update(CanvasItemUpdate, int = 0, int = 0) { }
 		virtual void init();
 		virtual void draw();
@@ -438,9 +438,9 @@ namespace KSVG
 		AggImage(AggCanvas *c, SVGImageElementImpl *image);
 		virtual ~AggImage();
 
-		virtual QRect bbox() const;
-		virtual bool fillContains(const QPoint &) { return true; }
-		virtual bool strokeContains(const QPoint &) { return true; }
+		virtual TQRect bbox() const;
+		virtual bool fillContains(const TQPoint &) { return true; }
+		virtual bool strokeContains(const TQPoint &) { return true; }
 		virtual void update(CanvasItemUpdate, int = 0, int = 0) { }
 		virtual void init();
 		virtual void draw();
@@ -459,9 +459,9 @@ namespace KSVG
 		AggText(AggCanvas *c, SVGTextElementImpl *text);
 		virtual ~AggText();
 
-		virtual QRect bbox() const;
-		virtual bool fillContains(const QPoint &p);
-		virtual bool strokeContains(const QPoint &p);
+		virtual TQRect bbox() const;
+		virtual bool fillContains(const TQPoint &p);
+		virtual bool strokeContains(const TQPoint &p);
 		virtual void update(CanvasItemUpdate, int param1 = 0, int param2 = 0);
 		virtual void draw();
 		virtual bool isVisible();
@@ -491,7 +491,7 @@ namespace KSVG
 			AggStrokePaintServer		*strokePainter;
 		};
 
-		mutable QPtrList<SVPElement> m_drawItems;
+		mutable TQPtrList<SVPElement> m_drawItems;
 	};
 };
 

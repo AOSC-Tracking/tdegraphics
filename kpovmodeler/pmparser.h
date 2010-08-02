@@ -25,20 +25,20 @@
 #endif
 
 #include <kurl.h>
-#include <qcstring.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qvaluelist.h>
-#include <qptrdict.h>
-#include <qptrlist.h>
+#include <tqcstring.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqvaluelist.h>
+#include <tqptrdict.h>
+#include <tqptrlist.h>
 
 #include "pmobject.h"
 #include "pmsymboltable.h"
 #include "pmvalue.h"
 #include "pmerrordialog.h"
 
-class QTextStream;
-class QIODevice;
+class TQTextStream;
+class TQIODevice;
 
 class PMScanner;
 class PMPart;
@@ -56,11 +56,11 @@ public:
    /**
     * Parser that parses the device
     */
-   PMParser( PMPart* part, QIODevice* device );
+   PMParser( PMPart* part, TQIODevice* device );
    /**
     * Parser that parses the byte array
     */
-   PMParser( PMPart* part, const QByteArray& array );
+   PMParser( PMPart* part, const TQByteArray& array );
    /**
     * Deletes the parser
     */
@@ -70,7 +70,7 @@ public:
     * Quickly scans the top level objects. Appends all top level object
     * types to the list.
     */
-   virtual void quickParse( QStringList& /*list*/ ) { };
+   virtual void quickParse( TQStringList& /*list*/ ) { };
    /**
     * Returns true, if the parser can quickly scan the top level objects.
     */
@@ -132,11 +132,11 @@ public:
    /**
     * Adds an error to the message string
     */
-   void printError( const QString& msg );
+   void printError( const TQString& msg );
    /**
     * Adds the error "'<str>' expected, found <token> instead" to the message string
     */
-   void printExpected( const QString& str, const char* token );
+   void printExpected( const TQString& str, const char* token );
    /**
     * Adds the error "'<c>' expected" to the message string
     */
@@ -144,20 +144,20 @@ public:
    /**
     * Adds the error "Unexpected token '<str>', found <token> instead" to the message string
     */
-   void printUnexpected( const QString& str );
+   void printUnexpected( const TQString& str );
    /**
     * Adds a warning to the message string
     */
-   void printWarning( const QString& msg );
+   void printWarning( const TQString& msg );
    /**
     * Adds an info to the message string
     */
-   void printInfo( const QString& msg );
+   void printInfo( const TQString& msg );
    /**
     * Adds the message to the message string. Type is "error", "warning",
     * "info" or "scanner error"
     */
-   void printMessage( const QString& type, const QString& msg );
+   void printMessage( const TQString& type, const TQString& msg );
    /**
     * Prints a messages that should only reported once
     */
@@ -177,7 +177,7 @@ public:
     * Returns the declare object with id, if it exists and is declared at
     * the current parse position, otherwise 0
     */
-   PMDeclare* checkLink( const QString& id );
+   PMDeclare* checkLink( const TQString& id );
    /**
     * Checks the id of the declare. If there is already a declare with
     * the same id, the id of the object is renamed.
@@ -190,11 +190,11 @@ public:
     * the same id, the id of the value is renamed.
     *
     * Inserts the object into the symbol table.*/
-   void checkID( const QString& id, const PMValue& v );
+   void checkID( const TQString& id, const PMValue& v );
    /**
     * Returns the symbol with id id or 0 if the id is undeclared
     */
-   PMSymbol* getSymbol( const QString& id ) const;
+   PMSymbol* getSymbol( const TQString& id ) const;
    /**
     * Tries to insert obj as child of parent. If parent is 0, the object
     * will be inserted in the list of top level objects.
@@ -229,7 +229,7 @@ protected:
    /**
     * The QIODevice
     */
-   QIODevice* m_pDevice;
+   TQIODevice* m_pDevice;
    /**
     * True, if the device was created by the parser
     */
@@ -248,7 +248,7 @@ private:
    /**
     * A dictionary object -> message
     */
-   QPtrDict< QPtrList<PMMessage> > m_messageDict;
+   TQPtrDict< TQPtrList<PMMessage> > m_messageDict;
    /**
     * Number of warnings during parsing
     */
@@ -281,11 +281,11 @@ private:
    /**
     * List of renamed declares
     */
-   QPtrList<PMSymbol> m_renamedObjectSymbols;
+   TQPtrList<PMSymbol> m_renamedObjectSymbols;
    /**
     * Dictionary of symbol names, that can be linked
     */
-   QDict<bool> m_okDeclares;
+   TQDict<bool> m_okDeclares;
    PMObject* m_pNextCheckDeclare;
    /**
     * Symbol table used during parsing. The symbol table of the part

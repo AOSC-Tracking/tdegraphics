@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qpaintdevicemetrics.h>
-#include <qpainter.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqpainter.h>
 
 #include <kkeydialog.h>
 #include <klocale.h>
@@ -41,12 +41,12 @@ void KIconEdit::updateProperties()
 {
     KIconEditProperties *props = KIconEditProperties::self();
     gridview->setShowRulers(props->showRulers());
-    if(props->bgMode() == QWidget::FixedPixmap)
+    if(props->bgMode() == TQWidget::FixedPixmap)
     {
-        QPixmap pix(props->bgPixmap());
+        TQPixmap pix(props->bgPixmap());
         if(pix.isNull())
         {
-            QPixmap pmlogo((const char**)logo);
+            TQPixmap pmlogo((const char**)logo);
             pix = pmlogo;
         }
         gridview->viewPortWidget()->viewport()->setBackgroundPixmap(pix);
@@ -66,7 +66,7 @@ void KIconEdit::updateProperties()
     grid->update();
 }
 
-void KIconEdit::slotNewWin(const QString & url)
+void KIconEdit::slotNewWin(const TQString & url)
 {
     //kdDebug(4640) << "KIconEdit::openNewWin() - " << url << endl;
 
@@ -81,7 +81,7 @@ void KIconEdit::slotNew()
     if (grid->isModified())
     {
         int r = KMessageBox::warningYesNoCancel(this,
-        i18n("The current file has been modified.\nDo you want to save it?"), QString::null, KStdGuiItem::save(), KStdGuiItem::discard());
+        i18n("The current file has been modified.\nDo you want to save it?"), TQString::null, KStdGuiItem::save(), KStdGuiItem::discard());
 
         switch(r)
         {
@@ -112,14 +112,14 @@ void KIconEdit::slotNew()
             if(r == KNewIcon::Blank)
             {
                 grid->editClear();
-                const QSize s = newicon.templateSize();
+                const TQSize s = newicon.templateSize();
                 //kdDebug(4640) << "Size: " << s.width() << " x " << s.height() << endl;
                 grid->setSize(s);
                 grid->setModified(false);
             }
             else if(r == KNewIcon::Template)
             {
-                QString str = newicon.templatePath();
+                TQString str = newicon.templatePath();
                 icon->open(&grid->image(), KURL( str ));
             }
             icon->setUrl("");
@@ -136,7 +136,7 @@ void KIconEdit::slotOpen()
     if( grid->isModified() )
     {
         int r = KMessageBox::warningYesNoCancel(this,
-      i18n("The current file has been modified.\nDo you want to save it?"),QString::null, KStdGuiItem::save(), KStdGuiItem::discard());
+      i18n("The current file has been modified.\nDo you want to save it?"),TQString::null, KStdGuiItem::save(), KStdGuiItem::discard());
 
         switch( r )
         {
@@ -200,11 +200,11 @@ void KIconEdit::slotPrint()
         int margin = 10, yPos = 0;
         printer.setCreator("KDE Icon Editor");
 
-        QPainter p;
+        TQPainter p;
         p.begin( &printer );
-        QFontMetrics fm = p.fontMetrics();
+        TQFontMetrics fm = p.fontMetrics();
         // need width/height
-        QPaintDeviceMetrics metrics( &printer );
+        TQPaintDeviceMetrics metrics( &printer );
 
         p.drawText( margin, margin + yPos, metrics.width(), fm.lineSpacing(),
                         ExpandTabs | DontClip, icon->url() );
@@ -280,7 +280,7 @@ void KIconEdit::slotOpenRecent(const KURL& iconFile)
     if( grid->isModified() )
     {
         int r = KMessageBox::warningYesNoCancel(this,
-      i18n("The current file has been modified.\nDo you want to save it?"),QString::null, KStdGuiItem::save(), KStdGuiItem::discard());
+      i18n("The current file has been modified.\nDo you want to save it?"),TQString::null, KStdGuiItem::save(), KStdGuiItem::discard());
 
         switch( r )
         {
@@ -422,20 +422,20 @@ void KIconEdit::slotUpdateZoom( int s )
 
 void KIconEdit::slotUpdateStatusPos(int x, int y)
 {
-    QString str = i18n("Status Position", "%1, %2").arg(x).arg(y);
+    TQString str = i18n("Status Position", "%1, %2").arg(x).arg(y);
     statusbar->changeItem( str, 0);
 }
 
 void KIconEdit::slotUpdateStatusSize(int x, int y)
 {
-    QString str = i18n("Status Size", "%1 x %2").arg(x).arg(y);
+    TQString str = i18n("Status Size", "%1 x %2").arg(x).arg(y);
     statusbar->changeItem( str, 1);
 }
 
 void KIconEdit::slotUpdateStatusScaling(int s)
 {
     KIconEditProperties::self()->setGridScale( s );
-    QString str;
+    TQString str;
 
     str.sprintf("1:%d", s);
     statusbar->changeItem( str, 2);
@@ -443,28 +443,28 @@ void KIconEdit::slotUpdateStatusScaling(int s)
 
 void KIconEdit::slotUpdateStatusColors(uint)
 {
-    QString str = i18n("Colors: %1").arg(grid->numColors());
+    TQString str = i18n("Colors: %1").arg(grid->numColors());
     statusbar->changeItem( str, 3);
 }
 
 void KIconEdit::slotUpdateStatusColors(uint n, uint *)
 {
-    QString str = i18n("Colors: %1").arg(n);
+    TQString str = i18n("Colors: %1").arg(n);
     statusbar->changeItem( str, 3);
 }
 
 
-void KIconEdit::slotUpdateStatusMessage(const QString & msg)
+void KIconEdit::slotUpdateStatusMessage(const TQString & msg)
 {
     statusbar->changeItem( msg, 4);
 }
 
 
-void KIconEdit::slotUpdateStatusName(const QString & name)
+void KIconEdit::slotUpdateStatusName(const TQString & name)
 {
     m_name = name;
 
-    QString text = m_name;
+    TQString text = m_name;
 
     if(grid->isModified())
     {
@@ -494,13 +494,13 @@ void KIconEdit::slotUpdateCopy(bool state)
 }
 
 
-void KIconEdit::slotOpenBlank(const QSize s)
+void KIconEdit::slotOpenBlank(const TQSize s)
 {
     grid->loadBlank( s.width(), s.height());
 }
 
 
-void KIconEdit::dragEnterEvent(QDragEnterEvent* e)
+void KIconEdit::dragEnterEvent(TQDragEnterEvent* e)
 {
   e->accept(KURLDrag::canDecode(e));
 }
@@ -510,7 +510,7 @@ void KIconEdit::dragEnterEvent(QDragEnterEvent* e)
     accept drop of a file - opens file in current window
     old code to drop image, as image, should be removed
 */
-void KIconEdit::dropEvent( QDropEvent *e )
+void KIconEdit::dropEvent( TQDropEvent *e )
 {
     //kdDebug(4640) << "Got QDropEvent!" << endl;
 

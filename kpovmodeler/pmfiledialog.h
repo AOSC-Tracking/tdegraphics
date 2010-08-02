@@ -43,18 +43,18 @@ public:
     * Default constructor, use the static methods
     * @ref getImportFileName or @ref getExportFileName instead
     */
-   PMFileDialog( const QString& startDir, const QString& filter, QWidget* parent, const char* name, bool modal );
+   PMFileDialog( const TQString& startDir, const TQString& filter, TQWidget* parent, const char* name, bool modal );
    /**
     * Opens a modal file dialog and returns a selected file and the chosen
     * file format.
     */
-   static QString getImportFileName( QWidget* parent, PMPart* part, PMIOFormat*& format );
+   static TQString getImportFileName( TQWidget* parent, PMPart* part, PMIOFormat*& format );
    /**
     * Opens a modal file dialog and returns a selected file and the chosen
     * file format and filter.
     */
-   static QString getExportFileName( QWidget* parent, PMPart* part,
-                                     PMIOFormat*& format, QString& filter );
+   static TQString getExportFileName( TQWidget* parent, PMPart* part,
+                                     PMIOFormat*& format, TQString& filter );
 };
 
 #endif

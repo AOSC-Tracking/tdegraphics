@@ -21,7 +21,7 @@
 #ifndef SVGGradientElementImpl_H
 #define SVGGradientElementImpl_H
 
-#include <qmap.h>
+#include <tqmap.h>
 
 #include "SVGElementImpl.h"
 #include "SVGStylableImpl.h"
@@ -64,7 +64,7 @@ public:
 
 	// Returns the linear/radial gradient attributes set on this element,
 	// taking into account indirection through href.
-	virtual QMap<QString, DOM::DOMString> gradientAttributes() = 0;
+	virtual TQMap<TQString, DOM::DOMString> gradientAttributes() = 0;
 	
 protected:
 	void setAttributesFromHref();

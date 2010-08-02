@@ -23,8 +23,8 @@
 
 #ifdef __cplusplus
 
-#include <qcolor.h>
-#include <qvaluevector.h>
+#include <tqcolor.h>
+#include <tqvaluevector.h>
 #include "Affine.h"
 #include "Point.h"
 #include "SVGMatrixImpl.h"
@@ -62,21 +62,21 @@ public:
 		KSVGHelper::matrixToAffine(matrix, affine.data());
 	}
 
-	static QString toColorString(QColor color)
+	static TQString toColorString(TQColor color)
 	{
 		int r = color.red();
 		int g = color.green();
 		int b = color.blue();
 
-		return "rgb(" + QString::number(r) + "," + QString::number(g) + "," + QString::number(b) + ")";
+		return "rgb(" + TQString::number(r) + "," + TQString::number(g) + "," + TQString::number(b) + ")";
 	}
 
-	static unsigned int toArtColor(const QColor &color)
+	static unsigned int toArtColor(const TQColor &color)
 	{
 		return (qRed(color.rgb()) << 24) | (qGreen(color.rgb()) << 16) | ( qBlue(color.rgb()) << 8) | (qAlpha(color.rgb()));
 	}
 
-	static unsigned int toArtColor(const QColor &color, short opacity)
+	static unsigned int toArtColor(const TQColor &color, short opacity)
 	{
 		return (qRed(color.rgb()) << 24) | (qGreen(color.rgb()) << 16) | ( qBlue(color.rgb()) << 8) | (opacity);
 	}
@@ -113,7 +113,7 @@ public:
 	void clear() { m_points.clear(); }
 
 private:
-	QValueVector<KSVGPoint> m_points;
+	TQValueVector<KSVGPoint> m_points;
 };
 
 class KSVGRectangle : public KSVGPolygon

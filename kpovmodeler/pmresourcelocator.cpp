@@ -19,8 +19,8 @@
 #include "pmpovrayrenderwidget.h"
 #include "pmdebug.h"
 
-#include <qfileinfo.h>
-#include <qdir.h>
+#include <tqfileinfo.h>
+#include <tqdir.h>
 
 PMResourceLocator* PMResourceLocator::s_pInstance = 0;
 KStaticDeleter<PMResourceLocator> PMResourceLocator::s_staticDeleter;
@@ -36,7 +36,7 @@ PMResourceLocator::~PMResourceLocator( )
    m_cache.clear( );
 }
 
-QString PMResourceLocator::findFile( const QString& file )
+TQString PMResourceLocator::findFile( const TQString& file )
 {
    if( !s_pInstance )
       s_staticDeleter.setObject( s_pInstance, new PMResourceLocator( ) );
@@ -49,24 +49,24 @@ void PMResourceLocator::clearCache( )
       s_pInstance->m_cache.clear( );
 }
 
-QString PMResourceLocator::lookUp( const QString& file )
+TQString PMResourceLocator::lookUp( const TQString& file )
 {
    if( file.isEmpty( ) )
-      return QString::null;
+      return TQString::null;
 
    kdDebug( PMArea ) << "LookUp: " << file << endl;
    
-   QString* ps = m_cache.find( file );
+   TQString* ps = m_cache.find( file );
    if( ps )
       return *ps;
 
    bool found = false;
-   QString fullPath = QString::null;
+   TQString fullPath = TQString::null;
    
    if( file[0] == '/' )
    {
       // absolute path, library paths are not used
-      QFileInfo info( file );
+      TQFileInfo info( file );
       if( info.exists( ) && info.isReadable( ) && info.isFile( ) )
       {
          found = true;
@@ -75,12 +75,12 @@ QString PMResourceLocator::lookUp( const QString& file )
    }
    else
    {
-      QStringList plist = PMPovrayRenderWidget::povrayLibraryPaths( );
-      QStringList::ConstIterator it = plist.begin( );
+      TQStringList plist = PMPovrayRenderWidget::povrayLibraryPaths( );
+      TQStringList::ConstIterator it = plist.begin( );
       for( ; ( it != plist.end( ) ) && !found; ++it )
       {
-         QDir dir( *it );
-         QFileInfo info( dir, file );
+         TQDir dir( *it );
+         TQFileInfo info( dir, file );
          if( info.exists( ) && info.isReadable( ) && info.isFile( ) )
          {
             found = true;
@@ -91,7 +91,7 @@ QString PMResourceLocator::lookUp( const QString& file )
 
    if( found )
    {
-      QString* ni = new QString( fullPath );
+      TQString* ni = new TQString( fullPath );
       if( !m_cache.insert( file, ni ) )
          delete ni;
       kdDebug( PMArea ) << "File \"" << file << "\" found in "

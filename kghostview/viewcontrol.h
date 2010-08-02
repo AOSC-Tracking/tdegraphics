@@ -1,20 +1,20 @@
 #ifndef VIEWCONTROL_H
 #define VIEWCONTROL_H
 
-#include <qdialog.h>
-class QComboBox;
-class QPushButton;
+#include <tqdialog.h>
+class TQComboBox;
+class TQPushButton;
 
 
 class ViewControl : public QDialog
 {
 	Q_OBJECT
 public:
-	ViewControl( QWidget *parent, const char *name );
-	QComboBox* magComboBox;
-	QComboBox* mediaComboBox;
-	QComboBox* orientComboBox;
-	QPushButton *apply;
+	ViewControl( TQWidget *parent, const char *name );
+	TQComboBox* magComboBox;
+	TQComboBox* mediaComboBox;
+	TQComboBox* orientComboBox;
+	TQPushButton *apply;
 
 	/**
 	 * Update the mag combo box.

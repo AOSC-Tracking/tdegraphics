@@ -17,10 +17,10 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qstring.h>
-#include <qasciidict.h>
-#include <qmap.h>
-#include <qdict.h>
+#include <tqstring.h>
+#include <tqasciidict.h>
+#include <tqmap.h>
+#include <tqdict.h>
 #include <kdebug.h>
 #include <kconfig.h>
 
@@ -28,7 +28,7 @@
 #include "kscanoption.h"
 #include "kscanoptset.h"
 
-KScanOptSet::KScanOptSet( const QCString& setName )
+KScanOptSet::KScanOptSet( const TQCString& setName )
 {
   name = setName;
 
@@ -49,7 +49,7 @@ KScanOptSet::~KScanOptSet()
 
 
 
-KScanOption *KScanOptSet::get( const QCString name ) const
+KScanOption *KScanOptSet::get( const TQCString name ) const
 {
   KScanOption *ret = 0;
 
@@ -58,10 +58,10 @@ KScanOption *KScanOptSet::get( const QCString name ) const
   return( ret );
 }
 
-QCString KScanOptSet::getValue( const QCString name ) const
+TQCString KScanOptSet::getValue( const TQCString name ) const
 {
    KScanOption *re = get( name );
-   QCString retStr = "";
+   TQCString retStr = "";
 
    if( re )
    {
@@ -80,7 +80,7 @@ bool KScanOptSet::backupOption( const KScanOption& opt )
   bool retval = true;
 
   /** Allocate a new option and store it **/
-  const QCString& optName = opt.getName();
+  const TQCString& optName = opt.getName();
   if( !optName )
     retval = false;
 
@@ -96,7 +96,7 @@ bool KScanOptSet::backupOption( const KScanOption& opt )
      }
      else
      {
-	const QCString& qq = opt.get();
+	const TQCString& qq = opt.get();
 	kdDebug(29000) << "Value is now: <" << qq << ">" << endl;
 	const KScanOption *newopt = new KScanOption( opt );
 
@@ -115,19 +115,19 @@ bool KScanOptSet::backupOption( const KScanOption& opt )
 
 }
 
-QString KScanOptSet::getDescription() const
+TQString KScanOptSet::getDescription() const
 {
    return description;
 }
 
-void KScanOptSet::slSetDescription( const QString& str )
+void KScanOptSet::slSetDescription( const TQString& str )
 {
    description = str;
 }
 
-void KScanOptSet::backupOptionDict( const QAsciiDict<KScanOption>& optDict )
+void KScanOptSet::backupOptionDict( const TQAsciiDict<KScanOption>& optDict )
 {
-   QAsciiDictIterator<KScanOption> it( optDict );
+   TQAsciiDictIterator<KScanOption> it( optDict );
 
    while ( it.current() )
    {
@@ -140,14 +140,14 @@ void KScanOptSet::backupOptionDict( const QAsciiDict<KScanOption>& optDict )
 }
 
 /* */
-void KScanOptSet::saveConfig( const QString& scannerName, const QString& configName,
-			      const QString& descr )
+void KScanOptSet::saveConfig( const TQString& scannerName, const TQString& configName,
+			      const TQString& descr )
 {
-   QString confFile = SCANNER_DB_FILE;
+   TQString confFile = SCANNER_DB_FILE;
    kdDebug( 29000) << "Creating scan configuration file <" << confFile << ">" << endl;
 
    KConfig *scanConfig = new KConfig( confFile );
-   QString cfgName = configName;
+   TQString cfgName = configName;
 
    if( configName.isNull() || configName.isEmpty() )
       cfgName = "default";
@@ -156,12 +156,12 @@ void KScanOptSet::saveConfig( const QString& scannerName, const QString& configN
 
    scanConfig->writeEntry( "description", descr );
    scanConfig->writeEntry( "scannerName", scannerName );
-   QAsciiDictIterator<KScanOption> it( *this);
+   TQAsciiDictIterator<KScanOption> it( *this);
 
     while ( it.current() )
     {
-       const QString line = it.current() -> configLine();
-       const QString name = it.current()->getName();
+       const TQString line = it.current() -> configLine();
+       const TQString name = it.current()->getName();
 
        kdDebug(29000) << "writing " << name << " = <" << line << ">" << endl;
 
@@ -174,14 +174,14 @@ void KScanOptSet::saveConfig( const QString& scannerName, const QString& configN
     delete( scanConfig );
 }
 
-bool KScanOptSet::load( const QString& /*scannerName*/ )
+bool KScanOptSet::load( const TQString& /*scannerName*/ )
 {
-   QString confFile = SCANNER_DB_FILE;
+   TQString confFile = SCANNER_DB_FILE;
    kdDebug( 29000) << "** Reading from scan configuration file <" << confFile << ">" << endl;
    bool ret = true;
 
    KConfig *scanConfig = new KConfig( confFile, true );
-   QString cfgName = name; /* of the KScanOptSet, given in constructor */
+   TQString cfgName = name; /* of the KScanOptSet, given in constructor */
 
    if( cfgName.isNull() || cfgName.isEmpty() )
       cfgName = "default";
@@ -195,17 +195,17 @@ bool KScanOptSet::load( const QString& /*scannerName*/ )
    {
       scanConfig->setGroup( name );
 
-      typedef QMap<QString, QString> StringMap;
+      typedef TQMap<TQString, TQString> StringMap;
 
       StringMap strMap = scanConfig->entryMap( name );
 
       StringMap::Iterator it;
       for( it = strMap.begin(); it != strMap.end(); ++it )
       {
-	 QCString optName = it.key().latin1();
+	 TQCString optName = it.key().latin1();
 	 KScanOption optset( optName );
 
-	 QCString val = it.data().latin1();
+	 TQCString val = it.data().latin1();
 	 kdDebug(29000) << "Reading for " << optName << " value " << val << endl;
 
 	 optset.set( val );

@@ -21,12 +21,12 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
-#include <qcheckbox.h>
+#include <tqcheckbox.h>
 
-PMBlobCylinderEdit::PMBlobCylinderEdit( QWidget* parent, const char* name )
+PMBlobCylinderEdit::PMBlobCylinderEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,32 +36,32 @@ void PMBlobCylinderEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   QHBoxLayout* layout;
-   QGridLayout* gl;
+   TQHBoxLayout* layout;
+   TQGridLayout* gl;
 
    m_pEnd1 = new PMVectorEdit( "x", "y", "z", this );
    m_pEnd2 = new PMVectorEdit( "x", "y", "z", this );
    m_pRadius = new PMFloatEdit( this );
    m_pStrength = new PMFloatEdit( this );
 
-   gl = new QGridLayout( topLayout( ), 2, 2 );
-   gl->addWidget( new QLabel( i18n( "End 1:" ), this ), 0, 0 );
+   gl = new TQGridLayout( topLayout( ), 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "End 1:" ), this ), 0, 0 );
    gl->addWidget( m_pEnd1, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "End 2:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "End 2:" ), this ), 1, 0 );
    gl->addWidget( m_pEnd2, 1, 1 );
 
-   layout = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( layout, 2, 2 );
-   gl->addWidget( new QLabel( i18n( "Radius:" ), this ), 0, 0 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( layout, 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "Radius:" ), this ), 0, 0 );
    gl->addWidget( m_pRadius, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Strength:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Strength:" ), this ), 1, 0 );
    gl->addWidget( m_pStrength, 1, 1 );
    layout->addStretch( 1 );
 
-   connect( m_pEnd1, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnd2, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRadius, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pStrength, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pEnd1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnd2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pStrength, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBlobCylinderEdit::displayObject( PMObject* o )

@@ -29,8 +29,8 @@
 class PMRainbow;
 class PMFloatEdit;
 class PMVectorEdit;
-class QCheckBox;
-class QLabel;
+class TQCheckBox;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMRainbow
@@ -43,7 +43,7 @@ public:
    /**
     * Creates a PMRainbowEdit with parent and name
     */
-   PMRainbowEdit( QWidget* parent, const char* name = 0 );
+   PMRainbowEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -76,14 +76,14 @@ private:
    PMVectorEdit* m_pUpEdit;
    PMFloatEdit* m_pArcAngleEdit;
    PMFloatEdit* m_pFalloffAngleEdit;
-   QCheckBox* m_pEnableDirectionEdit;
-   QCheckBox* m_pEnableAngleEdit;
-   QCheckBox* m_pEnableWidthEdit;
-   QCheckBox* m_pEnableDistanceEdit;
-   QCheckBox* m_pEnableJitterEdit;
-   QCheckBox* m_pEnableUpEdit;
-   QCheckBox* m_pEnableArcAngleEdit;
-   QCheckBox* m_pEnableFalloffAngleEdit;
+   TQCheckBox* m_pEnableDirectionEdit;
+   TQCheckBox* m_pEnableAngleEdit;
+   TQCheckBox* m_pEnableWidthEdit;
+   TQCheckBox* m_pEnableDistanceEdit;
+   TQCheckBox* m_pEnableJitterEdit;
+   TQCheckBox* m_pEnableUpEdit;
+   TQCheckBox* m_pEnableArcAngleEdit;
+   TQCheckBox* m_pEnableFalloffAngleEdit;
 };
 
 

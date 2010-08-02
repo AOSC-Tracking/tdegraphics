@@ -65,7 +65,7 @@ public:
             kpViewManager *viewManager,
             kpView *buddyView,
             kpViewScrollableContainer *scrollableContainer,
-            QWidget *parent, const char *name);
+            TQWidget *parent, const char *name);
 
     /**
      * Destructs an unzoomed thumbnail view.
@@ -76,7 +76,7 @@ public:
     /**
      * Implements @ref kpThumbnailView.
      */
-    QString caption () const;
+    TQString caption () const;
 
 
 public slots:

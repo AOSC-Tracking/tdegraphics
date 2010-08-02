@@ -28,8 +28,8 @@
 #ifndef __kp_squeezed_text_label_h__
 #define __kp_squeezed_text_label_h__
 
-#include <qlabel.h>
-#include <qstring.h>
+#include <tqlabel.h>
+#include <tqstring.h>
 
 
 // KSqueezedTextLabel done properly - squeeze at the end of the string,
@@ -39,26 +39,26 @@ class kpSqueezedTextLabel : public QLabel
 Q_OBJECT
 
 public:
-    kpSqueezedTextLabel (QWidget *parent, const char *name = 0);
-    kpSqueezedTextLabel (const QString &text, QWidget *parent, const char *name = 0);
+    kpSqueezedTextLabel (TQWidget *parent, const char *name = 0);
+    kpSqueezedTextLabel (const TQString &text, TQWidget *parent, const char *name = 0);
 
-    virtual QSize minimumSizeHint () const;
+    virtual TQSize minimumSizeHint () const;
 
     // TODO: maybe text() should return the full text?
-    QString fullText () const;
+    TQString fullText () const;
 
     bool showEllipsis () const;
     void setShowEllipsis (bool yes = true);
     
 public slots:
-    virtual void setText (const QString &text);
+    virtual void setText (const TQString &text);
 
 protected:
-    virtual void resizeEvent (QResizeEvent *);
-    QString ellipsisText () const;
+    virtual void resizeEvent (TQResizeEvent *);
+    TQString ellipsisText () const;
     void squeezeText ();
 
-    QString m_fullText;
+    TQString m_fullText;
     bool m_showEllipsis;
 };
 

@@ -50,7 +50,7 @@ PMTrueTypeCache::~PMTrueTypeCache( )
       FT_Done_FreeType( m_library );
 }
 
-PMTrueTypeFont* PMTrueTypeCache::lookUp( const QString& file )
+PMTrueTypeFont* PMTrueTypeCache::lookUp( const TQString& file )
 {
    if( !m_library )
       return 0;
@@ -81,7 +81,7 @@ PMTrueTypeFont* PMTrueTypeCache::lookUp( const QString& file )
    return 0;
 }
 
-PMTrueTypeFont* PMTrueTypeCache::font( const QString& file )
+PMTrueTypeFont* PMTrueTypeCache::font( const TQString& file )
 {
    if( !s_pInstance )
       s_staticDeleter.setObject( s_pInstance, new PMTrueTypeCache( ) );
@@ -144,13 +144,13 @@ bool PMTrueTypeFont::isValid( )
    return m_valid;
 }
 
-PMTrueTypeOutline* PMTrueTypeFont::outline( QChar c )
+PMTrueTypeOutline* PMTrueTypeFont::outline( TQChar c )
 {
    PMTrueTypeOutline* ol = 0;
    
    if( isValid( ) )
    {
-      QString str( c );
+      TQString str( c );
       ol = m_cache.find( str );
       if( !ol )
       {
@@ -193,7 +193,7 @@ PMTrueTypeOutline* PMTrueTypeFont::outline( QChar c )
    return ol;
 }
 
-double PMTrueTypeFont::kerning( QChar c1, QChar c2 )
+double PMTrueTypeFont::kerning( TQChar c1, TQChar c2 )
 {
    double k = 0.0;
    if( m_useKerning && !c1.isNull( ) && !c2.isNull( ) )
@@ -211,7 +211,7 @@ double PMTrueTypeFont::kerning( QChar c1, QChar c2 )
    return k;
 }
 
-FT_UInt PMTrueTypeFont::findGlyphIndex( QChar c )
+FT_UInt PMTrueTypeFont::findGlyphIndex( TQChar c )
 {
    FT_UInt glyphIndex = 0;
 
@@ -368,7 +368,7 @@ PMTrueTypeCache::PMTrueTypeCache( )
 {
 }
 
-PMTrueTypeFont* PMTrueTypeCache::font( const QString& )
+PMTrueTypeFont* PMTrueTypeCache::font( const TQString& )
 {
    return 0;
 }
@@ -382,12 +382,12 @@ bool PMTrueTypeFont::isValid( )
    return false;
 }
 
-PMTrueTypeOutline* PMTrueTypeFont::outline( QChar )
+PMTrueTypeOutline* PMTrueTypeFont::outline( TQChar )
 {
    return 0;
 }
 
-double PMTrueTypeFont::kerning( QChar, QChar )
+double PMTrueTypeFont::kerning( TQChar, TQChar )
 {
    return 0;
 }

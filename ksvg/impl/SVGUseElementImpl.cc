@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "KSVGLoader.h"
 #include "KSVGCanvas.h"
@@ -169,7 +169,7 @@ void SVGUseElementImpl::putValueProperty(ExecState *exec, int token, const Value
 			break;
 		case Href:
 		{
-			QString url = value.toString(exec).qstring();
+			TQString url = value.toString(exec).qstring();
 			href()->setBaseVal(SVGURIReferenceImpl::getTarget(url));
 			break;
 		}
@@ -212,7 +212,7 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 	{
 		// ownerSVGElement()->getElementById() is wrong here.
 		// It could reference elements from other documents when using getURL (Niko)
-		QString filename, id;
+		TQString filename, id;
 		DOM::DOMString url = getAttribute("href");
 		if(!SVGURIReferenceImpl::parseURIReference(url.string(), filename, id))
 			return;
@@ -223,7 +223,7 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 			KURL fragmentUrl(ownerDoc()->baseUrl(), url.string());
 
 			id = fragmentUrl.ref();
-			fragmentUrl.setRef(QString::null);
+			fragmentUrl.setRef(TQString::null);
 
 			orig = KSVGLoader::getSVGFragment(fragmentUrl, ownerDoc(), id);
 		}
@@ -250,11 +250,11 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 		SVGElementImpl *clone = orig->cloneNode(true);
 
 		// Apply the use-correction
-		QString trans;
+		TQString trans;
 		trans += " translate(";
-		trans += QString::number(x()->baseVal()->value());
+		trans += TQString::number(x()->baseVal()->value());
 		trans += " ";
-		trans += QString::number(y()->baseVal()->value());
+		trans += TQString::number(y()->baseVal()->value());
 		trans += ")";
 
 		// Apply the transform attribute and render the element
@@ -304,7 +304,7 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 		dynamic_cast<SVGLocatableImpl *>(parent)->updateCachedScreenCTM(screenCTM());
 
 		// Redirect local ecma event handlers to the correspondingElement
-		QPtrListIterator<SVGRegisteredEventListener> it(eventListeners());
+		TQPtrListIterator<SVGRegisteredEventListener> it(eventListeners());
 		SVGRegisteredEventListener *eventListener;
 		while((eventListener = it.current()) != 0)
 		{

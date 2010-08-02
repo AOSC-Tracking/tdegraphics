@@ -22,14 +22,14 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qdatastream.h>
-#include <qfile.h>
+#include <tqdatastream.h>
+#include <tqfile.h>
 
 typedef KGenericFactory<KPcxPlugin> PcxFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pcx, PcxFactory("kfile_pcx"))
 
-QDataStream &operator>>( QDataStream &s, PALETTE &pal )
+TQDataStream &operator>>( TQDataStream &s, PALETTE &pal )
 {
   for (  int i=0; i<16; ++i )
     s >> pal.p[ i ].r >> pal.p[ i ].g >> pal.p[ i ].b;
@@ -37,7 +37,7 @@ QDataStream &operator>>( QDataStream &s, PALETTE &pal )
   return s;
 }
 
-QDataStream &operator>>( QDataStream &s, PCXHEADER &ph )
+TQDataStream &operator>>( TQDataStream &s, PCXHEADER &ph )
 {
   s >> ph.Manufacturer;
   s >> ph.Version;
@@ -56,8 +56,8 @@ QDataStream &operator>>( QDataStream &s, PCXHEADER &ph )
   return s;
 }
 
-KPcxPlugin::KPcxPlugin( QObject *parent, const char *name,
-        const QStringList &args ) : KFilePlugin( parent, name, args )
+KPcxPlugin::KPcxPlugin( TQObject *parent, const char *name,
+        const TQStringList &args ) : KFilePlugin( parent, name, args )
 {
   kdDebug(7034) << "PCX file meta info plugin" << endl;
   KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-pcx" );
@@ -67,17 +67,17 @@ KPcxPlugin::KPcxPlugin( QObject *parent, const char *name,
 
   KFileMimeTypeInfo::ItemInfo* item;
   item = addItemInfo( group, "Dimensions", i18n( "Dimensions" ),
-      QVariant::Size );
+      TQVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
   item = addItemInfo( group, "BitDepth", i18n( "Bit Depth" ),
-      QVariant::Int );
+      TQVariant::Int );
   setUnit( item, KFileMimeTypeInfo::BitsPerPixel );
   item = addItemInfo( group, "Resolution", i18n( "Resolution" ),
-      QVariant::Size );
+      TQVariant::Size );
   setUnit( item, KFileMimeTypeInfo::DotsPerInch );
   item = addItemInfo( group, "Compression", i18n( "Compression" ),
-      QVariant::String );
+      TQVariant::String );
 }
 
 bool KPcxPlugin::readInfo( KFileMetaInfo& info, uint )
@@ -87,12 +87,12 @@ bool KPcxPlugin::readInfo( KFileMetaInfo& info, uint )
 
   struct PCXHEADER header;
 
-  QFile f( info.path() );
+  TQFile f( info.path() );
   if ( !f.open( IO_ReadOnly ) )
     return false;
 
-  QDataStream s( &f );
-  s.setByteOrder(  QDataStream::LittleEndian );
+  TQDataStream s( &f );
+  s.setByteOrder(  TQDataStream::LittleEndian );
 
   s >> header;
 
@@ -102,9 +102,9 @@ bool KPcxPlugin::readInfo( KFileMetaInfo& info, uint )
 
   KFileMetaInfoGroup group = appendGroup( info, "General" );
 
-  appendItem( group, "Dimensions", QSize( w, h ) );
+  appendItem( group, "Dimensions", TQSize( w, h ) );
   appendItem( group, "BitDepth", bpp );
-  appendItem( group, "Resolution", QSize( header.HDpi, header.YDpi ) );
+  appendItem( group, "Resolution", TQSize( header.HDpi, header.YDpi ) );
   if ( header.Encoding == 1 )
     appendItem( group, "Compression", i18n( "Yes (RLE)" ) );
   else

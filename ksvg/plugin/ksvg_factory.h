@@ -31,10 +31,10 @@ class KSVGPluginFactory : public KParts::Factory
 {
 Q_OBJECT
 public:
-	KSVGPluginFactory(QObject *parent = 0, const char *name = 0);
+	KSVGPluginFactory(TQObject *parent = 0, const char *name = 0);
 	virtual ~KSVGPluginFactory();
 	
-	virtual KParts::Part *createPartObject(QWidget *parentWidget = 0, const char *widgetName = 0, QObject *parent = 0, const char *name = 0, const char *classname = "KParts::Part", const QStringList &args = QStringList());
+	virtual KParts::Part *createPartObject(TQWidget *parentWidget = 0, const char *widgetName = 0, TQObject *parent = 0, const char *name = 0, const char *classname = "KParts::Part", const TQStringList &args = TQStringList());
 	
 	static KInstance *instance();
 

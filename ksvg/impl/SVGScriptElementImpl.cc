@@ -22,7 +22,7 @@
 
 #include <kio/job.h>
 #include <kfilterdev.h>
-#include <qbuffer.h>
+#include <tqbuffer.h>
 
 #include "SVGDocumentImpl.h"
 #include "SVGAnimatedStringImpl.h"
@@ -35,7 +35,7 @@ using namespace KSVG;
 #include "ksvg_bridge.h"
 #include "ksvg_ecma.h"
 
-SVGScriptElementImpl::SVGScriptElementImpl(DOM::ElementImpl *impl) : QObject(), SVGElementImpl(impl), SVGURIReferenceImpl(), SVGExternalResourcesRequiredImpl()
+SVGScriptElementImpl::SVGScriptElementImpl(DOM::ElementImpl *impl) : TQObject(), SVGElementImpl(impl), SVGURIReferenceImpl(), SVGExternalResourcesRequiredImpl()
 {
 	KSVG_EMPTY_FLAGS
 
@@ -66,7 +66,7 @@ void SVGScriptElementImpl::setAttributes()
 		KSVG_SET_ALT_ATTRIBUTE(Type, "text/ecmascript")
 
 	// Remote downloading
-	QString href = m_href->baseVal().string();
+	TQString href = m_href->baseVal().string();
 
 	if(!href.isEmpty())
 	{
@@ -75,14 +75,14 @@ void SVGScriptElementImpl::setAttributes()
 		if(m_job == 0)
 			m_job = KIO::get(url, false, false);
 
-		connect(m_job, SIGNAL(data(KIO::Job *, const QByteArray &)), this, SLOT(slotData(KIO::Job *, const QByteArray &)));
-		connect(m_job, SIGNAL(result(KIO::Job *)), this, SLOT(slotResult(KIO::Job *)));
+		connect(m_job, TQT_SIGNAL(data(KIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(KIO::Job *, const TQByteArray &)));
+		connect(m_job, TQT_SIGNAL(result(KIO::Job *)), this, TQT_SLOT(slotResult(KIO::Job *)));
 	}
 }
 
-void SVGScriptElementImpl::slotData(KIO::Job *, const QByteArray &data)
+void SVGScriptElementImpl::slotData(KIO::Job *, const TQByteArray &data)
 {
-	QDataStream dataStream(m_data, IO_WriteOnly | IO_Append);
+	TQDataStream dataStream(m_data, IO_WriteOnly | IO_Append);
 	dataStream.writeRawBytes(data.data(), data.size());
 }
 
@@ -94,13 +94,13 @@ void SVGScriptElementImpl::slotResult(KIO::Job *)
 	m_data.resize(m_data.size() + 1);
 	m_data[m_data.size() - 1] = '\0';
 
-	QBuffer buf(m_data);
-	QIODevice *dev = KFilterDev::device(&buf, "application/x-gzip", false);
-	QByteArray contents;
+	TQBuffer buf(m_data);
+	TQIODevice *dev = KFilterDev::device(&buf, "application/x-gzip", false);
+	TQByteArray contents;
 	if(dev->open(IO_ReadOnly))
 		contents = dev->readAll();
 	delete dev;
-	m_text = QString::fromUtf8(contents.data());
+	m_text = TQString::fromUtf8(contents.data());
 
 	m_data.resize(0);
 }
@@ -124,7 +124,7 @@ bool SVGScriptElementImpl::executeScript(DOM::Node node)
 	return SVGScriptElementImpl::executeScript(node, ownerDoc(), m_text);
 }
 
-bool SVGScriptElementImpl::executeScript(DOM::Node node, SVGDocumentImpl *document, const QString &text)
+bool SVGScriptElementImpl::executeScript(DOM::Node node, SVGDocumentImpl *document, const TQString &text)
 {
 #ifdef KJS_VERBOSE
     kdDebug(6070) << "SVGScriptElementImpl::executeScript n=" << node.nodeName().string().latin1() << "(" << (node.isNull() ? 0 : node.nodeType()) << ") " << text << endl;

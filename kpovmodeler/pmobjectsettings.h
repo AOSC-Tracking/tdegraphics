@@ -26,7 +26,7 @@
 
 class PMIntEdit;
 class PMFloatEdit;
-class QCheckBox;
+class TQCheckBox;
 
 /**
  * Object details configuration dialog page
@@ -38,7 +38,7 @@ public:
    /**
     * Default constructor
     */
-   PMObjectSettings( QWidget* parent, const char* name = 0 );
+   PMObjectSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -71,7 +71,7 @@ private:
    PMIntEdit* m_pSphereSweepRSteps;
    PMIntEdit* m_pSphereSweepSSteps;
    PMIntEdit* m_pHeightFieldVariance;
-   QCheckBox* m_pHighDetailCameraViews;
+   TQCheckBox* m_pHighDetailCameraViews;
 };
 
 

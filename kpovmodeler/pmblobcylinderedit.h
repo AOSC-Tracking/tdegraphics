@@ -38,7 +38,7 @@ public:
    /**
     * Creates a PMBlobCylinderEdit with parent and name
     */
-   PMBlobCylinderEdit( QWidget* parent, const char* name = 0 );
+   PMBlobCylinderEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

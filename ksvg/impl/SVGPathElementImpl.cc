@@ -446,7 +446,7 @@ Value SVGPathElementImpl::getValueProperty(ExecState *exec, int token) const
 		case D:
 //	if(!attributeMode)
 		{
-				QString d;
+				TQString d;
 				unsigned int nrSegs = pathSegList()->numberOfItems();
 				SVGPathSegImpl *curseg = 0;
 				for(unsigned int i = 0; i < nrSegs; i++)
@@ -475,7 +475,7 @@ void SVGPathElementImpl::putValueProperty(ExecState *exec, int token, const Valu
 		case D:
 		{
 			pathSegList()->clear();
-			QString d = value.toString(exec).qstring();
+			TQString d = value.toString(exec).qstring();
 			parseSVG(d, false);
 			if(hasMarkers())
 				m_markerData = MarkerData(pathSegList());
@@ -596,7 +596,7 @@ SVGPathElementImpl::MarkerData::MarkerData(SVGPathSegListImpl *path)
 	double previousCubicX2 = 0;
 	double previousCubicY2 = 0;
 
-	QValueVector<SegmentData> pathSegmentData(numSegments);
+	TQValueVector<SegmentData> pathSegmentData(numSegments);
 
 	for(unsigned int i = 0; i < numSegments; i++)
 	{
@@ -797,7 +797,7 @@ SVGPathElementImpl::MarkerData::MarkerData(SVGPathSegListImpl *path)
 	}
 }
 
-bool SVGPathElementImpl::MarkerData::getStartSlope(QValueVector<SegmentData> segments, unsigned int i, double *pStartSlope)
+bool SVGPathElementImpl::MarkerData::getStartSlope(TQValueVector<SegmentData> segments, unsigned int i, double *pStartSlope)
 {
 	if(i > segments.count() - 1 || segments[i].type == PATHSEG_MOVETO_ABS || segments[i].type == PATHSEG_MOVETO_REL)
 		return false;
@@ -831,7 +831,7 @@ bool SVGPathElementImpl::MarkerData::getStartSlope(QValueVector<SegmentData> seg
 	}
 }
 
-bool SVGPathElementImpl::MarkerData::getEndSlope(QValueVector<SegmentData> segments, unsigned int i, double *pEndSlope)
+bool SVGPathElementImpl::MarkerData::getEndSlope(TQValueVector<SegmentData> segments, unsigned int i, double *pEndSlope)
 {
 	if(i > segments.count() - 1 || segments[i].type == PATHSEG_MOVETO_ABS || segments[i].type == PATHSEG_MOVETO_REL)
 		return false;

@@ -30,13 +30,13 @@
 #define KP_DOCUMENT_SAVE_OPTIONS_WIDGET_H
 
 
-#include <qsize.h>
+#include <tqsize.h>
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 
-class QPixmap;
-class QLabel;
+class TQPixmap;
+class TQLabel;
 
 class kpResizeSignallingLabel;
 
@@ -46,13 +46,13 @@ class kpDocumentSaveOptionsPreviewDialog : public QWidget
 Q_OBJECT
 
 public:
-    kpDocumentSaveOptionsPreviewDialog (QWidget *parent, const char *name = 0);
+    kpDocumentSaveOptionsPreviewDialog (TQWidget *parent, const char *name = 0);
     virtual ~kpDocumentSaveOptionsPreviewDialog ();
 
-    QSize preferredMinimumSize () const;
+    TQSize preferredMinimumSize () const;
 
 protected:
-    static const QSize s_pixmapLabelMinimumSize;
+    static const TQSize s_pixmapLabelMinimumSize;
 
 signals:
     void moved ();
@@ -60,32 +60,32 @@ signals:
     void finished ();
 
 public slots:
-    void setFilePixmapAndSize (const QPixmap &filePixmap, int fileSize);
+    void setFilePixmapAndSize (const TQPixmap &filePixmap, int fileSize);
     void updatePixmapPreview ();
 
 protected:
-    virtual void closeEvent (QCloseEvent *e);
-    virtual void moveEvent (QMoveEvent *e);
-    virtual void resizeEvent (QResizeEvent *e);
+    virtual void closeEvent (TQCloseEvent *e);
+    virtual void moveEvent (TQMoveEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
 
 protected:
-    QPixmap *m_filePixmap;
+    TQPixmap *m_filePixmap;
     int m_fileSize;
 
     kpResizeSignallingLabel *m_filePixmapLabel;
-    QLabel *m_fileSizeLabel;
+    TQLabel *m_fileSizeLabel;
 };
 
 
-#include <qrect.h>
-#include <qwidget.h>
+#include <tqrect.h>
+#include <tqwidget.h>
 
 #include <kpdocumentmetainfo.h>
 #include <kpdocumentsaveoptions.h>
 
 
-class QLabel;
-class QTimer;
+class TQLabel;
+class TQTimer;
 
 class KComboBox;
 class KIntNumInput;
@@ -97,11 +97,11 @@ class kpDocumentSaveOptionsWidget : public QWidget
 Q_OBJECT
 
 public:
-    kpDocumentSaveOptionsWidget (const QPixmap &docPixmap,
+    kpDocumentSaveOptionsWidget (const TQPixmap &docPixmap,
                                  const kpDocumentSaveOptions &saveOptions,
                                  const kpDocumentMetaInfo &metaInfo,
-                                 QWidget *parent, const char *name = 0);
-    kpDocumentSaveOptionsWidget (QWidget *parent, const char *name = 0);
+                                 TQWidget *parent, const char *name = 0);
+    kpDocumentSaveOptionsWidget (TQWidget *parent, const char *name = 0);
 private:
     void init ();
 public:
@@ -109,7 +109,7 @@ public:
 
 
     // <visualParent> is usually the filedialog
-    void setVisualParent (QWidget *visualParent);
+    void setVisualParent (TQWidget *visualParent);
 
 
 protected:
@@ -117,9 +117,9 @@ protected:
     bool mimeTypeHasConfigurableQuality () const;
 
 public:
-    QString mimeType () const;
+    TQString mimeType () const;
 public slots:
-    void setMimeType (const QString &string);
+    void setMimeType (const TQString &string);
 
 public:
     int colorDepth () const;
@@ -144,7 +144,7 @@ public slots:
 
 
 public:
-    void setDocumentPixmap (const QPixmap &documentPixmap);
+    void setDocumentPixmap (const TQPixmap &documentPixmap);
     void setDocumentMetaInfo (const kpDocumentMetaInfo &metaInfo);
 
 
@@ -171,29 +171,29 @@ protected slots:
 
 
 protected:
-    QWidget *m_visualParent;
+    TQWidget *m_visualParent;
 
     Mode m_mode;
 
-    QPixmap *m_documentPixmap;
+    TQPixmap *m_documentPixmap;
 
     kpDocumentSaveOptions m_baseDocumentSaveOptions;
     kpDocumentMetaInfo m_documentMetaInfo;
 
-    QLabel *m_colorDepthLabel;
+    TQLabel *m_colorDepthLabel;
     KComboBox *m_colorDepthCombo;
     int m_colorDepthComboLastSelectedItem;
-    QWidget *m_colorDepthSpaceWidget;
+    TQWidget *m_colorDepthSpaceWidget;
 
-    QLabel *m_qualityLabel;
+    TQLabel *m_qualityLabel;
     KIntNumInput *m_qualityInput;
 
     KPushButton *m_previewButton;
     kpDocumentSaveOptionsPreviewDialog *m_previewDialog;
-    QRect m_previewDialogLastRelativeGeometry;
-    QTimer *m_updatePreviewTimer;
+    TQRect m_previewDialogLastRelativeGeometry;
+    TQTimer *m_updatePreviewTimer;
     int m_updatePreviewDelay;
-    QTimer *m_updatePreviewDialogLastRelativeGeometryTimer;
+    TQTimer *m_updatePreviewDialogLastRelativeGeometryTimer;
 };
 
 

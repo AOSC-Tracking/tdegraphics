@@ -27,7 +27,7 @@
 #include "pmdebug.h"
 
 #include <klocale.h>
-#include <qptrdict.h>
+#include <tqptrdict.h>
 
 PMMoveCommand::PMMoveCommand( PMObject* obj, PMObject* parent, PMObject* after )
       : PMCommand( i18n( "Move %1" ).arg( obj->description( ) ) )
@@ -172,7 +172,7 @@ void PMMoveCommand::execute( PMCommandManager* theManager )
          }
       }
 
-      QPtrListIterator<PMMemento> mit( m_dataChanges );
+      TQPtrListIterator<PMMemento> mit( m_dataChanges );
       for( ; mit.current( ); ++mit )
       {
          PMObjectChangeListIterator change = mit.current( )->changedObjects( );
@@ -212,7 +212,7 @@ void PMMoveCommand::undo( PMCommandManager* theManager )
          theManager->cmdObjectChanged( obj, PMCAdd );
       }
 
-      QPtrListIterator<PMMemento> mit( m_dataChanges );
+      TQPtrListIterator<PMMemento> mit( m_dataChanges );
       for( ; mit.current( ); ++mit )
       {
          mit.current( )->originator( )->restoreMemento( mit.current( ) );
@@ -238,11 +238,11 @@ int PMMoveCommand::errorFlags( PMPart* )
    bool stop;
 
    // dictionary of deleted objects
-   QPtrDict<bool> deletedObjects( 1009 );
+   TQPtrDict<bool> deletedObjects( 1009 );
    deletedObjects.setAutoDelete( true );
-   QPtrDict<bool> objectsAfterInsertPosition( 1009 );
+   TQPtrDict<bool> objectsAfterInsertPosition( 1009 );
    objectsAfterInsertPosition.setAutoDelete( true );
-   QPtrDict<bool> declaresBeforeInsertPosition( 199 );
+   TQPtrDict<bool> declaresBeforeInsertPosition( 199 );
    declaresBeforeInsertPosition.setAutoDelete( true );
 
 
@@ -441,7 +441,7 @@ int PMMoveCommand::errorFlags( PMPart* )
          if( linked )
          {
             obj = info->deletedObject( );
-            QString name = obj->name( );
+            TQString name = obj->name( );
             decl = ( PMDeclare* ) linked;
             
             if( name.isEmpty( ) )

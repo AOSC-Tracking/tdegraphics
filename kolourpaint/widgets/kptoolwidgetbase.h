@@ -29,15 +29,15 @@
 #ifndef __kp_tool_widget_base_h__
 #define __kp_tool_widget_base_h__
 
-#include <qframe.h>
-#include <qpair.h>
-#include <qpixmap.h>
-#include <qrect.h>
-#include <qvaluevector.h>
-#include <qwidget.h>
+#include <tqframe.h>
+#include <tqpair.h>
+#include <tqpixmap.h>
+#include <tqrect.h>
+#include <tqvaluevector.h>
+#include <tqwidget.h>
 
 
-class QPainter;
+class TQPainter;
 
 
 // TODO: frame becomes a combobox when its parent kpToolToolBar becomes too small
@@ -46,11 +46,11 @@ class kpToolWidgetBase : public QFrame
 Q_OBJECT
 
 public:
-    kpToolWidgetBase (QWidget *parent, const char *name);  // must provide a name for config to work
+    kpToolWidgetBase (TQWidget *parent, const char *name);  // must provide a name for config to work
     virtual ~kpToolWidgetBase ();
 
 public:
-    void addOption (const QPixmap &pixmap, const QString &toolTip = QString::null);
+    void addOption (const TQPixmap &pixmap, const TQString &toolTip = TQString::null);
     void startNewOptionRow ();
 
     // Call this at the end of your constructor.
@@ -59,7 +59,7 @@ public:
     void finishConstruction (int fallBackRow, int fallBackCol);
 
 private:
-    QValueVector <int> spreadOutElements (const QValueVector <int> &sizes, int maxSize);
+    TQValueVector <int> spreadOutElements (const TQValueVector <int> &sizes, int maxSize);
 
 public:  // (only have to use these if you don't use finishConstruction())
     // (rereads from config file)
@@ -92,19 +92,19 @@ signals:
     void optionSelected (int row, int col);
 
 protected:
-    virtual void mousePressEvent (QMouseEvent *e);
-    virtual void drawContents (QPainter *painter);
+    virtual void mousePressEvent (TQMouseEvent *e);
+    virtual void drawContents (TQPainter *painter);
 
     void setInvertSelectedPixmap (bool yes = true) { m_invertSelectedPixmap = yes; }
     bool m_invertSelectedPixmap;
 
-    // coulbe be a QFrame or a ComboBox
-    QWidget *m_baseWidget;
+    // coulbe be a TQFrame or a ComboBox
+    TQWidget *m_baseWidget;
 
-    QValueVector < QValueVector <QPixmap> > m_pixmaps;
-    QValueVector < QValueVector <QString> > m_toolTips;
+    TQValueVector < TQValueVector <TQPixmap> > m_pixmaps;
+    TQValueVector < TQValueVector <TQString> > m_toolTips;
 
-    QValueVector < QValueVector <QRect> > m_pixmapRects;
+    TQValueVector < TQValueVector <TQRect> > m_pixmapRects;
 
     int m_selectedRow, m_selectedCol;
 };

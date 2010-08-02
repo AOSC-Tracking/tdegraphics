@@ -27,10 +27,10 @@
 #include "pmdialogeditbase.h"
 
 class PMDeclare;
-class QLineEdit;
-class QListBox;
-class QPushButton;
-class QListBoxItem;
+class TQLineEdit;
+class TQListBox;
+class TQPushButton;
+class TQListBoxItem;
 
 /**
  * Dialog edit class for @ref PMDeclare.
@@ -43,7 +43,7 @@ public:
    /**
     * Creates a PMDeclareEdit with parent and name
     */
-   PMDeclareEdit( QWidget* parent, const char* name = 0 );
+   PMDeclareEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -59,14 +59,14 @@ protected:
    virtual void saveContents( );
 
 private slots:
-   void slotNameChanged( const QString& );
-   void slotItemSelected( QListBoxItem* );
+   void slotNameChanged( const TQString& );
+   void slotItemSelected( TQListBoxItem* );
    void slotSelect( );
 private:
    PMDeclare* m_pDisplayedObject;
-   QLineEdit* m_pNameEdit;
-   QListBox* m_pLinkedObjects;
-   QPushButton* m_pSelectButton;
+   TQLineEdit* m_pNameEdit;
+   TQListBox* m_pLinkedObjects;
+   TQPushButton* m_pSelectButton;
    PMObject* m_pSelectedObject;
 };
 

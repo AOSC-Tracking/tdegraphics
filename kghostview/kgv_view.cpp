@@ -16,12 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qframe.h>
-#include <qtable.h>
-#include <qlayout.h>
-#include <qregexp.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqframe.h>
+#include <tqtable.h>
+#include <tqlayout.h>
+#include <tqregexp.h>
 
 #include <kaction.h>
 #include <kapplication.h>
@@ -74,14 +74,14 @@ namespace KGV {
     }
 }
 
-KGVPart::KGVPart( QWidget* parentWidget, const char*,
-                  QObject* parent, const char* name,
-                  const QStringList &args ) :
+KGVPart::KGVPart( TQWidget* parentWidget, const char*,
+                  TQObject* parent, const char* name,
+                  const TQStringList &args ) :
     KParts::ReadOnlyPart( parent, name ),
-    _fitTimer( new QTimer( this ) ),
+    _fitTimer( new TQTimer( this ) ),
     _job( 0 ),
     _mimetypeScanner( 0 ),
-    _dirtyHandler( new QTimer( this ) ),
+    _dirtyHandler( new TQTimer( this ) ),
     _isGuiInitialized( false ),
     _isFileDirty( false ),
     _stickyOptions( false ),
@@ -94,31 +94,31 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
     setProgressInfoEnabled( !args.contains( "Browser/View") );
 
     _document = new KGVDocument( this );
-    connect( _document, SIGNAL( fileChangeFailed() ),
-	     this, SLOT( slotCancelWatch() ) );
-    connect( _document, SIGNAL( completed() ),
-	     this, SLOT( slotOpenFileCompleted() ) );
-    connect( _document, SIGNAL( canceled( const QString& ) ),
-	     this, SIGNAL( canceled( const QString& ) ) );
+    connect( _document, TQT_SIGNAL( fileChangeFailed() ),
+	     this, TQT_SLOT( slotCancelWatch() ) );
+    connect( _document, TQT_SIGNAL( completed() ),
+	     this, TQT_SLOT( slotOpenFileCompleted() ) );
+    connect( _document, TQT_SIGNAL( canceled( const TQString& ) ),
+	     this, TQT_SIGNAL( canceled( const TQString& ) ) );
 
     _fileWatcher = new KDirWatch( this );
-    connect( _fileWatcher, SIGNAL( dirty( const QString& ) ),
-	     this, SLOT( slotFileDirty( const QString& ) ) );
-    connect( _dirtyHandler, SIGNAL( timeout() ),
-	     this, SLOT( slotDoFileDirty() ) );
+    connect( _fileWatcher, TQT_SIGNAL( dirty( const TQString& ) ),
+	     this, TQT_SLOT( slotFileDirty( const TQString& ) ) );
+    connect( _dirtyHandler, TQT_SIGNAL( timeout() ),
+	     this, TQT_SLOT( slotDoFileDirty() ) );
 
     // Setup main widget
     _mainWidget = new KGVMainWidget( parentWidget );
-    _mainWidget->setFocusPolicy( QWidget::StrongFocus );
+    _mainWidget->setFocusPolicy( TQWidget::StrongFocus );
     _mainWidget->installEventFilter( this );
     _mainWidget->setAcceptDrops( true );
-    connect( _mainWidget, SIGNAL( spacePressed() ),
-             this, SLOT( slotReadDown() ) );
-    connect( _mainWidget, SIGNAL( urlDropped( const KURL& ) ),
-	    this, SLOT( openURL( const KURL& ) ) );
+    connect( _mainWidget, TQT_SIGNAL( spacePressed() ),
+             this, TQT_SLOT( slotReadDown() ) );
+    connect( _mainWidget, TQT_SIGNAL( urlDropped( const KURL& ) ),
+	    this, TQT_SLOT( openURL( const KURL& ) ) );
 
-    QHBoxLayout* hlay = new QHBoxLayout( _mainWidget, 0, 0 );
-    QVBoxLayout* vlay = new QVBoxLayout( hlay );
+    TQHBoxLayout* hlay = new TQHBoxLayout( _mainWidget, 0, 0 );
+    TQVBoxLayout* vlay = new TQVBoxLayout( hlay );
 
     const int PAGELIST_WIDTH = 75;
 
@@ -127,14 +127,14 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
     _scrollBox->setMinimumHeight( PAGELIST_WIDTH );
     vlay->addWidget( _scrollBox );
 
-    _divider = new QFrame( _mainWidget, "divider" );
-    _divider->setFrameStyle( QFrame::Panel | QFrame::Raised );
+    _divider = new TQFrame( _mainWidget, "divider" );
+    _divider->setFrameStyle( TQFrame::Panel | TQFrame::Raised );
     _divider->setLineWidth( 1 );
     _divider->setMinimumWidth( 3 );
     hlay->addWidget( _divider );
 
     _pageView = new KGVPageView( _mainWidget, "pageview" );
-    _pageView->viewport()->setBackgroundMode( QWidget::PaletteMid );
+    _pageView->viewport()->setBackgroundMode( TQWidget::PaletteMid );
     hlay->addWidget( _pageView, 1 );
     _mainWidget->setFocusProxy( _pageView );
     setWidget( _mainWidget );
@@ -146,17 +146,17 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
     _psWidget = new KPSWidget( _pageDecorator );
     _psWidget->readSettings();
     _pageView->setPage( _pageDecorator );
-    connect( _psWidget, SIGNAL( output( char*, int ) ),
-             this, SLOT( slotGhostscriptOutput( char*, int ) ) );
+    connect( _psWidget, TQT_SIGNAL( output( char*, int ) ),
+             this, TQT_SLOT( slotGhostscriptOutput( char*, int ) ) );
 
-    connect( _psWidget, SIGNAL( ghostscriptError( const QString& ) ),
-             this, SLOT( slotGhostscriptError( const QString& ) ) );
+    connect( _psWidget, TQT_SIGNAL( ghostscriptError( const TQString& ) ),
+             this, TQT_SLOT( slotGhostscriptError( const TQString& ) ) );
 
 
     _logWindow = new LogWindow( i18n( "Ghostscript Messages" ), _mainWidget, "logwindow" );
     _showLogWindow = false;
 
-    connect( _logWindow, SIGNAL( configureGS() ), SLOT( slotConfigure() ) );
+    connect( _logWindow, TQT_SIGNAL( configureGS() ), TQT_SLOT( slotConfigure() ) );
 
     _docManager = new KGVMiniWidget( this );
     _docManager->setPSWidget( _psWidget );
@@ -165,57 +165,57 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
     _markList = new MarkList( _mainWidget, "marklist", _docManager );
     _markList->setFixedWidth( PAGELIST_WIDTH );
     vlay->addWidget( _markList, 1 );
-    connect( _markList, SIGNAL( contextMenuRequested ( int, int, const QPoint& ) ),
-             this, SLOT( showPopup( int, int, const QPoint& ) ) );
+    connect( _markList, TQT_SIGNAL( contextMenuRequested ( int, int, const TQPoint& ) ),
+             this, TQT_SLOT( showPopup( int, int, const TQPoint& ) ) );
 
 
-    connect( _markList, SIGNAL( selected( int ) ),
-	     _docManager, SLOT( goToPage( int ) ) );
-    connect( _docManager, SIGNAL( newPageShown( int ) ),
-	     _markList, SLOT( select( int ) ) );
-    connect( _docManager, SIGNAL( setStatusBarText( const QString& ) ),
-	     this, SIGNAL( setStatusBarText( const QString& ) ) );
-    connect( _scrollBox, SIGNAL( valueChangedRelative( int, int ) ),
-	     _pageView, SLOT( scrollBy( int, int ) ) );
-    connect( _pageView, SIGNAL( pageSizeChanged( const QSize& ) ),
-	     _scrollBox, SLOT( setPageSize( const QSize& ) ) );
-    connect( _pageView, SIGNAL( viewSizeChanged( const QSize& ) ),
-	     _scrollBox, SLOT( setViewSize( const QSize& ) ) );
-    connect( _pageView, SIGNAL( contentsMoving( int, int ) ),
-	     _scrollBox, SLOT( setViewPos( int, int ) ) );
+    connect( _markList, TQT_SIGNAL( selected( int ) ),
+	     _docManager, TQT_SLOT( goToPage( int ) ) );
+    connect( _docManager, TQT_SIGNAL( newPageShown( int ) ),
+	     _markList, TQT_SLOT( select( int ) ) );
+    connect( _docManager, TQT_SIGNAL( setStatusBarText( const TQString& ) ),
+	     this, TQT_SIGNAL( setStatusBarText( const TQString& ) ) );
+    connect( _scrollBox, TQT_SIGNAL( valueChangedRelative( int, int ) ),
+	     _pageView, TQT_SLOT( scrollBy( int, int ) ) );
+    connect( _pageView, TQT_SIGNAL( pageSizeChanged( const TQSize& ) ),
+	     _scrollBox, TQT_SLOT( setPageSize( const TQSize& ) ) );
+    connect( _pageView, TQT_SIGNAL( viewSizeChanged( const TQSize& ) ),
+	     _scrollBox, TQT_SLOT( setViewSize( const TQSize& ) ) );
+    connect( _pageView, TQT_SIGNAL( contentsMoving( int, int ) ),
+	     _scrollBox, TQT_SLOT( setViewPos( int, int ) ) );
 
     //-- File Menu ----------------------------------------------------------
-    KStdAction::saveAs( document(), SLOT( saveAs() ),
+    KStdAction::saveAs( document(), TQT_SLOT( saveAs() ),
                         actionCollection() );
     new KAction( i18n( "Document &Info" ), 0,
-                 miniWidget(), SLOT( info() ),
+                 miniWidget(), TQT_SLOT( info() ),
                  actionCollection(), "info" );
 
     //-- Edit Menu -----------------------------------------------------
     _popup = new KPopupMenu( _markList, "marklist_menu" );
 
     KAction *act = new KAction( i18n( "Mark Current Page" ), "flag", CTRL+SHIFT+Key_M,
-                 _markList, SLOT( markCurrent() ),
+                 _markList, TQT_SLOT( markCurrent() ),
                  actionCollection(), "mark_current" );
     act->plug( _popup );
     act = new KAction( i18n( "Mark &All Pages" ), 0,
-                 _markList, SLOT( markAll() ),
+                 _markList, TQT_SLOT( markAll() ),
                  actionCollection(), "mark_all" );
     act->plug( _popup );
     act = new KAction( i18n( "Mark &Even Pages" ), 0,
-                 _markList, SLOT( markEven() ),
+                 _markList, TQT_SLOT( markEven() ),
                  actionCollection(), "mark_even" );
     act->plug( _popup );
     act = new KAction( i18n( "Mark &Odd Pages" ), 0,
-                 _markList, SLOT( markOdd() ),
+                 _markList, TQT_SLOT( markOdd() ),
                  actionCollection(), "mark_odd" );
     act->plug( _popup );
     act = new KAction( i18n( "&Toggle Page Marks" ), 0,
-                 _markList, SLOT( toggleMarks() ),
+                 _markList, TQT_SLOT( toggleMarks() ),
                  actionCollection(), "toggle" );
     act->plug( _popup );
     act = new KAction( i18n("&Remove Page Marks"), 0,
-                 _markList, SLOT( removeMarks() ),
+                 _markList, TQT_SLOT( removeMarks() ),
                  actionCollection(), "remove" );
     act->plug( _popup );
 
@@ -228,10 +228,10 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
                                     actionCollection(), "media_menu" );
 
     _flick = new KToggleAction( i18n( "No &Flicker" ), 0,
-                                this, SLOT( slotFlicker() ),
+                                this, TQT_SLOT( slotFlicker() ),
                                 actionCollection(), "no_flicker" );
     
-    QStringList orientations;
+    TQStringList orientations;
     orientations.append( i18n( "Auto" ) );
     orientations.append( i18n( "Portrait" ) );
     orientations.append( i18n( "Landscape" ) );
@@ -239,32 +239,32 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
     orientations.append( i18n( "Seascape" ) );
     _selectOrientation->setItems( orientations );
 
-    connect( _selectOrientation, SIGNAL( activated( int ) ),
-	     this, SLOT( slotOrientation( int ) ) );
-    connect( _selectMedia, SIGNAL( activated( int ) ),
-             this, SLOT( slotMedia( int ) ) );
+    connect( _selectOrientation, TQT_SIGNAL( activated( int ) ),
+	     this, TQT_SLOT( slotOrientation( int ) ) );
+    connect( _selectMedia, TQT_SIGNAL( activated( int ) ),
+             this, TQT_SLOT( slotMedia( int ) ) );
 
     {
 	KShortcut zoomInShort = KStdAccel::zoomIn();
 	zoomInShort.append( KKey( CTRL+Key_Equal ) );
-	_zoomIn = KStdAction::zoomIn( this, SLOT( slotZoomIn() ),
+	_zoomIn = KStdAction::zoomIn( this, TQT_SLOT( slotZoomIn() ),
 				    actionCollection(), "zoomIn" );
 	_zoomIn->setShortcut( zoomInShort );
     }
-    _zoomOut = KStdAction::zoomOut( this,  SLOT( slotZoomOut() ),
+    _zoomOut = KStdAction::zoomOut( this,  TQT_SLOT( slotZoomOut() ),
                                     actionCollection(), "zoomOut" );
     _zoomTo = new KSelectAction(  i18n( "Zoom" ), "viewmag", 0, actionCollection(), "zoomTo" );
-    connect(  _zoomTo, SIGNAL(  activated(  const QString & ) ), this, SLOT(  slotZoom( const QString& ) ) );
+    connect(  _zoomTo, TQT_SIGNAL(  activated(  const TQString & ) ), this, TQT_SLOT(  slotZoom( const TQString& ) ) );
     _zoomTo->setEditable(  true );
     _zoomTo->clear();
-    QValueList<double> mags = DisplayOptions::normalMagnificationValues();
-    QStringList zooms;
+    TQValueList<double> mags = DisplayOptions::normalMagnificationValues();
+    TQStringList zooms;
     int idx = 0;
     int cur = 0;
-    for ( QValueList<double>::iterator first = mags.begin(), last = mags.end();
+    for ( TQValueList<double>::iterator first = mags.begin(), last = mags.end();
 	    first != last;
 	    ++first ) {
-        QString str = QString( "%1%" ).arg( KGlobal::locale()->formatNumber( *first * 100.0, 2 ));
+        TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( *first * 100.0, 2 ));
         str.remove( KGlobal::locale()->decimalSymbol() + "00" );
         zooms << str;
 	if ( *first == 1.0 ) idx = cur;
@@ -274,41 +274,41 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
     _zoomTo->setCurrentItem( idx );
 
     _fitWidth = new KAction( i18n( "&Fit to Page Width" ), 0, this,
-	    SLOT( slotFitToPage() ), actionCollection(),
+	    TQT_SLOT( slotFitToPage() ), actionCollection(),
 	    "fit_to_page");
     _fitScreen = new KAction( i18n( "&Fit to Screen" ), Key_S, this,
-	    SLOT( slotFitToScreen() ), actionCollection(),
+	    TQT_SLOT( slotFitToScreen() ), actionCollection(),
 	    "fit_to_screen");
 
-    _prevPage  = new KAction( i18n( "Previous Page" ), CTRL+Key_PageUp, this, SLOT( slotPrevPage() ),
+    _prevPage  = new KAction( i18n( "Previous Page" ), CTRL+Key_PageUp, this, TQT_SLOT( slotPrevPage() ),
                                     actionCollection(), "prevPage" );
     _prevPage->setWhatsThis( i18n( "Moves to the previous page of the document" ) );
 
-    _nextPage  = new KAction( i18n( "Next Page" ), CTRL + Key_PageDown, this, SLOT( slotNextPage() ),
+    _nextPage  = new KAction( i18n( "Next Page" ), CTRL + Key_PageDown, this, TQT_SLOT( slotNextPage() ),
                                    actionCollection(), "nextPage" );
     _nextPage->setWhatsThis( i18n( "Moves to the next page of the document" ) );
 
-    _firstPage = KStdAction::firstPage( this, SLOT( slotGotoStart() ),
+    _firstPage = KStdAction::firstPage( this, TQT_SLOT( slotGotoStart() ),
                                    actionCollection(), "goToStart" );
     _firstPage->setWhatsThis( i18n( "Moves to the first page of the document" ) );
 
-    _lastPage  = KStdAction::lastPage( this, SLOT( slotGotoEnd() ),
+    _lastPage  = KStdAction::lastPage( this, TQT_SLOT( slotGotoEnd() ),
                                    actionCollection(), "goToEnd" );
     _lastPage->setWhatsThis( i18n( "Moves to the last page of the document" ) );
 
     KShortcut readUpShort = KStdAccel::shortcut( KStdAccel::Prior );
     readUpShort.append( KKey( SHIFT+Key_Space ) );
     _readUp    = new KAction( i18n( "Read Up" ), "up",
-                              readUpShort, this, SLOT( slotReadUp() ),
+                              readUpShort, this, TQT_SLOT( slotReadUp() ),
                               actionCollection(), "readUp" );
 
     KShortcut readDownShort = KStdAccel::shortcut( KStdAccel::Next );
     readDownShort.append( KKey( Key_Space ) );
     _readDown  = new KAction( i18n( "Read Down" ), "down",
-                              readDownShort, this, SLOT( slotReadDown() ),
+                              readDownShort, this, TQT_SLOT( slotReadDown() ),
                               actionCollection(), "readDown" );
 
-    _gotoPage = KStdAction::gotoPage( _docManager, SLOT( goToPage() ),
+    _gotoPage = KStdAction::gotoPage( _docManager, TQT_SLOT( goToPage() ),
                                       actionCollection(), "goToPage" );
 
     //-- Settings Menu ------------------------------------------------------
@@ -316,7 +316,7 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
                                 actionCollection(), "show_scrollbars" );
     _showScrollBars->setCheckedState(i18n("Hide &Scrollbars"));
     _watchFile	    = new KToggleAction( i18n( "&Watch File" ), 0,
-                                this, SLOT( slotWatchFile() ),
+                                this, TQT_SLOT( slotWatchFile() ),
                                 actionCollection(), "watch_file" );
     _showPageList   = new KToggleAction( i18n( "Show &Page List" ), 0,
                                 actionCollection(), "show_page_list" );
@@ -324,31 +324,31 @@ KGVPart::KGVPart( QWidget* parentWidget, const char*,
     _showPageLabels = new KToggleAction( i18n("Show Page &Labels"), 0,
                                 actionCollection(), "show_page_labels" );
     _showPageLabels->setCheckedState(i18n("Hide Page &Labels"));
-    KStdAction::preferences( this, SLOT( slotConfigure() ), actionCollection() );
-    connect( _showScrollBars, SIGNAL( toggled( bool ) ),
-             SLOT( showScrollBars( bool ) ) );
-    connect( _showPageList, SIGNAL( toggled( bool ) ),
-             SLOT( showMarkList( bool ) ) );
-    connect( _showPageLabels, SIGNAL( toggled( bool ) ),
-             SLOT( showPageLabels( bool ) ) );
+    KStdAction::preferences( this, TQT_SLOT( slotConfigure() ), actionCollection() );
+    connect( _showScrollBars, TQT_SIGNAL( toggled( bool ) ),
+             TQT_SLOT( showScrollBars( bool ) ) );
+    connect( _showPageList, TQT_SIGNAL( toggled( bool ) ),
+             TQT_SLOT( showMarkList( bool ) ) );
+    connect( _showPageLabels, TQT_SIGNAL( toggled( bool ) ),
+             TQT_SLOT( showPageLabels( bool ) ) );
 
     _extension = new KGVBrowserExtension( this );
 
     setXMLFile( "kgv_part.rc" );
 
-    connect( miniWidget(), SIGNAL( newPageShown( int ) ),
-	     this, SLOT( slotNewPage( int ) ) );
-    connect( _pageView, SIGNAL( contentsMoving( int, int ) ),
-	     this, SLOT( slotPageMoved( int, int ) ) );
+    connect( miniWidget(), TQT_SIGNAL( newPageShown( int ) ),
+	     this, TQT_SLOT( slotNewPage( int ) ) );
+    connect( _pageView, TQT_SIGNAL( contentsMoving( int, int ) ),
+	     this, TQT_SLOT( slotPageMoved( int, int ) ) );
 
-    connect( _pageView, SIGNAL( nextPage() ), SLOT( slotNextPage() ));
-    connect( _pageView, SIGNAL( prevPage() ), SLOT( slotPrevPage() ));
-    connect( _pageView, SIGNAL( zoomIn() ), SLOT( slotZoomIn() ));
-    connect( _pageView, SIGNAL( zoomOut() ), SLOT( slotZoomOut() ));
-    connect( _pageView, SIGNAL( ReadUp() ), SLOT( slotReadUp() ));
-    connect( _pageView, SIGNAL( ReadDown() ), SLOT( slotReadDown() ));
+    connect( _pageView, TQT_SIGNAL( nextPage() ), TQT_SLOT( slotNextPage() ));
+    connect( _pageView, TQT_SIGNAL( prevPage() ), TQT_SLOT( slotPrevPage() ));
+    connect( _pageView, TQT_SIGNAL( zoomIn() ), TQT_SLOT( slotZoomIn() ));
+    connect( _pageView, TQT_SIGNAL( zoomOut() ), TQT_SLOT( slotZoomOut() ));
+    connect( _pageView, TQT_SIGNAL( ReadUp() ), TQT_SLOT( slotReadUp() ));
+    connect( _pageView, TQT_SIGNAL( ReadDown() ), TQT_SLOT( slotReadDown() ));
 
-    QStringList items = document()->mediaNames();
+    TQStringList items = document()->mediaNames();
     items.prepend( i18n( "Auto ") );
     _selectMedia->setItems( items );
 
@@ -426,7 +426,7 @@ bool KGVPart::closeURL()
 	_mimetypeScanner->abort();
     if( !m_file.isEmpty() )
         _fileWatcher->removeFile( m_file );
-    _mimetype = QString::null;
+    _mimetype = TQString::null;
     updatePageDepActions();
     stateChanged( "initState" );
     return KParts::ReadOnlyPart::closeURL();
@@ -568,7 +568,7 @@ void KGVPart::updateZoomActions()
     _zoomIn->setEnabled(!_docManager->atMaxZoom());
     _zoomOut->setEnabled(!_docManager->atMinZoom());
     _zoomTo->setEnabled( true );
-    QStringList items = _zoomTo->items();
+    TQStringList items = _zoomTo->items();
     bool updateItems = false;
     if (_customZoomIndex != -1)
     {
@@ -578,10 +578,10 @@ void KGVPart::updateZoomActions()
     }
     double zoom = floor(miniWidget()->displayOptions().magnification()*1000.0) / 10.0;
     unsigned idx = 0;
-    for ( QStringList::iterator first = items.begin(), last = items.end();
+    for ( TQStringList::iterator first = items.begin(), last = items.end();
 	    first != last;
 	    ++first ) {
-	QString cur = *first;
+	TQString cur = *first;
 	cur.remove(  cur.find(  '%' ), 1 );
 	cur = cur.simplifyWhiteSpace();
 	bool ok = false;
@@ -600,7 +600,7 @@ void KGVPart::updateZoomActions()
     }
 
     // Show percentage that isn't predefined
-    QString str = QString( "%1%" ).arg( KGlobal::locale()->formatNumber( zoom, 2 ));
+    TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( zoom, 2 ));
     str.remove( KGlobal::locale()->decimalSymbol() + "00" );
     items.insert( items.at(idx), 1, str );
     _zoomTo->setItems( items );
@@ -658,10 +658,10 @@ bool KGVPart::openURL( const KURL& url )
     emit setWindowCaption( m_url.prettyURL() );
 
     _mimetypeScanner = new KGVRun( m_url, 0, m_url.isLocalFile(), false );
-    connect( _mimetypeScanner, SIGNAL( finished( const QString& ) ),
-             SLOT( slotMimetypeFinished( const QString& ) ) );
-    connect( _mimetypeScanner, SIGNAL( error() ),
-             SLOT( slotMimetypeError() ) );
+    connect( _mimetypeScanner, TQT_SIGNAL( finished( const TQString& ) ),
+             TQT_SLOT( slotMimetypeFinished( const TQString& ) ) );
+    connect( _mimetypeScanner, TQT_SIGNAL( error() ),
+             TQT_SLOT( slotMimetypeError() ) );
 
     return true;
 }
@@ -680,12 +680,12 @@ void KGVPart::openURLContinue()
 	m_bTemp = true;
 	// Use same extension as remote file. This is important for
 	// mimetype-determination (e.g. koffice)
-	QString extension;
-	QString fileName = m_url.fileName();
+	TQString extension;
+	TQString fileName = m_url.fileName();
 	int extensionPos = fileName.findRev( '.' );
 	if( extensionPos != -1 )
 	    extension = fileName.mid( extensionPos ); // keep the '.'
-	KTempFile tempFile( QString::null, extension );
+	KTempFile tempFile( TQString::null, extension );
 	m_file = tempFile.name();
 	_tmpFile.setName( m_file );
 	_tmpFile.open( IO_ReadWrite );
@@ -693,15 +693,15 @@ void KGVPart::openURLContinue()
 	/*
 	d->m_job = KIO::file_copy( m_url, m_file, 0600, true, false, d->m_showProgressInfo );
 	emit started( d->m_job );
-	connect( d->m_job, SIGNAL( result( KIO::Job * ) ), this, SLOT( slotJobFinished ( KIO::Job * ) ) );
+	connect( d->m_job, TQT_SIGNAL( result( KIO::Job * ) ), this, TQT_SLOT( slotJobFinished ( KIO::Job * ) ) );
 	*/
 
 	_job = KIO::get( m_url, false, isProgressInfoEnabled() );
 
-	connect( _job, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
-		 SLOT( slotData( KIO::Job*, const QByteArray& ) ) );
-	connect( _job, SIGNAL( result( KIO::Job* ) ),
-		 SLOT( slotJobFinished( KIO::Job* ) ) );
+	connect( _job, TQT_SIGNAL( data( KIO::Job*, const TQByteArray& ) ),
+		 TQT_SLOT( slotData( KIO::Job*, const TQByteArray& ) ) );
+	connect( _job, TQT_SIGNAL( result( KIO::Job* ) ),
+		 TQT_SLOT( slotJobFinished( KIO::Job* ) ) );
 
 	emit started( _job );
     }
@@ -736,13 +736,13 @@ void KGVPart::slotOpenFileCompleted()
 
 void KGVPart::slotGhostscriptOutput( char* data, int len )
 {
-    _logWindow->append( QString::fromLocal8Bit( data, len ) );
+    _logWindow->append( TQString::fromLocal8Bit( data, len ) );
     if( _showLogWindow )
 	_logWindow->show();
 }
 
 
-void KGVPart::slotGhostscriptError( const QString& error )
+void KGVPart::slotGhostscriptError( const TQString& error )
 {
     _logWindow->setLabel( i18n( "<qt>An error occurred in rendering.<br>"
 				"<strong>%1</strong><br>"
@@ -770,7 +770,7 @@ void KGVPart::guiActivateEvent( KParts::GUIActivateEvent* event )
     KParts::ReadOnlyPart::guiActivateEvent( event );
 }
 
-void KGVPart::slotData( KIO::Job* job, const QByteArray& data )
+void KGVPart::slotData( KIO::Job* job, const TQByteArray& data )
 {
     Q_ASSERT( _job == job );
 
@@ -779,12 +779,12 @@ void KGVPart::slotData( KIO::Job* job, const QByteArray& data )
     _tmpFile.writeBlock( data );
 }
 
-void KGVPart::slotMimetypeFinished( const QString& type )
+void KGVPart::slotMimetypeFinished( const TQString& type )
 {
     kdDebug(4500) << "KGVPart::slotMimetypeFinished( " << type << " )" << endl;
     _mimetype = type;
     if( !_mimetypeScanner || _mimetypeScanner->hasError() )
-	emit canceled( QString::null );
+	emit canceled( TQString::null );
     else
 	openURLContinue();
     _mimetypeScanner = 0;
@@ -796,7 +796,7 @@ void KGVPart::slotMimetypeError()
     _mimetypeScanner = 0;
     emit started( 0 );
     //kapp->processEvents();
-    emit canceled( QString::null );
+    emit canceled( TQString::null );
 }
 
 void KGVPart::slotJobFinished( KIO::Job* job )
@@ -815,7 +815,7 @@ void KGVPart::slotJobFinished( KIO::Job* job )
 	document()->openFile( m_file, _mimetype );
 }
 
-void KGVPart::slotFileDirty( const QString& fileName )
+void KGVPart::slotFileDirty( const TQString& fileName )
 {
     // The beauty of this is that each start cancels the previous one.
     // This means that timeout() is only fired when there have
@@ -897,9 +897,9 @@ void KGVPart::slotZoomOut()
     updateZoomActions();
 }
 
-void KGVPart::slotZoom( const QString& nz )
+void KGVPart::slotZoom( const TQString& nz )
 {
-    QString z = nz;
+    TQString z = nz;
     double zoom;
     z.remove(  z.find(  '%' ), 1 );
     zoom = KGlobal::locale()->readNumber(  z ) / 100;
@@ -926,8 +926,8 @@ void KGVPart::slotFitToScreen()
 {
     kdDebug(4500) << "KGVPart::slotFitToScreen()" << endl;
     if ( _fitTimer->isActive() ) {
-	disconnect( _fitTimer, SIGNAL( timeout() ), this, 0 );
-	connect( _fitTimer, SIGNAL( timeout() ), SLOT( slotDoFitToScreen() ) );
+	disconnect( _fitTimer, TQT_SIGNAL( timeout() ), this, 0 );
+	connect( _fitTimer, TQT_SIGNAL( timeout() ), TQT_SLOT( slotDoFitToScreen() ) );
     }
     else slotDoFitToScreen();
 }
@@ -967,8 +967,8 @@ void KGVPart::setDisplayOptions( const DisplayOptions& options )
     _markList->select( options.page() );
     _docManager->setDisplayOptions( options );
     _selectOrientation->setCurrentItem( options.overrideOrientation()  );
-    QStringList medias = document()->mediaNames();
-    QStringList::Iterator now = medias.find( options.overridePageMedia() );
+    TQStringList medias = document()->mediaNames();
+    TQStringList::Iterator now = medias.find( options.overridePageMedia() );
     if ( now != medias.end() ){
 	// The options are displayed in inverted order.
 	// Therefore, size() - index gets you the display index
@@ -996,13 +996,13 @@ KGVRun::KGVRun( const KURL& url, mode_t mode, bool isLocalFile,
                 bool showProgressInfo ) :
     KRun( url, mode, isLocalFile, showProgressInfo )
 {
-    connect( this, SIGNAL( finished() ), SLOT( emitFinishedWithMimetype() ) );
+    connect( this, TQT_SIGNAL( finished() ), TQT_SLOT( emitFinishedWithMimetype() ) );
 }
 
 KGVRun::~KGVRun()
 {}
 
-void KGVRun::foundMimeType( const QString& mimetype )
+void KGVRun::foundMimeType( const TQString& mimetype )
 {
     kdDebug(4500) << "KGVRun::foundMimeType( " << mimetype << " )" << endl;
 
@@ -1026,7 +1026,7 @@ void KGVPart::updateFullScreen( bool fs )
     else showMarkList( _showPageList->isChecked() );
 }
 
-void KGVPart::showPopup( int, int, const QPoint& pos )
+void KGVPart::showPopup( int, int, const TQPoint& pos )
 {
     _popup->exec( pos );
 }

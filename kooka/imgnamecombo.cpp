@@ -25,9 +25,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qlistview.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqlistview.h>
 
 #include <kcombobox.h>
 
@@ -38,10 +38,10 @@
 #include "imgnamecombo.h"
 #include "img_saver.h"
 
-ImageNameCombo::ImageNameCombo( QWidget *parent )
+ImageNameCombo::ImageNameCombo( TQWidget *parent )
    : KComboBox( parent )
 {
-   setInsertionPolicy( QComboBox::AtTop );
+   setInsertionPolicy( TQComboBox::AtTop );
 }
 
 ImageNameCombo::~ImageNameCombo()
@@ -49,12 +49,12 @@ ImageNameCombo::~ImageNameCombo()
    
 }
 
-void ImageNameCombo::slotPathRemove( KFileTreeBranch *branch, const QString& relPath )
+void ImageNameCombo::slotPathRemove( KFileTreeBranch *branch, const TQString& relPath )
 {
-   QString path = branch->name() + QString::fromLatin1(" - ") + relPath;
+   TQString path = branch->name() + TQString::fromLatin1(" - ") + relPath;
 
    kdDebug(28000) << "ImageNameCombo: Removing " << path << endl;
-   QString select = currentText();
+   TQString select = currentText();
    
    if( items.contains( path ))
    {
@@ -66,10 +66,10 @@ void ImageNameCombo::slotPathRemove( KFileTreeBranch *branch, const QString& rel
    rewriteList( branch, select );
 }
 
-void ImageNameCombo::rewriteList( KFileTreeBranch *branch, const QString& selText )
+void ImageNameCombo::rewriteList( KFileTreeBranch *branch, const TQString& selText )
 {
    clear();
-   for ( QStringList::Iterator it = items.begin(); it != items.end(); ++it )
+   for ( TQStringList::Iterator it = items.begin(); it != items.end(); ++it )
    {
       insertItem( branch->pixmap(), *it );
    }
@@ -78,11 +78,11 @@ void ImageNameCombo::rewriteList( KFileTreeBranch *branch, const QString& selTex
    setCurrentItem( index );
 }
 
-void ImageNameCombo::slotGalleryPathChanged( KFileTreeBranch* branch, const QString& relativPath )
+void ImageNameCombo::slotGalleryPathChanged( KFileTreeBranch* branch, const TQString& relativPath )
 {
-   QString newPath;
+   TQString newPath;
 
-   newPath = branch->name() + QString::fromLatin1(" - ") + relativPath;
+   newPath = branch->name() + TQString::fromLatin1(" - ") + relativPath;
 
    kdDebug( 28000) << "Inserting " << newPath << " to combobox" << endl;
 

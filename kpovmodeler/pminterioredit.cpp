@@ -21,13 +21,13 @@
 #include "pmlineedits.h"
 #include "pmcoloredit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 
 
-PMInteriorEdit::PMInteriorEdit( QWidget* parent, const char* name )
+PMInteriorEdit::PMInteriorEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,48 +37,48 @@ void PMInteriorEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   QGridLayout* layout = new QGridLayout( hl ,17 ,6);
-   m_pEnableIorEdit = new QCheckBox( i18n( "Refraction:" ), this );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   TQGridLayout* layout = new TQGridLayout( hl ,17 ,6);
+   m_pEnableIorEdit = new TQCheckBox( i18n( "Refraction:" ), this );
    m_pIorEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableIorEdit, 0, 0 );
    layout->addWidget( m_pIorEdit, 0, 1 );
-   m_pEnableCausticsEdit = new QCheckBox( i18n( "Caustics:" ), this );
+   m_pEnableCausticsEdit = new TQCheckBox( i18n( "Caustics:" ), this );
    m_pCausticsEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableCausticsEdit, 1, 0 );
    layout->addWidget( m_pCausticsEdit, 1, 1 );
-   m_pEnableDispersionEdit = new QCheckBox( i18n( "Dispersion:" ), this );
+   m_pEnableDispersionEdit = new TQCheckBox( i18n( "Dispersion:" ), this );
    m_pDispersionEdit = new PMFloatEdit( this );
    m_pDispersionEdit->setValidation( true, 0, false, 0 );
    layout->addWidget( m_pEnableDispersionEdit, 2, 0 );
    layout->addWidget( m_pDispersionEdit, 2, 1 );
-   m_pEnableDispSamplesEdit = new QCheckBox( i18n( "Dispersion samples:" ), this );
+   m_pEnableDispSamplesEdit = new TQCheckBox( i18n( "Dispersion samples:" ), this );
    m_pDispSamplesEdit = new PMIntEdit( this );
    m_pDispSamplesEdit->setValidation( true, 2, false, 0 );
    layout->addWidget( m_pEnableDispSamplesEdit, 3, 0 );
    layout->addWidget( m_pDispSamplesEdit, 3, 1 );
-   m_pEnableFadeDistanceEdit = new QCheckBox( i18n( "Fade distance:" ), this );
+   m_pEnableFadeDistanceEdit = new TQCheckBox( i18n( "Fade distance:" ), this );
    m_pFadeDistanceEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableFadeDistanceEdit, 4, 0 );
    layout->addWidget( m_pFadeDistanceEdit, 4, 1 );
-   m_pEnableFadePowerEdit = new QCheckBox( i18n( "Fade power:" ), this );
+   m_pEnableFadePowerEdit = new TQCheckBox( i18n( "Fade power:" ), this );
    m_pFadePowerEdit = new PMFloatEdit( this );
    layout->addWidget( m_pEnableFadePowerEdit, 5, 0 );
    layout->addWidget( m_pFadePowerEdit, 5, 1 );
    hl->addStretch( 1 );
 
-   connect( m_pIorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCausticsEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDispersionEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDispSamplesEdit, SIGNAL( dataChanged( ) ), SIGNAL ( dataChanged( ) ) );
-   connect( m_pFadeDistanceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pFadePowerEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableIorEdit, SIGNAL( clicked( ) ), SLOT( slotIorClicked( ) ) );
-   connect( m_pEnableCausticsEdit, SIGNAL( clicked( ) ), SLOT( slotCausticsClicked( ) ) );
-   connect( m_pEnableDispersionEdit, SIGNAL( clicked( ) ), SLOT( slotDispersionClicked( ) ) );
-   connect( m_pEnableDispSamplesEdit, SIGNAL( clicked( ) ), SLOT( slotDispSamplesClicked( ) ) );
-   connect( m_pEnableFadeDistanceEdit, SIGNAL( clicked( ) ), SLOT( slotFadeDistanceClicked( ) ) );
-   connect( m_pEnableFadePowerEdit, SIGNAL( clicked( ) ), SLOT( slotFadePowerClicked( ) ) );
+   connect( m_pIorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCausticsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDispersionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDispSamplesEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
+   connect( m_pFadeDistanceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFadePowerEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableIorEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotIorClicked( ) ) );
+   connect( m_pEnableCausticsEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCausticsClicked( ) ) );
+   connect( m_pEnableDispersionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDispersionClicked( ) ) );
+   connect( m_pEnableDispSamplesEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDispSamplesClicked( ) ) );
+   connect( m_pEnableFadeDistanceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFadeDistanceClicked( ) ) );
+   connect( m_pEnableFadePowerEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFadePowerClicked( ) ) );
 }
 
 void PMInteriorEdit::displayObject( PMObject* o )

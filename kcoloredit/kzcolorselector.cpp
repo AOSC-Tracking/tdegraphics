@@ -15,20 +15,20 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qpainter.h>
-#include <qimage.h>
+#include <tqpainter.h>
+#include <tqimage.h>
 #include <kimageeffect.h>
 #include <kpalette.h>
 
 #include "main.h"
 #include "kzcolorselector.h"
 
-KZColorSelector::KZColorSelector(Orientation o, QWidget *parent, const char *name) :
+KZColorSelector::KZColorSelector(Orientation o, TQWidget *parent, const char *name) :
 	KSelector(o, parent, name) {
 	baseColorH = -1;
 	baseColorS = 0;
 	baseColorV = 0;
-	pixmap.setOptimization( QPixmap::BestOptim );
+	pixmap.setOptimization( TQPixmap::BestOptim );
 }
 KZColorSelector::~KZColorSelector() {
 }
@@ -56,15 +56,15 @@ void KZColorSelector::updateContents() {
 	repaint(false);
 }
 
-void KZColorSelector::resizeEvent(QResizeEvent*) {
+void KZColorSelector::resizeEvent(TQResizeEvent*) {
 	updateContents();
 }
 
-void KZColorSelector::drawContents(QPainter* painter) {
+void KZColorSelector::drawContents(TQPainter* painter) {
 	painter->drawPixmap(contentsRect().x(), contentsRect().y(), pixmap);
 }
 
-void KZColorSelector::setBaseColor(const QColor& color) {
+void KZColorSelector::setBaseColor(const TQColor& color) {
 	color.hsv(&baseColorH, &baseColorS, &baseColorV);
 }
 
@@ -100,7 +100,7 @@ void KZColorSelector::updatePointerPos() {
 	setValue(pos);
 }
 
-void KZColorSelector::setColor(QColor* const color, const int y) {
+void KZColorSelector::setColor(TQColor* const color, const int y) {
 	int ySize = contentsRect().height();
 	switch(type) {
 		case TYPE_H:
@@ -118,8 +118,8 @@ void KZColorSelector::setColor(QColor* const color, const int y) {
 	}
 }
 
-QColor* KZColorSelector::getStandardColorsPalette() {
-	QColor* palette = new QColor[( int )STANDARD_PALETTE_SIZE];
+TQColor* KZColorSelector::getStandardColorsPalette() {
+	TQColor* palette = new QColor[( int )STANDARD_PALETTE_SIZE];
 	int i = 0;
 	palette[i++] = Qt::red;
 	palette[i++] = Qt::green;
@@ -141,11 +141,11 @@ QColor* KZColorSelector::getStandardColorsPalette() {
 	return palette;
 }
 
-void KZColorSelector::drawPalette(QPixmap* pixmap) {
+void KZColorSelector::drawPalette(TQPixmap* pixmap) {
 	int xSize = contentsRect().width();
 	int ySize = contentsRect().height();
-	QImage image(xSize, ySize, 32);
-	QColor color;
+	TQImage image(xSize, ySize, 32);
+	TQColor color;
 	int x;
 	int y;
 
@@ -159,9 +159,9 @@ void KZColorSelector::drawPalette(QPixmap* pixmap) {
 			++p;
 		}
 	}
-	if (QColor::numBitPlanes() <= 8)
+	if (TQColor::numBitPlanes() <= 8)
 	{
-    QColor* standardPalette = getStandardColorsPalette();
+    TQColor* standardPalette = getStandardColorsPalette();
 		KImageEffect::dither(image, standardPalette, STANDARD_PALETTE_SIZE);
 		delete[] standardPalette;
 	}

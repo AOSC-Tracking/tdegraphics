@@ -21,8 +21,8 @@
 #ifndef SVGPatternElementImpl_H
 #define SVGPatternElementImpl_H
 
-#include <qimage.h>
-#include <qwmatrix.h>
+#include <tqimage.h>
+#include <tqwmatrix.h>
 
 #include "SVGTestsImpl.h"
 #include "SVGElementImpl.h"
@@ -72,21 +72,21 @@ public:
 
 	SVGUnitConverter *converter() const { return m_converter; }
 
-	void reference(const QString &href);
+	void reference(const TQString &href);
 	void finalizePaintServer();
 
 	class Tile
 	{
 	public:
 		Tile() {}
-		Tile(const QImage& image, const QWMatrix& screenToTile) : m_image(image), m_screenToTile(screenToTile) {}
+		Tile(const TQImage& image, const TQWMatrix& screenToTile) : m_image(image), m_screenToTile(screenToTile) {}
 
-		QImage image() const { return m_image; }
-		const QWMatrix& screenToTile() const { return m_screenToTile; }
+		TQImage image() const { return m_image; }
+		const TQWMatrix& screenToTile() const { return m_screenToTile; }
 
 	private:
-		QImage m_image;
-		QWMatrix m_screenToTile;
+		TQImage m_image;
+		TQWMatrix m_screenToTile;
 	};
 
 	Tile createTile(SVGShapeImpl *referencingElement);
@@ -94,7 +94,7 @@ public:
 	static void flushCachedTiles();
 
 private:
-	QImage createTile(SVGShapeImpl *referencingElement, int imageWidth, int imageHeight);
+	TQImage createTile(SVGShapeImpl *referencingElement, int imageWidth, int imageHeight);
 
 	SVGAnimatedEnumerationImpl *m_patternUnits;
 	SVGAnimatedEnumerationImpl *m_patternContentUnits;
@@ -108,9 +108,9 @@ private:
 
 	KSVGCanvas *m_canvas;	
 	SVGElementImpl *m_location; // the referenced element
-	MinOneLRUCache<QSize, QImage> m_tileCache;
+	MinOneLRUCache<TQSize, TQImage> m_tileCache;
 
-	static QValueList<SVGPatternElementImpl *> m_patternElements;
+	static TQValueList<SVGPatternElementImpl *> m_patternElements;
 
 public:
 	KSVG_GET

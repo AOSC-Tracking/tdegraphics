@@ -20,8 +20,8 @@
 
 #include <kdebug.h>
 
-#include <qstring.h>
-#include <qstringlist.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
 
 #include "SVGPreserveAspectRatio.h"
 
@@ -65,7 +65,7 @@ SVGAnimatedPreserveAspectRatioImpl *SVGFitToViewBoxImpl::preserveAspectRatio() c
 	return m_preserveAspectRatio;
 }
 
-void SVGFitToViewBoxImpl::parseViewBox(const QString &s)
+void SVGFitToViewBoxImpl::parseViewBox(const TQString &s)
 {
 	// Set default if preserveAspectRatio wasnt parsed earlier (Rob)
 	if(m_preserveAspectRatio->baseVal()->align() == SVG_PRESERVEASPECTRATIO_UNKNOWN)
@@ -74,8 +74,8 @@ void SVGFitToViewBoxImpl::parseViewBox(const QString &s)
 		m_preserveAspectRatio->baseVal()->setMeetOrSlice(SVG_MEETORSLICE_MEET);
 
 	// allow for viewbox def with ',' or whitespace
-	QString viewbox(s);
-	QStringList points = QStringList::split(' ', viewbox.replace(',', ' ').simplifyWhiteSpace());
+	TQString viewbox(s);
+	TQStringList points = TQStringList::split(' ', viewbox.replace(',', ' ').simplifyWhiteSpace());
 
 	viewBox()->baseVal()->setX(points[0].toFloat());
 	viewBox()->baseVal()->setY(points[1].toFloat());

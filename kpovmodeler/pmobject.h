@@ -24,12 +24,12 @@
 #include <config.h>
 #endif
 
-#include <qvaluelist.h>
-#include <qptrlist.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <tqvaluelist.h>
+#include <tqptrlist.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
 #include <kdebug.h>
-#include <qdom.h>
+#include <tqdom.h>
 
 #include "pmmatrix.h"
 #include "pmcontrolpoint.h"
@@ -45,8 +45,8 @@ class PMObjectAction;
 class PMPart;
 
 class PMObject;
-typedef QPtrList<PMObject> PMObjectList;
-typedef QPtrListIterator<PMObject> PMObjectListIterator;
+typedef TQPtrList<PMObject> PMObjectList;
+typedef TQPtrListIterator<PMObject> PMObjectListIterator;
 
 /**
  * Base class for all povray objects
@@ -91,26 +91,26 @@ public:
     * Returns true if the object is of type t or inherits the object
     * class with type t
     */
-   bool isA( const QString& className ) const;
+   bool isA( const TQString& className ) const;
 
    /**
     * Returns the class name (not i18n'ed, without the PM prefix)
     */
-   QString type( ) const;
+   TQString type( ) const;
    /**
     * same as @ref type( )
     */
-   QString className( ) const { return type( ); }
+   TQString className( ) const { return type( ); }
    /**
     * Returns the class name of the object (povray name).
     * This is the name that is showed in dialogs and menus.
     */
-   virtual QString description( ) const = 0;
+   virtual TQString description( ) const = 0;
    /**
     * Returns the name of the object. This is the name that helps
     * the user to identify a object (like "south wall", "floor" ...)
     */
-   virtual QString name( ) const { return QString::null; }
+   virtual TQString name( ) const { return TQString::null; }
    /**
     * Returns true if the object can have a name
     */
@@ -136,7 +136,7 @@ public:
     * The parser uses the third parameter for top level objects. These objects
     * have to be treated as if they are inserted after the object after.
     */
-   bool canInsert( const QString& className, const PMObject* after,
+   bool canInsert( const TQString& className, const PMObject* after,
                    const PMObjectList* objectsBetween = 0 ) const;
    /**
     * Returns true if the object o can be inserted as child after the object
@@ -154,7 +154,7 @@ public:
    /**
     * Returns the number of objects that can be inserted at that position
     */
-   int canInsert( const QStringList& classes, const PMObject* after ) const;
+   int canInsert( const TQStringList& classes, const PMObject* after ) const;
 
    /**
     * Returns true if an insert or remove operation of children will
@@ -251,7 +251,7 @@ public:
    /**
     * Returns a list of auxiliary files
     */
-   virtual QStringList auxiliaryFiles( ) const { return QStringList( ); }
+   virtual TQStringList auxiliaryFiles( ) const { return TQStringList( ); }
 
    /**
     * Returns true if the object has a (povray) transformation matrix.
@@ -332,7 +332,7 @@ public:
     * @see PMObjectAction
     */
    virtual void addObjectActions( const PMControlPointList&,
-                                  QPtrList<PMObjectAction>& ) { }
+                                  TQPtrList<PMObjectAction>& ) { }
 
    /**
     * This member is called when the user selects an object action
@@ -344,17 +344,17 @@ public:
     */
    virtual void objectActionCalled( const PMObjectAction*,
                                     const PMControlPointList&,
-                                    const QPtrList<PMVector>&,
+                                    const TQPtrList<PMVector>&,
                                     const PMVector& ) { };
 
    /**
     * Saves the object as kpovmodeler xml code.
     */
-   QDomElement serialize( QDomDocument& doc ) const;
+   TQDomElement serialize( TQDomDocument& doc ) const;
    /**
     * Adds the objects attributes and child objects to the element
     */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const = 0;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const = 0;
    /**
     * Reads the attributes from the QDomElement
     */
@@ -363,16 +363,16 @@ public:
    /**
     * Returns the list of known properties
     */
-   QStringList properties( ) const;
+   TQStringList properties( ) const;
 
    /**
     * Sets a property and returns true if successful
     */
-   bool setProperty( const QString&, const PMVariant& v );
+   bool setProperty( const TQString&, const PMVariant& v );
    /**
     * Returns a property
     */
-   PMVariant property( const QString& ) const;
+   PMVariant property( const TQString& ) const;
 
    /**
     * Returns true if the object is selected
@@ -413,12 +413,12 @@ public:
     *
     * The widget will be created as a child of parent.
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const = 0;
+   virtual TQString pixmap( ) const = 0;
    /**
     * Returns a pointer to the @ref PMDeclare object, that is linked to
     * that object, or 0, if this object contains no link

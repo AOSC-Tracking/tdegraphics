@@ -21,7 +21,7 @@ RenderedDocumentPage::RenderedDocumentPage()
   textBoxList.reserve(250);
   pageNr = 0;
   isEmpty = true;
-  pageText = QString::null;
+  pageText = TQString::null;
 }
 
 
@@ -46,23 +46,23 @@ void RenderedDocumentPage::clear()
 
   textBoxList.clear();
   hyperLinkList.clear();
-  pageText = QString::null;
+  pageText = TQString::null;
 
   isEmpty = true;
 }
 
 
-QRegion RenderedDocumentPage::selectedRegion(const TextSelection& selection)
+TQRegion RenderedDocumentPage::selectedRegion(const TextSelection& selection)
 {
   if (selection.isEmpty() || selection.getPageNumber() != pageNr)
-    return QRegion();
+    return TQRegion();
 
   int startIndex = selection.getSelectedTextStart();
   int endIndex = selection.getSelectedTextEnd();
 
-  QValueVector<QRect> wordBox;
+  TQValueVector<TQRect> wordBox;
 
-  QRect currentWordBox;
+  TQRect currentWordBox;
   //unsigned int currentBaseline = 0;
 
   // Merge character boxes into boxes containing complete words.
@@ -93,12 +93,12 @@ QRegion RenderedDocumentPage::selectedRegion(const TextSelection& selection)
   // we still need to store the last word
   wordBox.push_back(currentWordBox);
 
-  QValueVector<QRect> lineBox;
+  TQValueVector<TQRect> lineBox;
 
   // Merge word boxes into boxes containing whole lines.
   // We start a new line if we encounter a wordbox which does not
   // vertically overlap which the current lineBox.
-  QRect currentLineBox;
+  TQRect currentLineBox;
 
   for (unsigned int i = 0; i < wordBox.size(); i++)
   {
@@ -143,17 +143,17 @@ QRegion RenderedDocumentPage::selectedRegion(const TextSelection& selection)
   }
 
   // Add the lineboxes to a Region
-  QRegion selectedRegion;
+  TQRegion selectedRegion;
   for (unsigned int i = 0; i < lineBox.size(); i++)
   {
-    selectedRegion += QRegion(lineBox[i]);
+    selectedRegion += TQRegion(lineBox[i]);
   }
 
   return selectedRegion;
 }
 
 
-TextSelection RenderedDocumentPage::select(const QRect& selectedRectangle)
+TextSelection RenderedDocumentPage::select(const TQRect& selectedRectangle)
 {
   int selectedTextStart = -1;
   int selectedTextEnd   = -1;
@@ -172,7 +172,7 @@ TextSelection RenderedDocumentPage::select(const QRect& selectedRectangle)
 
   TextSelection selection;
 
-  QString selectedText;
+  TQString selectedText;
 
   if (selectedTextStart != -1)
   {
@@ -187,7 +187,7 @@ TextSelection RenderedDocumentPage::select(const QRect& selectedRectangle)
   return selection;
 }
 
-TextSelection RenderedDocumentPage::select(const QPoint& point)
+TextSelection RenderedDocumentPage::select(const TQPoint& point)
 {
   int selectedTextStart = -1;
   int selectedTextEnd   = -1;
@@ -204,7 +204,7 @@ TextSelection RenderedDocumentPage::select(const QPoint& point)
 
   TextSelection selection;
 
-  QString selectedText;
+  TQString selectedText;
 
   if (selectedTextStart != -1)
   {
@@ -216,12 +216,12 @@ TextSelection RenderedDocumentPage::select(const QPoint& point)
   return selection;
 }
 
-TextSelection RenderedDocumentPage::find(const QString& str, int index, bool caseSensitive)
+TextSelection RenderedDocumentPage::find(const TQString& str, int index, bool caseSensitive)
 {
   if (pageText.isNull())
   {
     // Create the pageText by joining all entries of textBoxList.
-    for (QValueVector<TextBox>::Iterator i = textBoxList.begin(); i != textBoxList.end(); i++)
+    for (TQValueVector<TextBox>::Iterator i = textBoxList.begin(); i != textBoxList.end(); i++)
     {
       pageText = pageText + i->text;
     }
@@ -291,7 +291,7 @@ TextSelection RenderedDocumentPage::find(const QString& str, int index, bool cas
 }
 
 
-TextSelection RenderedDocumentPage::findRev(const QString& str, int index, bool caseSensitive)
+TextSelection RenderedDocumentPage::findRev(const TQString& str, int index, bool caseSensitive)
 {
   // Negative index means we start the search at the end of the text.
   if (index < 0)
@@ -302,7 +302,7 @@ TextSelection RenderedDocumentPage::findRev(const QString& str, int index, bool 
   if (pageText.isNull())
   {
     // Create the pageText by joining all entries of textBoxList.
-    for (QValueVector<TextBox>::Iterator i = textBoxList.begin(); i != textBoxList.end(); i++)
+    for (TQValueVector<TextBox>::Iterator i = textBoxList.begin(); i != textBoxList.end(); i++)
     {
       pageText = pageText + i->text;
     }

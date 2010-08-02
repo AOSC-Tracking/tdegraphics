@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMObjectLinkEdit with parent and name
     */
-   PMObjectLinkEdit( QWidget* parent, const char* name = 0 );
+   PMObjectLinkEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

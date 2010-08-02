@@ -81,7 +81,7 @@ PMListPattern::~PMListPattern( )
 {
 }
 
-void PMListPattern::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMListPattern::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    switch( m_listType )
    {
@@ -102,7 +102,7 @@ void PMListPattern::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMListPattern::readAttributes( const PMXMLHelper& h )
 {
-   QString str = h.stringAttribute( "listtype", "checker" );
+   TQString str = h.stringAttribute( "listtype", "checker" );
    if( str == "checker" )
       m_listType = ListPatternChecker;
    else if( str == "brick" )
@@ -123,9 +123,9 @@ PMMetaObject* PMListPattern::metaObject( ) const
       PMListTypeProperty* p = new PMListTypeProperty(
          "listType", &PMListPattern::setListType,
          &PMListPattern::listType );
-      p->addEnumValue( QString( "Checker" ), ListPatternChecker );
-      p->addEnumValue( QString( "Brick" ), ListPatternBrick );
-      p->addEnumValue( QString( "Hexagon" ), ListPatternHexagon );
+      p->addEnumValue( TQString( "Checker" ), ListPatternChecker );
+      p->addEnumValue( TQString( "Brick" ), ListPatternBrick );
+      p->addEnumValue( TQString( "Hexagon" ), ListPatternHexagon );
       s_pMetaObject->addProperty( p );
 
       s_pMetaObject->addProperty(
@@ -178,7 +178,7 @@ void PMListPattern::setMortar( double n )
    }
 }
 
-PMDialogEditBase* PMListPattern::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMListPattern::editWidget( TQWidget* parent ) const
 {
    return new PMListPatternEdit( parent );
 }
@@ -248,7 +248,7 @@ void PMTextureList::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMTextureList::description( ) const
+TQString PMTextureList::description( ) const
 {
    return i18n( "texture list" );
 }
@@ -287,7 +287,7 @@ void PMPigmentList::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMPigmentList::description( ) const
+TQString PMPigmentList::description( ) const
 {
    return i18n( "pigment list" );
 }
@@ -326,7 +326,7 @@ void PMColorList::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMColorList::description( ) const
+TQString PMColorList::description( ) const
 {
    return i18n( "color list" );
 }
@@ -365,7 +365,7 @@ void PMDensityList::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMDensityList::description( ) const
+TQString PMDensityList::description( ) const
 {
    return i18n( "density list" );
 }
@@ -411,7 +411,7 @@ void PMNormalList::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMNormalList::description( ) const
+TQString PMNormalList::description( ) const
 {
    return i18n( "normal list" );
 }
@@ -450,7 +450,7 @@ void PMNormalList::restoreMemento( PMMemento* s )
    Base::restoreMemento( s );
 }
 
-void PMNormalList::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMNormalList::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "depth", m_depth );
    Base::serialize( e, doc );
@@ -462,7 +462,7 @@ void PMNormalList::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMNormalList::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMNormalList::editWidget( TQWidget* parent ) const
 {
    return new PMListPatternEdit( parent );
 }

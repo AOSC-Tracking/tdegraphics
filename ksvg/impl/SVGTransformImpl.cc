@@ -120,27 +120,27 @@ void SVGTransformImpl::setSkewY(double angle)
 	m_matrix->skewY(angle);
 }
 
-QString SVGTransformImpl::toString() const
+TQString SVGTransformImpl::toString() const
 {
      	switch (m_type)
 	{
 		case SVG_TRANSFORM_UNKNOWN:
-			return QString();
+			return TQString();
 		case SVG_TRANSFORM_MATRIX:
-			return QString("matrix(" + QString::number(m_matrix->a()) + " " + QString::number(m_matrix->b()) + " " + QString::number(m_matrix->c()) + " " + QString::number(m_matrix->d()) + " " + QString::number(m_matrix->e()) + " " + QString::number(m_matrix->f()) + ")");
+			return TQString("matrix(" + TQString::number(m_matrix->a()) + " " + TQString::number(m_matrix->b()) + " " + TQString::number(m_matrix->c()) + " " + TQString::number(m_matrix->d()) + " " + TQString::number(m_matrix->e()) + " " + TQString::number(m_matrix->f()) + ")");
 		case SVG_TRANSFORM_TRANSLATE:
-			return QString("translate(" + QString::number(m_matrix->e()) + " " + QString::number(m_matrix->f()) + ")");
+			return TQString("translate(" + TQString::number(m_matrix->e()) + " " + TQString::number(m_matrix->f()) + ")");
 		case SVG_TRANSFORM_SCALE:
-			return QString("scale(" + QString::number(m_matrix->a()) + " " + QString::number(m_matrix->d()) + ")");
+			return TQString("scale(" + TQString::number(m_matrix->a()) + " " + TQString::number(m_matrix->d()) + ")");
 		case SVG_TRANSFORM_ROTATE:
-			return QString("rotate(" + QString::number(m_angle) + " " + QString::number(m_cx) + " " + QString::number(m_cy) + ")");
+			return TQString("rotate(" + TQString::number(m_angle) + " " + TQString::number(m_cx) + " " + TQString::number(m_cy) + ")");
 		case SVG_TRANSFORM_SKEWX:
-			return QString("skewX(" + QString::number(m_angle) + ")");
+			return TQString("skewX(" + TQString::number(m_angle) + ")");
 		case SVG_TRANSFORM_SKEWY:
-			return QString("skewY(" + QString::number(m_angle) + ")");
+			return TQString("skewY(" + TQString::number(m_angle) + ")");
 		default:
 			kdWarning() << "Unknown transform type " << m_type << endl;
-			return QString();	
+			return TQString();	
 	}
 }
 

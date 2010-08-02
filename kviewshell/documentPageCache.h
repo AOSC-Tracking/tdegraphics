@@ -15,12 +15,12 @@
 #include "pageSize.h"
 #include "selection.h"
 
-#include <qcache.h>
-#include <qguardedptr.h>
-#include <qobject.h>
+#include <tqcache.h>
+#include <tqguardedptr.h>
+#include <tqobject.h>
 
 class DocumentRenderer;
-class QPixmap;
+class TQPixmap;
 class RenderedDocumentPage;
 
 
@@ -56,7 +56,7 @@ class DocumentPageCache: public QObject
       set with setResolution(). If the document does not specify a
       size (which happens, e.g., for some DVI-files), the
       userPreferredSize is used. */
-  QSize sizeOfPageInPixel(const PageNumber& page) const;
+  TQSize sizeOfPageInPixel(const PageNumber& page) const;
 
   /** Returns a pointer to a documentPage structure, or 0, if the
       documentPage could not be generated for some reason (e.g.,
@@ -64,16 +64,16 @@ class DocumentPageCache: public QObject
   RenderedDocumentPagePixmap* getPage(const PageNumber& pageNr);
 
   /** Checks if the given page is already in the cache. */
-  bool isPageCached(const PageNumber& pageNumber, const QSize& size);
+  bool isPageCached(const PageNumber& pageNumber, const TQSize& size);
 
   /** Checks if the given page is already in the cache. Here we don't care about the size
       of the page. */
   bool isPageCached(const PageNumber& pageNumber);
 
   /** Returns a "width" pixels width thumbnail of the given page. This
-      method returns an empty QPixmap if one of the arguments is
+      method returns an empty TQPixmap if one of the arguments is
       invalid, or if the page cannot be rendered for any reason. */
-  QPixmap createThumbnail(const PageNumber& pageNr, int width);
+  TQPixmap createThumbnail(const PageNumber& pageNr, int width);
 
  signals:
   /** This signal is emitted when setUserPreferredSize() or
@@ -102,13 +102,13 @@ class DocumentPageCache: public QObject
   virtual RenderedDocumentPagePixmap* createDocumentPagePixmap() const;
 
   /** Creates the hashing key for the cache. */
-  QString createKey(const PageNumber& pageNumber, const QSize& size);
+  TQString createKey(const PageNumber& pageNumber, const TQSize& size);
 
   /** Creates the hashing function. The size of the page is calculated
       based on the current resolution. */
-  QString createKey(const PageNumber& pageNumber);
+  TQString createKey(const PageNumber& pageNumber);
 
-  QGuardedPtr<DocumentRenderer> renderer;
+  TQGuardedPtr<DocumentRenderer> renderer;
 
  private:
   /** The maximum of memory used by the cache. (32MB)
@@ -132,7 +132,7 @@ class DocumentPageCache: public QObject
 
 
   /** This list holds the cache. */
-  QCache<RenderedDocumentPagePixmap> LRUCache;
+  TQCache<RenderedDocumentPagePixmap> LRUCache;
 
   /** This is a dummy documentPage structure which is used internally
       by the 'createThumbnail' method. */

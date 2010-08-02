@@ -28,11 +28,11 @@
 
 #include <kpmainwindow.h>
 
-#include <qcstring.h>
-#include <qdatastream.h>
-#include <qpaintdevicemetrics.h>
-#include <qpainter.h>
-#include <qsize.h>
+#include <tqcstring.h>
+#include <tqdatastream.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqpainter.h>
+#include <tqsize.h>
 
 #include <dcopclient.h>
 #include <kapplication.h>
@@ -67,41 +67,41 @@ void kpMainWindow::setupFileMenuActions ()
 #endif
     KActionCollection *ac = actionCollection ();
 
-    m_actionNew = KStdAction::openNew (this, SLOT (slotNew ()), ac);
-    m_actionOpen = KStdAction::open (this, SLOT (slotOpen ()), ac);
+    m_actionNew = KStdAction::openNew (this, TQT_SLOT (slotNew ()), ac);
+    m_actionOpen = KStdAction::open (this, TQT_SLOT (slotOpen ()), ac);
 
-    m_actionOpenRecent = KStdAction::openRecent (this, SLOT (slotOpenRecent (const KURL &)), ac);
+    m_actionOpenRecent = KStdAction::openRecent (this, TQT_SLOT (slotOpenRecent (const KURL &)), ac);
     m_actionOpenRecent->loadEntries (kapp->config ());
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\trecent URLs=" << m_actionOpenRecent->items () << endl;
 #endif
 
-    m_actionSave = KStdAction::save (this, SLOT (slotSave ()), ac);
-    m_actionSaveAs = KStdAction::saveAs (this, SLOT (slotSaveAs ()), ac);
+    m_actionSave = KStdAction::save (this, TQT_SLOT (slotSave ()), ac);
+    m_actionSaveAs = KStdAction::saveAs (this, TQT_SLOT (slotSaveAs ()), ac);
 
     m_actionExport = new KAction (i18n ("E&xport..."), 0,
-        this, SLOT (slotExport ()), ac, "file_export");
+        this, TQT_SLOT (slotExport ()), ac, "file_export");
 
     m_actionScan = new KAction (i18n ("Scan..."), SmallIcon ("scanner"), 0,
-        this, SLOT (slotScan ()), ac, "file_scan");
+        this, TQT_SLOT (slotScan ()), ac, "file_scan");
 
-    //m_actionRevert = KStdAction::revert (this, SLOT (slotRevert ()), ac);
+    //m_actionRevert = KStdAction::revert (this, TQT_SLOT (slotRevert ()), ac);
     m_actionReload = new KAction (i18n ("Reloa&d"), KStdAccel::reload (),
-        this, SLOT (slotReload ()), ac, "file_revert");
+        this, TQT_SLOT (slotReload ()), ac, "file_revert");
     slotEnableReload ();
 
-    m_actionPrint = KStdAction::print (this, SLOT (slotPrint ()), ac);
-    m_actionPrintPreview = KStdAction::printPreview (this, SLOT (slotPrintPreview ()), ac);
+    m_actionPrint = KStdAction::print (this, TQT_SLOT (slotPrint ()), ac);
+    m_actionPrintPreview = KStdAction::printPreview (this, TQT_SLOT (slotPrintPreview ()), ac);
 
-    m_actionMail = KStdAction::mail (this, SLOT (slotMail ()), ac);
+    m_actionMail = KStdAction::mail (this, TQT_SLOT (slotMail ()), ac);
 
     m_actionSetAsWallpaperCentered = new KAction (i18n ("Set as Wa&llpaper (Centered)"), 0,
-        this, SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
+        this, TQT_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
     m_actionSetAsWallpaperTiled = new KAction (i18n ("Set as Wallpaper (&Tiled)"), 0,
-        this, SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
+        this, TQT_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
 
-    m_actionClose = KStdAction::close (this, SLOT (slotClose ()), ac);
-    m_actionQuit = KStdAction::quit (this, SLOT (slotQuit ()), ac);
+    m_actionClose = KStdAction::close (this, TQT_SLOT (slotClose ()), ac);
+    m_actionQuit = KStdAction::quit (this, TQT_SLOT (slotQuit ()), ac);
 
     m_scanDialog = 0;
 
@@ -173,7 +173,7 @@ void kpMainWindow::addRecentURL (const KURL &url)
         kdDebug () << "\thave memberList" << endl;
     #endif
 
-        for (QPtrList <KMainWindow>::const_iterator it = KMainWindow::memberList->begin ();
+        for (TQPtrList <KMainWindow>::const_iterator it = KMainWindow::memberList->begin ();
              it != KMainWindow::memberList->end ();
              it++)
         {
@@ -228,7 +228,7 @@ void kpMainWindow::slotNew ()
 
 
 // private
-QSize kpMainWindow::defaultDocSize () const
+TQSize kpMainWindow::defaultDocSize () const
 {
     // KConfig::readEntry() does not actually reread from disk, hence doesn't
     // realise what other processes have done e.g. Settings / Show Path
@@ -237,17 +237,17 @@ QSize kpMainWindow::defaultDocSize () const
     KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
-    QSize docSize = cfg->readSizeEntry (kpSettingLastDocSize);
+    TQSize docSize = cfg->readSizeEntry (kpSettingLastDocSize);
 
     if (docSize.isEmpty ())
     {
-        docSize = QSize (400, 300);
+        docSize = TQSize (400, 300);
     }
     else
     {
         // Don't get too big or you'll thrash (or even lock up) the computer
         // just by opening a window
-        docSize = QSize (QMIN (2048, docSize.width ()),
+        docSize = TQSize (QMIN (2048, docSize.width ()),
                          QMIN (2048, docSize.height ()));
     }
 
@@ -255,7 +255,7 @@ QSize kpMainWindow::defaultDocSize () const
 }
 
 // private
-void kpMainWindow::saveDefaultDocSize (const QSize &size)
+void kpMainWindow::saveDefaultDocSize (const TQSize &size)
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\tCONFIG: saving Last Doc Size = " << size << endl;
@@ -295,7 +295,7 @@ void kpMainWindow::setDocumentChoosingWindow (kpDocument *doc)
 
 // private
 kpDocument *kpMainWindow::openInternal (const KURL &url,
-        const QSize &fallbackDocSize,
+        const TQSize &fallbackDocSize,
         bool newDocSameNameIfNotExist)
 {
     // create doc
@@ -334,12 +334,12 @@ bool kpMainWindow::open (const KURL &url, bool newDocSameNameIfNotExist)
 
 
 // private
-KURL::List kpMainWindow::askForOpenURLs (const QString &caption, const QString &startURL,
+KURL::List kpMainWindow::askForOpenURLs (const TQString &caption, const TQString &startURL,
                                          bool allowMultipleURLs)
 {
-    QStringList mimeTypes = KImageIO::mimeTypes (KImageIO::Reading);
+    TQStringList mimeTypes = KImageIO::mimeTypes (KImageIO::Reading);
 #if DEBUG_KP_MAIN_WINDOW
-    QStringList sortedMimeTypes = mimeTypes;
+    TQStringList sortedMimeTypes = mimeTypes;
     sortedMimeTypes.sort ();
     kdDebug () << "kpMainWindow::askForURLs(allowMultiple="
                << allowMultipleURLs
@@ -347,7 +347,7 @@ KURL::List kpMainWindow::askForOpenURLs (const QString &caption, const QString &
                << "\tmimeTypes=" << mimeTypes << endl
                << "\tsortedMimeTypes=" << sortedMimeTypes << endl;
 #endif
-    QString filter = mimeTypes.join (" ");
+    TQString filter = mimeTypes.join (" ");
 
     KFileDialog fd (startURL, filter, this, "fd", true/*modal*/);
     fd.setCaption (caption);
@@ -370,7 +370,7 @@ void kpMainWindow::slotOpen ()
 
 
     const KURL::List urls = askForOpenURLs (i18n ("Open Image"),
-        m_document ? m_document->url ().url () : QString::null);
+        m_document ? m_document->url ().url () : TQString::null);
 
     for (KURL::List::const_iterator it = urls.begin ();
          it != urls.end ();
@@ -451,8 +451,8 @@ void kpMainWindow::slotScan ()
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\tcreated scanDialog=" << m_scanDialog << endl;
     #endif
-        connect (m_scanDialog, SIGNAL (finalImage (const QImage &, int)),
-                 SLOT (slotScanned (const QImage &, int)));
+        connect (m_scanDialog, TQT_SIGNAL (finalImage (const TQImage &, int)),
+                 TQT_SLOT (slotScanned (const TQImage &, int)));
     }
 
 
@@ -481,7 +481,7 @@ void kpMainWindow::slotScan ()
 }
 
 // private slot
-void kpMainWindow::slotScanned (const QImage &image, int)
+void kpMainWindow::slotScanned (const TQImage &image, int)
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow::slotScanned() image.rect=" << image.rect () << endl;
@@ -509,11 +509,11 @@ void kpMainWindow::slotScanned (const QImage &image, int)
     // TODO: Maybe this code should be moved into kpdocument.cpp -
     //       since it resembles the responsibilities of kpDocument::open().
 
-    // Convert QImage to kpDocument's image format, gathering meta info
-    // from QImage.
+    // Convert TQImage to kpDocument's image format, gathering meta info
+    // from TQImage.
     kpDocumentSaveOptions saveOptions;
     kpDocumentMetaInfo metaInfo;
-    const QPixmap pixmap = kpDocument::convertToPixmapAsLosslessAsPossible (
+    const TQPixmap pixmap = kpDocument::convertToPixmapAsLosslessAsPossible (
         image,
         kpMainWindow::pasteWarnAboutLossInfo (),
         &saveOptions,
@@ -580,12 +580,12 @@ bool kpMainWindow::slotSave ()
 }
 
 // private
-KURL kpMainWindow::askForSaveURL (const QString &caption,
-                                  const QString &startURL,
-                                  const QPixmap &pixmapToBeSaved,
+KURL kpMainWindow::askForSaveURL (const TQString &caption,
+                                  const TQString &startURL,
+                                  const TQPixmap &pixmapToBeSaved,
                                   const kpDocumentSaveOptions &startSaveOptions,
                                   const kpDocumentMetaInfo &docMetaInfo,
-                                  const QString &forcedSaveOptionsGroup,
+                                  const TQString &forcedSaveOptionsGroup,
                                   bool localOnly,
                                   kpDocumentSaveOptions *chosenSaveOptions,
                                   bool isSavingForFirstTime,
@@ -625,9 +625,9 @@ KURL kpMainWindow::askForSaveURL (const QString &caption,
 
     kpDocumentSaveOptions fdSaveOptions = startSaveOptions;
 
-    QStringList mimeTypes = KImageIO::mimeTypes (KImageIO::Writing);
+    TQStringList mimeTypes = KImageIO::mimeTypes (KImageIO::Writing);
 #if DEBUG_KP_MAIN_WINDOW
-    QStringList sortedMimeTypes = mimeTypes;
+    TQStringList sortedMimeTypes = mimeTypes;
     sortedMimeTypes.sort ();
     kdDebug () << "\tmimeTypes=" << mimeTypes << endl
                << "\tsortedMimeTypes=" << sortedMimeTypes << endl;
@@ -692,7 +692,7 @@ KURL kpMainWindow::askForSaveURL (const QString &caption,
             docMetaInfo,
             this);
 
-    KFileDialog fd (startURL, QString::null, this, "fd", true/*modal*/,
+    KFileDialog fd (startURL, TQString::null, this, "fd", true/*modal*/,
                     saveOptionsWidget);
     saveOptionsWidget->setVisualParent (&fd);
     fd.setCaption (caption);
@@ -704,8 +704,8 @@ KURL kpMainWindow::askForSaveURL (const QString &caption,
     if (localOnly)
         fd.setMode (KFile::File | KFile::LocalOnly);
 
-    connect (&fd, SIGNAL (filterChanged (const QString &)),
-             saveOptionsWidget, SLOT (setMimeType (const QString &)));
+    connect (&fd, TQT_SIGNAL (filterChanged (const TQString &)),
+             saveOptionsWidget, TQT_SLOT (setMimeType (const TQString &)));
 
 
     if (fd.exec ())
@@ -898,7 +898,7 @@ bool kpMainWindow::slotReload ()
                                "Reloading will lose all changes since you last saved it.\n"
                                "Are you sure?")
                              .arg (m_document->prettyFilename ()),
-                         QString::null/*caption*/,
+                         TQString::null/*caption*/,
                          i18n ("&Reload"));
         }
         else
@@ -908,7 +908,7 @@ bool kpMainWindow::slotReload ()
                                "Reloading will lose all changes.\n"
                                "Are you sure?")
                              .arg (m_document->prettyFilename ()),
-                         QString::null/*caption*/,
+                         TQString::null/*caption*/,
                          i18n ("&Reload"));
         }
 
@@ -963,7 +963,7 @@ void kpMainWindow::sendFilenameToPrinter (KPrinter *printer)
     {
         int dot;
 
-        QString fileName = url.fileName ();
+        TQString fileName = url.fileName ();
         dot = fileName.findRev ('.');
 
         // file.ext but not .hidden-file?
@@ -1027,7 +1027,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
         bool showPrinterSetupDialog)
 {
     // Get image to be printed.
-    QPixmap pixmap = m_document->pixmapWithSelection ();
+    TQPixmap pixmap = m_document->pixmapWithSelection ();
 
 
     // Get image DPI.
@@ -1069,7 +1069,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
         // what if you have multiple screens connected to the same computer
         // with different DPIs?
         // TODO: mysteriously, someone else is setting this to 96dpi always.
-        QPaintDeviceMetrics screenMetrics (&pixmap/*screen element*/);
+        TQPaintDeviceMetrics screenMetrics (&pixmap/*screen element*/);
         const int dpiX = screenMetrics.logicalDpiX (),
             dpiY = screenMetrics.logicalDpiY ();
     #if DEBUG_KP_MAIN_WINDOW
@@ -1088,7 +1088,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
     //     m   m       m = margin
     //     m   m
     //     mmmmm
-    QPaintDeviceMetrics printerMetrics (printer);
+    TQPaintDeviceMetrics printerMetrics (printer);
     const int printerWidthMM = printerMetrics.widthMM ();
     const int printerHeightMM = printerMetrics.heightMM ();
 #if DEBUG_KP_MAIN_WINDOW
@@ -1132,7 +1132,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
     }
 
 
-    // Make sure DPIs are equal as that's all QPrinter::setResolution()
+    // Make sure DPIs are equal as that's all TQPrinter::setResolution()
     // supports.  We do this in such a way that we only ever stretch an
     // image, to avoid losing information.  Don't antialias as the printer
     // will do that to translate our DPI to its physical resolution and
@@ -1166,7 +1166,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
 
 
     // ASSERT: dpiX == dpiY
-    // QPrinter::setResolution() has to be called before QPrinter::setup().
+    // TQPrinter::setResolution() has to be called before TQPrinter::setup().
     printer->setResolution (QMAX (1, qRound (dpiX)));
 
 
@@ -1190,14 +1190,14 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
     {
         // The user can mutate margins at their own risk in this dialog.
         // It doesn't seem to affect the size of the page as reported
-        // by QPaintDeviceMetrics::{width,height}MM().
+        // by TQPaintDeviceMetrics::{width,height}MM().
         if (!printer->setup (this))
             return;
     }
 
 
     // Send pixmap to printer.
-    QPainter painter;
+    TQPainter painter;
     painter.begin (printer);
     painter.drawPixmap (qRound (originX), qRound (originY), pixmap);
     painter.end ();
@@ -1244,7 +1244,7 @@ void kpMainWindow::slotMail ()
         int result = KMessageBox::questionYesNo (this,
                         i18n ("You must save this image before sending it.\n"
                               "Do you want to save it?"),
-                        QString::null,
+                        TQString::null,
                         KStdGuiItem::save (), KStdGuiItem::cancel ());
 
         if (result == KMessageBox::Yes)
@@ -1263,13 +1263,13 @@ void kpMainWindow::slotMail ()
     }
 
     kapp->invokeMailer (
-        QString::null/*to*/,
-        QString::null/*cc*/,
-        QString::null/*bcc*/,
+        TQString::null/*to*/,
+        TQString::null/*cc*/,
+        TQString::null/*bcc*/,
         m_document->prettyFilename()/*subject*/,
-        QString::null/*body*/,
-        QString::null/*messageFile*/,
-        QStringList (m_document->url ().url ())/*attachments*/);
+        TQString::null/*body*/,
+        TQString::null/*messageFile*/,
+        TQStringList (m_document->url ().url ())/*attachments*/);
 }
 
 
@@ -1281,7 +1281,7 @@ void kpMainWindow::setAsWallpaper (bool centered)
         !m_document->isFromURL () ||
         m_document->isModified ()/*needs to be saved*/)
     {
-        QString question;
+        TQString question;
 
         if (!m_document->url ().isLocalFile ())
         {
@@ -1297,7 +1297,7 @@ void kpMainWindow::setAsWallpaper (bool centered)
         }
 
         int result = KMessageBox::questionYesNo (this,
-                         question, QString::null,
+                         question, TQString::null,
                          KStdGuiItem::save (), KStdGuiItem::cancel ());
 
         if (result == KMessageBox::Yes)
@@ -1318,15 +1318,15 @@ void kpMainWindow::setAsWallpaper (bool centered)
     }
 
 
-    QByteArray data;
-    QDataStream dataStream (data, IO_WriteOnly);
+    TQByteArray data;
+    TQDataStream dataStream (data, IO_WriteOnly);
 
     // write path
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow::setAsWallpaper() path="
                << m_document->url ().path () << endl;
 #endif
-    dataStream << QString (m_document->url ().path ());
+    dataStream << TQString (m_document->url ().path ());
 
     // write position:
     //
@@ -1353,7 +1353,7 @@ void kpMainWindow::setAsWallpaper (bool centered)
     // installed so kdebase/kdesktop/KBackgroundIface.h might not be around
     // to be compiled in (where user == developer :))
     if (!KApplication::dcopClient ()->send ("kdesktop", "KBackgroundIface",
-                                            "setWallpaper(QString,int)", data))
+                                            "setWallpaper(TQString,int)", data))
     {
         KMessageBox::sorry (this, i18n ("Could not change wallpaper."));
     }

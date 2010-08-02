@@ -28,14 +28,14 @@
 
 class PMBlendMapModifiers;
 class PMVectorEdit;
-class QComboBox;
+class TQComboBox;
 class PMFloatEdit;
 class PMIntEdit;
-class QLabel;
-class QCheckBox;
-class QWidget;
-class QLineEdit;
-class QPushButton;
+class TQLabel;
+class TQCheckBox;
+class TQWidget;
+class TQLineEdit;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMBlendMapModifiers.
@@ -48,7 +48,7 @@ public:
    /**
     * Creates a PMBlendMapModifiersEdit with parent and name
     */
-   PMBlendMapModifiersEdit( QWidget* parent, const char* name = 0 );
+   PMBlendMapModifiersEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -86,14 +86,14 @@ private:
    void setBlendMapModifiersType( int i );
    PMBlendMapModifiers*     m_pDisplayedObject;
 
-   QComboBox*     m_pWaveTypeCombo;
+   TQComboBox*     m_pWaveTypeCombo;
    PMFloatEdit*   m_pFrequencyEdit;
    PMFloatEdit*   m_pPhaseEdit;
    PMFloatEdit*   m_pWaveExponentEdit;
-   QLabel*        m_pWaveExponentLabel;
-   QCheckBox*     m_pEnableFrequencyEdit;
-   QCheckBox*     m_pEnablePhaseEdit;
-   QCheckBox*     m_pEnableWaveFormEdit;
+   TQLabel*        m_pWaveExponentLabel;
+   TQCheckBox*     m_pEnableFrequencyEdit;
+   TQCheckBox*     m_pEnablePhaseEdit;
+   TQCheckBox*     m_pEnableWaveFormEdit;
 };
 
 

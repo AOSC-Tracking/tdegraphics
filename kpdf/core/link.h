@@ -10,8 +10,8 @@
 #ifndef _KPDF_LINK_H_
 #define _KPDF_LINK_H_
 
-#include <qstring.h>
-#include <qrect.h>
+#include <tqstring.h>
+#include <tqrect.h>
 #include "core/document.h" // for DocumentViewport
 
 /**
@@ -27,7 +27,7 @@ class KPDFLink
         // get link type (inherited classes mustreturn an unique identifier)
         enum LinkType { Goto, Execute, Browse, Action, Movie };
         virtual LinkType linkType() const = 0;
-        virtual QString linkTip() const { return QString::null; }
+        virtual TQString linkTip() const { return TQString::null; }
 
         // virtual destructor (remove warnings)
         virtual ~KPDFLink();
@@ -40,16 +40,16 @@ class KPDFLinkGoto : public KPDFLink
     public:
         // query for goto parameters
         bool isExternal() const { return !m_extFileName.isEmpty(); }
-        const QString & fileName() const { return m_extFileName; }
+        const TQString & fileName() const { return m_extFileName; }
         const DocumentViewport & destViewport() const { return m_vp; }
 
         // create a KPDFLink_Goto
-        KPDFLinkGoto( QString extFileName, const DocumentViewport & vp ) { m_extFileName = extFileName; m_vp = vp; }
+        KPDFLinkGoto( TQString extFileName, const DocumentViewport & vp ) { m_extFileName = extFileName; m_vp = vp; }
         LinkType linkType() const { return Goto; }
-        QString linkTip() const;
+        TQString linkTip() const;
 
     private:
-        QString m_extFileName;
+        TQString m_extFileName;
         DocumentViewport m_vp;
 };
 
@@ -58,17 +58,17 @@ class KPDFLinkExecute : public KPDFLink
 {
     public:
         // query for filename / parameters
-        const QString & fileName() const { return m_fileName; }
-        const QString & parameters() const { return m_parameters; }
+        const TQString & fileName() const { return m_fileName; }
+        const TQString & parameters() const { return m_parameters; }
 
         // create a KPDFLink_Execute
-        KPDFLinkExecute( const QString & file, const QString & params ) { m_fileName = file; m_parameters = params; }
+        KPDFLinkExecute( const TQString & file, const TQString & params ) { m_fileName = file; m_parameters = params; }
         LinkType linkType() const { return Execute; }
-        QString linkTip() const;
+        TQString linkTip() const;
 
     private:
-        QString m_fileName;
-        QString m_parameters;
+        TQString m_fileName;
+        TQString m_parameters;
 };
 
 /** Browse: an URL to open, ranging from 'http://' to 'mailto:' etc.. **/
@@ -76,15 +76,15 @@ class KPDFLinkBrowse : public KPDFLink
 {
     public:
         // query for URL
-        const QString & url() const { return m_url; }
+        const TQString & url() const { return m_url; }
 
         // create a KPDFLink_Browse
-        KPDFLinkBrowse( const QString &url ) { m_url = url; }
+        KPDFLinkBrowse( const TQString &url ) { m_url = url; }
         LinkType linkType() const { return Browse; }
-        QString linkTip() const;
+        TQString linkTip() const;
 
     private:
-        QString m_url;
+        TQString m_url;
 };
 
 /** Action: contains an action to perform on document / kpdf **/
@@ -100,7 +100,7 @@ class KPDFLinkAction : public KPDFLink
         // create a KPDFLink_Action
         KPDFLinkAction( enum ActionType actionType ) { m_type = actionType; }
         LinkType linkType() const { return Action; }
-        QString linkTip() const;
+        TQString linkTip() const;
 
     private:
         ActionType m_type;

@@ -39,7 +39,7 @@ class Color {
 		Color();
 		/** constructs a color with given components and a name
 		 */
-		Color(const int red, const int green, const int blue, const QString& name);
+		Color(const int red, const int green, const int blue, const TQString& name);
 		~Color();
 		/** sets a component
 		 */
@@ -49,7 +49,7 @@ class Color {
 		void setComponents(const int red, const int green, const int blue);
 		/** sets a name
 		 */
-		void setName(const QString& name);
+		void setName(const TQString& name);
 		/** @return a component
 		 */
 		int component(const int index) const;
@@ -58,7 +58,7 @@ class Color {
 		const int* components() const;
 		/** @return a color name
 		 */
-		const QString& name() const;
+		const TQString& name() const;
 		/** @return if is equal to color
 		 */
 		bool equals(const Color& color);
@@ -75,7 +75,7 @@ class Color {
 		int m_components[COMPONENTS_NUM];
 		/** a color name
 		 */
-		QString m_name;
+		TQString m_name;
 };
 
 #endif

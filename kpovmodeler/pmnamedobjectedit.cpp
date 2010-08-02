@@ -19,12 +19,12 @@
 #include "pmnamedobjectedit.h"
 #include "pmnamedobject.h"
 
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
-PMNamedObjectEdit::PMNamedObjectEdit( QWidget* parent, const char* name )
+PMNamedObjectEdit::PMNamedObjectEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -34,15 +34,15 @@ void PMNamedObjectEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout = new QHBoxLayout( topLayout( ) );
-   m_pNameEdit = new QLineEdit( this );
-   QLabel* label = new QLabel( i18n( "Name:" ), this );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   m_pNameEdit = new TQLineEdit( this );
+   TQLabel* label = new TQLabel( i18n( "Name:" ), this );
 
    layout->addWidget( label );
    layout->addWidget( m_pNameEdit );
 
-   connect( m_pNameEdit, SIGNAL( textChanged( const QString& ) ),
-            SLOT( slotNameChanged( const QString& ) ) );
+   connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
+            TQT_SLOT( slotNameChanged( const TQString& ) ) );
 }
 
 void PMNamedObjectEdit::displayObject( PMObject* o )
@@ -74,7 +74,7 @@ bool PMNamedObjectEdit::isDataValid( )
    return Base::isDataValid( );
 }
 
-void PMNamedObjectEdit::slotNameChanged( const QString& )
+void PMNamedObjectEdit::slotNameChanged( const TQString& )
 {
    emit dataChanged( );
 }

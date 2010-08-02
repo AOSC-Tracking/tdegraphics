@@ -39,7 +39,7 @@ public:
    /**
     * Creates a PMDensityEdit with parent and name
     */
-   PMDensityEdit( QWidget* parent, const char* name = 0 );
+   PMDensityEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -125,12 +125,12 @@ void PMFog::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMFog::description( ) const
+TQString PMFog::description( ) const
 {
    return i18n( "fog" );
 }
 
-void PMFog::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMFog::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
    e.setAttribute( "fog_type", m_fogType );
@@ -284,7 +284,7 @@ void PMFog::setUp( const PMVector& c )
    }
 }
 
-PMDialogEditBase* PMFog::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMFog::editWidget( TQWidget* parent ) const
 {
    return new PMFogEdit( parent );
 }

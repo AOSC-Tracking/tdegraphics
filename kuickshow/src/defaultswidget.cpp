@@ -16,11 +16,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qvgroupbox.h>
+#include <tqcheckbox.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqvgroupbox.h>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -31,40 +31,40 @@
 #include "imlibwidget.h"
 #include "defaultswidget.h"
 
-DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
-  : QWidget( parent, name )
+DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
+  : TQWidget( parent, name )
 {
   imFiltered = 0L;
 
-  cbEnableMods = new QCheckBox( i18n("Apply default image modifications"), this );
-  connect( cbEnableMods, SIGNAL( toggled(bool) ), SLOT( enableWidgets(bool) ));
+  cbEnableMods = new TQCheckBox( i18n("Apply default image modifications"), this );
+  connect( cbEnableMods, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( enableWidgets(bool) ));
 
   // create all the widgets
 
-  gbScale = new QGroupBox( i18n("Scaling"), this );
+  gbScale = new TQGroupBox( i18n("Scaling"), this );
   gbScale->setColumnLayout( 0, Qt::Horizontal );
 
-  cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"),
+  cbDownScale = new TQCheckBox( i18n("Shrink image to screen size, if larger"),
 			       gbScale, "shrinktoscreen" );
 
-  cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale, "upscale checkbox" );
+  cbUpScale = new TQCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale, "upscale checkbox" );
 
   sbMaxUpScaleFactor = new KIntNumInput( gbScale, "upscale factor" );
   sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
 
-  connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
-            SLOT( setEnabled(bool) ));
+  connect(cbUpScale, TQT_SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
+            TQT_SLOT( setEnabled(bool) ));
 
   // --
 
-  gbGeometry = new QGroupBox( i18n("Geometry"), this );
+  gbGeometry = new TQGroupBox( i18n("Geometry"), this );
   gbGeometry->setColumnLayout( 0, Qt::Horizontal );
 
-  cbFlipVertically = new QCheckBox( i18n("Flip vertically"), gbGeometry );
+  cbFlipVertically = new TQCheckBox( i18n("Flip vertically"), gbGeometry );
 
-  cbFlipHorizontally = new QCheckBox( i18n("Flip horizontally"), gbGeometry );
+  cbFlipHorizontally = new TQCheckBox( i18n("Flip horizontally"), gbGeometry );
 
-  lbRotate = new QLabel( i18n("Rotate image:"), gbGeometry );
+  lbRotate = new TQLabel( i18n("Rotate image:"), gbGeometry );
 
   comboRotate = new KComboBox( gbGeometry, "rotate combobox" );
   comboRotate->insertItem( i18n("0 Degrees") );
@@ -74,7 +74,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbAdjust = new QVGroupBox( i18n("Adjustments"), this );
+  gbAdjust = new TQVGroupBox( i18n("Adjustments"), this );
 
   sbBrightness = new KIntNumInput( gbAdjust, "brightness spinbox" );
   sbBrightness->setRange( -256, 256, 1, true );
@@ -91,37 +91,37 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbPreview = new QGroupBox( i18n("Preview"), this );
+  gbPreview = new TQGroupBox( i18n("Preview"), this );
   gbPreview->setAlignment( AlignCenter );
 
-  lbImOrig = new QLabel( i18n("Original"), gbPreview );
+  lbImOrig = new TQLabel( i18n("Original"), gbPreview );
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
 
-  lbImFiltered = new QLabel( i18n("Modified"), gbPreview );
+  lbImFiltered = new TQLabel( i18n("Modified"), gbPreview );
   imFiltered = new ImlibWidget( 0L, imOrig->getImlibData(), gbPreview, "" );
-  connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
+  connect( imFiltered, TQT_SIGNAL( destroyed() ), TQT_SLOT( slotNoImage() ));
 
   ////
   ////////////////
 
 
   // layout management
-  QVBoxLayout *mainLayout = new QVBoxLayout( this, 0,
+  TQVBoxLayout *mainLayout = new TQVBoxLayout( this, 0,
             KDialog::spacingHint(), "main layout" );
 
-  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale->layout(),
+  TQVBoxLayout *gbScaleLayout = new TQVBoxLayout( gbScale->layout(),
             KDialog::spacingHint());
-  QVBoxLayout *gbGeometryLayout = new QVBoxLayout(gbGeometry->layout(),
+  TQVBoxLayout *gbGeometryLayout = new TQVBoxLayout(gbGeometry->layout(),
             KDialog::spacingHint());
-  QGridLayout *gbPreviewLayout = new QGridLayout(gbPreview, 2, 3, 0,
+  TQGridLayout *gbPreviewLayout = new TQGridLayout(gbPreview, 2, 3, 0,
             KDialog::spacingHint());
 
-  QHBoxLayout *scaleLayout = new QHBoxLayout();
-  QHBoxLayout *rotateLayout = new QHBoxLayout();
+  TQHBoxLayout *scaleLayout = new TQHBoxLayout();
+  TQHBoxLayout *rotateLayout = new TQHBoxLayout();
 
   mainLayout->addWidget( cbEnableMods );
   mainLayout->addWidget( gbScale );
-  QHBoxLayout *hl = new QHBoxLayout();
+  TQHBoxLayout *hl = new TQHBoxLayout();
   hl->addWidget( gbGeometry );
   hl->addWidget( gbAdjust );
   mainLayout->addLayout( hl );
@@ -159,19 +159,19 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   ////////////////
 
   // connect them all to the update slot
-  connect( cbDownScale,        SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( cbUpScale,          SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( cbFlipVertically,   SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( cbFlipHorizontally, SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( sbMaxUpScaleFactor, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( sbBrightness, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( sbContrast,   SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( sbGamma,      SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
+  connect( cbDownScale,        TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
+  connect( cbUpScale,          TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
+  connect( cbFlipVertically,   TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
+  connect( cbFlipHorizontally, TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
+  connect( sbMaxUpScaleFactor, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
+  connect( sbBrightness, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
+  connect( sbContrast,   TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
+  connect( sbGamma,      TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
 
-  connect( comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
+  connect( comboRotate,  TQT_SIGNAL( activated(int) ), TQT_SLOT( updatePreview() ));
 
 
-  QString filename = locate( "data", "kuickshow/pics/calibrate.png" );
+  TQString filename = locate( "data", "kuickshow/pics/calibrate.png" );
   if ( !imOrig->loadImage( filename ) )
     imOrig = 0L; // FIXME - display some errormessage!
   if ( !imFiltered->loadImage( filename ) )

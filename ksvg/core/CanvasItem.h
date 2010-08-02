@@ -21,9 +21,9 @@
 #ifndef CANVASITEM_H
 #define CANVASITEM_H
 
-#include <qrect.h>
-#include <qpoint.h>
-#include <qvaluelist.h>
+#include <tqrect.h>
+#include <tqpoint.h>
+#include <tqvaluelist.h>
 
 #define CHUNK_SIZE_HORIZONTAL 32
 #define CHUNK_SIZE_VERTICAL   32
@@ -60,9 +60,9 @@ public:
 	CanvasItem() { m_zIndex = 0; m_referenced = false; }
 	virtual ~CanvasItem() { }
 
-	virtual QRect bbox() const = 0;
-	virtual bool fillContains(const QPoint &) = 0;
-	virtual bool strokeContains(const QPoint &) = 0;
+	virtual TQRect bbox() const = 0;
+	virtual bool fillContains(const TQPoint &) = 0;
+	virtual bool strokeContains(const TQPoint &) = 0;
 	virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0) = 0;
 	virtual void draw() = 0;
 	virtual bool isVisible() = 0;
@@ -114,10 +114,10 @@ private:
 	CanvasItem *ptr;
 };
 
-class CanvasItemList : public QValueList<CanvasItem *>
+class CanvasItemList : public TQValueList<CanvasItem *>
 {
 public:
-	void sort() { qHeapSort(*((QValueList<CanvasItemPtr> *) this)); }
+	void sort() { qHeapSort(*((TQValueList<CanvasItemPtr> *) this)); }
 };
 
 class CanvasChunk
@@ -138,7 +138,7 @@ public:
 	short x() const { return m_x; }
 	short y() const { return m_y; }
 
-	QRect bbox() const { return QRect(m_x * CHUNK_SIZE_HORIZONTAL, m_y * CHUNK_SIZE_VERTICAL, CHUNK_SIZE_HORIZONTAL, CHUNK_SIZE_VERTICAL); }
+	TQRect bbox() const { return TQRect(m_x * CHUNK_SIZE_HORIZONTAL, m_y * CHUNK_SIZE_VERTICAL, CHUNK_SIZE_HORIZONTAL, CHUNK_SIZE_VERTICAL); }
 
 private:
 	CanvasItemList m_list;

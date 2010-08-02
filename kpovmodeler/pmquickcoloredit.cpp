@@ -21,12 +21,12 @@
 #include "pmcoloredit.h"
 #include "pmdebug.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
 
-PMQuickColorEdit::PMQuickColorEdit( QWidget* parent, const char* name )
+PMQuickColorEdit::PMQuickColorEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,12 +36,12 @@ void PMQuickColorEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout = new QHBoxLayout( topLayout( ) );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pColorEdit = new PMColorEdit( false, this );
-   layout->addWidget( new QLabel( i18n( "Color:" ), this ), 0, AlignTop );
+   layout->addWidget( new TQLabel( i18n( "Color:" ), this ), 0, AlignTop );
    layout->addWidget( m_pColorEdit );
 
-   connect( m_pColorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMQuickColorEdit::displayObject( PMObject* o )

@@ -23,12 +23,12 @@
 #include <config.h>
 #endif
 
-class QIODevice;
+class TQIODevice;
 
 #include "pmobject.h"
 #include "pmerrordialog.h"
 
-#include <qdict.h>
+#include <tqdict.h>
 
 
 /**
@@ -50,7 +50,7 @@ public:
     *
     * The serialized data will be written to the io device
     */
-   PMSerializer( QIODevice* dev );
+   PMSerializer( TQIODevice* dev );
    /**
     * Destructor
     */
@@ -60,7 +60,7 @@ public:
     * the same string as description( ) of the corresponding
     * IO format.
     */
-   virtual QString description( ) const = 0;
+   virtual TQString description( ) const = 0;
 
    /**
     * Serializes one object to the device
@@ -101,20 +101,20 @@ public:
    /**
     * Adds an error to the message string
     */
-   void printError( const QString& msg );
+   void printError( const TQString& msg );
    /**
     * Adds a warning to the message string
     */
-   void printWarning( const QString& msg );
+   void printWarning( const TQString& msg );
    /**
     * Adds an info to the message string
     */
-   void printInfo( const QString& msg );
+   void printInfo( const TQString& msg );
    /**
     * Adds the message to the message string. Type is "error", "warning",
     * "info"
     */
-   void printMessage( const QString& type, const QString& msg );
+   void printMessage( const TQString& type, const TQString& msg );
 
    /**
     * Sets the fatal error flag
@@ -142,7 +142,7 @@ protected:
    /**
     * The assigned IO device for serialization
     */
-   QIODevice* m_pDev;
+   TQIODevice* m_pDev;
 
 private:
    /**
@@ -152,7 +152,7 @@ private:
    /**
     * A dictionary object -> message
     */
-   QPtrDict< QPtrList<PMMessage> > m_messageDict;
+   TQPtrDict< TQPtrList<PMMessage> > m_messageDict;
    /**
     * Number of warnings during parsing
     */

@@ -29,7 +29,7 @@
 #ifndef __kptool_skew_h__
 #define __kptool_skew_h__
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include <kpcommandhistory.h>
 #include <kdialogbase.h>
@@ -38,9 +38,9 @@
 #include <kpselection.h>
 #include <kptoolpreviewdialog.h>
 
-class QGroupBox;
-class QLabel;
-class QPixmap;
+class TQGroupBox;
+class TQLabel;
+class TQPixmap;
 
 class KIntNumInput;
 
@@ -56,7 +56,7 @@ public:
                        kpMainWindow *mainWindow);
     virtual ~kpToolSkewCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
 
@@ -68,7 +68,7 @@ private:
     int m_hangle, m_vangle;
 
     kpColor m_backgroundColor;
-    QPixmap *m_oldPixmapPtr;
+    TQPixmap *m_oldPixmapPtr;
     kpSelection m_oldSelection;
 };
 
@@ -88,8 +88,8 @@ private:
 
     void createAngleGroupBox ();
 
-    virtual QSize newDimensions () const;
-    virtual QPixmap transformPixmap (const QPixmap &pixmap,
+    virtual TQSize newDimensions () const;
+    virtual TQPixmap transformPixmap (const TQPixmap &pixmap,
                                      int targetWidth, int targetHeight) const;
 
     void updateLastAngles ();

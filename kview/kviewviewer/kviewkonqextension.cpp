@@ -23,9 +23,9 @@
 #include "kimageviewer/canvas.h"
 #include "imagesettings.h"
 
-#include <qpainter.h>
-#include <qimage.h>
-#include <qpaintdevicemetrics.h>
+#include <tqpainter.h>
+#include <tqimage.h>
+#include <tqpaintdevicemetrics.h>
 
 #include <kprinter.h>
 #include <kdebug.h>
@@ -64,23 +64,23 @@ void KViewKonqExtension::print()
 		return;
 	}
 
-	KPrinter printer;//( true, QPrinter::ScreenResolution );
+	KPrinter printer;//( true, TQPrinter::ScreenResolution );
 	printer.addDialogPage( new ImageSettings );
 	printer.setDocName( "KView: " + m_pViewer->url().fileName( false ) );
 
 	if ( !printer.setup( ((KViewViewer *)parent())->widget(), i18n("Print %1").arg(m_pViewer->url().fileName( false )) ) )
 		return;
 
-	QPainter painter;
+	TQPainter painter;
 	painter.begin( &printer );
 
-	QPaintDeviceMetrics metrics( painter.device() );
+	TQPaintDeviceMetrics metrics( painter.device() );
 	kdDebug( 4610 ) << "metrics: " << metrics.width() << "x" << metrics.height() << endl;
-	QPoint pos( 0, 0 );
+	TQPoint pos( 0, 0 );
 
-	QImage imagetoprint;
+	TQImage imagetoprint;
 	if( printer.option( "app-kviewviewer-fitimage" ) == "1" )
-		imagetoprint = m_pCanvas->image()->smoothScale( metrics.width(), metrics.height(), QImage::ScaleMin );
+		imagetoprint = m_pCanvas->image()->smoothScale( metrics.width(), metrics.height(), TQImage::ScaleMin );
 	else
 		imagetoprint = *m_pCanvas->image();
 

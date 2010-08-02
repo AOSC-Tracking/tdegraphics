@@ -29,21 +29,21 @@
 #ifndef KP_DOCUMENT_H
 #define KP_DOCUMENT_H
 
-#include <qbitmap.h>
-#include <qobject.h>
-#include <qstring.h>
+#include <tqbitmap.h>
+#include <tqobject.h>
+#include <tqstring.h>
 
 #include <kurl.h>
 
 #include <kppixmapfx.h>
 
 
-class QImage;
-class QIODevice;
-class QPixmap;
-class QPoint;
-class QRect;
-class QSize;
+class TQImage;
+class TQIODevice;
+class TQPixmap;
+class TQPoint;
+class TQRect;
+class TQSize;
 
 class kpColor;
 class kpDocumentSaveOptions;
@@ -70,14 +70,14 @@ public:
 
     // Wraps kpPixmapFX::convertToPixmapAsLosslessAsPossible() but also
     // returns document meta information.
-    static QPixmap convertToPixmapAsLosslessAsPossible (
-        const QImage &image,
+    static TQPixmap convertToPixmapAsLosslessAsPossible (
+        const TQImage &image,
         const kpPixmapFX::WarnAboutLossInfo &wali = kpPixmapFX::WarnAboutLossInfo (),
         kpDocumentSaveOptions *saveOptions = 0,
         kpDocumentMetaInfo *metaInfo = 0);
 
-    static QPixmap getPixmapFromFile (const KURL &url, bool suppressDoesntExistDialog,
-                                      QWidget *parent,
+    static TQPixmap getPixmapFromFile (const KURL &url, bool suppressDoesntExistDialog,
+                                      TQWidget *parent,
                                       kpDocumentSaveOptions *saveOptions = 0,
                                       kpDocumentMetaInfo *metaInfo = 0);
     // TODO: fix: open*() should only be called once.
@@ -85,23 +85,23 @@ public:
     void openNew (const KURL &url);
     bool open (const KURL &url, bool newDocSameNameIfNotExist = false);
 
-    static bool lossyPromptContinue (const QPixmap &pixmap,
+    static bool lossyPromptContinue (const TQPixmap &pixmap,
                                      const kpDocumentSaveOptions &saveOptions,
-                                     QWidget *parent);
-    static bool savePixmapToDevice (const QPixmap &pixmap,
-                                    QIODevice *device,
+                                     TQWidget *parent);
+    static bool savePixmapToDevice (const TQPixmap &pixmap,
+                                    TQIODevice *device,
                                     const kpDocumentSaveOptions &saveOptions,
                                     const kpDocumentMetaInfo &metaInfo,
                                     bool lossyPrompt,
-                                    QWidget *parent,
+                                    TQWidget *parent,
                                     bool *userCancelled = 0);
-    static bool savePixmapToFile (const QPixmap &pixmap,
+    static bool savePixmapToFile (const TQPixmap &pixmap,
                                   const KURL &url,
                                   const kpDocumentSaveOptions &saveOptions,
                                   const kpDocumentMetaInfo &metaInfo,
                                   bool overwritePrompt,
                                   bool lossyPrompt,
-                                  QWidget *parent);
+                                  TQWidget *parent);
     bool save (bool overwritePrompt = false, bool lossyPrompt = false);
     bool saveAs (const KURL &url,
                  const kpDocumentSaveOptions &saveOptions,
@@ -126,12 +126,12 @@ public:
     bool isFromURL (bool checkURLStillExists = true) const;
 
     // (will convert: empty URL --> "Untitled")
-    static QString prettyURLForURL (const KURL &url);
-    QString prettyURL () const;
+    static TQString prettyURLForURL (const KURL &url);
+    TQString prettyURL () const;
 
     // (will convert: empty URL --> "Untitled")
-    static QString prettyFilenameForURL (const KURL &url);
-    QString prettyFilename () const;
+    static TQString prettyFilenameForURL (const KURL &url);
+    TQString prettyFilename () const;
 
     // (guaranteed to return valid pointer)
 
@@ -160,7 +160,7 @@ public:
     int oldHeight () const;  // only valid in a slot connected to sizeChanged()
     void setHeight (int h, const kpColor &backgroundColor);
 
-    QRect rect (bool ofSelection = false) const;
+    TQRect rect (bool ofSelection = false) const;
 
 
     /*
@@ -169,16 +169,16 @@ public:
 
     // get a copy of a bit of the doc's pixmap
     // (not including the selection)
-    QPixmap getPixmapAt (const QRect &rect) const;
+    TQPixmap getPixmapAt (const TQRect &rect) const;
 
-    void setPixmapAt (const QPixmap &pixmap, const QPoint &at);
+    void setPixmapAt (const TQPixmap &pixmap, const TQPoint &at);
 
-    void paintPixmapAt (const QPixmap &pixmap, const QPoint &at);
+    void paintPixmapAt (const TQPixmap &pixmap, const TQPoint &at);
 
     // (not including the selection)
-    QPixmap *pixmap (bool ofSelection = false) const;
-    void setPixmap (const QPixmap &pixmap);
-    void setPixmap (bool ofSelection, const QPixmap &pixmap);
+    TQPixmap *pixmap (bool ofSelection = false) const;
+    void setPixmap (const TQPixmap &pixmap);
+    void setPixmap (bool ofSelection, const TQPixmap &pixmap);
 
 private:
     void updateToolsSingleKeyTriggersEnabled ();
@@ -188,7 +188,7 @@ public:
     void setSelection (const kpSelection &selection);
 
     // TODO: this always returns opaque pixmap - need transparent ver
-    QPixmap getSelectedPixmap (const QBitmap &maskBitmap = QBitmap ()) const;
+    TQPixmap getSelectedPixmap (const TQBitmap &maskBitmap = TQBitmap ()) const;
 
     bool selectionPullFromDocument (const kpColor &backgroundColor);
     bool selectionDelete ();
@@ -197,7 +197,7 @@ public:
 
     // same as pixmap() but returns a _copy_ of the current pixmap
     // + any selection pasted on top
-    QPixmap pixmapWithSelection () const;
+    TQPixmap pixmapWithSelection () const;
 
 
     /*
@@ -212,9 +212,9 @@ public:
 
 public slots:
     // these will emit signals!
-    void slotContentsChanged (const QRect &rect);
+    void slotContentsChanged (const TQRect &rect);
     void slotSizeChanged (int newWidth, int newHeight);
-    void slotSizeChanged (const QSize &newSize);
+    void slotSizeChanged (const TQSize &newSize);
 
 signals:
     void documentOpened ();
@@ -224,9 +224,9 @@ signals:
     // This is the _only_ signal that may be emitted in addition to the others.
     void documentModified ();
 
-    void contentsChanged (const QRect &rect);
+    void contentsChanged (const TQRect &rect);
     void sizeChanged (int newWidth, int newHeight);  // see oldWidth(), oldHeight()
-    void sizeChanged (const QSize &newSize);
+    void sizeChanged (const TQSize &newSize);
 
     void selectionEnabled (bool on);
 
@@ -236,7 +236,7 @@ signals:
 private:
     int m_constructorWidth, m_constructorHeight;
     kpMainWindow *m_mainWindow;
-    QPixmap *m_pixmap;
+    TQPixmap *m_pixmap;
 
     KURL m_url;
     bool m_isFromURL;

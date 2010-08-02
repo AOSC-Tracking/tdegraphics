@@ -26,8 +26,8 @@
 
 #ifndef KSANEOCR_H
 #define KSANEOCR_H
-#include <qwidget.h>
-#include <qobject.h>
+#include <tqwidget.h>
+#include <tqobject.h>
 
 #include "ocrword.h"
 
@@ -53,9 +53,9 @@ class KOCRBase;
 class KookaImage;
 class KTempFile;
 class KProcess;
-class QRect;
-class QPixmap;
-class QStringList;
+class TQRect;
+class TQPixmap;
+class TQStringList;
 class KSpell;
 class KSpellConfig;
 class ImageCanvas;
@@ -78,10 +78,10 @@ class KSANEOCR : public QObject
 public:
     enum OCREngines{ GOCR, OCRAD, KADMOS };
 
-    KSANEOCR( QWidget*, KConfig *);
+    KSANEOCR( TQWidget*, KConfig *);
     ~KSANEOCR();
 
-    bool startOCRVisible( QWidget* parent=0);
+    bool startOCRVisible( TQWidget* parent=0);
 
     void finishedOCRVisible( bool );
 
@@ -98,7 +98,7 @@ public:
      * return the final ocr result
      */
 
-    QString ocrResultText();
+    TQString ocrResultText();
 
     /**
      * @return the current spell config.
@@ -116,9 +116,9 @@ public:
     void setImageCanvas( ImageCanvas* canvas );
 
 signals:
-    void newOCRResultText( const QString& );
+    void newOCRResultText( const TQString& );
     void clearOCRResultText();
-    void newOCRResultPixmap( const QPixmap& );
+    void newOCRResultPixmap( const TQPixmap& );
 
     /**
      * progress of the ocr process. The first integer is the main progress,
@@ -144,7 +144,7 @@ signals:
      * @param wordFrom  the original word
      * @param wordTo    the new word(s).
      */
-    void updateWord( int line, const QString& wordFrom, const QString& wordTo );
+    void updateWord( int line, const TQString& wordFrom, const TQString& wordTo );
 
     /**
      * signal to indicate that word word was ignored by the user. This should result
@@ -166,14 +166,14 @@ signals:
     /**
      * indicates that the text editor holding the text that came through
      * newOCRResultText should be set to readonly or not. Can be connected
-     * to QTextEdit::setReadOnly directly.
+     * to TQTextEdit::setReadOnly directly.
      */
     void readOnlyEditor( bool );
 
 public slots:
     void slSetImage( KookaImage* );
 
-    void slLineBox( const QRect& );
+    void slLineBox( const TQRect& );
 
 protected:
     /**
@@ -181,13 +181,13 @@ protected:
      *  This method starts the spell checking.
      **/
     void startLineSpellCheck();
-    ocrWord ocrWordFromKSpellWord( int line, const QString& word );
+    ocrWord ocrWordFromKSpellWord( int line, const TQString& word );
 
     /**
      * Eventhandler to handle the mouse events to the image viewer showing the
      * ocr result image
      */
-    bool eventFilter( QObject *object, QEvent *event );
+    bool eventFilter( TQObject *object, TQEvent *event );
 
     void startOCRAD();
 protected slots:
@@ -202,20 +202,20 @@ protected slots:
      */
     // void gotOCRLine( int line );
 
-    void slMisspelling( const QString& originalword,
-                        const QStringList& suggestions,
+    void slMisspelling( const TQString& originalword,
+                        const TQStringList& suggestions,
                         unsigned int pos );
-    void slSpellCorrected( const QString& originalword,
-                           const QString& newword,
+    void slSpellCorrected( const TQString& originalword,
+                           const TQString& newword,
                            unsigned int pos );
 
-    void slSpellIgnoreWord( const QString& word );
+    void slSpellIgnoreWord( const TQString& word );
 
     void slCheckListDone( bool );
 
     bool  slUpdateWord( int line, int spellWordIndx,
-                        const QString& origWord,
-                        const QString& newWord );
+                        const TQString& origWord,
+                        const TQString& newWord );
 
 private slots:
 
@@ -233,7 +233,7 @@ private slots:
      * reads orf files from a file and fills the result structures
      * accordingly.
      */
-    bool readORF( const QString&, QString& );
+    bool readORF( const TQString&, TQString& );
 
 private:
     void     cleanUpFiles( void );
@@ -245,15 +245,15 @@ private:
     KTempFile       *m_tmpFile;
 
     KookaImage      *m_img;
-    QString         m_ocrResultText;
-    QString         m_ocrResultImage;
-    QString         m_ocrImagePBM;
-    QString         m_tmpOrfName;
-    QImage          *m_resultImage;
+    TQString         m_ocrResultText;
+    TQString         m_ocrResultImage;
+    TQString         m_ocrImagePBM;
+    TQString         m_tmpOrfName;
+    TQImage          *m_resultImage;
 
     OCREngines      m_ocrEngine;
-    QPixmap         m_resPixmap;
-    QPixmap         m_storePixmap;
+    TQPixmap         m_resPixmap;
+    TQPixmap         m_storePixmap;
 
     ImageCanvas     *m_imgCanvas;
 
@@ -265,10 +265,10 @@ private:
 
     /* ValueVector of wordLists for every line of ocr results */
     ocrBlock         m_ocrPage; /* one block contains all lines of the page */
-    QWidget          *m_parent;
+    TQWidget          *m_parent;
     /* current processed line to speed kspell correction */
     unsigned         m_ocrCurrLine;
-    QStringList      m_checkStrings;
+    TQStringList      m_checkStrings;
 
     int              m_currHighlight;
     bool             m_applyFilter;

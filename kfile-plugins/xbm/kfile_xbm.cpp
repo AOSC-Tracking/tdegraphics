@@ -26,11 +26,11 @@
 #include <kstringvalidator.h>
 #include <kdebug.h>
 
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
 
 #if !defined(__osf__)
 #include <inttypes.h>
@@ -42,8 +42,8 @@ typedef KGenericFactory<KXbmPlugin> XbmFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_xbm, XbmFactory( "kfile_xbm" ))
 
-KXbmPlugin::KXbmPlugin(QObject *parent, const char *name,
-                       const QStringList &args)
+KXbmPlugin::KXbmPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args)
 
     : KFilePlugin(parent, name, args)
 {
@@ -55,7 +55,7 @@ KXbmPlugin::KXbmPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
     setHint( item, KFileMimeTypeInfo::Size );
     setUnit(item, KFileMimeTypeInfo::Pixels);
 }
@@ -96,11 +96,11 @@ unsigned long KXbmPlugin::xbm_processLine(char * linebuf)
 bool KXbmPlugin::readInfo( KFileMetaInfo& info, uint what)
 {
 
-    QFile file(info.path());
+    TQFile file(info.path());
 
     if (!file.open(IO_ReadOnly))
     {
-        kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
         return false;
     }
 
@@ -118,7 +118,7 @@ bool KXbmPlugin::readInfo( KFileMetaInfo& info, uint what)
     if ((width > 0) && (height > 0)) {
         // we have valid looking data
         KFileMetaInfoGroup group = appendGroup(info, "Technical");
-        appendItem(group, "Dimensions", QSize(width, height));
+        appendItem(group, "Dimensions", TQSize(width, height));
         return true;
     }
 

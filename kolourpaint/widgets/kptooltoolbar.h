@@ -29,16 +29,16 @@
 #ifndef __kp_tool_tool_bar_h__
 #define __kp_tool_tool_bar_h__
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 
 #include <ktoolbar.h>
 
 
-class QBoxLayout;
-class QButton;
-class QButtonGroup;
-class QWidget;
-class QGridLayout;
+class TQBoxLayout;
+class TQButton;
+class TQButtonGroup;
+class TQWidget;
+class TQGridLayout;
 
 class kpMainWindow;
 class kpTool;
@@ -56,7 +56,7 @@ class kpToolToolBar : public KToolBar
 Q_OBJECT
 
 public:
-    kpToolToolBar (const QString &label, kpMainWindow *mainWindow, int colsOrRows = 2, const char *name = 0);
+    kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, int colsOrRows = 2, const char *name = 0);
     virtual ~kpToolToolBar ();
 
 private:
@@ -102,16 +102,16 @@ public slots:
     virtual void setOrientation (Qt::Orientation o);
 
 private:
-    void addButton (QButton *button, Qt::Orientation o, int num);
+    void addButton (TQButton *button, Qt::Orientation o, int num);
 
     Qt::Orientation m_lastDockedOrientation;
     bool m_lastDockedOrientationSet;
     int m_vertCols;
 
-    QButtonGroup *m_buttonGroup;
-    QWidget *m_baseWidget;
-    QBoxLayout *m_baseLayout;
-    QGridLayout *m_toolLayout;
+    TQButtonGroup *m_buttonGroup;
+    TQWidget *m_baseWidget;
+    TQBoxLayout *m_baseLayout;
+    TQGridLayout *m_toolLayout;
 
     kpToolWidgetBrush *m_toolWidgetBrush;
     kpToolWidgetEraserSize *m_toolWidgetEraserSize;
@@ -120,12 +120,12 @@ private:
     kpToolWidgetOpaqueOrTransparent *m_toolWidgetOpaqueOrTransparent;
     kpToolWidgetSpraycanSize *m_toolWidgetSpraycanSize;
 
-    QValueVector <kpToolWidgetBase *> m_toolWidgets;
+    TQValueVector <kpToolWidgetBase *> m_toolWidgets;
 
 private:
     struct kpButtonToolPair
     {
-        kpButtonToolPair (QButton *button, kpTool *tool)
+        kpButtonToolPair (TQButton *button, kpTool *tool)
             : m_button (button), m_tool (tool)
         {
         }
@@ -135,11 +135,11 @@ private:
         {
         }
 
-        QButton *m_button;
+        TQButton *m_button;
         kpTool *m_tool;
     };
 
-    QValueVector <kpButtonToolPair> m_buttonToolPairs;
+    TQValueVector <kpButtonToolPair> m_buttonToolPairs;
 
     kpTool *m_previousTool, *m_currentTool;
     

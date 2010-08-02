@@ -10,8 +10,8 @@
 #ifndef KUICKFILE_H
 #define KUICKFILE_H
 
-#include <qobject.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqstring.h>
 
 #include <kurl.h>
 #include <kprogress.h>
@@ -43,7 +43,7 @@ public:
     const KURL& url() const { return m_url; }
 
 
-    QString localFile() const;
+    TQString localFile() const;
 
     bool download();
 
@@ -71,7 +71,7 @@ public:
      * immediately.
      * @return true when the download has finished or false when the user aborted the dialog
      */
-    KuickFile::DownloadStatus waitForDownload( QWidget *parent );
+    KuickFile::DownloadStatus waitForDownload( TQWidget *parent );
 
 //    bool needsDownload();
 
@@ -87,7 +87,7 @@ private slots:
 
 private:
     KURL m_url;
-    QString m_localFile;
+    TQString m_localFile;
     KIO::FileCopyJob *m_job;
     KProgress *m_progress;
     int m_currentProgress;

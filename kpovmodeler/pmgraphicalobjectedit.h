@@ -27,9 +27,9 @@
 #include "pmdetailobjectedit.h"
 
 class PMGraphicalObject;
-class QCheckBox;
-class QSpinBox;
-class QLabel;
+class TQCheckBox;
+class TQSpinBox;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMGraphicalObject.
@@ -42,7 +42,7 @@ public:
    /**
     * Creates a PMGraphicalObjectEdit with parent and name
     */
-   PMGraphicalObjectEdit( QWidget* parent, const char* name = 0 );
+   PMGraphicalObjectEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -64,14 +64,14 @@ private:
 
 private:
    PMGraphicalObject* m_pDisplayedObject;
-   QCheckBox* m_pNoShadowButton;
-   QCheckBox* m_pNoImageButton;
-   QCheckBox* m_pNoReflectionButton;
-   QCheckBox* m_pDoubleIlluminateButton;
-   QSpinBox* m_pVisibilityLevel;
-   QCheckBox* m_pRelativeVisibility;
-   QLabel* m_pResultingVisibility;
-   QCheckBox* m_pExport;
+   TQCheckBox* m_pNoShadowButton;
+   TQCheckBox* m_pNoImageButton;
+   TQCheckBox* m_pNoReflectionButton;
+   TQCheckBox* m_pDoubleIlluminateButton;
+   TQSpinBox* m_pVisibilityLevel;
+   TQCheckBox* m_pRelativeVisibility;
+   TQLabel* m_pResultingVisibility;
+   TQCheckBox* m_pExport;
 };
 
 

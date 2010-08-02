@@ -25,10 +25,10 @@
 
 #include "pmobject.h"
 
-#include <qstringlist.h>
-#include <qptrlist.h>
-#include <qdict.h>
-#include <qdom.h>
+#include <tqstringlist.h>
+#include <tqptrlist.h>
+#include <tqdict.h>
+#include <tqdom.h>
 
 class PMInsertRuleSystem;
 class PMPrototypeManager;
@@ -51,7 +51,7 @@ public:
    /**
     * Returns true if the given class types matches the category.
     */
-   virtual bool matches( const QString& className ) = 0;
+   virtual bool matches( const TQString& className ) = 0;
 };
 
 /**
@@ -66,13 +66,13 @@ public:
     */
    static PMPrototypeManager* s_pPrototypeManager;
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleClass( QDomElement& e );
+   PMRuleClass( TQDomElement& e );
    /** */
-   virtual bool matches( const QString& className );
+   virtual bool matches( const TQString& className );
 private:
-   QString m_className;
+   TQString m_className;
    PMPrototypeManager* m_pPrototypeManager;
 };
 
@@ -84,10 +84,10 @@ class PMRuleDefineGroup
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleDefineGroup( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                      QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleDefineGroup( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                      TQPtrList<PMRuleDefineGroup>& localGroups );
    /**
     * Destructor
     */
@@ -95,14 +95,14 @@ public:
    /**
     * Returns true if the given class types matches the category.
     */
-   virtual bool matches( const QString& className );
+   virtual bool matches( const TQString& className );
    /**
     * Returns the group's name
     */
-   QString name( ) const { return m_name; }
+   TQString name( ) const { return m_name; }
 private:
-   QPtrList<PMRuleCategory> m_categories;
-   QString m_name;
+   TQPtrList<PMRuleCategory> m_categories;
+   TQString m_name;
 };
 
 /**
@@ -112,12 +112,12 @@ class PMRuleGroup : public PMRuleCategory
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleGroup( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleGroup( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
-   bool matches( const QString& className );
+   bool matches( const TQString& className );
 private:
    PMRuleDefineGroup* m_pGroup;
 };
@@ -140,11 +140,11 @@ public:
    /**
     * Returns the node type.
     */
-   virtual QString type( ) const = 0;
+   virtual TQString type( ) const = 0;
    /**
     * Calls countChildProtected for this node and all child nodes
     */
-   void countChild( const QString& className, bool afterInsertPoint );
+   void countChild( const TQString& className, bool afterInsertPoint );
    /**
     * Calls resetProtected for this node and all child nodes
     */
@@ -152,16 +152,16 @@ public:
    /**
     * Returns an iterator to all child nodes
     */
-   QPtrListIterator<PMRuleBase> childIterator( ) const
+   TQPtrListIterator<PMRuleBase> childIterator( ) const
    {
-      return QPtrListIterator<PMRuleBase>( m_children );
+      return TQPtrListIterator<PMRuleBase>( m_children );
    }
 protected:
    /**
     * Reimplement this method if the nodes value depends
     * on already inserted child objects.
     */
-   virtual void countChildProtected( const QString&, bool ) { }
+   virtual void countChildProtected( const TQString&, bool ) { }
    /**
     * Reset all cached data (like counted child objects) here.
     */
@@ -170,7 +170,7 @@ protected:
    /**
     * Add all child nodes to this list.
     */
-   QPtrList<PMRuleBase> m_children;
+   TQPtrList<PMRuleBase> m_children;
 };
 
 /**
@@ -199,15 +199,15 @@ class PMRuleProperty : public PMRuleValue
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleProperty( QDomElement& e );
+   PMRuleProperty( TQDomElement& e );
    /** */
-   virtual QString type( ) const { return QString( "Property" ); }
+   virtual TQString type( ) const { return TQString( "Property" ); }
    /** */
    virtual PMVariant evaluate( const PMObject* o );
 private:
-   QString m_property;
+   TQString m_property;
 };
 
 
@@ -218,11 +218,11 @@ class PMRuleConstant : public PMRuleValue
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleConstant( QDomElement& e );
+   PMRuleConstant( TQDomElement& e );
    /** */
-   virtual QString type( ) const { return QString( "Constant" ); }
+   virtual TQString type( ) const { return TQString( "Constant" ); }
    /** */
    virtual PMVariant evaluate( const PMObject* );
    /**
@@ -241,28 +241,28 @@ class PMRuleCount : public PMRuleValue
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleCount( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleCount( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                TQPtrList<PMRuleDefineGroup>& localGroups );
    /**
     * Destructor
     */
    virtual ~PMRuleCount( );
    /** */
-   virtual QString type( ) const { return QString( "Count" ); }
+   virtual TQString type( ) const { return TQString( "Count" ); }
    /** */
    virtual PMVariant evaluate( const PMObject* );
 protected:
    /** */
-   virtual void countChildProtected( const QString& className,
+   virtual void countChildProtected( const TQString& className,
                                      bool afterInsertPoint );
    /**
     * Reset all cached data (like counted child objects) here.
     */
    virtual void resetProtected( );
 private:
-   QPtrList<PMRuleCategory> m_categories;
+   TQPtrList<PMRuleCategory> m_categories;
    int m_number;
 };
 
@@ -292,12 +292,12 @@ class PMRuleNot : public PMRuleCondition
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleNot( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-              QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleNot( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+              TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
-   virtual QString type( ) const { return QString( "Not" ); }
+   virtual TQString type( ) const { return TQString( "Not" ); }
    /** */
    virtual bool evaluate( const PMObject* object );
 private:
@@ -312,16 +312,16 @@ class PMRuleAnd : public PMRuleCondition
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleAnd( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-              QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleAnd( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+              TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
-   virtual QString type( ) const { return QString( "And" ); }
+   virtual TQString type( ) const { return TQString( "And" ); }
    /** */
    virtual bool evaluate( const PMObject* object );
 private:
-   QPtrList<PMRuleCondition> m_conditions;
+   TQPtrList<PMRuleCondition> m_conditions;
 };
 
 /**
@@ -331,16 +331,16 @@ class PMRuleOr : public PMRuleCondition
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleOr( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-             QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleOr( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+             TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
-   virtual QString type( ) const { return QString( "Or" ); }
+   virtual TQString type( ) const { return TQString( "Or" ); }
    /** */
    virtual bool evaluate( const PMObject* object );
 private:
-   QPtrList<PMRuleCondition> m_conditions;
+   TQPtrList<PMRuleCondition> m_conditions;
 };
 
 /**
@@ -351,26 +351,26 @@ class PMRuleBefore : public PMRuleCondition
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleBefore( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                 QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleBefore( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                 TQPtrList<PMRuleDefineGroup>& localGroups );
    /**
     * Destructor
     */
    virtual ~PMRuleBefore( );
    /** */
-   virtual QString type( ) const { return QString( "Before" ); }
+   virtual TQString type( ) const { return TQString( "Before" ); }
    /** */
    virtual bool evaluate( const PMObject* object );
 protected:
    /** */
-   virtual void countChildProtected( const QString& className,
+   virtual void countChildProtected( const TQString& className,
                                      bool afterInsertPoint );
    /** */
    virtual void resetProtected( );
 private:
-   QPtrList<PMRuleCategory> m_categories;
+   TQPtrList<PMRuleCategory> m_categories;
    bool m_contains;
 };
 
@@ -382,26 +382,26 @@ class PMRuleAfter : public PMRuleCondition
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleAfter( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleAfter( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                TQPtrList<PMRuleDefineGroup>& localGroups );
    /**
     * Destructor
     */
    virtual ~PMRuleAfter( );
    /** */
-   virtual QString type( ) const { return QString( "After" ); }
+   virtual TQString type( ) const { return TQString( "After" ); }
    /** */
    virtual bool evaluate( const PMObject* object );
 protected:
    /** */
-   virtual void countChildProtected( const QString& className,
+   virtual void countChildProtected( const TQString& className,
                                      bool afterInsertPoint );
    /** */
    virtual void resetProtected( );
 private:
-   QPtrList<PMRuleCategory> m_categories;
+   TQPtrList<PMRuleCategory> m_categories;
    bool m_contains;
 };
 
@@ -413,26 +413,26 @@ class PMRuleContains : public PMRuleCondition
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleContains( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                   QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleContains( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                   TQPtrList<PMRuleDefineGroup>& localGroups );
    /**
     * Destructor
     */
    virtual ~PMRuleContains( );
    /** */
-   virtual QString type( ) const { return QString( "Contains" ); }
+   virtual TQString type( ) const { return TQString( "Contains" ); }
    /** */
    virtual bool evaluate( const PMObject* object );
 protected:
    /** */
-   virtual void countChildProtected( const QString& className,
+   virtual void countChildProtected( const TQString& className,
                                      bool afterInsertPoint );
    /** */
    virtual void resetProtected( );
 private:
-   QPtrList<PMRuleCategory> m_categories;
+   TQPtrList<PMRuleCategory> m_categories;
    bool m_contains;
 };
 
@@ -443,10 +443,10 @@ class PMRuleCompare : public PMRuleCondition
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleCompare( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                  QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleCompare( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                  TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
    virtual bool evaluate( const PMObject* object );
 protected:
@@ -467,12 +467,12 @@ class PMRuleLess : public PMRuleCompare
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleLess( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-               QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleLess( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+               TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
-   virtual QString type( ) const { return QString( "Less" ); }
+   virtual TQString type( ) const { return TQString( "Less" ); }
 protected:
    /** */
    virtual bool compare( const PMVariant& v1, const PMVariant& v2 );
@@ -485,12 +485,12 @@ class PMRuleGreater : public PMRuleCompare
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleGreater( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                  QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleGreater( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                  TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
-   virtual QString type( ) const { return QString( "Greater" ); }
+   virtual TQString type( ) const { return TQString( "Greater" ); }
 protected:
    /** */
    virtual bool compare( const PMVariant& v1, const PMVariant& v2 );
@@ -503,12 +503,12 @@ class PMRuleEqual : public PMRuleCompare
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleEqual( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-                QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRuleEqual( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+                TQPtrList<PMRuleDefineGroup>& localGroups );
    /** */
-   virtual QString type( ) const { return QString( "Equal" ); }
+   virtual TQString type( ) const { return TQString( "Equal" ); }
 protected:
    /** */
    virtual bool compare( const PMVariant& v1, const PMVariant& v2 );
@@ -518,27 +518,27 @@ class PMRule : public PMRuleBase
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRule( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups,
-           QPtrList<PMRuleDefineGroup>& localGroups );
+   PMRule( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups,
+           TQPtrList<PMRuleDefineGroup>& localGroups );
    /**
     * Destructor
     */
    virtual ~PMRule( );
    /** */
-   virtual QString type( ) const { return QString( "Rule" ); }
+   virtual TQString type( ) const { return TQString( "Rule" ); }
    /**
     * Returns true if this rule matches for the given class.
     */
-   bool matches( const QString& className );
+   bool matches( const TQString& className );
    /**
     * Returns the conditions value.
     */
    bool evaluate( const PMObject* parent );
 
 private:
-   QPtrList<PMRuleCategory> m_categories;
+   TQPtrList<PMRuleCategory> m_categories;
    PMRuleCondition* m_pCondition;
 };
 
@@ -551,10 +551,10 @@ class PMRuleTargetClass
 {
 public:
    /**
-    * Reads the data from the QDomElement.
+    * Reads the data from the TQDomElement.
     */
-   PMRuleTargetClass( QDomElement& e,
-                      QPtrList<PMRuleDefineGroup>& globalGroups );
+   PMRuleTargetClass( TQDomElement& e,
+                      TQPtrList<PMRuleDefineGroup>& globalGroups );
    /**
     * Destructor
     */
@@ -564,27 +564,27 @@ public:
     * Reads rules and groups from the QDomELement and appends
     * them to the local ones.
     */
-   void appendRules( QDomElement& e, QPtrList<PMRuleDefineGroup>& globalGroups );
+   void appendRules( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups );
    /**
     * Returns an iterator to the rules
     */
-   QPtrListIterator<PMRule> rules( ) const
+   TQPtrListIterator<PMRule> rules( ) const
    {
-      return QPtrListIterator<PMRule>( m_rules );
+      return TQPtrListIterator<PMRule>( m_rules );
    }
    /**
     * Returns the class name
     */
-   QString name( ) const { return m_class; }
+   TQString name( ) const { return m_class; }
    /**
     * Returns a list of exceptions for this rule.
     */
-   QStringList exceptions( ) const { return m_exceptions; }
+   TQStringList exceptions( ) const { return m_exceptions; }
 private:
-   QPtrList<PMRuleDefineGroup> m_groups;
-   QPtrList<PMRule> m_rules;
-   QString m_class;
-   QStringList m_exceptions;
+   TQPtrList<PMRuleDefineGroup> m_groups;
+   TQPtrList<PMRule> m_rules;
+   TQString m_class;
+   TQStringList m_exceptions;
 };
 
 /**
@@ -615,7 +615,7 @@ public:
     * Rules are never loaded twice for the same file. It is save
     * to call this method twice for the same file.
     */
-   void loadRules( const QString& fileName );
+   void loadRules( const TQString& fileName );
 
    /**
     * Returns true if an object of the given class can be inserted as child
@@ -624,7 +624,7 @@ public:
     * The parser uses the third parameter for top level objects. These objects
     * have to be treated as if they are inserted after the object after.
     */
-   bool canInsert( const PMObject* parentObject, const QString& className,
+   bool canInsert( const PMObject* parentObject, const TQString& className,
                    const PMObject* after, const PMObjectList* objectsBetween = 0 );
 
    /**
@@ -647,7 +647,7 @@ public:
    /**
     * Returns the number of objects that can be inserted at that position
     */
-   int canInsert( const PMObject* parentObject, const QStringList& listOfClasses,
+   int canInsert( const PMObject* parentObject, const TQStringList& listOfClasses,
                   const PMObject* after );
    /**
     * Returns a pointer to the part
@@ -658,20 +658,20 @@ private:
    /**
     * List of all rules.
     */
-   QPtrList<PMRuleTargetClass> m_classRules;
+   TQPtrList<PMRuleTargetClass> m_classRules;
    /**
     * List of global groups
     */
-   QPtrList<PMRuleDefineGroup> m_groups;
+   TQPtrList<PMRuleDefineGroup> m_groups;
    /**
     * Dictionary that maps from the class name
     * to a list of rules that match.
     */
-   QDict<PMRuleTargetClass> m_rulesDict;
+   TQDict<PMRuleTargetClass> m_rulesDict;
    /**
     * List of already loaded files
     */
-   QStringList m_loadedFiles;
+   TQStringList m_loadedFiles;
    PMPart* m_pPart;
 };
 

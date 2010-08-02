@@ -33,15 +33,15 @@
 #include <float.h>
 #include <math.h>
 
-#include <qbitmap.h>
-#include <qcursor.h>
-#include <qlayout.h>
-#include <qpainter.h>
-#include <qpoint.h>
-#include <qpushbutton.h>
-#include <qrect.h>
-#include <qtooltip.h>
-#include <qvbuttongroup.h>
+#include <tqbitmap.h>
+#include <tqcursor.h>
+#include <tqlayout.h>
+#include <tqpainter.h>
+#include <tqpoint.h>
+#include <tqpushbutton.h>
+#include <tqrect.h>
+#include <tqtooltip.h>
+#include <tqvbuttongroup.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -58,16 +58,16 @@
 
 
 #if DEBUG_KP_TOOL_POLYGON
-static const char *pointArrayToString (const QPointArray &pointArray)
+static const char *pointArrayToString (const TQPointArray &pointArray)
 {
     static char string [1000];
     string [0] = '\0';
 
-    for (QPointArray::ConstIterator it = pointArray.begin ();
+    for (TQPointArray::ConstIterator it = pointArray.begin ();
          it != pointArray.end ();
          it++)
     {
-        QString ps = QString (" (%1, %2)").arg ((*it).x ()).arg ((*it).y ());
+        TQString ps = TQString (" (%1, %2)").arg ((*it).x ()).arg ((*it).y ());
         const char *pss = ps.latin1 ();
         if (strlen (string) + strlen (pss) + 1 > sizeof (string) / sizeof (string [0]))
             break;
@@ -79,18 +79,18 @@ static const char *pointArrayToString (const QPointArray &pointArray)
 #endif
 
 
-static QPen makeMaskPen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle)
+static TQPen makeMaskPen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle)
 {
-    return QPen (color.maskColor (),
+    return TQPen (color.maskColor (),
                  lineWidth == 1 ? 0/*closer to looking width 1*/ : lineWidth, lineStyle,
                  Qt::RoundCap, Qt::RoundJoin);
 }
 
-static QPen makePen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle)
+static TQPen makePen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle)
 {
     if (color.isOpaque ())
     {
-        return QPen (color.toQColor (),
+        return TQPen (color.toQColor (),
                      lineWidth == 1 ? 0/*closer to looking width 1*/ : lineWidth, lineStyle,
                      Qt::RoundCap, Qt::RoundJoin);
     }
@@ -98,7 +98,7 @@ static QPen makePen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle
         return Qt::NoPen;
 }
 
-static QBrush makeMaskBrush (const kpColor &foregroundColor,
+static TQBrush makeMaskBrush (const kpColor &foregroundColor,
                              const kpColor &backgroundColor,
                              kpToolWidgetFillStyle *toolWidgetFillStyle)
 {
@@ -108,7 +108,7 @@ static QBrush makeMaskBrush (const kpColor &foregroundColor,
         return Qt::NoBrush;
 }
 
-static QBrush makeBrush (const kpColor &foregroundColor,
+static TQBrush makeBrush (const kpColor &foregroundColor,
                          const kpColor &backgroundColor,
                          kpToolWidgetFillStyle *toolWidgetFillStyle)
 {
@@ -118,7 +118,7 @@ static QBrush makeBrush (const kpColor &foregroundColor,
         return Qt::NoBrush;
 }
 
-static bool only1PixelInPointArray (const QPointArray &points)
+static bool only1PixelInPointArray (const TQPointArray &points)
 {
     if (points.count () == 0)
         return false;
@@ -132,8 +132,8 @@ static bool only1PixelInPointArray (const QPointArray &points)
     return true;
 }
 
-static QPixmap pixmap (const QPixmap &oldPixmap,
-                       const QPointArray &points, const QRect &rect,
+static TQPixmap pixmap (const TQPixmap &oldPixmap,
+                       const TQPointArray &points, const TQRect &rect,
                        const kpColor &foregroundColor, kpColor backgroundColor,
                        int lineWidth, Qt::PenStyle lineStyle,
                        kpToolWidgetFillStyle *toolWidgetFillStyle,
@@ -142,7 +142,7 @@ static QPixmap pixmap (const QPixmap &oldPixmap,
     //
     // figure out points to draw relative to topLeft of oldPixmap
 
-    QPointArray pointsInRect = points;
+    TQPointArray pointsInRect = points;
     pointsInRect.detach ();
     pointsInRect.translate (-rect.x (), -rect.y ());
 
@@ -154,15 +154,15 @@ static QPixmap pixmap (const QPixmap &oldPixmap,
     //
     // draw
 
-    QPen pen = makePen (foregroundColor, lineWidth, lineStyle),
+    TQPen pen = makePen (foregroundColor, lineWidth, lineStyle),
          maskPen = makeMaskPen (foregroundColor, lineWidth, lineStyle);
-    QBrush brush = makeBrush (foregroundColor, backgroundColor, toolWidgetFillStyle),
+    TQBrush brush = makeBrush (foregroundColor, backgroundColor, toolWidgetFillStyle),
            maskBrush = makeMaskBrush (foregroundColor, backgroundColor, toolWidgetFillStyle);
 
-    QPixmap pixmap = oldPixmap;
-    QBitmap maskBitmap;
+    TQPixmap pixmap = oldPixmap;
+    TQBitmap maskBitmap;
 
-    QPainter painter, maskPainter;
+    TQPainter painter, maskPainter;
 
     if (pixmap.mask () ||
         (maskPen.style () != Qt::NoPen &&
@@ -233,7 +233,7 @@ static QPixmap pixmap (const QPixmap &oldPixmap,
                 {
                     if (painter.isActive ())
                     {
-                        QPen XORpen = painter.pen ();
+                        TQPen XORpen = painter.pen ();
                         XORpen.setColor (Qt::white);
 
                         painter.setPen (XORpen);
@@ -242,7 +242,7 @@ static QPixmap pixmap (const QPixmap &oldPixmap,
 
                     if (maskPainter.isActive ())
                     {
-                        QPen XORpen = maskPainter.pen ();
+                        TQPen XORpen = maskPainter.pen ();
 
                         // TODO???
                         #if 0
@@ -261,7 +261,7 @@ static QPixmap pixmap (const QPixmap &oldPixmap,
             break;
         case kpToolPolygon::Curve:
             int numPoints = pointsInRect.count ();
-            QPointArray pa (4);
+            TQPointArray pa (4);
 
             pa [0] = pointsInRect [0];
             pa [3] = pointsInRect [1];
@@ -303,7 +303,7 @@ static QPixmap pixmap (const QPixmap &oldPixmap,
  */
 
 kpToolPolygon::kpToolPolygon (Mode mode,
-                              const QString &text, const QString &description,
+                              const TQString &text, const TQString &description,
                               int key,
                               kpMainWindow *mainWindow, const char *name)
     : kpTool (text, description, key, mainWindow, name),
@@ -334,7 +334,7 @@ void kpToolPolygon::setMode (Mode m)
 
 
 // private
-QString kpToolPolygon::haventBegunShapeUserMessage () const
+TQString kpToolPolygon::haventBegunShapeUserMessage () const
 {
     switch (m_mode)
     {
@@ -346,7 +346,7 @@ QString kpToolPolygon::haventBegunShapeUserMessage () const
     case Curve:
         return i18n ("Drag out the start and end points.");
     default:
-        return QString::null;
+        return TQString::null;
     }
 }
 
@@ -370,11 +370,11 @@ void kpToolPolygon::begin ()
 
         if (m_toolWidgetFillStyle)
         {
-            connect (m_toolWidgetFillStyle, SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
-                     this, SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
+            connect (m_toolWidgetFillStyle, TQT_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
+                     this, TQT_SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
         }
-        connect (m_toolWidgetLineWidth, SIGNAL (lineWidthChanged (int)),
-                 this, SLOT (slotLineWidthChanged (int)));
+        connect (m_toolWidgetLineWidth, TQT_SIGNAL (lineWidthChanged (int)),
+                 this, TQT_SLOT (slotLineWidthChanged (int)));
 
         if (m_toolWidgetFillStyle)
             m_toolWidgetFillStyle->show ();
@@ -390,7 +390,7 @@ void kpToolPolygon::begin ()
         m_lineWidth = 1;
     }
 
-    viewManager ()->setCursor (QCursor (CrossCursor));
+    viewManager ()->setCursor (TQCursor (CrossCursor));
 
     m_originatingMouseButton = -1;
 
@@ -404,15 +404,15 @@ void kpToolPolygon::end ()
 
     if (m_toolWidgetFillStyle)
     {
-        disconnect (m_toolWidgetFillStyle, SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
-                    this, SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
+        disconnect (m_toolWidgetFillStyle, TQT_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
+                    this, TQT_SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
         m_toolWidgetFillStyle = 0;
     }
 
     if (m_toolWidgetLineWidth)
     {
-        disconnect (m_toolWidgetLineWidth, SIGNAL (lineWidthChanged (int)),
-                    this, SLOT (slotLineWidthChanged (int)));
+        disconnect (m_toolWidgetLineWidth, TQT_SIGNAL (lineWidthChanged (int)),
+                    this, TQT_SLOT (slotLineWidthChanged (int)));
         m_toolWidgetLineWidth = 0;
     }
 
@@ -549,13 +549,13 @@ void kpToolPolygon::applyModifiers ()
         if (fabs (KP_RADIANS_TO_DEGREES (angle) - 0)
             < kpPixmapFX::AngleInDegreesEpsilon)
         {
-            m_toolLineEndPoint = QPoint (m_toolLineEndPoint.x (), m_toolLineStartPoint.y ());
+            m_toolLineEndPoint = TQPoint (m_toolLineEndPoint.x (), m_toolLineStartPoint.y ());
         }
         // vertical (dist from start !maintained)
         else if (fabs (KP_RADIANS_TO_DEGREES (angle) - 90)
                  < kpPixmapFX::AngleInDegreesEpsilon)
         {
-            m_toolLineEndPoint = QPoint (m_toolLineStartPoint.x (), m_toolLineEndPoint.y ());
+            m_toolLineEndPoint = TQPoint (m_toolLineStartPoint.x (), m_toolLineEndPoint.y ());
         }
         // diagonal (dist from start maintained)
         else
@@ -569,7 +569,7 @@ void kpToolPolygon::applyModifiers ()
             const int newdy = qRound (dist * sin (angle) * sgn (diffy));
             #undef sgn
 
-            m_toolLineEndPoint = QPoint (m_toolLineStartPoint.x () + newdx,
+            m_toolLineEndPoint = TQPoint (m_toolLineStartPoint.x () + newdx,
                                          m_toolLineStartPoint.y () + newdy);
 
         #if DEBUG_KP_TOOL_POLYGON && 1
@@ -597,12 +597,12 @@ void kpToolPolygon::applyModifiers ()
     m_points [count - 2] = m_toolLineStartPoint;
     m_points [count - 1] = m_toolLineEndPoint;
 
-    m_toolLineRect = kpTool::neededRect (QRect (m_toolLineStartPoint, m_toolLineEndPoint).normalize (),
+    m_toolLineRect = kpTool::neededRect (TQRect (m_toolLineStartPoint, m_toolLineEndPoint).normalize (),
                                          m_lineWidth);
 }
 
 // virtual
-void kpToolPolygon::draw (const QPoint &, const QPoint &, const QRect &)
+void kpToolPolygon::draw (const TQPoint &, const TQPoint &, const TQRect &)
 {
     if (m_points.count () == 0)
         return;
@@ -638,7 +638,7 @@ void kpToolPolygon::updateShape ()
     if (m_points.count () == 0)
         return;
 
-    QRect boundingRect = kpTool::neededRect (m_points.boundingRect (), m_lineWidth);
+    TQRect boundingRect = kpTool::neededRect (m_points.boundingRect (), m_lineWidth);
 
 #if DEBUG_KP_TOOL_POLYGON
     kdDebug () << "kpToolPolygon::updateShape() boundingRect="
@@ -648,8 +648,8 @@ void kpToolPolygon::updateShape ()
                << endl;
 #endif
 
-    QPixmap oldPixmap = document ()->getPixmapAt (boundingRect);
-    QPixmap newPixmap = pixmap (oldPixmap,
+    TQPixmap oldPixmap = document ()->getPixmapAt (boundingRect);
+    TQPixmap newPixmap = pixmap (oldPixmap,
                                 m_points, boundingRect,
                                 color (m_mouseButton), color (1 - m_mouseButton),
                                 m_lineWidth, Qt::SolidLine,
@@ -668,7 +668,7 @@ void kpToolPolygon::updateShape ()
 void kpToolPolygon::cancelShape ()
 {
 #if 0
-    endDraw (QPoint (), QRect ());
+    endDraw (TQPoint (), TQRect ());
     commandHistory ()->undo ();
 #else
     viewManager ()->invalidateTempPixmap ();
@@ -687,7 +687,7 @@ void kpToolPolygon::releasedAllButtons ()
 }
 
 // virtual
-void kpToolPolygon::endDraw (const QPoint &, const QRect &)
+void kpToolPolygon::endDraw (const TQPoint &, const TQRect &)
 {
 #if DEBUG_KP_TOOL_POLYGON
     kdDebug () << "kpToolPolygon::endDraw()  m_points=" << pointArrayToString (m_points) << endl;
@@ -772,7 +772,7 @@ void kpToolPolygon::endDraw (const QPoint &, const QRect &)
 }
 
 // public virtual
-void kpToolPolygon::endShape (const QPoint &, const QRect &)
+void kpToolPolygon::endShape (const TQPoint &, const TQRect &)
 {
 #if DEBUG_KP_TOOL_POLYGON
     kdDebug () << "kpToolPolygon::endShape()  m_points=" << pointArrayToString (m_points) << endl;
@@ -783,7 +783,7 @@ void kpToolPolygon::endShape (const QPoint &, const QRect &)
 
     viewManager ()->invalidateTempPixmap ();
 
-    QRect boundingRect = kpTool::neededRect (m_points.boundingRect (), m_lineWidth);
+    TQRect boundingRect = kpTool::neededRect (m_points.boundingRect (), m_lineWidth);
 
     kpToolPolygonCommand *lineCommand =
         new kpToolPolygonCommand
@@ -840,13 +840,13 @@ void kpToolPolygon::slotBackgroundColorChanged (const kpColor &)
  * kpToolPolygonCommand
  */
 
-kpToolPolygonCommand::kpToolPolygonCommand (const QString &name,
-                                            const QPointArray &points,
-                                            const QRect &normalizedRect,
+kpToolPolygonCommand::kpToolPolygonCommand (const TQString &name,
+                                            const TQPointArray &points,
+                                            const TQRect &normalizedRect,
                                             const kpColor &foregroundColor, const kpColor &backgroundColor,
                                             int lineWidth, Qt::PenStyle lineStyle,
                                             kpToolWidgetFillStyle *toolWidgetFillStyle,
-                                            const QPixmap &originalArea,
+                                            const TQPixmap &originalArea,
                                             enum kpToolPolygon::Mode mode,
                                             kpMainWindow *mainWindow)
     : kpNamedCommand (name, mainWindow),
@@ -877,7 +877,7 @@ int kpToolPolygonCommand::size () const
 // public virtual [base kpCommand]
 void kpToolPolygonCommand::execute ()
 {
-    QPixmap p = pixmap (m_originalArea,
+    TQPixmap p = pixmap (m_originalArea,
                         m_points, m_normalizedRect,
                         m_foregroundColor, m_backgroundColor,
                         m_lineWidth, m_lineStyle,

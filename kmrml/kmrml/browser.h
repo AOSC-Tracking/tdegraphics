@@ -33,8 +33,8 @@ namespace KMrml
         Browser( MrmlPart *parent, const char *name );
         ~Browser();
 
-        virtual void saveState( QDataStream& stream );
-        virtual void restoreState( QDataStream& stream );
+        virtual void saveState( TQDataStream& stream );
+        virtual void restoreState( TQDataStream& stream );
 
         virtual int xOffset();
         virtual int yOffset();

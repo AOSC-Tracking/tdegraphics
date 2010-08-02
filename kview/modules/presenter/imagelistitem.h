@@ -23,9 +23,9 @@
 
 #include <klistview.h>
 #include <kurl.h>
-#include <qstring.h>
+#include <tqstring.h>
 
-class QImage;
+class TQImage;
 
 class ImageListItem : public KListViewItem
 {
@@ -33,15 +33,15 @@ class ImageListItem : public KListViewItem
 		ImageListItem( KListView * parent, const KURL & url );
 		~ImageListItem();
 
-		const QImage * image() const;
-		const QString & file() const;
+		const TQImage * image() const;
+		const TQString & file() const;
 		const KURL & url() const;
 
 		virtual int rtti() const { return 48294; }
 
 	private:
-		QImage * m_pImage;
-		QString m_filename;
+		TQImage * m_pImage;
+		TQString m_filename;
 		KURL m_url;
 };
 

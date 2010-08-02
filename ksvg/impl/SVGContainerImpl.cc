@@ -37,7 +37,7 @@ SVGContainerImpl::~SVGContainerImpl()
 SVGRectImpl *SVGContainerImpl::getBBox()
 {
 	// just get the union of the children bboxes
-	QRect rect;
+	TQRect rect;
 	DOM::Node node = firstChild();
 	for(; !node.isNull(); node = node.nextSibling())
 	{

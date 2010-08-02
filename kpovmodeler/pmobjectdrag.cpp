@@ -26,20 +26,20 @@
 #include "pmiomanager.h"
 #include "pmserializer.h"
 
-#include <qbuffer.h>
+#include <tqbuffer.h>
 #include <string.h>
 
 const char* const c_kpmDocumentMimeFormat = "application/x-kpovmodeler";
 
-PMObjectDrag::PMObjectDrag( PMPart* part, PMObject* object, QWidget* dragSource,
+PMObjectDrag::PMObjectDrag( PMPart* part, PMObject* object, TQWidget* dragSource,
                             const char* name )
-      : QDragObject( dragSource, name )
+      : TQDragObject( dragSource, name )
 {
-   QByteArray modelerData;
+   TQByteArray modelerData;
 
-   QTextStream s2( modelerData, IO_WriteOnly );
-   QDomDocument doc( "KPOVMODELER" );
-   QDomElement top = doc.createElement( "objects" );
+   TQTextStream s2( modelerData, IO_WriteOnly );
+   TQDomDocument doc( "KPOVMODELER" );
+   TQDomElement top = doc.createElement( "objects" );
    doc.appendChild( top );
    top.setAttribute( "majorFormat", c_majorDocumentFormat );
    top.setAttribute( "minorFormat", c_minorDocumentFormat );
@@ -49,13 +49,13 @@ PMObjectDrag::PMObjectDrag( PMPart* part, PMObject* object, QWidget* dragSource,
       PMObject* o = object->firstChild( );
       for( ; o; o = o->nextSibling( ) )
       {
-         QDomElement e = o->serialize( doc );
+         TQDomElement e = o->serialize( doc );
          top.appendChild( e );
       }
    }
    else
    {
-      QDomElement e = object->serialize( doc );
+      TQDomElement e = object->serialize( doc );
       top.appendChild( e );
    }
    s2 << doc;
@@ -63,14 +63,14 @@ PMObjectDrag::PMObjectDrag( PMPart* part, PMObject* object, QWidget* dragSource,
    m_data.push_back( modelerData );
    m_mimeTypes.push_back( c_kpmDocumentMimeFormat );
 
-   const QPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
-   QPtrListIterator<PMIOFormat> it( formats );
+   const TQPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
+   TQPtrListIterator<PMIOFormat> it( formats );
    for( ; it.current( ); ++it )
    {
       if( it.current( )->services( ) & PMIOFormat::Export )
       {
-         QByteArray data;
-         QBuffer buffer( data );
+         TQByteArray data;
+         TQBuffer buffer( data );
          buffer.open( IO_WriteOnly );
 
          PMSerializer* ser = it.current( )->newSerializer( &buffer );
@@ -96,15 +96,15 @@ PMObjectDrag::PMObjectDrag( PMPart* part, PMObject* object, QWidget* dragSource,
    }
 }
 
-PMObjectDrag::PMObjectDrag( PMPart* part, const PMObjectList& objList, QWidget* dragSource,
+PMObjectDrag::PMObjectDrag( PMPart* part, const PMObjectList& objList, TQWidget* dragSource,
                             const char* name )
-      : QDragObject( dragSource, name )
+      : TQDragObject( dragSource, name )
 {
-   QByteArray modelerData;
+   TQByteArray modelerData;
 
-   QTextStream s2( modelerData, IO_WriteOnly );
-   QDomDocument doc( "KPOVMODELER" );
-   QDomElement top = doc.createElement( "objects" );
+   TQTextStream s2( modelerData, IO_WriteOnly );
+   TQDomDocument doc( "KPOVMODELER" );
+   TQDomElement top = doc.createElement( "objects" );
    doc.appendChild( top );
    top.setAttribute( "majorFormat", c_majorDocumentFormat );
    top.setAttribute( "minorFormat", c_minorDocumentFormat );
@@ -117,13 +117,13 @@ PMObjectDrag::PMObjectDrag( PMPart* part, const PMObjectList& objList, QWidget* 
          PMObject* o = it.current( )->firstChild( );
          for( ; o; o = o->nextSibling( ) )
          {
-            QDomElement e = o->serialize( doc );
+            TQDomElement e = o->serialize( doc );
             top.appendChild( e );
          }
       }
       else
       {
-         QDomElement e = it.current( )->serialize( doc );
+         TQDomElement e = it.current( )->serialize( doc );
          top.appendChild( e );
       }
    }
@@ -133,14 +133,14 @@ PMObjectDrag::PMObjectDrag( PMPart* part, const PMObjectList& objList, QWidget* 
    m_data.push_back( modelerData );
    m_mimeTypes.push_back( c_kpmDocumentMimeFormat );
 
-   const QPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
-   QPtrListIterator<PMIOFormat> fit( formats );
+   const TQPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
+   TQPtrListIterator<PMIOFormat> fit( formats );
    for( ; fit.current( ); ++fit )
    {
       if( fit.current( )->services( ) & PMIOFormat::Export )
       {
-         QByteArray data;
-         QBuffer buffer( data );
+         TQByteArray data;
+         TQBuffer buffer( data );
          buffer.open( IO_WriteOnly );
 
          PMSerializer* ser = fit.current( )->newSerializer( &buffer );
@@ -170,10 +170,10 @@ PMObjectDrag::~PMObjectDrag( )
 {
 }
 
-QByteArray PMObjectDrag::encodedData( const char* format ) const
+TQByteArray PMObjectDrag::encodedData( const char* format ) const
 {
-   QValueList<QByteArray>::ConstIterator dit;
-   QStringList::ConstIterator sit;
+   TQValueList<TQByteArray>::ConstIterator dit;
+   TQStringList::ConstIterator sit;
 
    for( dit = m_data.begin( ), sit = m_mimeTypes.begin( );
         dit != m_data.end( ) && sit != m_mimeTypes.end( ); ++dit, ++sit )
@@ -182,7 +182,7 @@ QByteArray PMObjectDrag::encodedData( const char* format ) const
          return *dit;
    }
 
-   QByteArray empty;
+   TQByteArray empty;
    return empty;
 }
 
@@ -193,13 +193,13 @@ const char* PMObjectDrag::format( int i /*=0*/ ) const
    return 0;
 }
 
-bool PMObjectDrag::canDecode( const QMimeSource* e, PMPart* part )
+bool PMObjectDrag::canDecode( const TQMimeSource* e, PMPart* part )
 {
    if( e->provides( c_kpmDocumentMimeFormat ) )
       return true;
 
-   const QPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
-   QPtrListIterator<PMIOFormat> fit( formats );
+   const TQPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
+   TQPtrListIterator<PMIOFormat> fit( formats );
    for( ; fit.current( ); ++fit )
       if( fit.current( )->services( ) & PMIOFormat::Import &&
           e->provides( fit.current( )->mimeType( ).latin1( ) ) )
@@ -208,17 +208,17 @@ bool PMObjectDrag::canDecode( const QMimeSource* e, PMPart* part )
    return false;
 }
 
-PMParser* PMObjectDrag::newParser( const QMimeSource* e, PMPart* part )
+PMParser* PMObjectDrag::newParser( const TQMimeSource* e, PMPart* part )
 {
    if( e->provides( c_kpmDocumentMimeFormat ) )
       return new PMXMLParser( part, e->encodedData( c_kpmDocumentMimeFormat ) );
 
-   const QPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
-   QPtrListIterator<PMIOFormat> fit( formats );
+   const TQPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
+   TQPtrListIterator<PMIOFormat> fit( formats );
    for( ; fit.current( ); ++fit )
    {
       PMIOFormat* f = fit.current( );
-      QString str = f->mimeType( );
+      TQString str = f->mimeType( );
       const char* lat = str.latin1( );
       if( f->services( ) & PMIOFormat::Import && e->provides( lat ) )
          return f->newParser( part, e->encodedData( lat ) );

@@ -25,8 +25,8 @@
 #ifndef SVGEventImpl_H
 #define SVGEventImpl_H
 
-#include <qevent.h>
-#include <qdatetime.h>
+#include <tqevent.h>
+#include <tqdatetime.h>
 
 #include <dom/dom_misc.h>
 #include <dom/dom_node.h>
@@ -98,7 +98,7 @@ protected:
 	SVGElementImpl *m_target;
 
 	unsigned short m_eventPhase;
-	QDateTime m_createTime;
+	TQDateTime m_createTime;
 
 public:
 	KSVG_BASECLASS_GET
@@ -278,7 +278,7 @@ public:
 			bool inputGeneratedArg,
 			bool numPadArg);
 
-	SVGKeyEventImpl(QKeyEvent *key, DOM::AbstractView &view, SVGEvent::EventId _id);
+	SVGKeyEventImpl(TQKeyEvent *key, DOM::AbstractView &view, SVGEvent::EventId _id);
 
 	virtual bool isKeyEvent() { return true; }
 
@@ -363,7 +363,7 @@ public:
 
 	unsigned long virtKeyVal() const { return m_virtKeyVal; }
 
-	QKeyEvent *qKeyEvent;
+	TQKeyEvent *qKeyEvent;
 
 private:	
 	unsigned long m_keyVal;

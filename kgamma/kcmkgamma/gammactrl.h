@@ -21,35 +21,35 @@
 #ifndef GAMMACTRL_H
 #define GAMMACTRL_H
 
-#include <qhbox.h>
-#include <qslider.h>
+#include <tqhbox.h>
+#include <tqslider.h>
 
-class QString;
+class TQString;
 class DisplayNumber;
 class XVidExtWrap;
 
-class GammaCtrl : public QHBox  {
+class GammaCtrl : public TQHBox  {
 
   Q_OBJECT
   public:
     /** construktor */
-    GammaCtrl(QWidget *parent=0, XVidExtWrap *xvid=0, int channel=0, \
-      const QString& mingamma="0.40", const QString& maxgamma="3.50", \
-      const QString& setgamma="1.00", const char *name=0 );
+    GammaCtrl(TQWidget *parent=0, XVidExtWrap *xvid=0, int channel=0, \
+      const TQString& mingamma="0.40", const TQString& maxgamma="3.50", \
+      const TQString& setgamma="1.00", const char *name=0 );
     /** destruktor */
     ~GammaCtrl();
     /** Return the current gamma value with precision prec */
-    QString gamma(int);
+    TQString gamma(int);
     /** Set gamma, slider and textfield */
-    void setGamma(const QString&);
+    void setGamma(const TQString&);
     /** Set slider and textfield */
-    void setControl(const QString&);
+    void setControl(const TQString&);
     /** Disable the slider */
     void disableSlider() { slider->setDisabled(true);};
 
   private:
-    QString mgamma;
-    QSlider *slider;
+    TQString mgamma;
+    TQSlider *slider;
     DisplayNumber *textfield;
     bool suspended, changed;
     int gchannel, oldpos;

@@ -35,23 +35,23 @@
   *@author Klaas Freitag
 */
 
-class QListViewItem;
+class TQListViewItem;
 class KFileBranch;
 
 class ImageNameCombo: public KComboBox
 {
    Q_OBJECT
 public:
-   ImageNameCombo( QWidget* );
+   ImageNameCombo( TQWidget* );
    ~ImageNameCombo();
 
 public slots:
 
-   void slotGalleryPathChanged( KFileTreeBranch* branch, const QString& relativPath );
-   void slotPathRemove( KFileTreeBranch *branch, const QString& relPath );
+   void slotGalleryPathChanged( KFileTreeBranch* branch, const TQString& relativPath );
+   void slotPathRemove( KFileTreeBranch *branch, const TQString& relPath );
 private:
-   void rewriteList( KFileTreeBranch *, const QString& selText );
-   QStringList items;
+   void rewriteList( KFileTreeBranch *, const TQString& selText );
+   TQStringList items;
 };
 
 #endif

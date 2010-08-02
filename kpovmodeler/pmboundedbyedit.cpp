@@ -19,11 +19,11 @@
 #include "pmboundedbyedit.h"
 #include "pmboundedby.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
-PMBoundedByEdit::PMBoundedByEdit( QWidget* parent, const char* name )
+PMBoundedByEdit::PMBoundedByEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -33,9 +33,9 @@ void PMBoundedByEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   m_pChildLabel = new QLabel( i18n( "No child objects" ), this );
+   m_pChildLabel = new TQLabel( i18n( "No child objects" ), this );
    topLayout( )->addWidget( m_pChildLabel );
-   m_pClippedByLabel = new QLabel( i18n( "(= clipped by)" ), this );
+   m_pClippedByLabel = new TQLabel( i18n( "(= clipped by)" ), this );
    topLayout( )->addWidget( m_pClippedByLabel );   
 }
 

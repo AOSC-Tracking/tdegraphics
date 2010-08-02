@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qimage.h>
+#include <tqimage.h>
 
 #include "SVGPaint.h"
 #include "SVGRectImpl.h"
@@ -207,12 +207,12 @@ AggShape::~AggShape()
 	delete m_strokePainter;
 }
 
-QRect AggShape::bbox() const
+TQRect AggShape::bbox() const
 {
 	return m_bbox;
 }
 
-bool AggShape::fillContains(const QPoint &p)
+bool AggShape::fillContains(const TQPoint &p)
 {
 	agg::rasterizer_scanline_aa<> ras;
 	ras.filling_rule(m_style->getFillRule() == RULE_EVENODD ? agg::fill_even_odd : agg::fill_non_zero);
@@ -221,7 +221,7 @@ bool AggShape::fillContains(const QPoint &p)
 	return b;
 }
 
-bool AggShape::strokeContains(const QPoint &p)
+bool AggShape::strokeContains(const TQPoint &p)
 {
 	agg::rasterizer_scanline_aa<> ras;
 	ras.add_path(m_curved_stroked_trans);
@@ -287,7 +287,7 @@ void AggShape::draw(SVGShapeImpl *shape)
 
 	double x1, y1, x2, y2;
 	agg::bounding_rect(m_curved_trans, *this, 0, 1, &x1, &y1, &x2, &y2);
-	m_bbox = QRect(int(x1), int(y1), int(x2 - x1), int(y2 - y1));
+	m_bbox = TQRect(int(x1), int(y1), int(x2 - x1), int(y2 - y1));
 
 	m_curved.approximation_scale(pow(m_transform.scale(), 0.75));
 
@@ -309,7 +309,7 @@ void AggShape::calcSVPs(const SVGMatrixImpl *matrix)
 
 	double x1, y1, x2, y2;
 	agg::bounding_rect(m_curved_trans, *this, 0, 1, &x1, &y1, &x2, &y2);
-	m_bbox = QRect(int(x1), int(y1), int(x2 - x1), int(y2 - y1));
+	m_bbox = TQRect(int(x1), int(y1), int(x2 - x1), int(y2 - y1));
 }
 
 void AggShape::init(const SVGMatrixImpl *)
@@ -358,7 +358,7 @@ void AggStrokePaintServer::update(SVGStylableImpl *style)
 {
 	if(style->getStrokeColor()->paintType() != SVG_PAINTTYPE_URI)
 	{
-		QColor qcolor;
+		TQColor qcolor;
 		if(style->getStrokeColor()->paintType() == SVG_PAINTTYPE_CURRENTCOLOR)
 			qcolor = style->getColor()->rgbColor().color();
 		else
@@ -407,7 +407,7 @@ void AggFillPaintServer::update(SVGStylableImpl *style)
 {
 	if(style->getFillColor()->paintType() != SVG_PAINTTYPE_URI)
 	{
-		QColor qcolor;
+		TQColor qcolor;
 		if(style->getFillColor()->paintType() == SVG_PAINTTYPE_CURRENTCOLOR)
 			qcolor = style->getColor()->rgbColor().color();
 		else
@@ -678,7 +678,7 @@ void AggLine::draw()
 		{
 			m_canvas->m_ras.reset();
 			m_canvas->m_ras.add_path(m_curved_stroked_trans);
-			QColor qcolor;
+			TQColor qcolor;
 			if(m_style->getStrokeColor()->paintType() == SVG_PAINTTYPE_CURRENTCOLOR)
 				qcolor = m_style->getColor()->rgbColor().color();
 			else
@@ -995,9 +995,9 @@ void AggImage::draw()
 	{
 		//KSVGPolygon clippingPolygon = m_image->clippingShape();
 
-		QImage *img = m_image->image();
+		TQImage *img = m_image->image();
 		if(!img) return;
-		QImage image = m_image->scaledImage();
+		TQImage image = m_image->scaledImage();
 		agg::rendering_buffer source_buffer;
 		source_buffer.attach(image.bits(), image.width(), image.height(), image.width() * 4);
 
@@ -1053,9 +1053,9 @@ void AggImage::init()
 {
 }
 
-QRect AggImage::bbox() const
+TQRect AggImage::bbox() const
 {
-	QRect bbox(static_cast<int>(m_image->x()->baseVal()->value()),
+	TQRect bbox(static_cast<int>(m_image->x()->baseVal()->value()),
 			   static_cast<int>(m_image->y()->baseVal()->value()),
 			   static_cast<int>(m_image->width()->baseVal()->value()),
 			   static_cast<int>(m_image->height()->baseVal()->value()));
@@ -1077,9 +1077,9 @@ AggText::~AggText()
 {
 }
 
-bool AggText::fillContains(const QPoint &p)
+bool AggText::fillContains(const TQPoint &p)
 {
-	QPtrListIterator<SVPElement> it(m_drawItems);
+	TQPtrListIterator<SVPElement> it(m_drawItems);
 
 	SVPElement *fill = it.current();
 	while(fill)
@@ -1099,9 +1099,9 @@ bool AggText::fillContains(const QPoint &p)
 	return false;
 }
 
-bool AggText::strokeContains(const QPoint &p)
+bool AggText::strokeContains(const TQPoint &p)
 {
-	QPtrListIterator<SVPElement> it(m_drawItems);
+	TQPtrListIterator<SVPElement> it(m_drawItems);
 
 	SVPElement *stroke = it.current();
 	while(stroke)
@@ -1121,11 +1121,11 @@ bool AggText::strokeContains(const QPoint &p)
 	return false;
 }
 
-QRect AggText::bbox() const
+TQRect AggText::bbox() const
 {
-	QRect result, rect;
+	TQRect result, rect;
 
-	QPtrListIterator<SVPElement> it(m_drawItems);
+	TQPtrListIterator<SVPElement> it(m_drawItems);
 
 	SVPElement *elem = it.current();
 	while(elem)
@@ -1152,7 +1152,7 @@ void AggText::update(CanvasItemUpdate reason, int param1, int param2)
 {
 	if(reason == UPDATE_STYLE)
 	{
-		QPtrListIterator<SVPElement> it(m_drawItems);
+		TQPtrListIterator<SVPElement> it(m_drawItems);
 
 		SVPElement *svpelement = it.current();
 		SVGTextContentElementImpl *text;
@@ -1181,7 +1181,7 @@ void AggText::update(CanvasItemUpdate reason, int param1, int param2)
 	}
 	else if(reason == UPDATE_PAN)
 	{
-		QPtrListIterator<SVPElement> it(m_drawItems);
+		TQPtrListIterator<SVPElement> it(m_drawItems);
 
 		SVPElement *svpelement = it.current();
 		T2P::BezierPathAgg *bpath;
@@ -1202,7 +1202,7 @@ void AggText::update(CanvasItemUpdate reason, int param1, int param2)
 
 void AggText::draw()
 {
-	QPtrListIterator<SVPElement> it(m_drawItems);
+	TQPtrListIterator<SVPElement> it(m_drawItems);
 
 	SVPElement *svpelement = it.current();
 	BezierPathAggStroked *bpath;
@@ -1229,7 +1229,7 @@ void AggText::draw()
 bool AggText::isVisible()
 {
 	bool foundVisible = false;
-	QPtrListIterator<SVPElement> it(m_drawItems);
+	TQPtrListIterator<SVPElement> it(m_drawItems);
 
 	SVPElement *svpelement = it.current();
 	SVGTextContentElementImpl *text;
@@ -1361,7 +1361,7 @@ void AggGradient::parseGradientStops(SVGGradientElementImpl *gradient)
 			//offsets++;
 
 			// Get color
-			QColor qStopColor;
+			TQColor qStopColor;
 
 			if(elem->getStopColor()->colorType() == SVG_COLORTYPE_CURRENTCOLOR)
 				qStopColor = elem->getColor()->rgbColor().color();
@@ -1369,7 +1369,7 @@ void AggGradient::parseGradientStops(SVGGradientElementImpl *gradient)
 				qStopColor = elem->getStopColor()->rgbColor().color();
 
 			// Convert in an agg suitable form
-			QString tempName = qStopColor.name();
+			TQString tempName = qStopColor.name();
 			const char *str = tempName.latin1();
 
 			// We need to take into account fill/stroke opacity, if available (Rob)
@@ -1449,14 +1449,14 @@ void AggGradient::finalizePaintServer()
 {
 	parseGradientStops(m_gradient->stopsSource());
 
-	QString _href = SVGURIReferenceImpl::getTarget(m_gradient->href()->baseVal().string());
+	TQString _href = SVGURIReferenceImpl::getTarget(m_gradient->href()->baseVal().string());
 	if(!_href.isEmpty())
 		reference(_href);
 
 	setFinalized();
 }
 
-void AggGradient::reference(const QString &/*href*/)
+void AggGradient::reference(const TQString &/*href*/)
 {
 }
 
@@ -1475,7 +1475,7 @@ void AggLinearGradient::render(AggCanvas *c)
 	SVGMatrixImpl *gradTrans = linear->gradientTransform()->baseVal()->concatenate();
 	if(gradTrans)
 	{
-		QWMatrix m = gradTrans->qmatrix();
+		TQWMatrix m = gradTrans->qmatrix();
 		m.map(_x1, _y1, &_x1, &_y1);
 		m.map(_x2, _y2, &_x2, &_y2);
 		gradTrans->deref();
@@ -1613,7 +1613,7 @@ void AggRadialGradient::render(AggCanvas *c)
 	if(gradTrans)
 	{
 		agg::trans_affine mtx;
-		QWMatrix m = gradTrans->qmatrix();
+		TQWMatrix m = gradTrans->qmatrix();
 		mtx = agg::trans_affine(m.m11(), m.m12(), m.m21(), m.m22(), m.dx(), m.dy());
 		gradTrans->deref();
 		mtx_g1 *= mtx;
@@ -1693,7 +1693,7 @@ void AggPattern::finalizePaintServer()
 	setFinalized();
 }
 
-void AggPattern::reference(const QString &href)
+void AggPattern::reference(const TQString &href)
 {
 	m_pattern->reference(href);
 }
@@ -1704,7 +1704,7 @@ void AggPattern::render(AggCanvas *c)
 
         if(!tile.image().isNull())
         {
-                QWMatrix m = tile.screenToTile();
+                TQWMatrix m = tile.screenToTile();
                 double affine[6];
 
                 affine[0] = m.m11();

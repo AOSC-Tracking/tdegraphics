@@ -109,17 +109,17 @@ PMPovray31Format::~PMPovray31Format( )
 
 }
 
-PMParser* PMPovray31Format::newParser( PMPart* part, QIODevice* dev ) const
+PMParser* PMPovray31Format::newParser( PMPart* part, TQIODevice* dev ) const
 {
    return new PMPovrayParser( part, dev );
 }
 
-PMParser* PMPovray31Format::newParser( PMPart* part, const QByteArray& data ) const
+PMParser* PMPovray31Format::newParser( PMPart* part, const TQByteArray& data ) const
 {
    return new PMPovrayParser( part, data );
 }
 
-PMSerializer* PMPovray31Format::newSerializer( QIODevice* dev )
+PMSerializer* PMPovray31Format::newSerializer( TQIODevice* dev )
 {
    return new PMOutputDevice( dev, this );
 }
@@ -130,24 +130,24 @@ PMRenderer* PMPovray31Format::newRenderer( PMPart* ) const
    return 0;
 }
 
-QString PMPovray31Format::mimeType( ) const
+TQString PMPovray31Format::mimeType( ) const
 {
-   return QString( "text/plain" );
+   return TQString( "text/plain" );
 }
 
-QStringList PMPovray31Format::importPatterns( ) const
+TQStringList PMPovray31Format::importPatterns( ) const
 {
-   QStringList result;
-   result.push_back( QString( "*.pov *.inc|" )
+   TQStringList result;
+   result.push_back( TQString( "*.pov *.inc|" )
                      + i18n( "POV-Ray 3.1 Files (*.pov, *.inc)" ) );
    return result;
 }
 
-QStringList PMPovray31Format::exportPatterns( ) const
+TQStringList PMPovray31Format::exportPatterns( ) const
 {
-   QStringList result;
-   result.push_back( QString( "*.pov|" ) + i18n( "POV-Ray 3.1 Files (*.pov)" ) );
-   result.push_back( QString( "*.ini|" ) + i18n( "POV-Ray 3.1 Include Files (*.ini)" ) );
+   TQStringList result;
+   result.push_back( TQString( "*.pov|" ) + i18n( "POV-Ray 3.1 Files (*.pov)" ) );
+   result.push_back( TQString( "*.ini|" ) + i18n( "POV-Ray 3.1 Include Files (*.ini)" ) );
    return result;
 
 }

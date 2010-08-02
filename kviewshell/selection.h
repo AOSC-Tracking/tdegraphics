@@ -10,7 +10,7 @@
 
 #include "pageNumber.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 /* The --very simple-- class TextSelection represents text that the
@@ -22,7 +22,7 @@
    should hold indiced referring to the start and the end of the
    selected text in the appropriate documentPage's textLinkList
 
-   a QString, 'selectedText' that holds the text that is selected
+   a TQString, 'selectedText' that holds the text that is selected
 
    these values can be stored, retrieved, it can be checked if the
    selection is empty, and signals are emitted when the values change
@@ -47,7 +47,7 @@ public:
   // values; it is not even checked if selectedTextStart <=
   // selectedTextEnd! The signals pageChanged() and
   // selectionIsNotEmpty() are emitted if appropriate.
-  void          set(const PageNumber& pageNr, Q_INT32 selectedTextStart, Q_INT32 selectedTextEnd, const QString& text);
+  void          set(const PageNumber& pageNr, Q_INT32 selectedTextStart, Q_INT32 selectedTextEnd, const TQString& text);
   
   // This method can be used to find out if the selection is empty,
   // i.e. if the page number is invalid or the selected text is empty.
@@ -60,7 +60,7 @@ public:
   Q_INT32       getSelectedTextEnd() const {return selectedTextEnd;}
 
   // Method used to retrieve the data described above
-  const QString &getSelectedText() const {return selectedText;}
+  const TQString &getSelectedText() const {return selectedText;}
 
   // Method used to retrieve the data described above
   PageNumber    getPageNumber() const {return page;}
@@ -80,7 +80,7 @@ public:
   Q_INT32       selectedTextStart, selectedTextEnd;
 
   // Described above
-  QString       selectedText;
+  TQString       selectedText;
 };
 
 #endif

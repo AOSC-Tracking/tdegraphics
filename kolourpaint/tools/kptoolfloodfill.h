@@ -29,7 +29,7 @@
 #ifndef __kptoolfloodfill_h__
 #define __kptoolfloodfill_h__
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include <kpcommandhistory.h>
 
@@ -37,7 +37,7 @@
 #include <kptool.h>
 
 
-class QString;
+class TQString;
 
 class kpColor;
 
@@ -54,15 +54,15 @@ public:
     virtual ~kpToolFloodFill ();
 
 private:
-    QString haventBegunDrawUserMessage () const;
+    TQString haventBegunDrawUserMessage () const;
 
 public:
     virtual void begin ();
     virtual void beginDraw ();
-    virtual void draw (const QPoint &thisPoint, const QPoint &, const QRect &);
+    virtual void draw (const TQPoint &thisPoint, const TQPoint &, const TQRect &);
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
-    virtual void endDraw (const QPoint &, const QRect &);
+    virtual void endDraw (const TQPoint &, const TQRect &);
 
 private:
     kpToolFloodFillCommand *m_currentCommand;
@@ -77,7 +77,7 @@ public:
                             kpMainWindow *mainWindow);
     virtual ~kpToolFloodFillCommand ();
     
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
 
@@ -87,7 +87,7 @@ public:
     virtual void unexecute ();
 
 private:
-    QPixmap m_oldPixmap;
+    TQPixmap m_oldPixmap;
     bool m_fillEntirePixmap;
 };
 

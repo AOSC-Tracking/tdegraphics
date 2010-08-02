@@ -19,7 +19,7 @@
 #ifndef FILEWIDGET_H
 #define FILEWIDGET_H
 
-#include <qevent.h>
+#include <tqevent.h>
 
 #include <kdiroperator.h>
 
@@ -33,20 +33,20 @@ class FileWidget : public KDirOperator
 public:
     enum WhichItem { Previous, Next, Current };
 
-    FileWidget( const KURL& url, QWidget *parent = 0L, const char *name = 0L );
+    FileWidget( const KURL& url, TQWidget *parent = 0L, const char *name = 0L );
     ~FileWidget();
 
     bool hasFiles() const;
     void reloadConfiguration();
 
-    void setInitialItem( const QString& filename );
+    void setInitialItem( const TQString& filename );
 
     KFileItem *getCurrentItem( bool onlyImage ) const {
 	return getItem( Current, onlyImage );
     }
 
     void setCurrentItem( const KFileItem * );
-    void setCurrentItem( const QString& filename ) {
+    void setCurrentItem( const TQString& filename ) {
 	KDirOperator::setCurrentItem( filename );
     }
 
@@ -67,14 +67,14 @@ signals:
     void finished();
 
 protected:
-    virtual bool eventFilter( QObject *o, QEvent * );
-    virtual void resizeEvent( QResizeEvent * );
-    virtual void activatedMenu( const KFileItem *, const QPoint& );
-    virtual QSize sizeHint() const;
+    virtual bool eventFilter( TQObject *o, TQEvent * );
+    virtual void resizeEvent( TQResizeEvent * );
+    virtual void activatedMenu( const KFileItem *, const TQPoint& );
+    virtual TQSize sizeHint() const;
 
 private slots:
-    void slotReturnPressed( const QString& text );
-    void findCompletion( const QString& );
+    void slotReturnPressed( const TQString& text );
+    void findCompletion( const TQString& );
     void slotViewChanged();
 
     void slotItemsCleared();
@@ -89,8 +89,8 @@ private:
 
     bool m_validCompletion;
     FileFinder *m_fileFinder;
-    QString m_currentURL;
-    QString m_initialName;
+    TQString m_currentURL;
+    TQString m_initialName;
 
 };
 

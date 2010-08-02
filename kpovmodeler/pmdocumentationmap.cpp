@@ -20,35 +20,35 @@
 #include <kconfig.h>
 #include <kstandarddirs.h>
 
-#include <qfile.h>
-#include <qdom.h>
+#include <tqfile.h>
+#include <tqdom.h>
 
 #include "pmdebug.h"
 
 PMDocumentationMap* PMDocumentationMap::s_pInstance = 0;
 KStaticDeleter<PMDocumentationMap> PMDocumentationMap::s_staticDeleter;
 
-QString PMDocumentationVersion::documentation( const QString& className ) const
+TQString PMDocumentationVersion::documentation( const TQString& className ) const
 {
    if( m_map.contains( className ) )
       return m_map[className];
    return m_index;
 }
 
-void PMDocumentationVersion::loadData( QDomElement& e )
+void PMDocumentationVersion::loadData( TQDomElement& e )
 {
-   QString className;
-   QString target;
+   TQString className;
+   TQString target;
    
    m_version = e.attribute( "number", "3.1" );
    m_index = e.attribute( "index", "index.htm" );
 
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          className = me.attribute( "className", "" );
          target = me.attribute( "target", "" );
          if( !className.isEmpty( ) && !target.isEmpty( ) )
@@ -84,20 +84,20 @@ void PMDocumentationMap::restoreConfig( KConfig* cfg )
    m_currentVersion = cfg->readEntry( "DocumentationVersion", "3.1" );
 }
 
-void PMDocumentationMap::setDocumentationVersion( const QString& v )
+void PMDocumentationMap::setDocumentationVersion( const TQString& v )
 {
    m_currentVersion = v;
    if( m_mapLoaded )
       findVersion( );
 }
 
-QValueList<QString> PMDocumentationMap::availableVersions( )
+TQValueList<TQString> PMDocumentationMap::availableVersions( )
 {
    if( !m_mapLoaded )
       loadMap( );
 
-   QValueList<QString> result;
-   QPtrListIterator<PMDocumentationVersion> it( m_maps );
+   TQValueList<TQString> result;
+   TQPtrListIterator<PMDocumentationVersion> it( m_maps );
    
    for( ; it.current( ); ++it )
       result.push_back( it.current( )->version( ) );
@@ -105,15 +105,15 @@ QValueList<QString> PMDocumentationMap::availableVersions( )
    return result;
 }
 
-QString PMDocumentationMap::documentation( const QString& objectName )
+TQString PMDocumentationMap::documentation( const TQString& objectName )
 {
    if( !m_mapLoaded )
       loadMap( );
    
-   QString url;
+   TQString url;
 
    if( !m_documentationPath.isEmpty( ) )
-      if( !m_documentationPath.endsWith( QString( "/" ) ) )
+      if( !m_documentationPath.endsWith( TQString( "/" ) ) )
          m_documentationPath += "/";
    
    if( !m_documentationPath.isEmpty( ) && m_pCurrentVersion )
@@ -129,14 +129,14 @@ void PMDocumentationMap::loadMap( )
    {
       m_mapLoaded = true;
       
-      QString fileName = locate( "data", "kpovmodeler/povraydocmap.xml" );
+      TQString fileName = locate( "data", "kpovmodeler/povraydocmap.xml" );
       if( fileName.isEmpty( ) )
       {
          kdError( PMArea ) << "Povray documentation map not found" << endl;
          return;
       }
       
-      QFile file( fileName );
+      TQFile file( fileName );
       if( !file.open( IO_ReadOnly ) )
       {
          kdError( PMArea ) << "Could not open the povray documentation map file"
@@ -144,19 +144,19 @@ void PMDocumentationMap::loadMap( )
          return;
       }
 
-      QDomDocument doc( "DOCMAP" );
+      TQDomDocument doc( "DOCMAP" );
       doc.setContent( &file );
 
-      QDomElement e = doc.documentElement( );
-      QDomNode c = e.firstChild( );
+      TQDomElement e = doc.documentElement( );
+      TQDomNode c = e.firstChild( );
 
-      QString str;
+      TQString str;
 
       while( !c.isNull( ) )
       {
          if( c.isElement( ) )
          {
-            QDomElement ce = c.toElement( );
+            TQDomElement ce = c.toElement( );
             PMDocumentationVersion* v = new PMDocumentationVersion( );
             m_maps.append( v );
             v->loadData( ce );
@@ -170,7 +170,7 @@ void PMDocumentationMap::loadMap( )
 
 void PMDocumentationMap::findVersion( )
 {
-   QPtrListIterator< PMDocumentationVersion > it( m_maps );
+   TQPtrListIterator< PMDocumentationVersion > it( m_maps );
    bool found = false;
 
    m_pCurrentVersion = 0;

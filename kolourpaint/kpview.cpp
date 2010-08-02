@@ -35,20 +35,20 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include <qbitmap.h>
-#include <qcursor.h>
-#include <qdragobject.h>
-#include <qguardedptr.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qpoint.h>
-#include <qrect.h>
-#include <qregion.h>
-#include <qmemarray.h>
+#include <tqbitmap.h>
+#include <tqcursor.h>
+#include <tqdragobject.h>
+#include <tqguardedptr.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
+#include <tqrect.h>
+#include <tqregion.h>
+#include <tqmemarray.h>
 
 #if DEBUG_KP_VIEW || DEBUG_KP_VIEW_RENDERER
-    #include <qdatetime.h>
+    #include <tqdatetime.h>
 #endif
 
 #include <kdebug.h>
@@ -80,20 +80,20 @@ struct kpViewPrivate
     //
     // For more details, see SVN commit:
     //     "r385274 | dang | 2005-02-02 22:08:27 +1100 (Wed, 02 Feb 2005) | 21 lines".
-    QGuardedPtr <kpDocument> m_document;
-    QGuardedPtr <kpToolToolBar> m_toolToolBar;
-    QGuardedPtr <kpViewManager> m_viewManager;
-    QGuardedPtr <kpView> m_buddyView;
-    QGuardedPtr <kpViewScrollableContainer> m_scrollableContainer;
+    TQGuardedPtr <kpDocument> m_document;
+    TQGuardedPtr <kpToolToolBar> m_toolToolBar;
+    TQGuardedPtr <kpViewManager> m_viewManager;
+    TQGuardedPtr <kpView> m_buddyView;
+    TQGuardedPtr <kpViewScrollableContainer> m_scrollableContainer;
 
     int m_hzoom, m_vzoom;
-    QPoint m_origin;
+    TQPoint m_origin;
     bool m_showGrid;
     bool m_isBuddyViewScrollableContainerRectangleShown;
-    QRect m_buddyViewScrollableContainerRectangle;
+    TQRect m_buddyViewScrollableContainerRectangle;
 
-    QRegion m_queuedUpdateArea;
-    QPixmap *m_backBuffer;
+    TQRegion m_queuedUpdateArea;
+    TQPixmap *m_backBuffer;
 };
 
 
@@ -102,9 +102,9 @@ kpView::kpView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        QWidget *parent, const char *name)
+        TQWidget *parent, const char *name)
 
-    : QWidget (parent, name, Qt::WNoAutoErase/*no flicker*/),
+    : TQWidget (parent, name, Qt::WNoAutoErase/*no flicker*/),
       d (new kpViewPrivate ())
 {
     d->m_document = document;
@@ -114,7 +114,7 @@ kpView::kpView (kpDocument *document,
     d->m_scrollableContainer = scrollableContainer;
 
     d->m_hzoom = 100, d->m_vzoom = 100;
-    d->m_origin = QPoint (0, 0);
+    d->m_origin = TQPoint (0, 0);
     d->m_showGrid = false;
     d->m_isBuddyViewScrollableContainerRectangleShown = false;
 
@@ -122,7 +122,7 @@ kpView::kpView (kpDocument *document,
 
 
     setBackgroundMode (Qt::NoBackground);  // no flicker
-    setFocusPolicy (QWidget::WheelFocus);
+    setFocusPolicy (TQWidget::WheelFocus);
     setMouseTracking (true);  // mouseMoveEvent's even when no mousebtn down
     setKeyCompression (true);
     setInputMethodEnabled (true);  // ensure using InputMethod
@@ -218,13 +218,13 @@ void kpView::setZoomLevel (int hzoom, int vzoom)
 
 
 // public
-QPoint kpView::origin () const
+TQPoint kpView::origin () const
 {
     return d->m_origin;
 }
 
 // public virtual
-void kpView::setOrigin (const QPoint &origin)
+void kpView::setOrigin (const TQPoint &origin)
 {
 #if DEBUG_KP_VIEW
     kdDebug () << "kpView(" << name () << ")::setOrigin" << origin << endl;
@@ -297,55 +297,55 @@ void kpView::showBuddyViewScrollableContainerRectangle (bool yes)
         // Got these connect statements by analysing deps of
         // updateBuddyViewScrollableContainerRectangle() rect update code.
 
-        connect (this, SIGNAL (zoomLevelChanged (int, int)),
-                 this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
-        connect (this, SIGNAL (originChanged (const QPoint &)),
-                 this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+        connect (this, TQT_SIGNAL (zoomLevelChanged (int, int)),
+                 this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
+        connect (this, TQT_SIGNAL (originChanged (const TQPoint &)),
+                 this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
 
         if (buddyViewScrollableContainer ())
         {
-            connect (buddyViewScrollableContainer (), SIGNAL (contentsMovingSoon (int, int)),
-                     this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
-            connect (buddyViewScrollableContainer (), SIGNAL (resized ()),
-                     this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            connect (buddyViewScrollableContainer (), TQT_SIGNAL (contentsMovingSoon (int, int)),
+                     this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            connect (buddyViewScrollableContainer (), TQT_SIGNAL (resized ()),
+                     this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
         }
 
         if (buddyView ())
         {
-            connect (buddyView (), SIGNAL (zoomLevelChanged (int, int)),
-                     this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
-            connect (buddyView (), SIGNAL (originChanged (const QPoint &)),
-                     this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            connect (buddyView (), TQT_SIGNAL (zoomLevelChanged (int, int)),
+                     this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            connect (buddyView (), TQT_SIGNAL (originChanged (const TQPoint &)),
+                     this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
 
-            connect (buddyView (), SIGNAL (sizeChanged (int, int)),
-                     this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            connect (buddyView (), TQT_SIGNAL (sizeChanged (int, int)),
+                     this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
         }
 
     }
     else
     {
-        disconnect (this, SIGNAL (zoomLevelChanged (int, int)),
-                    this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
-        disconnect (this, SIGNAL (originChanged (const QPoint &)),
-                    this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+        disconnect (this, TQT_SIGNAL (zoomLevelChanged (int, int)),
+                    this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
+        disconnect (this, TQT_SIGNAL (originChanged (const TQPoint &)),
+                    this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
 
         if (buddyViewScrollableContainer ())
         {
-            disconnect (buddyViewScrollableContainer (), SIGNAL (contentsMovingSoon (int, int)),
-                        this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
-            disconnect (buddyViewScrollableContainer (), SIGNAL (resized ()),
-                        this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            disconnect (buddyViewScrollableContainer (), TQT_SIGNAL (contentsMovingSoon (int, int)),
+                        this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            disconnect (buddyViewScrollableContainer (), TQT_SIGNAL (resized ()),
+                        this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
         }
 
         if (buddyView ())
         {
-            disconnect (buddyView (), SIGNAL (zoomLevelChanged (int, int)),
-                        this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
-            disconnect (buddyView (), SIGNAL (originChanged (const QPoint &)),
-                        this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            disconnect (buddyView (), TQT_SIGNAL (zoomLevelChanged (int, int)),
+                        this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            disconnect (buddyView (), TQT_SIGNAL (originChanged (const TQPoint &)),
+                        this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
 
-            disconnect (buddyView (), SIGNAL (sizeChanged (int, int)),
-                        this, SLOT (updateBuddyViewScrollableContainerRectangle ()));
+            disconnect (buddyView (), TQT_SIGNAL (sizeChanged (int, int)),
+                        this, TQT_SLOT (updateBuddyViewScrollableContainerRectangle ()));
         }
 
     }
@@ -355,7 +355,7 @@ void kpView::showBuddyViewScrollableContainerRectangle (bool yes)
 
 
 // protected
-QRect kpView::buddyViewScrollableContainerRectangle () const
+TQRect kpView::buddyViewScrollableContainerRectangle () const
 {
     return d->m_buddyViewScrollableContainerRectangle;
 }
@@ -378,12 +378,12 @@ void kpView::updateBuddyViewScrollableContainerRectangle ()
         }
 
 
-        QRect newRect;
+        TQRect newRect;
         if (isBuddyViewScrollableContainerRectangleShown () &&
             buddyViewScrollableContainer () && buddyView ())
         {
-            QRect docRect = buddyView ()->transformViewToDoc (
-                QRect (buddyViewScrollableContainer ()->contentsXSoon (),
+            TQRect docRect = buddyView ()->transformViewToDoc (
+                TQRect (buddyViewScrollableContainer ()->contentsXSoon (),
                        buddyViewScrollableContainer ()->contentsYSoon (),
                        QMIN (buddyView ()->width (),
                              buddyViewScrollableContainer ()->visibleWidth ()),
@@ -391,19 +391,19 @@ void kpView::updateBuddyViewScrollableContainerRectangle ()
                              buddyViewScrollableContainer ()->visibleHeight ())));
 
 
-            QRect viewRect = this->transformDocToView (docRect);
+            TQRect viewRect = this->transformDocToView (docRect);
 
 
             // (Surround the area of interest by moving outwards by 1 pixel in each
             //  direction - don't overlap area)
-            newRect = QRect (viewRect.x () - 1,
+            newRect = TQRect (viewRect.x () - 1,
                              viewRect.y () - 1,
                              viewRect.width () + 2,
                              viewRect.height () + 2);
         }
         else
         {
-            newRect = QRect ();
+            newRect = TQRect ();
         }
 
         if (newRect != d->m_buddyViewScrollableContainerRectangle)
@@ -441,32 +441,32 @@ double kpView::transformViewToDocY (double viewY) const
 }
 
 // public
-QPoint kpView::transformViewToDoc (const QPoint &viewPoint) const
+TQPoint kpView::transformViewToDoc (const TQPoint &viewPoint) const
 {
-    return QPoint ((int) transformViewToDocX (viewPoint.x ()),
+    return TQPoint ((int) transformViewToDocX (viewPoint.x ()),
                    (int) transformViewToDocY (viewPoint.y ()));
 }
 
 // public
-QRect kpView::transformViewToDoc (const QRect &viewRect) const
+TQRect kpView::transformViewToDoc (const TQRect &viewRect) const
 {
     if (zoomLevelX () == 100 && zoomLevelY () == 100)
     {
-        return QRect (viewRect.x () - origin ().x (),
+        return TQRect (viewRect.x () - origin ().x (),
                       viewRect.y () - origin ().y (),
                       viewRect.width (),
                       viewRect.height ());
     }
     else
     {
-        const QPoint docTopLeft = transformViewToDoc (viewRect.topLeft ());
+        const TQPoint docTopLeft = transformViewToDoc (viewRect.topLeft ());
 
         // (don't call transformViewToDoc[XY]() - need to round up dimensions)
         const int docWidth = qRound (double (viewRect.width ()) * 100.0 / double (zoomLevelX ()));
         const int docHeight = qRound (double (viewRect.height ()) * 100.0 / double (zoomLevelY ()));
 
-        // (like QWMatrix::Areas)
-        return QRect (docTopLeft.x (), docTopLeft.y (), docWidth, docHeight);
+        // (like TQWMatrix::Areas)
+        return TQRect (docTopLeft.x (), docTopLeft.y (), docWidth, docHeight);
     }
 }
 
@@ -484,38 +484,38 @@ double kpView::transformDocToViewY (double docY) const
 }
 
 // public
-QPoint kpView::transformDocToView (const QPoint &docPoint) const
+TQPoint kpView::transformDocToView (const TQPoint &docPoint) const
 {
-    return QPoint ((int) transformDocToViewX (docPoint.x ()),
+    return TQPoint ((int) transformDocToViewX (docPoint.x ()),
                    (int) transformDocToViewY (docPoint.y ()));
 }
 
 // public
-QRect kpView::transformDocToView (const QRect &docRect) const
+TQRect kpView::transformDocToView (const TQRect &docRect) const
 {
     if (zoomLevelX () == 100 && zoomLevelY () == 100)
     {
-        return QRect (docRect.x () + origin ().x (),
+        return TQRect (docRect.x () + origin ().x (),
                       docRect.y () + origin ().y (),
                       docRect.width (),
                       docRect.height ());
     }
     else
     {
-        const QPoint viewTopLeft = transformDocToView (docRect.topLeft ());
+        const TQPoint viewTopLeft = transformDocToView (docRect.topLeft ());
 
         // (don't call transformDocToView[XY]() - need to round up dimensions)
         const int viewWidth = qRound (double (docRect.width ()) * double (zoomLevelX ()) / 100.0);
         const int viewHeight = qRound (double (docRect.height ()) * double (zoomLevelY ()) / 100.0);
 
-        // (like QWMatrix::Areas)
-        return QRect (viewTopLeft.x (), viewTopLeft.y (), viewWidth, viewHeight);
+        // (like TQWMatrix::Areas)
+        return TQRect (viewTopLeft.x (), viewTopLeft.y (), viewWidth, viewHeight);
     }
 }
 
 
 // public
-QPoint kpView::transformViewToOtherView (const QPoint &viewPoint,
+TQPoint kpView::transformViewToOtherView (const TQPoint &viewPoint,
                                          const kpView *otherView)
 {
     if (this == otherView)
@@ -527,7 +527,7 @@ QPoint kpView::transformViewToOtherView (const QPoint &viewPoint,
     const double otherViewX = otherView->transformDocToViewX (docX);
     const double otherViewY = otherView->transformDocToViewY (docY);
                    
-    return QPoint ((int) otherViewX, (int) otherViewY);
+    return TQPoint ((int) otherViewX, (int) otherViewY);
 }
 
 
@@ -566,7 +566,7 @@ void kpView::setHasMouse (bool yes)
 
 
 // public
-void kpView::addToQueuedArea (const QRegion &region)
+void kpView::addToQueuedArea (const TQRegion &region)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name ()
@@ -578,7 +578,7 @@ void kpView::addToQueuedArea (const QRegion &region)
 }
 
 // public
-void kpView::addToQueuedArea (const QRect &rect)
+void kpView::addToQueuedArea (const TQRect &rect)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name ()
@@ -596,7 +596,7 @@ void kpView::invalidateQueuedArea ()
     kdDebug () << "kpView::invalidateQueuedArea()" << endl;
 #endif
 
-    d->m_queuedUpdateArea = QRegion ();
+    d->m_queuedUpdateArea = TQRegion ();
 }
 
 // public
@@ -625,7 +625,7 @@ void kpView::updateQueuedArea ()
 }
 
 // public
-void kpView::updateMicroFocusHint (const QRect &microFocusHint)
+void kpView::updateMicroFocusHint (const TQRect &microFocusHint)
 {
     int x = microFocusHint.topLeft().x();
     int y = microFocusHint.topLeft().y();
@@ -635,25 +635,25 @@ void kpView::updateMicroFocusHint (const QRect &microFocusHint)
 }
 
 // public
-QRect kpView::selectionViewRect () const
+TQRect kpView::selectionViewRect () const
 {
     return selection () ?
                transformDocToView (selection ()->boundingRect ()) :
-               QRect ();
+               TQRect ();
 
 }
 
 // public
-QPoint kpView::mouseViewPoint (const QPoint &returnViewPoint) const
+TQPoint kpView::mouseViewPoint (const TQPoint &returnViewPoint) const
 {
     if (returnViewPoint != KP_INVALID_POINT)
         return returnViewPoint;
     else
-        return mapFromGlobal (QCursor::pos ());
+        return mapFromGlobal (TQCursor::pos ());
 }
 
 // public
-QPoint kpView::mouseViewPointRelativeToSelection (const QPoint &viewPoint) const
+TQPoint kpView::mouseViewPointRelativeToSelection (const TQPoint &viewPoint) const
 {
     if (!selection ())
         return KP_INVALID_POINT;
@@ -662,9 +662,9 @@ QPoint kpView::mouseViewPointRelativeToSelection (const QPoint &viewPoint) const
 }
 
 // public
-bool kpView::mouseOnSelection (const QPoint &viewPoint) const
+bool kpView::mouseOnSelection (const TQPoint &viewPoint) const
 {
-    const QRect selViewRect = selectionViewRect ();
+    const TQRect selViewRect = selectionViewRect ();
     if (!selViewRect.isValid ())
         return false;
 
@@ -682,7 +682,7 @@ int kpView::textSelectionMoveBorderAtomicSize () const
 }
 
 // public
-bool kpView::mouseOnSelectionToMove (const QPoint &viewPoint) const
+bool kpView::mouseOnSelectionToMove (const TQPoint &viewPoint) const
 {
     if (!mouseOnSelection (viewPoint))
         return false;
@@ -694,10 +694,10 @@ bool kpView::mouseOnSelectionToMove (const QPoint &viewPoint) const
         return false;
 
 
-    const QPoint viewPointRelSel = mouseViewPointRelativeToSelection (viewPoint);
+    const TQPoint viewPointRelSel = mouseViewPointRelativeToSelection (viewPoint);
 
     // Middle point should always be selectable
-    const QPoint selCenterDocPoint = selection ()->boundingRect ().center ();
+    const TQPoint selCenterDocPoint = selection ()->boundingRect ().center ();
     if (tool () &&
         tool ()->currentPoint () == selCenterDocPoint)
     {
@@ -706,7 +706,7 @@ bool kpView::mouseOnSelectionToMove (const QPoint &viewPoint) const
 
 
     const int atomicSize = textSelectionMoveBorderAtomicSize ();
-    const QRect selViewRect = selectionViewRect ();
+    const TQRect selViewRect = selectionViewRect ();
 
     return (viewPointRelSel.x () < atomicSize ||
             viewPointRelSel.x () >= selViewRect.width () - atomicSize ||
@@ -721,7 +721,7 @@ bool kpView::selectionLargeEnoughToHaveResizeHandlesIfAtomicSize (int atomicSize
     if (!selection ())
         return false;
 
-    const QRect selViewRect = selectionViewRect ();
+    const TQRect selViewRect = selectionViewRect ();
 
     return (selViewRect.width () >= atomicSize * 5 ||
             selViewRect.height () >= atomicSize * 5);
@@ -747,13 +747,13 @@ bool kpView::selectionLargeEnoughToHaveResizeHandles () const
 }
 
 // public
-QRegion kpView::selectionResizeHandlesViewRegion (bool forRenderer) const
+TQRegion kpView::selectionResizeHandlesViewRegion (bool forRenderer) const
 {
-    QRegion ret;
+    TQRegion ret;
 
     const int atomicLength = selectionResizeHandleAtomicSize ();
     if (atomicLength <= 0)
-        return QRegion ();
+        return TQRegion ();
 
 
     // HACK: At low zoom (e.g. 100%), resize handles will probably be too
@@ -790,10 +790,10 @@ QRegion kpView::selectionResizeHandlesViewRegion (bool forRenderer) const
     }
 
 
-    const QRect selViewRect = selectionViewRect ();
+    const TQRect selViewRect = selectionViewRect ();
 
 #define ADD_BOX_RELATIVE_TO_SELECTION(type,x,y)    \
-    ret += QRect ((x), (y), type##AtomicLength, type##AtomicLength)
+    ret += TQRect ((x), (y), type##AtomicLength, type##AtomicLength)
 
     ADD_BOX_RELATIVE_TO_SELECTION (normal,
                                    selViewRect.width () - normalAtomicLength,
@@ -830,7 +830,7 @@ QRegion kpView::selectionResizeHandlesViewRegion (bool forRenderer) const
 }
 
 // public
-int kpView::mouseOnSelectionResizeHandle (const QPoint &viewPoint) const
+int kpView::mouseOnSelectionResizeHandle (const TQPoint &viewPoint) const
 {
 #if DEBUG_KP_VIEW
     kdDebug () << "kpView::mouseOnSelectionResizeHandle(viewPoint="
@@ -846,7 +846,7 @@ int kpView::mouseOnSelectionResizeHandle (const QPoint &viewPoint) const
     }
 
 
-    const QRect selViewRect = selectionViewRect ();
+    const TQRect selViewRect = selectionViewRect ();
 #if DEBUG_KP_VIEW
     kdDebug () << "\tselViewRect=" << selViewRect << endl;
 #endif
@@ -867,14 +867,14 @@ int kpView::mouseOnSelectionResizeHandle (const QPoint &viewPoint) const
     }
 
 
-    const QPoint viewPointRelSel = mouseViewPointRelativeToSelection (viewPoint);
+    const TQPoint viewPointRelSel = mouseViewPointRelativeToSelection (viewPoint);
 #if DEBUG_KP_VIEW
     kdDebug () << "\tviewPointRelSel=" << viewPointRelSel << endl;
 #endif
 
 
 #define LOCAL_POINT_IN_BOX_AT(x,y)  \
-    QRect ((x), (y), atomicLength, atomicLength).contains (viewPointRelSel)
+    TQRect ((x), (y), atomicLength, atomicLength).contains (viewPointRelSel)
 
     // Favour the bottom & right and the corners.
     if (LOCAL_POINT_IN_BOX_AT (selViewRect.width () - atomicLength,
@@ -923,7 +923,7 @@ int kpView::mouseOnSelectionResizeHandle (const QPoint &viewPoint) const
 }
 
 // public
-bool kpView::mouseOnSelectionToSelectText (const QPoint &viewPoint) const
+bool kpView::mouseOnSelectionToSelectText (const TQPoint &viewPoint) const
 {
 #if DEBUG_KP_VIEW
     kdDebug () << "kpView::mouseOnSelectionToSelectText(viewPoint="
@@ -958,7 +958,7 @@ bool kpView::mouseOnSelectionToSelectText (const QPoint &viewPoint) const
 
 
 // protected virtual [base QWidget]
-void kpView::mouseMoveEvent (QMouseEvent *e)
+void kpView::mouseMoveEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::mouseMoveEvent ("
@@ -978,7 +978,7 @@ void kpView::mouseMoveEvent (QMouseEvent *e)
 }
 
 // protected virtual [base QWidget]
-void kpView::mousePressEvent (QMouseEvent *e)
+void kpView::mousePressEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::mousePressEvent ("
@@ -995,7 +995,7 @@ void kpView::mousePressEvent (QMouseEvent *e)
 }
 
 // protected virtual [base QWidget]
-void kpView::mouseReleaseEvent (QMouseEvent *e)
+void kpView::mouseReleaseEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::mouseReleaseEvent ("
@@ -1012,7 +1012,7 @@ void kpView::mouseReleaseEvent (QMouseEvent *e)
 }
 
 // public virtual [base QWidget]
-void kpView::wheelEvent (QWheelEvent *e)
+void kpView::wheelEvent (TQWheelEvent *e)
 {
     if (tool ())
         tool ()->wheelEvent (e);
@@ -1020,7 +1020,7 @@ void kpView::wheelEvent (QWheelEvent *e)
 
 
 // protected virtual [base QWidget]
-void kpView::keyPressEvent (QKeyEvent *e)
+void kpView::keyPressEvent (TQKeyEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::keyPressEvent()" << endl;
@@ -1033,7 +1033,7 @@ void kpView::keyPressEvent (QKeyEvent *e)
 }
 
 // protected virtual [base QWidget]
-void kpView::keyReleaseEvent (QKeyEvent *e)
+void kpView::keyReleaseEvent (TQKeyEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::keyReleaseEvent()" << endl;
@@ -1047,7 +1047,7 @@ void kpView::keyReleaseEvent (QKeyEvent *e)
 
 
 // protected virtual [base QWidget]
-void kpView::focusInEvent (QFocusEvent *e)
+void kpView::focusInEvent (TQFocusEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::focusInEvent()" << endl;
@@ -1057,7 +1057,7 @@ void kpView::focusInEvent (QFocusEvent *e)
 }
 
 // protected virtual [base QWidget]
-void kpView::focusOutEvent (QFocusEvent *e)
+void kpView::focusOutEvent (TQFocusEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::focusOutEvent()" << endl;
@@ -1068,7 +1068,7 @@ void kpView::focusOutEvent (QFocusEvent *e)
 
 
 // protected virtual [base QWidget]
-void kpView::enterEvent (QEvent *e)
+void kpView::enterEvent (TQEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::enterEvent()" << endl;
@@ -1090,7 +1090,7 @@ void kpView::enterEvent (QEvent *e)
 }
 
 // protected virtual [base QWidget]
-void kpView::leaveEvent (QEvent *e)
+void kpView::leaveEvent (TQEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
     kdDebug () << "kpView(" << name () << ")::leaveEvent()" << endl;
@@ -1103,7 +1103,7 @@ void kpView::leaveEvent (QEvent *e)
 
 
 // protected virtual [base QWidget]
-void kpView::dragEnterEvent (QDragEnterEvent *)
+void kpView::dragEnterEvent (TQDragEnterEvent *)
 {
 #if DEBUG_KP_VIEW && 1
     kdDebug () << "kpView(" << name () << ")::dragEnterEvent()" << endl;
@@ -1113,7 +1113,7 @@ void kpView::dragEnterEvent (QDragEnterEvent *)
 }
 
 // protected virtual [base QWidget]
-void kpView::dragLeaveEvent (QDragLeaveEvent *)
+void kpView::dragLeaveEvent (TQDragLeaveEvent *)
 {
 #if DEBUG_KP_VIEW && 1
     kdDebug () << "kpView(" << name () << ")::dragLeaveEvent" << endl;
@@ -1132,11 +1132,11 @@ void kpView::resize (int w, int h)
                << endl;
 #endif
 
-    QWidget::resize (w, h);
+    TQWidget::resize (w, h);
 }
 
 // protected virtual [base QWidget]
-void kpView::resizeEvent (QResizeEvent *e)
+void kpView::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_VIEW && 1
     kdDebug () << "kpView(" << name () << ")::resizeEvent("
@@ -1145,7 +1145,7 @@ void kpView::resizeEvent (QResizeEvent *e)
                << ") old=" << e->oldSize () << endl;
 #endif
 
-    QWidget::resizeEvent (e);
+    TQWidget::resizeEvent (e);
 
     emit sizeChanged (width (), height ());
     emit sizeChanged (size ());
@@ -1153,7 +1153,7 @@ void kpView::resizeEvent (QResizeEvent *e)
 
 
 // private virtual
-void kpView::imStartEvent (QIMEvent *e)
+void kpView::imStartEvent (TQIMEvent *e)
 {
 #if DEBUG_KP_VIEW && 1
     kdDebug () << "kpView(" << name () << ")::imStartEvent" << endl;
@@ -1165,7 +1165,7 @@ void kpView::imStartEvent (QIMEvent *e)
 }
 
 // private virtual
-void kpView::imComposeEvent (QIMEvent *e)
+void kpView::imComposeEvent (TQIMEvent *e)
 {
 #if DEBUG_KP_VIEW && 1
     kdDebug () << "kpView(" << name () << ")::imComposeEvent" << endl;
@@ -1177,7 +1177,7 @@ void kpView::imComposeEvent (QIMEvent *e)
 }
 
 // private virtual
-void kpView::imEndEvent (QIMEvent *e)
+void kpView::imEndEvent (TQIMEvent *e)
 {
 #if DEBUG_KP_VIEW && 1
     kdDebug () << "kpView(" << name () << ")::imEndEvent" << endl;
@@ -1194,13 +1194,13 @@ void kpView::imEndEvent (QIMEvent *e)
 //
 
 // protected
-QRect kpView::paintEventGetDocRect (const QRect &viewRect) const
+TQRect kpView::paintEventGetDocRect (const TQRect &viewRect) const
 {
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "kpView::paintEventGetDocRect(" << viewRect << ")" << endl;
 #endif
 
-    QRect docRect;
+    TQRect docRect;
 
     // From the "we aren't sure whether to round up or round down" department:
 
@@ -1210,7 +1210,7 @@ QRect kpView::paintEventGetDocRect (const QRect &viewRect) const
     {
         // think of a grid - you need to fully cover the zoomed-in pixels
         // when docRect is zoomed back to the view later
-        docRect = QRect (transformViewToDoc (viewRect.topLeft ()),  // round down
+        docRect = TQRect (transformViewToDoc (viewRect.topLeft ()),  // round down
                          transformViewToDoc (viewRect.bottomRight ()));  // round down
     }
 
@@ -1220,7 +1220,7 @@ QRect kpView::paintEventGetDocRect (const QRect &viewRect) const
         // - helpful because it ensures we at least cover the required area
         //   at e.g. 67% or 573%
         // - harmless since paintEventDrawRect() clips for us anyway
-        docRect.setBottomRight (docRect.bottomRight () + QPoint (2, 2));
+        docRect.setBottomRight (docRect.bottomRight () + TQPoint (2, 2));
     }
 
 #if DEBUG_KP_VIEW_RENDERER && 1
@@ -1239,9 +1239,9 @@ QRect kpView::paintEventGetDocRect (const QRect &viewRect) const
 }
 
 // public
-void kpView::drawTransparentBackground (QPainter *painter,
+void kpView::drawTransparentBackground (TQPainter *painter,
                                         int /*viewWidth*/, int /*viewHeight*/,
-                                        const QRect &rect,
+                                        const TQRect &rect,
                                         bool isPreview)
 {
     const int cellSize = !isPreview ? 16 : 10;
@@ -1260,14 +1260,14 @@ void kpView::drawTransparentBackground (QPainter *painter,
         for (int x = startx; x <= rect.right (); x += cellSize)
         {
             bool parity = (x / cellSize + y / cellSize) % 2;
-            QColor col;
+            TQColor col;
 
             if (parity)
             {
                 if (!isPreview)
-                    col = QColor (213, 213, 213);
+                    col = TQColor (213, 213, 213);
                 else
-                    col = QColor (224, 224, 224);
+                    col = TQColor (224, 224, 224);
             }
             else
                 col = Qt::white;
@@ -1280,7 +1280,7 @@ void kpView::drawTransparentBackground (QPainter *painter,
 }
 
 // protected
-void kpView::paintEventDrawCheckerBoard (QPainter *painter, const QRect &viewRect)
+void kpView::paintEventDrawCheckerBoard (TQPainter *painter, const TQRect &viewRect)
 {
     kpDocument *doc = document ();
     if (!doc)
@@ -1293,7 +1293,7 @@ void kpView::paintEventDrawCheckerBoard (QPainter *painter, const QRect &viewRec
 }
 
 // protected
-void kpView::paintEventDrawSelection (QPixmap *destPixmap, const QRect &docRect)
+void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRect)
 {
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "kpView::paintEventDrawSelection() docRect=" << docRect << endl;
@@ -1339,15 +1339,15 @@ void kpView::paintEventDrawSelection (QPixmap *destPixmap, const QRect &docRect)
 #endif
     if (vm->selectionBorderVisible ())
     {
-        QPainter destPixmapPainter (destPixmap);
+        TQPainter destPixmapPainter (destPixmap);
         destPixmapPainter.setRasterOp (Qt::XorROP);
-        destPixmapPainter.setPen (QPen (Qt::white, 1, Qt::DotLine));
+        destPixmapPainter.setPen (TQPen (Qt::white, 1, Qt::DotLine));
 
-        destPixmapPainter.setBackgroundMode (QPainter::OpaqueMode);
+        destPixmapPainter.setBackgroundMode (TQPainter::OpaqueMode);
         destPixmapPainter.setBackgroundColor (Qt::blue);
 
-        QBitmap maskBitmap;
-        QPainter maskBitmapPainter;
+        TQBitmap maskBitmap;
+        TQPainter maskBitmapPainter;
         if (destPixmap->mask ())
         {
             maskBitmap = *destPixmap->mask ();
@@ -1363,7 +1363,7 @@ void kpView::paintEventDrawSelection (QPixmap *destPixmap, const QRect &docRect)
             maskBitmapPainter . cmd;         \
     }
 
-        QRect boundingRect = sel->boundingRect ();
+        TQRect boundingRect = sel->boundingRect ();
     #if DEBUG_KP_VIEW_RENDERER && 1
         kdDebug () << "\tsel boundingRect="
                    << boundingRect
@@ -1405,7 +1405,7 @@ void kpView::paintEventDrawSelection (QPixmap *destPixmap, const QRect &docRect)
             #if DEBUG_KP_VIEW_RENDERER
                 kdDebug () << "\tselection border = freeForm" << endl;
             #endif
-                QPointArray points = sel->points ();
+                TQPointArray points = sel->points ();
                 points.detach ();
                 points.translate (-docRect.x (), -docRect.y ());
                 if (vm->selectionBorderFinished ())
@@ -1470,18 +1470,18 @@ void kpView::paintEventDrawSelection (QPixmap *destPixmap, const QRect &docRect)
         !vm->activeView ()))  // sync: call will break when vm is not held by 1 mainWindow
     {
         // TODO: Fix code duplication: kpViewManager::{setTextCursorPosition,updateTextCursor}() & kpView::paintEventDrawSelection()
-        QPoint topLeft = sel->pointForTextRowCol (vm->textCursorRow (), vm->textCursorCol ());
+        TQPoint topLeft = sel->pointForTextRowCol (vm->textCursorRow (), vm->textCursorCol ());
         if (topLeft != KP_INVALID_POINT)
         {
-            QRect rect = QRect (topLeft.x (), topLeft.y (),
+            TQRect rect = TQRect (topLeft.x (), topLeft.y (),
                                 1, sel->textStyle ().fontMetrics ().height ());
             rect = rect.intersect (sel->textAreaRect ());
             if (!rect.isEmpty ())
             {
                 rect.moveBy (-docRect.x (), -docRect.y ());
 
-                QBitmap maskBitmap;
-                QPainter destPixmapPainter, maskBitmapPainter;
+                TQBitmap maskBitmap;
+                TQPainter destPixmapPainter, maskBitmapPainter;
 
                 if (destPixmap->mask ())
                 {
@@ -1510,7 +1510,7 @@ bool kpView::selectionResizeHandleAtomicSizeCloseToZoomLevel () const
 }
 
 // protected
-void kpView::paintEventDrawSelectionResizeHandles (QPainter *painter, const QRect &viewRect)
+void kpView::paintEventDrawSelectionResizeHandles (TQPainter *painter, const TQRect &viewRect)
 {
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "kpView::paintEventDrawSelectionResizeHandles("
@@ -1535,7 +1535,7 @@ void kpView::paintEventDrawSelectionResizeHandles (QPainter *painter, const QRec
         return;
     }
 
-    const QRect selViewRect = selectionViewRect ();
+    const TQRect selViewRect = selectionViewRect ();
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "\tselViewRect=" << selViewRect << endl;
 #endif
@@ -1547,7 +1547,7 @@ void kpView::paintEventDrawSelectionResizeHandles (QPainter *painter, const QRec
         return;
     }
 
-    QRegion selResizeHandlesRegion = selectionResizeHandlesViewRegion (true/*for renderer*/);
+    TQRegion selResizeHandlesRegion = selectionResizeHandlesViewRegion (true/*for renderer*/);
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "\tsel resize handles view region="
                << selResizeHandlesRegion << endl;
@@ -1556,7 +1556,7 @@ void kpView::paintEventDrawSelectionResizeHandles (QPainter *painter, const QRec
 
     painter->save ();
 
-    QColor fillColor;
+    TQColor fillColor;
     if (selectionResizeHandleAtomicSizeCloseToZoomLevel ())
     {
         fillColor = Qt::blue;
@@ -1568,8 +1568,8 @@ void kpView::paintEventDrawSelectionResizeHandles (QPainter *painter, const QRec
         painter->setRasterOp (Qt::XorROP);
     }
 
-    QMemArray <QRect> rects = selResizeHandlesRegion.rects ();
-    for (QMemArray <QRect>::ConstIterator it = rects.begin ();
+    TQMemArray <TQRect> rects = selResizeHandlesRegion.rects ();
+    for (TQMemArray <TQRect>::ConstIterator it = rects.begin ();
          it != rects.end ();
          it++)
     {
@@ -1580,7 +1580,7 @@ void kpView::paintEventDrawSelectionResizeHandles (QPainter *painter, const QRec
 }
 
 // protected
-void kpView::paintEventDrawTempPixmap (QPixmap *destPixmap, const QRect &docRect)
+void kpView::paintEventDrawTempPixmap (TQPixmap *destPixmap, const TQRect &docRect)
 {
     kpViewManager *vm = viewManager ();
     if (!vm)
@@ -1602,13 +1602,13 @@ void kpView::paintEventDrawTempPixmap (QPixmap *destPixmap, const QRect &docRect
 }
 
 // protected
-void kpView::paintEventDrawGridLines (QPainter *painter, const QRect &viewRect)
+void kpView::paintEventDrawGridLines (TQPainter *painter, const TQRect &viewRect)
 {
     int hzoomMultiple = zoomLevelX () / 100;
     int vzoomMultiple = zoomLevelY () / 100;
 
-    QPen ordinaryPen (Qt::gray);
-    QPen tileBoundaryPen (Qt::lightGray);
+    TQPen ordinaryPen (Qt::gray);
+    TQPen tileBoundaryPen (Qt::lightGray);
 
     painter->setPen (ordinaryPen);
 
@@ -1658,7 +1658,7 @@ void kpView::paintEventDrawGridLines (QPainter *painter, const QRect &viewRect)
 }
 
 
-void kpView::paintEventDrawRect (const QRect &viewRect)
+void kpView::paintEventDrawRect (const TQRect &viewRect)
 {
 #if DEBUG_KP_VIEW_RENDERER
     kdDebug () << "\tkpView::paintEventDrawRect(viewRect=" << viewRect
@@ -1676,7 +1676,7 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
         return;
 
 
-    QRect docRect = paintEventGetDocRect (viewRect);
+    TQRect docRect = paintEventGetDocRect (viewRect);
 
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "\tdocRect=" << docRect << endl;
@@ -1684,7 +1684,7 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
 
 // uncomment to cause deliberate flicker (identifies needless updates)
 #if DEBUG_KP_VIEW_RENDERER && 0
-    QPainter flickerPainter (this);
+    TQPainter flickerPainter (this);
     flickerPainter.fillRect (viewRect, Qt::red);
     flickerPainter.end ();
 #endif
@@ -1700,13 +1700,13 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
         d->m_backBuffer->width () > width () ||
         d->m_backBuffer->height () > height ())
     {
-        // don't use QPixmap::resize() as that wastes time copying pixels
+        // don't use TQPixmap::resize() as that wastes time copying pixels
         // that will be overwritten anyway
         //
         // OPT: Should use doubling trick or at least go up in multiples
         //      to reduce X server pressure.
         delete d->m_backBuffer;
-        d->m_backBuffer = new QPixmap (viewRect.width (), viewRect.height ());
+        d->m_backBuffer = new TQPixmap (viewRect.width (), viewRect.height ());
     }
 
 // uncomment to catch bits of the view that the renderer forgot to update
@@ -1714,7 +1714,7 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
     d->m_backBuffer->fill (Qt::green);
 #endif
 
-    QPainter backBufferPainter;
+    TQPainter backBufferPainter;
     backBufferPainter.begin (d->m_backBuffer);
 
 
@@ -1722,7 +1722,7 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
     // Draw checkboard for transparent images and/or views with borders
     //
 
-    QPixmap docPixmap;
+    TQPixmap docPixmap;
 
     bool tempPixmapWillBeRendered = false;
 
@@ -1784,7 +1784,7 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
     #endif
         // blit scaled version of docPixmap + tempPixmap onto Back Buffer
     #if DEBUG_KP_VIEW_RENDERER && 1
-        QTime scaleTimer; scaleTimer.start ();
+        TQTime scaleTimer; scaleTimer.start ();
     #endif
         backBufferPainter.translate (origin ().x () - viewRect.x (),
                                      origin ().y () - viewRect.y ());
@@ -1806,7 +1806,7 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
     if (isGridShown ())
     {
     #if DEBUG_KP_VIEW_RENDERER && 1
-        QTime gridTimer; gridTimer.start ();
+        TQTime gridTimer; gridTimer.start ();
     #endif
         paintEventDrawGridLines (&backBufferPainter, viewRect);
     #if DEBUG_KP_VIEW_RENDERER && 1
@@ -1815,7 +1815,7 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
     }
 
 
-    const QRect bvsvRect = buddyViewScrollableContainerRectangle ();
+    const TQRect bvsvRect = buddyViewScrollableContainerRectangle ();
     if (!bvsvRect.isEmpty ())
     {
         backBufferPainter.save ();
@@ -1846,19 +1846,19 @@ void kpView::paintEventDrawRect (const QRect &viewRect)
     backBufferPainter.end ();
 
     bitBlt (this, viewRect.topLeft (),
-            d->m_backBuffer, QRect (0, 0, viewRect.width (), viewRect.height ()));
+            d->m_backBuffer, TQRect (0, 0, viewRect.width (), viewRect.height ()));
 }
 
 
 // protected virtual [base QWidget]
-void kpView::paintEvent (QPaintEvent *e)
+void kpView::paintEvent (TQPaintEvent *e)
 {
     // sync: kpViewPrivate
     // WARNING: document(), viewManager() and friends might be 0 in this method.
     // TODO: I'm not 100% convinced that we always check if their friends are 0.
 
 #if DEBUG_KP_VIEW_RENDERER && 1
-    QTime timer;
+    TQTime timer;
     timer.start ();
 #endif
 
@@ -1870,7 +1870,7 @@ void kpView::paintEvent (QPaintEvent *e)
                << " fastUpdates=" << (vm && vm->fastUpdates ())
                << " viewRect=" << e->rect ()
                << " erased=" << e->erased ()
-               << " topLeft=" << QPoint (x (), y ())
+               << " topLeft=" << TQPoint (x (), y ())
                << endl;
 #endif
 
@@ -1887,13 +1887,13 @@ void kpView::paintEvent (QPaintEvent *e)
     }
 
 
-    QRegion viewRegion = clipRegion ().intersect (e->region ());
-    QMemArray <QRect> rects = viewRegion.rects ();
+    TQRegion viewRegion = clipRegion ().intersect (e->region ());
+    TQMemArray <TQRect> rects = viewRegion.rects ();
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "\t#rects = " << rects.count () << endl;
 #endif
 
-    for (QMemArray <QRect>::ConstIterator it = rects.begin ();
+    for (TQMemArray <TQRect>::ConstIterator it = rects.begin ();
          it != rects.end ();
          it++)
     {

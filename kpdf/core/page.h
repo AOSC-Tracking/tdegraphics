@@ -10,11 +10,11 @@
 #ifndef _KPDF_PAGE_H_
 #define _KPDF_PAGE_H_
 
-#include <qmap.h>
-#include <qvaluelist.h>
+#include <tqmap.h>
+#include <tqvaluelist.h>
 
-class QPixmap;
-class QRect;
+class TQPixmap;
+class TQRect;
 class TextPage;
 class KPDFPageTransition;
 class HighlightRect;
@@ -30,13 +30,13 @@ class NormalizedRect
 
         NormalizedRect();
         NormalizedRect( double l, double t, double r, double b );
-        NormalizedRect( const QRect & r, double xScale, double yScale );
+        NormalizedRect( const TQRect & r, double xScale, double yScale );
 
         bool contains( double x, double y ) const;
         bool intersects( const NormalizedRect & normRect ) const;
         bool intersects( double l, double t, double r, double b ) const;
 
-        QRect geometry( int xScale, int yScale ) const;
+        TQRect geometry( int xScale, int yScale ) const;
 };
 
 /**
@@ -102,18 +102,18 @@ class KPDFPage
         //bool hasAnnotation( double x, double y ) const;
         bool hasTransition() const;
 
-        NormalizedRect * findText( const QString & text, bool keepCase, NormalizedRect * last = 0 ) const;
-        const QString getText( const NormalizedRect & rect ) const;
+        NormalizedRect * findText( const TQString & text, bool keepCase, NormalizedRect * last = 0 ) const;
+        const TQString getText( const NormalizedRect & rect ) const;
         const ObjectRect * hasObject( ObjectRect::ObjectType type, double x, double y ) const;
         //const Annotation * getAnnotation( double x, double y ) const;
         const KPDFPageTransition * getTransition() const;
 
         // operations: set/delete contents (by KPDFDocument)
-        void setPixmap( int p_id, QPixmap * pixmap );
+        void setPixmap( int p_id, TQPixmap * pixmap );
         void setSearchPage( TextPage * text );
         void setBookmark( bool state );
-        void setObjectRects( const QValueList< ObjectRect * > rects );
-        void setHighlight( int s_id, NormalizedRect * &r, const QColor & color );
+        void setObjectRects( const TQValueList< ObjectRect * > rects );
+        void setHighlight( int s_id, NormalizedRect * &r, const TQColor & color );
         //void setAnnotation( Annotation * annotation );
         void setTransition( KPDFPageTransition * transition );
         void deletePixmap( int p_id );
@@ -129,11 +129,11 @@ class KPDFPage
         float m_width, m_height;
         bool m_bookmarked;
 
-        QMap< int, QPixmap * > m_pixmaps;
+        TQMap< int, TQPixmap * > m_pixmaps;
         TextPage * m_text;
-        QValueList< ObjectRect * > m_rects;
-        QValueList< HighlightRect * > m_highlights;
-        //QValueList< Annotation * > m_annotations;
+        TQValueList< ObjectRect * > m_rects;
+        TQValueList< HighlightRect * > m_highlights;
+        //TQValueList< Annotation * > m_annotations;
         KPDFPageTransition * m_transition;
 };
 
@@ -146,7 +146,7 @@ struct HighlightRect : public NormalizedRect
     // searchID of the highlight owner
     int s_id;
     // color of the highlight
-    QColor color;
+    TQColor color;
 };
 
 #endif

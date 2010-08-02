@@ -36,10 +36,10 @@ public:
 	SVGGlyphElementImpl(DOM::ElementImpl *);
 	virtual ~SVGGlyphElementImpl();
 	
-	QString d() const;
+	TQString d() const;
 	
 private:
-	QString m_d;
+	TQString m_d;
 
 public:
 	KSVG_GET

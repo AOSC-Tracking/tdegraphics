@@ -23,8 +23,8 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qscrollview.h>
+#include <tqwidget.h>
+#include <tqscrollview.h>
 #include <kpushbutton.h>
 
 #include "pmviewbase.h"
@@ -33,9 +33,9 @@
 class PMDialogEditBase;
 class PMObject;
 class PMPart;
-class QGroupBox;
-class QBoxLayout;
-class QLabel;
+class TQGroupBox;
+class TQBoxLayout;
+class TQLabel;
 
 /**
  * Helper class for @ref PMDialogView
@@ -44,13 +44,13 @@ class PMDialogEditContent : public QScrollView
 {
    Q_OBJECT
 public:
-   PMDialogEditContent( QWidget* parent, const char* name = 0 );
-   void setContents( QWidget* wid );
+   PMDialogEditContent( TQWidget* parent, const char* name = 0 );
+   void setContents( TQWidget* wid );
    void calculateSize( );
 protected:
-   void resizeEvent( QResizeEvent* );
+   void resizeEvent( TQResizeEvent* );
 private:
-   QWidget* m_pContents;
+   TQWidget* m_pContents;
 };
 
 /**
@@ -67,23 +67,23 @@ public:
    /**
     * Creates a new PMDialogView widget
     */
-   PMDialogView( PMPart* part, QWidget* parent, const char* name = 0 );
+   PMDialogView( PMPart* part, TQWidget* parent, const char* name = 0 );
    /**
     * Deletes the widget
     */
    ~PMDialogView( );
 
    /** */
-   virtual QString viewType( ) const { return QString( "dialogview" ); }
+   virtual TQString viewType( ) const { return TQString( "dialogview" ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
 public slots:
    /**
     * Called when an object is changed.
     * Mode is a bit combination of @ref PMChange constants
     */
-   void slotObjectChanged( PMObject* obj, const int mode, QObject* sender );
+   void slotObjectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Called before the scene is rendered
     */
@@ -101,14 +101,14 @@ signals:
     * Signal that is emitted when an object is changed.
     * Mode is a bit combination of @ref PMChange constants.
     */
-   void objectChanged( PMObject* obj, const int mode, QObject* sender );
+   void objectChanged( PMObject* obj, const int mode, TQObject* sender );
    /**
     * Emitted in the destructor
     */
    void destroyed( PMDialogView* v );
 
 protected:
-   virtual void keyPressEvent( QKeyEvent* );
+   virtual void keyPressEvent( TQKeyEvent* );
 
 private slots:
    void slotApply( );
@@ -129,14 +129,14 @@ private:
    void displayObject( PMObject* obj, bool updateDescription = true );
 
    PMDialogEditBase* m_pDisplayedWidget;
-   QBoxLayout* m_pLayout;
+   TQBoxLayout* m_pLayout;
 
    KPushButton* m_pApplyButton;
    KPushButton* m_pCancelButton;
    KPushButton* m_pHelpButton;
 
-   QLabel* m_pPixmapLabel;
-   QLabel* m_pObjectTypeLabel;
+   TQLabel* m_pPixmapLabel;
+   TQLabel* m_pObjectTypeLabel;
 
    PMDialogEditContent* m_pHelper;
 
@@ -151,10 +151,10 @@ class PMDialogViewFactory : public PMViewTypeFactory
 {
 public:
    PMDialogViewFactory( ) { }
-   virtual QString viewType( ) const { return QString( "dialogview" ); }
-   virtual QString description( ) const;
-   virtual QString iconName( ) const { return QString( "pmdialogview" ); }
-   virtual PMViewBase* newInstance( QWidget* parent, PMPart* part ) const
+   virtual TQString viewType( ) const { return TQString( "dialogview" ); }
+   virtual TQString description( ) const;
+   virtual TQString iconName( ) const { return TQString( "pmdialogview" ); }
+   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
    {
       return new PMDialogView( part, parent );
    }

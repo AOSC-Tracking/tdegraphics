@@ -29,9 +29,9 @@
 #include <kpmainwindow.h>
 #include <kpmainwindow_p.h>
 
-#include <qdragobject.h>
-#include <qpainter.h>
-#include <qtimer.h>
+#include <tqdragobject.h>
+#include <tqpainter.h>
+#include <tqtimer.h>
 
 #include <kactionclasses.h>
 #include <kapplication.h>
@@ -59,7 +59,7 @@
 #include <kpzoomedview.h>
 
 #if DEBUG_KP_MAIN_WINDOW
-    #include <qdatetime.h>
+    #include <tqdatetime.h>
 #endif
 
 
@@ -169,8 +169,8 @@ void kpMainWindow::init ()
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow(" << name () << ")::init()" << endl;
-    QTime totalTime; totalTime.start ();
-    QTime time; time.start ();
+    TQTime totalTime; totalTime.start ();
+    TQTime time; time.start ();
 #endif
 
     d = new kpMainWindowPrivate;
@@ -259,20 +259,20 @@ void kpMainWindow::init ()
 #endif
 
     m_scrollView = new kpViewScrollableContainer (this, "scrollView");
-    connect (m_scrollView, SIGNAL (beganDocResize ()),
-             this, SLOT (slotBeganDocResize ()));
-    connect (m_scrollView, SIGNAL (continuedDocResize (const QSize &)),
-             this, SLOT (slotContinuedDocResize (const QSize &)));
-    connect (m_scrollView, SIGNAL (cancelledDocResize ()),
-             this, SLOT (slotCancelledDocResize ()));
-    connect (m_scrollView, SIGNAL (endedDocResize (const QSize &)),
-             this, SLOT (slotEndedDocResize (const QSize &)));
+    connect (m_scrollView, TQT_SIGNAL (beganDocResize ()),
+             this, TQT_SLOT (slotBeganDocResize ()));
+    connect (m_scrollView, TQT_SIGNAL (continuedDocResize (const TQSize &)),
+             this, TQT_SLOT (slotContinuedDocResize (const TQSize &)));
+    connect (m_scrollView, TQT_SIGNAL (cancelledDocResize ()),
+             this, TQT_SLOT (slotCancelledDocResize ()));
+    connect (m_scrollView, TQT_SIGNAL (endedDocResize (const TQSize &)),
+             this, TQT_SLOT (slotEndedDocResize (const TQSize &)));
 
-    connect (m_scrollView, SIGNAL (statusMessageChanged (const QString &)),
-             this, SLOT (slotDocResizeMessageChanged (const QString &)));
+    connect (m_scrollView, TQT_SIGNAL (statusMessageChanged (const TQString &)),
+             this, TQT_SLOT (slotDocResizeMessageChanged (const TQString &)));
 
-    connect (m_scrollView, SIGNAL (contentsMoving (int, int)),
-             this, SLOT (slotScrollViewAboutToScroll ()));
+    connect (m_scrollView, TQT_SIGNAL (contentsMoving (int, int)),
+             this, TQT_SLOT (slotScrollViewAboutToScroll ()));
     setCentralWidget (m_scrollView);
     m_scrollView->show ();
 #if DEBUG_KP_MAIN_WINDOW
@@ -334,7 +334,7 @@ void kpMainWindow::readProperties (KConfig *cfg)
         kdDebug () << "\turl=" << url << endl;
     #endif
 
-        const QSize notFromURLDocSize =
+        const TQSize notFromURLDocSize =
             cfg->readSizeEntry (kpSessionSettingNotFromUrlDocumentSize);
 
         // Is from URL?
@@ -413,7 +413,7 @@ void kpMainWindow::saveProperties (KConfig *cfg)
             //    constructorWidth().
             //
             // Similarly for height() and constructorHeight().
-            const QSize docSize (m_document->constructorWidth (),
+            const TQSize docSize (m_document->constructorWidth (),
                                  m_document->constructorHeight ());
         #if DEBUG_KP_MAIN_WINDOW
             kdDebug () << "\tnot from url; doc size=" << docSize << endl;
@@ -423,7 +423,7 @@ void kpMainWindow::saveProperties (KConfig *cfg)
 
 
         // Local session save i.e. queryClose() was not called beforehand
-        // (see QApplication::saveState())?
+        // (see TQApplication::saveState())?
     #if 0
         if (m_document->isModified ())
         {
@@ -550,7 +550,7 @@ bool kpMainWindow::actionsSingleKeyTriggersEnabled () const
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow::actionsSingleKeyTriggersEnabled()" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
 #endif
 
     if (m_toolToolBar)
@@ -573,7 +573,7 @@ void kpMainWindow::enableActionsSingleKeyTriggers (bool enable)
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow::enableActionsSingleKeyTriggers("
                << enable << ")" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
 #endif
 
     if (m_toolToolBar)
@@ -658,11 +658,11 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
 
 
     if (!m_lastCopyToURL.isEmpty ())
-        m_lastCopyToURL.setFileName (QString::null);
+        m_lastCopyToURL.setFileName (TQString::null);
     m_copyToFirstTime = true;
 
     if (!m_lastExportURL.isEmpty ())
-        m_lastExportURL.setFileName (QString::null);
+        m_lastExportURL.setFileName (TQString::null);
     m_exportFirstTime = true;
 
 
@@ -707,16 +707,16 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
     #endif
 
         // Copy/Cut/Deselect/Delete
-        connect (m_document, SIGNAL (selectionEnabled (bool)),
-                 m_actionCut, SLOT (setEnabled (bool)));
-        connect (m_document, SIGNAL (selectionEnabled (bool)),
-                 m_actionCopy, SLOT (setEnabled (bool)));
-        connect (m_document, SIGNAL (selectionEnabled (bool)),
-                 m_actionDelete, SLOT (setEnabled (bool)));
-        connect (m_document, SIGNAL (selectionEnabled (bool)),
-                 m_actionDeselect, SLOT (setEnabled (bool)));
-        connect (m_document, SIGNAL (selectionEnabled (bool)),
-                 m_actionCopyToFile, SLOT (setEnabled (bool)));
+        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
+                 m_actionCut, TQT_SLOT (setEnabled (bool)));
+        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
+                 m_actionCopy, TQT_SLOT (setEnabled (bool)));
+        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
+                 m_actionDelete, TQT_SLOT (setEnabled (bool)));
+        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
+                 m_actionDeselect, TQT_SLOT (setEnabled (bool)));
+        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
+                 m_actionCopyToFile, TQT_SLOT (setEnabled (bool)));
 
         // this code won't actually enable any actions at this stage
         // (fresh document) but better safe than sorry
@@ -726,40 +726,40 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
         m_actionDelete->setEnabled (m_document->selection ());
         m_actionCopyToFile->setEnabled (m_document->selection ());
 
-        connect (m_document, SIGNAL (selectionEnabled (bool)),
-                 this, SLOT (slotImageMenuUpdateDueToSelection ()));
-        connect (m_document, SIGNAL (selectionIsTextChanged (bool)),
-                 this, SLOT (slotImageMenuUpdateDueToSelection ()));
+        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
+                 this, TQT_SLOT (slotImageMenuUpdateDueToSelection ()));
+        connect (m_document, TQT_SIGNAL (selectionIsTextChanged (bool)),
+                 this, TQT_SLOT (slotImageMenuUpdateDueToSelection ()));
 
         // Status bar
-        connect (m_document, SIGNAL (documentOpened ()),
-                 this, SLOT (recalculateStatusBar ()));
+        connect (m_document, TQT_SIGNAL (documentOpened ()),
+                 this, TQT_SLOT (recalculateStatusBar ()));
 
-        connect (m_document, SIGNAL (sizeChanged (const QSize &)),
-                 this, SLOT (setStatusBarDocSize (const QSize &)));
+        connect (m_document, TQT_SIGNAL (sizeChanged (const TQSize &)),
+                 this, TQT_SLOT (setStatusBarDocSize (const TQSize &)));
 
         // Caption (url, modified)
-        connect (m_document, SIGNAL (documentModified ()),
-                 this, SLOT (slotUpdateCaption ()));
-        connect (m_document, SIGNAL (documentOpened ()),
-                 this, SLOT (slotUpdateCaption ()));
-        connect (m_document, SIGNAL (documentSaved ()),
-                 this, SLOT (slotUpdateCaption ()));
+        connect (m_document, TQT_SIGNAL (documentModified ()),
+                 this, TQT_SLOT (slotUpdateCaption ()));
+        connect (m_document, TQT_SIGNAL (documentOpened ()),
+                 this, TQT_SLOT (slotUpdateCaption ()));
+        connect (m_document, TQT_SIGNAL (documentSaved ()),
+                 this, TQT_SLOT (slotUpdateCaption ()));
 
         // File/Reload action only available with non-empty URL
-        connect (m_document, SIGNAL (documentSaved ()),
-                 this, SLOT (slotEnableReload ()));
+        connect (m_document, TQT_SIGNAL (documentSaved ()),
+                 this, TQT_SLOT (slotEnableReload ()));
 
-        connect (m_document, SIGNAL (documentSaved ()),
-                 this, SLOT (slotEnableSettingsShowPath ()));
+        connect (m_document, TQT_SIGNAL (documentSaved ()),
+                 this, TQT_SLOT (slotEnableSettingsShowPath ()));
 
         // Command history
         if (m_commandHistory)
         {
-            connect (m_commandHistory, SIGNAL (documentRestored ()),
-                     this, SLOT (slotDocumentRestored ()));  // caption "!modified"
-            connect (m_document, SIGNAL (documentSaved ()),
-                     m_commandHistory, SLOT (documentSaved ()));
+            connect (m_commandHistory, TQT_SIGNAL (documentRestored ()),
+                     this, TQT_SLOT (slotDocumentRestored ()));  // caption "!modified"
+            connect (m_document, TQT_SIGNAL (documentSaved ()),
+                     m_commandHistory, TQT_SLOT (documentSaved ()));
         }
         else
         {
@@ -768,10 +768,10 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
         }
 
         // Sync document -> views
-        connect (m_document, SIGNAL (contentsChanged (const QRect &)),
-                 m_viewManager, SLOT (updateViews (const QRect &)));
-        connect (m_document, SIGNAL (sizeChanged (int, int)),
-                 m_viewManager, SLOT (adjustViewsToEnvironment ()));
+        connect (m_document, TQT_SIGNAL (contentsChanged (const TQRect &)),
+                 m_viewManager, TQT_SLOT (updateViews (const TQRect &)));
+        connect (m_document, TQT_SIGNAL (sizeChanged (int, int)),
+                 m_viewManager, TQT_SLOT (adjustViewsToEnvironment ()));
 
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\tenabling actions" << endl;
@@ -814,7 +814,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
             #if DEBUG_KP_MAIN_WINDOW
                 kdDebug () << "\tcreating thumbnail LATER" << endl;
             #endif
-                QTimer::singleShot (0, this, SLOT (slotCreateThumbnail ()));
+                TQTimer::singleShot (0, this, TQT_SLOT (slotCreateThumbnail ()));
             }
         }
     #endif
@@ -855,7 +855,7 @@ bool kpMainWindow::queryClose ()
                      i18n ("The document \"%1\" has been modified.\n"
                            "Do you want to save it?")
                          .arg (m_document->prettyFilename ()),
-                    QString::null/*caption*/,
+                    TQString::null/*caption*/,
                     KStdGuiItem::save (), KStdGuiItem::discard ());
 
     switch (result)
@@ -871,15 +871,15 @@ bool kpMainWindow::queryClose ()
 
 
 // private virtual [base QWidget]
-void kpMainWindow::dragEnterEvent (QDragEnterEvent *e)
+void kpMainWindow::dragEnterEvent (TQDragEnterEvent *e)
 {
     e->accept (kpSelectionDrag::canDecode (e) ||
                KURLDrag::canDecode (e) ||
-               QTextDrag::canDecode (e));
+               TQTextDrag::canDecode (e));
 }
 
 // private virtual [base QWidget]
-void kpMainWindow::dropEvent (QDropEvent *e)
+void kpMainWindow::dropEvent (TQDropEvent *e)
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow::dropEvent" << e->pos () << endl;
@@ -887,12 +887,12 @@ void kpMainWindow::dropEvent (QDropEvent *e)
 
     kpSelection sel;
     KURL::List urls;
-    QString text;
+    TQString text;
 
     if (kpSelectionDrag::decode (e, sel/*ref*/, pasteWarnAboutLossInfo ()))
     {
         sel.setTransparency (selectionTransparency ());
-        // TODO: drop at point like with QTextDrag below?
+        // TODO: drop at point like with TQTextDrag below?
         paste (sel);
     }
     else if (KURLDrag::decode (e, urls/*ref*/))
@@ -902,10 +902,10 @@ void kpMainWindow::dropEvent (QDropEvent *e)
             open (*it);
         }
     }
-    else if (QTextDrag::decode (e, text/*ref*/))
+    else if (TQTextDrag::decode (e, text/*ref*/))
     {
-        QPoint selTopLeft = KP_INVALID_POINT;
-        const QPoint globalPos = QWidget::mapToGlobal (e->pos ());
+        TQPoint selTopLeft = KP_INVALID_POINT;
+        const TQPoint globalPos = TQWidget::mapToGlobal (e->pos ());
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\tpos toGlobal=" << globalPos << endl;
     #endif
@@ -931,7 +931,7 @@ void kpMainWindow::dropEvent (QDropEvent *e)
                             << kpWidgetMapper::toGlobal (m_mainView, m_mainView->rect ())
                             << " scrollView->globalRect="
                             << kpWidgetMapper::toGlobal (m_scrollView,
-                                    QRect (0, 0,
+                                    TQRect (0, 0,
                                             m_scrollView->visibleWidth (),
                                             m_scrollView->visibleHeight ()))
                             << endl;
@@ -950,7 +950,7 @@ void kpMainWindow::dropEvent (QDropEvent *e)
                              .contains (globalPos) &&
                          m_scrollView &&
                          kpWidgetMapper::toGlobal (m_scrollView,
-                             QRect (0, 0,
+                             TQRect (0, 0,
                                     m_scrollView->visibleWidth (),
                                     m_scrollView->visibleHeight ()))
                              .contains (globalPos))
@@ -962,8 +962,8 @@ void kpMainWindow::dropEvent (QDropEvent *e)
 
         if (view)
         {
-            const QPoint viewPos = view->mapFromGlobal (globalPos);
-            const QPoint docPoint = view->transformViewToDoc (viewPos);
+            const TQPoint viewPos = view->mapFromGlobal (globalPos);
+            const TQPoint docPoint = view->transformViewToDoc (viewPos);
 
             // viewUnderCursor() is hacky and can return a view when we aren't
             // over one thanks to drags.
@@ -973,7 +973,7 @@ void kpMainWindow::dropEvent (QDropEvent *e)
 
                 // TODO: In terms of doc pixels, would be inconsistent behaviour
                 //       based on zoomLevel of view.
-                // selTopLeft -= QPoint (-view->selectionResizeHandleAtomicSize (),
+                // selTopLeft -= TQPoint (-view->selectionResizeHandleAtomicSize (),
                 //                       -view->selectionResizeHandleAtomicSize ());
             }
         }
@@ -998,12 +998,12 @@ void kpMainWindow::slotScrollViewAboutToScroll ()
     else
     {
         // We're getting a late signal from the scrollview (thanks to
-        // a timer inside the QScrollView).  By now, setDocument() has
+        // a timer inside the TQScrollView).  By now, setDocument() has
         // already killed the document(), tool() and viewManager().
     }
 #endif
 
-    QTimer::singleShot (0, this, SLOT (slotScrollViewAfterScroll ()));
+    TQTimer::singleShot (0, this, TQT_SLOT (slotScrollViewAfterScroll ()));
 }
 
 // private slot
@@ -1022,7 +1022,7 @@ void kpMainWindow::slotScrollViewAfterScroll ()
 
 
 // private virtual [base QWidget]
-void kpMainWindow::moveEvent (QMoveEvent * /*e*/)
+void kpMainWindow::moveEvent (TQMoveEvent * /*e*/)
 {
     if (m_thumbnail)
     {
@@ -1045,7 +1045,7 @@ void kpMainWindow::slotUpdateCaption ()
     }
     else
     {
-        setCaption (QString::null, false);
+        setCaption (TQString::null, false);
     }
 }
 

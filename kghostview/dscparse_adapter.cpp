@@ -67,7 +67,7 @@ int KDSCBBOX::ury() const { return _ury; }
 int KDSCBBOX::width()  const { return _urx - _llx; }
 int KDSCBBOX::height() const { return _ury - _lly; }
 
-QSize KDSCBBOX::size() const { return QSize( width(), height() ); }
+TQSize KDSCBBOX::size() const { return TQSize( width(), height() ); }
 
 ostream& operator << ( ostream& os, const KDSCBBOX& source )
 {
@@ -78,7 +78,7 @@ ostream& operator << ( ostream& os, const KDSCBBOX& source )
 
 /*-- KDSCError implementation ----------------------------------------------*/
 
-KDSCError::KDSCError( Type type, Severity severity, const QCString& line,
+KDSCError::KDSCError( Type type, Severity severity, const TQCString& line,
 	              unsigned int lineNumber ) :
     _type( type ),
     _severity( severity ),
@@ -96,7 +96,7 @@ KDSCError::Severity KDSCError::severity() const
     return _severity; 
 }
 
-QCString KDSCError::line() const
+TQCString KDSCError::line() const
 {
     return _line; 
 }
@@ -132,9 +132,9 @@ KDSC::~KDSC()
     delete _scanHandler;
 }
 
-QString KDSC::dsc_version() const
+TQString KDSC::dsc_version() const
 {
-    return QString( _cdsc->dsc_version );   
+    return TQString( _cdsc->dsc_version );   
 }
 
 bool KDSC::dsc() const
@@ -298,24 +298,24 @@ auto_ptr<KDSCBBOX> KDSC::page_bbox() const
 	return auto_ptr<KDSCBBOX>( new KDSCBBOX( *_cdsc->page_bbox ) );
 }
 
-QString KDSC::dsc_title() const
+TQString KDSC::dsc_title() const
 {
-    return QString( _cdsc->dsc_title );
+    return TQString( _cdsc->dsc_title );
 }
 
-QString KDSC::dsc_creator() const
+TQString KDSC::dsc_creator() const
 {
-    return QString( _cdsc->dsc_creator );
+    return TQString( _cdsc->dsc_creator );
 }
 
-QString KDSC::dsc_date() const
+TQString KDSC::dsc_date() const
 {
-    return QString( _cdsc->dsc_date );
+    return TQString( _cdsc->dsc_date );
 }
 
-QString KDSC::dsc_for() const
+TQString KDSC::dsc_for() const
 {
-    return QString( _cdsc->dsc_for );
+    return TQString( _cdsc->dsc_for );
 }
 
 bool KDSC::scanData( char* buffer, unsigned int count )
@@ -378,7 +378,7 @@ int KDSC::errorFunction( void* caller_data, CDSC* dsc,
     KDSCError error( 
 	    static_cast< KDSCError::Type >( explanation ), 
 	    static_cast< KDSCError::Severity >( dsc->severity[explanation] ),
-	    QCString( line, line_len + 1 ),
+	    TQCString( line, line_len + 1 ),
 	    dsc->line_count
     );
     

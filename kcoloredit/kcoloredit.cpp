@@ -16,9 +16,9 @@
  ***************************************************************************/
 
 // include files for QT
-#include <qdir.h>
-#include <qprinter.h>
-#include <qpainter.h>
+#include <tqdir.h>
+#include <tqprinter.h>
+#include <tqpainter.h>
 
 // include files for KDE
 #include <kiconloader.h>
@@ -64,40 +64,40 @@ KColorEditApp::~KColorEditApp() {
 void KColorEditApp::initActions()
 {
   // File actiojns
-  KStdAction::openNew( this, SLOT( slotFileNew() ), actionCollection() );
-  KStdAction::open( this, SLOT( slotFileOpen() ), actionCollection() );
-  KStdAction::saveAs( this, SLOT( slotFileSaveAs() ), actionCollection() );
-  KStdAction::close( this, SLOT( slotClose() ), actionCollection() );
-  KStdAction::quit( this, SLOT( slotQuit() ), actionCollection() );
-  m_actSave = KStdAction::save( this, SLOT( slotFileSave() ),
+  KStdAction::openNew( this, TQT_SLOT( slotFileNew() ), actionCollection() );
+  KStdAction::open( this, TQT_SLOT( slotFileOpen() ), actionCollection() );
+  KStdAction::saveAs( this, TQT_SLOT( slotFileSaveAs() ), actionCollection() );
+  KStdAction::close( this, TQT_SLOT( slotClose() ), actionCollection() );
+  KStdAction::quit( this, TQT_SLOT( slotQuit() ), actionCollection() );
+  m_actSave = KStdAction::save( this, TQT_SLOT( slotFileSave() ),
           actionCollection() );
   m_actRecent = KStdAction::openRecent( this,
-          SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
+          TQT_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
 
   ( void ) new KAction( i18n("New &Window"), kapp->miniIcon(), KShortcut(),
-          this, SLOT( slotFileNewWindow() ), actionCollection(),
+          this, TQT_SLOT( slotFileNewWindow() ), actionCollection(),
           "file_new_window" );
 
   // Edit actions
-  m_actCut = KStdAction::cut( this, SLOT( slotEditCut() ),
+  m_actCut = KStdAction::cut( this, TQT_SLOT( slotEditCut() ),
           actionCollection() );
-  m_actCopy = KStdAction::copy( this, SLOT( slotEditCopy() ),
+  m_actCopy = KStdAction::copy( this, TQT_SLOT( slotEditCopy() ),
           actionCollection() );
-  m_actPaste = KStdAction::paste( this, SLOT( slotEditPaste() ),
+  m_actPaste = KStdAction::paste( this, TQT_SLOT( slotEditPaste() ),
           actionCollection() );
 
   m_actPaste->setEnabled( false );
 
   // Color Menu
   m_actNames = new KToggleAction( i18n("Show &Color Names"), KShortcut(), this,
-          SLOT( slotViewColorNames() ), actionCollection(),
+          TQT_SLOT( slotViewColorNames() ), actionCollection(),
           "color_view_names" );
   m_actNames->setCheckedState(i18n("Hide &Color Names"));
   m_actPalette = new KAction( i18n("From &Palette"), KShortcut(), this,
-          SLOT( slotColorFromPalette() ), actionCollection(),
+          TQT_SLOT( slotColorFromPalette() ), actionCollection(),
           "color_from_palette" );
   ( void ) new KAction( i18n("From &Screen"), KShortcut(), this,
-          SLOT( slotColorFromScreen() ), actionCollection(),
+          TQT_SLOT( slotColorFromScreen() ), actionCollection(),
           "color_from_screen" );
 }
 
@@ -112,14 +112,14 @@ void KColorEditApp::initDocument()
   doc = new KColorEditDoc(this);
   doc->newDocument();
 
-  connect( doc, SIGNAL( selectionChanged( int, int ) ),
-          SLOT( slotSelectionChanged( int, int ) ) );
-  connect( doc, SIGNAL( clipboardChanged() ),
-          SLOT( slotClipboardChanged() ) );
-  connect( doc, SIGNAL( modified( bool ) ),
-          SLOT( slotModified( bool ) ) );
-  connect( doc, SIGNAL( paletteAvailable( bool ) ),
-          SLOT( slotPaletteAvailable( bool ) ) );
+  connect( doc, TQT_SIGNAL( selectionChanged( int, int ) ),
+          TQT_SLOT( slotSelectionChanged( int, int ) ) );
+  connect( doc, TQT_SIGNAL( clipboardChanged() ),
+          TQT_SLOT( slotClipboardChanged() ) );
+  connect( doc, TQT_SIGNAL( modified( bool ) ),
+          TQT_SLOT( slotModified( bool ) ) );
+  connect( doc, TQT_SIGNAL( paletteAvailable( bool ) ),
+          TQT_SLOT( slotPaletteAvailable( bool ) ) );
 }
 
 void KColorEditApp::initView()
@@ -178,7 +178,7 @@ bool KColorEditApp::queryExit()
 }
 
 /////////////////////////////////////////////////////////////////////
-// SLOT IMPLEMENTATION
+// TQT_SLOT IMPLEMENTATION
 /////////////////////////////////////////////////////////////////////
 
 void KColorEditApp::slotSelectionChanged( int begin, int end )
@@ -221,7 +221,7 @@ void KColorEditApp::slotFileOpen() {
   if(doc->saveModified()) {
     LoadPaletteDlg dialog(this);
     if(dialog.exec()) {
-      QString fileToOpen = dialog.getFileName();
+      TQString fileToOpen = dialog.getFileName();
       if(!fileToOpen.isEmpty())
       {
         if(!doc->openDocument( fileToOpen )) {
@@ -255,12 +255,12 @@ bool KColorEditApp::slotFileSaveAs()
     bool result = true;
 
     while(result) {
-        QString newName=KFileDialog::getSaveFileName(lastSavePaletteAsFileDir,
+        TQString newName=KFileDialog::getSaveFileName(lastSavePaletteAsFileDir,
                   "*|" + i18n("All Files"), this, i18n("Save As"));
         if(newName.isEmpty())
             result = false;
         else {
-      QFileInfo saveAsInfo(newName);
+      TQFileInfo saveAsInfo(newName);
       if(!saveAsInfo.exists() ||
                KMessageBox::questionYesNo( this,
                        i18n("A Document with this name already exists.\n"
@@ -291,7 +291,7 @@ void KColorEditApp::slotClose()
 
 void KColorEditApp::slotFilePrint()
 {
-  QPrinter printer;
+  TQPrinter printer;
   if (printer.setup(this))
   {
     view->print(&printer);
@@ -348,12 +348,12 @@ void KColorEditApp::slotViewColorNames()
   doc->slotChangeViewMode(viewColorNames);
 }
 
-void KColorEditApp::mouseReleaseEvent(QMouseEvent* event) {
+void KColorEditApp::mouseReleaseEvent(TQMouseEvent* event) {
 	if(gettingColorFromScreen) {
 		gettingColorFromScreen = false;
 		releaseMouse();
 		releaseKeyboard();
-		QColor rgbColor =  KColorDialog::grabColor(event->globalPos());
+		TQColor rgbColor =  KColorDialog::grabColor(event->globalPos());
 		color.setComponents(rgbColor.red(), rgbColor.green(), rgbColor.blue());
 		view->chooseColor(&color);
 	} else

@@ -20,14 +20,14 @@
 #include "kfax_printsettings.h"
 
 #include <klocale.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqwhatsthis.h>
 
-KFAXPrintSettings::KFAXPrintSettings(QWidget *parent, const char *name)
+KFAXPrintSettings::KFAXPrintSettings(TQWidget *parent, const char *name)
 : KPrintDialogPage(parent, name)
 {
-	QString whatsThisScaleFullPage = i18n( "<qt>"
+	TQString whatsThisScaleFullPage = i18n( "<qt>"
 		"<p><strong>'Ignore Paper Margins'</strong></p>"
 		"<p>"
 		"If this checkbox is enabled, the paper margins will be ignored "
@@ -38,7 +38,7 @@ KFAXPrintSettings::KFAXPrintSettings(QWidget *parent, const char *name)
 		"margins and print the fax inside this printable area."
 		"</p>"
 						" </qt>" );
-	QString whatsThisCenterHorz = i18n( "<qt>"
+	TQString whatsThisCenterHorz = i18n( "<qt>"
 		"<p><strong>'Horizontal centered'</strong></p>"
 		"<p>"
 		"If this checkbox is enabled, the fax will be centered horizontally "
@@ -49,7 +49,7 @@ KFAXPrintSettings::KFAXPrintSettings(QWidget *parent, const char *name)
 		"side of the page."
 		"</p>"
 						" </qt>" );
-	QString whatsThisCenterVert = i18n( "<qt>"
+	TQString whatsThisCenterVert = i18n( "<qt>"
 		"<p><strong>'Vertical centered'</strong></p>"
 		"<p>"
 		"If this checkbox is enabled, the fax will be centered vertically "
@@ -63,14 +63,14 @@ KFAXPrintSettings::KFAXPrintSettings(QWidget *parent, const char *name)
 
 	setTitle(i18n("&Layout"));
 
-	m_scaleFullPage = new QCheckBox(i18n("Ignore paper margins"), this);
-	QWhatsThis::add(m_scaleFullPage, whatsThisScaleFullPage);
-	m_center_horz = new QCheckBox(i18n("Horizontal centered"), this);
-	QWhatsThis::add(m_center_horz, whatsThisCenterHorz);
-	m_center_vert = new QCheckBox(i18n("Vertical centered"), this);
-	QWhatsThis::add(m_center_vert, whatsThisCenterVert);
+	m_scaleFullPage = new TQCheckBox(i18n("Ignore paper margins"), this);
+	TQWhatsThis::add(m_scaleFullPage, whatsThisScaleFullPage);
+	m_center_horz = new TQCheckBox(i18n("Horizontal centered"), this);
+	TQWhatsThis::add(m_center_horz, whatsThisCenterHorz);
+	m_center_vert = new TQCheckBox(i18n("Vertical centered"), this);
+	TQWhatsThis::add(m_center_vert, whatsThisCenterVert);
 
-	QVBoxLayout *l0 = new QVBoxLayout(this, 0, 10);
+	TQVBoxLayout *l0 = new TQVBoxLayout(this, 0, 10);
 	l0->addWidget(m_scaleFullPage);
 	l0->addWidget(m_center_horz);
 	l0->addWidget(m_center_vert);
@@ -81,14 +81,14 @@ KFAXPrintSettings::~KFAXPrintSettings()
 {
 }
 
-void KFAXPrintSettings::getOptions(QMap<QString,QString>& opts, bool /*incldef*/)
+void KFAXPrintSettings::getOptions(TQMap<TQString,TQString>& opts, bool /*incldef*/)
 {
 	opts[APP_KFAX_SCALE_FULLPAGE] = (m_scaleFullPage->isChecked() ? "true" : "false");
 	opts[APP_KFAX_CENTER_HORZ]    = (m_center_horz->isChecked() ? "true" : "false");
 	opts[APP_KFAX_CENTER_VERT]    = (m_center_vert->isChecked() ? "true" : "false");
 }
 
-void KFAXPrintSettings::setOptions(const QMap<QString,QString>& opts)
+void KFAXPrintSettings::setOptions(const TQMap<TQString,TQString>& opts)
 {
 	m_scaleFullPage->setChecked(opts[APP_KFAX_SCALE_FULLPAGE] == "true");
 	m_center_horz->setChecked(opts[APP_KFAX_CENTER_HORZ] != "false");

@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMScaleEdit with parent and name
     */
-   PMScaleEdit( QWidget* parent, const char* name = 0 );
+   PMScaleEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

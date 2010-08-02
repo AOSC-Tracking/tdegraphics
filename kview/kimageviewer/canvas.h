@@ -21,14 +21,14 @@
 #ifndef KIMAGEVIEWER_CANVAS_H
 #define KIMAGEVIEWER_CANVAS_H
 
-class QColor;
-class QSize;
-class QImage;
-class QRect;
-class QPoint;
-class QWidget;
+class TQColor;
+class TQSize;
+class TQImage;
+class TQRect;
+class TQPoint;
+class TQWidget;
 
-#include <qstring.h>
+#include <tqstring.h>
 #include <qobjectdefs.h>
 #include <kdemacros.h>
 namespace KImageViewer
@@ -47,7 +47,7 @@ namespace KImageViewer
  * your program:
  *
  * <pre>
-   QWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<QWidget>( "KImageViewer/Canvas", QString::null, this );
+   TQWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<TQWidget>( "KImageViewer/Canvas", TQString::null, this );
    m_canvas = static_cast<KImageViewer::Canvas *>( widget->qt_cast( "KImageViewer::Canvas" ) );
    if( ! ( widget && m_canvas ) )
    {
@@ -55,13 +55,13 @@ namespace KImageViewer
      kapp->quit();
    }
    setCentralWidget( widget );
-   connect( widget, SIGNAL( contextPress( const QPoint & ) ), SLOT( mySlot( const QPoint & ) ) );
-   connect( m_canvas->widget(), SIGNAL( contextPress( const QPoint & ) ), SLOT( mySlot( const QPoint & ) ) );
+   connect( widget, TQT_SIGNAL( contextPress( const TQPoint & ) ), TQT_SLOT( mySlot( const TQPoint & ) ) );
+   connect( m_canvas->widget(), TQT_SIGNAL( contextPress( const TQPoint & ) ), TQT_SLOT( mySlot( const TQPoint & ) ) );
    </pre>
  *
  * You can't connect signals or slots using KImageViewer::Canvas, because this interface
- * doesn't inherit from QObject. But you can cast to QWidget and use that instead (or just
- * keep the original pointer to QWidget around, like shown in the example).
+ * doesn't inherit from TQObject. But you can cast to TQWidget and use that instead (or just
+ * keep the original pointer to TQWidget around, like shown in the example).
  *
  * This interface is not guaranteed to be kept binary or source compatible
  * until it's finished. So if you're using this interface please get in contact
@@ -73,12 +73,12 @@ class KDE_EXPORT Canvas
 		/**
 		 * set the background color of the canvas
 		 */
-		virtual void setBgColor( const QColor & ) = 0;
+		virtual void setBgColor( const TQColor & ) = 0;
 
 		/**
 		 * returns the current background color
 		 */
-		virtual const QColor & bgColor() const = 0;
+		virtual const TQColor & bgColor() const = 0;
 
 		/**
 		 * the depth of the contained image
@@ -88,12 +88,12 @@ class KDE_EXPORT Canvas
 		/**
 		 * the size of the unzoomed image
 		 */
-		virtual QSize imageSize() const = 0;
+		virtual TQSize imageSize() const = 0;
 
 		/**
 		 * the size of the zoomed (current) image
 		 */
-		virtual QSize currentSize() const = 0;
+		virtual TQSize currentSize() const = 0;
 
 		/**
 		 * returns the zoom factor
@@ -105,7 +105,7 @@ class KDE_EXPORT Canvas
 		 * Take care that the canas may delete the image so you probably need to
 		 * make a copy of the image if you want to keep it around.
 		 */
-		virtual const QImage * image() const = 0;
+		virtual const TQImage * image() const = 0;
 
 		/**
 		 * Scrolls the content so that the point (x, y) is in the top-left corner.
@@ -136,7 +136,7 @@ class KDE_EXPORT Canvas
 		 * Return the selected rectangle. If nothing is selected the rectangle is
 		 * empty but doesn't have to be null.
 		 */
-		virtual QRect selection() const = 0;
+		virtual TQRect selection() const = 0;
 
 		/**
 		 * Returns whether the aspect ratio of the image is kept
@@ -151,7 +151,7 @@ class KDE_EXPORT Canvas
 		/**
 		 * @return the description of the blend effect
 		 */
-		virtual QString blendEffectDescription( unsigned int ) const { return QString::null; }
+		virtual TQString blendEffectDescription( unsigned int ) const { return TQString::null; }
 
 		/**
 		 * Sets the blending effect used to create a transition between images
@@ -166,23 +166,23 @@ class KDE_EXPORT Canvas
 		/**
 		 * @return the current maximum image size
 		 */
-		virtual const QSize & maximumImageSize() const = 0;
+		virtual const TQSize & maximumImageSize() const = 0;
 
 		/**
 		 * @return the current minimum image size
 		 */
-		virtual const QSize & minimumImageSize() const = 0;
+		virtual const TQSize & minimumImageSize() const = 0;
 
 		/**
-		 * @return a pointer to the QWidget interface of this object
+		 * @return a pointer to the TQWidget interface of this object
 		 */
-		virtual QWidget * widget() = 0;
+		virtual TQWidget * widget() = 0;
 
 	signals:
 		/**
 		 * a mouse button was pressed and a context menu should be openend
 		 */
-		virtual void contextPress( const QPoint & ) = 0;
+		virtual void contextPress( const TQPoint & ) = 0;
 
 		/**
 		 * the size of the image has changed (a new image was loaded, or the
@@ -190,7 +190,7 @@ class KDE_EXPORT Canvas
 		 *
 		 * it passes the new size of the image
 		 */
-		virtual void imageSizeChanged( const QSize & ) = 0;
+		virtual void imageSizeChanged( const TQSize & ) = 0;
 
 		/**
 		 * The zoom of the image has changed.
@@ -201,7 +201,7 @@ class KDE_EXPORT Canvas
 		 * The selection has changed. Connect to this signal if you want to
 		 * do something with a selection of the image (e.g. crop).
 		 */
-		virtual void selectionChanged( const QRect & ) = 0;
+		virtual void selectionChanged( const TQRect & ) = 0;
 
 		/**
 		 * Emitted when an image is finished being shown. If a blend effect is being used
@@ -227,7 +227,7 @@ class KDE_EXPORT Canvas
 		/**
 		 * The current mouse cursor position on the image.
 		 */
-		virtual void cursorPos( const QPoint & ) = 0;
+		virtual void cursorPos( const TQPoint & ) = 0;
 
 	public slots:
 		/**
@@ -239,7 +239,7 @@ class KDE_EXPORT Canvas
 		/**
 		 * Give the canvas a new image to show. The zoom level is kept.
 		 */
-		virtual void setImage( const QImage & ) = 0;
+		virtual void setImage( const TQImage & ) = 0;
 
 		/**
 		 * Give the canvas a new image to show.
@@ -247,7 +247,7 @@ class KDE_EXPORT Canvas
 		 * You have to pass the size the image should have when it appears
 		 * on screen.
 		 */
-		virtual void setImage( const QImage &, const QSize & ) = 0;
+		virtual void setImage( const TQImage &, const TQSize & ) = 0;
 
 		/**
 		 * Set the zoom to be used when showing the image.
@@ -257,7 +257,7 @@ class KDE_EXPORT Canvas
 		/**
 		 * Fit the image into the requested width and height.
 		 */
-		virtual void boundImageTo( const QSize & size ) = 0;
+		virtual void boundImageTo( const TQSize & size ) = 0;
 
 		/**
 		 * Set the maximum size of the image. If this is set the image will
@@ -265,7 +265,7 @@ class KDE_EXPORT Canvas
 		 *
 		 * If you set this to 0x0 the image size may be as big as possible
 		 */
-		virtual void setMaximumImageSize( const QSize & ) = 0;
+		virtual void setMaximumImageSize( const TQSize & ) = 0;
 
 		/**
 		 * Set the minimum size of the image. If this is set the image will
@@ -273,14 +273,14 @@ class KDE_EXPORT Canvas
 		 *
 		 * If you set this to 0x0 the image size can be as small as possible
 		 */
-		virtual void setMinimumImageSize( const QSize & ) = 0;
+		virtual void setMinimumImageSize( const TQSize & ) = 0;
 
 		/**
 		 * Resize the image to the given size. It will keep the aspect ratio
 		 * as long as keepAspectRatio is true (default). The image will be as
 		 * large as possible within the given constraints.
 		 */
-		virtual void resizeImage( const QSize & ) = 0;
+		virtual void resizeImage( const TQSize & ) = 0;
 
 		/**
 		 * Hides the scrollbars of the canvas. It's still possible to scroll

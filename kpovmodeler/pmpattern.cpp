@@ -33,7 +33,7 @@ const PMVector crackleFormDefault = PMVector( -1.0, 1.0, 0.0 );
 const int crackleMetricDefault = 2;
 const double crackleOffsetDefault = 0.0;
 const bool crackleSolidDefault = false;
-const QString densityFileDefault = QString( "" );
+const TQString densityFileDefault = TQString( "" );
 const int densityInterpolateDefault = 0;
 const PMVector gradientDefault = PMVector( 1.0, 1.0, 1.0 );
 const PMVector juliaComplexDefault = PMVector( 0.353, 0.288 );
@@ -56,7 +56,7 @@ const double slopeLoAltDefault = 0.0;
 const double slopeHiAltDefault = 1.0;
 const int spiralNumberArmsDefault = 0;
 const PMPattern::PMNoiseType noiseGeneratorDefault = PMPattern::GlobalSetting;
-const QString noiseGeneratorDefaultText = QString( "global_setting" );
+const TQString noiseGeneratorDefaultText = TQString( "global_setting" );
 const bool turbulenceDefault = false;
 const PMVector valueVectorDefault = PMVector( 0.0, 0.0, 0.0 );
 const int octavesDefault = 6;
@@ -182,7 +182,7 @@ PMPattern::~PMPattern( )
 {
 }
 
-void PMPattern::serialize( QDomElement& e, QDomDocument& ) const
+void PMPattern::serialize( TQDomElement& e, TQDomDocument& ) const
 {
    switch( m_patternType )
    {
@@ -336,7 +336,7 @@ void PMPattern::serialize( QDomElement& e, QDomDocument& ) const
 
 void PMPattern::readAttributes( const PMXMLHelper& h )
 {
-   QString str = h.stringAttribute( "patterntype", "agate" );
+   TQString str = h.stringAttribute( "patterntype", "agate" );
 
    if( str == "agate" )
       m_patternType = PatternAgate;
@@ -549,7 +549,7 @@ void PMPattern::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMPattern::description( ) const
+TQString PMPattern::description( ) const
 {
    return i18n( "pattern" );
 }
@@ -630,7 +630,7 @@ void PMPattern::setDensityInterpolate( int c )
    }
 }
 
-void PMPattern::setDensityFile( const QString& s )
+void PMPattern::setDensityFile( const TQString& s )
 {
    if( s != m_densityFile )
    {
@@ -982,7 +982,7 @@ void PMPattern::setDepth( const double c )
    }
 }
 
-PMDialogEditBase* PMPattern::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMPattern::editWidget( TQWidget* parent ) const
 {
    return new PMPatternEdit( parent );
 }

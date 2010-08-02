@@ -30,13 +30,13 @@
 #define KP_DOCUMENT_META_INFO
 
 
-#include <qimage.h>
-#include <qmap.h>
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqimage.h>
+#include <tqmap.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 
 
-class QPoint;
+class TQPoint;
 
 
 class kpDocumentMetaInfo
@@ -54,10 +54,10 @@ public:
     kpDocumentMetaInfo &operator= (const kpDocumentMetaInfo &rhs);
 
 
-    void printDebug (const QString &prefix) const;
+    void printDebug (const TQString &prefix) const;
 
 
-    // See QImage documentation
+    // See TQImage documentation
 
     int dotsPerMeterX () const;
     void setDotsPerMeterX (int val);
@@ -66,17 +66,17 @@ public:
     void setDotsPerMeterY (int val);
 
 
-    QPoint offset () const;
-    void setOffset (const QPoint &point);
+    TQPoint offset () const;
+    void setOffset (const TQPoint &point);
 
 
-    QMap <QImageTextKeyLang, QString> textMap () const;
-    QValueList <QImageTextKeyLang> textList () const;
+    TQMap <TQImageTextKeyLang, TQString> textMap () const;
+    TQValueList <TQImageTextKeyLang> textList () const;
 
-    QString text (const QImageTextKeyLang &itkl) const;
-    QString text (const char *key, const char *lang) const;
-    void setText (const QImageTextKeyLang &itkl, const QString &string);
-    void setText (const char *key, const char *lang, const QString &string);
+    TQString text (const TQImageTextKeyLang &itkl) const;
+    TQString text (const char *key, const char *lang) const;
+    void setText (const TQImageTextKeyLang &itkl, const TQString &string);
+    void setText (const char *key, const char *lang, const TQString &string);
 
 
 private:

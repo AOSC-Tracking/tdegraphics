@@ -21,20 +21,20 @@
 #ifndef SCAN_H
 #define SCAN_H
 
-#include <qimage.h>
+#include <tqimage.h>
 #include <kscan.h>
 
 class ScanParams;
 class KScanDevice;
 class Previewer;
-class QSplitter;
+class TQSplitter;
 
 class ScanDialog : public KScanDialog
 {
    Q_OBJECT
 
 public:
-   ScanDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+   ScanDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
    ~ScanDialog();
 
    virtual bool setup();
@@ -43,8 +43,8 @@ private:
    void createOptionsTab( void );
 
 protected slots:
-   void slotFinalImage( QImage *, ImgScanInfo * );
-   void slotNewPreview( QImage * );
+   void slotFinalImage( TQImage *, ImgScanInfo * );
+   void slotNewPreview( TQImage * );
    void slotScanStart( );
    void slotScanFinished( KScanStat status );
    void slotAcquireStart();
@@ -59,11 +59,11 @@ private:
    ScanParams   *m_scanParams;
    KScanDevice  *m_device;
    Previewer    *m_previewer;
-   QImage       m_previewImage;
+   TQImage       m_previewImage;
    bool         good_scan_connect;
-   QCheckBox    *cb_askOnStart;
-   QCheckBox    *cb_network;
-   QSplitter    *splitter;
+   TQCheckBox    *cb_askOnStart;
+   TQCheckBox    *cb_network;
+   TQSplitter    *splitter;
    class ScanDialogPrivate;
    ScanDialogPrivate *d;
 };
@@ -71,10 +71,10 @@ private:
 class ScanDialogFactory : public KScanDialogFactory
 {
 public:
-   ScanDialogFactory( QObject *parent=0, const char *name=0 );
+   ScanDialogFactory( TQObject *parent=0, const char *name=0 );
 
 protected:
-   virtual KScanDialog * createDialog( QWidget *parent=0, const char *name=0,
+   virtual KScanDialog * createDialog( TQWidget *parent=0, const char *name=0,
 				       bool modal=false );
 
 

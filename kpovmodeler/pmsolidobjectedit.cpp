@@ -19,11 +19,11 @@
 #include "pmsolidobjectedit.h"
 #include "pmsolidobject.h"
 
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
 #include <klocale.h>
 
-PMSolidObjectEdit::PMSolidObjectEdit( QWidget* parent, const char* name )
+PMSolidObjectEdit::PMSolidObjectEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -31,16 +31,16 @@ PMSolidObjectEdit::PMSolidObjectEdit( QWidget* parent, const char* name )
 
 void PMSolidObjectEdit::createBottomWidgets( )
 {
-   m_pInverseButton = new QCheckBox( i18n( "Inverse" ), this );
-   m_pHollowButton = new QCheckBox( i18n( "Hollow" ), this );
+   m_pInverseButton = new TQCheckBox( i18n( "Inverse" ), this );
+   m_pHollowButton = new TQCheckBox( i18n( "Hollow" ), this );
 
    m_pHollowButton->setTristate( true );
    
    topLayout( )->addWidget( m_pInverseButton );
    topLayout( )->addWidget( m_pHollowButton );
 
-   connect( m_pHollowButton, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pInverseButton, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pHollowButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pInverseButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
    Base::createBottomWidgets( );
 }

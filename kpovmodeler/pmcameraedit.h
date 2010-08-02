@@ -25,15 +25,15 @@
 #endif
 
 #include "pmnamedobjectedit.h"
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 class PMCamera;
 class PMVectorEdit;
 class PMFloatEdit;
 class PMIntEdit;
-class QComboBox;
-class QLabel;
-class QCheckBox;
+class TQComboBox;
+class TQLabel;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMCamera
@@ -46,7 +46,7 @@ public:
    /**
     * Creates a PMCameraEdit with parent and name
     */
-   PMCameraEdit( QWidget* parent, const char* name = 0 );
+   PMCameraEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -80,19 +80,19 @@ private:
    PMVectorEdit* m_pUp;
    PMVectorEdit* m_pSky;
    PMVectorEdit* m_pLookAt;
-   QCheckBox* m_pEnableAngle;
+   TQCheckBox* m_pEnableAngle;
    PMFloatEdit* m_pAngle;
-   QComboBox* m_pCameraType;
-   QComboBox* m_pCylinderType;
-   QLabel* m_pCylinderTypeLabel;
-   QCheckBox* m_pFocalBlur;
+   TQComboBox* m_pCameraType;
+   TQComboBox* m_pCylinderType;
+   TQLabel* m_pCylinderTypeLabel;
+   TQCheckBox* m_pFocalBlur;
    PMFloatEdit* m_pAperture;
    PMIntEdit* m_pBlurSamples;
    PMVectorEdit* m_pFocalPoint;
    PMFloatEdit* m_pConfidence;
    PMFloatEdit* m_pVariance;
-   QPtrList<QWidget> m_focalWidgets;
-   QCheckBox* m_pExport;
+   TQPtrList<TQWidget> m_focalWidgets;
+   TQCheckBox* m_pExport;
 };
 
 

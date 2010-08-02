@@ -21,7 +21,7 @@
 #ifndef LRUCACHE_H
 #define LRUCACHE_H
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 namespace KSVG
 {
@@ -61,7 +61,7 @@ protected:
 		int m_cost;
 	};
 
-	typedef QValueList<CacheItem> CacheItemList;
+	typedef TQValueList<CacheItem> CacheItemList;
 
 	typename CacheItemList::iterator find(const keyType& key);
 	void enforceCostConstraint();

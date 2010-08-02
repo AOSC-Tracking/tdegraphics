@@ -24,14 +24,14 @@
 #include <kfilemetainfo.h>
 #include <kurl.h>
 
-class QStringList;
+class TQStringList;
 
 class KExrPlugin: public KFilePlugin
 {
     Q_OBJECT
     
 public:
-    KExrPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+    KExrPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
 
     virtual bool readInfo( KFileMetaInfo& info, uint );
 };

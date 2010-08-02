@@ -19,22 +19,22 @@
 
 #include "sizeindicator.h"
 
-#include <qpalette.h>
-#include <qimage.h>
+#include <tqpalette.h>
+#include <tqimage.h>
 
 #include <kimageeffect.h>
 #include <klocale.h>
 #include <kdebug.h>
-#include <qpainter.h>
+#include <tqpainter.h>
 
 
 
-SizeIndicator::SizeIndicator( QWidget *parent, long  thres, long crit )
-   :QLabel( parent )
+SizeIndicator::SizeIndicator( TQWidget *parent, long  thres, long crit )
+   :TQLabel( parent )
 {
    sizeInByte = -1;
-   setFrameStyle( QFrame::Box | QFrame::Sunken );
-   setMinimumWidth( fontMetrics().width( QString::fromLatin1("MMM.MM MB") ));
+   setFrameStyle( TQFrame::Box | TQFrame::Sunken );
+   setMinimumWidth( fontMetrics().width( TQString::fromLatin1("MMM.MM MB") ));
    setCritical( crit );
    threshold = thres;
 
@@ -64,9 +64,9 @@ void SizeIndicator::setSizeInByte( long newSize )
    sizeInByte = newSize;
    kdDebug(29000) << "New size in byte: " << newSize << endl ;
 
-   QString t;
+   TQString t;
 
-   QString unit = i18n( "%1 kB" );
+   TQString unit = i18n( "%1 kB" );
    double sizer = double(sizeInByte)/1024.0; // produces kiloBytes
    int precision = 1;
    int fwidth = 3;
@@ -86,11 +86,11 @@ void SizeIndicator::setSizeInByte( long newSize )
 
 
 
-void SizeIndicator::drawContents( QPainter *p )
+void SizeIndicator::drawContents( TQPainter *p )
 {
-   QSize s = size();
+   TQSize s = size();
 
-   QColor warnColor;
+   TQColor warnColor;
 
    if( sizeInByte >= threshold )
    {
@@ -104,7 +104,7 @@ void SizeIndicator::drawContents( QPainter *p )
 						      warnColor, KImageEffect::CrossDiagonalGradient, 200,200 ));
    }
    /* Displaying the text */
-   QString t = text();
+   TQString t = text();
    p->drawText( 0, 0, s.width(), s.height(),
 		AlignHCenter | AlignVCenter, t);
 

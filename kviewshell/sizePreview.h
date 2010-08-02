@@ -11,8 +11,8 @@
 #ifndef SIZEPREVIEW_H
 #define SIZEPREVIEW_H
 
-#include <qpixmap.h>
-#include <qwidget.h>
+#include <tqpixmap.h>
+#include <tqwidget.h>
 
 class SimplePageSize;
 
@@ -21,7 +21,7 @@ class SizePreview : public QWidget
   Q_OBJECT
 
 public:
-  SizePreview( QWidget *parent, const char* name=0, WFlags f=0 );
+  SizePreview( TQWidget *parent, const char* name=0, WFlags f=0 );
 
 public slots:
   // Sets the size.
@@ -31,8 +31,8 @@ public slots:
   void setOrientation(int ori); 
 
 protected:
-  void paintEvent(QPaintEvent*);
-  void resizeEvent(QResizeEvent*);
+  void paintEvent(TQPaintEvent*);
+  void resizeEvent(TQResizeEvent*);
 
 private:
   int orientation; // 0 = portrait, other = landscape
@@ -41,7 +41,7 @@ private:
   float _width; // in mm
   float _height; // in mm
 
-  QPixmap pixmap;
+  TQPixmap pixmap;
 };
 
 #endif

@@ -39,7 +39,7 @@ Copyright (c) 2004 Charles Samuels <charles@kde.org>
 #ifndef PHOTOBOOK_H
 #define PHOTOBOOK_H
 
-#include <qsplitter.h>
+#include <tqsplitter.h>
 #include <kfileiconview.h>
 #include <kdirlister.h>
 
@@ -58,7 +58,7 @@ Q_OBJECT
 	KParts::ReadOnlyPart *mViewer;
 
 public:
-	PhotoBook(QWidget *parent, PhotoBookPart *part, const char *name=0);
+	PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name=0);
 	void openURL(const KURL &url);
 	void updateButton(bool, bool );
 
@@ -76,10 +76,10 @@ Q_OBJECT
 	
 	KDirLister mDirLister;
 	PhotoBook *mPhotoBook;
-	QStringList mMimeTypes;
+	TQStringList mMimeTypes;
 
 public:
-	Previews(PhotoBook *parent, const QStringList &mimetypes);
+	Previews(PhotoBook *parent, const TQStringList &mimetypes);
 	~Previews();
 	void openURL(const KURL &url);
 
@@ -112,9 +112,9 @@ Q_OBJECT
 
 public:
 	PhotoBookPart(
-			QWidget *parentWidget, const char *widgetName,
-			QObject *parent, const char *name=0,
-			const QStringList& args = QStringList()
+			TQWidget *parentWidget, const char *widgetName,
+			TQObject *parent, const char *name=0,
+			const TQStringList& args = TQStringList()
 		);
 	~PhotoBookPart();
 

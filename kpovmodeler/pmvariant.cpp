@@ -17,7 +17,7 @@
 
 #include "pmvariant.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 #include "pmcolor.h"
 #include "pmvector.h"
 #include "pmdebug.h"
@@ -62,10 +62,10 @@ PMVariant::PMVariant( PMThreeState data )
 }
 
 
-PMVariant::PMVariant( const QString& data )
+PMVariant::PMVariant( const TQString& data )
 {
    m_dataType = PMVariant::String;
-   m_pData = new QString( data );
+   m_pData = new TQString( data );
 }
 
 PMVariant::PMVariant( const PMVector& data )
@@ -109,7 +109,7 @@ PMVariant::PMVariant( const PMVariant& v )
          setThreeState( *( ( PMThreeState* ) v.m_pData ) );
          break;
       case PMVariant::String:
-         setString( *( ( QString* ) v.m_pData ) );
+         setString( *( ( TQString* ) v.m_pData ) );
          break;
       case PMVariant::Vector:
          setVector( *( ( PMVector* ) v.m_pData ) );
@@ -145,7 +145,7 @@ PMVariant& PMVariant::operator= ( const PMVariant& v )
          setThreeState( *( ( PMThreeState* ) v.m_pData ) );
          break;
       case PMVariant::String:
-         setString( *( ( QString* ) v.m_pData ) );
+         setString( *( ( TQString* ) v.m_pData ) );
          break;
       case PMVariant::Vector:
          setVector( *( ( PMVector* ) v.m_pData ) );
@@ -188,7 +188,7 @@ void PMVariant::clear( )
          delete( ( PMThreeState* ) m_pData );
          break;
       case PMVariant::String:
-         delete( ( QString* ) m_pData );
+         delete( ( TQString* ) m_pData );
          break;
       case PMVariant::Vector:
          delete( ( PMVector* ) m_pData );
@@ -267,16 +267,16 @@ void PMVariant::setThreeState( const PMThreeState data )
       *( ( PMThreeState* ) m_pData ) = data;
 }
 
-void PMVariant::setString( const QString& data )
+void PMVariant::setString( const TQString& data )
 {
    if( m_dataType != PMVariant::String )
    {
       clear( );
-      m_pData = new QString( data );
+      m_pData = new TQString( data );
       m_dataType = PMVariant::String;
    }
    else
-      *( ( QString* ) m_pData ) = data;
+      *( ( TQString* ) m_pData ) = data;
 }
 
 void PMVariant::setVector( const PMVector& data )
@@ -355,12 +355,12 @@ PMThreeState PMVariant::threeStateData( ) const
    return PMUnspecified;
 }
 
-QString PMVariant::stringData( ) const
+TQString PMVariant::stringData( ) const
 {
    if( m_dataType == PMVariant::String )
-      return *( ( QString* ) m_pData );
+      return *( ( TQString* ) m_pData );
    kdError( PMArea ) << "Wrong type in PMVariant get function\n";
-   return QString::null;
+   return TQString::null;
 }
 
 PMVector PMVariant::vectorData( ) const
@@ -415,7 +415,7 @@ bool PMVariant::convertTo( PMVariant::PMVariantDataType t )
                break;
             case PMVariant::String:
             {
-               QString tmp;
+               TQString tmp;
                tmp.setNum( data );
                setString( tmp );
                break;
@@ -458,7 +458,7 @@ bool PMVariant::convertTo( PMVariant::PMVariantDataType t )
                break;
             case PMVariant::String:
             {
-               QString tmp;
+               TQString tmp;
                tmp.setNum( data );
                setString( tmp );
                break;
@@ -501,7 +501,7 @@ bool PMVariant::convertTo( PMVariant::PMVariantDataType t )
                break;
             case PMVariant::String:
             {
-               QString tmp;
+               TQString tmp;
                tmp.setNum( data );
                setString( tmp );
                break;
@@ -547,9 +547,9 @@ bool PMVariant::convertTo( PMVariant::PMVariantDataType t )
                break;
             case PMVariant::String:
                if( data )
-                  setString( QString( "true" ) );
+                  setString( TQString( "true" ) );
                else
-                  setString( QString( "false" ) );
+                  setString( TQString( "false" ) );
                break;
             case PMVariant::Vector:
                success = false;
@@ -594,11 +594,11 @@ bool PMVariant::convertTo( PMVariant::PMVariantDataType t )
                break;
             case PMVariant::String:
                if( data == PMTrue )
-                  setString( QString( "true" ) );
+                  setString( TQString( "true" ) );
                else if( data == PMFalse )
-                  setString( QString( "false" ) );
+                  setString( TQString( "false" ) );
                else
-                  setString( QString( "unspecified" ) );
+                  setString( TQString( "unspecified" ) );
                break;
             case PMVariant::Vector:
                success = false;
@@ -618,7 +618,7 @@ bool PMVariant::convertTo( PMVariant::PMVariantDataType t )
 
       case PMVariant::String:
       {
-         QString data = *( ( QString* ) m_pData );
+         TQString data = *( ( TQString* ) m_pData );
 
          switch( t )
          {
@@ -738,9 +738,9 @@ bool PMVariant::convertTo( PMVariant::PMVariantDataType t )
    return success;
 }
 
-QString PMVariant::asString( ) const
+TQString PMVariant::asString( ) const
 {
-   QString tmp;
+   TQString tmp;
 
    switch( m_dataType )
    {
@@ -789,7 +789,7 @@ QString PMVariant::asString( ) const
       }
       case PMVariant::String:
       {
-         tmp = *( ( QString* ) m_pData );
+         tmp = *( ( TQString* ) m_pData );
          break;
       }
       case PMVariant::Vector:
@@ -822,7 +822,7 @@ QString PMVariant::asString( ) const
    return tmp;
 }
 
-bool PMVariant::fromString( const PMVariant::PMVariantDataType t, const QString& value )
+bool PMVariant::fromString( const PMVariant::PMVariantDataType t, const TQString& value )
 {
    bool success;
 
@@ -895,7 +895,7 @@ bool PMVariant::fromString( const PMVariant::PMVariantDataType t, const QString&
    return success;
 }
 
-QDataStream& operator<<( QDataStream& stream, const PMVariant& value )
+TQDataStream& operator<<( TQDataStream& stream, const PMVariant& value )
 {
    stream << (Q_INT8)value.dataType( );
    stream << value.asString( );
@@ -903,11 +903,11 @@ QDataStream& operator<<( QDataStream& stream, const PMVariant& value )
    return stream;
 }
 
-QDataStream& operator>>( QDataStream& stream, PMVariant& value ) 
+TQDataStream& operator>>( TQDataStream& stream, PMVariant& value ) 
 {
    Q_INT8 type;
    PMVariant::PMVariantDataType dataType;
-   QString str;
+   TQString str;
 
    stream >> type;
    dataType = (PMVariant::PMVariantDataType)type;

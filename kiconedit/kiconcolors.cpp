@@ -18,14 +18,14 @@
     Boston, MA 02110-1301, USA.
 */  
 
-#include <qpainter.h>
-#include <qdrawutil.h>
+#include <tqpainter.h>
+#include <tqdrawutil.h>
 
 #include <kdebug.h>
 
 #include "kiconcolors.h"
 
-KDrawColors::KDrawColors(QWidget *parent) : KColorGrid(parent, 0, 3)
+KDrawColors::KDrawColors(TQWidget *parent) : KColorGrid(parent, 0, 3)
 {
   kdDebug(4640) << "KDrawColors - constructor" << endl;
   setCellSize(17);
@@ -35,11 +35,11 @@ KDrawColors::KDrawColors(QWidget *parent) : KColorGrid(parent, 0, 3)
   kdDebug(4640) << "KDrawColors - constructor - done" << endl;
 }
 
-void KDrawColors::paintCell( QPainter *painter, int row, int col )
+void KDrawColors::paintCell( TQPainter *painter, int row, int col )
 {
   //KColorGrid::paintCell(painter, row, col);
   uint c = colorAt( row * numCols() + col );
-  QBrush brush(c);
+  TQBrush brush(c);
   int d = spacing();
 
   qDrawShadePanel( painter, d, d, cellSize()-d, cellSize()-d,
@@ -48,7 +48,7 @@ void KDrawColors::paintCell( QPainter *painter, int row, int col )
      painter->drawWinFocusRect( d+1, d+1, cellSize()-(2*d)+1, cellSize()-(2*d)+1 );
 }
 
-void KDrawColors::mouseReleaseEvent( QMouseEvent *e )
+void KDrawColors::mouseReleaseEvent( TQMouseEvent *e )
 {
   int row = findRow( e->pos().y() );
   int col = findCol( e->pos().x() );
@@ -65,7 +65,7 @@ void KDrawColors::mouseReleaseEvent( QMouseEvent *e )
   emit newColor(colorAt(cell)|OPAQUE_MASK);
 }
 
-KSysColors::KSysColors(QWidget *parent) : KDrawColors(parent)
+KSysColors::KSysColors(TQWidget *parent) : KDrawColors(parent)
 {
   kdDebug(4640) << "KSysColors - constructor" << endl;
 
@@ -85,7 +85,7 @@ KSysColors::KSysColors(QWidget *parent) : KDrawColors(parent)
   kdDebug(4640) << "KSysColors - constructor - done" << endl;
 }
 
-KCustomColors::KCustomColors(QWidget *parent) : KDrawColors(parent)
+KCustomColors::KCustomColors(TQWidget *parent) : KDrawColors(parent)
 {
   kdDebug(4640) << "KCustomColors - constructor" << endl;
   setNumRows(3);
@@ -103,12 +103,12 @@ KCustomColors::~KCustomColors()
   delete [] freecells;
 }
 
-void KCustomColors::mouseDoubleClickEvent(QMouseEvent *e)
+void KCustomColors::mouseDoubleClickEvent(TQMouseEvent *e)
 {
   int row = findRow( e->pos().y() );
   int col = findCol( e->pos().x() );
   int cell = row * numCols() + col;
-  QColor color=colorAt(cell);
+  TQColor color=colorAt(cell);
   if(KColorDialog::getColor(color))
   {
     setColor(cell, color.rgb());
@@ -124,7 +124,7 @@ void KCustomColors::addColor(uint c)
     int f = getFreeCell();
     if(f != -1)
     {
-      QColor color(c);
+      TQColor color(c);
       if(!color.isValid())
       {
         kdDebug(4640) << "KCustomColors::addColor: Not a valid color: " << c << endl;

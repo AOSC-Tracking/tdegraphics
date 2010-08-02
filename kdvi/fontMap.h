@@ -9,8 +9,8 @@
 #ifndef _FONTMAP_H
 #define _FONTMAP_H
 
-#include <qmap.h>
-#include <qstring.h>
+#include <tqmap.h>
+#include <tqstring.h>
 
 /**
  * This class represents one line of a font map file, and contains
@@ -25,18 +25,18 @@ class fontMapEntry {
   // File name of the font WITHOUT the path. The full path name must
   // be looked by using the kpathsea library, e.g. by means of the
   // kpsewhich command. A valid entry would be 'ubkd8a.pfb'
-  QString fontFileName;
+  TQString fontFileName;
 
   // This string contains the full name of the font,
   // e.g. 'URWBookmanL-DemiBold'
-  QString fullFontName;
+  TQString fullFontName;
 
   // If the font requires an encoding (see fontEncoding.h for an
   // explanation), this string is not empty and contains the name of
   // the encoding, e.g. '8r'. The path of the associated encoding file
   // (on the author's machine: /usr/share/texmf/dvips/psnfss/8r.enc)
   // must be looked up using the kpsewhich comman.
-  QString fontEncoding;
+  TQString fontEncoding;
 
   // Some fonts need to be slanted, and the font map file defines by
   // how much. This field is set to 0.0 if no slanting is specified in
@@ -92,27 +92,27 @@ class fontMap {
   
   /** find the name of a font file (e.g. 'ubkd8a.pfb') from a TeX font
       name (e.g. 'rpbkd'). This method return a reference to
-      QString::null if the font could not be found. */
-  const QString &findFileName(const QString &TeXName);
+      TQString::null if the font could not be found. */
+  const TQString &findFileName(const TQString &TeXName);
   
   /** find the name of a font (e.g. 'URWBookmanL-DemiBold') from a TeX
       font name (e.g. 'rpbkd'). This method return a reference to
-      QString::null if the font could not be found. */
-  const QString &findFontName(const QString &TeXName);
+      TQString::null if the font could not be found. */
+  const TQString &findFontName(const TQString &TeXName);
   
   /** find the name of an encoding file for a font (e.g. '8r') from a
       TeX font name (e.g. 'rpbkd'). This method return a reference to
-      QString::null if the font could not be found. */
-  const QString &findEncoding(const QString &TeXName);
+      TQString::null if the font could not be found. */
+  const TQString &findEncoding(const TQString &TeXName);
 
   /** This method finds the slant of a font. Returns 0.0 if no slant
       was defined. */
-  double findSlant(const QString &TeXName);
+  double findSlant(const TQString &TeXName);
   
  private:
   /** This member maps TeX font names mapEntry classes that contain
       the font's filenames, full font names and encodings. */
-  QMap<QString, fontMapEntry> fontMapEntries;
+  TQMap<TQString, fontMapEntry> fontMapEntries;
 };
 
 #endif // ifndef _FONTMAP_H

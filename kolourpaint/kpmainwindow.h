@@ -32,10 +32,10 @@
 
 #define DEBUG_KP_MAIN_WINDOW 0
 
-#include <qpoint.h>
-#include <qptrlist.h>
-#include <qsize.h>
-#include <qvaluevector.h>
+#include <tqpoint.h>
+#include <tqptrlist.h>
+#include <tqsize.h>
+#include <tqvaluevector.h>
 
 #include <kmainwindow.h>
 #include <kurl.h>
@@ -45,12 +45,12 @@
 #include <kppixmapfx.h>
 
 
-class QPainter;
-class QPoint;
-class QPopupMenu;
-class QRect;
-class QSize;
-class QStringList;
+class TQPainter;
+class TQPoint;
+class TQPopupMenu;
+class TQRect;
+class TQSize;
+class TQStringList;
 
 class KAction;
 class KFontAction;
@@ -113,7 +113,7 @@ private:
     double m_configColorSimilarity;
 
     bool m_configThumbnailShown;
-    QRect m_configThumbnailGeometry;
+    TQRect m_configThumbnailGeometry;
     bool m_configZoomedThumbnail;
 
     void readGeneralSettings ();
@@ -166,15 +166,15 @@ private:
 
     virtual bool queryClose ();
 
-    virtual void dragEnterEvent (QDragEnterEvent *e);
-    virtual void dropEvent (QDropEvent *e);
+    virtual void dragEnterEvent (TQDragEnterEvent *e);
+    virtual void dropEvent (TQDropEvent *e);
 
 private slots:
     void slotScrollViewAboutToScroll ();
     void slotScrollViewAfterScroll ();
 
 private:
-    virtual void moveEvent (QMoveEvent *e);
+    virtual void moveEvent (TQMoveEvent *e);
 
 private slots:
     void slotUpdateCaption ();
@@ -203,7 +203,7 @@ private:
            *m_toolRoundedRectangle;
     kpToolText *m_toolText;
 
-    QPtrList <kpTool> m_tools;
+    TQPtrList <kpTool> m_tools;
     int m_lastToolNumber;
 
     bool m_toolActionsEnabled;
@@ -263,19 +263,19 @@ private:
 private:
     bool maybeDragScrollingMainView () const;
 private slots:
-    bool slotDragScroll (const QPoint &docPoint,
-                         const QPoint &docLastPoint,
+    bool slotDragScroll (const TQPoint &docPoint,
+                         const TQPoint &docLastPoint,
                          int zoomLevel,
                          bool *didSomething);
     bool slotEndDragScroll ();
 
 private slots:
     void slotBeganDocResize ();
-    void slotContinuedDocResize (const QSize &size);
+    void slotContinuedDocResize (const TQSize &size);
     void slotCancelledDocResize ();
-    void slotEndedDocResize (const QSize &size);
+    void slotEndedDocResize (const TQSize &size);
 
-    void slotDocResizeMessageChanged (const QString &string);
+    void slotDocResizeMessageChanged (const TQString &string);
 
 private slots:
     void slotActionPrevToolOptionGroup1 ();
@@ -334,8 +334,8 @@ private slots:
     void slotNew ();
 
 private:
-    QSize defaultDocSize () const;
-    void saveDefaultDocSize (const QSize &size);
+    TQSize defaultDocSize () const;
+    void saveDefaultDocSize (const TQSize &size);
 
 private:
     bool shouldOpenInNewWindow () const;
@@ -343,7 +343,7 @@ private:
 
 private:
     kpDocument *openInternal (const KURL &url,
-        const QSize &fallbackDocSize,
+        const TQSize &fallbackDocSize,
         bool newDocSameNameIfNotExist);
     // Same as above except that it:
     //
@@ -358,8 +358,8 @@ private:
     // make sense to bubble the Recent Files list.
     bool open (const KURL &url, bool newDocSameNameIfNotExist = false);
 
-    KURL::List askForOpenURLs (const QString &caption,
-                               const QString &startURL,
+    KURL::List askForOpenURLs (const TQString &caption,
+                               const TQString &startURL,
                                bool allowMultipleURLs = true);
 
 private slots:
@@ -367,18 +367,18 @@ private slots:
     void slotOpenRecent (const KURL &url);
 
     void slotScan ();
-    void slotScanned (const QImage &image, int);
+    void slotScanned (const TQImage &image, int);
 
     bool save (bool localOnly = false);
     bool slotSave ();
 
 private:
-    KURL askForSaveURL (const QString &caption,
-                        const QString &startURL,
-                        const QPixmap &pixmapToBeSaved,
+    KURL askForSaveURL (const TQString &caption,
+                        const TQString &startURL,
+                        const TQPixmap &pixmapToBeSaved,
                         const kpDocumentSaveOptions &startSaveOptions,
                         const kpDocumentMetaInfo &docMetaInfo,
-                        const QString &forcedSaveOptionsGroup,
+                        const TQString &forcedSaveOptionsGroup,
                         bool localOnly,
                         kpDocumentSaveOptions *chosenSaveOptions,
                         bool isSavingForFirstTime,
@@ -439,22 +439,22 @@ private:
     bool m_copyToFirstTime;
 
 public:
-    QPopupMenu *selectionToolRMBMenu ();
+    TQPopupMenu *selectionToolRMBMenu ();
 
 private slots:
     void slotCut ();
     void slotCopy ();
     void slotEnablePaste ();
 private:
-    QRect calcUsefulPasteRect (int pixmapWidth, int pixmapHeight);
+    TQRect calcUsefulPasteRect (int pixmapWidth, int pixmapHeight);
     void paste (const kpSelection &sel,
                 bool forceTopLeft = false);
 public:
     // (<forceNewTextSelection> is ignored if <text> is empty)
-    void pasteText (const QString &text,
+    void pasteText (const TQString &text,
                     bool forceNewTextSelection = false,
-                    const QPoint &newTextSelectionTopLeft = KP_INVALID_POINT);
-    void pasteTextAt (const QString &text, const QPoint &point,
+                    const TQPoint &newTextSelectionTopLeft = KP_INVALID_POINT);
+    void pasteTextAt (const TQString &text, const TQPoint &point,
                       // Allow tiny adjustment of <point> so that mouse
                       // pointer is not exactly on top of the topLeft of
                       // any new text selection (so that it doesn't look
@@ -498,12 +498,12 @@ private:
     KToggleAction *m_actionShowGrid,
                   *m_actionShowThumbnail, *m_actionZoomedThumbnail;
 
-    QValueVector <int> m_zoomList;
+    TQValueVector <int> m_zoomList;
 
 private:
     void sendZoomListToActionZoom ();
-    int zoomLevelFromString (const QString &string);
-    QString zoomLevelToString (int zoomLevel);
+    int zoomLevelFromString (const TQString &string);
+    TQString zoomLevelToString (int zoomLevel);
     void zoomTo (int zoomLevel, bool centerUnderCursor = false);
 
 private slots:
@@ -534,8 +534,8 @@ private:
     void updateMainViewGrid ();
 
 private:
-    QRect mapToGlobal (const QRect &rect) const;
-    QRect mapFromGlobal (const QRect &rect) const;
+    TQRect mapToGlobal (const TQRect &rect) const;
+    TQRect mapFromGlobal (const TQRect &rect) const;
 
 private slots:
     void slotDestroyThumbnailIfNotVisible (bool tnIsVisible);
@@ -544,7 +544,7 @@ private slots:
     void slotCreateThumbnail ();
 
 private:
-    QTimer *m_thumbnailSaveConfigTimer;
+    TQTimer *m_thumbnailSaveConfigTimer;
 
 public:
     void notifyThumbnailGeometryChanged ();
@@ -573,7 +573,7 @@ private:
     bool isSelectionActive () const;
     bool isTextSelection () const;
 
-    QString autoCropText () const;
+    TQString autoCropText () const;
 
     void setupImageMenuActions ();
     void enableImageMenuDocumentActions (bool enable = true);
@@ -647,9 +647,9 @@ private:
     kpSqueezedTextLabel *m_statusBarMessageLabel;
 
     bool m_statusBarShapeLastPointsInitialised;
-    QPoint m_statusBarShapeLastStartPoint, m_statusBarShapeLastEndPoint;
+    TQPoint m_statusBarShapeLastStartPoint, m_statusBarShapeLastEndPoint;
     bool m_statusBarShapeLastSizeInitialised;
-    QSize m_statusBarShapeLastSize;
+    TQSize m_statusBarShapeLastSize;
 
     enum
     {
@@ -665,11 +665,11 @@ private:
     void createStatusBar ();
 
 private slots:
-    void setStatusBarMessage (const QString &message = QString::null);
-    void setStatusBarShapePoints (const QPoint &startPoint = KP_INVALID_POINT,
-                                  const QPoint &endPoint = KP_INVALID_POINT);
-    void setStatusBarShapeSize (const QSize &size = KP_INVALID_SIZE);
-    void setStatusBarDocSize (const QSize &size = KP_INVALID_SIZE);
+    void setStatusBarMessage (const TQString &message = TQString::null);
+    void setStatusBarShapePoints (const TQPoint &startPoint = KP_INVALID_POINT,
+                                  const TQPoint &endPoint = KP_INVALID_POINT);
+    void setStatusBarShapeSize (const TQSize &size = KP_INVALID_SIZE);
+    void setStatusBarDocSize (const TQSize &size = KP_INVALID_SIZE);
     void setStatusBarDocDepth (int depth = 0);
     void setStatusBarZoom (int zoom = 0);
 
@@ -712,7 +712,7 @@ private:
                   *m_actionTextUnderline, *m_actionTextStrikeThru;
 
     int m_settingTextStyle;
-    QString m_textOldFontFamily;
+    TQString m_textOldFontFamily;
     int m_textOldFontSize;
 
 
@@ -725,7 +725,7 @@ private:
 
 private slots:
     void slotHelpTakingScreenshots ();
-    void slotHelpTakingScreenshotsFollowLink (const QString &link);
+    void slotHelpTakingScreenshotsFollowLink (const TQString &link);
 
 
 private:

@@ -24,10 +24,10 @@
 
 #include "pmsettingsdialog.h"
 
-class QLineEdit;
-class QPushButton;
-class QComboBox;
-class QListBox;
+class TQLineEdit;
+class TQPushButton;
+class TQComboBox;
+class TQListBox;
 
 /**
  * Povray configuration dialog page
@@ -39,7 +39,7 @@ public:
    /**
     * Default constructor
     */
-   PMPovraySettings( QWidget* parent, const char* name = 0 );
+   PMPovraySettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -81,17 +81,17 @@ protected slots:
    void slotBrowsePovrayDocumentation( );
    
 private:
-   QLineEdit* m_pPovrayCommand;
-   QPushButton* m_pBrowsePovrayCommand;
-   QLineEdit* m_pDocumentationPath;
-   QPushButton* m_pBrowseDocumentationPath;
-   QComboBox* m_pDocumentationVersion;
-   QListBox* m_pLibraryPaths;
-   QPushButton* m_pAddLibraryPath;
-   QPushButton* m_pRemoveLibraryPath;
-   QPushButton* m_pChangeLibraryPath;
-   QPushButton* m_pLibraryPathUp;
-   QPushButton* m_pLibraryPathDown;
+   TQLineEdit* m_pPovrayCommand;
+   TQPushButton* m_pBrowsePovrayCommand;
+   TQLineEdit* m_pDocumentationPath;
+   TQPushButton* m_pBrowseDocumentationPath;
+   TQComboBox* m_pDocumentationVersion;
+   TQListBox* m_pLibraryPaths;
+   TQPushButton* m_pAddLibraryPath;
+   TQPushButton* m_pRemoveLibraryPath;
+   TQPushButton* m_pChangeLibraryPath;
+   TQPushButton* m_pLibraryPathUp;
+   TQPushButton* m_pLibraryPathDown;
    int m_selectionIndex;
 };
 

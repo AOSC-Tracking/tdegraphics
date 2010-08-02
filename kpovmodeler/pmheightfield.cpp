@@ -29,8 +29,8 @@
 #include <klocale.h>
 
 const PMHeightField::HeightFieldType c_defaultType = PMHeightField::HFgif;
-const QString c_defaultTypeText = QString( "gif" );
-const QString c_defaultFileName = QString( "" );
+const TQString c_defaultTypeText = TQString( "gif" );
+const TQString c_defaultFileName = TQString( "" );
 const bool c_defaultHierarchy = true;
 const bool c_defaultSmooth = false;
 const double c_defaultWaterLevel = 0.0;
@@ -82,12 +82,12 @@ PMHeightField::~PMHeightField( )
    delete m_pROAM;
 }
 
-QString PMHeightField::description( ) const
+TQString PMHeightField::description( ) const
 {
    return i18n( "height field" );
 }
 
-void PMHeightField::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMHeightField::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "hf_type", typeToString( m_hfType ) );
    e.setAttribute( "file_name", m_fileName );
@@ -146,7 +146,7 @@ void PMHeightField::setHeightFieldType( PMHeightField::HeightFieldType t )
    }
 }
 
-void PMHeightField::setFileName( const QString& f )
+void PMHeightField::setFileName( const TQString& f )
 {
    if( f != m_fileName )
    {
@@ -200,7 +200,7 @@ void PMHeightField::setWaterLevel( double wl )
    }
 }
 
-PMDialogEditBase* PMHeightField::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMHeightField::editWidget( TQWidget* parent ) const
 {
    return new PMHeightFieldEdit( parent );
 }
@@ -396,37 +396,37 @@ PMViewStructure* PMHeightField::defaultViewStructure( ) const
    return s_pDefaultViewStructure;
 }
 
-QString PMHeightField::typeToString( PMHeightField::HeightFieldType t )
+TQString PMHeightField::typeToString( PMHeightField::HeightFieldType t )
 {
-   QString s;
+   TQString s;
    switch( t )
    {
       case HFgif:
-         s = QString( "gif" );
+         s = TQString( "gif" );
          break;
       case HFtga:
-         s = QString( "tga" );
+         s = TQString( "tga" );
          break;
       case HFpot:
-         s = QString( "pot" );
+         s = TQString( "pot" );
          break;
       case HFpng:
-         s = QString( "png" );
+         s = TQString( "png" );
          break;
       case HFpgm:
-         s = QString( "pgm" );
+         s = TQString( "pgm" );
          break;
       case HFppm:
-         s = QString( "ppm" );
+         s = TQString( "ppm" );
          break;
       case HFsys:
-         s = QString( "sys" );
+         s = TQString( "sys" );
          break;
    }
    return s;
 }
 
-PMHeightField::HeightFieldType PMHeightField::stringToType( const QString &str )
+PMHeightField::HeightFieldType PMHeightField::stringToType( const TQString &str )
 {
    HeightFieldType t = HFgif;
    if( str == "gif" )

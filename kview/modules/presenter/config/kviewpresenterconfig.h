@@ -21,13 +21,13 @@
 
 #include <kcmodule.h>
 
-class QCheckBox;
+class TQCheckBox;
 
 class KViewPresenterConfig : public KCModule
 {
 	Q_OBJECT
 	public:
-		KViewPresenterConfig( QWidget * parent, const char * name = 0, const QStringList & args = QStringList() );
+		KViewPresenterConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );
 		~KViewPresenterConfig();
 
 		virtual void load();
@@ -38,7 +38,7 @@ class KViewPresenterConfig : public KCModule
 		void checkChanged();
 
 	private:
-		QCheckBox * m_pCheckBox;
+		TQCheckBox * m_pCheckBox;
 };
 
 // vim:sw=4:ts=4

@@ -26,12 +26,12 @@
 #include "pmscene.h"
 #include "pmobjectdrag.h"
 
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qmultilineedit.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qdragobject.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqmultilineedit.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
+#include <tqdragobject.h>
 
 #include <kurl.h>
 #include <klocale.h>
@@ -39,8 +39,8 @@
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
-PMLibraryEntryPreview::PMLibraryEntryPreview( QWidget* parent ) :
-   QWidget( parent )
+PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :
+   TQWidget( parent )
 {
    setAcceptDrops( true );
    m_pPart = new PMPart( this, "treeview", NULL, "part", false, true );
@@ -50,71 +50,71 @@ PMLibraryEntryPreview::PMLibraryEntryPreview( QWidget* parent ) :
    m_subLib = false;
 
    setMaximumSize( 1000, 1000 );
-   QVBoxLayout* vl = new QVBoxLayout( this, KDialog::spacingHint( ) );
+   TQVBoxLayout* vl = new TQVBoxLayout( this, KDialog::spacingHint( ) );
 
-   QHBoxLayout* hl = new QHBoxLayout( vl );
+   TQHBoxLayout* hl = new TQHBoxLayout( vl );
    hl->addStretch( 1 );
 
-   QGridLayout* gl = new QGridLayout( vl, 4, 2 );
+   TQGridLayout* gl = new TQGridLayout( vl, 4, 2 );
    gl->setColStretch( 1, 1 );
-   QLabel* lbl = new QLabel( i18n( "Name: " ), this );
-   m_pName = new QLineEdit( this );
+   TQLabel* lbl = new TQLabel( i18n( "Name: " ), this );
+   m_pName = new TQLineEdit( this );
    m_pName->setAlignment( Qt::AlignLeft );
    m_pName->setReadOnly( true );
    gl->addWidget( lbl, 0, 0 );
    gl->addWidget( m_pName, 0, 1 );
 
-   lbl = new QLabel( i18n( "Description:" ), this );
+   lbl = new TQLabel( i18n( "Description:" ), this );
    lbl->setAlignment( Qt::AlignTop );
-   m_pDescription = new QMultiLineEdit( this );
+   m_pDescription = new TQMultiLineEdit( this );
    m_pDescription->setAlignment( Qt::AlignTop  | Qt::AlignLeft |
                                  Qt::WordBreak | Qt::DontClip );
    m_pDescription->setReadOnly( true );
    gl->addWidget( lbl, 1, 0 );
    gl->addWidget( m_pDescription, 1, 1 );
 
-   m_pKeywordsLabel = new QLabel( i18n( "Keywords:" ), this );
+   m_pKeywordsLabel = new TQLabel( i18n( "Keywords:" ), this );
    m_pKeywordsLabel->setAlignment( Qt::AlignTop );
-   m_pKeywords = new QMultiLineEdit( this );
+   m_pKeywords = new TQMultiLineEdit( this );
    m_pKeywords->setAlignment( Qt::AlignTop  | Qt::AlignLeft |
                                  Qt::WordBreak | Qt::DontClip );
    m_pKeywords->setReadOnly( true );
    gl->addWidget( m_pKeywordsLabel, 2, 0 );
    gl->addWidget( m_pKeywords, 2, 1 );
 
-   m_pContentsLabel = new QLabel( i18n( "Contents:" ), this );
+   m_pContentsLabel = new TQLabel( i18n( "Contents:" ), this );
    m_pContentsPreview = new PMTreeView( m_pPart, this );
    gl->addMultiCellWidget( m_pContentsLabel, 3, 3, 0, 1 );
    gl->addMultiCellWidget( m_pContentsPreview, 4, 4, 0, 1 );
    gl->setRowStretch(4, 1);
 
-   hl = new QHBoxLayout( vl );
+   hl = new TQHBoxLayout( vl );
    hl->addStretch( 1 );
-   m_pSetPreviewImageButton = new QPushButton( i18n( "Change Preview Image" ), this );
+   m_pSetPreviewImageButton = new TQPushButton( i18n( "Change Preview Image" ), this );
    m_pSetPreviewImageButton->setEnabled( false );
    hl->addWidget( m_pSetPreviewImageButton );
 
-   hl = new QHBoxLayout( vl );
+   hl = new TQHBoxLayout( vl );
    hl->addStretch( 1 );
-   m_pApplyChanges = new QPushButton( i18n( "&Apply" ), this );
+   m_pApplyChanges = new TQPushButton( i18n( "&Apply" ), this );
    m_pApplyChanges->setEnabled( false );
    hl->addWidget( m_pApplyChanges );
-   m_pCancelChanges = new QPushButton( i18n( "&Cancel" ), this );
+   m_pCancelChanges = new TQPushButton( i18n( "&Cancel" ), this );
    m_pCancelChanges->setEnabled( false );
    hl->addWidget( m_pCancelChanges );
 
-   connect( m_pName,                  SIGNAL( textChanged( const QString& ) ),
-                                      SLOT( slotTextChanged( const QString& ) ) );
-   connect( m_pDescription,           SIGNAL( textChanged( ) ),
-                                      SLOT( slotTextChanged( ) ) );
-   connect( m_pKeywords,              SIGNAL( textChanged( ) ),
-                                      SLOT( slotTextChanged( ) ) );
-   connect( m_pSetPreviewImageButton, SIGNAL( clicked( ) ),
-                                      SLOT( slotPreviewClicked( ) ) );
-   connect( m_pPart,                  SIGNAL( modified( ) ),
-                                      SLOT( slotTextChanged( ) ) );
-   connect( m_pApplyChanges, SIGNAL( clicked( ) ), SLOT( slotApplyClicked( ) ) );
-   connect( m_pCancelChanges, SIGNAL( clicked( ) ), SLOT( slotCancelClicked( ) ) );
+   connect( m_pName,                  TQT_SIGNAL( textChanged( const TQString& ) ),
+                                      TQT_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pDescription,           TQT_SIGNAL( textChanged( ) ),
+                                      TQT_SLOT( slotTextChanged( ) ) );
+   connect( m_pKeywords,              TQT_SIGNAL( textChanged( ) ),
+                                      TQT_SLOT( slotTextChanged( ) ) );
+   connect( m_pSetPreviewImageButton, TQT_SIGNAL( clicked( ) ),
+                                      TQT_SLOT( slotPreviewClicked( ) ) );
+   connect( m_pPart,                  TQT_SIGNAL( modified( ) ),
+                                      TQT_SLOT( slotTextChanged( ) ) );
+   connect( m_pApplyChanges, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotApplyClicked( ) ) );
+   connect( m_pCancelChanges, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCancelClicked( ) ) );
    vl->addStretch( 1 );
 }
 
@@ -172,7 +172,7 @@ bool PMLibraryEntryPreview::showPreview( KURL u, bool readOnly, bool subLib )
    return result;
 }
 
-void PMLibraryEntryPreview::loadObjects( QByteArray* obj )
+void PMLibraryEntryPreview::loadObjects( TQByteArray* obj )
 {
 
    m_pPart->setReadWrite( true );
@@ -236,17 +236,17 @@ void PMLibraryEntryPreview::slotTextChanged( )
    setModified( true );
 }
 
-void PMLibraryEntryPreview::slotTextChanged( const QString& /* s */)
+void PMLibraryEntryPreview::slotTextChanged( const TQString& /* s */)
 {
    setModified( true );
 }
 
 void PMLibraryEntryPreview::slotPreviewClicked( )
 {
-   KFileDialog dlg( QString::null, "", NULL, "", false );
+   KFileDialog dlg( TQString::null, "", NULL, "", false );
 
    dlg.setFilter( "image/jpeg image/gif image/tiff image/png image/x-bmp" );
-   if( dlg.exec( ) == QDialog::Accepted )
+   if( dlg.exec( ) == TQDialog::Accepted )
    {
       m_image.load( dlg.selectedFile( ) );
       setModified( true );
@@ -319,15 +319,15 @@ bool PMLibraryEntryPreview::saveIfNeeded( bool forceSave )
    return false;
 }
 
-void PMLibraryEntryPreview::dragEnterEvent( QDragEnterEvent* event )
+void PMLibraryEntryPreview::dragEnterEvent( TQDragEnterEvent* event )
 {
-   event->accept( !m_readOnly && QImageDrag::canDecode( event ) );
+   event->accept( !m_readOnly && TQImageDrag::canDecode( event ) );
 }
 
-void PMLibraryEntryPreview::dropEvent( QDropEvent* event )
+void PMLibraryEntryPreview::dropEvent( TQDropEvent* event )
 {
-   QImage img;
-   if( QImageDrag::decode( event, img ) )
+   TQImage img;
+   if( TQImageDrag::decode( event, img ) )
    {
       m_image = img;
       setModified( true );

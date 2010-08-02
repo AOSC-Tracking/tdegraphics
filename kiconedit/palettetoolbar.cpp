@@ -19,10 +19,10 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qpainter.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqwhatsthis.h>
+#include <tqpainter.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -30,56 +30,56 @@
 #include "kiconcolors.h"
 #include "palettetoolbar.h"
 
-PaletteToolBar::PaletteToolBar( QWidget *parent, const char *name )
+PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
     : KToolBar( parent, name )
 {
-  QWidget *base = new QWidget( this );
+  TQWidget *base = new TQWidget( this );
 
-  QBoxLayout::Direction d = orientation() == Qt::Horizontal? 
-      QBoxLayout::LeftToRight : QBoxLayout::TopToBottom;
-  m_layout = new QBoxLayout( base, d, 2, 6 );
+  TQBoxLayout::Direction d = orientation() == Qt::Horizontal? 
+      TQBoxLayout::LeftToRight : TQBoxLayout::TopToBottom;
+  m_layout = new TQBoxLayout( base, d, 2, 6 );
 
-  m_lblPreview = new QLabel( base );
-  m_lblPreview->setFrameStyle( QFrame::Panel|QFrame::Sunken );
+  m_lblPreview = new TQLabel( base );
+  m_lblPreview->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_lblPreview->setFixedHeight( 64 );
   m_lblPreview->setAlignment( Qt::AlignHCenter|Qt::AlignVCenter );
-  QWhatsThis::add(m_lblPreview, i18n( "Preview\n\nThis is a 1:1 preview"
+  TQWhatsThis::add(m_lblPreview, i18n( "Preview\n\nThis is a 1:1 preview"
       " of the current icon" ) );
   m_layout->addWidget( m_lblPreview );
 
-  m_currentColorView = new QLabel( base );
-  m_currentColorView->setFrameStyle( QFrame::Panel|QFrame::Sunken );
+  m_currentColorView = new TQLabel( base );
+  m_currentColorView->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_currentColorView->setFixedHeight( 24 );
   m_currentColorView->setAlignment( Qt::AlignHCenter|Qt::AlignVCenter );
-  QWhatsThis::add(m_currentColorView, i18n( "Current color\n\nThis is the currently selected color" ) );
+  TQWhatsThis::add(m_currentColorView, i18n( "Current color\n\nThis is the currently selected color" ) );
   m_layout->addWidget( m_currentColorView );
 
-  QVBoxLayout *vlayout = new QVBoxLayout( m_layout, 0 );
-  QLabel *l = new QLabel( i18n( "System colors:" ), base );
+  TQVBoxLayout *vlayout = new TQVBoxLayout( m_layout, 0 );
+  TQLabel *l = new TQLabel( i18n( "System colors:" ), base );
   vlayout->addWidget( l );
   m_sysColors = new KSysColors( base );
-  QWhatsThis::add(m_sysColors, i18n( "System colors\n\nHere you can select"
+  TQWhatsThis::add(m_sysColors, i18n( "System colors\n\nHere you can select"
       " colors from the KDE icon palette" ) );
 
   vlayout->addWidget( m_sysColors );
 
-  connect( m_sysColors, SIGNAL( newColor(uint) ), 
-      SIGNAL( newColor(uint) ) );
+  connect( m_sysColors, TQT_SIGNAL( newColor(uint) ), 
+      TQT_SIGNAL( newColor(uint) ) );
 
-  vlayout = new QVBoxLayout( m_layout, 0 );
-  l = new QLabel( i18n( "Custom colors:" ), base );
+  vlayout = new TQVBoxLayout( m_layout, 0 );
+  l = new TQLabel( i18n( "Custom colors:" ), base );
   vlayout->addWidget( l );
   m_customColors = new KCustomColors( base );
-  QWhatsThis::add(m_customColors, i18n( "Custom colors\n\nHere you can"
+  TQWhatsThis::add(m_customColors, i18n( "Custom colors\n\nHere you can"
       " build a palette of custom colors.\nDouble-click on a box to edit"
       " the color" ) );
 
   vlayout->addWidget( m_customColors );
 
-  connect( m_customColors, SIGNAL( newColor(uint) ), 
-      SIGNAL( newColor(uint) ) );
-  connect( this, SIGNAL( newColor(uint)),
-      this, SLOT(currentColorChanged(uint)));
+  connect( m_customColors, TQT_SIGNAL( newColor(uint) ), 
+      TQT_SIGNAL( newColor(uint) ) );
+  connect( this, TQT_SIGNAL( newColor(uint)),
+      this, TQT_SLOT(currentColorChanged(uint)));
   currentColorChanged(OPAQUE_MASK|0);
 
   setEnableContextMenu( false );
@@ -91,14 +91,14 @@ void PaletteToolBar::setOrientation( Orientation o )
    if(  barPos() == Floating )
      o = o == Qt::Vertical ? Qt::Horizontal : Qt::Vertical;
 
-  QBoxLayout::Direction d = o == Qt::Horizontal? QBoxLayout::LeftToRight
-        : QBoxLayout::TopToBottom;
+  TQBoxLayout::Direction d = o == Qt::Horizontal? TQBoxLayout::LeftToRight
+        : TQBoxLayout::TopToBottom;
   m_layout->setDirection( d );
 
-  QDockWindow::setOrientation( o );
+  TQDockWindow::setOrientation( o );
 }
 
-void PaletteToolBar::previewChanged(  const QPixmap &p )
+void PaletteToolBar::previewChanged(  const TQPixmap &p )
 {
   m_lblPreview->setPixmap( p );
 }
@@ -116,12 +116,12 @@ void PaletteToolBar::addColor( uint color )
         m_customColors->addColor( color );
 }
 
-void PaletteToolBar::setPreviewBackground( QPixmap pixmap )
+void PaletteToolBar::setPreviewBackground( TQPixmap pixmap )
 {
     m_lblPreview->setBackgroundPixmap(pixmap);
 }
 
-void PaletteToolBar::setPreviewBackground( const QColor& colour )
+void PaletteToolBar::setPreviewBackground( const TQColor& colour )
 {
     m_lblPreview->setBackgroundColor(colour);
 }
@@ -139,8 +139,8 @@ void PaletteToolBar::currentColorChanged(uint color)
     const uint lightColour = qRgb(255, 255, 255);
     const uint darkColour = qRgb(127, 127, 127);
 
-    QPixmap pm(2 * squareWidth, 2 * squareWidth);
-    QPainter p(&pm);
+    TQPixmap pm(2 * squareWidth, 2 * squareWidth);
+    TQPainter p(&pm);
 
     double alpha = qAlpha(color) / 255.0;
 

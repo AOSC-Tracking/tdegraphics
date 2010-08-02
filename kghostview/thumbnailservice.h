@@ -19,23 +19,23 @@
  */
 
 #include <set>
-#include <qobject.h>
-#include <qpixmap.h>
-#include <qguardedptr.h>
+#include <tqobject.h>
+#include <tqpixmap.h>
+#include <tqguardedptr.h>
 #include <stdio.h>
 
 class KPSWidget;
 class KGVMiniWidget;
-class QTimer;
+class TQTimer;
 
-class ThumbnailService : public QObject {
+class ThumbnailService : public TQObject {
 	Q_OBJECT
 	public:
 		ThumbnailService( KGVMiniWidget* parent, const char* name = 0 );
 		~ThumbnailService();
 
 	public slots:
-		void delayedGetThumbnail( int page, QObject* receiver, const char* slot, bool urgent = false );
+		void delayedGetThumbnail( int page, TQObject* receiver, const char* slot, bool urgent = false );
 		/**
 		 * Cancels the request matching the signature below.
 		 *
@@ -43,7 +43,7 @@ class ThumbnailService : public QObject {
 		 * @param receiver the receiver. Use null for wildcard
 		 * @param slot Use null for wildcard
 		 */
-		void cancelRequests( int page, QObject* receiver, const char* slot);
+		void cancelRequests( int page, TQObject* receiver, const char* slot);
 	
 		void reset();
 		/**
@@ -58,31 +58,31 @@ class ThumbnailService : public QObject {
 		/** 
 		 * Don't connect to this directly
 		 */
-		void relayPixmap( QPixmap );
+		void relayPixmap( TQPixmap );
 
 	private slots:
-		void slotDone( QPixmap );
+		void slotDone( TQPixmap );
 		void processOne();
 
 	private:
 
 	struct Request {
-		Request( int p, QObject* r, const char* s ) :
+		Request( int p, TQObject* r, const char* s ) :
 		    page( p ), receiver( r ), slot( s ), urgent( false ) { }
-		Request( int p, QObject* r, const char* s, bool u ) :
+		Request( int p, TQObject* r, const char* s, bool u ) :
 		    page( p ), receiver( r ), slot( s ), urgent( u ) { }
 
 		int page;
-		QObject* receiver;
+		TQObject* receiver;
 		const char* slot;
 		bool urgent;
 		bool operator < ( Request ) const;
 	};
 	static bool pageCmp( Request, Request );
 	std::set<Request> pending;
-	QGuardedPtr<KPSWidget> _thumbnailDrawer;
+	TQGuardedPtr<KPSWidget> _thumbnailDrawer;
 	KGVMiniWidget* _mini;
-	QTimer* timer_;
+	TQTimer* timer_;
 	bool _busy;
 	bool _enabled;
 };

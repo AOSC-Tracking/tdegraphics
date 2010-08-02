@@ -10,8 +10,8 @@
 #ifndef KUICKIMAGE_H
 #define KUICKIMAGE_H
 
-#include <qimage.h>
-#include <qobject.h>
+#include <tqimage.h>
+#include <tqobject.h>
 
 #include <kurl.h>
 
@@ -49,7 +49,7 @@ public:
   ImlibImage *	imlibImage()	const { return myIm;      }
   Pixmap& 	pixmap();
   void 		renderPixmap();
-//  const QString& filename() 	const { return myFilename;}
+//  const TQString& filename() 	const { return myFilename;}
   const KuickFile& file()       const { return *myFile; }
   const KURL& url()             const { return myFile->url(); }
 
@@ -58,7 +58,7 @@ public:
   Rotation      absRotation()   const { return myRotation; }
   FlipMode      flipMode()      const { return myFlipMode; }
 
-  static ImlibImage * toImage( ImlibData *id, QImage& image );
+  static ImlibImage * toImage( ImlibData *id, TQImage& image );
 
 private:
   void      fastResize( int newWidth, int newHeight );
@@ -66,7 +66,7 @@ private:
   /**
    * Note: caller must delete it!
    */
-  QImage * 	newQImage() const;
+  TQImage * 	newQImage() const;
 
   const KuickFile * myFile;
 

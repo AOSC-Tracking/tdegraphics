@@ -30,8 +30,8 @@
 
 #include <kpdocumentsaveoptions.h>
 
-#include <qpixmap.h>
-#include <qstring.h>
+#include <tqpixmap.h>
+#include <tqstring.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -42,7 +42,7 @@
 
 struct kpDocumentSaveOptionsPrivate
 {
-    QString m_mimeType;
+    TQString m_mimeType;
     int m_colorDepth;
     bool m_dither;
     int m_quality;
@@ -67,7 +67,7 @@ kpDocumentSaveOptions::kpDocumentSaveOptions (const kpDocumentSaveOptions &rhs)
     d->m_quality = rhs.quality ();
 }
 
-kpDocumentSaveOptions::kpDocumentSaveOptions (QString mimeType, int colorDepth, bool dither, int quality)
+kpDocumentSaveOptions::kpDocumentSaveOptions (TQString mimeType, int colorDepth, bool dither, int quality)
     : d (new kpDocumentSaveOptionsPrivate ())
 {
     d->m_mimeType = mimeType;
@@ -111,11 +111,11 @@ kpDocumentSaveOptions &kpDocumentSaveOptions::operator= (const kpDocumentSaveOpt
 
 
 // public
-void kpDocumentSaveOptions::printDebug (const QString &prefix) const
+void kpDocumentSaveOptions::printDebug (const TQString &prefix) const
 {
-    const QString usedPrefix = !prefix.isEmpty () ?
-                                   prefix + QString::fromLatin1 (": ") :
-                                   QString::null;
+    const TQString usedPrefix = !prefix.isEmpty () ?
+                                   prefix + TQString::fromLatin1 (": ") :
+                                   TQString::null;
 
     kdDebug () << usedPrefix
                << "mimeType=" << mimeType ()
@@ -127,26 +127,26 @@ void kpDocumentSaveOptions::printDebug (const QString &prefix) const
 
 
 // public
-QString kpDocumentSaveOptions::mimeType () const
+TQString kpDocumentSaveOptions::mimeType () const
 {
     return d->m_mimeType;
 }
 
 // public
-void kpDocumentSaveOptions::setMimeType (const QString &mimeType)
+void kpDocumentSaveOptions::setMimeType (const TQString &mimeType)
 {
     d->m_mimeType = mimeType;
 }
 
 
 // public static
-QString kpDocumentSaveOptions::invalidMimeType ()
+TQString kpDocumentSaveOptions::invalidMimeType ()
 {
-    return QString::null;
+    return TQString::null;
 }
 
 // public static
-bool kpDocumentSaveOptions::mimeTypeIsInvalid (const QString &mimeType)
+bool kpDocumentSaveOptions::mimeTypeIsInvalid (const TQString &mimeType)
 {
     return (mimeType == invalidMimeType ());
 }
@@ -243,15 +243,15 @@ bool kpDocumentSaveOptions::qualityIsInvalid () const
 
 
 // public static
-QString kpDocumentSaveOptions::defaultMimeType (KConfigBase *config)
+TQString kpDocumentSaveOptions::defaultMimeType (KConfigBase *config)
 {
     return config->readEntry (kpSettingForcedMimeType,
-                              QString::fromLatin1 ("image/png"));
+                              TQString::fromLatin1 ("image/png"));
 }
 
 // public static
 void kpDocumentSaveOptions::saveDefaultMimeType (KConfigBase *config,
-                                                 const QString &mimeType)
+                                                 const TQString &mimeType)
 {
     config->writeEntry (kpSettingForcedMimeType, mimeType);
 }
@@ -366,10 +366,10 @@ bool kpDocumentSaveOptions::saveDefaultDifferences (KConfigBase *config,
 }
 
 
-static QStringList mimeTypesSupportingProperty (const QString &property,
-    const QStringList &defaultMimeTypesWithPropertyList)
+static TQStringList mimeTypesSupportingProperty (const TQString &property,
+    const TQStringList &defaultMimeTypesWithPropertyList)
 {
-    QStringList mimeTypeList;
+    TQStringList mimeTypeList;
 
     KConfigGroupSaver cfgGroupSaver (KGlobal::config (),
                                      kpSettingsGroupMimeTypeProperties);
@@ -390,10 +390,10 @@ static QStringList mimeTypesSupportingProperty (const QString &property,
     return mimeTypeList;
 }
 
-static bool mimeTypeSupportsProperty (const QString &mimeType,
-    const QString &property, const QStringList &defaultMimeTypesWithPropertyList)
+static bool mimeTypeSupportsProperty (const TQString &mimeType,
+    const TQString &property, const TQStringList &defaultMimeTypesWithPropertyList)
 {
-    const QStringList mimeTypeList = mimeTypesSupportingProperty (
+    const TQStringList mimeTypeList = mimeTypesSupportingProperty (
         property, defaultMimeTypesWithPropertyList);
 
     return mimeTypeList.contains (mimeType);
@@ -434,31 +434,31 @@ static bool mimeTypeSupportsProperty (const QString &mimeType,
 //
 // To test whether depth is configurable, write an image in the new
 // mimetype with all depths and read each one back.  See what
-// kpDocument thinks the depth is when it gets QImage to read it.
+// kpDocument thinks the depth is when it gets TQImage to read it.
 
 
 // public static
-int kpDocumentSaveOptions::mimeTypeMaximumColorDepth (const QString &mimeType)
+int kpDocumentSaveOptions::mimeTypeMaximumColorDepth (const TQString &mimeType)
 {
-    QStringList defaultList;
+    TQStringList defaultList;
 
     // SYNC: update mime info here
     
     // Greyscale actually (unenforced since depth not set to configurable)
-    defaultList << QString::fromLatin1 ("image/x-eps:32");
+    defaultList << TQString::fromLatin1 ("image/x-eps:32");
     
-    defaultList << QString::fromLatin1 ("image/x-portable-bitmap:1");
+    defaultList << TQString::fromLatin1 ("image/x-portable-bitmap:1");
     
     // Greyscale actually (unenforced since depth not set to configurable)
-    defaultList << QString::fromLatin1 ("image/x-portable-greymap:8");
+    defaultList << TQString::fromLatin1 ("image/x-portable-greymap:8");
     
-    defaultList << QString::fromLatin1 ("image/x-xbm:1");
+    defaultList << TQString::fromLatin1 ("image/x-xbm:1");
 
-    const QStringList mimeTypeList = mimeTypesSupportingProperty (
+    const TQStringList mimeTypeList = mimeTypesSupportingProperty (
         kpSettingMimeTypeMaximumColorDepth, defaultList);
 
-    const QString mimeTypeColon = mimeType + QString::fromLatin1 (":");
-    for (QStringList::const_iterator it = mimeTypeList.begin ();
+    const TQString mimeTypeColon = mimeType + TQString::fromLatin1 (":");
+    for (TQStringList::const_iterator it = mimeTypeList.begin ();
          it != mimeTypeList.end ();
          it++)
     {
@@ -483,21 +483,21 @@ int kpDocumentSaveOptions::mimeTypeMaximumColorDepth () const
 
 
 // public static
-bool kpDocumentSaveOptions::mimeTypeHasConfigurableColorDepth (const QString &mimeType)
+bool kpDocumentSaveOptions::mimeTypeHasConfigurableColorDepth (const TQString &mimeType)
 {
-    QStringList defaultMimeTypes;
+    TQStringList defaultMimeTypes;
 
     // SYNC: update mime info here
-    defaultMimeTypes << QString::fromLatin1 ("image/png");
-    defaultMimeTypes << QString::fromLatin1 ("image/x-bmp");
-    defaultMimeTypes << QString::fromLatin1 ("image/x-pcx");
+    defaultMimeTypes << TQString::fromLatin1 ("image/png");
+    defaultMimeTypes << TQString::fromLatin1 ("image/x-bmp");
+    defaultMimeTypes << TQString::fromLatin1 ("image/x-pcx");
     
     // TODO: Only 1, 24 not 8; Qt only sees 32 but "file" cmd realises
     //       it's either 1 or 24.
-    defaultMimeTypes << QString::fromLatin1 ("image/x-rgb");
+    defaultMimeTypes << TQString::fromLatin1 ("image/x-rgb");
   
     // TODO: Only 8 and 24 - no 1.
-    defaultMimeTypes << QString::fromLatin1 ("image/x-xpm");
+    defaultMimeTypes << TQString::fromLatin1 ("image/x-xpm");
 
     return mimeTypeSupportsProperty (mimeType,
         kpSettingMimeTypeHasConfigurableColorDepth,
@@ -512,13 +512,13 @@ bool kpDocumentSaveOptions::mimeTypeHasConfigurableColorDepth () const
 
 
 // public static
-bool kpDocumentSaveOptions::mimeTypeHasConfigurableQuality (const QString &mimeType)
+bool kpDocumentSaveOptions::mimeTypeHasConfigurableQuality (const TQString &mimeType)
 {
-    QStringList defaultMimeTypes;
+    TQStringList defaultMimeTypes;
 
     // SYNC: update mime info here
-    defaultMimeTypes << QString::fromLatin1 ("image/jp2");
-    defaultMimeTypes << QString::fromLatin1 ("image/jpeg");
+    defaultMimeTypes << TQString::fromLatin1 ("image/jp2");
+    defaultMimeTypes << TQString::fromLatin1 ("image/jpeg");
 
     return mimeTypeSupportsProperty (mimeType,
         kpSettingMimeTypeHasConfigurableQuality,
@@ -533,7 +533,7 @@ bool kpDocumentSaveOptions::mimeTypeHasConfigurableQuality () const
 
 
 // public
-int kpDocumentSaveOptions::isLossyForSaving (const QPixmap &pixmap) const
+int kpDocumentSaveOptions::isLossyForSaving (const TQPixmap &pixmap) const
 {
     int ret = 0;
 

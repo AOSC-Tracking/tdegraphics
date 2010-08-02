@@ -10,7 +10,7 @@
 #ifndef FILECACHE_H
 #define FILECACHE_H
 
-#include <qcache.h>
+#include <tqcache.h>
 
 #include "kuickfile.h"
 
@@ -27,9 +27,9 @@ public:
     int getLimit() const { return m_limit; }
 
     /**
-     * @return the temporary directory or QString::null if none available
+     * @return the temporary directory or TQString::null if none available
      */
-    QString tempDir();
+    TQString tempDir();
 
 private:
     static FileCache *s_self;
@@ -37,7 +37,7 @@ private:
     ~FileCache();
 
     KTempDir * createTempDir();
-    QCache<KuickFile> m_files;
+    TQCache<KuickFile> m_files;
 
     int m_limit;
     KTempDir *m_tempDir;

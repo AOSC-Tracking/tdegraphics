@@ -19,11 +19,11 @@
 #pragma interface
 #endif
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 #include "xpdf/PDFDoc.h" // for 'Object'
 #include "xpdf/SplashOutputDev.h"
 
-class QPixmap;
+class TQPixmap;
 class KPDFLink;
 class ObjectRect;
 class DocumentViewport;
@@ -52,9 +52,9 @@ class KPDFOutputDev : public SplashOutputDev
                         bool decodeLinks, bool decodeImages, bool qtThreadSafety = false );
 
         // takes pointers out of the class (so deletion it's up to others)
-        QPixmap * takePixmap();
-        QImage * takeImage();
-        QValueList< ObjectRect * > takeObjectRects();
+        TQPixmap * takePixmap();
+        TQImage * takeImage();
+        TQValueList< ObjectRect * > takeObjectRects();
 
         /** inherited from OutputDev */
         // End a page.
@@ -82,9 +82,9 @@ class KPDFOutputDev : public SplashOutputDev
 
         // Internal objects
         PDFDoc * m_doc;
-        QPixmap * m_pixmap;
-        QImage * m_image;
-        QValueList< ObjectRect * > m_rects; // objectRects (links/images)
+        TQPixmap * m_pixmap;
+        TQImage * m_image;
+        TQValueList< ObjectRect * > m_rects; // objectRects (links/images)
 };
 
 #endif

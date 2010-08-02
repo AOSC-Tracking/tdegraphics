@@ -20,7 +20,7 @@
 
 #include "kfile_ps.h"
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <klocale.h>
 #include <kgenericfactory.h>
@@ -30,8 +30,8 @@ typedef KGenericFactory<KPSPlugin> PSFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_ps, PSFactory("kfile_ps"))
 
-KPSPlugin::KPSPlugin(QObject *parent, const char *name,
-                       const QStringList &preferredItems) : 
+KPSPlugin::KPSPlugin(TQObject *parent, const char *name,
+                       const TQStringList &preferredItems) : 
     KFilePlugin( parent, name, preferredItems )
 {
     kdDebug(7034) << "ps plugin\n";
@@ -47,11 +47,11 @@ void KPSPlugin::makeMimeTypeInfo( const char* mimeType )
 
     // general group
     KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
-    addItemInfo(group, "Title", i18n("Title"), QVariant::String);
-    addItemInfo(group, "Creator", i18n("Creator"), QVariant::String);
-    addItemInfo(group, "CreationDate", i18n("Creation Date"), QVariant::String);
-    addItemInfo(group, "For", i18n("For"), QVariant::String);
-    addItemInfo(group, "Pages", i18n("Pages"), QVariant::UInt);
+    addItemInfo(group, "Title", i18n("Title"), TQVariant::String);
+    addItemInfo(group, "Creator", i18n("Creator"), TQVariant::String);
+    addItemInfo(group, "CreationDate", i18n("Creation Date"), TQVariant::String);
+    addItemInfo(group, "For", i18n("For"), TQVariant::String);
+    addItemInfo(group, "Pages", i18n("Pages"), TQVariant::UInt);
 }
 
 bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
@@ -63,7 +63,7 @@ bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
     _dsc = new KDSC;
     _dsc->setCommentHandler( this );
-    FILE* fp = fopen( QFile::encodeName( info.path() ), "r" );
+    FILE* fp = fopen( TQFile::encodeName( info.path() ), "r" );
     if( fp == 0 )
         return false;
     

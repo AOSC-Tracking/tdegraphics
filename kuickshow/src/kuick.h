@@ -19,8 +19,8 @@
 #ifndef KUICKGLOBALS_H
 #define KUICKGLOBALS_H
 
-#include <qrect.h>
-#include <qsize.h>
+#include <tqrect.h>
+#include <tqsize.h>
 
 #include <kwin.h>
 #include <kwinmodule.h>
@@ -28,11 +28,11 @@
 class Kuick
 {
 public:
-    static QRect workArea() {
+    static TQRect workArea() {
 	return self()->winModule.workArea();
     }
 
-    static QSize frameSize( WId win = 0L ) {
+    static TQSize frameSize( WId win = 0L ) {
 	if ( win ) {
 	    KWin::WindowInfo info = KWin::windowInfo(win, NET::WMKDEFrameStrut | NET::WMGeometry);
 	    int wborder = info.frameGeometry().width() - info.geometry().width();
@@ -45,7 +45,7 @@ public:
 	}
 	
 	if ( !s_frameSize.isValid() )
-	    return QSize( 0, 0 );
+	    return TQSize( 0, 0 );
 
 	return s_frameSize;
     }
@@ -63,7 +63,7 @@ private:
     Kuick() {}
     static Kuick * s_self;
 
-    static QSize s_frameSize;
+    static TQSize s_frameSize;
 };
 
 

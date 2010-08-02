@@ -19,11 +19,11 @@
 #ifndef __KGVSHELL_H__
 #define __KGVSHELL_H__
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kparts/mainwindow.h>
 
-class QTimer;
+class TQTimer;
 
 class KRecentFilesAction;
 class ScrollBox;
@@ -76,7 +76,7 @@ private:
     friend class FullScreenFilter;
     
     KGVPart* m_gvpart;
-    QString cwd;
+    TQString cwd;
 
     KAction* openact;
     KToggleAction* _showMenuBarAction;

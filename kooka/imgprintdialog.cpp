@@ -29,17 +29,17 @@
 #include <knuminput.h>
 #include <kdialog.h>
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qlayout.h>
-#include <qvbuttongroup.h>
-#include <qcheckbox.h>
-#include <qradiobutton.h>
+#include <tqstring.h>
+#include <tqmap.h>
+#include <tqlayout.h>
+#include <tqvbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqradiobutton.h>
 #include "kookaimage.h"
-#include <qvgroupbox.h>
-#include <qpaintdevicemetrics.h>
-#include <qlabel.h>
-#include <qtooltip.h>
+#include <tqvgroupbox.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqlabel.h>
+#include <tqtooltip.h>
 #include <kdebug.h>
 
 #define ID_SCREEN 0
@@ -47,55 +47,55 @@
 #define ID_CUSTOM 2
 #define ID_FIT_PAGE 3
 
-ImgPrintDialog::ImgPrintDialog( KookaImage *img, QWidget *parent, const char* name )
+ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* name )
     : KPrintDialogPage( parent, name ),
       m_image(img),
       m_ignoreSignal(false)
 {
     setTitle(i18n("Image Printing"));
-    QVBoxLayout *layout = new QVBoxLayout( this );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
     // layout->setMargin( KDialog::marginHint() );
     // layout->setSpacing( KDialog::spacingHint() );
 
-    m_scaleRadios = new QButtonGroup( 2, Qt::Vertical, i18n("Image Print Size"), this );
+    m_scaleRadios = new TQButtonGroup( 2, Qt::Vertical, i18n("Image Print Size"), this );
     m_scaleRadios->setRadioButtonExclusive(true);
-    connect( m_scaleRadios, SIGNAL(clicked(int)), SLOT(slScaleChanged(int)));
+    connect( m_scaleRadios, TQT_SIGNAL(clicked(int)), TQT_SLOT(slScaleChanged(int)));
 
-    m_rbScreen = new QRadioButton( i18n("Scale to same size as on screen"),
+    m_rbScreen = new TQRadioButton( i18n("Scale to same size as on screen"),
                                        m_scaleRadios );
-    QToolTip::add( m_rbScreen, i18n("Screen scaling. That prints according to the screen resolution."));
+    TQToolTip::add( m_rbScreen, i18n("Screen scaling. That prints according to the screen resolution."));
 
     m_scaleRadios->insert( m_rbScreen, ID_SCREEN );
 
-    m_rbOrigSize = new QRadioButton( i18n("Original size (calculate from scan resolution)"),
+    m_rbOrigSize = new TQRadioButton( i18n("Original size (calculate from scan resolution)"),
                                      m_scaleRadios );
-    QToolTip::add( m_rbOrigSize,
+    TQToolTip::add( m_rbOrigSize,
 		   i18n("Calculates the print size from the scan resolution. Enter the scan resolution in the dialog field below." ));
     m_scaleRadios->insert( m_rbOrigSize, ID_ORIG );
 
 
-    m_rbScale    = new QRadioButton( i18n("Scale image to custom dimension"), m_scaleRadios );
-    QToolTip::add( m_rbScale,
+    m_rbScale    = new TQRadioButton( i18n("Scale image to custom dimension"), m_scaleRadios );
+    TQToolTip::add( m_rbScale,
 		   i18n("Set the print size yourself in the dialog below. The image is centered on the paper."));
     
     m_scaleRadios->insert( m_rbScale, ID_CUSTOM );
 
-    m_rbFitPage = new QRadioButton( i18n("Scale image to fit to page"), m_scaleRadios );
-    QToolTip::add( m_rbFitPage, i18n("Printout uses maximum space on the selected pager. Aspect ratio is maintained."));
+    m_rbFitPage = new TQRadioButton( i18n("Scale image to fit to page"), m_scaleRadios );
+    TQToolTip::add( m_rbFitPage, i18n("Printout uses maximum space on the selected pager. Aspect ratio is maintained."));
     m_scaleRadios->insert( m_rbFitPage, ID_FIT_PAGE );
 
     layout->addWidget( m_scaleRadios );
 
 
-    QHBoxLayout *hbox = new QHBoxLayout( this );
+    TQHBoxLayout *hbox = new TQHBoxLayout( this );
     layout->addLayout( hbox );
 
     /** Box for Image Resolutions **/
-    QVGroupBox *group1 = new QVGroupBox( i18n("Resolutions"), this );
+    TQVGroupBox *group1 = new TQVGroupBox( i18n("Resolutions"), this );
     hbox->addWidget( group1 );
 
     /* Postscript generation resolution  */
-    m_psDraft = new QCheckBox( i18n("Generate low resolution PostScript (fast draft print)"),
+    m_psDraft = new TQCheckBox( i18n("Generate low resolution PostScript (fast draft print)"),
 				      group1, "cbPostScriptRes" );
     m_psDraft->setChecked( false );
 
@@ -107,27 +107,27 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, QWidget *parent, const char* na
     m_dpi->setSuffix( i18n(" dpi"));
 
     /* Label for displaying the screen Resolution */
-    m_screenRes = new QLabel( group1 );
+    m_screenRes = new TQLabel( group1 );
 
     /** Box for Image Print Size **/
-    QVGroupBox *group = new QVGroupBox( i18n("Image Print Size"), this );
+    TQVGroupBox *group = new TQVGroupBox( i18n("Image Print Size"), this );
     hbox->addWidget( group );
 
     m_sizeW = new KIntNumInput( group );
     m_sizeW->setLabel( i18n("Image width:"), AlignVCenter );
     m_sizeW->setSuffix( i18n(" mm"));
-    connect( m_sizeW, SIGNAL(valueChanged(int)), SLOT(slCustomWidthChanged(int)));
+    connect( m_sizeW, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slCustomWidthChanged(int)));
     m_sizeH = new KIntNumInput( m_sizeW, AlignVCenter, group  );
     m_sizeH->setLabel( i18n("Image height:"), AlignVCenter);
     m_sizeH->setSuffix( i18n(" mm"));
-    connect( m_sizeH, SIGNAL(valueChanged(int)), SLOT(slCustomHeightChanged(int)));
+    connect( m_sizeH, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slCustomHeightChanged(int)));
 
-    m_ratio = new QCheckBox( i18n("Maintain aspect ratio"), group, "cbAspectRatio" );
+    m_ratio = new TQCheckBox( i18n("Maintain aspect ratio"), group, "cbAspectRatio" );
     m_ratio->setChecked(true);
 
 
-    QWidget *spaceEater = new QWidget( this );
-    spaceEater->setSizePolicy( QSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored ));
+    TQWidget *spaceEater = new TQWidget( this );
+    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     layout->addWidget( spaceEater );
 
     /* Set start values */
@@ -143,10 +143,10 @@ void ImgPrintDialog::setImage( KookaImage *img )
 
 }
 
-void ImgPrintDialog::setOptions(const QMap<QString,QString>& opts)
+void ImgPrintDialog::setOptions(const TQMap<TQString,TQString>& opts)
 {
     // m_autofit->setChecked(opts["app-img-autofit"] == "1");
-    QString scale = opts[OPT_SCALING];
+    TQString scale = opts[OPT_SCALING];
 
     kdDebug(28000) << "In setOption" << endl;
 
@@ -178,12 +178,12 @@ void ImgPrintDialog::setOptions(const QMap<QString,QString>& opts)
 }
 
 
-void ImgPrintDialog::getOptions(QMap<QString,QString>& opts, bool )
+void ImgPrintDialog::getOptions(TQMap<TQString,TQString>& opts, bool )
 {
     // TODO: Check for meaning of include_def !
     // kdDebug(28000) << "In getOption with include_def: "  << include_def << endl;
 
-    QString scale = "screen";
+    TQString scale = "screen";
     if( m_rbOrigSize->isChecked() )
         scale = "scan";
     else if( m_rbScale->isChecked() )
@@ -193,19 +193,19 @@ void ImgPrintDialog::getOptions(QMap<QString,QString>& opts, bool )
 
     opts[OPT_SCALING] = scale;
 
-    opts[OPT_SCAN_RES]    = QString::number( m_dpi->value()         );
-    opts[OPT_WIDTH]       = QString::number( m_sizeW->value()       );
-    opts[OPT_HEIGHT]      = QString::number( m_sizeH->value()       );
-    opts[OPT_PSGEN_DRAFT] = QString::number( m_psDraft->isChecked() );
-    opts[OPT_RATIO]       = QString::number( m_ratio->isChecked()   );
+    opts[OPT_SCAN_RES]    = TQString::number( m_dpi->value()         );
+    opts[OPT_WIDTH]       = TQString::number( m_sizeW->value()       );
+    opts[OPT_HEIGHT]      = TQString::number( m_sizeH->value()       );
+    opts[OPT_PSGEN_DRAFT] = TQString::number( m_psDraft->isChecked() );
+    opts[OPT_RATIO]       = TQString::number( m_ratio->isChecked()   );
 
     {
-	QPaintDeviceMetrics metric( this );
-	opts[OPT_SCREEN_RES] = QString::number( metric.logicalDpiX());
+	TQPaintDeviceMetrics metric( this );
+	opts[OPT_SCREEN_RES] = TQString::number( metric.logicalDpiX());
     }
 }
 
-bool ImgPrintDialog::isValid(QString& msg)
+bool ImgPrintDialog::isValid(TQString& msg)
 {
     /* check if scan reso is higher than 0 in case its needed */
     int id = m_scaleRadios->id( m_scaleRadios->selected());

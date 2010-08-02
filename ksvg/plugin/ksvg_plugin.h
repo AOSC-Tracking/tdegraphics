@@ -21,7 +21,7 @@
 #ifndef KSVGPlugin_H
 #define KSVGPlugin_H
 
-#include <qobject.h>
+#include <tqobject.h>
 #include <kparts/part.h>
 
 namespace KSVG
@@ -36,7 +36,7 @@ class KSVGPlugin : public KParts::ReadOnlyPart
 {
 Q_OBJECT
 public:
-	KSVGPlugin(QWidget *parentWidget, const char *wname, QObject *parent, const char *name, unsigned int width = 0, unsigned int height = 0);
+	KSVGPlugin(TQWidget *parentWidget, const char *wname, TQObject *parent, const char *name, unsigned int width = 0, unsigned int height = 0);
 	virtual ~KSVGPlugin();
 
 	virtual bool openFile() { return false; }
@@ -46,19 +46,19 @@ public:
 	KSVG::SVGDocumentImpl *docImpl();
 
 	void reset();
-	void setPanPoint(const QPoint &translate);
+	void setPanPoint(const TQPoint &translate);
 	void update();
 	void setPopupActive(bool);
 
 signals:
-	void gotHyperlink(const QString &);
-	void gotHyperlinkCoordinate(const QRect &);
+	void gotHyperlink(const TQString &);
+	void gotHyperlinkCoordinate(const TQRect &);
 
 public slots:
-	void slotRedraw(const QRect &);
+	void slotRedraw(const TQRect &);
 
 private slots:
-	void browseURL(const QString &url);
+	void browseURL(const TQString &url);
 	void slotStop();
 	void slotViewSource();
 	void slotViewMemory();
@@ -71,11 +71,11 @@ private slots:
 	void slotAboutKSVG();
 	void slotSaveToPNG();
   
-	void slotParsingFinished(bool error, const QString &errorDesc);
+	void slotParsingFinished(bool error, const TQString &errorDesc);
 	void slotRenderingFinished();
-	void slotSetDescription(const QString &);
-	void slotSetTitle(const QString &);
-	void slotGotURL(const QString &);
+	void slotSetDescription(const TQString &);
+	void slotSetTitle(const TQString &);
+	void slotGotURL(const TQString &);
 
 private:
 	class Private;

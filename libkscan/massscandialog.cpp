@@ -17,11 +17,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qprogressbar.h>
-#include <qgroupbox.h>
-#include <qframe.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqprogressbar.h>
+#include <tqgroupbox.h>
+#include <tqframe.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -30,67 +30,67 @@
 
 #include "massscandialog.h"
 
-MassScanDialog::MassScanDialog( QWidget *parent )
-   :QDialog( parent, "MASS_SCAN", true )
+MassScanDialog::MassScanDialog( TQWidget *parent )
+   :TQDialog( parent, "MASS_SCAN", true )
 {
    setCaption( i18n( "ADF Scanning" ));
    kdDebug(29000) << "Starting MassScanDialog!" << endl;
    // Layout-Boxes
-   QVBoxLayout *bigdad = new QVBoxLayout( this, 5 );
-   // QHBoxLayout *hl1= new QHBoxLayout( );      // Caption
-   QHBoxLayout *l_but  = new QHBoxLayout( 10 );  // Buttons
+   TQVBoxLayout *bigdad = new TQVBoxLayout( this, 5 );
+   // TQHBoxLayout *hl1= new TQHBoxLayout( );      // Caption
+   TQHBoxLayout *l_but  = new TQHBoxLayout( 10 );  // Buttons
  	
  	/* Caption */
- 	QLabel *l1 = new QLabel( i18n( "<B>Mass Scanning</B>" ), this);
+ 	TQLabel *l1 = new TQLabel( i18n( "<B>Mass Scanning</B>" ), this);
    bigdad->addWidget( l1, 1);
  	
  	/* Scan parameter information */
- 	QGroupBox *f1 = new QGroupBox( i18n("Scan Parameter"), this );
- 	f1->setFrameStyle( QFrame::Box | QFrame::Sunken );
+ 	TQGroupBox *f1 = new TQGroupBox( i18n("Scan Parameter"), this );
+ 	f1->setFrameStyle( TQFrame::Box | TQFrame::Sunken );
  	f1->setMargin(5);
  	f1->setLineWidth( 1 );
-   QVBoxLayout *l_main = new QVBoxLayout( f1, f1->frameWidth()+3, 3 );
+   TQVBoxLayout *l_main = new TQVBoxLayout( f1, f1->frameWidth()+3, 3 );
  	bigdad->addWidget( f1, 6 );
  	
    scanopts = i18n("Scanning <B>%s</B> with <B>%d</B> dpi");
- 	l_scanopts = new QLabel( scanopts, f1 );
+ 	l_scanopts = new TQLabel( scanopts, f1 );
  	l_main->addWidget( l_scanopts );
 
    tofolder = i18n("Storing new images in folder <B>%s</B>");
- 	l_tofolder = new QLabel( tofolder, f1 );
+ 	l_tofolder = new TQLabel( tofolder, f1 );
  	l_main->addWidget( l_tofolder );
  	
  	/* Scan Progress information */
- 	QGroupBox *f2 = new QGroupBox( i18n("Scan Progress"), this );
- 	f2->setFrameStyle( QFrame::Box | QFrame::Sunken );
+ 	TQGroupBox *f2 = new TQGroupBox( i18n("Scan Progress"), this );
+ 	f2->setFrameStyle( TQFrame::Box | TQFrame::Sunken );
  	f2->setMargin(15);
  	f2->setLineWidth( 1 );
-   QVBoxLayout *l_pro = new QVBoxLayout( f2, f2->frameWidth()+3, 3 );
+   TQVBoxLayout *l_pro = new TQVBoxLayout( f2, f2->frameWidth()+3, 3 );
  	bigdad->addWidget( f2, 6 );
 
- 	QHBoxLayout *l_scanp = new QHBoxLayout( );
+ 	TQHBoxLayout *l_scanp = new TQHBoxLayout( );
  	l_pro->addLayout( l_scanp, 5 );
    progress = i18n("Scanning page %1");
-   l_progress = new QLabel( progress, f2 );
+   l_progress = new TQLabel( progress, f2 );
    l_scanp->addWidget( l_progress, 3 );
  	l_scanp->addStretch( 1 );
-   QPushButton *pb_cancel_scan = new QPushButton( i18n("Cancel Scan"), f2);
+   TQPushButton *pb_cancel_scan = new TQPushButton( i18n("Cancel Scan"), f2);
    l_scanp->addWidget( pb_cancel_scan,3 );
 
-   progressbar = new QProgressBar( 1000, f2 );
+   progressbar = new TQProgressBar( 1000, f2 );
    l_pro->addWidget( progressbar, 3 );
 
  	/* Buttons to start scanning and close the Window */
   	bigdad->addLayout( l_but );
 
-   QPushButton *b_start = new QPushButton( i18n("Start Scan"), this, "ButtOK" );
-   connect( b_start, SIGNAL(clicked()), this, SLOT( slStartScan()) );
+   TQPushButton *b_start = new TQPushButton( i18n("Start Scan"), this, "ButtOK" );
+   connect( b_start, TQT_SIGNAL(clicked()), this, TQT_SLOT( slStartScan()) );
 
-   QPushButton *b_cancel = new QPushButton( i18n("Stop"), this, "ButtCancel" );
-   connect( b_cancel, SIGNAL(clicked()), this, SLOT(slStopScan()) );
+   TQPushButton *b_cancel = new TQPushButton( i18n("Stop"), this, "ButtCancel" );
+   connect( b_cancel, TQT_SIGNAL(clicked()), this, TQT_SLOT(slStopScan()) );
 
-   QPushButton *b_finish = new KPushButton( KStdGuiItem::close(), this, "ButtFinish" );
-   connect( b_finish, SIGNAL(clicked()), this, SLOT(slFinished()) );
+   TQPushButton *b_finish = new KPushButton( KStdGuiItem::close(), this, "ButtFinish" );
+   connect( b_finish, TQT_SIGNAL(clicked()), this, TQT_SLOT(slFinished()) );
 
    l_but->addWidget( b_start );
    l_but->addWidget( b_cancel );

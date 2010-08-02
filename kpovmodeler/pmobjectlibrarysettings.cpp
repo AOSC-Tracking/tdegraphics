@@ -24,54 +24,54 @@
 #include "pmlibraryhandleedit.h"
 #include "pmdebug.h"
 
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
 #include <klocale.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 
-PMObjectLibrarySettings::PMObjectLibrarySettings( QWidget* parent, const char* name )
+PMObjectLibrarySettings::PMObjectLibrarySettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   QVBoxLayout* vlayout = new QVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
-   QGroupBox* gb = new QGroupBox( i18n( "Libraries" ), this );
+   TQGroupBox* gb = new TQGroupBox( i18n( "Libraries" ), this );
    vlayout->addWidget( gb );
 
-   QHBoxLayout* hlayout = new QHBoxLayout( gb, KDialog::marginHint( ) + 5, KDialog::spacingHint( ) );
-   m_pObjectLibraries = new QListBox( gb );
-   connect( m_pObjectLibraries, SIGNAL( selectionChanged( ) ), SLOT( slotObjectLibraryChanged( ) ) );
+   TQHBoxLayout* hlayout = new TQHBoxLayout( gb, KDialog::marginHint( ) + 5, KDialog::spacingHint( ) );
+   m_pObjectLibraries = new TQListBox( gb );
+   connect( m_pObjectLibraries, TQT_SIGNAL( selectionChanged( ) ), TQT_SLOT( slotObjectLibraryChanged( ) ) );
    hlayout->addWidget( m_pObjectLibraries );
-   QVBoxLayout* gvl = new QVBoxLayout( hlayout );
-   m_pCreateObjectLibrary = new QPushButton( i18n( "Create..." ), gb );
-   connect( m_pCreateObjectLibrary, SIGNAL( clicked( ) ), SLOT( slotCreateObjectLibrary( ) ) );
+   TQVBoxLayout* gvl = new TQVBoxLayout( hlayout );
+   m_pCreateObjectLibrary = new TQPushButton( i18n( "Create..." ), gb );
+   connect( m_pCreateObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCreateObjectLibrary( ) ) );
    gvl->addWidget( m_pCreateObjectLibrary );
-   m_pRemoveObjectLibrary = new QPushButton( i18n( "Remove" ), gb );
-   connect( m_pRemoveObjectLibrary, SIGNAL( clicked( ) ), SLOT( slotRemoveObjectLibrary( ) ) );
+   m_pRemoveObjectLibrary = new TQPushButton( i18n( "Remove" ), gb );
+   connect( m_pRemoveObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveObjectLibrary( ) ) );
    gvl->addWidget( m_pRemoveObjectLibrary );
-   m_pImportObjectLibrary = new QPushButton( i18n( "Import" ), gb );
-   connect( m_pImportObjectLibrary, SIGNAL( clicked( ) ), SLOT( slotImportObjectLibrary( ) ) );
+   m_pImportObjectLibrary = new TQPushButton( i18n( "Import" ), gb );
+   connect( m_pImportObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotImportObjectLibrary( ) ) );
    gvl->addWidget( m_pImportObjectLibrary );
-   m_pModifyObjectLibrary = new QPushButton( i18n( "Properties" ), gb );
-   connect( m_pModifyObjectLibrary, SIGNAL( clicked( ) ), SLOT( slotModifyObjectLibrary( ) ) );
+   m_pModifyObjectLibrary = new TQPushButton( i18n( "Properties" ), gb );
+   connect( m_pModifyObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotModifyObjectLibrary( ) ) );
    gvl->addWidget( m_pModifyObjectLibrary );
    gvl->addStretch( 1 );
 
-   gb = new QGroupBox( i18n( "Library Details" ), this );
-   QGridLayout* grid = new QGridLayout( gb, 4, 2, KDialog::marginHint( ) + 5, KDialog::spacingHint( ) );
-   QLabel* lbl = new QLabel( i18n( "Path" ), gb );
+   gb = new TQGroupBox( i18n( "Library Details" ), this );
+   TQGridLayout* grid = new TQGridLayout( gb, 4, 2, KDialog::marginHint( ) + 5, KDialog::spacingHint( ) );
+   TQLabel* lbl = new TQLabel( i18n( "Path" ), gb );
    grid->addWidget( lbl, 0, 0 );
-   lbl = new QLabel( i18n( "Author" ), gb );
+   lbl = new TQLabel( i18n( "Author" ), gb );
    grid->addWidget( lbl, 1, 0 );
-   lbl = new QLabel( i18n( "Description" ), gb );
+   lbl = new TQLabel( i18n( "Description" ), gb );
    grid->addWidget( lbl, 2, 0 );
-   m_pLibraryPath = new QLabel( "", gb );
-   m_pLibraryAuthor = new QLabel( "", gb );
-   m_pLibraryDescription = new QLabel( "", gb );
-   m_pReadOnlyText = new QLabel( "", gb );
+   m_pLibraryPath = new TQLabel( "", gb );
+   m_pLibraryAuthor = new TQLabel( "", gb );
+   m_pLibraryDescription = new TQLabel( "", gb );
+   m_pReadOnlyText = new TQLabel( "", gb );
    grid->addWidget( m_pLibraryPath, 0, 1 );
    grid->addWidget( m_pLibraryAuthor, 1, 1 );
    grid->addWidget( m_pLibraryDescription, 2, 1 );
@@ -113,7 +113,7 @@ void PMObjectLibrarySettings::slotModifyObjectLibrary( )
    {
       PMLibraryHandleEdit h_dlg( h, this );
 
-      if( h_dlg.exec( ) == QDialog::Accepted )
+      if( h_dlg.exec( ) == TQDialog::Accepted )
       {
          h->saveLibraryInfo( );
          displaySettings( );
@@ -139,9 +139,9 @@ void PMObjectLibrarySettings::slotCreateObjectLibrary( )
 {
    PMLibraryHandle h;
    PMLibraryHandleEdit h_dlg( &h, this );
-   QString libfilename;
+   TQString libfilename;
 
-   if( h_dlg.exec( ) == QDialog::Accepted )
+   if( h_dlg.exec( ) == TQDialog::Accepted )
    {
       libfilename = h.name( );
       h.setPath( locateLocal( "appdata", "library/" ) + libfilename.stripWhiteSpace( ) + "/" );

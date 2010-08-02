@@ -22,7 +22,7 @@
 #ifndef __PROPS_H__
 #define __PROPS_H__
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 #include "kicongrid.h"
 
@@ -32,49 +32,49 @@ public:
   static KIconEditProperties* self();
   ~KIconEditProperties();
 
-  QString bgPixmap() { return m_bgPixmap; }
-  QColor bgColor() { return m_bgColor; }
-  QWidget::BackgroundMode bgMode() { return m_bgMode; }
+  TQString bgPixmap() { return m_bgPixmap; }
+  TQColor bgColor() { return m_bgColor; }
+  TQWidget::BackgroundMode bgMode() { return m_bgMode; }
   bool showGrid() { return m_showGrid; }
   bool pasteTransparent() { return m_pasteTransparent; }
   bool showRulers() { return m_showRulers; }
   int gridScale() { return m_gridScale; }
   
   KIconEditGrid::TransparencyDisplayType transparencyDisplayType() const { return m_transparencyDisplayType; }
-  QColor checkerboardColor1() const { return m_checkerboardColor1; }
-  QColor checkerboardColor2() const { return m_checkerboardColor2; }
+  TQColor checkerboardColor1() const { return m_checkerboardColor1; }
+  TQColor checkerboardColor2() const { return m_checkerboardColor2; }
   KIconEditGrid::CheckerboardSize checkerboardSize() const { return m_checkerboardSize; }
-  QColor transparencySolidColor() const { return m_transparencySolidColor; }
+  TQColor transparencySolidColor() const { return m_transparencySolidColor; }
 
-  void setBgPixmap( const QString &p ) { m_bgPixmap = p; }
-  void setBgColor( const QColor &c ) { m_bgColor = c; }
-  void setBgMode( QWidget::BackgroundMode m ) { m_bgMode = m; }
+  void setBgPixmap( const TQString &p ) { m_bgPixmap = p; }
+  void setBgColor( const TQColor &c ) { m_bgColor = c; }
+  void setBgMode( TQWidget::BackgroundMode m ) { m_bgMode = m; }
   void setShowGrid( bool b ) { m_showGrid = b; }
   void setPasteTransparent( bool b ) { m_pasteTransparent = b; }
   void setShowRulers( bool b ) { m_showRulers = b; }
   void setGridScale( int s ) { m_gridScale = s; }
   void setTransparencyDisplayType(KIconEditGrid::TransparencyDisplayType t) { m_transparencyDisplayType = t; }
-  void setCheckerboardColor1(const QColor& c) { m_checkerboardColor1 = c; }
-  void setCheckerboardColor2(const QColor& c) { m_checkerboardColor2 = c; }
+  void setCheckerboardColor1(const TQColor& c) { m_checkerboardColor1 = c; }
+  void setCheckerboardColor2(const TQColor& c) { m_checkerboardColor2 = c; }
   void setCheckerboardSize(KIconEditGrid::CheckerboardSize size) { m_checkerboardSize = size; }
-  void setTransparencySolidColor(const QColor& c) { m_transparencySolidColor = c; }
+  void setTransparencySolidColor(const TQColor& c) { m_transparencySolidColor = c; }
 
   void save();
 
 protected:
   KIconEditProperties();
-  QString m_bgPixmap;
-  QColor m_bgColor;
-  QWidget::BackgroundMode m_bgMode;
+  TQString m_bgPixmap;
+  TQColor m_bgColor;
+  TQWidget::BackgroundMode m_bgMode;
   bool m_showGrid;
   bool m_pasteTransparent;
   bool m_showRulers;
   int m_gridScale;
   KIconEditGrid::TransparencyDisplayType m_transparencyDisplayType;
-  QColor m_checkerboardColor1;
-  QColor m_checkerboardColor2;
+  TQColor m_checkerboardColor1;
+  TQColor m_checkerboardColor2;
   KIconEditGrid::CheckerboardSize m_checkerboardSize;
-  QColor m_transparencySolidColor;
+  TQColor m_transparencySolidColor;
 
   static KIconEditProperties* m_self;
 };

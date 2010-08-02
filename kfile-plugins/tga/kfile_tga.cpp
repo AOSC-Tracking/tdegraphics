@@ -26,11 +26,11 @@
 #include <kstringvalidator.h>
 #include <kdebug.h>
 
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
 
 #if !defined(__osf__)
 #include <inttypes.h>
@@ -44,8 +44,8 @@ typedef KGenericFactory<KTgaPlugin> TgaFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_tga, TgaFactory( "kfile_tga" ))
 
-KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
-                       const QStringList &args)
+KTgaPlugin::KTgaPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args)
 
     : KFilePlugin(parent, name, args)
 {
@@ -57,15 +57,15 @@ KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
     setHint( item, KFileMimeTypeInfo::Size );
     setUnit(item, KFileMimeTypeInfo::Pixels);
 
-    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-    item = addItemInfo(group, "ColorMode", i18n("Color Mode"), QVariant::String);
-    item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
+    item = addItemInfo(group, "ColorMode", i18n("Color Mode"), TQVariant::String);
+    item = addItemInfo(group, "Compression", i18n("Compression"), TQVariant::String);
 
 }
 
@@ -73,18 +73,18 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
 {
 
 
-    QFile file(info.path());
+    TQFile file(info.path());
 
     if (!file.open(IO_ReadOnly))
     {
-        kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
         return false;
     }
 
-    QDataStream dstream(&file);
+    TQDataStream dstream(&file);
 
     // TGA files are little-endian
-    dstream.setByteOrder(QDataStream::LittleEndian);
+    dstream.setByteOrder(TQDataStream::LittleEndian);
 
     // the vars for the image data
     uint8_t  tga_idlength;
@@ -116,7 +116,7 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     // output the useful bits
     KFileMetaInfoGroup group = appendGroup(info, "Technical");
-    appendItem(group, "Dimensions", QSize(tga_imagespec_width, tga_imagespec_height));
+    appendItem(group, "Dimensions", TQSize(tga_imagespec_width, tga_imagespec_height));
     appendItem(group, "BitDepth", tga_imagespec_depth);
 
     switch (tga_imagetype) {

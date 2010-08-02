@@ -17,7 +17,7 @@
  */
 #include "displayoptions.h"
 #include <kdebug.h>
-#include <qregexp.h>
+#include <tqregexp.h>
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 
@@ -65,18 +65,18 @@ namespace {
 	const char* const qformat = ".page: %1; .magnification: %2; .orientation = %3; .media = %4;";
 }
 
-QString DisplayOptions::toString( const DisplayOptions& options )
+TQString DisplayOptions::toString( const DisplayOptions& options )
 {
-	return QString( qformat )
+	return TQString( qformat )
 		.arg( options.page() )
 		.arg( options.magnification() )
 		.arg( options.overrideOrientation() )
 		.arg( options.overridePageMedia().utf8() );
 }
 
-bool DisplayOptions::fromString( DisplayOptions& out, const QString& in )
+bool DisplayOptions::fromString( DisplayOptions& out, const TQString& in )
 {
-	QRegExp regex( QString::fromLatin1( rformat ) );
+	TQRegExp regex( TQString::fromLatin1( rformat ) );
 	if ( regex.search( in ) < 0 ) return false;
 
 	out.reset();
@@ -138,8 +138,8 @@ unsigned DisplayOptions::closestIndex() const {
 	return res;
 }
 
-QValueList<double> DisplayOptions::normalMagnificationValues() {
-	QValueList<double> res;
+TQValueList<double> DisplayOptions::normalMagnificationValues() {
+	TQValueList<double> res;
 	for ( const double *first = allowedMagnifications, *last = allowedMagnifications + numberOfMagnifications;
 			first != last;
 			++first ) {

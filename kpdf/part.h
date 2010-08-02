@@ -18,14 +18,14 @@
 
 #include <kparts/browserextension.h>
 #include <kparts/part.h>
-#include <qguardedptr.h>
+#include <tqguardedptr.h>
 #include "core/document.h"
 #include "core/observer.h"
 #include "dcop.h"
 
-class QWidget;
-class QSplitter;
-class QToolBox;
+class TQWidget;
+class TQSplitter;
+class TQToolBox;
 
 class KURL;
 class KAction;
@@ -62,8 +62,8 @@ Q_OBJECT
 
 public:
 	// Default constructor
-	Part(QWidget* parentWidget, const char* widgetName,
-	     QObject* parent, const char* name, const QStringList& args);
+	Part(TQWidget* parentWidget, const char* widgetName,
+	     TQObject* parent, const char* name, const TQStringList& args);
 
 	// Destructor
 	~Part();
@@ -89,7 +89,7 @@ protected:
 	bool openURL(const KURL &url);
 	bool closeURL();
   // filter that watches for splitter size changes
-  bool eventFilter( QObject * watched, QEvent * e );
+  bool eventFilter( TQObject * watched, TQEvent * e );
 
 protected slots:
 	void openURLFromDocument(const KURL &url);
@@ -107,7 +107,7 @@ protected slots:
 	void slotPreferences();
 	void slotNewConfig();
 	void slotPrintPreview();
-	void slotShowMenu(const KPDFPage *page, const QPoint &point);
+	void slotShowMenu(const KPDFPage *page, const TQPoint &point);
 	void slotShowProperties();
 	void slotShowLeftPanel();
 	void slotShowPresentation();
@@ -121,7 +121,7 @@ protected slots:
 	void cannotQuit();
 	void saveSplitterSize();
 	void setMimeTypes(KIO::Job *job);
-	void readMimeType(KIO::Job *job, const QString &mime);
+	void readMimeType(KIO::Job *job, const TQString &mime);
 	void emitWindowCaption();
 
 public slots:
@@ -129,7 +129,7 @@ public slots:
 	void slotPrint();
 	void restoreDocument(KConfig* config);
 	void saveDocumentRestoreInfo(KConfig* config);
-	void slotFileDirty( const QString& );
+	void slotFileDirty( const TQString& );
 	void slotDoFileDirty();
 
 private:
@@ -137,38 +137,38 @@ private:
 
 	// the document
 	KPDFDocument * m_document;
-	QString m_temporaryLocalFile;
+	TQString m_temporaryLocalFile;
 
 	// main widgets
-	QSplitter *m_splitter;
-	QWidget *m_leftPanel;
-	QToolBox *m_toolBox;
+	TQSplitter *m_splitter;
+	TQWidget *m_leftPanel;
+	TQToolBox *m_toolBox;
 	SearchWidget *m_searchWidget;
-	QGuardedPtr<ThumbnailList> m_thumbnailList;
-	QGuardedPtr<PageView> m_pageView;
-	QGuardedPtr<TOC> m_tocFrame;
-	QGuardedPtr<MiniBar> m_miniBar;
-	QGuardedPtr<PresentationWidget> m_presentationWidget;
+	TQGuardedPtr<ThumbnailList> m_thumbnailList;
+	TQGuardedPtr<PageView> m_pageView;
+	TQGuardedPtr<TOC> m_tocFrame;
+	TQGuardedPtr<MiniBar> m_miniBar;
+	TQGuardedPtr<PresentationWidget> m_presentationWidget;
 
 	// static instances counter
 	static unsigned int m_count;
 
 	// this is a hack because we can not use writeConfig on part destructor
 	// and we don't want to writeconfig every time someone moves the splitter
-	// so we use a QTimer each 500 ms
-	QTimer *m_saveSplitterSizeTimer;
+	// so we use a TQTimer each 500 ms
+	TQTimer *m_saveSplitterSizeTimer;
 
 	KDirWatch *m_watcher;
-	QTimer *m_dirtyHandler;
+	TQTimer *m_dirtyHandler;
 	DocumentViewport m_viewportDirty;
 	bool m_wasPresentationOpen;
 	int m_dirtyToolboxIndex;
 	
 	// Remember the search history
-	QStringList m_searchHistory;
+	TQStringList m_searchHistory;
 	
 	// mimetype got from the job
-	QString m_jobMime;
+	TQString m_jobMime;
 
 	// actions
 	KAction *m_gotoPage;

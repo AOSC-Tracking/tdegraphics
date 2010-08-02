@@ -34,7 +34,7 @@ public:
 	SVGTSpanElementImpl(DOM::ElementImpl *);
 	virtual ~SVGTSpanElementImpl();
 
-	QString text();
+	TQString text();
 
 	virtual long getNumberOfChars();
 

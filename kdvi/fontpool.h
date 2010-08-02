@@ -12,8 +12,8 @@
 #include "fontprogress.h"
 #include "TeXFontDefinition.h"
 
-#include <qptrlist.h>
-#include <qobject.h>
+#include <tqptrlist.h>
+#include <tqobject.h>
 
 #ifdef HAVE_FREETYPE
 #include <ft2build.h>
@@ -36,7 +36,7 @@ class KShellProcess;
  *
  **/
 
-class fontPool : public QObject {
+class fontPool : public TQObject {
  Q_OBJECT
 
 public:
@@ -56,12 +56,12 @@ public:
      current working directory for the kpsewhich command, so that
      kpsewhich will find fonts that are stored in the DVI file's
      directory. */ 
- void setExtraSearchPath( const QString &path ) {extraSearchPath = path;}
+ void setExtraSearchPath( const TQString &path ) {extraSearchPath = path;}
  
  /** Returns the path that is set as the current working directory
      for the kpsewhich command, so that kpsewhich will find fonts
      that are stored in the DVI file's directory. */ 
- QString getExtraSearchPath( ) const {return extraSearchPath;}
+ TQString getExtraSearchPath( ) const {return extraSearchPath;}
  
  /** Sets the resolution of the output device. */
  void setDisplayResolution( double _displayResolution_in_dpi );
@@ -78,14 +78,14 @@ public:
  // called. Since this is done using a concurrently running process,
  // there is no guarantee that the loading is already performed when
  // the method returns.
- TeXFontDefinition* appendx(const QString& fontname, Q_UINT32 checksum, Q_UINT32 scale, double enlargement);
+ TeXFontDefinition* appendx(const TQString& fontname, Q_UINT32 checksum, Q_UINT32 scale, double enlargement);
  
  // Returns a string in a very basic HTML format which describes the
  // fonts in the pool.
- QString status();
+ TQString status();
   
   // This is the list which actually holds pointers to the fonts
-  QPtrList<TeXFontDefinition> fontList;
+  TQPtrList<TeXFontDefinition> fontList;
 
   // This method marks all fonts in the fontpool as "not in use". The
   // fonts are, however, not removed from memory until the method
@@ -131,7 +131,7 @@ public:
 
 signals:
   /** Passed through to the top-level kpart. */
-  void setStatusBarText( const QString& );
+  void setStatusBarText( const TQString& );
 
 public slots:
  // Locates font files on the disk using the kpsewhich program.  If
@@ -177,18 +177,18 @@ private:
  // virtual font is found, the variable remains untouched.
  void locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFound=0);
 
- // This QString is used internally by the mf_output_receiver()
- // method.  This string is set to QString::null in locateFonts(bool,
+ // This TQString is used internally by the mf_output_receiver()
+ // method.  This string is set to TQString::null in locateFonts(bool,
  // bool, bool *). Values are set and read by the
  // mf_output_receiver(...)  method
- QString        MetafontOutput;
+ TQString        MetafontOutput;
 
- // This QString is used to collect the output of kpsewhich and
- // MetaFont. The string is set to QString::null in the
+ // This TQString is used to collect the output of kpsewhich and
+ // MetaFont. The string is set to TQString::null in the
  // locateFonts()-method, and content is gathered by the
  // mf_output_receiver(). This string is used by locateFonts() and
  // locateFonts(bool, bool, bool *) to display error messages.
- QString        kpsewhichOutput;
+ TQString        kpsewhichOutput;
  
  // This string is set to the DVI file's path. It is used to set the
  // current working directory for the kpsewhich command, so that
@@ -196,7 +196,7 @@ private:
  // directory. Used by the locateFonts() and the locateFonts(bool,
  // bool, bool *) method. Values are set by the
  // setExtraSearchPath(...) method
- QString        extraSearchPath;
+ TQString        extraSearchPath;
  
  // FontProgress; the progress dialog used when generating fonts.
  fontProgressDialog progress;

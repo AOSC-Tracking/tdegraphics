@@ -27,8 +27,8 @@
 #include "pmvector.h"
 #include "pmcontrolpoint.h"
 #include "pmmetaobject.h"
-#include <qptrlist.h>
-#include <qstring.h>
+#include <tqptrlist.h>
+#include <tqstring.h>
 
 class KAction;
 
@@ -49,7 +49,7 @@ public:
     * Constructor
     */
    PMObjectAction( PMMetaObject* objectType, int actionID,
-                   const QString& description, bool enabled = true )
+                   const TQString& description, bool enabled = true )
    {
       m_class = objectType;
       m_actionID = actionID;
@@ -69,7 +69,7 @@ public:
    /**
     * Returns the description
     */
-   QString description( ) const { return m_description; }
+   TQString description( ) const { return m_description; }
 
    /**
     * Returns the enabled flag
@@ -92,7 +92,7 @@ public:
 private:
    PMMetaObject* m_class;
    int m_actionID;
-   QString m_description;
+   TQString m_description;
    bool m_enabled;
    int m_menuID;
 };

@@ -26,7 +26,7 @@
 
 #include "pmmemento.h"
 #include "pmvector.h"
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 
 /**
@@ -47,11 +47,11 @@ public:
    /**
     * Saves the prism points
     */
-   void setPrismPoints( const QValueList< QValueList<PMVector> >& v );
+   void setPrismPoints( const TQValueList< TQValueList<PMVector> >& v );
    /**
     * Returns the prism points
     */
-   QValueList< QValueList<PMVector> > prismPoints( ) const
+   TQValueList< TQValueList<PMVector> > prismPoints( ) const
    {
       return m_prismPoints;
    }
@@ -64,7 +64,7 @@ private:
    /**
     * The stored points
     */
-   QValueList< QValueList<PMVector> > m_prismPoints;
+   TQValueList< TQValueList<PMVector> > m_prismPoints;
    bool m_bPrismPointsSaved;
 };
 

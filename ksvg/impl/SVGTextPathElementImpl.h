@@ -34,7 +34,7 @@ public:
 	SVGTextPathElementImpl(DOM::ElementImpl *);
 	virtual ~SVGTextPathElementImpl();
 
-	QString text();
+	TQString text();
 
 	SVGAnimatedLengthImpl *startOffset() const;
 	SVGAnimatedEnumerationImpl *method() const;

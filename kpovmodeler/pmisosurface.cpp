@@ -96,14 +96,14 @@ PMIsoSurface::~PMIsoSurface( )
 {
 }
 
-QString PMIsoSurface::description( ) const
+TQString PMIsoSurface::description( ) const
 {
    return i18n( "isosurface" );
 }
 
-void PMIsoSurface::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMIsoSurface::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QDomText t = doc.createTextNode( m_function );
+   TQDomText t = doc.createTextNode( m_function );
    e.appendChild( t );
 
    if( m_containedBy == Box )
@@ -129,11 +129,11 @@ void PMIsoSurface::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMIsoSurface::readAttributes( const PMXMLHelper& h )
 {
-   QDomNode e = h.element( ).firstChild( );
+   TQDomNode e = h.element( ).firstChild( );
    if( e.isText( ) )
       m_function = e.toText( ).data( );
 
-   QString str = h.stringAttribute( "contained_by", "" );
+   TQString str = h.stringAttribute( "contained_by", "" );
    if( str == "sphere" )
       m_containedBy = Sphere;
    else
@@ -174,7 +174,7 @@ PMMetaObject* PMIsoSurface::metaObject( ) const
    return s_pMetaObject;
 }
 
-void PMIsoSurface::setFunction( const QString& f )
+void PMIsoSurface::setFunction( const TQString& f )
 {
    if( f != m_function )
    {
@@ -333,7 +333,7 @@ void PMIsoSurface::setAllIntersections( bool yes )
    }
 }
 
-PMDialogEditBase* PMIsoSurface::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMIsoSurface::editWidget( TQWidget* parent ) const
 {
    return new PMIsoSurfaceEdit( parent );
 }

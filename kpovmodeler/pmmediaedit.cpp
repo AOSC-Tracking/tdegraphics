@@ -21,15 +21,15 @@
 #include "pmlineedits.h"
 #include "pmcoloredit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
 
-PMMediaEdit::PMMediaEdit( QWidget* parent, const char* name )
+PMMediaEdit::PMMediaEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,94 +37,94 @@ PMMediaEdit::PMMediaEdit( QWidget* parent, const char* name )
 
 void PMMediaEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
-   QGridLayout* gl;
+   TQHBoxLayout* hl;
+   TQGridLayout* gl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Method:" ), this ) );
-   m_pMethodEdit = new QComboBox( this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Method:" ), this ) );
+   m_pMethodEdit = new TQComboBox( this );
    m_pMethodEdit->insertItem( i18n( "1 (Monte Carlo)" ) );
    m_pMethodEdit->insertItem( i18n( "2 (Smooth)" ) );
    m_pMethodEdit->insertItem( i18n( "3 (Adaptive sampling)" ) );
    hl->addWidget( m_pMethodEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Intervals:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Intervals:" ), this ) );
    m_pIntervalsEdit = new PMIntEdit( this );
    m_pIntervalsEdit->setValidation( true, 1, false, 0 );
    hl->addWidget( m_pIntervalsEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Samples" ), this ) );
-   hl->addWidget( new QLabel( i18n( "Min:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Samples" ), this ) );
+   hl->addWidget( new TQLabel( i18n( "Min:" ), this ) );
    m_pSamplesMinEdit = new PMIntEdit( this );
    m_pSamplesMinEdit->setValidation( true, 1, false, 0 );
    hl->addWidget( m_pSamplesMinEdit );
-   m_pSamplesMaxLabel = new QLabel( i18n( "Max:" ), this );
+   m_pSamplesMaxLabel = new TQLabel( i18n( "Max:" ), this );
    hl->addWidget( m_pSamplesMaxLabel );
    m_pSamplesMaxEdit = new PMIntEdit( this );
    hl->addWidget( m_pSamplesMaxEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 3, 2 );
-   gl->addWidget( new QLabel( i18n( "Confidence:" ), this ), 0, 0 );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 3, 2 );
+   gl->addWidget( new TQLabel( i18n( "Confidence:" ), this ), 0, 0 );
    m_pConfidenceEdit = new PMFloatEdit( this );
    m_pConfidenceEdit->setValidation( true, 0, true, 1 );
    gl->addWidget( m_pConfidenceEdit, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Variance:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Variance:" ), this ), 1, 0 );
    m_pVarianceEdit = new PMFloatEdit( this );
    gl->addWidget( m_pVarianceEdit, 1, 1 );
-   gl->addWidget( new QLabel( i18n( "Ratio:" ), this ), 2, 0 );
+   gl->addWidget( new TQLabel( i18n( "Ratio:" ), this ), 2, 0 );
    m_pRatioEdit = new PMFloatEdit( this );
    gl->addWidget( m_pRatioEdit, 2, 1 );
    hl->addStretch( 1 );
 
-   m_pAAWidget = new QWidget( this );
-   hl = new QHBoxLayout( m_pAAWidget, KDialog::spacingHint( ) );
-   hl->addWidget( new QLabel( i18n( "Anti-aliasing" ), m_pAAWidget ) );
-   hl->addWidget( new QLabel( i18n( "Level:" ), m_pAAWidget ) );
+   m_pAAWidget = new TQWidget( this );
+   hl = new TQHBoxLayout( m_pAAWidget, KDialog::spacingHint( ) );
+   hl->addWidget( new TQLabel( i18n( "Anti-aliasing" ), m_pAAWidget ) );
+   hl->addWidget( new TQLabel( i18n( "Level:" ), m_pAAWidget ) );
    m_pAALevelEdit = new PMIntEdit( m_pAAWidget );
    m_pAALevelEdit->setValidation(  true, 1, false, 0 );
    hl->addWidget( m_pAALevelEdit );
-   hl->addWidget( new QLabel( i18n( "Threshold:" ), m_pAAWidget ) );
+   hl->addWidget( new TQLabel( i18n( "Threshold:" ), m_pAAWidget ) );
    m_pAAThresholdEdit = new PMFloatEdit( m_pAAWidget );
    m_pAAThresholdEdit->setValidation( true, 0.0, false, 0.0 );
    hl->addWidget( m_pAAThresholdEdit );
    hl->addStretch( 1 );
    topLayout( )->addWidget( m_pAAWidget );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 2, 2 );
-   m_pEnableAbsorptionEdit = new QCheckBox( i18n( "Absorption" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 2, 2 );
+   m_pEnableAbsorptionEdit = new TQCheckBox( i18n( "Absorption" ), this );
    gl->addMultiCellWidget( m_pEnableAbsorptionEdit, 0, 0, 0, 1 );
    m_pAbsorptionEdit = new PMColorEdit( false, this );
-   m_pAbsorptionLabel = new QLabel( i18n( "Color:" ), this );
+   m_pAbsorptionLabel = new TQLabel( i18n( "Color:" ), this );
    gl->addWidget( m_pAbsorptionLabel, 1, 0, AlignTop );
    gl->addWidget( m_pAbsorptionEdit, 1, 1 );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 2, 2 );
-   m_pEnableEmissionEdit = new QCheckBox( i18n( "Emission" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 2, 2 );
+   m_pEnableEmissionEdit = new TQCheckBox( i18n( "Emission" ), this );
    gl->addMultiCellWidget( m_pEnableEmissionEdit, 0, 0, 0, 1 );
    m_pEmissionEdit = new PMColorEdit( false, this );
-   m_pEmissionLabel = new QLabel( i18n( "Color:" ), this );
+   m_pEmissionLabel = new TQLabel( i18n( "Color:" ), this );
    gl->addWidget( m_pEmissionLabel, 1, 0, AlignTop );
    gl->addWidget( m_pEmissionEdit, 1, 1 );
    hl->addStretch( 1 );
 
-   m_pEnableScatteringEdit = new QCheckBox( i18n( "Scattering" ), this );
+   m_pEnableScatteringEdit = new TQCheckBox( i18n( "Scattering" ), this );
    topLayout( )->addWidget( m_pEnableScatteringEdit );
-   m_pScatteringWidget = new QWidget( this );
-   QVBoxLayout* vl = new QVBoxLayout( m_pScatteringWidget, KDialog::spacingHint( ) );
-   hl = new QHBoxLayout( vl );
-   hl->addWidget( new QLabel( i18n( "Type:" ), m_pScatteringWidget ) );
-   m_pScatteringTypeEdit = new QComboBox( m_pScatteringWidget );
+   m_pScatteringWidget = new TQWidget( this );
+   TQVBoxLayout* vl = new TQVBoxLayout( m_pScatteringWidget, KDialog::spacingHint( ) );
+   hl = new TQHBoxLayout( vl );
+   hl->addWidget( new TQLabel( i18n( "Type:" ), m_pScatteringWidget ) );
+   m_pScatteringTypeEdit = new TQComboBox( m_pScatteringWidget );
    m_pScatteringTypeEdit->insertItem( i18n( "Isotropic" ) );
    m_pScatteringTypeEdit->insertItem( i18n( "Mie Haze" ) );
    m_pScatteringTypeEdit->insertItem( i18n( "Mie Murky" ) );
@@ -132,40 +132,40 @@ void PMMediaEdit::createTopWidgets( )
    m_pScatteringTypeEdit->insertItem( i18n( "Henyey-Greenstein" ) );
    hl->addWidget( m_pScatteringTypeEdit );
    hl->addStretch( 1 );
-   hl = new QHBoxLayout( vl );
-   hl->addWidget( new QLabel( i18n( "Color:" ), m_pScatteringWidget ), 0, AlignTop );
+   hl = new TQHBoxLayout( vl );
+   hl->addWidget( new TQLabel( i18n( "Color:" ), m_pScatteringWidget ), 0, AlignTop );
    m_pScatteringColorEdit = new PMColorEdit( false, m_pScatteringWidget );
    hl->addWidget( m_pScatteringColorEdit );
-   hl = new QHBoxLayout( vl );
-   gl = new QGridLayout( hl, 2, 2 );
-   m_pScatteringEccentricityLabel = new QLabel( i18n( "Eccentricity:" ), m_pScatteringWidget );
+   hl = new TQHBoxLayout( vl );
+   gl = new TQGridLayout( hl, 2, 2 );
+   m_pScatteringEccentricityLabel = new TQLabel( i18n( "Eccentricity:" ), m_pScatteringWidget );
    gl->addWidget( m_pScatteringEccentricityLabel, 0, 0 );
    m_pScatteringEccentricityEdit = new PMFloatEdit( m_pScatteringWidget );
    gl->addWidget( m_pScatteringEccentricityEdit, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Extinction:" ), m_pScatteringWidget ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Extinction:" ), m_pScatteringWidget ), 1, 0 );
    m_pScatteringExtinctionEdit = new PMFloatEdit( m_pScatteringWidget );
    gl->addWidget( m_pScatteringExtinctionEdit, 1, 1 );
    hl->addStretch( 1 );
    topLayout( )->addWidget( m_pScatteringWidget );
 
-   connect( m_pMethodEdit, SIGNAL( activated( int ) ), SLOT( slotMethodChanged( int ) ) );
-   connect( m_pIntervalsEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSamplesMinEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSamplesMaxEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pConfidenceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pVarianceEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRatioEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAALevelEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAAThresholdEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAbsorptionEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEmissionEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableAbsorptionEdit, SIGNAL( clicked( ) ), SLOT( slotAbsorptionClicked( ) ) );
-   connect( m_pEnableEmissionEdit, SIGNAL( clicked( ) ), SLOT( slotEmissionClicked( ) ) );
-   connect( m_pEnableScatteringEdit, SIGNAL( clicked( ) ), SLOT( slotScatteringClicked( ) ) );
-   connect( m_pScatteringTypeEdit, SIGNAL( activated( int ) ), SLOT( slotScatteringTypeChanged( int ) ) );
-   connect( m_pScatteringColorEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pScatteringEccentricityEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pScatteringExtinctionEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pMethodEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotMethodChanged( int ) ) );
+   connect( m_pIntervalsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSamplesMinEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSamplesMaxEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pConfidenceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pVarianceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRatioEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAALevelEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAAThresholdEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAbsorptionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEmissionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableAbsorptionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAbsorptionClicked( ) ) );
+   connect( m_pEnableEmissionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotEmissionClicked( ) ) );
+   connect( m_pEnableScatteringEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotScatteringClicked( ) ) );
+   connect( m_pScatteringTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotScatteringTypeChanged( int ) ) );
+   connect( m_pScatteringColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pScatteringEccentricityEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pScatteringExtinctionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMMediaEdit::displayObject( PMObject* o )

@@ -32,8 +32,8 @@
 #include <Converter.h>
 #include "GlyphTracerLibart.h"
 
-class QString;
-class QImage;
+class TQString;
+class TQImage;
 
 struct _ArtSVP;
 
@@ -50,8 +50,8 @@ class LibartCanvas : public KSVGCanvas
 public:
 	LibartCanvas(unsigned int width, unsigned int height);
 
-	void drawSVP(_ArtSVP *svp, art_u32 color, QByteArray mask, QRect screenBBox);
-	void drawImage(QImage image, SVGStylableImpl *style, const SVGMatrixImpl *matrix, const KSVGPolygon& clippingPolygon);
+	void drawSVP(_ArtSVP *svp, art_u32 color, TQByteArray mask, TQRect screenBBox);
+	void drawImage(TQImage image, SVGStylableImpl *style, const SVGMatrixImpl *matrix, const KSVGPolygon& clippingPolygon);
 
 	virtual T2P::BezierPath *toBezierPath(CanvasItem *item) const;
 
@@ -69,7 +69,7 @@ public:
 	virtual CanvasItem *createText(SVGTextElementImpl *text);
 	virtual CanvasPaintServer *createPaintServer(SVGElementImpl *pserver);
 
-	_ArtSVP *clippingRect(const QRect &rect, const SVGMatrixImpl *ctm);
+	_ArtSVP *clippingRect(const TQRect &rect, const SVGMatrixImpl *ctm);
 	_ArtSVP *svpFromPolygon(const KSVGPolygon& polygon);
 
 	static ArtSVP *copy_svp(const ArtSVP *svp);

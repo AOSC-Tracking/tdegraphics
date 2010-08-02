@@ -47,17 +47,17 @@ void setupImageHandlers()
   formats->append(new imageFormat("ICO", "Windows Icon File",  "ico"));
 /*
 #ifdef HAVE_LIBJPEG
-  QImageIO::defineIOHandler("JFIF","^\377\330\377\340", 0, read_jpeg_jfif, NULL);
+  TQImageIO::defineIOHandler("JFIF","^\377\330\377\340", 0, read_jpeg_jfif, NULL);
 #endif
 */
 }
 
 // Simple copy operation on local files (isn't there something like this in the libs?)
-bool copyFile(const QString &src, const QString &dest)
+bool copyFile(const TQString &src, const TQString &dest)
 {
-  QFile f_src(src);
-  QFile f_dest(dest);
-  QFileInfo fi(f_src);
+  TQFile f_src(src);
+  TQFile f_dest(dest);
+  TQFileInfo fi(f_src);
   uint src_size = fi.size();
   kdDebug(4640) << "Size: " << src_size << endl;
 
@@ -96,11 +96,11 @@ bool copyFile(const QString &src, const QString &dest)
   return false;
 }
 
-bool removeFile(const QString &file)
+bool removeFile(const TQString &file)
 {
-  if(file.length() > 0 && QFile::exists(file))
+  if(file.length() > 0 && TQFile::exists(file))
   {
-    QDir d;
+    TQDir d;
     kdDebug(4640) << "Removing " << file << endl;
     if(!d.remove(file))
     {
@@ -112,7 +112,7 @@ bool removeFile(const QString &file)
   return false;
 }
 
-bool moveFile(const QString &src, const QString &dest)
+bool moveFile(const TQString &src, const TQString &dest)
 {
   if(copyFile(src, dest))
     return removeFile(src);

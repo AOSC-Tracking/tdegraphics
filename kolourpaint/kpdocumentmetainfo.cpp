@@ -27,7 +27,7 @@
 
 #include <kpdocumentmetainfo.h>
 
-#include <qpoint.h>
+#include <tqpoint.h>
 
 #include <kdebug.h>
 
@@ -35,9 +35,9 @@
 struct kpDocumentMetaInfoPrivate
 {
     int m_dotsPerMeterX, m_dotsPerMeterY;
-    QPoint m_offset;
+    TQPoint m_offset;
 
-    QMap <QImageTextKeyLang, QString> m_textMap;
+    TQMap <TQImageTextKeyLang, TQString> m_textMap;
 };
 
 
@@ -47,7 +47,7 @@ kpDocumentMetaInfo::kpDocumentMetaInfo ()
 {
     d->m_dotsPerMeterX = 0;
     d->m_dotsPerMeterY = 0;
-    d->m_offset = QPoint (0, 0);
+    d->m_offset = TQPoint (0, 0);
 }
 
 kpDocumentMetaInfo::kpDocumentMetaInfo (const kpDocumentMetaInfo &rhs)
@@ -79,11 +79,11 @@ kpDocumentMetaInfo &kpDocumentMetaInfo::operator= (const kpDocumentMetaInfo &rhs
 
 
 // public
-void kpDocumentMetaInfo::printDebug (const QString &prefix) const
+void kpDocumentMetaInfo::printDebug (const TQString &prefix) const
 {
-    const QString usedPrefix = !prefix.isEmpty () ?
-                                   prefix + QString::fromLatin1 (":") :
-                                   QString::null;
+    const TQString usedPrefix = !prefix.isEmpty () ?
+                                   prefix + TQString::fromLatin1 (":") :
+                                   TQString::null;
 
     kdDebug () << usedPrefix << endl;
 
@@ -91,8 +91,8 @@ void kpDocumentMetaInfo::printDebug (const QString &prefix) const
                << " Y=" << dotsPerMeterY ()
                << " offset=" << offset () << endl;
 
-    QValueList <QImageTextKeyLang> keyList = textList ();
-    for (QValueList <QImageTextKeyLang>::const_iterator it = keyList.begin ();
+    TQValueList <TQImageTextKeyLang> keyList = textList ();
+    for (TQValueList <TQImageTextKeyLang>::const_iterator it = keyList.begin ();
          it != keyList.end ();
          it++)
     {
@@ -133,54 +133,54 @@ void kpDocumentMetaInfo::setDotsPerMeterY (int val)
 
 
 // public
-QPoint kpDocumentMetaInfo::offset () const
+TQPoint kpDocumentMetaInfo::offset () const
 {
     return d->m_offset;
 }
 
 // public
-void kpDocumentMetaInfo::setOffset (const QPoint &point)
+void kpDocumentMetaInfo::setOffset (const TQPoint &point)
 {
     d->m_offset = point;
 }
 
 
 // public
-QMap <QImageTextKeyLang, QString> kpDocumentMetaInfo::textMap () const
+TQMap <TQImageTextKeyLang, TQString> kpDocumentMetaInfo::textMap () const
 {
     return d->m_textMap;
 }
 
 // public
-QValueList <QImageTextKeyLang> kpDocumentMetaInfo::textList () const
+TQValueList <TQImageTextKeyLang> kpDocumentMetaInfo::textList () const
 {
     return d->m_textMap.keys ();
 }
 
 
 // public
-QString kpDocumentMetaInfo::text (const QImageTextKeyLang &itkl) const
+TQString kpDocumentMetaInfo::text (const TQImageTextKeyLang &itkl) const
 {
     return d->m_textMap [itkl];
 }
 
 // public
-QString kpDocumentMetaInfo::text (const char *key, const char *lang) const
+TQString kpDocumentMetaInfo::text (const char *key, const char *lang) const
 {
-    return text (QImageTextKeyLang (key, lang));
+    return text (TQImageTextKeyLang (key, lang));
 }
 
 
 // public
-void kpDocumentMetaInfo::setText (const QImageTextKeyLang &itkl,
-                                  const QString &string)
+void kpDocumentMetaInfo::setText (const TQImageTextKeyLang &itkl,
+                                  const TQString &string)
 {
     d->m_textMap [itkl] = string;
 }
 
 // public
 void kpDocumentMetaInfo::setText (const char *key, const char *lang,
-                                  const QString &string)
+                                  const TQString &string)
 {
-    setText (QImageTextKeyLang (key, lang), string);
+    setText (TQImageTextKeyLang (key, lang), string);
 }

@@ -18,9 +18,9 @@
 #ifndef COLORSELECTOR_H
 #define COLORSELECTOR_H
 
-#include <qwidget.h>
-#include <qcolor.h>
-#include <qbuttongroup.h>
+#include <tqwidget.h>
+#include <tqcolor.h>
+#include <tqbuttongroup.h>
 #include <kcolordialog.h>
 
 #include "color.h"
@@ -29,12 +29,12 @@
 /** Color selector widget
  *  @author Artur Rataj
  */
-class ColorSelector : public QWidget  {
+class ColorSelector : public TQWidget  {
 	Q_OBJECT
 
 public:
 	/** constructs a color selector widget */
-	ColorSelector(QWidget *parent=0, const char *name=0);
+	ColorSelector(TQWidget *parent=0, const char *name=0);
 	~ColorSelector();
 	/** @return the selected color */
 	const Color& color();
@@ -49,7 +49,7 @@ public slots:
 	/** Called if a color changed */
 	void slotSetColor(Color* color);
 	/** called if a color changed in the color patch */
-	void slotSetColor(const QColor& color);
+	void slotSetColor(const TQColor& color);
 	/** Called by the gradient selection, to replace or modify a color */
 	void slotGradientSelectionChangeColor(Color* gradientSelectionColor);
 	/** Called by the gradient selection, to synchronize its color */
@@ -69,9 +69,9 @@ private:
 	       MAX_COLOR_CHANGE_VALUE = 16 };
 	
 	/** A color change slider widget */
-	QWidget* colorChangeSliderWidget;
+	TQWidget* colorChangeSliderWidget;
 	/** Color change buttons button group widget */
-	QButtonGroup colorChangeButtons;
+	TQButtonGroup colorChangeButtons;
 	/** A color patch widget */
 	KColorPatch* colorPatch;
 	/** A gradient selection widget */

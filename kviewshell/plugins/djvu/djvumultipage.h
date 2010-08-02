@@ -24,7 +24,7 @@
 #ifndef __DJVUMULTIPAGE_H
 #define __DJVUMULTIPAGE_H
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include "kmultipage.h"
 #include "djvurenderer.h"
@@ -95,8 +95,8 @@ public:
   kmultipage. Please have a look at the constructor's source code to
   see how to adjust this for your implementation.
   */
-  DjVuMultiPage(QWidget *parentWidget, const char *widgetName, QObject *parent,
-		   const char *name, const QStringList& args = QStringList());
+  DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+		   const char *name, const TQStringList& args = TQStringList());
   
   /** Destructor
 		
@@ -111,7 +111,7 @@ public:
   This method returns the list of supported file formats for saving
   the file.
   */
-  virtual QStringList fileFormats() const;
+  virtual TQStringList fileFormats() const;
 
   /** Author information
  

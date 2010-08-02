@@ -59,7 +59,7 @@ public:
     /**
      * Default Constructor
      */
-    Kooka(const QCString& deviceToUse);
+    Kooka(const TQCString& deviceToUse);
 
     /**
      * Default Destructor
@@ -76,8 +76,8 @@ protected:
     /**
      * Overridden virtuals for Qt drag 'n drop (XDND)
      */
-    virtual void dragEnterEvent(QDragEnterEvent *event);
-    // virtual void dropEvent(QDropEvent *event);
+    virtual void dragEnterEvent(TQDragEnterEvent *event);
+    // virtual void dropEvent(TQDropEvent *event);
 
     /**
      * This function is called when it is time for the app to save its
@@ -105,9 +105,9 @@ private slots:
    void optionsConfigureToolbars();
    void optionsPreferences();
 
-   void changeStatusbar(const QString& text);
+   void changeStatusbar(const TQString& text);
    void cleanStatusbar(void) { changeStatusbar(""); }
-   void changeCaption(const QString& text);
+   void changeCaption(const TQString& text);
    void newToolbarConfig();
 
    // void fileSaveAs();

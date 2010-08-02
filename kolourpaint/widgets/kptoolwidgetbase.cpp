@@ -31,11 +31,11 @@
 
 #include <kptoolwidgetbase.h>
 
-#include <qbitmap.h>
-#include <qcolor.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qtooltip.h>
+#include <tqbitmap.h>
+#include <tqcolor.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqtooltip.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -45,15 +45,15 @@
 #include <kpeffectinvert.h>
 
 
-kpToolWidgetBase::kpToolWidgetBase (QWidget *parent, const char *name)
-    : QFrame (parent, name),
+kpToolWidgetBase::kpToolWidgetBase (TQWidget *parent, const char *name)
+    : TQFrame (parent, name),
       m_invertSelectedPixmap (true),
       m_selectedRow (-1), m_selectedCol (-1)
 {
     if (!name)
         kdError () << "kpToolWidgetBase::kpToolWidgetBase() without name" << endl;
 
-    setFrameStyle (QFrame::Panel | QFrame::Sunken);
+    setFrameStyle (TQFrame::Panel | TQFrame::Sunken);
     setFixedSize (44, 66);
 }
 
@@ -63,13 +63,13 @@ kpToolWidgetBase::~kpToolWidgetBase ()
 
 
 // public
-void kpToolWidgetBase::addOption (const QPixmap &pixmap, const QString &toolTip)
+void kpToolWidgetBase::addOption (const TQPixmap &pixmap, const TQString &toolTip)
 {
     if (m_pixmaps.isEmpty ())
         startNewOptionRow ();
 
     m_pixmaps.last ().append (pixmap);
-    m_pixmapRects.last ().append (QRect ());
+    m_pixmapRects.last ().append (TQRect ());
     m_toolTips.last ().append (toolTip);
 }
 
@@ -110,14 +110,14 @@ void kpToolWidgetBase::finishConstruction (int fallBackRow, int fallBackCol)
 
 
 // private
-QValueVector <int> kpToolWidgetBase::spreadOutElements (const QValueVector <int> &sizes, int max)
+TQValueVector <int> kpToolWidgetBase::spreadOutElements (const TQValueVector <int> &sizes, int max)
 {
     if (sizes.count () == 0)
-        return QValueVector <int> ();
+        return TQValueVector <int> ();
     else if (sizes.count () == 1)
-        return QValueVector <int> (1, sizes.first () > max ? 0 : 1/*margin*/);
+        return TQValueVector <int> (1, sizes.first () > max ? 0 : 1/*margin*/);
 
-    QValueVector <int> retOffsets (sizes.count ());
+    TQValueVector <int> retOffsets (sizes.count ());
 
     int totalSize = 0;
     for (int i = 0; i < (int) sizes.count (); i++)
@@ -175,10 +175,10 @@ QPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
         KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
         KConfigBase *cfg = cfgGroupSaver.config ();
 
-        QString nameString = QString::fromLatin1 (name ());
+        TQString nameString = TQString::fromLatin1 (name ());
 
-        row = cfg->readNumEntry (nameString + QString::fromLatin1 (" Row"), -1);
-        col = cfg->readNumEntry (nameString + QString::fromLatin1 (" Col"), -1);
+        row = cfg->readNumEntry (nameString + TQString::fromLatin1 (" Row"), -1);
+        col = cfg->readNumEntry (nameString + TQString::fromLatin1 (" Col"), -1);
     }
 
 #if DEBUG_KP_TOOL_WIDGET_BASE
@@ -218,9 +218,9 @@ void kpToolWidgetBase::saveSelectedAsDefault () const
     KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
-    QString nameString = QString::fromLatin1 (name ());
-    cfg->writeEntry (nameString + QString::fromLatin1 (" Row"), m_selectedRow);
-    cfg->writeEntry (nameString + QString::fromLatin1 (" Col"), m_selectedCol);
+    TQString nameString = TQString::fromLatin1 (name ());
+    cfg->writeEntry (nameString + TQString::fromLatin1 (" Row"), m_selectedRow);
+    cfg->writeEntry (nameString + TQString::fromLatin1 (" Col"), m_selectedCol);
     cfg->sync ();
 }
 
@@ -250,7 +250,7 @@ void kpToolWidgetBase::relayoutOptions ()
     kdDebug () << "\tfinding heights of rows:" << endl;
 #endif
 
-    QValueVector <int> maxHeightOfRow (m_pixmaps.count ());
+    TQValueVector <int> maxHeightOfRow (m_pixmaps.count ());
 
     for (int r = 0; r < (int) m_pixmaps.count (); r++)
     {
@@ -264,7 +264,7 @@ void kpToolWidgetBase::relayoutOptions ()
     #endif
     }
 
-    QValueVector <int> rowYOffset = spreadOutElements (maxHeightOfRow, height ());
+    TQValueVector <int> rowYOffset = spreadOutElements (maxHeightOfRow, height ());
 #if DEBUG_KP_TOOL_WIDGET_BASE
     kdDebug () << "\tspread out offsets of rows:" << endl;
     for (int r = 0; r < (int) rowYOffset.count (); r++)
@@ -277,7 +277,7 @@ void kpToolWidgetBase::relayoutOptions ()
         kdDebug () << "\tlaying out row " << r << ":" << endl;
     #endif
 
-        QValueVector <int> widths (m_pixmaps [r].count ());
+        TQValueVector <int> widths (m_pixmaps [r].count ());
         for (int c = 0; c < (int) m_pixmaps [r].count (); c++)
             widths [c] = m_pixmaps [r][c].width ();
     #if DEBUG_KP_TOOL_WIDGET_BASE
@@ -286,7 +286,7 @@ void kpToolWidgetBase::relayoutOptions ()
             kdDebug () << "\t\t\t" << c << ": " << widths [c] << endl;
     #endif
 
-        QValueVector <int> colXOffset = spreadOutElements (widths, width ());
+        TQValueVector <int> colXOffset = spreadOutElements (widths, width ());
     #if DEBUG_KP_TOOL_WIDGET_BASE
         kdDebug () << "\t\tspread out offsets of cols:" << endl;
         for (int c = 0; c < (int) colXOffset.count (); c++)
@@ -319,10 +319,10 @@ void kpToolWidgetBase::relayoutOptions ()
             else
                 h = rowYOffset [r + 1] - y;
 
-            m_pixmapRects [r][c] = QRect (x, y, w, h);
+            m_pixmapRects [r][c] = TQRect (x, y, w, h);
 
             if (!m_toolTips [r][c].isEmpty ())
-                QToolTip::add (this, m_pixmapRects [r][c], m_toolTips [r][c]);
+                TQToolTip::add (this, m_pixmapRects [r][c], m_toolTips [r][c]);
         }
     }
 
@@ -537,7 +537,7 @@ bool kpToolWidgetBase::selectNextOption ()
 
 
 // protected virtual [base QWidget]
-void kpToolWidgetBase::mousePressEvent (QMouseEvent *e)
+void kpToolWidgetBase::mousePressEvent (TQMouseEvent *e)
 {
     e->ignore ();
 
@@ -560,7 +560,7 @@ void kpToolWidgetBase::mousePressEvent (QMouseEvent *e)
 }
 
 // protected virtual [base QFrame]
-void kpToolWidgetBase::drawContents (QPainter *painter)
+void kpToolWidgetBase::drawContents (TQPainter *painter)
 {
 #if DEBUG_KP_TOOL_WIDGET_BASE && 1
     kdDebug () << "kpToolWidgetBase::drawContents(): rect=" << contentsRect () << endl;
@@ -574,8 +574,8 @@ void kpToolWidgetBase::drawContents (QPainter *painter)
 
         for (int j = 0; j < (int) m_pixmaps [i].count (); j++)
         {
-            QRect rect = m_pixmapRects [i][j];
-            QPixmap pixmap = m_pixmaps [i][j];
+            TQRect rect = m_pixmapRects [i][j];
+            TQPixmap pixmap = m_pixmaps [i][j];
 
         #if DEBUG_KP_TOOL_WIDGET_BASE && 1
             kdDebug () << "\t\tCol: " << j << " rect=" << rect << endl;
@@ -598,7 +598,7 @@ void kpToolWidgetBase::drawContents (QPainter *painter)
 
         #endif
 
-            painter->drawPixmap (QPoint (rect.x () + (rect.width () - pixmap.width ()) / 2,
+            painter->drawPixmap (TQPoint (rect.x () + (rect.width () - pixmap.width ()) / 2,
                                          rect.y () + (rect.height () - pixmap.height ()) / 2),
                                  pixmap);
         }

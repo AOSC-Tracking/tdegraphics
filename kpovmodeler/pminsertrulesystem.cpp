@@ -21,17 +21,17 @@
 #include "pmvariant.h"
 #include "pmdebug.h"
 
-#include <qfile.h>
+#include <tqfile.h>
 #include <kstandarddirs.h>
 
-bool isCategory( QDomElement& e )
+bool isCategory( TQDomElement& e )
 {
    return( e.tagName( ) == "class" || e.tagName( ) == "group" );
 }
 
-PMRuleCategory* newCategory( QDomElement& e,
-                             QPtrList<PMRuleDefineGroup>& globalGroups,
-                             QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleCategory* newCategory( TQDomElement& e,
+                             TQPtrList<PMRuleDefineGroup>& globalGroups,
+                             TQPtrList<PMRuleDefineGroup>& localGroups )
 {
    if( e.tagName( ) == "class" )
       return new PMRuleClass( e );
@@ -42,7 +42,7 @@ PMRuleCategory* newCategory( QDomElement& e,
 
 PMPrototypeManager* PMRuleClass::s_pPrototypeManager = 0;
 
-PMRuleClass::PMRuleClass( QDomElement& e )
+PMRuleClass::PMRuleClass( TQDomElement& e )
       : PMRuleCategory( )
 {
    m_pPrototypeManager = s_pPrototypeManager;
@@ -54,26 +54,26 @@ PMRuleClass::PMRuleClass( QDomElement& e )
                         << m_className << endl;
 }
 
-bool PMRuleClass::matches( const QString& className )
+bool PMRuleClass::matches( const TQString& className )
 {
    return m_pPrototypeManager->isA( className, m_className );
 }
 
-PMRuleGroup::PMRuleGroup( QDomElement& e,
-                          QPtrList<PMRuleDefineGroup>& globalGroups,
-                          QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleGroup::PMRuleGroup( TQDomElement& e,
+                          TQPtrList<PMRuleDefineGroup>& globalGroups,
+                          TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCategory( )
 {
    m_pGroup = 0;
-   QString groupName = e.attribute( "name" );
+   TQString groupName = e.attribute( "name" );
    if( groupName.isEmpty( ) )
       kdError( PMArea ) << "RuleSystem: Invalid group name" << endl;
    // find group
-   QPtrListIterator<PMRuleDefineGroup> lit( localGroups );
+   TQPtrListIterator<PMRuleDefineGroup> lit( localGroups );
    for( ; lit.current( ) && !m_pGroup; ++lit )
       if( lit.current( )->name( ) == groupName )
          m_pGroup = lit.current( );
-   QPtrListIterator<PMRuleDefineGroup> git( globalGroups );
+   TQPtrListIterator<PMRuleDefineGroup> git( globalGroups );
    for( ; git.current( ) && !m_pGroup; ++git )
       if( git.current( )->name( ) == groupName )
          m_pGroup = git.current( );
@@ -82,27 +82,27 @@ PMRuleGroup::PMRuleGroup( QDomElement& e,
                         << groupName << endl;
 }
 
-bool PMRuleGroup::matches( const QString& className )
+bool PMRuleGroup::matches( const TQString& className )
 {
    if( m_pGroup )
       return m_pGroup->matches( className );
    return false;
 }
 
-PMRuleDefineGroup::PMRuleDefineGroup( QDomElement& e,
-                         QPtrList<PMRuleDefineGroup>& globalGroups,
-                         QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleDefineGroup::PMRuleDefineGroup( TQDomElement& e,
+                         TQPtrList<PMRuleDefineGroup>& globalGroups,
+                         TQPtrList<PMRuleDefineGroup>& localGroups )
 {
    m_name = e.attribute( "name" );
    if( m_name.isEmpty( ) )
       kdError( PMArea ) << "RuleSystem: Invalid group name" << endl;
 
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCategory( me ) )
             m_categories.append( newCategory( me, globalGroups, localGroups ) );
       }
@@ -116,23 +116,23 @@ PMRuleDefineGroup::~PMRuleDefineGroup( )
    m_categories.clear( );
 }
 
-bool PMRuleDefineGroup::matches( const QString& className )
+bool PMRuleDefineGroup::matches( const TQString& className )
 {
    bool m = false;
-   QPtrListIterator<PMRuleCategory> it( m_categories );
+   TQPtrListIterator<PMRuleCategory> it( m_categories );
    for( ; it.current( ) && !m; ++it )
       m = it.current( )->matches( className );
    return m;
 }
 
 
-bool isValue( QDomElement& e )
+bool isValue( TQDomElement& e )
 {
    return( e.tagName( ) == "property" || e.tagName( ) == "const" ||
            e.tagName( ) == "count" );
 }
 
-bool isCondition( QDomElement& e )
+bool isCondition( TQDomElement& e )
 {
    return( e.tagName( ) == "not" || e.tagName( ) == "and" ||
            e.tagName( ) == "or" || e.tagName( ) == "before" ||
@@ -141,9 +141,9 @@ bool isCondition( QDomElement& e )
            e.tagName( ) == "equal" );
 }
 
-PMRuleValue* newValue( QDomElement& e,
-                       QPtrList<PMRuleDefineGroup>& globalGroups,
-                       QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleValue* newValue( TQDomElement& e,
+                       TQPtrList<PMRuleDefineGroup>& globalGroups,
+                       TQPtrList<PMRuleDefineGroup>& localGroups )
 {
    if( e.tagName( ) == "property" )
       return new PMRuleProperty( e );
@@ -154,9 +154,9 @@ PMRuleValue* newValue( QDomElement& e,
    return 0;
 }
 
-PMRuleCondition* newCondition( QDomElement& e,
-                               QPtrList<PMRuleDefineGroup>& globalGroups,
-                               QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleCondition* newCondition( TQDomElement& e,
+                               TQPtrList<PMRuleDefineGroup>& globalGroups,
+                               TQPtrList<PMRuleDefineGroup>& localGroups )
 {
    if( e.tagName( ) == "not" )
       return new PMRuleNot( e, globalGroups, localGroups );
@@ -185,11 +185,11 @@ PMRuleBase::~PMRuleBase( )
    m_children.clear( );
 }
 
-void PMRuleBase::countChild( const QString& className, bool afterInsertPoint )
+void PMRuleBase::countChild( const TQString& className, bool afterInsertPoint )
 {
    countChildProtected( className, afterInsertPoint );
 
-   QPtrListIterator<PMRuleBase> it( m_children );
+   TQPtrListIterator<PMRuleBase> it( m_children );
    for( ; it.current( ); ++it )
       it.current( )->countChild( className, afterInsertPoint );
 }
@@ -198,12 +198,12 @@ void PMRuleBase::reset( )
 {
    resetProtected( );
 
-   QPtrListIterator<PMRuleBase> it( m_children );
+   TQPtrListIterator<PMRuleBase> it( m_children );
    for( ; it.current( ); ++it )
       it.current( )->reset( );
 }
 
-PMRuleProperty::PMRuleProperty( QDomElement& e )
+PMRuleProperty::PMRuleProperty( TQDomElement& e )
       : PMRuleValue( )
 {
    m_property = e.attribute( "name" );
@@ -221,10 +221,10 @@ PMVariant PMRuleProperty::evaluate( const PMObject* o )
 }
 
 
-PMRuleConstant::PMRuleConstant( QDomElement& e )
+PMRuleConstant::PMRuleConstant( TQDomElement& e )
       : PMRuleValue( )
 {
-   QString v = e.attribute( "value" );
+   TQString v = e.attribute( "value" );
    if( v.isNull( ) )
       kdError( PMArea ) << "RuleSystem: Invalid value" << endl;
 
@@ -242,18 +242,18 @@ bool PMRuleConstant::convertTo( PMVariant::PMVariantDataType type )
 }
 
 
-PMRuleCount::PMRuleCount( QDomElement& e,
-                          QPtrList<PMRuleDefineGroup>& globalGroups,
-                          QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleCount::PMRuleCount( TQDomElement& e,
+                          TQPtrList<PMRuleDefineGroup>& globalGroups,
+                          TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleValue( )
 {
    m_number = 0;
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCategory( me ) )
             m_categories.append( newCategory( me, globalGroups, localGroups ) );
       }
@@ -272,10 +272,10 @@ PMVariant PMRuleCount::evaluate( const PMObject* )
    return PMVariant( m_number );
 }
 
-void PMRuleCount::countChildProtected( const QString& className, bool )
+void PMRuleCount::countChildProtected( const TQString& className, bool )
 {
    bool m = false;
-   QPtrListIterator<PMRuleCategory> it( m_categories );
+   TQPtrListIterator<PMRuleCategory> it( m_categories );
    for( ; it.current( ) && !m; ++it )
       m = it.current( )->matches( className );
    if( m )
@@ -287,18 +287,18 @@ void PMRuleCount::resetProtected( )
    m_number = 0;
 }
 
-PMRuleNot::PMRuleNot( QDomElement& e,
-                      QPtrList<PMRuleDefineGroup>& globalGroups,
-                      QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleNot::PMRuleNot( TQDomElement& e,
+                      TQPtrList<PMRuleDefineGroup>& globalGroups,
+                      TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
    m_pChild = 0;
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) && !m_pChild )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCondition( me ) )
          {
             m_pChild = newCondition( me, globalGroups, localGroups );
@@ -316,17 +316,17 @@ bool PMRuleNot::evaluate( const PMObject* object )
    return true;
 }
 
-PMRuleAnd::PMRuleAnd( QDomElement& e,
-                      QPtrList<PMRuleDefineGroup>& globalGroups,
-                      QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleAnd::PMRuleAnd( TQDomElement& e,
+                      TQPtrList<PMRuleDefineGroup>& globalGroups,
+                      TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCondition( me ) )
          {
             PMRuleCondition* c = newCondition( me, globalGroups, localGroups );
@@ -341,23 +341,23 @@ PMRuleAnd::PMRuleAnd( QDomElement& e,
 bool PMRuleAnd::evaluate( const PMObject* object )
 {
    bool b = true;
-   QPtrListIterator<PMRuleCondition> it( m_conditions );
+   TQPtrListIterator<PMRuleCondition> it( m_conditions );
    for( ; it.current( ) && b; ++it )
       b = it.current( )->evaluate( object );
    return b;
 }
 
-PMRuleOr::PMRuleOr( QDomElement& e,
-                    QPtrList<PMRuleDefineGroup>& globalGroups,
-                    QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleOr::PMRuleOr( TQDomElement& e,
+                    TQPtrList<PMRuleDefineGroup>& globalGroups,
+                    TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCondition( me ) )
          {
             PMRuleCondition* c = newCondition( me, globalGroups, localGroups );
@@ -372,24 +372,24 @@ PMRuleOr::PMRuleOr( QDomElement& e,
 bool PMRuleOr::evaluate( const PMObject* object )
 {
    bool b = false;
-   QPtrListIterator<PMRuleCondition> it( m_conditions );
+   TQPtrListIterator<PMRuleCondition> it( m_conditions );
    for( ; it.current( ) && !b; ++it )
       b = it.current( )->evaluate( object );
    return b;
 }
 
-PMRuleBefore::PMRuleBefore( QDomElement& e,
-                            QPtrList<PMRuleDefineGroup>& globalGroups,
-                            QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleBefore::PMRuleBefore( TQDomElement& e,
+                            TQPtrList<PMRuleDefineGroup>& globalGroups,
+                            TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
    m_contains = false;
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCategory( me ) )
             m_categories.append( newCategory( me, globalGroups, localGroups ) );
       }
@@ -408,12 +408,12 @@ bool PMRuleBefore::evaluate( const PMObject* )
    return m_contains;
 }
 
-void PMRuleBefore::countChildProtected( const QString& className,
+void PMRuleBefore::countChildProtected( const TQString& className,
                                         bool afterInsertPoint )
 {
    if( afterInsertPoint && !m_contains )
    {
-      QPtrListIterator<PMRuleCategory> it( m_categories );
+      TQPtrListIterator<PMRuleCategory> it( m_categories );
       for( ; it.current( ) && !m_contains; ++it )
          m_contains = it.current( )->matches( className );
    }
@@ -424,18 +424,18 @@ void PMRuleBefore::resetProtected( )
    m_contains = false;
 }
 
-PMRuleAfter::PMRuleAfter( QDomElement& e,
-                          QPtrList<PMRuleDefineGroup>& globalGroups,
-                          QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleAfter::PMRuleAfter( TQDomElement& e,
+                          TQPtrList<PMRuleDefineGroup>& globalGroups,
+                          TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
    m_contains = false;
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCategory( me ) )
             m_categories.append( newCategory( me, globalGroups, localGroups ) );
       }
@@ -454,12 +454,12 @@ bool PMRuleAfter::evaluate( const PMObject* )
    return m_contains;
 }
 
-void PMRuleAfter::countChildProtected( const QString& className,
+void PMRuleAfter::countChildProtected( const TQString& className,
                                        bool afterInsertPoint )
 {
    if( !afterInsertPoint && !m_contains )
    {
-      QPtrListIterator<PMRuleCategory> it( m_categories );
+      TQPtrListIterator<PMRuleCategory> it( m_categories );
       for( ; it.current( ) && !m_contains; ++it )
          m_contains = it.current( )->matches( className );
    }
@@ -470,18 +470,18 @@ void PMRuleAfter::resetProtected( )
    m_contains = false;
 }
 
-PMRuleContains::PMRuleContains( QDomElement& e,
-                                QPtrList<PMRuleDefineGroup>& globalGroups,
-                                QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleContains::PMRuleContains( TQDomElement& e,
+                                TQPtrList<PMRuleDefineGroup>& globalGroups,
+                                TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
    m_contains = false;
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCategory( me ) )
             m_categories.append( newCategory( me, globalGroups, localGroups ) );
       }
@@ -500,11 +500,11 @@ bool PMRuleContains::evaluate( const PMObject* )
    return m_contains;
 }
 
-void PMRuleContains::countChildProtected( const QString& className, bool )
+void PMRuleContains::countChildProtected( const TQString& className, bool )
 {
    if( !m_contains )
    {
-      QPtrListIterator<PMRuleCategory> it( m_categories );
+      TQPtrListIterator<PMRuleCategory> it( m_categories );
       for( ; it.current( ) && !m_contains; ++it )
          m_contains = it.current( )->matches( className );
    }
@@ -515,21 +515,21 @@ void PMRuleContains::resetProtected( )
    m_contains = false;
 }
 
-PMRuleCompare::PMRuleCompare( QDomElement& e,
-                              QPtrList<PMRuleDefineGroup>& globalGroups,
-                              QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleCompare::PMRuleCompare( TQDomElement& e,
+                              TQPtrList<PMRuleDefineGroup>& globalGroups,
+                              TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
    m_pValue[0] = 0;
    m_pValue[1] = 0;
 
    int i = 0;
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) && !m_pValue[1] )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isValue( me ) )
          {
             m_pValue[i] = newValue( me, globalGroups, localGroups );
@@ -585,9 +585,9 @@ bool PMRuleCompare::evaluate( const PMObject* object )
    return compare( v[0], v[1] );
 }
 
-PMRuleLess::PMRuleLess( QDomElement& e,
-                        QPtrList<PMRuleDefineGroup>& globalGroups,
-                        QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleLess::PMRuleLess( TQDomElement& e,
+                        TQPtrList<PMRuleDefineGroup>& globalGroups,
+                        TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCompare( e, globalGroups, localGroups )
 {
 }
@@ -632,9 +632,9 @@ bool PMRuleLess::compare( const PMVariant& v1, const PMVariant& v2 )
    return c;
 }
 
-PMRuleGreater::PMRuleGreater( QDomElement& e,
-                              QPtrList<PMRuleDefineGroup>& globalGroups,
-                              QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleGreater::PMRuleGreater( TQDomElement& e,
+                              TQPtrList<PMRuleDefineGroup>& globalGroups,
+                              TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCompare( e, globalGroups, localGroups )
 {
 }
@@ -679,9 +679,9 @@ bool PMRuleGreater::compare( const PMVariant& v1, const PMVariant& v2 )
    return c;
 }
 
-PMRuleEqual::PMRuleEqual( QDomElement& e,
-                          QPtrList<PMRuleDefineGroup>& globalGroups,
-                          QPtrList<PMRuleDefineGroup>& localGroups )
+PMRuleEqual::PMRuleEqual( TQDomElement& e,
+                          TQPtrList<PMRuleDefineGroup>& globalGroups,
+                          TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCompare( e, globalGroups, localGroups )
 {
 }
@@ -727,19 +727,19 @@ bool PMRuleEqual::compare( const PMVariant& v1, const PMVariant& v2 )
 }
 
 
-PMRule::PMRule( QDomElement& e,
-                QPtrList<PMRuleDefineGroup>& globalGroups,
-                QPtrList<PMRuleDefineGroup>& localGroups )
+PMRule::PMRule( TQDomElement& e,
+                TQPtrList<PMRuleDefineGroup>& globalGroups,
+                TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleBase( )
 {
    m_pCondition = 0;
 
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) && !m_pCondition )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( isCategory( me ) )
             m_categories.append( newCategory( me, globalGroups, localGroups ) );
          else if( isCondition( me ) )
@@ -758,10 +758,10 @@ PMRule::~PMRule( )
    m_categories.clear( );
 }
 
-bool PMRule::matches( const QString& className )
+bool PMRule::matches( const TQString& className )
 {
    bool m = false;
-   QPtrListIterator<PMRuleCategory> it( m_categories );
+   TQPtrListIterator<PMRuleCategory> it( m_categories );
    for( ; it.current( ) && !m; ++it )
       m = it.current( )->matches( className );
    return m;
@@ -775,8 +775,8 @@ bool PMRule::evaluate( const PMObject* parent )
       return m_pCondition->evaluate( parent );
 }
 
-PMRuleTargetClass::PMRuleTargetClass( QDomElement& e,
-                                      QPtrList<PMRuleDefineGroup>& globalGroups )
+PMRuleTargetClass::PMRuleTargetClass( TQDomElement& e,
+                                      TQPtrList<PMRuleDefineGroup>& globalGroups )
 {
    m_class = e.attribute( "name" );
    if( m_class.isEmpty( ) )
@@ -785,15 +785,15 @@ PMRuleTargetClass::PMRuleTargetClass( QDomElement& e,
    appendRules( e, globalGroups );
 }
 
-void PMRuleTargetClass::appendRules( QDomElement& e,
-                                     QPtrList<PMRuleDefineGroup>& globalGroups )
+void PMRuleTargetClass::appendRules( TQDomElement& e,
+                                     TQPtrList<PMRuleDefineGroup>& globalGroups )
 {
-   QDomNode m = e.firstChild( );
+   TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
       if( m.isElement( ) )
       {
-         QDomElement me = m.toElement( );
+         TQDomElement me = m.toElement( );
          if( me.tagName( ) == "definegroup" )
             m_groups.append( new PMRuleDefineGroup( me, globalGroups, m_groups ) );
          if( me.tagName( ) == "rule" )
@@ -826,7 +826,7 @@ PMInsertRuleSystem::~PMInsertRuleSystem( )
    m_classRules.clear( );
 }
 
-void PMInsertRuleSystem::loadRules( const QString& fileName )
+void PMInsertRuleSystem::loadRules( const TQString& fileName )
 {
    PMRuleClass::s_pPrototypeManager = m_pPart->prototypeManager( );
    if( m_loadedFiles.find( fileName ) != m_loadedFiles.end( ) )
@@ -834,7 +834,7 @@ void PMInsertRuleSystem::loadRules( const QString& fileName )
    m_loadedFiles.push_back( fileName );
 
 
-   QString ruleFile = locate( "data", QString( "kpovmodeler/" + fileName ) );
+   TQString ruleFile = locate( "data", TQString( "kpovmodeler/" + fileName ) );
    if( ruleFile.isEmpty( ) )
    {
       kdError( PMArea ) << "Rule file 'kpovmodeler/" << fileName
@@ -842,7 +842,7 @@ void PMInsertRuleSystem::loadRules( const QString& fileName )
       return;
    }
 
-   QFile file( ruleFile );
+   TQFile file( ruleFile );
    if( !file.open( IO_ReadOnly ) )
    {
       kdError( PMArea ) << "Could not open rule file 'kpovmodeler/" << fileName
@@ -850,29 +850,29 @@ void PMInsertRuleSystem::loadRules( const QString& fileName )
       return;
    }
 
-   QDomDocument doc( "insertrules" );
+   TQDomDocument doc( "insertrules" );
    doc.setContent( &file );
 
-   QDomElement e = doc.documentElement( );
+   TQDomElement e = doc.documentElement( );
    if( e.attribute( "format" ) != "1.0" )
       kdError( PMArea ) << "Rule format " << e.attribute( "format" )
                         << " not supported." << endl;
    else
    {
-      QDomNode c = e.firstChild( );
-      QPtrList<PMRuleDefineGroup> dummyLocalGroups;
+      TQDomNode c = e.firstChild( );
+      TQPtrList<PMRuleDefineGroup> dummyLocalGroups;
 
       while( !c.isNull( ) )
       {
          if( c.isElement( ) )
          {
-            QDomElement ce = c.toElement( );
+            TQDomElement ce = c.toElement( );
             if( ce.tagName( ) == "definegroup" )
                m_groups.append( new PMRuleDefineGroup( ce, m_groups,
                                                        dummyLocalGroups ) );
             else if( ce.tagName( ) == "targetclass" )
             {
-               QString className = ce.attribute( "name" );
+               TQString className = ce.attribute( "name" );
                // find a target class with the same name
                PMRuleTargetClass* target = 0;
 
@@ -898,7 +898,7 @@ void PMInsertRuleSystem::loadRules( const QString& fileName )
 }
 
 bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
-                                    const QString& className,
+                                    const TQString& className,
                                     const PMObject* after,
                                     const PMObjectList* objectsBetween )
 {
@@ -912,9 +912,9 @@ bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
       if( tc )
       {
          // check the exception list
-         QStringList exceptions = tc->exceptions( );
+         TQStringList exceptions = tc->exceptions( );
          bool exceptionFound = false;
-         QStringList::ConstIterator it;
+         TQStringList::ConstIterator it;
          for( it = exceptions.begin( );
               it != exceptions.end( ) && !exceptionFound; ++it )
             if( parentObject->isA( *it ) )
@@ -922,7 +922,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
 
          if( !exceptionFound )
          {
-            QPtrListIterator<PMRule> rit = tc->rules( );
+            TQPtrListIterator<PMRule> rit = tc->rules( );
             // find matching rules for class name
             for( ; rit.current( ) && !possible; ++rit )
             {
@@ -975,14 +975,14 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                    const PMObject* after )
 {
    PMObjectListIterator it( list );
-   QStringList classes;
+   TQStringList classes;
    for( ; it.current( ); ++it )
       classes.append( it.current( )->type( ) );
    return canInsert( parentObject, classes, after );
 }
 
 int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
-                                   const QStringList& list,
+                                   const TQStringList& list,
                                    const PMObject* after )
 {
    if( list.size( ) == 1 )
@@ -995,7 +995,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
    }
 
    // find rules for target class
-   QPtrList<PMRuleTargetClass> targetClassList;
+   TQPtrList<PMRuleTargetClass> targetClassList;
    PMMetaObject* meta = parentObject->metaObject( );
    for( ; meta; meta = meta->superClass( ) )
    {
@@ -1007,10 +1007,10 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
       return 0; // not rules found
 
    // count already inserted children
-   QPtrListIterator<PMRuleTargetClass> tit( targetClassList );
+   TQPtrListIterator<PMRuleTargetClass> tit( targetClassList );
    for( ; tit.current( ); ++tit ) // ... for all target classes
    {
-      QPtrListIterator<PMRule> rit = tit.current( )->rules( );
+      TQPtrListIterator<PMRule> rit = tit.current( )->rules( );
       for( ; rit.current( ); ++rit ) // ... and all rules
       {
          rit.current( )->reset( );
@@ -1028,14 +1028,14 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
    }
 
    int number = 0;
-   QStringList::const_iterator oit;
+   TQStringList::const_iterator oit;
 
    for( oit = list.begin( ); oit != list.end( ); ++oit )
    {
       bool possible = false;
       for( tit.toFirst( ); tit.current( ) && !possible; ++tit )
       {
-         QPtrListIterator<PMRule> rit = tit.current( )->rules( );
+         TQPtrListIterator<PMRule> rit = tit.current( )->rules( );
 
          for( ; rit.current( ) && !possible; ++rit )
          {
@@ -1049,7 +1049,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
          // object can be inserted, count it
          for( ; tit.current( ); ++tit )
          {
-            QPtrListIterator<PMRule> rit = tit.current( )->rules( );
+            TQPtrListIterator<PMRule> rit = tit.current( )->rules( );
             for( ; rit.current( ); ++rit )
                rit.current( )->countChild( *oit, false );
          }

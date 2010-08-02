@@ -24,9 +24,9 @@
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <qfileinfo.h>
-#include <qimage.h>
-#include <qpainter.h>
+#include <tqfileinfo.h>
+#include <tqimage.h>
+#include <tqpainter.h>
 #include <kapp.h>
 
 #include "GBitmap.h"
@@ -44,21 +44,21 @@
 
 //#define KF_DEBUG
 
-inline GUTF8String GStringFromQString(const QString& x)
+inline GUTF8String GStringFromQString(const TQString& x)
 {
   GUTF8String retval=(const char*)x.utf8();
   return retval;
 }
 
 
-inline QString QStringFromGString(const GUTF8String& x)
+inline TQString QStringFromGString(const GUTF8String& x)
 {
-  QString retval=QString::fromUtf8((const char*)x);
+  TQString retval=TQString::fromUtf8((const char*)x);
   return retval;
 }
 
 
-DjVuRenderer::DjVuRenderer(QWidget* par)
+DjVuRenderer::DjVuRenderer(TQWidget* par)
   : DocumentRenderer(par)
 {
 #ifdef KF_DEBUG
@@ -77,7 +77,7 @@ DjVuRenderer::~DjVuRenderer()
 #endif
 
   // Wait for all access to this documentRenderer to finish
-  QMutexLocker locker( &mutex );
+  TQMutexLocker locker( &mutex );
 }
 
 
@@ -98,7 +98,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
   }
 
   // Wait for all access to this documentRenderer to finish
-  QMutexLocker locker( &mutex );
+  TQMutexLocker locker( &mutex );
 
   // more paranoid safety checks
   if (page->getPageNumber() > numPages) {
@@ -151,7 +151,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
   else if (Prefs::renderMode() == Prefs::EnumRenderMode::Background)
     djvuPixmap = djvuPage->get_bg_pixmap(pageRect, pageRect);
 
-  QPainter* foreGroundPaint = page->getPainter();
+  TQPainter* foreGroundPaint = page->getPainter();
   if (foreGroundPaint != 0) 
   {
     if(djvuPixmap && Prefs::renderMode() != Prefs::EnumRenderMode::BlackAndWhite)
@@ -180,7 +180,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
         for (int j = 0; j < pageWidth; j++)
         {
           GPixel pixel = pixmapRow[j];
-          foreGroundPaint->setPen(QColor(pixel.r, pixel.g, pixel.b));
+          foreGroundPaint->setPen(TQColor(pixel.r, pixel.g, pixel.b));
           foreGroundPaint->drawPoint(j, pageHeight - i - 1);
         }
       }*/
@@ -217,7 +217,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
           for (int j = 0; j < pageWidth; j++)
           {
             unsigned char pixel = 255-bitmapRow[j];
-            foreGroundPaint->setPen(QColor(pixel, pixel, pixel));
+            foreGroundPaint->setPen(TQColor(pixel, pixel, pixel));
             foreGroundPaint->drawPoint(j, pageHeight - i - 1);
           }
         }*/
@@ -237,7 +237,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
 
   if (pageText)
   {
-    QSize djvuPageSize(djvuPage->get_width(), djvuPage->get_real_height());
+    TQSize djvuPageSize(djvuPage->get_width(), djvuPage->get_real_height());
     fillInText(page, pageText, pageText->page_zone, djvuPageSize);
     //kdDebug() << "Text of page " << pageNumber << endl;
     //kdDebug() << (const char*)pageText->textUTF8 << endl;
@@ -249,14 +249,14 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
 }
 
 
-bool DjVuRenderer::setFile(const QString &fname, const KURL &)
+bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
 {
 #ifdef KF_DEBUG
   kdDebug() << "DjVuRenderer::setFile(" << fname << ") called" << endl;
 #endif
 
   // Wait for all access to this documentRenderer to finish
-  QMutexLocker locker( &mutex );
+  TQMutexLocker locker( &mutex );
 
   // If fname is the empty string, then this means: "close".
   if (fname.isEmpty()) {
@@ -267,8 +267,8 @@ bool DjVuRenderer::setFile(const QString &fname, const KURL &)
   // Paranoid saftey checks: make sure the file actually exists, and
   // that it is a file, not a directory. Otherwise, show an error
   // message and exit..
-  QFileInfo fi(fname);
-  QString   filename = fi.absFilePath();
+  TQFileInfo fi(fname);
+  TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
     KMessageBox::error( parentWidget,
 			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").arg(filename),
@@ -353,12 +353,12 @@ void DjVuRenderer::getAnnotations(RenderedDocumentPage* page, GP<DjVuImage> djvu
 
       GRect rect = map[pos]->get_bound_rect();
 
-      QRect hyperlinkRect((int)(rect.xmin*scaleX+0.5), (int)((djvuPage->get_height()-rect.ymax)*scaleY+0.5),
+      TQRect hyperlinkRect((int)(rect.xmin*scaleX+0.5), (int)((djvuPage->get_height()-rect.ymax)*scaleY+0.5),
                           (int)(rect.width()*scaleX +0.5), (int)(rect.height()*scaleY+0.5));
 
-      QString url((const char*)map[pos]->url);
-      QString target((const char*)map[pos]->target);
-      QString comment((const char*)map[pos]->comment);
+      TQString url((const char*)map[pos]->url);
+      TQString target((const char*)map[pos]->target);
+      TQString comment((const char*)map[pos]->comment);
 
       // Create an anchor for this link.
       if (!anchorList.contains(url))
@@ -418,7 +418,7 @@ bool DjVuRenderer::initializeDocument()
       pageSizes[i].setPageSize(w, h);
     }
   }
-  emit setStatusBarText(QString::null);
+  emit setStatusBarText(TQString::null);
   
   // We will also generate a list of hyperlink-anchors in the document.
   // So declare the existing lists empty.
@@ -459,7 +459,7 @@ GP<DjVuTXT> DjVuRenderer::getText(PageNumber pageNumber)
   return 0;
 }
 
-void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& text, DjVuTXT::Zone& zone, QSize& djvuPageSize)
+void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& text, DjVuTXT::Zone& zone, TQSize& djvuPageSize)
 {
   if (zone.children.isempty())
   {
@@ -469,11 +469,11 @@ void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& tex
     double scaleX = pageWidth / (double)djvuPageSize.width();
     double scaleY = pageHeight / (double)djvuPageSize.height();
 
-    QString zoneString = QStringFromGString(text->textUTF8.substr(zone.text_start, zone.text_length));
+    TQString zoneString = QStringFromGString(text->textUTF8.substr(zone.text_start, zone.text_length));
 
     //kdDebug() << "zone text: " << zoneString << endl;
 
-    QRect textRect((int)(zone.rect.xmin*scaleX+0.5), (int)((djvuPageSize.height()-zone.rect.ymax)*scaleY+0.5),
+    TQRect textRect((int)(zone.rect.xmin*scaleX+0.5), (int)((djvuPageSize.height()-zone.rect.ymax)*scaleY+0.5),
                    (int)(zone.rect.width()*scaleX+0.5), (int)(zone.rect.height()*scaleY+0.5));
     //kdDebug() << "zone rect: " << textRect.x() << ", " << textRect.y() << ", " << textRect.width() << ", " << textRect.height() << endl;
     TextBox textBox(textRect, zoneString);
@@ -545,7 +545,7 @@ bool DjVuRenderer::getPageInfo(GP<DjVuFile> file, int& width, int& height, int& 
 
 void DjVuRenderer::getText(RenderedDocumentPage* page)
 {
-  QMutexLocker locker( &mutex );
+  TQMutexLocker locker( &mutex );
   
   int pageNumber = page->getPageNumber() - 1;
   GP<DjVuTXT> pageText = getText(pageNumber);
@@ -560,37 +560,37 @@ void DjVuRenderer::getText(RenderedDocumentPage* page)
 
     if (ok)
     {
-      QSize djvuPageSize(pageWidth, pageHeight);
+      TQSize djvuPageSize(pageWidth, pageHeight);
       fillInText(page, pageText, pageText->page_zone, djvuPageSize);
     }
   }
 }
 
 
-bool DjVuRenderer::convertToPSFile( DjVuToPS &converter, QString filename, QValueList<int> &pageList )
+bool DjVuRenderer::convertToPSFile( DjVuToPS &converter, TQString filename, TQValueList<int> &pageList )
 {
   if (document == 0) {
     kdError(1223) << "DjVuRenderer::convertToPSFile(..) called when document was 0" << endl;
     return false;
   }
 
-  QMutexLocker locker( &mutex );
+  TQMutexLocker locker( &mutex );
   
   // Set up progress dialog
   KProgressDialog *pdialog = new KProgressDialog(parentWidget, "Printing-ProgressDialog", i18n("Printing..."), i18n("Preparing pages for printing..."), true);
   pdialog->setButtonText(i18n("Abort"));
   pdialog->showCancelButton(true);
   pdialog->progressBar()->setTotalSteps(pageList.size());
-  pdialog->progressBar()->setFormat(QString::null);
+  pdialog->progressBar()->setFormat(TQString::null);
   
   // Open output file
   GURL outname = GURL::Filename::UTF8(GStringFromQString(filename));
   GP<ByteStream> obs = ByteStream::create(outname, "w");
   
-  QString pagename;
-  QValueList<int>::ConstIterator it = pageList.begin();
+  TQString pagename;
+  TQValueList<int>::ConstIterator it = pageList.begin();
   while (true) {
-    pagename += QString::number(*it);
+    pagename += TQString::number(*it);
     ++it;
     if (it == pageList.end())
       break;
@@ -630,14 +630,14 @@ void DjVuRenderer::deletePages(Q_UINT16 from, Q_UINT16 to)
     return;
   }
 
-  QMutexLocker locker( &mutex );
+  TQMutexLocker locker( &mutex );
 
   KProgressDialog *pdialog = 0;
   if (to-from > 9) {
     pdialog = new KProgressDialog(parentWidget, "Printing-ProgressDialog", i18n("Deleting pages..."), i18n("Please wait while pages are removed..."), true);
     pdialog->showCancelButton(false);
     pdialog->progressBar()->setTotalSteps(to-from+1);
-    pdialog->progressBar()->setFormat(QString::null);
+    pdialog->progressBar()->setFormat(TQString::null);
     pdialog->show();
     kapp->processEvents();
   }
@@ -669,14 +669,14 @@ void DjVuRenderer::deletePages(Q_UINT16 from, Q_UINT16 to)
 }
 
 
-bool DjVuRenderer::save(const QString &filename)
+bool DjVuRenderer::save(const TQString &filename)
 {
   if (document == 0) {
     kdError() << "DjVuRenderer::save(..) called when document==0" << endl;
     return false;
   }
   
-  QMutexLocker locker( &mutex );
+  TQMutexLocker locker( &mutex );
   
   G_TRY {
     document->save_as(GURL::Filename::UTF8(GStringFromQString(filename)), true);
@@ -688,7 +688,7 @@ bool DjVuRenderer::save(const QString &filename)
 
   document->save_as(GURL::Filename::UTF8(filename.ascii()), true);
   
-  if (QFile::exists(filename) == false)
+  if (TQFile::exists(filename) == false)
     return false;
   
   _isModified = false;

@@ -22,13 +22,13 @@
 #include "imagelistdialog.h"
 #include "imagelistitem.h"
 
-#include <qvbox.h>
-#include <qobjectlist.h>
-#include <qsignalslotimp.h>
-#include <qtimer.h>
-#include <qevent.h>
-#include <qdragobject.h>
-#include <qstringlist.h>
+#include <tqvbox.h>
+#include <tqobjectlist.h>
+#include <tqsignalslotimp.h>
+#include <tqtimer.h>
+#include <tqevent.h>
+#include <tqdragobject.h>
+#include <tqstringlist.h>
 
 #include <kpushbutton.h>
 #include <kapplication.h>
@@ -51,35 +51,35 @@
 typedef KGenericFactory<KViewPresenter> KViewPresenterFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_presenterplugin, KViewPresenterFactory( "kviewpresenterplugin" ) )
 
-KViewPresenter::KViewPresenter( QObject* parent, const char* name, const QStringList & )
+KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStringList & )
 	: Plugin( parent, name )
 	, m_pImageList( new ImageListDialog() )
 	, m_paFileOpen( 0 )
 	, m_bDontAdd( false )
 	, m_pCurrentItem( 0 )
-	, m_pSlideshowTimer( new QTimer( this ) )
+	, m_pSlideshowTimer( new TQTimer( this ) )
 {
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	m_imagelist.setAutoDelete( true );
 
-	QObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )
 	{
 		( void ) new KAction( i18n( "&Image List..." ), 0, 0,
-							this, SLOT( slotImageList() ),
+							this, TQT_SLOT( slotImageList() ),
 							actionCollection(), "plugin_presenter_imageList" );
 		m_paSlideshow = new KToggleAction( i18n( "Start &Slideshow" ), Key_S, actionCollection(), "plugin_presenter_slideshow" );
 		( void ) new KAction( i18n( "&Previous Image in List" ), "previous", ALT+Key_Left,
-							  this, SLOT( prev() ),
+							  this, TQT_SLOT( prev() ),
 							  actionCollection(), "plugin_presenter_prev" );
 		( void ) new KAction( i18n( "&Next Image in List" ), "next", ALT+Key_Right,
-							  this, SLOT( next() ),
+							  this, TQT_SLOT( next() ),
 							  actionCollection(), "plugin_presenter_next" );
 
-		connect( m_paSlideshow, SIGNAL( toggled( bool ) ), m_pImageList->m_pSlideshow, SLOT( setOn( bool ) ) );
-		connect( m_pImageList->m_pSlideshow, SIGNAL( toggled( bool ) ), m_paSlideshow, SLOT( setChecked( bool ) ) );
+		connect( m_paSlideshow, TQT_SIGNAL( toggled( bool ) ), m_pImageList->m_pSlideshow, TQT_SLOT( setOn( bool ) ) );
+		connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ), m_paSlideshow, TQT_SLOT( setChecked( bool ) ) );
 
 		// search for file_open action
 		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( parent->qt_cast( "KXMLGUIClient" ) );
@@ -89,48 +89,48 @@ KViewPresenter::KViewPresenter( QObject* parent, const char* name, const QString
 			m_paFileClose = parentClient->actionCollection()->action( "file_close" );
 		}
 		if( m_paFileClose )
-			connect( m_paFileClose, SIGNAL( activated() ), this, SLOT( slotClose() ) );
+			connect( m_paFileClose, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotClose() ) );
 		if( m_paFileOpen )
 		{
-			disconnect( m_paFileOpen, SIGNAL( activated() ), parent, SLOT( slotOpenFile() ) );
-			connect( m_paFileOpen, SIGNAL( activated() ), this, SLOT( slotOpenFiles() ) );
+			disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), parent, TQT_SLOT( slotOpenFile() ) );
+			connect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
 		}
 		else
 		{
 			(void) new KAction( i18n( "Open &Multiple Files..." ), "queue", CTRL+SHIFT+Key_O,
-							this, SLOT( slotOpenFiles() ),
+							this, TQT_SLOT( slotOpenFiles() ),
 							actionCollection(), "plugin_presenter_openFiles" );
 		}
-		connect( m_pViewer, SIGNAL( imageOpened( const KURL & ) ),
-				SLOT( slotImageOpened( const KURL & ) ) );
+		connect( m_pViewer, TQT_SIGNAL( imageOpened( const KURL & ) ),
+				TQT_SLOT( slotImageOpened( const KURL & ) ) );
 	}
 	else
 		kdWarning( 4630 ) << "no KImageViewer interface found - the presenter plugin won't work" << endl;
 
 	//( void )new KViewPresenterConfModule( this );
 
-	connect( m_pImageList->m_pListView, SIGNAL( executed( QListViewItem* ) ),
-			this, SLOT( changeItem( QListViewItem* ) ) );
-	connect( m_pImageList->m_pPrevious, SIGNAL( clicked() ),
-			this, SLOT( prev() ) );
-	connect( m_pImageList->m_pNext, SIGNAL( clicked() ),
-			this, SLOT( next() ) );
-	connect( m_pImageList->m_pListView, SIGNAL( spacePressed( QListViewItem* ) ),
-			this, SLOT( changeItem( QListViewItem* ) ) );
-	connect( m_pImageList->m_pListView, SIGNAL( returnPressed( QListViewItem* ) ),
-			this, SLOT( changeItem( QListViewItem* ) ) );
-	connect( m_pImageList->m_pSlideshow, SIGNAL( toggled( bool ) ),
-			this, SLOT( slideshow( bool ) ) );
-	connect( m_pImageList->m_pInterval, SIGNAL( valueChanged( int ) ),
-			this, SLOT( setSlideshowInterval( int ) ) );
-	connect( m_pImageList->m_pShuffle, SIGNAL( clicked() ),
-			this, SLOT( shuffle() ) );
-	connect( m_pImageList->m_pLoad, SIGNAL( clicked() ),
-			this, SLOT( loadList() ) );
-	connect( m_pImageList->m_pSave, SIGNAL( clicked() ),
-			this, SLOT( saveList() ) );
-	connect( m_pImageList->m_pCloseAll, SIGNAL( clicked() ),
-			this, SLOT( closeAll() ) );
+	connect( m_pImageList->m_pListView, TQT_SIGNAL( executed( TQListViewItem* ) ),
+			this, TQT_SLOT( changeItem( TQListViewItem* ) ) );
+	connect( m_pImageList->m_pPrevious, TQT_SIGNAL( clicked() ),
+			this, TQT_SLOT( prev() ) );
+	connect( m_pImageList->m_pNext, TQT_SIGNAL( clicked() ),
+			this, TQT_SLOT( next() ) );
+	connect( m_pImageList->m_pListView, TQT_SIGNAL( spacePressed( TQListViewItem* ) ),
+			this, TQT_SLOT( changeItem( TQListViewItem* ) ) );
+	connect( m_pImageList->m_pListView, TQT_SIGNAL( returnPressed( TQListViewItem* ) ),
+			this, TQT_SLOT( changeItem( TQListViewItem* ) ) );
+	connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ),
+			this, TQT_SLOT( slideshow( bool ) ) );
+	connect( m_pImageList->m_pInterval, TQT_SIGNAL( valueChanged( int ) ),
+			this, TQT_SLOT( setSlideshowInterval( int ) ) );
+	connect( m_pImageList->m_pShuffle, TQT_SIGNAL( clicked() ),
+			this, TQT_SLOT( shuffle() ) );
+	connect( m_pImageList->m_pLoad, TQT_SIGNAL( clicked() ),
+			this, TQT_SLOT( loadList() ) );
+	connect( m_pImageList->m_pSave, TQT_SIGNAL( clicked() ),
+			this, TQT_SLOT( saveList() ) );
+	connect( m_pImageList->m_pCloseAll, TQT_SIGNAL( clicked() ),
+			this, TQT_SLOT( closeAll() ) );
 
 	// allow drop on the dialog
 	m_pImageList->installEventFilter( this );
@@ -140,8 +140,8 @@ KViewPresenter::KViewPresenter( QObject* parent, const char* name, const QString
 	// grab drops on the main view
 	m_pViewer->widget()->installEventFilter( this );
 
-	connect( m_pSlideshowTimer, SIGNAL( timeout() ),
-			this, SLOT( next() ) );
+	connect( m_pSlideshowTimer, TQT_SIGNAL( timeout() ),
+			this, TQT_SLOT( next() ) );
 }
 
 KViewPresenter::~KViewPresenter()
@@ -149,46 +149,46 @@ KViewPresenter::~KViewPresenter()
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	if( m_paFileOpen )
 	{
-		disconnect( m_paFileOpen, SIGNAL( activated() ), this, SLOT( slotOpenFiles() ) );
+		disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
 		// If the parent() doesn't exist we either leave the "File Open" action
 		// in an unusable state or KView was just shutting down and therefor we
 		// can ignore this. I've only seen the second one happening and to get
-		// rid of the QObject::connect warning we do the parent() check.
+		// rid of the TQObject::connect warning we do the parent() check.
 		if( parent() )
-			connect( m_paFileOpen, SIGNAL( activated() ), parent(), SLOT( slotOpenFile() ) );
+			connect( m_paFileOpen, TQT_SIGNAL( activated() ), parent(), TQT_SLOT( slotOpenFile() ) );
 	}
 }
 
-bool KViewPresenter::eventFilter( QObject *obj, QEvent *ev )
+bool KViewPresenter::eventFilter( TQObject *obj, TQEvent *ev )
 {
 	if( obj == m_pImageList || obj == m_pImageList->m_pListView || obj == m_pImageList->m_pListView->viewport() || obj == m_pViewer->widget() )
 	{
 		switch( ev->type() )
 		{
-			case QEvent::DragEnter:
-			case QEvent::DragMove:
+			case TQEvent::DragEnter:
+			case TQEvent::DragMove:
 			{
 				// drag enter event in the image list
 				//kdDebug( 4630 ) << "DragEnterEvent in the image list: " << obj->className() << endl;
-				QDragEnterEvent * e = static_cast<QDragEnterEvent*>( ev );
+				TQDragEnterEvent * e = static_cast<TQDragEnterEvent*>( ev );
 				//for( int i = 0; e->format( i ); ++i )
 					//kdDebug( 4630 ) << " - " << e->format( i ) << endl;
-				if( KURLDrag::canDecode( e ) )// || QImageDrag::canDecode( e ) )
+				if( KURLDrag::canDecode( e ) )// || TQImageDrag::canDecode( e ) )
 				{
 					e->accept();
 					return true;
 				}
 			}
-			case QEvent::Drop:
+			case TQEvent::Drop:
 			{
 				// drop event in the image list
 				kdDebug( 4630 ) << "DropEvent in the image list: " << obj->className() << endl;
-				QDropEvent * e = static_cast<QDropEvent*>( ev );
-				QStringList l;
-				//QImage image;
+				TQDropEvent * e = static_cast<TQDropEvent*>( ev );
+				TQStringList l;
+				//TQImage image;
 				if( KURLDrag::decodeToUnicodeUris( e, l ) )
 				{
-					for( QStringList::const_iterator it = l.begin(); it != l.end(); ++it )
+					for( TQStringList::const_iterator it = l.begin(); it != l.end(); ++it )
 					{
 						ImageInfo * info = new ImageInfo( KURL( *it ) );
 						if( ! m_imagelist.contains( info ) )
@@ -201,7 +201,7 @@ bool KViewPresenter::eventFilter( QObject *obj, QEvent *ev )
 					}
 					return true;
 				}
-				//else if( QImageDrag::decode( e, image ) )
+				//else if( TQImageDrag::decode( e, image ) )
 					//newImage( image );
 			}
 			default: // do nothing
@@ -221,7 +221,7 @@ void KViewPresenter::slotImageOpened( const KURL & url )
 		if( ! m_imagelist.contains( info ) )
 		{
 			m_imagelist.inSort( info );
-			QListViewItem * item = new ImageListItem( m_pImageList->m_pListView, url );
+			TQListViewItem * item = new ImageListItem( m_pImageList->m_pListView, url );
 			makeCurrent( item );
 		}
 		else
@@ -260,7 +260,7 @@ void KViewPresenter::slotOpenFiles()
 
 void KViewPresenter::slotClose()
 {
-	QListViewItem * next = m_pCurrentItem->itemBelow() ? m_pCurrentItem->itemBelow() : m_pImageList->m_pListView->firstChild();
+	TQListViewItem * next = m_pCurrentItem->itemBelow() ? m_pCurrentItem->itemBelow() : m_pImageList->m_pListView->firstChild();
 	if( next == m_pCurrentItem )
 		next = 0;
 
@@ -273,7 +273,7 @@ void KViewPresenter::slotClose()
 		changeItem( next );
 }
 
-void KViewPresenter::changeItem( QListViewItem * qitem )
+void KViewPresenter::changeItem( TQListViewItem * qitem )
 {
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	if( qitem->rtti() == 48294 )
@@ -281,14 +281,14 @@ void KViewPresenter::changeItem( QListViewItem * qitem )
 		ImageListItem * item = static_cast<ImageListItem*>( qitem );
 		if( ! item->url().isEmpty() )
 		{
-			if( item->url().isLocalFile() && ! QFile::exists( item->url().path() ) )
+			if( item->url().isLocalFile() && ! TQFile::exists( item->url().path() ) )
 			{
 				kdDebug( 4630 ) << "file doesn't exist. removed." << endl;
 				ImageInfo info( item->url() );
 				m_imagelist.remove( &info );
 				if( m_pCurrentItem == item )
 				{
-					QListViewItem * next = m_pCurrentItem->itemBelow() ? m_pCurrentItem->itemBelow() : m_pImageList->m_pListView->firstChild();
+					TQListViewItem * next = m_pCurrentItem->itemBelow() ? m_pCurrentItem->itemBelow() : m_pImageList->m_pListView->firstChild();
 					if( next->rtti() != 48294 )
 						kdWarning( 4630 ) << "unknown ListView item" << endl;
 					else
@@ -327,7 +327,7 @@ void KViewPresenter::prev()
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	if( m_pCurrentItem )
 	{
-		QListViewItem * prev = m_pCurrentItem->itemAbove() ? m_pCurrentItem->itemAbove() : m_pImageList->m_pListView->lastItem();
+		TQListViewItem * prev = m_pCurrentItem->itemAbove() ? m_pCurrentItem->itemAbove() : m_pImageList->m_pListView->lastItem();
 		if( prev )
 			changeItem( prev );
 	}
@@ -338,16 +338,16 @@ void KViewPresenter::next()
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	if( m_pCurrentItem )
 	{
-		QListViewItem * next = m_pCurrentItem->itemBelow() ? m_pCurrentItem->itemBelow() : m_pImageList->m_pListView->firstChild();
+		TQListViewItem * next = m_pCurrentItem->itemBelow() ? m_pCurrentItem->itemBelow() : m_pImageList->m_pListView->firstChild();
 		if( next )
 			changeItem( next );
 	}
 }
 
-void KViewPresenter::makeCurrent( QListViewItem * item )
+void KViewPresenter::makeCurrent( TQListViewItem * item )
 {
 	if( m_pCurrentItem )
-		m_pCurrentItem->setPixmap( 0, QPixmap() );
+		m_pCurrentItem->setPixmap( 0, TQPixmap() );
 	if( item->rtti() != 48294 )
 		kdWarning( 4630 ) << "unknown ListView item" << endl;
 	else
@@ -384,8 +384,8 @@ void KViewPresenter::shuffle()
 {
 	m_pImageList->noSort();
 	KListView * listview = m_pImageList->m_pListView;
-	QPtrList<QListViewItem> items;
-	for( QListViewItem * item = listview->firstChild(); item; item = listview->firstChild() )
+	TQPtrList<TQListViewItem> items;
+	for( TQListViewItem * item = listview->firstChild(); item; item = listview->firstChild() )
 	{
 		items.append( item );
 		listview->takeItem( item );
@@ -405,26 +405,26 @@ void KViewPresenter::closeAll()
 
 void KViewPresenter::loadList()
 {
-	KURL url = KFileDialog::getOpenURL( ":load_list", QString::null, m_pImageList );
+	KURL url = KFileDialog::getOpenURL( ":load_list", TQString::null, m_pImageList );
 	if( url.isEmpty() )
 		return;
 
-	QString tempfile;
+	TQString tempfile;
 	if( ! KIO::NetAccess::download( url, tempfile, m_pViewer->widget() ) )
 	{
 		KMessageBox::error( m_pImageList, i18n( "Could not load\n%1" ).arg( url.prettyURL() ) );
 		return;
 	}
-	QFile file( tempfile );
+	TQFile file( tempfile );
 	if( file.open( IO_ReadOnly ) )
 	{
-		QTextStream t( &file );
+		TQTextStream t( &file );
 		if( t.readLine() == "[KView Image List]" )
 		{
 			//clear old image list
 			closeAll();
 
-			QStringList list;
+			TQStringList list;
 			if( ! t.eof() )
 				m_pViewer->openURL( KURL( t.readLine() ) );
 			while( ! t.eof() )
@@ -451,12 +451,12 @@ void KViewPresenter::loadList()
 
 void KViewPresenter::saveList()
 {
-	KURL url = KFileDialog::getSaveURL( ":save_list", QString::null, m_pImageList );
+	KURL url = KFileDialog::getSaveURL( ":save_list", TQString::null, m_pImageList );
 
 	if( url.isEmpty() )
 		return;
 
-	QString tempfile;
+	TQString tempfile;
 	if( url.isLocalFile() )
 		tempfile = url.path();
 	else
@@ -465,13 +465,13 @@ void KViewPresenter::saveList()
 		tempfile = ktempf.name();
 	}
 
-	QFile file( tempfile );
+	TQFile file( tempfile );
 	if( file.open( IO_WriteOnly ) )
 	{
-		QTextStream t( &file );
+		TQTextStream t( &file );
 		// write header
 		t << "[KView Image List]" << endl;
-		QListViewItem * item = m_pImageList->m_pListView->firstChild();
+		TQListViewItem * item = m_pImageList->m_pListView->firstChild();
 		while( item )
 		{
 			if( item->rtti() == 48294 )

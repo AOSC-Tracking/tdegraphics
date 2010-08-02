@@ -27,8 +27,8 @@
 #include "pmvariant.h"
 #include "pmcommand.h"
 #include "pmmetaobject.h"
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 /**
  * Class used by @ref PMObjectMemento to store one value.
@@ -65,7 +65,7 @@ public:
    /**
     * Stores a string
     */
-   PMMementoData( PMMetaObject* classType, int vID, const QString& data );
+   PMMementoData( PMMetaObject* classType, int vID, const TQString& data );
    /**
     * Stores a @ref PMVector
     */
@@ -99,7 +99,7 @@ private:
    int m_valueID;
 };
 
-typedef QPtrList<PMMementoData> PMMementoDataList;
+typedef TQPtrList<PMMementoData> PMMementoDataList;
 
 
 /**
@@ -126,8 +126,8 @@ private:
    int m_mode;
 };
 
-typedef QPtrList<PMObjectChange> PMObjectChangeList;
-typedef QPtrListIterator<PMObjectChange> PMObjectChangeListIterator;
+typedef TQPtrList<PMObjectChange> PMObjectChangeList;
+typedef TQPtrListIterator<PMObjectChange> PMObjectChangeListIterator;
 
 /**
  * Class that stores the data of povray objects for undo/redo information
@@ -202,10 +202,10 @@ public:
    void addData( PMMetaObject* classType, int vID, const PMThreeState data );
 
    /**
-    * Adds an @ref QString data object. Will be ignored if the memento
+    * Adds an @ref TQString data object. Will be ignored if the memento
     * already contains this data
     */
-   void addData( PMMetaObject* classType, int vID, const QString& data );
+   void addData( PMMetaObject* classType, int vID, const TQString& data );
 
    /**
     * Adds an @ref PMVector data object. Will be ignored if the memento
@@ -228,7 +228,7 @@ public:
    /**
     * Call this to store an id change
     */
-   void addIDChange( PMMetaObject* classType, int vID, const QString& data );
+   void addIDChange( PMMetaObject* classType, int vID, const TQString& data );
 
    /**
     * Returns true if the memento contains changed data
@@ -253,7 +253,7 @@ public:
    /**
     * Returns the old id
     */
-   QString oldID( ) const;
+   TQString oldID( ) const;
    /**
     * If one object is changed, other objects can be changed as well.
     *
@@ -289,7 +289,7 @@ private:
    /**
     * List of changes
     */
-   QPtrList<PMObjectChange> m_changedObjects;
+   TQPtrList<PMObjectChange> m_changedObjects;
    PMObjectChange* m_pOriginatorChange;
    PMObject* m_pOriginator;
 };
@@ -298,19 +298,19 @@ private:
 /**
  * Iterator for memento data
  */
-class PMMementoDataIterator : public QPtrListIterator<PMMementoData>
+class PMMementoDataIterator : public TQPtrListIterator<PMMementoData>
 {
 public:
    PMMementoDataIterator( const PMMemento& m )
-         : QPtrListIterator<PMMementoData>( m.m_data )
+         : TQPtrListIterator<PMMementoData>( m.m_data )
    {
    }
    PMMementoDataIterator( const PMMemento* m )
-         : QPtrListIterator<PMMementoData>( m->m_data )
+         : TQPtrListIterator<PMMementoData>( m->m_data )
    {
    }
    PMMementoDataIterator( const PMMementoDataList& l )
-         : QPtrListIterator<PMMementoData>( l )
+         : TQPtrListIterator<PMMementoData>( l )
    {
    }
 };

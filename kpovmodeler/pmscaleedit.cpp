@@ -20,11 +20,11 @@
 #include "pmscale.h"
 #include "pmvectoredit.h"
 
-#include <qlayout.h>
+#include <tqlayout.h>
 #include <klocale.h>
 
 
-PMScaleEdit::PMScaleEdit( QWidget* parent, const char* name )
+PMScaleEdit::PMScaleEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,7 +37,7 @@ void PMScaleEdit::createTopWidgets( )
    m_pVector = new PMVectorEdit( "x", "y", "z", this );
    topLayout( )->addWidget( m_pVector );
 
-   connect( m_pVector, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );   
+   connect( m_pVector, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );   
 }
 
 void PMScaleEdit::displayObject( PMObject* o )

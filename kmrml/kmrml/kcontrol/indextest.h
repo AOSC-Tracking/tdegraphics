@@ -18,7 +18,7 @@ public:
     
 private slots:
     void slotFinished( bool success );
-    void slotProgress( int percent, const QString& message );
+    void slotProgress( int percent, const TQString& message );
     
 };
 

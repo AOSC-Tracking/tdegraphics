@@ -8,9 +8,9 @@
  */
 
 
-#include <qfileinfo.h>
-#include <qtimer.h>
-#include <qregexp.h>
+#include <tqfileinfo.h>
+#include <tqtimer.h>
+#include <tqregexp.h>
 
 #include <kiconloader.h>
 #include <kstandarddirs.h>
@@ -29,7 +29,7 @@
 #include <kmimetype.h>
 
 #include <kprogress.h>
-#include <qlabel.h>
+#include <tqlabel.h>
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -45,7 +45,7 @@
 #define StatusBar_ID_Zoom 3
 
 
-KViewShell::KViewShell(const QString& defaultMimeType)
+KViewShell::KViewShell(const TQString& defaultMimeType)
   : KParts::MainWindow()
 {
   // create the viewer part
@@ -53,13 +53,13 @@ KViewShell::KViewShell(const QString& defaultMimeType)
   // Try to load
   KLibFactory *factory = KLibLoader::self()->factory("kviewerpart");
   if (factory) {
-    if (defaultMimeType == QString::null)
+    if (defaultMimeType == TQString::null)
     {
       view = (KViewPart_Iface*) factory->create(this, "kviewerpart", "KViewPart");
     }
     else
     {
-      QStringList args;
+      TQStringList args;
       args << defaultMimeType;
       view = (KViewPart_Iface*) factory->create(this, "kviewerpart", "KViewPart", args);
     }
@@ -73,33 +73,33 @@ KViewShell::KViewShell(const QString& defaultMimeType)
   setCentralWidget(view->widget());
 
   // file menu
-  KStdAction::open(view, SLOT(slotFileOpen()), actionCollection());
-  recent = KStdAction::openRecent (this, SLOT(openURL(const KURL &)), actionCollection());
-  reloadAction = new KAction(i18n("Reload"), "reload", CTRL + Key_R, view, SLOT(reload()), actionCollection(), "reload");
-  closeAction = KStdAction::close(this, SLOT(slotFileClose()), actionCollection());
-  KStdAction::quit (this, SLOT(slotQuit()), actionCollection());
+  KStdAction::open(view, TQT_SLOT(slotFileOpen()), actionCollection());
+  recent = KStdAction::openRecent (this, TQT_SLOT(openURL(const KURL &)), actionCollection());
+  reloadAction = new KAction(i18n("Reload"), "reload", CTRL + Key_R, view, TQT_SLOT(reload()), actionCollection(), "reload");
+  closeAction = KStdAction::close(this, TQT_SLOT(slotFileClose()), actionCollection());
+  KStdAction::quit (this, TQT_SLOT(slotQuit()), actionCollection());
 
-  connect(view, SIGNAL(fileOpened()), this, SLOT(addRecentFile()));
+  connect(view, TQT_SIGNAL(fileOpened()), this, TQT_SLOT(addRecentFile()));
 
   // view menu
-  fullScreenAction = KStdAction::fullScreen(this, SLOT(slotFullScreen()), actionCollection(), this, "fullscreen" );
+  fullScreenAction = KStdAction::fullScreen(this, TQT_SLOT(slotFullScreen()), actionCollection(), this, "fullscreen" );
 
   // settings menu
   createStandardStatusBarAction();
 
   setStandardToolBarMenuEnabled(true);
 
-  KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection());
-  KStdAction::configureToolbars(this, SLOT(slotEditToolbar()), actionCollection());
+  KStdAction::keyBindings(this, TQT_SLOT(slotConfigureKeys()), actionCollection());
+  KStdAction::configureToolbars(this, TQT_SLOT(slotEditToolbar()), actionCollection());
 
   // statusbar connects
-  connect( view, SIGNAL( zoomChanged(const QString &) ), this,SLOT( slotChangeZoomText(const QString &) ) );
-  connect( view, SIGNAL( pageChanged(const QString &) ), this,SLOT( slotChangePageText(const QString &) ) );
-  connect( view, SIGNAL( sizeChanged(const QString &) ), this,SLOT( slotChangeSizeText(const QString &) ) );
+  connect( view, TQT_SIGNAL( zoomChanged(const TQString &) ), this,TQT_SLOT( slotChangeZoomText(const TQString &) ) );
+  connect( view, TQT_SIGNAL( pageChanged(const TQString &) ), this,TQT_SLOT( slotChangePageText(const TQString &) ) );
+  connect( view, TQT_SIGNAL( sizeChanged(const TQString &) ), this,TQT_SLOT( slotChangeSizeText(const TQString &) ) );
 
   // Setup session management
-  connect( this, SIGNAL( restoreDocument(const KURL &, int) ), view, SLOT( restoreDocument(const KURL &, int)));
-  connect( this, SIGNAL( saveDocumentRestoreInfo(KConfig*) ), view, SLOT( saveDocumentRestoreInfo(KConfig*)));
+  connect( this, TQT_SIGNAL( restoreDocument(const KURL &, int) ), view, TQT_SLOT( restoreDocument(const KURL &, int)));
+  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(KConfig*) ), view, TQT_SLOT( saveDocumentRestoreInfo(KConfig*)));
 
   setXMLFile( "kviewshell.rc" );
   createGUI(view);
@@ -120,7 +120,7 @@ KViewShell::KViewShell(const QString& defaultMimeType)
   statusBar()->changeItem("", StatusBar_ID_Zoom);
   statusBar()->insertItem(view->pageSizeDescription(), StatusBar_ID_PageSize, 0, true);
 
-  connect( view, SIGNAL(pluginChanged(KParts::Part*)), this, SLOT(createGUI(KParts::Part*)));
+  connect( view, TQT_SIGNAL(pluginChanged(KParts::Part*)), this, TQT_SLOT(createGUI(KParts::Part*)));
 }
 
 
@@ -176,11 +176,11 @@ void KViewShell::readSettings()
   // Constant source of annoyance in KDVI < 1.0: the 'recent-files'
   // menu contains lots of files which don't exist (any longer). Thus,
   // we'll sort out the non-existent files here.
-  QStringList items = recent->items();
-  for ( QStringList::Iterator it = items.begin(); it != items.end(); ++it ) {
+  TQStringList items = recent->items();
+  for ( TQStringList::Iterator it = items.begin(); it != items.end(); ++it ) {
     KURL url(*it);
     if (url.isLocalFile()) {
-      QFileInfo info(url.path());
+      TQFileInfo info(url.path());
       if (!info.exists())
         recent->removeURL(url);
     }
@@ -229,7 +229,7 @@ void KViewShell::addRecentFile()
   KURL actualURL = view->url();
   // To store the URL in the list of recent files, we remove the
   // reference part.
-  actualURL.setRef(QString::null);
+  actualURL.setRef(TQString::null);
   recent->addURL(actualURL);
   checkActions();
 }
@@ -290,7 +290,7 @@ void KViewShell::slotEditToolbar()
 {
   saveMainWindowSettings( KGlobal::config(), autoSaveGroup() );
   KEditToolbar dlg(factory());
-  connect( &dlg, SIGNAL( newToolbarConfig() ), SLOT( slotNewToolbarConfig() ) );
+  connect( &dlg, TQT_SIGNAL( newToolbarConfig() ), TQT_SLOT( slotNewToolbarConfig() ) );
   dlg.exec();
 }
 
@@ -300,7 +300,7 @@ void KViewShell::slotNewToolbarConfig()
   applyMainWindowSettings( KGlobal::config(), autoSaveGroup() );
 }
 
-void KViewShell::dragEnterEvent(QDragEnterEvent *event)
+void KViewShell::dragEnterEvent(TQDragEnterEvent *event)
 {
   if (KURLDrag::canDecode(event))
   {
@@ -325,10 +325,10 @@ void KViewShell::dragEnterEvent(QDragEnterEvent *event)
       // Safety check
       if (view)
       {
-        QStringList mimetypeList = view->supportedMimeTypes();
+        TQStringList mimetypeList = view->supportedMimeTypes();
         kdDebug() << "[dragEnterEvent] Supported mime types: " << mimetypeList << endl;
 
-        for (QStringList::Iterator it = mimetypeList.begin(); it != mimetypeList.end(); ++it)
+        for (TQStringList::Iterator it = mimetypeList.begin(); it != mimetypeList.end(); ++it)
         {
           if (mimetype->is(*it))
           {
@@ -345,7 +345,7 @@ void KViewShell::dragEnterEvent(QDragEnterEvent *event)
 }
 
 
-void KViewShell::dropEvent(QDropEvent *event)
+void KViewShell::dropEvent(TQDropEvent *event)
 {
   KURL::List urls;
   if (KURLDrag::decode(event, urls) && !urls.isEmpty())
@@ -353,7 +353,7 @@ void KViewShell::dropEvent(QDropEvent *event)
 }
 
 
-void KViewShell::keyPressEvent(QKeyEvent *event)
+void KViewShell::keyPressEvent(TQKeyEvent *event)
 {
   // The Escape Key is used to return to normal mode from fullscreen
   // mode
@@ -366,19 +366,19 @@ void KViewShell::keyPressEvent(QKeyEvent *event)
 }
 
 
-void KViewShell::slotChangePageText(const QString &message)
+void KViewShell::slotChangePageText(const TQString &message)
 {
   statusBar()->changeItem(" "+message+" ",StatusBar_ID_PageNr);
 }
 
 
-void KViewShell::slotChangeSizeText(const QString &message)
+void KViewShell::slotChangeSizeText(const TQString &message)
 {
   statusBar()->changeItem(" "+message+" ",StatusBar_ID_PageSize);
 }
 
 
-void KViewShell::slotChangeZoomText(const QString &message)
+void KViewShell::slotChangeZoomText(const TQString &message)
 {
   statusBar()->changeItem(" "+message+" ",StatusBar_ID_Zoom);
 }

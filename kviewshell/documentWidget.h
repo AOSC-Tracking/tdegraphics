@@ -15,14 +15,14 @@
 
 #include "selection.h"
 
-#include <qregion.h>
-#include <qtimer.h>
-#include <qwidget.h>
+#include <tqregion.h>
+#include <tqtimer.h>
+#include <tqwidget.h>
 
 class DocumentPageCache;
 class PageView;
-class QMouseEvent;
-class QPaintEvent;
+class TQMouseEvent;
+class TQPaintEvent;
 
 
 /* DocumentWidget */
@@ -32,15 +32,15 @@ class DocumentWidget : public QWidget
   Q_OBJECT
 
 public:
-  DocumentWidget(QWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name);
+  DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name);
 
   void          setPageNumber(Q_UINT16 pageNr);
   Q_UINT16      getPageNumber() const {return pageNr;}
 
   /** Returns the size of the widget without the page shadow. */
-  QSize pageSize() const;
+  TQSize pageSize() const;
   /** Returns the bounding rectangle of the widget without the page shadow. */
-  QRect pageRect() const;
+  TQRect pageRect() const;
 
   /** Draw a red vertical line at y-coordinate ycoord. The line is removed again 
       after one second. This is used to make it easier to regain reading focus if
@@ -59,13 +59,13 @@ public slots:
 
   /** Sets the size of the widget so that the page is of the given size.
       The widget gets slightly bigger because of the page shadow. */
-  void setPageSize(const QSize&);
+  void setPageSize(const TQSize&);
   void setPageSize(int width, int height);
 
 signals:
   /** Passed through to the top-level kpart. */
-  void          setStatusBarText( const QString& );
-  void          localLink( const QString& );
+  void          setStatusBarText( const TQString& );
+  void          localLink( const TQString& );
 
   /** This signal is emitted when the widget resizes itself */
   void          resized();
@@ -74,9 +74,9 @@ signals:
   void clearSelection();
 
 protected:
-  virtual void  paintEvent (QPaintEvent *);
-  virtual void  mousePressEvent ( QMouseEvent * e );
-  virtual void  mouseReleaseEvent (QMouseEvent *);
+  virtual void  paintEvent (TQPaintEvent *);
+  virtual void  mousePressEvent ( TQMouseEvent * e );
+  virtual void  mouseReleaseEvent (TQMouseEvent *);
 
   /** This method is used by the DocumentWidget to find out of the
       mouse pointer hovers over a hyperlink, and to update the
@@ -91,7 +91,7 @@ protected:
 	  
 	  DocumentWidget::mouseMoveEvent(e);
 
-      2) Ignore the QMouseEvent if a mouse button is pressed
+      2) Ignore the TQMouseEvent if a mouse button is pressed
 
       3) If no mouse button is pressed, analyze the mouse movement and
          take appropriate actions. To set statusbar text, do
@@ -109,7 +109,7 @@ protected:
 	 areas in the widget.
 
   */
-  virtual void  mouseMoveEvent (QMouseEvent *);
+  virtual void  mouseMoveEvent (TQMouseEvent *);
 
 protected:
   void updateSelection(const TextSelection& newTextSelection);
@@ -117,7 +117,7 @@ protected:
   /** Methods and counters used for the animation to mark the target of
       an hyperlink. */
   int           timerIdent;
-  void          timerEvent( QTimerEvent *e );
+  void          timerEvent( TQTimerEvent *e );
   int           animationCounter;
   int           flashOffset;
 
@@ -128,11 +128,11 @@ protected:
      moves over a block of text that contains source hyperlinks. The
      signal timeout() is connected to the method clearStatusBar() of
      *this. */
-  QTimer        clearStatusBarTimer;
+  TQTimer        clearStatusBarTimer;
 
   /* Data structures used for marking text with the mouse */
-  QPoint       firstSelectedPoint;
-  QRect        selectedRectangle;
+  TQPoint       firstSelectedPoint;
+  TQRect        selectedRectangle;
 
   /** Pointer to the PageView that contains this
       widget. This pointer is used in the re-implementation of the
@@ -141,7 +141,7 @@ protected:
   DocumentPageCache *documentCache;
 
   /** Currently selected Region */
-  QRegion selectedRegion;
+  TQRegion selectedRegion;
 
   /** This is set to the index of the link over which the mouse pointer currently resides,
       and -1 if the no link is hovered.
@@ -156,7 +156,7 @@ protected:
   virtual void setStandardCursor();
 
 private slots:
-  /** This slot emits the signal setStatusBarText(QString::null) to
+  /** This slot emits the signal setStatusBarText(TQString::null) to
       clear the status bar. It is connected to the timeout slot of the
       clearStatusBarTimer. */
   void clearStatusBar();
@@ -167,13 +167,13 @@ private slots:
   void clearScrollGuide();
 
 private:
-  QRect linkFlashRect();
+  TQRect linkFlashRect();
 
   /** If this variable is positive draw a vertical line at this y-coordinate. */
   int scrollGuide;
 
   /** Color used by in the shadow drawing to check if the background color has been changed. */
-  static QColor backgroundColorForCorners;
+  static TQColor backgroundColorForCorners;
 
   /** The following tables store grey values for roundish shadow
       corners. They were shamelessly stolen from kdelibs/kdefx/kstyle.cpp. */

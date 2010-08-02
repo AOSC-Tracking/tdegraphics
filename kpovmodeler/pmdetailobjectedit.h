@@ -25,9 +25,9 @@
 #include "pmnamedobjectedit.h"
 
 class PMDetailObject;
-class QCheckBox;
-class QLabel;
-class QComboBox;
+class TQCheckBox;
+class TQLabel;
+class TQComboBox;
 
 /**
  * Dialog edit class for @ref PMNamedObject.
@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMNamedObjectEdit with parent and name
     */
-   PMDetailObjectEdit( QWidget* parent, const char* name = 0 );
+   PMDetailObjectEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -59,9 +59,9 @@ private slots:
 
 private:
    PMDetailObject* m_pDisplayedObject;
-   QCheckBox* m_pGlobalDetail;
-   QLabel* m_pLocalDetailLevelLabel;
-   QComboBox* m_pLocalDetailLevel;
+   TQCheckBox* m_pGlobalDetail;
+   TQLabel* m_pLocalDetailLevelLabel;
+   TQComboBox* m_pLocalDetailLevel;
 };
 
 

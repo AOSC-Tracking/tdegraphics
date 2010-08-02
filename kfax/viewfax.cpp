@@ -36,12 +36,12 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-#include <qglobal.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qevent.h>
-#include <qprinter.h>
-#include <qstring.h>
+#include <tqglobal.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqevent.h>
+#include <tqprinter.h>
+#include <tqstring.h>
 
 #include <kcmdlineargs.h>
 #include <klocale.h>
@@ -222,7 +222,7 @@ int viewfaxmain()
        defaultpage.width = args->getOption("width").toInt();
     }
 
-    QCString mem = args->getOption("mem");
+    TQCString mem = args->getOption("mem");
     Memlimit = atoi(mem.data());
     switch(mem[mem.length()-1]) {
 	    case 'M':
@@ -240,7 +240,7 @@ int viewfaxmain()
     firstpage = lastpage = thispage = helppage = auxpage =  0;
 
     for (int i = 0; i < args->count(); i++){
-	loadfile(QFile::decodeName(args->arg(i)));
+	loadfile(TQFile::decodeName(args->arg(i)));
     }
     args->clear();
 

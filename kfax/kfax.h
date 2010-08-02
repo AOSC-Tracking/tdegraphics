@@ -30,19 +30,19 @@
 
 #include <kapplication.h>
 #include <kmainwindow.h>
-#include <qptrlist.h>
+#include <tqptrlist.h>
 #include <kurl.h>
 
 #define Pimage(p)	((XImage *)(p)->extra)
 
-class QPopupMenu;
+class TQPopupMenu;
 class KConfig;
 class KStatusBar;
 class KAction;
 class KRecentFilesAction;
 class KPrinter;
-class QPainter;
-class QScrollBar;
+class TQPainter;
+class TQScrollBar;
 
 typedef KToolBar::BarPosition BarPosition;
 
@@ -58,24 +58,24 @@ class TopLevel : public KMainWindow
 
 public:
 
-    TopLevel( QWidget *parent=0, const char *name=0 );
+    TopLevel( TQWidget *parent=0, const char *name=0 );
     ~TopLevel();
 
     void openNetFile( const KURL& _url);
     void saveNetFile( const KURL& _url );
 
-    static QPtrList<TopLevel> windowList;
-    QPopupMenu *right_mouse_button, *colors;
+    static TQPtrList<TopLevel> windowList;
+    TQPopupMenu *right_mouse_button, *colors;
 
     void handle_X_event(XEvent Event);
     void putImage();
 
 protected:
 
-    void resizeEvent( QResizeEvent * );
-    void wheelEvent( QWheelEvent * );
-    void dragEnterEvent( QDragEnterEvent * event );
-    void dropEvent( QDropEvent * event );
+    void resizeEvent( TQResizeEvent * );
+    void wheelEvent( TQWheelEvent * );
+    void dragEnterEvent( TQDragEnterEvent * event );
+    void dropEvent( TQDropEvent * event );
 
     void updateActions();
     void updateGoActions();
@@ -95,11 +95,11 @@ protected:
 
 private:
 
-    QFrame *faxqtwin;
+    TQFrame *faxqtwin;
 
     int indentID;
-    QColor forecolor;
-    QColor backcolor;
+    TQColor forecolor;
+    TQColor backcolor;
 
     KURL fileURL;
     KStatusBar *statusbar;
@@ -113,11 +113,11 @@ private:
 
     KConfig *config;
 
-    QScrollBar *hsb;
-    QScrollBar *vsb;
-    QFrame* 	mainpane;
+    TQScrollBar *hsb;
+    TQScrollBar *vsb;
+    TQFrame* 	mainpane;
 
-    void printIt( KPrinter &printer, QPainter &painter );
+    void printIt( KPrinter &printer, TQPainter &painter );
     bool loadAllPages( int &numpages, int &currentpage );
 
 public slots:
@@ -146,14 +146,14 @@ public slots:
     void lastPage();
     void uiUpdate();
 
-    void openadd(QString filename);
+    void openadd(TQString filename);
     void FreeFax();
     void scrollHorz(int);
     void scrollVert(int);
 };
 
-void kfaxerror(const QString&, const QString&);
-void loadfile(QString filename);
+void kfaxerror(const TQString&, const TQString&);
+void loadfile(TQString filename);
 
 #endif // _KFAX_H_
 

@@ -17,11 +17,11 @@
 
 #include <math.h>
 
-#include <qlayout.h>
-/* #include <qtabwidget.h> */
-#include <qradiobutton.h>
-#include <qlabel.h>
-#include <qslider.h>
+#include <tqlayout.h>
+/* #include <tqtabwidget.h> */
+#include <tqradiobutton.h>
+#include <tqlabel.h>
+#include <tqslider.h>
 #include <kseparator.h>
 #include <klocale.h>
 
@@ -30,59 +30,59 @@
 #include "texteditselection.h"
 #include "colorselector.h"
 
-ColorSelector::ColorSelector(QWidget *parent, const char *name ) : QWidget(parent, name) {
+ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(parent, name) {
 	fComponentsMode = false;
-	QVBoxLayout* topLayout = new QVBoxLayout(this, 4);
+	TQVBoxLayout* topLayout = new TQVBoxLayout(this, 4);
 	/*
-	QTabWidget* pages = new QTabWidget(this);
+	TQTabWidget* pages = new TQTabWidget(this);
 	 */
 	gradientSelection = new GradientSelection(this);
-	connect(gradientSelection, SIGNAL( valueChanged(Color*) ),
-		SLOT( slotGradientSelectionChangeColor(Color*) ));
-	connect(gradientSelection, SIGNAL( synchronizeColor() ),
-		SLOT( slotGradientSelectionSynchronizeColor() ));
-	connect(this, SIGNAL( valueChanged(Color*) ), gradientSelection, SLOT( slotSetValue(Color*) ));
+	connect(gradientSelection, TQT_SIGNAL( valueChanged(Color*) ),
+		TQT_SLOT( slotGradientSelectionChangeColor(Color*) ));
+	connect(gradientSelection, TQT_SIGNAL( synchronizeColor() ),
+		TQT_SLOT( slotGradientSelectionSynchronizeColor() ));
+	connect(this, TQT_SIGNAL( valueChanged(Color*) ), gradientSelection, TQT_SLOT( slotSetValue(Color*) ));
 	/*
 	pages->addTab(gradientSelection, i18n( "Gradient" ));
 	ImageSelection* imageSelection = new ImageSelection(this);
-	connect(imageSelection, SIGNAL( valueChanged(Color*) ), SLOT( slotSetColor(Color*) ));
-	connect(this, SIGNAL( valueChanged(Color*) ), imageSelection, SLOT( slotSetValue(Color*) ));
+	connect(imageSelection, TQT_SIGNAL( valueChanged(Color*) ), TQT_SLOT( slotSetColor(Color*) ));
+	connect(this, TQT_SIGNAL( valueChanged(Color*) ), imageSelection, TQT_SLOT( slotSetValue(Color*) ));
 	pages->addTab(imageSelection, i18n( "Image" ));
 	topLayout->addWidget(pages, 10);
 	 */
 	topLayout->addWidget(gradientSelection, 10);
 	KSeparator* hLine = new KSeparator(KSeparator::HLine, this);
 	topLayout->addWidget(hLine);
-	QHBoxLayout* layout = new QHBoxLayout();
+	TQHBoxLayout* layout = new TQHBoxLayout();
 	TextEditSelection* textEditSelection = new TextEditSelection(this);
-	connect(textEditSelection, SIGNAL( valueChanged(Color*) ), SLOT( slotSetColor(Color*) ));
-	connect(this, SIGNAL( valueChanged(Color*) ), textEditSelection, SLOT( slotSetValue(Color*) ));
-	QVBoxLayout* colorChangeLayout = new QVBoxLayout();
+	connect(textEditSelection, TQT_SIGNAL( valueChanged(Color*) ), TQT_SLOT( slotSetColor(Color*) ));
+	connect(this, TQT_SIGNAL( valueChanged(Color*) ), textEditSelection, TQT_SLOT( slotSetValue(Color*) ));
+	TQVBoxLayout* colorChangeLayout = new TQVBoxLayout();
 	colorChangeLayout->setMargin(2);
-	QRadioButton* replaceButton = new QRadioButton(i18n( "Replace" ), this);
-	connect(replaceButton, SIGNAL( clicked() ), SLOT( slotColorReplace() ));
+	TQRadioButton* replaceButton = new TQRadioButton(i18n( "Replace" ), this);
+	connect(replaceButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotColorReplace() ));
 	replaceButton->setChecked(true);
 	colorChangeButtons.insert(replaceButton);
 	colorChangeLayout->addWidget(replaceButton);
-	QRadioButton* changeButton = new QRadioButton(i18n( "Change" ) + ":", this);
-	connect(changeButton, SIGNAL( clicked() ), SLOT( slotColorChange() ));
+	TQRadioButton* changeButton = new TQRadioButton(i18n( "Change" ) + ":", this);
+	connect(changeButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotColorChange() ));
 	colorChangeButtons.insert(changeButton);
 	colorChangeLayout->addWidget(changeButton);
 	colorChangeValue = 0;
-	colorChangeSliderWidget = new QWidget(this);
-	QVBoxLayout* colorChangeSliderLayout = new QVBoxLayout(colorChangeSliderWidget, 1);
+	colorChangeSliderWidget = new TQWidget(this);
+	TQVBoxLayout* colorChangeSliderLayout = new TQVBoxLayout(colorChangeSliderWidget, 1);
 	colorChangeSliderLayout->setMargin(0);
-	QSlider* colorChangeSlider = new QSlider(0, MAX_COLOR_CHANGE_VALUE,
-		MAX_COLOR_CHANGE_VALUE/4, colorChangeValue, QSlider::Horizontal, colorChangeSliderWidget);
+	TQSlider* colorChangeSlider = new TQSlider(0, MAX_COLOR_CHANGE_VALUE,
+		MAX_COLOR_CHANGE_VALUE/4, colorChangeValue, TQSlider::Horizontal, colorChangeSliderWidget);
 	colorChangeSlider->setTickInterval(colorChangeSlider->pageStep());
-	colorChangeSlider->setTickmarks(QSlider::Above);
-	connect(colorChangeSlider, SIGNAL( valueChanged(int) ), SLOT( slotColorChangeValueChanged(int) ));
+	colorChangeSlider->setTickmarks(TQSlider::Above);
+	connect(colorChangeSlider, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( slotColorChangeValueChanged(int) ));
 	colorChangeSliderLayout->addWidget(colorChangeSlider);
-	QHBoxLayout* colorChangeSliderLabelsLayout = new QHBoxLayout(0);
-	QLabel* subtractLabel = new QLabel(i18n( "0" ), colorChangeSliderWidget);
+	TQHBoxLayout* colorChangeSliderLabelsLayout = new TQHBoxLayout(0);
+	TQLabel* subtractLabel = new TQLabel(i18n( "0" ), colorChangeSliderWidget);
 	colorChangeSliderLabelsLayout->addWidget(subtractLabel);
 	colorChangeSliderLabelsLayout->addStretch(10);
-	QLabel* addLabel = new QLabel(" " + i18n( "Replace" ), colorChangeSliderWidget);
+	TQLabel* addLabel = new TQLabel(" " + i18n( "Replace" ), colorChangeSliderWidget);
 	colorChangeSliderLabelsLayout->addWidget(addLabel);
 	colorChangeSliderLayout->addLayout(colorChangeSliderLabelsLayout);
 	colorChangeLayout->addStretch(10);
@@ -95,7 +95,7 @@ ColorSelector::ColorSelector(QWidget *parent, const char *name ) : QWidget(paren
 	layout->addWidget(vLine);
 	layout->addWidget(textEditSelection, 1);
 	colorPatch = new KColorPatch(this);
-	connect(colorPatch, SIGNAL( colorChanged(const QColor&) ), SLOT( slotSetColor(const QColor&) ));
+	connect(colorPatch, TQT_SIGNAL( colorChanged(const TQColor&) ), TQT_SLOT( slotSetColor(const TQColor&) ));
 	colorPatch->setMinimumSize(80, 64);
 	layout->addWidget(colorPatch, 10);
 	topLayout->addLayout(layout);
@@ -105,7 +105,7 @@ ColorSelector::~ColorSelector() {
 
 void ColorSelector::slotSetColor(Color color) {
 	m_color = color;
-	colorPatch->setColor(QColor( m_color.component(Color::RED_INDEX),
+	colorPatch->setColor(TQColor( m_color.component(Color::RED_INDEX),
 		m_color.component(Color::GREEN_INDEX),
 		m_color.component(Color::BLUE_INDEX) ));
 	fComponentsMode = false;
@@ -116,7 +116,7 @@ void ColorSelector::slotSetColor(Color* color) {
 	slotSetColor(*color);
 }
 
-void ColorSelector::slotSetColor(const QColor& color) {
+void ColorSelector::slotSetColor(const TQColor& color) {
 	m_color.setComponent(Color::RED_INDEX, color.red());
 	m_color.setComponent(Color::GREEN_INDEX, color.green());
 	m_color.setComponent(Color::BLUE_INDEX, color.blue());

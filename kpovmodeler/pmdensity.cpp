@@ -63,13 +63,13 @@ void PMDensity::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMDensity::description( ) const
+TQString PMDensity::description( ) const
 {
    return i18n( "density" );
 }
 
 
-PMDialogEditBase* PMDensity::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMDensity::editWidget( TQWidget* parent ) const
 {
    return new PMDensityEdit( parent );
 }

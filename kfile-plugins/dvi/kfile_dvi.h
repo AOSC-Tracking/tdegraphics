@@ -23,13 +23,13 @@
 
 #include <kfilemetainfo.h>
 
-class QStringList;
+class TQStringList;
 
 class KDviPlugin : public KFilePlugin
 {
 	Q_OBJECT
 public:
-	KDviPlugin ( QObject * parent, const char * name, const QStringList & preferredItems );
+	KDviPlugin ( TQObject * parent, const char * name, const TQStringList & preferredItems );
 
 	virtual bool readInfo (KFileMetaInfo & info, uint what);
 };

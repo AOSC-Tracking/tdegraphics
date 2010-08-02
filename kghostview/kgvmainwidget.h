@@ -19,7 +19,7 @@
 #ifndef KGVMAINWIDGET_H
 #define KGVMAINWIDGET_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 class KURL;
 
@@ -28,16 +28,16 @@ class KGVMainWidget : public QWidget
     Q_OBJECT
     
 public:
-    KGVMainWidget( QWidget* parent = 0, const char* name = 0 );
+    KGVMainWidget( TQWidget* parent = 0, const char* name = 0 );
 
 signals:
     void spacePressed();
     void urlDropped( const KURL& );
 
 protected:
-    virtual void keyPressEvent( QKeyEvent* );
-    virtual void dragEnterEvent( QDragEnterEvent* );
-    virtual void dropEvent( QDropEvent* );
+    virtual void keyPressEvent( TQKeyEvent* );
+    virtual void dragEnterEvent( TQDragEnterEvent* );
+    virtual void dropEvent( TQDropEvent* );
 };
 
 #endif

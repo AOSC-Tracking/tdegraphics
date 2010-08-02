@@ -23,18 +23,18 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qvbox.h>
-#include <qhbox.h>
-#include <qradiobutton.h>
-#include <qslider.h>
-#include <qlineedit.h>
-#include <qcombobox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
+#include <tqvbox.h>
+#include <tqhbox.h>
+#include <tqradiobutton.h>
+#include <tqslider.h>
+#include <tqlineedit.h>
+#include <tqcombobox.h>
 
-#include <qvbuttongroup.h>
-#include <qbuttongroup.h>
+#include <tqvbuttongroup.h>
+#include <tqbuttongroup.h>
 
 
 extern "C"{
@@ -45,21 +45,21 @@ extern "C"{
 #endif
 
 
-ScanSourceDialog::ScanSourceDialog( QWidget *parent, const QStrList list, ADF_BEHAVE adfBehave )
+ScanSourceDialog::ScanSourceDialog( TQWidget *parent, const TQStrList list, ADF_BEHAVE adfBehave )
  : KDialogBase( parent, "SOURCE_DIALOG", true, i18n("Scan Source Selection"),
 		Ok|Cancel,Ok, true)
 {
-   QVBox *vbox = makeVBoxMainWidget();
+   TQVBox *vbox = makeVBoxMainWidget();
 
-   (void) new QLabel( i18n("<B>Source selection</B><P>"
+   (void) new TQLabel( i18n("<B>Source selection</B><P>"
 			   "Note that you may see more sources than actually exist"), vbox );
 
    /* Combo Box for sources */
-   const QStrList xx = list;
+   const TQStrList xx = list;
    sources = new KScanCombo( vbox,
 			     i18n("Select the Scanner document source:"),
 			     xx);
-   connect( sources, SIGNAL( activated(int)), this, SLOT( slChangeSource(int)));
+   connect( sources, TQT_SIGNAL( activated(int)), this, TQT_SLOT( slChangeSource(int)));
 
 
    /* Button Group for ADF-Behaviour */
@@ -68,16 +68,16 @@ ScanSourceDialog::ScanSourceDialog( QWidget *parent, const QStrList list, ADF_BE
 
    if( sourceAdfEntry() > -1 )
    {
-      bgroup = new QVButtonGroup( i18n("Advanced ADF-Options"), vbox, "ADF_BGROUP" );
+      bgroup = new TQVButtonGroup( i18n("Advanced ADF-Options"), vbox, "ADF_BGROUP" );
 
-      connect( bgroup, SIGNAL(clicked(int)), this, SLOT( slNotifyADF(int)));
+      connect( bgroup, TQT_SIGNAL(clicked(int)), this, TQT_SLOT( slNotifyADF(int)));
 
       /* Two buttons inside */
-      QRadioButton *rbADFTillEnd = new QRadioButton( i18n("Scan until ADF reports out of paper"),
+      TQRadioButton *rbADFTillEnd = new TQRadioButton( i18n("Scan until ADF reports out of paper"),
 						  bgroup );
       bgroup->insert( rbADFTillEnd, ADF_SCAN_ALONG );
 
-      QRadioButton *rbADFOnce = new QRadioButton( i18n("Scan only one sheet of ADF per click"),
+      TQRadioButton *rbADFOnce = new TQRadioButton( i18n("Scan only one sheet of ADF per click"),
 					       bgroup );
       bgroup->insert( rbADFOnce, ADF_SCAN_ONCE );
 
@@ -104,7 +104,7 @@ ScanSourceDialog::ScanSourceDialog( QWidget *parent, const QStrList list, ADF_BE
    }
 }
 
-QString  ScanSourceDialog::getText( void ) const
+TQString  ScanSourceDialog::getText( void ) const
 {
    return( sources->currentText() );
 }
@@ -115,7 +115,7 @@ void ScanSourceDialog::slNotifyADF( int )
    /* this seems to be broken, adf_text is a visible string?
    *  needs rework if SANE 2 comes up which supports i18n */
 #if 0
-  QString adf_text = getText();
+  TQString adf_text = getText();
 
   adf = ADF_OFF;
 
@@ -161,7 +161,7 @@ int ScanSourceDialog::sourceAdfEntry( void ) const
 
    for( int i = 0; i < cou; i++ )
    {
-      QString q = sources->text( i );
+      TQString q = sources->text( i );
 
 #if 0
       if( q == "ADF" || q == SANE_NAME_DOCUMENT_FEEDER )
@@ -174,7 +174,7 @@ int ScanSourceDialog::sourceAdfEntry( void ) const
 
 
 
-void ScanSourceDialog::slSetSource( const QString source )
+void ScanSourceDialog::slSetSource( const TQString source )
 {
    if( !sources  ) return;
    kdDebug(29000) << "Setting <" << source << "> as source" << endl;
@@ -189,7 +189,7 @@ void ScanSourceDialog::slSetSource( const QString source )
       if( sources->text( i ) == source )
       {
          sources->setCurrentItem( i );
-         if( source == QString::number(sourceAdfEntry()) )
+         if( source == TQString::number(sourceAdfEntry()) )
          {
 	    if( bgroup )
 	       bgroup->setEnabled( true );

@@ -33,16 +33,16 @@
 #include <kdebug.h>
 
 
-kpResizeSignallingLabel::kpResizeSignallingLabel (const QString &string,
-                                                  QWidget *parent,
+kpResizeSignallingLabel::kpResizeSignallingLabel (const TQString &string,
+                                                  TQWidget *parent,
                                                   const char *name)
-    : QLabel (string, parent, name)
+    : TQLabel (string, parent, name)
 {
 }
 
-kpResizeSignallingLabel::kpResizeSignallingLabel (QWidget *parent,
+kpResizeSignallingLabel::kpResizeSignallingLabel (TQWidget *parent,
                                                   const char *name)
-    : QLabel (parent, name)
+    : TQLabel (parent, name)
 {
 }
 
@@ -52,13 +52,13 @@ kpResizeSignallingLabel::~kpResizeSignallingLabel ()
 
 
 // protected virtual [base QLabel]
-void kpResizeSignallingLabel::resizeEvent (QResizeEvent *e)
+void kpResizeSignallingLabel::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_RESIZE_SIGNALLING_LABEL
     kdDebug () << "kpResizeSignallingLabel::resizeEvent() newSize=" << e->size ()
                << " oldSize=" << e->oldSize () << endl;
 #endif
-    QLabel::resizeEvent (e);
+    TQLabel::resizeEvent (e);
 
     emit resized ();
 }

@@ -21,11 +21,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <qdir.h>
-#include <qfile.h>
-#include <qdom.h>
-#include <qtextstream.h>
-#include <qimage.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqdom.h>
+#include <tqtextstream.h>
+#include <tqimage.h>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -43,7 +43,7 @@ PMLibraryHandle::PMLibraryHandle( )
    m_libraries.setAutoDelete( true );
 }
 
-PMLibraryHandle::PMLibraryHandle( const QString& path )
+PMLibraryHandle::PMLibraryHandle( const TQString& path )
 {
    setPath( path );
    setAuthor( i18n( "Unknown" ) );
@@ -57,23 +57,23 @@ PMLibraryHandle::~PMLibraryHandle( )
 {
 }
 
-void PMLibraryHandle::setName( const QString& name )
+void PMLibraryHandle::setName( const TQString& name )
 {
    m_name = name;
 }
 
-void PMLibraryHandle::setPath( const QString& path )
+void PMLibraryHandle::setPath( const TQString& path )
 {
    m_objects.clear( );
    m_path = path;
 }
 
-void PMLibraryHandle::setAuthor( const QString& author )
+void PMLibraryHandle::setAuthor( const TQString& author )
 {
    m_author = author;
 }
 
-void PMLibraryHandle::setDescription( const QString& description )
+void PMLibraryHandle::setDescription( const TQString& description )
 {
    m_description = description;
 }
@@ -86,7 +86,7 @@ void PMLibraryHandle::setReadOnly( const bool rdOnly )
 void PMLibraryHandle::loadLibraryInfo( )
 {
    // 1. Open the information file (library_index.xml)
-   QFile file( m_path + "/library_index.xml" );
+   TQFile file( m_path + "/library_index.xml" );
 
    if( !file.open( IO_ReadOnly ) )
    {
@@ -95,10 +95,10 @@ void PMLibraryHandle::loadLibraryInfo( )
    }
 
    // 2. Read the information
-   QDomDocument doc( "KPOVLIBINDEX" );
+   TQDomDocument doc( "KPOVLIBINDEX" );
    doc.setContent( &file );
 
-   QDomElement e = doc.documentElement( );
+   TQDomElement e = doc.documentElement( );
 
    if( e.tagName( ) != "library" )
    {
@@ -121,12 +121,12 @@ void PMLibraryHandle::loadLibraryInfo( )
       m_subLibrary = true;
 
    // 4. The object entries
-   QDomNode n = e.firstChild( );
+   TQDomNode n = e.firstChild( );
    if( !n.isNull( ) )
    {
       if( n.isElement( ) )
       {
-         QDomElement c = n.toElement( );
+         TQDomElement c = n.toElement( );
          if( c.tagName( ) == "object_list" )
          {
             n = n.firstChild( );
@@ -136,12 +136,12 @@ void PMLibraryHandle::loadLibraryInfo( )
                if( c.tagName( ) == "object_entry" )
                {
                   m_objects.insert( c.attribute( "name", i18n( "Unknown" ) ),
-                                    new QString( c.attribute( "file", "" ) ) );
+                                    new TQString( c.attribute( "file", "" ) ) );
                }
                else if( c.tagName( ) == "library_entry" )
                {
                   m_libraries.insert( c.attribute( "name", i18n( "Unknown" ) ),
-                                    new QString( c.attribute( "file", "" ) ) );
+                                    new TQString( c.attribute( "file", "" ) ) );
                }
                n = n.nextSibling( );
             }
@@ -153,7 +153,7 @@ void PMLibraryHandle::loadLibraryInfo( )
 PMLibraryHandle::PMResult PMLibraryHandle::createLibrary( )
 {
    // Test if the library exists.
-   QDir d( m_path );
+   TQDir d( m_path );
 
    if( !d.exists( ) )
    {
@@ -174,15 +174,15 @@ PMLibraryHandle::PMResult PMLibraryHandle::createLibrary( )
 PMLibraryHandle::PMResult PMLibraryHandle::saveLibraryInfo( )
 {
    // Save the information to the index
-   QFile file( m_path + "/library_index.xml" );
+   TQFile file( m_path + "/library_index.xml" );
    if( !file.open( IO_WriteOnly ) )
    {
       return PMLibraryHandle::CouldNotCreateInfo;
    }
 
    // Create the XML DOM tree
-   QDomDocument doc( "KPOVLIBINDEX" );
-   QDomElement e = doc.createElement( "library" );
+   TQDomDocument doc( "KPOVLIBINDEX" );
+   TQDomElement e = doc.createElement( "library" );
    e.setAttribute( "name", name( ) );
    e.setAttribute( "author", author( ) );
    e.setAttribute( "description", description( ) );
@@ -197,17 +197,17 @@ PMLibraryHandle::PMResult PMLibraryHandle::saveLibraryInfo( )
       e.setAttribute( "sublibrary", "false" );
 
    // Add the object list to the tree
-   QDomElement l = doc.createElement( "object_list" );
-   for(QDictIterator<QString> it( m_objects ); it.current( ); ++it )
+   TQDomElement l = doc.createElement( "object_list" );
+   for(TQDictIterator<TQString> it( m_objects ); it.current( ); ++it )
    {
-      QDomElement n = doc.createElement( "object_entry" );
+      TQDomElement n = doc.createElement( "object_entry" );
       n.setAttribute( "name", it.currentKey( ) );
       n.setAttribute( "file", *( it.current( ) ) );
       l.appendChild( n );
    }
-   for(QDictIterator<QString> it( m_libraries ); it.current( ); ++it )
+   for(TQDictIterator<TQString> it( m_libraries ); it.current( ); ++it )
    {
-      QDomElement n = doc.createElement( "library_entry" );
+      TQDomElement n = doc.createElement( "library_entry" );
       n.setAttribute( "name", it.currentKey( ) );
       n.setAttribute( "file", *( it.current( ) ) );
       l.appendChild( n );
@@ -216,8 +216,8 @@ PMLibraryHandle::PMResult PMLibraryHandle::saveLibraryInfo( )
    doc.appendChild( e );
 
    // Save to the file
-   QTextStream str( &file );
-   str.setEncoding( QTextStream::UnicodeUTF8 );
+   TQTextStream str( &file );
+   str.setEncoding( TQTextStream::UnicodeUTF8 );
    str << doc.toString( );
    file.close( );
 
@@ -230,16 +230,16 @@ PMLibraryHandle::PMResult PMLibraryHandle::createNewObject( )
    return PMLibraryHandle::CouldNotCreateFile;
    /*
    PMLibraryObject aux;
-   QCString s = m_path.latin1( );
-   QString unknownIcon = locate( "data" , "kpovmodeler/questionmark.png" );
-   QImage img;
+   TQCString s = m_path.latin1( );
+   TQString unknownIcon = locate( "data" , "kpovmodeler/questionmark.png" );
+   TQImage img;
    int fh;
 
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
 
    aux.setName( i18n( "Empty" ) );
-   aux.setObjects( QByteArray( ) );
+   aux.setObjects( TQByteArray( ) );
    img.load( unknownIcon, "PNG" );
    aux.setPreview( img );
 
@@ -252,24 +252,24 @@ PMLibraryHandle::PMResult PMLibraryHandle::createNewObject( )
 
    // Success creating the file
    close( fh );
-   m_objects.insert( i18n( "Empty" ), new QString( s ) );
+   m_objects.insert( i18n( "Empty" ), new TQString( s ) );
    aux.save( s );
    saveLibraryInfo( );
    return PMLibraryHandle::Ok;
    */
 }
 
-PMLibraryHandle::PMResult PMLibraryHandle::addObject( const QString& path, const QString& name )
+PMLibraryHandle::PMResult PMLibraryHandle::addObject( const TQString& path, const TQString& name )
 {
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
 
-   m_objects.insert( name, new QString( path ) );
+   m_objects.insert( name, new TQString( path ) );
    saveLibraryInfo( );
    return PMLibraryHandle::Ok;
 }
 
-PMLibraryHandle::PMResult PMLibraryHandle::deleteObject( const QString& objectName )
+PMLibraryHandle::PMResult PMLibraryHandle::deleteObject( const TQString& objectName )
 {
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
@@ -290,13 +290,13 @@ PMLibraryHandle::PMResult PMLibraryHandle::deleteObject( const QString& objectNa
    return PMLibraryHandle::NotInLib;
 }
 
-PMLibraryHandle::PMResult PMLibraryHandle::createNewSubLibrary( const QString /*subLibName*/ )
+PMLibraryHandle::PMResult PMLibraryHandle::createNewSubLibrary( const TQString /*subLibName*/ )
 {
    /// @todo Need to replace mkdtemp and mkstemps before enabling libs
    return PMLibraryHandle::CouldNotCreateFile;
    /*
    char* dirname;
-   QCString s = m_path.latin1( );
+   TQCString s = m_path.latin1( );
    PMLibraryHandle aux;
 
    if( m_readOnly )
@@ -316,23 +316,23 @@ PMLibraryHandle::PMResult PMLibraryHandle::createNewSubLibrary( const QString /*
    aux.setAuthor( author( ) );
    aux.setPath( dirname );
    aux.saveLibraryInfo( );
-   m_libraries.insert( subLibName, new QString( dirname ) );
+   m_libraries.insert( subLibName, new TQString( dirname ) );
    saveLibraryInfo( );
    return PMLibraryHandle::Ok;
    */
 }
 
-PMLibraryHandle::PMResult PMLibraryHandle::addSubLibrary( const QString& path, const QString& subLibName )
+PMLibraryHandle::PMResult PMLibraryHandle::addSubLibrary( const TQString& path, const TQString& subLibName )
 {
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
 
-   m_libraries.insert( subLibName, new QString( path ) );
+   m_libraries.insert( subLibName, new TQString( path ) );
    saveLibraryInfo( );
    return PMLibraryHandle::Ok;
 }
 
-PMLibraryHandle::PMResult PMLibraryHandle::deleteSubLibrary( const QString& subLibName )
+PMLibraryHandle::PMResult PMLibraryHandle::deleteSubLibrary( const TQString& subLibName )
 {
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
@@ -353,25 +353,25 @@ PMLibraryHandle::PMResult PMLibraryHandle::deleteSubLibrary( const QString& subL
    return PMLibraryHandle::NotInLib;
 }
 
-PMLibraryHandle::PMResult PMLibraryHandle::changeParentLibrary( const QString& parentPath )
+PMLibraryHandle::PMResult PMLibraryHandle::changeParentLibrary( const TQString& parentPath )
 {
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
 
-   QString newPath = parentPath + "/" + m_path.section( '/', -1 );
+   TQString newPath = parentPath + "/" + m_path.section( '/', -1 );
    PMLibraryHandle::EntryIterator itr( m_libraries );
    for( ; itr.current( ); ++itr )
    {
       PMLibraryHandle lib = PMLibraryHandle( *itr.current( ) );
       lib.changeParentLibrary( newPath );
-      m_libraries.replace( itr.currentKey( ), new QString( newPath + "/" + lib.path( ) ) );
+      m_libraries.replace( itr.currentKey( ), new TQString( newPath + "/" + lib.path( ) ) );
    }
 
    PMLibraryHandle::EntryIterator objItr( m_objects );
    for( ; objItr.current( ); ++objItr )
    {
-      QString test = newPath + "/" + objItr.current( )->section( '/', -1 );
-      m_objects.replace( objItr.currentKey( ), new QString( newPath + "/" + objItr.current( )->section( '/', -1 ) ) );
+      TQString test = newPath + "/" + objItr.current( )->section( '/', -1 );
+      m_objects.replace( objItr.currentKey( ), new TQString( newPath + "/" + objItr.current( )->section( '/', -1 ) ) );
    }
 
    saveLibraryInfo( );

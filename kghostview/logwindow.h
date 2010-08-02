@@ -21,8 +21,8 @@
 
 #include <kdialogbase.h>
 
-class QLabel;
-class QTextEdit;
+class TQLabel;
+class TQTextEdit;
 class KURLLabel;
 
 class LogWindow : public KDialogBase
@@ -30,13 +30,13 @@ class LogWindow : public KDialogBase
     Q_OBJECT
 
 public:
-    LogWindow( const QString& caption,
-               QWidget* parent = 0, const char* name = 0 );
+    LogWindow( const TQString& caption,
+               TQWidget* parent = 0, const char* name = 0 );
 
 public slots:
-    void append( const QString& message );
+    void append( const TQString& message );
     void clear(); 
-    void setLabel( const QString&, bool showConfigureGSLink );
+    void setLabel( const TQString&, bool showConfigureGSLink );
 
 private slots:
     void emitConfigureGS();
@@ -45,8 +45,8 @@ signals:
     void configureGS();
 
 private:
-    QLabel*      _errorIndication;
-    QTextEdit*   _logView;
+    TQLabel*      _errorIndication;
+    TQTextEdit*   _logView;
     KURLLabel*   _configureGS;
 };
 

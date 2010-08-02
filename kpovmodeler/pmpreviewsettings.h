@@ -26,7 +26,7 @@
 
 class PMIntEdit;
 class PMFloatEdit;
-class QCheckBox;
+class TQCheckBox;
 class KColorButton;
 
 /**
@@ -39,7 +39,7 @@ public:
    /**
     * Default constructor
     */
-   PMPreviewSettings( QWidget* parent, const char* name = 0 );
+   PMPreviewSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -51,14 +51,14 @@ public:
 
 private:
    PMIntEdit* m_pPreviewSize;
-   QCheckBox* m_pPreviewSphere;
-   QCheckBox* m_pPreviewCylinder;
-   QCheckBox* m_pPreviewBox;
-   QCheckBox* m_pPreviewAA;
+   TQCheckBox* m_pPreviewSphere;
+   TQCheckBox* m_pPreviewCylinder;
+   TQCheckBox* m_pPreviewBox;
+   TQCheckBox* m_pPreviewAA;
    PMIntEdit* m_pPreviewAALevel;
    PMFloatEdit* m_pPreviewAAThreshold;
-   QCheckBox* m_pPreviewWall;
-   QCheckBox* m_pPreviewFloor;
+   TQCheckBox* m_pPreviewWall;
+   TQCheckBox* m_pPreviewFloor;
    KColorButton* m_pFloorColor1;
    KColorButton* m_pFloorColor2;
    KColorButton* m_pWallColor1;

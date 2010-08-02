@@ -23,7 +23,7 @@
 #include "kgammatable.h"
 
 KGammaTable::KGammaTable( int gamma, int brightness, int contrast  ) 
-    : QObject()
+    : TQObject()
 {
    g = gamma < 1 ? 1 : gamma;
    b = brightness;

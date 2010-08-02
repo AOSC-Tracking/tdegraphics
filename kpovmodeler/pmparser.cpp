@@ -18,8 +18,8 @@
 
 #include "pmparser.h"
 
-#include <qstring.h>
-#include <qbuffer.h>
+#include <tqstring.h>
+#include <tqbuffer.h>
 #include <klocale.h>
 
 #include "pmpart.h"
@@ -32,7 +32,7 @@ unsigned int PMParser::s_maxErrors = 30;
 unsigned int PMParser::s_maxWarnings = 50;
 
 
-PMParser::PMParser( PMPart* part, QIODevice* dev )
+PMParser::PMParser( PMPart* part, TQIODevice* dev )
       : m_okDeclares( 101 )
 {
    m_pPart = part;
@@ -42,11 +42,11 @@ PMParser::PMParser( PMPart* part, QIODevice* dev )
    init( );
 }
 
-PMParser::PMParser( PMPart* part, const QByteArray& array )
+PMParser::PMParser( PMPart* part, const TQByteArray& array )
       : m_okDeclares( 101 )
 {
    m_pPart = part;
-   QBuffer* buffer = new QBuffer( array );
+   TQBuffer* buffer = new TQBuffer( array );
    buffer->open( IO_ReadOnly );
    m_pDevice = buffer;
    m_bDeviceCreated = true;
@@ -104,7 +104,7 @@ void PMParser::printMessage( const PMPMessage messageNum )
    }
 }
 
-void PMParser::printMessage( const QString& type, const QString& msg )
+void PMParser::printMessage( const TQString& type, const TQString& msg )
 {
    if( m_lineNum >= 0 )
       m_messages += PMMessage( i18n( "Line %1: " ).arg( m_lineNum ) + type + ": " + msg );
@@ -112,7 +112,7 @@ void PMParser::printMessage( const QString& type, const QString& msg )
       m_messages += PMMessage( type + ": " + msg );
 }
 
-void PMParser::printError( const QString& msg )
+void PMParser::printError( const TQString& msg )
 {
    if( m_errors < s_maxErrors )
    {
@@ -127,7 +127,7 @@ void PMParser::printError( const QString& msg )
    }
 }
 
-void PMParser::printWarning( const QString& msg )
+void PMParser::printWarning( const TQString& msg )
 {
    if( m_warnings < s_maxWarnings )
    {
@@ -148,18 +148,18 @@ void PMParser::printExpected( const char c, const char* sValue )
                .arg( c ).arg( sValue ) );
 }
 
-void PMParser::printExpected( const QString& str, const char* sValue )
+void PMParser::printExpected( const TQString& str, const char* sValue )
 {
    printError( i18n( "'%1' expected, found token '%2' instead." )
                .arg( str ).arg( sValue ) );
 }
 
-void PMParser::printUnexpected( const QString& str )
+void PMParser::printUnexpected( const TQString& str )
 {
    printError( i18n( "Unexpected token '%1'." ).arg( str ) );
 }
 
-void PMParser::printInfo( const QString& msg )
+void PMParser::printInfo( const TQString& msg )
 {
    printMessage( i18n( "Info" ), msg );
 }
@@ -230,7 +230,7 @@ void PMParser::parse( PMObjectList* list, PMObject* parent,
    
    topParse( );
 
-   QPtrListIterator<PMSymbol> it( m_renamedObjectSymbols );
+   TQPtrListIterator<PMSymbol> it( m_renamedObjectSymbols );
    for( ; it.current( ); ++it )
       it.current( )->setRenamedSymbol( 0 );
    m_renamedObjectSymbols.clear( );
@@ -333,7 +333,7 @@ void PMParser::checkID( PMDeclare* decl )
    }
 }
 
-void PMParser::checkID( const QString& id, const PMValue& v )
+void PMParser::checkID( const TQString& id, const PMValue& v )
 {
    PMSymbolTable* st = m_pPart->symbolTable( );
    PMSymbol* s = m_pLocalST.find( id );
@@ -368,7 +368,7 @@ void PMParser::checkID( const QString& id, const PMValue& v )
    }
 }
 
-PMDeclare* PMParser::checkLink( const QString& id )
+PMDeclare* PMParser::checkLink( const TQString& id )
 {
    PMSymbolTable* t = m_pPart->symbolTable( );
    bool ok = false;
@@ -423,7 +423,7 @@ PMDeclare* PMParser::checkLink( const QString& id )
    return 0;
 }
 
-PMSymbol* PMParser::getSymbol( const QString& id ) const
+PMSymbol* PMParser::getSymbol( const TQString& id ) const
 {
    PMSymbol* s = m_pLocalST.find( id );
    if( !s )

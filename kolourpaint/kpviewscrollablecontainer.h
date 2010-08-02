@@ -30,14 +30,14 @@
 #define KP_VIEW_SCROLLABLE_CONTAINER_H
 
 
-#include <qpoint.h>
-#include <qscrollview.h>
-#include <qsize.h>
+#include <tqpoint.h>
+#include <tqscrollview.h>
+#include <tqsize.h>
 
 
-class QCursor;
-class QRect;
-class QTimer;
+class TQCursor;
+class TQRect;
+class TQTimer;
 
 class kpGrip;
 class kpView;
@@ -57,14 +57,14 @@ public:
     };
 
     kpGrip (GripType type,
-            QWidget *parent, const char *name = 0);
+            TQWidget *parent, const char *name = 0);
     virtual ~kpGrip ();
 
     GripType type () const;
 
-    static const QCursor &cursorForType (GripType type);
+    static const TQCursor &cursorForType (GripType type);
 
-    QRect hotRect (bool toGlobal = false) const;
+    TQRect hotRect (bool toGlobal = false) const;
 
     bool isDrawing () const;
 
@@ -74,40 +74,40 @@ signals:
     void cancelledDraw ();
     void endedDraw (int viewDX, int viewDY);
 
-    void statusMessageChanged (const QString &string);
+    void statusMessageChanged (const TQString &string);
 
     void releasedAllButtons ();
 
 public:
-    QString haventBegunDrawUserMessage () const;
+    TQString haventBegunDrawUserMessage () const;
 
-    QString userMessage () const;
-    void setUserMessage (const QString &message);
+    TQString userMessage () const;
+    void setUserMessage (const TQString &message);
 
 protected:
     void updatePixmap ();
     void cancel ();
 
 protected:
-    virtual void keyReleaseEvent (QKeyEvent *e);
-    virtual void mousePressEvent (QMouseEvent *e);
+    virtual void keyReleaseEvent (TQKeyEvent *e);
+    virtual void mousePressEvent (TQMouseEvent *e);
 public:
-    QPoint viewDeltaPoint () const;
-    void mouseMovedTo (const QPoint &point, bool dueToDragScroll);
+    TQPoint viewDeltaPoint () const;
+    void mouseMovedTo (const TQPoint &point, bool dueToDragScroll);
 protected:
-    virtual void mouseMoveEvent (QMouseEvent *e);
-    virtual void mouseReleaseEvent (QMouseEvent *e);
-    virtual void resizeEvent (QResizeEvent *e);
+    virtual void mouseMoveEvent (TQMouseEvent *e);
+    virtual void mouseReleaseEvent (TQMouseEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
 
-    virtual void enterEvent (QEvent *e);
-    virtual void leaveEvent (QEvent *e);
+    virtual void enterEvent (TQEvent *e);
+    virtual void leaveEvent (TQEvent *e);
 
-    virtual void paintEvent (QPaintEvent *e);
+    virtual void paintEvent (TQPaintEvent *e);
 
 protected:
     GripType m_type;
-    QPoint m_startPoint, m_currentPoint;
-    QString m_userMessage;
+    TQPoint m_startPoint, m_currentPoint;
+    TQString m_userMessage;
     bool m_shouldReleaseMouseButtons;
 };
 
@@ -133,25 +133,25 @@ signals:
     void contentsMovingSoon (int contentsX, int contentsY);
 
     void beganDocResize ();
-    void continuedDocResize (const QSize &size);
+    void continuedDocResize (const TQSize &size);
     void cancelledDocResize ();
-    void endedDocResize (const QSize &size);
+    void endedDocResize (const TQSize &size);
 
     // (string.isEmpty() if kpViewScrollableContainer has nothing to say)
-    void statusMessageChanged (const QString &string);
+    void statusMessageChanged (const TQString &string);
 
     void resized ();
 
 public:
-    QSize newDocSize () const;
+    TQSize newDocSize () const;
     bool haveMovedFromOriginalDocSize () const;
-    QString statusMessage () const;
+    TQString statusMessage () const;
     void clearStatusMessage ();
 
 protected:
     void connectGripSignals (kpGrip *grip);
 
-    QSize newDocSize (int viewDX, int viewDY) const;
+    TQSize newDocSize (int viewDX, int viewDY) const;
 
     void calculateDocResizingGrip ();
     kpGrip *docResizingGrip () const;
@@ -159,19 +159,19 @@ protected:
     int bottomResizeLineWidth () const;
     int rightResizeLineWidth () const;
 
-    QRect bottomResizeLineRect () const;
-    QRect rightResizeLineRect () const;
-    QRect bottomRightResizeLineRect () const;
+    TQRect bottomResizeLineRect () const;
+    TQRect rightResizeLineRect () const;
+    TQRect bottomRightResizeLineRect () const;
 
-    QPoint mapViewToViewport (const QPoint &viewPoint);
-    QRect mapViewToViewport (const QRect &viewRect);
+    TQPoint mapViewToViewport (const TQPoint &viewPoint);
+    TQRect mapViewToViewport (const TQRect &viewRect);
 
-    QRect mapViewportToGlobal (const QRect &viewportRect);
-    QRect mapViewToGlobal (const QRect &viewRect);
+    TQRect mapViewportToGlobal (const TQRect &viewportRect);
+    TQRect mapViewToGlobal (const TQRect &viewRect);
 
-    void repaintWidgetAtResizeLineViewRect (QWidget *widget,
-                                            const QRect &resizeLineViewRect);
-    void repaintWidgetAtResizeLines (QWidget *widget);
+    void repaintWidgetAtResizeLineViewRect (TQWidget *widget,
+                                            const TQRect &resizeLineViewRect);
+    void repaintWidgetAtResizeLines (TQWidget *widget);
     void eraseResizeLines ();
 
     void drawResizeLines ();
@@ -185,7 +185,7 @@ protected slots:
     void slotGripCancelledDraw ();
     void slotGripEndedDraw (int viewDX, int viewDY);
 
-    void slotGripStatusMessageChanged (const QString &string);
+    void slotGripStatusMessageChanged (const TQString &string);
 
 public slots:
     void recalculateStatusMessage ();
@@ -200,7 +200,7 @@ protected:
 
 public:
     // Calls setView(<widget>) after adding <widget> if it's a kpView.
-    virtual void addChild (QWidget *widget, int x = 0, int y = 0);
+    virtual void addChild (TQWidget *widget, int x = 0, int y = 0);
 
     kpView *view () const;
     void setView (kpView *view);
@@ -213,10 +213,10 @@ protected slots:
 public slots:
     // TODO: Why the QPoint's?
     //       Why the need for view's zoomLevel?  We have the view() anyway.
-    bool beginDragScroll (const QPoint &, const QPoint &,
+    bool beginDragScroll (const TQPoint &, const TQPoint &,
                           int zoomLevel,
                           bool *didSomething);
-    bool beginDragScroll (const QPoint &, const QPoint &,
+    bool beginDragScroll (const TQPoint &, const TQPoint &,
                           int zoomLevel);
     bool endDragScroll ();
 
@@ -225,16 +225,16 @@ protected slots:
     bool slotDragScroll ();
 
 protected:
-    QRect noDragScrollRect () const;
+    TQRect noDragScrollRect () const;
 
-    virtual void contentsDragMoveEvent (QDragMoveEvent *e);
-    virtual void contentsMouseMoveEvent (QMouseEvent *e);
-    virtual void contentsWheelEvent (QWheelEvent *e);
-    virtual void mouseMoveEvent (QMouseEvent *e);
-    virtual bool eventFilter (QObject *watchedObject, QEvent *e);
-    virtual void viewportPaintEvent (QPaintEvent *e);
-    virtual void paintEvent (QPaintEvent *e);
-    virtual void resizeEvent (QResizeEvent *e);
+    virtual void contentsDragMoveEvent (TQDragMoveEvent *e);
+    virtual void contentsMouseMoveEvent (TQMouseEvent *e);
+    virtual void contentsWheelEvent (TQWheelEvent *e);
+    virtual void mouseMoveEvent (TQMouseEvent *e);
+    virtual bool eventFilter (TQObject *watchedObject, TQEvent *e);
+    virtual void viewportPaintEvent (TQPaintEvent *e);
+    virtual void paintEvent (TQPaintEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
 
 protected:
     kpMainWindow *m_mainWindow;
@@ -242,13 +242,13 @@ protected:
     kpView *m_view;
     kpGrip *m_bottomGrip, *m_rightGrip, *m_bottomRightGrip;
     kpGrip *m_docResizingGrip;
-    QTimer *m_dragScrollTimer;
+    TQTimer *m_dragScrollTimer;
     int m_zoomLevel;
     bool m_scrollTimerRunOnce;
     int m_resizeRoundedLastViewX, m_resizeRoundedLastViewY;
     int m_resizeRoundedLastViewDX, m_resizeRoundedLastViewDY;
     bool m_haveMovedFromOriginalDocSize;
-    QString m_gripStatusMessage;
+    TQString m_gripStatusMessage;
 };
 
 

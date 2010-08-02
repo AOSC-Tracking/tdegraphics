@@ -25,16 +25,16 @@
 #include "pmdefaults.h"
 
 #include <math.h>
-#include <qpopupmenu.h>
-#include <qpainter.h>
-#include <qapplication.h>
-#include <qcursor.h>
-#include <qcolor.h>
-#include <qglobal.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qdom.h>
+#include <tqpopupmenu.h>
+#include <tqpainter.h>
+#include <tqapplication.h>
+#include <tqcursor.h>
+#include <tqcolor.h>
+#include <tqglobal.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqdom.h>
 
 #include <kxmlguifactory.h>
 #include <kaction.h>
@@ -106,7 +106,7 @@ bool PMGLView::s_bDirect = true;
 
 
 PMGLView::PMGLView( PMPart* part, PMViewType t,
-                    QWidget* parent, const char* name, WFlags f )
+                    TQWidget* parent, const char* name, WFlags f )
       : PMViewBase( parent, name, f | Qt::WWinOwnDC | Qt::WRepaintNoErase )
 {
    m_pPart = part;
@@ -150,33 +150,33 @@ PMGLView::PMGLView( PMPart* part, PMViewType t,
 
    setMinimumSize( 50, 50 );
 
-   connect( part, SIGNAL( refresh( ) ), SLOT( slotRefresh( ) ) );
-   connect( part, SIGNAL( clear( ) ), SLOT( slotClear( ) ) );
+   connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );
+   connect( part, TQT_SIGNAL( clear( ) ), TQT_SLOT( slotClear( ) ) );
 
-   connect( this, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-            part, SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
-   connect( part, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-            SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
+   connect( this, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            part, TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
-   connect( part, SIGNAL( activeRenderModeChanged( ) ),
-            SLOT( slotActiveRenderModeChanged( ) ) );
+   connect( part, TQT_SIGNAL( activeRenderModeChanged( ) ),
+            TQT_SLOT( slotActiveRenderModeChanged( ) ) );
 
-   connect( &m_startTimer, SIGNAL( timeout( ) ),
-            SLOT( slotMouseChangeTimer( ) ) );
-   connect( &m_autoScrollTimer, SIGNAL( timeout( ) ),
-            SLOT( slotAutoScroll( ) ) );
+   connect( &m_startTimer, TQT_SIGNAL( timeout( ) ),
+            TQT_SLOT( slotMouseChangeTimer( ) ) );
+   connect( &m_autoScrollTimer, TQT_SIGNAL( timeout( ) ),
+            TQT_SLOT( slotAutoScroll( ) ) );
 
-   connect( rm, SIGNAL( renderingStarted( PMGLView* ) ),
-            SLOT( slotRenderingStarted( PMGLView* ) ) );
-   connect( rm, SIGNAL( aboutToUpdate( PMGLView* ) ),
-            SLOT( slotAboutToUpdate( PMGLView* ) ) );
-   connect( rm, SIGNAL( renderingFinished( PMGLView* ) ),
-            SLOT( slotRenderingFinished( PMGLView* ) ) );
-   connect( rm, SIGNAL( renderingSettingsChanged( ) ),
-            SLOT( slotRefresh( ) ) );
+   connect( rm, TQT_SIGNAL( renderingStarted( PMGLView* ) ),
+            TQT_SLOT( slotRenderingStarted( PMGLView* ) ) );
+   connect( rm, TQT_SIGNAL( aboutToUpdate( PMGLView* ) ),
+            TQT_SLOT( slotAboutToUpdate( PMGLView* ) ) );
+   connect( rm, TQT_SIGNAL( renderingFinished( PMGLView* ) ),
+            TQT_SLOT( slotRenderingFinished( PMGLView* ) ) );
+   connect( rm, TQT_SIGNAL( renderingSettingsChanged( ) ),
+            TQT_SLOT( slotRefresh( ) ) );
 
-   connect( this, SIGNAL( controlPointMessage( const QString& ) ),
-            m_pPart, SIGNAL( controlPointMessage( const QString& ) ) );
+   connect( this, TQT_SIGNAL( controlPointMessage( const TQString& ) ),
+            m_pPart, TQT_SIGNAL( controlPointMessage( const TQString& ) ) );
 
    updateControlPoints( );
 }
@@ -206,10 +206,10 @@ void PMGLView::initializeGL( )
             // check if we can use the global colormap
             // should be the default ?
             if( vi->visualid ==
-                XVisualIDFromVisual( ( Visual* ) QPaintDevice::x11AppVisual( ) ) )
+                XVisualIDFromVisual( ( Visual* ) TQPaintDevice::x11AppVisual( ) ) )
             {
                kdDebug( PMArea ) << "PMGLView: Default colormap used\n";
-               s_pSharedData->m_colormap = QPaintDevice::x11AppColormap();
+               s_pSharedData->m_colormap = TQPaintDevice::x11AppColormap();
                s_pSharedData->m_colormapAllocated = false;
             }
 
@@ -312,7 +312,7 @@ void PMGLView::initializeGL( )
 
       Window p;
       p = RootWindow( display, vi->screen );
-      QWidget* pw = parentWidget( );
+      TQWidget* pw = parentWidget( );
       if( pw )
          p = pw->winId( );
 
@@ -365,8 +365,8 @@ void PMGLView::initializeGL( )
    }
    else
    {
-      QVBoxLayout* topLayout = new QVBoxLayout( this );
-      QLabel* label = new QLabel( i18n( "No OpenGL support" ), this );
+      TQVBoxLayout* topLayout = new TQVBoxLayout( this );
+      TQLabel* label = new TQLabel( i18n( "No OpenGL support" ), this );
       label->setAlignment( Qt::AlignCenter );
       topLayout->addWidget( label );
    }
@@ -424,12 +424,12 @@ void PMGLView::setTranslationY( double d )
    invalidateProjection( );
 }
 
-void PMGLView::resizeEvent( QResizeEvent* )
+void PMGLView::resizeEvent( TQResizeEvent* )
 {
    invalidateProjection( );
 }
 
-void PMGLView::paintEvent( QPaintEvent* )
+void PMGLView::paintEvent( TQPaintEvent* )
 {
    repaint( );
 }
@@ -503,7 +503,7 @@ void PMGLView::enableScaleMode( bool yes )
    }
 }
 
-void PMGLView::mousePressEvent( QMouseEvent* e )
+void PMGLView::mousePressEvent( TQMouseEvent* e )
 {
    if( m_bScaleMode || m_bTranslateMode )
    {
@@ -550,7 +550,7 @@ void PMGLView::mousePressEvent( QMouseEvent* e )
                m_bGraphicalChangeMode = true;
                m_bMementoCreated = false;
                m_changeStartPos = e->pos( );
-               m_changeStartTime = QTime::currentTime( );
+               m_changeStartTime = TQTime::currentTime( );
                m_currentMousePos = m_changeStartPos;
                m_startTimer.start( c_mouseChangeDelayMs, true );
             }
@@ -606,7 +606,7 @@ void PMGLView::mousePressEvent( QMouseEvent* e )
    }
 }
 
-void PMGLView::mouseReleaseEvent( QMouseEvent* e )
+void PMGLView::mouseReleaseEvent( TQMouseEvent* e )
 {
    m_bMousePressed = false;
    if( m_bGraphicalChangeMode )
@@ -640,7 +640,7 @@ void PMGLView::mouseReleaseEvent( QMouseEvent* e )
       {
          int sx, sy, ex, ey, w, h;
          double isx, isy, iex, iey;
-         QPtrListIterator<PMVector> pit( m_controlPointsPosition );
+         TQPtrListIterator<PMVector> pit( m_controlPointsPosition );
          PMControlPointListIterator cit( m_controlPoints );
          PMVector p;
 
@@ -677,14 +677,14 @@ void PMGLView::mouseReleaseEvent( QMouseEvent* e )
       m_autoScrollTimer.stop( );
    }
 
-   if( e->button( ) & QEvent::MidButton )
+   if( e->button( ) & TQEvent::MidButton )
       m_bMidMousePressed = false;
 
    m_bSelectUnderMouse = false;
    m_bDeselectUnderMouse = false;
 }
 
-void PMGLView::mouseMoveEvent( QMouseEvent* e )
+void PMGLView::mouseMoveEvent( TQMouseEvent* e )
 {
    if( m_bMousePressed )
    {
@@ -722,8 +722,8 @@ void PMGLView::mouseMoveEvent( QMouseEvent* e )
       m_currentMousePos = e->pos( );
       if( !m_bMementoCreated )
       {
-         QPoint movement = e->pos( ) - m_changeStartPos;
-         if( ( m_changeStartTime.msecsTo( QTime::currentTime( ) ) > c_mouseChangeDelayMs )
+         TQPoint movement = e->pos( ) - m_changeStartPos;
+         if( ( m_changeStartTime.msecsTo( TQTime::currentTime( ) ) > c_mouseChangeDelayMs )
             || ( movement.manhattanLength( ) > c_mouseChangeDelayPixel ) )
          {
             m_startTimer.stop( );
@@ -780,7 +780,7 @@ void PMGLView::mouseMoveEvent( QMouseEvent* e )
 
       if( m_bAutoScroll && !as )
       {
-         m_lastAutoScrollUpdate = QTime::currentTime( );
+         m_lastAutoScrollUpdate = TQTime::currentTime( );
          m_autoScrollTimer.start( c_minAutoScrollUpdateTime, true );
       }
       if( !m_bAutoScroll && as )
@@ -788,7 +788,7 @@ void PMGLView::mouseMoveEvent( QMouseEvent* e )
    }
 }
 
-void PMGLView::wheelEvent( QWheelEvent* e )
+void PMGLView::wheelEvent( TQWheelEvent* e )
 {
    if( m_type != PMViewCamera )
    {
@@ -803,7 +803,7 @@ void PMGLView::wheelEvent( QWheelEvent* e )
    }
 }
 
-void PMGLView::keyPressEvent( QKeyEvent* e )
+void PMGLView::keyPressEvent( TQKeyEvent* e )
 {
    bool accept = true;
 
@@ -867,7 +867,7 @@ void PMGLView::slotAutoScroll( )
 {
    if( m_bAutoScroll )
    {
-      QTime now = QTime::currentTime( );
+      TQTime now = TQTime::currentTime( );
       int msecs = m_lastAutoScrollUpdate.msecsTo( now );
       int pixels = ( int ) ( m_autoScrollSpeed * msecs / 1000.0 );
 
@@ -890,7 +890,7 @@ void PMGLView::slotAutoScroll( )
    if( m_bGraphicalChangeMode )
       if( m_bMultipleSelectionMode )
       {
-         m_selectionStart += QPoint( pixels * m_autoScrollDirectionX,
+         m_selectionStart += TQPoint( pixels * m_autoScrollDirectionX,
                                      pixels * m_autoScrollDirectionY );
 
          saveSelectionBox( );
@@ -898,7 +898,7 @@ void PMGLView::slotAutoScroll( )
       }
 
       if( m_bGraphicalChangeMode )
-         graphicalChange( mapFromGlobal( QCursor::pos( ) ) );
+         graphicalChange( mapFromGlobal( TQCursor::pos( ) ) );
       else
          repaint( );
 
@@ -918,7 +918,7 @@ void PMGLView::slotMouseChangeTimer( )
    }
 }
 
-void PMGLView::startChange( const QPoint& mousePos )
+void PMGLView::startChange( const TQPoint& mousePos )
 {
    m_pActiveObject->createMemento( );
    m_bMementoCreated = true;
@@ -937,7 +937,7 @@ void PMGLView::startChange( const QPoint& mousePos )
       m_pUnderMouse->startChange( p, m_normal );
 }
 
-void PMGLView::graphicalChange( const QPoint& mousePos )
+void PMGLView::graphicalChange( const TQPoint& mousePos )
 {
    PMVector p = mousePosition( m_pUnderMouse, mousePos.x( ), mousePos.y( ) );
    p.transform( m_inversePointsTransformation );
@@ -1145,7 +1145,7 @@ void PMGLView::slotStopRendering( )
 }
 
 void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
-                                  QObject* sender )
+                                  TQObject* sender )
 {
    bool redraw = false;
 
@@ -1414,7 +1414,7 @@ void PMGLView::paintSelectionBox( )
    {
       int sx, sy, ex, ey, w, h;
       calculateSelectionBox( sx, sy, ex, ey, w, h );
-      QPainter p;
+      TQPainter p;
       p.begin( this );
       p.setPen( PMRenderManager::theManager( )->controlPointColor( 1 ) );
       p.drawRect( sx, sy, w, h );
@@ -1484,7 +1484,7 @@ void PMGLView::slotRenderingFinished( PMGLView* view )
 
       if( m_bAutoScroll )
       {
-         QTime now = QTime::currentTime( );
+         TQTime now = TQTime::currentTime( );
          int msecs = m_lastAutoScrollUpdate.msecsTo( now );
 
          if( msecs < c_minAutoScrollUpdateTime )
@@ -1495,9 +1495,9 @@ void PMGLView::slotRenderingFinished( PMGLView* view )
    }
 }
 
-QString PMGLView::viewTypeAsString( PMViewType t )
+TQString PMGLView::viewTypeAsString( PMViewType t )
 {
-   QString str;
+   TQString str;
 
    switch( t )
    {
@@ -1536,17 +1536,17 @@ void PMGLView::restoreConfig( KConfig* /*cfg*/ )
 
 void PMGLView::contextMenu( )
 {
-   QPopupMenu* m = new QPopupMenu( );
-   m->insertItem( i18n( "Left View" ), this, SLOT( slotSetTypePosX( ) ) );
-   m->insertItem( i18n( "Right View" ), this, SLOT( slotSetTypeNegX( ) ) );
-   m->insertItem( i18n( "Top View" ), this, SLOT( slotSetTypeNegY( ) ) );
-   m->insertItem( i18n( "Bottom View" ), this, SLOT( slotSetTypePosY( ) ) );
-   m->insertItem( i18n( "Front View" ), this, SLOT( slotSetTypePosZ( ) ) );
-   m->insertItem( i18n( "Back View" ), this, SLOT( slotSetTypeNegZ( ) ) );
+   TQPopupMenu* m = new TQPopupMenu( );
+   m->insertItem( i18n( "Left View" ), this, TQT_SLOT( slotSetTypePosX( ) ) );
+   m->insertItem( i18n( "Right View" ), this, TQT_SLOT( slotSetTypeNegX( ) ) );
+   m->insertItem( i18n( "Top View" ), this, TQT_SLOT( slotSetTypeNegY( ) ) );
+   m->insertItem( i18n( "Bottom View" ), this, TQT_SLOT( slotSetTypePosY( ) ) );
+   m->insertItem( i18n( "Front View" ), this, TQT_SLOT( slotSetTypePosZ( ) ) );
+   m->insertItem( i18n( "Back View" ), this, TQT_SLOT( slotSetTypeNegZ( ) ) );
 
-   QPopupMenu* cm = new QPopupMenu( m );
-   QPtrListIterator<PMCamera> it = m_pPart->cameras( );
-   QString name;
+   TQPopupMenu* cm = new TQPopupMenu( m );
+   TQPtrListIterator<PMCamera> it = m_pPart->cameras( );
+   TQString name;
    if( !it.current( ) )
       cm->insertItem( i18n( "No Cameras" ) );
    else
@@ -1560,13 +1560,13 @@ void PMGLView::contextMenu( )
          cm->insertItem( name, cnr );
       }
    }
-   connect( cm, SIGNAL( activated( int ) ), SLOT( slotCameraView( int ) ) );
+   connect( cm, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotCameraView( int ) ) );
 
    m->insertItem( SmallIconSet( "pmcamera" ), i18n( "Camera" ), cm );
 
    m->insertSeparator( );
 
-   m->insertItem( i18n( "Snap to Grid" ), this, SLOT( slotSnapToGrid( ) ) );
+   m->insertItem( i18n( "Snap to Grid" ), this, TQT_SLOT( slotSnapToGrid( ) ) );
    m_objectActions.clear( );
    if( m_pActiveObject )
    {
@@ -1574,7 +1574,7 @@ void PMGLView::contextMenu( )
       if( !m_objectActions.isEmpty( ) )
       {
          PMObjectAction* oa = 0;
-         QPtrListIterator<PMObjectAction> ait( m_objectActions );
+         TQPtrListIterator<PMObjectAction> ait( m_objectActions );
 
          for( ; ait.current( ); ++ait )
          {
@@ -1583,11 +1583,11 @@ void PMGLView::contextMenu( )
          }
       }
    }
-   connect( m, SIGNAL( activated( int ) ), SLOT( slotObjectAction( int ) ) );
+   connect( m, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotObjectAction( int ) ) );
 
    m->insertSeparator( );
 
-   QPopupMenu* menu = new QPopupMenu( m );
+   TQPopupMenu* menu = new TQPopupMenu( m );
    PMControlPointListIterator pit( m_controlPoints );
 
    if( !pit.current( ) )
@@ -1598,18 +1598,18 @@ void PMGLView::contextMenu( )
       for( ; pit.current( ); ++pit, ++cnr )
          menu->insertItem( pit.current( )->description( ), cnr );
    }
-   connect( menu, SIGNAL( activated( int ) ), SLOT( slotControlPoint( int ) ) );
+   connect( menu, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotControlPoint( int ) ) );
 
    m->insertItem( i18n( "Control Points" ), menu );
 
-   m->exec( QCursor::pos( ) );
+   m->exec( TQCursor::pos( ) );
    delete m;
 }
 
 void PMGLView::slotCameraView( int id )
 {
    int i;
-   QPtrListIterator<PMCamera> it = m_pPart->cameras( );
+   TQPtrListIterator<PMCamera> it = m_pPart->cameras( );
 
    for( i = 0; i < id; i++ )
       ++it;
@@ -1622,7 +1622,7 @@ void PMGLView::slotCameraView( int id )
 
 void PMGLView::slotObjectAction( int id )
 {
-   QPtrListIterator<PMObjectAction> it( m_objectActions );
+   TQPtrListIterator<PMObjectAction> it( m_objectActions );
    PMObjectAction* oa = 0;
 
    for( ; it.current( ) && !oa; ++it )
@@ -1677,7 +1677,7 @@ void PMGLView::slotSnapToGrid( )
    }
 }
 
-QString PMGLView::description( ) const
+TQString PMGLView::description( ) const
 {
    return viewTypeAsString( m_type );
 }
@@ -1700,9 +1700,9 @@ void PMGLView::saveViewConfig( PMViewOptions* vo ) const
    }
 }
 
-void PMGLViewOptions::loadData( QDomElement& e )
+void PMGLViewOptions::loadData( TQDomElement& e )
 {
-   QString s = e.attribute( "type", "Camera" );
+   TQString s = e.attribute( "type", "Camera" );
    if( s == "Camera" ) m_glViewType = PMGLView::PMViewCamera;
    else if( s == "X" ) m_glViewType = PMGLView::PMViewPosX;
    else if( s == "Y" ) m_glViewType = PMGLView::PMViewPosY;
@@ -1712,7 +1712,7 @@ void PMGLViewOptions::loadData( QDomElement& e )
    else if( s == "NegZ" ) m_glViewType = PMGLView::PMViewNegZ;
 }
 
-void PMGLViewOptions::saveData( QDomElement& e )
+void PMGLViewOptions::saveData( TQDomElement& e )
 {
    switch( m_glViewType )
    {
@@ -1744,12 +1744,12 @@ void PMGLViewOptions::saveData( QDomElement& e )
    }
 }
 
-QString PMGLViewFactory::description( ) const
+TQString PMGLViewFactory::description( ) const
 {
    return i18n( "3D View" );
 }
 
-QString PMGLViewFactory::description( PMViewOptions* vo ) const
+TQString PMGLViewFactory::description( PMViewOptions* vo ) const
 {
    if( vo && vo->viewType( ) == "glview" )
    {
@@ -1760,7 +1760,7 @@ QString PMGLViewFactory::description( PMViewOptions* vo ) const
    return description( );
 }
 
-PMViewOptionsWidget* PMGLViewFactory::newOptionsWidget( QWidget* parent,
+PMViewOptionsWidget* PMGLViewFactory::newOptionsWidget( TQWidget* parent,
                                                         PMViewOptions* o )
 {
    return new PMGLViewOptionsWidget( parent, o );
@@ -1772,17 +1772,17 @@ PMViewOptions* PMGLViewFactory::newOptionsInstance( ) const
    return o;
 }
 
-PMGLViewOptionsWidget::PMGLViewOptionsWidget( QWidget* parent,
+PMGLViewOptionsWidget::PMGLViewOptionsWidget( TQWidget* parent,
                                               PMViewOptions* o )
       : PMViewOptionsWidget( parent )
 {
    m_pOptions = ( PMGLViewOptions* ) o;
 
-   QHBoxLayout* hl = new QHBoxLayout( this, 0, KDialog::spacingHint( ) );
-   QLabel* l = new QLabel( i18n( "3D view type:" ), this );
+   TQHBoxLayout* hl = new TQHBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQLabel* l = new TQLabel( i18n( "3D view type:" ), this );
    hl->addWidget( l );
 
-   m_pGLViewType = new QComboBox( false, this );
+   m_pGLViewType = new TQComboBox( false, this );
    m_pGLViewType->insertItem( i18n( "Top" ) );
    m_pGLViewType->insertItem( i18n( "Bottom" ) );
    m_pGLViewType->insertItem( i18n( "Left" ) );
@@ -1816,8 +1816,8 @@ PMGLViewOptionsWidget::PMGLViewOptionsWidget( QWidget* parent,
          break;
    }
 
-   connect( m_pGLViewType, SIGNAL( activated( int ) ),
-            SLOT( slotGLViewTypeChanged( int ) ) );
+   connect( m_pGLViewType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotGLViewTypeChanged( int ) ) );
    hl->addWidget( m_pGLViewType );
 }
 

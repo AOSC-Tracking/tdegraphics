@@ -18,19 +18,19 @@
 #ifndef IMAGESELECTION_H
 #define IMAGESELECTION_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 #include "color.h"
 
 /** This is a widget for selecting colors from an image
   * @author Artur Rataj
   */
-class ImageSelection : public QWidget  {
+class ImageSelection : public TQWidget  {
    Q_OBJECT
 
 public:
 	/** constructs the widget */
-	ImageSelection(QWidget *parent=0, const char *name=0);
+	ImageSelection(TQWidget *parent=0, const char *name=0);
 	~ImageSelection();
 	
 signals:

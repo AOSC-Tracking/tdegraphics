@@ -26,15 +26,15 @@
 #include <kcmodule.h>
 #include <gphoto2.h>
 
-class QWidget;
-class QRadioButton;
-class QPushButton;
-class QComboBox;
-class QVButtonGroup;
-class QLineEdit;
-class QWidgetStack;
-class QCheckBox;
-class QIconViewItem;
+class TQWidget;
+class TQRadioButton;
+class TQPushButton;
+class TQComboBox;
+class TQVButtonGroup;
+class TQLineEdit;
+class TQWidgetStack;
+class TQCheckBox;
+class TQIconViewItem;
 
 class KCamera;
 class KameraDeviceSelectDialog;
@@ -50,7 +50,7 @@ class KKameraConfig : public KCModule
 	friend class KameraDeviceSelectDialog;
 
 public:
-	KKameraConfig(QWidget *parent, const char *name, const QStringList &);
+	KKameraConfig(TQWidget *parent, const char *name, const TQStringList &);
 	virtual ~KKameraConfig();
 
 	// KCModule interface methods
@@ -59,22 +59,22 @@ public:
 	void save();
 	void defaults();
 	int buttons();
-	QString quickHelp() const;
+	TQString quickHelp() const;
 
 protected:
-	QString suggestName(const QString &name);
+	TQString suggestName(const TQString &name);
 
 protected slots:
-	void slot_deviceMenu(QIconViewItem *item, const QPoint &point);
-	void slot_deviceSelected(QIconViewItem *item);
+	void slot_deviceMenu(TQIconViewItem *item, const TQPoint &point);
+	void slot_deviceSelected(TQIconViewItem *item);
 	void slot_addCamera();
 	void slot_removeCamera();
 	void slot_configureCamera();
 	void slot_cameraSummary();
 	void slot_testCamera();
 	void slot_cancelOperation();
-	void slot_error(const QString &message);
-	void slot_error(const QString &message, const QString &details);
+	void slot_error(const TQString &message);
+	void slot_error(const TQString &message, const TQString &details);
 
 private:
 	void displayGPFailureDialogue(void);
@@ -89,7 +89,7 @@ private:
 	static GPContextFeedback cbGPCancel(GPContext *context, void *data);
 
 private:
-	typedef QMap<QString, KCamera *> CameraDevicesMap;
+	typedef TQMap<TQString, KCamera *> CameraDevicesMap;
 	
 	KSimpleConfig *m_config;
 	CameraDevicesMap m_devices;
@@ -101,7 +101,7 @@ private:
 	// widgets for the cameras listview
 	KIconView *m_deviceSel;
 	KActionCollection *m_actions;
-	QPushButton *m_addCamera, *m_removeCamera, *m_testCamera, *m_configureCamera;
+	TQPushButton *m_addCamera, *m_removeCamera, *m_testCamera, *m_configureCamera;
 	KToolBar *m_toolbar;
 	KPopupMenu *m_devicePopup;
 

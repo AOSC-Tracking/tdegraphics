@@ -31,10 +31,10 @@
 
 #include <kptoolfloodfill.h>
 
-#include <qapplication.h>
-#include <qcursor.h>
-#include <qpainter.h>
-#include <qpixmap.h>
+#include <tqapplication.h>
+#include <tqcursor.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -63,7 +63,7 @@ kpToolFloodFill::~kpToolFloodFill ()
 {
 }
 
-QString kpToolFloodFill::haventBegunDrawUserMessage () const
+TQString kpToolFloodFill::haventBegunDrawUserMessage () const
 {
     return i18n ("Click to fill a region.");
 }
@@ -80,7 +80,7 @@ void kpToolFloodFill::beginDraw ()
     kdDebug () << "kpToolFloodFill::beginDraw()" << endl;
 #endif
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     // Flood Fill is an expensive CPU operation so we only fill at a
     // mouse click (beginDraw ()), not on mouse move (virtually draw())
@@ -112,13 +112,13 @@ void kpToolFloodFill::beginDraw ()
         kdError () << "kpToolFloodFill::beginDraw() could not prepareColorToChange!" << endl;
     }
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 
     setUserMessage (cancelUserMessage ());
 }
 
 // virtual
-void kpToolFloodFill::draw (const QPoint &thisPoint, const QPoint &, const QRect &)
+void kpToolFloodFill::draw (const TQPoint &thisPoint, const TQPoint &, const TQRect &)
 {
     setUserShapePoints (thisPoint);
 }
@@ -127,7 +127,7 @@ void kpToolFloodFill::draw (const QPoint &thisPoint, const QPoint &, const QRect
 void kpToolFloodFill::cancelShape ()
 {
 #if 0
-    endDraw (QPoint (), QRect ());
+    endDraw (TQPoint (), TQRect ());
     mainWindow ()->commandHistory ()->undo ();
 #else
     m_currentCommand->unexecute ();
@@ -145,7 +145,7 @@ void kpToolFloodFill::releasedAllButtons ()
 }
 
 // virtual
-void kpToolFloodFill::endDraw (const QPoint &, const QRect &)
+void kpToolFloodFill::endDraw (const TQPoint &, const TQRect &)
 {
     mainWindow ()->commandHistory ()->addCommand (m_currentCommand,
         false /* no exec - we already did it up there */);
@@ -175,7 +175,7 @@ kpToolFloodFillCommand::~kpToolFloodFillCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolFloodFillCommand::name () const
+TQString kpToolFloodFillCommand::name () const
 {
     return i18n ("Flood Fill");
 }
@@ -211,17 +211,17 @@ void kpToolFloodFillCommand::execute ()
     }
     else
     {
-        QRect rect = kpFloodFill::boundingRect ();
+        TQRect rect = kpFloodFill::boundingRect ();
         if (rect.isValid ())
         {
-            QApplication::setOverrideCursor (QCursor::waitCursor);
+            TQApplication::setOverrideCursor (TQCursor::waitCursor);
 
             m_oldPixmap = doc->getPixmapAt (rect);
 
             kpFloodFill::fill ();
             doc->slotContentsChanged (rect);
 
-            QApplication::restoreOverrideCursor ();
+            TQApplication::restoreOverrideCursor ();
         }
         else
         {
@@ -246,7 +246,7 @@ void kpToolFloodFillCommand::unexecute ()
     }
     else
     {
-        QRect rect = kpFloodFill::boundingRect ();
+        TQRect rect = kpFloodFill::boundingRect ();
         if (rect.isValid ())
         {
             doc->setPixmapAt (m_oldPixmap, rect.topLeft ());

@@ -28,17 +28,17 @@ PMSplineMemento::~PMSplineMemento( )
 {
 }
 
-void PMSplineMemento::setSplinePoints( const QValueList<PMVector>& v )
+void PMSplineMemento::setSplinePoints( const TQValueList<PMVector>& v )
 {
    if( !m_bSplinePointsSaved )
    {
       // Direct assignment does not work with Qt 2.3.x
       // The list will be changed later in a graphical
-      // change because QValueList::detach( ) is called
+      // change because TQValueList::detach( ) is called
       // too late!
       // Copy the list by hand.
 
-      QValueList<PMVector>::ConstIterator it = v.begin( );
+      TQValueList<PMVector>::ConstIterator it = v.begin( );
       for( ; it != v.end( ); ++it )
          m_splinePoints.append( *it );
 
@@ -47,7 +47,7 @@ void PMSplineMemento::setSplinePoints( const QValueList<PMVector>& v )
    }
 }
 
-QValueList<PMVector> PMSplineMemento::splinePoints( ) const
+TQValueList<PMVector> PMSplineMemento::splinePoints( ) const
 {
    if( !m_bSplinePointsSaved )
       kdError( PMArea ) << "Spline points not saved in PMSplineMemento::splinePoints\n";

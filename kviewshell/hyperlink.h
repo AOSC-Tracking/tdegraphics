@@ -9,8 +9,8 @@
 #ifndef _hyperlink_h_
 #define _hyperlink_h_
 
-#include <qrect.h>
-#include <qstring.h>
+#include <tqrect.h>
+#include <tqstring.h>
 
 
 /** Represents a named, rectangular region in a rendered documentPage
@@ -39,7 +39,7 @@ public:
   @param re value for the box
   @param lT valus for the text field
   */
-  Hyperlink(Q_UINT32 bl, const QRect& re, const QString& lT): baseline(bl), box(re), linkText(lT) {}
+  Hyperlink(Q_UINT32 bl, const TQRect& re, const TQString& lT): baseline(bl), box(re), linkText(lT) {}
 
   /** \brief Base line of a hyperlink
 
@@ -62,7 +62,7 @@ public:
   documentRenderer.drawPage() method. The box is used to determine if
   the mouse pointer hovers over the link.
   */
-  QRect    box;
+  TQRect    box;
 
   /** \brief Name of the region
 
@@ -70,7 +70,7 @@ public:
   e.g. "http://www.kde.org". If the Hyperlink class is used to
   represent text, then the text is stored here.
   */
-  QString  linkText;
+  TQString  linkText;
 };
 
 

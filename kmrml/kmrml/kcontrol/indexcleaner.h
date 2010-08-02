@@ -8,8 +8,8 @@
 #ifndef INDEXCLEANER_H
 #define INDEXCLEANER_H
 
-#include <qobject.h>
-#include <qstringlist.h>
+#include <tqobject.h>
+#include <tqstringlist.h>
 
 class KProcess;
 
@@ -25,8 +25,8 @@ namespace KMrmlConfig
         Q_OBJECT
 
     public:
-        IndexCleaner( const QStringList& dirs, const KMrml::Config *config,
-                      QObject *parent = 0, const char *name = 0 );
+        IndexCleaner( const TQStringList& dirs, const KMrml::Config *config,
+                      TQObject *parent = 0, const char *name = 0 );
         ~IndexCleaner();
 
         void start();
@@ -42,7 +42,7 @@ namespace KMrmlConfig
         int m_stepSize;
         void startNext();
 
-        QStringList m_dirs;
+        TQStringList m_dirs;
         const KMrml::Config *m_config;
         KProcess *m_process;
     };

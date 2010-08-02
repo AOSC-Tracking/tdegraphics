@@ -29,17 +29,17 @@ PMPaletteValueMemento::~PMPaletteValueMemento( )
 {
 }
 
-void PMPaletteValueMemento::setFilterPaletteValues( const QValueList<PMPaletteValue>& v )
+void PMPaletteValueMemento::setFilterPaletteValues( const TQValueList<PMPaletteValue>& v )
 {
    if( !m_bFilterPaletteValuesSaved )
    {
       // Direct assignment does not work with Qt 2.3.x
       // The list will be changed later in a graphical
-      // change because QValueList::detach( ) is called
+      // change because TQValueList::detach( ) is called
       // too late!
       // Copy the list by hand.
 
-      QValueList<PMPaletteValue>::ConstIterator it = v.begin( );
+      TQValueList<PMPaletteValue>::ConstIterator it = v.begin( );
       for( ; it != v.end( ); ++it )
          m_filterPaletteValues.append( *it );
 
@@ -48,7 +48,7 @@ void PMPaletteValueMemento::setFilterPaletteValues( const QValueList<PMPaletteVa
    }
 }
 
-QValueList<PMPaletteValue> PMPaletteValueMemento::filterPaletteValues( ) const
+TQValueList<PMPaletteValue> PMPaletteValueMemento::filterPaletteValues( ) const
 {
    if( !m_bFilterPaletteValuesSaved )
       kdError( PMArea ) << "Filter palette values not saved in PMPaletteValueMemento::filterPaletteValues\n";
@@ -56,17 +56,17 @@ QValueList<PMPaletteValue> PMPaletteValueMemento::filterPaletteValues( ) const
    return m_filterPaletteValues;
 }
 
-void PMPaletteValueMemento::setTransmitPaletteValues( const QValueList<PMPaletteValue>& v )
+void PMPaletteValueMemento::setTransmitPaletteValues( const TQValueList<PMPaletteValue>& v )
 {
    if( !m_bTransmitPaletteValuesSaved )
    {
       // Direct assignment does not work with Qt 2.3.x
       // The list will be changed later in a graphical
-      // change because QValueList::detach( ) is called
+      // change because TQValueList::detach( ) is called
       // too late!
       // Copy the list by hand.
 
-      QValueList<PMPaletteValue>::ConstIterator it = v.begin( );
+      TQValueList<PMPaletteValue>::ConstIterator it = v.begin( );
       for( ; it != v.end( ); ++it )
          m_transmitPaletteValues.append( *it );
 
@@ -75,7 +75,7 @@ void PMPaletteValueMemento::setTransmitPaletteValues( const QValueList<PMPalette
    }
 }
 
-QValueList<PMPaletteValue> PMPaletteValueMemento::transmitPaletteValues( ) const
+TQValueList<PMPaletteValue> PMPaletteValueMemento::transmitPaletteValues( ) const
 {
    if( !m_bTransmitPaletteValuesSaved )
       kdError( PMArea ) << "Transmit palette values not saved in PMPaletteValueMemento::transmitPaletteValues\n";

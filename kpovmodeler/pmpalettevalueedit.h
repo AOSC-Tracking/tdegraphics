@@ -37,7 +37,7 @@ class PMPaletteValueEdit: public QWidget
    Q_OBJECT
 public:
    /** */
-   PMPaletteValueEdit( QWidget* parent, const char* name = 0 );
+   PMPaletteValueEdit( TQWidget* parent, const char* name = 0 );
    /** */
    void setIndex( int idx );
    /** */

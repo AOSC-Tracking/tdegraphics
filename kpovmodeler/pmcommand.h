@@ -24,8 +24,8 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 #include "pmmessage.h"
 #include "pmerrorflags.h"
@@ -93,7 +93,7 @@ public:
    /**
     * Creates a command with command text text
     */
-   PMCommand( const QString &text )
+   PMCommand( const TQString &text )
    { m_text = text; }
    /**
     * Deletes the command.
@@ -103,11 +103,11 @@ public:
    /**
     * Command text shown in the undo/redo menues
     */
-   QString text( ) const { return m_text; }
+   TQString text( ) const { return m_text; }
    /**
     * Sets the command text
     */
-   void setText( const QString& s ) { m_text = s; }
+   void setText( const TQString& s ) { m_text = s; }
 
    /**
     * Checks if the command is valid and sets the error message
@@ -138,9 +138,9 @@ private:
    /**
     * The command text.
     */
-   QString m_text;
+   TQString m_text;
 };
 
-typedef QPtrList<PMCommand> PMCommandList;
+typedef TQPtrList<PMCommand> PMCommandList;
 
 #endif

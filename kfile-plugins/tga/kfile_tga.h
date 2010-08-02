@@ -22,14 +22,14 @@
 
 #include <kfilemetainfo.h>
 
-class QStringList;
+class TQStringList;
 
 class KTgaPlugin: public KFilePlugin
 {
     Q_OBJECT
     
 public:
-    KTgaPlugin( QObject *parent, const char *name, const QStringList& args );
+    KTgaPlugin( TQObject *parent, const char *name, const TQStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

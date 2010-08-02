@@ -27,7 +27,7 @@ typedef KGenericFactory<KPdfPlugin> PdfFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pdf, PdfFactory("kfile_pdf"))
 
-KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &preferredItems)
+KPdfPlugin::KPdfPlugin(TQObject *parent, const char *name, const TQStringList &preferredItems)
     : KFilePlugin(parent, name, preferredItems)
 {
     kdDebug(7034) << "pdf plugin\n";
@@ -40,21 +40,21 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Title", i18n("Title"), QVariant::String);
+    item = addItemInfo(group, "Title", i18n("Title"), TQVariant::String);
     setHint(item, KFileMimeTypeInfo::Name);
-    item = addItemInfo(group, "Subject", i18n("Subject"), QVariant::String);
+    item = addItemInfo(group, "Subject", i18n("Subject"), TQVariant::String);
     setHint(item, KFileMimeTypeInfo::Description);
-    item = addItemInfo(group, "Author", i18n("Author"), QVariant::String);
+    item = addItemInfo(group, "Author", i18n("Author"), TQVariant::String);
     setHint(item, KFileMimeTypeInfo::Author);
-    addItemInfo(group, "Keywords", i18n("Key Words"), QVariant::String);
-    addItemInfo(group, "Creator", i18n("Creator"), QVariant::String);
-    addItemInfo(group, "Producer", i18n("Producer"), QVariant::String);
-    addItemInfo(group, "CreationDate", i18n("Creation Date"), QVariant::DateTime);
-    addItemInfo(group, "ModificationDate", i18n("Modified"), QVariant::DateTime);
-    addItemInfo(group, "Pages", i18n("Pages"), QVariant::Int);
-    addItemInfo(group, "Protected", i18n("Protected"), QVariant::String);
-    addItemInfo(group, "Linearized", i18n("Linearized"), QVariant::String);
-    addItemInfo(group, "Version", i18n("Version"), QVariant::String);
+    addItemInfo(group, "Keywords", i18n("Key Words"), TQVariant::String);
+    addItemInfo(group, "Creator", i18n("Creator"), TQVariant::String);
+    addItemInfo(group, "Producer", i18n("Producer"), TQVariant::String);
+    addItemInfo(group, "CreationDate", i18n("Creation Date"), TQVariant::DateTime);
+    addItemInfo(group, "ModificationDate", i18n("Modified"), TQVariant::DateTime);
+    addItemInfo(group, "Pages", i18n("Pages"), TQVariant::Int);
+    addItemInfo(group, "Protected", i18n("Protected"), TQVariant::String);
+    addItemInfo(group, "Linearized", i18n("Linearized"), TQVariant::String);
+    addItemInfo(group, "Version", i18n("Version"), TQVariant::String);
 }
 
 bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
@@ -79,7 +79,7 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     appendItem(generalGroup, "ModificationDate", doc->getDate("ModDate") );
     appendItem(generalGroup, "Pages", doc->getNumPages() );
     
-    QString enc;
+    TQString enc;
     if (doc->isEncrypted())
     {
     	enc = i18n("Yes (Can Print:%1 Can Copy:%2 Can Change:%3 Can Add notes:%4)")
@@ -92,7 +92,7 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     
     appendItem(generalGroup, "Protected", enc );
     appendItem(generalGroup, "Linearized", doc->isLinearized() ? i18n("Yes") : i18n("No") );
-    QString versionString = QString("%1").arg( doc->getPDFVersion(), 0, 'f', 1 );
+    TQString versionString = TQString("%1").arg( doc->getPDFVersion(), 0, 'f', 1 );
     appendItem(generalGroup, "Version", versionString );
 
     delete doc;

@@ -20,8 +20,8 @@
 
 #include <unistd.h>
 
-#include <qstring.h>
-#include <qdir.h>
+#include <tqstring.h>
+#include <tqdir.h>
 
 #include <kurl.h>
 #include <kio/job.h>
@@ -50,14 +50,14 @@ const char* PMLibraryIconDrag::format( int i ) const
    }
 }
 
-QByteArray PMLibraryIconDrag::encodedData( const char* mime ) const
+TQByteArray PMLibraryIconDrag::encodedData( const char* mime ) const
 {
-   QByteArray a;
-   if ( QString( mime ) == "application/x-qiconlist" )
-      a = QIconDrag::encodedData( mime );
-   else if ( QString( mime ) == "text/sublib-list" )
+   TQByteArray a;
+   if ( TQString( mime ) == "application/x-qiconlist" )
+      a = TQIconDrag::encodedData( mime );
+   else if ( TQString( mime ) == "text/sublib-list" )
    {
-      QString s , l;
+      TQString s , l;
       for( unsigned i = 0; i < m_paths.count( ); ++i )
       {
          if( m_subLibs[i] )
@@ -72,19 +72,19 @@ QByteArray PMLibraryIconDrag::encodedData( const char* mime ) const
    return a;
 }
 
-bool PMLibraryIconDrag::canDecode( QMimeSource* e )
+bool PMLibraryIconDrag::canDecode( TQMimeSource* e )
 {
    return e->provides( "application/x-qiconlist" ) ||
           e->provides( "text/sublib-list" );
 }
 
-bool PMLibraryIconDrag::decode( QMimeSource* e, QStringList& strList, QValueList<bool>& subLibList )
+bool PMLibraryIconDrag::decode( TQMimeSource* e, TQStringList& strList, TQValueList<bool>& subLibList )
 {
-   QByteArray a = e->encodedData( "text/sublib-list" );
+   TQByteArray a = e->encodedData( "text/sublib-list" );
    if( a.isEmpty( ) )
       return false;
 
-   QStringList list = QStringList::split( "\n", QString( a ) );
+   TQStringList list = TQStringList::split( "\n", TQString( a ) );
    for( unsigned i = 0; i < list.count( ); ++i )
    {
       strList.append( list[i].section( "\r", 0, 0 ) );
@@ -96,15 +96,15 @@ bool PMLibraryIconDrag::decode( QMimeSource* e, QStringList& strList, QValueList
    return true;
 }
 
-void PMLibraryIconDrag::append( const QIconDragItem &item, const QRect &pr,
-                               const QRect &tr, const QString &path, bool isSubLibrary )
+void PMLibraryIconDrag::append( const TQIconDragItem &item, const TQRect &pr,
+                               const TQRect &tr, const TQString &path, bool isSubLibrary )
 {
-   QIconDrag::append( item, pr, tr );
+   TQIconDrag::append( item, pr, tr );
    m_paths << path;
    m_subLibs.append( isSubLibrary );
 }
 
-PMLibraryIconView::PMLibraryIconView( QWidget* parent, const char* name )
+PMLibraryIconView::PMLibraryIconView( TQWidget* parent, const char* name )
       : KIconView( parent, name )
 {
    m_pLibrary = NULL;
@@ -131,7 +131,7 @@ void PMLibraryIconView::refresh( )
    it = m_pLibrary->createSubLibraryIterator( );
    for( ; it->current( ); ++(*it) )
    {
-      QString f_name = *( it->current( ) );
+      TQString f_name = *( it->current( ) );
       PMLibraryHandle h( f_name );
 
       new PMLibraryIconViewItem( this, h.name( ), f_name, true );
@@ -142,7 +142,7 @@ void PMLibraryIconView::refresh( )
    it = m_pLibrary->createObjectIterator( );
    for( ; it->current( ); ++(*it) )
    {
-      QString f_name = *( it->current( ) );
+      TQString f_name = *( it->current( ) );
       PMLibraryObject obj( f_name );
 
       if( obj.preview( ) )
@@ -153,20 +153,20 @@ void PMLibraryIconView::refresh( )
    delete it;
 }
 
-void PMLibraryIconView::slotDropped( QDropEvent *e, const QValueList<QIconDragItem> & )
+void PMLibraryIconView::slotDropped( TQDropEvent *e, const TQValueList<TQIconDragItem> & )
 {
    e->ignore( );
 }
 
-QDragObject* PMLibraryIconView::dragObject( )
+TQDragObject* PMLibraryIconView::dragObject( )
 {
    if ( !currentItem( ) )
       return 0;
 
-   QPoint orig = viewportToContents( viewport( )->mapFromGlobal( QCursor::pos( ) ) );
+   TQPoint orig = viewportToContents( viewport( )->mapFromGlobal( TQCursor::pos( ) ) );
    PMLibraryIconDrag *drag = new PMLibraryIconDrag( viewport( ) );
    drag->setPixmap( *currentItem( )->pixmap( ),
-                     QPoint( currentItem( )->pixmapRect( ).width( ) / 2,
+                     TQPoint( currentItem( )->pixmapRect( ).width( ) / 2,
                              currentItem( )->pixmapRect( ).height( ) / 2 ) );
 
    for ( PMLibraryIconViewItem *item = (PMLibraryIconViewItem*)firstItem( );
@@ -174,14 +174,14 @@ QDragObject* PMLibraryIconView::dragObject( )
    {
       if ( item->isSelected( ) )
       {
-         QIconDragItem id;
-         id.setData( QCString( item->path( ).latin1( ) ) );
+         TQIconDragItem id;
+         id.setData( TQCString( item->path( ).latin1( ) ) );
          drag->append( id,
-                       QRect( item->pixmapRect( FALSE ).x( ) - orig.x( ),
+                       TQRect( item->pixmapRect( FALSE ).x( ) - orig.x( ),
                               item->pixmapRect( FALSE ).y( ) - orig.y( ),
                               item->pixmapRect( ).width( ),
                               item->pixmapRect( ).height( ) ),
-                       QRect( item->textRect( FALSE ).x( ) - orig.x( ),
+                       TQRect( item->textRect( FALSE ).x( ) - orig.x( ),
                               item->textRect( FALSE ).y( ) - orig.y( ),
                               item->textRect().width( ),
                               item->textRect( ).height( ) ),
@@ -192,21 +192,21 @@ QDragObject* PMLibraryIconView::dragObject( )
    return drag;
 }
 
-PMLibraryIconViewItem::PMLibraryIconViewItem( QIconView *parent, const QString &text, const QString& path, bool isSubLibrary )
+PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *parent, const TQString &text, const TQString& path, bool isSubLibrary )
    : KIconViewItem( parent, text )
 {
    m_path = path;
    m_isSubLibrary = isSubLibrary;
 }
 
-PMLibraryIconViewItem::PMLibraryIconViewItem( QIconView *parent, const QString &text, const QImage& image, const QString& path, bool isSubLibrary )
+PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *parent, const TQString &text, const TQImage& image, const TQString& path, bool isSubLibrary )
    : KIconViewItem( parent, text, image )
 {
    m_path = path;
    m_isSubLibrary = isSubLibrary;
 }
 
-bool PMLibraryIconViewItem::acceptDrop( const QMimeSource *e ) const
+bool PMLibraryIconViewItem::acceptDrop( const TQMimeSource *e ) const
 {
    if ( m_isSubLibrary && e->provides( "text/sublib-list" ) )
       return true;
@@ -214,10 +214,10 @@ bool PMLibraryIconViewItem::acceptDrop( const QMimeSource *e ) const
    return false;
 }
 
-void PMLibraryIconViewItem::dropped( QDropEvent *e, const QValueList<QIconDragItem> & )
+void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDragItem> & )
 {
-   QStringList pathList;
-   QValueList<bool> subLibList;
+   TQStringList pathList;
+   TQValueList<bool> subLibList;
    if( m_isSubLibrary && PMLibraryIconDrag::decode( e, pathList, subLibList ) )
    {
       PMLibraryIconView* source = static_cast<PMLibraryIconView*>( e->source( )->parentWidget( ) );
@@ -232,12 +232,12 @@ void PMLibraryIconViewItem::dropped( QDropEvent *e, const QValueList<QIconDragIt
       for( unsigned i = 0; i < pathList.count( ); ++i )
       {
          bool success = true;
-         QString path = pathList[i];
+         TQString path = pathList[i];
          if( path != ( m_path +"/" + path.section( '/', -1 ) ) )
          {
             if( subLibList[i] )
             {
-               QString newpath = newPath( path, true );
+               TQString newpath = newPath( path, true );
                if( parentLib->deleteSubLibrary( path ) == PMLibraryHandle::Ok )
                {
                   PMLibraryHandle lib = PMLibraryHandle( path );
@@ -257,7 +257,7 @@ void PMLibraryIconViewItem::dropped( QDropEvent *e, const QValueList<QIconDragIt
             }
             else
             {
-               QString newpath = newPath( path, false );
+               TQString newpath = newPath( path, false );
                if( parentLib->deleteObject( path ) == PMLibraryHandle::Ok )
                {
                   PMLibraryObject obj = PMLibraryObject( path );
@@ -292,28 +292,28 @@ void PMLibraryIconViewItem::dropped( QDropEvent *e, const QValueList<QIconDragIt
    }
 }
 
-QString PMLibraryIconViewItem::newPath( const QString oldPath, bool /*subLib*/ )
+TQString PMLibraryIconViewItem::newPath( const TQString oldPath, bool /*subLib*/ )
 {
    /// @todo Need to replace mkdtemp and mkstemps before enabling libs
    return oldPath;
    /*
-   QString path = m_path + "/" + oldPath.section( '/', -1 );
+   TQString path = m_path + "/" + oldPath.section( '/', -1 );
    if( subLib )
    {
-      QString test = path + "/library_index.xml";
-      if( QFile::exists( test ) )
+      TQString test = path + "/library_index.xml";
+      if( TQFile::exists( test ) )
       {
-         QCString s = m_path.latin1();
+         TQCString s = m_path.latin1();
          s+= "/libXXXXXX";
          char* dirname = mkdtemp( s.data() );
          rmdir( dirname );
          path = dirname;
       }
    }
-   else if( QFile::exists( path ) )
+   else if( TQFile::exists( path ) )
    {
       // we need to rename it.
-      QCString s = m_path.latin1();
+      TQCString s = m_path.latin1();
       s += "/objXXXXXX.kpml";
       int fh = mkstemps( s.data( ), 5 );
       close( fh );

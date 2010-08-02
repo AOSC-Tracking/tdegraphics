@@ -40,7 +40,7 @@ public:
     * is changed, too!
     */
    PMPlaneNormalControlPoint( PMDistanceControlPoint* d, const PMVector& normal,
-                              int id, const QString& description );
+                              int id, const TQString& description );
    /**
     * Deletes the PMPlaneNormalControlPoint
     */

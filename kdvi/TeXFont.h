@@ -18,7 +18,7 @@ class TeXFont {
   TeXFont(TeXFontDefinition *_parent)
     {
       parent       = _parent;
-      errorMessage = QString::null;
+      errorMessage = TQString::null;
     };
   
   virtual ~TeXFont();
@@ -29,7 +29,7 @@ class TeXFont {
 	glyphtable[i].shrunkenCharacter.resize(0, 0);
     };
   
-  virtual glyph* getGlyph(Q_UINT16 character, bool generateCharacterPixmap=false, const QColor& color=Qt::black) = 0;
+  virtual glyph* getGlyph(Q_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=Qt::black) = 0;
 
   // Checksum of the font. Used e.g. by PK fonts. This field is filled
   // in by the constructor, or set to 0.0, if the font format does not
@@ -38,7 +38,7 @@ class TeXFont {
 
   // If the font or if some glyphs could not be loaded, error messages
   // will be put here.
-  QString            errorMessage;
+  TQString            errorMessage;
    
  protected:
   glyph              glyphtable[TeXFontDefinition::max_num_of_chars_in_font];

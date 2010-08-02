@@ -21,13 +21,13 @@
 #include "pmlinkedit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 
 
-PMNormalEdit::PMNormalEdit( QWidget* parent, const char* name )
+PMNormalEdit::PMNormalEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -35,31 +35,31 @@ PMNormalEdit::PMNormalEdit( QWidget* parent, const char* name )
 
 void PMNormalEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
+   TQHBoxLayout* hl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pBumpSizeCheck = new QCheckBox( i18n( "Bump size" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pBumpSizeCheck = new TQCheckBox( i18n( "Bump size" ), this );
    m_pBumpSizeEdit = new PMFloatEdit( this );
    hl->addWidget( m_pBumpSizeCheck );
    hl->addWidget( m_pBumpSizeEdit );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   QLabel* lbl = new QLabel( i18n( "Accuracy" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   TQLabel* lbl = new TQLabel( i18n( "Accuracy" ), this );
    m_pAccuracy = new PMFloatEdit( this );
    hl->addWidget( lbl );
    hl->addWidget( m_pAccuracy );
    hl->addStretch( 1 );
 
-   m_pUVMapping = new QCheckBox( i18n( "UV mapping" ), this );
+   m_pUVMapping = new TQCheckBox( i18n( "UV mapping" ), this );
    topLayout( )->addWidget( m_pUVMapping );
 
-   connect( m_pBumpSizeCheck, SIGNAL( clicked( ) ), SLOT( slotBumpSizeClicked( )) );
-   connect( m_pBumpSizeEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( )) );
-   connect( m_pAccuracy, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pUVMapping, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pBumpSizeCheck, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotBumpSizeClicked( )) );
+   connect( m_pBumpSizeEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( )) );
+   connect( m_pAccuracy, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pUVMapping, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMNormalEdit::displayObject( PMObject* o )

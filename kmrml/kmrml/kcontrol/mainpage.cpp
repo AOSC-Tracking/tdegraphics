@@ -16,12 +16,12 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qsizepolicy.h>
-#include <qtooltip.h>
-#include <qwidget.h>
-#include <qvgroupbox.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqsizepolicy.h>
+#include <tqtooltip.h>
+#include <tqwidget.h>
+#include <tqvgroupbox.h>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -50,8 +50,8 @@
 using namespace KMrmlConfig;
 
 
-MainPage::MainPage( QWidget *parent, const char *name )
-    : QVBox( parent, name ),
+MainPage::MainPage( TQWidget *parent, const char *name )
+    : TQVBox( parent, name ),
       m_indexer( 0L ),
       m_indexCleaner( 0L ),
       m_progressDialog( 0L ),
@@ -61,12 +61,12 @@ MainPage::MainPage( QWidget *parent, const char *name )
     m_config = new KMrml::Config();
     setSpacing( KDialog::spacingHint() );
 
-    QVGroupBox *gBox = new QVGroupBox( i18n("Indexing Server Configuration"),
+    TQVGroupBox *gBox = new TQVGroupBox( i18n("Indexing Server Configuration"),
                                        this );
     m_serverWidget = new ServerConfigWidget( gBox, "server config widget" );
-    QString tip = i18n("Hostname of the Indexing Server");
-    QToolTip::add( m_serverWidget->m_hostLabel, tip );
-    QToolTip::add( m_serverWidget->m_hostCombo, tip );
+    TQString tip = i18n("Hostname of the Indexing Server");
+    TQToolTip::add( m_serverWidget->m_hostLabel, tip );
+    TQToolTip::add( m_serverWidget->m_hostCombo, tip );
 
     m_serverWidget->m_portInput->setRange( 0, MAX_PORT_VALUE );
 
@@ -74,8 +74,8 @@ MainPage::MainPage( QWidget *parent, const char *name )
     KURLRequester *requester = new KURLRequester( this, "dir requester" );
     requester->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     requester->setURL( KGlobalSettings::documentPath() );
-    connect( requester, SIGNAL( openFileDialog( KURLRequester * )),
-             SLOT( slotRequesterClicked( KURLRequester * )));
+    connect( requester, TQT_SIGNAL( openFileDialog( KURLRequester * )),
+             TQT_SLOT( slotRequesterClicked( KURLRequester * )));
 
     m_listBox = new KEditListBox( i18n("Folders to Be Indexed" ),
                                   requester->customEditor(), this, "listbox",
@@ -87,30 +87,30 @@ MainPage::MainPage( QWidget *parent, const char *name )
                                   KEditListBox::Add |  KEditListBox::Remove );
 #endif
 
-    connect( m_listBox, SIGNAL( changed() ), SLOT( slotDirectoriesChanged() ));
-    connect( m_serverWidget->m_hostCombo, SIGNAL( textChanged(const QString&)),
-             SLOT( slotHostChanged() ));
-    connect( m_serverWidget->m_portInput, SIGNAL( valueChanged( int )),
-             SLOT( slotPortChanged( int ) ));
-    connect ( m_serverWidget->m_useAuth, SIGNAL( toggled(bool) ),
-              SLOT( slotUseAuthChanged( bool ) ));
-    connect( m_serverWidget->m_userEdit, SIGNAL( textChanged( const QString&)),
-             SLOT( slotUserChanged( const QString& ) ));
-    connect( m_serverWidget->m_passEdit, SIGNAL( textChanged( const QString&)),
-             SLOT( slotPassChanged( const QString& ) ));
+    connect( m_listBox, TQT_SIGNAL( changed() ), TQT_SLOT( slotDirectoriesChanged() ));
+    connect( m_serverWidget->m_hostCombo, TQT_SIGNAL( textChanged(const TQString&)),
+             TQT_SLOT( slotHostChanged() ));
+    connect( m_serverWidget->m_portInput, TQT_SIGNAL( valueChanged( int )),
+             TQT_SLOT( slotPortChanged( int ) ));
+    connect ( m_serverWidget->m_useAuth, TQT_SIGNAL( toggled(bool) ),
+              TQT_SLOT( slotUseAuthChanged( bool ) ));
+    connect( m_serverWidget->m_userEdit, TQT_SIGNAL( textChanged( const TQString&)),
+             TQT_SLOT( slotUserChanged( const TQString& ) ));
+    connect( m_serverWidget->m_passEdit, TQT_SIGNAL( textChanged( const TQString&)),
+             TQT_SLOT( slotPassChanged( const TQString& ) ));
 
-    connect( m_serverWidget->m_addButton, SIGNAL( clicked() ),
-             SLOT( slotAddClicked() ));
-    connect( m_serverWidget->m_removeButton, SIGNAL( clicked() ),
-             SLOT( slotRemoveClicked() ));
+    connect( m_serverWidget->m_addButton, TQT_SIGNAL( clicked() ),
+             TQT_SLOT( slotAddClicked() ));
+    connect( m_serverWidget->m_removeButton, TQT_SIGNAL( clicked() ),
+             TQT_SLOT( slotRemoveClicked() ));
 
-    connect( m_serverWidget->m_hostCombo, SIGNAL( activated( const QString& )),
-             SLOT( slotHostActivated( const QString& )));
-    connect( m_serverWidget->m_hostCombo, SIGNAL( returnPressed() ),
-             SLOT( slotAddClicked() ));
+    connect( m_serverWidget->m_hostCombo, TQT_SIGNAL( activated( const TQString& )),
+             TQT_SLOT( slotHostActivated( const TQString& )));
+    connect( m_serverWidget->m_hostCombo, TQT_SIGNAL( returnPressed() ),
+             TQT_SLOT( slotAddClicked() ));
 
-    connect( m_serverWidget->m_autoPort, SIGNAL( toggled( bool ) ),
-             SLOT( slotAutoPortChanged( bool ) ));
+    connect( m_serverWidget->m_autoPort, TQT_SIGNAL( toggled( bool ) ),
+             TQT_SLOT( slotAutoPortChanged( bool ) ));
 
     m_serverWidget->m_hostCombo->setTrapReturnKey( true );
     m_serverWidget->m_hostCombo->setFocus();
@@ -162,9 +162,9 @@ void MainPage::save()
     m_config->addSettings( m_settings );
     m_config->setDefaultHost( m_settings.host );
 
-    QStringList indexDirs = m_listBox->items();
-    QStringList oldIndexDirs = m_config->indexableDirectories();
-    QStringList removedDirs = difference( oldIndexDirs, indexDirs );
+    TQStringList indexDirs = m_listBox->items();
+    TQStringList oldIndexDirs = m_config->indexableDirectories();
+    TQStringList removedDirs = difference( oldIndexDirs, indexDirs );
 
     m_config->setIndexableDirectories( indexDirs );
     if ( indexDirs.isEmpty() )
@@ -181,14 +181,14 @@ void MainPage::save()
     processIndexDirs( removedDirs );
 }
 
-QStringList MainPage::difference( const QStringList& oldIndexDirs,
-                                  const QStringList& newIndexDirs ) const
+TQStringList MainPage::difference( const TQStringList& oldIndexDirs,
+                                  const TQStringList& newIndexDirs ) const
 {
-    QStringList result;
+    TQStringList result;
 
-    QString slash = QString::fromLatin1("/");
-    QStringList::ConstIterator oldIt = oldIndexDirs.begin();
-    QString oldDir, newDir;
+    TQString slash = TQString::fromLatin1("/");
+    TQStringList::ConstIterator oldIt = oldIndexDirs.begin();
+    TQString oldDir, newDir;
 
     for ( ; oldIt != oldIndexDirs.end(); oldIt++ )
     {
@@ -198,7 +198,7 @@ QStringList MainPage::difference( const QStringList& oldIndexDirs,
         while ( oldDir.endsWith( slash ) ) // remove slashes
             oldDir.remove( oldDir.length() - 1, 1 );
 
-        QStringList::ConstIterator newIt = newIndexDirs.begin();
+        TQStringList::ConstIterator newIt = newIndexDirs.begin();
         for ( ; newIt != newIndexDirs.end(); newIt++ )
         {
             newDir = *newIt;
@@ -234,7 +234,7 @@ void MainPage::initFromSettings( const KMrml::ServerSettings& settings )
     m_locked = false;
 }
 
-void MainPage::slotHostActivated( const QString& host )
+void MainPage::slotHostActivated( const TQString& host )
 {
     // implicitly save the current settings when another host was chosen
     m_config->addSettings( m_settings );
@@ -244,7 +244,7 @@ void MainPage::slotHostActivated( const QString& host )
 
 void MainPage::slotHostChanged()
 {
-    QString host = m_serverWidget->m_hostCombo->currentText();
+    TQString host = m_serverWidget->m_hostCombo->currentText();
     m_listBox->setEnabled( (host == "localhost") );
 
     KMrml::ServerSettings settings = m_config->settingsForHost( host );
@@ -264,7 +264,7 @@ void MainPage::slotUseAuthChanged( bool enable )
         changed();
 }
 
-void MainPage::slotUserChanged( const QString& user )
+void MainPage::slotUserChanged( const TQString& user )
 {
     if ( m_locked )
         return;
@@ -273,7 +273,7 @@ void MainPage::slotUserChanged( const QString& user )
     changed();
 }
 
-void MainPage::slotPassChanged( const QString& pass )
+void MainPage::slotPassChanged( const TQString& pass )
 {
     if ( m_locked )
         return;
@@ -314,7 +314,7 @@ void MainPage::slotRequesterClicked( KURLRequester *requester )
 
 void MainPage::slotAddClicked()
 {
-    QString host = m_serverWidget->m_hostCombo->currentText();
+    TQString host = m_serverWidget->m_hostCombo->currentText();
     m_settings.host = host;
 
     m_config->addSettings( m_settings );
@@ -326,7 +326,7 @@ void MainPage::slotAddClicked()
 
 void MainPage::slotRemoveClicked()
 {
-    QString host = m_serverWidget->m_hostCombo->currentText();
+    TQString host = m_serverWidget->m_hostCombo->currentText();
     if ( host.isEmpty() ) // should never happen
         return;
 
@@ -340,7 +340,7 @@ void MainPage::slotRemoveClicked()
 
 void MainPage::enableWidgetsFor( const KMrml::ServerSettings& settings )
 {
-    QString host = settings.host;
+    TQString host = settings.host;
     bool enableWidgets = (m_config->hosts().findIndex( host ) > -1);
     m_serverWidget->m_addButton->setEnabled(!enableWidgets && !host.isEmpty());
     m_serverWidget->m_removeButton->setEnabled( enableWidgets &&
@@ -370,7 +370,7 @@ void MainPage::slotDirectoriesChanged()
     changed();
 }
 
-void MainPage::processIndexDirs( const QStringList& removeDirs )
+void MainPage::processIndexDirs( const TQStringList& removeDirs )
 {
     // ### how to remove indexed directories?
     if ( !m_performIndexing ||
@@ -389,8 +389,8 @@ void MainPage::processIndexDirs( const QStringList& removeDirs )
                                             true );
     m_progressDialog->setAutoClose( false );
     m_progressDialog->setMinimumWidth( 300 );
-    connect( m_progressDialog, SIGNAL( cancelClicked() ),
-             SLOT( slotCancelIndexing() ));
+    connect( m_progressDialog, TQT_SIGNAL( cancelClicked() ),
+             TQT_SLOT( slotCancelIndexing() ));
 
     // argh -- don't automatically show the dialog
     m_progressDialog->setMinimumDuration( INT_MAX );
@@ -398,10 +398,10 @@ void MainPage::processIndexDirs( const QStringList& removeDirs )
     if ( !removeDirs.isEmpty() )
     {
         m_indexCleaner = new IndexCleaner( removeDirs, m_config, this );
-        connect( m_indexCleaner, SIGNAL( advance( int ) ),
-                 m_progressDialog->progressBar(), SLOT( advance( int ) ));
-        connect( m_indexCleaner, SIGNAL( finished() ),
-                 SLOT( slotMaybeIndex() ) );
+        connect( m_indexCleaner, TQT_SIGNAL( advance( int ) ),
+                 m_progressDialog->progressBar(), TQT_SLOT( advance( int ) ));
+        connect( m_indexCleaner, TQT_SIGNAL( finished() ),
+                 TQT_SLOT( slotMaybeIndex() ) );
         m_indexCleaner->start();
     }
     else
@@ -438,15 +438,15 @@ void MainPage::slotMaybeIndex()
 
     // do the indexing
     m_indexer = new Indexer( m_config, this, "Indexer" );
-    connect( m_indexer, SIGNAL( progress( int, const QString& )),
-             SLOT( slotIndexingProgress( int, const QString& ) ));
-    connect( m_indexer, SIGNAL( finished( int )),
-             SLOT( slotIndexingFinished( int ) ));
+    connect( m_indexer, TQT_SIGNAL( progress( int, const TQString& )),
+             TQT_SLOT( slotIndexingProgress( int, const TQString& ) ));
+    connect( m_indexer, TQT_SIGNAL( finished( int )),
+             TQT_SLOT( slotIndexingFinished( int ) ));
     m_indexer->startIndexing( m_config->indexableDirectories() );
 }
 
 
-void MainPage::slotIndexingProgress( int percent, const QString& message )
+void MainPage::slotIndexingProgress( int percent, const TQString& message )
 {
     m_progressDialog->progressBar()->setValue( percent );
     m_progressDialog->setLabel( message );
@@ -456,14 +456,14 @@ void MainPage::slotIndexingFinished( int returnCode )
 {
     if ( returnCode != 0 )
     {
-        QString syserr;
+        TQString syserr;
         if ( returnCode == 127 )
             syserr = i18n("Is the \"GNU Image Finding Tool\" properly installed?");
         else
 	{
             char *err = strerror( returnCode );
             if ( err )
-                syserr = QString::fromLocal8Bit( err );
+                syserr = TQString::fromLocal8Bit( err );
             else
                 syserr = i18n("Unknown error: %1").arg( returnCode );
         }

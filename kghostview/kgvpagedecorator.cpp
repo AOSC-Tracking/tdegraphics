@@ -16,15 +16,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qbitmap.h>
-#include <qdrawutil.h>
-#include <qpainter.h>
-#include <qregion.h>
+#include <tqbitmap.h>
+#include <tqdrawutil.h>
+#include <tqpainter.h>
+#include <tqregion.h>
 
 #include "kgvpagedecorator.h"
     
-KGVPageDecorator::KGVPageDecorator( QWidget* parent, const char* name ) : 
-    QHBox( parent, name ), 
+KGVPageDecorator::KGVPageDecorator( TQWidget* parent, const char* name ) : 
+    TQHBox( parent, name ), 
     _margin( 5 ), 
     _borderWidth( 1 ), 
     _shadowOffset( 2, 2 )
@@ -35,35 +35,35 @@ KGVPageDecorator::KGVPageDecorator( QWidget* parent, const char* name ) :
     setAutoMask( true );
 }
 
-bool KGVPageDecorator::eventFilter( QObject* o, QEvent* e )
+bool KGVPageDecorator::eventFilter( TQObject* o, TQEvent* e )
 {
     switch( e->type() ) {
-    case QEvent::MouseButtonPress: 
-    case QEvent::MouseButtonRelease: 
-    case QEvent::MouseButtonDblClick:
-    case QEvent::MouseMove:
+    case TQEvent::MouseButtonPress: 
+    case TQEvent::MouseButtonRelease: 
+    case TQEvent::MouseButtonDblClick:
+    case TQEvent::MouseMove:
 	return event( e );
     default:
 	;
     }
-    return QHBox::eventFilter( o, e );
+    return TQHBox::eventFilter( o, e );
 }
 
-void KGVPageDecorator::childEvent( QChildEvent* e )
+void KGVPageDecorator::childEvent( TQChildEvent* e )
 {
     if( e->child()->isWidgetType() && e->inserted() )
 	e->child()->installEventFilter( this );
 }
 
-void KGVPageDecorator::drawFrame( QPainter* p )
+void KGVPageDecorator::drawFrame( TQPainter* p )
 {
-    QRect r( frameRect().topLeft()     + QPoint(_margin,_margin), 
-	     frameRect().bottomRight() - QPoint(_margin,_margin) );
+    TQRect r( frameRect().topLeft()     + TQPoint(_margin,_margin), 
+	     frameRect().bottomRight() - TQPoint(_margin,_margin) );
 	     
     if( !r.isValid() ) 
 	return;
     
-    const QColorGroup& cg = colorGroup();
+    const TQColorGroup& cg = colorGroup();
 
     r.moveCenter( r.center() + _shadowOffset );
     qDrawPlainRect( p, r, cg.shadow(), _shadowOffset.manhattanLength() );
@@ -72,17 +72,17 @@ void KGVPageDecorator::drawFrame( QPainter* p )
     qDrawPlainRect( p, r, cg.foreground(), _borderWidth );
 }
 
-void KGVPageDecorator::drawMask( QPainter* p )
+void KGVPageDecorator::drawMask( TQPainter* p )
 {
-    QRect r( frameRect().topLeft()     + QPoint(_margin,_margin), 
-	     frameRect().bottomRight() - QPoint(_margin,_margin) );
+    TQRect r( frameRect().topLeft()     + TQPoint(_margin,_margin), 
+	     frameRect().bottomRight() - TQPoint(_margin,_margin) );
 
     if( !r.isValid() )
 	return;
 
-    QColorGroup cg( color1, color1, color1, color1, color1, color1, color1,
+    TQColorGroup cg( color1, color1, color1, color1, color1, color1, color1,
 		    color1, color0 );
-    QBrush brush( cg.foreground() );
+    TQBrush brush( cg.foreground() );
     
     r.moveCenter( r.center() + _shadowOffset );
     qDrawPlainRect( p, r, cg.foreground(), _shadowOffset.manhattanLength() );
@@ -93,9 +93,9 @@ void KGVPageDecorator::drawMask( QPainter* p )
 
 void KGVPageDecorator::updateMask()
 {
-    QBitmap bm( size() );
+    TQBitmap bm( size() );
     bm.fill( color0 );
-    QPainter p( &bm, this );
+    TQPainter p( &bm, this );
     p.setPen( color1 );
     p.setBrush( color1 );
     drawMask( &p );

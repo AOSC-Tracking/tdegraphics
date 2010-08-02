@@ -67,17 +67,17 @@ void PMPigment::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMPigment::description( ) const
+TQString PMPigment::description( ) const
 {
    return i18n( "pigment" );
 }
 
-PMDialogEditBase* PMPigment::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMPigment::editWidget( TQWidget* parent ) const
 {
    return new PMPigmentEdit( parent );
 }
 
-void PMPigment::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMPigment::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "uv_mapping", m_uvMapping );
    Base::serialize( e, doc );

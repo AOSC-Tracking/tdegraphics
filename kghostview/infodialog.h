@@ -20,7 +20,7 @@
 #ifndef _INFO_DIALOG_H_
 #define _INFO_DIALOG_H_
 
-class QLabel;
+class TQLabel;
 
 #include <kdialogbase.h>
 
@@ -29,14 +29,14 @@ class InfoDialog : public KDialogBase
   Q_OBJECT
 
   public:
-    InfoDialog( QWidget *parent=0, const char *name=0, bool modal=true );
-    void setup( const QString &fileName, const QString &documentTitle,
-		const QString &publicationDate );
+    InfoDialog( TQWidget *parent=0, const char *name=0, bool modal=true );
+    void setup( const TQString &fileName, const TQString &documentTitle,
+		const TQString &publicationDate );
 
   private:
-    QLabel *mFileLabel;
-    QLabel *mTitleLabel;
-    QLabel *mDateLabel;
+    TQLabel *mFileLabel;
+    TQLabel *mTitleLabel;
+    TQLabel *mDateLabel;
 };
 
 #endif

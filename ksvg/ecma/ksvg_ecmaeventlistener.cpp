@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qvariant.h>
+#include <tqvariant.h>
 
 #include "SVGDocumentImpl.h"
 #include "SVGSVGElementImpl.h"
@@ -32,7 +32,7 @@
 using namespace KSVG;
 using namespace KJS;
 
-KSVGEcmaEventListener::KSVGEcmaEventListener(KJS::Object _listener, QString _type, KSVGEcma *_ecma) : SVGEventListener()
+KSVGEcmaEventListener::KSVGEcmaEventListener(KJS::Object _listener, TQString _type, KSVGEcma *_ecma) : SVGEventListener()
 {
 	m_listener = _listener;
 	m_remove = true;
@@ -84,8 +84,8 @@ void KSVGEcmaEventListener::handleEvent(SVGEventImpl *evt)
 		}
 		else
 		{
-			QVariant ret = valueToVariant(exec, retval);
-			if(ret.type() == QVariant::Bool && ret.toBool() == false)
+			TQVariant ret = valueToVariant(exec, retval);
+			if(ret.type() == TQVariant::Bool && ret.toBool() == false)
 				evt->preventDefault();
 		}
 	}

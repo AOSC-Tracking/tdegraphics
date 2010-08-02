@@ -20,13 +20,13 @@
 #ifndef PMACTIONS_H
 #define PMACTIONS_H
 
-#include <qguardedptr.h>
+#include <tqguardedptr.h>
 #include <kaction.h>
 
-class QComboBox;
-class QSpinBox;
-class QLabel;
-class QToolButton;
+class TQComboBox;
+class TQSpinBox;
+class TQLabel;
+class TQToolButton;
 
 /**
  * Combobox action for the toolbar.
@@ -37,14 +37,14 @@ class PMComboAction : public KAction
 {
    Q_OBJECT
 public:
-   PMComboAction( const QString& text, int accel, const QObject* receiver, const char* member, QObject* parent, const char* name );
+   PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* parent, const char* name );
    ~PMComboAction( );
    
-   virtual int plug( QWidget* w, int index = -1 );
+   virtual int plug( TQWidget* w, int index = -1 );
    
-   virtual void unplug( QWidget* w );
+   virtual void unplug( TQWidget* w );
    
-   QGuardedPtr<QComboBox> combo( ) { return m_combo; }
+   TQGuardedPtr<TQComboBox> combo( ) { return m_combo; }
 
    void setMaximumWidth( int w ) { m_maxWidth = w; }
    void setMinimumWidth( int w ) { m_minWidth = w; }
@@ -53,8 +53,8 @@ signals:
    void plugged( );
    
 private:
-   QGuardedPtr<QComboBox> m_combo;
-   const QObject* m_receiver;
+   TQGuardedPtr<TQComboBox> m_combo;
+   const TQObject* m_receiver;
    const char* m_member;
    int m_minWidth, m_maxWidth;
 };
@@ -68,14 +68,14 @@ class PMLabelAction : public KAction
 {
    Q_OBJECT
 public:
-   PMLabelAction( const QString &text, QObject *parent = 0, const char *name = 0 );
+   PMLabelAction( const TQString &text, TQObject *parent = 0, const char *name = 0 );
    
-   virtual int plug( QWidget *widget, int index = -1 );
-   virtual void unplug( QWidget *widget );
-   QToolButton* button( ) { return m_button; }
+   virtual int plug( TQWidget *widget, int index = -1 );
+   virtual void unplug( TQWidget *widget );
+   TQToolButton* button( ) { return m_button; }
    
 private:
-   QToolButton* m_button;
+   TQToolButton* m_button;
 };
 
 /**
@@ -85,20 +85,20 @@ class PMSpinBoxAction : public KAction
 {
    Q_OBJECT
 public:
-   PMSpinBoxAction( const QString& text, int accel, const QObject* receiver, const char* member, QObject* parent, const char* name );
+   PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* parent, const char* name );
    ~PMSpinBoxAction( );
    
-   virtual int plug( QWidget* w, int index = -1 );
-   virtual void unplug( QWidget* w );
+   virtual int plug( TQWidget* w, int index = -1 );
+   virtual void unplug( TQWidget* w );
    
-   QGuardedPtr<QSpinBox> spinBox( ) { return m_spinBox; }
+   TQGuardedPtr<TQSpinBox> spinBox( ) { return m_spinBox; }
 
 signals:
    void plugged( );
    
 private:
-   QGuardedPtr<QSpinBox> m_spinBox;
-   const QObject* m_receiver;
+   TQGuardedPtr<TQSpinBox> m_spinBox;
+   const TQObject* m_receiver;
    const char* m_member;
 };
 

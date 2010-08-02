@@ -32,10 +32,10 @@ class EmptyMultiPage : public KMultiPage
   Q_OBJECT
 
 public:
-  EmptyMultiPage(QWidget* parentWidget, const char* widgetName, QObject* parent, const char* name,
-                 const QStringList& args = QStringList());
+  EmptyMultiPage(TQWidget* parentWidget, const char* widgetName, TQObject* parent, const char* name,
+                 const TQStringList& args = TQStringList());
 
-  virtual QStringList fileFormats() const { return QString::null; }
+  virtual TQStringList fileFormats() const { return TQString::null; }
 
   /// opens a file
   virtual bool openFile() { return false; }

@@ -22,21 +22,21 @@
 
 #include <kfilemetainfo.h>
 
-#include <qintdict.h>
+#include <tqintdict.h>
 
 class KTiffPlugin: public KFilePlugin
 {
     Q_OBJECT
 
 public:
-    KTiffPlugin(QObject *parent, const char *name, const QStringList& args);
+    KTiffPlugin(TQObject *parent, const char *name, const TQStringList& args);
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:
-    QDateTime tiffDate(const QString&) const;
+    TQDateTime tiffDate(const TQString&) const;
 
-    QIntDict<QString> m_colorMode;
-    QIntDict<QString> m_imageCompression;
+    TQIntDict<TQString> m_colorMode;
+    TQIntDict<TQString> m_imageCompression;
 };
 
 #endif

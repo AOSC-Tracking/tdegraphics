@@ -40,15 +40,15 @@ void PMPaletteValue::setValue( double value )
    m_value = value;
 }
 
-void PMPaletteValue::serialize( QDomElement& e, QDomDocument& /* doc */ ) const
+void PMPaletteValue::serialize( TQDomElement& e, TQDomDocument& /* doc */ ) const
 {
    e.setAttribute( "index", m_index );
    e.setAttribute( "value", m_value );
 }
 
-void PMPaletteValue::readAttributes( const QDomElement& h )
+void PMPaletteValue::readAttributes( const TQDomElement& h )
 {
-   QString str;
+   TQString str;
    bool ok;
 
    str = h.attribute( "index" );

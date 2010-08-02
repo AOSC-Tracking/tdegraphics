@@ -28,11 +28,11 @@
 #include "pmobject.h"
 #include "pmviewstructure.h"
 
-#include <qobject.h>
-#include <qptrlist.h>
-#include <qcolor.h>
-#include <qptrstack.h>
-#include <qvaluestack.h>
+#include <tqobject.h>
+#include <tqptrlist.h>
+#include <tqcolor.h>
+#include <tqptrstack.h>
+#include <tqvaluestack.h>
 #include <kstaticdeleter.h>
 #include <GL/gl.h>
 
@@ -40,7 +40,7 @@ class PMGLView;
 class PMCamera;
 class PMPoint;
 class KConfig;
-class QString;
+class TQString;
 
 /**
  * Used internally by PMRenderManager.
@@ -87,8 +87,8 @@ private:
    int m_visibilityLevel;
 };
 
-typedef QPtrList<PMRenderTask> PMRenderTaskList;
-typedef QPtrListIterator<PMRenderTask> PMRenderTaskListIterator;
+typedef TQPtrList<PMRenderTask> PMRenderTaskList;
+typedef TQPtrListIterator<PMRenderTask> PMRenderTaskListIterator;
 
 /**
  * Class that controls the background rendering
@@ -141,52 +141,52 @@ public:
    /**
     * Returns the color for the control points
     */
-   QColor controlPointColor( int i ) const;
+   TQColor controlPointColor( int i ) const;
    /**
     * Sets the control point color
     */
-   void setControlPointColor( int i, const QColor& c );
+   void setControlPointColor( int i, const TQColor& c );
    /**
     * Returns the color for graphical objects
     */
-   QColor graphicalObjectColor( int i ) const;
+   TQColor graphicalObjectColor( int i ) const;
    /**
     * Sets the graphical object color
     */
-   void setGraphicalObjectColor( int i, const QColor& c );
+   void setGraphicalObjectColor( int i, const TQColor& c );
    /**
     * Returns the color for the coordinate axes
     */
-   QColor axesColor( int i ) const;
+   TQColor axesColor( int i ) const;
    /**
     * Sets the axes color
     */
-   void setAxesColor( int i, const QColor& c );
+   void setAxesColor( int i, const TQColor& c );
    /**
     * Returns the background color
     */
-   QColor backgroundColor( ) const { return m_backgroundColor; }
+   TQColor backgroundColor( ) const { return m_backgroundColor; }
    /**
     * Sets the background color
     */
-   void setBackgroundColor( const QColor& c ) { m_backgroundColor = c; }
+   void setBackgroundColor( const TQColor& c ) { m_backgroundColor = c; }
    /**
     * Returns the field of view color.
     */
-   QColor fieldOfViewColor( ) const { return m_fieldOfViewColor; }
+   TQColor fieldOfViewColor( ) const { return m_fieldOfViewColor; }
    /**
     * Sets the field of view color
     */
-   void setFieldOfViewColor( const QColor& c ) { m_fieldOfViewColor = c; }
+   void setFieldOfViewColor( const TQColor& c ) { m_fieldOfViewColor = c; }
    
    /**
     * Sets the grid color
     */
-   void setGridColor( const QColor& c ) { m_gridColor = c; }
+   void setGridColor( const TQColor& c ) { m_gridColor = c; }
    /**
     * Returns the grid color
     */
-   QColor gridColor( ) { return m_gridColor; }
+   TQColor gridColor( ) { return m_gridColor; }
    /**
     * Sets the grid distance
     */
@@ -209,7 +209,7 @@ public:
    /**
     * Sets the gl drawing color
     */
-   static void setGLColor( const QColor& c );
+   static void setGLColor( const TQColor& c );
 
    /**
     * Saves the configuration
@@ -266,7 +266,7 @@ signals:
    void renderingFinished( );
    
 protected:
-   virtual void timerEvent( QTimerEvent* );
+   virtual void timerEvent( TQTimerEvent* );
    
 private:
    /**
@@ -319,7 +319,7 @@ private:
    /**
     * Renders the string
     */
-   void renderString( const QString& str, double x, double y );
+   void renderString( const TQString& str, double x, double y );
    
    /**
     * Transforms and renders the view structure for special
@@ -343,7 +343,7 @@ private:
    /**
     * List of render tasks. The first has the highest priority
     */
-   QPtrList<PMRenderTask> m_renderTasks;
+   TQPtrList<PMRenderTask> m_renderTasks;
    /**
     * Flag for background rendering
     */
@@ -353,35 +353,35 @@ private:
     *
     * index 0: normal color, 1: selected
     */
-   QColor m_graphicalObjectColor[2];
+   TQColor m_graphicalObjectColor[2];
    /**
     * The color for view structures of textures
     */
-   QColor m_textureColor[2];
+   TQColor m_textureColor[2];
    /**
     * The color for the coordinate axes
     */
-   QColor m_axesColor[3];
+   TQColor m_axesColor[3];
    /**
     * The background color
     */
-   QColor m_backgroundColor;
+   TQColor m_backgroundColor;
    /**
     * color for control points
     *
     * index 0: normal color, 1: selected
     */
-   QColor m_controlPointColor[2];
+   TQColor m_controlPointColor[2];
    /**
     * Color for the field of view box
     */
-   QColor m_fieldOfViewColor;
+   TQColor m_fieldOfViewColor;
    
    /**
     * Grid distance and color
     */
    int m_gridDistance;
-   QColor m_gridColor;
+   TQColor m_gridColor;
    /**
     * If true, lines are subdivided in camera views with complex
     * projections
@@ -406,14 +406,14 @@ private:
    // Member variables to save stack space during rendering
    PMRenderTask* m_pCurrentTask;
    PMGLView* m_pCurrentGlView;
-   QPtrStack<PMMatrix> m_matrixStack; // I don't know if the build in gl matrix stack is deep enough
+   TQPtrStack<PMMatrix> m_matrixStack; // I don't know if the build in gl matrix stack is deep enough
    bool m_selected;
    PMObject* m_pDeselectObject;
    PMObjectList m_objectToRenderStack;
-   QPtrStack<PMObject> m_quickColorObjects;
-   QPtrStack<QColor> m_quickColors;
-   QColor m_currentColor;
-   QValueStack<int> m_visibilityStack;
+   TQPtrStack<PMObject> m_quickColorObjects;
+   TQPtrStack<TQColor> m_quickColors;
+   TQColor m_currentColor;
+   TQValueStack<int> m_visibilityStack;
    int m_currentVisibility;
    unsigned int m_renderedLines;
    PMMatrix m_controlPointTransformation;

@@ -25,14 +25,14 @@
 
 #include "dscparse_adapter.h"
 
-class QStringList;
+class TQStringList;
 
 class KPSPlugin: public KFilePlugin, public KDSCCommentHandler
 {
     Q_OBJECT
 public:
-    KPSPlugin( QObject *parent, const char *name,
-                const QStringList& preferredItems );
+    KPSPlugin( TQObject *parent, const char *name,
+                const TQStringList& preferredItems );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 

@@ -24,10 +24,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qfileinfo.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqfileinfo.h>
+#include <tqtooltip.h>
 #include <kio/job.h>
 #include <kio/previewjob.h>
 
@@ -40,8 +40,8 @@
 #include <kseparator.h>
 #include <kmessagebox.h>
 #include <kactivelabel.h>
-#include <qhbox.h>
-#include <qvbox.h>
+#include <tqhbox.h>
+#include <tqvbox.h>
 
 #include "resource.h"
 #include "kocrbase.h"
@@ -52,14 +52,14 @@
 #include <kstandarddirs.h>
 #include <kfilemetainfo.h>
 #include <ksconfig.h>
-#include <qstringlist.h>
-#include <qcolor.h>
-#include <qgrid.h>
-#include <qsizepolicy.h>
-#include <qgroupbox.h>
-#include <qcheckbox.h>
+#include <tqstringlist.h>
+#include <tqcolor.h>
+#include <tqgrid.h>
+#include <tqsizepolicy.h>
+#include <tqgroupbox.h>
+#include <tqcheckbox.h>
 
-KOCRBase::KOCRBase( QWidget *parent, KSpellConfig *spellConfig,
+KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
                     KDialogBase::DialogType face )
    :KDialogBase( face, i18n("Optical Character Recognition"),
 		 User2|Close|User1, User1, parent,0, false, true,
@@ -86,9 +86,9 @@ KOCRBase::KOCRBase( QWidget *parent, KSpellConfig *spellConfig,
     m_userWantsSpellCheck = konf->readBoolEntry(CFG_WANT_KSPELL, true);
 
     /* Connect signals which disable the fields and store the configuration */
-    connect( this, SIGNAL( user1Clicked()), this, SLOT( writeConfig()));
-    connect( this, SIGNAL( user1Clicked()), this, SLOT( startOCR() ));
-    connect( this, SIGNAL( user2Clicked()), this, SLOT( stopOCR() ));
+    connect( this, TQT_SIGNAL( user1Clicked()), this, TQT_SLOT( writeConfig()));
+    connect( this, TQT_SIGNAL( user1Clicked()), this, TQT_SLOT( startOCR() ));
+    connect( this, TQT_SIGNAL( user2Clicked()), this, TQT_SLOT( stopOCR() ));
     m_previewSize.setWidth(200);
     m_previewSize.setHeight(300);
 
@@ -98,11 +98,11 @@ KOCRBase::KOCRBase( QWidget *parent, KSpellConfig *spellConfig,
 }
 
 
-KAnimWidget* KOCRBase::getAnimation(QWidget *parent)
+KAnimWidget* KOCRBase::getAnimation(TQWidget *parent)
 {
    if( ! m_animation )
    {
-      m_animation = new KAnimWidget( QString("kde"), 48, parent, "ANIMATION" );
+      m_animation = new KAnimWidget( TQString("kde"), 48, parent, "ANIMATION" );
    }
    return( m_animation );
 }
@@ -119,24 +119,24 @@ EngineError KOCRBase::setupGui()
 void KOCRBase::imgIntro()
 {
     m_imgPage = addVBoxPage( i18n("Image") );
-    (void) new QLabel( i18n("Image Information"), m_imgPage );
+    (void) new TQLabel( i18n("Image Information"), m_imgPage );
 
     // Caption - Label and image
-    m_imgHBox = new QHBox( m_imgPage );
+    m_imgHBox = new TQHBox( m_imgPage );
 
     m_imgHBox->setSpacing( KDialog::spacingHint());
 
-    m_previewPix = new QLabel( m_imgHBox );
-    m_previewPix->setPixmap(QPixmap());
+    m_previewPix = new TQLabel( m_imgHBox );
+    m_previewPix->setPixmap(TQPixmap());
     m_previewPix->setFixedSize(m_previewSize);
     m_previewPix->setAlignment( Qt::AlignCenter );
-    m_previewPix->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+    m_previewPix->setFrameStyle( TQFrame::Panel | TQFrame::Sunken );
     // m_previewPix->resize(m_previewSize);
 
     /* See introduceImage where the meta box is filled with data from the
      * incoming widget.
      */
-    m_metaBox = new QVBox( m_imgHBox );
+    m_metaBox = new TQVBox( m_imgHBox );
 }
 
 /*
@@ -148,22 +148,22 @@ void KOCRBase::ocrIntro( )
 
     // Caption - Label and image
     /* labelstring */
-    (void) new QLabel( i18n("<b>Starting Optical Character Recognition with %1</b><p>").
+    (void) new TQLabel( i18n("<b>Starting Optical Character Recognition with %1</b><p>").
                        arg( ocrEngineName() ), m_ocrPage );
     // Find the kadmos logo and display if available
     KStandardDirs stdDir;
-    QString logo = stdDir.findResource( "data", "kooka/pics/" + ocrEngineLogo() );
+    TQString logo = stdDir.findResource( "data", "kooka/pics/" + ocrEngineLogo() );
 
     kdDebug(28000)<< "Reading logo " << logo << endl;
-    QPixmap pix;
-    QWidget *pa = m_ocrPage;
+    TQPixmap pix;
+    TQWidget *pa = m_ocrPage;
 
     if( pix.load( logo ))
     {
-        QHBox *hb_cap = new QHBox( m_ocrPage );
+        TQHBox *hb_cap = new TQHBox( m_ocrPage );
         hb_cap->setSpacing( KDialog::spacingHint());
 
-        QLabel *imgLab = new QLabel( hb_cap );
+        TQLabel *imgLab = new TQLabel( hb_cap );
         imgLab->setAlignment( Qt::AlignHCenter | Qt::AlignTop  );
         imgLab->setPixmap( pix );
         pa = hb_cap;
@@ -178,26 +178,26 @@ void KOCRBase::spellCheckIntro()
     m_spellchkPage = addVBoxPage( i18n("Spell-checking") );
 
     /* Want the spell checking at all? Checkbox here */
-    QGroupBox *gb1 = new QGroupBox( 1, Qt::Horizontal, i18n("OCR Post Processing"), m_spellchkPage );
-    m_cbWantCheck = new QCheckBox( i18n("Enable spell-checking for validation of the OCR result"),
+    TQGroupBox *gb1 = new TQGroupBox( 1, Qt::Horizontal, i18n("OCR Post Processing"), m_spellchkPage );
+    m_cbWantCheck = new TQCheckBox( i18n("Enable spell-checking for validation of the OCR result"),
                                    gb1 );
     /* Spellcheck options */
-    m_gbSpellOpts = new QGroupBox( 1, Qt::Horizontal, i18n("Spell-Check Options"),
+    m_gbSpellOpts = new TQGroupBox( 1, Qt::Horizontal, i18n("Spell-Check Options"),
                                    m_spellchkPage );
 
     KSpellConfig *sCfg = new KSpellConfig( m_gbSpellOpts, "SPELLCHK", m_spellConfig, false );
     /* A space eater */
-    QWidget *spaceEater = new QWidget(m_spellchkPage);
-    spaceEater->setSizePolicy( QSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored ));
+    TQWidget *spaceEater = new TQWidget(m_spellchkPage);
+    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
 
     /* connect toggle button */
-    connect( m_cbWantCheck, SIGNAL(toggled(bool)), this, SLOT(slWantSpellcheck(bool)));
+    connect( m_cbWantCheck, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slWantSpellcheck(bool)));
     m_cbWantCheck->setChecked( m_userWantsSpellCheck );
     m_gbSpellOpts->setEnabled( m_userWantsSpellCheck );
     m_spellConfig = sCfg;
 
-    connect( sCfg, SIGNAL(configChanged()),
-            this, SLOT(slSpellConfigChanged()));
+    connect( sCfg, TQT_SIGNAL(configChanged()),
+            this, TQT_SLOT(slSpellConfigChanged()));
 }
 
 void KOCRBase::slSpellConfigChanged()
@@ -228,12 +228,12 @@ void KOCRBase::introduceImage( KookaImage* img)
 {
     if( ! (img && img->isFileBound()) ) return;
     KFileMetaInfo info = img->fileMetaInfo();
-    QStringList groups;
+    TQStringList groups;
     if ( info.isValid() )
          groups = info.preferredGroups();
 
     delete m_metaBox;
-    m_metaBox = new QVBox( m_imgHBox );
+    m_metaBox = new TQVBox( m_imgHBox );
 
     /* Start to create a preview job for the thumb */
     KURL::List li(img->url());
@@ -242,50 +242,50 @@ void KOCRBase::introduceImage( KookaImage* img)
 
     if( m_job )
     {
-        connect( m_job, SIGNAL( result( KIO::Job * )),
-                 this, SLOT( slPreviewResult( KIO::Job * )));
-        connect( m_job, SIGNAL( gotPreview( const KFileItem*, const QPixmap& )),
-                 SLOT( slGotPreview( const KFileItem*, const QPixmap& ) ));
+        connect( m_job, TQT_SIGNAL( result( KIO::Job * )),
+                 this, TQT_SLOT( slPreviewResult( KIO::Job * )));
+        connect( m_job, TQT_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
+                 TQT_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
          /* KIO::Jo result is called in any way: Success, Failed, Error,
           * thus connecting the failed is not really necessary.
           */
     }
 
-    for ( QStringList::Iterator it = groups.begin(); it != groups.end(); ++it )
+    for ( TQStringList::Iterator it = groups.begin(); it != groups.end(); ++it )
     {
-        QString theGroup(*it);
+        TQString theGroup(*it);
 
         kdDebug(29000) << "handling the group " << theGroup << endl;
 
-        QStringList keys = info.group(theGroup).supportedKeys();
+        TQStringList keys = info.group(theGroup).supportedKeys();
 
         if( keys.count() > 0 )
         {
             // info.groupInfo( theGroup )->translatedName()
             // FIXME: howto get the translated group name?
-            QLabel *lGroup = new QLabel( theGroup, m_metaBox );
-            lGroup->setBackgroundColor( QColor(gray));
+            TQLabel *lGroup = new TQLabel( theGroup, m_metaBox );
+            lGroup->setBackgroundColor( TQColor(gray));
             lGroup->setMargin( KDialog::spacingHint());
 
-            QGrid *nGrid = new QGrid( 2,  m_metaBox );
+            TQGrid *nGrid = new TQGrid( 2,  m_metaBox );
             nGrid->setSpacing( KDialog::spacingHint());
-            for ( QStringList::Iterator keyIt = keys.begin(); keyIt != keys.end(); ++keyIt )
+            for ( TQStringList::Iterator keyIt = keys.begin(); keyIt != keys.end(); ++keyIt )
             {
                 KFileMetaInfoItem item = info.item(*keyIt);
-                QString itKey = item.translatedKey();
+                TQString itKey = item.translatedKey();
                 if( itKey.isEmpty() )
                     itKey = item.key();
                 if( ! itKey.isEmpty() )
                 {
-                    (void) new QLabel( item.translatedKey() + ": ", nGrid );
-                    (void) new QLabel( item.string(), nGrid );
+                    (void) new TQLabel( item.translatedKey() + ": ", nGrid );
+                    (void) new TQLabel( item.string(), nGrid );
                     kdDebug(29000) << "hasKey " << *keyIt << endl;
                 }
             }
         }
     }
-    QWidget *spaceEater = new QWidget( m_metaBox );
-    spaceEater->setSizePolicy( QSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored ));
+    TQWidget *spaceEater = new TQWidget( m_metaBox );
+    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     m_metaBox->show();
 }
 
@@ -299,7 +299,7 @@ void KOCRBase::slPreviewResult(KIO::Job *job )
    }
 }
 
-void KOCRBase::slGotPreview( const KFileItem*, const QPixmap& newPix )
+void KOCRBase::slGotPreview( const KFileItem*, const TQPixmap& newPix )
 {
     kdDebug(28000) << "Got the preview" << endl;
     m_previewPix->setPixmap(newPix);

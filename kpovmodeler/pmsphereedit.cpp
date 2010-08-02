@@ -22,11 +22,11 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
-PMSphereEdit::PMSphereEdit( QWidget* parent, const char* name )
+PMSphereEdit::PMSphereEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,22 +36,22 @@ void PMSphereEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout;
+   TQHBoxLayout* layout;
 
    m_pCentre = new PMVectorEdit( "x", "y", "z", this );
    m_pRadius = new PMFloatEdit( this );
 
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Center:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Center:" ), this ) );
    layout->addWidget( m_pCentre );
 
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Radius:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Radius:" ), this ) );
    layout->addWidget( m_pRadius );
    layout->addStretch( 1 );
 
-   connect( m_pCentre, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRadius, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pCentre, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMSphereEdit::displayObject( PMObject* o )

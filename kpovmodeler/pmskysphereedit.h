@@ -39,7 +39,7 @@ public:
    /**
     * Creates a PMSkySphereEdit with parent and name
     */
-   PMSkySphereEdit( QWidget* parent, const char* name = 0 );
+   PMSkySphereEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

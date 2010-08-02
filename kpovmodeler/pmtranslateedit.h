@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMTranslateEdit with parent and name
     */
-   PMTranslateEdit( QWidget* parent, const char* name = 0 );
+   PMTranslateEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

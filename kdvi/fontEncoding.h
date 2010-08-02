@@ -9,7 +9,7 @@
 #ifndef _FONTENCODING_H
 #define _FONTENCODING_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 /**
@@ -63,15 +63,15 @@ class fontEncoding {
   // located, opened or parsed, errors are printed using the kdError()
   // channel, and the array glyphNameVector will contain empty
   // strings.
-  fontEncoding(const QString &encName);
+  fontEncoding(const TQString &encName);
 
   // Full name of the encoding, as read from the encoding file
-  QString encodingFullName;
+  TQString encodingFullName;
 
   // List of 256 glyph names. The name can be '.notdef' to indicate
   // that a certain position is left open, or empty, if the encoding
   // file did not contain 256 characters or could not be properly read
-  QString glyphNameVector[256];
+  TQString glyphNameVector[256];
 
   // Returns 'true' if the encoding file was found and could
   // successfully be loaded.

@@ -53,7 +53,7 @@ public:
    /** */
    virtual PMObject* copy( ) const { return new PMText( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -61,35 +61,35 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
    /**
     * Returns a new @ref PMTextEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
     */
-   virtual QString pixmap( ) const { return QString( "pmtext" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmtext" ); }
 
    /**
     * Returns the font file
     */
-   QString font( ) const { return m_font; }
+   TQString font( ) const { return m_font; }
    /**
     * Sets the font file
     */
-   void setFont( const QString& f );
+   void setFont( const TQString& f );
    /**
     * Returns the text
     */
-   QString text( ) const { return m_text; }
+   TQString text( ) const { return m_text; }
    /**
     * Sets the text
     */
-   void setText( const QString& t );
+   void setText( const TQString& t );
    /**
     * Returns the thickness
     */
@@ -134,7 +134,7 @@ private:
     * IDs for @ref PMMementoData
     */
    enum PMTextMementoID { PMFontID, PMTextID, PMThicknessID, PMOffsetID };
-   QString m_font, m_text;
+   TQString m_font, m_text;
    double m_thickness;
    PMVector m_offset;
 

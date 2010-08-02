@@ -16,9 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qtextedit.h>
-#include <qlabel.h>
-#include <qvbox.h>
+#include <tqtextedit.h>
+#include <tqlabel.h>
+#include <tqvbox.h>
 
 #include <kglobalsettings.h>
 #include <kurllabel.h>
@@ -26,35 +26,35 @@
 
 #include "logwindow.h"
 
-LogWindow::LogWindow( const QString& caption, 
-                      QWidget* parent, const char* name) :
+LogWindow::LogWindow( const TQString& caption, 
+                      TQWidget* parent, const char* name) :
     KDialogBase( parent, name, false, caption, User1|Close, Close, false, 
                  KStdGuiItem::clear() )
 {
-    QVBox * display = makeVBoxMainWidget();
+    TQVBox * display = makeVBoxMainWidget();
     
-    _errorIndication = new QLabel( "", display, "logview-label" );
+    _errorIndication = new TQLabel( "", display, "logview-label" );
     _errorIndication->hide();
     
-    _configureGS = new KURLLabel( i18n( "Configure Ghostscript" ), QString::null, display );
+    _configureGS = new KURLLabel( i18n( "Configure Ghostscript" ), TQString::null, display );
     _configureGS->hide();
 
-    _logView = new QTextEdit( display, "logview" );
+    _logView = new TQTextEdit( display, "logview" );
     _logView->setTextFormat( Qt::PlainText );
     _logView->setReadOnly( true );
-    _logView->setWordWrap( QTextEdit::NoWrap );
+    _logView->setWordWrap( TQTextEdit::NoWrap );
     _logView->setFont( KGlobalSettings::fixedFont() );
     _logView->setMinimumWidth( 80 * fontMetrics().width( " " ) );
 
-    connect( this, SIGNAL( user1Clicked() ), SLOT( clear() ) );
-    connect( _configureGS, SIGNAL( leftClickedURL() ), SLOT( emitConfigureGS() ) );
+    connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( clear() ) );
+    connect( _configureGS, TQT_SIGNAL( leftClickedURL() ), TQT_SLOT( emitConfigureGS() ) );
 }
 
 void LogWindow::emitConfigureGS() {
 	emit configureGS();
 }
 
-void LogWindow::append( const QString& message )
+void LogWindow::append( const TQString& message )
 {
     _logView->append( message );
 }
@@ -65,7 +65,7 @@ void LogWindow::clear()
     _errorIndication->clear();
 }
 
-void LogWindow::setLabel( const QString& text, bool showConfigureGS )
+void LogWindow::setLabel( const TQString& text, bool showConfigureGS )
 {
 	_errorIndication->setText( text );
 	_errorIndication->show();

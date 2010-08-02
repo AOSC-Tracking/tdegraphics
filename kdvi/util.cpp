@@ -68,7 +68,7 @@
  *	Print error message and quit.
  */
 
-void oops(QString message)
+void oops(TQString message)
 {
   kdError() << i18n("Fatal Error! ") << message << endl;
 

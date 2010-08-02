@@ -24,7 +24,7 @@
 #include "ksvg_bridge.h"
 #include "ksvg_lookup.h"
 #include "ksvg_scriptinterpreter.h"
-#include <qptrlist.h>
+#include <tqptrlist.h>
 #include <dom/dom_misc.h>
 
 namespace KSVG
@@ -162,7 +162,7 @@ public:
 	}	
 
 private:
-	QPtrList<T> m_impl;
+	TQPtrList<T> m_impl;
 };
 
 }

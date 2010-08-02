@@ -29,9 +29,9 @@
 class PMFinish;
 class PMFloatEdit;
 class PMColorEdit;
-class QCheckBox;
-class QLabel;
-class QWidget;
+class TQCheckBox;
+class TQLabel;
+class TQWidget;
 
 /**
  * Dialog edit class for @ref PMFinish
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMFinishEdit with parent and name
     */
-   PMFinishEdit( QWidget* parent, const char* name = 0 );
+   PMFinishEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -77,45 +77,45 @@ protected slots:
 private:
    PMFinish* m_pDisplayedObject;
    PMColorEdit* m_pAmbientColorEdit;
-   QLabel* m_pAmbientColorLabel;
+   TQLabel* m_pAmbientColorLabel;
    PMFloatEdit* m_pDiffuseEdit;
    PMFloatEdit* m_pBrillianceEdit;
    PMFloatEdit* m_pCrandEdit;
-   QCheckBox* m_pConserveEnergyEdit;
+   TQCheckBox* m_pConserveEnergyEdit;
    PMFloatEdit* m_pPhongEdit;
    PMFloatEdit* m_pPhongSizeEdit;
    PMFloatEdit* m_pMetallicEdit;
    PMFloatEdit* m_pSpecularEdit;
    PMFloatEdit* m_pRoughnessEdit;
-   QCheckBox* m_pIridEdit;
+   TQCheckBox* m_pIridEdit;
    PMFloatEdit* m_pIridAmountEdit;
    PMFloatEdit* m_pIridThicknessEdit;
    PMFloatEdit* m_pIridTurbulenceEdit;
-   QLabel* m_pIridAmountLabel;
-   QLabel* m_pIridThicknessLabel;
-   QLabel* m_pIridTurbulenceLabel;
-   QCheckBox* m_pEnableAmbientEdit;
-   QCheckBox* m_pEnablePhongEdit;
-   QCheckBox* m_pEnablePhongSizeEdit;
-   QCheckBox* m_pEnableDiffuseEdit;
-   QCheckBox* m_pEnableBrillianceEdit;
-   QCheckBox* m_pEnableCrandEdit;
-   QCheckBox* m_pEnableSpecularEdit;
-   QCheckBox* m_pEnableRoughnessEdit;
-   QCheckBox* m_pEnableMetallicEdit;
+   TQLabel* m_pIridAmountLabel;
+   TQLabel* m_pIridThicknessLabel;
+   TQLabel* m_pIridTurbulenceLabel;
+   TQCheckBox* m_pEnableAmbientEdit;
+   TQCheckBox* m_pEnablePhongEdit;
+   TQCheckBox* m_pEnablePhongSizeEdit;
+   TQCheckBox* m_pEnableDiffuseEdit;
+   TQCheckBox* m_pEnableBrillianceEdit;
+   TQCheckBox* m_pEnableCrandEdit;
+   TQCheckBox* m_pEnableSpecularEdit;
+   TQCheckBox* m_pEnableRoughnessEdit;
+   TQCheckBox* m_pEnableMetallicEdit;
 
-   QWidget* m_pReflectionWidget;
+   TQWidget* m_pReflectionWidget;
    PMColorEdit* m_pReflectionColorEdit;
    PMColorEdit* m_pReflectionMinColorEdit;
-   QCheckBox* m_pReflectionFresnelEdit;
+   TQCheckBox* m_pReflectionFresnelEdit;
    PMFloatEdit* m_pReflectionFalloffEdit;
    PMFloatEdit* m_pReflectionExponentEdit;
    PMFloatEdit* m_pReflectionMetallicEdit;
-   QCheckBox* m_pEnableReflectionEdit;
-   QCheckBox* m_pEnableReflectionMinEdit;
-   QCheckBox* m_pEnableRefFalloffEdit;
-   QCheckBox* m_pEnableRefExponentEdit;
-   QCheckBox* m_pEnableRefMetallicEdit;
+   TQCheckBox* m_pEnableReflectionEdit;
+   TQCheckBox* m_pEnableReflectionMinEdit;
+   TQCheckBox* m_pEnableRefFalloffEdit;
+   TQCheckBox* m_pEnableRefExponentEdit;
+   TQCheckBox* m_pEnableRefMetallicEdit;
 };
 
 

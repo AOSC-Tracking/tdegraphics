@@ -19,8 +19,8 @@
 #ifndef MRMLPART_H
 #define MRMLPART_H
 
-#include <qcstring.h>
-#include <qstringlist.h>
+#include <tqcstring.h>
+#include <tqstringlist.h>
 
 #include <kurl.h>
 #include <kparts/factory.h>
@@ -30,9 +30,9 @@
 
 #include "mrml_elements.h"
 
-class QCheckBox;
-class QHGroupBox;
-class QPushButton;
+class TQCheckBox;
+class TQHGroupBox;
+class TQPushButton;
 
 class KAboutData;
 class KComboBox;
@@ -58,15 +58,15 @@ class MrmlPart : public KParts::ReadOnlyPart
 public:
     enum Status { NeedCollection, CanSearch, InProgress };
 
-    MrmlPart( QWidget *parentWidget, const char *widgetName,
-              QObject *parent, const char *name, const QStringList& args );
+    MrmlPart( TQWidget *parentWidget, const char *widgetName,
+              TQObject *parent, const char *name, const TQStringList& args );
     ~MrmlPart();
 
-    QString sessionId() const { return m_sessionId; }
-    QString transactionId() const { return QString::null; } // ###
+    TQString sessionId() const { return m_sessionId; }
+    TQString transactionId() const { return TQString::null; } // ###
 
-    void saveState( QDataStream& stream );
-    void restoreState( QDataStream& stream );
+    void saveState( TQDataStream& stream );
+    void restoreState( TQDataStream& stream );
 
     static KAboutData *createAboutData();
 
@@ -85,16 +85,16 @@ signals:
     /**
      * allow plugins to extend the query
      */
-    void aboutToStartQuery( QDomDocument& );
+    void aboutToStartQuery( TQDomDocument& );
 
 private slots:
     void slotStartClicked();
-    void slotSetStatusBar( const QString& );
+    void slotSetStatusBar( const TQString& );
     void slotSetStatusBar( const KURL& url ) { slotSetStatusBar( url.prettyURL() ); }
-    void slotHostComboActivated( const QString& );
+    void slotHostComboActivated( const TQString& );
 
     void slotResult( KIO::Job * );
-    void slotData( KIO::Job *, const QByteArray& );
+    void slotData( KIO::Job *, const TQByteArray& );
 
     void slotDownloadResult( KIO::Job * );
 
@@ -104,11 +104,11 @@ private slots:
 
 private:
     void createQuery( const KURL::List * relevantItems = 0L );
-    void initCollections( const QDomElement& );
-    void initAlgorithms( const QDomElement& );
-    void performQuery( QDomDocument& doc );
-    void parseMrml( QDomDocument& doc );
-    void parseQueryResult( QDomElement& );
+    void initCollections( const TQDomElement& );
+    void initAlgorithms( const TQDomElement& );
+    void performQuery( TQDomDocument& doc );
+    void parseMrml( TQDomDocument& doc );
+    void parseQueryResult( TQDomElement& );
     void enableExtensionActions( const KURL& url, bool enable );
     KIO::TransferJob * transferJob( const KURL& url );
 
@@ -125,18 +125,18 @@ private:
     Config m_config;
     KIntNumInput * m_resultSizeInput;
     CollectionCombo * m_collectionCombo;
-    QPushButton *m_algoButton;
-    QHGroupBox *m_panel;
-    QPushButton *m_startButton;
-    QCheckBox *m_random;
+    TQPushButton *m_algoButton;
+    TQHGroupBox *m_panel;
+    TQPushButton *m_startButton;
+    TQCheckBox *m_random;
     Browser *m_browser;
     AlgorithmDialog *m_algoConfig;
     KComboBox *m_hostCombo;
 
-    QPtrList<KIO::FileCopyJob> m_downloadJobs;
-    QStringList m_tempFiles;
+    TQPtrList<KIO::FileCopyJob> m_downloadJobs;
+    TQStringList m_tempFiles;
 
-    QString m_sessionId;
+    TQString m_sessionId;
     KURL::List m_queryList; // a list of valid LOCAL (!) urls to query for
 
     CollectionList m_collections;
@@ -158,12 +158,12 @@ public:
     static KInstance * instance();
 
 protected:
-    virtual KParts::Part * createPartObject( QWidget *parentWidget = 0,
+    virtual KParts::Part * createPartObject( TQWidget *parentWidget = 0,
                                         const char *widgetName = 0,
-                                        QObject *parent = 0,
+                                        TQObject *parent = 0,
                                         const char *name = 0,
                                         const char *classname = "KParts::Part",
-                                        const QStringList& args = QStringList() );
+                                        const TQStringList& args = TQStringList() );
 
 private:
     static KInstance * s_instance;

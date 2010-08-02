@@ -22,7 +22,7 @@
 
 PMPlaneNormalControlPoint::PMPlaneNormalControlPoint( PMDistanceControlPoint* d,
                                 const PMVector& normal, int id,
-                                const QString& description )
+                                const TQString& description )
       : PMControlPoint( id, description )
 {
    m_normal = normal;

@@ -30,7 +30,7 @@
 #define KP_VIEW_H
 
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 #include <kpdefs.h>
 
@@ -80,7 +80,7 @@ public:
             kpViewManager *viewManager,
             kpView *buddyView,
             kpViewScrollableContainer *scrollableContainer,
-            QWidget *parent, const char *name);
+            TQWidget *parent, const char *name);
 
     /**
      * Destructs this view.  Informs the viewManager() that the mouse
@@ -159,7 +159,7 @@ public:
      * @returns in views coordinates, where the top-left document() pixel
      *          will be rendered (default: (0,0)).
      */
-    QPoint origin () const;
+    TQPoint origin () const;
 
     /**
      * Sets the origin.
@@ -168,7 +168,7 @@ public:
      *
      * If reimplementing, you must call this base implementation.
      */
-    virtual void setOrigin (const QPoint &origin);
+    virtual void setOrigin (const TQPoint &origin);
 
 
     /**
@@ -210,7 +210,7 @@ protected:
      *          visible through buddyViewScrollableContainer(), that is being
      *          rendered by this view.
      */
-    QRect buddyViewScrollableContainerRectangle () const;
+    TQRect buddyViewScrollableContainerRectangle () const;
 
 protected slots:
     /**
@@ -248,7 +248,7 @@ public:
      * @returns viewPoint transformed to document coordinates, based on the
      *                    origin(), zoomLevelX() and zoomLevelY().
      */
-    QPoint transformViewToDoc (const QPoint &viewPoint) const;
+    TQPoint transformViewToDoc (const TQPoint &viewPoint) const;
 
     /**
      * @param viewRect Rectangle in view coordinates.
@@ -258,9 +258,9 @@ public:
      *
      * For bounding rectangles, you should use this function instead of
      * transformViewToDocX(), transformViewToDocY() or
-     * transformViewToDoc(const QPoint &) which act on coordinates only.
+     * transformViewToDoc(const TQPoint &) which act on coordinates only.
      */
-    QRect transformViewToDoc (const QRect &viewRect) const;
+    TQRect transformViewToDoc (const TQRect &viewRect) const;
 
 
     /**
@@ -285,7 +285,7 @@ public:
      * @returns docPoint transformed to view coordinates, based on the
      *                   origin(), zoomLevelX(), zoomLevelY().
      */
-    QPoint transformDocToView (const QPoint &docPoint) const;
+    TQPoint transformDocToView (const TQPoint &docPoint) const;
 
     /**
      * @param docRect Rectangle in document coordinates.
@@ -295,9 +295,9 @@ public:
      *
      * For bounding rectangles, you should use this function instead of
      * transformDocToViewX(), transformDocToViewY() or
-     * transformDocToView(const QPoint &) which act on coordinates only.
+     * transformDocToView(const TQPoint &) which act on coordinates only.
      */
-    QRect transformDocToView (const QRect &docRect) const;
+    TQRect transformDocToView (const TQRect &docRect) const;
 
 
     /**
@@ -310,7 +310,7 @@ public:
      *          zoomLevelX() and zoomLevelY().  This has less rounding
      *          error than otherView->transformDocToView (transformViewToDoc (viewPoint)).
      */
-    QPoint transformViewToOtherView (const QPoint &viewPoint,
+    TQPoint transformViewToOtherView (const TQPoint &viewPoint,
                                      const kpView *otherView);
     
                                         
@@ -348,7 +348,7 @@ public:
      *
      * @param region Region (in view coordinates) that needs repainting.
      */
-    void addToQueuedArea (const QRegion &region);
+    void addToQueuedArea (const TQRegion &region);
 
     /**
      * Convenience function.  Same as above.
@@ -359,7 +359,7 @@ public:
      *
      * @param rect Rectangle (in view coordinates) that needs repainting.
      */
-     void addToQueuedArea (const QRect &rect);
+     void addToQueuedArea (const TQRect &rect);
 
     /**
      * Removes the dirty region that has been queued for updating.
@@ -374,7 +374,7 @@ public:
      */
     void updateQueuedArea ();
     
-    void updateMicroFocusHint (const QRect &microFocusHint);
+    void updateMicroFocusHint (const TQRect &microFocusHint);
 
 
 public slots:
@@ -395,16 +395,16 @@ public slots:
 
 
 public:
-    QRect selectionViewRect () const;
+    TQRect selectionViewRect () const;
 
-    // (if <viewPoint> is KP_INVALID_POINT, it uses QCursor::pos())
+    // (if <viewPoint> is KP_INVALID_POINT, it uses TQCursor::pos())
 
-    QPoint mouseViewPoint (const QPoint &returnViewPoint = KP_INVALID_POINT) const;
-    QPoint mouseViewPointRelativeToSelection (const QPoint &viewPoint = KP_INVALID_POINT) const;
-    bool mouseOnSelection (const QPoint &viewPoint = KP_INVALID_POINT) const;
+    TQPoint mouseViewPoint (const TQPoint &returnViewPoint = KP_INVALID_POINT) const;
+    TQPoint mouseViewPointRelativeToSelection (const TQPoint &viewPoint = KP_INVALID_POINT) const;
+    bool mouseOnSelection (const TQPoint &viewPoint = KP_INVALID_POINT) const;
 
     int textSelectionMoveBorderAtomicSize () const;
-    bool mouseOnSelectionToMove (const QPoint &viewPoint = KP_INVALID_POINT) const;
+    bool mouseOnSelectionToMove (const TQPoint &viewPoint = KP_INVALID_POINT) const;
 
 protected:
     bool selectionLargeEnoughToHaveResizeHandlesIfAtomicSize (int atomicSize) const;
@@ -412,7 +412,7 @@ public:
     int selectionResizeHandleAtomicSize () const;
     bool selectionLargeEnoughToHaveResizeHandles () const;
 
-    QRegion selectionResizeHandlesViewRegion (bool forRenderer = false) const;
+    TQRegion selectionResizeHandlesViewRegion (bool forRenderer = false) const;
 
     enum SelectionResizeType
     {
@@ -424,9 +424,9 @@ public:
     };
 
     // Returns a bitwise OR of the SelectionResizeType's
-    int mouseOnSelectionResizeHandle (const QPoint &viewPoint = KP_INVALID_POINT) const;
+    int mouseOnSelectionResizeHandle (const TQPoint &viewPoint = KP_INVALID_POINT) const;
 
-    bool mouseOnSelectionToSelectText (const QPoint &viewPoint = KP_INVALID_POINT) const;
+    bool mouseOnSelectionToSelectText (const TQPoint &viewPoint = KP_INVALID_POINT) const;
 
 
 signals:
@@ -443,7 +443,7 @@ signals:
      *
      * @param size New view size.
      */
-    void sizeChanged (const QSize &size);
+    void sizeChanged (const TQSize &size);
 
     /**
      * Convenience signal - same as above.
@@ -460,42 +460,42 @@ signals:
      *
      * @param origin The new origin.
      */
-    void originChanged (const QPoint &origin);
+    void originChanged (const TQPoint &origin);
 
 protected:
-    virtual void mouseMoveEvent (QMouseEvent *e);
-    virtual void mousePressEvent (QMouseEvent *e);
-    virtual void mouseReleaseEvent (QMouseEvent *e);
+    virtual void mouseMoveEvent (TQMouseEvent *e);
+    virtual void mousePressEvent (TQMouseEvent *e);
+    virtual void mouseReleaseEvent (TQMouseEvent *e);
 public:
     // (needs to be public as it may also get event from
-    //  QScrollView::contentsWheelEvent())
-    virtual void wheelEvent (QWheelEvent *e);
+    //  TQScrollView::contentsWheelEvent())
+    virtual void wheelEvent (TQWheelEvent *e);
 
 protected:
-    virtual void keyPressEvent (QKeyEvent *e);
-    virtual void keyReleaseEvent (QKeyEvent *e);
+    virtual void keyPressEvent (TQKeyEvent *e);
+    virtual void keyReleaseEvent (TQKeyEvent *e);
 
-    virtual void focusInEvent (QFocusEvent *e);
-    virtual void focusOutEvent (QFocusEvent *e);
+    virtual void focusInEvent (TQFocusEvent *e);
+    virtual void focusOutEvent (TQFocusEvent *e);
 
-    virtual void enterEvent (QEvent *e);
-    virtual void leaveEvent (QEvent *e);
+    virtual void enterEvent (TQEvent *e);
+    virtual void leaveEvent (TQEvent *e);
 
-    virtual void dragEnterEvent (QDragEnterEvent *);
-    virtual void dragLeaveEvent (QDragLeaveEvent *);
+    virtual void dragEnterEvent (TQDragEnterEvent *);
+    virtual void dragLeaveEvent (TQDragLeaveEvent *);
     
-    virtual void imStartEvent (QIMEvent *e);
-    virtual void imComposeEvent (QIMEvent *e);
-    virtual void imEndEvent (QIMEvent *e);
+    virtual void imStartEvent (TQIMEvent *e);
+    virtual void imComposeEvent (TQIMEvent *e);
+    virtual void imEndEvent (TQIMEvent *e);
 
 public:
     virtual void resize (int w, int h);
 protected:
-    virtual void resizeEvent (QResizeEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
 
 
 protected:
-    QRect paintEventGetDocRect (const QRect &viewRect) const;
+    TQRect paintEventGetDocRect (const TQRect &viewRect) const;
 public:
     /**
      * Draws an opaque background representing transparency.  Currently,
@@ -511,20 +511,20 @@ public:
      *                  e.g. editing.  If set, this function may render
      *                  slightly differently.
      */
-    static void drawTransparentBackground (QPainter *painter,
+    static void drawTransparentBackground (TQPainter *painter,
                                            int viewWidth, int viewHeight,
-                                           const QRect &rect,
+                                           const TQRect &rect,
                                            bool isPreview = false);
 protected:
-    void paintEventDrawCheckerBoard (QPainter *painter, const QRect &viewRect);
-    void paintEventDrawSelection (QPixmap *destPixmap, const QRect &docRect);
+    void paintEventDrawCheckerBoard (TQPainter *painter, const TQRect &viewRect);
+    void paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRect);
     bool selectionResizeHandleAtomicSizeCloseToZoomLevel () const;
-    void paintEventDrawSelectionResizeHandles (QPainter *painter, const QRect &viewRect);
-    void paintEventDrawTempPixmap (QPixmap *destPixmap, const QRect &docRect);
-    void paintEventDrawGridLines (QPainter *painter, const QRect &viewRect);
+    void paintEventDrawSelectionResizeHandles (TQPainter *painter, const TQRect &viewRect);
+    void paintEventDrawTempPixmap (TQPixmap *destPixmap, const TQRect &docRect);
+    void paintEventDrawGridLines (TQPainter *painter, const TQRect &viewRect);
 
-    void paintEventDrawRect (const QRect &viewRect);
-    virtual void paintEvent (QPaintEvent *e);
+    void paintEventDrawRect (const TQRect &viewRect);
+    virtual void paintEvent (TQPaintEvent *e);
 
 
 private:

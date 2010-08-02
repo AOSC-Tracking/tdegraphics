@@ -32,7 +32,7 @@
 #include <kpcoloreffect.h>
 
 
-class QLabel;
+class TQLabel;
 
 class KComboBox;
 class KIntNumInput;
@@ -58,12 +58,12 @@ public:
                             kpMainWindow *mainWindow);
     virtual ~kpEffectBalanceCommand ();
 
-    static QPixmap applyColorEffect (const QPixmap &pixmap,
+    static TQPixmap applyColorEffect (const TQPixmap &pixmap,
                                      int channels,
                                      int brightness, int contrast, int gamma);
 
 protected:
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
 protected:
     int m_channels;
@@ -78,13 +78,13 @@ Q_OBJECT
 public:
     kpEffectBalanceWidget (bool actOnSelection,
                            kpMainWindow *mainWindow,
-                           QWidget *parent, const char *name = 0);
+                           TQWidget *parent, const char *name = 0);
     virtual ~kpEffectBalanceWidget ();
 
-    virtual QString caption () const;
+    virtual TQString caption () const;
 
     virtual bool isNoOp () const;
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     virtual kpColorEffectCommand *createCommand () const;
 
@@ -108,7 +108,7 @@ protected:
     KIntNumInput *m_brightnessInput,
                  *m_contrastInput,
                  *m_gammaInput;
-    QLabel *m_gammaLabel;
+    TQLabel *m_gammaLabel;
     KComboBox *m_channelsComboBox;
 };
 

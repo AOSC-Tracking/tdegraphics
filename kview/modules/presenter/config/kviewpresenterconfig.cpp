@@ -18,9 +18,9 @@
 
 #include "kviewpresenterconfig.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qframe.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqframe.h>
 
 #include <klocale.h>
 #include <kdialog.h>
@@ -28,17 +28,17 @@
 #include <kconfig.h>
 #include <kgenericfactory.h>
 
-typedef KGenericFactory<KViewPresenterConfig, QWidget> KViewPresenterConfigFactory;
+typedef KGenericFactory<KViewPresenterConfig, TQWidget> KViewPresenterConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewpresenterconfig, KViewPresenterConfigFactory( "kcm_kviewpresenterconfig" ) )
 
-KViewPresenterConfig::KViewPresenterConfig( QWidget * parent, const char *, const QStringList & args )
+KViewPresenterConfig::KViewPresenterConfig( TQWidget * parent, const char *, const TQStringList & args )
 	: KCModule( KViewPresenterConfigFactory::instance(), parent, args )
 {
-	QBoxLayout * layout = new QVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 	layout->setAutoAdd( true );
 
-	m_pCheckBox = new QCheckBox( "This is only for testing...", this );
-	connect( m_pCheckBox, SIGNAL( clicked() ), this, SLOT( checkChanged() ) );
+	m_pCheckBox = new TQCheckBox( "This is only for testing...", this );
+	connect( m_pCheckBox, TQT_SIGNAL( clicked() ), this, TQT_SLOT( checkChanged() ) );
 }
 
 KViewPresenterConfig::~KViewPresenterConfig()

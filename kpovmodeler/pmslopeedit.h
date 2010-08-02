@@ -30,9 +30,9 @@ class PMSlope;
 class PMVectorEdit;
 class PMIntEdit;
 class PMFloatEdit;
-class QComboBox;
-class QCheckBox;
-class QLabel;
+class TQComboBox;
+class TQCheckBox;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMSlope.
@@ -45,7 +45,7 @@ public:
    /**
     * Creates a PMSlopeEdit with parent and name
     */
-   PMSlopeEdit( QWidget* parent, const char* name = 0 );
+   PMSlopeEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

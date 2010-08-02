@@ -37,7 +37,7 @@ KJS::UString::UString(const DOM::DOMString &d)
 	rep = KJS::UString::Rep::create(dat, len);
 }
 
-KJS::UString::UString(const QString &d)
+KJS::UString::UString(const TQString &d)
 {
 	unsigned int len = d.length();
 	KJS::UChar *dat = new UChar[len];
@@ -45,24 +45,24 @@ KJS::UString::UString(const QString &d)
 	rep = KJS::UString::Rep::create(dat, len);
 }
 
-QString KJS::UString::qstring() const
+TQString KJS::UString::qstring() const
 {
-	return QString(reinterpret_cast<QChar *>(const_cast<KJS::UChar *>(data())), size());
+	return TQString(reinterpret_cast<TQChar *>(const_cast<KJS::UChar *>(data())), size());
 }
 
 DOM::DOMString KJS::UString::string() const
 {
-	return DOM::DOMString(reinterpret_cast<QChar *>(const_cast<KJS::UChar *>(data())), size());
+	return DOM::DOMString(reinterpret_cast<TQChar *>(const_cast<KJS::UChar *>(data())), size());
 }
 
 DOM::DOMString KJS::Identifier::string() const
 {
-	return DOM::DOMString((QChar*) data(), size());
+	return DOM::DOMString((TQChar*) data(), size());
 }
 
-QString KJS::Identifier::qstring() const
+TQString KJS::Identifier::qstring() const
 {
-	return QString((QChar*) data(), size());
+	return TQString((TQChar*) data(), size());
 }
 
 // vim:ts=4:noet

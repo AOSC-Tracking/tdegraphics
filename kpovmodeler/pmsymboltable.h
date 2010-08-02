@@ -28,8 +28,8 @@
 class PMObject;
 class PMDeclare;
 
-#include <qdict.h>
-#include <qstring.h>
+#include <tqdict.h>
+#include <tqstring.h>
 
 /**
  * Entry in a @ref PMSymbolTable. Can be a @ref PMValue or a @ref PMObject
@@ -42,11 +42,11 @@ public:
    /**
     * Creates a entry for an object
     */
-   PMSymbol( const QString& id, PMDeclare* o );
+   PMSymbol( const TQString& id, PMDeclare* o );
    /**
     * Creates a entry for a value
     */
-   PMSymbol( const QString& id, const PMValue& v );
+   PMSymbol( const TQString& id, const PMValue& v );
    /**
     * Destructor
     */
@@ -59,11 +59,11 @@ public:
    /**
     * Returns the id of the symbol
     */
-   QString id( ) const { return m_id; }
+   TQString id( ) const { return m_id; }
    /**
     * Sets the id
     */
-   void setId( const QString& id );
+   void setId( const TQString& id );
    /**
     * Returns the stored object
     */
@@ -92,13 +92,13 @@ private:
    PMDeclare* m_pObj;
    PMSymbol* m_pRenamedSymbol;
    PMValue* m_pVal;
-   QString m_id;
+   TQString m_id;
 };
 
 /**
  * Symbol table for povray #declare statements
  */
-class PMSymbolTable : public QDict<PMSymbol>
+class PMSymbolTable : public TQDict<PMSymbol>
 {
 public:
    /**
@@ -112,7 +112,7 @@ public:
    /**
     * Returns a free id with prefix prefix and a number as suffix
     */
-   QString findNewID( const QString& prefix );
+   TQString findNewID( const TQString& prefix );
    /**
     * Returns a free id with prefix prefix and a number as suffix and assigns
     * it to the object.
@@ -120,9 +120,9 @@ public:
     * Does NOT add the object to the symbol table.
     *
     * Returns the new symbol.*/
-   PMSymbol* findNewID( const QString& prefix, PMDeclare* obj );
+   PMSymbol* findNewID( const TQString& prefix, PMDeclare* obj );
 private:
-   QDict<int> m_lastID;
+   TQDict<int> m_lastID;
 };
 
 #endif

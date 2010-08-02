@@ -30,14 +30,14 @@
 class PMImageMap;
 class PMPaletteValue;
 class PMVectorEdit;
-class QComboBox;
+class TQComboBox;
 class PMFloatEdit;
 class PMIntEdit;
-class QLabel;
-class QCheckBox;
-class QWidget;
-class QLineEdit;
-class QPushButton;
+class TQLabel;
+class TQCheckBox;
+class TQWidget;
+class TQLineEdit;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMImageMap.
@@ -50,7 +50,7 @@ public:
    /**
     * Creates a PMImageMapEdit with parent and name
     */
-   PMImageMapEdit( QWidget* parent, const char* name = 0 );
+   PMImageMapEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -65,12 +65,12 @@ protected:
    /** */
    virtual void saveContents( );
    /** */
-   QValueList<PMPaletteValue> filters( );
+   TQValueList<PMPaletteValue> filters( );
    /** */
-   QValueList<PMPaletteValue> transmits( );
+   TQValueList<PMPaletteValue> transmits( );
    /** */
-   void displayPaletteEntries( const QValueList<PMPaletteValue>& filters,
-                               const QValueList<PMPaletteValue>& transmits );
+   void displayPaletteEntries( const TQValueList<PMPaletteValue>& filters,
+                               const TQValueList<PMPaletteValue>& transmits );
 
 private slots:
    /** */
@@ -80,7 +80,7 @@ private slots:
    /** */
    void slotInterpolateTypeChanged( int a );
    /** */
-   void slotImageFileNameChanged( const QString& a );
+   void slotImageFileNameChanged( const TQString& a );
    /** */
    void slotImageFileBrowseClicked( );
    /** */
@@ -97,25 +97,25 @@ private slots:
    void slotRemoveTransmitEntry( );
 private:
    PMImageMap*  m_pDisplayedObject;
-   QComboBox*   m_pImageFileTypeEdit;
-   QLineEdit*   m_pImageFileNameEdit;
-   QPushButton* m_pImageFileNameBrowse;
-   QCheckBox*   m_pOnceEdit;
-   QComboBox*   m_pMapTypeEdit;
-   QComboBox*   m_pInterpolateTypeEdit;
-   QCheckBox*   m_pEnableFilterAllEdit;
-   QCheckBox*   m_pEnableTransmitAllEdit;
+   TQComboBox*   m_pImageFileTypeEdit;
+   TQLineEdit*   m_pImageFileNameEdit;
+   TQPushButton* m_pImageFileNameBrowse;
+   TQCheckBox*   m_pOnceEdit;
+   TQComboBox*   m_pMapTypeEdit;
+   TQComboBox*   m_pInterpolateTypeEdit;
+   TQCheckBox*   m_pEnableFilterAllEdit;
+   TQCheckBox*   m_pEnableTransmitAllEdit;
    PMFloatEdit* m_pFilterAllEdit;
    PMFloatEdit* m_pTransmitAllEdit;
-   QWidget*     m_pFiltersWidget;
-   QWidget*     m_pTransmitsWidget;
+   TQWidget*     m_pFiltersWidget;
+   TQWidget*     m_pTransmitsWidget;
 
-   QPtrList<PMPaletteValueEdit> m_filterEntries;
-   QPtrList<QPushButton>        m_filterAddButtons;
-   QPtrList<QPushButton>        m_filterRemoveButtons;
-   QPtrList<PMPaletteValueEdit> m_transmitEntries;
-   QPtrList<QPushButton>        m_transmitAddButtons;
-   QPtrList<QPushButton>        m_transmitRemoveButtons;
+   TQPtrList<PMPaletteValueEdit> m_filterEntries;
+   TQPtrList<TQPushButton>        m_filterAddButtons;
+   TQPtrList<TQPushButton>        m_filterRemoveButtons;
+   TQPtrList<PMPaletteValueEdit> m_transmitEntries;
+   TQPtrList<TQPushButton>        m_transmitAddButtons;
+   TQPtrList<TQPushButton>        m_transmitRemoveButtons;
 };
 
 #endif

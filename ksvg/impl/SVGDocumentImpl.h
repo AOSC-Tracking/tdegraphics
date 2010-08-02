@@ -23,12 +23,12 @@
 
 #include <kurl.h>
 
-#include <qxml.h>
-#include <qobject.h>
-#include <qptrdict.h>
-#include <qptrlist.h>
-#include <qdatetime.h>
-#include <qstringlist.h>
+#include <tqxml.h>
+#include <tqobject.h>
+#include <tqptrdict.h>
+#include <tqptrlist.h>
+#include <tqdatetime.h>
+#include <tqstringlist.h>
 
 #include <kjs/object.h>
 
@@ -66,7 +66,7 @@ class SVGScriptElementImpl;
 class SVGDescElementImpl;
 class SVGTitleElementImpl;
 class SVGUseElementImpl;
-class SVGDocumentImpl : public QObject,
+class SVGDocumentImpl : public TQObject,
 						public DOM::DomShared,
 						public DOM::Document,
 						public SVGDOMNodeBridge
@@ -109,7 +109,7 @@ public:
 	// Ecma stuff
 	KSVGEcma *ecmaEngine() { return m_ecmaEngine; }
 
-	void parseSVG(QXmlInputSource *inputSource, bool getURLMode = false);
+	void parseSVG(TQXmlInputSource *inputSource, bool getURLMode = false);
 
 	virtual bool implementsCall() const { return true; }
 
@@ -139,7 +139,7 @@ public:
 
 	SVGElementImpl *recursiveSearch(DOM::Node start, const DOM::DOMString &id);
 
-	void finishParsing(bool error, const QString &errorDesc);
+	void finishParsing(bool error, const TQString &errorDesc);
 
 	void newImageJob(SVGImageElementImpl *);
 
@@ -148,7 +148,7 @@ public:
 	void resortZIndicesOnFinishedLoading() { m_resortZIndicesOnFinishedLoading = true; }
 	
 	void addForwardReferencingUseElement(SVGUseElementImpl *use);
-	QValueList<SVGUseElementImpl *> forwardReferencingUseElements() const { return m_forwardReferencingUseElements; }
+	TQValueList<SVGUseElementImpl *> forwardReferencingUseElements() const { return m_forwardReferencingUseElements; }
 
 	// Traverse the element hierarchy and update any cached matrices that are
 	// no longer valid.
@@ -159,18 +159,18 @@ public slots:
 	void executeScripts();
 
 private slots:
-	void slotSVGContent(QIODevice *);
-	void slotFinishedParsing(bool error, const QString &errorDesc);
+	void slotSVGContent(TQIODevice *);
+	void slotFinishedParsing(bool error, const TQString &errorDesc);
 
 // KDE invents public signals :)
 #undef signals
 #define signals public
 signals:
-	void gotDescription(const QString &);
-	void gotTitle(const QString &);
-	void gotURL(const QString &);
+	void gotDescription(const TQString &);
+	void gotTitle(const TQString &);
+	void gotURL(const TQString &);
 
-	void finishedParsing(bool error, const QString &errorDesc);
+	void finishedParsing(bool error, const TQString &errorDesc);
 	void finishedRendering();
 	void finishedLoading();
 
@@ -195,8 +195,8 @@ private:
 
 	KSVGEcma *m_ecmaEngine;
 
-	QPtrDict<SVGElementImpl> m_elemDict;
-	QPtrDict<SVGDocumentImpl> m_documentDict;
+	TQPtrDict<SVGElementImpl> m_elemDict;
+	TQPtrDict<SVGDocumentImpl> m_documentDict;
 
 	static uint elemDictHashSizes[];
 	static const int numElemDictHashSizes;
@@ -211,12 +211,12 @@ private:
 
 	bool m_fit;
 
-	QTime m_t;
+	TQTime m_t;
 	
-	QValueList<SVGImageElementImpl *> m_imagesLoading;
+	TQValueList<SVGImageElementImpl *> m_imagesLoading;
 	bool m_resortZIndicesOnFinishedLoading;
 
-	QValueList<SVGUseElementImpl *> m_forwardReferencingUseElements;
+	TQValueList<SVGUseElementImpl *> m_forwardReferencingUseElements;
 
 public:
 	KSVG_BASECLASS_GET

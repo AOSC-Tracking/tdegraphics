@@ -13,10 +13,10 @@
 
 #include "bigEndianByteReader.h"
 
-#include <qintdict.h>
-#include <qiodevice.h>
-#include <qmemarray.h>
-#include <qstring.h>
+#include <tqintdict.h>
+#include <tqiodevice.h>
+#include <tqmemarray.h>
+#include <tqstring.h>
 
 class fontPool;
 class pageSize;
@@ -28,25 +28,25 @@ class dvifile : public bigEndianByteReader
  public:
   /** Makes a deep copy of the old DVI file. */
   dvifile(const dvifile *old, fontPool *fp );
-  dvifile(const QString& fname, class fontPool* pool);
+  dvifile(const TQString& fname, class fontPool* pool);
 
   ~dvifile();
 
   fontPool     * font_pool;
-  QString        filename;
-  QString        generatorString;
+  TQString        filename;
+  TQString        generatorString;
   Q_UINT16       total_pages;
-  QMemArray<Q_UINT32> page_offset;
+  TQMemArray<Q_UINT32> page_offset;
 
   /** Saves the DVI file. Returns true on success. */
-  bool           saveAs(const QString &filename);
+  bool           saveAs(const TQString &filename);
 
   // Returns a pointer to the DVI file's data, or 0 if no data has yet
   // been allocated.
   Q_UINT8      * dvi_Data() {return dviData.data();}
 
-  QIODevice::Offset size_of_file;
-  QString        errorMsg;
+  TQIODevice::Offset size_of_file;
+  TQString        errorMsg;
 
   /** This field is set to zero when the DVI file is constructed, and
       will be modified during the prescan phase (at this time the
@@ -68,7 +68,7 @@ class dvifile : public bigEndianByteReader
       KDVI ensures that the user is only informed once. */
   bool           sourceSpecialMarker;
   
-  QIntDict<TeXFontDefinition> tn_table;
+  TQIntDict<TeXFontDefinition> tn_table;
 
   /** Returns the number of centimeters per DVI unit in this DVI
       file. */
@@ -89,7 +89,7 @@ class dvifile : public bigEndianByteReader
   
   /** Sets new DVI data; all old data is erased. EXPERIMENTAL, use
       with care. */
-  void           setNewData(const QMemArray<Q_UINT8>& newData) {dviData = newData;}
+  void           setNewData(const TQMemArray<Q_UINT8>& newData) {dviData = newData;}
 
   /** Page numbers that appear in a DVI document need not be
       ordered. Worse, page numbers need not be unique. This method
@@ -112,9 +112,9 @@ class dvifile : public bigEndianByteReader
     name, the method will then NOT convert the file, but simply return
     the name from the buffer
 
-  @returns The name of the PS file, or QString::null on failure.
+  @returns The name of the PS file, or TQString::null on failure.
   */
-  QString convertPDFtoPS(const QString &PDFFilename);
+  TQString convertPDFtoPS(const TQString &PDFFilename);
 
  private:
   /** process_preamble reads the information in the preamble and
@@ -134,17 +134,17 @@ class dvifile : public bigEndianByteReader
 
   double         cmPerDVIunit;
 
-  QMemArray<Q_UINT8>  dviData;
+  TQMemArray<Q_UINT8>  dviData;
 
 
   /** Map of filenames for converted PDF files
 
   This map contains names of PDF files that were converted to
   PostScript. The key is the name of the PDF file, the data the name
-  of the associated PS file, or QString::null, if the file could not
+  of the associated PS file, or TQString::null, if the file could not
   be converted. The PS files are deleted when the DVI-file is
   destructed. */
-  QMap<QString, QString> convertedFiles;
+  TQMap<TQString, TQString> convertedFiles;
 };
 
 #endif //ifndef _DVIFILE_H

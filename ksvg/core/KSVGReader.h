@@ -21,8 +21,8 @@
 #ifndef KSVGReader_H
 #define KSVGReader_H
 
-#include <qxml.h>
-#include <qobject.h>
+#include <tqxml.h>
+#include <tqobject.h>
 
 namespace KSVG
 {
@@ -37,17 +37,17 @@ public:
 		bool fit;
 		bool getURLMode;
 
-		QString SVGFragmentId;
+		TQString SVGFragmentId;
 	};
 
 	KSVGReader(SVGDocumentImpl *doc, KSVGCanvas *canvas, ParsingArgs args);
 	virtual ~KSVGReader();
 
-	void parse(QXmlInputSource *source);
-	void finishParsing(bool, const QString &);
+	void parse(TQXmlInputSource *source);
+	void finishParsing(bool, const TQString &);
 
 signals:
-	void finished(bool, const QString &);
+	void finished(bool, const TQString &);
 
 protected:
 	friend class Helper;
@@ -55,7 +55,7 @@ protected:
 	SVGDocumentImpl *doc();
 	KSVGCanvas *canvas();
 
-	void setFinished(bool error, const QString &errorDesc = 0);
+	void setFinished(bool error, const TQString &errorDesc = 0);
 
 private:
 	struct Private;

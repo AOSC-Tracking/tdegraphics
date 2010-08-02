@@ -18,7 +18,7 @@
 
 #include <stdlib.h>
 
-#include <qcolor.h>
+#include <tqcolor.h>
 #include <kconfig.h>
 #include <kglobal.h>
 

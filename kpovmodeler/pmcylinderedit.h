@@ -29,7 +29,7 @@
 class PMVectorEdit;
 class PMFloatEdit;
 class PMCylinder;
-class QCheckBox;
+class TQCheckBox;
 
 class PMCylinderEdit : public PMSolidObjectEdit
 {
@@ -39,7 +39,7 @@ public:
    /**
     * Creates a PMCylinderEdit with parent and name
     */
-   PMCylinderEdit( QWidget* parent, const char* name = 0 );
+   PMCylinderEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -57,7 +57,7 @@ private:
    PMVectorEdit* m_pEnd1;
    PMVectorEdit* m_pEnd2;
    PMFloatEdit* m_pRadius;
-   QCheckBox* m_pOpen;
+   TQCheckBox* m_pOpen;
 
 };	
 #endif

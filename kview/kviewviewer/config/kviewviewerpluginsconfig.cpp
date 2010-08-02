@@ -25,16 +25,16 @@
 #include <ksimpleconfig.h>
 #include <kplugininfo.h>
 
-#include <qstring.h>
+#include <tqstring.h>
 
-typedef KGenericFactory<KViewViewerPluginsConfig, QWidget> KViewViewerPluginsConfigFactory;
+typedef KGenericFactory<KViewViewerPluginsConfig, TQWidget> KViewViewerPluginsConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewviewerpluginsconfig, KViewViewerPluginsConfigFactory( "kcm_kviewviewerpluginsconfig" ) )
 
-KViewViewerPluginsConfig::KViewViewerPluginsConfig( QWidget * parent, const char *, const QStringList & args )
+KViewViewerPluginsConfig::KViewViewerPluginsConfig( TQWidget * parent, const char *, const TQStringList & args )
 	: KSettings::PluginPage( KViewViewerPluginsConfigFactory::instance(), parent, args )
 {
 	m_config = new KSimpleConfig( "kviewviewerrc" );
-	pluginSelector()->addPlugins( QString::fromAscii( "kviewviewer" ), i18n( "Viewer" ), QString::null, m_config );
+	pluginSelector()->addPlugins( TQString::fromAscii( "kviewviewer" ), i18n( "Viewer" ), TQString::null, m_config );
 	pluginSelector()->setShowEmptyConfigPage( false );
 }
 

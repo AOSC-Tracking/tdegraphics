@@ -38,7 +38,7 @@ unsigned int KSVGTextChunk::count() const
 	return m_text.count();
 }
 
-QString KSVGTextChunk::getText(unsigned int index) const
+TQString KSVGTextChunk::getText(unsigned int index) const
 {
 	return m_text[index];
 }
@@ -60,7 +60,7 @@ void KSVGTextChunk::clear()
 	m_textElements.clear();
 }
 
-void KSVGTextChunk::addText(const QString &text, SVGTextContentElementImpl *textElement)
+void KSVGTextChunk::addText(const TQString &text, SVGTextContentElementImpl *textElement)
 {
 	m_text.append(text);
 	m_textElements.append(textElement);

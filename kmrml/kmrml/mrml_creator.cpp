@@ -18,11 +18,11 @@
 
 #include "mrml_creator.h"
 
-QDomElement MrmlCreator::createMrml( QDomDocument& doc,
-                                     const QString& sessionId,
-                                     const QString& transactionId )
+TQDomElement MrmlCreator::createMrml( TQDomDocument& doc,
+                                     const TQString& sessionId,
+                                     const TQString& transactionId )
 {
-    QDomElement mrml = doc.createElement( "mrml" );
+    TQDomElement mrml = doc.createElement( "mrml" );
     doc.appendChild( mrml );
     mrml.setAttribute( MrmlShared::sessionId(), sessionId );
     if ( !transactionId.isNull() )
@@ -31,12 +31,12 @@ QDomElement MrmlCreator::createMrml( QDomDocument& doc,
     return mrml;
 }
 
-QDomElement MrmlCreator::configureSession( QDomElement& mrml,
+TQDomElement MrmlCreator::configureSession( TQDomElement& mrml,
                                            const KMrml::Algorithm& algo,
-                                           const QString& sessionId )
+                                           const TQString& sessionId )
 {
-    QDomDocument doc = mrml.ownerDocument();
-    QDomElement config = doc.createElement( MrmlShared::configureSession() );
+    TQDomDocument doc = mrml.ownerDocument();
+    TQDomElement config = doc.createElement( MrmlShared::configureSession() );
     mrml.appendChild( config );
     config.setAttribute( MrmlShared::sessionId(), sessionId );
     algo.toElement( config );
@@ -44,18 +44,18 @@ QDomElement MrmlCreator::configureSession( QDomElement& mrml,
     return config;
 }
 
-QDomElement MrmlCreator::addQuery( QDomElement& mrml, int resultSize )
+TQDomElement MrmlCreator::addQuery( TQDomElement& mrml, int resultSize )
 {
-    QDomElement query = mrml.ownerDocument().createElement("query-step");
+    TQDomElement query = mrml.ownerDocument().createElement("query-step");
     mrml.appendChild( query );
     // query.setAttribute( "query-step-id", "5" ); // ###
-    query.setAttribute( "result-size", QString::number( resultSize ));
+    query.setAttribute( "result-size", TQString::number( resultSize ));
     return query;
 }
 
-QDomElement MrmlCreator::addRelevanceList( QDomElement& query )
+TQDomElement MrmlCreator::addRelevanceList( TQDomElement& query )
 {
-    QDomElement elem =
+    TQDomElement elem =
         query.ownerDocument().createElement("user-relevance-element-list");
     query.appendChild( elem );
     return elem;
@@ -64,13 +64,13 @@ QDomElement MrmlCreator::addRelevanceList( QDomElement& query )
 /**
  * Creates a <user-relevance-element> with the given attributes set.
  */
-void MrmlCreator::createRelevanceElement( QDomDocument& doc,
-                                          QDomElement& parent,
-                                          const QString& url,
+void MrmlCreator::createRelevanceElement( TQDomDocument& doc,
+                                          TQDomElement& parent,
+                                          const TQString& url,
                                           Relevance relevance )
 {
-    QDomElement element = doc.createElement( "user-relevance-element" );
+    TQDomElement element = doc.createElement( "user-relevance-element" );
     element.setAttribute( "image-location", url );
-    element.setAttribute( "user-relevance", QString::number( relevance ) );
+    element.setAttribute( "user-relevance", TQString::number( relevance ) );
     parent.appendChild( element );
 }

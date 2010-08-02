@@ -22,26 +22,26 @@
 #include <kfilefiltercombo.h>
 
 
-PMFileDialog::PMFileDialog( const QString& startDir, const QString& filter, QWidget* parent, const char* name, bool modal )
+PMFileDialog::PMFileDialog( const TQString& startDir, const TQString& filter, TQWidget* parent, const char* name, bool modal )
       : KFileDialog( startDir, filter, parent, name, modal )
 {
 
 }
 
-QString PMFileDialog::getImportFileName( QWidget* parent, PMPart* part,
+TQString PMFileDialog::getImportFileName( TQWidget* parent, PMPart* part,
                                          PMIOFormat*& format )
 {
    PMIOManager* manager = part->ioManager( );
-   QString filter;
-   QPtrListIterator<PMIOFormat> it( manager->formats( ) );
-   QPtrList<PMIOFormat> formats;
+   TQString filter;
+   TQPtrListIterator<PMIOFormat> it( manager->formats( ) );
+   TQPtrList<PMIOFormat> formats;
 
    for( ; it.current( ); ++it )
    {
       if( it.current( )->services( ) & PMIOFormat::Import )
       {
-         QStringList patterns = it.current( )->importPatterns( );
-         QStringList::Iterator pit;
+         TQStringList patterns = it.current( )->importPatterns( );
+         TQStringList::Iterator pit;
          for( pit = patterns.begin( ); pit != patterns.end( ); ++pit )
          {
             if( !filter.isEmpty( ) )
@@ -52,7 +52,7 @@ QString PMFileDialog::getImportFileName( QWidget* parent, PMPart* part,
       }
    }
 
-   PMFileDialog dlg( QString::null, filter, parent, "import file dialog", true );
+   PMFileDialog dlg( TQString::null, filter, parent, "import file dialog", true );
    dlg.setOperationMode( Opening );
    dlg.setMode( KFile::File | KFile::LocalOnly );
    dlg.setCaption( i18n( "Import" ) );
@@ -64,20 +64,20 @@ QString PMFileDialog::getImportFileName( QWidget* parent, PMPart* part,
    return dlg.selectedFile( );
 }
 
-QString PMFileDialog::getExportFileName( QWidget* parent, PMPart* part,
-                                         PMIOFormat*& format, QString& selectedFilter )
+TQString PMFileDialog::getExportFileName( TQWidget* parent, PMPart* part,
+                                         PMIOFormat*& format, TQString& selectedFilter )
 {
    PMIOManager* manager = part->ioManager( );
-   QString filter;
-   QPtrListIterator<PMIOFormat> it( manager->formats( ) );
-   QPtrList<PMIOFormat> formats;
+   TQString filter;
+   TQPtrListIterator<PMIOFormat> it( manager->formats( ) );
+   TQPtrList<PMIOFormat> formats;
 
    for( ; it.current( ); ++it )
    {
       if( it.current( )->services( ) & PMIOFormat::Export )
       {
-         QStringList patterns = it.current( )->exportPatterns( );
-         QStringList::Iterator pit;
+         TQStringList patterns = it.current( )->exportPatterns( );
+         TQStringList::Iterator pit;
          for( pit = patterns.begin( ); pit != patterns.end( ); ++pit )
          {
             if( !filter.isEmpty( ) )
@@ -88,7 +88,7 @@ QString PMFileDialog::getExportFileName( QWidget* parent, PMPart* part,
       }
    }
 
-   PMFileDialog dlg( QString::null, filter, parent, "export file dialog", true );
+   PMFileDialog dlg( TQString::null, filter, parent, "export file dialog", true );
    dlg.setOperationMode( Saving );
    dlg.setMode( KFile::File | KFile::LocalOnly );
    dlg.setCaption( i18n( "Export" ) );

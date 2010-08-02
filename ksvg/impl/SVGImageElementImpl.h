@@ -21,7 +21,7 @@
 #ifndef SVGImageElementImpl_H
 #define SVGImageElementImpl_H
 
-#include <qobject.h>
+#include <tqobject.h>
 
 #include "ksvg_lookup.h"
 
@@ -42,7 +42,7 @@ class SVGSVGElementImpl;
 class SVGAnimatedLengthImpl;
 class SVGColorProfileElementImpl;
 class SVGAnimatedPreserveAspectRatioImpl;
-class SVGImageElementImpl : public QObject,
+class SVGImageElementImpl : public TQObject,
 							public SVGShapeImpl,
 							public SVGURIReferenceImpl,
 							public SVGTestsImpl,
@@ -67,12 +67,12 @@ public:
 
 	virtual void setAttributes();
 
-	virtual bool prepareMouseEvent(const QPoint &p, const QPoint &a, SVGMouseEventImpl *mev);
+	virtual bool prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *mev);
 
-	void setImage(QImage *image);
-	QImage *image() { return m_image; }
+	void setImage(TQImage *image);
+	TQImage *image() { return m_image; }
 
-	QImage scaledImage();
+	TQImage scaledImage();
 	SVGMatrixImpl *imageMatrix();
 	SVGMatrixImpl *scaledImageMatrix();
 
@@ -81,7 +81,7 @@ public:
 	void applyColorProfile();
 	static void applyColorProfile(SVGColorProfileElementImpl *profile, SVGImageElementImpl *image);
 
-	QString fileName() const;
+	TQString fileName() const;
 
 	virtual SVGRectImpl *getBBox();
 	
@@ -93,7 +93,7 @@ public:
 	void setupSVGElement(SVGSVGElementImpl *svg);
 
 private slots:
-	void slotParsingFinished(bool error, const QString &errorDesc);
+	void slotParsingFinished(bool error, const TQString &errorDesc);
 	void slotLoadingFinished();
 
 private:
@@ -102,7 +102,7 @@ private:
 	SVGAnimatedLengthImpl *m_width;
 	SVGAnimatedLengthImpl *m_height;
 
-	QImage *m_image;
+	TQImage *m_image;
 
 	bool m_colorProfileApplied;
 	SVGAnimatedPreserveAspectRatioImpl *m_preserveAspectRatio;
@@ -127,7 +127,7 @@ public:
 
 struct ImageStreamMap
 {
-	QByteArray *data;
+	TQByteArray *data;
 	SVGImageElementImpl *imageElement;
 };
 

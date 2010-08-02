@@ -18,9 +18,9 @@
 */
 
 #include "windowgrabber.h"
-#include <qbitmap.h>
-#include <qpainter.h>
-#include <qptrlist.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
+#include <tqptrlist.h>
 #include <algorithm>
 
 #include <config.h>
@@ -34,7 +34,7 @@ static
 const int minSize = 8;
 
 static
-bool operator< ( const QRect& r1, const QRect& r2 )
+bool operator< ( const TQRect& r1, const TQRect& r2 )
 {
     return r1.width() * r1.height() < r2.width() * r2.height();
 }
@@ -43,7 +43,7 @@ bool operator< ( const QRect& r1, const QRect& r2 )
 // a tree of window descriptors. Windows in non-viewable state or with height
 // or width smaller than minSize will be ignored.
 static
-void getWindowsRecursive( std::vector<QRect>& windows, Window w,
+void getWindowsRecursive( std::vector<TQRect>& windows, Window w,
 			  int rx = 0, int ry = 0, int depth = 0 )
 {
     XWindowAttributes atts;
@@ -56,7 +56,7 @@ void getWindowsRecursive( std::vector<QRect>& windows, Window w,
 	    y = atts.y + ry;
 	}
 
-	QRect r( x, y, atts.width, atts.height );
+	TQRect r( x, y, atts.width, atts.height );
 	if ( std::find( windows.begin(), windows.end(), r ) == windows.end() ) {
 	    windows.push_back( r );
 	}
@@ -130,15 +130,15 @@ Window windowUnderCursor( bool includeDecorations = true )
 }
 
 static
-QPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
+TQPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
 {
-    QPixmap pm( QPixmap::grabWindow( qt_xrootwin(), x, y, w, h ) );
+    TQPixmap pm( TQPixmap::grabWindow( qt_xrootwin(), x, y, w, h ) );
 
 #ifdef HAVE_X11_EXTENSIONS_SHAPE_H
     int tmp1, tmp2;
     //Check whether the extension is available
     if ( XShapeQueryExtension( qt_xdisplay(), &tmp1, &tmp2 ) ) {
-	QBitmap mask( w, h );
+	TQBitmap mask( w, h );
 	//As the first step, get the mask from XShape.
 	int count, order;
 	XRectangle* rects = XShapeGetRectangles( qt_xdisplay(), child,
@@ -148,30 +148,30 @@ QPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
 	//Since the border area is part of the window, we use bounding
 	// to limit our work region
 	if (rects) {
-	    //Create a QRegion from the rectangles describing the bounding mask.
-	    QRegion contents;
+	    //Create a TQRegion from the rectangles describing the bounding mask.
+	    TQRegion contents;
 	    for ( int pos = 0; pos < count; pos++ )
-		contents += QRegion( rects[pos].x, rects[pos].y,
+		contents += TQRegion( rects[pos].x, rects[pos].y,
 				     rects[pos].width, rects[pos].height );
 	    XFree( rects );
 
 	    //Create the bounding box.
-	    QRegion bbox( 0, 0, w, h );
+	    TQRegion bbox( 0, 0, w, h );
 
 	    if( border > 0 ) {
 		contents.translate( border, border );
-		contents += QRegion( 0, 0, border, h );
-		contents += QRegion( 0, 0, w, border );
-		contents += QRegion( 0, h - border, w, border );
-		contents += QRegion( w - border, 0, border, h );
+		contents += TQRegion( 0, 0, border, h );
+		contents += TQRegion( 0, 0, w, border );
+		contents += TQRegion( 0, h - border, w, border );
+		contents += TQRegion( w - border, 0, border, h );
 	    }
 
 	    //Get the masked away area.
-	    QRegion maskedAway = bbox - contents;
-	    QMemArray<QRect> maskedAwayRects = maskedAway.rects();
+	    TQRegion maskedAway = bbox - contents;
+	    TQMemArray<TQRect> maskedAwayRects = maskedAway.rects();
 
 	    //Construct a bitmap mask from the rectangles
-	    QPainter p(&mask);
+	    TQPainter p(&mask);
 	    p.fillRect(0, 0, w, h, Qt::color1);
 	    for (uint pos = 0; pos < maskedAwayRects.count(); pos++)
 		    p.fillRect(maskedAwayRects[pos], Qt::color0);
@@ -186,7 +186,7 @@ QPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
 }
 
 WindowGrabber::WindowGrabber()
-: QDialog( 0, 0, true, Qt::WStyle_Customize  | Qt::WStyle_NoBorder |
+: TQDialog( 0, 0, true, Qt::WStyle_Customize  | Qt::WStyle_NoBorder |
                        Qt::WStyle_StaysOnTop | Qt::WX11BypassWM ),
   current( -1 ), yPos( -1 )
 {
@@ -196,7 +196,7 @@ WindowGrabber::WindowGrabber()
     XGrabServer( qt_xdisplay() );
     Window child = windowUnderCursor();
     XGetGeometry( qt_xdisplay(), child, &root, &x, &y, &w, &h, &border, &depth );
-    QPixmap pm( grabWindow( child, x, y, w, h, border ) );
+    TQPixmap pm( grabWindow( child, x, y, w, h, border ) );
     getWindowsRecursive( windows, child );
     XUngrabServer( qt_xdisplay() );
 
@@ -210,7 +210,7 @@ WindowGrabber::~WindowGrabber()
 {
 }
 
-QPixmap WindowGrabber::grabCurrent( bool includeDecorations )
+TQPixmap WindowGrabber::grabCurrent( bool includeDecorations )
 {
     Window root;
     int y, x;
@@ -233,19 +233,19 @@ QPixmap WindowGrabber::grabCurrent( bool includeDecorations )
 	    y = newy;
 	}
     }
-    QPixmap pm( grabWindow( child, x, y, w, h, border ) );
+    TQPixmap pm( grabWindow( child, x, y, w, h, border ) );
     XUngrabServer( qt_xdisplay() );
     return pm;
 }
 
-void WindowGrabber::mousePressEvent( QMouseEvent *e )
+void WindowGrabber::mousePressEvent( TQMouseEvent *e )
 {
-    if ( e->button() == QMouseEvent::RightButton )
+    if ( e->button() == TQMouseEvent::RightButton )
 	yPos = e->globalY();
     else {
-	QPixmap pm;
+	TQPixmap pm;
 	if ( current ) {
-	    QRect r( windows[ current ] );
+	    TQRect r( windows[ current ] );
 	    int w = r.width();
 	    int h = r.height();
 	    pm.resize( w, h );
@@ -256,16 +256,16 @@ void WindowGrabber::mousePressEvent( QMouseEvent *e )
     }
 }
 
-void WindowGrabber::mouseReleaseEvent( QMouseEvent *e )
+void WindowGrabber::mouseReleaseEvent( TQMouseEvent *e )
 {
-    if ( e->button() == QMouseEvent::RightButton )
+    if ( e->button() == TQMouseEvent::RightButton )
 	yPos = -1;
 }
 
 static
 const int minDistance = 10;
 
-void WindowGrabber::mouseMoveEvent( QMouseEvent *e )
+void WindowGrabber::mouseMoveEvent( TQMouseEvent *e )
 {
     if ( yPos == -1 ) {
 	int w = windowIndex( e->pos() );
@@ -287,7 +287,7 @@ void WindowGrabber::mouseMoveEvent( QMouseEvent *e )
     }
 }
 
-void WindowGrabber::wheelEvent( QWheelEvent *e )
+void WindowGrabber::wheelEvent( TQWheelEvent *e )
 {
     if ( e->delta() > 0 )
 	increaseScope( e->pos() );
@@ -300,7 +300,7 @@ void WindowGrabber::wheelEvent( QWheelEvent *e )
 // Increases the scope to the next-bigger window containing the mouse pointer.
 // This method is activated by either rotating the mouse wheel forwards or by
 // dragging the mouse forwards while keeping the right mouse button pressed.
-void WindowGrabber::increaseScope( const QPoint &pos )
+void WindowGrabber::increaseScope( const TQPoint &pos )
 {
     for ( uint i = current + 1; i < windows.size(); i++ ) {
 	if ( windows[ i ].contains( pos ) ) {
@@ -314,7 +314,7 @@ void WindowGrabber::increaseScope( const QPoint &pos )
 // Decreases the scope to the next-smaller window containing the mosue pointer.
 // This method is activated by either rotating the mouse wheel backwards or by
 // dragging the mouse backwards while keeping the right mouse button pressed.
-void WindowGrabber::decreaseScope( const QPoint &pos )
+void WindowGrabber::decreaseScope( const TQPoint &pos )
 {
     for ( int i = current - 1; i >= 0; i-- ) {
 	if ( windows[ i ].contains( pos ) ) {
@@ -327,7 +327,7 @@ void WindowGrabber::decreaseScope( const QPoint &pos )
 
 // Searches and returns the index of the first (=smallest) window
 // containing the mouse pointer.
-int WindowGrabber::windowIndex( const QPoint &pos ) const
+int WindowGrabber::windowIndex( const TQPoint &pos ) const
 {
     for ( uint i = 0; i < windows.size(); i++ ) {
 	if ( windows[ i ].contains( pos ) )
@@ -342,9 +342,9 @@ void WindowGrabber::drawBorder()
     repaint();
 
     if ( current >= 0 ) {
-	QPainter p;
+	TQPainter p;
 	p.begin( this );
-	p.setPen( QPen( Qt::red, 3 ) );
+	p.setPen( TQPen( Qt::red, 3 ) );
 	p.drawRect( windows[ current ] );
 	p.end();
     }

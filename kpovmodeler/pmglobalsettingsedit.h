@@ -30,8 +30,8 @@ class PMGlobalSettings;
 class PMColorEdit;
 class PMFloatEdit;
 class PMIntEdit;
-class QCheckBox;
-class QComboBox;
+class TQCheckBox;
+class TQComboBox;
 
 /**
  * Dialog edit class for @ref PMGlobalSettings.
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMGlobalSettingsEdit with parent and name
     */
-   PMGlobalSettingsEdit( QWidget* parent, const char* name = 0 );
+   PMGlobalSettingsEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -70,14 +70,14 @@ private:
    PMFloatEdit* m_pAdcBailoutEdit;
    PMColorEdit* m_pAmbientLightEdit;
    PMFloatEdit* m_pAssumedGammaEdit;
-   QCheckBox*   m_pHfGray16Edit;
+   TQCheckBox*   m_pHfGray16Edit;
    PMColorEdit* m_pIridWaveLengthEdit;
    PMIntEdit*   m_pMaxIntersectionsEdit;
    PMIntEdit*   m_pMaxTraceLevelEdit;
    PMIntEdit*   m_pNumberWavesEdit;
-   QComboBox*   m_pNoiseGeneratorEdit;
-   QCheckBox*   m_pRadiosityEdit;
-   QWidget*     m_pRadiosityWidget;
+   TQComboBox*   m_pNoiseGeneratorEdit;
+   TQCheckBox*   m_pRadiosityEdit;
+   TQWidget*     m_pRadiosityWidget;
    PMFloatEdit* m_pBrightnessEdit;
    PMIntEdit*   m_pCountEdit;
    PMFloatEdit* m_pDistanceMaximumEdit;

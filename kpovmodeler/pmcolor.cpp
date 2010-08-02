@@ -22,8 +22,8 @@
 
 #include "pmdebug.h"
 
-#include <qtextstream.h>
-#include <qstring.h>
+#include <tqtextstream.h>
+#include <tqstring.h>
 
 PMColor::PMColor( )
 {
@@ -67,7 +67,7 @@ PMColor::PMColor( const PMVector& v )
    }
 }
 
-PMColor::PMColor( const QColor& c )
+PMColor::PMColor( const TQColor& c )
 {
    m_colorValue[0] = c.red( ) / 255.0;
    m_colorValue[1] = c.green( ) / 255.0;
@@ -76,7 +76,7 @@ PMColor::PMColor( const QColor& c )
    m_colorValue[4] = 0.0;
 }
 
-QColor PMColor::toQColor( ) const
+TQColor PMColor::toQColor( ) const
 {
    double r, g, b, max = 0;
    r = red( );
@@ -99,14 +99,14 @@ QColor PMColor::toQColor( ) const
       g /= max;
       b /= max;
    }
-   return QColor( ( int ) ( r * 255 + 0.5 ), ( int ) ( g * 255 + 0.5 ),
+   return TQColor( ( int ) ( r * 255 + 0.5 ), ( int ) ( g * 255 + 0.5 ),
                   ( int ) ( b * 255 + 0.5 ) );
 }
 
-QString PMColor::serialize( bool addColorKeyword ) const
+TQString PMColor::serialize( bool addColorKeyword ) const
 {
-   QString result;
-   QTextStream str( &result, IO_WriteOnly );
+   TQString result;
+   TQTextStream str( &result, IO_WriteOnly );
 
    if( addColorKeyword )
       str << "color ";
@@ -146,10 +146,10 @@ QString PMColor::serialize( bool addColorKeyword ) const
    return result;
 }
 
-QString PMColor::serializeXML( ) const
+TQString PMColor::serializeXML( ) const
 {
-   QString result;
-   QTextStream str( &result, IO_WriteOnly );
+   TQString result;
+   TQTextStream str( &result, IO_WriteOnly );
    int i;
 
    for( i = 0; i < 5; i++ )
@@ -177,11 +177,11 @@ bool PMColor::operator== ( const PMColor& c ) const
    return true;
 }
 
-bool PMColor::loadXML( const QString& str )
+bool PMColor::loadXML( const TQString& str )
 {
-   QString tmp( str );
-   QTextStream s( &tmp, IO_ReadOnly );
-   QString val;
+   TQString tmp( str );
+   TQTextStream s( &tmp, IO_ReadOnly );
+   TQString val;
    bool ok;
    int i;
    

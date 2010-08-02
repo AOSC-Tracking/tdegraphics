@@ -30,13 +30,13 @@
 #define __kp_cursor_provider_h__
 
 
-class QCursor;
+class TQCursor;
 
 
 class kpCursorProvider
 {
 public:
-    static QCursor lightCross ();
+    static TQCursor lightCross ();
 };
 
 

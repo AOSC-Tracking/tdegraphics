@@ -22,26 +22,26 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <qcursor.h>
-#include <qpainter.h>
-#include <qrect.h>
+#include <tqcursor.h>
+#include <tqpainter.h>
+#include <tqrect.h>
 #include <math.h>
 
 #include "pageView.h"
 #include "pageNumber.h"
 
-PageView::PageView( QWidget* parent, const char* name )
-  : QScrollView( parent, name, WStaticContents | WNoAutoErase)
+PageView::PageView( TQWidget* parent, const char* name )
+  : TQScrollView( parent, name, WStaticContents | WNoAutoErase)
 {
   moveTool = true;
 
   widgetList = 0;
-  viewport()->setFocusPolicy(QWidget::StrongFocus);
+  viewport()->setFocusPolicy(TQWidget::StrongFocus);
 
-  setResizePolicy(QScrollView::Manual);
+  setResizePolicy(TQScrollView::Manual);
 
-  setVScrollBarMode(QScrollView::Auto);
-  setHScrollBarMode(QScrollView::Auto);
+  setVScrollBarMode(TQScrollView::Auto);
+  setHScrollBarMode(TQScrollView::Auto);
 
   viewport()->setBackgroundMode(Qt::NoBackground);
 
@@ -54,11 +54,11 @@ PageView::PageView( QWidget* parent, const char* name )
   continuousViewmode = true;
   fullScreen = false;
 
-  connect(this, SIGNAL(contentsMoving(int, int)), this, SLOT(calculateCurrentPageNumber(int, int)));
+  connect(this, TQT_SIGNAL(contentsMoving(int, int)), this, TQT_SLOT(calculateCurrentPageNumber(int, int)));
 }
 
 
-void PageView::addChild( QPtrVector<DocumentWidget> *wdgList )
+void PageView::addChild( TQPtrVector<DocumentWidget> *wdgList )
 {
   if( wdgList == 0 ) {
     kdError(1223) << "PageView::addChild(...) called with invalid arguments" << endl;
@@ -171,7 +171,7 @@ void PageView::scrollTop()
   verticalScrollBar()->setValue( verticalScrollBar()->minValue() );
 }
 
-void PageView::keyPressEvent( QKeyEvent* e )
+void PageView::keyPressEvent( TQKeyEvent* e )
 {
   switch ( e->key() ) {
     case Key_Up:
@@ -193,7 +193,7 @@ void PageView::keyPressEvent( QKeyEvent* e )
   e->accept();
 }
 
-void PageView::contentsMousePressEvent( QMouseEvent* e )
+void PageView::contentsMousePressEvent( TQMouseEvent* e )
 {
   if (e->button() == LeftButton)
   {
@@ -213,26 +213,26 @@ void PageView::contentsMousePressEvent( QMouseEvent* e )
   }
 }
 
-void PageView::contentsMouseReleaseEvent( QMouseEvent* )
+void PageView::contentsMouseReleaseEvent( TQMouseEvent* )
 {
   setCursor(Qt::arrowCursor);
 }
 
-void PageView::contentsMouseMoveEvent( QMouseEvent* e )
+void PageView::contentsMouseMoveEvent( TQMouseEvent* e )
 {
-  QPoint newPos = e->globalPos();
+  TQPoint newPos = e->globalPos();
 
   if (e->state() == LeftButton && moveTool)
   {
-    QPoint delta = dragGrabPos - newPos;
+    TQPoint delta = dragGrabPos - newPos;
     scrollBy(delta.x(), delta.y());
   }
   dragGrabPos = newPos;
 }
 
-void PageView::viewportResizeEvent( QResizeEvent* e )
+void PageView::viewportResizeEvent( TQResizeEvent* e )
 {
-  QScrollView::viewportResizeEvent( e );
+  TQScrollView::viewportResizeEvent( e );
 
   if (!widgetList)
     return;
@@ -265,11 +265,11 @@ bool PageView::singlePageFullScreenMode()
 void PageView::slotShowScrollbars(bool status)
 {
   if (status == true) {
-    setVScrollBarMode(QScrollView::Auto);
-    setHScrollBarMode(QScrollView::Auto);
+    setVScrollBarMode(TQScrollView::Auto);
+    setHScrollBarMode(TQScrollView::Auto);
   } else {
-    setVScrollBarMode(QScrollView::AlwaysOff);
-    setHScrollBarMode(QScrollView::AlwaysOff);
+    setVScrollBarMode(TQScrollView::AlwaysOff);
+    setHScrollBarMode(TQScrollView::AlwaysOff);
   }
 }
 
@@ -278,10 +278,10 @@ void PageView::setFullScreenMode(bool fullScreen)
   this -> fullScreen = fullScreen;
   if (fullScreen == true) 
   {
-    setVScrollBarMode(QScrollView::AlwaysOff);
-    setHScrollBarMode(QScrollView::AlwaysOff);
+    setVScrollBarMode(TQScrollView::AlwaysOff);
+    setHScrollBarMode(TQScrollView::AlwaysOff);
     oldFrameStyle = frameStyle();
-    setFrameStyle(QFrame::NoFrame);
+    setFrameStyle(TQFrame::NoFrame);
     backgroundColor = viewport()->paletteBackgroundColor();
     if (singlePageFullScreenMode())
     {
@@ -307,7 +307,7 @@ void PageView::layoutPages(bool zoomChanged)
   // (we detect that by looking at the contentsWidth and -Height).
   if (widgetList->isEmpty()) {
     if ((contentsWidth() != 0) || (contentsHeight() != 0)) {
-      QScrollView::resizeContents(0,0);
+      TQScrollView::resizeContents(0,0);
     }
     return;
   }
@@ -321,7 +321,7 @@ void PageView::layoutPages(bool zoomChanged)
     distance = 0;
   }
 
-  QMemArray<Q_UINT32> colWidth(nrCols);
+  TQMemArray<Q_UINT32> colWidth(nrCols);
   for(Q_UINT8 i=0; i<colWidth.size(); i++)
     colWidth[i] = 0;
 
@@ -335,7 +335,7 @@ void PageView::layoutPages(bool zoomChanged)
     numRows = (Q_INT16)ceil(((double)widgetList->size()) / nrCols);
   }
 
-  QMemArray<Q_UINT32> rowHeight(numRows);
+  TQMemArray<Q_UINT32> rowHeight(numRows);
   for(Q_UINT16 i=0; i<rowHeight.size(); i++)
     rowHeight[i] = 0;
 
@@ -369,7 +369,7 @@ void PageView::layoutPages(bool zoomChanged)
     totalWidth += colWidth[i];
 
   totalWidth += (nrCols+1)*distance;
-  QSize newViewportSize = viewportSize( totalWidth, totalHeight );
+  TQSize newViewportSize = viewportSize( totalWidth, totalHeight );
   Q_UINT32 centeringLeft = 0;
   if( (Q_UINT32)newViewportSize.width() > totalWidth )
     centeringLeft = ( newViewportSize.width() - totalWidth )/2;
@@ -381,7 +381,7 @@ void PageView::layoutPages(bool zoomChanged)
   if (((Q_UINT32)contentsWidth() != totalWidth) || ((Q_UINT32)contentsHeight() != totalHeight))
   {
     // Calculate the point in the coordinates of the contents which is currently at the center of the viewport.
-    QPoint midPoint = QPoint(visibleWidth() / 2 + contentsX(), visibleHeight() / 2 + contentsY()); 
+    TQPoint midPoint = TQPoint(visibleWidth() / 2 + contentsX(), visibleHeight() / 2 + contentsY()); 
     double midPointRatioX = (double)(midPoint.x()) / contentsWidth();
     double midPointRatioY = (double)(midPoint.y()) / contentsHeight();
 
@@ -394,12 +394,12 @@ void PageView::layoutPages(bool zoomChanged)
 
   // Finally, calculate the left and top coordinates of each row and
   // column, respectively
-  QMemArray<Q_UINT32> colLeft(nrCols);
+  TQMemArray<Q_UINT32> colLeft(nrCols);
   colLeft[0] = distance;
   for(Q_UINT8 i=1; i<colLeft.size(); i++)
     colLeft[i] = colLeft[i-1]+colWidth[i-1]+distance;
 
-  QMemArray<Q_UINT32> rowTop(numRows);
+  TQMemArray<Q_UINT32> rowTop(numRows);
   rowTop[0] = distance;
   for(Q_UINT16 i=1; i<rowTop.size(); i++)
     rowTop[i] = rowTop[i-1]+rowHeight[i-1]+distance;
@@ -442,13 +442,13 @@ void PageView::layoutPages(bool zoomChanged)
 }
 
 
-void PageView::contentsWheelEvent ( QWheelEvent * e )
+void PageView::contentsWheelEvent ( TQWheelEvent * e )
 {
   emit(wheelEventReceived(e));
 }
 
 
-void PageView::moveViewportToWidget(QWidget* widget, int y)
+void PageView::moveViewportToWidget(TQWidget* widget, int y)
 {
   int verticalPos = 0;
   int verticalPosTop = 0;
@@ -487,10 +487,10 @@ void PageView::moveViewportToWidget(QWidget* widget, int y)
 }
 
 
-void PageView::viewportPaintEvent(QPaintEvent* e)
+void PageView::viewportPaintEvent(TQPaintEvent* e)
 {
   // Region from which rectangles occupied by child widgets will by substracted.
-  QRegion backgroundArea(e->rect());
+  TQRegion backgroundArea(e->rect());
 
   if (widgetList != 0)
   {
@@ -502,12 +502,12 @@ void PageView::viewportPaintEvent(QPaintEvent* e)
       if (!item->geometry().intersects(e->rect()))
         continue;
 
-      QRect widgetGeometry = item->geometry();
+      TQRect widgetGeometry = item->geometry();
 
       // Draw the widget.
       if (e->rect().intersects(widgetGeometry))
       {
-        QRect widgetRect = e->rect().intersect(widgetGeometry);
+        TQRect widgetRect = e->rect().intersect(widgetGeometry);
         widgetRect.moveBy(-widgetGeometry.left(), -widgetGeometry.top());
 
         item->update(widgetRect);
@@ -519,9 +519,9 @@ void PageView::viewportPaintEvent(QPaintEvent* e)
   }
 
   // Paint the background.
-  QPainter p(viewport());
+  TQPainter p(viewport());
 
-  QMemArray<QRect> backgroundRects = backgroundArea.rects();
+  TQMemArray<TQRect> backgroundRects = backgroundArea.rects();
 
   for (unsigned int i = 0; i < backgroundRects.count(); i++)
     p.fillRect(backgroundRects[i], colorGroup().mid());
@@ -534,7 +534,7 @@ void PageView::calculateCurrentPageNumber(int x, int y)
   if (widgetList == 0)
     return;
 
-  QRect viewportRect(x, y, visibleWidth(), visibleHeight());
+  TQRect viewportRect(x, y, visibleWidth(), visibleHeight());
 
   //kdDebug() << "viewportRect(" << viewportRect.x() << ", " << viewportRect.y() << ", "
   //          << viewportRect.width() << ", " << viewportRect.height() << ")" << endl;
@@ -552,14 +552,14 @@ void PageView::calculateCurrentPageNumber(int x, int y)
     // Check if the Widget is visible
     int cx = childX(documentWidget);
     int cy = childY(documentWidget);
-    QRect widgetRect(cx, cy, documentWidget->width(), documentWidget->height());
+    TQRect widgetRect(cx, cy, documentWidget->width(), documentWidget->height());
     bool isVisible = widgetRect.intersects(viewportRect);
 
     if (!isVisible)
       continue;
 
     // Calculate the number of visible pixels of the widget
-    QRect visibleRect = widgetRect.intersect(viewportRect);
+    TQRect visibleRect = widgetRect.intersect(viewportRect);
     int visiblePixels = visibleRect.width() * visibleRect.height();
 
     //kdDebug() << visiblePixels << " pixels are visible of page " << documentWidget->getPageNumber() << endl;

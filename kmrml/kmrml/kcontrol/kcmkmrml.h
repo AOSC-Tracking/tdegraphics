@@ -33,13 +33,13 @@ namespace KMrmlConfig
         Q_OBJECT
     
     public:
-        KCMKMrml(QWidget *parent, const char *name, const QStringList &);
+        KCMKMrml(TQWidget *parent, const char *name, const TQStringList &);
         virtual ~KCMKMrml();
 
         virtual void defaults();
         virtual void load();
         virtual void save();
-        virtual QString quickHelp() const;
+        virtual TQString quickHelp() const;
 
     private:
         void checkGiftInstallation();

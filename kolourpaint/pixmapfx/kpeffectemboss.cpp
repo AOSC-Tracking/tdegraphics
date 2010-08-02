@@ -30,12 +30,12 @@
 
 #include <kpeffectemboss.h>
 
-#include <qcheckbox.h>
-#include <qimage.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qpushbutton.h>
+#include <tqcheckbox.h>
+#include <tqimage.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqpixmap.h>
+#include <tqpushbutton.h>
 
 #include <kdebug.h>
 #include <kimageeffect.h>
@@ -62,7 +62,7 @@ kpEffectEmbossCommand::~kpEffectEmbossCommand ()
 
 
 // public static
-QPixmap kpEffectEmbossCommand::apply (const QPixmap &pixmap,
+TQPixmap kpEffectEmbossCommand::apply (const TQPixmap &pixmap,
                                       double radius, double sigma,
                                       int repeat)
 {
@@ -76,19 +76,19 @@ QPixmap kpEffectEmbossCommand::apply (const QPixmap &pixmap,
 #endif
 
     // (KImageEffect::emboss() ignores mask)
-    QPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
+    TQPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
         pixmap,
         Qt::white/*arbitrarily chosen*/);
 
 
-    QImage image = kpPixmapFX::convertToImage (usePixmap);
+    TQImage image = kpPixmapFX::convertToImage (usePixmap);
 
     for (int i = 0; i < repeat; i++)
     {
         image = KImageEffect::emboss (image, radius, sigma);
     }
 
-    QPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
+    TQPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
 
 
     // KImageEffect::emboss() nukes mask - restore it
@@ -100,7 +100,7 @@ QPixmap kpEffectEmbossCommand::apply (const QPixmap &pixmap,
 }
 
 // protected virtual [base kpColorEffectCommand]
-QPixmap kpEffectEmbossCommand::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectEmbossCommand::applyColorEffect (const TQPixmap &pixmap)
 {
     return apply (pixmap, m_radius, m_sigma, m_repeat);
 }
@@ -109,14 +109,14 @@ QPixmap kpEffectEmbossCommand::applyColorEffect (const QPixmap &pixmap)
 
 kpEffectEmbossWidget::kpEffectEmbossWidget (bool actOnSelection,
                                             kpMainWindow *mainWindow,
-                                            QWidget *parent, const char *name)
+                                            TQWidget *parent, const char *name)
     : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
-    QGridLayout *lay = new QGridLayout (this, 4, 2, marginHint (), spacingHint ());
+    TQGridLayout *lay = new TQGridLayout (this, 4, 2, marginHint (), spacingHint ());
 
 
 #if 0
-    QLabel *amountLabel = new QLabel (i18n ("&Amount:"), this);
+    TQLabel *amountLabel = new TQLabel (i18n ("&Amount:"), this);
     m_amountInput = new KIntNumInput (this);
     m_amountInput->setRange (0, 10, 1/*step*/, true/*slider*/);
     m_amountInput->setSpecialValueText (i18n ("None"));
@@ -131,11 +131,11 @@ kpEffectEmbossWidget::kpEffectEmbossWidget (bool actOnSelection,
     lay->setColStretch (1, 1);
 
 
-    connect (m_amountInput, SIGNAL (valueChanged (int)),
-             this, SIGNAL (settingsChanged ()));
+    connect (m_amountInput, TQT_SIGNAL (valueChanged (int)),
+             this, TQT_SIGNAL (settingsChanged ()));
 #endif
 
-    m_enableCheckBox = new QCheckBox (i18n ("E&nable"), this);
+    m_enableCheckBox = new TQCheckBox (i18n ("E&nable"), this);
 
 
     lay->addMultiCellWidget (m_enableCheckBox, 0, 0, 0, 1, Qt::AlignCenter);
@@ -144,8 +144,8 @@ kpEffectEmbossWidget::kpEffectEmbossWidget (bool actOnSelection,
     // (settingsChangedDelayed() instead of settingsChanged() so that the
     //  user can quickly press OK to apply effect to document directly and
     //  not have to wait for the also slow preview)
-    connect (m_enableCheckBox, SIGNAL (toggled (bool)),
-             this, SIGNAL (settingsChangedDelayed ()));
+    connect (m_enableCheckBox, TQT_SIGNAL (toggled (bool)),
+             this, TQT_SIGNAL (settingsChangedDelayed ()));
 }
 
 kpEffectEmbossWidget::~kpEffectEmbossWidget ()
@@ -154,9 +154,9 @@ kpEffectEmbossWidget::~kpEffectEmbossWidget ()
 
 
 // public virtual [base kpColorEffectWidget]
-QString kpEffectEmbossWidget::caption () const
+TQString kpEffectEmbossWidget::caption () const
 {
-    return QString::null;
+    return TQString::null;
 }
 
 
@@ -168,7 +168,7 @@ bool kpEffectEmbossWidget::isNoOp () const
 }
 
 // public virtual [base kpColorEffectWidget]
-QPixmap kpEffectEmbossWidget::applyColorEffect (const QPixmap &pixmap)
+TQPixmap kpEffectEmbossWidget::applyColorEffect (const TQPixmap &pixmap)
 {
     if (isNoOp ())
         return pixmap;

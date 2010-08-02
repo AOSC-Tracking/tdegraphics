@@ -18,7 +18,7 @@
 
 #include "pmscene.h"
 #include <klocale.h>
-#include <qdom.h>
+#include <tqdom.h>
 #include "pmxmlhelper.h"
 #include "pmdocumentformat.h"
 
@@ -47,7 +47,7 @@ PMScene::~PMScene( )
    m_renderModes.clear( );
 }
 
-QString PMScene::description( ) const
+TQString PMScene::description( ) const
 {
    return i18n( "scene" );
 }
@@ -72,13 +72,13 @@ void PMScene::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMScene::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMScene::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "majorFormat", c_majorDocumentFormat );
    e.setAttribute( "minorFormat", c_minorDocumentFormat );
    e.setAttribute( "visibility_level", m_visibilityLevel );
-   QDomElement data = doc.createElement( "extra_data" );
-   QDomElement rm;
+   TQDomElement data = doc.createElement( "extra_data" );
+   TQDomElement rm;
 
    PMRenderModeListIterator it( m_renderModes );
    for( ; it.current( ); ++it )
@@ -95,15 +95,15 @@ void PMScene::serialize( QDomElement& e, QDomDocument& doc ) const
 void PMScene::readAttributes( const PMXMLHelper& h )
 {
    m_visibilityLevel = h.intAttribute( "visibility_level", c_defaultVisibilityLevel );
-   QDomElement e = h.extraData( );
+   TQDomElement e = h.extraData( );
    if( !e.isNull( ) )
    {
-      QDomNode c = e.firstChild( );
+      TQDomNode c = e.firstChild( );
       while( !c.isNull( ) )
       {
          if( c.isElement( ) )
          {
-            QDomElement ce = c.toElement( );
+            TQDomElement ce = c.toElement( );
             if( ce.tagName( ) == "rendermode" )
                m_renderModes.append( new PMRenderMode( ce ) );
          }

@@ -21,7 +21,7 @@
 #ifndef SVGMatrixImpl_H
 #define SVGMatrixImpl_H
 
-#include <qwmatrix.h>
+#include <tqwmatrix.h>
 
 #include <dom/dom_misc.h>
 
@@ -35,7 +35,7 @@ class SVGMatrixImpl : public DOM::DomShared
 { 
 public:
 	SVGMatrixImpl();
-	SVGMatrixImpl(QWMatrix mat);
+	SVGMatrixImpl(TQWMatrix mat);
 	SVGMatrixImpl(double, double, double, double, double, double);
 	~SVGMatrixImpl();
 
@@ -88,8 +88,8 @@ public:
 	void reset();
 
 	// KSVG helper method
-	QWMatrix &qmatrix();
-	const QWMatrix &qmatrix() const;
+	TQWMatrix &qmatrix();
+	const TQWMatrix &qmatrix() const;
 
 	// Determine the scaling component of the matrix and factor it out. After
 	// this operation, the matrix has x and y scale of one.
@@ -99,8 +99,8 @@ public:
 	KSVGPolygon inverseMap(const KSVGPolygon& polygon) const;
 
 private:
-	void setMatrix(QWMatrix mat);
-	QWMatrix m_mat;
+	void setMatrix(TQWMatrix mat);
+	TQWMatrix m_mat;
 	
 public:
 	KSVG_GET

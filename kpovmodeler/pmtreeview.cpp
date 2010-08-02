@@ -18,11 +18,11 @@
 
 #include <stdlib.h>
 
-#include <qlistview.h>
-#include <qheader.h>
-#include <qlayout.h>
-#include <qpopupmenu.h>
-#include <qcursor.h>
+#include <tqlistview.h>
+#include <tqheader.h>
+#include <tqlayout.h>
+#include <tqpopupmenu.h>
+#include <tqcursor.h>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -38,23 +38,23 @@
 #include "pmobjectdrag.h"
 
 
-PMTreeViewWidget::PMTreeViewWidget( PMPart* part, QWidget* parent /*= 0*/,
+PMTreeViewWidget::PMTreeViewWidget( PMPart* part, TQWidget* parent /*= 0*/,
                                     const char* name /*=0*/ )
       : PMViewBase( parent, name )
 {
-   QHBoxLayout* hl = new QHBoxLayout( this );
+   TQHBoxLayout* hl = new TQHBoxLayout( this );
    PMTreeView* tv = new PMTreeView( part, this );
    hl->addWidget( tv );
 }
 
-QString PMTreeViewWidget::description( ) const
+TQString PMTreeViewWidget::description( ) const
 {
    return i18n( "Object Tree" );
 }
 
-PMTreeView::PMTreeView( PMPart* part, QWidget* parent /*= 0*/,
+PMTreeView::PMTreeView( PMPart* part, TQWidget* parent /*= 0*/,
                         const char* name /*= 0*/ )
-      : QListView( parent, name )
+      : TQListView( parent, name )
 {
    addColumn( i18n( "Objects" ) );
    header( )->hide( );
@@ -75,16 +75,16 @@ PMTreeView::PMTreeView( PMPart* part, QWidget* parent /*= 0*/,
 
    viewport( )->setAcceptDrops( true );
    viewport( )->setMouseTracking( true );
-   viewport( )->setFocusPolicy( QWidget::WheelFocus );
-   setFocusPolicy( QWidget::WheelFocus );
+   viewport( )->setFocusPolicy( TQWidget::WheelFocus );
+   setFocusPolicy( TQWidget::WheelFocus );
    setAcceptDrops( true );
 
-   connect( part, SIGNAL( refresh( ) ), SLOT( slotRefresh( ) ) );
-   connect( part, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-                  SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
-   connect( part, SIGNAL( clear( ) ), SLOT( slotClear( ) ) );
-   connect( this, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-            part, SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
+   connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );
+   connect( part, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+                  TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQT_SIGNAL( clear( ) ), TQT_SLOT( slotClear( ) ) );
+   connect( this, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            part, TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
    slotRefresh( );
 }
@@ -95,7 +95,7 @@ PMTreeView::~PMTreeView( )
 }
 
 void PMTreeView::slotObjectChanged( PMObject* obj, const int mode,
-                                    QObject* sender )
+                                    TQObject* sender )
 {
    PMTreeViewItem* pTreeItem = 0;
    bool as = m_acceptSelect;
@@ -114,11 +114,11 @@ void PMTreeView::slotObjectChanged( PMObject* obj, const int mode,
          else
          {
             // find the parent in the listview
-            QListViewItem* pParentTreeItem = findObject( obj->parent( ) );
+            TQListViewItem* pParentTreeItem = findObject( obj->parent( ) );
             if( pParentTreeItem )
             {
                PMObject* hObj = obj->prevSibling( );
-               QListViewItem* pSibling = 0;
+               TQListViewItem* pSibling = 0;
                bool found = false;
 
                if( hObj )
@@ -261,9 +261,9 @@ PMTreeViewItem* PMTreeView::findObject( const PMObject* obj )
 }
 
 
-void PMTreeView::selectItem( QListViewItem* /*sitem*/ )
+void PMTreeView::selectItem( TQListViewItem* /*sitem*/ )
 {
-/*   QListViewItem* pItem = 0;
+/*   TQListViewItem* pItem = 0;
    bool emitSig;
    emitSig = ( m_pSelectedObject != ( ( PMTreeViewItem* ) sitem )->object( ) );
 
@@ -342,7 +342,7 @@ void PMTreeView::itemSelected( PMTreeViewItem* item, bool selected )
    }
 }
 
-void PMTreeView::contentsMousePressEvent( QMouseEvent * e )
+void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
 {
    m_itemSelected = false;
    m_itemDeselected = false;
@@ -351,11 +351,11 @@ void PMTreeView::contentsMousePressEvent( QMouseEvent * e )
    m_selectOnReleaseEvent = false;
    bool specialAction = false;
 
-   QListViewItem* oldCurrent = currentItem( );
+   TQListViewItem* oldCurrent = currentItem( );
 
    m_event = true;
    m_acceptSelect = true;
-   QListView::contentsMousePressEvent( e );
+   TQListView::contentsMousePressEvent( e );
    m_event = false;
    m_acceptSelect = true;
 
@@ -399,7 +399,7 @@ void PMTreeView::contentsMousePressEvent( QMouseEvent * e )
             if( m_pLastSelected->object( )->isSelectable( ) )
             {
                bool down = oldCurrent->itemPos( ) < m_pLastSelected->itemPos( );
-               QListViewItem* tmp;
+               TQListViewItem* tmp;
 
                if( down )
                {
@@ -446,7 +446,7 @@ void PMTreeView::contentsMousePressEvent( QMouseEvent * e )
    m_acceptSelect = false;
 }
 
-void PMTreeView::contentsMouseMoveEvent( QMouseEvent * e )
+void PMTreeView::contentsMouseMoveEvent( TQMouseEvent * e )
 {
    m_itemSelected = false;
    m_itemDeselected = false;
@@ -454,7 +454,7 @@ void PMTreeView::contentsMouseMoveEvent( QMouseEvent * e )
    m_selectionCleared = false;
 
    m_event = true;
-   QListView::contentsMouseMoveEvent( e );
+   TQListView::contentsMouseMoveEvent( e );
    m_event = false;
 
    // ignore all selections/deselections
@@ -462,24 +462,24 @@ void PMTreeView::contentsMouseMoveEvent( QMouseEvent * e )
       m_pLastSelected->setSelected( m_pLastSelected->object( )->isSelected( ) );
 }
 
-void PMTreeView::viewportMousePressEvent( QMouseEvent* e )
+void PMTreeView::viewportMousePressEvent( TQMouseEvent* e )
 {
    m_acceptSelect = true;
-   QListView::viewportMousePressEvent( e );
+   TQListView::viewportMousePressEvent( e );
    m_acceptSelect = false;
 
    m_pressed = false;
 
-   QPoint p = e->pos( );
+   TQPoint p = e->pos( );
 
    if( e->button( ) & RightButton )
    {
       if( m_pPart->factory( ) ) 
       {
-         QPopupMenu* m =
-            ( QPopupMenu* ) m_pPart->factory( )->container( "treeViewPopup", m_pPart );
+         TQPopupMenu* m =
+            ( TQPopupMenu* ) m_pPart->factory( )->container( "treeViewPopup", m_pPart );
          if( m )
-            m->exec( QCursor::pos( ) );
+            m->exec( TQCursor::pos( ) );
       }
       return;
    }
@@ -507,9 +507,9 @@ void PMTreeView::viewportMousePressEvent( QMouseEvent* e )
    }
 }
 
-void PMTreeView::viewportMouseReleaseEvent( QMouseEvent* e )
+void PMTreeView::viewportMouseReleaseEvent( TQMouseEvent* e )
 {
-   QListView::viewportMouseReleaseEvent( e );
+   TQListView::viewportMouseReleaseEvent( e );
 
    if( !m_pressed )
       return;
@@ -531,9 +531,9 @@ void PMTreeView::viewportMouseReleaseEvent( QMouseEvent* e )
    }
 }
 
-void PMTreeView::viewportMouseMoveEvent( QMouseEvent *e )
+void PMTreeView::viewportMouseMoveEvent( TQMouseEvent *e )
 {
-   QListView::viewportMouseMoveEvent( e );
+   TQListView::viewportMouseMoveEvent( e );
 
    if( m_pressed && m_pressedItem )
    {
@@ -547,7 +547,7 @@ void PMTreeView::viewportMouseMoveEvent( QMouseEvent *e )
          m_selectOnReleaseEvent = false;
 
          // Calculate hotspot
-         QPoint hotspot;
+         TQPoint hotspot;
          PMObjectList sortedList = m_pPart->selectedObjects( );
 
          // Do not handle more mouse move or mouse release events
@@ -576,7 +576,7 @@ void PMTreeView::viewportMouseMoveEvent( QMouseEvent *e )
    }
 }
 
-void PMTreeView::viewportDragMoveEvent( QDragMoveEvent *e )
+void PMTreeView::viewportDragMoveEvent( TQDragMoveEvent *e )
 {
    bool accept = false;
 
@@ -645,7 +645,7 @@ void PMTreeView::viewportDragMoveEvent( QDragMoveEvent *e )
       e->ignore( );
 }
 
-void PMTreeView::viewportDragEnterEvent( QDragEnterEvent *e )
+void PMTreeView::viewportDragEnterEvent( TQDragEnterEvent *e )
 {
    m_pDragOverItem = 0L;
 
@@ -655,12 +655,12 @@ void PMTreeView::viewportDragEnterEvent( QDragEnterEvent *e )
       e->ignore( );
 }
 
-void PMTreeView::viewportDragLeaveEvent( QDragLeaveEvent* )
+void PMTreeView::viewportDragLeaveEvent( TQDragLeaveEvent* )
 {
    m_pDragOverItem = 0L;
 }
 
-void PMTreeView::viewportDropEvent( QDropEvent* e )
+void PMTreeView::viewportDropEvent( TQDropEvent* e )
 {
    PMObject* obj;
 
@@ -674,7 +674,7 @@ void PMTreeView::viewportDropEvent( QDropEvent* e )
       if( PMObjectDrag::canDecode( e, m_pPart ) )
       {
          if( targetDisplaysPart( e->source( ) ) &&
-             ( e->action( ) == QDropEvent::Move ) )
+             ( e->action( ) == TQDropEvent::Move ) )
          {
             if( m_pPart->dragMoveSelectionTo( obj ) )
                e->acceptAction( );
@@ -698,24 +698,24 @@ void PMTreeView::viewportDropEvent( QDropEvent* e )
    m_pDragOverItem = 0L;
 }
 
-void PMTreeView::focusOutEvent( QFocusEvent* e )
+void PMTreeView::focusOutEvent( TQFocusEvent* e )
 {
-   QWidget::focusOutEvent( e );
+   TQWidget::focusOutEvent( e );
    m_pressed = false;
    m_pressedItem = 0;
 }
 
-void PMTreeView::focusInEvent( QFocusEvent* e )
+void PMTreeView::focusInEvent( TQFocusEvent* e )
 {
-   QWidget::focusInEvent( e );
+   TQWidget::focusInEvent( e );
    m_pressed = false;
    m_pressedItem = 0;
 }
 
-void PMTreeView::keyPressEvent( QKeyEvent* e )
+void PMTreeView::keyPressEvent( TQKeyEvent* e )
 {
-   QListViewItem* current = currentItem( );
-   QListViewItem* newSelection = 0;
+   TQListViewItem* current = currentItem( );
+   TQListViewItem* newSelection = 0;
    bool accept = false;
    bool deleteItem = false;
    bool pasteItem = false;
@@ -788,10 +788,10 @@ void PMTreeView::keyPressEvent( QKeyEvent* e )
       e->accept( );
    else
       e->ignore( );
-   QWidget::keyPressEvent( e );
+   TQWidget::keyPressEvent( e );
 }
 
-bool PMTreeView::targetDisplaysPart( QWidget* target )
+bool PMTreeView::targetDisplaysPart( TQWidget* target )
 {
    bool result = false;
    if( !target ) // another application
@@ -802,7 +802,7 @@ bool PMTreeView::targetDisplaysPart( QWidget* target )
    {
       // Widget may be a view port
       // find the tree view
-      QWidget* t = target;
+      TQWidget* t = target;
       while( t && !t->isA( "PMTreeView" ) )
          t = t->parentWidget( );
       if( t )
@@ -812,7 +812,7 @@ bool PMTreeView::targetDisplaysPart( QWidget* target )
    return result;
 }
 
-QString PMTreeViewFactory::description( ) const
+TQString PMTreeViewFactory::description( ) const
 {
    return i18n( "Object Tree" );
 }

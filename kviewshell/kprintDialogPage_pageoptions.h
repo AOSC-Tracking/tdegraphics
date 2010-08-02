@@ -13,8 +13,8 @@
 
 #include <kdeprint/kprintdialogpage.h>
 
-class QCheckBox;
-class QVBoxLayout;
+class TQCheckBox;
+class TQVBoxLayout;
 
 
 // This is a fairly standard KPrintDialogPage that allows the user to
@@ -24,19 +24,19 @@ class QVBoxLayout;
 class KPrintDialogPage_PageOptions : public KPrintDialogPage
 {
  public:
-  KPrintDialogPage_PageOptions( QWidget *parent = 0, const char *name = 0 );
+  KPrintDialogPage_PageOptions( TQWidget *parent = 0, const char *name = 0 );
   
-  void getOptions( QMap<QString,QString>& opts, bool incldef = false );
-  void setOptions( const QMap<QString,QString>& opts );
-  bool isValid( QString& msg );
+  void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false );
+  void setOptions( const TQMap<TQString,TQString>& opts );
+  bool isValid( TQString& msg );
 
-  QCheckBox* checkBox_center;
-  QCheckBox* checkBox_rotate;
-  QCheckBox* checkBox_shrink;
-  QCheckBox* checkBox_expand;
+  TQCheckBox* checkBox_center;
+  TQCheckBox* checkBox_rotate;
+  TQCheckBox* checkBox_shrink;
+  TQCheckBox* checkBox_expand;
 
  private:
-  QVBoxLayout* kprintDialogPage_pageoptions_baseLayout;
+  TQVBoxLayout* kprintDialogPage_pageoptions_baseLayout;
 };
 
 

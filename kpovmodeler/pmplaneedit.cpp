@@ -21,14 +21,14 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMPlaneEdit::PMPlaneEdit( QWidget* parent, const char* name )
+PMPlaneEdit::PMPlaneEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -38,28 +38,28 @@ void PMPlaneEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   QHBoxLayout* layout;
+   TQHBoxLayout* layout;
 
    m_pNormal = new PMVectorEdit( "x", "y", "z", this );
    m_pDistance = new PMFloatEdit( this );
 
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Normal:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Normal:" ), this ) );
    layout->addWidget( m_pNormal );
 
-   layout = new QHBoxLayout( topLayout( ) );
-   layout->addWidget( new QLabel( i18n( "Distance:" ), this ) );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Distance:" ), this ) );
    layout->addWidget( m_pDistance );
    layout->addStretch( 1 );
 
-   QPushButton* nb = new QPushButton( i18n( "Normalize" ), this );
-   layout = new QHBoxLayout( topLayout( ) );
+   TQPushButton* nb = new TQPushButton( i18n( "Normalize" ), this );
+   layout = new TQHBoxLayout( topLayout( ) );
    layout->addWidget( nb );
    layout->addStretch( 1 );
 
-   connect( m_pNormal, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDistance, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( nb, SIGNAL( clicked( ) ), SLOT( slotNormalize( ) ) );
+   connect( m_pNormal, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDistance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( nb, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotNormalize( ) ) );
 }
 
 void PMPlaneEdit::slotNormalize( )

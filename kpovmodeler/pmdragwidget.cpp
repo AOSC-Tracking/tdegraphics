@@ -17,23 +17,23 @@
 
 #include "pmdragwidget.h"
 
-PMDragWidget::PMDragWidget( QWidget* parent, const char* name, WFlags f )
-      : QWidget( parent, name, f )
+PMDragWidget::PMDragWidget( TQWidget* parent, const char* name, WFlags f )
+      : TQWidget( parent, name, f )
 {
    dragging = false;
 }
 
-void PMDragWidget::mousePressEvent( QMouseEvent* )
+void PMDragWidget::mousePressEvent( TQMouseEvent* )
 {
    dragging = true;
 }
 
-void PMDragWidget::mouseReleaseEvent( QMouseEvent* )
+void PMDragWidget::mouseReleaseEvent( TQMouseEvent* )
 {
    dragging = false;
 }
 
-void PMDragWidget::mouseMoveEvent( QMouseEvent* )
+void PMDragWidget::mouseMoveEvent( TQMouseEvent* )
 {
    if( dragging )
    {

@@ -11,8 +11,8 @@
 #ifndef ZOOM_H
 #define ZOOM_H
 
-#include <qobject.h>
-#include <qstringlist.h>
+#include <tqobject.h>
+#include <tqstringlist.h>
 
 
 class Zoom : public QObject
@@ -26,7 +26,7 @@ public:
   /** Returns a list like "33%", "100%", etc. If you call
       zoomNames() more than once, it is guaranteed that the same
       list of strings will be returned. */
-  QStringList zoomNames() const { return valueNames; }
+  TQStringList zoomNames() const { return valueNames; }
 
   float       zoomIn();
   float       zoomOut();
@@ -34,21 +34,21 @@ public:
 
 public slots:
   void        setZoomValue(float);
-  void        setZoomValue(const QString &);
+  void        setZoomValue(const TQString &);
 
   void        setZoomFitWidth(float zoom);
   void        setZoomFitHeight(float zoom);
   void        setZoomFitPage(float zoom);
 
 signals:
-  void        zoomNamesChanged(const QStringList &);
-  void        zoomNameChanged(const QString &);
+  void        zoomNamesChanged(const TQStringList &);
+  void        zoomNameChanged(const TQString &);
   void        valNoChanged(int);
 
 private:
   float       _zoomValue;
-  QStringList valueNames;
-  // This will be the number of the current value in the generated QStringList.
+  TQStringList valueNames;
+  // This will be the number of the current value in the generated TQStringList.
   int         valNo;
 };
 

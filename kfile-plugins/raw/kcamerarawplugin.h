@@ -22,17 +22,17 @@
 
 #include <kfilemetainfo.h>
 
-class QImage;
+class TQImage;
 
 class KCameraRawPlugin: public KFilePlugin {
     Q_OBJECT
 
 public:
-    KCameraRawPlugin(QObject *parent, const char *name, const QStringList& args);
+    KCameraRawPlugin(TQObject *parent, const char *name, const TQStringList& args);
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:
-    bool createPreview(const QString &path, QImage &img);
+    bool createPreview(const TQString &path, TQImage &img);
 };
 
 #endif /* KCAMERARAWPLUGIN_H */

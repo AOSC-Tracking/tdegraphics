@@ -21,11 +21,11 @@
 #ifndef __KICONEDITGRID_H__
 #define __KICONEDITGRID_H__
 
-#include <qpixmap.h>
-#include <qimage.h>
-#include <qcursor.h>
-#include <qpointarray.h>
-#include <qframe.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
+#include <tqcursor.h>
+#include <tqpointarray.h>
+#include <tqframe.h>
 #include <kcommand.h>
 #include <klocale.h>
 
@@ -34,7 +34,7 @@
 class KCommandHistory;
 class KRuler;
 class KIconEditGrid;
-class QScrollView;
+class TQScrollView;
 
 enum Direction {
     DirIn = 0, DirOut = 1,
@@ -44,7 +44,7 @@ enum Direction {
 
 class DrawCommand : public KCommand {
     public:
-        DrawCommand( int xx, int yy, uint newcol, QImage* img, KIconEditGrid* g ) {
+        DrawCommand( int xx, int yy, uint newcol, TQImage* img, KIconEditGrid* g ) {
             x = xx;
 	    y = yy;
 	    newcolor = newcol;
@@ -54,7 +54,7 @@ class DrawCommand : public KCommand {
         
         void execute();
         void unexecute();
-        QString name() const {
+        TQString name() const {
             return i18n("Drawed Something");
         }
 
@@ -63,13 +63,13 @@ class DrawCommand : public KCommand {
 	int y;
         uint newcolor;
         uint oldcolor;
-	QImage* image;
+	TQImage* image;
 	KIconEditGrid* grid;
 };
 
 class RepaintCommand : public KCommand {
     public:
-	RepaintCommand( QRect a, KIconEditGrid* g ) {
+	RepaintCommand( TQRect a, KIconEditGrid* g ) {
 		area = a;
 		grid = g;
 	}
@@ -79,28 +79,28 @@ class RepaintCommand : public KCommand {
 		execute();
 	}
 	
-	QString name() const {
+	TQString name() const {
 		return "repainted";
 	}
     protected:
 	KIconEditGrid* grid;
-	QRect area;
+	TQRect area;
 };
 
 class KGridView : public QFrame
 {
     Q_OBJECT
 public:
-  KGridView( QImage *image, KCommandHistory* history, QWidget * parent = 0, const char *name = 0);
+  KGridView( TQImage *image, KCommandHistory* history, TQWidget * parent = 0, const char *name = 0);
 
   KRuler *hruler() { return _hruler;}
   KRuler *vruler() { return _vruler;}
-  QFrame *corner() { return _corner;}
+  TQFrame *corner() { return _corner;}
   KIconEditGrid *grid() { return _grid; }
   void setShowRulers(bool mode);
   void setAcceptDrop(bool a);
-  const QRect viewRect();
-  QScrollView *viewPortWidget() { return viewport;}
+  const TQRect viewRect();
+  TQScrollView *viewPortWidget() { return viewport;}
 
 public slots:
   void sizeChange(int, int);
@@ -110,15 +110,15 @@ public slots:
   void checkClipboard();
 
 protected:
-  virtual void paintEvent(QPaintEvent*);
-  virtual void resizeEvent(QResizeEvent*);
+  virtual void paintEvent(TQPaintEvent*);
+  virtual void resizeEvent(TQResizeEvent*);
   void paintDropSite();
   void setSizes();
 
-  QFrame *_corner;
+  TQFrame *_corner;
   KIconEditGrid *_grid;
   KRuler *_hruler, *_vruler;
-  QScrollView *viewport;
+  TQScrollView *viewport;
   bool acceptdrop;
 };
 
@@ -132,7 +132,7 @@ class KIconEditGrid : public KColorGrid
 {
     Q_OBJECT
 public:
-  KIconEditGrid( QImage *image, KCommandHistory* h, QWidget * parent = 0, const char *name = 0);
+  KIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * parent = 0, const char *name = 0);
   virtual ~KIconEditGrid();
 
   enum DrawTool { Line, Freehand, FloodFill, Spray, Rect, FilledRect, Circle,
@@ -142,14 +142,14 @@ public:
   void setGrid(bool g) { KColorGrid::setGrid(g); emit needPainting(); }
   bool isModified() { return modified; };
   void setModified(bool m);
-  const QPixmap &pixmap();
-  const QImage &image() { return *img; }
-  QImage clipboardImage(bool &ok);
-  QImage getSelection(bool);
+  const TQPixmap &pixmap();
+  const TQImage &image() { return *img; }
+  TQImage clipboardImage(bool &ok);
+  TQImage getSelection(bool);
   int rows() { return numRows(); };
   int cols() { return numCols(); };
   uint getColors( uint *_colors) { return colors(_colors); }
-  bool isMarked(QPoint p);
+  bool isMarked(TQPoint p);
   bool isMarked(int x, int y);
   int scaling() { return cellSize(); }
   void loadBlank( int w = 0, int h = 0);
@@ -170,29 +170,29 @@ public:
   };
 
   TransparencyDisplayType transparencyDisplayType() const { return m_transparencyDisplayType; }
-  QColor checkerboardColor1() const { return m_checkerboardColor1; }
-  QColor checkerboardColor2() const { return m_checkerboardColor2; }
+  TQColor checkerboardColor1() const { return m_checkerboardColor1; }
+  TQColor checkerboardColor2() const { return m_checkerboardColor2; }
   CheckerboardSize checkerboardSize() const { return m_checkerboardSize; }
-  QColor transparencySolidColor() const { return m_transparencySolidColor; }
+  TQColor transparencySolidColor() const { return m_transparencySolidColor; }
 
   void setTransparencyDisplayType(TransparencyDisplayType t) { m_transparencyDisplayType = t; }
-  void setCheckerboardColor1(const QColor& c) { m_checkerboardColor1 = c; }
-  void setCheckerboardColor2(const QColor& c) { m_checkerboardColor2 = c; }
+  void setCheckerboardColor1(const TQColor& c) { m_checkerboardColor1 = c; }
+  void setCheckerboardColor2(const TQColor& c) { m_checkerboardColor2 = c; }
   void setCheckerboardSize(CheckerboardSize size) { m_checkerboardSize = size; }
-  void setTransparencySolidColor(const QColor& c) { m_transparencySolidColor = c; }
+  void setTransparencySolidColor(const TQColor& c) { m_transparencySolidColor = c; }
 
 public slots:
-  void load( QImage *);
+  void load( TQImage *);
   void editCopy(bool cut = false);
   void editPaste(bool paste = false);
   void editPasteAsNew();
   void editSelectAll();
   void editClear();
-  void getImage(QImage *image);
+  void getImage(TQImage *image);
 //#if QT_VERSION <= 140
   void editResize();
 //#endif
-  void setSize(const QSize s);
+  void setSize(const TQSize s);
   void grayScale();
   void mapToKDEPalette();
   void setTool(DrawTool tool);
@@ -203,12 +203,12 @@ public slots:
 
 signals:
   void scalingchanged(int);
-  void changed( const QPixmap & );
+  void changed( const TQPixmap & );
   void sizechanged( int, int );
   void poschanged( int, int );
   void xposchanged( int );
   void yposchanged( int );
-  void newmessage(const QString &);
+  void newmessage(const TQString &);
   void clipboarddata(bool);
   void selecteddata(bool);
   void needPainting();
@@ -220,39 +220,39 @@ protected slots:
   void updatePreviewPixmap();
 
 protected:
-  virtual void paintEvent(QPaintEvent*);
-  virtual void paintCell( QPainter*, int, int ) {}
-  virtual void paintForeground(QPainter* p, QPaintEvent* e);
-  virtual void mousePressEvent(QMouseEvent*);
-  virtual void mouseReleaseEvent(QMouseEvent*);
-  virtual void mouseMoveEvent(QMouseEvent*);
+  virtual void paintEvent(TQPaintEvent*);
+  virtual void paintCell( TQPainter*, int, int ) {}
+  virtual void paintForeground(TQPainter* p, TQPaintEvent* e);
+  virtual void mousePressEvent(TQMouseEvent*);
+  virtual void mouseReleaseEvent(TQMouseEvent*);
+  virtual void mouseMoveEvent(TQMouseEvent*);
   void createCursors();
-  void drawPointArray(QPointArray, DrawAction);
+  void drawPointArray(TQPointArray, DrawAction);
   void drawEllipse(bool);
   void drawLine(bool drawIt, bool drawStraight);
   void drawRect(bool);
-  void drawSpray(QPoint);
+  void drawSpray(TQPoint);
   void drawFlood(int x, int y, uint oldcolor);
-  static void clearImage(QImage *image);
+  static void clearImage(TQImage *image);
 
   uint currentcolor;
-  QPoint start, end;
-  QRect insrect;
-  QSize cbsize;
-  QImage *img;
-  QPixmap p;
+  TQPoint start, end;
+  TQRect insrect;
+  TQSize cbsize;
+  TQImage *img;
+  TQPixmap p;
   int selected, tool; //, numrows, numcols;
   bool modified, btndown, ispasting, isselecting;
-  QPointArray pntarray;
+  TQPointArray pntarray;
   KColorArray iconcolors;
   KCommandHistory* history;
   KMacroCommand* m_command;
-  QCursor cursor_normal, cursor_aim, cursor_flood, cursor_spray, cursor_erase, cursor_paint, cursor_colorpicker;
+  TQCursor cursor_normal, cursor_aim, cursor_flood, cursor_spray, cursor_erase, cursor_paint, cursor_colorpicker;
   TransparencyDisplayType m_transparencyDisplayType;
-  QColor m_checkerboardColor1;
-  QColor m_checkerboardColor2;
+  TQColor m_checkerboardColor1;
+  TQColor m_checkerboardColor2;
   CheckerboardSize m_checkerboardSize;
-  QColor m_transparencySolidColor;
+  TQColor m_transparencySolidColor;
 };
 
 

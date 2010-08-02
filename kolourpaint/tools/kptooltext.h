@@ -29,7 +29,7 @@
 #ifndef __kp_tool_text_h__
 #define __kp_tool_text_h__
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kpcommandhistory.h>
 
@@ -57,17 +57,17 @@ public:
     bool hasBegunText () const;
     virtual bool hasBegunShape () const;
     virtual void cancelShape ();
-    virtual void endShape (const QPoint &thisPoint, const QRect &normalizedRect);
+    virtual void endShape (const TQPoint &thisPoint, const TQRect &normalizedRect);
 
 protected:
-    virtual void keyPressEvent (QKeyEvent *e);
-    virtual void imStartEvent (QIMEvent *e);
-    virtual void imComposeEvent (QIMEvent *e);
-    virtual void imEndEvent (QIMEvent *e);
+    virtual void keyPressEvent (TQKeyEvent *e);
+    virtual void imStartEvent (TQIMEvent *e);
+    virtual void imComposeEvent (TQIMEvent *e);
+    virtual void imEndEvent (TQIMEvent *e);
 
 protected:
     bool shouldChangeTextStyle () const;
-    void changeTextStyle (const QString &name,
+    void changeTextStyle (const TQString &name,
                           const kpTextStyle &newTextStyle,
                           const kpTextStyle &oldTextStyle);
 
@@ -80,7 +80,7 @@ protected slots:
     virtual void slotColorSimilarityChanged (double, int);
 
 public slots:
-    void slotFontFamilyChanged (const QString &fontFamily, const QString &oldFontFamily);
+    void slotFontFamilyChanged (const TQString &fontFamily, const TQString &oldFontFamily);
     void slotFontSizeChanged (int fontSize, int oldFontSize);
     void slotBoldChanged (bool isBold);
     void slotItalicChanged (bool isItalic);
@@ -96,14 +96,14 @@ protected:
     bool m_isIMStarted;
     int m_IMStartCursorRow;
     int m_IMStartCursorCol;
-    QString m_IMPreeditStr;
+    TQString m_IMPreeditStr;
 };
 
 
 class kpToolTextChangeStyleCommand : public kpNamedCommand
 {
 public:
-    kpToolTextChangeStyleCommand (const QString &name,
+    kpToolTextChangeStyleCommand (const TQString &name,
         const kpTextStyle &newTextStyle, const kpTextStyle &oldTextStyle,
         kpMainWindow *mainWindow);
     virtual ~kpToolTextChangeStyleCommand ();
@@ -120,12 +120,12 @@ protected:
 class kpToolTextInsertCommand : public kpNamedCommand
 {
 public:
-    kpToolTextInsertCommand (const QString &name,
-        int row, int col, QString newText,
+    kpToolTextInsertCommand (const TQString &name,
+        int row, int col, TQString newText,
         kpMainWindow *mainWindow);
     virtual ~kpToolTextInsertCommand ();
 
-    void addText (const QString &moreText);
+    void addText (const TQString &moreText);
 
     virtual int size () const;
     
@@ -134,13 +134,13 @@ public:
 
 protected:
     int m_row, m_col;
-    QString m_newText;
+    TQString m_newText;
 };
 
 class kpToolTextEnterCommand : public kpNamedCommand
 {
 public:
-    kpToolTextEnterCommand (const QString &name,
+    kpToolTextEnterCommand (const TQString &name,
         int row, int col,
         kpMainWindow *mainWindow);
     virtual ~kpToolTextEnterCommand ();
@@ -160,7 +160,7 @@ protected:
 class kpToolTextBackspaceCommand : public kpNamedCommand
 {
 public:
-    kpToolTextBackspaceCommand (const QString &name,
+    kpToolTextBackspaceCommand (const TQString &name,
         int row, int col,
         kpMainWindow *mainWindow);
     virtual ~kpToolTextBackspaceCommand ();
@@ -175,13 +175,13 @@ public:
 protected:
     int m_row, m_col;
     int m_numBackspaces;
-    QString m_deletedText;
+    TQString m_deletedText;
 };
 
 class kpToolTextDeleteCommand : public kpNamedCommand
 {
 public:
-    kpToolTextDeleteCommand (const QString &name,
+    kpToolTextDeleteCommand (const TQString &name,
         int row, int col,
         kpMainWindow *mainWindow);
     virtual ~kpToolTextDeleteCommand ();
@@ -196,7 +196,7 @@ public:
 protected:
     int m_row, m_col;
     int m_numDeletes;
-    QString m_deletedText;
+    TQString m_deletedText;
 };
 
 #endif  // __kp_tool_text_h__

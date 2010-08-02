@@ -26,7 +26,7 @@
 #include <ksvg_ecma.h>
 #include <ksvg_scriptinterpreter.h>
 
-#include <qstylesheet.h>
+#include <tqstylesheet.h>
 
 #include <kurl.h>
 #include <kmessagebox.h>
@@ -113,7 +113,7 @@ void SVGWindowImpl::postURL(const DOM::DOMString &/*uri*/, const DOM::DOMString 
 
 DOM::DOMString SVGWindowImpl::printNode(const DOM::Node &node, unsigned short level)
 {
-	QString ret;
+	TQString ret;
 	if(node.isNull()) return ret;
 	SVGElementImpl *elem = m_document->getElementFromHandle(node.handle());
 	if(node.nodeType() == DOM::Node::DOCUMENT_NODE)
@@ -130,7 +130,7 @@ DOM::DOMString SVGWindowImpl::printNode(const DOM::Node &node, unsigned short le
 		printIndentation(ret, level);
 		ret += "<" + elem->tagName().string();
 		// handle attrs
-		QDictIterator<DOM::DOMString> it(elem->attributes());
+		TQDictIterator<DOM::DOMString> it(elem->attributes());
 		for(;it.current(); ++it)
 		         ret += " " + it.currentKey() + "=\"" + it.current()->string() + '\"';
 		if(elem->firstChild().isNull()) // no children
@@ -147,7 +147,7 @@ DOM::DOMString SVGWindowImpl::printNode(const DOM::Node &node, unsigned short le
 	return ret;
 }
 
-void SVGWindowImpl::printIndentation(QString &ret, unsigned short level, unsigned short indent)
+void SVGWindowImpl::printIndentation(TQString &ret, unsigned short level, unsigned short indent)
 {
 	for(int i = 0;i < indent * level;i++)
 		ret += " ";
@@ -163,21 +163,21 @@ long SVGWindowImpl::setTimeout(const DOM::DOMString &/*code*/, const long &/*del
 	return 0;
 }
 
-void SVGWindowImpl::alert(const DOM::DOMString &message, const QString &title)
+void SVGWindowImpl::alert(const DOM::DOMString &message, const TQString &title)
 {
-	KMessageBox::error(0L, QStyleSheet::convertFromPlainText(message.string()), title);
+	KMessageBox::error(0L, TQStyleSheet::convertFromPlainText(message.string()), title);
 }
 
-bool SVGWindowImpl::confirm(const DOM::DOMString &message, const QString &title)
+bool SVGWindowImpl::confirm(const DOM::DOMString &message, const TQString &title)
 {
-	return KMessageBox::warningContinueCancel(0L, QStyleSheet::convertFromPlainText(message.string()), title, KStdGuiItem::ok()) == KMessageBox::Continue;
+	return KMessageBox::warningContinueCancel(0L, TQStyleSheet::convertFromPlainText(message.string()), title, KStdGuiItem::ok()) == KMessageBox::Continue;
 }
 
-DOM::DOMString SVGWindowImpl::prompt(const DOM::DOMString &message, const DOM::DOMString &_default, const QString &)
+DOM::DOMString SVGWindowImpl::prompt(const DOM::DOMString &message, const DOM::DOMString &_default, const TQString &)
 {
 	bool ok;
-	QString str;
-	str = KInputDialog::getText(i18n("Prompt"), QStyleSheet::convertFromPlainText(message.string()), _default.string(), &ok);
+	TQString str;
+	str = KInputDialog::getText(i18n("Prompt"), TQStyleSheet::convertFromPlainText(message.string()), _default.string(), &ok);
 	if(ok)
 		return str;
 	else

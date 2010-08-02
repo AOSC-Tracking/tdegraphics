@@ -38,8 +38,8 @@
 using namespace T2P;
 // START OF GENERATED DATA
 
-// copied form qfont.h, as we can't include it in tools. Do not modify without
-// changing the script enum in qfont.h aswell.
+// copied form tqfont.h, as we can't include it in tools. Do not modify without
+// changing the script enum in tqfont.h aswell.
 const unsigned char QtUnicode::otherScripts [120] = {
 #define SCRIPTS_02 0
     0xaf, Latin, 0xff, SpacingModifiers, 			// row 0x02, index 0

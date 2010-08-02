@@ -18,10 +18,10 @@
 #ifndef GRADIENTSELECTION_H
 #define GRADIENTSELECTION_H
 
-#include <qwidget.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
-#include <qbuttongroup.h>
+#include <tqwidget.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
+#include <tqbuttongroup.h>
 
 #include "kxycolorselector.h"
 #include "kzcolorselector.h"
@@ -30,12 +30,12 @@
 /** A widget for selecting colors from gradients
   * @author Artur Rataj
   */
-class GradientSelection : public QWidget  {
+class GradientSelection : public TQWidget  {
    Q_OBJECT
 
 public:
 	/** Constructs the widget */
-	GradientSelection(QWidget *parent=0, const char *name=0);
+	GradientSelection(TQWidget *parent=0, const char *name=0);
 	~GradientSelection();
 	/** Enables or disables the color synchronize button */
 	void enableSynchronizeColorButton(bool enable);
@@ -62,11 +62,11 @@ protected:
 	       V_COMPONENT = KXYColorSelector::TYPE_HS };
 	
 	/** Variable global component checkbox */
-	QCheckBox* variableCheckBox;
+	TQCheckBox* variableCheckBox;
 	/** Synchronize color button */
-	QPushButton* synchronizeColorButton;
+	TQPushButton* synchronizeColorButton;
 	/** HSV buttons button group widget */
-	QButtonGroup hsvButtons;
+	TQButtonGroup hsvButtons;
 	/** The two components selector */
 	KXYColorSelector* xyColorSelector;
 	/** The gradient selector */

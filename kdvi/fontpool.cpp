@@ -13,10 +13,10 @@
 #include <kprocess.h>
 #include <kprocio.h>
 #include <math.h>
-#include <qapplication.h>
-#include <qfile.h>
-#include <qimage.h>
-#include <qpainter.h>
+#include <tqapplication.h>
+#include <tqfile.h>
+#include <tqimage.h>
+#include <tqpainter.h>
 #include <stdlib.h>
 
 #include "fontpool.h"
@@ -35,7 +35,7 @@
 //const int   MFResolutions[] = { 300, 600, 1200 };
 
 #ifdef PERFORMANCE_MEASUREMENT
-QTime fontPoolTimer;
+TQTime fontPoolTimer;
 bool fontPoolTimerFlag;
 #endif
 
@@ -60,7 +60,7 @@ fontPool::fontPool()
   displayResolution_in_dpi = 100.0; // A not-too-bad-default
   useFontHints             = true;
   CMperDVIunit             = 0;
-  extraSearchPath          = QString::null;
+  extraSearchPath          = TQString::null;
   fontList.setAutoDelete(true);
 
 
@@ -78,14 +78,14 @@ fontPool::fontPool()
   // of QT at compile and runtime or the availability of the XFt
   // extension, alpha channels are either supported, or silently
   // converted to 1-bit masks.
-  QImage start(1, 1, 32); // Generate a 1x1 image, black with alpha=0x10
+  TQImage start(1, 1, 32); // Generate a 1x1 image, black with alpha=0x10
   start.setAlphaBuffer(true);
   Q_UINT32 *destScanLine = (Q_UINT32 *)start.scanLine(0);
   *destScanLine = 0x80000000;
-  QPixmap intermediate(start);
-  QPixmap dest(1,1);
+  TQPixmap intermediate(start);
+  TQPixmap dest(1,1);
   dest.fill(Qt::white);
-  QPainter paint( &dest );
+  TQPainter paint( &dest );
   paint.drawPixmap(0, 0, intermediate);
   paint.end();
   start = dest.convertToImage().convertDepth(32);
@@ -93,12 +93,12 @@ fontPool::fontPool()
 
   if ((result == 0xff) || (result == 0x00)) {
 #ifdef DEBUG_FONTPOOL
-    kdDebug(4300) << "fontPool::fontPool(): QPixmap does not support the alpha channel" << endl;
+    kdDebug(4300) << "fontPool::fontPool(): TQPixmap does not support the alpha channel" << endl;
 #endif
     QPixmapSupportsAlpha = false;
   } else {
 #ifdef DEBUG_FONTPOOL
-    kdDebug(4300) << "fontPool::fontPool(): QPixmap supports the alpha channel" << endl;
+    kdDebug(4300) << "fontPool::fontPool(): TQPixmap supports the alpha channel" << endl;
 #endif
     QPixmapSupportsAlpha = true;
   }
@@ -137,7 +137,7 @@ void fontPool::setParameters( bool _useFontHints )
 }
 
 
-TeXFontDefinition* fontPool::appendx(const QString& fontname, Q_UINT32 checksum, Q_UINT32 scale, double enlargement)
+TeXFontDefinition* fontPool::appendx(const TQString& fontname, Q_UINT32 checksum, Q_UINT32 scale, double enlargement)
 {
   // Reuse font if possible: check if a font with that name and
   // natural resolution is already in the fontpool, and use that, if
@@ -173,20 +173,20 @@ TeXFontDefinition* fontPool::appendx(const QString& fontname, Q_UINT32 checksum,
 }
 
 
-QString fontPool::status()
+TQString fontPool::status()
 {
 #ifdef DEBUG_FONTPOOL
   kdDebug(4300) << "fontPool::status() called" << endl;
 #endif
 
-  QString       text;
-  QStringList   tmp;
+  TQString       text;
+  TQStringList   tmp;
 
   if (fontList.isEmpty())
     return i18n("The fontlist is currently empty.");
 
   text.append("<table WIDTH=\"100%\" NOSAVE >");
-  text.append( QString("<tr><td><b>%1</b></td> <td><b>%2</b></td> <td><b>%3</b></td> <td><b>%4</b> <td><b>%5</b></td> <td><b>%6</b></td></tr>")
+  text.append( TQString("<tr><td><b>%1</b></td> <td><b>%2</b></td> <td><b>%3</b></td> <td><b>%4</b> <td><b>%5</b></td> <td><b>%6</b></td></tr>")
 	       .arg(i18n("TeX Name"))
 	       .arg(i18n("Family"))
 	       .arg(i18n("Zoom"))
@@ -196,7 +196,7 @@ QString fontPool::status()
 
  TeXFontDefinition *fontp = fontList.first();
   while ( fontp != 0 ) {
-    QString errMsg, encoding;
+    TQString errMsg, encoding;
 
     if (!(fontp->flags & TeXFontDefinition::FONT_VIRTUAL)) {
 #ifdef HAVE_FREETYPE
@@ -209,7 +209,7 @@ QString fontPool::status()
     }
 
 #ifdef HAVE_FREETYPE
-    tmp << QString ("<tr><td>%1</td> <td>%2</td> <td>%3%</td> <td>%4</td> <td>%5</td> <td>%6</td></tr>")
+    tmp << TQString ("<tr><td>%1</td> <td>%2</td> <td>%3%</td> <td>%4</td> <td>%5</td> <td>%6</td></tr>")
       .arg(fontp->fontname)
       .arg(fontp->getFullFontName())
       .arg((int)(fontp->enlargement*100 + 0.5))
@@ -252,7 +252,7 @@ bool fontPool::areFontsLocated()
 
 void fontPool::locateFonts()
 {
-  kpsewhichOutput = QString::null;
+  kpsewhichOutput = TQString::null;
 
   // First, we try and find those fonts which exist on disk
   // already. If virtual fonts are found, they will add new fonts to
@@ -280,7 +280,7 @@ void fontPool::locateFonts()
   // present an error message to the user.
   if (!areFontsLocated()) {
     markFontsAsLocated();
-    QString details = QString("<qt><p><b>PATH:</b> %1</p>%2</qt>").arg(getenv("PATH")).arg(kpsewhichOutput);
+    TQString details = TQString("<qt><p><b>PATH:</b> %1</p>%2</qt>").arg(getenv("PATH")).arg(kpsewhichOutput);
     KMessageBox::detailedError( 0, i18n("<qt><p>KDVI was not able to locate all the font files "
 					"which are necessary to display the current DVI file. "
 					"Your document might be unreadable.</p></qt>"),
@@ -298,14 +298,14 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
   // enabled globally.
   emit setStatusBarText(i18n("Locating fonts..."));
 
-  QStringList shellProcessCmdLine;
+  TQStringList shellProcessCmdLine;
 
   KProcIO kpsewhichIO;
   // If PK fonts are generated, the kpsewhich command will re-route
   // the output of MetaFont into its stderr. Here we make sure this
   // output is intercepted and parsed.
-  qApp->connect(&kpsewhichIO, SIGNAL(receivedStderr(KProcess *, char *, int)),
-		this, SLOT(mf_output_receiver(KProcess *, char *, int)));
+  qApp->connect(&kpsewhichIO, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)),
+		this, TQT_SLOT(mf_output_receiver(KProcess *, char *, int)));
   
   
   kpsewhichIO.setUseShell(true);
@@ -313,8 +313,8 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
   // Now generate the command line for the kpsewhich
   // program. Unfortunately, this can be rather long and involved...
   shellProcessCmdLine += "kpsewhich";
-  shellProcessCmdLine += QString("--dpi 1200");
-  shellProcessCmdLine += QString("--mode lexmarks");
+  shellProcessCmdLine += TQString("--dpi 1200");
+  shellProcessCmdLine += TQString("--mode lexmarks");
   
   // Disable automatic pk-font generation.
   if (makePK == true)
@@ -330,17 +330,17 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
       numFontsInJob++;
       
       if (locateTFMonly == true)
-	shellProcessCmdLine += KShellProcess::quote(QString("%1.tfm").arg(fontp->fontname));
+	shellProcessCmdLine += KShellProcess::quote(TQString("%1.tfm").arg(fontp->fontname));
       else {
 #ifdef HAVE_FREETYPE
 	if (FreeType_could_be_loaded == true) {
-	  const QString &filename = fontsByTeXName.findFileName(fontp->fontname);
+	  const TQString &filename = fontsByTeXName.findFileName(fontp->fontname);
 	  if (!filename.isEmpty())
-	    shellProcessCmdLine += KShellProcess::quote(QString("%1").arg(filename));
+	    shellProcessCmdLine += KShellProcess::quote(TQString("%1").arg(filename));
 	}
 #endif
-	shellProcessCmdLine += KShellProcess::quote(QString("%1.vf").arg(fontp->fontname));
-	shellProcessCmdLine += KShellProcess::quote(QString("%1.1200pk").arg(fontp->fontname));
+	shellProcessCmdLine += KShellProcess::quote(TQString("%1.vf").arg(fontp->fontname));
+	shellProcessCmdLine += KShellProcess::quote(TQString("%1.1200pk").arg(fontp->fontname));
       }
     }
     fontp=fontList.next();
@@ -352,18 +352,18 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
   progress.setTotalSteps(numFontsInJob, &kpsewhichIO);
 
   // Now run... kpsewhich. In case of error, kick up a fuss.
-  MetafontOutput = QString::null;
+  MetafontOutput = TQString::null;
   kpsewhichOutput += "<p><b>"+shellProcessCmdLine.join(" ")+"</b></p>";
   kpsewhichIO << shellProcessCmdLine;
-  QString importanceOfKPSEWHICH = i18n("<p>KDVI relies on the <b>kpsewhich</b> program to locate font files "
+  TQString importanceOfKPSEWHICH = i18n("<p>KDVI relies on the <b>kpsewhich</b> program to locate font files "
 				       "on your hard disc and to generate PK fonts, if necessary.</p>");
   if (kpsewhichIO.start(KProcess::NotifyOnExit, false) == false) {
-    QString msg = i18n(	"<p>The shell process for the kpsewhich program could not "
+    TQString msg = i18n(	"<p>The shell process for the kpsewhich program could not "
 			"be started. Consequently, some font files could not be found, "
 			"and your document might by unreadable. If this error is reproducable "
 			"please report the issue to the KDVI developers using the 'Help' menu.<p>" );
-    QApplication::restoreOverrideCursor();
-    KMessageBox::error( 0, QString("<qt>%1%2</qt>").arg(importanceOfKPSEWHICH).arg(msg),
+    TQApplication::restoreOverrideCursor();
+    KMessageBox::error( 0, TQString("<qt>%1%2</qt>").arg(importanceOfKPSEWHICH).arg(msg),
 			i18n("Problem locating fonts - KDVI") );
     markFontsAsLocated();
     return;
@@ -390,8 +390,8 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
     if (kpsewhichIO.exitStatus() == 127) {
       // An exit status of 127 means that the kpsewhich executable
       // could not be found. We give extra explanation then.
-      QApplication::restoreOverrideCursor();
-      QString msg = i18n( "<p>There were problems running kpsewhich. As a result, "
+      TQApplication::restoreOverrideCursor();
+      TQString msg = i18n( "<p>There were problems running kpsewhich. As a result, "
 			  "some font files could not be located, and your document might be unreadable.</p>"
 			  "<p><b>Possible reason:</b> The kpsewhich program is perhaps not installed on your system, or it "
 			  "cannot be found in the current search path.</p>"
@@ -399,9 +399,9 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
 			  "typesetting system. If TeX is not installed on your system, you could install the TeTeX distribution (www.tetex.org). "
 			  "If you are sure that TeX is installed, please try to use the kpsewhich program from the command line to check if it "
 			  "really works.</p>");
-      QString details = QString("<qt><p><b>PATH:</b> %1</p>%2</qt>").arg(getenv("PATH")).arg(kpsewhichOutput);
+      TQString details = TQString("<qt><p><b>PATH:</b> %1</p>%2</qt>").arg(getenv("PATH")).arg(kpsewhichOutput);
       
-      KMessageBox::detailedError( 0, QString("<qt>%1%2</qt>").arg(importanceOfKPSEWHICH).arg(msg), details,
+      KMessageBox::detailedError( 0, TQString("<qt>%1%2</qt>").arg(importanceOfKPSEWHICH).arg(msg), details,
 				  i18n("Problem locating fonts - KDVI") );
       // This makes sure the we don't try to run kpsewhich again
       markFontsAsLocated();
@@ -409,8 +409,8 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
     }
   
   // Create a list with all filenames found by the kpsewhich program.
-  QStringList fileNameList;
-  QString line;
+  TQStringList fileNameList;
+  TQString line;
   while(kpsewhichIO.readln(line) >= 0)
     fileNameList += line;
   
@@ -418,9 +418,9 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
   fontp=fontList.first();
   while ( fontp != 0 ) {
     if (fontp->filename.isEmpty() == true) {
-      QStringList matchingFiles;
+      TQStringList matchingFiles;
 #ifdef HAVE_FREETYPE
-      const QString &fn = fontsByTeXName.findFileName(fontp->fontname);
+      const TQString &fn = fontsByTeXName.findFileName(fontp->fontname);
       if (!fn.isEmpty())
 	matchingFiles = fileNameList.grep(fn);
 #endif
@@ -431,7 +431,7 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
 #ifdef DEBUG_FONTPOOL
 	kdDebug(4300) << "Associated " << fontp->fontname << " to " << matchingFiles.first() << endl;
 #endif
-	QString fname = matchingFiles.first();
+	TQString fname = matchingFiles.first();
 	fontp->fontNameReceiver(fname);
 	fontp->flags |= TeXFontDefinition::FONT_KPSE_NAME;
 	if (fname.endsWith(".vf")) {
@@ -550,7 +550,7 @@ void fontPool::mf_output_receiver(KProcess *, char *buffer, int buflen)
   if (buflen < 0)
     return;
   
-  QString op = QString::fromLocal8Bit(buffer, buflen);
+  TQString op = TQString::fromLocal8Bit(buffer, buflen);
 
   kpsewhichOutput.append(op);
   MetafontOutput.append(op);
@@ -559,7 +559,7 @@ void fontPool::mf_output_receiver(KProcess *, char *buffer, int buflen)
   int numleft;
   bool show_prog = false;
   while( (numleft = MetafontOutput.find('\n')) != -1) {
-    QString line = MetafontOutput.left(numleft+1);
+    TQString line = MetafontOutput.left(numleft+1);
 #ifdef DEBUG_FONTPOOL
     kdDebug(4300) << "MF OUTPUT RECEIVED: " << line;
 #endif
@@ -575,16 +575,16 @@ void fontPool::mf_output_receiver(KProcess *, char *buffer, int buflen)
     int startlineindex = line.find("kpathsea:");
     if (startlineindex != -1) {
       int endstartline  = line.find("\n",startlineindex);
-      QString startLine = line.mid(startlineindex,endstartline-startlineindex);
+      TQString startLine = line.mid(startlineindex,endstartline-startlineindex);
 
       // The last word in the startline is the name of the font which we
       // are generating. The second-to-last word is the resolution in
       // dots per inch. Display this info in the text label below the
       // progress bar.
       int lastblank     = startLine.findRev(' ');
-      QString fontName  = startLine.mid(lastblank+1);
+      TQString fontName  = startLine.mid(lastblank+1);
       int secondblank   = startLine.findRev(' ',lastblank-1);
-      QString dpi       = startLine.mid(secondblank+1,lastblank-secondblank-1);
+      TQString dpi       = startLine.mid(secondblank+1,lastblank-secondblank-1);
 
       progress.show();
       progress.increaseNumSteps( i18n("Currently generating %1 at %2 dpi").arg(fontName).arg(dpi) );

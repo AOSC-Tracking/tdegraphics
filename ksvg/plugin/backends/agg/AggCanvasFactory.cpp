@@ -35,7 +35,7 @@ AggCanvasFactory::~AggCanvasFactory()
 {
 }
 
-QObject *AggCanvasFactory::createObject(QObject *, const char *, const char *, const QStringList &args)
+TQObject *AggCanvasFactory::createObject(TQObject *, const char *, const char *, const TQStringList &args)
 {
 	unsigned int width = (*args.at(1)).toUInt();
 	unsigned int height = (*args.at(0)).toUInt();

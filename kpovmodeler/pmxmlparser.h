@@ -34,11 +34,11 @@ public:
    /**
     * Parser that parses the device
     */
-   PMXMLParser( PMPart* part, QIODevice* device );
+   PMXMLParser( PMPart* part, TQIODevice* device );
    /**
     * Parser that parses the byte array
     */
-   PMXMLParser( PMPart* part, const QByteArray& array );
+   PMXMLParser( PMPart* part, const TQByteArray& array );
    /**
     * Deletes the parser
     */
@@ -48,7 +48,7 @@ public:
     * Quickly scans the top level objects. Appends all top level object
     * types to the list.
     */
-   virtual void quickParse( QStringList& list );
+   virtual void quickParse( TQStringList& list );
    /**
     * Returns true, if the parser can quickly scan the top level objects.
     */
@@ -65,7 +65,7 @@ private:
     */
    void init( );
    /**
-    * Initializes the QDomDocument. Returns true if successful.
+    * Initializes the TQDomDocument. Returns true if successful.
     */
    bool initDocument( );
    
@@ -73,9 +73,9 @@ private:
     * Looks for child objects, parses them and appends them to the parent
     * object. If parent is 0, all objects are appended to the result list.
     */
-   void parseChildObjects( QDomElement& e, PMObject* parent );
+   void parseChildObjects( TQDomElement& e, PMObject* parent );
 
-   QDomDocument* m_pDoc;
+   TQDomDocument* m_pDoc;
    int m_majorDocumentFormat;
    int m_minorDocumentFormat;
 };

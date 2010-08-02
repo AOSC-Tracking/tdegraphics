@@ -50,9 +50,9 @@ public:
    virtual PMObject* copy( ) const { return new PMDeclare( *this ); }
 
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual QString pixmap( ) const;
+   virtual TQString pixmap( ) const;
 
    /** */
    virtual PMMetaObject* metaObject( ) const;
@@ -62,31 +62,31 @@ public:
    /** */
    virtual bool dataChangeOnInsertRemove( ) const { return true; }
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
    /**
     * Returns a new @ref PMDeclareEdit
     */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the id of the declare
     */
-   virtual QString name( ) const { return m_id; }
+   virtual TQString name( ) const { return m_id; }
    /**
     * Returns the id of the declare
     */
-   QString id( ) const { return m_id; }
+   TQString id( ) const { return m_id; }
    /**
     * Returns the declare type
     */
-   QString declareType( ) const;
+   TQString declareType( ) const;
 
    /**
     * Sets the id of the object.
     */
-   void setID( const QString& id );
+   void setID( const TQString& id );
    /** */
    virtual bool canHaveName( ) const { return true; }
 
@@ -131,7 +131,7 @@ private:
    /**
     * id of the declare
     */
-   QString m_id;
+   TQString m_id;
    /**
     * The linked objects
     */

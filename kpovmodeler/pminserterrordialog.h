@@ -25,10 +25,10 @@
 #endif 
 
 #include <kdialogbase.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
-class QListBox;
-class QLabel;
+class TQListBox;
+class TQLabel;
 
 /**
  * Dialog that is shown if not all objects could be inserted
@@ -41,14 +41,14 @@ public:
     * Creates a modal PMInsertErrorDialog with parent and name.
     */
    PMInsertErrorDialog( int NumberOfObjects, int NumberOfInsertErrors,
-                       const QStringList& details,
-                       QWidget* parent = 0, const char* name = 0 );
+                       const TQStringList& details,
+                       TQWidget* parent = 0, const char* name = 0 );
 protected slots:
    void slotUser1( );
  
 private:
-   QListBox* m_pDetails;
-   QLabel* m_pDetailsLabel;
+   TQListBox* m_pDetails;
+   TQLabel* m_pDetailsLabel;
 };
 
 #endif

@@ -54,8 +54,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <ktempfile.h>
-#include <qdir.h>
-#include <qfileinfo.h>
+#include <tqdir.h>
+#include <tqfileinfo.h>
 #include <stdlib.h>
 #include <kprocio.h>
 
@@ -71,7 +71,7 @@ extern "C" {
 
 dvifile::dvifile(const dvifile *old, fontPool *fp) 
 {
-  errorMsg     = QString::null;
+  errorMsg     = TQString::null;
   errorCounter = 0;
   page_offset  = 0;
   suggestedPageSize = 0;
@@ -267,13 +267,13 @@ void dvifile::prepare_pages()
 }
 
 
-dvifile::dvifile(const QString& fname, fontPool* pool)
+dvifile::dvifile(const TQString& fname, fontPool* pool)
 {
 #ifdef DEBUG_DVIFILE
   kdDebug(4300) << "init_dvi_file: " << fname << endl;
 #endif
 
-  errorMsg     = QString::null;
+  errorMsg     = TQString::null;
   errorCounter = 0;
   page_offset  = 0;
   suggestedPageSize = 0;
@@ -282,7 +282,7 @@ dvifile::dvifile(const QString& fname, fontPool* pool)
   font_pool    = pool;
   sourceSpecialMarker = true;
   
-  QFile file(fname);
+  TQFile file(fname);
   filename = file.name();
   file.open( IO_ReadOnly );
   size_of_file = file.size();
@@ -319,9 +319,9 @@ dvifile::~dvifile()
 #endif
 
   // Delete converted PDF files
-  QMap<QString, QString>::Iterator it;
+  TQMap<TQString, TQString>::Iterator it;
   for ( it = convertedFiles.begin(); it != convertedFiles.end(); ++it ) 
-    QFile::remove(it.data());
+    TQFile::remove(it.data());
 
   if (suggestedPageSize != 0)
     delete suggestedPageSize;
@@ -359,18 +359,18 @@ void dvifile::renumber()
 }
 
 
-QString dvifile::convertPDFtoPS(const QString &PDFFilename)
+TQString dvifile::convertPDFtoPS(const TQString &PDFFilename)
 {
   // Check if the PDFFile is known
-  QMap<QString, QString>::Iterator it =  convertedFiles.find(PDFFilename);
+  TQMap<TQString, TQString>::Iterator it =  convertedFiles.find(PDFFilename);
   if (it != convertedFiles.end()) {
     // PDF-File is known. Good.
     return it.data();
   }
 
   // Get the name of a temporary file
-  KTempFile tmpfile(QString::null, ".ps");
-  QString convertedFileName = tmpfile.name();
+  KTempFile tmpfile(TQString::null, ".ps");
+  TQString convertedFileName = tmpfile.name();
   tmpfile.close();
   tmpfile.unlink();
 
@@ -378,9 +378,9 @@ QString dvifile::convertPDFtoPS(const QString &PDFFilename)
   KProcIO proc;
   proc << "pdf2ps" << PDFFilename << convertedFileName;
   if (proc.start(KProcess::Block) == false) 
-    convertedFileName = QString::null; // Indicates that conversion failed, won't try again.
-  if (!QFile::exists(convertedFileName))
-    convertedFileName = QString::null; // Indicates that conversion failed, won't try again.
+    convertedFileName = TQString::null; // Indicates that conversion failed, won't try again.
+  if (!TQFile::exists(convertedFileName))
+    convertedFileName = TQString::null; // Indicates that conversion failed, won't try again.
 
   // Save name of converted file to buffer, so PDF file won't be
   // converted again, and files can be deleted when *this is
@@ -391,12 +391,12 @@ QString dvifile::convertPDFtoPS(const QString &PDFFilename)
 }
 
 
-bool dvifile::saveAs(const QString &filename)
+bool dvifile::saveAs(const TQString &filename)
 {
   if (dvi_Data() == 0)
     return false;
 
-  QFile out(filename);
+  TQFile out(filename);
   if (out.open( IO_Raw|IO_WriteOnly ) == false)
     return false;
   if (out.writeBlock ( (char *)(dvi_Data()), size_of_file ) == -1)

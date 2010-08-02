@@ -27,7 +27,7 @@
 #include "pmsolidobjectedit.h"
 
 class PMMesh;
-class QCheckBox;
+class TQCheckBox;
 class PMVectorEdit;
 
 /**
@@ -41,7 +41,7 @@ public:
    /**
     * Creates a PMMeshEdit with parent and name
     */
-   PMMeshEdit( QWidget* parent, const char* name = 0 );
+   PMMeshEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -58,8 +58,8 @@ protected slots:
 private:
    PMMesh* m_pDisplayedObject;
 
-   QCheckBox* m_pHierarchy;
-   QCheckBox* m_pEnableInsideVector;
+   TQCheckBox* m_pHierarchy;
+   TQCheckBox* m_pEnableInsideVector;
    PMVectorEdit* m_pInsideVector;
 };
 

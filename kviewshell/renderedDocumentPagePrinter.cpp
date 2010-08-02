@@ -21,8 +21,8 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <qguardedptr.h>
-#include <qpaintdevicemetrics.h>
+#include <tqguardedptr.h>
+#include <tqpaintdevicemetrics.h>
 #include <kprinter.h>
 
 #include "renderedDocumentPagePrinter.h"
@@ -37,17 +37,17 @@ RenderedDocumentPagePrinter::RenderedDocumentPagePrinter(KPrinter *kp)
     return;
   }
 
-  printerPainter = new QPainter(printer);
+  printerPainter = new TQPainter(printer);
 }
 
 
-QSize RenderedDocumentPagePrinter::size()
+TQSize RenderedDocumentPagePrinter::size()
 {
   if (printer == 0) {
     kdError(1223) << "RenderedDocumentPagePrinter::size() called with printer == 0" << endl;
-    return QSize(0,0);
+    return TQSize(0,0);
   }
   
-  QPaintDeviceMetrics pdm( printer );
-  return QSize(pdm.width(), pdm.height());
+  TQPaintDeviceMetrics pdm( printer );
+  return TQSize(pdm.width(), pdm.height());
 }

@@ -21,7 +21,7 @@
 #ifndef SVGPathElementImpl_H
 #define SVGPathElementImpl_H
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 
 #include "svgpathparser.h"
 
@@ -133,10 +133,10 @@ public:
 			int type;
 		};
 
-		static bool getStartSlope(QValueVector<SegmentData> segments, unsigned int i, double *pStartSlope);
-		static bool getEndSlope(QValueVector<SegmentData> segments, unsigned int i, double *pEndSlope);
+		static bool getStartSlope(TQValueVector<SegmentData> segments, unsigned int i, double *pStartSlope);
+		static bool getEndSlope(TQValueVector<SegmentData> segments, unsigned int i, double *pEndSlope);
 
-		QValueVector<Marker> m_markers;
+		TQValueVector<Marker> m_markers;
 	};
 
 	MarkerData markerData() const { return m_markerData; }

@@ -5,7 +5,7 @@
 #include "kmultipage.h"
 #include "dviRenderer.h"
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 class KPrinter;
 
@@ -14,14 +14,14 @@ class KDVIMultiPage : public KMultiPage
   Q_OBJECT
 
 public:
-  KDVIMultiPage(QWidget *parentWidget, const char *widgetName, QObject *parent,
-                const char *name, const QStringList& args = QStringList());
+  KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+                const char *name, const TQStringList& args = TQStringList());
   virtual ~KDVIMultiPage();
 
 // Interface definition start ------------------------------------------------
 
   /// returns the list of supported file formats
-  virtual QStringList fileFormats() const;
+  virtual TQStringList fileFormats() const;
   
   virtual void setFile(bool r);
 

@@ -23,7 +23,7 @@
 
 PMDistanceControlPoint::PMDistanceControlPoint( PMControlPoint* base,
                           const PMVector& direction, double distance,
-                          int id, const QString& description,
+                          int id, const TQString& description,
                           bool showExtraLine )
       : PMControlPoint( id, description )
 {
@@ -36,7 +36,7 @@ PMDistanceControlPoint::PMDistanceControlPoint( PMControlPoint* base,
 
 PMDistanceControlPoint::PMDistanceControlPoint( const PMVector& base,
                           const PMVector& direction, double distance,
-                          int id, const QString& description,
+                          int id, const TQString& description,
                           bool showExtraLine )
       : PMControlPoint( id, description )
 {

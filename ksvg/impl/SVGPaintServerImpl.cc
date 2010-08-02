@@ -35,7 +35,7 @@ SVGPaintServerImpl::~SVGPaintServerImpl()
 {
 }
 
-CanvasPaintServer *SVGPaintServerImpl::paintServer(SVGDocumentImpl *doc, const QString& id)
+CanvasPaintServer *SVGPaintServerImpl::paintServer(SVGDocumentImpl *doc, const TQString& id)
 {
 	CanvasPaintServer *pserver = 0;
 	SVGElementImpl *element = doc->rootElement()->getElementById(id);

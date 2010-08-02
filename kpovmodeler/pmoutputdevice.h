@@ -26,9 +26,9 @@
 
 #include "pmserializer.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 
-class QTextStream;
+class TQTextStream;
 class PMPovrayFormat;
 
 /**
@@ -49,12 +49,12 @@ public:
     * Creates an PMOutputDevice that serializes the povray code
     * to the device
     */
-   PMOutputDevice( QIODevice* dev, PMPovrayFormat* format );
+   PMOutputDevice( TQIODevice* dev, PMPovrayFormat* format );
    /** */
    virtual ~PMOutputDevice( );
 
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
    virtual void serialize( PMObject* o );
    /** */
@@ -64,11 +64,11 @@ public:
     * Writes the povray object type, an open bracket to the text stream
     * and indents the next lines
     */
-   void objectBegin( const QString& type );
+   void objectBegin( const TQString& type );
    /**
     * Begins a declare with the identifier id
     */
-   void declareBegin( const QString& id );
+   void declareBegin( const TQString& id );
    /**
     * Writes an closing bracket to the text stream
     * and decreases the indentation
@@ -80,11 +80,11 @@ public:
     *
     * Adds a newline before the string.
     */
-   void writeLine( const QString& str );
+   void writeLine( const TQString& str );
    /**
     * Writes the string to the text stream
     */
-   void write( const QString& str );
+   void write( const TQString& str );
    /**
     * Writes a new line to the text stream and indents the next line.
     */
@@ -92,7 +92,7 @@ public:
    /**
     * Writes a comment string to the text stream
     */
-   void writeComment( const QString& text );
+   void writeComment( const TQString& text );
    /**
     * Writes a semicolon after a call to objectEnd( )
     */
@@ -101,7 +101,7 @@ public:
     * Writes a special name comment to the text stream, if the
     * name is not empty
     */
-   void writeName( const QString& name );
+   void writeName( const TQString& name );
 
    /**
     * Returns the basic indentation offset
@@ -131,7 +131,7 @@ public:
     * Escapes only not escaped characters. "\"" and "\\" in the string
     * are not escaped.
     */
-   static QString escapeAndQuoteString( const QString& s );
+   static TQString escapeAndQuoteString( const TQString& s );
 
    /**
     * Calls the serialization method for the object o and class
@@ -148,8 +148,8 @@ private:
 
    PMPovrayFormat* m_pFormat;
    unsigned int m_indentation;
-   QString m_indentString;
-   QTextStream m_stream;
+   TQString m_indentString;
+   TQTextStream m_stream;
    bool m_lastWasComment;
    bool m_pendingNewLine;
    bool m_objectSeparation;

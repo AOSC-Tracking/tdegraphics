@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 // qt/kde includes
-#include <qcursor.h>
-#include <qtimer.h>
+#include <tqcursor.h>
+#include <tqtimer.h>
 #include <kaction.h>
 #include <kapplication.h>
 #include <kedittoolbar.h>
@@ -87,9 +87,9 @@ void Shell::init()
     m_part = 0;
     return;
   }
-  connect( this, SIGNAL( restoreDocument(KConfig*) ),m_part, SLOT( restoreDocument(KConfig*)));
-  connect( this, SIGNAL( saveDocumentRestoreInfo(KConfig*) ), m_part, SLOT( saveDocumentRestoreInfo(KConfig*)));
-  connect( m_part, SIGNAL( enablePrintAction(bool) ), m_printAction, SLOT( setEnabled(bool)));
+  connect( this, TQT_SIGNAL( restoreDocument(KConfig*) ),m_part, TQT_SLOT( restoreDocument(KConfig*)));
+  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(KConfig*) ), m_part, TQT_SLOT( saveDocumentRestoreInfo(KConfig*)));
+  connect( m_part, TQT_SIGNAL( enablePrintAction(bool) ), m_printAction, TQT_SLOT( setEnabled(bool)));
   
   readSettings();
   if (!KGlobal::config()->hasGroup("MainWindow"))
@@ -99,7 +99,7 @@ void Shell::init()
   }
   setAutoSaveSettings();
   
-  if (m_openUrl.isValid()) QTimer::singleShot(0, this, SLOT(delayedOpen()));
+  if (m_openUrl.isValid()) TQTimer::singleShot(0, this, TQT_SLOT(delayedOpen()));
 }
 
 void Shell::delayedOpen()
@@ -146,19 +146,19 @@ void Shell::writeSettings()
 
 void Shell::setupActions()
 {
-  KAction * openAction = KStdAction::open(this, SLOT(fileOpen()), actionCollection());
-  m_recent = KStdAction::openRecent( this, SLOT( openURL( const KURL& ) ), actionCollection() );
-  connect( m_recent, SIGNAL( activated() ), openAction, SLOT( activate() ) );
+  KAction * openAction = KStdAction::open(this, TQT_SLOT(fileOpen()), actionCollection());
+  m_recent = KStdAction::openRecent( this, TQT_SLOT( openURL( const KURL& ) ), actionCollection() );
+  connect( m_recent, TQT_SIGNAL( activated() ), openAction, TQT_SLOT( activate() ) );
   m_recent->setWhatsThis( i18n( "<b>Click</b> to open a file or <b>Click and hold</b> to select a recent file" ) );
-  m_printAction = KStdAction::print( m_part, SLOT( slotPrint() ), actionCollection() );
+  m_printAction = KStdAction::print( m_part, TQT_SLOT( slotPrint() ), actionCollection() );
   m_printAction->setEnabled( false );
-  KStdAction::quit(this, SLOT(slotQuit()), actionCollection());
+  KStdAction::quit(this, TQT_SLOT(slotQuit()), actionCollection());
 
   setStandardToolBarMenuEnabled(true);
 
-  m_showMenuBarAction = KStdAction::showMenubar( this, SLOT( slotShowMenubar() ), actionCollection());
-  KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
-  m_fullScreenAction = KStdAction::fullScreen( this, SLOT( slotUpdateFullScreen() ), actionCollection(), this );
+  m_showMenuBarAction = KStdAction::showMenubar( this, TQT_SLOT( slotShowMenubar() ), actionCollection());
+  KStdAction::configureToolbars(this, TQT_SLOT(optionsConfigureToolbars()), actionCollection());
+  m_fullScreenAction = KStdAction::fullScreen( this, TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 }
 
 void Shell::saveProperties(KConfig* config)
@@ -187,7 +187,7 @@ Shell::fileOpen()
   // this slot is called whenever the File->Open menu is selected,
   // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
   // button is clicked
-    KURL url = KFileDialog::getOpenURL( QString::null, "application/pdf application/postscript" );//getOpenFileName();
+    KURL url = KFileDialog::getOpenURL( TQString::null, "application/pdf application/postscript" );//getOpenFileName();
 
   if (!url.isEmpty())
     openURL(url);
@@ -197,7 +197,7 @@ Shell::fileOpen()
 Shell::optionsConfigureToolbars()
 {
   KEditToolbar dlg(factory());
-  connect(&dlg, SIGNAL(newToolbarConfig()), this, SLOT(applyNewToolbarConfig()));
+  connect(&dlg, TQT_SIGNAL(newToolbarConfig()), this, TQT_SLOT(applyNewToolbarConfig()));
   dlg.exec();
 }
 

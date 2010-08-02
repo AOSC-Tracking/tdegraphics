@@ -11,10 +11,10 @@
 #ifndef _KPDF_GENERATOR_PDF_H_
 #define _KPDF_GENERATOR_PDF_H_
 
-#include <qmutex.h>
-#include <qcolor.h>
-#include <qstring.h>
-#include <qthread.h>
+#include <tqmutex.h>
+#include <tqcolor.h>
+#include <tqstring.h>
+#include <tqthread.h>
 #include "core/generator.h"
 #include "core/document.h"
 #include "core/link.h"
@@ -42,7 +42,7 @@ class PDFPixmapGeneratorThread;
  * For generating page contents we tell PDFDoc to render a page and grab
  * contents from out OutputDevs when rendering finishes.
  *
- * Background asyncronous contents providing is done via a QThread inherited
+ * Background asyncronous contents providing is done via a TQThread inherited
  * class defined at the bottom of the file.
  */
 class PDFGenerator : public Generator
@@ -52,7 +52,7 @@ class PDFGenerator : public Generator
         virtual ~PDFGenerator();
 
         // [INHERITED] load a document and fill up the pagesVector
-        bool loadDocument( const QString & fileName, QValueVector<KPDFPage*> & pagesVector );
+        bool loadDocument( const TQString & fileName, TQValueVector<KPDFPage*> & pagesVector );
 
         // [INHERITED] document informations
         const DocumentInfo * generateDocumentInfo();
@@ -77,7 +77,7 @@ class PDFGenerator : public Generator
         bool print( KPrinter& printer );
 
         // [INHERITED] reply to some metadata requests
-        QString getMetaData( const QString & key, const QString & option );
+        TQString getMetaData( const TQString & key, const TQString & option );
 
         // [INHERITED] reparse configuration
         bool reparseConfig();
@@ -86,26 +86,26 @@ class PDFGenerator : public Generator
         // friend class to access private document related variables
         friend class PDFPixmapGeneratorThread;
 
-        void scanFonts(Dict *resDict, KListView *list, Ref **fonts, int &fontsLen, int &fontsSize, QValueVector<Ref> *visitedXObjects);
+        void scanFonts(Dict *resDict, KListView *list, Ref **fonts, int &fontsLen, int &fontsSize, TQValueVector<Ref> *visitedXObjects);
         void scanFont(GfxFont *font, KListView *list, Ref **fonts, int &fontsLen, int &fontsSize);
 
         void fillViewportFromLink( DocumentViewport &viewport, LinkDest *destination );
 
         // private functions for accessing document informations via PDFDoc
-        QString getDocumentInfo( const QString & data, bool canReturnNull = false ) const;
-        QString getDocumentDate( const QString & data ) const;
+        TQString getDocumentInfo( const TQString & data, bool canReturnNull = false ) const;
+        TQString getDocumentDate( const TQString & data ) const;
         // private function for creating the document synopsis hieracy
-        void addSynopsisChildren( QDomNode * parent, GList * items );
+        void addSynopsisChildren( TQDomNode * parent, GList * items );
         // private function for creating the transition information
         void addTransition( int pageNumber, KPDFPage * page );
         // (async related) receive data from the generator thread
-        void customEvent( QCustomEvent * );
+        void customEvent( TQCustomEvent * );
 
         // xpdf dependant stuff
-        QMutex docLock;
+        TQMutex docLock;
         PDFDoc * pdfdoc;
         KPDFOutputDev * kpdfOutputDev;
-        QColor paperColor;
+        TQColor paperColor;
 
         // asyncronous generation related stuff
         PDFPixmapGeneratorThread * generatorThread;
@@ -136,9 +136,9 @@ class PDFPixmapGeneratorThread : public QThread
         void endGeneration();
 
         // methods for getting contents from the GUI thread
-        QImage * takeImage() const;
+        TQImage * takeImage() const;
         TextPage * takeTextPage() const;
-        QValueList< ObjectRect * > takeObjectRects() const;
+        TQValueList< ObjectRect * > takeObjectRects() const;
 
     private:
         // can't be called from the outside (but from startGeneration)

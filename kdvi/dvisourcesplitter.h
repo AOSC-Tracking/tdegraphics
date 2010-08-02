@@ -10,24 +10,24 @@
 #ifndef DVI_SOURCEFILESPLITTER_H
 #define DVI_SOURCEFILESPLITTER_H
 
-#include <qfileinfo.h>
+#include <tqfileinfo.h>
 
-class QString;
+class TQString;
 
 
 class DVI_SourceFileSplitter 
 {
 public:
-  DVI_SourceFileSplitter(const QString & scrlink, const QString & dviFile);
+  DVI_SourceFileSplitter(const TQString & scrlink, const TQString & dviFile);
   
-  QString  fileName() { return m_fileInfo.fileName(); }
-  QString  filePath() { return m_fileInfo.absFilePath(); }
+  TQString  fileName() { return m_fileInfo.fileName(); }
+  TQString  filePath() { return m_fileInfo.absFilePath(); }
   bool     fileExists() { return m_fileInfo.exists(); }
   
   Q_UINT32 line()     { return m_line; }
   
 private:
-  QFileInfo m_fileInfo;
+  TQFileInfo m_fileInfo;
   Q_UINT32  m_line;
   bool      m_exists; 
 };

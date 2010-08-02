@@ -22,29 +22,29 @@
 #include <config.h>
 #endif
 
-#include <qcolor.h>
+#include <tqcolor.h>
 #include <math.h>
 
 // PMRenderManager
-const QColor c_defaultGraphicalObjectColor0 = QColor( 148, 148, 148 );
-const QColor c_defaultGraphicalObjectColor1 = QColor( 255, 255, 128 );
-const QColor c_defaultTextureColor0 = QColor( 64, 192, 64 );
-const QColor c_defaultTextureColor1 = QColor( 192, 255, 128 );
-const QColor c_defaultAxesColorX = QColor( 255, 0, 0 );
-const QColor c_defaultAxesColorY = QColor( 0, 255, 0 );
-const QColor c_defaultAxesColorZ = QColor( 0, 0, 255 );
-const QColor c_defaultControlPointColor0 = QColor( 255, 255, 148 );
-const QColor c_defaultControlPointColor1 = QColor( 92, 255, 92 );
-const QColor c_defaultBackgroundColor = QColor( 0, 0, 0 );
-const QColor c_defaultFieldOfViewColor = QColor( 128, 128, 255 );
+const TQColor c_defaultGraphicalObjectColor0 = TQColor( 148, 148, 148 );
+const TQColor c_defaultGraphicalObjectColor1 = TQColor( 255, 255, 128 );
+const TQColor c_defaultTextureColor0 = TQColor( 64, 192, 64 );
+const TQColor c_defaultTextureColor1 = TQColor( 192, 255, 128 );
+const TQColor c_defaultAxesColorX = TQColor( 255, 0, 0 );
+const TQColor c_defaultAxesColorY = TQColor( 0, 255, 0 );
+const TQColor c_defaultAxesColorZ = TQColor( 0, 0, 255 );
+const TQColor c_defaultControlPointColor0 = TQColor( 255, 255, 148 );
+const TQColor c_defaultControlPointColor1 = TQColor( 92, 255, 92 );
+const TQColor c_defaultBackgroundColor = TQColor( 0, 0, 0 );
+const TQColor c_defaultFieldOfViewColor = TQColor( 128, 128, 255 );
 const bool c_defaultHighDetailCameraView = true;
 
 // PMGLView
 const int c_defaultGridDistance = 50;
-const QColor c_defaultGridColor = QColor( 40, 120, 40 );
+const TQColor c_defaultGridColor = TQColor( 40, 120, 40 );
 
 // PovrayRenderWidget
-const QString c_defaultPovrayCommand = QString( "povray" );
+const TQString c_defaultPovrayCommand = TQString( "povray" );
 
 // PMDetailObject
 const int c_defaultDetailObjectGlobalDetailLevel = 1;
@@ -112,10 +112,10 @@ const int c_defaultTPAADepth = 2;
 const double c_defaultTPAAThreshold = 0.3;
 const bool c_defaultTPShowFloor = true;
 const bool c_defaultTPShowWall = true;
-const QColor c_defaultTPWallColor1 = QColor( 255, 255, 255 );
-const QColor c_defaultTPWallColor2 = QColor( 0, 0, 0 );
-const QColor c_defaultTPFloorColor1 = QColor( 192, 0, 0 );
-const QColor c_defaultTPFloorColor2 = QColor( 255, 255, 255 );
+const TQColor c_defaultTPWallColor1 = TQColor( 255, 255, 255 );
+const TQColor c_defaultTPWallColor2 = TQColor( 0, 0, 0 );
+const TQColor c_defaultTPFloorColor1 = TQColor( 192, 0, 0 );
+const TQColor c_defaultTPFloorColor2 = TQColor( 255, 255, 255 );
 const double c_defaultTPGamma = 1.5;
 
 // PM3DControlPoint

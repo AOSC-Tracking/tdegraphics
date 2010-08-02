@@ -22,7 +22,7 @@
 #define DocumentFactory_H
 
 #include <kurl.h>
-#include <qobject.h>
+#include <tqobject.h>
 
 namespace KSVG
 {
@@ -39,7 +39,7 @@ public:
 	static DocumentFactory *self();
 
 	// Creates a document and connects the parsingFinished() signal to the notifySlot...
-	SVGDocument *requestDocument(QObject *notifyObject, const char *notifySlot) const;
+	SVGDocument *requestDocument(TQObject *notifyObject, const char *notifySlot) const;
 
 	// Loads 'url' and emits parsingFinisihed() signal, when done
 	bool startParsing(SVGDocument *document, const KURL &url);

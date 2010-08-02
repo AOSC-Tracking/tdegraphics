@@ -29,8 +29,8 @@
 #include <kpmainwindow.h>
 #include <kpmainwindow_p.h>
 
-#include <qcolor.h>
-#include <qsize.h>
+#include <tqcolor.h>
+#include <tqsize.h>
 
 #include <kaction.h>
 #include <kapplication.h>
@@ -77,7 +77,7 @@ bool kpMainWindow::isTextSelection () const
 
 
 // private
-QString kpMainWindow::autoCropText () const
+TQString kpMainWindow::autoCropText () const
 {
     return kpToolAutoCropCommand::name (isSelectionActive (),
                                         kpToolAutoCropCommand::ShowAccel);
@@ -90,37 +90,37 @@ void kpMainWindow::setupImageMenuActions ()
     KActionCollection *ac = actionCollection ();
 
     m_actionResizeScale = new KAction (i18n ("R&esize / Scale..."), Qt::CTRL + Qt::Key_E,
-        this, SLOT (slotResizeScale ()), ac, "image_resize_scale");
+        this, TQT_SLOT (slotResizeScale ()), ac, "image_resize_scale");
 
     m_actionCrop = new KAction (i18n ("Se&t as Image (Crop)"), Qt::CTRL + Qt::Key_T,
-        this, SLOT (slotCrop ()), ac, "image_crop");
+        this, TQT_SLOT (slotCrop ()), ac, "image_crop");
 
     m_actionAutoCrop = new KAction (autoCropText (), Qt::CTRL + Qt::Key_U,
-        this, SLOT (slotAutoCrop ()), ac, "image_auto_crop");
+        this, TQT_SLOT (slotAutoCrop ()), ac, "image_auto_crop");
 
     m_actionFlip = new KAction (i18n ("&Flip..."), Qt::CTRL + Qt::Key_F,
-        this, SLOT (slotFlip ()), ac, "image_flip");
+        this, TQT_SLOT (slotFlip ()), ac, "image_flip");
 
     m_actionRotate = new KAction (i18n ("&Rotate..."), Qt::CTRL + Qt::Key_R,
-        this, SLOT (slotRotate ()), ac, "image_rotate");
+        this, TQT_SLOT (slotRotate ()), ac, "image_rotate");
 
     m_actionSkew = new KAction (i18n ("S&kew..."), Qt::CTRL + Qt::Key_K,
-        this, SLOT (slotSkew ()), ac, "image_skew");
+        this, TQT_SLOT (slotSkew ()), ac, "image_skew");
 
     m_actionConvertToBlackAndWhite = new KAction (i18n ("Reduce to Mo&nochrome (Dithered)"), 0,
-        this, SLOT (slotConvertToBlackAndWhite ()), ac, "image_convert_to_black_and_white");
+        this, TQT_SLOT (slotConvertToBlackAndWhite ()), ac, "image_convert_to_black_and_white");
 
     m_actionConvertToGrayscale = new KAction (i18n ("Reduce to &Grayscale"), 0,
-        this, SLOT (slotConvertToGrayscale ()), ac, "image_convert_to_grayscale");
+        this, TQT_SLOT (slotConvertToGrayscale ()), ac, "image_convert_to_grayscale");
 
     m_actionInvertColors = new KAction (i18n ("&Invert Colors"), Qt::CTRL + Qt::Key_I,
-        this, SLOT (slotInvertColors ()), ac, "image_invert_colors");
+        this, TQT_SLOT (slotInvertColors ()), ac, "image_invert_colors");
 
     m_actionClear = new KAction (i18n ("C&lear"), Qt::CTRL + Qt::SHIFT + Qt::Key_N,
-        this, SLOT (slotClear ()), ac, "image_clear");
+        this, TQT_SLOT (slotClear ()), ac, "image_clear");
 
     m_actionMoreEffects = new KAction (i18n ("&More Effects..."), Qt::CTRL + Qt::Key_M,
-        this, SLOT (slotMoreEffects ()), ac, "image_more_effects");
+        this, TQT_SLOT (slotMoreEffects ()), ac, "image_more_effects");
 
     enableImageMenuDocumentActions (false);
 }
@@ -157,10 +157,10 @@ void kpMainWindow::slotImageMenuUpdateDueToSelection ()
         int id = mBar->idAt (index);
 
         // SYNC: kolourpaintui.rc
-        QString menuBarItemTextImage = i18n ("&Image");
-        QString menuBarItemTextSelection = i18n ("Select&ion");
+        TQString menuBarItemTextImage = i18n ("&Image");
+        TQString menuBarItemTextSelection = i18n ("Select&ion");
 
-        const QString menuBarItemText = mBar->text (id);
+        const TQString menuBarItemText = mBar->text (id);
         if (menuBarItemText == menuBarItemTextImage ||
             menuBarItemText == menuBarItemTextSelection)
         {
@@ -260,7 +260,7 @@ void kpMainWindow::addImageOrSelectionCommand (kpCommand *cmd,
         kpMacroCommand *macroCmd = new kpMacroCommand (cmd->name (), this);
 
         macroCmd->addCommand (new kpToolSelectionPullFromDocumentCommand (
-            QString::null/*uninteresting child of macro cmd*/,
+            TQString::null/*uninteresting child of macro cmd*/,
             this));
 
         macroCmd->addCommand (cmd);
@@ -308,7 +308,7 @@ void kpMainWindow::slotResizeScale ()
             dialog.type () == kpToolResizeScaleCommand::Resize)
         {
             // TODO: this should be the responsibility of kpDocument
-            saveDefaultDocSize (QSize (dialog.imageWidth (), dialog.imageHeight ()));
+            saveDefaultDocSize (TQSize (dialog.imageWidth (), dialog.imageHeight ()));
         }
     }
 

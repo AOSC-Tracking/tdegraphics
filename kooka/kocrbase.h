@@ -29,8 +29,8 @@
 
 #include <kdialogbase.h>
 #include <kio/previewjob.h>
-#include <qimage.h>
-#include <qstring.h>
+#include <tqimage.h>
+#include <tqstring.h>
 
 #include <kscanslider.h>
 #include <kanimwidget.h>
@@ -43,19 +43,19 @@
 
 
 class KookaImage;
-class QHBox;
-class QVBox;
-class QLabel;
-class QSize;
+class TQHBox;
+class TQVBox;
+class TQLabel;
+class TQSize;
 class KSpellConfig;
-class QCheckBox;
-class QGroupBox;
+class TQCheckBox;
+class TQGroupBox;
 
 class KOCRBase: public KDialogBase
 {
     Q_OBJECT
 public:
-    KOCRBase( QWidget *, KSpellConfig *spellConfig,
+    KOCRBase( TQWidget *, KSpellConfig *spellConfig,
               KDialogBase::DialogType face = KDialogBase::Plain );
     ~KOCRBase();
 
@@ -64,21 +64,21 @@ public:
     /**
      * @return the name of the ocr engine
      */
-    virtual QString ocrEngineName() const { return QString(); }
+    virtual TQString ocrEngineName() const { return TQString(); }
 
     /**
      * @return the filename (without path) of the logo of the ocr engine.
      * the logo needs to be installed in $KDEDIR/share/apps/kooka/pics
      */
-    virtual QString ocrEngineLogo() const { return QString(); }
+    virtual TQString ocrEngineLogo() const { return TQString(); }
 
     /**
      * @return a description string of the ocr engine
      */
-    virtual QString ocrEngineDesc() const { return QString(); }
+    virtual TQString ocrEngineDesc() const { return TQString(); }
 
-    QVBox* ocrPage() const { return m_ocrPage; }
-    QVBox* imagePage() const { return m_imgPage; }
+    TQVBox* ocrPage() const { return m_ocrPage; }
+    TQVBox* imagePage() const { return m_imgPage; }
 
     KSpellConfig* spellConfig() const
         { return m_spellConfig; }
@@ -123,7 +123,7 @@ protected:
 
 
 protected slots:
-    virtual KAnimWidget* getAnimation(QWidget*);
+    virtual KAnimWidget* getAnimation(TQWidget*);
     virtual void writeConfig();
     virtual void slSpellConfigChanged();
 
@@ -134,25 +134,25 @@ protected slots:
 
 private slots:
     virtual void slPreviewResult( KIO::Job* );
-    virtual void slGotPreview( const KFileItem*, const QPixmap& );
+    virtual void slGotPreview( const KFileItem*, const TQPixmap& );
 
 private:
     KAnimWidget  *m_animation;
-    QVBox        *m_ocrPage;
-    QVBox        *m_imgPage;
-    QVBox        *m_spellchkPage;
-    QVBox        *m_metaBox;
-    QHBox        *m_imgHBox;
-    QLabel       *m_previewPix;
+    TQVBox        *m_ocrPage;
+    TQVBox        *m_imgPage;
+    TQVBox        *m_spellchkPage;
+    TQVBox        *m_metaBox;
+    TQHBox        *m_imgHBox;
+    TQLabel       *m_previewPix;
     KookaImage   *m_currImg;
 
     KSpellConfig *m_spellConfig;
     bool          m_wantSpellCfg;         /* show the spellcheck options? */
     bool          m_userWantsSpellCheck;  /* user has enabled/disabled spellcheck */
-    QSize         m_previewSize;
+    TQSize         m_previewSize;
 
-    QCheckBox     *m_cbWantCheck;
-    QGroupBox     *m_gbSpellOpts;
+    TQCheckBox     *m_cbWantCheck;
+    TQGroupBox     *m_gbSpellOpts;
 };
 
 #endif

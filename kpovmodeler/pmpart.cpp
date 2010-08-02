@@ -17,18 +17,18 @@
 
 
 // include files for QT
-#include <qapplication.h>
-#include <qdir.h>
-#include <qstrlist.h>
-#include <qclipboard.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qmessagebox.h>
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qlabel.h>
-#include <qdatetime.h>
-#include <qstringlist.h>
+#include <tqapplication.h>
+#include <tqdir.h>
+#include <tqstrlist.h>
+#include <tqclipboard.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqmessagebox.h>
+#include <tqcombobox.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
+#include <tqdatetime.h>
+#include <tqstringlist.h>
 
 // include files for KDE
 #include <kiconloader.h>
@@ -94,13 +94,13 @@
 #include "pmfiledialog.h"
 
 #ifdef PMEnableSimpleProfiling
-QTime PMDebugTime;
+TQTime PMDebugTime;
 #endif
 
 //#define KPM_WITH_OBJECT_LIBRARY
 
-PMPart::PMPart( QWidget* parentWidget, const char* widgetName,
-                QObject* parent, const char* name, bool readwrite,
+PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
+                TQObject* parent, const char* name, bool readwrite,
                 PMShell* shell )
       : DCOPObject( "PMPartIface" ),
         KParts::ReadWritePart( parent, name ),
@@ -145,15 +145,15 @@ PMPart::PMPart( QWidget* parentWidget, const char* widgetName,
 
    restoreConfig( instance( )->config( ) );
 
-   connect( qApp->clipboard( ), SIGNAL( dataChanged( ) ),
-            SLOT( slotClipboardDataChanged( ) ) );
+   connect( qApp->clipboard( ), TQT_SIGNAL( dataChanged( ) ),
+            TQT_SLOT( slotClipboardDataChanged( ) ) );
    slotClipboardDataChanged( );
-   connect( &m_commandManager, SIGNAL( updateUndoRedo( const QString&, const QString& ) ),
-            SLOT( slotUpdateUndoRedo( const QString&, const QString& ) ) );
-   connect( &m_commandManager, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-            SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
-   connect( &m_commandManager, SIGNAL( idChanged( PMObject*, const QString& ) ),
-            SLOT( slotIDChanged( PMObject*, const QString& ) ) );
+   connect( &m_commandManager, TQT_SIGNAL( updateUndoRedo( const TQString&, const TQString& ) ),
+            TQT_SLOT( slotUpdateUndoRedo( const TQString&, const TQString& ) ) );
+   connect( &m_commandManager, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( &m_commandManager, TQT_SIGNAL( idChanged( PMObject*, const TQString& ) ),
+            TQT_SLOT( slotIDChanged( PMObject*, const TQString& ) ) );
 
    PMPluginManager::theManager( )->registerPart( this );
 
@@ -161,8 +161,8 @@ PMPart::PMPart( QWidget* parentWidget, const char* widgetName,
    slotObjectChanged( m_pScene, PMCNewSelection, this );
 }
 
-PMPart::PMPart( QWidget* /*parentWidget*/, const char* /*widgetName*/,
-                QObject* parent, const char* name, bool readwrite,
+PMPart::PMPart( TQWidget* /*parentWidget*/, const char* /*widgetName*/,
+                TQObject* parent, const char* name, bool readwrite,
                 bool /*onlyCutPaste*/, PMShell* shell )
       : DCOPObject( "LibraryBrowserIface" ),
         KParts::ReadWritePart( parent, name ),
@@ -202,8 +202,8 @@ PMPart::PMPart( QWidget* /*parentWidget*/, const char* /*widgetName*/,
 
    initCopyPasteActions( );
 
-   connect( &m_commandManager, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-            SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
+   connect( &m_commandManager, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
    PMPluginManager::theManager( )->registerPart( this );
 
@@ -222,13 +222,13 @@ PMPart::~PMPart( )
 void PMPart::initCopyPasteActions( )
 {
    // setup edit menu
-   m_pCutAction = KStdAction::cut( this, SLOT( slotEditCut( ) ), actionCollection( ) );
-   m_pCopyAction = KStdAction::copy( this, SLOT( slotEditCopy( ) ), actionCollection( ) );
-   m_pPasteAction = KStdAction::paste( this, SLOT( slotEditPaste( ) ), actionCollection( ) );
+   m_pCutAction = KStdAction::cut( this, TQT_SLOT( slotEditCut( ) ), actionCollection( ) );
+   m_pCopyAction = KStdAction::copy( this, TQT_SLOT( slotEditCopy( ) ), actionCollection( ) );
+   m_pPasteAction = KStdAction::paste( this, TQT_SLOT( slotEditPaste( ) ), actionCollection( ) );
 
    m_pDeleteAction =
       new KAction( i18n( "Delete" ), "edittrash", Qt::Key_Delete,
-                   this, SLOT( slotEditDelete( ) ),
+                   this, TQT_SLOT( slotEditDelete( ) ),
                    actionCollection( ), "edit_delete" );
 
    m_pCutAction->setEnabled( false );
@@ -242,311 +242,311 @@ void PMPart::initActions( )
 {
    // file menu
    m_pImportAction = new KAction( i18n( "Import..." ), 0, this,
-                                  SLOT( slotFileImport( ) ), actionCollection( ),
+                                  TQT_SLOT( slotFileImport( ) ), actionCollection( ),
                                   "file_import" );
    m_pExportAction = new KAction( i18n( "&Export..." ), 0, this,
-                                  SLOT( slotFileExport( ) ), actionCollection( ),
+                                  TQT_SLOT( slotFileExport( ) ), actionCollection( ),
                                   "file_export" );
 
    initCopyPasteActions( );
    m_onlyCopyPaste = false;
 
-   m_pRenderComboAction = new PMComboAction( i18n( "Render Modes" ), 0, this, SLOT( slotRenderMode( int ) ),
+   m_pRenderComboAction = new PMComboAction( i18n( "Render Modes" ), 0, this, TQT_SLOT( slotRenderMode( int ) ),
                                              actionCollection( ), "view_render_combo" );
    m_pRenderComboAction->setMinimumWidth( 250 );
-   connect( m_pRenderComboAction, SIGNAL( plugged( ) ),
-            SLOT( slotRenderModeActionPlugged( ) ) );
-   m_pRenderAction = new KAction( i18n( "Render" ), "pmrender", 0, this, SLOT( slotRender( ) ),
+   connect( m_pRenderComboAction, TQT_SIGNAL( plugged( ) ),
+            TQT_SLOT( slotRenderModeActionPlugged( ) ) );
+   m_pRenderAction = new KAction( i18n( "Render" ), "pmrender", 0, this, TQT_SLOT( slotRender( ) ),
                                   actionCollection( ), "view_render" );
-   m_pRenderSettingsAction = new KAction( i18n( "Render Modes..." ), "pmrendersettings", 0, this, SLOT( slotRenderSettings( ) ),
+   m_pRenderSettingsAction = new KAction( i18n( "Render Modes..." ), "pmrendersettings", 0, this, TQT_SLOT( slotRenderSettings( ) ),
                                           actionCollection( ), "view_render_settings" );
-   m_pViewRenderWindowAction = new KAction( i18n( "Render Window" ), 0, this, SLOT( slotViewRenderWindow( ) ),
+   m_pViewRenderWindowAction = new KAction( i18n( "Render Window" ), 0, this, TQT_SLOT( slotViewRenderWindow( ) ),
                                             actionCollection( ), "view_render_window" );
-   m_pVisibilityLabelAction = new PMLabelAction( i18n( "Visibility level:" ) + QString( " " ), actionCollection( ), "view_visibility_label" );
+   m_pVisibilityLabelAction = new PMLabelAction( i18n( "Visibility level:" ) + TQString( " " ), actionCollection( ), "view_visibility_label" );
    m_pVisibilityLevelAction = new PMSpinBoxAction( i18n( "Visibility Level" ),
-                     0, this, SLOT( slotVisibilityLevelChanged( int ) ),
+                     0, this, TQT_SLOT( slotVisibilityLevelChanged( int ) ),
                      actionCollection( ), "view_visibility_level" );
-   connect( m_pVisibilityLevelAction, SIGNAL( plugged( ) ),
-            SLOT( slotVisibilityActionPlugged( ) ) );
+   connect( m_pVisibilityLevelAction, TQT_SIGNAL( plugged( ) ),
+            TQT_SLOT( slotVisibilityActionPlugged( ) ) );
 
-   m_pGlobalDetailLabelAction = new PMLabelAction( i18n( "Global detail:" ) + QString( " " ), actionCollection( ), "global_detail_label" );
+   m_pGlobalDetailLabelAction = new PMLabelAction( i18n( "Global detail:" ) + TQString( " " ), actionCollection( ), "global_detail_label" );
    m_pGlobalDetailAction = new KSelectAction( i18n("Global Detail Level"), KShortcut(), actionCollection(), "global_detail_level" );
-   QStringList strList;
+   TQStringList strList;
    strList.append( i18n( "Very Low" ) );
    strList.append( i18n( "Low" ) );
    strList.append( i18n( "Medium" ) );
    strList.append( i18n( "High" ) );
    strList.append( i18n( "Very High" ) );
    m_pGlobalDetailAction->setItems( strList );
-   connect( m_pGlobalDetailAction, SIGNAL( activated( int ) ), SLOT( slotGlobalDetailLevelChanged( int ) ) );
+   connect( m_pGlobalDetailAction, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotGlobalDetailLevelChanged( int ) ) );
 
    // new objects
    if( isReadWrite( ) )
    {
-      m_pNewGlobalSettingsAction = new KAction( i18n( "Global Settings" ), "pmglobalsettings", 0, this, SLOT( slotNewGlobalSettings( ) ),
+      m_pNewGlobalSettingsAction = new KAction( i18n( "Global Settings" ), "pmglobalsettings", 0, this, TQT_SLOT( slotNewGlobalSettings( ) ),
                                      actionCollection( ), "new_globalsettings" );
       m_readWriteActions.append( m_pNewGlobalSettingsAction );
-      m_pNewSkySphereAction = new KAction( i18n( "Sky Sphere" ), "pmskysphere", 0, this, SLOT( slotNewSkySphere( ) ),
+      m_pNewSkySphereAction = new KAction( i18n( "Sky Sphere" ), "pmskysphere", 0, this, TQT_SLOT( slotNewSkySphere( ) ),
                                      actionCollection( ), "new_skysphere" );
       m_readWriteActions.append( m_pNewSkySphereAction );
-      m_pNewRainbowAction = new KAction( i18n( "Rainbow" ), "pmrainbow", 0, this, SLOT( slotNewRainbow( ) ),
+      m_pNewRainbowAction = new KAction( i18n( "Rainbow" ), "pmrainbow", 0, this, TQT_SLOT( slotNewRainbow( ) ),
                                      actionCollection( ), "new_rainbow" );
       m_readWriteActions.append( m_pNewRainbowAction );
-      m_pNewFogAction = new KAction( i18n( "Fog" ), "pmfog", 0, this, SLOT( slotNewFog( ) ),
+      m_pNewFogAction = new KAction( i18n( "Fog" ), "pmfog", 0, this, TQT_SLOT( slotNewFog( ) ),
                                      actionCollection( ), "new_fog" );
       m_readWriteActions.append( m_pNewFogAction );
-      m_pNewInteriorAction = new KAction( i18n( "Interior" ), "pminterior", 0, this, SLOT( slotNewInterior( ) ),
+      m_pNewInteriorAction = new KAction( i18n( "Interior" ), "pminterior", 0, this, TQT_SLOT( slotNewInterior( ) ),
                                      actionCollection( ), "new_interior" );
       m_readWriteActions.append( m_pNewInteriorAction );
-      m_pNewMediaAction = new KAction( i18n( "Media" ), "pmmedia", 0, this, SLOT( slotNewMedia( ) ),
+      m_pNewMediaAction = new KAction( i18n( "Media" ), "pmmedia", 0, this, TQT_SLOT( slotNewMedia( ) ),
                                      actionCollection( ), "new_media" );
       m_readWriteActions.append( m_pNewMediaAction );
-      m_pNewDensityAction = new KAction( i18n( "Density" ), "pmdensity", 0, this, SLOT( slotNewDensity( ) ),
+      m_pNewDensityAction = new KAction( i18n( "Density" ), "pmdensity", 0, this, TQT_SLOT( slotNewDensity( ) ),
                                      actionCollection( ), "new_density" );
       m_readWriteActions.append( m_pNewDensityAction );
-      m_pNewMaterialAction = new KAction( i18n( "Material" ), "pmmaterial", 0, this, SLOT( slotNewMaterial( ) ),
+      m_pNewMaterialAction = new KAction( i18n( "Material" ), "pmmaterial", 0, this, TQT_SLOT( slotNewMaterial( ) ),
                                      actionCollection( ), "new_material" );
       m_readWriteActions.append( m_pNewMaterialAction );
-      m_pNewBoxAction = new KAction( i18n( "Box" ), "pmbox", 0, this, SLOT( slotNewBox( ) ),
+      m_pNewBoxAction = new KAction( i18n( "Box" ), "pmbox", 0, this, TQT_SLOT( slotNewBox( ) ),
                                      actionCollection( ), "new_box" );
       m_readWriteActions.append( m_pNewBoxAction );
-      m_pNewSphereAction = new KAction( i18n( "Sphere" ), "pmsphere", 0, this, SLOT( slotNewSphere( ) ),
+      m_pNewSphereAction = new KAction( i18n( "Sphere" ), "pmsphere", 0, this, TQT_SLOT( slotNewSphere( ) ),
                                         actionCollection( ), "new_sphere" );
       m_readWriteActions.append( m_pNewSphereAction );
-      m_pNewCylinderAction = new KAction( i18n( "Cylinder" ), "pmcylinder", 0, this, SLOT( slotNewCylinder( ) ),
+      m_pNewCylinderAction = new KAction( i18n( "Cylinder" ), "pmcylinder", 0, this, TQT_SLOT( slotNewCylinder( ) ),
                                           actionCollection( ), "new_cylinder" );
       m_readWriteActions.append( m_pNewCylinderAction );
-      m_pNewConeAction =  new KAction( i18n( "Cone" ), "pmcone", 0, this, SLOT( slotNewCone( ) ),
+      m_pNewConeAction =  new KAction( i18n( "Cone" ), "pmcone", 0, this, TQT_SLOT( slotNewCone( ) ),
                                        actionCollection( ), "new_cone" );
       m_readWriteActions.append( m_pNewConeAction );
-      m_pNewTorusAction = new KAction( i18n( "Torus" ), "pmtorus", 0, this, SLOT( slotNewTorus( ) ),
+      m_pNewTorusAction = new KAction( i18n( "Torus" ), "pmtorus", 0, this, TQT_SLOT( slotNewTorus( ) ),
                                        actionCollection( ), "new_torus" );
       m_readWriteActions.append( m_pNewTorusAction );
 
-      m_pNewLatheAction = new KAction( i18n( "Lathe" ), "pmlathe", 0, this, SLOT( slotNewLathe( ) ),
+      m_pNewLatheAction = new KAction( i18n( "Lathe" ), "pmlathe", 0, this, TQT_SLOT( slotNewLathe( ) ),
                                        actionCollection( ), "new_lathe" );
       m_readWriteActions.append( m_pNewLatheAction );
-      m_pNewPrismAction = new KAction( i18n( "Prism" ), "pmprism", 0, this, SLOT( slotNewPrism( ) ),
+      m_pNewPrismAction = new KAction( i18n( "Prism" ), "pmprism", 0, this, TQT_SLOT( slotNewPrism( ) ),
                                        actionCollection( ), "new_prism" );
       m_readWriteActions.append( m_pNewPrismAction );
-      m_pNewSurfaceOfRevolutionAction = new KAction( i18n( "Surface of Revolution" ), "pmsor", 0, this, SLOT( slotNewSurfaceOfRevolution( ) ),
+      m_pNewSurfaceOfRevolutionAction = new KAction( i18n( "Surface of Revolution" ), "pmsor", 0, this, TQT_SLOT( slotNewSurfaceOfRevolution( ) ),
                                        actionCollection( ), "new_surfaceofrevolution" );
       m_readWriteActions.append( m_pNewSurfaceOfRevolutionAction );
-      m_pNewSuperquadricEllipsoidAction = new KAction( i18n( "Superquadric Ellipsoid" ), "pmsqe", 0, this, SLOT( slotNewSuperquadricEllipsoid( ) ),
+      m_pNewSuperquadricEllipsoidAction = new KAction( i18n( "Superquadric Ellipsoid" ), "pmsqe", 0, this, TQT_SLOT( slotNewSuperquadricEllipsoid( ) ),
                                        actionCollection( ), "new_superquadricellipsoid" );
       m_readWriteActions.append( m_pNewSuperquadricEllipsoidAction );
 
-      m_pNewJuliaFractalAction = new KAction( i18n( "Julia Fractal" ), "pmjuliafractal", 0, this, SLOT( slotNewJuliaFractal( ) ),
+      m_pNewJuliaFractalAction = new KAction( i18n( "Julia Fractal" ), "pmjuliafractal", 0, this, TQT_SLOT( slotNewJuliaFractal( ) ),
                                               actionCollection( ), "new_juliafractal" );
       m_readWriteActions.append( m_pNewJuliaFractalAction );
-      m_pNewHeightFieldAction = new KAction( i18n( "Height Field" ), "pmheightfield", 0, this, SLOT( slotNewHeightField( ) ),
+      m_pNewHeightFieldAction = new KAction( i18n( "Height Field" ), "pmheightfield", 0, this, TQT_SLOT( slotNewHeightField( ) ),
                                              actionCollection( ), "new_heightfield" );
       m_readWriteActions.append( m_pNewHeightFieldAction );
-      m_pNewTextAction = new KAction( i18n( "Text" ), "pmtext", 0, this, SLOT( slotNewText( ) ),
+      m_pNewTextAction = new KAction( i18n( "Text" ), "pmtext", 0, this, TQT_SLOT( slotNewText( ) ),
                                       actionCollection( ), "new_text" );
       m_readWriteActions.append( m_pNewTextAction );
 
-      m_pNewBlobAction = new KAction( i18n( "Blob" ), "pmblob", 0, this, SLOT( slotNewBlob( ) ),
+      m_pNewBlobAction = new KAction( i18n( "Blob" ), "pmblob", 0, this, TQT_SLOT( slotNewBlob( ) ),
                                       actionCollection( ), "new_blob" );
       m_readWriteActions.append( m_pNewBlobAction );
-      m_pNewBlobSphereAction = new KAction( i18n( "Blob Sphere" ), "pmblobsphere", 0, this, SLOT( slotNewBlobSphere( ) ),
+      m_pNewBlobSphereAction = new KAction( i18n( "Blob Sphere" ), "pmblobsphere", 0, this, TQT_SLOT( slotNewBlobSphere( ) ),
                                             actionCollection( ), "new_blobsphere" );
       m_readWriteActions.append( m_pNewBlobSphereAction );
-      m_pNewBlobCylinderAction = new KAction( i18n( "Blob Cylinder" ), "pmblobcylinder", 0, this, SLOT( slotNewBlobCylinder( ) ),
+      m_pNewBlobCylinderAction = new KAction( i18n( "Blob Cylinder" ), "pmblobcylinder", 0, this, TQT_SLOT( slotNewBlobCylinder( ) ),
                                               actionCollection( ), "new_blobcylinder" );
       m_readWriteActions.append( m_pNewBlobCylinderAction );
 
-      m_pNewPlaneAction = new KAction( i18n( "Plane" ), "pmplane", 0, this, SLOT( slotNewPlane( ) ),
+      m_pNewPlaneAction = new KAction( i18n( "Plane" ), "pmplane", 0, this, TQT_SLOT( slotNewPlane( ) ),
                                        actionCollection( ), "new_plane" );
       m_readWriteActions.append( m_pNewPlaneAction );
-      m_pNewPolynomAction = new KAction( i18n( "Polynom" ), "pmpolynom", 0, this, SLOT( slotNewPolynom( ) ),
+      m_pNewPolynomAction = new KAction( i18n( "Polynom" ), "pmpolynom", 0, this, TQT_SLOT( slotNewPolynom( ) ),
                                          actionCollection( ), "new_polynom" );
       m_readWriteActions.append( m_pNewPolynomAction );
 
-      m_pNewDeclareAction = new KAction( i18n( "Declaration" ), "pmdeclare", 0, this, SLOT( slotNewDeclare( ) ),
+      m_pNewDeclareAction = new KAction( i18n( "Declaration" ), "pmdeclare", 0, this, TQT_SLOT( slotNewDeclare( ) ),
                                          actionCollection( ), "new_declare" );
       m_readWriteActions.append( m_pNewDeclareAction );
-      m_pNewObjectLinkAction = new KAction( i18n( "Object Link" ), "pmobjectlink", 0, this, SLOT( slotNewObjectLink( ) ),
+      m_pNewObjectLinkAction = new KAction( i18n( "Object Link" ), "pmobjectlink", 0, this, TQT_SLOT( slotNewObjectLink( ) ),
                                             actionCollection( ), "new_objectlink" );
       m_readWriteActions.append( m_pNewObjectLinkAction );
 
-      m_pNewUnionAction = new KAction( i18n( "Union" ), "pmunion", 0, this, SLOT( slotNewUnion( ) ),
+      m_pNewUnionAction = new KAction( i18n( "Union" ), "pmunion", 0, this, TQT_SLOT( slotNewUnion( ) ),
                                        actionCollection( ), "new_union" );
       m_readWriteActions.append( m_pNewUnionAction );
-      m_pNewIntersectionAction = new KAction( i18n( "Intersection" ), "pmintersection", 0, this, SLOT( slotNewIntersection( ) ),
+      m_pNewIntersectionAction = new KAction( i18n( "Intersection" ), "pmintersection", 0, this, TQT_SLOT( slotNewIntersection( ) ),
                                               actionCollection( ), "new_intersection" );
       m_readWriteActions.append( m_pNewIntersectionAction );
-      m_pNewDifferenceAction = new KAction( i18n( "Difference" ), "pmdifference", 0, this, SLOT( slotNewDifference( ) ),
+      m_pNewDifferenceAction = new KAction( i18n( "Difference" ), "pmdifference", 0, this, TQT_SLOT( slotNewDifference( ) ),
                                             actionCollection( ), "new_difference" );
       m_readWriteActions.append( m_pNewDifferenceAction );
-      m_pNewMergeAction = new KAction( i18n( "Merge" ), "pmmerge", 0, this, SLOT( slotNewMerge( ) ),
+      m_pNewMergeAction = new KAction( i18n( "Merge" ), "pmmerge", 0, this, TQT_SLOT( slotNewMerge( ) ),
                                        actionCollection( ), "new_merge" );
       m_readWriteActions.append( m_pNewMergeAction );
 
-      m_pNewBoundedByAction = new KAction( i18n( "Bounded By" ), "pmboundedby", 0, this, SLOT( slotNewBoundedBy( ) ),
+      m_pNewBoundedByAction = new KAction( i18n( "Bounded By" ), "pmboundedby", 0, this, TQT_SLOT( slotNewBoundedBy( ) ),
                                        actionCollection( ), "new_boundedby" );
       m_readWriteActions.append( m_pNewBoundedByAction );
-      m_pNewClippedByAction = new KAction( i18n( "Clipped By" ), "pmclippedby", 0, this, SLOT( slotNewClippedBy( ) ),
+      m_pNewClippedByAction = new KAction( i18n( "Clipped By" ), "pmclippedby", 0, this, TQT_SLOT( slotNewClippedBy( ) ),
                                        actionCollection( ), "new_clippedby" );
       m_readWriteActions.append( m_pNewClippedByAction );
 
-      m_pNewLightAction = new KAction( i18n( "Light" ), "pmlight", 0, this, SLOT( slotNewLight( ) ),
+      m_pNewLightAction = new KAction( i18n( "Light" ), "pmlight", 0, this, TQT_SLOT( slotNewLight( ) ),
                                        actionCollection( ), "new_light" );
       m_readWriteActions.append( m_pNewLightAction );
-      m_pNewLooksLikeAction = new KAction( i18n( "Looks Like" ), "pmlookslike", 0, this, SLOT( slotNewLooksLike( ) ),
+      m_pNewLooksLikeAction = new KAction( i18n( "Looks Like" ), "pmlookslike", 0, this, TQT_SLOT( slotNewLooksLike( ) ),
                                        actionCollection( ), "new_lookslike" );
       m_readWriteActions.append( m_pNewLooksLikeAction );
-      m_pNewProjectedThroughAction = new KAction( i18n( "Projected Through" ), "pmprojectedthrough", 0, this, SLOT( slotNewProjectedThrough( ) ),
+      m_pNewProjectedThroughAction = new KAction( i18n( "Projected Through" ), "pmprojectedthrough", 0, this, TQT_SLOT( slotNewProjectedThrough( ) ),
                                        actionCollection( ), "new_projectedthrough" );
       m_readWriteActions.append( m_pNewProjectedThroughAction );
 
-      m_pNewBicubicPatchAction = new KAction( i18n( "Bicubic Patch" ), "pmbicubicpatch", 0, this, SLOT( slotNewBicubicPatch( ) ),
+      m_pNewBicubicPatchAction = new KAction( i18n( "Bicubic Patch" ), "pmbicubicpatch", 0, this, TQT_SLOT( slotNewBicubicPatch( ) ),
                                               actionCollection( ), "new_bicubicpatch" );
       m_readWriteActions.append( m_pNewBicubicPatchAction );
-      m_pNewDiscAction = new KAction( i18n( "Disc" ), "pmdisc", 0, this, SLOT( slotNewDisc( ) ),
+      m_pNewDiscAction = new KAction( i18n( "Disc" ), "pmdisc", 0, this, TQT_SLOT( slotNewDisc( ) ),
                                       actionCollection( ), "new_disc" );
       m_readWriteActions.append( m_pNewDiscAction );
-      m_pNewTriangleAction = new KAction( i18n( "Triangle" ), "pmtriangle", 0, this, SLOT( slotNewTriangle( ) ),
+      m_pNewTriangleAction = new KAction( i18n( "Triangle" ), "pmtriangle", 0, this, TQT_SLOT( slotNewTriangle( ) ),
                                           actionCollection( ), "new_triangle" );
       m_readWriteActions.append( m_pNewTriangleAction );
 
 
-      m_pNewCameraAction = new KAction( i18n( "Camera" ), "pmcamera", 0, this, SLOT( slotNewCamera( ) ),
+      m_pNewCameraAction = new KAction( i18n( "Camera" ), "pmcamera", 0, this, TQT_SLOT( slotNewCamera( ) ),
                                         actionCollection( ), "new_camera" );
       m_readWriteActions.append( m_pNewCameraAction );
 
-      m_pNewTextureAction = new KAction( i18n( "Texture" ), "pmtexture", 0, this, SLOT( slotNewTexture( ) ),
+      m_pNewTextureAction = new KAction( i18n( "Texture" ), "pmtexture", 0, this, TQT_SLOT( slotNewTexture( ) ),
                                          actionCollection( ), "new_texture" );
       m_readWriteActions.append( m_pNewTextureAction );
 
-      m_pNewPigmentAction = new KAction( i18n( "Pigment" ), "pmpigment", 0, this, SLOT( slotNewPigment( ) ),
+      m_pNewPigmentAction = new KAction( i18n( "Pigment" ), "pmpigment", 0, this, TQT_SLOT( slotNewPigment( ) ),
                                          actionCollection( ), "new_pigment" );
       m_readWriteActions.append( m_pNewPigmentAction );
-      m_pNewNormalAction = new KAction( i18n( "Normal" ), "pmnormal", 0, this, SLOT( slotNewNormal( ) ),
+      m_pNewNormalAction = new KAction( i18n( "Normal" ), "pmnormal", 0, this, TQT_SLOT( slotNewNormal( ) ),
                                          actionCollection( ), "new_normal" );
       m_readWriteActions.append( m_pNewNormalAction );
-      m_pNewSolidColorAction = new KAction( i18n( "Solid Color" ), "pmsolidcolor", 0, this, SLOT( slotNewSolidColor( ) ),
+      m_pNewSolidColorAction = new KAction( i18n( "Solid Color" ), "pmsolidcolor", 0, this, TQT_SLOT( slotNewSolidColor( ) ),
                                             actionCollection( ), "new_solidcolor" );
       m_readWriteActions.append( m_pNewSolidColorAction );
 
-      m_pNewTextureListAction = new KAction( i18n( "Texture List" ), "pmtexturelist", 0, this, SLOT( slotNewTextureList( ) ),
+      m_pNewTextureListAction = new KAction( i18n( "Texture List" ), "pmtexturelist", 0, this, TQT_SLOT( slotNewTextureList( ) ),
                                             actionCollection( ), "new_texturelist" );
       m_readWriteActions.append( m_pNewTextureListAction );
-      m_pNewColorListAction = new KAction( i18n( "Color List" ), "pmcolorlist", 0, this, SLOT( slotNewColorList( ) ),
+      m_pNewColorListAction = new KAction( i18n( "Color List" ), "pmcolorlist", 0, this, TQT_SLOT( slotNewColorList( ) ),
                                             actionCollection( ), "new_colorlist" );
       m_readWriteActions.append( m_pNewColorListAction );
-      m_pNewPigmentListAction = new KAction( i18n( "Pigment List" ), "pmpigmentlist", 0, this, SLOT( slotNewPigmentList( ) ),
+      m_pNewPigmentListAction = new KAction( i18n( "Pigment List" ), "pmpigmentlist", 0, this, TQT_SLOT( slotNewPigmentList( ) ),
                                             actionCollection( ), "new_pigmentlist" );
       m_readWriteActions.append( m_pNewPigmentListAction );
-      m_pNewNormalListAction = new KAction( i18n( "Normal List" ), "pmnormallist", 0, this, SLOT( slotNewNormalList( ) ),
+      m_pNewNormalListAction = new KAction( i18n( "Normal List" ), "pmnormallist", 0, this, TQT_SLOT( slotNewNormalList( ) ),
                                             actionCollection( ), "new_normallist" );
       m_readWriteActions.append( m_pNewNormalListAction );
-      m_pNewDensityListAction = new KAction( i18n( "Density List" ), "pmdensitylist", 0, this, SLOT( slotNewDensityList( ) ),
+      m_pNewDensityListAction = new KAction( i18n( "Density List" ), "pmdensitylist", 0, this, TQT_SLOT( slotNewDensityList( ) ),
                                             actionCollection( ), "new_densitylist" );
       m_readWriteActions.append( m_pNewDensityListAction );
 
-      m_pNewFinishAction = new KAction( i18n( "Finish" ), "pmfinish", 0, this, SLOT( slotNewFinish( ) ),
+      m_pNewFinishAction = new KAction( i18n( "Finish" ), "pmfinish", 0, this, TQT_SLOT( slotNewFinish( ) ),
                                             actionCollection( ), "new_finish" );
       m_readWriteActions.append( m_pNewFinishAction );
 
-      m_pNewPatternAction = new KAction( i18n( "Pattern" ), "pmpattern", 0, this, SLOT( slotNewPattern( ) ),
+      m_pNewPatternAction = new KAction( i18n( "Pattern" ), "pmpattern", 0, this, TQT_SLOT( slotNewPattern( ) ),
                                          actionCollection( ), "new_pattern" );
       m_readWriteActions.append( m_pNewPatternAction );
-      m_pNewBlendMapModifiersAction = new KAction( i18n( "Blend Map Modifiers" ), "pmblendmapmodifiers", 0, this, SLOT( slotNewBlendMapModifiers( ) ),
+      m_pNewBlendMapModifiersAction = new KAction( i18n( "Blend Map Modifiers" ), "pmblendmapmodifiers", 0, this, TQT_SLOT( slotNewBlendMapModifiers( ) ),
                                          actionCollection( ), "new_blendmapmodifiers" );
       m_readWriteActions.append( m_pNewBlendMapModifiersAction );
-      m_pNewTextureMapAction = new KAction( i18n( "Texture Map" ), "pmtexturemap", 0, this, SLOT( slotNewTextureMap( ) ),
+      m_pNewTextureMapAction = new KAction( i18n( "Texture Map" ), "pmtexturemap", 0, this, TQT_SLOT( slotNewTextureMap( ) ),
                                             actionCollection( ), "new_texturemap" );
       m_readWriteActions.append( m_pNewTextureMapAction );
-      m_pNewMaterialMapAction = new KAction( i18n( "Material Map" ), "pmmaterialmap", 0, this, SLOT( slotNewMaterialMap( ) ),
+      m_pNewMaterialMapAction = new KAction( i18n( "Material Map" ), "pmmaterialmap", 0, this, TQT_SLOT( slotNewMaterialMap( ) ),
                                             actionCollection( ), "new_materialmap" );
       m_readWriteActions.append( m_pNewMaterialMapAction );
-      m_pNewPigmentMapAction = new KAction( i18n( "Pigment Map" ), "pmpigmentmap", 0, this, SLOT( slotNewPigmentMap( ) ),
+      m_pNewPigmentMapAction = new KAction( i18n( "Pigment Map" ), "pmpigmentmap", 0, this, TQT_SLOT( slotNewPigmentMap( ) ),
                                             actionCollection( ), "new_pigmentmap" );
       m_readWriteActions.append( m_pNewPigmentMapAction );
-      m_pNewColorMapAction = new KAction( i18n( "Color Map" ), "pmcolormap", 0, this, SLOT( slotNewColorMap( ) ),
+      m_pNewColorMapAction = new KAction( i18n( "Color Map" ), "pmcolormap", 0, this, TQT_SLOT( slotNewColorMap( ) ),
                                           actionCollection( ), "new_colormap" );
       m_readWriteActions.append( m_pNewColorMapAction );
-      m_pNewNormalMapAction = new KAction( i18n( "Normal Map" ), "pmnormalmap", 0, this, SLOT( slotNewNormalMap( ) ),
+      m_pNewNormalMapAction = new KAction( i18n( "Normal Map" ), "pmnormalmap", 0, this, TQT_SLOT( slotNewNormalMap( ) ),
                                            actionCollection( ), "new_normalmap" );
       m_readWriteActions.append( m_pNewNormalMapAction );
-      m_pNewBumpMapAction = new KAction( i18n( "Bump Map" ), "pmbumpmap", 0, this, SLOT( slotNewBumpMap( ) ),
+      m_pNewBumpMapAction = new KAction( i18n( "Bump Map" ), "pmbumpmap", 0, this, TQT_SLOT( slotNewBumpMap( ) ),
                                            actionCollection( ), "new_bumpmap" );
       m_readWriteActions.append( m_pNewBumpMapAction );
-      m_pNewSlopeMapAction = new KAction( i18n( "Slope Map" ), "pmslopemap", 0, this, SLOT( slotNewSlopeMap( ) ),
+      m_pNewSlopeMapAction = new KAction( i18n( "Slope Map" ), "pmslopemap", 0, this, TQT_SLOT( slotNewSlopeMap( ) ),
                                            actionCollection( ), "new_slopemap" );
       m_readWriteActions.append( m_pNewSlopeMapAction );
-      m_pNewDensityMapAction = new KAction( i18n( "Density Map" ), "pmdensitymap", 0, this, SLOT( slotNewDensityMap( ) ),
+      m_pNewDensityMapAction = new KAction( i18n( "Density Map" ), "pmdensitymap", 0, this, TQT_SLOT( slotNewDensityMap( ) ),
                                            actionCollection( ), "new_densitymap" );
       m_readWriteActions.append( m_pNewDensityMapAction );
-      m_pNewSlopeAction = new KAction( i18n( "Slope" ), "pmslope", 0, this, SLOT( slotNewSlope( ) ),
+      m_pNewSlopeAction = new KAction( i18n( "Slope" ), "pmslope", 0, this, TQT_SLOT( slotNewSlope( ) ),
                                            actionCollection( ), "new_slope" );
       m_readWriteActions.append( m_pNewSlopeAction );
 
-      m_pNewWarpAction = new KAction( i18n( "Warp" ), "pmwarp", 0, this, SLOT( slotNewWarp( ) ),
+      m_pNewWarpAction = new KAction( i18n( "Warp" ), "pmwarp", 0, this, TQT_SLOT( slotNewWarp( ) ),
                                             actionCollection( ), "new_warp" );
       m_readWriteActions.append( m_pNewWarpAction );
-      m_pNewImageMapAction = new KAction( i18n( "Image Map" ), "pmimagemap", 0, this, SLOT( slotNewImageMap( ) ),
+      m_pNewImageMapAction = new KAction( i18n( "Image Map" ), "pmimagemap", 0, this, TQT_SLOT( slotNewImageMap( ) ),
                                             actionCollection( ), "new_imagemap" );
       m_readWriteActions.append( m_pNewImageMapAction );
-      m_pNewQuickColorAction = new KAction( i18n( "QuickColor" ), "pmquickcolor", 0, this, SLOT( slotNewQuickColor( ) ),
+      m_pNewQuickColorAction = new KAction( i18n( "QuickColor" ), "pmquickcolor", 0, this, TQT_SLOT( slotNewQuickColor( ) ),
                                              actionCollection( ), "new_quickcolor" );
       m_readWriteActions.append( m_pNewQuickColorAction );
 
-      m_pNewTranslateAction = new KAction( i18n( "Translate" ), "pmtranslate", 0, this, SLOT( slotNewTranslate( ) ),
+      m_pNewTranslateAction = new KAction( i18n( "Translate" ), "pmtranslate", 0, this, TQT_SLOT( slotNewTranslate( ) ),
                                      actionCollection( ), "new_translate" );
       m_readWriteActions.append( m_pNewTranslateAction );
-      m_pNewScaleAction = new KAction( i18n( "Scale" ), "pmscale", 0, this, SLOT( slotNewScale( ) ),
+      m_pNewScaleAction = new KAction( i18n( "Scale" ), "pmscale", 0, this, TQT_SLOT( slotNewScale( ) ),
                                      actionCollection( ), "new_scale" );
       m_readWriteActions.append( m_pNewScaleAction );
-      m_pNewRotateAction = new KAction( i18n( "Rotate" ), "pmrotate", 0, this, SLOT( slotNewRotate( ) ),
+      m_pNewRotateAction = new KAction( i18n( "Rotate" ), "pmrotate", 0, this, TQT_SLOT( slotNewRotate( ) ),
                                      actionCollection( ), "new_rotate" );
       m_readWriteActions.append( m_pNewRotateAction );
-      m_pNewMatrixAction = new KAction( i18n( "Matrix" ), "pmmatrix", 0, this, SLOT( slotNewMatrix( ) ),
+      m_pNewMatrixAction = new KAction( i18n( "Matrix" ), "pmmatrix", 0, this, TQT_SLOT( slotNewMatrix( ) ),
                                         actionCollection( ), "new_povraymatrix" );
       m_readWriteActions.append( m_pNewMatrixAction );
 
-      m_pNewCommentAction = new KAction( i18n( "Comment" ), "pmcomment", 0, this, SLOT( slotNewComment( ) ),
+      m_pNewCommentAction = new KAction( i18n( "Comment" ), "pmcomment", 0, this, TQT_SLOT( slotNewComment( ) ),
                                          actionCollection( ), "new_comment" );
       m_readWriteActions.append( m_pNewCommentAction );
-      m_pNewRawAction = new KAction( i18n( "Raw Povray" ), "pmraw", 0, this, SLOT( slotNewRaw( ) ),
+      m_pNewRawAction = new KAction( i18n( "Raw Povray" ), "pmraw", 0, this, TQT_SLOT( slotNewRaw( ) ),
                                          actionCollection( ), "new_raw" );
       m_readWriteActions.append( m_pNewRawAction );
 
       // POV-Ray 3.5 objects
-      m_pNewIsoSurfaceAction = new KAction( i18n( "Iso Surface" ), "pmisosurface", 0, this, SLOT( slotNewIsoSurface( ) ),
+      m_pNewIsoSurfaceAction = new KAction( i18n( "Iso Surface" ), "pmisosurface", 0, this, TQT_SLOT( slotNewIsoSurface( ) ),
                                          actionCollection( ), "new_isosurface" );
       m_readWriteActions.append( m_pNewIsoSurfaceAction );
-      m_pNewRadiosityAction = new KAction( i18n( "Radiosity" ), "pmradiosity", 0, this, SLOT( slotNewRadiosity( ) ),
+      m_pNewRadiosityAction = new KAction( i18n( "Radiosity" ), "pmradiosity", 0, this, TQT_SLOT( slotNewRadiosity( ) ),
                                          actionCollection( ), "new_radiosity" );
       m_readWriteActions.append( m_pNewRadiosityAction );
-      m_pNewGlobalPhotonsAction = new KAction( i18n( "Global Photons" ), "pmglobalphotons", 0, this, SLOT( slotNewGlobalPhotons( ) ),
+      m_pNewGlobalPhotonsAction = new KAction( i18n( "Global Photons" ), "pmglobalphotons", 0, this, TQT_SLOT( slotNewGlobalPhotons( ) ),
                                          actionCollection( ), "new_globalphotons" );
       m_readWriteActions.append( m_pNewGlobalPhotonsAction );
-      m_pNewPhotonsAction = new KAction( i18n( "Photons" ), "pmphotons", 0, this, SLOT( slotNewPhotons( ) ),
+      m_pNewPhotonsAction = new KAction( i18n( "Photons" ), "pmphotons", 0, this, TQT_SLOT( slotNewPhotons( ) ),
                                          actionCollection( ), "new_photons" );
       m_readWriteActions.append( m_pNewPhotonsAction );
-      m_pNewLightGroupAction = new KAction( i18n( "Light Group" ), "pmlightgroup", 0, this, SLOT( slotNewLightGroup( ) ),
+      m_pNewLightGroupAction = new KAction( i18n( "Light Group" ), "pmlightgroup", 0, this, TQT_SLOT( slotNewLightGroup( ) ),
                                          actionCollection( ), "new_lightgroup" );
       m_readWriteActions.append( m_pNewLightGroupAction );
-      m_pNewInteriorTextureAction = new KAction( i18n( "Interior Texture" ), "pminteriortexture", 0, this, SLOT( slotNewInteriorTexture( ) ),
+      m_pNewInteriorTextureAction = new KAction( i18n( "Interior Texture" ), "pminteriortexture", 0, this, TQT_SLOT( slotNewInteriorTexture( ) ),
                                          actionCollection( ), "new_interiortexture" );
       m_readWriteActions.append( m_pNewInteriorTextureAction );
-      m_pNewSphereSweepAction = new KAction( i18n( "Sphere Sweep" ), "pmspheresweep", 0, this, SLOT( slotNewSphereSweep( ) ),
+      m_pNewSphereSweepAction = new KAction( i18n( "Sphere Sweep" ), "pmspheresweep", 0, this, TQT_SLOT( slotNewSphereSweep( ) ),
                                          actionCollection( ), "new_spheresweep" );
       m_readWriteActions.append( m_pNewSphereSweepAction );
-      m_pNewMeshAction = new KAction( i18n( "Mesh" ), "pmmesh", 0, this, SLOT( slotNewMesh( ) ),
+      m_pNewMeshAction = new KAction( i18n( "Mesh" ), "pmmesh", 0, this, TQT_SLOT( slotNewMesh( ) ),
                                          actionCollection( ), "new_mesh" );
       m_readWriteActions.append( m_pNewMeshAction );
 
 #ifdef KPM_WITH_OBJECT_LIBRARY
-      m_pSearchLibraryObjectAction = new KAction( i18n( "Search Object" ), "pmsearchlibrary", 0, this, SLOT( slotSearchLibraryObject( ) ),
+      m_pSearchLibraryObjectAction = new KAction( i18n( "Search Object" ), "pmsearchlibrary", 0, this, TQT_SLOT( slotSearchLibraryObject( ) ),
                                          actionCollection( ), "search_library_object" );
       m_readWriteActions.append( m_pSearchLibraryObjectAction );
 #endif
 
-      m_pUndoAction = KStdAction::undo( this, SLOT( slotEditUndo( ) ), actionCollection( ) );
-      m_pRedoAction = KStdAction::redo( this, SLOT( slotEditRedo( ) ), actionCollection( ) );
+      m_pUndoAction = KStdAction::undo( this, TQT_SLOT( slotEditUndo( ) ), actionCollection( ) );
+      m_pRedoAction = KStdAction::redo( this, TQT_SLOT( slotEditRedo( ) ), actionCollection( ) );
       m_pUndoAction->setEnabled( false );
       m_pRedoAction->setEnabled( false );
    }
@@ -655,7 +655,7 @@ void PMPart::updateNewObjectActions( )
 {
    if( isReadWrite( ) && !m_onlyCopyPaste )
    {
-      QPtrListIterator<PMMetaObject> it =
+      TQPtrListIterator<PMMetaObject> it =
          m_pPrototypeManager->prototypeIterator( );
       KAction* action;
       bool enable;
@@ -672,13 +672,13 @@ void PMPart::updateNewObjectActions( )
          // action names are "new_" + povray name
          // (like new_box, new_sphere ...)
 
-         QString actionName = "new_" + it.current( )->className( ).lower( );
+         TQString actionName = "new_" + it.current( )->className( ).lower( );
          action = actionCollection( )->action( actionName.latin1( ) );
          if( action )
          {
             if( m_pActiveObject )
             {
-               QString insertName = it.current( )->className( );
+               TQString insertName = it.current( )->className( );
                enable = m_pActiveObject->canInsert( insertName, 0 );
                if( !enable )
                   if( m_pActiveObject->lastChild( ) )
@@ -695,13 +695,13 @@ void PMPart::updateNewObjectActions( )
       // special treatment for csg actions
       if( m_pActiveObject )
       {
-         enable = m_pActiveObject->canInsert( QString( "CSG" ), 0 );
+         enable = m_pActiveObject->canInsert( TQString( "CSG" ), 0 );
          if( !enable )
             if( m_pActiveObject->lastChild( ) )
-               enable = m_pActiveObject->canInsert( QString( "CSG" ), m_pActiveObject->lastChild( ) );
+               enable = m_pActiveObject->canInsert( TQString( "CSG" ), m_pActiveObject->lastChild( ) );
          if( !enable )
             if( readWriteParent )
-               enable = m_pActiveObject->parent( )->canInsert( QString( "CSG" ), m_pActiveObject );
+               enable = m_pActiveObject->parent( )->canInsert( TQString( "CSG" ), m_pActiveObject );
       }
       else
          enable = false;
@@ -715,7 +715,7 @@ void PMPart::updateNewObjectActions( )
 
 void PMPart::disableReadWriteActions( )
 {
-   QPtrListIterator<KAction> it( m_readWriteActions);
+   TQPtrListIterator<KAction> it( m_readWriteActions);
    for( ; it.current( ); ++it )
       it.current( )->setEnabled( false );
 }
@@ -725,7 +725,7 @@ void PMPart::initDocument( )
    newDocument( );
 }
 
-void PMPart::initView( QWidget* parent, const char* name )
+void PMPart::initView( TQWidget* parent, const char* name )
 {
    if( !m_pShell )
    {
@@ -838,7 +838,7 @@ void PMPart::restoreConfig( KConfig* cfg )
 
 bool PMPart::openFile( )
 {
-   QIODevice* dev = KFilterDev::deviceForFile( m_file, "application/x-gzip" );
+   TQIODevice* dev = KFilterDev::deviceForFile( m_file, "application/x-gzip" );
    bool success = true;
    PMObjectList list;
 
@@ -856,7 +856,7 @@ bool PMPart::openFile( )
       {
          PMErrorDialog dlg( parser.messages( ), parser.errorFlags( ) );
          // still try to insert the correct parsed objects?
-         success = ( dlg.exec( ) == QDialog::Accepted );
+         success = ( dlg.exec( ) == TQDialog::Accepted );
       }
       if( success )
       {
@@ -901,14 +901,14 @@ bool PMPart::saveFile( )
 {
    bool success = false;
 
-   QIODevice* dev = KFilterDev::deviceForFile( m_file, "application/x-gzip" );
+   TQIODevice* dev = KFilterDev::deviceForFile( m_file, "application/x-gzip" );
    if( dev && dev->open( IO_WriteOnly ) )
    {
-      QDomDocument doc( "KPOVMODELER" );
-      QDomElement e = ( ( PMObject* )m_pScene)->serialize( doc );
+      TQDomDocument doc( "KPOVMODELER" );
+      TQDomElement e = ( ( PMObject* )m_pScene)->serialize( doc );
       doc.appendChild( e );
 
-      QTextStream str( dev );
+      TQTextStream str( dev );
       str << doc;
       dev->close( );
       setModified( false );
@@ -924,7 +924,7 @@ bool PMPart::saveFile( )
 bool PMPart::exportPovray( const KURL& url )
 {
    KTempFile* tempFile = 0;
-   QFile* file = 0;
+   TQFile* file = 0;
    bool ok = true;
 
    if( !url.isValid( ) )
@@ -933,7 +933,7 @@ bool PMPart::exportPovray( const KURL& url )
    if( url.isLocalFile( ) )
    {
       // Local file
-      file = new QFile( url.path( ) );
+      file = new TQFile( url.path( ) );
       if( !file->open( IO_WriteOnly ) )
          ok = false;
    }
@@ -958,7 +958,7 @@ bool PMPart::exportPovray( const KURL& url )
       if( tempFile )
       {
          tempFile->close( );
-         ok = KIO::NetAccess::upload( tempFile->name( ), url, (QWidget*) 0 );
+         ok = KIO::NetAccess::upload( tempFile->name( ), url, (TQWidget*) 0 );
          tempFile->unlink( );
          file = 0;
       }
@@ -972,9 +972,9 @@ bool PMPart::exportPovray( const KURL& url )
    return ok;
 }
 
-QString PMPart::activeObjectName( )
+TQString PMPart::activeObjectName( )
 {
-   QString result = "";
+   TQString result = "";
    PMObject* tmpObj;
    PMObject* testSib;
    int idx = 0;
@@ -990,7 +990,7 @@ QString PMPart::activeObjectName( )
 
       // prepend to result
       if( idx != 0 )
-         result = tmpObj->type( ) + "[" + QString::number( idx ) + "]/" + result;
+         result = tmpObj->type( ) + "[" + TQString::number( idx ) + "]/" + result;
       else
          result = tmpObj->type( ) + "/" + result;
 
@@ -1005,13 +1005,13 @@ QString PMPart::activeObjectName( )
    return result;
 }
 
-bool PMPart::setActiveObject( const QString& name )
+bool PMPart::setActiveObject( const TQString& name )
 {
    PMObject* tmpObj;
    PMObject* tmpSibling;
    int pos, siblingIndex, objIndex, firstBracket, lastBracket;
-   QString objPath;
-   QString pathElem;
+   TQString objPath;
+   TQString pathElem;
 
    // check if it's a absolute object name
    if( name[0] == '/' )
@@ -1032,7 +1032,7 @@ bool PMPart::setActiveObject( const QString& name )
    else
    {
       pathElem = objPath;
-      objPath = QString::null;
+      objPath = TQString::null;
    }
 
    while( !pathElem.isNull( ) )
@@ -1079,7 +1079,7 @@ bool PMPart::setActiveObject( const QString& name )
       else
       {
          pathElem = objPath;
-         objPath = QString::null;
+         objPath = TQString::null;
       }
    }
    if( tmpObj )
@@ -1091,18 +1091,18 @@ bool PMPart::setActiveObject( const QString& name )
       return false;
 }
 
-QStringList PMPart::getProperties( )
+TQStringList PMPart::getProperties( )
 {
    PMObject* curObj = activeObject( );
 
    // Ensure that there is an active object
    if( !curObj )
-      return QStringList( );
+      return TQStringList( );
 
    return curObj->properties( );
 }
 
-bool PMPart::setProperty( const QString& name, const PMVariant& value )
+bool PMPart::setProperty( const TQString& name, const PMVariant& value )
 {
    PMObject* curObj = activeObject( );
 
@@ -1115,7 +1115,7 @@ bool PMPart::setProperty( const QString& name, const PMVariant& value )
    return true;
 }
 
-bool PMPart::setProperty( const QString& name, const QString& value )
+bool PMPart::setProperty( const TQString& name, const TQString& value )
 {
    PMObject* curObj = activeObject( );
    PMVariant variant;
@@ -1130,7 +1130,7 @@ bool PMPart::setProperty( const QString& name, const QString& value )
    return true;
 }
 
-const PMVariant PMPart::getProperty( const QString& name )
+const PMVariant PMPart::getProperty( const TQString& name )
 {
    PMObject* curObj = activeObject( );
 
@@ -1141,7 +1141,7 @@ const PMVariant PMPart::getProperty( const QString& name )
    return curObj->property( name );
 }
 
-const QString PMPart::getPropertyStr( const QString& name )
+const TQString PMPart::getPropertyStr( const TQString& name )
 {
    PMObject* curObj = activeObject( );
 
@@ -1159,7 +1159,7 @@ const PMObjectList& PMPart::selectedObjects( )
    bool stop = false;
 
    PMObject* tmp;
-   QPtrStack<PMObject> stack;
+   TQPtrStack<PMObject> stack;
 
    if( !m_sortedListUpToDate )
    {
@@ -1212,7 +1212,7 @@ const PMObjectList& PMPart::selectedObjects( )
 int PMPart::whereToInsert( PMObject* obj, const PMObjectList& list )
 {
    // if you change this function, change
-   // whereToInsert( PMObject* obj, const QStringList& ), too
+   // whereToInsert( PMObject* obj, const TQStringList& ), too
 
    int canInsertAsFirstChild = 0;
    int canInsertAsLastChild = 0;
@@ -1270,7 +1270,7 @@ int PMPart::whereToInsert( PMObject* obj, const PMObjectList& list )
    return insertAs;
 }
 
-int PMPart::whereToInsert( PMObject* obj, const QStringList& list )
+int PMPart::whereToInsert( PMObject* obj, const TQStringList& list )
 {
    // if you change this function, change
    // whereToInsert( PMObject* obj, const PMObjectList ), too
@@ -1359,14 +1359,14 @@ int PMPart::whereToInsert( PMObject* obj )
 
 void PMPart::slotFileImport( )
 {
-   QString fileName;
+   TQString fileName;
    PMIOFormat* selectedFormat = 0;
 
    fileName = PMFileDialog::getImportFileName( 0, this, selectedFormat );
 
    if( !fileName.isEmpty( ) && selectedFormat )
    {
-      QFile file( fileName );
+      TQFile file( fileName );
       if( file.open( IO_ReadOnly ) )
       {
          PMParser* newParser = selectedFormat->newParser( this, &file );
@@ -1393,15 +1393,15 @@ void PMPart::slotFileExport( )
 {
 	emit aboutToSave( );
 
-   QString fileName, filter;
+   TQString fileName, filter;
    PMIOFormat* selectedFormat = 0;
 
    fileName = PMFileDialog::getExportFileName( 0, this, selectedFormat, filter );
 
    if( !fileName.isEmpty( ) && selectedFormat )
    {
-      QByteArray baData;
-      QBuffer buffer( baData );
+      TQByteArray baData;
+      TQBuffer buffer( baData );
       buffer.open( IO_WriteOnly );
 
       PMSerializer* newSer = selectedFormat->newSerializer( &buffer );
@@ -1416,15 +1416,15 @@ void PMPart::slotFileExport( )
             // there were errors, display them
             PMErrorDialog dlg( newSer->messages( ), newSer->errorFlags( ) );
             // still try to export?
-            success = ( dlg.exec( ) == QDialog::Accepted );
+            success = ( dlg.exec( ) == TQDialog::Accepted );
          }
          if( success )
          {
-            QFileInfo info( fileName );
+            TQFileInfo info( fileName );
             if( info.extension( ).isEmpty( ) )
                fileName += filter.right( filter.length( ) - 1 ); // remove '*'
 
-            QFile file( fileName );
+            TQFile file( fileName );
             if( file.open( IO_WriteOnly ) )
             {
                file.writeBlock( baData );
@@ -1450,7 +1450,7 @@ void PMPart::slotEditCut( )
 
    if( sortedList.count( ) > 0 )
    {
-      QApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
       removeSelection( i18n( "Cut" ) );
    }
 
@@ -1472,7 +1472,7 @@ void PMPart::slotEditCopy( )
    const PMObjectList& sortedList = selectedObjects( );
 
    if( sortedList.count( ) > 0 )
-      QApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
 
    emit setStatusBarText( "" );
 }
@@ -1526,7 +1526,7 @@ bool PMPart::dragMoveSelectionTo( PMObject* obj )
    return false;
 }
 
-bool PMPart::removeSelection( const QString& type )
+bool PMPart::removeSelection( const TQString& type )
 {
    PMDeleteCommand* cmd = 0;
    const PMObjectList& sortedList = selectedObjects( );
@@ -1540,7 +1540,7 @@ bool PMPart::removeSelection( const QString& type )
    return false;
 }
 
-bool PMPart::drop( PMObject* obj, QMimeSource* mime )
+bool PMPart::drop( PMObject* obj, TQMimeSource* mime )
 {
    return pasteOrDrop( i18n( "Drop" ), mime, obj );
 }
@@ -1555,7 +1555,7 @@ void PMPart::slotEditPaste( )
    emit setStatusBarText( "" );
 }
 
-bool PMPart::pasteOrDrop( const QString& type, QMimeSource* mime, PMObject* obj )
+bool PMPart::pasteOrDrop( const TQString& type, TQMimeSource* mime, PMObject* obj )
 {
    bool success = false;
 
@@ -1569,7 +1569,7 @@ bool PMPart::pasteOrDrop( const QString& type, QMimeSource* mime, PMObject* obj 
    return success;
 }
 
-bool PMPart::insertFromParser( const QString& type, PMParser* parser,
+bool PMPart::insertFromParser( const TQString& type, PMParser* parser,
                                PMObject* obj )
 {
    PMObjectList list;
@@ -1580,7 +1580,7 @@ bool PMPart::insertFromParser( const QString& type, PMParser* parser,
    // try to parse
    if( parser->canQuickParse( ) )
    {
-      QStringList types;
+      TQStringList types;
       parser->quickParse( types );
 
       success = !( parser->warnings( ) || parser->errors( ) );
@@ -1590,7 +1590,7 @@ bool PMPart::insertFromParser( const QString& type, PMParser* parser,
          // there were errors, display them
          PMErrorDialog dlg( parser->messages( ), parser->errorFlags( ) );
          // still try to insert the correct parsed objects?
-         success = ( dlg.exec( ) == QDialog::Accepted );
+         success = ( dlg.exec( ) == TQDialog::Accepted );
       }
       if( success && ( types.count( ) > 0 ) )
          insertAs = whereToInsert( obj, types );
@@ -1631,7 +1631,7 @@ bool PMPart::insertFromParser( const QString& type, PMParser* parser,
          // there were errors, display them
          PMErrorDialog dlg( parser->messages( ), parser->errorFlags( ) );
          // still try to insert the correct parsed objects?
-         success = ( dlg.exec( ) == QDialog::Accepted );
+         success = ( dlg.exec( ) == TQDialog::Accepted );
       }
 
       if( list.count( ) > 0 )
@@ -1725,7 +1725,7 @@ bool PMPart::executeCommand( PMCommand* cmd )
       if( flags )
       {
          PMErrorDialog dlg( cmd->messages( ), flags );
-         execute = ( dlg.exec( ) == QDialog::Accepted );
+         execute = ( dlg.exec( ) == TQDialog::Accepted );
       }
 
       if( execute )
@@ -1755,7 +1755,7 @@ bool PMPart::executeCommand( PMCommand* cmd )
 }
 
 void PMPart::slotObjectChanged( PMObject* obj, const int m,
-                                QObject* sender )
+                                TQObject* sender )
 {
    int mode = m;
    bool selectionChanged = false;
@@ -1785,7 +1785,7 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
       {
          if( obj->selectedChildren( ) > 0 )
          {
-            QPtrStack<PMObject> stack;
+            TQPtrStack<PMObject> stack;
             PMObject* tmp = obj->firstChild( );
             bool stop = false;
 
@@ -1930,8 +1930,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
    if( mode & PMCInsertError )
    {
       m_numInsertErrors++;
-      QString detail;
-      detail = obj->description( ) + QString( " " ) + obj->name( );
+      TQString detail;
+      detail = obj->description( ) + TQString( " " ) + obj->name( );
       m_insertErrorDetails.append( detail );
 
       if( obj->isA( "Declare" ) )
@@ -1972,7 +1972,7 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
    emit objectChanged( obj, mode, sender );
 }
 
-void PMPart::slotIDChanged( PMObject* obj, const QString& oldID )
+void PMPart::slotIDChanged( PMObject* obj, const TQString& oldID )
 {
    if( obj->isA( "Declare" ) )
    {
@@ -2050,14 +2050,14 @@ void PMPart::slotNewObject( PMObject* newObject, int insertAs )
    }
 }
 
-void PMPart::slotNewObject( const QString& type )
+void PMPart::slotNewObject( const TQString& type )
 {
    PMObject* newObject = m_pPrototypeManager->newObject( type );
    if( newObject )
       slotNewObject( newObject );
 }
 
-void PMPart::slotNewObject( const QString& type, const QString& pos )
+void PMPart::slotNewObject( const TQString& type, const TQString& pos )
 {
    PMObject* newObject = m_pPrototypeManager->newObject( type );
    if( newObject )
@@ -2073,10 +2073,10 @@ void PMPart::slotNewObject( const QString& type, const QString& pos )
    }
 }
 
-QStringList PMPart::getObjectTypes( )
+TQStringList PMPart::getObjectTypes( )
 {
-   QStringList result;
-   QPtrListIterator<PMMetaObject> it = m_pPrototypeManager->prototypeIterator( );
+   TQStringList result;
+   TQPtrListIterator<PMMetaObject> it = m_pPrototypeManager->prototypeIterator( );
 
    for( ; it.current( ); ++it )
    {
@@ -2089,11 +2089,11 @@ void PMPart::slotNewTransformedObject( PMObject* o )
 {
    if( o )
    {
-      if( o->canInsert( QString( "Scale" ), o->lastChild( ) ) )
+      if( o->canInsert( TQString( "Scale" ), o->lastChild( ) ) )
          o->appendChild( new PMScale( this ) );
-      if( o->canInsert( QString( "Rotate" ), o->lastChild( ) ) )
+      if( o->canInsert( TQString( "Rotate" ), o->lastChild( ) ) )
          o->appendChild( new PMRotate( this ) );
-      if( o->canInsert( QString( "Translate" ), o->lastChild( ) ) )
+      if( o->canInsert( TQString( "Translate" ), o->lastChild( ) ) )
          o->appendChild( new PMTranslate( this ) );
       slotNewObject( o );
    }
@@ -2625,7 +2625,7 @@ void PMPart::deleteContents( )
    m_bCameraListUpToDate = true;
 }
 
-void PMPart::slotUpdateUndoRedo( const QString& undo, const QString& redo )
+void PMPart::slotUpdateUndoRedo( const TQString& undo, const TQString& redo )
 {
    if( isReadWrite( ) )
    {
@@ -2685,11 +2685,11 @@ PMCamera* PMPart::firstCamera( )
    return m_cameras.first( );
 }
 
-QPtrListIterator<PMCamera> PMPart::cameras( )
+TQPtrListIterator<PMCamera> PMPart::cameras( )
 {
    if( !m_bCameraListUpToDate )
       updateCameraList( );
-   return QPtrListIterator<PMCamera>( m_cameras );
+   return TQPtrListIterator<PMCamera>( m_cameras );
 }
 
 void PMPart::updateCameraList( )
@@ -2709,8 +2709,8 @@ void PMPart::slotRender( )
    {
       emit aboutToRender( );
 
-      QByteArray a;
-      QBuffer buffer( a );
+      TQByteArray a;
+      TQBuffer buffer( a );
       buffer.open( IO_WriteOnly );
       PMPovray35Format format;
       PMSerializer* dev = format.newSerializer( &buffer );
@@ -2732,7 +2732,7 @@ void PMPart::slotRenderSettings( )
    PMRenderModesDialog dlg( m_pScene->renderModes( ), widget( ) );
    int result = dlg.exec( );
 
-   if( result == QDialog::Accepted )
+   if( result == TQDialog::Accepted )
    {
       if( isReadWrite( ) )
          setModified( true );
@@ -2762,7 +2762,7 @@ void PMPart::updateRenderModes( )
       PMRenderModeList* list = m_pScene->renderModes( );
       PMRenderModeListIterator it( *list );
 
-      QComboBox* box = m_pRenderComboAction->combo( );
+      TQComboBox* box = m_pRenderComboAction->combo( );
       if( box )
       {
          bool b = box->signalsBlocked( );
@@ -2783,8 +2783,8 @@ void PMPart::updateRenderModes( )
 void PMPart::slotRenderModeActionPlugged( )
 {
    updateRenderModes( );
-//   connect( m_pRenderComboAction->combo( ), SIGNAL( activated( int ) ),
-//            SLOT( slotRenderMode( int ) ) );
+//   connect( m_pRenderComboAction->combo( ), TQT_SIGNAL( activated( int ) ),
+//            TQT_SLOT( slotRenderMode( int ) ) );
 }
 
 void PMPart::slotVisibilityLevelChanged( int l )
@@ -2802,7 +2802,7 @@ void PMPart::slotVisibilityActionPlugged( )
 {
    if( m_pVisibilityLevelAction )
    {
-      QSpinBox* box = m_pVisibilityLevelAction->spinBox( );
+      TQSpinBox* box = m_pVisibilityLevelAction->spinBox( );
       if( box )
       {
          box->setMinValue( -1000 );
@@ -2816,7 +2816,7 @@ void PMPart::updateVisibilityLevel( )
 {
    if( m_pVisibilityLevelAction )
    {
-      QSpinBox* box = m_pVisibilityLevelAction->spinBox( );
+      TQSpinBox* box = m_pVisibilityLevelAction->spinBox( );
       if( box && m_pScene )
       {
          bool sb = box->signalsBlocked( );

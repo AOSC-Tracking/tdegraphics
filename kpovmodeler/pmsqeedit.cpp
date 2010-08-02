@@ -20,11 +20,11 @@
 #include "pmsqe.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
-PMSuperquadricEllipsoidEdit::PMSuperquadricEllipsoidEdit( QWidget* parent, const char* name )
+PMSuperquadricEllipsoidEdit::PMSuperquadricEllipsoidEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -39,18 +39,18 @@ void PMSuperquadricEllipsoidEdit::createTopWidgets( )
    m_pValueN = new PMFloatEdit( this );
    m_pValueN->setValidation( true, 0.01, false, 1.0 );
    
-   topLayout( )->addWidget( new QLabel( i18n( "Exponents:" ), this ) );
+   topLayout( )->addWidget( new TQLabel( i18n( "Exponents:" ), this ) );
    
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   QGridLayout* gl = new QGridLayout( hl, 2, 2 );
-   gl->addWidget( new QLabel( i18n( "East-west:" ), this ), 0, 0 );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   TQGridLayout* gl = new TQGridLayout( hl, 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "East-west:" ), this ), 0, 0 );
    gl->addWidget( m_pValueE, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "North-south:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "North-south:" ), this ), 1, 0 );
    gl->addWidget( m_pValueN, 1, 1 );
    hl->addStretch( 1 );
 
-   connect( m_pValueE, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pValueN, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pValueE, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pValueN, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMSuperquadricEllipsoidEdit::displayObject( PMObject* o )

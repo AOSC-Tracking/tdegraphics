@@ -20,7 +20,7 @@
 #ifndef MRML_UTILS_H
 #define MRML_UTILS_H
 
-#include <qobject.h>
+#include <tqobject.h>
 
 #include <kurl.h>
 

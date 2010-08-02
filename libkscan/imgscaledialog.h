@@ -20,7 +20,7 @@
 #ifndef __IMGSCALEDIALOG_H__
 #define __IMGSCALEDIALOG_H__
 
-#include <qlineedit.h>
+#include <tqlineedit.h>
 #include <kdialogbase.h>
 
 
@@ -35,7 +35,7 @@ class ImgScaleDialog : public KDialogBase
    Q_PROPERTY( int selected READ getSelected WRITE setSelValue )
       
 public:
-   ImgScaleDialog( QWidget *parent, int curr_sel = 100,
+   ImgScaleDialog( TQWidget *parent, int curr_sel = 100,
 		   const char *name = 0 );
 
 public slots:
@@ -50,9 +50,9 @@ public slots:
 signals:
    void customScaleChange( int );
 public slots:
-   void customChanged( const QString& );
+   void customChanged( const TQString& );
 private:
-   QLineEdit *leCust;
+   TQLineEdit *leCust;
    int selected;
 
    class ImgScaleDialogPrivate;

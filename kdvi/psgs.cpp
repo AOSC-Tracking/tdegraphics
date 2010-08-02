@@ -14,8 +14,8 @@
 #include <kprocio.h>
 #include <ktempfile.h>
 #include <kurl.h>
-#include <qdir.h>
-#include <qpainter.h>
+#include <tqdir.h>
+#include <tqpainter.h>
 
 #include "psgs.h"
 #include "dviFile.h"
@@ -26,8 +26,8 @@ extern const char psheader[];
 //#define DEBUG_PSGS
 
 
-pageInfo::pageInfo(const QString& _PostScriptString) {
-  PostScriptString = new QString(_PostScriptString);
+pageInfo::pageInfo(const TQString& _PostScriptString) {
+  PostScriptString = new TQString(_PostScriptString);
   background  = Qt::white;
   permanentBackground = Qt::white;
 }
@@ -44,7 +44,7 @@ pageInfo::~pageInfo() {
 ghostscript_interface::ghostscript_interface() {
   pageList.setAutoDelete(true);
 
-  PostScriptHeaderString = new QString();
+  PostScriptHeaderString = new TQString();
 
   knownDevices.append("png256");
   knownDevices.append("jpeg");
@@ -59,7 +59,7 @@ ghostscript_interface::~ghostscript_interface() {
 }
 
 
-void ghostscript_interface::setPostScript(const PageNumber& page, const QString& PostScript) {
+void ghostscript_interface::setPostScript(const PageNumber& page, const TQString& PostScript) {
 #ifdef DEBUG_PSGS
   kdDebug(4300) << "ghostscript_interface::setPostScript( " << page << ", ... )" << endl;
 #endif
@@ -75,7 +75,7 @@ void ghostscript_interface::setPostScript(const PageNumber& page, const QString&
 }
 
 
-void ghostscript_interface::setIncludePath(const QString &_includePath) {
+void ghostscript_interface::setIncludePath(const TQString &_includePath) {
   if (_includePath.isEmpty())
      includePath = "*"; // Allow all files
   else
@@ -83,13 +83,13 @@ void ghostscript_interface::setIncludePath(const QString &_includePath) {
 }
 
 
-void ghostscript_interface::setBackgroundColor(const PageNumber& page, const QColor& background_color, bool permanent) {
+void ghostscript_interface::setBackgroundColor(const PageNumber& page, const TQColor& background_color, bool permanent) {
 #ifdef DEBUG_PSGS
   kdDebug(4300) << "ghostscript_interface::setBackgroundColor( " << page << ", " << background_color << " )" << endl;
 #endif
 
   if (pageList.find(page) == 0) {
-    pageInfo *info = new pageInfo(QString::null);
+    pageInfo *info = new pageInfo(TQString::null);
     info->background = background_color;
     if (permanent)
       info->permanentBackground = background_color;
@@ -119,7 +119,7 @@ void ghostscript_interface::restoreBackgroundColor(const PageNumber& page)
 // Returns the background color for a certain page. This color is
 // always guaranteed to be valid
 
-QColor ghostscript_interface::getBackgroundColor(const PageNumber& page) const {
+TQColor ghostscript_interface::getBackgroundColor(const PageNumber& page) const {
 #ifdef DEBUG_PSGS
   kdDebug(4300) << "ghostscript_interface::getBackgroundColor( " << page << " )" << endl;
 #endif
@@ -139,7 +139,7 @@ void ghostscript_interface::clear() {
 }
 
 
-void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, const QString& filename, long magnification) {
+void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, const TQString& filename, long magnification) {
 #ifdef DEBUG_PSGS
   kdDebug(4300) << "ghostscript_interface::gs_generate_graphics_file( " << page << ", " << filename << " )" << endl;
 #endif
@@ -155,9 +155,9 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
 
   // Generate a PNG-file
   // Step 1: Write the PostScriptString to a File
-  KTempFile PSfile(QString::null,".ps");
+  KTempFile PSfile(TQString::null,".ps");
 
-  QTextStream& os = *PSfile.textStream();
+  TQTextStream& os = *PSfile.textStream();
   os << "%!PS-Adobe-2.0\n"
      << "%%Creator: kdvi\n"
      << "%%Title: KDVI temporary PostScript\n"
@@ -190,7 +190,7 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
     os << PostScriptHeaderString->latin1();
 
   if (info->background != Qt::white) {
-    QString colorCommand = QString("gsave %1 %2 %3 setrgbcolor clippath fill grestore\n").
+    TQString colorCommand = TQString("gsave %1 %2 %3 setrgbcolor clippath fill grestore\n").
       arg(info->background.red()/255.0).
       arg(info->background.green()/255.0).
       arg(info->background.blue()/255.0);
@@ -206,16 +206,16 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
   PSfile.close();
 
   // Step 2: Call GS with the File
-  QFile::remove(filename.ascii());
+  TQFile::remove(filename.ascii());
   KProcIO proc;
-  QStringList argus;
+  TQStringList argus;
   argus << "gs";
   argus << "-dSAFER" << "-dPARANOIDSAFER" << "-dDELAYSAFER" << "-dNOPAUSE" << "-dBATCH";
-  argus << QString("-sDEVICE=%1").arg(*gsDevice);
-  argus << QString("-sOutputFile=%1").arg(filename);
-  argus << QString("-sExtraIncludePath=%1").arg(includePath);
-  argus << QString("-g%1x%2").arg(pixel_page_w).arg(pixel_page_h); // page size in pixels
-  argus << QString("-r%1").arg(resolution);                       // resolution in dpi
+  argus << TQString("-sDEVICE=%1").arg(*gsDevice);
+  argus << TQString("-sOutputFile=%1").arg(filename);
+  argus << TQString("-sExtraIncludePath=%1").arg(includePath);
+  argus << TQString("-g%1x%2").arg(pixel_page_w).arg(pixel_page_h); // page size in pixels
+  argus << TQString("-r%1").arg(resolution);                       // resolution in dpi
   argus << "-c" << "<< /PermitFileReading [ ExtraIncludePath ] /PermitFileWriting [] /PermitFileControl [] >> setuserparams .locksafe";
   argus << "-f" << PSfile.name();
   
@@ -232,15 +232,15 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
   PSfile.unlink();
 
   // Check if gs has indeed produced a file.
-  if (QFile::exists(filename) == false) {
+  if (TQFile::exists(filename) == false) {
     kdError(4300) << "GS did not produce output." << endl;
 
     // No. Check is the reason is that the device is not compiled into
     // ghostscript. If so, try again with another device.
-    QString GSoutput;
+    TQString GSoutput;
     while(proc.readln(GSoutput) != -1) {
       if (GSoutput.contains("Unknown device")) {
-	kdDebug(4300) << QString("The version of ghostview installed on this computer does not support "
+	kdDebug(4300) << TQString("The version of ghostview installed on this computer does not support "
 				   "the '%1' ghostview device driver.").arg(*gsDevice) << endl;
 	knownDevices.remove(gsDevice);
 	gsDevice = knownDevices.begin();
@@ -267,24 +267,24 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
 					  "drivers. Note that KDVI needs to be restarted to re-enable PostScript support."
 					  "</p></qt>"));
 	else {
-	  kdDebug(4300) << QString("KDVI will now try to use the '%1' device driver.").arg(*gsDevice) << endl;
+	  kdDebug(4300) << TQString("KDVI will now try to use the '%1' device driver.").arg(*gsDevice) << endl;
 	  gs_generate_graphics_file(page, filename, magnification);
 	}
 	return;
       }
     }
   }
-  emit(setStatusBarText(QString::null));
+  emit(setStatusBarText(TQString::null));
 }
 
 
-void ghostscript_interface::graphics(const PageNumber& page, double dpi, long magnification, QPainter* paint) {
+void ghostscript_interface::graphics(const PageNumber& page, double dpi, long magnification, TQPainter* paint) {
 #ifdef DEBUG_PSGS
   kdDebug(4300) << "ghostscript_interface::graphics( " << page << ", " << dpi << ", ... ) called." << endl;
 #endif
 
   if (paint == 0) {
-    kdError(4300) << "ghostscript_interface::graphics(PageNumber page, double dpi, long magnification, QPainter *paint) called with paint == 0" << endl;
+    kdError(4300) << "ghostscript_interface::graphics(PageNumber page, double dpi, long magnification, TQPainter *paint) called with paint == 0" << endl;
     return;
   }
 
@@ -303,32 +303,32 @@ void ghostscript_interface::graphics(const PageNumber& page, double dpi, long ma
     return;
   }
 
-  KTempFile gfxFile(QString::null, ".png");
+  KTempFile gfxFile(TQString::null, ".png");
   gfxFile.setAutoDelete(1);
   gfxFile.close(); // we are want the filename, not the file
 
   gs_generate_graphics_file(page, gfxFile.name(), magnification);
 
-  QPixmap MemoryCopy(gfxFile.name());
+  TQPixmap MemoryCopy(gfxFile.name());
   paint->drawPixmap(0, 0, MemoryCopy);
   return;
 }
 
 
-QString ghostscript_interface::locateEPSfile(const QString &filename, const KURL &base)
+TQString ghostscript_interface::locateEPSfile(const TQString &filename, const KURL &base)
 {
   // If the base URL indicates that the DVI file is local, try to find
   // the graphics file in the directory where the DVI file resides
   if (base.isLocalFile()) {
-    QString path = base.path();       // -> "/bar/foo.dvi"
-    QFileInfo fi1(path);
-    QFileInfo fi2(fi1.dir(),filename);
+    TQString path = base.path();       // -> "/bar/foo.dvi"
+    TQFileInfo fi1(path);
+    TQFileInfo fi2(fi1.dir(),filename);
     if (fi2.exists())
       return fi2.absFilePath();
   }
   
   // Otherwise, use kpsewhich to find the eps file.
-  QString EPSfilename;
+  TQString EPSfilename;
   KProcIO proc;
   proc << "kpsewhich" << filename;
   proc.start(KProcess::Block);

@@ -16,22 +16,22 @@ KPDFLink::~KPDFLink()
 {
 }
 
-QString KPDFLinkGoto::linkTip() const
+TQString KPDFLinkGoto::linkTip() const
 {
-    return m_extFileName.isEmpty() ? ( m_vp.pageNumber != -1 ? i18n( "Go to page %1" ).arg( m_vp.pageNumber + 1 ) : QString::null ) : i18n("Open external file");
+    return m_extFileName.isEmpty() ? ( m_vp.pageNumber != -1 ? i18n( "Go to page %1" ).arg( m_vp.pageNumber + 1 ) : TQString::null ) : i18n("Open external file");
 }
 
-QString KPDFLinkExecute::linkTip() const
+TQString KPDFLinkExecute::linkTip() const
 {
     return i18n( "Execute '%1'..." ).arg( m_fileName );
 }
 
-QString KPDFLinkBrowse::linkTip() const
+TQString KPDFLinkBrowse::linkTip() const
 {
     return m_url;
 }
 
-QString KPDFLinkAction::linkTip() const
+TQString KPDFLinkAction::linkTip() const
 {
     switch ( m_type )
     {
@@ -61,5 +61,5 @@ QString KPDFLinkAction::linkTip() const
         default: ;
     }
 
-    return QString::null;
+    return TQString::null;
 }

@@ -18,17 +18,17 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qlabel.h>
-#include <qfontmetrics.h>
-#include <qhbox.h>
-#include <qtooltip.h>
-#include <qpopupmenu.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qcombobox.h>
-#include <qradiobutton.h>
-#include <qgroupbox.h>
-#include <qlayout.h>
+#include <tqlabel.h>
+#include <tqfontmetrics.h>
+#include <tqhbox.h>
+#include <tqtooltip.h>
+#include <tqpopupmenu.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqcombobox.h>
+#include <tqradiobutton.h>
+#include <tqgroupbox.h>
+#include <tqlayout.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -41,13 +41,13 @@
 #include "sizeindicator.h"
 #include "devselector.h" /* for definition of config key :( */
 #include "kscandevice.h"
-#include <qslider.h>
-#include <qcheckbox.h>
+#include <tqslider.h>
+#include <tqcheckbox.h>
 #include <kconfig.h>
-#include <qbuttongroup.h>
-#include <qvbuttongroup.h>
+#include <tqbuttongroup.h>
+#include <tqvbuttongroup.h>
 #include <kmessagebox.h>
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 
 #define ID_CUSTOM 0
 #define ID_A4     1
@@ -95,33 +95,33 @@ public:
 
     bool         m_bgIsWhite;        /* indicates if a scan without paper
                                       * results in black or white */
-    QSlider     *m_sliderThresh;
-    QSlider     *m_sliderDust;
-    QCheckBox   *m_cbAutoSel;
-    QComboBox   *m_cbBackground;
-    QGroupBox   *m_autoSelGroup;
+    TQSlider     *m_sliderThresh;
+    TQSlider     *m_sliderDust;
+    TQCheckBox   *m_cbAutoSel;
+    TQComboBox   *m_cbBackground;
+    TQGroupBox   *m_autoSelGroup;
     KScanDevice *m_scanner;
 
-    QMemArray<long> m_heightSum;
-    QMemArray<long> m_widthSum;
+    TQMemArray<long> m_heightSum;
+    TQMemArray<long> m_widthSum;
 };
 
-Previewer::Previewer(QWidget *parent, const char *name )
-    : QWidget(parent,name)
+Previewer::Previewer(TQWidget *parent, const char *name )
+    : TQWidget(parent,name)
 {
     d = new PreviewerPrivate();
 
     // beautification to look like the left scanparams widget in the dialog
-    QHBoxLayout *htop = new QHBoxLayout( this );
-    QFrame *frame = new QFrame( this );
-    frame->setFrameStyle( QFrame::Panel | QFrame::Raised );
+    TQHBoxLayout *htop = new TQHBoxLayout( this );
+    TQFrame *frame = new TQFrame( this );
+    frame->setFrameStyle( TQFrame::Panel | TQFrame::Raised );
     frame->setLineWidth( 1 );
     htop->addWidget( frame );
 
-    QVBoxLayout *top = new QVBoxLayout( frame, KDialog::marginHint(), KDialog::spacingHint() );
-    layout = new QHBoxLayout( KDialog::spacingHint() );
+    TQVBoxLayout *top = new TQVBoxLayout( frame, KDialog::marginHint(), KDialog::spacingHint() );
+    layout = new TQHBoxLayout( KDialog::spacingHint() );
     top->addLayout( layout, 9 );
-    QVBoxLayout *left = new QVBoxLayout( KDialog::spacingHint() );
+    TQVBoxLayout *left = new TQVBoxLayout( KDialog::spacingHint() );
     layout->addLayout( left, 2 );
 
     /* Load autoselection values from Config file */
@@ -147,25 +147,25 @@ Previewer::Previewer(QWidget *parent, const char *name )
     /* Actions for the previewer zoom */
     KAction *act;
     act =  new KAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
-		       this, SLOT( slScaleToWidth()), this, "preview_scaletowidth" );
+		       this, TQT_SLOT( slScaleToWidth()), this, "preview_scaletowidth" );
     act->plug( img_canvas->contextMenu());
 
     act = new KAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
-		      this, SLOT( slScaleToHeight()), this, "preview_scaletoheight" );
+		      this, TQT_SLOT( slScaleToHeight()), this, "preview_scaletoheight" );
     act->plug( img_canvas->contextMenu());
 
     /*Signals: Control the custom-field and show size of selection */
-    connect( img_canvas, SIGNAL(newRect()),      this, SLOT(slCustomChange()));
-    connect( img_canvas, SIGNAL(newRect(QRect)), this, SLOT(slNewDimen(QRect)));
+    connect( img_canvas, TQT_SIGNAL(newRect()),      this, TQT_SLOT(slCustomChange()));
+    connect( img_canvas, TQT_SIGNAL(newRect(TQRect)), this, TQT_SLOT(slNewDimen(TQRect)));
 
     /* Stuff for the preview-Notification */
-    left->addWidget( new QLabel( i18n("<B>Preview</B>"), frame ), 1);
+    left->addWidget( new TQLabel( i18n("<B>Preview</B>"), frame ), 1);
 
     // Create a button group to contain buttons for Portrait/Landscape
-    bgroup = new QVButtonGroup( i18n("Scan Size"), frame );
+    bgroup = new TQVButtonGroup( i18n("Scan Size"), frame );
 
     // -----
-    pre_format_combo = new QComboBox( frame, "PREVIEWFORMATCOMBO" );
+    pre_format_combo = new TQComboBox( frame, "PREVIEWFORMATCOMBO" );
     pre_format_combo->insertItem( i18n( "Custom" ), ID_CUSTOM);
     pre_format_combo->insertItem( i18n( "DIN A4" ), ID_A4);
     pre_format_combo->insertItem( i18n( "DIN A5" ), ID_A5);
@@ -174,23 +174,23 @@ Previewer::Previewer(QWidget *parent, const char *name )
     pre_format_combo->insertItem( i18n( "10x15 cm" ), ID_10_15 );
     pre_format_combo->insertItem( i18n( "Letter" ), ID_LETTER);
 
-    connect( pre_format_combo, SIGNAL(activated (int)),
-             this, SLOT( slFormatChange(int)));
+    connect( pre_format_combo, TQT_SIGNAL(activated (int)),
+             this, TQT_SLOT( slFormatChange(int)));
 
     left->addWidget( pre_format_combo, 1 );
 
     /** Potrait- and Landscape Selector **/
-    QFontMetrics fm = bgroup->fontMetrics();
-    int w = fm.width( (const QString)i18n(" Landscape " ) );
+    TQFontMetrics fm = bgroup->fontMetrics();
+    int w = fm.width( (const TQString)i18n(" Landscape " ) );
     int h = fm.height( );
 
-    rb1 = new QRadioButton( i18n("&Landscape"), bgroup );
+    rb1 = new TQRadioButton( i18n("&Landscape"), bgroup );
     landscape_id = bgroup->id( rb1 );
-    rb2 = new QRadioButton( i18n("P&ortrait"),  bgroup );
+    rb2 = new TQRadioButton( i18n("P&ortrait"),  bgroup );
     portrait_id = bgroup->id( rb2 );
     bgroup->setButton( portrait_id );
 
-    connect(bgroup, SIGNAL(clicked(int)), this, SLOT(slOrientChange(int)));
+    connect(bgroup, TQT_SIGNAL(clicked(int)), this, TQT_SLOT(slOrientChange(int)));
 
     int rblen = 5+w+12;  // 12 for the button?
     rb1->setGeometry( 5, 6, rblen, h );
@@ -200,34 +200,34 @@ Previewer::Previewer(QWidget *parent, const char *name )
 
 
     /** Autoselection Box **/
-    d->m_autoSelGroup = new QGroupBox( 1, Horizontal, i18n("Auto-Selection"), frame);
+    d->m_autoSelGroup = new TQGroupBox( 1, Horizontal, i18n("Auto-Selection"), frame);
 
-    QHBox *hbox       = new QHBox(d->m_autoSelGroup);
-    d->m_cbAutoSel    = new QCheckBox( i18n("Active on"), hbox );
-    QToolTip::add( d->m_cbAutoSel, i18n("Check here if you want autodetection\n"
+    TQHBox *hbox       = new TQHBox(d->m_autoSelGroup);
+    d->m_cbAutoSel    = new TQCheckBox( i18n("Active on"), hbox );
+    TQToolTip::add( d->m_cbAutoSel, i18n("Check here if you want autodetection\n"
                                         "of the document on the preview."));
 
     /* combobox to select if black or white background */
-    d->m_cbBackground = new QComboBox( hbox );
+    d->m_cbBackground = new TQComboBox( hbox );
     d->m_cbBackground->insertItem(i18n("Black"), BG_ITEM_BLACK );
     d->m_cbBackground->insertItem(i18n("White"), BG_ITEM_WHITE );
-    connect( d->m_cbBackground, SIGNAL(activated(int) ),
-             this, SLOT( slScanBackgroundChanged( int )));
+    connect( d->m_cbBackground, TQT_SIGNAL(activated(int) ),
+             this, TQT_SLOT( slScanBackgroundChanged( int )));
 
 
-    QToolTip::add( d->m_cbBackground,
+    TQToolTip::add( d->m_cbBackground,
                    i18n("Select whether a scan of the empty\n"
                         "scanner glass results in a\n"
                         "black or a white image."));
-    connect( d->m_cbAutoSel, SIGNAL(toggled(bool) ), SLOT(slAutoSelToggled(bool)));
+    connect( d->m_cbAutoSel, TQT_SIGNAL(toggled(bool) ), TQT_SLOT(slAutoSelToggled(bool)));
 
-    (void) new QLabel( i18n("scanner background"), d->m_autoSelGroup );
+    (void) new TQLabel( i18n("scanner background"), d->m_autoSelGroup );
 
-    QLabel *l1= new QLabel( i18n("Thresh&old:"), d->m_autoSelGroup );
-    d->m_sliderThresh = new QSlider( 0, 254, 10, d->m_autoSelThresh,  Qt::Horizontal,
+    TQLabel *l1= new TQLabel( i18n("Thresh&old:"), d->m_autoSelGroup );
+    d->m_sliderThresh = new TQSlider( 0, 254, 10, d->m_autoSelThresh,  Qt::Horizontal,
                                      d->m_autoSelGroup );
-    connect( d->m_sliderThresh, SIGNAL(valueChanged(int)), SLOT(slSetAutoSelThresh(int)));
-    QToolTip::add( d->m_sliderThresh,
+    connect( d->m_sliderThresh, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slSetAutoSelThresh(int)));
+    TQToolTip::add( d->m_sliderThresh,
                    i18n("Threshold for autodetection.\n"
                         "All pixels higher (on black background)\n"
                         "or smaller (on white background)\n"
@@ -235,9 +235,9 @@ Previewer::Previewer(QWidget *parent, const char *name )
     l1->setBuddy(d->m_sliderThresh);
 
 #if 0  /** Dustsize-Slider: No deep impact on result **/
-    (void) new QLabel( i18n("Dust size:"), grBox );
-    d->m_sliderDust = new QSlider( 0, 50, 5, d->m_dustsize,  Qt::Horizontal, grBox );
-    connect( d->m_sliderDust, SIGNAL(valueChanged(int)), SLOT(slSetAutoSelDustsize(int)));
+    (void) new TQLabel( i18n("Dust size:"), grBox );
+    d->m_sliderDust = new TQSlider( 0, 50, 5, d->m_dustsize,  Qt::Horizontal, grBox );
+    connect( d->m_sliderDust, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slSetAutoSelDustsize(int)));
 #endif
 
     /* disable Autoselbox as long as no scanner is connected */
@@ -246,27 +246,27 @@ Previewer::Previewer(QWidget *parent, const char *name )
     left->addWidget(d->m_autoSelGroup);
 
     /* Labels for the dimension */
-    QGroupBox *gbox = new QGroupBox( 1, Horizontal, i18n("Selection"), frame, "GROUPBOX" );
+    TQGroupBox *gbox = new TQGroupBox( 1, Horizontal, i18n("Selection"), frame, "GROUPBOX" );
 
-    QLabel *l2 = new QLabel( i18n("width - mm" ), gbox );
-    QLabel *l3 = new QLabel( i18n("height - mm" ), gbox );
+    TQLabel *l2 = new TQLabel( i18n("width - mm" ), gbox );
+    TQLabel *l3 = new TQLabel( i18n("height - mm" ), gbox );
 
-    connect( this, SIGNAL(setScanWidth(const QString&)),
-             l2, SLOT(setText(const QString&)));
-    connect( this, SIGNAL(setScanHeight(const QString&)),
-             l3, SLOT(setText(const QString&)));
+    connect( this, TQT_SIGNAL(setScanWidth(const TQString&)),
+             l2, TQT_SLOT(setText(const TQString&)));
+    connect( this, TQT_SIGNAL(setScanHeight(const TQString&)),
+             l3, TQT_SLOT(setText(const TQString&)));
 
     /* size indicator */
-    QHBox *hb = new QHBox( gbox );
-    (void) new QLabel( i18n( "Size:"), hb );
+    TQHBox *hb = new TQHBox( gbox );
+    (void) new TQLabel( i18n( "Size:"), hb );
     SizeIndicator *indi = new SizeIndicator( hb );
-    QToolTip::add( indi, i18n( "This size field shows how large the uncompressed image will be.\n"
+    TQToolTip::add( indi, i18n( "This size field shows how large the uncompressed image will be.\n"
                                "It tries to warn you, if you try to produce huge images by \n"
                                "changing its background color." ));
     indi->setText( i18n("-") );
 
-    connect( this, SIGNAL( setSelectionSize(long)),
-             indi, SLOT(   setSizeInByte   (long)) );
+    connect( this, TQT_SIGNAL( setSelectionSize(long)),
+             indi, TQT_SLOT(   setSizeInByte   (long)) );
 
     left->addWidget( gbox, 1 );
 
@@ -292,7 +292,7 @@ Previewer::~Previewer()
     delete d;
 }
 
-bool Previewer::setPreviewImage( const QImage &image )
+bool Previewer::setPreviewImage( const TQImage &image )
 {
    if ( image.isNull() )
 	return false;
@@ -303,9 +303,9 @@ bool Previewer::setPreviewImage( const QImage &image )
    return true;
 }
 
-QString Previewer::galleryRoot()
+TQString Previewer::galleryRoot()
 {
-   QString dir = (KGlobal::dirs())->saveLocation( "data", "ScanImages", true );
+   TQString dir = (KGlobal::dirs())->saveLocation( "data", "ScanImages", true );
 
    if( !dir.endsWith("/") )
       dir += "/";
@@ -314,7 +314,7 @@ QString Previewer::galleryRoot()
 
 }
 
-void Previewer::newImage( QImage *ni )
+void Previewer::newImage( TQImage *ni )
 {
    /* image canvas does not copy the image, so we hold a copy here */
    m_previewImage = *ni;
@@ -352,7 +352,7 @@ void Previewer::slOrientChange( int id )
 /** Slot called whenever the format selection combo changes. **/
 void Previewer::slFormatChange( int id )
 {
-   QPoint p(0,0);
+   TQPoint p(0,0);
    bool lands_allowed;
    bool portr_allowed;
    bool setSelection = true;
@@ -421,10 +421,10 @@ void Previewer::slFormatChange( int id )
       bgroup->setButton( portrait_id );
       format_id = portrait_id;
    }
-   /* Convert the new dimension to a new QRect and call slot in canvas */
+   /* Convert the new dimension to a new TQRect and call slot in canvas */
    if( setSelection )
    {
-      QRect newrect;
+      TQRect newrect;
       newrect.setRect( 0,0, p.y(), p.x() );
 
       if( format_id == portrait_id )
@@ -469,14 +469,14 @@ void Previewer::slNewScanResolutions( int x, int y )
  * in values between 0..1000. It emits signals, that redraw the
  * size labels.
  */
-void Previewer::slNewDimen(QRect r)
+void Previewer::slNewDimen(TQRect r)
 {
    if( r.height() > 0)
         selectionWidthMm = (overallWidth / 1000 * r.width());
    if( r.width() > 0)
         selectionHeightMm = (overallHeight / 1000 * r.height());
 
-   QString s;
+   TQString s;
    s = i18n("width %1 mm").arg( int(selectionWidthMm));
    emit(setScanWidth(s));
 
@@ -507,9 +507,9 @@ void Previewer::recalcFileSize( void )
 }
 
 
-QPoint Previewer::calcPercent( int w_mm, int h_mm )
+TQPoint Previewer::calcPercent( int w_mm, int h_mm )
 {
-	QPoint p(0,0);
+	TQPoint p(0,0);
 	if( overallWidth < 1.0 || overallHeight < 1.0 ) return( p );
 
  	if( sizeUnit == KRuler::Millimetres ) {
@@ -547,20 +547,20 @@ void Previewer::slConnectScanner( KScanDevice *scan )
     {
         /* Enable the by-default disabled autoselection group */
         d->m_autoSelGroup->setEnabled(true);
-        QString h;
+        TQString h;
 
-        h = scan->getConfig( CFG_AUTOSEL_DO, QString("unknown") );
-        if( h == QString("on") )
+        h = scan->getConfig( CFG_AUTOSEL_DO, TQString("unknown") );
+        if( h == TQString("on") )
             d->m_cbAutoSel->setChecked(true);
         else
             d->m_cbAutoSel->setChecked(false);
 
-        QString isWhite = d->m_scanner->getConfig( CFG_SCANNER_EMPTY_BG, "unknown" );
+        TQString isWhite = d->m_scanner->getConfig( CFG_SCANNER_EMPTY_BG, "unknown" );
 
-        h = scan->getConfig( CFG_AUTOSEL_DUSTSIZE, QString("5") );
+        h = scan->getConfig( CFG_AUTOSEL_DUSTSIZE, TQString("5") );
         d->m_dustsize = h.toInt();
 
-        QString  thresh = DEF_THRESH_BLACK; /* for black */
+        TQString  thresh = DEF_THRESH_BLACK; /* for black */
         if( isWhite.lower() == "yes" )
             thresh = DEF_THRESH_WHITE;
 
@@ -584,7 +584,7 @@ void Previewer::slSetScannerBgIsWhite( bool b )
             d->m_cbBackground->setCurrentItem( BG_ITEM_BLACK );
         }
 
-        d->m_scanner->slStoreConfig( CFG_SCANNER_EMPTY_BG, b ? QString("Yes") : QString("No"));
+        d->m_scanner->slStoreConfig( CFG_SCANNER_EMPTY_BG, b ? TQString("Yes") : TQString("No"));
     }
 }
 
@@ -597,7 +597,7 @@ void Previewer::checkForScannerBg()
 {
     if( d->m_scanner ) /* Is the scan device already known? */
     {
-        QString isWhite = d->m_scanner->getConfig( CFG_SCANNER_EMPTY_BG, "unknown" );
+        TQString isWhite = d->m_scanner->getConfig( CFG_SCANNER_EMPTY_BG, "unknown" );
         bool goWhite = false;
         if( isWhite == "unknown" )
         {
@@ -634,7 +634,7 @@ void Previewer::slAutoSelToggled(bool isOn )
 
     if( d->m_cbAutoSel )
     {
-        QRect r = img_canvas->sel();
+        TQRect r = img_canvas->sel();
 
         kdDebug(29000) << "The rect is " << r.width() << " x " << r.height() << endl;
         d->m_doAutoSelection = isOn;
@@ -673,7 +673,7 @@ void Previewer::slSetAutoSelThresh(int t)
     d->m_autoSelThresh = t;
     kdDebug(29000) << "Setting threshold to " << t << endl;
     if( d->m_scanner )
-        d->m_scanner->slStoreConfig( CFG_AUTOSEL_THRESH, QString::number(t) );
+        d->m_scanner->slStoreConfig( CFG_AUTOSEL_THRESH, TQString::number(t) );
     findSelection();
 }
 
@@ -701,22 +701,22 @@ void  Previewer::findSelection( )
     if( ! d->m_doAutoSelection ) return;
     int line;
     int x;
-    const QImage *img = img_canvas->rootImage();
+    const TQImage *img = img_canvas->rootImage();
     if( ! img ) return;
 
     long iWidth  = img->width();
     long iHeight = img->height();
 
-    QMemArray<long> heightSum;
-    QMemArray<long> widthSum;
+    TQMemArray<long> heightSum;
+    TQMemArray<long> widthSum;
 
     kdDebug(29000)<< "Preview size is " << iWidth << "x" << iHeight << endl;
 
     if( (d->m_heightSum).size() == 0 && (iHeight>0) )
     {
         kdDebug(29000) << "Starting to fill Array " << endl;
-        QMemArray<long> heightSum(iHeight);
-        QMemArray<long> widthSum(iWidth);
+        TQMemArray<long> heightSum(iHeight);
+        TQMemArray<long> widthSum(iWidth);
         heightSum.fill(0);
         widthSum.fill(0);
 
@@ -753,9 +753,9 @@ void  Previewer::findSelection( )
 #if 0
     /* debug output */
     {
-        QFile fi( "/tmp/thheight.dat");
+        TQFile fi( "/tmp/thheight.dat");
         if( fi.open( IO_ReadWrite ) ) {
-            QTextStream str( &fi );
+            TQTextStream str( &fi );
 
             str << "# height ##################" << endl;
             for( x = 0; x < iHeight; x++ )
@@ -763,10 +763,10 @@ void  Previewer::findSelection( )
             fi.close();
         }
     }
-    QFile fi1( "/tmp/thwidth.dat");
+    TQFile fi1( "/tmp/thwidth.dat");
     if( fi1.open( IO_ReadWrite ))
     {
-        QTextStream str( &fi1 );
+        TQTextStream str( &fi1 );
         str << "# width ##################" << endl;
         str << "# " << iWidth << " points" << endl;
         for( x = 0; x < iWidth; x++ )
@@ -777,7 +777,7 @@ void  Previewer::findSelection( )
 #endif
     int start = 0;
     int end = 0;
-    QRect r;
+    TQRect r;
 
     /** scale to 0..1000 range **/
     start = 0;
@@ -813,7 +813,7 @@ void  Previewer::findSelection( )
 /*
  * returns an Array containing the
  */
-bool Previewer::imagePiece( QMemArray<long> src, int& start, int& end )
+bool Previewer::imagePiece( TQMemArray<long> src, int& start, int& end )
 {
     for( uint x = 0; x < src.size(); x++ )
     {

@@ -19,10 +19,10 @@
 #ifndef KUICKSHOW_H
 #define KUICKSHOW_H
 
-#include <qevent.h>
-#include <qguardedptr.h>
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqevent.h>
+#include <tqguardedptr.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 
 #include <kfileitem.h>
 #include <kmainwindow.h>
@@ -50,7 +50,7 @@ class KuickFile;
 class DelayedRepeatEvent
 {
 public:
-    DelayedRepeatEvent( ImageWindow *view, QKeyEvent *ev ) {
+    DelayedRepeatEvent( ImageWindow *view, TQKeyEvent *ev ) {
         viewer = view;
         event  = ev;
     }
@@ -73,7 +73,7 @@ public:
     };
 
     ImageWindow *viewer;
-    QKeyEvent *event;
+    TQKeyEvent *event;
     int action;
     void *data;
 };
@@ -88,7 +88,7 @@ public:
     ~KuickShow();
 
     virtual void 	show();
-    static QValueList<ImageWindow*>  s_viewers;
+    static TQValueList<ImageWindow*>  s_viewers;
 
     // overridden to make KDCOPActionProxy work -- all our actions are not
     // in the mainwindow's collection, but in the filewidget's.
@@ -106,7 +106,7 @@ private slots:
     void 		slotPrint();
     void 		slotConfigApplied();
     void 		slotConfigClosed();
-    void 		messageCantLoadImage( const KuickFile * file, const QString& message);
+    void 		messageCantLoadImage( const KuickFile * file, const TQString& message);
     bool         	showImage(const KFileItem *, bool newWindow = false,
                                   bool fullscreen = false, bool moveToTopLeft = true );
     void 		showFileItem( ImageWindow *, const KFileItem * );
@@ -120,7 +120,7 @@ private slots:
     void 		nextSlide();
     void                nextSlide( KFileItem *item );
     void		viewerDeleted();
-    void 		slotDropped( const KFileItem *, QDropEvent *, const KURL::List &);
+    void 		slotDropped( const KFileItem *, TQDropEvent *, const KURL::List &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 
@@ -142,12 +142,12 @@ private slots:
 
 private:
     void 		initGUI( const KURL& startDir );
-    bool	       	eventFilter( QObject *, QEvent * );
+    bool	       	eventFilter( TQObject *, TQEvent * );
     void 		initImlib();
     void 		saveProperties( KConfig * );
     void 		saveSettings();
     bool 		haveBrowser() const;
-    void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
+    void 		delayedRepeatEvent( ImageWindow *, TQKeyEvent * );
     void		abortDelayedEvent();
     void                deleteAllViewers();
     void                redirectDeleteAndTrashActions(KActionCollection *coll);
@@ -155,8 +155,8 @@ private:
     void                delayAction(DelayedRepeatEvent *event);
     void                replayAdvance(DelayedRepeatEvent *event);
 
-    void                performDeleteCurrentImage(QWidget *parent);
-    void                performTrashCurrentImage(QWidget *parent);
+    void                performDeleteCurrentImage(TQWidget *parent);
+    void                performTrashCurrentImage(TQWidget *parent);
 
     uint 		viewItem, renameItem, deleteItem, printItem;
     uint                m_slideshowCycle;
@@ -169,10 +169,10 @@ private:
     KToggleAction 	*oneWindowAction;
     KAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
-    QTimer              *m_slideTimer;
+    TQTimer              *m_slideTimer;
     bool                m_slideShowStopped;
     KToggleAction       *m_toggleBrowserAction;
-    QGuardedPtr<AboutWidget> aboutWidget;
+    TQGuardedPtr<AboutWidget> aboutWidget;
 };
 
 #endif

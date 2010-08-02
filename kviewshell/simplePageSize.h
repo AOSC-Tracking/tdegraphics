@@ -13,10 +13,10 @@
 
 #include "length.h"
 
-#include <qsize.h>
+#include <tqsize.h>
 
-class QString;
-class QStringList;
+class TQString;
+class TQStringList;
 
 
 /** \brief This class represents phyiscal page sizes.
@@ -74,16 +74,16 @@ class SimplePageSize
 
   @param resolution in dots per inch
 
-  @returns the pixel size, represented by a QSize. If the page size is
+  @returns the pixel size, represented by a TQSize. If the page size is
       invalid, the result is undefined. */
-  QSize       sizeInPixel(double resolution) const {return QSize( (int)(resolution*pageWidth.getLength_in_inch() + 0.5), 
+  TQSize       sizeInPixel(double resolution) const {return TQSize( (int)(resolution*pageWidth.getLength_in_inch() + 0.5), 
 								  (int)(resolution*pageHeight.getLength_in_inch() + 0.5)); }
 
   /** \brief Zoom value required to scale to a certain height
 
   If the pageSize is valid, this method returns the zoom value
   required to scale the page size down to 'height' pixels on the
-  currently used display. The method uses QPaintDevice::x11AppDpiY()
+  currently used display. The method uses TQPaintDevice::x11AppDpiY()
   to find the resolution of the display. If the pageSize is invalid,
   an error message is printed, and an undefined value is returned.
       
@@ -99,7 +99,7 @@ class SimplePageSize
 
   If the pageSize is valid, this method returns the zoom value
   required to scale the page size down to 'width' pixels on the
-  currently used display. The method uses QPaintDevice::x11AppDpiX()
+  currently used display. The method uses TQPaintDevice::x11AppDpiX()
   to find the resolution of the display. If the pageSize is invalid,
   an error message is printed, and an undefined value is returned.
   

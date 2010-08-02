@@ -20,17 +20,17 @@
 #include <klocale.h>
 #include <kiconloader.h>
 
-PMListBoxObject::PMListBoxObject( QListBox* listbox, PMObject* obj,
-                                  QListBoxItem* after )
-      : QListBoxPixmap( listbox,
+PMListBoxObject::PMListBoxObject( TQListBox* listbox, PMObject* obj,
+                                  TQListBoxItem* after )
+      : TQListBoxPixmap( listbox,
                       SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
                       checkName( obj->name( ) ), after )
 {
    m_pObject = obj;
 }
 
-PMListBoxObject::PMListBoxObject( QListBox* listbox, PMObject* obj )
-      : QListBoxPixmap( listbox,
+PMListBoxObject::PMListBoxObject( TQListBox* listbox, PMObject* obj )
+      : TQListBoxPixmap( listbox,
                       SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
                       checkName( obj->name( ) ) )
 {
@@ -38,38 +38,38 @@ PMListBoxObject::PMListBoxObject( QListBox* listbox, PMObject* obj )
 }
 
 PMListBoxObject::PMListBoxObject( PMObject* obj )
-      : QListBoxPixmap( SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
+      : TQListBoxPixmap( SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
                       checkName( obj->name( ) ) )
 {
    m_pObject = obj;
 }
 
-PMListBoxObject::PMListBoxObject( QListBox* listbox, PMObject* obj,
-                                  const QString& text, QListBoxItem* after )
-      : QListBoxPixmap( listbox,
+PMListBoxObject::PMListBoxObject( TQListBox* listbox, PMObject* obj,
+                                  const TQString& text, TQListBoxItem* after )
+      : TQListBoxPixmap( listbox,
                       SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
                       text, after )
 {
    m_pObject = obj;
 }
 
-PMListBoxObject::PMListBoxObject( QListBox* listbox, PMObject* obj,
-                                  const QString& text )
-      : QListBoxPixmap( listbox,
+PMListBoxObject::PMListBoxObject( TQListBox* listbox, PMObject* obj,
+                                  const TQString& text )
+      : TQListBoxPixmap( listbox,
                       SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
                       text )
 {
    m_pObject = obj;
 }
 
-PMListBoxObject::PMListBoxObject( PMObject* obj, const QString& text )
-      : QListBoxPixmap( SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
+PMListBoxObject::PMListBoxObject( PMObject* obj, const TQString& text )
+      : TQListBoxPixmap( SmallIcon( obj->pixmap( ), PMFactory::instance( ) ),
                       text )
 {
    m_pObject = obj;
 }
 
-QString PMListBoxObject::checkName( const QString& text )
+TQString PMListBoxObject::checkName( const TQString& text )
 {
    if( text.isEmpty( ) )
       return i18n( "(unnamed)" );
@@ -81,21 +81,21 @@ PMListBoxObject::~PMListBoxObject( )
 }
 
 
-QSize PMObjectSelect::s_size = QSize( 200, 300 );
+TQSize PMObjectSelect::s_size = TQSize( 200, 300 );
 
 
-PMObjectSelect::PMObjectSelect( QWidget* parent, const char* name, bool modal )
+PMObjectSelect::PMObjectSelect( TQWidget* parent, const char* name, bool modal )
       : KDialogBase( parent, name, modal, i18n( "Choose Object" ), Ok | Cancel )
 {
    m_pSelectedObject = 0;
-   m_pListBox = new QListBox( this );
+   m_pListBox = new TQListBox( this );
    setMainWidget( m_pListBox );
    setInitialSize( s_size );
 
-   connect( m_pListBox, SIGNAL( highlighted( QListBoxItem* ) ),
-            SLOT( slotHighlighted( QListBoxItem* ) ) );
-   connect( m_pListBox, SIGNAL( selected( QListBoxItem* ) ),
-            SLOT( slotSelected( QListBoxItem* ) ) );
+   connect( m_pListBox, TQT_SIGNAL( highlighted( TQListBoxItem* ) ),
+            TQT_SLOT( slotHighlighted( TQListBoxItem* ) ) );
+   connect( m_pListBox, TQT_SIGNAL( selected( TQListBoxItem* ) ),
+            TQT_SLOT( slotSelected( TQListBoxItem* ) ) );
    enableButtonOK( false );
 }
 
@@ -109,8 +109,8 @@ void PMObjectSelect::addObject( PMObject* obj )
    m_pListBox->insertItem( new PMListBoxObject( obj ) );
 }
 
-int PMObjectSelect::selectObject( PMObject* link, const QString& t,
-                                  PMObject* & obj, QWidget* parent )
+int PMObjectSelect::selectObject( PMObject* link, const TQString& t,
+                                  PMObject* & obj, TQWidget* parent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -166,8 +166,8 @@ int PMObjectSelect::selectObject( PMObject* link, const QString& t,
 }
 
 int PMObjectSelect::selectObject( PMObject* link,
-                                  const QStringList& t,
-                                  PMObject* & obj, QWidget* parent )
+                                  const TQStringList& t,
+                                  PMObject* & obj, TQWidget* parent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -222,8 +222,8 @@ int PMObjectSelect::selectObject( PMObject* link,
    return Rejected;
 }
 
-int PMObjectSelect::selectDeclare( PMObject* link, const QString& declareType,
-                                   PMObject* & obj, QWidget* parent )
+int PMObjectSelect::selectDeclare( PMObject* link, const TQString& declareType,
+                                   PMObject* & obj, TQWidget* parent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -284,8 +284,8 @@ int PMObjectSelect::selectDeclare( PMObject* link, const QString& declareType,
    return Rejected;
 }
 
-int PMObjectSelect::selectDeclare( PMObject* link, const QStringList& declareTypes,
-                                   PMObject* & obj, QWidget* parent )
+int PMObjectSelect::selectDeclare( PMObject* link, const TQStringList& declareTypes,
+                                   PMObject* & obj, TQWidget* parent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -346,13 +346,13 @@ int PMObjectSelect::selectDeclare( PMObject* link, const QStringList& declareTyp
    return Rejected;
 }
 
-void PMObjectSelect::slotHighlighted( QListBoxItem* lbi )
+void PMObjectSelect::slotHighlighted( TQListBoxItem* lbi )
 {
    m_pSelectedObject = ( ( PMListBoxObject* ) lbi )->object( );
    enableButtonOK( true );
 }
 
-void PMObjectSelect::slotSelected( QListBoxItem* lbi )
+void PMObjectSelect::slotSelected( TQListBoxItem* lbi )
 {
    m_pSelectedObject = ( ( PMListBoxObject* ) lbi )->object( );
    enableButtonOK( true );

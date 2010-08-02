@@ -56,12 +56,12 @@ PMBlob::~PMBlob( )
 {
 }
 
-QString PMBlob::description( ) const
+TQString PMBlob::description( ) const
 {
    return i18n( "blob" );
 }
 
-void PMBlob::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMBlob::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "threshold", m_threshold );
    e.setAttribute( "sturm", m_sturm );
@@ -139,7 +139,7 @@ void PMBlob::setHierarchy( bool h )
    }
 }
 
-PMDialogEditBase* PMBlob::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBlob::editWidget( TQWidget* parent ) const
 {
    return new PMBlobEdit( parent );
 }

@@ -22,18 +22,18 @@
 #include "pmvectorlistedit.h"
 #include "pmpart.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qtooltip.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqtooltip.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 
-PMLatheEdit::PMLatheEdit( QWidget* parent, const char* name )
+PMLatheEdit::PMLatheEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -43,9 +43,9 @@ void PMLatheEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Spline type:" ), this ) );
-   m_pSplineType = new QComboBox( false, this );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Spline type:" ), this ) );
+   m_pSplineType = new TQComboBox( false, this );
    m_pSplineType->insertItem( i18n( "Linear Spline" ) );
    m_pSplineType->insertItem( i18n( "Quadratic Spline" ) );
    m_pSplineType->insertItem( i18n( "Cubic Spline" ) );
@@ -53,40 +53,40 @@ void PMLatheEdit::createTopWidgets( )
    hl->addWidget( m_pSplineType );
    hl->addStretch( 1 );
 
-   connect( m_pSplineType, SIGNAL( activated( int ) ),
-            SLOT( slotTypeChanged( int ) ) );
+   connect( m_pSplineType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotTypeChanged( int ) ) );
 }
 
 void PMLatheEdit::createBottomWidgets( )
 {
-   topLayout( )->addWidget( new QLabel( i18n( "Spline points:" ), this ) );
+   topLayout( )->addWidget( new TQLabel( i18n( "Spline points:" ), this ) );
    
    m_pPoints = new PMVectorListEdit( "u", "v", this );
-   connect( m_pPoints, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPoints, SIGNAL( selectionChanged( ) ),
-            SLOT( slotSelectionChanged( ) ) );
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
+   connect( m_pPoints, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPoints, TQT_SIGNAL( selectionChanged( ) ),
+            TQT_SLOT( slotSelectionChanged( ) ) );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
    hl->addWidget( m_pPoints, 2 );
 
-   m_pAddAbove = new QPushButton( this );
+   m_pAddAbove = new TQPushButton( this );
    m_pAddAbove->setPixmap( SmallIcon( "pmaddpointabove" ) );
-   m_pAddBelow = new QPushButton( this );
+   m_pAddBelow = new TQPushButton( this );
    m_pAddBelow->setPixmap( SmallIcon( "pmaddpoint" ) );
-   m_pRemove = new QPushButton( this );
+   m_pRemove = new TQPushButton( this );
    m_pRemove->setPixmap( SmallIcon( "pmremovepoint" ) );
-   connect( m_pAddAbove, SIGNAL( clicked( ) ), SLOT( slotAddPointAbove( ) ) );
-   connect( m_pAddBelow, SIGNAL( clicked( ) ), SLOT( slotAddPointBelow( ) ) );
-   connect( m_pRemove, SIGNAL( clicked( ) ), SLOT( slotRemovePoint( ) ) );
+   connect( m_pAddAbove, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPointAbove( ) ) );
+   connect( m_pAddBelow, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPointBelow( ) ) );
+   connect( m_pRemove, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemovePoint( ) ) );
 
-   QVBoxLayout* bl = new QVBoxLayout( hl );
+   TQVBoxLayout* bl = new TQVBoxLayout( hl );
    bl->addWidget( m_pAddAbove );
    bl->addWidget( m_pAddBelow );
    bl->addWidget( m_pRemove );
    bl->addStretch( 1 );
 
-   m_pSturm = new QCheckBox( i18n( "Sturm" ), this );
+   m_pSturm = new TQCheckBox( i18n( "Sturm" ), this );
    topLayout( )->addWidget( m_pSturm );
-   connect( m_pSturm, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
    Base::createBottomWidgets( );
 }
@@ -234,12 +234,12 @@ void PMLatheEdit::slotAddPointAbove( )
    int index = m_pPoints->currentRow( );
    if( index >= 0 )
    {
-      QValueList<PMVector> points = m_pPoints->vectors( );
-      QValueListIterator<PMVector> it = points.at( index );
+      TQValueList<PMVector> points = m_pPoints->vectors( );
+      TQValueListIterator<PMVector> it = points.at( index );
 
       if( it != points.end( ) )
       {
-         QValueListIterator<PMVector> it2 = it;
+         TQValueListIterator<PMVector> it2 = it;
          it2--;
          PMVector v;
          if( it2 == points.end( ) )
@@ -261,12 +261,12 @@ void PMLatheEdit::slotAddPointBelow( )
    int index = m_pPoints->currentRow( );
    if( index >= 0 )
    {
-      QValueList<PMVector> points = m_pPoints->vectors( );
-      QValueListIterator<PMVector> it = points.at( index );
+      TQValueList<PMVector> points = m_pPoints->vectors( );
+      TQValueListIterator<PMVector> it = points.at( index );
 
       if( it != points.end( ) )
       {
-         QValueListIterator<PMVector> it2 = it;
+         TQValueListIterator<PMVector> it2 = it;
          it2++;
          PMVector v;
          if( it2 == points.end( ) )
@@ -290,8 +290,8 @@ void PMLatheEdit::slotRemovePoint( )
 
    if( row >= 0 )
    {
-      QValueList<PMVector> points = m_pPoints->vectors( );
-      QValueListIterator<PMVector> it = points.at( row );
+      TQValueList<PMVector> points = m_pPoints->vectors( );
+      TQValueListIterator<PMVector> it = points.at( row );
       
       if( it != points.end( ) && points.size( ) > 1 )
       {

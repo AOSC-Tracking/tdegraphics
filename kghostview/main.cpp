@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qdir.h>
+#include <tqdir.h>
 
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -55,7 +55,7 @@ int main( int argc, char** argv )
     else {
 	KGVShell* shell = new KGVShell;
 	if( args->count() == 1 ) {
-	    if( QString( args->arg(0) ) == "-" ) {
+	    if( TQString( args->arg(0) ) == "-" ) {
 		shell->openStdin();
 	    } else {
 		shell->openURL( args->url(0) );

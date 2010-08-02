@@ -23,9 +23,9 @@
 
 #include "dscparse_adapter.h"
 
-class QLabel;
-class QPushButton;
-class QTextEdit;
+class TQLabel;
+class TQPushButton;
+class TQTextEdit;
 
 class KDSCErrorThreshold : public KDSCErrorHandler
 {
@@ -44,12 +44,12 @@ class KDSCErrorDialog : public KDialog, public KDSCErrorHandler
     Q_OBJECT
 	
 public:
-    KDSCErrorDialog( QWidget* parent = 0 );
+    KDSCErrorDialog( TQWidget* parent = 0 );
     
     Response error( const KDSCError& );
 
 protected:
-    QString description( KDSCError::Type ) const;
+    TQString description( KDSCError::Type ) const;
     
 protected slots:
     void slotOk();
@@ -57,13 +57,13 @@ protected slots:
     void slotIgnoreAll();
     
 private:
-    QLabel*    _lineNumberLabel;
-    QTextEdit* _lineLabel;
-    QLabel*    _descriptionLabel;
+    TQLabel*    _lineNumberLabel;
+    TQTextEdit* _lineLabel;
+    TQLabel*    _descriptionLabel;
     
-    QPushButton* _okButton;
-    QPushButton* _cancelButton;
-    QPushButton* _ignoreAllButton;
+    TQPushButton* _okButton;
+    TQPushButton* _cancelButton;
+    TQPushButton* _ignoreAllButton;
 
     Response _response;
 };

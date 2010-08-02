@@ -75,7 +75,7 @@ class KPcxPlugin: public KFilePlugin
   Q_OBJECT
 
 public:
-  KPcxPlugin(QObject *parent, const char *name, const QStringList& args);
+  KPcxPlugin(TQObject *parent, const char *name, const TQStringList& args);
   virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:

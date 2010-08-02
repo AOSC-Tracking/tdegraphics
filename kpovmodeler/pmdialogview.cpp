@@ -33,14 +33,14 @@
 #include <krun.h>
 #include <kstdguiitem.h>
 
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qgroupbox.h>
-#include <qscrollview.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
+#include <tqgroupbox.h>
+#include <tqscrollview.h>
+#include <tqlabel.h>
 
-PMDialogEditContent::PMDialogEditContent( QWidget* parent, const char* name )
-      : QScrollView( parent, name )
+PMDialogEditContent::PMDialogEditContent( TQWidget* parent, const char* name )
+      : TQScrollView( parent, name )
 {
    m_pContents = 0;
    setVScrollBarMode( AlwaysOff );
@@ -50,7 +50,7 @@ PMDialogEditContent::PMDialogEditContent( QWidget* parent, const char* name )
    setResizePolicy( Manual );
 }
 
-void PMDialogEditContent::setContents( QWidget* wid )
+void PMDialogEditContent::setContents( TQWidget* wid )
 {
    if( m_pContents )
       removeChild( m_pContents );
@@ -69,7 +69,7 @@ void PMDialogEditContent::calculateSize( )
    int fw = lineWidth( ) * 2;
    if( m_pContents )
    {
-      QSize newSize = m_pContents->minimumSizeHint( );
+      TQSize newSize = m_pContents->minimumSizeHint( );
 
       setVScrollBarMode( AlwaysOff );
       setHScrollBarMode( AlwaysOff );
@@ -106,12 +106,12 @@ void PMDialogEditContent::calculateSize( )
    }
 }
 
-void PMDialogEditContent::resizeEvent( QResizeEvent* /* ev */ )
+void PMDialogEditContent::resizeEvent( TQResizeEvent* /* ev */ )
 {
    calculateSize( );
 }
 
-PMDialogView::PMDialogView( PMPart* part, QWidget* parent, const char* name )
+PMDialogView::PMDialogView( PMPart* part, TQWidget* parent, const char* name )
       : PMViewBase( parent, name )
 {
    m_pDisplayedWidget = 0;
@@ -120,12 +120,12 @@ PMDialogView::PMDialogView( PMPart* part, QWidget* parent, const char* name )
    m_pHelper->show( );
    m_pPart = part;
 
-   m_pLayout = new QVBoxLayout( this, KDialog::marginHint( ),
+   m_pLayout = new TQVBoxLayout( this, KDialog::marginHint( ),
                                 KDialog::spacingHint( ) );
 
-   QHBoxLayout* labelLayout = new QHBoxLayout( m_pLayout );
-   m_pPixmapLabel = new QLabel( this );
-   m_pObjectTypeLabel = new QLabel( this );
+   TQHBoxLayout* labelLayout = new TQHBoxLayout( m_pLayout );
+   m_pPixmapLabel = new TQLabel( this );
+   m_pObjectTypeLabel = new TQLabel( this );
    labelLayout->addWidget( m_pPixmapLabel );
    labelLayout->addWidget( m_pObjectTypeLabel );
    labelLayout->addStretch( );
@@ -133,34 +133,34 @@ PMDialogView::PMDialogView( PMPart* part, QWidget* parent, const char* name )
    m_pLayout->addWidget( m_pHelper, 2 );
    m_pLayout->addStretch( );
 
-   QHBoxLayout* buttonLayout = new QHBoxLayout( m_pLayout );
+   TQHBoxLayout* buttonLayout = new TQHBoxLayout( m_pLayout );
    m_pHelpButton = new KPushButton( KStdGuiItem::help(), this );
    buttonLayout->addWidget( m_pHelpButton );
-   connect( m_pHelpButton, SIGNAL( clicked( ) ), this, SLOT( slotHelp( ) ) );
+   connect( m_pHelpButton, TQT_SIGNAL( clicked( ) ), this, TQT_SLOT( slotHelp( ) ) );
    m_pHelpButton->setEnabled( false );
 
    m_pApplyButton = new KPushButton( KStdGuiItem::apply(), this );
    buttonLayout->addWidget( m_pApplyButton );
-   connect( m_pApplyButton, SIGNAL( clicked( ) ), this, SLOT( slotApply( ) ) );
+   connect( m_pApplyButton, TQT_SIGNAL( clicked( ) ), this, TQT_SLOT( slotApply( ) ) );
    m_pApplyButton->setEnabled( false );
 
    buttonLayout->addStretch( );
 
    m_pCancelButton = new KPushButton( KStdGuiItem::cancel(), this );
    buttonLayout->addWidget( m_pCancelButton );
-   connect( m_pCancelButton, SIGNAL( clicked( ) ), this, SLOT( slotCancel( ) ) );
+   connect( m_pCancelButton, TQT_SIGNAL( clicked( ) ), this, TQT_SLOT( slotCancel( ) ) );
    m_pCancelButton->setEnabled( false );
 
    m_pLayout->activate( );
 
-   connect( part, SIGNAL( refresh( ) ), SLOT( slotRefresh( ) ) );
-   connect( part, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-            SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
-   connect( part, SIGNAL( clear( ) ), SLOT( slotClear( ) ) );
-   connect( part, SIGNAL( aboutToRender( ) ), SLOT( slotAboutToRender( ) ) );
-   connect( part, SIGNAL( aboutToSave( ) ), SLOT( slotAboutToRender( ) ) );
-   connect( this, SIGNAL( objectChanged( PMObject*, const int, QObject* ) ),
-            part, SLOT( slotObjectChanged( PMObject*, const int, QObject* ) ) );
+   connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );
+   connect( part, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQT_SIGNAL( clear( ) ), TQT_SLOT( slotClear( ) ) );
+   connect( part, TQT_SIGNAL( aboutToRender( ) ), TQT_SLOT( slotAboutToRender( ) ) );
+   connect( part, TQT_SIGNAL( aboutToSave( ) ), TQT_SLOT( slotAboutToRender( ) ) );
+   connect( this, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            part, TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
    displayObject( m_pPart->activeObject( ) );
 }
@@ -172,7 +172,7 @@ PMDialogView::~PMDialogView( )
    emit destroyed( this );
 }
 
-void PMDialogView::slotObjectChanged( PMObject* obj, const int mode, QObject* sender )
+void PMDialogView::slotObjectChanged( PMObject* obj, const int mode, TQObject* sender )
 {
    if( sender == this )
       return;
@@ -275,7 +275,7 @@ void PMDialogView::slotHelp( )
 {
    if( m_pDisplayedWidget && m_pDisplayedWidget->displayedObject( ) )
    {
-      QString url = PMDocumentationMap::theMap( )->documentation(
+      TQString url = PMDocumentationMap::theMap( )->documentation(
          m_pDisplayedWidget->displayedObject( )->className( ) );
       if( !url.isEmpty( ) )
       {
@@ -371,15 +371,15 @@ void PMDialogView::displayObject( PMObject* obj, bool updateDescription )
 
          if( m_pDisplayedWidget )
          {
-            connect( m_pDisplayedWidget, SIGNAL( dataChanged( ) ),
-                     this, SLOT( slotDataChanged( ) ) );
-            connect( m_pDisplayedWidget, SIGNAL( sizeChanged( ) ),
-                     this, SLOT( slotSizeChanged( ) ) );
-            connect( m_pDisplayedWidget, SIGNAL( aboutToRender( ) ),
-                     this, SLOT( slotAboutToRender( ) ) );
+            connect( m_pDisplayedWidget, TQT_SIGNAL( dataChanged( ) ),
+                     this, TQT_SLOT( slotDataChanged( ) ) );
+            connect( m_pDisplayedWidget, TQT_SIGNAL( sizeChanged( ) ),
+                     this, TQT_SLOT( slotSizeChanged( ) ) );
+            connect( m_pDisplayedWidget, TQT_SIGNAL( aboutToRender( ) ),
+                     this, TQT_SLOT( slotAboutToRender( ) ) );
             connect( m_pDisplayedWidget,
-                     SIGNAL( controlPointSelectionChanged( ) ),
-                     SLOT( slotControlPointSelectionChanged( ) ) );
+                     TQT_SIGNAL( controlPointSelectionChanged( ) ),
+                     TQT_SLOT( slotControlPointSelectionChanged( ) ) );
 
          }
       }
@@ -415,7 +415,7 @@ void PMDialogView::displayObject( PMObject* obj, bool updateDescription )
    m_unsavedData = false;
 }
 
-void PMDialogView::keyPressEvent( QKeyEvent* ev )
+void PMDialogView::keyPressEvent( TQKeyEvent* ev )
 {
    if( ( ev->key( ) == Key_Return ) || ( ev->key( ) == Key_Enter ) )
       slotApply( );
@@ -428,12 +428,12 @@ void PMDialogView::slotAboutToRender( )
          slotApply( );
 }
 
-QString PMDialogView::description( ) const
+TQString PMDialogView::description( ) const
 {
    return i18n( "Object Properties" );
 }
 
-QString PMDialogViewFactory::description( ) const
+TQString PMDialogViewFactory::description( ) const
 {
    return i18n( "Object Properties" );
 }

@@ -20,8 +20,8 @@
 #ifndef PMVECTOR_H
 #define PMVECTOR_H
 
-#include <qmemarray.h>
-#include <qstring.h>
+#include <tqmemarray.h>
+#include <tqstring.h>
 
 class PMMatrix;
 
@@ -255,15 +255,15 @@ public:
    /**
     * Returns a string for serialization
     */
-   QString serialize( ) const;
+   TQString serialize( ) const;
    /**
     * Returns a string for xml output
     */
-   QString serializeXML( ) const;
+   TQString serializeXML( ) const;
    /**
     * loads the vector data from the xml string
     */
-   bool loadXML( const QString& str );
+   bool loadXML( const TQString& str );
 private:
    void allocateMemory( unsigned int size );
    

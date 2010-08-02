@@ -21,14 +21,14 @@
 #include <kfileitem.h>
 
 KMyFileItemList::KMyFileItemList() {}
-KMyFileItemList::KMyFileItemList( const QPtrList<KFileItem> & l ) : QPtrList<KFileItem>( l ) {}
+KMyFileItemList::KMyFileItemList( const TQPtrList<KFileItem> & l ) : TQPtrList<KFileItem>( l ) {}
 
-KMyFileItemList & KMyFileItemList::operator=( const QPtrList<KFileItem> & l )
+KMyFileItemList & KMyFileItemList::operator=( const TQPtrList<KFileItem> & l )
 {
-	return (KMyFileItemList &)QPtrList<KFileItem>::operator=( l );
+	return (KMyFileItemList &)TQPtrList<KFileItem>::operator=( l );
 }
 
-int KMyFileItemList::compareItems( QPtrCollection::Item item1, QPtrCollection::Item item2 )
+int KMyFileItemList::compareItems( TQPtrCollection::Item item1, TQPtrCollection::Item item2 )
 {
 	KFileItem * fileitem1 = static_cast<KFileItem *>( item1 );
 	KFileItem * fileitem2 = static_cast<KFileItem *>( item2 );

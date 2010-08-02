@@ -44,9 +44,9 @@
 
 #include "SVGPaint.h"
 
-#include <qdatetime.h>
-#include <qstring.h>
-#include <qimage.h>
+#include <tqdatetime.h>
+#include <tqstring.h>
+#include <tqimage.h>
 
 #include "KSVGHelper.h"
 #include "KSVGTextChunk.h"
@@ -91,7 +91,7 @@ ArtSVP *art_svp_from_irect(ArtIRect *bbox)
 	return art_svp_from_rect(bbox->x0, bbox->y0, bbox->x1, bbox->y1);
 } 
 
-ArtSVP *art_svp_from_qrect(const QRect& rect)
+ArtSVP *art_svp_from_qrect(const TQRect& rect)
 {
 	return art_svp_from_rect(rect.left(), rect.top(), rect.right() + 1, rect.bottom() + 1);
 } 
@@ -153,7 +153,7 @@ CanvasItem *LibartCanvas::createPath(SVGPathElementImpl *path)
 CanvasItem *LibartCanvas::createClipPath(SVGClipPathElementImpl *clippath)
 {
 	CanvasClipPath *result = new LibartClipPath(this, clippath);
-	QString index = clippath->id().string();
+	TQString index = clippath->id().string();
 	m_clipPaths.insert(index, result);
 	return result;
 }
@@ -185,7 +185,7 @@ CanvasPaintServer *LibartCanvas::createPaintServer(SVGElementImpl *pserver)
 	return result;
 }
 
-void LibartCanvas::drawImage(QImage image, SVGStylableImpl *style, const SVGMatrixImpl *matrix, const KSVGPolygon& clippingPolygon)
+void LibartCanvas::drawImage(TQImage image, SVGStylableImpl *style, const SVGMatrixImpl *matrix, const KSVGPolygon& clippingPolygon)
 {
 	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(style);
 
@@ -212,9 +212,9 @@ void LibartCanvas::drawImage(QImage image, SVGStylableImpl *style, const SVGMatr
 		{
 			clipToBuffer(x0, y0, x1, y1);
 
-			QRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
+			TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-			QByteArray mask = SVGMaskElementImpl::maskRectangle(shape, screenBBox);
+			TQByteArray mask = SVGMaskElementImpl::maskRectangle(shape, screenBBox);
 
 			double affine[6];
 			KSVGHelper::matrixToAffine(matrix, affine);
@@ -227,7 +227,7 @@ void LibartCanvas::drawImage(QImage image, SVGStylableImpl *style, const SVGMatr
 	}
 }
 
-ArtSVP *LibartCanvas::clippingRect(const QRect &rect, const SVGMatrixImpl *ctm)
+ArtSVP *LibartCanvas::clippingRect(const TQRect &rect, const SVGMatrixImpl *ctm)
 {
 	ArtVpath *vec = allocVPath(6);
 	// Order of points in clipping rectangle must be counter-clockwise
@@ -273,7 +273,7 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
 
 	if(style)
 	{
-		QString clipPathRef = style->getClipPath();
+		TQString clipPathRef = style->getClipPath();
 
 		if(!clipPathRef.isEmpty())
 		{
@@ -354,7 +354,7 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
 	return clippedSvp;
 }
 
-void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, QByteArray mask, QRect screenBBox)
+void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, TQByteArray mask, TQRect screenBBox)
 {
 	int x0 = screenBBox.left();
 	int y0 = screenBBox.top();

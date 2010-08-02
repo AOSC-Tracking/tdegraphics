@@ -36,7 +36,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_LINETO_HORIZONTAL_ABS; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "H"; }
-	virtual QString toString() const { return QString("H %1").arg(m_x); }
+	virtual TQString toString() const { return TQString("H %1").arg(m_x); }
 
 	void setX(const double &);
 	double x() const;
@@ -68,7 +68,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_LINETO_HORIZONTAL_REL; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "h"; }
-	virtual QString toString() const { return QString("h %1").arg(m_x); }
+	virtual TQString toString() const { return TQString("h %1").arg(m_x); }
 
 	void setX(const double &);
 	double x() const;

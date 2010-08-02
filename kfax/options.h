@@ -27,17 +27,17 @@
 #ifndef _OPTIONS_DIALOG_H_
 #define _OPTIONS_DIALOG_H_
 
-#include <qapplication.h>
-#include <qfiledialog.h>
+#include <tqapplication.h>
+#include <tqfiledialog.h>
 #include <kdialogbase.h>
-#include <qstring.h>
+#include <tqstring.h>
 
-class QGroupBox;
-class QLabel;
-class QButtonGroup;
-class QRadioButton;
-class QCheckBox;
-class QRadioButton;
+class TQGroupBox;
+class TQLabel;
+class TQButtonGroup;
+class TQRadioButton;
+class TQCheckBox;
+class TQRadioButton;
 
 
 struct optionsinfo {
@@ -60,7 +60,7 @@ class OptionsDialog : public KDialogBase {
     Q_OBJECT
 
 public:
-    OptionsDialog( QWidget *parent = 0, const char *name = 0);
+    OptionsDialog( TQWidget *parent = 0, const char *name = 0);
 
     struct optionsinfo* getInfo();
     void setWidgets(struct optionsinfo *oi);
@@ -77,30 +77,30 @@ public slots:
 private:
 
     QGroupBox	 *bg;
-    QLabel 	*reslabel;
-    QButtonGroup *resgroup;
-    QRadioButton *fine;
-    QRadioButton *resauto;
-    QRadioButton *normal;
+    TQLabel 	*reslabel;
+    TQButtonGroup *resgroup;
+    TQRadioButton *fine;
+    TQRadioButton *resauto;
+    TQRadioButton *normal;
     QLabel	*displaylabel;
-    QButtonGroup *displaygroup;
-    QCheckBox *landscape;
-    QCheckBox *geomauto;
-    QCheckBox *flip;
-    QCheckBox *invert;
+    TQButtonGroup *displaygroup;
+    TQCheckBox *landscape;
+    TQCheckBox *geomauto;
+    TQCheckBox *flip;
+    TQCheckBox *invert;
 
-    QButtonGroup  *lsbgroup;
-    QLabel        *lsblabel;
-    QCheckBox *lsb;
-    QButtonGroup *rawgroup;
-    QRadioButton *g3;
-    QRadioButton *g32d;
-    QRadioButton *g4;
+    TQButtonGroup  *lsbgroup;
+    TQLabel        *lsblabel;
+    TQCheckBox *lsb;
+    TQButtonGroup *rawgroup;
+    TQRadioButton *g3;
+    TQRadioButton *g32d;
+    TQRadioButton *g4;
 
-    QLabel 	*rawlabel;
+    TQLabel 	*rawlabel;
 
-    QLabel 	*widthlabel;
-    QLabel 	*heightlabel;
+    TQLabel 	*widthlabel;
+    TQLabel 	*heightlabel;
     KIntNumInput *widthedit;
     KIntNumInput *heightedit;
 

@@ -13,7 +13,7 @@
 #include <kstdaction.h>
 #include <ktempfile.h>
 #include <ktip.h>
-#include <qtimer.h>
+#include <tqtimer.h>
 
 #include <kparts/part.h>
 #include <kparts/genericfactory.h>
@@ -34,13 +34,13 @@
 #include "renderedDocumentPagePixmap.h"
 
 
-#include <qlabel.h>
+#include <tqlabel.h>
 
 //#define KDVI_MULTIPAGE_DEBUG
 
 #ifdef PERFORMANCE_MEASUREMENT
 // These objects are explained in the file "performanceMeasurement.h"
-QTime performanceTimer;
+TQTime performanceTimer;
 int  performanceFlag = 0;
 #endif
 
@@ -49,8 +49,8 @@ K_EXPORT_COMPONENT_FACTORY(kdvipart, KDVIMultiPageFactory)
 
 
 
-KDVIMultiPage::KDVIMultiPage(QWidget *parentWidget, const char *widgetName, QObject *parent,
-                             const char *name, const QStringList& args)
+KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+                             const char *name, const TQStringList& args)
   : KMultiPage(parentWidget, widgetName, parent, name), DVIRenderer(parentWidget)
 {
   Q_UNUSED(args);
@@ -67,13 +67,13 @@ KDVIMultiPage::KDVIMultiPage(QWidget *parentWidget, const char *widgetName, QObj
   DVIRenderer.setName("DVI renderer");
   setRenderer(&DVIRenderer);
 
-  docInfoAction    = new KAction(i18n("Document &Info"), "info", 0, &DVIRenderer, SLOT(showInfo()), actionCollection(), "info_dvi");
-  embedPSAction    = new KAction(i18n("Embed External PostScript Files..."), 0, this, SLOT(slotEmbedPostScript()), actionCollection(), "embed_postscript");
-  new KAction(i18n("Enable All Warnings && Messages"), 0, this, SLOT(doEnableWarnings()), actionCollection(), "enable_msgs");
-  exportPSAction   = new KAction(i18n("PostScript..."), 0, &DVIRenderer, SLOT(exportPS()), actionCollection(), "export_postscript");
-  exportPDFAction  = new KAction(i18n("PDF..."), 0, &DVIRenderer, SLOT(exportPDF()), actionCollection(), "export_pdf");
+  docInfoAction    = new KAction(i18n("Document &Info"), "info", 0, &DVIRenderer, TQT_SLOT(showInfo()), actionCollection(), "info_dvi");
+  embedPSAction    = new KAction(i18n("Embed External PostScript Files..."), 0, this, TQT_SLOT(slotEmbedPostScript()), actionCollection(), "embed_postscript");
+  new KAction(i18n("Enable All Warnings && Messages"), 0, this, TQT_SLOT(doEnableWarnings()), actionCollection(), "enable_msgs");
+  exportPSAction   = new KAction(i18n("PostScript..."), 0, &DVIRenderer, TQT_SLOT(exportPS()), actionCollection(), "export_postscript");
+  exportPDFAction  = new KAction(i18n("PDF..."), 0, &DVIRenderer, TQT_SLOT(exportPDF()), actionCollection(), "export_pdf");
 
-  KStdAction::tipOfDay(this, SLOT(showTip()), actionCollection(), "help_tipofday");
+  KStdAction::tipOfDay(this, TQT_SLOT(showTip()), actionCollection(), "help_tipofday");
 
   setXMLFile("kdvi_part.rc");
 
@@ -81,7 +81,7 @@ KDVIMultiPage::KDVIMultiPage(QWidget *parentWidget, const char *widgetName, QObj
 
   enableActions(false);
   // Show tip of the day, when the first main window is shown.
-  QTimer::singleShot(0,this,SLOT(showTipOnStart()));
+  TQTimer::singleShot(0,this,TQT_SLOT(showTipOnStart()));
 }
 
 
@@ -139,18 +139,18 @@ void KDVIMultiPage::setEmbedPostScriptAction()
 void KDVIMultiPage::slotSave()
 {
   // Try to guess the proper ending...
-  QString formats;
-  QString ending;
+  TQString formats;
+  TQString ending;
   int rindex = m_file.findRev(".");
   if (rindex == -1) {
-    ending = QString::null;
-    formats = QString::null;
+    ending = TQString::null;
+    formats = TQString::null;
   } else {
     ending = m_file.mid(rindex); // e.g. ".dvi"
     formats = fileFormats().grep(ending).join("\n");
   }
 
-  QString fileName = KFileDialog::getSaveFileName(QString::null, formats, 0, i18n("Save File As"));
+  TQString fileName = KFileDialog::getSaveFileName(TQString::null, formats, 0, i18n("Save File As"));
 
   if (fileName.isEmpty())
     return;
@@ -160,7 +160,7 @@ void KDVIMultiPage::slotSave()
   if (!ending.isEmpty() && fileName.find(ending) == -1)
     fileName = fileName+ending;
 
-  if (QFile(fileName).exists()) {
+  if (TQFile(fileName).exists()) {
     int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Do you want to overwrite that file?").arg(fileName),
                        i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
@@ -190,9 +190,9 @@ void KDVIMultiPage::setFile(bool r)
 }
 
 
-QStringList KDVIMultiPage::fileFormats() const
+TQStringList KDVIMultiPage::fileFormats() const
 {
-  QStringList r;
+  TQStringList r;
   r << i18n("*.dvi *.DVI|TeX Device Independent Files (*.dvi)");
   return r;
 }
@@ -256,7 +256,7 @@ void KDVIMultiPage::print()
 
   // Turn the results of the options requestor into a list arguments
   // which are used by dvips.
-  QString dvips_options = QString::null;
+  TQString dvips_options = TQString::null;
   // Print in reverse order.
   if ( printer->pageOrder() == KPrinter::LastPageFirst )
     dvips_options += "-r ";
@@ -371,15 +371,15 @@ void KDVIMultiPage::print()
 
 
   // List of pages to print.
-  QValueList<int> pageList = printer->pageList();
+  TQValueList<int> pageList = printer->pageList();
   dvips_options += "-pp ";
   int commaflag = 0;
-  for( QValueList<int>::ConstIterator it = pageList.begin(); it != pageList.end(); ++it ) {
+  for( TQValueList<int>::ConstIterator it = pageList.begin(); it != pageList.end(); ++it ) {
     if (commaflag == 1)
-      dvips_options +=  QString(",");
+      dvips_options +=  TQString(",");
     else
       commaflag = 1;
-    dvips_options += QString("%1").arg(*it);
+    dvips_options += TQString("%1").arg(*it);
   }
 
   // Now print. For that, export the DVI-File to PostScript. Note that
@@ -435,12 +435,12 @@ DocumentWidget* KDVIMultiPage::createDocumentWidget()
                               "singlePageWidget" );
 
   // Lets not forget the connections we make in the KMultiPage
-  connect(documentWidget, SIGNAL(clearSelection()), this, SLOT(clearSelection()));
-  connect(this, SIGNAL(enableMoveTool(bool)), documentWidget, SLOT(slotEnableMoveTool(bool)));
+  connect(documentWidget, TQT_SIGNAL(clearSelection()), this, TQT_SLOT(clearSelection()));
+  connect(this, TQT_SIGNAL(enableMoveTool(bool)), documentWidget, TQT_SLOT(slotEnableMoveTool(bool)));
 
   // Handle source links
-  connect(documentWidget, SIGNAL(SRCLink(const QString&, QMouseEvent*, DocumentWidget*)), getRenderer(),
-          SLOT(handleSRCLink(const QString& ,QMouseEvent*, DocumentWidget*)));
+  connect(documentWidget, TQT_SIGNAL(SRCLink(const TQString&, TQMouseEvent*, DocumentWidget*)), getRenderer(),
+          TQT_SLOT(handleSRCLink(const TQString& ,TQMouseEvent*, DocumentWidget*)));
 
   return documentWidget;
 }

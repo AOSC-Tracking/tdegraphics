@@ -122,12 +122,12 @@ PMLight::~PMLight( )
 {
 }
 
-QString PMLight::description( ) const
+TQString PMLight::description( ) const
 {
    return i18n( "light" );
 }
 
-void PMLight::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMLight::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "location", m_location.serializeXML( ) );
    e.setAttribute( "color", m_color.serializeXML( ) );
@@ -212,7 +212,7 @@ void PMLight::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMLight::readAttributes( const PMXMLHelper& h )
 {
-   QString str;
+   TQString str;
 
    m_location = h.vectorAttribute( "location", locationDefault );
    m_color = h.colorAttribute( "color", colorDefault );
@@ -564,7 +564,7 @@ void PMLight::setMediaAttenuation( bool y )
    }
 }
 
-PMDialogEditBase* PMLight::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMLight::editWidget( TQWidget* parent ) const
 {
    return new PMLightEdit( parent );
 }

@@ -29,7 +29,7 @@
 #define KP_RESIZE_SIGNALLING_LABEL
 
 
-#include <qlabel.h>
+#include <tqlabel.h>
 
 
 class kpResizeSignallingLabel : public QLabel
@@ -37,15 +37,15 @@ class kpResizeSignallingLabel : public QLabel
 Q_OBJECT
 
 public:
-    kpResizeSignallingLabel (const QString &string, QWidget *parent, const char *name = 0);
-    kpResizeSignallingLabel (QWidget *parent, const char *name = 0);
+    kpResizeSignallingLabel (const TQString &string, TQWidget *parent, const char *name = 0);
+    kpResizeSignallingLabel (TQWidget *parent, const char *name = 0);
     virtual ~kpResizeSignallingLabel ();
 
 signals:
     void resized ();
 
 protected:
-    virtual void resizeEvent (QResizeEvent *e);
+    virtual void resizeEvent (TQResizeEvent *e);
 };
 
 

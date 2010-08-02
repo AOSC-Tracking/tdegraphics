@@ -22,7 +22,7 @@
 #include "pmvector.h"
 #include "pmdebug.h"
 
-#include <qtextstream.h>
+#include <tqtextstream.h>
 
 PMMatrix::PMMatrix( )
 {
@@ -407,10 +407,10 @@ void PMMatrix::testOutput( )
    }     
 }
 
-QString PMMatrix::serializeXML( ) const
+TQString PMMatrix::serializeXML( ) const
 {
-   QString result;
-   QTextStream str( &result, IO_WriteOnly );
+   TQString result;
+   TQTextStream str( &result, IO_WriteOnly );
    int i;
 
    for( i = 0; i < 16; i++ )
@@ -423,12 +423,12 @@ QString PMMatrix::serializeXML( ) const
    return result;
 }
 
-bool PMMatrix::loadXML( const QString& str )
+bool PMMatrix::loadXML( const TQString& str )
 {
    int i;
-   QString tmp( str );
-   QTextStream s( &tmp, IO_ReadOnly );
-   QString val;
+   TQString tmp( str );
+   TQTextStream s( &tmp, IO_ReadOnly );
+   TQString val;
    bool ok;
    
    for( i = 0; i < 16; i++ )

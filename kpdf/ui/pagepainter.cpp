@@ -8,11 +8,11 @@
  ***************************************************************************/
 
 // qt / kde includes
-#include <qrect.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qimage.h>
-#include <qapplication.h>
+#include <tqrect.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
+#include <tqapplication.h>
 #include <kimageeffect.h>
 
 // local includes
@@ -21,9 +21,9 @@
 #include "conf/settings.h"
 
 void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
-    QPainter * destPainter, const QRect & limits, int width, int height )
+    TQPainter * destPainter, const TQRect & limits, int width, int height )
 {
-    QPixmap * pixmap = 0;
+    TQPixmap * pixmap = 0;
 
     // if a pixmap is present for given id, use it
     if ( page->m_pixmaps.contains( id ) )
@@ -33,7 +33,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     else if ( !page->m_pixmaps.isEmpty() && width != -1 )
     {
         int minDistance = -1;
-        QMap< int,QPixmap * >::const_iterator it = page->m_pixmaps.begin(), end = page->m_pixmaps.end();
+        TQMap< int,TQPixmap * >::const_iterator it = page->m_pixmaps.begin(), end = page->m_pixmaps.end();
         for ( ; it != end; ++it )
         {
             int pixWidth = (*it)->width(),
@@ -49,7 +49,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     // if have no pixmap, draw blank page with gray cross and exit
     if ( !pixmap )
     {
-        QColor color = Qt::white;
+        TQColor color = Qt::white;
         if ( KpdfSettings::changeColors() )
         {
             switch ( KpdfSettings::renderMode() )
@@ -92,7 +92,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
                nYMax = (double)limits.bottom() / (double)height;
         // if no rect intersects limits, disable paintHighlights
         paintHighlights = false;
-        QValueList< HighlightRect * >::const_iterator hIt = page->m_highlights.begin(), hEnd = page->m_highlights.end();
+        TQValueList< HighlightRect * >::const_iterator hIt = page->m_highlights.begin(), hEnd = page->m_highlights.end();
         for ( ; hIt != hEnd; ++hIt )
         {
             if ( (*hIt)->intersects( nXMin, nYMin, nXMax, nYMax ) )
@@ -105,13 +105,13 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
 
     // use backBuffer if 'pixmap direct manipulation' is needed
     bool backBuffer = paintAccessibility || paintHighlights;
-    QPixmap * backPixmap = 0;
-    QPainter * p = destPainter;
+    TQPixmap * backPixmap = 0;
+    TQPainter * p = destPainter;
     if ( backBuffer )
     {
         // let's paint using a buffered painter
-        backPixmap = new QPixmap( limits.width(), limits.height() );
-        p = new QPainter( backPixmap );
+        backPixmap = new TQPixmap( limits.width(), limits.height() );
+        p = new TQPainter( backPixmap );
         p->translate( -limits.left(), -limits.top() );
     }
 
@@ -131,14 +131,14 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     // 2. mangle pixmap: convert it to 32-bit qimage and perform pixel-level manipulations
     if ( backBuffer )
     {
-        QImage backImage = backPixmap->convertToImage();
+        TQImage backImage = backPixmap->convertToImage();
         // 2.1. modify pixmap following accessibility settings
         if ( paintAccessibility )
         {
             switch ( KpdfSettings::renderMode() )
             {
                 case KpdfSettings::EnumRenderMode::Inverted:
-                    // Invert image pixels using QImage internal function
+                    // Invert image pixels using TQImage internal function
                     backImage.invertPixels(false);
                     break;
                 case KpdfSettings::EnumRenderMode::Recolor:
@@ -174,11 +174,11 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
         if ( paintHighlights )
         {
             // draw highlights that are inside the 'limits' paint region
-            QValueList< HighlightRect * >::const_iterator hIt = page->m_highlights.begin(), hEnd = page->m_highlights.end();
+            TQValueList< HighlightRect * >::const_iterator hIt = page->m_highlights.begin(), hEnd = page->m_highlights.end();
             for ( ; hIt != hEnd; ++hIt )
             {
                 HighlightRect * r = *hIt;
-                QRect highlightRect = r->geometry( width, height );
+                TQRect highlightRect = r->geometry( width, height );
                 if ( highlightRect.isValid() && highlightRect.intersects( limits ) )
                 {
                     // find out the rect to highlight on pixmap
@@ -213,20 +213,20 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     // 3. visually enchance links and images if requested
     if ( enhanceLinks || enhanceImages )
     {
-        QColor normalColor = QApplication::palette().active().highlight();
-        QColor lightColor = normalColor.light( 140 );
+        TQColor normalColor = TQApplication::palette().active().highlight();
+        TQColor lightColor = normalColor.light( 140 );
         // enlarging limits for intersection is like growing the 'rectGeometry' below
-        QRect limitsEnlarged = limits;
+        TQRect limitsEnlarged = limits;
         limitsEnlarged.addCoords( -2, -2, 2, 2 );
         // draw rects that are inside the 'limits' paint region as opaque rects
-        QValueList< ObjectRect * >::const_iterator lIt = page->m_rects.begin(), lEnd = page->m_rects.end();
+        TQValueList< ObjectRect * >::const_iterator lIt = page->m_rects.begin(), lEnd = page->m_rects.end();
         for ( ; lIt != lEnd; ++lIt )
         {
             ObjectRect * rect = *lIt;
             if ( (enhanceLinks && rect->objectType() == ObjectRect::Link) ||
                  (enhanceImages && rect->objectType() == ObjectRect::Image) )
             {
-                QRect rectGeometry = rect->geometry( width, height );
+                TQRect rectGeometry = rect->geometry( width, height );
                 if ( rectGeometry.intersects( limitsEnlarged ) )
                 {
                     // expand rect and draw inner border

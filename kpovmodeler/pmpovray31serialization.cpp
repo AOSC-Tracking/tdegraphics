@@ -26,7 +26,7 @@ void PMPov31SerBicubicPatch( const PMObject* object, const PMMetaObject* metaObj
    PMBicubicPatch* o = ( PMBicubicPatch* ) object;
 
    int u, v;
-   QString str, line;
+   TQString str, line;
    dev->objectBegin( "bicubic_patch" );
 
    dev->writeName( object->name( ) );
@@ -47,7 +47,7 @@ void PMPov31SerBicubicPatch( const PMObject* object, const PMMetaObject* metaObj
    {
       line = o->controlPoint( v*4 ).serialize( );
       for( u = 1; u < 4; u++ )
-         line += QString( ", " ) + o->controlPoint( u+4*v ).serialize( );
+         line += TQString( ", " ) + o->controlPoint( u+4*v ).serialize( );
       if( v != 3 )
          line += ",";
       dev->writeLine( line );
@@ -61,7 +61,7 @@ void PMPov31SerBlendMapModifiers( const PMObject* object, const PMMetaObject*, P
 {
    PMBlendMapModifiers* o = ( PMBlendMapModifiers* ) object;
 
-   QString str;
+   TQString str;
 
    if( o->isFrequencyEnabled( ) )
    {
@@ -109,7 +109,7 @@ void PMPov31SerBlob( const PMObject* object, const PMMetaObject* metaObject, PMO
    dev->objectBegin( "blob" );
 
    dev->writeName( object->name( ) );
-   dev->writeLine( QString( "threshold %1" ).arg( o->threshold( ) ) );
+   dev->writeLine( TQString( "threshold %1" ).arg( o->threshold( ) ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
 
@@ -128,11 +128,11 @@ void PMPov31SerBlobCylinder( const PMObject* object, const PMMetaObject* metaObj
    dev->objectBegin( "cylinder" );
 
    dev->writeName( object->name( ) );
-   QString str1;
+   TQString str1;
    str1.setNum( o->radius( ) );
    dev->writeLine( o->end1( ).serialize( ) + ", " + o->end2( ).serialize( )
                   + ", " + str1 + "," );
-   dev->writeLine( QString( "strength %1" ).arg( o->strength( ) ) );
+   dev->writeLine( TQString( "strength %1" ).arg( o->strength( ) ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
    dev->objectEnd( );
@@ -144,8 +144,8 @@ void PMPov31SerBlobSphere( const PMObject* object, const PMMetaObject* metaObjec
 
    dev->objectBegin( "sphere" );
    dev->writeName( object->name( ) );
-   dev->writeLine( o->centre( ).serialize( ) + QString( ", %1," ).arg( o->radius( ) ) );
-   dev->writeLine( QString( "strength %1" ).arg( o->strength( ) ) );
+   dev->writeLine( o->centre( ).serialize( ) + TQString( ", %1," ).arg( o->radius( ) ) );
+   dev->writeLine( TQString( "strength %1" ).arg( o->strength( ) ) );
    dev->callSerialization( object, metaObject->superClass( ) );
    dev->objectEnd( );
 }
@@ -178,7 +178,7 @@ void PMPov31SerBumpMap( const PMObject* object, const PMMetaObject*, PMOutputDev
 {
    PMBumpMap* o = ( PMBumpMap* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "bump_map" );
 
@@ -262,7 +262,7 @@ void PMPov31SerCamera( const PMObject* object, const PMMetaObject* metaObject, P
    PMCamera* o = ( PMCamera* ) object;
 
    dev->objectBegin( "camera" );
-   QString str;
+   TQString str;
 
    dev->writeName( object->name( ) );
 
@@ -341,13 +341,13 @@ void PMPov31SerCone( const PMObject* object, const PMMetaObject* metaObject, PMO
    dev->objectBegin( "cone" );
 
    dev->writeName( object->name( ) );
-   QString str1;
+   TQString str1;
    str1.setNum( o->radius1( ) );
    dev->writeLine( o->end1( ).serialize( ) + ", " + str1 + "," );
    str1.setNum( o->radius2( ) );
    dev->writeLine( o->end2( ).serialize( ) + ", " + str1 );
    if( o->open( ) )
-      dev->writeLine( QString( "open" ) );
+      dev->writeLine( TQString( "open" ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
    dev->objectEnd( );
@@ -385,12 +385,12 @@ void PMPov31SerCylinder( const PMObject* object, const PMMetaObject* metaObject,
    dev->objectBegin( "cylinder" );
 
    dev->writeName( object->name( ) );
-   QString str1;
+   TQString str1;
    str1.setNum( o->radius( ) );
    dev->writeLine( o->end1( ).serialize( ) + ", " + o->end2( ).serialize( )
                   + ", " + str1 );
    if( o->open( ) )
-      dev->writeLine( QString( "open" ) );
+      dev->writeLine( TQString( "open" ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
    dev->objectEnd( );
@@ -428,7 +428,7 @@ void PMPov31SerDisc( const PMObject* object, const PMMetaObject* metaObject, PMO
    dev->objectBegin( "disc" );
 
    dev->writeName( object->name( ) );
-   QString str1, str2;
+   TQString str1, str2;
    str1.setNum( o->radius( ) );
    if( o->radius( ) != 0.0 )
    {
@@ -447,7 +447,7 @@ void PMPov31SerFinish( const PMObject* object, const PMMetaObject* metaObject, P
 {
    PMFinish* o = ( PMFinish* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "finish" );
 
@@ -525,7 +525,7 @@ void PMPov31SerFog( const PMObject* object, const PMMetaObject*, PMOutputDevice*
 {
    PMFog* o = ( PMFog* ) object;
 
-   QString str;
+   TQString str;
 
    dev->objectBegin( "fog" );
 
@@ -539,12 +539,12 @@ void PMPov31SerFog( const PMObject* object, const PMMetaObject*, PMOutputDevice*
          dev->writeLine( o->linkedObject( )->id( ) );
       else
       {
-         QString text;
+         TQString text;
          text = o->name( );
          if( text.isEmpty( ) )
             text = o->description( );
 
-         dev->writeComment( QString( "No prototype for %1" ).arg( text ) );
+         dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
       }
    }
 
@@ -615,7 +615,7 @@ void PMPov31SerGlobalSettings( const PMObject* object, const PMMetaObject*, PMOu
 {
    PMGlobalSettings* o = ( PMGlobalSettings* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "global_settings" );
 
@@ -727,7 +727,7 @@ void PMPov31SerHeightField( const PMObject* object, const PMMetaObject* metaObje
 
    dev->writeLine( o->typeToString( o->heightFieldType( ) ) + " \"" + o->fileName( ) + "\"" );
    if( o->waterLevel( ) > 0.0 )
-      dev->writeLine( QString( "water_level %1" ).arg( o->waterLevel( ) ) );
+      dev->writeLine( TQString( "water_level %1" ).arg( o->waterLevel( ) ) );
    if( !o->hierarchy( ) )
       dev->writeLine( "hierarchy off" );
    if( o->smooth( ) )
@@ -741,10 +741,10 @@ void PMPov31SerImageMap( const PMObject* object, const PMMetaObject*, PMOutputDe
 {
    PMImageMap* o = ( PMImageMap* ) object;
 
-   typedef QValueList<PMPaletteValue> PMPaletteValueList;
+   typedef TQValueList<PMPaletteValue> PMPaletteValueList;
    PMPaletteValueList values;
    PMPaletteValueList::ConstIterator tmpPalette;
-   QString str1, str2;
+   TQString str1, str2;
 
    dev->objectBegin( "image_map" );
 
@@ -846,7 +846,7 @@ void PMPov31SerInterior( const PMObject* object, const PMMetaObject* metaObject,
 {
    PMInterior* o = ( PMInterior* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "interior" );
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -885,14 +885,14 @@ void PMPov31SerJuliaFractal( const PMObject* object, const PMMetaObject* metaObj
    dev->writeLine( o->algebraTypeToString( o->algebraType( ) ) );
 
    if( o->functionType( ) == PMJuliaFractal::FTpwr )
-      dev->writeLine( QString( "pwr(%1, %2)" ).arg( o->exponent( )[0] ).
+      dev->writeLine( TQString( "pwr(%1, %2)" ).arg( o->exponent( )[0] ).
                      arg( o->exponent( )[1] ) );
    else
       dev->writeLine( o->functionTypeToString( o->functionType( ) ) );
 
-   dev->writeLine( QString( "max_iteration %1" ).arg( o->maximumIterations( ) ) );
-   dev->writeLine( QString( "precision %1" ).arg( o->precision( ) ) );
-   dev->writeLine( QString( "slice %1, %2" ).arg( o->sliceNormal( ).serialize( ) )
+   dev->writeLine( TQString( "max_iteration %1" ).arg( o->maximumIterations( ) ) );
+   dev->writeLine( TQString( "precision %1" ).arg( o->precision( ) ) );
+   dev->writeLine( TQString( "slice %1, %2" ).arg( o->sliceNormal( ).serialize( ) )
                   .arg( o->sliceDistance( ) ) );
 
 
@@ -925,11 +925,11 @@ void PMPov31SerLathe( const PMObject* object, const PMMetaObject* metaObject, PM
    }
 
    int num = o->points( ).count( );
-   dev->writeLine( QString( "%1," ).arg( num ) );
+   dev->writeLine( TQString( "%1," ).arg( num ) );
 
    bool first = true;
-   QValueList<PMVector> points = o->points( );
-   QValueList<PMVector>::ConstIterator it = points.begin( );
+   TQValueList<PMVector> points = o->points( );
+   TQValueList<PMVector>::ConstIterator it = points.begin( );
    for( ; it != points.end( ); ++it )
    {
       if( !first )
@@ -953,49 +953,49 @@ void PMPov31SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
 {
    PMLight* o = ( PMLight* ) object;
 
-   dev->objectBegin( QString( "light_source" ) );
+   dev->objectBegin( TQString( "light_source" ) );
 
    dev->writeName( object->name( ) );
    dev->writeLine( o->location( ).serialize( ) + ", " + o->color( ).serialize( ) );
 
    if( o->lightType( ) == PMLight::SpotLight )
-      dev->writeLine( QString( "spotlight" ) );
+      dev->writeLine( TQString( "spotlight" ) );
    else if( o->lightType( ) == PMLight::CylinderLight )
-      dev->writeLine( QString( "cylinder" ) );
+      dev->writeLine( TQString( "cylinder" ) );
    else if( o->lightType( ) == PMLight::ShadowlessLight )
-      dev->writeLine( QString( "shadowless" ) );
+      dev->writeLine( TQString( "shadowless" ) );
 
    if( ( o->lightType( ) == PMLight::SpotLight ) ||
        ( o->lightType( ) == PMLight::CylinderLight ) )
    {
-      dev->writeLine( QString( "radius %1" ).arg( o->radius( ) ) );
-      dev->writeLine( QString( "falloff %1" ).arg( o->falloff( ) ) );
+      dev->writeLine( TQString( "radius %1" ).arg( o->radius( ) ) );
+      dev->writeLine( TQString( "falloff %1" ).arg( o->falloff( ) ) );
       if( o->tightness( ) != c_defaultLightTightness )
-         dev->writeLine( QString( "tightness %1" ).arg( o->tightness( ) ) );
-      dev->writeLine( QString( "point_at " ) + o->pointAt( ).serialize( ) );
+         dev->writeLine( TQString( "tightness %1" ).arg( o->tightness( ) ) );
+      dev->writeLine( TQString( "point_at " ) + o->pointAt( ).serialize( ) );
    }
 
    if( o->isAreaLight( ) )
    {
-      dev->writeLine( QString( "area_light " ) + o->axis1( ).serialize( )
-                     + QString( ", " ) + o->axis2( ).serialize( )
-                     + QString( ", %1, %2" ).arg( o->size1( ) ).arg( o->size2( ) ) );
+      dev->writeLine( TQString( "area_light " ) + o->axis1( ).serialize( )
+                     + TQString( ", " ) + o->axis2( ).serialize( )
+                     + TQString( ", %1, %2" ).arg( o->size1( ) ).arg( o->size2( ) ) );
       if( o->adaptive( ) != c_defaultLightAdaptive )
-         dev->writeLine( QString( "adaptive %1" ).arg( o->adaptive( ) ) );
+         dev->writeLine( TQString( "adaptive %1" ).arg( o->adaptive( ) ) );
       if( o->jitter( ) )
-         dev->writeLine( QString( "jitter" ) );
+         dev->writeLine( TQString( "jitter" ) );
    }
 
    if( o->fading( ) )
    {
-      dev->writeLine( QString( "fade_distance %1" ).arg( o->fadeDistance( ) ) );
-      dev->writeLine( QString( "fade_power %1" ).arg( o->fadePower( ) ) );
+      dev->writeLine( TQString( "fade_distance %1" ).arg( o->fadeDistance( ) ) );
+      dev->writeLine( TQString( "fade_power %1" ).arg( o->fadePower( ) ) );
    }
 
    if( !o->mediaInteraction( ) )
-      dev->writeLine( QString( "media_interaction off" ) );
+      dev->writeLine( TQString( "media_interaction off" ) );
    if( !o->mediaAttenuation( ) )
-      dev->writeLine( QString( "media_attenuation off" ) );
+      dev->writeLine( TQString( "media_attenuation off" ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
    dev->objectEnd( );
@@ -1005,7 +1005,7 @@ void PMPov31SerListPattern( const PMObject* object, const PMMetaObject* metaObje
 {
    PMListPattern* o = ( PMListPattern* ) object;
 
-   QString str1;
+   TQString str1;
 
    switch( o->listType( ) )
    {
@@ -1055,7 +1055,7 @@ void PMPov31SerNormalList( const PMObject* object, const PMMetaObject*, PMOutput
 {
    PMNormalList* o = ( PMNormalList* ) object;
 
-   QString str1;
+   TQString str1;
 
    switch( o->listType( ) )
    {
@@ -1102,7 +1102,7 @@ void PMPov31SerMaterialMap( const PMObject* object, const PMMetaObject* metaObje
 {
    PMMaterialMap* o = ( PMMaterialMap* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "material_map" );
 
@@ -1187,8 +1187,8 @@ void PMPov31SerMedia( const PMObject* object, const PMMetaObject* metaObject, PM
 {
    PMMedia* o = ( PMMedia* ) object;
 
-   QString str1;
-   QString str2;
+   TQString str1;
+   TQString str2;
 
    dev->objectBegin( "media" );
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -1257,7 +1257,7 @@ void PMPov31SerNormal( const PMObject* object, const PMMetaObject* metaObject, P
 {
    PMNormal* o = ( PMNormal* ) object;
 
-   QString str1;
+   TQString str1;
    bool bObject = true;
 
    if( o->parent( ) )
@@ -1297,12 +1297,12 @@ void PMPov31SerObjectLink( const PMObject* object, const PMMetaObject* metaObjec
    }
    if( writeComment )
    {
-      QString text;
+      TQString text;
       text = o->name( );
       if( text.isEmpty( ) )
          text = o->description( );
 
-      dev->writeComment( QString( "No prototype for %1" ).arg( text ) );
+      dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
    }
 }
 
@@ -1314,7 +1314,7 @@ void PMPov31SerPattern( const PMObject* object, const PMMetaObject*, PMOutputDev
 {
    PMPattern* o = ( PMPattern* ) object;
 
-   QString str;
+   TQString str;
 
    // pattern type
    switch( o->patternType( ) )
@@ -1476,7 +1476,7 @@ void PMPov31SerPlane( const PMObject* object, const PMMetaObject* metaObject, PM
    dev->objectBegin( "plane" );
 
    dev->writeName( object->name( ) );
-   QString str1;
+   TQString str1;
    str1.setNum( o->distance( ) );
    dev->writeLine( o->normal( ).serialize( ) + ", "  + str1 );
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -1501,23 +1501,23 @@ void PMPov31SerPolynom( const PMObject* object, const PMMetaObject* metaObject, 
 
    if( o->polynomOrder( ) == 2 )
    {
-      dev->writeLine( QString( "<%1, %2, %3>," ).arg( coefficients[0] )
+      dev->writeLine( TQString( "<%1, %2, %3>," ).arg( coefficients[0] )
                      .arg( coefficients[4] ).arg( coefficients[7] ) );
-      dev->writeLine( QString( "<%1, %2, %3>," ).arg( coefficients[1] )
+      dev->writeLine( TQString( "<%1, %2, %3>," ).arg( coefficients[1] )
                      .arg( coefficients[2] ).arg( coefficients[5] ) );
-      dev->writeLine( QString( "<%1, %2, %3>, %4" ).arg( coefficients[3] )
+      dev->writeLine( TQString( "<%1, %2, %3>, %4" ).arg( coefficients[3] )
                      .arg( coefficients[6] ).arg( coefficients[8] )
                      .arg( coefficients[9] ) );
    }
    else
    {
       if( o->polynomOrder( ) > 4 )
-         dev->writeLine( QString( "%1," ).arg( o->polynomOrder( ) ) );
+         dev->writeLine( TQString( "%1," ).arg( o->polynomOrder( ) ) );
 
       int size = coefficients.size( );
 
       int i;
-      QString hlp;
+      TQString hlp;
 
       dev->write( "<" );
       for( i = 0; i < size; i++ )
@@ -1545,13 +1545,13 @@ void PMPov31SerPovrayMatrix( const PMObject* object, const PMMetaObject*, PMOutp
 {
    PMPovrayMatrix* o = ( PMPovrayMatrix* ) object;
 
-   dev->writeLine( QString( "matrix < %1, %2, %3," ).arg( o->values( )[0] )
+   dev->writeLine( TQString( "matrix < %1, %2, %3," ).arg( o->values( )[0] )
                   .arg( o->values( )[1] ).arg( o->values( )[2] ) );
-   dev->writeLine( QString( "         %1, %2, %3," ).arg( o->values( )[3] )
+   dev->writeLine( TQString( "         %1, %2, %3," ).arg( o->values( )[3] )
                   .arg( o->values( )[4] ).arg( o->values( )[5] ) );
-   dev->writeLine( QString( "         %1, %2, %3," ).arg( o->values( )[6] )
+   dev->writeLine( TQString( "         %1, %2, %3," ).arg( o->values( )[6] )
                   .arg( o->values( )[7] ).arg( o->values( )[8] ) );
-   dev->writeLine( QString( "         %1, %2, %3 >" ).arg( o->values( )[9] )
+   dev->writeLine( TQString( "         %1, %2, %3 >" ).arg( o->values( )[9] )
                   .arg( o->values( )[10] ).arg( o->values( )[11] ) );
 }
 
@@ -1587,11 +1587,11 @@ void PMPov31SerPrism( const PMObject* object, const PMMetaObject* metaObject, PM
          dev->writeLine( "conic_sweep" );
          break;
    }
-   dev->writeLine( QString( "%1, %2," ).arg( o->height1( ) ).arg( o->height2( ) ) );
+   dev->writeLine( TQString( "%1, %2," ).arg( o->height1( ) ).arg( o->height2( ) ) );
 
    // count number of points
-   QValueList< QValueList<PMVector> > points = o->points( );
-   QValueList< QValueList<PMVector> >::ConstIterator spit = points.begin( );
+   TQValueList< TQValueList<PMVector> > points = o->points( );
+   TQValueList< TQValueList<PMVector> >::ConstIterator spit = points.begin( );
    int lines = 0;
    for( ; spit != points.end( ); ++spit )
    {
@@ -1600,14 +1600,14 @@ void PMPov31SerPrism( const PMObject* object, const PMMetaObject* metaObject, PM
       else
          lines += ( *spit ).count( ) / 3 * 4;
    }
-   dev->writeLine( QString( "%1," ).arg( lines ) );
+   dev->writeLine( TQString( "%1," ).arg( lines ) );
 
    for( spit = points.begin( ); spit != points.end( ); ++spit )
    {
       bool first = true;
 
-      QValueList<PMVector> fullPoints = o->expandedPoints( *spit );
-      QValueList<PMVector>::ConstIterator it = fullPoints.begin( );
+      TQValueList<PMVector> fullPoints = o->expandedPoints( *spit );
+      TQValueList<PMVector>::ConstIterator it = fullPoints.begin( );
 
       for( ; it != fullPoints.end( ); ++it )
       {
@@ -1616,7 +1616,7 @@ void PMPov31SerPrism( const PMObject* object, const PMMetaObject* metaObject, PM
          dev->write( ( *it ).serialize( ) );
          first = false;
       }
-      QValueList< QValueList<PMVector> >::ConstIterator spit2 = spit;
+      TQValueList< TQValueList<PMVector> >::ConstIterator spit2 = spit;
       spit2++;
       if( spit2 != points.end( ) )
          dev->write( "," );
@@ -1643,7 +1643,7 @@ void PMPov31SerRainbow( const PMObject* object, const PMMetaObject* metaObject, 
 {
    PMRainbow* o = ( PMRainbow* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "rainbow" );
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -1691,8 +1691,8 @@ void PMPov31SerRaw( const PMObject* object, const PMMetaObject*, PMOutputDevice*
 
    dev->writeLine( "//*PMRawBegin" );
 
-   QString tmp = o->code( );
-   QTextStream str( &tmp, IO_ReadOnly );
+   TQString tmp = o->code( );
+   TQTextStream str( &tmp, IO_ReadOnly );
    while( !str.atEnd( ) )
       dev->writeLine( str.readLine( ) );
 
@@ -1704,8 +1704,8 @@ void PMPov31SerRotate( const PMObject* object, const PMMetaObject*, PMOutputDevi
    PMRotate* o = ( PMRotate* ) object;
    PMVector rotate = o->rotation( );
 
-   QString vector;
-   QTextStream str( &vector, IO_WriteOnly );
+   TQString vector;
+   TQTextStream str( &vector, IO_WriteOnly );
    int i;
    bool z[3];
 
@@ -1756,7 +1756,7 @@ void PMPov31SerScale( const PMObject* object, const PMMetaObject* , PMOutputDevi
 
    if( approx( scale[0], scale[1] ) &&
        approx( scale[1], scale[2] ) )
-      dev->writeLine( QString( "scale %1" ).arg( scale[0] ) );
+      dev->writeLine( TQString( "scale %1" ).arg( scale[0] ) );
    else
       dev->writeLine( "scale " + scale.serialize( ) );
 }
@@ -1777,7 +1777,7 @@ void PMPov31SerSlope( const PMObject* object, const PMMetaObject* , PMOutputDevi
 {
    PMSlope* o = ( PMSlope* ) object;
 
-   QString str1,str2;
+   TQString str1,str2;
 
    str1.setNum(o->height( ));
    str2.setNum(o->slope( ));
@@ -1821,11 +1821,11 @@ void PMPov31SerSurfaceOfRevolution( const PMObject* object, const PMMetaObject* 
    dev->writeName( object->name( ) );
 
    int num = o->points( ).count( );
-   dev->writeLine( QString( "%1," ).arg( num ) );
+   dev->writeLine( TQString( "%1," ).arg( num ) );
 
    bool first = true;
-   QValueList<PMVector> points = o->points( );
-   QValueList<PMVector>::ConstIterator it = points.begin( );
+   TQValueList<PMVector> points = o->points( );
+   TQValueList<PMVector>::ConstIterator it = points.begin( );
    for( ; it != points.end( ); ++it )
    {
       if( !first )
@@ -1850,7 +1850,7 @@ void PMPov31SerSphere( const PMObject* object, const PMMetaObject* metaObject, P
 
    dev->objectBegin( "sphere" );
    dev->writeName( object->name( ) );
-   QString str;
+   TQString str;
    str.setNum( o->radius( ) );
    dev->writeLine( o->centre( ).serialize( ) + ", " + str );
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -1864,7 +1864,7 @@ void PMPov31SerSuperquadricEllipsoid( const PMObject* object, const PMMetaObject
    dev->objectBegin( "superellipsoid" );
 
    dev->writeName( object->name( ) );
-   dev->writeLine( QString( "<%1, %2>" ).arg( o->eastWestExponent( ) )
+   dev->writeLine( TQString( "<%1, %2>" ).arg( o->eastWestExponent( ) )
                   .arg( o->northSouthExponent( ) ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -1878,9 +1878,9 @@ void PMPov31SerText( const PMObject* object, const PMMetaObject* metaObject, PMO
    dev->objectBegin( "text" );
 
    dev->writeName( object->name( ) );
-   dev->writeLine( QString( "ttf \"" ) + o->font( ) + "\"" );
+   dev->writeLine( TQString( "ttf \"" ) + o->font( ) + "\"" );
    dev->writeLine( PMOutputDevice::escapeAndQuoteString( o->text( ) ) );
-   dev->writeLine( QString( "%1, " ).arg( o->thickness( ) )
+   dev->writeLine( TQString( "%1, " ).arg( o->thickness( ) )
                   + o->offset( ).serialize( ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
@@ -1917,12 +1917,12 @@ void PMPov31SerTextureBase( const PMObject* object, const PMMetaObject* metaObje
          dev->writeLine( linkedObject->id( ) );
       else
       {
-         QString text;
+         TQString text;
          text = o->name( );
          if( text.isEmpty( ) )
             text = o->description( );
 
-         dev->writeComment( QString( "No prototype for %1" ).arg( text ) );
+         dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
       }
    }
 
@@ -1933,8 +1933,8 @@ void PMPov31SerTextureMapBase( const PMObject* object, const PMMetaObject* , PMO
 {
    PMTextureMapBase* o = ( PMTextureMapBase* ) object;
 
-   QValueList<double> mapValues = o->mapValues( );
-   QValueList<double>::ConstIterator it = mapValues.begin( );
+   TQValueList<double> mapValues = o->mapValues( );
+   TQValueList<double>::ConstIterator it = mapValues.begin( );
    PMObject* c = o->firstChild( );
    double value = 0.0;
 
@@ -1945,12 +1945,12 @@ void PMPov31SerTextureMapBase( const PMObject* object, const PMMetaObject* , PMO
          dev->writeLine( o->linkedObject( )->id( ) );
       else
       {
-         QString text;
+         TQString text;
          text = o->name( );
          if( text.isEmpty( ) )
             text = o->description( );
 
-         dev->writeComment( QString( "No prototype for %1" ).arg( text ) );
+         dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
       }
    }
 
@@ -1962,7 +1962,7 @@ void PMPov31SerTextureMapBase( const PMObject* object, const PMMetaObject* , PMO
          value = 1.0;
          if( it != mapValues.end( ) )
             value = *it;
-         dev->write( QString( "[ %1 " ).arg( value ) );
+         dev->write( TQString( "[ %1 " ).arg( value ) );
          dev->serialize( c );
          dev->writeLine( "]" );
          ++it;
@@ -2018,14 +2018,14 @@ void PMPov31SerTorus( const PMObject* object, const PMMetaObject* metaObject, PM
 
    dev->objectBegin( "torus" );
    dev->writeName( object->name( ) );
-   QString strMinor;
-   QString strMajor;
+   TQString strMinor;
+   TQString strMajor;
    strMinor.setNum( o->minorRadius( ) );
    strMajor.setNum( o->majorRadius( ) );
 
    dev->writeLine(strMajor + ", " + strMinor);
    if( o->sturm( ) )
-      dev->writeLine( QString( "sturm" ) );
+      dev->writeLine( TQString( "sturm" ) );
 
    dev->callSerialization( object, metaObject->superClass( ) );
    dev->objectEnd( );
@@ -2035,8 +2035,8 @@ void PMPov31SerTranslate( const PMObject* object, const PMMetaObject* , PMOutput
 {
    PMTranslate* o = ( PMTranslate* ) object;
 
-   QString vector;
-   QTextStream str( &vector, IO_WriteOnly );
+   TQString vector;
+   TQTextStream str( &vector, IO_WriteOnly );
    int i;
    bool z[3];
    PMVector move = o->translation( );
@@ -2130,7 +2130,7 @@ void PMPov31SerWarp( const PMObject* object, const PMMetaObject* , PMOutputDevic
 {
    PMWarp* o = ( PMWarp* ) object;
 
-   QString str1;
+   TQString str1;
 
    dev->objectBegin( "warp" );
    switch( o->warpType( ) )

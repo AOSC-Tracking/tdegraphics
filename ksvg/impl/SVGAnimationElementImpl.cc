@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 #include "CanvasItem.h"
 #include "SVGHelperImpl.h"
@@ -74,10 +74,10 @@ SVGElementImpl *SVGAnimationElementImpl::targetElement() const
 	return m_targetElement;
 }
 
-double SVGAnimationElementImpl::parseClockValue(const QString &data) const
+double SVGAnimationElementImpl::parseClockValue(const TQString &data) const
 {
-	QString parse = data.stripWhiteSpace();
-	QString debugOutput = "parseClockValue(" + parse + ") -> ";
+	TQString parse = data.stripWhiteSpace();
+	TQString debugOutput = "parseClockValue(" + parse + ") -> ";
 	
 	if(parse == "indefinite") // Saves some time...
 		return -1;
@@ -98,7 +98,7 @@ double SVGAnimationElementImpl::parseClockValue(const QString &data) const
 
 		if(parse.find('.') != -1)
 		{
-			QString temp = parse.mid(9, 2);
+			TQString temp = parse.mid(9, 2);
 			milliseconds = temp.toUInt();
 			result += (milliseconds * (1 / pow(10.0, temp.length())));
 		}
@@ -113,7 +113,7 @@ double SVGAnimationElementImpl::parseClockValue(const QString &data) const
 
 		if(parse.find('.') != -1)
 		{
-			QString temp = parse.mid(6, 2);
+			TQString temp = parse.mid(6, 2);
 			milliseconds = temp.toUInt();
 			result += (milliseconds * (1 / pow(10.0, temp.length())));
 		}
@@ -129,7 +129,7 @@ double SVGAnimationElementImpl::parseClockValue(const QString &data) const
 			else
 			{
 				result = parse.mid(0, dotPosition).toUInt() * 3600;
-				QString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 2);
+				TQString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 2);
 				result += (3600.0 * temp.toUInt()) * (1 / pow(10.0, temp.length()));
 			}
 		}
@@ -140,7 +140,7 @@ double SVGAnimationElementImpl::parseClockValue(const QString &data) const
 			else
 			{
 				result = parse.mid(0, dotPosition).toUInt() * 60;
-				QString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 4);
+				TQString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 4);
 				result += (60.0 * temp.toUInt()) * (1 / pow(10.0, temp.length()));
 			}
 		}
@@ -151,7 +151,7 @@ double SVGAnimationElementImpl::parseClockValue(const QString &data) const
 			else
 			{
 				result = parse.mid(0, dotPosition).toUInt() / 1000.0;
-				QString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 3);
+				TQString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 3);
 				result += (temp.toUInt() / 1000.0) * (1 / pow(10.0, temp.length()));
 			}
 		}
@@ -162,7 +162,7 @@ double SVGAnimationElementImpl::parseClockValue(const QString &data) const
 			else
 			{
 				result = parse.mid(0, dotPosition).toUInt();
-				QString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 2);
+				TQString temp = parse.mid(dotPosition + 1, parse.length() - dotPosition - 2);
 				result += temp.toUInt() * (1 / pow(10.0, temp.length()));
 			}
 		}
@@ -229,7 +229,7 @@ void SVGAnimationElementImpl::putValueProperty(ExecState *exec, int token, const
 	if(!(attr & KJS::Internal))
 		return;
 
-	QString val = value.toString(exec).qstring();
+	TQString val = value.toString(exec).qstring();
 	switch(token)
 	{
 		case Href:
@@ -293,12 +293,12 @@ void SVGAnimationElementImpl::putValueProperty(ExecState *exec, int token, const
 			// Parse data
 			for(unsigned int i = 0; i < temp->numberOfItems(); i++)
 			{
-				QString current = temp->getItem(i)->string();
+				TQString current = temp->getItem(i)->string();
 				
 				if(current.startsWith("accessKey"))
 				{
 					// Register keyDownEventListener for the character
-					QString character = current.mid(current.length() - 2, 1);
+					TQString character = current.mid(current.length() - 2, 1);
 
 					kdDebug() << "ACCESSKEY CHARACTER " << character << endl;
 				}
@@ -307,7 +307,7 @@ void SVGAnimationElementImpl::putValueProperty(ExecState *exec, int token, const
 					int firstBrace = current.find("(");
 					int secondBrace = current.find(")");
 					
-					QString wallclockValue = current.mid(firstBrace + 1, secondBrace - firstBrace - 2);
+					TQString wallclockValue = current.mid(firstBrace + 1, secondBrace - firstBrace - 2);
 
 					kdDebug() << "WALLCLOCK VALUE " << wallclockValue << endl;
 				}	
@@ -315,8 +315,8 @@ void SVGAnimationElementImpl::putValueProperty(ExecState *exec, int token, const
 				{
 					int dotPosition = current.find(".");
 					
-					QString element = current.mid(0, dotPosition);
-					QString clockValue;
+					TQString element = current.mid(0, dotPosition);
+					TQString clockValue;
 
 					if(current.contains("begin"))
 						clockValue = current.mid(dotPosition + 6);
@@ -333,7 +333,7 @@ void SVGAnimationElementImpl::putValueProperty(ExecState *exec, int token, const
 						else if(current.contains("-"))
 							plusMinusPosition = current.find("-");
 
-						QString event = current.mid(dotPosition + 1, plusMinusPosition - dotPosition - 1);
+						TQString event = current.mid(dotPosition + 1, plusMinusPosition - dotPosition - 1);
 
 						clockValue = current.mid(dotPosition + event.length() + 1);
 						kdDebug() << "EVENT " << event << endl;
@@ -427,7 +427,7 @@ void SVGAnimationElementImpl::setTargetElement(SVGElementImpl *target)
 	m_targetElement->ref();
 }
 
-void SVGAnimationElementImpl::applyAttribute(const QString &name, const QString &value)
+void SVGAnimationElementImpl::applyAttribute(const TQString &name, const TQString &value)
 {
 	SVGElementImpl *target = targetElement();
 	if(!target)

@@ -4,13 +4,13 @@
 #define KSNAPSHOT_H
 #include "ksnapshotiface.h"
 
-#include <qbitmap.h>
-#include <qcursor.h>
-#include <qlabel.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qstyle.h>
-#include <qtimer.h>
+#include <tqbitmap.h>
+#include <tqcursor.h>
+#include <tqlabel.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqstyle.h>
+#include <tqtimer.h>
 
 #include <dcopclient.h>
 #include <kglobalsettings.h>
@@ -25,67 +25,67 @@ class KSnapshotPreview : public QLabel
     Q_OBJECT
 
     public:
-        KSnapshotPreview(QWidget *parent, const char *name = 0)
-            : QLabel(parent, name)
+        KSnapshotPreview(TQWidget *parent, const char *name = 0)
+            : TQLabel(parent, name)
         {
             setAlignment(AlignHCenter | AlignVCenter);
-            setCursor(QCursor(Qt::PointingHandCursor));
+            setCursor(TQCursor(Qt::PointingHandCursor));
         }
         virtual ~KSnapshotPreview() {}
 
-        void setPixmap(const QPixmap& pm)
+        void setPixmap(const TQPixmap& pm)
         {
             // if this looks convoluted, that's because it is. drawing a PE_SizeGrip
             // does unexpected things when painting directly onto the pixmap
-            QPixmap pixmap(pm);
-            QPixmap handle(15, 15);
-            QBitmap mask(15, 15, true);
+            TQPixmap pixmap(pm);
+            TQPixmap handle(15, 15);
+            TQBitmap mask(15, 15, true);
 
             {
-                QPainter p(&mask);
-                style().drawPrimitive(QStyle::PE_SizeGrip, &p, QRect(0, 0, 15, 15), palette().active());
+                TQPainter p(&mask);
+                style().drawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
                 p.end();
                 handle.setMask(mask);
             }
 
             {
-                QPainter p(&handle);
-                style().drawPrimitive(QStyle::PE_SizeGrip, &p, QRect(0, 0, 15, 15), palette().active());
+                TQPainter p(&handle);
+                style().drawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
                 p.end();
             }
 
-            QRect rect(pixmap.width() - 16, pixmap.height() - 16, 15, 15);
-            QPainter p(&pixmap);
+            TQRect rect(pixmap.width() - 16, pixmap.height() - 16, 15, 15);
+            TQPainter p(&pixmap);
             p.drawPixmap(rect, handle);
             p.end();
-            QLabel::setPixmap(pixmap);
+            TQLabel::setPixmap(pixmap);
         }
 
     signals:
         void startDrag();
 
     protected:
-        void mousePressEvent(QMouseEvent * e)
+        void mousePressEvent(TQMouseEvent * e)
         {
             mClickPt = e->pos();
         }
 
-        void mouseMoveEvent(QMouseEvent * e)
+        void mouseMoveEvent(TQMouseEvent * e)
         {
-            if (mClickPt != QPoint(0, 0) &&
+            if (mClickPt != TQPoint(0, 0) &&
                 (e->pos() - mClickPt).manhattanLength() > KGlobalSettings::dndEventDelay())
             {
-                mClickPt = QPoint(0, 0);
+                mClickPt = TQPoint(0, 0);
                 emit startDrag();
             }
         }
 
-        void mouseReleaseEvent(QMouseEvent * /*e*/)
+        void mouseReleaseEvent(TQMouseEvent * /*e*/)
         {
-            mClickPt = QPoint(0, 0);
+            mClickPt = TQPoint(0, 0);
         }
 
-        QPoint mClickPt;
+        TQPoint mClickPt;
 };
 
 class KSnapshot : public KDialogBase, virtual public KSnapshotIface
@@ -93,13 +93,13 @@ class KSnapshot : public KDialogBase, virtual public KSnapshotIface
   Q_OBJECT
 
 public:
-  KSnapshot(QWidget *parent= 0, const char *name= 0, bool grabCurrent=false);
+  KSnapshot(TQWidget *parent= 0, const char *name= 0, bool grabCurrent=false);
   ~KSnapshot();
 
   enum CaptureMode { FullScreen=0, WindowUnderCursor=1, Region=2, ChildWindow=3 };
 
-  bool save( const QString &filename );
-  QString url() const { return filename.url(); }
+  bool save( const TQString &filename );
+  TQString url() const { return filename.url(); }
 
 protected slots:
   void slotGrab();
@@ -110,24 +110,24 @@ protected slots:
   void slotMovePointer( int x, int y );
 
   void setTime(int newTime);
-  void setURL(const QString &newURL);
+  void setURL(const TQString &newURL);
   void setGrabMode( int m );
   void exit();
 
 protected:
     void reject() { close(); }
 
-    virtual void closeEvent( QCloseEvent * e );
-    void resizeEvent(QResizeEvent*);
-    bool eventFilter( QObject*, QEvent* );
+    virtual void closeEvent( TQCloseEvent * e );
+    void resizeEvent(TQResizeEvent*);
+    bool eventFilter( TQObject*, TQEvent* );
     
 private slots:
     void grabTimerDone();
     void slotDragSnapshot();
     void updateCaption();
     void updatePreview();
-    void slotRegionGrabbed( const QPixmap & );
-    void slotWindowGrabbed( const QPixmap & );
+    void slotRegionGrabbed( const TQPixmap & );
+    void slotWindowGrabbed( const TQPixmap & );
 
 private:
     bool save( const KURL& url );
@@ -136,10 +136,10 @@ private:
     int grabMode();
     int timeout();
 
-    QPixmap snapshot;
-    QTimer grabTimer;
-    QTimer updateTimer;
-    QWidget* grabber;
+    TQPixmap snapshot;
+    TQTimer grabTimer;
+    TQTimer updateTimer;
+    TQWidget* grabber;
     KURL filename;
     KSnapshotWidget *mainWidget;
     RegionGrabber *rgnGrab;

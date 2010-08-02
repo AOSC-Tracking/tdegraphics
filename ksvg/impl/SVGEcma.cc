@@ -405,7 +405,7 @@ Value SVGDOMNodeBridgeProtoFunc::call(ExecState *exec, Object &thisObj, const Li
 			{
 				SVGEvent::EventId eventId = SVGEvent::typeToId(args[0].toString(exec).string());
 				if(eventId != SVGEvent::UNKNOWN_EVENT)
-					element->setEventListener(eventId, new KSVGEcmaEventListener(Object::dynamicCast(args[1]), QString::null, doc->ecmaEngine()));
+					element->setEventListener(eventId, new KSVGEcmaEventListener(Object::dynamicCast(args[1]), TQString::null, doc->ecmaEngine()));
 			}
 			return Undefined();
 		}

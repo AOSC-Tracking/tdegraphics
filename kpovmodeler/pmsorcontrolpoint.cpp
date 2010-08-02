@@ -22,7 +22,7 @@
 PMSorControlPoint::PMSorControlPoint( PMSorControlPoint* prev,
                                       const PMVector& point,
                                       PMSorControlPoint::CPType type, int id,
-                                      const QString& description )
+                                      const TQString& description )
       : PMControlPoint( id, description )
 {
    m_point = point;

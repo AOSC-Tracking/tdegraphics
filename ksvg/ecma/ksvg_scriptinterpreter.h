@@ -21,7 +21,7 @@
 #ifndef KSVGScriptInterpreter_H
 #define KSVGScriptInterpreter_H
 
-#include <qptrdict.h>
+#include <tqptrdict.h>
 
 namespace KJS
 {
@@ -63,7 +63,7 @@ private:
 	
 	bool m_attributeGetMode, m_attributeSetMode;
 	
-	QPtrDict<KJS::ObjectImp> m_domObjects;
+	TQPtrDict<KJS::ObjectImp> m_domObjects;
 };
 
 #endif

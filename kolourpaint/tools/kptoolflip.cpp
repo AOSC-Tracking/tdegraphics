@@ -28,10 +28,10 @@
 
 #include <kptoolflip.h>
 
-#include <qapplication.h>
-#include <qradiobutton.h>
-#include <qvbox.h>
-#include <qvbuttongroup.h>
+#include <tqapplication.h>
+#include <tqradiobutton.h>
+#include <tqvbox.h>
+#include <tqvbuttongroup.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -63,9 +63,9 @@ kpToolFlipCommand::~kpToolFlipCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpToolFlipCommand::name () const
+TQString kpToolFlipCommand::name () const
 {
-    QString opName;
+    TQString opName;
 
     
 #if 1
@@ -80,7 +80,7 @@ QString kpToolFlipCommand::name () const
     else
     {
         kdError () << "kpToolFlipCommand::name() not asked to flip" << endl;
-        return QString::null;
+        return TQString::null;
     }
 #endif
 
@@ -120,7 +120,7 @@ void kpToolFlipCommand::flip ()
         return;
 
 
-    QApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (Qt::waitCursor);
 
     
     if (m_actOnSelection)
@@ -131,13 +131,13 @@ void kpToolFlipCommand::flip ()
     }
     else
     {
-        QPixmap newPixmap = kpPixmapFX::flip (*doc->pixmap (), m_horiz, m_vert);
+        TQPixmap newPixmap = kpPixmapFX::flip (*doc->pixmap (), m_horiz, m_vert);
 
         doc->setPixmap (newPixmap);
     }
 
 
-    QApplication::restoreOverrideCursor ();
+    TQApplication::restoreOverrideCursor ();
 }
 
 
@@ -149,12 +149,12 @@ void kpToolFlipCommand::flip ()
 bool kpToolFlipDialog::s_lastIsVerticalFlip = true;
 
 
-kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, QWidget *parent)
+kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, TQWidget *parent)
     : KDialogBase (parent, 0/*name*/, true/*modal*/,
                    actOnSelection ? i18n ("Flip Selection") : i18n ("Flip Image"),
                    KDialogBase::Ok | KDialogBase::Cancel)
 {
-    QVBox *vbox = makeVBoxMainWidget ();
+    TQVBox *vbox = makeVBoxMainWidget ();
 
     if (!vbox)
     {
@@ -162,19 +162,19 @@ kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, QWidget *parent)
     }
     else
     {
-        QVButtonGroup *buttonGroup = new QVButtonGroup (i18n ("Direction"), vbox);
+        TQVButtonGroup *buttonGroup = new TQVButtonGroup (i18n ("Direction"), vbox);
 
         // I'm sure vert flipping is much more common than horiz flipping so make it come first
-        m_verticalFlipRadioButton = new QRadioButton (i18n ("&Vertical (upside-down)"), buttonGroup);
-        m_horizontalFlipRadioButton = new QRadioButton (i18n ("&Horizontal"), buttonGroup);
+        m_verticalFlipRadioButton = new TQRadioButton (i18n ("&Vertical (upside-down)"), buttonGroup);
+        m_horizontalFlipRadioButton = new TQRadioButton (i18n ("&Horizontal"), buttonGroup);
 
         m_verticalFlipRadioButton->setChecked (s_lastIsVerticalFlip);
         m_horizontalFlipRadioButton->setChecked (!s_lastIsVerticalFlip);
 
-        connect (m_verticalFlipRadioButton, SIGNAL (toggled (bool)),
-                 this, SLOT (slotIsVerticalFlipChanged ()));
-        connect (m_horizontalFlipRadioButton, SIGNAL (toggled (bool)),
-                 this, SLOT (slotIsVerticalFlipChanged ()));
+        connect (m_verticalFlipRadioButton, TQT_SIGNAL (toggled (bool)),
+                 this, TQT_SLOT (slotIsVerticalFlipChanged ()));
+        connect (m_horizontalFlipRadioButton, TQT_SIGNAL (toggled (bool)),
+                 this, TQT_SLOT (slotIsVerticalFlipChanged ()));
     }
 }
 

@@ -25,7 +25,7 @@
 
 #include "SVGAnimationElementImpl.h"
 
-class QTimer;
+class TQTimer;
 
 namespace KSVG
 {
@@ -42,7 +42,7 @@ public:
 	virtual void setAttributes();
 
 private:
-	QString m_type, m_lastTransform;
+	TQString m_type, m_lastTransform;
 
 	int m_times;
 
@@ -53,7 +53,7 @@ private:
 	double m_from, m_to, m_newFrom, m_newTo;
 	double m_addStep;
 
-	QTimer *m_transformTimer;
+	TQTimer *m_transformTimer;
 	SVGTransformListImpl *m_transformList;
 
 	bool m_firstEvent;

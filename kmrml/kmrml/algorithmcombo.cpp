@@ -25,12 +25,12 @@ using namespace KMrml;
 // ### copycat of CollectionCombo... moc can't handle templates unfortunately..
 // could use base-class MrmlElement....
 
-AlgorithmCombo::AlgorithmCombo( QWidget *parent, const char *name )
+AlgorithmCombo::AlgorithmCombo( TQWidget *parent, const char *name )
     : KComboBox( false, parent, name ),
       m_algorithms( 0L )
 {
-    connect( this, SIGNAL( activated( const QString& ) ),
-             SLOT( slotActivated( const QString& ) ));
+    connect( this, TQT_SIGNAL( activated( const TQString& ) ),
+             TQT_SLOT( slotActivated( const TQString& ) ));
 }
 
 AlgorithmCombo::~AlgorithmCombo()
@@ -57,7 +57,7 @@ Algorithm AlgorithmCombo::current() const
     return m_algorithms->findByName( currentText() );
 }
 
-void AlgorithmCombo::slotActivated( const QString& name )
+void AlgorithmCombo::slotActivated( const TQString& name )
 {
     Algorithm coll = m_algorithms->findByName( name );
     emit selected( coll );

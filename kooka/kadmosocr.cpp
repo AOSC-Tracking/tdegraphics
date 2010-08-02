@@ -32,11 +32,11 @@
 
 /* Kadmos CPP object oriented interface */
 
-#include <qimage.h>
-#include <qpainter.h>
-#include <qstring.h>
-#include <qrect.h>
-#include <qstringlist.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqstring.h>
+#include <tqrect.h>
+#include <tqstringlist.h>
 
 #include <assert.h>
 
@@ -54,11 +54,11 @@ using namespace Kadmos;
 
 /* -------------------- CRep -------------------- */
 CRep::CRep()
-    :QObject()
+    :TQObject()
 {
   memset(&m_RepData, 0, sizeof(m_RepData));
   m_Error = RE_SUCCESS;
-  m_undetectChar = QChar('_');
+  m_undetectChar = TQChar('_');
 }
 
 CRep::~CRep()
@@ -161,8 +161,8 @@ ocrWordList CRep::getLineWords( int line )
 
         do
         {
-            QString resultWord;
-            QRect boundingRect;
+            TQString resultWord;
+            TQRect boundingRect;
 
             int newNextKnode = nextBestWord( line, nextKnode, resultWord, boundingRect );
             boundingRect.moveBy( repRes->left, repRes->top );
@@ -179,7 +179,7 @@ ocrWordList CRep::getLineWords( int line )
 
 
             // Alternativen:
-            // partStrings( line, nextKnode, QString());   // fills m_parts - list with alternative words
+            // partStrings( line, nextKnode, TQString());   // fills m_parts - list with alternative words
             // nextKnode = newNextKnode;
             // kdDebug(28000) << "NextKnodeWord: " << resultWord << endl;
         }
@@ -192,7 +192,7 @@ ocrWordList CRep::getLineWords( int line )
 /* This fills theWord with the next best word and returns the
  * next knode or 0 if there is no next node
  */
-int CRep::nextBestWord( int line, int knode, QString& theWord, QRect& brect )
+int CRep::nextBestWord( int line, int knode, TQString& theWord, TQRect& brect )
 {
 
     Kadmos::RelGraph  *relg = getGraphKnode( line, knode );
@@ -207,7 +207,7 @@ int CRep::nextBestWord( int line, int knode, QString& theWord, QRect& brect )
             // kdDebug(28000) << "Leading Blanks: " << relg->leading_blanks <<
             //    " und Knode " << knode << endl;
             char c = relr->rec_char[0][0];
-            QChar newChar = c;
+            TQChar newChar = c;
             if( c == 0 )
             {
                 kdDebug(28000) << "Undetected char found !" << endl;
@@ -227,7 +227,7 @@ int CRep::nextBestWord( int line, int knode, QString& theWord, QRect& brect )
 
                 /* save the bounding rect */
                 // kdDebug(28000) << "LEFT: " << relr->left << " TOP: " << relr->top << endl;
-                QRect r( relr->left, relr->top, relr->width, relr->height );
+                TQRect r( relr->left, relr->top, relr->width, relr->height );
 
                 if( brect.isNull() )
                 {
@@ -258,13 +258,13 @@ int CRep::nextBestWord( int line, int knode, QString& theWord, QRect& brect )
 
 
 
-void CRep::partStrings( int line, int graphKnode, QString soFar )
+void CRep::partStrings( int line, int graphKnode, TQString soFar )
 {
     /* The following knodes after a word break */
     Kadmos::RelGraph  *relg = getGraphKnode( line, graphKnode );
     // kdDebug(28000) << "GraphKnode is " << graphKnode << endl;
 
-    QString theWord="";
+    TQString theWord="";
     for( int resNo=0; resNo < SEG_ALT; resNo++ )
     {
         // kdDebug(28000) << "Alternative " << resNo << " is " << relg->result_number[resNo] << endl;
@@ -275,7 +275,7 @@ void CRep::partStrings( int line, int graphKnode, QString soFar )
         }
 
         Kadmos::RelResult *relr = getRelResult( line, relg, resNo );
-        theWord = QChar(relr->rec_char[0][0]);
+        theWord = TQChar(relr->rec_char[0][0]);
 
         if ( !soFar.isEmpty() && relg->leading_blanks )
         {
@@ -288,7 +288,7 @@ void CRep::partStrings( int line, int graphKnode, QString soFar )
         }
         else
         {
-            /* make a QString from this single char and append it. */
+            /* make a TQString from this single char and append it. */
             soFar += theWord;
         }
 
@@ -311,19 +311,19 @@ void CRep::partStrings( int line, int graphKnode, QString soFar )
 
 
 
-void CRep::drawCharBox( QPixmap *pix, const QRect& r )
+void CRep::drawCharBox( TQPixmap *pix, const TQRect& r )
 {
-    drawBox( pix, r, QColor( Qt::red ));
+    drawBox( pix, r, TQColor( Qt::red ));
 }
 
-void CRep::drawLineBox( QPixmap* pix, const QRect& r )
+void CRep::drawLineBox( TQPixmap* pix, const TQRect& r )
 {
-    drawBox( pix, r, QColor( Qt::blue ));
+    drawBox( pix, r, TQColor( Qt::blue ));
 }
 
-void CRep::drawBox( QPixmap* pix, const QRect& r, const QColor& color )
+void CRep::drawBox( TQPixmap* pix, const TQRect& r, const TQColor& color )
 {
-    QPainter p;
+    TQPainter p;
     p.begin(pix);
 
     p.setPen( color );
@@ -332,7 +332,7 @@ void CRep::drawBox( QPixmap* pix, const QRect& r, const QColor& color )
 
 
 
-KADMOS_ERROR CRep::SetImage( const QString file )
+KADMOS_ERROR CRep::SetImage( const TQString file )
 {
     ReImageHandle image_handle;
     image_handle = re_readimage(file.latin1(), &m_RepData.image);
@@ -345,7 +345,7 @@ KADMOS_ERROR CRep::SetImage( const QString file )
 
 }
 
-KADMOS_ERROR CRep::SetImage(QImage *Image)
+KADMOS_ERROR CRep::SetImage(TQImage *Image)
 {
     // memcpy(&m_RepData.image, Image.bits(), Image.numBytes());
     if( !Image ) return RE_PARAMETERERROR;
@@ -411,12 +411,12 @@ void CRep::CheckError()
     }
 }
 
-/* returns a QString containing the string describing the kadmos error */
-QString CRep::getErrorText() const
+/* returns a TQString containing the string describing the kadmos error */
+TQString CRep::getErrorText() const
 {
     re_ErrorText Err;
     re_GetErrorText(&Err);
-    return QString::fromLocal8Bit( Err.text );
+    return TQString::fromLocal8Bit( Err.text );
 }
 
 bool CRep::kadmosError()

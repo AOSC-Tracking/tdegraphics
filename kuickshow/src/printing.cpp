@@ -16,19 +16,19 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qgrid.h>
-#include <qhbox.h>
-#include <qlayout.h>
-#include <qimage.h>
+#include <tqcheckbox.h>
+#include <tqfont.h>
+#include <tqfontmetrics.h>
+#include <tqgrid.h>
+#include <tqhbox.h>
+#include <tqlayout.h>
+#include <tqimage.h>
 #include <kimageeffect.h>
-#include <qpaintdevicemetrics.h>
-#include <qpainter.h>
-#include <qradiobutton.h>
-#include <qvbuttongroup.h>
-#include <qcolor.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqpainter.h>
+#include <tqradiobutton.h>
+#include <tqvbuttongroup.h>
+#include <tqcolor.h>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -43,9 +43,9 @@
 #include "printing.h"
 #include "version.h"
 
-bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
+bool Printing::printImage( ImageWindow& imageWin, TQWidget *parent )
 {
-    QString imageURL = imageWin.url().prettyURL();
+    TQString imageURL = imageWin.url().prettyURL();
     KPrinter printer;
     printer.setDocName( imageURL );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
@@ -54,7 +54,7 @@ bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 
     if ( printer.setup( parent, i18n("Print %1").arg(printer.docName().section('/', -1)) ) )
     {
-        KTempFile tmpFile( QString::null, ".png" );
+        KTempFile tmpFile( TQString::null, ".png" );
         if ( tmpFile.status() == 0 )
         {
             tmpFile.setAutoDelete( true );
@@ -69,27 +69,27 @@ bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
     return true; // user aborted
 }
 
-bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
-                                 const QString& originalFileName )
+bool Printing::printImageWithQt( const TQString& filename, KPrinter& printer,
+                                 const TQString& originalFileName )
 {
-    QImage image( filename );
+    TQImage image( filename );
     if ( image.isNull() ) {
         kdWarning() << "Can't load image: " << filename << " for printing.\n";
         return false;
     }
 
-    QPainter p;
+    TQPainter p;
     p.begin( &printer );
 
-    QPaintDeviceMetrics metrics( &printer );
+    TQPaintDeviceMetrics metrics( &printer );
     p.setFont( KGlobalSettings::generalFont() );
-    QFontMetrics fm = p.fontMetrics();
+    TQFontMetrics fm = p.fontMetrics();
 
     int w = metrics.width();
     int h = metrics.height();
 
-    QString t = "true";
-    QString f = "false";
+    TQString t = "true";
+    TQString f = "false";
 
     // Black & white print?
     if ( printer.option( "app-kuickshow-blackwhite" ) != f) {
@@ -107,9 +107,9 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     // shrink image to pagesize, if necessary
     //
     bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
-    QSize imagesize = image.size();
+    TQSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
-        imagesize.scale( w, h, QSize::ScaleMin );
+        imagesize.scale( w, h, TQSize::ScaleMin );
     }
 
 
@@ -144,11 +144,11 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     // perform the actual drawing
     //
-    p.drawImage( QRect( x, y, imagesize.width(), imagesize.height()), image );
+    p.drawImage( TQRect( x, y, imagesize.width(), imagesize.height()), image );
 
     if ( printFilename )
     {
-        QString fname = minimizeString( originalFileName, fm, w );
+        TQString fname = minimizeString( originalFileName, fm, w );
         if ( !fname.isEmpty() )
         {
             int fw = fm.width( fname );
@@ -163,11 +163,11 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     return true;
 }
 
-QString Printing::minimizeString( QString text, const QFontMetrics&
+TQString Printing::minimizeString( TQString text, const TQFontMetrics&
                                   metrics, int maxWidth )
 {
     if ( text.length() <= 5 )
-        return QString::null; // no sense to cut that tiny little string
+        return TQString::null; // no sense to cut that tiny little string
 
     bool changed = false;
     while ( metrics.width( text ) > maxWidth )
@@ -181,7 +181,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
     {
         int mid = text.length() / 2;
         if ( mid <= 5 ) // sanity check
-            return QString::null;
+            return TQString::null;
 
         text.replace( mid - 1, 3, "..." );
     }
@@ -194,42 +194,42 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 ///////////////////////////////////////////////////////////////////
 
 
-KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
+KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *parent, const char *name )
     : KPrintDialogPage( parent, name )
 {
     setTitle( i18n("Image Settings") );
 
-    QVBoxLayout *layout = new QVBoxLayout( this );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
     layout->setMargin( KDialog::marginHint() );
     layout->setSpacing( KDialog::spacingHint() );
 
-    m_addFileName = new QCheckBox( i18n("Print fi&lename below image"), this);
+    m_addFileName = new TQCheckBox( i18n("Print fi&lename below image"), this);
     m_addFileName->setChecked( true );
     layout->addWidget( m_addFileName );
 
-    m_blackwhite = new QCheckBox ( i18n("Print image in &black and white"), this);
+    m_blackwhite = new TQCheckBox ( i18n("Print image in &black and white"), this);
     m_blackwhite->setChecked( false );
     layout->addWidget (m_blackwhite );
 
-    QVButtonGroup *group = new QVButtonGroup( i18n("Scaling"), this );
+    TQVButtonGroup *group = new TQVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
     layout->addWidget( group );
-    // m_shrinkToFit = new QRadioButton( i18n("Shrink image to &fit, if necessary"), group );
-    m_shrinkToFit = new QCheckBox( i18n("Shrink image to &fit, if necessary"), group );
+    // m_shrinkToFit = new TQRadioButton( i18n("Shrink image to &fit, if necessary"), group );
+    m_shrinkToFit = new TQCheckBox( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit->setChecked( true );
 
-    QWidget *widget = new QWidget( group );
-    QGridLayout *grid = new QGridLayout( widget, 3, 3 );
+    TQWidget *widget = new TQWidget( group );
+    TQGridLayout *grid = new TQGridLayout( widget, 3, 3 );
     grid->addColSpacing( 0, 30 );
     grid->setColStretch( 0, 0 );
     grid->setColStretch( 1, 1 );
     grid->setColStretch( 2, 10 );
 
-    m_scale = new QRadioButton( i18n("Print e&xact size: "), widget );
+    m_scale = new TQRadioButton( i18n("Print e&xact size: "), widget );
     m_scale->setEnabled( false ); // ###
     grid->addMultiCellWidget( m_scale, 0, 0, 0, 1 );
     group->insert( m_scale );
-    connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
+    connect( m_scale, TQT_SIGNAL( toggled( bool )), TQT_SLOT( toggleScaling( bool )));
 
     m_units = new KComboBox( false, widget, "unit combobox" );
     grid->addWidget( m_units, 0, 2, AlignLeft );
@@ -252,11 +252,11 @@ KuickPrintDialogPage::~KuickPrintDialogPage()
 {
 }
 
-void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
+void KuickPrintDialogPage::getOptions( TQMap<TQString,TQString>& opts,
                                        bool /*incldef*/ )
 {
-    QString t = "true";
-    QString f = "false";
+    TQString t = "true";
+    TQString f = "false";
 
 //    ### opts["app-kuickshow-alignment"] = ;
     opts["app-kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
@@ -264,14 +264,14 @@ void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
     opts["app-kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;
     opts["app-kuickshow-scale"] = m_scale->isChecked() ? t : f;
     opts["app-kuickshow-scale-unit"] = m_units->currentText();
-    opts["app-kuickshow-scale-width-pixels"] = QString::number( scaleWidth() );
-    opts["app-kuickshow-scale-height-pixels"] = QString::number( scaleHeight() );
+    opts["app-kuickshow-scale-width-pixels"] = TQString::number( scaleWidth() );
+    opts["app-kuickshow-scale-height-pixels"] = TQString::number( scaleHeight() );
 }
 
-void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
+void KuickPrintDialogPage::setOptions( const TQMap<TQString,TQString>& opts )
 {
-    QString t = "true";
-    QString f = "false";
+    TQString t = "true";
+    TQString f = "false";
 
     m_addFileName->setChecked( opts["app-kuickshow-printFilename"] != f );
     // This sound strange, but if I copy the code on the line above, the checkbox

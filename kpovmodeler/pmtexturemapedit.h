@@ -25,13 +25,13 @@
 #endif
 
 #include "pmtexturebaseedit.h"
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 class PMTextureMapBase;
 class PMFloatEdit;
-class QWidget;
-class QVBoxLayout;
-class QLabel;
+class TQWidget;
+class TQVBoxLayout;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMTextureMapBase.
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMTextureMapEdit with parent and name
     */
-   PMTextureMapEdit( QWidget* parent, const char* name = 0 );
+   PMTextureMapEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -59,10 +59,10 @@ protected:
    
 private:
    PMTextureMapBase* m_pDisplayedObject;
-   QPtrList<PMFloatEdit> m_edits;
-   QVBoxLayout* m_pEditLayout;
-   QLabel* m_pNoChildLabel;
-   QLabel* m_pPureLinkLabel;
+   TQPtrList<PMFloatEdit> m_edits;
+   TQVBoxLayout* m_pEditLayout;
+   TQLabel* m_pNoChildLabel;
+   TQLabel* m_pPureLinkLabel;
    int m_numValues;
 };
 

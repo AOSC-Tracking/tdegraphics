@@ -19,16 +19,16 @@
 #include "pmgraphicalobjectedit.h"
 #include "pmgraphicalobject.h"
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qspinbox.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqspinbox.h>
 #include <klocale.h>
 
 const int c_minValue = -1000;
 const int c_maxValue = 1000;
 
-PMGraphicalObjectEdit::PMGraphicalObjectEdit( QWidget* parent, const char* name )
+PMGraphicalObjectEdit::PMGraphicalObjectEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,38 +36,38 @@ PMGraphicalObjectEdit::PMGraphicalObjectEdit( QWidget* parent, const char* name 
 
 void PMGraphicalObjectEdit::createBottomWidgets( )
 {
-   QGridLayout* gl = new QGridLayout( topLayout( ), 2, 2 );
-   m_pNoShadowButton = new QCheckBox( i18n( "No shadow" ), this );
+   TQGridLayout* gl = new TQGridLayout( topLayout( ), 2, 2 );
+   m_pNoShadowButton = new TQCheckBox( i18n( "No shadow" ), this );
    gl->addWidget( m_pNoShadowButton, 0, 0 );
-   m_pNoImageButton = new QCheckBox( i18n( "No image" ), this );
+   m_pNoImageButton = new TQCheckBox( i18n( "No image" ), this );
    gl->addWidget( m_pNoImageButton, 0, 1 );
-   m_pNoReflectionButton = new QCheckBox( i18n( "No reflection" ), this );
+   m_pNoReflectionButton = new TQCheckBox( i18n( "No reflection" ), this );
    gl->addWidget( m_pNoReflectionButton, 1, 0 );
-   m_pDoubleIlluminateButton = new QCheckBox( i18n( "Double illuminate" ), this );
+   m_pDoubleIlluminateButton = new TQCheckBox( i18n( "Double illuminate" ), this );
    gl->addWidget( m_pDoubleIlluminateButton, 1, 1 );
-   m_pExport = new QCheckBox( i18n( "Export to renderer" ), this );
+   m_pExport = new TQCheckBox( i18n( "Export to renderer" ), this );
    topLayout( )->addWidget( m_pExport );
 
-   QHBoxLayout* hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Visibility level: " ), this ) );
-   m_pVisibilityLevel = new QSpinBox( c_minValue, c_maxValue, 1, this );
+   TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Visibility level: " ), this ) );
+   m_pVisibilityLevel = new TQSpinBox( c_minValue, c_maxValue, 1, this );
    hl->addWidget( m_pVisibilityLevel );
-   m_pResultingVisibility = new QLabel( QString( "(  )" ), this );
+   m_pResultingVisibility = new TQLabel( TQString( "(  )" ), this );
    hl->addWidget( m_pResultingVisibility );
    hl->addSpacing( 10 );
-   m_pRelativeVisibility = new QCheckBox( i18n( "Relative" ), this );
+   m_pRelativeVisibility = new TQCheckBox( i18n( "Relative" ), this );
    hl->addWidget( m_pRelativeVisibility );
    hl->addStretch( 1 );
 
-   connect( m_pNoShadowButton, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pNoImageButton, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pNoReflectionButton, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pDoubleIlluminateButton, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRelativeVisibility, SIGNAL( clicked( ) ),
-            SLOT( slotRelativeChanged( ) ) );
-   connect( m_pVisibilityLevel, SIGNAL( valueChanged( int ) ),
-            SLOT( slotLevelChanged( int ) ) );
-   connect( m_pExport, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pNoShadowButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoImageButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoReflectionButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pDoubleIlluminateButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRelativeVisibility, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotRelativeChanged( ) ) );
+   connect( m_pVisibilityLevel, TQT_SIGNAL( valueChanged( int ) ),
+            TQT_SLOT( slotLevelChanged( int ) ) );
+   connect( m_pExport, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 
 
    Base::createBottomWidgets( );
@@ -162,7 +162,7 @@ void PMGraphicalObjectEdit::recalculateResultingVisibility( )
             absoluteFound = true;
       }
    }
-   m_pResultingVisibility->setText( QString( "(%1)" ).arg( level ) );
+   m_pResultingVisibility->setText( TQString( "(%1)" ).arg( level ) );
 }
 
 #include "pmgraphicalobjectedit.moc"

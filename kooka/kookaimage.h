@@ -29,10 +29,10 @@
 #ifndef KOOKAIMAGE_H
 #define KOOKAIMAGE_H
 #include <kurl.h>
-#include <qimage.h>
-#include <qptrlist.h>
-#include <qvaluevector.h>
-#include <qrect.h>
+#include <tqimage.h>
+#include <tqptrlist.h>
+#include <tqvaluevector.h>
+#include <tqrect.h>
 
 #include <kfilemetainfo.h>
 
@@ -41,7 +41,7 @@ class KFileItem;
 /**
   * @author Klaas Freitag
   *
-  * class that represents an image, very much as QImage. But this one can contain
+  * class that represents an image, very much as TQImage. But this one can contain
   * multiple pages.
   */
 
@@ -58,10 +58,10 @@ public:
      * @param p is the parent image.
      */
     KookaImage(  int subNo, KookaImage *p );
-    KookaImage( 	const QImage& img );
+    KookaImage( 	const TQImage& img );
 
     KookaImage& operator=(const KookaImage& );
-    KookaImage& operator=(const QImage& );
+    KookaImage& operator=(const TQImage& );
     /**
      * load an image from a KURL. This method reads the entire file and sets
      * the values for subimage count.
@@ -91,7 +91,7 @@ public:
     void         extractNow();
 
     KURL         url() const;
-    QString      localFileName( ) const;
+    TQString      localFileName( ) const;
 
     /**
      *  Set and get the KFileItem of the image. Note that the KFileItem pointer returned
@@ -124,15 +124,15 @@ public:
      * The parameters rows and cols contain the number of rows and cols after
      * tiling. If both are one, the image is smaller than maxSize, thus the
      * left-top tile is index 1,1.
-     * Use getTile() to read the QRect list.
+     * Use getTile() to read the TQRect list.
      */
-    int cutToTiles( const QSize maxSize, int& rows, int& cols, TileMode mode = MaxCut );
+    int cutToTiles( const TQSize maxSize, int& rows, int& cols, TileMode mode = MaxCut );
 
     /**
      * read tiles from the tile list. The image needs to be tiled by method
      * cutToTiles before.
      */
-    QRect getTileRect( int rowPos, int colPos ) const;
+    TQRect getTileRect( int rowPos, int colPos ) const;
 
     /**
      * retrieve the sub number of this image.
@@ -141,7 +141,7 @@ public:
 
 private:
     int 		m_subImages;
-    bool                loadTiffDir( const QString&, int );
+    bool                loadTiffDir( const TQString&, int );
 
     /* if subNo is 0, the image is the one and only. If it is larger than 0, the
      * parent contains the filename */
@@ -154,12 +154,12 @@ private:
     KFileItem           *m_fileItem;
     bool                m_fileBound;
 
-    QValueVector<QRect> m_tileVector;
+    TQValueVector<TQRect> m_tileVector;
     int                 m_tileCols;  /* number of tile columns  */
 };
 
 
-class KookaImageList: public QPtrList<KookaImage>
+class KookaImageList: public TQPtrList<KookaImage>
 {
 public:
    KookaImageList() {}

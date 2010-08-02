@@ -59,16 +59,16 @@ DOM::DOMString SVGLangSpaceImpl::xmlspace() const
 	return m_xmlspace;
 }
 
-QString SVGLangSpaceImpl::handleText(const QString &data) const
+TQString SVGLangSpaceImpl::handleText(const TQString &data) const
 {
-	QString result = data;
+	TQString result = data;
 
 	if(xmlspace() == "preserve")
 	{
 		// Spec: What to do here?
 		//		 It will convert all newline and tab characters into space characters
-		result.replace("\n\r", QString(" "));
-		result.replace("\r\n", QString(" "));
+		result.replace("\n\r", TQString(" "));
+		result.replace("\r\n", TQString(" "));
 		result.replace('\t', ' ');
 	}
 	else if(xmlspace() == "default")
@@ -78,8 +78,8 @@ QString SVGLangSpaceImpl::handleText(const QString &data) const
 		//       Then it will convert all tab characters into space characters  (simplifyWhiteSpace)
 		//       Then, it will strip off all leading and trailing space characters (stripWhiteSpace)
 		//       Then, all contiguous space characters will be consolidated. (simplifyWhiteSpace)
-		result.replace('\n', QString::null);
-		result.replace('\r', QString::null);
+		result.replace('\n', TQString::null);
+		result.replace('\r', TQString::null);
 		result = result.stripWhiteSpace().simplifyWhiteSpace();
 	}
 

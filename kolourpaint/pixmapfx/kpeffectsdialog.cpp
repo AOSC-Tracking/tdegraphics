@@ -30,11 +30,11 @@
 
 #include <kpeffectsdialog.h>
 
-#include <qgroupbox.h>
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qtimer.h>
+#include <tqgroupbox.h>
+#include <tqhbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
 
 #include <kapplication.h>
 #include <kcombobox.h>
@@ -63,12 +63,12 @@ kpEffectsDialog::kpEffectsDialog (bool actOnSelection,
                                   const char *name)
     : kpToolPreviewDialog (kpToolPreviewDialog::Preview,
                            true/*reserve top row*/,
-                           QString::null/*caption*/,
-                           QString::null/*afterActionText (no Dimensions Group Box)*/,
+                           TQString::null/*caption*/,
+                           TQString::null/*afterActionText (no Dimensions Group Box)*/,
                            actOnSelection,
                            parent,
                            name),
-      m_delayedUpdateTimer (new QTimer (this)),
+      m_delayedUpdateTimer (new TQTimer (this)),
       m_effectsComboBox (0),
       m_settingsGroupBox (0),
       m_settingsLayout (0),
@@ -84,16 +84,16 @@ kpEffectsDialog::kpEffectsDialog (bool actOnSelection,
         setCaption (i18n ("More Image Effects"));
 
 
-    connect (m_delayedUpdateTimer, SIGNAL (timeout ()),
-             this, SLOT (slotUpdateWithWaitCursor ()));
+    connect (m_delayedUpdateTimer, TQT_SIGNAL (timeout ()),
+             this, TQT_SLOT (slotUpdateWithWaitCursor ()));
 
 
-    QHBox *effectContainer = new QHBox (mainWidget ());
+    TQHBox *effectContainer = new TQHBox (mainWidget ());
     effectContainer->setSpacing (spacingHint () * 4
-                                 /*need more space for QGroupBox titles*/);
+                                 /*need more space for TQGroupBox titles*/);
     effectContainer->setMargin (0);
 
-    QLabel *label = new QLabel (i18n ("&Effect:"), effectContainer);
+    TQLabel *label = new TQLabel (i18n ("&Effect:"), effectContainer);
 
     m_effectsComboBox = new KComboBox (effectContainer);
     m_effectsComboBox->insertItem (i18n ("Balance"));
@@ -109,15 +109,15 @@ kpEffectsDialog::kpEffectsDialog (bool actOnSelection,
     addCustomWidgetToFront (effectContainer);
 
 
-    m_settingsGroupBox = new QGroupBox (mainWidget ());
-    m_settingsLayout = new QVBoxLayout (m_settingsGroupBox,
+    m_settingsGroupBox = new TQGroupBox (mainWidget ());
+    m_settingsLayout = new TQVBoxLayout (m_settingsGroupBox,
                                         marginHint () * 2,
                                         spacingHint ());
     addCustomWidgetToBack (m_settingsGroupBox);
 
 
-    connect (m_effectsComboBox, SIGNAL (activated (int)),
-             this, SLOT (selectEffect (int)));
+    connect (m_effectsComboBox, TQT_SIGNAL (activated (int)),
+             this, TQT_SLOT (selectEffect (int)));
     selectEffect (0);
 
 
@@ -157,21 +157,21 @@ kpColorEffectCommand *kpEffectsDialog::createCommand () const
 
 
 // protected virtual [base kpToolPreviewDialog]
-QSize kpEffectsDialog::newDimensions () const
+TQSize kpEffectsDialog::newDimensions () const
 {
     kpDocument *doc = document ();
     if (!doc)
-        return QSize ();
+        return TQSize ();
 
-    return QSize (doc->width (m_actOnSelection),
+    return TQSize (doc->width (m_actOnSelection),
                   doc->height (m_actOnSelection));
 }
 
 // protected virtual [base kpToolPreviewDialog]
-QPixmap kpEffectsDialog::transformPixmap (const QPixmap &pixmap,
+TQPixmap kpEffectsDialog::transformPixmap (const TQPixmap &pixmap,
                                           int targetWidth, int targetHeight) const
 {
-    QPixmap pixmapWithEffect;
+    TQPixmap pixmapWithEffect;
 
     if (m_colorEffectWidget)
         pixmapWithEffect = m_colorEffectWidget->applyColorEffect (pixmap);
@@ -209,7 +209,7 @@ void kpEffectsDialog::selectEffect (int which)
     m_colorEffectWidget = 0;
 
 
-    m_settingsGroupBox->setCaption (QString::null);
+    m_settingsGroupBox->setCaption (TQString::null);
 
 #define CREATE_EFFECT_WIDGET(name)                        \
     m_colorEffectWidget = new name (m_actOnSelection,     \
@@ -255,12 +255,12 @@ void kpEffectsDialog::selectEffect (int which)
         // Don't resize the preview when showing the widget:
         // TODO: actually work
 
-        QSize previewGroupBoxMinSize = m_previewGroupBox->minimumSize ();
-        QSize previewGroupBoxMaxSize = m_previewGroupBox->maximumSize ();
-        QLayout::ResizeMode previewGroupBoxResizeMode =
+        TQSize previewGroupBoxMinSize = m_previewGroupBox->minimumSize ();
+        TQSize previewGroupBoxMaxSize = m_previewGroupBox->maximumSize ();
+        TQLayout::ResizeMode previewGroupBoxResizeMode =
             m_previewGroupBox->layout () ?
                 m_previewGroupBox->layout ()->resizeMode () :
-                QLayout::Auto;
+                TQLayout::Auto;
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tpreviewGroupBox: minSize=" << previewGroupBoxMinSize
                    << " maxSize=" << previewGroupBoxMaxSize
@@ -271,7 +271,7 @@ void kpEffectsDialog::selectEffect (int which)
     #endif
 
         if (m_previewGroupBox->layout ())
-            m_previewGroupBox->layout ()->setResizeMode (QLayout::FreeResize);
+            m_previewGroupBox->layout ()->setResizeMode (TQLayout::FreeResize);
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter set resizeMode, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;
@@ -308,12 +308,12 @@ void kpEffectsDialog::selectEffect (int which)
     #endif
 
 
-        connect (m_colorEffectWidget, SIGNAL (settingsChangedNoWaitCursor ()),
-                 this, SLOT (slotUpdate ()));
-        connect (m_colorEffectWidget, SIGNAL (settingsChanged ()),
-                 this, SLOT (slotUpdateWithWaitCursor ()));
-        connect (m_colorEffectWidget, SIGNAL (settingsChangedDelayed ()),
-                 this, SLOT (slotDelayedUpdate ()));
+        connect (m_colorEffectWidget, TQT_SIGNAL (settingsChangedNoWaitCursor ()),
+                 this, TQT_SLOT (slotUpdate ()));
+        connect (m_colorEffectWidget, TQT_SIGNAL (settingsChanged ()),
+                 this, TQT_SLOT (slotUpdateWithWaitCursor ()));
+        connect (m_colorEffectWidget, TQT_SIGNAL (settingsChangedDelayed ()),
+                 this, TQT_SLOT (slotDelayedUpdate ()));
         slotUpdateWithWaitCursor ();
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter slotUpdateWithWaitCursor, previewGroupBox.size="

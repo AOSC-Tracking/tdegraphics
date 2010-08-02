@@ -11,8 +11,8 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <qdatastream.h>
-#include <qfile.h>
+#include <tqdatastream.h>
+#include <tqfile.h>
 
 #include "glyph.h"
 #include "TeXFont_TFM.h"
@@ -28,12 +28,12 @@ TeXFont_TFM::TeXFont_TFM(TeXFontDefinition *parent)
   kdDebug(4300) << "TeXFont_TFM::TeXFont_TFM( parent=" << parent << " )" << endl;
 #endif
 
-  QFile file( parent->filename );
+  TQFile file( parent->filename );
   if ( !file.open( IO_ReadOnly ) ) {
     kdError(4300) << "TeXFont_TFM::TeXFont_TFM(): Could not read TFM file" << endl;
     return;
   }
-  QDataStream stream( &file );
+  TQDataStream stream( &file );
 
   // Data from the very beginning of the TFM file, as specified in
   // "The DVI Driver Standard, Level 0", section D.2.1
@@ -122,7 +122,7 @@ TeXFont_TFM::~TeXFont_TFM()
 }
 
 
-glyph *TeXFont_TFM::getGlyph(Q_UINT16 characterCode, bool generateCharacterPixmap, const QColor& color)
+glyph *TeXFont_TFM::getGlyph(Q_UINT16 characterCode, bool generateCharacterPixmap, const TQColor& color)
 {
 #ifdef DEBUG_TFM
   kdDebug(4300) << "TeXFont_TFM::getGlyph( ch=" << ch << ", generateCharacterPixmap=" << generateCharacterPixmap << " )" << endl;

@@ -20,7 +20,7 @@
 
 #include <stdlib.h>
 
-#include <qimage.h>
+#include <tqimage.h>
 
 #include <kmessagebox.h>
 #include <kfiledialog.h>
@@ -32,8 +32,8 @@
 #include "kicon.h"
 #include "utils.h"
 
-KIconEditIcon::KIconEditIcon(QObject *parent, const QImage *img, KURL url) 
-   : QObject(parent)
+KIconEditIcon::KIconEditIcon(TQObject *parent, const TQImage *img, KURL url) 
+   : TQObject(parent)
 {
     f = 0;
     _lastdir = "/";
@@ -51,9 +51,9 @@ KIconEditIcon::~KIconEditIcon()
 }
 
 
-bool KIconEditIcon::open(const QImage *image, KURL url)
+bool KIconEditIcon::open(const TQImage *image, KURL url)
 {
-    QImage *img = (QImage*)image;
+    TQImage *img = (TQImage*)image;
 
     if(url.isEmpty())
         return false;
@@ -64,19 +64,19 @@ bool KIconEditIcon::open(const QImage *image, KURL url)
     {
         kdDebug(4640) << "KIconEditIcon::open (malformed) " << url.prettyURL() << endl;
 
-        QFileInfo fi(url.url());
+        TQFileInfo fi(url.url());
         if(fi.isRelative())
             url = "file:" + fi.absFilePath();
 
         if(!url.isValid()) // Giving up
         {
-            QString msg = i18n("The URL: %1 \nseems to be malformed.\n").arg(url.url());
-            KMessageBox::sorry((QWidget*)parent(), msg);
+            TQString msg = i18n("The URL: %1 \nseems to be malformed.\n").arg(url.url());
+            KMessageBox::sorry((TQWidget*)parent(), msg);
             return false;
         }
     }
 
-    QString filename;
+    TQString filename;
 
     if(url.isLocalFile())
     {
@@ -84,10 +84,10 @@ bool KIconEditIcon::open(const QImage *image, KURL url)
     }
     else
     {
-        if(!KIO::NetAccess::download( url, filename, (QWidget*)parent() ))
+        if(!KIO::NetAccess::download( url, filename, (TQWidget*)parent() ))
         {
-            QString msg = i18n("There was an error loading:\n%1\n").arg(url.prettyURL());
-            KMessageBox::error((QWidget*)parent(), msg);
+            TQString msg = i18n("There was an error loading:\n%1\n").arg(url.prettyURL());
+            KMessageBox::error((TQWidget*)parent(), msg);
             return false;
         }
     }
@@ -101,8 +101,8 @@ bool KIconEditIcon::open(const QImage *image, KURL url)
 
     if(!loadedOk) 
     {
-          QString msg = i18n("There was an error loading:\n%1\n").arg(url.prettyURL());
-          KMessageBox::error((QWidget*)parent(), msg);
+          TQString msg = i18n("There was an error loading:\n%1\n").arg(url.prettyURL());
+          KMessageBox::error((TQWidget*)parent(), msg);
     }
     else
     {
@@ -140,11 +140,11 @@ bool KIconEditIcon::open(const QImage *image, KURL url)
 
 
 
-bool KIconEditIcon::promptForFile(const QImage *img)
+bool KIconEditIcon::promptForFile(const TQImage *img)
 {
-    kdDebug(4640) << "KIconEditIcon::promptForFile(const QImage *img)" << endl;
+    kdDebug(4640) << "KIconEditIcon::promptForFile(const TQImage *img)" << endl;
     /*
-    QString filter = i18n("*|All Files (*)\n"
+    TQString filter = i18n("*|All Files (*)\n"
                         "*.xpm|XPM (*.xpm)\n"
                         "*.png|PNG (*.png)\n"
                         "*.gif|GIF files (*.gif)\n"
@@ -152,10 +152,10 @@ bool KIconEditIcon::promptForFile(const QImage *img)
                         "*.ico|Icon files (*.ico)\n");
 
   
-    KURL url = KFileDialog::getOpenURL( QString::null, filter );
+    KURL url = KFileDialog::getOpenURL( TQString::null, filter );
     */
     bool loaded = false;
-    KURL url = KFileDialog::getImageOpenURL( QString::null, static_cast<QWidget *>(parent()) );
+    KURL url = KFileDialog::getImageOpenURL( TQString::null, static_cast<TQWidget *>(parent()) );
 
     if( !url.isEmpty() )
     {
@@ -167,20 +167,20 @@ bool KIconEditIcon::promptForFile(const QImage *img)
 
 
 
-bool KIconEditIcon::saveAs(const QImage *image)
+bool KIconEditIcon::saveAs(const TQImage *image)
 {
     kdDebug(4640) << "KIconEditIcon::saveAs" << endl;
 
-    QString file;
+    TQString file;
 
     //Get list of file types..
-    KFileDialog *dialog=new KFileDialog(QString::null, QString::null, static_cast<QWidget *>(parent()), "file dialog", true);
+    KFileDialog *dialog=new KFileDialog(TQString::null, TQString::null, static_cast<TQWidget *>(parent()), "file dialog", true);
     dialog->setCaption( i18n("Save Icon As") );
     dialog->setKeepLocation( true );
     dialog->setMimeFilter( KImageIO::mimeTypes(KImageIO::Writing), "image/png" );
     dialog->setOperationMode( KFileDialog::Saving );
 
-    if(dialog->exec()==QDialog::Accepted)
+    if(dialog->exec()==TQDialog::Accepted)
     {
         file = dialog->selectedFile();
         if( file.isNull() )
@@ -204,9 +204,9 @@ bool KIconEditIcon::saveAs(const QImage *image)
         
     delete dialog;
 
-    if(QFile::exists(file))
+    if(TQFile::exists(file))
     {
-        int r=KMessageBox::warningContinueCancel(static_cast<QWidget *>(parent()),
+        int r=KMessageBox::warningContinueCancel(static_cast<TQWidget *>(parent()),
             i18n( "A file named \"%1\" already exists. "
                   "Overwrite it?" ).arg(file),
             i18n( "Overwrite File?" ),
@@ -223,10 +223,10 @@ bool KIconEditIcon::saveAs(const QImage *image)
 
 
 
-bool KIconEditIcon::save(const QImage *image, const QString &_filename)
+bool KIconEditIcon::save(const TQImage *image, const TQString &_filename)
 {
     kdDebug(4640) << "KIconEditIcon::save" << endl;
-    QString filename = _filename;
+    TQString filename = _filename;
 
     if(filename.isEmpty())
     {
@@ -241,11 +241,11 @@ bool KIconEditIcon::save(const QImage *image, const QString &_filename)
         }    
     }
 
-    QImage *img = (QImage*)image;
+    TQImage *img = (TQImage*)image;
     img->setAlphaBuffer(true);
     
     KURL turl(filename);
-    QString str = turl.path();
+    TQString str = turl.path();
     bool savedOk = false;
 
     /* base image type on file extension - let kimageio
@@ -265,8 +265,8 @@ bool KIconEditIcon::save(const QImage *image, const QString &_filename)
     }
     else 
     {
-        QString msg = i18n("There was an error saving:\n%1\n").arg(str);
-        KMessageBox::error((QWidget*)parent(), msg);
+        TQString msg = i18n("There was an error saving:\n%1\n").arg(str);
+        KMessageBox::error((TQWidget*)parent(), msg);
         kdDebug(4640) << "KIconEditIcon::save - " << msg << endl;
     }
 

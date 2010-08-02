@@ -21,7 +21,7 @@
 #ifndef KSVGLoader_H
 #define KSVGLoader_H
 
-#include <qobject.h>
+#include <tqobject.h>
 
 class KURL;
 
@@ -62,27 +62,27 @@ public:
 	void getSVGContent(::KURL url);
 	void newImageJob(SVGImageElementImpl *impl, ::KURL url);
 
-	static QString getUrl(::KURL url, bool local = false);
-	void postUrl(::KURL url, const QByteArray &data, const QString &mimeType, KJS::ExecState *exec, KJS::Object &callBackFunction, KJS::Object &status);
-	static QString getCharacterData(::KURL url, const QString &id);
-	static SVGElementImpl *getSVGFragment(::KURL, SVGDocumentImpl *doc, const QString &id);
+	static TQString getUrl(::KURL url, bool local = false);
+	void postUrl(::KURL url, const TQByteArray &data, const TQString &mimeType, KJS::ExecState *exec, KJS::Object &callBackFunction, KJS::Object &status);
+	static TQString getCharacterData(::KURL url, const TQString &id);
+	static SVGElementImpl *getSVGFragment(::KURL, SVGDocumentImpl *doc, const TQString &id);
 
 signals:
-	void gotResult(QIODevice *);
+	void gotResult(TQIODevice *);
 	void imageReady(SVGImageElementImpl *);
 
 private slots:
-	void slotData(KIO::Job *, const QByteArray &);
+	void slotData(KIO::Job *, const TQByteArray &);
 	void slotResult(KIO::Job *);
 
 private:
-	static QString loadXML(::KURL);
+	static TQString loadXML(::KURL);
 
 	PostUrlData m_postUrlData;
 
-	QByteArray m_data;
+	TQByteArray m_data;
 	KIO::TransferJob *m_job;
-	QMap<KIO::TransferJob *, ImageStreamMap *> m_imageJobs;
+	TQMap<KIO::TransferJob *, ImageStreamMap *> m_imageJobs;
 };
 
 }

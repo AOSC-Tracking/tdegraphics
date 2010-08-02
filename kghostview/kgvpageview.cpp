@@ -16,22 +16,22 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qdatetime.h>
+#include <tqdatetime.h>
 
 #include <kdebug.h>
 
 #include "kgvpageview.h"
 
-KGVPageView::KGVPageView( QWidget* parent, const char* name )
-  : QScrollView( parent, name )
+KGVPageView::KGVPageView( TQWidget* parent, const char* name )
+  : TQScrollView( parent, name )
 {
     _page = 0;
 
-    setFocusPolicy( QWidget::StrongFocus );
-    viewport()->setFocusPolicy( QWidget::WheelFocus );
+    setFocusPolicy( TQWidget::StrongFocus );
+    viewport()->setFocusPolicy( TQWidget::WheelFocus );
 }
 
-void KGVPageView::setPage( QWidget* page )
+void KGVPageView::setPage( TQWidget* page )
 {
     if( page != 0 ) {
 	addChild( page );
@@ -50,21 +50,21 @@ bool KGVPageView::atBottom() const
     return verticalScrollBar()->value() == verticalScrollBar()->maxValue();
 }
 
-bool KGVPageView::eventFilter( QObject* o, QEvent* e )
+bool KGVPageView::eventFilter( TQObject* o, TQEvent* e )
 {
-    if ( o == _page &&  e->type() == QEvent::Resize ) {
-	// We need to call QScrollView::eventFilter before centerContents,
+    if ( o == _page &&  e->type() == TQEvent::Resize ) {
+	// We need to call TQScrollView::eventFilter before centerContents,
 	// otherwise a loop will be introduced.
-	bool result = QScrollView::eventFilter( o, e );
+	bool result = TQScrollView::eventFilter( o, e );
 	centerContents();
 	emit pageSizeChanged( _page->size() );
 	return result;
     }
-    return QScrollView::eventFilter( o, e );
+    return TQScrollView::eventFilter( o, e );
 }
 
 
-void KGVPageView::wheelEvent( QWheelEvent *e )
+void KGVPageView::wheelEvent( TQWheelEvent *e )
 {
     int delta = e->delta();
     e->accept();
@@ -84,9 +84,9 @@ void KGVPageView::wheelEvent( QWheelEvent *e )
     }
 
     else
-        QScrollView::wheelEvent( e );
+        TQScrollView::wheelEvent( e );
 }
-void KGVPageView::mousePressEvent( QMouseEvent * e )
+void KGVPageView::mousePressEvent( TQMouseEvent * e )
 {
     if ( e->button() & LeftButton )
     {
@@ -103,7 +103,7 @@ void KGVPageView::mousePressEvent( QMouseEvent * e )
     }
 }
 
-void KGVPageView::mouseReleaseEvent( QMouseEvent *e )
+void KGVPageView::mouseReleaseEvent( TQMouseEvent *e )
 {
     if ( e -> button() & LeftButton )
     {
@@ -111,11 +111,11 @@ void KGVPageView::mouseReleaseEvent( QMouseEvent *e )
     }
 }
 
-void KGVPageView::mouseMoveEvent( QMouseEvent * e )
+void KGVPageView::mouseMoveEvent( TQMouseEvent * e )
 {
     if ( e->state() & LeftButton )
     {
-	QPoint delta = _dragGrabPos - e->globalPos();
+	TQPoint delta = _dragGrabPos - e->globalPos();
 	scrollBy( delta.x(), delta.y() );
 	_dragGrabPos = e->globalPos();
     }
@@ -201,7 +201,7 @@ void KGVPageView::enableScrollBars( bool b )
     setVScrollBarMode( b ? Auto : AlwaysOff );
 }
 
-void KGVPageView::keyPressEvent( QKeyEvent* e )
+void KGVPageView::keyPressEvent( TQKeyEvent* e )
 {
     switch ( e->key() ) {
     case Key_Up:
@@ -223,9 +223,9 @@ void KGVPageView::keyPressEvent( QKeyEvent* e )
     e->accept();
 }
 
-void KGVPageView::viewportResizeEvent( QResizeEvent* e )
+void KGVPageView::viewportResizeEvent( TQResizeEvent* e )
 {
-    QScrollView::viewportResizeEvent( e );
+    TQScrollView::viewportResizeEvent( e );
     emit viewSizeChanged( viewport()->size() );
     centerContents();
 }
@@ -238,7 +238,7 @@ void KGVPageView::centerContents()
     int newX = 0;
     int newY = 0;
 
-    QSize newViewportSize = viewportSize( _page->width(),
+    TQSize newViewportSize = viewportSize( _page->width(),
 					  _page->height() );
 
     if( newViewportSize.width() > _page->width() )

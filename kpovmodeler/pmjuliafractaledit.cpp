@@ -21,13 +21,13 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMJuliaFractalEdit::PMJuliaFractalEdit( QWidget* parent, const char* name )
+PMJuliaFractalEdit::PMJuliaFractalEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,24 +37,24 @@ void PMJuliaFractalEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   QHBoxLayout* hl;
-   QGridLayout* gl;
+   TQHBoxLayout* hl;
+   TQGridLayout* gl;
 
-   topLayout( )->addWidget( new QLabel( i18n( "Julia parameter:" ), this ) );
+   topLayout( )->addWidget( new TQLabel( i18n( "Julia parameter:" ), this ) );
    m_pJuliaParameter = new PMVectorEdit( "", "i", "j", "k", this );
    topLayout( )->addWidget( m_pJuliaParameter );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Algebra type:" ), this ) );
-   m_pAlgebraType = new QComboBox( false, this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Algebra type:" ), this ) );
+   m_pAlgebraType = new TQComboBox( false, this );
    m_pAlgebraType->insertItem( i18n( "Quaternion" ) );
    m_pAlgebraType->insertItem( i18n( "Hypercomplex" ) );
    hl->addWidget( m_pAlgebraType );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Function type:" ), this ) );
-   m_pFunctionType = new QComboBox( false, this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Function type:" ), this ) );
+   m_pFunctionType = new TQComboBox( false, this );
    m_pFunctionType->insertItem( "sqr" );
    m_pFunctionType->insertItem( "cube" );
    m_pFunctionType->insertItem( "exp" );
@@ -76,45 +76,45 @@ void PMJuliaFractalEdit::createTopWidgets( )
    hl->addWidget( m_pFunctionType );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   m_pExponentsLabel = new QLabel( i18n( "Exponent:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   m_pExponentsLabel = new TQLabel( i18n( "Exponent:" ), this );
    hl->addWidget( m_pExponentsLabel );
    m_pExponents = new PMVectorEdit( "", "i", this );
    hl->addWidget( m_pExponents );
    hl->addStretch( 1 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 2, 2 );
-   gl->addWidget( new QLabel( i18n( "Maximum iterations:" ), this ), 0, 0 );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "Maximum iterations:" ), this ), 0, 0 );
    m_pMaxIterations = new PMIntEdit( this );
    m_pMaxIterations->setValidation( true, 1, false, 0 );
    gl->addWidget( m_pMaxIterations, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Precision:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Precision:" ), this ), 1, 0 );
    m_pPrecision = new PMFloatEdit( this );
    m_pPrecision->setValidation( true, 1.0, false, 0.0 );
    gl->addWidget( m_pPrecision, 1, 1 );
    hl->addStretch( 1 );
    
-   topLayout( )->addWidget( new QLabel( i18n( "Slice normal:" ), this ) );
+   topLayout( )->addWidget( new TQLabel( i18n( "Slice normal:" ), this ) );
    m_pSliceNormal = new PMVectorEdit( "", "i", "j", "k", this );
    topLayout( )->addWidget( m_pSliceNormal );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   hl->addWidget( new QLabel( i18n( "Slice distance:" ), this ) );
+   hl = new TQHBoxLayout( topLayout( ) );
+   hl->addWidget( new TQLabel( i18n( "Slice distance:" ), this ) );
    m_pSliceDistance = new PMFloatEdit( this );
    hl->addWidget( m_pSliceDistance );
    hl->addStretch( 1 );
 
-   connect( m_pJuliaParameter, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAlgebraType, SIGNAL( activated( int ) ),
-            SLOT( slotAlgebraTypeSelected( int ) ) );
-   connect( m_pFunctionType, SIGNAL( activated( int ) ),
-            SLOT( slotFunctionTypeSelected( int ) ) );
-   connect( m_pExponents, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxIterations, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPrecision, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSliceNormal, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSliceDistance, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );   
+   connect( m_pJuliaParameter, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAlgebraType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotAlgebraTypeSelected( int ) ) );
+   connect( m_pFunctionType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotFunctionTypeSelected( int ) ) );
+   connect( m_pExponents, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxIterations, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPrecision, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSliceNormal, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSliceDistance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );   
 }
 
 void PMJuliaFractalEdit::displayObject( PMObject* o )

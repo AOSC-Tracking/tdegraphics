@@ -11,19 +11,19 @@
 
 #include "fontEncoding.h"
 
-#include <qdict.h>
+#include <tqdict.h>
 
-class QString;
+class TQString;
 
 
 class fontEncodingPool {
  public:
   fontEncodingPool();
 
-  fontEncoding *findByName(const QString &name);
+  fontEncoding *findByName(const TQString &name);
 
  private:
-  QDict<fontEncoding> dictionary;
+  TQDict<fontEncoding> dictionary;
 };
 
 #endif

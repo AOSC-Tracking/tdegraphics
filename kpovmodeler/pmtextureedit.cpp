@@ -20,12 +20,12 @@
 #include "pmtexture.h"
 #include "pmlinkedit.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 
 
-PMTextureEdit::PMTextureEdit( QWidget* parent, const char* name )
+PMTextureEdit::PMTextureEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -34,10 +34,10 @@ PMTextureEdit::PMTextureEdit( QWidget* parent, const char* name )
 void PMTextureEdit::createTopWidgets()
 {
    Base::createTopWidgets();
-   m_pUVMapping = new QCheckBox( i18n( "UV mapping" ), this );
+   m_pUVMapping = new TQCheckBox( i18n( "UV mapping" ), this );
    topLayout( )->addWidget( m_pUVMapping );
 
-   connect( m_pUVMapping, SIGNAL( clicked() ), SIGNAL( dataChanged() ) );
+   connect( m_pUVMapping, TQT_SIGNAL( clicked() ), TQT_SIGNAL( dataChanged() ) );
 }
 
 void PMTextureEdit::displayObject( PMObject* o )

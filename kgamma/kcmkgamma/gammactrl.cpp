@@ -15,9 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qstring.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqstring.h>
 
 #include <kdialog.h>
 
@@ -26,9 +26,9 @@
 #include "displaynumber.h"
 #include "gammactrl.moc"
 
-GammaCtrl::GammaCtrl(QWidget *parent, XVidExtWrap *xvid, int channel, \
-  const QString& mingamma, const QString& maxgamma, const QString& setgamma, \
-  const char *name) : QHBox(parent, name)
+GammaCtrl::GammaCtrl(TQWidget *parent, XVidExtWrap *xvid, int channel, \
+  const TQString& mingamma, const TQString& maxgamma, const TQString& setgamma, \
+  const char *name) : TQHBox(parent, name)
 {
   int maxslider = (int)( ( maxgamma.toDouble() - mingamma.toDouble() \
                   + 0.0005 ) * 20 );
@@ -47,14 +47,14 @@ GammaCtrl::GammaCtrl(QWidget *parent, XVidExtWrap *xvid, int channel, \
 
   setSpacing(KDialog::spacingHint());
 
-  slider = new QSlider(Horizontal, this);
+  slider = new TQSlider(Horizontal, this);
   slider->setFixedHeight(24);
-  slider->setTickmarks(QSlider::Below);
+  slider->setTickmarks(TQSlider::Below);
   slider->setRange(0, maxslider);
   slider->setTickInterval(2);
   slider->setValue(setslider);
-  connect(slider, SIGNAL(valueChanged(int)), SLOT(setGamma(int)));
-  connect(slider, SIGNAL(sliderPressed()), SLOT(pressed()));
+  connect(slider, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(setGamma(int)));
+  connect(slider, TQT_SIGNAL(sliderPressed()), TQT_SLOT(pressed()));
 
   textfield = new DisplayNumber(this, 4, 2);
   textfield->setText(setgamma);
@@ -66,7 +66,7 @@ GammaCtrl::~GammaCtrl()
 }
 
 /** set gamma, slider and textfield */
-void GammaCtrl::setGamma(const QString& gamma){
+void GammaCtrl::setGamma(const TQString& gamma){
   int sliderpos;
 
   sliderpos = (int)( ( gamma.toDouble() - mgamma.toDouble() + 0.0005 ) * 20 );
@@ -81,7 +81,7 @@ void GammaCtrl::setGamma(const QString& gamma){
 }
 
 /** set slider and textfield */
-void GammaCtrl::setControl(const QString& gamma){
+void GammaCtrl::setControl(const TQString& gamma){
   int sliderpos;
 
   sliderpos = (int)( ( gamma.toDouble() - mgamma.toDouble() + 0.0005 ) * 20 );
@@ -89,8 +89,8 @@ void GammaCtrl::setControl(const QString& gamma){
 }
 
 /** Return the current gamma value with precision prec */
-QString GammaCtrl::gamma(int prec){
-  QString gammatext;
+TQString GammaCtrl::gamma(int prec){
+  TQString gammatext;
   gammatext.setNum(xv->getGamma(gchannel) + 0.0005, 'f', prec);
 
   return(gammatext);

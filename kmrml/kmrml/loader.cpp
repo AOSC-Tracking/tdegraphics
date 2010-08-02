@@ -33,13 +33,13 @@ Loader * Loader::self()
     return s_self;
 }
 
-Loader::Loader() : QObject()
+Loader::Loader() : TQObject()
 {
 }
 
 Loader::~Loader()
 {
-    disconnect( this, SIGNAL( finished( const KURL&, const QByteArray& )));
+    disconnect( this, TQT_SIGNAL( finished( const KURL&, const TQByteArray& )));
 
     DownloadIterator it = m_downloads.begin();
     for ( ; it != m_downloads.end(); ++it ) {
@@ -61,20 +61,20 @@ void Loader::requestDownload( const KURL& url )
     KIO::TransferJob *job = KIO::get( url, false, false );
     KIO::Scheduler::scheduleJob(job);
 
-    connect( job , SIGNAL( data( KIO::Job *, const QByteArray& )),
-             SLOT( slotData( KIO::Job *, const QByteArray& )));
-    connect( job , SIGNAL( result( KIO::Job * )),
-             SLOT( slotResult( KIO::Job * )));
+    connect( job , TQT_SIGNAL( data( KIO::Job *, const TQByteArray& )),
+             TQT_SLOT( slotData( KIO::Job *, const TQByteArray& )));
+    connect( job , TQT_SIGNAL( result( KIO::Job * )),
+             TQT_SLOT( slotResult( KIO::Job * )));
 
     Download *d = new Download();
     m_downloads.insert( job, d );
 }
 
-void Loader::slotData( KIO::Job *job, const QByteArray& data )
+void Loader::slotData( KIO::Job *job, const TQByteArray& data )
 {
     DownloadIterator it = m_downloads.find( static_cast<KIO::TransferJob*>(job) );
     if ( it != m_downloads.end() ) {
-        QBuffer& buffer = it.data()->m_buffer;
+        TQBuffer& buffer = it.data()->m_buffer;
         if ( !buffer.isOpen() )
             buffer.open( IO_ReadWrite );
         if ( !buffer.isOpen() ) {
@@ -95,7 +95,7 @@ void Loader::slotResult( KIO::Job *job )
         Download *d = it.data();
 
         if ( job->error() != 0 )
-            emit finished( tjob->url(), QByteArray() );
+            emit finished( tjob->url(), TQByteArray() );
         else
             emit finished( tjob->url(), d->m_buffer.buffer() );
 

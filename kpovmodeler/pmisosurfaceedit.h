@@ -30,10 +30,10 @@ class PMIsoSurface;
 class PMVectorEdit;
 class PMFloatEdit;
 class PMIntEdit;
-class QCheckBox;
-class QComboBox;
-class QLabel;
-class QLineEdit;
+class TQCheckBox;
+class TQComboBox;
+class TQLabel;
+class TQLineEdit;
 
 /**
  * Dialog edit class for @ref PMIsoSurface
@@ -46,7 +46,7 @@ public:
    /**
     * Creates a PMIsoSurfaceEdit with parent and name
     */
-   PMIsoSurfaceEdit( QWidget* parent, const char* name = 0 );
+   PMIsoSurfaceEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -60,7 +60,7 @@ protected:
    virtual void saveContents( );
 
 private slots:
-   void textChanged( const QString& );
+   void textChanged( const TQString& );
    void currentChanged( int i );
    void evaluateToggled( bool );
    void allToggled( bool );
@@ -68,24 +68,24 @@ private slots:
 
 private:
    PMIsoSurface* m_pDisplayedObject;
-   QLineEdit* m_pFunction;
-   QComboBox* m_pContainedBy;
+   TQLineEdit* m_pFunction;
+   TQComboBox* m_pContainedBy;
    PMVectorEdit* m_pCorner1;
    PMVectorEdit* m_pCorner2;
    PMVectorEdit* m_pCenter;
    PMFloatEdit* m_pRadius;
-   QLabel* m_pCorner1Label;
-   QLabel* m_pCorner2Label;
-   QLabel* m_pCenterLabel;
-   QLabel* m_pRadiusLabel;
+   TQLabel* m_pCorner1Label;
+   TQLabel* m_pCorner2Label;
+   TQLabel* m_pCenterLabel;
+   TQLabel* m_pRadiusLabel;
    PMFloatEdit* m_pThreshold;
    PMFloatEdit* m_pAccuracy;
    PMFloatEdit* m_pMaxGradient;
-   QCheckBox* m_pEvaluate;
+   TQCheckBox* m_pEvaluate;
    PMFloatEdit* m_pEvaluateValue[3];
-   QCheckBox* m_pOpen;
+   TQCheckBox* m_pOpen;
    PMIntEdit* m_pMaxTrace;
-   QCheckBox* m_pAllIntersections;
+   TQCheckBox* m_pAllIntersections;
 };
 
 

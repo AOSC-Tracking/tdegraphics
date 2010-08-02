@@ -40,7 +40,7 @@ public:
    /**
     * Creates a PMSuperquadricEllipsoidEdit with parent and name
     */
-   PMSuperquadricEllipsoidEdit( QWidget* parent, const char* name = 0 );
+   PMSuperquadricEllipsoidEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

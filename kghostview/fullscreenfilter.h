@@ -18,7 +18,7 @@
 #ifndef DB_FULLSCREENFILTER_H1055977622_INCLUDE_GUARD_
 #define DB_FULLSCREENFILTER_H1055977622_INCLUDE_GUARD_
 
-#include <qobject.h>
+#include <tqobject.h>
 class KGVShell;
 
 /* @class FullScreenFilter
@@ -26,7 +26,7 @@ class KGVShell;
  * @short This class is to have in one place the special event all the special
  * key/mouse handling related to full-screen mode without bloating further KGVPart
  */
-class FullScreenFilter : public QObject {
+class FullScreenFilter : public TQObject {
 	Q_OBJECT
 	public:
 		FullScreenFilter( KGVShell& parent );
@@ -34,7 +34,7 @@ class FullScreenFilter : public QObject {
 		/** 
 		 * @reimplemented
 		 */
-		virtual bool eventFilter( QObject*, QEvent* );
+		virtual bool eventFilter( TQObject*, TQEvent* );
 	private:
 		KGVShell& parent;
 };

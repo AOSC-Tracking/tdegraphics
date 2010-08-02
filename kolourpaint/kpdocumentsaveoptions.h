@@ -30,8 +30,8 @@
 #define KP_DOCUMENT_SAVE_OPTIONS_H
 
 
-class QPixmap;
-class QString;
+class TQPixmap;
+class TQString;
 
 class KConfigBase;
 
@@ -41,7 +41,7 @@ class kpDocumentSaveOptions
 public:
     kpDocumentSaveOptions ();
     kpDocumentSaveOptions (const kpDocumentSaveOptions &rhs);
-    kpDocumentSaveOptions (QString mimeType, int colorDepth, bool dither, int quality);
+    kpDocumentSaveOptions (TQString mimeType, int colorDepth, bool dither, int quality);
     virtual ~kpDocumentSaveOptions ();
 
     bool operator== (const kpDocumentSaveOptions &rhs) const;
@@ -50,14 +50,14 @@ public:
     kpDocumentSaveOptions &operator= (const kpDocumentSaveOptions &rhs);
 
 
-    void printDebug (const QString &prefix) const;
+    void printDebug (const TQString &prefix) const;
 
 
-    QString mimeType () const;
-    void setMimeType (const QString &mimeType);
+    TQString mimeType () const;
+    void setMimeType (const TQString &mimeType);
 
-    static QString invalidMimeType ();
-    static bool mimeTypeIsInvalid (const QString &mimeType);
+    static TQString invalidMimeType ();
+    static bool mimeTypeIsInvalid (const TQString &mimeType);
     bool mimeTypeIsInvalid () const;
 
 
@@ -86,8 +86,8 @@ public:
     // (All assume that <config>'s group has been set)
     // (None of them call KConfigBase::reparseConfig() nor KConfigBase::sync())
 
-    static QString defaultMimeType (KConfigBase *config);
-    static void saveDefaultMimeType (KConfigBase *config, const QString &mimeType);
+    static TQString defaultMimeType (KConfigBase *config);
+    static void saveDefaultMimeType (KConfigBase *config, const TQString &mimeType);
 
     static int defaultColorDepth (KConfigBase *config);
     static void saveDefaultColorDepth (KConfigBase *config, int colorDepth);
@@ -108,14 +108,14 @@ public:
 
 public:
     // (purely for informational purposes - not enforced by this class)
-    static int mimeTypeMaximumColorDepth (const QString &mimeType);
+    static int mimeTypeMaximumColorDepth (const TQString &mimeType);
     int mimeTypeMaximumColorDepth () const;
 
 
-    static bool mimeTypeHasConfigurableColorDepth (const QString &mimeType);
+    static bool mimeTypeHasConfigurableColorDepth (const TQString &mimeType);
     bool mimeTypeHasConfigurableColorDepth () const;
 
-    static bool mimeTypeHasConfigurableQuality (const QString &mimeType);
+    static bool mimeTypeHasConfigurableQuality (const TQString &mimeType);
     bool mimeTypeHasConfigurableQuality () const;
 
 
@@ -136,7 +136,7 @@ public:
     // Returns whether saving <pixmap> with these options will result in
     // loss of information.  Returned value is the bitwise OR of
     // LossType enum possiblities.
-    int isLossyForSaving (const QPixmap &pixmap) const;
+    int isLossyForSaving (const TQPixmap &pixmap) const;
 
 
 private:

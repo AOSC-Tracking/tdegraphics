@@ -20,10 +20,10 @@
 #ifndef _LIBKFAXIMAGE_H_
 #define _LIBKFAXIMAGE_H_
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qimage.h>
-#include <qptrlist.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqimage.h>
+#include <tqptrlist.h>
 #include <kdelibs_export.h>
 
 class pagenode;
@@ -45,9 +45,9 @@ class pagenode;
  *			406 dpi x 392 lpi
  */
 
-#define KFAX_DPI_STANDARD	QPoint(203,98)
-#define KFAX_DPI_FINE		QPoint(203,196)
-#define KFAX_DPI_SUPERFINE	QPoint(406,392)
+#define KFAX_DPI_STANDARD	TQPoint(203,98)
+#define KFAX_DPI_FINE		TQPoint(203,196)
+#define KFAX_DPI_SUPERFINE	TQPoint(406,392)
 
 
 class KDE_EXPORT KFaxImage : public QObject
@@ -63,7 +63,7 @@ public:
      *  @see: numPages
      */
 
-    KFaxImage( const QString &filename = QString::null, QObject *parent = 0, const char *name = 0 );
+    KFaxImage( const TQString &filename = TQString::null, TQObject *parent = 0, const char *name = 0 );
 
     /**
      *  Destructor
@@ -81,14 +81,14 @@ public:
      *  @see: errorString
      */
 
-    bool loadImage( const QString &filename );
+    bool loadImage( const TQString &filename );
 
     /**
      *  returns currently loaded image file name.
      *  @return FAX filename
      */
 
-    QString filename() { return m_filename; };
+    TQString filename() { return m_filename; };
 
     /**
      *  returns number of pages which are stored in the FAX file
@@ -98,34 +98,34 @@ public:
     unsigned int numPages() const { return m_pagenodes.count(); };
 
     /**
-     *  returns a QImage which holds the contents of page pageNr
+     *  returns a TQImage which holds the contents of page pageNr
      *  @param pageNr: page number (starting with 0)
-     *  @return QImage of the page pageNr
+     *  @return TQImage of the page pageNr
      */
 
-    QImage page( unsigned int pageNr );
+    TQImage page( unsigned int pageNr );
 
     /**
      *  returns the DPI (dots per inch) of page pageNr
      *  @param pageNr: page number (starting with 0)
-     *  @return a QPoint value with the DPIs in X- and Y-direction
+     *  @return a TQPoint value with the DPIs in X- and Y-direction
      */
 
-    QPoint page_dpi( unsigned int pageNr );
+    TQPoint page_dpi( unsigned int pageNr );
 
     /**
      *  returns the physical pixels of page pageNr
      *  @param pageNr: page number (starting with 0)
-     *  @return a QSize value with the width and height of the image
+     *  @return a TQSize value with the width and height of the image
      */
 
-    QSize page_size( unsigned int pageNr );
+    TQSize page_size( unsigned int pageNr );
 
     /**
      *  @return a user-visible, translated error string
      */
 
-    const QString errorString() const { return m_errorString; };
+    const TQString errorString() const { return m_errorString; };
 
 
 
@@ -135,10 +135,10 @@ public:
      *  private member variables
      */
 
-    QString m_filename;
-    QString m_errorString;
+    TQString m_filename;
+    TQString m_errorString;
 
-    typedef QPtrList<pagenode> t_PageNodeList;
+    typedef TQPtrList<pagenode> t_PageNodeList;
     t_PageNodeList m_pagenodes;
 
     /**
@@ -146,7 +146,7 @@ public:
      */
 
     void reset();
-    void kfaxerror(const QString& error);
+    void kfaxerror(const TQString& error);
     pagenode *AppendImageNode(int type);
     bool NewImage(pagenode *pn, int w, int h);
     void FreeImage(pagenode *pn);

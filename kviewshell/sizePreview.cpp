@@ -11,15 +11,15 @@
 
 #include <kdebug.h>
 #include <krandomsequence.h>
-#include <qevent.h>
-#include <qpainter.h>
+#include <tqevent.h>
+#include <tqpainter.h>
 
 #include "sizePreview.h"
 
 #include "simplePageSize.h"
 
-SizePreview::SizePreview( QWidget *parent, const char *name, WFlags)
-    : QWidget( parent, name, WStaticContents | WNoAutoErase )
+SizePreview::SizePreview( TQWidget *parent, const char *name, WFlags)
+    : TQWidget( parent, name, WStaticContents | WNoAutoErase )
 {
   // Set a sane default
   _width = _height = 50.0;
@@ -44,12 +44,12 @@ void SizePreview::setSize(const SimplePageSize& size)
   update();
 }
 
-void SizePreview::resizeEvent(QResizeEvent*)
+void SizePreview::resizeEvent(TQResizeEvent*)
 {
   update();
 }
 
-void SizePreview::paintEvent( QPaintEvent * )
+void SizePreview::paintEvent( TQPaintEvent * )
 {
   int displayedWidth, displayedHeight;
 
@@ -73,7 +73,7 @@ void SizePreview::paintEvent( QPaintEvent * )
   // Now draw the graphics
   pixmap.resize(width(), height());
 
-  QPainter p(&pixmap);
+  TQPainter p(&pixmap);
   p.fillRect(rect(), colorGroup().background());
   p.setPen(Qt::black);
   p.setBrush(Qt::white);
@@ -81,7 +81,7 @@ void SizePreview::paintEvent( QPaintEvent * )
 
   // mark the textbox; we assume 25mm margin
   int margin = (int)(25.0*displayedWidth/_width + 0.5);
-  QRect textBox(hOffset+margin, vOffset+margin, displayedWidth-2*margin, displayedHeight-2*margin);
+  TQRect textBox(hOffset+margin, vOffset+margin, displayedWidth-2*margin, displayedHeight-2*margin);
   p.setPen(Qt::lightGray);
   p.drawRect(textBox);
 

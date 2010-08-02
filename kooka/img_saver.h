@@ -26,19 +26,19 @@
 
 #ifndef __IMG_SAVER_H__
 #define __IMG_SAVER_H__
-#include <qobject.h>
-#include <qwidget.h>
-#include <qlabel.h>
-#include <qmemarray.h>
-#include <qstring.h>
-#include <qimage.h>
+#include <tqobject.h>
+#include <tqwidget.h>
+#include <tqlabel.h>
+#include <tqmemarray.h>
+#include <tqstring.h>
+#include <tqimage.h>
 #include <stdlib.h>
-#include <qdialog.h>
-#include <qpushbutton.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
-#include <qlistbox.h>
-#include <qmap.h>
+#include <tqdialog.h>
+#include <tqpushbutton.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
+#include <tqlistbox.h>
+#include <tqmap.h>
 #include <kdialogbase.h>
 #include <kurl.h>
 
@@ -102,36 +102,36 @@ class FormatDialog:public KDialogBase
 {
    Q_OBJECT
 public:
-   FormatDialog( QWidget *parent, const QString&, const char * );
+   FormatDialog( TQWidget *parent, const TQString&, const char * );
 
 
-   QString      getFormat( ) const;
-   QCString      getSubFormat( ) const;
-   QString      errorString( ImgSaveStat stat );
+   TQString      getFormat( ) const;
+   TQCString      getSubFormat( ) const;
+   TQString      errorString( ImgSaveStat stat );
 
    bool         askForFormat( ) const
       { return( ! cbDontAsk->isChecked()); }
 
 public slots:
-    void        setSelectedFormat( QString );
+    void        setSelectedFormat( TQString );
 
 
 protected slots:
-   void 	showHelp( const QString& item );
+   void 	showHelp( const TQString& item );
 
 private:
 
-   void		check_subformat( const QString & format );
+   void		check_subformat( const TQString & format );
    void 	buildHelp( void );
    void 	readConfig( void );
 
-   QMap<QString, QString> 	format_help;
-   QComboBox   	*cb_subf;
-   QListBox    	*lb_format;
-   QLabel      	*l_help;
+   TQMap<TQString, TQString> 	format_help;
+   TQComboBox   	*cb_subf;
+   TQListBox    	*lb_format;
+   TQLabel      	*l_help;
    QLabel	*l2;
-   QCheckBox    *cbRemember;
-   QCheckBox    *cbDontAsk;
+   TQCheckBox    *cbRemember;
+   TQCheckBox    *cbDontAsk;
 };
 
 /**
@@ -142,7 +142,7 @@ private:
  *  and cares for database entries (later ;)
  **/
 
-class ImgSaver:public QObject {
+class ImgSaver:public TQObject {
    Q_OBJECT
 public:
 	/**
@@ -153,56 +153,56 @@ public:
 	 *  @param dir  Name of the save root directory
 	 *  @param name Name of a subdirectory in the saveroot.
 	 **/
-   ImgSaver( QWidget *parent, const KURL );
-   ImgSaver( QWidget *parent );
+   ImgSaver( TQWidget *parent, const KURL );
+   ImgSaver( TQWidget *parent );
 
-   QString     errorString( ImgSaveStat );
+   TQString     errorString( ImgSaveStat );
    /**
     *  returns the name of the last file that was saved by ImgSaver.
     */
-   QString     lastFilename() const { return( last_file ); }
+   TQString     lastFilename() const { return( last_file ); }
    KURL        lastFileUrl() const { return( KURL(last_file )); }
    /**
     *  returns the image format of the last saved image.
     */
-   QCString    lastSaveFormat( void ) const { return( last_format ); }
+   TQCString    lastSaveFormat( void ) const { return( last_format ); }
 
-   QString     getFormatForType( picType ) const;
-   void        storeFormatForType( picType, QString, bool );
-   bool        isRememberedFormat( picType type, QString format ) const;
+   TQString     getFormatForType( picType ) const;
+   void        storeFormatForType( picType, TQString, bool );
+   bool        isRememberedFormat( picType type, TQString format ) const;
 
    /* static function that exports a file */
-   static bool    copyImage( const KURL& fromUrl, const KURL& toUrl, QWidget *overWidget=0 );
-   static bool    renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt=false, QWidget *overWidget=0 );
-   static QString tempSaveImage( KookaImage *img, const QString& format, int colors = -1 );
+   static bool    copyImage( const KURL& fromUrl, const KURL& toUrl, TQWidget *overWidget=0 );
+   static bool    renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt=false, TQWidget *overWidget=0 );
+   static TQString tempSaveImage( KookaImage *img, const TQString& format, int colors = -1 );
 
    /* static function that returns the extension of an url */
-   static QString extension( const KURL& );
+   static TQString extension( const KURL& );
 
 public slots:
-   ImgSaveStat saveImage( QImage *image );
-   ImgSaveStat saveImage( QImage *image, const KURL& filename, const QString& imgFormat );
+   ImgSaveStat saveImage( TQImage *image );
+   ImgSaveStat saveImage( TQImage *image, const KURL& filename, const TQString& imgFormat );
 
 private:
-   QString 	picTypeAsString( picType type ) const;
-   QString      findFormat( picType type );
-   QString      findSubFormat( QString format );
-   void		createDir( const QString& );
+   TQString 	picTypeAsString( picType type ) const;
+   TQString      findFormat( picType type );
+   TQString      findSubFormat( TQString format );
+   void		createDir( const TQString& );
 
-   ImgSaveStat  save( QImage *image, const QString &filename, const QString &format,
-		     const QString &subformat );
-   QString      createFilename( QString format );
+   ImgSaveStat  save( TQImage *image, const TQString &filename, const TQString &format,
+		     const TQString &subformat );
+   TQString      createFilename( TQString format );
    void	        readConfig( void );
-   QString      startFormatDialog( picType );
+   TQString      startFormatDialog( picType );
 
-   // QStrList    all_formats;
-   QString     	directory;    // dir where the image should be saved
-   QString     	last_file;
-   QCString   	subformat;
-   QCString    	last_format;
+   // TQStrList    all_formats;
+   TQString     	directory;    // dir where the image should be saved
+   TQString     	last_file;
+   TQCString   	subformat;
+   TQCString    	last_format;
    bool	       	ask_for_format;
 
-   // QDict<QString> formats;
+   // TQDict<TQString> formats;
 };
 
 #endif

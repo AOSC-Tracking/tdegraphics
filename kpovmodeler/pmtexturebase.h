@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 #include "pmnamedobject.h"
 #include "pmdeclare.h"
@@ -50,7 +50,7 @@ public:
    virtual ~PMTextureBase( );
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 

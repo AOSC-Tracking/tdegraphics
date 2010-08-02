@@ -30,22 +30,22 @@
 
 #include <kpsqueezedtextlabel.h>
 
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qstring.h>
+#include <tqfont.h>
+#include <tqfontmetrics.h>
+#include <tqstring.h>
 
 #include <kdebug.h>
 #include <klocale.h>
 
 
-kpSqueezedTextLabel::kpSqueezedTextLabel (QWidget *parent, const char *name)
-    : QLabel (parent, name),
+kpSqueezedTextLabel::kpSqueezedTextLabel (TQWidget *parent, const char *name)
+    : TQLabel (parent, name),
       m_showEllipsis (true)
 {
 }
 
-kpSqueezedTextLabel::kpSqueezedTextLabel (const QString &text, QWidget *parent, const char *name)
-    : QLabel (parent, name),
+kpSqueezedTextLabel::kpSqueezedTextLabel (const TQString &text, TQWidget *parent, const char *name)
+    : TQLabel (parent, name),
       m_showEllipsis (true)
 {
     setText (text);
@@ -53,18 +53,18 @@ kpSqueezedTextLabel::kpSqueezedTextLabel (const QString &text, QWidget *parent, 
 
 
 // public virtual
-QSize kpSqueezedTextLabel::minimumSizeHint () const
+TQSize kpSqueezedTextLabel::minimumSizeHint () const
 {
 #if DEBUG_KP_SQUEEZED_TEXT_LABEL && 1
     kdDebug () << "kpSqueezedTextLabel::minimumSizeHint() qLabel prefers"
-               << QLabel::minimumSizeHint () << endl;
+               << TQLabel::minimumSizeHint () << endl;
 #endif
-    return QSize (-1/*no minimum width*/, QLabel::minimumHeight ());
+    return TQSize (-1/*no minimum width*/, TQLabel::minimumHeight ());
 }
 
 
 // public
-QString kpSqueezedTextLabel::fullText () const
+TQString kpSqueezedTextLabel::fullText () const
 {
     return m_fullText;
 }
@@ -89,7 +89,7 @@ void kpSqueezedTextLabel::setShowEllipsis (bool yes)
 
 
 // public slots virtual [base QLabel]
-void kpSqueezedTextLabel::setText (const QString &text)
+void kpSqueezedTextLabel::setText (const TQString &text)
 {
     m_fullText = text;
     squeezeText ();
@@ -97,7 +97,7 @@ void kpSqueezedTextLabel::setText (const QString &text)
 
 
 // protected virtual [base QWidget]
-void kpSqueezedTextLabel::resizeEvent (QResizeEvent *e)
+void kpSqueezedTextLabel::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_SQUEEZED_TEXT_LABEL && 1
     kdDebug () << "kpSqueezedTextLabeL::resizeEvent() size=" << e->size ()
@@ -109,9 +109,9 @@ void kpSqueezedTextLabel::resizeEvent (QResizeEvent *e)
 
 
 // protected
-QString kpSqueezedTextLabel::ellipsisText () const
+TQString kpSqueezedTextLabel::ellipsisText () const
 {
-    return m_showEllipsis ? i18n ("...") : QString::null;
+    return m_showEllipsis ? i18n ("...") : TQString::null;
 }
     
 // protected
@@ -121,7 +121,7 @@ void kpSqueezedTextLabel::squeezeText ()
     kdDebug () << "kpSqueezedTextLabeL::squeezeText" << endl;
 #endif
 
-    QFontMetrics fontMetrics (font ());
+    TQFontMetrics fontMetrics (font ());
     int fullTextWidth = fontMetrics.width (m_fullText);
 #if DEBUG_KP_SQUEEZED_TEXT_LABEL && 1
     kdDebug () << "\tfullText=" << m_fullText
@@ -135,7 +135,7 @@ void kpSqueezedTextLabel::squeezeText ()
     #if DEBUG_KP_SQUEEZED_TEXT_LABEL && 1
         kdDebug () << "\tfullText will fit - display" << endl;
     #endif
-        QLabel::setText (m_fullText);
+        TQLabel::setText (m_fullText);
     }
     else
     {
@@ -151,7 +151,7 @@ void kpSqueezedTextLabel::squeezeText ()
         #if DEBUG_KP_SQUEEZED_TEXT_LABEL && 1
             kdDebug () << "\t\t\tcan't even fit \"...\" - forget it" << endl;
         #endif
-            QLabel::setText (QString::null);
+            TQLabel::setText (TQString::null);
             return;
         }
 
@@ -208,7 +208,7 @@ void kpSqueezedTextLabel::squeezeText ()
             }
         }
 
-        QLabel::setText (m_fullText.left (numLettersToUse) + ellipsisText ());
+        TQLabel::setText (m_fullText.left (numLettersToUse) + ellipsisText ());
     }
 }
 

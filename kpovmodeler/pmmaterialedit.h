@@ -39,7 +39,7 @@ public:
    /**
     * Creates a PMMaterialEdit with parent and name
     */
-   PMMaterialEdit( QWidget* parent, const char* name = 0 );
+   PMMaterialEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

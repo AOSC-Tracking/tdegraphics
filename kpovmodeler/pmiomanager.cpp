@@ -61,7 +61,7 @@ void PMIOManager::addFormat( PMIOFormat* format )
       kdError( PMArea ) << "Format " << format->name( ) << "already registered" << endl;
 }
 
-void PMIOManager::removeFormat( const QString& name )
+void PMIOManager::removeFormat( const TQString& name )
 {
    PMIOFormat* pFormat = format( name );
    if( pFormat )
@@ -71,14 +71,14 @@ void PMIOManager::removeFormat( const QString& name )
    }
 }
 
-PMIOFormat* PMIOManager::format( const QString& name ) const
+PMIOFormat* PMIOManager::format( const TQString& name ) const
 {
    return m_dict.find( name );
 }
 
-PMIOFormat* PMIOManager::formatForMimeType( const QString& mime ) const
+PMIOFormat* PMIOManager::formatForMimeType( const TQString& mime ) const
 {
-   QPtrListIterator<PMIOFormat> it( m_formats );
+   TQPtrListIterator<PMIOFormat> it( m_formats );
    bool found = false;
    PMIOFormat* pFormat = 0;
 

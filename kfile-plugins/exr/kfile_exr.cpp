@@ -45,12 +45,12 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qimage.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqimage.h>
 
 
 #include "kfile_exr.h"
@@ -60,8 +60,8 @@ typedef KGenericFactory<KExrPlugin> ExrFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_exr, ExrFactory("kfile_exr"))
 
-KExrPlugin::KExrPlugin(QObject *parent, const char *name,
-                       const QStringList &args)
+KExrPlugin::KExrPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args)
     : KFilePlugin(parent, name, args)
 {
     // set up our mime type
@@ -72,92 +72,92 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
 
 	// info group
     group = addGroupInfo( info, "Info", i18n("Information") );
-    addItemInfo( group, "Version", i18n("Format Version"), QVariant::Int );
-    addItemInfo( group, "Tiled image", i18n("Tiled Image"), QVariant::String );
-	item = addItemInfo( group, "Dimensions", i18n("Dimensions"), QVariant::Size );
+    addItemInfo( group, "Version", i18n("Format Version"), TQVariant::Int );
+    addItemInfo( group, "Tiled image", i18n("Tiled Image"), TQVariant::String );
+	item = addItemInfo( group, "Dimensions", i18n("Dimensions"), TQVariant::Size );
 	setHint( item, KFileMimeTypeInfo::Size );
 	setUnit( item, KFileMimeTypeInfo::Pixels );
 	item = addItemInfo( group, "ThumbnailDimensions",
-						i18n("Thumbnail Dimensions"), QVariant::Size );
+						i18n("Thumbnail Dimensions"), TQVariant::Size );
 	setHint( item, KFileMimeTypeInfo::Size );
 	setUnit( item, KFileMimeTypeInfo::Pixels );
-	addItemInfo( group, "Comment", i18n("Comment"), QVariant::String );
-	item = addItemInfo( group, "Thumbnail", i18n("Thumbnail"), QVariant::Image );
+	addItemInfo( group, "Comment", i18n("Comment"), TQVariant::String );
+	item = addItemInfo( group, "Thumbnail", i18n("Thumbnail"), TQVariant::Image );
 	setHint( item, KFileMimeTypeInfo::Thumbnail );
 
 	// standard attributes group
     group = addGroupInfo( info, "Standard", i18n("Standard Attributes") );
-    addItemInfo( group, "Owner", i18n("Owner"), QVariant::String );
-	addItemInfo( group, "Comments", i18n("Comments"), QVariant::String );
-	addItemInfo( group, "Capture Date", i18n("Capture Date"), QVariant::String );
-	item = addItemInfo( group, "UTC Offset", i18n("UTC Offset"), QVariant::String );
-	item = addItemInfo( group, "Exposure time", i18n("Exposure Time"), QVariant::Double);
+    addItemInfo( group, "Owner", i18n("Owner"), TQVariant::String );
+	addItemInfo( group, "Comments", i18n("Comments"), TQVariant::String );
+	addItemInfo( group, "Capture Date", i18n("Capture Date"), TQVariant::String );
+	item = addItemInfo( group, "UTC Offset", i18n("UTC Offset"), TQVariant::String );
+	item = addItemInfo( group, "Exposure time", i18n("Exposure Time"), TQVariant::Double);
 	setUnit( item, KFileMimeTypeInfo::Seconds );
-	item = addItemInfo( group, "Focus", i18n("Focus"), QVariant::Double);
+	item = addItemInfo( group, "Focus", i18n("Focus"), TQVariant::Double);
 	setSuffix( item, i18n("Metres", "m") );
-	item = addItemInfo( group, "X Density", i18n("X Density"), QVariant::Double);
+	item = addItemInfo( group, "X Density", i18n("X Density"), TQVariant::Double);
 	setSuffix( item, i18n("Pixels Per Inch", " ppi") );
-	item = addItemInfo( group, "White luminance", i18n("White Luminance"), QVariant::Double);
+	item = addItemInfo( group, "White luminance", i18n("White Luminance"), TQVariant::Double);
 	setSuffix( item, i18n("Candelas per square metre", " Nits") );
-	addItemInfo( group, "Longitude", i18n("Longitude"), QVariant::String );
-	addItemInfo( group, "Latitude", i18n("Latitude"), QVariant::String );
-	item = 	addItemInfo( group, "Altitude", i18n("Altitude"), QVariant::String );
+	addItemInfo( group, "Longitude", i18n("Longitude"), TQVariant::String );
+	addItemInfo( group, "Latitude", i18n("Latitude"), TQVariant::String );
+	item = 	addItemInfo( group, "Altitude", i18n("Altitude"), TQVariant::String );
 	setSuffix( item, i18n("Metres", "m") );
-	addItemInfo( group, "ISO speed", i18n("ISO Speed"), QVariant::Double );
-	addItemInfo( group, "Aperture", i18n("Aperture"), QVariant::Double );
+	addItemInfo( group, "ISO speed", i18n("ISO Speed"), TQVariant::Double );
+	addItemInfo( group, "Aperture", i18n("Aperture"), TQVariant::Double );
 
     // channel group
     group = addGroupInfo( info, "Channel", i18n("Channels") );
-    addItemInfo( group, "A", i18n("A"), QVariant::String );
-    addItemInfo( group, "R", i18n("R"), QVariant::String );
-    addItemInfo( group, "G", i18n("G"), QVariant::String );
-    addItemInfo( group, "B", i18n("B"), QVariant::String );
-    addItemInfo( group, "Z", i18n("Z"), QVariant::String );
-    addItemInfo( group, "NX", i18n("NX"), QVariant::String );
-    addItemInfo( group, "NY", i18n("NY"), QVariant::String );
-    addItemInfo( group, "NZ", i18n("NZ"), QVariant::String );
-    addItemInfo( group, "R", i18n("R"), QVariant::String );
-    addItemInfo( group, "U", i18n("U"), QVariant::String );
-    addItemInfo( group, "V", i18n("V"), QVariant::String );
-    addItemInfo( group, "materialID", i18n("materialID"), QVariant::String );
-    addItemInfo( group, "objectID", i18n("objectID"), QVariant::String );
-    addItemInfo( group, "renderID", i18n("renderID"), QVariant::String );
-    addItemInfo( group, "pixelCover", i18n("pixelCover"), QVariant::String );
-    addItemInfo( group, "velX", i18n("velX"), QVariant::String );
-    addItemInfo( group, "velY", i18n("velY"), QVariant::String );
-    addItemInfo( group, "packedRGBA", i18n("packedRGBA"), QVariant::String );
+    addItemInfo( group, "A", i18n("A"), TQVariant::String );
+    addItemInfo( group, "R", i18n("R"), TQVariant::String );
+    addItemInfo( group, "G", i18n("G"), TQVariant::String );
+    addItemInfo( group, "B", i18n("B"), TQVariant::String );
+    addItemInfo( group, "Z", i18n("Z"), TQVariant::String );
+    addItemInfo( group, "NX", i18n("NX"), TQVariant::String );
+    addItemInfo( group, "NY", i18n("NY"), TQVariant::String );
+    addItemInfo( group, "NZ", i18n("NZ"), TQVariant::String );
+    addItemInfo( group, "R", i18n("R"), TQVariant::String );
+    addItemInfo( group, "U", i18n("U"), TQVariant::String );
+    addItemInfo( group, "V", i18n("V"), TQVariant::String );
+    addItemInfo( group, "materialID", i18n("materialID"), TQVariant::String );
+    addItemInfo( group, "objectID", i18n("objectID"), TQVariant::String );
+    addItemInfo( group, "renderID", i18n("renderID"), TQVariant::String );
+    addItemInfo( group, "pixelCover", i18n("pixelCover"), TQVariant::String );
+    addItemInfo( group, "velX", i18n("velX"), TQVariant::String );
+    addItemInfo( group, "velY", i18n("velY"), TQVariant::String );
+    addItemInfo( group, "packedRGBA", i18n("packedRGBA"), TQVariant::String );
 
 
     // technical group
     group = addGroupInfo( info, "Technical", i18n("Technical Details") );
-    addItemInfo( group, "Compression", i18n("Compression"), QVariant::String );
-    addItemInfo( group, "Line Order", i18n("Line Order"), QVariant::String );
+    addItemInfo( group, "Compression", i18n("Compression"), TQVariant::String );
+    addItemInfo( group, "Line Order", i18n("Line Order"), TQVariant::String );
 
     // 3dsMax group
 	// This supports a special plugin for 3D Studio Max
     group = addGroupInfo( info, "3dsMax", i18n("3dsMax Details") );
-    addItemInfo( group, "Local time", i18n("Local Time"), QVariant::String );
-    addItemInfo( group, "System time", i18n("System Time"), QVariant::String );
-    addItemInfo( group, "Plugin version", i18n("Plugin Version"), QVariant::String );
-    addItemInfo( group, "EXR version", i18n("EXR Version"), QVariant::String );
-    addItemInfo( group, "Computer name", i18n("Computer Name"), QVariant::String );
+    addItemInfo( group, "Local time", i18n("Local Time"), TQVariant::String );
+    addItemInfo( group, "System time", i18n("System Time"), TQVariant::String );
+    addItemInfo( group, "Plugin version", i18n("Plugin Version"), TQVariant::String );
+    addItemInfo( group, "EXR version", i18n("EXR Version"), TQVariant::String );
+    addItemInfo( group, "Computer name", i18n("Computer Name"), TQVariant::String );
 }
 
-QCString doType( PixelType pt )
+TQCString doType( PixelType pt )
 {
     switch (pt)
     {
 	case UINT:
-		return QCString("32-bit unsigned integer");
+		return TQCString("32-bit unsigned integer");
 		break;
 	case HALF:
-		return QCString("16-bit floating-point");
+		return TQCString("16-bit floating-point");
 		break;
 	case FLOAT:
-		return QCString("32-bit floating-point");
+		return TQCString("32-bit floating-point");
 		break;
     default:
-		return QCString();
+		return TQCString();
 		break;
     }
 }
@@ -183,13 +183,13 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		}
 
 		Imath::Box2i dw = h.dataWindow();
-		appendItem( infogroup, "Dimensions", QSize( (dw.max.x - dw.min.x + 1 ),
+		appendItem( infogroup, "Dimensions", TQSize( (dw.max.x - dw.min.x + 1 ),
 													(dw.max.y - dw.min.y + 1 ) ) );
 
 		if ( h.hasPreviewImage() ) {
 			const PreviewImage &preview = in.header().previewImage();
-			appendItem( infogroup, "ThumbnailDimensions", QSize(preview.width(), preview.height()) );
-			QImage qpreview(preview.width(), preview.height(), 32, 0, QImage::BigEndian);
+			appendItem( infogroup, "ThumbnailDimensions", TQSize(preview.width(), preview.height()) );
+			TQImage qpreview(preview.width(), preview.height(), 32, 0, TQImage::BigEndian);
 			for ( unsigned int y=0; y < preview.height(); y++ ) {
 				for ( unsigned int x=0; x < preview.width(); x++ ) {
 					const PreviewRgba &q = preview.pixels()[x+(y*preview.width())];
@@ -202,7 +202,7 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		const StringAttribute *commentSA = h.findTypedAttribute <StringAttribute> ("comment");
 		if (commentSA) {
 			std::string commentString = commentSA->value();
-			QString qcommentString(commentString.data());
+			TQString qcommentString(commentString.data());
 			qcommentString.setLength(commentString.size());
 			appendItem( infogroup, "Comment", qcommentString );
 		}
@@ -211,19 +211,19 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		// meaningfully represent.
 		if ( hasComments(h) ) {
 			std::string commentsString = comments(h);
-			QString qcommentsString(commentsString.data());
+			TQString qcommentsString(commentsString.data());
 			qcommentsString.setLength(commentsString.size());
 			appendItem( stdgroup, "Comments", qcommentsString );
 		}
 		if ( hasOwner(h) ) {
 			std::string ownerString = owner(h);
-			QString qownerString(ownerString.data());
+			TQString qownerString(ownerString.data());
 			qownerString.setLength(ownerString.size());
 			appendItem( stdgroup, "Owner", qownerString );
 		}
 		if ( hasCapDate(h) ) {
 			std::string capDateString = capDate(h);
-			QString qcapDateString(capDateString.data());
+			TQString qcapDateString(capDateString.data());
 			qcapDateString.setLength(capDateString.size());
 			appendItem( stdgroup, "Capture Date", qcapDateString );
 		}
@@ -235,12 +235,12 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		// This is the 1.6.0 and later version
 		if ( hasUtcOffset(h) ) {
 #endif
-			QString UTCOffset;
+			TQString UTCOffset;
 			if (utcOffset(h)>0.0) {
-				UTCOffset.append(QString("%1").arg(utcOffset(h)/3600, 0, 'f', 1));
+				UTCOffset.append(TQString("%1").arg(utcOffset(h)/3600, 0, 'f', 1));
 				UTCOffset.append(" hours behind UTC");
 			} else {
-				UTCOffset.append(QString("%1").arg(-1.0*utcOffset(h)/3600, 0, 'f', 1));
+				UTCOffset.append(TQString("%1").arg(-1.0*utcOffset(h)/3600, 0, 'f', 1));
 				UTCOffset.append(" hours ahead of UTC");
 			}
 			appendItem( stdgroup, "UTC Offset", UTCOffset); 
@@ -262,30 +262,30 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 			appendItem( stdgroup, "White luminance", WhiteLuminance );
 		}
 		if ( hasLongitude(h) ) {
-			QString Longitude;
+			TQString Longitude;
 			if (longitude(h)<0.0) {
-				Longitude.append(QString("%1").arg(-1.0*longitude(h),0,'f',3));
+				Longitude.append(TQString("%1").arg(-1.0*longitude(h),0,'f',3));
 				Longitude.append(" deg West");
 			} else {
-				Longitude.append(QString("%1").arg(longitude(h),0,'f',3));
+				Longitude.append(TQString("%1").arg(longitude(h),0,'f',3));
 				Longitude.append(" deg East");
 			}
 			appendItem( stdgroup, "Longitude", Longitude);
 		}
 		if ( hasLatitude(h) ) {
-			QString Latitude;
+			TQString Latitude;
 			if (latitude(h)<0.0) {
-				Latitude.append(QString("%1").arg(-1.0*latitude(h),0,'f',3));
+				Latitude.append(TQString("%1").arg(-1.0*latitude(h),0,'f',3));
 				Latitude.append(" deg South");
 			} else {
-				Latitude.append(QString("%1").arg(latitude(h),0,'f',3));
+				Latitude.append(TQString("%1").arg(latitude(h),0,'f',3));
 				Latitude.append(" deg North");
 			}
 			appendItem( stdgroup, "Latitude", Latitude );
 		}
 		if ( hasAltitude(h) ) {
 			double Altitude = altitude(h);
-			appendItem( stdgroup, "Altitude", QString("%1").arg(Altitude,0,'f',1) );
+			appendItem( stdgroup, "Altitude", TQString("%1").arg(Altitude,0,'f',1) );
 		}
 		if ( hasIsoSpeed(h) ) {
 			double IsoSpeed = isoSpeed(h);
@@ -348,35 +348,35 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		const StringAttribute *ver3DSM = h.findTypedAttribute <StringAttribute> ("version3dsMax");
 		if (ver3DSM) {
 			std::string ver3DSMstring = ver3DSM->value();
-			QString qver3DSMstring(ver3DSMstring.data());
+			TQString qver3DSMstring(ver3DSMstring.data());
 			qver3DSMstring.setLength(ver3DSMstring.size());
 			appendItem( threedsmaxgroup, "Plugin version", qver3DSMstring );
 		}
 		const StringAttribute *verEXR = h.findTypedAttribute <StringAttribute> ("versionEXR");
 		if (verEXR) {
 			std::string verEXRstring = verEXR->value();
-			QString qverEXRstring(verEXRstring.data());
+			TQString qverEXRstring(verEXRstring.data());
 			qverEXRstring.setLength(verEXRstring.size());
-			appendItem( threedsmaxgroup, "EXR version", QString( verEXRstring.data() ) );
+			appendItem( threedsmaxgroup, "EXR version", TQString( verEXRstring.data() ) );
 		}
 		const StringAttribute *localTime = h.findTypedAttribute <StringAttribute> ("localTime");
 		if (localTime) {
 			std::string localTimeString = localTime->value();
-			QString qlocalTimeString(localTimeString.data());
+			TQString qlocalTimeString(localTimeString.data());
 			qlocalTimeString.setLength(localTimeString.size());
 			appendItem( threedsmaxgroup, "Local time", qlocalTimeString );
 		}
 		const StringAttribute *systemTime = h.findTypedAttribute <StringAttribute> ("systemTime");
 		if (systemTime) {
 			std::string systemTimeString = systemTime->value();
-			QString qsystemTimeString(systemTimeString.data());
+			TQString qsystemTimeString(systemTimeString.data());
 			qsystemTimeString.setLength(systemTimeString.size());
 			appendItem( threedsmaxgroup, "System time", qsystemTimeString );
 		}
 		const StringAttribute *computerName = h.findTypedAttribute <StringAttribute> ("computerName");
 		if (computerName) {
 			std::string computerNameString = computerName->value();
-			QString qcomputerNameString(computerNameString.data());
+			TQString qcomputerNameString(computerNameString.data());
 			qcomputerNameString.setLength(computerNameString.size());
 			appendItem( threedsmaxgroup, "Computer name", qcomputerNameString );
 		}

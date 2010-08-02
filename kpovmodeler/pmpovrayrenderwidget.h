@@ -22,11 +22,11 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qcstring.h>
-#include <qimage.h>
-#include <qbuffer.h>
-#include <qstringlist.h>
+#include <tqwidget.h>
+#include <tqcstring.h>
+#include <tqimage.h>
+#include <tqbuffer.h>
+#include <tqstringlist.h>
 
 #include "pmrendermode.h"
 #include "pmdragwidget.h"
@@ -47,7 +47,7 @@ public:
    /**
     * Standard constructor
     */
-   PMPovrayRenderWidget( QWidget* parent = 0, const char* name = 0 );
+   PMPovrayRenderWidget( TQWidget* parent = 0, const char* name = 0 );
    /**
     * destructor
     */
@@ -58,17 +58,17 @@ public:
     * render mode m.
     * @see PMRenderMode
     */
-   bool render( const QByteArray& scene, const PMRenderMode& m,
+   bool render( const TQByteArray& scene, const PMRenderMode& m,
                 const KURL& documentURL );
 
    /**
     * Returns the povray text output
     */
-   QString povrayOutput( ) const { return m_povrayOutput; }
+   TQString povrayOutput( ) const { return m_povrayOutput; }
    /**
     * Returns the rendered image
     */
-   QImage image( ) const { return m_image; }
+   TQImage image( ) const { return m_image; }
    
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );
@@ -76,21 +76,21 @@ public:
    /**
     * Returns the povray command
     */
-   static QString povrayCommand( ) { return s_povrayCommand; }
+   static TQString povrayCommand( ) { return s_povrayCommand; }
    /**
     * Sets the povray command
     */
-   static void setPovrayCommand( const QString& c ) { s_povrayCommand = c; }
+   static void setPovrayCommand( const TQString& c ) { s_povrayCommand = c; }
    /**
     * Returns the library paths
     */
-   static QStringList povrayLibraryPaths( ) { return s_libraryPaths; }
+   static TQStringList povrayLibraryPaths( ) { return s_libraryPaths; }
    /**
     * Sets the library paths
     */
-   static void setPovrayLibraryPaths( const QStringList& slist )
+   static void setPovrayLibraryPaths( const TQStringList& slist )
    { s_libraryPaths = slist; }
-   virtual QSize sizeHint( ) const;
+   virtual TQSize sizeHint( ) const;
 
    virtual void startDrag( );
 signals:
@@ -109,7 +109,7 @@ signals:
    /**
     * The povray output text
     */
-   void povrayMessage( const QString& msg );
+   void povrayMessage( const TQString& msg );
    
 public slots:
    /**
@@ -144,7 +144,7 @@ protected slots:
    void slotRenderingFinished( KProcess* proc );
    
 protected:
-   virtual void paintEvent( QPaintEvent* );
+   virtual void paintEvent( TQPaintEvent* );
       
 private:
    void setPixel( int x, int y, uint c );
@@ -153,7 +153,7 @@ private:
    KProcess* m_pProcess;
    bool m_bSuspended;
    PMRenderMode m_renderMode;
-   QImage m_image;
+   TQImage m_image;
    bool m_rcvHeader;
    unsigned char m_header[18];
    int m_rcvHeaderBytes;
@@ -165,13 +165,13 @@ private:
    int m_numRestBytes;
    int m_line;
    int m_column;
-   QPixmap m_pixmap;
+   TQPixmap m_pixmap;
    bool m_bPixmapUpToDate;
-   QString m_povrayOutput;
+   TQString m_povrayOutput;
    KTempFile* m_pTempFile;
 
-   static QString s_povrayCommand;
-   static QStringList s_libraryPaths;
+   static TQString s_povrayCommand;
+   static TQStringList s_libraryPaths;
 };
 
 #endif

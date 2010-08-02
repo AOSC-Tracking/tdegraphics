@@ -20,16 +20,16 @@
 #define DEFAULTS_H
 
 #include <klocale.h>
-#include <qsize.h>
-#include <qcolor.h>
+#include <tqsize.h>
+#include <tqcolor.h>
 
 namespace Defaults {
 	static const bool smoothScaling = false;
 	static const bool keepAspectRatio = true;
 	static const bool centerImage = true;
-	static const QColor bgColor( Qt::black );
-	static const QSize minSize( 1, 1 );
-	static const QSize maxSize( 10000, 10000 );
+	static const TQColor bgColor( Qt::black );
+	static const TQSize minSize( 1, 1 );
+	static const TQSize maxSize( 10000, 10000 );
 	static const unsigned int numOfBlendEffects = 4;
 	static const char * blendEffectDescription[ 6 ] = {
 														I18N_NOOP( "No Blending" ),

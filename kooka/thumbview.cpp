@@ -27,8 +27,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qpixmap.h>
-#include <qpainter.h>
+#include <tqpixmap.h>
+#include <tqpainter.h>
 
 #include <kio/previewjob.h>
 #include <kdebug.h>
@@ -47,8 +47,8 @@
 
 
 
-ThumbView::ThumbView( QWidget *parent, const char *name )
-   : QVBox( parent ),
+ThumbView::ThumbView( TQWidget *parent, const char *name )
+   : TQVBox( parent ),
      m_iconView(0),
      m_job(0)
 {
@@ -65,7 +65,7 @@ ThumbView::ThumbView( QWidget *parent, const char *name )
 
    readSettings();
 
-   m_basePix.resize( QSize( m_pixWidth, m_pixHeight ) );
+   m_basePix.resize( TQSize( m_pixWidth, m_pixHeight ) );
    m_basePix.fill();  // fills white per default TODO
 
 
@@ -73,8 +73,8 @@ ThumbView::ThumbView( QWidget *parent, const char *name )
 
    slSetBackGround();
 
-   connect( m_iconView, SIGNAL( executed( QIconViewItem* )),
-	    this, SLOT( slDoubleClicked( QIconViewItem* )));
+   connect( m_iconView, TQT_SIGNAL( executed( TQIconViewItem* )),
+	    this, TQT_SLOT( slDoubleClicked( TQIconViewItem* )));
 
    m_pendingJobs.setAutoDelete(false);
 }
@@ -90,7 +90,7 @@ bool ThumbView::readSettings()
    cfg->setGroup( THUMB_GROUP );
    bool dirty = false;
 
-   QColor color;
+   TQColor color;
    color = cfg->readColorEntry( MARGIN_COLOR1, &(colorGroup().base()));
    if( color != m_marginColor1 )
    {
@@ -138,7 +138,7 @@ bool ThumbView::readSettings()
    }
 
    KStandardDirs stdDir;
-   QString newBgImg = cfg->readEntry( BG_WALLPAPER, stdDir.findResource( "data", STD_TILE_IMG ) );
+   TQString newBgImg = cfg->readEntry( BG_WALLPAPER, stdDir.findResource( "data", STD_TILE_IMG ) );
 
    if( m_bgImg != newBgImg )
    {
@@ -149,7 +149,7 @@ bool ThumbView::readSettings()
    return (sizeDirty || dirty);
 }
 
-void ThumbView::slDoubleClicked( QIconViewItem *qIt )
+void ThumbView::slDoubleClicked( TQIconViewItem *qIt )
 {
    ThumbViewItem *it = static_cast<ThumbViewItem*>( qIt );
 
@@ -163,11 +163,11 @@ void ThumbView::slDoubleClicked( QIconViewItem *qIt )
 
 void ThumbView::slSetBackGround( )
 {
-   QPixmap bgPix;
+   TQPixmap bgPix;
    if( m_bgImg.isEmpty())
    {
-      bgPix.resize( QSize(16, 16));
-      bgPix.fill( QPixmap::blue );
+      bgPix.resize( TQSize(16, 16));
+      bgPix.fill( TQPixmap::blue );
    }
    else
    {
@@ -188,7 +188,7 @@ void ThumbView::slImageChanged( KFileItem *kfit )
    KURL itemUrl = kfit->url();
 
    /* delete filename */
-   itemUrl.setFileName( QString());
+   itemUrl.setFileName( TQString());
    if( !itemUrl.equals( thumbDir, true ))
    {
       // kdDebug(28000) << "returning, because directory does not match: " << itemUrl.prettyURL() << endl;
@@ -214,7 +214,7 @@ void ThumbView::slImageRenamed( KFileItem *kfit, const KURL& newUrl )
 	clear();
     }
     
-    for ( QIconViewItem *item = m_iconView->firstItem(); item; item = item->nextItem() )
+    for ( TQIconViewItem *item = m_iconView->firstItem(); item; item = item->nextItem() )
     {
         ThumbViewItem *it=static_cast<ThumbViewItem*>( item );
 
@@ -239,7 +239,7 @@ void  ThumbView::slCheckForUpdate( KFileItem *kfit )
 
    /* iterate over all icon items and compare urls.
     * TODO: Check the parent url to avoid iteration over all */
-   for ( QIconViewItem *item = m_iconView->firstItem(); item && !haveItem;
+   for ( TQIconViewItem *item = m_iconView->firstItem(); item && !haveItem;
 	 item = item->nextItem() )
    {
       if( searchUrl == static_cast<ThumbViewItem*>(item)->itemUrl() )
@@ -270,7 +270,7 @@ bool ThumbView::deleteImage( KFileItem *kfit )
 
    /* iterate over all icon items and compare urls.
     * TODO: Check the parent url to avoid iteration over all */
-   for ( QIconViewItem *item = m_iconView->firstItem(); item && !haveItem; item = item->nextItem() )
+   for ( TQIconViewItem *item = m_iconView->firstItem(); item && !haveItem; item = item->nextItem() )
    {
       if( searchUrl == static_cast<ThumbViewItem*>(item)->itemUrl() )
       {
@@ -323,19 +323,19 @@ void ThumbView::slNewFileItems( const KFileItemList& items )
    KFileItem *item = 0;
    for ( ; (item = it.current()); ++it )
    {
-      QString filename = item->url().prettyURL();
+      TQString filename = item->url().prettyURL();
       if( item->isDir() )
       {
 	 /* create a dir pixmap */
       }
       else
       {
-	 QPixmap p(m_basePix) ;
-	 QPixmap mime( item->pixmap(0) );
+	 TQPixmap p(m_basePix) ;
+	 TQPixmap mime( item->pixmap(0) );
 
 	 if( p.width() > mime.width() && p.height() > mime.height() )
 	 {
-	    QPainter paint( &p );
+	    TQPainter paint( &p );
 	    paint.drawPixmap( (p.width()-mime.width())/2,
 			      (p.height()-mime.height())/2,
 			      mime );
@@ -389,18 +389,18 @@ void ThumbView::slNewFileItems( const KFileItemList& items )
 
       if( m_job )
       {
-	 connect( m_job, SIGNAL( result( KIO::Job * )),
-		  this, SLOT( slPreviewResult( KIO::Job * )));
-	 connect( m_job, SIGNAL( gotPreview( const KFileItem*, const QPixmap& )),
-		  SLOT( slGotPreview( const KFileItem*, const QPixmap& ) ));
+	 connect( m_job, TQT_SIGNAL( result( KIO::Job * )),
+		  this, TQT_SLOT( slPreviewResult( KIO::Job * )));
+	 connect( m_job, TQT_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
+		  TQT_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
 
          m_pendingJobs.clear();
 
          /* KIO::Jo result is called in any way: Success, Failed, Error,
 	  * thus connecting the failed is not really necessary.
 	  */
-        // connect( job, SIGNAL( failed( const KFileItem* )),
-        //          this, SLOT( slotFailed( const KFileItem* ) ));
+        // connect( job, TQT_SIGNAL( failed( const KFileItem* )),
+        //          this, TQT_SLOT( slotFailed( const KFileItem* ) ));
 
       }
    }
@@ -408,7 +408,7 @@ void ThumbView::slNewFileItems( const KFileItemList& items )
 
 
 
-void ThumbView::slGotPreview( const KFileItem* newFileItem, const QPixmap& newPix )
+void ThumbView::slGotPreview( const KFileItem* newFileItem, const TQPixmap& newPix )
 {
    if( ! newFileItem ) return;
    KFileIconViewItem *item = static_cast<KFileIconViewItem*>(const_cast<void*>(newFileItem->extraData( this )));
@@ -451,17 +451,17 @@ void ThumbView::slPreviewResult( KIO::Job *job )
 }
 
 
-QPixmap ThumbView::createPixmap( const QPixmap& preview ) const
+TQPixmap ThumbView::createPixmap( const TQPixmap& preview ) const
 {
-   QImage ires = KImageEffect::unbalancedGradient( QSize( 2*m_thumbMargin+ preview.width(),
+   TQImage ires = KImageEffect::unbalancedGradient( TQSize( 2*m_thumbMargin+ preview.width(),
 							  2*m_thumbMargin+ preview.height()),
 						   m_marginColor1, m_marginColor2,
 						   KImageEffect::DiagonalGradient );
 
 
-   QPixmap pixRet;
+   TQPixmap pixRet;
    pixRet.convertFromImage( ires );
-   QPainter p( &pixRet );
+   TQPainter p( &pixRet );
 
    p.drawPixmap( m_thumbMargin, m_thumbMargin, preview );
    p.flush();

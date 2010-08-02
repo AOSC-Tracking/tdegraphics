@@ -18,13 +18,13 @@
 
 #include "pmdialogeditbase.h"
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
-#include <qvbox.h>
-#include <qbuffer.h>
-#include <qptrdict.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqpushbutton.h>
+#include <tqlabel.h>
+#include <tqvbox.h>
+#include <tqbuffer.h>
+#include <tqptrdict.h>
 #include <kdialog.h>
 #include <kconfig.h>
 #include <klocale.h>
@@ -51,52 +51,52 @@ int PMDialogEditBase::s_previewAADepth = c_defaultTPAADepth;
 double PMDialogEditBase::s_previewAAThreshold = c_defaultTPAAThreshold;
 bool PMDialogEditBase::s_showFloor = c_defaultTPShowFloor;
 bool PMDialogEditBase::s_showWall = c_defaultTPShowWall;
-QColor PMDialogEditBase::s_wallColor1 = c_defaultTPWallColor1;
-QColor PMDialogEditBase::s_wallColor2 = c_defaultTPWallColor2;
-QColor PMDialogEditBase::s_floorColor1 = c_defaultTPFloorColor1;
-QColor PMDialogEditBase::s_floorColor2 = c_defaultTPFloorColor2;
+TQColor PMDialogEditBase::s_wallColor1 = c_defaultTPWallColor1;
+TQColor PMDialogEditBase::s_wallColor2 = c_defaultTPWallColor2;
+TQColor PMDialogEditBase::s_floorColor1 = c_defaultTPFloorColor1;
+TQColor PMDialogEditBase::s_floorColor2 = c_defaultTPFloorColor2;
 bool PMDialogEditBase::s_previewLocal = false;
 double PMDialogEditBase::s_previewGamma = c_defaultTPGamma;
 
 
 /** Constants for texture preview */
-const QString c_wallCode = QString(
+const TQString c_wallCode = TQString(
    "plane { <0, 0, -1>, -2\n"
    "  pigment { checker %1 %2\n"
    "    scale <0.5, 0.5, 0.5>\n"
    "    translate <0.5, 0, 0>\n"
    "  }\n"
    "}\n" );
-const QString c_floorCode = QString(
+const TQString c_floorCode = TQString(
    "plane { <0, 1, 0>, 0\n"
    "  pigment { checker %1 %2\n"
    "    scale <0.5, 0.5, 0.5>\n"
    "  }\n"
    "}\n" );
-const QString c_lightCode = QString(
+const TQString c_lightCode = TQString(
    "light_source { <-2.5, 3, -1.5>, rgb <1, 1, 1> }\n"
    "light_source { <3, 3, -3>, rgb <0.6, 0.6, 0.6> shadowless }\n" );
 
 
-const QString c_cameraCode[3] = {
-   QString( "camera { location <-1, 1.25, -2> right <1, 0, 0>\n"
+const TQString c_cameraCode[3] = {
+   TQString( "camera { location <-1, 1.25, -2> right <1, 0, 0>\n"
             "  look_at <0.0, 0.5, 0> angle 45 }\n" ),
-   QString( "camera { location <-1, 2, -3> right <1, 0, 0>\n"
+   TQString( "camera { location <-1, 2, -3> right <1, 0, 0>\n"
             "  look_at <0.0, 1, 0> angle 45 }\n" ),
-   QString( "camera { location <-2, 2.5, -4> right <1, 0, 0>\n"
+   TQString( "camera { location <-2, 2.5, -4> right <1, 0, 0>\n"
             "  look_at <0.0, 1.5, 0> angle 45 }\n" )
 };
-const QString c_sphereCode = QString(
+const TQString c_sphereCode = TQString(
    "sphere { <0, 0.5, 0>, 0.5 translate <0, %1, 0> }\n" );
-const QString c_cylinderCode = QString(
+const TQString c_cylinderCode = TQString(
    "cylinder { <0, 0, 0>, <0, 1, 0>, 0.5 translate <0, %1, 0> }\n" );
-const QString c_boxCode = QString(
+const TQString c_boxCode = TQString(
    "box { <-0.5, 0, -0.5>, <0.5, 1, 0.5> translate <0, %1, 0> }\n" );
-const QString c_globalSettingsCode = QString(
+const TQString c_globalSettingsCode = TQString(
    "global_settings { assumed_gamma %1 }\n" );
 
-PMDialogEditBase::PMDialogEditBase( QWidget* parent, const char* name )
-      : QWidget( parent, name )
+PMDialogEditBase::PMDialogEditBase( TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_pDisplayedObject = 0;
    m_pPart = 0;
@@ -118,7 +118,7 @@ PMDialogEditBase::~PMDialogEditBase( )
 
 void PMDialogEditBase::createWidgets( )
 {
-   m_pTopLayout = new QBoxLayout( this, QBoxLayout::TopToBottom,
+   m_pTopLayout = new TQBoxLayout( this, TQBoxLayout::TopToBottom,
                                   KDialog::spacingHint( ) );
 
    createTopWidgets( );
@@ -130,7 +130,7 @@ void PMDialogEditBase::createWidgets( )
 
 void PMDialogEditBase::createBottomWidgets( )
 {
-   m_pTexturePreviewWidget = new QWidget( this );
+   m_pTexturePreviewWidget = new TQWidget( this );
    m_pTexturePreviewWidget->hide( );
    m_pTopLayout->addWidget( m_pTexturePreviewWidget );
 }
@@ -163,43 +163,43 @@ void PMDialogEditBase::displayObject( PMObject* o )
       // is the preview widget created?
       if( !m_pRenderWidget )
       {
-         QVBoxLayout* vl = new QVBoxLayout( m_pTexturePreviewWidget, 0,
+         TQVBoxLayout* vl = new TQVBoxLayout( m_pTexturePreviewWidget, 0,
                                             KDialog::spacingHint( ) );
          vl->addSpacing( 10 );
-         QFrame* hline = new QFrame( m_pTexturePreviewWidget );
-         hline->setFrameStyle( QFrame::HLine | QFrame::Plain );
+         TQFrame* hline = new TQFrame( m_pTexturePreviewWidget );
+         hline->setFrameStyle( TQFrame::HLine | TQFrame::Plain );
          hline->setLineWidth( 1 );
          vl->addWidget( hline );
-         vl->addWidget( new QLabel( i18n( "Texture preview:" ), m_pTexturePreviewWidget ) );
-         m_pRenderFrame = new QVBox( m_pTexturePreviewWidget );
-         m_pRenderFrame->setFrameStyle( QFrame::StyledPanel | QFrame::Sunken );
+         vl->addWidget( new TQLabel( i18n( "Texture preview:" ), m_pTexturePreviewWidget ) );
+         m_pRenderFrame = new TQVBox( m_pTexturePreviewWidget );
+         m_pRenderFrame->setFrameStyle( TQFrame::StyledPanel | TQFrame::Sunken );
          m_pRenderFrame->setLineWidth( 2 );
          m_pRenderFrame->hide( );
          vl->addWidget( m_pRenderFrame );
 
          m_pRenderWidget = new PMPovrayRenderWidget( m_pRenderFrame );
-         connect( m_pRenderWidget, SIGNAL( finished( int ) ),
-                  SLOT( slotPreviewFinished( int ) ) );
-         m_pPreviewLocalBox = new QCheckBox( i18n( "local" ), m_pTexturePreviewWidget );
+         connect( m_pRenderWidget, TQT_SIGNAL( finished( int ) ),
+                  TQT_SLOT( slotPreviewFinished( int ) ) );
+         m_pPreviewLocalBox = new TQCheckBox( i18n( "local" ), m_pTexturePreviewWidget );
          m_pPreviewLocalBox->setChecked( s_previewLocal );
-         connect( m_pPreviewLocalBox, SIGNAL( toggled( bool ) ),
-                  SLOT( slotPreviewLocal( bool ) ) );
+         connect( m_pPreviewLocalBox, TQT_SIGNAL( toggled( bool ) ),
+                  TQT_SLOT( slotPreviewLocal( bool ) ) );
          vl->addWidget( m_pPreviewLocalBox );
 
-         QHBoxLayout* hl = new QHBoxLayout( vl );
-         m_pPreviewButton = new QPushButton( i18n( "&Preview" ), m_pTexturePreviewWidget );
+         TQHBoxLayout* hl = new TQHBoxLayout( vl );
+         m_pPreviewButton = new TQPushButton( i18n( "&Preview" ), m_pTexturePreviewWidget );
          hl->addWidget( m_pPreviewButton );
-         connect( m_pPreviewButton, SIGNAL( clicked( ) ),
-                  SLOT( slotTexturePreview( ) ) );
-         m_pOutputButton = new QPushButton( i18n( "Povray Output" ), m_pTexturePreviewWidget );
+         connect( m_pPreviewButton, TQT_SIGNAL( clicked( ) ),
+                  TQT_SLOT( slotTexturePreview( ) ) );
+         m_pOutputButton = new TQPushButton( i18n( "Povray Output" ), m_pTexturePreviewWidget );
          hl->addWidget( m_pOutputButton );
-         connect( m_pOutputButton, SIGNAL( clicked( ) ),
-                  SLOT( slotPovrayOutput( ) ) );
+         connect( m_pOutputButton, TQT_SIGNAL( clicked( ) ),
+                  TQT_SLOT( slotPovrayOutput( ) ) );
          hl->addStretch( 1 );
 
          m_pOutputWidget = new PMPovrayOutputWidget( );
-         connect( m_pRenderWidget, SIGNAL( povrayMessage( const QString& ) ),
-                  m_pOutputWidget, SLOT( slotText( const QString& ) ) );
+         connect( m_pRenderWidget, TQT_SIGNAL( povrayMessage( const TQString& ) ),
+                  m_pOutputWidget, TQT_SLOT( slotText( const TQString& ) ) );
       }
 
       m_pTexturePreviewWidget->show( );
@@ -217,7 +217,7 @@ void PMDialogEditBase::displayObject( PMObject* o )
    }
 }
 
-void PMDialogEditBase::setHelp( const QString& anchor )
+void PMDialogEditBase::setHelp( const TQString& anchor )
 {
    m_helpTopic = anchor;
 }
@@ -228,7 +228,7 @@ void PMDialogEditBase::redisplay( )
       displayObject( m_pDisplayedObject );
 }
 
-void PMDialogEditBase::setCheckBox( QCheckBox* box, PMThreeState state )
+void PMDialogEditBase::setCheckBox( TQCheckBox* box, PMThreeState state )
 {
    switch( state )
    {
@@ -244,18 +244,18 @@ void PMDialogEditBase::setCheckBox( QCheckBox* box, PMThreeState state )
    }
 }
 
-PMThreeState PMDialogEditBase::checkBoxState( QCheckBox* box )
+PMThreeState PMDialogEditBase::checkBoxState( TQCheckBox* box )
 {
    PMThreeState st = PMTrue;
    switch( box->state( ) )
    {
-      case QCheckBox::On:
+      case TQCheckBox::On:
          st = PMTrue;
          break;
-      case QCheckBox::Off:
+      case TQCheckBox::Off:
          st = PMFalse;
          break;
-      case QCheckBox::NoChange:
+      case TQCheckBox::NoChange:
          st = PMUnspecified;
          break;
    }
@@ -385,15 +385,15 @@ void PMDialogEditBase::slotTexturePreview( )
          s_showSphere = true;
 
       int numObjects = 0;
-      QByteArray scene;
-      QBuffer buffer( scene );
+      TQByteArray scene;
+      TQBuffer buffer( scene );
       buffer.open( IO_WriteOnly );
-      QTextStream str( &buffer );
+      TQTextStream str( &buffer );
       PMPovray31Format format;
       PMSerializer* dev = format.newSerializer( &buffer );
       PMRenderMode mode;
       PMObjectList neededDeclares, objectsToCheck;
-      QPtrDict<PMObject> objectsToSerialize( 101 );
+      TQPtrDict<PMObject> objectsToSerialize( 101 );
       PMObject* link;
 
       // find needed declares

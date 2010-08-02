@@ -1,12 +1,12 @@
-#include <qfileinfo.h>
-#include <qhbox.h>
-#include <qlayout.h>
-#include <qscrollview.h>
-#include <qscrollbar.h>
-#include <qtimer.h>
-#include <qpainter.h>
-#include <qprinter.h>
-#include <qprintdialog.h>
+#include <tqfileinfo.h>
+#include <tqhbox.h>
+#include <tqlayout.h>
+#include <tqscrollview.h>
+#include <tqscrollbar.h>
+#include <tqtimer.h>
+#include <tqpainter.h>
+#include <tqprinter.h>
+#include <tqprintdialog.h>
 
 #include <kaboutdialog.h>
 #include <kaccel.h>
@@ -56,10 +56,10 @@
 typedef KParts::GenericFactory<KViewPart> KViewPartFactory;
 K_EXPORT_COMPONENT_FACTORY(kviewerpart, KViewPartFactory)
 
-KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *parent,
-                     const char *name, const QStringList& args)
+KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+                     const char *name, const TQStringList& args)
   : KViewPart_Iface(parent, name), showSidebar(0), saveAction(0), partManager(0),
-    multiPageLibrary(QString::null), aboutDialog(0)
+    multiPageLibrary(TQString::null), aboutDialog(0)
 {
   KGlobal::locale()->insertCatalogue("kviewshell");
 
@@ -68,11 +68,11 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   setInstance(KViewPartFactory::instance());
 
   watch = KDirWatch::self();
-  connect(watch, SIGNAL(dirty(const QString&)), this, SLOT(fileChanged(const QString&)));
+  connect(watch, TQT_SIGNAL(dirty(const TQString&)), this, TQT_SLOT(fileChanged(const TQString&)));
   watch->startScan();
 
-  mainWidget = new QHBox(parentWidget, widgetName);
-  mainWidget->setFocusPolicy(QWidget::StrongFocus);
+  mainWidget = new TQHBox(parentWidget, widgetName);
+  mainWidget->setFocusPolicy(TQWidget::StrongFocus);
   setWidget(mainWidget);
 
   // Setup part manager
@@ -83,7 +83,7 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   // Without this the GUI-items of the KMultiPages are not merged
   partManager->setAllowNestedParts(true);
 
-  connect(partManager, SIGNAL(activePartChanged(KParts::Part*)), this, SIGNAL(pluginChanged(KParts::Part*)));
+  connect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
   partManager->addPart(this);
 
   // create the displaying part
@@ -94,10 +94,10 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   if (!args.isEmpty())
   {
     // If a default MimeType is specified try to load a MultiPage supporting it.
-    QString defaultMimeType = args.first();
+    TQString defaultMimeType = args.first();
     offers = KTrader::self()->query(
-        QString::fromLatin1("KViewShell/MultiPage" ),
-        QString("([X-KDE-MultiPageVersion] == %1) and "
+        TQString::fromLatin1("KViewShell/MultiPage" ),
+        TQString("([X-KDE-MultiPageVersion] == %1) and "
                 "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(defaultMimeType));
   }
 
@@ -105,8 +105,8 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   if (offers.isEmpty())
   {
     offers = KTrader::self()->query(
-        QString::fromLatin1("KViewShell/MultiPage" ),
-        QString("([X-KDE-MultiPageVersion] == %1) and "
+        TQString::fromLatin1("KViewShell/MultiPage" ),
+        TQString("([X-KDE-MultiPageVersion] == %1) and "
                 "([X-KDE-EmptyMultiPage] == 1)").arg(MULTIPAGE_VERSION));
   }
 
@@ -123,11 +123,11 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   // Try to load the multiPage
   int error;
   multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, mainWidget,
-														 service->name().utf8(), QStringList(), &error ));
+														 service->name().utf8(), TQStringList(), &error ));
 
   // If the loading of the MultiPage failed report and error and abort.
   if (!multiPage) {
-    QString reason;
+    TQString reason;
     switch(error) {
     case KParts::ComponentFactory::ErrNoServiceFound:
       reason = i18n("<qt>No service implementing the given mimetype and fullfilling the given constraint expression can be found.</qt>");
@@ -147,7 +147,7 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
       break;
     }
 
-    QString text = i18n("<qt><p><b>Problem:</b> The document <b>%1</b> cannot be shown.</p>"
+    TQString text = i18n("<qt><p><b>Problem:</b> The document <b>%1</b> cannot be shown.</p>"
 			"<p><b>Reason:</b> The software component <b>%2</b> which is required to "
 			"display your files could not be initialized. This could point to "
 			"serious misconfiguration of your KDE system, or to damaged program files.</p>"
@@ -156,9 +156,9 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
 			"provider of your software (e.g. the vendor of your Linux distribution), or "
 			"directly to the authors of the software. The entry <b>Report Bug...</b> in the "
 			"<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library());
-    QString caption = i18n("Error Initializing Software Component");
+    TQString caption = i18n("Error Initializing Software Component");
     KMessageBox::detailedError(mainWidget, text, reason, caption);
-    emit setStatusBarText(QString::null);
+    emit setStatusBarText(TQString::null);
     return;
   }
   // Make the KViewPart the parent of the MultiPage.
@@ -170,35 +170,35 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   // Add the multipage to the GUI.
   partManager->addPart(multiPage);
 
-  exportTextAction = new KAction(i18n("Text..."), 0, this, SLOT(mp_exportText()), actionCollection(), "export_text");
+  exportTextAction = new KAction(i18n("Text..."), 0, this, TQT_SLOT(mp_exportText()), actionCollection(), "export_text");
 
   // edit menu
-  findTextAction = KStdAction::find(this, SLOT(mp_showFindTextDialog()), actionCollection(), "find");
-  findNextAction = KStdAction::findNext(this, SLOT(mp_findNextText()), actionCollection(), "findnext");
+  findTextAction = KStdAction::find(this, TQT_SLOT(mp_showFindTextDialog()), actionCollection(), "find");
+  findNextAction = KStdAction::findNext(this, TQT_SLOT(mp_findNextText()), actionCollection(), "findnext");
   findNextAction->setEnabled(false);
-  findPrevAction = KStdAction::findPrev(this, SLOT(mp_findPrevText()), actionCollection(), "findprev");
+  findPrevAction = KStdAction::findPrev(this, TQT_SLOT(mp_findPrevText()), actionCollection(), "findprev");
   findPrevAction->setEnabled(false);
 
-  selectAllAction = KStdAction::selectAll(this, SLOT(mp_doSelectAll()), actionCollection(), "edit_select_all");
+  selectAllAction = KStdAction::selectAll(this, TQT_SLOT(mp_doSelectAll()), actionCollection(), "edit_select_all");
 
-  copyTextAction = KStdAction::copy(this, SLOT(mp_copyText()), actionCollection(), "copy_text");
+  copyTextAction = KStdAction::copy(this, TQT_SLOT(mp_copyText()), actionCollection(), "copy_text");
   copyTextAction->setEnabled(false);
 
-  deselectAction = KStdAction::deselect(this, SLOT(mp_clearSelection()), actionCollection(), "edit_deselect_all");
+  deselectAction = KStdAction::deselect(this, TQT_SLOT(mp_clearSelection()), actionCollection(), "edit_deselect_all");
   deselectAction->setEnabled(false);
 
-  saveAction = KStdAction::save(this, SLOT(mp_slotSave_defaultFilename()), actionCollection());
+  saveAction = KStdAction::save(this, TQT_SLOT(mp_slotSave_defaultFilename()), actionCollection());
 
   // settings menu
   showSidebar = new KToggleAction (i18n("Show &Sidebar"), "show_side_panel", 0, this,
-                                   SLOT(slotShowSidebar()), actionCollection(), "show_sidebar");
+                                   TQT_SLOT(slotShowSidebar()), actionCollection(), "show_sidebar");
   showSidebar->setCheckedState(i18n("Hide &Sidebar"));
   watchAct = new KToggleAction(i18n("&Watch File"), 0, 0, 0, actionCollection(), "watch_file");
   scrollbarHandling = new KToggleAction (i18n("Show Scrollbars"), 0, 0, 0, actionCollection(), "scrollbarHandling");
   scrollbarHandling->setCheckedState(i18n("Hide Scrollbars"));
 
   // View modes
-  QStringList viewModes;
+  TQStringList viewModes;
   viewModes.append(i18n("Single Page"));
   viewModes.append(i18n("Continuous"));
   viewModes.append(i18n("Continuous - Facing"));
@@ -207,38 +207,38 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   viewModeAction->setItems(viewModes);
 
   // Orientation menu
-  QStringList orientations;
+  TQStringList orientations;
   orientations.append(i18n("Portrait"));
   orientations.append(i18n("Landscape"));
   orientation = new KSelectAction (i18n("Preferred &Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
   orientation->setItems(orientations);
-  connect(orientation, SIGNAL(activated (int)), &userRequestedPaperSize, SLOT(setOrientation(int)));
+  connect(orientation, TQT_SIGNAL(activated (int)), &userRequestedPaperSize, TQT_SLOT(setOrientation(int)));
 
   // Zoom Menu
   zoom_action = new KSelectAction (i18n("&Zoom"), 0, 0, 0, actionCollection(), "view_zoom");
   zoom_action->setEditable(true);
   zoom_action->setItems(_zoomVal.zoomNames());
 
-  connect (&_zoomVal, SIGNAL(zoomNamesChanged(const QStringList &)), zoom_action, SLOT(setItems(const QStringList &)));
-  connect (&_zoomVal, SIGNAL(valNoChanged(int)), zoom_action, SLOT(setCurrentItem(int)));
-  connect (&_zoomVal, SIGNAL(zoomNameChanged(const QString &)), this, SIGNAL(zoomChanged(const QString &)) );
-  connect (zoom_action, SIGNAL(activated(const QString &)), this, SLOT(setZoomValue(const QString &)));
+  connect (&_zoomVal, TQT_SIGNAL(zoomNamesChanged(const TQStringList &)), zoom_action, TQT_SLOT(setItems(const TQStringList &)));
+  connect (&_zoomVal, TQT_SIGNAL(valNoChanged(int)), zoom_action, TQT_SLOT(setCurrentItem(int)));
+  connect (&_zoomVal, TQT_SIGNAL(zoomNameChanged(const TQString &)), this, TQT_SIGNAL(zoomChanged(const TQString &)) );
+  connect (zoom_action, TQT_SIGNAL(activated(const TQString &)), this, TQT_SLOT(setZoomValue(const TQString &)));
   _zoomVal.setZoomValue(1.0); // should not be necessary @@@@
   emit(zoomChanged("100%"));
 
   // Paper Size Menu
   media = new KSelectAction (i18n("Preferred Paper &Size"), 0, 0, 0, actionCollection(), "view_media");
-  QStringList items = userRequestedPaperSize.pageSizeNames();
+  TQStringList items = userRequestedPaperSize.pageSizeNames();
   items.prepend(i18n("Custom Size..."));
   media->setItems(items);
-  connect (media, SIGNAL(activated(int)), this, SLOT(slotMedia(int)));
+  connect (media, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotMedia(int)));
 
-  useDocumentSpecifiedSize = new KToggleAction(i18n("&Use Document Specified Paper Size"), 0, this, SLOT(slotShowSidebar()),
+  useDocumentSpecifiedSize = new KToggleAction(i18n("&Use Document Specified Paper Size"), 0, this, TQT_SLOT(slotShowSidebar()),
 					       actionCollection(), "view_use_document_specified_size");
 
   // Zoom Actions
-  zoomInAct = KStdAction::zoomIn (this, SLOT(zoomIn()), actionCollection());
-  zoomOutAct = KStdAction::zoomOut(this, SLOT(zoomOut()), actionCollection());
+  zoomInAct = KStdAction::zoomIn (this, TQT_SLOT(zoomIn()), actionCollection());
+  zoomOutAct = KStdAction::zoomOut(this, TQT_SLOT(zoomOut()), actionCollection());
 
   fitPageAct = new KToggleAction(i18n("&Fit to Page"), "view_fit_window", Key_P,
                                  actionCollection(), "view_fit_to_page");
@@ -251,24 +251,24 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   fitWidthAct -> setExclusiveGroup("view_fit");
   fitHeightAct -> setExclusiveGroup("view_fit");
 
-  connect(fitPageAct, SIGNAL(toggled(bool)), this, SLOT(enableFitToPage(bool)));
-  connect(fitWidthAct, SIGNAL(toggled(bool)), this, SLOT(enableFitToWidth(bool)));
-  connect(fitHeightAct, SIGNAL(toggled(bool)), this, SLOT(enableFitToHeight(bool)));
+  connect(fitPageAct, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(enableFitToPage(bool)));
+  connect(fitWidthAct, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(enableFitToWidth(bool)));
+  connect(fitHeightAct, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(enableFitToHeight(bool)));
 
   // go menu
-  backAct = KStdAction::prior(this, SLOT(mp_prevPage()), actionCollection());
-  forwardAct = KStdAction::next(this, SLOT(mp_nextPage()), actionCollection());
-  startAct = KStdAction::firstPage(this, SLOT(mp_firstPage()), actionCollection());
-  endAct = KStdAction::lastPage(this, SLOT(mp_lastPage()), actionCollection());
-  gotoAct = KStdAction::gotoPage(this, SLOT(goToPage()), actionCollection());
+  backAct = KStdAction::prior(this, TQT_SLOT(mp_prevPage()), actionCollection());
+  forwardAct = KStdAction::next(this, TQT_SLOT(mp_nextPage()), actionCollection());
+  startAct = KStdAction::firstPage(this, TQT_SLOT(mp_firstPage()), actionCollection());
+  endAct = KStdAction::lastPage(this, TQT_SLOT(mp_lastPage()), actionCollection());
+  gotoAct = KStdAction::gotoPage(this, TQT_SLOT(goToPage()), actionCollection());
   gotoAct->setShortcut("CTRL+G");
 
-  readUpAct = new KAction(i18n("Read Up Document"), "up", SHIFT+Key_Space, this, SLOT(mp_readUp()), actionCollection(), "go_read_up");
-  readDownAct = new KAction(i18n("Read Down Document"), "down", Key_Space, this, SLOT(mp_readDown()), actionCollection(), "go_read_down");
+  readUpAct = new KAction(i18n("Read Up Document"), "up", SHIFT+Key_Space, this, TQT_SLOT(mp_readUp()), actionCollection(), "go_read_up");
+  readDownAct = new KAction(i18n("Read Down Document"), "down", Key_Space, this, TQT_SLOT(mp_readDown()), actionCollection(), "go_read_down");
 
-  printAction = KStdAction::print(this, SLOT(slotPrint()), actionCollection());
+  printAction = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
 
-  saveAsAction = KStdAction::saveAs(this, SLOT(mp_slotSave()), actionCollection());
+  saveAsAction = KStdAction::saveAs(this, TQT_SLOT(mp_slotSave()), actionCollection());
 
   // mode action
   moveModeAction = new KRadioAction(i18n("&Move Tool"), "movetool", Key_F4, actionCollection(), "move_tool");
@@ -279,20 +279,20 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
 
   moveModeAction->setChecked(true);
 
-  connect(moveModeAction, SIGNAL(toggled(bool)), this, SLOT(slotEnableMoveTool(bool)));
-  //connect(selectionModeAction, SIGNAL(toggled(bool)), this, SLOT(slotEnableSelectionTool(bool)));
+  connect(moveModeAction, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotEnableMoveTool(bool)));
+  //connect(selectionModeAction, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotEnableSelectionTool(bool)));
 
   // history action
   backAction = new KAction(i18n("&Back"), "1leftarrow", 0,
-                   this, SLOT(mp_doGoBack()), actionCollection(), "go_back");
+                   this, TQT_SLOT(mp_doGoBack()), actionCollection(), "go_back");
   forwardAction = new KAction(i18n("&Forward"), "1rightarrow", 0,
-                      this, SLOT(mp_doGoForward()), actionCollection(), "go_forward");
+                      this, TQT_SLOT(mp_doGoForward()), actionCollection(), "go_forward");
 
   backAction->setEnabled(false);
   forwardAction->setEnabled(false);
 
 
-  settingsAction = KStdAction::preferences(this, SLOT(doSettings()), actionCollection());
+  settingsAction = KStdAction::preferences(this, TQT_SLOT(doSettings()), actionCollection());
 
   // We only show this menuitem if no default mimetype is set. This usually means kviewshell
   // has been started by itself. Otherwise if KDVI or KFaxView has been started show the
@@ -300,20 +300,20 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
   if (!args.isEmpty())
   {
     aboutAction = new KAction(i18n("About KViewShell"), "kviewshell", 0, this,
-                            SLOT(aboutKViewShell()), actionCollection(), "help_about_kviewshell");
+                            TQT_SLOT(aboutKViewShell()), actionCollection(), "help_about_kviewshell");
   }
 
   // keyboard accelerators
   accel = new KAccel(mainWidget);
-  accel->insert(I18N_NOOP("Scroll Up"), Key_Up, this, SLOT(mp_scrollUp()));
-  accel->insert(I18N_NOOP("Scroll Down"), Key_Down, this, SLOT(mp_scrollDown()));
-  accel->insert(I18N_NOOP("Scroll Left"), Key_Left, this, SLOT(mp_scrollLeft()));
-  accel->insert(I18N_NOOP("Scroll Right"), Key_Right, this, SLOT(mp_scrollRight()));
+  accel->insert(I18N_NOOP("Scroll Up"), Key_Up, this, TQT_SLOT(mp_scrollUp()));
+  accel->insert(I18N_NOOP("Scroll Down"), Key_Down, this, TQT_SLOT(mp_scrollDown()));
+  accel->insert(I18N_NOOP("Scroll Left"), Key_Left, this, TQT_SLOT(mp_scrollLeft()));
+  accel->insert(I18N_NOOP("Scroll Right"), Key_Right, this, TQT_SLOT(mp_scrollRight()));
 
-  accel->insert(I18N_NOOP("Scroll Up Page"), SHIFT+Key_Up, this, SLOT(mp_scrollUpPage()));
-  accel->insert(I18N_NOOP("Scroll Down Page"), SHIFT+Key_Down, this, SLOT(mp_scrollDownPage()));
-  accel->insert(I18N_NOOP("Scroll Left Page"), SHIFT+Key_Left, this, SLOT(mp_scrollLeftPage()));
-  accel->insert(I18N_NOOP("Scroll Right Page"), SHIFT+Key_Right, this, SLOT(mp_scrollRightPage()));
+  accel->insert(I18N_NOOP("Scroll Up Page"), SHIFT+Key_Up, this, TQT_SLOT(mp_scrollUpPage()));
+  accel->insert(I18N_NOOP("Scroll Down Page"), SHIFT+Key_Down, this, TQT_SLOT(mp_scrollDownPage()));
+  accel->insert(I18N_NOOP("Scroll Left Page"), SHIFT+Key_Left, this, TQT_SLOT(mp_scrollLeftPage()));
+  accel->insert(I18N_NOOP("Scroll Right Page"), SHIFT+Key_Right, this, TQT_SLOT(mp_scrollRightPage()));
 
   accel->readSettings();
   readSettings();
@@ -333,7 +333,7 @@ KViewPart::KViewPart(QWidget *parentWidget, const char *widgetName, QObject *par
 
   // We disconnect because we dont want some FocusEvents to trigger a GUI update, which might mess
   // with our menus.
-  disconnect(partManager, SIGNAL(activePartChanged(KParts::Part*)), this, SIGNAL(pluginChanged(KParts::Part*)));
+  disconnect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
 }
 
 KViewPart::~KViewPart()
@@ -360,41 +360,41 @@ void KViewPart::initializeMultiPage()
   // Paper Size handling
   multiPage->setUseDocumentSpecifiedSize(useDocumentSpecifiedSize->isChecked());
   multiPage->setUserPreferredSize(userRequestedPaperSize);
-  connect(&userRequestedPaperSize, SIGNAL(sizeChanged(const SimplePageSize&)), multiPage, SLOT(setUserPreferredSize(const SimplePageSize&)));
-  connect(useDocumentSpecifiedSize, SIGNAL(toggled(bool)), multiPage, SLOT(setUseDocumentSpecifiedSize(bool)));
+  connect(&userRequestedPaperSize, TQT_SIGNAL(sizeChanged(const SimplePageSize&)), multiPage, TQT_SLOT(setUserPreferredSize(const SimplePageSize&)));
+  connect(useDocumentSpecifiedSize, TQT_SIGNAL(toggled(bool)), multiPage, TQT_SLOT(setUseDocumentSpecifiedSize(bool)));
 
 
-  connect(scrollbarHandling, SIGNAL(toggled(bool)),  multiPage, SLOT(slotShowScrollbars(bool)));
+  connect(scrollbarHandling, TQT_SIGNAL(toggled(bool)),  multiPage, TQT_SLOT(slotShowScrollbars(bool)));
 
   // connect to the multi page view
-  connect( this, SIGNAL(scrollbarStatusChanged(bool)), multiPage, SLOT(slotShowScrollbars(bool)));
-  connect( multiPage, SIGNAL(pageInfo(int, int)), this, SLOT(pageInfo(int, int)) );
-  connect( multiPage, SIGNAL(askingToCheckActions()), this, SLOT(checkActions()) );
-  connect( multiPage, SIGNAL( started( KIO::Job * ) ), this, SIGNAL( started( KIO::Job * ) ) );
-  connect( multiPage, SIGNAL( completed() ), this, SIGNAL( completed() ) );
-  connect( multiPage, SIGNAL( canceled( const QString & ) ), this, SIGNAL( canceled( const QString & ) ) );
-  connect( multiPage, SIGNAL( setStatusBarText( const QString& ) ), this, SLOT( setStatusBarTextFromMultiPage( const QString& ) ) );
+  connect( this, TQT_SIGNAL(scrollbarStatusChanged(bool)), multiPage, TQT_SLOT(slotShowScrollbars(bool)));
+  connect( multiPage, TQT_SIGNAL(pageInfo(int, int)), this, TQT_SLOT(pageInfo(int, int)) );
+  connect( multiPage, TQT_SIGNAL(askingToCheckActions()), this, TQT_SLOT(checkActions()) );
+  connect( multiPage, TQT_SIGNAL( started( KIO::Job * ) ), this, TQT_SIGNAL( started( KIO::Job * ) ) );
+  connect( multiPage, TQT_SIGNAL( completed() ), this, TQT_SIGNAL( completed() ) );
+  connect( multiPage, TQT_SIGNAL( canceled( const TQString & ) ), this, TQT_SIGNAL( canceled( const TQString & ) ) );
+  connect( multiPage, TQT_SIGNAL( setStatusBarText( const TQString& ) ), this, TQT_SLOT( setStatusBarTextFromMultiPage( const TQString& ) ) );
 
-  connect( multiPage, SIGNAL(zoomIn()), this, SLOT(zoomIn()) );
-  connect( multiPage, SIGNAL(zoomOut()), this, SLOT(zoomOut()) );
+  connect( multiPage, TQT_SIGNAL(zoomIn()), this, TQT_SLOT(zoomIn()) );
+  connect( multiPage, TQT_SIGNAL(zoomOut()), this, TQT_SLOT(zoomOut()) );
 
   // change the viewmode
-  connect(viewModeAction, SIGNAL(activated (int)), multiPage, SLOT(setViewMode(int)));
+  connect(viewModeAction, TQT_SIGNAL(activated (int)), multiPage, TQT_SLOT(setViewMode(int)));
 
   // Update zoomlevel on viewmode changes
-  connect(multiPage, SIGNAL(viewModeChanged()), this, SLOT(updateZoomLevel()));
+  connect(multiPage, TQT_SIGNAL(viewModeChanged()), this, TQT_SLOT(updateZoomLevel()));
 
   // navigation history
-  connect(multiPage->history(), SIGNAL(backItem(bool)), backAction, SLOT(setEnabled(bool)));
-  connect(multiPage->history(), SIGNAL(forwardItem(bool)), forwardAction, SLOT(setEnabled(bool)));
+  connect(multiPage->history(), TQT_SIGNAL(backItem(bool)), backAction, TQT_SLOT(setEnabled(bool)));
+  connect(multiPage->history(), TQT_SIGNAL(forwardItem(bool)), forwardAction, TQT_SLOT(setEnabled(bool)));
 
   // text selection
-  connect(multiPage, SIGNAL(textSelected(bool)), copyTextAction, SLOT(setEnabled(bool)));
-  connect(multiPage, SIGNAL(textSelected(bool)), deselectAction, SLOT(setEnabled(bool)));
+  connect(multiPage, TQT_SIGNAL(textSelected(bool)), copyTextAction, TQT_SLOT(setEnabled(bool)));
+  connect(multiPage, TQT_SIGNAL(textSelected(bool)), deselectAction, TQT_SLOT(setEnabled(bool)));
 
   // text search
-  connect(multiPage, SIGNAL(searchEnabled(bool)), findNextAction, SLOT(setEnabled(bool)));
-  connect(multiPage, SIGNAL(searchEnabled(bool)), findPrevAction, SLOT(setEnabled(bool)));
+  connect(multiPage, TQT_SIGNAL(searchEnabled(bool)), findNextAction, TQT_SLOT(setEnabled(bool)));
+  connect(multiPage, TQT_SIGNAL(searchEnabled(bool)), findPrevAction, TQT_SLOT(setEnabled(bool)));
 
   // allow parts to have a GUI, too :-)
   // (will be merged automatically)
@@ -407,22 +407,22 @@ void KViewPart::slotStartFitTimer()
 }
 
 
-QString KViewPart::pageSizeDescription()
+TQString KViewPart::pageSizeDescription()
 {
   PageNumber nr = multiPage->currentPageNumber();
   if (!nr.isValid())
-    return QString::null;
+    return TQString::null;
   SimplePageSize ss = multiPage->sizeOfPage(nr);
   if (!ss.isValid())
-    return QString::null;
+    return TQString::null;
   pageSize s(ss);
 
-  QString size = " ";
+  TQString size = " ";
   if (s.formatNumber() == -1) {
     if (KGlobal::locale()-> measureSystem() == KLocale::Metric)
-      size += QString("%1x%2 mm").arg(s.width().getLength_in_mm(), 0, 'f', 0).arg(s.height().getLength_in_mm(), 0, 'f', 0);
+      size += TQString("%1x%2 mm").arg(s.width().getLength_in_mm(), 0, 'f', 0).arg(s.height().getLength_in_mm(), 0, 'f', 0);
     else
-      size += QString("%1x%2 in").arg(s.width().getLength_in_inch(), 0, 'g', 2).arg(s.height().getLength_in_inch(), 0, 'g', 2);
+      size += TQString("%1x%2 in").arg(s.width().getLength_in_inch(), 0, 'g', 2).arg(s.height().getLength_in_inch(), 0, 'g', 2);
   } else {
     size += s.formatName() + "/";
     if (s.getOrientation() == 0)
@@ -459,20 +459,20 @@ void KViewPart::slotFileOpen()
       return;
   }
 
-  KURL url = KFileDialog::getOpenURL(QString::null, supportedMimeTypes().join(" "));
+  KURL url = KFileDialog::getOpenURL(TQString::null, supportedMimeTypes().join(" "));
 
   if (!url.isEmpty())
     openURL(url);
 }
 
-QStringList KViewPart::supportedMimeTypes()
+TQStringList KViewPart::supportedMimeTypes()
 {
-  QStringList supportedMimeTypes;
+  TQStringList supportedMimeTypes;
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      QString::fromLatin1("KViewShell/MultiPage"),
-      QString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
+      TQString::fromLatin1("KViewShell/MultiPage"),
+      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -483,7 +483,7 @@ QStringList KViewPart::supportedMimeTypes()
     for (; iterator != end; ++iterator)
     {
       KService::Ptr service = *iterator;
-      QString mimeType = service->property("X-KDE-MimeTypes").toString();
+      TQString mimeType = service->property("X-KDE-MimeTypes").toString();
       supportedMimeTypes << mimeType;
 
     }
@@ -505,19 +505,19 @@ QStringList KViewPart::supportedMimeTypes()
   return supportedMimeTypes;
 }
 
-QStringList KViewPart::fileFormats() const
+TQStringList KViewPart::fileFormats() const
 {
   // Compile a list of the supported filename patterns
 
   // First we build a list of the mimetypes which are supported by the
   // currently installed KMultiPage-Plugins.
-  QStringList supportedMimeTypes;
-  QStringList supportedPattern;
+  TQStringList supportedMimeTypes;
+  TQStringList supportedPattern;
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      QString::fromLatin1("KViewShell/MultiPage"),
-      QString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
+      TQString::fromLatin1("KViewShell/MultiPage"),
+      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -528,10 +528,10 @@ QStringList KViewPart::fileFormats() const
     for (; iterator != end; ++iterator)
     {
       KService::Ptr service = *iterator;
-      QString mimeType = service->property("X-KDE-MimeTypes").toString();
+      TQString mimeType = service->property("X-KDE-MimeTypes").toString();
       supportedMimeTypes << mimeType;
 
-      QStringList pattern = KMimeType::mimeType(mimeType)->patterns();
+      TQStringList pattern = KMimeType::mimeType(mimeType)->patterns();
       while(!pattern.isEmpty())
       {
         supportedPattern.append(pattern.front().stripWhiteSpace());
@@ -549,9 +549,9 @@ QStringList KViewPart::fileFormats() const
   // Check if this version of KDE supports bzip2
   bool bzip2Available = (KFilterBase::findFilterByMimeType( "application/x-bzip2" ) != 0L);
 
-  QStringList compressedPattern;
+  TQStringList compressedPattern;
 
-  for(QStringList::Iterator it = supportedPattern.begin(); it != supportedPattern.end(); ++it )
+  for(TQStringList::Iterator it = supportedPattern.begin(); it != supportedPattern.end(); ++it )
   {
     if ((*it).find(".gz", -3) == -1) // Paranoia safety check
       compressedPattern.append(*it + ".gz");
@@ -602,15 +602,15 @@ bool KViewPart::openFile()
   // We try to be error-tolerant about filenames. If the user calls us
   // with something like "test", and we are using the DVI-part, we'll
   // also look for "testdvi" and "test.dvi".
-  QFileInfo fi(m_file);
+  TQFileInfo fi(m_file);
   m_file = fi.absFilePath();
 
   if (!fi.exists())
   {
-    QStringList supportedPatterns = fileFormats();
-    QStringList endings;
+    TQStringList supportedPatterns = fileFormats();
+    TQStringList endings;
 
-    for (QStringList::Iterator it = supportedPatterns.begin(); it != supportedPatterns.end(); ++it)
+    for (TQStringList::Iterator it = supportedPatterns.begin(); it != supportedPatterns.end(); ++it)
     {
       // Only consider patterns starting with "*."
       if ((*it).find("*.") == 0)
@@ -623,7 +623,7 @@ bool KViewPart::openFile()
 
     // Now try to append the endings with and without "." to the given filename,
     // and see if that gives a existing file.
-    for (QStringList::Iterator it = endings.begin(); it != endings.end(); ++it)
+    for (TQStringList::Iterator it = endings.begin(); it != endings.end(); ++it)
     {
       fi.setFile(m_file+(*it));
       if (fi.exists())
@@ -643,10 +643,10 @@ bool KViewPart::openFile()
     if (!fi.exists())
     {
       KMessageBox::error(mainWidget, i18n("<qt>File <nobr><strong>%1</strong></nobr> does not exist.</qt>").arg(m_file));
-      emit setStatusBarText(QString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
-    m_url.setPath(QFileInfo(m_file).absFilePath());
+    m_url.setPath(TQFileInfo(m_file).absFilePath());
   }
 
   // Set the window caption now, before we do any uncompression and generation of temporary files.
@@ -670,8 +670,8 @@ bool KViewPart::openFile()
     {
       KMessageBox::error(mainWidget, i18n("<qt><strong>File Error!</strong> Could not create "
                          "temporary file.</qt>"));
-      emit setWindowCaption(QString::null);
-      emit setStatusBarText(QString::null);
+      emit setWindowCaption(TQString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
     tmpUnzipped->setAutoDelete(true);
@@ -679,12 +679,12 @@ bool KViewPart::openFile()
     {
       KMessageBox::error(mainWidget, i18n("<qt><strong>File Error!</strong> Could not create temporary file "
                          "<nobr><strong>%1</strong></nobr>.</qt>").arg(strerror(tmpUnzipped->status())));
-      emit setWindowCaption(QString::null);
-      emit setStatusBarText(QString::null);
+      emit setWindowCaption(TQString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
 
-    QIODevice* filterDev;
+    TQIODevice* filterDev;
     if (( mimetype->parentMimeType() == "application/x-gzip" ) ||
         ( mimetype->parentMimeType() == "application/x-bzip2" ))
       filterDev = KFilterDev::deviceForFile(m_file, mimetype->parentMimeType());
@@ -692,8 +692,8 @@ bool KViewPart::openFile()
       filterDev = KFilterDev::deviceForFile(m_file);
     if (filterDev == 0L)
     {
-      emit setWindowCaption(QString::null);
-      emit setStatusBarText(QString::null);
+      emit setWindowCaption(TQString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
     if(!filterDev->open(IO_ReadOnly))
@@ -704,9 +704,9 @@ bool KViewPart::openFile()
           i18n("<qt>This error typically occurs if you do not have enough permissions to read the file. "
           "You can check ownership and permissions if you right-click on the file in the Konqueror "
           "file manager and then choose the 'Properties' menu.</qt>"));
-      emit setWindowCaption(QString::null);
+      emit setWindowCaption(TQString::null);
       delete filterDev;
-      emit setStatusBarText(QString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
 
@@ -718,7 +718,7 @@ bool KViewPart::openFile()
     prog->progressBar()->setProgress(0);
     prog->setMinimumDuration(250);
 
-    QByteArray buf(1024);
+    TQByteArray buf(1024);
     int read = 0, wrtn = 0;
 
     bool progress_dialog_was_cancelled = false;
@@ -739,7 +739,7 @@ bool KViewPart::openFile()
     tmpUnzipped->sync();
 
     if (progress_dialog_was_cancelled) {
-      emit setStatusBarText(QString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
 
@@ -749,8 +749,8 @@ bool KViewPart::openFile()
           "the file <nobr><strong>%1</strong></nobr>. The file will not be loaded.</qt>").arg( m_file ),
           i18n("<qt>This error typically occurs if the file is corrupt. "
           "If you want to be sure, try to decompress the file manually using command-line tools.</qt>"));
-      emit setWindowCaption(QString::null);
-      emit setStatusBarText(QString::null);
+      emit setWindowCaption(TQString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
     tmpUnzipped->close();
@@ -768,8 +768,8 @@ bool KViewPart::openFile()
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      QString::fromLatin1("KViewShell/MultiPage" ),
-  QString("([X-KDE-MultiPageVersion] == %1) and "
+      TQString::fromLatin1("KViewShell/MultiPage" ),
+  TQString("([X-KDE-MultiPageVersion] == %1) and "
           "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(mimetype->name()));
 
   if (offers.isEmpty()) {
@@ -777,8 +777,8 @@ bool KViewPart::openFile()
 						"its file type is not supported.</qt>").arg(m_file),
 			       i18n("<qt>The file has mime type <b>%1</b> which is not supported by "
 				    "any of the installed KViewShell plugins.</qt>").arg(mimetype->name()));
-    emit setWindowCaption(QString::null);
-    emit setStatusBarText(QString::null);
+    emit setWindowCaption(TQString::null);
+    emit setStatusBarText(TQString::null);
     return false;
   }
 
@@ -801,10 +801,10 @@ bool KViewPart::openFile()
     // Try to load the multiPage
     int error;
     multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, mainWidget,
-														   service->name().utf8(), QStringList(), &error ));
+														   service->name().utf8(), TQStringList(), &error ));
 
     if (multiPage.isNull()) {
-      QString reason;
+      TQString reason;
       switch(error) {
       case KParts::ComponentFactory::ErrNoServiceFound:
 	reason = i18n("<qt>No service implementing the given mimetype and fullfilling the given constraint expression can be found.</qt>");
@@ -823,7 +823,7 @@ bool KViewPart::openFile()
 	break;
       }
 
-      QString text = i18n("<qt><p><b>Problem:</b> The document <b>%1</b> cannot be shown.</p>"
+      TQString text = i18n("<qt><p><b>Problem:</b> The document <b>%1</b> cannot be shown.</p>"
 			  "<p><b>Reason:</b> The software "
 			  "component <b>%2</b> which is required to display files of type <b>%3</b> could "
 			  "not be initialized. This could point to serious misconfiguration of your KDE "
@@ -833,19 +833,19 @@ bool KViewPart::openFile()
 			  "provider of your software (e.g. the vendor of your Linux distribution), or "
 			  "directly to the authors of the software. The entry <b>Report Bug...</b> in the "
 			  "<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library()).arg(mimetype->name());
-      QString caption = i18n("Error Initializing Software Component");
+      TQString caption = i18n("Error Initializing Software Component");
       if (reason.isEmpty())
 	KMessageBox::error(mainWidget, text, caption);
       else
 	KMessageBox::detailedError(mainWidget, text, reason, caption);
-      emit setStatusBarText(QString::null);
+      emit setStatusBarText(TQString::null);
       return false;
     }
 
     // Remember the name of the part. So only need to switch if really necessary.
     multiPageLibrary = service->library();
 
-    connect(partManager, SIGNAL(activePartChanged(KParts::Part*)), this, SIGNAL(pluginChanged(KParts::Part*)));
+    connect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
 
     // Switch to the new multiPage
     partManager->replacePart(oldMultiPage, multiPage);
@@ -862,7 +862,7 @@ bool KViewPart::openFile()
 
     // We disconnect because we dont want some FocusEvents to trigger a GUI update, which might mess
     // with our menus.
-    disconnect(partManager, SIGNAL(activePartChanged(KParts::Part*)), this, SIGNAL(pluginChanged(KParts::Part*)));
+    disconnect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
 
     readSettings();
   }
@@ -895,13 +895,13 @@ bool KViewPart::openFile()
     // Notify the ViewShell about the newly opened file.
     emit fileOpened();
   } else {
-    m_url = QString::null;
-    emit setWindowCaption(QString::null);
+    m_url = TQString::null;
+    emit setWindowCaption(TQString::null);
   }
 
   checkActions();
-  emit zoomChanged(QString("%1%").arg((int)(_zoomVal.value()*100.0+0.5)));
-  emit setStatusBarText(QString::null);
+  emit zoomChanged(TQString("%1%").arg((int)(_zoomVal.value()*100.0+0.5)));
+  emit setStatusBarText(TQString::null);
   return r;
 }
 
@@ -912,7 +912,7 @@ void KViewPart::reload()
 }
 
 
-void KViewPart::fileChanged(const QString &file)
+void KViewPart::fileChanged(const TQString &file)
 {
   if (file == m_file && watchAct->isChecked())
     multiPage->reload();
@@ -946,7 +946,7 @@ bool KViewPart::closeURL()
 
   KParts::ReadOnlyPart::closeURL();
   multiPage->closeURL();
-  m_url = QString::null;
+  m_url = TQString::null;
   checkActions();
   emit setWindowCaption("");
 
@@ -994,7 +994,7 @@ void KViewPart::pageInfo(int numpages, int currentpage)
   updateZoomLevel();
 
   // ATTN: The string here must be the same as in setPage() below
-  QString pageString = i18n("Page %1 of %2").arg(currentpage).arg(numpages);
+  TQString pageString = i18n("Page %1 of %2").arg(currentpage).arg(numpages);
   if (pageChangeIsConnected) {
     emit pageChanged(pageString);
     emit sizeChanged(pageSizeDescription());
@@ -1083,15 +1083,15 @@ void KViewPart::enableFitToPage(bool enable)
   if (enable)
   {
     fitToPage();
-    connect(multiPage->mainWidget(), SIGNAL(viewSizeChanged(const QSize&)),
-            this, SLOT(slotStartFitTimer()));
-    connect(&fitTimer, SIGNAL(timeout()), SLOT(fitToPage()));
+    connect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
+            this, TQT_SLOT(slotStartFitTimer()));
+    connect(&fitTimer, TQT_SIGNAL(timeout()), TQT_SLOT(fitToPage()));
   }
   else
   {
-    disconnect(multiPage->mainWidget(), SIGNAL(viewSizeChanged(const QSize&)),
-               this, SLOT(slotStartFitTimer()));
-    disconnect(&fitTimer, SIGNAL(timeout()), this, SLOT(fitToPage()));
+    disconnect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
+               this, TQT_SLOT(slotStartFitTimer()));
+    disconnect(&fitTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(fitToPage()));
   }
 }
 
@@ -1100,15 +1100,15 @@ void KViewPart::enableFitToWidth(bool enable)
   if (enable)
   {
     fitToWidth();
-    connect(multiPage->mainWidget(), SIGNAL(viewSizeChanged(const QSize&)),
-            this, SLOT(slotStartFitTimer()));
-    connect(&fitTimer, SIGNAL(timeout()), SLOT(fitToWidth()));
+    connect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
+            this, TQT_SLOT(slotStartFitTimer()));
+    connect(&fitTimer, TQT_SIGNAL(timeout()), TQT_SLOT(fitToWidth()));
   }
   else
   {
-    disconnect(multiPage->mainWidget(), SIGNAL(viewSizeChanged(const QSize&)),
-               this, SLOT(slotStartFitTimer()));
-    disconnect(&fitTimer, SIGNAL(timeout()), this, SLOT(fitToWidth()));
+    disconnect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
+               this, TQT_SLOT(slotStartFitTimer()));
+    disconnect(&fitTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(fitToWidth()));
   }
 }
 
@@ -1117,15 +1117,15 @@ void KViewPart::enableFitToHeight(bool enable)
   if (enable)
   {
     fitToHeight();
-    connect(multiPage->mainWidget(), SIGNAL(viewSizeChanged(const QSize&)),
-            this, SLOT(slotStartFitTimer()));
-    connect(&fitTimer, SIGNAL(timeout()), SLOT(fitToHeight()));
+    connect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
+            this, TQT_SLOT(slotStartFitTimer()));
+    connect(&fitTimer, TQT_SIGNAL(timeout()), TQT_SLOT(fitToHeight()));
   }
   else
   {
-    disconnect(multiPage->mainWidget(), SIGNAL(viewSizeChanged(const QSize&)),
-               this, SLOT(slotStartFitTimer()));
-    disconnect(&fitTimer, SIGNAL(timeout()), this, SLOT(fitToHeight()));
+    disconnect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
+               this, TQT_SLOT(slotStartFitTimer()));
+    disconnect(&fitTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(fitToHeight()));
   }
 }
 
@@ -1179,7 +1179,7 @@ void KViewPart::fitToWidth()
 }
 
 
-void KViewPart::setZoomValue(const QString &sval)
+void KViewPart::setZoomValue(const TQString &sval)
 {
   if (sval == i18n("Fit to Page Width"))
   {
@@ -1382,17 +1382,17 @@ void KViewPart::writeSettings()
 
 void KViewPart::connectNotify ( const char *sig )
 {
-  if (QString(sig).contains("pageChanged"))
+  if (TQString(sig).contains("pageChanged"))
     pageChangeIsConnected = true;
 }
 
 
-void KViewPart::setStatusBarTextFromMultiPage( const QString &msg )
+void KViewPart::setStatusBarTextFromMultiPage( const TQString &msg )
 {
   if (msg.isEmpty())
   {
     if (pageChangeIsConnected)
-      emit setStatusBarText(QString::null);
+      emit setStatusBarText(TQString::null);
     else
     {
       int currentPage = multiPage->currentPageNumber();
@@ -1420,26 +1420,26 @@ void KViewPart::aboutKViewShell()
     aboutDialog = new KAboutDialog(mainWidget, "about_kviewshell");
     aboutDialog->setTitle(I18N_NOOP("KViewShell"));
     aboutDialog->setVersion("0.6");
-    aboutDialog->setAuthor("Matthias Hoelzer-Kluepfel", QString::null, QString::null,
+    aboutDialog->setAuthor("Matthias Hoelzer-Kluepfel", TQString::null, TQString::null,
                            I18N_NOOP("Original Author"));
 
-    aboutDialog->addContributor("Matthias Hoelzer-Kluepfel", "mhk@caldera.de", QString::null,
+    aboutDialog->addContributor("Matthias Hoelzer-Kluepfel", "mhk@caldera.de", TQString::null,
                                 I18N_NOOP("Framework"));
     aboutDialog->addContributor("David Sweet", "dsweet@kde.org", "http://www.chaos.umd.edu/~dsweet",
                                 I18N_NOOP("Former KGhostView Maintainer"));
-    aboutDialog->addContributor("Mark Donohoe", QString::null, QString::null,
+    aboutDialog->addContributor("Mark Donohoe", TQString::null, TQString::null,
                                 I18N_NOOP("KGhostView Author"));
-    aboutDialog->addContributor("Markku Hihnala", QString::null, QString::null,
+    aboutDialog->addContributor("Markku Hihnala", TQString::null, TQString::null,
                                 I18N_NOOP("Navigation widgets"));
-    aboutDialog->addContributor("David Faure", QString::null, QString::null,
+    aboutDialog->addContributor("David Faure", TQString::null, TQString::null,
                                 I18N_NOOP("Basis for shell"));
-    aboutDialog->addContributor("Daniel Duley", QString::null, QString::null,
+    aboutDialog->addContributor("Daniel Duley", TQString::null, TQString::null,
                                 I18N_NOOP("Port to KParts"));
-    aboutDialog->addContributor("Espen Sand", QString::null, QString::null,
+    aboutDialog->addContributor("Espen Sand", TQString::null, TQString::null,
                                 I18N_NOOP("Dialog boxes"));
-    aboutDialog->addContributor("Stefan Kebekus", "kebekus@kde.org", QString::null,
+    aboutDialog->addContributor("Stefan Kebekus", "kebekus@kde.org", TQString::null,
                                 I18N_NOOP("DCOP-Interface, major improvements"));
-    aboutDialog->addContributor("Wilfried Huss", "Wilfried.Huss@gmx.at", QString::null,
+    aboutDialog->addContributor("Wilfried Huss", "Wilfried.Huss@gmx.at", TQString::null,
                                 I18N_NOOP("Interface enhancements"));
   }
   aboutDialog->show();
@@ -1460,7 +1460,7 @@ void KViewPart::doSettings()
 
   multiPage->addConfigDialogs(configDialog);
 
-  connect(configDialog, SIGNAL(settingsChanged()), this, SLOT(preferencesChanged()));
+  connect(configDialog, TQT_SIGNAL(settingsChanged()), this, TQT_SLOT(preferencesChanged()));
   configDialog->show();
 }
 
@@ -1471,13 +1471,13 @@ void KViewPart::preferencesChanged()
 
 void KViewPart::partActivateEvent( KParts::PartActivateEvent *ev )
 {
-  QApplication::sendEvent( multiPage, ev );
+  TQApplication::sendEvent( multiPage, ev );
 }
 
 
 void KViewPart::guiActivateEvent( KParts::GUIActivateEvent *ev )
 {
-  QApplication::sendEvent( multiPage, ev );
+  TQApplication::sendEvent( multiPage, ev );
 }
 
 

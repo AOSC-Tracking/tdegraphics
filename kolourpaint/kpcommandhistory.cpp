@@ -33,7 +33,7 @@
 
 #include <limits.h>
 
-#include <qdatetime.h>
+#include <tqdatetime.h>
 
 #include <kactionclasses.h>
 #include <kapplication.h>
@@ -51,12 +51,12 @@
 
 
 //template <typename T>
-static void clearPointerList (QValueList <kpCommand *> *listPtr)
+static void clearPointerList (TQValueList <kpCommand *> *listPtr)
 {
     if (!listPtr)
         return;
 
-    for (QValueList <kpCommand *>::iterator it = listPtr->begin ();
+    for (TQValueList <kpCommand *>::iterator it = listPtr->begin ();
          it != listPtr->end ();
          it++)
     {
@@ -118,7 +118,7 @@ kpViewManager *kpCommand::viewManager () const
 // kpNamedCommand
 //
 
-kpNamedCommand::kpNamedCommand (const QString &name, kpMainWindow *mainWindow)
+kpNamedCommand::kpNamedCommand (const TQString &name, kpMainWindow *mainWindow)
     : kpCommand (mainWindow),
       m_name (name)
 {
@@ -130,7 +130,7 @@ kpNamedCommand::~kpNamedCommand ()
 
 
 // public virtual [base kpCommand]
-QString kpNamedCommand::name () const
+TQString kpNamedCommand::name () const
 {
     return m_name;
 }
@@ -144,7 +144,7 @@ struct kpMacroCommandPrivate
 {
 };
 
-kpMacroCommand::kpMacroCommand (const QString &name, kpMainWindow *mainWindow)
+kpMacroCommand::kpMacroCommand (const TQString &name, kpMainWindow *mainWindow)
     : kpNamedCommand (name, mainWindow),
       d (new kpMacroCommandPrivate ())
 {
@@ -168,7 +168,7 @@ int kpMacroCommand::size () const
 #if DEBUG_KP_COMMAND_HISTORY && 0
     kdDebug () << "\tcalculating:" << endl;
 #endif
-    for (QValueList <kpCommand *>::const_iterator it = m_commandList.begin ();
+    for (TQValueList <kpCommand *>::const_iterator it = m_commandList.begin ();
          it != m_commandList.end ();
          it++)
     {
@@ -204,7 +204,7 @@ void kpMacroCommand::execute ()
 #if DEBUG_KP_COMMAND_HISTORY
     kdDebug () << "kpMacroCommand::execute()" << endl;
 #endif
-    for (QValueList <kpCommand *>::const_iterator it = m_commandList.begin ();
+    for (TQValueList <kpCommand *>::const_iterator it = m_commandList.begin ();
          it != m_commandList.end ();
          it++)
     {
@@ -221,7 +221,7 @@ void kpMacroCommand::unexecute ()
 #if DEBUG_KP_COMMAND_HISTORY
     kdDebug () << "kpMacroCommand::unexecute()" << endl;
 #endif
-    QValueList <kpCommand *>::const_iterator it = m_commandList.end ();
+    TQValueList <kpCommand *>::const_iterator it = m_commandList.end ();
     it--;
 
     while (it != m_commandList.end ())
@@ -257,15 +257,15 @@ kpCommandHistoryBase::kpCommandHistoryBase (bool doReadConfig,
     : d (new kpCommandHistoryBasePrivate ())
 {
     m_actionUndo = new KToolBarPopupAction (undoActionText (),
-        QString::fromLatin1 ("undo"),
+        TQString::fromLatin1 ("undo"),
         KStdAccel::shortcut (KStdAccel::Undo),
-        this, SLOT (undo ()),
+        this, TQT_SLOT (undo ()),
         ac, KStdAction::name (KStdAction::Undo));
 
     m_actionRedo = new KToolBarPopupAction (redoActionText (),
-        QString::fromLatin1 ("redo"),
+        TQString::fromLatin1 ("redo"),
         KStdAccel::shortcut (KStdAccel::Redo),
-        this, SLOT (redo ()),
+        this, TQT_SLOT (redo ()),
         ac, KStdAction::name (KStdAction::Redo));
 
 
@@ -273,10 +273,10 @@ kpCommandHistoryBase::kpCommandHistoryBase (bool doReadConfig,
     m_actionRedo->setEnabled (false);
 
 
-    connect (m_actionUndo->popupMenu (), SIGNAL (activated (int)),
-             this, SLOT (undoUpToNumber (int)));
-    connect (m_actionRedo->popupMenu (), SIGNAL (activated (int)),
-             this, SLOT (redoUpToNumber (int)));
+    connect (m_actionUndo->popupMenu (), TQT_SIGNAL (activated (int)),
+             this, TQT_SLOT (undoUpToNumber (int)));
+    connect (m_actionRedo->popupMenu (), TQT_SIGNAL (activated (int)),
+             this, TQT_SLOT (redoUpToNumber (int)));
 
 
     m_undoMinLimit = 10;
@@ -620,7 +620,7 @@ void kpCommandHistoryBase::redoUpToNumber (int which)
 
 
 // protected
-QString kpCommandHistoryBase::undoActionText () const
+TQString kpCommandHistoryBase::undoActionText () const
 {
     kpCommand *undoCommand = nextUndoCommand ();
 
@@ -631,7 +631,7 @@ QString kpCommandHistoryBase::undoActionText () const
 }
 
 // protected
-QString kpCommandHistoryBase::redoActionText () const
+TQString kpCommandHistoryBase::redoActionText () const
 {
     kpCommand *redoCommand = nextRedoCommand ();
 
@@ -654,11 +654,11 @@ void kpCommandHistoryBase::trimCommandListsUpdateActions ()
 }
 
 // protected
-void kpCommandHistoryBase::trimCommandList (QValueList <kpCommand *> *commandList)
+void kpCommandHistoryBase::trimCommandList (TQValueList <kpCommand *> *commandList)
 {
 #if DEBUG_KP_COMMAND_HISTORY
     kdDebug () << "kpCommandHistoryBase::trimCommandList()" << endl;
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
 #endif
 
     if (!commandList)
@@ -689,7 +689,7 @@ void kpCommandHistoryBase::trimCommandList (QValueList <kpCommand *> *commandLis
     kdDebug () << "\tsize over undoMinLimit - iterating thru cmds:" << endl;
 #endif
 
-    QValueList <kpCommand *>::iterator it = commandList->begin ();
+    TQValueList <kpCommand *>::iterator it = commandList->begin ();
     int upto = 0;
 
     int sizeSoFar = 0;
@@ -772,15 +772,15 @@ void kpCommandHistoryBase::trimCommandLists ()
 
 
 static void populatePopupMenu (KPopupMenu *popupMenu,
-                               const QString &undoOrRedo,
-                               const QValueList <kpCommand *> &commandList)
+                               const TQString &undoOrRedo,
+                               const TQValueList <kpCommand *> &commandList)
 {
     if (!popupMenu)
         return;
 
     popupMenu->clear ();
 
-    QValueList <kpCommand *>::const_iterator it = commandList.begin ();
+    TQValueList <kpCommand *>::const_iterator it = commandList.begin ();
     int i = 0;
     while (i < 10 && it != commandList.end ())
     {
@@ -810,7 +810,7 @@ void kpCommandHistoryBase::updateActions ()
     m_actionUndo->setEnabled ((bool) nextUndoCommand ());
     m_actionUndo->setText (undoActionText ());
 #if DEBUG_KP_COMMAND_HISTORY
-    QTime timer; timer.start ();
+    TQTime timer; timer.start ();
 #endif
     populatePopupMenu (m_actionUndo->popupMenu (),
                        i18n ("Undo"),

@@ -30,14 +30,14 @@
 
 class PMPattern;
 class PMVectorEdit;
-class QComboBox;
+class TQComboBox;
 class PMFloatEdit;
 class PMIntEdit;
-class QLabel;
-class QCheckBox;
-class QWidget;
-class QLineEdit;
-class QPushButton;
+class TQLabel;
+class TQCheckBox;
+class TQWidget;
+class TQLineEdit;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMPattern.
@@ -50,7 +50,7 @@ public:
    /**
     * Creates a PMPatternEdit with parent and name
     */
-   PMPatternEdit( QWidget* parent, const char* name = 0 );
+   PMPatternEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -96,67 +96,67 @@ private:
     */
    bool m_noDepth;
    PMPattern*     m_pDisplayedObject;
-   QComboBox*     m_pTypeCombo;
+   TQComboBox*     m_pTypeCombo;
 
-   QLabel*        m_pAgateTurbulenceLabel;
+   TQLabel*        m_pAgateTurbulenceLabel;
    PMFloatEdit*   m_pAgateTurbulenceEdit;
 
-   QWidget*       m_pCrackleWidget;
+   TQWidget*       m_pCrackleWidget;
    PMVectorEdit*  m_pCrackleForm;
    PMIntEdit*     m_pCrackleMetric;
    PMFloatEdit*   m_pCrackleOffset;
-   QCheckBox*     m_pCrackleSolid;
+   TQCheckBox*     m_pCrackleSolid;
 
-   QWidget*       m_pDensityWidget;
-   QComboBox*     m_pDensityInterpolate;
-   QLineEdit*     m_pDensityFile;
-   QPushButton*   m_pDensityFileBrowse;
+   TQWidget*       m_pDensityWidget;
+   TQComboBox*     m_pDensityInterpolate;
+   TQLineEdit*     m_pDensityFile;
+   TQPushButton*   m_pDensityFileBrowse;
 
-   QLabel*        m_pGradientLabel;
+   TQLabel*        m_pGradientLabel;
    PMVectorEdit*  m_pGradientEdit;
 
-   QLabel*        m_pJuliaComplexLabel;
+   TQLabel*        m_pJuliaComplexLabel;
    PMVectorEdit*  m_pJuliaComplex;
-   QWidget*       m_pFractalWidget;
-   QCheckBox*     m_pFractalMagnet;
-   QComboBox*     m_pFractalMagnetType;
+   TQWidget*       m_pFractalWidget;
+   TQCheckBox*     m_pFractalMagnet;
+   TQComboBox*     m_pFractalMagnetType;
    PMIntEdit*     m_pMaxIterationsEdit;
-   QLabel*        m_pFractalExponentLabel;
+   TQLabel*        m_pFractalExponentLabel;
    PMIntEdit*     m_pFractalExponent;
-   QComboBox*     m_pFractalExtType;
+   TQComboBox*     m_pFractalExtType;
    PMFloatEdit*   m_pFractalExtFactor;
-   QComboBox*     m_pFractalIntType;
+   TQComboBox*     m_pFractalIntType;
    PMFloatEdit*   m_pFractalIntFactor;
 
-   QLabel*        m_pQuiltControlsLabel;
+   TQLabel*        m_pQuiltControlsLabel;
    PMFloatEdit*   m_pQuiltControl0Edit;
    PMFloatEdit*   m_pQuiltControl1Edit;
 
-   QWidget*       m_pSlopeWidget;
+   TQWidget*       m_pSlopeWidget;
    PMVectorEdit*  m_pSlopeDirection;
    PMFloatEdit*   m_pSlopeLoSlope;
    PMFloatEdit*   m_pSlopeHiSlope;
-   QCheckBox*     m_pSlopeAltFlag;
+   TQCheckBox*     m_pSlopeAltFlag;
    PMVectorEdit*  m_pSlopeAltitude;
-   QLabel*        m_pSlopeLoAltLabel;
+   TQLabel*        m_pSlopeLoAltLabel;
    PMFloatEdit*   m_pSlopeLoAlt;
-   QLabel*        m_pSlopeHiAltLabel;
+   TQLabel*        m_pSlopeHiAltLabel;
    PMFloatEdit*   m_pSlopeHiAlt;
 
-   QLabel*        m_pSpiralNumberLabel;
+   TQLabel*        m_pSpiralNumberLabel;
    PMIntEdit*     m_pSpiralNumberEdit;
 
-   QLabel*        m_pNoiseGeneratorLabel;
-   QComboBox*     m_pNoiseGenerator;
+   TQLabel*        m_pNoiseGeneratorLabel;
+   TQComboBox*     m_pNoiseGenerator;
 
-   QCheckBox*     m_pEnableTurbulenceEdit;
-   QWidget*       m_pTurbulenceWidget;
+   TQCheckBox*     m_pEnableTurbulenceEdit;
+   TQWidget*       m_pTurbulenceWidget;
    PMVectorEdit*  m_pValueVectorEdit;
    PMIntEdit*     m_pOctavesEdit;
    PMFloatEdit*   m_pOmegaEdit;
    PMFloatEdit*   m_pLambdaEdit;
 
-   QLabel*        m_pDepthLabel;
+   TQLabel*        m_pDepthLabel;
    PMFloatEdit*   m_pDepthEdit;
 };
 

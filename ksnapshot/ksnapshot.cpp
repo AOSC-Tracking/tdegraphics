@@ -23,11 +23,11 @@
 #include <ksavefile.h>
 #include <ktempfile.h>
 
-#include <qbitmap.h>
-#include <qdragobject.h>
-#include <qimage.h>
-#include <qclipboard.h>
-#include <qvbox.h>
+#include <tqbitmap.h>
+#include <tqdragobject.h>
+#include <tqimage.h>
+#include <tqclipboard.h>
+#include <tqvbox.h>
 
 #include <kaccel.h>
 #include <knotifyclient.h>
@@ -36,11 +36,11 @@
 #include <kpushbutton.h>
 #include <kstartupinfo.h>
 
-#include <qcursor.h>
-#include <qregexp.h>
-#include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qwhatsthis.h>
+#include <tqcursor.h>
+#include <tqregexp.h>
+#include <tqpainter.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqwhatsthis.h>
 
 #include <stdlib.h>
 
@@ -58,32 +58,32 @@
 
 #define kApp KApplication::kApplication()
 
-KSnapshot::KSnapshot(QWidget *parent, const char *name, bool grabCurrent)
+KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
   : DCOPObject("interface"), 
-    KDialogBase(parent, name, true, QString::null, Help|User1, User1, 
+    KDialogBase(parent, name, true, TQString::null, Help|User1, User1, 
     true, KStdGuiItem::quit() )
 {
-    grabber = new QWidget( 0, 0, WStyle_Customize | WX11BypassWM );
+    grabber = new TQWidget( 0, 0, WStyle_Customize | WX11BypassWM );
     grabber->move( -1000, -1000 );
     grabber->installEventFilter( this );
 
     KStartupInfo::appStarted();
 
-    QVBox *vbox = makeVBoxMainWidget();
+    TQVBox *vbox = makeVBoxMainWidget();
     mainWidget = new KSnapshotWidget( vbox, "mainWidget" );
 
-    connect(mainWidget, SIGNAL(startImageDrag()), SLOT(slotDragSnapshot()));
+    connect(mainWidget, TQT_SIGNAL(startImageDrag()), TQT_SLOT(slotDragSnapshot()));
 
-    connect( mainWidget, SIGNAL( newClicked() ), SLOT( slotGrab() ) );
-    connect( mainWidget, SIGNAL( saveClicked() ), SLOT( slotSaveAs() ) );
-    connect( mainWidget, SIGNAL( printClicked() ), SLOT( slotPrint() ) );
-    connect( mainWidget, SIGNAL( copyClicked() ), SLOT( slotCopy() ) );
+    connect( mainWidget, TQT_SIGNAL( newClicked() ), TQT_SLOT( slotGrab() ) );
+    connect( mainWidget, TQT_SIGNAL( saveClicked() ), TQT_SLOT( slotSaveAs() ) );
+    connect( mainWidget, TQT_SIGNAL( printClicked() ), TQT_SLOT( slotPrint() ) );
+    connect( mainWidget, TQT_SIGNAL( copyClicked() ), TQT_SLOT( slotCopy() ) );
 
     grabber->show();
     grabber->grabMouse( waitCursor );
 
     if ( !grabCurrent )
-	snapshot = QPixmap::grabWindow( qt_xrootwin() );
+	snapshot = TQPixmap::grabWindow( qt_xrootwin() );
     else {
 	mainWidget->setMode( WindowUnderCursor );
 	mainWidget->setIncludeDecorations( true );
@@ -99,44 +99,44 @@ KSnapshot::KSnapshot(QWidget *parent, const char *name, bool grabCurrent)
     mainWidget->setDelay(conf->readNumEntry("delay",0));
     mainWidget->setMode( conf->readNumEntry( "mode", 0 ) );
     mainWidget->setIncludeDecorations(conf->readBoolEntry("includeDecorations",true));
-    filename = KURL::fromPathOrURL( conf->readPathEntry( "filename", QDir::currentDirPath()+"/"+i18n("snapshot")+"1.png" ));
+    filename = KURL::fromPathOrURL( conf->readPathEntry( "filename", TQDir::currentDirPath()+"/"+i18n("snapshot")+"1.png" ));
 
     // Make sure the name is not already being used
     while(KIO::NetAccess::exists( filename, false, this )) {
 	autoincFilename();
     }
 
-    connect( &grabTimer, SIGNAL( timeout() ), this, SLOT(  grabTimerDone() ) );
-    connect( &updateTimer, SIGNAL( timeout() ), this, SLOT(  updatePreview() ) );
-    QTimer::singleShot( 0, this, SLOT( updateCaption() ) );
+    connect( &grabTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  grabTimerDone() ) );
+    connect( &updateTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  updatePreview() ) );
+    TQTimer::singleShot( 0, this, TQT_SLOT( updateCaption() ) );
 
     KHelpMenu *helpMenu = new KHelpMenu(this, KGlobal::instance()->aboutData(), false);
 
-    QPushButton *helpButton = actionButton( Help );
+    TQPushButton *helpButton = actionButton( Help );
     helpButton->setPopup(helpMenu->menu());
 
     KAccel* accel = new KAccel(this);
-    accel->insert(KStdAccel::Quit, kapp, SLOT(quit()));
+    accel->insert(KStdAccel::Quit, kapp, TQT_SLOT(quit()));
     accel->insert( "QuickSave", i18n("Quick Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user without showing the file dialog."),
-		   CTRL+SHIFT+Key_S, this, SLOT(slotSave()));
-    accel->insert(KStdAccel::Save, this, SLOT(slotSaveAs()));
-//    accel->insert(KShortcut(CTRL+Key_A), this, SLOT(slotSaveAs()));
+		   CTRL+SHIFT+Key_S, this, TQT_SLOT(slotSave()));
+    accel->insert(KStdAccel::Save, this, TQT_SLOT(slotSaveAs()));
+//    accel->insert(KShortcut(CTRL+Key_A), this, TQT_SLOT(slotSaveAs()));
     accel->insert( "SaveAs", i18n("Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user."),
-		   CTRL+Key_A, this, SLOT(slotSaveAs()));
-    accel->insert(KStdAccel::Print, this, SLOT(slotPrint()));
-    accel->insert(KStdAccel::New, this, SLOT(slotGrab()));
-    accel->insert(KStdAccel::Copy, this, SLOT(slotCopy()));
+		   CTRL+Key_A, this, TQT_SLOT(slotSaveAs()));
+    accel->insert(KStdAccel::Print, this, TQT_SLOT(slotPrint()));
+    accel->insert(KStdAccel::New, this, TQT_SLOT(slotGrab()));
+    accel->insert(KStdAccel::Copy, this, TQT_SLOT(slotCopy()));
 
-    accel->insert( "Quit2", Key_Q, this, SLOT(slotSave()));
-    accel->insert( "Save2", Key_S, this, SLOT(slotSaveAs()));
-    accel->insert( "Print2", Key_P, this, SLOT(slotPrint()));
-    accel->insert( "New2", Key_N, this, SLOT(slotGrab()));
-    accel->insert( "New3", Key_Space, this, SLOT(slotGrab()));
+    accel->insert( "Quit2", Key_Q, this, TQT_SLOT(slotSave()));
+    accel->insert( "Save2", Key_S, this, TQT_SLOT(slotSaveAs()));
+    accel->insert( "Print2", Key_P, this, TQT_SLOT(slotPrint()));
+    accel->insert( "New2", Key_N, this, TQT_SLOT(slotGrab()));
+    accel->insert( "New3", Key_Space, this, TQT_SLOT(slotGrab()));
 
     setEscapeButton( User1 );
-    connect( this, SIGNAL( user1Clicked() ), SLOT( reject() ) );
+    connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( reject() ) );
 
     mainWidget->btnNew->setFocus();
 }
@@ -145,7 +145,7 @@ KSnapshot::~KSnapshot()
 {
 }
 
-void KSnapshot::resizeEvent( QResizeEvent *event)
+void KSnapshot::resizeEvent( TQResizeEvent *event)
 {
 	if( !updateTimer.isActive() )
 		updateTimer.start(200, true);
@@ -153,7 +153,7 @@ void KSnapshot::resizeEvent( QResizeEvent *event)
 		updateTimer.changeInterval(200);
 }
 
-bool KSnapshot::save( const QString &filename )
+bool KSnapshot::save( const TQString &filename )
 {
     return save( KURL::fromPathOrURL( filename ));
 }
@@ -161,15 +161,15 @@ bool KSnapshot::save( const QString &filename )
 bool KSnapshot::save( const KURL& url )
 {
     if ( KIO::NetAccess::exists( url, false, this ) ) {
-        const QString title = i18n( "File Exists" );
-        const QString text = i18n( "<qt>Do you really want to overwrite <b>%1</b>?</qt>" ).arg(url.prettyURL());
+        const TQString title = i18n( "File Exists" );
+        const TQString text = i18n( "<qt>Do you really want to overwrite <b>%1</b>?</qt>" ).arg(url.prettyURL());
         if (KMessageBox::Continue != KMessageBox::warningContinueCancel( this, text, title, i18n("Overwrite") ) ) 
         {
             return false;
         }
     }
 
-    QString type( KImageIO::type(url.path()) );
+    TQString type( KImageIO::type(url.path()) );
     if ( type.isNull() )
 	type = "PNG";
 
@@ -193,12 +193,12 @@ bool KSnapshot::save( const KURL& url )
 	}
     }
 
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
     if ( !ok ) {
 	kdWarning() << "KSnapshot was unable to save the snapshot" << endl;
 
-	QString caption = i18n("Unable to save image");
-	QString text = i18n("KSnapshot was unable to save the image to\n%1.")
+	TQString caption = i18n("Unable to save image");
+	TQString text = i18n("KSnapshot was unable to save the image to\n%1.")
 	               .arg(url.prettyURL());
 	KMessageBox::error(this, text, caption);
     }
@@ -216,7 +216,7 @@ void KSnapshot::slotSave()
 
 void KSnapshot::slotSaveAs()
 {
-    QStringList mimetypes = KImageIO::mimeTypes( KImageIO::Writing );
+    TQStringList mimetypes = KImageIO::mimeTypes( KImageIO::Writing );
     KFileDialog dlg( filename.url(), mimetypes.join(" "), this, "filedialog", true);
 
     dlg.setOperationMode( KFileDialog::Saving );
@@ -241,13 +241,13 @@ void KSnapshot::slotSaveAs()
 
 void KSnapshot::slotCopy()
 {
-    QClipboard *cb = QApplication::clipboard();
+    QClipboard *cb = TQApplication::clipboard();
     cb->setPixmap( snapshot );
 }
 
 void KSnapshot::slotDragSnapshot()
 {
-    QDragObject *drobj = new QImageDrag(snapshot.convertToImage(), this);
+    TQDragObject *drobj = new TQImageDrag(snapshot.convertToImage(), this);
     drobj->setPixmap(mainWidget->preview());
     drobj->dragCopy();
 }
@@ -261,8 +261,8 @@ void KSnapshot::slotGrab()
     else {
 	if ( mainWidget->mode() == Region ) {
 	    rgnGrab = new RegionGrabber();
-	    connect( rgnGrab, SIGNAL( regionGrabbed( const QPixmap & ) ),
-		     SLOT( slotRegionGrabbed( const QPixmap & ) ) );
+	    connect( rgnGrab, TQT_SIGNAL( regionGrabbed( const TQPixmap & ) ),
+		     TQT_SLOT( slotRegionGrabbed( const TQPixmap & ) ) );
 	}
 	else {
 	    grabber->show();
@@ -285,8 +285,8 @@ void KSnapshot::slotPrint()
     {
 	qApp->processEvents();
 
-        QPainter painter(&printer);
-        QPaintDeviceMetrics metrics(painter.device());
+        TQPainter painter(&printer);
+        TQPaintDeviceMetrics metrics(painter.device());
 
 	float w = snapshot.width();
 	float dw = w - metrics.width();
@@ -299,7 +299,7 @@ void KSnapshot::slotPrint()
 
 	if ( scale ) {
 
-	    QImage img = snapshot.convertToImage();
+	    TQImage img = snapshot.convertToImage();
 	    qApp->processEvents();
 
 	    float newh, neww;
@@ -312,7 +312,7 @@ void KSnapshot::slotPrint()
 		neww = newh/h*w;
 	    }
 
-	    img = img.smoothScale( int(neww), int(newh), QImage::ScaleMin );
+	    img = img.smoothScale( int(neww), int(newh), TQImage::ScaleMin );
 	    qApp->processEvents();
 
 	    int x = (metrics.width()-img.width())/2;
@@ -330,7 +330,7 @@ void KSnapshot::slotPrint()
     qApp->processEvents();
 }
 
-void KSnapshot::slotRegionGrabbed( const QPixmap &pix )
+void KSnapshot::slotRegionGrabbed( const TQPixmap &pix )
 {
   if ( !pix.isNull() )
   {
@@ -341,11 +341,11 @@ void KSnapshot::slotRegionGrabbed( const QPixmap &pix )
   }
 
   delete rgnGrab;
-  QApplication::restoreOverrideCursor();
+  TQApplication::restoreOverrideCursor();
   show();
 }
 
-void KSnapshot::slotWindowGrabbed( const QPixmap &pix )
+void KSnapshot::slotWindowGrabbed( const TQPixmap &pix )
 {
     if ( !pix.isNull() )
     {
@@ -355,11 +355,11 @@ void KSnapshot::slotWindowGrabbed( const QPixmap &pix )
         updateCaption();
     }
 
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
     show();
 }
 
-void KSnapshot::closeEvent( QCloseEvent * e )
+void KSnapshot::closeEvent( TQCloseEvent * e )
 {
     KConfig *conf=KGlobal::config();
     conf->setGroup("GENERAL");
@@ -367,16 +367,16 @@ void KSnapshot::closeEvent( QCloseEvent * e )
     conf->writeEntry("mode",mainWidget->mode());
     conf->writeEntry("includeDecorations",mainWidget->includeDecorations());
     KURL url = filename;
-    url.setPass( QString::null );
+    url.setPass( TQString::null );
     conf->writePathEntry("filename",url.url());
     e->accept();
 }
 
-bool KSnapshot::eventFilter( QObject* o, QEvent* e)
+bool KSnapshot::eventFilter( TQObject* o, TQEvent* e)
 {
-    if ( o == grabber && e->type() == QEvent::MouseButtonPress ) {
-	QMouseEvent* me = (QMouseEvent*) e;
-	if ( QWidget::mouseGrabber() != grabber )
+    if ( o == grabber && e->type() == TQEvent::MouseButtonPress ) {
+	TQMouseEvent* me = (TQMouseEvent*) e;
+	if ( TQWidget::mouseGrabber() != grabber )
 	    return false;
 	if ( me->button() == LeftButton )
 	    performGrab();
@@ -387,18 +387,18 @@ bool KSnapshot::eventFilter( QObject* o, QEvent* e)
 void KSnapshot::autoincFilename()
 {
     // Extract the filename from the path
-    QString name= filename.fileName();
+    TQString name= filename.fileName();
 
     // If the name contains a number then increment it
-    QRegExp numSearch("[0-9]+");
+    TQRegExp numSearch("[0-9]+");
 
     // Does it have a number?
     int start = numSearch.search(name);
     if (start != -1) {
         // It has a number, increment it
         int len = numSearch.matchedLength();
-	QString numAsStr= name.mid(start, len);
-	QString number = QString::number(numAsStr.toInt() + 1);
+	TQString numAsStr= name.mid(start, len);
+	TQString number = TQString::number(numAsStr.toInt() + 1);
 	number = number.rightJustify( len, '0');
 	name.replace(start, len, number );
     }
@@ -430,8 +430,8 @@ void KSnapshot::grabTimerDone()
 {
     if ( mainWidget->mode() == Region ) {
         rgnGrab = new RegionGrabber();
-        connect( rgnGrab, SIGNAL( regionGrabbed( const QPixmap & ) ),
-            SLOT( slotRegionGrabbed( const QPixmap & ) ) );
+        connect( rgnGrab, TQT_SIGNAL( regionGrabbed( const TQPixmap & ) ),
+            TQT_SLOT( slotRegionGrabbed( const TQPixmap & ) ) );
     }
     else {
 	performGrab();
@@ -446,18 +446,18 @@ void KSnapshot::performGrab()
     grabTimer.stop();
     if ( mainWidget->mode() == ChildWindow ) {
 	WindowGrabber wndGrab;
-	connect( &wndGrab, SIGNAL( windowGrabbed( const QPixmap & ) ),
-	    SLOT( slotWindowGrabbed( const QPixmap & ) ) );
+	connect( &wndGrab, TQT_SIGNAL( windowGrabbed( const TQPixmap & ) ),
+	    TQT_SLOT( slotWindowGrabbed( const TQPixmap & ) ) );
 	wndGrab.exec();
 	}
     else if ( mainWidget->mode() == WindowUnderCursor ) {
 	snapshot = WindowGrabber::grabCurrent( mainWidget->includeDecorations() );
     }
     else {
-	snapshot = QPixmap::grabWindow( qt_xrootwin() );
+	snapshot = TQPixmap::grabWindow( qt_xrootwin() );
     }
     updatePreview();
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
     modified = true;
     updateCaption();
     show();
@@ -473,7 +473,7 @@ int KSnapshot::timeout()
     return mainWidget->delay();
 }
 
-void KSnapshot::setURL( const QString &url )
+void KSnapshot::setURL( const TQString &url )
 {
     KURL newURL = KURL::fromPathOrURL( url );
     if ( newURL == filename )
@@ -500,7 +500,7 @@ void KSnapshot::updateCaption()
 
 void KSnapshot::slotMovePointer(int x, int y)
 {
-    QCursor::setPos( x, y );
+    TQCursor::setPos( x, y );
 }
 
 void KSnapshot::exit()

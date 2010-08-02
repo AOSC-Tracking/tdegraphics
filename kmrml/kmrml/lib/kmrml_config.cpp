@@ -16,9 +16,9 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qdir.h>
-#include <qfile.h>
-#include <qtextcodec.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqtextcodec.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -101,10 +101,10 @@ bool Config::sync()
 //         KIO::SlaveConfig::self()->reset();
 }
 
-void Config::setDefaultHost( const QString& host )
+void Config::setDefaultHost( const TQString& host )
 {
     m_defaultHost = host.isEmpty() ?
-                    QString::fromLatin1(DEFAULT_HOST) : host;
+                    TQString::fromLatin1(DEFAULT_HOST) : host;
 
     m_config->setGroup( CONFIG_GROUP );
     m_config->writeEntry( "Default Host", m_defaultHost );
@@ -115,7 +115,7 @@ ServerSettings Config::settingsForLocalHost() const
     return settingsForHost( "localhost" );
 }
 
-ServerSettings Config::settingsForHost( const QString& host ) const
+ServerSettings Config::settingsForHost( const TQString& host ) const
 {
     KConfigGroup config( m_config, settingsGroup( host ) );
     ServerSettings settings;
@@ -136,7 +136,7 @@ ServerSettings Config::settingsForHost( const QString& host ) const
 
 void Config::addSettings( const ServerSettings& settings )
 {
-    QString host = settings.host;
+    TQString host = settings.host;
     if ( m_hostList.find( host ) == m_hostList.end() )
         m_hostList.append( host );
 
@@ -152,7 +152,7 @@ void Config::addSettings( const ServerSettings& settings )
     m_config->writeEntry( "Perform Authentication", settings.useAuth );
 }
 
-bool Config::removeSettings( const QString& host )
+bool Config::removeSettings( const TQString& host )
 {
     bool success = m_config->deleteGroup( settingsGroup( host ) );
     if ( success )
@@ -164,22 +164,22 @@ bool Config::removeSettings( const QString& host )
     return success;
 }
 
-QStringList Config::indexableDirectories() const
+TQStringList Config::indexableDirectories() const
 {
     m_config->setGroup( CONFIG_GROUP );
     return m_config->readListEntry( "Indexable Directories" );
 }
 
-void Config::setIndexableDirectories( const QStringList& dirs )
+void Config::setIndexableDirectories( const TQStringList& dirs )
 {
     m_config->setGroup( CONFIG_GROUP );
     m_config->writeEntry( "Indexable Directories", dirs );
 }
 
-QString Config::addCollectionCommandLine() const
+TQString Config::addCollectionCommandLine() const
 {
     m_config->setGroup( CONFIG_GROUP );
-    QString cmd = m_config->readEntry( "AddCollection Commandline",
+    TQString cmd = m_config->readEntry( "AddCollection Commandline",
                                        DEFAULT_ADDCOLLECTION_CMD );
     int index = cmd.find( "%h" );
     if ( index != -1 )
@@ -187,21 +187,21 @@ QString Config::addCollectionCommandLine() const
 
     index = cmd.find( "%e" );
     if ( index != -1 )
-        cmd.replace( index, 2, QTextCodec::codecForLocale()->mimeName() );
+        cmd.replace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
 
     return cmd;
 }
 
-void Config::setAddCollectionCommandLine( const QString& cmd )
+void Config::setAddCollectionCommandLine( const TQString& cmd )
 {
     m_config->setGroup( CONFIG_GROUP );
     m_config->writeEntry( "AddCollection Commandline", cmd );
 }
 
-QString Config::removeCollectionCommandLine() const
+TQString Config::removeCollectionCommandLine() const
 {
     m_config->setGroup( CONFIG_GROUP );
-    QString cmd = m_config->readEntry( "RemoveCollection Commandline",
+    TQString cmd = m_config->readEntry( "RemoveCollection Commandline",
                                        DEFAULT_REMOVECOLLECTION_CMD );
     int index = cmd.find( "%h" );
     if ( index != -1 )
@@ -209,23 +209,23 @@ QString Config::removeCollectionCommandLine() const
 
     index = cmd.find( "%e" );
     if ( index != -1 )
-        cmd.replace( index, 2, QTextCodec::codecForLocale()->mimeName() );
+        cmd.replace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
 
     return cmd;
 }
 
-void Config::setRemoveCollectionCommandLine( const QString& cmd )
+void Config::setRemoveCollectionCommandLine( const TQString& cmd )
 {
     m_config->setGroup( CONFIG_GROUP );
     m_config->writeEntry( "RemoveCollection Commandline", cmd );
 }
 
-QString Config::mrmldCommandline() const
+TQString Config::mrmldCommandline() const
 {
     ServerSettings settings = settingsForLocalHost();
 
     m_config->setGroup( CONFIG_GROUP );
-    QString cmd = m_config->readEntry( "MrmmlDaemon Commandline",
+    TQString cmd = m_config->readEntry( "MrmmlDaemon Commandline",
                                        settings.autoPort ?
                                        DEFAULT_MRMLD_CMD_AUTOPORT :
                                        DEFAULT_MRMLD_CMD );
@@ -234,8 +234,8 @@ QString Config::mrmldCommandline() const
     int index = cmd.find( "%p" );
     if ( index != -1 )
     {
-        QString port = settings.autoPort ?
-                  QString::null : QString::number( settings.configuredPort );
+        TQString port = settings.autoPort ?
+                  TQString::null : TQString::number( settings.configuredPort );
         cmd.replace( index, 2, port );
     }
     index = cmd.find( "%d" );
@@ -249,17 +249,17 @@ QString Config::mrmldCommandline() const
     return cmd;
 }
 
-QString Config::mrmldDataDir()
+TQString Config::mrmldDataDir()
 {
-    QString dir = KGlobal::dirs()->saveLocation( "data",
+    TQString dir = KGlobal::dirs()->saveLocation( "data",
                                                  "kmrml/mrmld-data/" );
     if ( dir.isEmpty() ) // fallback
-        dir = QDir::homeDirPath() + "/";
+        dir = TQDir::homeDirPath() + "/";
 
     return dir;
 }
 
-void Config::setMrmldCommandLine( const QString& cmd )
+void Config::setMrmldCommandLine( const TQString& cmd )
 {
     m_config->setGroup( CONFIG_GROUP );
     m_config->writeEntry( "MrmmlDaemon Commandline", cmd );
@@ -275,9 +275,9 @@ ServerSettings::ServerSettings()
 {
 }
 
-ServerSettings::ServerSettings( const QString& host, unsigned short int port,
+ServerSettings::ServerSettings( const TQString& host, unsigned short int port,
                                 bool autoPort, bool useAuth,
-                                const QString& user, const QString& pass )
+                                const TQString& user, const TQString& pass )
 {
     this->host = host;
     this->configuredPort = port;
@@ -316,11 +316,11 @@ unsigned short int ServerSettings::port() const
 {
     if ( autoPort )
     {
-        QString portsFile = Config::mrmldDataDir() + "gift-port.txt";
-        QFile file( portsFile );
+        TQString portsFile = Config::mrmldDataDir() + "gift-port.txt";
+        TQFile file( portsFile );
         if ( file.open( IO_ReadOnly ) )
         {
-            QString line;
+            TQString line;
             (void) file.readLine( line, 6 );
 //             qDebug("**** read: %s", line.latin1());
 

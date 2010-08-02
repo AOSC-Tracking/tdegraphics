@@ -19,16 +19,16 @@
 
 #include <stdlib.h>
 
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qcstring.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qfile.h>
-#include <qpushbutton.h>
-#include <qradiobutton.h>
-#include <qstrlist.h>
-#include <qstringlist.h>
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqcstring.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqfile.h>
+#include <tqpushbutton.h>
+#include <tqradiobutton.h>
+#include <tqstrlist.h>
+#include <tqstringlist.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -41,36 +41,36 @@
 #include "devselector.h"
 
 
-DeviceSelector::DeviceSelector( QWidget *parent, QStrList& devList,
-				const QStringList& hrdevList )
+DeviceSelector::DeviceSelector( TQWidget *parent, TQStrList& devList,
+				const TQStringList& hrdevList )
     : KDialogBase( parent,  "DeviceSel", true, i18n("Welcome to Kooka"),
 		   Ok|Cancel, Ok, true )
 {
    kdDebug(29000) << "Starting DevSelector!" << endl;
    // Layout-Boxes
-   QWidget *page = new QWidget( this );
+   TQWidget *page = new TQWidget( this );
    Q_CHECK_PTR( page );
    setMainWidget( page );
 
-   QVBoxLayout *topLayout = new QVBoxLayout( page, marginHint(), spacingHint() );
-   QLabel *label = new QLabel( page, "captionImage" );
+   TQVBoxLayout *topLayout = new TQVBoxLayout( page, marginHint(), spacingHint() );
+   TQLabel *label = new TQLabel( page, "captionImage" );
    Q_CHECK_PTR( label );
-   label->setPixmap( QPixmap( "kookalogo.png" ));
+   label->setPixmap( TQPixmap( "kookalogo.png" ));
    label->resize( 100, 350 );
    topLayout->addWidget( label );
 
-   selectBox = new QButtonGroup( 1, Horizontal, i18n( "Select Scan Device" ),
+   selectBox = new TQButtonGroup( 1, Horizontal, i18n( "Select Scan Device" ),
 				 page, "ButtonBox");
    Q_CHECK_PTR( selectBox );
    selectBox->setExclusive( true );
    topLayout->addWidget( selectBox );
    setScanSources( devList, hrdevList );
 
-   cbSkipDialog = new QCheckBox( i18n("&Do not ask on startup again, always use this device"),
+   cbSkipDialog = new TQCheckBox( i18n("&Do not ask on startup again, always use this device"),
 				 page, "CBOX_SKIP_ON_START" );
 
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(QString::fromLatin1(GROUP_STARTUP));
+   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    cbSkipDialog->setChecked( skipDialog );
 
@@ -78,18 +78,18 @@ DeviceSelector::DeviceSelector( QWidget *parent, QStrList& devList,
    
 }
 
-QCString DeviceSelector::getDeviceFromConfig( void ) const
+TQCString DeviceSelector::getDeviceFromConfig( void ) const
 {
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(QString::fromLatin1(GROUP_STARTUP));
+   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    
-   QCString result;
+   TQCString result;
 
    /* in this case, the user has checked 'Do not ask me again' and does not
     * want to be bothered any more.
     */
-   result = QFile::encodeName(gcfg->readEntry( STARTUP_SCANDEV, "" ));
+   result = TQFile::encodeName(gcfg->readEntry( STARTUP_SCANDEV, "" ));
    kdDebug(29000) << "Got scanner from config file to use: " << result << endl;
    
    /* Now check if the scanner read from the config file is available !
@@ -102,7 +102,7 @@ QCString DeviceSelector::getDeviceFromConfig( void ) const
    else
    {
       kdDebug(29000) << "Scanner from Config file is _not_ available" << endl;
-      result = QCString();
+      result = TQCString();
    }
    
    return( result );
@@ -113,7 +113,7 @@ bool DeviceSelector::getShouldSkip( void ) const
    return( cbSkipDialog->isChecked());
 }
 
-QCString DeviceSelector::getSelectedDevice( void ) const
+TQCString DeviceSelector::getSelectedDevice( void ) const
 {
    unsigned int selID = selectBox->id( selectBox->selected() );
 
@@ -126,7 +126,7 @@ QCString DeviceSelector::getSelectedDevice( void ) const
 
    /* Store scanner selection settings */
    KConfig *c = KGlobal::config();
-   c->setGroup(QString::fromLatin1(GROUP_STARTUP));
+   c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    /* Write both the scan device and the skip-start-dialog flag global. */
    c->writeEntry( STARTUP_SCANDEV, dev, true, true );
    c->writeEntry( STARTUP_SKIP_ASK, getShouldSkip(), true, true );
@@ -136,24 +136,24 @@ QCString DeviceSelector::getSelectedDevice( void ) const
 }
 
 
-void DeviceSelector::setScanSources( const QStrList& sources,
-				     const QStringList& hrSources )
+void DeviceSelector::setScanSources( const TQStrList& sources,
+				     const TQStringList& hrSources )
 {
    bool default_ok = false;
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(QString::fromLatin1(GROUP_STARTUP));
-   QCString defstr = gcfg->readEntry( STARTUP_SCANDEV, "" ).local8Bit();
+   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
+   TQCString defstr = gcfg->readEntry( STARTUP_SCANDEV, "" ).local8Bit();
 
    /* Selector-Stuff*/
    uint nr = 0;
    int  checkDefNo = 0;
 
-   QStrListIterator it( sources );
-   QStringList::ConstIterator it2 = hrSources.begin();
+   TQStrListIterator it( sources );
+   TQStringList::ConstIterator it2 = hrSources.begin();
    for ( ; it.current(); ++it, ++it2 )
    {
-      QString text = QString::fromLatin1("&%1. %2\n%3").arg(1+nr).arg( QString::fromLocal8Bit(*it) ).arg( *it2 );
-      QRadioButton *rb = new QRadioButton( text, selectBox );
+      TQString text = TQString::fromLatin1("&%1. %2\n%3").arg(1+nr).arg( TQString::fromLocal8Bit(*it) ).arg( *it2 );
+      TQRadioButton *rb = new TQRadioButton( text, selectBox );
       selectBox->insert( rb );
 
       devices.append( *it );
@@ -168,7 +168,7 @@ void DeviceSelector::setScanSources( const QStrList& sources,
    if( ! default_ok )
    {
       /* if no default found, set the first */
-      QRadioButton *rb = (QRadioButton*) selectBox->find( checkDefNo );
+      TQRadioButton *rb = (TQRadioButton*) selectBox->find( checkDefNo );
       if ( rb )
 	  rb->setChecked( true );
    }

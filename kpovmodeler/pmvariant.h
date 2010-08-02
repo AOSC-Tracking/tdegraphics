@@ -19,7 +19,7 @@
 #ifndef PMVARIANT_H
 #define PMVARIANT_H
 
-#include <qstring.h>
+#include <tqstring.h>
 #include "pmcolor.h"
 #include "pmvector.h"
 #include "pmthreestate.h"
@@ -30,9 +30,9 @@ class PMObject;
  * Variant class for KPovModeler.
  *
  * Can store and convert: int, unsigned int, double, bool,
- * PMThreeState, QString, PMVector, PMColor, PMObject*.
+ * PMThreeState, TQString, PMVector, PMColor, PMObject*.
  *
- * Enums are stored as QString.
+ * Enums are stored as TQString.
  *
  * The variant can store one type at a time. You can try to convert
  * the type with the convertTo* methods. These will return bool on success.
@@ -76,7 +76,7 @@ public:
    /**
     * Stores a string
     */
-   PMVariant( const QString& data );
+   PMVariant( const TQString& data );
    /**
     * Stores a @ref PMVector
     */
@@ -131,7 +131,7 @@ public:
    /**
     * Sets the string data
     */
-   void setString( const QString& data );
+   void setString( const TQString& data );
    /**
     * Sets the vector data
     */
@@ -168,7 +168,7 @@ public:
    /**
     * Returns the string data. Data type has to be String!
     */
-   QString stringData( ) const;
+   TQString stringData( ) const;
    /**
     * Returns the vector data. Data type has to be Vector!
     */
@@ -195,11 +195,11 @@ public:
    /**
     * Returns the value of the stored data in string format
     */
-   QString asString( ) const;
+   TQString asString( ) const;
    /**
     * Sets the value of the variant based on the string
     */
-   bool fromString( const PMVariant::PMVariantDataType t, const QString& value );
+   bool fromString( const PMVariant::PMVariantDataType t, const TQString& value );
 private:
    void clear( );
 
@@ -214,8 +214,8 @@ private:
 };
 
 // Streaming operators for PMVariant
-QDataStream& operator<<( QDataStream& stream, const PMVariant& value );
-QDataStream& operator>>( QDataStream& stream, PMVariant& value );
+TQDataStream& operator<<( TQDataStream& stream, const PMVariant& value );
+TQDataStream& operator>>( TQDataStream& stream, PMVariant& value );
 
 
 #endif

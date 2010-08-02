@@ -23,7 +23,7 @@
 #include "pmmemento.h"
 
 #include <klocale.h>
-#include <qtextstream.h>
+#include <tqtextstream.h>
 
 PMDefinePropertyClass( PMRaw, PMRawProperty );
 
@@ -44,7 +44,7 @@ PMRaw::PMRaw( const PMRaw& r )
    m_code = r.m_code;
 }
 
-PMRaw::PMRaw( PMPart* part, const QString& t )
+PMRaw::PMRaw( PMPart* part, const TQString& t )
    : Base( part )
 {
    m_code = t;
@@ -54,12 +54,12 @@ PMRaw::~PMRaw( )
 {
 }
 
-QString PMRaw::description( ) const
+TQString PMRaw::description( ) const
 {
    return i18n( "raw povray" );
 }
 
-void PMRaw::setCode( const QString& code )
+void PMRaw::setCode( const TQString& code )
 {
    if( code != m_code )
    {
@@ -91,20 +91,20 @@ void PMRaw::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMRaw::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMRaw::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QDomText t = doc.createTextNode( m_code );
+   TQDomText t = doc.createTextNode( m_code );
    e.appendChild( t );
 }
 
 void PMRaw::readAttributes( const PMXMLHelper& h )
 {
-   QDomNode e = h.element( ).firstChild( );
+   TQDomNode e = h.element( ).firstChild( );
    if( e.isText( ) )
       m_code = e.toText( ).data( );
 }
 
-PMDialogEditBase* PMRaw::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMRaw::editWidget( TQWidget* parent ) const
 {
    return new PMRawEdit( parent );
 }

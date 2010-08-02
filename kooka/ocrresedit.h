@@ -27,21 +27,21 @@
 #ifndef _OCR_RESEDIT_
 #define _OCR_RESEDIT_
 
-#include <qtextedit.h>
+#include <tqtextedit.h>
 
-class QString;
-class QColor;
+class TQString;
+class TQColor;
 class ocrWord;
 
 class ocrResEdit : public QTextEdit
 {
     Q_OBJECT
 public:
-    ocrResEdit( QWidget  *parent );
+    ocrResEdit( TQWidget  *parent );
 
 public slots:
-    void slUpdateOCRResult( int line, const QString& wordFrom,
-                            const QString& wordTo );
+    void slUpdateOCRResult( int line, const TQString& wordFrom,
+                            const TQString& wordTo );
 
     void slMarkWordWrong( int line, const ocrWord& word );
 
@@ -52,13 +52,13 @@ public slots:
     void slSaveText();
 
 protected slots:
-    void slReplaceWord( int line, const QString& wordFrom,
-                        const QString& wordTo, const QColor& color );
+    void slReplaceWord( int line, const TQString& wordFrom,
+                        const TQString& wordTo, const TQColor& color );
 
 private:
-    QColor      m_updateColor;
-    QColor      m_ignoreColor;
-    QColor      m_wrnColor;
+    TQColor      m_updateColor;
+    TQColor      m_ignoreColor;
+    TQColor      m_wrnColor;
 
 };
 

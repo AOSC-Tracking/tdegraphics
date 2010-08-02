@@ -25,59 +25,59 @@
 #include <kcolordialog.h>
 #include <kfontdialog.h>
 
-#include <qlabel.h>
-#include <qpainter.h>
-#include <qwidget.h>
-#include <qcursor.h>
+#include <tqlabel.h>
+#include <tqpainter.h>
+#include <tqwidget.h>
+#include <tqcursor.h>
 
 class KLineal : public KMainWindow {
   Q_OBJECT
 public:
   enum { North=0, West=1, South=2, East=3 };
   /** constructor */
-  KLineal(QWidget*parent=0,const char* name=0);
+  KLineal(TQWidget*parent=0,const char* name=0);
   /** destructor */
   ~KLineal();
   void move(int x, int y);
-  void move(const QPoint &p);
-  QPoint pos();
+  void move(const TQPoint &p);
+  TQPoint pos();
   int x();
   int y();
 protected:
-	void keyPressEvent(QKeyEvent *e);
-  void mousePressEvent(QMouseEvent *e);
-  void mouseReleaseEvent(QMouseEvent *e);
-  void mouseMoveEvent(QMouseEvent *e);
-  void paintEvent(QPaintEvent *e);
-  void enterEvent(QEvent *e);
-  void leaveEvent(QEvent *e);
+	void keyPressEvent(TQKeyEvent *e);
+  void mousePressEvent(TQMouseEvent *e);
+  void mouseReleaseEvent(TQMouseEvent *e);
+  void mouseMoveEvent(TQMouseEvent *e);
+  void paintEvent(TQPaintEvent *e);
+  void enterEvent(TQEvent *e);
+  void leaveEvent(TQEvent *e);
   void setupBackground();
 
 
 private:
-  void drawScale(QPainter &painter);
+  void drawScale(TQPainter &painter);
   void reLength(int percentOfScreen);
   bool mDragging;
-  QPoint mLastClickPos;
-  QPoint mDragOffset;
-  QLabel *mLabel;
-  QLabel *mColorLabel;
-  QFrame *mColorRect;
+  TQPoint mLastClickPos;
+  TQPoint mDragOffset;
+  TQLabel *mLabel;
+  TQLabel *mColorLabel;
+  TQFrame *mColorRect;
   int mOrientation;
   int mLongEdgeLen;
   int mShortEdgeLen;
   KPopupMenu *mMenu;
   KPopupMenu *mLenMenu;
-  QColor mColor;
-  QColor mStoredColor;
-  QCursor mCurrentCursor;
-  QCursor mNorthCursor;
-  QCursor mEastCursor;
-  QCursor mWestCursor;
-  QCursor mSouthCursor;
-  QCursor mDragCursor;
+  TQColor mColor;
+  TQColor mStoredColor;
+  TQCursor mCurrentCursor;
+  TQCursor mNorthCursor;
+  TQCursor mEastCursor;
+  TQCursor mWestCursor;
+  TQCursor mSouthCursor;
+  TQCursor mDragCursor;
   KColorDialog mColorSelector;
-  QFont mScaleFont;
+  TQFont mScaleFont;
 	bool _clicked;
 public slots:
   void setOrientation(int);
@@ -96,8 +96,8 @@ public slots:
   void setTallLength();
   void setFullLength();
   void setColor();
-  void setFont(QFont &);
-  void setColor(const QColor &color);
+  void setFont(TQFont &);
+  void setColor(const TQColor &color);
   void choseColor();
   void choseFont();
   void restoreColor();

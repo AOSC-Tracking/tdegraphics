@@ -13,7 +13,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <math.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include "pageSize.h"
 #include "units.h"
@@ -61,10 +61,10 @@ pageSize::pageSize(const SimplePageSize& s)
 }
 
 
-bool pageSize::setPageSize(const QString& name)
+bool pageSize::setPageSize(const TQString& name)
 {
   // See if we can recognize the string
-  QString currentName;
+  TQString currentName;
   for(int i=0; staticList[i].name != 0; i++) {
     currentName = staticList[i].name;
     if (currentName == name) {
@@ -138,14 +138,14 @@ void pageSize::setPageSize(double width, double height)
 }
 
 
-void pageSize::setPageSize(const QString& width, const QString& _widthUnits, const QString& height, const QString& _heightUnits)
+void pageSize::setPageSize(const TQString& width, const TQString& _widthUnits, const TQString& height, const TQString& _heightUnits)
 {
   SimplePageSize oldPage = *this;
 
   double w = width.toFloat();
   double h = height.toFloat();
 
-  QString widthUnits = _widthUnits;
+  TQString widthUnits = _widthUnits;
   if ((widthUnits != "cm") && (widthUnits != "mm") && (widthUnits != "in")) {
     kdError(1223) << "Unrecognized page width unit '" << widthUnits << "'. Assuming mm" << endl;
     widthUnits = "mm";
@@ -156,7 +156,7 @@ void pageSize::setPageSize(const QString& width, const QString& _widthUnits, con
   if (widthUnits == "in")
     pageWidth.setLength_in_inch(w);
   
-  QString heightUnits = _heightUnits;
+  TQString heightUnits = _heightUnits;
   if ((heightUnits != "cm") && (heightUnits != "mm") && (heightUnits != "in")) {
     kdError(1223) << "Unrecognized page height unit '" << widthUnits << "'. Assuming mm" << endl;
     heightUnits = "mm";
@@ -204,7 +204,7 @@ void pageSize::rectifySizes()
 }
 
 
-QString pageSize::preferredUnit() const
+TQString pageSize::preferredUnit() const
 {
   if (currentSize >= 0)
     return staticList[currentSize].preferredUnit;
@@ -217,9 +217,9 @@ QString pageSize::preferredUnit() const
 }
 
 
-QString pageSize::widthString(const QString& unit) const
+TQString pageSize::widthString(const TQString& unit) const
 {
-  QString answer = "--";
+  TQString answer = "--";
 
   if (unit == "cm")
     answer.setNum(pageWidth.getLength_in_cm());
@@ -232,9 +232,9 @@ QString pageSize::widthString(const QString& unit) const
 }
 
 
-QString pageSize::heightString(const QString& unit) const
+TQString pageSize::heightString(const TQString& unit) const
 {
-  QString answer = "--";
+  TQString answer = "--";
 
   if (unit == "cm")
     answer.setNum(pageHeight.getLength_in_cm());
@@ -247,9 +247,9 @@ QString pageSize::heightString(const QString& unit) const
 }
 
 
-QStringList pageSize::pageSizeNames() 
+TQStringList pageSize::pageSizeNames() 
 {
-  QStringList names;
+  TQStringList names;
   
   for(int i=0; staticList[i].name != 0; i++) 
     names << staticList[i].name;
@@ -258,12 +258,12 @@ QStringList pageSize::pageSizeNames()
 }
 
 
-QString pageSize::formatName() const
+TQString pageSize::formatName() const
 {
   if (currentSize >= 0)
     return staticList[currentSize].name;
   else 
-    return QString::null;
+    return TQString::null;
 }
 
 
@@ -299,12 +299,12 @@ void pageSize::setOrientation(int orient)
 }
 
 
-QString pageSize::serialize() const
+TQString pageSize::serialize() const
 {
   if ((currentSize >= 0) && (fabs(staticList[currentSize].height-pageHeight.getLength_in_mm()) <= 0.5))
     return staticList[currentSize].name;
   else 
-    return QString("%1x%2").arg(pageWidth.getLength_in_mm()).arg(pageHeight.getLength_in_mm());
+    return TQString("%1x%2").arg(pageWidth.getLength_in_mm()).arg(pageHeight.getLength_in_mm());
 }
 
 
@@ -330,7 +330,7 @@ void pageSize::reconstructCurrentSize()
 
 int pageSize::defaultPageSize()
 {
-  // FIXME: static_cast<QPrinter::PageSize>(KGlobal::locale()->pageSize())
+  // FIXME: static_cast<TQPrinter::PageSize>(KGlobal::locale()->pageSize())
   //        is the proper solution here.  Then you can determine the values
   //        without using your hardcoded table too!
   if (KGlobal::locale()-> measureSystem() == KLocale::Metric)

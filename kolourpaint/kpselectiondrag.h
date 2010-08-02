@@ -29,7 +29,7 @@
 #ifndef __kp_selection_drag_h__
 #define __kp_selection_drag_h__
 
-#include <qdragobject.h>
+#include <tqdragobject.h>
 
 #include <kppixmapfx.h>
 #include <kpselection.h>
@@ -40,9 +40,9 @@ class kpSelectionDrag : public QImageDrag
 Q_OBJECT
 
 public:
-    kpSelectionDrag (QWidget *dragSource = 0, const char *name = 0);
-    kpSelectionDrag (const QImage &image, QWidget *dragSource = 0, const char *name = 0);
-    kpSelectionDrag (const kpSelection &sel, QWidget *dragSource = 0, const char *name = 0);
+    kpSelectionDrag (TQWidget *dragSource = 0, const char *name = 0);
+    kpSelectionDrag (const TQImage &image, TQWidget *dragSource = 0, const char *name = 0);
+    kpSelectionDrag (const kpSelection &sel, TQWidget *dragSource = 0, const char *name = 0);
     virtual ~kpSelectionDrag ();
 
     static const char * const selectionMimeType;
@@ -55,11 +55,11 @@ protected:
 public:
     virtual const char *format (int which = 0) const;
     virtual bool provides (const char *mimeType) const;
-    virtual QByteArray encodedData (const char *mimeType) const;
+    virtual TQByteArray encodedData (const char *mimeType) const;
 
-    static bool canDecode (const QMimeSource *e);
-    static bool decode (const QMimeSource *e, QImage &img);
-    static bool decode (const QMimeSource *e, kpSelection &sel,
+    static bool canDecode (const TQMimeSource *e);
+    static bool decode (const TQMimeSource *e, TQImage &img);
+    static bool decode (const TQMimeSource *e, kpSelection &sel,
                         const kpPixmapFX::WarnAboutLossInfo &wali =
                             kpPixmapFX::WarnAboutLossInfo ());
 

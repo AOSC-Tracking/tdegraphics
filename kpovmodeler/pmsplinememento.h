@@ -26,7 +26,7 @@
 
 #include "pmmemento.h"
 #include "pmvector.h"
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 
 /**
@@ -47,11 +47,11 @@ public:
    /**
     * Saves the spline points
     */
-   void setSplinePoints( const QValueList<PMVector>& v );
+   void setSplinePoints( const TQValueList<PMVector>& v );
    /**
     * Returns the spline points
     */
-   QValueList<PMVector> splinePoints( ) const;
+   TQValueList<PMVector> splinePoints( ) const;
    /**
     * Returns true if the spline points were saved
     */
@@ -61,7 +61,7 @@ private:
    /**
     * The stored points
     */
-   QValueList<PMVector> m_splinePoints;
+   TQValueList<PMVector> m_splinePoints;
    bool m_bSplinePointsSaved;
 };
 

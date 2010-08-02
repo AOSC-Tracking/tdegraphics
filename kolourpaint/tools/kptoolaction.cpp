@@ -31,10 +31,10 @@
 #include <kptool.h>
 
 
-kpToolAction::kpToolAction (const QString &text,
-                            const QString &pic, const KShortcut &shortcut,
-                            const QObject *receiver, const char *slot,
-                            QObject *parent, const char *name)
+kpToolAction::kpToolAction (const TQString &text,
+                            const TQString &pic, const KShortcut &shortcut,
+                            const TQObject *receiver, const char *slot,
+                            TQObject *parent, const char *name)
     : KToggleAction (text,
                      pic, shortcut,
                      receiver, slot,
@@ -51,7 +51,7 @@ kpToolAction::~kpToolAction ()
 // protected
 void kpToolAction::updateToolTip ()
 {
-    const QString newToolTip =
+    const TQString newToolTip =
         kpTool::toolTipForTextAndShortcut (text (), shortcut ());
     if (newToolTip == toolTip ())
         return;
@@ -66,7 +66,7 @@ void kpToolAction::updateToolTip ()
 //
 
 // public slot virtual [base KAction]
-void kpToolAction::setText (const QString &text)
+void kpToolAction::setText (const TQString &text)
 {
     KToggleAction::setText (text);
     updateToolTip ();

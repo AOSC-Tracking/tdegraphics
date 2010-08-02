@@ -31,9 +31,9 @@
 
 #include <kptoolwidgetspraycansize.h>
 
-#include <qbitmap.h>
-#include <qimage.h>
-#include <qpainter.h>
+#include <tqbitmap.h>
+#include <tqimage.h>
+#include <tqpainter.h>
 
 #include <kdebug.h>
 #include <kiconloader.h>
@@ -44,7 +44,7 @@
 
 static int spraycanSizes [] = {9, 17, 29};
 
-kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (QWidget *parent, const char *name)
+kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *parent, const char *name)
     : kpToolWidgetBase (parent, name)
 {
 #if DEBUG_KP_TOOL_WIDGET_SPRAYCAN_SIZE
@@ -54,22 +54,22 @@ kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (QWidget *parent, const char 
     for (int i = 0; i < int (sizeof (spraycanSizes) / sizeof (spraycanSizes [0])); i++)
     {
         int s = spraycanSizes [i];
-        QString iconName = QString ("tool_spraycan_%1x%1").arg (s).arg(s);
+        TQString iconName = TQString ("tool_spraycan_%1x%1").arg (s).arg(s);
         
     #if DEBUG_KP_TOOL_WIDGET_SPRAYCAN_SIZE
         kdDebug () << "\ticonName=" << iconName << endl;
     #endif
 
-        QPixmap pixmap (s, s);
+        TQPixmap pixmap (s, s);
         pixmap.fill (Qt::white);
         
-        QPainter painter (&pixmap);
+        TQPainter painter (&pixmap);
         painter.drawPixmap (0, 0, UserIcon (iconName));
         painter.end ();
 
-        QImage image = kpPixmapFX::convertToImage (pixmap);
+        TQImage image = kpPixmapFX::convertToImage (pixmap);
 
-        QBitmap mask (pixmap.width (), pixmap.height ());
+        TQBitmap mask (pixmap.width (), pixmap.height ());
         mask.fill (Qt::color0);
 
         painter.begin (&mask);

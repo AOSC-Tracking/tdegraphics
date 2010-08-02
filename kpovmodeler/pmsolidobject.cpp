@@ -66,7 +66,7 @@ void PMSolidObject::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMSolidObject::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMSolidObject::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    switch( m_hollow )
    {

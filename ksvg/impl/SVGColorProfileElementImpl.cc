@@ -22,7 +22,7 @@
 #include <kdebug.h>
 #include <kio/netaccess.h>
 
-#include <qimage.h>
+#include <tqimage.h>
 
 #include "SVGDocumentImpl.h"
 #include "SVGSVGElementImpl.h"
@@ -97,7 +97,7 @@ void SVGColorProfileElementImpl::putValueProperty(ExecState *exec, int token, co
 			break;
 		case RenderingIntent:
 		{
-			QString compare = value.toString(exec).qstring().lower();
+			TQString compare = value.toString(exec).qstring().lower();
 
 			if(compare == "perceptual")
 				m_renderingIntent = RENDERING_INTENT_PERCEPTUAL;
@@ -148,12 +148,12 @@ unsigned short SVGColorProfileElementImpl::renderingIntent() const
 
 bool SVGColorProfileElementImpl::canLoad()
 {
-	QString open;
+	TQString open;
 	bool temp;
 	return canLoad(false, temp, open, true);
 }
 
-bool SVGColorProfileElementImpl::canLoad(bool remote, bool &tempFile, QString &open, bool verbose)
+bool SVGColorProfileElementImpl::canLoad(bool remote, bool &tempFile, TQString &open, bool verbose)
 {
 	KURL file;
 	
@@ -174,7 +174,7 @@ bool SVGColorProfileElementImpl::canLoad(bool remote, bool &tempFile, QString &o
 	{
 		open = file.path();
 		
-		if(!QFile::exists(open))
+		if(!TQFile::exists(open))
 		{
 			if(verbose)
 				kdDebug() << "Couldn't load color profile " << file.path() << "! It does not exist." << endl;
@@ -196,7 +196,7 @@ bool SVGColorProfileElementImpl::canLoad(bool remote, bool &tempFile, QString &o
 
 bool SVGColorProfileElementImpl::loadColorProfile()
 {
-	QString open;
+	TQString open;
 	bool tempFile = false;
 	
 	if(!canLoad(true, tempFile, open, false))
@@ -251,7 +251,7 @@ QRgb SVGColorProfileElementImpl::correctPixel(float r, float g, float b)
 	return qRgb(0, 0, 0);
 }
 
-QImage *SVGColorProfileElementImpl::correctImage(QImage *input)
+TQImage *SVGColorProfileElementImpl::correctImage(TQImage *input)
 {
 	if(!canLoad())
 		return input;

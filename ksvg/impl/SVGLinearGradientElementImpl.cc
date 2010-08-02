@@ -177,12 +177,12 @@ void SVGLinearGradientElementImpl::setAttributes()
 		KSVG_SET_ALT_ATTRIBUTE(Y2, "0")
 }
 
-QMap<QString, DOM::DOMString> SVGLinearGradientElementImpl::gradientAttributes()
+TQMap<TQString, DOM::DOMString> SVGLinearGradientElementImpl::gradientAttributes()
 {
 	setAttributes();
 
-	QMap<QString, DOM::DOMString> gradAttributes;
-	QDictIterator<DOM::DOMString> it(attributes());
+	TQMap<TQString, DOM::DOMString> gradAttributes;
+	TQDictIterator<DOM::DOMString> it(attributes());
 
 	for(; it.current(); ++it)
 	{

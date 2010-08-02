@@ -25,7 +25,7 @@ double PMControlPoint::s_moveGrid = c_defaultMoveGrid;
 double PMControlPoint::s_scaleGrid = c_defaultScaleGrid;
 double PMControlPoint::s_rotateGrid = c_defaultRotateGrid;
 
-PMControlPoint::PMControlPoint( int id, const QString& description )
+PMControlPoint::PMControlPoint( int id, const TQString& description )
 {
    m_id = id;
    m_bChanged = false;

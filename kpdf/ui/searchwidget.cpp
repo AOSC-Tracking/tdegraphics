@@ -8,9 +8,9 @@
  ***************************************************************************/
 
 // qt/kde includes
-#include <qtooltip.h>
-#include <qapplication.h>
-#include <qtimer.h>
+#include <tqtooltip.h>
+#include <tqapplication.h>
+#include <tqtimer.h>
 #include <kaction.h>
 #include <kactioncollection.h>
 #include <klocale.h>
@@ -28,7 +28,7 @@
 #define LEDIT_ID    2
 #define FIND_ID     3
 
-SearchWidget::SearchWidget( QWidget * parent, KPDFDocument * document )
+SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
     : KToolBar( parent, "iSearchBar" ), m_document( document ),
     m_searchType( 0 ), m_caseSensitive( false )
 {
@@ -39,19 +39,19 @@ SearchWidget::SearchWidget( QWidget * parent, KPDFDocument * document )
     setMovingEnabled( false );
 
     // a timer to ensure that we don't flood the document with requests to search
-    m_inputDelayTimer = new QTimer(this);
-    connect( m_inputDelayTimer, SIGNAL( timeout() ),
-             this, SLOT( startSearch() ) );
+    m_inputDelayTimer = new TQTimer(this);
+    connect( m_inputDelayTimer, TQT_SIGNAL( timeout() ),
+             this, TQT_SLOT( startSearch() ) );
 
     // 1. text line
-    insertLined( QString::null, LEDIT_ID, SIGNAL( textChanged(const QString &) ),
-                 this, SLOT( slotTextChanged(const QString &) ), true,
+    insertLined( TQString::null, LEDIT_ID, TQT_SIGNAL( textChanged(const TQString &) ),
+                 this, TQT_SLOT( slotTextChanged(const TQString &) ), true,
                  i18n( "Enter at least 3 letters to filter pages" ), 0/*size*/, 1 );
 
     // 2. clear button (uses a lineEdit slot, so it must be created after)
-    insertButton( QApplication::reverseLayout() ? "clear_left" : "locationbar_erase",
-                  CLEAR_ID, SIGNAL( clicked() ),
-                  getLined( LEDIT_ID ), SLOT( clear() ), true,
+    insertButton( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase",
+                  CLEAR_ID, TQT_SIGNAL( clicked() ),
+                  getLined( LEDIT_ID ), TQT_SLOT( clear() ), true,
                   i18n( "Clear filter" ), 0/*index*/ );
 
     // 3.1. create the popup menu for changing filtering features
@@ -62,7 +62,7 @@ SearchWidget::SearchWidget( QWidget * parent, KPDFDocument * document )
     m_menu->insertItem( i18n("Match All Words"), 4 );
     m_menu->insertItem( i18n("Match Any Word"), 5 );
     m_menu->setItemChecked( 3, true );
-    connect( m_menu, SIGNAL( activated(int) ), SLOT( slotMenuChaged(int) ) );
+    connect( m_menu, TQT_SIGNAL( activated(int) ), TQT_SLOT( slotMenuChaged(int) ) );
 
     // 3.2. create the toolbar button that spawns the popup menu
     insertButton( "kpdf", FIND_ID, m_menu, true, i18n( "Filter Options" ), 2/*index*/ );
@@ -76,10 +76,10 @@ void SearchWidget::clearText()
     getLined( LEDIT_ID )->clear();
 }
 
-void SearchWidget::slotTextChanged( const QString & text )
+void SearchWidget::slotTextChanged( const TQString & text )
 {
     // if 0<length<3 set 'red' text and send a blank string to document
-    QColor color = text.length() > 0 && text.length() < 3 ? Qt::darkRed : palette().active().text();
+    TQColor color = text.length() > 0 && text.length() < 3 ? Qt::darkRed : palette().active().text();
     KLineEdit * lineEdit = getLined( LEDIT_ID );
     lineEdit->setPaletteForegroundColor( color );
     lineEdit->setPaletteBackgroundColor( palette().active().base() );
@@ -111,7 +111,7 @@ void SearchWidget::slotMenuChaged( int index )
 void SearchWidget::startSearch()
 {
     // search text if have more than 3 chars or else clear search
-    QString text = getLined( LEDIT_ID )->text();
+    TQString text = getLined( LEDIT_ID )->text();
     bool ok = true;
     if ( text.length() >= 3 )
     {

@@ -83,17 +83,17 @@ public:
    /**
     * Saves the radii
     */
-   void setRadii( const QValueList<double>& r )
+   void setRadii( const TQValueList<double>& r )
    {
       if( !m_bRadiiSaved )
       {
          // Direct assignment does not work with Qt 2.3.x
          // The list will be changed later in a graphical
-         // change because QValueList::detach( ) is called
+         // change because TQValueList::detach( ) is called
          // too late!
          // Copy the list by hand.
 
-         QValueList<double>::ConstIterator it = r.begin( );
+         TQValueList<double>::ConstIterator it = r.begin( );
          for( ; it != r.end( ); ++it )
             m_radii.append( *it );
 
@@ -104,7 +104,7 @@ public:
    /**
     * Returns the radii
     */
-   QValueList<double> radii( ) const
+   TQValueList<double> radii( ) const
    {
       if( !m_bRadiiSaved )
          kdError( PMArea ) << "Radii points not saved in PMSphereSweepMemento::radii\n";
@@ -119,7 +119,7 @@ private:
    /**
     * The stored radii
     */
-   QValueList<double> m_radii;
+   TQValueList<double> m_radii;
    bool m_bRadiiSaved;
 };
 
@@ -151,21 +151,21 @@ PMSphereSweep::~PMSphereSweep( )
 {
 }
 
-QString PMSphereSweep::description( ) const
+TQString PMSphereSweep::description( ) const
 {
    return i18n( "sphere sweep" );
 }
 
-void PMSphereSweep::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMSphereSweep::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QDomElement data = doc.createElement( "extra_data" );
-   QDomElement p;
+   TQDomElement data = doc.createElement( "extra_data" );
+   TQDomElement p;
 
    e.setAttribute( "spline_type", m_splineType );
    e.setAttribute( "tolerance", m_tolerance );
 
-   QValueList<PMVector>::ConstIterator it;
-   QValueList<double>::ConstIterator it2;
+   TQValueList<PMVector>::ConstIterator it;
+   TQValueList<double>::ConstIterator it2;
    for( it = m_points.begin( ), it2 = m_radii.begin( );
         it != m_points.end( ) && it2 != m_radii.end( ); ++it, ++it2 )
    {
@@ -188,23 +188,23 @@ void PMSphereSweep::readAttributes( const PMXMLHelper& h )
    m_radii.clear( );
    PMVector v( 3 );
 
-   QDomElement e = h.extraData( );
+   TQDomElement e = h.extraData( );
    if( !e.isNull( ) )
    {
-      QDomNode c = e.firstChild( );
+      TQDomNode c = e.firstChild( );
       while( !c.isNull( ) )
       {
          if( c.isElement( ) )
          {
-            QDomElement ce = c.toElement( );
+            TQDomElement ce = c.toElement( );
             if( ce.tagName( ) == "point" )
             {
-               QString str = ce.attribute( "vector" );
+               TQString str = ce.attribute( "vector" );
                if( !str.isNull( ) )
                {
                   v.loadXML( str );
                   m_points.append( v );
-                  QString str = ce.attribute( "radius" );
+                  TQString str = ce.attribute( "radius" );
                   m_radii.append( str.toDouble( ) );
                }
             }
@@ -266,7 +266,7 @@ void PMSphereSweep::setTolerance( double t )
    }
 }
 
-void PMSphereSweep::setPoints( const QValueList<PMVector>& points )
+void PMSphereSweep::setPoints( const TQValueList<PMVector>& points )
 {
    if( m_points != points )
    {
@@ -278,7 +278,7 @@ void PMSphereSweep::setPoints( const QValueList<PMVector>& points )
    }
 }
 
-void PMSphereSweep::setRadii( const QValueList<double>& radii )
+void PMSphereSweep::setRadii( const TQValueList<double>& radii )
 {
    if( m_radii != radii )
    {
@@ -290,7 +290,7 @@ void PMSphereSweep::setRadii( const QValueList<double>& radii )
    }
 }
 
-PMDialogEditBase* PMSphereSweep::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMSphereSweep::editWidget( TQWidget* parent ) const
 {
    return new PMSphereSweepEdit( parent );
 }
@@ -426,8 +426,8 @@ void PMSphereSweep::createViewStructure( )
 
 void PMSphereSweep::controlPoints( PMControlPointList& list )
 {
-   QValueList<PMVector>::Iterator it;
-   QValueList<double>::Iterator it2;
+   TQValueList<PMVector>::Iterator it;
+   TQValueList<double>::Iterator it2;
    int i, nr;
 
    for( it = m_points.begin( ), it2 = m_radii.begin( ), nr = 1, i = 0;
@@ -454,8 +454,8 @@ void PMSphereSweep::controlPoints( PMControlPointList& list )
 void PMSphereSweep::controlPointsChanged( PMControlPointList& list )
 {
    PMControlPointListIterator it1( list );
-   QValueList<PMVector>::Iterator pit = m_points.begin( );
-   QValueList<double>::Iterator rit = m_radii.begin( );
+   TQValueList<PMVector>::Iterator pit = m_points.begin( );
+   TQValueList<double>::Iterator rit = m_radii.begin( );
    int i;
    PM3DControlPoint* p;
    PMDistanceControlPoint* r;
@@ -513,7 +513,7 @@ void PMSphereSweep::controlPointsChanged( PMControlPointList& list )
 }
 
 void PMSphereSweep::addObjectActions( const PMControlPointList& /*cp*/,
-                                QPtrList<PMObjectAction>& actions )
+                                TQPtrList<PMObjectAction>& actions )
 {
    PMObjectAction* a;
 
@@ -545,7 +545,7 @@ void PMSphereSweep::addObjectActions( const PMControlPointList& /*cp*/,
 
 void PMSphereSweep::objectActionCalled( const PMObjectAction* action,
                                   const PMControlPointList& cp,
-                                  const QPtrList<PMVector>& cpViewPosition,
+                                  const TQPtrList<PMVector>& cpViewPosition,
                                   const PMVector& clickPosition )
 {
    if( action->objectType( ) == s_pMetaObject )
@@ -568,7 +568,7 @@ void PMSphereSweep::objectActionCalled( const PMObjectAction* action,
 }
 
 void PMSphereSweep::splitSegment( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest segment
@@ -578,8 +578,8 @@ void PMSphereSweep::splitSegment( const PMControlPointList& /*cp*/,
    int i, j;
    PMVector mid( 3 ), dist( 2 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
-   QPtrListIterator<PMVector> it2( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it2( cpViewPosition );
    ++it2;
 
    for( i = 0; i < nump; i++ )
@@ -618,17 +618,17 @@ void PMSphereSweep::splitSegment( const PMControlPointList& /*cp*/,
    }
 
    // add a new segment
-   QValueList<PMVector> newPoints = m_points;
-   QValueList<double> newRadii = m_radii;
+   TQValueList<PMVector> newPoints = m_points;
+   TQValueList<double> newRadii = m_radii;
 
-   QValueList<PMVector>::Iterator it = newPoints.at( ( unsigned ) ns );
-   QValueList<PMVector>::Iterator hit = it;
+   TQValueList<PMVector>::Iterator it = newPoints.at( ( unsigned ) ns );
+   TQValueList<PMVector>::Iterator hit = it;
    ++it;
    mid = ( *it + *hit ) / 2;
    newPoints.insert( it, mid );
 
-   QValueList<double>::Iterator rit = newRadii.at( ( unsigned ) ns );
-   QValueList<double>::Iterator rhit = rit;
+   TQValueList<double>::Iterator rit = newRadii.at( ( unsigned ) ns );
+   TQValueList<double>::Iterator rhit = rit;
    ++rit;
    newRadii.insert( rit, ( *rit + *rhit ) / 2 );
 
@@ -637,7 +637,7 @@ void PMSphereSweep::splitSegment( const PMControlPointList& /*cp*/,
 }
 
 void PMSphereSweep::joinSegments( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest point
@@ -667,7 +667,7 @@ void PMSphereSweep::joinSegments( const PMControlPointList& /*cp*/,
    PMVector* p;
    PMVector dist( 2 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
 
    for( i = 0; i < nump; i++ )
    {
@@ -687,10 +687,10 @@ void PMSphereSweep::joinSegments( const PMControlPointList& /*cp*/,
    }
 
    // join two segments
-   QValueList<PMVector> newPoints = m_points;
-   QValueList<PMVector>::Iterator it;
-   QValueList<double> newRadii = m_radii;
-   QValueList<double>::Iterator rit;
+   TQValueList<PMVector> newPoints = m_points;
+   TQValueList<PMVector>::Iterator it;
+   TQValueList<double> newRadii = m_radii;
+   TQValueList<double>::Iterator rit;
 
    // never remove the first or last point
    if( ns == 0 )

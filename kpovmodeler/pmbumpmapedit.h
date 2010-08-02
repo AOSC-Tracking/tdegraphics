@@ -30,14 +30,14 @@
 class PMBumpMap;
 class PMPaletteValue;
 class PMVectorEdit;
-class QComboBox;
+class TQComboBox;
 class PMFloatEdit;
 class PMIntEdit;
-class QLabel;
-class QCheckBox;
-class QWidget;
-class QLineEdit;
-class QPushButton;
+class TQLabel;
+class TQCheckBox;
+class TQWidget;
+class TQLineEdit;
+class TQPushButton;
 
 /**
  * Dialog edit class for @ref PMBumpMap.
@@ -50,7 +50,7 @@ public:
    /**
     * Creates a PMBumpMapEdit with parent and name
     */
-   PMBumpMapEdit( QWidget* parent, const char* name = 0 );
+   PMBumpMapEdit( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displayObject( PMObject* o );
    /** */
@@ -68,18 +68,18 @@ private slots:
    /** */
    void slotInterpolateTypeChanged( int a );
    /** */
-   void slotImageFileNameChanged( const QString& a );
+   void slotImageFileNameChanged( const TQString& a );
    /** */
    void slotImageFileBrowseClicked( );
 private:
    PMBumpMap*   m_pDisplayedObject;
-   QComboBox*   m_pImageFileTypeEdit;
-   QLineEdit*   m_pImageFileNameEdit;
-   QPushButton* m_pImageFileNameBrowse;
-   QCheckBox*   m_pOnceEdit;
-   QComboBox*   m_pMapTypeEdit;
-   QComboBox*   m_pInterpolateTypeEdit;
-   QCheckBox*   m_pUseIndexEdit;
+   TQComboBox*   m_pImageFileTypeEdit;
+   TQLineEdit*   m_pImageFileNameEdit;
+   TQPushButton* m_pImageFileNameBrowse;
+   TQCheckBox*   m_pOnceEdit;
+   TQComboBox*   m_pMapTypeEdit;
+   TQComboBox*   m_pInterpolateTypeEdit;
+   TQCheckBox*   m_pUseIndexEdit;
    PMFloatEdit* m_pBumpSizeEdit;
 };
 

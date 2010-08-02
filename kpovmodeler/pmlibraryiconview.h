@@ -35,25 +35,25 @@ class PMLibraryIconDrag : public QIconDrag
    Q_OBJECT
 public:
    /** Constructor */
-   PMLibraryIconDrag( QWidget * dragSource, const char* name = 0 ) : QIconDrag( dragSource, name ) {}
+   PMLibraryIconDrag( TQWidget * dragSource, const char* name = 0 ) : TQIconDrag( dragSource, name ) {}
 
    /** @return The ith format, or NULL. */
    const char* format( int i ) const;
    /** @return The encoded payload of this object, in the specified MIME format. */
-   QByteArray encodedData( const char* mime ) const;
+   TQByteArray encodedData( const char* mime ) const;
    /** @return True if the information in e can be decoded */
-   static bool canDecode( QMimeSource* e );
+   static bool canDecode( TQMimeSource* e );
    /**
     * Attempts to decode the data in e
     * @return True if successful otherwise returns false
     */
-   static bool decode( QMimeSource* e, QStringList& StrList, QValueList<bool>& subLibList );
+   static bool decode( TQMimeSource* e, TQStringList& StrList, TQValueList<bool>& subLibList );
    /** Adds a item to the object */
-   void append( const QIconDragItem &item, const QRect &pr, const QRect &tr, const QString &path, bool subLib );
+   void append( const TQIconDragItem &item, const TQRect &pr, const TQRect &tr, const TQString &path, bool subLib );
 
 private:
-   QStringList m_paths;
-   QValueList<bool> m_subLibs;
+   TQStringList m_paths;
+   TQValueList<bool> m_subLibs;
 };
 
 /**
@@ -63,7 +63,7 @@ class PMLibraryIconView: public KIconView
 {
    Q_OBJECT
 public:
-   PMLibraryIconView( QWidget *parent, const char* name = NULL );
+   PMLibraryIconView( TQWidget *parent, const char* name = NULL );
 
    /**
     * Set the library base path
@@ -81,11 +81,11 @@ public slots:
    void refresh( );
 
    /** called when an Item is dropped onto the view */
-   void slotDropped( QDropEvent *e, const QValueList<QIconDragItem>& );
+   void slotDropped( TQDropEvent *e, const TQValueList<TQIconDragItem>& );
 
 protected:
-   /** @return a QDragObject for drag and drop */
-   virtual QDragObject* dragObject( );
+   /** @return a TQDragObject for drag and drop */
+   virtual TQDragObject* dragObject( );
 
 private:
    PMLibraryHandle *m_pLibrary;
@@ -99,24 +99,24 @@ private:
 class PMLibraryIconViewItem: public KIconViewItem
 {
 public:
-   PMLibraryIconViewItem( QIconView *parent, const QString& text, const QString& path, bool isSubLibrary );
-   PMLibraryIconViewItem( QIconView *parent, const QString& text, const QImage& image, const QString& path, bool isSubLibrary );
+   PMLibraryIconViewItem( TQIconView *parent, const TQString& text, const TQString& path, bool isSubLibrary );
+   PMLibraryIconViewItem( TQIconView *parent, const TQString& text, const TQImage& image, const TQString& path, bool isSubLibrary );
 
    /** Get the path of the entry */
-   QString path( ) const { return m_path; }
+   TQString path( ) const { return m_path; }
    /** Is the entry a sublib library? */
    bool isSubLibrary( ) const { return m_isSubLibrary; }
    /** Reimplement accept drop to take items */
-   virtual bool acceptDrop( const QMimeSource *mime ) const;
+   virtual bool acceptDrop( const TQMimeSource *mime ) const;
 
 protected:
    /** Tokes a dropped item */
-   void dropped( QDropEvent *evt, const QValueList<QIconDragItem>& );
+   void dropped( TQDropEvent *evt, const TQValueList<TQIconDragItem>& );
    /** Checks for the existance of oldpath and generates a new path as required */
-   QString newPath( const QString oldPath, bool subLib );
+   TQString newPath( const TQString oldPath, bool subLib );
 
 private:
-   QString m_path;
+   TQString m_path;
    bool    m_isSubLibrary;
 };
 

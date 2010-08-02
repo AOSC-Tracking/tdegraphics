@@ -29,12 +29,12 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qimage.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqimage.h>
 
 #include "exif.h"
 
@@ -44,8 +44,8 @@ typedef KGenericFactory<KJpegPlugin> JpegFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_jpeg, JpegFactory("kfile_jpeg"))
 
-KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
-                       const QStringList &args )
+KJpegPlugin::KJpegPlugin(TQObject *parent, const char *name,
+                       const TQStringList &args )
     : KFilePlugin(parent, name, args)
 {
   kdDebug(7034) << "jpeg plugin\n";
@@ -58,110 +58,110 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                                                           i18n("JPEG Exif") );
   KFileMimeTypeInfo::ItemInfo* item;
 
-  item = addItemInfo( exifGroup, "Comment", i18n("Comment"), QVariant::String);
+  item = addItemInfo( exifGroup, "Comment", i18n("Comment"), TQVariant::String);
   setAttributes( item,
                  KFileMimeTypeInfo::Modifiable |
                  KFileMimeTypeInfo::Addable |
                  KFileMimeTypeInfo::MultiLine );
 
   item = addItemInfo( exifGroup, "Manufacturer", i18n("Camera Manufacturer"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Model", i18n("Camera Model"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Date/time", i18n("Date/Time"),
-                      QVariant::DateTime );
+                      TQVariant::DateTime );
 
   item = addItemInfo( exifGroup, "CreationDate", i18n("Creation Date"),
-                      QVariant::Date );
+                      TQVariant::Date );
 
   item = addItemInfo( exifGroup, "CreationTime", i18n("Creation Time"),
-                      QVariant::Time );
+                      TQVariant::Time );
 
   item = addItemInfo( exifGroup, "Dimensions", i18n("Dimensions"),
-                      QVariant::Size );
+                      TQVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
 
   item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
-                      QVariant::Int );
+                      TQVariant::Int );
 
   item = addItemInfo( exifGroup, "ColorMode", i18n("Color Mode"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Flash used", i18n("Flash Used"),
-                      QVariant::String );
+                      TQVariant::String );
   item = addItemInfo( exifGroup, "Focal length", i18n("Focal Length"),
-                      QVariant::String );
+                      TQVariant::String );
   setUnit( item, KFileMimeTypeInfo::Millimeters );
 
   item = addItemInfo( exifGroup, "35mm equivalent", i18n("35mm Equivalent"),
-                      QVariant::Int );
+                      TQVariant::Int );
   setUnit( item, KFileMimeTypeInfo::Millimeters );
 
   item = addItemInfo( exifGroup, "CCD width", i18n("CCD Width"),
-                      QVariant::String );
+                      TQVariant::String );
   setUnit( item, KFileMimeTypeInfo::Millimeters );
 
   item = addItemInfo( exifGroup, "Exposure time", i18n("Exposure Time"),
-                      QVariant::String );
+                      TQVariant::String );
   setHint( item, KFileMimeTypeInfo::Seconds );
 
   item = addItemInfo( exifGroup, "Aperture", i18n("Aperture"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Focus dist.", i18n("Focus Dist."),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Exposure bias", i18n("Exposure Bias"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Whitebalance", i18n("Whitebalance"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Metering mode", i18n("Metering Mode"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Exposure", i18n("Exposure"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "ISO equiv.", i18n("ISO Equiv."),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "JPEG quality", i18n("JPEG Quality"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "User comment", i18n("User Comment"),
-                      QVariant::String );
+                      TQVariant::String );
   setHint(item,  KFileMimeTypeInfo::Description);
 
   item = addItemInfo( exifGroup, "JPEG process", i18n("JPEG Process"),
-                      QVariant::String );
+                      TQVariant::String );
 
   item = addItemInfo( exifGroup, "Thumbnail", i18n("Thumbnail"),
-                      QVariant::Image );
+                      TQVariant::Image );
   setHint( item, KFileMimeTypeInfo::Thumbnail );
 
 //  ###
 //   exifGroup.setSupportsVariableKeys(true);
 }
 
-QValidator* KJpegPlugin::createValidator(const KFileMetaInfoItem& /*item*/,
-                                        QObject */*parent*/,
+TQValidator* KJpegPlugin::createValidator(const KFileMetaInfoItem& /*item*/,
+                                        TQObject */*parent*/,
                                          const char */*name*/ ) const
 {
     // no need to return a validator that validates everything as OK :)
 //     if (item.isEditable())
-//         return new QRegExpValidator(QRegExp(".*"), parent, name);
+//         return new TQRegExpValidator(TQRegExp(".*"), parent, name);
 //     else
     return 0L;
 }
 
 bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
 {
-    QString comment = info[EXIFGROUP].value("Comment").toString();
-    QString path    = info.path();
+    TQString comment = info[EXIFGROUP].value("Comment").toString();
+    TQString path    = info.path();
 
     kdDebug(7034) << "exif writeInfo: " << info.path() << " \"" << comment << "\"\n";
 
@@ -182,7 +182,7 @@ bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
         which is fully backwards compatible with readers expecting ascii.
         Readers expecting a national character set are out of luck...
     */
-    if( safe_copy_and_modify( QFile::encodeName( path ), comment.utf8() ) ) {
+    if( safe_copy_and_modify( TQFile::encodeName( path ), comment.utf8() ) ) {
             return false;
         }
     return true;
@@ -190,11 +190,11 @@ bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
 
 bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
-    const QString path( info.path() );
+    const TQString path( info.path() );
     if ( path.isEmpty() ) // remote file
         return false;
 
-    QString tag;
+    TQString tag;
     ExifData ImageInfo;
 
     // parse the jpeg file now
@@ -230,7 +230,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     tag = ImageInfo.getDateTime();
     if (tag.length()){
-        QDateTime dt = parseDateTime( tag.stripWhiteSpace() );
+        TQDateTime dt = parseDateTime( tag.stripWhiteSpace() );
         if ( dt.isValid() ) {
             appendItem( exifGroup, "Date/time", dt );
             appendItem( exifGroup, "CreationDate", dt.date() );
@@ -238,7 +238,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
         }
     }
 
-    appendItem( exifGroup,"Dimensions", QSize( ImageInfo.getWidth(),
+    appendItem( exifGroup,"Dimensions", TQSize( ImageInfo.getWidth(),
                                                ImageInfo.getHeight() ) );
 
     if ( ImageInfo.getOrientation() )
@@ -249,7 +249,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     int flashUsed = ImageInfo.getFlashUsed(); // -1, <set>
     if ( flashUsed >= 0 ) {
-	 QString flash = i18n("Flash", "(unknown)");
+	 TQString flash = i18n("Flash", "(unknown)");
          switch ( flashUsed ) {
          case 0: flash = i18n("Flash", "No");
              break;
@@ -286,7 +286,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getFocalLength()){
     	appendItem( exifGroup, "Focal length",
-                    QString().sprintf("%4.1f", ImageInfo.getFocalLength()) );
+                    TQString().sprintf("%4.1f", ImageInfo.getFocalLength()) );
 
         if (ImageInfo.getCCDWidth()){
             appendItem( exifGroup, "35mm equivalent",
@@ -296,21 +296,21 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getCCDWidth()){
 	appendItem( exifGroup, "CCD width",
-                    QString().sprintf("%4.2f", ImageInfo.getCCDWidth()) );
+                    TQString().sprintf("%4.2f", ImageInfo.getCCDWidth()) );
     }
 
     if (ImageInfo.getExposureTime()){
-        tag=QString().sprintf("%6.3f", ImageInfo.getExposureTime());
+        tag=TQString().sprintf("%6.3f", ImageInfo.getExposureTime());
         float exposureTime = ImageInfo.getExposureTime();
 	if (exposureTime > 0 && exposureTime <= 0.5){
-            tag+=QString().sprintf(" (1/%d)", (int)(0.5 + 1/exposureTime) );
+            tag+=TQString().sprintf(" (1/%d)", (int)(0.5 + 1/exposureTime) );
 	}
 	appendItem( exifGroup, "Exposure time", tag );
     }
 
     if (ImageInfo.getApertureFNumber()){
 	appendItem( exifGroup, "Aperture",
-                    QString().sprintf("f/%3.1f",
+                    TQString().sprintf("f/%3.1f",
                                       (double)ImageInfo.getApertureFNumber()));
     }
 
@@ -318,14 +318,14 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
         if (ImageInfo.getDistance() < 0){
 	    tag=i18n("Infinite");
         }else{
-	    tag=QString().sprintf("%5.2fm",(double)ImageInfo.getDistance());
+	    tag=TQString().sprintf("%5.2fm",(double)ImageInfo.getDistance());
         }
     	appendItem( exifGroup, "Focus dist.", tag );
     }
 
     if (ImageInfo.getExposureBias()){
 	appendItem( exifGroup, "Exposure bias",
-                    QString().sprintf("%4.2f",
+                    TQString().sprintf("%4.2f",
                                       (double)ImageInfo.getExposureBias()) );
     }
 
@@ -443,7 +443,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getISOequivalent()){
 	appendItem( exifGroup, "ISO equiv.",
-                    QString().sprintf("%2d",
+                    TQString().sprintf("%2d",
                                       (int)ImageInfo.getISOequivalent()) );
     }
 
@@ -473,7 +473,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     for (a=0;;a++){
         if (ProcessTable[a].Tag == ImageInfo.getProcess() || ProcessTable[a].Tag == 0){
     	    appendItem( exifGroup, "JPEG process",
-                        QString::fromUtf8( ProcessTable[a].Desc) );
+                        TQString::fromUtf8( ProcessTable[a].Desc) );
             break;
         }
     }
@@ -487,18 +487,18 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
 // format of the string is:
 // YYYY:MM:DD HH:MM:SS
-QDateTime KJpegPlugin::parseDateTime( const QString& string )
+TQDateTime KJpegPlugin::parseDateTime( const TQString& string )
 {
-    QDateTime dt;
+    TQDateTime dt;
     if ( string.length() != 19 )
         return dt;
 
-    QString year    = string.left( 4 );
-    QString month   = string.mid( 5, 2 );
-    QString day     = string.mid( 8, 2 );
-    QString hour    = string.mid( 11, 2 );
-    QString minute  = string.mid( 14, 2 );
-    QString seconds = string.mid( 17, 2 );
+    TQString year    = string.left( 4 );
+    TQString month   = string.mid( 5, 2 );
+    TQString day     = string.mid( 8, 2 );
+    TQString hour    = string.mid( 11, 2 );
+    TQString minute  = string.mid( 14, 2 );
+    TQString seconds = string.mid( 17, 2 );
 
     bool ok;
     bool allOk = true;
@@ -521,8 +521,8 @@ QDateTime KJpegPlugin::parseDateTime( const QString& string )
     allOk &= ok;
 
     if ( allOk ) {
-        dt.setDate( QDate( y, mo, d ) );
-        dt.setTime( QTime( h, mi, s ) );
+        dt.setDate( TQDate( y, mo, d ) );
+        dt.setTime( TQTime( h, mi, s ) );
     }
 
     return dt;

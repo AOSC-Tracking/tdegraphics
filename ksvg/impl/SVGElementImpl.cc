@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qxml.h>
+#include <tqxml.h>
 
 #include <kdebug.h>
 
@@ -78,7 +78,7 @@ int SVGElementImpl::getEventListeners(bool local)
 {
 	int events = 0;
 
-	QPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
+	TQPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
 	for(; it.current(); ++it)
 		events |= (1 << it.current()->id);
 
@@ -91,7 +91,7 @@ int SVGElementImpl::getEventListeners(bool local)
 
 		if(element)
 		{
-			QPtrListIterator<SVGRegisteredEventListener> it(element->m_eventListeners);
+			TQPtrListIterator<SVGRegisteredEventListener> it(element->m_eventListeners);
 			for(; it.current(); ++it)
 				events |= (1 << it.current()->id);
 		}
@@ -109,12 +109,12 @@ void SVGElementImpl::setupEventListeners(SVGDocumentImpl *doc, SVGDocumentImpl *
 	// Needed for parseXML'ed elements with events, their listeners
 	// are created in the temporary document fragment and need to be
 	// registered in the main document (Niko)
-	QPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
+	TQPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
 	for(; it.current(); ++it)
 	{
 		SVGRegisteredEventListener *current = it.current();
 
-		QString valueOfCurrent = newDoc->ecmaEngine()->valueOfEventListener(current->listener);
+		TQString valueOfCurrent = newDoc->ecmaEngine()->valueOfEventListener(current->listener);
 		setEventListener(current->id, doc->createEventListener(valueOfCurrent));
 	}
 }
@@ -122,7 +122,7 @@ void SVGElementImpl::setupEventListeners(SVGDocumentImpl *doc, SVGDocumentImpl *
 bool SVGElementImpl::hasEventListener(int id, bool local)
 {
 	// First check if we have the listener, locally
-	QPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
+	TQPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
 	for(; it.current(); ++it)
 	{
 		if(it.current()->id == id)
@@ -141,7 +141,7 @@ bool SVGElementImpl::hasEventListener(int id, bool local)
 
 		if(element)
 		{
-			QPtrListIterator<SVGRegisteredEventListener> it(element->m_eventListeners);
+			TQPtrListIterator<SVGRegisteredEventListener> it(element->m_eventListeners);
 			for(; it.current(); ++it)
 			{
 				if(it.current()->id == id)
@@ -155,7 +155,7 @@ bool SVGElementImpl::hasEventListener(int id, bool local)
 
 void SVGElementImpl::removeEventListener(int id)
 {
-	QPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
+	TQPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
 	for(; it.current(); ++it)
 	{
 		if(it.current()->id == id)
@@ -168,7 +168,7 @@ void SVGElementImpl::removeEventListener(int id)
 
 void SVGElementImpl::handleLocalEvents(SVGEventImpl *evt, bool useCapture)
 {
-	QPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
+	TQPtrListIterator<SVGRegisteredEventListener> it(m_eventListeners);
 	for(; it.current(); ++it)
 	{
 		if(it.current()->id == evt->id() && it.current()->useCapture == useCapture)
@@ -320,7 +320,7 @@ Value SVGElementImplProtoFunc::call(ExecState *exec, Object &thisObj, const List
 	return Undefined();
 }
 
-QDict<DOM::DOMString> &SVGElementImpl::attributes()
+TQDict<DOM::DOMString> &SVGElementImpl::attributes()
 {
 	return m_attributes;
 }
@@ -376,11 +376,11 @@ bool SVGElementImpl::hasAttributes()
 	return m_attributes.count() > 0;
 }
 
-void SVGElementImpl::setApplyAttribute(const QString &name, const QString &value)
+void SVGElementImpl::setApplyAttribute(const TQString &name, const TQString &value)
 {
 	if(hasAttribute(name))
 	{
-		QString cur = getAttribute(name).string();
+		TQString cur = getAttribute(name).string();
 		cur = cur.simplifyWhiteSpace();
 
 		if(!cur.endsWith(";"))
@@ -451,7 +451,7 @@ SVGElementImpl *SVGElementImpl::viewportElement() const
 	return m_viewportElement;
 }
 
-void SVGElementImpl::setAttributes(const QXmlAttributes &attrs)
+void SVGElementImpl::setAttributes(const TQXmlAttributes &attrs)
 {
 	for(int i = 0; i < attrs.length(); i++)
 	{
@@ -494,7 +494,7 @@ void SVGElementImpl::setAttributes(bool deep)
 	}
 }
 
-bool SVGElementImpl::prepareMouseEvent(const QPoint &p, const QPoint &a, SVGMouseEventImpl *mev)
+bool SVGElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *mev)
 {
 	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(this);
 	if(shape)
@@ -519,7 +519,7 @@ bool SVGElementImpl::dispatchEvent(SVGEventImpl *evt, bool tempEvent)
 	evt->setTarget(this);
 
 	// Find out, where to send to -> collect parent nodes
-	QPtrList<SVGElementImpl> nodeChain;
+	TQPtrList<SVGElementImpl> nodeChain;
 
 	for(DOM::Element e = *this; !e.isNull(); e = e.parentNode())
 		nodeChain.prepend(ownerDoc()->getElementFromHandle(e.handle()));
@@ -527,7 +527,7 @@ bool SVGElementImpl::dispatchEvent(SVGEventImpl *evt, bool tempEvent)
 	// Trigger any capturing event handlers on our way down
 	evt->setEventPhase(DOM::Event::CAPTURING_PHASE);
 
-	QPtrListIterator<SVGElementImpl> it(nodeChain);
+	TQPtrListIterator<SVGElementImpl> it(nodeChain);
 	for(; it.current() && it.current() != this && !evt->propagationStopped(); ++it)
 	{
 		evt->setCurrentTarget(it.current());
@@ -583,17 +583,17 @@ bool SVGElementImpl::dispatchEvent(SVGEventImpl *evt, bool tempEvent)
 	return !evt->defaultPrevented(); // ### what if defaultPrevented was called before dispatchEvent?
 }
 
-bool SVGElementImpl::dispatchKeyEvent(QKeyEvent *ke)
+bool SVGElementImpl::dispatchKeyEvent(TQKeyEvent *ke)
 {
 	DOM::AbstractView temp;
 
 	SVGEvent::EventId evtId = SVGEvent::UNKNOWN_EVENT;
 
-	if(ke->type() == QEvent::KeyRelease && !ke->isAutoRepeat())
+	if(ke->type() == TQEvent::KeyRelease && !ke->isAutoRepeat())
 		evtId = SVGEvent::KEYUP_EVENT;
 	else if(ke->isAutoRepeat())
 		evtId = SVGEvent::KEYPRESS_EVENT;
-	else if(ke->type() == QEvent::KeyPress)
+	else if(ke->type() == TQEvent::KeyPress)
 		evtId = SVGEvent::KEYDOWN_EVENT;
 
 	if(evtId == SVGEvent::KEYUP_EVENT && hasEventListener(SVGEvent::DOMACTIVATE_EVENT, false))
@@ -679,7 +679,7 @@ void SVGElementImpl::cloneChildNodes(SVGElementImpl *clone)
 	}
 }
 
-void SVGElementImpl::gotError(const QString &errorDesc)
+void SVGElementImpl::gotError(const TQString &errorDesc)
 {
 	if(ownerDoc())
 	{
@@ -689,9 +689,9 @@ void SVGElementImpl::gotError(const QString &errorDesc)
 	}
 }
 
-QString SVGElementImpl::collectText()
+TQString SVGElementImpl::collectText()
 {
-	QString text;
+	TQString text;
 
 	if(hasChildNodes())
 	{

@@ -20,19 +20,19 @@
 #ifndef KSCANSLIDER_H
 #define KSCANSLIDER_H
 
-#include <qframe.h>
-#include <qstrlist.h>
-#include <qhbox.h>
-#include <qcombobox.h>
-#include <qslider.h>
-#include <qlineedit.h>
+#include <tqframe.h>
+#include <tqstrlist.h>
+#include <tqhbox.h>
+#include <tqcombobox.h>
+#include <tqslider.h>
+#include <tqlineedit.h>
 /**
   *@author Klaas Freitag
   */
 
-class QPushButton;
-class QSpinBox;
-class QLabel;
+class TQPushButton;
+class TQSpinBox;
+class TQLabel;
 
 /**
  * a kind of extended slider which has a spinbox beside the slider offering
@@ -60,7 +60,7 @@ public:
     *        appears on the left of the slider.
     * @param stdValue the value to which the standard button resets the slider.
     */
-   KScanSlider( QWidget *parent, const QString& text,
+   KScanSlider( TQWidget *parent, const TQString& text,
 		double min, double max, bool haveStdButt=false,
 		int stdValue=0);
    /**
@@ -103,9 +103,9 @@ private slots:
 private:
    QSlider	*slider;
    QLabel	*l1, *numdisp;
-   QSpinBox     *m_spin;
+   TQSpinBox     *m_spin;
    int          m_stdValue;
-   QPushButton  *m_stdButt;
+   TQPushButton  *m_stdButt;
    class KScanSliderPrivate;
    KScanSliderPrivate *d;
 
@@ -117,7 +117,7 @@ private:
 class KScanEntry : public QFrame
 {
    Q_OBJECT
-   Q_PROPERTY( QString text READ text WRITE slSetEntry )
+   Q_PROPERTY( TQString text READ text WRITE slSetEntry )
 
 public:
    /**
@@ -125,20 +125,20 @@ public:
     * @param parent the parent widget
     * @text the prefix text
     */
-   KScanEntry( QWidget *parent, const QString& text );
+   KScanEntry( TQWidget *parent, const TQString& text );
    // ~KScanEntry();
 
    /**
     * @return the current entry field contents.
     */
-   QString text( ) const;
+   TQString text( ) const;
 
 public slots:
    /**
     * set the current text
     * @param t the new string
     */
-   void		slSetEntry( const QString& t );
+   void		slSetEntry( const TQString& t );
    /**
     * enable or disable the text entry.
     * @param b set enabled if true, else disabled.
@@ -149,14 +149,14 @@ protected slots:
    void         slReturnPressed( void );
 
 signals:
-   void		valueChanged( const QCString& );
-   void         returnPressed( const QCString& );
+   void		valueChanged( const TQCString& );
+   void         returnPressed( const TQCString& );
 
 private slots:
-   void		slEntryChange( const QString& );
+   void		slEntryChange( const TQString& );
 
 private:
-   QLineEdit 	*entry;
+   TQLineEdit 	*entry;
 
    class KScanEntryPrivate;
    KScanEntryPrivate *d;
@@ -170,7 +170,7 @@ private:
 class KScanCombo : public QHBox
 {
    Q_OBJECT
-   Q_PROPERTY( QString cbEntry READ currentText WRITE slSetEntry )
+   Q_PROPERTY( TQString cbEntry READ currentText WRITE slSetEntry )
 
 public:
    /**
@@ -180,19 +180,19 @@ public:
     * @param text the text the combobox is prepended by
     * @param list a stringlist with values the list should contain.
     */
-   KScanCombo( QWidget *parent, const QString& text, const QStrList& list );
-   KScanCombo( QWidget *parent, const QString& text, const QStringList& list );
+   KScanCombo( TQWidget *parent, const TQString& text, const TQStrList& list );
+   KScanCombo( TQWidget *parent, const TQString& text, const TQStringList& list );
    // ~KScanCombo();
 
    /**
     * @return the current selected text
     */
-   QString      currentText( ) const;
+   TQString      currentText( ) const;
 
    /**
     * @return the text a position i
     */
-   QString      text( int i ) const;
+   TQString      text( int i ) const;
 
    /**
     * @return the amount of list entries.
@@ -204,7 +204,7 @@ public slots:
     * set the current entry to the given string if it is member of the list.
     * if not, the entry is not changed.
     */
-   void		slSetEntry( const QString &);
+   void		slSetEntry( const TQString &);
 
    /**
     * enable or disable the combobox.
@@ -217,7 +217,7 @@ public slots:
     * @param pix the pixmap to set.
     * @param str the string for which the pixmap should be set.
     */
-   void         slSetIcon( const QPixmap& pix, const QString& str);
+   void         slSetIcon( const TQPixmap& pix, const TQString& str);
 
    /**
     * set the current item of the combobox.
@@ -226,14 +226,14 @@ public slots:
 
 private slots:
    void         slFireActivated( int);
-   void		slComboChange( const QString & );
+   void		slComboChange( const TQString & );
 
 signals:
-   void		valueChanged( const QCString& );
+   void		valueChanged( const TQCString& );
    void         activated(int);
 
 private:
-    void createCombo( const QString& text );
+    void createCombo( const TQString& text );
    QComboBox	*combo;
    QStrList	combolist;
 

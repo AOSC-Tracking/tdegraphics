@@ -19,8 +19,8 @@
 #ifndef ABOUTWIDGET_H
 #define ABOUTWIDGET_H
 
-#include <qevent.h>
-#include <qvbox.h>
+#include <tqevent.h>
+#include <tqvbox.h>
 
 class KURLWidget;
 
@@ -29,11 +29,11 @@ class AboutWidget : public QVBox
     Q_OBJECT
 
 public:
-    AboutWidget(QWidget *parent = 0, const char *name = 0);
+    AboutWidget(TQWidget *parent = 0, const char *name = 0);
 
 protected:
     ~AboutWidget();
-    bool eventFilter( QObject*, QEvent * );
+    bool eventFilter( TQObject*, TQEvent * );
 
 private:
     KURLWidget *m_homepage;

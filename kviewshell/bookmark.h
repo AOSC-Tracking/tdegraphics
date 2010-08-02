@@ -24,8 +24,8 @@
 
 #include "anchor.h"
 
-#include <qptrlist.h>
-#include <qstring.h>
+#include <tqptrlist.h>
+#include <tqstring.h>
 
 
 /** \brief Bookmark
@@ -54,13 +54,13 @@ class Bookmark {
 
   @param pos an Anchor that specifies the position of the bookmark
   */
-  Bookmark(const QString &text, const Anchor &pos) {
+  Bookmark(const TQString &text, const Anchor &pos) {
     Bookmark();
     bookmarkText = text;
     position = pos;
   }
   
-  /** Convenience funtion, behaves as   Bookmark(const QString &text, const Anchor &pos)
+  /** Convenience funtion, behaves as   Bookmark(const TQString &text, const Anchor &pos)
 
   @param text name of the bookmark, as it appears in the GUI
 
@@ -70,7 +70,7 @@ class Bookmark {
   @param distance_from_top position on the page, distance from
   top of the page
   */
-  Bookmark(const QString& text, const PageNumber& page, const Length& distance_from_top) {
+  Bookmark(const TQString& text, const PageNumber& page, const Length& distance_from_top) {
     Bookmark();
     bookmarkText = text;
     position.page = page;
@@ -79,7 +79,7 @@ class Bookmark {
   
   /** Label of the bookmark as it will appear in the GUI to the user,
       such as "Section 1", "Theorem 12", etc. */
-  QString bookmarkText;
+  TQString bookmarkText;
   
   /** The anchor that specifies the position of the bookmark */
   Anchor position;
@@ -95,7 +95,7 @@ class Bookmark {
    true. Thus, extra care must be taken when copying this
    list. Otherwise, a segfault could result.
   */
-  QPtrList<Bookmark> subordinateBookmarks;
+  TQPtrList<Bookmark> subordinateBookmarks;
   
   // Returns true if the bookmark is valid, false otherwise. A
   // bookmark is valid if the text is not empty and the anchor is

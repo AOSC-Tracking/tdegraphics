@@ -21,10 +21,10 @@
 #include "mainwidget.h"
 
 
-MainWidget::MainWidget( QString startDir, QWidget *parent,
-			const char *name ) : QWidget ( parent, name )
+MainWidget::MainWidget( TQString startDir, TQWidget *parent,
+			const char *name ) : TQWidget ( parent, name )
 {	
-  box = new FileView( startDir, true, (QDir::Dirs | QDir::Files),
+  box = new FileView( startDir, true, (TQDir::Dirs | TQDir::Files),
 		      this, "fileview" );
 }
 
@@ -36,7 +36,7 @@ MainWidget::~MainWidget()
 
 
 // for now, no layout managers
-void MainWidget::resizeEvent( QResizeEvent * )
+void MainWidget::resizeEvent( TQResizeEvent * )
 {
   box->resize( width(), height() );
 }

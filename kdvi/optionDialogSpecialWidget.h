@@ -17,20 +17,20 @@ class optionDialogSpecialWidget : public optionDialogSpecialWidget_base
   Q_OBJECT
     
  public:
-  optionDialogSpecialWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  optionDialogSpecialWidget( TQWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
   ~optionDialogSpecialWidget();
   
  public slots:
   void apply();
   void slotComboBox(int item);
-  void slotUserDefdEditorCommand( const QString &text );
-  void slotExtraHelpButton( const QString &anchor);
+  void slotUserDefdEditorCommand( const TQString &text );
+  void slotExtraHelpButton( const TQString &anchor);
 
  private:
-  QStringList editorNameString, editorCommandString, editorDescriptionString;
-  QString     EditorCommand;
+  TQStringList editorNameString, editorCommandString, editorDescriptionString;
+  TQString     EditorCommand;
   bool        isUserDefdEditor;
-  QString     usersEditorCommand;
+  TQString     usersEditorCommand;
 };
 
 #endif // OPTIONDIALOGSPECIALWIDGET_H

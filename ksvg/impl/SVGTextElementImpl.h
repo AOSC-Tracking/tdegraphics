@@ -37,7 +37,7 @@ public:
 	SVGTextElementImpl(DOM::ElementImpl *);
 	virtual ~SVGTextElementImpl();
 
-	QString text();
+	TQString text();
 
 	virtual long getNumberOfChars();
 
@@ -45,7 +45,7 @@ public:
 
 	virtual SVGRectImpl *getBBox();
 
-	virtual bool prepareMouseEvent(const QPoint &p, const QPoint &a, SVGMouseEventImpl *mev);
+	virtual bool prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *mev);
 
 private:
 	int m_bboxX, m_bboxY, m_bboxWidth, m_bboxHeight;

@@ -18,14 +18,14 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qstringlist.h>
-#include <qstrlist.h>
-#include <qtooltip.h>
-#include <qsizepolicy.h>
-#include <qapplication.h>
-#include <qcheckbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqstringlist.h>
+#include <tqstrlist.h>
+#include <tqtooltip.h>
+#include <tqsizepolicy.h>
+#include <tqapplication.h>
+#include <tqcheckbox.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -51,14 +51,14 @@ extern "C" {
     }
 }
 
-ScanDialogFactory::ScanDialogFactory( QObject *parent, const char *name )
+ScanDialogFactory::ScanDialogFactory( TQObject *parent, const char *name )
     : KScanDialogFactory( parent, name )
 {
     setName( "ScanDialogFactory" );
-    KGlobal::locale()->insertCatalogue( QString::fromLatin1("libkscan") );
+    KGlobal::locale()->insertCatalogue( TQString::fromLatin1("libkscan") );
 }
 
-KScanDialog * ScanDialogFactory::createDialog( QWidget *parent,
+KScanDialog * ScanDialogFactory::createDialog( TQWidget *parent,
 					       const char *name, bool modal)
 {
     return new ScanDialog( parent, name, modal );
@@ -68,24 +68,24 @@ KScanDialog * ScanDialogFactory::createDialog( QWidget *parent,
 ///////////////////////////////////////////////////////////////////
 
 
-ScanDialog::ScanDialog( QWidget *parent, const char *name, bool modal )
+ScanDialog::ScanDialog( TQWidget *parent, const char *name, bool modal )
    : KScanDialog( Tabbed, Close|Help, parent, name, modal ),
      good_scan_connect(false)
 {
-    QVBox *page = addVBoxPage( i18n("&Scanning") );
+    TQVBox *page = addVBoxPage( i18n("&Scanning") );
 
-    splitter = new QSplitter( Horizontal, page, "splitter" );
+    splitter = new TQSplitter( Horizontal, page, "splitter" );
     Q_CHECK_PTR( splitter );
 
     m_scanParams = 0;
     m_device = new KScanDevice( this );
-    connect(m_device, SIGNAL(sigNewImage(QImage *, ImgScanInfo*)),
-            this, SLOT(slotFinalImage(QImage *, ImgScanInfo *)));
+    connect(m_device, TQT_SIGNAL(sigNewImage(TQImage *, ImgScanInfo*)),
+            this, TQT_SLOT(slotFinalImage(TQImage *, ImgScanInfo *)));
 
-    connect( m_device, SIGNAL(sigScanStart()), this, SLOT(slotScanStart()));
-    connect( m_device, SIGNAL(sigScanFinished(KScanStat)),
-	     this, SLOT(slotScanFinished(KScanStat)));
-    connect( m_device, SIGNAL(sigAcquireStart()), this, SLOT(slotAcquireStart()));
+    connect( m_device, TQT_SIGNAL(sigScanStart()), this, TQT_SLOT(slotScanStart()));
+    connect( m_device, TQT_SIGNAL(sigScanFinished(KScanStat)),
+	     this, TQT_SLOT(slotScanFinished(KScanStat)));
+    connect( m_device, TQT_SIGNAL(sigAcquireStart()), this, TQT_SLOT(slotAcquireStart()));
     /* Create a preview widget to the right side of the splitter */
     m_previewer = new Previewer( splitter );
     Q_CHECK_PTR(m_previewer );
@@ -93,8 +93,8 @@ ScanDialog::ScanDialog( QWidget *parent, const char *name, bool modal )
     /* ... and connect to the selector-slots. They communicate user's
      * selection to the scanner parameter engine */
     /* a new preview signal */
-    connect( m_device, SIGNAL( sigNewPreview( QImage*, ImgScanInfo* )),
-             this, SLOT( slotNewPreview( QImage* )));
+    connect( m_device, TQT_SIGNAL( sigNewPreview( TQImage*, ImgScanInfo* )),
+             this, TQT_SLOT( slotNewPreview( TQImage* )));
 
     m_previewer->setEnabled( false ); // will be enabled in setup()
 
@@ -107,44 +107,44 @@ ScanDialog::ScanDialog( QWidget *parent, const char *name, bool modal )
 void ScanDialog::createOptionsTab( void )
 {
 
-   QVBox *page = addVBoxPage( i18n("&Options"));
+   TQVBox *page = addVBoxPage( i18n("&Options"));
    setMainWidget(page);
 
-   QGroupBox *gb = new QGroupBox( 1, Qt::Horizontal, i18n("Startup Options"), page, "GB_STARTUP" );
-   QLabel *label = new QLabel( i18n( "Note: changing these options will affect the scan plugin on next start." ),
+   TQGroupBox *gb = new TQGroupBox( 1, Qt::Horizontal, i18n("Startup Options"), page, "GB_STARTUP" );
+   TQLabel *label = new TQLabel( i18n( "Note: changing these options will affect the scan plugin on next start." ),
 			       gb );
-   label->setSizePolicy( QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed ) );
+   label->setSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed ) );
 
    /* Checkbox for asking for scanner on startup */
-   cb_askOnStart = new QCheckBox( i18n( "&Ask for the scan device on plugin startup"), gb );
-   QToolTip::add( cb_askOnStart,
+   cb_askOnStart = new TQCheckBox( i18n( "&Ask for the scan device on plugin startup"), gb );
+   TQToolTip::add( cb_askOnStart,
 		  i18n("You can uncheck this if you do not want to be asked which scanner to use on startup."));
    Q_CHECK_PTR( cb_askOnStart );
 
    /* Checkbox for network access */
-   cb_network = new QCheckBox( i18n( "&Query the network for scan devices"), gb );
-   QToolTip::add( cb_network,
+   cb_network = new TQCheckBox( i18n( "&Query the network for scan devices"), gb );
+   TQToolTip::add( cb_network,
 		  i18n("Check this if you want to query for configured network scan stations."));
    Q_CHECK_PTR( cb_network );
 
 
    /* Read settings for startup behavior */
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(QString::fromLatin1(GROUP_STARTUP));
+   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog  = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    bool onlyLocal   = gcfg->readBoolEntry( STARTUP_ONLY_LOCAL, false );
 
    /* Note: flag must be inverted because of question is 'the other way round' */
    cb_askOnStart->setChecked( !skipDialog );
-   connect( cb_askOnStart, SIGNAL(toggled(bool)), this, SLOT(slotAskOnStartToggle(bool)));
+   connect( cb_askOnStart, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotAskOnStartToggle(bool)));
 
    cb_network->setChecked( !onlyLocal );
-   connect( cb_network, SIGNAL(toggled(bool)), this, SLOT(slotNetworkToggle(bool)));
+   connect( cb_network, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotNetworkToggle(bool)));
 
 
-   QWidget *spaceEater = new QWidget( page );
+   TQWidget *spaceEater = new TQWidget( page );
    Q_CHECK_PTR( spaceEater );
-   spaceEater->setSizePolicy( QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding) );
+   spaceEater->setSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding) );
 
 }
 
@@ -154,7 +154,7 @@ void ScanDialog::slotNetworkToggle( bool state)
 
    kdDebug(29000) << "slotNetworkToggle: Writing state " << writestate << endl;
    KConfig *c = KGlobal::config();
-   c->setGroup(QString::fromLatin1(GROUP_STARTUP));
+   c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    c->writeEntry( STARTUP_ONLY_LOCAL, writestate, true, true );
 }
 
@@ -164,7 +164,7 @@ void ScanDialog::slotAskOnStartToggle(bool state)
 
    kdDebug(29000) << "slotAskOnStartToggle: Writing state " << writestate << endl;
    KConfig *c = KGlobal::config();
-   c->setGroup(QString::fromLatin1(GROUP_STARTUP));
+   c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    c->writeEntry( STARTUP_SKIP_ASK, writestate, true, true );
 }
 
@@ -230,20 +230,20 @@ bool ScanDialog::setup()
    }
 
    m_scanParams = new ScanParams( splitter );
-   connect( m_previewer->getImageCanvas(), SIGNAL( newRect(QRect)),
-	    m_scanParams, SLOT(slCustomScanSize(QRect)));
-   connect( m_previewer->getImageCanvas(), SIGNAL( noRect()),
-	    m_scanParams, SLOT(slMaximalScanSize()));
+   connect( m_previewer->getImageCanvas(), TQT_SIGNAL( newRect(TQRect)),
+	    m_scanParams, TQT_SLOT(slCustomScanSize(TQRect)));
+   connect( m_previewer->getImageCanvas(), TQT_SIGNAL( noRect()),
+	    m_scanParams, TQT_SLOT(slMaximalScanSize()));
 
-   connect( m_scanParams, SIGNAL( scanResolutionChanged( int, int )),
-	    m_previewer, SLOT( slNewScanResolutions( int, int )));
+   connect( m_scanParams, TQT_SIGNAL( scanResolutionChanged( int, int )),
+	    m_previewer, TQT_SLOT( slNewScanResolutions( int, int )));
 
 
    /* continue to attach a real scanner */
    /* first, get the list of available devices from libkscan */
-   QStringList scannerNames;
-   QStrList backends = m_device->getDevices();;
-   QStrListIterator it( backends );
+   TQStringList scannerNames;
+   TQStrList backends = m_device->getDevices();;
+   TQStrListIterator it( backends );
 
    while ( it.current() ) {
       scannerNames.append( m_device->getScannerName( it.current() ));
@@ -251,7 +251,7 @@ bool ScanDialog::setup()
    }
 
    /* ..if there are devices.. */
-   QCString configDevice;
+   TQCString configDevice;
    good_scan_connect = true;
    if( scannerNames.count() > 0 )
    {
@@ -262,7 +262,7 @@ bool ScanDialog::setup()
       if( configDevice.isEmpty() || configDevice.isNull() )
       {
 	 kdDebug(29000) << "configDevice is not valid - starting selector!" << configDevice << endl;
-	 if ( ds.exec() == QDialog::Accepted )
+	 if ( ds.exec() == TQDialog::Accepted )
 	 {
 	    configDevice = ds.getSelectedDevice();
 	 }
@@ -310,11 +310,11 @@ bool ScanDialog::setup()
     KConfig *kfg = KGlobal::config();
     if( kfg )
     {
-       QRect r = KGlobalSettings::desktopGeometry(this);
+       TQRect r = KGlobalSettings::desktopGeometry(this);
 
        kfg->setGroup( GROUP_STARTUP );
        /* Since this is a vertical splitter, only the width is important */
-       QString key = QString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
+       TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
        kdDebug(29000) << "Read Splitter-Sizes " << key  << endl;
        splitter->setSizes( kfg->readIntListEntry( key ));
     }
@@ -332,11 +332,11 @@ void ScanDialog::slotClose()
       KConfig *kfg = KGlobal::config();
       if( kfg )
       {
-         QRect r = KGlobalSettings::desktopGeometry(this);
+         TQRect r = KGlobalSettings::desktopGeometry(this);
 
 	 kfg->setGroup( GROUP_STARTUP );
 	 /* Since this is a vertical splitter, only the width is important */
-	 QString key = QString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
+	 TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
 	 kfg->writeEntry( key, splitter->sizes(), true, true);
       }
    }
@@ -354,7 +354,7 @@ void ScanDialog::slotClose()
    accept();
 }
 
-void ScanDialog::slotNewPreview( QImage *image )
+void ScanDialog::slotNewPreview( TQImage *image )
 {
     if( image )
     {
@@ -372,7 +372,7 @@ ScanDialog::~ScanDialog()
 {
 }
 
-void ScanDialog::slotFinalImage(QImage *image, ImgScanInfo *)
+void ScanDialog::slotFinalImage(TQImage *image, ImgScanInfo *)
 {
     emit finalImage(*image, nextId());
 }

@@ -18,18 +18,18 @@
 */
 
 #include <stdlib.h>
-#include <qwidget.h>
-#include <qobject.h>
-#include <qasciidict.h>
-#include <qcombobox.h>
-#include <qslider.h>
-#include <qcheckbox.h>
-#include <qlineedit.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qimage.h>
-#include <qregexp.h>
+#include <tqwidget.h>
+#include <tqobject.h>
+#include <tqasciidict.h>
+#include <tqcombobox.h>
+#include <tqslider.h>
+#include <tqcheckbox.h>
+#include <tqlineedit.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqimage.h>
+#include <tqregexp.h>
 
 #include <kdebug.h>
 
@@ -51,7 +51,7 @@
 
 
 /** inline-access to the option descriptor, object to changes with global vars. **/
-inline const SANE_Option_Descriptor *getOptionDesc( const QCString& name )
+inline const SANE_Option_Descriptor *getOptionDesc( const TQCString& name )
 {
    int *idx = (*KScanDevice::option_dic)[ name ];
    
@@ -77,8 +77,8 @@ inline const SANE_Option_Descriptor *getOptionDesc( const QCString& name )
 /* ************************************************************************ */
 /* KScan Option                                                             */
 /* ************************************************************************ */
-KScanOption::KScanOption( const QCString& new_name ) :
-   QObject()
+KScanOption::KScanOption( const TQCString& new_name ) :
+   TQObject()
 {
    if( initOption( new_name ) )
    {
@@ -102,7 +102,7 @@ KScanOption::KScanOption( const QCString& new_name ) :
 }
 
 
-bool KScanOption::initOption( const QCString& new_name )
+bool KScanOption::initOption( const TQCString& new_name )
 {
    desc = 0;
    if( new_name.isEmpty() ) return( false );
@@ -160,7 +160,7 @@ bool KScanOption::initOption( const QCString& new_name )
 }
 
 KScanOption::KScanOption( const KScanOption &so ) :
-   QObject()
+   TQObject()
 {
    /* desc is stored by sane-lib and may be copied */
    desc = so.desc;
@@ -206,9 +206,9 @@ KScanOption::KScanOption( const KScanOption &so ) :
 }
 
 
-const QString KScanOption::configLine( void )
+const TQString KScanOption::configLine( void )
 {
-   QCString strval = this->get();
+   TQCString strval = this->get();
    kdDebug(29000) << "configLine returns <" << strval << ">" << endl;
    return( strval );
 }
@@ -253,9 +253,9 @@ const KScanOption& KScanOption::operator= (const KScanOption& so )
     return( *this );
 }
 
-void KScanOption::slWidgetChange( const QCString& t )
+void KScanOption::slWidgetChange( const TQCString& t )
 {
-    kdDebug(29000) << "Received WidgetChange for " << getName() << " (const QCString&)" << endl;
+    kdDebug(29000) << "Received WidgetChange for " << getName() << " (const TQCString&)" << endl;
     set( t );
     emit( guiChange( this ) );
     // emit( optionChanged( this ));
@@ -267,7 +267,7 @@ void KScanOption::slWidgetChange( void )
     /* If Type is bool, the widget is a checkbox. */
     if( type() == BOOL )
     {
-	bool b = ((QCheckBox*) internal_widget)->isChecked();
+	bool b = ((TQCheckBox*) internal_widget)->isChecked();
 	kdDebug(29000) << "Setting bool: " << b << endl;
 	set( b );
     }
@@ -292,9 +292,9 @@ void KScanOption::slRedrawWidget( KScanOption *so )
 {
   // qDebug( "Checking widget %s", (const char*) so->getName());
   int     help = 0;
-  QString string;
+  TQString string;
 	
-  QWidget *w = so->widget();
+  TQWidget *w = so->widget();
 	
   if( so->valid() && w && so->getBuffer() )
     {
@@ -302,7 +302,7 @@ void KScanOption::slRedrawWidget( KScanOption *so )
 	{
 	case BOOL:
 	  if( so->get( &help ))
-	    ((QCheckBox*) w)->setChecked( (bool) help );
+	    ((TQCheckBox*) w)->setChecked( (bool) help );
 	  /* Widget Type is ToggleButton */
 	  break;
 	case SINGLE_VAL:
@@ -317,7 +317,7 @@ void KScanOption::slRedrawWidget( KScanOption *so )
 	  break;
 	case GAMMA_TABLE:
  	 	  		/* Widget Type is GammaTable */
-	  // w = new QSlider( parent, "AUTO_GAMMA" );
+	  // w = new TQSlider( parent, "AUTO_GAMMA" );
 	  break;
 	case STR_LIST:	 		
 	  // w = comboBox( parent, text );
@@ -519,7 +519,7 @@ bool KScanOption::set( int val )
    bool ret = false;
 
    int word_size       = 0;
-   QMemArray<SANE_Word> qa;
+   TQMemArray<SANE_Word> qa;
    SANE_Word sw        = SANE_TRUE;
    const SANE_Word sw1 = val;
    const SANE_Word sw2 = SANE_FIX( (double) val );
@@ -585,7 +585,7 @@ bool KScanOption::set( double val )
    if( ! desc ) return( false );
    bool ret = false;
    int  word_size = 0;
-   QMemArray<SANE_Word> qa;
+   TQMemArray<SANE_Word> qa;
    SANE_Word sw = SANE_FALSE;
 
    switch( desc->type )
@@ -653,7 +653,7 @@ bool KScanOption::set( int *val, int size )
     int    offset = 0;
 
     int word_size = desc->size / sizeof( SANE_Word ); /* add 1 in case offset is needed */
-    QMemArray<SANE_Word> qa( 1+word_size );
+    TQMemArray<SANE_Word> qa( 1+word_size );
 #if 0
     if( desc->constraint_type == SANE_CONSTRAINT_WORD_LIST )
     {
@@ -719,7 +719,7 @@ bool KScanOption::set( int *val, int size )
     return( ret );
 }
 
-bool KScanOption::set( const QCString& c_string )
+bool KScanOption::set( const TQCString& c_string )
 {
    bool ret = false;
    int  val = 0;
@@ -729,12 +729,12 @@ bool KScanOption::set( const QCString& c_string )
    /* Check if it is a gammatable. If it is, convert to KGammaTable and call
     *  the approbiate set method.
     */
-   QRegExp re( "\\d+, \\d+, \\d+" );
+   TQRegExp re( "\\d+, \\d+, \\d+" );
    re.setMinimal(true);
    
-   if( QString(c_string).contains( re ))
+   if( TQString(c_string).contains( re ))
    {
-      QStringList relist = QStringList::split( ", ", QString(c_string) );
+      TQStringList relist = TQStringList::split( ", ", TQString(c_string) );
       
       int brig = (relist[0]).toInt();
       int contr = (relist[1]).toInt();
@@ -810,7 +810,7 @@ bool KScanOption::set( KGammaTable *gt )
    SANE_Word *run = gt->getTable();
 
    int word_size = desc->size / sizeof( SANE_Word );
-   QMemArray<SANE_Word> qa( word_size );
+   TQMemArray<SANE_Word> qa( word_size );
    kdDebug(29000) << "KScanOption::set for Gammatable !" << endl;
    switch( desc->type )
    {
@@ -898,9 +898,9 @@ bool KScanOption::get( int *val ) const
 
 
 
-QCString KScanOption::get( void ) const
+TQCString KScanOption::get( void ) const
 {
-   QCString retstr;
+   TQCString retstr;
 
    SANE_Word sane_word;
 
@@ -960,11 +960,11 @@ bool KScanOption::get( KGammaTable *gt ) const
 }
 
 
-QStrList KScanOption::getList( ) const
+TQStrList KScanOption::getList( ) const
 {
    if( ! desc ) return( false );
    const char	**sstring = 0;
-   QStrList strList;
+   TQStrList strList;
 
    if( desc->constraint_type == SANE_CONSTRAINT_STRING_LIST ) {
       sstring =  (const char**) desc->constraint.string_list;
@@ -979,7 +979,7 @@ QStrList KScanOption::getList( ) const
    if( desc->constraint_type == SANE_CONSTRAINT_WORD_LIST ) {
       const SANE_Int *sint =  desc->constraint.word_list;
       int amount_vals = *sint; sint ++;
-      QString s;
+      TQString s;
 
       for( int i=0; i < amount_vals; i++ ) {
 	 if( desc->type == SANE_TYPE_FIXED )
@@ -1059,24 +1059,24 @@ bool KScanOption::getRange( double *min, double *max, double *q ) const
    return( ret );
 }
 
-QWidget *KScanOption::createWidget( QWidget *parent, const QString& w_desc,
-                                    const QString& tooltip )
+TQWidget *KScanOption::createWidget( TQWidget *parent, const TQString& w_desc,
+                                    const TQString& tooltip )
 {
-  QStrList list;
+  TQStrList list;
   if( ! valid() )
   {
      kdDebug(29000) << "The option is not valid!" << endl;
      return( 0 );
   }
-  QWidget *w = 0;
+  TQWidget *w = 0;
   /* free the old widget */
   delete internal_widget;
   internal_widget = 0;
  	
   /* check for text */
-  QString text = w_desc;
+  TQString text = w_desc;
   if( text.isEmpty() && desc ) {
-    text = QString::fromLocal8Bit( desc->title );
+    text = TQString::fromLocal8Bit( desc->title );
   }
  	
  	
@@ -1084,9 +1084,9 @@ QWidget *KScanOption::createWidget( QWidget *parent, const QString& w_desc,
     {
     case BOOL:
       /* Widget Type is ToggleButton */
-      w = new  QCheckBox( text, parent, "AUTO_TOGGLE_BUTTON" );
-      connect( w, SIGNAL(clicked()), this,
-	       SLOT(slWidgetChange()));
+      w = new  TQCheckBox( text, parent, "AUTO_TOGGLE_BUTTON" );
+      connect( w, TQT_SIGNAL(clicked()), this,
+	       TQT_SLOT(slWidgetChange()));
       break;
     case SINGLE_VAL:
       /* Widget Type is Entry-Field */
@@ -1120,14 +1120,14 @@ QWidget *KScanOption::createWidget( QWidget *parent, const QString& w_desc,
   if( w )
     {
       internal_widget = w;
-      connect( this, SIGNAL( optionChanged( KScanOption*)),
-	       SLOT( slRedrawWidget( KScanOption* )));
-      QString tt = tooltip;
+      connect( this, TQT_SIGNAL( optionChanged( KScanOption*)),
+	       TQT_SLOT( slRedrawWidget( KScanOption* )));
+      TQString tt = tooltip;
       if( tt.isEmpty() && desc )
-	tt = QString::fromLocal8Bit( desc->desc );
+	tt = TQString::fromLocal8Bit( desc->desc );
  			
       if( !tt.isEmpty() )
-	QToolTip::add( internal_widget, tt );
+	TQToolTip::add( internal_widget, tt );
     }
  	
   /* Check if option is active, setEnabled etc. */
@@ -1137,38 +1137,38 @@ QWidget *KScanOption::createWidget( QWidget *parent, const QString& w_desc,
 }
 
 
-QWidget *KScanOption::comboBox( QWidget *parent, const QString& text )
+TQWidget *KScanOption::comboBox( TQWidget *parent, const TQString& text )
 {
-  QStrList list = getList();
+  TQStrList list = getList();
 
   KScanCombo *cb = new KScanCombo( parent, text, list);
 
-  connect( cb, SIGNAL( valueChanged( const QCString& )), this,
-	   SLOT( slWidgetChange( const QCString& )));
+  connect( cb, TQT_SIGNAL( valueChanged( const TQCString& )), this,
+	   TQT_SLOT( slWidgetChange( const TQCString& )));
 
   return( cb );
 }
 
 
-QWidget *KScanOption::entryField( QWidget *parent, const QString& text )
+TQWidget *KScanOption::entryField( TQWidget *parent, const TQString& text )
 {
   KScanEntry *ent = new KScanEntry( parent, text );
-  connect( ent, SIGNAL( valueChanged( QCString )), this,
-	   SLOT( slWidgetChange( QCString )));
+  connect( ent, TQT_SIGNAL( valueChanged( TQCString )), this,
+	   TQT_SLOT( slWidgetChange( TQCString )));
 	
   return( ent );
 }
 
 
-QWidget *KScanOption::KSaneSlider( QWidget *parent, const QString& text )
+TQWidget *KScanOption::KSaneSlider( TQWidget *parent, const TQString& text )
 {
   double min, max, quant;
   getRange( &min, &max, &quant );
 
   KScanSlider *slider = new KScanSlider( parent, text, min, max );
   /* Connect to the options change Slot */
-  connect( slider, SIGNAL( valueChanged(int)), this,
-	   SLOT( slWidgetChange(int)));
+  connect( slider, TQT_SIGNAL( valueChanged(int)), this,
+	   TQT_SLOT( slWidgetChange(int)));
 
   return( slider );
 }

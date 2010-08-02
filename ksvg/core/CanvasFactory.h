@@ -23,8 +23,8 @@
 
 #include <ktrader.h>
 
-#include <qstring.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqptrlist.h>
 
 namespace KSVG
 {
@@ -35,7 +35,7 @@ class CanvasInfo
 public:
 	KService::Ptr service;
 	KSVGCanvas *canvas;
-	QString name, internal;
+	TQString name, internal;
 };
 
 class CanvasFactory
@@ -50,16 +50,16 @@ public:
 	KSVGCanvas *loadCanvas(int width, int height);
 
 	int itemInList(KSVGCanvas *canvas);
-	QString internalNameFor(const QString &name);
+	TQString internalNameFor(const TQString &name);
 	void deleteCanvas(KSVGCanvas *canvas);
 	
-	QPtrList<CanvasInfo> canvasList();
+	TQPtrList<CanvasInfo> canvasList();
 
 private:
 	void queryCanvas();
 
 	static CanvasFactory *s_factory;
-	QPtrList<CanvasInfo> m_canvasList;
+	TQPtrList<CanvasInfo> m_canvasList;
 };
 
 }

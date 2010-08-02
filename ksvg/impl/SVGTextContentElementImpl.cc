@@ -59,9 +59,9 @@ SVGTextContentElementImpl::~SVGTextContentElementImpl()
 		m_textLength->deref();
 }
 
-QString SVGTextContentElementImpl::textDirectionAwareText()
+TQString SVGTextContentElementImpl::textDirectionAwareText()
 {
-	QString text;
+	TQString text;
 
 	if(hasChildNodes())
 	{
@@ -73,11 +73,11 @@ QString SVGTextContentElementImpl::textDirectionAwareText()
 			if(node.nodeType() == TEXT_NODE)
 			{
 				DOM::Text textNode = node;
-				QString temp = textNode.data().string();
+				TQString temp = textNode.data().string();
 
 				if(!ltr)
 				{
-					QString convert = temp;
+					TQString convert = temp;
 
 					for(int i = temp.length(); i > 0; i--)
 						convert[temp.length() - i] = temp[i - 1];
@@ -237,7 +237,7 @@ void SVGTextContentElementImpl::putValueProperty(ExecState *exec, int token, con
 			break;
 		case LengthAdjust:
 		{
-			QString temp = value.toString(exec).qstring();
+			TQString temp = value.toString(exec).qstring();
 			if(temp == "spacingAndGlyphs")
 				m_lengthAdjust->setBaseVal(LENGTHADJUST_SPACINGANDGLYPHS);
 			else if(temp == "spacing")

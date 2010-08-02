@@ -26,7 +26,7 @@ class KURLWidget : public KURLLabel
     Q_OBJECT
 
 public:
-    KURLWidget( const QString& text, QWidget *, const char *name=0 );
+    KURLWidget( const TQString& text, TQWidget *, const char *name=0 );
 
 protected slots:
     virtual void run();

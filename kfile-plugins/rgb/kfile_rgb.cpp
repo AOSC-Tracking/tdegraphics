@@ -20,8 +20,8 @@
 #include <config.h>
 #include "kfile_rgb.h"
 
-#include <qfile.h>
-#include <qvalidator.h>
+#include <tqfile.h>
+#include <tqvalidator.h>
 
 #include <kdebug.h>
 #include <kgenericfactory.h>
@@ -32,7 +32,7 @@ typedef KGenericFactory<KRgbPlugin> RgbFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_rgb, RgbFactory("kfile_rgb"))
 
 
-KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &args) :
+KRgbPlugin::KRgbPlugin(TQObject *parent, const char *name, const TQStringList &args) :
 	KFilePlugin(parent, name, args)
 {
 	KFileMimeTypeInfo* info = addMimeTypeInfo("image/x-rgb");
@@ -43,39 +43,39 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 
 	group = addGroupInfo(info, "Comment", i18n("Comment"));
 
-	item = addItemInfo(group, "ImageName", i18n("Name"), QVariant::String);
+	item = addItemInfo(group, "ImageName", i18n("Name"), TQVariant::String);
 	setAttributes(item, KFileMimeTypeInfo::Modifiable);
 	setHint(item, KFileMimeTypeInfo::Description);
 
 
 	group = addGroupInfo(info, "Technical", i18n("Technical Details"));
 
-	item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+	item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
 	setHint(item, KFileMimeTypeInfo::Size);
 	setUnit(item, KFileMimeTypeInfo::Pixels);
 
-	item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+	item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
 	setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-	item = addItemInfo(group, "ColorMode", i18n("Color Mode"), QVariant::String);
-	item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
+	item = addItemInfo(group, "ColorMode", i18n("Color Mode"), TQVariant::String);
+	item = addItemInfo(group, "Compression", i18n("Compression"), TQVariant::String);
 	item = addItemInfo(group, "SharedRows",
 			i18n("percentage of avoided vertical redundancy (the higher the better)",
-			"Shared Rows"), QVariant::String);
+			"Shared Rows"), TQVariant::String);
 
 }
 
 
 bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 {
-	QFile file(info.path());
+	TQFile file(info.path());
 
 	if (!file.open(IO_ReadOnly)) {
-		kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+		kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
 		return false;
 	}
 
-	QDataStream dstream(&file);
+	TQDataStream dstream(&file);
 
 	Q_UINT16 magic;
 	Q_UINT8  storage;
@@ -116,7 +116,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 
 	if (dimension == 1)
 		ysize = 1;
-	appendItem(group, "Dimensions", QSize(xsize, ysize));
+	appendItem(group, "Dimensions", TQSize(xsize, ysize));
 	appendItem(group, "BitDepth", zsize * 8 * bpc);
 
 	if (zsize == 1)
@@ -134,13 +134,13 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		long compressed = file.size() - 512;
 		long verbatim = xsize * ysize * zsize;
 		appendItem(group, "Compression", i18n("Runlength Encoded")
-				+ QString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
+				+ TQString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
 
 		long k;
 		Q_UINT32 offs;
-		QMap<Q_UINT32, uint> map;
-		QMap<Q_UINT32, uint>::Iterator it;
-		QMap<Q_UINT32, uint>::Iterator end = map.end();
+		TQMap<Q_UINT32, uint> map;
+		TQMap<Q_UINT32, uint>::Iterator it;
+		TQMap<Q_UINT32, uint>::Iterator end = map.end();
 		for (k = 0; k < (ysize * zsize); k++) {
 			dstream >> offs;
 			if ((it = map.find(offs)) != end)
@@ -152,7 +152,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 			k += it.data();
 
 		if (k)
-			appendItem(group, "SharedRows", QString("%1%").arg(k * 100.0
+			appendItem(group, "SharedRows", TQString("%1%").arg(k * 100.0
 					/ (ysize * zsize), 0, 'f', 1));
 		else
 			appendItem(group, "SharedRows", i18n("None"));
@@ -170,10 +170,10 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 
 bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 {
-	QFile file(info.path());
+	TQFile file(info.path());
 
 	if (!file.open(IO_WriteOnly|IO_Raw)) {
-		kdDebug(7034) << "couldn't open " << QFile::encodeName(info.path()) << endl;
+		kdDebug(7034) << "couldn't open " << TQFile::encodeName(info.path()) << endl;
 		return false;
 	}
 
@@ -182,8 +182,8 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 		return false;
 	}
 
-	QDataStream dstream(&file);
-	QString s = info["Comment"]["ImageName"].value().toString();
+	TQDataStream dstream(&file);
+	TQString s = info["Comment"]["ImageName"].value().toString();
 	s.truncate(79);
 
 	unsigned i;
@@ -198,10 +198,10 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 
 
 // restrict to 79 ASCII characters
-QValidator* KRgbPlugin::createValidator(const QString&, const QString &,
-		const QString &, QObject* parent, const char* name) const
+TQValidator* KRgbPlugin::createValidator(const TQString&, const TQString &,
+		const TQString &, TQObject* parent, const char* name) const
 {
-	return new QRegExpValidator(QRegExp("[\x0020-\x007E]{79}"), parent, name);
+	return new TQRegExpValidator(TQRegExp("[\x0020-\x007E]{79}"), parent, name);
 }
 
 

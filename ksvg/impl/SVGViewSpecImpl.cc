@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 #include "SVGElementImpl.h"
 #include "SVGViewSpecImpl.h"
@@ -75,15 +75,15 @@ DOM::DOMString SVGViewSpecImpl::viewTargetString() const
 	return m_viewTargetString;
 }
 
-bool SVGViewSpecImpl::parseViewSpec(const QString &s)
+bool SVGViewSpecImpl::parseViewSpec(const TQString &s)
 {
 	if(!s.startsWith("svgView("))
 		return false;
 
 	// remove 'svgView(' and ')'
-	QStringList subAttrs = QStringList::split(';', s.mid(8));
+	TQStringList subAttrs = TQStringList::split(';', s.mid(8));
 
-	for(QStringList::ConstIterator it = subAttrs.begin() ; it != subAttrs.end(); ++it)
+	for(TQStringList::ConstIterator it = subAttrs.begin() ; it != subAttrs.end(); ++it)
 	{
 		if((*it).startsWith("viewBox("))
 			m_viewBoxString = (*it).mid(8);

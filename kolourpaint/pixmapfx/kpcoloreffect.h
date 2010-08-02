@@ -29,12 +29,12 @@
 #ifndef KP_COLOR_EFFECT_H
 #define KP_COLOR_EFFECT_H
 
-#include <qstring.h>
-#include <qwidget.h>
+#include <tqstring.h>
+#include <tqwidget.h>
 
 #include <kpcommandhistory.h>
 
-class QPixmap;
+class TQPixmap;
 
 class kpDocument;
 class kpMainWindow;
@@ -43,12 +43,12 @@ class kpMainWindow;
 class kpColorEffectCommand : public kpCommand
 {
 public:
-    kpColorEffectCommand (const QString &name,
+    kpColorEffectCommand (const TQString &name,
                           bool actOnSelection,
                           kpMainWindow *mainWindow);
     virtual ~kpColorEffectCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
     virtual int size () const;
 
 public:
@@ -61,13 +61,13 @@ public:
     virtual bool isInvertible () const { return false; }
 
 protected:
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap) = 0;
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap) = 0;
 
 private:
-    QString m_name;
+    TQString m_name;
     bool m_actOnSelection;
 
-    QPixmap *m_oldPixmapPtr;
+    TQPixmap *m_oldPixmapPtr;
 };
 
 
@@ -78,7 +78,7 @@ Q_OBJECT
 public:
     kpColorEffectWidget (bool actOnSelection,
                          kpMainWindow *mainWindow,
-                         QWidget *parent, const char *name = 0);
+                         TQWidget *parent, const char *name = 0);
     virtual ~kpColorEffectWidget ();
 
 signals:
@@ -91,10 +91,10 @@ signals:
     void settingsChangedDelayed ();
 
 public:
-    virtual QString caption () const;
+    virtual TQString caption () const;
 
     virtual bool isNoOp () const = 0;
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap) = 0;
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap) = 0;
 
     virtual kpColorEffectCommand *createCommand () const = 0;
 

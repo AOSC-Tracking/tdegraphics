@@ -35,7 +35,7 @@
 #include <kpcoloreffect.h>
 
 
-class QLabel;
+class TQLabel;
 
 class KIntNumInput;
 
@@ -57,12 +57,12 @@ public:
                                 kpMainWindow *mainWindow);
     virtual ~kpEffectBlurSharpenCommand ();
 
-    static QPixmap apply (const QPixmap &pixmap,
+    static TQPixmap apply (const TQPixmap &pixmap,
                           Type type, double radius, double sigma,
                           int repeat);
 
 protected:
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
 protected:
     Type m_type;
@@ -78,13 +78,13 @@ Q_OBJECT
 public:
     kpEffectBlurSharpenWidget (bool actOnSelection,
                                kpMainWindow *mainWindow,
-                               QWidget *parent, const char *name = 0);
+                               TQWidget *parent, const char *name = 0);
     virtual ~kpEffectBlurSharpenWidget ();
 
-    virtual QString caption () const;
+    virtual TQString caption () const;
 
     virtual bool isNoOp () const;
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     virtual kpColorEffectCommand *createCommand () const;
 
@@ -98,7 +98,7 @@ protected:
     int repeat () const;
 
     KIntNumInput *m_amountInput;
-    QLabel *m_typeLabel;
+    TQLabel *m_typeLabel;
 };
 
 

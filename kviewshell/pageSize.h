@@ -14,10 +14,10 @@
 
 #include "simplePageSize.h"
 
-#include <qobject.h>
+#include <tqobject.h>
 
-class QString;
-class QStringList;
+class TQString;
+class TQStringList;
 
 
 /* \brief This class represents physical page sizes.
@@ -38,7 +38,7 @@ The main difference to the SimplePageSize class are the following.
 @version 1.0.0
 */
 
-class pageSize : public QObject, public SimplePageSize
+class pageSize : public TQObject, public SimplePageSize
 {
 Q_OBJECT
 
@@ -58,15 +58,15 @@ public:
   /** \brief List of standard pageSizes
 
   This method returns the names of standard pageSizes,
-  e.g. "A4". These can be used, e.g., by a QComboBox to let the user
+  e.g. "A4". These can be used, e.g., by a TQComboBox to let the user
   choose known sizes. The returned list is also a list of all possible
   return values of the formatName() method explained below. If you
   call pageSizeNames() more than once, it is guaranteed that the
   same list of strings will be returned.
 
-  @returns QStringList that contains 
+  @returns TQStringList that contains 
   */
-  QStringList pageSizeNames();
+  TQStringList pageSizeNames();
   
   /** \brief Set page size by name.
 
@@ -97,7 +97,7 @@ public:
   @returns 'True', if the parameter could be parsed, and 'false'
   otherwise.
   */
-  bool        setPageSize(const QString& name);
+  bool        setPageSize(const TQString& name);
   
   /** \brief Set page size from width and height strings
 
@@ -125,7 +125,7 @@ public:
   @param heightUnits units for the height string. Currently "mm", "cm"
   and "in" are allowed.
   */
-  void        setPageSize(const QString& width, const QString& widthUnits, const QString& height, const QString& heightUnits);
+  void        setPageSize(const TQString& width, const TQString& widthUnits, const TQString& height, const TQString& heightUnits);
 
   /** \brief Set page size
 
@@ -157,7 +157,7 @@ public:
       US Letter and US Legal are best given in inches, to avoid very
       odd numbers. If the page format is unknown, returns a guess
       based on the current locale. */
-  QString     preferredUnit() const;
+  TQString     preferredUnit() const;
 
   /** \brief Returns the page width as a string
 
@@ -167,7 +167,7 @@ public:
   @returns a string containing a number, e.g. "3.1415", which gives the page
   width in the given unit.  If the unit is not recognized, the string "--" is returned.
   */
-  QString     widthString(const QString& unit) const;
+  TQString     widthString(const TQString& unit) const;
 
   /** \brief Returns the page height as a string
 
@@ -178,7 +178,7 @@ public:
   the given unit. If the unit is not recognized, the string "--" is
   returned.
   */
-  QString     heightString(const QString& unit) const;
+  TQString     heightString(const TQString& unit) const;
 
   /** \brief Returns a name for the page size, if this is a standard
       size
@@ -188,11 +188,11 @@ public:
       297x210.
       
       @returns A name for the current page size, if the format has a
-      name, or QString::null otherwise. If the result is not
-      QString::null, it is guaranteed to be one of the strings
+      name, or TQString::null otherwise. If the result is not
+      TQString::null, it is guaranteed to be one of the strings
       returned by the pageSizeNames() method.
   */
-  QString     formatName() const;
+  TQString     formatName() const;
 
   /** \brief Returns an number for the page size, if this is a
       standard size
@@ -203,7 +203,7 @@ public:
       
       @returns If the current format is one of the standard sizes, a
       non-negative integer is returned, which is an index to the
-      QStringList returned by the pageSizeNames() method. If the
+      TQStringList returned by the pageSizeNames() method. If the
       current format is none of the standard sizes, -1 is returned.
   */
   int         formatNumber() const {return currentSize;}
@@ -220,13 +220,13 @@ public:
   */
   int         getOrientation() const;
 
-  /** \brief Returns a string that can be read by setPageSize(QString)
+  /** \brief Returns a string that can be read by setPageSize(TQString)
 
   @returns This method returns a string like "210x297". The numbers
-  are page width and height in millimeters. The setPageSize(QString)
+  are page width and height in millimeters. The setPageSize(TQString)
   method will understand this output.
   */
-  QString     serialize() const;
+  TQString     serialize() const;
 
 public slots:
   /** \brief Sets orientation

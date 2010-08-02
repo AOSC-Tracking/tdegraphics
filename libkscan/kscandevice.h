@@ -20,12 +20,12 @@
 #ifndef _KSCANDEV_H_
 #define _KSCANDEV_H_
 
-#include <qwidget.h>
-#include <qasciidict.h>
-#include <qsize.h>
-#include <qobject.h>
-#include <qstrlist.h>
-#include <qsocketnotifier.h>
+#include <tqwidget.h>
+#include <tqasciidict.h>
+#include <tqsize.h>
+#include <tqobject.h>
+#include <tqstrlist.h>
+#include <tqsocketnotifier.h>
 
 
 #include "kscanoption.h"
@@ -75,7 +75,7 @@ public:
      *
      */
 
-    KScanDevice( QObject *parent = 0 );
+    KScanDevice( TQObject *parent = 0 );
 
     /**
      *  Destructor
@@ -89,22 +89,22 @@ public:
      *   @return the state of the operation
      *   @param backend: the name of the backend to open
      */
-    KScanStat openDevice( const QCString& backend );
+    KScanStat openDevice( const TQCString& backend );
 
     /**
      *  returns the names of all existing Scan Devices in the system.
      *  @param enable_net: allow net devices.
-     *  @return a QStrList of available Scanners in the system
+     *  @return a TQStrList of available Scanners in the system
      *  @see KScanDevice
      */
-    QStrList getDevices( ) const
+    TQStrList getDevices( ) const
         { return( scanner_avail ); }
 
     /**
      * returns the short, technical name of the currently attached backend.
      * It is in the form 'umax:/dev/sg1'.
      */
-    QCString shortScannerName() const { return scanner_name; }
+    TQCString shortScannerName() const { return scanner_name; }
 
     /**
      *  returns a long, human readable name of the scanner, like
@@ -113,17 +113,17 @@ public:
      * If the name of the backend is skipped, the selected backend is
      * returned.
      *
-     * @param a QString with a backend string
-     * @return a QString containing a human readable scanner name
+     * @param a TQString with a backend string
+     * @return a TQString containing a human readable scanner name
      **/
-    QString getScannerName( const QCString& name = 0 ) const;
+    TQString getScannerName( const TQCString& name = 0 ) const;
 
     /*
      *  ========= Preview Functions ==========
      */
 
     /**
-     *  QImage * acquirePreview( bool forceGray = 0, int dpi = 0 )
+     *  TQImage * acquirePreview( bool forceGray = 0, int dpi = 0 )
      *
      *  acquires a preview on the selected device. KScanDevice allocs
      *  memory for the qimage returned. This qimage remains valid
@@ -144,29 +144,29 @@ public:
      *  the Parameter image needs to point to a object qimage,
      *  which is filled by the SANE-Dev. After the function returns,
      *  the qimage is valid, if the returnvalue is OK.
-     *  @param QImage *image - Pointer to a reserved image
+     *  @param TQImage *image - Pointer to a reserved image
      *  @return the state of the operation in KScanStat
      */
-    KScanStat acquire( const QString& filename = QString::null );
+    KScanStat acquire( const TQString& filename = TQString::null );
 
     /**
      *  returns the default filename of the preview image of this scanner.
      *	@return default filename
      **/
-    const QString previewFile();
+    const TQString previewFile();
 
     /**
      *  loads the last saved previewed image on this device from the default file
      *	@return a bitmap as QImage
      **/
-    QImage loadPreviewImage();
+    TQImage loadPreviewImage();
 
     /**
      *  saves current previewed image from this device to the default file
      *  @param image	current preview image which should be saved
      *	@return true if the saving was sucessful
      **/
-    bool   savePreviewImage( const QImage& image );
+    bool   savePreviewImage( const TQImage& image );
 
 
     /*
@@ -176,9 +176,9 @@ public:
     /**
      *  returns all existing options of the selected device.
      *  @see openDevice
-     *	@return a QStrList with the names of all options
+     *	@return a TQStrList with the names of all options
      **/
-    QStrList getAllOptions();
+    TQStrList getAllOptions();
 
     /**
      *  returns the common options of the device. A frontend should
@@ -186,18 +186,18 @@ public:
      *  use.
      *  @see getAllOptions
      *  @see getAdvancedOptions
-     *  @return a QStrList with with names of the common options.
+     *  @return a TQStrList with with names of the common options.
      */
-    QStrList getCommonOptions();
+    TQStrList getCommonOptions();
 
     /**
      *  returns a list of advanced scan options. A frontend should
      *  display these options in a special dialog.
      *  @see getAllOptions
      *  @see getCommonOptions
-     *  @return a QStrList with names of advanced scan options.
+     *  @return a TQStrList with names of advanced scan options.
      */
-    QStrList getAdvancedOptions();
+    TQStrList getAdvancedOptions();
 
     /**
      * retrieves a set of the current scan options and writes them
@@ -230,15 +230,15 @@ public:
      *  @param name: the name of a option from a returned option-List
      *  @return true, if the option exists
      */
-    bool optionExists( const QCString& name );
+    bool optionExists( const TQCString& name );
 
     /**
      *  checks if the backend knows the option with the required name under
      *  a different name, like some backends do. If it does, the known name
-     *  is returned, otherwise a null QCString.
+     *  is returned, otherwise a null TQCString.
      */
 
-    QCString aliasName( const QCString& name );
+    TQCString aliasName( const TQCString& name );
 
     /**
      *  returns a Widget suitable for the selected Option and creates the
@@ -249,20 +249,20 @@ public:
      *  @param desc: pointer to the text appearing as widget text
      *  @param tooltip: tooltip text. If zero, the SANE text will be used.
      **/
-    KScanOption *getGuiElement( const QCString& name, QWidget *parent,
-                                const QString& desc = QString::null,
-                                const QString& tooltip = QString::null );
+    KScanOption *getGuiElement( const TQCString& name, TQWidget *parent,
+                                const TQString& desc = TQString::null,
+                                const TQString& tooltip = TQString::null );
 
     /**
      *  returns the pointer to an already created Scanoption from the
      *  gui element list. Cares for option name aliases.
      */
-    KScanOption *getExistingGuiElement( const QCString& name );
+    KScanOption *getExistingGuiElement( const TQCString& name );
 
     /**
      *  sets an widget of the named option enabled/disabled
      **/
-    void guiSetEnabled( const QCString& name, bool state );
+    void guiSetEnabled( const TQCString& name, bool state );
 
     /**
      *  returns the maximum scan size. This is interesting e.g. for the
@@ -270,17 +270,17 @@ public:
      *  The unit of the return value is millimeter, if the sane backend
      *  returns millimeter. (TODO)
      **/
-    QSize getMaxScanSize( void ) const;
+    TQSize getMaxScanSize( void ) const;
 
     /**
      *  returns the information bit stored for the currently attached scanner
      *  identified by the key.
      */
-    QString getConfig( const QString& key, const QString& def = QString() ) const;
+    TQString getConfig( const TQString& key, const TQString& def = TQString() ) const;
 
     static bool        scanner_initialised;
     static SANE_Handle scanner_handle;
-    static QAsciiDict<int>*  option_dic;
+    static TQAsciiDict<int>*  option_dic;
     static SANE_Device const **dev_list;
     static KScanOptSet *gammaTables;
 
@@ -317,10 +317,10 @@ public slots:
     /**
      * Save the current configuration parameter set. Only changed options are saved.
      **/
-    void slSaveScanConfigSet( const QString&, const QString& );
+    void slSaveScanConfigSet( const TQString&, const TQString& );
 
 
-    void slSetDirty( const QCString& name );
+    void slSetDirty( const TQCString& name );
 
     /**
      * Closes the scan device and frees all related data, makes
@@ -334,7 +334,7 @@ public slots:
      * is opened, a group is created that identifies the scanner and the
      * device where it is connected. The information is stored into that group.
      */
-    void slStoreConfig( const QString&, const QString& );
+    void slStoreConfig( const TQString&, const TQString& );
 
 signals:
     /**
@@ -355,13 +355,13 @@ signals:
      *  emitted if a new image was acquired. The image has to be
      *  copied in the signal handler.
      */
-    void sigNewImage( QImage*, ImgScanInfo* );
+    void sigNewImage( TQImage*, ImgScanInfo* );
 
     /**
      *  emitted if a new preview was acquired. The image has to be
      *  copied in the signal handler.
      */
-    void sigNewPreview( QImage*, ImgScanInfo* );
+    void sigNewPreview( TQImage*, ImgScanInfo* );
     
     /**
      * emitted to tell the application the start of scanning. That is
@@ -422,28 +422,28 @@ private:
     KScanStat           createNewImage( SANE_Parameters *p );
 
 // not implemented
-//   QWidget	      *entryField( QWidget *parent, const QString& text,
-//                                    const QString& tooltip );
+//   QWidget	      *entryField( TQWidget *parent, const TQString& text,
+//                                    const TQString& tooltip );
     KScanStat           find_options(); // help fct. to process options
     KScanStat           acquire_data( bool isPreview = false );
-    QStrList 	      scanner_avail;  // list of names of all scan dev.
+    TQStrList 	      scanner_avail;  // list of names of all scan dev.
     QStrList	      option_list;    // list of names of all options
-    QStrList            dirtyList;     // option changes
+    TQStrList            dirtyList;     // option changes
 
-    inline  QString optionNotifyString(int) const;
+    inline  TQString optionNotifyString(int) const;
     
-    QPtrList<KScanOption>  gui_elements;
-    QAsciiDict<SANE_Device>  scannerDevices;
+    TQPtrList<KScanOption>  gui_elements;
+    TQAsciiDict<SANE_Device>  scannerDevices;
 
-    QSocketNotifier     *sn;
+    TQSocketNotifier     *sn;
 
     SCANSTATUS          scanStatus;
 
     /* Data for the scan process */
     /* This could/should go to  a small help object */
-    QCString             scanner_name;
+    TQCString             scanner_name;
     SANE_Byte           *data;
-    QImage              *img;
+    TQImage              *img;
     SANE_Parameters      sane_scan_param;
     long		      overall_bytes;
     int                 rest_bytes;

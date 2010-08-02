@@ -16,10 +16,10 @@
  ***************************************************************************/
 
 // include files for Qt
-#include <qdir.h>
-#include <qfileinfo.h>
-#include <qwidget.h>
-#include <qclipboard.h>
+#include <tqdir.h>
+#include <tqfileinfo.h>
+#include <tqwidget.h>
+#include <tqclipboard.h>
 
 // include files for KDE
 #include <klocale.h>
@@ -31,9 +31,9 @@
 #include "kcoloreditview.h"
 #include "resource.h"
 
-KColorEditDoc::KColorEditDoc(QWidget *parent, const char *name) : QObject(parent, name),
+KColorEditDoc::KColorEditDoc(TQWidget *parent, const char *name) : TQObject(parent, name),
 	m_palette(), m_paletteHistory(&m_palette, 0) {
-	m_pViewList = new QPtrList<KColorEditView>();
+	m_pViewList = new TQPtrList<KColorEditView>();
 	m_pViewList->setAutoDelete(true);
 }
 
@@ -57,22 +57,22 @@ void KColorEditDoc::setModified(bool b) {
     emit modified( b );
 }
 
-void KColorEditDoc::setAbsFilePath(const QString &filename)
+void KColorEditDoc::setAbsFilePath(const TQString &filename)
 {
   m_absFilePath=filename;
 }
 
-const QString &KColorEditDoc::absFilePath() const
+const TQString &KColorEditDoc::absFilePath() const
 {
   return m_absFilePath;
 }
 
-void KColorEditDoc::setTitle(const QString &_t)
+void KColorEditDoc::setTitle(const TQString &_t)
 {
   m_title=_t;
 }
 
-const QString &KColorEditDoc::title() const
+const TQString &KColorEditDoc::title() const
 {
   return m_title;
 }
@@ -109,7 +109,7 @@ bool KColorEditDoc::saveModified()
     KColorEditApp *window=(KColorEditApp *) parent();
     int want_save = KMessageBox::warningYesNoCancel(window,
                                          i18n("The current file has been modified.\n"
-                                              "Do you want to save it?"), QString::null, KStdGuiItem::save(), i18n("Do Not Save"));
+                                              "Do you want to save it?"), TQString::null, KStdGuiItem::save(), i18n("Do Not Save"));
     switch(want_save)
     {
       case KMessageBox::Yes:
@@ -151,7 +151,7 @@ bool KColorEditDoc::newDocument()
 {
   deleteContents();
 	setModified(false);
-  setAbsFilePath( QDir::homeDirPath() );
+  setAbsFilePath( TQDir::homeDirPath() );
   setTitle( i18n("Untitled") );
   setPaletteCursorPos(0);
   setPaletteSelection(0, 0);
@@ -159,12 +159,12 @@ bool KColorEditDoc::newDocument()
   return true;
 }
 
-bool KColorEditDoc::openDocument(const QString& filename) {
+bool KColorEditDoc::openDocument(const TQString& filename) {
 	if(filename.isEmpty())
 		return newDocument();
 	else {
 		deleteContents();
-		QFileInfo fileInfo(filename);
+		TQFileInfo fileInfo(filename);
 		setAbsFilePath( fileInfo.absFilePath() );
 		if(!m_palette.load( absFilePath() )) {
 			setErrorString(m_palette.errorString());
@@ -181,7 +181,7 @@ bool KColorEditDoc::openDocument(const QString& filename) {
 	return true;
 }
 
-bool KColorEditDoc::saveDocument(const QString& filename) {
+bool KColorEditDoc::saveDocument(const TQString& filename) {
 	if(!m_palette.save( filename )) {
 	 	setErrorString(m_palette.errorString());
 	 	return false;
@@ -194,11 +194,11 @@ void KColorEditDoc::deleteContents() {
 	m_palette.deleteContents();
 }
 
-void KColorEditDoc::setErrorString(const QString& string) {
+void KColorEditDoc::setErrorString(const TQString& string) {
 	m_errorString = string;
 }
 
-const QString& KColorEditDoc::errorString() const {
+const TQString& KColorEditDoc::errorString() const {
 	return m_errorString;
 }
 
@@ -232,8 +232,8 @@ int KColorEditDoc::paletteSelectionEnd() const {
 }
 
 void KColorEditDoc::copyToClipboard(Palette& palette) {
-	QString text;
-	QTextOStream stream(&text);
+	TQString text;
+	TQTextOStream stream(&text);
 	palette.save(stream, 0, false);
 	KApplication::clipboard()->setText(text);
 
@@ -258,8 +258,8 @@ void KColorEditDoc::cut() {
 
 void KColorEditDoc::paste() {
 	Palette palettePaste;
-	QString text;
-	QTextIStream stream(&text);
+	TQString text;
+	TQTextIStream stream(&text);
 	text = KApplication::clipboard()->text();
 	if(palettePaste.load( stream, false )) {
 		m_paletteHistory.paste(paletteCursorPos(), palettePaste);

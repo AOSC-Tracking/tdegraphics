@@ -21,10 +21,10 @@
 #ifndef SVGTimeScheduler_H
 #define SVGTimeScheduler_H
 
-#include <qtimer.h>
-#include <qdatetime.h>
-#include <qobject.h>
-#include <qvaluelist.h>
+#include <tqtimer.h>
+#include <tqdatetime.h>
+#include <tqobject.h>
+#include <tqvaluelist.h>
 
 #include "SVGElementImpl.h"
 #include "SVGAnimationElementImpl.h"
@@ -32,17 +32,17 @@
 namespace KSVG
 {
 
-typedef QValueList<SVGElementImpl *> SVGNotifyList;
+typedef TQValueList<SVGElementImpl *> SVGNotifyList;
 class SVGTimer
 {
 public:
-	SVGTimer(QObject *scheduler, unsigned int ms, bool singleShot);
+	SVGTimer(TQObject *scheduler, unsigned int ms, bool singleShot);
 	~SVGTimer();
 
-	bool operator==(const QTimer *timer);
-	const QTimer *qtimer() const;
+	bool operator==(const TQTimer *timer);
+	const TQTimer *qtimer() const;
 
-	void start(QObject *receiver, const char *member);
+	void start(TQObject *receiver, const char *member);
 	void stop();
 
 	bool isActive() const;
@@ -58,11 +58,11 @@ private:
 	unsigned int m_ms;
 	bool m_invoked, m_singleShot;
 
-	QTimer *m_timer;
+	TQTimer *m_timer;
 	SVGNotifyList m_notifyList;
 };
 
-typedef QValueList<SVGTimer *> SVGTimerList;
+typedef TQValueList<SVGTimer *> SVGTimerList;
 class SVGDocumentImpl;
 class SVGTimeScheduler : public QObject
 {
@@ -94,7 +94,7 @@ private:
 	SVGDocumentImpl *m_doc;
 	SVGTimerList m_timerList;
 	SVGTimer *m_intervalTimer;
-	QTime m_creationTime;
+	TQTime m_creationTime;
 };
 
 }

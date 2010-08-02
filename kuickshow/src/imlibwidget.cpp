@@ -24,12 +24,12 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include <qcolor.h>
-#include <qfile.h>
-#include <qglobal.h>
-#include <qimage.h>
-#include <qobject.h>
-#include <qpalette.h>
+#include <tqcolor.h>
+#include <tqfile.h>
+#include <tqglobal.h>
+#include <tqimage.h>
+#include <tqobject.h>
+#include <tqpalette.h>
 
 #include <kcursor.h>
 #include <kdebug.h>
@@ -43,8 +43,8 @@
 
 const int ImlibWidget::ImlibOffset = 256;
 
-ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
-  QWidget( parent, name, WDestructiveClose )
+ImlibWidget::ImlibWidget( ImData *_idata, TQWidget *parent, const char *name ) :
+  TQWidget( parent, name, WDestructiveClose )
 {
     idata 		= _idata;
     deleteImData 	= false;
@@ -82,9 +82,9 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
 }
 
 
-ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent,
+ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, TQWidget *parent,
 			  const char *name )
-    : QWidget( parent, name, WDestructiveClose )
+    : TQWidget( parent, name, WDestructiveClose )
 {
     id              = _id;
     idata           = _idata;
@@ -113,12 +113,12 @@ void ImlibWidget::init()
 
     setAutoRender( true );
 
-    setPalette( QPalette( myBackgroundColor ));
+    setPalette( TQPalette( myBackgroundColor ));
     setBackgroundMode( PaletteBackground );
 
     imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
-    connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
-    connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
+    connect( imageCache, TQT_SIGNAL( sigBusy() ), TQT_SLOT( setBusyCursor() ));
+    connect( imageCache, TQT_SIGNAL( sigIdle() ), TQT_SLOT( restoreCursor() ));
 
     win = XCreateSimpleWindow(x11Display(), winId(), 0,0,w,h,0,0,0);
 }
@@ -206,7 +206,7 @@ bool ImlibWidget::cacheImage( const KURL& url )
         if ( !file->download() ) {
             return false;
         }
-        connect( file, SIGNAL( downloaded( KuickFile * )), SLOT( cacheImage( KuickFile * )) );
+        connect( file, TQT_SIGNAL( downloaded( KuickFile * )), TQT_SLOT( cacheImage( KuickFile * )) );
         return true; // optimistic
     }
 }
@@ -466,21 +466,21 @@ void ImlibWidget::updateGeometry( int w, int h )
 }
 
 
-void ImlibWidget::closeEvent( QCloseEvent *e )
+void ImlibWidget::closeEvent( TQCloseEvent *e )
 {
     e->accept();
-    QWidget::closeEvent( e );
+    TQWidget::closeEvent( e );
 }
 
 
-void ImlibWidget::setBackgroundColor( const QColor& color )
+void ImlibWidget::setBackgroundColor( const TQColor& color )
 {
     myBackgroundColor = color;
-    setPalette( QPalette( myBackgroundColor ));
+    setPalette( TQPalette( myBackgroundColor ));
     repaint( false); // FIXME - false? necessary at all?
 }
 
-const QColor& ImlibWidget::backgroundColor() const
+const TQColor& ImlibWidget::backgroundColor() const
 {
     return myBackgroundColor;
 }
@@ -510,7 +510,7 @@ void ImlibWidget::setBusyCursor()
     if ( ownCursor() )
         m_oldCursor = cursor();
     else
-        m_oldCursor = QCursor();
+        m_oldCursor = TQCursor();
 
     setCursor( KCursor::waitCursor() );
 }
@@ -527,13 +527,13 @@ void ImlibWidget::restoreCursor()
 // destroying the Imlib image X window. Therefore it needs to be temporarily reparented
 // away and reparented back to the new X window.
 // Reparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
-void ImlibWidget::reparent( QWidget* parent, WFlags f, const QPoint& p, bool showIt )
+void ImlibWidget::reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt )
 {
     XWindowAttributes attr;
     XGetWindowAttributes( x11Display(), win, &attr );
     XUnmapWindow( x11Display(), win );
     XReparentWindow( x11Display(), win, attr.root, 0, 0 );
-    QWidget::reparent( parent, f, p, showIt );
+    TQWidget::reparent( parent, f, p, showIt );
     XReparentWindow( x11Display(), win, winId(), attr.x, attr.y );
     if( attr.map_state != IsUnmapped )
         XMapWindow( x11Display(), win );
@@ -630,7 +630,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
 // #endif
 
         ImlibImage *im = Imlib_load_image( myId,
-                                           QFile::encodeName( file->localFile() ).data() );
+                                           TQFile::encodeName( file->localFile() ).data() );
 
 // #ifndef NDEBUG
 //         gettimeofday( &tms2, NULL );
@@ -649,8 +649,8 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
 
 	Imlib_set_image_modifier( myId, im, &mod );
 	kuim = new KuickImage( file, im, myId );
-	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
-	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));
+	connect( kuim, TQT_SIGNAL( startRendering() ),   TQT_SLOT( slotBusy() ));
+	connect( kuim, TQT_SIGNAL( stoppedRendering() ), TQT_SLOT( slotIdle() ));
 
 	kuickList.insert( 0, kuim );
 	fileList.prepend( file );
@@ -668,13 +668,13 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
 
 // Note: the returned image's filename will not be the real filename (which it usually
 // isn't anyway, according to Imlib's sources).
-ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
+ImlibImage * ImageCache::loadImageWithQt( const TQString& fileName ) const
 {
     kdDebug() << "Trying to load " << fileName << " with KImageIO..." << endl;
 
     KImageIO::registerFormats();
 
-    QImage image( fileName );
+    TQImage image( fileName );
     if ( image.isNull() )
 	return 0L;
     if ( image.depth() != 32 ) {

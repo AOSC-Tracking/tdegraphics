@@ -22,18 +22,18 @@
 
 #include <kfilemetainfo.h>
 
-class QStringList;
+class TQStringList;
 
 class KPnmPlugin: public KFilePlugin
 {
 	Q_OBJECT
     
 public:
-	KPnmPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+	KPnmPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
 	virtual bool readInfo( KFileMetaInfo& info, uint );
 
 private:
-	void makeMimeTypeInfo( const QString&);
+	void makeMimeTypeInfo( const TQString&);
 };
 
 #endif

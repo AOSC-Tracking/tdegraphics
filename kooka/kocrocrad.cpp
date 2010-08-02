@@ -26,11 +26,11 @@
 
 /* $Id$ */
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qfileinfo.h>
-#include <qtooltip.h>
-#include <qregexp.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqfileinfo.h>
+#include <tqtooltip.h>
+#include <tqregexp.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -48,15 +48,15 @@
 #include <kscanslider.h>
 #include "kookaimage.h"
 #include "kookapref.h"
-#include <qvbox.h>
-#include <qhbox.h>
-#include <qcombobox.h>
+#include <tqvbox.h>
+#include <tqhbox.h>
+#include <tqcombobox.h>
 
 
 
-ocradDialog::ocradDialog( QWidget *parent, KSpellConfig *spellConfig )
+ocradDialog::ocradDialog( TQWidget *parent, KSpellConfig *spellConfig )
     :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
-     m_ocrCmd( QString()),
+     m_ocrCmd( TQString()),
      m_orfUrlRequester(0L),
      m_layoutMode(0),
      m_binaryLabel(0),
@@ -67,17 +67,17 @@ ocradDialog::ocradDialog( QWidget *parent, KSpellConfig *spellConfig )
    // Layout-Boxes
 }
 
-QString ocradDialog::ocrEngineLogo() const
+TQString ocradDialog::ocrEngineLogo() const
 {
     return "ocrad.png";
 }
 
-QString ocradDialog::ocrEngineName() const
+TQString ocradDialog::ocrEngineName() const
 {
     return i18n("ocrad" );
 }
 
-QString ocradDialog::ocrEngineDesc() const
+TQString ocradDialog::ocrEngineDesc() const
 {
     return i18n("ocrad is a Free Software project "
                 "for optical character recognition.<p>"
@@ -101,7 +101,7 @@ EngineError ocradDialog::setupGui()
 {
     KOCRBase::setupGui();
 
-    QVBox *page = ocrPage();
+    TQVBox *page = ocrPage();
     Q_CHECK_PTR( page );
 
     KConfig *conf = KGlobal::config ();
@@ -111,7 +111,7 @@ EngineError ocradDialog::setupGui()
     // (void) new  KSeparator( KSeparator::HLine, page);
 
     // Entry-Field.
-    QString res = conf->readPathEntry( CFG_OCRAD_BINARY, "notFound" );
+    TQString res = conf->readPathEntry( CFG_OCRAD_BINARY, "notFound" );
     if( res == "notFound" )
     {
         res = KookaPreferences::tryFindBinary("ocrad", CFG_OCRAD_BINARY);
@@ -135,10 +135,10 @@ EngineError ocradDialog::setupGui()
     kdDebug(28000) << "Layout detection from config: " << layoutDetect << endl;
 
     (void) new KSeparator( KSeparator::HLine, page);
-    QHBox *hb1 = new QHBox(page);
+    TQHBox *hb1 = new TQHBox(page);
     hb1->setSpacing( KDialog::spacingHint() );
-    (void) new QLabel( i18n("OCRAD layout analysis mode: "), hb1);
-    m_layoutMode = new QComboBox(hb1);
+    (void) new TQLabel( i18n("OCRAD layout analysis mode: "), hb1);
+    m_layoutMode = new TQComboBox(hb1);
     m_layoutMode->insertItem(i18n("No Layout Detection"), 0 );
     m_layoutMode->insertItem(i18n("Column Detection"), 1 );
     m_layoutMode->insertItem(i18n("Full Layout Detection"), 2);
@@ -146,10 +146,10 @@ EngineError ocradDialog::setupGui()
 
     /** stating the ocrad binary **/
     (void) new KSeparator( KSeparator::HLine, page);
-    QHBox *hb = new QHBox(page);
+    TQHBox *hb = new TQHBox(page);
     hb->setSpacing( KDialog::spacingHint());
 
-    m_binaryLabel = new QLabel( i18n("Using ocrad binary: ") + res, hb );
+    m_binaryLabel = new TQLabel( i18n("Using ocrad binary: ") + res, hb );
 
     // retrieve Program version and display
     version(res);
@@ -180,7 +180,7 @@ void ocradDialog::writeConfig( void )
    KConfig *conf = KGlobal::config ();
    conf->setGroup( CFG_GROUP_OCR_DIA );
 
-   conf->writeEntry( CFG_OCRAD_BINARY, QString(getOCRCmd()));
+   conf->writeEntry( CFG_OCRAD_BINARY, TQString(getOCRCmd()));
 
    conf->setGroup( CFG_GROUP_OCRAD );
    conf->writeEntry( CFG_OCRAD_LAYOUT_DETECTION, m_layoutMode->currentItem());
@@ -195,15 +195,15 @@ void ocradDialog::enableFields(bool )
 /* Later: Allow interactive loading of orf files
  *  for now, return emty string
  */
-QString ocradDialog::orfUrl() const
+TQString ocradDialog::orfUrl() const
 {
     if( m_orfUrlRequester )
 	return m_orfUrlRequester->url();
     else
-	return QString();
+	return TQString();
 }
 
-void ocradDialog::version( const QString& exe )
+void ocradDialog::version( const TQString& exe )
 {
     if( m_proc ) delete m_proc;
 
@@ -211,10 +211,10 @@ void ocradDialog::version( const QString& exe )
 
     kdDebug(28000) << "Using " << exe << " as command" << endl;
     *m_proc << exe;
-    *m_proc << QString("-V");
+    *m_proc << TQString("-V");
 
-    connect( m_proc, SIGNAL(receivedStdout(KProcess *, char *, int )),
-             this,     SLOT(slReceiveStdIn(KProcess *, char *, int )));
+    connect( m_proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
+             this,     TQT_SLOT(slReceiveStdIn(KProcess *, char *, int )));
 
     if( ! m_proc->start( KProcess::NotifyOnExit, KProcess::Stdout ) )
     {
@@ -224,19 +224,19 @@ void ocradDialog::version( const QString& exe )
 
 void ocradDialog::slReceiveStdIn( KProcess*, char *buffer, int buflen)
 {
-    QString vstr = QString::fromUtf8(buffer, buflen);
+    TQString vstr = TQString::fromUtf8(buffer, buflen);
 
     kdDebug(28000) << "Got input: "<< buffer << endl;
 
-    QRegExp rx;
+    TQRegExp rx;
     rx.setPattern("GNU Ocrad version ([\\d\\.]+)");
     if( rx.search( vstr ) > -1 )
     {
-        QString vStr = rx.cap(1);
+        TQString vStr = rx.cap(1);
         vStr.remove(0,2);
 
         m_version = vStr.toInt();
-        QString v = i18n("Version: ") + rx.cap(1);
+        TQString v = i18n("Version: ") + rx.cap(1);
 
         if( m_binaryLabel )
         {

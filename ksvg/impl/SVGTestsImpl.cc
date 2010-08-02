@@ -52,17 +52,17 @@ SVGTestsImpl::~SVGTestsImpl()
 		m_systemLanguage->deref();
 }
 
-void SVGTestsImpl::parseRequiredFeatures(const QString &/*value*/)
+void SVGTestsImpl::parseRequiredFeatures(const TQString &/*value*/)
 {
 	// FIXME
 }
 
-void SVGTestsImpl::parseRequiredExtensions(const QString &value)
+void SVGTestsImpl::parseRequiredExtensions(const TQString &value)
 {
 	m_requiredExtensions->appendItem(new SharedString(value));
 }
 
-void SVGTestsImpl::parseSystemLanguage(const QString &value)
+void SVGTestsImpl::parseSystemLanguage(const TQString &value)
 {
 	m_systemLanguage->appendItem(new SharedString(value));
 }
@@ -91,7 +91,7 @@ bool SVGTestsImpl::ok()
 	}
 	for(unsigned int i = 0;i < m_systemLanguage->numberOfItems();i++)
 	{
-		QString value = m_systemLanguage->getItem(i)->string();
+		TQString value = m_systemLanguage->getItem(i)->string();
 		if(value.isEmpty() || value != (KGlobal::locale()->language()).left(2))
 			return false;
 	}

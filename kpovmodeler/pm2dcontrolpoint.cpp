@@ -21,7 +21,7 @@
 
 PM2DControlPoint::PM2DControlPoint( const PMVector& point,
                                     PM2DControlPoint::CPType type, int id,
-                                    const QString& description )
+                                    const TQString& description )
       : PMControlPoint( id, description )
 {
    m_point = point;
@@ -34,7 +34,7 @@ PM2DControlPoint::PM2DControlPoint( const PMVector& point,
 
 void PM2DControlPoint::graphicalChangeStarted( )
 {
-   QPtrListIterator<PM2DControlPoint> it( m_linkedPoints );
+   TQPtrListIterator<PM2DControlPoint> it( m_linkedPoints );
    for( ; *it; ++it )
       if( !( *it )->selected( ) )
          ( *it )->graphicalChangeStarted( );
@@ -63,7 +63,7 @@ void PM2DControlPoint::graphicalChange( const PMVector& startPoint,
          m_point = op;
    }
 
-   QPtrListIterator<PM2DControlPoint> it( m_linkedPoints );
+   TQPtrListIterator<PM2DControlPoint> it( m_linkedPoints );
    for( ; *it; ++it )
    {
       ( *it )->m_point = m_point + ( *it )->m_original2DPoint
@@ -110,7 +110,7 @@ void PM2DControlPoint::snapToGrid( )
    if( diff )
       m_point += m_pBasePoint->m_point;
 
-   QPtrListIterator<PM2DControlPoint> it( m_linkedPoints );
+   TQPtrListIterator<PM2DControlPoint> it( m_linkedPoints );
    for( ; *it; ++it )
    {
       ( *it )->m_point += change;

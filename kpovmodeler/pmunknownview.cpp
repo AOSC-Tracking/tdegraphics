@@ -17,21 +17,21 @@
 
 #include "pmunknownview.h"
 #include <klocale.h>
-#include <qlayout.h>
+#include <tqlayout.h>
 
-PMUnknownView::PMUnknownView( const QString& viewType,
-                              QWidget* parent, const char* name )
+PMUnknownView::PMUnknownView( const TQString& viewType,
+                              TQWidget* parent, const char* name )
       : PMViewBase( parent, name )
 {
-   QHBoxLayout* hl = new QHBoxLayout( this );
-   QLabel* l;
-   l = new QLabel( i18n( "Unknown view type \"%1\"" ).arg( viewType ), this );
+   TQHBoxLayout* hl = new TQHBoxLayout( this );
+   TQLabel* l;
+   l = new TQLabel( i18n( "Unknown view type \"%1\"" ).arg( viewType ), this );
    l->setAlignment( Qt::AlignCenter );
    hl->addWidget( l );
    m_viewType = viewType;
 }
 
-QString PMUnknownView::description( ) const
+TQString PMUnknownView::description( ) const
 {
    return i18n( "Unknown" );
 }

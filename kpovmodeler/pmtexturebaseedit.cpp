@@ -20,12 +20,12 @@
 #include "pmpigment.h"
 #include "pmlinkedit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
 
-PMTextureBaseEdit::PMTextureBaseEdit( QWidget* parent, const char* name )
+PMTextureBaseEdit::PMTextureBaseEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,7 +37,7 @@ void PMTextureBaseEdit::createTopWidgets( )
    Base::createTopWidgets( );
    m_pLinkEdit = new PMLinkEdit( this );
    topLayout( )->addWidget( m_pLinkEdit );
-   connect( m_pLinkEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pLinkEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 

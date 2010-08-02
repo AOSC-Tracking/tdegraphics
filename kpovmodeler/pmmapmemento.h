@@ -25,7 +25,7 @@
 #endif
 
 #include "pmmemento.h"
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 
 
 /**
@@ -46,11 +46,11 @@ public:
    /**
     * Saves the map values
     */
-   void setMapValues( const QValueList<double>& v );
+   void setMapValues( const TQValueList<double>& v );
    /**
     * Returns the map values
     */
-   QValueList<double> mapValues( ) const { return m_mapValues; }
+   TQValueList<double> mapValues( ) const { return m_mapValues; }
    /**
     * Returns true if the map values were saved
     */
@@ -59,11 +59,11 @@ public:
    /**
     * Saves the removed values
     */
-   void setRemovedValues( const QValueList<double>& v );
+   void setRemovedValues( const TQValueList<double>& v );
    /**
     * Returns the removed values
     */
-   QValueList<double> removedValues( ) const { return m_removedValues; }
+   TQValueList<double> removedValues( ) const { return m_removedValues; }
    /**
     * Returns true if the removed values were saved
     */
@@ -73,8 +73,8 @@ private:
    /**
     * The stored values
     */
-   QValueList<double> m_mapValues;
-   QValueList<double> m_removedValues;
+   TQValueList<double> m_mapValues;
+   TQValueList<double> m_removedValues;
    bool m_bMapValuesSaved, m_bRemovedValuesSaved;
 };
 

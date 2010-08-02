@@ -22,15 +22,15 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-#include <qimage.h>
+#include <tqimage.h>
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif // HAVE_CONFIG_H
 
-#include <qdir.h>
-#include <qfile.h>
-#include <qfileinfo.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
 #include <kapplication.h>
 
 #define OPAQUE_MASK 0xff000000
@@ -57,14 +57,14 @@ struct imageFormat
   const char *extension;
 };
 
-typedef QPtrList<struct imageFormat> imageFormats;
+typedef TQPtrList<struct imageFormat> imageFormats;
 extern imageFormats *formats;
 
 void setupImageHandlers();
 
-bool copyFile(const QString &src, const QString &dest);
-bool removeFile(const QString &file);
-bool moveFile(const QString &src, const QString &dest);
+bool copyFile(const TQString &src, const TQString &dest);
+bool removeFile(const TQString &file);
+bool moveFile(const TQString &src, const TQString &dest);
 uint kdeColor(uint c);
 
 #endif //__UTILS_H__

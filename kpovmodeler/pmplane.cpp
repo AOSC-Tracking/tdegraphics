@@ -63,12 +63,12 @@ PMPlane::~PMPlane( )
 {
 }
 
-QString PMPlane::description( ) const
+TQString PMPlane::description( ) const
 {
    return i18n( "plane" );
 }
 
-void PMPlane::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMPlane::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "normal", m_normal.serializeXML( ) );
    e.setAttribute( "distance", m_distance );
@@ -126,7 +126,7 @@ void PMPlane::setDistance( double distance )
    }
 }
 
-PMDialogEditBase* PMPlane::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMPlane::editWidget( TQWidget* parent ) const
 {
    return new PMPlaneEdit( parent );
 }

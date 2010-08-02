@@ -21,7 +21,7 @@
 #define PMRAW_H
 
 #include "pmnamedobject.h"
-#include <qstring.h>
+#include <tqstring.h>
 
 
 /**
@@ -42,7 +42,7 @@ public:
    /**
     * Creates a raw povray object with text t
     */
-   PMRaw( PMPart* part, const QString& t );
+   PMRaw( PMPart* part, const TQString& t );
    /**
     * Deletes the raw povray object
     */
@@ -51,18 +51,18 @@ public:
    /**
     * Sets the povray code
     */
-   void setCode( const QString& text );
+   void setCode( const TQString& text );
    /**
     * Returns the raw povray code
     */
-   QString code( ) const { return m_code; }
+   TQString code( ) const { return m_code; }
 
    /** */
    virtual PMObject* copy( ) const { return new PMRaw( *this ); }
    /** */
-   virtual QString description( ) const;
+   virtual TQString description( ) const;
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
    /** */
    virtual void readAttributes( const PMXMLHelper& h );
 
@@ -72,9 +72,9 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual PMDialogEditBase* editWidget( QWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
-   virtual QString pixmap( ) const { return QString( "pmraw" ); }
+   virtual TQString pixmap( ) const { return TQString( "pmraw" ); }
    /** */
    virtual void restoreMemento( PMMemento* s );
 private:
@@ -82,7 +82,7 @@ private:
     * IDs for @ref PMMementoData
     */
    enum PMRawMementoID { PMCodeID };
-   QString m_code;
+   TQString m_code;
 
    static PMMetaObject* s_pMetaObject;
 };

@@ -28,19 +28,19 @@
 #ifndef __kp_text_style_h__
 #define __kp_text_style_h__
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kpcolor.h>
 
-class QDataStream;
-class QFont;
-class QFontMetrics;
+class TQDataStream;
+class TQFont;
+class TQFontMetrics;
 
 class kpTextStyle
 {
 public:
     kpTextStyle ();
-    kpTextStyle (const QString &fontFamily,
+    kpTextStyle (const TQString &fontFamily,
                  int fontSize,
                  bool isBold, bool isItalic,
                  bool isUnderline, bool isStrikeThru,
@@ -50,14 +50,14 @@ public:
     ~kpTextStyle ();
 
 
-    friend QDataStream &operator<< (QDataStream &stream, const kpTextStyle &textStyle);
-    friend QDataStream &operator>> (QDataStream &stream, kpTextStyle &textStyle);
+    friend TQDataStream &operator<< (TQDataStream &stream, const kpTextStyle &textStyle);
+    friend TQDataStream &operator>> (TQDataStream &stream, kpTextStyle &textStyle);
     bool operator== (const kpTextStyle &rhs) const;
     bool operator!= (const kpTextStyle &rhs) const;
 
 
-    QString fontFamily () const;
-    void setFontFamily (const QString &f);
+    TQString fontFamily () const;
+    void setFontFamily (const TQString &f);
 
     int fontSize () const;
     void setFontSize (int s);
@@ -94,11 +94,11 @@ public:
     // Else, returns kpColor::transparent.
     kpColor effectiveBackgroundColor () const;
 
-    QFont font () const;
-    QFontMetrics fontMetrics () const;
+    TQFont font () const;
+    TQFontMetrics fontMetrics () const;
 
 private:
-    QString m_fontFamily;
+    TQString m_fontFamily;
     int m_fontSize;
     bool m_isBold, m_isItalic, m_isUnderline, m_isStrikeThru;
     kpColor m_foregroundColor, m_backgroundColor;

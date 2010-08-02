@@ -39,7 +39,7 @@ public:
    /**
     * Creates a PMBlobSphereEdit with parent and name
     */
-   PMBlobSphereEdit( QWidget* parent, const char* name = 0 );
+   PMBlobSphereEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

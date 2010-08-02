@@ -17,8 +17,8 @@
  */
 #ifndef DISPLAYOPTIONS_H
 #define DISPLAYOPTIONS_H
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 #include "dscparse_adapter.h"
 #include <kdemacros.h>
 class KCmdLineArgs;
@@ -39,9 +39,9 @@ class KDE_EXPORT DisplayOptions
 	void setOverrideOrientation(CDSC_ORIENTATION_ENUM e)  { _overrideOrientation = e; }
 	CDSC_ORIENTATION_ENUM overrideOrientation() const { return _overrideOrientation; }
 
-	void restoreOverridePageMedia() { _overridePageMedia = QString::null; }
-	void setOverridePageMedia(const QString& newMedia) { _overridePageMedia = newMedia; }
-	const QString& overridePageMedia() const { return _overridePageMedia; }
+	void restoreOverridePageMedia() { _overridePageMedia = TQString::null; }
+	void setOverridePageMedia(const TQString& newMedia) { _overridePageMedia = newMedia; }
+	const TQString& overridePageMedia() const { return _overridePageMedia; }
 
 	/** 
 	 * The current page.
@@ -76,26 +76,26 @@ class KDE_EXPORT DisplayOptions
 	 *
 	 * \sa fromString
 	 */
-	static QString toString( const DisplayOptions& );
+	static TQString toString( const DisplayOptions& );
 	/**
 	 * Reads the display options from a string formatted by toString.
 	 *
 	 * \return true if the convertion succeeded.
 	 */
-	static bool fromString( DisplayOptions&, const QString& );
+	static bool fromString( DisplayOptions&, const TQString& );
 
 	/**
 	 * Returns a list of values that normally we can get through
 	 * zoomIn() & zoomOut()
 	 */
-	static QValueList<double> normalMagnificationValues();
+	static TQValueList<double> normalMagnificationValues();
 
 	private:
 
 	unsigned closestIndex() const;
 
 	CDSC_ORIENTATION_ENUM _overrideOrientation;
-	QString               _overridePageMedia;
+	TQString               _overridePageMedia;
 	int                   _page;
 	double                _magnification;
 };
@@ -103,7 +103,7 @@ class KDE_EXPORT DisplayOptions
 inline
 DisplayOptions::DisplayOptions()
 	:_overrideOrientation( CDSC_ORIENT_UNKNOWN ),
-	 _overridePageMedia ( QString::null ),
+	 _overridePageMedia ( TQString::null ),
 	 _page( 0 )
 {
 	setMagnification( 1.0 );

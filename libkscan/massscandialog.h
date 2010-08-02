@@ -20,11 +20,11 @@
 #ifndef MASSSCANDIALOG_H
 #define MASSSCANDIALOG_H
 
-#include <qstring.h>
-#include <qdialog.h>
+#include <tqstring.h>
+#include <tqdialog.h>
 
-class QProgressBar;
-class QLabel;
+class TQProgressBar;
+class TQLabel;
 
 /**
   *@author Klaas Freitag
@@ -34,7 +34,7 @@ class MassScanDialog : public QDialog
 {
    Q_OBJECT
 public: 
-   MassScanDialog( QWidget *parent);
+   MassScanDialog( TQWidget *parent);
    ~MassScanDialog();
 	
 public slots:
@@ -49,16 +49,16 @@ public slots:
       }
 		
 private:
-   QString     scanopts;
-   QLabel      *l_scanopts;	
+   TQString     scanopts;
+   TQLabel      *l_scanopts;	
 
-   QString     tofolder;
-   QLabel      *l_tofolder;	
+   TQString     tofolder;
+   TQLabel      *l_tofolder;	
 
-   QString     progress;
-   QLabel      *l_progress;	
+   TQString     progress;
+   TQLabel      *l_progress;	
 
-   QProgressBar *progressbar;
+   TQProgressBar *progressbar;
 
    class MassScanDialogPrivate;
    MassScanDialogPrivate *d;

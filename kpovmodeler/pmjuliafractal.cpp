@@ -32,9 +32,9 @@ const PMVector c_defaultSliceNormal = PMVector( 0.0, 0.0, 0.0, 1.0 );
 const double c_defaultSliceDistance = 0.0;
 const int c_defaultMaxIterations = 20;
 const PMJuliaFractal::AlgebraType c_defaultAlgebraType = PMJuliaFractal::Quaternion;
-const QString c_defaultAlgebraString = "quaternion";
+const TQString c_defaultAlgebraString = "quaternion";
 const PMJuliaFractal::FunctionType c_defaultFunctionType = PMJuliaFractal::FTsqr;
-const QString c_defaultFunctionString = "sqr";
+const TQString c_defaultFunctionString = "sqr";
 const PMVector c_defaultExponent = PMVector( 0.0, 0.0 );
 const double c_defaultPrecision = 20.0;
 
@@ -81,12 +81,12 @@ PMJuliaFractal::~PMJuliaFractal( )
 {
 }
 
-QString PMJuliaFractal::description( ) const
+TQString PMJuliaFractal::description( ) const
 {
    return i18n( "julia fractal" );
 }
 
-void PMJuliaFractal::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMJuliaFractal::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    e.setAttribute( "julia_parameter", m_juliaParameter.serializeXML( ) );
    e.setAttribute( "algebra_type", algebraTypeToString( m_algebraType ) );
@@ -272,7 +272,7 @@ void PMJuliaFractal::setExponent( const PMVector& e )
    }
 }
 
-PMDialogEditBase* PMJuliaFractal::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMJuliaFractal::editWidget( TQWidget* parent ) const
 {
    return new PMJuliaFractalEdit( parent );
 }
@@ -322,9 +322,9 @@ void PMJuliaFractal::restoreMemento( PMMemento* s )
    Base::restoreMemento( s );
 }
 
-QString PMJuliaFractal::functionTypeToString( PMJuliaFractal::FunctionType t )
+TQString PMJuliaFractal::functionTypeToString( PMJuliaFractal::FunctionType t )
 {
-   QString result = "sqr";
+   TQString result = "sqr";
    switch( t )
    {
       case FTsqr:
@@ -385,7 +385,7 @@ QString PMJuliaFractal::functionTypeToString( PMJuliaFractal::FunctionType t )
    return result;
 }
 
-PMJuliaFractal::FunctionType PMJuliaFractal::stringToFunctionType( const QString& str )
+PMJuliaFractal::FunctionType PMJuliaFractal::stringToFunctionType( const TQString& str )
 {
    FunctionType t = c_defaultFunctionType;
 
@@ -428,9 +428,9 @@ PMJuliaFractal::FunctionType PMJuliaFractal::stringToFunctionType( const QString
    return t;
 }
 
-QString PMJuliaFractal::algebraTypeToString( PMJuliaFractal::AlgebraType t )
+TQString PMJuliaFractal::algebraTypeToString( PMJuliaFractal::AlgebraType t )
 {
-   QString result;
+   TQString result;
    if( t == Quaternion )
       result = "quaternion";
    else
@@ -438,7 +438,7 @@ QString PMJuliaFractal::algebraTypeToString( PMJuliaFractal::AlgebraType t )
    return result;
 }
 
-PMJuliaFractal::AlgebraType PMJuliaFractal::stringToAlgebraType( const QString& str )
+PMJuliaFractal::AlgebraType PMJuliaFractal::stringToAlgebraType( const TQString& str )
 {
    AlgebraType t = c_defaultAlgebraType;
    if( str == "quaternion" )

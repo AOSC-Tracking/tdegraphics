@@ -32,8 +32,8 @@
 #include <kpcommandhistory.h>
 #include <kdialogbase.h>
 
-class QRadioButton;
-class QString;
+class TQRadioButton;
+class TQString;
 
 class kpDocument;
 class kpMainWindow;
@@ -47,7 +47,7 @@ public:
                        kpMainWindow *mainWindow);
     virtual ~kpToolFlipCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
 
@@ -67,7 +67,7 @@ class kpToolFlipDialog : public KDialogBase
 Q_OBJECT
 
 public:
-    kpToolFlipDialog (bool actOnSelection, QWidget *parent);
+    kpToolFlipDialog (bool actOnSelection, TQWidget *parent);
     ~kpToolFlipDialog ();
 
 private:
@@ -82,7 +82,7 @@ public:
     bool isNoOp () const;
 
 private:
-    QRadioButton *m_horizontalFlipRadioButton, *m_verticalFlipRadioButton;
+    TQRadioButton *m_horizontalFlipRadioButton, *m_verticalFlipRadioButton;
 };
 
 #endif  // __kptoolflip_h__

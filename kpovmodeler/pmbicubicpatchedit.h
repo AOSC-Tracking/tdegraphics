@@ -30,8 +30,8 @@ class PMBicubicPatch;
 class PMIntEdit;
 class PMFloatEdit;
 class PMVectorListEdit;
-class QComboBox;
-class QCheckBox;
+class TQComboBox;
+class TQCheckBox;
 
 /**
  * Dialog edit class for @ref PMBicubicPatch
@@ -44,7 +44,7 @@ public:
    /**
     * Creates a PMBicubicPatchEdit with parent and name
     */
-   PMBicubicPatchEdit( QWidget* parent, const char* name = 0 );
+   PMBicubicPatchEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -65,12 +65,12 @@ protected:
    virtual void saveContents( );
 
 private:
-   QComboBox* m_pType;
+   TQComboBox* m_pType;
    PMIntEdit* m_pUSteps;
    PMIntEdit* m_pVSteps;
    PMFloatEdit* m_pFlatness;
    PMVectorListEdit* m_pPoints;
-   QCheckBox* m_pUVEnabled;
+   TQCheckBox* m_pUVEnabled;
    PMVectorListEdit* m_pUVVectors;
 
    PMBicubicPatch* m_pDisplayedObject;

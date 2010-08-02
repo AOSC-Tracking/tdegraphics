@@ -214,12 +214,12 @@ void PMFinish::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMFinish::description( ) const
+TQString PMFinish::description( ) const
 {
    return i18n( "finish" );
 }
 
-void PMFinish::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMFinish::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    Base::serialize( e, doc );
    e.setAttribute( "enable_ambient", m_enableAmbient );
@@ -637,7 +637,7 @@ void PMFinish::setIridTurbulence( double c )
    }
 }
 
-PMDialogEditBase* PMFinish::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMFinish::editWidget( TQWidget* parent ) const
 {
    return new PMFinishEdit( parent );
 }

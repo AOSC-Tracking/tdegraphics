@@ -24,12 +24,12 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include "pmcolor.h"
 
 class KColorButton;
 class PMFloatEdit;
-class QColor;
+class TQColor;
 
 /**
  * Edit widget for @ref PMColor
@@ -41,7 +41,7 @@ public:
    /**
     * Creates an edit widget for rgbft colors.
     */
-   PMColorEdit( bool filterAndTransmit, QWidget* parent, const char* name = 0 );
+   PMColorEdit( bool filterAndTransmit, TQWidget* parent, const char* name = 0 );
    
    /**
     * Sets the displayed color
@@ -69,7 +69,7 @@ signals:
    void dataChanged( );
    
 protected slots:
-   void slotColorChanged( const QColor& c );
+   void slotColorChanged( const TQColor& c );
    void slotEditChanged( );
 private:
    void updateButton( );

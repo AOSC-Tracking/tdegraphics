@@ -60,7 +60,7 @@ extern "C" {
 
 const int Mrml::bufsize = 8192;
 
-Mrml::Mrml( const QCString& pool_socket, const QCString& app_socket )
+Mrml::Mrml( const TQCString& pool_socket, const TQCString& app_socket )
     : TCPSlaveBase( 12789, "mrml", pool_socket, app_socket ),
       m_config( KGlobal::config() )
 {
@@ -100,21 +100,21 @@ void Mrml::get( const KURL& url )
     int retriesLeft = 5;
 tryConnect:
 
-    QCString utf8;
+    TQCString utf8;
     bool sendError = (retriesLeft <= 0);
 
     if ( connectToHost( url.host(), port(url), sendError ) )
     {
 //         qDebug(" connected!");
 
-        QString task = metaData( MrmlShared::kio_task() );
+        TQString task = metaData( MrmlShared::kio_task() );
 
         if ( task == MrmlShared::kio_initialize() ) {
             startSession( url );
         }
 
         else if ( task == MrmlShared::kio_startQuery() ) {
-            QString meta = metaData( MrmlShared::mrml_data() );
+            TQString meta = metaData( MrmlShared::mrml_data() );
             if ( meta.isEmpty() ) {
                 closeDescriptor();
                 error( KIO::ERR_SLAVE_DEFINED, i18n("No MRML data is available.") );
@@ -154,14 +154,14 @@ tryConnect:
     }
 
     closeDescriptor();
-    //data( QByteArray() ); // send an empty QByteArray to signal end of data.
+    //data( TQByteArray() ); // send an empty TQByteArray to signal end of data.
     finished();
 }
 
 // make sure we're connected when you call this!
-QCString Mrml::readAll()
+TQCString Mrml::readAll()
 {
-    QCString data;
+    TQCString data;
 
     char buf[bufsize];
     ssize_t bytes = 0;
@@ -175,21 +175,21 @@ QCString Mrml::readAll()
     return data;
 }
 
-QCString Mrml::loginString()
+TQCString Mrml::loginString()
 {
     return "<mrml><get-server-properties/></mrml>";
 }
 
-QCString Mrml::getConfigurationString()
+TQCString Mrml::getConfigurationString()
 {
     return "<mrml><get-configuration/></mrml>";
 }
 
 // ### needed?
-QCString Mrml::getSessionsString( const QString& username,
-                                  const QString& password )
+TQCString Mrml::getSessionsString( const TQString& username,
+                                  const TQString& password )
 {
-    QCString data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><mrml><get-sessions ";
+    TQCString data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><mrml><get-sessions ";
     if ( !username.isEmpty() ) { // ### pop up auth-dialog???
         data.append( "user-name=\"");
         data.append( username.utf8() );
@@ -216,13 +216,13 @@ bool Mrml::startSession( const KURL& url )
     // Wolfgang says, we shouldn't create an own session-id here, as gcc 2.95
     // apparently makes problems in exception handling somehow. So we simply
     // accept the server's session-id.
-    QString msg = mrmlString( QString::null ).arg(
+    TQString msg = mrmlString( TQString::null ).arg(
         "<open-session user-name=\"%1\" session-name=\"kio_mrml session\" /> \
          <get-algorithms />                                                  \
          <get-collections />                                                 \
          </mrml>" ).arg( user( url ));
 
-    QCString utf8 = msg.utf8();
+    TQCString utf8 = msg.utf8();
 //     qDebug(":::Writing: %s", utf8.data());
     write( utf8, utf8.length() );
 
@@ -231,9 +231,9 @@ bool Mrml::startSession( const KURL& url )
     return true;
 }
 
-QString Mrml::mrmlString( const QString& sessionId, const QString& transactionId )
+TQString Mrml::mrmlString( const TQString& sessionId, const TQString& transactionId )
 {
-    QString msg =
+    TQString msg =
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>            \
          <!DOCTYPE mrml SYSTEM \"http://isrpc85.epfl.ch/Charmer/code/mrml.dtd\"> \
          %1                                                                      \
@@ -249,7 +249,7 @@ QString Mrml::mrmlString( const QString& sessionId, const QString& transactionId
                   .arg( sessionId ).arg( transactionId );
 }
 
-void Mrml::emitData( const QCString& msg )
+void Mrml::emitData( const TQCString& msg )
 {
     mimeType( "text/mrml" );
     data( msg );

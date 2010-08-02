@@ -21,7 +21,7 @@ static KCmdLineOptions options[] =
 
 Worker::Worker(const KURL &url)
 {
-	m_doc = DocumentFactory::self()->requestDocument(this, SLOT(slotParsingFinished(bool, const QString &)));
+	m_doc = DocumentFactory::self()->requestDocument(this, TQT_SLOT(slotParsingFinished(bool, const TQString &)));
 
 	if(!m_doc)
 		return;
@@ -35,7 +35,7 @@ Worker::~Worker()
 	delete m_doc;
 }
 
-void Worker::slotParsingFinished(bool, const QString &)
+void Worker::slotParsingFinished(bool, const TQString &)
 {
 	SVGWindow win = m_doc->window();	
 	SVGSVGElement root = m_doc->rootElement();

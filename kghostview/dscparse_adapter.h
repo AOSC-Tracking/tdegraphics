@@ -23,8 +23,8 @@
 #include <map>
 #include <memory>
 
-#include <qsize.h>
-#include <qstring.h>
+#include <tqsize.h>
+#include <tqstring.h>
 
 #include "dscparse.h"
 
@@ -94,7 +94,7 @@ public:
     int width()  const;
     int height() const;
 
-    QSize size() const;
+    TQSize size() const;
 
 private:
     int _llx, _lly, _urx, _ury;
@@ -133,18 +133,18 @@ public:
 	Error       = CDSC_ERROR_ERROR
     };
 
-    KDSCError( Type, Severity, const QCString& line, 
+    KDSCError( Type, Severity, const TQCString& line, 
 	       unsigned int lineNumber );
     
     Type         type()       const;
     Severity     severity()   const;
-    QCString     line()       const;
+    TQCString     line()       const;
     unsigned int lineNumber() const;
     
 private:
     Type         _type;
     Severity     _severity;
-    QCString     _line;
+    TQCString     _line;
     unsigned int _lineNumber;
 };
 
@@ -266,7 +266,7 @@ public:
     ~KDSC();
 
     /*--- Adapter for CDSC ------------------------------------------------*/
-    QString dsc_version() const;
+    TQString dsc_version() const;
     
     bool dsc()   const;
     bool ctrld() const;
@@ -314,10 +314,10 @@ public:
 
     // CDSCDOSEPS *doseps;
 
-    QString dsc_title()   const;
-    QString dsc_creator() const;
-    QString dsc_date()    const;
-    QString dsc_for()     const;
+    TQString dsc_title()   const;
+    TQString dsc_creator() const;
+    TQString dsc_date()    const;
+    TQString dsc_for()     const;
 
     // unsigned int max_error
    

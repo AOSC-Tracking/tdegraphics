@@ -21,15 +21,15 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 #include <kdialog.h>
 
 
-PMSlopeEdit::PMSlopeEdit( QWidget* parent, const char* name )
+PMSlopeEdit::PMSlopeEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,25 +37,25 @@ PMSlopeEdit::PMSlopeEdit( QWidget* parent, const char* name )
 
 void PMSlopeEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
-   QGridLayout* gl;
+   TQHBoxLayout* hl;
+   TQGridLayout* gl;
 
    Base::createTopWidgets( );
 
-   QLabel* label = new QLabel( i18n( "Height:" ), this );
+   TQLabel* label = new TQLabel( i18n( "Height:" ), this );
    m_pHeightEdit = new PMFloatEdit( this );
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 2, 2 );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 2, 2 );
    gl->addWidget( label, 0, 0 );
    gl->addWidget( m_pHeightEdit, 0, 1 );
-   label = new QLabel( i18n( "Slope:" ), this );
+   label = new TQLabel( i18n( "Slope:" ), this );
    m_pSlopeEdit = new PMFloatEdit( this );
    gl->addWidget( label, 1, 0 );
    gl->addWidget( m_pSlopeEdit, 1, 1 );
    hl->addStretch( 1 );
    
-   connect( m_pHeightEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeEdit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pHeightEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMSlopeEdit::displayObject( PMObject* o )

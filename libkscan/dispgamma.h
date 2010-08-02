@@ -20,10 +20,10 @@
 #ifndef DISPGAMMA_H
 #define DISPGAMMA_H
 
-#include <qwidget.h>
-#include <qsizepolicy.h>
-#include <qsize.h>
-#include <qmemarray.h>
+#include <tqwidget.h>
+#include <tqsizepolicy.h>
+#include <tqsize.h>
+#include <tqmemarray.h>
 
 extern "C"{
 #include <sane/sane.h>
@@ -33,26 +33,26 @@ extern "C"{
   *@author Klaas Freitag
   */
 
-class DispGamma : public QWidget  {
+class DispGamma : public TQWidget  {
     Q_OBJECT
 public: 
-    DispGamma( QWidget *parent );
+    DispGamma( TQWidget *parent );
     ~DispGamma();
 
-    QSize sizeHint( void );
-    QSizePolicy sizePolicy( void );
+    TQSize sizeHint( void );
+    TQSizePolicy sizePolicy( void );
 
-    void setValueRef( QMemArray<SANE_Word> *newVals )
+    void setValueRef( TQMemArray<SANE_Word> *newVals )
     {
         vals = newVals;
     }
 protected:
-    void paintEvent (QPaintEvent *ev );
-    void resizeEvent( QResizeEvent* );
+    void paintEvent (TQPaintEvent *ev );
+    void resizeEvent( TQResizeEvent* );
 
 private:
 
-    QMemArray<SANE_Word> *vals;
+    TQMemArray<SANE_Word> *vals;
     int margin;
 
    class DispGammaPrivate;

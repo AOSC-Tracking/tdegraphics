@@ -23,13 +23,13 @@
 
 #include "kpreferencesmodule.h"
 
-class QCheckBox;
+class TQCheckBox;
 
 class KViewPresenterConfModule : public KPreferencesModule
 {
 	Q_OBJECT
 	public:
-		KViewPresenterConfModule( QObject * parent );
+		KViewPresenterConfModule( TQObject * parent );
 		~KViewPresenterConfModule();
 
 	signals:
@@ -38,10 +38,10 @@ class KViewPresenterConfModule : public KPreferencesModule
 	protected:
 		virtual void applyChanges();
 		virtual void reset();
-		virtual void createPage( QFrame * page );
+		virtual void createPage( TQFrame * page );
 
 	private:
-		QCheckBox * m_pCheckBox;
+		TQCheckBox * m_pCheckBox;
 };
 
 // vim:sw=4:ts=4

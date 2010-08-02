@@ -17,12 +17,12 @@
 
 #include "pmactions.h"
 
-#include <qcombobox.h>
-#include <qwhatsthis.h>
-#include <qspinbox.h>
-#include <qlabel.h>
-#include <qstyle.h>
-#include <qpainter.h>
+#include <tqcombobox.h>
+#include <tqwhatsthis.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
+#include <tqstyle.h>
+#include <tqpainter.h>
 #include <ktoolbar.h>
 #include <ktoolbarbutton.h>
 
@@ -34,25 +34,25 @@
 class PMComboBox : public QComboBox
 {
 public:
-   PMComboBox( QWidget* parent, const char* name = 0 )
-         : QComboBox( parent, name )
+   PMComboBox( TQWidget* parent, const char* name = 0 )
+         : TQComboBox( parent, name )
    {
    }
 
-   virtual QSize minimumSizeHint( ) const
+   virtual TQSize minimumSizeHint( ) const
    {
-      QSize s = QComboBox::minimumSizeHint( );
+      TQSize s = TQComboBox::minimumSizeHint( );
       return s.expandedTo( minimumSize( ) );
    }
-   virtual QSize sizeHint( ) const
+   virtual TQSize sizeHint( ) const
    {
-      QSize s = QComboBox::sizeHint( );
+      TQSize s = TQComboBox::sizeHint( );
       return s.expandedTo( minimumSize( ) );
    }
 };
 
-PMComboAction::PMComboAction( const QString& text, int accel, const QObject* receiver, const char* member,
-                              QObject* parent, const char* name )
+PMComboAction::PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
+                              TQObject* parent, const char* name )
       : KAction( text, accel, parent, name )
 {
    m_receiver = receiver;
@@ -65,7 +65,7 @@ PMComboAction::~PMComboAction( )
 {
 }
 
-int PMComboAction::plug( QWidget* w, int index )
+int PMComboAction::plug( TQWidget* w, int index )
 {
    if( !w->inherits( "KToolBar" ) )
       return -1;
@@ -74,7 +74,7 @@ int PMComboAction::plug( QWidget* w, int index )
 
    int id = KAction::getToolButtonID( );
 
-   QComboBox* comboBox = new PMComboBox( toolBar );
+   TQComboBox* comboBox = new PMComboBox( toolBar );
    if( m_minWidth > 0 )
       comboBox->setMinimumWidth( m_minWidth );
    if( m_maxWidth > 0 )
@@ -82,11 +82,11 @@ int PMComboAction::plug( QWidget* w, int index )
 
    toolBar->insertWidget( id, m_minWidth > 0 ? m_minWidth : 300,
                           comboBox, index );
-   connect( comboBox, SIGNAL( activated( int ) ), m_receiver, m_member );
+   connect( comboBox, TQT_SIGNAL( activated( int ) ), m_receiver, m_member );
 
    addContainer( toolBar, id );
 
-   connect( toolBar, SIGNAL( destroyed( ) ), this, SLOT( slotDestroyed( ) ) );
+   connect( toolBar, TQT_SIGNAL( destroyed( ) ), this, TQT_SLOT( slotDestroyed( ) ) );
 
    //toolBar->setItemAutoSized( id, true );
 
@@ -94,12 +94,12 @@ int PMComboAction::plug( QWidget* w, int index )
 
    emit plugged( );
 
-   QWhatsThis::add( comboBox, whatsThis( ) );
+   TQWhatsThis::add( comboBox, whatsThis( ) );
 
    return containerCount( ) - 1;
 }
 
-void PMComboAction::unplug( QWidget *w )
+void PMComboAction::unplug( TQWidget *w )
 {
    if( !w->inherits( "KToolBar" ) )
       return;
@@ -120,40 +120,40 @@ void PMComboAction::unplug( QWidget *w )
 class PMToolBarLabel : public QToolButton
 {
 public:
-   PMToolBarLabel( const QString& text, QWidget* parent = 0, const char* name = 0 )
-         : QToolButton( parent, name )
+   PMToolBarLabel( const TQString& text, TQWidget* parent = 0, const char* name = 0 )
+         : TQToolButton( parent, name )
    {
       setText( text );
    }
 protected:
-   QSize sizeHint( ) const
+   TQSize sizeHint( ) const
    {
       int w = fontMetrics( ).width( text( ) );
       int h = fontMetrics( ).height( );
-      return QSize( w, h );
+      return TQSize( w, h );
    }
-   void drawButton( QPainter* p )
+   void drawButton( TQPainter* p )
    {
 #if ( QT_VERSION >= 300 )
       // Draw the background
-      style( ).drawComplexControl( QStyle::CC_ToolButton, p, this, rect( ), colorGroup( ),
-                                   QStyle::Style_Enabled, QStyle::SC_ToolButton );
+      style( ).drawComplexControl( TQStyle::CC_ToolButton, p, this, rect( ), colorGroup( ),
+                                   TQStyle::Style_Enabled, TQStyle::SC_ToolButton );
       // Draw the label
-      style( ).drawControl( QStyle::CE_ToolButtonLabel, p, this, rect( ), colorGroup( ),
-                            QStyle::Style_Enabled );
+      style( ).drawControl( TQStyle::CE_ToolButtonLabel, p, this, rect( ), colorGroup( ),
+                            TQStyle::Style_Enabled );
 #else
       p->drawText( rect( ), Qt::AlignVCenter | Qt::AlignLeft, text( ) );
 #endif      
    }
 };
 
-PMLabelAction::PMLabelAction( const QString &text, QObject *parent, const char *name )
+PMLabelAction::PMLabelAction( const TQString &text, TQObject *parent, const char *name )
     : KAction( text, 0, parent, name )
 {
    m_button = 0;
 }
 
-int PMLabelAction::plug( QWidget *widget, int index )
+int PMLabelAction::plug( TQWidget *widget, int index )
 {
    //do not call the previous implementation here
 
@@ -168,7 +168,7 @@ int PMLabelAction::plug( QWidget *widget, int index )
 
       addContainer( tb, id );
 
-      connect( tb, SIGNAL( destroyed( ) ), this, SLOT( slotDestroyed( ) ) );
+      connect( tb, TQT_SIGNAL( destroyed( ) ), this, TQT_SLOT( slotDestroyed( ) ) );
 
       return containerCount( ) - 1;
   }
@@ -176,7 +176,7 @@ int PMLabelAction::plug( QWidget *widget, int index )
   return -1;
 }
 
-void PMLabelAction::unplug( QWidget *widget )
+void PMLabelAction::unplug( TQWidget *widget )
 {
    if( widget->inherits( "KToolBar" ) )
    {
@@ -196,8 +196,8 @@ void PMLabelAction::unplug( QWidget *widget )
 }
 
 
-PMSpinBoxAction::PMSpinBoxAction( const QString& text, int accel, const QObject* receiver, const char* member,
-                                  QObject* parent, const char* name )
+PMSpinBoxAction::PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
+                                  TQObject* parent, const char* name )
       : KAction( text, accel, parent, name )
 {
    m_receiver = receiver;
@@ -208,7 +208,7 @@ PMSpinBoxAction::~PMSpinBoxAction( )
 {
 }
 
-int PMSpinBoxAction::plug( QWidget* w, int index )
+int PMSpinBoxAction::plug( TQWidget* w, int index )
 {
    if( !w->inherits( "KToolBar" ) )
       return -1;
@@ -217,26 +217,26 @@ int PMSpinBoxAction::plug( QWidget* w, int index )
 
    int id = KAction::getToolButtonID( );
    
-   QSpinBox* spinBox = new QSpinBox( -1000, 1000, 1, w );
+   TQSpinBox* spinBox = new TQSpinBox( -1000, 1000, 1, w );
    toolBar->insertWidget( id, 70, spinBox, index );
    
-   connect( spinBox, SIGNAL( valueChanged( int ) ), m_receiver, m_member );
+   connect( spinBox, TQT_SIGNAL( valueChanged( int ) ), m_receiver, m_member );
 
    addContainer( toolBar, id );
 
-   connect( toolBar, SIGNAL( destroyed( ) ), this, SLOT( slotDestroyed( ) ) );
+   connect( toolBar, TQT_SIGNAL( destroyed( ) ), this, TQT_SLOT( slotDestroyed( ) ) );
    //toolBar->setItemAutoSized( id, false );
 
    m_spinBox = spinBox;
 
    emit plugged( );
 
-   QWhatsThis::add( spinBox, whatsThis( ) );
+   TQWhatsThis::add( spinBox, whatsThis( ) );
 
    return containerCount( ) - 1;
 }
 
-void PMSpinBoxAction::unplug( QWidget *w )
+void PMSpinBoxAction::unplug( TQWidget *w )
 {
    if( !w->inherits( "KToolBar" ) )
       return;

@@ -18,13 +18,13 @@
 
 #include "pmoutputdevice.h"
 #include "pmpovrayformat.h"
-#include <qtextstream.h>
+#include <tqtextstream.h>
 #include <klocale.h>
 
 unsigned int PMOutputDevice::s_indentOffset = 3;
 bool PMOutputDevice::s_bracketBehindType = true;
 
-PMOutputDevice::PMOutputDevice( QIODevice* dev, PMPovrayFormat* format )
+PMOutputDevice::PMOutputDevice( TQIODevice* dev, PMPovrayFormat* format )
       : PMSerializer( dev ), m_stream( dev )
 {
    m_pFormat = format;
@@ -38,9 +38,9 @@ PMOutputDevice::~PMOutputDevice( )
 {
 }
 
-QString PMOutputDevice::description( ) const
+TQString PMOutputDevice::description( ) const
 {
-   return QString( "POV-Ray" );
+   return TQString( "POV-Ray" );
 }
 
 void PMOutputDevice::callSerialization( const PMObject* o, const PMMetaObject* mo )
@@ -78,7 +78,7 @@ void PMOutputDevice::close( )
 //   m_stream << ( char ) 0;
 }
 
-void PMOutputDevice::objectBegin( const QString& type )
+void PMOutputDevice::objectBegin( const TQString& type )
 {
    if( m_pendingNewLine )
       newLine( );
@@ -97,7 +97,7 @@ void PMOutputDevice::objectBegin( const QString& type )
    m_objectSeparation = false;
 }
 
-void PMOutputDevice::declareBegin( const QString& id )
+void PMOutputDevice::declareBegin( const TQString& id )
 {
    if( m_pendingNewLine )
       newLine( );
@@ -118,7 +118,7 @@ void PMOutputDevice::objectEnd( )
    m_objectSeparation = true;
 }
 
-void PMOutputDevice::writeLine( const QString& str )
+void PMOutputDevice::writeLine( const TQString& str )
 {
    if( m_pendingNewLine )
       newLine( );
@@ -127,7 +127,7 @@ void PMOutputDevice::writeLine( const QString& str )
    m_objectSeparation = true;
 }
 
-void PMOutputDevice::write( const QString& str )
+void PMOutputDevice::write( const TQString& str )
 {
    if( m_pendingNewLine )
       newLine( );
@@ -142,10 +142,10 @@ void PMOutputDevice::newLine( )
    m_stream << '\n' << m_indentString;
 }
 
-void PMOutputDevice::writeComment( const QString& text )
+void PMOutputDevice::writeComment( const TQString& text )
 {
-   QString s( text );
-   QTextStream str( &s, IO_ReadOnly );
+   TQString s( text );
+   TQTextStream str( &s, IO_ReadOnly );
 
    bool lwc = m_lastWasComment;
    if( m_pendingNewLine )
@@ -158,7 +158,7 @@ void PMOutputDevice::writeComment( const QString& text )
       writeLine( "//" );
    else
       while( !str.atEnd( ) )
-         writeLine( QString( "// " ) + str.readLine( ) );
+         writeLine( TQString( "// " ) + str.readLine( ) );
    m_lastWasComment = true;
    m_objectSeparation = false;
 }
@@ -169,18 +169,18 @@ void PMOutputDevice::writeSemicolon( )
    m_stream << ';';
 }
 
-void PMOutputDevice::writeName( const QString& name )
+void PMOutputDevice::writeName( const TQString& name )
 {
    if( !name.isEmpty( ) )
-      writeLine( QString( "//*PMName " ) + name );
+      writeLine( TQString( "//*PMName " ) + name );
 }
 
-QString PMOutputDevice::escapeAndQuoteString( const QString& s )
+TQString PMOutputDevice::escapeAndQuoteString( const TQString& s )
 {
-   QString result = "\"";
-   QString tmp = s;
-   QTextStream stream( &tmp, IO_ReadOnly );
-   QChar current, last;
+   TQString result = "\"";
+   TQString tmp = s;
+   TQTextStream stream( &tmp, IO_ReadOnly );
+   TQChar current, last;
 
    while( !stream.atEnd( ) )
    {
@@ -191,7 +191,7 @@ QString PMOutputDevice::escapeAndQuoteString( const QString& s )
       result += current;
       // correctly quoted backslash
       if( ( last == '\\' ) && ( current == '\\' ) )
-         current = QChar( 0 ); // clear the last char
+         current = TQChar( 0 ); // clear the last char
       last = current;
    }
    // backslash at the end

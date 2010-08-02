@@ -33,8 +33,8 @@
 #include <kpcoloreffect.h>
 
 
-class QCheckBox;
-class QImage;
+class TQCheckBox;
+class TQImage;
 
 class kpMainWindow;
 
@@ -59,7 +59,7 @@ public:
 
     //
     // Inverts the colours of each pixel in the given image.
-    // These functions differ from QImage::invertPixels() in the following ways:
+    // These functions differ from TQImage::invertPixels() in the following ways:
     //
     // 1. for 8-bit images, it inverts the colours of the Colour Table
     //    (this means that you would get visually similar results to inversion
@@ -68,10 +68,10 @@ public:
     // 2. never inverts the Alpha Buffer
     //
 
-    static void apply (QPixmap *destPixmapPtr, int channels = RGB);
-    static QPixmap apply (const QPixmap &pm, int channels = RGB);
-    static void apply (QImage *destImagePtr, int channels = RGB);
-    static QImage apply (const QImage &img, int channels = RGB);
+    static void apply (TQPixmap *destPixmapPtr, int channels = RGB);
+    static TQPixmap apply (const TQPixmap &pm, int channels = RGB);
+    static void apply (TQImage *destImagePtr, int channels = RGB);
+    static TQImage apply (const TQImage &img, int channels = RGB);
 
 
     //
@@ -82,7 +82,7 @@ public:
     virtual bool isInvertible () const { return true; }
 
 protected:
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     int m_channels;
 };
@@ -95,7 +95,7 @@ Q_OBJECT
 public:
     kpEffectInvertWidget (bool actOnSelection,
                           kpMainWindow *mainWindow,
-                          QWidget *parent, const char *name = 0);
+                          TQWidget *parent, const char *name = 0);
     virtual ~kpEffectInvertWidget ();
 
 
@@ -106,10 +106,10 @@ public:
     // kpColorEffectWidget interface
     //
 
-    virtual QString caption () const;
+    virtual TQString caption () const;
 
     virtual bool isNoOp () const;
-    virtual QPixmap applyColorEffect (const QPixmap &pixmap);
+    virtual TQPixmap applyColorEffect (const TQPixmap &pixmap);
 
     virtual kpColorEffectCommand *createCommand () const;
 
@@ -118,7 +118,7 @@ protected slots:
     void slotAllCheckBoxToggled ();
 
 protected:
-    QCheckBox *m_redCheckBox, *m_greenCheckBox, *m_blueCheckBox,
+    TQCheckBox *m_redCheckBox, *m_greenCheckBox, *m_blueCheckBox,
               *m_allCheckBox;
 
     // blockSignals() didn't seem to work

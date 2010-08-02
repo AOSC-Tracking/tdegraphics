@@ -11,13 +11,13 @@
 #include <kmessagebox.h>
 #include <kparts/componentfactory.h>
 
-#include <qimage.h>
+#include <tqimage.h>
 
 KImageViewerTest::KImageViewerTest()
     : KParts::MainWindow( 0L, "KImageViewerTest" )
 {
-	QWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<QWidget>(
-			"KImageViewer/Canvas", QString::null, this );
+	TQWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<TQWidget>(
+			"KImageViewer/Canvas", TQString::null, this );
     if( widget )
     {
 		m_part = dynamic_cast<KImageViewer::Canvas *>( widget );
@@ -36,7 +36,7 @@ KImageViewerTest::~KImageViewerTest()
 
 void KImageViewerTest::load(const KURL& url)
 {
-	QImage image( url.fileName() );
+	TQImage image( url.fileName() );
 	if( m_part )
 		m_part->setImage( image );
 	else

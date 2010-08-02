@@ -29,14 +29,14 @@
  */
 #include <kfilemetainfo.h>
 
-class QStringList;
+class TQStringList;
 
 class xpmPlugin: public KFilePlugin
 {
   Q_OBJECT
 
   public:
-    xpmPlugin(QObject *parent, const char *name, const QStringList& args);
+    xpmPlugin(TQObject *parent, const char *name, const TQStringList& args);
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 };

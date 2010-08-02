@@ -42,15 +42,15 @@
 #include <kstdaccel.h>
 #include <kprogress.h>
 
-#include <qimage.h>
-#include <qsize.h>
-#include <qscrollbar.h>
-#include <qstyle.h>
-#include <qclipboard.h>
-#include <qdragobject.h>
-#include <qvaluelist.h>
-#include <qtimer.h>
-#include <qdockarea.h>
+#include <tqimage.h>
+#include <tqsize.h>
+#include <tqscrollbar.h>
+#include <tqstyle.h>
+#include <tqclipboard.h>
+#include <tqdragobject.h>
+#include <tqvaluelist.h>
+#include <tqtimer.h>
+#include <tqdockarea.h>
 
 #include <assert.h>
 #include <kplugininfo.h>
@@ -82,28 +82,28 @@ KView::KView()
 
 		setStandardToolBarMenuEnabled( true );
 
-		connect( part->widget(), SIGNAL( imageSizeChanged( const QSize & ) ),
-				SLOT( imageSizeChanged( const QSize & ) ) );
-		connect( part->widget(), SIGNAL( selectionChanged( const QRect & ) ),
-				SLOT( selectionChanged( const QRect & ) ) );
-		connect( part->widget(), SIGNAL( contextPress( const QPoint & ) ),
-				SLOT( contextPress( const QPoint & ) ) );
+		connect( part->widget(), TQT_SIGNAL( imageSizeChanged( const TQSize & ) ),
+				TQT_SLOT( imageSizeChanged( const TQSize & ) ) );
+		connect( part->widget(), TQT_SIGNAL( selectionChanged( const TQRect & ) ),
+				TQT_SLOT( selectionChanged( const TQRect & ) ) );
+		connect( part->widget(), TQT_SIGNAL( contextPress( const TQPoint & ) ),
+				TQT_SLOT( contextPress( const TQPoint & ) ) );
 
-		connect( QApplication::clipboard(), SIGNAL( dataChanged() ),
-				SLOT( clipboardDataChanged() ) );
+		connect( TQApplication::clipboard(), TQT_SIGNAL( dataChanged() ),
+				TQT_SLOT( clipboardDataChanged() ) );
 
-		connect( m_pViewer, SIGNAL( started( KIO::Job * ) ),
-				this, SLOT( jobStarted( KIO::Job * ) ) );
-		connect( m_pViewer, SIGNAL( completed() ),
-				this, SLOT( jobCompleted() ) );
-		connect( m_pViewer, SIGNAL( completed( bool ) ),
-				this, SLOT( jobCompleted( bool ) ) );
-		connect( m_pViewer, SIGNAL( canceled( const QString & ) ),
-				this, SLOT( jobCanceled( const QString & ) ) );
-		connect( m_pViewer, SIGNAL( imageOpened( const KURL & ) ),
-				m_paRecent, SLOT( addURL( const KURL & ) ) );
+		connect( m_pViewer, TQT_SIGNAL( started( KIO::Job * ) ),
+				this, TQT_SLOT( jobStarted( KIO::Job * ) ) );
+		connect( m_pViewer, TQT_SIGNAL( completed() ),
+				this, TQT_SLOT( jobCompleted() ) );
+		connect( m_pViewer, TQT_SIGNAL( completed( bool ) ),
+				this, TQT_SLOT( jobCompleted( bool ) ) );
+		connect( m_pViewer, TQT_SIGNAL( canceled( const TQString & ) ),
+				this, TQT_SLOT( jobCanceled( const TQString & ) ) );
+		connect( m_pViewer, TQT_SIGNAL( imageOpened( const KURL & ) ),
+				m_paRecent, TQT_SLOT( addURL( const KURL & ) ) );
 
-		connect( m_pCanvas->widget(), SIGNAL( cursorPos( const QPoint & ) ), SLOT( cursorPos( const QPoint & ) ) );
+		connect( m_pCanvas->widget(), TQT_SIGNAL( cursorPos( const TQPoint & ) ), TQT_SLOT( cursorPos( const TQPoint & ) ) );
 
 		m_paRecent->loadEntries( KGlobal::config() );
 		if (!initialGeometrySet())
@@ -112,7 +112,7 @@ KView::KView()
 		m_pViewer->widget()->installEventFilter( this );
 
 		// reload configuration when it's changed by the conf dlg
-		KSettings::Dispatcher::self()->registerInstance( instance(), this, SLOT( readSettings() ) );
+		KSettings::Dispatcher::self()->registerInstance( instance(), this, TQT_SLOT( readSettings() ) );
 
 		setPluginLoadingMode( LoadPluginsIfEnabled );
 		createGUI( part );
@@ -126,7 +126,7 @@ KView::KView()
 		statusBar()->insertItem( "", STATUSBAR_SIZE_ID, 0, true );
 		statusBar()->setItemFixed( STATUSBAR_SIZE_ID, 8 + fontMetrics().width( "8888 x 8888" ) );
 
-		statusBar()->insertItem( QString::null, STATUSBAR_SELECTION_ID );
+		statusBar()->insertItem( TQString::null, STATUSBAR_SELECTION_ID );
 
 		m_pProgressBar = new KProgress( statusBar() );
 		m_pProgressBar->setFixedSize( 140, fontMetrics().height() );
@@ -145,7 +145,7 @@ KView::KView()
 	else
 	{
 		KMessageBox::error( this, i18n( "An error occurred while loading the KViewViewer KPart. Check your installation." ) );
-		QTimer::singleShot( 0, kapp, SLOT( quit() ) );
+		TQTimer::singleShot( 0, kapp, TQT_SLOT( quit() ) );
 	}
 }
 
@@ -163,14 +163,14 @@ void KView::load( const KURL & url )
 		if( url.isLocalFile() )
 		{
 			// XXX: this code is what
-			//KRecentDirs::add( QString::fromLatin1( ":load_image" ), url.directory() );
+			//KRecentDirs::add( TQString::fromLatin1( ":load_image" ), url.directory() );
 			// would do:
-			QString directory = url.directory();
-			QString key = QString::fromLatin1( "load_image" );
+			TQString directory = url.directory();
+			TQString key = TQString::fromLatin1( "load_image" );
 			KConfig * config = KGlobal::config();
 
-			config->setGroup( QString::fromLatin1( "Recent Dirs" ) );
-			QStringList result = config->readPathListEntry( key );
+			config->setGroup( TQString::fromLatin1( "Recent Dirs" ) );
+			TQStringList result = config->readPathListEntry( key );
 			// make sure the dir is first in history
 			result.remove( directory );
 			result.prepend( directory );
@@ -186,15 +186,15 @@ void KView::loadFromStdin()
 {
 	if( m_pViewer )
 	{
-		QFile file;
+		TQFile file;
 		file.open( IO_ReadOnly, stdin );
-		QImage image( file.readAll() );
+		TQImage image( file.readAll() );
 		file.close();
 		m_pViewer->newImage( image );
 	}
 }
 
-QSize KView::sizeForCentralWidgetSize( QSize size )
+TQSize KView::sizeForCentralWidgetSize( TQSize size )
 {
 	// add size of the dockareas
 	kdDebug( 4600 ) << "sizeForCentralWidgetSize " << size << endl;
@@ -208,7 +208,7 @@ QSize KView::sizeForCentralWidgetSize( QSize size )
 	if( ! mb->isHidden() )
 	{
 		size.rheight() += mb->heightForWidth( width() );
-		if( style().styleHint( QStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
+		if( style().styleHint( TQStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
 			size.rheight() += dockWindowsMovable() ? 1 : 2;
 	}
 	kdDebug( 4600 ) << "added Menubar:           " << size << endl;
@@ -249,9 +249,9 @@ void KView::readSettings() // KConfig * config )
 	loadPlugins();
 }
 
-bool KView::eventFilter( QObject * obj, QEvent * ev )
+bool KView::eventFilter( TQObject * obj, TQEvent * ev )
 {
-	if( obj == m_pViewer->widget() && ev->type() == QEvent::Resize )
+	if( obj == m_pViewer->widget() && ev->type() == TQEvent::Resize )
 	{
 		if( m_nResizeMode == ResizeImage )
 			handleResize();
@@ -259,26 +259,26 @@ bool KView::eventFilter( QObject * obj, QEvent * ev )
 	return KParts::MainWindow::eventFilter( obj, ev );
 }
 
-void KView::imageSizeChanged( const QSize & /*size*/ )
+void KView::imageSizeChanged( const TQSize & /*size*/ )
 {
-	QSize size = m_pCanvas->imageSize();
-	statusBar()->changeItem( QString( "%1 x %2" ).arg( size.width() ).arg( size.height() ), STATUSBAR_SIZE_ID );
+	TQSize size = m_pCanvas->imageSize();
+	statusBar()->changeItem( TQString( "%1 x %2" ).arg( size.width() ).arg( size.height() ), STATUSBAR_SIZE_ID );
 	handleResize();
 }
 
-void KView::selectionChanged( const QRect & rect )
+void KView::selectionChanged( const TQRect & rect )
 {
 	kdDebug( 4600 ) << k_funcinfo << rect << endl;
 	if( rect.isNull() )
-		statusBar()->changeItem( QString::null, STATUSBAR_SELECTION_ID );
+		statusBar()->changeItem( TQString::null, STATUSBAR_SELECTION_ID );
 	else
-		statusBar()->changeItem( QString( "%1, %2 - %3 x %4" ).arg( rect.x() ).arg( rect.y() ).arg( rect.width() ).arg( rect.height() ), STATUSBAR_SELECTION_ID );
+		statusBar()->changeItem( TQString( "%1, %2 - %3 x %4" ).arg( rect.x() ).arg( rect.y() ).arg( rect.width() ).arg( rect.height() ), STATUSBAR_SELECTION_ID );
 	action( "crop" )->setEnabled( ! rect.isNull() );
 }
 
-void KView::contextPress( const QPoint & point )
+void KView::contextPress( const TQPoint & point )
 {
-	QPopupMenu * pop = ( QPopupMenu* )factory()->container( "popupmenu", this );
+	TQPopupMenu * pop = ( TQPopupMenu* )factory()->container( "popupmenu", this );
 	pop->popup( point );
 }
 
@@ -301,10 +301,10 @@ void KView::slotClose()
 
 void KView::slotCopy()
 {
-	QClipboard *cb = QApplication::clipboard();
+	QClipboard *cb = TQApplication::clipboard();
 	cb->setSelectionMode( false );
 
-	QRect selectarea = m_pCanvas->selection();
+	TQRect selectarea = m_pCanvas->selection();
 	if( selectarea.isEmpty() )
 	{
 		kdDebug( 4600 ) << k_funcinfo << " copy whole image" << endl;
@@ -319,21 +319,21 @@ void KView::slotCopy()
 
 void KView::slotPaste()
 {
-	// Get QImage from clipboard and create a new image.
-	QClipboard *cb = QApplication::clipboard();
-    QImage img = cb->image();
+	// Get TQImage from clipboard and create a new image.
+	QClipboard *cb = TQApplication::clipboard();
+    TQImage img = cb->image();
 	if( ! img.isNull() )
 		m_pViewer->newImage( img );
 }
 
 void KView::slotCrop()
 {
-	QRect selectarea = m_pCanvas->selection();
+	TQRect selectarea = m_pCanvas->selection();
 	kdDebug( 4600 ) << "Crop following area: " << selectarea.x() << ", " << selectarea.y() << ", " << selectarea.width() << ", " << selectarea.height() << endl;
 
 	if( selectarea.isNull() )
 		return;
-	const QImage * origimg = m_pCanvas->image();
+	const TQImage * origimg = m_pCanvas->image();
 	if( origimg == 0 )
 		return;
 
@@ -387,7 +387,7 @@ void KView::slotConfigureToolbars()
 {
 	saveMainWindowSettings( KGlobal::config(), "MainWindow" );
 	KEditToolbar dlg( factory() );
-	connect( &dlg, SIGNAL( newToolbarConfig() ), SLOT( slotNewToolbarConfig() ) );
+	connect( &dlg, TQT_SIGNAL( newToolbarConfig() ), TQT_SLOT( slotNewToolbarConfig() ) );
 	dlg.exec();
 }
 
@@ -412,9 +412,9 @@ void KView::enableAction( const char * name, bool b )
 
 void KView::clipboardDataChanged()
 {
-	QClipboard * cb = QApplication::clipboard();
+	QClipboard * cb = TQApplication::clipboard();
 	cb->setSelectionMode( false );
-	bool hasImage = QImageDrag::canDecode( cb->data( QClipboard::Clipboard ) );
+	bool hasImage = TQImageDrag::canDecode( cb->data( QClipboard::Clipboard ) );
 	m_paPaste->setEnabled( hasImage );
 }
 
@@ -422,9 +422,9 @@ void KView::jobStarted( KIO::Job * job )
 {
 	if( job )
 	{
-		connect( job, SIGNAL( percent( KIO::Job *, unsigned long ) ), this, SLOT( loadingProgress( KIO::Job *, unsigned long ) ) );
-		connect( job, SIGNAL( speed(   KIO::Job *, unsigned long ) ), this, SLOT( speedProgress(   KIO::Job *, unsigned long ) ) );
-		//connect( job, SIGNAL( infoMessage( KIO::Job *, const QString & ) ), this, SLOT() );
+		connect( job, TQT_SIGNAL( percent( KIO::Job *, unsigned long ) ), this, TQT_SLOT( loadingProgress( KIO::Job *, unsigned long ) ) );
+		connect( job, TQT_SIGNAL( speed(   KIO::Job *, unsigned long ) ), this, TQT_SLOT( speedProgress(   KIO::Job *, unsigned long ) ) );
+		//connect( job, TQT_SIGNAL( infoMessage( KIO::Job *, const TQString & ) ), this, TQT_SLOT() );
 		loadingProgress( job, 0 );
 		speedProgress( job, 0 );
 	}
@@ -441,7 +441,7 @@ void KView::jobCompleted( bool /*hasPending*/ )
 	statusBar()->changeItem( "", STATUSBAR_SPEED_ID );
 }
 
-void KView::jobCanceled( const QString & errorMsg )
+void KView::jobCanceled( const TQString & errorMsg )
 {
 	statusBar()->message( errorMsg );
 	jobCompleted();
@@ -463,7 +463,7 @@ void KView::loadingProgress( KIO::Job *, unsigned long percent )
 
 void KView::speedProgress( KIO::Job *, unsigned long bytesPerSecond )
 {
-	QString sizeStr;
+	TQString sizeStr;
 
 	if( bytesPerSecond > 0 )
 		sizeStr = i18n( "%1/s" ).arg( KIO::convertSize( bytesPerSecond ) );
@@ -473,7 +473,7 @@ void KView::speedProgress( KIO::Job *, unsigned long bytesPerSecond )
 	statusBar()->changeItem( sizeStr, STATUSBAR_SPEED_ID );
 }
 
-void KView::slotSetStatusBarText( const QString & msg )
+void KView::slotSetStatusBarText( const TQString & msg )
 {
 	kdDebug( 4600 ) << k_funcinfo << endl;
 	statusBar()->message( msg );
@@ -481,59 +481,59 @@ void KView::slotSetStatusBarText( const QString & msg )
 		KMessageBox::information( this, msg );
 }
 
-void KView::cursorPos( const QPoint & pos )
+void KView::cursorPos( const TQPoint & pos )
 {
-	statusBar()->changeItem( QString( "%1, %2" ).arg( pos.x() ).arg( pos.y() ), STATUSBAR_CURSOR_ID );
+	statusBar()->changeItem( TQString( "%1, %2" ).arg( pos.x() ).arg( pos.y() ), STATUSBAR_CURSOR_ID );
 }
 
-void KView::setupActions( QObject * partobject )
+void KView::setupActions( TQObject * partobject )
 {
 	// File
-	KStdAction::open( this, SLOT( slotOpenFile() ), actionCollection() );
-	m_paRecent = KStdAction::openRecent( this, SLOT( slotOpenRecent( const KURL & ) ), actionCollection() );
-	KAction * aClose = KStdAction::close( this, SLOT( slotClose() ), actionCollection() );
+	KStdAction::open( this, TQT_SLOT( slotOpenFile() ), actionCollection() );
+	m_paRecent = KStdAction::openRecent( this, TQT_SLOT( slotOpenRecent( const KURL & ) ), actionCollection() );
+	KAction * aClose = KStdAction::close( this, TQT_SLOT( slotClose() ), actionCollection() );
 	aClose->setEnabled( false );
-	connect( m_pViewer->widget(), SIGNAL( hasImage( bool ) ), aClose, SLOT( setEnabled( bool ) ) );
+	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aClose, TQT_SLOT( setEnabled( bool ) ) );
 
-	QObject * extension = partobject->child( 0, "KParts::BrowserExtension", false );
+	TQObject * extension = partobject->child( 0, "KParts::BrowserExtension", false );
 	if( extension )
 	{
-		QStrList slotNames = extension->metaObject()->slotNames();
+		TQStrList slotNames = extension->metaObject()->slotNames();
 		if( slotNames.contains( "print()" ) )
-			KStdAction::print( extension, SLOT( print() ), actionCollection(), "print" );
+			KStdAction::print( extension, TQT_SLOT( print() ), actionCollection(), "print" );
 		if( slotNames.contains( "del()" ) )
 			( void )new KAction( i18n( "&Delete" ), "editdelete", SHIFT+Key_Delete,
-								 extension, SLOT( del() ), actionCollection(), "del" );
-		connect( extension, SIGNAL( enableAction( const char *, bool ) ), SLOT( enableAction( const char *, bool ) ) );
+								 extension, TQT_SLOT( del() ), actionCollection(), "del" );
+		connect( extension, TQT_SIGNAL( enableAction( const char *, bool ) ), TQT_SLOT( enableAction( const char *, bool ) ) );
 	}
-	KStdAction::quit( this, SLOT( close() ), actionCollection() );
+	KStdAction::quit( this, TQT_SLOT( close() ), actionCollection() );
 
 	// Edit
-	KAction * aCopy = KStdAction::copy( this, SLOT( slotCopy() ), actionCollection() );
+	KAction * aCopy = KStdAction::copy( this, TQT_SLOT( slotCopy() ), actionCollection() );
 	aCopy->setEnabled( false );
-	connect( m_pViewer->widget(), SIGNAL( hasImage( bool ) ), aCopy, SLOT( setEnabled( bool ) ) );
-	m_paPaste = KStdAction::paste( this, SLOT( slotPaste() ), actionCollection() );
+	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aCopy, TQT_SLOT( setEnabled( bool ) ) );
+	m_paPaste = KStdAction::paste( this, TQT_SLOT( slotPaste() ), actionCollection() );
 	clipboardDataChanged(); //enable or disable paste
-	KAction * aCrop = new KAction( i18n( "Cr&op" ), Key_C, this, SLOT( slotCrop() ), actionCollection(), "crop" );
+	KAction * aCrop = new KAction( i18n( "Cr&op" ), Key_C, this, TQT_SLOT( slotCrop() ), actionCollection(), "crop" );
 	aCrop->setEnabled( false );
 
 	KAction * aReload = new KAction( i18n( "&Reload" ), "reload", KStdAccel::shortcut( KStdAccel::Reload ), partobject,
-			SLOT( reload() ), actionCollection(), "reload" );
+			TQT_SLOT( reload() ), actionCollection(), "reload" );
 	aReload->setEnabled( false );
-	connect( m_pViewer->widget(), SIGNAL( hasImage( bool ) ), aReload, SLOT( setEnabled( bool ) ) );
+	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aReload, TQT_SLOT( setEnabled( bool ) ) );
 
 	// Settings
-	m_paShowMenubar = KStdAction::showMenubar( this, SLOT( slotToggleMenubar() ), actionCollection() );
+	m_paShowMenubar = KStdAction::showMenubar( this, TQT_SLOT( slotToggleMenubar() ), actionCollection() );
 	createStandardStatusBarAction();
 	m_paShowStatusBar = ::qt_cast<KToggleAction*>( action( "options_show_statusbar" ) );
 	if( m_paShowStatusBar )
-		connect( m_paShowStatusBar, SIGNAL( toggled( bool ) ), SLOT( statusbarToggled( bool ) ) );
+		connect( m_paShowStatusBar, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( statusbarToggled( bool ) ) );
 	m_paShowFullScreen = KStdAction::fullScreen( 0, 0, actionCollection(), this );
-	connect( m_paShowFullScreen, SIGNAL( toggled( bool )), this, SLOT( slotUpdateFullScreen( bool )));
-	KStdAction::preferences( this, SLOT( slotPreferences() ), actionCollection() );
-	KStdAction::keyBindings(guiFactory(), SLOT(configureShortcuts()), 
+	connect( m_paShowFullScreen, TQT_SIGNAL( toggled( bool )), this, TQT_SLOT( slotUpdateFullScreen( bool )));
+	KStdAction::preferences( this, TQT_SLOT( slotPreferences() ), actionCollection() );
+	KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
-	KStdAction::configureToolbars( this, SLOT( slotConfigureToolbars() ), actionCollection() );
+	KStdAction::configureToolbars( this, TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
 }
 
 void KView::handleResize()
@@ -552,13 +552,13 @@ void KView::handleResize()
 			m_pCanvas->boundImageTo( m_pViewer->widget()->size() );
 			break;
 		case BestFit:
-			QSize imageSize = m_pCanvas->imageSize();
+			TQSize imageSize = m_pCanvas->imageSize();
 			if( imageSize.isEmpty() )
 				return;
 
 			// Compare the image size and the maximum available space in the
 			// display canvas i.e. will the image fit without resizing ?
-			QSize maxCanvas = maxCanvasSize();
+			TQSize maxCanvas = maxCanvasSize();
 			if( ( maxCanvas.height() >= imageSize.height() )
 					&& ( maxCanvas.width() >= imageSize.width() ) )
 			{
@@ -588,14 +588,14 @@ void KView::fitWindowToImage()
 	bool centeredOrig = m_pCanvas->centered();
 	m_pCanvas->setCentered( false );
 
-	QSize imagesize = m_pCanvas->currentSize();
+	TQSize imagesize = m_pCanvas->currentSize();
 	if( imagesize.isEmpty() )
 		return;
 
-	QSize winsize = sizeForCentralWidgetSize( imagesize );
-	QRect workarea = m_pWinModule->workArea();
+	TQSize winsize = sizeForCentralWidgetSize( imagesize );
+	TQRect workarea = m_pWinModule->workArea();
 
-	QScrollBar * sb = new QScrollBar( Qt::Horizontal, this );
+	TQScrollBar * sb = new TQScrollBar( Qt::Horizontal, this );
 	int scrollbarwidth = sb->height();
 	delete sb;
 
@@ -614,7 +614,7 @@ void KView::fitWindowToImage()
 			winsize.setWidth( workarea.width() );
 	}
 
-	QRect winrect( geometry() );
+	TQRect winrect( geometry() );
 	winrect.setSize( winsize );
 
 	int xdiff = winrect.x() + winrect.width()  - workarea.x() - workarea.width();
@@ -636,7 +636,7 @@ void KView::fitWindowToImage()
 	m_pCanvas->setCentered( centeredOrig );
 }
 
-QSize KView::barSize( int mainwinwidth, BarSizeFrom from )
+TQSize KView::barSize( int mainwinwidth, BarSizeFrom from )
 {
 	int height = 0;
 	int width = 0;
@@ -653,7 +653,7 @@ QSize KView::barSize( int mainwinwidth, BarSizeFrom from )
 				width += toolBar()->width();
 				break;
 			case KToolBar::Flat:
-				height += kapp->style().pixelMetric( QStyle::PM_DockWindowHandleExtent );
+				height += kapp->style().pixelMetric( TQStyle::PM_DockWindowHandleExtent );
 				break;
 			case KToolBar::Floating:
 				break;
@@ -666,14 +666,14 @@ QSize KView::barSize( int mainwinwidth, BarSizeFrom from )
 	if( statusBar()->isVisibleTo( this ) )
 		height += statusBar()->height();
 
-	return QSize( width, height );
+	return TQSize( width, height );
 }
 
-QSize KView::maxCanvasSize()
+TQSize KView::maxCanvasSize()
 {
-	QSize workarea = m_pWinModule->workArea().size();
-	QSize framesize = frameSize() - size();
-	QSize maxcanvassize = workarea - framesize - barSize( workarea.width() - framesize.width(), FromWidgetSize );
+	TQSize workarea = m_pWinModule->workArea().size();
+	TQSize framesize = frameSize() - size();
+	TQSize maxcanvassize = workarea - framesize - barSize( workarea.width() - framesize.width(), FromWidgetSize );
 	kdDebug( 4600 ) << "maxcanvassize = " << maxcanvassize.width() << "x" << maxcanvassize.height() << endl;
 	return maxcanvassize;
 }

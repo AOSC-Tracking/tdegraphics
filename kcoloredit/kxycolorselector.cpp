@@ -15,15 +15,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qimage.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
 #include <kimageeffect.h>
 #include <kpalette.h>
 
 #include "kxycolorselector.h"
 
-KXYColorSelector::KXYColorSelector(QWidget *parent, const char *name) : KXYSelector(parent,name) {
+KXYColorSelector::KXYColorSelector(TQWidget *parent, const char *name) : KXYSelector(parent,name) {
 	setBackgroundMode(NoBackground);
 	setRange(0, 0, COMPONENT_SELECTION_RESOLUTION - 1, COMPONENT_SELECTION_RESOLUTION - 1);
 	setType(TYPE_NONE);
@@ -45,17 +45,17 @@ void KXYColorSelector::updateContents() {
 	repaint();
 }
 
-void KXYColorSelector::resizeEvent(QResizeEvent*) {
+void KXYColorSelector::resizeEvent(TQResizeEvent*) {
 	setValues(xValue(), yValue());
 	updateContents();
 }
 
-void KXYColorSelector::drawContents(QPainter* painter) {
+void KXYColorSelector::drawContents(TQPainter* painter) {
 	painter->drawPixmap(contentsRect().x(), contentsRect().y(), pixmap);
 }
 
-void KXYColorSelector::drawCursor(QPainter* painter, int x, int y) {
-	QColor color;
+void KXYColorSelector::drawCursor(TQPainter* painter, int x, int y) {
+	TQColor color;
 	int colorX = x - contentsRect().x();
 	int colorY = y - contentsRect().y();
 	if(colorX < 0)
@@ -67,13 +67,13 @@ void KXYColorSelector::drawCursor(QPainter* painter, int x, int y) {
 	if(colorY > contentsRect().height() - 1)
 		colorY = contentsRect().height() - 1;
 	setColor(&color, colorX, colorY);
-	QColor cursorColor;
+	TQColor cursorColor;
 	if(( 2*color.red() + 4*color.green() + 1*color.blue() )*1.0/
 		( 2*255 + 4*255 + 1*255 ) > 0.65)
 		cursorColor = Qt::black;
 	else
 		cursorColor = Qt::white;
-	painter->setPen(QPen( cursorColor ));
+	painter->setPen(TQPen( cursorColor ));
 	const int lineBegin = 2;
 	const int lineEnd = 6;
 	painter->drawLine(x + lineBegin, y - lineBegin, x + lineEnd, y - lineEnd);
@@ -90,7 +90,7 @@ int KXYColorSelector::globalComponent() const{
 	return m_globalComponent;
 }
 
-void KXYColorSelector::setColor(QColor* const color, const int x, const int y) {
+void KXYColorSelector::setColor(TQColor* const color, const int x, const int y) {
 	int xSize = contentsRect().width();
 	int ySize = contentsRect().height();
 	switch(type) {
@@ -131,8 +131,8 @@ void KXYColorSelector::setColor(QColor* const color, const int x, const int y) {
 	}
 }
 
-QColor* KXYColorSelector::standardColorsPalette() {
-	QColor* palette = new QColor[STANDARD_PALETTE_SIZE];
+TQColor* KXYColorSelector::standardColorsPalette() {
+	TQColor* palette = new QColor[STANDARD_PALETTE_SIZE];
 	int i = 0;
 	palette[i++] = Qt::red;
 	palette[i++] = Qt::green;
@@ -154,11 +154,11 @@ QColor* KXYColorSelector::standardColorsPalette() {
 	return palette;
 }
 
-void KXYColorSelector::drawPalette(QPixmap* pixmap) {
+void KXYColorSelector::drawPalette(TQPixmap* pixmap) {
 	int xSize = contentsRect().width();
 	int ySize = contentsRect().height();
-	QImage image(xSize, ySize, 32);
-	QColor color;
+	TQImage image(xSize, ySize, 32);
+	TQColor color;
 	int x;
 	int y;
 
@@ -173,9 +173,9 @@ void KXYColorSelector::drawPalette(QPixmap* pixmap) {
 				++p;
 			}
 		}
-		if (QColor::numBitPlanes() <= 8)
+		if (TQColor::numBitPlanes() <= 8)
 		{
-	    QColor* standardPalette = standardColorsPalette();
+	    TQColor* standardPalette = standardColorsPalette();
 			KImageEffect::dither(image, standardPalette, STANDARD_PALETTE_SIZE);
 			delete[] standardPalette;
 		}

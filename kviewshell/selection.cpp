@@ -8,18 +8,18 @@
 
 #include <config.h>
 
-#include <qapplication.h>
-#include <qclipboard.h>
+#include <tqapplication.h>
+#include <tqclipboard.h>
 
 #include "selection.h"
 
 TextSelection::TextSelection()
   : page(PageNumber::invalidPage),
-    selectedText(QString::null)
+    selectedText(TQString::null)
 {}
 
 
-void TextSelection::set(const PageNumber& pageNr, Q_INT32 start, Q_INT32 end, const QString& text)
+void TextSelection::set(const PageNumber& pageNr, Q_INT32 start, Q_INT32 end, const TQString& text)
 {
   page              = pageNr;
   selectedTextStart = start;
@@ -27,11 +27,11 @@ void TextSelection::set(const PageNumber& pageNr, Q_INT32 start, Q_INT32 end, co
   if (page != 0)
     selectedText = text;
   else
-    selectedText = QString::null;
+    selectedText = TQString::null;
 
   if (page != 0) {
-    QApplication::clipboard()->setSelectionMode(true);
-    QApplication::clipboard()->setText(selectedText);
+    TQApplication::clipboard()->setSelectionMode(true);
+    TQApplication::clipboard()->setText(selectedText);
   }
 }
 
@@ -53,14 +53,14 @@ bool TextSelection::operator!= (const TextSelection& s) const
 void TextSelection::copyText() const
 {
   if (!isEmpty()) {
-    QApplication::clipboard()->setSelectionMode(false);
-    QApplication::clipboard()->setText(selectedText);
+    TQApplication::clipboard()->setSelectionMode(false);
+    TQApplication::clipboard()->setText(selectedText);
   }
 }
 
 
 void TextSelection::clear()
 {
-  set(0, -1, -1, QString::null);
+  set(0, -1, -1, TQString::null);
 }
 

@@ -18,10 +18,10 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qxml.h>
-#include <qfile.h>
-#include <qimage.h>
-#include <qbuffer.h>
+#include <tqxml.h>
+#include <tqfile.h>
+#include <tqimage.h>
+#include <tqbuffer.h>
 
 #include <kurl.h>
 #include <kdebug.h>
@@ -46,21 +46,21 @@ KSVGLoader::~KSVGLoader()
 {
 }
 
-QString KSVGLoader::loadXML(::KURL url)
+TQString KSVGLoader::loadXML(::KURL url)
 {
-	QString tmpFile;
+	TQString tmpFile;
 	if(KIO::NetAccess::download(url, tmpFile, 0))
 	{
-		QIODevice *dev = KFilterDev::deviceForFile(tmpFile, "application/x-gzip", true);
-		QByteArray contents;
+		TQIODevice *dev = KFilterDev::deviceForFile(tmpFile, "application/x-gzip", true);
+		TQByteArray contents;
 		if(dev->open(IO_ReadOnly))
 			contents = dev->readAll();
 		delete dev;
 		KIO::NetAccess::removeTempFile(tmpFile);
-		return QString(contents);
+		return TQString(contents);
 	}
 
-	return QString::null;
+	return TQString::null;
 }
 
 void KSVGLoader::getSVGContent(::KURL url)
@@ -72,8 +72,8 @@ void KSVGLoader::getSVGContent(::KURL url)
 
 		m_job->setAutoErrorHandlingEnabled(true);
 
-		connect(m_job, SIGNAL(data(KIO::Job *, const QByteArray &)), this, SLOT(slotData(KIO::Job *, const QByteArray &)));
-		connect(m_job, SIGNAL(result(KIO::Job *)), this, SLOT(slotResult(KIO::Job *)));
+		connect(m_job, TQT_SIGNAL(data(KIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(KIO::Job *, const TQByteArray &)));
+		connect(m_job, TQT_SIGNAL(result(KIO::Job *)), this, TQT_SLOT(slotResult(KIO::Job *)));
 	}
 }
 
@@ -86,31 +86,31 @@ void KSVGLoader::newImageJob(SVGImageElementImpl *image, ::KURL baseURL)
 	}
 
 	ImageStreamMap *map = new ImageStreamMap();
-	map->data = new QByteArray();
+	map->data = new TQByteArray();
 	map->imageElement = image;
 
 	KIO::TransferJob *imageJob = KIO::get(::KURL(baseURL, map->imageElement->fileName()), false, false);
-	connect(imageJob, SIGNAL(data(KIO::Job *, const QByteArray &)), this, SLOT(slotData(KIO::Job *, const QByteArray &)));
-	connect(imageJob, SIGNAL(result(KIO::Job *)), this, SLOT(slotResult(KIO::Job *)));
+	connect(imageJob, TQT_SIGNAL(data(KIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(KIO::Job *, const TQByteArray &)));
+	connect(imageJob, TQT_SIGNAL(result(KIO::Job *)), this, TQT_SLOT(slotResult(KIO::Job *)));
 
 	m_imageJobs.insert(imageJob, map);
 }
 
-void KSVGLoader::slotData(KIO::Job *job, const QByteArray &data)
+void KSVGLoader::slotData(KIO::Job *job, const TQByteArray &data)
 {
 	if(job == m_job)
 	{
-		QDataStream dataStream(m_data, IO_WriteOnly | IO_Append);
+		TQDataStream dataStream(m_data, IO_WriteOnly | IO_Append);
 		dataStream.writeRawBytes(data.data(), data.size());
 	}
 	else
 	{
-		QMap<KIO::TransferJob *, ImageStreamMap *>::Iterator it;
+		TQMap<KIO::TransferJob *, ImageStreamMap *>::Iterator it;
 		for(it = m_imageJobs.begin(); it != m_imageJobs.end(); ++it)
 		{
 			if(it.key() == job)
 			{
-				QDataStream dataStream(*(it.data())->data, IO_WriteOnly | IO_Append);
+				TQDataStream dataStream(*(it.data())->data, IO_WriteOnly | IO_Append);
 				dataStream.writeRawBytes(data.data(), data.size());
 				break;
 			}
@@ -124,18 +124,18 @@ void KSVGLoader::slotResult(KIO::Job *job)
 	{
 		if(m_job->error() == 0)
 		{
-			QString check = static_cast<KIO::TransferJob *>(job)->url().prettyURL();
+			TQString check = static_cast<KIO::TransferJob *>(job)->url().prettyURL();
 			if(check.contains(".svgz") || check.contains(".svg.gz"))
 			{
 				// decode the gzipped svg and emit it
-				QIODevice *dev = KFilterDev::device(new QBuffer(m_data), "application/x-gzip");
+				TQIODevice *dev = KFilterDev::device(new TQBuffer(m_data), "application/x-gzip");
 				dev->open(IO_ReadOnly);
 				emit gotResult(dev);
 			}
 			else
 			{
 				m_job = 0;
-				emit gotResult(new QBuffer(m_data));
+				emit gotResult(new TQBuffer(m_data));
 				m_data.resize(0);
 			}
 		}
@@ -151,29 +151,29 @@ void KSVGLoader::slotResult(KIO::Job *job)
 	}
 	else
 	{
-		QMap<KIO::TransferJob *, ImageStreamMap *>::Iterator it;
+		TQMap<KIO::TransferJob *, ImageStreamMap *>::Iterator it;
 		for(it = m_imageJobs.begin(); it != m_imageJobs.end(); ++it)
 		{
 			if(it.key() == job)
 			{
 				ImageStreamMap *streamMap = it.data();
 
-				QBuffer buffer(*(streamMap->data));
+				TQBuffer buffer(*(streamMap->data));
 
 				if(buffer.open(IO_ReadOnly))
 				{
-					const char *imageFormat = QImageIO::imageFormat(&buffer);
+					const char *imageFormat = TQImageIO::imageFormat(&buffer);
 
 					if(imageFormat != 0)
 					{
-						QImageIO imageIO(&buffer, imageFormat);
+						TQImageIO imageIO(&buffer, imageFormat);
 
 						// Gamma correction
 						imageIO.setGamma(1/0.45454); 
 
 						if(imageIO.read())
 						{
-							QImage *image = new QImage(imageIO.image());
+							TQImage *image = new TQImage(imageIO.image());
 							image->detach();
 							(streamMap->imageElement)->setImage(image);
 						}
@@ -193,16 +193,16 @@ void KSVGLoader::slotResult(KIO::Job *job)
 	}
 }
 
-QString KSVGLoader::getUrl(::KURL url, bool local)
+TQString KSVGLoader::getUrl(::KURL url, bool local)
 {
 	// Security issue: Only retrieve http and https
 	if(local || (!url.prettyURL().isEmpty()) && ((url.protocol() == "http") || (url.protocol() == "https")))
 		return loadXML(url);
 
-	return QString::null;
+	return TQString::null;
 }
 
-void KSVGLoader::postUrl(::KURL url, const QByteArray &data, const QString &mimeType,  KJS::ExecState *exec, KJS::Object &callBackFunction, KJS::Object &status)
+void KSVGLoader::postUrl(::KURL url, const TQByteArray &data, const TQString &mimeType,  KJS::ExecState *exec, KJS::Object &callBackFunction, KJS::Object &status)
 {
 	KIO::TransferJob *job = KIO::http_post(url, data, false);
 	job->addMetaData("content-type", mimeType);
@@ -212,13 +212,13 @@ void KSVGLoader::postUrl(::KURL url, const QByteArray &data, const QString &mime
 	m_postUrlData.status = &status;
 	m_postUrlData.callBackFunction = &callBackFunction;
 
-	connect(job, SIGNAL(result(KIO::Job *)), SLOT(slotResult(KIO::Job *)));
+	connect(job, TQT_SIGNAL(result(KIO::Job *)), TQT_SLOT(slotResult(KIO::Job *)));
 }
 
 class CharacterDataSearcher : public QXmlDefaultHandler
 {
 public:
-	CharacterDataSearcher(const QString &id) : m_id(id) { }
+	CharacterDataSearcher(const TQString &id) : m_id(id) { }
 
 	virtual bool startDocument()
 	{
@@ -226,7 +226,7 @@ public:
 		return true;
 	}
 
-	virtual bool startElement(const QString &, const QString &, const QString &qName, const QXmlAttributes &atts)
+	virtual bool startElement(const TQString &, const TQString &, const TQString &qName, const TQXmlAttributes &atts)
 	{
 		kdDebug(26001) << "CharacterDataSearcher::startElement, qName " << qName << endl;
 
@@ -240,7 +240,7 @@ public:
 		return true;
 	}
 
-	virtual bool endElement(const QString &, const QString &, const QString &qName)
+	virtual bool endElement(const TQString &, const TQString &, const TQString &qName)
 	{
 		if(m_tagFound == qName && m_foundCount > 0)
 		{
@@ -252,7 +252,7 @@ public:
 		return true;
 	}
 
-	virtual bool characters(const QString &ch)
+	virtual bool characters(const TQString &ch)
 	{
 		kdDebug(26001) << "CharacterDataSearcher::characters, read " << ch.latin1() << endl;
 
@@ -262,24 +262,24 @@ public:
 		return true;
 	}		
 
-	QString result() { return m_result; }
+	TQString result() { return m_result; }
 
 private:
-	QString m_id, m_result, m_tagFound;
+	TQString m_id, m_result, m_tagFound;
 	int m_foundCount;
 };
 
-QString KSVGLoader::getCharacterData(::KURL url, const QString &id)
+TQString KSVGLoader::getCharacterData(::KURL url, const TQString &id)
 {
-	QXmlSimpleReader reader;
+	TQXmlSimpleReader reader;
 
 	CharacterDataSearcher searcher(id);
 	reader.setContentHandler(&searcher);
 	reader.setErrorHandler(&searcher);
 
-	QString s = loadXML(url);
+	TQString s = loadXML(url);
 
-	QXmlInputSource source;
+	TQXmlInputSource source;
 	source.setData(s);
 
 	reader.parse(&source);
@@ -292,7 +292,7 @@ QString KSVGLoader::getCharacterData(::KURL url, const QString &id)
 class SVGFragmentSearcher : public QXmlDefaultHandler
 {
 public:
-	SVGFragmentSearcher(SVGDocumentImpl *doc, const QString &id, ::KURL url) : m_id(id), m_url(url), m_doc(doc) { }
+	SVGFragmentSearcher(SVGDocumentImpl *doc, const TQString &id, ::KURL url) : m_id(id), m_url(url), m_doc(doc) { }
 
 	virtual bool startDocument()
 	{
@@ -302,7 +302,7 @@ public:
 		return true;
 	}
 
-	virtual bool startElement(const QString &namespaceURI, const QString &, const QString &qName, const QXmlAttributes &attrs)
+	virtual bool startElement(const TQString &namespaceURI, const TQString &, const TQString &qName, const TQXmlAttributes &attrs)
 	{
 		kdDebug(26001) << "SVGFragmentSearcher::startElement, namespaceURI " << namespaceURI << ", qName " << qName << endl;
 		bool parse = m_result;
@@ -324,12 +324,12 @@ public:
 			else
 				m_result = newElement;
 
-			QXmlAttributes newAttrs;
+			TQXmlAttributes newAttrs;
 
 			for(int i = 0; i < attrs.count(); i++)
 			{
-				QString name = attrs.localName(i);
-				QString value = attrs.value(i);
+				TQString name = attrs.localName(i);
+				TQString value = attrs.value(i);
 
 				if(name == "id")
 				{
@@ -346,7 +346,7 @@ public:
 						value.remove(0, 1);
 
 						// Convert the id to its mangled version.
-						QString id = "@fragment@" + m_url.prettyURL() + "@" + value;
+						TQString id = "@fragment@" + m_url.prettyURL() + "@" + value;
 
 						if(m_idMap.contains(id))
 						{
@@ -373,7 +373,7 @@ public:
 		return true;
 	}
 
-	virtual bool endElement(const QString &, const QString &, const QString &)
+	virtual bool endElement(const TQString &, const TQString &, const TQString &)
 	{
 		if(m_result)
 		{
@@ -388,7 +388,7 @@ public:
 		return true;
 	}
 
-	virtual bool characters(const QString &ch)
+	virtual bool characters(const TQString &ch)
 	{
 		kdDebug(26001) << "SVGFragmentSearcher::characters, read " << ch.latin1() << endl;
 
@@ -397,7 +397,7 @@ public:
 			SVGElementImpl *element = m_result->ownerDoc()->getElementFromHandle(m_currentNode->handle());
 			if(element)
 			{
-				QString t = ch;
+				TQString t = ch;
 
 				SVGLangSpaceImpl *langSpace = dynamic_cast<SVGLangSpaceImpl *>(element);
 				if(langSpace)
@@ -417,28 +417,28 @@ public:
 	SVGElementImpl *result() { return m_result; }
 
 private:
-	QString m_id;
+	TQString m_id;
 	::KURL m_url;
 
 	SVGDocumentImpl *m_doc;
 	SVGElementImpl *m_result;
 
 	DOM::Node *m_currentNode, m_parentNode;
-	QMap<QString, SVGElementImpl *> m_idMap;
+	TQMap<TQString, SVGElementImpl *> m_idMap;
 };
 
-SVGElementImpl *KSVGLoader::getSVGFragment(::KURL url, SVGDocumentImpl *doc, const QString &id)
+SVGElementImpl *KSVGLoader::getSVGFragment(::KURL url, SVGDocumentImpl *doc, const TQString &id)
 {
-	QXmlSimpleReader reader;
+	TQXmlSimpleReader reader;
 
 	kdDebug(26001) << "getSVGFragment: " << url.prettyURL() << "#" << id << endl;
 	SVGFragmentSearcher searcher(doc, id, url);
 	reader.setContentHandler(&searcher);
 	reader.setErrorHandler(&searcher);
 
-	QString s = loadXML(url);
+	TQString s = loadXML(url);
 
-	QXmlInputSource source;
+	TQXmlInputSource source;
 	source.setData(s);
 
 	reader.parse(&source);

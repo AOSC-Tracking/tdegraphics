@@ -74,8 +74,8 @@ protected:
    virtual bool setProtected( PMObject* obj, const PMVariant& var )
    {
       PMSurfaceOfRevolution* p = ( PMSurfaceOfRevolution* ) obj;
-      QValueList<PMVector> list = p->points( );
-      QValueList<PMVector>::Iterator it = list.begin( );
+      TQValueList<PMVector> list = p->points( );
+      TQValueList<PMVector>::Iterator it = list.begin( );
       int i;
       PMVector v = var.vectorData( );
       v.resize( 2 );
@@ -96,8 +96,8 @@ protected:
    virtual PMVariant getProtected( const PMObject* obj )
    {
       PMSurfaceOfRevolution* p = ( PMSurfaceOfRevolution* ) obj;
-      QValueList<PMVector> list = p->points( );
-      QValueList<PMVector>::ConstIterator it = list.at( m_index );
+      TQValueList<PMVector> list = p->points( );
+      TQValueList<PMVector>::ConstIterator it = list.at( m_index );
 
       if( it == list.end( ) )
       {
@@ -135,20 +135,20 @@ PMSurfaceOfRevolution::~PMSurfaceOfRevolution( )
 {
 }
 
-QString PMSurfaceOfRevolution::description( ) const
+TQString PMSurfaceOfRevolution::description( ) const
 {
    return i18n( "surface of revolution" );
 }
 
-void PMSurfaceOfRevolution::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMSurfaceOfRevolution::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QDomElement data = doc.createElement( "extra_data" );
-   QDomElement p;
+   TQDomElement data = doc.createElement( "extra_data" );
+   TQDomElement p;
 
    e.setAttribute( "sturm", m_sturm );
    e.setAttribute( "open", m_open );
 
-   QValueList<PMVector>::ConstIterator it;
+   TQValueList<PMVector>::ConstIterator it;
    for( it = m_points.begin( ); it != m_points.end( ); ++it )
    {
       p = doc.createElement( "point" );
@@ -168,18 +168,18 @@ void PMSurfaceOfRevolution::readAttributes( const PMXMLHelper& h )
    m_points.clear( );
    PMVector v( 2 );
 
-   QDomElement e = h.extraData( );
+   TQDomElement e = h.extraData( );
    if( !e.isNull( ) )
    {
-      QDomNode c = e.firstChild( );
+      TQDomNode c = e.firstChild( );
       while( !c.isNull( ) )
       {
          if( c.isElement( ) )
          {
-            QDomElement ce = c.toElement( );
+            TQDomElement ce = c.toElement( );
             if( ce.tagName( ) == "point" )
             {
-               QString str = ce.attribute( "vector" );
+               TQString str = ce.attribute( "vector" );
                if( !str.isNull( ) )
                {
                   v.loadXML( str );
@@ -241,7 +241,7 @@ void PMSurfaceOfRevolution::setOpen( bool o )
    }
 }
 
-void PMSurfaceOfRevolution::setPoints( const QValueList<PMVector>& points )
+void PMSurfaceOfRevolution::setPoints( const TQValueList<PMVector>& points )
 {
    if( m_points != points )
    {
@@ -253,7 +253,7 @@ void PMSurfaceOfRevolution::setPoints( const QValueList<PMVector>& points )
    }
 }
 
-PMDialogEditBase* PMSurfaceOfRevolution::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMSurfaceOfRevolution::editWidget( TQWidget* parent ) const
 {
    return new PMSurfaceOfRevolutionEdit( parent );
 }
@@ -330,8 +330,8 @@ void PMSurfaceOfRevolution::createViewStructure( )
 
 
    // calculate the spline segments
-   QValueList<PMSorSegment> segments;
-   QValueList<PMVector>::Iterator it1, it2, it3, it4;
+   TQValueList<PMSorSegment> segments;
+   TQValueList<PMVector>::Iterator it1, it2, it3, it4;
    it1 = m_points.begin( );
    it2 = it1; ++it2;
    it3 = it2; ++it3;
@@ -364,7 +364,7 @@ void PMSurfaceOfRevolution::createViewStructure( )
 
    // calculate the points
    PMVector point2, point3;
-   QValueList<PMSorSegment>::Iterator sit = segments.begin( );
+   TQValueList<PMSorSegment>::Iterator sit = segments.begin( );
 
    double poffset = 1.0 / sSteps;
    PMMatrix rot = PMMatrix::rotation( 0.0, M_PI * 2.0 / rSteps, 0.0 );
@@ -408,8 +408,8 @@ void PMSurfaceOfRevolution::createViewStructure( )
 
 void PMSurfaceOfRevolution::controlPoints( PMControlPointList& list )
 {
-   QValueList<PMVector>::Iterator it;
-   QPtrList<PMSorControlPoint> tmp1, tmp2;
+   TQValueList<PMVector>::Iterator it;
+   TQPtrList<PMSorControlPoint> tmp1, tmp2;
    int i;
 
    PMSorControlPoint* cp = 0;
@@ -436,7 +436,7 @@ void PMSurfaceOfRevolution::controlPoints( PMControlPointList& list )
       tmp2.append( cp );
    }
 
-   QPtrListIterator<PMSorControlPoint> cit1( tmp1 ), cit2( tmp2 );
+   TQPtrListIterator<PMSorControlPoint> cit1( tmp1 ), cit2( tmp2 );
 
    for( ; cit1.current( ) && cit2.current( ); ++cit1, ++cit2 )
    {
@@ -452,7 +452,7 @@ void PMSurfaceOfRevolution::controlPoints( PMControlPointList& list )
 void PMSurfaceOfRevolution::controlPointsChanged( PMControlPointList& list )
 {
    PMControlPointListIterator it1( list ), it2( list );
-   QValueList<PMVector>::Iterator pit = m_points.begin( );
+   TQValueList<PMVector>::Iterator pit = m_points.begin( );
    PMSorControlPoint* p1;
    PMSorControlPoint* p2;
    bool firstChange = true;
@@ -509,7 +509,7 @@ void PMSurfaceOfRevolution::controlPointsChanged( PMControlPointList& list )
       }
       if( ( pnr == ( num - 1 ) ) || ( pnr == 2 ) )
       {
-         QValueList<PMVector>::Iterator hit = pit;
+         TQValueList<PMVector>::Iterator hit = pit;
          --hit; --hit;
 
          if( approxZero( ( *hit )[1] - ( *pit )[1], c_sorTolerance ) )
@@ -525,7 +525,7 @@ void PMSurfaceOfRevolution::controlPointsChanged( PMControlPointList& list )
 }
 
 void PMSurfaceOfRevolution::addObjectActions( const PMControlPointList& /*cp*/,
-                                QPtrList<PMObjectAction>& actions )
+                                TQPtrList<PMObjectAction>& actions )
 {
    PMObjectAction* a;
 
@@ -544,7 +544,7 @@ void PMSurfaceOfRevolution::addObjectActions( const PMControlPointList& /*cp*/,
 
 void PMSurfaceOfRevolution::objectActionCalled( const PMObjectAction* action,
                                   const PMControlPointList& cp,
-                                  const QPtrList<PMVector>& cpViewPosition,
+                                  const TQPtrList<PMVector>& cpViewPosition,
                                   const PMVector& clickPosition )
 {
    if( action->objectType( ) == s_pMetaObject )
@@ -567,7 +567,7 @@ void PMSurfaceOfRevolution::objectActionCalled( const PMObjectAction* action,
 }
 
 void PMSurfaceOfRevolution::splitSegment( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest segment
@@ -577,8 +577,8 @@ void PMSurfaceOfRevolution::splitSegment( const PMControlPointList& /*cp*/,
    int i, j;
    PMVector mid( 3 ), dist( 2 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
-   QPtrListIterator<PMVector> it2( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it2( cpViewPosition );
    ++it2;
 
    for( j = 0; j < 2; ++j )
@@ -608,10 +608,10 @@ void PMSurfaceOfRevolution::splitSegment( const PMControlPointList& /*cp*/,
    }
 
    // add a new segment
-   QValueList<PMVector> newPoints = m_points;
-   QValueList<PMVector>::Iterator it = newPoints.at( ( unsigned ) ns );
+   TQValueList<PMVector> newPoints = m_points;
+   TQValueList<PMVector>::Iterator it = newPoints.at( ( unsigned ) ns );
    PMVector p[4];
-   QValueList<PMVector>::Iterator hit = it;
+   TQValueList<PMVector>::Iterator hit = it;
 
    // calculate the spline segment
    --hit;
@@ -635,7 +635,7 @@ void PMSurfaceOfRevolution::splitSegment( const PMControlPointList& /*cp*/,
 }
 
 void PMSurfaceOfRevolution::joinSegments( const PMControlPointList& /*cp*/,
-                            const QPtrList<PMVector>& cpViewPosition,
+                            const TQPtrList<PMVector>& cpViewPosition,
                             const PMVector& clickPosition )
 {
    // find nearest point
@@ -653,7 +653,7 @@ void PMSurfaceOfRevolution::joinSegments( const PMControlPointList& /*cp*/,
    PMVector* p;
    PMVector dist( 2 );
 
-   QPtrListIterator<PMVector> it1( cpViewPosition );
+   TQPtrListIterator<PMVector> it1( cpViewPosition );
 
    for( j = 0; j < 2; ++j )
    {
@@ -675,8 +675,8 @@ void PMSurfaceOfRevolution::joinSegments( const PMControlPointList& /*cp*/,
    }
 
    // join two segments
-   QValueList<PMVector> newPoints = m_points;
-   QValueList<PMVector>::Iterator it;
+   TQValueList<PMVector> newPoints = m_points;
+   TQValueList<PMVector>::Iterator it;
 
    // never remove the first or last point
    if( ns == 0 )

@@ -23,16 +23,16 @@
 #include <config.h>
 #endif
 
-#include <qwidget.h>
-#include <qimage.h>
+#include <tqwidget.h>
+#include <tqimage.h>
 
 #include <kurl.h>
 
-class QLabel;
-class QLineEdit;
-class QMultiLineEdit;
-class QPushButton;
-class QFrame;
+class TQLabel;
+class TQLineEdit;
+class TQMultiLineEdit;
+class TQPushButton;
+class TQFrame;
 class PMPart;
 class PMTreeView;
 
@@ -44,7 +44,7 @@ class PMLibraryEntryPreview: public QWidget
    Q_OBJECT
 public:
    /** Constructor */
-   PMLibraryEntryPreview( QWidget *parent );
+   PMLibraryEntryPreview( TQWidget *parent );
    /** Destructor */
    ~PMLibraryEntryPreview( );
 
@@ -73,15 +73,15 @@ signals:
    void objectChanged( );
 
 protected:
-   virtual void dragEnterEvent( QDragEnterEvent* event );
+   virtual void dragEnterEvent( TQDragEnterEvent* event );
 
-   virtual void dropEvent( QDropEvent* event );
+   virtual void dropEvent( TQDropEvent* event );
 
 private slots:
    /** Called when description or keywords are changed */
    void slotTextChanged( );
    /** Called when the name is changed */
-   void slotTextChanged( const QString& s );
+   void slotTextChanged( const TQString& s );
    /** Called when the set preview button is clicked */
    void slotPreviewClicked( );
    /** Called when the apply button is clicked */
@@ -91,24 +91,24 @@ private slots:
 
 private:
    /** Called to load the object tree. */
-   void loadObjects( QByteArray* obj );
+   void loadObjects( TQByteArray* obj );
    /** Sets whether the object is read only or not */
    void setReadOnly( bool b );
    /** Sets whether the object is modified or not */
    void setModified( bool modified );
 
    PMPart*         m_pPart;
-   QLineEdit*      m_pName;
-   QMultiLineEdit* m_pDescription;
-   QLabel*         m_pKeywordsLabel;
-   QMultiLineEdit* m_pKeywords;
-   QLabel*         m_pContentsLabel;
+   TQLineEdit*      m_pName;
+   TQMultiLineEdit* m_pDescription;
+   TQLabel*         m_pKeywordsLabel;
+   TQMultiLineEdit* m_pKeywords;
+   TQLabel*         m_pContentsLabel;
    PMTreeView*     m_pContentsPreview;
-   QPushButton*    m_pSetPreviewImageButton;
-   QPushButton*    m_pApplyChanges;
-   QPushButton*    m_pCancelChanges;
+   TQPushButton*    m_pSetPreviewImageButton;
+   TQPushButton*    m_pApplyChanges;
+   TQPushButton*    m_pCancelChanges;
 
-   QImage          m_image;
+   TQImage          m_image;
    KURL            m_currentURL;
 
    bool m_modified;

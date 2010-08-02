@@ -29,17 +29,17 @@
 #ifndef __kptoolrectangle_h__
 #define __kptoolrectangle_h__
 
-#include <qbrush.h>
-#include <qpen.h>
-#include <qpixmap.h>
-#include <qpoint.h>
-#include <qrect.h>
+#include <tqbrush.h>
+#include <tqpen.h>
+#include <tqpixmap.h>
+#include <tqpoint.h>
+#include <tqrect.h>
 
 #include <kpcommandhistory.h>
 
 #include <kptool.h>
 
-class QString;
+class TQString;
 
 class kpColor;
 class kpMainWindow;
@@ -58,7 +58,7 @@ public:
     enum Mode {Rectangle, RoundedRectangle, Ellipse};
 
     kpToolRectangle (Mode mode,
-                     const QString &text, const QString &description,
+                     const TQString &text, const TQString &description,
                      int key,
                      kpMainWindow *mainWindow,
                      const char *name);
@@ -70,7 +70,7 @@ public:
     virtual bool careAboutModifierState () const { return true; }
 
 private:
-    QString haventBegunDrawUserMessage () const;
+    TQString haventBegunDrawUserMessage () const;
 
 public:
     virtual void begin ();
@@ -80,10 +80,10 @@ public:
 private:
     void updateShape ();
 public:
-    virtual void draw (const QPoint &, const QPoint &, const QRect &);
+    virtual void draw (const TQPoint &, const TQPoint &, const TQRect &);
     virtual void cancelShape ();
     virtual void releasedAllButtons ();
-    virtual void endDraw (const QPoint &, const QRect &);
+    virtual void endDraw (const TQPoint &, const TQRect &);
 
 private slots:
     void updatePens ();
@@ -102,28 +102,28 @@ private:
     kpToolWidgetFillStyle *m_toolWidgetFillStyle;
 
     void updatePen (int mouseButton);
-    QPen m_pen [2], m_maskPen [2];
+    TQPen m_pen [2], m_maskPen [2];
 
     void updateBrush (int mouseButton);
-    QBrush m_brush [2], m_maskBrush [2];
+    TQBrush m_brush [2], m_maskBrush [2];
 
     void applyModifiers ();
-    QPoint m_toolRectangleStartPoint, m_toolRectangleEndPoint;
-    QRect m_toolRectangleRectWithoutLineWidth, m_toolRectangleRect;
+    TQPoint m_toolRectangleStartPoint, m_toolRectangleEndPoint;
+    TQRect m_toolRectangleRectWithoutLineWidth, m_toolRectangleRect;
 };
 
 class kpToolRectangleCommand : public kpCommand
 {
 public:
     kpToolRectangleCommand (kpToolRectangle::Mode mode,
-                            const QPen &pen, const QPen &maskPen,
-                            const QBrush &brush, const QBrush &maskBrush,
-                            const QRect &rect,
-                            const QPoint &startPoint, const QPoint &endPoint,
+                            const TQPen &pen, const TQPen &maskPen,
+                            const TQBrush &brush, const TQBrush &maskBrush,
+                            const TQRect &rect,
+                            const TQPoint &startPoint, const TQPoint &endPoint,
                             kpMainWindow *mainWindow);
     virtual ~kpToolRectangleCommand ();
 
-    virtual QString name () const;
+    virtual TQString name () const;
 
     virtual int size () const;
 
@@ -132,11 +132,11 @@ public:
 
 private:
     kpToolRectangle::Mode m_mode;
-    QPen m_pen, m_maskPen;
-    QBrush m_brush, m_maskBrush;
-    QRect m_rect;
-    QPoint m_startPoint, m_endPoint;
-    QPixmap *m_oldPixmapPtr;
+    TQPen m_pen, m_maskPen;
+    TQBrush m_brush, m_maskBrush;
+    TQRect m_rect;
+    TQPoint m_startPoint, m_endPoint;
+    TQPixmap *m_oldPixmapPtr;
 };
 
 #endif  // __kptoolrectangle_h__

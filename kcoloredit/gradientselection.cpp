@@ -15,39 +15,39 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlayout.h>
-#include <qframe.h>
-#include <qradiobutton.h>
-#include <qcolor.h>
+#include <tqlayout.h>
+#include <tqframe.h>
+#include <tqradiobutton.h>
+#include <tqcolor.h>
 #include <klocale.h>
 
 #include "main.h"
 #include "gradientselection.h"
 
-GradientSelection::GradientSelection(QWidget *parent, const char *name ) : QWidget(parent,name) {
-	QGridLayout* topLayout = new QGridLayout(this, 2, 2, 0);
-	QHBoxLayout* layout = new QHBoxLayout(0);
+GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
+	TQGridLayout* topLayout = new TQGridLayout(this, 2, 2, 0);
+	TQHBoxLayout* layout = new TQHBoxLayout(0);
 	layout->setMargin(3);
 	xyColorSelector = new KXYColorSelector(this);
-	connect(xyColorSelector, SIGNAL( valueChanged(int, int) ),
-		SLOT( slotXyColorSelectorPosChanged(int, int) ));
+	connect(xyColorSelector, TQT_SIGNAL( valueChanged(int, int) ),
+		TQT_SLOT( slotXyColorSelectorPosChanged(int, int) ));
 	layout->addWidget(xyColorSelector);
 	topLayout->addLayout(layout, 0, 0);
 	topLayout->setRowStretch(0, 10);
 	topLayout->setRowStretch(1, 0);
-	QVBoxLayout* xyColorSelectorLayout = new QVBoxLayout();
-	QHBoxLayout* checkBoxLayout = new QHBoxLayout();
+	TQVBoxLayout* xyColorSelectorLayout = new TQVBoxLayout();
+	TQHBoxLayout* checkBoxLayout = new TQHBoxLayout();
 	checkBoxLayout->setMargin(0);
-	variableCheckBox = new QCheckBox(i18n( "Variable" ), this);
+	variableCheckBox = new TQCheckBox(i18n( "Variable" ), this);
 	variableGlobalComponent = false;
-	connect(variableCheckBox, SIGNAL( toggled(bool) ), SLOT( slotSetVariableGlobalComponent(bool) ));
+	connect(variableCheckBox, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( slotSetVariableGlobalComponent(bool) ));
 	checkBoxLayout->addSpacing(2);
 	checkBoxLayout->addWidget(variableCheckBox);
 	xyColorSelectorLayout->addLayout(checkBoxLayout);
 	xyColorSelectorLayout->addStretch(10);
-	QHBoxLayout* buttonsLayout = new QHBoxLayout();
-	synchronizeColorButton = new QPushButton(i18n( "Synchronize" ), this);
-	connect(synchronizeColorButton, SIGNAL( clicked() ), SLOT( slotSynchronizeColor() ));
+	TQHBoxLayout* buttonsLayout = new TQHBoxLayout();
+	synchronizeColorButton = new TQPushButton(i18n( "Synchronize" ), this);
+	connect(synchronizeColorButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotSynchronizeColor() ));
 	buttonsLayout->addSpacing(2);
 	buttonsLayout->addWidget(synchronizeColorButton);
 	buttonsLayout->addStretch(10);
@@ -55,19 +55,19 @@ GradientSelection::GradientSelection(QWidget *parent, const char *name ) : QWidg
 	xyColorSelectorLayout->addSpacing(2);
 	topLayout->addLayout(xyColorSelectorLayout, 1, 0);
 	zColorSelector = new KZColorSelector(KZColorSelector::Vertical, this);
-	connect(zColorSelector, SIGNAL( valueChanged(int) ),
-		SLOT( slotZColorSelectorPosChanged(int) ));
+	connect(zColorSelector, TQT_SIGNAL( valueChanged(int) ),
+		TQT_SLOT( slotZColorSelectorPosChanged(int) ));
 	zColorSelector->setFixedWidth(36);
 	topLayout->addWidget(zColorSelector, 0, 1);
-	QVBoxLayout* zColorSelectorLayout = new QVBoxLayout(0);
-	connect(&hsvButtons, SIGNAL( clicked(int) ), SLOT( slotSetColorSelectionMode(int) ));
-	QRadioButton* hRadioButton = new QRadioButton("H", this);
+	TQVBoxLayout* zColorSelectorLayout = new TQVBoxLayout(0);
+	connect(&hsvButtons, TQT_SIGNAL( clicked(int) ), TQT_SLOT( slotSetColorSelectionMode(int) ));
+	TQRadioButton* hRadioButton = new TQRadioButton("H", this);
 	hsvButtons.insert(hRadioButton, H_COMPONENT);
 	zColorSelectorLayout->addWidget(hRadioButton);
-	QRadioButton* sRadioButton = new QRadioButton("S", this);
+	TQRadioButton* sRadioButton = new TQRadioButton("S", this);
 	hsvButtons.insert(sRadioButton, S_COMPONENT);
 	zColorSelectorLayout->addWidget(sRadioButton);
-	QRadioButton* vRadioButton = new QRadioButton("V", this);
+	TQRadioButton* vRadioButton = new TQRadioButton("V", this);
 	hsvButtons.insert(vRadioButton, V_COMPONENT);
 	vRadioButton->toggle();
 	zColorSelectorLayout->addWidget(vRadioButton);
@@ -88,7 +88,7 @@ void GradientSelection::slotSetValue(Color* color) {
 		int newHComponent;
 		int newSComponent;
 		int newVComponent;
-		QColor hsvColor(this->color.component(Color::RED_INDEX),
+		TQColor hsvColor(this->color.component(Color::RED_INDEX),
 			this->color.component(Color::GREEN_INDEX),
 			this->color.component(Color::BLUE_INDEX));
 		hsvColor.hsv(&newHComponent, &newSComponent, &newVComponent);
@@ -210,7 +210,7 @@ void GradientSelection::slotXyColorSelectorPosChanged(int x, int y) {
 			break;
 	
 	}
-	QColor rgbColor;
+	TQColor rgbColor;
 	rgbColor.setHsv(hComponent, sComponent, vComponent);
 	color.setComponents(rgbColor.red(), rgbColor.green(), rgbColor.blue());
 	updateZColorSelector();
@@ -233,7 +233,7 @@ void GradientSelection::slotZColorSelectorPosChanged(int y) {
 			break;
 	
 	}
-	QColor rgbColor;
+	TQColor rgbColor;
 	rgbColor.setHsv(hComponent, sComponent, vComponent);
 	color.setComponents(rgbColor.red(), rgbColor.green(), rgbColor.blue());
 	updateXyColorSelector(false);

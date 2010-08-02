@@ -29,7 +29,7 @@
 class PMVectorEdit;
 class PMFloatEdit;
 class PMPlane;
-class QCheckBox;
+class TQCheckBox;
 
 class PMPlaneEdit : public PMSolidObjectEdit
 {
@@ -39,7 +39,7 @@ public:
    /**
     * Creates a PMPlaneEdit with parent and name
     */
-   PMPlaneEdit( QWidget* parent, const char* name = 0 );
+   PMPlaneEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -22,7 +22,7 @@
 
 #include <kimageeffect.h>
 #include <kdebug.h>
-#include <qimage.h>
+#include <tqimage.h>
 
 #include "kvsprefs.h"
 #include "renderedDocumentPagePixmap.h"
@@ -38,39 +38,39 @@ RenderedDocumentPagePixmap::~RenderedDocumentPagePixmap()
 }
 
 
-QPainter* RenderedDocumentPagePixmap::getPainter()
+TQPainter* RenderedDocumentPagePixmap::getPainter()
 {
   if (paintingActive()) {
     kdError(1223) << "RenderedDocumentPagePixmap::getPainter() called when painting was active" << endl;
     return 0;
   } else
-    return new QPainter(this);
+    return new TQPainter(this);
 }
 
 
 void RenderedDocumentPagePixmap::resize(int width, int height)
 {
-  QPixmap::resize(width, height);
+  TQPixmap::resize(width, height);
   if(_accessiblePixmap)
     _accessiblePixmap->resize(width, height);
 
   dirty = true;
 }
 
-void RenderedDocumentPagePixmap::resize(const QSize& size)
+void RenderedDocumentPagePixmap::resize(const TQSize& size)
 {
   resize(size.width(), size.height());
 }
 
-QPixmap RenderedDocumentPagePixmap::accessiblePixmap()
+TQPixmap RenderedDocumentPagePixmap::accessiblePixmap()
 {
   if (!_accessiblePixmap || dirty)
   {
-    QImage backImage = this->convertToImage();
+    TQImage backImage = this->convertToImage();
     switch (KVSPrefs::renderMode())
     {
       case KVSPrefs::EnumRenderMode::Inverted:
-        // Invert image pixels using QImage internal function
+        // Invert image pixels using TQImage internal function
         backImage.invertPixels(false);
         break;
       case KVSPrefs::EnumRenderMode::Recolor:
@@ -105,7 +105,7 @@ QPixmap RenderedDocumentPagePixmap::accessiblePixmap()
         break;
     }
     if (!_accessiblePixmap)
-      _accessiblePixmap = new QPixmap(width(), height());
+      _accessiblePixmap = new TQPixmap(width(), height());
 
     _accessiblePixmap->convertFromImage(backImage);
     dirty = false;

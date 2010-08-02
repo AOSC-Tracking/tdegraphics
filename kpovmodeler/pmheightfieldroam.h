@@ -18,7 +18,7 @@
 #ifndef PMHEIGHTFIELDROAM_H
 #define PMHEIGHTFIELDROAM_H
 
-class QString;
+class TQString;
 
 /**
  * ROAM display class for @ref PMHeightField
@@ -81,7 +81,7 @@ class PMHeightFieldROAM
     * @param filename The name of the file to load
     * @return true if succesful false it it fails
     */
-    bool imageToData( const QString &fileName );
+    bool imageToData( const TQString &fileName );
 
    /**
     * Sets the Maximum Level of the tree.
@@ -174,7 +174,7 @@ public:
     * Constructor for class
     * @param fileName Source file for the map
     */
-   PMHeightFieldROAM( const QString &fileName );
+   PMHeightFieldROAM( const TQString &fileName );
    /**
     * Class Destructor relases all the memory
     */

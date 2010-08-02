@@ -31,10 +31,10 @@ class PMVectorEdit;
 class PMFloatEdit;
 class PMIntEdit;
 class PMColorEdit;
-class QCheckBox;
-class QComboBox;
-class QWidget;
-class QLabel;
+class TQCheckBox;
+class TQComboBox;
+class TQWidget;
+class TQLabel;
 
 /**
  * Dialog edit class for @ref PMFog
@@ -47,7 +47,7 @@ public:
    /**
     * Creates a PMFogEdit with parent and name
     */
-   PMFogEdit( QWidget* parent, const char* name = 0 );
+   PMFogEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
@@ -73,21 +73,21 @@ protected slots:
 private:
    PMFog* m_pDisplayedObject;
 
-   QComboBox* m_pFogTypeEdit;
+   TQComboBox* m_pFogTypeEdit;
    PMFloatEdit* m_pDistance;
    PMColorEdit* m_pColor;
-   QCheckBox* m_pTurbulenceCheck;
-   QWidget* m_pTurbulenceWidget;
+   TQCheckBox* m_pTurbulenceCheck;
+   TQWidget* m_pTurbulenceWidget;
    PMVectorEdit* m_pTurbulenceVector;
    PMIntEdit* m_pOctaves;
    PMFloatEdit* m_pOmega;
    PMFloatEdit* m_pLambda;
    PMFloatEdit* m_pDepth;
-   QLabel* m_pFogOffsetLabel;
+   TQLabel* m_pFogOffsetLabel;
    PMFloatEdit* m_pFogOffset;
-   QLabel* m_pFogAltLabel;
+   TQLabel* m_pFogAltLabel;
    PMFloatEdit* m_pFogAlt;
-   QLabel* m_pUpLabel;
+   TQLabel* m_pUpLabel;
    PMVectorEdit* m_pUp;
 };
 

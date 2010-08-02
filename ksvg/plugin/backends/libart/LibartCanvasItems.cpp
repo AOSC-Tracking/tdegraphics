@@ -20,8 +20,8 @@
 
 #include <cfloat>
 
-#include <qimage.h>
-#include <qwmatrix.h>
+#include <tqimage.h>
+#include <tqwmatrix.h>
 
 #include "SVGPaint.h"
 #include "SVGRectImpl.h"
@@ -108,9 +108,9 @@ LibartShape::~LibartShape()
 	delete m_strokePainter;
 }
 
-QRect LibartShape::bbox() const
+TQRect LibartShape::bbox() const
 {
-	QRect rect;
+	TQRect rect;
 	if(m_strokeSVP || m_fillSVP)
 	{
 		ArtIRect *irect = new ArtIRect();
@@ -134,7 +134,7 @@ bool LibartShape::isVisible(SVGShapeImpl *shape)
 	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && shape->directRender());
 }
 
-bool LibartShape::fillContains(const QPoint &p)
+bool LibartShape::fillContains(const TQPoint &p)
 {
 	if(m_fillSVP)
 		return art_svp_point_wind(m_fillSVP, p.x(), p.y()) != 0;
@@ -142,7 +142,7 @@ bool LibartShape::fillContains(const QPoint &p)
 		return false;
 }
 
-bool LibartShape::strokeContains(const QPoint &p)
+bool LibartShape::strokeContains(const TQPoint &p)
 {
 	if(m_strokeSVP)
 		return art_svp_point_wind(m_strokeSVP, p.x(), p.y()) != 0;
@@ -214,7 +214,7 @@ void LibartPainter::update(SVGStylableImpl *style)
 {
 	if(paintType(style) != SVG_PAINTTYPE_URI)
 	{
-		QColor qcolor;
+		TQColor qcolor;
 		if(paintType(style) == SVG_PAINTTYPE_CURRENTCOLOR)
 			qcolor = style->getColor()->rgbColor().color();
 		else
@@ -250,9 +250,9 @@ void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *st
 	{
 		canvas->clipToBuffer(x0, y0, x1, y1);
 
-		QRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
+		TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-		QByteArray mask = SVGMaskElementImpl::maskRectangle(shape, screenBBox);
+		TQByteArray mask = SVGMaskElementImpl::maskRectangle(shape, screenBBox);
 
 		if(paintType(style) == SVG_PAINTTYPE_URI)
 		{
@@ -1356,7 +1356,7 @@ void LibartImage::draw()
 	if(isVisible())
 	{
 		SVGMatrixImpl *ctm = m_image->scaledImageMatrix();
-		QImage image = m_image->scaledImage();
+		TQImage image = m_image->scaledImage();
 		KSVGPolygon clippingPolygon = m_image->clippingShape();
 
 		m_canvas->drawImage(image, m_image, ctm, clippingPolygon);
@@ -1374,9 +1374,9 @@ void LibartImage::init()
 {
 }
 
-QRect LibartImage::bbox() const
+TQRect LibartImage::bbox() const
 {
-	QRect bbox(static_cast<int>(m_image->x()->baseVal()->value()),
+	TQRect bbox(static_cast<int>(m_image->x()->baseVal()->value()),
 			   static_cast<int>(m_image->y()->baseVal()->value()),
 			   static_cast<int>(m_image->width()->baseVal()->value()),
 			   static_cast<int>(m_image->height()->baseVal()->value()));
@@ -1428,12 +1428,12 @@ LibartText::SVPElement::~SVPElement()
 		art_svp_free(svp);
 }
 
-QRect LibartText::bbox() const
+TQRect LibartText::bbox() const
 {
-	QRect result, rect;
+	TQRect result, rect;
 
-	QPtrListIterator<SVPElement> it1(m_drawFillItems);
-	QPtrListIterator<SVPElement> it2(m_drawStrokeItems);
+	TQPtrListIterator<SVPElement> it1(m_drawFillItems);
+	TQPtrListIterator<SVPElement> it2(m_drawStrokeItems);
 
 	SVPElement *fill = it1.current(), *stroke = it2.current();
 	while(fill != 0 || stroke != 0)
@@ -1458,9 +1458,9 @@ QRect LibartText::bbox() const
 	return result;
 }
 
-bool LibartText::fillContains(const QPoint &p)
+bool LibartText::fillContains(const TQPoint &p)
 {
-	QPtrListIterator<SVPElement> it(m_drawFillItems);
+	TQPtrListIterator<SVPElement> it(m_drawFillItems);
 
 	SVPElement *fill = it.current();
 	while(fill && fill->svp)
@@ -1474,9 +1474,9 @@ bool LibartText::fillContains(const QPoint &p)
 	return false;
 }
 
-bool LibartText::strokeContains(const QPoint &p)
+bool LibartText::strokeContains(const TQPoint &p)
 {
-	QPtrListIterator<SVPElement> it(m_drawStrokeItems);
+	TQPtrListIterator<SVPElement> it(m_drawStrokeItems);
 
 	SVPElement *stroke = it.current();
 	while(stroke && stroke->svp)
@@ -1494,8 +1494,8 @@ void LibartText::update(CanvasItemUpdate reason, int param1, int param2)
 {
 	if(reason == UPDATE_STYLE)
 	{
-		QPtrListIterator<SVPElement> it1(m_drawFillItems);
-		QPtrListIterator<SVPElement> it2(m_drawStrokeItems);
+		TQPtrListIterator<SVPElement> it1(m_drawFillItems);
+		TQPtrListIterator<SVPElement> it2(m_drawStrokeItems);
 		SVPElement *fill = it1.current(), *stroke = it2.current();
 		while(fill != 0 || stroke != 0)
 		{
@@ -1529,8 +1529,8 @@ void LibartText::update(CanvasItemUpdate reason, int param1, int param2)
 	}
 	else if(reason == UPDATE_PAN)
 	{
-		QPtrListIterator<SVPElement> it1(m_drawFillItems);
-		QPtrListIterator<SVPElement> it2(m_drawStrokeItems);
+		TQPtrListIterator<SVPElement> it1(m_drawFillItems);
+		TQPtrListIterator<SVPElement> it2(m_drawStrokeItems);
 
 		double affine[6];
 		KSVGHelper::matrixToAffine(m_text->screenCTM(), affine);
@@ -1559,8 +1559,8 @@ void LibartText::update(CanvasItemUpdate reason, int param1, int param2)
 
 void LibartText::draw()
 {
-	QPtrListIterator<SVPElement> it1(m_drawFillItems);
-	QPtrListIterator<SVPElement> it2(m_drawStrokeItems);
+	TQPtrListIterator<SVPElement> it1(m_drawFillItems);
+	TQPtrListIterator<SVPElement> it2(m_drawStrokeItems);
 
 	SVPElement *fill = it1.current(), *stroke = it2.current();
 	while(fill != 0 || stroke != 0)
@@ -1588,8 +1588,8 @@ void LibartText::draw()
 bool LibartText::isVisible()
 {
 	bool foundVisible = false;
-	QPtrListIterator<SVPElement> it1(m_drawFillItems);
-	QPtrListIterator<SVPElement> it2(m_drawStrokeItems);
+	TQPtrListIterator<SVPElement> it1(m_drawFillItems);
+	TQPtrListIterator<SVPElement> it2(m_drawStrokeItems);
 
 	SVPElement *fill = it1.current(), *stroke = it2.current();
 	while(fill != 0 || stroke != 0)
@@ -1767,7 +1767,7 @@ void LibartText::initClipItem()
 ArtSVP *LibartText::clipSVP()
 {
 	ArtSVP *svp = 0;
-	QPtrListIterator<SVPElement> it(m_drawFillItems);
+	TQPtrListIterator<SVPElement> it(m_drawFillItems);
 
 	SVPElement *fill = it.current();
 	while(fill && fill->svp)
@@ -1787,7 +1787,7 @@ ArtSVP *LibartText::clipSVP()
 	return svp;
 }
 
-ArtRender *LibartPaintServer::createRenderer(QRect bbox, KSVGCanvas *c)
+ArtRender *LibartPaintServer::createRenderer(TQRect bbox, KSVGCanvas *c)
 {
 	int x0 = bbox.x();
 	int y0 = bbox.y();
@@ -1836,7 +1836,7 @@ void LibartGradient::parseGradientStops(SVGGradientElementImpl *gradient)
 				stop->offset = (stop - 1)->offset;
 
 			// Get color
-			QColor qStopColor;
+			TQColor qStopColor;
 
 			if(elem->getStopColor()->colorType() == SVG_COLORTYPE_CURRENTCOLOR)
 				qStopColor = elem->getColor()->rgbColor().color();
@@ -1844,7 +1844,7 @@ void LibartGradient::parseGradientStops(SVGGradientElementImpl *gradient)
 				qStopColor = elem->getStopColor()->rgbColor().color();
 
 			// Convert in a libart suitable form
-			QString tempName = qStopColor.name();
+			TQString tempName = qStopColor.name();
 			const char *str = tempName.latin1();
 
 			int stopColor = 0;
@@ -1888,18 +1888,18 @@ void LibartGradient::finalizePaintServer()
 {
 	parseGradientStops(m_gradient->stopsSource());
 
-	QString _href = SVGURIReferenceImpl::getTarget(m_gradient->href()->baseVal().string());
+	TQString _href = SVGURIReferenceImpl::getTarget(m_gradient->href()->baseVal().string());
 	if(!_href.isEmpty())
 		reference(_href);
 
 	setFinalized();
 }
 
-void LibartGradient::reference(const QString &)
+void LibartGradient::reference(const TQString &)
 {
 }
 
-void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, QByteArray mask, QRect screenBBox)
+void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
 {
 	if(!m_stops.isEmpty())
 	{
@@ -1995,7 +1995,7 @@ void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, QBy
 
 		matrix->deref();
 
-		QMemArray<ArtGradientStop> stops = m_stops;
+		TQMemArray<ArtGradientStop> stops = m_stops;
 		stops.detach();
 
 		for(unsigned int i = 0; i < stops.size(); i++)
@@ -2032,7 +2032,7 @@ void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, QBy
 	}
 }
 
-void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, QByteArray mask, QRect screenBBox)
+void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
 {
 	if(!m_stops.isEmpty())
 	{
@@ -2146,7 +2146,7 @@ void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, QBy
 
 		matrix->deref();
 
-		QMemArray<ArtGradientStop> stops = m_stops;
+		TQMemArray<ArtGradientStop> stops = m_stops;
 		stops.detach();
 
 		for(unsigned int i = 0; i < stops.size(); i++)
@@ -2179,18 +2179,18 @@ void LibartPattern::finalizePaintServer()
 	setFinalized();
 }
 
-void LibartPattern::reference(const QString &href)
+void LibartPattern::reference(const TQString &href)
 {
 	m_pattern->reference(href);
 }
 
-void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, QByteArray mask, QRect screenBBox)
+void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
 {
 	SVGPatternElementImpl::Tile tile = m_pattern->createTile(getBBoxTarget());
 
 	if(!tile.image().isNull())
 	{
-		QWMatrix m = tile.screenToTile();
+		TQWMatrix m = tile.screenToTile();
 		double affine[6];
 		 
 		affine[0] = m.m11();

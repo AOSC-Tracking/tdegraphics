@@ -25,8 +25,8 @@
 
 #include "pmobject.h"
 
-#include <qvaluelist.h>
-#include <qstring.h>
+#include <tqvaluelist.h>
+#include <tqstring.h>
 
 /**
  * Class for messages in the @ref PMErrorDialog
@@ -42,7 +42,7 @@ public:
     * Creates a message with a text and optionally with
     * a link to an object
     */
-   PMMessage( const QString& text, PMObject* object = 0 );
+   PMMessage( const TQString& text, PMObject* object = 0 );
    /**
     * Copy constructor
     */
@@ -55,11 +55,11 @@ public:
    /**
     * Returns the message text
     */
-   QString text( ) const { return m_sText; }
+   TQString text( ) const { return m_sText; }
    /**
     * Sets the message text
     */
-   void setText( const QString& text ) { m_sText = text; }
+   void setText( const TQString& text ) { m_sText = text; }
    /**
     * Returns the linked object or 0
     */
@@ -70,10 +70,10 @@ public:
    void setLinkedObject( PMObject* o ) { m_pObject = o; }
 
 private:
-   QString m_sText;
+   TQString m_sText;
    PMObject* m_pObject;
 };
 
-typedef QValueList<PMMessage> PMMessageList;
+typedef TQValueList<PMMessage> PMMessageList;
 
 #endif

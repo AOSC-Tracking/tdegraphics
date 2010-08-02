@@ -109,7 +109,7 @@ public:
    virtual bool takeChild( uint i );
 
    /** */
-   virtual void serialize( QDomElement& e, QDomDocument& doc ) const;
+   virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
 
    /**
     * Returns the number of selected child items. All selected items in

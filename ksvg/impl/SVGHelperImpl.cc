@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <qregexp.h>
+#include <tqregexp.h>
 
 #include "SVGRectImpl.h"
 #include "SVGMatrixImpl.h"
@@ -77,7 +77,7 @@ void SVGHelperImpl::updateItem(KJS::ExecState *exec, const DOM::Node node)
 
 void SVGHelperImpl::copyAttributes(SVGElementImpl *src, SVGElementImpl *dst)
 {
-	QDictIterator<DOM::DOMString> it(src->attributes());
+	TQDictIterator<DOM::DOMString> it(src->attributes());
 	for(; it.current(); ++it)
 	{
 		DOM::DOMString name = it.currentKey();
@@ -91,14 +91,14 @@ void SVGHelperImpl::copyAttributes(SVGElementImpl *src, SVGElementImpl *dst)
 	}
 }
 
-void SVGHelperImpl::parseList(SVGStringListImpl *list, char seperator, const QString &data)
+void SVGHelperImpl::parseList(SVGStringListImpl *list, char seperator, const TQString &data)
 {
 	// TODO : more error checking/reporting
 	list->clear();
 
-	QStringList substrings = QStringList::split(seperator, data);
-	QStringList::ConstIterator it = substrings.begin();
-	QStringList::ConstIterator end = substrings.end();
+	TQStringList substrings = TQStringList::split(seperator, data);
+	TQStringList::ConstIterator it = substrings.begin();
+	TQStringList::ConstIterator end = substrings.end();
 	for(; it != end; ++it)
 	{
 		SharedString *string = new SharedString(*it);
@@ -108,13 +108,13 @@ void SVGHelperImpl::parseList(SVGStringListImpl *list, char seperator, const QSt
 	}
 }
 
-void SVGHelperImpl::parseLengthList(SVGAnimatedLengthListImpl *list, const QString &lengths, LengthMode mode, SVGElementImpl *object)
+void SVGHelperImpl::parseLengthList(SVGAnimatedLengthListImpl *list, const TQString &lengths, LengthMode mode, SVGElementImpl *object)
 {
 	// get either comma or space delimited lists
 	// TODO : more error checking/reporting
-	QStringList sublengths = QStringList::split(QRegExp("[, ]"), lengths);
-	QStringList::ConstIterator it = sublengths.begin();
-	QStringList::ConstIterator end = sublengths.end();
+	TQStringList sublengths = TQStringList::split(TQRegExp("[, ]"), lengths);
+	TQStringList::ConstIterator it = sublengths.begin();
+	TQStringList::ConstIterator end = sublengths.end();
 	
 	SVGLengthImpl *lengthImpl = 0;
 	for(; it != end; ++it)
@@ -127,32 +127,32 @@ void SVGHelperImpl::parseLengthList(SVGAnimatedLengthListImpl *list, const QStri
 	}
 }
 
-void SVGHelperImpl::parseCommaSeperatedList(SVGStringListImpl *list, const QString &data)
+void SVGHelperImpl::parseCommaSeperatedList(SVGStringListImpl *list, const TQString &data)
 {
 	parseList(list, ',', data);
 }
 
-void SVGHelperImpl::parseSemicolonSeperatedList(SVGStringListImpl *list, const QString &data)
+void SVGHelperImpl::parseSemicolonSeperatedList(SVGStringListImpl *list, const TQString &data)
 {
 	parseList(list, ';', data);
 }
 
-void SVGHelperImpl::parseTransformAttribute(SVGTransformListImpl *list, const QString &transform)
+void SVGHelperImpl::parseTransformAttribute(SVGTransformListImpl *list, const TQString &transform)
 {
 	// Split string for handling 1 transform statement at a time
-	QStringList subtransforms = QStringList::split(')', transform);
-	QStringList::ConstIterator it = subtransforms.begin();
-	QStringList::ConstIterator end = subtransforms.end();
+	TQStringList subtransforms = TQStringList::split(')', transform);
+	TQStringList::ConstIterator it = subtransforms.begin();
+	TQStringList::ConstIterator end = subtransforms.end();
 	for(; it != end; ++it)
 	{
-		QStringList subtransform = QStringList::split('(', (*it));
+		TQStringList subtransform = TQStringList::split('(', (*it));
 
 		subtransform[0] = subtransform[0].stripWhiteSpace().lower();
 		subtransform[1] = subtransform[1].simplifyWhiteSpace();
-		QRegExp reg("([-]?\\d*\\.?\\d+(?:e[-]?\\d+)?)");
+		TQRegExp reg("([-]?\\d*\\.?\\d+(?:e[-]?\\d+)?)");
 
 		int pos = 0;
-		QStringList params;
+		TQStringList params;
 		
 		while(pos >= 0)
 		{
@@ -215,9 +215,9 @@ void SVGHelperImpl::parseTransformAttribute(SVGTransformListImpl *list, const QS
 }
 
 /// convert from user space to "real" pixels on rendering area
-QRect SVGHelperImpl::fromUserspace(SVGElementImpl *obj, const QRect &r)
+TQRect SVGHelperImpl::fromUserspace(SVGElementImpl *obj, const TQRect &r)
 {
-	QRect sr;
+	TQRect sr;
 
 	SVGLocatableImpl *locate = dynamic_cast<SVGLocatableImpl *>(obj);
 	

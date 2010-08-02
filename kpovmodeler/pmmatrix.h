@@ -27,7 +27,7 @@
 #include "pmmath.h"
 #include "math.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <GL/gl.h>
 
@@ -164,11 +164,11 @@ public:
    /**
     * Returns a string for xml output
     */
-   QString serializeXML( ) const;
+   TQString serializeXML( ) const;
    /**
     * loads the vector data from the xml string
     */
-   bool loadXML( const QString& str );
+   bool loadXML( const TQString& str );
 private:
    /**
     * Exchanges two rows

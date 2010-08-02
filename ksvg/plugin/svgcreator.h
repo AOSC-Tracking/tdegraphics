@@ -24,13 +24,13 @@
 
 #include <kio/thumbcreator.h>
 
-class SVGCreator : public QObject, public ThumbCreator
+class SVGCreator : public TQObject, public ThumbCreator
 {
     Q_OBJECT
 public:
     SVGCreator();
     virtual ~SVGCreator();
-    virtual bool create(const QString &path, int width, int height, QImage &img);
+    virtual bool create(const TQString &path, int width, int height, TQImage &img);
     virtual Flags flags() const;
 
 private slots:

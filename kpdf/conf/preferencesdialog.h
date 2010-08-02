@@ -13,7 +13,7 @@
 #include <kconfigdialog.h>
 #include "conf/settings.h"
 
-class QWidget;
+class TQWidget;
 class KConfigSkeleton;
 
 class DlgGeneral;
@@ -25,7 +25,7 @@ class PreferencesDialog : public KConfigDialog
 {
 
     public:
-        PreferencesDialog( QWidget * parent, KConfigSkeleton * config );
+        PreferencesDialog( TQWidget * parent, KConfigSkeleton * config );
 
     protected:
 //      void updateSettings(); // Called when OK/Apply is pressed.

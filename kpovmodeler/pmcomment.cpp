@@ -22,7 +22,7 @@
 #include "pmcommentedit.h"
 #include "pmmemento.h"
 
-#include <qtextstream.h>
+#include <tqtextstream.h>
 #include <klocale.h>
 
 PMDefinePropertyClass( PMComment, PMCommentProperty );
@@ -40,7 +40,7 @@ PMComment::PMComment( PMPart* part )
 {
 }
 
-PMComment::PMComment( PMPart* part, const QString& t )
+PMComment::PMComment( PMPart* part, const TQString& t )
    : Base( part )
 {
    m_text = t;
@@ -56,13 +56,13 @@ PMComment::~PMComment( )
 {
 }
 
-QString PMComment::description( ) const
+TQString PMComment::description( ) const
 {
    if( !m_text.isEmpty( ) )
    {
-      QString copy = m_text;
-      QTextStream str( &copy, IO_ReadOnly );
-      QString tmp, desc;
+      TQString copy = m_text;
+      TQTextStream str( &copy, IO_ReadOnly );
+      TQString tmp, desc;
       bool stop = false;
       bool truncated = false;
 
@@ -95,7 +95,7 @@ QString PMComment::description( ) const
    return i18n( "comment" );
 }
 
-void PMComment::setText( const QString& text )
+void PMComment::setText( const TQString& text )
 {
    if( text != m_text )
    {
@@ -130,20 +130,20 @@ void PMComment::cleanUp( ) const
    Base::cleanUp( );
 }
 
-void PMComment::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMComment::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
-   QDomText t = doc.createTextNode( m_text );
+   TQDomText t = doc.createTextNode( m_text );
    e.appendChild( t );
 }
 
 void PMComment::readAttributes( const PMXMLHelper& h )
 {
-   QDomNode e = h.element( ).firstChild( );
+   TQDomNode e = h.element( ).firstChild( );
    if( e.isText( ) )
       m_text = e.toText( ).data( );
 }
 
-PMDialogEditBase* PMComment::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMComment::editWidget( TQWidget* parent ) const
 {
    return new PMCommentEdit( parent );
 }

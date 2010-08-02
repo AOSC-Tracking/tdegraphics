@@ -21,7 +21,7 @@
 #include <cfloat>
 
 #include <kdebug.h>
-#include <qimage.h>
+#include <tqimage.h>
 
 #include "SVGMaskElement.h"
 
@@ -336,12 +336,12 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 
 	{
 		// Note: r and b reversed
-		//QImage maskImage(reinterpret_cast<unsigned char *>(imageBits), imageWidth, imageHeight, 32, 0, 0, QImage::IgnoreEndian);
+		//TQImage maskImage(reinterpret_cast<unsigned char *>(imageBits), imageWidth, imageHeight, 32, 0, 0, TQImage::IgnoreEndian);
 		//maskImage.setAlphaBuffer(true);
 		//maskImage.save("mask.png", "PNG");
 	}
 
-	QByteArray maskData(imageWidth * imageHeight);
+	TQByteArray maskData(imageWidth * imageHeight);
     const double epsilon = DBL_EPSILON;
 
 	// Convert the rgba image into an 8-bit mask, according to the specs.
@@ -390,7 +390,7 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 
 	// The screenToMask matrix is calculated each time the mask is used so we don't
 	// need to set it here.
-	QWMatrix tempMatrix;
+	TQWMatrix tempMatrix;
 
 	return Mask(maskData, tempMatrix, imageWidth, imageHeight);
 }
@@ -444,7 +444,7 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 
 		matrix->scaleNonUniform(1 / xScale, 1 / yScale);
 
-		QWMatrix screenToMask = matrix->qmatrix().invert();
+		TQWMatrix screenToMask = matrix->qmatrix().invert();
 		matrix->deref();
 
 		mask.setScreenToMask(screenToMask);
@@ -453,9 +453,9 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	return mask;
 }
 
-QByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *shape, const QRect& screenRectangle)
+TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *shape, const TQRect& screenRectangle)
 {
-	QByteArray cumulativeMask;
+	TQByteArray cumulativeMask;
 
 	do
 	{
@@ -475,7 +475,7 @@ QByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *shape, const QRect& s
 					
 					if(!mask.isEmpty())
 					{
-						QByteArray maskData = mask.rectangle(screenRectangle);
+						TQByteArray maskData = mask.rectangle(screenRectangle);
 
 						if(cumulativeMask.size() == 0)
 							cumulativeMask = maskData;
@@ -514,14 +514,14 @@ QByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *shape, const QRect& s
 	return cumulativeMask;
 }
 
-SVGMaskElementImpl::Mask::Mask(const QByteArray& mask, const QWMatrix& screenToMask, int width, int height)
+SVGMaskElementImpl::Mask::Mask(const TQByteArray& mask, const TQWMatrix& screenToMask, int width, int height)
 	:	m_width(width), m_height(height), m_mask(mask), m_screenToMask(screenToMask)
 {
 }
 
-QByteArray SVGMaskElementImpl::Mask::rectangle(int screenX, int screenY, int width, int height)
+TQByteArray SVGMaskElementImpl::Mask::rectangle(int screenX, int screenY, int width, int height)
 {
-	QByteArray rect(width * height);
+	TQByteArray rect(width * height);
 
 	for(int x = 0; x < width; x++)
 	{
@@ -534,7 +534,7 @@ QByteArray SVGMaskElementImpl::Mask::rectangle(int screenX, int screenY, int wid
 	return rect;
 }
 
-QByteArray SVGMaskElementImpl::Mask::rectangle(const QRect& rect)
+TQByteArray SVGMaskElementImpl::Mask::rectangle(const TQRect& rect)
 {
 	return rectangle(rect.x(), rect.y(), rect.width(), rect.height());
 }

@@ -20,16 +20,16 @@
 #include "pmglobalphotons.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
 
 
-PMGlobalPhotonsEdit::PMGlobalPhotonsEdit( QWidget* parent, const char* name )
+PMGlobalPhotonsEdit::PMGlobalPhotonsEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,15 +37,15 @@ PMGlobalPhotonsEdit::PMGlobalPhotonsEdit( QWidget* parent, const char* name )
 
 void PMGlobalPhotonsEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
-   QGridLayout* gl;
-   QLabel* lbl;
+   TQHBoxLayout* hl;
+   TQGridLayout* gl;
+   TQLabel* lbl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Photon numbers" ), this );
-   m_pNumberType = new QComboBox( false, this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Photon numbers" ), this );
+   m_pNumberType = new TQComboBox( false, this );
    m_pNumberType->insertItem( i18n( "Spacing" ) );
    m_pNumberType->insertItem( i18n( "Count" ) );
    m_pSpacing = new PMFloatEdit( this );
@@ -58,128 +58,128 @@ void PMGlobalPhotonsEdit::createTopWidgets( )
    hl->addWidget( m_pCount );
    hl->addStretch( 1 );
 
-   gl = new QGridLayout( topLayout( ), 2, 5 );
-   lbl = new QLabel( i18n( "Gather" ), this );
+   gl = new TQGridLayout( topLayout( ), 2, 5 );
+   lbl = new TQLabel( i18n( "Gather" ), this );
    gl->addWidget( lbl, 0, 0 );
-   lbl = new QLabel( i18n( "Min:" ), this );
+   lbl = new TQLabel( i18n( "Min:" ), this );
    gl->addWidget( lbl, 0, 1 );
    m_pGatherMin = new PMIntEdit( this );
    m_pGatherMin->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pGatherMin, 0, 2 );
-   lbl = new QLabel( i18n( "Max:" ), this );
+   lbl = new TQLabel( i18n( "Max:" ), this );
    gl->addWidget( lbl, 0, 3 );
    m_pGatherMax = new PMIntEdit( this );
    m_pGatherMax->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pGatherMax, 0, 4 );
 
-   lbl = new QLabel( i18n( "Media" ), this );
+   lbl = new TQLabel( i18n( "Media" ), this );
    gl->addWidget( lbl, 1, 0 );
-   lbl = new QLabel( i18n( "Max stop:" ), this );
+   lbl = new TQLabel( i18n( "Max stop:" ), this );
    gl->addWidget( lbl, 1, 1 );
    m_pMediaMaxSteps = new PMIntEdit( this );
    m_pMediaMaxSteps->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pMediaMaxSteps, 1, 2 );
-   lbl = new QLabel( i18n( "Factor:" ), this );
+   lbl = new TQLabel( i18n( "Factor:" ), this );
    gl->addWidget( lbl,1, 3 );
    m_pMediaFactor = new PMFloatEdit( this );
    m_pMediaFactor->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pMediaFactor, 1, 4 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Jitter:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Jitter:" ), this );
    m_pJitter = new PMFloatEdit( this );
    m_pJitter->setValidation ( true, 0, false, 0 );
    hl->addWidget( lbl );
    hl->addWidget( m_pJitter );
    hl->addStretch( 1 );
 
-   gl = new QGridLayout( topLayout( ), 2, 3 );
-   lbl = new QLabel( i18n( "Max trace level:" ), this );
+   gl = new TQGridLayout( topLayout( ), 2, 3 );
+   lbl = new TQLabel( i18n( "Max trace level:" ), this );
    m_pMaxTraceLevel = new PMIntEdit ( this );
    m_pMaxTraceLevel->setValidation( true, 0, false, 0 );
-   m_pMaxTraceLevelGlobal = new QCheckBox( i18n( "Use global" ), this );
+   m_pMaxTraceLevelGlobal = new TQCheckBox( i18n( "Use global" ), this );
    gl->addWidget( lbl, 0, 0 );
    gl->addWidget( m_pMaxTraceLevel, 0, 1 );
    gl->addWidget( m_pMaxTraceLevelGlobal, 0, 2 );
 
-   lbl = new QLabel( i18n( "Adc bailout:" ), this );
+   lbl = new TQLabel( i18n( "Adc bailout:" ), this );
    m_pAdcBailout = new PMFloatEdit ( this );
    m_pAdcBailout->setValidation( true, 0, true, 1 );
-   m_pAdcBailoutGlobal = new QCheckBox( i18n( "Use global" ), this );
+   m_pAdcBailoutGlobal = new TQCheckBox( i18n( "Use global" ), this );
    gl->addWidget( lbl, 1, 0 );
    gl->addWidget( m_pAdcBailout, 1, 1 );
    gl->addWidget( m_pAdcBailoutGlobal, 1, 2 );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   lbl = new QLabel( i18n( "Autostop:" ), this );
+   hl = new TQHBoxLayout( topLayout( ) );
+   lbl = new TQLabel( i18n( "Autostop:" ), this );
    m_pAutostop = new PMFloatEdit ( this );
    m_pAutostop->setValidation( true, 0, true, 1 );
    hl->addWidget( lbl );
    hl->addWidget( m_pAutostop );
    hl->addStretch( 1 );
 
-   gl = new QGridLayout( topLayout( ), 3, 5 );
-   lbl = new QLabel( i18n( "Expand" ), this );
+   gl = new TQGridLayout( topLayout( ), 3, 5 );
+   lbl = new TQLabel( i18n( "Expand" ), this );
    gl->addWidget( lbl, 0, 0 );
-   lbl = new QLabel( i18n( "Increase:" ), this );
+   lbl = new TQLabel( i18n( "Increase:" ), this );
    gl->addWidget( lbl, 0, 1 );
    m_pExpandIncrease = new PMFloatEdit( this );
    m_pExpandIncrease->setValidation( true, 0, true, 1 );
    gl->addWidget( m_pExpandIncrease, 0, 2 );
-   lbl = new QLabel( i18n( "Minimum:" ), this );
+   lbl = new TQLabel( i18n( "Minimum:" ), this );
    gl->addWidget( lbl, 0, 3 );
    m_pExpandMin = new PMIntEdit( this );
    m_pExpandMin->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pExpandMin, 0, 4 );
 
-   lbl = new QLabel( i18n( "Gather" ), this );
+   lbl = new TQLabel( i18n( "Gather" ), this );
    gl->addWidget( lbl, 1, 0 );
-   lbl = new QLabel( i18n( "Radius:" ), this );
+   lbl = new TQLabel( i18n( "Radius:" ), this );
    gl->addWidget( lbl, 1, 1 );
    m_pRadiusGather = new PMFloatEdit( this );
    m_pRadiusGather->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pRadiusGather, 1, 2 );
-   lbl = new QLabel( i18n( "Multiplier:" ), this );
+   lbl = new TQLabel( i18n( "Multiplier:" ), this );
    gl->addWidget( lbl, 1, 3 );
    m_pRadiusGatherMulti = new PMFloatEdit( this );
    m_pRadiusGatherMulti->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pRadiusGatherMulti, 1, 4 );
 
-   lbl = new QLabel( i18n( "Media" ), this );
+   lbl = new TQLabel( i18n( "Media" ), this );
    gl->addWidget( lbl, 2, 0 );
-   lbl = new QLabel( i18n( "Radius:" ), this );
+   lbl = new TQLabel( i18n( "Radius:" ), this );
    gl->addWidget( lbl, 2, 1 );
    m_pRadiusMedia = new PMFloatEdit( this );
    m_pRadiusMedia->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pRadiusMedia, 2, 2 );
-   lbl = new QLabel( i18n( "Multiplier:" ), this );
+   lbl = new TQLabel( i18n( "Multiplier:" ), this );
    gl->addWidget( lbl, 2, 3 );
    m_pRadiusMediaMulti = new PMFloatEdit( this );
    m_pRadiusMediaMulti->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pRadiusMediaMulti, 2, 4 );
 
-   connect( m_pNumberType, SIGNAL( activated( int ) ),
-            SLOT( slotNumberTypeActivated( int ) ) );
-   connect( m_pSpacing, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCount, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pGatherMin, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pGatherMax, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaMaxSteps, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaFactor, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pJitter, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxTraceLevelGlobal, SIGNAL( clicked( ) ),
-            SLOT( slotMaxTraceLevelGlobalClicked( ) ) );
-   connect( m_pMaxTraceLevel, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAdcBailoutGlobal, SIGNAL( clicked( ) ),
-            SLOT( slotAdcBailoutGlobalClicked( ) ) );
-   connect( m_pAdcBailout, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAutostop, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pExpandIncrease, SIGNAL( dataChanged( ) ), SIGNAL ( dataChanged( ) ) );
-   connect( m_pExpandMin, SIGNAL( dataChanged( ) ), SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusGather, SIGNAL( dataChanged( ) ), SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusGatherMulti, SIGNAL( dataChanged( ) ), SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusMedia, SIGNAL( dataChanged( ) ), SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusMediaMulti, SIGNAL( dataChanged( ) ), SIGNAL ( dataChanged( ) ) );
+   connect( m_pNumberType, TQT_SIGNAL( activated( int ) ),
+            TQT_SLOT( slotNumberTypeActivated( int ) ) );
+   connect( m_pSpacing, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCount, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pGatherMin, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pGatherMax, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaMaxSteps, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pJitter, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxTraceLevelGlobal, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotMaxTraceLevelGlobalClicked( ) ) );
+   connect( m_pMaxTraceLevel, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAdcBailoutGlobal, TQT_SIGNAL( clicked( ) ),
+            TQT_SLOT( slotAdcBailoutGlobalClicked( ) ) );
+   connect( m_pAdcBailout, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAutostop, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pExpandIncrease, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
+   connect( m_pExpandMin, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusGather, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusGatherMulti, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusMedia, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusMediaMulti, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
 }
 
 void PMGlobalPhotonsEdit::displayObject( PMObject* o )

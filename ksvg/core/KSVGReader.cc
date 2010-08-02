@@ -21,7 +21,7 @@
 #include <dom/dom_exception.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <qmap.h>
+#include <tqmap.h>
 #include <ksimpleconfig.h>
 #include <KSVGCanvas.h>
 #include "KSVGReader.moc"
@@ -54,18 +54,18 @@ public:
 	void addSVGElement(SVGSVGElementImpl *one, DOM::NodeImpl *two) { m_svgMap.insert(two, one); }
 	SVGSVGElementImpl *nextSVGElement(SVGElementImpl *elem);
 	SVGSVGElementImpl *nextSVGElement(DOM::Node elem);
-	void setFinished(bool error, const QString &errorDesc = "") { m_reader->setFinished(error, errorDesc); }
+	void setFinished(bool error, const TQString &errorDesc = "") { m_reader->setFinished(error, errorDesc); }
 
 	// Error handling
-	void setErrorDescription(const QString &err) { m_errorDesc = err; }
-	QString errorDescription() { return m_errorDesc; }
+	void setErrorDescription(const TQString &err) { m_errorDesc = err; }
+	TQString errorDescription() { return m_errorDesc; }
 	bool hasError() const { return !m_errorDesc.isEmpty(); }
 
 	bool getURLMode() const { return m_getURLMode; }
 	void setGetURLMode(bool mode) { m_getURLMode = mode; }
 
-	QString SVGFragmentId() const { return m_SVGFragmentId; }
-	void setSVGFragmentId(const QString &SVGFragmentId) { m_SVGFragmentId = SVGFragmentId; }
+	TQString SVGFragmentId() const { return m_SVGFragmentId; }
+	void setSVGFragmentId(const TQString &SVGFragmentId) { m_SVGFragmentId = SVGFragmentId; }
 
 protected:
 	Helper(KSVGReader *reader);
@@ -76,12 +76,12 @@ private:
 	Helper &operator=(const Helper &rhs);
 
 	static Helper *m_instance;
-	QMap<DOM::NodeImpl *, SVGSVGElementImpl *> m_svgMap;
+	TQMap<DOM::NodeImpl *, SVGSVGElementImpl *> m_svgMap;
 	KSVGReader *m_reader;
 	bool m_bFit;
 	bool m_getURLMode;
-	QString m_errorDesc;
-	QString m_SVGFragmentId;
+	TQString m_errorDesc;
+	TQString m_SVGFragmentId;
 };
 
 class InputHandler : public QXmlDefaultHandler
@@ -89,17 +89,17 @@ class InputHandler : public QXmlDefaultHandler
 public:
 	virtual bool startDocument();
 	virtual bool endDocument();
-	virtual bool startElement(const QString &namespaceURI,
-	                          const QString &localName,
-	                          const QString &qName,
-	                          const QXmlAttributes &atts);
-	virtual bool endElement(const QString &namespaceURI,
-	                        const QString &localName,
-	                        const QString &qName);
-	virtual bool characters(const QString &ch);
-	virtual bool warning(const QXmlParseException &e);
-	virtual bool error(const QXmlParseException &e);
-	virtual bool fatalError(const QXmlParseException &e);
+	virtual bool startElement(const TQString &namespaceURI,
+	                          const TQString &localName,
+	                          const TQString &qName,
+	                          const TQXmlAttributes &atts);
+	virtual bool endElement(const TQString &namespaceURI,
+	                        const TQString &localName,
+	                        const TQString &qName);
+	virtual bool characters(const TQString &ch);
+	virtual bool warning(const TQXmlParseException &e);
+	virtual bool error(const TQXmlParseException &e);
+	virtual bool fatalError(const TQXmlParseException &e);
 
 private:
 	DOM::Node *m_rootNode;
@@ -186,14 +186,14 @@ bool InputHandler::endDocument()
 	return true;
 }
 
-bool InputHandler::characters(const QString &ch)
+bool InputHandler::characters(const TQString &ch)
 {
 	kdDebug(26001) << "InputHandler::characters, read " << ch << endl;
 
 	if(ch.simplifyWhiteSpace().isEmpty())
 		return true;
 
-	QString t = ch;
+	TQString t = ch;
 
 	SVGSVGElementImpl *root = Helper::self()->nextSVGElement(*m_currentNode);
 	if(root)
@@ -214,7 +214,7 @@ bool InputHandler::characters(const QString &ch)
 	return true;
 }
 
-bool InputHandler::startElement(const QString &namespaceURI, const QString &, const QString &qName, const QXmlAttributes &attrs)
+bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, const TQString &qName, const TQXmlAttributes &attrs)
 {
 	kdDebug(26001) << "InputHandler::startElement, namespaceURI " << namespaceURI << " qName " << qName << endl;
 
@@ -245,14 +245,14 @@ bool InputHandler::startElement(const QString &namespaceURI, const QString &, co
 					SVGLengthImpl *height = SVGSVGElementImpl::createSVGLength();
 					width->setValueAsString(svg->getAttribute("width").string());
 					height->setValueAsString(svg->getAttribute("height").string());
-					QString viewbox = QString("0 0 %1 %2").arg(width->value()).arg(height->value());
+					TQString viewbox = TQString("0 0 %1 %2").arg(width->value()).arg(height->value());
 					//kdDebug(26001) << "VIEWBOX : " << viewbox.latin1() << endl;
 					svg->setAttribute("viewBox", viewbox);
 					width->deref();
 					height->deref();
 				}
-				svg->setAttribute("width", QString::number(Helper::self()->canvas()->width()));
-				svg->setAttribute("height", QString::number(Helper::self()->canvas()->height()));
+				svg->setAttribute("width", TQString::number(Helper::self()->canvas()->width()));
+				svg->setAttribute("height", TQString::number(Helper::self()->canvas()->height()));
 			}
 
 			if(!Helper::self()->SVGFragmentId().isEmpty())
@@ -341,7 +341,7 @@ bool InputHandler::startElement(const QString &namespaceURI, const QString &, co
 	return !Helper::self()->hasError();
 }
 
-bool InputHandler::endElement(const QString &, const QString &, const QString &qName)
+bool InputHandler::endElement(const TQString &, const TQString &, const TQString &qName)
 {
 	kdDebug(26001) << "InputHandler::endElement, qName " << qName << endl;
 
@@ -364,12 +364,12 @@ bool InputHandler::endElement(const QString &, const QString &, const QString &q
 
 				Helper::self()->canvas()->blit();
 
-				QValueList<SVGUseElementImpl *> forwardReferencingUseElements = Helper::self()->doc()->forwardReferencingUseElements();
+				TQValueList<SVGUseElementImpl *> forwardReferencingUseElements = Helper::self()->doc()->forwardReferencingUseElements();
 
 				if(!forwardReferencingUseElements.isEmpty())
 				{
 					// Create the elements again now that we have parsed the whole document.
-					QValueList<SVGUseElementImpl *>::iterator it;
+					TQValueList<SVGUseElementImpl *>::iterator it;
 
 					Helper::self()->canvas()->setImmediateUpdate(false);
 
@@ -407,29 +407,29 @@ bool InputHandler::endElement(const QString &, const QString &, const QString &q
 	return true;
 }
 
-bool InputHandler::warning(const QXmlParseException &e)
+bool InputHandler::warning(const TQXmlParseException &e)
 {
 	kdDebug(26001) << "[" << e.lineNumber() << ":" << e.columnNumber() << "]: WARNING: " << e.message() << endl;
 	return true;
 }
 
-bool InputHandler::error(const QXmlParseException &e)
+bool InputHandler::error(const TQXmlParseException &e)
 {
 	kdDebug(26001) << "[" << e.lineNumber() << ":" << e.columnNumber() << "]: ERROR: " << e.message() << endl;
 	return true;
 }
 
-bool InputHandler::fatalError(const QXmlParseException &e)
+bool InputHandler::fatalError(const TQXmlParseException &e)
 {
-	QString error;
+	TQString error;
 	
 	if(Helper::self()->hasError())
 	{
 		error = Helper::self()->errorDescription();
-		Helper::self()->setErrorDescription(QString::null);
+		Helper::self()->setErrorDescription(TQString::null);
 	}
 	else
-		error = QString("[%1:%2]: FATAL ERROR: %3").arg(e.lineNumber()).arg(e.columnNumber()).arg(e.message());
+		error = TQString("[%1:%2]: FATAL ERROR: %3").arg(e.lineNumber()).arg(e.columnNumber()).arg(e.message());
 
 	kdDebug(26001) << "InputHandler::fatalError, " << error << endl;
 
@@ -439,18 +439,18 @@ bool InputHandler::fatalError(const QXmlParseException &e)
 
 struct KSVGReader::Private
 {
-	QXmlSimpleReader *reader;
+	TQXmlSimpleReader *reader;
 	InputHandler *inputHandler;
 	SVGDocumentImpl *doc;
 	KSVGCanvas *canvas;
 };
 
-KSVGReader::KSVGReader(SVGDocumentImpl *doc, KSVGCanvas *canvas, ParsingArgs args) : QObject(), d(new Private)
+KSVGReader::KSVGReader(SVGDocumentImpl *doc, KSVGCanvas *canvas, ParsingArgs args) : TQObject(), d(new Private)
 {
 	d->doc = doc;
 	d->canvas = canvas;
 
-	d->reader = new QXmlSimpleReader();
+	d->reader = new TQXmlSimpleReader();
 	d->inputHandler = new InputHandler();
 
 	Helper::self(this);
@@ -471,17 +471,17 @@ KSVGReader::~KSVGReader()
 	delete d;
 }
 
-void KSVGReader::parse(QXmlInputSource *source)
+void KSVGReader::parse(TQXmlInputSource *source)
 {
 	d->reader->parse(source);
 }
 
-void KSVGReader::finishParsing(bool, const QString &errorDesc)
+void KSVGReader::finishParsing(bool, const TQString &errorDesc)
 {
 	Helper::self()->setErrorDescription(errorDesc);
 }
 
-void KSVGReader::setFinished(bool error, const QString &errorDesc)
+void KSVGReader::setFinished(bool error, const TQString &errorDesc)
 {
 	kdDebug(26001) << "KSVGReader::setFinished" << endl;
 	emit finished(error, errorDesc);

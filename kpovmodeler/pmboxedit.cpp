@@ -20,11 +20,11 @@
 #include "pmbox.h"
 #include "pmvectoredit.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
 #include <klocale.h>
 
-PMBoxEdit::PMBoxEdit( QWidget* parent, const char* name )
+PMBoxEdit::PMBoxEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -37,14 +37,14 @@ void PMBoxEdit::createTopWidgets( )
    m_pCorner1 = new PMVectorEdit( "x", "y", "z", this );
    m_pCorner2 = new PMVectorEdit( "x", "y", "z", this );
 
-   QGridLayout* gl = new QGridLayout( topLayout( ), 2, 2 );
-   gl->addWidget( new QLabel( i18n( "Corner 1:" ), this ), 0, 0 );
+   TQGridLayout* gl = new TQGridLayout( topLayout( ), 2, 2 );
+   gl->addWidget( new TQLabel( i18n( "Corner 1:" ), this ), 0, 0 );
    gl->addWidget( m_pCorner1, 0, 1 );
-   gl->addWidget( new QLabel( i18n( "Corner 2:" ), this ), 1, 0 );
+   gl->addWidget( new TQLabel( i18n( "Corner 2:" ), this ), 1, 0 );
    gl->addWidget( m_pCorner2, 1, 1 );
 
-   connect( m_pCorner1, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCorner2, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pCorner1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCorner2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBoxEdit::displayObject( PMObject* o )

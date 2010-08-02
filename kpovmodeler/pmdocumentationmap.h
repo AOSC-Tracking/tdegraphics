@@ -23,14 +23,14 @@
 #include <config.h>
 #endif
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qptrlist.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqmap.h>
+#include <tqptrlist.h>
+#include <tqvaluelist.h>
 #include <kstaticdeleter.h>
 
 class KConfig;
-class QDomElement;
+class TQDomElement;
 
 /**
  * Class used internally by @ref PMDocumentationMap
@@ -47,19 +47,19 @@ public:
     */
    ~PMDocumentationVersion( ) { }
 
-   QString version( ) const { return m_version; }
-   void setVersion( const QString& str ) { m_version = str; }
-   QString index( ) const { return m_index; }
-   void setIndex( const QString& str ) { m_index = str; }
+   TQString version( ) const { return m_version; }
+   void setVersion( const TQString& str ) { m_version = str; }
+   TQString index( ) const { return m_index; }
+   void setIndex( const TQString& str ) { m_index = str; }
 
-   QString documentation( const QString& className ) const;
+   TQString documentation( const TQString& className ) const;
 
-   void loadData( QDomElement& e );
+   void loadData( TQDomElement& e );
       
 private:
-   QString m_version;
-   QString m_index;
-   QMap< QString, QString > m_map;
+   TQString m_version;
+   TQString m_index;
+   TQMap< TQString, TQString > m_map;
 };
 
 /**
@@ -81,14 +81,14 @@ public:
    /**
     * Sets the path to the povray user documentation
     */
-   void setPovrayDocumentationPath( const QString& s )
+   void setPovrayDocumentationPath( const TQString& s )
    {
       m_documentationPath = s;
    }
    /**
     * Returns the path to the povray user documentation
     */
-   QString povrayDocumentationPath( )
+   TQString povrayDocumentationPath( )
    {
       return m_documentationPath;
    }
@@ -96,22 +96,22 @@ public:
    /**
     * Sets the povray documentation version
     */
-   void setDocumentationVersion( const QString& str );
+   void setDocumentationVersion( const TQString& str );
    /**
     * Returns the povray documentation version
     */
-   QString documentationVersion( ) const { return m_currentVersion; }
+   TQString documentationVersion( ) const { return m_currentVersion; }
 
    /**
     * Returns the list of available documentation versions
     */
-   QValueList<QString> availableVersions( );
+   TQValueList<TQString> availableVersions( );
 
    /**
     * Returns the povray documentation file for the
     * given object type
     */
-   QString documentation( const QString& objectName );
+   TQString documentation( const TQString& objectName );
    
    void saveConfig( KConfig* cfg );
    void restoreConfig( KConfig* cfg );
@@ -125,11 +125,11 @@ private:
    void loadMap( );
    void findVersion( );
 
-   QString m_documentationPath;
+   TQString m_documentationPath;
    bool m_mapLoaded;
-   QPtrList< PMDocumentationVersion > m_maps;
+   TQPtrList< PMDocumentationVersion > m_maps;
    PMDocumentationVersion* m_pCurrentVersion;
-   QString m_currentVersion;
+   TQString m_currentVersion;
 
    static PMDocumentationMap* s_pInstance;
    static KStaticDeleter<PMDocumentationMap> s_staticDeleter;   

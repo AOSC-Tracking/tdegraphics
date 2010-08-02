@@ -19,11 +19,11 @@
 #include "pmcommentedit.h"
 #include "pmcomment.h"
 
-#include <qlayout.h>
-#include <qmultilineedit.h>
+#include <tqlayout.h>
+#include <tqmultilineedit.h>
 #include <kglobalsettings.h>
 
-PMCommentEdit::PMCommentEdit( QWidget* parent, const char* name )
+PMCommentEdit::PMCommentEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -33,15 +33,15 @@ void PMCommentEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   m_pEdit = new QMultiLineEdit( this );
+   m_pEdit = new TQMultiLineEdit( this );
 #if ( QT_VERSION >= 300 )
    m_pEdit->setTextFormat( Qt::PlainText );
-   m_pEdit->setWordWrap( QTextEdit::NoWrap );
+   m_pEdit->setWordWrap( TQTextEdit::NoWrap );
 #endif
    m_pEdit->setFont( KGlobalSettings::fixedFont( ) );
    topLayout( )->addWidget( m_pEdit, 2 );
    
-   connect( m_pEdit, SIGNAL( textChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pEdit, TQT_SIGNAL( textChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMCommentEdit::displayObject( PMObject* o )

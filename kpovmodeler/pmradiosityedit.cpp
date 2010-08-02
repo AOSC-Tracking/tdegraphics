@@ -20,15 +20,15 @@
 #include "pmradiosity.h"
 #include "pmlineedits.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
 
 
-PMRadiosityEdit::PMRadiosityEdit( QWidget* parent, const char* name )
+PMRadiosityEdit::PMRadiosityEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -36,91 +36,91 @@ PMRadiosityEdit::PMRadiosityEdit( QWidget* parent, const char* name )
 
 void PMRadiosityEdit::createTopWidgets( )
 {
-   QHBoxLayout* hl;
-   QGridLayout *gl;
-   QLabel* lbl;
+   TQHBoxLayout* hl;
+   TQGridLayout *gl;
+   TQLabel* lbl;
 
    Base::createTopWidgets( );
 
-   hl = new QHBoxLayout( topLayout( ) );
-   gl = new QGridLayout( hl, 15, 2 );
+   hl = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( hl, 15, 2 );
 
-   lbl = new QLabel( i18n( "Adc bailout:" ), this );
+   lbl = new TQLabel( i18n( "Adc bailout:" ), this );
    m_pAdcBailout = new PMFloatEdit( this );
    m_pAdcBailout->setValidation( true, 0, true, 1 );
    gl->addWidget( lbl, 0, 0 );
    gl->addWidget( m_pAdcBailout, 0, 1 );
 
-   m_pAlwaysSample = new QCheckBox( i18n( "Always sample" ), this );
+   m_pAlwaysSample = new TQCheckBox( i18n( "Always sample" ), this );
    gl->addMultiCellWidget( m_pAlwaysSample, 1, 1, 0, 1 );
 
-   lbl = new QLabel( i18n( "Brightness:" ), this );
+   lbl = new TQLabel( i18n( "Brightness:" ), this );
    m_pBrightness = new PMFloatEdit( this );
    m_pBrightness->setValidation( true, 0, false, 0 );
    gl->addWidget( lbl, 2, 0 );
    gl->addWidget( m_pBrightness, 2, 1 );
 
-   lbl = new QLabel( i18n( "Count:" ), this );
+   lbl = new TQLabel( i18n( "Count:" ), this );
    m_pCount = new PMIntEdit( this );
    m_pCount->setValidation( true, 0, true, 1600 );
    gl->addWidget( lbl, 3, 0 );
    gl->addWidget( m_pCount, 3, 1 );
 
-   lbl = new QLabel( i18n( "Error boundary:" ), this );
+   lbl = new TQLabel( i18n( "Error boundary:" ), this );
    m_pErrorBound = new PMFloatEdit( this );
    m_pErrorBound->setValidation( true, 0, false, 0 );
    gl->addWidget( lbl, 4, 0 );
    gl->addWidget( m_pErrorBound, 4, 1 );
 
-   lbl = new QLabel( i18n( "Gray threshold:" ), this );
+   lbl = new TQLabel( i18n( "Gray threshold:" ), this );
    m_pGrayThreshold = new PMFloatEdit( this );
    m_pGrayThreshold->setValidation( true, 0, true, 1 );
    gl->addWidget( lbl, 5, 0 );
    gl->addWidget( m_pGrayThreshold, 5, 1 );
 
-   lbl = new QLabel( i18n( "Low error factor:" ), this );
+   lbl = new TQLabel( i18n( "Low error factor:" ), this );
    m_pLowErrorFactor = new PMFloatEdit( this );
    m_pLowErrorFactor->setValidation( true, 0, true, 1 );
    gl->addWidget( lbl, 6, 0 );
    gl->addWidget( m_pLowErrorFactor, 6, 1 );
 
-   lbl = new QLabel( i18n( "Maximum sample:" ), this );
+   lbl = new TQLabel( i18n( "Maximum sample:" ), this );
    m_pMaxSample = new PMFloatEdit( this );
    m_pMaxSample->setValidation( true, -1, false, 0 );
    gl->addWidget( lbl, 7, 0 );
    gl->addWidget( m_pMaxSample, 7, 1 );
 
-   m_pMedia = new QCheckBox( i18n( "Media" ), this );
+   m_pMedia = new TQCheckBox( i18n( "Media" ), this );
    gl->addMultiCellWidget( m_pMedia, 8, 8, 0, 1 );
 
-   lbl = new QLabel( i18n( "Minimum reuse:" ), this );
+   lbl = new TQLabel( i18n( "Minimum reuse:" ), this );
    m_pMinimumReuse = new PMFloatEdit( this );
    m_pMinimumReuse->setValidation( true, 0, true, 1 );
    gl->addWidget( lbl, 9, 0 );
    gl->addWidget( m_pMinimumReuse, 9, 1 );
 
-   lbl = new QLabel( i18n( "Nearest count:" ), this );
+   lbl = new TQLabel( i18n( "Nearest count:" ), this );
    m_pNearestCount = new PMIntEdit( this );
    m_pNearestCount->setValidation( true, 0, true, 20 );
    gl->addWidget( lbl, 10, 0 );
    gl->addWidget( m_pNearestCount, 10, 1 );
 
-   m_pNormal = new QCheckBox( i18n( "Normal" ), this );
+   m_pNormal = new TQCheckBox( i18n( "Normal" ), this );
    gl->addMultiCellWidget( m_pNormal, 11, 11, 0, 1 );
 
-   lbl = new QLabel( i18n( "Pretrace start:" ), this );
+   lbl = new TQLabel( i18n( "Pretrace start:" ), this );
    m_pPretraceStart = new PMFloatEdit( this );
    m_pPretraceStart->setValidation( true, 0, true, 1 );
    gl->addWidget( lbl, 12, 0 );
    gl->addWidget( m_pPretraceStart, 12, 1 );
 
-   lbl = new QLabel( i18n( "Pretrace end:" ), this );
+   lbl = new TQLabel( i18n( "Pretrace end:" ), this );
    m_pPretraceEnd = new PMFloatEdit( this );
    m_pPretraceEnd->setValidation( true, 0, true, 1 );
    gl->addWidget( lbl, 13, 0 );
    gl->addWidget( m_pPretraceEnd, 13, 1 );
 
-   lbl = new QLabel( i18n( "Recursion limit:" ), this );
+   lbl = new TQLabel( i18n( "Recursion limit:" ), this );
    m_pRecursionLimit = new PMIntEdit( this );
    m_pRecursionLimit->setValidation( true, 1, true, 20 );
    gl->addWidget( lbl, 14, 0 );
@@ -128,21 +128,21 @@ void PMRadiosityEdit::createTopWidgets( )
 
    hl->addStretch( 1 );
 
-   connect( m_pAdcBailout, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pAlwaysSample, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pBrightness, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pCount, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pErrorBound, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pGrayThreshold, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pLowErrorFactor, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxSample, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMedia, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pMinimumReuse, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pNearestCount, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pNormal, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPretraceStart, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pPretraceEnd, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
-   connect( m_pRecursionLimit, SIGNAL( dataChanged( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pAdcBailout, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAlwaysSample, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pBrightness, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCount, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pErrorBound, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pGrayThreshold, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLowErrorFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxSample, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMedia, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMinimumReuse, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNearestCount, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNormal, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPretraceStart, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pPretraceEnd, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pRecursionLimit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMRadiosityEdit::displayObject( PMObject* o )

@@ -26,11 +26,11 @@
 #include <kstringvalidator.h>
 #include <kdebug.h>
 
-#include <qdict.h>
-#include <qvalidator.h>
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
+#include <tqdict.h>
+#include <tqvalidator.h>
+#include <tqcstring.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
 
 
 typedef KGenericFactory<KDdsPlugin> DdsFactory;
@@ -96,7 +96,7 @@ namespace {	// Private.
 		uint amask;
 	};
 
-	QDataStream & operator>> ( QDataStream & s, DDSPixelFormat & pf )
+	TQDataStream & operator>> ( TQDataStream & s, DDSPixelFormat & pf )
 	{
 		s >> pf.size;
 		s >> pf.flags;
@@ -116,7 +116,7 @@ namespace {	// Private.
 		uint caps4;
 	};
 
-	QDataStream & operator>> ( QDataStream & s, DDSCaps & caps )
+	TQDataStream & operator>> ( TQDataStream & s, DDSCaps & caps )
 	{
 		s >> caps.caps1;
 		s >> caps.caps2;
@@ -139,7 +139,7 @@ namespace {	// Private.
 		uint notused;
 	};
 
-	QDataStream & operator>> ( QDataStream & s, DDSHeader & header )
+	TQDataStream & operator>> ( TQDataStream & s, DDSHeader & header )
 	{
 		s >> header.size;
 		s >> header.flags;
@@ -182,7 +182,7 @@ namespace {	// Private.
 K_EXPORT_COMPONENT_FACTORY(kfile_dds, DdsFactory( "kfile_dds" ))
 
 // Constructor, init mime type info.
-KDdsPlugin::KDdsPlugin(QObject *parent, const char *name, const QStringList &args) : 
+KDdsPlugin::KDdsPlugin(TQObject *parent, const char *name, const TQStringList &args) : 
 	KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo * info = addMimeTypeInfo( "image/x-dds" );
@@ -193,41 +193,41 @@ KDdsPlugin::KDdsPlugin(QObject *parent, const char *name, const QStringList &arg
 
     KFileMimeTypeInfo::ItemInfo * item;
 
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), TQVariant::Size);
     setHint(item, KFileMimeTypeInfo::Size);
     setUnit(item, KFileMimeTypeInfo::Pixels);
 
-	item = addItemInfo(group, "Depth", i18n("Depth"), QVariant::Int);
+	item = addItemInfo(group, "Depth", i18n("Depth"), TQVariant::Int);
 	setUnit(item, KFileMimeTypeInfo::Pixels);
 	
-    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), TQVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-	addItemInfo(group, "MipmapCount", i18n("Mipmap Count"), QVariant::Int);
+	addItemInfo(group, "MipmapCount", i18n("Mipmap Count"), TQVariant::Int);
 	
-	addItemInfo(group, "Type", i18n("Type"), QVariant::String);
-    addItemInfo(group, "ColorMode", i18n("Color Mode"), QVariant::String);
-    addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
+	addItemInfo(group, "Type", i18n("Type"), TQVariant::String);
+    addItemInfo(group, "ColorMode", i18n("Color Mode"), TQVariant::String);
+    addItemInfo(group, "Compression", i18n("Compression"), TQVariant::String);
 }
 
 // Read mime type info.
 bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 {
-	QFile file(info.path());
+	TQFile file(info.path());
 
 	if (!file.open(IO_ReadOnly)) {
-		kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+		kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
 		return false;
 	}
 
-	QDataStream s(&file);
-	s.setByteOrder(QDataStream::LittleEndian);
+	TQDataStream s(&file);
+	s.setByteOrder(TQDataStream::LittleEndian);
 
 	// Validate header.
 	uint fourcc;
 	s >> fourcc;
 	if( fourcc != FOURCC_DDS ) {
-		kdDebug(7034) << QFile::encodeName(info.path()) << " is not a DDS file." << endl;
+		kdDebug(7034) << TQFile::encodeName(info.path()) << " is not a DDS file." << endl;
 		return false;
 	}
 
@@ -237,13 +237,13 @@ bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 
 	// Check image file format.
 	if( s.atEnd() || !IsValid( header ) ) {
-		kdDebug(7034) << QFile::encodeName(info.path()) << " is not a valid DDS file." << endl;
+		kdDebug(7034) << TQFile::encodeName(info.path()) << " is not a valid DDS file." << endl;
 		return false;
 	}
 
 	// Set file info.
 	KFileMetaInfoGroup group = appendGroup(info, "Technical");
- 	appendItem(group, "Dimensions", QSize(header.width, header.height));
+ 	appendItem(group, "Dimensions", TQSize(header.width, header.height));
 	appendItem(group, "MipmapCount", header.mipmapcount);
 	
 	// Set file type.

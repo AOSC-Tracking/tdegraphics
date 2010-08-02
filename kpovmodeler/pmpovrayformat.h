@@ -72,23 +72,23 @@ public:
    /**
     * Registers the serialization method for the class className
     */
-   void registerMethod( const QString& className, PMPovraySerializeMethod method );
+   void registerMethod( const TQString& className, PMPovraySerializeMethod method );
    /**
     * Removes a registered serialization method
     */
-   void removeMethod( const QString& className );
+   void removeMethod( const TQString& className );
    /**
     * Returns the serialization methods info for the given object type
     * or 0 if there is none.
     */
    const PMPovraySerializeMethodInfo* serializationMethod(
-      const QString& className );
+      const TQString& className );
 
 private:
    /**
     * Dict class name -> serialization method
     */
-   QDict<PMPovraySerializeMethodInfo> m_methodDict;
+   TQDict<PMPovraySerializeMethodInfo> m_methodDict;
 };
 
 #endif

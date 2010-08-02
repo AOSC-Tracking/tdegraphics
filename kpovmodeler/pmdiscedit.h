@@ -38,7 +38,7 @@ public:
    /**
     * Creates a PMPlaneEdit with parent and name
     */
-   PMDiscEdit( QWidget* parent, const char* name = 0 );
+   PMDiscEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

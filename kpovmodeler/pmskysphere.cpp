@@ -64,12 +64,12 @@ void PMSkySphere::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMSkySphere::description( ) const
+TQString PMSkySphere::description( ) const
 {
    return i18n( "skysphere" );
 }
 
-PMDialogEditBase* PMSkySphere::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMSkySphere::editWidget( TQWidget* parent ) const
 {
    return new PMSkySphereEdit( parent );
 }

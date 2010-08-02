@@ -25,10 +25,10 @@
 
 #include <kdialogbase.h>
 
-class QLineEdit;
-class QTextEdit;
-class QListBox;
-class QCheckBox;
+class TQLineEdit;
+class TQTextEdit;
+class TQListBox;
+class TQCheckBox;
 class PMLibraryHandle;
 
 /** 
@@ -42,25 +42,25 @@ public:
     * Construct a dialog to edit the properties of lib. The library will be
     * modified only if Ok is pressed.
     */
-   PMLibraryHandleEdit( PMLibraryHandle* lib, QWidget *parent = NULL, const char* name = NULL );
+   PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget *parent = NULL, const char* name = NULL );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );
-   static QSize s_size;
+   static TQSize s_size;
 
 private slots:
    void slotOk( );
-   void slotEditsChanged( const QString& );
+   void slotEditsChanged( const TQString& );
    void slotDescriptionChanged( );
    void slotReadOnlyChanged( );
-   void resizeEvent( QResizeEvent *ev );
+   void resizeEvent( TQResizeEvent *ev );
 
 private:
    PMLibraryHandle* m_pLibrary;
-   QLineEdit*       m_pNameEdit;
-   QLineEdit*       m_pAuthorEdit;
-   QTextEdit*       m_pDescriptionEdit;
-   QCheckBox*     m_pReadOnlyEdit;
+   TQLineEdit*       m_pNameEdit;
+   TQLineEdit*       m_pAuthorEdit;
+   TQTextEdit*       m_pDescriptionEdit;
+   TQCheckBox*     m_pReadOnlyEdit;
 };
 
 #endif

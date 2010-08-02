@@ -54,7 +54,7 @@ PMCSG::~PMCSG( )
 {
 }
 
-QString PMCSG::description( ) const
+TQString PMCSG::description( ) const
 {
    switch( m_type )
    {
@@ -71,30 +71,30 @@ QString PMCSG::description( ) const
          return i18n( "merge" );
          break;
    }
-   return QString( "" );
+   return TQString( "" );
 }
 
-QString PMCSG::pixmap( ) const
+TQString PMCSG::pixmap( ) const
 {
    switch( m_type )
    {
       case CSGUnion:
-         return QString( "pmunion" );
+         return TQString( "pmunion" );
          break;
       case CSGIntersection:
-         return QString( "pmintersection" );
+         return TQString( "pmintersection" );
          break;
       case CSGDifference:
-         return QString( "pmdifference" );
+         return TQString( "pmdifference" );
          break;
       case CSGMerge:
-         return QString( "pmmerge" );
+         return TQString( "pmmerge" );
          break;
    }
-   return QString( "" );
+   return TQString( "" );
 }
 
-void PMCSG::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMCSG::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    switch( m_type )
    {
@@ -117,7 +117,7 @@ void PMCSG::serialize( QDomElement& e, QDomDocument& doc ) const
 
 void PMCSG::readAttributes( const PMXMLHelper& h )
 {
-   QString str = h.stringAttribute( "csgtype", "union" );
+   TQString str = h.stringAttribute( "csgtype", "union" );
    if( str == "union" )
       m_type = CSGUnion;
    else if( str == "intersection" )
@@ -169,7 +169,7 @@ void PMCSG::setCSGType( const PMCSGType t )
    }
 }
 
-PMDialogEditBase* PMCSG::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMCSG::editWidget( TQWidget* parent ) const
 {
    return new PMCSGEdit( parent );
 }

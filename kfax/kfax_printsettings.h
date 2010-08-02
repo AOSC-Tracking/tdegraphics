@@ -22,7 +22,7 @@
 
 #include <kdeprint/kprintdialogpage.h>
 
-class QCheckBox;
+class TQCheckBox;
 
 #define APP_KFAX_SCALE_FULLPAGE "app-kfax-scalefullpage"
 #define APP_KFAX_CENTER_HORZ    "app-kfax-center-horz"
@@ -32,11 +32,11 @@ class KFAXPrintSettings : public KPrintDialogPage
 {
 	Q_OBJECT
 public:
-	KFAXPrintSettings(QWidget *parent = 0, const char *name = 0);
+	KFAXPrintSettings(TQWidget *parent = 0, const char *name = 0);
 	~KFAXPrintSettings();
 
-	void getOptions(QMap<QString,QString>& opts, bool incldef = false);
-	void setOptions(const QMap<QString,QString>& opts);
+	void getOptions(TQMap<TQString,TQString>& opts, bool incldef = false);
+	void setOptions(const TQMap<TQString,TQString>& opts);
 
 private:
 	QCheckBox	*m_scaleFullPage;

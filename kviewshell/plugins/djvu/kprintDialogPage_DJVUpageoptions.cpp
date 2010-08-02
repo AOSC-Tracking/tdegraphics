@@ -19,16 +19,16 @@
  ***************************************************************************/
 
 #include <klocale.h>
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
 #include <kdebug.h>
 
 #include "kprintDialogPage_DJVUpageoptions.h"
 
-KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( QWidget *parent, const char *name )
+KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *parent, const char *name )
   : KPrintDialogPage( parent, name )
 {
   setTitle( i18n("Page Size & Placement") );
@@ -38,17 +38,17 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( QWidget *par
   checkBox_fitpage = 0;
 
 
-  kprintDialogPage_pageoptions_baseLayout = new QVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout");
+  kprintDialogPage_pageoptions_baseLayout = new TQVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout");
   if (kprintDialogPage_pageoptions_baseLayout == 0) {
     kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create layout" << endl;
     return;
   }
 
-  checkBox_rotate = new QCheckBox( this, "checkBox_rotate" );
+  checkBox_rotate = new TQCheckBox( this, "checkBox_rotate" );
   if (checkBox_rotate != 0) {
     checkBox_rotate->setText( i18n( "Automatically choose landscape or portrait orientation" ) );
-    QToolTip::add( checkBox_rotate, i18n( "If this option is enabled, some pages might be rotated to better fit the paper size." ) );
-    QWhatsThis::add( checkBox_rotate, i18n( "<qt><p>If this option is enabled, landscape or portrait orientation are automatically chosen on a "
+    TQToolTip::add( checkBox_rotate, i18n( "If this option is enabled, some pages might be rotated to better fit the paper size." ) );
+    TQWhatsThis::add( checkBox_rotate, i18n( "<qt><p>If this option is enabled, landscape or portrait orientation are automatically chosen on a "
 					    "page-by-page basis. This makes better use of the paper and gives more visually-"
 					    "appealing printouts.</p>"
 					    "<p><b>Note:</b> This option overrides the Portrait/Landscape option chosen in the printer "
@@ -57,11 +57,11 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( QWidget *par
     kprintDialogPage_pageoptions_baseLayout->addWidget( checkBox_rotate );
   }
 
-  checkBox_fitpage = new QCheckBox( this, "checkBox_shrink" );
+  checkBox_fitpage = new TQCheckBox( this, "checkBox_shrink" );
   if (checkBox_fitpage != 0) {
     checkBox_fitpage->setText( i18n( "Scale pages to fit paper size" ) );
-    QToolTip::add( checkBox_fitpage, i18n( "If this option is enabled, all pages will be scaled to optimally fit the printer's paper size." ) );
-    QWhatsThis::add( checkBox_fitpage, i18n( "<qt><p>If this option is enabled, all pages will be scaled to optimally fit the printer's "
+    TQToolTip::add( checkBox_fitpage, i18n( "If this option is enabled, all pages will be scaled to optimally fit the printer's paper size." ) );
+    TQWhatsThis::add( checkBox_fitpage, i18n( "<qt><p>If this option is enabled, all pages will be scaled to optimally fit the printer's "
 					    "paper size.</p>"
 					    "<p><b>Note:</b> If this option is enabled, and if the pages in your document have different sizes, "
 					    "then different pages might be scaled by different scaling factors.</p></qt>" ) );
@@ -70,13 +70,13 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( QWidget *par
 
   kprintDialogPage_pageoptions_baseLayout->addStretch();
 
-  resize( QSize(319, 166).expandedTo(minimumSizeHint()) );
+  resize( TQSize(319, 166).expandedTo(minimumSizeHint()) );
   clearWState( WState_Polished );
 }
 
 
 
-void KPrintDialogPage_DJVUPageOptions::getOptions( QMap<QString,QString>& opts, bool )
+void KPrintDialogPage_DJVUPageOptions::getOptions( TQMap<TQString,TQString>& opts, bool )
 {
   // Save options, taking default values into consideration. Warning:
   // The default values are also coded into setOptions() and
@@ -96,13 +96,13 @@ void KPrintDialogPage_DJVUPageOptions::getOptions( QMap<QString,QString>& opts, 
 }
 
 
-void KPrintDialogPage_DJVUPageOptions::setOptions( const QMap<QString,QString>& opts )
+void KPrintDialogPage_DJVUPageOptions::setOptions( const TQMap<TQString,TQString>& opts )
 {
   // Warning: All default values are also coded into getOptions() and
   // kmultipage::print(..).
 
   // same for rotation
-  QString op = opts[ "kde-kviewshell-rotatepage" ];
+  TQString op = opts[ "kde-kviewshell-rotatepage" ];
   if (checkBox_rotate != 0)
     checkBox_rotate->setChecked( op != "false" );
 
@@ -113,7 +113,7 @@ void KPrintDialogPage_DJVUPageOptions::setOptions( const QMap<QString,QString>& 
 }
 
 
-bool KPrintDialogPage_DJVUPageOptions::isValid( QString& )
+bool KPrintDialogPage_DJVUPageOptions::isValid( TQString& )
 {
   return true;
 }

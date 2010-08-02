@@ -22,12 +22,12 @@
 #include "pmrendermode.h"
 #include <kdialogbase.h>
 
-class QCheckBox;
-class QComboBox;
-class QLineEdit;
-class QListBox;
-class QPushButton;
-class QTabWidget;
+class TQCheckBox;
+class TQComboBox;
+class TQLineEdit;
+class TQListBox;
+class TQPushButton;
+class TQTabWidget;
 class KConfig;
 class PMIntEdit;
 class PMFloatEdit;
@@ -43,7 +43,7 @@ public:
    /**
     * Creates a dialog for the modes list
     */
-   PMRenderModesDialog( PMRenderModeList* modes, QWidget* parent = 0, const char* name = 0 );
+   PMRenderModesDialog( PMRenderModeList* modes, TQWidget* parent = 0, const char* name = 0 );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );
@@ -81,7 +81,7 @@ protected slots:
    virtual void slotOk( );
    
 protected:
-   virtual void resizeEvent( QResizeEvent* ev );
+   virtual void resizeEvent( TQResizeEvent* ev );
 
 private:
    void displayList( );
@@ -91,13 +91,13 @@ private:
    PMRenderModeList m_workingModes;
    int m_selectionIndex;
 
-   QListBox* m_pListBox;
-   QPushButton* m_pAddButton;
-   QPushButton* m_pRemoveButton;
-   QPushButton* m_pUpButton;
-   QPushButton* m_pDownButton;
-   QPushButton* m_pEditButton;
-   static QSize s_size;
+   TQListBox* m_pListBox;
+   TQPushButton* m_pAddButton;
+   TQPushButton* m_pRemoveButton;
+   TQPushButton* m_pUpButton;
+   TQPushButton* m_pDownButton;
+   TQPushButton* m_pEditButton;
+   static TQSize s_size;
 };
 
 /**
@@ -111,19 +111,19 @@ public:
    /**
     * Creates a dialog for the mode
     */
-   PMRenderModeDialog( PMRenderMode* mode, QWidget* parent = 0, const char* name = 0 );
+   PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent = 0, const char* name = 0 );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );
 
 protected:
-   virtual void resizeEvent( QResizeEvent* ev );
+   virtual void resizeEvent( TQResizeEvent* ev );
 
 
 protected slots:
    virtual void slotOk( );
    void slotChanged( );
-   void slotTextChanged( const QString& );
+   void slotTextChanged( const TQString& );
    void slotActivated( int );
    void slotSubsectionToggled( bool );
    void slotAntialiasingToggled( bool );
@@ -152,28 +152,28 @@ private:
    
    PMRenderMode* m_pMode;
    
-   QTabWidget* m_pTabWidget;
-   QLineEdit* m_pDescriptionEdit;
+   TQTabWidget* m_pTabWidget;
+   TQLineEdit* m_pDescriptionEdit;
    PMIntEdit* m_pHeightEdit;
    PMIntEdit* m_pWidthEdit;
-   QCheckBox* m_pSubsectionBox;
+   TQCheckBox* m_pSubsectionBox;
    PMFloatEdit* m_pStartRowEdit;
    PMFloatEdit* m_pEndRowEdit;
    PMFloatEdit* m_pStartColumnEdit;
    PMFloatEdit* m_pEndColumnEdit;
    // quality
-   QComboBox* m_pQualityCombo;
-   QCheckBox* m_pRadiosityBox;
-   QCheckBox* m_pAntialiasingBox;
-   QComboBox* m_pSamplingCombo;
+   TQComboBox* m_pQualityCombo;
+   TQCheckBox* m_pRadiosityBox;
+   TQCheckBox* m_pAntialiasingBox;
+   TQComboBox* m_pSamplingCombo;
    PMFloatEdit* m_pThresholdEdit;
-   QCheckBox* m_pJitterBox;
+   TQCheckBox* m_pJitterBox;
    PMFloatEdit* m_pJitterAmountEdit;
    PMIntEdit* m_pAntialiasDepthEdit;
    // output
-   QCheckBox* m_pAlphaBox;
+   TQCheckBox* m_pAlphaBox;
    
-   static QSize s_size;
+   static TQSize s_size;
 };
 
 #endif

@@ -85,12 +85,12 @@ PMMetaObject* PMBlendMapModifiers::metaObject( ) const
       PMWaveFormProperty* p = new PMWaveFormProperty(
          "waveForm", &PMBlendMapModifiers::setWaveFormType,
          &PMBlendMapModifiers::waveFormType );
-      p->addEnumValue( QString( "RampWave" ), RampWave );
-      p->addEnumValue( QString( "TriangleWave" ), TriangleWave );
-      p->addEnumValue( QString( "SineWave" ), SineWave );
-      p->addEnumValue( QString( "ScallopWave" ), ScallopWave );
-      p->addEnumValue( QString( "CubicWave" ), CubicWave );
-      p->addEnumValue( QString( "PolyWave" ), PolyWave );
+      p->addEnumValue( TQString( "RampWave" ), RampWave );
+      p->addEnumValue( TQString( "TriangleWave" ), TriangleWave );
+      p->addEnumValue( TQString( "SineWave" ), SineWave );
+      p->addEnumValue( TQString( "ScallopWave" ), ScallopWave );
+      p->addEnumValue( TQString( "CubicWave" ), CubicWave );
+      p->addEnumValue( TQString( "PolyWave" ), PolyWave );
       s_pMetaObject->addProperty( p );
    }
    return s_pMetaObject;
@@ -106,12 +106,12 @@ void PMBlendMapModifiers::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMBlendMapModifiers::description( ) const
+TQString PMBlendMapModifiers::description( ) const
 {
    return i18n( "blend map modifiers" );
 }
 
-void PMBlendMapModifiers::serialize( QDomElement& e, QDomDocument& ) const
+void PMBlendMapModifiers::serialize( TQDomElement& e, TQDomDocument& ) const
 {
    e.setAttribute( "frequency", m_frequency );
    e.setAttribute( "phase", m_phase );
@@ -144,7 +144,7 @@ void PMBlendMapModifiers::serialize( QDomElement& e, QDomDocument& ) const
 
 void PMBlendMapModifiers::readAttributes( const PMXMLHelper& h )
 {
-   QString str = h.stringAttribute( "waveform_type", "ramp" );
+   TQString str = h.stringAttribute( "waveform_type", "ramp" );
 
    if( str == "ramp" )
       m_waveFormType = RampWave;
@@ -236,7 +236,7 @@ void PMBlendMapModifiers::setWaveFormType( PMWaveFormType c )
    }
 }
 
-PMDialogEditBase* PMBlendMapModifiers::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMBlendMapModifiers::editWidget( TQWidget* parent ) const
 {
    return new PMBlendMapModifiersEdit( parent );
 }

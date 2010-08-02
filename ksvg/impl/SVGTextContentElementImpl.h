@@ -50,7 +50,7 @@ public:
 	SVGTextContentElementImpl(DOM::ElementImpl *impl);
 	virtual ~SVGTextContentElementImpl();
 
-	QString textDirectionAwareText();
+	TQString textDirectionAwareText();
 
 	virtual T2P::GlyphLayoutParams *layoutParams() const;
 

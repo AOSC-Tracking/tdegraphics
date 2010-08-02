@@ -21,7 +21,7 @@
 #ifndef LIBARTCANVASITEMS_H
 #define LIBARTCANVASITEMS_H
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 #include "CanvasItems.h"
 #include "LibartCanvas.h"
@@ -73,9 +73,9 @@ namespace KSVG
 		LibartPaintServer() : CanvasPaintServer() {}
 		virtual ~LibartPaintServer() {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, QByteArray mask, QRect screenBBox) = 0;
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox) = 0;
 
-		_ArtRender *createRenderer(QRect rect, KSVGCanvas *c);
+		_ArtRender *createRenderer(TQRect rect, KSVGCanvas *c);
 	};
 
 	class LibartGradient : public LibartPaintServer
@@ -87,11 +87,11 @@ namespace KSVG
 		void parseGradientStops(SVGGradientElementImpl *gradient);
 
 		virtual void finalizePaintServer();
-		virtual void reference(const QString &href);
+		virtual void reference(const TQString &href);
 
 	protected:
 		SVGGradientElementImpl *m_gradient;
-		QMemArray<_ArtGradientStop> m_stops;
+		TQMemArray<_ArtGradientStop> m_stops;
 	};
 
 	class LibartLinearGradient : public LibartGradient
@@ -99,7 +99,7 @@ namespace KSVG
 	public:
 		LibartLinearGradient(SVGLinearGradientElementImpl *linear) : LibartGradient(linear), m_linear(linear) {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, QByteArray mask, QRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
 
 	protected:
 		SVGLinearGradientElementImpl *m_linear;
@@ -110,7 +110,7 @@ namespace KSVG
 	public:
 		LibartRadialGradient(SVGRadialGradientElementImpl *radial) : LibartGradient(radial), m_radial(radial) {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, QByteArray mask, QRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
 
 	protected:
 		SVGRadialGradientElementImpl *m_radial;
@@ -123,9 +123,9 @@ namespace KSVG
 		virtual ~LibartPattern() {}
 
 		virtual void finalizePaintServer();
-		virtual void reference(const QString &href);
+		virtual void reference(const TQString &href);
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, QByteArray mask, QRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
 
 	protected:
 		SVGPatternElementImpl *m_pattern;
@@ -142,7 +142,7 @@ namespace KSVG
 
 		virtual float opacity(SVGStylableImpl *style) const = 0;
 		virtual unsigned short paintType(SVGStylableImpl *style) const = 0;
-		virtual QString paintUri(SVGStylableImpl *style) const = 0;
+		virtual TQString paintUri(SVGStylableImpl *style) const = 0;
 		virtual QRgb color(SVGStylableImpl *style) const = 0;
 
 		protected:
@@ -156,7 +156,7 @@ namespace KSVG
 
 		float opacity(SVGStylableImpl *style) const { return style->getFillOpacity() * style->getOpacity(); }
 		unsigned short paintType(SVGStylableImpl *style) const { return style->getFillColor()->paintType(); }
-		QString paintUri(SVGStylableImpl *style) const { return style->getFillColor()->uri().string(); }
+		TQString paintUri(SVGStylableImpl *style) const { return style->getFillColor()->uri().string(); }
 		QRgb color(SVGStylableImpl *style) const { return style->getFillColor()->rgbColor().color(); }
 	};
 
@@ -167,7 +167,7 @@ namespace KSVG
 
 		float opacity(SVGStylableImpl *style) const { return style->getStrokeOpacity() * style->getOpacity(); }
 		unsigned short paintType(SVGStylableImpl *style) const { return style->getStrokeColor()->paintType(); }
-		QString paintUri(SVGStylableImpl *style) const { return style->getStrokeColor()->uri().string(); }
+		TQString paintUri(SVGStylableImpl *style) const { return style->getStrokeColor()->uri().string(); }
 		QRgb color(SVGStylableImpl *style) const { return style->getStrokeColor()->rgbColor().color(); }
 	};
 
@@ -191,9 +191,9 @@ namespace KSVG
 		LibartShape(LibartCanvas *c, SVGStylableImpl *style);
 		virtual ~LibartShape();
 
-		virtual QRect bbox() const;
-		virtual bool fillContains(const QPoint &p);
-		virtual bool strokeContains(const QPoint &p);
+		virtual TQRect bbox() const;
+		virtual bool fillContains(const TQPoint &p);
+		virtual bool strokeContains(const TQPoint &p);
 		virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0);
 		void draw(SVGShapeImpl *shape);
 		bool isVisible(SVGShapeImpl *shape);
@@ -307,9 +307,9 @@ namespace KSVG
 		LibartClipPath(LibartCanvas *c, SVGClipPathElementImpl *clipPath);
 		virtual ~LibartClipPath();
 
-		virtual QRect bbox() const { return QRect(); }
-		virtual bool fillContains(const QPoint &) { return true; }
-		virtual bool strokeContains(const QPoint &) { return true; }
+		virtual TQRect bbox() const { return TQRect(); }
+		virtual bool fillContains(const TQPoint &) { return true; }
+		virtual bool strokeContains(const TQPoint &) { return true; }
 		virtual void update(CanvasItemUpdate, int param1 = 0, int param2 = 0);
 		virtual void init();
 		virtual void draw();
@@ -321,7 +321,7 @@ namespace KSVG
 		LibartCanvas *m_canvas;
 		_ArtSVP *m_clipSVP;
 
-		QPtrList<CanvasItem> m_clipItems;
+		TQPtrList<CanvasItem> m_clipItems;
 	};
 
 	class LibartImage : public CanvasItem
@@ -330,9 +330,9 @@ namespace KSVG
 		LibartImage(LibartCanvas *c, SVGImageElementImpl *image);
 		virtual ~LibartImage();
 
-		virtual QRect bbox() const;
-		virtual bool fillContains(const QPoint &) { return true; }
-		virtual bool strokeContains(const QPoint &) { return true; }
+		virtual TQRect bbox() const;
+		virtual bool fillContains(const TQPoint &) { return true; }
+		virtual bool strokeContains(const TQPoint &) { return true; }
 		virtual void update(CanvasItemUpdate, int = 0, int = 0) { }
 		virtual void init();
 		virtual void draw();
@@ -353,9 +353,9 @@ namespace KSVG
 		LibartMarker(LibartCanvas *c, SVGMarkerElementImpl *marker);
 		virtual ~LibartMarker();
 
-		virtual QRect bbox() const { return QRect(); }
-		virtual bool fillContains(const QPoint &) { return true; }
-		virtual bool strokeContains(const QPoint &) { return true; }
+		virtual TQRect bbox() const { return TQRect(); }
+		virtual bool fillContains(const TQPoint &) { return true; }
+		virtual bool strokeContains(const TQPoint &) { return true; }
 		virtual void update(CanvasItemUpdate, int = 0, int = 0) { }
 		virtual void init();
 		virtual void draw();
@@ -371,9 +371,9 @@ namespace KSVG
 		LibartText(LibartCanvas *c, SVGTextElementImpl *text);
 		virtual ~LibartText();
 
-		virtual QRect bbox() const;
-		virtual bool fillContains(const QPoint &p);
-		virtual bool strokeContains(const QPoint &p);
+		virtual TQRect bbox() const;
+		virtual bool fillContains(const TQPoint &p);
+		virtual bool strokeContains(const TQPoint &p);
 		virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0);
 		virtual void draw();
 		virtual bool isVisible();
@@ -403,10 +403,10 @@ namespace KSVG
 		};
 
 		// renderCallback() is const.
-		mutable QPtrList<SVPElement> m_drawFillItems;
-		mutable QPtrList<SVPElement> m_drawStrokeItems;
-		mutable QPtrDict<LibartFillPainter> m_fillPainters;
-		mutable QPtrDict<LibartStrokePainter> m_strokePainters;
+		mutable TQPtrList<SVPElement> m_drawFillItems;
+		mutable TQPtrList<SVPElement> m_drawStrokeItems;
+		mutable TQPtrDict<LibartFillPainter> m_fillPainters;
+		mutable TQPtrDict<LibartStrokePainter> m_strokePainters;
 	};
 }
 

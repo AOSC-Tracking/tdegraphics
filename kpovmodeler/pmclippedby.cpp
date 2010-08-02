@@ -62,7 +62,7 @@ void PMClippedBy::cleanUp( ) const
    Base::cleanUp( );
 }
 
-QString PMClippedBy::description( ) const
+TQString PMClippedBy::description( ) const
 {
    return i18n( "clipped by" );
 }
@@ -79,7 +79,7 @@ bool PMClippedBy::boundedBy( ) const
    return cb;
 }
 
-void PMClippedBy::serialize( QDomElement& e, QDomDocument& doc ) const
+void PMClippedBy::serialize( TQDomElement& e, TQDomDocument& doc ) const
 {
    // no extra data at the moment
    Base::serialize( e, doc );
@@ -91,7 +91,7 @@ void PMClippedBy::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMClippedBy::editWidget( QWidget* parent ) const
+PMDialogEditBase* PMClippedBy::editWidget( TQWidget* parent ) const
 {
    return new PMClippedByEdit( parent );
 }

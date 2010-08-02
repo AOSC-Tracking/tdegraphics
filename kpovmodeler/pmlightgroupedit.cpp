@@ -19,12 +19,12 @@
 #include "pmlightgroupedit.h"
 #include "pmlightgroup.h"
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 #include <klocale.h>
 
-PMLightGroupEdit::PMLightGroupEdit( QWidget* parent, const char* name )
+PMLightGroupEdit::PMLightGroupEdit( TQWidget* parent, const char* name )
       : Base( parent, name )
 {
    m_pDisplayedObject = 0;
@@ -34,14 +34,14 @@ void PMLightGroupEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   QHBoxLayout* layout;
-   m_pGlobalLights = new QCheckBox( i18n( "Global lights" ), this );
+   TQHBoxLayout* layout;
+   m_pGlobalLights = new TQCheckBox( i18n( "Global lights" ), this );
 
-   layout = new QHBoxLayout( topLayout( ) );
+   layout = new TQHBoxLayout( topLayout( ) );
    layout->addWidget( m_pGlobalLights );
    layout->addStretch( 1 );
 
-   connect( m_pGlobalLights, SIGNAL( clicked( ) ), SIGNAL( dataChanged( ) ) );
+   connect( m_pGlobalLights, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
 
 void PMLightGroupEdit::displayObject( PMObject* o )

@@ -31,7 +31,7 @@ class PageRangeWidget : public PageRangeWidget_base
 Q_OBJECT
 
 public:
-  PageRangeWidget( Q_UINT16 _from, Q_UINT16 _to, Q_UINT16 _current, QWidget *parent = 0, const char *name = 0 );
+  PageRangeWidget( Q_UINT16 _from, Q_UINT16 _to, Q_UINT16 _current, TQWidget *parent = 0, const char *name = 0 );
 
   Q_UINT16 getFrom() const {return (from == 0) ? 0 : from->value(); }
   Q_UINT16 getTo() const {return (to == 0) ? 0 : to->value(); }

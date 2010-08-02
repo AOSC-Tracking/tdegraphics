@@ -33,13 +33,13 @@ KIconEditProperties* KIconEditProperties::self()
     return m_self;
 }
 
-KIconEditProperties::KIconEditProperties() : QObject()
+KIconEditProperties::KIconEditProperties() : TQObject()
 {
     KConfig *config = kapp->config();
 
     config->setGroup( "Appearance" );
 
-    m_bgMode = (QWidget::BackgroundMode)config->readNumEntry( "BackgroundMode", QWidget::FixedPixmap);
+    m_bgMode = (TQWidget::BackgroundMode)config->readNumEntry( "BackgroundMode", TQWidget::FixedPixmap);
     m_bgColor = config->readColorEntry( "BackgroundColor", &gray);
     m_bgPixmap = config->readPathEntry("BackgroundPixmap");
 
@@ -58,13 +58,13 @@ KIconEditProperties::KIconEditProperties() : QObject()
       m_transparencyDisplayType = KIconEditGrid::TRD_SOLIDCOLOR;
     }
 
-    QColor checkColor1(255, 255, 255);
-    QColor checkColor2(127, 127, 127);
+    TQColor checkColor1(255, 255, 255);
+    TQColor checkColor2(127, 127, 127);
 
     m_checkerboardColor1 = config->readColorEntry( "CheckerboardColor1", &checkColor1);
     m_checkerboardColor2 = config->readColorEntry( "CheckerboardColor2", &checkColor2);
 
-    QString checkerboardSize = config->readEntry( "CheckerboardSize", "Medium" );
+    TQString checkerboardSize = config->readEntry( "CheckerboardSize", "Medium" );
 
     if(checkerboardSize == "Small")
     {
@@ -80,7 +80,7 @@ KIconEditProperties::KIconEditProperties() : QObject()
       m_checkerboardSize = KIconEditGrid::CHK_LARGE;
     }
 
-    QColor solidColor(255, 255, 255);
+    TQColor solidColor(255, 255, 255);
     m_transparencySolidColor = config->readColorEntry( "TransparencySolidColor", &solidColor);
 }
 
@@ -106,7 +106,7 @@ void KIconEditProperties::save()
     config->writeEntry("GridScaling", m_gridScale );
     config->writeEntry("ShowRulers", m_showRulers );
 
-    QString transparencyDisplayType;
+    TQString transparencyDisplayType;
 
     switch(m_transparencyDisplayType)
     {
@@ -123,7 +123,7 @@ void KIconEditProperties::save()
     config->writeEntry( "CheckerboardColor1", m_checkerboardColor1 );
     config->writeEntry( "CheckerboardColor2", m_checkerboardColor2 );
 
-    QString checkerboardSize;
+    TQString checkerboardSize;
 
     switch(m_checkerboardSize)
     {

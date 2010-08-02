@@ -21,9 +21,9 @@
 #define PMPTMANAGER_H
 
 #include "pmobject.h"
-#include <qdict.h>
-#include <qmap.h>
-#include <qvaluelist.h>
+#include <tqdict.h>
+#include <tqmap.h>
+#include <tqvaluelist.h>
 
 class PMPart;
 
@@ -41,7 +41,7 @@ public:
       description = d.description;
       pixmap = d.pixmap;
    }
-   PMDeclareDescription( PMMetaObject* t, const QString& d, const QString& p )
+   PMDeclareDescription( PMMetaObject* t, const TQString& d, const TQString& p )
    {
       type = t;
       description = d;
@@ -55,8 +55,8 @@ public:
       return *this;
    }
    PMMetaObject* type;
-   QString description;
-   QString pixmap;
+   TQString description;
+   TQString pixmap;
 };
 
 /**
@@ -91,31 +91,31 @@ public:
     * Adds a declaration type. Needed information is the class type,
     * the @ref description( ) and the @ref pixmap( )
     */
-   void addDeclarationType( const QString& className,
-                            const QString& description,
-                            const QString& pixmap );
+   void addDeclarationType( const TQString& className,
+                            const TQString& description,
+                            const TQString& pixmap );
    /**
     * Returns an iterator to the list of available objects
     */
-   QPtrListIterator<PMMetaObject> prototypeIterator( ) const;
+   TQPtrListIterator<PMMetaObject> prototypeIterator( ) const;
    /**
     * Returns an iterator to the list of available declaration types
     */
-   const QValueList<PMDeclareDescription>& declarationTypes( ) const;
+   const TQValueList<PMDeclareDescription>& declarationTypes( ) const;
    /**
     * Returns a new PMObject by class name
     */
-   PMObject* newObject( const QString& name ) const;
+   PMObject* newObject( const TQString& name ) const;
    /**
     * Returns the meta object by class name or 0 if this class does
     * not exist.
     * @see PMMetaObject
     */
-   PMMetaObject* metaObject( const QString& name ) const;
+   PMMetaObject* metaObject( const TQString& name ) const;
    /**
     * Returns true if the class exists
     */
-   bool existsClass( const QString& name ) const
+   bool existsClass( const TQString& name ) const
    {
       return metaObject( name );
    }
@@ -123,27 +123,27 @@ public:
     * Returns true if the second class is a base class for
     * the first class
     */
-   bool isA( const QString& className, const QString& baseClassName ) const;
+   bool isA( const TQString& className, const TQString& baseClassName ) const;
    /**
     * Returns true if the second class is a base class for
     * the first class
     */
-   bool isA( PMMetaObject* c, const QString& baseClassName ) const;
+   bool isA( PMMetaObject* c, const TQString& baseClassName ) const;
    /**
     * Returns the real class if only the lower case version is know.
     * Used by the xml parser
     */
-   QString className( const QString& lowercase ) const;
+   TQString className( const TQString& lowercase ) const;
    /**
     * Returns a pointer to the part
     */
    PMPart* part( ) const { return m_pPart; }
 
 private:
-   QPtrList<PMMetaObject> m_prototypes;
-   QDict<PMMetaObject> m_metaDict;
-   QMap<QString, QString> m_lowerCaseDict;
-   QValueList<PMDeclareDescription> m_declareDescriptions;
+   TQPtrList<PMMetaObject> m_prototypes;
+   TQDict<PMMetaObject> m_metaDict;
+   TQMap<TQString, TQString> m_lowerCaseDict;
+   TQValueList<PMDeclareDescription> m_declareDescriptions;
    PMPart* m_pPart;
 };
 #endif

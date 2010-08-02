@@ -40,7 +40,7 @@
 
 
 KookaImage::KookaImage( )
-   : QImage(),
+   : TQImage(),
      m_subImages(-1),
      m_subNo(0),
      m_parent(0),
@@ -52,7 +52,7 @@ KookaImage::KookaImage( )
 
 /* constructor for subimages */
 KookaImage::KookaImage( int subNo, KookaImage *p )
-   : QImage(),
+   : TQImage(),
      m_subImages(-1),
      m_subNo(subNo),
      m_parent( p ),
@@ -65,7 +65,7 @@ KookaImage::KookaImage( int subNo, KookaImage *p )
 
 KookaImage& KookaImage::operator=(const KookaImage& img)
 {
-    QImage::operator=(img);
+    TQImage::operator=(img);
 
     m_subImages = img.subImagesCount();
     m_subNo     = img.m_subNo;
@@ -76,9 +76,9 @@ KookaImage& KookaImage::operator=(const KookaImage& img)
     return *this;
 }
 
-KookaImage& KookaImage::operator=(const QImage& img)
+KookaImage& KookaImage::operator=(const TQImage& img)
 {
-    QImage::operator=(img);
+    TQImage::operator=(img);
     return *this;
 }
 
@@ -94,7 +94,7 @@ void KookaImage::setFileItem( KFileItem* it )
 
 const KFileMetaInfo KookaImage::fileMetaInfo( )
 {
-    QString filename = localFileName( );
+    TQString filename = localFileName( );
     if( ! filename.isEmpty() )
     {
         kdDebug(28000) << "Fetching metainfo for " << filename << endl;
@@ -105,21 +105,21 @@ const KFileMetaInfo KookaImage::fileMetaInfo( )
         return KFileMetaInfo();
 }
 
-QString KookaImage::localFileName( ) const
+TQString KookaImage::localFileName( ) const
 {
 
     if( ! m_url.isEmpty() )
         return( m_url.directory() + "/" + m_url.fileName());
     else
-        return QString();
+        return TQString();
 }
 
 bool KookaImage::loadFromUrl( const KURL& url )
 {
    bool ret = true;
    m_url = url;
-   QString filename = localFileName( );
-   QString format ( imageFormat( filename ));
+   TQString filename = localFileName( );
+   TQString format ( imageFormat( filename ));
 
    /* if the format was not recogniseable, check the extension, if it is tif, try to read it by
     * tifflib */
@@ -189,13 +189,13 @@ bool KookaImage::loadFromUrl( const KURL& url )
 }
 
 
-KookaImage::KookaImage( const QImage& img )
-   : QImage( img )
+KookaImage::KookaImage( const TQImage& img )
+   : TQImage( img )
    /* m_subImages( 1 ) */
 {
    m_subImages = 0;
 
-   /* Load one QImage, can not be Tiff yet. */
+   /* Load one TQImage, can not be Tiff yet. */
    kdDebug(28000) << "constructor from other image here " << endl;
 }
 
@@ -222,7 +222,7 @@ KURL KookaImage::url() const
    return m_url;
 }
 
-bool KookaImage::loadTiffDir( const QString& filename, int no )
+bool KookaImage::loadTiffDir( const TQString& filename, int no )
 {
 #ifdef HAVE_LIBTIFF
    int imgWidth, imgHeight;
@@ -300,7 +300,7 @@ bool KookaImage::loadTiffDir( const QString& filename, int no )
 	   float yScalefactor = xReso / yReso;
 	   kdDebug(28000) << "Different resolution x/y, rescaling with factor " << yScalefactor << endl;
 	   /* rescale the image */
-	   *this = smoothScale( imgWidth, int(imgHeight*yScalefactor), QImage::ScaleFree );
+	   *this = smoothScale( imgWidth, int(imgHeight*yScalefactor), TQImage::ScaleFree );
        }
        else
        {
@@ -308,7 +308,7 @@ bool KookaImage::loadTiffDir( const QString& filename, int no )
 	   float scalefactor = yReso / xReso;
 	   kdDebug(28000) << "Different resolution x/y, rescaling x with factor " << scalefactor << endl;
 	   /* rescale the image */
-	   *this = smoothScale( int(imgWidth*scalefactor), imgHeight, QImage::ScaleFree );
+	   *this = smoothScale( int(imgWidth*scalefactor), imgHeight, TQImage::ScaleFree );
 	   
        }
    }
@@ -341,9 +341,9 @@ bool KookaImage::isSubImage() const
 /*
  * tiling
  */
-int KookaImage::cutToTiles( const QSize maxSize, int& rows, int& cols, TileMode  )
+int KookaImage::cutToTiles( const TQSize maxSize, int& rows, int& cols, TileMode  )
 {
-    QSize imgSize = size();
+    TQSize imgSize = size();
 
     int w = imgSize.width();
     if( w > maxSize.width() )
@@ -369,7 +369,7 @@ int KookaImage::cutToTiles( const QSize maxSize, int& rows, int& cols, TileMode 
         while( w ) // Loop over width, cut in horizontal direction
         {
             cols++;
-            m_tileVector.append( QRect( absX, absY, w, h ));
+            m_tileVector.append( TQRect( absX, absY, w, h ));
 
             absX += w+1;
             w = imgSize.width() - absX;
@@ -403,11 +403,11 @@ int KookaImage::cutToTiles( const QSize maxSize, int& rows, int& cols, TileMode 
 
 
 
-QRect KookaImage::getTileRect( int rowPos, int colPos ) const
+TQRect KookaImage::getTileRect( int rowPos, int colPos ) const
 {
     int indx = rowPos*m_tileCols+colPos;
     kdDebug(28000) << "Tile Index: " << indx << endl;
-    const QRect r = m_tileVector[(rowPos)*m_tileCols + colPos];
+    const TQRect r = m_tileVector[(rowPos)*m_tileCols + colPos];
 
     return r;
 }

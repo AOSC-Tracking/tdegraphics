@@ -8,9 +8,9 @@
  ***************************************************************************/
 
 // qt/kde includes
-#include <qpixmap.h>
-#include <qstring.h>
-#include <qmap.h>
+#include <tqpixmap.h>
+#include <tqstring.h>
+#include <tqmap.h>
 #include <kdebug.h>
 
 // local includes
@@ -78,7 +78,7 @@ bool KPDFPage::hasPixmap( int id, int width, int height ) const
         return false;
     if ( width == -1 || height == -1 )
         return true;
-    QPixmap * p = m_pixmaps[ id ];
+    TQPixmap * p = m_pixmaps[ id ];
     return p ? ( p->width() == width && p->height() == height ) : false;
 }
 
@@ -96,7 +96,7 @@ bool KPDFPage::hasObjectRect( double x, double y ) const
 {
     if ( m_rects.count() < 1 )
         return false;
-    QValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
+    TQValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
     for ( ; it != end; ++it )
         if ( (*it)->contains( x, y ) )
             return true;
@@ -112,7 +112,7 @@ bool KPDFPage::hasHighlights( int s_id ) const
     if ( s_id == -1 )
         return true;
     // iterate on the highlights list to find an entry by id
-    QValueList< HighlightRect * >::const_iterator it = m_highlights.begin(), end = m_highlights.end();
+    TQValueList< HighlightRect * >::const_iterator it = m_highlights.begin(), end = m_highlights.end();
     for ( ; it != end; ++it )
         if ( (*it)->s_id == s_id )
             return true;
@@ -125,15 +125,15 @@ bool KPDFPage::hasTransition() const
 }
 
 
-NormalizedRect * KPDFPage::findText( const QString & text, bool strictCase, NormalizedRect * lastRect ) const
+NormalizedRect * KPDFPage::findText( const TQString & text, bool strictCase, NormalizedRect * lastRect ) const
 {
     if ( text.isEmpty() )
         return 0;
 
     // create a xpf's Unicode (unsigned int) array for the given text
-    const QChar * str = text.unicode();
+    const TQChar * str = text.unicode();
     int len = text.length();
-    QMemArray<Unicode> u(len);
+    TQMemArray<Unicode> u(len);
     for (int i = 0; i < len; ++i)
         u[i] = str[i].unicode();
 
@@ -172,23 +172,23 @@ NormalizedRect * KPDFPage::findText( const QString & text, bool strictCase, Norm
     return 0;
 }
 
-const QString KPDFPage::getText( const NormalizedRect & rect ) const
+const TQString KPDFPage::getText( const NormalizedRect & rect ) const
 {
     if ( !m_text )
-        return QString::null;
+        return TQString::null;
     int left = (int)( rect.left * m_width ),
         top = (int)( rect.top * m_height ),
         right = (int)( rect.right * m_width ),
         bottom = (int)( rect.bottom * m_height );
     GString * text = m_text->getText( left, top, right, bottom );
-    QString result = QString::fromUtf8( text->getCString() );
+    TQString result = TQString::fromUtf8( text->getCString() );
     delete text;
     return result; 
 }
 
 const ObjectRect * KPDFPage::hasObject( ObjectRect::ObjectType type, double x, double y ) const
 {
-    QValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
+    TQValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
     for ( ; it != end; ++it )
         if ( (*it)->contains( x, y ) )
             if ((*it)->objectType() == type) return *it;
@@ -201,7 +201,7 @@ const KPDFPageTransition * KPDFPage::getTransition() const
 }
 
 
-void KPDFPage::setPixmap( int id, QPixmap * pixmap )
+void KPDFPage::setPixmap( int id, TQPixmap * pixmap )
 {
     if ( m_pixmaps.contains( id ) )
         delete m_pixmaps[id];
@@ -219,15 +219,15 @@ void KPDFPage::setBookmark( bool state )
     m_bookmarked = state;
 }
 
-void KPDFPage::setObjectRects( const QValueList< ObjectRect * > rects )
+void KPDFPage::setObjectRects( const TQValueList< ObjectRect * > rects )
 {
-    QValueList< ObjectRect * >::iterator it = m_rects.begin(), end = m_rects.end();
+    TQValueList< ObjectRect * >::iterator it = m_rects.begin(), end = m_rects.end();
     for ( ; it != end; ++it )
         delete *it;
     m_rects = rects;
 }
 
-void KPDFPage::setHighlight( int s_id, NormalizedRect * &rect, const QColor & color )
+void KPDFPage::setHighlight( int s_id, NormalizedRect * &rect, const TQColor & color )
 {
     // create a HighlightRect descriptor taking values from params
     HighlightRect * hr = new HighlightRect();
@@ -262,12 +262,12 @@ void KPDFPage::deletePixmap( int id )
 void KPDFPage::deletePixmapsAndRects()
 {
     // delete all stored pixmaps
-    QMap<int,QPixmap *>::iterator it = m_pixmaps.begin(), end = m_pixmaps.end();
+    TQMap<int,TQPixmap *>::iterator it = m_pixmaps.begin(), end = m_pixmaps.end();
     for ( ; it != end; ++it )
         delete *it;
     m_pixmaps.clear();
     // delete ObjectRects
-    QValueList< ObjectRect * >::iterator rIt = m_rects.begin(), rEnd = m_rects.end();
+    TQValueList< ObjectRect * >::iterator rIt = m_rects.begin(), rEnd = m_rects.end();
     for ( ; rIt != rEnd; ++rIt )
         delete *rIt;
     m_rects.clear();
@@ -276,7 +276,7 @@ void KPDFPage::deletePixmapsAndRects()
 void KPDFPage::deleteHighlights( int s_id )
 {
     // delete highlights by ID
-    QValueList< HighlightRect * >::iterator it = m_highlights.begin(), end = m_highlights.end();
+    TQValueList< HighlightRect * >::iterator it = m_highlights.begin(), end = m_highlights.end();
     while ( it != end )
     {
         HighlightRect * highlight = *it;
@@ -300,7 +300,7 @@ NormalizedRect::NormalizedRect( double l, double t, double r, double b )
     // note: check for swapping coords?
     : left( l ), top( t ), right( r ), bottom( b ) {}
 
-NormalizedRect::NormalizedRect( const QRect & r, double xScale, double yScale )
+NormalizedRect::NormalizedRect( const TQRect & r, double xScale, double yScale )
     : left( (double)r.left() / xScale ), top( (double)r.top() / yScale ),
     right( (double)r.right() / xScale ), bottom( (double)r.bottom() / yScale ) {}
 
@@ -319,13 +319,13 @@ bool NormalizedRect::intersects( double l, double t, double r, double b ) const
     return (l < right) && (r > left) && (t < bottom) && (b > top);
 }
 
-QRect NormalizedRect::geometry( int xScale, int yScale ) const
+TQRect NormalizedRect::geometry( int xScale, int yScale ) const
 {
     int l = (int)( left * xScale ),
         t = (int)( top * yScale ),
         r = (int)( right * xScale ),
         b = (int)( bottom * yScale );
-    return QRect( l, t, r - l + 1, b - t + 1 );
+    return TQRect( l, t, r - l + 1, b - t + 1 );
 }
 
 

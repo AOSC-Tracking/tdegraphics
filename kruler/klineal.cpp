@@ -32,14 +32,14 @@
 #include <kwin.h>
 #include <kstdguiitem.h>
 
-#include <qbitmap.h>
-#include <qcursor.h>
-#include <qdialog.h>
-#include <qiconset.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qwhatsthis.h>
+#include <tqbitmap.h>
+#include <tqcursor.h>
+#include <tqdialog.h>
+#include <tqiconset.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqwhatsthis.h>
 
 #include "klineal.h"
 
@@ -47,7 +47,7 @@
 #define CFG_KEY_SCALE_FONT "ScaleFont"
 #define CFG_KEY_LENGTH "Length"
 #define CFG_GROUP_SETTINGS "StoredSettings"
-#define DEFAULT_RULER_COLOR QColor(255, 200, 80)
+#define DEFAULT_RULER_COLOR TQColor(255, 200, 80)
 #define FULLSCREENID 23
 /**
 * this is our cursor bitmap:
@@ -67,7 +67,7 @@ static const uchar cursorBits[] = {
 * create the thingy with no borders and set up
 * its members
 */
-KLineal::KLineal(QWidget*parent,const char* name):KMainWindow(parent,name){
+KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
 	if (!name) {
 		name = "klineal";
 	}
@@ -75,28 +75,28 @@ KLineal::KLineal(QWidget*parent,const char* name):KMainWindow(parent,name){
   KWin::setType(winId(), NET::Override);   // or NET::Normal
   KWin::setState(winId(), NET::StaysOnTop);
   setPaletteBackgroundColor(black);
-  QWhatsThis::add(this,
+  TQWhatsThis::add(this,
   i18n(
   	"This is a tool to measure pixel distances and colors on the screen. "
   	"It is useful for working on layouts of dialogs, web pages etc."
   ));
-  QBitmap bim = QBitmap(QSize(8, 48), cursorBits);
-  QWMatrix m;
+  TQBitmap bim = TQBitmap(TQSize(8, 48), cursorBits);
+  TQWMatrix m;
   m.rotate(90.0);
-  mNorthCursor = QCursor(bim, bim, 3, 47);
+  mNorthCursor = TQCursor(bim, bim, 3, 47);
   bim = bim.xForm(m);
-  mEastCursor = QCursor(bim, bim, 0, 3);
+  mEastCursor = TQCursor(bim, bim, 0, 3);
   bim = bim.xForm(m);
-  mSouthCursor = QCursor(bim, bim, 4, 0);
+  mSouthCursor = TQCursor(bim, bim, 4, 0);
   bim = bim.xForm(m);
-  mWestCursor = QCursor(bim, bim, 47, 4);
+  mWestCursor = TQCursor(bim, bim, 47, 4);
 
   mCurrentCursor = mNorthCursor;
   setMinimumSize(60,60);
   setMaximumSize(8000,8000);
   KConfig *cfg = kapp->config();
-  QColor defaultColor = DEFAULT_RULER_COLOR;
-  QFont defaultFont(KGlobalSettings::generalFont().family(), 8);
+  TQColor defaultColor = DEFAULT_RULER_COLOR;
+  TQFont defaultFont(KGlobalSettings::generalFont().family(), 8);
   defaultFont.setPixelSize(8);
   if (cfg) {
       cfg->setGroup(CFG_GROUP_SETTINGS);
@@ -111,32 +111,32 @@ KLineal::KLineal(QWidget*parent,const char* name):KMainWindow(parent,name){
   kdDebug() << "mLongEdgeLen=" << mLongEdgeLen << endl;
   mShortEdgeLen = 70;
 
-  mLabel = new QLabel(this);
+  mLabel = new TQLabel(this);
   mLabel->setGeometry(0,height()-12,32,12);
   mLabel->setBackgroundOrigin(ParentOrigin);
-  QFont labelFont(KGlobalSettings::generalFont().family(), 10);
+  TQFont labelFont(KGlobalSettings::generalFont().family(), 10);
   labelFont.setPixelSize(10);
   mLabel->setFont(labelFont);
-  QWhatsThis::add(mLabel,
+  TQWhatsThis::add(mLabel,
   	i18n(
   		"This is the current distance measured in pixels."
   	));
-	mColorLabel = new QLabel(this);
+	mColorLabel = new TQLabel(this);
   mColorLabel->resize(45,12);
   mColorLabel->setPaletteBackgroundColor(mColor);
   mColorLabel->hide();
-  QFont colorFont(KGlobalSettings::fixedFont().family(), 10);
+  TQFont colorFont(KGlobalSettings::fixedFont().family(), 10);
   colorFont.setPixelSize(10);
   mColorLabel->setFont(colorFont);
-  mColorLabel->move(mLabel->pos() + QPoint(0, 20));
-  QWhatsThis::add(mColorLabel,
+  mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
+  TQWhatsThis::add(mColorLabel,
   	i18n(
-  		"This is the current color in hexadecimal rgb representation as you may use it in HTML or as a QColor name. "
+  		"This is the current color in hexadecimal rgb representation as you may use it in HTML or as a TQColor name. "
   		"The rectangles background shows the color of the pixel inside the "
   		"little square at the end of the line cursor."
   	));
 
-  resize(QSize(mLongEdgeLen, mShortEdgeLen));
+  resize(TQSize(mLongEdgeLen, mShortEdgeLen));
   setMouseTracking(TRUE);
   mDragging = FALSE;
   mOrientation = South;
@@ -146,41 +146,41 @@ KLineal::KLineal(QWidget*parent,const char* name):KMainWindow(parent,name){
   mMenu = new KPopupMenu(this);
   mMenu->insertTitle(i18n("KRuler"));
   KPopupMenu *oriMenu = new KPopupMenu(this);
-  oriMenu->insertItem(UserIconSet("kruler-north"), i18n("&North"), this, SLOT(setNorth()), Key_N);
-  oriMenu->insertItem(UserIconSet("kruler-east"), i18n("&East"), this, SLOT(setEast()), Key_E);
-  oriMenu->insertItem(UserIconSet("kruler-south"), i18n("&South"), this, SLOT(setSouth()), Key_S);
-  oriMenu->insertItem(UserIconSet("kruler-west"), i18n("&West"), this, SLOT(setWest()), Key_W);
-  oriMenu->insertItem(i18n("&Turn Right"), this, SLOT(turnRight()), Key_R);
-  oriMenu->insertItem(i18n("Turn &Left"), this, SLOT(turnLeft()), Key_L);
+  oriMenu->insertItem(UserIconSet("kruler-north"), i18n("&North"), this, TQT_SLOT(setNorth()), Key_N);
+  oriMenu->insertItem(UserIconSet("kruler-east"), i18n("&East"), this, TQT_SLOT(setEast()), Key_E);
+  oriMenu->insertItem(UserIconSet("kruler-south"), i18n("&South"), this, TQT_SLOT(setSouth()), Key_S);
+  oriMenu->insertItem(UserIconSet("kruler-west"), i18n("&West"), this, TQT_SLOT(setWest()), Key_W);
+  oriMenu->insertItem(i18n("&Turn Right"), this, TQT_SLOT(turnRight()), Key_R);
+  oriMenu->insertItem(i18n("Turn &Left"), this, TQT_SLOT(turnLeft()), Key_L);
   mMenu->insertItem(i18n("&Orientation"), oriMenu);
   mLenMenu = new KPopupMenu(this);
-  mLenMenu->insertItem(i18n("&Short"), this, SLOT(setShortLength()), CTRL+Key_S);
-  mLenMenu->insertItem(i18n("&Medium"), this, SLOT(setMediumLength()), CTRL+Key_M);
-  mLenMenu->insertItem(i18n("&Tall"), this, SLOT(setTallLength()), CTRL+Key_T);
-  mLenMenu->insertItem(i18n("&Full Screen Width"), this, SLOT(setFullLength()), CTRL+Key_F, FULLSCREENID);
+  mLenMenu->insertItem(i18n("&Short"), this, TQT_SLOT(setShortLength()), CTRL+Key_S);
+  mLenMenu->insertItem(i18n("&Medium"), this, TQT_SLOT(setMediumLength()), CTRL+Key_M);
+  mLenMenu->insertItem(i18n("&Tall"), this, TQT_SLOT(setTallLength()), CTRL+Key_T);
+  mLenMenu->insertItem(i18n("&Full Screen Width"), this, TQT_SLOT(setFullLength()), CTRL+Key_F, FULLSCREENID);
   mMenu->insertItem(i18n("&Length"), mLenMenu);
-  mMenu->insertItem(SmallIcon("colorscm"), i18n("&Choose Color..."), this, SLOT(choseColor()), CTRL+Key_C);
-  mMenu->insertItem(SmallIcon("font"), i18n("Choose &Font..."), this, SLOT(choseFont()), Key_F);
+  mMenu->insertItem(SmallIcon("colorscm"), i18n("&Choose Color..."), this, TQT_SLOT(choseColor()), CTRL+Key_C);
+  mMenu->insertItem(SmallIcon("font"), i18n("Choose &Font..."), this, TQT_SLOT(choseFont()), Key_F);
   mMenu->insertSeparator();
   mMenu->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), helpMenu());
   mMenu->insertSeparator();
-  mMenu->insertItem(SmallIcon( "exit" ), KStdGuiItem::quit().text(), kapp, SLOT(quit()), CTRL+Key_Q);
-  mLastClickPos = geometry().topLeft()+QPoint(width()/2, height()/2);
+  mMenu->insertItem(SmallIcon( "exit" ), KStdGuiItem::quit().text(), kapp, TQT_SLOT(quit()), CTRL+Key_Q);
+  mLastClickPos = geometry().topLeft()+TQPoint(width()/2, height()/2);
 }
 
 KLineal::~KLineal(){
 }
 
 void KLineal::move(int x, int y) {
-  move(QPoint(x, y));
+  move(TQPoint(x, y));
 }
 
-void KLineal::move(const QPoint &p) {
-  setGeometry(QRect(p, size()));
+void KLineal::move(const TQPoint &p) {
+  setGeometry(TQRect(p, size()));
 }
 
-QPoint KLineal::pos() {
-  QRect r = frameGeometry();
+TQPoint KLineal::pos() {
+  TQRect r = frameGeometry();
   return r.topLeft();
 }
 int KLineal::x() {
@@ -190,7 +190,7 @@ int KLineal::y() {
   return pos().y();
 }
 
-static void rotateRect(QRect &r, QPoint center, int nineties) {
+static void rotateRect(TQRect &r, TQPoint center, int nineties) {
   static int sintab[4] = {0,1,0,-1};
   static int costab[4] = {1,0,-1,0};
   int i=0;
@@ -212,7 +212,7 @@ static void rotateRect(QRect &r, QPoint center, int nineties) {
 }
 
 void KLineal::setupBackground() {
-  QColor a, b, bg = mColor;
+  TQColor a, b, bg = mColor;
   KImageEffect::GradientType gradType = KImageEffect::HorizontalGradient;
   switch (mOrientation) {
     case North:
@@ -236,26 +236,26 @@ void KLineal::setupBackground() {
       gradType = KImageEffect::HorizontalGradient;
       break;
   }
-  QPixmap bgPixmap = QPixmap(KImageEffect::gradient(size(), a, b, gradType));
+  TQPixmap bgPixmap = TQPixmap(KImageEffect::gradient(size(), a, b, gradType));
   setErasePixmap(bgPixmap);
   mLabel->setErasePixmap(bgPixmap);
 }
 
 void KLineal::setOrientation(int inOrientation) {
-  QRect r = frameGeometry();
+  TQRect r = frameGeometry();
   int nineties = (int)inOrientation - (int)mOrientation;
-  QPoint center = mLastClickPos;
+  TQPoint center = mLastClickPos;
 
   if (_clicked) {
     center = mLastClickPos;
     _clicked = false;
    } else {
-     center = r.topLeft()+QPoint(width()/2, height()/2);
+     center = r.topLeft()+TQPoint(width()/2, height()/2);
    }
    
   rotateRect(r, center, nineties);
 
-  QRect desktop = KGlobalSettings::desktopGeometry(this);
+  TQRect desktop = KGlobalSettings::desktopGeometry(this);
   if (r.top() < desktop.top())
      r.moveTop( desktop.top() );
   if (r.bottom() > desktop.bottom())
@@ -270,22 +270,22 @@ void KLineal::setOrientation(int inOrientation) {
   switch(mOrientation) {
   case North:
     mLabel->move(4, height()-mLabel->height()-4);
-    mColorLabel->move(mLabel->pos() + QPoint(0, -20));
+    mColorLabel->move(mLabel->pos() + TQPoint(0, -20));
     mCurrentCursor = mNorthCursor;
     break;
   case South:
     mLabel->move(4, 4);
-    mColorLabel->move(mLabel->pos() + QPoint(0, 20));
+    mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
     mCurrentCursor = mSouthCursor;
     break;
   case East:
     mLabel->move(4, 4);
-    mColorLabel->move(mLabel->pos() + QPoint(0, 20));
+    mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
     mCurrentCursor = mEastCursor;
     break;
   case West:
     mLabel->move(width()-mLabel->width()-4, 4);
-    mColorLabel->move(mLabel->pos() + QPoint(-5, 20));
+    mColorLabel->move(mLabel->pos() + TQPoint(-5, 20));
     mCurrentCursor = mWestCursor;
     break;
   }
@@ -317,7 +317,7 @@ void KLineal::reLength(int percentOfScreen) {
   if (percentOfScreen < 10) {
     return;
   }
-  QRect r = KGlobalSettings::desktopGeometry(this);
+  TQRect r = KGlobalSettings::desktopGeometry(this);
 
   if (mOrientation == North || mOrientation == South) {
     mLongEdgeLen = r.width() * percentOfScreen / 100;
@@ -347,9 +347,9 @@ void KLineal::setFullLength() {
   reLength(100);
 }
 void KLineal::choseColor() {
-  QRect r = KGlobalSettings::desktopGeometry(this);
+  TQRect r = KGlobalSettings::desktopGeometry(this);
 
-  QPoint pos = QCursor::pos();
+  TQPoint pos = TQCursor::pos();
   if (pos.x() + mColorSelector.width() > r.width()) {
     pos.setX(r.width() - mColorSelector.width());
   }
@@ -362,14 +362,14 @@ void KLineal::choseColor() {
   mColorSelector.setDefaultColor( DEFAULT_RULER_COLOR );
   mColorSelector.show();
 
-  connect(&mColorSelector, SIGNAL(okClicked()), this, SLOT(setColor()));
-  connect(&mColorSelector, SIGNAL(yesClicked()), this, SLOT(setColor()));
-  connect(&mColorSelector, SIGNAL(closeClicked()), this, SLOT(setColor()));
-  connect(&mColorSelector, SIGNAL(defaultClicked()), this, SLOT(setColor()));
-  connect(&mColorSelector, SIGNAL(colorSelected(const QColor&)), this, SLOT(setColor(const QColor&)));
+  connect(&mColorSelector, TQT_SIGNAL(okClicked()), this, TQT_SLOT(setColor()));
+  connect(&mColorSelector, TQT_SIGNAL(yesClicked()), this, TQT_SLOT(setColor()));
+  connect(&mColorSelector, TQT_SIGNAL(closeClicked()), this, TQT_SLOT(setColor()));
+  connect(&mColorSelector, TQT_SIGNAL(defaultClicked()), this, TQT_SLOT(setColor()));
+  connect(&mColorSelector, TQT_SIGNAL(colorSelected(const TQColor&)), this, TQT_SLOT(setColor(const TQColor&)));
 	/*
-  connect(&mColorSelector, SIGNAL(cancelPressed()), this, SLOT(restoreColor()));
-  connect(&mColorSelector, SIGNAL(okPressed()), this, SLOT(saveColor()));
+  connect(&mColorSelector, TQT_SIGNAL(cancelPressed()), this, TQT_SLOT(restoreColor()));
+  connect(&mColorSelector, TQT_SIGNAL(okPressed()), this, TQT_SLOT(saveColor()));
   */
 }
 
@@ -377,7 +377,7 @@ void KLineal::choseColor() {
 * slot to choose a font
 */
 void KLineal::choseFont() {
-  QFont font = mScaleFont;
+  TQFont font = mScaleFont;
   int result = KFontDialog::getFont(font, false, this);
   if (result == KFontDialog::Accepted) {
     setFont(font);
@@ -387,7 +387,7 @@ void KLineal::choseFont() {
 /**
 * set the ruler color to the previously selected color
 */
-void KLineal::setFont(QFont &font) {
+void KLineal::setFont(TQFont &font) {
 	mScaleFont = font;
 	saveSettings();
   repaint();
@@ -405,7 +405,7 @@ void KLineal::setColor() {
 /**
 * set the ruler color to some color
 */
-void KLineal::setColor(const QColor &color) {
+void KLineal::setColor(const TQColor &color) {
   mColor = color;
   if ( !mColor.isValid() )
     mColor = DEFAULT_RULER_COLOR;
@@ -418,11 +418,11 @@ void KLineal::setColor(const QColor &color) {
 void KLineal::saveSettings() {
   KConfig *cfg = kapp->config(); // new KConfig(locateLocal("config", kapp->name()+"rc"));
   if (cfg) {
-      QColor color = mColor;
+      TQColor color = mColor;
       cfg->setGroup(CFG_GROUP_SETTINGS);
-    	cfg->writeEntry(QString(CFG_KEY_BGCOLOR), color);
-    	cfg->writeEntry(QString(CFG_KEY_SCALE_FONT), mScaleFont);
-    	cfg->writeEntry(QString(CFG_KEY_LENGTH), mLongEdgeLen);
+    	cfg->writeEntry(TQString(CFG_KEY_BGCOLOR), color);
+    	cfg->writeEntry(TQString(CFG_KEY_SCALE_FONT), mScaleFont);
+    	cfg->writeEntry(TQString(CFG_KEY_LENGTH), mLongEdgeLen);
       cfg->sync();
   }
 }
@@ -437,21 +437,21 @@ void KLineal::restoreColor() {
 * lets the context menu appear at current cursor position
 */
 void KLineal::showMenu() {
-	QPoint pos = QCursor::pos();
+	TQPoint pos = TQCursor::pos();
 	mMenu->popup(pos);
 }
 
 /**
 * overwritten to switch the value label and line cursor on
 */
-void KLineal::enterEvent(QEvent * /*inEvent*/) {
+void KLineal::enterEvent(TQEvent * /*inEvent*/) {
   if (!mDragging) showLabel();
 }
 /**
 * overwritten to switch the value label and line cursor off
 */
-void KLineal::leaveEvent(QEvent * /*inEvent*/) {
-  if (!geometry().contains(QCursor::pos())) {
+void KLineal::leaveEvent(TQEvent * /*inEvent*/) {
+  if (!geometry().contains(TQCursor::pos())) {
     hideLabel();
   }
 }
@@ -474,8 +474,8 @@ void KLineal::hideLabel() {
 * updates the current value label
 */
 void KLineal::adjustLabel() {
-  QString s;
-  QPoint cpos = QCursor::pos();
+  TQString s;
+  TQPoint cpos = TQCursor::pos();
   switch (mOrientation) {
   case North:
     s.sprintf("%d px", cpos.x()-x());
@@ -492,8 +492,8 @@ void KLineal::adjustLabel() {
   }
   mLabel->setText(s);
 }
-void KLineal::keyPressEvent(QKeyEvent *e) {
-	QPoint dist(0,0);
+void KLineal::keyPressEvent(TQKeyEvent *e) {
+	TQPoint dist(0,0);
 	switch (e->key()) {
 	case Key_F1:
     	kapp->invokeHelp();
@@ -518,17 +518,17 @@ void KLineal::keyPressEvent(QKeyEvent *e) {
   	dist *= 10;
   }
   move(pos()+dist);
-  KNotifyClient::event(0, "cursormove",  QString::null);
+  KNotifyClient::event(0, "cursormove",  TQString::null);
 }
 /**
 * overwritten to handle the line cursor which is a seperate widget outside the main
 * window. Also used for dragging.
 */
-void KLineal::mouseMoveEvent(QMouseEvent * /*inEvent*/) {
+void KLineal::mouseMoveEvent(TQMouseEvent * /*inEvent*/) {
   if (mDragging && this == mouseGrabber()) {
-    move(QCursor::pos() - mDragOffset);
+    move(TQCursor::pos() - mDragOffset);
   } else {
-  	QPoint p = QCursor::pos();
+  	TQPoint p = TQCursor::pos();
   	switch (mOrientation) {
     case North:
     	p.setY(p.y()-46);
@@ -544,7 +544,7 @@ void KLineal::mouseMoveEvent(QMouseEvent * /*inEvent*/) {
     	break;
     }
     // cerr << p.x()-x() << "," << p.y()-y() << ": " << KColorDialog::grabColor(p).name() << endl;
-    QColor color = KColorDialog::grabColor(p);
+    TQColor color = KColorDialog::grabColor(p);
     int h, s, v;
     color.hsv(&h, &s, &v);
  		mColorLabel->setText(color.name().upper());
@@ -555,8 +555,8 @@ void KLineal::mouseMoveEvent(QMouseEvent * /*inEvent*/) {
   		v = 0;
    	}
    	color.setHsv(h, s, v);
-  	QPalette palette = mColorLabel->palette();
-  	palette.setColor(QColorGroup::Foreground, color);
+  	TQPalette palette = mColorLabel->palette();
+  	palette.setColor(TQColorGroup::Foreground, color);
   	mColorLabel->setPalette(palette);
     adjustLabel();
   }
@@ -565,12 +565,12 @@ void KLineal::mouseMoveEvent(QMouseEvent * /*inEvent*/) {
 /**
 * overwritten for dragging and contect menu
 */
-void KLineal::mousePressEvent(QMouseEvent *inEvent) {
-  mLastClickPos = QCursor::pos();
+void KLineal::mousePressEvent(TQMouseEvent *inEvent) {
+  mLastClickPos = TQCursor::pos();
   hideLabel();
 
-  QRect gr = geometry();
-  mDragOffset = mLastClickPos - QPoint(gr.left(), gr.top());
+  TQRect gr = geometry();
+  mDragOffset = mLastClickPos - TQPoint(gr.left(), gr.top());
   if (inEvent->button() == LeftButton) {
     if (!mDragging) {
       grabMouse(KCursor::sizeAllCursor());
@@ -586,7 +586,7 @@ void KLineal::mousePressEvent(QMouseEvent *inEvent) {
 /**
 * overwritten for dragging
 */
-void KLineal::mouseReleaseEvent(QMouseEvent * /*inEvent*/) {
+void KLineal::mouseReleaseEvent(TQMouseEvent * /*inEvent*/) {
   if (mDragging) {
     mDragging = FALSE;
     releaseMouse();
@@ -596,12 +596,12 @@ void KLineal::mouseReleaseEvent(QMouseEvent * /*inEvent*/) {
 /**
 * draws the scale according to the orientation
 */
-void KLineal::drawScale(QPainter &painter) {
+void KLineal::drawScale(TQPainter &painter) {
   painter.setPen(black);
-  QFont font = mScaleFont;
+  TQFont font = mScaleFont;
   // font.setPixelSize(9);
   painter.setFont(font);
-  QFontMetrics metrics = painter.fontMetrics();
+  TQFontMetrics metrics = painter.fontMetrics();
   int longCoo;
   int longLen;
   int shortStart;
@@ -658,7 +658,7 @@ void KLineal::drawScale(QPainter &painter) {
         } else {
       	  len = 15;
         }
-      	QString units;
+      	TQString units;
         int digits;
         if (hundred == 100 || mOrientation == West || mOrientation == East) {
           digits = longCoo;
@@ -666,7 +666,7 @@ void KLineal::drawScale(QPainter &painter) {
           digits = longCoo % 100;
         }
       	units.sprintf("%d", digits);
-      	QSize textSize = metrics.size(SingleLine, units);
+      	TQSize textSize = metrics.size(SingleLine, units);
         int tw = textSize.width();
         int th = textSize.height();
        	switch (mOrientation) {
@@ -736,8 +736,8 @@ void KLineal::drawScale(QPainter &painter) {
 /**
 * actually draws the ruler
 */
-void KLineal::paintEvent(QPaintEvent * /*inEvent*/) {
-  QPainter painter;
+void KLineal::paintEvent(TQPaintEvent * /*inEvent*/) {
+  TQPainter painter;
   painter.begin(this);
   drawScale(painter);
   painter.end();
