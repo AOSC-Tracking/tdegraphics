@@ -39,3 +39,21 @@ dnl Check for fontconfig
 # PKG_CHECK_MODULES(DEPS, fontconfig >= 2.2.0)
 #AC_SUBST(DEPS_CFLAGS)
 #AC_SUBST(DEPS_LIBS)
+
+dnl Check fribidi include location
+AC_LANG_SAVE
+AC_LANG_CPLUSPLUS
+cxx_flags_safe="$CXXFLAGS"
+cflags_safe="$CFLAGS"
+CXXFLAGS="$CXXFLAGS -I$ac_cv_sword_incdir"
+CFLAGS="$CFLAGS -I$ac_cv_sword_incdir"
+AC_MSG_CHECKING([for old fribidi header file])
+AC_TRY_COMPILE([#include <fribidi/fribidi_types.h>
+],[return 0;],
+AC_MSG_RESULT(yes),
+[AC_MSG_RESULT(no)
+AC_DEFINE(FRIBIDI_NEW_FILENAME,1,[no])])
+CXXFLAGS="$cxx_flags_safe"
+CFLAGS="$cflags_safe"
+AC_LANG_RESTORE
+
