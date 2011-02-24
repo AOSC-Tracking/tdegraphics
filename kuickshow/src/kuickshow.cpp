@@ -1306,7 +1306,7 @@ void KuickShow::slotReplayEvent()
     // ### WORKAROUND for TQIconView bug in Qt <= 3.0.3 at least
     if ( fileWidget && fileWidget->view() ) {
         TQWidget *widget = fileWidget->view()->widget();
-        if ( widget->inherits( "TQIconView" ) || widget->child(0, "TQIconView" ) ){
+        if ( widget->inherits( TQICONVIEW_OBJECT_NAME_STRING ) || widget->child(0, TQICONVIEW_OBJECT_NAME_STRING ) ){
             fileWidget->setSorting( fileWidget->sorting() );
         }
     }
@@ -1320,7 +1320,7 @@ void KuickShow::replayAdvance(DelayedRepeatEvent *event)
     // rely on sorting to be correct before the TQIconView has been show()n.
     if ( fileWidget && fileWidget->view() ) {
         TQWidget *widget = fileWidget->view()->widget();
-        if ( widget->inherits( "TQIconView" ) || widget->child(0, "TQIconView" ) ){
+        if ( widget->inherits( TQICONVIEW_OBJECT_NAME_STRING ) || widget->child(0, TQICONVIEW_OBJECT_NAME_STRING ) ){
             fileWidget->setSorting( fileWidget->sorting() );
         }
     }

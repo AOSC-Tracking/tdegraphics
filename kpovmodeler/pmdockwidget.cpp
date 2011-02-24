@@ -1310,7 +1310,7 @@ void PMDockManager::activate()
         obj->show();
     }
   }
-  if ( !main->inherits("TQDialog") ) main->show();
+  if ( !main->inherits(TQDIALOG_OBJECT_NAME_STRING) ) main->show();
 }
 
 bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
@@ -2466,7 +2466,7 @@ void PMDockArea::resizeEvent(TQResizeEvent *rsize)
 #ifndef NO_KDE2
     kdDebug()<<"PMDockArea::resize"<<endl;
 #endif
-    TQObjectList *list=queryList("TQWidget",0,false);
+    TQObjectList *list=queryList(TQWIDGET_OBJECT_NAME_STRING,0,false);
 
     TQObjectListIt it( *list ); // iterate over the buttons
     TQObject *obj;
