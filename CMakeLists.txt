@@ -1,6 +1,6 @@
 #################################################
 #
-#  (C) 2010 Serghei Amelian
+#  (C) 2010-2011 Serghei Amelian
 #  serghei (DOT) amelian (AT) gmail.com
 #
 #  Improvements and feedback are welcome
@@ -13,6 +13,7 @@ cmake_minimum_required( VERSION 2.6 )
 ##### general package setup #####################
 
 project( kdegraphics )
+set( VERSION 3.5.13 )
 
 
 ##### include essential cmake modules ###########
@@ -49,6 +50,7 @@ tde_setup_paths( )
 
 option( BUILD_ALL "Build all" OFF )
 option( BUILD_KVIEW "Build kview" ${BUILD_ALL} )
+option( BUILD_KRULER "Build kruler" ${BUILD_ALL} )
 
 
 ##### configure checks ##########################
@@ -75,9 +77,10 @@ set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 # endif()
 
 
-##### kdemultimedia directories ########################
+##### kdegraphics directories ###################
 
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
+tde_conditional_add_subdirectory( BUILD_KRULER kruler )
 
 
 ##### write configure files #####################
