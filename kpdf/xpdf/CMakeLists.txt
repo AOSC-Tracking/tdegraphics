@@ -9,6 +9,9 @@
 #
 #################################################
 
-# required stuff
-find_package( TQt )
-find_package( TDE )
+include( ConfigureChecks.cmake )
+
+add_subdirectory( fofi )
+add_subdirectory( goo )
+add_subdirectory( splash )
+add_subdirectory( xpdf )

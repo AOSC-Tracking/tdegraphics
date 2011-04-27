@@ -5,9 +5,11 @@
 #
 #  Improvements and feedback are welcome
 #
+#  This file is released under GPL >= 2
+#
 #################################################
 
-cmake_minimum_required( VERSION 2.6 )
+cmake_minimum_required( VERSION 2.8 )
 
 
 ##### general package setup #####################
@@ -21,12 +23,9 @@ set( VERSION 3.5.13 )
 include( FindPkgConfig )
 include( CheckIncludeFile )
 include( CheckTypeSize )
-# include( CheckCSourceRuns )
 include( CheckCSourceCompiles )
 include( CheckCXXSourceCompiles )
 include( CheckLibraryExists )
-# include( CheckFunctionExists )
-# include( CheckStructHasMember )
 
 
 ##### include our cmake modules #################
@@ -43,7 +42,8 @@ tde_setup_paths( )
 
 ##### optional stuff ############################
 
-# option( WITH_ALSA "Enable ALSA support" ON )
+option( WITH_T1LIB "Enable t1lib support" OFF )
+option( WITH_LIBPAPER "Enable libpaper support" OFF )
 
 
 ##### user requested modules ####################
@@ -51,6 +51,7 @@ tde_setup_paths( )
 option( BUILD_ALL "Build all" OFF )
 option( BUILD_KVIEW "Build kview" ${BUILD_ALL} )
 option( BUILD_KRULER "Build kruler" ${BUILD_ALL} )
+option( BUILD_KPDF "Build kpdf" ${BUILD_ALL} )
 
 
 ##### configure checks ##########################
@@ -62,25 +63,18 @@ include( ConfigureChecks.cmake )
 
 add_definitions(
   -DHAVE_CONFIG_H
-  ${TQT_CFLAGS_OTHER}
 )
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include tqt.h" )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TQT_CXX_FLAGS}" )
 set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
-
-
-##### activate dependencies #####################
-
-# if( BUILD_LIBKCAL OR BUILD_LIBKDEPIM OR BUILD_LIBKPIMIDENTITIES OR BUILD_KIOSLAVES OR BUILD_KMAIL )
-#   add_subdirectory( libemailfunctions )
-# endif()
 
 
 ##### kdegraphics directories ###################
 
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
 tde_conditional_add_subdirectory( BUILD_KRULER kruler )
+tde_conditional_add_subdirectory( BUILD_KPDF kpdf )
 
 
 ##### write configure files #####################

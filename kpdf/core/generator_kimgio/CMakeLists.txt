@@ -9,6 +9,15 @@
 #
 #################################################
 
-# required stuff
-find_package( TQt )
-find_package( TDE )
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}/../..
+  ${TDE_INCLUDE_DIR}
+  ${TQT_INCLUDE_DIRS}
+)
+
+
+##### generatorkimgio (static) ##################
+
+tde_add_library( generatorkimgio STATIC_PIC
+  SOURCES generator_kimgio.cpp
+)
