@@ -52,6 +52,7 @@ option( BUILD_ALL "Build all" OFF )
 option( BUILD_KVIEW "Build kview" ${BUILD_ALL} )
 option( BUILD_KRULER "Build kruler" ${BUILD_ALL} )
 option( BUILD_KPDF "Build kpdf" ${BUILD_ALL} )
+option( BUILD_KSVG "Build ksvg" ${BUILD_ALL} )
 
 
 ##### configure checks ##########################
@@ -65,7 +66,7 @@ add_definitions(
   -DHAVE_CONFIG_H
 )
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TQT_CXX_FLAGS}" )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TQT_CXX_FLAGS} -fexceptions" )
 set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 
@@ -75,6 +76,7 @@ set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
 tde_conditional_add_subdirectory( BUILD_KRULER kruler )
 tde_conditional_add_subdirectory( BUILD_KPDF kpdf )
+tde_conditional_add_subdirectory( BUILD_KSVG ksvg )
 
 
 ##### write configure files #####################
