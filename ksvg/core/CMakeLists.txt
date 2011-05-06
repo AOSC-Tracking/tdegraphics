@@ -33,6 +33,13 @@ install( FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/ksvg )
 
 
+##### other data ################################
+
+install( FILES
+    ksvgrenderer.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR} )
+
+
 ##### ksvgcore (static) #########################
 
 tde_add_library( ksvgcore STATIC_PIC AUTOMOC
