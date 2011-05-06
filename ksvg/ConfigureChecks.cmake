@@ -44,6 +44,8 @@ endif( )
 
 # fribidi
 pkg_search_module( FRIBIDI fribidi )
-if( NOT FRIBIDI_FOUND )
+if( FRIBIDI_FOUND )
+  check_include_file( fribidi/fribidi-types.h FRIBIDI_NEW_FILENAME )
+else( )
   tde_message_fatal( "fribidi is required, but was not found on your system" )
 endif( )

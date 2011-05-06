@@ -12,6 +12,7 @@
 #define STDC_HEADERS 1
 #cmakedefine LCMS_HEADER <@LCMS_HEADER@>
 #cmakedefine HAVE_FREETYPE_2_2_x 1
+#cmakedefine FRIBIDI_NEW_FILENAME 1
 
 // kviewshell (djvu plugin)
 #cmakedefine HAVE_WCHAR_T 1
