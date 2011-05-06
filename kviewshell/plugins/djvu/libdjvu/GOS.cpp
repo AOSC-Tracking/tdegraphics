@@ -66,6 +66,7 @@
 #include "GOS.h"
 #include "GURL.h"
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>

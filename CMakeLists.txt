@@ -49,10 +49,13 @@ option( WITH_LIBPAPER "Enable libpaper support" OFF )
 ##### user requested modules ####################
 
 option( BUILD_ALL "Build all" OFF )
+option( BUILD_KAMERA "Build kamera" ${BUILD_ALL} )
+option( BUILD_KCOLOREDIT "Build kcoloredit" ${BUILD_ALL} )
 option( BUILD_KVIEW "Build kview" ${BUILD_ALL} )
 option( BUILD_KRULER "Build kruler" ${BUILD_ALL} )
 option( BUILD_KPDF "Build kpdf" ${BUILD_ALL} )
 option( BUILD_KSVG "Build ksvg" ${BUILD_ALL} )
+option( BUILD_KVIEWSHELL "Build kviewshell" ${BUILD_ALL} )
 
 
 ##### configure checks ##########################
@@ -66,17 +69,20 @@ add_definitions(
   -DHAVE_CONFIG_H
 )
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TQT_CXX_FLAGS} -fexceptions" )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TQT_CXX_FLAGS}" )
 set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 
 
 ##### kdegraphics directories ###################
 
+tde_conditional_add_subdirectory( BUILD_KAMERA kamera )
+tde_conditional_add_subdirectory( BUILD_KCOLOREDIT kcoloredit )
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
 tde_conditional_add_subdirectory( BUILD_KRULER kruler )
 tde_conditional_add_subdirectory( BUILD_KPDF kpdf )
 tde_conditional_add_subdirectory( BUILD_KSVG ksvg )
+tde_conditional_add_subdirectory( BUILD_KVIEWSHELL kviewshell )
 
 
 ##### write configure files #####################
