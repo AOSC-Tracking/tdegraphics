@@ -25,7 +25,7 @@ link_directories(
 
 #### other data #################################
 
-install( FILES kfile_ps.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+install( FILES kfile_ps.desktop gsthumbnail.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
 
 #### kfile_ps (module) ########################
@@ -33,5 +33,14 @@ install( FILES kfile_ps.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 tde_add_kpart( kfile_ps AUTOMOC
   SOURCES kfile_ps.cpp
   LINK dscparse-static kio-shared
+  DESTINATION ${PLUGIN_INSTALL_DIR}
+)
+
+
+##### gsthumbnail (module) ######################
+
+tde_add_kpart( gsthumbnail AUTOMOC
+  SOURCES gscreator.cpp
+  LINK dscparse-static ${TQT_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
