@@ -35,7 +35,7 @@ install( FILES djvumultipage.rc DESTINATION ${DATA_INSTALL_DIR} )
 
 ##### djvuviewpart (module) #####################
 
-tde_add_kpart( djvuviewpart
+tde_add_kpart( djvuviewpart AUTOMOC
   SOURCES
     djvumultipage.cpp djvurenderer.cpp
     kprintDialogPage_DJVUpageoptions.cpp
