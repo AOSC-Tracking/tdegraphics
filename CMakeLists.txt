@@ -44,6 +44,9 @@ tde_setup_paths( )
 
 option( WITH_T1LIB "Enable t1lib support" OFF )
 option( WITH_LIBPAPER "Enable libpaper support" OFF )
+OPTION( WITH_TIFF "Enable tiff support (kfile-plugins)" OFF )
+OPTION( WITH_OPENEXR "Enable openexr support (kfile-plugins)" OFF )
+OPTION( WITH_PDF "Enable pdf support (kfile-plugins)" OFF )
 
 
 ##### user requested modules ####################
@@ -54,6 +57,10 @@ option( BUILD_DOC "Build documentation" ${BUILD_ALL} )
 option( BUILD_KAMERA "Build kamera" ${BUILD_ALL} )
 option( BUILD_KCOLOREDIT "Build kcoloredit" ${BUILD_ALL} )
 option( BUILD_KDVI "Build kdvi" ${BUILD_ALL} )
+option( BUILD_KFAX "Build kfax" ${BUILD_ALL} )
+option( BUILD_KFAXVIEW "Build kfaxview" ${BUILD_ALL} )
+option( BUILD_KFILE_PLUGINS "Build kfile-plugins" ${BUILD_ALL} )
+option( BUILD_KGHOSTVIEW "Build kghostview" ${BUILD_ALL} )
 option( BUILD_KVIEW "Build kview" ${BUILD_ALL} )
 option( BUILD_KRULER "Build kruler" ${BUILD_ALL} )
 option( BUILD_KPDF "Build kpdf" ${BUILD_ALL} )
@@ -79,11 +86,19 @@ set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 
 ##### kdegraphics directories ###################
 
+if( BUILD_KFILE_PLUGINS OR BUILD_GHOSTKVIEW )
+  add_subdirectory( kghostview/dscparse )
+endif( )
+
 tde_conditional_add_subdirectory( BUILD_DOC doc )
 tde_conditional_add_subdirectory( BUILD_KAMERA kamera )
 tde_conditional_add_subdirectory( BUILD_KCOLOREDIT kcoloredit )
 tde_conditional_add_subdirectory( BUILD_KDVI kdvi )
+tde_conditional_add_subdirectory( BUILD_KFAX kfax )
+tde_conditional_add_subdirectory( BUILD_KFAXVIEW kfaxview )
+tde_conditional_add_subdirectory( BUILD_KFILE_PLUGINS kfile-plugins )
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
+tde_conditional_add_subdirectory( BUILD_KGHOSTVIEW kghostview )
 tde_conditional_add_subdirectory( BUILD_KRULER kruler )
 tde_conditional_add_subdirectory( BUILD_KPDF kpdf )
 tde_conditional_add_subdirectory( BUILD_KSVG ksvg )
