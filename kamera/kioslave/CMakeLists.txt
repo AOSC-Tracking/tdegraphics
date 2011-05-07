@@ -23,6 +23,11 @@ link_directories(
 )
 
 
+##### other data ################################
+
+install( FILES camera.protocol DESTINATION ${SERVICES_INSTALL_DIR} )
+
+
 #### kamera (module) ############################
 
 tde_add_kpart( kio_kamera AUTOMOC
