@@ -66,6 +66,7 @@
 #include "textBox.h"
 #include "xdvi.h"
 
+#include <stdlib.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>

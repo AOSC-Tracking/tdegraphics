@@ -9,6 +9,17 @@
 #
 #################################################
 
+# freetype2
+if( BUILD_KDVI OR BUILD_KPDF OR BUILD_KSVG )
+  pkg_search_module( FREETYPE freetype2 )
+  if( FREETYPE_FOUND )
+    set( HAVE_FREETYPE 1 )
+  else( )
+    tde_message_fatal( "freetype2 is required, but was not found on your system" )
+  endif( )
+endif( )
+
+
 # required stuff
 find_package( TQt )
 find_package( TDE )

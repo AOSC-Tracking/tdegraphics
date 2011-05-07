@@ -31,11 +31,7 @@ if( NOT ART_FOUND )
 endif( )
 
 
-# freetype2
-pkg_search_module( FREETYPE freetype2 )
-if( NOT FREETYPE_FOUND )
-  tde_message_fatal( "freetype2 is required, but was not found on your system" )
-endif( )
+# freetype2 2.2.x
 if( NOT ${FREETYPE_VERSION} VERSION_LESS "2.2" )
   set( HAVE_FREETYPE_2_2_x 1 CACHE INTERNAL "" FORCE )
 endif( )

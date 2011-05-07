@@ -1,7 +1,9 @@
 #cmakedefine VERSION "@VERSION@"
 
-// kpdf
+// kpdf, kdvi
 #cmakedefine HAVE_FREETYPE 1
+
+// kpdf
 #cmakedefine HAVE_DIRENT_H 1
 #cmakedefine HAVE_SYS_NDIR_H 1
 #cmakedefine HAVE_SYS_DIR_H 1

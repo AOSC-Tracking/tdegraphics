@@ -9,14 +9,6 @@
 #
 #################################################
 
-pkg_search_module( FREETYPE freetype2 )
-if( FREETYPE_FOUND )
-  set( HAVE_FREETYPE 1 CACHE INTERNAL "" FORCE )
-else( )
-  tde_message_fatal( "freetype2 is required, but was not found on your system" )
-endif( )
-
-
 pkg_search_module( XFT xft )
 if( NOT XFT_FOUND )
     tde_message_fatal( "Xft is required, but was not found on your system" )
