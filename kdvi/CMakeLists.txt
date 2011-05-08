@@ -78,3 +78,12 @@ tde_add_kpart( kdvipart AUTOMOC
     kmultipage-shared kdeprint-shared kparts-shared ${FREETYPE_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
+
+
+##### kdvi (executable) ####################
+
+tde_add_executable( kdvi AUTOMOC
+  SOURCES main.cpp
+  LINK kviewshell-static kparts-shared
+  DESTINATION ${BIN_INSTALL_DIR}
+)
