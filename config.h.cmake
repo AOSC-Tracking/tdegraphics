@@ -34,3 +34,7 @@
     #define HAS_MBSTATE 1
   #endif
 #endif
+
+// kmrml
+#cmakedefine HAVE_STDLIB_H 1
+#cmakedefine HAVE_UNISTD_H 1
