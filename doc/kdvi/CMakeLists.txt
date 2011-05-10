@@ -9,4 +9,8 @@
 #
 #################################################
 
-tde_create_handbook( DESTINATION kdvi )
+tde_create_handbook(
+  EXTRA
+    srctex.sty srcltx.sty kdvi-search.el KDVI-features.tex
+    KDVI-features.dvi aboutkde.ps
+  DESTINATION kdvi )
