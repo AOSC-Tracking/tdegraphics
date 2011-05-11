@@ -38,3 +38,6 @@
 // kmrml
 #cmakedefine HAVE_STDLIB_H 1
 #cmakedefine HAVE_UNISTD_H 1
+
+// ksnapshop
+#cmakedefine HAVE_X11_EXTENSIONS_SHAPE_H 1
