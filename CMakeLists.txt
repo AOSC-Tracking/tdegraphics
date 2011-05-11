@@ -65,11 +65,13 @@ option( BUILD_KGHOSTVIEW "Build kghostview" ${BUILD_ALL} )
 option( BUILD_KICONEDIT "Build kiconedit" ${BUILD_ALL} )
 option( BUILD_KMRML "Build kmrml" ${BUILD_ALL} )
 option( BUILD_KOLOURPAINT "Build kolourpaint" )
+option( BUILD_KOOKA "Build kooka" ${BUILD_ALL} )
 option( BUILD_KVIEW "Build kview" ${BUILD_ALL} )
 option( BUILD_KRULER "Build kruler" ${BUILD_ALL} )
 option( BUILD_KPDF "Build kpdf" ${BUILD_ALL} )
 option( BUILD_KSVG "Build ksvg" ${BUILD_ALL} )
 option( BUILD_KVIEWSHELL "Build kviewshell" ${BUILD_ALL} )
+option( BUILD_LIBKSCAN "Build libkscan" ${BUILD_ALL} )
 
 
 ##### configure checks ##########################
@@ -106,11 +108,13 @@ tde_conditional_add_subdirectory( BUILD_KGHOSTVIEW kghostview )
 tde_conditional_add_subdirectory( BUILD_KICONEDIT kiconedit )
 tde_conditional_add_subdirectory( BUILD_KMRML kmrml )
 tde_conditional_add_subdirectory( BUILD_KOLOURPAINT kolourpaint )
+tde_conditional_add_subdirectory( BUILD_KOOKA kooka )
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
 tde_conditional_add_subdirectory( BUILD_KRULER kruler )
 tde_conditional_add_subdirectory( BUILD_KPDF kpdf )
 tde_conditional_add_subdirectory( BUILD_KSVG ksvg )
 tde_conditional_add_subdirectory( BUILD_KVIEWSHELL kviewshell )
+tde_conditional_add_subdirectory( BUILD_LIBKSCAN libkscan )
 
 
 ##### write configure files #####################
