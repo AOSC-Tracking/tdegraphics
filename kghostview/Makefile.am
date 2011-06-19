@@ -1,6 +1,6 @@
 SUBDIRS = data
 
-INCLUDES= $(all_includes)
+INCLUDES= $(all_includes) -I$(top_srcdir)/kghostview/dscparse
 
 ####### Files
 
@@ -33,12 +33,12 @@ kghostview_LDADD = libkghostviewlib.la
 
 libdscparse_la_LDFLAGS = $(all_libraries) -no-undefined
 libdscparse_la_LIBADD = $(LIB_QT)
-libdscparse_la_SOURCES = dscparse.cpp dscparse_adapter.cpp
+libdscparse_la_SOURCES = $(top_srcdir)/kghostview/dscparse/dscparse.cpp $(top_srcdir)/kghostview/dscparse/dscparse_adapter.cpp
 
 noinst_HEADERS =  marklist.h logwindow.h infodialog.h kgvshell.h \
 	kpswidget.h kgvpageview.h ps.h kgv_miniwidget.h kgv_view.h scrollbox.h \
-	kgvpagedecorator.h kgvconfigdialog.h kgvmainwidget.h dscparse.h \
-	dscparse_adapter.h kdscerrordialog.h kgvdocument.h displayoptions.h \
+	kgvpagedecorator.h kgvconfigdialog.h kgvmainwidget.h $(top_srcdir)/kghostview/dscparse/dscparse.h \
+	$(top_srcdir)/kghostview/dscparse/dscparse_adapter.h kdscerrordialog.h kgvdocument.h displayoptions.h \
 	fullscreenfilter.h kgvfactory.h thumbnailservice.h
 
 METASOURCES = AUTO

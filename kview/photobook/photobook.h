@@ -52,7 +52,8 @@ class PhotoBookPart;
 
 class PhotoBook : public TQSplitter
 {
-TQ_OBJECT	
+Q_OBJECT
+TQ_OBJECT
 	Previews *mList;
 	KAction *mFit;
 	KParts::ReadOnlyPart *mViewer;
@@ -72,7 +73,7 @@ signals:
 
 class Previews : public KFileIconView
 {
-Q_OBJECT
+  Q_OBJECT
   TQ_OBJECT
 	
 	KDirLister mDirLister;

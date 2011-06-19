@@ -185,7 +185,7 @@ public:
 	For                   = CDSC_FOR,
 	LanguageLevel         = CDSC_LANGUAGELEVEL,
 	BoundingBox           = CDSC_BOUNDINGBOX,
-	Qt::Orientation           = CDSC_ORIENTATION,
+	Orientation           = CDSC_ORIENTATION,
 	PageOrder             = CDSC_PAGEORDER,
 	DocumentMedia         = CDSC_DOCUMENTMEDIA,
 	DocumentPaperSizes    = CDSC_DOCUMENTPAPERSIZES,
@@ -206,7 +206,7 @@ public:
 	// Defaults section
 	BeginDefaults         = CDSC_BEGINDEFAULTS,
 	EndDefaults           = CDSC_ENDDEFAULTS,
-	// also %%PageMedia, %%PageQt::Orientation, %%PageBoundingBox
+	// also %%PageMedia, %%PageOrientation, %%PageBoundingBox
 
 	// Prolog section 
 	BeginProlog           = CDSC_BEGINPROLOG,
@@ -237,16 +237,16 @@ public:
 	EndPageSetup          = CDSC_ENDPAGESETUP,
 	PageMedia             = CDSC_PAGEMEDIA,
 	// also %%PaperColor, %%PaperForm, %%PaperWeight, %%PaperSize
-	PageQt::Orientation       = CDSC_PAGEORIENTATION,
+	PageOrientation       = CDSC_PAGEORIENTATION,
 	PageBoundingBox       = CDSC_PAGEBOUNDINGBOX,
 	// also %%Begin/EndFont, %%Begin/EndFeature 
 	// also %%Begin/EndResource, %%Begin/EndProcSet 
 	IncludeFont           = CDSC_INCLUDEFONT,
-	ViewingQt::Orientation    = CDSC_VIEWINGORIENTATION,
+	ViewingOrientation    = CDSC_VIEWINGORIENTATION,
 
 	// Trailer section
 	Trailer               = CDSC_TRAILER,
-	// also %%Pages, %%BoundingBox, %%Qt::Orientation, %%PageOrder, 
+	// also %%Pages, %%BoundingBox, %%Orientation, %%PageOrder, 
 	// %%DocumentMedia
 	// %%Page is recognised as an error
 	// also %%DocumentNeededFonts, %%DocumentSuppliedFonts

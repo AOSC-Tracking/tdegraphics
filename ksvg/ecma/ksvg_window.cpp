@@ -108,7 +108,7 @@ const ClassInfo KSVG::Window::s_classInfo = { "Window", 0, &s_hashTable, 0 };
 
 KSVG::Window::Window(KSVG::SVGDocumentImpl *p) : ObjectImp(), m_doc(p)
 {
-	winq = new WindowTQObject(this);
+	winq = new WindowQObject(this);
 }
 
 KSVG::Window::~Window()
@@ -278,7 +278,7 @@ void KSVG::Window::clear(ExecState *exec)
 {
 	kdDebug(26004) << "KSVG::Window::clear " << this << endl;
 	delete winq;
-	winq = new WindowTQObject(this);;
+	winq = new WindowQObject(this);;
 	
 	// Get rid of everything, those user vars could hold references to DOM nodes
 	deleteAllProperties(exec);
@@ -488,18 +488,18 @@ void ScheduledAction::execute(Window *window)
 	}
 }
 
-////////////////////// WindowTQObject ////////////////////////
+////////////////////// WindowQObject ////////////////////////
 
-WindowTQObject::WindowTQObject(Window *w) : tqparent(w)
+WindowQObject::WindowQObject(Window *w) : tqparent(w)
 {
 }
 
-WindowTQObject::~WindowTQObject()
+WindowQObject::~WindowQObject()
 {
 	tqparentDestroyed(); // reuse same code
 }
 
-void WindowTQObject::tqparentDestroyed()
+void WindowQObject::tqparentDestroyed()
 {
 	killTimers();
 	
@@ -513,7 +513,7 @@ void WindowTQObject::tqparentDestroyed()
 	scheduledActions.clear();
 }
 
-int WindowTQObject::installTimeout(const UString &handler, int t, bool singleShot)
+int WindowQObject::installTimeout(const UString &handler, int t, bool singleShot)
 {
 	int id = startTimer(t);
 	ScheduledAction *action = new ScheduledAction(handler.qstring(), singleShot);
@@ -521,7 +521,7 @@ int WindowTQObject::installTimeout(const UString &handler, int t, bool singleSho
 	return id;
 }
 
-int WindowTQObject::installTimeout(const Value &func, List args, int t, bool singleShot)
+int WindowQObject::installTimeout(const Value &func, List args, int t, bool singleShot)
 {
 	Object objFunc = Object::dynamicCast(func);
 	int id = startTimer(t);
@@ -529,7 +529,7 @@ int WindowTQObject::installTimeout(const Value &func, List args, int t, bool sin
 	return id;
 }
 
-void WindowTQObject::clearTimeout(int timerId, bool delAction)
+void WindowQObject::clearTimeout(int timerId, bool delAction)
 {
 	killTimer(timerId);
 	
@@ -545,7 +545,7 @@ void WindowTQObject::clearTimeout(int timerId, bool delAction)
 	}
 }
 
-void WindowTQObject::timerEvent(TQTimerEvent *e)
+void WindowQObject::timerEvent(TQTimerEvent *e)
 {
 	TQMapIterator<int, ScheduledAction *> it = scheduledActions.tqfind(e->timerId());
 	if(it != scheduledActions.end())
@@ -570,9 +570,9 @@ void WindowTQObject::timerEvent(TQTimerEvent *e)
 			delete action;
 	}
 	else
-		kdWarning(6070) << "WindowTQObject::timerEvent this=" << this << " timer " << e->timerId() << " not found (" << scheduledActions.count() << " actions in map)" << endl;
+		kdWarning(6070) << "WindowQObject::timerEvent this=" << this << " timer " << e->timerId() << " not found (" << scheduledActions.count() << " actions in map)" << endl;
 }
 
-void WindowTQObject::timeoutClose()
+void WindowQObject::timeoutClose()
 {
 }

@@ -98,7 +98,7 @@ void kpDocumentMetaInfo::printDebug (const TQString &prefix) const
     {
         kdDebug () << "key=" << (*it).key.data()
                    << " lang=" << (*it).lang.data()
-                   << " text=" << text (*it).data()
+                   << " text=" << text (*it).ascii()
                    << endl;
     }
 
