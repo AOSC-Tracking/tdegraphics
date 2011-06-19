@@ -28,8 +28,8 @@
 #define LEDIT_ID    2
 #define FIND_ID     3
 
-SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
-    : KToolBar( parent, "iSearchBar" ), m_document( document ),
+SearchWidget::SearchWidget( TQWidget * tqparent, KPDFDocument * document )
+    : KToolBar( tqparent, "iSearchBar" ), m_document( document ),
     m_searchType( 0 ), m_caseSensitive( false )
 {
     // change toolbar appearance
@@ -44,14 +44,14 @@ SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
              this, TQT_SLOT( startSearch() ) );
 
     // 1. text line
-    insertLined( TQString::null, LEDIT_ID, TQT_SIGNAL( textChanged(const TQString &) ),
-                 this, TQT_SLOT( slotTextChanged(const TQString &) ), true,
+    insertLined( TQString(), LEDIT_ID, TQT_SIGNAL( textChanged(const TQString &) ),
+                 TQT_TQOBJECT(this), TQT_SLOT( slotTextChanged(const TQString &) ), true,
                  i18n( "Enter at least 3 letters to filter pages" ), 0/*size*/, 1 );
 
     // 2. clear button (uses a lineEdit slot, so it must be created after)
     insertButton( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase",
                   CLEAR_ID, TQT_SIGNAL( clicked() ),
-                  getLined( LEDIT_ID ), TQT_SLOT( clear() ), true,
+                  TQT_TQOBJECT(getLined( LEDIT_ID )), TQT_SLOT( clear() ), true,
                   i18n( "Clear filter" ), 0/*index*/ );
 
     // 3.1. create the popup menu for changing filtering features
@@ -79,10 +79,10 @@ void SearchWidget::clearText()
 void SearchWidget::slotTextChanged( const TQString & text )
 {
     // if 0<length<3 set 'red' text and send a blank string to document
-    TQColor color = text.length() > 0 && text.length() < 3 ? Qt::darkRed : palette().active().text();
+    TQColor color = text.length() > 0 && text.length() < 3 ? TQt::darkRed : tqpalette().active().text();
     KLineEdit * lineEdit = getLined( LEDIT_ID );
     lineEdit->setPaletteForegroundColor( color );
-    lineEdit->setPaletteBackgroundColor( palette().active().base() );
+    lineEdit->setPaletteBackgroundColor( tqpalette().active().base() );
     m_inputDelayTimer->stop();
     m_inputDelayTimer->start(333, true);
 }
@@ -119,7 +119,7 @@ void SearchWidget::startSearch()
                                         ( (m_searchType > 1) ? KPDFDocument::GoogleAny :
                                         KPDFDocument::GoogleAll );
         ok = m_document->searchText( SW_SEARCH_ID, text, true, m_caseSensitive,
-                                     type, false, qRgb( 0, 183, 255 ) );
+                                     type, false, tqRgb( 0, 183, 255 ) );
     }
     else
         m_document->resetSearch( SW_SEARCH_ID );
@@ -127,8 +127,8 @@ void SearchWidget::startSearch()
     if ( !ok )
     {
         KLineEdit * lineEdit = getLined( LEDIT_ID );
-        lineEdit->setPaletteForegroundColor( Qt::white );
-        lineEdit->setPaletteBackgroundColor( Qt::red );
+        lineEdit->setPaletteForegroundColor( TQt::white );
+        lineEdit->setPaletteBackgroundColor( TQt::red );
     }
 }
 

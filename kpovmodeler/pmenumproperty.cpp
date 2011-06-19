@@ -40,7 +40,7 @@ TQStringList PMEnumProperty::enumValues( ) const
 
 bool PMEnumProperty::setProtected( PMObject* obj, const PMVariant& v )
 {
-   PMEnumStringValueMap::iterator it = m_stringMap.find( v.stringData( ) );
+   PMEnumStringValueMap::iterator it = m_stringMap.tqfind( v.stringData( ) );
    if( it == m_stringMap.end( ) )
       return false;
    setEnum( obj, it.data( ) );
@@ -50,8 +50,8 @@ bool PMEnumProperty::setProtected( PMObject* obj, const PMVariant& v )
 PMVariant PMEnumProperty::getProtected( const PMObject* obj )
 {
    int v = getEnum( obj );
-   PMEnumValueStringMap::const_iterator it = m_valueMap.find( v );
+   PMEnumValueStringMap::const_iterator it = m_valueMap.tqfind( v );
    if( it == m_valueMap.end( ) )
-      return PMVariant( TQString::null );
+      return PMVariant( TQString() );
    return it.data( );
 }

@@ -229,12 +229,12 @@ void SVGColorProfileElementImpl::closeColorProfile()
 	cmsCloseProfile(m_hInput);
 }
 
-QRgb SVGColorProfileElementImpl::correctPixel(float r, float g, float b)
+TQRgb SVGColorProfileElementImpl::correctPixel(float r, float g, float b)
 {
 	if(!m_loaded)
 	{
 		if(!loadColorProfile())
-			return qRgb(0, 0, 0);
+			return tqRgb(0, 0, 0);
 	}
 
 	unsigned short input[MAXCHANNELS], output[MAXCHANNELS];
@@ -246,9 +246,9 @@ QRgb SVGColorProfileElementImpl::correctPixel(float r, float g, float b)
 	cmsDoTransform(m_hTrans, input, output, 1);
 
 	if(m_outputColorSpace == icSigRgbData)
-		return qRgb(output[0] / 257, output[1] / 257, output[2] / 257);
+		return tqRgb(output[0] / 257, output[1] / 257, output[2] / 257);
 
-	return qRgb(0, 0, 0);
+	return tqRgb(0, 0, 0);
 }
 
 TQImage *SVGColorProfileElementImpl::correctImage(TQImage *input)
@@ -260,8 +260,8 @@ TQImage *SVGColorProfileElementImpl::correctImage(TQImage *input)
 	{
 		for(int x = 0; x < input->width(); x++)
 		{
-			QRgb pixel = input->pixel(x, y);
-			input->setPixel(x, y, correctPixel(qRed(pixel), qGreen(pixel), qBlue(pixel)));
+			TQRgb pixel = input->pixel(x, y);
+			input->setPixel(x, y, correctPixel(tqRed(pixel), tqGreen(pixel), tqBlue(pixel)));
 		}
 	}
 

@@ -147,33 +147,33 @@ void PMPrototypeManager::addPrototype( PMObject* obj )
    if( !obj )
       return;
 
-   PMMetaObject* metaObject = obj->metaObject( );
-   PMMetaObject* m2 = m_metaDict.find( metaObject->className( ) );
+   PMMetaObject* tqmetaObject = obj->tqmetaObject( );
+   PMMetaObject* m2 = m_metaDict.tqfind( tqmetaObject->className( ) );
    if( m2 )
    {
       kdError( PMArea ) << "PMPrototypeManager: Class '"
-                        << metaObject->className( )
+                        << tqmetaObject->className( )
                         << "' already registered." << endl;
    }
    else
    {
-      if( metaObject->isAbstract( ) )
+      if( tqmetaObject->isAbstract( ) )
          kdError( PMArea ) << "PMPrototypeManager: The meta object for the prototype "
-                           << metaObject->className( )
+                           << tqmetaObject->className( )
                            << " doesn't have a factory method" << endl;
 
-      m_prototypes.append( metaObject );
-      m_lowerCaseDict[metaObject->className( ).lower( )] = metaObject->className( );
+      m_prototypes.append( tqmetaObject );
+      m_lowerCaseDict[tqmetaObject->className( ).lower( )] = tqmetaObject->className( );
 
       // insert the meta object and all super classes into the hash table
-      while( metaObject )
+      while( tqmetaObject )
       {
-         if( m_metaDict.find( metaObject->className( ) ) )
-            metaObject = 0;
+         if( m_metaDict.tqfind( tqmetaObject->className( ) ) )
+            tqmetaObject = 0;
          else
          {
-            m_metaDict.insert( metaObject->className( ), metaObject );
-            metaObject = metaObject->superClass( );
+            m_metaDict.insert( tqmetaObject->className( ), tqmetaObject );
+            tqmetaObject = tqmetaObject->superClass( );
          }
       }
    }
@@ -184,7 +184,7 @@ void PMPrototypeManager::addDeclarationType( const TQString& className,
                                              const TQString& description,
                                              const TQString& pixmap )
 {
-   PMMetaObject* m = metaObject( className );
+   PMMetaObject* m = tqmetaObject( className );
    if( !m )
       kdError( PMArea ) << "PMPrototypeManager::addDeclarationType: Unknown class " << className << endl;
    else
@@ -206,29 +206,29 @@ PMObject* PMPrototypeManager::newObject( const TQString& name ) const
    if( name.isEmpty( ) )
       return 0;
 
-   PMMetaObject* meta = m_metaDict.find( name );
+   PMMetaObject* meta = m_metaDict.tqfind( name );
    if( !meta )
       return 0;
    return meta->newObject( m_pPart );
 }
 
-PMMetaObject* PMPrototypeManager::metaObject( const TQString& name ) const
+PMMetaObject* PMPrototypeManager::tqmetaObject( const TQString& name ) const
 {
    if( name.isNull( ) )
       return 0;
-   return m_metaDict.find( name );
+   return m_metaDict.tqfind( name );
 }
 
 bool PMPrototypeManager::isA( const TQString& className,
                               const TQString& baseClass ) const
 {
-   return isA( metaObject( className ), baseClass );
+   return isA( tqmetaObject( className ), baseClass );
 }
 
 bool PMPrototypeManager::isA( PMMetaObject* c,
                               const TQString& baseClass ) const
 {
-   PMMetaObject* bc = metaObject( baseClass );
+   PMMetaObject* bc = tqmetaObject( baseClass );
    while( c && c != bc )
       c = c->superClass( );
    return( c && ( c == bc ) );
@@ -236,8 +236,8 @@ bool PMPrototypeManager::isA( PMMetaObject* c,
 
 TQString PMPrototypeManager::className( const TQString& lowercase ) const
 {
-   TQMap<TQString, TQString>::const_iterator it = m_lowerCaseDict.find( lowercase );
+   TQMap<TQString, TQString>::const_iterator it = m_lowerCaseDict.tqfind( lowercase );
    if( it != m_lowerCaseDict.end( ) )
       return *it;
-   return TQString::null;
+   return TQString();
 }

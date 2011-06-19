@@ -27,8 +27,8 @@
 #include <klocale.h>
 
 
-PMInteriorEdit::PMInteriorEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMInteriorEdit::PMInteriorEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -38,33 +38,33 @@ void PMInteriorEdit::createTopWidgets( )
    Base::createTopWidgets( );
 
    TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
-   TQGridLayout* layout = new TQGridLayout( hl ,17 ,6);
+   TQGridLayout* tqlayout = new TQGridLayout( hl ,17 ,6);
    m_pEnableIorEdit = new TQCheckBox( i18n( "Refraction:" ), this );
    m_pIorEdit = new PMFloatEdit( this );
-   layout->addWidget( m_pEnableIorEdit, 0, 0 );
-   layout->addWidget( m_pIorEdit, 0, 1 );
+   tqlayout->addWidget( m_pEnableIorEdit, 0, 0 );
+   tqlayout->addWidget( m_pIorEdit, 0, 1 );
    m_pEnableCausticsEdit = new TQCheckBox( i18n( "Caustics:" ), this );
    m_pCausticsEdit = new PMFloatEdit( this );
-   layout->addWidget( m_pEnableCausticsEdit, 1, 0 );
-   layout->addWidget( m_pCausticsEdit, 1, 1 );
+   tqlayout->addWidget( m_pEnableCausticsEdit, 1, 0 );
+   tqlayout->addWidget( m_pCausticsEdit, 1, 1 );
    m_pEnableDispersionEdit = new TQCheckBox( i18n( "Dispersion:" ), this );
    m_pDispersionEdit = new PMFloatEdit( this );
    m_pDispersionEdit->setValidation( true, 0, false, 0 );
-   layout->addWidget( m_pEnableDispersionEdit, 2, 0 );
-   layout->addWidget( m_pDispersionEdit, 2, 1 );
+   tqlayout->addWidget( m_pEnableDispersionEdit, 2, 0 );
+   tqlayout->addWidget( m_pDispersionEdit, 2, 1 );
    m_pEnableDispSamplesEdit = new TQCheckBox( i18n( "Dispersion samples:" ), this );
    m_pDispSamplesEdit = new PMIntEdit( this );
    m_pDispSamplesEdit->setValidation( true, 2, false, 0 );
-   layout->addWidget( m_pEnableDispSamplesEdit, 3, 0 );
-   layout->addWidget( m_pDispSamplesEdit, 3, 1 );
+   tqlayout->addWidget( m_pEnableDispSamplesEdit, 3, 0 );
+   tqlayout->addWidget( m_pDispSamplesEdit, 3, 1 );
    m_pEnableFadeDistanceEdit = new TQCheckBox( i18n( "Fade distance:" ), this );
    m_pFadeDistanceEdit = new PMFloatEdit( this );
-   layout->addWidget( m_pEnableFadeDistanceEdit, 4, 0 );
-   layout->addWidget( m_pFadeDistanceEdit, 4, 1 );
+   tqlayout->addWidget( m_pEnableFadeDistanceEdit, 4, 0 );
+   tqlayout->addWidget( m_pFadeDistanceEdit, 4, 1 );
    m_pEnableFadePowerEdit = new TQCheckBox( i18n( "Fade power:" ), this );
    m_pFadePowerEdit = new PMFloatEdit( this );
-   layout->addWidget( m_pEnableFadePowerEdit, 5, 0 );
-   layout->addWidget( m_pFadePowerEdit, 5, 1 );
+   tqlayout->addWidget( m_pEnableFadePowerEdit, 5, 0 );
+   tqlayout->addWidget( m_pFadePowerEdit, 5, 1 );
    hl->addStretch( 1 );
 
    connect( m_pIorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

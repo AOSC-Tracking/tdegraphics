@@ -74,7 +74,7 @@ unsigned int SVGDocumentImpl::elemDictHashSizes [] =
 
 const int SVGDocumentImpl::numElemDictHashSizes = sizeof(elemDictHashSizes) / sizeof(elemDictHashSizes[0]);
 
-SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *parentImage) : TQObject(), DOM::DomShared(), DOM::Document(), SVGDOMNodeBridge(static_cast<DOM::Node>(*this))
+SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *tqparentImage) : TQObject(), DOM::DomShared(), DOM::Document(), SVGDOMNodeBridge(static_cast<DOM::Node>(*this))
 {
 	m_animations = anim;
 
@@ -97,7 +97,7 @@ SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *paren
 	m_resortZIndicesOnFinishedLoading = false;
 	m_fit = fit;
 
-	m_parentImage = parentImage;
+	m_parentImage = tqparentImage;
 	if(m_parentImage)
 		m_parentImage->ref();
 }
@@ -112,9 +112,9 @@ SVGDocumentImpl::~SVGDocumentImpl()
 	DOM::Node node = firstChild();
 	for(; !node.isNull(); node = node.nextSibling())
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(getElementFromHandle(node.handle()));
-		if(shape)
-			killList.append(shape);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(getElementFromHandle(node.handle()));
+		if(tqshape)
+			killList.append(tqshape);
 	}
 
 	SVGShapeImpl *rend = 0;
@@ -252,7 +252,7 @@ void SVGDocumentImpl::slotSVGContent(TQIODevice *dev)
 	args.getURLMode = false;
 
 	TQString url = m_baseURL.prettyURL();
-	int pos = url.find('#'); // url can become like this.svg#svgView(viewBox(63,226,74,74)), get part after '#'
+	int pos = url.tqfind('#'); // url can become like this.svg#svgView(viewBox(63,226,74,74)), get part after '#'
 	if(pos > -1)
 		args.SVGFragmentId = url.mid(pos + 1);
 		
@@ -358,7 +358,7 @@ void SVGDocumentImpl::checkFinishedLoading()
 
 void SVGDocumentImpl::addForwardReferencingUseElement(SVGUseElementImpl *use)
 {
-	if(!m_forwardReferencingUseElements.contains(use))
+	if(!m_forwardReferencingUseElements.tqcontains(use))
 		m_forwardReferencingUseElements.append(use);
 }
 
@@ -392,9 +392,9 @@ void SVGDocumentImpl::syncCachedMatrices()
 {
 	if(rootElement())
 	{
-		SVGMatrixImpl *parentMatrix = SVGSVGElementImpl::createSVGMatrix();
-		rootElement()->checkCachedScreenCTM(parentMatrix);
-		parentMatrix->deref();
+		SVGMatrixImpl *tqparentMatrix = SVGSVGElementImpl::createSVGMatrix();
+		rootElement()->checkCachedScreenCTM(tqparentMatrix);
+		tqparentMatrix->deref();
 	}
 }
 
@@ -478,7 +478,7 @@ bool SVGDocumentImpl::dispatchRecursiveEvent(SVGEvent::EventId id, DOM::Node sta
 	
 		if(element && element->hasChildNodes())
 		{
-			// Dispatch to all children
+			// Dispatch to all tqchildren
 			eventExecuted = dispatchRecursiveEvent(id, element->lastChild()) ? true : eventExecuted;
 
 			// Dispatch, locally

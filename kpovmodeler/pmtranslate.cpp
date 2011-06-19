@@ -65,11 +65,11 @@ void PMTranslate::readAttributes( const PMXMLHelper& h )
    m_move = h.vectorAttribute( "value", moveDefault );
 }
 
-PMMetaObject* PMTranslate::metaObject( ) const
+PMMetaObject* PMTranslate::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Translate", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Translate", Base::tqmetaObject( ),
                                         createNewTranslate );
       s_pMetaObject->addProperty(
          new PMTranslateProperty( "translation", &PMTranslate::setTranslation, &PMTranslate::translation ) );
@@ -101,9 +101,9 @@ void PMTranslate::setTranslation( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMTranslate::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMTranslate::editWidget( TQWidget* tqparent ) const
 {
-   return new PMTranslateEdit( parent );
+   return new PMTranslateEdit( tqparent );
 }
 
 void PMTranslate::restoreMemento( PMMemento* s )

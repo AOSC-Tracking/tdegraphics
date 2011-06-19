@@ -20,8 +20,8 @@
 #include "kprintDialogPage_pageoptions.h"
 
   
-KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *parent, const char *name )
-  : KPrintDialogPage( parent, name )
+KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *tqparent, const char *name )
+  : KPrintDialogPage( tqparent, name )
 {
   setTitle( i18n("Page Size & Placement") );
 
@@ -33,7 +33,7 @@ KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *parent, co
 
   kprintDialogPage_pageoptions_baseLayout = new TQVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout"); 
   if (kprintDialogPage_pageoptions_baseLayout == 0) {
-    kdError(1223) << "KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions() cannot create layout" << endl;
+    kdError(1223) << "KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions() cannot create tqlayout" << endl;
     return;
   }
     
@@ -91,7 +91,7 @@ KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *parent, co
   }
 
   
-  resize( TQSize(319, 166).expandedTo(minimumSizeHint()) );
+  resize( TQSize(319, 166).expandedTo(tqminimumSizeHint()) );
   clearWState( WState_Polished );
 }
 

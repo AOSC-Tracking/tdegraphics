@@ -130,11 +130,11 @@ void PMPolynom::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMPolynom::metaObject( ) const
+PMMetaObject* PMPolynom::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Polynom", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Polynom", Base::tqmetaObject( ),
                                         createNewPolynom );
       s_pMetaObject->addProperty(
          new PMPolynomProperty( "polynomOrder", &PMPolynom::setPolynomOrder,
@@ -158,9 +158,9 @@ void PMPolynom::cleanUp( ) const
    Base::cleanUp( );
 }
 
-PMDialogEditBase* PMPolynom::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMPolynom::editWidget( TQWidget* tqparent ) const
 {
-   return new PMPolynomEdit( parent );
+   return new PMPolynomEdit( tqparent );
 }
 
 void PMPolynom::setPolynomOrder( int o )

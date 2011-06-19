@@ -27,8 +27,8 @@
 #include "logwindow.h"
 
 LogWindow::LogWindow( const TQString& caption, 
-                      TQWidget* parent, const char* name) :
-    KDialogBase( parent, name, false, caption, User1|Close, Close, false, 
+                      TQWidget* tqparent, const char* name) :
+    KDialogBase( tqparent, name, false, caption, User1|Close, Close, false, 
                  KStdGuiItem::clear() )
 {
     TQVBox * display = makeVBoxMainWidget();
@@ -36,11 +36,11 @@ LogWindow::LogWindow( const TQString& caption,
     _errorIndication = new TQLabel( "", display, "logview-label" );
     _errorIndication->hide();
     
-    _configureGS = new KURLLabel( i18n( "Configure Ghostscript" ), TQString::null, display );
+    _configureGS = new KURLLabel( i18n( "Configure Ghostscript" ), TQString(), display );
     _configureGS->hide();
 
     _logView = new TQTextEdit( display, "logview" );
-    _logView->setTextFormat( Qt::PlainText );
+    _logView->setTextFormat( TQt::PlainText );
     _logView->setReadOnly( true );
     _logView->setWordWrap( TQTextEdit::NoWrap );
     _logView->setFont( KGlobalSettings::fixedFont() );

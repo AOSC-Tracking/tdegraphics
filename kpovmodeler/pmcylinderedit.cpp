@@ -26,8 +26,8 @@
 #include <klocale.h>
 #include <tqcheckbox.h>
 
-PMCylinderEdit::PMCylinderEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMCylinderEdit::PMCylinderEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -36,7 +36,7 @@ void PMCylinderEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    TQGridLayout* gl;
 
    m_pEnd1 = new PMVectorEdit( "x", "y", "z", this );
@@ -50,13 +50,13 @@ void PMCylinderEdit::createTopWidgets( )
    gl->addWidget( new TQLabel( i18n( "End 2:" ), this ), 1, 0 );
    gl->addWidget( m_pEnd2, 1, 1 );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( new TQLabel( i18n( "Radius:" ), this ) );
-   layout->addWidget( m_pRadius );
-   layout->addStretch( 1 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( new TQLabel( i18n( "Radius:" ), this ) );
+   tqlayout->addWidget( m_pRadius );
+   tqlayout->addStretch( 1 );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( m_pOpen );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( m_pOpen );
   
    connect( m_pEnd1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pEnd2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

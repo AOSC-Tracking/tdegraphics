@@ -239,13 +239,13 @@ void AggShape::update(CanvasItemUpdate reason, int param1, int param2)
 			m_fillPainter->update(m_style);
 		if(m_strokePainter)
 			m_strokePainter->update(m_style);
-		m_canvas->invalidate(this, false);
+		m_canvas->tqinvalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		freeSVPs();
 		init();
-		m_canvas->invalidate(this, true);
+		m_canvas->tqinvalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 		init();
@@ -257,13 +257,13 @@ void AggShape::update(CanvasItemUpdate reason, int param1, int param2)
 	else if(reason == UPDATE_LINEWIDTH)
 	{
 		init();
-		m_canvas->invalidate(this, true);
+		m_canvas->tqinvalidate(this, true);
 	}
 }
 
-void AggShape::draw(SVGShapeImpl *shape)
+void AggShape::draw(SVGShapeImpl *tqshape)
 {
-	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !shape->directRender()))
+	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !tqshape->directRender()))
 		return;
 
 	//if(!m_strokeSVP && (!m_fillSVP || !m_style->isFilled()))
@@ -292,14 +292,14 @@ void AggShape::draw(SVGShapeImpl *shape)
 	m_curved.approximation_scale(pow(m_transform.scale(), 0.75));
 
 	if(m_fillPainter)
-		m_fillPainter->draw(m_canvas, m_curved_trans, m_style, shape);
+		m_fillPainter->draw(m_canvas, m_curved_trans, m_style, tqshape);
 	if(m_strokePainter)
-		m_strokePainter->draw(m_canvas, m_curved_stroked_trans, m_style, shape);
+		m_strokePainter->draw(m_canvas, m_curved_stroked_trans, m_style, tqshape);
 }
 
-bool AggShape::isVisible(SVGShapeImpl *shape)
+bool AggShape::isVisible(SVGShapeImpl *tqshape)
 {
-	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && shape->directRender());
+	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && tqshape->directRender());
 }
 
 void AggShape::calcSVPs(const SVGMatrixImpl *matrix)
@@ -376,14 +376,14 @@ void AggStrokePaintServer::update(SVGStylableImpl *style)
 }
 
 template<class VertexSource>
-void AggStrokePaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *shape)
+void AggStrokePaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *tqshape)
 {
 	canvas->m_ras.reset();
 	if(style->getStrokeColor()->paintType() == SVG_PAINTTYPE_URI)
 	{
-		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(shape->ownerDoc(), style->getStrokeColor()->uri().string()));
+		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(tqshape->ownerDoc(), style->getStrokeColor()->uri().string()));
 		if(!pserver) return;
-		pserver->setBBoxTarget(shape);
+		pserver->setBBoxTarget(tqshape);
 
 		// TODO : Clipping
 		if(!pserver->finalized())
@@ -425,14 +425,14 @@ void AggFillPaintServer::update(SVGStylableImpl *style)
 }
 
 template<class VertexSource>
-void AggFillPaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *shape)
+void AggFillPaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *tqshape)
 {
 	canvas->m_ras.reset();
 	if(style->getFillColor()->paintType() == SVG_PAINTTYPE_URI)
 	{
-		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(shape->ownerDoc(), style->getFillColor()->uri().string()));
+		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(tqshape->ownerDoc(), style->getFillColor()->uri().string()));
 		if(!pserver) return;
-		pserver->setBBoxTarget(shape);
+		pserver->setBBoxTarget(tqshape);
 
 		// TODO : Clipping
 		if(!pserver->finalized())
@@ -1166,13 +1166,13 @@ void AggText::update(CanvasItemUpdate reason, int param1, int param2)
 
 			svpelement = ++it;
 		}
-		m_canvas->invalidate(this, false);
+		m_canvas->tqinvalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		clearCurved();
 		init();
-		m_canvas->invalidate(this, true);
+		m_canvas->tqinvalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 	{
@@ -1398,7 +1398,7 @@ void AggGradient::parseGradientStops(SVGGradientElementImpl *gradient)
 			opacity *= elem->stopOpacity();
 
 			// Get rgba color including stop-opacity
-			Q_UINT32 rgba = (stopColor << 8) | int(floor(int(opacity * 255.0) + 0.5));
+			TQ_UINT32 rgba = (stopColor << 8) | int(floor(int(opacity * 255.0) + 0.5));
 
 			// Convert from separated to premultiplied alpha
 			a = rgba & 0xff;

@@ -34,8 +34,8 @@ the DVI prescan routines.
 class PreBookmark
 {
  public:
-  PreBookmark(const TQString& t, const TQString& a, Q_UINT16 n) {title=t; anchorName=a; noOfChildren=n;}
-  PreBookmark() {title=TQString::null; anchorName=TQString::null; noOfChildren=0;}
+  PreBookmark(const TQString& t, const TQString& a, TQ_UINT16 n) {title=t; anchorName=a; noOfChildren=n;}
+  PreBookmark() {title=TQString(); anchorName=TQString(); noOfChildren=0;}
 
   // Title of the bookmark
   TQString title;
@@ -44,7 +44,7 @@ class PreBookmark
   TQString anchorName;
 
   // Number of subordinate bookmarks
-  Q_UINT16 noOfChildren;
+  TQ_UINT16 noOfChildren;
 };
 
 #endif

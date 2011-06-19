@@ -20,7 +20,7 @@
 This very simple class contains a page number and a vertical position
 in physical coordiantes. The vertical position is given by the
 distance from the top of the page. Anchors are completely independent
-of documents, there is no need for a document to exists that contains
+of documents, there is no need for a document to exists that tqcontains
 the given page, nor does the page number need to be valid.
 
 @author Stefan Kebekus <kebekus@kde.org>

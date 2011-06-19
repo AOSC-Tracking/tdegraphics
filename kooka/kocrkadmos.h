@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -66,6 +66,7 @@ private:
 class KadmosDialog: public KOCRBase
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     KadmosDialog( TQWidget *, KSpellConfig *spellConfig );
     ~KadmosDialog();
@@ -105,7 +106,7 @@ private:
     TQCheckBox             *m_cbAutoscale;
     TQString                m_customClassifierPath;
 
-    QButtonGroup	  *m_bbFont;
+    TQButtonGroup	  *m_bbFont;
 
     TQRadioButton          *m_rbMachine;
     TQRadioButton          *m_rbHand;

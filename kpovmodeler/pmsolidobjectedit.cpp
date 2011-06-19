@@ -23,8 +23,8 @@
 #include <tqlayout.h>
 #include <klocale.h>
 
-PMSolidObjectEdit::PMSolidObjectEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMSolidObjectEdit::PMSolidObjectEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

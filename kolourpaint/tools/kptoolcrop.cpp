@@ -68,7 +68,7 @@ public:
     virtual ~kpToolCropSetImageCommand ();
 
     /* (uninteresting child of macro cmd) */
-    virtual TQString name () const { return TQString::null; }
+    virtual TQString name () const { return TQString(); }
 
     virtual int size () const
     {
@@ -132,7 +132,7 @@ void kpToolCropSetImageCommand::execute ()
         //
         // The selection is deleted.
         //
-        // TODO: Do not introduce a mask if the result will not contain
+        // TODO: Do not introduce a tqmask if the result will not contain
         //       any transparent pixels.
         //
 
@@ -167,7 +167,7 @@ void kpToolCropSetImageCommand::execute ()
 
         kpPixmapFX::paintMaskTransparentWithBrush (&newDocPixmap,
             TQPoint (0, 0),
-            m_fromSelection.maskForOwnType ());
+            m_fromSelection.tqmaskForOwnType ());
 
         kpPixmapFX::paintPixmapAt (&newDocPixmap,
             TQPoint (0, 0),
@@ -274,7 +274,7 @@ kpToolCropCommand::kpToolCropCommand (kpMainWindow *mainWindow)
     #endif
         kpToolSelectionMoveCommand *moveCmd =
             new kpToolSelectionMoveCommand (
-                TQString::null/*uninteresting child of macro cmd*/,
+                TQString()/*uninteresting child of macro cmd*/,
                 mainWindow);
         moveCmd->moveTo (TQPoint (0, 0), true/*move on exec, not now*/);
         moveCmd->finalize ();
@@ -291,7 +291,7 @@ kpToolCropCommand::kpToolCropCommand (kpMainWindow *mainWindow)
     #if 0
         addCommand (
             new kpToolSelectionCreateCommand (
-                TQString::null/*uninteresting child of macro cmd*/,
+                TQString()/*uninteresting child of macro cmd*/,
                 selectionBorderAndMovedTo0_0 (*sel),
                 mainWindow));
     #endif

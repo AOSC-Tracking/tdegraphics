@@ -36,9 +36,10 @@ class PMPart;
  * The class PMCommandManager stores stacks of commands for undo/redo
  * operations.
  */
-class PMCommandManager : public QObject
+class PMCommandManager : public TQObject
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Creates a new PMCommandManager

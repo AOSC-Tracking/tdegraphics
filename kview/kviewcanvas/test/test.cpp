@@ -17,7 +17,7 @@ KImageViewerTest::KImageViewerTest()
     : KParts::MainWindow( 0L, "KImageViewerTest" )
 {
 	TQWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<TQWidget>(
-			"KImageViewer/Canvas", TQString::null, this );
+			"KImageViewer/Canvas", TQString(), this );
     if( widget )
     {
 		m_part = dynamic_cast<KImageViewer::Canvas *>( widget );

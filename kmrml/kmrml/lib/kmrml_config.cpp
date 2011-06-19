@@ -30,9 +30,9 @@
 
 #include <kdeversion.h>
 #if KDE_VERSION < 307
-  #define QUOTE( x ) x
+  #define TQUOTE( x ) x
 #else
-  #define QUOTE( x ) KProcess::quote( x )
+  #define TQUOTE( x ) KProcess::quote( x )
 #endif
 
 using namespace KMrml;
@@ -104,7 +104,7 @@ bool Config::sync()
 void Config::setDefaultHost( const TQString& host )
 {
     m_defaultHost = host.isEmpty() ?
-                    TQString::fromLatin1(DEFAULT_HOST) : host;
+                    TQString::tqfromLatin1(DEFAULT_HOST) : host;
 
     m_config->setGroup( CONFIG_GROUP );
     m_config->writeEntry( "Default Host", m_defaultHost );
@@ -137,7 +137,7 @@ ServerSettings Config::settingsForHost( const TQString& host ) const
 void Config::addSettings( const ServerSettings& settings )
 {
     TQString host = settings.host;
-    if ( m_hostList.find( host ) == m_hostList.end() )
+    if ( m_hostList.tqfind( host ) == m_hostList.end() )
         m_hostList.append( host );
 
     m_config->setGroup( CONFIG_GROUP );
@@ -181,13 +181,13 @@ TQString Config::addCollectionCommandLine() const
     m_config->setGroup( CONFIG_GROUP );
     TQString cmd = m_config->readEntry( "AddCollection Commandline",
                                        DEFAULT_ADDCOLLECTION_CMD );
-    int index = cmd.find( "%h" );
+    int index = cmd.tqfind( "%h" );
     if ( index != -1 )
-        cmd.replace( index, 2, QUOTE( mrmldDataDir() ) );
+        cmd.tqreplace( index, 2, TQUOTE( mrmldDataDir() ) );
 
-    index = cmd.find( "%e" );
+    index = cmd.tqfind( "%e" );
     if ( index != -1 )
-        cmd.replace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
+        cmd.tqreplace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
 
     return cmd;
 }
@@ -203,13 +203,13 @@ TQString Config::removeCollectionCommandLine() const
     m_config->setGroup( CONFIG_GROUP );
     TQString cmd = m_config->readEntry( "RemoveCollection Commandline",
                                        DEFAULT_REMOVECOLLECTION_CMD );
-    int index = cmd.find( "%h" );
+    int index = cmd.tqfind( "%h" );
     if ( index != -1 )
-        cmd.replace( index, 2, QUOTE( mrmldDataDir() ) );
+        cmd.tqreplace( index, 2, TQUOTE( mrmldDataDir() ) );
 
-    index = cmd.find( "%e" );
+    index = cmd.tqfind( "%e" );
     if ( index != -1 )
-        cmd.replace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
+        cmd.tqreplace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
 
     return cmd;
 }
@@ -231,17 +231,17 @@ TQString Config::mrmldCommandline() const
                                        DEFAULT_MRMLD_CMD );
 
     // add data directory and port to the commandline
-    int index = cmd.find( "%p" );
+    int index = cmd.tqfind( "%p" );
     if ( index != -1 )
     {
         TQString port = settings.autoPort ?
-                  TQString::null : TQString::number( settings.configuredPort );
-        cmd.replace( index, 2, port );
+                  TQString() : TQString::number( settings.configuredPort );
+        cmd.tqreplace( index, 2, port );
     }
-    index = cmd.find( "%d" );
+    index = cmd.tqfind( "%d" );
     if ( index != -1 )
     {
-        cmd.replace( index, 2, QUOTE( mrmldDataDir() ) );
+        cmd.tqreplace( index, 2, TQUOTE( mrmldDataDir() ) );
     }
 
     qDebug("***** commandline: %s", cmd.latin1());

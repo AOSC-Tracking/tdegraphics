@@ -25,10 +25,10 @@
 #include "minibar.h"
 
 // [private widget] show progress
-class ProgressWidget : public QWidget
+class ProgressWidget : public TQWidget
 {
     public:
-        ProgressWidget( MiniBar * parent );
+        ProgressWidget( MiniBar * tqparent );
         void setProgress( float percentage );
 
     protected:
@@ -43,10 +43,10 @@ class ProgressWidget : public QWidget
 };
 
 // [private widget] lineEdit for entering/validating page numbers
-class PagesEdit : public QLineEdit
+class PagesEdit : public TQLineEdit
 {
     public:
-        PagesEdit( MiniBar * parent );
+        PagesEdit( MiniBar * tqparent );
         void setPagesNumber( int pages );
         void setText( const TQString & );
 
@@ -64,10 +64,10 @@ class PagesEdit : public QLineEdit
 };
 
 // [private widget] a flat qpushbutton that enlights on hover
-class HoverButton : public QPushButton
+class HoverButton : public TQPushButton
 {
     public:
-        HoverButton( TQWidget * parent );
+        HoverButton( TQWidget * tqparent );
 
     protected:
         void paintEvent( TQPaintEvent * e );
@@ -78,8 +78,8 @@ class HoverButton : public QPushButton
 
 /** MiniBar **/
 
-MiniBar::MiniBar( TQWidget * parent, KPDFDocument * document )
-    : TQFrame( parent, "miniBar" ), m_document( document ),
+MiniBar::MiniBar( TQWidget * tqparent, KPDFDocument * document )
+    : TQFrame( tqparent, "miniBar" ), m_document( document ),
     m_currentPage( -1 )
 {
     // left spacer
@@ -87,7 +87,7 @@ MiniBar::MiniBar( TQWidget * parent, KPDFDocument * document )
     TQSpacerItem * spacerL = new TQSpacerItem( 20, 10, TQSizePolicy::Expanding );
     horLayout->addItem( spacerL );
 
-    // central 2r by 3c grid layout that contains all components
+    // central 2r by 3c grid tqlayout that contains all components
     TQGridLayout * gridLayout = new TQGridLayout( 0, 3,5, 2,1 );
      // top spacer 6x6 px
 //     TQSpacerItem * spacerTop = new TQSpacerItem( 6, 6, TQSizePolicy::Fixed, TQSizePolicy::Fixed );
@@ -127,7 +127,7 @@ MiniBar::MiniBar( TQWidget * parent, KPDFDocument * document )
     connect( m_nextButton, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( nextPage() ) );
 
     // widget starts hidden (will be shown after opening a document)
-    parent->hide();
+    tqparent->hide();
 }
 
 MiniBar::~MiniBar()
@@ -146,7 +146,7 @@ void MiniBar::notifySetup( const TQValueVector< KPDFPage * > & pageVector, bool 
     if ( pages < 1 )
     {
         m_currentPage = -1;
-        static_cast<TQWidget*>( parent() )->hide();
+        TQT_TQWIDGET( tqparent() )->hide();
         return;
     }
 
@@ -171,7 +171,7 @@ void MiniBar::notifySetup( const TQValueVector< KPDFPage * > & pageVector, bool 
     m_pagesButton->setText( TQString::number( pages ) );
     m_prevButton->setEnabled( false );
     m_nextButton->setEnabled( false );
-    static_cast<TQWidget*>( parent() )->show();
+    TQT_TQWIDGET( tqparent() )->show();
 }
 
 void MiniBar::notifyViewportChanged( bool /*smoothMove*/ )
@@ -198,7 +198,7 @@ void MiniBar::notifyViewportChanged( bool /*smoothMove*/ )
 void MiniBar::resizeEvent( TQResizeEvent * e )
 {
     // auto-hide 'prev' and 'next' buttons if not enough space
-    const TQSize & myHint = minimumSizeHint();
+    const TQSize & myHint = tqminimumSizeHint();
     bool shown = m_prevButton->isVisible() && m_nextButton->isVisible();
     if ( shown && e->size().width() < myHint.width() )
     {
@@ -208,7 +208,7 @@ void MiniBar::resizeEvent( TQResizeEvent * e )
     }
     else if ( !shown )
     {
-        int histeresis = m_prevButton->sizeHint().width() * 2 + 2;
+        int histeresis = m_prevButton->tqsizeHint().width() * 2 + 2;
         if ( e->size().width() > (myHint.width() + histeresis) )
         {
             m_prevButton->show();
@@ -259,9 +259,9 @@ void MiniBar::slotEmitPrevPage()
 
 /** ProgressWidget **/
 
-ProgressWidget::ProgressWidget( MiniBar * parent )
-    : TQWidget( parent, "progress", WNoAutoErase ),
-    m_miniBar( parent ), m_progressPercentage( -1 )
+ProgressWidget::ProgressWidget( MiniBar * tqparent )
+    : TQWidget( tqparent, "progress", WNoAutoErase ),
+    m_miniBar( tqparent ), m_progressPercentage( -1 )
 {
     setFixedHeight( 4 );
     setMouseTracking( true );
@@ -308,36 +308,36 @@ void ProgressWidget::paintEvent( TQPaintEvent * e )
     // paint rects and a separator line
     TQPainter p( this );
     if ( cRect.isValid() )
-        p.fillRect( cRect, palette().active().highlightedText() );
+        p.fillRect( cRect, tqpalette().active().highlightedText() );
     if ( fRect.isValid() )
-        p.fillRect( fRect, palette().active().highlight() );
+        p.fillRect( fRect, tqpalette().active().highlight() );
     if ( l && l != w  )
     {
-        p.setPen( palette().active().highlight().dark( 120 ) );
+        p.setPen( tqpalette().active().highlight().dark( 120 ) );
         int delta = TQApplication::reverseLayout() ? w - l : l;
         p.drawLine( delta, 0, delta, h );
     }
     // draw a frame-like outline
-    //p.setPen( palette().active().mid() );
+    //p.setPen( tqpalette().active().mid() );
     //p.drawRect( 0,0, w, h );
 }
 
 
 /** PagesEdit **/
 
-PagesEdit::PagesEdit( MiniBar * parent )
-    : TQLineEdit( parent ), m_miniBar( parent ), m_eatClick( false )
+PagesEdit::PagesEdit( MiniBar * tqparent )
+    : TQLineEdit( tqparent ), m_miniBar( tqparent ), m_eatClick( false )
 {
     // customize look
     setFrameShadow( TQFrame::Raised );
     focusOutEvent( 0 );
 
     // use an integer validator
-    m_validator = new TQIntValidator( 1, 1, this );
+    m_validator = new TQIntValidator( 1, 1, TQT_TQOBJECT(this) );
     setValidator( m_validator );
 
     // customize text properties
-    setAlignment( Qt::AlignCenter );
+    tqsetAlignment( TQt::AlignCenter );
     setMaxLength( 4 );
 }
 
@@ -363,7 +363,7 @@ void PagesEdit::focusInEvent( TQFocusEvent * e )
         m_eatClick = true;
     // change background color to the default 'edit' color
     setLineWidth( 2 );
-    setPaletteBackgroundColor( Qt::white );
+    setPaletteBackgroundColor( TQt::white );
     // call default handler
     TQLineEdit::focusInEvent( e );
 }
@@ -372,7 +372,7 @@ void PagesEdit::focusOutEvent( TQFocusEvent * e )
 {
     // change background color to a dark tone
     setLineWidth( 1 );
-    setPaletteBackgroundColor( palette().active().background().light( 105 ) );
+    setPaletteBackgroundColor( tqpalette().active().background().light( 105 ) );
     // restore text
     TQLineEdit::setText( backString );
     // call default handler
@@ -398,8 +398,8 @@ void PagesEdit::wheelEvent( TQWheelEvent * e )
 
 /** HoverButton **/
 
-HoverButton::HoverButton( TQWidget * parent )
-    : TQPushButton( parent )
+HoverButton::HoverButton( TQWidget * tqparent )
+    : TQPushButton( tqparent )
 {
     setMouseTracking( true );
 #if KDE_IS_VERSION(3,3,90)
@@ -428,7 +428,7 @@ void HoverButton::paintEvent( TQPaintEvent * e )
     else
     {
         TQPainter p( this );
-        p.fillRect(e->rect(), parentWidget() ? parentWidget()->palette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
+        p.fillRect(e->rect(), tqparentWidget() ? tqparentWidget()->tqpalette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
         drawButtonLabel( &p );
     }
 }

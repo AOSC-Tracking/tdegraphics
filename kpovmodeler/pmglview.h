@@ -51,6 +51,7 @@ class TQComboBox;
 class PMGLView : public PMViewBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Type of the view
@@ -61,7 +62,7 @@ public:
     * Constructor
     */
    PMGLView( PMPart* part, PMViewType t,
-             TQWidget* parent = 0, const char* name = 0, WFlags f = 0 );
+             TQWidget* tqparent = 0, const char* name = 0, WFlags f = 0 );
    /**
     * Destructor
     */
@@ -335,7 +336,7 @@ private:
    /**
     * Repaints the view
     */
-   void repaint( bool graphicalChange = false );
+   void tqrepaint( bool graphicalChange = false );
    /**
     * Starts a graphical change
     */
@@ -350,9 +351,9 @@ private:
     */
    void selectControlPoint( PMControlPoint* cp, bool select, bool deselectOthers = true );
    /**
-    * Invalidates the projection and repaints the view
+    * Invalidates the projection and tqrepaints the view
     */
-   void invalidateProjection( bool graphicaChange = false );
+   void tqinvalidateProjection( bool graphicaChange = false );
 
    /**
     * Starts multiple selection mode
@@ -558,25 +559,26 @@ public:
    virtual TQString description( ) const;
    virtual TQString description( PMViewOptions* ) const;
    virtual TQString iconName( ) const { return TQString( "pmglview" ); }
-   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
+   virtual PMViewBase* newInstance( TQWidget* tqparent, PMPart* part ) const
    {
-      return new PMGLView( part, PMGLView::PMViewPosX, parent );
+      return new PMGLView( part, PMGLView::PMViewPosX, tqparent );
    }
    virtual PMViewOptions* newOptionsInstance( ) const;
    virtual PMViewOptionsWidget* newOptionsWidget( TQWidget*, PMViewOptions* );
 };
 
 /**
- * Configuration widget for the view layout settings dialog
+ * Configuration widget for the view tqlayout settings dialog
  */
 class PMGLViewOptionsWidget : public PMViewOptionsWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMGLViewOptionsWidget( TQWidget* parent, PMViewOptions* o );
+   PMGLViewOptionsWidget( TQWidget* tqparent, PMViewOptions* o );
 
 protected slots:
    void slotGLViewTypeChanged( int );

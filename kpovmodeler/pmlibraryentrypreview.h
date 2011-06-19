@@ -39,12 +39,13 @@ class PMTreeView;
 /**
  * Preview widget for Library Objects and sub Libs.
  */
-class PMLibraryEntryPreview: public QWidget
+class PMLibraryEntryPreview: public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /** Constructor */
-   PMLibraryEntryPreview( TQWidget *parent );
+   PMLibraryEntryPreview( TQWidget *tqparent );
    /** Destructor */
    ~PMLibraryEntryPreview( );
 

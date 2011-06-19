@@ -41,7 +41,7 @@
  * %%PaperWeight:  (ignored)
  *
  * Other additions for defaults or page section
- % %%ViewingOrientation: xx xy yx yy
+ % %%ViewingQt::Orientation: xx xy yx yy
 */
 
 #include <stdio.h>	/* for sprintf(), not file I/O */
@@ -1736,7 +1736,7 @@ dsc_parse_viewing_orientation(CDSC *dsc, CDSCCTM **pctm)
 	*pctm = NULL;
     }
 
-    n = IS_DSC(dsc->line, "%%+") ? 3 : 21;  /* %%ViewingOrientation: */
+    n = IS_DSC(dsc->line, "%%+") ? 3 : 21;  /* %%ViewingQt::Orientation: */
     while (IS_WHITE(dsc->line[n]))
 	n++;
 
@@ -2026,7 +2026,7 @@ dsc_scan_comments(CDSC *dsc)
 	    continued ? 3 : 10))
 	    return CDSC_ERROR;
     }
-    else if (IS_DSC(line, "%%Orientation:")) {
+    else if (IS_DSC(line, "%%Qt::Orientation:")) {
 	dsc->id = CDSC_ORIENTATION;
 	if (dsc_parse_orientation(dsc, &(dsc->page_orientation), 
 		continued ? 3 : 14))
@@ -2197,7 +2197,7 @@ dsc_scan_comments(CDSC *dsc)
 	    dsc_unknown(dsc);
     }
     else if (IS_DSC(line, "%%Requirements:")) {
-	dsc->id = CDSC_REQUIREMENTS;
+	dsc->id = CDSC_RETQUIREMENTS;
 	/* ignore */
     }
     else if (IS_DSC(line, "%%DocumentNeededFonts:")) {
@@ -2328,9 +2328,9 @@ dsc_scan_defaults(CDSC *dsc)
 	dsc->id = CDSC_PAGEMEDIA;
 	dsc_parse_media(dsc, &dsc->page_media);
     }
-    else if (IS_DSC(line, "%%PageOrientation:")) {
+    else if (IS_DSC(line, "%%PageQt::Orientation:")) {
 	dsc->id = CDSC_PAGEORIENTATION;
-	/* This can override %%Orientation:  */
+	/* This can override %%Qt::Orientation:  */
 	if (dsc_parse_orientation(dsc, &(dsc->page_orientation), 18))
 	    return CDSC_ERROR;
     }
@@ -2339,7 +2339,7 @@ dsc_scan_defaults(CDSC *dsc)
 	if (dsc_parse_bounding_box(dsc, &(dsc->page_bbox), 18))
 	    return CDSC_ERROR;
     }
-    else if (IS_DSC(line, "%%ViewingOrientation:")) {
+    else if (IS_DSC(line, "%%ViewingQt::Orientation:")) {
 	dsc->id = CDSC_VIEWINGORIENTATION;
 	if (dsc_parse_viewing_orientation(dsc, &dsc->viewing_orientation))
 	    return CDSC_ERROR;
@@ -2849,7 +2849,7 @@ dsc_scan_page(CDSC *dsc)
 		dsc_unknown(dsc);
 	}
     }
-    else if (IS_DSC(line, "%%PageOrientation:")) {
+    else if (IS_DSC(line, "%%PageQt::Orientation:")) {
 	dsc->id = CDSC_PAGEORIENTATION;
 	if (dsc_parse_orientation(dsc, 
 		&(dsc->page[dsc->page_count-1].orientation) ,18))
@@ -2860,7 +2860,7 @@ dsc_scan_page(CDSC *dsc)
 	if (dsc_parse_bounding_box(dsc, &dsc->page[dsc->page_count-1].bbox, 18))
 	    return CDSC_NOTDSC;
     }
-    else if (IS_DSC(line, "%%ViewingOrientation:")) {
+    else if (IS_DSC(line, "%%ViewingQt::Orientation:")) {
 	dsc->id = CDSC_VIEWINGORIENTATION;
 	if (dsc_parse_viewing_orientation(dsc, 
 	    &dsc->page[dsc->page_count-1].viewing_orientation))
@@ -2938,7 +2938,7 @@ dsc_scan_page(CDSC *dsc)
  * %%DocumentSuppliedFonts:
  * %%DocumentSuppliedProcSets: 
  * %%DocumentSuppliedResources: 
- * %%Orientation: 
+ * %%Qt::Orientation: 
  * %%Pages: 
  * %%PageOrder: 
  *
@@ -2946,7 +2946,7 @@ dsc_scan_page(CDSC *dsc)
  * %%Trailer
  * %%EOF
  * %%BoundingBox:
- * %%Orientation: 
+ * %%Qt::Orientation: 
  * %%Pages: 
  * %%PageOrder: 
  * In addition to these, we support
@@ -2957,7 +2957,7 @@ dsc_scan_page(CDSC *dsc)
  * %%PageCustomColors: 
  * %%PageFiles: 
  * %%PageFonts: 
- * %%PageOrientation: 
+ * %%PageQt::Orientation: 
  * %%PageProcessColors: 
  * %%PageResources: 
  */
@@ -3052,7 +3052,7 @@ dsc_scan_trailer(CDSC *dsc)
 	    continued ? 3 : 10))
 	    return CDSC_ERROR;
     }
-    else if (IS_DSC(line, "%%Orientation:")) {
+    else if (IS_DSC(line, "%%Qt::Orientation:")) {
 	dsc->id = CDSC_ORIENTATION;
 	if (dsc_parse_orientation(dsc, &(dsc->page_orientation), continued ? 3 : 14))
 	    return CDSC_ERROR;

@@ -34,7 +34,7 @@ public:
    /**
     * Default constructor
     */
-   PMUnknownView( const TQString& viewType, TQWidget* parent,
+   PMUnknownView( const TQString& viewType, TQWidget* tqparent,
                   const char* name = 0 );
    /** */
    virtual TQString viewType( ) const { return m_viewType; }

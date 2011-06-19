@@ -33,7 +33,7 @@ kpToolRoundedRectangle::kpToolRoundedRectangle (kpMainWindow *mainWindow)
     : kpToolRectangle (RoundedRectangle,
                        i18n ("Rounded Rectangle"),
                        i18n ("Draws rectangles and squares with rounded corners"),
-                       Qt::Key_U,
+                       TQt::Key_U,
                        mainWindow, "tool_rounded_rectangle")
 {
 }

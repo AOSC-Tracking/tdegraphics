@@ -54,7 +54,7 @@ public:
    virtual TQString description( ) const;
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -66,7 +66,7 @@ public:
    /**
     * Returns a new @ref PMRotateEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmrotate" ); }
 

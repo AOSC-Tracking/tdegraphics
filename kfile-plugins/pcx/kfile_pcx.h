@@ -26,16 +26,16 @@ struct PALETTE
 {
   struct
   {
-    Q_UINT8 r;
-    Q_UINT8 g;
-    Q_UINT8 b;
+    TQ_UINT8 r;
+    TQ_UINT8 g;
+    TQ_UINT8 b;
   } p[ 16 ];
 };
 
 struct PCXHEADER
 {
-  Q_UINT8  Manufacturer;    // Constant Flag, 10 = ZSoft .pcx
-  Q_UINT8  Version;         // Version information·
+  TQ_UINT8  Manufacturer;    // Constant Flag, 10 = ZSoft .pcx
+  TQ_UINT8  Version;         // Version information·
                             // 0 = Version 2.5 of PC Paintbrush·
                             // 2 = Version 2.8 w/palette information·
                             // 3 = Version 2.8 w/o palette information·
@@ -45,37 +45,38 @@ struct PCXHEADER
                             //     and PC Paintbrush +, includes
                             //     Publisher's Paintbrush . Includes
                             //     24-bit .PCX files·
-  Q_UINT8  Encoding;        // 1 = .PCX run length encoding
-  Q_UINT8  Bpp;             // Number of bits to represent a pixel
+  TQ_UINT8  Encoding;        // 1 = .PCX run length encoding
+  TQ_UINT8  Bpp;             // Number of bits to represent a pixel
                             // (per Plane) - 1, 2, 4, or 8·
-  Q_UINT16 XMin;
-  Q_UINT16 YMin;
-  Q_UINT16 XMax;
-  Q_UINT16 YMax;
-  Q_UINT16 HDpi;
-  Q_UINT16 YDpi;
+  TQ_UINT16 XMin;
+  TQ_UINT16 YMin;
+  TQ_UINT16 XMax;
+  TQ_UINT16 YMax;
+  TQ_UINT16 HDpi;
+  TQ_UINT16 YDpi;
   struct PALETTE Palette;
-  Q_UINT8  Reserved;        // Should be set to 0.
-  Q_UINT8  NPlanes;         // Number of color planes
-  Q_UINT16 BytesPerLine;    // Number of bytes to allocate for a scanline
+  TQ_UINT8  Reserved;        // Should be set to 0.
+  TQ_UINT8  NPlanes;         // Number of color planes
+  TQ_UINT16 BytesPerLine;    // Number of bytes to allocate for a scanline
                             // plane.  MUST be an EVEN number.  Do NOT
                             // calculate from Xmax-Xmin.·
-  Q_UINT16 PaletteInfo;     // How to interpret palette- 1 = Color/BW,
+  TQ_UINT16 PaletteInfo;     // How to interpret palette- 1 = Color/BW,
                             // 2 = Grayscale ( ignored in PB IV/ IV + )·
-  Q_UINT16 HScreenSize;     // Horizontal screen size in pixels. New field
+  TQ_UINT16 HScreenSize;     //Qt::Horizontal screen size in pixels. New field
                             // found only in PB IV/IV Plus
-  Q_UINT16 VScreenSize;     // Vertical screen size in pixels. New field
+  TQ_UINT16 VScreenSize;     //Qt::Vertical screen size in pixels. New field
                             // found only in PB IV/IV Plus
-  Q_UINT8  Filler[ 54 ];    // Blank to fill out 128 byte header.  Set all
+  TQ_UINT8  Filler[ 54 ];    // Blank to fill out 128 byte header.  Set all
                             // bytes to 0
 };
 
 class KPcxPlugin: public KFilePlugin
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  KPcxPlugin(TQObject *parent, const char *name, const TQStringList& args);
+  KPcxPlugin(TQObject *tqparent, const char *name, const TQStringList& args);
   virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:

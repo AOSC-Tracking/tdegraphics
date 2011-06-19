@@ -21,8 +21,8 @@
 #include "mainwidget.h"
 
 
-MainWidget::MainWidget( TQString startDir, TQWidget *parent,
-			const char *name ) : TQWidget ( parent, name )
+MainWidget::MainWidget( TQString startDir, TQWidget *tqparent,
+			const char *name ) : TQWidget ( tqparent, name )
 {	
   box = new FileView( startDir, true, (TQDir::Dirs | TQDir::Files),
 		      this, "fileview" );
@@ -35,7 +35,7 @@ MainWidget::~MainWidget()
 }
 
 
-// for now, no layout managers
+// for now, no tqlayout managers
 void MainWidget::resizeEvent( TQResizeEvent * )
 {
   box->resize( width(), height() );

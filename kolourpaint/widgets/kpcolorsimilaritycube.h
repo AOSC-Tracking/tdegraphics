@@ -34,7 +34,7 @@
 class kpColor;
 class kpMainWindow;
 
-class kpColorSimilarityCube : public QFrame
+class kpColorSimilarityCube : public TQFrame
 {
 public:
     enum Look
@@ -46,7 +46,7 @@ public:
 
     kpColorSimilarityCube (int look,
                            kpMainWindow *mainWindow,
-                           TQWidget *parent,
+                           TQWidget *tqparent,
                            const char *name = 0);
     virtual ~kpColorSimilarityCube ();
 
@@ -55,7 +55,7 @@ public:
     double colorSimilarity () const;
     void setColorSimilarity (double similarity);
 
-    virtual TQSize sizeHint () const;
+    virtual TQSize tqsizeHint () const;
 
 protected:
     TQColor color (int redOrGreenOrBlue, int baseBrightness, int similarityDirection) const;

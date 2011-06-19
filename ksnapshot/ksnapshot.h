@@ -20,16 +20,17 @@
 class RegionGrabber;
 class KSnapshotWidget;
 
-class KSnapshotPreview : public QLabel
+class KSnapshotPreview : public TQLabel
 {
     Q_OBJECT
+  TQ_OBJECT
 
     public:
-        KSnapshotPreview(TQWidget *parent, const char *name = 0)
-            : TQLabel(parent, name)
+        KSnapshotPreview(TQWidget *tqparent, const char *name = 0)
+            : TQLabel(tqparent, name)
         {
-            setAlignment(AlignHCenter | AlignVCenter);
-            setCursor(TQCursor(Qt::PointingHandCursor));
+            tqsetAlignment(AlignHCenter | AlignVCenter);
+            setCursor(TQCursor(TQt::PointingHandCursor));
         }
         virtual ~KSnapshotPreview() {}
 
@@ -39,18 +40,18 @@ class KSnapshotPreview : public QLabel
             // does unexpected things when painting directly onto the pixmap
             TQPixmap pixmap(pm);
             TQPixmap handle(15, 15);
-            TQBitmap mask(15, 15, true);
+            TQBitmap tqmask(15, 15, true);
 
             {
-                TQPainter p(&mask);
-                style().drawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
+                TQPainter p(&tqmask);
+                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), tqpalette().active());
                 p.end();
-                handle.setMask(mask);
+                handle.setMask(tqmask);
             }
 
             {
                 TQPainter p(&handle);
-                style().drawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
+                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), tqpalette().active());
                 p.end();
             }
 
@@ -91,9 +92,10 @@ class KSnapshotPreview : public QLabel
 class KSnapshot : public KDialogBase, virtual public KSnapshotIface
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  KSnapshot(TQWidget *parent= 0, const char *name= 0, bool grabCurrent=false);
+  KSnapshot(TQWidget *tqparent= 0, const char *name= 0, bool grabCurrent=false);
   ~KSnapshot();
 
   enum CaptureMode { FullScreen=0, WindowUnderCursor=1, Region=2, ChildWindow=3 };

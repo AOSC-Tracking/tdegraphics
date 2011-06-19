@@ -29,6 +29,7 @@ class pageSize;
 class pageSizeDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
     
 public:
   // Constructs the page size Dialog. The pointer userPrefdPageSize
@@ -36,7 +37,7 @@ public:
   // value whenever the user clicks on 'accept' or 'ok'. Programmers
   // can then connect to the signal sizeChanged() of the object to be
   // informed about the changes.
-  pageSizeDialog( TQWidget *parent=0, pageSize *userPrefdPageSize=0, const char *name=0, bool modal=true);
+  pageSizeDialog( TQWidget *tqparent=0, pageSize *userPrefdPageSize=0, const char *name=0, bool modal=true);
   void setPageSize(const TQString&);
 
 protected slots:

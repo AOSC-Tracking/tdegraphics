@@ -365,7 +365,7 @@ public:
       discussion, the position is (#x/subsample#,#y/subsample#).  In other
       words, you can position the blit with a sub-pixel resolution.  The
       resulting anti-aliasing changes are paramount to the image quality. */
-  void blit(const GBitmap *shape, int x, int y, int subsample);
+  void blit(const GBitmap *tqshape, int x, int y, int subsample);
   //@}
   
   /** @name Saving images.  
@@ -418,7 +418,7 @@ public:
   const unsigned char *get_rle(unsigned int &rle_length);
   /** Initializes this GBitmap by setting the size to #h# rows and #w#
       columns, and directly addressing the memory buffer #rledata# provided by
-      the user.  This buffer contains #rledatalen# bytes representing the
+      the user.  This buffer tqcontains #rledatalen# bytes representing the
       bitmap in run length encoded form.  The GBitmap object then ``owns'' the
       buffer (unlike #borrow_data#, but like #donate_data#) and will
       deallocate this buffer when appropriate: you should not deallocate this

@@ -66,11 +66,11 @@ void PMRotate::readAttributes( const PMXMLHelper& h )
    m_rotate = h.vectorAttribute( "value", rotateDefault );
 }
 
-PMMetaObject* PMRotate::metaObject( ) const
+PMMetaObject* PMRotate::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Rotate", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Rotate", Base::tqmetaObject( ),
                                         createNewRotate );
       s_pMetaObject->addProperty(
          new PMRotateProperty( "rotation", &PMRotate::setRotation, &PMRotate::rotation ) );
@@ -102,9 +102,9 @@ void PMRotate::setRotation( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMRotate::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMRotate::editWidget( TQWidget* tqparent ) const
 {
-   return new PMRotateEdit( parent );
+   return new PMRotateEdit( tqparent );
 }
 
 void PMRotate::restoreMemento( PMMemento* s )

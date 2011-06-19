@@ -1,5 +1,4 @@
-/*
-    Copyright (C) 2003 Nikolas Zimmermann <wildfox@kde.org>
+/*    Copyright (C) 2003 Nikolas Zimmermann <wildfox@kde.org>
     This file is part of the KDE project
 
     This library is free software; you can redistribute it and/or
@@ -310,14 +309,14 @@ void GlyphRenderParams::setFont(Font *font)
 	m_font = font;
 }
 	
-const GlyphLayoutParams *GlyphRenderParams::layout() const
+const GlyphLayoutParams *GlyphRenderParams::tqlayout() const
 {
 	return m_layout;
 }
 
-void GlyphRenderParams::setLayout(const GlyphLayoutParams *layout)
+void GlyphRenderParams::setLayout(const GlyphLayoutParams *tqlayout)
 {
-	m_layout = layout;
+	m_layout = tqlayout;
 }
 
 unsigned int GlyphRenderParams::glyphIndex() const

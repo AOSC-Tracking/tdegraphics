@@ -17,7 +17,7 @@
 
 
 DocumentRenderer::DocumentRenderer(TQWidget* par)
-  : mutex(true), parentWidget(par), accessibilityBackground(false),
+  : mutex(true), tqparentWidget(par), accessibilityBackground(false),
     accessibilityBackgroundColor(TQColor(255,255,255))
 {
   numPages = 0;
@@ -122,7 +122,7 @@ Anchor DocumentRenderer::findAnchor(const TQString &locallink)
   // Wait for all access to this DocumentRenderer to finish
   TQMutexLocker locker(&mutex);
 
-  TQMap<TQString,Anchor>::Iterator it = anchorList.find(locallink);
+  TQMap<TQString,Anchor>::Iterator it = anchorList.tqfind(locallink);
   if (it != anchorList.end()) 
     return *it;
   else 

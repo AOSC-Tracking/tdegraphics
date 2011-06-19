@@ -20,7 +20,7 @@
  */
 
 #include <poppler-qt.h>
-#include <qfile.h>
+#include <tqfile.h>
 #include <GlobalParams.h>
 #include <Outline.h>
 #include <PDFDoc.h>
@@ -36,13 +36,13 @@
 
 namespace Poppler {
 
-Document *Document::load(const QString &filePath)
+Document *Document::load(const TQString &filePath)
 {
   if (!globalParams) {
     globalParams = new GlobalParams();
   }
 
-  DocumentData *doc = new DocumentData(new GooString(QFile::encodeName(filePath)), NULL);
+  DocumentData *doc = new DocumentData(new GooString(TQFile::encodeName(filePath)), NULL);
   Document *pdoc;
   if (doc->doc.isOk() || doc->doc.getErrorCode() == errEncrypted) {
     pdoc = new Document(doc);
@@ -72,7 +72,7 @@ bool Document::isLocked() const
   return data->locked;
 }
 
-bool Document::unlock(const QCString &password)
+bool Document::unlock(const TQCString &password)
 {
   if (data->locked) {
     /* racier then it needs to be */
@@ -115,14 +115,14 @@ int Document::getNumPages() const
   return data->doc.getNumPages();
 }
 
-QValueList<FontInfo> Document::fonts() const
+TQValueList<FontInfo> Document::fonts() const
 {
-  QValueList<FontInfo> ourList;
+  TQValueList<FontInfo> ourList;
   scanForFonts(getNumPages(), &ourList);
   return ourList;
 }
 
-bool Document::scanForFonts( int numPages, QValueList<FontInfo> *fontList ) const
+bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) const
 {
   GooList *items = data->m_fontInfoScanner->scan( numPages );
 
@@ -130,7 +130,7 @@ bool Document::scanForFonts( int numPages, QValueList<FontInfo> *fontList ) cons
     return false;
 
   for ( int i = 0; i < items->getLength(); ++i ) {
-    QString fontName;
+    TQString fontName;
     if (((::FontInfo*)items->get(i))->getName())
       fontName = ((::FontInfo*)items->get(i))->getName()->getCString();
 
@@ -145,7 +145,7 @@ bool Document::scanForFonts( int numPages, QValueList<FontInfo> *fontList ) cons
 }
 
 /* borrowed from kpdf */
-QString Document::getInfo( const QString & type ) const
+TQString Document::getInfo( const TQString & type ) const
 {
   // [Albert] Code adapted from pdfinfo.cc on xpdf
   Object info;
@@ -156,7 +156,7 @@ QString Document::getInfo( const QString & type ) const
   if ( !info.isDict() )
     return NULL;
 
-  QString result;
+  TQString result;
   Object obj;
   GooString *s1;
   GBool isUnicode;
@@ -189,7 +189,7 @@ QString Document::getInfo( const QString & type ) const
 	u = s1->getChar(i) & 0xff;
 	++i;
       }
-      result += unicodeToQString( &u, 1 );
+      result += tqunicodeToTQString( &u, 1 );
     }
     obj.free();
     info.free();
@@ -201,43 +201,43 @@ QString Document::getInfo( const QString & type ) const
 }
 
 /* borrowed from kpdf */
-QDateTime Document::getDate( const QString & type ) const
+TQDateTime Document::getDate( const TQString & type ) const
 {
   // [Albert] Code adapted from pdfinfo.cc on xpdf
   if ( data->locked )
-    return QDateTime();
+    return TQDateTime();
 
   Object info;
   data->doc.getDocInfo( &info );
   if ( !info.isDict() ) {
     info.free();
-    return QDateTime();
+    return TQDateTime();
   }
 
   Object obj;
   int year, mon, day, hour, min, sec, tz_hour, tz_minute;
   char tz;
   Dict *infoDict = info.getDict();
-  QString result;
+  TQString result;
 
   if ( infoDict->lookup( (char*)type.latin1(), &obj )->isString() )
   {
-    QString s = UnicodeParsedString(obj.getString());
+    TQString s = UnicodeParsedString(obj.getString());
     // TODO do something with the timezone information
     if ( parseDateString( s.latin1(), &year, &mon, &day, &hour, &min, &sec, &tz, &tz_hour, &tz_minute ) )
     {
-      QDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
-      QTime t( hour, min, sec );
+      TQDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
+      TQTime t( hour, min, sec );
       if ( d.isValid() && t.isValid() ) {
 	obj.free();
 	info.free();
-	return QDateTime( d, t );
+	return TQDateTime( d, t );
       }
     }
   }
   obj.free();
   info.free();
-  return QDateTime();
+  return TQDateTime();
 }
 
 bool Document::isEncrypted() const
@@ -283,7 +283,7 @@ void Document::getPdfVersion(int *major, int *minor) const
     *minor = data->doc.getPDFMinorVersion();
 }
 
-QDomDocument *Document::toc() const
+TQDomDocument *Document::toc() const
 {
   Outline * outline = data->doc.getOutline();
   if ( !outline )
@@ -293,33 +293,33 @@ QDomDocument *Document::toc() const
   if ( !items || items->getLength() < 1 )
     return NULL;
 
-  QDomDocument *toc = new QDomDocument();
+  TQDomDocument *toc = new TQDomDocument();
   if ( items->getLength() > 0 )
     data->addTocChildren( toc, toc, items );
 
   return toc;
 }
 
-LinkDestination *Document::linkDestination( const QString &name )
+LinkDestination *Document::linkDestination( const TQString &name )
 {
-  GooString * namedDest = QStringToGooString( name );
+  GooString * namedDest = TQStringToGooString( name );
   LinkDestinationData ldd(NULL, namedDest, data);
   LinkDestination *ld = new LinkDestination(ldd);
   delete namedDest;
   return ld;
 }
 
-bool Document::print(const QString &fileName, QValueList<int> pageList, double hDPI, double vDPI, int rotate)
+bool Document::print(const TQString &fileName, TQValueList<int> pageList, double hDPI, double vDPI, int rotate)
 {
   return print(fileName, pageList, hDPI, vDPI, rotate, -1, -1);
 }
 
-bool Document::print(const QString &file, QValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight)
+bool Document::print(const TQString &file, TQValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight)
 {
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), data->doc.getXRef(), data->doc.getCatalog(), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);
   
   if (psOut->isOk()) {
-    QValueList<int>::iterator it;
+    TQValueList<int>::iterator it;
     for (it = pageList.begin(); it != pageList.end(); ++it )
       data->doc.displayPage(psOut, *it, hDPI, vDPI, rotate, gFalse, gTrue, gTrue);
     

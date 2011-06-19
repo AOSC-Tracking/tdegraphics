@@ -30,15 +30,15 @@
 
 TQSize PMPovrayOutputWidget::s_size = TQSize( 400, 400 );
 
-PMPovrayOutputWidget::PMPovrayOutputWidget( TQWidget* parent, const char* name )
-      : KDialog( parent, name )
+PMPovrayOutputWidget::PMPovrayOutputWidget( TQWidget* tqparent, const char* name )
+      : KDialog( tqparent, name )
 {
    TQVBoxLayout* topLayout = new TQVBoxLayout( this, KDialog::marginHint( ), KDialog::spacingHint( ) );
 
    m_pTextView = new TQTextEdit( this );
    topLayout->addWidget( m_pTextView, 1 );
    m_pTextView->setFont( KGlobalSettings::fixedFont( ) );
-   m_pTextView->setTextFormat( Qt::PlainText );
+   m_pTextView->setTextFormat( TQt::PlainText );
    m_pTextView->setReadOnly( true );
 
    TQHBoxLayout* buttonLayout = new TQHBoxLayout( topLayout );
@@ -60,7 +60,7 @@ PMPovrayOutputWidget::~PMPovrayOutputWidget( )
 
 void PMPovrayOutputWidget::slotClear( )
 {
-   m_output = TQString::null;
+   m_output = TQString();
    m_startOfLastLine = 0;
    m_pTextView->clear( );
 }

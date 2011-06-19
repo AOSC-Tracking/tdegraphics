@@ -30,8 +30,9 @@ class ThumbnailWidget;
 class ThumbnailList : public TQScrollView, public DocumentObserver
 {
 Q_OBJECT
+  TQ_OBJECT
 	public:
-		ThumbnailList(TQWidget *parent, KPDFDocument *document);
+		ThumbnailList(TQWidget *tqparent, KPDFDocument *document);
 		~ThumbnailList();
 
         // inherited: return thumbnails observer id
@@ -97,11 +98,11 @@ Q_OBJECT
 /**
  * @short A vertical boxed container with zero size hint (for insertion on left toolbox)
  */
-class ThumbnailsBox : public QVBox
+class ThumbnailsBox : public TQVBox
 {
 	public:
-		ThumbnailsBox( TQWidget * parent ) : TQVBox( parent ) {};
-		TQSize sizeHint() const { return TQSize(); }
+		ThumbnailsBox( TQWidget * tqparent ) : TQVBox( tqparent ) {};
+		TQSize tqsizeHint() const { return TQSize(); }
 };
 
 /**
@@ -115,7 +116,7 @@ class ThumbnailsBox : public QVBox
 class ThumbnailController : public KToolBar
 {
     public:
-        ThumbnailController( TQWidget * parent, ThumbnailList * thumbnailList );
+        ThumbnailController( TQWidget * tqparent, ThumbnailList * thumbnailList );
 };
 
 #endif

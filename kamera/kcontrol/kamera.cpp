@@ -48,8 +48,8 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kamera, KKameraConfigFactory( "kcmkamera" ) )
 
 KKameraConfig *KKameraConfig::m_instance = NULL;
 
-KKameraConfig::KKameraConfig(TQWidget *parent, const char *name, const TQStringList &)
-	: KCModule(KKameraConfigFactory::instance(), parent, name)
+KKameraConfig::KKameraConfig(TQWidget *tqparent, const char *name, const TQStringList &)
+	: KCModule(KKameraConfigFactory::instance(), tqparent, name)
 {
 	m_devicePopup = new KPopupMenu(this);
 	m_actions = new KActionCollection(this);
@@ -96,7 +96,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	// set the kcontrol module buttons
 	setButtons(Help | Apply | Cancel | Ok);
 
-	// create a layout with two vertical boxes
+	// create a tqlayout with two vertical boxes
 	TQVBoxLayout *topLayout = new TQVBoxLayout(this, 0, 0);
 	topLayout->setAutoAdd(true);
 	
@@ -113,29 +113,29 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	connect(m_deviceSel, TQT_SIGNAL(selectionChanged(TQIconViewItem *)),
 		TQT_SLOT(slot_deviceSelected(TQIconViewItem *)));
 
-	m_deviceSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
+	m_deviceSel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
 	
 	// create actions
 	KAction *act;
 	
-	act = new KAction(i18n("Add"), "camera", 0, this, TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
+	act = new KAction(i18n("Add"), "camera", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
 	act->setWhatsThis(i18n("Click this button to add a new camera."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new KAction(i18n("Test"), "camera_test", 0, this, TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
+	act = new KAction(i18n("Test"), "camera_test", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Remove"), "edittrash", 0, this, TQT_SLOT(slot_removeCamera()), m_actions, "camera_remove");
+	act = new KAction(i18n("Remove"), "edittrash", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_removeCamera()), m_actions, "camera_remove");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Configure..."), "configure", 0, this, TQT_SLOT(slot_configureCamera()), m_actions, "camera_configure");
+	act = new KAction(i18n("Configure..."), "configure", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_configureCamera()), m_actions, "camera_configure");
 	act->setWhatsThis(i18n("Click this button to change the configuration of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Information"), "hwinfo", 0, this, TQT_SLOT(slot_cameraSummary()), m_actions, "camera_summary");
+	act = new KAction(i18n("Information"), "hwinfo", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cameraSummary()), m_actions, "camera_summary");
 	act->setWhatsThis(i18n("Click this button to view a summary of the current status of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new KAction(i18n("Cancel"), "stop", 0, this, TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
+	act = new KAction(i18n("Cancel"), "stop", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
 	act->setWhatsThis(i18n("Click this button to cancel the current camera operation."));
 	act->setEnabled(false);
 	act->plug(m_toolbar);
@@ -184,7 +184,7 @@ void KKameraConfig::load(bool useDefaults )
 	for (it = groupList.begin(); it != groupList.end(); it++) {
 		if (*it != "<default>")	{
 			m_config->setGroup(*it);
-			if (m_config->readEntry("Path").contains("usb:"))
+			if (m_config->readEntry("Path").tqcontains("usb:"))
 				continue;
 
 			kcamera = new KCamera(*it,m_config->readEntry("Path"));
@@ -218,7 +218,7 @@ void KKameraConfig::load(bool useDefaults )
 		if (!strcmp(value,"usb:"))
 			names[model] = value;
 	}
-	if (ports.contains("usb:") && names[ports["usb:"]]!="usb:")
+	if (ports.tqcontains("usb:") && names[ports["usb:"]]!="usb:")
 		ports.remove("usb:");
 
 	TQMap<TQString,TQString>::iterator portit;
@@ -256,7 +256,7 @@ void KKameraConfig::afterCameraOperation(void)
 
 	// if we're regaining control after a Cancel...
 	if (m_cancelPending) {
-		qApp->restoreOverrideCursor();
+		tqApp->restoreOverrideCursor();
 		m_cancelPending = false;
 	}
 	
@@ -268,23 +268,23 @@ void KKameraConfig::afterCameraOperation(void)
 TQString KKameraConfig::suggestName(const TQString &name)
 {
 	TQString new_name = name;
-	new_name.replace("/", ""); // we cannot have a slash in a URI's host
+	new_name.tqreplace("/", ""); // we cannot have a slash in a URI's host
 
-	if (!m_devices.contains(new_name)) return new_name;
+	if (!m_devices.tqcontains(new_name)) return new_name;
 	
 	// try new names with a number appended until we find a free one
 	int i = 1;
 	while (i++ < 0xffff) {
 		new_name = name + " (" + TQString::number(i) + ")";
-		if (!m_devices.contains(new_name)) return new_name;
+		if (!m_devices.tqcontains(new_name)) return new_name;
 	}
 
-	return TQString::null;
+	return TQString();
 }
 
 void KKameraConfig::slot_addCamera()
 {
-	KCamera *m_device = new KCamera(TQString::null,TQString::null);
+	KCamera *m_device = new KCamera(TQString(),TQString());
 	connect(m_device, TQT_SIGNAL(error(const TQString &)), TQT_SLOT(slot_error(const TQString &)));
 	connect(m_device, TQT_SIGNAL(error(const TQString &, const TQString &)), TQT_SLOT(slot_error(const TQString &, const TQString &)));
 	KameraDeviceSelectDialog dialog(this, m_device);
@@ -302,7 +302,7 @@ void KKameraConfig::slot_addCamera()
 void KKameraConfig::slot_removeCamera()
 {
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.contains(name)) {
+	if (m_devices.tqcontains(name)) {
 		KCamera *m_device = m_devices[name];
 		m_devices.remove(name);
 		delete m_device;
@@ -317,7 +317,7 @@ void KKameraConfig::slot_testCamera()
 	beforeCameraOperation();
 
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.contains(name)) {
+	if (m_devices.tqcontains(name)) {
 		KCamera *m_device = m_devices[name];
 		if (m_device->test())
 			KMessageBox::information(this, i18n("Camera test was successful."));
@@ -329,7 +329,7 @@ void KKameraConfig::slot_testCamera()
 void KKameraConfig::slot_configureCamera()
 {
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.contains(name)) {
+	if (m_devices.tqcontains(name)) {
 		KCamera *m_device = m_devices[name];
 		m_device->configure();
 	}
@@ -339,7 +339,7 @@ void KKameraConfig::slot_cameraSummary()
 {
 	TQString summary;
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.contains(name)) {
+	if (m_devices.tqcontains(name)) {
 		KCamera *m_device = m_devices[name];
 		summary = m_device->summary();
 		if (!summary.isNull()) {
@@ -354,7 +354,7 @@ void KKameraConfig::slot_cancelOperation()
 	// Prevent the user from keeping clicking Cancel
 	m_actions->action("camera_cancel")->setEnabled(false);
 	// and indicate that the click on Cancel did have some effect
-	qApp->setOverrideCursor(Qt::WaitCursor);
+	tqApp->setOverrideCursor(TQt::WaitCursor);
 }
 
 void KKameraConfig::slot_deviceMenu(TQIconViewItem *item, const TQPoint &point)
@@ -381,7 +381,7 @@ void KKameraConfig::cbGPIdle(GPContext * /*context*/, void * /*data*/)
 {
 	/*KKameraConfig *self( reinterpret_cast<KKameraConfig*>(data) );*/
 
-	qApp->processEvents();
+	tqApp->processEvents();
 }
 
 GPContextFeedback KKameraConfig::cbGPCancel(GPContext * /*context*/, void *data)
@@ -390,7 +390,7 @@ GPContextFeedback KKameraConfig::cbGPCancel(GPContext * /*context*/, void *data)
 
 	// Since in practice no camera driver supports idle callbacks yet,
 	// we'll use the cancel callback as opportunity to process events
-	qApp->processEvents();
+	tqApp->processEvents();
 
 	// If a cancel request is pending, ask gphoto to cancel
 	if (self->m_cancelPending)

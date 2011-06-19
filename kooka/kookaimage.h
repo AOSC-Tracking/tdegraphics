@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -47,15 +47,15 @@ class KFileItem;
 
 typedef enum { MaxCut, MediumCut } TileMode;
 
-class KookaImage: public QImage
+class KookaImage: public TQImage
 {
 public:
 
     KookaImage( );
     /**
-     * creating a subimage for a parent image.
+     * creating a subimage for a tqparent image.
      * @param subNo contains the sequence number of subimages to create.
-     * @param p is the parent image.
+     * @param p is the tqparent image.
      */
     KookaImage(  int subNo, KookaImage *p );
     KookaImage( 	const TQImage& img );
@@ -76,9 +76,9 @@ public:
     int         	subImagesCount() const;
 
     /**
-     * the parent image.
+     * the tqparent image.
      */
-    KookaImage*  parentImage() const;
+    KookaImage*  tqparentImage() const;
 
     /**
      * returns true if this is a subimage.
@@ -144,7 +144,7 @@ private:
     bool                loadTiffDir( const TQString&, int );
 
     /* if subNo is 0, the image is the one and only. If it is larger than 0, the
-     * parent contains the filename */
+     * tqparent contains the filename */
     int                 m_subNo;
 
     /* In case being a subimage */

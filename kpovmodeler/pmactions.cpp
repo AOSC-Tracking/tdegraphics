@@ -29,31 +29,31 @@
 #include "pmdebug.h"
 
 // Fixed widths are calculated wrong in a toolbar.
-// Fixed sizeHint for the combo box to return
+// Fixed tqsizeHint for the combo box to return
 // at least the minimum size
-class PMComboBox : public QComboBox
+class PMComboBox : public TQComboBox
 {
 public:
-   PMComboBox( TQWidget* parent, const char* name = 0 )
-         : TQComboBox( parent, name )
+   PMComboBox( TQWidget* tqparent, const char* name = 0 )
+         : TQComboBox( tqparent, name )
    {
    }
 
-   virtual TQSize minimumSizeHint( ) const
+   virtual TQSize tqminimumSizeHint( ) const
    {
-      TQSize s = TQComboBox::minimumSizeHint( );
-      return s.expandedTo( minimumSize( ) );
+      TQSize s = TQComboBox::tqminimumSizeHint( );
+      return s.expandedTo( tqminimumSize( ) );
    }
-   virtual TQSize sizeHint( ) const
+   virtual TQSize tqsizeHint( ) const
    {
-      TQSize s = TQComboBox::sizeHint( );
-      return s.expandedTo( minimumSize( ) );
+      TQSize s = TQComboBox::tqsizeHint( );
+      return s.expandedTo( tqminimumSize( ) );
    }
 };
 
 PMComboAction::PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
-                              TQObject* parent, const char* name )
-      : KAction( text, accel, parent, name )
+                              TQObject* tqparent, const char* name )
+      : KAction( text, accel, tqparent, name )
 {
    m_receiver = receiver;
    m_member = member;
@@ -117,16 +117,16 @@ void PMComboAction::unplug( TQWidget *w )
 
 // Use a toolbutton instead of a label so it is styled correctly.
 // copied from konq_actions.cc
-class PMToolBarLabel : public QToolButton
+class PMToolBarLabel : public TQToolButton
 {
 public:
-   PMToolBarLabel( const TQString& text, TQWidget* parent = 0, const char* name = 0 )
-         : TQToolButton( parent, name )
+   PMToolBarLabel( const TQString& text, TQWidget* tqparent = 0, const char* name = 0 )
+         : TQToolButton( tqparent, name )
    {
       setText( text );
    }
 protected:
-   TQSize sizeHint( ) const
+   TQSize tqsizeHint( ) const
    {
       int w = fontMetrics( ).width( text( ) );
       int h = fontMetrics( ).height( );
@@ -134,21 +134,17 @@ protected:
    }
    void drawButton( TQPainter* p )
    {
-#if ( QT_VERSION >= 300 )
       // Draw the background
-      style( ).drawComplexControl( TQStyle::CC_ToolButton, p, this, rect( ), colorGroup( ),
+      tqstyle( ).tqdrawComplexControl( TQStyle::CC_ToolButton, p, this, rect( ), tqcolorGroup( ),
                                    TQStyle::Style_Enabled, TQStyle::SC_ToolButton );
       // Draw the label
-      style( ).drawControl( TQStyle::CE_ToolButtonLabel, p, this, rect( ), colorGroup( ),
+      tqstyle( ).tqdrawControl( TQStyle::CE_ToolButtonLabel, p, this, rect( ), tqcolorGroup( ),
                             TQStyle::Style_Enabled );
-#else
-      p->drawText( rect( ), Qt::AlignVCenter | Qt::AlignLeft, text( ) );
-#endif      
    }
 };
 
-PMLabelAction::PMLabelAction( const TQString &text, TQObject *parent, const char *name )
-    : KAction( text, 0, parent, name )
+PMLabelAction::PMLabelAction( const TQString &text, TQObject *tqparent, const char *name )
+    : KAction( text, 0, tqparent, name )
 {
    m_button = 0;
 }
@@ -197,8 +193,8 @@ void PMLabelAction::unplug( TQWidget *widget )
 
 
 PMSpinBoxAction::PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
-                                  TQObject* parent, const char* name )
-      : KAction( text, accel, parent, name )
+                                  TQObject* tqparent, const char* name )
+      : KAction( text, accel, tqparent, name )
 {
    m_receiver = receiver;
    m_member = member;

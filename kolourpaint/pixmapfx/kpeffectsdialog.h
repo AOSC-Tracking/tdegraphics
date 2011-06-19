@@ -48,10 +48,11 @@ class kpMainWindow;
 class kpEffectsDialog : public kpToolPreviewDialog
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpEffectsDialog (bool actOnSelection,
-                     kpMainWindow *parent,
+                     kpMainWindow *tqparent,
                      const char *name = 0);
     virtual ~kpEffectsDialog ();
 

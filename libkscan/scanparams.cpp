@@ -53,8 +53,8 @@
 
 
 
-ScanParams::ScanParams( TQWidget *parent, const char *name )
-   : TQVBox( parent, name ),
+ScanParams::ScanParams( TQWidget *tqparent, const char *name )
+   : TQVBox( tqparent, name ),
      m_firstGTEdit( true )
 {
    /* first some initialisation and debug messages */
@@ -111,7 +111,7 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    /* initialise own widgets */
    cb_gray_preview = 0;
 
-   /* A top layout box */
+   /* A top tqlayout box */
    // TQVBoxLayout *top = new TQVBoxLayout(this, 6);
    TQHBox *hb = new TQHBox( this );
    hb->setSpacing( KDialog::spacingHint() );
@@ -120,7 +120,7 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    (void ) new TQLabel( cap, hb );
    m_led = new KLed( hb );
    m_led->setState( KLed::Off );
-   m_led->setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ));
+   m_led->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ));
 
 
    (void) new KSeparator( KSeparator::HLine, this);
@@ -160,7 +160,7 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slStartScan()) );
    pb = kbb->addButton( i18n( "&Preview Scan" ));
    connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slAcquirePreview()) );
-   kbb->layout();
+   kbb->tqlayout();
 
    /* Initialise the progress dialog */
    progressDialog = new TQProgressDialog( i18n("Scanning in progress"),
@@ -501,9 +501,9 @@ TQScrollView *ScanParams::scannerParams( )
    }
 
    TQWidget *spacer = new TQWidget( pbox );
-   spacer->setSizePolicy(TQSizePolicy::Minimum, TQSizePolicy::Expanding);
+   spacer->tqsetSizePolicy(TQSizePolicy::Minimum, TQSizePolicy::Expanding);
 
-   pbox->setMinimumWidth( pbox->sizeHint().width() );
+   pbox->setMinimumWidth( pbox->tqsizeHint().width() );
    sv->setMinimumWidth( pbox->minimumWidth() );
    sv->addChild( pbox );
 
@@ -547,7 +547,7 @@ void ScanParams::slSourceSelect( void )
       sources = so.getList();
 #undef CHEAT_FOR_DEBUGGING
 #ifdef CHEAT_FOR_DEBUGGING
-      if( sources.find( "Automatic Document Feeder" ) == -1)
+      if( sources.tqfind( "Automatic Document Feeder" ) == -1)
           sources.append( "Automatic Document Feeder" );
 #endif
 
@@ -575,7 +575,7 @@ void ScanParams::slSourceSelect( void )
  *  images, if a single file is selected, the virt Scanner just reads
  *  one file.
  *  If SANE Debug Mode is selected, only pnm can be loaded.
- *  on Qt mode, all available Qt-Formats are ok.
+ *  on TQt mode, all available TQt-Formats are ok.
  */
 void ScanParams::slFileSelect( void )
 {
@@ -583,7 +583,7 @@ void ScanParams::slFileSelect( void )
    TQString filter;
    TQCString prefix = "\n*.";
 
-   if( scan_mode == ID_QT_IMGIO )
+   if( scan_mode == ID_TQT_IMGIO )
    {
       TQStrList filterList = TQImage::inputFormats();
       filter = i18n( "*|All Files (*)");
@@ -591,7 +591,7 @@ void ScanParams::slFileSelect( void )
 	   fi_item = filterList.next() )
       {
 
-	 filter.append( TQString::fromLatin1( prefix + fi_item.lower()) );
+	 filter.append( TQString::tqfromLatin1( prefix + fi_item.lower()) );
       }
    }
    else
@@ -616,7 +616,7 @@ void ScanParams::slFileSelect( void )
    if ( !fileName.isNull() && virt_filename ) { // got a file name
       kdDebug(29000) << "Got fileName: " << fileName << endl;
       // write Value to SANEOption, it updates itself.
-      virt_filename->set( TQFile::encodeName( fileName ) );
+      virt_filename->set( TQFile::encodeName( fileName ).data() );
    }
 }
 
@@ -626,7 +626,7 @@ void ScanParams::slFileSelect( void )
 void ScanParams::slVirtScanModeSelect( int id )
 {
    if( id == 0 ) {
-      scan_mode = ID_SANE_DEBUG; /* , ID_QT_IMGIO */
+      scan_mode = ID_SANE_DEBUG; /* , ID_TQT_IMGIO */
       sane_device->guiSetEnabled( "three-pass", true );
       sane_device->guiSetEnabled( "grayify", true );
       sane_device->guiSetEnabled( SANE_NAME_CONTRAST, true );
@@ -638,11 +638,11 @@ void ScanParams::slVirtScanModeSelect( int id )
 	 kdDebug(29000) << "Found File in Filename-Option: " << vf << endl;
 
 	 TQFileInfo fi( vf );
-	 if( fi.extension() != TQString::fromLatin1("pnm") )
+	 if( fi.extension() != TQString::tqfromLatin1("pnm") )
 	    virt_filename->set(TQCString(""));
       }
    } else {
-      scan_mode = ID_QT_IMGIO;
+      scan_mode = ID_TQT_IMGIO;
       sane_device->guiSetEnabled( "three-pass", false );
       sane_device->guiSetEnabled( "grayify", false );
       sane_device->guiSetEnabled( SANE_NAME_CONTRAST, false );
@@ -672,13 +672,13 @@ void ScanParams::virtualScannerParams( void )
 
 
 
-   TQRadioButton *rb2 = new TQRadioButton( i18n("virt. Scan (all Qt modes)"),
-					 bg_virt_scan_mode, "VirtScanQtModes" );
+   TQRadioButton *rb2 = new TQRadioButton( i18n("virt. Scan (all TQt modes)"),
+					 bg_virt_scan_mode, "VirtScanTQtModes" );
 
    rb1->setChecked( true );
    rb2->setChecked( false );
 
-   if( scan_mode == ID_QT_IMGIO )
+   if( scan_mode == ID_TQT_IMGIO )
    {
       rb2->setChecked( true );
       rb1->setChecked( false );
@@ -695,7 +695,7 @@ void ScanParams::virtualScannerParams( void )
       TQHBoxLayout *hb = new TQHBoxLayout();
       top->addLayout( hb );
       w = virt_filename->widget();
-      w->setMinimumHeight( (w->sizeHint()).height());
+      w->setMinimumHeight( (w->tqsizeHint()).height());
       connect( w, TQT_SIGNAL(returnPressed()), this,
 	       TQT_SLOT( slCheckGlob()));
 
@@ -766,7 +766,7 @@ void ScanParams::slStartScan( void )
    kdDebug(29000) << "Called start-scan-Slot!" << endl;
    TQString q;
 
-   if( scan_mode == ID_SANE_DEBUG || scan_mode == ID_QT_IMGIO )
+   if( scan_mode == ID_SANE_DEBUG || scan_mode == ID_TQT_IMGIO )
    {
       if( virt_filename )
 	 q = virt_filename->get();
@@ -798,7 +798,7 @@ void ScanParams::slStartScan( void )
 	    // stat = performADFScan();
 	 }
       } else {
-	 kdDebug(29000) << "Reading 	dir by Qt-internal imagereading file " << q << endl;
+	 kdDebug(29000) << "Reading 	dir by TQt-internal imagereading file " << q << endl;
 	 sane_device->acquire( q );
       }
    }

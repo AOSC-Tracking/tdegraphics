@@ -21,8 +21,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -40,11 +40,12 @@ class KURLComboBox;
 class TQPushButton;
 class TQStringList;
 
-class ImageSelectLine:public QHBox
+class ImageSelectLine:public TQHBox
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   ImageSelectLine( TQWidget *parent, const TQString& text );
+   ImageSelectLine( TQWidget *tqparent, const TQString& text );
 
    KURL selectedURL() const;
    void setURL( const KURL& );

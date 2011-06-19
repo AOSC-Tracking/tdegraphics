@@ -49,20 +49,20 @@
 static inline TQPixmap loadIcon( const char * name )
 {
   return KGlobal::instance()->iconLoader()
-    ->loadIcon( TQString::fromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
+    ->loadIcon( TQString::tqfromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
 }
 
-KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent) 
-    : KDialogBase(parent, "KTemplateEditDlg", true, i18n( "Icon Template" ),
+KTemplateEditDlg::KTemplateEditDlg(TQWidget *tqparent) 
+    : KDialogBase(tqparent, "KTemplateEditDlg", true, i18n( "Icon Template" ),
       Ok|Cancel )
 {
   TQFrame *frame = makeMainWidget();
   TQVBoxLayout *ml = new TQVBoxLayout(frame);
   TQGroupBox *grp = new TQGroupBox(i18n("Template"), frame);
   grp->setColumnLayout(0, Qt::Vertical);
-  grp->layout()->setSpacing(spacingHint());
-  grp->layout()->setMargin(marginHint());
-  TQGridLayout *l = new TQGridLayout(grp->layout());
+  grp->tqlayout()->setSpacing(spacingHint());
+  grp->tqlayout()->setMargin(marginHint());
+  TQGridLayout *l = new TQGridLayout(grp->tqlayout());
 
   ln_name = new TQLineEdit( grp );
   connect( ln_name, TQT_SIGNAL( textChanged( const TQString & ) ), 
@@ -112,7 +112,7 @@ TQString KTemplateEditDlg::path()
   return ln_path->url();
 }
 
-KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
+KTemplateConfig::KTemplateConfig(TQWidget *tqparent) : TQWidget(tqparent)
 {
   kdDebug(4640) << "KTemplateConfig constructor" << endl;
 
@@ -130,7 +130,7 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
   TQVBoxLayout* ml = new TQVBoxLayout( this );
   ml->addWidget( grp );
 
-  TQVBoxLayout* l = new  TQVBoxLayout( grp->layout(), KDialog::spacingHint() );
+  TQVBoxLayout* l = new  TQVBoxLayout( grp->tqlayout(), KDialog::spacingHint() );
   l->addWidget( templates );
 
   for( unsigned int i = 0; i <  KIconTemplateContainer::self()->count(); i++ )
@@ -151,7 +151,7 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
 	
   bbox->addStretch( 1 );
 	
-  bbox->layout();
+  bbox->tqlayout();
   l->addWidget( bbox );
 }
 
@@ -224,8 +224,8 @@ void KTemplateConfig::edit()
   }
 }
 
-KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
-  : TQWidget( parent )
+KBackgroundConfig::KBackgroundConfig( TQWidget* tqparent )
+  : TQWidget( tqparent )
 {
   kdDebug(4640) << "KBackgroundConfig - constructor" << endl;
 
@@ -246,11 +246,11 @@ KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
 
   TQGroupBox *grp1 = new TQGroupBox( i18n( "Select Background" ), this );
   grp1->setColumnLayout(0, Qt::Vertical );
-  grp1->layout()->setSpacing( KDialog::spacingHint() );
-  grp1->layout()->setMargin( KDialog::marginHint() );
+  grp1->tqlayout()->setSpacing( KDialog::spacingHint() );
+  grp1->tqlayout()->setMargin( KDialog::marginHint() );
   mainLayout->addWidget( grp1 );
 
-  TQGridLayout *grp1Layout = new TQGridLayout( grp1->layout(), 3, 2 );
+  TQGridLayout *grp1Layout = new TQGridLayout( grp1->tqlayout(), 3, 2 );
 
   TQButtonGroup* btngrp = new TQButtonGroup( grp1 );
   btngrp->setExclusive( true );
@@ -373,7 +373,7 @@ void KBackgroundConfig::selectPixmap()
   }
 }
 
-KMiscConfig::KMiscConfig(TQWidget *parent) : TQWidget(parent)
+KMiscConfig::KMiscConfig(TQWidget *tqparent) : TQWidget(tqparent)
 {
   kdDebug(4640) << "KMiscConfig - constructor" << endl;
 
@@ -524,32 +524,32 @@ void KMiscConfig::slotTransparencyDisplayType(int id)
   }
 }
 
-KIconConfig::KIconConfig(TQWidget *parent)
+KIconConfig::KIconConfig(TQWidget *tqparent)
   : KDialogBase(KDialogBase::IconList, i18n("Configure"),
                          KDialogBase::Help |
                          KDialogBase::Ok |
                          KDialogBase::Apply |
                          KDialogBase::Cancel,
                          KDialogBase::Ok,
-                         parent, "configDialog", true, true)
+                         tqparent, "configDialog", true, true)
 {
-  setHelp(TQString::null);
+  setHelp(TQString());
   //KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
   connect(this, TQT_SIGNAL(finished()), this, TQT_SLOT(finis()));
 
-  TQVBox* page = addVBoxPage(i18n("Icon Templates"), TQString::null, loadIcon("icons"));
+  TQVBox* page = addVBoxPage(i18n("Icon Templates"), TQString(), loadIcon("icons"));
   temps = new KTemplateConfig(page);
 
-  page = addVBoxPage(i18n("Background"), TQString::null, loadIcon("background"));
+  page = addVBoxPage(i18n("Background"), TQString(), loadIcon("background"));
   backs = new KBackgroundConfig(page);
 
-  page = addVBoxPage(i18n("Icon Grid"), TQString::null, loadIcon("kiconedit"));
+  page = addVBoxPage(i18n("Icon Grid"), TQString(), loadIcon("kiconedit"));
   misc = new KMiscConfig(page);
 
   TQSize min(300, 400);
 
-  if (300 < sizeHint().width()) { min.setWidth(sizeHint().width()); }
-  if (400 < sizeHint().height()) { min.setHeight(sizeHint().height()); }
+  if (300 < tqsizeHint().width()) { min.setWidth(tqsizeHint().width()); }
+  if (400 < tqsizeHint().height()) { min.setHeight(tqsizeHint().height()); }
 
   resize(min);
 }

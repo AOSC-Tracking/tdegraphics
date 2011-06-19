@@ -208,15 +208,15 @@ TopLevel::TopLevel (TQWidget *, const char *name)
   qtwin = faxqtwin->winId();
   faxqtwin->setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
 
-  // Create a Vertical scroll bar
+  // Create aQt::Vertical scroll bar
 
-  vsb = new TQScrollBar( TQScrollBar::Vertical,faxqtwin,"scrollBar" );
+  vsb = new TQScrollBar( Qt::Vertical,faxqtwin,"scrollBar" );
   vsb->hide();
   connect( vsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollVert(int)) );
 
-  // Create a Horizontal scroll bar
+  // Create aQt::Horizontal scroll bar
 
-  hsb = new TQScrollBar( TQScrollBar::Horizontal,faxqtwin,"scrollBar" );
+  hsb = new TQScrollBar( Qt::Horizontal,faxqtwin,"scrollBar" );
   connect( hsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollHorz(int)) );
   hsb->hide();
 
@@ -235,43 +235,43 @@ TopLevel::~TopLevel()
 void TopLevel::setupMenuBar()
 {
   // File menu
-  KStdAction::open( this, TQT_SLOT( faxOpen() ), actionCollection() );
-  actRecent =  KStdAction::openRecent( this, TQT_SLOT( faxOpen( const KURL & ) ),
+  KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( faxOpen() ), actionCollection() );
+  actRecent =  KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( faxOpen( const KURL & ) ),
           actionCollection() );
-  actSave = KStdAction::save( this, TQT_SLOT( faxSave() ), actionCollection() );
-  actSaveAs = KStdAction::saveAs( this, TQT_SLOT( faxSaveAs() ),
+  actSave = KStdAction::save( TQT_TQOBJECT(this), TQT_SLOT( faxSave() ), actionCollection() );
+  actSaveAs = KStdAction::saveAs( TQT_TQOBJECT(this), TQT_SLOT( faxSaveAs() ),
           actionCollection() );
-  actPrint = KStdAction::print( this, TQT_SLOT( print() ), actionCollection() );
-  KStdAction::quit( this, TQT_SLOT( close() ), actionCollection() );
-  actAdd = new KAction( i18n( "A&dd..." ), "filenew", KShortcut(), this,
+  actPrint = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( print() ), actionCollection() );
+  KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close() ), actionCollection() );
+  actAdd = new KAction( i18n( "A&dd..." ), "filenew", KShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
 
   actRecent->setMaxItems( 5 );
 
   // View Menu
-  actSize = KStdAction::actualSize( this, TQT_SLOT( actualSize() ),
+  actSize = KStdAction::actualSize( TQT_TQOBJECT(this), TQT_SLOT( actualSize() ),
       actionCollection() );
-  actZoomIn = KStdAction::zoomIn( this, TQT_SLOT( zoomin() ), actionCollection() );
-  actZoomOut = KStdAction::zoomOut( this, TQT_SLOT( zoomout() ),
+  actZoomIn = KStdAction::zoomIn( TQT_TQOBJECT(this), TQT_SLOT( zoomin() ), actionCollection() );
+  actZoomOut = KStdAction::zoomOut( TQT_TQOBJECT(this), TQT_SLOT( zoomout() ),
       actionCollection() );
 
-  actRotate = new KAction( i18n( "&Rotate Page" ), "rotate", KShortcut(), this,
+  actRotate = new KAction( i18n( "&Rotate Page" ), "rotate", KShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( rotatePage() ), actionCollection(), "view_rotate" );
-  actMirror = new KAction( i18n( "Mirror Page" ), KShortcut(), this,
+  actMirror = new KAction( i18n( "Mirror Page" ), KShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( mirrorPage() ), actionCollection(), "view_mirror" );
-  actFlip = new KAction( i18n( "&Flip Page" ), KShortcut(), this,
+  actFlip = new KAction( i18n( "&Flip Page" ), KShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( flipPage() ), actionCollection(), "view_flip" );
 
   // Go menu
-  actNext = KStdAction::next( this, TQT_SLOT( nextPage() ), actionCollection() );
-  actPrev = KStdAction::prior( this, TQT_SLOT( prevPage() ), actionCollection() );
-  actFirst = KStdAction::firstPage( this, TQT_SLOT( firstPage() ),
+  actNext = KStdAction::next( TQT_TQOBJECT(this), TQT_SLOT( nextPage() ), actionCollection() );
+  actPrev = KStdAction::prior( TQT_TQOBJECT(this), TQT_SLOT( prevPage() ), actionCollection() );
+  actFirst = KStdAction::firstPage( TQT_TQOBJECT(this), TQT_SLOT( firstPage() ),
       actionCollection() );
-  actLast = KStdAction::lastPage( this, TQT_SLOT( lastPage() ),
+  actLast = KStdAction::lastPage( TQT_TQOBJECT(this), TQT_SLOT( lastPage() ),
       actionCollection() );
 
   // Settings menu
-  KStdAction::preferences( this, TQT_SLOT( faxoptions() ), actionCollection() );
+  KStdAction::preferences( TQT_TQOBJECT(this), TQT_SLOT( faxoptions() ), actionCollection() );
 }
 
 void TopLevel::setupStatusBar()
@@ -282,14 +282,14 @@ void TopLevel::setupStatusBar()
   statusbar->insertFixedItem(i18n("Res: XXXXX"), ID_GENERAL);
   statusbar->insertFixedItem(i18n("Type: XXXXXXX"), ID_TYPE);
   statusbar->insertFixedItem(i18n("Page: XX of XX"), ID_PAGE_NO);
-  statusbar->insertItem(TQString::null, ID_FNAME, 1);
+  statusbar->insertItem(TQString(), ID_FNAME, 1);
   statusbar->setItemAlignment( ID_FNAME, AlignLeft );
 
-  statusbar->changeItem(TQString::null, ID_INS_OVR);
-  statusbar->changeItem(TQString::null, ID_GENERAL);
-  statusbar->changeItem(TQString::null, ID_TYPE);
-  statusbar->changeItem(TQString::null, ID_PAGE_NO);
-  statusbar->changeItem(TQString::null, ID_FNAME);
+  statusbar->changeItem(TQString(), ID_INS_OVR);
+  statusbar->changeItem(TQString(), ID_GENERAL);
+  statusbar->changeItem(TQString(), ID_TYPE);
+  statusbar->changeItem(TQString(), ID_PAGE_NO);
+  statusbar->changeItem(TQString(), ID_FNAME);
 }
 
 void TopLevel::readSettings()
@@ -378,7 +378,7 @@ void TopLevel::writeSettings()
 
 void TopLevel::faxOpen()
 {
-  KURL url = KFileDialog::getOpenURL(TQString::null, KFAX_FILETYPES);
+  KURL url = KFileDialog::getOpenURL(TQString(), KFAX_FILETYPES);
 
   faxOpen( url );
 
@@ -400,7 +400,7 @@ void TopLevel::faxOpen( const KURL & url )
 
 void TopLevel::faxAdd()
 {
-  KURL url = KFileDialog::getOpenURL(TQString::null, KFAX_FILETYPES);
+  KURL url = KFileDialog::getOpenURL(TQString(), KFAX_FILETYPES);
 
   faxAdd( url );
 
@@ -424,7 +424,7 @@ void TopLevel::faxSave()
 
 void TopLevel::faxSaveAs()
 {
-  fileURL = KFileDialog::getSaveURL(TQString::null, KFAX_FILETYPES);
+  fileURL = KFileDialog::getSaveURL(TQString(), KFAX_FILETYPES);
 
   if (fileURL.isEmpty())
     return;
@@ -654,13 +654,13 @@ void TopLevel::resizeView()
   }
 
   if(Image){
-    hsb->setRange(0,QMAX(0,Image->width - qwindow_width));
+    hsb->setRange(0,TQMAX(0,Image->width - qwindow_width));
     hsb->setSteps(5,qwindow_width/2);
-    //    printf("hsb range: %d\n",QMAX(0,Image->width - qwindow_width));
-    vsb->setRange(0,QMAX(0,Image->height - qwindow_height));
+    //    printf("hsb range: %d\n",TQMAX(0,Image->width - qwindow_width));
+    vsb->setRange(0,TQMAX(0,Image->height - qwindow_height));
     vsb->setSteps(5,qwindow_height/2);
-    //    printf("vsb range: %d\n",QMAX(0,Image->height - qwindow_height));
-    //    printf("vsb QMIN %d vdb QMAX %d\n",vsb->QMINValue(),vsb->QMAXValue());
+    //    printf("vsb range: %d\n",TQMAX(0,Image->height - qwindow_height));
+    //    printf("vsb TQMIN %d vdb TQMAX %d\n",vsb->TQMINValue(),vsb->TQMAXValue());
   }
 
 
@@ -701,7 +701,7 @@ void TopLevel::print(){
   printer.setFullPage( true );
   printer.setUsePrinterResolution( true );
   printer.setCreator( i18n("KFax") + " " KFAXVERSION );
-  printer.setDocName( TQString("%1 - %2").arg(firstpage->name).arg(i18n("KFax")));
+  printer.setDocName( TQString("%1 - %2").tqarg(firstpage->name).tqarg(i18n("KFax")));
   printer.setDocFileName( firstpage->name );
   printer.setPageSelection( KPrinter::ApplicationSide );
   printer.setMinMax( 1, pages ); 
@@ -735,7 +735,7 @@ void TopLevel::printIt( KPrinter &printer, TQPainter &painter )
 
     ++currentpage;
     // should this page be printed ?
-    if (printer.pageList().findIndex(currentpage) < 0)
+    if (printer.pageList().tqfindIndex(currentpage) < 0)
 	continue;
 
     XImage *Image = Pimage(pn);
@@ -745,11 +745,11 @@ void TopLevel::printIt( KPrinter &printer, TQPainter &painter )
     // byte-swapping the image
     TQByteArray bytes( Image->height*Image->bytes_per_line );
     for (int y=Image->height-1; y>=0; --y) {
-      Q_UINT32 offset  = y*Image->bytes_per_line;
-      Q_UINT32 *source = (Q_UINT32 *) (Image->data + offset);
-      Q_UINT32 *dest   = (Q_UINT32 *) (bytes.data() + offset);
+      TQ_UINT32 offset  = y*Image->bytes_per_line;
+      TQ_UINT32 *source = (TQ_UINT32 *) (Image->data + offset);
+      TQ_UINT32 *dest   = (TQ_UINT32 *) (bytes.data() + offset);
       for (int x=(Image->bytes_per_line/4)-1; x>=0; --x) {
- 	Q_UINT32 dv = 0, sv = *source;
+ 	TQ_UINT32 dv = 0, sv = *source;
 	for (int bit=32; bit>0; --bit) {
 		dv <<= 1;
 		dv |= sv&1;
@@ -792,11 +792,11 @@ void TopLevel::printIt( KPrinter &printer, TQPainter &painter )
     TQSize scaledImageSize = size;
     if (size.width() > maxSize.width() || size.height() > maxSize.height() ) {
 	// Image does not fit - scale it and print centered
-	scaledImageSize.scale( maxSize, TQSize::ScaleMin );
+	scaledImageSize.tqscale( maxSize, TQSize::ScaleMin );
 	kdDebug() << "Image does not fit - scaling to " << maxSize << endl;
     } else {
 	// Image does fit - print it in original size, but centered
-	scaledImageSize.scale( size, TQSize::ScaleMin );
+	scaledImageSize.tqscale( size, TQSize::ScaleMin );
 	kdDebug() << "Image does fit - scaling to " << size << endl;
     }
     kdDebug() << "Final image size " << scaledImageSize << endl;
@@ -846,7 +846,7 @@ void TopLevel::openNetFile( const KURL &u)
 
   if ( u.isLocalFile() )
   {
-    TQString string = i18n("Loading '%1'").arg(u.path());
+    TQString string = i18n("Loading '%1'").tqarg(u.path());
     statusbar->message(string);
     openadd( u.path());
     statusbar->clear();
@@ -854,7 +854,7 @@ void TopLevel::openNetFile( const KURL &u)
   else
   {
     statusbar->message(i18n("Downloading..."));
-    TQString tmpFile = TQString::null;
+    TQString tmpFile = TQString();
     if ( KIO::NetAccess::download( u, tmpFile, this ) )
     {
       openadd( tmpFile );
@@ -1382,7 +1382,7 @@ void TopLevel::faxClose()
   vsb->hide();
   hsb->hide();
 
-  fileURL = TQString::null;
+  fileURL = TQString();
 
   updateActions();
 }
@@ -1441,17 +1441,17 @@ void TopLevel::uiUpdate(){
 	currentpage = pages;
     }
 
-    TQString pagestr = i18n("Page: %1 of %2").arg(currentpage).arg(pages);
+    TQString pagestr = i18n("Page: %1 of %2").tqarg(currentpage).tqarg(pages);
 
     statusbar->changeItem(pagestr, ID_PAGE_NO);
 
     if(Image){
-      TQString wh = i18n("W: %1 H: %2").arg(Image->width).arg(Image->height);
+      TQString wh = i18n("W: %1 H: %2").tqarg(Image->width).tqarg(Image->height);
       statusbar->changeItem(wh, ID_INS_OVR);
     }
 
-    TQString resolution = i18n("Res: %1").arg(thispage->vres?i18n("Fine"):i18n("Normal"));
-    // TODO: resolution += TQString("%1x%2").arg(thispage->dpiX).arg(thispage->dpiY);
+    TQString resolution = i18n("Res: %1").tqarg(thispage->vres?i18n("Fine"):i18n("Normal"));
+    // TODO: resolution += TQString("%1x%2").tqarg(thispage->dpiX).tqarg(thispage->dpiY);
     statusbar->changeItem(resolution, ID_GENERAL);
 
     statusbar->changeItem(thispage->name, ID_FNAME);
@@ -1528,16 +1528,16 @@ void TopLevel::putImage()
        has a sunken frame and I need to offset by 1 pixel to the right and
        one pixel down so that I don't paint my fax into the border of the frame*/
 
-    XResizeWindow(qtdisplay,Win,QMIN(qwindow_width -1,Image->width ),
-		  QMIN(qwindow_height -1,Image->height ));
+    XResizeWindow(qtdisplay,Win,TQMIN(qwindow_width -1,Image->width ),
+		  TQMIN(qwindow_height -1,Image->height ));
 
     XPutImage(qtdisplay, Win, PaintGC, Image,
-	      QMAX(xpos - qwindow_width/2,0), QMAX(ypos - qwindow_height/2,0),
-	      0, 0, QMIN(qwindow_width -1,Image->width)  ,
-	      QMIN(qwindow_height -1,Image->height) );
+	      TQMAX(xpos - qwindow_width/2,0), TQMAX(ypos - qwindow_height/2,0),
+	      0, 0, TQMIN(qwindow_width -1,Image->width)  ,
+	      TQMIN(qwindow_height -1,Image->height) );
 
-    vsb->setValue(QMAX(ypos - qwindow_height/2,0));
-    hsb->setValue(QMAX(xpos - qwindow_width/2,0));
+    vsb->setValue(TQMAX(ypos - qwindow_height/2,0));
+    hsb->setValue(TQMAX(xpos - qwindow_width/2,0));
 
     XFlush(qtdisplay);
   }

@@ -19,8 +19,8 @@
 #include "propertywidgets.h"
 
 IntegerWidget::IntegerWidget( const PropertySheet& sheet,
-                              TQWidget *parent, const char *name )
-    : TQHBox( parent, name )
+                              TQWidget *tqparent, const char *name )
+    : TQHBox( tqparent, name )
 {
     
 }
@@ -39,8 +39,8 @@ int IntegerWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 ComboWidget::ComboWidget( const PropertySheet& sheet,
-                              TQWidget *parent, const char *name )
-    : TQHBox( parent, name )
+                              TQWidget *tqparent, const char *name )
+    : TQHBox( tqparent, name )
 {
     
 }
@@ -60,8 +60,8 @@ TQString ComboWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 CheckBoxWidget::CheckBoxWidget( const PropertySheet& sheet,
-                              TQWidget *parent, const char *name )
-    : TQHBox( parent, name )
+                              TQWidget *tqparent, const char *name )
+    : TQHBox( tqparent, name )
 {
     
 }
@@ -81,8 +81,8 @@ bool CheckBoxWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 LineEditWidget::LineEditWidget( const PropertySheet& sheet,
-                              TQWidget *parent, const char *name )
-    : TQHBox( parent, name )
+                              TQWidget *tqparent, const char *name )
+    : TQHBox( tqparent, name )
 {
     
 }
@@ -102,8 +102,8 @@ TQString LineEditWidget::value() const
 ///////////////////////////////////////////////////////////////////
 
 ListBoxWidget::ListBoxWidget( const PropertySheet& sheet,
-                              TQWidget *parent, const char *name )
-    : TQHBox( parent, name )
+                              TQWidget *tqparent, const char *name )
+    : TQHBox( tqparent, name )
 {
     
 }

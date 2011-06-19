@@ -201,11 +201,11 @@ things are set multiple times. But it works :-)
   (load-library "vc")
   
   ;;for QT
-  (setq c-C++-access-key "\\<\\(signals\\|public\\|protected\\|private
-  \\|public slots\\|protected slots\\|private slots\\)\\>[ \t]*:")
-  ;; modify the colour of slots to match public, private, etc ...
+  (setq c-C++-access-key "\\<\\(Q_SIGNALS\\|public\\|protected\\|private
+  \\|public Q_SLOTS\\|protected Q_SLOTS\\|private Q_SLOTS\\)\\>[ \t]*:")
+  ;; modify the colour of Q_SLOTS to match public, private, etc ...
   (font-lock-add-keywords 'c++-mode
-  '(("\\<\\(slots\\|signals\\)\\>" . font-lock-type-face)))
+  '(("\\<\\(Q_SLOTS\\|Q_SIGNALS\\)\\>" . font-lock-type-face)))
   ;; make new font for rest of qt keywords
   (make-face 'qt-keywords-face)
   (set-face-foreground 'qt-keywords-face "green")

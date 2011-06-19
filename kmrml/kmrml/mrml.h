@@ -56,7 +56,7 @@ private:
     }
 
     static TQString mrmlString( const TQString& sessionId,
-                               const TQString& transactionId = TQString::null );
+                               const TQString& transactionId = TQString() );
 
     static TQCString loginString();
     static TQCString getConfigurationString();

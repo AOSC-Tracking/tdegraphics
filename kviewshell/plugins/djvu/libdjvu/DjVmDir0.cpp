@@ -132,7 +132,7 @@ DjVmDir0::decode(ByteStream & bs)
 GP<DjVmDir0::FileRec>
 DjVmDir0::get_file(const GUTF8String &name)
 {
-   if (name2file.contains(name))
+   if (name2file.tqcontains(name))
      return name2file[name];
    return 0;
 }

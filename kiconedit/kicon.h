@@ -43,9 +43,10 @@
 
 class TQImage;
 
-class KIconEditIcon : public QObject
+class KIconEditIcon : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
   KIconEditIcon(TQObject*, const TQImage*, KURL url = KURL() );
   ~KIconEditIcon();
@@ -57,7 +58,7 @@ public:
 public slots:
   bool open(const TQImage*, KURL url = KURL());
   bool promptForFile(const TQImage*);
-  bool save(const TQImage*, const TQString &filename=TQString::null);
+  bool save(const TQImage*, const TQString &filename=TQString());
   bool saveAs(const TQImage*);
 
 signals:

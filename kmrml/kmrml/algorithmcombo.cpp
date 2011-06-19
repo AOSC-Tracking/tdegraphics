@@ -22,11 +22,11 @@
 
 using namespace KMrml;
 
-// ### copycat of CollectionCombo... moc can't handle templates unfortunately..
+// ### copycat of CollectionCombo... tqmoc can't handle templates unfortunately..
 // could use base-class MrmlElement....
 
-AlgorithmCombo::AlgorithmCombo( TQWidget *parent, const char *name )
-    : KComboBox( false, parent, name ),
+AlgorithmCombo::AlgorithmCombo( TQWidget *tqparent, const char *name )
+    : KComboBox( false, tqparent, name ),
       m_algorithms( 0L )
 {
     connect( this, TQT_SIGNAL( activated( const TQString& ) ),

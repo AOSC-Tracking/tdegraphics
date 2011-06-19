@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 #ifndef KOOKAVIEW_H
@@ -66,9 +66,10 @@ class ocrResEdit;
  * @author Klaas Freitag <freitag@suse.de>
  * @version 0.1
  */
-class KookaView : public QObject
+class KookaView : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     typedef enum { MirrorVertical, MirrorHorizontal, MirrorBoth } MirrorType;
     typedef enum { StatusTemp, StatusImage } StatusBarIDs;
@@ -76,7 +77,7 @@ public:
     /**
      * Default constructor
      */
-    KookaView(KParts::DockMainWindow *parent, const TQCString& deviceToUse);
+    KookaView(KParts::DockMainWindow *tqparent, const TQCString& deviceToUse);
 
     /**
      * Destructor

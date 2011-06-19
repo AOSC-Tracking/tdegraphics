@@ -100,7 +100,7 @@ namespace {
     {
 	if ( version < TQString::number( 6.53 ) ) return TQString::number( 6.53 );
 	if ( version[ 0 ] == '7' && version < TQString::number( 7.04 ) ) return TQString::number( 7.05 );
-	return TQString::null;
+	return TQString();
     }
     // This function should contain all the gs version specific workarounds.
     void redoGSDetection() 
@@ -114,13 +114,13 @@ namespace {
 			"which are impossible to resolve. Please upgrade to a newer version.\n"
 			"KGhostView will try to work with it, but it may not display any files at all.\n"
 			"Version %2 seems to be appropriate on your system, although newer versions will work as well." )
-		    .arg( version )
-		    .arg( recommended ) );
+		    .tqarg( version )
+		    .tqarg( recommended ) );
 	}
 	if ( version < TQString::number( 7.00 ) ) 
 	{
 	    TQStringList arguments = TQStringList::split( ' ', Configuration::antialiasingArguments() );
-	    arguments.remove( TQString::fromLatin1( "-dMaxBitmap=10000000" ) );
+	    arguments.remove( TQString::tqfromLatin1( "-dMaxBitmap=10000000" ) );
 	    TQString antiAliasArgs = arguments.join( " " );
 
 	    Configuration::setAntialiasingArguments( antiAliasArgs );
@@ -140,9 +140,9 @@ void  ConfigDialog::showSettings( KGVPart* main ) {
     KConfigDialog* dialog = new KConfigDialog( 0, name,
 	    Configuration::self(), KDialogBase::IconList );
     dialog->addPage( new GeneralSettingsWidget( 0, "general-settings" ),
-	    i18n( "General" ), TQString::fromLatin1( "kghostview" ) );
+	    i18n( "General" ), TQString::tqfromLatin1( "kghostview" ) );
     GSSettingsWidget *gssw = new GSSettingsWidget( 0, "gs-settings" );
-    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), TQString::fromLatin1( "pdf" ) );
+    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), TQString::tqfromLatin1( "pdf" ) );
 
     gssw->setDetectedVersion(Configuration::version());
 

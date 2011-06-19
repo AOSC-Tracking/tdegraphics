@@ -44,8 +44,8 @@ static int eraserSizes [] = {2, 3, 5, 9, 17, 29};
 static const int numEraserSizes = int (sizeof (eraserSizes) / sizeof (eraserSizes [0]));
 
 
-kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *parent, const char *name)
-    : kpToolWidgetBase (parent, name)
+kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *tqparent, const char *name)
+    : kpToolWidgetBase (tqparent, name)
 {
     setInvertSelectedPixmap ();
 
@@ -60,29 +60,29 @@ kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *parent, const char *na
         int s = eraserSizes [i];
 
         cursorPixmap->resize (s, s);
-        cursorPixmap->fill (Qt::black);
+        cursorPixmap->fill (TQt::black);
 
 
         TQPixmap previewPixmap (s, s);
         if (i < 3)
         {
-            // HACK: kpToolWidgetBase's layout code sucks and gives uneven spacing
+            // HACK: kpToolWidgetBase's tqlayout code sucks and gives uneven spacing
             previewPixmap.resize ((width () - 4) / 3, 9);
         }
 
         TQPainter painter (&previewPixmap);
         TQRect rect ((previewPixmap.width () - s) / 2, (previewPixmap.height () - s) / 2, s, s);
-        painter.fillRect (rect, Qt::black);
+        painter.fillRect (rect, TQt::black);
         painter.end ();
 
-        TQBitmap mask (previewPixmap.width (), previewPixmap.height ());
-        mask.fill (Qt::color0/*transparent*/);
+        TQBitmap tqmask (previewPixmap.width (), previewPixmap.height ());
+        tqmask.fill (TQt::color0/*transparent*/);
 
-        TQPainter maskPainter (&mask);
-        maskPainter.fillRect (rect, Qt::color1/*opaque*/);
-        maskPainter.end ();
+        TQPainter tqmaskPainter (&tqmask);
+        tqmaskPainter.fillRect (rect, TQt::color1/*opaque*/);
+        tqmaskPainter.end ();
 
-        previewPixmap.setMask (mask);
+        previewPixmap.setMask (tqmask);
 
 
         addOption (previewPixmap, i18n ("%1x%2").arg (s).arg (s)/*tooltip*/);
@@ -115,7 +115,7 @@ TQPixmap kpToolWidgetEraserSize::cursorPixmap (const kpColor &color) const
     // TODO: why are we even storing m_cursorPixmaps?
     TQPixmap pixmap = m_cursorPixmaps [selected ()];
     if (color.isOpaque ())
-        pixmap.fill (color.toQColor ());
+        pixmap.fill (color.toTQColor ());
 
 
     bool showBorder = (pixmap.width () > 2 && pixmap.height () > 2);
@@ -123,26 +123,26 @@ TQPixmap kpToolWidgetEraserSize::cursorPixmap (const kpColor &color) const
     if (showBorder)
     {
         TQPainter painter (&pixmap);
-        painter.setPen (Qt::black);
+        painter.setPen (TQt::black);
         painter.drawRect (pixmap.rect ());
     }
 
 
     if (color.isTransparent ())
     {
-        TQBitmap maskBitmap (pixmap.width (), pixmap.height ());
-        maskBitmap.fill (Qt::color0/*transparent*/);
+        TQBitmap tqmaskBitmap (pixmap.width (), pixmap.height ());
+        tqmaskBitmap.fill (TQt::color0/*transparent*/);
 
 
         if (showBorder)
         {
-            TQPainter maskBitmapPainter (&maskBitmap);
-            maskBitmapPainter.setPen (Qt::color1/*opaque*/);
-            maskBitmapPainter.drawRect (maskBitmap.rect ());
+            TQPainter tqmaskBitmapPainter (&tqmaskBitmap);
+            tqmaskBitmapPainter.setPen (TQt::color1/*opaque*/);
+            tqmaskBitmapPainter.drawRect (tqmaskBitmap.rect ());
         }
 
 
-        pixmap.setMask (maskBitmap);
+        pixmap.setMask (tqmaskBitmap);
     }
 
 

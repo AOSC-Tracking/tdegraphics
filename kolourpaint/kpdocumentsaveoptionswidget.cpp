@@ -62,15 +62,15 @@ const TQSize kpDocumentSaveOptionsPreviewDialog::s_pixmapLabelMinimumSize (25, 2
 
 
 kpDocumentSaveOptionsPreviewDialog::kpDocumentSaveOptionsPreviewDialog (
-        TQWidget *parent,
+        TQWidget *tqparent,
         const char *name)
-    : TQWidget (parent, name,
-               Qt::WType_TopLevel |
-               Qt::WStyle_Customize |
-                   Qt::WStyle_DialogBorder |
-                   Qt::WStyle_Title),
+    : TQWidget (tqparent, name,
+               TQt::WType_TopLevel |
+               TQt::WStyle_Customize |
+                   TQt::WStyle_DialogBorder |
+                   TQt::WStyle_Title),
 #if 0
-KDialogBase (parent, name, false/*non-modal*/,
+KDialogBase (tqparent, name, false/*non-modal*/,
                    i18n ("Save Preview"),
                    0/*no buttons*/),
 #endif
@@ -94,7 +94,7 @@ KDialogBase (parent, name, false/*non-modal*/,
 
 
     lay->addWidget (m_filePixmapLabel, 0, 0);
-    lay->addWidget (m_fileSizeLabel, 1, 0, Qt::AlignHCenter);
+    lay->addWidget (m_fileSizeLabel, 1, 0, TQt::AlignHCenter);
 
 
     lay->setRowStretch (0, 1);
@@ -134,7 +134,7 @@ void kpDocumentSaveOptionsPreviewDialog::setFilePixmapAndSize (const TQPixmap &p
 
     const int pixmapSize = kpPixmapFX::pixmapSize (pixmap);
     const int percent = pixmapSize ?
-                            QMAX (1, fileSize * 100 / pixmapSize) :
+                            TQMAX (1, fileSize * 100 / pixmapSize) :
                             0;
 #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
     kdDebug () << "kpDocumentSaveOptionsPreviewDialog::setFilePixmapAndSize()"
@@ -173,9 +173,9 @@ void kpDocumentSaveOptionsPreviewDialog::updatePixmapPreview ()
 
     if (m_filePixmap)
     {
-        int maxNewWidth = QMIN (m_filePixmap->width (),
+        int maxNewWidth = TQMIN (m_filePixmap->width (),
                                 m_filePixmapLabel->width ()),
-            maxNewHeight = QMIN (m_filePixmap->height (),
+            maxNewHeight = TQMIN (m_filePixmap->height (),
                                  m_filePixmapLabel->height ());
 
         double keepsAspect = kpToolPreviewDialog::aspectScale (
@@ -229,7 +229,7 @@ void kpDocumentSaveOptionsPreviewDialog::updatePixmapPreview ()
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDocumentSaveOptionsPreviewDialog::closeEvent (TQCloseEvent *e)
 {
 #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
@@ -241,7 +241,7 @@ void kpDocumentSaveOptionsPreviewDialog::closeEvent (TQCloseEvent *e)
     emit finished ();
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDocumentSaveOptionsPreviewDialog::moveEvent (TQMoveEvent *e)
 {
 #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
@@ -253,7 +253,7 @@ void kpDocumentSaveOptionsPreviewDialog::moveEvent (TQMoveEvent *e)
     emit moved ();
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDocumentSaveOptionsPreviewDialog::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
@@ -270,9 +270,9 @@ kpDocumentSaveOptionsWidget::kpDocumentSaveOptionsWidget (
         const TQPixmap &docPixmap,
         const kpDocumentSaveOptions &saveOptions,
         const kpDocumentMetaInfo &metaInfo,
-        TQWidget *parent, const char *name)
-    : TQWidget (parent, name),
-      m_visualParent (parent)
+        TQWidget *tqparent, const char *name)
+    : TQWidget (tqparent, name),
+      m_visualParent (tqparent)
 {
     init ();
     setDocumentSaveOptions (saveOptions);
@@ -281,9 +281,9 @@ kpDocumentSaveOptionsWidget::kpDocumentSaveOptionsWidget (
 }
 
 kpDocumentSaveOptionsWidget::kpDocumentSaveOptionsWidget (
-        TQWidget *parent, const char *name)
-    : TQWidget (parent, name),
-      m_visualParent (parent)
+        TQWidget *tqparent, const char *name)
+    : TQWidget (tqparent, name),
+      m_visualParent (tqparent)
 {
     init ();
 }
@@ -320,15 +320,15 @@ void kpDocumentSaveOptionsWidget::init ()
 
     TQHBoxLayout *lay = new TQHBoxLayout (this, 0/*margin*/, KDialog::spacingHint ());
 
-    lay->addWidget (m_colorDepthLabel, 0/*stretch*/, Qt::AlignLeft);
+    lay->addWidget (m_colorDepthLabel, 0/*stretch*/, TQt::AlignLeft);
     lay->addWidget (m_colorDepthCombo, 0/*stretch*/);
 
     lay->addWidget (m_colorDepthSpaceWidget, 1/*stretch*/);
 
-    lay->addWidget (m_qualityLabel, 0/*stretch*/, Qt::AlignLeft);
+    lay->addWidget (m_qualityLabel, 0/*stretch*/, TQt::AlignLeft);
     lay->addWidget (m_qualityInput, 2/*stretch*/);
 
-    lay->addWidget (m_previewButton, 0/*stretch*/, Qt::AlignRight);
+    lay->addWidget (m_previewButton, 0/*stretch*/, TQt::AlignRight);
 
 
     connect (m_colorDepthCombo, TQT_SIGNAL (activated (int)),
@@ -704,17 +704,17 @@ void kpDocumentSaveOptionsWidget::setMode (Mode mode)
     // SYNC: HACK: When changing between color depth and quality widgets,
     //       we change the height of "this", causing the text on the labels
     //       to move but the first instance of the text doesn't get erased.
-    //       Qt bug.
-    TQTimer::singleShot (0, this, TQT_SLOT (repaintLabels ()));
+    //       TQt bug.
+    TQTimer::singleShot (0, this, TQT_SLOT (tqrepaintLabels ()));
 }
 
 // protected slot
-void kpDocumentSaveOptionsWidget::repaintLabels ()
+void kpDocumentSaveOptionsWidget::tqrepaintLabels ()
 {
     if (mode () != Quality)
-        m_colorDepthLabel->repaint ();
+        m_colorDepthLabel->tqrepaint ();
     if (mode () == Quality)
-        m_qualityLabel->repaint ();
+        m_qualityLabel->tqrepaint ();
 }
 
 
@@ -767,7 +767,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
         if (m_previewDialogLastRelativeGeometry.isEmpty ())
         {
         #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-            kdDebug () << "\tread cfg preview dialog last rel geometry" << endl;
+            kdDebug () << "\tread cfg preview dialog last rel tqgeometry" << endl;
         #endif
             KConfigGroupSaver cfgGroupSaver (KGlobal::config (), kpSettingsGroupPreviewSave);
             KConfigBase *cfg = cfgGroupSaver.config ();
@@ -826,7 +826,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
 
 
     #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-        kdDebug () << "\tgeometry after show="
+        kdDebug () << "\ttqgeometry after show="
                    << TQRect (m_previewDialog->x (), m_previewDialog->y (),
                               m_previewDialog->width (), m_previewDialog->height ())
                    << endl;
@@ -852,9 +852,9 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
         cfg->sync ();
 
     #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-        kdDebug () << "\tsaving preview geometry "
+        kdDebug () << "\tsaving preview tqgeometry "
                    << m_previewDialogLastRelativeGeometry
-                   << " (Qt would have us believe "
+                   << " (TQt would have us believe "
                    << kpWidgetMapper::fromGlobal (m_visualParent,
                           TQRect (m_previewDialog->x (), m_previewDialog->y (),
                                  m_previewDialog->width (), m_previewDialog->height ()))
@@ -891,14 +891,14 @@ void kpDocumentSaveOptionsWidget::updatePreview ()
     m_updatePreviewTimer->stop ();
 
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     TQByteArray data;
 
     TQBuffer buffer (data);
     buffer.open (IO_WriteOnly);
     kpDocument::savePixmapToDevice (*m_documentPixmap,
-                                    &buffer,
+                                    TQT_TQIODEVICE(&buffer),
                                     documentSaveOptions (),
                                     m_documentMetaInfo,
                                     false/*no lossy prompt*/,
@@ -942,7 +942,7 @@ void kpDocumentSaveOptionsWidget::updatePreviewDialogLastRelativeGeometry ()
     else
     {
     #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-        kdDebug () << "\tnot visible - ignoring geometry" << endl;
+        kdDebug () << "\tnot visible - ignoring tqgeometry" << endl;
     #endif
     }
 }

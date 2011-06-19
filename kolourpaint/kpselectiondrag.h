@@ -35,9 +35,10 @@
 #include <kpselection.h>
 
 
-class kpSelectionDrag : public QImageDrag
+class kpSelectionDrag : public TQImageDrag
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpSelectionDrag (TQWidget *dragSource = 0, const char *name = 0);
@@ -55,7 +56,7 @@ protected:
 public:
     virtual const char *format (int which = 0) const;
     virtual bool provides (const char *mimeType) const;
-    virtual TQByteArray encodedData (const char *mimeType) const;
+    virtual TQByteArray tqencodedData (const char *mimeType) const;
 
     static bool canDecode (const TQMimeSource *e);
     static bool decode (const TQMimeSource *e, TQImage &img);

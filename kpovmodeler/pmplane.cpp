@@ -82,11 +82,11 @@ void PMPlane::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMPlane::metaObject( ) const
+PMMetaObject* PMPlane::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Plane", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Plane", Base::tqmetaObject( ),
                                         createNewPlane );
       s_pMetaObject->addProperty(
          new PMPlaneProperty( "normal", &PMPlane::setNormal, &PMPlane::normal ) );
@@ -126,9 +126,9 @@ void PMPlane::setDistance( double distance )
    }
 }
 
-PMDialogEditBase* PMPlane::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMPlane::editWidget( TQWidget* tqparent ) const
 {
-   return new PMPlaneEdit( parent );
+   return new PMPlaneEdit( tqparent );
 }
 
 void PMPlane::restoreMemento( PMMemento* s )

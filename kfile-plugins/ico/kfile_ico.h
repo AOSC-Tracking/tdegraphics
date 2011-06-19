@@ -27,9 +27,10 @@ class TQStringList;
 class KIcoPlugin: public KFilePlugin
 {
     Q_OBJECT
+  TQ_OBJECT
     
 public:
-    KIcoPlugin( TQObject *parent, const char *name, const TQStringList& args );
+    KIcoPlugin( TQObject *tqparent, const char *name, const TQStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

@@ -31,11 +31,11 @@
 typedef KGenericFactory<KViewPresenterConfig, TQWidget> KViewPresenterConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewpresenterconfig, KViewPresenterConfigFactory( "kcm_kviewpresenterconfig" ) )
 
-KViewPresenterConfig::KViewPresenterConfig( TQWidget * parent, const char *, const TQStringList & args )
-	: KCModule( KViewPresenterConfigFactory::instance(), parent, args )
+KViewPresenterConfig::KViewPresenterConfig( TQWidget * tqparent, const char *, const TQStringList & args )
+	: KCModule( KViewPresenterConfigFactory::instance(), tqparent, args )
 {
-	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
-	layout->setAutoAdd( true );
+	TQBoxLayout * tqlayout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	tqlayout->setAutoAdd( true );
 
 	m_pCheckBox = new TQCheckBox( "This is only for testing...", this );
 	connect( m_pCheckBox, TQT_SIGNAL( clicked() ), this, TQT_SLOT( checkChanged() ) );

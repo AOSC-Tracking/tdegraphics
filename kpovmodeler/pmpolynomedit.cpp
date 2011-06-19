@@ -29,8 +29,8 @@
 #include <klocale.h>
 #include <kdialog.h>
 
-PMPolynomEdit::PMPolynomEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMPolynomEdit::PMPolynomEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
    m_currentOrder = 0;
@@ -96,8 +96,8 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
    {
       if( m_currentOrder > 0 )
       {
-         if( m_pPolyWidget->layout( ) )
-            delete m_pPolyWidget->layout( );
+         if( m_pPolyWidget->tqlayout( ) )
+            delete m_pPolyWidget->tqlayout( );
          
          m_labels.setAutoDelete( true );
          m_labels.clear( );

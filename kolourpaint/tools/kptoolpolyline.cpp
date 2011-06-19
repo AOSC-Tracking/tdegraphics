@@ -35,7 +35,7 @@ kpToolPolyline::kpToolPolyline (kpMainWindow *mainWindow)
     : kpToolPolygon (Polyline,
                      i18n ("Connected Lines"),
                      i18n ("Draws connected lines"),
-                     Qt::Key_N,
+                     TQt::Key_N,
                      mainWindow, "tool_polyline")
 {
 }

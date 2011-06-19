@@ -27,7 +27,7 @@ class KPDFLink
         // get link type (inherited classes mustreturn an unique identifier)
         enum LinkType { Goto, Execute, Browse, Action, Movie };
         virtual LinkType linkType() const = 0;
-        virtual TQString linkTip() const { return TQString::null; }
+        virtual TQString linkTip() const { return TQString(); }
 
         // virtual destructor (remove warnings)
         virtual ~KPDFLink();

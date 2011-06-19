@@ -50,11 +50,11 @@ const char* PMLibraryIconDrag::format( int i ) const
    }
 }
 
-TQByteArray PMLibraryIconDrag::encodedData( const char* mime ) const
+TQByteArray PMLibraryIconDrag::tqencodedData( const char* mime ) const
 {
    TQByteArray a;
    if ( TQString( mime ) == "application/x-qiconlist" )
-      a = TQIconDrag::encodedData( mime );
+      a = TQIconDrag::tqencodedData( mime );
    else if ( TQString( mime ) == "text/sublib-list" )
    {
       TQString s , l;
@@ -80,7 +80,7 @@ bool PMLibraryIconDrag::canDecode( TQMimeSource* e )
 
 bool PMLibraryIconDrag::decode( TQMimeSource* e, TQStringList& strList, TQValueList<bool>& subLibList )
 {
-   TQByteArray a = e->encodedData( "text/sublib-list" );
+   TQByteArray a = e->tqencodedData( "text/sublib-list" );
    if( a.isEmpty( ) )
       return false;
 
@@ -104,8 +104,8 @@ void PMLibraryIconDrag::append( const TQIconDragItem &item, const TQRect &pr,
    m_subLibs.append( isSubLibrary );
 }
 
-PMLibraryIconView::PMLibraryIconView( TQWidget* parent, const char* name )
-      : KIconView( parent, name )
+PMLibraryIconView::PMLibraryIconView( TQWidget* tqparent, const char* name )
+      : KIconView( tqparent, name )
 {
    m_pLibrary = NULL;
    m_pCurrentLibrary = NULL;
@@ -192,15 +192,15 @@ TQDragObject* PMLibraryIconView::dragObject( )
    return drag;
 }
 
-PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *parent, const TQString &text, const TQString& path, bool isSubLibrary )
-   : KIconViewItem( parent, text )
+PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *tqparent, const TQString &text, const TQString& path, bool isSubLibrary )
+   : KIconViewItem( tqparent, text )
 {
    m_path = path;
    m_isSubLibrary = isSubLibrary;
 }
 
-PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *parent, const TQString &text, const TQImage& image, const TQString& path, bool isSubLibrary )
-   : KIconViewItem( parent, text, image )
+PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *tqparent, const TQString &text, const TQImage& image, const TQString& path, bool isSubLibrary )
+   : KIconViewItem( tqparent, text, image )
 {
    m_path = path;
    m_isSubLibrary = isSubLibrary;
@@ -220,10 +220,10 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
    TQValueList<bool> subLibList;
    if( m_isSubLibrary && PMLibraryIconDrag::decode( e, pathList, subLibList ) )
    {
-      PMLibraryIconView* source = static_cast<PMLibraryIconView*>( e->source( )->parentWidget( ) );
-      PMLibraryHandle* parentLib = source->library( );
+      PMLibraryIconView* source = static_cast<PMLibraryIconView*>( e->source( )->tqparentWidget( ) );
+      PMLibraryHandle* tqparentLib = source->library( );
       PMLibraryHandle newParentLib = PMLibraryHandle( m_path );
-      if ( parentLib->isReadOnly() || newParentLib.isReadOnly() )
+      if ( tqparentLib->isReadOnly() || newParentLib.isReadOnly() )
       {
          e->ignore();
          return;
@@ -238,7 +238,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
             if( subLibList[i] )
             {
                TQString newpath = newPath( path, true );
-               if( parentLib->deleteSubLibrary( path ) == PMLibraryHandle::Ok )
+               if( tqparentLib->deleteSubLibrary( path ) == PMLibraryHandle::Ok )
                {
                   PMLibraryHandle lib = PMLibraryHandle( path );
                   if( newParentLib.addSubLibrary( newpath, lib.name() ) == PMLibraryHandle::Ok )
@@ -249,7 +249,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
                   else
                   {
                      success = false;
-                     parentLib->addSubLibrary( path, lib.name( ) );
+                     tqparentLib->addSubLibrary( path, lib.name( ) );
                   }
                }
                else
@@ -258,7 +258,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
             else
             {
                TQString newpath = newPath( path, false );
-               if( parentLib->deleteObject( path ) == PMLibraryHandle::Ok )
+               if( tqparentLib->deleteObject( path ) == PMLibraryHandle::Ok )
                {
                   PMLibraryObject obj = PMLibraryObject( path );
                   if( newParentLib.addObject( newpath, obj.name() ) == PMLibraryHandle::Ok )
@@ -268,7 +268,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
                   else
                   {
                      success = false;
-                     parentLib->addObject( path, obj.name( ) );
+                     tqparentLib->addObject( path, obj.name( ) );
                   }
                }
                else
@@ -277,7 +277,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
 
             if( !success )
             {
-               KMessageBox::error( 0, i18n( "Error moving \"%1\" to \"%2\"" ).arg( path ).arg( m_path ) );
+               KMessageBox::error( 0, i18n( "Error moving \"%1\" to \"%2\"" ).tqarg( path ).tqarg( m_path ) );
                e->ignore( );
                return;
             }

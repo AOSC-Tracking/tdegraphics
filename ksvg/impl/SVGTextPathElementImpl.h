@@ -41,7 +41,7 @@ public:
 	SVGAnimatedEnumerationImpl *spacing() const;
 
 	virtual void setAttributes();
-	virtual T2P::GlyphLayoutParams *layoutParams() const;
+	virtual T2P::GlyphLayoutParams *tqlayoutParams() const;
 
 private:
 	SVGAnimatedLengthImpl *m_startOffset;

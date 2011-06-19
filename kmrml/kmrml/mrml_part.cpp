@@ -90,14 +90,14 @@ KInstance * PartFactory::instance()
     return s_instance;
 }
 
-KParts::Part * PartFactory::createPartObject( TQWidget *parentWidget,
+KParts::Part * PartFactory::createPartObject( TQWidget *tqparentWidget,
                                               const char *widgetName,
-                                              TQObject *parent,
+                                              TQObject *tqparent,
                                               const char *name,
                                               const char *,
                                               const TQStringList& args )
 {
-    return new MrmlPart( parentWidget, widgetName, parent, name, args );
+    return new MrmlPart( tqparentWidget, widgetName, tqparent, name, args );
 }
 
 
@@ -111,10 +111,10 @@ KParts::Part * PartFactory::createPartObject( TQWidget *parentWidget,
 
 uint MrmlPart::s_sessionId = 0;
 
-MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
-                    TQObject *parent, const char *name,
+MrmlPart::MrmlPart( TQWidget *tqparentWidget, const char * /* widgetName */,
+                    TQObject *tqparent, const char *name,
                     const TQStringList& /* args */ )
-    : KParts::ReadOnlyPart( parent, name ),
+    : KParts::ReadOnlyPart( tqparent, name ),
       m_job( 0L ),
       m_status( NeedCollection )
 {
@@ -126,7 +126,7 @@ MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
     KConfig *config = PartFactory::instance()->config();
     config->setGroup("MRML Settings");
 
-    TQVBox *box = new TQVBox( parentWidget, "main mrml box" );
+    TQVBox *box = new TQVBox( tqparentWidget, "main mrml box" );
     m_view = new MrmlView( box, "MrmlView" );
     connect( m_view, TQT_SIGNAL( activated( const KURL&, ButtonState )),
              this, TQT_SLOT( slotActivated( const KURL&, ButtonState )));
@@ -151,15 +151,15 @@ MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
     // prevent crashes when the connection to the server fails
     m_collectionCombo->setCollections( &m_collections );
 
-    m_algoButton = new TQPushButton( TQString::null, m_panel );
+    m_algoButton = new TQPushButton( TQString(), m_panel );
     m_algoButton->setPixmap( SmallIcon("configure") );
-    m_algoButton->setFixedSize( m_algoButton->sizeHint() );
+    m_algoButton->setFixedSize( m_algoButton->tqsizeHint() );
     connect( m_algoButton, TQT_SIGNAL( clicked() ),
              TQT_SLOT( slotConfigureAlgorithm() ));
     TQToolTip::add( m_algoButton, i18n("Configure algorithm") );
 
     TQWidget *spacer = new TQWidget( m_panel );
-    spacer->setSizePolicy( TQSizePolicy( TQSizePolicy::MinimumExpanding,
+    spacer->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::MinimumExpanding,
                                         TQSizePolicy::Minimum ) );
 
     int resultSize = config->readNumEntry( "Result-size", 20 );
@@ -170,15 +170,15 @@ MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
     TQVBox *tmp = new TQVBox( m_panel );
     m_random = new TQCheckBox( i18n("Random search"), tmp );
 
-    m_startButton = new TQPushButton( TQString::null, tmp );
+    m_startButton = new TQPushButton( TQString(), tmp );
     connect( m_startButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotStartClicked() ));
-    setStatus( NeedCollection );
+    settqStatus( NeedCollection );
 
     setWidget( box );
 
     // setXMLFile( "mrml_part.rc" );
 
-    slotSetStatusBar( TQString::null );
+    slotSetStatusBar( TQString() );
 
     enableServerDependentWidgets( false );
 }
@@ -206,7 +206,7 @@ void MrmlPart::initCollections( const TQDomElement& elem )
         KMessageBox::information( widget(),
                                i18n("There is no image collection available\n"
                                     "at %1.\n"), i18n("No Image Collection"));
-        setStatus( NeedCollection );
+        settqStatus( NeedCollection );
     }
     else
         m_collectionCombo->updateGeometry(); // adjust the entire grid
@@ -229,7 +229,7 @@ bool MrmlPart::openURL( const KURL& url )
 
     m_url = url;
     TQString host = url.host().isEmpty() ?
-                   TQString::fromLatin1("localhost") : url.host();
+                   TQString::tqfromLatin1("localhost") : url.host();
 
     m_hostCombo->setCurrentItem( host );
 
@@ -285,8 +285,8 @@ bool MrmlPart::openURL( const KURL& url )
                  == KMessageBox::Yes )
             {
                 KApplication::kdeinitExec( "kcmshell",
-                                           TQString::fromLatin1("kcmkmrml"));
-                setStatus( NeedCollection );
+                                           TQString::tqfromLatin1("kcmkmrml"));
+                settqStatus( NeedCollection );
                 return false;
             }
         }
@@ -308,9 +308,9 @@ void MrmlPart::contactServer( const KURL& url )
     m_job->addMetaData( MrmlShared::kio_task(), MrmlShared::kio_initialize() );
 
     TQString host = url.host().isEmpty() ?
-                   TQString::fromLatin1("localhost") : url.host();
+                   TQString::tqfromLatin1("localhost") : url.host();
 
-    slotSetStatusBar( i18n("Connecting to indexing server at %1...").arg( host ));
+    slotSetStatusBar( i18n("Connecting to indexing server at %1...").tqarg( host ));
 }
 
 //
@@ -325,11 +325,11 @@ void MrmlPart::downloadReferenceFiles( const KURL::List& downloadList )
     for ( ; it != downloadList.end(); it++ )
     {
         TQString extension;
-        int index = (*it).fileName().findRev( '.' );
+        int index = (*it).fileName().tqfindRev( '.' );
         if ( index != -1 )
             extension = (*it).fileName().mid( index );
 
-        KTempFile tmpFile( TQString::null, extension );
+        KTempFile tmpFile( TQString(), extension );
         if ( tmpFile.status() != 0 )
         {
             kdWarning() << "Can't create temporary file, skipping: " << *it << endl;
@@ -376,7 +376,7 @@ bool MrmlPart::closeURL()
         m_job = 0L;
     }
 
-    setStatus( NeedCollection );
+    settqStatus( NeedCollection );
 
     return true;
 }
@@ -400,7 +400,7 @@ KIO::TransferJob * MrmlPart::transferJob( const KURL& url )
 
     emit started( job );
     emit setWindowCaption( url.prettyURL() );
-    setStatus( InProgress );
+    settqStatus( InProgress );
 
     return job;
 }
@@ -410,7 +410,7 @@ void MrmlPart::slotResult( KIO::Job *job )
     if ( job == m_job )
         m_job = 0L;
 
-    slotSetStatusBar( TQString::null );
+    slotSetStatusBar( TQString() );
 
     if ( !job->error() )
         emit completed();
@@ -423,7 +423,7 @@ void MrmlPart::slotResult( KIO::Job *job )
     bool auto_random = m_view->isEmpty() && m_queryList.isEmpty();
     m_random->setChecked( auto_random );
     m_random->setEnabled( !auto_random );
-    setStatus( job->error() ? NeedCollection : CanSearch );
+    settqStatus( job->error() ? NeedCollection : CanSearch );
 
     if ( !job->error() && !m_queryList.isEmpty() ) {
         // we have a connection and we got a list of relevant URLs to query for
@@ -495,7 +495,7 @@ void MrmlPart::parseMrml( TQDomDocument& doc )
                 else if ( tagName == "error" ) {
                     KMessageBox::information( widget(),
                                        i18n("Server returned error:\n%1\n")
-                                       .arg( elem.attribute( "message" )),
+                                       .tqarg( elem.attribute( "message" )),
                                               i18n("Server Error") );
                 }
 
@@ -560,8 +560,8 @@ void MrmlPart::slotStartClicked()
     // cut off an eventual query and reference from the url, when the user
     // performs a real query (otherwise restoreState() would restore and
     // re-do the query from the URL
-    m_url.setRef( TQString::null );
-    m_url.setQuery( TQString::null );
+    m_url.setRef( TQString() );
+    m_url.setQuery( TQString() );
 
     createQuery();
     m_browser->openURLNotify();
@@ -677,7 +677,7 @@ void MrmlPart::performQuery( TQDomDocument& doc )
             queryStep.setAttribute("query-type", "at-random");
 
             // remove user-relevance-element-list element for random search
-            relevanceList.parentNode().removeChild( relevanceList );
+            relevanceList.tqparentNode().removeChild( relevanceList );
         }
     }
     else
@@ -705,13 +705,13 @@ void MrmlPart::slotSetStatusBar( const TQString& text )
 
 void MrmlPart::slotActivated( const KURL& url, ButtonState button )
 {
-    if ( button == LeftButton )
+    if ( button == Qt::LeftButton )
         emit m_browser->openURLRequest( url );
-    else if ( button == MidButton )
+    else if ( button == Qt::MidButton )
         emit m_browser->createNewWindow( url );
-    else if ( button == RightButton ) {
+    else if ( button == Qt::RightButton ) {
         // enableExtensionActions( url, true ); // for now
-        emit m_browser->popupMenu( TQCursor::pos(), url, TQString::null );
+        emit m_browser->popupMenu( TQCursor::pos(), url, TQString() );
         // enableExtensionActions( url, false );
     }
 }
@@ -776,7 +776,7 @@ void MrmlPart::slotHostComboActivated( const TQString& host )
     openURL( settings.getUrl() );
 }
 
-void MrmlPart::setStatus( Status status )
+void MrmlPart::settqStatus( tqStatus status )
 {
     switch ( status )
     {

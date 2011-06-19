@@ -24,8 +24,8 @@
 #include <tqcombobox.h>
 #include <klocale.h>
 
-PMCSGEdit::PMCSGEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMCSGEdit::PMCSGEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -34,17 +34,17 @@ void PMCSGEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    m_pTypeCombo = new TQComboBox( false, this );
    m_pTypeCombo->insertItem( i18n( "Union" ) );
    m_pTypeCombo->insertItem( i18n( "Intersection" ) );
    m_pTypeCombo->insertItem( i18n( "Difference" ) );
    m_pTypeCombo->insertItem( i18n( "Merge" ) );
    
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( new TQLabel( i18n( "Type:" ), this ) );
-   layout->addWidget( m_pTypeCombo );
-   layout->addStretch( 1 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( new TQLabel( i18n( "Type:" ), this ) );
+   tqlayout->addWidget( m_pTypeCombo );
+   tqlayout->addStretch( 1 );
 
    connect( m_pTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotTypeSelected( int ) ) );
 }

@@ -100,7 +100,7 @@ void kpToolSkewCommand::execute ()
         return;
 
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
 
     m_oldPixmapPtr = new TQPixmap ();
@@ -181,7 +181,7 @@ void kpToolSkewCommand::unexecute ()
         return;
 
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
 
     TQPixmap oldPixmap = *m_oldPixmapPtr;
@@ -218,13 +218,13 @@ int kpToolSkewDialog::s_lastHorizontalAngle = 0,
     kpToolSkewDialog::s_lastVerticalAngle = 0;
 
 
-kpToolSkewDialog::kpToolSkewDialog (bool actOnSelection, kpMainWindow *parent,
+kpToolSkewDialog::kpToolSkewDialog (bool actOnSelection, kpMainWindow *tqparent,
                                     const char *name)
     : kpToolPreviewDialog (kpToolPreviewDialog::AllFeatures,
                            false/*don't reserve top row*/,
                            actOnSelection ? i18n ("Skew Selection") : i18n ("Skew Image"),
                            i18n ("After Skew:"),
-                           actOnSelection, parent, name)
+                           actOnSelection, tqparent, name)
 {
     // Too confusing - disable for now
     s_lastHorizontalAngle = s_lastVerticalAngle = 0;

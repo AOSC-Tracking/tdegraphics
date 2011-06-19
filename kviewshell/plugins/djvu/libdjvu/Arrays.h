@@ -319,7 +319,7 @@ public:
    /** Erases the array contents. All elements in the array are destroyed.  
        The valid subscript range is set to the empty range. */
    void empty();
-   /** Extends the subscript range so that is contains #n#.
+   /** Extends the subscript range so that is tqcontains #n#.
        This function does nothing if #n# is already int the valid subscript range.
        If the valid range was empty, both the lower bound and the upper bound
        are set to #n#.  Otherwise the valid subscript range is extended

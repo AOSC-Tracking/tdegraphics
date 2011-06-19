@@ -60,17 +60,18 @@ public:
 
 /**
  * Base class for configuration widgets for view types
- * for the layout settings dialog page
+ * for the tqlayout settings dialog page
  */
-class PMViewOptionsWidget : public QWidget
+class PMViewOptionsWidget : public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMViewOptionsWidget( TQWidget* parent, const char* name = 0 )
-         : TQWidget( parent, name )
+   PMViewOptionsWidget( TQWidget* tqparent, const char* name = 0 )
+         : TQWidget( tqparent, name )
    {
    }
 
@@ -87,15 +88,16 @@ signals:
  * Each view type has to implement this interface. Handles the
  * config loading and saving
  */
-class PMViewBase : public QWidget
+class PMViewBase : public TQWidget
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMViewBase( TQWidget* parent, const char* name = 0, WFlags f = 0 )
-         : TQWidget( parent, name, f )
+   PMViewBase( TQWidget* tqparent, const char* name = 0, WFlags f = 0 )
+         : TQWidget( tqparent, name, f )
    {
    }
    /**

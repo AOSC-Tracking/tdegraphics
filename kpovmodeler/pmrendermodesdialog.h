@@ -39,11 +39,12 @@ class PMFloatEdit;
 class PMRenderModesDialog : public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Creates a dialog for the modes list
     */
-   PMRenderModesDialog( PMRenderModeList* modes, TQWidget* parent = 0, const char* name = 0 );
+   PMRenderModesDialog( PMRenderModeList* modes, TQWidget* tqparent = 0, const char* name = 0 );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );
@@ -107,11 +108,12 @@ private:
 class PMRenderModeDialog : public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Creates a dialog for the mode
     */
-   PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent = 0, const char* name = 0 );
+   PMRenderModeDialog( PMRenderMode* mode, TQWidget* tqparent = 0, const char* name = 0 );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );

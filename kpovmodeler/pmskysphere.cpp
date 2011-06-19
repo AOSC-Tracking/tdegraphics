@@ -44,11 +44,11 @@ PMSkySphere::~PMSkySphere( )
 {
 }
 
-PMMetaObject* PMSkySphere::metaObject( ) const
+PMMetaObject* PMSkySphere::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SkySphere", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "SkySphere", Base::tqmetaObject( ),
                                         createNewSkySphere );
    }
    return s_pMetaObject;
@@ -69,8 +69,8 @@ TQString PMSkySphere::description( ) const
    return i18n( "skysphere" );
 }
 
-PMDialogEditBase* PMSkySphere::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMSkySphere::editWidget( TQWidget* tqparent ) const
 {
-   return new PMSkySphereEdit( parent );
+   return new PMSkySphereEdit( tqparent );
 }
 

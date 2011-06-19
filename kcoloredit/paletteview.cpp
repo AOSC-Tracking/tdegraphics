@@ -21,8 +21,8 @@
 #include "paletteview.h"
 
 PaletteView::PaletteView(const int defaultCellWidth, const int defaultCellHeight, const int cellSpacing,
-	KColorEditView* view, TQWidget *parent, const char *name) :
-	TQFrame(parent, name, TQWidget::WResizeNoErase*0) {
+	KColorEditView* view, TQWidget *tqparent, const char *name) :
+	TQFrame(tqparent, name, TQWidget::WResizeNoErase*0) {
 	setFrameStyle(StyledPanel|Sunken);
 	setLineWidth(2);
 	TQGridLayout* topLayout = new TQGridLayout(this, 2, 2);
@@ -32,7 +32,7 @@ PaletteView::PaletteView(const int defaultCellWidth, const int defaultCellHeight
 	topLayout->setColStretch(0, 10);
 	topLayout->setColStretch(1, 0);
 	scrollBar = new TQScrollBar(this);
-	hScrollBar = new TQScrollBar(0, 1, 1, 1, 0, TQScrollBar::Horizontal, this);
+	hScrollBar = new TQScrollBar(0, 1, 1, 1, 0, Qt::Horizontal, this);
 	scrolledArea = new PaletteViewScrolledArea(defaultCellWidth,
 		defaultCellHeight, cellSpacing, scrollBar, hScrollBar, view, this);
 	connect(scrollBar, TQT_SIGNAL( valueChanged(int) ),

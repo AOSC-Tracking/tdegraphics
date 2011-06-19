@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -58,8 +58,8 @@
 #include "previewer.h"
 #include "kookaimage.h"
 
-FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name )
-   :KDialogBase( parent, name, true,
+FormatDialog::FormatDialog( TQWidget *tqparent, const TQString&, const char *name )
+   :KDialogBase( tqparent, name, true,
                  /* Tabbed,*/ i18n( "Kooka Save Assistant" ),
 		 Ok|Cancel, Ok )
 
@@ -116,7 +116,7 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
    Q_CHECK_PTR(l_help);
    l_help->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
    l_help->setText( i18n("-No format selected-" ));
-   l_help->setAlignment( AlignVCenter | AlignHCenter );
+   l_help->tqsetAlignment( AlignVCenter | AlignHCenter );
    l_help->setMinimumWidth(230);
 
    // Insert Selbox for subformat
@@ -176,7 +176,7 @@ void FormatDialog::check_subformat( const TQString & format )
 
 void FormatDialog::setSelectedFormat( TQString fo )
 {
-   TQListBoxItem *item = lb_format->findItem( fo );
+   TQListBoxItem *item = lb_format->tqfindItem( fo );
 
    if( item )
    {
@@ -208,18 +208,18 @@ TQCString FormatDialog::getSubFormat( ) const
 #include "formathelp.h"
 void FormatDialog::buildHelp( void )
 {
-   format_help.insert( TQString::fromLatin1("BMP"), HELP_BMP );
-   format_help.insert( TQString::fromLatin1("PNM"), HELP_PNM );
-   format_help.insert( TQString::fromLatin1("JPEG"), HELP_JPG );
-   format_help.insert( TQString::fromLatin1("JPG"), HELP_JPG );
-   format_help.insert( TQString::fromLatin1("EPS"), HELP_EPS );
+   format_help.insert( TQString::tqfromLatin1("BMP"), HELP_BMP );
+   format_help.insert( TQString::tqfromLatin1("PNM"), HELP_PNM );
+   format_help.insert( TQString::tqfromLatin1("JPEG"), HELP_JPG );
+   format_help.insert( TQString::tqfromLatin1("JPG"), HELP_JPG );
+   format_help.insert( TQString::tqfromLatin1("EPS"), HELP_EPS );
 }
 
 
 /* ********************************************************************** */
 
-ImgSaver::ImgSaver(  TQWidget *parent, const KURL dir_name )
-   : TQObject( parent )
+ImgSaver::ImgSaver(  TQWidget *tqparent, const KURL dir_name )
+   : TQObject( tqparent )
 {
 
    if( dir_name.isEmpty() || dir_name.protocol() != "file" )
@@ -250,8 +250,8 @@ ImgSaver::ImgSaver(  TQWidget *parent, const KURL dir_name )
 }
 
 
-ImgSaver::ImgSaver( TQWidget *parent )
-   :TQObject( parent )
+ImgSaver::ImgSaver( TQWidget *tqparent )
+   :TQObject( tqparent )
 {
    directory = Previewer::galleryRoot();
    createDir( directory );
@@ -276,14 +276,14 @@ void ImgSaver::createDir( const TQString& dir )
       if( KIO::mkdir( KURL(dir)))
       {
         KMessageBox::sorry(0, i18n("The folder\n%1\n does not exist and could not be created;\n"
-                        "please check the permissions.").arg(dir));
+                        "please check the permissions.").tqarg(dir));
       }
    }
 #if 0
    if( ! fi.isWritable() )
    {
         KMessageBox::sorry(0, i18n("The directory\n%1\n is not writeable;\nplease check the permissions.")
-                .arg(dir));
+                .tqarg(dir));
    }
 #endif
 }
@@ -395,7 +395,7 @@ TQString ImgSaver::createFilename( TQString format )
 }
 
 /**
- *   This function gets a filename from the parent. The filename must not be relative.
+ *   This function gets a filename from the tqparent. The filename must not be relative.
  **/
 ImgSaveStat ImgSaver::saveImage( TQImage *image, const KURL& filename, const TQString& imgFormat )
 {
@@ -728,7 +728,7 @@ TQString ImgSaver::extension( const KURL& url )
 {
    TQString extension = url.fileName();
 
-   int dotPos = extension.findRev( '.' );
+   int dotPos = extension.tqfindRev( '.' );
    if( dotPos > 0 )
    {
       int len = extension.length();
@@ -766,7 +766,7 @@ bool ImgSaver::renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt,  TQWi
 
 	 TQString s;
 	 s = i18n("The filename you supplied has no file extension.\nShould the correct one be added automatically? ");
-	 s += i18n( "That would result in the new filename: %1" ).arg( fName);
+	 s += i18n( "That would result in the new filename: %1" ).tqarg( fName);
 
 	 result = KMessageBox::questionYesNo(overWidget, s, i18n( "Extension Missing"),
 					     i18n("Add Extension"), i18n("Do Not Add"),
@@ -863,7 +863,7 @@ bool ImgSaver::copyImage( const KURL& fromUrl, const KURL& toUrl, TQWidget *over
 
       TQString s;
       s = i18n("The filename you supplied has no file extension.\nShould the correct one be added automatically? ");
-      s += i18n( "That would result in the new filename: %1" ).arg( fName);
+      s += i18n( "That would result in the new filename: %1" ).tqarg( fName);
 
       result = KMessageBox::questionYesNo(overWidget, s, i18n( "Extension Missing"),
 					  i18n("Add Extension"), i18n("Do Not Add"),

@@ -28,9 +28,10 @@ namespace KSVG
 {
 
 class SVGDocumentImpl;
-class KSVGReader : public QObject
+class KSVGReader : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
 	struct ParsingArgs
 	{

@@ -22,8 +22,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -47,8 +47,8 @@
 
 
 
-ThumbView::ThumbView( TQWidget *parent, const char *name )
-   : TQVBox( parent ),
+ThumbView::ThumbView( TQWidget *tqparent, const char *name )
+   : TQVBox( tqparent ),
      m_iconView(0),
      m_job(0)
 {
@@ -91,14 +91,14 @@ bool ThumbView::readSettings()
    bool dirty = false;
 
    TQColor color;
-   color = cfg->readColorEntry( MARGIN_COLOR1, &(colorGroup().base()));
+   color = cfg->readColorEntry( MARGIN_COLOR1, &(tqcolorGroup().base()));
    if( color != m_marginColor1 )
    {
       dirty = true;
       m_marginColor1 = color;
    }
 
-   color = cfg->readColorEntry( MARGIN_COLOR2, &(colorGroup().foreground()));
+   color = cfg->readColorEntry( MARGIN_COLOR2, &(tqcolorGroup().foreground()));
    if( color != m_marginColor2 )
    {
       dirty = true;
@@ -238,7 +238,7 @@ void  ThumbView::slCheckForUpdate( KFileItem *kfit )
    bool haveItem = false;
 
    /* iterate over all icon items and compare urls.
-    * TODO: Check the parent url to avoid iteration over all */
+    * TODO: Check the tqparent url to avoid iteration over all */
    for ( TQIconViewItem *item = m_iconView->firstItem(); item && !haveItem;
 	 item = item->nextItem() )
    {
@@ -269,7 +269,7 @@ bool ThumbView::deleteImage( KFileItem *kfit )
    bool haveItem = false;
 
    /* iterate over all icon items and compare urls.
-    * TODO: Check the parent url to avoid iteration over all */
+    * TODO: Check the tqparent url to avoid iteration over all */
    for ( TQIconViewItem *item = m_iconView->firstItem(); item && !haveItem; item = item->nextItem() )
    {
       if( searchUrl == static_cast<ThumbViewItem*>(item)->itemUrl() )

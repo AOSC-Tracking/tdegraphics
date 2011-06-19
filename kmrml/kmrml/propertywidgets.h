@@ -25,13 +25,14 @@
 
 namespace KMrml
 {
-    class IntegerWidget : public QHBox
+    class IntegerWidget : public TQHBox
     {
         Q_OBJECT
+  TQ_OBJECT
         
     public:
         IntegerWidget( const PropertySheet& sheet, 
-                       TQWidget *parent = parent, const char *name = 0L );
+                       TQWidget *tqparent = tqparent, const char *name = 0L );
         ~IntegerWidget();
 
         int value() const;
@@ -40,13 +41,14 @@ namespace KMrml
         
     };
     
-    class ComboWidget : public QHBox
+    class ComboWidget : public TQHBox
     {
         Q_OBJECT
+  TQ_OBJECT
         
     public:
         ComboWidget( const PropertySheet& sheet, 
-                     TQWidget *parent = parent, const char *name = 0L );
+                     TQWidget *tqparent = tqparent, const char *name = 0L );
         ~ComboWidget();
         
         TQString value() const;
@@ -55,13 +57,14 @@ namespace KMrml
         
     };
     
-    class CheckBoxWidget : public QHBox
+    class CheckBoxWidget : public TQHBox
     {
         Q_OBJECT
+  TQ_OBJECT
         
     public:
         CheckBoxWidget( const PropertySheet& sheet, 
-                        TQWidget *parent = parent, const char *name = 0L );
+                        TQWidget *tqparent = tqparent, const char *name = 0L );
         ~CheckBoxWidget();
         
         bool value();
@@ -72,13 +75,14 @@ namespace KMrml
     };
     
     
-    class LineEditWidget : public QHBox
+    class LineEditWidget : public TQHBox
     {
         Q_OBJECT
+  TQ_OBJECT
         
     public:
         LineEditWidget( const PropertySheet& sheet, 
-                        TQWidget *parent = parent, const char *name = 0L );
+                        TQWidget *tqparent = tqparent, const char *name = 0L );
         ~LineEditWidget();
         
         TQString value();
@@ -87,13 +91,14 @@ namespace KMrml
         
     };
     
-    class ListBoxWidget : public QHBox
+    class ListBoxWidget : public TQHBox
     {
         Q_OBJECT
+  TQ_OBJECT
         
     public:
         ListBoxWidget( const PropertySheet& sheet, 
-                       TQWidget *parent = parent, const char *name = 0L );
+                       TQWidget *tqparent = tqparent, const char *name = 0L );
         ~ListBoxWidget();
         
         TQStringList values();

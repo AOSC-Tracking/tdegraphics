@@ -59,6 +59,7 @@ class kpToolWidgetOpaqueOrTransparent;
 class kpToolSelection : public kpTool
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum Mode {Rectangle, Ellipse, FreeForm, Text};
@@ -242,6 +243,7 @@ class kpToolSelectionResizeScaleCommand : public TQObject,
                                           public kpNamedCommand
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpToolSelectionResizeScaleCommand (kpMainWindow *mainWindow);

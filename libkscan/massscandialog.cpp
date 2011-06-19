@@ -30,8 +30,8 @@
 
 #include "massscandialog.h"
 
-MassScanDialog::MassScanDialog( TQWidget *parent )
-   :TQDialog( parent, "MASS_SCAN", true )
+MassScanDialog::MassScanDialog( TQWidget *tqparent )
+   :TQDialog( tqparent, "MASS_SCAN", true )
 {
    setCaption( i18n( "ADF Scanning" ));
    kdDebug(29000) << "Starting MassScanDialog!" << endl;

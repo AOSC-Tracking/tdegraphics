@@ -73,7 +73,7 @@ PMObjectDrag::PMObjectDrag( PMPart* part, PMObject* object, TQWidget* dragSource
          TQBuffer buffer( data );
          buffer.open( IO_WriteOnly );
 
-         PMSerializer* ser = it.current( )->newSerializer( &buffer );
+         PMSerializer* ser = it.current( )->newSerializer( TQT_TQIODEVICE(&buffer) );
 
          if( ser )
          {
@@ -143,7 +143,7 @@ PMObjectDrag::PMObjectDrag( PMPart* part, const PMObjectList& objList, TQWidget*
          TQBuffer buffer( data );
          buffer.open( IO_WriteOnly );
 
-         PMSerializer* ser = fit.current( )->newSerializer( &buffer );
+         PMSerializer* ser = fit.current( )->newSerializer( TQT_TQIODEVICE(&buffer) );
 
          if( ser )
          {
@@ -170,7 +170,7 @@ PMObjectDrag::~PMObjectDrag( )
 {
 }
 
-TQByteArray PMObjectDrag::encodedData( const char* format ) const
+TQByteArray PMObjectDrag::tqencodedData( const char* format ) const
 {
    TQValueList<TQByteArray>::ConstIterator dit;
    TQStringList::ConstIterator sit;
@@ -211,7 +211,7 @@ bool PMObjectDrag::canDecode( const TQMimeSource* e, PMPart* part )
 PMParser* PMObjectDrag::newParser( const TQMimeSource* e, PMPart* part )
 {
    if( e->provides( c_kpmDocumentMimeFormat ) )
-      return new PMXMLParser( part, e->encodedData( c_kpmDocumentMimeFormat ) );
+      return new PMXMLParser( part, e->tqencodedData( c_kpmDocumentMimeFormat ) );
 
    const TQPtrList<PMIOFormat>& formats = part->ioManager( )->formats( );
    TQPtrListIterator<PMIOFormat> fit( formats );
@@ -221,7 +221,7 @@ PMParser* PMObjectDrag::newParser( const TQMimeSource* e, PMPart* part )
       TQString str = f->mimeType( );
       const char* lat = str.latin1( );
       if( f->services( ) & PMIOFormat::Import && e->provides( lat ) )
-         return f->newParser( part, e->encodedData( lat ) );
+         return f->newParser( part, e->tqencodedData( lat ) );
    }
 
    return 0;

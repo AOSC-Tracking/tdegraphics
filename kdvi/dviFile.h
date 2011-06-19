@@ -35,15 +35,15 @@ class dvifile : public bigEndianByteReader
   fontPool     * font_pool;
   TQString        filename;
   TQString        generatorString;
-  Q_UINT16       total_pages;
-  TQMemArray<Q_UINT32> page_offset;
+  TQ_UINT16       total_pages;
+  TQMemArray<TQ_UINT32> page_offset;
 
   /** Saves the DVI file. Returns true on success. */
   bool           saveAs(const TQString &filename);
 
   // Returns a pointer to the DVI file's data, or 0 if no data has yet
   // been allocated.
-  Q_UINT8      * dvi_Data() {return dviData.data();}
+  TQ_UINT8      * dvi_Data() {return dviData.data();}
 
   TQIODevice::Offset size_of_file;
   TQString        errorMsg;
@@ -51,14 +51,14 @@ class dvifile : public bigEndianByteReader
   /** This field is set to zero when the DVI file is constructed, and
       will be modified during the prescan phase (at this time the
       prescan code still resides in the dviRenderer class) */
-  Q_UINT16       numberOfExternalPSFiles;
+  TQ_UINT16       numberOfExternalPSFiles;
   
   /** This field is set to zero when the DVI file is constructed, and
       will be modified during the prescan phase (at this time the
       prescan code still resides in the dviRenderer class) */
-  Q_UINT16       numberOfExternalNONPSFiles;
+  TQ_UINT16       numberOfExternalNONPSFiles;
 
-  Q_UINT32       beginning_of_postamble;
+  TQ_UINT32       beginning_of_postamble;
   
   /** This flag is set to "true" during the construction of the
       dvifile, and is never changed afterwards by the dvifile
@@ -76,20 +76,20 @@ class dvifile : public bigEndianByteReader
 
   /** Returns the magnification of the DVI file, as described in the
       DVI Standard. */
-  Q_UINT32        getMagnification() const {return _magnification;}
+  TQ_UINT32        getMagnification() const {return _magnification;}
 
   /** This member is set to zero on construction and can be used by
       other software to count error messages that were printed when
       the DVI-file was processed. Suggested application: limit the
       number of error messages to, say, 25. */
-  Q_UINT8        errorCounter;
+  TQ_UINT8        errorCounter;
 
   /** Papersize information read from the dvi-File */
   pageSize       *suggestedPageSize;
   
   /** Sets new DVI data; all old data is erased. EXPERIMENTAL, use
       with care. */
-  void           setNewData(const TQMemArray<Q_UINT8>& newData) {dviData = newData;}
+  void           setNewData(const TQMemArray<TQ_UINT8>& newData) {dviData = newData;}
 
   /** Page numbers that appear in a DVI document need not be
       ordered. Worse, page numbers need not be unique. This method
@@ -112,7 +112,7 @@ class dvifile : public bigEndianByteReader
     name, the method will then NOT convert the file, but simply return
     the name from the buffer
 
-  @returns The name of the PS file, or TQString::null on failure.
+  @returns The name of the PS file, or TQString() on failure.
   */
   TQString convertPDFtoPS(const TQString &PDFFilename);
 
@@ -129,19 +129,19 @@ class dvifile : public bigEndianByteReader
 
 
   /** Offset in DVI file of last page, set in read_postamble(). */
-  Q_UINT32       last_page_offset;
-  Q_UINT32       _magnification;
+  TQ_UINT32       last_page_offset;
+  TQ_UINT32       _magnification;
 
   double         cmPerDVIunit;
 
-  TQMemArray<Q_UINT8>  dviData;
+  TQMemArray<TQ_UINT8>  dviData;
 
 
   /** Map of filenames for converted PDF files
 
   This map contains names of PDF files that were converted to
   PostScript. The key is the name of the PDF file, the data the name
-  of the associated PS file, or TQString::null, if the file could not
+  of the associated PS file, or TQString(), if the file could not
   be converted. The PS files are deleted when the DVI-file is
   destructed. */
   TQMap<TQString, TQString> convertedFiles;

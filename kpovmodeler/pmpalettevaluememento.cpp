@@ -33,7 +33,7 @@ void PMPaletteValueMemento::setFilterPaletteValues( const TQValueList<PMPaletteV
 {
    if( !m_bFilterPaletteValuesSaved )
    {
-      // Direct assignment does not work with Qt 2.3.x
+      // Direct assignment does not work with TQt 2.3.x
       // The list will be changed later in a graphical
       // change because TQValueList::detach( ) is called
       // too late!
@@ -60,7 +60,7 @@ void PMPaletteValueMemento::setTransmitPaletteValues( const TQValueList<PMPalett
 {
    if( !m_bTransmitPaletteValuesSaved )
    {
-      // Direct assignment does not work with Qt 2.3.x
+      // Direct assignment does not work with TQt 2.3.x
       // The list will be changed later in a graphical
       // change because TQValueList::detach( ) is called
       // too late!

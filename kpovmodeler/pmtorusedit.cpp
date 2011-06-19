@@ -26,8 +26,8 @@
 #include <tqcheckbox.h>
 
 
-PMTorusEdit::PMTorusEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMTorusEdit::PMTorusEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

@@ -35,12 +35,13 @@ class PMVectorEdit;
 class PMScaleEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMScaleEdit with parent and name
+    * Creates a PMScaleEdit with tqparent and name
     */
-   PMScaleEdit( TQWidget* parent, const char* name = 0 );
+   PMScaleEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

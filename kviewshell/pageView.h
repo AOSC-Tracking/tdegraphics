@@ -34,20 +34,21 @@ class PageNumber;
  * PageView is a customized TQScrollView, which can hold one
  * page. This page will be centered on the viewport.
  */
-class PageView : public QScrollView
+class PageView : public TQScrollView
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    PageView( TQWidget* parent = 0, const char* name = 0 );
+    PageView( TQWidget* tqparent = 0, const char* name = 0 );
     ~PageView() {}
 
     void addChild( TQPtrVector<DocumentWidget> *wdgList );
 
     /** Sets the number of columns into which the widgets are
         aligned. If nothing is set, '2' is the default. */
-    void setNrColumns( Q_UINT8 cols );
-    void setNrRows( Q_UINT8 rows );
+    void setNrColumns( TQ_UINT8 cols );
+    void setNrRows( TQ_UINT8 rows );
 
     void setContinuousViewMode(bool continuous);
     bool fullScreenMode() { return fullScreen; }
@@ -71,9 +72,9 @@ public:
     widgets. The number i returned always satisfies 1 <= i <= nrCols,
     where nrCols is the private variable of the same nane.
     */
-    Q_UINT8 getNrColumns() const { return  (widgetList==0) ? 1 : QMIN(nrCols, QMAX(1, widgetList->size())); }
+    TQ_UINT8 getNrColumns() const { return  (widgetList==0) ? 1 : TQMIN(nrCols, TQMAX(1, widgetList->size())); }
 
-    Q_UINT8 getNrRows() const { return nrRows; }
+    TQ_UINT8 getNrRows() const { return nrRows; }
     bool isContinuous() const { return continuousViewmode; }
 
     /** Return true if the top resp. bottom of the page is visible. */
@@ -105,9 +106,9 @@ public slots:
     /** Turn the scrollbars on/off. */
     void slotShowScrollbars(bool);
 
-    /** Set layout of the page widgets according to the current viewmode and zoomlevel.
-        Set zoomChanged = true if the the layout needs updateing because the zoomlevel has changed. */
-    void layoutPages(bool zoomChanged = false);
+    /** Set tqlayout of the page widgets according to the current viewmode and zoomlevel.
+        Set zoomChanged = true if the the tqlayout needs updateing because the zoomlevel has changed. */
+    void tqlayoutPages(bool zoomChanged = false);
 
     void slotEnableMoveTool(bool enable);
 
@@ -150,8 +151,8 @@ private:
 
     /** Used internally by the centerContents()-method. Set with the
         setNrColumns() method */
-    Q_UINT8  nrCols;
-    Q_UINT8  nrRows;
+    TQ_UINT8  nrCols;
+    TQ_UINT8  nrRows;
 
     bool continuousViewmode;
     bool fullScreen;

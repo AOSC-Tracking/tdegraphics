@@ -104,7 +104,7 @@ class ByteStream;
 // -------- DJVUANT --------
 
 /** This class contains some trivial annotations of the page or of the
-    document such as page border color, page alignment, initial zoom and
+    document such as page border color, page tqalignment, initial zoom and
     display mode, hyperlinks and highlighted areas.  All this information is
     put inside a textual chunk #ANTa# in pseudo-lisp format. Decoding and
     encoding are normally done by \Ref{DjVuANT::decode}() and
@@ -120,7 +120,7 @@ public:
    enum { MODE_UNSPEC=0, MODE_COLOR, MODE_FORE, MODE_BACK, MODE_BW };
    enum { ZOOM_STRETCH=-4, ZOOM_ONE2ONE=-3, ZOOM_WIDTH=-2,
 	  ZOOM_PAGE=-1, ZOOM_UNSPEC=0 };
-   enum alignment { ALIGN_UNSPEC=0, ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT,
+   enum tqalignment { ALIGN_UNSPEC=0, ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT,
 	  ALIGN_TOP, ALIGN_BOTTOM };
 
       /// Creates an empty annotation object.
@@ -152,12 +152,12 @@ public:
                    special cases.
           \end{description} */
    int		mode;
-      /** Horizontal page alignment. Possible values are #ALIGN_LEFT#,
+      /**Qt::Horizontal page tqalignment. Possible values are #ALIGN_LEFT#,
 	  #ALIGN_CENTER#, #ALIGN_RIGHT# and #ALIGN_UNSPEC#. */
-   alignment hor_align;
-      /** Vertical page alignment. Possible values are #ALIGN_TOP#,
+   tqalignment hor_align;
+      /**Qt::Vertical page tqalignment. Possible values are #ALIGN_TOP#,
 	  #ALIGN_CENTER#, #ALIGN_BOTTOM# and #ALIGN_UNSPEC#. */
-   alignment ver_align;
+   tqalignment ver_align;
       /** List of defined map areas. They may be just areas of highlighting
 	  or hyperlink. Please refer to \Ref{GMapArea}, \Ref{GMapRect},
 	  \Ref{GMapPoly} and \Ref{GMapOval} for details. */
@@ -213,8 +213,8 @@ private:
    static unsigned long int get_bg_color(class GLParser & parser);
    static int get_zoom(class GLParser & parser);
    static int get_mode(class GLParser & parser);
-   static alignment get_hor_align(class GLParser & parser);
-   static alignment get_ver_align(class GLParser & parser);
+   static tqalignment get_hor_align(class GLParser & parser);
+   static tqalignment get_ver_align(class GLParser & parser);
    static GPList<GMapArea> get_map_areas(class GLParser & parser);
 #ifndef NO_METADATA_IN_ANT_CHUNK
    static GMap<GUTF8String, GUTF8String>get_metadata(GLParser & parser);

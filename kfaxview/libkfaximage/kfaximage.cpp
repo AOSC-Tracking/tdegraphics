@@ -38,10 +38,10 @@ static const char FAXMAGIC[]   = "\000PC Research, Inc\000\000\000\000\000\000";
 static const char littleTIFF[] = "\x49\x49\x2a\x00";
 static const char bigTIFF[]    = "\x4d\x4d\x00\x2a";
 
-KFaxImage::KFaxImage( const TQString &filename, TQObject *parent, const char *name )
-   : TQObject(parent,name)
+KFaxImage::KFaxImage( const TQString &filename, TQObject *tqparent, const char *name )
+   : TQObject(tqparent,name)
 {
-  KGlobal::locale()->insertCatalogue( TQString::fromLatin1("libkfaximage") );
+  KGlobal::locale()->insertCatalogue( TQString::tqfromLatin1("libkfaximage") );
   loadImage(filename);
 }
 
@@ -53,7 +53,7 @@ bool KFaxImage::loadImage( const TQString &filename )
   reset();
 
   m_filename = filename;
-  m_errorString = TQString::null;
+  m_errorString = TQString();
 
   if (m_filename.isEmpty())
 	return false;
@@ -126,9 +126,9 @@ pagenode *KFaxImage::AppendImageNode(int type)
 bool KFaxImage::NewImage(pagenode *pn, int w, int h)
 {
     pn->image = TQImage( w, h, 1, 2, TQImage::systemByteOrder() );
-    pn->image.setColor(0, qRgb(255,255,255));
-    pn->image.setColor(1, qRgb(0,0,0));
-    pn->data = (Q_UINT16*) pn->image.bits();
+    pn->image.setColor(0, tqRgb(255,255,255));
+    pn->image.setColor(1, tqRgb(0,0,0));
+    pn->data = (TQ_UINT16*) pn->image.bits();
     pn->bytes_per_line = pn->image.bytesPerLine();
     pn->dpi = KFAX_DPI_FINE;
 
@@ -293,7 +293,7 @@ KFaxImage::notetiff()
 			get2(buf, endian) : get4(buf, endian);
 		}
 		break;
-	    case 274:		/* Orientation */
+	    case 274:		/* Qt::Orientation */
 		switch(value) {
 		default:	/* row0 at top,    col0 at left   */
 		    orient = 0;
@@ -327,7 +327,7 @@ KFaxImage::notetiff()
 	    case 279:		/* StripByteCounts */
 		if (count != nstrips) {
 		  str = i18n("In file %1\nStripsPerImage tag 273=%2,tag279=%3\n")
-			      .arg(filename()).arg(nstrips).arg(count);
+			      .tqarg(filename()).tqarg(nstrips).tqarg(count);
 		  kfaxerror(str);
 		  goto realbad;
 		}
@@ -403,7 +403,7 @@ KFaxImage::notetiff()
 void
 KFaxImage::badfile(pagenode *pn)
 {
-  kfaxerror(i18n("%1: Bad Fax File").arg(filename()));
+  kfaxerror(i18n("%1: Bad Fax File").tqarg(filename()));
   FreeImage(pn);
 }
 
@@ -636,12 +636,12 @@ KFaxImage::GetImage(pagenode *pn)
     }
 
     // byte-swapping the image on little endian machines
-#if defined(Q_BYTE_ORDER) && (Q_BYTE_ORDER == Q_LITTLE_ENDIAN)
+#if defined(Q_BYTE_ORDER) && (Q_BYTE_ORDER == TQ_LITTLE_ENDIAN)
     for (int y=pn->image.height()-1; y>=0; --y) {
-      Q_UINT32 *source = (Q_UINT32 *) pn->image.scanLine(y);
-      Q_UINT32 *dest   = source;
+      TQ_UINT32 *source = (TQ_UINT32 *) pn->image.scanLine(y);
+      TQ_UINT32 *dest   = source;
       for (int x=(pn->bytes_per_line/4)-1; x>=0; --x) {
- 	Q_UINT32 dv = 0, sv = *source;
+ 	TQ_UINT32 dv = 0, sv = *source;
 	for (int bit=32; bit>0; --bit) {
 		dv <<= 1;
 		dv |= sv&1;

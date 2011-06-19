@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -54,8 +54,8 @@
 
 
 
-ocradDialog::ocradDialog( TQWidget *parent, KSpellConfig *spellConfig )
-    :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
+ocradDialog::ocradDialog( TQWidget *tqparent, KSpellConfig *spellConfig )
+    :KOCRBase( tqparent, spellConfig, KDialogBase::Tabbed ),
      m_ocrCmd( TQString()),
      m_orfUrlRequester(0L),
      m_layoutMode(0),
@@ -92,7 +92,7 @@ TQString ocradDialog::ocrEngineDesc() const
 }
 
 
-int ocradDialog::layoutDetectionMode() const
+int ocradDialog::tqlayoutDetectionMode() const
 {
     return m_layoutMode->currentItem();
 }
@@ -107,7 +107,7 @@ EngineError ocradDialog::setupGui()
     KConfig *conf = KGlobal::config ();
     conf->setGroup( CFG_GROUP_OCR_DIA );
 
-    // Horizontal line
+    //Qt::Horizontal line
     // (void) new  KSeparator( KSeparator::HLine, page);
 
     // Entry-Field.
@@ -129,20 +129,20 @@ EngineError ocradDialog::setupGui()
     else
         m_ocrCmd = res;
 
-    /** layout detection button **/
+    /** tqlayout detection button **/
     conf->setGroup( CFG_GROUP_OCRAD );
-    int layoutDetect = conf->readNumEntry( CFG_OCRAD_LAYOUT_DETECTION, 0 );
-    kdDebug(28000) << "Layout detection from config: " << layoutDetect << endl;
+    int tqlayoutDetect = conf->readNumEntry( CFG_OCRAD_LAYOUT_DETECTION, 0 );
+    kdDebug(28000) << "Layout detection from config: " << tqlayoutDetect << endl;
 
     (void) new KSeparator( KSeparator::HLine, page);
     TQHBox *hb1 = new TQHBox(page);
     hb1->setSpacing( KDialog::spacingHint() );
-    (void) new TQLabel( i18n("OCRAD layout analysis mode: "), hb1);
+    (void) new TQLabel( i18n("OCRAD tqlayout analysis mode: "), hb1);
     m_layoutMode = new TQComboBox(hb1);
     m_layoutMode->insertItem(i18n("No Layout Detection"), 0 );
     m_layoutMode->insertItem(i18n("Column Detection"), 1 );
     m_layoutMode->insertItem(i18n("Full Layout Detection"), 2);
-    m_layoutMode->setCurrentItem(layoutDetect);
+    m_layoutMode->setCurrentItem(tqlayoutDetect);
 
     /** stating the ocrad binary **/
     (void) new KSeparator( KSeparator::HLine, page);

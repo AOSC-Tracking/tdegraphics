@@ -71,7 +71,7 @@ TQPixmap RenderedDocumentPagePixmap::accessiblePixmap()
     {
       case KVSPrefs::EnumRenderMode::Inverted:
         // Invert image pixels using TQImage internal function
-        backImage.invertPixels(false);
+        backImage.tqinvertPixels(false);
         break;
       case KVSPrefs::EnumRenderMode::Recolor:
         // Recolor image using KImageEffect::flatten with dither:0
@@ -87,7 +87,7 @@ TQPixmap RenderedDocumentPagePixmap::accessiblePixmap()
 
         for( int i = 0; i < pixels; ++i )
         {
-          val = qGray(data[i]);
+          val = tqGray(data[i]);
           if (val > thr)
             val = 128 + (127 * (val - thr)) / (255 - thr);
           else if ( val < thr )
@@ -100,7 +100,7 @@ TQPixmap RenderedDocumentPagePixmap::accessiblePixmap()
             else if (val < 0)
               val = 0;
           }
-          data[i] = qRgba(val, val, val, 255);
+          data[i] = tqRgba(val, val, val, 255);
         }
         break;
     }

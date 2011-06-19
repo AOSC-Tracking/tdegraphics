@@ -57,7 +57,7 @@ PMObject::~PMObject( )
 {
 }
 
-PMMetaObject* PMObject::metaObject( ) const
+PMMetaObject* PMObject::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
@@ -72,7 +72,7 @@ PMMetaObject* PMObject::metaObject( ) const
 
 PMObject* PMObject::newObject( ) const
 {
-   return metaObject( )->newObject( m_pPart );
+   return tqmetaObject( )->newObject( m_pPart );
 }
 
 bool PMObject::insertChildAfter( PMObject*, PMObject* )
@@ -142,9 +142,9 @@ bool PMObject::takeChild( uint )
    return false;
 }
 
-PMDialogEditBase* PMObject::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMObject::editWidget( TQWidget* tqparent ) const
 {
-   return new PMDialogEditBase( parent );
+   return new PMDialogEditBase( tqparent );
 //   return 0;
 }
 
@@ -177,7 +177,7 @@ PMMatrix PMObject::transformedWith( ) const
    else if( o->nextSibling( ) )
       o = o->nextSibling( );
    else
-      o = o->parent( );
+      o = o->tqparent( );
 
    while( o )
    {
@@ -187,7 +187,7 @@ PMMatrix PMObject::transformedWith( ) const
       if( o->nextSibling( ) )
          o = o->nextSibling( );
       else
-         o = o->parent( );
+         o = o->tqparent( );
    }
 
    return result;
@@ -215,7 +215,7 @@ void PMObject::cleanUp( ) const
 
 bool PMObject::setProperty( const TQString& name, const PMVariant& v )
 {
-   PMPropertyBase* p = metaObject( )->property( name );
+   PMPropertyBase* p = tqmetaObject( )->property( name );
    if( !p )
       return false;
    return p->setProperty( this, v );
@@ -224,7 +224,7 @@ bool PMObject::setProperty( const TQString& name, const PMVariant& v )
 TQStringList PMObject::properties( ) const
 {
    TQStringList lst;
-   PMPropertyIterator it = metaObject( )->properties( );
+   PMPropertyIterator it = tqmetaObject( )->properties( );
    
    for( ; it.current( ); ++it )
       lst.append( it.current( )->name( ) );
@@ -234,7 +234,7 @@ TQStringList PMObject::properties( ) const
 
 PMVariant PMObject::property( const TQString& name ) const
 {
-   PMPropertyBase* p = metaObject( )->property( name );
+   PMPropertyBase* p = tqmetaObject( )->property( name );
    if( !p )
       return PMVariant( );
    return p->getProperty( this );
@@ -244,12 +244,12 @@ bool PMObject::isA( const TQString& className ) const
 {
    if( !m_pPart )
       return false;
-   return m_pPart->prototypeManager( )->isA( metaObject( ), className );
+   return m_pPart->prototypeManager( )->isA( tqmetaObject( ), className );
 }
 
 TQString PMObject::type( ) const
 {
-   return metaObject( )->className( );
+   return tqmetaObject( )->className( );
 }
 
 bool PMObject::canInsert( const TQString& className, const PMObject* after,

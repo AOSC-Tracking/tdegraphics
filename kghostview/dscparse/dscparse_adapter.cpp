@@ -111,7 +111,7 @@ unsigned int KDSCError::lineNumber() const
 KDSCErrorHandler::Response KDSCOkErrorHandler::error( const KDSCError& err ) 
 {
     cout << "KDSC: error in line " << err.lineNumber() << endl;
-    cout << err.line() << endl;
+    cout << err.line().data() << endl;
     return Ok;
 }
 

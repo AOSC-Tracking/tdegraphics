@@ -69,8 +69,8 @@ uint KColorArray::closestMatch(uint color)
   return c|OPAQUE_MASK;
 }
 
-KColorGrid::KColorGrid(TQWidget *parent, const char *name, int space)
- : TQWidget(parent, name, Qt::WResizeNoErase|Qt::WRepaintNoErase)
+KColorGrid::KColorGrid(TQWidget *tqparent, const char *name, int space)
+ : TQWidget(tqparent, name, TQt::WResizeNoErase|TQt::WRepaintNoErase)
 {
   //kdDebug(4640) << "KColorGrid - constructor" << endl;
   s = space;
@@ -163,7 +163,7 @@ void KColorGrid::resizeEvent(TQResizeEvent *)
 }
 */
 
-TQSize KColorGrid::sizeHint() const
+TQSize KColorGrid::tqsizeHint() const
 {
   return TQSize(totalwidth, totalheight);
 }
@@ -203,7 +203,7 @@ void KColorGrid::setNumRows(int n)
   rows = n;
 
   gridcolors.resize(n*numCols());  
-  //QTableView::setNumRows(n);
+  //TQTableView::setNumRows(n);
   totalheight = (n * cellsize) + 1;
   resize(totalwidth, totalheight);
   //kdDebug(4640) << "setNumRows() - gridcolors: " << gridcolors.size() << "  size: " << numCols()*numRows() << endl;
@@ -269,9 +269,9 @@ void KColorGrid::setColor( int colNum, uint col, bool update )
     return;
 
   //kdDebug(4640) << "KColorGrid::setColor - before adding" << endl;
-  if(!numcolors.contains(col))
+  if(!numcolors.tqcontains(col))
   {
-    //kdDebug(4640) << "KColorGrid::setColor() - adding " << //  col << " - " << qRed(col) << " " << qGreen(col) << " " << qBlue(col) << endl;
+    //kdDebug(4640) << "KColorGrid::setColor() - adding " << //  col << " - " << tqRed(col) << " " << tqGreen(col) << " " << tqBlue(col) << endl;
     numcolors.append(col);
     //kdDebug(4640) << "KColorGrid::setColor() - adding done " << numcolors.size()-1 << endl;
     //numcolors++;
@@ -279,12 +279,12 @@ void KColorGrid::setColor( int colNum, uint col, bool update )
   }  
 
   //kdDebug(4640) << "KColorGrid::setColor - before removing" << endl;
-  if(!gridcolors.contains(oldcolor))
+  if(!gridcolors.tqcontains(oldcolor))
   {
-    int idx = numcolors.find(oldcolor);
+    int idx = numcolors.tqfind(oldcolor);
     if(idx != -1)
     {
-      //kdDebug(4640) << "KColorGrid::setColor() - removing " << //  oldcolor << " - " << qRed(oldcolor) << " " << qGreen(oldcolor) << " " << qBlue(oldcolor) << endl;
+      //kdDebug(4640) << "KColorGrid::setColor() - removing " << //  oldcolor << " - " << tqRed(oldcolor) << " " << tqGreen(oldcolor) << " " << tqBlue(oldcolor) << endl;
       numcolors.remove(idx);
       //kdDebug(4640) << "KColorGrid::setColor() - removing done" << endl;
       emit colorschanged(numcolors.size(), numcolors.data());
@@ -293,14 +293,14 @@ void KColorGrid::setColor( int colNum, uint col, bool update )
   }
 
   //kdDebug(4640) << "KColorGrid::setColor - before updateCell" << endl;
-  repaint((colNum%numCols())*cellsize,(colNum/numCols())*cellsize,  cellsize, cellsize);
+  tqrepaint((colNum%numCols())*cellsize,(colNum/numCols())*cellsize,  cellsize, cellsize);
   //updateCell( colNum/numCols(), colNum%numCols(), false );
   //kdDebug(4640) << "KColorGrid::setColor - after updateCell" << endl;
 }
 
 void KColorGrid::updateCell( int row, int col, bool  )
 {
-    //kdDebug(4640) << "updateCell - before repaint" << endl;
+    //kdDebug(4640) << "updateCell - before tqrepaint" << endl;
   TQWMatrix matrix;
   TQPainter p;
   p.begin( this );
@@ -317,7 +317,7 @@ void KColorGrid::updateColors()
   for(int i = 0; i < (int)gridcolors.size(); i++)
   {
     uint col = gridcolors.at(i);
-    if(!numcolors.contains(col))
+    if(!numcolors.tqcontains(col))
       numcolors.append(col);
   }
   emit colorschanged(numcolors.size(), numcolors.data());
@@ -330,6 +330,6 @@ void KColorGrid::setCellSize( int s )
   totalheight = (numRows() * s) + 1;
   resize(totalwidth, totalheight);
   if ( isVisible() )
-    repaint(viewRect(), false);
+    tqrepaint(viewRect(), false);
 }
 #include "kcolorgrid.moc"

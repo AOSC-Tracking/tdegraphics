@@ -22,12 +22,13 @@
 #include <tqframe.h>
 #include <tqimage.h>
 
-class ScrollBox: public QFrame
+class ScrollBox: public TQFrame
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    ScrollBox( TQWidget* parent = 0, const char* name = 0 );
+    ScrollBox( TQWidget* tqparent = 0, const char* name = 0 );
 
 public slots:
     void setPageSize( const TQSize& );

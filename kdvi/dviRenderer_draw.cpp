@@ -235,8 +235,8 @@ void dviRenderer::set_vf_char(unsigned int cmd, unsigned int ch)
   
   currinf.fonttable         = &(currinf.fontp->vf_table);
   currinf._virtual          = currinf.fontp;
-  Q_UINT8 *command_ptr_sav  = command_pointer;
-  Q_UINT8 *end_ptr_sav      = end_pointer;
+  TQ_UINT8 *command_ptr_sav  = command_pointer;
+  TQ_UINT8 *end_ptr_sav      = end_pointer;
   command_pointer           = m->pos;
   end_pointer               = m->end;
   draw_part(currinf.fontp->scaled_size_in_DVI_units*(dviFile->getCmPerDVIunit() * 1200.0 / 2.54)/16.0, true);
@@ -278,8 +278,8 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
   kdDebug(4300) << "draw_part" << endl;
 #endif
 
-  Q_INT32 RRtmp=0, WWtmp=0, XXtmp=0, YYtmp=0, ZZtmp=0;
-  Q_UINT8 ch;
+  TQ_INT32 RRtmp=0, WWtmp=0, XXtmp=0, YYtmp=0, ZZtmp=0;
+  TQ_UINT8 ch;
 
   currinf.fontp        = NULL;
   currinf.set_char_p   = &dviRenderer::set_no_char;
@@ -290,14 +290,14 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
       (this->*currinf.set_char_p)(ch, ch);
     } else
       if (FNTNUM0 <= ch && ch <= (unsigned char) (FNTNUM0 + 63)) {
-	currinf.fontp = currinf.fonttable->find(ch - FNTNUM0);
+	currinf.fontp = currinf.fonttable->tqfind(ch - FNTNUM0);
 	if (currinf.fontp == NULL) {
-	  errorMsg = i18n("The DVI code referred to font #%1, which was not previously defined.").arg(ch - FNTNUM0);
+	  errorMsg = i18n("The DVI code referred to font #%1, which was not previously defined.").tqarg(ch - FNTNUM0);
 	  return;
 	}
 	currinf.set_char_p = currinf.fontp->set_char_p;
       } else {
-	Q_INT32 a, b;
+	TQ_INT32 a, b;
 	
 	switch (ch) {
 	case SET1:
@@ -453,7 +453,7 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
 	case DOWN3:
 	case DOWN4:
 	  {
-	    Q_INT32 DDtmp = readINT(ch - DOWN1 + 1);
+	    TQ_INT32 DDtmp = readINT(ch - DOWN1 + 1);
 	    if ((is_vfmacro == false) &&
 		(currinf.fontp != 0) &&
 		(abs(DDtmp) >= 5*(currinf.fontp->scaled_size_in_DVI_units/6)) && 
@@ -511,7 +511,7 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
 	case FNT1:
 	case FNT2:
 	case FNT3:
-	  currinf.fontp = currinf.fonttable->find(readUINT(ch - FNT1 + 1));
+	  currinf.fontp = currinf.fonttable->tqfind(readUINT(ch - FNT1 + 1));
 	  if (currinf.fontp == NULL) {
 	    errorMsg = i18n("The DVI code referred to a font which was not previously defined.");
 	    return;
@@ -520,7 +520,7 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
 	  break;
 
 	case FNT4:
-	  currinf.fontp = currinf.fonttable->find(readINT(ch - FNT1 + 1));
+	  currinf.fontp = currinf.fonttable->tqfind(readINT(ch - FNT1 + 1));
 	  if (currinf.fontp == NULL) {
 	    errorMsg = i18n("The DVI code referred to a font which was not previously defined.");
 	    return;
@@ -553,8 +553,8 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
 	case FNTDEF4:
 	  command_pointer += 12 + ch - FNTDEF1 + 1;
           {
-            Q_UINT8 tempa = readUINT8();
-            Q_UINT8 tempb = readUINT8();
+            TQ_UINT8 tempa = readUINT8();
+            TQ_UINT8 tempb = readUINT8();
 	    command_pointer += tempa + tempb;
           }
 	  break;
@@ -567,7 +567,7 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
 	  break;
 	  
 	default:
-	  errorMsg = i18n("The unknown op-code %1 was encountered.").arg(ch);
+	  errorMsg = i18n("The unknown op-code %1 was encountered.").tqarg(ch);
 	  return;
 	} /* end switch*/
       } /* end else (ch not a SETCHAR or FNTNUM) */

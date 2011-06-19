@@ -44,9 +44,10 @@ class kpView;
 class kpMainWindow;
 class kpTempPixmap;
 
-class kpViewManager : public QObject
+class kpViewManager : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpViewManager (kpMainWindow *mainWindow);
@@ -68,7 +69,7 @@ public:
 
     const kpTempPixmap *tempPixmap () const;
     void setTempPixmap (const kpTempPixmap &tempPixmap);
-    void invalidateTempPixmap ();
+    void tqinvalidateTempPixmap ();
 
 
     //
@@ -120,7 +121,7 @@ public:
     // View
     //
 
-    kpView *viewUnderCursor (bool usingQt = false) const;
+    kpView *viewUnderCursor (bool usingTQt = false) const;
 
     //
     // TQWidget::hasMouse() is unreliable:
@@ -156,18 +157,18 @@ public:
     //
     // This is better than TQWidget::setUpdatesEnabled() because
     // restoreQueueUpdates() automatically restores only the regions
-    // of the views that need to be repainted, per view.
+    // of the views that need to be tqrepainted, per view.
     bool queueUpdates () const;
     void setQueueUpdates ();
     void restoreQueueUpdates ();
 
     // Controls behaviour of updateViews():
     //
-    // Slow: Let Qt buffer paint events via TQWidget::update().
+    // Slow: Let TQt buffer paint events via TQWidget::update().
     //       Results in less flicker.  Paint events are probably merged
     //       so long-term efficiency is increased at the expense of
     //       reduced responsiveness (default).
-    // Fast: Force Qt to redraw immediately.  No paint events
+    // Fast: Force TQt to redraw immediately.  No paint events
     //       are merged so there is great potential for flicker,
     //       if used inappropriately.  Use this when the redraw
     //       area is small and KolourPaint's responsiveness is

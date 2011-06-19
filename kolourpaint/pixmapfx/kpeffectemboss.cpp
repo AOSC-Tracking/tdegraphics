@@ -75,10 +75,10 @@ TQPixmap kpEffectEmbossCommand::apply (const TQPixmap &pixmap,
                << endl;
 #endif
 
-    // (KImageEffect::emboss() ignores mask)
+    // (KImageEffect::emboss() ignores tqmask)
     TQPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
         pixmap,
-        Qt::white/*arbitrarily chosen*/);
+        TQt::white/*arbitrarily chosen*/);
 
 
     TQImage image = kpPixmapFX::convertToImage (usePixmap);
@@ -91,9 +91,9 @@ TQPixmap kpEffectEmbossCommand::apply (const TQPixmap &pixmap,
     TQPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
 
 
-    // KImageEffect::emboss() nukes mask - restore it
-    if (usePixmap.mask ())
-        retPixmap.setMask (*usePixmap.mask ());
+    // KImageEffect::emboss() nukes tqmask - restore it
+    if (usePixmap.tqmask ())
+        retPixmap.setMask (*usePixmap.tqmask ());
 
 
     return retPixmap;
@@ -109,8 +109,8 @@ TQPixmap kpEffectEmbossCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectEmbossWidget::kpEffectEmbossWidget (bool actOnSelection,
                                             kpMainWindow *mainWindow,
-                                            TQWidget *parent, const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
+                                            TQWidget *tqparent, const char *name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
 {
     TQGridLayout *lay = new TQGridLayout (this, 4, 2, marginHint (), spacingHint ());
 
@@ -138,7 +138,7 @@ kpEffectEmbossWidget::kpEffectEmbossWidget (bool actOnSelection,
     m_enableCheckBox = new TQCheckBox (i18n ("E&nable"), this);
 
 
-    lay->addMultiCellWidget (m_enableCheckBox, 0, 0, 0, 1, Qt::AlignCenter);
+    lay->addMultiCellWidget (m_enableCheckBox, 0, 0, 0, 1, TQt::AlignCenter);
 
 
     // (settingsChangedDelayed() instead of settingsChanged() so that the
@@ -156,7 +156,7 @@ kpEffectEmbossWidget::~kpEffectEmbossWidget ()
 // public virtual [base kpColorEffectWidget]
 TQString kpEffectEmbossWidget::caption () const
 {
-    return TQString::null;
+    return TQString();
 }
 
 

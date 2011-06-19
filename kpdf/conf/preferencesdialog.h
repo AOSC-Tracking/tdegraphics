@@ -25,7 +25,7 @@ class PreferencesDialog : public KConfigDialog
 {
 
     public:
-        PreferencesDialog( TQWidget * parent, KConfigSkeleton * config );
+        PreferencesDialog( TQWidget * tqparent, KConfigSkeleton * config );
 
     protected:
 //      void updateSettings(); // Called when OK/Apply is pressed.

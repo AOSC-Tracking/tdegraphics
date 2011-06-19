@@ -80,7 +80,7 @@ void TeXFontDefinition::read_VF_index()
 #endif
   // Read preamble.
   fseek(VF_file, (long) one(VF_file), 1);	/* skip comment */
-  Q_UINT32 file_checksum = four(VF_file);
+  TQ_UINT32 file_checksum = four(VF_file);
 
   if (file_checksum && checksum && file_checksum != checksum)
     kdError(4300) << i18n("Checksum mismatch") << "(dvi = " << checksum << "u, vf = " << file_checksum << 
@@ -91,11 +91,11 @@ void TeXFontDefinition::read_VF_index()
   first_font = NULL;
   while ((cmnd = one(VF_file)) >= FNTDEF1 && cmnd <= FNTDEF4) {
     int   TeXnumber = num(VF_file, (int) cmnd - FNTDEF1 + 1);
-    Q_UINT32 checksum  = four(VF_file);
-    Q_UINT32 scale     = four(VF_file);
-    Q_UINT32 design    = four(VF_file);
+    TQ_UINT32 checksum  = four(VF_file);
+    TQ_UINT32 scale     = four(VF_file);
+    TQ_UINT32 design    = four(VF_file);
     Q_UNUSED(design);
-    Q_UINT16 len       = one(VF_file) + one(VF_file); /* sequence point in the middle */
+    TQ_UINT16 len       = one(VF_file) + one(VF_file); /* sequence point in the middle */
     char *fontname  = new char[len + 1];
     fread(fontname, sizeof(char), len, VF_file);
     fontname[len] = '\0';
@@ -111,8 +111,8 @@ void TeXFontDefinition::read_VF_index()
     // imposes. One obtains the enlargement by dividing 2^20. 
     double enlargement_factor = double(scale)/(1<<20) * enlargement;
 
-    //    TeXFontDefinition *newfontp = font_pool->appendx(fontname, checksum, (Q_UINT32)(scaled_size_in_DVI_units*enlargement_factor), enlargement_factor);
-    TeXFontDefinition *newfontp = font_pool->appendx(fontname, checksum, (Q_UINT32)((double(scale)/(1<<20))*scaled_size_in_DVI_units), enlargement_factor);
+    //    TeXFontDefinition *newfontp = font_pool->appendx(fontname, checksum, (TQ_UINT32)(scaled_size_in_DVI_units*enlargement_factor), enlargement_factor);
+    TeXFontDefinition *newfontp = font_pool->appendx(fontname, checksum, (TQ_UINT32)((double(scale)/(1<<20))*scaled_size_in_DVI_units), enlargement_factor);
 
     // Insert font in dictionary and make sure the dictionary is big
     // enough.
@@ -177,7 +177,7 @@ void TeXFontDefinition::read_VF_index()
     }
   }
   if (cmnd != POST)
-    oops(i18n("Wrong command byte found in VF macro list: %1").arg(cmnd));
+    oops(i18n("Wrong command byte found in VF macro list: %1").tqarg(cmnd));
   
   fclose (VF_file);
   file = NULL;

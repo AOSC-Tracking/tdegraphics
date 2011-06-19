@@ -1,27 +1,27 @@
-#include <qapplication.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qwidget.h>
-#include <qlabel.h>
-#include <qmessagebox.h>
-#include <qfile.h>
+#include <tqapplication.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqwidget.h>
+#include <tqlabel.h>
+#include <tqmessagebox.h>
+#include <tqfile.h>
 #include <ctype.h>
 #include <poppler-qt.h>
 #include <stdlib.h>
 
-class PDFDisplay : public QWidget           // picture display widget
+class PDFDisplay : public TQWidget           // picture display widget
 {
 public:
     PDFDisplay( Poppler::Document *d );
    ~PDFDisplay();
 protected:
-    void        paintEvent( QPaintEvent * );
-    void        keyPressEvent( QKeyEvent * );
+    void        paintEvent( TQPaintEvent * );
+    void        keyPressEvent( TQKeyEvent * );
 private:
     void display();
     
     int currentPage;
-    QPixmap	*pixmap;
+    TQPixmap	*pixmap;
     Poppler::Document *doc;
 };
 
@@ -39,16 +39,16 @@ PDFDisplay::~PDFDisplay()
   delete pixmap;
 }
 
-void PDFDisplay::paintEvent( QPaintEvent *e )
+void PDFDisplay::paintEvent( TQPaintEvent *e )
 {
-  QPainter paint( this );                     // paint widget
+  TQPainter paint( this );                     // paint widget
   if (pixmap)
     paint.drawPixmap(0, 0, *pixmap);
 }
 
-void PDFDisplay::keyPressEvent( QKeyEvent *e )
+void PDFDisplay::keyPressEvent( TQKeyEvent *e )
 {
-  if (e->key() == Qt::Key_Down)
+  if (e->key() == TQt::Key_Down)
   {
     if (currentPage + 1 < doc->getNumPages())
     {
@@ -56,7 +56,7 @@ void PDFDisplay::keyPressEvent( QKeyEvent *e )
       display();
     }
   }
-  else if (e->key() == Qt::Key_Up)
+  else if (e->key() == TQt::Key_Up)
   {
     if (currentPage > 0)
     {
@@ -83,7 +83,7 @@ void PDFDisplay::display()
 
 int main( int argc, char **argv )
 {
-  QApplication a( argc, argv );               // QApplication required!
+  TQApplication a( argc, argv );               // TQApplication required!
 
   if ( argc < 2  || (argc == 3 && strcmp(argv[2], "-extract") != 0) || argc > 3)
   {
@@ -103,7 +103,7 @@ int main( int argc, char **argv )
   {  
     PDFDisplay test( doc );        // create picture display
     a.setMainWidget( &test);                // set main widget
-    test.setCaption("Poppler-Qt Test");
+    test.setCaption("Poppler-TQt Test");
     test.show();                            // show it
 
     return a.exec();                        // start event loop
@@ -112,7 +112,7 @@ int main( int argc, char **argv )
   {
     Poppler::Page *page = doc->getPage(0);
 
-    QLabel *l = new QLabel(page->getText(Poppler::Rectangle()), 0);
+    TQLabel *l = new TQLabel(page->getText(Poppler::Rectangle()), 0);
     l->show();
     a.setMainWidget(l);                // set main widget
     delete page;

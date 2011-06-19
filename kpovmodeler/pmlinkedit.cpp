@@ -28,23 +28,23 @@
 #include "pmobjectselect.h"
 
 PMLinkEdit::PMLinkEdit( const TQString& declareType,
-                        TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+                        TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    m_declareTypes.append( declareType );
    init( );
 }
 
 PMLinkEdit::PMLinkEdit( const TQStringList& declareTypes,
-                        TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+                        TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    m_declareTypes = declareTypes;
    init( );
 }
 
-PMLinkEdit::PMLinkEdit( TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMLinkEdit::PMLinkEdit( TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    init( );
 }
@@ -64,12 +64,12 @@ void PMLinkEdit::init( )
    m_pIDEdit->setReadOnly( true );
    grid->addWidget( m_pIDEdit, 0, 1 );
 
-   TQHBoxLayout* layout = new TQHBoxLayout( );
-   grid->addLayout( layout, 1, 1 );
+   TQHBoxLayout* tqlayout = new TQHBoxLayout( );
+   grid->addLayout( tqlayout, 1, 1 );
    m_pSelectButton = new TQPushButton( i18n( "Select..." ), this );
-   layout->addWidget( m_pSelectButton );
+   tqlayout->addWidget( m_pSelectButton );
    m_pClearButton = new KPushButton( KStdGuiItem::clear(), this );
-   layout->addWidget( m_pClearButton );
+   tqlayout->addWidget( m_pClearButton );
 
    connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelectClicked( ) ) );
    connect( m_pClearButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotClearClicked( ) ) );

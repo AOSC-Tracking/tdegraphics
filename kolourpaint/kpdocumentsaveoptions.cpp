@@ -114,8 +114,8 @@ kpDocumentSaveOptions &kpDocumentSaveOptions::operator= (const kpDocumentSaveOpt
 void kpDocumentSaveOptions::printDebug (const TQString &prefix) const
 {
     const TQString usedPrefix = !prefix.isEmpty () ?
-                                   prefix + TQString::fromLatin1 (": ") :
-                                   TQString::null;
+                                   prefix + TQString::tqfromLatin1 (": ") :
+                                   TQString();
 
     kdDebug () << usedPrefix
                << "mimeType=" << mimeType ()
@@ -142,7 +142,7 @@ void kpDocumentSaveOptions::setMimeType (const TQString &mimeType)
 // public static
 TQString kpDocumentSaveOptions::invalidMimeType ()
 {
-    return TQString::null;
+    return TQString();
 }
 
 // public static
@@ -246,7 +246,7 @@ bool kpDocumentSaveOptions::qualityIsInvalid () const
 TQString kpDocumentSaveOptions::defaultMimeType (KConfigBase *config)
 {
     return config->readEntry (kpSettingForcedMimeType,
-                              TQString::fromLatin1 ("image/png"));
+                              TQString::tqfromLatin1 ("image/png"));
 }
 
 // public static
@@ -396,7 +396,7 @@ static bool mimeTypeSupportsProperty (const TQString &mimeType,
     const TQStringList mimeTypeList = mimeTypesSupportingProperty (
         property, defaultMimeTypesWithPropertyList);
 
-    return mimeTypeList.contains (mimeType);
+    return mimeTypeList.tqcontains (mimeType);
 }
 
 
@@ -445,19 +445,19 @@ int kpDocumentSaveOptions::mimeTypeMaximumColorDepth (const TQString &mimeType)
     // SYNC: update mime info here
     
     // Greyscale actually (unenforced since depth not set to configurable)
-    defaultList << TQString::fromLatin1 ("image/x-eps:32");
+    defaultList << TQString::tqfromLatin1 ("image/x-eps:32");
     
-    defaultList << TQString::fromLatin1 ("image/x-portable-bitmap:1");
+    defaultList << TQString::tqfromLatin1 ("image/x-portable-bitmap:1");
     
     // Greyscale actually (unenforced since depth not set to configurable)
-    defaultList << TQString::fromLatin1 ("image/x-portable-greymap:8");
+    defaultList << TQString::tqfromLatin1 ("image/x-portable-greymap:8");
     
-    defaultList << TQString::fromLatin1 ("image/x-xbm:1");
+    defaultList << TQString::tqfromLatin1 ("image/x-xbm:1");
 
     const TQStringList mimeTypeList = mimeTypesSupportingProperty (
         kpSettingMimeTypeMaximumColorDepth, defaultList);
 
-    const TQString mimeTypeColon = mimeType + TQString::fromLatin1 (":");
+    const TQString mimeTypeColon = mimeType + TQString::tqfromLatin1 (":");
     for (TQStringList::const_iterator it = mimeTypeList.begin ();
          it != mimeTypeList.end ();
          it++)
@@ -488,16 +488,16 @@ bool kpDocumentSaveOptions::mimeTypeHasConfigurableColorDepth (const TQString &m
     TQStringList defaultMimeTypes;
 
     // SYNC: update mime info here
-    defaultMimeTypes << TQString::fromLatin1 ("image/png");
-    defaultMimeTypes << TQString::fromLatin1 ("image/x-bmp");
-    defaultMimeTypes << TQString::fromLatin1 ("image/x-pcx");
+    defaultMimeTypes << TQString::tqfromLatin1 ("image/png");
+    defaultMimeTypes << TQString::tqfromLatin1 ("image/x-bmp");
+    defaultMimeTypes << TQString::tqfromLatin1 ("image/x-pcx");
     
-    // TODO: Only 1, 24 not 8; Qt only sees 32 but "file" cmd realises
+    // TODO: Only 1, 24 not 8; TQt only sees 32 but "file" cmd realises
     //       it's either 1 or 24.
-    defaultMimeTypes << TQString::fromLatin1 ("image/x-rgb");
+    defaultMimeTypes << TQString::tqfromLatin1 ("image/x-rgb");
   
     // TODO: Only 8 and 24 - no 1.
-    defaultMimeTypes << TQString::fromLatin1 ("image/x-xpm");
+    defaultMimeTypes << TQString::tqfromLatin1 ("image/x-xpm");
 
     return mimeTypeSupportsProperty (mimeType,
         kpSettingMimeTypeHasConfigurableColorDepth,
@@ -517,8 +517,8 @@ bool kpDocumentSaveOptions::mimeTypeHasConfigurableQuality (const TQString &mime
     TQStringList defaultMimeTypes;
 
     // SYNC: update mime info here
-    defaultMimeTypes << TQString::fromLatin1 ("image/jp2");
-    defaultMimeTypes << TQString::fromLatin1 ("image/jpeg");
+    defaultMimeTypes << TQString::tqfromLatin1 ("image/jp2");
+    defaultMimeTypes << TQString::tqfromLatin1 ("image/jpeg");
 
     return mimeTypeSupportsProperty (mimeType,
         kpSettingMimeTypeHasConfigurableQuality,
@@ -545,7 +545,7 @@ int kpDocumentSaveOptions::isLossyForSaving (const TQPixmap &pixmap) const
     if (mimeTypeHasConfigurableColorDepth () &&
         !colorDepthIsInvalid () /*TODO: prevent*/ &&
         (colorDepth () < pixmap.depth () ||
-         colorDepth () < 32 && pixmap.mask ()))
+         colorDepth () < 32 && pixmap.tqmask ()))
     {
         ret |= ColorDepthLow;
     }

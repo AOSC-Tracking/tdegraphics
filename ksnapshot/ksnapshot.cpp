@@ -58,9 +58,9 @@
 
 #define kApp KApplication::kApplication()
 
-KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
+KSnapshot::KSnapshot(TQWidget *tqparent, const char *name, bool grabCurrent)
   : DCOPObject("interface"), 
-    KDialogBase(parent, name, true, TQString::null, Help|User1, User1, 
+    KDialogBase(tqparent, name, true, TQString(), Help|User1, User1, 
     true, KStdGuiItem::quit() )
 {
     grabber = new TQWidget( 0, 0, WStyle_Customize | WX11BypassWM );
@@ -106,9 +106,9 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
 	autoincFilename();
     }
 
-    connect( &grabTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  grabTimerDone() ) );
-    connect( &updateTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  updatePreview() ) );
-    TQTimer::singleShot( 0, this, TQT_SLOT( updateCaption() ) );
+    connect( &grabTimer, TQT_SIGNAL( timeout() ), TQT_TQOBJECT(this), TQT_SLOT(  grabTimerDone() ) );
+    connect( &updateTimer, TQT_SIGNAL( timeout() ), TQT_TQOBJECT(this), TQT_SLOT(  updatePreview() ) );
+    TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT( updateCaption() ) );
 
     KHelpMenu *helpMenu = new KHelpMenu(this, KGlobal::instance()->aboutData(), false);
 
@@ -116,24 +116,24 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     helpButton->setPopup(helpMenu->menu());
 
     KAccel* accel = new KAccel(this);
-    accel->insert(KStdAccel::Quit, kapp, TQT_SLOT(quit()));
+    accel->insert(KStdAccel::Quit, TQT_TQOBJECT(kapp), TQT_SLOT(quit()));
     accel->insert( "QuickSave", i18n("Quick Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user without showing the file dialog."),
-		   CTRL+SHIFT+Key_S, this, TQT_SLOT(slotSave()));
-    accel->insert(KStdAccel::Save, this, TQT_SLOT(slotSaveAs()));
-//    accel->insert(KShortcut(CTRL+Key_A), this, TQT_SLOT(slotSaveAs()));
+		   CTRL+SHIFT+Key_S, TQT_TQOBJECT(this), TQT_SLOT(slotSave()));
+    accel->insert(KStdAccel::Save, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
+//    accel->insert(KShortcut(CTRL+Key_A), TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
     accel->insert( "SaveAs", i18n("Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user."),
-		   CTRL+Key_A, this, TQT_SLOT(slotSaveAs()));
-    accel->insert(KStdAccel::Print, this, TQT_SLOT(slotPrint()));
-    accel->insert(KStdAccel::New, this, TQT_SLOT(slotGrab()));
-    accel->insert(KStdAccel::Copy, this, TQT_SLOT(slotCopy()));
+		   CTRL+Key_A, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
+    accel->insert(KStdAccel::Print, TQT_TQOBJECT(this), TQT_SLOT(slotPrint()));
+    accel->insert(KStdAccel::New, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
+    accel->insert(KStdAccel::Copy, TQT_TQOBJECT(this), TQT_SLOT(slotCopy()));
 
-    accel->insert( "Quit2", Key_Q, this, TQT_SLOT(slotSave()));
-    accel->insert( "Save2", Key_S, this, TQT_SLOT(slotSaveAs()));
-    accel->insert( "Print2", Key_P, this, TQT_SLOT(slotPrint()));
-    accel->insert( "New2", Key_N, this, TQT_SLOT(slotGrab()));
-    accel->insert( "New3", Key_Space, this, TQT_SLOT(slotGrab()));
+    accel->insert( "Quit2", Key_Q, TQT_TQOBJECT(this), TQT_SLOT(slotSave()));
+    accel->insert( "Save2", Key_S, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
+    accel->insert( "Print2", Key_P, TQT_TQOBJECT(this), TQT_SLOT(slotPrint()));
+    accel->insert( "New2", Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
+    accel->insert( "New3", Key_Space, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
 
     setEscapeButton( User1 );
     connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( reject() ) );
@@ -162,7 +162,7 @@ bool KSnapshot::save( const KURL& url )
 {
     if ( KIO::NetAccess::exists( url, false, this ) ) {
         const TQString title = i18n( "File Exists" );
-        const TQString text = i18n( "<qt>Do you really want to overwrite <b>%1</b>?</qt>" ).arg(url.prettyURL());
+        const TQString text = i18n( "<qt>Do you really want to overwrite <b>%1</b>?</qt>" ).tqarg(url.prettyURL());
         if (KMessageBox::Continue != KMessageBox::warningContinueCancel( this, text, title, i18n("Overwrite") ) ) 
         {
             return false;
@@ -199,7 +199,7 @@ bool KSnapshot::save( const KURL& url )
 
 	TQString caption = i18n("Unable to save image");
 	TQString text = i18n("KSnapshot was unable to save the image to\n%1.")
-	               .arg(url.prettyURL());
+	               .tqarg(url.prettyURL());
 	KMessageBox::error(this, text, caption);
     }
 
@@ -241,7 +241,7 @@ void KSnapshot::slotSaveAs()
 
 void KSnapshot::slotCopy()
 {
-    QClipboard *cb = TQApplication::clipboard();
+    TQClipboard *cb = TQApplication::tqclipboard();
     cb->setPixmap( snapshot );
 }
 
@@ -279,11 +279,11 @@ void KSnapshot::slotPrint()
     else
         printer.setOrientation(KPrinter::Portrait);
 
-    qApp->processEvents();
+    tqApp->processEvents();
 
     if (printer.setup(this, i18n("Print Screenshot")))
     {
-	qApp->processEvents();
+	tqApp->processEvents();
 
         TQPainter painter(&printer);
         TQPaintDeviceMetrics metrics(painter.device());
@@ -300,7 +300,7 @@ void KSnapshot::slotPrint()
 	if ( scale ) {
 
 	    TQImage img = snapshot.convertToImage();
-	    qApp->processEvents();
+	    tqApp->processEvents();
 
 	    float newh, neww;
 	    if ( dw > dh ) {
@@ -312,8 +312,8 @@ void KSnapshot::slotPrint()
 		neww = newh/h*w;
 	    }
 
-	    img = img.smoothScale( int(neww), int(newh), TQImage::ScaleMin );
-	    qApp->processEvents();
+	    img = img.smoothScale( int(neww), int(newh), TQ_ScaleMin );
+	    tqApp->processEvents();
 
 	    int x = (metrics.width()-img.width())/2;
 	    int y = (metrics.height()-img.height())/2;
@@ -327,7 +327,7 @@ void KSnapshot::slotPrint()
 	}
     }
 
-    qApp->processEvents();
+    tqApp->processEvents();
 }
 
 void KSnapshot::slotRegionGrabbed( const TQPixmap &pix )
@@ -367,18 +367,18 @@ void KSnapshot::closeEvent( TQCloseEvent * e )
     conf->writeEntry("mode",mainWidget->mode());
     conf->writeEntry("includeDecorations",mainWidget->includeDecorations());
     KURL url = filename;
-    url.setPass( TQString::null );
+    url.setPass( TQString() );
     conf->writePathEntry("filename",url.url());
     e->accept();
 }
 
 bool KSnapshot::eventFilter( TQObject* o, TQEvent* e)
 {
-    if ( o == grabber && e->type() == TQEvent::MouseButtonPress ) {
+    if ( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(grabber) && e->type() == TQEvent::MouseButtonPress ) {
 	TQMouseEvent* me = (TQMouseEvent*) e;
 	if ( TQWidget::mouseGrabber() != grabber )
 	    return false;
-	if ( me->button() == LeftButton )
+	if ( me->button() == Qt::LeftButton )
 	    performGrab();
     }
     return false;
@@ -400,11 +400,11 @@ void KSnapshot::autoincFilename()
 	TQString numAsStr= name.mid(start, len);
 	TQString number = TQString::number(numAsStr.toInt() + 1);
 	number = number.rightJustify( len, '0');
-	name.replace(start, len, number );
+	name.tqreplace(start, len, number );
     }
     else {
         // no number
-        start = name.findRev('.');
+        start = name.tqfindRev('.');
         if (start != -1) {
             // has a . somewhere, e.g. it has an extension
             name.insert(start, '1');

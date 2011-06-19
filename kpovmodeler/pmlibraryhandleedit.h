@@ -37,12 +37,13 @@ class PMLibraryHandle;
 class PMLibraryHandleEdit: public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Construct a dialog to edit the properties of lib. The library will be
     * modified only if Ok is pressed.
     */
-   PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget *parent = NULL, const char* name = NULL );
+   PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget *tqparent = NULL, const char* name = NULL );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );

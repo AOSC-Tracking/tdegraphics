@@ -34,11 +34,11 @@
 kpToolAction::kpToolAction (const TQString &text,
                             const TQString &pic, const KShortcut &shortcut,
                             const TQObject *receiver, const char *slot,
-                            TQObject *parent, const char *name)
+                            TQObject *tqparent, const char *name)
     : KToggleAction (text,
                      pic, shortcut,
                      receiver, slot,
-                     parent, name)
+                     tqparent, name)
 {
     updateToolTip ();
 }

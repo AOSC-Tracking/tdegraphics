@@ -295,7 +295,7 @@ void SVGColorImpl::setRGBColor(const DOM::DOMString &rgbColor)
 		setRGBColor(245, 255, 250);
 	else if(rgbColor == "mistyrose")
 		setRGBColor(255, 228, 225);
-	else if(rgbColor == "moccasin")
+	else if(rgbColor == "tqmoccasin")
 		setRGBColor(255, 228, 181);
 	else if(rgbColor == "navajowhite")
 		setRGBColor(255, 222, 173);
@@ -398,7 +398,7 @@ void SVGColorImpl::setRGBColorICCColor(const DOM::DOMString &rgbColor, const DOM
 	TQColor color;
 
 	TQString content = iccColor.string().right(iccColor.string().length() - 10);
-	TQString iccTarget = content.mid(0, content.find(','));
+	TQString iccTarget = content.mid(0, content.tqfind(','));
 
 	TQStringList colors = TQStringList::split(',', content);
 	TQString r = colors[1];

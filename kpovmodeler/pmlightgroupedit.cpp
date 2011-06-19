@@ -24,8 +24,8 @@
 #include <tqcheckbox.h>
 #include <klocale.h>
 
-PMLightGroupEdit::PMLightGroupEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMLightGroupEdit::PMLightGroupEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -34,12 +34,12 @@ void PMLightGroupEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    m_pGlobalLights = new TQCheckBox( i18n( "Global lights" ), this );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( m_pGlobalLights );
-   layout->addStretch( 1 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( m_pGlobalLights );
+   tqlayout->addStretch( 1 );
 
    connect( m_pGlobalLights, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }

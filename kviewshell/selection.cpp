@@ -15,11 +15,11 @@
 
 TextSelection::TextSelection()
   : page(PageNumber::invalidPage),
-    selectedText(TQString::null)
+    selectedText(TQString())
 {}
 
 
-void TextSelection::set(const PageNumber& pageNr, Q_INT32 start, Q_INT32 end, const TQString& text)
+void TextSelection::set(const PageNumber& pageNr, TQ_INT32 start, TQ_INT32 end, const TQString& text)
 {
   page              = pageNr;
   selectedTextStart = start;
@@ -27,11 +27,11 @@ void TextSelection::set(const PageNumber& pageNr, Q_INT32 start, Q_INT32 end, co
   if (page != 0)
     selectedText = text;
   else
-    selectedText = TQString::null;
+    selectedText = TQString();
 
   if (page != 0) {
-    TQApplication::clipboard()->setSelectionMode(true);
-    TQApplication::clipboard()->setText(selectedText);
+    TQApplication::tqclipboard()->setSelectionMode(true);
+    TQApplication::tqclipboard()->setText(selectedText);
   }
 }
 
@@ -53,14 +53,14 @@ bool TextSelection::operator!= (const TextSelection& s) const
 void TextSelection::copyText() const
 {
   if (!isEmpty()) {
-    TQApplication::clipboard()->setSelectionMode(false);
-    TQApplication::clipboard()->setText(selectedText);
+    TQApplication::tqclipboard()->setSelectionMode(false);
+    TQApplication::tqclipboard()->setText(selectedText);
   }
 }
 
 
 void TextSelection::clear()
 {
-  set(0, -1, -1, TQString::null);
+  set(0, -1, -1, TQString());
 }
 

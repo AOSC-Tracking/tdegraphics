@@ -42,9 +42,9 @@ typedef KGenericFactory<KGifPlugin> GifFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_gif, GifFactory("kfile_gif"))
 
-KGifPlugin::KGifPlugin(TQObject *parent, const char *name,
+KGifPlugin::KGifPlugin(TQObject *tqparent, const char *name,
                        const TQStringList &args)
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(tqparent, name, args)
 {
     kdDebug(7034) << "gif KFileMetaInfo plugin\n";
 
@@ -76,7 +76,7 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
     TQFile file(info.path());
 
     if (!file.open(IO_ReadOnly)) {
-	kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
+	kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()).data() << endl;
 	return false;
     }
 
@@ -84,9 +84,9 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     bool isGIF87a = false;
     char magic[7];
-    Q_UINT16 width = 0;
-    Q_UINT16 height = 0;
-    Q_UINT8 miscInfo = 0;
+    TQ_UINT16 width = 0;
+    TQ_UINT16 height = 0;
+    TQ_UINT8 miscInfo = 0;
 
     fstream.readRawBytes( magic, 6 ); 
     magic[6] = 0x00; // null terminate

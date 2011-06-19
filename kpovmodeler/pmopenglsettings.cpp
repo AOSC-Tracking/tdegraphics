@@ -25,15 +25,15 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMOpenGLSettings::PMOpenGLSettings( TQWidget* parent, const char* name )
-      : PMSettingsDialogPage( parent, name )
+PMOpenGLSettings::PMOpenGLSettings( TQWidget* tqparent, const char* name )
+      : PMSettingsDialogPage( tqparent, name )
 {
-   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
    m_pDirect = new TQCheckBox( i18n( "Direct rendering" ), this );
-   vlayout->addWidget( new TQLabel( i18n( "Changes take only effect after a restart!" ), this ) );
-   vlayout->addWidget( m_pDirect );
-   vlayout->addStretch( 1 );
+   vtqlayout->addWidget( new TQLabel( i18n( "Changes take only effect after a restart!" ), this ) );
+   vtqlayout->addWidget( m_pDirect );
+   vtqlayout->addStretch( 1 );
 }
 
 void PMOpenGLSettings::displaySettings( )

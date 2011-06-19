@@ -76,7 +76,7 @@ public:
    virtual TQString pixmap( ) const { return TQString( "pmpattern" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -88,7 +88,7 @@ public:
    /**
     * Returns a new @ref PMPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
 
    /**
     * Gets the pattern type

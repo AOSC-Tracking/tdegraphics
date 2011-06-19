@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.0" stdsetdef="1">
 <class>ServerConfigWidget</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>ServerConfigWidget</cstring>
     </property>
@@ -22,7 +22,7 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
                 <cstring>Layout7</cstring>
             </property>
@@ -36,7 +36,7 @@
                 <property name="spacing">
                     <number>6</number>
                 </property>
-                <widget class="QLayoutWidget" row="0" column="1">
+                <widget class="TQLayoutWidget" row="0" column="1">
                     <property name="name">
                         <cstring>Layout4</cstring>
                     </property>
@@ -66,7 +66,7 @@
                                 <bool>true</bool>
                             </property>
                         </widget>
-                        <widget class="QPushButton">
+                        <widget class="TQPushButton">
                             <property name="name">
                                 <cstring>m_addButton</cstring>
                             </property>
@@ -74,7 +74,7 @@
                                 <string>&amp;Add</string>
                             </property>
                         </widget>
-                        <widget class="QPushButton">
+                        <widget class="TQPushButton">
                             <property name="name">
                                 <cstring>m_removeButton</cstring>
                             </property>
@@ -84,7 +84,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QLayoutWidget" row="1" column="1">
+                <widget class="TQLayoutWidget" row="1" column="1">
                     <property name="name">
                         <cstring>Layout6</cstring>
                     </property>
@@ -114,7 +114,7 @@
                                 <string>TCP/IP Port Number of the Indexing Server</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>m_autoPort</cstring>
                             </property>
@@ -135,7 +135,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>200</width>
                                     <height>0</height>
@@ -144,7 +144,7 @@
                         </spacer>
                     </hbox>
                 </widget>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>m_hostLabel</cstring>
                     </property>
@@ -155,7 +155,7 @@
                         <cstring>m_hostCombo</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>m_portLabel</cstring>
                     </property>
@@ -168,7 +168,7 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="TQCheckBox">
             <property name="name">
                 <cstring>m_useAuth</cstring>
             </property>
@@ -176,7 +176,7 @@
                 <string>Per&amp;form authentication</string>
             </property>
         </widget>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
                 <cstring>Layout12</cstring>
             </property>
@@ -200,14 +200,14 @@
                     <property name="sizeType">
                         <enum>Fixed</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>16</width>
                             <height>16</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
                         <cstring>Layout6</cstring>
                     </property>
@@ -221,7 +221,7 @@
                         <property name="spacing">
                             <number>6</number>
                         </property>
-                        <widget class="QLabel" row="0" column="0">
+                        <widget class="TQLabel" row="0" column="0">
                             <property name="name">
                                 <cstring>m_userLabel</cstring>
                             </property>
@@ -237,7 +237,7 @@
                                 <cstring>m_passEdit</cstring>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="1" column="0">
+                        <widget class="TQLabel" row="1" column="0">
                             <property name="name">
                                 <cstring>m_passLabel</cstring>
                             </property>
@@ -268,5 +268,5 @@
     <tabstop>m_userEdit</tabstop>
     <tabstop>m_passEdit</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

@@ -29,8 +29,8 @@
 #include <kdialog.h>
 
 
-PMSlopeEdit::PMSlopeEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMSlopeEdit::PMSlopeEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

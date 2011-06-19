@@ -69,11 +69,11 @@ void PMLightGroup::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMLightGroup::metaObject( ) const
+PMMetaObject* PMLightGroup::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "LightGroup", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "LightGroup", Base::tqmetaObject( ),
                                         createNewLightGroup );
 
       s_pMetaObject->addProperty( new PMLightGroupProperty( "globalLights",
@@ -103,9 +103,9 @@ void PMLightGroup::setGlobalLights( bool gl )
    }
 }
 
-PMDialogEditBase* PMLightGroup::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMLightGroup::editWidget( TQWidget* tqparent ) const
 {
-   return new PMLightGroupEdit( parent );
+   return new PMLightGroupEdit( tqparent );
 }
 
 void PMLightGroup::restoreMemento( PMMemento* s )

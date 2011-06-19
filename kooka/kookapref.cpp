@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -149,7 +149,7 @@ void KookaPreferences::setupOCRPage()
 #endif
     top->addWidget( kgp );
     TQWidget *spaceEater = new TQWidget( page );
-    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
+    spaceEater->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     top->addWidget( spaceEater );
 
     /*
@@ -176,17 +176,17 @@ void KookaPreferences::setupOCRPage()
     }
 }
 
-KURLRequester* KookaPreferences::binaryCheckBox( TQWidget *parent, const TQString& program )
+KURLRequester* KookaPreferences::binaryCheckBox( TQWidget *tqparent, const TQString& program )
 {
-    TQHBox *hbox = new TQHBox( parent );
+    TQHBox *hbox = new TQHBox( tqparent );
 
-    (void) new TQLabel( i18n("Select the %1 binary to use:").arg( program ), hbox );
-    KURLRequester* urlRequester = new KURLRequester( parent );
+    (void) new TQLabel( i18n("Select the %1 binary to use:").tqarg( program ), hbox );
+    KURLRequester* urlRequester = new KURLRequester( tqparent );
     urlRequester->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
 
     TQToolTip::add( urlRequester,
                    i18n( "Enter the path to %1, the optical-character-recognition "
-			 "command line tool.").arg(program));
+			 "command line tool.").tqarg(program));
     return urlRequester;
 }
 
@@ -207,7 +207,7 @@ TQString KookaPreferences::tryFindBinary( const TQString& bin, const TQString& c
     if( res != "notFound" )
     {
         TQFileInfo fi( res );
-        if( fi.exists() && fi.isExecutable() && !fi.isDir() && res.contains(bin) )
+        if( fi.exists() && fi.isExecutable() && !fi.isDir() && res.tqcontains(bin) )
         {
             return res;
         }
@@ -272,7 +272,7 @@ void KookaPreferences::checkOCRBinarySilent( const TQString& cmd )
 #endif
 bool KookaPreferences::checkOCRBinIntern( const TQString& cmd, const TQString& tool, bool show_msg )
 {
-   if( ! cmd.contains( tool )) return false;
+   if( ! cmd.tqcontains( tool )) return false;
 
    bool ret = true;
    TQFileInfo fi( cmd );
@@ -316,7 +316,7 @@ void KookaPreferences::setupStartupPage()
 
     /* Query for network scanner (Checkbox) */
     cbNetQuery = new TQCheckBox( i18n("Query network for available scanners"),
-				page,  "CB_NET_QUERY" );
+				page,  "CB_NET_TQUERY" );
     TQToolTip::add( cbNetQuery,
 		   i18n( "Check this if you want a network query for available scanners.\nNote that this does not mean a query over the entire network but only the stations configured for SANE!" ));
     cbNetQuery->setChecked( ! (konf->readBoolEntry( STARTUP_ONLY_LOCAL, false )) );
@@ -356,7 +356,7 @@ void KookaPreferences::setupSaveFormatPage( )
 
    /* Skip the format asking if a format entry  exists */
    cbSkipFormatAsk = new TQCheckBox( i18n("Always display image save assistant"),
-				     page,  "CB_IMGASSIST_QUERY" );
+				     page,  "CB_IMGASSIST_TQUERY" );
    cbSkipFormatAsk->setChecked( konf->readBoolEntry( OP_FILE_ASK_FORMAT, true  ));
    TQToolTip::add( cbSkipFormatAsk, i18n("Check this if you want to see the image save assistant even if there is a default format for the image type." ));
    top->addWidget( cbSkipFormatAsk );
@@ -418,8 +418,8 @@ void KookaPreferences::setupThumbnailPage()
 
    /* Frame Stuff */
    int frameWidth = konf->readNumEntry( THUMB_MARGIN, 3 );
-   TQColor col1    = konf->readColorEntry( MARGIN_COLOR1, &(colorGroup().base()));
-   TQColor col2    = konf->readColorEntry( MARGIN_COLOR2, &(colorGroup().foreground()));
+   TQColor col1    = konf->readColorEntry( MARGIN_COLOR1, &(tqcolorGroup().base()));
+   TQColor col2    = konf->readColorEntry( MARGIN_COLOR2, &(tqcolorGroup().foreground()));
 
    TQGrid *fGrid = new TQGrid( 2, hgb3 );
    fGrid->setSpacing( 2 );
@@ -457,7 +457,7 @@ void KookaPreferences::slotApply( void )
     /* ** startup options ** */
 
    /** write the global one, to read from libkscan also */
-   konf->setGroup(TQString::fromLatin1(GROUP_STARTUP));
+   konf->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
    bool cbVal = !(cbShowScannerSelection->isChecked());
    kdDebug(28000) << "Writing for " << STARTUP_SKIP_ASK << ": " << cbVal << endl;
    konf->writeEntry( STARTUP_SKIP_ASK, cbVal, true, true ); /* global flag goes to kdeglobals */
@@ -532,8 +532,8 @@ void KookaPreferences::slotDefault( void )
     m_tileSelector->setURL( KURL(bgImg) );
     m_thumbWidth->setValue( 100 );
     m_thumbHeight->setValue( 120 );
-    TQColor col1    = TQColor( colorGroup().base());
-    TQColor col2    = TQColor( colorGroup().foreground());
+    TQColor col1    = TQColor( tqcolorGroup().base());
+    TQColor col2    = TQColor( tqcolorGroup().foreground());
 
     m_frameWidth->setValue( 3 );
     m_colButt1->setColor( col1 );

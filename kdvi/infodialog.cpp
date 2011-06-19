@@ -21,8 +21,8 @@
 #include "fontpool.h"
 #include "infodialog.h"
 
-infoDialog::infoDialog( TQWidget* parent )
-  : KDialogBase( Tabbed, i18n("Document Info"), Ok, Ok, parent, "Document Info", false, false)
+infoDialog::infoDialog( TQWidget* tqparent )
+  : KDialogBase( Tabbed, i18n("Document Info"), Ok, Ok, tqparent, "Document Info", false, false)
 {
   TQFrame *page1 = addPage( i18n("DVI File") );
   TQVBoxLayout *topLayout1 = new TQVBoxLayout( page1, 0, 6 );
@@ -51,8 +51,8 @@ infoDialog::infoDialog( TQWidget* parent )
   topLayout3->addWidget( TextLabel3 );
 
   MFOutputReceived = false;
-  headline         = TQString::null;
-  pool             = TQString::null;
+  headline         = TQString();
+  pool             = TQString();
 }
 
 
@@ -64,17 +64,17 @@ void infoDialog::setDVIData(dvifile *dviFile)
     text = i18n("There is no DVI file loaded at the moment.");
   else {
     text.append("<table WIDTH=\"100%\" NOSAVE >");
-    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("Filename")).arg(dviFile->filename));
+    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("Filename")).tqarg(dviFile->filename));
 
     TQFile file(dviFile->filename);
     if (file.exists())
-      text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("File Size")).arg(KIO::convertSize(file.size())));
+      text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("File Size")).tqarg(KIO::convertSize(file.size())));
     else
-      text.append(TQString("<tr><td><b> </b></td> <td>%1</td></tr>").arg(i18n("The file does no longer exist.")));
+      text.append(TQString("<tr><td><b> </b></td> <td>%1</td></tr>").tqarg(i18n("The file does no longer exist.")));
 
     text.append(TQString("<tr><td><b>  </b></td> <td>  </td></tr>"));
-    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("#Pages")).arg(dviFile->total_pages));
-    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("Generator/Date")).arg(dviFile->generatorString));
+    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("#Pages")).tqarg(dviFile->total_pages));
+    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("Generator/Date")).tqarg(dviFile->generatorString));
   } // else (dviFile == NULL)
 
   TextLabel1->setText( text );
@@ -89,17 +89,17 @@ void infoDialog::setFontInfo(fontPool *fp)
 void infoDialog::outputReceiver(const TQString& _op)
 {
   TQString op = _op;
-  op = op.replace( TQRegExp("<"), "&lt;" );
+  op = op.tqreplace( TQRegExp("<"), "&lt;" );
 
   if (MFOutputReceived == false) {
     TextLabel3->setText("<b>"+headline+"</b><br>");
-    headline = TQString::null;
+    headline = TQString();
   }
 
   // It seems that the TQTextView wants that we append only full lines.
   // We see to that.
   pool = pool+op;
-  int idx = pool.findRev("\n");
+  int idx = pool.tqfindRev("\n");
 
   while(idx != -1) {
     TQString line = pool.left(idx);
@@ -108,9 +108,9 @@ void infoDialog::outputReceiver(const TQString& _op)
     // If the Output of the kpsewhich program contains a line starting
     // with "kpathsea:", this means that a new MetaFont-run has been
     // started. We filter these lines out and print them in boldface.
-    int startlineindex = line.find("kpathsea:");
+    int startlineindex = line.tqfind("kpathsea:");
     if (startlineindex != -1) {
-      int endstartline  = line.find("\n",startlineindex);
+      int endstartline  = line.tqfind("\n",startlineindex);
       TQString startLine = line.mid(startlineindex,endstartline-startlineindex);
       if (MFOutputReceived)
 	TextLabel3->append("<hr>\n<b>"+startLine+"</b>");
@@ -119,7 +119,7 @@ void infoDialog::outputReceiver(const TQString& _op)
     TextLabel3->append(line.mid(endstartline));
     } else
       TextLabel3->append(line);
-    idx = pool.findRev("\n");
+    idx = pool.tqfindRev("\n");
   }
 
   MFOutputReceived = true;
@@ -128,7 +128,7 @@ void infoDialog::outputReceiver(const TQString& _op)
 void infoDialog::clear(const TQString& op)
 {
   headline         = op;
-  pool             = TQString::null;
+  pool             = TQString();
   MFOutputReceived = false;
 }
 #include "infodialog.moc"

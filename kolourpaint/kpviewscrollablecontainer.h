@@ -45,9 +45,10 @@ class kpMainWindow;
 
 
 // TODO: refactor by sharing iface's with kpTool
-class kpGrip : public QWidget
+class kpGrip : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum GripType
@@ -57,7 +58,7 @@ public:
     };
 
     kpGrip (GripType type,
-            TQWidget *parent, const char *name = 0);
+            TQWidget *tqparent, const char *name = 0);
     virtual ~kpGrip ();
 
     GripType type () const;
@@ -112,12 +113,13 @@ protected:
 };
 
 
-class kpViewScrollableContainer : public QScrollView
+class kpViewScrollableContainer : public TQScrollView
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpViewScrollableContainer (kpMainWindow *parent, const char *name = 0);
+    kpViewScrollableContainer (kpMainWindow *tqparent, const char *name = 0);
     virtual ~kpViewScrollableContainer ();
 
     // Same as contentsX() and contentsY() except that after
@@ -169,9 +171,9 @@ protected:
     TQRect mapViewportToGlobal (const TQRect &viewportRect);
     TQRect mapViewToGlobal (const TQRect &viewRect);
 
-    void repaintWidgetAtResizeLineViewRect (TQWidget *widget,
+    void tqrepaintWidgetAtResizeLineViewRect (TQWidget *widget,
                                             const TQRect &resizeLineViewRect);
-    void repaintWidgetAtResizeLines (TQWidget *widget);
+    void tqrepaintWidgetAtResizeLines (TQWidget *widget);
     void eraseResizeLines ();
 
     void drawResizeLines ();
@@ -211,7 +213,7 @@ protected slots:
     void slotViewDestroyed ();
 
 public slots:
-    // TODO: Why the QPoint's?
+    // TODO: Why the TQPoint's?
     //       Why the need for view's zoomLevel?  We have the view() anyway.
     bool beginDragScroll (const TQPoint &, const TQPoint &,
                           int zoomLevel,

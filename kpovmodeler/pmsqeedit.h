@@ -17,8 +17,8 @@
 **************************************************************************/
 
 
-#ifndef PMSQEEDIT_H
-#define PMSQEEDIT_H
+#ifndef PMSTQEEDIT_H
+#define PMSTQEEDIT_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -35,12 +35,13 @@ class PMFloatEdit;
 class PMSuperquadricEllipsoidEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSuperquadricEllipsoidEdit with parent and name
+    * Creates a PMSuperquadricEllipsoidEdit with tqparent and name
     */
-   PMSuperquadricEllipsoidEdit( TQWidget* parent, const char* name = 0 );
+   PMSuperquadricEllipsoidEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

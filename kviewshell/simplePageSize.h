@@ -93,7 +93,7 @@ class SimplePageSize
   'height' pixels. If the pageSize is invalid, an undefined value is
   returned.
   */
-  double      zoomForHeight(Q_UINT32 height) const;
+  double      zoomForHeight(TQ_UINT32 height) const;
   
   /** \brief Zoom value required to scale to a certain height 
 
@@ -109,7 +109,7 @@ class SimplePageSize
   'width' pixels. If the pageSize is invalid, an undefined value is
   returned.
   */
-  double      zoomForWidth(Q_UINT32 width) const;
+  double      zoomForWidth(TQ_UINT32 width) const;
 
   /** \brief Returns a zoom to fit into a certain page size
 

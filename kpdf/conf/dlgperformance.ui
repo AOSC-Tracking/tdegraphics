@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>DlgPerformance</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>DlgPerformance</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -38,15 +38,15 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout9</cstring>
+                        <cstring>tqlayout9</cstring>
                     </property>
                     <vbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_EnableCompositing</cstring>
                             </property>
@@ -54,7 +54,7 @@
                                 <string>Enable &amp;transparency effects</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_EnableThreading</cstring>
                             </property>
@@ -64,15 +64,15 @@
                         </widget>
                     </vbox>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout6_2</cstring>
+                        <cstring>tqlayout6_2</cstring>
                     </property>
                     <vbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLabel">
+                        <widget class="TQLabel">
                             <property name="name">
                                 <cstring>pixmapLabel1_2</cstring>
                             </property>
@@ -98,7 +98,7 @@
                             <property name="sizeType">
                                 <enum>Minimum</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>21</width>
                                     <height>1</height>
@@ -109,7 +109,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QButtonGroup">
+        <widget class="TQButtonGroup">
             <property name="name">
                 <cstring>kcfg_MemoryLevel</cstring>
             </property>
@@ -128,7 +128,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="1" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="1" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>descLabel</cstring>
                     </property>
@@ -138,19 +138,19 @@
                     <property name="textFormat">
                         <enum>PlainText</enum>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>WordBreak|AlignVCenter</set>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget" row="0" column="0">
+                <widget class="TQLayoutWidget" row="0" column="0">
                     <property name="name">
-                        <cstring>layout5</cstring>
+                        <cstring>tqlayout5</cstring>
                     </property>
                     <vbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QRadioButton">
+                        <widget class="TQRadioButton">
                             <property name="name">
                                 <cstring>lowRadio</cstring>
                             </property>
@@ -158,7 +158,7 @@
                                 <string>&amp;Low</string>
                             </property>
                         </widget>
-                        <widget class="QRadioButton">
+                        <widget class="TQRadioButton">
                             <property name="name">
                                 <cstring>normalRadio</cstring>
                             </property>
@@ -166,7 +166,7 @@
                                 <string>&amp;Normal (default)</string>
                             </property>
                         </widget>
-                        <widget class="QRadioButton">
+                        <widget class="TQRadioButton">
                             <property name="name">
                                 <cstring>aggressiveRadio</cstring>
                             </property>
@@ -176,15 +176,15 @@
                         </widget>
                     </vbox>
                 </widget>
-                <widget class="QLayoutWidget" row="0" column="1">
+                <widget class="TQLayoutWidget" row="0" column="1">
                     <property name="name">
-                        <cstring>layout6</cstring>
+                        <cstring>tqlayout6</cstring>
                     </property>
                     <vbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLabel">
+                        <widget class="TQLabel">
                             <property name="name">
                                 <cstring>pixmapLabel1</cstring>
                             </property>
@@ -210,7 +210,7 @@
                             <property name="sizeType">
                                 <enum>Minimum</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>21</width>
                                     <height>1</height>
@@ -231,7 +231,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>21</width>
                     <height>16</height>
@@ -265,14 +265,14 @@
     <include location="global" impldecl="in implementation">kiconloader.h</include>
     <include location="local" impldecl="in implementation">dlgperformance.ui.h</include>
 </includes>
-<slots>
+<Q_SLOTS>
     <slot>lowRadio_toggled( bool on )</slot>
     <slot>normalRadio_toggled( bool on )</slot>
     <slot>aggressiveRadio_toggled( bool on )</slot>
-</slots>
+</Q_SLOTS>
 <functions>
     <function access="private">init()</function>
 </functions>
 <pixmapfunction>DesktopIcon</pixmapfunction>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

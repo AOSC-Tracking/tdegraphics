@@ -53,7 +53,7 @@ public:
 
     TQString commandName (int depth, int dither) const;
 
-    // (always preserves mask)
+    // (always preserves tqmask)
     static void apply (TQPixmap *destPixmapPtr, int depth, bool dither);
     static TQPixmap apply (const TQPixmap &pm, int depth, bool dither);
 
@@ -73,11 +73,12 @@ protected:
 class kpEffectReduceColorsWidget : public kpColorEffectWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpEffectReduceColorsWidget (bool actOnSelection,
                                 kpMainWindow *mainWindow,
-                                TQWidget *parent, const char *name = 0);
+                                TQWidget *tqparent, const char *name = 0);
     virtual ~kpEffectReduceColorsWidget ();
 
 

@@ -2057,7 +2057,7 @@ FILE *GlobalParams::findToUnicodeFile(GString *name) {
 
 void parseStyle(TQString& name, int& weight, int& slant, int& width)
 {
-  if (name.find("MS-") == 0) name = "MS " + name.remove(0,3);
+  if (name.tqfind("MS-") == 0) name = "MS " + name.remove(0,3);
 
   if (!name.contains('-') && !name.contains(',')) return;
   TQString type = name.section(TQRegExp("[-,]"),-1);

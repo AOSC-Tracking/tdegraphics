@@ -29,7 +29,7 @@ class TQPoint;
 class TQWidget;
 
 #include <tqstring.h>
-#include <qobjectdefs.h>
+#include <tqobjectdefs.h>
 #include <kdemacros.h>
 namespace KImageViewer
 {
@@ -47,7 +47,7 @@ namespace KImageViewer
  * your program:
  *
  * <pre>
-   TQWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<TQWidget>( "KImageViewer/Canvas", TQString::null, this );
+   TQWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<TQWidget>( "KImageViewer/Canvas", TQString(), this );
    m_canvas = static_cast<KImageViewer::Canvas *>( widget->qt_cast( "KImageViewer::Canvas" ) );
    if( ! ( widget && m_canvas ) )
    {
@@ -151,7 +151,7 @@ class KDE_EXPORT Canvas
 		/**
 		 * @return the description of the blend effect
 		 */
-		virtual TQString blendEffectDescription( unsigned int ) const { return TQString::null; }
+		virtual TQString blendEffectDescription( unsigned int ) const { return TQString(); }
 
 		/**
 		 * Sets the blending effect used to create a transition between images

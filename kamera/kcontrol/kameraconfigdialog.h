@@ -34,15 +34,16 @@ extern "C" {
 class KameraConfigDialog : public KDialogBase
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
 	KameraConfigDialog(Camera *camera, CameraWidget *widget,
-			   TQWidget *parent = 0, const char *name = 0);
+			   TQWidget *tqparent = 0, const char *name = 0);
 
 private slots:
 	void slotOk();
 
 private:
-	void appendWidget(TQWidget *parent, CameraWidget *widget);
+	void appendWidget(TQWidget *tqparent, CameraWidget *widget);
 	void updateWidgetValue(CameraWidget *widget);
 	
 	TQMap<CameraWidget *, TQWidget *> m_wmap;

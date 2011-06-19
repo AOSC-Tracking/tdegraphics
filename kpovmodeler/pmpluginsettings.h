@@ -34,11 +34,12 @@ class TQPushButton;
 class PMPluginSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMPluginSettings( TQWidget* parent, const char* name = 0 );
+   PMPluginSettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

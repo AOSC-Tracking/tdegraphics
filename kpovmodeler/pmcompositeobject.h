@@ -44,12 +44,12 @@ public:
     */
    PMCompositeObject( const PMCompositeObject& o );
    /**
-    * Deletes the object and all children.
+    * Deletes the object and all tqchildren.
     */
    virtual ~PMCompositeObject( );
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -65,13 +65,13 @@ public:
     * Returns a pointer to the child object at position index,
     * or null if the index is out of range.
     */
-   virtual PMObject* childAt( uint index ) const;
+   virtual PMObject* tqchildAt( uint index ) const;
 
    /**
     * Returns true if the object contains the child object o
     */
    virtual bool containsChild( PMObject* o ) const
-   { return ( ( PMObject* )this == o->parent( ) ); }
+   { return ( ( PMObject* )this == o->tqparent( ) ); }
    /**
     * Returns the index of the object or -1 if not found
     */
@@ -96,7 +96,7 @@ public:
     */
    virtual bool appendChild( PMObject* );
    /**
-    * Returns the number of children.
+    * Returns the number of tqchildren.
     */
    virtual int countChildren( ) const;
    /**
@@ -135,7 +135,7 @@ public:
 protected:
    /**
     * Adds num to the number of selected objects in this object and all
-    * parent objects. num can be negative.
+    * tqparent objects. num can be negative.
     */
    virtual void adjustSelectedChildren( int num );
 

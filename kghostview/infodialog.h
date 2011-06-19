@@ -27,9 +27,10 @@ class TQLabel;
 class InfoDialog : public KDialogBase 
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    InfoDialog( TQWidget *parent=0, const char *name=0, bool modal=true );
+    InfoDialog( TQWidget *tqparent=0, const char *name=0, bool modal=true );
     void setup( const TQString &fileName, const TQString &documentTitle,
 		const TQString &publicationDate );
 

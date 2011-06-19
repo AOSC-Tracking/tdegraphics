@@ -41,7 +41,7 @@ TQString KuickFile::localFile() const
     // Note: never call isAvailable() from here, directly or indirectly
 
     if ( isDownloading() )
-        return TQString::null;
+        return TQString();
 
     return m_localFile;
 }
@@ -61,13 +61,13 @@ bool KuickFile::download()
         return true;
 
     // reinitialize
-    m_localFile = TQString::null;
+    m_localFile = TQString();
     m_currentProgress = 0;
     
 
     TQString ext;
     TQString fileName = m_url.fileName();
-    int extIndex = fileName.findRev('.');
+    int extIndex = fileName.tqfindRev('.');
     if ( extIndex > 0 )
         ext = fileName.mid( extIndex + 1 );
 
@@ -94,7 +94,7 @@ bool KuickFile::download()
     return m_job != 0L;
 }
 
-KuickFile::DownloadStatus KuickFile::waitForDownload( TQWidget *parent )
+KuickFile::DownloadtqStatus KuickFile::waitForDownload( TQWidget *tqparent )
 {
     if ( isAvailable() )
         return OK;
@@ -104,10 +104,10 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( TQWidget *parent )
             return ERROR;
     }
 
-    KProgressDialog *dialog = new KProgressDialog( parent );
+    KProgressDialog *dialog = new KProgressDialog( tqparent );
     dialog->setModal( true );
-    dialog->setCaption( i18n("Downloading %1...").arg( m_url.fileName() ) );
-    dialog->setLabel( i18n("Please wait while downloading\n%1").arg( m_url.prettyURL() ));
+    dialog->setCaption( i18n("Downloading %1...").tqarg( m_url.fileName() ) );
+    dialog->setLabel( i18n("Please wait while downloading\n%1").tqarg( m_url.prettyURL() ));
     dialog->setAllowCancel( true );
     dialog->setAutoClose( true );
 
@@ -152,7 +152,7 @@ void KuickFile::slotResult( KIO::Job *job )
 
         TQString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
         TQFile::remove( canceledFile );
-        m_progress->topLevelWidget()->hide();
+        m_progress->tqtopLevelWidget()->hide();
     }
     else {
 	    m_localFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
@@ -162,7 +162,7 @@ void KuickFile::slotResult( KIO::Job *job )
 	        m_progress->setProgress( 100 );
 #define BUGGY_VERSION KDE_MAKE_VERSION(3,5,2)
 	        if ( KDE::version() <= BUGGY_VERSION ) {
-	            m_progress->topLevelWidget()->hide(); // ### workaround broken KProgressDialog
+	            m_progress->tqtopLevelWidget()->hide(); // ### workaround broken KProgressDialog
 	        }
 	    }
     }

@@ -38,12 +38,13 @@ class TQLabel;
 class PMListPatternEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMListPatternEdit with parent and name
+    * Creates a PMListPatternEdit with tqparent and name
     */
-   PMListPatternEdit( TQWidget* parent, const char* name = 0 );
+   PMListPatternEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

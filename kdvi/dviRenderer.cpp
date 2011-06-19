@@ -71,7 +71,7 @@ dviRenderer::dviRenderer(TQWidget *par)
   : DocumentRenderer(par), info(new infoDialog(par))
 {
 #ifdef DEBUG_DVIRENDERER
-  kdDebug(4300) << "dviRenderer( parent=" << par << " )" << endl;
+  kdDebug(4300) << "dviRenderer( tqparent=" << par << " )" << endl;
 #endif
 
   // initialize the dvi machinery
@@ -79,7 +79,7 @@ dviRenderer::dviRenderer(TQWidget *par)
 
   connect(&font_pool, TQT_SIGNAL( setStatusBarText( const TQString& ) ), this, TQT_SIGNAL( setStatusBarText( const TQString& ) ) );
 
-  parentWidget = par;
+  tqparentWidget = par;
   shrinkfactor = 3;
   current_page = 0;
   resolutionInDPI = 0.0;
@@ -193,12 +193,12 @@ void dviRenderer::drawPage(double resolution, RenderedDocumentPage *page)
   
   // Reset colors
   colorStack.clear();
-  globalColor = Qt::black;
+  globalColor = TQt::black;
 
   TQApplication::setOverrideCursor( waitCursor );
   foreGroundPainter = page->getPainter();
   if (foreGroundPainter != 0) {
-    errorMsg = TQString::null;
+    errorMsg = TQString();
     draw_page();
     page->returnPainter(foreGroundPainter);
   }
@@ -206,11 +206,11 @@ void dviRenderer::drawPage(double resolution, RenderedDocumentPage *page)
   
   page->isEmpty = false;
   if (errorMsg.isEmpty() != true) {
-    KMessageBox::detailedError(parentWidget,
+    KMessageBox::detailedError(tqparentWidget,
 			       i18n("<qt><strong>File corruption!</strong> KDVI had trouble interpreting your DVI file. Most "
 				    "likely this means that the DVI file is broken.</qt>"),
 			       errorMsg, i18n("DVI File Error"));
-    errorMsg = TQString::null;
+    errorMsg = TQString();
     currentlyDrawnPage = 0;
     mutex.unlock();
     return;
@@ -260,7 +260,7 @@ void dviRenderer::showThatSourceInformationIsPresent()
   
   if (showMsg) {
     KDialogBase *dialog= new KDialogBase(i18n("KDVI: Information"), KDialogBase::Yes, KDialogBase::Yes, KDialogBase::Yes,
-					 parentWidget, "information", true, true,KStdGuiItem::ok() );
+					 tqparentWidget, "information", true, true,KStdGuiItem::ok() );
     
     TQVBox *topcontents = new TQVBox (dialog);
     topcontents->setSpacing(KDialog::spacingHint()*2);
@@ -277,7 +277,7 @@ void dviRenderer::showThatSourceInformationIsPresent()
     TQLabel *label2 = new TQLabel( i18n("<qt>This DVI file contains source file information. You may click into the text with the "
 				      "middle mouse button, and an editor will open the TeX-source file immediately.</qt>"),
 				 contents);
-    label2->setMinimumSize(label2->sizeHint());
+    label2->setMinimumSize(label2->tqsizeHint());
     lay->add( label2 );
     lay->addStretch(1);
     TQSize extraSize = TQSize(50,30);
@@ -311,8 +311,8 @@ void dviRenderer::embedPostScript()
   if (!dviFile)
     return;
 
-  embedPS_progress = new KProgressDialog(parentWidget, "embedPSProgressDialog",
-					 i18n("Embedding PostScript Files"), TQString::null, true);
+  embedPS_progress = new KProgressDialog(tqparentWidget, "embedPSProgressDialog",
+					 i18n("Embedding PostScript Files"), TQString(), true);
   if (!embedPS_progress)
     return;
   embedPS_progress->setAllowCancel(false);
@@ -323,8 +323,8 @@ void dviRenderer::embedPostScript()
   embedPS_numOfProgressedFiles = 0;
 
 
-  Q_UINT16 currPageSav = current_page;
-  errorMsg = TQString::null;
+  TQ_UINT16 currPageSav = current_page;
+  errorMsg = TQString();
   for(current_page=0; current_page < dviFile->total_pages; current_page++) {
     if (current_page < dviFile->total_pages) {
       command_pointer = dviFile->dvi_Data() + dviFile->page_offset[current_page];
@@ -342,12 +342,12 @@ void dviRenderer::embedPostScript()
 
   if (!errorMsg.isEmpty()) {
     errorMsg = "<qt>" + errorMsg + "</qt>";
-    KMessageBox::detailedError(parentWidget, "<qt>" + i18n("Not all PostScript files could be embedded into your document.") + "</qt>", errorMsg);
-    errorMsg = TQString::null;
+    KMessageBox::detailedError(tqparentWidget, "<qt>" + i18n("Not all PostScript files could be embedded into your document.") + "</qt>", errorMsg);
+    errorMsg = TQString();
   } else
-    KMessageBox::information(parentWidget, "<qt>" + i18n("All external PostScript files were embedded into your document. You "
+    KMessageBox::information(tqparentWidget, "<qt>" + i18n("All external PostScript files were embedded into your document. You "
 						 "will probably want to save the DVI file now.") + "</qt>",
-			     TQString::null, "embeddingDone");
+			     TQString(), "embeddingDone");
 
   // Prescan phase starts here
 #ifdef PERFORMANCE_MEASUREMENT
@@ -435,9 +435,9 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   
   // Make sure the file actually exists.
   if (!fi.exists() || fi.isDir()) {
-    KMessageBox::error( parentWidget,
+    KMessageBox::error( tqparentWidget,
 			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist. "
-			     "KDVI already tried to add the ending '.dvi'.</qt>").arg(filename),
+			     "KDVI already tried to add the ending '.dvi'.</qt>").tqarg(filename),
 			i18n("File Error!"));
     return false;
   }
@@ -448,21 +448,21 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   // the multipage.
   TQString mimetype( KMimeMagic::self()->findFileType( fname )->mimeType() );
   if (mimetype != "application/x-dvi") {
-    KMessageBox::sorry( parentWidget,
+    KMessageBox::sorry( tqparentWidget,
 			i18n( "<qt>Could not open file <nobr><strong>%1</strong></nobr> which has "
 			      "type <strong>%2</strong>. KDVI can only load DVI (.dvi) files.</qt>" )
-			.arg( fname )
-			.arg( mimetype ) );
+			.tqarg( fname )
+			.tqarg( mimetype ) );
     return false;
   }
   
   // Check if the file is a valid DVI file.
   if (!isValidFile(filename))
   {
-    KMessageBox::sorry( parentWidget,
+    KMessageBox::sorry( tqparentWidget,
                         i18n("<qt>File corruption! KDVI had trouble interpreting your DVI file. Most "
                              "likely this means that the DVI file is broken.</qt>")
-                        .arg( fname ) );
+                        .tqarg( fname ) );
     return false;
   }
 
@@ -477,7 +477,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   if ((dviFile_new->dvi_Data() == NULL)||(dviFile_new->errorMsg.isEmpty() != true)) {
     TQApplication::restoreOverrideCursor();
     if (dviFile_new->errorMsg.isEmpty() != true)
-      KMessageBox::detailedError(parentWidget,
+      KMessageBox::detailedError(tqparentWidget,
 				 i18n("<qt>File corruption! KDVI had trouble interpreting your DVI file. Most "
 				      "likely this means that the DVI file is broken.</qt>"),
 				 dviFile_new->errorMsg, i18n("DVI File Error"));
@@ -507,7 +507,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   TQString includePath;
   if (!baseURL.isLocalFile()) {
     includePath = filename;
-    includePath.truncate(includePath.findRev('/'));
+    includePath.truncate(includePath.tqfindRev('/'));
   }
   PS_interface->setIncludePath(includePath);
   
@@ -538,7 +538,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   preScanTimer.start();
 #endif
   dviFile->numberOfExternalPSFiles = 0;
-  Q_UINT16 currPageSav = current_page;
+  TQ_UINT16 currPageSav = current_page;
   prebookmarks.clear();
   
   for(current_page=0; current_page < dviFile->total_pages; current_page++) {
@@ -629,19 +629,19 @@ Anchor dviRenderer::parseReference(const TQString &reference)
   // points to line number 1111 in the file "Filename". KDVI then
   // looks for source specials of the form "src:xxxxFilename", and
   // tries to find the special with the biggest xxxx
-  if (reference.find("src:",0,false) == 0) {
+  if (reference.tqfind("src:",0,false) == 0) {
   
     // Extract the file name and the numeral part from the reference string
     DVI_SourceFileSplitter splitter(reference, dviFile->filename);
-    Q_UINT32 refLineNumber = splitter.line();
+    TQ_UINT32 refLineNumber = splitter.line();
     TQString  refFileName   = splitter.filePath();
     
     if (sourceHyperLinkAnchors.isEmpty()) {
-      KMessageBox::sorry(parentWidget, i18n("<qt>You have asked KDVI to locate the place in the DVI file which corresponds to "
+      KMessageBox::sorry(tqparentWidget, i18n("<qt>You have asked KDVI to locate the place in the DVI file which corresponds to "
 				    "line %1 in the TeX-file <strong>%2</strong>. It seems, however, that the DVI file "
 				    "does not contain the necessary source file information. "
 				    "We refer to the manual of KDVI for a detailed explanation on how to include this "
-				    "information. Press the F1 key to open the manual.</qt>").arg(refLineNumber).arg(refFileName),
+				    "information. Press the F1 key to open the manual.</qt>").tqarg(refLineNumber).tqarg(refFileName),
 			 i18n("Could Not Find Reference"));
       mutex.unlock();
       return Anchor();
@@ -651,7 +651,7 @@ Anchor dviRenderer::parseReference(const TQString &reference)
     // whose line number is the biggest among those that are smaller
     // than the refLineNumber. That way, the position in the DVI file
     // which is highlighted is always a little further up than the
-    // position in the editor, e.g. if the DVI file contains
+    // position in the editor, e.g. if the DVI file tqcontains
     // positional information at the beginning of every paragraph,
     // KDVI jumps to the beginning of the paragraph that the cursor is
     // in, and never to the next paragraph. If source file anchors for
@@ -680,8 +680,8 @@ Anchor dviRenderer::parseReference(const TQString &reference)
       return Anchor(bestMatch->page, bestMatch->distance_from_top);
     } else
       if (anchorForRefFileFound == false)
-	KMessageBox::sorry(parentWidget, i18n("<qt>KDVI was not able to locate the place in the DVI file which corresponds to "
-					      "line %1 in the TeX-file <strong>%2</strong>.</qt>").arg(refLineNumber).arg(refFileName),
+	KMessageBox::sorry(tqparentWidget, i18n("<qt>KDVI was not able to locate the place in the DVI file which corresponds to "
+					      "line %1 in the TeX-file <strong>%2</strong>.</qt>").tqarg(refLineNumber).tqarg(refFileName),
 			   i18n( "Could Not Find Reference" ));
       else {
 	mutex.unlock();
@@ -715,7 +715,7 @@ void dviRenderer::setResolution(double resolution_in_DPI)
 
 void dviRenderer::clearStatusBar()
 {
-  emit setStatusBarText( TQString::null );
+  emit setStatusBarText( TQString() );
 }
 
 
@@ -733,9 +733,9 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   TQString TeXfile = splitter.filePath();
   if ( ! splitter.fileExists() )
   {
-      KMessageBox::sorry(parentWidget, TQString("<qt>") +
+      KMessageBox::sorry(tqparentWidget, TQString("<qt>") +
 			 i18n("The DVI-file refers to the TeX-file "
-			      "<strong>%1</strong> which could not be found.").arg(KShellProcess::quote(TeXfile)) +
+			      "<strong>%1</strong> which could not be found.").tqarg(KShellProcess::quote(TeXfile)) +
 			 TQString("</qt>"),
 			 i18n( "Could Not Find File" ));
       return;
@@ -743,7 +743,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   
   TQString command = editorCommand;
   if (command.isEmpty() == true) {
-    int r = KMessageBox::warningContinueCancel(parentWidget, TQString("<qt>") +
+    int r = KMessageBox::warningContinueCancel(tqparentWidget, TQString("<qt>") +
 					       i18n("You have not yet specified an editor for inverse search. "
 						    "Please choose your favorite editor in the "
 						    "<strong>DVI options dialog</strong> "
@@ -756,7 +756,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
     else
       return;
   }
-  command = command.replace( "%l", TQString::number(splitter.line()) ).replace( "%f", KShellProcess::quote(TeXfile) );
+  command = command.tqreplace( "%l", TQString::number(splitter.line()) ).tqreplace( "%f", KShellProcess::quote(TeXfile) );
   
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "Calling program: " << command << endl;
@@ -767,8 +767,8 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   // henceforth dimiss the output of the older programm. "If it
   // hasn't failed until now, we don't care."
   if (proc != 0) {
-    qApp->disconnect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), 0, 0);
-    qApp->disconnect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), 0, 0);
     proc = 0;
   }
   
@@ -778,15 +778,15 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
     kdError(4300) << "Could not allocate ShellProcess for the editor command." << endl;
     return;
   }
-  qApp->connect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  qApp->connect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  qApp->connect(proc, TQT_SIGNAL(processExited(KProcess *)), this, TQT_SLOT(editorCommand_terminated(KProcess *)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(processExited(KProcess *)), this, TQT_SLOT(editorCommand_terminated(KProcess *)));
   // Merge the editor-specific editor message here.
   export_errorString = i18n("<qt>The external program<br><br><tt><strong>%1</strong></tt><br/><br/>which was used to call the editor "
 			    "for inverse search, reported an error. You might wish to look at the <strong>document info "
 			    "dialog</strong> which you will find in the File-Menu for a precise error report. The "
 			    "manual for KDVI contains a detailed explanation how to set up your editor for use with KDVI, "
-			    "and a list of common problems.</qt>").arg(command);
+			    "and a list of common problems.</qt>").tqarg(command);
   
   info->clear(i18n("Starting the editor..."));
   
@@ -804,33 +804,33 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
 }
 
 
-TQString dviRenderer::PDFencodingToQString(const TQString& _pdfstring)
+TQString dviRenderer::PDFencodingToTQString(const TQString& _pdfstring)
 {
   // This method locates special PDF characters in a string and
   // replaces them by UTF8. See Section 3.2.3 of the PDF reference
   // guide for information.
   TQString pdfstring = _pdfstring;
-  pdfstring = pdfstring.replace("\\n", "\n");
-  pdfstring = pdfstring.replace("\\r", "\n");
-  pdfstring = pdfstring.replace("\\t", "\t");
-  pdfstring = pdfstring.replace("\\f", "\f");
-  pdfstring = pdfstring.replace("\\(", "(");
-  pdfstring = pdfstring.replace("\\)", ")");
-  pdfstring = pdfstring.replace("\\\\", "\\");
+  pdfstring = pdfstring.tqreplace("\\n", "\n");
+  pdfstring = pdfstring.tqreplace("\\r", "\n");
+  pdfstring = pdfstring.tqreplace("\\t", "\t");
+  pdfstring = pdfstring.tqreplace("\\f", "\f");
+  pdfstring = pdfstring.tqreplace("\\(", "(");
+  pdfstring = pdfstring.tqreplace("\\)", ")");
+  pdfstring = pdfstring.tqreplace("\\\\", "\\");
   
   // Now replace octal character codes with the characters they encode
   int pos;
   TQRegExp rx( "(\\\\)(\\d\\d\\d)" );  // matches "\xyz" where x,y,z are numbers
   while((pos = rx.search( pdfstring )) != -1) {
-    pdfstring = pdfstring.replace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
+    pdfstring = pdfstring.tqreplace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
   }
   rx.setPattern( "(\\\\)(\\d\\d)" );  // matches "\xy" where x,y are numbers
   while((pos = rx.search( pdfstring )) != -1) {
-    pdfstring = pdfstring.replace(pos, 3, TQChar(rx.cap(2).toInt(0,8)));
+    pdfstring = pdfstring.tqreplace(pos, 3, TQChar(rx.cap(2).toInt(0,8)));
   }
   rx.setPattern( "(\\\\)(\\d)" );  // matches "\x" where x is a number
   while((pos = rx.search( pdfstring )) != -1) {
-    pdfstring = pdfstring.replace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
+    pdfstring = pdfstring.tqreplace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
   }
   return pdfstring;
 }

@@ -52,9 +52,10 @@ typedef struct
 class SVGImageElementImpl;
 class SVGElementImpl;
 class SVGDocumentImpl;
-class KSVGLoader : public QObject
+class KSVGLoader : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
 	KSVGLoader();
 	~KSVGLoader();

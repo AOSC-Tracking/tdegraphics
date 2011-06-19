@@ -22,8 +22,8 @@
 #include "renderedDviPagePixmap.h"
 #include "selection.h"
 
-DVIWidget::DVIWidget(TQWidget* parent, PageView* sv, DocumentPageCache* cache, const char* name)
-  : DocumentWidget(parent, sv, cache, name)
+DVIWidget::DVIWidget(TQWidget* tqparent, PageView* sv, DocumentPageCache* cache, const char* name)
+  : DocumentWidget(tqparent, sv, cache, name)
 {
 }
 
@@ -45,7 +45,7 @@ void DVIWidget::mousePressEvent(TQMouseEvent* e)
   // Check if the mouse is pressed on a source-hyperlink
   // source hyperlinks can be invoked with the Middle Mousebutton or alternatively
   // with Control+Left Mousebutton
-  if ((e->button() == MidButton || (e->button() == LeftButton && (e->state() & ControlButton)))
+  if ((e->button() == Qt::MidButton || (e->button() == Qt::LeftButton && (e->state() & ControlButton)))
       && (pageData->sourceHyperLinkList.size() > 0))
   {
     int minIndex = 0;
@@ -53,7 +53,7 @@ void DVIWidget::mousePressEvent(TQMouseEvent* e)
 
     for(unsigned int i=0; i<pageData->sourceHyperLinkList.size(); i++)
     {
-      if (pageData->sourceHyperLinkList[i].box.contains(e->pos()))
+      if (pageData->sourceHyperLinkList[i].box.tqcontains(e->pos()))
       {
         emit(SRCLink(pageData->sourceHyperLinkList[i].linkText, e, this));
         e->accept();
@@ -74,7 +74,7 @@ void DVIWidget::mousePressEvent(TQMouseEvent* e)
     e->accept();
   }
 
-  // Call implementation from parent
+  // Call implementation from tqparent
   DocumentWidget::mousePressEvent(e);
 }
 
@@ -99,7 +99,7 @@ void DVIWidget::mouseMoveEvent(TQMouseEvent* e)
     
     // Check if the cursor hovers over a sourceHyperlink.
     for(unsigned int i=0; i<pageData->sourceHyperLinkList.size(); i++) {
-      if (pageData->sourceHyperLinkList[i].box.contains(e->pos())) {
+      if (pageData->sourceHyperLinkList[i].box.tqcontains(e->pos())) {
 	clearStatusBarTimer.stop();
 	
 	// The macro-package srcltx gives a special like "src:99 test.tex"
@@ -112,7 +112,7 @@ void DVIWidget::mouseMoveEvent(TQMouseEvent* e)
 	  if (cp[i].isDigit() == false)
 	    break;
 	
-	emit setStatusBarText( i18n("line %1 of %2").arg(cp.left(i)).arg(cp.mid(i).simplifyWhiteSpace()) );
+	emit setStatusBarText( i18n("line %1 of %2").tqarg(cp.left(i)).tqarg(cp.mid(i).simplifyWhiteSpace()) );
 	return;
       }
     }

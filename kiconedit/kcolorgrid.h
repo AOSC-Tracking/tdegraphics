@@ -37,12 +37,13 @@ public:
   uint closestMatch(uint);
 };
 
-class KColorGrid : public QWidget
+class KColorGrid : public TQWidget
 {
 private:
     Q_OBJECT
+  TQ_OBJECT
 public:
-  KColorGrid( TQWidget * parent = 0, const char *name = 0, int spacing = 0);
+  KColorGrid( TQWidget * tqparent = 0, const char *name = 0, int spacing = 0);
   virtual ~KColorGrid() {};
 
   enum GridState { Plain, Shaded };
@@ -55,7 +56,7 @@ public:
   bool hasGrid() { return hasgrid; }
   uint numColors() { return numcolors.size(); }
   uint colors( uint *c ) { c = numcolors.data(); return numcolors.size(); }
-  bool contains(uint c) { return numcolors.contains(c); }
+  bool tqcontains(uint c) { return numcolors.tqcontains(c); }
   uint colorAt(int idx) { return gridcolors.at(idx); }
   uint *data() {return numcolors.data(); }
   void fill(uint color);
@@ -64,7 +65,7 @@ public:
 
   virtual void setCellSize( int s );
   virtual int cellSize() { return cellsize; }
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 
   void setSize(const TQSize s) { setNumRows(s.height()); setNumCols(s.width()); }
 

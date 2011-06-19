@@ -76,11 +76,11 @@ void PMBox::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBox::metaObject( ) const
+PMMetaObject* PMBox::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Box", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Box", Base::tqmetaObject( ),
                                         createNewBox );
       s_pMetaObject->addProperty(
          new PMBoxProperty( "corner1", &PMBox::setCorner1, &PMBox::corner1 ) );
@@ -114,9 +114,9 @@ void PMBox::setCorner2( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMBox::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMBox::editWidget( TQWidget* tqparent ) const
 {
-   return new PMBoxEdit( parent );
+   return new PMBoxEdit( tqparent );
 }
 
 void PMBox::restoreMemento( PMMemento* s )

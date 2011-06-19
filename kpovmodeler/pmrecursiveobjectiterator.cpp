@@ -39,7 +39,7 @@ PMObject* PMRecursiveObjectIterator::operator++( )
          bool stop = false;
          do
          {
-            m_pCurrent = m_pCurrent->parent( );
+            m_pCurrent = m_pCurrent->tqparent( );
             if( !m_pCurrent )
                stop = true;
             else if( m_pCurrent == m_pObject )

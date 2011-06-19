@@ -27,13 +27,14 @@ extern "C" {
 #include <sane/sane.h>
 }
 
-class KGammaTable: public QObject
+class KGammaTable: public TQObject
 {
    Q_OBJECT
+  TQ_OBJECT
 
-   Q_PROPERTY( int g READ getGamma WRITE setGamma )
-   Q_PROPERTY( int c READ getContrast WRITE setContrast )
-   Q_PROPERTY( int b READ getBrightness WRITE setBrightness )
+   TQ_PROPERTY( int g READ getGamma WRITE setGamma )
+   TQ_PROPERTY( int c READ getContrast WRITE setContrast )
+   TQ_PROPERTY( int b READ getBrightness WRITE setBrightness )
       
 public:
    KGammaTable ( int gamma = 100, int brightness = 0,

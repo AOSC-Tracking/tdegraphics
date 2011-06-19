@@ -153,7 +153,7 @@ void kpTool::createAction ()
     m_action = new kpToolAction (text (), iconName (), shortcutForKey (m_key),
                                  this, TQT_SLOT (slotActionActivated ()),
                                  m_mainWindow->actionCollection (), name ());
-    m_action->setExclusiveGroup (TQString::fromLatin1 ("Tool Box Actions"));
+    m_action->setExclusiveGroup (TQString::tqfromLatin1 ("Tool Box Actions"));
     m_action->setWhatsThis (description ());
 
     connect (m_action, TQT_SIGNAL (toolTipChanged (const TQString &)),
@@ -239,7 +239,7 @@ KShortcut kpTool::shortcutForKey (int key)
         shortcut.append (KKeySequence (KKey (key)));
         // (CTRL+<key>, ALT+<key>, CTRL+ALT+<key>, CTRL+SHIFT+<key>
         //  all clash with global KDE shortcuts)
-        shortcut.append (KKeySequence (KKey (Qt::ALT + Qt::SHIFT + key)));
+        shortcut.append (KKeySequence (KKey (TQt::ALT + TQt::SHIFT + key)));
     }
 
     return shortcut;
@@ -256,7 +256,7 @@ KShortcut kpTool::shortcut () const
 bool kpTool::keyIsText (int key)
 {
     // TODO: should work like !TQKeyEvent::text().isEmpty()
-    return !(key & (Qt::MODIFIER_MASK ^ Qt::SHIFT));
+    return !(key & (TQt::MODIFIER_MASK ^ TQt::SHIFT));
 }
 
 // public static
@@ -744,7 +744,7 @@ void kpTool::endDrawInternal (const TQPoint &thisPoint, const TQRect &normalized
 // private
 void kpTool::endShapeInternal (const TQPoint &thisPoint, const TQRect &normalizedRect)
 {
-    endDrawInternal (thisPoint, normalizedRect, true/*end shape*/);
+    endDrawInternal (thisPoint, normalizedRect, true/*end tqshape*/);
 }
 
 // virtual
@@ -940,11 +940,11 @@ void kpTool::mousePressEvent (TQMouseEvent *e)
 #endif
 
     // state of all the buttons - not just the one that triggered the event (button())
-    Qt::ButtonState buttonState = e->stateAfter ();
+    TQt::ButtonState buttonState = e->stateAfter ();
 
     if (m_mainWindow && e->button () == Qt::MidButton)
     {
-        const TQString text = TQApplication::clipboard ()->text (QClipboard::Selection);
+        const TQString text = TQApplication::tqclipboard ()->text (TQClipboard::Selection);
     #if DEBUG_KP_TOOL && 1
         kdDebug () << "\tMMB pasteText='" << text << "'" << endl;
     #endif
@@ -1016,9 +1016,9 @@ void kpTool::mousePressEvent (TQMouseEvent *e)
 
     // let user know what mouse button is being used for entire draw
     m_mouseButton = mouseButton (buttonState);
-    m_shiftPressed = (buttonState & Qt::ShiftButton);
-    m_controlPressed = (buttonState & Qt::ControlButton);
-    m_altPressed = (buttonState & Qt::AltButton);
+    m_shiftPressed = (buttonState & TQt::ShiftButton);
+    m_controlPressed = (buttonState & TQt::ControlButton);
+    m_altPressed = (buttonState & TQt::AltButton);
     m_startPoint = m_currentPoint = view ? view->transformViewToDoc (e->pos ()) : TQPoint (-1, -1);
     m_currentViewPoint = view ? e->pos () : TQPoint (-1, -1);
     m_viewUnderStartPoint = view;
@@ -1040,19 +1040,19 @@ void kpTool::mouseMoveEvent (TQMouseEvent *e)
     kdDebug () << "kpTool::mouseMoveEvent pos=" << e->pos ()
                << " btnStateAfter=" << (int) e->stateAfter () << endl;
     kpView *v0 = viewUnderCursor (),
-           *v1 = viewManager ()->viewUnderCursor (true/*use Qt*/),
+           *v1 = viewManager ()->viewUnderCursor (true/*use TQt*/),
            *v2 = viewUnderStartPoint ();
     kdDebug () << "\tviewUnderCursor=" << (v0 ? v0->name () : "(none)")
-               << " viewUnderCursorQt=" << (v1 ? v1->name () : "(none)")
+               << " viewUnderCursorTQt=" << (v1 ? v1->name () : "(none)")
                << " viewUnderStartPoint=" << (v2 ? v2->name () : "(none)")
                << endl;
-    kdDebug () << "\tfocusWidget=" << kapp->focusWidget () << endl;
+    kdDebug () << "\ttqfocusWidget=" << kapp->tqfocusWidget () << endl;
 #endif
 
-    Qt::ButtonState buttonState = e->stateAfter ();
-    m_shiftPressed = (buttonState & Qt::ShiftButton);
-    m_controlPressed = (buttonState & Qt::ControlButton);
-    m_altPressed = (buttonState & Qt::AltButton);
+    TQt::ButtonState buttonState = e->stateAfter ();
+    m_shiftPressed = (buttonState & TQt::ShiftButton);
+    m_controlPressed = (buttonState & TQt::ControlButton);
+    m_altPressed = (buttonState & TQt::AltButton);
 
     if (m_beganDraw)
     {
@@ -1151,10 +1151,10 @@ void kpTool::wheelEvent (TQWheelEvent *e)
     e->ignore ();
     
     // If CTRL not pressed, bye.
-    if ((e->state () & Qt::ControlButton) == 0)
+    if ((e->state () & TQt::ControlButton) == 0)
         return;
     
-    // If drawing, bye; don't care if a shape in progress though.
+    // If drawing, bye; don't care if a tqshape in progress though.
     if (hasBegunDraw ())
         return;
         
@@ -1196,20 +1196,20 @@ void kpTool::keyPressEvent (TQKeyEvent *e)
     switch (e->key ())
     {
     case 0:
-    case Qt::Key_unknown:
+    case TQt::Key_unknown:
     #if DEBUG_KP_TOOL && 0
         kdDebug () << "kpTool::keyPressEvent() picked up unknown key!" << endl;
     #endif
         // --- fall thru and update all modifiers ---
-    case Qt::Key_Alt:
-    case Qt::Key_Shift:
-    case Qt::Key_Control:
+    case TQt::Key_Alt:
+    case TQt::Key_Shift:
+    case TQt::Key_Control:
         keyUpdateModifierState (e);
 
         e->accept ();
         break;
 
-    case Qt::Key_Delete:
+    case TQt::Key_Delete:
         m_mainWindow->slotDelete ();
         break;
 
@@ -1217,21 +1217,21 @@ void kpTool::keyPressEvent (TQKeyEvent *e)
      * TQCursor::setPos conveniently causes mouseMoveEvents :)
      */
 
-    case Qt::Key_Home:     dx = -1, dy = -1;    break;
-    case Qt::Key_Up:                dy = -1;    break;
-    case Qt::Key_PageUp:   dx = +1, dy = -1;    break;
+    case TQt::Key_Home:     dx = -1, dy = -1;    break;
+    case TQt::Key_Up:                dy = -1;    break;
+    case TQt::Key_PageUp:   dx = +1, dy = -1;    break;
 
-    case Qt::Key_Left:     dx = -1;             break;
-    case Qt::Key_Right:    dx = +1;             break;
+    case TQt::Key_Left:     dx = -1;             break;
+    case TQt::Key_Right:    dx = +1;             break;
 
-    case Qt::Key_End:      dx = -1, dy = +1;    break;
-    case Qt::Key_Down:              dy = +1;    break;
-    case Qt::Key_PageDown: dx = +1, dy = +1;    break;
+    case TQt::Key_End:      dx = -1, dy = +1;    break;
+    case TQt::Key_Down:              dy = +1;    break;
+    case TQt::Key_PageDown: dx = +1, dy = +1;    break;
 
-    case Qt::Key_Enter:
-    case Qt::Key_Return:
-    case Qt::Key_Insert:
-    case Qt::Key_Clear/*Numpad 5 Key*/:
+    case TQt::Key_Enter:
+    case TQt::Key_Return:
+    case TQt::Key_Insert:
+    case TQt::Key_Clear/*Numpad 5 Key*/:
     {
         kpView *view = viewUnderCursor (); // TODO: wrong for dragging lines outside of view (for e.g.)
         if (view)
@@ -1258,8 +1258,8 @@ void kpTool::keyPressEvent (TQKeyEvent *e)
     #endif
 
 
-        const int viewIncX = (dx ? QMAX (1, view->zoomLevelX () / 100) * dx : 0);
-        const int viewIncY = (dy ? QMAX (1, view->zoomLevelY () / 100) * dy : 0);
+        const int viewIncX = (dx ? TQMAX (1, view->zoomLevelX () / 100) * dx : 0);
+        const int viewIncY = (dy ? TQMAX (1, view->zoomLevelY () / 100) * dy : 0);
 
         int newViewX = oldPoint.x () + viewIncX;
         int newViewY = oldPoint.y () + viewIncY;
@@ -1282,8 +1282,8 @@ void kpTool::keyPressEvent (TQKeyEvent *e)
 
 
         // TODO: visible width/height (e.g. with scrollbars)
-        int x = QMIN (QMAX (newViewX, 0), view->width () - 1);
-        int y = QMIN (QMAX (newViewY, 0), view->height () - 1);
+        int x = TQMIN (TQMAX (newViewX, 0), view->width () - 1);
+        int y = TQMIN (TQMAX (newViewY, 0), view->height () - 1);
 
         TQCursor::setPos (view->mapToGlobal (TQPoint (x, y)));
         e->accept ();
@@ -1301,23 +1301,23 @@ void kpTool::keyReleaseEvent (TQKeyEvent *e)
     switch (e->key ())
     {
     case 0:
-    case Qt::Key_unknown:
+    case TQt::Key_unknown:
     #if DEBUG_KP_TOOL
         kdDebug () << "kpTool::keyReleaseEvent() picked up unknown key!" << endl;
     #endif
-        // HACK: around Qt bug: if you hold a modifier before you start the
+        // HACK: around TQt bug: if you hold a modifier before you start the
         //                      program and then release it over the view,
-        //                      Qt reports it as the release of an unknown key
+        //                      TQt reports it as the release of an unknown key
         // --- fall thru and update all modifiers ---
-    case Qt::Key_Alt:
-    case Qt::Key_Shift:
-    case Qt::Key_Control:
+    case TQt::Key_Alt:
+    case TQt::Key_Shift:
+    case TQt::Key_Control:
         keyUpdateModifierState (e);
 
         e->accept ();
         break;
 
-    case Qt::Key_Escape:
+    case TQt::Key_Escape:
         if (hasBegunDraw ())
         {
             cancelShapeInternal ();
@@ -1326,10 +1326,10 @@ void kpTool::keyReleaseEvent (TQKeyEvent *e)
 
         break;
 
-    case Qt::Key_Enter:
-    case Qt::Key_Return:
-    case Qt::Key_Insert:
-    case Qt::Key_Clear/*Numpad 5 Key*/:
+    case TQt::Key_Enter:
+    case TQt::Key_Return:
+    case TQt::Key_Insert:
+    case TQt::Key_Clear/*Numpad 5 Key*/:
     {
         kpView *view = viewUnderCursor ();
         if (view)
@@ -1351,21 +1351,21 @@ void kpTool::keyUpdateModifierState (TQKeyEvent *e)
 #if DEBUG_KP_TOOL && 0
     kdDebug () << "kpTool::updateModifierState() e->key=" << e->key () << endl;
     kdDebug () << "\tshift="
-               << (e->stateAfter () & Qt::ShiftButton)
+               << (e->stateAfter () & TQt::ShiftButton)
                << " control="
-               << (e->stateAfter () & Qt::ControlButton)
+               << (e->stateAfter () & TQt::ControlButton)
                << " alt="
-               << (e->stateAfter () & Qt::AltButton)
+               << (e->stateAfter () & TQt::AltButton)
                << endl;
 #endif
-    if (e->key () & (Qt::Key_Alt | Qt::Key_Shift | Qt::Key_Control))
+    if (e->key () & (TQt::Key_Alt | TQt::Key_Shift | TQt::Key_Control))
     {
     #if DEBUG_KP_TOOL && 0
         kdDebug () << "\t\tmodifier changed - use e's claims" << endl;
     #endif
-        setShiftPressed (e->stateAfter () & Qt::ShiftButton);
-        setControlPressed (e->stateAfter () & Qt::ControlButton);
-        setAltPressed (e->stateAfter () & Qt::AltButton);
+        setShiftPressed (e->stateAfter () & TQt::ShiftButton);
+        setControlPressed (e->stateAfter () & TQt::ControlButton);
+        setAltPressed (e->stateAfter () & TQt::AltButton);
     }
     else
     {
@@ -1379,7 +1379,7 @@ void kpTool::keyUpdateModifierState (TQKeyEvent *e)
 
         // TODO: Can't do much about ALT - unless it's always KApplication::Modifier1?
         //       Ditto for everywhere else where I set SHIFT & CTRL but not alt.
-        setAltPressed (e->stateAfter () & Qt::AltButton);
+        setAltPressed (e->stateAfter () & TQt::AltButton);
     }
 }
 
@@ -1466,14 +1466,14 @@ void kpTool::leaveEvent (TQEvent *)
 }
 
 // static
-int kpTool::mouseButton (const Qt::ButtonState &buttonState)
+int kpTool::mouseButton (const TQt::ButtonState &buttonState)
 {
     // we have nothing to do with mid-buttons
     if (buttonState & Qt::MidButton)
         return -1;
 
     // both left & right together is quite meaningless...
-    Qt::ButtonState bothButtons = (Qt::ButtonState) (Qt::LeftButton | Qt::RightButton);
+    TQt::ButtonState bothButtons = (TQt::ButtonState) (Qt::LeftButton | Qt::RightButton);
     if ((buttonState & bothButtons) == bothButtons)
         return -1;
 
@@ -1618,7 +1618,7 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
                                  const TQString &text,
                                  const TQString &caption,
                                  const TQString &continueButtonText,
-                                 TQWidget *parent)
+                                 TQWidget *tqparent)
 {
 #if DEBUG_KP_TOOL
     kdDebug () << "kpTool::warnIfBigImageSize()"
@@ -1648,11 +1648,11 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
     if (kpPixmapFX::pixmapSize (newWidth, newHeight, TQPixmap::defaultDepth ()) >=
         KP_BIG_IMAGE_SIZE)
     {
-        int accept = KMessageBox::warningContinueCancel (parent,
+        int accept = KMessageBox::warningContinueCancel (tqparent,
             text,
             caption,
             continueButtonText,
-            TQString::fromLatin1 ("BigImageDontAskAgain"));
+            TQString::tqfromLatin1 ("BigImageDontAskAgain"));
 
         return (accept == KMessageBox::Continue);
     }

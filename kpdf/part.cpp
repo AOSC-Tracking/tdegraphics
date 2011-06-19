@@ -80,12 +80,12 @@ class PDFOptionsPage : public KPrintDialogPage
        PDFOptionsPage()
        {
            setTitle( i18n( "PDF Options" ) );
-           TQVBoxLayout *layout = new TQVBoxLayout(this);
+           TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
            m_forceRaster = new TQCheckBox(i18n("Force rasterization"), this);
            TQToolTip::add(m_forceRaster, i18n("Rasterize into an image before printing"));
            TQWhatsThis::add(m_forceRaster, i18n("Forces the rasterization of each page into an image before printing it. This usually gives somewhat worse results, but is useful when printing documents that appear to print incorrectly."));
-           layout->addWidget(m_forceRaster);
-           layout->addStretch(1);
+           tqlayout->addWidget(m_forceRaster);
+           tqlayout->addStretch(1);
        }
 
        void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false )
@@ -113,10 +113,10 @@ using namespace KPDF;
 
 unsigned int Part::m_count = 0;
 
-Part::Part(TQWidget *parentWidget, const char *widgetName,
-           TQObject *parent, const char *name,
+Part::Part(TQWidget *tqparentWidget, const char *widgetName,
+           TQObject *tqparent, const char *name,
            const TQStringList & /*args*/ )
-	: DCOPObject("kpdf"), KParts::ReadOnlyPart(parent, name), m_showMenuBarAction(0), m_showFullScreenAction(0),
+	: DCOPObject("kpdf"), KParts::ReadOnlyPart(tqparent, name), m_showMenuBarAction(0), m_showFullScreenAction(0),
 	m_actionsSearched(false), m_searchStarted(false)
 {
 	// connect the started signal to tell the job the mimetypes we like
@@ -151,13 +151,13 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	connect( m_document, TQT_SIGNAL( openURL(const KURL &) ), this, TQT_SLOT( openURLFromDocument(const KURL &) ) );
 	connect( m_document, TQT_SIGNAL( close() ), this, TQT_SLOT( close() ) );
 	
-	if (parent && parent->metaObject()->slotNames(true).contains("slotQuit()"))
-		connect( m_document, TQT_SIGNAL( quit() ), parent, TQT_SLOT( slotQuit() ) );
+	if (tqparent && tqparent->tqmetaObject()->slotNames(true).tqcontains("slotQuit()"))
+		connect( m_document, TQT_SIGNAL( quit() ), tqparent, TQT_SLOT( slotQuit() ) );
 	else
 		connect( m_document, TQT_SIGNAL( quit() ), this, TQT_SLOT( cannotQuit() ) );
 
 	// widgets: ^searchbar (toolbar containing label and SearchWidget)
-//	m_searchToolBar = new KToolBar( parentWidget, "searchBar" );
+//	m_searchToolBar = new KToolBar( tqparentWidget, "searchBar" );
 //	m_searchToolBar->boxLayout()->setSpacing( KDialog::spacingHint() );
 //	TQLabel * sLabel = new TQLabel( i18n( "&Search:" ), m_searchToolBar, "kde toolbar widget" );
 //	m_searchWidget = new SearchWidget( m_searchToolBar, m_document );
@@ -165,7 +165,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 //	m_searchToolBar->setStretchableWidget( m_searchWidget );
 
 	// widgets: [] splitter []
-	m_splitter = new TQSplitter( parentWidget, widgetName );
+	m_splitter = new TQSplitter( tqparentWidget, widgetName );
 	m_splitter->setOpaqueResize( true );
 	setWidget( m_splitter );
 	
@@ -186,7 +186,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 
 	int index;
 	// [left toolbox: Table of Contents] | []
-	// dummy wrapper with layout to enable horizontal scroll bars (bug: 147233)
+	// dummy wrapper with tqlayout to enable horizontal scroll bars (bug: 147233)
 	TQWidget *tocWrapper = new TQWidget(m_toolBox);
 	TQVBoxLayout *tocWrapperLayout = new TQVBoxLayout(tocWrapper);
 	m_tocFrame = new TOC( tocWrapper, m_document );
@@ -278,8 +278,8 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_historyNext->setWhatsThis( i18n( "Go to the place you were after" ) );
 
 	// Find and other actions
-	m_find = KStdAction::find( this, TQT_SLOT( slotFind() ), ac, "find" );
-	m_find->setEnabled( false );
+	m_tqfind = KStdAction::find( this, TQT_SLOT( slotFind() ), ac, "tqfind" );
+	m_tqfind->setEnabled( false );
 
 	m_findNext = KStdAction::findNext( this, TQT_SLOT( slotFindNext() ), ac, "find_next" );
 	m_findNext->setEnabled( false );
@@ -297,7 +297,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_showPresentation = new KAction( i18n("P&resentation"), "kpresenter_kpr", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
 	m_showPresentation->setEnabled( false );
 
-	// attach the actions of the children widgets too
+	// attach the actions of the tqchildren widgets too
 	m_pageView->setupActions( ac );
 
 	// apply configuration (both internal settings and GUI configured items)
@@ -310,7 +310,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	}
 	m_splitter->setSizes( splitterSizes );
 	// get notified about splitter size changes (HACK that will be removed
-	// by connecting to Qt4::QSplitter's sliderMoved())
+	// by connecting to TQt4::TQSplitter's sliderMoved())
 	m_pageView->installEventFilter( this );
 	m_watcher = new KDirWatch( this );
 	connect( m_watcher, TQT_SIGNAL( dirty( const TQString& ) ), this, TQT_SLOT( slotFileDirty( const TQString& ) ) );
@@ -422,7 +422,7 @@ bool Part::openFile()
         {
             if ( TQFile::exists(m_file) )
 	    {
-                KTempFile tf( TQString::null, ".pdf" );
+                KTempFile tf( TQString(), ".pdf" );
                 if ( tf.status() == 0 )
                 {
                     tf.close();
@@ -447,12 +447,12 @@ bool Part::openFile()
         }
     }
 
-    m_temporaryLocalFile = TQString::null;
+    m_temporaryLocalFile = TQString();
 
     bool ok = m_document->openDocument( m_file, url(), mime );
 
     // update one-time actions
-    m_find->setEnabled( ok && m_document-> supportsSearching());
+    m_tqfind->setEnabled( ok && m_document-> supportsSearching());
     m_findNext->setEnabled( ok && m_document-> supportsSearching());
     m_saveAs->setEnabled( ok );
     m_printPreview->setEnabled( ok );
@@ -482,7 +482,7 @@ bool Part::openFile()
     // if the 'StartFullScreen' flag is set, start presentation
     if ( m_document->getMetaData( "StartFullScreen" ) == "yes" )
     {
-	KMessageBox::information(m_presentationWidget, i18n("The document is going to be launched on presentation mode because the file requested it."), TQString::null, "autoPresentationWarning");
+	KMessageBox::information(m_presentationWidget, i18n("The document is going to be launched on presentation mode because the file requested it."), TQString(), "autoPresentationWarning");
         slotShowPresentation();
     }
 
@@ -502,7 +502,7 @@ bool Part::openURL(const KURL &url)
     // if it matches then: download it (if not local) extract to a temp file using
     // KTar and proceed with the URL of the temporary file
 
-    m_jobMime = TQString::null;
+    m_jobMime = TQString();
 
     // this calls the above 'openURL' method
     bool b = KParts::ReadOnlyPart::openURL(url);
@@ -510,7 +510,7 @@ bool Part::openURL(const KURL &url)
     // these setWindowCaption calls only work for local files
     if ( !b )
     {
-        KMessageBox::error( widget(), i18n("Could not open %1").arg( url.prettyURL() ) );
+        KMessageBox::error( widget(), i18n("Could not open %1").tqarg( url.prettyURL() ) );
         emit setWindowCaption("");
     }
     else
@@ -548,11 +548,11 @@ bool Part::closeURL()
     if (!m_temporaryLocalFile.isNull())
     {
         TQFile::remove( m_temporaryLocalFile );
-        m_temporaryLocalFile = TQString::null;
+        m_temporaryLocalFile = TQString();
     }
 
     slotHidePresentation();
-    m_find->setEnabled( false );
+    m_tqfind->setEnabled( false );
     m_findNext->setEnabled( false );
     m_saveAs->setEnabled( false );
     m_printPreview->setEnabled( false );
@@ -571,7 +571,7 @@ bool Part::closeURL()
 bool Part::eventFilter( TQObject * watched, TQEvent * e )
 {
     // if pageView has been resized, save splitter sizes
-    if ( watched == m_pageView && e->type() == TQEvent::Resize )
+    if ( TQT_BASE_OBJECT(watched) == TQT_BASE_OBJECT(m_pageView) && e->type() == TQEvent::Resize )
         m_saveSplitterSizeTimer->start(500, true);
 
     // only intercept events, don't block them
@@ -634,11 +634,11 @@ void Part::slotDoFileDirty()
 
 void Part::close()
 {
-  if (parent() && strcmp(parent()->name(), "KPDF::Shell") == 0)
+  if (tqparent() && strcmp(tqparent()->name(), "KPDF::Shell") == 0)
   {
     closeURL();
   }
-  else KMessageBox::information(widget(), i18n("This link points to a close document action that does not work when using the embedded viewer."), TQString::null, "warnNoCloseIfNotInKPDF");
+  else KMessageBox::information(widget(), i18n("This link points to a close document action that does not work when using the embedded viewer."), TQString(), "warnNoCloseIfNotInKPDF");
 }
 
 void Part::updateViewActions()
@@ -686,7 +686,7 @@ void Part::psTransformEnded()
 
 void Part::cannotQuit()
 {
-	KMessageBox::information(widget(), i18n("This link points to a quit application action that does not work when using the embedded viewer."), TQString::null, "warnNoQuitIfNotInKPDF");
+	KMessageBox::information(widget(), i18n("This link points to a quit application action that does not work when using the embedded viewer."), TQString(), "warnNoQuitIfNotInKPDF");
 }
 
 void Part::saveSplitterSize()
@@ -789,7 +789,7 @@ void Part::slotFind()
         m_searchStarted = true;
         m_document->resetSearch( PART_SEARCH_ID );
         m_document->searchText( PART_SEARCH_ID, dlg.pattern(), false, savedCaseSensitive,
-                                KPDFDocument::NextMatch, true, qRgb( 255, 255, 64 ) );
+                                KPDFDocument::NextMatch, true, tqRgb( 255, 255, 64 ) );
     }
 }
 
@@ -801,22 +801,22 @@ void Part::slotFindNext()
 
 void Part::slotSaveFileAs()
 {
-    KURL saveURL = KFileDialog::getSaveURL( url().isLocalFile() ? url().url() : url().fileName(), TQString::null, widget() );
+    KURL saveURL = KFileDialog::getSaveURL( url().isLocalFile() ? url().url() : url().fileName(), TQString(), widget() );
     if ( saveURL.isValid() && !saveURL.isEmpty() )
     {
         if (saveURL == url())
         {
-            KMessageBox::information( widget(), i18n("You are trying to overwrite \"%1\" with itself. This is not allowed. Please save it in another location.").arg(saveURL.filename()) );
+            KMessageBox::information( widget(), i18n("You are trying to overwrite \"%1\" with itself. This is not allowed. Please save it in another location.").tqarg(saveURL.filename()) );
             return;
         }
         if ( KIO::NetAccess::exists( saveURL, false, widget() ) )
         {
-            if (KMessageBox::warningContinueCancel( widget(), i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?").arg(saveURL.filename()), TQString::null, i18n("Overwrite")) != KMessageBox::Continue)
+            if (KMessageBox::warningContinueCancel( widget(), i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?").tqarg(saveURL.filename()), TQString(), i18n("Overwrite")) != KMessageBox::Continue)
                 return;
         }
 
         if ( !KIO::NetAccess::file_copy( m_file, saveURL, -1, true ) )
-            KMessageBox::information( 0, i18n("File could not be saved in '%1'. Try to save it to another location.").arg( saveURL.prettyURL() ) );
+            KMessageBox::information( 0, i18n("File could not be saved in '%1'. Try to save it to another location.").tqarg( saveURL.prettyURL() ) );
     }
 }
 
@@ -894,7 +894,7 @@ void Part::slotPrintPreview()
         page = m_document->page(i);
         width = page->width();
         height = page->height();
-        if (page->rotation() == 90 || page->rotation() == 270) qSwap(width, height);
+        if (page->rotation() == 90 || page->rotation() == 270) tqSwap(width, height);
         if (width > height) landscape++;
         else portrait++;
     }
@@ -939,7 +939,7 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 	KPopupMenu *popup = new KPopupMenu( widget(), "rmb popup" );
 	if (page)
 	{
-		popup->insertTitle( i18n( "Page %1" ).arg( page->number() + 1 ) );
+		popup->insertTitle( i18n( "Page %1" ).tqarg( page->number() + 1 ) );
         if ( page->hasBookmark() )
 			popup->insertItem( SmallIcon("bookmark"), i18n("Remove Bookmark"), 1 );
 		else
@@ -1041,7 +1041,7 @@ void Part::slotPrint()
         page = m_document->page(i);
         width = page->width();
         height = page->height();
-        if (page->rotation() == 90 || page->rotation() == 270) qSwap(width, height);
+        if (page->rotation() == 90 || page->rotation() == 270) tqSwap(width, height);
         if (width > height) landscape++;
         else portrait++;
     }
@@ -1085,8 +1085,8 @@ void Part::saveDocumentRestoreInfo(KConfig* config)
 /*
 * BrowserExtension class
 */
-BrowserExtension::BrowserExtension(Part* parent)
-  : KParts::BrowserExtension( parent, "KPDF::BrowserExtension" )
+BrowserExtension::BrowserExtension(Part* tqparent)
+  : KParts::BrowserExtension( tqparent, "KPDF::BrowserExtension" )
 {
 	emit enableAction("print", true);
 	setURLDropHandlingEnabled(true);
@@ -1094,7 +1094,7 @@ BrowserExtension::BrowserExtension(Part* parent)
 
 void BrowserExtension::print()
 {
-	static_cast<Part*>(parent())->slotPrint();
+	static_cast<Part*>(tqparent())->slotPrint();
 }
 
 #include "part.moc"

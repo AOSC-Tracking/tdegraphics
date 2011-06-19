@@ -40,11 +40,12 @@ class TQLabel;
 /**
  * Helper class for @ref PMDialogView
  */
-class PMDialogEditContent : public QScrollView
+class PMDialogEditContent : public TQScrollView
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMDialogEditContent( TQWidget* parent, const char* name = 0 );
+   PMDialogEditContent( TQWidget* tqparent, const char* name = 0 );
    void setContents( TQWidget* wid );
    void calculateSize( );
 protected:
@@ -63,11 +64,12 @@ private:
 class PMDialogView : public PMViewBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Creates a new PMDialogView widget
     */
-   PMDialogView( PMPart* part, TQWidget* parent, const char* name = 0 );
+   PMDialogView( PMPart* part, TQWidget* tqparent, const char* name = 0 );
    /**
     * Deletes the widget
     */
@@ -154,9 +156,9 @@ public:
    virtual TQString viewType( ) const { return TQString( "dialogview" ); }
    virtual TQString description( ) const;
    virtual TQString iconName( ) const { return TQString( "pmdialogview" ); }
-   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
+   virtual PMViewBase* newInstance( TQWidget* tqparent, PMPart* part ) const
    {
-      return new PMDialogView( part, parent );
+      return new PMDialogView( part, tqparent );
    }
 };
 

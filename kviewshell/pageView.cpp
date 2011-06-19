@@ -30,20 +30,20 @@
 #include "pageView.h"
 #include "pageNumber.h"
 
-PageView::PageView( TQWidget* parent, const char* name )
-  : TQScrollView( parent, name, WStaticContents | WNoAutoErase)
+PageView::PageView( TQWidget* tqparent, const char* name )
+  : TQScrollView( tqparent, name, WStaticContents | WNoAutoErase)
 {
   moveTool = true;
 
   widgetList = 0;
-  viewport()->setFocusPolicy(TQWidget::StrongFocus);
+  viewport()->setFocusPolicy(TQ_StrongFocus);
 
   setResizePolicy(TQScrollView::Manual);
 
   setVScrollBarMode(TQScrollView::Auto);
   setHScrollBarMode(TQScrollView::Auto);
 
-  viewport()->setBackgroundMode(Qt::NoBackground);
+  viewport()->setBackgroundMode(TQt::NoBackground);
 
   setResizePolicy(Manual);
   setDragAutoScroll(false);
@@ -66,7 +66,7 @@ void PageView::addChild( TQPtrVector<DocumentWidget> *wdgList )
   }
 
   widgetList = wdgList;
-  layoutPages();
+  tqlayoutPages();
 }
 
 
@@ -93,7 +93,7 @@ bool PageView::readUp()
     DocumentWidget* widget = 0;
     // Find the widget(s) that intersect the top of the viewport
     // TODO: It would be better to use a binary search.
-    for(Q_UINT16 i=0; i<widgetList->size(); i++)
+    for(TQ_UINT16 i=0; i<widgetList->size(); i++)
     {
       widget = widgetList->at(i);
       if (childY(widget) < top && childY(widget) + widget->height() > top)
@@ -103,7 +103,7 @@ bool PageView::readUp()
       }
     }
 
-    int newValue = QMAX( verticalScrollBar()->value() - (int)(height() * 0.9),
+    int newValue = TQMAX( verticalScrollBar()->value() - (int)(height() * 0.9),
                          verticalScrollBar()->minValue() );
     verticalScrollBar()->setValue( newValue );
     return true;
@@ -122,7 +122,7 @@ bool PageView::readDown()
     DocumentWidget* widget = 0;
     // Find the widget(s) that intersect the bottom of the viewport
     // TODO: It would be better to use a binary search.
-    for(Q_UINT16 i=0; i<widgetList->size(); i++)
+    for(TQ_UINT16 i=0; i<widgetList->size(); i++)
     {
       widget = widgetList->at(i);
       if (childY(widget) < bottom && childY(widget) + widget->height() > bottom)
@@ -132,7 +132,7 @@ bool PageView::readDown()
       }
     }
 
-    int newValue = QMIN( verticalScrollBar()->value() + (int)(height() * 0.9),
+    int newValue = TQMIN( verticalScrollBar()->value() + (int)(height() * 0.9),
                          verticalScrollBar()->maxValue() );
     verticalScrollBar()->setValue( newValue );
 
@@ -195,11 +195,11 @@ void PageView::keyPressEvent( TQKeyEvent* e )
 
 void PageView::contentsMousePressEvent( TQMouseEvent* e )
 {
-  if (e->button() == LeftButton)
+  if (e->button() == Qt::LeftButton)
   {
     if (moveTool)
     {
-      setCursor(Qt::SizeAllCursor);
+      setCursor(TQt::SizeAllCursor);
       dragGrabPos = e->globalPos();
     }
     else
@@ -209,20 +209,20 @@ void PageView::contentsMousePressEvent( TQMouseEvent* e )
   }
   else
   {
-    setCursor(Qt::arrowCursor);
+    setCursor(TQt::arrowCursor);
   }
 }
 
 void PageView::contentsMouseReleaseEvent( TQMouseEvent* )
 {
-  setCursor(Qt::arrowCursor);
+  setCursor(TQt::arrowCursor);
 }
 
 void PageView::contentsMouseMoveEvent( TQMouseEvent* e )
 {
   TQPoint newPos = e->globalPos();
 
-  if (e->state() == LeftButton && moveTool)
+  if (e->state() == Qt::LeftButton && moveTool)
   {
     TQPoint delta = dragGrabPos - newPos;
     scrollBy(delta.x(), delta.y());
@@ -237,17 +237,17 @@ void PageView::viewportResizeEvent( TQResizeEvent* e )
   if (!widgetList)
     return;
 
-  layoutPages();
+  tqlayoutPages();
 
   emit viewSizeChanged( viewport()->size() );
 }
 
-void PageView::setNrColumns( Q_UINT8 cols )
+void PageView::setNrColumns( TQ_UINT8 cols )
 {
   nrCols = cols;
 }
 
-void PageView::setNrRows( Q_UINT8 rows )
+void PageView::setNrRows( TQ_UINT8 rows )
 {
   nrRows = rows;
 }
@@ -285,7 +285,7 @@ void PageView::setFullScreenMode(bool fullScreen)
     backgroundColor = viewport()->paletteBackgroundColor();
     if (singlePageFullScreenMode())
     {
-      viewport()->setPaletteBackgroundColor( Qt::black ) ;
+      viewport()->setPaletteBackgroundColor( TQt::black ) ;
     }
   }
   else
@@ -295,7 +295,7 @@ void PageView::setFullScreenMode(bool fullScreen)
   }
 }
 
-void PageView::layoutPages(bool zoomChanged)
+void PageView::tqlayoutPages(bool zoomChanged)
 {
   // Paranoid safety check
   if (widgetList == 0)
@@ -321,29 +321,29 @@ void PageView::layoutPages(bool zoomChanged)
     distance = 0;
   }
 
-  TQMemArray<Q_UINT32> colWidth(nrCols);
-  for(Q_UINT8 i=0; i<colWidth.size(); i++)
+  TQMemArray<TQ_UINT32> colWidth(nrCols);
+  for(TQ_UINT8 i=0; i<colWidth.size(); i++)
     colWidth[i] = 0;
 
-  Q_UINT16 numRows;
+  TQ_UINT16 numRows;
   if(nrCols <= 2)
   {
     numRows = (widgetList->size()+2*nrCols-2) / nrCols;
   }
   else
   {
-    numRows = (Q_INT16)ceil(((double)widgetList->size()) / nrCols);
+    numRows = (TQ_INT16)ceil(((double)widgetList->size()) / nrCols);
   }
 
-  TQMemArray<Q_UINT32> rowHeight(numRows);
-  for(Q_UINT16 i=0; i<rowHeight.size(); i++)
+  TQMemArray<TQ_UINT32> rowHeight(numRows);
+  for(TQ_UINT16 i=0; i<rowHeight.size(); i++)
     rowHeight[i] = 0;
 
   // Now find the widths and heights of the columns
-  for(Q_UINT16 i=0; i<widgetList->size(); i++) 
+  for(TQ_UINT16 i=0; i<widgetList->size(); i++) 
   {
-    Q_UINT8 col;
-    Q_UINT16 row;
+    TQ_UINT8 col;
+    TQ_UINT16 row;
 
     if (nrCols == 2) {
       // In two-column display, start with the right column
@@ -354,31 +354,31 @@ void PageView::layoutPages(bool zoomChanged)
       row = (i+nrCols) / nrCols - 1;
     }
 
-    colWidth[col] = QMAX(colWidth[col], (Q_UINT32)widgetList->at(i)->pageSize().width());
-    rowHeight[row] = QMAX(rowHeight[row], (Q_UINT32)widgetList->at(i)->pageSize().height());
+    colWidth[col] = TQMAX(colWidth[col], (TQ_UINT32)widgetList->at(i)->pageSize().width());
+    rowHeight[row] = TQMAX(rowHeight[row], (TQ_UINT32)widgetList->at(i)->pageSize().height());
   }
 
   // Calculate the total width and height of the display
-  Q_UINT32 totalHeight = 0;
-  for(Q_UINT16 i=0; i<rowHeight.size(); i++)
+  TQ_UINT32 totalHeight = 0;
+  for(TQ_UINT16 i=0; i<rowHeight.size(); i++)
     totalHeight += rowHeight[i];
 
   totalHeight += (numRows+1)*distance;
-  Q_UINT32 totalWidth = 0;
-  for(Q_UINT8 i=0; i<colWidth.size(); i++)
+  TQ_UINT32 totalWidth = 0;
+  for(TQ_UINT8 i=0; i<colWidth.size(); i++)
     totalWidth += colWidth[i];
 
   totalWidth += (nrCols+1)*distance;
   TQSize newViewportSize = viewportSize( totalWidth, totalHeight );
-  Q_UINT32 centeringLeft = 0;
-  if( (Q_UINT32)newViewportSize.width() > totalWidth )
+  TQ_UINT32 centeringLeft = 0;
+  if( (TQ_UINT32)newViewportSize.width() > totalWidth )
     centeringLeft = ( newViewportSize.width() - totalWidth )/2;
-  Q_UINT32 centeringTop = 0;
-  if( (Q_UINT32)newViewportSize.height() > totalHeight )
+  TQ_UINT32 centeringTop = 0;
+  if( (TQ_UINT32)newViewportSize.height() > totalHeight )
     centeringTop = ( newViewportSize.height() - totalHeight)/2;
 
   // Resize the viewport
-  if (((Q_UINT32)contentsWidth() != totalWidth) || ((Q_UINT32)contentsHeight() != totalHeight))
+  if (((TQ_UINT32)contentsWidth() != totalWidth) || ((TQ_UINT32)contentsHeight() != totalHeight))
   {
     // Calculate the point in the coordinates of the contents which is currently at the center of the viewport.
     TQPoint midPoint = TQPoint(visibleWidth() / 2 + contentsX(), visibleHeight() / 2 + contentsY()); 
@@ -394,20 +394,20 @@ void PageView::layoutPages(bool zoomChanged)
 
   // Finally, calculate the left and top coordinates of each row and
   // column, respectively
-  TQMemArray<Q_UINT32> colLeft(nrCols);
+  TQMemArray<TQ_UINT32> colLeft(nrCols);
   colLeft[0] = distance;
-  for(Q_UINT8 i=1; i<colLeft.size(); i++)
+  for(TQ_UINT8 i=1; i<colLeft.size(); i++)
     colLeft[i] = colLeft[i-1]+colWidth[i-1]+distance;
 
-  TQMemArray<Q_UINT32> rowTop(numRows);
+  TQMemArray<TQ_UINT32> rowTop(numRows);
   rowTop[0] = distance;
-  for(Q_UINT16 i=1; i<rowTop.size(); i++)
+  for(TQ_UINT16 i=1; i<rowTop.size(); i++)
     rowTop[i] = rowTop[i-1]+rowHeight[i-1]+distance;
 
-  for(Q_UINT16 i=0; i<widgetList->size(); i++) 
+  for(TQ_UINT16 i=0; i<widgetList->size(); i++) 
   {
-    Q_UINT8 col;
-    Q_UINT16 row;
+    TQ_UINT8 col;
+    TQ_UINT16 row;
     if (nrCols == 2)
     {
       // In two column-mode start with the right column.
@@ -499,10 +499,10 @@ void PageView::viewportPaintEvent(TQPaintEvent* e)
       DocumentWidget* item = widgetList->at(i);
 
       // Check if the Widget needs to be updated.
-      if (!item->geometry().intersects(e->rect()))
+      if (!item->tqgeometry().intersects(e->rect()))
         continue;
 
-      TQRect widgetGeometry = item->geometry();
+      TQRect widgetGeometry = item->tqgeometry();
 
       // Draw the widget.
       if (e->rect().intersects(widgetGeometry))
@@ -521,10 +521,10 @@ void PageView::viewportPaintEvent(TQPaintEvent* e)
   // Paint the background.
   TQPainter p(viewport());
 
-  TQMemArray<TQRect> backgroundRects = backgroundArea.rects();
+  TQMemArray<TQRect> backgroundRects = backgroundArea.tqrects();
 
   for (unsigned int i = 0; i < backgroundRects.count(); i++)
-    p.fillRect(backgroundRects[i], colorGroup().mid());
+    p.fillRect(backgroundRects[i], tqcolorGroup().mid());
 }
 
 
@@ -542,7 +542,7 @@ void PageView::calculateCurrentPageNumber(int x, int y)
   int maxVisiblePixels = 0;
   DocumentWidget* _currentWidget = 0;
 
-  for (Q_UINT16 i = 0; i < widgetList->size(); i++)
+  for (TQ_UINT16 i = 0; i < widgetList->size(); i++)
   {
     DocumentWidget* documentWidget = widgetList->at(i);
     // Safety check

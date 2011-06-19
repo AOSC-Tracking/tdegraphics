@@ -31,9 +31,9 @@ typedef KParts::GenericFactory<FaxMultiPage> FaxMultiPageFactory;
 K_EXPORT_COMPONENT_FACTORY(kfaxviewpart, FaxMultiPageFactory)
 
 
-FaxMultiPage::FaxMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+FaxMultiPage::FaxMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
                              const char *name, const TQStringList&)
-  : KMultiPage(parentWidget, widgetName, parent, name), faxRenderer(parentWidget)
+  : KMultiPage(tqparentWidget, widgetName, tqparent, name), faxRenderer(tqparentWidget)
 {
   /* This is kparts wizardry that cannot be understood by man. Simply
      change the names to match your implementation.  */

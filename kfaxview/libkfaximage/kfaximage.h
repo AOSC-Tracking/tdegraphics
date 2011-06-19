@@ -50,9 +50,10 @@ class pagenode;
 #define KFAX_DPI_SUPERFINE	TQPoint(406,392)
 
 
-class KDE_EXPORT KFaxImage : public QObject
+class KDE_EXPORT KFaxImage : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
 
@@ -63,7 +64,7 @@ public:
      *  @see: numPages
      */
 
-    KFaxImage( const TQString &filename = TQString::null, TQObject *parent = 0, const char *name = 0 );
+    KFaxImage( const TQString &filename = TQString(), TQObject *tqparent = 0, const char *name = 0 );
 
     /**
      *  Destructor

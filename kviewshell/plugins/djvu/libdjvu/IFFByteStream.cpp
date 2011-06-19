@@ -444,7 +444,7 @@ IFFByteStream::full_id(GUTF8String &chkid)
   short_id(chkid);
   if (ctx->bComposite)
     return;
-  // Search parent FORM or PROP chunk.
+  // Search tqparent FORM or PROP chunk.
   for (IFFContext *ct = ctx->next; ct; ct=ct->next)
     if (memcmp(ct->idOne, "FOR", 3)==0 || 
         memcmp(ct->idOne, "PRO", 3)==0  )

@@ -91,7 +91,7 @@ static inline int contrast (int base, int strength)
 
 static inline int gamma (int base, int strength)
 {
-    return between0And255 (qRound (255.0 * pow (base / 255.0, 1.0 / pow (10, strength / 50.0))));
+    return between0And255 (tqRound (255.0 * pow (base / 255.0, 1.0 / pow (10, strength / 50.0))));
 }
 
 
@@ -105,13 +105,13 @@ static inline int brightnessContrastGamma (int base,
                   newGamma);
 }
 
-static inline QRgb brightnessContrastGammaForRGB (QRgb rgb,
+static inline TQRgb brightnessContrastGammaForRGB (TQRgb rgb,
     int channels,
     int brightness, int contrast, int gamma)
 {
-    int red = qRed (rgb);
-    int green = qGreen (rgb);
-    int blue = qBlue (rgb);
+    int red = tqRed (rgb);
+    int green = tqGreen (rgb);
+    int blue = tqBlue (rgb);
 
 
     if (channels & kpEffectBalanceCommand::Red)
@@ -122,7 +122,7 @@ static inline QRgb brightnessContrastGammaForRGB (QRgb rgb,
         blue = brightnessContrastGamma (blue, brightness, contrast, gamma);
 
 
-    return qRgba (red, green, blue, qAlpha (rgb));
+    return tqRgba (red, green, blue, tqAlpha (rgb));
 }
 
 
@@ -147,13 +147,13 @@ TQPixmap kpEffectBalanceCommand::applyColorEffect (const TQPixmap &pixmap,
 #endif
 
 
-    Q_UINT8 transformRed [256],
+    TQ_UINT8 transformRed [256],
             transformGreen [256],
             transformBlue [256];
 
     for (int i = 0; i < 256; i++)
     {
-        Q_UINT8 applied = (Q_UINT8) brightnessContrastGamma (i, brightness, contrast, gamma);
+        TQ_UINT8 applied = (TQ_UINT8) brightnessContrastGamma (i, brightness, contrast, gamma);
 
         if (channels & kpEffectBalanceCommand::Red)
             transformRed [i] = applied;
@@ -182,15 +182,15 @@ TQPixmap kpEffectBalanceCommand::applyColorEffect (const TQPixmap &pixmap,
         {
             for (int x = 0; x < image.width (); x++)
             {
-                const QRgb rgb = image.pixel (x, y);
+                const TQRgb rgb = image.pixel (x, y);
 
-                const Q_UINT8 red = (Q_UINT8) qRed (rgb);
-                const Q_UINT8 green = (Q_UINT8) qGreen (rgb);
-                const Q_UINT8 blue = (Q_UINT8) qBlue (rgb);
-                const Q_UINT8 alpha = (Q_UINT8) qAlpha (rgb);
+                const TQ_UINT8 red = (TQ_UINT8) tqRed (rgb);
+                const TQ_UINT8 green = (TQ_UINT8) tqGreen (rgb);
+                const TQ_UINT8 blue = (TQ_UINT8) tqBlue (rgb);
+                const TQ_UINT8 alpha = (TQ_UINT8) tqAlpha (rgb);
 
                 image.setPixel (x, y,
-                    qRgba (transformRed [red],
+                    tqRgba (transformRed [red],
                            transformGreen [green],
                            transformBlue [blue],
                            alpha));
@@ -208,15 +208,15 @@ TQPixmap kpEffectBalanceCommand::applyColorEffect (const TQPixmap &pixmap,
     {
         for (int i = 0; i < image.numColors (); i++)
         {
-            const QRgb rgb = image.color (i);
+            const TQRgb rgb = image.color (i);
 
-            const Q_UINT8 red = (Q_UINT8) qRed (rgb);
-            const Q_UINT8 green = (Q_UINT8) qGreen (rgb);
-            const Q_UINT8 blue = (Q_UINT8) qBlue (rgb);
-            const Q_UINT8 alpha = (Q_UINT8) qAlpha (rgb);
+            const TQ_UINT8 red = (TQ_UINT8) tqRed (rgb);
+            const TQ_UINT8 green = (TQ_UINT8) tqGreen (rgb);
+            const TQ_UINT8 blue = (TQ_UINT8) tqBlue (rgb);
+            const TQ_UINT8 alpha = (TQ_UINT8) tqAlpha (rgb);
 
             image.setColor (i,
-                qRgba (transformRed [red],
+                tqRgba (transformRed [red],
                        transformGreen [green],
                        transformBlue [blue],
                        alpha));
@@ -253,8 +253,8 @@ TQPixmap kpEffectBalanceCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
                                               kpMainWindow *mainWindow,
-                                              TQWidget *parent, const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
+                                              TQWidget *tqparent, const char *name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
 {
     TQGridLayout *lay = new TQGridLayout (this, 5, 5, marginHint (), spacingHint ());
 
@@ -275,9 +275,9 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
     // TODO: This is what should be shown in the m_gammaInput spinbox
     m_gammaLabel = new TQLabel (this);
     // TODO: This doesn't seem to be wide enough with some fonts so the
-    //       whole layout moves when we drag the gamma slider.
+    //       whole tqlayout moves when we drag the gamma slider.
     m_gammaLabel->setMinimumWidth (m_gammaLabel->fontMetrics ().width (" 10.00 "));
-    m_gammaLabel->setAlignment (m_gammaLabel->alignment () | Qt::AlignRight);
+    m_gammaLabel->tqsetAlignment (m_gammaLabel->tqalignment () | TQt::AlignRight);
     TQPushButton *gammaResetPushButton = new TQPushButton (i18n ("Rese&t"), this);
 
 
@@ -317,11 +317,11 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
     lay->addWidget (gammaResetPushButton, 2, 4);
 
     lay->addMultiCellWidget (spaceWidget, 3, 3, 0, 4);
-    lay->addMultiCellWidget (resetPushButton, 4, 4, 2, 4, Qt::AlignRight);
+    lay->addMultiCellWidget (resetPushButton, 4, 4, 2, 4, TQt::AlignRight);
 
     lay->addWidget (channelLabel, 4, 0);
-    lay->addWidget (m_channelsComboBox, 4, 1, Qt::AlignLeft);
-    //lay->addWidget (resetPushButton, 4, 2, Qt::AlignRight);
+    lay->addWidget (m_channelsComboBox, 4, 1, TQt::AlignLeft);
+    //lay->addWidget (resetPushButton, 4, 2, TQt::AlignRight);
 
     lay->setColStretch (1, 1);
 
@@ -438,7 +438,7 @@ void kpEffectBalanceWidget::recalculateGammaLabel ()
                          'f'/*[-]9.9*/,
                          2/*precision*/) +
         " ");
-    m_gammaLabel->repaint ();
+    m_gammaLabel->tqrepaint ();
 }
 
 
@@ -499,7 +499,7 @@ void kpEffectBalanceWidget::resetAll ()
         return;
 
     // Prevent multiple settingsChanged() which would normally result in
-    // redundant, expensive preview repaints
+    // redundant, expensive preview tqrepaints
     blockSignals (true);
 
     resetBrightness ();

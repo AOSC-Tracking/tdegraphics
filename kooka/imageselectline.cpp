@@ -21,8 +21,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 #include <tqhbox.h>
@@ -47,8 +47,8 @@
  * together in a row. The button opens a file selector box to pick a file.
  */
 
-ImageSelectLine::ImageSelectLine( TQWidget *parent, const TQString& text )
-   : TQHBox( parent )
+ImageSelectLine::ImageSelectLine( TQWidget *tqparent, const TQString& text )
+   : TQHBox( tqparent )
 {
    setSpacing( 5 );
    (void) new TQLabel( text, this );

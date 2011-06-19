@@ -149,7 +149,7 @@ public:
       /** Returns the chunk with given {\em name}. The {\em name} may not
 	  contain dots, but MAY contain colons and brackets (the latter -
 	  for specifying the chunk number). If {\em position} is not zero
-	  then the chunk position in its parent will be put into #*position# */
+	  then the chunk position in its tqparent will be put into #*position# */
    GP<GIFFChunk>get_chunk(const GUTF8String &name, int * position=0);
       /** Returns the number of chunks with given {\em name}. The {\em name}
 	  may not contain dots and brackets. If {\em name} is ZERO, the
@@ -233,10 +233,10 @@ GIFFChunk::GIFFChunk(const GUTF8String &name, const TArray<char> & data_in) :
        \item You may use {\em brackets} in the name to specify the chunk's
              position. The meaning of the number inside the brackets depends
 	     on the function you call. In most of the cases this is the number
-	     of the chunk with the given name in the parent chunk. But sometimes
+	     of the chunk with the given name in the tqparent chunk. But sometimes
 	     (as in #addChunk(name, buffer, length)#) the brackets at the
 	     end of the #name# actually specify the {\em position} of the
-	     chunk in the parent. For example, to insert #INCL# chunk into
+	     chunk in the tqparent. For example, to insert #INCL# chunk into
 	     #DJVU# form at position #1# (make it the second) you may want to
 	     use #manager.addChunk(".DJVU.INCL[1]", data, size)#. At the same
 	     time, to get 2-nd chunk with name #BG44# from form #DJVU# you
@@ -265,8 +265,8 @@ public:
 
       /// Sets the name of the top level chunk to {\em name}
    void		set_name(const GUTF8String &name);
-      /** Adds the chunk {\em chunk} to chunk with name {\em parent_name} at
-	  position {\em pos}. {\em parent_name} may contain dots, brackets
+      /** Adds the chunk {\em chunk} to chunk with name {\em tqparent_name} at
+	  position {\em pos}. {\em tqparent_name} may contain dots, brackets
 	  and colons. All missing chunks in the chain will be created.
 
 	  {\bf Examples:}
@@ -282,7 +282,7 @@ public:
 	     ;; Same thing regardless of the top-level chunk name
 	     m.addChunk("FORM:DJVU[1]", ch);
 	  \end{verbatim} */
-   void		add_chunk(GUTF8String parent_name, const GP<GIFFChunk> & chunk, int pos=-1);
+   void		add_chunk(GUTF8String tqparent_name, const GP<GIFFChunk> & chunk, int pos=-1);
       /** If {\em name}={\em name1}.{\em name2} where {\em name2} doesn't
 	  contain dots, then #addChunk()# will create plain chunk with
 	  name {\em name2} with data {\em buffer} of size {\em length} and
@@ -332,7 +332,7 @@ public:
 
       /** Returns the chunk with name {\em name}. The {\em name} may contain dots
 	  colons and slashes. If {\em position} is not zero, #*position# will
-	  be assigned the position of the found chunk in the parent chunk.
+	  be assigned the position of the found chunk in the tqparent chunk.
 
 	  {\bf Examples:}
 	  \begin{verbatim}

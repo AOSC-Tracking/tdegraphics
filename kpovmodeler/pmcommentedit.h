@@ -35,12 +35,13 @@ class TQMultiLineEdit;
 class PMCommentEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMCommentEdit with parent and name
+    * Creates a PMCommentEdit with tqparent and name
     */
-   PMCommentEdit( TQWidget* parent, const char* name = 0 );
+   PMCommentEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

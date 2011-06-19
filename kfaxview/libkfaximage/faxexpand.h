@@ -27,8 +27,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA. *
 #include <tqglobal.h>
 #include <tqimage.h>
 
-#define t32bits Q_UINT32
-#define t16bits Q_UINT16
+#define t32bits TQ_UINT32
+#define t16bits TQ_UINT16
 
 typedef t16bits pixnum;
 

@@ -24,15 +24,15 @@
 #include "main.h"
 #include "gradientselection.h"
 
-GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
+GradientSelection::GradientSelection(TQWidget *tqparent, const char *name ) : TQWidget(tqparent,name) {
 	TQGridLayout* topLayout = new TQGridLayout(this, 2, 2, 0);
-	TQHBoxLayout* layout = new TQHBoxLayout(0);
-	layout->setMargin(3);
+	TQHBoxLayout* tqlayout = new TQHBoxLayout(0);
+	tqlayout->setMargin(3);
 	xyColorSelector = new KXYColorSelector(this);
 	connect(xyColorSelector, TQT_SIGNAL( valueChanged(int, int) ),
 		TQT_SLOT( slotXyColorSelectorPosChanged(int, int) ));
-	layout->addWidget(xyColorSelector);
-	topLayout->addLayout(layout, 0, 0);
+	tqlayout->addWidget(xyColorSelector);
+	topLayout->addLayout(tqlayout, 0, 0);
 	topLayout->setRowStretch(0, 10);
 	topLayout->setRowStretch(1, 0);
 	TQVBoxLayout* xyColorSelectorLayout = new TQVBoxLayout();
@@ -54,7 +54,7 @@ GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWi
 	xyColorSelectorLayout->addLayout(buttonsLayout);
 	xyColorSelectorLayout->addSpacing(2);
 	topLayout->addLayout(xyColorSelectorLayout, 1, 0);
-	zColorSelector = new KZColorSelector(KZColorSelector::Vertical, this);
+	zColorSelector = new KZColorSelector(Qt::Vertical, this);
 	connect(zColorSelector, TQT_SIGNAL( valueChanged(int) ),
 		TQT_SLOT( slotZColorSelectorPosChanged(int) ));
 	zColorSelector->setFixedWidth(36);
@@ -218,7 +218,7 @@ void GradientSelection::slotXyColorSelectorPosChanged(int x, int y) {
 }
 
 void GradientSelection::slotZColorSelectorPosChanged(int y) {
-	bool repaintZColorSelector = false;
+	bool tqrepaintZColorSelector = false;
 	switch(zColorSelectorComponentIndex) {
 		case H_COMPONENT:
 			hComponent = y;
@@ -237,7 +237,7 @@ void GradientSelection::slotZColorSelectorPosChanged(int y) {
 	rgbColor.setHsv(hComponent, sComponent, vComponent);
 	color.setComponents(rgbColor.red(), rgbColor.green(), rgbColor.blue());
 	updateXyColorSelector(false);
-	if(repaintZColorSelector)
+	if(tqrepaintZColorSelector)
 		updateZColorSelector();
 	emit valueChanged(&color);
 }

@@ -67,7 +67,7 @@ static const uchar cursorBits[] = {
 * create the thingy with no borders and set up
 * its members
 */
-KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
+KLineal::KLineal(TQWidget*tqparent,const char* name):KMainWindow(tqparent,name){
 	if (!name) {
 		name = "klineal";
 	}
@@ -78,7 +78,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   TQWhatsThis::add(this,
   i18n(
   	"This is a tool to measure pixel distances and colors on the screen. "
-  	"It is useful for working on layouts of dialogs, web pages etc."
+  	"It is useful for working on tqlayouts of dialogs, web pages etc."
   ));
   TQBitmap bim = TQBitmap(TQSize(8, 48), cursorBits);
   TQWMatrix m;
@@ -152,7 +152,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   oriMenu->insertItem(UserIconSet("kruler-west"), i18n("&West"), this, TQT_SLOT(setWest()), Key_W);
   oriMenu->insertItem(i18n("&Turn Right"), this, TQT_SLOT(turnRight()), Key_R);
   oriMenu->insertItem(i18n("Turn &Left"), this, TQT_SLOT(turnLeft()), Key_L);
-  mMenu->insertItem(i18n("&Orientation"), oriMenu);
+  mMenu->insertItem(i18n("&Qt::Orientation"), oriMenu);
   mLenMenu = new KPopupMenu(this);
   mLenMenu->insertItem(i18n("&Short"), this, TQT_SLOT(setShortLength()), CTRL+Key_S);
   mLenMenu->insertItem(i18n("&Medium"), this, TQT_SLOT(setMediumLength()), CTRL+Key_M);
@@ -165,7 +165,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   mMenu->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), helpMenu());
   mMenu->insertSeparator();
   mMenu->insertItem(SmallIcon( "exit" ), KStdGuiItem::quit().text(), kapp, TQT_SLOT(quit()), CTRL+Key_Q);
-  mLastClickPos = geometry().topLeft()+TQPoint(width()/2, height()/2);
+  mLastClickPos = tqgeometry().topLeft()+TQPoint(width()/2, height()/2);
 }
 
 KLineal::~KLineal(){
@@ -293,7 +293,7 @@ void KLineal::setOrientation(int inOrientation) {
     mLenMenu->changeItem(FULLSCREENID, mOrientation % 2 ? i18n("&Full Screen Height") : i18n("&Full Screen Width"));
   setCursor(mCurrentCursor);
   setupBackground();
-  repaint();
+  tqrepaint();
 }
 void KLineal::setNorth() {
   setOrientation(North);
@@ -390,7 +390,7 @@ void KLineal::choseFont() {
 void KLineal::setFont(TQFont &font) {
 	mScaleFont = font;
 	saveSettings();
-  repaint();
+  tqrepaint();
 }
 
 
@@ -451,7 +451,7 @@ void KLineal::enterEvent(TQEvent * /*inEvent*/) {
 * overwritten to switch the value label and line cursor off
 */
 void KLineal::leaveEvent(TQEvent * /*inEvent*/) {
-  if (!geometry().contains(TQCursor::pos())) {
+  if (!tqgeometry().tqcontains(TQCursor::pos())) {
     hideLabel();
   }
 }
@@ -518,7 +518,7 @@ void KLineal::keyPressEvent(TQKeyEvent *e) {
   	dist *= 10;
   }
   move(pos()+dist);
-  KNotifyClient::event(0, "cursormove",  TQString::null);
+  KNotifyClient::event(0, "cursormove",  TQString());
 }
 /**
 * overwritten to handle the line cursor which is a seperate widget outside the main
@@ -547,7 +547,7 @@ void KLineal::mouseMoveEvent(TQMouseEvent * /*inEvent*/) {
     TQColor color = KColorDialog::grabColor(p);
     int h, s, v;
     color.hsv(&h, &s, &v);
- 		mColorLabel->setText(color.name().upper());
+ 		mColorLabel->setText(TQString(color.name()).upper());
   	mColorLabel->setPaletteBackgroundColor(color);
   	if (v < 255/2) {
   		v = 255;
@@ -569,17 +569,17 @@ void KLineal::mousePressEvent(TQMouseEvent *inEvent) {
   mLastClickPos = TQCursor::pos();
   hideLabel();
 
-  TQRect gr = geometry();
+  TQRect gr = tqgeometry();
   mDragOffset = mLastClickPos - TQPoint(gr.left(), gr.top());
-  if (inEvent->button() == LeftButton) {
+  if (inEvent->button() == Qt::LeftButton) {
     if (!mDragging) {
       grabMouse(KCursor::sizeAllCursor());
       mDragging = TRUE;
     }
-  } else if (inEvent->button() == MidButton) {
+  } else if (inEvent->button() == Qt::MidButton) {
 		_clicked = true;
     turnLeft();
-  } else if (inEvent->button() == RightButton) {
+  } else if (inEvent->button() == Qt::RightButton) {
     showMenu();
   }
 }

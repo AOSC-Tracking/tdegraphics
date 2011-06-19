@@ -191,7 +191,7 @@ bool PMPovrayParser::parseBool( )
    return true;
 }
 
-bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
+bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                                         int max /* = -1 */ )
 {
    PMObject* child = 0;
@@ -202,10 +202,10 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
 
    do
    {
-      if( !m_bLastPMCommentEmpty && parent )
+      if( !m_bLastPMCommentEmpty && tqparent )
       {
-         if( parent->isA( "NamedObject" ) )
-            ( ( PMNamedObject* ) parent )->setName( m_lastPMComment );
+         if( tqparent->isA( "NamedObject" ) )
+            ( ( PMNamedObject* ) tqparent )->setName( m_lastPMComment );
          m_bLastPMCommentEmpty = true;
       }
       if( m_skippedComments.count( ) > 0 )
@@ -230,8 +230,8 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                error = !parseBox( ( PMBox* ) child );
                break;
             case SPHERE_TOK:
-               if( ( parent && ( parent->type( ) == "Blob" ) )
-                   || ( !parent && m_pTopParent
+               if( ( tqparent && ( tqparent->type( ) == "Blob" ) )
+                   || ( !tqparent && m_pTopParent
                         && ( m_pTopParent->type( ) == "Blob" ) ) )
                {
                   child = new PMBlobSphere( m_pPart );
@@ -244,8 +244,8 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                }
                break;
             case CYLINDER_TOK:
-               if( ( parent && ( parent->type( ) == "Blob" ) )
-                   || ( !parent && m_pTopParent
+               if( ( tqparent && ( tqparent->type( ) == "Blob" ) )
+                   || ( !tqparent && m_pTopParent
                         && ( m_pTopParent->type( ) == "Blob" ) ) )
                {
                   child = new PMBlobCylinder( m_pPart );
@@ -289,9 +289,9 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                child = new PMPlane( m_pPart );
                error = !parsePlane( ( PMPlane* ) child );
                break;
-            case QUADRIC_TOK:
+            case TQUADRIC_TOK:
             case CUBIC_TOK:
-            case QUARTIC_TOK:
+            case TQUARTIC_TOK:
             case POLY_TOK:
                child = new PMPolynom( m_pPart );
                error = !parsePolynom( ( PMPolynom* ) child );
@@ -364,7 +364,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
             case MARBLE_TOK:
             case ONION_TOK:
             case PLANAR_TOK:
-            case QUILTED_TOK:
+            case TQUILTED_TOK:
             case RADIAL_TOK:
             case RIPPLES_TOK:
             case SLOPE_TOK:
@@ -378,14 +378,14 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                child = new PMPattern( m_pPart );
                {
                   bool normal = true;
-                  if( parent && ( parent->type( ) != "Normal" ) )
+                  if( tqparent && ( tqparent->type( ) != "Normal" ) )
                      normal = false;
                   error = !parsePattern( ( PMPattern* ) child, normal );
                }
                break;
             case TURBULENCE_TOK:
-               //  Search for a PMPattern in the object's children
-               child = parent->firstChild( );
+               //  Search for a PMPattern in the object's tqchildren
+               child = tqparent->firstChild( );
                while( child && !child->isA( "Pattern" ) )
                   child = child->nextSibling( );
                if( child )
@@ -408,8 +408,8 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
             case SCALLOP_WAVE_TOK:
             case CUBIC_WAVE_TOK:
             case POLY_WAVE_TOK:
-               //  Search for a PMBlendMapModifiers in the object's children
-               child = parent->firstChild( );
+               //  Search for a PMBlendMapModifiers in the object's tqchildren
+               child = tqparent->firstChild( );
                while( child && !child->isA( "BlendMapModifiers" ) )
                   child = child->nextSibling( );
                if( child )
@@ -478,7 +478,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                int expect = 0;
                PMListPattern::PMListType type = PMListPattern::ListPatternChecker;
 
-               if( parent && parent->type( ) == "Normal" )
+               if( tqparent && tqparent->type( ) == "Normal" )
                   normal = true;
                else if( m_pTopParent && m_pTopParent->type( ) == "Normal" )
                   normal = true;
@@ -640,7 +640,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                error = !parseMatrix( ( PMPovrayMatrix* ) child );
                break;
             case BOUNDED_BY_TOK:
-               if( parent && ( parent->type( ) == "ClippedBy" ) )
+               if( tqparent && ( tqparent->type( ) == "ClippedBy" ) )
                   finished = true;
                else
                {
@@ -649,7 +649,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                }
                break;
             case CLIPPED_BY_TOK:
-               if( parent && ( parent->type( ) == "BoundedBy" ) )
+               if( tqparent && ( tqparent->type( ) == "BoundedBy" ) )
                   finished = true;
                else
                {
@@ -666,7 +666,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                error = !parseRadiosity( ( PMRadiosity* ) child );
                break;
             case PHOTONS_TOK:
-               if ( parent && ( parent->type( ) == "GlobalSettings" ) )
+               if ( tqparent && ( tqparent->type( ) == "GlobalSettings" ) )
                {
                   child = new PMGlobalPhotons( m_pPart );
                   error = !parseGlobalPhotons( ( PMGlobalPhotons* ) child );
@@ -733,9 +733,9 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                         case SMOOTH_TRIANGLE_TOK:
                            // infinite solid
                         case PLANE_TOK:
-                        case QUADRIC_TOK:
+                        case TQUADRIC_TOK:
                         case CUBIC_TOK:
-                        case QUARTIC_TOK:
+                        case TQUARTIC_TOK:
                         case POLY_TOK:
                            // csg
                         case UNION_TOK:
@@ -791,7 +791,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                   printExpected( i18n( "identifier" ), m_pScanner->sValue( ) );
                break;
             case OBJECT_TOK:
-               error = !parseObject( parent );
+               error = !parseObject( tqparent );
                noChild = true;
                break;
             case RAW_POVRAY_TOK:
@@ -808,7 +808,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
          error = true;
       if( child )
       {
-         if( !insertChild( child, parent ) )
+         if( !insertChild( child, tqparent ) )
          {
             delete child;
             child = 0;
@@ -972,7 +972,7 @@ bool PMPovrayParser::parseNumericItem( PMValue& v, bool checkForBool /*=false*/ 
          else
          {
             printError( i18n( "Undefined identifier \"%1\"." )
-                        .arg( m_pScanner->sValue( ) ) );
+                        .tqarg( m_pScanner->sValue( ) ) );
             nextToken( );
          }
          break;
@@ -2331,7 +2331,7 @@ bool PMPovrayParser::parseJuliaFractal( PMJuliaFractal* pNewFractal )
 
       switch( m_token )
       {
-         case QUATERNION_TOK:
+         case TQUATERNION_TOK:
             pNewFractal->setAlgebraType( PMJuliaFractal::Quaternion );
             nextToken( );
             break;
@@ -2339,7 +2339,7 @@ bool PMPovrayParser::parseJuliaFractal( PMJuliaFractal* pNewFractal )
             pNewFractal->setAlgebraType( PMJuliaFractal::Hypercomplex );
             nextToken( );
             break;
-         case SQR_TOK:
+         case STQR_TOK:
             pNewFractal->setFunctionType( PMJuliaFractal::FTsqr );
             nextToken( );
             break;
@@ -2515,8 +2515,8 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
 
    pNewPoly->setSturm( false );
 
-   if( ( m_token == QUADRIC_TOK ) || ( m_token == CUBIC_TOK ) ||
-       ( m_token == QUARTIC_TOK ) || ( m_token == POLY_TOK ) )
+   if( ( m_token == TQUADRIC_TOK ) || ( m_token == CUBIC_TOK ) ||
+       ( m_token == TQUARTIC_TOK ) || ( m_token == POLY_TOK ) )
    {
       nextToken( );
       if( !parseToken( '{' ) )
@@ -2525,7 +2525,7 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
    else
       printExpected( "poly", m_pScanner->sValue( ) );
 
-   if( type == QUADRIC_TOK )
+   if( type == TQUADRIC_TOK )
    {
       c = PMVector( 10 );
       pNewPoly->setPolynomOrder( 2 );
@@ -2565,7 +2565,7 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
    {
       if( type == CUBIC_TOK )
          order = 3;
-      else if( type == QUARTIC_TOK )
+      else if( type == TQUARTIC_TOK )
          order = 4;
       else
       {
@@ -2587,7 +2587,7 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
       if( vector.size( ) != ( unsigned ) c_polynomSize[order] )
       {
          printError( i18n( "%1 coefficients are needed for a polynom with order %2" )
-                     .arg( c_polynomSize[order] ).arg( order ) );
+                     .tqarg( c_polynomSize[order] ).tqarg( order ) );
          vector.resize( c_polynomSize[order] );
       }
       pNewPoly->setCoefficients( vector );
@@ -2846,7 +2846,7 @@ bool PMPovrayParser::parseLathe( PMLathe* pNewLathe )
             nextToken( );
             minp = 2;
             break;
-         case QUADRATIC_SPLINE_TOK:
+         case TQUADRATIC_SPLINE_TOK:
             pNewLathe->setSplineType( PMLathe::QuadraticSpline );
             nextToken( );
             minp = 3;
@@ -2883,7 +2883,7 @@ bool PMPovrayParser::parseLathe( PMLathe* pNewLathe )
 
    if( nump < minp )
       printError( i18n( "At least %1 points are needed for that spline type" )
-                  .arg( minp ) );
+                  .tqarg( minp ) );
    else if( ( pNewLathe->splineType( ) == PMLathe::BezierSpline ) &&
             ( ( nump % 4 ) != 0 ) )
       printError( i18n( "Bezier splines need 4 points for each segment" ) );
@@ -2934,7 +2934,7 @@ bool PMPovrayParser::parsePrism( PMPrism* pNewPrism )
             nextToken( );
             minp = 3;
             break;
-         case QUADRATIC_SPLINE_TOK:
+         case TQUADRATIC_SPLINE_TOK:
             pNewPrism->setSplineType( PMPrism::QuadraticSpline );
             nextToken( );
             minp = 4;
@@ -3231,7 +3231,7 @@ bool PMPovrayParser::parseSor( PMSurfaceOfRevolution* pNewSor )
             if( approxZero( ( *it1 )[1] - ( *it3 )[1], c_sorTolerance ) )
             {
                printError( i18n( "The v coordinate of point %1 and %2 must be different; fixed" )
-                           .arg( pnr + 1 ).arg( pnr + 3 ) );
+                           .tqarg( pnr + 1 ).tqarg( pnr + 3 ) );
                if( pnr == 0 )
                   ( *it1 )[1] = ( *it3 )[1] - c_sorTolerance;
                else
@@ -3911,7 +3911,7 @@ bool PMPovrayParser::parsePattern( PMPattern* pattern, bool normal )
             pattern->setPatternType( PMPattern::PatternPlanar );
             type = true;
             break;
-         case QUILTED_TOK:
+         case TQUILTED_TOK:
             nextToken( );
             pattern->setPatternType( PMPattern::PatternQuilted );
             type = true;
@@ -4658,7 +4658,7 @@ bool PMPovrayParser::parseNormalMap( PMNormalMap* normalMap )
    {
       oldConsumed = m_consumedTokens;
 
-      //  If we find '}' no need to search for an entry
+      //  If we tqfind '}' no need to search for an entry
       if( m_token != '}' && parseToken( '[' ) )
       {
          if( !parseFloat( f_number1 ) )
@@ -4958,7 +4958,7 @@ bool PMPovrayParser::parseSlopeMap( PMSlopeMap* slopeMap )
    {
       oldConsumed = m_consumedTokens;
 
-      //  If we find '}' no need to search for an entry
+      //  If we tqfind '}' no need to search for an entry
       if( m_token != '}' && parseToken( '[' ) )
       {
          if( !parseFloat( f_number1 ) )
@@ -5014,7 +5014,7 @@ bool PMPovrayParser::parseDensityMap( PMDensityMap* densityMap )
    {
       oldConsumed = m_consumedTokens;
 
-      //  If we find '}' no need to search for an entry
+      //  If we tqfind '}' no need to search for an entry
       if( m_token != '}' && parseToken( '[' ) )
       {
          if( !parseFloat( f_number1 ) )
@@ -6436,9 +6436,9 @@ bool PMPovrayParser::parseDeclare( PMDeclare* decl )
          child = new PMPlane( m_pPart );
          error = !parsePlane( ( PMPlane* ) child );
          break;
-      case QUADRIC_TOK:
+      case TQUADRIC_TOK:
       case CUBIC_TOK:
-      case QUARTIC_TOK:
+      case TQUARTIC_TOK:
       case POLY_TOK:
          child = new PMPolynom( m_pPart );
          error = !parsePolynom( ( PMPolynom* ) child );
@@ -6572,7 +6572,7 @@ bool PMPovrayParser::parseDeclare( PMDeclare* decl )
    return !error;
 }
 
-bool PMPovrayParser::parseObject( PMCompositeObject* parent )
+bool PMPovrayParser::parseObject( PMCompositeObject* tqparent )
 {
    PMObject* child;
    bool error = false;
@@ -6586,23 +6586,23 @@ bool PMPovrayParser::parseObject( PMCompositeObject* parent )
          case ID_TOK:
             child = new PMObjectLink( m_pPart );
             error = !parseObjectLink( ( PMObjectLink* ) child );
-            if( !insertChild( child, parent ) )
+            if( !insertChild( child, tqparent ) )
                delete child;
             break;
          default:
          {
             PMObject* lastChild = 0;
-            if( parent )
-               lastChild = parent->lastChild( );
+            if( tqparent )
+               lastChild = tqparent->lastChild( );
             else
                lastChild = m_pResultList->last( );
 
-            error = !parseChildObjects( parent, 1 );
+            error = !parseChildObjects( tqparent, 1 );
             if( !error )
             {
                PMObject* newLast = 0;
-               if( parent )
-                  newLast = parent->lastChild( );
+               if( tqparent )
+                  newLast = tqparent->lastChild( );
                else
                   newLast = m_pResultList->last( );
 

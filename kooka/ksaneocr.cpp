@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -183,26 +183,26 @@ void KSANEOCR::slLineBox( const TQRect& )
  * starts visual ocr process. Depending on the ocr engine, this function creates
  * a new dialog, and shows it.
  */
-bool KSANEOCR::startOCRVisible( TQWidget *parent )
+bool KSANEOCR::startOCRVisible( TQWidget *tqparent )
 {
    if( visibleOCRRunning ) return( false );
    bool res = true;
 
-   m_parent = parent;
+   m_parent = tqparent;
 
    if( m_ocrEngine == GOCR )
    {
-       m_ocrProcessDia = new KGOCRDialog ( parent, m_spellInitialConfig );
+       m_ocrProcessDia = new KGOCRDialog ( tqparent, m_spellInitialConfig );
    }
    else if( m_ocrEngine == OCRAD )
    {
-       m_ocrProcessDia = new ocradDialog( parent, m_spellInitialConfig );
+       m_ocrProcessDia = new ocradDialog( tqparent, m_spellInitialConfig );
    }
    else if( m_ocrEngine == KADMOS )
    {
 #ifdef HAVE_KADMOS
 /*** Kadmos Engine OCR ***/
-       m_ocrProcessDia = new KadmosDialog( parent, m_spellInitialConfig );
+       m_ocrProcessDia = new KadmosDialog( tqparent, m_spellInitialConfig );
 #else
        KMessageBox::sorry(0, i18n("This version of Kooka was not compiled with KADMOS support.\n"
            "Please select another OCR engine in Kooka's options dialog."));
@@ -399,9 +399,9 @@ void KSANEOCR::startOCRAD( )
     *daemon << cmd;
     *daemon << TQString("-x");
     *daemon <<  m_tmpOrfName;                   // the orf result file
-    *daemon << TQFile::encodeName( m_ocrImagePBM );      // The name of the image
+    *daemon << TQFile::encodeName( m_ocrImagePBM ).data();      // The name of the image
     *daemon << TQString("-l");
-    *daemon << TQString::number( ocrDia->layoutDetectionMode());
+    *daemon << TQString::number( ocrDia->tqlayoutDetectionMode());
 
     KConfig *konf = KGlobal::config ();
     KConfigGroupSaver( konf, CFG_GROUP_OCRAD );
@@ -543,7 +543,7 @@ void KSANEOCR::startOCRProcess( void )
                this,   TQT_SLOT(  gocrStdErr(KProcess*, char*, int)));
 
        TQString opt;
-       *daemon << TQFile::encodeName(cmd);
+       *daemon << TQFile::encodeName(cmd).data();
        *daemon << "-x";
        *daemon << "-";
        if( !( m_img->numColors() > 0 && m_img->numColors() <3 ))   /* not a bw-image */
@@ -566,7 +566,7 @@ void KSANEOCR::startOCRProcess( void )
        // Unfortunately this is fixed by gocr.
        m_ocrResultImage = "out30.bmp";
 
-       *daemon << TQFile::encodeName(tmpFile);
+       *daemon << TQFile::encodeName(tmpFile).data();
 
        m_ocrCurrLine = 0;  // Important in gocrStdIn to store the results
 
@@ -631,7 +631,7 @@ void KSANEOCR::startOCRProcess( void )
 	   // rep.Recognize();
 	   m_rep.run();
 
-	   /* Dealing with threads or no threads (using QT_THREAD_SUPPORT to distinguish)
+	   /* Dealing with threads or no threads (using TQT_THREAD_SUPPORT to distinguish)
 	    * If threads are here, the recognition task is started in its own thread. The gui thread
 	    * needs to wait until the recognition thread is finished. Therefore, a timer is fired once
 	    * that calls slotKadmosResult and checks if the recognition task is finished. If it is not,
@@ -647,7 +647,7 @@ void KSANEOCR::startOCRProcess( void )
 	    * It does not :( That is why it is not used here. Maybe some day...
 	    */
        }
-#ifdef QT_THREAD_SUPPORT
+#ifdef TQT_THREAD_SUPPORT
        /* start a timer and wait until it fires. */
        TQTimer::singleShot( 500, this, TQT_SLOT( slotKadmosResult() ));
 #else
@@ -660,7 +660,7 @@ void KSANEOCR::startOCRProcess( void )
 
 /*
  * This method is called to check if the kadmos process was already finished, if
- * thread support is enabled (check for preprocessor variable QT_THREAD_SUPPORT)
+ * thread support is enabled (check for preprocessor variable TQT_THREAD_SUPPORT)
  * The problem is that the kadmos library seems not to be thread stable so thread
  * support should not be enabled by default. In case threads are enabled, this slot
  * checks if the KADMOS engine is finished already and if not it fires a timer.
@@ -814,11 +814,11 @@ bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
     TQFileInfo fi( fileName );
     if( ! fi.exists() ) {
         error = true;
-        errStr = i18n("The orf %1 does not exist.").arg(fileName);
+        errStr = i18n("The orf %1 does not exist.").tqarg(fileName);
     }
     if( ! error && ! fi.isReadable() ) {
         error = true;
-        errStr = i18n("Permission denied on file %1.").arg(fileName);
+        errStr = i18n("Permission denied on file %1.").tqarg(fileName);
     }
 
 
@@ -890,7 +890,7 @@ bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
 			{
 			    /* Read one line per character */
 			    TQString charLine = stream.readLine();
-			    int semiPos = charLine.find(';');
+			    int semiPos = charLine.tqfind(';');
 			    if( semiPos == -1 )
 			    {
 				kdDebug(28000) << "invalid line: " << charLine << endl;
@@ -906,7 +906,7 @@ bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
 
                                 // find the amount of alternatives.
                                 int altCount = 0;
-                                int h = results.find(',');  // search the first comma
+                                int h = results.tqfind(',');  // search the first comma
                                 if( h > -1 ) {
                                     // kdDebug(28000) << "Results of count search: " << results.left(h) << endl;
                                     altCount = results.left(h).toInt();
@@ -1127,7 +1127,7 @@ bool KSANEOCR::eventFilter( TQObject *object, TQEvent *event )
     {
         if( event->type() == TQEvent::MouseButtonDblClick )
         {
-            TQMouseEvent *mev = static_cast<TQMouseEvent*>(event);
+            TQMouseEvent *mev = TQT_TQMOUSEEVENT(event);
 
             int x = mev->x();
             int y = mev->y();
@@ -1328,7 +1328,7 @@ void KSANEOCR::slMisspelling( const TQString& originalword, const TQStringList& 
         /* draw a line under the word to check */
 
         /* copy the source */
-        emit repaintOCRResImage();
+        emit tqrepaintOCRResImage();
     }
     else
     {

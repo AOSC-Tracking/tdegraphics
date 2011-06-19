@@ -35,12 +35,13 @@ class PMFloatEdit;
 class PMPovrayMatrixEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMPovrayMatrixEdit with parent and name
+    * Creates a PMPovrayMatrixEdit with tqparent and name
     */
-   PMPovrayMatrixEdit( TQWidget* parent, const char* name = 0 );
+   PMPovrayMatrixEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

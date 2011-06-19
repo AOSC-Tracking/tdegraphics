@@ -97,7 +97,7 @@ KScanOption *KScanDevice::getExistingGuiElement( const TQCString& name )
 
     TQCString alias = aliasName( name );
 
-    /* gui_elements is a QList<KScanOption> */
+    /* gui_elements is a TQList<KScanOption> */
     for( ret = gui_elements.first(); ret != 0; ret = gui_elements.next())
     {
        if( ret->getName() == alias ) break;
@@ -109,7 +109,7 @@ KScanOption *KScanDevice::getExistingGuiElement( const TQCString& name )
 
    ------------------------------------------------------------------------- */
 
-KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *parent,
+KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *tqparent,
 					 const TQString& desc,
 					 const TQString& tooltip )
 {
@@ -132,7 +132,7 @@ KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *parent
       /** store new gui-elem in list of all gui-elements */
       gui_elements.append( so );
 
-      w = so->createWidget( parent, desc, tooltip );
+      w = so->createWidget( tqparent, desc, tooltip );
       if( w )
       {
 	 connect( so,   TQT_SIGNAL( optionChanged( KScanOption* ) ),
@@ -163,8 +163,8 @@ KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *parent
 // ---------------------------------------------------------------------------
 
 
-KScanDevice::KScanDevice( TQObject *parent )
-   : TQObject( parent )
+KScanDevice::KScanDevice( TQObject *tqparent )
+   : TQObject( tqparent )
 {
     SANE_Status sane_stat = sane_init(NULL, NULL );
 
@@ -175,7 +175,7 @@ KScanDevice::KScanDevice( TQObject *parent )
     gui_elements.setAutoDelete( true );
 
     scanner_initialised = false;  /* stays false until openDevice. */
-    scanStatus = SSTAT_SILENT;
+    scantqStatus = SSTAT_SILENT;
 
     data         = 0; /* temporary image data buffer while scanning */
     sn           = 0; /* socket notifier for async scanning         */
@@ -240,7 +240,7 @@ KScanStat KScanDevice::openDevice( const TQCString& backend )
    if( backend.isEmpty() ) return KSCAN_ERR_PARAM;
 
    // search for scanner
-   int indx = scanner_avail.find( backend );
+   int indx = scanner_avail.tqfind( backend );
 
    if( indx < 0 ) {
       stat = KSCAN_ERR_NO_DEVICE;
@@ -282,7 +282,7 @@ void KScanDevice::slCloseDevice( )
    scanner_name = UNDEF_SCANNERNAME;
    if( scanner_handle )
    {
-      if( scanStatus != SSTAT_SILENT )
+      if( scantqStatus != SSTAT_SILENT )
       {
          kdDebug(29000) << "Scanner is still active, calling cancel !" << endl;
          sane_cancel( scanner_handle );
@@ -304,14 +304,14 @@ TQString KScanDevice::getScannerName(const TQCString& name) const
   TQString ret = i18n("No scanner selected");
   SANE_Device *scanner = 0L;
 
-  if( scanner_name && scanner_initialised && name.isEmpty())
+  if( !scanner_name.isNull() && scanner_initialised && name.isEmpty())
   {
      scanner = scannerDevices[ scanner_name ];
   }
   else if ( ! name.isEmpty() )
   {
      scanner = scannerDevices[ name ];
-     ret = TQString::null;
+     ret = TQString();
   }
 
   if( scanner ) {
@@ -533,7 +533,7 @@ KScanStat KScanDevice::apply( KScanOption *opt, bool isGammaTable )
       }
       else
       {
-	 kdDebug(29000) << "Status of sane is bad: " << sane_strstatus( sane_stat )
+	 kdDebug(29000) << "tqStatus of sane is bad: " << sane_strstatus( sane_stat )
 			<< " for option " << oname << endl;
 
       }
@@ -570,7 +570,7 @@ void KScanDevice::slSetDirty( const TQCString& name )
 {
    if( optionExists( name ) )
    {
-      if( dirtyList.find( name ) == -1 )
+      if( dirtyList.tqfind( name ) == -1 )
       {
 	 kdDebug(29000)<< "Setting dirty <" << name << ">" << endl;
 	 /* item not found */
@@ -659,11 +659,11 @@ void KScanDevice::slReloadAll( )
 void KScanDevice::slStopScanning( void )
 {
     kdDebug(29000) << "Attempt to stop scanning" << endl;
-    if( scanStatus == SSTAT_IN_PROGRESS )
+    if( scantqStatus == SSTAT_IN_PROGRESS )
     {
 	emit( sigScanFinished( KSCAN_CANCELLED ));
     }
-    scanStatus = SSTAT_STOP_NOW;
+    scantqStatus = SSTAT_STOP_NOW;
 }
 
 
@@ -673,9 +673,9 @@ const TQString KScanDevice::previewFile()
    if( !dir.endsWith("/") )
       dir += "/";
 
-   TQString fname = dir + TQString::fromLatin1(".previews/");
+   TQString fname = dir + TQString::tqfromLatin1(".previews/");
    TQString sname( getScannerName(shortScannerName()) );
-   sname.replace( '/', "_");
+   sname.tqreplace( '/', "_");
 
    return fname+sname;
 }
@@ -901,7 +901,7 @@ void KScanDevice::prepareScan( void )
 
 /** Starts scanning
  *  depending on if a filename is given or not, the function tries to open
- *  the file using the Qt-Image-IO or really scans the image.
+ *  the file using the TQt-Image-IO or really scans the image.
  **/
 KScanStat KScanDevice::acquire( const TQString& filename )
 {
@@ -982,8 +982,8 @@ KScanStat KScanDevice::createNewImage( SANE_Parameters *p )
     if( img )
     {
       img->setNumColors( 2 );
-      img->setColor( 0, qRgb( 0,0,0));
-      img->setColor( 1, qRgb( 255,255,255) );
+      img->setColor( 0, tqRgb( 0,0,0));
+      img->setColor( 1, tqRgb( 255,255,255) );
     }
   }
   else if( p->depth == 8 )
@@ -998,7 +998,7 @@ KScanStat KScanDevice::createNewImage( SANE_Parameters *p )
 	img->setNumColors( 256 );
 
 	for(int i = 0; i<256; i++)
-	  img->setColor(i, qRgb(i,i,i));
+	  img->setColor(i, tqRgb(i,i,i));
       }
     }
     else
@@ -1084,13 +1084,13 @@ KScanStat KScanDevice::acquire_data( bool isPreview )
    if( stat == KSCAN_OK )
    {
       /* initiates Redraw of the Progress-Window */
-      qApp->processEvents();
+      tqApp->processEvents();
    }
 
    if( stat == KSCAN_OK )
    {
       overall_bytes 	= 0;
-      scanStatus = SSTAT_IN_PROGRESS;
+      scantqStatus = SSTAT_IN_PROGRESS;
       pixel_x 		    = 0;
       pixel_y 		    = 0;
       overall_bytes         = 0;
@@ -1115,7 +1115,7 @@ KScanStat KScanDevice::acquire_data( bool isPreview )
 	 do
 	 {
 	    doProcessABlock();
-	    if( scanStatus != SSTAT_SILENT )
+	    if( scantqStatus != SSTAT_SILENT )
 	    {
 	       sane_stat = sane_get_parameters( scanner_handle, &sane_scan_param );
 	       kdDebug(29000) << "--ProcessABlock-Loop" << endl;
@@ -1126,7 +1126,7 @@ KScanStat KScanDevice::acquire_data( bool isPreview )
 	       kdDebug(29000) << "pixels_per_line : " << sane_scan_param.pixels_per_line << endl;
 	       kdDebug(29000) << "bytes_per_line : " << sane_scan_param.bytes_per_line << endl;
 	    }
-	 } while ( scanStatus != SSTAT_SILENT );
+	 } while ( scantqStatus != SSTAT_SILENT );
       }
    }
 
@@ -1247,7 +1247,7 @@ void KScanDevice::slScanFinished( KScanStat status )
 void KScanDevice::doProcessABlock( void )
 {
   int 		  val,i;
-  QRgb      	  col, newCol;
+  TQRgb      	  col, newCol;
 
   SANE_Byte	  *rptr         = 0;
   SANE_Int	  bytes_written = 0;
@@ -1289,7 +1289,7 @@ void KScanDevice::doProcessABlock( void )
 	{
 	   case SANE_FRAME_RGB:
 	      if( sane_scan_param.lines < 1 ) break;
-	      bytes_written += rest_bytes; // die übergebliebenen Bytes dazu
+	      bytes_written += rest_bytes; // die ï¿½bergebliebenen Bytes dazu
 	      rest_bytes = bytes_written % 3;
 
 	      for( val = 0; val < ((bytes_written-rest_bytes) / 3); val++ )
@@ -1302,7 +1302,7 @@ void KScanDevice::doProcessABlock( void )
 		 if( pixel_x  == sane_scan_param.pixels_per_line )
 		 { pixel_x = 0; pixel_y++; }
 		 if( pixel_y < img->height())
-		    img->setPixel( pixel_x, pixel_y, qRgb( red, green,blue ));
+		    img->setPixel( pixel_x, pixel_y, tqRgb( red, green,blue ));
 
 		 pixel_x++;
 	      }
@@ -1363,25 +1363,25 @@ void KScanDevice::doProcessABlock( void )
 
 		    col = img->pixel( pixel_x, pixel_y );
 
-		    red   = qRed( col );
-		    green = qGreen( col );
-		    blue  = qBlue( col );
+		    red   = tqRed( col );
+		    green = tqGreen( col );
+		    blue  = tqBlue( col );
 		    chan  = *rptr++;
 
 		    switch( sane_scan_param.format )
 		    {
 		       case SANE_FRAME_RED :
-			  newCol = qRgba( chan, green, blue, 0xFF );
+			  newCol = tqRgba( chan, green, blue, 0xFF );
 			  break;
 		       case SANE_FRAME_GREEN :
-			  newCol = qRgba( red, chan, blue, 0xFF );
+			  newCol = tqRgba( red, chan, blue, 0xFF );
 			  break;
 		       case SANE_FRAME_BLUE :
-			  newCol = qRgba( red , green, chan, 0xFF );
+			  newCol = tqRgba( red , green, chan, 0xFF );
 			  break;
 		       default:
 			  kdDebug(29000) << "Undefined format !" << endl;
-			  newCol = qRgba( 0xFF, 0xFF, 0xFF, 0xFF );
+			  newCol = tqRgba( 0xFF, 0xFF, 0xFF, 0xFF );
 			  break;
 		    }
 		    img->setPixel( pixel_x, pixel_y, newCol );
@@ -1410,18 +1410,18 @@ void KScanDevice::doProcessABlock( void )
 	}
      }
 
-     if( goOn && scanStatus == SSTAT_STOP_NOW )
+     if( goOn && scantqStatus == SSTAT_STOP_NOW )
      {
-	/* scanStatus is set to SSTAT_STOP_NOW due to hitting slStopScanning   */
+	/* scantqStatus is set to SSTAT_STOP_NOW due to hitting slStopScanning   */
 	/* Mostly that one is fired by the STOP-Button in the progress dialog. */
 
 	/* This is also hit after the normal finish of the scan. Most probably,
-	 * the QSocketnotifier fires for a few times after the scan has been
+	 * the TQSocketnotifier fires for a few times after the scan has been
 	 * cancelled.  Does it matter ? To see it, just uncomment the qDebug msg.
 	 */
 	kdDebug(29000) << "Stopping the scan progress !" << endl;
 	goOn = false;
-	scanStatus = SSTAT_SILENT;
+	scantqStatus = SSTAT_SILENT;
 	emit( sigScanFinished( KSCAN_OK ));
      }
 
@@ -1435,13 +1435,13 @@ void KScanDevice::doProcessABlock( void )
      {
 	/** Everythings okay, the picture is ready **/
 	kdDebug(29000) << "last frame reached - scan successful" << endl;
-	scanStatus = SSTAT_SILENT;
+	scantqStatus = SSTAT_SILENT;
 	emit( sigScanFinished( KSCAN_OK ));
      }
      else
      {
 	/** EOF und nicht letzter Frame -> Parameter neu belegen und neu starten **/
-	scanStatus = SSTAT_NEXT_FRAME;
+	scantqStatus = SSTAT_NEXT_FRAME;
 	kdDebug(29000) << "EOF, but another frame to scan" << endl;
 
      }
@@ -1449,7 +1449,7 @@ void KScanDevice::doProcessABlock( void )
 
   if( sane_stat == SANE_STATUS_CANCELLED )
   {
-     scanStatus = SSTAT_STOP_NOW;
+     scantqStatus = SSTAT_STOP_NOW;
      kdDebug(29000) << "Scan was cancelled" << endl;
 
      // stat = KSCAN_CANCELLED;

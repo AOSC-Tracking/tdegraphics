@@ -52,9 +52,10 @@ class TQSize;
  * Holds a selection - will also be used for the clipboard
  * so that we can retain the border.
  */
-class kpSelection : public QObject
+class kpSelection : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum Type
@@ -102,7 +103,7 @@ public:
 
     int size () const;
 
-    TQBitmap maskForOwnType (bool nullForRectangular = false) const;
+    TQBitmap tqmaskForOwnType (bool nullForRectangular = false) const;
 
     // synonyms
     TQPoint topLeft () const;
@@ -126,8 +127,8 @@ public:
 
     // (for non-rectangular selections, may return false even if
     //  kpView::onSelectionResizeHandle())
-    bool contains (const TQPoint &point) const;
-    bool contains (int x, int y);
+    bool tqcontains (const TQPoint &point) const;
+    bool tqcontains (int x, int y);
 
 
     // (Avoid using for text selections since text selection may
@@ -168,7 +169,7 @@ public:
     //       Be more robust when external enforcement fails.
     static int minimumWidthForTextStyle (const kpTextStyle &);
     static int minimumHeightForTextStyle (const kpTextStyle &);
-    static TQSize minimumSizeForTextStyle (const kpTextStyle &);
+    static TQSize tqminimumSizeForTextStyle (const kpTextStyle &);
 
     static int preferredMinimumWidthForTextStyle (const kpTextStyle &textStyle);
     static int preferredMinimumHeightForTextStyle (const kpTextStyle &textStyle);
@@ -176,7 +177,7 @@ public:
 
     int minimumWidth () const;
     int minimumHeight () const;
-    TQSize minimumSize () const;
+    TQSize tqminimumSize () const;
 
     int textRowForPoint (const TQPoint &globalPoint) const;
     int textColForPoint (const TQPoint &globalPoint) const;

@@ -21,7 +21,7 @@ B/Cdx{Cd A length 1 sub get}B/Ci{Cd A type/stringtype ne{ctr get/ctr ctr
 1 roll S A/base get 2 index get S/BitMaps get S get/Cd X pop/ctr 0 N Cdx
 0 Cx Cy Ch sub Cx Cw add Cy setcachedevice Cw Ch true[1 0 0 -1 -.1 Cx
 sub Cy .1 sub]/id Ci N/rw Cw 7 add 8 idiv string N/rc 0 N/gp 0 N/cp 0 N{
-rc 0 ne{rc 1 sub/rc X rw}{G}ifelse}imagemask restore}B/G{{id gp get/gp
+rc 0 ne{rc 1 sub/rc X rw}{G}ifelse}imagetqmask restore}B/G{{id gp get/gp
 gp 1 add N A 18 mod S 18 idiv pl S get exec}loop}B/adv{cp add/cp X}B
 /chg{rw cp id gp 4 index getinterval putinterval A gp add/gp X adv}B/nd{
 /cp 0 N rw exit}B/lsh{rw cp 2 copy get A 0 eq{pop 1}{A 255 eq{pop 254}{
@@ -45,9 +45,9 @@ index cvrs cvn put}for pop 65781.76 div/vsize X 65781.76 div/hsize X}N
 /Ry X/Rx X V}B statusdict begin/product where{pop false[(Display)(NeXT)
 (LaserWriter 16/600)]{A length product length le{A length product exch 0
 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}ifelse
-end{{gsave TR -.1 .1 TR 1 1 scale Rx Ry false RMat{BDot}imagemask
+end{{gsave TR -.1 .1 TR 1 1 scale Rx Ry false RMat{BDot}imagetqmask
 grestore}}{{gsave TR -.1 .1 TR Rx Ry scale 1 1 false RMat{BDot}
-imagemask grestore}}ifelse B/QV{gsave newpath transform round exch round
+imagetqmask grestore}}ifelse B/QV{gsave newpath transform round exch round
 exch itransform moveto Rx 0 rlineto 0 Ry neg rlineto Rx neg 0 rlineto
 fill grestore}B/a{moveto}B/delta 0 N/tail{A/delta X 0 rmoveto}B/M{S p
 delta add tail}B/b{S p tail}B/c{-4 M}B/d{-3 M}B/e{-2 M}B/f{-1 M}B/g{0 M}

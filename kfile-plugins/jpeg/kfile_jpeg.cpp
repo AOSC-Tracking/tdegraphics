@@ -44,9 +44,9 @@ typedef KGenericFactory<KJpegPlugin> JpegFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_jpeg, JpegFactory("kfile_jpeg"))
 
-KJpegPlugin::KJpegPlugin(TQObject *parent, const char *name,
+KJpegPlugin::KJpegPlugin(TQObject *tqparent, const char *name,
                        const TQStringList &args )
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(tqparent, name, args)
 {
   kdDebug(7034) << "jpeg plugin\n";
 
@@ -84,7 +84,7 @@ KJpegPlugin::KJpegPlugin(TQObject *parent, const char *name,
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
 
-  item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
+  item = addItemInfo( exifGroup, "Qt::Orientation", i18n("Qt::Orientation"),
                       TQVariant::Int );
 
   item = addItemInfo( exifGroup, "ColorMode", i18n("Color Mode"),
@@ -148,12 +148,12 @@ KJpegPlugin::KJpegPlugin(TQObject *parent, const char *name,
 }
 
 TQValidator* KJpegPlugin::createValidator(const KFileMetaInfoItem& /*item*/,
-                                        TQObject */*parent*/,
+                                        TQObject */*tqparent*/,
                                          const char */*name*/ ) const
 {
     // no need to return a validator that validates everything as OK :)
 //     if (item.isEditable())
-//         return new TQRegExpValidator(TQRegExp(".*"), parent, name);
+//         return new TQRegExpValidator(TQRegExp(".*"), tqparent, name);
 //     else
     return 0L;
 }
@@ -178,7 +178,7 @@ bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
     */
     /*
         The jpeg standard does not regulate the contents of the COM block.
-        I'm assuming the best thing to do here is write as unicode utf-8,
+        I'm assuming the best thing to do here is write as tqunicode utf-8,
         which is fully backwards compatible with readers expecting ascii.
         Readers expecting a national character set are out of luck...
     */
@@ -242,7 +242,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
                                                ImageInfo.getHeight() ) );
 
     if ( ImageInfo.getOrientation() )
-        appendItem( exifGroup, "Orientation", ImageInfo.getOrientation() );
+        appendItem( exifGroup, "Qt::Orientation", ImageInfo.getOrientation() );
 
     appendItem( exifGroup, "ColorMode", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );
@@ -286,7 +286,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getFocalLength()){
     	appendItem( exifGroup, "Focal length",
-                    TQString().sprintf("%4.1f", ImageInfo.getFocalLength()) );
+                    TQString(TQString().sprintf("%4.1f", ImageInfo.getFocalLength()) ));
 
         if (ImageInfo.getCCDWidth()){
             appendItem( exifGroup, "35mm equivalent",
@@ -296,7 +296,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getCCDWidth()){
 	appendItem( exifGroup, "CCD width",
-                    TQString().sprintf("%4.2f", ImageInfo.getCCDWidth()) );
+                    TQString(TQString().sprintf("%4.2f", ImageInfo.getCCDWidth()) ));
     }
 
     if (ImageInfo.getExposureTime()){
@@ -310,8 +310,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getApertureFNumber()){
 	appendItem( exifGroup, "Aperture",
-                    TQString().sprintf("f/%3.1f",
-                                      (double)ImageInfo.getApertureFNumber()));
+                    TQString(TQString().sprintf("f/%3.1f",
+                                      (double)ImageInfo.getApertureFNumber())));
     }
 
     if (ImageInfo.getDistance()){
@@ -325,8 +325,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getExposureBias()){
 	appendItem( exifGroup, "Exposure bias",
-                    TQString().sprintf("%4.2f",
-                                      (double)ImageInfo.getExposureBias()) );
+                    TQString(TQString().sprintf("%4.2f",
+                                      (double)ImageInfo.getExposureBias()) ));
     }
 
     if (ImageInfo.getWhitebalance() != -1){
@@ -443,8 +443,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     if (ImageInfo.getISOequivalent()){
 	appendItem( exifGroup, "ISO equiv.",
-                    TQString().sprintf("%2d",
-                                      (int)ImageInfo.getISOequivalent()) );
+                    TQString(TQString().sprintf("%2d",
+                                      (int)ImageInfo.getISOequivalent()) ));
     }
 
     if (ImageInfo.getCompressionLevel()){

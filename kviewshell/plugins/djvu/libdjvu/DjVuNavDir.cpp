@@ -112,7 +112,7 @@ DjVuNavDir::decode(ByteStream & str)
       *ptr=0;
       if (!strlen(buffer)) continue;
 
-      if (!tmp_page2name.contains(buffer))
+      if (!tmp_page2name.tqcontains(buffer))
 	 tmp_page2name.append(buffer);
    };
 
@@ -161,7 +161,7 @@ DjVuNavDir::name_to_page(const char * name) const
 {
    GCriticalSectionLock lk((GCriticalSection *)&lock);
 
-   if (!name2page.contains(name)) return -1;
+   if (!name2page.tqcontains(name)) return -1;
    return name2page[name];
 }
 
@@ -170,7 +170,7 @@ DjVuNavDir::url_to_page(const GURL & url) const
 {
    GCriticalSectionLock lk((GCriticalSection *)&lock);
 
-   if (!url2page.contains(url)) return -1;
+   if (!url2page.tqcontains(url)) return -1;
    return url2page[url];
 }
 

@@ -114,11 +114,11 @@ void PMListPattern::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMListPattern::metaObject( ) const
+PMMetaObject* PMListPattern::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ListPattern", Base::metaObject( ) );
+      s_pMetaObject = new PMMetaObject( "ListPattern", Base::tqmetaObject( ) );
 
       PMListTypeProperty* p = new PMListTypeProperty(
          "listType", &PMListPattern::setListType,
@@ -178,9 +178,9 @@ void PMListPattern::setMortar( double n )
    }
 }
 
-PMDialogEditBase* PMListPattern::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMListPattern::editWidget( TQWidget* tqparent ) const
 {
-   return new PMListPatternEdit( parent );
+   return new PMListPatternEdit( tqparent );
 }
 
 void PMListPattern::restoreMemento( PMMemento* s )
@@ -228,11 +228,11 @@ PMTextureList::~PMTextureList( )
 {
 }
 
-PMMetaObject* PMTextureList::metaObject( ) const
+PMMetaObject* PMTextureList::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureList", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "TextureList", Base::tqmetaObject( ),
                                         createNewTextureList );
    }
    return s_pMetaObject;
@@ -267,11 +267,11 @@ PMPigmentList::~PMPigmentList( )
 {
 }
 
-PMMetaObject* PMPigmentList::metaObject( ) const
+PMMetaObject* PMPigmentList::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "PigmentList", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "PigmentList", Base::tqmetaObject( ),
                                         createNewPigmentList );
    }
    return s_pMetaObject;
@@ -306,11 +306,11 @@ PMColorList::~PMColorList( )
 {
 }
 
-PMMetaObject* PMColorList::metaObject( ) const
+PMMetaObject* PMColorList::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ColorList", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "ColorList", Base::tqmetaObject( ),
                                         createNewColorList );
    }
    return s_pMetaObject;
@@ -345,11 +345,11 @@ PMDensityList::~PMDensityList( )
 {
 }
 
-PMMetaObject* PMDensityList::metaObject( ) const
+PMMetaObject* PMDensityList::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "DensityList", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "DensityList", Base::tqmetaObject( ),
                                         createNewDensityList );
    }
    return s_pMetaObject;
@@ -388,11 +388,11 @@ PMNormalList::~PMNormalList( )
 {
 }
 
-PMMetaObject* PMNormalList::metaObject( ) const
+PMMetaObject* PMNormalList::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "NormalList", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "NormalList", Base::tqmetaObject( ),
                                         createNewNormalList );
       s_pMetaObject->addProperty(
          new PMNormalListProperty( "depth", &PMNormalList::setDepth,
@@ -462,8 +462,8 @@ void PMNormalList::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMNormalList::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMNormalList::editWidget( TQWidget* tqparent ) const
 {
-   return new PMListPatternEdit( parent );
+   return new PMListPatternEdit( tqparent );
 }
 

@@ -321,7 +321,7 @@ lt_XMLTags::init(XMLByteStream &xmlbs)
 GPList<lt_XMLTags>
 lt_XMLTags::get_Tags(char const tagname[]) const
 {
-  GPosition pos=allTags.contains(tagname);
+  GPosition pos=allTags.tqcontains(tagname);
   GPList<lt_XMLTags> retval;
   return (pos?allTags[pos]:retval);
 }
@@ -338,7 +338,7 @@ lt_XMLTags::get_Maps(char const tagname[],
     if(tag)
     {
       GPosition loc;
-      if((loc=tag->contains(tagname)))
+      if((loc=tag->tqcontains(tagname)))
       {
         GPList<lt_XMLTags> maps=(GPList<lt_XMLTags> &)((*tag)[loc]);
         for(GPosition mloc=maps;mloc;++mloc)
@@ -348,7 +348,7 @@ lt_XMLTags::get_Maps(char const tagname[],
           {
             GMap<GUTF8String,GUTF8String> &args=gtag->args;
             GPosition gpos;
-            if((gpos=args.contains(argn)))
+            if((gpos=args.tqcontains(argn)))
             {
               map[args[gpos]]=gtag;
             }

@@ -41,12 +41,13 @@ class TQLineEdit;
 class PMIsoSurfaceEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMIsoSurfaceEdit with parent and name
+    * Creates a PMIsoSurfaceEdit with tqparent and name
     */
-   PMIsoSurfaceEdit( TQWidget* parent, const char* name = 0 );
+   PMIsoSurfaceEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

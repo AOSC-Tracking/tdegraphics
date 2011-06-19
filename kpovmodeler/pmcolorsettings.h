@@ -32,11 +32,12 @@ class KColorButton;
 class PMColorSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMColorSettings( TQWidget* parent, const char* name = 0 );
+   PMColorSettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

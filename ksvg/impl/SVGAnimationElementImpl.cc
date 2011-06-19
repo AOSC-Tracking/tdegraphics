@@ -68,7 +68,7 @@ SVGElementImpl *SVGAnimationElementImpl::targetElement() const
 		if(!m_href.isEmpty())
 			modify->setTargetElement(ownerDoc()->getElementByIdRecursive(ownerSVGElement(), SVGURIReferenceImpl::getTarget(m_href)));
 		else if(!parentNode().isNull())
-			modify->setTargetElement(ownerDoc()->getElementFromHandle(parentNode().handle()));			
+			modify->setTargetElement(ownerDoc()->getElementFromHandle(parentNode().handle()));
 	}
 
 	return m_targetElement;
@@ -84,8 +84,8 @@ double SVGAnimationElementImpl::parseClockValue(const TQString &data) const
 
 	double result;
 
-	int doublePointOne = parse.find(':');
-	int doublePointTwo = parse.find(':', doublePointOne + 1);
+	int doublePointOne = parse.tqfind(':');
+	int doublePointTwo = parse.tqfind(':', doublePointOne + 1);
 
 	if(doublePointOne != -1 && doublePointTwo != -1) // Spec: "Full clock values"
 	{
@@ -96,7 +96,7 @@ double SVGAnimationElementImpl::parseClockValue(const TQString &data) const
 
 		result = (3600 * hours) + (60 * minutes) + seconds;
 
-		if(parse.find('.') != -1)
+		if(parse.tqfind('.') != -1)
 		{
 			TQString temp = parse.mid(9, 2);
 			milliseconds = temp.toUInt();
@@ -111,7 +111,7 @@ double SVGAnimationElementImpl::parseClockValue(const TQString &data) const
 
 		result = (60 * minutes) + seconds;
 
-		if(parse.find('.') != -1)
+		if(parse.tqfind('.') != -1)
 		{
 			TQString temp = parse.mid(6, 2);
 			milliseconds = temp.toUInt();
@@ -120,7 +120,7 @@ double SVGAnimationElementImpl::parseClockValue(const TQString &data) const
 	}
 	else // Spec: "Timecount values"
 	{
-		int dotPosition = parse.find('.');
+		int dotPosition = parse.tqfind('.');
 
 		if(parse.endsWith("h"))
 		{
@@ -304,34 +304,34 @@ void SVGAnimationElementImpl::putValueProperty(ExecState *exec, int token, const
 				}
 				else if(current.startsWith("wallclock"))
 				{
-					int firstBrace = current.find("(");
-					int secondBrace = current.find(")");
+					int firstBrace = current.tqfind("(");
+					int secondBrace = current.tqfind(")");
 					
 					TQString wallclockValue = current.mid(firstBrace + 1, secondBrace - firstBrace - 2);
 
 					kdDebug() << "WALLCLOCK VALUE " << wallclockValue << endl;
 				}	
-				else if(current.contains("."))
+				else if(current.tqcontains("."))
 				{
-					int dotPosition = current.find(".");
+					int dotPosition = current.tqfind(".");
 					
 					TQString element = current.mid(0, dotPosition);
 					TQString clockValue;
 
-					if(current.contains("begin"))
+					if(current.tqcontains("begin"))
 						clockValue = current.mid(dotPosition + 6);
-					else if(current.contains("end"))
+					else if(current.tqcontains("end"))
 						clockValue = current.mid(dotPosition + 4);
-					else if(current.contains("repeat"))
+					else if(current.tqcontains("repeat"))
 						clockValue = current.mid(dotPosition + 7);
 					else // DOM2 Event Reference
 					{
 						int plusMinusPosition = -1;
 						
-						if(current.contains("+"))
-							plusMinusPosition = current.find("+");
-						else if(current.contains("-"))
-							plusMinusPosition = current.find("-");
+						if(current.tqcontains("+"))
+							plusMinusPosition = current.tqfind("+");
+						else if(current.tqcontains("-"))
+							plusMinusPosition = current.tqfind("-");
 
 						TQString event = current.mid(dotPosition + 1, plusMinusPosition - dotPosition - 1);
 
@@ -405,9 +405,9 @@ void SVGAnimationElementImpl::setAttributes()
 {
 	SVGElementImpl::setAttributes();
 
-	// Spec: Default value is "replace"
+	// Spec: Default value is "tqreplace"
 	if(KSVG_TOKEN_NOT_PARSED(Additive))
-		KSVG_SET_ALT_ATTRIBUTE(Additive, "replace")
+		KSVG_SET_ALT_ATTRIBUTE(Additive, "tqreplace")
 	
 	// Spec: Default value is "none"
 	if(KSVG_TOKEN_NOT_PARSED(Accumulate))

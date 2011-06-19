@@ -21,8 +21,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -71,7 +71,7 @@
 
 /* ----------------------------------------------------------------------- */
 /* Constructor Scan Packager */
-ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
+ScanPackager::ScanPackager( TQWidget *tqparent ) : KFileTreeView( tqparent )
 {
    // TODO:
    setItemsRenameable (true );
@@ -245,7 +245,7 @@ void ScanPackager::slotDecorate( KFileTreeViewItem* item )
 	 }
 
 	 /* set image size in pixels */
-	 TQString t = i18n( "%1 x %2" ).arg( img->width()).arg(img->height());
+	 TQString t = i18n( "%1 x %2" ).tqarg( img->width()).tqarg(img->height());
 	 item->setText( 1, t );
 	 kdDebug( 28000) << "Image loaded and decorated!" << endl;
       }
@@ -412,7 +412,7 @@ TQString ScanPackager::itemDirectory( const KFileTreeViewItem* item, bool relati
    if( ! item )
    {
       kdDebug(28000) << "ERR: itemDirectory without item" << endl;
-      return TQString::null;
+      return TQString();
    }
 
    TQString relativUrl= (item->url()).prettyURL();
@@ -420,7 +420,7 @@ TQString ScanPackager::itemDirectory( const KFileTreeViewItem* item, bool relati
    if( ! item->isDir() )
    {
       // Cut off the filename in case it is not a dir
-      relativUrl.truncate( relativUrl.findRev( '/' )+1);
+      relativUrl.truncate( relativUrl.tqfindRev( '/' )+1);
    }
    else
    {
@@ -463,8 +463,8 @@ void ScanPackager::slotSelectDirectory( const TQString & dirString )
 {
    kdDebug(28000) << "Trying to decode directory string " << dirString << endl;
 
-   TQString searchFor = TQString::fromLatin1(" - ");
-   int pos = dirString.find( searchFor );
+   TQString searchFor = TQString::tqfromLatin1(" - ");
+   int pos = dirString.tqfind( searchFor );
 
    if( pos > -1 )
    {
@@ -531,7 +531,7 @@ void ScanPackager::slClicked( TQListViewItem *newItem )
 	 }
 	 else
 	 {
-	    emit( showThumbnails(  static_cast<KFileTreeViewItem*>(item->parent())));
+	    emit( showThumbnails(  static_cast<KFileTreeViewItem*>(item->tqparent())));
 	 }
       }
       else
@@ -600,7 +600,7 @@ void ScanPackager::loadImageForItem( KFileTreeViewItem *item )
                   prevItem = subImgItem;
 
                   subImgItem->setPixmap( 0, loader->loadIcon( "editcopy", KIcon::Small ));
-                  subImgItem->setText( 0, i18n("Sub-image %1").arg( i ) );
+                  subImgItem->setText( 0, i18n("Sub-image %1").tqarg( i ) );
                   KookaImage  *subImgImg = new KookaImage( i, img );
                   subImgImg->setFileItem( newKfi );
                   newKfi->setExtraData( (void*) this, (void*) subImgImg );
@@ -711,7 +711,7 @@ TQCString ScanPackager::getImgFormat( KFileTreeViewItem* item ) const
 
 TQString ScanPackager::localFileName( KFileTreeViewItem *it ) const
 {
-   if( ! it ) return( TQString::null );
+   if( ! it ) return( TQString() );
 
    KURL url = it->url();
 
@@ -853,15 +853,15 @@ void ScanPackager::slAddImage( TQImage *img, KookaImageMeta* )
    m_nextUrlToShow = lurl;
 
    TQString s;
-   /* Count amount of children of the father */
-   TQListViewItem *paps = curr->parent();
+   /* Count amount of tqchildren of the father */
+   TQListViewItem *paps = curr->tqparent();
    if( curr->isDir() ) /* take only father if the is no directory */
       paps = curr;
 
    if( paps )
    {
       int childcount = paps->childCount();
-      s = i18n("%1 images").arg(childcount);
+      s = i18n("%1 images").tqarg(childcount);
       paps->setText( 1, s);
       setOpen( paps, true );
    }
@@ -1012,7 +1012,7 @@ void ScanPackager::slotImportFile()
 
     if( ! curr->isDir() )
     {
-        KFileTreeViewItem *pa = static_cast<KFileTreeViewItem*>(curr->parent());
+        KFileTreeViewItem *pa = static_cast<KFileTreeViewItem*>(curr->tqparent());
         impTarget = pa->url();
     }
     kdDebug(28000) << "Importing to " << impTarget.url() << endl;
@@ -1136,7 +1136,7 @@ void ScanPackager::slotDeleteItems( )
       s = i18n("Do you really want to delete this image?\nIt cannot be restored!" );
       if( item->isDir() )
       {
-	 s = i18n("Do you really want to delete the folder %1\nand all the images inside?").arg("");
+	 s = i18n("Do you really want to delete the folder %1\nand all the images inside?").tqarg("");
       }
       result = KMessageBox::warningContinueCancel(this, s, i18n( "Delete Collection Item"),
 					  KStdGuiItem::del(), "AskForDeleteFiles" );
@@ -1168,7 +1168,7 @@ void ScanPackager::slotCreateFolder( )
 {
    bool ok;
    TQString folder = KInputDialog::getText( i18n( "New Folder" ),
-         i18n( "Please enter a name for the new folder:" ), TQString::null,
+         i18n( "Please enter a name for the new folder:" ), TQString(),
          &ok, this );
 
    if( ok )
@@ -1214,7 +1214,7 @@ TQString ScanPackager::getImgName( TQString name_on_disk )
    TQString s;
    (void) name_on_disk;
 
-   s = i18n("image %1").arg(img_counter++);
+   s = i18n("image %1").tqarg(img_counter++);
    return( s );
 }
 
@@ -1239,12 +1239,12 @@ void ScanPackager::contentsDragMoveEvent( TQDragMoveEvent *e )
    }
 
    TQListViewItem *afterme = 0;
-   TQListViewItem *parent = 0;
+   TQListViewItem *tqparent = 0;
 
-   findDrop( e->pos(), parent, afterme );
+   findDrop( e->pos(), tqparent, afterme );
 
    // "afterme" is 0 when aiming at a directory itself
-   TQListViewItem *item = afterme ? afterme : parent;
+   TQListViewItem *item = afterme ? afterme : tqparent;
 
    if( item )
    {

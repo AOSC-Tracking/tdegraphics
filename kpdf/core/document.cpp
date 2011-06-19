@@ -118,7 +118,7 @@ KPDFDocument::KPDFDocument(TQWidget *widget)
     TQStringList::Iterator it = list.begin();
     while( it != list.end() )
     {
-        d->kimgioMimes << KMimeType::findByPath(TQString("foo.%1").arg(*it), 0, true)->name();
+        d->kimgioMimes << KMimeType::findByPath(TQString("foo.%1").tqarg(*it), 0, true)->name();
         ++it;
     }
 }
@@ -139,13 +139,13 @@ bool KPDFDocument::openDocument( const TQString & docFile, const KURL & url, con
     TQFile fileReadTest( docFile );
     if ( !fileReadTest.open( IO_ReadOnly ) )
     {
-        d->docFileName = TQString::null;
+        d->docFileName = TQString();
         return false;
     }
     // determine the related "xml document-info" filename
     d->url = url;
     d->docFileName = docFile;
-    TQString fn = docFile.contains('/') ? docFile.section('/', -1, -1) : docFile;
+    TQString fn = docFile.tqcontains('/') ? docFile.section('/', -1, -1) : docFile;
     fn = "kpdf/" + TQString::number(fileReadTest.size()) + "." + fn + ".xml";
     fileReadTest.close();
     d->xmlFileName = locateLocal( "data", fn );
@@ -298,7 +298,7 @@ void KPDFDocument::addObserver( DocumentObserver * pObserver )
 void KPDFDocument::removeObserver( DocumentObserver * pObserver )
 {
     // remove observer from the map. it won't receive notifications anymore
-    if ( d->observers.contains( pObserver->observerId() ) )
+    if ( d->observers.tqcontains( pObserver->observerId() ) )
     {
         // free observer's pixmap data
         int observerId = pObserver->observerId();
@@ -331,7 +331,7 @@ void KPDFDocument::reparseConfig()
     // reparse generator config and if something changed clear KPDFPages
     if ( generator && generator->reparseConfig() )
     {
-        // invalidate pixmaps
+        // tqinvalidate pixmaps
         TQValueVector<KPDFPage*>::iterator it = pages_vector.begin(), end = pages_vector.end();
         for ( ; it != end; ++it )
             (*it)->deletePixmapsAndRects();
@@ -357,7 +357,7 @@ void KPDFDocument::reparseConfig()
 
 TQWidget *KPDFDocument::widget() const
 {
-    return static_cast<TQWidget*>(parent());
+    return TQT_TQWIDGET(tqparent());
 }
 
 bool KPDFDocument::isOpened() const
@@ -633,7 +633,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
         return false;
 
     // if searchID search not recorded, create new descriptor and init params
-    if ( !d->searches.contains( searchID ) )
+    if ( !d->searches.tqcontains( searchID ) )
     {
         RunningSearch * search = new RunningSearch();
         search->continueOnPage = -1;
@@ -707,12 +707,12 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             {
                 foundAMatch = true;
                 s->highlightedPages.append( pageNumber );
-                if ( !pagesToNotify.contains( pageNumber ) )
+                if ( !pagesToNotify.tqcontains( pageNumber ) )
                     pagesToNotify.append( pageNumber );
             }
         }
 
-        // reset cursor to previous shape
+        // reset cursor to previous tqshape
         TQApplication::restoreOverrideCursor();
 
         // send page lists if found anything new
@@ -747,7 +747,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             {
                 if ( currentPage >= pageCount )
                 {
-                    if ( noDialogs || KMessageBox::questionYesNo(widget(), i18n("End of document reached.\nContinue from the beginning?"), TQString::null, KStdGuiItem::cont(), KStdGuiItem::cancel()) == KMessageBox::Yes )
+                    if ( noDialogs || KMessageBox::questionYesNo(widget(), i18n("End of document reached.\nContinue from the beginning?"), TQString(), KStdGuiItem::cont(), KStdGuiItem::cancel()) == KMessageBox::Yes )
                         currentPage = 0;
                     else
                         break;
@@ -764,7 +764,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             }
         }
 
-        // reset cursor to previous shape
+        // reset cursor to previous tqshape
         TQApplication::restoreOverrideCursor();
 
         // if a match has been found..
@@ -779,7 +779,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             pages_vector[ currentPage ]->setHighlight( searchID, match, color );
 
             // ..queue page for notifying changes..
-            if ( !pagesToNotify.contains( currentPage ) )
+            if ( !pagesToNotify.tqcontains( currentPage ) )
                 pagesToNotify.append( currentPage );
 
             // ..move the viewport to show the searched word centered
@@ -793,7 +793,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             }
         }
         else if ( !noDialogs )
-            KMessageBox::information( widget(), i18n("No matches found for '%1'.").arg( text ) );
+            KMessageBox::information( widget(), i18n("No matches found for '%1'.").tqarg( text ) );
     }
     // 3. PREVMATCH //TODO
     else if ( type == PrevMatch )
@@ -860,12 +860,12 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             {
                 foundAMatch = true;
                 s->highlightedPages.append( pageNumber );
-                if ( !pagesToNotify.contains( pageNumber ) )
+                if ( !pagesToNotify.tqcontains( pageNumber ) )
                     pagesToNotify.append( pageNumber );
             }
         }
 
-        // reset cursor to previous shape
+        // reset cursor to previous tqshape
         TQApplication::restoreOverrideCursor();
 
         // send page lists to update observers (since some filter on bookmarks)
@@ -884,7 +884,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
 bool KPDFDocument::continueSearch( int searchID )
 {
     // check if searchID is present in runningSearches
-    if ( !d->searches.contains( searchID ) )
+    if ( !d->searches.tqcontains( searchID ) )
         return false;
 
     // start search with cached parameters from last search by searchID
@@ -897,7 +897,7 @@ bool KPDFDocument::continueSearch( int searchID )
 void KPDFDocument::resetSearch( int searchID )
 {
     // check if searchID is present in runningSearches
-    if ( !d->searches.contains( searchID ) )
+    if ( !d->searches.tqcontains( searchID ) )
         return;
 
     // get previous parameters for search
@@ -1016,7 +1016,7 @@ void KPDFDocument::processLink( const KPDFLink * link )
                 KRun::run( *ptr, lst );
             }
             else
-                KMessageBox::information( widget(), i18n( "No application found for opening file of mimetype %1." ).arg( mime->name() ) );
+                KMessageBox::information( widget(), i18n( "No application found for opening file of mimetype %1." ).tqarg( mime->name() ) );
             } break;
 
         case KPDFLink::Action: {
@@ -1067,14 +1067,14 @@ void KPDFDocument::processLink( const KPDFLink * link )
         case KPDFLink::Browse: {
             const KPDFLinkBrowse * browse = static_cast< const KPDFLinkBrowse * >( link );
             // if the url is a mailto one, invoke mailer
-            if ( browse->url().startsWith( "mailto:", false ) )
+            if ( browse->url().tqstartsWith( "mailto:", false ) )
                 kapp->invokeMailer( browse->url() );
             else
             {
                 TQString url = browse->url();
 
                 // fix for #100366, documents with relative links that are the form of http:foo.pdf
-                if (url.find("http:") == 0 && url.find("http://") == -1 && url.right(4) == ".pdf")
+                if (url.tqfind("http:") == 0 && url.tqfind("http://") == -1 && url.right(4) == ".pdf")
                 {
                     openRelativeFile(url.mid(5));
                     return;
@@ -1117,7 +1117,7 @@ void KPDFDocument::requestDone( PixmapRequest * req )
             break;
         }
 
-    if ( d->observers.contains( req->id ) )
+    if ( d->observers.tqcontains( req->id ) )
     {
         // [MEM] 1.2 append memory allocation descriptor to the FIFO
         int memoryBytes = 4 * req->width * req->height;
@@ -1381,7 +1381,7 @@ void KPDFDocument::loadDocumentInfo()
 TQString KPDFDocument::giveAbsolutePath( const TQString & fileName )
 {
     if ( !d->url.isValid() )
-        return TQString::null;
+        return TQString();
     
     return d->url.upURL().url() + fileName;
 }

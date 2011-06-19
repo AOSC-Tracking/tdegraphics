@@ -214,7 +214,7 @@ int kpPixmapFX::pointArraySize (const TQPointArray &points)
 
 
 //
-// QPixmap/TQImage Conversion Functions
+// TQPixmap/TQImage Conversion Functions
 //
 
 // public static
@@ -238,9 +238,9 @@ static bool imageHasAlphaChannel (const TQImage &image)
     {
         for (int x = 0; x < image.width (); x++)
         {
-            const QRgb rgb = image.pixel (x, y);
+            const TQRgb rgb = image.pixel (x, y);
 
-            if (qAlpha (rgb) > 0 && qAlpha (rgb) < 255)
+            if (tqAlpha (rgb) > 0 && tqAlpha (rgb) < 255)
                 return true;
         }
     }
@@ -250,7 +250,7 @@ static bool imageHasAlphaChannel (const TQImage &image)
 
 static int imageNumColorsUpTo (const TQImage &image, int max)
 {
-    TQMap <QRgb, bool> rgbMap;
+    TQMap <TQRgb, bool> rgbMap;
 
     if (image.depth () <= 8)
     {
@@ -309,7 +309,7 @@ static void convertToPixmapWarnAboutLoss (const TQImage &image,
     int screenDepthNeeded = 0;
 
     if (moreColorsThanDisplay)
-        screenDepthNeeded = QMIN (24, image.depth ());
+        screenDepthNeeded = TQMIN (24, image.depth ());
 
 #if DEBUG_KP_PIXMAP_FX && 1
     kdDebug () << "\ttranslucencyShouldBeShown="
@@ -331,14 +331,14 @@ static void convertToPixmapWarnAboutLoss (const TQImage &image,
 #endif
 
 
-    TQApplication::setOverrideCursor (Qt::arrowCursor);
+    TQApplication::setOverrideCursor (TQt::arrowCursor);
 
     if (moreColorsThanDisplay && hasAlphaChannel)
     {
         KMessageBox::information (wali.m_parent,
             wali.m_moreColorsThanDisplayAndHasAlphaChannelMessage
                 .arg (screenDepthNeeded),
-            TQString::null,  // or would you prefer "Low Screen Depth and Image Contains Transparency"? :)
+            TQString(),  // or would you prefer "Low Screen Depth and Image Contains Transparency"? :)
             colorDepthTranslucencyDontAskAgain);
 
         if (!KMessageBox::shouldBeShownContinue (colorDepthTranslucencyDontAskAgain))
@@ -387,18 +387,18 @@ TQPixmap kpPixmapFX::convertToPixmap (const TQImage &image, bool pretty,
     if (!pretty)
     {
         destPixmap.convertFromImage (image,
-                                     Qt::ColorOnly/*always display depth*/ |
-                                     Qt::ThresholdDither/*no dither*/ |
-                                     Qt::ThresholdAlphaDither/*no dither alpha*/|
-                                     Qt::AvoidDither);
+                                     TQt::ColorOnly/*always display depth*/ |
+                                     TQt::ThresholdDither/*no dither*/ |
+                                     TQt::ThresholdAlphaDither/*no dither alpha*/|
+                                     TQt::AvoidDither);
     }
     else
     {
         destPixmap.convertFromImage (image,
-                                     Qt::ColorOnly/*always display depth*/ |
-                                     Qt::DiffuseDither/*hi quality dither*/ |
-                                     Qt::ThresholdAlphaDither/*no dither alpha*/ |
-                                     Qt::PreferDither/*(dither even if <256 colours)*/);
+                                     TQt::ColorOnly/*always display depth*/ |
+                                     TQt::DiffuseDither/*hi quality dither*/ |
+                                     TQt::ThresholdAlphaDither/*no dither alpha*/ |
+                                     TQt::PreferDither/*(dither even if <256 colours)*/);
     }
 
 #if DEBUG_KP_PIXMAP_FX && 1
@@ -449,7 +449,7 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
                    << " (AvoidDither | ThresholdDither)" << endl;
     #endif
 
-        ditherFlags = (Qt::AvoidDither | Qt::ThresholdDither);
+        ditherFlags = (TQt::AvoidDither | TQt::ThresholdDither);
     }
     // PRE: image.depth() > screenDepth
     // ASSERT: screenDepth < 32
@@ -470,7 +470,7 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
             kdDebug () << "\t\tcolors fit on screen - don't dither"
                        << " (AvoidDither | ThresholdDither)" << endl;
         #endif
-            ditherFlags = (Qt::AvoidDither | Qt::ThresholdDither);
+            ditherFlags = (TQt::AvoidDither | TQt::ThresholdDither);
         }
         else
         {
@@ -478,7 +478,7 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
             kdDebug () << "\t\tcolors don't fit on screen - dither"
                        << " (PreferDither | DiffuseDither)" << endl;
         #endif
-            ditherFlags = (Qt::PreferDither | Qt::DiffuseDither);
+            ditherFlags = (TQt::PreferDither | TQt::DiffuseDither);
         }
     }
     // PRE: image.depth() > screenDepth &&
@@ -519,7 +519,7 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
             kdDebug () << "\t\t\talways dither (PreferDither | DiffuseDither)"
                         << endl;
         #endif
-            ditherFlags = (Qt::PreferDither | Qt::DiffuseDither);
+            ditherFlags = (TQt::PreferDither | TQt::DiffuseDither);
         }
         else
         {
@@ -527,14 +527,14 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
             kdDebug () << "\t\t\tdon't dither (AvoidDither | ThresholdDither)"
                        << endl;
         #endif
-            ditherFlags = (Qt::AvoidDither | Qt::ThresholdDither);
+            ditherFlags = (TQt::AvoidDither | TQt::ThresholdDither);
         }
     }
 
 
     destPixmap.convertFromImage (image,
-                                 Qt::ColorOnly/*always display depth*/ |
-                                 Qt::ThresholdAlphaDither/*no dither alpha*/ |
+                                 TQt::ColorOnly/*always display depth*/ |
+                                 TQt::ThresholdAlphaDither/*no dither alpha*/ |
                                  ditherFlags);
 
 #if DEBUG_KP_PIXMAP_FX && 1
@@ -556,7 +556,7 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
 TQPixmap kpPixmapFX::pixmapWithDefinedTransparentPixels (const TQPixmap &pixmap,
                                                         const TQColor &transparentColor)
 {
-    if (!pixmap.mask ())
+    if (!pixmap.tqmask ())
         return pixmap;
 
     TQPixmap retPixmap (pixmap.width (), pixmap.height ());
@@ -566,7 +566,7 @@ TQPixmap kpPixmapFX::pixmapWithDefinedTransparentPixels (const TQPixmap &pixmap,
     p.drawPixmap (TQPoint (0, 0), pixmap);
     p.end ();
 
-    retPixmap.setMask (*pixmap.mask ());
+    retPixmap.setMask (*pixmap.tqmask ());
     return retPixmap;
 }
 
@@ -583,7 +583,7 @@ TQPixmap kpPixmapFX::getPixmapAt (const TQPixmap &pm, const TQRect &rect)
 
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "kpPixmapFX::getPixmapAt(pm.hasMask="
-               << (pm.mask () ? 1 : 0)
+               << (pm.tqmask () ? 1 : 0)
                << ",rect="
                << rect
                << ")"
@@ -599,7 +599,7 @@ TQPixmap kpPixmapFX::getPixmapAt (const TQPixmap &pm, const TQRect &rect)
         kdDebug () << "\tret would contain undefined pixels - setting them to transparent" << endl;
     #endif
         TQBitmap transparentMask (rect.width (), rect.height ());
-        transparentMask.fill (Qt::color0/*transparent*/);
+        transparentMask.fill (TQt::color0/*transparent*/);
         retPixmap.setMask (transparentMask);
     }
 
@@ -614,14 +614,14 @@ TQPixmap kpPixmapFX::getPixmapAt (const TQPixmap &pm, const TQRect &rect)
 
     const TQPoint destTopLeft = validSrcRect.topLeft () - rect.topLeft ();
 
-    // copy data _and_ mask (if avail)
+    // copy data _and_ tqmask (if avail)
     copyBlt (&retPixmap, /* dest */
              destTopLeft.x (), destTopLeft.y (), /* dest pt */
              &pm, /* src */
              validSrcRect.x (), validSrcRect.y (), /* src pt */
              validSrcRect.width (), validSrcRect.height ());
 
-    if (wouldHaveUndefinedPixels && retPixmap.mask () && !pm.mask ())
+    if (wouldHaveUndefinedPixels && retPixmap.tqmask () && !pm.tqmask ())
     {
     #if DEBUG_KP_PIXMAP_FX && 0
         kdDebug () << "\tensure opaque in valid region" << endl;
@@ -633,7 +633,7 @@ TQPixmap kpPixmapFX::getPixmapAt (const TQPixmap &pm, const TQRect &rect)
 
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "\tretPixmap.hasMask="
-               << (retPixmap.mask () ? 1 : 0)
+               << (retPixmap.tqmask () ? 1 : 0)
                << endl;
 #endif
 
@@ -652,19 +652,19 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
     kdDebug () << "kpPixmapFX::setPixmapAt(destPixmap->rect="
                << destPixmapPtr->rect ()
                << ",destPixmap->hasMask="
-               << (destPixmapPtr->mask () ? 1 : 0)
+               << (destPixmapPtr->tqmask () ? 1 : 0)
                << ",destRect="
                << destRect
                << ",srcPixmap.rect="
                << srcPixmap.rect ()
                << ",srcPixmap.hasMask="
-               << (srcPixmap.mask () ? 1 : 0)
+               << (srcPixmap.tqmask () ? 1 : 0)
                << ")"
                << endl;
 #endif
 
 #if DEBUG_KP_PIXMAP_FX && 0
-    if (destPixmapPtr->mask ())
+    if (destPixmapPtr->tqmask ())
     {
         TQImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
         int numTrans = 0;
@@ -673,7 +673,7 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
         {
             for (int x = 0; x < image.width (); x++)
             {
-                if (qAlpha (image.pixel (x, y)) == 0)
+                if (tqAlpha (image.pixel (x, y)) == 0)
                     numTrans++;
             }
         }
@@ -685,38 +685,38 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
 #if 0
     // TODO: why does undo'ing a single pen dot on a transparent pixel,
     //       result in a opaque image, except for that single transparent pixel???
-    //       Qt bug on boundary case?
+    //       TQt bug on boundary case?
 
-    // copy data _and_ mask
+    // copy data _and_ tqmask
     copyBlt (destPixmapPtr,
              destAt.x (), destAt.y (),
              &srcPixmap,
              0, 0,
              destRect.width (), destRect.height ());
 #else
-    bitBlt (destPixmapPtr,
+    bitBlt (TQT_TQPAINTDEVICE(destPixmapPtr),
             destRect.x (), destRect.y (),
-            &srcPixmap,
+            TQT_TQPAINTDEVICE(const_cast<TQPixmap*>(&srcPixmap)),
             0, 0,
             destRect.width (), destRect.height (),
-            Qt::CopyROP,
-            true/*ignore mask*/);
+            TQt::CopyROP,
+            true/*ignore tqmask*/);
 
-    if (srcPixmap.mask ())
+    if (srcPixmap.tqmask ())
     {
-        TQBitmap mask = getNonNullMask (*destPixmapPtr);
-        bitBlt (&mask,
+        TQBitmap tqmask = getNonNullMask (*destPixmapPtr);
+        bitBlt (TQT_TQPAINTDEVICE(&tqmask),
                 destRect.x (), destRect.y (),
-                srcPixmap.mask (),
+                TQT_TQPAINTDEVICE(const_cast<TQBitmap*>(srcPixmap.tqmask ())),
                 0, 0,
                 destRect.width (), destRect.height (),
-                Qt::CopyROP,
-                true/*ignore mask*/);
-        destPixmapPtr->setMask (mask);
+                TQt::CopyROP,
+                true/*ignore tqmask*/);
+        destPixmapPtr->setMask (tqmask);
     }
 #endif
 
-    if (destPixmapPtr->mask () && !srcPixmap.mask ())
+    if (destPixmapPtr->tqmask () && !srcPixmap.tqmask ())
     {
     #if DEBUG_KP_PIXMAP_FX && 0
         kdDebug () << "\t\topaque'ing dest rect" << endl;
@@ -726,9 +726,9 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
 
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "\tdestPixmap->hasMask="
-               << (destPixmapPtr->mask () ? 1 : 0)
+               << (destPixmapPtr->tqmask () ? 1 : 0)
                << endl;
-    if (destPixmapPtr->mask ())
+    if (destPixmapPtr->tqmask ())
     {
         TQImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
         int numTrans = 0;
@@ -737,7 +737,7 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
         {
             for (int x = 0; x < image.width (); x++)
             {
-                if (qAlpha (image.pixel (x, y)) == 0)
+                if (tqAlpha (image.pixel (x, y)) == 0)
                     numTrans++;
             }
         }
@@ -772,7 +772,7 @@ void kpPixmapFX::paintPixmapAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
     if (!destPixmapPtr)
         return;
 
-    // Copy src (masked by src's mask) on top of dest.
+    // Copy src (tqmasked by src's tqmask) on top of dest.
     bitBlt (destPixmapPtr, /* dest */
             destAt.x (), destAt.y (), /* dest pt */
             &srcPixmap, /* src */
@@ -825,7 +825,7 @@ kpColor kpPixmapFX::getColorAtPixel (const TQImage &img, const TQPoint &at)
     if (!img.valid (at.x (), at.y ()))
         return kpColor::invalid;
 
-    QRgb rgba = img.pixel (at.x (), at.y ());
+    TQRgb rgba = img.pixel (at.x (), at.y ());
     return kpColor (rgba);
 }
 
@@ -852,14 +852,14 @@ void kpPixmapFX::ensureNoAlphaChannel (TQPixmap *destPixmapPtr)
 // public static
 TQBitmap kpPixmapFX::getNonNullMask (const TQPixmap &pm)
 {
-    if (pm.mask ())
-        return *pm.mask ();
+    if (pm.tqmask ())
+        return *pm.tqmask ();
     else
     {
-        TQBitmap maskBitmap (pm.width (), pm.height ());
-        maskBitmap.fill (Qt::color1/*opaque*/);
+        TQBitmap tqmaskBitmap (pm.width (), pm.height ());
+        tqmaskBitmap.fill (TQt::color1/*opaque*/);
 
-        return maskBitmap;
+        return tqmaskBitmap;
     }
 }
 
@@ -870,18 +870,18 @@ void kpPixmapFX::ensureTransparentAt (TQPixmap *destPixmapPtr, const TQRect &des
     if (!destPixmapPtr)
         return;
 
-    TQBitmap maskBitmap = getNonNullMask (*destPixmapPtr);
+    TQBitmap tqmaskBitmap = getNonNullMask (*destPixmapPtr);
 
-    TQPainter p (&maskBitmap);
+    TQPainter p (&tqmaskBitmap);
 
-    p.setPen (Qt::color0/*transparent*/);
-    p.setBrush (Qt::color0/*transparent*/);
+    p.setPen (TQt::color0/*transparent*/);
+    p.setBrush (TQt::color0/*transparent*/);
 
     p.drawRect (destRect);
 
     p.end ();
 
-    destPixmapPtr->setMask (maskBitmap);
+    destPixmapPtr->setMask (tqmaskBitmap);
 }
 
 
@@ -916,7 +916,7 @@ void kpPixmapFX::paintMaskTransparentWithBrush (TQPixmap *destPixmapPtr, const T
             &brushBitmap,
             0, 0,
             brushBitmap.width (), brushBitmap.height (),
-            Qt::NotAndROP);
+            TQt::NotAndROP);
 
     destPixmapPtr->setMask (destMaskBitmap);
 }
@@ -934,46 +934,46 @@ void kpPixmapFX::paintMaskTransparentWithBrush (TQPixmap *destPixmapPtr, int des
 // public static
 void kpPixmapFX::ensureOpaqueAt (TQPixmap *destPixmapPtr, const TQRect &destRect)
 {
-    if (!destPixmapPtr || !destPixmapPtr->mask ()/*already opaque*/)
+    if (!destPixmapPtr || !destPixmapPtr->tqmask ()/*already opaque*/)
         return;
 
-    TQBitmap maskBitmap = *destPixmapPtr->mask ();
+    TQBitmap tqmaskBitmap = *destPixmapPtr->tqmask ();
 
-    TQPainter p (&maskBitmap);
+    TQPainter p (&tqmaskBitmap);
 
-    p.setPen (Qt::color1/*opaque*/);
-    p.setBrush (Qt::color1/*opaque*/);
+    p.setPen (TQt::color1/*opaque*/);
+    p.setBrush (TQt::color1/*opaque*/);
 
     p.drawRect (destRect);
 
     p.end ();
 
-    destPixmapPtr->setMask (maskBitmap);
+    destPixmapPtr->setMask (tqmaskBitmap);
 }
 
 // public static
 void kpPixmapFX::ensureOpaqueAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
                                  const TQPixmap &srcPixmap)
 {
-    if (!destPixmapPtr || !destPixmapPtr->mask ()/*already opaque*/)
+    if (!destPixmapPtr || !destPixmapPtr->tqmask ()/*already opaque*/)
         return;
 
-    TQBitmap destMask = *destPixmapPtr->mask ();
+    TQBitmap destMask = *destPixmapPtr->tqmask ();
 
-    if (srcPixmap.mask ())
+    if (srcPixmap.tqmask ())
     {
         bitBlt (&destMask, /* dest */
                 destAt, /* dest pt */
-                srcPixmap.mask (), /* src */
+                srcPixmap.tqmask (), /* src */
                 TQRect (0, 0, srcPixmap.width (), srcPixmap.height ()), /* src rect */
-                Qt::OrROP/*if either is opaque, it's opaque*/);
+                TQt::OrROP/*if either is opaque, it's opaque*/);
     }
     else
     {
         TQPainter p (&destMask);
 
-        p.setPen (Qt::color1/*opaque*/);
-        p.setBrush (Qt::color1/*opaque*/);
+        p.setPen (TQt::color1/*opaque*/);
+        p.setBrush (TQt::color1/*opaque*/);
 
         p.drawRect (destAt.x (), destAt.y (),
                     srcPixmap.width (), srcPixmap.height ());
@@ -1012,16 +1012,16 @@ TQPixmap kpPixmapFX::convertToGrayscale (const TQPixmap &pm)
     return kpPixmapFX::convertToPixmap (image);
 }
 
-static QRgb toGray (QRgb rgb)
+static TQRgb toGray (TQRgb rgb)
 {
     // naive way that doesn't preserve brightness
-    // int gray = (qRed (rgb) + qGreen (rgb) + qBlue (rgb)) / 3;
+    // int gray = (tqRed (rgb) + tqGreen (rgb) + tqBlue (rgb)) / 3;
 
     // over-exaggerates red & blue
-    // int gray = qGray (rgb);
+    // int gray = tqGray (rgb);
 
-    int gray = (212671 * qRed (rgb) + 715160 * qGreen (rgb) + 72169 * qBlue (rgb)) / 1000000;
-    return qRgba (gray, gray, gray, qAlpha (rgb));
+    int gray = (212671 * tqRed (rgb) + 715160 * tqGreen (rgb) + 72169 * tqBlue (rgb)) / 1000000;
+    return tqRgba (gray, gray, gray, tqAlpha (rgb));
 }
 
 // public static
@@ -1064,8 +1064,8 @@ void kpPixmapFX::fill (TQPixmap *destPixmapPtr, const kpColor &color)
 
     if (color.isOpaque ())
     {
-        destPixmapPtr->setMask (TQBitmap ());  // no mask = opaque
-        destPixmapPtr->fill (color.toQColor ());
+        destPixmapPtr->setMask (TQBitmap ());  // no tqmask = opaque
+        destPixmapPtr->fill (color.toTQColor ());
     }
     else
     {
@@ -1107,22 +1107,22 @@ void kpPixmapFX::resize (TQPixmap *destPixmapPtr, int w, int h,
     #if DEBUG_KP_PIXMAP_FX && 1
         kdDebug () << "\tfilling in new areas" << endl;
     #endif
-        TQBitmap maskBitmap;
-        TQPainter painter, maskPainter;
+        TQBitmap tqmaskBitmap;
+        TQPainter painter, tqmaskPainter;
 
         if (backgroundColor.isOpaque ())
         {
             painter.begin (destPixmapPtr);
-            painter.setPen (backgroundColor.toQColor ());
-            painter.setBrush (backgroundColor.toQColor ());
+            painter.setPen (backgroundColor.toTQColor ());
+            painter.setBrush (backgroundColor.toTQColor ());
         }
 
-        if (backgroundColor.isTransparent () || destPixmapPtr->mask ())
+        if (backgroundColor.isTransparent () || destPixmapPtr->tqmask ())
         {
-            maskBitmap = kpPixmapFX::getNonNullMask (*destPixmapPtr);
-            maskPainter.begin (&maskBitmap);
-            maskPainter.setPen (backgroundColor.maskColor ());
-            maskPainter.setBrush (backgroundColor.maskColor ());
+            tqmaskBitmap = kpPixmapFX::getNonNullMask (*destPixmapPtr);
+            tqmaskPainter.begin (&tqmaskBitmap);
+            tqmaskPainter.setPen (backgroundColor.tqmaskColor ());
+            tqmaskPainter.setBrush (backgroundColor.tqmaskColor ());
         }
 
     #define PAINTER_CALL(cmd)         \
@@ -1130,8 +1130,8 @@ void kpPixmapFX::resize (TQPixmap *destPixmapPtr, int w, int h,
         if (painter.isActive ())      \
             painter . cmd ;           \
                                       \
-        if (maskPainter.isActive ())  \
-            maskPainter . cmd ;       \
+        if (tqmaskPainter.isActive ())  \
+            tqmaskPainter . cmd ;       \
     }
         if (w > oldWidth)
             PAINTER_CALL (drawRect (oldWidth, 0, w - oldWidth, oldHeight));
@@ -1140,14 +1140,14 @@ void kpPixmapFX::resize (TQPixmap *destPixmapPtr, int w, int h,
             PAINTER_CALL (drawRect (0, oldHeight, w, h - oldHeight));
     #undef PAINTER_CALL
 
-        if (maskPainter.isActive ())
-            maskPainter.end ();
+        if (tqmaskPainter.isActive ())
+            tqmaskPainter.end ();
 
         if (painter.isActive ())
             painter.end ();
 
-        if (!maskBitmap.isNull ())
-            destPixmapPtr->setMask (maskBitmap);
+        if (!tqmaskBitmap.isNull ())
+            destPixmapPtr->setMask (tqmaskBitmap);
     }
 }
 
@@ -1373,12 +1373,12 @@ static TQPixmap xForm (const TQPixmap &pm, const TQWMatrix &transformMatrix_,
     TQBitmap newBitmapMask;
 
     if (backgroundColor.isOpaque ())
-        newPixmap.fill (backgroundColor.toQColor ());
+        newPixmap.fill (backgroundColor.toTQColor ());
 
-    if (backgroundColor.isTransparent () || pm.mask ())
+    if (backgroundColor.isTransparent () || pm.tqmask ())
     {
         newBitmapMask.resize (newPixmap.width (), newPixmap.height ());
-        newBitmapMask.fill (backgroundColor.maskColor ());
+        newBitmapMask.fill (backgroundColor.tqmaskColor ());
     }
 
     TQPainter painter (&newPixmap);
@@ -1403,12 +1403,12 @@ static TQPixmap xForm (const TQPixmap &pm, const TQWMatrix &transformMatrix_,
     painter.setWorldMatrix (transformMatrix);
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "\ttranslate top=" << painter.xForm (TQPoint (0, 0)) << endl;
-    kdDebug () << "\tmatrix: m11=" << painter.worldMatrix ().m11 ()
-               << " m12=" << painter.worldMatrix ().m12 ()
-               << " m21=" << painter.worldMatrix ().m21 ()
-               << " m22=" << painter.worldMatrix ().m22 ()
-               << " dx=" << painter.worldMatrix ().dx ()
-               << " dy=" << painter.worldMatrix ().dy ()
+    kdDebug () << "\tmatrix: m11=" << painter.tqworldMatrix ().m11 ()
+               << " m12=" << painter.tqworldMatrix ().m12 ()
+               << " m21=" << painter.tqworldMatrix ().m21 ()
+               << " m22=" << painter.tqworldMatrix ().m22 ()
+               << " dx=" << painter.tqworldMatrix ().dx ()
+               << " dy=" << painter.tqworldMatrix ().dy ()
                << endl;
 #endif
     painter.drawPixmap (TQPoint (0, 0), pm);
@@ -1416,10 +1416,10 @@ static TQPixmap xForm (const TQPixmap &pm, const TQWMatrix &transformMatrix_,
 
     if (!newBitmapMask.isNull ())
     {
-        TQPainter maskPainter (&newBitmapMask);
-        maskPainter.setWorldMatrix (transformMatrix);
-        maskPainter.drawPixmap (TQPoint (0, 0), kpPixmapFX::getNonNullMask (pm));
-        maskPainter.end ();
+        TQPainter tqmaskPainter (&newBitmapMask);
+        tqmaskPainter.setWorldMatrix (transformMatrix);
+        tqmaskPainter.drawPixmap (TQPoint (0, 0), kpPixmapFX::getNonNullMask (pm));
+        tqmaskPainter.end ();
         newPixmap.setMask (newBitmapMask);
     }
 

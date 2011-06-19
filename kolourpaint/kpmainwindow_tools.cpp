@@ -102,24 +102,24 @@ void kpMainWindow::setupToolActions ()
 
     m_actionPrevToolOptionGroup1 = new kpSingleKeyTriggersAction (
         i18n ("Previous Tool Option (Group #1)"),
-        kpTool::shortcutForKey (Qt::Key_1),
-        this, TQT_SLOT (slotActionPrevToolOptionGroup1 ()),
+        kpTool::shortcutForKey (TQt::Key_1),
+        TQT_TQOBJECT(this), TQT_SLOT (slotActionPrevToolOptionGroup1 ()),
         ac, "prev_tool_option_group_1");
     m_actionNextToolOptionGroup1 = new kpSingleKeyTriggersAction (
         i18n ("Next Tool Option (Group #1)"),
-        kpTool::shortcutForKey (Qt::Key_2),
-        this, TQT_SLOT (slotActionNextToolOptionGroup1 ()),
+        kpTool::shortcutForKey (TQt::Key_2),
+        TQT_TQOBJECT(this), TQT_SLOT (slotActionNextToolOptionGroup1 ()),
         ac, "next_tool_option_group_1");
 
     m_actionPrevToolOptionGroup2 = new kpSingleKeyTriggersAction (
         i18n ("Previous Tool Option (Group #2)"),
-        kpTool::shortcutForKey (Qt::Key_3),
-        this, TQT_SLOT (slotActionPrevToolOptionGroup2 ()),
+        kpTool::shortcutForKey (TQt::Key_3),
+        TQT_TQOBJECT(this), TQT_SLOT (slotActionPrevToolOptionGroup2 ()),
         ac, "prev_tool_option_group_2");
     m_actionNextToolOptionGroup2 = new kpSingleKeyTriggersAction (
         i18n ("Next Tool Option (Group #2)"),
-        kpTool::shortcutForKey (Qt::Key_4),
-        this, TQT_SLOT (slotActionNextToolOptionGroup2 ()),
+        kpTool::shortcutForKey (TQt::Key_4),
+        TQT_TQOBJECT(this), TQT_SLOT (slotActionNextToolOptionGroup2 ()),
         ac, "next_tool_option_group_2");
 }
 
@@ -289,7 +289,7 @@ void kpMainWindow::setSelectionTransparency (const kpSelectionTransparency &tran
 {
 #if DEBUG_KP_MAIN_WINDOW && 1
     kdDebug () << "kpMainWindow::setSelectionTransparency() isOpaque=" << transparency.isOpaque ()
-               << " color=" << (transparency.transparentColor ().isValid () ? (int *) transparency.transparentColor ().toQRgb () : 0)
+               << " color=" << (transparency.transparentColor ().isValid () ? (int *) transparency.transparentColor ().toTQRgb () : 0)
                << " forceColorChange=" << forceColorChange
                << endl;
 #endif

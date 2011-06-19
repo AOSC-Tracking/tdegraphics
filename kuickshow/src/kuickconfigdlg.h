@@ -33,9 +33,10 @@ class ImageWindow;
 class KuickConfigDialog : public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    KuickConfigDialog( KActionCollection *coll, TQWidget *parent=0,
+    KuickConfigDialog( KActionCollection *coll, TQWidget *tqparent=0,
 		       const char *name=0, bool modal=true);
     ~KuickConfigDialog();
 

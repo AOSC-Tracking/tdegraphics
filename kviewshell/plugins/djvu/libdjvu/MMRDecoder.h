@@ -81,9 +81,9 @@ class JB2Image;
     CCITT-G4/MMR decoder suitable for use in DjVu.  The main 
     entry point is function \Ref{MMRDecoder::decode}.
 
-    The foreground mask layer of a DjVu file is usually encoded with a
+    The foreground tqmask layer of a DjVu file is usually encoded with a
     #"Sjbz"# chunk containing JB2 encoded data (cf. \Ref{JB2Image.h}).
-    Alternatively, the qmask layer may be encoded with a #"Smmr"#
+    Alternatively, the qtqmask layer may be encoded with a #"Smmr"#
     chunk containing a small header followed by MMR encoded data.
     This encoding scheme produces significantly larger files. On the
     other hand, many scanners a printers talk MMR using very efficient

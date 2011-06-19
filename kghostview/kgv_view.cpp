@@ -59,7 +59,7 @@
 
 namespace KGV {
     /*
-     * This is because Qt's iterators
+     * This is because TQt's iterators
      * are not standard iterators bc of missing typedefs,
      * so they are only *almost* STL compatible
      */
@@ -74,10 +74,10 @@ namespace KGV {
     }
 }
 
-KGVPart::KGVPart( TQWidget* parentWidget, const char*,
-                  TQObject* parent, const char* name,
+KGVPart::KGVPart( TQWidget* tqparentWidget, const char*,
+                  TQObject* tqparent, const char* name,
                   const TQStringList &args ) :
-    KParts::ReadOnlyPart( parent, name ),
+    KParts::ReadOnlyPart( tqparent, name ),
     _fitTimer( new TQTimer( this ) ),
     _job( 0 ),
     _mimetypeScanner( 0 ),
@@ -85,13 +85,13 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _isGuiInitialized( false ),
     _isFileDirty( false ),
     _stickyOptions( false ),
-    _embeddedInKGhostView( !args.contains( "KParts::ReadOnlyPart" ) ),
+    _embeddedInKGhostView( !args.tqcontains( "KParts::ReadOnlyPart" ) ),
     _customZoomIndex( -1 )
 {
     setInstance( KGVFactory::instance() );
 
     // Don't show the progress info dialog if we're embedded in Konqueror.
-    setProgressInfoEnabled( !args.contains( "Browser/View") );
+    setProgressInfoEnabled( !args.tqcontains( "Browser/View") );
 
     _document = new KGVDocument( this );
     connect( _document, TQT_SIGNAL( fileChangeFailed() ),
@@ -108,8 +108,8 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
 	     this, TQT_SLOT( slotDoFileDirty() ) );
 
     // Setup main widget
-    _mainWidget = new KGVMainWidget( parentWidget );
-    _mainWidget->setFocusPolicy( TQWidget::StrongFocus );
+    _mainWidget = new KGVMainWidget( tqparentWidget );
+    _mainWidget->setFocusPolicy( TQ_StrongFocus );
     _mainWidget->installEventFilter( this );
     _mainWidget->setAcceptDrops( true );
     connect( _mainWidget, TQT_SIGNAL( spacePressed() ),
@@ -165,14 +165,14 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _markList = new MarkList( _mainWidget, "marklist", _docManager );
     _markList->setFixedWidth( PAGELIST_WIDTH );
     vlay->addWidget( _markList, 1 );
-    connect( _markList, TQT_SIGNAL( contextMenuRequested ( int, int, const TQPoint& ) ),
+    connect( TQT_TQOBJECT(_markList), TQT_SIGNAL( contextMenuRequested ( int, int, const TQPoint& ) ),
              this, TQT_SLOT( showPopup( int, int, const TQPoint& ) ) );
 
 
-    connect( _markList, TQT_SIGNAL( selected( int ) ),
+    connect( TQT_TQOBJECT(_markList), TQT_SIGNAL( selected( int ) ),
 	     _docManager, TQT_SLOT( goToPage( int ) ) );
     connect( _docManager, TQT_SIGNAL( newPageShown( int ) ),
-	     _markList, TQT_SLOT( select( int ) ) );
+	     TQT_TQOBJECT(_markList), TQT_SLOT( select( int ) ) );
     connect( _docManager, TQT_SIGNAL( setStatusBarText( const TQString& ) ),
 	     this, TQT_SIGNAL( setStatusBarText( const TQString& ) ) );
     connect( _scrollBox, TQT_SIGNAL( valueChangedRelative( int, int ) ),
@@ -195,34 +195,34 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _popup = new KPopupMenu( _markList, "marklist_menu" );
 
     KAction *act = new KAction( i18n( "Mark Current Page" ), "flag", CTRL+SHIFT+Key_M,
-                 _markList, TQT_SLOT( markCurrent() ),
+                 TQT_TQOBJECT(_markList), TQT_SLOT( markCurrent() ),
                  actionCollection(), "mark_current" );
     act->plug( _popup );
     act = new KAction( i18n( "Mark &All Pages" ), 0,
-                 _markList, TQT_SLOT( markAll() ),
+                 TQT_TQOBJECT(_markList), TQT_SLOT( markAll() ),
                  actionCollection(), "mark_all" );
     act->plug( _popup );
     act = new KAction( i18n( "Mark &Even Pages" ), 0,
-                 _markList, TQT_SLOT( markEven() ),
+                 TQT_TQOBJECT(_markList), TQT_SLOT( markEven() ),
                  actionCollection(), "mark_even" );
     act->plug( _popup );
     act = new KAction( i18n( "Mark &Odd Pages" ), 0,
-                 _markList, TQT_SLOT( markOdd() ),
+                 TQT_TQOBJECT(_markList), TQT_SLOT( markOdd() ),
                  actionCollection(), "mark_odd" );
     act->plug( _popup );
     act = new KAction( i18n( "&Toggle Page Marks" ), 0,
-                 _markList, TQT_SLOT( toggleMarks() ),
+                 TQT_TQOBJECT(_markList), TQT_SLOT( toggleMarks() ),
                  actionCollection(), "toggle" );
     act->plug( _popup );
     act = new KAction( i18n("&Remove Page Marks"), 0,
-                 _markList, TQT_SLOT( removeMarks() ),
+                 TQT_TQOBJECT(_markList), TQT_SLOT( removeMarks() ),
                  actionCollection(), "remove" );
     act->plug( _popup );
 
     // TODO -- disable entry if there aren't any page names
 
     //-- View Menu ----------------------------------------------------------
-    _selectOrientation = new KSelectAction( i18n( "&Orientation" ), 0, 0, 0,
+    _selectOrientation = new KSelectAction( i18n( "&Qt::Orientation" ), 0, 0, 0,
                                     actionCollection(), "orientation_menu" );
     _selectMedia       = new KSelectAction( i18n( "Paper &Size" ), 0, 0, 0,
                                     actionCollection(), "media_menu" );
@@ -264,7 +264,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     for ( TQValueList<double>::iterator first = mags.begin(), last = mags.end();
 	    first != last;
 	    ++first ) {
-        TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( *first * 100.0, 2 ));
+        TQString str = TQString( "%1%" ).tqarg( KGlobal::locale()->formatNumber( *first * 100.0, 2 ));
         str.remove( KGlobal::locale()->decimalSymbol() + "00" );
         zooms << str;
 	if ( *first == 1.0 ) idx = cur;
@@ -426,7 +426,7 @@ bool KGVPart::closeURL()
 	_mimetypeScanner->abort();
     if( !m_file.isEmpty() )
         _fileWatcher->removeFile( m_file );
-    _mimetype = TQString::null;
+    _mimetype = TQString();
     updatePageDepActions();
     stateChanged( "initState" );
     return KParts::ReadOnlyPart::closeURL();
@@ -582,7 +582,7 @@ void KGVPart::updateZoomActions()
 	    first != last;
 	    ++first ) {
 	TQString cur = *first;
-	cur.remove(  cur.find(  '%' ), 1 );
+	cur.remove(  cur.tqfind(  '%' ), 1 );
 	cur = cur.simplifyWhiteSpace();
 	bool ok = false;
 	double z = cur.toDouble(&ok);
@@ -600,7 +600,7 @@ void KGVPart::updateZoomActions()
     }
 
     // Show percentage that isn't predefined
-    TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( zoom, 2 ));
+    TQString str = TQString( "%1%" ).tqarg( KGlobal::locale()->formatNumber( zoom, 2 ));
     str.remove( KGlobal::locale()->decimalSymbol() + "00" );
     items.insert( items.at(idx), 1, str );
     _zoomTo->setItems( items );
@@ -682,10 +682,10 @@ void KGVPart::openURLContinue()
 	// mimetype-determination (e.g. koffice)
 	TQString extension;
 	TQString fileName = m_url.fileName();
-	int extensionPos = fileName.findRev( '.' );
+	int extensionPos = fileName.tqfindRev( '.' );
 	if( extensionPos != -1 )
 	    extension = fileName.mid( extensionPos ); // keep the '.'
-	KTempFile tempFile( TQString::null, extension );
+	KTempFile tempFile( TQString(), extension );
 	m_file = tempFile.name();
 	_tmpFile.setName( m_file );
 	_tmpFile.open( IO_ReadWrite );
@@ -750,8 +750,8 @@ void KGVPart::slotGhostscriptError( const TQString& error )
 				"Below are any error messages which were received from Ghostscript "
 				"(<nobr><strong>%2</strong></nobr>) "
 				"which may help you.</qt>" )
-		    .arg( error )
-		    .arg( Configuration::interpreter() ),
+		    .tqarg( error )
+		    .tqarg( Configuration::interpreter() ),
 	   true );
     // The true above makes it show a "configure gs" option, but maybe we
     // should trigger an auto-redetection?
@@ -784,7 +784,7 @@ void KGVPart::slotMimetypeFinished( const TQString& type )
     kdDebug(4500) << "KGVPart::slotMimetypeFinished( " << type << " )" << endl;
     _mimetype = type;
     if( !_mimetypeScanner || _mimetypeScanner->hasError() )
-	emit canceled( TQString::null );
+	emit canceled( TQString() );
     else
 	openURLContinue();
     _mimetypeScanner = 0;
@@ -796,7 +796,7 @@ void KGVPart::slotMimetypeError()
     _mimetypeScanner = 0;
     emit started( 0 );
     //kapp->processEvents();
-    emit canceled( TQString::null );
+    emit canceled( TQString() );
 }
 
 void KGVPart::slotJobFinished( KIO::Job* job )
@@ -839,7 +839,7 @@ void KGVPart::slotNewPage( int )
 {
     updatePageDepActions();
     //media->setCurrentItem (miniWidget()->getSize()-1);
-    //orientation->setCurrentItem (miniWidget()->getOrientation()-1);
+    //orientation->setCurrentItem (miniWidget()->getQt::Orientation()-1);
     //TODO -- zoom
 }
 
@@ -901,7 +901,7 @@ void KGVPart::slotZoom( const TQString& nz )
 {
     TQString z = nz;
     double zoom;
-    z.remove(  z.find(  '%' ), 1 );
+    z.remove(  z.tqfind(  '%' ), 1 );
     zoom = KGlobal::locale()->readNumber(  z ) / 100;
     kdDebug( 4500 ) << "ZOOM = "  << nz << ", setting zoom = " << zoom << endl;
 
@@ -968,7 +968,7 @@ void KGVPart::setDisplayOptions( const DisplayOptions& options )
     _docManager->setDisplayOptions( options );
     _selectOrientation->setCurrentItem( options.overrideOrientation()  );
     TQStringList medias = document()->mediaNames();
-    TQStringList::Iterator now = medias.find( options.overridePageMedia() );
+    TQStringList::Iterator now = medias.tqfind( options.overridePageMedia() );
     if ( now != medias.end() ){
 	// The options are displayed in inverted order.
 	// Therefore, size() - index gets you the display index
@@ -979,8 +979,8 @@ void KGVPart::setDisplayOptions( const DisplayOptions& options )
 }
 
 
-KGVBrowserExtension::KGVBrowserExtension( KGVPart *parent ) :
-    KParts::BrowserExtension( parent, "KGVBrowserExtension" )
+KGVBrowserExtension::KGVBrowserExtension( KGVPart *tqparent ) :
+    KParts::BrowserExtension( tqparent, "KGVBrowserExtension" )
 {
     emit enableAction( "print", true );
     setURLDropHandlingEnabled( true );
@@ -988,7 +988,7 @@ KGVBrowserExtension::KGVBrowserExtension( KGVPart *parent ) :
 
 void KGVBrowserExtension::print()
 {
-    ((KGVPart *)parent())->document()->print();
+    ((KGVPart *)tqparent())->document()->print();
 }
 
 

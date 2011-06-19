@@ -2,7 +2,7 @@
     KDE Icon Editor - a small graphics drawing program for the KDE.
     Copyright (C) 1998  Thomas Tanghus (tanghus@kde.org)
 
-    Includes portions of code from Qt,
+    Includes portions of code from TQt,
     Copyright (C) 1992-2000 Trolltech AS.
 
     This program is free software; you can redistribute it and/or
@@ -67,8 +67,8 @@ void RepaintCommand::execute()
         grid->update( area);
 }
 
-KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *parent, const char *name)
-: TQFrame(parent, name)
+KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *tqparent, const char *name)
+: TQFrame(tqparent, name)
 {
   _corner = 0L;
   _hruler = _vruler = 0L;
@@ -290,8 +290,8 @@ void KGridView::resizeEvent(TQResizeEvent*)
 }
 
 
-KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *parent, const char *name)
- : KColorGrid(parent, name, 1)
+KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *tqparent, const char *name)
+ : KColorGrid(tqparent, name, 1)
 {
     img = image;
     history = h;
@@ -310,7 +310,7 @@ KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *paren
     img->setAlphaBuffer(true);
     clearImage(img);
 
-    currentcolor = qRgb(0,0,0)|OPAQUE_MASK;
+    currentcolor = tqRgb(0,0,0)|OPAQUE_MASK;
     emit colorSelected(currentcolor);
 
     setMouseTracking(true);
@@ -348,13 +348,13 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
 
     //time.start();
 
-    QRgb *imageBuffer = new QRgb[paintCellsRect.width() * paintCellsRect.height()];
+    TQRgb *imageBuffer = new TQRgb[paintCellsRect.width() * paintCellsRect.height()];
     const int cellsize = cellSize();
     const int firstCellPixelsRemaining = cellsize - paintCellsRect.left() % cellsize;
 
     if(transparencyDisplayType() == TRD_SOLIDCOLOR)
     {
-      const QRgb backgroundColor = transparencySolidColor().rgb();
+      const TQRgb backgroundColor = transparencySolidColor().rgb();
       const int backgroundRed = transparencySolidColor().red();
       const int backgroundGreen = transparencySolidColor().green();
       const int backgroundBlue = transparencySolidColor().blue();
@@ -362,19 +362,19 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
 
       for(int y = paintCellsRect.top(); y <= paintCellsRect.bottom(); y++)
       {
-        QRgb *dest = imageBuffer + (y - paintCellsRect.top()) * paintCellsRect.width();
+        TQRgb *dest = imageBuffer + (y - paintCellsRect.top()) * paintCellsRect.width();
         
         if(y % cellsize == 0 || dest == imageBuffer)
         {
           // Paint the first scanline in each block of cellSize() identical lines.
           // The remaineder can just be copied from this one.
           const int cellY = y / cellsize;
-          QRgb *src = gridcolors.data() + cellY * numCols() + firstCellX;
+          TQRgb *src = gridcolors.data() + cellY * numCols() + firstCellX;
 
-          QRgb sourcePixel = *src++;
-          int sourceAlpha = qAlpha(sourcePixel);
+          TQRgb sourcePixel = *src++;
+          int sourceAlpha = tqAlpha(sourcePixel);
           
-          QRgb c;
+          TQRgb c;
 
           if(sourceAlpha == 255)
           {
@@ -387,9 +387,9 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
           }
           else
           {
-            const int sourceRed = qRed(sourcePixel);
-            const int sourceGreen = qGreen(sourcePixel);
-            const int sourceBlue = qBlue(sourcePixel);
+            const int sourceRed = tqRed(sourcePixel);
+            const int sourceGreen = tqGreen(sourcePixel);
+            const int sourceBlue = tqBlue(sourcePixel);
 
             int r = (sourceAlpha * (sourceRed - backgroundRed)) + 0x80;
             r = backgroundRed + ((r + (r >> 8)) >> 8);
@@ -400,7 +400,7 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
             int b = (sourceAlpha * (sourceBlue - backgroundBlue)) + 0x80;
             b = backgroundBlue + ((b + (b >> 8)) >> 8);
 
-            c = qRgb(r, g, b);
+            c = tqRgb(r, g, b);
           }
 
           int cellPixelsRemaining = firstCellPixelsRemaining;
@@ -413,7 +413,7 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
 
               // Fetch the next source pixel
               sourcePixel = *src++;
-              sourceAlpha = qAlpha(sourcePixel);
+              sourceAlpha = tqAlpha(sourcePixel);
 
               if(sourceAlpha == 255)
               {
@@ -426,9 +426,9 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
               }
               else
               {
-                const int sourceRed = qRed(sourcePixel);
-                const int sourceGreen = qGreen(sourcePixel);
-                const int sourceBlue = qBlue(sourcePixel);
+                const int sourceRed = tqRed(sourcePixel);
+                const int sourceGreen = tqGreen(sourcePixel);
+                const int sourceBlue = tqBlue(sourcePixel);
 
                 //int r = backgroundRed + (sourceAlpha * (sourceRed - backgroundRed)) / 255;
                 //int g = backgroundGreen + (sourceAlpha * (sourceGreen - backgroundGreen)) / 255;
@@ -443,7 +443,7 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
                 int b = (sourceAlpha * (sourceBlue - backgroundBlue)) + 0x80;
                 b = backgroundBlue + ((b + (b >> 8)) >> 8);
 
-                c = qRgb(r, g, b);
+                c = tqRgb(r, g, b);
               }
             }
 
@@ -455,7 +455,7 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
         else
         {
           // Copy the scanline above.
-          memcpy(dest, dest - paintCellsRect.width(), paintCellsRect.width() * sizeof(QRgb));
+          memcpy(dest, dest - paintCellsRect.width(), paintCellsRect.width() * sizeof(TQRgb));
         }
       }
     }
@@ -478,10 +478,10 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
         squareSize = (2 * cellSize() * fixedPointMultiplier) / 2;
       }
 
-      QRgb *color1ScanLine = new QRgb[paintCellsRect.width()];
-      QRgb *color2ScanLine = new QRgb[paintCellsRect.width()];
-      QRgb *color1Buffer = color1ScanLine;
-      QRgb *color2Buffer = color2ScanLine;
+      TQRgb *color1ScanLine = new TQRgb[paintCellsRect.width()];
+      TQRgb *color2ScanLine = new TQRgb[paintCellsRect.width()];
+      TQRgb *color1Buffer = color1ScanLine;
+      TQRgb *color2Buffer = color2ScanLine;
 
       for(int x = paintCellsRect.left(); x <= paintCellsRect.right(); x++)
       {
@@ -504,11 +504,11 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
 
       for(int y = paintCellsRect.top(); y <= paintCellsRect.bottom(); y++)
       {
-        QRgb *dest = imageBuffer + (y - paintCellsRect.top()) * paintCellsRect.width();
+        TQRgb *dest = imageBuffer + (y - paintCellsRect.top()) * paintCellsRect.width();
         const int cellY = y / cellsize;
 
         int firstSquareColour;
-        const QRgb *checkerboardSrc;
+        const TQRgb *checkerboardSrc;
 
         if((((y * fixedPointMultiplier) / squareSize) & 1) == 0)
         {
@@ -524,17 +524,17 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
         if(cellY == lastCellY && firstSquareColour == lastLineFirstSquareColour)
         {
           // Copy the scanline above.
-          memcpy(dest, dest - paintCellsRect.width(), paintCellsRect.width() * sizeof(QRgb));
+          memcpy(dest, dest - paintCellsRect.width(), paintCellsRect.width() * sizeof(TQRgb));
         }
         else
         {
-          QRgb *src = gridcolors.data() + cellY * numCols() + firstCellX;
+          TQRgb *src = gridcolors.data() + cellY * numCols() + firstCellX;
 
-          QRgb sourcePixel = *src++;
-          int sourceRed = qRed(sourcePixel);
-          int sourceGreen = qGreen(sourcePixel);
-          int sourceBlue = qBlue(sourcePixel);
-          int sourceAlpha = qAlpha(sourcePixel);
+          TQRgb sourcePixel = *src++;
+          int sourceRed = tqRed(sourcePixel);
+          int sourceGreen = tqGreen(sourcePixel);
+          int sourceBlue = tqBlue(sourcePixel);
+          int sourceAlpha = tqAlpha(sourcePixel);
 
           int cellPixelsRemaining = firstCellPixelsRemaining;
 
@@ -546,15 +546,15 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
 
               // Fetch the next source pixel
               sourcePixel = *src++;
-              sourceRed = qRed(sourcePixel);
-              sourceGreen = qGreen(sourcePixel);
-              sourceBlue = qBlue(sourcePixel);
-              sourceAlpha = qAlpha(sourcePixel);
+              sourceRed = tqRed(sourcePixel);
+              sourceGreen = tqGreen(sourcePixel);
+              sourceBlue = tqBlue(sourcePixel);
+              sourceAlpha = tqAlpha(sourcePixel);
             }
 
             cellPixelsRemaining--;
 
-            QRgb c;
+            TQRgb c;
 
             if(sourceAlpha == 255)
             {
@@ -568,9 +568,9 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
             else
             {
               const int backgroundColor = *checkerboardSrc;
-              const int backgroundRed = qRed(backgroundColor);
-              const int backgroundGreen = qGreen(backgroundColor);
-              const int backgroundBlue = qBlue(backgroundColor);
+              const int backgroundRed = tqRed(backgroundColor);
+              const int backgroundGreen = tqGreen(backgroundColor);
+              const int backgroundBlue = tqBlue(backgroundColor);
 
               //int r = backgroundRed + (sourceAlpha * (sourceRed - backgroundRed)) / 255;
               //int g = backgroundGreen + (sourceAlpha * (sourceGreen - backgroundGreen)) / 255;
@@ -585,7 +585,7 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
               int b = (sourceAlpha * (sourceBlue - backgroundBlue)) + 0x80;
               b = backgroundBlue + ((b + (b >> 8)) >> 8);
 
-              c = qRgb(r, g, b);
+              c = tqRgb(r, g, b);
             }
 
             *dest++ = c;
@@ -710,7 +710,7 @@ void KIconEditGrid::paintForeground(TQPainter* p, TQPaintEvent* e)
 
 void KIconEditGrid::mousePressEvent( TQMouseEvent *e )
 {
-    if(!e || (e->button() != LeftButton))
+    if(!e || (e->button() != Qt::LeftButton))
         return;
 
     int row = findRow( e->pos().y() );
@@ -886,7 +886,7 @@ void KIconEditGrid::mouseMoveEvent( TQMouseEvent *e )
 
 void KIconEditGrid::mouseReleaseEvent( TQMouseEvent *e )
 {
-  if(!e || (e->button() != LeftButton))
+  if(!e || (e->button() != Qt::LeftButton))
     return;
 
   int row = findRow( e->pos().y() );
@@ -1035,7 +1035,7 @@ void KIconEditGrid::load( TQImage *image)
             setColor((y*numCols())+x, *l, false);
         }
         //kdDebug(4640) << "Row: " << y << endl;
-        kapp->processEvents(200);
+        kapp->tqprocessEvents(200);
     }
 
     updateColors();
@@ -1044,7 +1044,7 @@ void KIconEditGrid::load( TQImage *image)
     emit changed(pixmap());
     setUpdatesEnabled(true);
     emit needPainting();
-    //repaint(viewRect(), false);
+    //tqrepaint(viewRect(), false);
     history->clear();
 }
 
@@ -1108,7 +1108,7 @@ void KIconEditGrid::checkClipboard()
 TQImage KIconEditGrid::clipboardImage(bool &ok)
 {
   //###### Remove me later.
-  //Workaround Qt bug -- check whether format provided first.
+  //Workaround TQt bug -- check whether format provided first.
   //Code below is from TQDragObject, to match the mimetype list....
 
   TQStrList fileFormats = TQImageIO::inputFormats();
@@ -1118,7 +1118,7 @@ TQImage KIconEditGrid::clipboardImage(bool &ok)
   {
     TQCString format = fileFormats.current();
     TQCString type = "image/" + format.lower();
-    if (kapp->clipboard()->data()->provides(type ) )
+    if (kapp->tqclipboard()->data()->provides(type ) )
     {
       oneIsSupported = true;
     }
@@ -1179,7 +1179,7 @@ TQImage KIconEditGrid::getSelection(bool cut)
     {
         int x = pntarray[i].x();
         int y = pntarray[i].y();
-        if(img->valid(x, y) && rect.contains(TQPoint(x, y)))
+        if(img->valid(x, y) && rect.tqcontains(TQPoint(x, y)))
         {
             *((uint*)tmp.scanLine(y-ny) + (x-nx)) = *((uint*)img->scanLine(y) + x);
             if(cut)
@@ -1232,7 +1232,7 @@ void KIconEditGrid::editPaste(bool paste)
         {
             if(KMessageBox::warningYesNo(this,
                 i18n("The clipboard image is larger than the current"
-                " image!\nPaste as new image?"),TQString::null,i18n("Paste"), i18n("Do Not Paste")) == 0)
+                " image!\nPaste as new image?"),TQString(),i18n("Paste"), i18n("Do Not Paste")) == 0)
             {
                 editPasteAsNew();
             }
@@ -1263,12 +1263,12 @@ void KIconEditGrid::editPaste(bool paste)
                     else
                     {
                         // Porter-Duff Over composition
-                        double alphaS = qAlpha(*cl) / 255.0;
-                        double alphaD = qAlpha(*l) / 255.0;
+                        double alphaS = tqAlpha(*cl) / 255.0;
+                        double alphaD = tqAlpha(*l) / 255.0;
   
-                        double r = qRed(*cl) * alphaS + (1 - alphaS) * qRed(*l) * alphaD;
-                        double g = qGreen(*cl) * alphaS + (1 - alphaS) * qGreen(*l) * alphaD;
-                        double b = qBlue(*cl) * alphaS + (1 - alphaS) * qBlue(*l) * alphaD;
+                        double r = tqRed(*cl) * alphaS + (1 - alphaS) * tqRed(*l) * alphaD;
+                        double g = tqGreen(*cl) * alphaS + (1 - alphaS) * tqGreen(*l) * alphaD;
+                        double b = tqBlue(*cl) * alphaS + (1 - alphaS) * tqBlue(*l) * alphaD;
                         double a = alphaS + (1 - alphaS) * alphaD;
   
                         // Remove multiplication by alpha
@@ -1334,7 +1334,7 @@ void KIconEditGrid::editPaste(bool paste)
                             ia = 255;
                         }
                         
-                        *l = qRgba(ir, ig, ib, ia);
+                        *l = tqRgba(ir, ig, ib, ia);
                     }
 
                     setColor((y*numCols())+x, (uint)*l, false);
@@ -1379,7 +1379,7 @@ void KIconEditGrid::editPasteAsNew()
             *img = tmp;
             load(img);
             setModified(true);
-            //repaint(viewRect(), false);
+            //tqrepaint(viewRect(), false);
   
             p = *img;
             emit changed(TQPixmap(p));
@@ -1426,7 +1426,7 @@ void KIconEditGrid::setSize(const TQSize s)
 
 void KIconEditGrid::createCursors()
 {
-  TQBitmap mask(22, 22);
+  TQBitmap tqmask(22, 22);
   TQPixmap pix;
 
   cursor_normal = TQCursor(arrowCursor);
@@ -1439,8 +1439,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    mask = pix.createHeuristicMask();
-    pix.setMask(mask);
+    tqmask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(tqmask);
     cursor_colorpicker = TQCursor(pix, 1, 21);
   }
 
@@ -1452,8 +1452,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    mask = pix.createHeuristicMask();
-    pix.setMask(mask);
+    tqmask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(tqmask);
     cursor_paint = TQCursor(pix, 0, 19);
   }
 
@@ -1465,8 +1465,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    mask = pix.createHeuristicMask();
-    pix.setMask(mask);
+    tqmask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(tqmask);
     cursor_flood = TQCursor(pix, 3, 20);
   }
 
@@ -1478,8 +1478,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    mask = pix.createHeuristicMask();
-    pix.setMask(mask);
+    tqmask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(tqmask);
     cursor_aim = TQCursor(pix, 10, 10);
   }
 
@@ -1491,8 +1491,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    mask = pix.createHeuristicMask(true);
-    pix.setMask(mask);
+    tqmask = TQPixmap(pix.createHeuristicMask(true));
+    pix.setMask(tqmask);
     cursor_spray = TQCursor(pix, 0, 20);
   }
 
@@ -1504,8 +1504,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    mask = pix.createHeuristicMask(true);
-    pix.setMask(mask);
+    tqmask = TQPixmap(pix.createHeuristicMask(true));
+    pix.setMask(tqmask);
     cursor_erase = TQCursor(pix, 1, 16);
   }
 }
@@ -1600,11 +1600,11 @@ void KIconEditGrid::drawSpray(TQPoint point)
 }
 
 
-//This routine is from Qt sources -- it's the branch of TQPointArray::makeEllipse( int x, int y, int w, int h ) that's not normally compiled
-//It seems like KIconEdit relied on the Qt1 semantics for makeEllipse, which broke
-//the tool with reasonably recent Qt versions.
-//Thankfully, Qt includes the old code #ifdef'd, which is hence included here
-static void QPA_makeEllipse(TQPointArray& ar, int x, int y, int w, int h )
+//This routine is from TQt sources -- it's the branch of TQPointArray::makeEllipse( int x, int y, int w, int h ) that's not normally compiled
+//It seems like KIconEdit relied on the TQt1 semantics for makeEllipse, which broke
+//the tool with reasonably recent TQt versions.
+//Thankfully, TQt includes the old code #ifdef'd, which is hence included here
+static void TQPA_makeEllipse(TQPointArray& ar, int x, int y, int w, int h )
 {						// midpoint, 1/4 ellipse
     if ( w <= 0 || h <= 0 ) {
 	if ( w == 0 || h == 0 ) {
@@ -1712,9 +1712,9 @@ void KIconEditGrid::drawEllipse(bool drawit)
     drawPointArray(a, Mark);
 
     if(tool == Circle || tool == FilledCircle || tool == SelectCircle)
-        QPA_makeEllipse(pntarray, x, y, d, d);
+        TQPA_makeEllipse(pntarray, x, y, d, d);
     else if(tool == Ellipse || tool == FilledEllipse)
-        QPA_makeEllipse(pntarray, x, y, cx, cy);
+        TQPA_makeEllipse(pntarray, x, y, cx, cy);
 
     if((tool == FilledEllipse) || (tool == FilledCircle)
     || (tool == SelectCircle))
@@ -1829,7 +1829,7 @@ void KIconEditGrid::drawLine(bool drawit, bool drawStraight)
     x = start.x();
     y = start.y();
 
-    delta = QMAX(abs(dx), abs(dy));
+    delta = TQMAX(abs(dx), abs(dy));
     int deltaX = abs(dx);
     int deltaY = abs(dy);
 
@@ -1909,7 +1909,7 @@ void KIconEditGrid::drawPointArray(TQPointArray a, DrawAction action)
         int x = a[i].x();
         int y = a[i].y();
 
-        if(img->valid(x, y) && a.boundingRect().contains(a[ i ]))
+        if(img->valid(x, y) && TQT_TQRECT_OBJECT(a.boundingRect()).tqcontains(a[ i ]))
         {
             //kdDebug(4640) << "x: " << x << " - y: " << y << endl;
             switch( action )
@@ -1982,10 +1982,10 @@ bool KIconEditGrid::isMarked(int x, int y)
 
 
 // Fast diffuse dither to 3x3x3 color cube
-// Based on Qt's image conversion functions
+// Based on TQt's image conversion functions
 static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
 {
-    register QRgb *p;
+    register TQRgb *p;
     uchar  *b;
     int	    y;
 
@@ -2041,7 +2041,7 @@ static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
 		    for ( bc=0; bc<=MAX_B; bc++ )
             {
 		        dst->setColor( INDEXOF(rc,gc,bc),
-			    qRgb( rc*255/MAX_R, gc*255/MAX_G, bc*255/MAX_B ) );
+			    tqRgb( rc*255/MAX_R, gc*255/MAX_G, bc*255/MAX_B ) );
 		    }
 
 	int sw = src->width();
@@ -2061,12 +2061,12 @@ static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
 
 	for ( y=0; y < src->height(); y++ )
     {
-	    p = (QRgb *)src->scanLine(y);
+	    p = (TQRgb *)src->scanLine(y);
 	    b = dst->scanLine(y);
 		int endian = (TQImage::systemByteOrder() == TQImage::BigEndian);
 		int x;
-		uchar* q = src->scanLine(y);
-		uchar* q2 = src->scanLine(y+1 < src->height() ? y + 1 : 0);
+		uchar* q = const_cast<TQImage*>(src)->scanLine(y);
+		uchar* q2 = const_cast<TQImage*>(src)->scanLine(y+1 < src->height() ? y + 1 : 0);
 		for (int chan = 0; chan < 3; chan++)
         {
 		    b = dst->scanLine(y);
@@ -2087,7 +2087,7 @@ static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
             {
 			    for (x=0; x<sw; x++)
                 {
-			        int pix = QMAX(QMIN(2, (l1[x] * 2 + 128)/ 255), 0);
+			        int pix = TQMAX(TQMIN(2, (l1[x] * 2 + 128)/ 255), 0);
 			        int err = l1[x] - pix * 255 / 2;
 			        pv[chan][x] = pix;
 
@@ -2106,7 +2106,7 @@ static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
             {
 			    for (x=sw; x-->0; )
                 {
-			        int pix = QMAX(QMIN(2, (l1[x] * 2 + 128)/ 255), 0);
+			        int pix = TQMAX(TQMIN(2, (l1[x] * 2 + 128)/ 255), 0);
 			        int err = l1[x] - pix * 255 / 2;
 			        pv[chan][x] = pix;
 
@@ -2180,7 +2180,7 @@ void KIconEditGrid::mapToKDEPalette()
     return;
 
 /*
-#if QT_VERSION > 140
+#if [[[TQT_VERSION IS DEPRECATED]]] > 140
   *img = img->convertDepthWithPalette(32, iconpalette, 42);
   load(img);
   return;
@@ -2195,7 +2195,7 @@ void KIconEditGrid::mapToKDEPalette()
         {
             if(*l != TRANSPARENT)
             {
-                if(!iconcolors.contains(*l))
+                if(!iconcolors.tqcontains(*l))
                     *l = iconcolors.closestMatch(*l);
             }
         }
@@ -2216,8 +2216,8 @@ void KIconEditGrid::grayScale()
         {
             if(*l != TRANSPARENT)
             {
-                uint c = qGray(*l);
-                *l = qRgba(c, c, c, qAlpha(*l));
+                uint c = tqGray(*l);
+                *l = tqRgba(c, c, c, tqAlpha(*l));
             }
         }
     }

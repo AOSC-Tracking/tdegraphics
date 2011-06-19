@@ -360,7 +360,7 @@ TQString PMVariant::stringData( ) const
    if( m_dataType == PMVariant::String )
       return *( ( TQString* ) m_pData );
    kdError( PMArea ) << "Wrong type in PMVariant get function\n";
-   return TQString::null;
+   return TQString();
 }
 
 PMVector PMVariant::vectorData( ) const
@@ -897,7 +897,7 @@ bool PMVariant::fromString( const PMVariant::PMVariantDataType t, const TQString
 
 TQDataStream& operator<<( TQDataStream& stream, const PMVariant& value )
 {
-   stream << (Q_INT8)value.dataType( );
+   stream << (TQ_INT8)value.dataType( );
    stream << value.asString( );
 
    return stream;
@@ -905,7 +905,7 @@ TQDataStream& operator<<( TQDataStream& stream, const PMVariant& value )
 
 TQDataStream& operator>>( TQDataStream& stream, PMVariant& value ) 
 {
-   Q_INT8 type;
+   TQ_INT8 type;
    PMVariant::PMVariantDataType dataType;
    TQString str;
 

@@ -133,7 +133,7 @@ KuickShow::KuickShow( const char *name )
         if ( KMessageBox::warningYesNo(
                  this,
                  i18n("Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", 
-                      "Do you really want to display these %n images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", numArgs).arg(KStdGuiItem::no().plainText()),
+                      "Do you really want to display these %n images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", numArgs).tqarg(KStdGuiItem::no().plainText()),
                  i18n("Display Multiple Images?"))
              != KMessageBox::Yes )
         {
@@ -246,24 +246,24 @@ void KuickShow::initGUI( const KURL& startDir )
              this, TQT_SLOT( slotDropped( const KFileItem *, TQDropEvent *, const KURL::List &)) );
 
     // setup actions
-    KAction *open = KStdAction::open( this, TQT_SLOT( slotOpenURL() ),
+    KAction *open = KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotOpenURL() ),
                                       coll, "openURL" );
 
-    KAction *print = KStdAction::print( this, TQT_SLOT( slotPrint() ),
+    KAction *print = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( slotPrint() ),
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configure %1...").arg( KGlobal::instance()->aboutData()->programName() ), "configure",
+    KAction *configure = new KAction( i18n("Configure %1...").tqarg( KGlobal::instance()->aboutData()->programName() ), "configure",
                                       KShortcut(),
-                                      this, TQT_SLOT( configuration() ),
+                                      TQT_TQOBJECT(this), TQT_SLOT( configuration() ),
                                       coll, "kuick_configure" );
     KAction *slide = new KAction( i18n("Start Slideshow" ), "ksslide",
                                   KShortcut( Key_F2 ),
-                                  this, TQT_SLOT( startSlideShow() ),
+                                  TQT_TQOBJECT(this), TQT_SLOT( startSlideShow() ),
                                   coll, "kuick_slideshow" );
     KAction *about = new KAction( i18n( "About KuickShow" ), "about",
                                   KShortcut(),
-                                  this, TQT_SLOT( about() ), coll, "about" );
+                                  TQT_TQOBJECT(this), TQT_SLOT( about() ), coll, "about" );
 
     oneWindowAction = new KToggleAction( i18n("Open Only One Image Window"),
                                          "window_new",
@@ -276,20 +276,20 @@ void KuickShow::initGUI( const KURL& startDir )
              TQT_SLOT( toggleBrowser() ));
 
     KAction *showInOther = new KAction( i18n("Show Image"), KShortcut(),
-                                        this, TQT_SLOT( slotShowInOtherWindow() ),
+                                        TQT_TQOBJECT(this), TQT_SLOT( slotShowInOtherWindow() ),
                                         coll, "kuick_showInOtherWindow" );
     KAction *showInSame = new KAction( i18n("Show Image in Active Window"),
                                        KShortcut(),
-                                       this, TQT_SLOT( slotShowInSameWindow() ),
+                                       TQT_TQOBJECT(this), TQT_SLOT( slotShowInSameWindow() ),
                                        coll, "kuick_showInSameWindow" );
     KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen Mode"),
-					   KShortcut(), this, TQT_SLOT( slotShowFullscreen() ),
+					   KShortcut(), TQT_TQOBJECT(this), TQT_SLOT( slotShowFullscreen() ),
 					   coll, "kuick_showFullscreen" );
 
-    KAction *quit = KStdAction::quit( this, TQT_SLOT(slotQuit()), coll, "quit");
+    KAction *quit = KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), coll, "quit");
 
-    // remove TQString::null parameter -- ellis
-    coll->readShortcutSettings( TQString::null );
+    // remove TQString() parameter -- ellis
+    coll->readShortcutSettings( TQString() );
     m_accel = coll->accel();
 
     // menubar
@@ -319,7 +319,7 @@ void KuickShow::initGUI( const KURL& startDir )
     TQPopupMenu *mainPopup = mainActionMenu->popupMenu();
     int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
     int separatorId = mainPopup->idAt( sortingIndex + 1 );
-    TQMenuItem *separatorItem = mainPopup->findItem( separatorId );
+    TQMenuItem *separatorItem = mainPopup->tqfindItem( separatorId );
     if ( separatorItem && separatorItem->isSeparator() )
         mainPopup->removeItem( separatorId );
     mainActionMenu->remove( sortingMenu );
@@ -363,7 +363,7 @@ void KuickShow::initGUI( const KURL& startDir )
     tBar->insertSeparator();
     about->plug( tBar );
 
-    TQPopupMenu *help = helpMenu( TQString::null, false );
+    TQPopupMenu *help = helpMenu( TQString(), false );
     mBar->insertItem( KStdGuiItem::help().text() , help );
 
 
@@ -552,7 +552,7 @@ bool KuickShow::showImage( const KFileItem *fi,
                      this, TQT_SLOT (slotTrashCurrentImage (ImageWindow *)));
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
-                // after showing, otherwise we get some bogus geometry()
+                // after showing, otherwise we get some bogus tqgeometry()
                 m_viewer->move( Kuick::workArea().topLeft() );
             }
 
@@ -631,7 +631,7 @@ void KuickShow::slotTrashCurrentImage(ImageWindow *viewer)
     performTrashCurrentImage(viewer);
 }
 
-void KuickShow::performDeleteCurrentImage(TQWidget *parent)
+void KuickShow::performDeleteCurrentImage(TQWidget *tqparent)
 {
     assert(fileWidget != 0L);
 
@@ -640,8 +640,8 @@ void KuickShow::performDeleteCurrentImage(TQWidget *parent)
     list.append (item);
 
     if (KMessageBox::warningContinueCancel(
-            parent,
-            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>").arg(item->url().pathOrURL()),
+            tqparent,
+            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>").tqarg(item->url().pathOrURL()),
             i18n("Delete File"),
             KStdGuiItem::del(),
             "Kuick_delete_current_image")
@@ -654,7 +654,7 @@ void KuickShow::performDeleteCurrentImage(TQWidget *parent)
     fileWidget->del(list, false, false);
 }
 
-void KuickShow::performTrashCurrentImage(TQWidget *parent)
+void KuickShow::performTrashCurrentImage(TQWidget *tqparent)
 {
     assert(fileWidget != 0L);
 
@@ -665,8 +665,8 @@ void KuickShow::performTrashCurrentImage(TQWidget *parent)
     list.append (item);
 
     if (KMessageBox::warningContinueCancel(
-            parent,
-            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>").arg(item->url().pathOrURL()),
+            tqparent,
+            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>").tqarg(item->url().pathOrURL()),
             i18n("Trash File"),
             KGuiItem(i18n("to trash", "&Trash"),"edittrash"),
             "Kuick_trash_current_image")
@@ -676,7 +676,7 @@ void KuickShow::performTrashCurrentImage(TQWidget *parent)
     }
 
     tryShowNextImage();
-    fileWidget->trash(list, parent, false, false);
+    fileWidget->trash(list, tqparent, false, false);
 }
 
 void KuickShow::tryShowNextImage()
@@ -880,7 +880,7 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
     int eventType = e->type();
     TQKeyEvent *k = 0L;
     if ( eventType == TQEvent::KeyPress )
-        k = static_cast<TQKeyEvent *>( e );
+        k = TQT_TQKEYEVENT( e );
 
     if ( k ) {
         if ( KStdAccel::quit().contains( KKey( k ) ) ) {
@@ -1036,8 +1036,8 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
         // and shows browser when last window closed via doubleclick
         else if ( eventType == TQEvent::MouseButtonDblClick )
         {
-            TQMouseEvent *ev = static_cast<TQMouseEvent*>( e );
-            if ( ev->button() == LeftButton )
+            TQMouseEvent *ev = TQT_TQMOUSEEVENT( e );
+            if ( ev->button() == Qt::LeftButton )
             {
                 if ( s_viewers.count() == 1 )
                 {
@@ -1300,10 +1300,10 @@ void KuickShow::slotReplayEvent()
     DelayedRepeatEvent *e = m_delayedRepeatItem;
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
 
-    eventFilter( e->viewer, e->event );
+    eventFilter( TQT_TQOBJECT(e->viewer), TQT_TQEVENT(e->event) );
     delete e;
 
-    // ### WORKAROUND for TQIconView bug in Qt <= 3.0.3 at least
+    // ### WORKAROUND for TQIconView bug in TQt <= 3.0.3 at least
     if ( fileWidget && fileWidget->view() ) {
         TQWidget *widget = fileWidget->view()->widget();
         if ( widget->inherits( TQICONVIEW_OBJECT_NAME_STRING ) || widget->child(0, TQICONVIEW_OBJECT_NAME_STRING ) ){
@@ -1315,7 +1315,7 @@ void KuickShow::slotReplayEvent()
 
 void KuickShow::replayAdvance(DelayedRepeatEvent *event)
 {
-    // ### WORKAROUND for TQIconView bug in Qt <= 3.0.3 at least
+    // ### WORKAROUND for TQIconView bug in TQt <= 3.0.3 at least
     // Sigh. According to qt-bugs, they won't fix this bug ever. So you can't
     // rely on sorting to be correct before the TQIconView has been show()n.
     if ( fileWidget && fileWidget->view() ) {
@@ -1401,7 +1401,7 @@ void KuickShow::toggleBrowser()
 
 void KuickShow::slotOpenURL()
 {
-    KFileDialog dlg(TQString::null, kdata->fileFilter, this, "filedialog", true);
+    KFileDialog dlg(TQString(), kdata->fileFilter, this, "filedialog", true);
     dlg.setMode( KFile::Files | KFile::Directory );
     dlg.setCaption( i18n("Select Files or Folder to Open") );
 

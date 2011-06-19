@@ -32,7 +32,7 @@
 kpToolEraser::kpToolEraser (kpMainWindow *mainWindow)
     : kpToolPen (kpToolPen::Eraser,
                  i18n ("Eraser"), i18n ("Lets you rub out mistakes"),
-                 Qt::Key_A,
+                 TQt::Key_A,
                  mainWindow, "tool_eraser")
 {
 }

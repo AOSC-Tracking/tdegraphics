@@ -40,17 +40,18 @@
 class TQPainter;
 
 
-// TODO: frame becomes a combobox when its parent kpToolToolBar becomes too small
-class kpToolWidgetBase : public QFrame
+// TODO: frame becomes a combobox when its tqparent kpToolToolBar becomes too small
+class kpToolWidgetBase : public TQFrame
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpToolWidgetBase (TQWidget *parent, const char *name);  // must provide a name for config to work
+    kpToolWidgetBase (TQWidget *tqparent, const char *name);  // must provide a name for config to work
     virtual ~kpToolWidgetBase ();
 
 public:
-    void addOption (const TQPixmap &pixmap, const TQString &toolTip = TQString::null);
+    void addOption (const TQPixmap &pixmap, const TQString &toolTip = TQString());
     void startNewOptionRow ();
 
     // Call this at the end of your constructor.
@@ -63,13 +64,13 @@ private:
 
 public:  // (only have to use these if you don't use finishConstruction())
     // (rereads from config file)
-    QPair <int, int> defaultSelectedRowAndCol () const;
+    TQPair <int, int> defaultSelectedRowAndCol () const;
     int defaultSelectedRow () const;
     int defaultSelectedCol () const;
 
     void saveSelectedAsDefault () const;
 
-    void relayoutOptions ();
+    void retqlayoutOptions ();
 
 public:
     int selectedRow () const;

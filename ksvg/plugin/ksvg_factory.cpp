@@ -43,7 +43,7 @@ extern "C"
 KInstance *KSVGPluginFactory::s_instance = 0;
 KAboutData *KSVGPluginFactory::s_about = 0;
 
-KSVGPluginFactory::KSVGPluginFactory(TQObject *parent, const char *name) : KParts::Factory(parent, name)
+KSVGPluginFactory::KSVGPluginFactory(TQObject *tqparent, const char *name) : KParts::Factory(tqparent, name)
 {
 }
 
@@ -56,7 +56,7 @@ KSVGPluginFactory::~KSVGPluginFactory()
 	s_about = 0;
 }
 
-KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *parentWidget, const char *wname, TQObject *parent, const char *name, const char *, const TQStringList &args)
+KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *tqparentWidget, const char *wname, TQObject *tqparent, const char *name, const char *, const TQStringList &args)
 {
 	// Get the width and height of the <embed>
 	// TODO : <object>
@@ -72,7 +72,7 @@ KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *parentWidget, const 
 			height = r2.cap(3).toUInt(&dummy);
 	}
 	
-	return new KSVGPlugin(parentWidget, wname, parent, name, width, height);
+	return new KSVGPlugin(tqparentWidget, wname, tqparent, name, width, height);
 }
 
 KInstance *KSVGPluginFactory::instance()
@@ -90,8 +90,8 @@ KInstance *KSVGPluginFactory::instance()
 	return s_instance;
 }
 
-KSVGPluginBrowserExtension::KSVGPluginBrowserExtension(KSVGPlugin *parent)
-: KParts::BrowserExtension(parent, "KSVGPlugin BrowserExtension")
+KSVGPluginBrowserExtension::KSVGPluginBrowserExtension(KSVGPlugin *tqparent)
+: KParts::BrowserExtension(tqparent, "KSVGPlugin BrowserExtension")
 {
 }
 

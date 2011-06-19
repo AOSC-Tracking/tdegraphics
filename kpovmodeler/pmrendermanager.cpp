@@ -16,8 +16,8 @@
 **************************************************************************/
 
 // conflicting types for INT32 in qt and glx
-#ifndef QT_CLEAN_NAMESPACE
-#define QT_CLEAN_NAMESPACE
+#ifndef TQT_CLEAN_NAMESPACE
+#define TQT_CLEAN_NAMESPACE
 #endif
 
 #include "pmrendermanager.h"
@@ -78,7 +78,7 @@ PMRenderManager* PMRenderManager::theManager( )
 }
 
 PMRenderManager::PMRenderManager( )
-      : TQObject( qApp )
+      : TQObject( tqApp )
 {
    int i;
 
@@ -146,7 +146,7 @@ void PMRenderManager::addView( PMGLView* view, PMObject* active, PMObject* top,
          restart = true;
       else if( graphicalChange )
       {
-         m_renderTasks.findRef( task );
+         m_renderTasks.tqfindRef( task );
          m_renderTasks.take( );
          m_renderTasks.prepend( task );
          restart = true;
@@ -205,12 +205,12 @@ void PMRenderManager::removeView( PMGLView* view )
 bool PMRenderManager::containsTask( PMGLView* view ) const
 {
    PMRenderTaskListIterator it( m_renderTasks );
-   bool contains = false;
+   bool tqcontains = false;
 
-   for( ; it.current( ) && !contains; ++it )
+   for( ; it.current( ) && !tqcontains; ++it )
       if( it.current( )->view( ) == view )
-         contains = true;
-   return contains;
+         tqcontains = true;
+   return tqcontains;
 }
 
 TQColor PMRenderManager::controlPointColor( int i ) const
@@ -377,7 +377,7 @@ void PMRenderManager::renderTask( )
             emit renderingFinished( m_pCurrentGlView );
             if( m_bStopTask || m_bStartTask )
                break;
-            qApp->processEvents( maxEventTime );
+            tqApp->processEvents( maxEventTime );
             if( m_bStopTask || m_bStartTask )
                break;
             m_renderTasks.removeFirst( );
@@ -394,7 +394,7 @@ void PMRenderManager::renderTask( )
 
 void PMRenderManager::renderObject( PMObject* objectToRender )
 {
-   bool children = false;
+   bool tqchildren = false;
    PMGraphicalObject* go = 0;
 
    m_objectToRenderStack.append( objectToRender );
@@ -416,8 +416,8 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
          m_selected = true;
          m_pDeselectObject = objectToRender;
          if( objectToRender->hasTransformationMatrix( ) )
-            if( objectToRender->parent( ) )
-               m_pDeselectObject = objectToRender->parent( );
+            if( objectToRender->tqparent( ) )
+               m_pDeselectObject = objectToRender->tqparent( );
       }
    }
 
@@ -426,8 +426,8 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
    {
       PMObject* obj = 0;
 
-      children = objectToRender->lastChild( ) || objectToRender->linkedObject( );
-      if( children )
+      tqchildren = objectToRender->lastChild( ) || objectToRender->linkedObject( );
+      if( tqchildren )
       {
          bool stop;
 
@@ -438,7 +438,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
             matrix = new PMMatrix( PMMatrix::modelviewMatrix( ) );
          m_matrixStack.push( matrix );
 
-         // render the children and the linked object
+         // render the tqchildren and the linked object
          obj = objectToRender->lastChild( );
          while( obj && !m_bStopTask && !m_bStartTask )
          {
@@ -469,7 +469,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
 
       if( !m_bStopTask && !m_bStartTask )
       {
-         // children of the object are rendered
+         // tqchildren of the object are rendered
          // render the object
 
          if( objectToRender == m_pCurrentTask->activeObject( ) )
@@ -500,7 +500,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
                {
                   m_quickColorObjects.push( it.current( ) );
                   m_quickColors.push( new TQColor( m_currentColor ) );
-                  m_currentColor = qc->color( ).toQColor( );
+                  m_currentColor = qc->color( ).toTQColor( );
                }
             }
          }
@@ -515,7 +515,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
                    || ( objectToRender == m_pCurrentTask->activeObject( ) ) )
                {
                   // render the view structure.
-                  // call qApp->processEvents( ) each m_nMaxRenderedLines rendered
+                  // call tqApp->processEvents( ) each m_nMaxRenderedLines rendered
                   // lines
                   if( m_selected )
                      setGLColor( m_graphicalObjectColor[ 1 ] );
@@ -538,7 +538,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
    }
    if( !m_bStopTask && !m_bStartTask )
    {
-      if( children )
+      if( tqchildren )
       {
          PMMatrix* matrix = m_matrixStack.pop( );
 
@@ -681,7 +681,7 @@ void PMRenderManager::renderViewStructureSimple( PMPointArray& points,
       if( m_renderedLines >=  m_nMaxRenderedLines )
       {
          m_renderedLines = 0;
-         qApp->processEvents( maxEventTime );
+         tqApp->processEvents( maxEventTime );
          if( !m_bStopTask && !m_bStartTask )
             m_pCurrentGlView->makeCurrent( );
       }
@@ -1315,10 +1315,10 @@ void PMRenderManager::renderFieldOfView( )
 
          if( camera->cameraType( ) == PMCamera::Omnimax )
             renderString( i18n( "not supported" ), 5.0,
-                          height - qApp->fontMetrics( ).height( ) * 2 - 2 );
+                          height - tqApp->fontMetrics( ).height( ) * 2 - 2 );
          else if( m_specialCameraMode && !m_highDetailCameraView )
             renderString( i18n( "approximated" ), 5.0,
-                          height - qApp->fontMetrics( ).height( ) * 2 - 2 );
+                          height - tqApp->fontMetrics( ).height( ) * 2 - 2 );
 
          glBegin( GL_LINE_LOOP );
 
@@ -1363,7 +1363,7 @@ void PMRenderManager::renderGrid( )
       int width = m_pCurrentGlView->width( );
       double transX = m_pCurrentGlView->translationX( );
       double transY = m_pCurrentGlView->translationY( );
-      int fontHeight = qApp->fontMetrics( ).height( );
+      int fontHeight = tqApp->fontMetrics( ).height( );
 
       glMatrixMode( GL_PROJECTION );
       glPushMatrix( );
@@ -1410,8 +1410,8 @@ void PMRenderManager::renderGrid( )
          glVertex2d( screenx, height/2 );
          glEnd( );
 
-         TQString label = TQString( "%1" ).arg( x * signx, 0, 'g', 4 );
-         if( approxZero( x ) && label.find( "e-" ) )
+         TQString label = TQString( "%1" ).tqarg( x * signx, 0, 'g', 4 );
+         if( approxZero( x ) && label.tqfind( "e-" ) )
             label = "0";
 
          renderString( label, screenx + 3, height / 2 - fontHeight - 2 );
@@ -1431,8 +1431,8 @@ void PMRenderManager::renderGrid( )
          glVertex2d( width/2, screeny );
          glEnd( );
 
-         TQString label = TQString( "%1" ).arg( y * signy, 0, 'g', 4 );
-         if( approxZero( y ) && label.find( "e-" ) )
+         TQString label = TQString( "%1" ).tqarg( y * signy, 0, 'g', 4 );
+         if( approxZero( y ) && label.tqfind( "e-" ) )
             label = "0";
 
          renderString( label, -width / 2 + 3, screeny + 2 );
@@ -1448,7 +1448,7 @@ void PMRenderManager::renderGrid( )
          case PMGLView::PMViewPosY:
          case PMGLView::PMViewPosZ:
          case PMGLView::PMViewNegY:
-            renderString( "x", width / 2 - qApp->fontMetrics( ).boundingRect( "x" ).width( ) - 4, -3 );
+            renderString( "x", width / 2 - tqApp->fontMetrics( ).boundingRect( "x" ).width( ) - 4, -3 );
             break;
          case PMGLView::PMViewNegZ:
             renderString( "x", -width / 2 + 3, -3 );
@@ -1475,7 +1475,7 @@ void PMRenderManager::renderGrid( )
             renderString( "z", -width / 2 + 3, -3 );
             break;
          case PMGLView::PMViewNegX:
-            renderString( "z", width / 2 - qApp->fontMetrics( ).boundingRect( "z" ).width( ) - 4, -3 );
+            renderString( "z", width / 2 - tqApp->fontMetrics( ).boundingRect( "z" ).width( ) - 4, -3 );
             break;
          case PMGLView::PMViewNegY:
             renderString( "z", -3, height / 2 - fontHeight );
@@ -1499,7 +1499,7 @@ void PMRenderManager::renderDescription( )
 {
    int height = m_pCurrentGlView->height( );
    int width = m_pCurrentGlView->width( );
-   int fontHeight = qApp->fontMetrics( ).height( );
+   int fontHeight = tqApp->fontMetrics( ).height( );
 
    glMatrixMode( GL_PROJECTION );
    glPushMatrix( );
@@ -1561,19 +1561,19 @@ void PMRenderManager::renderDescription( )
 
 void PMRenderManager::renderString( const TQString& str, double x, double y )
 {
-   int width  = qApp->fontMetrics( ).boundingRect( str ).width( );
-   int height = qApp->fontMetrics( ).height( );
+   int width  = tqApp->fontMetrics( ).boundingRect( str ).width( );
+   int height = tqApp->fontMetrics( ).height( );
 
    // GL wants word aligned bitmap
    TQBitmap bm( ( ( width + 32 ) % 32 ) * 32, height, true );
 
    TQPainter p( &bm );
-   p.setFont( qApp->font( ) );
-   p.drawText( bm.rect( ), Qt::AlignLeft | Qt::AlignBottom, str );
+   p.setFont( tqApp->font( ) );
+   p.drawText( bm.rect( ), TQt::AlignLeft | TQt::AlignBottom, str );
    p.end();
 
    // Transform to GL bitmap
-   TQImage img = bm.convertToImage( ).mirror( ).convertBitOrder( TQImage::BigEndian );
+   TQImage img = TQImage(bm.convertToImage( )).mirror( ).convertBitOrder( TQImage::BigEndian );
 
    glRasterPos2d( x, y );
    glBitmap( img.width( ), img.height( ), 0, 0, 0, 0, img.bits( ) );

@@ -56,10 +56,10 @@
 typedef KParts::GenericFactory<KViewPart> KViewPartFactory;
 K_EXPORT_COMPONENT_FACTORY(kviewerpart, KViewPartFactory)
 
-KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+KViewPart::KViewPart(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
                      const char *name, const TQStringList& args)
-  : KViewPart_Iface(parent, name), showSidebar(0), saveAction(0), partManager(0),
-    multiPageLibrary(TQString::null), aboutDialog(0)
+  : KViewPart_Iface(tqparent, name), showSidebar(0), saveAction(0), partManager(0),
+    multiPageLibrary(TQString()), aboutDialog(0)
 {
   KGlobal::locale()->insertCatalogue("kviewshell");
 
@@ -71,12 +71,12 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   connect(watch, TQT_SIGNAL(dirty(const TQString&)), this, TQT_SLOT(fileChanged(const TQString&)));
   watch->startScan();
 
-  mainWidget = new TQHBox(parentWidget, widgetName);
-  mainWidget->setFocusPolicy(TQWidget::StrongFocus);
+  mainWidget = new TQHBox(tqparentWidget, widgetName);
+  mainWidget->setFocusPolicy(TQ_StrongFocus);
   setWidget(mainWidget);
 
   // Setup part manager
-  partManager = new KParts::PartManager(parentWidget, "PartManager for kviewpart");
+  partManager = new KParts::PartManager(tqparentWidget, "PartManager for kviewpart");
   setManager(partManager);
   // Don't switch to another part when pressing a mouse button
   partManager->setActivationButtonMask(0);
@@ -96,24 +96,24 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
     // If a default MimeType is specified try to load a MultiPage supporting it.
     TQString defaultMimeType = args.first();
     offers = KTrader::self()->query(
-        TQString::fromLatin1("KViewShell/MultiPage" ),
+        TQString::tqfromLatin1("KViewShell/MultiPage" ),
         TQString("([X-KDE-MultiPageVersion] == %1) and "
-                "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(defaultMimeType));
+                "([X-KDE-MimeTypes] == '%2')").tqarg(MULTIPAGE_VERSION).tqarg(defaultMimeType));
   }
 
   // If no default MimeType is given or no MultiPage has been found, try to load the Empty MultiPage.
   if (offers.isEmpty())
   {
     offers = KTrader::self()->query(
-        TQString::fromLatin1("KViewShell/MultiPage" ),
+        TQString::tqfromLatin1("KViewShell/MultiPage" ),
         TQString("([X-KDE-MultiPageVersion] == %1) and "
-                "([X-KDE-EmptyMultiPage] == 1)").arg(MULTIPAGE_VERSION));
+                "([X-KDE-EmptyMultiPage] == 1)").tqarg(MULTIPAGE_VERSION));
   }
 
   // If still no MultiPage has been found, report an error and abort.
   if (offers.isEmpty())
   {
-    KMessageBox::error(parentWidget, i18n("<qt>No MultiPage found.</qt>"));
+    KMessageBox::error(tqparentWidget, i18n("<qt>No MultiPage found.</qt>"));
     //    return;
   }
 
@@ -122,7 +122,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
 
   // Try to load the multiPage
   int error;
-  multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, mainWidget,
+  multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, TQT_TQOBJECT(mainWidget),
 														 service->name().utf8(), TQStringList(), &error ));
 
   // If the loading of the MultiPage failed report and error and abort.
@@ -137,7 +137,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
       break;
     case KParts::ComponentFactory::ErrNoLibrary:
       reason = i18n("<qt><p>The specified library <b>%1</b> could not be loaded. The error message returned was:</p>"
-		    "<p><b>%2</b></p></qt>").arg(service->library()).arg(KLibLoader::self()->lastErrorMessage());
+		    "<p><b>%2</b></p></qt>").tqarg(service->library()).tqarg(KLibLoader::self()->lastErrorMessage());
       break;
     case KParts::ComponentFactory::ErrNoFactory:
       reason = i18n("<qt>The library does not export a factory for creating components.</qt>");
@@ -155,13 +155,13 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
 			"question. If that does not help, you could file an error report, either to the "
 			"provider of your software (e.g. the vendor of your Linux distribution), or "
 			"directly to the authors of the software. The entry <b>Report Bug...</b> in the "
-			"<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library());
+			"<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").tqarg(m_file).tqarg(service->library());
     TQString caption = i18n("Error Initializing Software Component");
     KMessageBox::detailedError(mainWidget, text, reason, caption);
-    emit setStatusBarText(TQString::null);
+    emit setStatusBarText(TQString());
     return;
   }
-  // Make the KViewPart the parent of the MultiPage.
+  // Make the KViewPart the tqparent of the MultiPage.
   // So the Partmanager treats it as a nested KPart.
   insertChild(multiPage);
 
@@ -173,7 +173,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   exportTextAction = new KAction(i18n("Text..."), 0, this, TQT_SLOT(mp_exportText()), actionCollection(), "export_text");
 
   // edit menu
-  findTextAction = KStdAction::find(this, TQT_SLOT(mp_showFindTextDialog()), actionCollection(), "find");
+  findTextAction = KStdAction::find(this, TQT_SLOT(mp_showFindTextDialog()), actionCollection(), "tqfind");
   findNextAction = KStdAction::findNext(this, TQT_SLOT(mp_findNextText()), actionCollection(), "findnext");
   findNextAction->setEnabled(false);
   findPrevAction = KStdAction::findPrev(this, TQT_SLOT(mp_findPrevText()), actionCollection(), "findprev");
@@ -206,11 +206,11 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   viewModeAction = new KSelectAction (i18n("View Mode"), 0, 0, 0, actionCollection(), "viewmode");
   viewModeAction->setItems(viewModes);
 
-  // Orientation menu
+  // Qt::Orientation menu
   TQStringList orientations;
   orientations.append(i18n("Portrait"));
   orientations.append(i18n("Landscape"));
-  orientation = new KSelectAction (i18n("Preferred &Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
+  orientation = new KSelectAction (i18n("Preferred &Qt::Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
   orientation->setItems(orientations);
   connect(orientation, TQT_SIGNAL(activated (int)), &userRequestedPaperSize, TQT_SLOT(setOrientation(int)));
 
@@ -411,18 +411,18 @@ TQString KViewPart::pageSizeDescription()
 {
   PageNumber nr = multiPage->currentPageNumber();
   if (!nr.isValid())
-    return TQString::null;
+    return TQString();
   SimplePageSize ss = multiPage->sizeOfPage(nr);
   if (!ss.isValid())
-    return TQString::null;
+    return TQString();
   pageSize s(ss);
 
   TQString size = " ";
   if (s.formatNumber() == -1) {
     if (KGlobal::locale()-> measureSystem() == KLocale::Metric)
-      size += TQString("%1x%2 mm").arg(s.width().getLength_in_mm(), 0, 'f', 0).arg(s.height().getLength_in_mm(), 0, 'f', 0);
+      size += TQString("%1x%2 mm").tqarg(s.width().getLength_in_mm(), 0, 'f', 0).tqarg(s.height().getLength_in_mm(), 0, 'f', 0);
     else
-      size += TQString("%1x%2 in").arg(s.width().getLength_in_inch(), 0, 'g', 2).arg(s.height().getLength_in_inch(), 0, 'g', 2);
+      size += TQString("%1x%2 in").tqarg(s.width().getLength_in_inch(), 0, 'g', 2).tqarg(s.height().getLength_in_inch(), 0, 'g', 2);
   } else {
     size += s.formatName() + "/";
     if (s.getOrientation() == 0)
@@ -459,7 +459,7 @@ void KViewPart::slotFileOpen()
       return;
   }
 
-  KURL url = KFileDialog::getOpenURL(TQString::null, supportedMimeTypes().join(" "));
+  KURL url = KFileDialog::getOpenURL(TQString(), supportedMimeTypes().join(" "));
 
   if (!url.isEmpty())
     openURL(url);
@@ -471,8 +471,8 @@ TQStringList KViewPart::supportedMimeTypes()
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      TQString::fromLatin1("KViewShell/MultiPage"),
-      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
+      TQString::tqfromLatin1("KViewShell/MultiPage"),
+      TQString("([X-KDE-MultiPageVersion] == %1)").tqarg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -516,8 +516,8 @@ TQStringList KViewPart::fileFormats() const
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      TQString::fromLatin1("KViewShell/MultiPage"),
-      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
+      TQString::tqfromLatin1("KViewShell/MultiPage"),
+      TQString("([X-KDE-MultiPageVersion] == %1)").tqarg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -553,10 +553,10 @@ TQStringList KViewPart::fileFormats() const
 
   for(TQStringList::Iterator it = supportedPattern.begin(); it != supportedPattern.end(); ++it )
   {
-    if ((*it).find(".gz", -3) == -1) // Paranoia safety check
+    if ((*it).tqfind(".gz", -3) == -1) // Paranoia safety check
       compressedPattern.append(*it + ".gz");
 
-    if ((bzip2Available) && ((*it).find(".bz2", -4) == -1)) // Paranoia safety check
+    if ((bzip2Available) && ((*it).tqfind(".bz2", -4) == -1)) // Paranoia safety check
       compressedPattern.append(*it + ".bz2");
   }
 
@@ -613,7 +613,7 @@ bool KViewPart::openFile()
     for (TQStringList::Iterator it = supportedPatterns.begin(); it != supportedPatterns.end(); ++it)
     {
       // Only consider patterns starting with "*."
-      if ((*it).find("*.") == 0)
+      if ((*it).tqfind("*.") == 0)
       {
         // Remove first Letter from string
         endings.append((*it).mid(2).stripWhiteSpace());
@@ -642,8 +642,8 @@ bool KViewPart::openFile()
     // If we still have not found a file. Show an error message and return.
     if (!fi.exists())
     {
-      KMessageBox::error(mainWidget, i18n("<qt>File <nobr><strong>%1</strong></nobr> does not exist.</qt>").arg(m_file));
-      emit setStatusBarText(TQString::null);
+      KMessageBox::error(mainWidget, i18n("<qt>File <nobr><strong>%1</strong></nobr> does not exist.</qt>").tqarg(m_file));
+      emit setStatusBarText(TQString());
       return false;
     }
     m_url.setPath(TQFileInfo(m_file).absFilePath());
@@ -651,7 +651,7 @@ bool KViewPart::openFile()
 
   // Set the window caption now, before we do any uncompression and generation of temporary files.
   tmpFileURL.setPath(m_file);
-  emit setStatusBarText(i18n("Loading '%1'...").arg(tmpFileURL.prettyURL()));
+  emit setStatusBarText(i18n("Loading '%1'...").tqarg(tmpFileURL.prettyURL()));
   emit setWindowCaption( tmpFileURL.prettyURL() ); // set Window caption WITHOUT the reference part!
 
   // Check if the file is compressed
@@ -670,17 +670,17 @@ bool KViewPart::openFile()
     {
       KMessageBox::error(mainWidget, i18n("<qt><strong>File Error!</strong> Could not create "
                          "temporary file.</qt>"));
-      emit setWindowCaption(TQString::null);
-      emit setStatusBarText(TQString::null);
+      emit setWindowCaption(TQString());
+      emit setStatusBarText(TQString());
       return false;
     }
     tmpUnzipped->setAutoDelete(true);
     if(tmpUnzipped->status() != 0)
     {
       KMessageBox::error(mainWidget, i18n("<qt><strong>File Error!</strong> Could not create temporary file "
-                         "<nobr><strong>%1</strong></nobr>.</qt>").arg(strerror(tmpUnzipped->status())));
-      emit setWindowCaption(TQString::null);
-      emit setStatusBarText(TQString::null);
+                         "<nobr><strong>%1</strong></nobr>.</qt>").tqarg(strerror(tmpUnzipped->status())));
+      emit setWindowCaption(TQString());
+      emit setStatusBarText(TQString());
       return false;
     }
 
@@ -692,27 +692,27 @@ bool KViewPart::openFile()
       filterDev = KFilterDev::deviceForFile(m_file);
     if (filterDev == 0L)
     {
-      emit setWindowCaption(TQString::null);
-      emit setStatusBarText(TQString::null);
+      emit setWindowCaption(TQString());
+      emit setStatusBarText(TQString());
       return false;
     }
     if(!filterDev->open(IO_ReadOnly))
     {
       KMessageBox::detailedError(mainWidget, i18n("<qt><strong>File Error!</strong> Could not open the file "
           "<nobr><strong>%1</strong></nobr> for uncompression. "
-          "The file will not be loaded.</qt>").arg(m_file),
+          "The file will not be loaded.</qt>").tqarg(m_file),
           i18n("<qt>This error typically occurs if you do not have enough permissions to read the file. "
           "You can check ownership and permissions if you right-click on the file in the Konqueror "
           "file manager and then choose the 'Properties' menu.</qt>"));
-      emit setWindowCaption(TQString::null);
+      emit setWindowCaption(TQString());
       delete filterDev;
-      emit setStatusBarText(TQString::null);
+      emit setStatusBarText(TQString());
       return false;
     }
 
     KProgressDialog* prog = new KProgressDialog(0L, "uncompress-progress",
         i18n("Uncompressing..."),
-        i18n("<qt>Uncompressing the file <nobr><strong>%1</strong></nobr>. Please wait.</qt>").arg(m_file));
+        i18n("<qt>Uncompressing the file <nobr><strong>%1</strong></nobr>. Please wait.</qt>").tqarg(m_file));
 
     prog->progressBar()->setTotalSteps((int) fi.size()/1024);
     prog->progressBar()->setProgress(0);
@@ -739,18 +739,18 @@ bool KViewPart::openFile()
     tmpUnzipped->sync();
 
     if (progress_dialog_was_cancelled) {
-      emit setStatusBarText(TQString::null);
+      emit setStatusBarText(TQString());
       return false;
     }
 
     if ((read != 0) || (tmpUnzipped->file()->size() == 0))
     {
       KMessageBox::detailedError(mainWidget, i18n("<qt><strong>File Error!</strong> Could not uncompress "
-          "the file <nobr><strong>%1</strong></nobr>. The file will not be loaded.</qt>").arg( m_file ),
+          "the file <nobr><strong>%1</strong></nobr>. The file will not be loaded.</qt>").tqarg( m_file ),
           i18n("<qt>This error typically occurs if the file is corrupt. "
           "If you want to be sure, try to decompress the file manually using command-line tools.</qt>"));
-      emit setWindowCaption(TQString::null);
-      emit setStatusBarText(TQString::null);
+      emit setWindowCaption(TQString());
+      emit setStatusBarText(TQString());
       return false;
     }
     tmpUnzipped->close();
@@ -768,17 +768,17 @@ bool KViewPart::openFile()
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      TQString::fromLatin1("KViewShell/MultiPage" ),
+      TQString::tqfromLatin1("KViewShell/MultiPage" ),
   TQString("([X-KDE-MultiPageVersion] == %1) and "
-          "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(mimetype->name()));
+          "([X-KDE-MimeTypes] == '%2')").tqarg(MULTIPAGE_VERSION).tqarg(mimetype->name()));
 
   if (offers.isEmpty()) {
     KMessageBox::detailedError(mainWidget, i18n("<qt>The document <b>%1</b> cannot be shown because "
-						"its file type is not supported.</qt>").arg(m_file),
+						"its file type is not supported.</qt>").tqarg(m_file),
 			       i18n("<qt>The file has mime type <b>%1</b> which is not supported by "
-				    "any of the installed KViewShell plugins.</qt>").arg(mimetype->name()));
-    emit setWindowCaption(TQString::null);
-    emit setStatusBarText(TQString::null);
+				    "any of the installed KViewShell plugins.</qt>").tqarg(mimetype->name()));
+    emit setWindowCaption(TQString());
+    emit setStatusBarText(TQString());
     return false;
   }
 
@@ -800,7 +800,7 @@ bool KViewPart::openFile()
 
     // Try to load the multiPage
     int error;
-    multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, mainWidget,
+    multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, TQT_TQOBJECT(mainWidget),
 														   service->name().utf8(), TQStringList(), &error ));
 
     if (multiPage.isNull()) {
@@ -813,7 +813,7 @@ bool KViewPart::openFile()
 	reason = i18n("<qt>The specified service provides no shared library.</qt>");
 	break;
       case KParts::ComponentFactory::ErrNoLibrary:
-	reason = i18n("<qt><p>The specified library <b>%1</b> could not be loaded. The error message returned was:</p> <p><b>%2</b></p></qt>").arg(service->library()).arg(KLibLoader::self()->lastErrorMessage());
+	reason = i18n("<qt><p>The specified library <b>%1</b> could not be loaded. The error message returned was:</p> <p><b>%2</b></p></qt>").tqarg(service->library()).tqarg(KLibLoader::self()->lastErrorMessage());
 	break;
       case KParts::ComponentFactory::ErrNoFactory:
 	reason = i18n("<qt>The library does not export a factory for creating components.</qt>");
@@ -832,13 +832,13 @@ bool KViewPart::openFile()
 			  "question. If that does not help, you could file an error report, either to the "
 			  "provider of your software (e.g. the vendor of your Linux distribution), or "
 			  "directly to the authors of the software. The entry <b>Report Bug...</b> in the "
-			  "<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library()).arg(mimetype->name());
+			  "<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").tqarg(m_file).tqarg(service->library()).tqarg(mimetype->name());
       TQString caption = i18n("Error Initializing Software Component");
       if (reason.isEmpty())
 	KMessageBox::error(mainWidget, text, caption);
       else
 	KMessageBox::detailedError(mainWidget, text, reason, caption);
-      emit setStatusBarText(TQString::null);
+      emit setStatusBarText(TQString());
       return false;
     }
 
@@ -895,13 +895,13 @@ bool KViewPart::openFile()
     // Notify the ViewShell about the newly opened file.
     emit fileOpened();
   } else {
-    m_url = TQString::null;
-    emit setWindowCaption(TQString::null);
+    m_url = TQString();
+    emit setWindowCaption(TQString());
   }
 
   checkActions();
-  emit zoomChanged(TQString("%1%").arg((int)(_zoomVal.value()*100.0+0.5)));
-  emit setStatusBarText(TQString::null);
+  emit zoomChanged(TQString("%1%").tqarg((int)(_zoomVal.value()*100.0+0.5)));
+  emit setStatusBarText(TQString());
   return r;
 }
 
@@ -946,7 +946,7 @@ bool KViewPart::closeURL()
 
   KParts::ReadOnlyPart::closeURL();
   multiPage->closeURL();
-  m_url = TQString::null;
+  m_url = TQString();
   checkActions();
   emit setWindowCaption("");
 
@@ -994,7 +994,7 @@ void KViewPart::pageInfo(int numpages, int currentpage)
   updateZoomLevel();
 
   // ATTN: The string here must be the same as in setPage() below
-  TQString pageString = i18n("Page %1 of %2").arg(currentpage).arg(numpages);
+  TQString pageString = i18n("Page %1 of %2").tqarg(currentpage).tqarg(numpages);
   if (pageChangeIsConnected) {
     emit pageChanged(pageString);
     emit sizeChanged(pageSizeDescription());
@@ -1132,7 +1132,7 @@ void KViewPart::enableFitToHeight(bool enable)
 
 void KViewPart::fitToPage()
 {
-  double z = QMIN(multiPage->calculateFitToHeightZoomValue(),
+  double z = TQMIN(multiPage->calculateFitToHeightZoomValue(),
                   multiPage->calculateFitToWidthZoomValue());
 
   // Check if the methods returned usable values. Values that are not
@@ -1382,7 +1382,7 @@ void KViewPart::writeSettings()
 
 void KViewPart::connectNotify ( const char *sig )
 {
-  if (TQString(sig).contains("pageChanged"))
+  if (TQString(sig).tqcontains("pageChanged"))
     pageChangeIsConnected = true;
 }
 
@@ -1392,12 +1392,12 @@ void KViewPart::setStatusBarTextFromMultiPage( const TQString &msg )
   if (msg.isEmpty())
   {
     if (pageChangeIsConnected)
-      emit setStatusBarText(TQString::null);
+      emit setStatusBarText(TQString());
     else
     {
       int currentPage = multiPage->currentPageNumber();
       int numberOfPages = multiPage->numberOfPages();
-      emit setStatusBarText(i18n("Page %1 of %2").arg(currentPage).arg(numberOfPages));
+      emit setStatusBarText(i18n("Page %1 of %2").tqarg(currentPage).tqarg(numberOfPages));
     }
   }
   else
@@ -1420,26 +1420,26 @@ void KViewPart::aboutKViewShell()
     aboutDialog = new KAboutDialog(mainWidget, "about_kviewshell");
     aboutDialog->setTitle(I18N_NOOP("KViewShell"));
     aboutDialog->setVersion("0.6");
-    aboutDialog->setAuthor("Matthias Hoelzer-Kluepfel", TQString::null, TQString::null,
+    aboutDialog->setAuthor("Matthias Hoelzer-Kluepfel", TQString(), TQString(),
                            I18N_NOOP("Original Author"));
 
-    aboutDialog->addContributor("Matthias Hoelzer-Kluepfel", "mhk@caldera.de", TQString::null,
+    aboutDialog->addContributor("Matthias Hoelzer-Kluepfel", "mhk@caldera.de", TQString(),
                                 I18N_NOOP("Framework"));
     aboutDialog->addContributor("David Sweet", "dsweet@kde.org", "http://www.chaos.umd.edu/~dsweet",
                                 I18N_NOOP("Former KGhostView Maintainer"));
-    aboutDialog->addContributor("Mark Donohoe", TQString::null, TQString::null,
+    aboutDialog->addContributor("Mark Donohoe", TQString(), TQString(),
                                 I18N_NOOP("KGhostView Author"));
-    aboutDialog->addContributor("Markku Hihnala", TQString::null, TQString::null,
+    aboutDialog->addContributor("Markku Hihnala", TQString(), TQString(),
                                 I18N_NOOP("Navigation widgets"));
-    aboutDialog->addContributor("David Faure", TQString::null, TQString::null,
+    aboutDialog->addContributor("David Faure", TQString(), TQString(),
                                 I18N_NOOP("Basis for shell"));
-    aboutDialog->addContributor("Daniel Duley", TQString::null, TQString::null,
+    aboutDialog->addContributor("Daniel Duley", TQString(), TQString(),
                                 I18N_NOOP("Port to KParts"));
-    aboutDialog->addContributor("Espen Sand", TQString::null, TQString::null,
+    aboutDialog->addContributor("Espen Sand", TQString(), TQString(),
                                 I18N_NOOP("Dialog boxes"));
-    aboutDialog->addContributor("Stefan Kebekus", "kebekus@kde.org", TQString::null,
+    aboutDialog->addContributor("Stefan Kebekus", "kebekus@kde.org", TQString(),
                                 I18N_NOOP("DCOP-Interface, major improvements"));
-    aboutDialog->addContributor("Wilfried Huss", "Wilfried.Huss@gmx.at", TQString::null,
+    aboutDialog->addContributor("Wilfried Huss", "Wilfried.Huss@gmx.at", TQString(),
                                 I18N_NOOP("Interface enhancements"));
   }
   aboutDialog->show();
@@ -1491,8 +1491,8 @@ void KViewPart::slotEnableMoveTool(bool enable)
 }
 
 
-KViewPartExtension::KViewPartExtension(KViewPart *parent)
-  : KParts::BrowserExtension( parent, "KViewPartExtension")
+KViewPartExtension::KViewPartExtension(KViewPart *tqparent)
+  : KParts::BrowserExtension( tqparent, "KViewPartExtension")
 {
 }
 

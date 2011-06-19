@@ -275,11 +275,11 @@ void PMImageMap::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMImageMap::metaObject( ) const
+PMMetaObject* PMImageMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ImageMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "ImageMap", Base::tqmetaObject( ),
                                         createNewImageMap );
 
       PMBitmapTypeProperty* bp = new PMBitmapTypeProperty(
@@ -459,9 +459,9 @@ void PMImageMap::setTransmits( const TQValueList<PMPaletteValue>& c )
    }
 }
 
-PMDialogEditBase* PMImageMap::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMImageMap::editWidget( TQWidget* tqparent ) const
 {
-   return new PMImageMapEdit( parent );
+   return new PMImageMapEdit( tqparent );
 }
 
 void PMImageMap::restoreMemento( PMMemento* s )

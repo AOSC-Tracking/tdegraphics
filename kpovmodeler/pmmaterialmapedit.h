@@ -42,12 +42,13 @@ class TQPushButton;
 class PMMaterialMapEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMMaterialMapEdit with parent and name
+    * Creates a PMMaterialMapEdit with tqparent and name
     */
-   PMMaterialMapEdit( TQWidget* parent, const char* name = 0 );
+   PMMaterialMapEdit( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displayObject( PMObject* o );
    /** */

@@ -26,7 +26,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     TQPixmap * pixmap = 0;
 
     // if a pixmap is present for given id, use it
-    if ( page->m_pixmaps.contains( id ) )
+    if ( page->m_pixmaps.tqcontains( id ) )
         pixmap = page->m_pixmaps[ id ];
 
     // else find the closest match using pixmaps of other IDs (great optim!)
@@ -49,13 +49,13 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     // if have no pixmap, draw blank page with gray cross and exit
     if ( !pixmap )
     {
-        TQColor color = Qt::white;
+        TQColor color = TQt::white;
         if ( KpdfSettings::changeColors() )
         {
             switch ( KpdfSettings::renderMode() )
             {
                 case KpdfSettings::EnumRenderMode::Inverted:
-                    color = Qt::black;
+                    color = TQt::black;
                     break;
                 case KpdfSettings::EnumRenderMode::Paper:
                     color = KpdfSettings::paperColor();
@@ -70,7 +70,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
 
         // draw a cross (to  that the pixmap as not yet been loaded)
         // helps a lot on pages that take much to render
-        destPainter->setPen( Qt::gray );
+        destPainter->setPen( TQt::gray );
         destPainter->drawLine( 0, 0, width-1, height-1 );
         destPainter->drawLine( 0, height-1, width-1, 0 );
         // idea here: draw a hourglass (or kpdf icon :-) on top-left corner
@@ -122,7 +122,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     else
     {
         p->save();
-        // TODO paint only the needed part (note: hope that Qt4 transforms are faster)
+        // TODO paint only the needed part (note: hope that TQt4 transforms are faster)
         p->scale( width / (double)pixmap->width(), height / (double)pixmap->height() );
         p->drawPixmap( 0,0, *pixmap, 0,0, pixmap->width(), pixmap->height() );
         p->restore();
@@ -139,7 +139,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             {
                 case KpdfSettings::EnumRenderMode::Inverted:
                     // Invert image pixels using TQImage internal function
-                    backImage.invertPixels(false);
+                    backImage.tqinvertPixels(false);
                     break;
                 case KpdfSettings::EnumRenderMode::Recolor:
                     // Recolor image using KImageEffect::flatten with dither:0
@@ -152,7 +152,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
                         con = KpdfSettings::bWContrast(), thr = 255 - KpdfSettings::bWThreshold();
                     for( int i = 0; i < pixels; ++i )
                     {
-                        val = qGray( data[i] );
+                        val = tqGray( data[i] );
                         if ( val > thr )
                             val = 128 + (127 * (val - thr)) / (255 - thr);
                         else if ( val < thr )
@@ -165,7 +165,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
                             else if ( val < 0 )
                                 val = 0;
                         }
-                        data[i] = qRgba( val, val, val, 255 );
+                        data[i] = tqRgba( val, val, val, 255 );
                     }
                     break;
             }
@@ -178,7 +178,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             for ( ; hIt != hEnd; ++hIt )
             {
                 HighlightRect * r = *hIt;
-                TQRect highlightRect = r->geometry( width, height );
+                TQRect highlightRect = r->tqgeometry( width, height );
                 if ( highlightRect.isValid() && highlightRect.intersects( limits ) )
                 {
                     // find out the rect to highlight on pixmap
@@ -197,10 +197,10 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
                         for( int x = highlightRect.left(); x <= highlightRect.right(); ++x )
                         {
                             val = data[ x + offset ];
-                            newR = (qRed(val) * rh) / 255;
-                            newG = (qGreen(val) * gh) / 255;
-                            newB = (qBlue(val) * bh) / 255;
-                            data[ x + offset ] = qRgba( newR, newG, newB, 255 );
+                            newR = (tqRed(val) * rh) / 255;
+                            newG = (tqGreen(val) * gh) / 255;
+                            newB = (tqBlue(val) * bh) / 255;
+                            data[ x + offset ] = tqRgba( newR, newG, newB, 255 );
                         }
                         offset += backImage.width();
                     }
@@ -213,7 +213,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     // 3. visually enchance links and images if requested
     if ( enhanceLinks || enhanceImages )
     {
-        TQColor normalColor = TQApplication::palette().active().highlight();
+        TQColor normalColor = TQApplication::tqpalette().active().highlight();
         TQColor lightColor = normalColor.light( 140 );
         // enlarging limits for intersection is like growing the 'rectGeometry' below
         TQRect limitsEnlarged = limits;
@@ -226,7 +226,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             if ( (enhanceLinks && rect->objectType() == ObjectRect::Link) ||
                  (enhanceImages && rect->objectType() == ObjectRect::Image) )
             {
-                TQRect rectGeometry = rect->geometry( width, height );
+                TQRect rectGeometry = rect->tqgeometry( width, height );
                 if ( rectGeometry.intersects( limitsEnlarged ) )
                 {
                     // expand rect and draw inner border

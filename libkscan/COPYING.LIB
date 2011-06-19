@@ -128,7 +128,7 @@ included without limitation in the term "modification".)
 
   "Source code" for a work means the preferred form of the work for
 making modifications to it.  For a library, complete source code means
-all the source code for all modules it contains, plus any associated
+all the source code for all modules it tqcontains, plus any associated
 interface definition files, plus the scripts used to control compilation
 and installation of the library.
 
@@ -250,7 +250,7 @@ linked without the Library, or if the work is itself a library.  The
 threshold for this to be true is not precisely defined by law.
 
   If such an object file uses only numerical parameters, data
-structure layouts and accessors, and small macros and small inline
+structure tqlayouts and accessors, and small macros and small inline
 functions (ten lines or less in length), then the use of the object
 file is unrestricted, regardless of whether it is legally a derivative
 work.  (Executables containing this object code plus portions of the

@@ -27,10 +27,10 @@
 #include "conf/settings.h"
 
 // ThumbnailWidget represents a single thumbnail in the ThumbnailList
-class ThumbnailWidget : public QWidget
+class ThumbnailWidget : public TQWidget
 {
     public:
-        ThumbnailWidget( TQWidget * parent, const KPDFPage * page, ThumbnailList * tl );
+        ThumbnailWidget( TQWidget * tqparent, const KPDFPage * page, ThumbnailList * tl );
 
         // set internal parameters to fit the page in the given width
         void resizeFitWidth( int width );
@@ -63,8 +63,8 @@ class ThumbnailWidget : public QWidget
 
 /** ThumbnailList implementation **/
 
-ThumbnailList::ThumbnailList( TQWidget *parent, KPDFDocument *document )
-	: TQScrollView( parent, "KPDF::Thumbnails", WNoAutoErase | WStaticContents ),
+ThumbnailList::ThumbnailList( TQWidget *tqparent, KPDFDocument *document )
+	: TQScrollView( tqparent, "KPDF::Thumbnails", WNoAutoErase | WStaticContents ),
 	m_document( document ), m_selected( 0 ), m_delayTimer( 0 ), m_bookmarkOverlay( 0 )
 {
 	// set scrollbars
@@ -76,13 +76,13 @@ ThumbnailList::ThumbnailList( TQWidget *parent, KPDFDocument *document )
 
 	// widget setup: can be focused by tab and mouse click (not wheel)
 	viewport()->setFocusProxy( this );
-	viewport()->setFocusPolicy( StrongFocus );
+	viewport()->setFocusPolicy( TQ_StrongFocus );
 	setResizePolicy( Manual );
 	setAcceptDrops( true );
 	setDragAutoScroll( false );
 
 	// set contents background to the 'base' color
-	viewport()->setPaletteBackgroundColor( palette().active().base() );
+	viewport()->setPaletteBackgroundColor( tqpalette().active().base() );
 
 	setFrameStyle( StyledPanel | Raised );
 	connect( this, TQT_SIGNAL(contentsMoving(int, int)), this, TQT_SLOT(slotRequestVisiblePixmaps(int, int)) );
@@ -184,7 +184,7 @@ void ThumbnailList::notifyViewportChanged( bool /*smoothMove*/ )
 			m_selected->setSelected( true );
 			if ( KpdfSettings::syncThumbnailsViewport() )
 			{
-				int yOffset = QMAX( visibleHeight() / 4, m_selected->height() / 2 );
+				int yOffset = TQMAX( visibleHeight() / 4, m_selected->height() / 2 );
 				ensureVisible( 0, childY( m_selected ) + m_selected->height()/2, 0, yOffset );
 			}
 			break;
@@ -199,7 +199,7 @@ void ThumbnailList::notifyPageChanged( int pageNumber, int /*changedFlags*/ )
     //if ( !(changedFlags & DocumentObserver::Pixmap) )
     //    return;
 
-    // iterate over visible items: if page(pageNumber) is one of them, repaint it
+    // iterate over visible items: if page(pageNumber) is one of them, tqrepaint it
     TQValueList<ThumbnailWidget *>::iterator vIt = m_visibleThumbnails.begin(), vEnd = m_visibleThumbnails.end();
     for ( ; vIt != vEnd; ++vIt )
         if ( (*vIt)->pageNumber() == pageNumber )
@@ -362,7 +362,7 @@ void ThumbnailList::viewportResizeEvent( TQResizeEvent * e )
 	else if ( e->size().height() <= e->oldSize().height() )
 		return;
 
-	// invalidate the bookmark overlay
+	// tqinvalidate the bookmark overlay
 	if ( m_bookmarkOverlay )
 	{
 		delete m_bookmarkOverlay;
@@ -452,8 +452,8 @@ void ThumbnailList::delayedRequestVisiblePixmaps( int delayMs )
 
 /** ThumbnailWidget implementation **/
 
-ThumbnailWidget::ThumbnailWidget( TQWidget * parent, const KPDFPage * kp, ThumbnailList * tl )
-    : TQWidget( parent, 0, WNoAutoErase ), m_tl( tl ), m_page( kp ),
+ThumbnailWidget::ThumbnailWidget( TQWidget * tqparent, const KPDFPage * kp, ThumbnailList * tl )
+    : TQWidget( tqparent, 0, WNoAutoErase ), m_tl( tl ), m_page( kp ),
     m_selected( false ), m_pixmapWidth( 10 ), m_pixmapHeight( 10 )
 {
     m_labelNumber = m_page->number() + 1;
@@ -495,10 +495,10 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
     TQPainter p( this );
 
     // draw the bottom label + highlight mark
-    TQColor fillColor = m_selected ? palette().active().highlight() : palette().active().base();
+    TQColor fillColor = m_selected ? tqpalette().active().highlight() : tqpalette().active().base();
     p.fillRect( 0, 0, width, height, fillColor );
-    p.setPen( m_selected ? palette().active().highlightedText() : palette().active().text() );
-    p.drawText( 0, m_pixmapHeight + m_margin, width, m_labelHeight, Qt::AlignCenter, TQString::number( m_labelNumber ) );
+    p.setPen( m_selected ? tqpalette().active().highlightedText() : tqpalette().active().text() );
+    p.drawText( 0, m_pixmapHeight + m_margin, width, m_labelHeight, TQt::AlignCenter, TQString::number( m_labelNumber ) );
 
     // draw page outline and pixmap
     if ( clipRect.top() < m_pixmapHeight + m_margin )
@@ -506,10 +506,10 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
         // if page is bookmarked draw a colored border
         bool isBookmarked = m_page->hasBookmark();
         // draw the inner rect
-        p.setPen( isBookmarked ? TQColor( 0xFF8000 ) : Qt::black );
+        p.setPen( isBookmarked ? TQColor( 0xFF8000 ) : TQt::black );
         p.drawRect( m_margin/2 - 1, m_margin/2 - 1, m_pixmapWidth + 2, m_pixmapHeight + 2 );
         // draw the clear rect
-        p.setPen( isBookmarked ? TQColor( 0x804000 ) : palette().active().base() );
+        p.setPen( isBookmarked ? TQColor( 0x804000 ) : tqpalette().active().base() );
         // draw the bottom and right shadow edges
         if ( !isBookmarked )
         {
@@ -518,7 +518,7 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
             right = m_margin/2 + m_pixmapWidth + 1;
             bottom = m_pixmapHeight + m_margin/2 + 1;
             top = m_margin/2 + 1;
-            p.setPen( Qt::gray );
+            p.setPen( TQt::gray );
             p.drawLine( left, bottom, right, bottom );
             p.drawLine( right, top, right, bottom );
         }
@@ -552,8 +552,8 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
 
 #define FILTERB_ID  1
 
-ThumbnailController::ThumbnailController( TQWidget * parent, ThumbnailList * list )
-    : KToolBar( parent, "ThumbsControlBar" )
+ThumbnailController::ThumbnailController( TQWidget * tqparent, ThumbnailList * list )
+    : KToolBar( tqparent, "ThumbsControlBar" )
 {
     // change toolbar appearance
     setMargin( 3 );
@@ -564,7 +564,7 @@ ThumbnailController::ThumbnailController( TQWidget * parent, ThumbnailList * lis
     // insert a togglebutton [show only bookmarked pages]
     //insertSeparator();
     insertButton( "bookmark", FILTERB_ID, TQT_SIGNAL( toggled( bool ) ),
-                  list, TQT_SLOT( slotFilterBookmarks( bool ) ),
+                  TQT_TQOBJECT(list), TQT_SLOT( slotFilterBookmarks( bool ) ),
                   true, i18n( "Show bookmarked pages only" ) );
     setToggle( FILTERB_ID );
     setButton( FILTERB_ID, KpdfSettings::filterBookmarks() );

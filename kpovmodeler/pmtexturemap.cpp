@@ -119,7 +119,7 @@ TQString PMTextureMapBase::valuesToString( ) const
       str.setNum( *it );
       ++it;
       for( ; it != m_mapValues.end( ); ++it )
-         str += TQString( " %1" ).arg( *it );
+         str += TQString( " %1" ).tqarg( *it );
    }
    return str;
 }
@@ -138,11 +138,11 @@ void PMTextureMapBase::stringToValues( const TQString& str )
    }
 }
 
-PMMetaObject* PMTextureMapBase::metaObject( ) const
+PMMetaObject* PMTextureMapBase::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureMapBase", Base::metaObject( ) );
+      s_pMetaObject = new PMMetaObject( "TextureMapBase", Base::tqmetaObject( ) );
       s_pMetaObject->addProperty( new PMValueProperty( ) );
    }
    return s_pMetaObject;
@@ -158,9 +158,9 @@ void PMTextureMapBase::cleanUp( ) const
    Base::cleanUp( );
 }
 
-PMDialogEditBase* PMTextureMapBase::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMTextureMapBase::editWidget( TQWidget* tqparent ) const
 {
-   return new PMTextureMapEdit( parent );
+   return new PMTextureMapEdit( tqparent );
 }
 
 void PMTextureMapBase::restoreMemento( PMMemento* s )
@@ -342,11 +342,11 @@ PMTextureMap::~PMTextureMap( )
 {
 }
 
-PMMetaObject* PMTextureMap::metaObject( ) const
+PMMetaObject* PMTextureMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "TextureMap", Base::tqmetaObject( ),
                                         createNewTextureMap );
    }
    return s_pMetaObject;
@@ -388,11 +388,11 @@ PMPigmentMap::~PMPigmentMap( )
 {
 }
 
-PMMetaObject* PMPigmentMap::metaObject( ) const
+PMMetaObject* PMPigmentMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "PigmentMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "PigmentMap", Base::tqmetaObject( ),
                                         createNewPigmentMap );
    }
    return s_pMetaObject;
@@ -434,11 +434,11 @@ PMColorMap::~PMColorMap( )
 {
 }
 
-PMMetaObject* PMColorMap::metaObject( ) const
+PMMetaObject* PMColorMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ColorMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "ColorMap", Base::tqmetaObject( ),
                                         createNewColorMap );
    }
    return s_pMetaObject;
@@ -480,11 +480,11 @@ PMNormalMap::~PMNormalMap( )
 {
 }
 
-PMMetaObject* PMNormalMap::metaObject( ) const
+PMMetaObject* PMNormalMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "NormalMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "NormalMap", Base::tqmetaObject( ),
                                         createNewNormalMap );
    }
    return s_pMetaObject;
@@ -526,11 +526,11 @@ PMSlopeMap::~PMSlopeMap( )
 {
 }
 
-PMMetaObject* PMSlopeMap::metaObject( ) const
+PMMetaObject* PMSlopeMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SlopeMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "SlopeMap", Base::tqmetaObject( ),
                                         createNewSlopeMap );
    }
    return s_pMetaObject;
@@ -572,11 +572,11 @@ PMDensityMap::~PMDensityMap( )
 {
 }
 
-PMMetaObject* PMDensityMap::metaObject( ) const
+PMMetaObject* PMDensityMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "DensityMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "DensityMap", Base::tqmetaObject( ),
                                         createNewDensityMap );
    }
    return s_pMetaObject;

@@ -51,34 +51,34 @@ extern "C" {
     }
 }
 
-ScanDialogFactory::ScanDialogFactory( TQObject *parent, const char *name )
-    : KScanDialogFactory( parent, name )
+ScanDialogFactory::ScanDialogFactory( TQObject *tqparent, const char *name )
+    : KScanDialogFactory( tqparent, name )
 {
     setName( "ScanDialogFactory" );
-    KGlobal::locale()->insertCatalogue( TQString::fromLatin1("libkscan") );
+    KGlobal::locale()->insertCatalogue( TQString::tqfromLatin1("libkscan") );
 }
 
-KScanDialog * ScanDialogFactory::createDialog( TQWidget *parent,
+KScanDialog * ScanDialogFactory::createDialog( TQWidget *tqparent,
 					       const char *name, bool modal)
 {
-    return new ScanDialog( parent, name, modal );
+    return new ScanDialog( tqparent, name, modal );
 }
 
 
 ///////////////////////////////////////////////////////////////////
 
 
-ScanDialog::ScanDialog( TQWidget *parent, const char *name, bool modal )
-   : KScanDialog( Tabbed, Close|Help, parent, name, modal ),
+ScanDialog::ScanDialog( TQWidget *tqparent, const char *name, bool modal )
+   : KScanDialog( Tabbed, Close|Help, tqparent, name, modal ),
      good_scan_connect(false)
 {
     TQVBox *page = addVBoxPage( i18n("&Scanning") );
 
-    splitter = new TQSplitter( Horizontal, page, "splitter" );
+    splitter = new TQSplitter(Qt::Horizontal, page, "splitter" );
     Q_CHECK_PTR( splitter );
 
     m_scanParams = 0;
-    m_device = new KScanDevice( this );
+    m_device = new KScanDevice( TQT_TQOBJECT(this) );
     connect(m_device, TQT_SIGNAL(sigNewImage(TQImage *, ImgScanInfo*)),
             this, TQT_SLOT(slotFinalImage(TQImage *, ImgScanInfo *)));
 
@@ -113,7 +113,7 @@ void ScanDialog::createOptionsTab( void )
    TQGroupBox *gb = new TQGroupBox( 1, Qt::Horizontal, i18n("Startup Options"), page, "GB_STARTUP" );
    TQLabel *label = new TQLabel( i18n( "Note: changing these options will affect the scan plugin on next start." ),
 			       gb );
-   label->setSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed ) );
+   label->tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed ) );
 
    /* Checkbox for asking for scanner on startup */
    cb_askOnStart = new TQCheckBox( i18n( "&Ask for the scan device on plugin startup"), gb );
@@ -130,7 +130,7 @@ void ScanDialog::createOptionsTab( void )
 
    /* Read settings for startup behavior */
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
+   gcfg->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
    bool skipDialog  = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    bool onlyLocal   = gcfg->readBoolEntry( STARTUP_ONLY_LOCAL, false );
 
@@ -144,7 +144,7 @@ void ScanDialog::createOptionsTab( void )
 
    TQWidget *spaceEater = new TQWidget( page );
    Q_CHECK_PTR( spaceEater );
-   spaceEater->setSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding) );
+   spaceEater->tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding) );
 
 }
 
@@ -154,7 +154,7 @@ void ScanDialog::slotNetworkToggle( bool state)
 
    kdDebug(29000) << "slotNetworkToggle: Writing state " << writestate << endl;
    KConfig *c = KGlobal::config();
-   c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
+   c->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
    c->writeEntry( STARTUP_ONLY_LOCAL, writestate, true, true );
 }
 
@@ -164,7 +164,7 @@ void ScanDialog::slotAskOnStartToggle(bool state)
 
    kdDebug(29000) << "slotAskOnStartToggle: Writing state " << writestate << endl;
    KConfig *c = KGlobal::config();
-   c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
+   c->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
    c->writeEntry( STARTUP_SKIP_ASK, writestate, true, true );
 }
 
@@ -176,7 +176,7 @@ void ScanDialog::slotScanStart( )
       KLed *led = m_scanParams->operationLED();
       if( led )
       {
-	 led->setColor( Qt::red );
+	 led->setColor( TQt::red );
 	 led->setState( KLed::On );
       }
 
@@ -190,7 +190,7 @@ void ScanDialog::slotAcquireStart( )
       KLed *led = m_scanParams->operationLED();
       if( led )
       {
-	 led->setColor( Qt::green );
+	 led->setColor( TQt::green );
       }
 
    }
@@ -205,7 +205,7 @@ void ScanDialog::slotScanFinished( KScanStat status )
       KLed *led = m_scanParams->operationLED();
       if( led )
       {
-	 led->setColor( Qt::green );
+	 led->setColor( TQt::green );
 	 led->setState( KLed::Off );
       }
 
@@ -314,7 +314,7 @@ bool ScanDialog::setup()
 
        kfg->setGroup( GROUP_STARTUP );
        /* Since this is a vertical splitter, only the width is important */
-       TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
+       TQString key = TQString::tqfromLatin1( SCANDIA_SPLITTER_SIZES ).tqarg( r.width());
        kdDebug(29000) << "Read Splitter-Sizes " << key  << endl;
        splitter->setSizes( kfg->readIntListEntry( key ));
     }
@@ -336,7 +336,7 @@ void ScanDialog::slotClose()
 
 	 kfg->setGroup( GROUP_STARTUP );
 	 /* Since this is a vertical splitter, only the width is important */
-	 TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
+	 TQString key = TQString::tqfromLatin1( SCANDIA_SPLITTER_SIZES ).tqarg( r.width());
 	 kfg->writeEntry( key, splitter->sizes(), true, true);
       }
    }

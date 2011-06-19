@@ -34,12 +34,13 @@ class PMDensity;
 class PMDensityEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMDensityEdit with parent and name
+    * Creates a PMDensityEdit with tqparent and name
     */
-   PMDensityEdit( TQWidget* parent, const char* name = 0 );
+   PMDensityEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

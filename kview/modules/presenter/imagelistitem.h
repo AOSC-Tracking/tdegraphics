@@ -30,7 +30,7 @@ class TQImage;
 class ImageListItem : public KListViewItem
 {
 	public:
-		ImageListItem( KListView * parent, const KURL & url );
+		ImageListItem( KListView * tqparent, const KURL & url );
 		~ImageListItem();
 
 		const TQImage * image() const;

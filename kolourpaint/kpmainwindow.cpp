@@ -64,7 +64,7 @@
 
 
 kpMainWindow::kpMainWindow ()
-    : KMainWindow (0/*parent*/, "mainWindow"),
+    : KMainWindow (0/*tqparent*/, "mainWindow"),
       m_isFullyConstructed (false)
 {
     init ();
@@ -74,7 +74,7 @@ kpMainWindow::kpMainWindow ()
 }
 
 kpMainWindow::kpMainWindow (const KURL &url)
-    : KMainWindow (0/*parent*/, "mainWindow"),
+    : KMainWindow (0/*tqparent*/, "mainWindow"),
       m_isFullyConstructed (false)
 {
     init ();
@@ -84,7 +84,7 @@ kpMainWindow::kpMainWindow (const KURL &url)
 }
 
 kpMainWindow::kpMainWindow (kpDocument *newDoc)
-    : KMainWindow (0/*parent*/, "mainWindow"),
+    : KMainWindow (0/*tqparent*/, "mainWindow"),
       m_isFullyConstructed (false)
 {
     init ();
@@ -157,7 +157,7 @@ void kpMainWindow::readThumbnailSettings ()
 
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\t\tThumbnail Settings: shown=" << m_configThumbnailShown
-               << " geometry=" << m_configThumbnailGeometry
+               << " tqgeometry=" << m_configThumbnailGeometry
                << " zoomed=" << m_configZoomedThumbnail
                << " showRectangle=" << d->m_configThumbnailShowRectangle
                << endl;
@@ -658,11 +658,11 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
 
 
     if (!m_lastCopyToURL.isEmpty ())
-        m_lastCopyToURL.setFileName (TQString::null);
+        m_lastCopyToURL.setFileName (TQString());
     m_copyToFirstTime = true;
 
     if (!m_lastExportURL.isEmpty ())
-        m_lastExportURL.setFileName (TQString::null);
+        m_lastExportURL.setFileName (TQString());
     m_exportFirstTime = true;
 
 
@@ -731,7 +731,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
         connect (m_document, TQT_SIGNAL (selectionIsTextChanged (bool)),
                  this, TQT_SLOT (slotImageMenuUpdateDueToSelection ()));
 
-        // Status bar
+        // tqStatus bar
         connect (m_document, TQT_SIGNAL (documentOpened ()),
                  this, TQT_SLOT (recalculateStatusBar ()));
 
@@ -808,7 +808,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
             #endif
                 slotCreateThumbnail ();
             }
-            // this' geometry is weird ATM
+            // this' tqgeometry is weird ATM
             else
             {
             #if DEBUG_KP_MAIN_WINDOW
@@ -855,7 +855,7 @@ bool kpMainWindow::queryClose ()
                      i18n ("The document \"%1\" has been modified.\n"
                            "Do you want to save it?")
                          .arg (m_document->prettyFilename ()),
-                    TQString::null/*caption*/,
+                    TQString()/*caption*/,
                     KStdGuiItem::save (), KStdGuiItem::discard ());
 
     switch (result)
@@ -870,7 +870,7 @@ bool kpMainWindow::queryClose ()
 }
 
 
-// private virtual [base QWidget]
+// private virtual [base TQWidget]
 void kpMainWindow::dragEnterEvent (TQDragEnterEvent *e)
 {
     e->accept (kpSelectionDrag::canDecode (e) ||
@@ -878,7 +878,7 @@ void kpMainWindow::dragEnterEvent (TQDragEnterEvent *e)
                TQTextDrag::canDecode (e));
 }
 
-// private virtual [base QWidget]
+// private virtual [base TQWidget]
 void kpMainWindow::dropEvent (TQDropEvent *e)
 {
 #if DEBUG_KP_MAIN_WINDOW
@@ -939,7 +939,7 @@ void kpMainWindow::dropEvent (TQDropEvent *e)
             #endif
                 if (m_thumbnailView &&
                     kpWidgetMapper::toGlobal (m_thumbnailView, m_thumbnailView->rect ())
-                        .contains (globalPos))
+                        .tqcontains (globalPos))
                 {
                     // TODO: Code will never get executed.
                     //       Thumbnail doesn't accept drops.
@@ -947,13 +947,13 @@ void kpMainWindow::dropEvent (TQDropEvent *e)
                 }
                 else if (m_mainView &&
                          kpWidgetMapper::toGlobal (m_mainView, m_mainView->rect ())
-                             .contains (globalPos) &&
+                             .tqcontains (globalPos) &&
                          m_scrollView &&
                          kpWidgetMapper::toGlobal (m_scrollView,
                              TQRect (0, 0,
                                     m_scrollView->visibleWidth (),
                                     m_scrollView->visibleHeight ()))
-                             .contains (globalPos))
+                             .tqcontains (globalPos))
                 {
                     view = m_mainView;
                 }
@@ -967,7 +967,7 @@ void kpMainWindow::dropEvent (TQDropEvent *e)
 
             // viewUnderCursor() is hacky and can return a view when we aren't
             // over one thanks to drags.
-            if (m_document && m_document->rect ().contains (docPoint))
+            if (m_document && m_document->rect ().tqcontains (docPoint))
             {
                 selTopLeft = docPoint;
 
@@ -1021,7 +1021,7 @@ void kpMainWindow::slotScrollViewAfterScroll ()
 }
 
 
-// private virtual [base QWidget]
+// private virtual [base TQWidget]
 void kpMainWindow::moveEvent (TQMoveEvent * /*e*/)
 {
     if (m_thumbnail)
@@ -1045,7 +1045,7 @@ void kpMainWindow::slotUpdateCaption ()
     }
     else
     {
-        setCaption (TQString::null, false);
+        setCaption (TQString(), false);
     }
 }
 

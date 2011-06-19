@@ -34,14 +34,15 @@ class TQColor;
 /**
  * Edit widget for @ref PMColor
  */
-class PMColorEdit : public QWidget
+class PMColorEdit : public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Creates an edit widget for rgbft colors.
     */
-   PMColorEdit( bool filterAndTransmit, TQWidget* parent, const char* name = 0 );
+   PMColorEdit( bool filterAndTransmit, TQWidget* tqparent, const char* name = 0 );
    
    /**
     * Sets the displayed color

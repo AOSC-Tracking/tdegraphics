@@ -40,9 +40,9 @@ PMLibraryObject::PMLibraryObject( )
    m_preview = NULL;
    m_objects = NULL;
    m_data = NULL;
-   m_name = TQString::null;
-   m_description = TQString::null;
-   m_keywords = TQString::null;
+   m_name = TQString();
+   m_description = TQString();
+   m_keywords = TQString();
 }
 
 PMLibraryObject::PMLibraryObject( KURL u )

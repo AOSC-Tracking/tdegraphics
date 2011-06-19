@@ -177,10 +177,10 @@ void PMBicubicPatch::serialize( TQDomElement& e, TQDomDocument& doc ) const
    e.setAttribute( "uvEnabled", m_uvEnabled );
 
    for( i = 0; i < 16; i++ )
-      e.setAttribute( TQString( "cp%1" ).arg( i ), m_point[i].serializeXML( ) );
+      e.setAttribute( TQString( "cp%1" ).tqarg( i ), m_point[i].serializeXML( ) );
 
    for( i = 0; i < 4; ++i )
-      e.setAttribute( TQString( "uv%1" ).arg( i ), m_uvVectors[i].serializeXML( ) );
+      e.setAttribute( TQString( "uv%1" ).tqarg( i ), m_uvVectors[i].serializeXML( ) );
 
    Base::serialize( e, doc );
 }
@@ -198,7 +198,7 @@ void PMBicubicPatch::readAttributes( const PMXMLHelper& h )
 
    for( v = 0; v < 4; v++ )
       for( u = 0; u < 4; u++ )
-         m_point[u+v*4] = h.vectorAttribute( TQString( "cp%1" ).arg( u+v*4 ),
+         m_point[u+v*4] = h.vectorAttribute( TQString( "cp%1" ).tqarg( u+v*4 ),
                                       PMVector( o + s * u, 0, o + s * v ) );
 
    m_uvVectors[0] = h.vectorAttribute( "uv0", c_defaultUVVector0 );
@@ -209,11 +209,11 @@ void PMBicubicPatch::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBicubicPatch::metaObject( ) const
+PMMetaObject* PMBicubicPatch::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BicubicPatch", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BicubicPatch", Base::tqmetaObject( ),
                                         createNewBicubicPatch );
       s_pMetaObject->addProperty(
          new PMBicubicPatchProperty( "patchType", &PMBicubicPatch::setPatchType,
@@ -365,9 +365,9 @@ PMVector PMBicubicPatch::uvVector( int i ) const
    return PMVector( 0.0, 0.0 );
 }
 
-PMDialogEditBase* PMBicubicPatch::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMBicubicPatch::editWidget( TQWidget* tqparent ) const
 {
-   return new PMBicubicPatchEdit( parent );
+   return new PMBicubicPatchEdit( tqparent );
 }
 
 void PMBicubicPatch::restoreMemento( PMMemento* s )
@@ -527,7 +527,7 @@ void PMBicubicPatch::controlPoints( PMControlPointList& list )
    for( v = 0; v < 4; v++ )
       for( u = 0; u < 4; u++ )
          list.append( new PM3DControlPoint( m_point[u+v*4], u+v*4,
-                                            i18n( "Point (%1, %2)" ).arg( u ).arg( v ) ) );
+                                            i18n( "Point (%1, %2)" ).tqarg( u ).tqarg( v ) ) );
 }
 
 void PMBicubicPatch::controlPointsChanged( PMControlPointList& list )

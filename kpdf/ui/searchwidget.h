@@ -20,7 +20,7 @@ class m_inputDelayTimer;
 #define SW_SEARCH_ID 3
 
 /**
- * @short A widget for find-as-you-type search. Outputs to the Document.
+ * @short A widget for tqfind-as-you-type search. Outputs to the Document.
  *
  * This widget accepts keyboard input and performs a call to findTextAll(..)
  * in the KPDFDocument class when there are 3 or more chars to search for.
@@ -30,8 +30,9 @@ class m_inputDelayTimer;
 class SearchWidget : public KToolBar
 {
     Q_OBJECT
+  TQ_OBJECT
     public:
-        SearchWidget( TQWidget *parent, KPDFDocument *document );
+        SearchWidget( TQWidget *tqparent, KPDFDocument *document );
         void clearText();
 
     private:

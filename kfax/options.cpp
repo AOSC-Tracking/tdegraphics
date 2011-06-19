@@ -1,7 +1,7 @@
 /*
     $Id$
 
-    Requires the Qt widget libraries, available at no cost at
+    Requires the TQt widget libraries, available at no cost at
     http://www.troll.no
 
     Copyright (C) 1996 Bernd Johannes Wuebben
@@ -48,8 +48,8 @@
 #include "kfax.h"
 #include "options.h"
 
-OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
-    : KDialogBase( parent, name, true, i18n("Configure"), Ok|Cancel)
+OptionsDialog::OptionsDialog( TQWidget *tqparent, const char *name)
+    : KDialogBase( tqparent, name, true, i18n("Configure"), Ok|Cancel)
 {
   TQWidget *mainWidget = new TQWidget(this);
   setMainWidget(mainWidget);
@@ -60,28 +60,28 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   bg->setColumnLayout( 0, Qt::Horizontal );
   mainLayout->addWidget( bg );
 
-  TQVBoxLayout *vbl = new TQVBoxLayout(bg->layout());
+  TQVBoxLayout *vbl = new TQVBoxLayout(bg->tqlayout());
 
   TQHBoxLayout *hbl1 = new TQHBoxLayout();
 
   vbl->addLayout( hbl1 );
 
   displaylabel = new TQLabel(i18n("Display options:"), bg,"displaylabel");
-  displaylabel->setFixedSize( displaylabel->sizeHint() );
+  displaylabel->setFixedSize( displaylabel->tqsizeHint() );
   hbl1->addWidget( displaylabel );
 
   landscape = new TQCheckBox(i18n("Landscape"), bg,"Landscape");
-  landscape->setFixedSize( landscape->sizeHint() );
+  landscape->setFixedSize( landscape->tqsizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( landscape );
 
   flip = new TQCheckBox(i18n("Upside down"), bg,"upsidedown");
-  flip->setFixedSize( flip->sizeHint() );
+  flip->setFixedSize( flip->tqsizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( flip );
 
   invert = new TQCheckBox(i18n("Invert"), bg,"invert");
-  invert->setFixedSize( invert->sizeHint() );
+  invert->setFixedSize( invert->tqsizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( invert );
 
@@ -139,7 +139,7 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   rawgroup->setFrameStyle(TQFrame::NoFrame);
 
   rawlabel = new TQLabel(i18n("Raw fax format:"),rawgroup,"rawlabel");
-  rawlabel->setFixedSize( rawlabel->sizeHint() );
+  rawlabel->setFixedSize( rawlabel->tqsizeHint() );
   hbl4->addWidget( rawlabel );
 
   g3 = new TQRadioButton("G3",rawgroup,"g3");

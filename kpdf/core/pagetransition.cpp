@@ -15,7 +15,7 @@
 KPDFPageTransition::KPDFPageTransition( Type type )
   : m_type( type ),
     m_duration( 1 ),
-    m_alignment( Horizontal ),
+    m_tqalignment(Horizontal ),
     m_direction( Inward ),
     m_angle( 0 ),
     m_scale( 1.0 ),

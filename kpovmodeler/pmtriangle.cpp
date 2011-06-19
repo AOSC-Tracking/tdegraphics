@@ -228,11 +228,11 @@ void PMTriangle::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMTriangle::metaObject( ) const
+PMMetaObject* PMTriangle::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Triangle", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Triangle", Base::tqmetaObject( ),
                                         createNewTriangle );
       s_pMetaObject->addProperty(
          new PMTriangleProperty( "smooth", &PMTriangle::setSmoothTriangle,
@@ -345,9 +345,9 @@ void PMTriangle::enableUV( bool yes )
    }
 }
 
-PMDialogEditBase* PMTriangle::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMTriangle::editWidget( TQWidget* tqparent ) const
 {
-   return new PMTriangleEdit( parent );
+   return new PMTriangleEdit( tqparent );
 }
 
 void PMTriangle::restoreMemento( PMMemento* s )

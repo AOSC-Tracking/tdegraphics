@@ -81,12 +81,12 @@ bool KScanOptSet::backupOption( const KScanOption& opt )
 
   /** Allocate a new option and store it **/
   const TQCString& optName = opt.getName();
-  if( !optName )
+  if( optName.isNull() )
     retval = false;
 
   if( retval )
   {
-     KScanOption *newopt = find( optName );
+     KScanOption *newopt = tqfind( optName );
 
      if( newopt )
      {

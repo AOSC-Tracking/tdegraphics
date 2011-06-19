@@ -66,7 +66,7 @@ void Shell::init()
   {
     // now that the Part is loaded, we cast it to a Part to get
     // our hands on it
-    m_part = (KParts::ReadOnlyPart*) factory->createPart(this, "kpdf_part", this, 0, "KParts::ReadOnlyPart");
+    m_part = (KParts::ReadOnlyPart*) factory->createPart(this, "kpdf_part", TQT_TQOBJECT(this), 0, "KParts::ReadOnlyPart");
     if (m_part)
     {
       // then, setup our actions
@@ -146,19 +146,19 @@ void Shell::writeSettings()
 
 void Shell::setupActions()
 {
-  KAction * openAction = KStdAction::open(this, TQT_SLOT(fileOpen()), actionCollection());
-  m_recent = KStdAction::openRecent( this, TQT_SLOT( openURL( const KURL& ) ), actionCollection() );
+  KAction * openAction = KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(fileOpen()), actionCollection());
+  m_recent = KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( openURL( const KURL& ) ), actionCollection() );
   connect( m_recent, TQT_SIGNAL( activated() ), openAction, TQT_SLOT( activate() ) );
   m_recent->setWhatsThis( i18n( "<b>Click</b> to open a file or <b>Click and hold</b> to select a recent file" ) );
   m_printAction = KStdAction::print( m_part, TQT_SLOT( slotPrint() ), actionCollection() );
   m_printAction->setEnabled( false );
-  KStdAction::quit(this, TQT_SLOT(slotQuit()), actionCollection());
+  KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), actionCollection());
 
   setStandardToolBarMenuEnabled(true);
 
-  m_showMenuBarAction = KStdAction::showMenubar( this, TQT_SLOT( slotShowMenubar() ), actionCollection());
-  KStdAction::configureToolbars(this, TQT_SLOT(optionsConfigureToolbars()), actionCollection());
-  m_fullScreenAction = KStdAction::fullScreen( this, TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
+  m_showMenuBarAction = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotShowMenubar() ), actionCollection());
+  KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(optionsConfigureToolbars()), actionCollection());
+  m_fullScreenAction = KStdAction::fullScreen( TQT_TQOBJECT(this), TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 }
 
 void Shell::saveProperties(KConfig* config)
@@ -187,7 +187,7 @@ Shell::fileOpen()
   // this slot is called whenever the File->Open menu is selected,
   // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
   // button is clicked
-    KURL url = KFileDialog::getOpenURL( TQString::null, "application/pdf application/postscript" );//getOpenFileName();
+    KURL url = KFileDialog::getOpenURL( TQString(), "application/pdf application/postscript" );//getOpenFileName();
 
   if (!url.isEmpty())
     openURL(url);

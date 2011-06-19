@@ -93,9 +93,10 @@ typedef TQPtrListIterator<PMRenderTask> PMRenderTaskListIterator;
 /**
  * Class that controls the background rendering
  */
-class PMRenderManager : public QObject
+class PMRenderManager : public TQObject
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Returns a pointer to the render manager

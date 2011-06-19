@@ -88,6 +88,7 @@ class kpZoomedView;
 class kpMainWindow : public KMainWindow
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     // Opens a new window with a blank document.
@@ -639,7 +640,7 @@ private slots:
 
 
     /*
-     * Status Bar
+     * tqStatus Bar
      */
 
 private:
@@ -665,7 +666,7 @@ private:
     void createStatusBar ();
 
 private slots:
-    void setStatusBarMessage (const TQString &message = TQString::null);
+    void setStatusBarMessage (const TQString &message = TQString());
     void setStatusBarShapePoints (const TQPoint &startPoint = KP_INVALID_POINT,
                                   const TQPoint &endPoint = KP_INVALID_POINT);
     void setStatusBarShapeSize (const TQSize &size = KP_INVALID_SIZE);

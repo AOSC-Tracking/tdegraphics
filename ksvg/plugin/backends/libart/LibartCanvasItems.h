@@ -73,7 +73,7 @@ namespace KSVG
 		LibartPaintServer() : CanvasPaintServer() {}
 		virtual ~LibartPaintServer() {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox) = 0;
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox) = 0;
 
 		_ArtRender *createRenderer(TQRect rect, KSVGCanvas *c);
 	};
@@ -99,7 +99,7 @@ namespace KSVG
 	public:
 		LibartLinearGradient(SVGLinearGradientElementImpl *linear) : LibartGradient(linear), m_linear(linear) {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox);
 
 	protected:
 		SVGLinearGradientElementImpl *m_linear;
@@ -110,7 +110,7 @@ namespace KSVG
 	public:
 		LibartRadialGradient(SVGRadialGradientElementImpl *radial) : LibartGradient(radial), m_radial(radial) {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox);
 
 	protected:
 		SVGRadialGradientElementImpl *m_radial;
@@ -125,7 +125,7 @@ namespace KSVG
 		virtual void finalizePaintServer();
 		virtual void reference(const TQString &href);
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox);
 
 	protected:
 		SVGPatternElementImpl *m_pattern;
@@ -138,12 +138,12 @@ namespace KSVG
 		virtual ~LibartPainter() {}
 		
 		void update(SVGStylableImpl *style);
-		void draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *shape);
+		void draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *tqshape);
 
 		virtual float opacity(SVGStylableImpl *style) const = 0;
 		virtual unsigned short paintType(SVGStylableImpl *style) const = 0;
 		virtual TQString paintUri(SVGStylableImpl *style) const = 0;
-		virtual QRgb color(SVGStylableImpl *style) const = 0;
+		virtual TQRgb color(SVGStylableImpl *style) const = 0;
 
 		protected:
 			art_u32 m_color;
@@ -157,7 +157,7 @@ namespace KSVG
 		float opacity(SVGStylableImpl *style) const { return style->getFillOpacity() * style->getOpacity(); }
 		unsigned short paintType(SVGStylableImpl *style) const { return style->getFillColor()->paintType(); }
 		TQString paintUri(SVGStylableImpl *style) const { return style->getFillColor()->uri().string(); }
-		QRgb color(SVGStylableImpl *style) const { return style->getFillColor()->rgbColor().color(); }
+		TQRgb color(SVGStylableImpl *style) const { return style->getFillColor()->rgbColor().color(); }
 	};
 
 	class LibartStrokePainter : public LibartPainter
@@ -168,7 +168,7 @@ namespace KSVG
 		float opacity(SVGStylableImpl *style) const { return style->getStrokeOpacity() * style->getOpacity(); }
 		unsigned short paintType(SVGStylableImpl *style) const { return style->getStrokeColor()->paintType(); }
 		TQString paintUri(SVGStylableImpl *style) const { return style->getStrokeColor()->uri().string(); }
-		QRgb color(SVGStylableImpl *style) const { return style->getStrokeColor()->rgbColor().color(); }
+		TQRgb color(SVGStylableImpl *style) const { return style->getStrokeColor()->rgbColor().color(); }
 	};
 
 	class LibartClipItem
@@ -195,8 +195,8 @@ namespace KSVG
 		virtual bool fillContains(const TQPoint &p);
 		virtual bool strokeContains(const TQPoint &p);
 		virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0);
-		void draw(SVGShapeImpl *shape);
-		bool isVisible(SVGShapeImpl *shape);
+		void draw(SVGShapeImpl *tqshape);
+		bool isVisible(SVGShapeImpl *tqshape);
 
 		virtual void init();
 		virtual void init(const SVGMatrixImpl *);

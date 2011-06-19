@@ -190,7 +190,7 @@ ArrayRep::resize(int lo, int hi)
   init1(ndata, hibound+1-nminlo, hi-nminlo);
   destroy(data, lobound-minlo, hibound-minlo);
 
-  // free and replace
+  // free and tqreplace
   void *tmp=data;
   data = ndata;
   ndata=tmp;

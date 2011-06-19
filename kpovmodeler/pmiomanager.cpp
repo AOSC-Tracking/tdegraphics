@@ -47,9 +47,9 @@ void PMIOManager::addFormat( PMIOFormat* format )
 {
    if( !format )
       return;
-   if( !m_formats.containsRef( format ) )
+   if( !m_formats.tqcontainsRef( format ) )
    {
-      if( !m_dict.find( format->name( ) ) )
+      if( !m_dict.tqfind( format->name( ) ) )
       {
          m_formats.append( format );
          m_dict.insert( format->name( ), format );
@@ -73,7 +73,7 @@ void PMIOManager::removeFormat( const TQString& name )
 
 PMIOFormat* PMIOManager::format( const TQString& name ) const
 {
-   return m_dict.find( name );
+   return m_dict.tqfind( name );
 }
 
 PMIOFormat* PMIOManager::formatForMimeType( const TQString& mime ) const

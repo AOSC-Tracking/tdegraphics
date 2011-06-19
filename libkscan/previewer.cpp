@@ -106,8 +106,8 @@ public:
     TQMemArray<long> m_widthSum;
 };
 
-Previewer::Previewer(TQWidget *parent, const char *name )
-    : TQWidget(parent,name)
+Previewer::Previewer(TQWidget *tqparent, const char *name )
+    : TQWidget(tqparent,name)
 {
     d = new PreviewerPrivate();
 
@@ -119,10 +119,10 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     htop->addWidget( frame );
 
     TQVBoxLayout *top = new TQVBoxLayout( frame, KDialog::marginHint(), KDialog::spacingHint() );
-    layout = new TQHBoxLayout( KDialog::spacingHint() );
-    top->addLayout( layout, 9 );
+    tqlayout = new TQHBoxLayout( KDialog::spacingHint() );
+    top->addLayout( tqlayout, 9 );
     TQVBoxLayout *left = new TQVBoxLayout( KDialog::spacingHint() );
-    layout->addLayout( left, 2 );
+    tqlayout->addLayout( left, 2 );
 
     /* Load autoselection values from Config file */
     KConfig *cfg = KGlobal::config();
@@ -141,17 +141,17 @@ Previewer::Previewer(TQWidget *parent, const char *name )
 
     img_canvas->setDefaultScaleKind( ImageCanvas::DYNAMIC );
     img_canvas->enableContextMenu(true);
-    img_canvas->repaint();
-    layout->addWidget( img_canvas, 6 );
+    img_canvas->tqrepaint();
+    tqlayout->addWidget( img_canvas, 6 );
 
     /* Actions for the previewer zoom */
     KAction *act;
     act =  new KAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
-		       this, TQT_SLOT( slScaleToWidth()), this, "preview_scaletowidth" );
+		       TQT_TQOBJECT(this), TQT_SLOT( slScaleToWidth()), TQT_TQOBJECT(this), "preview_scaletowidth" );
     act->plug( img_canvas->contextMenu());
 
     act = new KAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
-		      this, TQT_SLOT( slScaleToHeight()), this, "preview_scaletoheight" );
+		      TQT_TQOBJECT(this), TQT_SLOT( slScaleToHeight()), TQT_TQOBJECT(this), "preview_scaletoheight" );
     act->plug( img_canvas->contextMenu());
 
     /*Signals: Control the custom-field and show size of selection */
@@ -200,7 +200,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
 
 
     /** Autoselection Box **/
-    d->m_autoSelGroup = new TQGroupBox( 1, Horizontal, i18n("Auto-Selection"), frame);
+    d->m_autoSelGroup = new TQGroupBox( 1,Qt::Horizontal, i18n("Auto-Selection"), frame);
 
     TQHBox *hbox       = new TQHBox(d->m_autoSelGroup);
     d->m_cbAutoSel    = new TQCheckBox( i18n("Active on"), hbox );
@@ -246,7 +246,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     left->addWidget(d->m_autoSelGroup);
 
     /* Labels for the dimension */
-    TQGroupBox *gbox = new TQGroupBox( 1, Horizontal, i18n("Selection"), frame, "GROUPBOX" );
+    TQGroupBox *gbox = new TQGroupBox( 1,Qt::Horizontal, i18n("Selection"), frame, "GROUPBOX" );
 
     TQLabel *l2 = new TQLabel( i18n("width - mm" ), gbox );
     TQLabel *l3 = new TQLabel( i18n("height - mm" ), gbox );
@@ -477,11 +477,11 @@ void Previewer::slNewDimen(TQRect r)
         selectionHeightMm = (overallHeight / 1000 * r.height());
 
    TQString s;
-   s = i18n("width %1 mm").arg( int(selectionWidthMm));
+   s = i18n("width %1 mm").tqarg( int(selectionWidthMm));
    emit(setScanWidth(s));
 
    kdDebug(29000) << "Setting new Dimension " << s << endl;
-   s = i18n("height %1 mm").arg(int(selectionHeightMm));
+   s = i18n("height %1 mm").tqarg(int(selectionHeightMm));
    emit(setScanHeight(s));
 
    recalcFileSize( );
@@ -727,7 +727,7 @@ void  Previewer::findSelection( )
 
             for( x = 0; x < iWidth; x++ )
             {
-                int gray  = qGray( img->pixel( x, line ));
+                int gray  = tqGray( img->pixel( x, line ));
                 // kdDebug(29000) << "Gray-Value at line " << gray << endl;
                 Q_ASSERT( line < iHeight );
                 Q_ASSERT( x < iWidth );

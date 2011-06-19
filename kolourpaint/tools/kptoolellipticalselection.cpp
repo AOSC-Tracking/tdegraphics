@@ -35,7 +35,7 @@ kpToolEllipticalSelection::kpToolEllipticalSelection (kpMainWindow *mainWindow)
     : kpToolSelection (Ellipse,
                        i18n ("Selection (Elliptical)"),
                        i18n ("Makes an elliptical or circular selection"),
-                       Qt::Key_I,
+                       TQt::Key_I,
                        mainWindow, "tool_elliptical_selection")
 {
 }

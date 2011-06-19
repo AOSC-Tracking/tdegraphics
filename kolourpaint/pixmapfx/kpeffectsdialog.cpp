@@ -59,14 +59,14 @@ int kpEffectsDialog::s_lastHeight = 620;
 
 
 kpEffectsDialog::kpEffectsDialog (bool actOnSelection,
-                                  kpMainWindow *parent,
+                                  kpMainWindow *tqparent,
                                   const char *name)
     : kpToolPreviewDialog (kpToolPreviewDialog::Preview,
                            true/*reserve top row*/,
-                           TQString::null/*caption*/,
-                           TQString::null/*afterActionText (no Dimensions Group Box)*/,
+                           TQString()/*caption*/,
+                           TQString()/*afterActionText (no Dimensions Group Box)*/,
                            actOnSelection,
-                           parent,
+                           tqparent,
                            name),
       m_delayedUpdateTimer (new TQTimer (this)),
       m_effectsComboBox (0),
@@ -209,7 +209,7 @@ void kpEffectsDialog::selectEffect (int which)
     m_colorEffectWidget = 0;
 
 
-    m_settingsGroupBox->setCaption (TQString::null);
+    m_settingsGroupBox->setCaption (TQString());
 
 #define CREATE_EFFECT_WIDGET(name)                        \
     m_colorEffectWidget = new name (m_actOnSelection,     \
@@ -255,23 +255,23 @@ void kpEffectsDialog::selectEffect (int which)
         // Don't resize the preview when showing the widget:
         // TODO: actually work
 
-        TQSize previewGroupBoxMinSize = m_previewGroupBox->minimumSize ();
-        TQSize previewGroupBoxMaxSize = m_previewGroupBox->maximumSize ();
-        TQLayout::ResizeMode previewGroupBoxResizeMode =
-            m_previewGroupBox->layout () ?
-                m_previewGroupBox->layout ()->resizeMode () :
+        TQSize previewGroupBoxMinSize = m_previewGroupBox->tqminimumSize ();
+        TQSize previewGroupBoxMaxSize = m_previewGroupBox->tqmaximumSize ();
+        TQLayout::ResizeMode previewGroupBoxResizeMode = 
+            m_previewGroupBox->tqlayout () ?
+                m_previewGroupBox->tqlayout ()->tqresizeMode () :
                 TQLayout::Auto;
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tpreviewGroupBox: minSize=" << previewGroupBoxMinSize
                    << " maxSize=" << previewGroupBoxMaxSize
                    << " size=" << m_previewGroupBox->size ()
-                   << " layout=" << m_previewGroupBox->layout ()
+                   << " tqlayout=" << m_previewGroupBox->tqlayout ()
                    << " resizeMode=" << previewGroupBoxResizeMode
                    << endl;
     #endif
 
-        if (m_previewGroupBox->layout ())
-            m_previewGroupBox->layout ()->setResizeMode (TQLayout::FreeResize);
+        if (m_previewGroupBox->tqlayout ())
+            m_previewGroupBox->tqlayout ()->setResizeMode (TQLayout::FreeResize);
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter set resizeMode, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;
@@ -300,8 +300,8 @@ void kpEffectsDialog::selectEffect (int which)
         kdDebug () << "\tafter set fixedSize, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;
     #endif
-        if (m_previewGroupBox->layout ())
-            m_previewGroupBox->layout ()->setResizeMode (previewGroupBoxResizeMode);
+        if (m_previewGroupBox->tqlayout ())
+            m_previewGroupBox->tqlayout ()->setResizeMode (previewGroupBoxResizeMode);
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter restore resizeMode, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;

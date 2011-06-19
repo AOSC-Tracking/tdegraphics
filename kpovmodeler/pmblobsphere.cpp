@@ -72,11 +72,11 @@ TQString PMBlobSphere::description( ) const
    return i18n( "blob sphere" );
 }
 
-PMMetaObject* PMBlobSphere::metaObject( ) const
+PMMetaObject* PMBlobSphere::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BlobSphere", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BlobSphere", Base::tqmetaObject( ),
                                         createNewBlobSphere );
       s_pMetaObject->addProperty(
          new PMBlobSphereProperty( "center", &PMBlobSphere::setCentre,
@@ -107,9 +107,9 @@ void PMBlobSphere::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMBlobSphere::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMBlobSphere::editWidget( TQWidget* tqparent ) const
 {
-   return new PMBlobSphereEdit( parent );
+   return new PMBlobSphereEdit( tqparent );
 }
 
 void PMBlobSphere::restoreMemento( PMMemento* s )

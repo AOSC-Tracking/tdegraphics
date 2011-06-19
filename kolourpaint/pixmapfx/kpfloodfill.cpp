@@ -95,22 +95,22 @@ bool kpFloodFill::fill ()
     // not trying to do a NOP fill
     if (m_boundingRect.isValid ())
     {
-        TQApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (TQt::waitCursor);
 
-        TQPainter painter, maskPainter;
-        TQBitmap maskBitmap;
+        TQPainter painter, tqmaskPainter;
+        TQBitmap tqmaskBitmap;
 
-        if (m_pixmapPtr->mask () || m_color.isTransparent ())
+        if (m_pixmapPtr->tqmask () || m_color.isTransparent ())
         {
-            maskBitmap = kpPixmapFX::getNonNullMask (*m_pixmapPtr);
-            maskPainter.begin (&maskBitmap);
-            maskPainter.setPen (m_color.maskColor ());
+            tqmaskBitmap = kpPixmapFX::getNonNullMask (*m_pixmapPtr);
+            tqmaskPainter.begin (&tqmaskBitmap);
+            tqmaskPainter.setPen (m_color.tqmaskColor ());
         }
 
         if (m_color.isOpaque ())
         {
             painter.begin (m_pixmapPtr);
-            painter.setPen (m_color.toQColor ());
+            painter.setPen (m_color.toTQColor ());
         }
 
         const TQValueList <FillLine>::ConstIterator fillLinesEnd = m_fillLines.end ();
@@ -124,18 +124,18 @@ bool kpFloodFill::fill ()
             if (painter.isActive ())
                 painter.drawLine (p1, p2);
 
-            if (maskPainter.isActive ())
-                maskPainter.drawLine (p1, p2);
+            if (tqmaskPainter.isActive ())
+                tqmaskPainter.drawLine (p1, p2);
         }
 
         if (painter.isActive ())
             painter.end ();
 
-        if (maskPainter.isActive ())
-            maskPainter.end ();
+        if (tqmaskPainter.isActive ())
+            tqmaskPainter.end ();
 
-        if (!maskBitmap.isNull ())
-            m_pixmapPtr->setMask (maskBitmap);
+        if (!tqmaskBitmap.isNull ())
+            m_pixmapPtr->setMask (tqmaskBitmap);
 
         TQApplication::restoreOverrideCursor ();
     }
@@ -196,7 +196,7 @@ bool kpFloodFill::prepare ()
     kdDebug () << "\tperforming NOP check" << endl;
 #endif
 
-    // get the color we need to replace
+    // get the color we need to tqreplace
     if (m_processedColorSimilarity == 0 && m_color == m_colorToChange)
     {
         // need to do absolutely nothing (this is a significant optimisation

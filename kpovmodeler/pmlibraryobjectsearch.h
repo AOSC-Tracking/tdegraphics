@@ -36,11 +36,12 @@ class KListView;
  * It also provides drag. If the user doesn't have a clear idea
  * where the objects he wants are, this is the dialog to use.
  */
-class PMLibraryObjectSearch: public QWidget
+class PMLibraryObjectSearch: public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMLibraryObjectSearch( TQWidget *parent );
+   PMLibraryObjectSearch( TQWidget *tqparent );
 
 private slots:
    void slotSearchButtonPressed( );

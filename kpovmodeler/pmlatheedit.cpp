@@ -33,8 +33,8 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 
-PMLatheEdit::PMLatheEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMLatheEdit::PMLatheEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

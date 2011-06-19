@@ -31,7 +31,7 @@ void PMPrismMemento::setPrismPoints( const TQValueList< TQValueList<PMVector> >&
 {
    if( !m_bPrismPointsSaved )
    {
-      // Direct assignment does not work with Qt 2.3.x
+      // Direct assignment does not work with TQt 2.3.x
       // The list will be changed later in a graphical
       // change because TQValueList::detach( ) is called
       // too late!

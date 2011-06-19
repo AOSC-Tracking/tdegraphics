@@ -171,8 +171,8 @@ namespace T2P
 		Font *font() const;
 		void setFont(Font *font);
 		
-		const GlyphLayoutParams *layout() const;
-		void setLayout(const GlyphLayoutParams *layout);
+		const GlyphLayoutParams *tqlayout() const;
+		void setLayout(const GlyphLayoutParams *tqlayout);
 		
 		unsigned int glyphIndex() const;
 		void setGlyphIndex(unsigned int glyphIndex);
@@ -185,7 +185,7 @@ namespace T2P
 
 	private:
 		Font *m_font;
-		const GlyphLayoutParams *m_layout; // Glyph layouting params
+		const GlyphLayoutParams *m_layout; // Glyph tqlayouting params
 	
 		unsigned int m_glyphIndex; // 'character' index in font
 		unsigned int m_lastGlyph;	// Kerning

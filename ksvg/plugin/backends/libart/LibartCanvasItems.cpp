@@ -129,9 +129,9 @@ TQRect LibartShape::bbox() const
 	return rect;
 }
 
-bool LibartShape::isVisible(SVGShapeImpl *shape)
+bool LibartShape::isVisible(SVGShapeImpl *tqshape)
 {
-	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && shape->directRender());
+	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && tqshape->directRender());
 }
 
 bool LibartShape::fillContains(const TQPoint &p)
@@ -160,12 +160,12 @@ void LibartShape::update(CanvasItemUpdate reason, int param1, int param2)
 			m_fillPainter->update(m_style);
 		if(m_strokePainter)
 			m_strokePainter->update(m_style);
-		m_canvas->invalidate(this, false);
+		m_canvas->tqinvalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		reset();
-		m_canvas->invalidate(this, true);
+		m_canvas->tqinvalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 		reset();
@@ -184,13 +184,13 @@ void LibartShape::update(CanvasItemUpdate reason, int param1, int param2)
 			m_strokeSVP = 0;
 		}
 		init();
-		m_canvas->invalidate(this, true);
+		m_canvas->tqinvalidate(this, true);
 	}
 }
 
-void LibartShape::draw(SVGShapeImpl *shape)
+void LibartShape::draw(SVGShapeImpl *tqshape)
 {
-	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !shape->directRender()))
+	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !tqshape->directRender()))
 		return;
 
 	bool fillOk = m_fillSVP && m_style->isFilled();
@@ -199,10 +199,10 @@ void LibartShape::draw(SVGShapeImpl *shape)
 	if(fillOk || strokeOk)
 	{
 		if(m_fillPainter && m_fillSVP)
-			m_fillPainter->draw(m_canvas, m_fillSVP, m_style, shape);
+			m_fillPainter->draw(m_canvas, m_fillSVP, m_style, tqshape);
 
 		if(m_strokePainter && m_strokeSVP)
-			m_strokePainter->draw(m_canvas, m_strokeSVP, m_style, shape);
+			m_strokePainter->draw(m_canvas, m_strokeSVP, m_style, tqshape);
 	}
 }
 
@@ -230,9 +230,9 @@ void LibartPainter::update(SVGStylableImpl *style)
 	}
 }
 
-void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *shape)
+void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *tqshape)
 {
-	ArtSVP *clippedSvp = canvas->clipSingleSVP(svp, shape);
+	ArtSVP *clippedSvp = canvas->clipSingleSVP(svp, tqshape);
 
 	// Clipping
 	ArtDRect bbox;
@@ -252,22 +252,22 @@ void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *st
 
 		TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-		TQByteArray mask = SVGMaskElementImpl::maskRectangle(shape, screenBBox);
+		TQByteArray tqmask = SVGMaskElementImpl::tqmaskRectangle(tqshape, screenBBox);
 
 		if(paintType(style) == SVG_PAINTTYPE_URI)
 		{
-			LibartPaintServer *pserver = static_cast<LibartPaintServer *>(SVGPaintServerImpl::paintServer(shape->ownerDoc(), paintUri(style)));
+			LibartPaintServer *pserver = static_cast<LibartPaintServer *>(SVGPaintServerImpl::paintServer(tqshape->ownerDoc(), paintUri(style)));
 
 			if(pserver)
 			{
-				pserver->setBBoxTarget(shape);
+				pserver->setBBoxTarget(tqshape);
 				if(!pserver->finalized())
 					pserver->finalizePaintServer();
-				pserver->render(canvas, clippedSvp, opacity(style), mask, screenBBox);
+				pserver->render(canvas, clippedSvp, opacity(style), tqmask, screenBBox);
 			}
 		}
 		else
-			canvas->drawSVP(clippedSvp, m_color, mask, screenBBox);
+			canvas->drawSVP(clippedSvp, m_color, tqmask, screenBBox);
 	}
 
 	art_svp_free(clippedSvp);
@@ -1064,29 +1064,29 @@ void LibartPath::init(const SVGMatrixImpl *screenCTM)
 		double cury = m_array[index - 1].y3;
 
 		// Find last subpath
-		int find = -1;
+		int tqfind = -1;
 		for(int i = index - 1; i >= 0; i--)
 		{
 			if(m_array[i].code == ART_MOVETO_OPEN || m_array[i].code == ART_MOVETO)
 			{
-				find = i;
+				tqfind = i;
 				break;
 			}
 		}
 
 		// Fix a problem where the .svg file used floats as values... (sofico.svg)
-		if(curx != m_array[find].x3 && cury != m_array[find].y3)
+		if(curx != m_array[tqfind].x3 && cury != m_array[tqfind].y3)
 		{
-			if((int) curx == (int) m_array[find].x3 && (int) cury == (int) m_array[find].y3)
+			if((int) curx == (int) m_array[tqfind].x3 && (int) cury == (int) m_array[tqfind].y3)
 			{
 				ensureSpace(m_array, index)
 
 				m_array[index].code = ART_LINETO;
-				m_array[index].x3 = m_array[find].x3;
-				m_array[index].y3 = m_array[find].y3;
+				m_array[index].x3 = m_array[tqfind].x3;
+				m_array[index].y3 = m_array[tqfind].y3;
 
-				curx = m_array[find].x3;
-				cury = m_array[find].y3;
+				curx = m_array[tqfind].x3;
+				cury = m_array[tqfind].y3;
 
 				index++;
 			}
@@ -1095,16 +1095,16 @@ void LibartPath::init(const SVGMatrixImpl *screenCTM)
 		// handle filled paths that are not closed explicitly
 		if(m_path->getFillColor()->paintType() != SVG_PAINTTYPE_NONE)
 		{
-			if((int) curx != (int) m_array[find].x3 || (int) cury != (int) m_array[find].y3)
+			if((int) curx != (int) m_array[tqfind].x3 || (int) cury != (int) m_array[tqfind].y3)
 			{
 				ensureSpace(m_array, index)
 
 				m_array[index].code = (ArtPathcode)ART_END2;
-				m_array[index].x3 = m_array[find].x3;
-				m_array[index].y3 = m_array[find].y3;
+				m_array[index].x3 = m_array[tqfind].x3;
+				m_array[index].y3 = m_array[tqfind].y3;
 
-				curx = m_array[find].x3;
-				cury = m_array[find].y3;
+				curx = m_array[tqfind].x3;
+				cury = m_array[tqfind].y3;
 
 				index++;
 			}
@@ -1147,12 +1147,12 @@ void LibartPath::svgMoveTo(double x1, double y1, bool closed, bool)
 	if(index > 0 && !closed)
 	{
 		// Find last subpath
-		int find = -1;
+		int tqfind = -1;
 		for(int i = index - 1; i >= 0; i--)
 		{
 			if(m_array[i].code == ART_MOVETO_OPEN || m_array[i].code == ART_MOVETO)
 			{
-				find = i;
+				tqfind = i;
 				break;
 			}
 		}
@@ -1160,8 +1160,8 @@ void LibartPath::svgMoveTo(double x1, double y1, bool closed, bool)
 		ensureSpace(m_array, index)
 
 		m_array[index].code = (ArtPathcode) ART_END2;
-		m_array[index].x3 = m_array[find].x3;
-		m_array[index].y3 = m_array[find].y3;
+		m_array[index].x3 = m_array[tqfind].x3;
+		m_array[index].y3 = m_array[tqfind].y3;
 
 		index++;
 	}
@@ -1205,25 +1205,25 @@ void LibartPath::svgClosePath()
 	double curx = m_array[index - 1].x3;
 	double cury = m_array[index - 1].y3;
 
-	int find = -1;
+	int tqfind = -1;
 	for(int i = index - 1; i >= 0; i--)
 	{
 		if(m_array[i].code == ART_MOVETO_OPEN || m_array[i].code == ART_MOVETO)
 		{
-			find = i;
+			tqfind = i;
 			break;
 		}
 	}
 
-	if(find != -1)
+	if(tqfind != -1)
 	{
-		if(m_array[find].x3 != curx || m_array[find].y3 != cury)
+		if(m_array[tqfind].x3 != curx || m_array[tqfind].y3 != cury)
 		{
 			ensureSpace(m_array, index)
 
 			m_array[index].code = ART_LINETO;
-			m_array[index].x3 = m_array[find].x3;
-			m_array[index].y3 = m_array[find].y3;
+			m_array[index].x3 = m_array[tqfind].x3;
+			m_array[index].y3 = m_array[tqfind].y3;
 		}
 	}
 }
@@ -1285,28 +1285,28 @@ void LibartClipPath::init()
 	for(; !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = m_clipPath->ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
 
-		if(element && shape && ok && !shape->isContainer())
+		if(element && tqshape && ok && !tqshape->isContainer())
 		{
-			LibartClipItem *clipElement = dynamic_cast<LibartClipItem *>(shape->item());
+			LibartClipItem *clipElement = dynamic_cast<LibartClipItem *>(tqshape->item());
 			
-			if(dynamic_cast<LibartText *>(shape->item()))
+			if(dynamic_cast<LibartText *>(tqshape->item()))
 			{
 				// The cast to a clipElement above is failing when it is valid. But only
 				// in the plugin - svgdisplay works fine. What's going on? (Adrian)
-				clipElement = dynamic_cast<LibartText *>(shape->item());
+				clipElement = dynamic_cast<LibartText *>(tqshape->item());
 			}
 
 			if(clipElement)
 			{
 				clipElement->setRenderContext(CLIPPING);
 
-				// Push coordinate system down to children.
-				SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(shape);
+				// Push coordinate system down to tqchildren.
+				SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(tqshape);
 				if(locatable)
 					locatable->updateCachedScreenCTM(clipMatrix);
 
@@ -1505,22 +1505,22 @@ void LibartText::update(CanvasItemUpdate reason, int param1, int param2)
 			bool strokeOk = stroke && stroke->svp && text->isStroked() && text->getStrokeWidth()->baseVal()->value() > 0; // Spec: A zero value causes no stroke to be painted.
 			if(fillOk || strokeOk)
 			{
-				if(m_fillPainters.find(text))
+				if(m_fillPainters.tqfind(text))
 					m_fillPainters[text]->update(text);
 
-				if(m_strokePainters.find(text))
+				if(m_strokePainters.tqfind(text))
 					m_strokePainters[text]->update(text);
 			}
 			fill = ++it1;
 			stroke = ++it2;
 		}
-		m_canvas->invalidate(this, false);
+		m_canvas->tqinvalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		clearSVPs();
 		init();
-		m_canvas->invalidate(this, true);
+		m_canvas->tqinvalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 	{
@@ -1574,10 +1574,10 @@ void LibartText::draw()
 
 		if(fillOk || strokeOk)
 		{
-			if(fillOk && m_fillPainters.find(text))
+			if(fillOk && m_fillPainters.tqfind(text))
 				m_fillPainters[text]->draw(m_canvas, fill->svp, text, text);
 
-			if(strokeOk && m_strokePainters.find(text))
+			if(strokeOk && m_strokePainters.tqfind(text))
 				m_strokePainters[text]->draw(m_canvas, stroke->svp, text, text);
 		}
 		fill = ++it1;
@@ -1655,11 +1655,11 @@ void LibartText::renderCallback(SVGTextContentElementImpl *element, const SVGMat
 		m_drawFillItems.append(fillElement);
 		m_drawStrokeItems.append(strokeElement);
 
-		if(!m_fillPainters.find(element) && element->isFilled())
+		if(!m_fillPainters.tqfind(element) && element->isFilled())
 			m_fillPainters.insert(element, new LibartFillPainter(element));
 
 		// Spec: A zero value causes no stroke to be painted.
-		if(!m_strokePainters.find(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
+		if(!m_strokePainters.tqfind(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
 			m_strokePainters.insert(element, new LibartStrokePainter(element));
 	}
 }
@@ -1734,7 +1734,7 @@ void LibartText::addTextDecoration(SVGTextContentElementImpl *element, double x,
 
 			m_drawFillItems.append(fillElement);
 
-			if(!m_fillPainters.find(element) && element->isFilled())
+			if(!m_fillPainters.tqfind(element) && element->isFilled())
 				m_fillPainters.insert(element, new LibartFillPainter(element));
 
 			art_svp_free(temp);
@@ -1752,7 +1752,7 @@ void LibartText::addTextDecoration(SVGTextContentElementImpl *element, double x,
 			m_drawStrokeItems.append(strokeElement);
 
 			// Spec: A zero value causes no stroke to be painted.
-			if(!m_strokePainters.find(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
+			if(!m_strokePainters.tqfind(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
 				m_strokePainters.insert(element, new LibartStrokePainter(element));
 		}
 		art_free(vec);
@@ -1799,10 +1799,10 @@ ArtRender *LibartPaintServer::createRenderer(TQRect bbox, KSVGCanvas *c)
 	// Note: We always pass 3 for the number of channels since the ART_ALPHA parameter
 	// adds the alpha channel when present.
 	ArtRender *render = 0;
-	render = art_render_new(QMIN(x0, x1),
-							QMIN(y0, y1),
-							QMAX(x0, x1) + 1,
-							QMAX(y0, y1) + 1,
+	render = art_render_new(TQMIN(x0, x1),
+							TQMIN(y0, y1),
+							TQMAX(x0, x1) + 1,
+							TQMAX(y0, y1) + 1,
 							c->renderingBuffer() + x0 * c->nrChannels() + y0 * c->rowStride(),
 							c->rowStride(), 3, 8,
 							c->nrChannels() == 3 ? ART_ALPHA_NONE : ART_ALPHA_PREMUL, 0);
@@ -1868,8 +1868,8 @@ void LibartGradient::parseGradientStops(SVGGradientElementImpl *gradient)
 			float opacity = elem->stopOpacity();
 
 			// Get rgba color including stop-opacity
-			Q_UINT32 rgba = (stopColor << 8) | int(opacity * 255.0 + 0.5);
-			Q_UINT32 r, g, b, a;
+			TQ_UINT32 rgba = (stopColor << 8) | int(opacity * 255.0 + 0.5);
+			TQ_UINT32 r, g, b, a;
 
 			a = rgba & 0xff;
 			r = (rgba >> 24) & 0xff;
@@ -1899,7 +1899,7 @@ void LibartGradient::reference(const TQString &)
 {
 }
 
-void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
+void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox)
 {
 	if(!m_stops.isEmpty())
 	{
@@ -2022,9 +2022,9 @@ void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 		art_render_svp(render, svp);
 		art_ksvg_render_gradient_linear(render, linear, ART_FILTER_HYPER);
 
-		if(mask.data())
+		if(tqmask.data())
 			art_render_mask(render, screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1,
-				(const art_u8 *)mask.data(), screenBBox.width());
+				(const art_u8 *)tqmask.data(), screenBBox.width());
 
 		art_render_invoke(render);
 
@@ -2032,7 +2032,7 @@ void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 	}
 }
 
-void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
+void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox)
 {
 	if(!m_stops.isEmpty())
 	{
@@ -2085,7 +2085,7 @@ void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 			// Here we're undoing the unit-converter's work because putting the
 			// bounding box transform into the matrix here lets the gradient transform
 			// sit at the right point in the chain to work with bounding box coordinates.
-			// It also produces the elliptical shape due to the non-uniform scaling.
+			// It also produces the elliptical tqshape due to the non-uniform scaling.
 			SVGRectImpl *userBBox = getBBoxTarget()->getBBox();
 
 			double width = userBBox->width();
@@ -2158,9 +2158,9 @@ void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 		art_render_svp(render, svp);
 		art_ksvg_render_gradient_radial(render, radial, ART_FILTER_HYPER);
 
-		if(mask.data())
+		if(tqmask.data())
 			art_render_mask(render, screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1,
-				(const art_u8 *)mask.data(), screenBBox.width());
+				(const art_u8 *)tqmask.data(), screenBBox.width());
 
 		art_render_invoke(render);
 
@@ -2184,7 +2184,7 @@ void LibartPattern::reference(const TQString &href)
 	m_pattern->reference(href);
 }
 
-void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
+void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox)
 {
 	SVGPatternElementImpl::Tile tile = m_pattern->createTile(getBBoxTarget());
 
@@ -2202,7 +2202,7 @@ void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArra
 
 		int alpha = int(opacity * 255 + 0.5);
 
-		ksvg_art_rgb_texture(svp, c->renderingBuffer() + screenBBox.x() * c->nrChannels() + screenBBox.y() * c->rowStride(), screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1, c->rowStride(), c->nrChannels(), tile.image().bits(), tile.image().width(), tile.image().height(), tile.image().width() * 4, affine, ART_FILTER_NEAREST, 0L, alpha, (art_u8 *)mask.data());
+		ksvg_art_rgb_texture(svp, c->renderingBuffer() + screenBBox.x() * c->nrChannels() + screenBBox.y() * c->rowStride(), screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1, c->rowStride(), c->nrChannels(), tile.image().bits(), tile.image().width(), tile.image().height(), tile.image().width() * 4, affine, ART_FILTER_NEAREST, 0L, alpha, (art_u8 *)tqmask.data());
 	}
 }
 

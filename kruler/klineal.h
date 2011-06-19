@@ -32,10 +32,11 @@
 
 class KLineal : public KMainWindow {
   Q_OBJECT
+  TQ_OBJECT
 public:
   enum { North=0, West=1, South=2, East=3 };
   /** constructor */
-  KLineal(TQWidget*parent=0,const char* name=0);
+  KLineal(TQWidget*tqparent=0,const char* name=0);
   /** destructor */
   ~KLineal();
   void move(int x, int y);

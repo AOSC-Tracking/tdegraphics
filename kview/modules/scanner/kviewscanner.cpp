@@ -35,13 +35,13 @@
 typedef KGenericFactory<KViewScanner> KViewScannerFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_scannerplugin, KViewScannerFactory( "kviewscannerplugin" ) )
 
-KViewScanner::KViewScanner( TQObject* parent, const char* name,
+KViewScanner::KViewScanner( TQObject* tqparent, const char* name,
 	                                  const TQStringList & )
-  : Plugin( parent, name ),
+  : Plugin( tqparent, name ),
   m_pScandlg( 0 ),
   m_pViewer( 0 )
 {
-	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = tqparent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )

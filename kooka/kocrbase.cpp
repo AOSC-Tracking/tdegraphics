@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -59,10 +59,10 @@
 #include <tqgroupbox.h>
 #include <tqcheckbox.h>
 
-KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
+KOCRBase::KOCRBase( TQWidget *tqparent, KSpellConfig *spellConfig,
                     KDialogBase::DialogType face )
    :KDialogBase( face, i18n("Optical Character Recognition"),
-		 User2|Close|User1, User1, parent,0, false, true,
+		 User2|Close|User1, User1, tqparent,0, false, true,
 		 KGuiItem( i18n("Start OCR" ), "launch",
 			   i18n("Start the Optical Character Recognition process" )),
                  KGuiItem( i18n("Cancel" ), "stopocr",
@@ -98,11 +98,11 @@ KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
 }
 
 
-KAnimWidget* KOCRBase::getAnimation(TQWidget *parent)
+KAnimWidget* KOCRBase::getAnimation(TQWidget *tqparent)
 {
    if( ! m_animation )
    {
-      m_animation = new KAnimWidget( TQString("kde"), 48, parent, "ANIMATION" );
+      m_animation = new KAnimWidget( TQString("kde"), 48, tqparent, "ANIMATION" );
    }
    return( m_animation );
 }
@@ -129,7 +129,7 @@ void KOCRBase::imgIntro()
     m_previewPix = new TQLabel( m_imgHBox );
     m_previewPix->setPixmap(TQPixmap());
     m_previewPix->setFixedSize(m_previewSize);
-    m_previewPix->setAlignment( Qt::AlignCenter );
+    m_previewPix->tqsetAlignment( TQt::AlignCenter );
     m_previewPix->setFrameStyle( TQFrame::Panel | TQFrame::Sunken );
     // m_previewPix->resize(m_previewSize);
 
@@ -164,7 +164,7 @@ void KOCRBase::ocrIntro( )
         hb_cap->setSpacing( KDialog::spacingHint());
 
         TQLabel *imgLab = new TQLabel( hb_cap );
-        imgLab->setAlignment( Qt::AlignHCenter | Qt::AlignTop  );
+        imgLab->tqsetAlignment( TQt::AlignHCenter | TQt::AlignTop  );
         imgLab->setPixmap( pix );
         pa = hb_cap;
     }
@@ -188,7 +188,7 @@ void KOCRBase::spellCheckIntro()
     KSpellConfig *sCfg = new KSpellConfig( m_gbSpellOpts, "SPELLCHK", m_spellConfig, false );
     /* A space eater */
     TQWidget *spaceEater = new TQWidget(m_spellchkPage);
-    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
+    spaceEater->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
 
     /* connect toggle button */
     connect( m_cbWantCheck, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slWantSpellcheck(bool)));
@@ -285,7 +285,7 @@ void KOCRBase::introduceImage( KookaImage* img)
         }
     }
     TQWidget *spaceEater = new TQWidget( m_metaBox );
-    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
+    spaceEater->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     m_metaBox->show();
 }
 

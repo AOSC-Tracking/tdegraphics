@@ -43,6 +43,7 @@ class PMViewOptions;
 class PMShell : public PMDockMainWindow
 {
    Q_OBJECT
+  TQ_OBJECT
 
 public:
    /**
@@ -113,9 +114,9 @@ public slots:
    void saveOptions( );
    void restoreOptions( );
 
-   void setCaption( const TQString& caption = TQString::null );
-   void statusMsg( const TQString& text = TQString::null );
-   void slotControlPointMsg( const TQString& msg = TQString::null );
+   void setCaption( const TQString& caption = TQString() );
+   void statusMsg( const TQString& text = TQString() );
+   void slotControlPointMsg( const TQString& msg = TQString() );
 
    void slotModified( );
    void slotDockWidgetClosed( );

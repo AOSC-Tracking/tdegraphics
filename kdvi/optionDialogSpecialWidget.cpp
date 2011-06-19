@@ -23,10 +23,10 @@
 #include "prefs.h"
 
 
-// Constructs a optionDialogWidget_base which is a child of 'parent', with
+// Constructs a optionDialogWidget_base which is a child of 'tqparent', with
 // the name 'name' and widget flags set to 'f'.
-optionDialogSpecialWidget::optionDialogSpecialWidget( TQWidget* parent,  const char* name, WFlags fl )
-    : optionDialogSpecialWidget_base( parent,  name, fl )
+optionDialogSpecialWidget::optionDialogSpecialWidget( TQWidget* tqparent,  const char* name, WFlags fl )
+    : optionDialogSpecialWidget_base( tqparent,  name, fl )
 {
   // Set up the list of known and supported editors
   editorNameString        += i18n("User-Defined Editor");

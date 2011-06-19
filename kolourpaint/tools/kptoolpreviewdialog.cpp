@@ -51,14 +51,14 @@ kpToolPreviewDialog::kpToolPreviewDialog (Features features,
                                           const TQString &caption,
                                           const TQString &afterActionText,
                                           bool actOnSelection,
-                                          kpMainWindow *parent,
+                                          kpMainWindow *tqparent,
                                           const char *name)
-    : KDialogBase (parent, name, true/*modal*/,
+    : KDialogBase (tqparent, name, true/*modal*/,
                    caption,
                    KDialogBase::Ok | KDialogBase::Cancel),
       m_afterActionText (afterActionText),
       m_actOnSelection (actOnSelection),
-      m_mainWindow (parent),
+      m_mainWindow (tqparent),
       m_dimensionsGroupBox (0),
       m_afterTransformDimensionsLabel (0),
       m_previewGroupBox (0),
@@ -149,10 +149,10 @@ void kpToolPreviewDialog::createDimensionsGroupBox ()
                                                      2, 2,
                                                      marginHint () * 2, spacingHint ());
 
-    dimensionsLayout->addWidget (originalLabel, 0, 0, Qt::AlignBottom);
-    dimensionsLayout->addWidget (originalDimensionsLabel, 0, 1, Qt::AlignBottom);
-    dimensionsLayout->addWidget (afterTransformLabel, 1, 0, Qt::AlignTop);
-    dimensionsLayout->addWidget (m_afterTransformDimensionsLabel, 1, 1, Qt::AlignTop);
+    dimensionsLayout->addWidget (originalLabel, 0, 0, TQt::AlignBottom);
+    dimensionsLayout->addWidget (originalDimensionsLabel, 0, 1, TQt::AlignBottom);
+    dimensionsLayout->addWidget (afterTransformLabel, 1, 0, TQt::AlignTop);
+    dimensionsLayout->addWidget (m_afterTransformDimensionsLabel, 1, 1, TQt::AlignTop);
 }
 
 // private
@@ -173,10 +173,10 @@ void kpToolPreviewDialog::createPreviewGroupBox ()
 
     TQVBoxLayout *previewLayout = new TQVBoxLayout (m_previewGroupBox,
                                                   marginHint () * 2,
-                                                  QMAX (1, spacingHint () / 2));
+                                                  TQMAX (1, spacingHint () / 2));
 
     previewLayout->addWidget (m_previewPixmapLabel, 1/*stretch*/);
-    previewLayout->addWidget (updatePushButton, 0/*stretch*/, Qt::AlignHCenter);
+    previewLayout->addWidget (updatePushButton, 0/*stretch*/, TQt::AlignHCenter);
 }
 
 
@@ -231,15 +231,15 @@ double kpToolPreviewDialog::aspectScale (int newWidth, int newHeight,
     double heightScale = double (newHeight) / double (oldHeight);
 
     // Keeps aspect ratio
-    return QMIN (widthScale, heightScale);
+    return TQMIN (widthScale, heightScale);
 }
 
 // public static
 int kpToolPreviewDialog::scaleDimension (int dimension, double scale, int min, int max)
 {
-    return QMAX (min,
-                 QMIN (max,
-                       qRound (dimension * scale)));
+    return TQMAX (min,
+                 TQMIN (max,
+                       tqRound (dimension * scale)));
 }
 
 
@@ -389,7 +389,7 @@ void kpToolPreviewDialog::updatePreview ()
         m_previewPixmapLabel->setPixmap (previewPixmap);
 
         // immediate update esp. for expensive previews
-        m_previewPixmapLabel->repaint (false/*no erase*/);
+        m_previewPixmapLabel->tqrepaint (false/*no erase*/);
 
 #if DEBUG_KP_TOOL_PREVIEW_DIALOG
     kdDebug () << "\tafter TQLabel::setPixmap() previewPixmapLabel: w="
@@ -420,7 +420,7 @@ void kpToolPreviewDialog::slotUpdateWithWaitCursor ()
                << endl;
 #endif
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     slotUpdate ();
 

@@ -37,10 +37,11 @@ class TQPainter;
  *  user that he is doing something obvious.
  */
 
-class SizeIndicator: public QLabel
+class SizeIndicator: public TQLabel
 {
    Q_OBJECT
-   // Q_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )
+  TQ_OBJECT
+   // TQ_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )
 
 public:
    /**
@@ -49,7 +50,7 @@ public:
     *  @param crit: Critical value, not yet used.
 
     */
-   SizeIndicator( TQWidget *parent, long thres = DEFAULT_THRESHOLD,
+   SizeIndicator( TQWidget *tqparent, long thres = DEFAULT_THRESHOLD,
 		  long crit = DEFAULT_CRITICAL );
    /**
     *  destructor does not really do much yet.

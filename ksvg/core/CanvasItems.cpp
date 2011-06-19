@@ -107,7 +107,7 @@ void CanvasText::handleTSpan(KSVGCanvas *canvas, const SVGMatrixImpl *screenCTM,
 			TQString text = tspan->text();
 			if(!text.isEmpty())
 			{
-				T2P::GlyphLayoutParams *params = tspan->layoutParams();
+				T2P::GlyphLayoutParams *params = tspan->tqlayoutParams();
 
 				if(bMultipleX || bMultipleY)
 				{
@@ -265,7 +265,7 @@ KSVGTextChunk *CanvasText::createTextChunk(KSVGCanvas *canvas, const SVGMatrixIm
 						curx = usex;
 						cury = usey;
 
-						T2P::GlyphLayoutParams *params = tpath->layoutParams();
+						T2P::GlyphLayoutParams *params = tpath->tqlayoutParams();
 
 						if(!params->tb())
 							curx += endx;
@@ -290,7 +290,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 	TQMemArray<double> _cury(1);
 	_cury[0] = double(cury);
 
-	T2P::GlyphLayoutParams *params = m_text->layoutParams();
+	T2P::GlyphLayoutParams *params = m_text->tqlayoutParams();
 	SVGTextPositioningElementImpl *tp = textChunk->getTextElement(0);
 	SVGTextContentElementImpl *tc = textChunk->getTextContentElement(0);
 	SVGTextContentElementImpl *tc0 = tc;
@@ -373,14 +373,14 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 		}
 
 		{
-			T2P::GlyphLayoutParams *params = tc->layoutParams();
+			T2P::GlyphLayoutParams *params = tc->tqlayoutParams();
 			params->setLetterSpacing(params->letterSpacing() + addLetterSpacing);
 			if(bpath)
 			{
 				params->setTextPathStartOffset(pathAdvance);
 				if(tp && tp->dy()->baseVal()->numberOfItems() > 0)
 					pathDy += tp->dy()->baseVal()->getItem(0)->value();
-				TQString shift = TQString("%1%%").arg((pathDy / font->fontParams()->size()) * -100.0);
+				TQString shift = TQString("%1%%").tqarg((pathDy / font->fontParams()->size()) * -100.0);
 				params->setBaselineShift(shift.latin1());
 			}
 
@@ -429,7 +429,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 		return;
 
 	// Draw 'text-decoration'
-	// TODO: Currently just ignore text-decoration on vertical layouts, is that correct?
+	// TODO: Currently just ignore text-decoration on vertical tqlayouts, is that correct?
 	// Underline and overline have to be drawn before the glyphs are rendered
 	if(tc0->getTextDecoration() & UNDERLINE && !params->tb())
 		addTextDecoration(tc0, (curx - anchor), (cury + (glyph->underlinePosition() - glyph->pixelBaseline())),
@@ -444,7 +444,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 		SVGTextContentElementImpl *style = textChunk->getTextContentElement(j);
 
 		// Draw 'text-decoration'
-		// TODO: Currently just ignore text-decoration on vertical layouts, is that correct?
+		// TODO: Currently just ignore text-decoration on vertical tqlayouts, is that correct?
 		// Underline and overline have to be drawn before the glyphs are rendered
 		if(style->getAttribute("text-decoration") == "underline" && !params->tb())
 			addTextDecoration(style, glyph->bboxX() - anchor, (cury + (glyph->underlinePosition() - glyph->pixelBaseline())),
@@ -484,26 +484,26 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 
 // #####
 
-void MarkerHelper::doMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle, const TQString &markerId)
+void MarkerHelper::doMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle, const TQString &markerId)
 {
-	SVGMarkerElementImpl *marker = dynamic_cast<SVGMarkerElementImpl *>(shape->ownerSVGElement()->getElementById(markerId));
+	SVGMarkerElementImpl *marker = dynamic_cast<SVGMarkerElementImpl *>(tqshape->ownerSVGElement()->getElementById(markerId));
 	if(marker)
-		marker->draw(shape, x, y, style->getStrokeWidth()->baseVal()->value(), angle);
+		marker->draw(tqshape, x, y, style->getStrokeWidth()->baseVal()->value(), angle);
 }
 
-void MarkerHelper::doStartMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle)
+void MarkerHelper::doStartMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle)
 {
-	doMarker(shape, style, x, y, angle, style->getStartMarker());
+	doMarker(tqshape, style, x, y, angle, style->getStartMarker());
 }
 
-void MarkerHelper::doMidMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle)
+void MarkerHelper::doMidMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle)
 {
-	doMarker(shape, style, x, y, angle, style->getMidMarker());
+	doMarker(tqshape, style, x, y, angle, style->getMidMarker());
 }
 
-void MarkerHelper::doEndMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle)
+void MarkerHelper::doEndMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle)
 {
-	doMarker(shape, style, x, y, angle, style->getEndMarker());
+	doMarker(tqshape, style, x, y, angle, style->getEndMarker());
 }
 
 // vim:ts=4:noet

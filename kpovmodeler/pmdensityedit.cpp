@@ -25,8 +25,8 @@
 #include <klocale.h>
 
 
-PMDensityEdit::PMDensityEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMDensityEdit::PMDensityEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

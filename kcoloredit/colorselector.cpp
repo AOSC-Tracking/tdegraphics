@@ -30,7 +30,7 @@
 #include "texteditselection.h"
 #include "colorselector.h"
 
-ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(parent, name) {
+ColorSelector::ColorSelector(TQWidget *tqparent, const char *name ) : TQWidget(tqparent, name) {
 	fComponentsMode = false;
 	TQVBoxLayout* topLayout = new TQVBoxLayout(this, 4);
 	/*
@@ -53,7 +53,7 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	topLayout->addWidget(gradientSelection, 10);
 	KSeparator* hLine = new KSeparator(KSeparator::HLine, this);
 	topLayout->addWidget(hLine);
-	TQHBoxLayout* layout = new TQHBoxLayout();
+	TQHBoxLayout* tqlayout = new TQHBoxLayout();
 	TextEditSelection* textEditSelection = new TextEditSelection(this);
 	connect(textEditSelection, TQT_SIGNAL( valueChanged(Color*) ), TQT_SLOT( slotSetColor(Color*) ));
 	connect(this, TQT_SIGNAL( valueChanged(Color*) ), textEditSelection, TQT_SLOT( slotSetValue(Color*) ));
@@ -73,7 +73,7 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	TQVBoxLayout* colorChangeSliderLayout = new TQVBoxLayout(colorChangeSliderWidget, 1);
 	colorChangeSliderLayout->setMargin(0);
 	TQSlider* colorChangeSlider = new TQSlider(0, MAX_COLOR_CHANGE_VALUE,
-		MAX_COLOR_CHANGE_VALUE/4, colorChangeValue, TQSlider::Horizontal, colorChangeSliderWidget);
+		MAX_COLOR_CHANGE_VALUE/4, colorChangeValue, Qt::Horizontal, colorChangeSliderWidget);
 	colorChangeSlider->setTickInterval(colorChangeSlider->pageStep());
 	colorChangeSlider->setTickmarks(TQSlider::Above);
 	connect(colorChangeSlider, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( slotColorChangeValueChanged(int) ));
@@ -88,17 +88,17 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	colorChangeLayout->addStretch(10);
 	colorChangeLayout->addWidget(colorChangeSliderWidget);
 	colorChangeLayout->addStretch(10);
-	layout->addLayout(colorChangeLayout, 10);
+	tqlayout->addLayout(colorChangeLayout, 10);
 	m_color.setComponents(RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE);
 	slotColorReplace();
 	KSeparator* vLine = new KSeparator(KSeparator::VLine, this);
-	layout->addWidget(vLine);
-	layout->addWidget(textEditSelection, 1);
+	tqlayout->addWidget(vLine);
+	tqlayout->addWidget(textEditSelection, 1);
 	colorPatch = new KColorPatch(this);
 	connect(colorPatch, TQT_SIGNAL( colorChanged(const TQColor&) ), TQT_SLOT( slotSetColor(const TQColor&) ));
 	colorPatch->setMinimumSize(80, 64);
-	layout->addWidget(colorPatch, 10);
-	topLayout->addLayout(layout);
+	tqlayout->addWidget(colorPatch, 10);
+	topLayout->addLayout(tqlayout);
 }
 ColorSelector::~ColorSelector() {
 }

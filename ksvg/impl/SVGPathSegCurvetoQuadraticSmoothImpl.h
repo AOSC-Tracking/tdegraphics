@@ -34,9 +34,9 @@ public:
 	SVGPathSegCurvetoQuadraticSmoothAbsImpl();
 	virtual ~SVGPathSegCurvetoQuadraticSmoothAbsImpl();
 
-	virtual unsigned short pathSegType() const { return PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS; }
+	virtual unsigned short pathSegType() const { return PATHSEG_CURVETO_TQUADRATIC_SMOOTH_ABS; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "T"; }
-	virtual TQString toString() const { return TQString("T %1 %2").arg(m_x).arg(m_y); }
+	virtual TQString toString() const { return TQString("T %1 %2").tqarg(m_x).tqarg(m_y); }
 
 	void setX(const double &);
 	double x() const;
@@ -78,9 +78,9 @@ public:
 	SVGPathSegCurvetoQuadraticSmoothRelImpl();
 	virtual ~SVGPathSegCurvetoQuadraticSmoothRelImpl();
 
-	virtual unsigned short pathSegType() const { return PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL; }
+	virtual unsigned short pathSegType() const { return PATHSEG_CURVETO_TQUADRATIC_SMOOTH_REL; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "t"; }
-	virtual TQString toString() const { return TQString("t %1 %2").arg(m_x).arg(m_y); }
+	virtual TQString toString() const { return TQString("t %1 %2").tqarg(m_x).tqarg(m_y); }
 
 	void setX(const double &);
 	double x() const;

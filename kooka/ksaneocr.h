@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -72,16 +72,17 @@ class KConfig;
  */
 typedef enum{ ENG_ERROR, ENG_OK, ENG_DATA_MISSING, ENG_BAD_SETUP } EngineError;
 
-class KSANEOCR : public QObject
+class KSANEOCR : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     enum OCREngines{ GOCR, OCRAD, KADMOS };
 
     KSANEOCR( TQWidget*, KConfig *);
     ~KSANEOCR();
 
-    bool startOCRVisible( TQWidget* parent=0);
+    bool startOCRVisible( TQWidget* tqparent=0);
 
     void finishedOCRVisible( bool );
 
@@ -161,7 +162,7 @@ signals:
     /**
      * signal the tells that the result image was modified.
      */
-    void repaintOCRResImage( );
+    void tqrepaintOCRResImage( );
 
     /**
      * indicates that the text editor holding the text that came through

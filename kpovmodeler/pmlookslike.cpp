@@ -49,11 +49,11 @@ TQString PMLooksLike::description( ) const
    return i18n( "looks like" );
 }
 
-PMMetaObject* PMLooksLike::metaObject( ) const
+PMMetaObject* PMLooksLike::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "LooksLike", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "LooksLike", Base::tqmetaObject( ),
                                         createNewLooksLike );
       // no properties
    }
@@ -80,9 +80,9 @@ void PMLooksLike::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMLooksLike::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMLooksLike::editWidget( TQWidget* tqparent ) const
 {
-   return new PMNamedObjectEdit( parent );
+   return new PMNamedObjectEdit( tqparent );
 }
 
 void PMLooksLike::restoreMemento( PMMemento* s )

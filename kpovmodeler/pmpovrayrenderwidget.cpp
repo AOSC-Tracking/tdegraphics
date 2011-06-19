@@ -40,8 +40,8 @@
 TQString PMPovrayRenderWidget::s_povrayCommand = c_defaultPovrayCommand;
 TQStringList PMPovrayRenderWidget::s_libraryPaths;
 
-PMPovrayRenderWidget::PMPovrayRenderWidget( TQWidget* parent, const char* name )
-      : PMDragWidget( parent, name )
+PMPovrayRenderWidget::PMPovrayRenderWidget( TQWidget* tqparent, const char* name )
+      : PMDragWidget( tqparent, name )
 {
    m_pProcess = 0;
    m_bSuspended = false;
@@ -74,7 +74,7 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
    }
 
    // output to tmp file
-   m_pTempFile = new KTempFile( TQString::null, ".pov" );
+   m_pTempFile = new KTempFile( TQString(), ".pov" );
    TQDataStream* dstr = m_pTempFile->dataStream( );
 
    if( ( m_pTempFile->status( ) != 0 ) || !dstr )
@@ -132,9 +132,9 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
 
    m_image.create( width, height, 32 );
    m_image.setAlphaBuffer( m_renderMode.alpha( ) );
-   m_image.fill( qRgb( 0, 0, 0 ) );
+   m_image.fill( tqRgb( 0, 0, 0 ) );
    m_bPixmapUpToDate = false;
-   repaint( );
+   tqrepaint( );
 
    if( !m_pProcess->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
    {
@@ -236,11 +236,11 @@ void PMPovrayRenderWidget::slotPovrayImage( KProcess*, char* buffer, int buflen 
 
          if( m_bytespp == 4 )
             setPixel( m_column, m_line,
-                      qRgba( m_restBytes[2], m_restBytes[1],
+                      tqRgba( m_restBytes[2], m_restBytes[1],
                              m_restBytes[0], m_restBytes[3] ) );
          else
             setPixel( m_column, m_line,
-                      qRgb( m_restBytes[2], m_restBytes[1], m_restBytes[0] ) );
+                      tqRgb( m_restBytes[2], m_restBytes[1], m_restBytes[0] ) );
 
          m_column++;
          m_rcvPixels++;
@@ -259,11 +259,11 @@ void PMPovrayRenderWidget::slotPovrayImage( KProcess*, char* buffer, int buflen 
       {
          if( m_bytespp == 4 )
             setPixel( m_column, m_line,
-                      qRgba( buffer[index+2], buffer[index+1],
+                      tqRgba( buffer[index+2], buffer[index+1],
                              buffer[index], buffer[index+3] ) );
          else
             setPixel( m_column, m_line,
-                      qRgb( buffer[index+2], buffer[index+1],
+                      tqRgb( buffer[index+2], buffer[index+1],
                             buffer[index] ) );
          index += m_bytespp;
 
@@ -393,7 +393,7 @@ void PMPovrayRenderWidget::cleanup( )
    m_pTempFile = 0;
 }
 
-TQSize PMPovrayRenderWidget::sizeHint( ) const
+TQSize PMPovrayRenderWidget::tqsizeHint( ) const
 {
    TQSize s;
    if( m_image.isNull( ) )
@@ -401,7 +401,7 @@ TQSize PMPovrayRenderWidget::sizeHint( ) const
    else
       s = m_image.size( );
 
-   return s.expandedTo( minimumSize( ) );
+   return s.expandedTo( tqminimumSize( ) );
 }
 
 void PMPovrayRenderWidget::saveConfig( KConfig* cfg )

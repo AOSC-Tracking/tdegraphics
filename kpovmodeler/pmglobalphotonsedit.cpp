@@ -29,8 +29,8 @@
 #include <kmessagebox.h>
 
 
-PMGlobalPhotonsEdit::PMGlobalPhotonsEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMGlobalPhotonsEdit::PMGlobalPhotonsEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

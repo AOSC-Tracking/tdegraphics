@@ -1,7 +1,7 @@
 /****************************************************************************
 ** $Id$
 **
-** ImlibWidget: maps an Xlib window with Imlib's contents on a QWidget
+** ImlibWidget: maps an Xlib window with Imlib's contents on a TQWidget
 **
 ** Created : 98
 **
@@ -22,7 +22,7 @@
 
 #include <kurl.h>
 
-// #include those AFTER Qt-includes!
+// #include those AFTER TQt-includes!
 #include <Imlib.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -34,9 +34,10 @@
 class KuickFile;
 class KuickImage;
 
-class ImageCache : public QObject
+class ImageCache : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   ImageCache( ImlibData *id, int maxImages=1 );
@@ -48,7 +49,7 @@ public:
   KuickImage *		getKuimage( KuickFile * file, ImlibColorModifier  );
 
 private:
-  ImlibImage *		loadImageWithQt( const TQString& filename ) const;
+  ImlibImage *		loadImageWithTQt( const TQString& filename ) const;
 
   int 			myMaxImages;
   TQValueList<KuickFile*>fileList;
@@ -72,14 +73,15 @@ signals:
 
 class TQColor;
 
-class ImlibWidget : public QWidget
+class ImlibWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
 
-  ImlibWidget( ImData *_idata=0, TQWidget *parent=0, const char *name=0 );
-  ImlibWidget( ImData *_idata, ImlibData *id, TQWidget *parent=0,
+  ImlibWidget( ImData *_idata=0, TQWidget *tqparent=0, const char *name=0 );
+  ImlibWidget( ImData *_idata, ImlibData *id, TQWidget *tqparent=0,
 	       const char *name=0 );
   virtual ~ImlibWidget();
 
@@ -119,7 +121,7 @@ public:
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
-  virtual void  reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt = FALSE );
+  virtual void  reparent( TQWidget* tqparent, WFlags f, const TQPoint& p, bool showIt = FALSE );
 
 public slots:
   void	        rotate90();
@@ -136,7 +138,7 @@ protected:
   void 		showImage();
   void          setImageModifier();
   void 		rotate( int );
-  void 		updateWidget( bool geometryUpdate=true );
+  void 		updateWidget( bool tqgeometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
   virtual void  loaded( KuickImage * );
   virtual bool  canZoomTo( int newWidth, int newHeight );
@@ -144,9 +146,9 @@ protected:
 
   void 		closeEvent( TQCloseEvent * );
 
-  inline void	autoUpdate( bool geometryUpdate=false ) {
+  inline void	autoUpdate( bool tqgeometryUpdate=false ) {
     if ( isAutoRendering )
-      updateWidget( geometryUpdate );
+      updateWidget( tqgeometryUpdate );
   }
 
   bool		stillResizing, deleteImData, deleteImlibData;

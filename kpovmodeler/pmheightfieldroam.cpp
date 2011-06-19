@@ -180,7 +180,7 @@ bool PMHeightFieldROAM::imageToData(const TQString &fileName)
       colourIndex = false;
    else
    {
-      scaledMap = scaledMap.convertDepthWithPalette( 8, mapFile.colorTable( ), 256 );
+      scaledMap = scaledMap.convertDepthWithPalette( 8, mapFile.tqcolorTable( ), 256 );
       colourIndex = true;
    }
 
@@ -191,8 +191,8 @@ bool PMHeightFieldROAM::imageToData(const TQString &fileName)
          if ( colourIndex )
             setHeight( x, y2, scaledMap.pixelIndex( x, y ) * 256 );
          else
-            setHeight( x, y2, ( 256 * qRed( scaledMap.pixel( x, y ) ) ) +
-                             qGreen( scaledMap.pixel( x, y ) ) );
+            setHeight( x, y2, ( 256 * tqRed( scaledMap.pixel( x, y ) ) ) +
+                             tqGreen( scaledMap.pixel( x, y ) ) );
       }
    }
 

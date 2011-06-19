@@ -39,12 +39,13 @@ class TQCheckBox;
 class PMPolynomEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMPolynomEdit with parent and name
+    * Creates a PMPolynomEdit with tqparent and name
     */
-   PMPolynomEdit( TQWidget* parent, const char* name = 0 );
+   PMPolynomEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

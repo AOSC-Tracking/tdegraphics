@@ -55,7 +55,7 @@ KuickData::KuickData()
   maxZoomFactor	  = 4.0;
 
   maxCachedImages = 4;
-  backgroundColor = Qt::black;
+  backgroundColor = TQt::black;
 
   startInLastDir = true;
 
@@ -106,7 +106,7 @@ void KuickData::load()
 
   maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages",
                                               def.maxCachedImages );
-  backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
+  backgroundColor = kc->readColorEntry( "BackgroundColor", &TQt::black );
 
   startInLastDir = kc->readBoolEntry( "StartInLastDir", true);
 

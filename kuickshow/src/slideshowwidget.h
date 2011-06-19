@@ -24,11 +24,12 @@
 class TQCheckBox;
 class KIntNumInput;
 
-class SlideShowWidget : public QWidget
+class SlideShowWidget : public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    SlideShowWidget( TQWidget *parent, const char *name );
+    SlideShowWidget( TQWidget *tqparent, const char *name );
     ~SlideShowWidget();
 
     virtual void loadSettings( const KuickData& data );

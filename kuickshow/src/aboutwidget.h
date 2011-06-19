@@ -24,12 +24,13 @@
 
 class KURLWidget;
 
-class AboutWidget : public QVBox
+class AboutWidget : public TQVBox
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    AboutWidget(TQWidget *parent = 0, const char *name = 0);
+    AboutWidget(TQWidget *tqparent = 0, const char *name = 0);
 
 protected:
     ~AboutWidget();

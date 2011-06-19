@@ -25,22 +25,22 @@
 #include <tqpushbutton.h>
 #include <klocale.h>
 
-class PMPluginListViewItem : public QListViewItem
+class PMPluginListViewItem : public TQListViewItem
 {
 public:
-   PMPluginListViewItem( TQListView* parent, PMPluginInfo* info )
-         : TQListViewItem( parent, info->name( ), info->description( ) )
+   PMPluginListViewItem( TQListView* tqparent, PMPluginInfo* info )
+         : TQListViewItem( tqparent, info->name( ), info->description( ) )
    {
       m_info = info;
       m_enabled = info->enabled( );
-      setStatus( );
+      settqStatus( );
    }
-   void toggleStatus( )
+   void toggletqStatus( )
    {
       m_enabled = !m_enabled;
-      setStatus( );
+      settqStatus( );
    }
-   void setStatus( )
+   void settqStatus( )
    {
       if( m_enabled )
          setText( 2, i18n( "loaded" ) );
@@ -51,13 +51,13 @@ public:
    bool m_enabled;
 };
 
-PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
-      : PMSettingsDialogPage( parent, name )
+PMPluginSettings::PMPluginSettings( TQWidget* tqparent, const char* name )
+      : PMSettingsDialogPage( tqparent, name )
 {
-   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
    TQGroupBox* gb = new TQGroupBox( i18n( "Installed Plugins" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
 
    TQVBoxLayout* gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
@@ -67,7 +67,7 @@ PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
             TQT_SLOT( slotSelectionChanged( ) ) );
    m_pPluginsList->addColumn( i18n( "Name" ) );
    m_pPluginsList->addColumn( i18n( "Description" ) );
-   m_pPluginsList->addColumn( i18n( "Status" ) );
+   m_pPluginsList->addColumn( i18n( "tqStatus" ) );
    gvl->addWidget( m_pPluginsList, 1 );
 
    TQHBoxLayout* hl = new TQHBoxLayout( gvl );
@@ -77,7 +77,7 @@ PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
    hl->addWidget( m_pToggle );
    hl->addStretch( 1 );
 
-   vlayout->addStretch( 1 );
+   vtqlayout->addStretch( 1 );
 }
 
 void PMPluginSettings::displaySettings( )
@@ -122,7 +122,7 @@ void PMPluginSettings::slotToggle( )
       ( PMPluginListViewItem* ) m_pPluginsList->currentItem( );
    if( item )
    {
-      item->toggleStatus( );
+      item->toggletqStatus( );
    
       if( item->m_enabled )
          m_pToggle->setText( i18n( "Deactivate" ) );

@@ -51,6 +51,7 @@
 /*sealed*/ class kpZoomedView : public kpView
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     /**
@@ -61,7 +62,7 @@ public:
                   kpViewManager *viewManager,
                   kpView *buddyView,
                   kpViewScrollableContainer *scrollableContainer,
-                  TQWidget *parent, const char *name);
+                  TQWidget *tqparent, const char *name);
 
     /**
      * Destructs an unzoomed view.

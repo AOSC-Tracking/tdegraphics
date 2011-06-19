@@ -44,8 +44,8 @@
 
 static int spraycanSizes [] = {9, 17, 29};
 
-kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *parent, const char *name)
-    : kpToolWidgetBase (parent, name)
+kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *tqparent, const char *name)
+    : kpToolWidgetBase (tqparent, name)
 {
 #if DEBUG_KP_TOOL_WIDGET_SPRAYCAN_SIZE
     kdDebug () << "kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize() CALLED!" << endl;
@@ -54,14 +54,14 @@ kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *parent, const char
     for (int i = 0; i < int (sizeof (spraycanSizes) / sizeof (spraycanSizes [0])); i++)
     {
         int s = spraycanSizes [i];
-        TQString iconName = TQString ("tool_spraycan_%1x%1").arg (s).arg(s);
+        TQString iconName = TQString ("tool_spraycan_%1x%1").tqarg (s).tqarg(s);
         
     #if DEBUG_KP_TOOL_WIDGET_SPRAYCAN_SIZE
         kdDebug () << "\ticonName=" << iconName << endl;
     #endif
 
         TQPixmap pixmap (s, s);
-        pixmap.fill (Qt::white);
+        pixmap.fill (TQt::white);
         
         TQPainter painter (&pixmap);
         painter.drawPixmap (0, 0, UserIcon (iconName));
@@ -69,24 +69,24 @@ kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *parent, const char
 
         TQImage image = kpPixmapFX::convertToImage (pixmap);
 
-        TQBitmap mask (pixmap.width (), pixmap.height ());
-        mask.fill (Qt::color0);
+        TQBitmap tqmask (pixmap.width (), pixmap.height ());
+        tqmask.fill (TQt::color0);
 
-        painter.begin (&mask);
-        painter.setPen (Qt::color1);
+        painter.begin (&tqmask);
+        painter.setPen (TQt::color1);
         
         for (int y = 0; y < image.height (); y++)
         {
             for (int x = 0; x < image.width (); x++)
             {
-                if ((image.pixel (x, y) & RGB_MASK) == 0/*black*/)
+                if ((image.pixel (x, y) & TQRGB_MASK) == 0/*black*/)
                     painter.drawPoint (x, y);  // mark as opaque
             }
         }
 
         painter.end ();
 
-        pixmap.setMask (mask);
+        pixmap.setMask (tqmask);
         
         addOption (pixmap, i18n ("%1x%2").arg (s).arg (s)/*tooltip*/);
         if (i == 1)

@@ -34,8 +34,8 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 
-PMPrismEdit::PMPrismEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMPrismEdit::PMPrismEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
    m_lastSplineType = 0;
@@ -206,7 +206,7 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
       {
          // create all edits for one sub prism
          hl = new TQHBoxLayout( tvl );
-         label = new TQLabel( i18n( "Sub prism %1:" ).arg( spnr + 1 ),
+         label = new TQLabel( i18n( "Sub prism %1:" ).tqarg( spnr + 1 ),
                              m_pEditWidget );
          hl->addWidget( label );
          hl->addStretch( 1 );
@@ -332,8 +332,8 @@ void PMPrismEdit::deleteEdits( )
    m_points.clear( );
    m_points.setAutoDelete( false );
    
-   if( m_pEditWidget->layout( ) )
-      delete m_pEditWidget->layout( );
+   if( m_pEditWidget->tqlayout( ) )
+      delete m_pEditWidget->tqlayout( );
 }
 
 TQValueList< TQValueList<PMVector> > PMPrismEdit::splinePoints( )
@@ -452,7 +452,7 @@ void PMPrismEdit::slotAddPointAbove( )
    TQPushButton* bt = ( TQPushButton* ) sender( );
    if( bt )
    {
-      int subIndex = m_addAboveButtons.findRef( bt );
+      int subIndex = m_addAboveButtons.tqfindRef( bt );
       if( subIndex >= 0 )
       {
          PMVectorListEdit* ed = m_points.at( subIndex );
@@ -488,7 +488,7 @@ void PMPrismEdit::slotAddPointBelow( )
    TQPushButton* bt = ( TQPushButton* ) sender( );
    if( bt )
    {
-      int subIndex = m_addBelowButtons.findRef( bt );
+      int subIndex = m_addBelowButtons.tqfindRef( bt );
       if( subIndex >= 0 )
       {
          PMVectorListEdit* ed = m_points.at( subIndex );
@@ -524,7 +524,7 @@ void PMPrismEdit::slotRemovePoint( )
    TQPushButton* bt = ( TQPushButton* ) sender( );
    if( bt )
    {
-      int subIndex = m_removeButtons.findRef( bt );
+      int subIndex = m_removeButtons.tqfindRef( bt );
       if( subIndex >= 0 )
       {
          PMVectorListEdit* ed = m_points.at( subIndex );
@@ -560,7 +560,7 @@ void PMPrismEdit::slotAddSubPrism( )
    TQPushButton* button = ( TQPushButton* ) sender( );
    if( button )
    {
-      int index = m_subPrismAddButtons.findRef( button );
+      int index = m_subPrismAddButtons.tqfindRef( button );
       if( index >= 0 )
       {
          TQValueList< TQValueList<PMVector> > points = splinePoints( );
@@ -600,7 +600,7 @@ void PMPrismEdit::slotRemoveSubPrism( )
    TQPushButton* button = ( TQPushButton* ) sender( );
    if( button )
    {
-      int index = m_subPrismRemoveButtons.findRef( button );
+      int index = m_subPrismRemoveButtons.tqfindRef( button );
       if( index >= 0 )
       {
          TQValueList< TQValueList<PMVector> > points = splinePoints( );

@@ -10,6 +10,7 @@ noinst_HEADERS   = kfile_pdf.h
 
 kde_module_LTLIBRARIES = kfile_pdf.la
 
+kfile_pdf_la_COMPILE_FIRST = poppler-qt
 kfile_pdf_la_SOURCES = kfile_pdf.cpp
 kfile_pdf_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 kfile_pdf_la_LIBADD = $(LIB_KIO) -L$(top_builddir)/kfile-plugins/pdf/poppler-qt/ -lpoppler-qt

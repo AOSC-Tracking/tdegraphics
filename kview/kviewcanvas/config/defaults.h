@@ -27,7 +27,7 @@ namespace Defaults {
 	static const bool smoothScaling = false;
 	static const bool keepAspectRatio = true;
 	static const bool centerImage = true;
-	static const TQColor bgColor( Qt::black );
+	static const TQColor bgColor( TQt::black );
 	static const TQSize minSize( 1, 1 );
 	static const TQSize maxSize( 10000, 10000 );
 	static const unsigned int numOfBlendEffects = 4;

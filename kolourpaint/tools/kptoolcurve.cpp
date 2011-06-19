@@ -35,7 +35,7 @@ kpToolCurve::kpToolCurve (kpMainWindow *mainWindow)
     : kpToolPolygon (Curve,
                      i18n ("Curve"),
                      i18n ("Draws curves"),
-                     Qt::Key_V,
+                     TQt::Key_V,
                      mainWindow, "tool_curve")
 {
 }

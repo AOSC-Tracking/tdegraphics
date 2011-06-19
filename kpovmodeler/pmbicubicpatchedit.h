@@ -39,12 +39,13 @@ class TQCheckBox;
 class PMBicubicPatchEdit : public PMGraphicalObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMGraphicalObjectEdit Base;
 public:
    /**
-    * Creates a PMBicubicPatchEdit with parent and name
+    * Creates a PMBicubicPatchEdit with tqparent and name
     */
-   PMBicubicPatchEdit( TQWidget* parent, const char* name = 0 );
+   PMBicubicPatchEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

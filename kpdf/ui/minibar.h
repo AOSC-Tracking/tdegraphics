@@ -25,8 +25,9 @@ class ProgressWidget;
 class MiniBar : public TQFrame, public DocumentObserver
 {
     Q_OBJECT
+  TQ_OBJECT
     public:
-        MiniBar( TQWidget *parent, KPDFDocument * document );
+        MiniBar( TQWidget *tqparent, KPDFDocument * document );
         ~MiniBar();
 
         // [INHERITED] from DocumentObserver

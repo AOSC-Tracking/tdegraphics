@@ -45,8 +45,8 @@
 #include <kpeffectinvert.h>
 
 
-kpToolWidgetBase::kpToolWidgetBase (TQWidget *parent, const char *name)
-    : TQFrame (parent, name),
+kpToolWidgetBase::kpToolWidgetBase (TQWidget *tqparent, const char *name)
+    : TQFrame (tqparent, name),
       m_invertSelectedPixmap (true),
       m_selectedRow (-1), m_selectedCol (-1)
 {
@@ -92,9 +92,9 @@ void kpToolWidgetBase::finishConstruction (int fallBackRow, int fallBackCol)
                << endl;
 #endif
 
-    relayoutOptions ();
+    retqlayoutOptions ();
 
-    const QPair <int, int> rowColPair = defaultSelectedRowAndCol ();
+    const TQPair <int, int> rowColPair = defaultSelectedRowAndCol ();
     if (!setSelected (rowColPair.first, rowColPair.second, false/*don't save*/))
     {
         if (!setSelected (fallBackRow, fallBackCol))
@@ -166,7 +166,7 @@ TQValueVector <int> kpToolWidgetBase::spreadOutElements (const TQValueVector <in
 
 
 // public
-QPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
+TQPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
 {
     int row = -1, col = -1;
 
@@ -175,10 +175,10 @@ QPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
         KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
         KConfigBase *cfg = cfgGroupSaver.config ();
 
-        TQString nameString = TQString::fromLatin1 (name ());
+        TQString nameString = TQString::tqfromLatin1 (name ());
 
-        row = cfg->readNumEntry (nameString + TQString::fromLatin1 (" Row"), -1);
-        col = cfg->readNumEntry (nameString + TQString::fromLatin1 (" Col"), -1);
+        row = cfg->readNumEntry (nameString + TQString::tqfromLatin1 (" Row"), -1);
+        col = cfg->readNumEntry (nameString + TQString::tqfromLatin1 (" Col"), -1);
     }
 
 #if DEBUG_KP_TOOL_WIDGET_BASE
@@ -188,7 +188,7 @@ QPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
                << endl;
 #endif
 
-    return qMakePair (row, col);
+    return tqMakePair (row, col);
 }
 
 // public
@@ -218,18 +218,18 @@ void kpToolWidgetBase::saveSelectedAsDefault () const
     KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
-    TQString nameString = TQString::fromLatin1 (name ());
-    cfg->writeEntry (nameString + TQString::fromLatin1 (" Row"), m_selectedRow);
-    cfg->writeEntry (nameString + TQString::fromLatin1 (" Col"), m_selectedCol);
+    TQString nameString = TQString::tqfromLatin1 (name ());
+    cfg->writeEntry (nameString + TQString::tqfromLatin1 (" Row"), m_selectedRow);
+    cfg->writeEntry (nameString + TQString::tqfromLatin1 (" Col"), m_selectedCol);
     cfg->sync ();
 }
 
 
 // public
-void kpToolWidgetBase::relayoutOptions ()
+void kpToolWidgetBase::retqlayoutOptions ()
 {
 #if DEBUG_KP_TOOL_WIDGET_BASE
-    kdDebug () << "kpToolWidgetBase::relayoutOptions()" << endl;
+    kdDebug () << "kpToolWidgetBase::retqlayoutOptions()" << endl;
 #endif
 
     while (!m_pixmaps.isEmpty () && m_pixmaps.last ().count () == 0)
@@ -536,7 +536,7 @@ bool kpToolWidgetBase::selectNextOption ()
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpToolWidgetBase::mousePressEvent (TQMouseEvent *e)
 {
     e->ignore ();
@@ -549,7 +549,7 @@ void kpToolWidgetBase::mousePressEvent (TQMouseEvent *e)
     {
         for (int j = 0; j < (int) m_pixmapRects [i].count (); j++)
         {
-            if (m_pixmapRects [i][j].contains (e->pos ()))
+            if (m_pixmapRects [i][j].tqcontains (e->pos ()))
             {
                 setSelected (i, j);
                 e->accept ();
@@ -559,7 +559,7 @@ void kpToolWidgetBase::mousePressEvent (TQMouseEvent *e)
     }
 }
 
-// protected virtual [base QFrame]
+// protected virtual [base TQFrame]
 void kpToolWidgetBase::drawContents (TQPainter *painter)
 {
 #if DEBUG_KP_TOOL_WIDGET_BASE && 1
@@ -583,7 +583,7 @@ void kpToolWidgetBase::drawContents (TQPainter *painter)
 
             if (i == m_selectedRow && j == m_selectedCol)
             {
-                painter->fillRect (rect, Qt::blue/*selection color*/);
+                painter->fillRect (rect, TQt::blue/*selection color*/);
 
                 if (m_invertSelectedPixmap)
                     kpEffectInvertCommand::apply (&pixmap);

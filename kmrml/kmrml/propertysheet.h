@@ -34,7 +34,7 @@ namespace KMrml
         {
             MultiSet = 1,       // ??
             Subset,             // radio-button/combobox or listbox
-            SetElement,         // CheckBox -> disables/enables children?
+            SetElement,         // CheckBox -> disables/enables tqchildren?
             Boolean,            // CheckBox
             Numeric,            // Slider/Spinbox
             Textual,            // lineedit
@@ -71,9 +71,9 @@ namespace KMrml
         }
         void initFromDOM( const TQDomElement& elem );
 
-        void toElement( TQDomElement& parent );
+        void toElement( TQDomElement& tqparent );
 
-        TQWidget * createWidget( TQWidget *parent, const char *name = 0 );
+        TQWidget * createWidget( TQWidget *tqparent, const char *name = 0 );
 
     private:
         static Visibility getVisibility( const TQString& value );

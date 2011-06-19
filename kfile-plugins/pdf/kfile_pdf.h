@@ -29,8 +29,9 @@ class TQStringList;
 class KPdfPlugin: public KFilePlugin
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
-    KPdfPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
+    KPdfPlugin( TQObject *tqparent, const char *name, const TQStringList& preferredItems );
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 };

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2003, Luís Pedro Coelho
+ * Copyright (C) 2003, Luï¿½s Pedro Coelho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,26 +22,26 @@
 #include "kgv_miniwidget.h"
 #include "kgvpageview.h"
 
-FullScreenFilter::FullScreenFilter( KGVShell& parent )
-	:TQObject( &parent, "full-screen-filter" ),
-	 parent( parent )
+FullScreenFilter::FullScreenFilter( KGVShell& tqparent )
+	:TQObject( &tqparent, "full-screen-filter" ),
+	 tqparent( tqparent )
 {
 }
 
 bool FullScreenFilter::eventFilter( TQObject* /*object*/, TQEvent* ev) {
 	if ( TQKeyEvent* keyevent = dynamic_cast<TQKeyEvent*>( ev ) ) {
 		if ( keyevent->key() == Key_Escape ) {
-			parent.setFullScreen( false );
+			tqparent.setFullScreen( false );
 			keyevent->accept();
 			return true;
 		}
 	}
 	if ( TQMouseEvent* mouseevent = dynamic_cast<TQMouseEvent*>( ev ) ) {
-		if ( mouseevent->stateAfter() & mouseevent->button() & LeftButton ) {
+		if ( mouseevent->stateAfter() & mouseevent->button() & Qt::LeftButton ) {
 			// if ( The whole image is visible at once )
-			if ( parent.m_gvpart->pageView()->contentsHeight() <= parent.m_gvpart->widget()->height() &&
-			     parent.m_gvpart->pageView()->contentsWidth() <= parent.m_gvpart->widget()->width() ) {
-				parent.m_gvpart->miniWidget()->nextPage();
+			if ( tqparent.m_gvpart->pageView()->contentsHeight() <= tqparent.m_gvpart->widget()->height() &&
+			     tqparent.m_gvpart->pageView()->contentsWidth() <= tqparent.m_gvpart->widget()->width() ) {
+				tqparent.m_gvpart->miniWidget()->nextPage();
 				mouseevent->accept();
 				return true;
 			}

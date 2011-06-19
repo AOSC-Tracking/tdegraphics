@@ -18,7 +18,7 @@ fontEncodingPool::fontEncodingPool()
 
 fontEncoding *fontEncodingPool::findByName(const TQString &name)
 {
-  fontEncoding *ptr = dictionary.find( name );
+  fontEncoding *ptr = dictionary.tqfind( name );
   
   if (ptr == 0) {
     ptr = new fontEncoding(name);

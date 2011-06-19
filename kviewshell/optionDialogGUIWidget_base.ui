@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>optionDialogGUIWidget_base</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>optionDialogGUIWidget_base</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QComboBox" row="0" column="1">
+        <widget class="TQComboBox" row="0" column="1">
             <item>
                 <property name="text">
                     <string>Enabled</string>
@@ -47,7 +47,7 @@
 &lt;/ul&gt;&lt;/qt&gt;</string>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -63,7 +63,7 @@
                 <string>Underline links:</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="2">
+        <widget class="TQCheckBox" row="1" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>kcfg_ShowThumbnails</cstring>
             </property>
@@ -71,7 +71,7 @@
                 <string>Show &amp;thumbnail previews</string>
             </property>
         </widget>
-        <widget class="QGroupBox" row="2" column="0" rowspan="1" colspan="2">
+        <widget class="TQGroupBox" row="2" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -82,7 +82,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>rowLabel</cstring>
                     </property>
@@ -98,7 +98,7 @@
                         <string>Rows:</string>
                     </property>
                 </widget>
-                <widget class="QSpinBox" row="1" column="1">
+                <widget class="TQSpinBox" row="1" column="1">
                     <property name="name">
                         <cstring>kcfg_OverviewModeColumns</cstring>
                     </property>
@@ -109,7 +109,7 @@
                         <number>3</number>
                     </property>
                 </widget>
-                <widget class="QSpinBox" row="0" column="1">
+                <widget class="TQSpinBox" row="0" column="1">
                     <property name="name">
                         <cstring>kcfg_OverviewModeRows</cstring>
                     </property>
@@ -120,7 +120,7 @@
                         <number>1</number>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>columnLabel</cstring>
                     </property>
@@ -144,5 +144,5 @@
     <tabstop>kcfg_OverviewModeRows</tabstop>
     <tabstop>kcfg_OverviewModeColumns</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

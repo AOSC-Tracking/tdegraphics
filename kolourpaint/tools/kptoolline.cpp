@@ -35,7 +35,7 @@ kpToolLine::kpToolLine (kpMainWindow *mainWindow)
     : kpToolPolygon (Line,
                      i18n ("Line"),
                      i18n ("Draws lines"),
-                     Qt::Key_L,
+                     TQt::Key_L,
                      mainWindow, "tool_line")
 {
 }

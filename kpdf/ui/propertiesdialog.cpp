@@ -19,23 +19,23 @@
 #include "propertiesdialog.h"
 #include "core/document.h"
 
-PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
-  : KDialogBase( Tabbed, i18n( "Unknown File" ), Ok, Ok, parent, 0, true, true )
+PropertiesDialog::PropertiesDialog(TQWidget *tqparent, KPDFDocument *doc)
+  : KDialogBase( Tabbed, i18n( "Unknown File" ), Ok, Ok, tqparent, 0, true, true )
 {
   // Properties
   TQFrame *page = addPage(i18n("Properties"));
-  TQGridLayout *layout = new TQGridLayout( page, 2, 2, marginHint(), spacingHint() );
+  TQGridLayout *tqlayout = new TQGridLayout( page, 2, 2, marginHint(), spacingHint() );
 
   // get document info, if not present display blank data and a warning
   const DocumentInfo * info = doc->documentInfo();
   if ( !info ) {
-    layout->addWidget( new TQLabel( i18n( "No document opened." ), page ), 0, 0 );
+    tqlayout->addWidget( new TQLabel( i18n( "No document opened." ), page ), 0, 0 );
     return;
   }
 
   // mime name based on mimetype id
   TQString mimeName = info->get( "mimeType" ).section( '/', -1 ).upper();
-  setCaption( i18n("%1 Properties").arg( mimeName ) );
+  setCaption( i18n("%1 Properties").tqarg( mimeName ) );
 
   TQDomElement docElement = info->documentElement();
 
@@ -49,15 +49,15 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
     if ( titleString.isEmpty() || valueString.isEmpty() )
         continue;
 
-    // create labels and layout them
-    TQLabel *key = new TQLabel( i18n( "%1:" ).arg( titleString ), page );
+    // create labels and tqlayout them
+    TQLabel *key = new TQLabel( i18n( "%1:" ).tqarg( titleString ), page );
     TQLabel *value = new KSqueezedTextLabel( valueString, page );
-    layout->addWidget( key, row, 0, AlignRight );
-    layout->addWidget( value, row, 1 );
+    tqlayout->addWidget( key, row, 0, AlignRight );
+    tqlayout->addWidget( value, row, 1 );
     row++;
 
     // refine maximum width of 'value' labels
-    valMaxWidth = QMAX( valMaxWidth, fontMetrics().width( valueString ) );
+    valMaxWidth = TQMAX( valMaxWidth, fontMetrics().width( valueString ) );
   }
 
   // add the number of pages if the generator hasn't done it already
@@ -66,8 +66,8 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
     TQLabel *key = new TQLabel( i18n( "Pages:" ), page );
     TQLabel *value = new TQLabel( TQString::number( doc->pages() ), page );
 
-    layout->addWidget( key, row, 0 );
-    layout->addWidget( value, row, 1 );
+    tqlayout->addWidget( key, row, 0 );
+    tqlayout->addWidget( value, row, 1 );
   }
 
   // Fonts
@@ -82,13 +82,13 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
   }
 
   // current width: left column + right column + dialog borders
-  int width = layout->minimumSize().width() + valMaxWidth + marginHint() + spacingHint() + marginHint() + 30;
+  int width = tqlayout->tqminimumSize().width() + valMaxWidth + marginHint() + spacingHint() + marginHint() + 30;
   if (page2Layout)
   {
-    width = QMAX( width, page2Layout->sizeHint().width() + marginHint() + spacingHint() + 31 );
+    width = TQMAX( width, page2Layout->tqsizeHint().width() + marginHint() + spacingHint() + 31 );
   }
   // stay inside the 2/3 of the screen width
   TQRect screenContainer = KGlobalSettings::desktopGeometry( this );
-  width = QMIN( width, 2*screenContainer.width()/3 );
+  width = TQMIN( width, 2*screenContainer.width()/3 );
   resize(width, 1);
 }

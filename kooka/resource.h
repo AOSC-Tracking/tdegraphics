@@ -20,8 +20,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -52,7 +52,7 @@
 
 #define ID_FILE_PRINT               10080
 
-#define ID_FILE_QUIT                10100
+#define ID_FILE_TQUIT                10100
 
 
 ///////////////////////////////////////////////////////////////////

@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 #include <tqcolor.h>
@@ -36,8 +36,8 @@
 
 /* -------------------- ocrResEdit -------------------- */
 
-ocrResEdit::ocrResEdit( TQWidget *parent )
-    : TQTextEdit(parent)
+ocrResEdit::ocrResEdit( TQWidget *tqparent )
+    : TQTextEdit(tqparent)
 {
     m_updateColor.setNamedColor( "SeaGreen");
     m_ignoreColor.setNamedColor( "CadetBlue4" );
@@ -75,11 +75,11 @@ void ocrResEdit::slSelectWord( int line, const ocrWord& word )
    if( line < paragraphs() )
    {
       TQString editLine = text(line);
-      int cnt = editLine.contains( word);
+      int cnt = editLine.tqcontains( word);
 
       if( cnt > 0 )
       {
-	 int pos = editLine.find(word);
+	 int pos = editLine.tqfind(word);
 	 setCursorPosition( line, pos );
 	 setSelection( line, pos, line, pos + word.length());
       }
@@ -96,11 +96,11 @@ void ocrResEdit::slReplaceWord( int line, const TQString& wordFrom,
     if( line < paragraphs() )
     {
         TQString editLine = text(line);
-        int cnt = editLine.contains( wordFrom );
+        int cnt = editLine.tqcontains( wordFrom );
 
         if( cnt > 0 )
         {
-            int pos = editLine.find(wordFrom);
+            int pos = editLine.tqfind(wordFrom);
             setSelection( line, pos, line, pos+wordFrom.length());
 
             TQColor saveCol = this->color();

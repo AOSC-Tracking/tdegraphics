@@ -132,7 +132,7 @@ namespace DJVU {
 class GRect 
 {
 public:
-  /** #OrientationBits# defines 3 mutually exclusive
+  /** #Qt::OrientationBits# defines 3 mutually exclusive
      bits to indicate the image orientation.
 
      There are four possible rotation values for an image
@@ -150,7 +150,7 @@ public:
   };
 
   /**  #Orientations# defines all 8 possible orientations, using
-   the three \Ref{OrientationBits}.
+   the three \Ref{Qt::OrientationBits}.
    \begin{itemize}
    \item {\em TDLRNR} for Top Down, Left to Right, No Rotation.
    \item {\em BULRNR} for Bottom Up, Left to Right, No Rotation.
@@ -209,11 +209,11 @@ public:
       contains all pixels with horizontal pixel coordinates in range #xmin#
       (inclusive) to #xmax# (exclusive) and vertical coordinates #ymin#
       (inclusive) to #ymax# (exclusive). */
-  int  contains(int x, int y) const;
+  int  tqcontains(int x, int y) const;
   /** Returns true if this rectangle contains the passed rectangle #rect#.
       The function basically checks, that the intersection of this rectangle
       with #rect# is #rect#. */
-  int  contains(const GRect & rect) const;
+  int  tqcontains(const GRect & rect) const;
   /** Returns true if rectangles #r1# and #r2# are equal. */
   friend int operator==(const GRect & r1, const GRect & r2);
   /** Returns true if rectangles #r1# and #r2# are not equal. */
@@ -379,7 +379,7 @@ GRect::area() const
 }
 
 inline int
-GRect::contains(int x, int y) const
+GRect::tqcontains(int x, int y) const
 {
   return (x>=xmin && x<xmax && y>=ymin && y<ymax);
 }

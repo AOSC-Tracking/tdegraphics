@@ -60,12 +60,13 @@ class kpSingleKeyTriggersAction : public KAction,
                                   public kpSingleKeyTriggersActionInterface
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpSingleKeyTriggersAction (const TQString &text,
                                const KShortcut &shortcut,
                                const TQObject *receiver, const char *slot,
-                               KActionCollection *parent, const char *name);
+                               KActionCollection *tqparent, const char *name);
     virtual ~kpSingleKeyTriggersAction ();
 
 

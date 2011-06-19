@@ -47,9 +47,9 @@ typedef KParts::GenericFactory<DjVuMultiPage> DjVuMultiPageFactory;
 K_EXPORT_COMPONENT_FACTORY(djvuviewpart, DjVuMultiPageFactory)
 
 
-DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+DjVuMultiPage::DjVuMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
                              const char *name, const TQStringList&)
-  : KMultiPage(parentWidget, widgetName, parent, name), djvuRenderer(parentWidget)
+  : KMultiPage(tqparentWidget, widgetName, tqparent, name), djvuRenderer(tqparentWidget)
 {
   /* This is kparts wizardry that cannot be understood by man. Simply
      change the names to match your implementation.  */
@@ -162,7 +162,7 @@ void DjVuMultiPage::slotDeletePages()
   if (numberOfPages() == 0)
     return;
   
-  KDialogBase dialog( parentWdg, "urldialog", true, i18n("Delete Pages"), KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+  KDialogBase dialog( tqparentWdg, "urldialog", true, i18n("Delete Pages"), KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
   PageRangeWidget range( 1, numberOfPages(), currentPageNumber(), &dialog, "range widget" );
   TQToolTip::add( &range, i18n( "Select the pages you wish to delete." ) );
   dialog.setButtonOK(i18n("Delete Pages"));
@@ -188,7 +188,7 @@ void DjVuMultiPage::slotDeletePages()
   //@@@@@@@@@@  tableOfContents->setContents(renderer->getBookmarks());
   
   // Clear Statusbar
-  emit setStatusBarText(TQString::null);
+  emit setStatusBarText(TQString());
 }
 
 
@@ -220,7 +220,7 @@ void DjVuMultiPage::print()
   printer->addDialogPage( conversionOptions );
   
   // initialize the printer using the print dialog
-  if ( printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1))) ) {    
+  if ( printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
     // Now do the printing. 
     TQValueList<int> pageList = printer->pageList();
     if (pageList.isEmpty()) 
@@ -228,7 +228,7 @@ void DjVuMultiPage::print()
     else {
       // Printing usually takes a while. This is to keep the GUI
       // updated.
-      qApp->processEvents();
+      tqApp->processEvents();
       
       // Printing...
       DjVuToPS converter;
@@ -279,7 +279,7 @@ void DjVuMultiPage::print()
       else
 	options.set_zoom(100);
       
-      KTempFile tmpPSFile(TQString::null, "ps");
+      KTempFile tmpPSFile(TQString(), "ps");
       tmpPSFile.close();
       tmpPSFile.setAutoDelete(true);
       
@@ -314,27 +314,27 @@ void DjVuMultiPage::slotSave()
   // Try to guess the proper ending...
   TQString formats;
   TQString ending;
-  int rindex = m_file.findRev(".");
+  int rindex = m_file.tqfindRev(".");
   if (rindex == -1) {
-    ending = TQString::null;
-    formats = TQString::null;
+    ending = TQString();
+    formats = TQString();
   } else {
     ending = m_file.mid(rindex); // e.g. ".dvi"
     formats = fileFormats().grep(ending).join("\n");
   }
 
-  TQString fileName = KFileDialog::getSaveFileName(TQString::null, formats, 0, i18n("Save File As"));
+  TQString fileName = KFileDialog::getSaveFileName(TQString(), formats, 0, i18n("Save File As"));
 
   if (fileName.isEmpty())
     return;
 
   // Add the ending to the filename. I hope the user likes it that
   // way.
-  if (!ending.isEmpty() && fileName.find(ending) == -1)
+  if (!ending.isEmpty() && fileName.tqfind(ending) == -1)
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
-    int r = KMessageBox::warningContinueCancel(parentWdg, i18n("The file %1\nalready exists. Do you want to overwrite it?").arg(fileName),
+    int r = KMessageBox::warningContinueCancel(tqparentWdg, i18n("The file %1\nalready exists. Do you want to overwrite it?").tqarg(fileName),
 					       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -344,8 +344,8 @@ void DjVuMultiPage::slotSave()
 
   /*
   if (!djvuRenderer.save(fileName) == false)
-    KMessageBox::error( parentWdg,
-			i18n("<qt><strong>File error.</strong> Unable to write to the specified file '%1'. The document is <strong>not</strong> saved.</qt>").arg(fileName),
+    KMessageBox::error( tqparentWdg,
+			i18n("<qt><strong>File error.</strong> Unable to write to the specified file '%1'. The document is <strong>not</strong> saved.</qt>").tqarg(fileName),
 			i18n("File Error"));
   */
   

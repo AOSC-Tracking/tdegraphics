@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -54,6 +54,7 @@ class TQGroupBox;
 class KOCRBase: public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     KOCRBase( TQWidget *, KSpellConfig *spellConfig,
               KDialogBase::DialogType face = KDialogBase::Plain );
@@ -106,7 +107,7 @@ protected:
      * ocr engine used.
      * It calls the virtual subs ocrEngineName, ocrEngineLogo and ocrEngineDesc which
      * must return the approbiate values for the engines.
-     * @return a pointer to a VBox in which further elements can be layouted
+     * @return a pointer to a VBox in which further elements can be tqlayouted
      */
     virtual void ocrIntro();
 

@@ -42,7 +42,7 @@ class PMPovrayOutputWidget;
 /**
  * Base class for all widgets for editing object attributes.
  *
- * Ensures a consistent layout for all widgets. Widgets should not
+ * Ensures a consistent tqlayout for all widgets. Widgets should not
  * created within the constructor, but with the functions @ref createTopWidgets
  * and @ref createBottomWidgets.
  * 
@@ -51,9 +51,10 @@ class PMPovrayOutputWidget;
  * of solid objects. Subclasses like the widget for the box object add their
  * object specific controls.
  */
-class PMDialogEditBase : public QWidget
+class PMDialogEditBase : public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Creates a new PMDialogEditBase widget objectType is
@@ -62,7 +63,7 @@ public:
     * No widgets are created within the constructor! You have to call
     * @ref createWidgets after creating a new edit widget.
     */
-   PMDialogEditBase( TQWidget* parent, const char* name = 0 );
+   PMDialogEditBase( TQWidget* tqparent, const char* name = 0 );
    /**
     * Destructor
     */
@@ -275,7 +276,7 @@ protected:
     * of the sub class.
     *
     * First call the function of the base class, then create and append
-    * the widgets to the top layout.
+    * the widgets to the top tqlayout.
     */
    virtual void createTopWidgets( ) { };
 
@@ -283,7 +284,7 @@ protected:
     * Create widgets here, that should be placed under the widgets
     * of the sub class.
     *
-    * First create and append the widgets to the top layout, then
+    * First create and append the widgets to the top tqlayout, then
     * call the function of the base class
     */
    virtual void createBottomWidgets( );
@@ -295,7 +296,7 @@ protected:
    virtual void saveContents( );
 
    /**
-    * Returns a pointer to the top layout
+    * Returns a pointer to the top tqlayout
     */
    TQBoxLayout* topLayout( ) const { return m_pTopLayout; }
 

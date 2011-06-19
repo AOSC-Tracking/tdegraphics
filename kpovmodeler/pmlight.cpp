@@ -268,11 +268,11 @@ void PMLight::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMLight::metaObject( ) const
+PMMetaObject* PMLight::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Light", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Light", Base::tqmetaObject( ),
                                         createNewLight );
       PMTypeProperty* p = new PMTypeProperty( "lightType", &PMLight::setLightType,
                                               &PMLight::lightType );
@@ -564,9 +564,9 @@ void PMLight::setMediaAttenuation( bool y )
    }
 }
 
-PMDialogEditBase* PMLight::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMLight::editWidget( TQWidget* tqparent ) const
 {
-   return new PMLightEdit( parent );
+   return new PMLightEdit( tqparent );
 }
 
 void PMLight::restoreMemento( PMMemento* s )

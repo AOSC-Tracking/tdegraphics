@@ -76,7 +76,7 @@ PMColor::PMColor( const TQColor& c )
    m_colorValue[4] = 0.0;
 }
 
-TQColor PMColor::toQColor( ) const
+TQColor PMColor::toTQColor( ) const
 {
    double r, g, b, max = 0;
    r = red( );

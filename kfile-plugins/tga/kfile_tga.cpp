@@ -44,10 +44,10 @@ typedef KGenericFactory<KTgaPlugin> TgaFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_tga, TgaFactory( "kfile_tga" ))
 
-KTgaPlugin::KTgaPlugin(TQObject *parent, const char *name,
+KTgaPlugin::KTgaPlugin(TQObject *tqparent, const char *name,
                        const TQStringList &args)
 
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(tqparent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-targa" );
 
@@ -77,7 +77,7 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     if (!file.open(IO_ReadOnly))
     {
-        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
+        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()).data() << endl;
         return false;
     }
 

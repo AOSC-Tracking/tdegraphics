@@ -64,7 +64,7 @@ void KIconEdit::init()
 
   gridview = new KGridView(&img, history, this);
   grid = gridview->grid();
-  icon = new KIconEditIcon(this, &grid->image());
+  icon = new KIconEditIcon(TQT_TQOBJECT(this), &grid->image());
 
   setAcceptDrops(true);
 
@@ -146,7 +146,7 @@ void KIconEdit::init()
 
   updateAccels();
   show();
-  moveDockWindow( m_paletteToolBar, Qt::DockRight, true, 0 );
+  moveDockWindow( m_paletteToolBar, TQt::DockRight, true, 0 );
 }
 
 KIconEdit::~KIconEdit()
@@ -165,7 +165,7 @@ bool KIconEdit::queryClose()
     if (grid->isModified())
     {
         int r = KMessageBox::warningYesNoCancel(this,
-	    i18n("The current file has been modified.\nDo you want to save it?"), TQString::null, KStdGuiItem::save(), KStdGuiItem::discard());
+	    i18n("The current file has been modified.\nDo you want to save it?"), TQString(), KStdGuiItem::save(), KStdGuiItem::discard());
 
         switch(r)
         {
@@ -222,10 +222,10 @@ void KIconEdit::writeConfig()
     saveMainWindowSettings( config, "MainWindowSettings" );
 }
 
-TQSize KIconEdit::sizeHint() const
+TQSize KIconEdit::tqsizeHint() const
 {
     if(gridview)
-        return gridview->sizeHint();
+        return gridview->tqsizeHint();
     else
         return TQSize(-1, -1);
 }
@@ -240,43 +240,43 @@ void KIconEdit::setupActions()
 
   // File Menu
   action = new KAction(i18n("New &Window"), "window_new", cut,
-      this,  TQT_SLOT(slotNewWin()), actionCollection(), "file_new_window");
+      TQT_TQOBJECT(this),  TQT_SLOT(slotNewWin()), actionCollection(), "file_new_window");
   action->setWhatsThis(i18n("New window\n\nOpens a new icon editor window."));
 
-  action = KStdAction::openNew(this, TQT_SLOT(slotNew()), actionCollection());
+  action = KStdAction::openNew(TQT_TQOBJECT(this), TQT_SLOT(slotNew()), actionCollection());
   action->setWhatsThis(i18n("New\n\nCreate a new icon, either from a"
       " template or by specifying the size"));
 
-  action = KStdAction::open(this, TQT_SLOT(slotOpen()), actionCollection());
+  action = KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(slotOpen()), actionCollection());
   action->setWhatsThis(i18n("Open\n\nOpen an existing icon"));
 
-  m_actRecent = KStdAction::openRecent(this,
+  m_actRecent = KStdAction::openRecent(TQT_TQOBJECT(this),
       TQT_SLOT(slotOpenRecent(const KURL&)), actionCollection());
   m_actRecent->setMaxItems(15); // FIXME should be configurable!
   m_actRecent->loadEntries(kapp->config());
 
-  action = KStdAction::save(this, TQT_SLOT(slotSave()), actionCollection());
+  action = KStdAction::save(TQT_TQOBJECT(this), TQT_SLOT(slotSave()), actionCollection());
   action->setWhatsThis(i18n("Save\n\nSave the current icon"));
 
-  KStdAction::saveAs(this, TQT_SLOT(slotSaveAs()), actionCollection());
+  KStdAction::saveAs(TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()), actionCollection());
 
-  action = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
+  action = KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(slotPrint()), actionCollection());
   action->setWhatsThis(i18n("Print\n\nOpens a print dialog to let you print"
       " the current icon."));
 
-  KStdAction::close(this, TQT_SLOT(slotClose()), actionCollection());
+  KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(slotClose()), actionCollection());
 
   // Edit Menu
 
-  m_actCut = KStdAction::cut(this, TQT_SLOT(slotCut()), actionCollection());
+  m_actCut = KStdAction::cut(TQT_TQOBJECT(this), TQT_SLOT(slotCut()), actionCollection());
   m_actCut->setWhatsThis(i18n("Cut\n\nCut the current selection out of the"
       " icon.\n\n(Tip: You can make both rectangular and circular selections)"));
 
-  m_actCopy = KStdAction::copy(this, TQT_SLOT(slotCopy()), actionCollection());
+  m_actCopy = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(slotCopy()), actionCollection());
   m_actCopy->setWhatsThis(i18n("Copy\n\nCopy the current selection out of the"
       " icon.\n\n(Tip: You can make both rectangular and circular selections)"));
 
-  m_actPaste = KStdAction::paste(this, TQT_SLOT(slotPaste()), actionCollection());
+  m_actPaste = KStdAction::paste(TQT_TQOBJECT(this), TQT_SLOT(slotPaste()), actionCollection());
   m_actPaste->setWhatsThis(i18n("Paste\n\n"
        "Paste the contents of the clipboard into the current icon.\n\n"
        "If the contents are larger than the current icon you can paste them"
@@ -284,29 +284,29 @@ void KIconEdit::setupActions()
        "(Tip: Select \"Paste transparent pixels\" in the configuration dialog"
        " if you also want to paste transparency.)"));
 
-  m_actPasteNew = new KAction( i18n( "Paste as &New" ), cut, grid,
+  m_actPasteNew = new KAction( i18n( "Paste as &New" ), cut, TQT_TQOBJECT(grid),
       TQT_SLOT( editPasteAsNew() ), actionCollection(), "edit_paste_as_new" );
 
-  KStdAction::clear(this, TQT_SLOT(slotClear()), actionCollection());
-  KStdAction::selectAll(this, TQT_SLOT(slotSelectAll()), actionCollection());
+  KStdAction::clear(TQT_TQOBJECT(this), TQT_SLOT(slotClear()), actionCollection());
+  KStdAction::selectAll(TQT_TQOBJECT(this), TQT_SLOT(slotSelectAll()), actionCollection());
 
   action = new KAction(i18n("Resi&ze..."), "transform", cut,
-      grid,  TQT_SLOT(editResize()), actionCollection(), "edit_resize");
+      TQT_TQOBJECT(grid),  TQT_SLOT(editResize()), actionCollection(), "edit_resize");
   action->setWhatsThis(i18n("Resize\n\nSmoothly resizes the icon while"
       " trying to preserve the contents"));
 
   action = new KAction(i18n("&GrayScale"), "grayscale", cut,
-      grid,  TQT_SLOT(grayScale()), actionCollection(), "edit_grayscale");
+      TQT_TQOBJECT(grid),  TQT_SLOT(grayScale()), actionCollection(), "edit_grayscale");
   action->setWhatsThis(i18n("Gray scale\n\nGray scale the current icon.\n"
       "(Warning: The result is likely to contain colors not in the icon"
       " palette"));
 
   // View Menu
-  m_actZoomIn = KStdAction::zoomIn(this, TQT_SLOT(slotZoomIn()),
+  m_actZoomIn = KStdAction::zoomIn(TQT_TQOBJECT(this), TQT_SLOT(slotZoomIn()),
       actionCollection());
   m_actZoomIn->setWhatsThis(i18n("Zoom in\n\nZoom in by one."));
 
-  m_actZoomOut = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()),
+  m_actZoomOut = KStdAction::zoomOut(TQT_TQOBJECT(this), TQT_SLOT(slotZoomOut()),
       actionCollection());
   m_actZoomOut->setWhatsThis(i18n("Zoom out\n\nZoom out by one."));
 
@@ -314,26 +314,26 @@ void KIconEdit::setupActions()
       actionCollection(), "view_zoom" );
 
   // xgettext:no-c-format
-  action = new KAction( i18n( "100%" ), cut, this, TQT_SLOT( slotZoom1() ),
+  action = new KAction( i18n( "100%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom1() ),
       actionCollection(), "view_zoom_1" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new KAction( i18n( "200%" ), cut, this, TQT_SLOT( slotZoom2() ),
+  action = new KAction( i18n( "200%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom2() ),
       actionCollection(), "view_zoom_2" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new KAction( i18n( "500%" ), cut, this, TQT_SLOT( slotZoom5() ),
+  action = new KAction( i18n( "500%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom5() ),
       actionCollection(), "view_zoom_5" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new KAction( i18n( "1000%" ), cut, this, TQT_SLOT( slotZoom10() ),
+  action = new KAction( i18n( "1000%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom10() ),
       actionCollection(), "view_zoom_10" );
   actMenu->insert( action );
 
   // Settings Menu
-  KStdAction::keyBindings(this, TQT_SLOT(slotConfigureKeys()),
+  KStdAction::keyBindings(TQT_TQOBJECT(this), TQT_SLOT(slotConfigureKeys()),
       actionCollection());
-  KStdAction::preferences(this, TQT_SLOT(slotConfigureSettings()),
+  KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(slotConfigureSettings()),
       actionCollection());
 
   createStandardStatusBarAction();
@@ -341,7 +341,7 @@ void KIconEdit::setupActions()
   KToggleAction *toggle;
 
   toggle = new KToggleAction( i18n( "Show &Grid" ), "grid",
-      cut, this, TQT_SLOT( slotShowGrid() ), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT( slotShowGrid() ), actionCollection(),
       "options_show_grid" );
   toggle->setCheckedState(i18n("Hide &Grid"));
   toggle->setWhatsThis( i18n( "Show grid\n\nToggles the grid in the icon"
@@ -350,14 +350,14 @@ void KIconEdit::setupActions()
 
   // Tools Menu
   toolAction = new KRadioAction(i18n("Color Picker"), "colorpicker",
-      cut, this, TQT_SLOT(slotToolPointer()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolPointer()), actionCollection(),
       "tool_find_pixel");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Color Picker\n\nThe color of the pixel clicked"
       " on will be the current draw color"));
 
   toolAction = new KRadioAction(i18n("Freehand"), "paintbrush",
-      cut, this, TQT_SLOT(slotToolFreehand()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFreehand()), actionCollection(),
       "tool_freehand");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Free hand\n\nDraw non-linear lines"));
@@ -366,64 +366,64 @@ void KIconEdit::setupActions()
   grid->setTool(KIconEditGrid::Freehand);
 
   toolAction = new KRadioAction(i18n("Rectangle"), "rectangle",
-      cut, this, TQT_SLOT(slotToolRectangle()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolRectangle()), actionCollection(),
       "tool_rectangle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Rectangle\n\nDraw a rectangle"));
 
   toolAction = new KRadioAction(i18n("Filled Rectangle"), "filledrectangle",
-      cut, this, TQT_SLOT(slotToolFilledRectangle()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFilledRectangle()), actionCollection(),
       "tool_filled_rectangle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled rectangle\n\nDraw a filled rectangle"));
 
   toolAction = new KRadioAction(i18n("Circle"), "circle",
-      cut, this, TQT_SLOT(slotToolCircle()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolCircle()), actionCollection(),
       "tool_circle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Circle\n\nDraw a circle"));
 
   toolAction = new KRadioAction(i18n("Filled Circle"), "filledcircle",
-      cut, this, TQT_SLOT(slotToolFilledCircle()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFilledCircle()), actionCollection(),
       "tool_filled_circle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled circle\n\nDraw a filled circle"));
 
   toolAction = new KRadioAction(i18n("Ellipse"), "ellipse",
-      cut, this, TQT_SLOT(slotToolEllipse()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolEllipse()), actionCollection(),
       "tool_ellipse");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Ellipse\n\nDraw an ellipse"));
 
   toolAction = new KRadioAction(i18n("Filled Ellipse"), "filledellipse",
-      cut, this, TQT_SLOT(slotToolFilledEllipse()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFilledEllipse()), actionCollection(),
       "tool_filled_ellipse");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled ellipse\n\nDraw a filled ellipse"));
 
   toolAction = new KRadioAction(i18n("Spray"), "airbrush",
-      cut, this, TQT_SLOT(slotToolSpray()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolSpray()), actionCollection(),
       "tool_spray");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Spray\n\nDraw scattered pixels in the"
       " current color"));
 
   toolAction = new KRadioAction(i18n("Flood Fill"), "fill",
-      cut, this, TQT_SLOT(slotToolFlood()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFlood()), actionCollection(),
       "tool_flood_fill");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Flood fill\n\nFill adjoining pixels with"
       " the same color with the current color"));
 
   toolAction = new KRadioAction(i18n("Line"), "line",
-      cut, this, TQT_SLOT(slotToolLine()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolLine()), actionCollection(),
       "tool_line");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Line\n\nDraw a straight line vertically,"
       " horizontally or at 45 deg. angles"));
 
   toolAction = new KRadioAction(i18n("Eraser (Transparent)"), "eraser",
-      cut, this, TQT_SLOT(slotToolEraser()), actionCollection(),
+      cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolEraser()), actionCollection(),
       "tool_eraser");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Erase\n\nErase pixels. Set the pixels to"
@@ -432,14 +432,14 @@ void KIconEdit::setupActions()
       " to use)"));
 
   toolAction = new KRadioAction(i18n("Rectangular Selection"),
-      "selectrect", cut, this,  TQT_SLOT(slotToolSelectRect()),
+      "selectrect", cut, TQT_TQOBJECT(this),  TQT_SLOT(slotToolSelectRect()),
       actionCollection(), "edit_select_rectangle");
   toolAction->setExclusiveGroup( "toolActions" );
   toolAction->setWhatsThis(i18n("Select\n\nSelect a rectangular section"
       " of the icon using the mouse."));
 
   toolAction = new KRadioAction(i18n("Circular Selection"),
-      "selectcircle", cut, this,  TQT_SLOT(slotToolSelectCircle()),
+      "selectcircle", cut, TQT_TQOBJECT(this),  TQT_SLOT(slotToolSelectCircle()),
       actionCollection(), "edit_select_circle");
   toolAction->setExclusiveGroup( "toolActions" );
   toolAction->setWhatsThis(i18n("Select\n\nSelect a circular section of the"
@@ -451,7 +451,7 @@ void KIconEdit::updateAccels()
     actionCollection()->readShortcutSettings();
 }
 
-TQWidget *KIconEdit::createContainer( TQWidget *parent, int index,
+TQWidget *KIconEdit::createContainer( TQWidget *tqparent, int index,
         const TQDomElement &element, int &id )
 {
     if ( element.attribute( "name" ) == "paletteToolBar" )
@@ -461,7 +461,7 @@ TQWidget *KIconEdit::createContainer( TQWidget *parent, int index,
         return m_paletteToolBar;
     }
 
-    return KXMLGUIBuilder::createContainer( parent, index, element, id );
+    return KXMLGUIBuilder::createContainer( tqparent, index, element, id );
 }
 
 bool KIconEdit::setupStatusBar()
@@ -477,7 +477,7 @@ bool KIconEdit::setupStatusBar()
     statusbar->insertFixedItem("99999,99999", 0, true);
     statusbar->insertFixedItem("99999 x 99999", 1, true);
     statusbar->insertFixedItem(" 1:999", 2, true);
-    str = i18n("Colors: %1").arg(9999999);
+    str = i18n("Colors: %1").tqarg(9999999);
     statusbar->insertFixedItem(str, 3, true);
     statusbar->insertItem("", 4);
 

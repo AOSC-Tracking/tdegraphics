@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 #ifndef KOOKAPREF_H
@@ -47,6 +47,7 @@ class TQCheckBox;
 class KookaPreferences : public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     KookaPreferences();
     static TQString tryFindGocr( void );

@@ -80,8 +80,8 @@ TQCString palette2String( Configuration::EnumPalette::type palette )
 }
 
 
-KPSWidget::KPSWidget( TQWidget* parent, const char* name ) : 
-    TQWidget           ( parent, name ),
+KPSWidget::KPSWidget( TQWidget* tqparent, const char* name ) : 
+    TQWidget           ( tqparent, name ),
     _gsWindow         ( None ),
     _usePipe          ( false ),
     _doubleBuffer     ( false ),
@@ -279,8 +279,8 @@ void KPSWidget::setupWidget()
 
     Q_ASSERT( orientation() != CDSC_ORIENT_UNKNOWN );
 
-    const float dpiX = _magnification * x11AppDpiX();
-    const float dpiY = _magnification * x11AppDpiY();
+    const float dpiX = _magnification * TQT_TQPAINTDEVICE(this)->x11AppDpiX();
+    const float dpiY = _magnification * TQT_TQPAINTDEVICE(this)->x11AppDpiY();
 
     int newWidth = 0, newHeight = 0;
     if( orientation() == CDSC_PORTRAIT || orientation() == CDSC_UPSIDEDOWN )
@@ -333,7 +333,7 @@ void KPSWidget::setupWidget()
     // Make sure the properties are updated immediately.
     XSync( x11Display(), false );
 
-    repaint();
+    tqrepaint();
 
     _widgetDirty = false;
 }
@@ -343,7 +343,7 @@ bool KPSWidget::startInterpreter()
     setupWidget();
 
     _process = new KProcess;
-    if ( _doubleBuffer ) _process->setEnvironment( "GHOSTVIEW", TQString(  "%1 %2" ).arg( winId() ).arg( _backgroundPixmap.handle() ) );
+    if ( _doubleBuffer ) _process->setEnvironment( "GHOSTVIEW", TQString(  "%1 %2" ).tqarg( winId() ).tqarg( _backgroundPixmap.handle() ) );
     else _process->setEnvironment( "GHOSTVIEW", TQString::number( winId() ) );
 
     *_process << _ghostscriptPath.local8Bit();
@@ -420,7 +420,7 @@ void KPSWidget::slotProcessExited( KProcess* process )
     {
 	kdDebug( 4500 ) << "KPSWidget::slotProcessExited(): looks like it was not a clean exit." << endl;
 	if ( process->normalExit() ) {
-	    emit ghostscriptError( TQString( i18n( "Exited with error code %1." ).arg( process->exitStatus() ) ) );
+	    emit ghostscriptError( TQString( i18n( "Exited with error code %1." ).tqarg( process->exitStatus() ) ) );
 	} else {
 	    emit ghostscriptError( TQString( i18n( "Process killed or crashed." ) ) );
 	}
@@ -464,7 +464,7 @@ void KPSWidget::gs_input( KProcess* process )
     const unsigned buffer_size = 4096;
     if ( !_buffer ) _buffer = static_cast<char*>( operator new( buffer_size ) );
     const int bytesRead = fread( _buffer, sizeof (char), 
-	    QMIN( buffer_size, current.len ),
+	    TQMIN( buffer_size, current.len ),
 	    current.fp );
     if( bytesRead > 0 ) 
     {
@@ -493,7 +493,7 @@ void KPSWidget::readSettings()
     if( !Configuration::platformFonts() )
 	arguments << "-dNOPLATFONTS";
 
-    arguments << "-dNOPAUSE" << "-dQUIET" << "-dSAFER" << "-dPARANOIDSAFER";
+    arguments << "-dNOPAUSE" << "-dTQUIET" << "-dSAFER" << "-dPARANOIDSAFER";
 
     setGhostscriptArguments( arguments );
 

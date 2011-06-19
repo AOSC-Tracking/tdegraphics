@@ -32,11 +32,12 @@ class TQCheckBox;
 class PMOpenGLSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMOpenGLSettings( TQWidget* parent, const char* name = 0 );
+   PMOpenGLSettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

@@ -21,14 +21,14 @@
 //#define DEBUG_TFM
 
 
-TeXFont_TFM::TeXFont_TFM(TeXFontDefinition *parent) 
-  : TeXFont(parent)
+TeXFont_TFM::TeXFont_TFM(TeXFontDefinition *tqparent) 
+  : TeXFont(tqparent)
 {
 #ifdef DEBUG_TFM
-  kdDebug(4300) << "TeXFont_TFM::TeXFont_TFM( parent=" << parent << " )" << endl;
+  kdDebug(4300) << "TeXFont_TFM::TeXFont_TFM( tqparent=" << tqparent << " )" << endl;
 #endif
 
-  TQFile file( parent->filename );
+  TQFile file( tqparent->filename );
   if ( !file.open( IO_ReadOnly ) ) {
     kdError(4300) << "TeXFont_TFM::TeXFont_TFM(): Could not read TFM file" << endl;
     return;
@@ -37,7 +37,7 @@ TeXFont_TFM::TeXFont_TFM(TeXFontDefinition *parent)
 
   // Data from the very beginning of the TFM file, as specified in
   // "The DVI Driver Standard, Level 0", section D.2.1
-  Q_UINT16 lf, lh, bc, ec, nw, nh, nd;
+  TQ_UINT16 lf, lh, bc, ec, nw, nh, nd;
   stream >> lf >> lh >> bc >> ec >> nw >> nh >> nd;
 #ifdef DEBUG_TFM
   kdDebug(4300) << "lf= " << lf << endl
@@ -49,7 +49,7 @@ TeXFont_TFM::TeXFont_TFM(TeXFontDefinition *parent)
 		<< "nd= " << nd << endl;
 #endif
   if ((bc > ec) || (ec >= TeXFontDefinition::max_num_of_chars_in_font)) {
-    kdError(4300) << "TeXFont_TFM::TeXFont_TFM( filename=" << parent->filename << " ): The font has an invalid bc and ec entries." << endl;
+    kdError(4300) << "TeXFont_TFM::TeXFont_TFM( filename=" << tqparent->filename << " ): The font has an invalid bc and ec entries." << endl;
     file.close();
     return;
   }
@@ -94,10 +94,10 @@ TeXFont_TFM::TeXFont_TFM(TeXFontDefinition *parent)
   for(unsigned int characterCode=bc; characterCode<ec; characterCode++) {
     glyph *g = glyphtable+characterCode;
     
-    Q_UINT8 byte;
+    TQ_UINT8 byte;
     stream >> byte;
     if (byte >= nw) 
-      kdError(4300) << "TeXFont_TFM::TeXFont_TFM( filename=" << parent->filename << " ): The font has an invalid Char-Info table." << endl;
+      kdError(4300) << "TeXFont_TFM::TeXFont_TFM( filename=" << tqparent->filename << " ): The font has an invalid Char-Info table." << endl;
     else {
       characterWidth_in_units_of_design_size[characterCode] = widthTable_in_units_of_design_size[byte];
       g->dvi_advance_in_units_of_design_size_by_2e20 = widthTable_in_units_of_design_size[byte].value;
@@ -106,7 +106,7 @@ TeXFont_TFM::TeXFont_TFM(TeXFontDefinition *parent)
     stream >> byte;
     byte = byte >> 4;
     if (byte >= nh)
-      kdError(4300) << "TeXFont_TFM::TeXFont_TFM( filename=" << parent->filename << " ): The font has an invalid Char-Info table." << endl;
+      kdError(4300) << "TeXFont_TFM::TeXFont_TFM( filename=" << tqparent->filename << " ): The font has an invalid Char-Info table." << endl;
     else 
       characterHeight_in_units_of_design_size[characterCode] = heightTable_in_units_of_design_size[byte];
     
@@ -122,7 +122,7 @@ TeXFont_TFM::~TeXFont_TFM()
 }
 
 
-glyph *TeXFont_TFM::getGlyph(Q_UINT16 characterCode, bool generateCharacterPixmap, const TQColor& color)
+glyph *TeXFont_TFM::getGlyph(TQ_UINT16 characterCode, bool generateCharacterPixmap, const TQColor& color)
 {
 #ifdef DEBUG_TFM
   kdDebug(4300) << "TeXFont_TFM::getGlyph( ch=" << ch << ", generateCharacterPixmap=" << generateCharacterPixmap << " )" << endl;
@@ -139,10 +139,10 @@ glyph *TeXFont_TFM::getGlyph(Q_UINT16 characterCode, bool generateCharacterPixma
   
   if ((generateCharacterPixmap == true) && ((g->shrunkenCharacter.isNull()) || (color != g->color)) ) {
     g->color = color;
-    Q_UINT16 pixelWidth = (Q_UINT16)(parent->displayResolution_in_dpi *
+    TQ_UINT16 pixelWidth = (TQ_UINT16)(tqparent->displayResolution_in_dpi *
 				     design_size_in_TeX_points.toDouble() *
 				     characterWidth_in_units_of_design_size[characterCode].toDouble() * 100.0/7227.0 + 0.5);
-    Q_UINT16 pixelHeight = (Q_UINT16)(parent->displayResolution_in_dpi *
+    TQ_UINT16 pixelHeight = (TQ_UINT16)(tqparent->displayResolution_in_dpi *
 				      design_size_in_TeX_points.toDouble() *
 				      characterHeight_in_units_of_design_size[characterCode].toDouble() * 100.0/7227.0 + 0.5);
     

@@ -15,9 +15,10 @@
 #include <tqstringlist.h>
 
 
-class Zoom : public QObject
+class Zoom : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
   /** Initializs the zoom with a default of 100% */

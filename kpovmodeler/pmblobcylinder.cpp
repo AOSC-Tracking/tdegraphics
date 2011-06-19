@@ -93,11 +93,11 @@ void PMBlobCylinder::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBlobCylinder::metaObject( ) const
+PMMetaObject* PMBlobCylinder::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BlobCylinder", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BlobCylinder", Base::tqmetaObject( ),
                                         createNewBlobCylinder );
       s_pMetaObject->addProperty(
          new PMBlobCylinderProperty( "end1", &PMBlobCylinder::setEnd1,
@@ -160,9 +160,9 @@ void PMBlobCylinder::setStrength( double s )
    }
 }
 
-PMDialogEditBase* PMBlobCylinder::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMBlobCylinder::editWidget( TQWidget* tqparent ) const
 {
-   return new PMBlobCylinderEdit( parent );
+   return new PMBlobCylinderEdit( tqparent );
 }
 
 void PMBlobCylinder::restoreMemento( PMMemento* s )

@@ -47,9 +47,9 @@
 
 // ************** PMLibraryBrowser **************************
 
-PMLibraryBrowserView::PMLibraryBrowserView( PMPart* /*part*/, TQWidget* parent /*= 0*/,
+PMLibraryBrowserView::PMLibraryBrowserView( PMPart* /*part*/, TQWidget* tqparent /*= 0*/,
                                     const char* name /*=0*/ )
-      : PMViewBase( parent, name )
+      : PMViewBase( tqparent, name )
 {
    TQHBoxLayout* hl = new TQHBoxLayout( this );
    PMLibraryBrowserViewWidget* tv = new PMLibraryBrowserViewWidget( this );
@@ -61,8 +61,8 @@ TQString PMLibraryBrowserView::description( ) const
    return i18n( "Library View" );
 }
 
-PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    setCaption( i18n( "Library Objects" ) );
 

@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -38,7 +38,7 @@
 #include "kocrbase.h"
 
 #define CFG_GROUP_OCRAD "ocrad"
-#define CFG_OCRAD_LAYOUT_DETECTION "layoutDetection"
+#define CFG_OCRAD_LAYOUT_DETECTION "tqlayoutDetection"
 #define CFG_OCRAD_EXTRA_ARGUMENTS  "extraArguments"
 #define CFG_OCRAD_FORMAT "format"
 #define CFG_OCRAD_CHARSET "charset"
@@ -55,6 +55,7 @@ class TQComboBox;
 class ocradDialog: public KOCRBase
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     ocradDialog( TQWidget*, KSpellConfig* );
     ~ocradDialog();
@@ -70,7 +71,7 @@ public:
 
     TQString orfUrl() const;
 
-    int layoutDetectionMode() const;
+    int tqlayoutDetectionMode() const;
 
     /**
      * returns the numeric version of the ocrad program.

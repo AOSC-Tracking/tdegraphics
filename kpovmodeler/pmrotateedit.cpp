@@ -24,8 +24,8 @@
 #include <klocale.h>
 
 
-PMRotateEdit::PMRotateEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMRotateEdit::PMRotateEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

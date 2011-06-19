@@ -31,7 +31,7 @@ class PMPart;
  * Supports drag/drop and copy/paste of kpovmodeler objects
  */
 
-class PMObjectDrag : public QDragObject
+class PMObjectDrag : public TQDragObject
 {
 public:
    /**
@@ -56,7 +56,7 @@ public:
     * Returns the encoded payload of this object, in the
     * specified MIME format.
     */
-   virtual TQByteArray encodedData( const char* ) const;
+   virtual TQByteArray tqencodedData( const char* ) const;
    /**
     * Returns the ith format, or NULL.
     */

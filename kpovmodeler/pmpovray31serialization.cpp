@@ -21,7 +21,7 @@
 
 const double c_defaultPatchFlatness = 0;
 
-void PMPov31SerBicubicPatch( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerBicubicPatch( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMBicubicPatch* o = ( PMBicubicPatch* ) object;
 
@@ -53,7 +53,7 @@ void PMPov31SerBicubicPatch( const PMObject* object, const PMMetaObject* metaObj
       dev->writeLine( line );
    }
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -102,16 +102,16 @@ void PMPov31SerBlendMapModifiers( const PMObject* object, const PMMetaObject*, P
    }
 }
 
-void PMPov31SerBlob( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerBlob( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMBlob* o = ( PMBlob* ) object;
 
    dev->objectBegin( "blob" );
 
    dev->writeName( object->name( ) );
-   dev->writeLine( TQString( "threshold %1" ).arg( o->threshold( ) ) );
+   dev->writeLine( TQString( "threshold %1" ).tqarg( o->threshold( ) ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 
    if( o->sturm( ) )
       dev->writeLine( "sturm" );
@@ -121,7 +121,7 @@ void PMPov31SerBlob( const PMObject* object, const PMMetaObject* metaObject, PMO
    dev->objectEnd( );
 }
 
-void PMPov31SerBlobCylinder( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerBlobCylinder( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMBlobCylinder* o = ( PMBlobCylinder* ) object;
 
@@ -132,36 +132,36 @@ void PMPov31SerBlobCylinder( const PMObject* object, const PMMetaObject* metaObj
    str1.setNum( o->radius( ) );
    dev->writeLine( o->end1( ).serialize( ) + ", " + o->end2( ).serialize( )
                   + ", " + str1 + "," );
-   dev->writeLine( TQString( "strength %1" ).arg( o->strength( ) ) );
+   dev->writeLine( TQString( "strength %1" ).tqarg( o->strength( ) ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerBlobSphere( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerBlobSphere( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMBlobSphere* o = ( PMBlobSphere* ) object;
 
    dev->objectBegin( "sphere" );
    dev->writeName( object->name( ) );
-   dev->writeLine( o->centre( ).serialize( ) + TQString( ", %1," ).arg( o->radius( ) ) );
-   dev->writeLine( TQString( "strength %1" ).arg( o->strength( ) ) );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->writeLine( o->centre( ).serialize( ) + TQString( ", %1," ).tqarg( o->radius( ) ) );
+   dev->writeLine( TQString( "strength %1" ).tqarg( o->strength( ) ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerBoundedBy( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerBoundedBy( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMBoundedBy* o = ( PMBoundedBy* ) object;
 
    dev->objectBegin( "bounded_by" );
    if( o->clippedBy( ) )
       dev->writeLine( "clipped_by" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerBox( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerBox( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMBox* o = ( PMBox* ) object;
 
@@ -170,7 +170,7 @@ void PMPov31SerBox( const PMObject* object, const PMMetaObject* metaObject, PMOu
    dev->writeName( object->name( ) );
    dev->writeLine( o->corner1( ).serialize( ) + ", " + o->corner2( ).serialize( ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -257,7 +257,7 @@ void PMPov31SerBumpMap( const PMObject* object, const PMMetaObject*, PMOutputDev
    dev->objectEnd( );
 }
 
-void PMPov31SerCamera( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerCamera( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMCamera* o = ( PMCamera* ) object;
 
@@ -301,18 +301,18 @@ void PMPov31SerCamera( const PMObject* object, const PMMetaObject* metaObject, P
       dev->writeLine( "variance " + str );
    }
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerClippedBy( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerClippedBy( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMClippedBy* o = ( PMClippedBy* ) object;
 
    dev->objectBegin( "clipped_by" );
    if( o->boundedBy( ) )
       dev->writeLine( "bounded_by" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -334,7 +334,7 @@ void PMPov31SerCompositeObject( const PMObject* object, const PMMetaObject*, PMO
          dev->serialize( tmp );
 }
 
-void PMPov31SerCone( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerCone( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMCone* o = ( PMCone* ) object;
 
@@ -349,11 +349,11 @@ void PMPov31SerCone( const PMObject* object, const PMMetaObject* metaObject, PMO
    if( o->open( ) )
       dev->writeLine( TQString( "open" ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerCSG( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerCSG( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMCSG* o = ( PMCSG* ) object;
 
@@ -374,11 +374,11 @@ void PMPov31SerCSG( const PMObject* object, const PMMetaObject* metaObject, PMOu
    }
 
    dev->writeName( object->name( ) );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerCylinder( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerCylinder( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMCylinder* o = ( PMCylinder* ) object;
 
@@ -392,36 +392,36 @@ void PMPov31SerCylinder( const PMObject* object, const PMMetaObject* metaObject,
    if( o->open( ) )
       dev->writeLine( TQString( "open" ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerDeclare( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerDeclare( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMDeclare* o = ( PMDeclare* ) object;
 
    if( o->firstChild( ) )
    {
       dev->declareBegin( o->id( ) );
-      dev->callSerialization( object, metaObject->superClass( ) );
+      dev->callSerialization( object, tqmetaObject->superClass( ) );
    }
 }
 
-void PMPov31SerDensity( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerDensity( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    bool bObject = true;
-   if( object->parent( ) )
-      if( object->parent( )->type( ) == "DensityMap" )
+   if( object->tqparent( ) )
+      if( object->tqparent( )->type( ) == "DensityMap" )
          bObject = false;
 
    if( bObject )
       dev->objectBegin( "density" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    if( bObject )
       dev->objectEnd( );
 }
 
-void PMPov31SerDisc( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerDisc( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMDisc* o = ( PMDisc* ) object;
 
@@ -439,11 +439,11 @@ void PMPov31SerDisc( const PMObject* object, const PMMetaObject* metaObject, PMO
    {
       dev->writeLine( o->center( ).serialize( ) + ","  + o->normal( ).serialize( ) + ", "  + str1 );
    }
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerFinish( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerFinish( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMFinish* o = ( PMFinish* ) object;
 
@@ -451,7 +451,7 @@ void PMPov31SerFinish( const PMObject* object, const PMMetaObject* metaObject, P
 
    dev->objectBegin( "finish" );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 
    if( o->isAmbientEnabled( ) )
       dev->writeLine( "ambient " + o->ambientColor( ).serialize( ) );
@@ -544,7 +544,7 @@ void PMPov31SerFog( const PMObject* object, const PMMetaObject*, PMOutputDevice*
          if( text.isEmpty( ) )
             text = o->description( );
 
-         dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
+         dev->writeComment( TQString( "No prototype for %1" ).tqarg( text ) );
       }
    }
 
@@ -587,8 +587,8 @@ void PMPov31SerFog( const PMObject* object, const PMMetaObject*, PMOutputDevice*
       dev->writeLine( "fog_alt " + str );
       dev->writeLine( "up " + o->up( ).serialize( ) );
    }
-   // Serialize the children of this object
-   dev->callSerialization( object, object->metaObject( )->superClass( )->superClass( ) );
+   // Serialize the tqchildren of this object
+   dev->callSerialization( object, object->tqmetaObject( )->superClass( )->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -708,16 +708,16 @@ void PMPov31SerGlobalSettings( const PMObject* object, const PMMetaObject*, PMOu
    dev->objectEnd( );
 }
 
-void PMPov31SerGraphicalObject( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerGraphicalObject( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMGraphicalObject* o = ( PMGraphicalObject* ) object;
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    if( o->noShadow( ) )
       dev->writeLine( "no_shadow" );
 }
 
-void PMPov31SerHeightField( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerHeightField( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMHeightField* o = ( PMHeightField* ) object;
 
@@ -727,13 +727,13 @@ void PMPov31SerHeightField( const PMObject* object, const PMMetaObject* metaObje
 
    dev->writeLine( o->typeToString( o->heightFieldType( ) ) + " \"" + o->fileName( ) + "\"" );
    if( o->waterLevel( ) > 0.0 )
-      dev->writeLine( TQString( "water_level %1" ).arg( o->waterLevel( ) ) );
+      dev->writeLine( TQString( "water_level %1" ).tqarg( o->waterLevel( ) ) );
    if( !o->hierarchy( ) )
       dev->writeLine( "hierarchy off" );
    if( o->smooth( ) )
       dev->writeLine( "smooth" );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -842,14 +842,14 @@ void PMPov31SerImageMap( const PMObject* object, const PMMetaObject*, PMOutputDe
    dev->objectEnd( );
 }
 
-void PMPov31SerInterior( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerInterior( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMInterior* o = ( PMInterior* ) object;
 
    TQString str1;
 
    dev->objectBegin( "interior" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 
    if( o->isIorEnabled( ) )
    {
@@ -874,7 +874,7 @@ void PMPov31SerInterior( const PMObject* object, const PMMetaObject* metaObject,
    dev->objectEnd( );
 }
 
-void PMPov31SerJuliaFractal( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerJuliaFractal( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMJuliaFractal* o = ( PMJuliaFractal* ) object;
 
@@ -885,22 +885,22 @@ void PMPov31SerJuliaFractal( const PMObject* object, const PMMetaObject* metaObj
    dev->writeLine( o->algebraTypeToString( o->algebraType( ) ) );
 
    if( o->functionType( ) == PMJuliaFractal::FTpwr )
-      dev->writeLine( TQString( "pwr(%1, %2)" ).arg( o->exponent( )[0] ).
+      dev->writeLine( TQString( "pwr(%1, %2)" ).tqarg( o->exponent( )[0] ).
                      arg( o->exponent( )[1] ) );
    else
       dev->writeLine( o->functionTypeToString( o->functionType( ) ) );
 
-   dev->writeLine( TQString( "max_iteration %1" ).arg( o->maximumIterations( ) ) );
-   dev->writeLine( TQString( "precision %1" ).arg( o->precision( ) ) );
-   dev->writeLine( TQString( "slice %1, %2" ).arg( o->sliceNormal( ).serialize( ) )
-                  .arg( o->sliceDistance( ) ) );
+   dev->writeLine( TQString( "max_iteration %1" ).tqarg( o->maximumIterations( ) ) );
+   dev->writeLine( TQString( "precision %1" ).tqarg( o->precision( ) ) );
+   dev->writeLine( TQString( "slice %1, %2" ).tqarg( o->sliceNormal( ).serialize( ) )
+                  .tqarg( o->sliceDistance( ) ) );
 
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerLathe( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerLathe( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMLathe* o = ( PMLathe* ) object;
 
@@ -925,7 +925,7 @@ void PMPov31SerLathe( const PMObject* object, const PMMetaObject* metaObject, PM
    }
 
    int num = o->points( ).count( );
-   dev->writeLine( TQString( "%1," ).arg( num ) );
+   dev->writeLine( TQString( "%1," ).tqarg( num ) );
 
    bool first = true;
    TQValueList<PMVector> points = o->points( );
@@ -942,14 +942,14 @@ void PMPov31SerLathe( const PMObject* object, const PMMetaObject* metaObject, PM
    if( o->sturm( ) )
       dev->writeLine( "sturm" );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
 const double c_defaultLightTightness = 10;
 const int c_defaultLightAdaptive = 0;
 
-void PMPov31SerLight( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerLight( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMLight* o = ( PMLight* ) object;
 
@@ -968,10 +968,10 @@ void PMPov31SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
    if( ( o->lightType( ) == PMLight::SpotLight ) ||
        ( o->lightType( ) == PMLight::CylinderLight ) )
    {
-      dev->writeLine( TQString( "radius %1" ).arg( o->radius( ) ) );
-      dev->writeLine( TQString( "falloff %1" ).arg( o->falloff( ) ) );
+      dev->writeLine( TQString( "radius %1" ).tqarg( o->radius( ) ) );
+      dev->writeLine( TQString( "falloff %1" ).tqarg( o->falloff( ) ) );
       if( o->tightness( ) != c_defaultLightTightness )
-         dev->writeLine( TQString( "tightness %1" ).arg( o->tightness( ) ) );
+         dev->writeLine( TQString( "tightness %1" ).tqarg( o->tightness( ) ) );
       dev->writeLine( TQString( "point_at " ) + o->pointAt( ).serialize( ) );
    }
 
@@ -979,17 +979,17 @@ void PMPov31SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
    {
       dev->writeLine( TQString( "area_light " ) + o->axis1( ).serialize( )
                      + TQString( ", " ) + o->axis2( ).serialize( )
-                     + TQString( ", %1, %2" ).arg( o->size1( ) ).arg( o->size2( ) ) );
+                     + TQString( ", %1, %2" ).tqarg( o->size1( ) ).tqarg( o->size2( ) ) );
       if( o->adaptive( ) != c_defaultLightAdaptive )
-         dev->writeLine( TQString( "adaptive %1" ).arg( o->adaptive( ) ) );
+         dev->writeLine( TQString( "adaptive %1" ).tqarg( o->adaptive( ) ) );
       if( o->jitter( ) )
          dev->writeLine( TQString( "jitter" ) );
    }
 
    if( o->fading( ) )
    {
-      dev->writeLine( TQString( "fade_distance %1" ).arg( o->fadeDistance( ) ) );
-      dev->writeLine( TQString( "fade_power %1" ).arg( o->fadePower( ) ) );
+      dev->writeLine( TQString( "fade_distance %1" ).tqarg( o->fadeDistance( ) ) );
+      dev->writeLine( TQString( "fade_power %1" ).tqarg( o->fadePower( ) ) );
    }
 
    if( !o->mediaInteraction( ) )
@@ -997,11 +997,11 @@ void PMPov31SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
    if( !o->mediaAttenuation( ) )
       dev->writeLine( TQString( "media_attenuation off" ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerListPattern( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerListPattern( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMListPattern* o = ( PMListPattern* ) object;
 
@@ -1020,7 +1020,7 @@ void PMPov31SerListPattern( const PMObject* object, const PMMetaObject* metaObje
          break;
    }
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 
    if( o->listType( ) == PMListPattern::ListPatternBrick )
    {
@@ -1031,24 +1031,24 @@ void PMPov31SerListPattern( const PMObject* object, const PMMetaObject* metaObje
    }
 }
 
-void PMPov31SerTextureList( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerTextureList( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }
 
-void PMPov31SerPigmentList( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerPigmentList( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }
 
-void PMPov31SerColorList( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerColorList( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }
 
-void PMPov31SerDensityList( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerDensityList( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }
 
 void PMPov31SerNormalList( const PMObject* object, const PMMetaObject*, PMOutputDevice* dev )
@@ -1083,22 +1083,22 @@ void PMPov31SerNormalList( const PMObject* object, const PMMetaObject*, PMOutput
    }
 }
 
-void PMPov31SerLooksLike( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerLooksLike( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "looks_like" );
    dev->writeName( object->name( ) );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerMaterial( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerMaterial( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "material" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerMaterialMap( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerMaterialMap( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMMaterialMap* o = ( PMMaterialMap* ) object;
 
@@ -1169,7 +1169,7 @@ void PMPov31SerMaterialMap( const PMObject* object, const PMMetaObject* metaObje
          break;
    }
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 
    dev->objectEnd( );
 }
@@ -1183,7 +1183,7 @@ const double c_defaultMediaRatio = 0.9;
 const double c_defaultMediaScatteringEccentricity = 0;
 const double c_defaultMediaScatteringExtinction = 1.0;
 
-void PMPov31SerMedia( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerMedia( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMMedia* o = ( PMMedia* ) object;
 
@@ -1191,7 +1191,7 @@ void PMPov31SerMedia( const PMObject* object, const PMMetaObject* metaObject, PM
    TQString str2;
 
    dev->objectBegin( "media" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    if( o->intervals( ) != c_defaultMediaIntervals )
    {
       str1.setNum( o->intervals( ) );
@@ -1248,25 +1248,25 @@ void PMPov31SerMedia( const PMObject* object, const PMMetaObject* metaObject, PM
    dev->objectEnd( );
 }
 
-void PMPov31SerNamedObject( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerNamedObject( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }
 
-void PMPov31SerNormal( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerNormal( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMNormal* o = ( PMNormal* ) object;
 
    TQString str1;
    bool bObject = true;
 
-   if( o->parent( ) )
-      if( o->parent( )->type( ) == "NormalMap" )
+   if( o->tqparent( ) )
+      if( o->tqparent( )->type( ) == "NormalMap" )
          bObject = false;
 
    if( bObject )
       dev->objectBegin( "normal" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    if( o->isBumpSizeEnabled( ) )
    {
       str1.setNum( o->bumpSize( ) );
@@ -1276,7 +1276,7 @@ void PMPov31SerNormal( const PMObject* object, const PMMetaObject* metaObject, P
       dev->objectEnd( );
 }
 
-void PMPov31SerObjectLink( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerObjectLink( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMObjectLink* o = ( PMObjectLink* ) object;
 
@@ -1289,7 +1289,7 @@ void PMPov31SerObjectLink( const PMObject* object, const PMMetaObject* metaObjec
 
          dev->writeName( object->name( ) );
          dev->writeLine( o->linkedObject( )->id( ) );
-         dev->callSerialization( object, metaObject->superClass( ) );
+         dev->callSerialization( object, tqmetaObject->superClass( ) );
          writeComment = false;
 
          dev->objectEnd( );
@@ -1302,7 +1302,7 @@ void PMPov31SerObjectLink( const PMObject* object, const PMMetaObject* metaObjec
       if( text.isEmpty( ) )
          text = o->description( );
 
-      dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
+      dev->writeComment( TQString( "No prototype for %1" ).tqarg( text ) );
    }
 }
 
@@ -1404,9 +1404,9 @@ void PMPov31SerPattern( const PMObject* object, const PMMetaObject*, PMOutputDev
          break;
    }
    // depth
-   if( o->parent( ) )
+   if( o->tqparent( ) )
    {
-      if( o->depth( ) && o->parent( )->type( ) == "Normal" )
+      if( o->depth( ) && o->tqparent( )->type( ) == "Normal" )
       {
          str.setNum( o->depth( ) );
          dev->writeLine( str );
@@ -1453,23 +1453,23 @@ void PMPov31SerPattern( const PMObject* object, const PMMetaObject*, PMOutputDev
    }
 }
 
-void PMPov31SerPigment( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerPigment( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMPigment* o = ( PMPigment* ) object;
 
    bool bObject = true;
-   if( o->parent( ) )
-      if( o->parent( )->type( ) == "PigmentMap" )
+   if( o->tqparent( ) )
+      if( o->tqparent( )->type( ) == "PigmentMap" )
          bObject = false;
 
    if( bObject )
       dev->objectBegin( "pigment" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    if( bObject )
       dev->objectEnd( );
 }
 
-void PMPov31SerPlane( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerPlane( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMPlane* o = ( PMPlane* ) object;
 
@@ -1479,11 +1479,11 @@ void PMPov31SerPlane( const PMObject* object, const PMMetaObject* metaObject, PM
    TQString str1;
    str1.setNum( o->distance( ) );
    dev->writeLine( o->normal( ).serialize( ) + ", "  + str1 );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerPolynom( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerPolynom( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMPolynom* o = ( PMPolynom* ) object;
    PMVector coefficients = o->coefficients( );
@@ -1501,18 +1501,18 @@ void PMPov31SerPolynom( const PMObject* object, const PMMetaObject* metaObject, 
 
    if( o->polynomOrder( ) == 2 )
    {
-      dev->writeLine( TQString( "<%1, %2, %3>," ).arg( coefficients[0] )
-                     .arg( coefficients[4] ).arg( coefficients[7] ) );
-      dev->writeLine( TQString( "<%1, %2, %3>," ).arg( coefficients[1] )
-                     .arg( coefficients[2] ).arg( coefficients[5] ) );
-      dev->writeLine( TQString( "<%1, %2, %3>, %4" ).arg( coefficients[3] )
-                     .arg( coefficients[6] ).arg( coefficients[8] )
-                     .arg( coefficients[9] ) );
+      dev->writeLine( TQString( "<%1, %2, %3>," ).tqarg( coefficients[0] )
+                     .tqarg( coefficients[4] ).tqarg( coefficients[7] ) );
+      dev->writeLine( TQString( "<%1, %2, %3>," ).tqarg( coefficients[1] )
+                     .tqarg( coefficients[2] ).tqarg( coefficients[5] ) );
+      dev->writeLine( TQString( "<%1, %2, %3>, %4" ).tqarg( coefficients[3] )
+                     .tqarg( coefficients[6] ).tqarg( coefficients[8] )
+                     .tqarg( coefficients[9] ) );
    }
    else
    {
       if( o->polynomOrder( ) > 4 )
-         dev->writeLine( TQString( "%1," ).arg( o->polynomOrder( ) ) );
+         dev->writeLine( TQString( "%1," ).tqarg( o->polynomOrder( ) ) );
 
       int size = coefficients.size( );
 
@@ -1537,7 +1537,7 @@ void PMPov31SerPolynom( const PMObject* object, const PMMetaObject* metaObject, 
          dev->writeLine( "sturm" );
    }
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -1545,17 +1545,17 @@ void PMPov31SerPovrayMatrix( const PMObject* object, const PMMetaObject*, PMOutp
 {
    PMPovrayMatrix* o = ( PMPovrayMatrix* ) object;
 
-   dev->writeLine( TQString( "matrix < %1, %2, %3," ).arg( o->values( )[0] )
-                  .arg( o->values( )[1] ).arg( o->values( )[2] ) );
-   dev->writeLine( TQString( "         %1, %2, %3," ).arg( o->values( )[3] )
-                  .arg( o->values( )[4] ).arg( o->values( )[5] ) );
-   dev->writeLine( TQString( "         %1, %2, %3," ).arg( o->values( )[6] )
-                  .arg( o->values( )[7] ).arg( o->values( )[8] ) );
-   dev->writeLine( TQString( "         %1, %2, %3 >" ).arg( o->values( )[9] )
-                  .arg( o->values( )[10] ).arg( o->values( )[11] ) );
+   dev->writeLine( TQString( "matrix < %1, %2, %3," ).tqarg( o->values( )[0] )
+                  .tqarg( o->values( )[1] ).tqarg( o->values( )[2] ) );
+   dev->writeLine( TQString( "         %1, %2, %3," ).tqarg( o->values( )[3] )
+                  .tqarg( o->values( )[4] ).tqarg( o->values( )[5] ) );
+   dev->writeLine( TQString( "         %1, %2, %3," ).tqarg( o->values( )[6] )
+                  .tqarg( o->values( )[7] ).tqarg( o->values( )[8] ) );
+   dev->writeLine( TQString( "         %1, %2, %3 >" ).tqarg( o->values( )[9] )
+                  .tqarg( o->values( )[10] ).tqarg( o->values( )[11] ) );
 }
 
-void PMPov31SerPrism( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerPrism( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMPrism* o = ( PMPrism* ) object;
 
@@ -1587,7 +1587,7 @@ void PMPov31SerPrism( const PMObject* object, const PMMetaObject* metaObject, PM
          dev->writeLine( "conic_sweep" );
          break;
    }
-   dev->writeLine( TQString( "%1, %2," ).arg( o->height1( ) ).arg( o->height2( ) ) );
+   dev->writeLine( TQString( "%1, %2," ).tqarg( o->height1( ) ).tqarg( o->height2( ) ) );
 
    // count number of points
    TQValueList< TQValueList<PMVector> > points = o->points( );
@@ -1600,7 +1600,7 @@ void PMPov31SerPrism( const PMObject* object, const PMMetaObject* metaObject, PM
       else
          lines += ( *spit ).count( ) / 3 * 4;
    }
-   dev->writeLine( TQString( "%1," ).arg( lines ) );
+   dev->writeLine( TQString( "%1," ).tqarg( lines ) );
 
    for( spit = points.begin( ); spit != points.end( ); ++spit )
    {
@@ -1628,7 +1628,7 @@ void PMPov31SerPrism( const PMObject* object, const PMMetaObject* metaObject, PM
    if( o->sturm( ) )
       dev->writeLine( "sturm" );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -1639,14 +1639,14 @@ void PMPov31SerQuickColor( const PMObject* object, const PMMetaObject*, PMOutput
    dev->writeLine( "quick_color " + o->color( ).serialize( ) );
 }
 
-void PMPov31SerRainbow( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerRainbow( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMRainbow* o = ( PMRainbow* ) object;
 
    TQString str1;
 
    dev->objectBegin( "rainbow" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 
    if( o->isDirectionEnabled( ) )
       dev->writeLine( "direction " + o->direction( ).serialize( ) );
@@ -1756,20 +1756,20 @@ void PMPov31SerScale( const PMObject* object, const PMMetaObject* , PMOutputDevi
 
    if( approx( scale[0], scale[1] ) &&
        approx( scale[1], scale[2] ) )
-      dev->writeLine( TQString( "scale %1" ).arg( scale[0] ) );
+      dev->writeLine( TQString( "scale %1" ).tqarg( scale[0] ) );
    else
       dev->writeLine( "scale " + scale.serialize( ) );
 }
 
-void PMPov31SerScene( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerScene( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }
 
-void PMPov31SerSkySphere( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerSkySphere( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "sky_sphere" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -1792,11 +1792,11 @@ void PMPov31SerSolidColor( const PMObject* object, const PMMetaObject* , PMOutpu
    dev->writeLine( o->color( ).serialize( true ) );
 }
 
-void PMPov31SerSolidObject( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerSolidObject( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMSolidObject* o = ( PMSolidObject* ) object;
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    switch( o->hollow( ) )
    {
       case PMTrue:
@@ -1812,7 +1812,7 @@ void PMPov31SerSolidObject( const PMObject* object, const PMMetaObject* metaObje
       dev->writeLine( "inverse" );
 }
 
-void PMPov31SerSurfaceOfRevolution( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerSurfaceOfRevolution( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMSurfaceOfRevolution* o = ( PMSurfaceOfRevolution* ) object;
 
@@ -1821,7 +1821,7 @@ void PMPov31SerSurfaceOfRevolution( const PMObject* object, const PMMetaObject* 
    dev->writeName( object->name( ) );
 
    int num = o->points( ).count( );
-   dev->writeLine( TQString( "%1," ).arg( num ) );
+   dev->writeLine( TQString( "%1," ).tqarg( num ) );
 
    bool first = true;
    TQValueList<PMVector> points = o->points( );
@@ -1840,11 +1840,11 @@ void PMPov31SerSurfaceOfRevolution( const PMObject* object, const PMMetaObject* 
    if( o->sturm( ) )
       dev->writeLine( "sturm" );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerSphere( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerSphere( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMSphere* o = ( PMSphere* ) object;
 
@@ -1853,25 +1853,25 @@ void PMPov31SerSphere( const PMObject* object, const PMMetaObject* metaObject, P
    TQString str;
    str.setNum( o->radius( ) );
    dev->writeLine( o->centre( ).serialize( ) + ", " + str );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerSuperquadricEllipsoid( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerSuperquadricEllipsoid( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMSuperquadricEllipsoid* o = ( PMSuperquadricEllipsoid* ) object;
 
    dev->objectBegin( "superellipsoid" );
 
    dev->writeName( object->name( ) );
-   dev->writeLine( TQString( "<%1, %2>" ).arg( o->eastWestExponent( ) )
-                  .arg( o->northSouthExponent( ) ) );
+   dev->writeLine( TQString( "<%1, %2>" ).tqarg( o->eastWestExponent( ) )
+                  .tqarg( o->northSouthExponent( ) ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerText( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerText( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMText* o = ( PMText* ) object;
 
@@ -1880,30 +1880,30 @@ void PMPov31SerText( const PMObject* object, const PMMetaObject* metaObject, PMO
    dev->writeName( object->name( ) );
    dev->writeLine( TQString( "ttf \"" ) + o->font( ) + "\"" );
    dev->writeLine( PMOutputDevice::escapeAndQuoteString( o->text( ) ) );
-   dev->writeLine( TQString( "%1, " ).arg( o->thickness( ) )
+   dev->writeLine( TQString( "%1, " ).tqarg( o->thickness( ) )
                   + o->offset( ).serialize( ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerTexture( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerTexture( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMTexture* o = ( PMTexture* ) object;
 
    bool bObject = true;
-   if( o->parent( ) )
-      if( o->parent( )->type( ) == "TextureMap" )
+   if( o->tqparent( ) )
+      if( o->tqparent( )->type( ) == "TextureMap" )
          bObject = false;
 
    if( bObject )
       dev->objectBegin( "texture" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    if( bObject )
       dev->objectEnd( );
 }
 
-void PMPov31SerTextureBase( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerTextureBase( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMTextureBase* o = ( PMTextureBase* ) object;
 
@@ -1922,11 +1922,11 @@ void PMPov31SerTextureBase( const PMObject* object, const PMMetaObject* metaObje
          if( text.isEmpty( ) )
             text = o->description( );
 
-         dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
+         dev->writeComment( TQString( "No prototype for %1" ).tqarg( text ) );
       }
    }
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }
 
 void PMPov31SerTextureMapBase( const PMObject* object, const PMMetaObject* , PMOutputDevice* dev )
@@ -1950,7 +1950,7 @@ void PMPov31SerTextureMapBase( const PMObject* object, const PMMetaObject* , PMO
          if( text.isEmpty( ) )
             text = o->description( );
 
-         dev->writeComment( TQString( "No prototype for %1" ).arg( text ) );
+         dev->writeComment( TQString( "No prototype for %1" ).tqarg( text ) );
       }
    }
 
@@ -1962,7 +1962,7 @@ void PMPov31SerTextureMapBase( const PMObject* object, const PMMetaObject* , PMO
          value = 1.0;
          if( it != mapValues.end( ) )
             value = *it;
-         dev->write( TQString( "[ %1 " ).arg( value ) );
+         dev->write( TQString( "[ %1 " ).tqarg( value ) );
          dev->serialize( c );
          dev->writeLine( "]" );
          ++it;
@@ -1970,49 +1970,49 @@ void PMPov31SerTextureMapBase( const PMObject* object, const PMMetaObject* , PMO
    }
 }
 
-void PMPov31SerTextureMap( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerTextureMap( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "texture_map" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerPigmentMap( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerPigmentMap( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "pigment_map" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerColorMap( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerColorMap( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "color_map" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerNormalMap( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerNormalMap( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "normal_map" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerSlopeMap( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerSlopeMap( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "slope_map" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerDensityMap( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerDensityMap( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    dev->objectBegin( "density_map" );
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
-void PMPov31SerTorus( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerTorus( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMTorus* o = ( PMTorus* ) object;
 
@@ -2027,7 +2027,7 @@ void PMPov31SerTorus( const PMObject* object, const PMMetaObject* metaObject, PM
    if( o->sturm( ) )
       dev->writeLine( TQString( "sturm" ) );
 
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
    dev->objectEnd( );
 }
 
@@ -2081,7 +2081,7 @@ void PMPov31SerTranslate( const PMObject* object, const PMMetaObject* , PMOutput
    dev->writeLine( "translate " + vector );
 }
 
-void PMPov31SerTriangle( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerTriangle( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    PMTriangle* o = ( PMTriangle* ) object;
 
@@ -2094,7 +2094,7 @@ void PMPov31SerTriangle( const PMObject* object, const PMMetaObject* metaObject,
       dev->writeLine( o->point( 1 ).serialize( ) + ", " + o->normal( 1 ).serialize( ) + "," );
       dev->writeLine( o->point( 2 ).serialize( ) + ", " + o->normal( 2 ).serialize( ) );
 
-      dev->callSerialization( object, metaObject->superClass( ) );
+      dev->callSerialization( object, tqmetaObject->superClass( ) );
       dev->objectEnd( );
    }
    else
@@ -2105,7 +2105,7 @@ void PMPov31SerTriangle( const PMObject* object, const PMMetaObject* metaObject,
       dev->writeLine( o->point( 0 ).serialize( ) + ", " + o->point( 1 ).serialize( )
                      + ", " + o->point( 2 ).serialize( ) );
 
-      dev->callSerialization( object, metaObject->superClass( ) );
+      dev->callSerialization( object, tqmetaObject->superClass( ) );
       dev->objectEnd( );
    }
 }
@@ -2193,7 +2193,7 @@ void PMPov31SerWarp( const PMObject* object, const PMMetaObject* , PMOutputDevic
    dev->objectEnd( );
 }
 
-void PMPov31SerDetailObject( const PMObject* object, const PMMetaObject* metaObject, PMOutputDevice* dev )
+void PMPov31SerDetailObject( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
-   dev->callSerialization( object, metaObject->superClass( ) );
+   dev->callSerialization( object, tqmetaObject->superClass( ) );
 }

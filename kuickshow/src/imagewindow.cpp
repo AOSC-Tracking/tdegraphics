@@ -74,15 +74,15 @@
 
 TQCursor *ImageWindow::s_handCursor = 0L;
 
-ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, TQWidget *parent,
+ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, TQWidget *tqparent,
 			  const char *name )
-    : ImlibWidget( _idata, id, parent, name )
+    : ImlibWidget( _idata, id, tqparent, name )
 {
     init();
 }
 
-ImageWindow::ImageWindow( ImData *_idata, TQWidget *parent, const char *name )
-    : ImlibWidget( _idata, parent, name )
+ImageWindow::ImageWindow( ImData *_idata, TQWidget *tqparent, const char *name )
+    : ImlibWidget( _idata, tqparent, name )
 {
     init();
 }
@@ -94,7 +94,7 @@ ImageWindow::~ImageWindow()
 
 void ImageWindow::init()
 {
-    setFocusPolicy( TQWidget::StrongFocus );
+    setFocusPolicy( TQ_StrongFocus );
     
     KCursor::setAutoHideCursor( this, true, true );
     KCursor::setHideCursorDelay( 1500 );
@@ -146,103 +146,103 @@ void ImageWindow::updateActions()
 void ImageWindow::setupActions()
 {
     new KAction( i18n("Show Next Image"), KStdAccel::next(),
-                 this, TQT_SLOT( slotRequestNext() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( slotRequestNext() ),
                  m_actions, "next_image" );
     new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
-                 this, TQT_SLOT( slotRequestPrevious() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
 
     new KAction( i18n("Delete Image"), SHIFT + Key_Delete,
-                 this, TQT_SLOT( imageDelete() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( imageDelete() ),
                  m_actions, "delete_image" );
     new KAction( i18n("Move Image to Trash"), Key_Delete,
-                 this, TQT_SLOT( imageTrash() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( imageTrash() ),
                  m_actions, "trash_image" );
 
     new KAction( i18n("Zoom In"), Key_Plus,
-                 this, TQT_SLOT( zoomIn() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( zoomIn() ),
                  m_actions, "zoom_in" );
     new KAction( i18n("Zoom Out"), Key_Minus,
-                 this, TQT_SLOT( zoomOut() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
     new KAction( i18n("Restore Original Size"), Key_O,
-                 this, TQT_SLOT( showImageOriginalSize() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
     new KAction( i18n("Maximize"), Key_M,
-                 this, TQT_SLOT( maximize() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( maximize() ),
                  m_actions, "maximize" );
 
     new KAction( i18n("Rotate 90 Degrees"), Key_9,
-                 this, TQT_SLOT( rotate90() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( rotate90() ),
                  m_actions, "rotate90" );
     new KAction( i18n("Rotate 180 Degrees"), Key_8,
-                 this, TQT_SLOT( rotate180() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( rotate180() ),
                  m_actions, "rotate180" );
     new KAction( i18n("Rotate 270 Degrees"), Key_7,
-                 this, TQT_SLOT( rotate270() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
-    new KAction( i18n("Flip Horizontally"), Key_Asterisk,
-                 this, TQT_SLOT( flipHoriz() ),
+    new KAction( i18n("FlipQt::Horizontally"), Key_Asterisk,
+                 TQT_TQOBJECT(this), TQT_SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
-    new KAction( i18n("Flip Vertically"), Key_Slash,
-                 this, TQT_SLOT( flipVert() ),
+    new KAction( i18n("FlipQt::Vertically"), Key_Slash,
+                 TQT_TQOBJECT(this), TQT_SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
     new KAction( i18n("Print Image..."), KStdAccel::print(),
-                 this, TQT_SLOT( printImage() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( printImage() ),
                  m_actions, "print_image" );
-    KStdAction::saveAs( this, TQT_SLOT( saveImage() ),
+    KStdAction::saveAs( TQT_TQOBJECT(this), TQT_SLOT( saveImage() ),
                  m_actions, "save_image_as" );
 
-    KStdAction::close( this, TQT_SLOT( close() ),
+    KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( close() ),
                  m_actions, "close_image" );
     // --------
     new KAction( i18n("More Brightness"), Key_B,
-                 this, TQT_SLOT( moreBrightness() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( moreBrightness() ),
                  m_actions, "more_brightness" );
     new KAction( i18n("Less Brightness"), SHIFT + Key_B,
-                 this, TQT_SLOT( lessBrightness() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( lessBrightness() ),
                  m_actions, "less_brightness" );
     new KAction( i18n("More Contrast"), Key_C,
-                 this, TQT_SLOT( moreContrast() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( moreContrast() ),
                  m_actions, "more_contrast" );
     new KAction( i18n("Less Contrast"), SHIFT + Key_C,
-                 this, TQT_SLOT( lessContrast() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( lessContrast() ),
                  m_actions, "less_contrast" );
     new KAction( i18n("More Gamma"), Key_G,
-                 this, TQT_SLOT( moreGamma() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( moreGamma() ),
                  m_actions, "more_gamma" );
     new KAction( i18n("Less Gamma"), SHIFT + Key_G,
-                 this, TQT_SLOT( lessGamma() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( lessGamma() ),
                  m_actions, "less_gamma" );
 
     // --------
     new KAction( i18n("Scroll Up"), Key_Up,
-                 this, TQT_SLOT( scrollUp() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( scrollUp() ),
                  m_actions, "scroll_up" );
     new KAction( i18n("Scroll Down"), Key_Down,
-                 this, TQT_SLOT( scrollDown() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( scrollDown() ),
                  m_actions, "scroll_down" );
     new KAction( i18n("Scroll Left"), Key_Left,
-                 this, TQT_SLOT( scrollLeft() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( scrollLeft() ),
                  m_actions, "scroll_left" );
     new KAction( i18n("Scroll Right"), Key_Right,
-                 this, TQT_SLOT( scrollRight() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
     // --------
     new KAction( i18n("Pause Slideshow"), Key_P,
-                 this, TQT_SLOT( pauseSlideShow() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( pauseSlideShow() ),
                  m_actions, "kuick_slideshow_pause" );
 
-    KAction *fullscreenAction = KStdAction::fullScreen(this, TQT_SLOT( toggleFullscreen() ), m_actions, 0 );
+    KAction *fullscreenAction = KStdAction::fullScreen(TQT_TQOBJECT(this), TQT_SLOT( toggleFullscreen() ), m_actions, 0 );
 
     KAction *reloadAction = new KAction( i18n("Reload Image"), KStdAccel::shortcut(KStdAccel::Reload),
-                                         this, TQT_SLOT( reload() ),
+                                         TQT_TQOBJECT(this), TQT_SLOT( reload() ),
                                          m_actions, "reload_image" );
 
     new KAction( i18n("Properties"), ALT + Key_Return,
-                 this, TQT_SLOT( slotProperties() ),
+                 TQT_TQOBJECT(this), TQT_SLOT( slotProperties() ),
                  m_actions, "properties" );
 
     m_actions->readShortcutSettings();
@@ -310,8 +310,8 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 	
     TQString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%3 (%1 x %2)" );
-    caption = caption.arg( m_kuim->originalWidth() ).
-              arg( m_kuim->originalHeight() ).arg( m_kuim->url().prettyURL() );
+    caption = caption.tqarg( m_kuim->originalWidth() ).
+              tqarg( m_kuim->originalHeight() ).tqarg( m_kuim->url().prettyURL() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
@@ -403,7 +403,7 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //     XUnmapWindow();
 //     XSetWindowBackgroundPixmap()
 //     resize window to fit image size, center image
-//     XClearWindow(); // repaint
+//     XClearWindow(); // tqrepaint
 //     XMapWindow(), XSync();
 //
 bool ImageWindow::showNextImage( const KURL& url )
@@ -412,7 +412,7 @@ bool ImageWindow::showNextImage( const KURL& url )
     switch ( file->waitForDownload( this ) ) {
     	case KuickFile::ERROR:
     	{
-    	    TQString tmp = i18n("Unable to download the image from %1.").arg(url.prettyURL());
+    	    TQString tmp = i18n("Unable to download the image from %1.").tqarg(url.prettyURL());
 	        emit sigImageError( file, tmp );
 	        return false;
     	}
@@ -430,7 +430,7 @@ bool ImageWindow::showNextImage( KuickFile *file )
     if ( !loadImage( file ) ) {
    	    TQString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.").arg(file->url().prettyURL());
+                       "your Imlib is not installed properly.").tqarg(file->url().prettyURL());
         emit sigImageError( file, tmp );
         return false;
     }
@@ -630,7 +630,7 @@ void ImageWindow::mousePressEvent( TQMouseEvent *e )
     xposPress = xmove;
     yposPress = ymove;
 
-    if ( e->button() == LeftButton ) {
+    if ( e->button() == Qt::LeftButton ) {
         if ( e->state() & ShiftButton )
             updateCursor( ZoomCursor );
         else
@@ -675,7 +675,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
 
 void ImageWindow::mouseMoveEvent( TQMouseEvent *e )
 {
-    if ( !(e->state() & LeftButton) ) { // only handle LeftButton actions
+    if ( !(e->state() & Qt::LeftButton) ) { // only handle LeftButton actions
 	return;
     }
 
@@ -692,7 +692,7 @@ void ImageWindow::mouseMoveEvent( TQMouseEvent *e )
  	// really required?
  	p.eraseRect( transWidget->rect() );
 	transWidget->show();
-	qApp->processOneEvent();
+	tqApp->processOneEvent();
 	
 	int width  = e->x() - xposPress;
 	int height = e->y() - yposPress;
@@ -707,7 +707,7 @@ void ImageWindow::mouseMoveEvent( TQMouseEvent *e )
 	    yzoom = e->y();
 	}
 
-	TQPen pen( Qt::white, 1, DashLine );
+	TQPen pen( TQt::white, 1, DashLine );
 	p.setPen( pen );     // for drawing white dashed line
 	p.drawRect( xzoom, yzoom, width, height );
 	p.setPen( DotLine ); // defaults to black dotted line pen
@@ -736,7 +736,7 @@ void ImageWindow::mouseReleaseEvent( TQMouseEvent *e )
     }
 
     // only proceed if shift-Key is still pressed
-    if ( !(e->button() == LeftButton && e->state() & ShiftButton) )
+    if ( !(e->button() == Qt::LeftButton && e->state() & ShiftButton) )
 	return;
 
     int neww, newh, topX, topY, botX, botY;
@@ -972,7 +972,7 @@ bool ImageWindow::saveImage( const KURL& dest, bool keepOriginalSize )
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
     if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270 )
-        qSwap( w, h );
+        tqSwap( w, h );
 
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
                                                    w, h );
@@ -987,7 +987,7 @@ bool ImageWindow::saveImage( const KURL& dest, bool keepOriginalSize )
 		if ( !extension.isEmpty() )
 			extension.prepend( '.' );
 		
-		KTempFile tmpFile( TQString::null, extension );
+		KTempFile tmpFile( TQString(), extension );
 		if ( tmpFile.status() != 0 )
 			return false;
 		tmpFile.close();
@@ -1045,7 +1045,7 @@ void ImageWindow::autoScale( KuickImage *kuim )
     int mh = s.height();
 
     if ( kuim->absRotation() == ROT_90 || kuim->absRotation() == ROT_270 )
-        qSwap( newW, newH );
+        tqSwap( newW, newH );
 
     bool doIt = false;
 
@@ -1128,7 +1128,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )
     {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).width();
+        return KGlobalSettings::desktopGeometry(tqtopLevelWidget()).width();
     } else
 	return Kuick::workArea().width();
 }
@@ -1137,7 +1137,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 int ImageWindow::desktopHeight( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen ) {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).height();
+        return KGlobalSettings::desktopGeometry(tqtopLevelWidget()).height();
     } else {
 	return Kuick::workArea().height();
     }
@@ -1146,7 +1146,7 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
 TQSize ImageWindow::maxImageSize() const
 {
     if ( myIsFullscreen ) {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+        return KGlobalSettings::desktopGeometry(tqtopLevelWidget()).size();
     }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
@@ -1193,7 +1193,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     if ( !ImlibWidget::canZoomTo( newWidth, newHeight ) )
         return false;
     
-    TQSize desktopSize = KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+    TQSize desktopSize = KGlobalSettings::desktopGeometry(tqtopLevelWidget()).size();
 
     int desktopArea = desktopSize.width() * desktopSize.height();
     int imageArea = newWidth * newHeight;
@@ -1203,8 +1203,8 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
         return KMessageBox::warningContinueCancel(
             this,
             i18n("You are about to view a very large image (%1 x %2 pixels), which can be very resource-consuming and even make your computer hang.\nDo you want to continue?")
-            .arg( newWidth ).arg( newHeight ),
-            TQString::null,
+            .tqarg( newWidth ).tqarg( newHeight ),
+            TQString(),
             KStdGuiItem::cont(),
             "ImageWindow_confirm_very_large_window"
             ) == KMessageBox::Continue;
@@ -1245,7 +1245,7 @@ void ImageWindow::restoreCursor()
 
 bool ImageWindow::isCursorHidden() const
 {
-    return cursor().shape() == Qt::BlankCursor;
+    return cursor().shape() == TQt::BlankCursor;
 }
     
 #include "imagewindow.moc"

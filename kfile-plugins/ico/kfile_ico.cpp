@@ -44,10 +44,10 @@ typedef KGenericFactory<KIcoPlugin> IcoFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_ico, IcoFactory( "kfile_ico" ))
 
-KIcoPlugin::KIcoPlugin(TQObject *parent, const char *name,
+KIcoPlugin::KIcoPlugin(TQObject *tqparent, const char *name,
                        const TQStringList &args)
 
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(tqparent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-ico" );
 
@@ -75,7 +75,7 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     if (!file.open(IO_ReadOnly))
     {
-        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
+        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()).data() << endl;
         return false;
     }
 

@@ -83,8 +83,8 @@ bool kpSelectionTransparency::operator== (const kpSelectionTransparency &rhs) co
     }
 
 #if DEBUG_KP_SELECTION_TRANSPARENCY && 0
-    kdDebug () << "\tcolours: lhs=" << (int *) m_transparentColor.toQRgb ()
-               << " rhs=" << (int *) rhs.m_transparentColor.toQRgb ()
+    kdDebug () << "\tcolours: lhs=" << (int *) m_transparentColor.toTQRgb ()
+               << " rhs=" << (int *) rhs.m_transparentColor.toTQRgb ()
                << endl;
     kdDebug () << "\tcolour similarity: lhs=" << m_colorSimilarity
                << " rhs=" << rhs.m_colorSimilarity

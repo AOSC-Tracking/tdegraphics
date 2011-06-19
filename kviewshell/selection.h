@@ -18,7 +18,7 @@
 
    the page number,
 
-   two Q_INT32 numbers, 'selectedTextStart' and 'selectedTextEnd' that
+   two TQ_INT32 numbers, 'selectedTextStart' and 'selectedTextEnd' that
    should hold indiced referring to the start and the end of the
    selected text in the appropriate documentPage's textLinkList
 
@@ -47,17 +47,17 @@ public:
   // values; it is not even checked if selectedTextStart <=
   // selectedTextEnd! The signals pageChanged() and
   // selectionIsNotEmpty() are emitted if appropriate.
-  void          set(const PageNumber& pageNr, Q_INT32 selectedTextStart, Q_INT32 selectedTextEnd, const TQString& text);
+  void          set(const PageNumber& pageNr, TQ_INT32 selectedTextStart, TQ_INT32 selectedTextEnd, const TQString& text);
   
   // This method can be used to find out if the selection is empty,
   // i.e. if the page number is invalid or the selected text is empty.
   bool          isEmpty() const {return (!page.isValid() || selectedText.isEmpty());}
 
   // Method used to retrieve the data described above
-  Q_INT32       getSelectedTextStart() const {return selectedTextStart;}
+  TQ_INT32       getSelectedTextStart() const {return selectedTextStart;}
 
   // Method used to retrieve the data described above
-  Q_INT32       getSelectedTextEnd() const {return selectedTextEnd;}
+  TQ_INT32       getSelectedTextEnd() const {return selectedTextEnd;}
 
   // Method used to retrieve the data described above
   const TQString &getSelectedText() const {return selectedText;}
@@ -77,7 +77,7 @@ public:
   PageNumber    page;
 
   // Described above
-  Q_INT32       selectedTextStart, selectedTextEnd;
+  TQ_INT32       selectedTextStart, selectedTextEnd;
 
   // Described above
   TQString       selectedText;

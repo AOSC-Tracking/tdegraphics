@@ -23,7 +23,7 @@ class KPDFPage;
 /**
  * @short PageViewItem represents graphically a kpdfpage into the PageView.
  *
- * It has methods for settings Item's geometry and other visual properties such
+ * It has methods for settings Item's tqgeometry and other visual properties such
  * as the individual zoom factor.
  */
 class PageViewItem
@@ -33,7 +33,7 @@ class PageViewItem
 
         const KPDFPage * page() const;
         int pageNumber() const;
-        const TQRect& geometry() const;
+        const TQRect& tqgeometry() const;
         int width() const;
         int height() const;
         double zoomFactor() const;
@@ -45,17 +45,17 @@ class PageViewItem
     private:
         const KPDFPage * m_page;
         double m_zoomFactor;
-        TQRect m_geometry;
+        TQRect m_tqgeometry;
 };
 
 
 /**
  * @short A widget that displays messages in the top-left corner.
  */
-class PageViewMessage : public QWidget
+class PageViewMessage : public TQWidget
 {
     public:
-        PageViewMessage( TQWidget * parent );
+        PageViewMessage( TQWidget * tqparent );
 
         enum Icon { None, Info, Warning, Error, Find };
         void display( const TQString & message, Icon icon = Info, int durationMs = 4000 );

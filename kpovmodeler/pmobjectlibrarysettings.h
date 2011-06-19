@@ -35,11 +35,12 @@ class TQListBox;
 class PMObjectLibrarySettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMObjectLibrarySettings( TQWidget* parent, const char* name = 0 );
+   PMObjectLibrarySettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

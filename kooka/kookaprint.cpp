@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -112,7 +112,7 @@ bool KookaPrint::printImage( KookaImage *img )
 
 	kdDebug(28000) << "Scaling to printer size " << newWidth << " x " << newHeight << endl;
 
-	tmpImg = img->smoothScale(newWidth, newHeight, TQImage::ScaleFree);
+	tmpImg = img->smoothScale(newWidth, newHeight, TQ_ScaleFree);
 
         TQSize   sz = tmpImg.size();        // the current image size
         TQSize   maxOnPage = maxPageSize(); // the maximum space on one side
@@ -177,7 +177,7 @@ void KookaPrint::printFittingToPage(KookaImage *img)
 	newHeight = int( double( img->height() ) * hAspect );
     }
     
-    tmpImg = img->smoothScale(newWidth, newHeight, TQImage::ScaleFree);
+    tmpImg = img->smoothScale(newWidth, newHeight, TQ_ScaleFree);
 
     m_painter->drawImage( 0,0, tmpImg );
     
@@ -201,7 +201,7 @@ void KookaPrint::drawCutSign( const TQPoint& p, int num, MarkerDirection dir )
     int start = 0;
     const int radius=20;
 
-    TQColor brushColor( Qt::red );
+    TQColor brushColor( TQt::red );
     int toffX=0;
     int toffY=0;
     TQString numStr = TQString::number(num);
@@ -215,7 +215,7 @@ void KookaPrint::drawCutSign( const TQPoint& p, int num, MarkerDirection dir )
     {
 	case SW:
 	    start = -90;
-	    brushColor = Qt::green;
+	    brushColor = TQt::green;
 	    toffX =-1;
 	    toffY = 1;
 	    textXOff = -1*textWidth;
@@ -223,7 +223,7 @@ void KookaPrint::drawCutSign( const TQPoint& p, int num, MarkerDirection dir )
 	    break;
 	case NW:
 	    start = -180;
-	    brushColor = Qt::blue;
+	    brushColor = TQt::blue;
 	    toffX =-1;
 	    toffY =-1;
 	    textXOff = -1*textWidth;
@@ -231,7 +231,7 @@ void KookaPrint::drawCutSign( const TQPoint& p, int num, MarkerDirection dir )
 	    break;
 	case NO:
 	    start = -270;
-	    brushColor = Qt::yellow;
+	    brushColor = TQt::yellow;
 	    toffX = 1;
 	    toffY = -1;
 	    textXOff = -1*textWidth;
@@ -240,7 +240,7 @@ void KookaPrint::drawCutSign( const TQPoint& p, int num, MarkerDirection dir )
 	    break;
 	case SO:
 	    start = 0;
-	    brushColor = Qt::magenta;
+	    brushColor = TQt::magenta;
 	    toffX = 1;
 	    toffY = 1;
 	    textXOff = -1*textWidth;

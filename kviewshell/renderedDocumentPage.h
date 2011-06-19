@@ -64,9 +64,10 @@ class TextSelection;
     @version 1.0.0
 */
 
-class RenderedDocumentPage : public QObject
+class RenderedDocumentPage : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
   /** \brief Default constructor
@@ -196,13 +197,13 @@ class RenderedDocumentPage : public QObject
   /** Finds the first occurence of str starting by the current index.
   If the text is found a corresponding TextSelection is returned.
   If the text is not found a empty selection is returned. */
-  TextSelection find(const TQString& str, int index = 0, bool caseSensitive = true);
+  TextSelection tqfind(const TQString& str, int index = 0, bool caseSensitive = true);
 
   /** Finds the first occurence of str starting by the current index searching backwards.
   If the text is found a corresponding TextSelection is returned.
   If the text is not found a empty selection is returned.
   If index < 0 start the search at the end of the page. */
-  TextSelection findRev(const TQString& str, int index = 0, bool cs = true);
+  TextSelection tqfindRev(const TQString& str, int index = 0, bool cs = true);
 
   /** \brief Hyperlinks on the document page
 
@@ -221,7 +222,7 @@ class RenderedDocumentPage : public QObject
       
   Clears the contents of the class, but leaves pageNumber intact. For
   performance reasons, it does not free the memory for the
-  QValueVectors so that lengthy re-allocations won't be necessary
+  TQValueVectors so that lengthy re-allocations won't be necessary
   later.
   */
   virtual void clear();

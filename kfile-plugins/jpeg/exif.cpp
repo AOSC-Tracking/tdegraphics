@@ -116,7 +116,7 @@ static int BytesPerFormat[] = {0,1,1,2,4,8,1,1,2,4,8,4,8};
 #define TAG_WHITEBALANCE      0x9208
 #define TAG_METERING_MODE     0x9207
 #define TAG_EXPOSURE_PROGRAM  0x8822
-#define TAG_ISO_EQUIVALENT    0x8827
+#define TAG_ISO_ETQUIVALENT    0x8827
 #define TAG_COMPRESSION_LEVEL 0x9102
 
 #define TAG_THUMBNAIL_OFFSET  0x0201
@@ -135,7 +135,7 @@ static int BytesPerFormat[] = {0,1,1,2,4,8,1,1,2,4,8,4,8};
   {   0x10F,   "Make"},
   {   0x110,   "Model"},
   {   0x111,   "StripOffsets"},
-  {   0x112,   "Orientation"},
+  {   0x112,   "Qt::Orientation"},
   {   0x115,   "SamplesPerPixel"},
   {   0x116,   "RowsPerStrip"},
   {   0x117,   "StripByteCounts"},
@@ -282,7 +282,7 @@ int ExifData::ReadJpegSections (TQFile & infile, ReadMode_t ReadMode)
                 if (ReadMode & READ_IMAGE){
                     unsigned long size;
 
-                    size = kMax( 0ul, infile.size()-infile.at() );
+                    size = kMax( 0ul, (unsigned long)(infile.size()-infile.at()) );
                     Data = (uchar *)malloc(size);
                     if (Data == NULL){
                         throw FatalError("could not allocate data for entire image");
@@ -525,11 +525,11 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
         switch(Tag){
 
             case TAG_MAKE:
-                ExifData::CameraMake = TQString::fromLatin1((const char*)ValuePtr, 31);
+                ExifData::CameraMake = TQString::tqfromLatin1((const char*)ValuePtr, 31);
                 break;
 
             case TAG_MODEL:
-                ExifData::CameraModel = TQString::fromLatin1((const char*)ValuePtr, 39);
+                ExifData::CameraModel = TQString::tqfromLatin1((const char*)ValuePtr, 39);
 		break;
 
             case TAG_ORIENTATION:
@@ -537,7 +537,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 break;
 
             case TAG_DATETIME_ORIGINAL:
-		DateTime = TQString::fromLatin1((const char*)ValuePtr, 19);
+		DateTime = TQString::tqfromLatin1((const char*)ValuePtr, 19);
                 break;
 
             case TAG_USERCOMMENT:
@@ -558,12 +558,12 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                         int c;
                         c = (ValuePtr)[a];
                         if (c != '\0' && c != ' '){
-                            UserComment = TQString::fromLatin1((const char*)(a+ValuePtr), 199);
+                            UserComment = TQString::tqfromLatin1((const char*)(a+ValuePtr), 199);
                             break;
                         }
                     }
                 }else{
-                    UserComment = TQString::fromLatin1((const char*)ValuePtr, 199);
+                    UserComment = TQString::tqfromLatin1((const char*)ValuePtr, 199);
                 }
                 break;
 
@@ -660,7 +660,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 ExifData::ExposureProgram = (int)ConvertAnyFormat(ValuePtr, Format);
                 break;
 
-            case TAG_ISO_EQUIVALENT:
+            case TAG_ISO_ETQUIVALENT:
                 ExifData::ISOequivalent = (int)ConvertAnyFormat(ValuePtr, Format);
                 if ( ExifData::ISOequivalent < 50 ) ExifData::ISOequivalent *= 200;
                 break;
@@ -803,7 +803,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
             // printf("Exif section in Motorola order\n");
             MotorolaOrder = 1;
         }else{
-            throw FatalError("Invalid Exif alignment marker.");
+            throw FatalError("Invalid Exif tqalignment marker.");
         }
     }
 

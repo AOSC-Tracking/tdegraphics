@@ -29,14 +29,14 @@
 #include "kprintDialogPage_DJVUconversionoptions.h"
 #include "kprintDialogPage_DJVUconversionoptions_basewidget.h"
 
-KPrintDialogPage_DJVUConversionOptions::KPrintDialogPage_DJVUConversionOptions( TQWidget *parent, const char *name )
-  : KPrintDialogPage( parent, name )
+KPrintDialogPage_DJVUConversionOptions::KPrintDialogPage_DJVUConversionOptions( TQWidget *tqparent, const char *name )
+  : KPrintDialogPage( tqparent, name )
 {
   setTitle( i18n("DJVU to PS Conversion") );
 
   kprintDialogPage_pageoptions_baseLayout = new TQVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout"); 
   if (kprintDialogPage_pageoptions_baseLayout == 0) {
-    kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create layout" << endl;
+    kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create tqlayout" << endl;
     return;
   }
   

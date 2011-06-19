@@ -49,9 +49,9 @@ K_EXPORT_COMPONENT_FACTORY(kdvipart, KDVIMultiPageFactory)
 
 
 
-KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+KDVIMultiPage::KDVIMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
                              const char *name, const TQStringList& args)
-  : KMultiPage(parentWidget, widgetName, parent, name), DVIRenderer(parentWidget)
+  : KMultiPage(tqparentWidget, widgetName, tqparent, name), DVIRenderer(tqparentWidget)
 {
   Q_UNUSED(args);
 #ifdef PERFORMANCE_MEASUREMENT
@@ -141,27 +141,27 @@ void KDVIMultiPage::slotSave()
   // Try to guess the proper ending...
   TQString formats;
   TQString ending;
-  int rindex = m_file.findRev(".");
+  int rindex = m_file.tqfindRev(".");
   if (rindex == -1) {
-    ending = TQString::null;
-    formats = TQString::null;
+    ending = TQString();
+    formats = TQString();
   } else {
     ending = m_file.mid(rindex); // e.g. ".dvi"
     formats = fileFormats().grep(ending).join("\n");
   }
 
-  TQString fileName = KFileDialog::getSaveFileName(TQString::null, formats, 0, i18n("Save File As"));
+  TQString fileName = KFileDialog::getSaveFileName(TQString(), formats, 0, i18n("Save File As"));
 
   if (fileName.isEmpty())
     return;
 
   // Add the ending to the filename. I hope the user likes it that
   // way.
-  if (!ending.isEmpty() && fileName.find(ending) == -1)
+  if (!ending.isEmpty() && fileName.tqfind(ending) == -1)
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
-    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Do you want to overwrite that file?").arg(fileName),
+    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
                        i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -213,7 +213,7 @@ void KDVIMultiPage::addConfigDialogs(KConfigDialog* configDialog)
 
 void KDVIMultiPage::preferencesChanged()
 {
-  // Call method from parent class
+  // Call method from tqparent class
   KMultiPage::preferencesChanged();
 #ifdef  KDVI_MULTIPAGE_DEBUG
   kdDebug(4300) << "preferencesChanged" << endl;
@@ -239,7 +239,7 @@ void KDVIMultiPage::print()
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1)) ))
+  if (!printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) ))
     return;
 
   // This funny method call is necessary for the KPrinter to return
@@ -256,7 +256,7 @@ void KDVIMultiPage::print()
 
   // Turn the results of the options requestor into a list arguments
   // which are used by dvips.
-  TQString dvips_options = TQString::null;
+  TQString dvips_options = TQString();
   // Print in reverse order.
   if ( printer->pageOrder() == KPrinter::LastPageFirst )
     dvips_options += "-r ";
@@ -365,7 +365,7 @@ void KDVIMultiPage::print()
   default:
     break;
   }
-  // Orientation
+  // Qt::Orientation
   if ( printer->orientation() == KPrinter::Landscape )
     dvips_options += "-t landscape ";
 
@@ -379,7 +379,7 @@ void KDVIMultiPage::print()
       dvips_options +=  TQString(",");
     else
       commaflag = 1;
-    dvips_options += TQString("%1").arg(*it);
+    dvips_options += TQString("%1").tqarg(*it);
   }
 
   // Now print. For that, export the DVI-File to PostScript. Note that

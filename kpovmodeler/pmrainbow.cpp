@@ -87,11 +87,11 @@ PMRainbow::~PMRainbow( )
 {
 }
 
-PMMetaObject* PMRainbow::metaObject( ) const
+PMMetaObject* PMRainbow::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Rainbow", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Rainbow", Base::tqmetaObject( ),
                                         createNewRainbow );
       s_pMetaObject->addProperty(
          new PMRainbowProperty( "direction", &PMRainbow::setDirection, &PMRainbow::direction ) );
@@ -347,9 +347,9 @@ void PMRainbow::enableFalloffAngle( bool c )
    }
 }
 
-PMDialogEditBase* PMRainbow::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMRainbow::editWidget( TQWidget* tqparent ) const
 {
-   return new PMRainbowEdit( parent );
+   return new PMRainbowEdit( tqparent );
 }
 
 void PMRainbow::restoreMemento( PMMemento* s )

@@ -108,8 +108,8 @@ private:
 /**
  * Class used internally by @ref PMViewLayoutManager
  *
- * This class maintains a named layout. It basically stores all views
- * associated with that layout.
+ * This class maintains a named tqlayout. It basically stores all views
+ * associated with that tqlayout.
  */
 class PMViewLayout
 {
@@ -143,12 +143,12 @@ public:
     */
    void displayLayout( PMShell* shell );
    /**
-    * Sets the name of the layout
+    * Sets the name of the tqlayout
     */
    void setName( const TQString& n );
    /**
     *
-    * Add a new entry to the layout. By default it adds the entry at the end
+    * Add a new entry to the tqlayout. By default it adds the entry at the end
     * of the list. If a position is given it adds the entry at the indicated
     * position
     */
@@ -179,7 +179,7 @@ public:
    void normalize( );
 
    /**
-    * Extracts the view layout from the current window
+    * Extracts the view tqlayout from the current window
     */
    static PMViewLayout extractViewLayout( PMShell* shell );
 private:
@@ -198,11 +198,11 @@ private:
 };
 
 /**
- * Singleton that contains the view layouts available.
+ * Singleton that contains the view tqlayouts available.
  *
- * It interacts with @ref PMShell to create the view layouts.
- * The class maintains a list of layouts as well as the name of the default
- * layout. The layouts are stored in a XML file caled viewlayouts.xml.
+ * It interacts with @ref PMShell to create the view tqlayouts.
+ * The class maintains a list of tqlayouts as well as the name of the default
+ * tqlayout. The tqlayouts are stored in a XML file caled viewtqlayouts.xml.
  */
 class PMViewLayoutManager
 {
@@ -217,15 +217,15 @@ public:
    static PMViewLayoutManager* theManager( );
 
    /**
-    * Returns the list of available view layouts
+    * Returns the list of available view tqlayouts
     */
    TQStringList availableLayouts( );
    /**
-    * Sets the default layout
+    * Sets the default tqlayout
     */
    void setDefaultLayout( const TQString& name );
    /**
-    * Returns the default layout
+    * Returns the default tqlayout
     */
    TQString defaultLayout( ) const { return m_defaultLayout; }
    /**
@@ -233,43 +233,43 @@ public:
     */
    void displayLayout( const TQString& name, PMShell* shell );
    /**
-    * Displays the layout indicated as default
+    * Displays the tqlayout indicated as default
     */
    void displayDefaultLayout( PMShell* shell );
    /**
-    * Loads all layouts from the configuration file
+    * Loads all tqlayouts from the configuration file
     */
    void loadData( );
    /**
-    * Saves the current layout collection to the configuration file
+    * Saves the current tqlayout collection to the configuration file
     */
    void saveData( );
    /**
-    * Add a new empty layout
+    * Add a new empty tqlayout
     */
    void addLayout( const TQString& name );
    /**
-    * Add a new layout
+    * Add a new tqlayout
     */
    void addLayout( const PMViewLayout& l ) { m_layouts.append( l ); }
    /**
-    * Remove a layout
+    * Remove a tqlayout
     */
    void removeLayout( const TQString& name );
    /**
-    * Get a known layout
+    * Get a known tqlayout
     */
    PMViewLayout* findLayout( const TQString& name );
    /**
-    * Returns the list of available layouts
+    * Returns the list of available tqlayouts
     */
-   TQValueList<PMViewLayout> layouts( ) { return m_layouts; }
+   TQValueList<PMViewLayout> tqlayouts( ) { return m_layouts; }
    /**
-    * Sets the list of available layouts
+    * Sets the list of available tqlayouts
     */
    void setLayouts( const TQValueList<PMViewLayout>& l ) { m_layouts = l; }
    /**
-    * Fill the available layouts menu
+    * Fill the available tqlayouts menu
     */
    void fillPopupMenu( KPopupMenu* pMenu );
 private:
@@ -291,8 +291,9 @@ private:
 class PMSaveViewLayoutDialog : public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMSaveViewLayoutDialog( PMShell* parent, const char* name = 0 );
+   PMSaveViewLayoutDialog( PMShell* tqparent, const char* name = 0 );
    ~PMSaveViewLayoutDialog( );
 protected slots:
    virtual void slotOk( );

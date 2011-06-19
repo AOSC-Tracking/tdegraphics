@@ -38,9 +38,9 @@
 #include "pmobjectdrag.h"
 
 
-PMTreeViewWidget::PMTreeViewWidget( PMPart* part, TQWidget* parent /*= 0*/,
+PMTreeViewWidget::PMTreeViewWidget( PMPart* part, TQWidget* tqparent /*= 0*/,
                                     const char* name /*=0*/ )
-      : PMViewBase( parent, name )
+      : PMViewBase( tqparent, name )
 {
    TQHBoxLayout* hl = new TQHBoxLayout( this );
    PMTreeView* tv = new PMTreeView( part, this );
@@ -52,9 +52,9 @@ TQString PMTreeViewWidget::description( ) const
    return i18n( "Object Tree" );
 }
 
-PMTreeView::PMTreeView( PMPart* part, TQWidget* parent /*= 0*/,
+PMTreeView::PMTreeView( PMPart* part, TQWidget* tqparent /*= 0*/,
                         const char* name /*= 0*/ )
-      : TQListView( parent, name )
+      : TQListView( tqparent, name )
 {
    addColumn( i18n( "Objects" ) );
    header( )->hide( );
@@ -75,8 +75,8 @@ PMTreeView::PMTreeView( PMPart* part, TQWidget* parent /*= 0*/,
 
    viewport( )->setAcceptDrops( true );
    viewport( )->setMouseTracking( true );
-   viewport( )->setFocusPolicy( TQWidget::WheelFocus );
-   setFocusPolicy( TQWidget::WheelFocus );
+   viewport( )->setFocusPolicy( TQ_WheelFocus );
+   setFocusPolicy( TQ_WheelFocus );
    setAcceptDrops( true );
 
    connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );
@@ -101,20 +101,20 @@ void PMTreeView::slotObjectChanged( PMObject* obj, const int mode,
    bool as = m_acceptSelect;
    m_acceptSelect = true;
 
-   if( sender != this )
+   if( TQT_BASE_OBJECT(sender) != TQT_BASE_OBJECT(this) )
    {
       if( ( mode & PMCAdd ) && !( mode & PMCInsertError ) )
       {
          // object was added
-         if( !obj->parent( ) )
+         if( !obj->tqparent( ) )
          {
-            // object has no parent, append it as top level item
+            // object has no tqparent, append it as top level item
             pTreeItem = new PMTreeViewItem( obj, this );
          }
          else
          {
-            // find the parent in the listview
-            TQListViewItem* pParentTreeItem = findObject( obj->parent( ) );
+            // find the tqparent in the listview
+            TQListViewItem* pParentTreeItem = findObject( obj->tqparent( ) );
             if( pParentTreeItem )
             {
                PMObject* hObj = obj->prevSibling( );
@@ -186,7 +186,7 @@ void PMTreeView::slotObjectChanged( PMObject* obj, const int mode,
          if( pTreeItem )
          {
              PMTreeViewItem* p;
-             for( p = pTreeItem->parent( ); p; p = p->parent( ) )
+             for( p = pTreeItem->tqparent( ); p; p = p->tqparent( ) )
                  p->setOpen( true );
              pTreeItem->setSelected( true );
              setCurrentItem( pTreeItem );
@@ -238,7 +238,7 @@ PMTreeViewItem* PMTreeView::findObject( const PMObject* obj )
 {
    PMTreeViewItem* pTreeItem = 0;
 
-   if( !obj->parent( ) )
+   if( !obj->tqparent( ) )
    {
       // top level object
       pTreeItem = ( PMTreeViewItem* ) firstChild( );
@@ -248,7 +248,7 @@ PMTreeViewItem* PMTreeView::findObject( const PMObject* obj )
    }
    else
    {
-      pTreeItem = findObject( obj->parent( ) );
+      pTreeItem = findObject( obj->tqparent( ) );
       if( pTreeItem )
       {
          pTreeItem = ( PMTreeViewItem* ) pTreeItem->firstChild( );
@@ -269,7 +269,7 @@ void PMTreeView::selectItem( TQListViewItem* /*sitem*/ )
 
    m_pSelectedObject = ( ( PMTreeViewItem* ) sitem )->object( );
 
-   for( pItem = sitem->parent( ); pItem; pItem = pItem->parent( ) )
+   for( pItem = sitem->tqparent( ); pItem; pItem = pItem->tqparent( ) )
       pItem->setOpen( true );
    ensureItemVisible( sitem );
    setCurrentItem( sitem );
@@ -292,7 +292,7 @@ void PMTreeView::addChildItems( PMTreeViewItem* item )
       else
          // first child
          listItem = new PMTreeViewItem( obj, item );
-      // recursive call, if child has children
+      // recursive call, if child has tqchildren
       if( obj->countChildren( ) > 0 )
          addChildItems( listItem );
    }
@@ -324,7 +324,7 @@ void PMTreeView::slotClear( )
 
 void PMTreeView::itemSelected( PMTreeViewItem* item, bool selected )
 {
-   repaintItem( item );
+   tqrepaintItem( item );
 
    if( m_event )
    {
@@ -361,7 +361,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
 
    if( m_selectionCleared )
    {
-      emit objectChanged( 0, PMCNewSelection, this );
+      emit objectChanged( 0, PMCNewSelection, TQT_TQOBJECT(this) );
       specialAction = true;
    }
    else if( m_itemSelected || m_itemDeselected )
@@ -378,7 +378,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
             m_pLastSelected->setSelected( true );
 
             emit objectChanged( m_pLastSelected->object( ), PMCNewSelection,
-                                this );
+                                TQT_TQOBJECT(this) );
          }
          else
          {
@@ -389,11 +389,11 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
       else if( ( e->state( ) & ShiftButton ) && oldCurrent && m_pLastSelected )
       {
          if( ( oldCurrent != m_pLastSelected ) &&
-             ( oldCurrent->parent( ) == m_pLastSelected->parent( ) ) )
+             ( oldCurrent->tqparent( ) == m_pLastSelected->tqparent( ) ) )
          {
             specialAction = true;
 
-            // shift click, old current item has the same parent
+            // shift click, old current item has the same tqparent
             // as the new selection. Select all items between the two
             // items
             if( m_pLastSelected->object( )->isSelectable( ) )
@@ -407,7 +407,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
                   {
                      tmp->setSelected( true );
                      emit objectChanged( (( PMTreeViewItem* ) tmp)->object( ),
-                                         PMCSelected, this );
+                                         PMCSelected, TQT_TQOBJECT(this) );
                      if( tmp == m_pLastSelected )
                         break;
                   }
@@ -418,7 +418,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
                   {
                      tmp->setSelected( true );
                      emit objectChanged( (( PMTreeViewItem* ) tmp)->object( ),
-                                         PMCSelected, this );
+                                         PMCSelected, TQT_TQOBJECT(this) );
                      if( tmp == oldCurrent )
                         break;
                   }
@@ -436,12 +436,12 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
       if( m_itemSelected )
       {
          if( m_pLastSelected->object( )->isSelectable( ) )
-            emit objectChanged( m_pLastSelected->object( ), PMCSelected, this );
+            emit objectChanged( m_pLastSelected->object( ), PMCSelected, TQT_TQOBJECT(this) );
          else
             m_pLastSelected->setSelected( false );
       }
       else if( m_itemDeselected )
-         emit objectChanged( m_pLastSelected->object( ), PMCDeselected, this );
+         emit objectChanged( m_pLastSelected->object( ), PMCDeselected, TQT_TQOBJECT(this) );
    }
    m_acceptSelect = false;
 }
@@ -472,7 +472,7 @@ void PMTreeView::viewportMousePressEvent( TQMouseEvent* e )
 
    TQPoint p = e->pos( );
 
-   if( e->button( ) & RightButton )
+   if( e->button( ) & Qt::RightButton )
    {
       if( m_pPart->factory( ) ) 
       {
@@ -497,7 +497,7 @@ void PMTreeView::viewportMousePressEvent( TQMouseEvent* e )
 
    if( item )
    {
-      if( e->button( ) == LeftButton || e->button( ) == MidButton )
+      if( e->button( ) == Qt::LeftButton || e->button( ) == Qt::MidButton )
       {
          m_pressed = true;
          m_pressedPos = e->pos( );
@@ -526,7 +526,7 @@ void PMTreeView::viewportMouseReleaseEvent( TQMouseEvent* e )
          m_pLastSelected->setSelected( true );
          m_acceptSelect = false;
 
-         emit objectChanged( m_pLastSelected->object( ), PMCNewSelection, this );
+         emit objectChanged( m_pLastSelected->object( ), PMCNewSelection, TQT_TQOBJECT(this) );
       }
    }
 }
@@ -628,8 +628,8 @@ void PMTreeView::viewportDragMoveEvent( TQDragMoveEvent *e )
             accept = false;
             if( !obj->isReadOnly( ) )
                accept = true;
-            if( obj->parent( ) )
-               if( !obj->parent( )->isReadOnly( ) )
+            if( obj->tqparent( ) )
+               if( !obj->tqparent( )->isReadOnly( ) )
                   accept = true;
          }
       }
@@ -724,35 +724,35 @@ void PMTreeView::keyPressEvent( TQKeyEvent* e )
    {
       switch( e->key( ) )
       {
-         case Qt::Key_Up:
+         case TQt::Key_Up:
             newSelection = current->itemAbove( );
             accept = true;
             break;
-         case Qt::Key_Down:
+         case TQt::Key_Down:
             newSelection = current->itemBelow( );
             accept = true;
             break;
-         case Qt::Key_Left:
-            newSelection = current->parent( );
+         case TQt::Key_Left:
+            newSelection = current->tqparent( );
             accept = true;
             break;
-         case Qt::Key_Right:
+         case TQt::Key_Right:
             newSelection = current->firstChild( );
             accept = true;
             break;
-         case Qt::Key_Plus:
+         case TQt::Key_Plus:
             current->setOpen( true );
             accept = true;
             break;
-         case Qt::Key_Minus:
+         case TQt::Key_Minus:
             current->setOpen( false );
             accept = true;
-         case Qt::Key_Delete:
+         case TQt::Key_Delete:
             deleteItem = true;
             accept = true;
             break;
-         case Qt::CTRL+Qt::Key_V:
-         case Qt::SHIFT+Qt::Key_Insert:
+         case TQt::CTRL+TQt::Key_V:
+         case TQt::SHIFT+TQt::Key_Insert:
             pasteItem = true;
             accept = true;
             break;
@@ -769,7 +769,7 @@ void PMTreeView::keyPressEvent( TQKeyEvent* e )
       m_acceptSelect = false;
 
       emit objectChanged( ( ( PMTreeViewItem* ) newSelection )->object( ),
-                          PMCNewSelection, this );
+                          PMCNewSelection, TQT_TQOBJECT(this) );
    }
 
    if( deleteItem && m_pPart->isReadWrite( ) )
@@ -804,7 +804,7 @@ bool PMTreeView::targetDisplaysPart( TQWidget* target )
       // find the tree view
       TQWidget* t = target;
       while( t && !t->isA( "PMTreeView" ) )
-         t = t->parentWidget( );
+         t = t->tqparentWidget( );
       if( t )
          if( ( ( PMTreeView* ) t )->part( ) == m_pPart )
             result = true;

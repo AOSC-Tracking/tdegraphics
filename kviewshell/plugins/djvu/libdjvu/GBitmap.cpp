@@ -348,7 +348,7 @@ GBitmap::donate_data(unsigned char *data, int w, int h)
   ncolumns = w;
   border = 0;
   bytes_per_row = w;
-  gbytes_data.replace(data,w*h);
+  gbytes_data.tqreplace(data,w*h);
   bytes = bytes_data;
   rlelength = 0;
 }
@@ -363,7 +363,7 @@ GBitmap::donate_rle(unsigned char *rledata, unsigned int rledatalen, int w, int 
   border = 0;
   bytes_per_row = w;
 //  rle = rledata;
-  grle.replace(rledata,rledatalen);
+  grle.tqreplace(rledata,rledatalen);
   rlelength = rledatalen;
 }
 
@@ -814,19 +814,19 @@ GBitmap::read_pbm_raw(ByteStream &bs)
   for (int n = nrows-1; n>=0; n--) 
     {
       unsigned char acc = 0;
-      unsigned char mask = 0;
+      unsigned char tqmask = 0;
       for (int c = 0; c<ncolumns; c++)
         {
-          if (!mask) 
+          if (!tqmask) 
             {
               bs.read(&acc, 1);
-              mask = (unsigned char)0x80;
+              tqmask = (unsigned char)0x80;
             }
-          if (acc & mask)
+          if (acc & tqmask)
             row[c] = 1;
           else
             row[c] = 0;
-          mask >>= 1;
+          tqmask >>= 1;
         }
       row -= bytes_per_row;
     }
@@ -1037,18 +1037,18 @@ GBitmap::rle_get_bitmap (
 {
   const int obyte_def=invert?0xff:0;
   const int obyte_ndef=invert?0:0xff;
-  int mask=0x80,obyte=0;
+  int tqmask=0x80,obyte=0;
   for(int c=ncolumns;c > 0 ;)
   {
     int x=read_run(runs);
     c-=x;
     while((x--)>0)
     {
-      if(!(mask>>=1))
+      if(!(tqmask>>=1))
       {
         *(bitmap++) = obyte^obyte_def;
         obyte=0;
-        mask=0x80;
+        tqmask=0x80;
         for(;x>=8;x-=8)
         {
           *(bitmap++)=obyte_def;
@@ -1061,19 +1061,19 @@ GBitmap::rle_get_bitmap (
       c-=x;
       while((x--)>0)
       {
-        obyte|=mask;
-        if(!(mask>>=1))
+        obyte|=tqmask;
+        if(!(tqmask>>=1))
         {
           *(bitmap++)=obyte^obyte_def;
           obyte=0;
-          mask=0x80;
+          tqmask=0x80;
           for(;(x>8);x-=8)
             *(bitmap++)=obyte_ndef;
         }
       }
     }
   }
-  if(mask != 0x80)
+  if(tqmask != 0x80)
   {
     *(bitmap++)=obyte^obyte_def;
   }

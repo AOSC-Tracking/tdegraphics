@@ -52,7 +52,7 @@ PMShell::PMShell( const KURL& url )
    setPluginLoadingMode( DoNotLoadPlugins );
    setInstance( PMFactory::instance( ), false );
 
-   m_pPart = new PMPart( this, "part", this, "part", true, this );
+   m_pPart = new PMPart( this, "part", TQT_TQOBJECT(this), "part", true, this );
    m_pPart->setReadWrite( ); // read-write mode
    m_viewNumber = 0;
    m_objectsToDelete.setAutoDelete( true );
@@ -95,71 +95,71 @@ void PMShell::setupActions( )
 //   m_helpMenu = new KHelpMenu( this, PMFactory::aboutData( ), true,
 //                               actionCollection( ) );
 
-   KStdAction::openNew( this, TQT_SLOT( slotFileNew( ) ), actionCollection( ) );
-   KStdAction::open( this, TQT_SLOT( slotFileOpen( ) ), actionCollection( ) );
-   m_pRecent = KStdAction::openRecent( this, TQT_SLOT( slotOpenRecent( const KURL& ) ),
+   KStdAction::openNew( TQT_TQOBJECT(this), TQT_SLOT( slotFileNew( ) ), actionCollection( ) );
+   KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotFileOpen( ) ), actionCollection( ) );
+   m_pRecent = KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( slotOpenRecent( const KURL& ) ),
                                        actionCollection( ) );
-   KStdAction::save( this, TQT_SLOT( slotFileSave( ) ), actionCollection( ) );
-   KStdAction::saveAs( this, TQT_SLOT( slotFileSaveAs( ) ), actionCollection( ) );
+   KStdAction::save( TQT_TQOBJECT(this), TQT_SLOT( slotFileSave( ) ), actionCollection( ) );
+   KStdAction::saveAs( TQT_TQOBJECT(this), TQT_SLOT( slotFileSaveAs( ) ), actionCollection( ) );
 
-   KStdAction::revert( this, TQT_SLOT( slotFileRevert( ) ), actionCollection( ) );
-   KStdAction::print( this, TQT_SLOT( slotFilePrint( ) ), actionCollection( ) );
+   KStdAction::revert( TQT_TQOBJECT(this), TQT_SLOT( slotFileRevert( ) ), actionCollection( ) );
+   KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( slotFilePrint( ) ), actionCollection( ) );
 
-   KStdAction::close( this, TQT_SLOT( slotFileClose( ) ), actionCollection( ) );
-   KStdAction::quit( this, TQT_SLOT( close( ) ), actionCollection( ) );
+   KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( slotFileClose( ) ), actionCollection( ) );
+   KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close( ) ), actionCollection( ) );
 
-   m_pPathAction = new KToggleAction( i18n( "Show &Path" ), 0, this,
+   m_pPathAction = new KToggleAction( i18n( "Show &Path" ), 0, TQT_TQOBJECT(this),
                                TQT_SLOT( slotShowPath( ) ), actionCollection( ),
                                "options_show_path" );
    m_pPathAction->setCheckedState(i18n("Hide &Path"));
 
-   m_pStatusbarAction = KStdAction::showStatusbar( this, TQT_SLOT( slotShowStatusbar( ) ),
+   m_pStatusbarAction = KStdAction::showStatusbar( TQT_TQOBJECT(this), TQT_SLOT( slotShowStatusbar( ) ),
                                                    actionCollection( ) );
 
-   KStdAction::saveOptions( this, TQT_SLOT( saveOptions( ) ), actionCollection( ) );
+   KStdAction::saveOptions( TQT_TQOBJECT(this), TQT_SLOT( saveOptions( ) ), actionCollection( ) );
 
-   KStdAction::keyBindings( this, TQT_SLOT( slotConfigureKeys( ) ),
+   KStdAction::keyBindings( TQT_TQOBJECT(this), TQT_SLOT( slotConfigureKeys( ) ),
                             actionCollection( ) );
-   KStdAction::configureToolbars( this, TQT_SLOT( slotConfigureToolbars( ) ),
+   KStdAction::configureToolbars( TQT_TQOBJECT(this), TQT_SLOT( slotConfigureToolbars( ) ),
                                   actionCollection( ) );
-   KStdAction::preferences( this, TQT_SLOT( slotSettings( ) ), actionCollection( ) );
+   KStdAction::preferences( TQT_TQOBJECT(this), TQT_SLOT( slotSettings( ) ), actionCollection( ) );
 
-   m_pNewTopViewAction = new KAction( i18n( "New Top View" ), 0, this,
+   m_pNewTopViewAction = new KAction( i18n( "New Top View" ), 0, TQT_TQOBJECT(this),
                                       TQT_SLOT( slotNewTopView( ) ),
                                       actionCollection( ), "view_new_topview" );
-   m_pNewBottomViewAction = new KAction( i18n( "New Bottom View" ), 0, this,
+   m_pNewBottomViewAction = new KAction( i18n( "New Bottom View" ), 0, TQT_TQOBJECT(this),
                                          TQT_SLOT( slotNewBottomView( ) ),
                                          actionCollection( ), "view_new_bottomview" );
-   m_pNewLeftViewAction = new KAction( i18n( "New Left View" ), 0, this,
+   m_pNewLeftViewAction = new KAction( i18n( "New Left View" ), 0, TQT_TQOBJECT(this),
                                        TQT_SLOT( slotNewLeftView( ) ),
                                        actionCollection( ), "view_new_leftview" );
-   m_pNewRightViewAction = new KAction( i18n( "New Right View" ), 0, this,
+   m_pNewRightViewAction = new KAction( i18n( "New Right View" ), 0, TQT_TQOBJECT(this),
                                         TQT_SLOT( slotNewRightView( ) ),
                                         actionCollection( ), "view_new_rightview" );
-   m_pNewFrontViewAction = new KAction( i18n( "New Front View" ), 0, this,
+   m_pNewFrontViewAction = new KAction( i18n( "New Front View" ), 0, TQT_TQOBJECT(this),
                                         TQT_SLOT( slotNewFrontView( ) ),
                                         actionCollection( ), "view_new_frontview" );
-   m_pNewBackViewAction = new KAction( i18n( "New Back View" ), 0, this,
+   m_pNewBackViewAction = new KAction( i18n( "New Back View" ), 0, TQT_TQOBJECT(this),
                                        TQT_SLOT( slotNewBackView( ) ),
                                        actionCollection( ), "view_new_back_view" );
-   m_pNewCameraViewAction = new KAction( i18n( "New Camera View" ), 0, this,
+   m_pNewCameraViewAction = new KAction( i18n( "New Camera View" ), 0, TQT_TQOBJECT(this),
                                          TQT_SLOT( slotNewCameraView( ) ),
                                          actionCollection( ), "view_new_cameraview" );
 
-   m_pNewTreeViewAction = new KAction( i18n( "New Object Tree" ), 0, this,
+   m_pNewTreeViewAction = new KAction( i18n( "New Object Tree" ), 0, TQT_TQOBJECT(this),
                               TQT_SLOT( slotNewTreeView( ) ), actionCollection( ),
                               "view_new_treeview" );
-   m_pNewDialogViewAction = new KAction( i18n( "New Properties View" ), 0, this,
+   m_pNewDialogViewAction = new KAction( i18n( "New Properties View" ), 0, TQT_TQOBJECT(this),
                              TQT_SLOT( slotNewDialogView( ) ), actionCollection( ),
                              "view_new_dialogview" );
 
 #ifdef KPM_WITH_OBJECT_LIBRARY
-   m_pNewLibraryBrowserAction = new KAction( i18n( "New Library Browser" ), 0, this,
+   m_pNewLibraryBrowserAction = new KAction( i18n( "New Library Browser" ), 0, TQT_TQOBJECT(this),
                                     TQT_SLOT( slotNewLibraryBrowserView( ) ), actionCollection( ),
                                     "view_new_librarybrowser" );
 #endif
 
-   // Creating the view layouts menu
+   // Creating the view tqlayouts menu
    m_pViewLayoutsAction = new KActionMenu( i18n( "View Layouts" ),
                                            actionCollection( ), "view_layouts_menu" );
    KPopupMenu* menu = m_pViewLayoutsAction->popupMenu( );
@@ -167,7 +167,7 @@ void PMShell::setupActions( )
    PMViewLayoutManager::theManager( )->fillPopupMenu( menu );
    connect( menu, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotSelectedLayout( int ) ) );
 
-   m_pSaveViewLayoutAction = new KAction( i18n( "Save View Layout..." ), 0, this,
+   m_pSaveViewLayoutAction = new KAction( i18n( "Save View Layout..." ), 0, TQT_TQOBJECT(this),
                                           TQT_SLOT( slotSaveViewLayout( ) ),
                                           actionCollection( ), "save_view_layout" );
 }
@@ -188,7 +188,7 @@ PMDockWidget* PMShell::createView( const TQString& t, PMViewOptions* o,
       PMViewFactory::theFactory( )->viewFactory( t );
 
    m_viewNumber++;
-   TQString name = TQString( "View (%1)" ).arg( m_viewNumber );
+   TQString name = TQString( "View (%1)" ).tqarg( m_viewNumber );
 
    if( factory )
    {
@@ -231,7 +231,7 @@ PMDockWidget* PMShell::createTreeView( )
 {
    PMDockWidget* dock = 0;
    m_numTreeViews++;
-   TQString name = TQString( "Object Tree (%1)" ).arg( m_numTreeViews );
+   TQString name = TQString( "Object Tree (%1)" ).tqarg( m_numTreeViews );
    dock = createDockWidget( name, SmallIcon( "pmtreeview" ),
                             0L, i18n( "Object Tree" ), i18n( "Object Tree" ) );
    dock->setDockSite( PMDockWidget::DockFullSite );
@@ -248,7 +248,7 @@ PMDockWidget* PMShell::createDialogView( )
 {
    PMDockWidget* dock = 0;
    m_numDialogViews++;
-   TQString name = TQString( "Object Properties (%1)" ).arg( m_numDialogViews );
+   TQString name = TQString( "Object Properties (%1)" ).tqarg( m_numDialogViews );
    dock = createDockWidget( name, SmallIcon( "pmdialogview" ),
                             0L, i18n( "Object Properties" ), i18n( "Object Properties" ) );
    dock->setDockSite( PMDockWidget::DockFullSite );
@@ -265,7 +265,7 @@ PMDockWidget* PMShell::create3DView( PMGLView::PMViewType t )
 {
    PMDockWidget* dock = 0;
    m_numGLViews++;
-   TQString name = TQString( "3D View (%1)" ).arg( m_numGLViews );
+   TQString name = TQString( "3D View (%1)" ).tqarg( m_numGLViews );
    dock = createDockWidget( name, SmallIcon( "pmglview" ),
                             0L, i18n( "3D View" ), i18n( "3D View" ) );
    dock->setDockSite( PMDockWidget::DockFullSite );
@@ -341,13 +341,13 @@ void PMShell::slotNewLibraryBrowserView( )
 
 void PMShell::slotDockWidgetClosed( )
 {
-   const TQObject* o = sender( );
+   const TQObject* o = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender( )));
    if( o && o->inherits( "PMDockWidget" ) )
    {
-      if( m_objectsToDelete.containsRef( o ) == 0 )
+      if( m_objectsToDelete.tqcontainsRef( o ) == 0 )
       {
          m_objectsToDelete.append( o );
-         TQTimer::singleShot( 0, this, TQT_SLOT( slotDeleteClosedObjects( ) ) );
+         TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT( slotDeleteClosedObjects( ) ) );
       }
    }
 }
@@ -377,7 +377,7 @@ void PMShell::openURL( const KURL& url )
 void PMShell::slotOpenRecent( const KURL& url )
 {
    m_openRecentURL = url;
-   TQTimer::singleShot( 0, this, TQT_SLOT( slotOpenRecentTimer( ) ) );
+   TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT( slotOpenRecentTimer( ) ) );
 }
 
 void PMShell::slotOpenRecentTimer( )
@@ -402,7 +402,7 @@ void PMShell::slotFileNew( )
 void PMShell::slotFileOpen( )
 {
    KURL url = KFileDialog::getOpenURL(
-      TQString::null, TQString( "*.kpm|" ) + i18n( "Povray Modeler Files (*.kpm)" )
+      TQString(), TQString( "*.kpm|" ) + i18n( "Povray Modeler Files (*.kpm)" )
       + "\n*|" + i18n( "All Files" ) );
 
    if( !url.isEmpty( ) )
@@ -434,7 +434,7 @@ void PMShell::slotFileSaveAs( )
 
 void PMShell::saveAs( )
 {
-   KFileDialog dlg( TQString::null,
+   KFileDialog dlg( TQString(),
                     TQString( "*.kpm|" ) + i18n( "Povray Modeler Files (*.kpm)" ) +
                     TQString( "\n*|" ) + i18n( "All Files" ),
                     0, "filedialog", true );
@@ -602,7 +602,7 @@ void PMShell::setCaption( const TQString& caption )
    else
    {
       if( !m_pPathAction->isChecked( ) )
-         tmp = caption.right( caption.length( ) - caption.findRev( '/' ) - 1 );
+         tmp = caption.right( caption.length( ) - caption.tqfindRev( '/' ) - 1 );
       else
          tmp = caption;
    }
@@ -649,14 +649,14 @@ bool PMShell::overwriteURL( const KURL& u )
       TQString name( u.path( ) );
       info.setFile( name );
       if( info.exists( ) )
-         query = KMessageBox::warningContinueCancel( 0, i18n( "A file with this name already exists.\nDo you want to overwrite it?" ), TQString::null, i18n("Overwrite") );
+         query = KMessageBox::warningContinueCancel( 0, i18n( "A file with this name already exists.\nDo you want to overwrite it?" ), TQString(), i18n("Overwrite") );
    }
    return ( query == KMessageBox::Continue );
 }
 
 void PMShell::slotSelectedLayout( int id )
 {
-   TQMenuItem* menu = m_pViewLayoutsAction->popupMenu( )->findItem( id );
+   TQMenuItem* menu = m_pViewLayoutsAction->popupMenu( )->tqfindItem( id );
    PMViewLayoutManager::theManager( )->displayLayout( menu->text( ), this );
 }
 

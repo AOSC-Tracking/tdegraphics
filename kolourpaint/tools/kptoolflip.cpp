@@ -80,7 +80,7 @@ TQString kpToolFlipCommand::name () const
     else
     {
         kdError () << "kpToolFlipCommand::name() not asked to flip" << endl;
-        return TQString::null;
+        return TQString();
     }
 #endif
 
@@ -120,7 +120,7 @@ void kpToolFlipCommand::flip ()
         return;
 
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     
     if (m_actOnSelection)
@@ -149,8 +149,8 @@ void kpToolFlipCommand::flip ()
 bool kpToolFlipDialog::s_lastIsVerticalFlip = true;
 
 
-kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, TQWidget *parent)
-    : KDialogBase (parent, 0/*name*/, true/*modal*/,
+kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, TQWidget *tqparent)
+    : KDialogBase (tqparent, 0/*name*/, true/*modal*/,
                    actOnSelection ? i18n ("Flip Selection") : i18n ("Flip Image"),
                    KDialogBase::Ok | KDialogBase::Cancel)
 {

@@ -32,15 +32,16 @@ class KCustomColors;
 class PaletteToolBar : public KToolBar
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    PaletteToolBar( TQWidget *parent, const char *name = 0L );
+    PaletteToolBar( TQWidget *tqparent, const char *name = 0L );
 
   signals:
     void newColor( uint c );
 
   public slots:
-    virtual void setOrientation( Orientation o );
+    virtual void setOrientation( Qt::Orientation o );
     void previewChanged( const TQPixmap &p );
     void addColors( uint n, uint *c );
     void addColor( uint color );

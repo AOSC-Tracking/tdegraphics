@@ -38,8 +38,8 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 
-PMImageMapEdit::PMImageMapEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMImageMapEdit::PMImageMapEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -247,8 +247,8 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    TQPixmap removeButtonPixmap = SmallIcon( "pmremovepoint" );
 
    // First let's deal with the filter entries...
-   if( m_pFiltersWidget->layout( ) )
-      delete m_pFiltersWidget->layout( );
+   if( m_pFiltersWidget->tqlayout( ) )
+      delete m_pFiltersWidget->tqlayout( );
 
    m_filterEntries.setAutoDelete( true );
    m_filterAddButtons.setAutoDelete( true );
@@ -313,8 +313,8 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    m_transmitRemoveButtons.setAutoDelete( false );
 
    // recreate the entry edits
-   if( m_pTransmitsWidget->layout( ) )
-      delete m_pTransmitsWidget->layout( );
+   if( m_pTransmitsWidget->tqlayout( ) )
+      delete m_pTransmitsWidget->tqlayout( );
 
    gl = new TQGridLayout( m_pTransmitsWidget, ntransmits + 1, 3, 0, KDialog::spacingHint( ) );
 
@@ -475,7 +475,7 @@ void PMImageMapEdit::slotImageFileNameChanged( const TQString& /*a*/ )
 
 void PMImageMapEdit::slotImageFileBrowseClicked( )
 {
-   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString(), TQString() );
 
    if( !str.isEmpty() )
    {
@@ -535,7 +535,7 @@ void PMImageMapEdit::slotAddFilterEntry( )
 
    if( button )
    {
-      int index = m_filterAddButtons.findRef( button );
+      int index = m_filterAddButtons.tqfindRef( button );
       if( index >= 0 )
       {
          entriesFilters = filters( );
@@ -561,7 +561,7 @@ void PMImageMapEdit::slotRemoveFilterEntry( )
 
    if( button )
    {
-      int index = m_filterRemoveButtons.findRef( button );
+      int index = m_filterRemoveButtons.tqfindRef( button );
       if( index >= 0 )
       {
          entriesFilters = filters( );
@@ -583,7 +583,7 @@ void PMImageMapEdit::slotAddTransmitEntry( )
 
    if( button )
    {
-      int index = m_transmitAddButtons.findRef( button );
+      int index = m_transmitAddButtons.tqfindRef( button );
       if( index >= 0 )
       {
          entriesTransmits = transmits( );
@@ -609,7 +609,7 @@ void PMImageMapEdit::slotRemoveTransmitEntry( )
 
    if( button )
    {
-      int index = m_transmitRemoveButtons.findRef( button );
+      int index = m_transmitRemoveButtons.tqfindRef( button );
       if( index >= 0 )
       {
          entriesTransmits = transmits( );

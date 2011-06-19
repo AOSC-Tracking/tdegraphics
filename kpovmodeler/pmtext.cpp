@@ -89,11 +89,11 @@ void PMText::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMText::metaObject( ) const
+PMMetaObject* PMText::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Text", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Text", Base::tqmetaObject( ),
                                         createNewText );
       s_pMetaObject->addProperty(
          new PMTextProperty( "font", &PMText::setFont, &PMText::font ) );
@@ -162,9 +162,9 @@ void PMText::setOffset( const PMVector& o )
    }
 }
 
-PMDialogEditBase* PMText::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMText::editWidget( TQWidget* tqparent ) const
 {
-   return new PMTextEdit( parent );
+   return new PMTextEdit( tqparent );
 }
 
 void PMText::restoreMemento( PMMemento* s )

@@ -31,17 +31,18 @@ class TQCheckBox;
 class KFAXPrintSettings : public KPrintDialogPage
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	KFAXPrintSettings(TQWidget *parent = 0, const char *name = 0);
+	KFAXPrintSettings(TQWidget *tqparent = 0, const char *name = 0);
 	~KFAXPrintSettings();
 
 	void getOptions(TQMap<TQString,TQString>& opts, bool incldef = false);
 	void setOptions(const TQMap<TQString,TQString>& opts);
 
 private:
-	QCheckBox	*m_scaleFullPage;
-	QCheckBox	*m_center_horz;
-	QCheckBox	*m_center_vert;
+	TQCheckBox	*m_scaleFullPage;
+	TQCheckBox	*m_center_horz;
+	TQCheckBox	*m_center_vert;
 };
 
 #endif

@@ -35,12 +35,13 @@ class TQCheckBox;
 class PMPigmentEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMPigmentEdit with parent and name
+    * Creates a PMPigmentEdit with tqparent and name
     */
-   PMPigmentEdit( TQWidget* parent, const char* name = 0 );
+   PMPigmentEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -45,11 +45,12 @@ class TQCache;
 class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIface
 {
 	Q_OBJECT
+  TQ_OBJECT
 	friend class KViewKonqExtension;
 
 	public:
-		KViewViewer( TQWidget * parentWidget, const char * widgetName,
-				TQObject * parent, const char * name, const TQStringList & );
+		KViewViewer( TQWidget * tqparentWidget, const char * widgetName,
+				TQObject * tqparent, const char * name, const TQStringList & );
 		virtual ~KViewViewer();
 
 		KImageViewer::Canvas * canvas() const { return m_pCanvas; }

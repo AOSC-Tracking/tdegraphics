@@ -57,7 +57,7 @@
  * internal: thread race prevention is done via the 'docLock' mutex. the
  *           mutex is needed only because we have the asyncronous thread; else
  *           the operations are all within the 'gui' thread, scheduled by the
- *           Qt scheduler and no mutex is needed.
+ *           TQt scheduler and no mutex is needed.
  * external: dangerous operations are all locked via mutex internally, and the
  *           only needed external thing is the 'canGeneratePixmap' method
  *           that tells if the generator is free (since we don't want an
@@ -152,7 +152,7 @@ bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPa
         }
 
         // 2. reopen the document using the password
-        GString * pwd2 = new GString( TQString::fromLocal8Bit(password.data()).latin1() );
+        GString * pwd2 = new GString( TQString(TQString::fromLocal8Bit(password.data())).latin1() );
             delete pdfdoc;
         pdfdoc = new PDFDoc( new GString( TQFile::encodeName( filePath ) ), pwd2, pwd2 );
             delete pwd2;
@@ -209,7 +209,7 @@ const DocumentInfo * PDFGenerator::generateDocumentInfo()
         if ( pdfdoc )
         {
             docInfo.set( "format", i18n( "PDF v. <version>", "PDF v. %1" )
-                         .arg( TQString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
+                         .tqarg( TQString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
             docInfo.set( "encryption", pdfdoc->isEncrypted() ? i18n( "Encrypted" ) : i18n( "Unencrypted" ),
                          i18n("Security") );
             docInfo.set( "optimization", pdfdoc->isLinearized() ? i18n( "Yes" ) : i18n( "No" ),
@@ -423,18 +423,18 @@ bool PDFGenerator::print( KPrinter& printer )
     marginBottom = (int)printer.option("kde-margin-bottom").toDouble();
     bool forceRasterize = printer.option("kde-kpdf-forceRaster").toInt();
 
-    if (ps.find(TQRegExp("w\\d+h\\d+")) == 0)
+    if (ps.tqfind(TQRegExp("w\\d+h\\d+")) == 0)
     {
-        // size not supported by Qt, CUPS gives us the size as wWIDTHhHEIGHT, at least on the printers i tester
+        // size not supported by TQt, CUPS gives us the size as wWIDTHhHEIGHT, at least on the printers i tester
         // remove the w
         ps = ps.mid(1);
-        int hPos = ps.find("h");
+        int hPos = ps.tqfind("h");
         paperWidth = ps.left(hPos).toInt();
         paperHeight = ps.mid(hPos+1).toInt();
     }
     else
     {
-        // size is supported by Qt, we get either the pageSize name or nothing because the CUPS driver
+        // size is supported by TQt, we get either the pageSize name or nothing because the CUPS driver
         // does not do any translation, then use KPrinter::pageSize to get the page size
         KPrinter::PageSize qtPageSize;
         if (!ps.isEmpty()) qtPageSize = pageNameToPageSize(ps);
@@ -449,7 +449,7 @@ bool PDFGenerator::print( KPrinter& printer )
         paperHeight = metrics.height();
     }
 
-    KTempFile tf( TQString::null, ".ps" );
+    KTempFile tf( TQString(), ".ps" );
     globalParams->setPSPaperWidth(paperWidth);
     globalParams->setPSPaperHeight(paperHeight);
     TQString pstitle = getDocumentInfo("Title", true);
@@ -457,7 +457,7 @@ bool PDFGenerator::print( KPrinter& printer )
     {
         pstitle = m_document->currentDocument().fileName( false );
     }
-    // this looks non-unicode-safe and it is. anything other than ASCII is not specified
+    // this looks non-tqunicode-safe and it is. anything other than ASCII is not specified
     // and some printers actually stop printing when they encounter non-ASCII characters in the
     // Postscript %%Title tag
     TQCString pstitle8Bit = pstitle.latin1();
@@ -524,18 +524,18 @@ bool PDFGenerator::print( KPrinter& printer )
     }
 }
 
-static GString *QStringToGString(const TQString &s) {
+static GString *TQStringToGString(const TQString &s) {
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
-      cstring[i] = s.at(i).unicode();
+      cstring[i] = s.tqat(i).tqunicode();
     return new GString(cstring, len);
 }
 
-static TQString unicodeToQString(Unicode* u, int len) {
+static TQString tqunicodeToTQString(Unicode* u, int len) {
     TQString ret;
     ret.setLength(len);
-    TQChar* qch = (TQChar*) ret.unicode();
+    TQChar* qch = (TQChar*) ret.tqunicode();
     for (;len;--len)
       *qch++ = (TQChar) *u++;
     return ret;
@@ -568,7 +568,7 @@ static TQString UnicodeParsedString(GString *s1) {
             u = s1->getChar(i) & 0xff;
             ++i;
         }
-        result += unicodeToQString( &u, 1 );
+        result += tqunicodeToTQString( &u, 1 );
     }
     return result;
 }
@@ -586,7 +586,7 @@ TQString PDFGenerator::getMetaData( const TQString & key, const TQString & optio
         // asking for the page related to a 'named link destination'. the
         // option is the link name. @see addSynopsisChildren.
         DocumentViewport viewport;
-        GString * namedDest = QStringToGString(option);
+        GString * namedDest = TQStringToGString(option);
         docLock.lock();
         LinkDest * destination = pdfdoc->findDest( namedDest );
         if ( destination )
@@ -610,7 +610,7 @@ bool PDFGenerator::reparseConfig()
 {
     // load paper color from Settings or use the white default color
     TQColor color = ( (KpdfSettings::renderMode() == KpdfSettings::EnumRenderMode::Paper ) &&
-                     KpdfSettings::changeColors() ) ? KpdfSettings::paperColor() : Qt::white;
+                     KpdfSettings::changeColors() ) ? KpdfSettings::paperColor() : TQt::white;
     // if paper color is changed we have to rebuild every visible pixmap in addition
     // to the outputDevice. it's the 'heaviest' case, other effect are just recoloring
     // over the page rendered on 'standard' white background.
@@ -789,11 +789,11 @@ TQString PDFGenerator::getDocumentInfo( const TQString & data, bool canReturnNul
     // [Albert] Code adapted from pdfinfo.cc on xpdf
     Object info;
     if ( !pdfdoc )
-        return canReturnNull ? TQString::null : i18n( "Unknown" );
+        return canReturnNull ? TQString() : i18n( "Unknown" );
 
     pdfdoc->getDocInfo( &info );
     if ( !info.isDict() )
-        return canReturnNull ? TQString::null : i18n( "Unknown" );
+        return canReturnNull ? TQString() : i18n( "Unknown" );
 
     Object obj;
     Dict *infoDict = info.getDict();
@@ -807,7 +807,7 @@ TQString PDFGenerator::getDocumentInfo( const TQString & data, bool canReturnNul
     }
     obj.free();
     info.free();
-    return canReturnNull ? TQString::null : i18n( "Unknown" );
+    return canReturnNull ? TQString() : i18n( "Unknown" );
 }
 
 TQString PDFGenerator::getDocumentDate( const TQString & data ) const
@@ -856,7 +856,7 @@ TQString PDFGenerator::getDocumentDate( const TQString & data ) const
     return result;
 }
 
-void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
+void PDFGenerator::addSynopsisChildren( TQDomNode * tqparent, GList * items )
 {
     int numItems = items->getLength();
     for ( int i = 0; i < numItems; ++i )
@@ -868,11 +868,11 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
         TQString name;
         Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
-        name = unicodeToQString(uniChar, titleLength);
+        name = tqunicodeToTQString(uniChar, titleLength);
         if ( name.isEmpty() )
             continue;
         TQDomElement item = docSyn.createElement( name );
-        parent->appendChild( item );
+        tqparent->appendChild( item );
 
         // 2. find the page the link refers to
         LinkAction * a = outlineItem->getAction();
@@ -888,7 +888,7 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
                 // so better storing the reference and provide the viewport as metadata
                 // on demand
                 GString *s = g->getNamedDest();
-                TQChar *charArray = new QChar[s->getLength()];
+                TQChar *charArray = new TQChar[s->getLength()];
                 for (int i = 0; i < s->getLength(); ++i) charArray[i] = TQChar(s->getCString()[i]);
                 TQString option(charArray, s->getLength());
                 item.setAttribute( "ViewportName", option );
@@ -909,11 +909,11 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
 
         item.setAttribute( "Open", TQVariant( (bool)outlineItem->isOpen() ).toString() );
 
-        // 3. recursively descend over children
+        // 3. recursively descend over tqchildren
         outlineItem->open();
-        GList * children = outlineItem->getKids();
-        if ( children )
-            addSynopsisChildren( &item, children );
+        GList * tqchildren = outlineItem->getKids();
+        if ( tqchildren )
+            addSynopsisChildren( &item, tqchildren );
     }
 }
 
@@ -1017,10 +1017,10 @@ void PDFGenerator::addTransition( int pageNumber, KPDFPage * page )
 
     switch ( pdfTransition->getAlignment() ) {
         case PageTransition::Horizontal:
-            transition->setAlignment( KPDFPageTransition::Horizontal );
+            transition->tqsetAlignment( KPDFPageTransition::Horizontal );
             break;
         case PageTransition::Vertical:
-            transition->setAlignment( KPDFPageTransition::Vertical );
+            transition->tqsetAlignment( KPDFPageTransition::Vertical );
             break;
     }
 

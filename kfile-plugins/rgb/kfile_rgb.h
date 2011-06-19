@@ -27,14 +27,15 @@ class TQStringList;
 class KRgbPlugin : public KFilePlugin
 {
 	Q_OBJECT
+  TQ_OBJECT
 
 public:
-	KRgbPlugin(TQObject *parent, const char *name, const TQStringList& args);
+	KRgbPlugin(TQObject *tqparent, const char *name, const TQStringList& args);
 	virtual bool readInfo(KFileMetaInfo& info, uint what);
 	virtual bool writeInfo(const KFileMetaInfo& info) const;
 	virtual TQValidator* createValidator(const TQString& mimetype,
 			const TQString &group, const TQString &key,
-			TQObject* parent, const char* name) const;
+			TQObject* tqparent, const char* name) const;
 
 };
 

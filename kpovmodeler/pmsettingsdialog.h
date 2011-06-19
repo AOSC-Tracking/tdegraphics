@@ -49,14 +49,15 @@ class PMViewLayoutEntry;
  * methods @ref displaySettings, @ref displayDefaults, @ref validateData
  * and @ref applySettings
  */
-class PMSettingsDialogPage : public QWidget
+class PMSettingsDialogPage : public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Constructor
     */
-   PMSettingsDialogPage( TQWidget* parent, const char* name = 0 );
+   PMSettingsDialogPage( TQWidget* tqparent, const char* name = 0 );
    /**
     * Display the settings here.
     *
@@ -88,7 +89,7 @@ signals:
     * Emit this signal if a parameter was changed
     * that influences the wire frame rendering.
     */
-   void repaintViews( );
+   void tqrepaintViews( );
    /**
     * Tells the settings dialog to show this page.
     */
@@ -126,11 +127,12 @@ public:
 class PMSettingsDialog : public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Standard constructor
     */
-   PMSettingsDialog( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
+   PMSettingsDialog( PMPart* part, TQWidget* tqparent = 0, const char* name = 0 );
    /**
     * Registers a new settings page.
     *
@@ -177,7 +179,7 @@ private:
    bool validateData( );
    void saveSettings( );
    int findPage( const PMSettingsDialogPage* page );
-   bool m_repaint;
+   bool m_tqrepaint;
    TQValueList<PMRegisteredSettingsPage> m_pages;
    PMPart* m_pPart;
    

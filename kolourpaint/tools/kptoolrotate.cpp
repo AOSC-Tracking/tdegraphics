@@ -97,7 +97,7 @@ void kpToolRotateCommand::execute ()
         return;
 
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
 
     if (!m_losslessRotation)
@@ -181,7 +181,7 @@ void kpToolRotateCommand::unexecute ()
         return;
 
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
 
     TQPixmap oldPixmap;
@@ -294,10 +294,10 @@ void kpToolRotateDialog::createDirectionGroupBox ()
 
     TQGridLayout *directionLayout = new TQGridLayout (directionGroupBox,
                                                     2, 2, marginHint () * 2, spacingHint ());
-    directionLayout->addWidget (antiClockwisePixmapLabel, 0, 0, Qt::AlignCenter);
-    directionLayout->addWidget (clockwisePixmapLabel, 0, 1, Qt::AlignCenter);
-    directionLayout->addWidget (m_antiClockwiseRadioButton, 1, 0, Qt::AlignCenter);
-    directionLayout->addWidget (m_clockwiseRadioButton, 1, 1, Qt::AlignCenter);
+    directionLayout->addWidget (antiClockwisePixmapLabel, 0, 0, TQt::AlignCenter);
+    directionLayout->addWidget (clockwisePixmapLabel, 0, 1, TQt::AlignCenter);
+    directionLayout->addWidget (m_antiClockwiseRadioButton, 1, 0, TQt::AlignCenter);
+    directionLayout->addWidget (m_clockwiseRadioButton, 1, 1, TQt::AlignCenter);
 
 
     connect (m_antiClockwiseRadioButton, TQT_SIGNAL (toggled (bool)),

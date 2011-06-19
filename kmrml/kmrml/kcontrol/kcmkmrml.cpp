@@ -43,8 +43,8 @@ static const int COL_FILENAME = 1;
 typedef KGenericFactory<KCMKMrml, TQWidget> MrmlFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kmrml, MrmlFactory("kmrml") )
 
-KCMKMrml::KCMKMrml(TQWidget *parent, const char *name, const TQStringList & ):
-    KCModule(MrmlFactory::instance(), parent, name)
+KCMKMrml::KCMKMrml(TQWidget *tqparent, const char *name, const TQStringList & ):
+    KCModule(MrmlFactory::instance(), tqparent, name)
 {
     KAboutData* ab = new KAboutData(
         "kcmkmrml",
@@ -58,11 +58,11 @@ KCMKMrml::KCMKMrml(TQWidget *parent, const char *name, const TQStringList & ):
     ab->addAuthor( "Carsten Pfeiffer", 0, "pfeiffer@kde.org" );
     setAboutData( ab );
 
-    TQVBoxLayout *layout = new TQVBoxLayout( this );
-    layout->setSpacing( KDialog::spacingHint() );
+    TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
+    tqlayout->setSpacing( KDialog::spacingHint() );
     m_mainPage = new MainPage( this, "main page" );
 
-    layout->addWidget( m_mainPage );
+    tqlayout->addWidget( m_mainPage );
 
     connect( m_mainPage, TQT_SIGNAL( changed( bool ) ), TQT_SIGNAL( changed( bool )));
 
@@ -86,11 +86,11 @@ void KCMKMrml::checkGiftInstallation()
         KMessageBox::error( this, errorMessage );
         m_mainPage->hide();
         TQLabel *errorLabel = new TQLabel( errorMessage, this );
-        errorLabel->setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
-        KURLLabel *urlLabel = new KURLLabel( "http://www.gnu.org/software/gift", TQString::null, this ); 
-        urlLabel->setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ) );
+        errorLabel->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
+        KURLLabel *urlLabel = new KURLLabel( "http://www.gnu.org/software/gift", TQString(), this ); 
+        urlLabel->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ) );
         connect( urlLabel, TQT_SIGNAL( leftClickedURL( const TQString& )), kapp, TQT_SLOT( invokeBrowser( const TQString& )) );
-        TQLayout *l = layout();
+        TQLayout *l = tqlayout();
         l->addItem( new TQSpacerItem( 0, 10, TQSizePolicy::Minimum, TQSizePolicy::Expanding ) );
         l->add( errorLabel );
         l->add( urlLabel );

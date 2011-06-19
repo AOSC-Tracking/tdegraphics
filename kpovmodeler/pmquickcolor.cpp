@@ -67,11 +67,11 @@ void PMQuickColor::readAttributes( const PMXMLHelper& h )
    m_color = h.colorAttribute( "quickcolor", colorDefault );
 }
 
-PMMetaObject* PMQuickColor::metaObject( ) const
+PMMetaObject* PMQuickColor::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "QuickColor", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "QuickColor", Base::tqmetaObject( ),
                                         createNewQuickColor );
       s_pMetaObject->addProperty(
          new PMQuickColorProperty( "color", &PMQuickColor::setColor, &PMQuickColor::color ) );
@@ -102,9 +102,9 @@ void PMQuickColor::setColor( const PMColor& c )
    }
 }
 
-PMDialogEditBase* PMQuickColor::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMQuickColor::editWidget( TQWidget* tqparent ) const
 {
-   return new PMQuickColorEdit( parent );
+   return new PMQuickColorEdit( tqparent );
 }
 
 void PMQuickColor::restoreMemento( PMMemento* s )

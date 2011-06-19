@@ -49,9 +49,9 @@ const double kpColorSimilarityCube::colorCubeDiagonalDistance =
 
 kpColorSimilarityCube::kpColorSimilarityCube (int look,
                                               kpMainWindow *mainWindow,
-                                              TQWidget *parent,
+                                              TQWidget *tqparent,
                                               const char *name)
-    : TQFrame (parent, name, Qt::WNoAutoErase/*no flicker*/),
+    : TQFrame (tqparent, name, TQt::WNoAutoErase/*no flicker*/),
       m_mainWindow (mainWindow),
       m_colorSimilarity (-1)
 {
@@ -133,12 +133,12 @@ void kpColorSimilarityCube::setColorSimilarity (double similarity)
 
     m_colorSimilarity = similarity;
 
-    repaint (false/*no erase*/);
+    tqrepaint (false/*no erase*/);
 }
 
 
-// protected virtual [base QWidget]
-TQSize kpColorSimilarityCube::sizeHint () const
+// protected virtual [base TQWidget]
+TQSize kpColorSimilarityCube::tqsizeHint () const
 {
     return TQSize (52, 52);
 }
@@ -193,8 +193,8 @@ static void drawQuadrant (TQPainter *p,
 
     points.resize (3);
 
-    p->setPen (Qt::black);
-    p->setBrush (Qt::NoBrush);
+    p->setPen (TQt::black);
+    p->setBrush (TQt::NoBrush);
     p->drawPolyline (points);
 
 
@@ -233,7 +233,7 @@ void kpColorSimilarityCube::drawFace (TQPainter *p,
     const TQPoint mm (::pointBetween (ml, mr));
 
 
-    const int baseBrightness = QMAX (127,
+    const int baseBrightness = TQMAX (127,
                                      255 - int (kpColorSimilarityDialog::maximumColorSimilarity *
                                                 kpColorSimilarityCube::colorCubeDiagonalDistance / 2));
     TQColor colors [2] =
@@ -247,8 +247,8 @@ void kpColorSimilarityCube::drawFace (TQPainter *p,
     #if DEBUG_KP_COLOR_SIMILARITY_CUBE
         kdDebug () << "\tnot enabled - making us grey" << endl;
     #endif
-        colors [0] = colorGroup ().background ();
-        colors [1] = colorGroup ().background ();
+        colors [0] = tqcolorGroup ().background ();
+        colors [1] = tqcolorGroup ().background ();
     }
 
 #if DEBUG_KP_COLOR_SIMILARITY_CUBE
@@ -256,8 +256,8 @@ void kpColorSimilarityCube::drawFace (TQPainter *p,
                << " colorCubeDiagDist=" << kpColorSimilarityCube::colorCubeDiagonalDistance
                << endl
                << "\tbaseBrightness=" << baseBrightness
-               << " color[0]=" << ((colors [0].rgb () & RGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
-               << " color[1]=" << ((colors [1].rgb () & RGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
+               << " color[0]=" << ((colors [0].rgb () & TQRGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
+               << " color[1]=" << ((colors [1].rgb () & TQRGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
                << endl;
 #endif
 
@@ -268,17 +268,17 @@ void kpColorSimilarityCube::drawFace (TQPainter *p,
     ::drawQuadrant (p, colors [0], bm, br, mr, mm);
 }
 
-// protected virtual [base QFrame]
+// protected virtual [base TQFrame]
 void kpColorSimilarityCube::drawContents (TQPainter *p)
 {
     TQRect cr (contentsRect ());
 
     TQPixmap backBuffer (cr.width (), cr.height ());
-    backBuffer.fill (colorGroup ().background ());
+    backBuffer.fill (tqcolorGroup ().background ());
 
     TQPainter backBufferPainter (&backBuffer);
 
-    int cubeRectSize = QMIN (cr.width () * 6 / 8, cr.height () * 6 / 8);
+    int cubeRectSize = TQMIN (cr.width () * 6 / 8, cr.height () * 6 / 8);
     int dx = (cr.width () - cubeRectSize) / 2,
         dy = (cr.height () - cubeRectSize) / 2;
     backBufferPainter.translate (dx, dy);
@@ -336,7 +336,7 @@ void kpColorSimilarityCube::drawContents (TQPainter *p)
 
 #if 0
     backBufferPainter.save ();
-    backBufferPainter.setPen (Qt::cyan);
+    backBufferPainter.setPen (TQt::cyan);
     backBufferPainter.drawRect (0, 0, cubeRectSize, cubeRectSize);
     backBufferPainter.restore ();
 #endif

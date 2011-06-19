@@ -39,8 +39,8 @@
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
-PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :
-   TQWidget( parent )
+PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* tqparent ) :
+   TQWidget( tqparent )
 {
    setAcceptDrops( true );
    m_pPart = new PMPart( this, "treeview", NULL, "part", false, true );
@@ -59,25 +59,25 @@ PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :
    gl->setColStretch( 1, 1 );
    TQLabel* lbl = new TQLabel( i18n( "Name: " ), this );
    m_pName = new TQLineEdit( this );
-   m_pName->setAlignment( Qt::AlignLeft );
+   m_pName->tqsetAlignment( TQt::AlignLeft );
    m_pName->setReadOnly( true );
    gl->addWidget( lbl, 0, 0 );
    gl->addWidget( m_pName, 0, 1 );
 
    lbl = new TQLabel( i18n( "Description:" ), this );
-   lbl->setAlignment( Qt::AlignTop );
+   lbl->tqsetAlignment( TQt::AlignTop );
    m_pDescription = new TQMultiLineEdit( this );
-   m_pDescription->setAlignment( Qt::AlignTop  | Qt::AlignLeft |
-                                 Qt::WordBreak | Qt::DontClip );
+   m_pDescription->tqsetAlignment( TQt::AlignTop  | TQt::AlignLeft |
+                                 TQt::WordBreak | TQt::DontClip );
    m_pDescription->setReadOnly( true );
    gl->addWidget( lbl, 1, 0 );
    gl->addWidget( m_pDescription, 1, 1 );
 
    m_pKeywordsLabel = new TQLabel( i18n( "Keywords:" ), this );
-   m_pKeywordsLabel->setAlignment( Qt::AlignTop );
+   m_pKeywordsLabel->tqsetAlignment( TQt::AlignTop );
    m_pKeywords = new TQMultiLineEdit( this );
-   m_pKeywords->setAlignment( Qt::AlignTop  | Qt::AlignLeft |
-                                 Qt::WordBreak | Qt::DontClip );
+   m_pKeywords->tqsetAlignment( TQt::AlignTop  | TQt::AlignLeft |
+                                 TQt::WordBreak | TQt::DontClip );
    m_pKeywords->setReadOnly( true );
    gl->addWidget( m_pKeywordsLabel, 2, 0 );
    gl->addWidget( m_pKeywords, 2, 1 );
@@ -243,7 +243,7 @@ void PMLibraryEntryPreview::slotTextChanged( const TQString& /* s */)
 
 void PMLibraryEntryPreview::slotPreviewClicked( )
 {
-   KFileDialog dlg( TQString::null, "", NULL, "", false );
+   KFileDialog dlg( TQString(), "", NULL, "", false );
 
    dlg.setFilter( "image/jpeg image/gif image/tiff image/png image/x-bmp" );
    if( dlg.exec( ) == TQDialog::Accepted )
@@ -302,7 +302,7 @@ bool PMLibraryEntryPreview::saveIfNeeded( bool forceSave )
 
             // Add them to the object to save.
             PMObjectDrag drag( m_pPart, sortedList );
-            objToSave.setObjects( drag.encodedData( "application/x-kpovmodeler" ) );
+            objToSave.setObjects( drag.tqencodedData( "application/x-kpovmodeler" ) );
 
             // Add the preview image
             objToSave.setPreview( m_image.copy( ) );

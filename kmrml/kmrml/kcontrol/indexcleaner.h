@@ -20,13 +20,14 @@ namespace KMrml
 
 namespace KMrmlConfig
 {
-    class IndexCleaner : public QObject
+    class IndexCleaner : public TQObject
     {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
         IndexCleaner( const TQStringList& dirs, const KMrml::Config *config,
-                      TQObject *parent = 0, const char *name = 0 );
+                      TQObject *tqparent = 0, const char *name = 0 );
         ~IndexCleaner();
 
         void start();

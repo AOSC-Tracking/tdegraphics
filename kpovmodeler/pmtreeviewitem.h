@@ -32,28 +32,28 @@ class PMObject;
  *
  * Each PMListViewItem is connected to a PMObject.
  */
-class PMTreeViewItem : public QListViewItem
+class PMTreeViewItem : public TQListViewItem
 {
 public:
    /**
-    * Constructs a new top-level list view item in the TQListView parent.
+    * Constructs a new top-level list view item in the TQListView tqparent.
     */
-   PMTreeViewItem( PMObject* object, TQListView* parent );
+   PMTreeViewItem( PMObject* object, TQListView* tqparent );
    /**
-    * Constructs a new list view item which is a child of parent and
-    * first in the parent's list of children.
+    * Constructs a new list view item which is a child of tqparent and
+    * first in the tqparent's list of tqchildren.
     */
-   PMTreeViewItem( PMObject* object, TQListViewItem* parent );
+   PMTreeViewItem( PMObject* object, TQListViewItem* tqparent );
    /**
-    * Constructs a list view item which is a child of parent
-    * and is after after in the parent's list of children.
+    * Constructs a list view item which is a child of tqparent
+    * and is after after in the tqparent's list of tqchildren.
     */
-   PMTreeViewItem( PMObject* object, TQListView* parent, TQListViewItem* after );
+   PMTreeViewItem( PMObject* object, TQListView* tqparent, TQListViewItem* after );
    /**
-    * Constructs a list view item which is a child of parent
-    * and is after after in the parent's list of children.
+    * Constructs a list view item which is a child of tqparent
+    * and is after after in the tqparent's list of tqchildren.
     */
-   PMTreeViewItem( PMObject* object, TQListViewItem* parent,
+   PMTreeViewItem( PMObject* object, TQListViewItem* tqparent,
                    TQListViewItem* after );
    /**
     * Returns the connected @ref PMObject
@@ -61,15 +61,15 @@ public:
    PMObject* object( ) const { return m_pObject; }
    /**
     * Returns a key that can be used for sorting, here the index in the
-    * parents list of children
+    * tqparents list of tqchildren
     */
    virtual TQString key( int column, bool ascending ) const;
    /**
-    * Returns a pointer to the parent item
+    * Returns a pointer to the tqparent item
     */
-   PMTreeViewItem* parent( )
+   PMTreeViewItem* tqparent( )
    {
-      return ( PMTreeViewItem* ) TQListViewItem::parent( );
+      return ( PMTreeViewItem* ) TQListViewItem::tqparent( );
    }
    void setSelected( bool select );
    

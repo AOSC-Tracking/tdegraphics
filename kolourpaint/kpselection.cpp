@@ -337,11 +337,11 @@ int kpSelection::size () const
 
 
 // public
-TQBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
+TQBitmap kpSelection::tqmaskForOwnType (bool nullForRectangular) const
 {
     if (!m_rect.isValid ())
     {
-        kdError () << "kpSelection::maskForOwnType() boundingRect invalid" << endl;
+        kdError () << "kpSelection::tqmaskForOwnType() boundingRect invalid" << endl;
         return TQBitmap ();
     }
 
@@ -351,19 +351,19 @@ TQBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
         if (nullForRectangular)
             return TQBitmap ();
 
-        TQBitmap maskBitmap (m_rect.width (), m_rect.height ());
-        maskBitmap.fill (Qt::color1/*opaque*/);
-        return maskBitmap;
+        TQBitmap tqmaskBitmap (m_rect.width (), m_rect.height ());
+        tqmaskBitmap.fill (TQt::color1/*opaque*/);
+        return tqmaskBitmap;
     }
 
 
-    TQBitmap maskBitmap (m_rect.width (), m_rect.height ());
-    maskBitmap.fill (Qt::color0/*transparent*/);
+    TQBitmap tqmaskBitmap (m_rect.width (), m_rect.height ());
+    tqmaskBitmap.fill (TQt::color0/*transparent*/);
 
     TQPainter painter;
-    painter.begin (&maskBitmap);
-    painter.setPen (Qt::color1)/*opaque*/;
-    painter.setBrush (Qt::color1/*opaque*/);
+    painter.begin (&tqmaskBitmap);
+    painter.setPen (TQt::color1)/*opaque*/;
+    painter.setBrush (TQt::color1/*opaque*/);
 
     if (m_type == kpSelection::Ellipse)
         painter.drawEllipse (0, 0, m_rect.width (), m_rect.height ());
@@ -373,13 +373,13 @@ TQBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
         points.detach ();
         points.translate (-m_rect.x (), -m_rect.y ());
 
-        painter.drawPolygon (points, false/*even-odd algo*/);
+        painter.tqdrawPolygon (points, false/*even-odd algo*/);
     }
 
     painter.end ();
 
 
-    return maskBitmap;
+    return tqmaskBitmap;
 }
 
 
@@ -490,18 +490,18 @@ int kpSelection::height () const
 }
 
 // public
-bool kpSelection::contains (const TQPoint &point) const
+bool kpSelection::tqcontains (const TQPoint &point) const
 {
     TQRect rect = boundingRect ();
 
 #if DEBUG_KP_SELECTION && 1
-    kdDebug () << "kpSelection::contains(" << point
+    kdDebug () << "kpSelection::tqcontains(" << point
                << ") rect==" << rect
                << " #points=" << m_points.size ()
                << endl;
 #endif
 
-    if (!rect.contains (point))
+    if (!rect.tqcontains (point))
         return false;
 
     // OPT: TQRegion is probably incredibly slow - cache
@@ -514,20 +514,20 @@ bool kpSelection::contains (const TQPoint &point) const
     case kpSelection::Text:
         return true;
     case kpSelection::Ellipse:
-        return TQRegion (m_rect, TQRegion::Ellipse).contains (point);
+        return TQRegion (m_rect, TQRegion::Ellipse).tqcontains (point);
     case kpSelection::Points:
         // TODO: make this always include the border
         //       (draw up a rect sel in this mode to see what I mean)
-        return TQRegion (m_points, false/*even-odd algo*/).contains (point);
+        return TQRegion (m_points, false/*even-odd algo*/).tqcontains (point);
     default:
         return false;
     }
 }
 
 // public
-bool kpSelection::contains (int x, int y)
+bool kpSelection::tqcontains (int x, int y)
 {
-    return contains (TQPoint (x, y));
+    return tqcontains (TQPoint (x, y));
 }
 
 
@@ -606,20 +606,20 @@ static int mostContrastingValue (int val)
         return 0;
 }
 
-static QRgb mostContrastingRGB (QRgb val)
+static TQRgb mostContrastingRGB (TQRgb val)
 {
-    return qRgba (mostContrastingValue (qRed (val)),
-                  mostContrastingValue (qGreen (val)),
-                  mostContrastingValue (qBlue (val)),
-                  mostContrastingValue (qAlpha (val)));
+    return tqRgba (mostContrastingValue (tqRed (val)),
+                  mostContrastingValue (tqGreen (val)),
+                  mostContrastingValue (tqBlue (val)),
+                  mostContrastingValue (tqAlpha (val)));
 }
 
 // private
-static void drawTextLines (TQPainter *painter, TQPainter *maskPainter,
+static void drawTextLines (TQPainter *painter, TQPainter *tqmaskPainter,
                            const TQRect &rect,
                            const TQValueVector <TQString> &textLines)
 {
-    if (!painter->clipRegion ().isEmpty () || !maskPainter->clipRegion ().isEmpty ())
+    if (!painter->clipRegion ().isEmpty () || !tqmaskPainter->clipRegion ().isEmpty ())
     {
         // TODO: fix esp. before making method public
         kdError () << "kpselection.cpp:drawTextLines() can't deal with existing painter clip regions" << endl;
@@ -632,8 +632,8 @@ static void drawTextLines (TQPainter *painter, TQPainter *maskPainter,
     if (painter->isActive ())      \
         painter->cmd;              \
                                    \
-    if (maskPainter->isActive ())  \
-        maskPainter->cmd;          \
+    if (tqmaskPainter->isActive ())  \
+        tqmaskPainter->cmd;          \
 }
 
 
@@ -685,7 +685,7 @@ void kpSelection::paintOpaqueText (TQPixmap *destPixmap, const TQRect &docRect) 
     TQBitmap destPixmapMask;
     TQPainter destPixmapPainter, destPixmapMaskPainter;
 
-    if (destPixmap->mask ())
+    if (destPixmap->tqmask ())
     {
         if (m_textStyle.effectiveBackgroundColor ().isTransparent ())
         {
@@ -698,19 +698,19 @@ void kpSelection::paintOpaqueText (TQPixmap *destPixmap, const TQRect &docRect) 
                 modifyingRectRelPixmap,
                 kpPixmapFX::pixmapWithDefinedTransparentPixels (
                     kpPixmapFX::getPixmapAt (*destPixmap, modifyingRectRelPixmap),
-                    m_textStyle.foregroundColor ().toQColor ()));
+                    m_textStyle.foregroundColor ().toTQColor ()));
         }
 
-        destPixmapMask = *destPixmap->mask ();
+        destPixmapMask = *destPixmap->tqmask ();
         destPixmapMaskPainter.begin (&destPixmapMask);
         destPixmapMaskPainter.translate (-docRect.x (), -docRect.y ());
-        destPixmapMaskPainter.setPen (Qt::color1/*opaque*/);
+        destPixmapMaskPainter.setPen (TQt::color1/*opaque*/);
         destPixmapMaskPainter.setFont (m_textStyle.font ());
     }
 
     destPixmapPainter.begin (destPixmap);
     destPixmapPainter.translate (-docRect.x (), -docRect.y ());
-    destPixmapPainter.setPen (m_textStyle.foregroundColor ().toQColor ());
+    destPixmapPainter.setPen (m_textStyle.foregroundColor ().toTQColor ());
     destPixmapPainter.setFont (m_textStyle.font ());
 
 
@@ -718,13 +718,13 @@ void kpSelection::paintOpaqueText (TQPixmap *destPixmap, const TQRect &docRect) 
     {
         destPixmapPainter.fillRect (
             boundingRect (),
-            m_textStyle.effectiveBackgroundColor ().toQColor ());
+            m_textStyle.effectiveBackgroundColor ().toTQColor ());
 
         if (destPixmapMaskPainter.isActive ())
         {
             destPixmapMaskPainter.fillRect (
                 boundingRect (),
-                Qt::color1/*opaque*/);
+                TQt::color1/*opaque*/);
         }
     }
 
@@ -759,7 +759,7 @@ TQPixmap kpSelection::transparentForegroundTextPixmap () const
     // Iron out stupid case first
     if (m_textStyle.effectiveBackgroundColor ().isTransparent ())
     {
-        pixmapMask.fill (Qt::color0/*transparent*/);
+        pixmapMask.fill (TQt::color0/*transparent*/);
         pixmap.setMask (pixmapMask);
         return pixmap;
     }
@@ -775,22 +775,22 @@ TQPixmap kpSelection::transparentForegroundTextPixmap () const
 
     TQPainter pixmapPainter, pixmapMaskPainter;
 
-    pixmap.fill (m_textStyle.effectiveBackgroundColor ().toQColor ());
+    pixmap.fill (m_textStyle.effectiveBackgroundColor ().toTQColor ());
     pixmapPainter.begin (&pixmap);
     // HACK: Transparent foreground colour + antialiased fonts don't
     // work - they don't seem to be able to draw in
-    // Qt::color0/*transparent*/ (but Qt::color1 seems Ok).
+    // TQt::color0/*transparent*/ (but TQt::color1 seems Ok).
     // So we draw in a contrasting color to the background so that
     // we can identify the transparent pixels for manually creating
-    // the mask.
+    // the tqmask.
     pixmapPainter.setPen (
-        TQColor (mostContrastingRGB (m_textStyle.effectiveBackgroundColor ().toQRgb () & RGB_MASK)));
+        TQColor (mostContrastingRGB (m_textStyle.effectiveBackgroundColor ().toTQRgb () & TQRGB_MASK)));
     pixmapPainter.setFont (font);
 
 
-    pixmapMask.fill (Qt::color1/*opaque*/);
+    pixmapMask.fill (TQt::color1/*opaque*/);
     pixmapMaskPainter.begin (&pixmapMask);
-    pixmapMaskPainter.setPen (Qt::color0/*transparent*/);
+    pixmapMaskPainter.setPen (TQt::color0/*transparent*/);
     pixmapMaskPainter.setFont (font);
 
 
@@ -812,7 +812,7 @@ TQPixmap kpSelection::transparentForegroundTextPixmap () const
     kdDebug () << "\tinvoking foreground transparency hack" << endl;
 #endif
     TQImage image = kpPixmapFX::convertToImage (pixmap);
-    QRgb backgroundRGB = image.pixel (0, 0);  // on textBorderSize()
+    TQRgb backgroundRGB = image.pixel (0, 0);  // on textBorderSize()
 
     pixmapMaskPainter.begin (&pixmapMask);
     for (int y = 0; y < image.height (); y++)
@@ -820,9 +820,9 @@ TQPixmap kpSelection::transparentForegroundTextPixmap () const
         for (int x = 0; x < image.width (); x++)
         {
             if (image.pixel (x, y) == backgroundRGB)
-                pixmapMaskPainter.setPen (Qt::color1/*opaque*/);
+                pixmapMaskPainter.setPen (TQt::color1/*opaque*/);
             else
-                pixmapMaskPainter.setPen (Qt::color0/*transparent*/);
+                pixmapMaskPainter.setPen (TQt::color0/*transparent*/);
 
             pixmapMaskPainter.drawPoint (x, y);
         }
@@ -853,9 +853,9 @@ void kpSelection::paint (TQPixmap *destPixmap, const TQRect &docRect) const
     {
     #if DEBUG_KP_SELECTION
         kdDebug () << "kpSelection::paint() textStyle: fcol="
-                << (int *) m_textStyle.foregroundColor ().toQRgb ()
+                << (int *) m_textStyle.foregroundColor ().toTQRgb ()
                 << " bcol="
-                << (int *) m_textStyle.effectiveBackgroundColor ().toQRgb ()
+                << (int *) m_textStyle.effectiveBackgroundColor ().toTQRgb ()
                 << endl;
     #endif
 
@@ -913,7 +913,7 @@ void kpSelection::calculateTextPixmap ()
 TQString kpSelection::textForTextLines (const TQValueVector <TQString> &textLines_)
 {
     if (textLines_.isEmpty ())
-        return TQString::null;
+        return TQString();
 
     TQString bigString = textLines_ [0];
 
@@ -921,7 +921,7 @@ TQString kpSelection::textForTextLines (const TQValueVector <TQString> &textLine
          it != textLines_.end ();
          it++)
     {
-        bigString += TQString::fromLatin1 ("\n");
+        bigString += TQString::tqfromLatin1 ("\n");
         bigString += (*it);
     }
 
@@ -933,7 +933,7 @@ TQString kpSelection::text () const
 {
     if (!isText ())
     {
-        return TQString::null;
+        return TQString();
     }
 
     return textForTextLines (m_textLines);
@@ -964,7 +964,7 @@ void kpSelection::setTextLines (const TQValueVector <TQString> &textLines_)
     if (m_textLines.isEmpty ())
     {
         kdError () << "kpSelection::setTextLines() passed no lines" << endl;
-        m_textLines.push_back (TQString::null);
+        m_textLines.push_back (TQString());
     }
     calculateTextPixmap ();
     emit changed (boundingRect ());
@@ -1000,7 +1000,7 @@ bool kpSelection::pointIsInTextBorderArea (const TQPoint &globalPoint) const
         return false;
     }
 
-    return (m_rect.contains (globalPoint) && !pointIsInTextArea (globalPoint));
+    return (m_rect.tqcontains (globalPoint) && !pointIsInTextArea (globalPoint));
 }
 
 // public
@@ -1012,7 +1012,7 @@ bool kpSelection::pointIsInTextArea (const TQPoint &globalPoint) const
         return false;
     }
 
-    return textAreaRect ().contains (globalPoint);
+    return textAreaRect ().tqcontains (globalPoint);
 }
 
 
@@ -1049,7 +1049,7 @@ int kpSelection::minimumHeightForTextStyle (const kpTextStyle &)
 }
 
 // public static
-TQSize kpSelection::minimumSizeForTextStyle (const kpTextStyle &textStyle)
+TQSize kpSelection::tqminimumSizeForTextStyle (const kpTextStyle &textStyle)
 {
     return TQSize (minimumWidthForTextStyle (textStyle),
                   minimumHeightForTextStyle (textStyle));
@@ -1061,14 +1061,14 @@ int kpSelection::preferredMinimumWidthForTextStyle (const kpTextStyle &textStyle
 {
     const int about15CharsWidth =
         textStyle.fontMetrics ().width (
-            TQString::fromLatin1 ("1234567890abcde"));
+            TQString::tqfromLatin1 ("1234567890abcde"));
 
     const int preferredMinWidth =
-        QMAX (150,
+        TQMAX (150,
               textBorderSize () * 2 + about15CharsWidth);
 
-    return QMAX (minimumWidthForTextStyle (textStyle),
-                 QMIN (250, preferredMinWidth));
+    return TQMAX (minimumWidthForTextStyle (textStyle),
+                 TQMIN (250, preferredMinWidth));
 }
 
 // public static
@@ -1077,8 +1077,8 @@ int kpSelection::preferredMinimumHeightForTextStyle (const kpTextStyle &textStyl
     const int preferredMinHeight =
         textBorderSize () * 2 + textStyle.fontMetrics ().height ();
 
-    return QMAX (minimumHeightForTextStyle (textStyle),
-                 QMIN (150, preferredMinHeight));
+    return TQMAX (minimumHeightForTextStyle (textStyle),
+                 TQMIN (150, preferredMinHeight));
 }
 
 // public static
@@ -1108,7 +1108,7 @@ int kpSelection::minimumHeight () const
 }
 
 // public
-TQSize kpSelection::minimumSize () const
+TQSize kpSelection::tqminimumSize () const
 {
     return TQSize (minimumWidth (), minimumHeight ());
 }
@@ -1252,7 +1252,7 @@ void kpSelection::calculateTransparencyMask ()
     if (isText ())
     {
     #if DEBUG_KP_SELECTION
-        kdDebug () << "\ttext - no need for transparency mask" << endl;
+        kdDebug () << "\ttext - no need for transparency tqmask" << endl;
     #endif
         m_transparencyMask.resize (0, 0);
         return;
@@ -1261,7 +1261,7 @@ void kpSelection::calculateTransparencyMask ()
     if (!m_pixmap)
     {
     #if DEBUG_KP_SELECTION
-        kdDebug () << "\tno pixmap - no need for transparency mask" << endl;
+        kdDebug () << "\tno pixmap - no need for transparency tqmask" << endl;
     #endif
         m_transparencyMask.resize (0, 0);
         return;
@@ -1270,7 +1270,7 @@ void kpSelection::calculateTransparencyMask ()
     if (m_transparency.isOpaque ())
     {
     #if DEBUG_KP_SELECTION
-        kdDebug () << "\topaque - no need for transparency mask" << endl;
+        kdDebug () << "\topaque - no need for transparency tqmask" << endl;
     #endif
         m_transparencyMask.resize (0, 0);
         return;
@@ -1289,12 +1289,12 @@ void kpSelection::calculateTransparencyMask ()
             if (kpPixmapFX::getColorAtPixel (image, x, y).isSimilarTo (m_transparency.transparentColor (),
                                                                        m_transparency.processedColorSimilarity ()))
             {
-                transparencyMaskPainter.setPen (Qt::color1/*make it transparent*/);
+                transparencyMaskPainter.setPen (TQt::color1/*make it transparent*/);
                 hasTransparent = true;
             }
             else
             {
-                transparencyMaskPainter.setPen (Qt::color0/*keep pixel as is*/);
+                transparencyMaskPainter.setPen (TQt::color0/*keep pixel as is*/);
             }
 
             transparencyMaskPainter.drawPoint (x, y);
@@ -1373,8 +1373,8 @@ bool kpSelection::setTransparency (const kpSelectionTransparency &transparency,
                     {
                     #if DEBUG_KP_SELECTION
                         kdDebug () << "\tdiffer at " << TQPoint (x, y)
-                                   << " old=" << (int *) kpPixmapFX::getColorAtPixel (oldTransparencyMaskImage, x, y).toQRgb ()
-                                   << " new=" << (int *) kpPixmapFX::getColorAtPixel (newTransparencyMaskImage, x, y).toQRgb ()
+                                   << " old=" << (int *) kpPixmapFX::getColorAtPixel (oldTransparencyMaskImage, x, y).toTQRgb ()
+                                   << " new=" << (int *) kpPixmapFX::getColorAtPixel (newTransparencyMaskImage, x, y).toTQRgb ()
                                    << endl;
                     #endif
                         changed = true;
@@ -1433,9 +1433,9 @@ void kpSelection::flip (bool horiz, bool vert)
     if (!m_transparencyMask.isNull ())
     {
     #if DEBUG_KP_SELECTION && 1
-        kdDebug () << "\thave transparency mask - flipping that" << endl;
+        kdDebug () << "\thave transparency tqmask - flipping that" << endl;
     #endif
-        kpPixmapFX::flip (&m_transparencyMask, horiz, vert);
+        kpPixmapFX::flip (TQT_TQPIXMAP(&m_transparencyMask), horiz, vert);
     }
 
 

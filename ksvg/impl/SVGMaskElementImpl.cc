@@ -63,11 +63,11 @@ SVGMaskElementImpl::SVGMaskElementImpl(DOM::ElementImpl *impl) : SVGElementImpl(
 	m_height = new SVGAnimatedLengthImpl(LENGTHMODE_HEIGHT, this);
 	m_height->ref();
 
-	m_maskUnits = new SVGAnimatedEnumerationImpl();
-	m_maskUnits->ref();
+	m_tqmaskUnits = new SVGAnimatedEnumerationImpl();
+	m_tqmaskUnits->ref();
 
-	m_maskContentUnits = new SVGAnimatedEnumerationImpl();
-	m_maskContentUnits->ref();
+	m_tqmaskContentUnits = new SVGAnimatedEnumerationImpl();
+	m_tqmaskContentUnits->ref();
 
 	m_converter = new SVGUnitConverter();
 	m_converter->add(m_x);
@@ -77,7 +77,7 @@ SVGMaskElementImpl::SVGMaskElementImpl(DOM::ElementImpl *impl) : SVGElementImpl(
 
 	m_canvas = 0;
 
-	m_maskCache.setMaxTotalCost(1024 * 1024);
+	m_tqmaskCache.setMaxTotalCost(1024 * 1024);
 }
 
 SVGMaskElementImpl::~SVGMaskElementImpl()
@@ -90,23 +90,23 @@ SVGMaskElementImpl::~SVGMaskElementImpl()
 		m_width->deref();
 	if(m_height)
 		m_height->deref();
-	if(m_maskUnits)
-		m_maskContentUnits->deref();
-	if(m_maskUnits)
-		m_maskContentUnits->deref();
+	if(m_tqmaskUnits)
+		m_tqmaskContentUnits->deref();
+	if(m_tqmaskUnits)
+		m_tqmaskContentUnits->deref();
 	delete m_converter;
 	if(m_canvas)
 		delete m_canvas;
 }
 
-SVGAnimatedEnumerationImpl *SVGMaskElementImpl::maskUnits() const
+SVGAnimatedEnumerationImpl *SVGMaskElementImpl::tqmaskUnits() const
 {
-	return m_maskUnits;
+	return m_tqmaskUnits;
 }
 
-SVGAnimatedEnumerationImpl *SVGMaskElementImpl::maskContentUnits() const
+SVGAnimatedEnumerationImpl *SVGMaskElementImpl::tqmaskContentUnits() const
 {
-	return m_maskContentUnits;
+	return m_tqmaskContentUnits;
 }
 
 SVGAnimatedLengthImpl *SVGMaskElementImpl::x() const
@@ -132,8 +132,8 @@ SVGAnimatedLengthImpl *SVGMaskElementImpl::height() const
 /*
 @namespace KSVG
 @begin SVGMaskElementImpl::s_hashTable 7
- maskUnits			SVGMaskElementImpl::MaskUnits			DontDelete|ReadOnly
- maskContentUnits	SVGMaskElementImpl::MaskContentUnits	DontDelete|ReadOnly
+ tqmaskUnits			SVGMaskElementImpl::MaskUnits			DontDelete|ReadOnly
+ tqmaskContentUnits	SVGMaskElementImpl::MaskContentUnits	DontDelete|ReadOnly
  x					SVGMaskElementImpl::X					DontDelete|ReadOnly
  y					SVGMaskElementImpl::Y					DontDelete|ReadOnly
  width				SVGMaskElementImpl::Width				DontDelete|ReadOnly
@@ -148,14 +148,14 @@ Value SVGMaskElementImpl::getValueProperty(ExecState *exec, int token) const
 	{
 		case MaskUnits:
 			if(!attributeMode)
-				return m_maskUnits->cache(exec);
+				return m_tqmaskUnits->cache(exec);
 			else
-				return Number(m_maskUnits->baseVal());
+				return Number(m_tqmaskUnits->baseVal());
 		case MaskContentUnits:
 			if(!attributeMode)
-				return m_maskContentUnits->cache(exec);
+				return m_tqmaskContentUnits->cache(exec);
 			else
-				return Number(m_maskContentUnits->baseVal());
+				return Number(m_tqmaskContentUnits->baseVal());
 		case X:
 			if(!attributeMode)
 				return m_x->cache(exec);
@@ -194,15 +194,15 @@ void SVGMaskElementImpl::putValueProperty(ExecState *exec, int token, const Valu
     {
         case MaskUnits:
             if(value.toString(exec).qstring() == "objectBoundingBox")
-                m_maskUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX);
+                m_tqmaskUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX);
             else
-                m_maskUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_USERSPACEONUSE);
+                m_tqmaskUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_USERSPACEONUSE);
             break;
         case MaskContentUnits:
             if(value.toString(exec).qstring() == "objectBoundingBox")
-                m_maskContentUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX);
+                m_tqmaskContentUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX);
             else
-                m_maskContentUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_USERSPACEONUSE);
+                m_tqmaskContentUnits->setBaseVal(SVGMaskElement::SVG_UNIT_TYPE_USERSPACEONUSE);
             break;
 		case X:
 			converter()->modify(x(), value.toString(exec).qstring());
@@ -262,19 +262,19 @@ void SVGMaskElementImpl::setAttributes()
 
 SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencingElement, int imageWidth, int imageHeight)
 {
-	converter()->finalize(referencingElement, ownerSVGElement(), maskUnits()->baseVal());
+	converter()->finalize(referencingElement, ownerSVGElement(), tqmaskUnits()->baseVal());
 
-	Q_UINT32 *imageBits = new Q_UINT32[imageWidth * imageHeight];
+	TQ_UINT32 *imageBits = new TQ_UINT32[imageWidth * imageHeight];
 
 	if(m_canvas == 0)
 		m_canvas = CanvasFactory::self()->loadCanvas(imageWidth, imageHeight);
 
 	m_canvas->setup(reinterpret_cast<unsigned char *>(imageBits), imageWidth, imageHeight);
-	m_canvas->setBackgroundColor(qRgba(0, 0, 0, 0));
+	m_canvas->setBackgroundColor(tqRgba(0, 0, 0, 0));
 
 	SVGMatrixImpl *baseMatrix = SVGSVGElementImpl::createSVGMatrix();
 
-	// Set the scale to map the mask onto the image
+	// Set the scale to map the tqmask onto the image
 	double xScale = static_cast<double>(imageWidth) / width()->baseVal()->value();
 	double yScale = static_cast<double>(imageHeight) / height()->baseVal()->value();
 
@@ -282,12 +282,12 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 
 	SVGRectImpl *bbox = referencingElement->getBBox();
 
-	if(maskUnits()->baseVal() == SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX)
+	if(tqmaskUnits()->baseVal() == SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX)
 		baseMatrix->translate(-(bbox->x() + x()->baseVal()->value()), -(bbox->y() + y()->baseVal()->value()));
 	else
 		baseMatrix->translate(-x()->baseVal()->value(), -y()->baseVal()->value());
 
-	if(maskContentUnits()->baseVal() == SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX)
+	if(tqmaskContentUnits()->baseVal() == SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX)
 	{
 		baseMatrix->translate(bbox->x(), bbox->y());
 		baseMatrix->scaleNonUniform(bbox->width(), bbox->height());
@@ -296,22 +296,22 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
-		if(element && shape && style && ok && style->getVisible() && style->getDisplay())
+		if(element && tqshape && style && ok && style->getVisible() && style->getDisplay())
 		{
 			SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(element);
 			if(locatable)
 				locatable->updateCachedScreenCTM(baseMatrix);
 
 			element->createItem(m_canvas);
-			if(shape->item())
+			if(tqshape->item())
 			{
-				shape->item()->setReferenced(true);
-				m_canvas->invalidate(shape->item(), true);
+				tqshape->item()->setReferenced(true);
+				m_canvas->tqinvalidate(tqshape->item(), true);
 			}
 		}
 	}
@@ -321,33 +321,33 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
-		if(element && shape && style && ok && style->getVisible() && style->getDisplay())
+		if(element && tqshape && style && ok && style->getVisible() && style->getDisplay())
 		{
-			if(shape)
-				shape->removeItem(m_canvas);
+			if(tqshape)
+				tqshape->removeItem(m_canvas);
 		}
 	}
 
 
 	{
 		// Note: r and b reversed
-		//TQImage maskImage(reinterpret_cast<unsigned char *>(imageBits), imageWidth, imageHeight, 32, 0, 0, TQImage::IgnoreEndian);
-		//maskImage.setAlphaBuffer(true);
-		//maskImage.save("mask.png", "PNG");
+		//TQImage tqmaskImage(reinterpret_cast<unsigned char *>(imageBits), imageWidth, imageHeight, 32, 0, 0, TQImage::IgnoreEndian);
+		//tqmaskImage.setAlphaBuffer(true);
+		//tqmaskImage.save("tqmask.png", "PNG");
 	}
 
-	TQByteArray maskData(imageWidth * imageHeight);
+	TQByteArray tqmaskData(imageWidth * imageHeight);
     const double epsilon = DBL_EPSILON;
 
-	// Convert the rgba image into an 8-bit mask, according to the specs.
+	// Convert the rgba image into an 8-bit tqmask, according to the specs.
 	for(int i = 0; i < imageWidth * imageHeight; i++)
 	{
-		Q_UINT32 rgba = imageBits[i];
+		TQ_UINT32 rgba = imageBits[i];
 
 #if X_BYTE_ORDER == X_LITTLE_ENDIAN
 		double r = (rgba & 0xff) / 255.0;
@@ -378,9 +378,9 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 		double luminanceAlpha = 0.2125 * r + 0.7154 * g + 0.0721 * b;
 
 		// Multiply by alpha.
-		double maskValue = luminanceAlpha * a;
+		double tqmaskValue = luminanceAlpha * a;
 
-		maskData[i] = static_cast<unsigned char>(maskValue * 255 + 0.5);
+		tqmaskData[i] = static_cast<unsigned char>(tqmaskValue * 255 + 0.5);
 	}
 
 	delete [] imageBits;
@@ -388,16 +388,16 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	baseMatrix->deref();
 	bbox->deref();
 
-	// The screenToMask matrix is calculated each time the mask is used so we don't
+	// The screenToMask matrix is calculated each time the tqmask is used so we don't
 	// need to set it here.
 	TQWMatrix tempMatrix;
 
-	return Mask(maskData, tempMatrix, imageWidth, imageHeight);
+	return Mask(tqmaskData, tempMatrix, imageWidth, imageHeight);
 }
 
 SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencingElement)
 {
-	converter()->finalize(referencingElement, ownerSVGElement(), maskUnits()->baseVal());
+	converter()->finalize(referencingElement, ownerSVGElement(), tqmaskUnits()->baseVal());
 
 	SVGMatrixImpl *refCTM = 0;
 	SVGLocatableImpl *locatableRef = dynamic_cast<SVGLocatableImpl *>(referencingElement);
@@ -414,26 +414,26 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	int imageWidth = static_cast<int>(width()->baseVal()->value() * xScale + 0.5);
 	int imageHeight = static_cast<int>(height()->baseVal()->value() * yScale + 0.5);
 
-	Mask mask;
+	Mask tqmask;
 
 	if(imageWidth > 0 && imageHeight > 0)
 	{
 		CacheKey key(referencingElement, imageWidth, imageHeight);
 
-		if(!m_maskCache.find(key, mask))
+		if(!m_tqmaskCache.tqfind(key, tqmask))
 		{
-			mask = createMask(referencingElement, imageWidth, imageHeight);
-			m_maskCache.insert(key, mask, imageWidth * imageHeight);
+			tqmask = createMask(referencingElement, imageWidth, imageHeight);
+			m_tqmaskCache.insert(key, tqmask, imageWidth * imageHeight);
 		}
 
-		// Generate a mask-coordinates to screen-coordinates matrix
+		// Generate a tqmask-coordinates to screen-coordinates matrix
 		SVGMatrixImpl *matrix = 0;
 		if(locatableRef)
 			matrix = locatableRef->getScreenCTM();
 		else
 			matrix = SVGSVGElementImpl::createSVGMatrix();
 
-		if(maskUnits()->baseVal() == SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX)
+		if(tqmaskUnits()->baseVal() == SVGMaskElement::SVG_UNIT_TYPE_OBJECTBOUNDINGBOX)
 		{
 			SVGRectImpl *bbox = referencingElement->getBBox();
 			matrix->translate(bbox->x() + x()->baseVal()->value(), bbox->y() + y()->baseVal()->value());
@@ -447,46 +447,46 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 		TQWMatrix screenToMask = matrix->qmatrix().invert();
 		matrix->deref();
 
-		mask.setScreenToMask(screenToMask);
+		tqmask.setScreenToMask(screenToMask);
 	}
 	
-	return mask;
+	return tqmask;
 }
 
-TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *shape, const TQRect& screenRectangle)
+TQByteArray SVGMaskElementImpl::tqmaskRectangle(SVGShapeImpl *tqshape, const TQRect& screenRectangle)
 {
 	TQByteArray cumulativeMask;
 
 	do
 	{
-		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(shape);
+		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(tqshape);
 
 		if(style && style->hasMask())
 		{
-			SVGElementImpl *element = shape->ownerDoc()->rootElement()->getElementById(style->getMask());
+			SVGElementImpl *element = tqshape->ownerDoc()->rootElement()->getElementById(style->getMask());
 
 			if(element)
 			{
-				SVGMaskElementImpl *maskElement = dynamic_cast<SVGMaskElementImpl *>(element);
+				SVGMaskElementImpl *tqmaskElement = dynamic_cast<SVGMaskElementImpl *>(element);
 
-				if(maskElement)
+				if(tqmaskElement)
 				{
-					SVGMaskElementImpl::Mask mask = maskElement->createMask(shape);
+					SVGMaskElementImpl::Mask tqmask = tqmaskElement->createMask(tqshape);
 					
-					if(!mask.isEmpty())
+					if(!tqmask.isEmpty())
 					{
-						TQByteArray maskData = mask.rectangle(screenRectangle);
+						TQByteArray tqmaskData = tqmask.rectangle(screenRectangle);
 
 						if(cumulativeMask.size() == 0)
-							cumulativeMask = maskData;
+							cumulativeMask = tqmaskData;
 						else
 						{
 							int size = cumulativeMask.size();
 
-							// Multiply into the cumulative mask (using fast divide by 255)
+							// Multiply into the cumulative tqmask (using fast divide by 255)
 							for(int i = 0; i < size; i++)
 							{
-								int tmp = maskData[i] * cumulativeMask[i] + 0x80;
+								int tmp = tqmaskData[i] * cumulativeMask[i] + 0x80;
 								cumulativeMask[i] = (tmp + (tmp >> 8)) >> 8;
 							}
 						}
@@ -495,27 +495,27 @@ TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *shape, const TQRect&
 			}
 		}
 
-		DOM::Node parentNode = shape->parentNode();
+		DOM::Node tqparentNode = tqshape->parentNode();
 
-		if(!parentNode.isNull())
+		if(!tqparentNode.isNull())
 		{
-			SVGElementImpl *parent = shape->ownerDoc()->getElementFromHandle(parentNode.handle());
+			SVGElementImpl *tqparent = tqshape->ownerDoc()->getElementFromHandle(tqparentNode.handle());
 
-			if(parent)
-				shape = dynamic_cast<SVGShapeImpl *>(parent);
+			if(tqparent)
+				tqshape = dynamic_cast<SVGShapeImpl *>(tqparent);
 			else
-				shape = 0;
+				tqshape = 0;
 		}
 		else
-			shape = 0;
+			tqshape = 0;
 
-	} while(shape);
+	} while(tqshape);
 
 	return cumulativeMask;
 }
 
-SVGMaskElementImpl::Mask::Mask(const TQByteArray& mask, const TQWMatrix& screenToMask, int width, int height)
-	:	m_width(width), m_height(height), m_mask(mask), m_screenToMask(screenToMask)
+SVGMaskElementImpl::Mask::Mask(const TQByteArray& tqmask, const TQWMatrix& screenToMask, int width, int height)
+	:	m_width(width), m_height(height), m_tqmask(tqmask), m_screenToMask(screenToMask)
 {
 }
 

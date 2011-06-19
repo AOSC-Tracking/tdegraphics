@@ -39,7 +39,7 @@ public:
   @param re value for the box
   @param lT valus for the text field
   */
-  Hyperlink(Q_UINT32 bl, const TQRect& re, const TQString& lT): baseline(bl), box(re), linkText(lT) {}
+  Hyperlink(TQ_UINT32 bl, const TQRect& re, const TQString& lT): baseline(bl), box(re), linkText(lT) {}
 
   /** \brief Base line of a hyperlink
 
@@ -52,7 +52,7 @@ public:
   in the box contains characters with underlengths, such as 'y', 'j'
   or 'g'.
    */
-  Q_UINT32 baseline;
+  TQ_UINT32 baseline;
 
   /** \brief Bounding box of the text or hyperlink
 

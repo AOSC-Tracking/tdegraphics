@@ -187,7 +187,7 @@ TQString PMMemento::oldID( ) const
 {
    if( m_pIDData )
       return m_pIDData->stringData( );
-   return TQString::null;
+   return TQString();
 }
 
 void PMMemento::addChangedObject( PMObject* obj, int mode )

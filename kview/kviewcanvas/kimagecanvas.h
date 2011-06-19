@@ -42,11 +42,12 @@ class KPixmap;
 class KDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
 		/**
 		 * KImageCanvas Constructor
 		 */
-		KImageCanvas( TQWidget * parent, const char * name, const TQStringList & args );
+		KImageCanvas( TQWidget * tqparent, const char * name, const TQStringList & args );
 
 		/**
 		 * KImageCanvas Destructor

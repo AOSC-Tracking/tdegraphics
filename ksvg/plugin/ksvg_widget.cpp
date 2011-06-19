@@ -27,11 +27,11 @@
 #include "SVGDocumentImpl.h"
 #include "SVGSVGElementImpl.h"
 
-KSVGWidget::KSVGWidget(KSVGPlugin *part, TQWidget *parent, const char *name)
-: TQWidget(parent, name), m_part(part)
+KSVGWidget::KSVGWidget(KSVGPlugin *part, TQWidget *tqparent, const char *name)
+: TQWidget(tqparent, name), m_part(part)
 {
 	setMouseTracking(true);	
-	setFocusPolicy(WheelFocus);
+	setFocusPolicy(TQ_WheelFocus);
 
 	setBackgroundMode(NoBackground);
 
@@ -90,10 +90,10 @@ KSVG::SVGMouseEventImpl *KSVGWidget::newMouseEvent(KSVG::SVGEvent::EventId id, T
 												   event->globalY(), // screenYArg,
 												   clientX, // clientXArg
 												   clientY, // clientYArg
-												   (event->state() & Qt::ControlButton), // ctrlKeyArg
-												   (event->state() & Qt::AltButton), // altKeyArg
-												   (event->state() & Qt::ShiftButton), // shiftKeyArg
-												   (event->state() & Qt::MetaButton), // metaKeyArg
+												   (event->state() & TQt::ControlButton), // ctrlKeyArg
+												   (event->state() & TQt::AltButton), // altKeyArg
+												   (event->state() & TQt::ShiftButton), // shiftKeyArg
+												   (event->state() & TQt::MetaButton), // metaKeyArg
 												   button, // buttonArg
 												   0);
 
@@ -104,7 +104,7 @@ KSVG::SVGMouseEventImpl *KSVGWidget::newMouseEvent(KSVG::SVGEvent::EventId id, T
 
 void KSVGWidget::mouseMoveEvent(TQMouseEvent *event)
 {
-	if(event->state() & TQMouseEvent::ControlButton && event->state() & TQMouseEvent::LeftButton)
+	if(event->state() & TQt::ControlButton && event->state() & Qt::LeftButton)
 	{
 		if(m_panningPos.isNull())
 			m_panningPos = event->pos();
@@ -113,7 +113,7 @@ void KSVGWidget::mouseMoveEvent(TQMouseEvent *event)
 
 		return;
 	}
-	else if(event->state() & TQMouseEvent::ControlButton)
+	else if(event->state() & TQt::ControlButton)
 		return;
 
 	KSVG::SVGMouseEventImpl *mev = newMouseEvent(KSVG::SVGEvent::MOUSEMOVE_EVENT, event);
@@ -183,10 +183,10 @@ void KSVGWidget::mouseMoveEvent(TQMouseEvent *event)
 
 void KSVGWidget::mousePressEvent(TQMouseEvent *event)
 {
-	if(event->state() & TQMouseEvent::ControlButton)
+	if(event->state() & TQt::ControlButton)
 		return;
 
-	if(event->button() == RightButton)
+	if(event->button() == Qt::RightButton)
 	{
 		if(part() && part()->factory())
 		{
@@ -213,7 +213,7 @@ void KSVGWidget::mouseReleaseEvent(TQMouseEvent *event)
 		m_panningPos.setY(0);
 	}
 
-	if(event->state() & TQMouseEvent::ControlButton)
+	if(event->state() & TQt::ControlButton)
 		return;
 
 	KSVG::SVGMouseEventImpl *mev = newMouseEvent(KSVG::SVGEvent::MOUSEUP_EVENT, event);
@@ -234,7 +234,7 @@ void KSVGWidget::mouseReleaseEvent(TQMouseEvent *event)
 
 void KSVGWidget::keyPressEvent(TQKeyEvent *ke)
 {
-	if(ke->stateAfter() & TQMouseEvent::ControlButton)
+	if(ke->stateAfter() & TQt::ControlButton)
 	{
 		setCursor(KCursor::sizeAllCursor());
 		return;
@@ -246,7 +246,7 @@ void KSVGWidget::keyPressEvent(TQKeyEvent *ke)
 
 void KSVGWidget::keyReleaseEvent(TQKeyEvent *ke)
 {
-	if(ke->state() & TQMouseEvent::ControlButton)
+	if(ke->state() & TQt::ControlButton)
 	{
 		setCursor(KCursor::arrowCursor());
 		return;

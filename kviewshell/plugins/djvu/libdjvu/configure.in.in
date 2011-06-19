@@ -217,7 +217,7 @@ AC_REQUIRE([AC_CANONICAL_HOST])
 acx_pthread_ok=no
 # First, check if the POSIX threads header, pthread.h, is available.
 # If it isn't, don't bother looking for the threads libraries.
-AC_CHECK_HEADER(pthread.h, , acx_pthread_ok=noheader)
+KDE_CHECK_HEADER(pthread.h, , acx_pthread_ok=noheader)
 # We must check for the threads library under a number of different
 # names; the ordering is very important because some systems
 # (e.g. DEC) have both -lpthread and -lpthreads, where one of the
@@ -378,10 +378,13 @@ fi
 if test x$acx_cothread != xno ; then
   AC_MSG_CHECKING([whether libgcc contains the cothread patch])
   AC_LANG_PUSH([C++])
+  kde_save_CXXFLAGS="$CXXFLAGS"
+  CXXFLAGS="$CXXFLAGS $qt_includes"
   AC_TRY_LINK([extern "C" { void *(*__get_eh_context_ptr)();
                             void *__new_eh_context(void); }],
               [ __get_eh_context_ptr = &__new_eh_context;],
               [acx_cothread_patch=yes], [acx_cothread_patch=no])
+  CXXFLAGS="$kde_save_CXXFLAGS"
   AC_LANG_POP([C++])
   AC_MSG_RESULT($acx_cothread_patch)
   if test x$acx_cothread_patch = xno ; then
@@ -560,8 +563,8 @@ AC_HEADER_STDC
 AC_HEADER_DIRENT
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS(wchar.h wctype.h sys/mman.h iconv.h)
-AC_CHECK_HEADERS(stdint.h sys/ipc.h sys/shm.h)
+KDE_CHECK_HEADERS(wchar.h wctype.h sys/mman.h iconv.h)
+KDE_CHECK_HEADERS(stdint.h sys/ipc.h sys/shm.h)
 
 # ----------------------------------------
 # Types

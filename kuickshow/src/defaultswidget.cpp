@@ -31,8 +31,8 @@
 #include "imlibwidget.h"
 #include "defaultswidget.h"
 
-DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
-  : TQWidget( parent, name )
+DefaultsWidget::DefaultsWidget( TQWidget *tqparent, const char *name)
+  : TQWidget( tqparent, name )
 {
   imFiltered = 0L;
 
@@ -92,7 +92,7 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   // --
 
   gbPreview = new TQGroupBox( i18n("Preview"), this );
-  gbPreview->setAlignment( AlignCenter );
+  gbPreview->tqsetAlignment( AlignCenter );
 
   lbImOrig = new TQLabel( i18n("Original"), gbPreview );
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
@@ -105,13 +105,13 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   ////////////////
 
 
-  // layout management
+  // tqlayout management
   TQVBoxLayout *mainLayout = new TQVBoxLayout( this, 0,
-            KDialog::spacingHint(), "main layout" );
+            KDialog::spacingHint(), "main tqlayout" );
 
-  TQVBoxLayout *gbScaleLayout = new TQVBoxLayout( gbScale->layout(),
+  TQVBoxLayout *gbScaleLayout = new TQVBoxLayout( gbScale->tqlayout(),
             KDialog::spacingHint());
-  TQVBoxLayout *gbGeometryLayout = new TQVBoxLayout(gbGeometry->layout(),
+  TQVBoxLayout *gbGeometryLayout = new TQVBoxLayout(gbGeometry->tqlayout(),
             KDialog::spacingHint());
   TQGridLayout *gbPreviewLayout = new TQGridLayout(gbPreview, 2, 3, 0,
             KDialog::spacingHint());

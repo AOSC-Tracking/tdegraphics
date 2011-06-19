@@ -34,7 +34,7 @@
 //       at the other extreme would not be deemed similar enough.  The
 //       key is to find the median color as the reference but how do
 //       you do this if you don't know which pixels to sample in the first
-//       place (that's what you're trying to find)?  Chicken and egg situation.
+//       place (that's what you're trying to tqfind)?  Chicken and egg situation.
 //
 //       The other heuristic that is in doubt is the use of the average
 //       color in determining the similarity of sides (it is possible
@@ -70,7 +70,7 @@ kpToolAutoCropBorder::kpToolAutoCropBorder (const TQPixmap *pixmapPtr,
     : m_pixmapPtr (pixmapPtr),
       m_processedColorSimilarity (processedColorSimilarity)
 {
-    invalidate ();
+    tqinvalidate ();
 }
 
 
@@ -280,7 +280,7 @@ bool kpToolAutoCropBorder::exists () const
 }
 
 // public
-void kpToolAutoCropBorder::invalidate ()
+void kpToolAutoCropBorder::tqinvalidate ()
 {
     m_rect = TQRect ();
     m_referenceColor = kpColor::invalid;
@@ -306,7 +306,7 @@ public:
 
 void showNothingToAutocropMessage (kpMainWindow *mainWindow, bool actOnSelection)
 {
-    kpSetOverrideCursorSaver cursorSaver (Qt::arrowCursor);
+    kpSetOverrideCursorSaver cursorSaver (TQt::arrowCursor);
 
     if (actOnSelection)
     {
@@ -367,14 +367,14 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow)
                          botBorder (&pixmap, processedColorSimilarity);
 
 
-    kpSetOverrideCursorSaver cursorSaver (Qt::waitCursor);
+    kpSetOverrideCursorSaver cursorSaver (TQt::waitCursor);
 
     // TODO: With Colour Similarity, a lot of weird (and wonderful) things can
     //       happen resulting in a huge number of code paths.  Needs refactoring
     //       and regression testing.
     //
     // TODO: e.g. When the top fills entire rect but bot doesn't we could
-    //       invalidate top and continue autocrop.
+    //       tqinvalidate top and continue autocrop.
     int numRegions = 0;
     if (!leftBorder.calculate (true/*x*/, +1/*going right*/) ||
         leftBorder.fillsEntirePixmap () ||
@@ -403,20 +403,20 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow)
 #if DEBUG_KP_TOOL_AUTO_CROP
     kdDebug () << "\tnumRegions=" << numRegions << endl;
     kdDebug () << "\t\tleft=" << leftBorder.rect ()
-               << " refCol=" << (leftBorder.exists () ? (int *) leftBorder.referenceColor ().toQRgb () : 0)
-               << " avgCol=" << (leftBorder.exists () ? (int *) leftBorder.averageColor ().toQRgb () : 0)
+               << " refCol=" << (leftBorder.exists () ? (int *) leftBorder.referenceColor ().toTQRgb () : 0)
+               << " avgCol=" << (leftBorder.exists () ? (int *) leftBorder.averageColor ().toTQRgb () : 0)
                << endl;
     kdDebug () << "\t\tright=" << rightBorder.rect ()
-               << " refCol=" << (rightBorder.exists () ? (int *) rightBorder.referenceColor ().toQRgb () : 0)
-               << " avgCol=" << (rightBorder.exists () ? (int *) rightBorder.averageColor ().toQRgb () : 0)
+               << " refCol=" << (rightBorder.exists () ? (int *) rightBorder.referenceColor ().toTQRgb () : 0)
+               << " avgCol=" << (rightBorder.exists () ? (int *) rightBorder.averageColor ().toTQRgb () : 0)
                << endl;
     kdDebug () << "\t\ttop=" << topBorder.rect ()
-               << " refCol=" << (topBorder.exists () ? (int *) topBorder.referenceColor ().toQRgb () : 0)
-               << " avgCol=" << (topBorder.exists () ? (int *) topBorder.averageColor ().toQRgb () : 0)
+               << " refCol=" << (topBorder.exists () ? (int *) topBorder.referenceColor ().toTQRgb () : 0)
+               << " avgCol=" << (topBorder.exists () ? (int *) topBorder.averageColor ().toTQRgb () : 0)
                << endl;
     kdDebug () << "\t\tbot=" << botBorder.rect ()
-               << " refCol=" << (botBorder.exists () ? (int *) botBorder.referenceColor ().toQRgb () : 0)
-               << " avgCol=" << (botBorder.exists () ? (int *) botBorder.averageColor ().toQRgb () : 0)
+               << " refCol=" << (botBorder.exists () ? (int *) botBorder.referenceColor ().toTQRgb () : 0)
+               << " avgCol=" << (botBorder.exists () ? (int *) botBorder.averageColor ().toTQRgb () : 0)
                << endl;
 #endif
 
@@ -439,7 +439,7 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow)
         #if DEBUG_KP_TOOL_AUTO_CROP
             kdDebug () << "\tignoring left border" << endl;
         #endif
-            leftBorder.invalidate ();
+            leftBorder.tqinvalidate ();
         }
     }
 
@@ -454,7 +454,7 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow)
         #if DEBUG_KP_TOOL_AUTO_CROP
             kdDebug () << "\tignoring top border" << endl;
         #endif
-            topBorder.invalidate ();
+            topBorder.tqinvalidate ();
         }
     }
 
@@ -654,7 +654,7 @@ void kpToolAutoCropCommand::unexecute ()
         return;
 
     TQPixmap pixmap (m_oldWidth, m_oldHeight);
-    TQBitmap maskBitmap;
+    TQBitmap tqmaskBitmap;
 
     // restore the position of the centre image
     kpPixmapFX::setPixmapAt (&pixmap, m_contentsRect,
@@ -663,7 +663,7 @@ void kpToolAutoCropCommand::unexecute ()
     // draw the borders
 
     TQPainter painter (&pixmap);
-    TQPainter maskPainter;
+    TQPainter tqmaskPainter;
 
     const kpToolAutoCropBorder *borders [] =
     {
@@ -690,23 +690,23 @@ void kpToolAutoCropCommand::unexecute ()
             kpColor col = (*b)->referenceColor ();
         #if DEBUG_KP_TOOL_AUTO_CROP && 1
             kdDebug () << "\tdrawing border " << (*b)->rect ()
-                       << " rgb=" << (int *) col.toQRgb () /* %X hack */ << endl;
+                       << " rgb=" << (int *) col.toTQRgb () /* %X hack */ << endl;
         #endif
 
             if (col.isOpaque ())
             {
-                painter.fillRect ((*b)->rect (), col.toQColor ());
+                painter.fillRect ((*b)->rect (), col.toTQColor ());
             }
             else
             {
-                if (maskBitmap.isNull ())
+                if (tqmaskBitmap.isNull ())
                 {
                     // TODO: dangerous when a painter is active on pixmap?
-                    maskBitmap = kpPixmapFX::getNonNullMask (pixmap);
-                    maskPainter.begin (&maskBitmap);
+                    tqmaskBitmap = kpPixmapFX::getNonNullMask (pixmap);
+                    tqmaskPainter.begin (&tqmaskBitmap);
                 }
 
-                maskPainter.fillRect ((*b)->rect (), Qt::color0/*transparent*/);
+                tqmaskPainter.fillRect ((*b)->rect (), TQt::color0/*transparent*/);
             }
         }
         else
@@ -720,24 +720,24 @@ void kpToolAutoCropCommand::unexecute ()
             // and the other branch would execute.
             if (*p)
             {
-                // TODO: We should really edit the mask here.  Due to good
-                //       luck (if "maskBitmap" is initialized above, this region
-                //       will be marked as opaque in the mask; if it's not
+                // TODO: We should really edit the tqmask here.  Due to good
+                //       luck (if "tqmaskBitmap" is initialized above, this region
+                //       will be marked as opaque in the tqmask; if it's not
                 //       initialized, we will be opaque by default), we
-                //       don't actually have to edit the mask but this is
+                //       don't actually have to edit the tqmask but this is
                 //       highly error-prone.
                 painter.drawPixmap ((*b)->rect (), **p);
             }
         }
     }
 
-    if (maskPainter.isActive ())
-        maskPainter.end ();
+    if (tqmaskPainter.isActive ())
+        tqmaskPainter.end ();
 
     painter.end ();
 
-    if (!maskBitmap.isNull ())
-        pixmap.setMask (maskBitmap);
+    if (!tqmaskBitmap.isNull ())
+        pixmap.setMask (tqmaskBitmap);
 
 
     if (!m_actOnSelection)

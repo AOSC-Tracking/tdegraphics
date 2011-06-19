@@ -71,14 +71,15 @@ private:
 };
 
 
-class kpColorEffectWidget : public QWidget
+class kpColorEffectWidget : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpColorEffectWidget (bool actOnSelection,
                          kpMainWindow *mainWindow,
-                         TQWidget *parent, const char *name = 0);
+                         TQWidget *tqparent, const char *name = 0);
     virtual ~kpColorEffectWidget ();
 
 signals:

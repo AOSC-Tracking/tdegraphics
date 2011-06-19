@@ -38,8 +38,9 @@ class KAction;
 class KViewPresenter : public KParts::Plugin
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	KViewPresenter( TQObject* parent, const char* name, const TQStringList & );
+	KViewPresenter( TQObject* tqparent, const char* name, const TQStringList & );
 	virtual ~KViewPresenter();
 
 protected:

@@ -29,8 +29,8 @@
 #include <kiconloader.h>
 #include <kfiledialog.h>
 
-PMTextEdit::PMTextEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMTextEdit::PMTextEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -126,7 +126,7 @@ void PMTextEdit::slotTextChanged( const TQString& )
 
 void PMTextEdit::slotChooseFont( )
 {
-   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString(), TQString() );
 
    if( !str.isEmpty() )
    {

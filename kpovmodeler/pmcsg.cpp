@@ -130,11 +130,11 @@ void PMCSG::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMCSG::metaObject( ) const
+PMMetaObject* PMCSG::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "CSG", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "CSG", Base::tqmetaObject( ),
                                         createNewCSG );
       PMCSGTypeProperty* p = new PMCSGTypeProperty( "csgType", &PMCSG::setCSGType, &PMCSG::csgType );
       p->addEnumValue( "union", CSGUnion );
@@ -169,9 +169,9 @@ void PMCSG::setCSGType( const PMCSGType t )
    }
 }
 
-PMDialogEditBase* PMCSG::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMCSG::editWidget( TQWidget* tqparent ) const
 {
-   return new PMCSGEdit( parent );
+   return new PMCSGEdit( tqparent );
 }
 
 void PMCSG::restoreMemento( PMMemento* s )

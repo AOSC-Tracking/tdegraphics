@@ -55,9 +55,10 @@ class kpToolToolBar;
 
 
 // Base class for all tools
-class kpTool : public QObject
+class kpTool : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpTool (const TQString &text, const TQString &description,
@@ -328,7 +329,7 @@ protected:
     virtual void leaveEvent (TQEvent *e);
 
     // 0 = left, 1 = right, -1 = other (none, left+right, mid)
-    static int mouseButton (const Qt::ButtonState &buttonState);
+    static int mouseButton (const TQt::ButtonState &buttonState);
 
     TQString m_text, m_description;
     const char *m_name;
@@ -340,7 +341,7 @@ protected:
 
 
     /*
-     * User Notifications (Status Bar)
+     * User Notifications (tqStatus Bar)
      */
 
 public:
@@ -350,7 +351,7 @@ public:
     TQString cancelUserMessage () const;
 
     TQString userMessage () const;
-    void setUserMessage (const TQString &userMessage = TQString::null);
+    void setUserMessage (const TQString &userMessage = TQString());
 
     TQPoint userShapeStartPoint () const;
     TQPoint userShapeEndPoint () const;
@@ -409,7 +410,7 @@ public:
                                     const TQString &text,
                                     const TQString &caption,
                                     const TQString &continueButtonText,
-                                    TQWidget *parent);
+                                    TQWidget *tqparent);
 
 
 protected:

@@ -149,7 +149,7 @@ TQString CanvasFactory::internalNameFor(const TQString &name)
 		++it;
 	}
 
-	return TQString::null;
+	return TQString();
 }	
 
 void CanvasFactory::deleteCanvas(KSVGCanvas *canvas)

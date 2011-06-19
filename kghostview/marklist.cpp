@@ -32,8 +32,8 @@
 
 #include "kgv_miniwidget.h"
 
-MarkListItem::MarkListItem(TQWidget *parent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget* miniW, int pageNum)
-    : TQWidget( parent ),
+MarkListItem::MarkListItem(TQWidget *tqparent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget* miniW, int pageNum)
+    : TQWidget( tqparent ),
     _miniWidget( miniW ),
     _pageNum( pageNum ),
     _requested( false )
@@ -43,7 +43,7 @@ MarkListItem::MarkListItem(TQWidget *parent, const TQString &text, const TQStrin
     _thumbnailW = new TQWidget( this );
     _checkBox = new TQCheckBox( text, this );
     l->addWidget( _thumbnailW, 1 );
-    l->addWidget( _checkBox, 0, Qt::AlignHCenter );
+    l->addWidget( _checkBox, 0, TQt::AlignHCenter );
     TQWhatsThis::add( _checkBox, i18n( "Using this checkbox you can select pages for printing." ) );
     setFixedHeight( 100 );
     _backgroundColor = color;
@@ -72,22 +72,27 @@ void MarkListItem::setPixmap( TQPixmap thumbnail )
     // The line below is needed to work around certain "features" of styles such as liquid
     // see bug:61711 for more info (LPC, 20 Aug '03)
     _thumbnailW->setBackgroundOrigin( TQWidget::WidgetOrigin );
-    _thumbnailW->setPaletteBackgroundPixmap( thumbnail.convertToImage().smoothScale( _thumbnailW->size() ) );
+    TQPixmap pm;
+    pm.convertFromImage( thumbnail.convertToImage().smoothScale( _thumbnailW->size() ) );
+    _thumbnailW->setPaletteBackgroundPixmap( pm );
     _requested = false;
 }
 
 void MarkListItem::setSelected( bool selected )
 {
     if (selected)
-	setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
+	setPaletteBackgroundColor( TQApplication::tqpalette().active().highlight() );
     else
 	setPaletteBackgroundColor( _backgroundColor );
 }
 
 void MarkListItem::resizeEvent( TQResizeEvent * )
 {
-    if ( _thumbnailW->paletteBackgroundPixmap() )
-	_thumbnailW->setPaletteBackgroundPixmap( _thumbnailW->paletteBackgroundPixmap()->convertToImage().smoothScale( _thumbnailW->size() ) );
+    if ( _thumbnailW->paletteBackgroundPixmap() ) {
+	TQPixmap pm;
+	pm.convertFromImage( _thumbnailW->paletteBackgroundPixmap()->convertToImage().smoothScale( _thumbnailW->size() ) );
+	_thumbnailW->setPaletteBackgroundPixmap( pm );
+    }
 }
 
 void MarkListItem::paintEvent( TQPaintEvent* )
@@ -100,7 +105,7 @@ void MarkListItem::paintEvent( TQPaintEvent* )
      */
     if ( _requested ) return;
     if ( !_thumbnailW->paletteBackgroundPixmap() ||  _thumbnailW->paletteBackgroundPixmap()->isNull() ) {
-	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, this, TQT_SLOT( setPixmap( TQPixmap ) ) );
+	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, TQT_TQOBJECT(this), TQT_SLOT( setPixmap( TQPixmap ) ) );
 	_requested = true;
     }
 }
@@ -108,8 +113,8 @@ void MarkListItem::paintEvent( TQPaintEvent* )
 
 /* MarkList */
 
-MarkList::MarkList( TQWidget* parent, const char* name, KGVMiniWidget* mini)
-    : TQTable( parent, name ),
+MarkList::MarkList( TQWidget* tqparent, const char* name, KGVMiniWidget* mini)
+    : TQTable( tqparent, name ),
     _selected ( -1 ),
 _miniWidget( mini )
 {

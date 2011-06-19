@@ -76,11 +76,11 @@ PMInterior::~PMInterior( )
 {
 }
 
-PMMetaObject* PMInterior::metaObject( ) const
+PMMetaObject* PMInterior::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Interior", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Interior", Base::tqmetaObject( ),
                                         createNewInterior );
       s_pMetaObject->addProperty(
          new PMInteriorProperty( "ior", &PMInterior::setIor, &PMInterior::ior ) );
@@ -281,9 +281,9 @@ void PMInterior::enableFadePower( bool c )
    }
 }
 
-PMDialogEditBase* PMInterior::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMInterior::editWidget( TQWidget* tqparent ) const
 {
-   return new PMInteriorEdit( parent );
+   return new PMInteriorEdit( tqparent );
 }
 
 void PMInterior::restoreMemento( PMMemento* s )

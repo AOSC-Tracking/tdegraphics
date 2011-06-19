@@ -1397,7 +1397,7 @@ cotask_select(int nfds,
     }
   // reschedule
   cotask_yield();
-  // call select to update masks
+  // call select to update tqmasks
   if (tm)
     {
       tm->tv_sec = maxwait/1000;
@@ -1837,16 +1837,16 @@ GSafeFlags::operator long(void) const
 }
 
 bool
-GSafeFlags::test_and_modify(long set_mask, long clr_mask,
-			    long set_mask1, long clr_mask1)
+GSafeFlags::test_and_modify(long set_tqmask, long clr_tqmask,
+			    long set_tqmask1, long clr_tqmask1)
 {
    enter();
-   if ((flags & set_mask)==set_mask &&
-       (~flags & clr_mask)==clr_mask)
+   if ((flags & set_tqmask)==set_tqmask &&
+       (~flags & clr_tqmask)==clr_tqmask)
    {
       long new_flags=flags;
-      new_flags|=set_mask1;
-      new_flags&=~clr_mask1;
+      new_flags|=set_tqmask1;
+      new_flags&=~clr_tqmask1;
       if (new_flags!=flags)
       {
 	 flags=new_flags;
@@ -1860,15 +1860,15 @@ GSafeFlags::test_and_modify(long set_mask, long clr_mask,
 }
 
 void
-GSafeFlags::wait_and_modify(long set_mask, long clr_mask,
-			    long set_mask1, long clr_mask1)
+GSafeFlags::wait_and_modify(long set_tqmask, long clr_tqmask,
+			    long set_tqmask1, long clr_tqmask1)
 {
    enter();
-   while((flags & set_mask)!=set_mask ||
-	 (~flags & clr_mask)!=clr_mask) wait();
+   while((flags & set_tqmask)!=set_tqmask ||
+	 (~flags & clr_tqmask)!=clr_tqmask) wait();
    long new_flags=flags;
-   new_flags|=set_mask1;
-   new_flags&=~clr_mask1;
+   new_flags|=set_tqmask1;
+   new_flags&=~clr_tqmask1;
    if (flags!=new_flags)
    {
       flags=new_flags;

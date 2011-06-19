@@ -29,16 +29,17 @@
  * Lineedit for float input
  */
 
-class PMFloatEdit : public QLineEdit
+class PMFloatEdit : public TQLineEdit
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    enum ValidationOp { OpGreater, OpGreaterEqual,
                        OpLess, OpLessEqual };
    /**
     * Simple constructor
     */
-   PMFloatEdit( TQWidget* parent, const char* name = 0 );
+   PMFloatEdit( TQWidget* tqparent, const char* name = 0 );
    /**
     * Sets the validation for the lineedit.
     *
@@ -87,14 +88,15 @@ private:
  * Lineedit for int input
  */
 
-class PMIntEdit : public QLineEdit
+class PMIntEdit : public TQLineEdit
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Simple constructor
     */
-   PMIntEdit( TQWidget* parent, const char* name = 0 );
+   PMIntEdit( TQWidget* tqparent, const char* name = 0 );
    /**
     * Sets the validation for the lineedit.
     *

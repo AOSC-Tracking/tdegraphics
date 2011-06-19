@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -58,8 +58,8 @@
 
 
 
-KGOCRDialog::KGOCRDialog( TQWidget *parent, KSpellConfig *spellConfig )
-    :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
+KGOCRDialog::KGOCRDialog( TQWidget *tqparent, KSpellConfig *spellConfig )
+    :KOCRBase( tqparent, spellConfig, KDialogBase::Tabbed ),
      m_ocrCmd( TQString())
 {
    kdDebug(28000) << "Starting KOCR-Start-Dialog!" << endl;
@@ -96,7 +96,7 @@ EngineError KGOCRDialog::setupGui()
     KConfig *conf = KGlobal::config ();
     conf->setGroup( CFG_GROUP_OCR_DIA );
 
-    // Horizontal line
+    //Qt::Horizontal line
     // (void) new  KSeparator( KSeparator::HLine, page);
 
     // Entry-Field.

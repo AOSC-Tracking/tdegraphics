@@ -25,8 +25,8 @@
 #include <klocale.h>
 
 
-PMInteriorTextureEdit::PMInteriorTextureEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMInteriorTextureEdit::PMInteriorTextureEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

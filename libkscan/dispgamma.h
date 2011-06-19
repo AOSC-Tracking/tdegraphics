@@ -35,11 +35,12 @@ extern "C"{
 
 class DispGamma : public TQWidget  {
     Q_OBJECT
+  TQ_OBJECT
 public: 
-    DispGamma( TQWidget *parent );
+    DispGamma( TQWidget *tqparent );
     ~DispGamma();
 
-    TQSize sizeHint( void );
+    TQSize tqsizeHint( void );
     TQSizePolicy sizePolicy( void );
 
     void setValueRef( TQMemArray<SANE_Word> *newVals )

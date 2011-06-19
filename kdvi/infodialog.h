@@ -20,9 +20,10 @@ class TQWidget;
 class infoDialog : public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    infoDialog( TQWidget* parent = 0 );
+    infoDialog( TQWidget* tqparent = 0 );
 
     /** This method is used to set the data coming from the DVI
         file. Note that 0 is a permissible argument, that just means:

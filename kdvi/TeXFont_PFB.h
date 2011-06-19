@@ -23,15 +23,15 @@ class glyph;
 
 class TeXFont_PFB : public TeXFont {
  public:
-  TeXFont_PFB(TeXFontDefinition *parent, fontEncoding *enc=0, double slant=0.0 );
+  TeXFont_PFB(TeXFontDefinition *tqparent, fontEncoding *enc=0, double slant=0.0 );
   ~TeXFont_PFB();
   
-  glyph* getGlyph(Q_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=Qt::black);
+  glyph* getGlyph(TQ_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=TQt::black);
 
  private:
   FT_Face       face;
   bool          fatalErrorInFontLoading;
-  Q_UINT16      charMap[256];
+  TQ_UINT16      charMap[256];
 
   // This matrix is used internally to describes the slant, if
   // nonzero. Otherwise, this is undefined.

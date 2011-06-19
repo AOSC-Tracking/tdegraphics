@@ -22,8 +22,8 @@
 #include <tqpainter.h>
 #include <tqcursor.h>
 
-PMDockSplitter::PMDockSplitter(TQWidget *parent, const char *name, Orientation orient, int pos, bool highResolution)
-: TQWidget(parent, name)
+PMDockSplitter::PMDockSplitter(TQWidget *tqparent, const char *name, Qt::Orientation orient, int pos, bool highResolution)
+: TQWidget(tqparent, name)
 {
   divider = 0L;
   child0 = 0L;
@@ -49,7 +49,7 @@ void PMDockSplitter::activate(TQWidget *c0, TQWidget *c1)
   divider->setLineWidth(1);
   divider->raise();
 
-  if (orientation == Horizontal)
+  if (orientation ==Qt::Horizontal)
     divider->setCursor(TQCursor(sizeVerCursor));
   else
     divider->setCursor(TQCursor(sizeHorCursor));
@@ -68,21 +68,21 @@ void PMDockSplitter::setupMinMaxSize()
 {
   // Set the minimum and maximum sizes
   int minx, maxx, miny, maxy;
-  if (orientation == Horizontal) {
-    miny = child0->minimumSize().height() + child1->minimumSize().height()+4;
-    maxy = child0->maximumSize().height() + child1->maximumSize().height()+4;
-    minx = (child0->minimumSize().width() > child1->minimumSize().width()) ? child0->minimumSize().width() : child1->minimumSize().width();
-    maxx = (child0->maximumSize().width() > child1->maximumSize().width()) ? child0->maximumSize().width() : child1->maximumSize().width();
+  if (orientation ==Qt::Horizontal) {
+    miny = child0->tqminimumSize().height() + child1->tqminimumSize().height()+4;
+    maxy = child0->tqmaximumSize().height() + child1->tqmaximumSize().height()+4;
+    minx = (child0->tqminimumSize().width() > child1->tqminimumSize().width()) ? child0->tqminimumSize().width() : child1->tqminimumSize().width();
+    maxx = (child0->tqmaximumSize().width() > child1->tqmaximumSize().width()) ? child0->tqmaximumSize().width() : child1->tqmaximumSize().width();
 
     miny = (miny > 4) ? miny : 4;
     maxy = (maxy < 32000) ? maxy : 32000;
     minx = (minx > 2) ? minx : 2;
     maxx = (maxx < 32000) ? maxx : 32000;
   } else {
-    minx = child0->minimumSize().width() + child1->minimumSize().width()+4;
-    maxx = child0->maximumSize().width() + child1->maximumSize().width()+4;
-    miny = (child0->minimumSize().height() > child1->minimumSize().height()) ? child0->minimumSize().height() : child1->minimumSize().height();
-    maxy = (child0->maximumSize().height() > child1->maximumSize().height()) ? child0->maximumSize().height() : child1->maximumSize().height();
+    minx = child0->tqminimumSize().width() + child1->tqminimumSize().width()+4;
+    maxx = child0->tqmaximumSize().width() + child1->tqmaximumSize().width()+4;
+    miny = (child0->tqminimumSize().height() > child1->tqminimumSize().height()) ? child0->tqminimumSize().height() : child1->tqminimumSize().height();
+    maxy = (child0->tqmaximumSize().height() > child1->tqmaximumSize().height()) ? child0->tqmaximumSize().height() : child1->tqmaximumSize().height();
 
     minx = (minx > 4) ? minx : 4;
     maxx = (maxx < 32000) ? maxx : 32000;
@@ -118,7 +118,7 @@ void PMDockSplitter::resizeEvent(TQResizeEvent *ev)
     int factor = (mHighResolution)? 10000:100;
     // real resize event, recalculate xpos
     if (ev && mKeepSize && isVisible()) {
-      if (orientation == Horizontal) {
+      if (orientation ==Qt::Horizontal) {
         if (ev->oldSize().height() != ev->size().height())
           xpos = factor * checkValue( child0->height()+1 ) / height();
       } else {
@@ -126,8 +126,8 @@ void PMDockSplitter::resizeEvent(TQResizeEvent *ev)
           xpos = factor * checkValue( child0->width()+1 ) / width();
       }
     }
-    int position = checkValue( (orientation == Vertical ? width() : height()) * xpos/factor );
-    if (orientation == Horizontal){
+    int position = checkValue( (orientation ==Qt::Vertical ? width() : height()) * xpos/factor );
+    if (orientation ==Qt::Horizontal){
       child0->setGeometry(0, 0, width(), position);
       child1->setGeometry(0, position+4, width(), height()-position-4);
       divider->setGeometry(0, position, width(), 4);
@@ -142,24 +142,24 @@ void PMDockSplitter::resizeEvent(TQResizeEvent *ev)
 int PMDockSplitter::checkValue( int position ) const
 {
   if (initialised){
-    if (orientation == Vertical){
-      if (position < (child0->minimumSize().width()))
-        position = child0->minimumSize().width();
-      if ((width()-4-position) < (child1->minimumSize().width()))
-        position = width() - (child1->minimumSize().width()) -4;
+    if (orientation ==Qt::Vertical){
+      if (position < (child0->tqminimumSize().width()))
+        position = child0->tqminimumSize().width();
+      if ((width()-4-position) < (child1->tqminimumSize().width()))
+        position = width() - (child1->tqminimumSize().width()) -4;
     } else {
-      if (position < (child0->minimumSize().height()))
-        position = (child0->minimumSize().height());
-      if ((height()-4-position) < (child1->minimumSize().height()))
-        position = height() - (child1->minimumSize().height()) -4;
+      if (position < (child0->tqminimumSize().height()))
+        position = (child0->tqminimumSize().height());
+      if ((height()-4-position) < (child1->tqminimumSize().height()))
+        position = height() - (child1->tqminimumSize().height()) -4;
     }
   }
 
   if (position < 0) position = 0;
 
-  if ((orientation == Vertical) && (position > width()))
+  if ((orientation ==Qt::Vertical) && (position > width()))
     position = width();
-  if ((orientation == Horizontal) && (position > height()))
+  if ((orientation ==Qt::Horizontal) && (position > height()))
     position = height();
 
   return position;
@@ -176,14 +176,14 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
       mev= (TQMouseEvent*)e;
       child0->setUpdatesEnabled(mOpaqueResize);
       child1->setUpdatesEnabled(mOpaqueResize);
-      if (orientation == Horizontal) {
+      if (orientation ==Qt::Horizontal) {
         if (!mOpaqueResize) {
           int position = checkValue( mapFromGlobal(mev->globalPos()).y() );
           divider->move( 0, position );
         } else {
           xpos = factor * checkValue( mapFromGlobal(mev->globalPos()).y() ) / height();
           resizeEvent(0);
-          divider->repaint(true);
+          divider->tqrepaint(true);
         }
       } else {
         if (!mOpaqueResize) {
@@ -192,7 +192,7 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
         } else {
           xpos = factor * checkValue( mapFromGlobal( mev->globalPos()).x() ) / width();
           resizeEvent(0);
-          divider->repaint(true);
+          divider->tqrepaint(true);
         }
       }
       handled= true;
@@ -201,14 +201,14 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
       child0->setUpdatesEnabled(true);
       child1->setUpdatesEnabled(true);
       mev= (TQMouseEvent*)e;
-      if (orientation == Horizontal){
+      if (orientation ==Qt::Horizontal){
         xpos = factor* checkValue( mapFromGlobal(mev->globalPos()).y() ) / height();
         resizeEvent(0);
-        divider->repaint(true);
+        divider->tqrepaint(true);
       } else {
         xpos = factor* checkValue( mapFromGlobal(mev->globalPos()).x() ) / width();
         resizeEvent(0);
-        divider->repaint(true);
+        divider->tqrepaint(true);
       }
       handled= true;
       break;
@@ -221,7 +221,7 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
 bool PMDockSplitter::event( TQEvent* e )
 {
   if ( e->type() == TQEvent::LayoutHint ){
-    // change children min/max size
+    // change tqchildren min/max size
     setupMinMaxSize();
     setSeparatorPos(xpos);
   }
@@ -238,15 +238,15 @@ void PMDockSplitter::updateName()
   if ( !initialised ) return;
 
   TQString new_name = TQString( child0->name() ) + "," + child1->name();
-  parentWidget()->setName( new_name.latin1() );
-  parentWidget()->setCaption( child0->caption() + "," + child1->caption() );
-  parentWidget()->repaint( false );
+  tqparentWidget()->setName( new_name.latin1() );
+  tqparentWidget()->setCaption( child0->caption() + "," + child1->caption() );
+  tqparentWidget()->tqrepaint( false );
 
-  ((PMDockWidget*)parentWidget())->firstName = child0->name();
-  ((PMDockWidget*)parentWidget())->lastName = child1->name();
-  ((PMDockWidget*)parentWidget())->splitterOrientation = orientation;
+  ((PMDockWidget*)tqparentWidget())->firstName = child0->name();
+  ((PMDockWidget*)tqparentWidget())->lastName = child1->name();
+  ((PMDockWidget*)tqparentWidget())->splitterOrientation = orientation;
 
-  TQWidget* p = parentWidget()->parentWidget();
+  TQWidget* p = tqparentWidget()->tqparentWidget();
   if ( p != 0L && p->inherits("PMDockSplitter" ) )
     ((PMDockSplitter*)p)->updateName();
 }
@@ -288,11 +288,11 @@ bool PMDockSplitter::highResolution() const
 
 
 /*************************************************************************/
-PMDockButton_Private::PMDockButton_Private( TQWidget *parent, const char * name )
-:TQPushButton( parent, name )
+PMDockButton_Private::PMDockButton_Private( TQWidget *tqparent, const char * name )
+:TQPushButton( tqparent, name )
 {
   moveMouse = false;
-  setFocusPolicy( NoFocus );
+  setFocusPolicy( TQ_NoFocus );
 }
 
 PMDockButton_Private::~PMDockButton_Private()
@@ -301,7 +301,7 @@ PMDockButton_Private::~PMDockButton_Private()
 
 void PMDockButton_Private::drawButton( TQPainter* p )
 {
-  p->fillRect( 0,0, width(), height(), TQBrush(colorGroup().brush(TQColorGroup::Background)) );
+  p->fillRect( 0,0, width(), height(), TQBrush(tqcolorGroup().brush(TQColorGroup::Background)) );
   p->drawPixmap( (width() - pixmap()->width()) / 2, (height() - pixmap()->height()) / 2, *pixmap() );
   if ( moveMouse && !isDown() ){
     p->setPen( white );
@@ -309,12 +309,12 @@ void PMDockButton_Private::drawButton( TQPainter* p )
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );
 
-    p->setPen( colorGroup().dark() );
+    p->setPen( tqcolorGroup().dark() );
     p->lineTo( width() - 1, height() - 1 );
     p->lineTo( 0, height() - 1 );
   }
   if ( isOn() || isDown() ){
-    p->setPen( colorGroup().dark() );
+    p->setPen( tqcolorGroup().dark() );
     p->moveTo( 0, height() - 1 );
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );
@@ -328,13 +328,13 @@ void PMDockButton_Private::drawButton( TQPainter* p )
 void PMDockButton_Private::enterEvent( TQEvent * )
 {
   moveMouse = true;
-  repaint();
+  tqrepaint();
 }
 
 void PMDockButton_Private::leaveEvent( TQEvent * )
 {
   moveMouse = false;
-  repaint();
+  tqrepaint();
 }
 
 /*************************************************************************/
@@ -361,12 +361,12 @@ void PMDockWidgetPrivate::slotFocusEmbeddedWidget(TQWidget* w)
 {
    if (w) {
       TQWidget* embeddedWdg = ((PMDockWidget*)w)->getWidget();
-      if (embeddedWdg && ((embeddedWdg->focusPolicy() == TQWidget::ClickFocus) || (embeddedWdg->focusPolicy() == TQWidget::StrongFocus))) {
+      if (embeddedWdg && ((embeddedWdg->focusPolicy() == TQ_ClickFocus) || (embeddedWdg->focusPolicy() == TQ_StrongFocus))) {
          embeddedWdg->setFocus();
       }
    }
 }
 
-#ifndef NO_INCLUDE_MOCFILES // for Qt-only projects, because tmake doesn't take this name
+#ifndef NO_INCLUDE_TQMOCFILES // for TQt-only projects, because tmake doesn't take this name
 #include "pmdockwidget_private.moc"
 #endif

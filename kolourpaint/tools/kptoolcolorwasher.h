@@ -34,6 +34,7 @@
 class kpToolColorWasher : public kpToolPen
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpToolColorWasher (kpMainWindow *mainWindow);

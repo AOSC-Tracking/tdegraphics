@@ -104,13 +104,13 @@ public:
 
 protected:
   void CodeNum(const int num, const int lo, const int hi, NumContext &ctx);
-  void encode_libonly_shape(const GP<JB2Image> &jim, int shapeno);
+  void encode_libonly_tqshape(const GP<JB2Image> &jim, int tqshapeno);
 // virtual
   bool CodeBit(const bool bit, BitContext &ctx);
   void code_comment(GUTF8String &comment);
   void code_record_type(int &rectype);
   int code_match_index(int &index, JB2Dict &jim);
-  void code_inherited_shape_count(JB2Dict &jim);
+  void code_inherited_tqshape_count(JB2Dict &jim);
   void code_image_size(JB2Dict &jim);
   void code_image_size(JB2Image &jim);
   void code_absolute_location(JB2Blit *jblt,  int rows, int columns);
@@ -166,7 +166,7 @@ JB2Image::encode(const GP<ByteStream> &gbs) const
 #define MATCHED_REFINE_IMAGE_ONLY       (6)
 #define MATCHED_COPY                    (7)
 #define NON_MARK_DATA                   (8)
-#define REQUIRED_DICT_OR_RESET          (9)
+#define RETQUIRED_DICT_OR_RESET          (9)
 #define PRESERVED_COMMENT               (10)
 #define END_OF_DATA                     (11)
 
@@ -228,18 +228,18 @@ JB2Dict::JB2Codec::Encode::code_record_type(int &rectype)
 int 
 JB2Dict::JB2Codec::Encode::code_match_index(int &index, JB2Dict &jim)
 {
-    int match=shape2lib[index];
-    CodeNum(match, 0, lib2shape.hbound(), dist_match_index);
+    int match=tqshape2lib[index];
+    CodeNum(match, 0, lib2tqshape.hbound(), dist_match_index);
     return match;
 }
 
 // CODE PAIRS
 
 void
-JB2Dict::JB2Codec::Encode::code_inherited_shape_count(JB2Dict &jim)
+JB2Dict::JB2Codec::Encode::code_inherited_tqshape_count(JB2Dict &jim)
 {
-  CodeNum(jim.get_inherited_shape_count(),
-    0, BIGPOSITIVE, inherited_shape_count_dist);
+  CodeNum(jim.get_inherited_tqshape_count(),
+    0, BIGPOSITIVE, inherited_tqshape_count_dist);
 }
 
 void 
@@ -360,12 +360,12 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Dict> &gjim)
       // -------------------------
       // THIS IS THE ENCODING PART
       // -------------------------
-      int firstshape = jim.get_inherited_shape_count();
-      int nshape = jim.get_shape_count();
+      int firsttqshape = jim.get_inherited_tqshape_count();
+      int ntqshape = jim.get_tqshape_count();
       init_library(jim);
       // Code headers.
-      int rectype = REQUIRED_DICT_OR_RESET;
-      if (jim.get_inherited_shape_count() > 0)
+      int rectype = RETQUIRED_DICT_OR_RESET;
+      if (jim.get_inherited_tqshape_count() > 0)
         code_record(rectype, gjim, 0);
       rectype = START_OF_DATA;
       code_record(rectype, gjim, 0);
@@ -373,22 +373,22 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Dict> &gjim)
       rectype = PRESERVED_COMMENT;
       if (!! jim.comment)
         code_record(rectype, gjim, 0);
-      // Encode every shape
-      int shapeno;
-      DJVU_PROGRESS_TASK(jb2code,"jb2 encode", nshape-firstshape);
-      for (shapeno=firstshape; shapeno<nshape; shapeno++)
+      // Encode every tqshape
+      int tqshapeno;
+      DJVU_PROGRESS_TASK(jb2code,"jb2 encode", ntqshape-firsttqshape);
+      for (tqshapeno=firsttqshape; tqshapeno<ntqshape; tqshapeno++)
         {
-          DJVU_PROGRESS_RUN(jb2code, (shapeno-firstshape)|0xff);
-          // Code shape
-          JB2Shape &jshp = jim.get_shape(shapeno);
-          rectype=(jshp.parent >= 0)
+          DJVU_PROGRESS_RUN(jb2code, (tqshapeno-firsttqshape)|0xff);
+          // Code tqshape
+          JB2Shape &jshp = jim.get_tqshape(tqshapeno);
+          rectype=(jshp.tqparent >= 0)
             ?MATCHED_REFINE_LIBRARY_ONLY:NEW_MARK_LIBRARY_ONLY;
           code_record(rectype, gjim, &jshp);
-          add_library(shapeno, jshp);
+          add_library(tqshapeno, jshp);
 	  // Check numcoder status
 	  if (cur_ncell > CELLCHUNK) 
 	    {
-	      rectype = REQUIRED_DICT_OR_RESET;
+	      rectype = RETQUIRED_DICT_OR_RESET;
 	      code_record(rectype, 0, 0);	      
 	    }
         }
@@ -413,35 +413,35 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
       // -------------------------
       int i;
       init_library(jim);
-      int firstshape = jim.get_inherited_shape_count();
-      int nshape = jim.get_shape_count();
+      int firsttqshape = jim.get_inherited_tqshape_count();
+      int ntqshape = jim.get_tqshape_count();
       int nblit = jim.get_blit_count();
-      // Initialize shape2lib 
-      shape2lib.resize(0,nshape-1);
-      for (i=firstshape; i<nshape; i++)
-        shape2lib[i] = -1;
-      // Determine shapes that go into library (shapeno>=firstshape)
-      //  shape2lib is -2 if used by one blit
-      //  shape2lib is -3 if used by more than one blit
-      //  shape2lib is -4 if used as a parent
+      // Initialize tqshape2lib 
+      tqshape2lib.resize(0,ntqshape-1);
+      for (i=firsttqshape; i<ntqshape; i++)
+        tqshape2lib[i] = -1;
+      // Determine tqshapes that go into library (tqshapeno>=firsttqshape)
+      //  tqshape2lib is -2 if used by one blit
+      //  tqshape2lib is -3 if used by more than one blit
+      //  tqshape2lib is -4 if used as a tqparent
       for (i=0; i<nblit; i++)
         {
           JB2Blit *jblt = jim.get_blit(i);
-          int shapeno = jblt->shapeno;
-          if (shapeno < firstshape)
+          int tqshapeno = jblt->tqshapeno;
+          if (tqshapeno < firsttqshape)
             continue;
-          if (shape2lib[shapeno] >= -2) 
-            shape2lib[shapeno] -= 1;
-          shapeno = jim.get_shape(shapeno).parent;
-          while (shapeno>=firstshape && shape2lib[shapeno]>=-3)
+          if (tqshape2lib[tqshapeno] >= -2) 
+            tqshape2lib[tqshapeno] -= 1;
+          tqshapeno = jim.get_tqshape(tqshapeno).tqparent;
+          while (tqshapeno>=firsttqshape && tqshape2lib[tqshapeno]>=-3)
             {
-              shape2lib[shapeno] = -4;
-              shapeno = jim.get_shape(shapeno).parent;
+              tqshape2lib[tqshapeno] = -4;
+              tqshapeno = jim.get_tqshape(tqshapeno).tqparent;
             }
         }
       // Code headers.
-      int rectype = REQUIRED_DICT_OR_RESET;
-      if (jim.get_inherited_shape_count() > 0)
+      int rectype = RETQUIRED_DICT_OR_RESET;
+      if (jim.get_inherited_tqshape_count() > 0)
         code_record(rectype, gjim, 0, 0);
       rectype = START_OF_DATA;
       code_record(rectype, gjim, 0, 0);
@@ -456,41 +456,41 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
         {
           DJVU_PROGRESS_RUN(jb2code, blitno|0xff);
           JB2Blit *jblt = jim.get_blit(blitno);
-          int shapeno = jblt->shapeno;
-          JB2Shape &jshp = jim.get_shape(shapeno);
-          // Tests if shape exists in library
-          if (shape2lib[shapeno] >= 0)
+          int tqshapeno = jblt->tqshapeno;
+          JB2Shape &jshp = jim.get_tqshape(tqshapeno);
+          // Tests if tqshape exists in library
+          if (tqshape2lib[tqshapeno] >= 0)
             {
               int rectype = MATCHED_COPY;
               code_record(rectype, gjim, 0, jblt);
             }
-          // Avoid coding null shapes/blits
+          // Avoid coding null tqshapes/blits
           else if (jshp.bits) 
             {
-              // Make sure all parents have been coded
-              if (jshp.parent>=0 && shape2lib[jshp.parent]<0)
-                encode_libonly_shape(gjim, jshp.parent);
+              // Make sure all tqparents have been coded
+              if (jshp.tqparent>=0 && tqshape2lib[jshp.tqparent]<0)
+                encode_libonly_tqshape(gjim, jshp.tqparent);
               // Allocate library entry when needed
 #define LIBRARY_CONTAINS_ALL
               int libraryp = 0;
 #ifdef LIBRARY_CONTAINS_MARKS // baseline
-              if (jshp.parent >= -1)
+              if (jshp.tqparent >= -1)
                 libraryp = 1;
 #endif
 #ifdef LIBRARY_CONTAINS_SHARED // worse             
-              if (shape2lib[shapeno] <= -3)
+              if (tqshape2lib[tqshapeno] <= -3)
                 libraryp = 1;
 #endif
 #ifdef LIBRARY_CONTAINS_ALL // better
               libraryp = 1;
 #endif
               // Test all blit cases
-              if (jshp.parent<-1 && !libraryp)
+              if (jshp.tqparent<-1 && !libraryp)
                 {
                   int rectype = NON_MARK_DATA;
                   code_record(rectype, gjim, &jshp, jblt);
                 }
-              else if (jshp.parent < 0)
+              else if (jshp.tqparent < 0)
                 {
                   int rectype = (libraryp ? NEW_MARK : NEW_MARK_IMAGE_ONLY);
                   code_record(rectype, gjim, &jshp, jblt);
@@ -500,14 +500,14 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
                   int rectype = (libraryp ? MATCHED_REFINE : MATCHED_REFINE_IMAGE_ONLY);
                   code_record(rectype, gjim, &jshp, jblt);
                 }
-              // Add shape to library
+              // Add tqshape to library
               if (libraryp) 
-                add_library(shapeno, jshp);
+                add_library(tqshapeno, jshp);
             }
 	  // Check numcoder status
 	  if (cur_ncell > CELLCHUNK) 
 	    {
-	      rectype = REQUIRED_DICT_OR_RESET;
+	      rectype = RETQUIRED_DICT_OR_RESET;
 	      code_record(rectype, 0, 0);
 	    }
         }
@@ -522,31 +522,31 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
 ////////////////////////////////////////
 
 void 
-JB2Dict::JB2Codec::Encode::encode_libonly_shape(
-  const GP<JB2Image> &gjim, int shapeno )
+JB2Dict::JB2Codec::Encode::encode_libonly_tqshape(
+  const GP<JB2Image> &gjim, int tqshapeno )
 {
   if(!gjim)
   {
     G_THROW( ERR_MSG("JB2Image.bad_number") );
   }
   JB2Image &jim=*gjim;
-  // Recursively encode parent shape
-  JB2Shape &jshp = jim.get_shape(shapeno);
-  if (jshp.parent>=0 && shape2lib[jshp.parent]<0)
-    encode_libonly_shape(gjim, jshp.parent);
-  // Test that library shape must be encoded
-  if (shape2lib[shapeno] < 0)
+  // Recursively encode tqparent tqshape
+  JB2Shape &jshp = jim.get_tqshape(tqshapeno);
+  if (jshp.tqparent>=0 && tqshape2lib[jshp.tqparent]<0)
+    encode_libonly_tqshape(gjim, jshp.tqparent);
+  // Test that library tqshape must be encoded
+  if (tqshape2lib[tqshapeno] < 0)
     {
       // Code library entry
-      int rectype=(jshp.parent >= 0)
+      int rectype=(jshp.tqparent >= 0)
             ?NEW_MARK_LIBRARY_ONLY:MATCHED_REFINE_LIBRARY_ONLY;
       code_record(rectype, gjim, &jshp, 0);      
-      // Add shape to library
-      add_library(shapeno, jshp);
+      // Add tqshape to library
+      add_library(tqshapeno, jshp);
       // Check numcoder status
       if (cur_ncell > CELLCHUNK) 
 	{
-	  rectype = REQUIRED_DICT_OR_RESET;
+	  rectype = RETQUIRED_DICT_OR_RESET;
 	  code_record(rectype, 0, 0);
 	}
     }

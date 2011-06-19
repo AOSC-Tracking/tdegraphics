@@ -23,7 +23,7 @@ static const char SVGStylableImpl__s_hashTableStrings[] = {
     "fill-opacity\0"
     "marker-start\0"
     "stroke-width\0"
-    "unicode-bidi\0"
+    "tqunicode-bidi\0"
     "word-spacing\0"
     "writing-mode\0"
     "font-family\0"
@@ -47,7 +47,7 @@ static const char SVGStylableImpl__s_hashTableStrings[] = {
     "stroke\0"
     "clip\0"
     "fill\0"
-    "mask\0"
+    "tqmask\0"
 };
 
 

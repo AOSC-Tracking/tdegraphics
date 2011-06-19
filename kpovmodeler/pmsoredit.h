@@ -43,12 +43,13 @@ class PMVectorListEdit;
 class PMSurfaceOfRevolutionEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSurfaceOfRevolutionEdit with parent and name
+    * Creates a PMSurfaceOfRevolutionEdit with tqparent and name
     */
-   PMSurfaceOfRevolutionEdit( TQWidget* parent, const char* name = 0 );
+   PMSurfaceOfRevolutionEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

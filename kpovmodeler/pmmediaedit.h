@@ -40,12 +40,13 @@ class TQComboBox;
 class PMMediaEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMMediaEdit with parent and name
+    * Creates a PMMediaEdit with tqparent and name
     */
-   PMMediaEdit( TQWidget* parent, const char* name = 0 );
+   PMMediaEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -301,7 +301,7 @@ lt_XMLParser::Impl::ChangeAnno(
   const GP<DjVuAnno> ganno(DjVuAnno::create());
   DjVuAnno &anno=*ganno;
   GPosition map_pos;
-  map_pos=map.contains(areatag);
+  map_pos=map.tqcontains(areatag);
   if(dfile.contains_anno())
   {
     GP<ByteStream> annobs=dfile.get_merged_anno();
@@ -350,7 +350,7 @@ lt_XMLParser::Impl::ChangeAnno(
         // with no matching y).
         // ******************************************************
         {
-          GPosition coords_pos=args.contains("coords");
+          GPosition coords_pos=args.tqcontains("coords");
           if(coords_pos)
           {
             GList<int> raw_coords;
@@ -373,20 +373,20 @@ lt_XMLParser::Impl::ChangeAnno(
             }
           }
         }
-        GUTF8String shape;
+        GUTF8String tqshape;
         {
-          GPosition shape_pos=args.contains("shape");
-          if(shape_pos)
+          GPosition tqshape_pos=args.tqcontains("tqshape");
+          if(tqshape_pos)
           {
-            shape=args[shape_pos];
+            tqshape=args[tqshape_pos];
           }
         }
         GP<GMapArea> a;
-        if(shape == "default")
+        if(tqshape == "default")
         {
           GRect rect(0,0,w,h);
           a=GMapRect::create(rect);
-        }else if(!shape.length() || shape == "rect")
+        }else if(!tqshape.length() || tqshape == "rect")
         {
           int xx[4];
           int i=0;
@@ -420,7 +420,7 @@ lt_XMLParser::Impl::ChangeAnno(
           }
           GRect rect(xmin,ymin,xmax-xmin,ymax-ymin);
           a=GMapRect::create(rect);
-        }else if(shape == "circle")
+        }else if(tqshape == "circle")
         {
           int xx[4];
           int i=0;
@@ -440,7 +440,7 @@ lt_XMLParser::Impl::ChangeAnno(
           int x=xx[0],y=xx[1],rx=xx[2],ry=(h-xx[3])-1;
           GRect rect(x-rx,y-ry,2*rx,2*ry);
           a=GMapOval::create(rect);
-        }else if(shape == "oval")
+        }else if(tqshape == "oval")
         {
           int xx[4];
           int i=0;
@@ -474,7 +474,7 @@ lt_XMLParser::Impl::ChangeAnno(
           }
           GRect rect(xmin,ymin,xmax-xmin,ymax-ymin);
           a=GMapOval::create(rect);
-        }else if(shape == "poly")
+        }else if(tqshape == "poly")
         {
           GP<GMapPoly> p=GMapPoly::create();
           for(GPosition poly_pos=coords;poly_pos;++poly_pos)
@@ -489,28 +489,28 @@ lt_XMLParser::Impl::ChangeAnno(
           a=p;
         }else
         {
-          G_THROW( ( ERR_MSG("XMLAnno.unknown_shape") "\t")+shape );
+          G_THROW( ( ERR_MSG("XMLAnno.unknown_tqshape") "\t")+tqshape );
         }
         if(a)
         {
           GPosition pos;
-          if((pos=args.contains("href")))
+          if((pos=args.tqcontains("href")))
           {
             a->url=args[pos];
           }
-          if((pos=args.contains("target")))
+          if((pos=args.tqcontains("target")))
           {
             a->target=args[pos];
           }
-          if((pos=args.contains("alt")))
+          if((pos=args.tqcontains("alt")))
           {
             a->comment=args[pos];
           }
-          if((pos=args.contains("bordertype")))
+          if((pos=args.tqcontains("bordertype")))
           {
             GUTF8String b=args[pos];
             static const GMap<GUTF8String,GMapArea::BorderType> typeMap=BorderTypeMap();
-            if((pos=typeMap.contains(b)))
+            if((pos=typeMap.tqcontains(b)))
             {
               a->border_type=typeMap[pos];
             }else
@@ -518,16 +518,16 @@ lt_XMLParser::Impl::ChangeAnno(
               G_THROW( (ERR_MSG("XMLAnno.unknown_border") "\t")+b );
             }
           }
-          a->border_always_visible=!!args.contains("visible");
-          if((pos=args.contains("bordercolor")))
+          a->border_always_visible=!!args.tqcontains("visible");
+          if((pos=args.tqcontains("bordercolor")))
           {
             a->border_color=convertToColor(args[pos]);
           }
-          if((pos=args.contains("highlight")))
+          if((pos=args.tqcontains("highlight")))
           {
             a->hilite_color=convertToColor(args[pos]);
           }
-          if((pos=args.contains("border")))
+          if((pos=args.tqcontains("border")))
           {
              a->border_width=args[pos].toInt(); //atoi(args[pos]);
           }
@@ -548,7 +548,7 @@ lt_XMLParser::Impl::get_file(const GURL &url,GUTF8String id)
   GP<DjVuDocument> doc;
   GCriticalSectionLock lock(&xmlparser_lock);
   {
-    GPosition pos=m_docs.contains(url.get_string());
+    GPosition pos=m_docs.tqcontains(url.get_string());
     if(pos)
     {
       doc=m_docs[pos];
@@ -572,10 +572,10 @@ lt_XMLParser::Impl::get_file(const GURL &url,GUTF8String id)
     }
   }
   const GURL fileurl(doc->id_to_url(id));
-  GPosition dpos(m_files.contains(fileurl.get_string()));
+  GPosition dpos(m_files.tqcontains(fileurl.get_string()));
   if(!dpos)
   {
-    if(!doc->get_id_list().contains(id))
+    if(!doc->get_id_list().tqcontains(id))
     {
       G_THROW( ERR_MSG("XMLAnno.bad_page") );
     }
@@ -622,7 +622,7 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
     GURL codebase;
     {
       DEBUG_MSG("Setting up codebase... m_codebase = " << m_codebase << "\n");
-      GPosition codebasePos=args.contains("codebase");
+      GPosition codebasePos=args.tqcontains("codebase");
       // If user specified a codebase attribute, assume it is correct (absolute URL):
       //  the GURL constructor will throw an exception if it isn't
       if(codebasePos)
@@ -642,11 +642,11 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
     //  URL (for now, just a path and file name).  If it's absolute,
     //  our GURL will adequately wrap it.  If it's relative, we need
     //  to use the codebase attribute to form an absolute URL first.
-    GPosition datapos=args.contains("data");
+    GPosition datapos=args.tqcontains("data");
     if(datapos)
     {
       bool isDjVuType=false;
-      GPosition typePos(args.contains("type"));
+      GPosition typePos(args.tqcontains("type"));
       if(typePos)
       {
         if(args[typePos] != mimetype)
@@ -659,12 +659,12 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
       const GURL url=GURL::UTF8(args[datapos],(args[datapos][0] == '/')?codebase.base():codebase);
       int width;
       {
-        GPosition widthPos=args.contains("width");
+        GPosition widthPos=args.tqcontains("width");
         width=(widthPos)?args[widthPos].toInt():0;
       }
       int height;
       {
-        GPosition heightPos=args.contains("height");
+        GPosition heightPos=args.tqcontains("height");
         height=(heightPos)?args[heightPos].toInt():0;
       }
       GUTF8String gamma;
@@ -672,17 +672,17 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
       GUTF8String page;
       GUTF8String do_ocr;
       {
-        GPosition paramPos(GObject.contains(paramtag));
+        GPosition paramPos(GObject.tqcontains(paramtag));
         if(paramPos)
         {
           const GPList<lt_XMLTags> Params(GObject[paramPos]);
           for(GPosition loc=Params;loc;++loc)
           {
             const GMap<GUTF8String,GUTF8String> &pargs=Params[loc]->get_args();
-            GPosition namepos=pargs.contains("name");
+            GPosition namepos=pargs.tqcontains("name");
             if(namepos)
             {
-              GPosition valuepos=pargs.contains("value");
+              GPosition valuepos=pargs.tqcontains("value");
               if(valuepos)
               {
                 const GUTF8String name=pargs[namepos].downcase();
@@ -691,19 +691,19 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
                 {
                   GMap<GUTF8String,GUTF8String> args;
                   lt_XMLTags::ParseValues(value,args,true);
-                  if(args.contains("page"))
+                  if(args.tqcontains("page"))
                   {
                     page=args["page"];
                   }
-                  if(args.contains("dpi"))
+                  if(args.tqcontains("dpi"))
                   {
                     dpi=args["dpi"];
                   }
-                  if(args.contains("gamma"))
+                  if(args.tqcontains("gamma"))
                   {
                     gamma=args["gamma"];
                   }
-                  if(args.contains("ocr"))
+                  if(args.tqcontains("ocr"))
                   {
                     do_ocr=args["ocr"];
                   }
@@ -749,14 +749,14 @@ lt_XMLParser::Impl::parse_anno(
 {
   GP<lt_XMLTags> map;
   {
-    GPosition usemappos=GObject.get_args().contains("usemap");
+    GPosition usemappos=GObject.get_args().tqcontains("usemap");
     if(usemappos)
     {
       const GUTF8String mapname(GObject.get_args()[usemappos]);
-      GPosition mappos=Maps.contains(mapname);
+      GPosition mappos=Maps.tqcontains(mapname);
       if(!mappos)
       {
-        G_THROW((ERR_MSG("XMLAnno.map_find") "\t")+mapname );
+        G_THROW((ERR_MSG("XMLAnno.map_tqfind") "\t")+mapname );
       }else
       {
         map=Maps[mappos];
@@ -782,10 +782,10 @@ static inline TYPE min(TYPE a,TYPE b) { return (a<b)?a:b; }
 
 // used to build the zone tree
 // true is returned if the GRect is known for this object,
-// and false, if the rectangle's size is just the parent size.
+// and false, if the rectangle's size is just the tqparent size.
 static bool
 make_child_layer(
-  DjVuTXT::Zone &parent,
+  DjVuTXT::Zone &tqparent,
   const lt_XMLTags &tag, ByteStream &bs,
   const int height, const double ws, const double hs)
 {
@@ -799,32 +799,32 @@ make_child_layer(
   const GUTF8String name(tag.get_name());
   if(name == wordtag)
   {
-    self_ptr=parent.append_child();
+    self_ptr=tqparent.append_child();
     self_ptr->ztype = DjVuTXT::WORD;
     sepchar=' ';
   }else if(name == linetag)
   {
-    self_ptr=parent.append_child();
+    self_ptr=tqparent.append_child();
     self_ptr->ztype = DjVuTXT::LINE;
     sepchar=DjVuTXT::end_of_line;
   }else if(name == paragraphtag)
   {
-    self_ptr=parent.append_child();
+    self_ptr=tqparent.append_child();
     self_ptr->ztype = DjVuTXT::PARAGRAPH;
     sepchar=DjVuTXT::end_of_paragraph;
   }else if(name == regiontag)
   {
-    self_ptr=parent.append_child();
+    self_ptr=tqparent.append_child();
     self_ptr->ztype = DjVuTXT::REGION;
     sepchar=DjVuTXT::end_of_region;
   }else if(name == pagecolumntag)
   {
-    self_ptr=parent.append_child();
+    self_ptr=tqparent.append_child();
     self_ptr->ztype = DjVuTXT::COLUMN;
     sepchar=DjVuTXT::end_of_column;
   }else
   {
-    self_ptr = &parent;
+    self_ptr = &tqparent;
     self_ptr->ztype = DjVuTXT::PAGE;
     sepchar=0;
   }
@@ -833,12 +833,12 @@ make_child_layer(
   int &xmin=self.rect.xmin, &ymin=self.rect.ymin, 
     &xmax=self.rect.xmax, &ymax=self.rect.ymax;
   GRect default_rect;
-  default_rect.xmin=max(parent.rect.xmax,parent.rect.xmin);
-  default_rect.xmax=min(parent.rect.xmax,parent.rect.xmin);
-  default_rect.ymin=max(parent.rect.ymax,parent.rect.ymin);
-  default_rect.ymax=min(parent.rect.ymax,parent.rect.ymin);
+  default_rect.xmin=max(tqparent.rect.xmax,tqparent.rect.xmin);
+  default_rect.xmax=min(tqparent.rect.xmax,tqparent.rect.xmin);
+  default_rect.ymin=max(tqparent.rect.ymax,tqparent.rect.ymin);
+  default_rect.ymax=min(tqparent.rect.ymax,tqparent.rect.ymin);
   // Now if there are coordinates, use those.
-  GPosition pos(tag.get_args().contains("coords"));
+  GPosition pos(tag.get_args().tqcontains("coords"));
   if(pos)
   {
     GList<int> rectArgs;
@@ -926,7 +926,7 @@ make_child_layer(
         }else
         {
           // If the child doesn't have coordinates, we need to use a box
-          // at least as big as the parent's coordinates.
+          // at least as big as the tqparent's coordinates.
           xmin=min(save_rect.xmin,default_rect.xmax);
           xmax=max(save_rect.xmax,default_rect.xmin);
           ymin=min(save_rect.ymin,default_rect.ymax);
@@ -952,10 +952,10 @@ make_child_layer(
       self.text_length = bs.tell() - self.text_start;
     }
   }
-  parent.rect.xmin=min(xmin,parent.rect.xmin);
-  parent.rect.ymin=min(ymin,parent.rect.ymin);
-  parent.rect.xmax=max(xmax,parent.rect.xmax);
-  parent.rect.ymax=max(ymax,parent.rect.ymax);
+  tqparent.rect.xmin=min(xmin,tqparent.rect.xmin);
+  tqparent.rect.ymin=min(ymin,tqparent.rect.ymin);
+  tqparent.rect.xmax=max(xmax,tqparent.rect.xmax);
+  tqparent.rect.ymax=max(ymax,tqparent.rect.ymax);
   if(xmin>xmax)
   {
     const int t=xmin;
@@ -1029,11 +1029,11 @@ lt_XMLParser::Impl::ChangeText(
     const int h=info->height;
     const int w=info->width;
     txt->page_zone.text_start = 0;
-    DjVuTXT::Zone &parent=txt->page_zone;
-    parent.rect.xmin=0;
-    parent.rect.ymin=0;
-    parent.rect.ymax=h;
-    parent.rect.xmax=w;
+    DjVuTXT::Zone &tqparent=txt->page_zone;
+    tqparent.rect.xmin=0;
+    tqparent.rect.ymin=0;
+    tqparent.rect.ymax=h;
+    tqparent.rect.xmax=w;
     double ws=1.0;
     if(width && width != w)
     {
@@ -1044,7 +1044,7 @@ lt_XMLParser::Impl::ChangeText(
     {
       hs=((double)h)/((double)height);
     }
-    make_child_layer(parent, tags, *textbs, h, ws,hs);
+    make_child_layer(tqparent, tags, *textbs, h, ws,hs);
     textbs->write8(0);
     long len = textbs->tell();
     txt->page_zone.text_length = len;
@@ -1062,7 +1062,7 @@ lt_XMLParser::Impl::parse_text(
   const lt_XMLTags &GObject,
   DjVuFile &dfile )
 {
-  GPosition textPos = GObject.contains(hiddentexttag);
+  GPosition textPos = GObject.tqcontains(hiddentexttag);
   if(textPos)
   {
     // loop through the hidden text - there should only be one 
@@ -1078,7 +1078,7 @@ lt_XMLParser::Impl::parse_meta(
   const lt_XMLTags &GObject,
   DjVuFile &dfile )
 {
-  GPosition metaPos = GObject.contains(metadatatag);
+  GPosition metaPos = GObject.tqcontains(metadatatag);
   if(metaPos)
   {
     // loop through the hidden text - there should only be one 

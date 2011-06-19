@@ -45,11 +45,11 @@ PMPigment::~PMPigment( )
 {
 }
 
-PMMetaObject* PMPigment::metaObject( ) const
+PMMetaObject* PMPigment::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Pigment", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Pigment", Base::tqmetaObject( ),
                                         createNewPigment );
       s_pMetaObject->addProperty(
          new PMPigmentProperty( "uvMapping", &PMPigment::setUVMapping, &PMPigment::uvMapping ) );
@@ -72,9 +72,9 @@ TQString PMPigment::description( ) const
    return i18n( "pigment" );
 }
 
-PMDialogEditBase* PMPigment::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMPigment::editWidget( TQWidget* tqparent ) const
 {
-   return new PMPigmentEdit( parent );
+   return new PMPigmentEdit( tqparent );
 }
 
 void PMPigment::serialize( TQDomElement& e, TQDomDocument& doc ) const

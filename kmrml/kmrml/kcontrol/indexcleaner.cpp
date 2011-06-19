@@ -6,17 +6,17 @@
 
 #include <kdeversion.h>
 #if KDE_VERSION < 306
-  #define QUOTE( x ) x
+  #define TQUOTE( x ) x
 #else
-  #define QUOTE( x ) KProcess::quote( x )
+  #define TQUOTE( x ) KProcess::quote( x )
 #endif
 
 using namespace KMrmlConfig;
 
 IndexCleaner::IndexCleaner( const TQStringList& dirs,
                             const KMrml::Config *config,
-                            TQObject *parent, const char *name )
-    : TQObject( parent, name ),
+                            TQObject *tqparent, const char *name )
+    : TQObject( tqparent, name ),
       m_dirs( dirs ),
       m_config( config ),
       m_process( 0L )
@@ -74,11 +74,11 @@ void IndexCleaner::startNext()
     TQString dir = m_dirs.first();
     m_dirs.pop_front();
 
-    int index = cmd.find( "%d" );
+    int index = cmd.tqfind( "%d" );
     if ( index != -1 )
-        cmd.replace( index, 2, QUOTE( dir ) );
+        cmd.tqreplace( index, 2, TQUOTE( dir ) );
     else // no %d? What else can we do?
-        cmd.append( TQString::fromLatin1(" ") + QUOTE( dir ) );
+        cmd.append( TQString::tqfromLatin1(" ") + TQUOTE( dir ) );
 
     *m_process << cmd;
 

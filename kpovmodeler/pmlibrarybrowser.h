@@ -40,7 +40,7 @@ class PMLibraryHandle;
 class PMPart;
 namespace KIO{ class Job; }
 
-typedef TQDict<TQString> QStringDict;
+typedef TQDict<TQString> TQStringDict;
 
 /**
  * Wrapper class for the treeview/dock widget
@@ -48,11 +48,12 @@ typedef TQDict<TQString> QStringDict;
 class PMLibraryBrowserView : public PMViewBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMLibraryBrowserView( PMPart* part, TQWidget* parent, const char* name = 0 );
+   PMLibraryBrowserView( PMPart* part, TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual TQString viewType( ) const { return TQString( "librarybrowserview" ); }
@@ -63,11 +64,12 @@ public:
 /**
  * This class provides a non-modal dialog to browse the available libraries.
  */
-class PMLibraryBrowserViewWidget: public QWidget
+class PMLibraryBrowserViewWidget: public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMLibraryBrowserViewWidget( TQWidget *parent, const char* name = NULL );
+   PMLibraryBrowserViewWidget( TQWidget *tqparent, const char* name = NULL );
 
 private slots:
    void resizeEvent( TQResizeEvent* ev );
@@ -110,9 +112,9 @@ public:
    virtual TQString viewType( ) const { return TQString( "librarybrowserview" ); }
    virtual TQString description( ) const;
    virtual TQString iconName( ) const { return TQString( "pmlibrarybrowserview" ); }
-   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
+   virtual PMViewBase* newInstance( TQWidget* tqparent, PMPart* part ) const
    {
-      return new PMLibraryBrowserView( part, parent );
+      return new PMLibraryBrowserView( part, tqparent );
    }
 };
 

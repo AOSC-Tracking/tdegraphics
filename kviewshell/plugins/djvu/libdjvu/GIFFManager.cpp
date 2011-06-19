@@ -113,7 +113,7 @@ GIFFChunk::set_name(GUTF8String name)
 
   DEBUG_MSG("auto-setting type to '" << type << "'\n");
 
-  if (name.contains(".[]")>=0)
+  if (name.tqcontains(".[]")>=0)
     G_THROW( ERR_MSG("GIFFManager.bad_char") );
    
   strncpy(GIFFChunk::name, (const char *)name, 4);
@@ -180,13 +180,13 @@ GIFFChunk::add_chunk(const GP<GIFFChunk> & chunk, int position)
 
   if (!type.length())
   {
-    DEBUG_MSG("Converting the parent to FORM\n");
+    DEBUG_MSG("Converting the tqparent to FORM\n");
     type="FORM";
   }
 
   if (chunk->get_type()=="PROP")
   {
-    DEBUG_MSG("Converting the parent to LIST\n");
+    DEBUG_MSG("Converting the tqparent to LIST\n");
     type="LIST";
   }
 
@@ -310,7 +310,7 @@ GIFFChunk::get_chunks_number(const GUTF8String &name)
      "' in '" << get_name() << "'\n");
   DEBUG_MAKE_INDENT(3);
 
-  if (name.contains("[]")>=0)
+  if (name.tqcontains("[]")>=0)
     G_THROW( ERR_MSG("GIFFManager.no_brackets") );
   
   int number; 
@@ -325,24 +325,24 @@ GIFFChunk::get_chunks_number(const GUTF8String &name)
 //************************************************************************
 
 void
-GIFFManager::add_chunk(GUTF8String parent_name, const GP<GIFFChunk> & chunk,
+GIFFManager::add_chunk(GUTF8String tqparent_name, const GP<GIFFChunk> & chunk,
 		       int pos)
-      // parent_name is the fully qualified name of the PARENT
+      // tqparent_name is the fully qualified name of the PARENT
       //             IT MAY BE EMPTY
       // All the required chunks will be created
       // pos=-1 means to append the chunk
 {
-  DEBUG_MSG("GIFFManager::add_chunk(): Adding chunk to name='" << parent_name << "'\n");
+  DEBUG_MSG("GIFFManager::add_chunk(): Adding chunk to name='" << tqparent_name << "'\n");
   DEBUG_MAKE_INDENT(3);
    
   if (!top_level->get_name().length())
   {
-    if ((!parent_name.length())||(parent_name[0]!='.'))
+    if ((!tqparent_name.length())||(tqparent_name[0]!='.'))
       G_THROW( ERR_MSG("GIFFManager.no_top_name") );
-    if (parent_name.length() < 2)
+    if (tqparent_name.length() < 2)
     {
       // 'chunk' is actually the new top-level chunk
-      DEBUG_MSG("since parent_name=='.', making the chunk top-level\n");
+      DEBUG_MSG("since tqparent_name=='.', making the chunk top-level\n");
       if (!chunk->is_container())
         G_THROW( ERR_MSG("GIFFManager.no_top_cont") );
       top_level=chunk;
@@ -350,33 +350,33 @@ GIFFManager::add_chunk(GUTF8String parent_name, const GP<GIFFChunk> & chunk,
     }
 
     DEBUG_MSG("Setting the name of the top-level chunk\n");
-    const int next_dot=parent_name.search('.',1);
+    const int next_dot=tqparent_name.search('.',1);
     if(next_dot>=0)
     {
-      top_level->set_name(parent_name.substr(1,next_dot-1));
+      top_level->set_name(tqparent_name.substr(1,next_dot-1));
     }else
     {
-      top_level->set_name(parent_name.substr(1,(unsigned int)-1));
+      top_level->set_name(tqparent_name.substr(1,(unsigned int)-1));
     }
   }
 
   DEBUG_MSG("top level chunk name='" << top_level->get_name() << "'\n");
    
-  if (parent_name.length() && parent_name[0] == '.')
+  if (tqparent_name.length() && tqparent_name[0] == '.')
   {
-    int next_dot=parent_name.search('.',1);
+    int next_dot=tqparent_name.search('.',1);
     if(next_dot<0)
     {
-      next_dot=parent_name.length();
+      next_dot=tqparent_name.length();
     }
-    GUTF8String top_name=parent_name.substr(1,next_dot-1);
+    GUTF8String top_name=tqparent_name.substr(1,next_dot-1);
     if (!top_level->check_name(top_name))
       G_THROW( ERR_MSG("GIFFManager.wrong_name") "\t"+top_name);
-    parent_name=parent_name.substr(next_dot,(unsigned int)-1);
+    tqparent_name=tqparent_name.substr(next_dot,(unsigned int)-1);
   }
 
   GP<GIFFChunk> cur_sec=top_level;
-  const char * start, * end=(const char *)parent_name-1;
+  const char * start, * end=(const char *)tqparent_name-1;
   do
   {
     for(start=++end;*end&&(*end!='.');end++)
@@ -497,7 +497,7 @@ GIFFManager::del_chunk(GUTF8String name)
     if (end>start && *end=='.')
       cur_sec=cur_sec->get_chunk(GUTF8String(start, end-start));
     if (!cur_sec)
-      G_THROW( ERR_MSG("GIFFManager.cant_find") "\t"+GUTF8String(name));
+      G_THROW( ERR_MSG("GIFFManager.cant_tqfind") "\t"+GUTF8String(name));
   } while(*end);
    
   if (!start[0])
@@ -631,7 +631,7 @@ GIFFManager::load_file(GP<ByteStream> str)
   if (istr.get_chunk(chunk_id))
   {
     if (chunk_id.substr(0,5) != "FORM:")
-      G_THROW( ERR_MSG("GIFFManager.cant_find2") );
+      G_THROW( ERR_MSG("GIFFManager.cant_tqfind2") );
     set_name(chunk_id);
     load_chunk(istr, top_level);
     istr.close_chunk();

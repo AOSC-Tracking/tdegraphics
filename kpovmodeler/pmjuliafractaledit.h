@@ -39,12 +39,13 @@ class TQLabel;
 class PMJuliaFractalEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMJuliaFractalEdit with parent and name
+    * Creates a PMJuliaFractalEdit with tqparent and name
     */
-   PMJuliaFractalEdit( TQWidget* parent, const char* name = 0 );
+   PMJuliaFractalEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

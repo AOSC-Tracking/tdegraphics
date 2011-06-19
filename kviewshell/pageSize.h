@@ -41,6 +41,7 @@ The main difference to the SimplePageSize class are the following.
 class pageSize : public TQObject, public SimplePageSize
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
   /** \brief Default constructor, initializes the pageSize with a
@@ -64,7 +65,7 @@ public:
   call pageSizeNames() more than once, it is guaranteed that the
   same list of strings will be returned.
 
-  @returns TQStringList that contains 
+  @returns TQStringList that tqcontains 
   */
   TQStringList pageSizeNames();
   
@@ -188,8 +189,8 @@ public:
       297x210.
       
       @returns A name for the current page size, if the format has a
-      name, or TQString::null otherwise. If the result is not
-      TQString::null, it is guaranteed to be one of the strings
+      name, or TQString() otherwise. If the result is not
+      TQString(), it is guaranteed to be one of the strings
       returned by the pageSizeNames() method.
   */
   TQString     formatName() const;

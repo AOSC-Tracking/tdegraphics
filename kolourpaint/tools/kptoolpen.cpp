@@ -73,7 +73,7 @@ kpToolPen::kpToolPen (Mode mode,
 
 kpToolPen::kpToolPen (kpMainWindow *mainWindow)
     : kpTool (i18n ("Pen"), i18n ("Draws dots and freehand strokes"),
-              Qt::Key_P,
+              TQt::Key_P,
               mainWindow, "tool_pen"),
       m_mode (Pen),
       m_toolWidgetBrush (0),
@@ -116,7 +116,7 @@ TQString kpToolPen::haventBegunDrawUserMessage () const
     case ColorWasher:
         return i18n ("Click or drag to erase pixels of the foreground color.");
     default:
-        return TQString::null;
+        return TQString();
     }
 }
 
@@ -179,7 +179,7 @@ void kpToolPen::end ()
     if (vm)
     {
         if (vm->tempPixmap () && vm->tempPixmap ()->isBrush ())
-            vm->invalidateTempPixmap ();
+            vm->tqinvalidateTempPixmap ();
 
         if (m_mode & (SquareBrushes | DiverseBrushes))
             vm->unsetCursor ();
@@ -218,7 +218,7 @@ void kpToolPen::beginDraw ()
     // user starts drawing in the background color, we don't want to leave
     // the cursor in the foreground colour -- just hide it in all cases
     // to avoid confusion
-    viewManager ()->invalidateTempPixmap ();
+    viewManager ()->tqinvalidateTempPixmap ();
 
     setUserMessage (cancelUserMessage ());
 }
@@ -266,15 +266,15 @@ void kpToolPen::hover (const TQPoint &point)
     }
 
 #if DEBUG_KP_TOOL_PEN && 0
-    if (document ()->rect ().contains (point))
+    if (document ()->rect ().tqcontains (point))
     {
         TQImage image = kpPixmapFX::convertToImage (*document ()->pixmap ());
 
-        QRgb v = image.pixel (point.x (), point.y ());
-        kdDebug () << "(" << point << "): r=" << qRed (v)
-                    << " g=" << qGreen (v)
-                    << " b=" << qBlue (v)
-                    << " a=" << qAlpha (v)
+        TQRgb v = image.pixel (point.x (), point.y ());
+        kdDebug () << "(" << point << "): r=" << tqRed (v)
+                    << " g=" << tqGreen (v)
+                    << " b=" << tqBlue (v)
+                    << " a=" << tqAlpha (v)
                     << endl;
     }
 #endif
@@ -282,15 +282,15 @@ void kpToolPen::hover (const TQPoint &point)
     setUserShapePoints (point);
 }
 
-bool kpToolPen::wash (TQPainter *painter, TQPainter *maskPainter,
+bool kpToolPen::wash (TQPainter *painter, TQPainter *tqmaskPainter,
                       const TQImage &image,
                       const kpColor &colorToReplace,
                       const TQRect &imageRect, int plotx, int ploty)
 {
-    return wash (painter, maskPainter, image, colorToReplace, imageRect, hotRect (plotx, ploty));
+    return wash (painter, tqmaskPainter, image, colorToReplace, imageRect, hotRect (plotx, ploty));
 }
 
-bool kpToolPen::wash (TQPainter *painter, TQPainter *maskPainter,
+bool kpToolPen::wash (TQPainter *painter, TQPainter *tqmaskPainter,
                       const TQImage &image,
                       const kpColor &colorToReplace,
                       const TQRect &imageRect, const TQRect &drawRect)
@@ -308,8 +308,8 @@ bool kpToolPen::wash (TQPainter *painter, TQPainter *maskPainter,
 {                                                        \
     if (painter && painter->isActive ())                 \
         painter->drawLine (startDrawX, y, x - 1, y);     \
-    if (maskPainter && maskPainter->isActive ())         \
-        maskPainter->drawLine (startDrawX, y, x - 1, y); \
+    if (tqmaskPainter && tqmaskPainter->isActive ())         \
+        tqmaskPainter->drawLine (startDrawX, y, x - 1, y); \
     didSomething = true;                                 \
     startDrawX = -1;                                     \
 }
@@ -331,8 +331,8 @@ bool kpToolPen::wash (TQPainter *painter, TQPainter *maskPainter,
         #if DEBUG_KP_TOOL_PEN && 0
             fprintf (stderr, "y=%i x=%i colorAtPixel=%08X colorToReplace=%08X ... ",
                      y, x,
-                     kpPixmapFX::getColorAtPixel (image, TQPoint (x, y)).toQRgb (),
-                     colorToReplace.toQRgb ());
+                     kpPixmapFX::getColorAtPixel (image, TQPoint (x, y)).toTQRgb (),
+                     colorToReplace.toTQRgb ());
         #endif
             if (kpPixmapFX::getColorAtPixel (image, TQPoint (x, y)).isSimilarTo (colorToReplace, processedColorSimilarity ()))
             {
@@ -383,33 +383,33 @@ void kpToolPen::globalDraw ()
         if (foregroundColor () == backgroundColor () && processedColorSimilarity () == 0)
             return;
 
-        TQApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (TQt::waitCursor);
 
         kpToolPenCommand *cmd = new kpToolPenCommand (
             i18n ("Color Eraser"), mainWindow ());
 
-        TQPainter painter, maskPainter;
-        TQBitmap maskBitmap;
+        TQPainter painter, tqmaskPainter;
+        TQBitmap tqmaskBitmap;
 
         if (backgroundColor ().isOpaque ())
         {
             painter.begin (document ()->pixmap ());
-            painter.setPen (backgroundColor ().toQColor ());
+            painter.setPen (backgroundColor ().toTQColor ());
         }
 
         if (backgroundColor ().isTransparent () ||
-            document ()->pixmap ()->mask ())
+            document ()->pixmap ()->tqmask ())
         {
-            maskBitmap = kpPixmapFX::getNonNullMask (*document ()->pixmap ());
-            maskPainter.begin (&maskBitmap);
+            tqmaskBitmap = kpPixmapFX::getNonNullMask (*document ()->pixmap ());
+            tqmaskPainter.begin (&tqmaskBitmap);
 
-            maskPainter.setPen (backgroundColor ().maskColor ());
+            tqmaskPainter.setPen (backgroundColor ().tqmaskColor ());
         }
 
         const TQImage image = kpPixmapFX::convertToImage (*document ()->pixmap ());
         TQRect rect = document ()->rect ();
 
-        const bool didSomething = wash (&painter, &maskPainter, image,
+        const bool didSomething = wash (&painter, &tqmaskPainter, image,
                                         foregroundColor ()/*replace foreground*/,
                                         rect, rect);
 
@@ -417,13 +417,13 @@ void kpToolPen::globalDraw ()
         if (painter.isActive ())
             painter.end ();
 
-        if (maskPainter.isActive ())
-            maskPainter.end ();
+        if (tqmaskPainter.isActive ())
+            tqmaskPainter.end ();
 
         if (didSomething)
         {
-            if (!maskBitmap.isNull ())
-                document ()->pixmap ()->setMask (maskBitmap);
+            if (!tqmaskBitmap.isNull ())
+                document ()->pixmap ()->setMask (tqmaskBitmap);
 
 
             document ()->slotContentsChanged (rect);
@@ -471,14 +471,14 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
             // OPT: this seems hopelessly inefficient
             if (c.isOpaque ())
             {
-                pixmap.fill (c.toQColor ());
+                pixmap.fill (c.toTQColor ());
             }
             else
             {
-                TQBitmap mask (1, 1);
-                mask.fill (Qt::color0/*transparent*/);
+                TQBitmap tqmask (1, 1);
+                tqmask.fill (TQt::color0/*transparent*/);
 
-                pixmap.setMask (mask);
+                pixmap.setMask (tqmask);
             }
 
             // draw onto doc
@@ -519,38 +519,38 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
         #if DEBUG_KP_TOOL_PEN
             kdDebug () << "\tconvert to image: " << timer.restart () << "ms" << endl;
         #endif
-            TQPainter painter, maskPainter;
-            TQBitmap maskBitmap;
+            TQPainter painter, tqmaskPainter;
+            TQBitmap tqmaskBitmap;
 
             if (color (m_mouseButton).isOpaque ())
             {
                 painter.begin (&pixmap);
-                painter.setPen (color (m_mouseButton).toQColor ());
+                painter.setPen (color (m_mouseButton).toTQColor ());
             }
 
             if (color (m_mouseButton).isTransparent () ||
-                pixmap.mask ())
+                pixmap.tqmask ())
             {
-                maskBitmap = kpPixmapFX::getNonNullMask (pixmap);
-                maskPainter.begin (&maskBitmap);
-                maskPainter.setPen (color (m_mouseButton).maskColor ());
+                tqmaskBitmap = kpPixmapFX::getNonNullMask (pixmap);
+                tqmaskPainter.begin (&tqmaskBitmap);
+                tqmaskPainter.setPen (color (m_mouseButton).tqmaskColor ());
             }
 
-            bool didSomething = wash (&painter, &maskPainter,
+            bool didSomething = wash (&painter, &tqmaskPainter,
                                       image,
-                                      color (1 - m_mouseButton)/*color to replace*/,
+                                      color (1 - m_mouseButton)/*color to tqreplace*/,
                                       rect, rect);
 
             if (painter.isActive ())
                 painter.end ();
 
-            if (maskPainter.isActive ())
-                maskPainter.end ();
+            if (tqmaskPainter.isActive ())
+                tqmaskPainter.end ();
 
             if (didSomething)
             {
-                if (!maskBitmap.isNull ())
-                    pixmap.setMask (maskBitmap);
+                if (!tqmaskBitmap.isNull ())
+                    pixmap.setMask (tqmaskBitmap);
 
             #if DEBUG_KP_TOOL_PEN
                 kdDebug () << "\twashed: " << timer.restart () << "ms" << endl;
@@ -594,23 +594,23 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
         bool transparent = c.isTransparent ();
 
         TQPixmap pixmap = document ()->getPixmapAt (rect);
-        TQBitmap maskBitmap;
+        TQBitmap tqmaskBitmap;
 
-        TQPainter painter, maskPainter;
+        TQPainter painter, tqmaskPainter;
 
         if (m_mode & (DrawsPixels | WashesPixmaps))
         {
             if (!transparent)
             {
                 painter.begin (&pixmap);
-                painter.setPen (c.toQColor ());
+                painter.setPen (c.toTQColor ());
             }
 
-            if (transparent || pixmap.mask ())
+            if (transparent || pixmap.tqmask ())
             {
-                maskBitmap = kpPixmapFX::getNonNullMask (pixmap);
-                maskPainter.begin (&maskBitmap);
-                maskPainter.setPen (c.maskColor ());
+                tqmaskBitmap = kpPixmapFX::getNonNullMask (pixmap);
+                tqmaskPainter.begin (&tqmaskBitmap);
+                tqmaskPainter.setPen (c.tqmaskColor ());
             }
         }
 
@@ -635,8 +635,8 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
             if (painter.isActive ())
                 painter.drawLine (sp, ep);
 
-            if (maskPainter.isActive ())
-                maskPainter.drawLine (sp, ep);
+            if (tqmaskPainter.isActive ())
+                tqmaskPainter.drawLine (sp, ep);
 
             didSomething = true;
         }
@@ -678,7 +678,7 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
 
             if (m_mode & WashesPixmaps)
             {
-                if (wash (&painter, &maskPainter, image,
+                if (wash (&painter, &tqmaskPainter, image,
                           colorToReplace,
                           rect, plotx + rect.left (), ploty + rect.top ()))
                 {
@@ -746,7 +746,7 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
 
                         if (m_mode & WashesPixmaps)
                         {
-                            if (wash (&painter, &maskPainter, image,
+                            if (wash (&painter, &tqmaskPainter, image,
                                       colorToReplace,
                                       rect, plotx + rect.left (), oldploty + rect.top ()))
                             {
@@ -774,7 +774,7 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
 
                     if (m_mode & WashesPixmaps)
                     {
-                        if (wash (&painter, &maskPainter, image,
+                        if (wash (&painter, &tqmaskPainter, image,
                                   colorToReplace,
                                   rect, plotx + rect.left (), ploty + rect.top ()))
                         {
@@ -806,8 +806,8 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
         if (painter.isActive ())
             painter.end ();
 
-        if (maskPainter.isActive ())
-            maskPainter.end ();
+        if (tqmaskPainter.isActive ())
+            tqmaskPainter.end ();
 
     #if DEBUG_KP_TOOL_PEN
         if (m_mode & WashesPixmaps)
@@ -824,8 +824,8 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
 
         if (didSomething)
         {
-            if (!maskBitmap.isNull ())
-                pixmap.setMask (maskBitmap);
+            if (!tqmaskBitmap.isNull ())
+                pixmap.setMask (tqmaskBitmap);
 
             // draw onto doc
             document ()->setPixmapAt (pixmap, rect.topLeft ());
@@ -920,7 +920,7 @@ void kpToolPen::slotForegroundColorChanged (const kpColor &col)
     kdDebug () << "kpToolPen::slotForegroundColorChanged()" << endl;
 #endif
     if (col.isOpaque ())
-        m_brushPixmap [(m_mode & SwappedColors) ? 1 : 0].fill (col.toQColor ());
+        m_brushPixmap [(m_mode & SwappedColors) ? 1 : 0].fill (col.toTQColor ());
 
     updateBrushCursor ();
 }
@@ -933,7 +933,7 @@ void kpToolPen::slotBackgroundColorChanged (const kpColor &col)
 #endif
 
     if (col.isOpaque ())
-        m_brushPixmap [(m_mode & SwappedColors) ? 0 : 1].fill (col.toQColor ());
+        m_brushPixmap [(m_mode & SwappedColors) ? 0 : 1].fill (col.toTQColor ());
 
     updateBrushCursor ();
 }
@@ -948,7 +948,7 @@ void kpToolPen::slotBrushChanged (const TQPixmap &pixmap, bool isDiagonalLine)
     {
         m_brushPixmap [i] = pixmap;
         if (color (i).isOpaque ())
-            m_brushPixmap [i].fill (color (i).toQColor ());
+            m_brushPixmap [i].fill (color (i).toTQColor ());
     }
 
     m_brushIsDiagonalLine = isDiagonalLine;
@@ -966,7 +966,7 @@ void kpToolPen::slotEraserSizeChanged (int size)
     for (int i = 0; i < 2; i++)
     {
         // Note: No matter what, the eraser's brush pixmap is never given
-        //       a mask.
+        //       a tqmask.
         //
         // With a transparent color, since we don't fill anything, the
         // resize by itself will leave us with garbage pixels.  This
@@ -978,7 +978,7 @@ void kpToolPen::slotEraserSizeChanged (int size)
         //    which only cares about the opaqueness.
         m_brushPixmap [i].resize (size, size);
         if (color (i).isOpaque ())
-            m_brushPixmap [i].fill (color (i).toQColor ());
+            m_brushPixmap [i].fill (color (i).toTQColor ());
     }
 
     updateBrushCursor ();

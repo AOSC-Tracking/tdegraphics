@@ -22,13 +22,13 @@
 
 #include "kgvpageview.h"
 
-KGVPageView::KGVPageView( TQWidget* parent, const char* name )
-  : TQScrollView( parent, name )
+KGVPageView::KGVPageView( TQWidget* tqparent, const char* name )
+  : TQScrollView( tqparent, name )
 {
     _page = 0;
 
-    setFocusPolicy( TQWidget::StrongFocus );
-    viewport()->setFocusPolicy( TQWidget::WheelFocus );
+    setFocusPolicy( TQ_StrongFocus );
+    viewport()->setFocusPolicy( TQ_WheelFocus );
 }
 
 void KGVPageView::setPage( TQWidget* page )
@@ -52,7 +52,7 @@ bool KGVPageView::atBottom() const
 
 bool KGVPageView::eventFilter( TQObject* o, TQEvent* e )
 {
-    if ( o == _page &&  e->type() == TQEvent::Resize ) {
+    if ( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(_page) &&  e->type() == TQEvent::Resize ) {
 	// We need to call TQScrollView::eventFilter before centerContents,
 	// otherwise a loop will be introduced.
 	bool result = TQScrollView::eventFilter( o, e );
@@ -88,16 +88,16 @@ void KGVPageView::wheelEvent( TQWheelEvent *e )
 }
 void KGVPageView::mousePressEvent( TQMouseEvent * e )
 {
-    if ( e->button() & LeftButton )
+    if ( e->button() & Qt::LeftButton )
     {
 	_dragGrabPos = e -> globalPos();
 	setCursor( sizeAllCursor );
     }
-    else if ( e->button() & MidButton )
+    else if ( e->button() & Qt::MidButton )
     {
 	emit ReadDown();
     }
-    else if ( e -> button() & RightButton )
+    else if ( e -> button() & Qt::RightButton )
     {
 	emit rightClick();
     }
@@ -105,7 +105,7 @@ void KGVPageView::mousePressEvent( TQMouseEvent * e )
 
 void KGVPageView::mouseReleaseEvent( TQMouseEvent *e )
 {
-    if ( e -> button() & LeftButton )
+    if ( e -> button() & Qt::LeftButton )
     {
 	setCursor( arrowCursor );
     }
@@ -113,7 +113,7 @@ void KGVPageView::mouseReleaseEvent( TQMouseEvent *e )
 
 void KGVPageView::mouseMoveEvent( TQMouseEvent * e )
 {
-    if ( e->state() & LeftButton )
+    if ( e->state() & Qt::LeftButton )
     {
 	TQPoint delta = _dragGrabPos - e->globalPos();
 	scrollBy( delta.x(), delta.y() );
@@ -126,7 +126,7 @@ bool KGVPageView::readUp()
     if( atTop() )
 	return false;
     else {
-	int newValue = QMAX( verticalScrollBar()->value() - height() + 50,
+	int newValue = TQMAX( verticalScrollBar()->value() - height() + 50,
 			     verticalScrollBar()->minValue() );
 
 	/*
@@ -148,7 +148,7 @@ bool KGVPageView::readDown()
     if( atBottom() )
 	return false;
     else {
-	int newValue = QMIN( verticalScrollBar()->value() + height() - 50,
+	int newValue = TQMIN( verticalScrollBar()->value() + height() - 50,
 			     verticalScrollBar()->maxValue() );
 	
 	/*

@@ -87,7 +87,7 @@ public:
    {
       if( !m_bRadiiSaved )
       {
-         // Direct assignment does not work with Qt 2.3.x
+         // Direct assignment does not work with TQt 2.3.x
          // The list will be changed later in a graphical
          // change because TQValueList::detach( ) is called
          // too late!
@@ -216,11 +216,11 @@ void PMSphereSweep::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMSphereSweep::metaObject( ) const
+PMMetaObject* PMSphereSweep::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SphereSweep", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "SphereSweep", Base::tqmetaObject( ),
                                         createNewSphereSweep );
       s_pMetaObject->addProperty(
          new PMSphereSweepProperty( "tolerance", &PMSphereSweep::setTolerance, &PMSphereSweep::tolerance ) );
@@ -290,9 +290,9 @@ void PMSphereSweep::setRadii( const TQValueList<double>& radii )
    }
 }
 
-PMDialogEditBase* PMSphereSweep::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMSphereSweep::editWidget( TQWidget* tqparent ) const
 {
-   return new PMSphereSweepEdit( parent );
+   return new PMSphereSweepEdit( tqparent );
 }
 
 void PMSphereSweep::createMemento( )
@@ -434,19 +434,19 @@ void PMSphereSweep::controlPoints( PMControlPointList& list )
         it != m_points.end( ) && it2 != m_radii.end( ); ++it, ++it2, ++nr )
    {
       PM3DControlPoint* p = new PM3DControlPoint( *it, i++,
-                                                  i18n( "Center %1" ).arg( nr ) );
+                                                  i18n( "Center %1" ).tqarg( nr ) );
       list.append( p );
       list.append( new PMDistanceControlPoint( p, PMVector( 1.0, 0.0, 0.0 ),
                                                *it2, i++,
-                                               i18n( "Radius %1 (x)" ).arg( nr ),
+                                               i18n( "Radius %1 (x)" ).tqarg( nr ),
                                                true ) );
       list.append( new PMDistanceControlPoint( p, PMVector( 0.0, 1.0, 0.0 ),
                                                *it2, i++,
-                                               i18n( "Radius %1 (y)" ).arg( nr ),
+                                               i18n( "Radius %1 (y)" ).tqarg( nr ),
                                                true ) );
       list.append( new PMDistanceControlPoint( p, PMVector( 0.0, 0.0, 1.0 ),
                                                *it2, i++,
-                                               i18n( "Radius %1 (z)" ).arg( nr ),
+                                               i18n( "Radius %1 (z)" ).tqarg( nr ),
                                                true ) );
    }
 }

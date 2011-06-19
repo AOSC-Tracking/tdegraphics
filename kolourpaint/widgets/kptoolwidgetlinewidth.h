@@ -34,9 +34,10 @@
 class kpToolWidgetLineWidth : public kpToolWidgetBase
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpToolWidgetLineWidth (TQWidget *parent, const char *name);
+    kpToolWidgetLineWidth (TQWidget *tqparent, const char *name);
     virtual ~kpToolWidgetLineWidth ();
 
     int lineWidth () const;

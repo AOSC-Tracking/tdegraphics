@@ -35,12 +35,13 @@ class TQComboBox;
 class PMCSGEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMCSGEdit with parent and name
+    * Creates a PMCSGEdit with tqparent and name
     */
-   PMCSGEdit( TQWidget* parent, const char* name = 0 );
+   PMCSGEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

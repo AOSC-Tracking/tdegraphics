@@ -37,12 +37,13 @@ class TQLabel;
 class PMGraphicalObjectEdit : public PMDetailObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDetailObjectEdit Base;
 public:
    /**
-    * Creates a PMGraphicalObjectEdit with parent and name
+    * Creates a PMGraphicalObjectEdit with tqparent and name
     */
-   PMGraphicalObjectEdit( TQWidget* parent, const char* name = 0 );
+   PMGraphicalObjectEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

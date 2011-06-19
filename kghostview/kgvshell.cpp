@@ -50,7 +50,7 @@
 #include "displayoptions.h"
 #include "fullscreenfilter.h"
 
-#undef Always  // avoid X11/Qt namespace clash
+#undef Always  // avoid X11/TQt namespace clash
 #include "kgvshell.moc"
 
 //TODO -- disable GUI when no file
@@ -60,29 +60,29 @@ KGVShell::KGVShell() :
     _tmpFile( 0 )
 {
     m_gvpart = KParts::ComponentFactory::createPartInstanceFromLibrary< KGVPart >( "libkghostviewpart", this, "kgvpart",
-                                                                                   this, "kgvpart" );
+                                                                                   TQT_TQOBJECT(this), "kgvpart" );
 
     /*---- File -----------------------------------------------------------*/
     openact =
-	    KStdAction::open( this, TQT_SLOT( slotFileOpen() ),
+	    KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotFileOpen() ),
 			      actionCollection() );
     recent =
-	    KStdAction::openRecent( this, TQT_SLOT( openURL( const KURL& ) ),
+	    KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( openURL( const KURL& ) ),
 				    actionCollection() );
 	    KStdAction::print( m_gvpart->document(), TQT_SLOT( print() ),
 			       actionCollection() );
     (void)
-	    KStdAction::quit( this, TQT_SLOT( slotQuit() ), actionCollection() );
+	    KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( slotQuit() ), actionCollection() );
 
     /*---- View -----------------------------------------------------------*/
             new KAction( i18n(  "&Reload" ), "reload",
 		    KStdAccel::shortcut( KStdAccel::Reload ),
 		    m_gvpart, TQT_SLOT(  reloadFile() ),
 		    actionCollection(), "reload" );
-	    new KAction( i18n( "&Maximize" ), Key_M, this,
+	    new KAction( i18n( "&Maximize" ), Key_M, TQT_TQOBJECT(this),
 			 TQT_SLOT( slotMaximize() ), actionCollection(),
 			 "maximize");
-    _showMenuBarAction = KStdAction::showMenubar( this, TQT_SLOT( slotShowMenubar() ), actionCollection() );
+    _showMenuBarAction = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotShowMenubar() ), actionCollection() );
 
     /*---- Settings -------------------------------------------------------*/
 #if KDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
@@ -91,11 +91,11 @@ KGVShell::KGVShell() :
     setAutoSaveSettings();
     setStandardToolBarMenuEnabled(true);
 #if KDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
-    m_fullScreenAction = KStdAction::fullScreen( this, TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
+    m_fullScreenAction = KStdAction::fullScreen( TQT_TQOBJECT(this), TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 #else
     m_fullScreenAction = new KToggleAction( this, TQT_SLOT( slotUpdateFullScreen() ) );
 #endif
-    KStdAction::configureToolbars( this, TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
+    KStdAction::configureToolbars( TQT_TQOBJECT(this), TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
     KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
 
@@ -115,7 +115,7 @@ actionCollection());
     // We could, at the user's option, make this connection and kghostview
     // will always resize to fit the width of the page.  But, for now,
     // let's not.
-    // connect ( m_gvpart->widget(), TQT_SIGNAL (sizeHintChanged()),	    this, TQT_SLOT (slotResize ()) );
+    // connect ( m_gvpart->widget(), TQT_SIGNAL (tqsizeHintChanged()),	    this, TQT_SLOT (slotResize ()) );
 
     setCentralWidget( m_gvpart->widget() );
     createGUI( m_gvpart );
@@ -252,7 +252,7 @@ KGVShell::openStdin()
     if( _tmpFile->status() != 0 ) {
 	KMessageBox::error( this,
 		i18n( "Could not create temporary file: %1" )
-		.arg( strerror( _tmpFile->status() ) ) );
+		.tqarg( strerror( _tmpFile->status() ) ) );
 	return;
     }
 
@@ -269,7 +269,7 @@ KGVShell::openStdin()
     if( read != 0 ) {
 	KMessageBox::error( this,
 		i18n( "Could not open standard input stream: %1" )
-		.arg( strerror( errno ) ) );
+		.tqarg( strerror( errno ) ) );
 	return;
     }
 
@@ -309,7 +309,7 @@ void KGVShell::slotMaximize()
 
 void KGVShell::slotResize()
 {
-    resize( m_gvpart->pageView()->sizeHint().width(), height() );
+    resize( m_gvpart->pageView()->tqsizeHint().width(), height() );
 }
 
 void KGVShell::setFullScreen( bool useFullScreen )

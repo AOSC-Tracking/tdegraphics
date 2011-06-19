@@ -117,7 +117,7 @@ void PMXMLParser::topParse( )
    }
 }
 
-void PMXMLParser::parseChildObjects( TQDomElement& e, PMObject* parent )
+void PMXMLParser::parseChildObjects( TQDomElement& e, PMObject* tqparent )
 {
    TQDomNode c = e.firstChild( );
    while( !c.isNull( ) )
@@ -132,7 +132,7 @@ void PMXMLParser::parseChildObjects( TQDomElement& e, PMObject* parent )
             PMXMLHelper hlp( ce, m_pPart, this,
                              m_majorDocumentFormat, m_minorDocumentFormat );
             obj->readAttributes( hlp );
-            if( insertChild( obj, parent ) )
+            if( insertChild( obj, tqparent ) )
             {
                parseChildObjects( ce, obj );
 
@@ -143,7 +143,7 @@ void PMXMLParser::parseChildObjects( TQDomElement& e, PMObject* parent )
                delete obj;
          }
          else if( ce.tagName( ) != "extra_data" )
-            printError( i18n( "Unknown object %1" ).arg( ce.tagName( ) ) );
+            printError( i18n( "Unknown object %1" ).tqarg( ce.tagName( ) ) );
       }
       c = c.nextSibling( );
    }

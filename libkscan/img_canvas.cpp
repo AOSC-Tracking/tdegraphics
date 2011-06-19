@@ -72,10 +72,10 @@ public:
     TQValueList<TQRect> highlightRects;
 };
 
-ImageCanvas::ImageCanvas(TQWidget *parent,
+ImageCanvas::ImageCanvas(TQWidget *tqparent,
 			 const TQImage *start_image,
 			 const char *name 	):
-   TQScrollView( parent, name ),
+   TQScrollView( tqparent, name ),
    m_contextMenu(0)
 {
     d = new ImageCanvasPrivate();
@@ -226,12 +226,12 @@ void ImageCanvas::newImage( TQImage *new_image )
    }
 
 
-   kdDebug(29000) << "going to repaint!" << endl;
-   repaint( true );
-   kdDebug(29000) << "repaint ok" << endl;
+   kdDebug(29000) << "going to tqrepaint!" << endl;
+   tqrepaint( true );
+   kdDebug(29000) << "tqrepaint ok" << endl;
 }
 
-TQSize ImageCanvas::sizeHint() const
+TQSize ImageCanvas::tqsizeHint() const
 {
    return( TQSize( 2, 2 ));
 }
@@ -295,7 +295,7 @@ void ImageCanvas::handle_popup( int item )
       default: break;
    }
    update_scaled_pixmap();
-   repaint();
+   tqrepaint();
 }
 
 
@@ -379,7 +379,7 @@ void ImageCanvas::drawContents( TQPainter * p, int clipx, int clipy, int clipw, 
     // p->scale( used_xscaler, used_yscaler );
     // p->scale( used_xscaler, used_yscaler );
     if ( x2 >= x1 && y2 >= y1 ) {
-    	p->drawPixmap( x1, y1, *pmScaled, x1, y1 ); //, clipw, cliph);
+    	p->tqdrawPixmap( x1, y1, *pmScaled, x1, y1 ); //, clipw, cliph);
         // p->setBrush( red );
         // p->drawRect( x1, y1, clipw, cliph );
     }
@@ -457,7 +457,7 @@ void ImageCanvas::viewportMousePressEvent(TQMouseEvent *ev)
 {
    if( ! acquired || ! image ) return;
 
-   if(ev->button()==LeftButton )
+   if(ev->button()==Qt::LeftButton )
    {
 
         int cx = contentsX(), cy = contentsY();
@@ -486,7 +486,7 @@ void ImageCanvas::viewportMousePressEvent(TQMouseEvent *ev)
 
 void ImageCanvas::viewportMouseReleaseEvent(TQMouseEvent *ev)
 {
-  if(ev->button()!=LeftButton || !acquired ) return;
+  if(ev->button()!=Qt::LeftButton || !acquired ) return;
 
   //// debug( "Mouse Release at %d/%d", ev->x(), ev->y());
   if(moving!=MOVE_NONE) {
@@ -675,7 +675,7 @@ void ImageCanvas::update_scaled_pixmap( void )
     if( scaleKind() == DYNAMIC )
         kdDebug(28000) << "Scaling DYNAMIC" << endl;
     TQSize noSBSize( visibleWidth(), visibleHeight());
-    const int sbWidth = kapp->style().pixelMetric( TQStyle::PM_ScrollBarExtent );
+    const int sbWidth = kapp->tqstyle().tqpixelMetric( TQStyle::PM_ScrollBarExtent );
 
     // if( verticalScrollBar()->visible() ) noSBSize.width()+=sbWidth;
     // if( horizontalScrollBar()->visible() ) noSBSize.height()+=sbWidth;
@@ -783,7 +783,7 @@ void ImageCanvas::drawHAreaBorder(TQPainter &p,int x1,int x2,int y,int r)
   } else if(!acquired) p.setPen(TQPen(TQColor(150,150,150)));
 
   for(;;) {
-    if(rect().contains(TQPoint(x1,y))) {
+    if(TQT_TQRECT_OBJECT(rect()).tqcontains(TQPoint(x1,y))) {
       if( r && acquired ) {
 	int re_x1, re_y;
 	inv_scale_matrix.map( x1+cx, y+cy, &re_x1, &re_y );
@@ -826,7 +826,7 @@ void ImageCanvas::drawVAreaBorder(TQPainter &p, int x, int y1, int y2, int r )
     if( !acquired ) p.setPen( TQPen( TQColor(150,150,150) ) );
 
   for(;;) {
-    if(rect().contains( TQPoint(x,y1) )) {
+    if(TQT_TQRECT_OBJECT(rect()).tqcontains( TQPoint(x,y1) )) {
       if( r && acquired ) {
 	int re_y1, re_x;
 	inv_scale_matrix.map( x+cx, y1+cy, &re_x, &re_y1 );
@@ -921,7 +921,7 @@ preview_state ImageCanvas::classifyPoint(int x,int y)
   if(x>=a.left()&&x<=a.right()) {
     if(top) return MOVE_TOP;
     if(bottom) return MOVE_BOTTOM;
-    if(selected->contains(TQPoint(x,y))) return MOVE_WHOLE;
+    if(selected->tqcontains(TQPoint(x,y))) return MOVE_WHOLE;
   }
   return MOVE_NONE;
 }
@@ -1022,7 +1022,7 @@ const TQString ImageCanvas::imageInfoString( int w, int h, int d )
         else
             return TQString("-");
     }
-    return i18n("%1x%2 pixel, %3 bit").arg(w).arg(h).arg(d);
+    return i18n("%1x%2 pixel, %3 bit").tqarg(w).tqarg(h).tqarg(d);
 }
 
 
@@ -1043,7 +1043,7 @@ const TQString ImageCanvas::scaleKindString()
         return i18n("Fit Height");
         break;
     case ZOOM:
-        return i18n("Zoom to %1 %%").arg( TQString::number(getScaleFactor()));
+        return i18n("Zoom to %1 %%").tqarg( TQString::number(getScaleFactor()));
         break;
     default:
         return i18n("Unknown scaling!");
@@ -1058,7 +1058,7 @@ int ImageCanvas::highlight( const TQRect& rect, const TQPen& pen, const TQBrush&
     saveRect.setRect( rect.x()-2, rect.y()-2, rect.width()+4, rect.height()+4 );
     d->highlightRects.append( saveRect );
 
-    int idx = d->highlightRects.findIndex(saveRect);
+    int idx = d->highlightRects.tqfindIndex(saveRect);
 
     TQRect targetRect = scale_matrix.map( rect );
 

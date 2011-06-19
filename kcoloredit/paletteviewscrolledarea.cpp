@@ -38,8 +38,8 @@
 
 PaletteViewScrolledArea::PaletteViewScrolledArea(const int defaultCellWidth,
 	const int defaultCellHeight, const int cellSpacing, TQScrollBar* scrollBar,
-	TQScrollBar* hScrollBar, KColorEditView* view, TQWidget* parent, const char* name)
-	: TQFrame(parent, name) {
+	TQScrollBar* hScrollBar, KColorEditView* view, TQWidget* tqparent, const char* name)
+	: TQFrame(tqparent, name) {
 	this->defaultCellWidth = defaultCellWidth;
 	this->defaultCellHeight = defaultCellHeight;
 	this->cellSpacing = cellSpacing;
@@ -73,11 +73,11 @@ void PaletteViewScrolledArea::slotViewColorNames(bool viewColorNames) {
 
 void PaletteViewScrolledArea::redraw() {
 	//setCellsSizes();
-	repaintPalette();
+	tqrepaintPalette();
 }
 
-void PaletteViewScrolledArea::repaintPalette() {
-	repaint(false);
+void PaletteViewScrolledArea::tqrepaintPalette() {
+	tqrepaint(false);
 }
 
 void PaletteViewScrolledArea::checkSelectionAutoScroll(const int mousePosY) {
@@ -106,7 +106,7 @@ void PaletteViewScrolledArea::slotScrollTimeout() {
 		else
 			setSelection(selectionEnd, selectionBegin);
 		checkSelectionAutoScroll(cursorPoint.y());
-		repaintPalette();
+		tqrepaintPalette();
 	}
 }
 
@@ -220,7 +220,7 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	setCellsSizes();
 	TQPixmap pixmap(size());
 	TQPainter painter;
-	painter.begin(&pixmap, this);
+	painter.tqbegin(TQT_TQPAINTDEVICE(&pixmap), this);
 	TQFontMetrics fontMetrics = painter.fontMetrics();
 	int maxLineWidth;
 	if(viewColorNames) {
@@ -249,12 +249,12 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	int lastRow = (posY + height() - 1 + rowHeight - 1)/rowHeight;
 	if(viewColorNames)
 		painter.fillRect(0, 0, rowWidth, height(),
-        TQBrush( TQFrame::palette().active().base() ));
-	TQBrush normalBackgroundBrush(TQFrame::palette().active().background());
-	TQBrush selectedBackgroundBrush(TQFrame::palette().active().highlight());
+        TQBrush( TQFrame::tqpalette().active().base() ));
+	TQBrush normalBackgroundBrush(TQFrame::tqpalette().active().background());
+	TQBrush selectedBackgroundBrush(TQFrame::tqpalette().active().highlight());
 	TQBrush foregroundBrush;
-	TQBrush cursorBrush(TQFrame::palette().active().foreground());
-	TQPen backgroundPen(TQFrame::palette().active().foreground());
+	TQBrush cursorBrush(TQFrame::tqpalette().active().foreground());
+	TQPen backgroundPen(TQFrame::tqpalette().active().foreground());
 	int min = selectionMin();
 	int max = selectionMax();
 	int fontAscent = fontMetrics.ascent();

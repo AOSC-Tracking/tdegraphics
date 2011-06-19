@@ -29,6 +29,7 @@
  */
 class KZColorSelector : public KSelector {
    Q_OBJECT
+  TQ_OBJECT
 	
 public:
 	/** Selector type constants */
@@ -37,7 +38,7 @@ public:
 	       TYPE_V = 2 };
 
 	/** Constructs the widget */
-	KZColorSelector(Orientation o, TQWidget *parent=0, const char *name=0);
+	KZColorSelector(Qt::Orientation o, TQWidget *tqparent=0, const char *name=0);
 	~KZColorSelector();
 	/** Sets the selector type */
 	void setType(const int type);

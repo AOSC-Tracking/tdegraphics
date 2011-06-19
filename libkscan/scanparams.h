@@ -42,16 +42,17 @@ class TQPushButton;
 class TQCheckBox;
 class TQButtonGroup;
 
-typedef enum { ID_SANE_DEBUG, ID_QT_IMGIO, ID_SCAN } ScanMode;
+typedef enum { ID_SANE_DEBUG, ID_TQT_IMGIO, ID_SCAN } ScanMode;
 
-class ScanParams : public QVBox
+class ScanParams : public TQVBox
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   ScanParams( TQWidget *parent, const char *name = 0);
+   ScanParams( TQWidget *tqparent, const char *name = 0);
    ~ScanParams();
 #if 0
-   TQSize sizeHint( );
+   TQSize tqsizeHint( );
 #endif
    bool connectDevice( KScanDevice* );
 
@@ -60,7 +61,7 @@ public:
 public slots:
 /**
  * In this slot, a custom scan window can be set, e.g. through a preview
- * image with a area selector. The QRect-param needs to contain values
+ * image with a area selector. The TQRect-param needs to contain values
  * between 0 and 1000, which are interpreted as tenth of percent of the
  * whole image dimensions.
  **/

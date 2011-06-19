@@ -88,9 +88,9 @@ my %counter2;
 my %counter3;
 
 # Read hashtable size
-my $readSize1 = `find -type f | xargs grep -I DontDelete | grep -v KSVG:: | grep Function`;
-my $readSize2 = `find -type f | xargs grep -I DontDelete | grep -v KSVG:: | grep -v Function`;
-my $readSize3 = `find -type f | xargs grep -I DontDelete | grep KSVG::`;
+my $readSize1 = `tqfind -type f | xargs grep -I DontDelete | grep -v KSVG:: | grep Function`;
+my $readSize2 = `tqfind -type f | xargs grep -I DontDelete | grep -v KSVG:: | grep -v Function`;
+my $readSize3 = `tqfind -type f | xargs grep -I DontDelete | grep KSVG::`;
 
 my @result1 = split(/.\//, $readSize1);
 my @result2 = split(/.\//, $readSize2);
@@ -100,9 +100,9 @@ my @result3 = split(/.\//, $readSize3);
 # calcSize1 = print out all prototype hashtables
 # calcSize2 = print out all non-prototype hashtables
 # calcSize3 = print out all svg*constructors hashtables
-my $calcSize1 = `find -type f | xargs grep -I s_hashTable | grep \@begin | grep -v generateddata | grep -v Constructor | grep -v Impl:: | grep -v Bridge::`;
-my $calcSize2 = `find -type f | xargs grep -I s_hashTable | grep \@begin | grep -v generateddata | grep -v Constructor | grep -v Proto::`;
-my $calcSize3 = `find -type f | xargs grep -I s_hashTable | grep \@begin | grep -v generateddata | grep Constructor`;
+my $calcSize1 = `tqfind -type f | xargs grep -I s_hashTable | grep \@begin | grep -v generateddata | grep -v Constructor | grep -v Impl:: | grep -v Bridge::`;
+my $calcSize2 = `tqfind -type f | xargs grep -I s_hashTable | grep \@begin | grep -v generateddata | grep -v Constructor | grep -v Proto::`;
+my $calcSize3 = `tqfind -type f | xargs grep -I s_hashTable | grep \@begin | grep -v generateddata | grep Constructor`;
 
 # Bring in suitable form
 calcSize($calcSize1, \%counter1, 5);

@@ -104,11 +104,11 @@ PMGlobalSettings::~PMGlobalSettings( )
 {
 }
 
-PMMetaObject* PMGlobalSettings::metaObject( ) const
+PMMetaObject* PMGlobalSettings::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "GlobalSettings", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "GlobalSettings", Base::tqmetaObject( ),
                                         createNewGlobalSettings );
       s_pMetaObject->addProperty(
          new PMGlobalSettingsProperty( "adcBailout", &PMGlobalSettings::setAdcBailout, &PMGlobalSettings::adcBailout ) );
@@ -432,9 +432,9 @@ void PMGlobalSettings::setRecursionLimit( int c )
    }
 }
 
-PMDialogEditBase* PMGlobalSettings::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMGlobalSettings::editWidget( TQWidget* tqparent ) const
 {
-   return new PMGlobalSettingsEdit( parent );
+   return new PMGlobalSettingsEdit( tqparent );
 }
 
 void PMGlobalSettings::restoreMemento( PMMemento* s )

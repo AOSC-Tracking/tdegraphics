@@ -177,7 +177,7 @@ KScanOption::KScanOption( const KScanOption &so ) :
    /* the widget is not copied ! */
    internal_widget = 0;
    
-   if( ! ( desc && name ) )
+   if ( ! ( desc && !name.isNull() ) )
    {
       kdWarning( 29000) << "Trying to copy a not healthy option (no name nor desc)" << endl;
       return;
@@ -317,15 +317,15 @@ void KScanOption::slRedrawWidget( KScanOption *so )
 	  break;
 	case GAMMA_TABLE:
  	 	  		/* Widget Type is GammaTable */
-	  // w = new TQSlider( parent, "AUTO_GAMMA" );
+	  // w = new TQSlider( tqparent, "AUTO_GAMMA" );
 	  break;
 	case STR_LIST:	 		
-	  // w = comboBox( parent, text );
+	  // w = comboBox( tqparent, text );
 	  ((KScanCombo*)w)->slSetEntry( so->get() ); 	  		
  	 	  		/* Widget Type is Selection Box */
 	  break;
 	case STRING:
-	  // w = entryField( parent, text );
+	  // w = entryField( tqparent, text );
 	  ((KScanEntry*)w)->slSetEntry( so->get() ); 	  	 	
  	  	 		/* Widget Type is Selection Box */
 	  break;
@@ -732,7 +732,7 @@ bool KScanOption::set( const TQCString& c_string )
    TQRegExp re( "\\d+, \\d+, \\d+" );
    re.setMinimal(true);
    
-   if( TQString(c_string).contains( re ))
+   if( TQString(c_string).tqcontains( re ))
    {
       TQStringList relist = TQStringList::split( ", ", TQString(c_string) );
       
@@ -1059,7 +1059,7 @@ bool KScanOption::getRange( double *min, double *max, double *q ) const
    return( ret );
 }
 
-TQWidget *KScanOption::createWidget( TQWidget *parent, const TQString& w_desc,
+TQWidget *KScanOption::createWidget( TQWidget *tqparent, const TQString& w_desc,
                                     const TQString& tooltip )
 {
   TQStrList list;
@@ -1084,31 +1084,31 @@ TQWidget *KScanOption::createWidget( TQWidget *parent, const TQString& w_desc,
     {
     case BOOL:
       /* Widget Type is ToggleButton */
-      w = new  TQCheckBox( text, parent, "AUTO_TOGGLE_BUTTON" );
+      w = new  TQCheckBox( text, tqparent, "AUTO_TOGGLE_BUTTON" );
       connect( w, TQT_SIGNAL(clicked()), this,
 	       TQT_SLOT(slWidgetChange()));
       break;
     case SINGLE_VAL:
       /* Widget Type is Entry-Field */
-      w = 0; // new QEntryField(
+      w = 0; // new TQEntryField(
       kdDebug(29000) << "can not create widget for SINGLE_VAL!" << endl;
       break;
     case RANGE:
       /* Widget Type is Slider */
-      w = KSaneSlider( parent, text );
+      w = KSaneSlider( tqparent, text );
       break;
     case GAMMA_TABLE:
       /* Widget Type is Slider */
-      // w = KSaneSlider( parent, text );
+      // w = KSaneSlider( tqparent, text );
       kdDebug(29000) << "can not create widget for GAMMA_TABLE!" << endl;
       w = 0; // No widget, needs to be a set !
       break;
     case STR_LIST:	 		
-      w = comboBox( parent, text );
+      w = comboBox( tqparent, text );
       /* Widget Type is Selection Box */
       break;
     case STRING:
-      w = entryField( parent, text );
+      w = entryField( tqparent, text );
       /* Widget Type is Selection Box */
       break;
     default:
@@ -1137,11 +1137,11 @@ TQWidget *KScanOption::createWidget( TQWidget *parent, const TQString& w_desc,
 }
 
 
-TQWidget *KScanOption::comboBox( TQWidget *parent, const TQString& text )
+TQWidget *KScanOption::comboBox( TQWidget *tqparent, const TQString& text )
 {
   TQStrList list = getList();
 
-  KScanCombo *cb = new KScanCombo( parent, text, list);
+  KScanCombo *cb = new KScanCombo( tqparent, text, list);
 
   connect( cb, TQT_SIGNAL( valueChanged( const TQCString& )), this,
 	   TQT_SLOT( slWidgetChange( const TQCString& )));
@@ -1150,9 +1150,9 @@ TQWidget *KScanOption::comboBox( TQWidget *parent, const TQString& text )
 }
 
 
-TQWidget *KScanOption::entryField( TQWidget *parent, const TQString& text )
+TQWidget *KScanOption::entryField( TQWidget *tqparent, const TQString& text )
 {
-  KScanEntry *ent = new KScanEntry( parent, text );
+  KScanEntry *ent = new KScanEntry( tqparent, text );
   connect( ent, TQT_SIGNAL( valueChanged( TQCString )), this,
 	   TQT_SLOT( slWidgetChange( TQCString )));
 	
@@ -1160,12 +1160,12 @@ TQWidget *KScanOption::entryField( TQWidget *parent, const TQString& text )
 }
 
 
-TQWidget *KScanOption::KSaneSlider( TQWidget *parent, const TQString& text )
+TQWidget *KScanOption::KSaneSlider( TQWidget *tqparent, const TQString& text )
 {
   double min, max, quant;
   getRange( &min, &max, &quant );
 
-  KScanSlider *slider = new KScanSlider( parent, text, min, max );
+  KScanSlider *slider = new KScanSlider( tqparent, text, min, max );
   /* Connect to the options change Slot */
   connect( slider, TQT_SIGNAL( valueChanged(int)), this,
 	   TQT_SLOT( slWidgetChange(int)));

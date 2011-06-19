@@ -30,8 +30,8 @@
 #include "kiconcolors.h"
 #include "palettetoolbar.h"
 
-PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
-    : KToolBar( parent, name )
+PaletteToolBar::PaletteToolBar( TQWidget *tqparent, const char *name )
+    : KToolBar( tqparent, name )
 {
   TQWidget *base = new TQWidget( this );
 
@@ -42,7 +42,7 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   m_lblPreview = new TQLabel( base );
   m_lblPreview->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_lblPreview->setFixedHeight( 64 );
-  m_lblPreview->setAlignment( Qt::AlignHCenter|Qt::AlignVCenter );
+  m_lblPreview->tqsetAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
   TQWhatsThis::add(m_lblPreview, i18n( "Preview\n\nThis is a 1:1 preview"
       " of the current icon" ) );
   m_layout->addWidget( m_lblPreview );
@@ -50,31 +50,31 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   m_currentColorView = new TQLabel( base );
   m_currentColorView->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_currentColorView->setFixedHeight( 24 );
-  m_currentColorView->setAlignment( Qt::AlignHCenter|Qt::AlignVCenter );
+  m_currentColorView->tqsetAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
   TQWhatsThis::add(m_currentColorView, i18n( "Current color\n\nThis is the currently selected color" ) );
   m_layout->addWidget( m_currentColorView );
 
-  TQVBoxLayout *vlayout = new TQVBoxLayout( m_layout, 0 );
+  TQVBoxLayout *vtqlayout = new TQVBoxLayout( m_layout, 0 );
   TQLabel *l = new TQLabel( i18n( "System colors:" ), base );
-  vlayout->addWidget( l );
+  vtqlayout->addWidget( l );
   m_sysColors = new KSysColors( base );
   TQWhatsThis::add(m_sysColors, i18n( "System colors\n\nHere you can select"
       " colors from the KDE icon palette" ) );
 
-  vlayout->addWidget( m_sysColors );
+  vtqlayout->addWidget( m_sysColors );
 
   connect( m_sysColors, TQT_SIGNAL( newColor(uint) ), 
       TQT_SIGNAL( newColor(uint) ) );
 
-  vlayout = new TQVBoxLayout( m_layout, 0 );
+  vtqlayout = new TQVBoxLayout( m_layout, 0 );
   l = new TQLabel( i18n( "Custom colors:" ), base );
-  vlayout->addWidget( l );
+  vtqlayout->addWidget( l );
   m_customColors = new KCustomColors( base );
   TQWhatsThis::add(m_customColors, i18n( "Custom colors\n\nHere you can"
       " build a palette of custom colors.\nDouble-click on a box to edit"
       " the color" ) );
 
-  vlayout->addWidget( m_customColors );
+  vtqlayout->addWidget( m_customColors );
 
   connect( m_customColors, TQT_SIGNAL( newColor(uint) ), 
       TQT_SIGNAL( newColor(uint) ) );
@@ -86,7 +86,7 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   setMovingEnabled( false );
 }
 
-void PaletteToolBar::setOrientation( Orientation o )
+void PaletteToolBar::setOrientation( Qt::Orientation o )
 {
    if(  barPos() == Floating )
      o = o == Qt::Vertical ? Qt::Horizontal : Qt::Vertical;
@@ -112,7 +112,7 @@ void PaletteToolBar::addColors( uint n, uint *c )
 
 void PaletteToolBar::addColor( uint color )
 {
-    if( !m_sysColors->contains( color ) )
+    if( !m_sysColors->tqcontains( color ) )
         m_customColors->addColor( color );
 }
 
@@ -128,7 +128,7 @@ void PaletteToolBar::setPreviewBackground( const TQColor& colour )
 
 void PaletteToolBar::currentColorChanged(uint color)
 {
-  if(qAlpha(color) == 255)
+  if(tqAlpha(color) == 255)
   {
     m_currentColorView->setBackgroundColor(color);
   }
@@ -136,32 +136,32 @@ void PaletteToolBar::currentColorChanged(uint color)
   {
     // Show the colour as if drawn over a checkerboard pattern
     const int squareWidth = 8;
-    const uint lightColour = qRgb(255, 255, 255);
-    const uint darkColour = qRgb(127, 127, 127);
+    const uint lightColour = tqRgb(255, 255, 255);
+    const uint darkColour = tqRgb(127, 127, 127);
 
     TQPixmap pm(2 * squareWidth, 2 * squareWidth);
     TQPainter p(&pm);
 
-    double alpha = qAlpha(color) / 255.0;
+    double alpha = tqAlpha(color) / 255.0;
 
-    int r = int(qRed(color) * alpha + (1 - alpha) * qRed(lightColour) + 0.5);
-    int g = int(qGreen(color) * alpha + (1 - alpha) * qGreen(lightColour) + 0.5);
-    int b = int(qBlue(color) * alpha + (1 - alpha) * qBlue(lightColour) + 0.5);
+    int r = int(tqRed(color) * alpha + (1 - alpha) * tqRed(lightColour) + 0.5);
+    int g = int(tqGreen(color) * alpha + (1 - alpha) * tqGreen(lightColour) + 0.5);
+    int b = int(tqBlue(color) * alpha + (1 - alpha) * tqBlue(lightColour) + 0.5);
 
-    uint squareColour = qRgb(r, g, b);
+    uint squareColour = tqRgb(r, g, b);
 
-    p.setPen(Qt::NoPen);
-    p.setBrush(squareColour);
+    p.setPen(TQt::NoPen);
+    p.setBrush(TQColor(squareColour));
     p.drawRect(0, 0, squareWidth, squareWidth);
     p.drawRect(squareWidth, squareWidth, squareWidth, squareWidth);
 
-    r = int(qRed(color) * alpha + (1 - alpha) * qRed(darkColour) + 0.5);
-    g = int(qGreen(color) * alpha + (1 - alpha) * qGreen(darkColour) + 0.5);
-    b = int(qBlue(color) * alpha + (1 - alpha) * qBlue(darkColour) + 0.5);
+    r = int(tqRed(color) * alpha + (1 - alpha) * tqRed(darkColour) + 0.5);
+    g = int(tqGreen(color) * alpha + (1 - alpha) * tqGreen(darkColour) + 0.5);
+    b = int(tqBlue(color) * alpha + (1 - alpha) * tqBlue(darkColour) + 0.5);
 
-    squareColour = qRgb(r, g, b);
+    squareColour = tqRgb(r, g, b);
 
-    p.setBrush(squareColour);
+    p.setBrush(TQColor(squareColour));
     p.drawRect(squareWidth, 0, squareWidth, squareWidth);
     p.drawRect(0, squareWidth, squareWidth, squareWidth);
 

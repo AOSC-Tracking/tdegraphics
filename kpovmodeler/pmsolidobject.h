@@ -44,11 +44,11 @@ public:
    PMSolidObject( const PMSolidObject& s );
 
    /**
-    * Deletes the object and all children
+    * Deletes the object and all tqchildren
     */
    virtual ~PMSolidObject( );
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

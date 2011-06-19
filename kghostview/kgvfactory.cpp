@@ -52,8 +52,8 @@ KGVFactory *KGVFactory::s_self;
 KInstance *KGVFactory::s_instance;
 KAboutData *KGVFactory::s_aboutData;
 
-KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *widgetName,
-        TQObject *parent, const char *name,
+KParts::Part *KGVFactory::createPartObject( TQWidget *tqparentWidget, const char *widgetName,
+        TQObject *tqparent, const char *name,
         const char *className,
         const TQStringList &args_ )
 {
@@ -64,13 +64,13 @@ KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *
      *
      * as we did before.
      */
-    args << TQString::fromLatin1( className );
+    args << TQString::tqfromLatin1( className );
     if ( !strcmp( className, "Browser/View" ) ) {
 	    className = "KParts::ReadOnlyPart";
     }
-    KGVPart *part = KDEPrivate::ConcreteFactory<KGVPart>::create( parentWidget,
+    KGVPart *part = KDEPrivate::ConcreteFactory<KGVPart>::create( tqparentWidget,
             widgetName,
-            parent,
+            tqparent,
             name,
             className,
             args );

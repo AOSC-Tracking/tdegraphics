@@ -31,9 +31,10 @@ class TQSize;
 class KViewPart : public KViewPart_Iface
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+  KViewPart(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
             const char *name, const TQStringList& args);
   virtual ~KViewPart();
 
@@ -239,11 +240,12 @@ private:
 class KViewPartExtension : public KParts::BrowserExtension
 {
   Q_OBJECT
+  TQ_OBJECT
   friend class KViewPart;
 
 public:
 
-  KViewPartExtension(KViewPart *parent);
+  KViewPartExtension(KViewPart *tqparent);
   virtual ~KViewPartExtension() {}
 
 };

@@ -34,8 +34,8 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 
-PMSphereSweepEdit::PMSphereSweepEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMSphereSweepEdit::PMSphereSweepEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

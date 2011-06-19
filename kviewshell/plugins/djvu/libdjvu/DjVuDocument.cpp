@@ -1328,7 +1328,7 @@ DjVuDocument::get_thumbnail(int page_num, bool dont_decode)
       }
    }
 
-      // Apparently we're out of luck and need to decode the requested
+      // Aptqparently we're out of luck and need to decode the requested
       // page (unless it's already done and if it's allowed) and render
       // it into the thumbnail. If dont_decode is true, do not attempt
       // to create this file (because this will result in a request for data)
@@ -1368,7 +1368,7 @@ add_to_cache(const GP<DjVuFile> & f, GMap<GURL, void *> & map,
    DEBUG_MSG("DjVuDocument::add_to_cache(): url='" << url << "'\n");
    DEBUG_MAKE_INDENT(3);
    
-   if (!map.contains(url))
+   if (!map.tqcontains(url))
    {
       map[url]=0;
       cache->add_file(f);
@@ -1391,12 +1391,12 @@ DjVuDocument::add_to_cache(const GP<DjVuFile> & f)
 
 void
 DjVuDocument::notify_file_flags_changed(const DjVuFile * source,
-					long set_mask, long clr_mask)
+					long set_tqmask, long clr_tqmask)
 {
       // Don't check here if the document is initialized or not.
       // This function may be called when it's not.
       // check();
-   if (set_mask & DjVuFile::DECODE_OK)
+   if (set_tqmask & DjVuFile::DECODE_OK)
    {
       set_file_aliases(source);
       if (cache) add_to_cache((DjVuFile *) source);
@@ -1414,7 +1414,7 @@ DjVuDocument::notify_file_flags_changed(const DjVuFile * source,
       process_threqs();
    }
    
-   if (set_mask & DjVuFile::DATA_PRESENT)
+   if (set_tqmask & DjVuFile::DATA_PRESENT)
       process_threqs();		// May be we can extract thumbnails now
 }
 
@@ -1530,7 +1530,7 @@ add_file_to_djvm(const GP<DjVuFile> & file, bool page,
 {
    GURL url=file->get_url();
 
-   if (!map.contains(url))
+   if (!map.tqcontains(url))
    {
       map[url]=0;
 
@@ -1586,7 +1586,7 @@ static void
 local_get_url_names(DjVuFile * f,const GMap<GURL, void *> & map,GMap<GURL,void *> &tmpmap)
 {
    GURL url=f->get_url();
-   if (!map.contains(url) && !tmpmap.contains(url))
+   if (!map.tqcontains(url) && !tmpmap.tqcontains(url))
    {
       tmpmap[url]=0;
       f->process_incl_chunks();

@@ -20,16 +20,16 @@
  * Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef __POPPLER_QT_H__
-#define __POPPLER_QT_H__
+#ifndef __POPPLER_TQT_H__
+#define __POPPLER_TQT_H__
 
 #include "poppler-link-qt3.h"
 #include "poppler-page-transition.h"
 
-#include <qcstring.h>
-#include <qdatetime.h>
-#include <qdom.h>
-#include <qpixmap.h>
+#include <tqcstring.h>
+#include <tqdatetime.h>
+#include <tqdom.h>
+#include <tqpixmap.h>
 
 namespace Poppler {
 
@@ -53,14 +53,14 @@ class Rectangle
 class TextBox
 {
  public:
-    TextBox(const QString& text, const Rectangle &bBox) :
+    TextBox(const TQString& text, const Rectangle &bBox) :
     m_text(text), m_bBox(bBox) {};
 
-    QString getText() const { return m_text; };
+    TQString getText() const { return m_text; };
     Rectangle getBoundingBox() const { return m_bBox; };
 
   private:
-    QString m_text;
+    TQString m_text;
     Rectangle m_bBox;
 };
 
@@ -89,7 +89,7 @@ public:
   /**
     Create a new font information container
   */
-  FontInfo( const QString &fontName, const bool isEmbedded,
+  FontInfo( const TQString &fontName, const bool isEmbedded,
             const bool isSubset, Type type );
 
   FontInfo();
@@ -99,9 +99,9 @@ public:
   ~FontInfo();
 
   /**
-    The name of the font. Can be QString::null if the font has no name
+    The name of the font. Can be TQString() if the font has no name
   */
-  const QString &name() const;
+  const TQString &name() const;
 
   /**
     Whether the font is embedded in the file, or not
@@ -123,7 +123,7 @@ public:
   */
   Type type() const;
 
-  const QString &typeName() const;
+  const TQString &typeName() const;
 
 private:
   FontInfoData *data;
@@ -134,7 +134,7 @@ class Page {
   friend class Document;
   public:
     ~Page();
-    void renderToPixmap(QPixmap **q, int x, int y, int w, int h, double xres, double yres, bool doLinks = false) const;
+    void renderToPixmap(TQPixmap **q, int x, int y, int w, int h, double xres, double yres, bool doLinks = false) const;
 
     /**
       This is a convenience function that is equivalent to
@@ -143,12 +143,12 @@ class Page {
 
       \sa renderToImage()
      */
-    void renderToPixmap(QPixmap **q, int x, int y, int w, int h, bool doLinks = false) const;
+    void renderToPixmap(TQPixmap **q, int x, int y, int w, int h, bool doLinks = false) const;
 
     /**
-      \brief Render the page to a QImage using the Splash renderer
+      \brief Render the page to a TQImage using the Splash renderer
 
-     This method can be used to render the page to a QImage. It
+     This method can be used to render the page to a TQImage. It
      uses the "Splash" rendering engine.
 
      \param xres horizontal resolution of the graphics device,
@@ -157,24 +157,24 @@ class Page {
      \param yres vertical resolution of the graphics device, in
      dots per inch (defaults to 72 dpi)
 
-     \returns a QImage of the page.
+     \returns a TQImage of the page.
 
      \sa renderToPixmap()
     */
-    QImage renderToImage(double xres = 72.0, double yres = 72.0, bool doLinks = false) const;
+    TQImage renderToImage(double xres = 72.0, double yres = 72.0, bool doLinks = false) const;
 
     /**
      * Returns the size of the page in points
      **/
-    QSize pageSize() const;
+    TQSize pageSize() const;
 
     /**
     * Returns the text that is inside the Rectangle r
     * If r is a null Rectangle all text of the page is given
     **/
-    QString getText(const Rectangle &r) const;
+    TQString getText(const Rectangle &r) const;
 
-    QValueList<TextBox*> textList() const;
+    TQValueList<TextBox*> textList() const;
 
     /**
     * Returns the transition of this page
@@ -196,7 +196,7 @@ class Page {
     /**
       Gets the links of the page once it has been rendered if doLinks was true
     */
-    QValueList<Link*> links() const;
+    TQValueList<Link*> links() const;
 
   private:
     Page(const Document *doc, int index);
@@ -217,7 +217,7 @@ public:
     UseOC
   };
   
-  static Document *load(const QString & filePath);
+  static Document *load(const TQString & filePath);
   
   Page *getPage(int index) const{ return new Page(this, index); }
   
@@ -225,12 +225,12 @@ public:
   
   PageMode getPageMode() const;
   
-  bool unlock(const QCString &password);
+  bool unlock(const TQCString &password);
   
   bool isLocked() const;
   
-  QDateTime getDate( const QString & data ) const;
-  QString getInfo( const QString & data ) const;
+  TQDateTime getDate( const TQString & data ) const;
+  TQString getInfo( const TQString & data ) const;
   bool isEncrypted() const;
   bool isLinearized() const;
   bool okToPrint() const;
@@ -251,16 +251,16 @@ public:
   */
   void getPdfVersion(int *major, int *minor) const;
 
-  bool print(const QString &fileName, QValueList<int> pageList, double hDPI, double vDPI, int rotate);
+  bool print(const TQString &fileName, TQValueList<int> pageList, double hDPI, double vDPI, int rotate);
 
-  // If you are using QPrinter you can get paper size doing
-  // QPrinter dummy(QPrinter::PrinterResolution);
+  // If you are using TQPrinter you can get paper size doing
+  // TQPrinter dummy(TQPrinter::PrinterResolution);
   // dummy.setFullPage(true);
   // dummy.setPageSize(thePageSizeYouWant);
-  // QPaintDeviceMetrics metrics(&dummy);
+  // TQPaintDeviceMetrics metrics(&dummy);
   // int width = metrics.width();
   // int height = metrics.height();
-  bool print(const QString &fileName, QValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight);
+  bool print(const TQString &fileName, TQValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight);
 
   /**
     The fonts within the PDF document.
@@ -269,7 +269,7 @@ public:
     document. You may wish to use the call below if you have more
     than say 20 pages
   */
-  QValueList<FontInfo> fonts() const;
+  TQValueList<FontInfo> fonts() const;
 
   /**
     \overload
@@ -280,7 +280,7 @@ public:
 
     \return false if the end of the document has been reached
   */
-  bool scanForFonts( int numPages, QValueList<FontInfo> *fontList ) const;
+  bool scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) const;
 
   /**
     Gets the TOC of the Document, it is application responsabiliy to delete
@@ -295,9 +295,9 @@ public:
 
      \returns NULL if the Document does not have TOC
   */
-  QDomDocument *toc() const;
+  TQDomDocument *toc() const;
 
-  LinkDestination *linkDestination( const QString &name );
+  LinkDestination *linkDestination( const TQString &name );
 
   ~Document();
   

@@ -52,7 +52,7 @@ class SVGEllipseElementImpl;
  * center point and two radii.
  *
  * For more info look here : <a href =
- * "http://www.w3.org/TR/SVG/shapes.html#EllipseElement">9.4 The
+ * "http://www.w3.org/TR/SVG/tqshapes.html#EllipseElement">9.4 The
  * 'ellipse' element</a>.
  */
 class SVGEllipseElement : public SVGElement,

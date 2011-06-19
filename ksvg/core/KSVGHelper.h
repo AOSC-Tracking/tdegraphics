@@ -73,12 +73,12 @@ public:
 
 	static unsigned int toArtColor(const TQColor &color)
 	{
-		return (qRed(color.rgb()) << 24) | (qGreen(color.rgb()) << 16) | ( qBlue(color.rgb()) << 8) | (qAlpha(color.rgb()));
+		return (tqRed(color.rgb()) << 24) | (tqGreen(color.rgb()) << 16) | ( tqBlue(color.rgb()) << 8) | (tqAlpha(color.rgb()));
 	}
 
 	static unsigned int toArtColor(const TQColor &color, short opacity)
 	{
-		return (qRed(color.rgb()) << 24) | (qGreen(color.rgb()) << 16) | ( qBlue(color.rgb()) << 8) | (opacity);
+		return (tqRed(color.rgb()) << 24) | (tqGreen(color.rgb()) << 16) | ( tqBlue(color.rgb()) << 8) | (opacity);
 	}
 
 	static int linearRGBFromsRGB(int sRGB8bit) { return m_linearRGBFromsRGB[sRGB8bit]; }

@@ -31,17 +31,17 @@
 
 #include "aboutwidget.h"
 
-AboutWidget::AboutWidget( TQWidget *parent, const char *name )
-    : TQVBox( parent, name, Qt::WShowModal )
+AboutWidget::AboutWidget( TQWidget *tqparent, const char *name )
+    : TQVBox( tqparent, name, TQt::WShowModal )
 {
     KWin::setType( winId(), NET::Override );
     KWin::setState( winId(), NET::SkipTaskbar );
 
     setFrameStyle( WinPanel | Raised );
 
-    TQGroupBox *gBox = new TQGroupBox( 1, Horizontal, this);
+    TQGroupBox *gBox = new TQGroupBox( 1,Qt::Horizontal, this);
     gBox->setGeometry( 10, 10, width()-20, height()-20 );
-    gBox->setAlignment( AlignHCenter );
+    gBox->tqsetAlignment( AlignHCenter );
     gBox->installEventFilter( this );
 
     gBox->setPalette( TQPalette( TQColor( white ) ) );
@@ -57,14 +57,14 @@ AboutWidget::AboutWidget( TQWidget *parent, const char *name )
 
     TQLabel *authors = new TQLabel("Kuickshow " KUICKSHOWVERSION
 				 " was brought to you by", gBox);
-    authors->setAlignment( AlignCenter );
+    authors->tqsetAlignment( AlignCenter );
 
     m_homepage = new KURLWidget("Carsten Pfeiffer", gBox);
     m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
-    m_homepage->setAlignment( AlignCenter );
+    m_homepage->tqsetAlignment( AlignCenter );
 
     TQLabel *copy = new TQLabel("(C) 1998-2006", gBox);
-    copy->setAlignment( AlignCenter );
+    copy->tqsetAlignment( AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
     if ( im->loadImage( file ) )
@@ -83,8 +83,8 @@ AboutWidget::~AboutWidget()
 bool AboutWidget::eventFilter( TQObject *o, TQEvent *e )
 {
     if ( e->type() == TQEvent::MouseButtonPress ) {
-        TQMouseEvent *ev = static_cast<TQMouseEvent*>( e );
-        if ( !m_homepage->geometry().contains( ev->pos() ) ) {
+        TQMouseEvent *ev = TQT_TQMOUSEEVENT( e );
+        if ( !m_homepage->tqgeometry().tqcontains( ev->pos() ) ) {
             deleteLater();
             return true;
         }

@@ -32,7 +32,7 @@ void PMSplineMemento::setSplinePoints( const TQValueList<PMVector>& v )
 {
    if( !m_bSplinePointsSaved )
    {
-      // Direct assignment does not work with Qt 2.3.x
+      // Direct assignment does not work with TQt 2.3.x
       // The list will be changed later in a graphical
       // change because TQValueList::detach( ) is called
       // too late!

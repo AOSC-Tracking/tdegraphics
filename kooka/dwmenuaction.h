@@ -22,8 +22,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -35,7 +35,7 @@
 
 /**
  * This class is just a helper class since the KDockWidget classes do not yet
- * export KActions but only a QPopup-Pointer, which is quite useless in case
+ * export KActions but only a TQPopup-Pointer, which is quite useless in case
  * you have a xml-file driven gui.
  * This class provides Actions for show and hide parts of the GUI (dockwidgets)
  * Maybe that classes can be removed as soon the DockWidget know Actions
@@ -43,10 +43,11 @@
 class dwMenuAction:public KToggleAction
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    dwMenuAction( const TQString& text,
 		 const KShortcut& cut = KShortcut(),
-		 KDockWidget *dw=0, TQObject* parent = 0,
+		 KDockWidget *dw=0, TQObject* tqparent = 0,
 		 KDockMainWindow * mw=0, const char* name = 0 );
    virtual ~dwMenuAction();
 

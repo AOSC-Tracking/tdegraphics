@@ -38,11 +38,12 @@ class KuickFile;
 class ImageWindow : public ImlibWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  ImageWindow( ImData *_idata, ImlibData *id, TQWidget *parent=0,
+  ImageWindow( ImData *_idata, ImlibData *id, TQWidget *tqparent=0,
 	       const char *name=0 );
-  ImageWindow( ImData *_idata=0, TQWidget *parent=0, const char *name=0 );
+  ImageWindow( ImData *_idata=0, TQWidget *tqparent=0, const char *name=0 );
 
   bool 		showNextImage( KuickFile * file );
   bool 		showNextImage( const KURL& url );
@@ -158,7 +159,7 @@ signals:
 private:
   int 		desktopWidth( bool totalScreen = false ) const;
   int 		desktopHeight( bool totalScreen = false ) const;
-  QSize		maxImageSize() const;
+  TQSize		maxImageSize() const;
   void          setupActions();
   void 		setPopupMenu();
   bool          isCursorHidden() const;

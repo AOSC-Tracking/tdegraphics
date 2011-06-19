@@ -21,8 +21,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -82,7 +82,7 @@
 #define STARTUP_IMG_SELECTION   "SelectedImageOnStartup"
 
 
-KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToUse)
+KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceToUse)
    : TQObject(),
      m_ocrResultImg(0),
      ocrFabric(0),
@@ -93,21 +93,21 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
      m_dockRecent(0),
      m_dockPreview(0),
      m_dockOCRText(0),
-     m_mainWindow(parent),
+     m_mainWindow(tqparent),
      m_ocrResEdit(0)
 {
    KIconLoader *loader = KGlobal::iconLoader();
    scan_params = 0L;
    preview_canvas = 0L;
 
-   m_mainDock = parent->createDockWidget( "Kookas MainDock",
+   m_mainDock = tqparent->createDockWidget( "Kookas MainDock",
                                           loader->loadIcon( "folder_image", KIcon::Small ),
                                           0L, i18n("Image Viewer"));
    m_mainDock->setEnableDocking(KDockWidget::DockNone );
    m_mainDock->setDockSite( KDockWidget::DockFullSite );
 
-   parent->setView( m_mainDock);
-   parent->setMainDockWidget( m_mainDock);
+   tqparent->setView( m_mainDock);
+   tqparent->setMainDockWidget( m_mainDock);
 
    img_canvas  = new ImageCanvas( m_mainDock );
    img_canvas->setMinimumSize(100,200);
@@ -121,7 +121,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    m_mainDock->setWidget( img_canvas );
 
    /** Thumbview **/
-   m_dockThumbs = parent->createDockWidget( "Thumbs",
+   m_dockThumbs = tqparent->createDockWidget( "Thumbs",
 					    loader->loadIcon( "thumbnail", KIcon::Small ),
 					    0L,  i18n("Thumbnails"));
    m_dockThumbs->setDockSite(KDockWidget::DockFullSite );
@@ -136,7 +136,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    /** Packager Dock **/
    /* A new packager to contain the already scanned images */
-   m_dockPackager = parent->createDockWidget( "Scanpackager",
+   m_dockPackager = tqparent->createDockWidget( "Scanpackager",
 					    loader->loadIcon( "palette_color", KIcon::Small ),
 					    0L, i18n("Gallery"));
    m_dockPackager->setDockSite(KDockWidget::DockFullSite);
@@ -155,7 +155,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    /*
     * Create a Kombobox that holds the last folders visible even on the preview page
     */
-   m_dockRecent  = parent->createDockWidget( "Recent",
+   m_dockRecent  = tqparent->createDockWidget( "Recent",
 					     loader->loadIcon( "image", KIcon::Small ),
 					     0L, i18n("Gallery Folders"));
 
@@ -164,7 +164,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    TQHBox *recentBox = new TQHBox( m_dockRecent );
    recentBox->setMargin(KDialog::marginHint());
    TQLabel *lab = new TQLabel( i18n("Gallery:"), recentBox );
-   lab->setSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
+   lab->tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
    recentFolder = new ImageNameCombo( recentBox );
 
    m_dockRecent->setWidget( recentBox );
@@ -184,14 +184,14 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 	    packager, TQT_SLOT(slotSelectDirectory( const TQString& )));
 
    /* the object from the kscan lib to handle low level scanning */
-   m_dockScanParam = parent->createDockWidget( "Scan Parameter",
+   m_dockScanParam = tqparent->createDockWidget( "Scan Parameter",
  					     loader->loadIcon( "folder", KIcon::Small ),
  					     0L, i18n("Scan Parameter"));
    //
    m_dockScanParam->setDockSite(KDockWidget::DockFullSite);
 
    m_dockScanParam->setWidget( 0 ); // later
-   sane = new KScanDevice( m_dockScanParam );
+   sane = new KScanDevice( TQT_TQOBJECT(m_dockScanParam) );
    Q_CHECK_PTR(sane);
 
    m_dockScanParam->manualDock( m_dockRecent,              // dock target
@@ -203,7 +203,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
     * the complete scanner options dialog
     * scan_params must be zero for that */
 
-   m_dockPreview = parent->createDockWidget( "Preview ",
+   m_dockPreview = tqparent->createDockWidget( "Preview ",
 					   loader->loadIcon( "viewmag", KIcon::Small ),
 					   0L, i18n("Scan Preview"));
 
@@ -222,7 +222,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    /* Create a text editor part for ocr results */
 
-   m_dockOCRText = parent->createDockWidget( "OCRResults",
+   m_dockOCRText = tqparent->createDockWidget( "OCRResults",
                                              loader->loadIcon("edit", KIcon::Small ),
                                              0L, i18n("OCR Result Text"));
    // m_textEdit
@@ -235,7 +235,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
                                   KDockWidget::DockCenter, // dock site
                                   100 );                  // relation target/this (in percent)
 
-       m_ocrResEdit->setTextFormat( Qt::PlainText );
+       m_ocrResEdit->setTextFormat( TQt::PlainText );
        m_ocrResEdit->setWordWrap( TQTextEdit::NoWrap );
        // m_dockOCRText->hide();
    }
@@ -277,7 +277,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    packager->openRoots();
 
-   /* Status Bar */
+   /* tqStatus Bar */
    KStatusBar *statBar = m_mainWindow->statusBar();
 
    // statBar->insertItem(TQString("1"), SBAR_ZOOM,  0, true );
@@ -472,7 +472,7 @@ void KookaView::print()
     printer.setUsePrinterResolution(true);
     printer.addDialogPage( new ImgPrintDialog( img ));
 
-    if( printer.setup( m_mainWindow, i18n("Print %1").arg(img->localFileName().section('/', -1)) ))
+    if( printer.setup( m_mainWindow, i18n("Print %1").tqarg(img->localFileName().section('/', -1)) ))
     {
 	KookaPrint kookaprint( &printer );
 	kookaprint.printImage(img);
@@ -564,8 +564,8 @@ void KookaView::startOCR( KookaImage *img )
 	  connect( ocrFabric, TQT_SIGNAL( newOCRResultText( const TQString& )),
 		   m_dockOCRText, TQT_SLOT( show() ));
 	  
-          connect( ocrFabric, TQT_SIGNAL( repaintOCRResImage( )),
-                   img_canvas, TQT_SLOT(repaint()));
+          connect( ocrFabric, TQT_SIGNAL( tqrepaintOCRResImage( )),
+                   img_canvas, TQT_SLOT(tqrepaint()));
 
 	  connect( ocrFabric, TQT_SIGNAL( clearOCRResultText()),
 		   m_ocrResEdit, TQT_SLOT(clear()));
@@ -626,7 +626,7 @@ void KookaView::slScanStart( )
       KLed *led = scan_params->operationLED();
       if( led )
       {
-	 led->setColor( Qt::red );
+	 led->setColor( TQt::red );
 	 led->setState( KLed::On );
       }
    }
@@ -640,7 +640,7 @@ void KookaView::slAcquireStart( )
       KLed *led = scan_params->operationLED();
       if( led )
       {
-	 led->setColor( Qt::green );
+	 led->setColor( TQt::green );
       }
    }
 }
@@ -663,7 +663,7 @@ void KookaView::slScanFinished( KScanStat stat )
       KLed *led = scan_params->operationLED();
       if( led )
       {
-	 led->setColor( Qt::green );
+	 led->setColor( TQt::green );
 	 led->setState( KLed::Off );
       }
    }
@@ -842,7 +842,7 @@ void KookaView::slShowAImage( KookaImage *img )
        ocrFabric->slSetImage( img );
    }
 
-   /* Status Bar */
+   /* tqStatus Bar */
    KStatusBar *statBar = m_mainWindow->statusBar();
    if( img_canvas )
        statBar->changeItem( img_canvas->imageInfoString(), StatusImage );
@@ -876,7 +876,7 @@ void KookaView::slShowThumbnails(KFileTreeViewItem *dirKfi, bool forceRedraw )
       }
       else
       {
-	 kftvi = static_cast<KFileTreeViewItem*>(static_cast<TQListViewItem*>(kftvi)->parent());
+	 kftvi = static_cast<KFileTreeViewItem*>(static_cast<TQListViewItem*>(kftvi)->tqparent());
 	 dirKfi = kftvi;
 	 forceRedraw = true;
 	 packager->setSelected( static_cast<TQListViewItem*>(dirKfi), true );
@@ -913,7 +913,7 @@ void KookaView::slShowThumbnails(KFileTreeViewItem *dirKfi, bool forceRedraw )
  */
 void KookaView::slStartLoading( const KURL& url )
 {
-   emit( signalChangeStatusbar( i18n("Loading %1" ).arg( url.prettyURL() ) ));
+   emit( signalChangeStatusbar( i18n("Loading %1" ).tqarg( url.prettyURL() ) ));
 
    // if( m_stack->visibleWidget() != img_canvas )
    // {

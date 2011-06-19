@@ -34,12 +34,13 @@ class TQCheckBox;
 class PMPlaneEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMPlaneEdit with parent and name
+    * Creates a PMPlaneEdit with tqparent and name
     */
-   PMPlaneEdit( TQWidget* parent, const char* name = 0 );
+   PMPlaneEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -38,8 +38,8 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 
-PMBumpMapEdit::PMBumpMapEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMBumpMapEdit::PMBumpMapEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -307,7 +307,7 @@ void PMBumpMapEdit::slotImageFileNameChanged( const TQString& /*a*/ )
 
 void PMBumpMapEdit::slotImageFileBrowseClicked( )
 {
-   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString(), TQString() );
 
    if( !str.isEmpty() )
    {

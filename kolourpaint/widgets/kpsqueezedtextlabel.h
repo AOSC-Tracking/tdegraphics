@@ -34,15 +34,16 @@
 
 // KSqueezedTextLabel done properly - squeeze at the end of the string,
 // not the middle.
-class kpSqueezedTextLabel : public QLabel
+class kpSqueezedTextLabel : public TQLabel
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpSqueezedTextLabel (TQWidget *parent, const char *name = 0);
-    kpSqueezedTextLabel (const TQString &text, TQWidget *parent, const char *name = 0);
+    kpSqueezedTextLabel (TQWidget *tqparent, const char *name = 0);
+    kpSqueezedTextLabel (const TQString &text, TQWidget *tqparent, const char *name = 0);
 
-    virtual TQSize minimumSizeHint () const;
+    virtual TQSize tqminimumSizeHint () const;
 
     // TODO: maybe text() should return the full text?
     TQString fullText () const;

@@ -47,10 +47,11 @@ class KPopupMenu;
 class KKameraConfig : public KCModule
 {
 	Q_OBJECT
+  TQ_OBJECT
 	friend class KameraDeviceSelectDialog;
 
 public:
-	KKameraConfig(TQWidget *parent, const char *name, const TQStringList &);
+	KKameraConfig(TQWidget *tqparent, const char *name, const TQStringList &);
 	virtual ~KKameraConfig();
 
 	// KCModule interface methods

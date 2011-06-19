@@ -29,11 +29,12 @@ class KFileItem;
 class FileWidget : public KDirOperator
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum WhichItem { Previous, Next, Current };
 
-    FileWidget( const KURL& url, TQWidget *parent = 0L, const char *name = 0L );
+    FileWidget( const KURL& url, TQWidget *tqparent = 0L, const char *name = 0L );
     ~FileWidget();
 
     bool hasFiles() const;
@@ -70,7 +71,7 @@ protected:
     virtual bool eventFilter( TQObject *o, TQEvent * );
     virtual void resizeEvent( TQResizeEvent * );
     virtual void activatedMenu( const KFileItem *, const TQPoint& );
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
 
 private slots:
     void slotReturnPressed( const TQString& text );

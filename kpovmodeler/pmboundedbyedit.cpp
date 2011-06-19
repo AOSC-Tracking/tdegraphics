@@ -23,8 +23,8 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMBoundedByEdit::PMBoundedByEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMBoundedByEdit::PMBoundedByEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

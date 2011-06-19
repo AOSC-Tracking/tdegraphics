@@ -34,11 +34,12 @@ class TQCheckBox;
 class PMObjectSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMObjectSettings( TQWidget* parent, const char* name = 0 );
+   PMObjectSettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

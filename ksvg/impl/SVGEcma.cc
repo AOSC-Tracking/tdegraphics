@@ -49,7 +49,7 @@ using namespace KSVG;
  nodeName			SVGDOMNodeBridge::NodeName			DontDelete|ReadOnly
  nodeValue			SVGDOMNodeBridge::NodeValue			DontDelete
  nodeType			SVGDOMNodeBridge::NodeType			DontDelete|ReadOnly
- parentNode			SVGDOMNodeBridge::ParentNode		DontDelete|ReadOnly
+ tqparentNode			SVGDOMNodeBridge::ParentNode		DontDelete|ReadOnly
  childNodes			SVGDOMNodeBridge::ChildNodes		DontDelete|ReadOnly
  firstChild			SVGDOMNodeBridge::FirstChild		DontDelete|ReadOnly
  lastChild			SVGDOMNodeBridge::LastChild			DontDelete|ReadOnly
@@ -74,7 +74,7 @@ using namespace KSVG;
  isSupported			SVGDOMNodeBridge::IsSupported			DontDelete|Function 2
  addEventListener		SVGDOMNodeBridge::AddEventListener		DontDelete|Function 3
  removeEventListener	SVGDOMNodeBridge::RemoveEventListener	DontDelete|Function 3
- contains				SVGDOMNodeBridge::Contains				DontDelete|Function 1
+ tqcontains				SVGDOMNodeBridge::Contains				DontDelete|Function 1
  getNodeName			SVGDOMNodeBridge::GetNodeName			DontDelete|Function 0
  getNodeValue			SVGDOMNodeBridge::GetNodeValue			DontDelete|Function 0
  getNodeType			SVGDOMNodeBridge::GetNodeType			DontDelete|Function 0
@@ -150,13 +150,13 @@ void SVGDOMNodeBridge::putValueProperty(ExecState *exec, int token, const Value 
 // triggered by one of the child nodes
 void updateTextItem(ExecState *exec, const DOM::Node node)
 {
-	DOM::Node parent;
-	while(!(parent = node.parentNode()).isNull())
+	DOM::Node tqparent;
+	while(!(tqparent = node.parentNode()).isNull())
 	{
-		DOM::DOMString name = parent.nodeName();
+		DOM::DOMString name = tqparent.nodeName();
 		if(name == "text" || name == "tspan" || name == "tref")
 		{
-			SVGHelperImpl::updateItem(exec, parent);
+			SVGHelperImpl::updateItem(exec, tqparent);
 			break;
 		}
 	}
@@ -169,19 +169,19 @@ void removeItem(ExecState *exec, DOM::Node &node)
 	SVGDocumentImpl *doc = KSVG::Window::retrieveActive(exec)->doc();
 
 	// Update canvas
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(doc->getElementFromHandle(node.handle()));
-	if(shape && shape->item())
-		doc->canvas()->removeItem(shape->item());
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(doc->getElementFromHandle(node.handle()));
+	if(tqshape && tqshape->item())
+		doc->canvas()->removeItem(tqshape->item());
 }
 
 // parseXML + getURL() need all these 5 functions to work properly
 void correctHandles(SVGElementImpl *main, DOM::Node &node)
 {
 	DOM::Element old(node.handle());
-	DOM::Element *replace = static_cast<DOM::Element *>(main->ownerDoc()->getElementFromHandle(node.handle()));
+	DOM::Element *tqreplace = static_cast<DOM::Element *>(main->ownerDoc()->getElementFromHandle(node.handle()));
 
-	if(replace && node.nodeType() == DOM::Node::ELEMENT_NODE)
-		*replace = old;
+	if(tqreplace && node.nodeType() == DOM::Node::ELEMENT_NODE)
+		*tqreplace = old;
 
 	if(node.hasChildNodes())
 	{
@@ -304,7 +304,7 @@ Value appendHelper(ExecState *exec, DOM::Node node, DOM::Node newNode)
 
 		// Get some SVGElementImpl's
 		SVGElementImpl *nodeElement = doc->getElementFromHandle(newNode.handle());
-		// TODO : extra check needed to see if the new elements parent is already appended
+		// TODO : extra check needed to see if the new elements tqparent is already appended
 		// in the doc. Not really nice, should be some other way? (Rob)
 		if(nodeElement && !nodeElement->parentNode().parentNode().isNull())
 		{
@@ -405,7 +405,7 @@ Value SVGDOMNodeBridgeProtoFunc::call(ExecState *exec, Object &thisObj, const Li
 			{
 				SVGEvent::EventId eventId = SVGEvent::typeToId(args[0].toString(exec).string());
 				if(eventId != SVGEvent::UNKNOWN_EVENT)
-					element->setEventListener(eventId, new KSVGEcmaEventListener(Object::dynamicCast(args[1]), TQString::null, doc->ecmaEngine()));
+					element->setEventListener(eventId, new KSVGEcmaEventListener(Object::dynamicCast(args[1]), TQString(), doc->ecmaEngine()));
 			}
 			return Undefined();
 		}
@@ -556,7 +556,7 @@ Value SVGDOMElementBridgeProtoFunc::call(ExecState *exec, Object &thisObj, const
 		{
 			// For now, we strip the NS part (Rob)
 			DOM::DOMString attr = args[1].toString(exec).string();
-			int pos = attr.string().find(':');
+			int pos = attr.string().tqfind(':');
 			if(pos > -1)
 				attr = attr.string().mid(pos + 1);
 

@@ -38,12 +38,13 @@ class kpToolAction : public KToggleAction,
                      public kpSingleKeyTriggersActionInterface
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpToolAction (const TQString &text,
         const TQString &pic, const KShortcut &shortcut,
         const TQObject *receiver, const char *slot,
-        TQObject *parent, const char *name);
+        TQObject *tqparent, const char *name);
     virtual ~kpToolAction ();
 
 

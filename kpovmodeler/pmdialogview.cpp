@@ -39,8 +39,8 @@
 #include <tqscrollview.h>
 #include <tqlabel.h>
 
-PMDialogEditContent::PMDialogEditContent( TQWidget* parent, const char* name )
-      : TQScrollView( parent, name )
+PMDialogEditContent::PMDialogEditContent( TQWidget* tqparent, const char* name )
+      : TQScrollView( tqparent, name )
 {
    m_pContents = 0;
    setVScrollBarMode( AlwaysOff );
@@ -69,7 +69,7 @@ void PMDialogEditContent::calculateSize( )
    int fw = lineWidth( ) * 2;
    if( m_pContents )
    {
-      TQSize newSize = m_pContents->minimumSizeHint( );
+      TQSize newSize = m_pContents->tqminimumSizeHint( );
 
       setVScrollBarMode( AlwaysOff );
       setHScrollBarMode( AlwaysOff );
@@ -111,8 +111,8 @@ void PMDialogEditContent::resizeEvent( TQResizeEvent* /* ev */ )
    calculateSize( );
 }
 
-PMDialogView::PMDialogView( PMPart* part, TQWidget* parent, const char* name )
-      : PMViewBase( parent, name )
+PMDialogView::PMDialogView( PMPart* part, TQWidget* tqparent, const char* name )
+      : PMViewBase( tqparent, name )
 {
    m_pDisplayedWidget = 0;
    m_unsavedData = false;
@@ -174,7 +174,7 @@ PMDialogView::~PMDialogView( )
 
 void PMDialogView::slotObjectChanged( PMObject* obj, const int mode, TQObject* sender )
 {
-   if( sender == this )
+   if( TQT_BASE_OBJECT(sender) == TQT_BASE_OBJECT(this) )
       return;
    if( mode & PMCNewSelection )
    {
@@ -314,10 +314,10 @@ void PMDialogView::slotDataChanged( )
 
 void PMDialogView::slotSizeChanged( )
 {
-   // force recalculating of the layout
+   // force recalculating of the tqlayout
    if( m_pDisplayedWidget )
-      if( m_pDisplayedWidget->layout( ) )
-         m_pDisplayedWidget->layout( )->activate( );
+      if( m_pDisplayedWidget->tqlayout( ) )
+         m_pDisplayedWidget->tqlayout( )->activate( );
    m_pHelper->calculateSize( );
 }
 
@@ -325,7 +325,7 @@ void PMDialogView::slotControlPointSelectionChanged( )
 {
    if( m_pDisplayedWidget && m_pDisplayedWidget->displayedObject( ) )
       emit objectChanged( m_pDisplayedWidget->displayedObject( ),
-                          PMCControlPointSelection, this );
+                          PMCControlPointSelection, TQT_TQOBJECT(this) );
 }
 
 void PMDialogView::displayObject( PMObject* obj, bool updateDescription )

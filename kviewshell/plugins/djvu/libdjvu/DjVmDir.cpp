@@ -363,7 +363,7 @@ DjVmDir::decode(const GP<ByteStream> &gstr)
       for(pos=files_list;pos;++pos)
       {
 	       GP<File> file=files_list[pos];
-	       if (name2file.contains(file->name))
+	       if (name2file.tqcontains(file->name))
 	          G_THROW( ERR_MSG("DjVmDir.dupl_name") "\t" + file->name );
 	       name2file[file->name]=file;
       }
@@ -372,7 +372,7 @@ DjVmDir::decode(const GP<ByteStream> &gstr)
       for(pos=files_list;pos;++pos)
       {
 	       GP<File> file=files_list[pos];
-	       if (id2file.contains(file->id))
+	       if (id2file.tqcontains(file->id))
 	          G_THROW( ERR_MSG("DjVmDir.dupl_id") "\t" + file->id);
 	       id2file[file->id]=file;
       }
@@ -383,7 +383,7 @@ DjVmDir::decode(const GP<ByteStream> &gstr)
 	       GP<File> file=files_list[pos];
 	       if (file->title.length())
 	       {
-	          if (title2file.contains(file->title))
+	          if (title2file.tqcontains(file->title))
 	             G_THROW( ERR_MSG("DjVmDir.dupl_title") "\t" + file->title);
 	          title2file[file->title]=file;
 	       }
@@ -542,7 +542,7 @@ DjVmDir::name_to_file(const GUTF8String & name) const
    GCriticalSectionLock lock((GCriticalSection *) &class_lock);
 
    GPosition pos;
-   return (name2file.contains(name, pos))?name2file[pos]:(GP<DjVmDir::File>(0));
+   return (name2file.tqcontains(name, pos))?name2file[pos]:(GP<DjVmDir::File>(0));
 }
 
 GP<DjVmDir::File>
@@ -551,7 +551,7 @@ DjVmDir::id_to_file(const GUTF8String &id) const
    GCriticalSectionLock lock((GCriticalSection *) &class_lock);
 
    GPosition pos;
-   return (id2file.contains(id, pos))?id2file[pos]:(GP<DjVmDir::File>(0));
+   return (id2file.tqcontains(id, pos))?id2file[pos]:(GP<DjVmDir::File>(0));
 }
 
 GP<DjVmDir::File>
@@ -560,7 +560,7 @@ DjVmDir::title_to_file(const GUTF8String &title) const
    GCriticalSectionLock lock((GCriticalSection *) &class_lock);
 
    GPosition pos;
-   return (title2file.contains(title, pos))?title2file[pos]:(GP<DjVmDir::File>(0));
+   return (title2file.tqcontains(title, pos))?title2file[pos]:(GP<DjVmDir::File>(0));
 }
 
 GPList<DjVmDir::File>
@@ -636,15 +636,15 @@ DjVmDir::insert_file(const GP<File> & file, int pos_num)
       // Modify maps
 //   if (! File::is_legal_id(file->id))
 //     G_THROW( ERR_MSG("DjVmDir.bad_file") "\t" + file->id);
-   if (id2file.contains(file->id))
+   if (id2file.tqcontains(file->id))
      G_THROW( ERR_MSG("DjVmDir.dupl_id2") "\t" + file->id);
-   if (name2file.contains(file->name))
+   if (name2file.tqcontains(file->name))
      G_THROW( ERR_MSG("DjVmDir.dupl_name2") "\t" + file->name);
    name2file[file->name]=file;
    id2file[file->id]=file;
    if (file->title.length())
      {
-       if (title2file.contains(file->title))  // duplicate titles may become ok some day
+       if (title2file.tqcontains(file->title))  // duplicate titles may become ok some day
          G_THROW( ERR_MSG("DjVmDir.dupl_title2") "\t" + file->title);
        title2file[file->title]=file;
      }
@@ -749,7 +749,7 @@ DjVmDir::set_file_name(const GUTF8String &id, const GUTF8String &name)
    }
 
       // Check if ID is valid
-   if (!id2file.contains(id, pos))
+   if (!id2file.tqcontains(id, pos))
       G_THROW( ERR_MSG("DjVmDir.no_info") "\t" + GUTF8String(id));
    GP<File> file=id2file[pos];
    name2file.del(file->name);
@@ -776,7 +776,7 @@ DjVmDir::set_file_title(const GUTF8String &id, const GUTF8String &title)
    }
 
       // Check if ID is valid
-   if (!id2file.contains(id, pos))
+   if (!id2file.tqcontains(id, pos))
       G_THROW( ERR_MSG("DjVmDir.no_info") "\t" + GUTF8String(id));
    GP<File> file=id2file[pos];
    title2file.del(file->title);
@@ -795,7 +795,7 @@ DjVmDir::resolve_duplicates(const bool save_as_bundled)
   for(pos=files_list;pos;++pos)
   {
     const GUTF8String save_name=files_list[pos]->check_save_name(save_as_bundled).downcase();
-    if(save_map.contains(save_name))
+    if(save_map.tqcontains(save_name))
     {
       conflicts[save_name].append(files_list[pos]);
     }else
@@ -813,7 +813,7 @@ DjVmDir::resolve_duplicates(const bool save_as_bundled)
     {
       GUTF8String new_name=cfiles[qpos]->get_load_name();
       if((new_name != GUTF8String(GNativeString(new_name)))
-        ||conflicts.contains(new_name))
+        ||conflicts.tqcontains(new_name))
       {
         do
         {
@@ -821,7 +821,7 @@ DjVmDir::resolve_duplicates(const bool save_as_bundled)
             ?(save_name+"-"+GUTF8String(count++))
             :(save_name.substr(0,dot)+"-"+GUTF8String(count++)+
               save_name.substr(dot,(unsigned int)(-1)));
-        } while(save_map.contains(new_name.downcase()));
+        } while(save_map.tqcontains(new_name.downcase()));
       }
       cfiles[qpos]->set_save_name(new_name);
       save_map[new_name]=0;

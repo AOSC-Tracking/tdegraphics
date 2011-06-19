@@ -41,6 +41,7 @@
 class kpThumbnailView : public kpView
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     /**
@@ -53,7 +54,7 @@ public:
                      kpViewManager *viewManager,
                      kpView *buddyView,
                      kpViewScrollableContainer *scrollableContainer,
-                     TQWidget *parent, const char *name);
+                     TQWidget *tqparent, const char *name);
 
     /**
      * Destructs this thumbnail view.
@@ -69,7 +70,7 @@ public:
 
 protected:
     /**
-     * Sets the mask to cover the rectangle with top-left, origin() and
+     * Sets the tqmask to cover the rectangle with top-left, origin() and
      * dimensions equal to or slightly less than (in case of rounding
      * error) the size of the document in view coordinates.  This ensures
      * that all pixels are initialised with either document pixels or the

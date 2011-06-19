@@ -29,8 +29,8 @@
 TQSize PMErrorDialog::s_size = TQSize( 150, 200 );
 
 PMErrorDialog::PMErrorDialog( const PMMessageList& messages, int errorFlags,
-                              TQWidget* parent, const char* name )
-      : KDialogBase( parent, name, true, i18n( "Messages" ),
+                              TQWidget* tqparent, const char* name )
+      : KDialogBase( tqparent, name, true, i18n( "Messages" ),
                      Ok | Cancel, Cancel )
 {
    TQVBox* page = makeVBoxMainWidget( );
@@ -51,16 +51,16 @@ PMErrorDialog::PMErrorDialog( const PMMessageList& messages, int errorFlags,
    for( ; pit.current( ); ++pit )
    {
       PMObject* obj = pit.current( )->linkedObject( );
-      for( ; obj; obj = obj->parent( ) )
+      for( ; obj; obj = obj->tqparent( ) )
       {
-         TQPtrList<PMMessage>* pList = m_messageDict.find( obj );
+         TQPtrList<PMMessage>* pList = m_messageDict.tqfind( obj );
          if( !pList )
          {
             pList = new TQPtrList<PMMessage>;
             m_messageDict.insert( obj, pList );
          }
          pList->append( pit.current( ) );
-         if( !obj->parent( ) )
+         if( !obj->tqparent( ) )
          {
             if( obj->type( ) != "scene" )
             {

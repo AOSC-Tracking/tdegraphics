@@ -33,7 +33,7 @@ kpToolColorWasher::kpToolColorWasher (kpMainWindow *mainWindow)
     : kpToolPen (kpToolPen::ColorWasher,
                  i18n ("Color Eraser"),
                  i18n ("Replaces pixels of the foreground color with the background color"),
-                 Qt::Key_O,
+                 TQt::Key_O,
                  mainWindow, "tool_color_washer")
 {
 }

@@ -35,8 +35,9 @@ namespace KSVG
 class KSVGPlugin : public KParts::ReadOnlyPart
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
-	KSVGPlugin(TQWidget *parentWidget, const char *wname, TQObject *parent, const char *name, unsigned int width = 0, unsigned int height = 0);
+	KSVGPlugin(TQWidget *tqparentWidget, const char *wname, TQObject *tqparent, const char *name, unsigned int width = 0, unsigned int height = 0);
 	virtual ~KSVGPlugin();
 
 	virtual bool openFile() { return false; }

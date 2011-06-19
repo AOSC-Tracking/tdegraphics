@@ -28,8 +28,8 @@
 #include <kmessagebox.h>
 
 
-PMRadiosityEdit::PMRadiosityEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMRadiosityEdit::PMRadiosityEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

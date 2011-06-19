@@ -45,54 +45,36 @@
 
 
 // TODO: get out of the Alt+Tab list
-kpThumbnail::kpThumbnail (kpMainWindow *parent, const char *name)
-#if KP_IS_QT_3_3
-    : TQDockWindow (TQDockWindow::OutsideDock, parent, name),
-#else  // With Qt <3.3, OutsideDock requires parent = 0,
-       // sync: make sure outside of dock
-    : TQDockWindow (TQDockWindow::InDock, parent, name),
-    #warning "Using Qt <3.3: the thumbnail will flicker more when appearing"
-#endif
-      m_mainWindow (parent),
+kpThumbnail::kpThumbnail (kpMainWindow *tqparent, const char *name)
+    : TQDockWindow (TQDockWindow::OutsideDock, tqparent, name),
+      m_mainWindow (tqparent),
       m_view (0)
 {
-    if (!parent)
-        kdError () << "kpThumbnail::kpThumbnail() requires parent" << endl;
+    if (!tqparent)
+        kdError () << "kpThumbnail::kpThumbnail() requires tqparent" << endl;
 
-
-#if !KP_IS_QT_3_3
-    if (parent)
-    {
-        hide ();
-
-        // sync: make sure outside of dock
-        parent->moveDockWindow (this, Qt::DockTornOff);
-    }
-#endif
-
-
-    if (parent)
+    if (tqparent)
     {
         // Prevent thumbnail from docking - it's _really_ irritating otherwise
-        parent->leftDock ()->setAcceptDockWindow (this, false);
-        parent->rightDock ()->setAcceptDockWindow (this, false);
-        parent->topDock ()->setAcceptDockWindow (this, false);
-        parent->bottomDock ()->setAcceptDockWindow (this, false);
+        tqparent->leftDock ()->setAcceptDockWindow (this, false);
+        tqparent->rightDock ()->setAcceptDockWindow (this, false);
+        tqparent->topDock ()->setAcceptDockWindow (this, false);
+        tqparent->bottomDock ()->setAcceptDockWindow (this, false);
     }
 
 
-    TQSize layoutMinimumSize = layout () ? layout ()->minimumSize () : TQSize ();
+    TQSize tqlayoutMinimumSize = tqlayout () ? tqlayout ()->tqminimumSize () : TQSize ();
 #if DEBUG_KP_THUMBNAIL
-    kdDebug () << "\tlayout=" << layout ()
-               << " minSize=" << (layout () ? layout ()->minimumSize () : TQSize ()) << endl;
+    kdDebug () << "\ttqlayout=" << tqlayout ()
+               << " minSize=" << (tqlayout () ? tqlayout ()->tqminimumSize () : TQSize ()) << endl;
     kdDebug () << "\tboxLayout=" << boxLayout ()
-               << " minSize=" << (boxLayout () ? boxLayout ()->minimumSize () : TQSize ())
+               << " minSize=" << (boxLayout () ? boxLayout ()->tqminimumSize () : TQSize ())
                << endl;
 #endif
-    if (layout ())
-        layout ()->setResizeMode (TQLayout::FreeResize);
-    setMinimumSize (QMAX (layoutMinimumSize.width (), 64),
-                    QMAX (layoutMinimumSize.height (), 64));
+    if (tqlayout ())
+        tqlayout ()->setResizeMode (TQLayout::FreeResize);
+    setMinimumSize (TQMAX (tqlayoutMinimumSize.width (), 64),
+                    TQMAX (tqlayoutMinimumSize.height (), 64));
 
 
     // Enable "X" Close Button
@@ -158,7 +140,7 @@ void kpThumbnail::updateCaption ()
 }
 
 
-// public slot virtual [base QDockWindow]
+// public slot virtual [base TQDockWindow]
 void kpThumbnail::dock ()
 {
 #if DEBUG_KP_THUMBNAIL
@@ -181,7 +163,7 @@ void kpThumbnail::slotViewDestroyed ()
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpThumbnail::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_THUMBNAIL
@@ -202,7 +184,7 @@ void kpThumbnail::resizeEvent (TQResizeEvent *e)
     }
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpThumbnail::moveEvent (TQMoveEvent * /*e*/)
 {
     if (m_mainWindow)

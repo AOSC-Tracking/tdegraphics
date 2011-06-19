@@ -53,12 +53,12 @@ void PMTableItem::paint( TQPainter* p, const TQColorGroup& cg,
    else
       p->setPen( cg.text( ) );
    p->drawText( x + 2, 0, w - x - 4, h,
-                wordWrap( ) ? ( alignment( ) | WordBreak ) : alignment( ), text( ) );
+                wordWrap( ) ? ( tqalignment( ) | WordBreak ) : tqalignment( ), text( ) );
 }
 */
 
-PMVectorListEdit::PMVectorListEdit( TQWidget* parent, const char* name )
-      : TQTable( 1, 3, parent, name )
+PMVectorListEdit::PMVectorListEdit( TQWidget* tqparent, const char* name )
+      : TQTable( 1, 3, tqparent, name )
 {
    init( 3 );
 
@@ -70,8 +70,8 @@ PMVectorListEdit::PMVectorListEdit( TQWidget* parent, const char* name )
 
 PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
                                     const TQString& c3, const TQString& c4,
-                                    TQWidget* parent, const char* name )
-      : TQTable( 1, 4, parent, name )
+                                    TQWidget* tqparent, const char* name )
+      : TQTable( 1, 4, tqparent, name )
 {
    init( 4 );
 
@@ -83,9 +83,9 @@ PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
 }
 
 PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
-                                    const TQString& c3, TQWidget* parent,
+                                    const TQString& c3, TQWidget* tqparent,
                                     const char* name )
-      : TQTable( 1, 3, parent, name )
+      : TQTable( 1, 3, tqparent, name )
 {
    init( 3 );
 
@@ -96,8 +96,8 @@ PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
 }
 
 PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
-                                    TQWidget* parent, const char* name )
-      : TQTable( 1, 2, parent, name )
+                                    TQWidget* tqparent, const char* name )
+      : TQTable( 1, 2, tqparent, name )
 {
    init( 2 );
 
@@ -121,7 +121,7 @@ void PMVectorListEdit::init( int dimensions )
       setColumnStretchable( i, true );
    connect( this, TQT_SIGNAL( valueChanged( int, int ) ),
             TQT_SLOT( slotTextChanged( int, int ) ) );
-   setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
+   tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
 }
 
 void PMVectorListEdit::setVectors( const TQValueList<PMVector>& l,
@@ -256,7 +256,7 @@ void PMVectorListEdit::setLink( int p1, int p2 )
    if( p2 >= 0 )
    {
       m_disabled[p2] = true;
-      str = TQString( "%1 (=%2)" ).arg( p2 + 1 ).arg( p1 + 1 );
+      str = TQString( "%1 (=%2)" ).tqarg( p2 + 1 ).tqarg( p1 + 1 );
       h->setLabel( p2, str );
       if( !isReadOnly( ) )
          setRowReadOnly( p2, true );
@@ -315,11 +315,11 @@ bool PMVectorListEdit::isDataValid( )
    return valid;
 }
 
-TQSize PMVectorListEdit::sizeHint( ) const
+TQSize PMVectorListEdit::tqsizeHint( ) const
 {
    return TQSize( c_columnWidth * m_dimension + frameWidth( ) * 2,
                  frameWidth( ) * 2 + horizontalHeader( )->height( )
-                 + verticalHeader( )->sizeHint( ).height( ) );
+                 + verticalHeader( )->tqsizeHint( ).height( ) );
 }
 
 void PMVectorListEdit::slotTextChanged( int, int )
@@ -342,10 +342,10 @@ void PMVectorListEdit::blockSelectionUpdates( bool block )
 
 bool PMVectorListEdit::eventFilter( TQObject* o, TQEvent* e )
 {
-   if( e->type( ) == TQEvent::Wheel && parent( ) )
-      return TQApplication::sendEvent( parent( ), e );
+   if( e->type( ) == TQEvent::Wheel && tqparent( ) )
+      return TQApplication::sendEvent( tqparent( ), e );
    if( e->type( ) == TQEvent::MouseButtonPress
-       && ( ( TQMouseEvent* ) e )->button( ) == RightButton )
+       && ( ( TQMouseEvent* ) e )->button( ) == Qt::RightButton )
    {
       bool b = TQTable::eventFilter( o, e );
       emit showContextMenu( );

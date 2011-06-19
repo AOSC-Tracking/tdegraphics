@@ -16,12 +16,13 @@ class TQLabel;
 class KViewShell : public KParts::MainWindow
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   KStatusBar *statusbar;
   KStatusBar *action;
 
-  KViewShell(const TQString& defaultMimeType = TQString::null);
+  KViewShell(const TQString& defaultMimeType = TQString());
   virtual ~KViewShell();
 
 public slots:

@@ -23,8 +23,8 @@
 #include <tqmultilineedit.h>
 #include <kglobalsettings.h>
 
-PMCommentEdit::PMCommentEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMCommentEdit::PMCommentEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -34,10 +34,8 @@ void PMCommentEdit::createTopWidgets( )
    Base::createTopWidgets( );
    
    m_pEdit = new TQMultiLineEdit( this );
-#if ( QT_VERSION >= 300 )
-   m_pEdit->setTextFormat( Qt::PlainText );
+   m_pEdit->setTextFormat( TQt::PlainText );
    m_pEdit->setWordWrap( TQTextEdit::NoWrap );
-#endif
    m_pEdit->setFont( KGlobalSettings::fixedFont( ) );
    topLayout( )->addWidget( m_pEdit, 2 );
    

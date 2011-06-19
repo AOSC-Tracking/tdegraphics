@@ -60,7 +60,7 @@ class PageTransition {
     Fade
   };
   
-  /** \brief alignment of the transition effect that shall be used
+  /** \brief tqalignment of the transition effect that shall be used
    */
   // if changed remember to keep in sync with PageTransition.h enum
   enum Alignment {
@@ -114,7 +114,7 @@ class PageTransition {
   /**
      \brief Get dimension in which the transition effect occurs.
   */
-  Alignment alignment() const;
+  Alignment tqalignment() const;
   
   /**
      \brief Get direction of motion of the transition effect.

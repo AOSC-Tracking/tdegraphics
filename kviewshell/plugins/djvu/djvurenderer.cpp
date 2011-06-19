@@ -44,14 +44,14 @@
 
 //#define KF_DEBUG
 
-inline GUTF8String GStringFromQString(const TQString& x)
+inline GUTF8String GStringFromTQString(const TQString& x)
 {
   GUTF8String retval=(const char*)x.utf8();
   return retval;
 }
 
 
-inline TQString QStringFromGString(const GUTF8String& x)
+inline TQString TQStringFromGString(const GUTF8String& x)
 {
   TQString retval=TQString::fromUtf8((const char*)x);
   return retval;
@@ -62,7 +62,7 @@ DjVuRenderer::DjVuRenderer(TQWidget* par)
   : DocumentRenderer(par)
 {
 #ifdef KF_DEBUG
-  kdError() << "DjVuRenderer( parent=" << par << " )" << endl;
+  kdError() << "DjVuRenderer( tqparent=" << par << " )" << endl;
 #endif
 
   PPMstream = ByteStream::create();
@@ -168,7 +168,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
       {
         kdError() << "loading failed" << endl;
         //draw an empty page
-        foreGroundPaint->fillRect(0, 0, pageWidth, pageHeight, Qt::white);
+        foreGroundPaint->fillRect(0, 0, pageWidth, pageHeight, TQt::white);
       }
       foreGroundPaint->drawPixmap(0, 0, pixmap);
       delete[] buf;
@@ -206,7 +206,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
         {
           kdError() << "loading failed" << endl;
           //draw an empty page
-          foreGroundPaint->fillRect(0, 0, pageWidth, pageHeight, Qt::white);
+          foreGroundPaint->fillRect(0, 0, pageWidth, pageHeight, TQt::white);
         }
         foreGroundPaint->drawPixmap(0, 0, pixmap);
         delete[] buf;
@@ -225,7 +225,7 @@ void DjVuRenderer::drawPage(double resolution, RenderedDocumentPage* page)
       else
       {
         //draw an empty page
-        foreGroundPaint->fillRect(0, 0, pageWidth, pageHeight, Qt::white);
+        foreGroundPaint->fillRect(0, 0, pageWidth, pageHeight, TQt::white);
       }
     }
 
@@ -270,8 +270,8 @@ bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
   TQFileInfo fi(fname);
   TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
-    KMessageBox::error( parentWidget,
-			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").arg(filename),
+    KMessageBox::error( tqparentWidget,
+			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").tqarg(filename),
 			i18n("File Error"));
     // the return value 'false' indicates that this operation was not successful.
     return false;
@@ -282,7 +282,7 @@ bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
 
   // Now we assume that the file is fine and load the file.
   G_TRY {
-    document = DjVuDocEditor::create_wait(GURL::Filename::UTF8(GStringFromQString(filename)));
+    document = DjVuDocEditor::create_wait(GURL::Filename::UTF8(GStringFromTQString(filename)));
   }
   G_CATCH(ex) {
     ;
@@ -292,8 +292,8 @@ bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
   // If the above assumption was false.
   if (!document)
   {
-    KMessageBox::error( parentWidget,
-      i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").arg(filename),
+    KMessageBox::error( tqparentWidget,
+      i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
       i18n("File Error"));
 
     clear();
@@ -348,7 +348,7 @@ void DjVuRenderer::getAnnotations(RenderedDocumentPage* page, GP<DjVuImage> djvu
     for (GPosition pos = map; pos; ++pos)
     {
       // Currently we only support rectangular links
-      if (!map[pos]->get_shape_type() == GMapArea::RECT)
+      if (!map[pos]->get_tqshape_type() == GMapArea::RECT)
         continue;
 
       GRect rect = map[pos]->get_bound_rect();
@@ -361,7 +361,7 @@ void DjVuRenderer::getAnnotations(RenderedDocumentPage* page, GP<DjVuImage> djvu
       TQString comment((const char*)map[pos]->comment);
 
       // Create an anchor for this link.
-      if (!anchorList.contains(url))
+      if (!anchorList.tqcontains(url))
 	{
 	  // For now we only accept links to pages in the same document.
 	  if(url[0] == '#' && target == "_self")
@@ -400,7 +400,7 @@ bool DjVuRenderer::initializeDocument()
   // very long documents
   if (numPages > 100)
     emit setStatusBarText(i18n("Loading file. Computing page sizes..."));
-  for(Q_UINT16 i=0; i<numPages; i++) {
+  for(TQ_UINT16 i=0; i<numPages; i++) {
     // Keep the GUI updated
     if (i%100 == 0)
       kapp->processEvents();
@@ -418,7 +418,7 @@ bool DjVuRenderer::initializeDocument()
       pageSizes[i].setPageSize(w, h);
     }
   }
-  emit setStatusBarText(TQString::null);
+  emit setStatusBarText(TQString());
   
   // We will also generate a list of hyperlink-anchors in the document.
   // So declare the existing lists empty.
@@ -461,7 +461,7 @@ GP<DjVuTXT> DjVuRenderer::getText(PageNumber pageNumber)
 
 void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& text, DjVuTXT::Zone& zone, TQSize& djvuPageSize)
 {
-  if (zone.children.isempty())
+  if (zone.tqchildren.isempty())
   {
     int pageWidth = page->width();
     int pageHeight = page->height();
@@ -469,7 +469,7 @@ void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& tex
     double scaleX = pageWidth / (double)djvuPageSize.width();
     double scaleY = pageHeight / (double)djvuPageSize.height();
 
-    TQString zoneString = QStringFromGString(text->textUTF8.substr(zone.text_start, zone.text_length));
+    TQString zoneString = TQStringFromGString(text->textUTF8.substr(zone.text_start, zone.text_length));
 
     //kdDebug() << "zone text: " << zoneString << endl;
 
@@ -481,9 +481,9 @@ void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& tex
   }
   else
   {
-    for (GPosition pos=zone.children; pos; ++pos)
+    for (GPosition pos=zone.tqchildren; pos; ++pos)
     {
-      fillInText(page, text, zone.children[pos], djvuPageSize);
+      fillInText(page, text, zone.tqchildren[pos], djvuPageSize);
     }
   }
 }
@@ -577,14 +577,14 @@ bool DjVuRenderer::convertToPSFile( DjVuToPS &converter, TQString filename, TQVa
   TQMutexLocker locker( &mutex );
   
   // Set up progress dialog
-  KProgressDialog *pdialog = new KProgressDialog(parentWidget, "Printing-ProgressDialog", i18n("Printing..."), i18n("Preparing pages for printing..."), true);
+  KProgressDialog *pdialog = new KProgressDialog(tqparentWidget, "Printing-ProgressDialog", i18n("Printing..."), i18n("Preparing pages for printing..."), true);
   pdialog->setButtonText(i18n("Abort"));
   pdialog->showCancelButton(true);
   pdialog->progressBar()->setTotalSteps(pageList.size());
-  pdialog->progressBar()->setFormat(TQString::null);
+  pdialog->progressBar()->setFormat(TQString());
   
   // Open output file
-  GURL outname = GURL::Filename::UTF8(GStringFromQString(filename));
+  GURL outname = GURL::Filename::UTF8(GStringFromTQString(filename));
   GP<ByteStream> obs = ByteStream::create(outname, "w");
   
   TQString pagename;
@@ -596,7 +596,7 @@ bool DjVuRenderer::convertToPSFile( DjVuToPS &converter, TQString filename, TQVa
       break;
     pagename += ",";
   }
-  GUTF8String pages = GStringFromQString(pagename);
+  GUTF8String pages = GStringFromTQString(pagename);
   
   converter.set_info_cb(printerInfoCallBack, (void*)pdialog);
   bool iscancelled = false;
@@ -618,7 +618,7 @@ bool DjVuRenderer::convertToPSFile( DjVuToPS &converter, TQString filename, TQVa
 }
 
 
-void DjVuRenderer::deletePages(Q_UINT16 from, Q_UINT16 to)
+void DjVuRenderer::deletePages(TQ_UINT16 from, TQ_UINT16 to)
 {
   // Paranoia security checks
   if (document == 0) {
@@ -634,10 +634,10 @@ void DjVuRenderer::deletePages(Q_UINT16 from, Q_UINT16 to)
 
   KProgressDialog *pdialog = 0;
   if (to-from > 9) {
-    pdialog = new KProgressDialog(parentWidget, "Printing-ProgressDialog", i18n("Deleting pages..."), i18n("Please wait while pages are removed..."), true);
+    pdialog = new KProgressDialog(tqparentWidget, "Printing-ProgressDialog", i18n("Deleting pages..."), i18n("Please wait while pages are removed..."), true);
     pdialog->showCancelButton(false);
     pdialog->progressBar()->setTotalSteps(to-from+1);
-    pdialog->progressBar()->setFormat(TQString::null);
+    pdialog->progressBar()->setFormat(TQString());
     pdialog->show();
     kapp->processEvents();
   }
@@ -650,14 +650,14 @@ void DjVuRenderer::deletePages(Q_UINT16 from, Q_UINT16 to)
   // Delete pages
   if (pdialog == 0) {
     GList<int> pageList;
-    for(Q_UINT16 i=from; i<= to; i++)
+    for(TQ_UINT16 i=from; i<= to; i++)
       pageList.append(i-1);
     document_new->remove_pages(pageList); 
   } else {
-    for(Q_UINT16 i=from; i<=to; i++) {
+    for(TQ_UINT16 i=from; i<=to; i++) {
       document_new->remove_page(from-1); 
       pdialog->progressBar()->setProgress(i-from);
-      pdialog->progressBar()->setFormat(i18n("deleting page %1").arg(i));
+      pdialog->progressBar()->setFormat(i18n("deleting page %1").tqarg(i));
       kapp->processEvents();
     }
     delete pdialog;
@@ -679,7 +679,7 @@ bool DjVuRenderer::save(const TQString &filename)
   TQMutexLocker locker( &mutex );
   
   G_TRY {
-    document->save_as(GURL::Filename::UTF8(GStringFromQString(filename)), true);
+    document->save_as(GURL::Filename::UTF8(GStringFromTQString(filename)), true);
   }
   G_CATCH(ex) {
     return false;
@@ -705,7 +705,7 @@ void DjVuRenderer::printerInfoCallBack(int page_num, int page_count, int, DjVuTo
   KProgressDialog *pdialog = (KProgressDialog *)pd;
   
   pdialog->progressBar()->setProgress(page_count);
-  pdialog->progressBar()->setFormat(i18n("processing page %1").arg(page_num+1));
+  pdialog->progressBar()->setFormat(i18n("processing page %1").tqarg(page_num+1));
   pdialog->show();
   
   if (pdialog->wasCancelled())

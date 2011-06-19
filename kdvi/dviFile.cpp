@@ -71,7 +71,7 @@ extern "C" {
 
 dvifile::dvifile(const dvifile *old, fontPool *fp) 
 {
-  errorMsg     = TQString::null;
+  errorMsg     = TQString();
   errorCounter = 0;
   page_offset  = 0;
   suggestedPageSize = 0;
@@ -107,7 +107,7 @@ void dvifile::process_preamble()
 {
   command_pointer = dvi_Data();
   
-  Q_UINT8 magic_number = readUINT8();
+  TQ_UINT8 magic_number = readUINT8();
   if (magic_number != PRE) {
     errorMsg = i18n("The DVI file does not start with the preamble.");
     return;
@@ -124,8 +124,8 @@ void dvifile::process_preamble()
       how many centimeters there are in one TeX unit, as explained in
       section A.3 of the DVI driver standard, Level 0, published by
       the TUG DVI driver standards committee. */
-  Q_UINT32 numerator     = readUINT32();
-  Q_UINT32 denominator   = readUINT32();
+  TQ_UINT32 numerator     = readUINT32();
+  TQ_UINT32 denominator   = readUINT32();
   _magnification = readUINT32();
   
   cmPerDVIunit =  (double(numerator) / double(denominator)) * (double(_magnification) / 1000.0) * (1.0 / 1e5);
@@ -165,7 +165,7 @@ void dvifile::find_postamble()
 
 void dvifile::read_postamble()
 {
-  Q_UINT8 magic_byte = readUINT8();
+  TQ_UINT8 magic_byte = readUINT8();
   if (magic_byte != POST) {
     errorMsg = i18n("The postamble does not begin with the POST command.");
     return;
@@ -181,17 +181,17 @@ void dvifile::read_postamble()
   total_pages  = readUINT16();
 
   // As a next step, read the font definitions.
-  Q_UINT8 cmnd = readUINT8();
+  TQ_UINT8 cmnd = readUINT8();
   while (cmnd >= FNTDEF1 && cmnd <= FNTDEF4) {
-    Q_UINT32 TeXnumber = readUINT(cmnd-FNTDEF1+1);
-    Q_UINT32 checksum  = readUINT32(); // Checksum of the font, as found by TeX in the TFM file
+    TQ_UINT32 TeXnumber = readUINT(cmnd-FNTDEF1+1);
+    TQ_UINT32 checksum  = readUINT32(); // Checksum of the font, as found by TeX in the TFM file
 
     // Read scale and design factor, and the name of the font. All
     // these are explained in section A.4 of the DVI driver standard,
     // Level 0, published by the TUG DVI driver standards committee
-    Q_UINT32 scale     = readUINT32(); 
-    Q_UINT32 design    = readUINT32(); 
-    Q_UINT16 len       = readUINT8() + readUINT8(); // Length of the font name, including the directory name
+    TQ_UINT32 scale     = readUINT32(); 
+    TQ_UINT32 design    = readUINT32(); 
+    TQ_UINT16 len       = readUINT8() + readUINT8(); // Length of the font name, including the directory name
     char *fontname  = new char[len + 1];
     strncpy(fontname, (char *)command_pointer, len );
     fontname[len] = '\0';
@@ -248,7 +248,7 @@ void dvifile::prepare_pages()
   
 
   page_offset[total_pages] = beginning_of_postamble;
-  Q_UINT16 i               = total_pages-1;
+  TQ_UINT16 i               = total_pages-1;
   page_offset[i]           = last_page_offset;
 
   // Follow back pointers through pages in the DVI file, storing the
@@ -256,7 +256,7 @@ void dvifile::prepare_pages()
    while (i > 0) {
     command_pointer  = dvi_Data() + page_offset[i--];
     if (readUINT8() != BOP) {
-      errorMsg = i18n("The page %1 does not start with the BOP command.").arg(i+1);
+      errorMsg = i18n("The page %1 does not start with the BOP command.").tqarg(i+1);
       return;
     }
     command_pointer += 10 * 4;
@@ -273,7 +273,7 @@ dvifile::dvifile(const TQString& fname, fontPool* pool)
   kdDebug(4300) << "init_dvi_file: " << fname << endl;
 #endif
 
-  errorMsg     = TQString::null;
+  errorMsg     = TQString();
   errorCounter = 0;
   page_offset  = 0;
   suggestedPageSize = 0;
@@ -340,10 +340,10 @@ void dvifile::renumber()
   bool bigEndian;
   qSysInfo (&wordSize, &bigEndian);
 
-  for(Q_UINT32 i=1; i<=total_pages; i++) {
-    Q_UINT8 *ptr = dviData.data() + page_offset[i-1]+1;
-    Q_UINT8 *num = (Q_UINT8 *)&i;
-    for(Q_UINT8 j=0; j<4; j++)
+  for(TQ_UINT32 i=1; i<=total_pages; i++) {
+    TQ_UINT8 *ptr = dviData.data() + page_offset[i-1]+1;
+    TQ_UINT8 *num = (TQ_UINT8 *)&i;
+    for(TQ_UINT8 j=0; j<4; j++)
       if (bigEndian) {
 	*(ptr++) = num[0];
 	*(ptr++) = num[1];
@@ -362,14 +362,14 @@ void dvifile::renumber()
 TQString dvifile::convertPDFtoPS(const TQString &PDFFilename)
 {
   // Check if the PDFFile is known
-  TQMap<TQString, TQString>::Iterator it =  convertedFiles.find(PDFFilename);
+  TQMap<TQString, TQString>::Iterator it =  convertedFiles.tqfind(PDFFilename);
   if (it != convertedFiles.end()) {
     // PDF-File is known. Good.
     return it.data();
   }
 
   // Get the name of a temporary file
-  KTempFile tmpfile(TQString::null, ".ps");
+  KTempFile tmpfile(TQString(), ".ps");
   TQString convertedFileName = tmpfile.name();
   tmpfile.close();
   tmpfile.unlink();
@@ -378,9 +378,9 @@ TQString dvifile::convertPDFtoPS(const TQString &PDFFilename)
   KProcIO proc;
   proc << "pdf2ps" << PDFFilename << convertedFileName;
   if (proc.start(KProcess::Block) == false) 
-    convertedFileName = TQString::null; // Indicates that conversion failed, won't try again.
+    convertedFileName = TQString(); // Indicates that conversion failed, won't try again.
   if (!TQFile::exists(convertedFileName))
-    convertedFileName = TQString::null; // Indicates that conversion failed, won't try again.
+    convertedFileName = TQString(); // Indicates that conversion failed, won't try again.
 
   // Save name of converted file to buffer, so PDF file won't be
   // converted again, and files can be deleted when *this is

@@ -37,8 +37,8 @@
 
 using namespace KMrml;
 
-MrmlView::MrmlView( TQWidget *parent, const char *name )
-    : TQScrollView( parent, name )
+MrmlView::MrmlView( TQWidget *tqparent, const char *name )
+    : TQScrollView( tqparent, name )
 {
     setStaticBackground( true );
     setResizePolicy( Manual );
@@ -57,11 +57,11 @@ MrmlView::MrmlView( TQWidget *parent, const char *name )
     // query result image
     TQLabel l( i18n( "No thumbnail available" ), 0L );
     l.setFixedSize( 80, 80 );
-    l.setAlignment( WordBreak | AlignCenter );
+    l.tqsetAlignment( WordBreak | AlignCenter );
 //     l.setFrameStyle( TQLabel::Box | TQLabel::Plain );
 //     l.setLineWidth( 1 );
-    l.setPaletteBackgroundColor( Qt::white );
-    l.setPaletteForegroundColor( Qt::black );
+    l.setPaletteBackgroundColor( TQt::white );
+    l.setPaletteForegroundColor( TQt::black );
     m_unavailablePixmap = TQPixmap::grabWidget( &l );
 }
 
@@ -103,11 +103,11 @@ MrmlViewItem * MrmlView::addItem( const KURL& url, const KURL& thumbURL,
 }
 
 void MrmlView::addRelevanceToQuery( TQDomDocument& document,
-                                    TQDomElement& parent )
+                                    TQDomElement& tqparent )
 {
     TQPtrListIterator<MrmlViewItem> it( m_items );
     for( ; it.current(); ++it ) {
-        it.current()->createRelevanceElement( document, parent );
+        it.current()->createRelevanceElement( document, tqparent );
     }
 }
 
@@ -120,7 +120,7 @@ void MrmlView::clear()
 TQPixmap * MrmlView::getPixmap( const KURL& url )
 {
     TQString u = url.url();
-    TQPixmap *pix = m_pixmapCache.find( u );
+    TQPixmap *pix = m_pixmapCache.tqfind( u );
     if ( pix )
         return pix;
 
@@ -130,7 +130,7 @@ TQPixmap * MrmlView::getPixmap( const KURL& url )
              p = m_unavailablePixmap;
 
         m_pixmapCache.insert( u, p );
-        return m_pixmapCache.find( u );
+        return m_pixmapCache.tqfind( u );
     }
     else { // remote url, download with KIO
         Loader::self()->requestDownload( url );
@@ -176,7 +176,7 @@ void MrmlView::slotLayout()
     TQPtrListIterator<MrmlViewItem> it( m_items );
 
     for ( ; it.current(); ++it ) {
-        itemWidth = QMAX( itemWidth, it.current()->sizeHint().width() );
+        itemWidth = TQMAX( itemWidth, it.current()->tqsizeHint().width() );
     }
 
     if ( itemWidth == 0 )
@@ -202,7 +202,7 @@ void MrmlView::slotLayout()
         if ( item == 0 )
             rowIt = it;
 
-        rowHeight = QMAX( rowHeight, it.current()->sizeHint().height() );
+        rowHeight = TQMAX( rowHeight, it.current()->tqsizeHint().height() );
         addChild( it.current(), margin + item * itemWidth, y );
         it.current()->show();
 
@@ -251,7 +251,7 @@ void MrmlView::restoreState( TQDataStream& stream )
 
     KURL url, thumbURL;
     double similarity;
-    Q_UINT32 relevance;
+    TQ_UINT32 relevance;
     MrmlViewItem *item;
 
 
@@ -274,7 +274,7 @@ TQDataStream& KMrml::operator<<( TQDataStream& stream,
     return stream << item.url()
                   << item.thumbURL()
                   << item.similarity()
-                  << static_cast<Q_UINT32>( item.relevance() );
+                  << static_cast<TQ_UINT32>( item.relevance() );
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -292,7 +292,7 @@ MrmlViewItem::MrmlViewItem( const KURL& url, const KURL& thumbURL,
       m_hasRemotePixmap( false )
 {
     if ( m_similarity != -1 )
-        m_similarity = QMAX( 0.0, QMIN( 1.0, similarity ));
+        m_similarity = TQMAX( 0.0, TQMIN( 1.0, similarity ));
     setFrameStyle( Panel | Sunken );
     setMouseTracking( true );
 
@@ -306,11 +306,11 @@ MrmlViewItem::MrmlViewItem( const KURL& url, const KURL& thumbURL,
 
     /*
     if ( similarity > -1 )
-        TQToolTip::add( this, TQString::fromLatin1("<qt>%1<br>%1</qt>")
-                       .arg( url )
-                       .arg(i18n("Similarity: %1").arg( TQString::number(similarity))));
+        TQToolTip::add( this, TQString::tqfromLatin1("<qt>%1<br>%1</qt>")
+                       .tqarg( url )
+                       .tqarg(i18n("Similarity: %1").tqarg( TQString::number(similarity))));
     else
-        TQToolTip::add( this, TQString::fromLatin1("<qt>%1</qt>").arg( url ) );
+        TQToolTip::add( this, TQString::tqfromLatin1("<qt>%1</qt>").tqarg( url ) );
     */
 
     setMinimumSize( 130, 130 ); // ###
@@ -342,14 +342,14 @@ void MrmlViewItem::paintEvent( TQPaintEvent *e )
 
     if ( m_similarity >= 0 ) {
         TQPainter p( this );
-        TQPen pen( colorGroup().highlight(), 1, TQPen::SolidLine );
+        TQPen pen( tqcolorGroup().highlight(), 1, TQPen::SolidLine );
         p.setPen( pen );
         int x = margin;
         int y = m_combo->y() - similarityHeight - 2;
         int w = (int) (similarityFullWidth * m_similarity);
         int h = similarityHeight;
         p.drawRect( x, y, similarityFullWidth, h );
-        p.fillRect( x, y, w, h, colorGroup().highlight() );
+        p.fillRect( x, y, w, h, tqcolorGroup().highlight() );
     }
 }
 
@@ -361,9 +361,9 @@ void MrmlViewItem::resizeEvent( TQResizeEvent *e )
     m_combo->move( width()/2 - m_combo->width()/2, y );
 }
 
-TQSize MrmlViewItem::sizeHint() const
+TQSize MrmlViewItem::tqsizeHint() const
 {
-    int w = QMAX( QMAX(minimumHeight(), m_combo->width()), m_pixmap.width() );
+    int w = TQMAX( TQMAX(minimumHeight(), m_combo->width()), m_pixmap.width() );
     w += 2 * margin;
 
     int h = m_pixmap.isNull() ? margin : margin + spacing + m_pixmap.height();
@@ -380,11 +380,11 @@ void MrmlViewItem::mousePressEvent( TQMouseEvent *e )
     pressedPos.setY( 0 );
 
 
-    if ( e->button() == LeftButton || e->button() == MidButton ) {
+    if ( e->button() == Qt::LeftButton || e->button() == Qt::MidButton ) {
         if ( hitsPixmap( e->pos() ) )
             pressedPos = e->pos();
     }
-    else if ( e->button() == RightButton && hitsPixmap( e->pos() ) )
+    else if ( e->button() == Qt::RightButton && hitsPixmap( e->pos() ) )
         emit view()->activated( m_url, e->button() );
 }
 
@@ -403,7 +403,7 @@ void MrmlViewItem::mouseMoveEvent( TQMouseEvent *e )
         }
     }
 
-    if ( (e->state() & LeftButton) && !pressedPos.isNull() ) {
+    if ( (e->state() & Qt::LeftButton) && !pressedPos.isNull() ) {
         TQPoint dist = e->pos() - pressedPos;
         if ( dist.manhattanLength() > KGlobalSettings::dndEventDelay() ) {
             // start drag here
@@ -439,13 +439,13 @@ bool MrmlViewItem::hitsPixmap( const TQPoint& pos ) const
 }
 
 void MrmlViewItem::createRelevanceElement( TQDomDocument& document,
-                                           TQDomElement& parent )
+                                           TQDomElement& tqparent )
 {
     int rel = m_combo->currentItem();
     if ( rel == Neutral )
         return;
 
-    MrmlCreator::createRelevanceElement( document, parent, m_url.url(),
+    MrmlCreator::createRelevanceElement( document, tqparent, m_url.url(),
         (rel == Relevant) ? MrmlCreator::Relevant : MrmlCreator::Irrelevant );
 }
 

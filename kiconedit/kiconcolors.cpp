@@ -25,7 +25,7 @@
 
 #include "kiconcolors.h"
 
-KDrawColors::KDrawColors(TQWidget *parent) : KColorGrid(parent, 0, 3)
+KDrawColors::KDrawColors(TQWidget *tqparent) : KColorGrid(tqparent, 0, 3)
 {
   kdDebug(4640) << "KDrawColors - constructor" << endl;
   setCellSize(17);
@@ -43,7 +43,7 @@ void KDrawColors::paintCell( TQPainter *painter, int row, int col )
   int d = spacing();
 
   qDrawShadePanel( painter, d, d, cellSize()-d, cellSize()-d,
-                colorGroup(), true, 1, &brush);
+                tqcolorGroup(), true, 1, &brush);
   if ( row * numCols() + col == selected)
      painter->drawWinFocusRect( d+1, d+1, cellSize()-(2*d)+1, cellSize()-(2*d)+1 );
 }
@@ -65,7 +65,7 @@ void KDrawColors::mouseReleaseEvent( TQMouseEvent *e )
   emit newColor(colorAt(cell)|OPAQUE_MASK);
 }
 
-KSysColors::KSysColors(TQWidget *parent) : KDrawColors(parent)
+KSysColors::KSysColors(TQWidget *tqparent) : KDrawColors(tqparent)
 {
   kdDebug(4640) << "KSysColors - constructor" << endl;
 
@@ -85,7 +85,7 @@ KSysColors::KSysColors(TQWidget *parent) : KDrawColors(parent)
   kdDebug(4640) << "KSysColors - constructor - done" << endl;
 }
 
-KCustomColors::KCustomColors(TQWidget *parent) : KDrawColors(parent)
+KCustomColors::KCustomColors(TQWidget *tqparent) : KDrawColors(tqparent)
 {
   kdDebug(4640) << "KCustomColors - constructor" << endl;
   setNumRows(3);
@@ -119,7 +119,7 @@ void KCustomColors::mouseDoubleClickEvent(TQMouseEvent *e)
 
 void KCustomColors::addColor(uint c)
 {
-  if(!contains(c))
+  if(!tqcontains(c))
   {
     int f = getFreeCell();
     if(f != -1)
@@ -130,7 +130,7 @@ void KCustomColors::addColor(uint c)
         kdDebug(4640) << "KCustomColors::addColor: Not a valid color: " << c << endl;
         return;
       }
-      //kdDebug(4640) << "KCustomColors::addColor: Adding color: " << c << " - " << qRed(c) << " " << qGreen(c) << " " << qBlue(c) << endl;
+      //kdDebug(4640) << "KCustomColors::addColor: Adding color: " << c << " - " << tqRed(c) << " " << tqGreen(c) << " " << tqBlue(c) << endl;
       setColor(f, c);
       freecells[f] = false;
     }

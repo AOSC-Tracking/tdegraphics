@@ -32,7 +32,7 @@ PMPovrayFormat::~PMPovrayFormat( )
 void PMPovrayFormat::registerMethod( const TQString& className,
                                      PMPovraySerializeMethod method )
 {
-   PMPovraySerializeMethodInfo* info = m_methodDict.find( className );
+   PMPovraySerializeMethodInfo* info = m_methodDict.tqfind( className );
    if( info )
       kdWarning( PMArea ) << "Serialization method for " << className
                           << " shadows old implementation" << endl;
@@ -48,5 +48,5 @@ void PMPovrayFormat::removeMethod( const TQString& className )
 const PMPovraySerializeMethodInfo* PMPovrayFormat::serializationMethod(
    const TQString& className )
 {
-   return m_methodDict.find( className );
+   return m_methodDict.tqfind( className );
 }

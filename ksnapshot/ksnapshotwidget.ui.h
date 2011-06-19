@@ -2,7 +2,7 @@
 ** ui.h extension file, included from the uic-generated form implementation.
 **
 ** If you wish to add, delete or rename functions or slots use
-** Qt Designer which will update this file, preserving your code. Create an
+** TQt Designer which will update this file, preserving your code. Create an
 ** init() function in place of a constructor, and a destroy() function in
 ** place of a destructor.
 *****************************************************************************/
@@ -39,15 +39,15 @@ void KSnapshotWidget::setPreview( const TQPixmap &pm )
     if ( r1 * previewWidth()  < previewHeight() )
         img = img.smoothScale(  previewWidth(),
 				int( previewWidth() * r1 ),
-				TQImage::ScaleMin );
+				TQ_ScaleMin );
     else
         img = img.smoothScale( ( int ) ( ( ( double )previewHeight() ) / r1 ),
-			       previewHeight(), TQImage::ScaleMin );
+			       previewHeight(), TQ_ScaleMin );
 
     TQToolTip::remove( lblImage );
     TQToolTip::add( lblImage,
         TQString( "Preview of the snapshot image (%1 x %2)" )
-        .arg( pm.width() ).arg( pm.height() ) );
+        .tqarg( pm.width() ).tqarg( pm.height() ) );
 
     lblImage->setPixmap( img );
     lblImage->adjustSize();

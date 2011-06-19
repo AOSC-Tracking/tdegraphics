@@ -134,7 +134,7 @@ class DjVuNavDir;
     {\bf Inclusion} is also a new feature specifically designed for a
     multipage document. Indeed, inside a given document there can be a lot
     of things shared between its pages. Examples can be the document
-    annotation (\Ref{DjVuAnno}) and other things like shared shapes and
+    annotation (\Ref{DjVuAnno}) and other things like shared tqshapes and
     dictionary (to be implemented). To avoid putting these chunks into
     every page, we have invented new chunk called #INCL# which purpose is
     to make the decoder open the specified file and decode it.
@@ -215,9 +215,9 @@ public:
    GP<IW44Image>	bg44;
       /// Pointer to the background component of DjVu image (Raw).
    GP<GPixmap>		bgpm;
-      /// Pointer to the mask of foreground component of DjVu image (JB2 encoded).
+      /// Pointer to the tqmask of foreground component of DjVu image (JB2 encoded).
    GP<JB2Image>		fgjb;
-      /// Pointer to the optional shape dictionary for the mask (JB2 encoded).
+      /// Pointer to the optional tqshape dictionary for the tqmask (JB2 encoded).
    GP<JB2Dict>		fgjd;
       /// Pointer to a colors layer for the foreground component of DjVu image.
    GP<GPixmap>		fgpm;
@@ -442,7 +442,7 @@ public:
 	  {\bf Warning.} Included files are normally created during decoding.
 	  Before that they do not exist.   If you call this function at
 	  that time and set #only_created# to #FALSE# then it will have to
-	  read all the data from this file in order to find #INCL# chunks,
+	  read all the data from this file in order to tqfind #INCL# chunks,
 	  which may block your application, if not all data is available.
 
 	  @param only_created If #TRUE#, the file will not try to process
@@ -610,7 +610,7 @@ public:
    virtual bool		inherits(const GUTF8String &class_name) const;
    virtual void		notify_chunk_done(const DjVuPort * source, const GUTF8String &name);
    virtual void		notify_file_flags_changed(const DjVuFile * source,
-						  long set_mask, long clr_mask);
+						  long set_tqmask, long clr_tqmask);
    virtual void		set_recover_errors(const ErrorRecoveryAction=ABORT);
    virtual void		set_verbose_eof(const bool verbose_eof=true);
    virtual void		report_error(const GException &ex,const bool=true);
@@ -648,7 +648,7 @@ private:
      const GP<ByteStream> &str, bool djvi, bool djvu, bool iw44);
    int		get_dpi(int w, int h);
 
-      // Functions dealing with the shape directory (fgjd)
+      // Functions dealing with the tqshape directory (fgjd)
    static GP<JB2Dict> static_get_fgjd(void *);
    GP<JB2Dict> get_fgjd(int block=0);
 

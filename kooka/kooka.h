@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -55,6 +55,7 @@ class KookaView;
 class Kooka : public KParts::DockMainWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     /**
      * Default Constructor
@@ -74,7 +75,7 @@ public:
 
 protected:
     /**
-     * Overridden virtuals for Qt drag 'n drop (XDND)
+     * Overridden virtuals for TQt drag 'n drop (XDND)
      */
     virtual void dragEnterEvent(TQDragEnterEvent *event);
     // virtual void dropEvent(TQDropEvent *event);

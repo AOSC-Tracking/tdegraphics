@@ -36,21 +36,21 @@ SVGContainerImpl::~SVGContainerImpl()
 
 SVGRectImpl *SVGContainerImpl::getBBox()
 {
-	// just get the union of the children bboxes
+	// just get the union of the tqchildren bboxes
 	TQRect rect;
 	DOM::Node node = firstChild();
 	for(; !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *elem = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(elem);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(elem);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(elem);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(elem);
 
 		bool ok = tests ? tests->ok() : true;
 
-		if(shape && style && ok && style->getVisible() && style->getDisplay())
+		if(tqshape && style && ok && style->getVisible() && style->getDisplay())
 		{
-			SVGRectImpl *current = shape->getBBox();
+			SVGRectImpl *current = tqshape->getBBox();
 			rect = rect.unite(current->qrect());
 			current->deref();
 		}
@@ -90,21 +90,21 @@ void SVGContainerImpl::update(CanvasItemUpdate reason, int param1, int param2)
 
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
-		if(shape)
-			shape->update(reason, param1, param2);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
+		if(tqshape)
+			tqshape->update(reason, param1, param2);
 	}
 }
 
-void SVGContainerImpl::invalidate(KSVGCanvas *c, bool recalc)
+void SVGContainerImpl::tqinvalidate(KSVGCanvas *c, bool recalc)
 {
-	SVGShapeImpl::invalidate(c, recalc);
+	SVGShapeImpl::tqinvalidate(c, recalc);
 
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
-		if(shape)
-			shape->invalidate(c, recalc);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
+		if(tqshape)
+			tqshape->tqinvalidate(c, recalc);
 	}
 }
 
@@ -114,9 +114,9 @@ void SVGContainerImpl::setReferenced(bool referenced)
 
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
-		if(shape)
-			shape->setReferenced(referenced);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
+		if(tqshape)
+			tqshape->setReferenced(referenced);
 	}
 }
 
@@ -126,9 +126,9 @@ void SVGContainerImpl::draw()
 
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
-		if(shape)
-			shape->draw();
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(node.handle()));
+		if(tqshape)
+			tqshape->draw();
 	}
 }
 

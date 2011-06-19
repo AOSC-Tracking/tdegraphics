@@ -28,11 +28,11 @@
 typedef KGenericFactory<KViewPluginsConfig, TQWidget> KViewPluginsConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewpluginsconfig, KViewPluginsConfigFactory( "kcm_kviewpluginsconfig" ) )
 
-KViewPluginsConfig::KViewPluginsConfig( TQWidget * parent, const char *, const TQStringList & args )
-	: KSettings::PluginPage( KViewPluginsConfigFactory::instance(), parent, args )
+KViewPluginsConfig::KViewPluginsConfig( TQWidget * tqparent, const char *, const TQStringList & args )
+	: KSettings::PluginPage( KViewPluginsConfigFactory::instance(), tqparent, args )
 {
 	m_config = new KSimpleConfig( "kviewrc" );
-	pluginSelector()->addPlugins( TQString::fromAscii( "kview" ), i18n( "Application" ), TQString::null, m_config );
+	pluginSelector()->addPlugins( TQString::fromAscii( "kview" ), i18n( "Application" ), TQString(), m_config );
 	pluginSelector()->setShowEmptyConfigPage( false );
 }
 

@@ -118,7 +118,7 @@ namespace T2P
 		}
 		
 		// Lookup entry
-		SharedT find(const std::string &key)
+		SharedT tqfind(const std::string &key)
 		{
 			for(typename std::vector<SharedT>::const_iterator it = m_entries.begin(); it != m_entries.end(); ++it)
 			{

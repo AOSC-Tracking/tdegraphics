@@ -86,11 +86,11 @@ PMRadiosity::~PMRadiosity( )
 {
 }
 
-PMMetaObject* PMRadiosity::metaObject( ) const
+PMMetaObject* PMRadiosity::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Radiosity", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Radiosity", Base::tqmetaObject( ),
                                         createNewRadiosity );
       s_pMetaObject->addProperty(
          new PMRadiosityProperty( "adcBailout", &PMRadiosity::setAdcBailout, &PMRadiosity::adcBailout ) );
@@ -356,9 +356,9 @@ void PMRadiosity::setRecursionLimit( int c )
    }
 }
 
-PMDialogEditBase* PMRadiosity::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMRadiosity::editWidget( TQWidget* tqparent ) const
 {
-   return new PMRadiosityEdit( parent );
+   return new PMRadiosityEdit( tqparent );
 }
 
 void PMRadiosity::restoreMemento( PMMemento* s )

@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-// include files for Qt
+// include files for TQt
 #include <tqevent.h>
 #include <tqstringlist.h>
 
@@ -54,6 +54,7 @@ class KColorEditView;
 class KColorEditApp : public KMainWindow
 {
   Q_OBJECT
+  TQ_OBJECT
 
   friend class KColorEditView;
 
@@ -73,7 +74,7 @@ class KColorEditApp : public KMainWindow
     KColorEditDoc *document() const;
 
   protected:
-    /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
+    /** save general Options like all bar positions and status as well as the tqgeometry and the recent file list to the configuration
      * file
      */
     void saveOptions();

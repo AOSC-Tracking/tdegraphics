@@ -28,16 +28,16 @@
 
 #include <kdeversion.h>
 #if KDE_VERSION < 306
-  #define QUOTE( x ) x
+  #define TQUOTE( x ) x
 #else
-  #define QUOTE( x ) KProcess::quote( x )
+  #define TQUOTE( x ) KProcess::quote( x )
 #endif
 
 using namespace KMrmlConfig;
 
 Indexer::Indexer( const KMrml::Config* config,
-                  TQObject *parent, const char *name )
-    : TQObject( parent, name ),
+                  TQObject *tqparent, const char *name )
+    : TQObject( tqparent, name ),
       m_config( config ),
       m_dirCount( 0 )
 {
@@ -93,14 +93,14 @@ void Indexer::processNext()
 
     TQString cmd = m_config->addCollectionCommandLine().simplifyWhiteSpace().stripWhiteSpace();
 
-    // in the commandline, replace %d with the directory to process and
+    // in the commandline, tqreplace %d with the directory to process and
     // %t with the thumbnail dir
-    int index = cmd.find( "%d" ); // ### TQFile::encodeName()?
+    int index = cmd.tqfind( "%d" ); // ### TQFile::encodeName()?
     if ( index != -1 )
-        cmd.replace( index, 2, QUOTE( m_currentDir ) );
-    index = cmd.find( "%t" );
+        cmd.tqreplace( index, 2, TQUOTE( m_currentDir ) );
+    index = cmd.tqfind( "%t" );
     if ( index != -1 )
-        cmd.replace( index, 2, QUOTE(m_currentDir + "_thumbnails") );
+        cmd.tqreplace( index, 2, TQUOTE(m_currentDir + "_thumbnails") );
 
 //     qDebug("****** command: %s", cmd.latin1());
 #if KDE_VERSION >= 306
@@ -112,7 +112,7 @@ void Indexer::processNext()
          *m_process << *it;
 #endif
 
-    emit progress( 0, i18n("<qt>Next Folder: <br><b>%1</b>").arg( m_currentDir ));
+    emit progress( 0, i18n("<qt>Next Folder: <br><b>%1</b>").tqarg( m_currentDir ));
     m_process->start();
 }
 
@@ -160,7 +160,7 @@ void Indexer::slotCanRead( KProcIO *proc )
                     if ( ok )
                     {
                         uint dirsLeft = m_dirs.count();
-                        TQString message = i18n( "<qt>Processing folder %1 of %2: <br><b>%3</b><br>File %4 of %5.</qt>").arg( m_dirCount - dirsLeft ).arg( m_dirCount).arg( m_currentDir ).arg( currentFile ).arg( numFiles );
+                        TQString message = i18n( "<qt>Processing folder %1 of %2: <br><b>%3</b><br>File %4 of %5.</qt>").tqarg( m_dirCount - dirsLeft ).tqarg( m_dirCount).tqarg( m_currentDir ).tqarg( currentFile ).tqarg( numFiles );
                         emit progress( perc, message );
                     }
                 }

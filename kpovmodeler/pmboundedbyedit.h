@@ -35,12 +35,13 @@ class TQLabel;
 class PMBoundedByEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMBoundedByEdit with parent and name
+    * Creates a PMBoundedByEdit with tqparent and name
     */
-   PMBoundedByEdit( TQWidget* parent, const char* name = 0 );
+   PMBoundedByEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

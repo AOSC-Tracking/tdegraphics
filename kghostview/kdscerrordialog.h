@@ -42,9 +42,10 @@ private:
 class KDSCErrorDialog : public KDialog, public KDSCErrorHandler
 {
     Q_OBJECT
+  TQ_OBJECT
 	
 public:
-    KDSCErrorDialog( TQWidget* parent = 0 );
+    KDSCErrorDialog( TQWidget* tqparent = 0 );
     
     Response error( const KDSCError& );
 

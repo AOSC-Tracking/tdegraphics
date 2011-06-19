@@ -37,12 +37,13 @@ class TQLabel;
 class PMPhotonsEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMPhotonsEdit with parent and name
+    * Creates a PMPhotonsEdit with tqparent and name
     */
-   PMPhotonsEdit( TQWidget* parent, const char* name = 0 );
+   PMPhotonsEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -66,22 +66,22 @@ kpColor::kpColor (int red, int green, int blue, bool isTransparent)
         return;
     }
 
-    m_rgba = qRgba (red, green, blue, isTransparent ? 0 : 255/*opaque*/);
+    m_rgba = tqRgba (red, green, blue, isTransparent ? 0 : 255/*opaque*/);
     m_rgbaIsValid = true;
 }
 
-kpColor::kpColor (const QRgb &rgba)
+kpColor::kpColor (const TQRgb &rgba)
     : m_colorCacheIsValid (false)
 {
-    if (qAlpha (rgba) > 0 && qAlpha (rgba) < 255)
+    if (tqAlpha (rgba) > 0 && tqAlpha (rgba) < 255)
     {
-        kdError () << "kpColor::<ctor>(QRgb) passed translucent alpha "
-                   << qAlpha (rgba)
+        kdError () << "kpColor::<ctor>(TQRgb) passed translucent alpha "
+                   << tqAlpha (rgba)
                    << " - trying to recover"
                    << endl;
 
         // Forget the alpha channel - make it opaque
-        m_rgba = qRgb (qRed (m_rgba), qGreen (m_rgba), qBlue (m_rgba));
+        m_rgba = tqRgb (tqRed (m_rgba), tqGreen (m_rgba), tqBlue (m_rgba));
         m_rgbaIsValid = true;
     }
     else
@@ -198,9 +198,9 @@ bool kpColor::isSimilarTo (const kpColor &rhs, int processedSimilarity) const
         return false;
     else
     {
-        return (square (qRed (m_rgba) - qRed (rhs.m_rgba)) +
-                square (qGreen (m_rgba) - qGreen (rhs.m_rgba)) +
-                square (qBlue (m_rgba) - qBlue (rhs.m_rgba))
+        return (square (tqRed (m_rgba) - tqRed (rhs.m_rgba)) +
+                square (tqGreen (m_rgba) - tqGreen (rhs.m_rgba)) +
+                square (tqBlue (m_rgba) - tqBlue (rhs.m_rgba))
                 <= processedSimilarity);
     }
 }
@@ -232,7 +232,7 @@ int kpColor::red () const
         return 0;
     }
 
-    return qRed (m_rgba);
+    return tqRed (m_rgba);
 }
 
 // public
@@ -250,7 +250,7 @@ int kpColor::green () const
         return 0;
     }
 
-    return qGreen (m_rgba);
+    return tqGreen (m_rgba);
 }
 
 // public
@@ -268,7 +268,7 @@ int kpColor::blue () const
         return 0;
     }
 
-    return qBlue (m_rgba);
+    return tqBlue (m_rgba);
 }
 
 // public
@@ -280,7 +280,7 @@ int kpColor::alpha () const
         return 0;
     }
 
-    const int alpha = qAlpha (m_rgba);
+    const int alpha = tqAlpha (m_rgba);
 
     if (alpha > 0 && alpha < 255)
     {
@@ -309,11 +309,11 @@ bool kpColor::isOpaque () const
 
 
 // public
-QRgb kpColor::toQRgb () const
+TQRgb kpColor::toTQRgb () const
 {
     if (!m_rgbaIsValid)
     {
-        kdError () << "kpColor::toQRgb() called with invalid kpColor" << endl;
+        kdError () << "kpColor::toTQRgb() called with invalid kpColor" << endl;
         return 0;
     }
 
@@ -321,31 +321,31 @@ QRgb kpColor::toQRgb () const
 }
 
 // public
-const TQColor &kpColor::toQColor () const
+const TQColor &kpColor::toTQColor () const
 {
     if (!m_rgbaIsValid)
     {
-        kdError () << "kpColor::toQColor() called with invalid kpColor" << endl;
-        return Qt::black;
+        kdError () << "kpColor::toTQColor() called with invalid kpColor" << endl;
+        return TQt::black;
     }
 
     if (m_colorCacheIsValid)
         return m_colorCache;
 
-    if (qAlpha (m_rgba) < 255)
+    if (tqAlpha (m_rgba) < 255)
     {
-        kdError () << "kpColor::toQColor() called with not fully opaque kpColor alpha="
-                   << qAlpha (m_rgba)
+        kdError () << "kpColor::toTQColor() called with not fully opaque kpColor alpha="
+                   << tqAlpha (m_rgba)
                    << endl;
-        return Qt::black;
+        return TQt::black;
     }
 
     m_colorCache = TQColor (m_rgba);
     if (!m_colorCache.isValid ())
     {
-        kdError () << "kpColor::toQColor () internal error - could not return valid TQColor"
+        kdError () << "kpColor::toTQColor () internal error - could not return valid TQColor"
                    << endl;
-        return Qt::black;
+        return TQt::black;
     }
 
     m_colorCacheIsValid = true;
@@ -354,7 +354,7 @@ const TQColor &kpColor::toQColor () const
 }
 
 // public
-TQColor kpColor::maskColor () const
+TQColor kpColor::tqmaskColor () const
 {
-    return isTransparent () ? Qt::color0 : Qt::color1;
+    return isTransparent () ? TQt::color0 : TQt::color1;
 }

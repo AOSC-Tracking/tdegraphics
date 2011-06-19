@@ -45,12 +45,13 @@ class TQLabel;
 class PMPrismEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMPrismEdit with parent and name
+    * Creates a PMPrismEdit with tqparent and name
     */
-   PMPrismEdit( TQWidget* parent, const char* name = 0 );
+   PMPrismEdit( TQWidget* tqparent, const char* name = 0 );
    /**
     * Destructor
     */

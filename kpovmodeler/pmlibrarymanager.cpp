@@ -88,7 +88,7 @@ void PMLibraryManager::scanLibraries( )
    {
       TQDir curDir( *i );
       curDir.setFilter( TQDir::Dirs );
-      QFileInfoListIterator it( *( curDir.entryInfoList( ) ) );
+      TQFileInfoListIterator it( *( curDir.entryInfoList( ) ) );
 
       // For each sub directory
       TQFileInfo* fi;

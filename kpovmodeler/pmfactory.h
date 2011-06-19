@@ -28,13 +28,14 @@ class KInstance;
 class PMFactory : public KParts::Factory
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    PMFactory( );
    virtual ~PMFactory( );
 
-   virtual KParts::Part* createPartObject( TQWidget* parentWidget,
+   virtual KParts::Part* createPartObject( TQWidget* tqparentWidget,
                                      const char* widgetName,
-                                     TQObject* parent, const char* name,
+                                     TQObject* tqparent, const char* name,
                                      const char* classname,
                                      const TQStringList& args );
    

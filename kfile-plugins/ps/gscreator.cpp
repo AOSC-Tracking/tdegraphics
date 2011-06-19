@@ -20,7 +20,7 @@
 */
 
 /*  This function gets a path of a DVI, EPS, PS or PDF file and
-    produces a PNG-Thumbnail which is stored as a QImage
+    produces a PNG-Thumbnail which is stored as a TQImage
 
     The program works as follows
 
@@ -46,7 +46,7 @@
     9. Turn the PS,PDF or EPS file into a PNG file using gs
 
     10. Parent process (1)
-        store data in a QImage
+        store data in a TQImage
 */
 
 #ifdef HAVE_CONFIG_H
@@ -176,7 +176,7 @@ bool GSCreator::create(const TQString &path, int width, int height, TQImage &img
 {
 // The code in the loop (when testing whether got_sig_term got set)
 // should read some variation of:
-// 		parentJob()->wasKilled()
+// 		tqparentJob()->wasKilled()
 //
 // Unfortunatelly, that's currently impossible without breaking BIC.
 // So we need to catch the signal ourselves.
@@ -234,7 +234,7 @@ bool GSCreator::create(const TQString &path, int width, int height, TQImage &img
   }
 
   const bool is_encapsulated = no_dvi &&
-    (path.find(TQRegExp("\\.epsi?$", false, false)) > 0) &&
+    (path.tqfind(TQRegExp("\\.epsi?$", false, false)) > 0) &&
     (dsc.bbox()->width() > 0) && (dsc.bbox()->height() > 0) && 
     (dsc.page_count() <= 1);
 
@@ -521,7 +521,7 @@ bool GSCreator::getEPSIPreview(const TQString &path, long start, long
     return false;
   }
 
-  TQString previewstr = TQString::fromLatin1(buf);
+  TQString previewstr = TQString::tqfromLatin1(buf);
   free(buf);
 
   int offset = 0;
@@ -567,7 +567,7 @@ bool GSCreator::getEPSIPreview(const TQString &path, long start, long
     for (unsigned int gray = 0; gray < colors; gray++) {
       unsigned int grayvalue = (255U * (colors - 1 - gray)) / 
 	(colors - 1);
-      img.setColor(gray, qRgb(grayvalue, grayvalue, grayvalue));
+      img.setColor(gray, tqRgb(grayvalue, grayvalue, grayvalue));
     }
   }
 

@@ -57,7 +57,7 @@ public:
     */
    virtual TQString listObjectType( ) const = 0;
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -69,7 +69,7 @@ public:
    /**
     * Returns a new @ref PMListPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
 
    /**
     * Returns the color list type
@@ -150,7 +150,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Texture" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -189,7 +189,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Pigment" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -228,7 +228,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "SolidColor" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -267,7 +267,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Density" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -306,14 +306,14 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Normal" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
    /**
     * Returns a new @ref PMListPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
 
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmnormallist" ); }

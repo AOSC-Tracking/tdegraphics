@@ -36,6 +36,7 @@ class kpMainWindow;
 class kpToolPolyline : public kpToolPolygon
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpToolPolyline (kpMainWindow *);

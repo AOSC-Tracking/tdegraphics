@@ -35,7 +35,7 @@ public:
 	AggCanvasFactory();
 	virtual ~AggCanvasFactory();
 
-	virtual TQObject *createObject(TQObject *parent = 0, const char *pname = 0, const char *name = "TQObject", const TQStringList &args = TQStringList());
+	virtual TQObject *createObject(TQObject *tqparent = 0, const char *pname = 0, const char *name = TQOBJECT_OBJECT_NAME_STRING, const TQStringList &args = TQStringList());
 };
 
 };

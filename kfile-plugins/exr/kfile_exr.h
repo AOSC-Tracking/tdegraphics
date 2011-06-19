@@ -29,9 +29,10 @@ class TQStringList;
 class KExrPlugin: public KFilePlugin
 {
     Q_OBJECT
+  TQ_OBJECT
     
 public:
-    KExrPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
+    KExrPlugin( TQObject *tqparent, const char *name, const TQStringList& preferredItems );
 
     virtual bool readInfo( KFileMetaInfo& info, uint );
 };

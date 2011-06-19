@@ -43,7 +43,7 @@ SVGEventImpl::SVGEventImpl()
 	m_defaultPrevented = false;
 	m_id = SVGEvent::UNKNOWN_EVENT;
 	m_eventPhase = 0;
-	m_createTime = TQDateTime::currentDateTime();
+	m_createTime = TQDateTime::tqcurrentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;
@@ -62,7 +62,7 @@ SVGEventImpl::SVGEventImpl(SVGEvent::EventId _id, bool canBubbleArg, bool cancel
 	m_defaultPrevented = false;
 	m_id = _id;
 	m_eventPhase = 0;
-	m_createTime = TQDateTime::currentDateTime();
+	m_createTime = TQDateTime::tqcurrentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;
@@ -345,8 +345,8 @@ SVGKeyEventImpl::SVGKeyEventImpl(TQKeyEvent *key, DOM::AbstractView &view, SVGEv
 {
 	qKeyEvent = new TQKeyEvent(key->type(), key->key(), key->ascii(), key->state(), key->text(), key->isAutoRepeat(), key->count());
 
-	// Events are supposed to be accepted by default in Qt!
-	// This line made QLineEdit's keyevents be ignored, so they were sent to the khtmlview
+	// Events are supposed to be accepted by default in TQt!
+	// This line made TQLineEdit's keyevents be ignored, so they were sent to the khtmlview
 	// (and e.g. space would make it scroll down)
 	//qKeyEvent->ignore();
 
@@ -359,147 +359,147 @@ SVGKeyEventImpl::SVGKeyEventImpl(TQKeyEvent *key, DOM::AbstractView &view, SVGEv
 
 	switch(key->key())
 	{
-		case Qt::Key_Enter:
+		case TQt::Key_Enter:
 			m_numPad = true;
 			/* fall through */
-		case Qt::Key_Return:
+		case TQt::Key_Return:
 			m_virtKeyVal = DOM_VK_ENTER;
 			break;
-		case Qt::Key_NumLock:
+		case TQt::Key_NumLock:
 			m_numPad = true;
 			m_virtKeyVal = DOM_VK_NUM_LOCK;
 			break;
-		case Qt::Key_Alt:
+		case TQt::Key_Alt:
 			m_virtKeyVal = DOM_VK_RIGHT_ALT;
 			// ### DOM_VK_LEFT_ALT;
 			break;
-		case Qt::Key_Control:
+		case TQt::Key_Control:
 			m_virtKeyVal = DOM_VK_LEFT_CONTROL;
 			// ### DOM_VK_RIGHT_CONTROL
 			break;
-		case Qt::Key_Shift:
+		case TQt::Key_Shift:
 			m_virtKeyVal = DOM_VK_LEFT_SHIFT;
 			// ### DOM_VK_RIGHT_SHIFT
 			break;
-		case Qt::Key_Meta:
+		case TQt::Key_Meta:
 			m_virtKeyVal = DOM_VK_LEFT_META;
 			// ### DOM_VK_RIGHT_META
 			break;
-		case Qt::Key_CapsLock:
+		case TQt::Key_CapsLock:
 			m_virtKeyVal = DOM_VK_CAPS_LOCK;
 			break;
-		case Qt::Key_Delete:
+		case TQt::Key_Delete:
 			m_virtKeyVal = DOM_VK_DELETE;
 			break;
-		case Qt::Key_End:
+		case TQt::Key_End:
 			m_virtKeyVal = DOM_VK_END;
 			break;
-		case Qt::Key_Escape:
+		case TQt::Key_Escape:
 			m_virtKeyVal = DOM_VK_ESCAPE;
 			break;
-		case Qt::Key_Home:
+		case TQt::Key_Home:
 			m_virtKeyVal = DOM_VK_HOME;
 			break;
-		case Qt::Key_Insert:
+		case TQt::Key_Insert:
 			m_virtKeyVal = DOM_VK_INSERT;
 			break;
-		case Qt::Key_Pause:
+		case TQt::Key_Pause:
 			m_virtKeyVal = DOM_VK_PAUSE;
 			break;
-		case Qt::Key_Print:
+		case TQt::Key_Print:
 			m_virtKeyVal = DOM_VK_PRINTSCREEN;
 			break;
-		case Qt::Key_ScrollLock:
+		case TQt::Key_ScrollLock:
 			m_virtKeyVal = DOM_VK_SCROLL_LOCK;
 			break;
-		case Qt::Key_Left:
+		case TQt::Key_Left:
 			m_virtKeyVal = DOM_VK_LEFT;
 			break;
-		case Qt::Key_Right:
+		case TQt::Key_Right:
 			m_virtKeyVal = DOM_VK_RIGHT;
 			break;
-		case Qt::Key_Up:
+		case TQt::Key_Up:
 			m_virtKeyVal = DOM_VK_UP;
 			break;
-		case Qt::Key_Down:
+		case TQt::Key_Down:
 			m_virtKeyVal = DOM_VK_DOWN;
 			break;
-		case Qt::Key_Next:
+		case TQt::Key_Next:
 			m_virtKeyVal = DOM_VK_PAGE_DOWN;
 			break;
-		case Qt::Key_Prior:
+		case TQt::Key_Prior:
 			m_virtKeyVal = DOM_VK_PAGE_UP;
 			break;
-		case Qt::Key_F1:
+		case TQt::Key_F1:
 			m_virtKeyVal = DOM_VK_F1;
 			break;
-		case Qt::Key_F2:
+		case TQt::Key_F2:
 			m_virtKeyVal = DOM_VK_F2;
 			break;
-		case Qt::Key_F3:
+		case TQt::Key_F3:
 			m_virtKeyVal = DOM_VK_F3;
 			break;
-		case Qt::Key_F4:
+		case TQt::Key_F4:
 			m_virtKeyVal = DOM_VK_F4;
 			break;
-		case Qt::Key_F5:
+		case TQt::Key_F5:
 			m_virtKeyVal = DOM_VK_F5;
 			break;
-		case Qt::Key_F6:
+		case TQt::Key_F6:
 			m_virtKeyVal = DOM_VK_F6;
 			break;
-		case Qt::Key_F7:
+		case TQt::Key_F7:
 			m_virtKeyVal = DOM_VK_F7;
 			break;
-		case Qt::Key_F8:
+		case TQt::Key_F8:
 			m_virtKeyVal = DOM_VK_F8;
 			break;
-		case Qt::Key_F9:
+		case TQt::Key_F9:
 			m_virtKeyVal = DOM_VK_F9;
 			break;
-		case Qt::Key_F10:
+		case TQt::Key_F10:
 			m_virtKeyVal = DOM_VK_F10;
 			break;
-		case Qt::Key_F11:
+		case TQt::Key_F11:
 			m_virtKeyVal = DOM_VK_F11;
 			break;
-		case Qt::Key_F12:
+		case TQt::Key_F12:
 			m_virtKeyVal = DOM_VK_F12;
 			break;
-		case Qt::Key_F13:
+		case TQt::Key_F13:
 			m_virtKeyVal = DOM_VK_F13;
 			break;
-		case Qt::Key_F14:
+		case TQt::Key_F14:
 			m_virtKeyVal = DOM_VK_F14;
 			break;
-		case Qt::Key_F15:
+		case TQt::Key_F15:
 			m_virtKeyVal = DOM_VK_F15;
 			break;
-		case Qt::Key_F16:
+		case TQt::Key_F16:
 			m_virtKeyVal = DOM_VK_F16;
 			break;
-		case Qt::Key_F17:
+		case TQt::Key_F17:
 			m_virtKeyVal = DOM_VK_F17;
 			break;
-		case Qt::Key_F18:
+		case TQt::Key_F18:
 			m_virtKeyVal = DOM_VK_F18;
 			break;
-		case Qt::Key_F19:
+		case TQt::Key_F19:
 			m_virtKeyVal = DOM_VK_F19;
 			break;
-		case Qt::Key_F20:
+		case TQt::Key_F20:
 			m_virtKeyVal = DOM_VK_F20;
 			break;
-		case Qt::Key_F21:
+		case TQt::Key_F21:
 			m_virtKeyVal = DOM_VK_F21;
 			break;
-		case Qt::Key_F22:
+		case TQt::Key_F22:
 			m_virtKeyVal = DOM_VK_F22;
 			break;
-		case Qt::Key_F23:
+		case TQt::Key_F23:
 			m_virtKeyVal = DOM_VK_F23;
 			break;
-		case Qt::Key_F24:
+		case TQt::Key_F24:
 			m_virtKeyVal = DOM_VK_F24;
 			break;
 		default:
@@ -507,17 +507,17 @@ SVGKeyEventImpl::SVGKeyEventImpl(TQKeyEvent *key, DOM::AbstractView &view, SVGEv
 			break;
 	}
 
-	// m_keyVal should contain the unicode value
+	// m_keyVal should contain the tqunicode value
 	// of the pressed key if available.
 	if (!key->text().isNull())
-		m_keyVal = key->text().unicode()[0];
+		m_keyVal = TQString(key->text()).tqunicode()[0];
 
 	//  m_numPad = ???
 
 	// key->state returns enum ButtonState, which is ShiftButton, ControlButton and AltButton or'ed together.
 	m_modifier = key->state();
 
-	// key->text() returns the unicode sequence as a QString
+	// key->text() returns the tqunicode sequence as a TQString
 	m_outputString = DOM::DOMString(key->text());
 }
 

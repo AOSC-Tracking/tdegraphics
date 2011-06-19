@@ -83,47 +83,47 @@
     be implemented in the future.
 
     {\bf JB2 Images} --- Class \Ref{JB2Image} is the central data structure
-    implemented here.  A #JB2Image# is composed of an array of shapes
-    and an array of blits.  Each shape contains a small bitmap representing an
+    implemented here.  A #JB2Image# is composed of an array of tqshapes
+    and an array of blits.  Each tqshape contains a small bitmap representing an
     elementary blob of ink, such as a character or a segment of line art.
-    Each blit instructs the decoder to render a particular shape at a
+    Each blit instructs the decoder to render a particular tqshape at a
     specified position in the image.  Some compression is already achieved
-    because several blits can refer to the same shape.  A shape can also
-    contain a pointer to a parent shape.  Additional compression is achieved
-    when both shapes are similar because each shape is encoded using the
-    parent shape as a model.  A #"O"# shape for instance could be a parent for
-    both a #"C"# shape and a #"Q"# shape.
+    because several blits can refer to the same tqshape.  A tqshape can also
+    contain a pointer to a tqparent tqshape.  Additional compression is achieved
+    when both tqshapes are similar because each tqshape is encoded using the
+    tqparent tqshape as a model.  A #"O"# tqshape for instance could be a tqparent for
+    both a #"C"# tqshape and a #"Q"# tqshape.
 
     {\bf JB2 Dictionary} --- Class \Ref{JB2Dict} is a peculiar kind of
-    JB2Image which only contains an array of shapes.  These shapes can be
+    JB2Image which only contains an array of tqshapes.  These tqshapes can be
     referenced from another JB2Dict/JB2Image.  This is arranged by setting the
     ``inherited dictionary'' of a JB2Dict/JB2Image using function
-    \Ref{JB2Dict::set_inherited_dict}. Several JB2Images can use shapes from a
+    \Ref{JB2Dict::set_inherited_dict}. Several JB2Images can use tqshapes from a
     same JB2Dict encoded separately.  This is how several pages of a same
     document can share information.
     
     {\bf Decoding JB2 data} --- The first step for decoding JB2 data consists of 
     creating an empty #JB2Image# object.  Function \Ref{JB2Image::decode} then
-    reads the data and populates the #JB2Image# with the shapes and the blits.
+    reads the data and populates the #JB2Image# with the tqshapes and the blits.
     Function \Ref{JB2Image::get_bitmap} finally produces an anti-aliased image.
 
     {\bf Encoding JB2 data} --- The first step for decoding JB2 data also
     consists of creating an empty #JB2Image# object.  You must then use
-    functions \Ref{JB2Image::add_shape} and \Ref{JB2Image::add_blit} to
+    functions \Ref{JB2Image::add_tqshape} and \Ref{JB2Image::add_blit} to
     populate the #JB2Image# object.  Function \Ref{JB2Image::encode} finally
     produces the JB2 data.  Function #encode# sequentially encodes the blits
-    and the necessary shapes.  The compression ratio depends on several
+    and the necessary tqshapes.  The compression ratio depends on several
     factors:
     \begin{itemize}
-    \item Blits should reuse shapes as often as possible.
+    \item Blits should reuse tqshapes as often as possible.
     \item Blits should be sorted in reading order because this facilitates
           the prediction of the blit coordinates.
     \item Shapes should be sorted according to the order of first appearance
           in the sequence of blits because this facilitates the prediction of the
-          shape indices.
-    \item Shapes should be compared to all previous shapes in the shape array.
-          The shape parent pointer should be set to a suitable parent shape if
-          such a parent shape exists.  The parent shape should have almost the
+          tqshape indices.
+    \item Shapes should be compared to all previous tqshapes in the tqshape array.
+          The tqshape tqparent pointer should be set to a suitable tqparent tqshape if
+          such a tqparent tqshape exists.  The tqparent tqshape should have almost the
           same size and the same pixels.
     \end{itemize}
     All this is quite easy to achieve in the case of an electronically
@@ -131,16 +131,16 @@
     characters are and where they are located.  If you only have a scanned
     image however you must first locate the characters (connected component
     analysis) and cut the remaining pieces of ink into smaller blobs.
-    Ordering the blits and matching the shapes is then an essentially
+    Ordering the blits and matching the tqshapes is then an essentially
     heuristic process.  Although the quality of the heuristics substantially
-    effects the file size, misordering blits or mismatching shapes never
+    effects the file size, misordering blits or mismatching tqshapes never
     effects the quality of the image.  The last refinement consists in
-    smoothing the shapes in order to reduce the noise and maximize the
-    similarities between shapes.
+    smoothing the tqshapes in order to reduce the noise and maximize the
+    similarities between tqshapes.
     
     {\bf JB2 extensions} --- Two extensions of the JB2
     encoding format have been introduced with DjVu files version 21. The first
-    extension addresses the shared shape dictionaries. The second extension
+    extension addresses the shared tqshape dictionaries. The second extension
     bounds the number of probability contexts used for coding numbers.
     Both extensions maintain backward compatibility with JB2 as 
     described in the ICFDD proposal. A more complete discussion
@@ -190,42 +190,42 @@ class ByteStream;
 
 /** Blit data structure.  A #JB2Image# contains an array of #JB2Blit# data
     structures.  Each array entry instructs the decoder to render a particular
-    shape at a particular location.  Members #left# and #bottom# specify the
-    coordinates of the bottom left corner of the shape bitmap.  All
+    tqshape at a particular location.  Members #left# and #bottom# specify the
+    coordinates of the bottom left corner of the tqshape bitmap.  All
     coordinates are relative to the bottom left corner of the image.  Member
-    #shapeno# is the subscript of the shape to be rendered.  */
+    #tqshapeno# is the subscript of the tqshape to be rendered.  */
 
 class JB2Blit {
 public:
-  /** Horizontal coordinate of the blit. */
+  /**Qt::Horizontal coordinate of the blit. */
   unsigned short left;
-  /** Vertical coordinate of the blit. */
+  /**Qt::Vertical coordinate of the blit. */
   unsigned short bottom;
-  /** Index of the shape to blit. */
-  unsigned int shapeno;
+  /** Index of the tqshape to blit. */
+  unsigned int tqshapeno;
 };
 
 
 /** Shape data structure.  A #JB2Image# contains an array of #JB2Shape# data
     structures.  Each array entry represents an elementary blob of ink such as
     a character or a segment of line art.  Member #bits# points to a bilevel
-    image representing the shape pixels.  Member #parent# is the subscript of
-    the parent shape.  */
+    image representing the tqshape pixels.  Member #tqparent# is the subscript of
+    the tqparent tqshape.  */
 
 class JB2Shape
 { 
 public: 
-  /** Subscript of the parent shape.  The parent shape must always be located
-      before the current shape in the shape array.  A negative value indicates
-      that this shape has no parent.  Any negative values smaller than #-1#
-      further indicates that this shape does not look like a character.  This
+  /** Subscript of the tqparent tqshape.  The tqparent tqshape must always be located
+      before the current tqshape in the tqshape array.  A negative value indicates
+      that this shape.has no tqparent.  Any negative values smaller than #-1#
+      further indicates that this tqshape does not look like a character.  This
       is used to enable a few internal optimizations.  This information is
-      saved into the JB2 file, but the actual value of the #parent# variable
+      saved into the JB2 file, but the actual value of the #tqparent# variable
       is not. */
-  int parent; 
-  /** Bilevel image of the shape pixels.  This must be a pointer to a bilevel
+  int tqparent; 
+  /** Bilevel image of the tqshape pixels.  This must be a pointer to a bilevel
       #GBitmap# image.  This pointer can also be null. The encoder will just
-      silently discard all blits referring to a shape containing a null
+      silently discard all blits referring to a tqshape containing a null
       bitmap. */
   GP<GBitmap> bits;
   /** Private user data. This long word is provided as a convenience for users
@@ -238,14 +238,14 @@ public:
 
 /** JB2 Dictionary callback.
     The decoding function call this callback function when they discover that
-    the current JB2Image or JB2Dict needs a pre-existing shape dictionary. 
+    the current JB2Image or JB2Dict needs a pre-existing tqshape dictionary. 
     The callback function must return a pointer to the dictionary or NULL
     if none is found. */
 
 typedef GP<JB2Dict> JB2DecoderCallback ( void* );
 
 
-/** Dictionary of JB2 shapes. */
+/** Dictionary of JB2 tqshapes. */
 
 class JB2Dict : public GPEnabled
 {
@@ -257,43 +257,43 @@ public:
   // CONSTRUCTION
   /** Default creator.  Constructs an empty #JB2Dict# object.  You can then
       call the decoding function #decode#.  You can also manually set the
-      image size using #add_shape#. */
+      image size using #add_tqshape#. */
   static GP<JB2Dict> create(void);
 
   // INITIALIZATION
-  /** Resets the #JB2Image# object.  This function reinitializes both the shape
+  /** Resets the #JB2Image# object.  This function reinitializes both the tqshape
      and the blit arrays.  All allocated memory is freed. */
   void init(void);
 
   // INHERITED
   /** Returns the inherited dictionary. */
   GP<JB2Dict> get_inherited_dict(void) const;
-  /** Returns the number of inherited shapes. */
-  int get_inherited_shape_count(void) const;
+  /** Returns the number of inherited tqshapes. */
+  int get_inherited_tqshape_count(void) const;
   /** Sets the inherited dictionary. */
   void set_inherited_dict(const GP<JB2Dict> &dict);
 
   // ACCESSING THE SHAPE LIBRARY
-  /** Returns the total number of shapes.
-      Shape indices range from #0# to #get_shape_count()-1#. */
-  int get_shape_count(void) const;
-  /** Returns a pointer to shape #shapeno#.
-      The returned pointer directly points into the shape array.
-      This pointer can be used for reading or writing the shape data. */
-  JB2Shape &get_shape(const int shapeno);
-  /** Returns a constant pointer to shape #shapeno#.
-      The returned pointer directly points into the shape array.
-      This pointer can only be used for reading the shape data. */
-  const JB2Shape &get_shape(const int shapeno) const;
-  /** Appends a shape to the shape array.  This function appends a copy of
-      shape #shape# to the shape array and returns the subscript of the new
-      shape.  The subscript of the parent shape #shape.parent# must 
-      actually designate an already existing shape. */
-  int  add_shape(const JB2Shape &shape);
+  /** Returns the total number of tqshapes.
+      Shape indices range from #0# to #get_tqshape_count()-1#. */
+  int get_tqshape_count(void) const;
+  /** Returns a pointer to tqshape #tqshapeno#.
+      The returned pointer directly points into the tqshape array.
+      This pointer can be used for reading or writing the tqshape data. */
+  JB2Shape &get_tqshape(const int tqshapeno);
+  /** Returns a constant pointer to tqshape #tqshapeno#.
+      The returned pointer directly points into the tqshape array.
+      This pointer can only be used for reading the tqshape data. */
+  const JB2Shape &get_tqshape(const int tqshapeno) const;
+  /** Appends a tqshape to the tqshape array.  This function appends a copy of
+      tqshape #tqshape# to the tqshape array and returns the subscript of the new
+      tqshape.  The subscript of the tqparent tqshape #tqshape.tqparent# must 
+      actually designate an already existing tqshape. */
+  int  add_tqshape(const JB2Shape &tqshape);
 
   // MEMORY OPTIMIZATION
-  /** Compresses all shape bitmaps.  This function reduces the memory required
-      by the #JB2Image# by calling \Ref{GBitmap::compress} on all shapes
+  /** Compresses all tqshape bitmaps.  This function reduces the memory required
+      by the #JB2Image# by calling \Ref{GBitmap::compress} on all tqshapes
       bitmaps.  This function is best called after decoding a #JB2Image#,
       because function \Ref{get_bitmap} can directly use the compressed
       bitmaps.  */
@@ -307,9 +307,9 @@ public:
       This function generates the JB2 data stream without any header.   */
   void encode(const GP<ByteStream> &gbs) const;
   /** Decodes JB2 data from ByteStream #bs#. This function decodes the image
-      size and populates the shape and blit arrays.  The callback function
+      size and populates the tqshape and blit arrays.  The callback function
       #cb# is called when the decoder determines that the ByteStream data
-      requires a shape dictionary which has not been set with
+      requires a tqshape dictionary which has not been set with
       \Ref{JB2Dict::set_inherited_dict}. The callback receives argument #arg#
       and must return a suitable dictionary which will be installed as the
       inherited dictionary.  The callback should return null if no such
@@ -322,15 +322,15 @@ public:
   GUTF8String comment;
 
 private:
-  int inherited_shapes;
+  int inherited_tqshapes;
   GP<JB2Dict> inherited_dict;
-  GArray<JB2Shape> shapes;
+  GArray<JB2Shape> tqshapes;
   
 };
 
-/** Main JB2 data structure.  Each #JB2Image# consists of an array of shapes
+/** Main JB2 data structure.  Each #JB2Image# consists of an array of tqshapes
     and an array of blits.  These arrays can be populated by hand using
-    functions \Ref{add_shape} and \Ref{add_blit}, or by decoding JB2 data
+    functions \Ref{add_tqshape} and \Ref{add_blit}, or by decoding JB2 data
     using function \Ref{decode}.  You can then use function \Ref{get_bitmap}
     to render anti-aliased images, or use function \Ref{encode} to generate
     JB2 data. */
@@ -343,12 +343,12 @@ public:
 
   /** Creates an empty #JB2Image# object.  You can then
       call the decoding function #decode#.  You can also manually set the
-      image size using #set_dimension# and populate the shape and blit arrays
-      using #add_shape# and #add_blit#. */
+      image size using #set_dimension# and populate the tqshape and blit arrays
+      using #add_tqshape# and #add_blit#. */
   static GP<JB2Image> create(void) { return new JB2Image(); }
 
   // INITIALIZATION
-  /** Resets the #JB2Image# object.  This function reinitializes both the shape
+  /** Resets the #JB2Image# object.  This function reinitializes both the tqshape
      and the blit arrays.  All allocated memory is freed. */
   void init(void);
 
@@ -370,7 +370,7 @@ public:
       JB2Image as a bilevel or gray level image.  Argument #subsample#
       specifies the desired subsampling ratio in range #1# to #15#.  The
       returned image uses #1+subsample^2# gray levels for representing
-      anti-aliased edges.  Argument #align# specified the alignment of the
+      anti-aliased edges.  Argument #align# specified the tqalignment of the
       rows of the returned images.  Setting #align# to #4#, for instance, will
       adjust the bitmap border in order to make sure that each row of the
       returned image starts on a word (four byte) boundary. */
@@ -380,7 +380,7 @@ public:
       this function first renders the full JB2Image with subsampling ratio
       #subsample# and then extracts rectangle #rect# in the subsampled image.
       Both operations of course are efficiently performed simultaneously.
-      Argument #align# specified the alignment of the rows of the returned
+      Argument #align# specified the tqalignment of the rows of the returned
       images, as explained above.  Argument #dispy# should remain null. */
   GP<GBitmap> get_bitmap(const GRect &rect, int subsample=1, int align=1, int dispy=0) const;
 
@@ -393,13 +393,13 @@ public:
       This pointer can be used for reading or writing the blit data. */
   JB2Blit *get_blit(int blitno);
   /** Returns a constant pointer to blit #blitno#.
-      The returned pointer directly points into the shape array.
-      This pointer can only be used for reading the shape data. */
+      The returned pointer directly points into the tqshape array.
+      This pointer can only be used for reading the tqshape data. */
   const JB2Blit *get_blit(int blitno) const;
   /** Appends a blit to the blit array.  This function appends a copy of blit
       #blit# to the blit array and returns the subscript of the new blit.  The
-      shape subscript #blit.shapeno# must actually designate an already
-      existing shape. */
+      tqshape subscript #blit.tqshapeno# must actually designate an already
+      existing tqshape. */
   int  add_blit(const JB2Blit &blit);
 
   // MEMORY OPTIMIZATION
@@ -412,9 +412,9 @@ public:
       This function generates the JB2 data stream without any header. */
   void encode(const GP<ByteStream> &gbs) const;
   /** Decodes JB2 data from ByteStream #bs#. This function decodes the image
-      size and populates the shape and blit arrays.  The callback function
+      size and populates the tqshape and blit arrays.  The callback function
       #cb# is called when the decoder determines that the ByteStream data
-      requires a shape dictionary which has not been set with
+      requires a tqshape dictionary which has not been set with
       \Ref{JB2Dict::set_inherited_dict}. The callback receives argument #arg#
       and must return a suitable dictionary which will be installed as the
       inherited dictionary.  The callback should return null if no such
@@ -438,15 +438,15 @@ public:
 // JB2DICT INLINE FUNCTIONS
 
 inline int
-JB2Dict::get_shape_count(void) const
+JB2Dict::get_tqshape_count(void) const
 {
-  return inherited_shapes + shapes.size();
+  return inherited_tqshapes + tqshapes.size();
 }
 
 inline int
-JB2Dict::get_inherited_shape_count(void) const
+JB2Dict::get_inherited_tqshape_count(void) const
 {
-  return inherited_shapes;
+  return inherited_tqshapes;
 }
 
 inline GP<JB2Dict>
@@ -501,7 +501,7 @@ JB2Image::get_blit(int blitno) const
     These extensions are described below by reference to the ICFDD
     proposal dated August 1999.  Both extension make use of the unused
     record type value #9# (cf. ICFDD page 24) which has been renamed
-    #REQUIRED_DICT_OR_RESET#.
+    #RETQUIRED_DICT_OR_RESET#.
 
     {\bf Shared Shape Dictionaries} --- This extension provides
     support for sharing symbol definitions between the pages of a
@@ -515,7 +515,7 @@ JB2Image::get_blit(int blitno) const
     by the following records.  The first record usually is a ``Start
     Of Image'' record describing the size of the image.
 
-    Starting with version 21, a #REQUIRED_DICT_OR_RESET# (9) record
+    Starting with version 21, a #RETQUIRED_DICT_OR_RESET# (9) record
     type can appear {\em before} the #START_OF_DATA# (0) record.  The
     record type field is followed by a single number arithmetically
     encoded (cf. ICFDD page 26) using a sixteenth context (cf. ICFDD
@@ -548,7 +548,7 @@ JB2Image::get_blit(int blitno) const
     contexts. These contexts are normally allocated when they are used
     for the first time (cf. ICFDD informative note, page 27).
 
-    Starting with version 21, a #REQUIRED_DICT_OR_RESET# (9) record
+    Starting with version 21, a #RETQUIRED_DICT_OR_RESET# (9) record
     type can appear {\em after} the #START_OF_DATA# (0) record.  The
     decoder should proceed with the next record after {\em clearing
     all binary contexts used for coding numbers}.  This operation
@@ -556,7 +556,7 @@ JB2Image::get_blit(int blitno) const
     numbers can be deallocated.
   
     Starting with version 21, the JB2 encoder should insert a
-    #REQUIRED_DICT_OR_RESET# record type whenever the number of these
+    #RETQUIRED_DICT_OR_RESET# record type whenever the number of these
     allocated binary contexts exceeds #20000#.  Only very large
     documents ever reach such a large number of allocated binary
     contexts (e.g large maps).  Hardware implementation however can
@@ -612,7 +612,7 @@ protected:
   void reset_numcoder(void);
   inline void code_eventual_lossless_refinement(void);
   void init_library(JB2Dict &jim);
-  int add_library(const int shapeno, JB2Shape &jshp);
+  int add_library(const int tqshapeno, JB2Shape &jshp);
   void code_relative_location(JB2Blit *jblt, int rows, int columns);
   void code_bitmap_directly (GBitmap &bm);
   void code_bitmap_by_cross_coding (GBitmap &bm, GP<GBitmap> &cbm, const int libno);
@@ -640,7 +640,7 @@ protected:
   virtual void code_comment(GUTF8String &comment) = 0;
   virtual void code_record_type(int &rectype) = 0;
   virtual int code_match_index(int &index, JB2Dict &jim)=0;
-  virtual void code_inherited_shape_count(JB2Dict &jim)=0;
+  virtual void code_inherited_tqshape_count(JB2Dict &jim)=0;
   virtual void code_image_size(JB2Dict &jim);
   virtual void code_image_size(JB2Image &jim);
   virtual void code_absolute_location(JB2Blit *jblt,  int rows, int columns)=0;
@@ -678,8 +678,8 @@ protected:
   NumContext dist_match_index;
   BitContext dist_refinement_flag;
   // Library
-  GTArray<int> shape2lib;
-  GTArray<int> lib2shape;
+  GTArray<int> tqshape2lib;
+  GTArray<int> lib2tqshape;
   GTArray<LibRect> libinfo;
   // Code pairs
   NumContext abs_loc_x;
@@ -687,7 +687,7 @@ protected:
   NumContext abs_size_x;
   NumContext abs_size_y;
   NumContext image_size_dist;
-  NumContext inherited_shape_count_dist;
+  NumContext inherited_tqshape_count_dist;
   BitContext offset_type_dist;
   NumContext rel_loc_x_current;
   NumContext rel_loc_x_last;

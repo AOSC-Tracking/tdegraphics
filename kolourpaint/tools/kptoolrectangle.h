@@ -50,9 +50,10 @@ class kpViewManager;
 class kpToolRectangle : public kpTool
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    // it turns out that these shapes are all really the same thing
+    // it turns out that these tqshapes are all really the same thing
     // (same options, same feel) - the only real difference is the
     // drawing functions (a one line change)
     enum Mode {Rectangle, RoundedRectangle, Ellipse};
@@ -102,10 +103,10 @@ private:
     kpToolWidgetFillStyle *m_toolWidgetFillStyle;
 
     void updatePen (int mouseButton);
-    TQPen m_pen [2], m_maskPen [2];
+    TQPen m_pen [2], m_tqmaskPen [2];
 
     void updateBrush (int mouseButton);
-    TQBrush m_brush [2], m_maskBrush [2];
+    TQBrush m_brush [2], m_tqmaskBrush [2];
 
     void applyModifiers ();
     TQPoint m_toolRectangleStartPoint, m_toolRectangleEndPoint;
@@ -116,8 +117,8 @@ class kpToolRectangleCommand : public kpCommand
 {
 public:
     kpToolRectangleCommand (kpToolRectangle::Mode mode,
-                            const TQPen &pen, const TQPen &maskPen,
-                            const TQBrush &brush, const TQBrush &maskBrush,
+                            const TQPen &pen, const TQPen &tqmaskPen,
+                            const TQBrush &brush, const TQBrush &tqmaskBrush,
                             const TQRect &rect,
                             const TQPoint &startPoint, const TQPoint &endPoint,
                             kpMainWindow *mainWindow);
@@ -132,8 +133,8 @@ public:
 
 private:
     kpToolRectangle::Mode m_mode;
-    TQPen m_pen, m_maskPen;
-    TQBrush m_brush, m_maskBrush;
+    TQPen m_pen, m_tqmaskPen;
+    TQBrush m_brush, m_tqmaskBrush;
     TQRect m_rect;
     TQPoint m_startPoint, m_endPoint;
     TQPixmap *m_oldPixmapPtr;

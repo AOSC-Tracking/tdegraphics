@@ -20,8 +20,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -38,8 +38,8 @@
 #include "imgnamecombo.h"
 #include "img_saver.h"
 
-ImageNameCombo::ImageNameCombo( TQWidget *parent )
-   : KComboBox( parent )
+ImageNameCombo::ImageNameCombo( TQWidget *tqparent )
+   : KComboBox( tqparent )
 {
    setInsertionPolicy( TQComboBox::AtTop );
 }
@@ -51,12 +51,12 @@ ImageNameCombo::~ImageNameCombo()
 
 void ImageNameCombo::slotPathRemove( KFileTreeBranch *branch, const TQString& relPath )
 {
-   TQString path = branch->name() + TQString::fromLatin1(" - ") + relPath;
+   TQString path = branch->name() + TQString::tqfromLatin1(" - ") + relPath;
 
    kdDebug(28000) << "ImageNameCombo: Removing " << path << endl;
    TQString select = currentText();
    
-   if( items.contains( path ))
+   if( items.tqcontains( path ))
    {
       kdDebug(28000) << "ImageNameCombo: Item exists-> deleting" << endl;
       items.remove( path );
@@ -74,7 +74,7 @@ void ImageNameCombo::rewriteList( KFileTreeBranch *branch, const TQString& selTe
       insertItem( branch->pixmap(), *it );
    }
 
-   int index = items.findIndex( selText );
+   int index = items.tqfindIndex( selText );
    setCurrentItem( index );
 }
 
@@ -82,7 +82,7 @@ void ImageNameCombo::slotGalleryPathChanged( KFileTreeBranch* branch, const TQSt
 {
    TQString newPath;
 
-   newPath = branch->name() + TQString::fromLatin1(" - ") + relativPath;
+   newPath = branch->name() + TQString::tqfromLatin1(" - ") + relativPath;
 
    kdDebug( 28000) << "Inserting " << newPath << " to combobox" << endl;
 

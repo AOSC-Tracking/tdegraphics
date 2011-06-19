@@ -66,11 +66,11 @@ void PMScale::readAttributes( const PMXMLHelper& h )
    m_scale = h.vectorAttribute( "value", scaleDefault );
 }
 
-PMMetaObject* PMScale::metaObject( ) const
+PMMetaObject* PMScale::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Scale", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Scale", Base::tqmetaObject( ),
                                         createNewScale );
       s_pMetaObject->addProperty(
          new PMScaleProperty( "scale", &PMScale::setScale, &PMScale::scale ) );
@@ -102,9 +102,9 @@ void PMScale::setScale( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMScale::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMScale::editWidget( TQWidget* tqparent ) const
 {
-   return new PMScaleEdit( parent );
+   return new PMScaleEdit( tqparent );
 }
 
 void PMScale::restoreMemento( PMMemento* s )

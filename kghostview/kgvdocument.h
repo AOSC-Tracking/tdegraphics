@@ -31,9 +31,10 @@ class KPrinter;
 class KTempFile;
 class Pdf2dsc;
 
-class KGVDocument : public QObject
+class KGVDocument : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum Format { PS, PDF };
@@ -116,7 +117,7 @@ protected:
      * kdelibs installed. Generally it will work for .gz and .bz2
      */
     bool uncompressFile();
-    void openPSFile(const TQString &file=TQString::null);
+    void openPSFile(const TQString &file=TQString());
 
 protected:
     bool savePages( const TQString& saveFileName,
@@ -156,12 +157,13 @@ private:
 };
 
 
-class Pdf2dsc : public QObject
+class Pdf2dsc : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 	
 public:
-    Pdf2dsc( const TQString& ghostscriptPath, TQObject* parent = 0, const char* name = 0 );
+    Pdf2dsc( const TQString& ghostscriptPath, TQObject* tqparent = 0, const char* name = 0 );
     ~Pdf2dsc();
     
     void run( const TQString& pdfName, const TQString& dscName );

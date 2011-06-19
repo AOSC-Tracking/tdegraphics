@@ -70,21 +70,22 @@ class KProcess;
 class PMPart : public KParts::ReadWritePart, virtual public PMPartIface
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * construtor of PMPart, calls all init functions to create the
     * application.
     */
-   PMPart( TQWidget* parentWidget, const char* widgetName,
-           TQObject* parent, const char* name, bool readWrite,
+   PMPart( TQWidget* tqparentWidget, const char* widgetName,
+           TQObject* tqparent, const char* name, bool readWrite,
            PMShell* shell = 0 );
 
    /**
     * construtor of PMPart, calls all init functions to create the
     * application. It does not create the main widget.
     */
-   PMPart( TQWidget* parentWidget, const char* widgetName,
-           TQObject* parent, const char* name, bool readWrite,
+   PMPart( TQWidget* tqparentWidget, const char* widgetName,
+           TQObject* tqparent, const char* name, bool readWrite,
            bool onlyCutPaste, PMShell* shell = 0 );
 
    /**
@@ -770,7 +771,7 @@ protected:
     * creates the widget of the part instance and sets
     * it as the view
     */
-   void initView( TQWidget* parent, const char* name );
+   void initView( TQWidget* tqparent, const char* name );
    /**
     * initializes the documents contents
     */
@@ -1025,10 +1026,11 @@ private:
 class PMBrowserExtension : public KParts::BrowserExtension
 {
    Q_OBJECT
+  TQ_OBJECT
    friend class PMPart;
 public:
-   PMBrowserExtension( PMPart* parent )
-      : KParts::BrowserExtension( parent, "PMBrowserExtension" )
+   PMBrowserExtension( PMPart* tqparent )
+      : KParts::BrowserExtension( tqparent, "PMBrowserExtension" )
    {
        KGlobal::locale()->insertCatalogue("kpovmodeler");
    }

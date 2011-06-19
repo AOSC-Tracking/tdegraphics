@@ -154,7 +154,7 @@ public:
     */
    TQPtrListIterator<PMRuleBase> childIterator( ) const
    {
-      return TQPtrListIterator<PMRuleBase>( m_children );
+      return TQPtrListIterator<PMRuleBase>( m_tqchildren );
    }
 protected:
    /**
@@ -170,7 +170,7 @@ protected:
    /**
     * Add all child nodes to this list.
     */
-   TQPtrList<PMRuleBase> m_children;
+   TQPtrList<PMRuleBase> m_tqchildren;
 };
 
 /**
@@ -344,7 +344,7 @@ private:
 };
 
 /**
- * Condition. Value is true if the object already contains
+ * Condition. Value is true if the object already tqcontains
  * objects of certaint classes before the insert point.
  */
 class PMRuleBefore : public PMRuleCondition
@@ -371,11 +371,11 @@ protected:
    virtual void resetProtected( );
 private:
    TQPtrList<PMRuleCategory> m_categories;
-   bool m_contains;
+   bool m_tqcontains;
 };
 
 /**
- * Condition. Value is true if the object already contains
+ * Condition. Value is true if the object already tqcontains
  * objects of certaint classes after the insert point.
  */
 class PMRuleAfter : public PMRuleCondition
@@ -402,11 +402,11 @@ protected:
    virtual void resetProtected( );
 private:
    TQPtrList<PMRuleCategory> m_categories;
-   bool m_contains;
+   bool m_tqcontains;
 };
 
 /**
- * Condition. Value is true if the object already contains
+ * Condition. Value is true if the object already tqcontains
  * objects of certaint classes.
  */
 class PMRuleContains : public PMRuleCondition
@@ -433,7 +433,7 @@ protected:
    virtual void resetProtected( );
 private:
    TQPtrList<PMRuleCategory> m_categories;
-   bool m_contains;
+   bool m_tqcontains;
 };
 
 /**
@@ -535,7 +535,7 @@ public:
    /**
     * Returns the conditions value.
     */
-   bool evaluate( const PMObject* parent );
+   bool evaluate( const PMObject* tqparent );
 
 private:
    TQPtrList<PMRuleCategory> m_categories;
@@ -561,7 +561,7 @@ public:
    ~PMRuleTargetClass( );
 
    /**
-    * Reads rules and groups from the QDomELement and appends
+    * Reads rules and groups from the TQDomELement and appends
     * them to the local ones.
     */
    void appendRules( TQDomElement& e, TQPtrList<PMRuleDefineGroup>& globalGroups );
@@ -624,7 +624,7 @@ public:
     * The parser uses the third parameter for top level objects. These objects
     * have to be treated as if they are inserted after the object after.
     */
-   bool canInsert( const PMObject* parentObject, const TQString& className,
+   bool canInsert( const PMObject* tqparentObject, const TQString& className,
                    const PMObject* after, const PMObjectList* objectsBetween = 0 );
 
    /**
@@ -634,20 +634,20 @@ public:
     * The parser uses the third parameter for top level objects. These objects
     * have to be treated as if they are inserted after the object after.
     *
-    * Same as canInsert( parentObject, object->class( ), after, objectsBetween )
+    * Same as canInsert( tqparentObject, object->class( ), after, objectsBetween )
     */
-   bool canInsert( const PMObject* parentObject, const PMObject* object,
+   bool canInsert( const PMObject* tqparentObject, const PMObject* object,
                    const PMObject* after, const PMObjectList* objectsBetween = 0 );
 
    /**
     * Returns the number of objects that can be inserted at that position
     */
-   int canInsert( const PMObject* parentObject, const PMObjectList& list,
+   int canInsert( const PMObject* tqparentObject, const PMObjectList& list,
                   const PMObject* after );
    /**
     * Returns the number of objects that can be inserted at that position
     */
-   int canInsert( const PMObject* parentObject, const TQStringList& listOfClasses,
+   int canInsert( const PMObject* tqparentObject, const TQStringList& listOfClasses,
                   const PMObject* after );
    /**
     * Returns a pointer to the part

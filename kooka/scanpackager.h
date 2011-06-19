@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -74,8 +74,9 @@ private:
 class ScanPackager : public KFileTreeView
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    ScanPackager( TQWidget *parent);
+    ScanPackager( TQWidget *tqparent);
     ~ScanPackager();
     virtual TQString getImgName( TQString name_on_disk );
 
@@ -142,7 +143,7 @@ private:
    KFileTreeViewItem *spFindItem( SearchType type, const TQString name, const KFileTreeBranch* branch = 0 );
    TQString       itemDirectory( const KFileTreeViewItem*, bool relativ = false ) const;
 
-   // int 	        readDir( TQListViewItem *parent, TQString dir_to_read );
+   // int 	        readDir( TQListViewItem *tqparent, TQString dir_to_read );
     void         showContextMenu( TQPoint p, bool show_folder = true );
 
     TQString      m_currImportDir;

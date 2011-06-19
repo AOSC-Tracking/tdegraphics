@@ -72,7 +72,7 @@ void Loader::requestDownload( const KURL& url )
 
 void Loader::slotData( KIO::Job *job, const TQByteArray& data )
 {
-    DownloadIterator it = m_downloads.find( static_cast<KIO::TransferJob*>(job) );
+    DownloadIterator it = m_downloads.tqfind( static_cast<KIO::TransferJob*>(job) );
     if ( it != m_downloads.end() ) {
         TQBuffer& buffer = it.data()->m_buffer;
         if ( !buffer.isOpen() )
@@ -90,7 +90,7 @@ void Loader::slotResult( KIO::Job *job )
 {
     KIO::TransferJob *tjob = static_cast<KIO::TransferJob*>( job );
 
-    DownloadIterator it = m_downloads.find( tjob );
+    DownloadIterator it = m_downloads.tqfind( tjob );
     if ( it != m_downloads.end() ) {
         Download *d = it.data();
 

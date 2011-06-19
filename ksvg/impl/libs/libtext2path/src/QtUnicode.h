@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef T2P_QT_UNICODE_H
-#define T2P_QT_UNICODE_H
+#ifndef T2P_TQT_UNICODE_H
+#define T2P_TQT_UNICODE_H
 
 namespace T2P
 {

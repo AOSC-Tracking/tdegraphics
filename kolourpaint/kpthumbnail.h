@@ -35,12 +35,13 @@ class kpMainWindow;
 class kpThumbnailView;
 
 
-class kpThumbnail : public QDockWindow
+class kpThumbnail : public TQDockWindow
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpThumbnail (kpMainWindow *parent, const char *name = 0);
+    kpThumbnail (kpMainWindow *tqparent, const char *name = 0);
     virtual ~kpThumbnail ();
 
 public:

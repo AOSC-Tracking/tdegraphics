@@ -27,9 +27,10 @@
 class KTiffPlugin: public KFilePlugin
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    KTiffPlugin(TQObject *parent, const char *name, const TQStringList& args);
+    KTiffPlugin(TQObject *tqparent, const char *name, const TQStringList& args);
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:

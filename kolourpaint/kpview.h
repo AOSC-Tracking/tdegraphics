@@ -56,9 +56,10 @@ class kpViewScrollableContainer;
  *
  * @author Clarence Dang <dang@kde.org>
  */
-class kpView : public QWidget
+class kpView : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     /**
@@ -80,7 +81,7 @@ public:
             kpViewManager *viewManager,
             kpView *buddyView,
             kpViewScrollableContainer *scrollableContainer,
-            TQWidget *parent, const char *name);
+            TQWidget *tqparent, const char *name);
 
     /**
      * Destructs this view.  Informs the viewManager() that the mouse
@@ -147,8 +148,8 @@ public:
     /**
      * Sets the horizontal and vertical zoom levels.
      *
-     * @param hzoom Horizontal zoom level.
-     * @param vzoom Vertical zoom level.
+     * @param hzoomQt::Horizontal zoom level.
+     * @param vzoomQt::Vertical zoom level.
      *
      * If reimplementing, you must call this base implementation.
      */
@@ -227,7 +228,7 @@ protected slots:
 public:
 
     /**
-     * @param viewX Horizontal position in view coordinates.
+     * @param viewXQt::Horizontal position in view coordinates.
      *
      * @returns viewX transformed to document coordinates, based on the
      *                origin() and zoomLevelX().
@@ -235,7 +236,7 @@ public:
     double transformViewToDocX (double viewX) const;
 
     /**
-     * @param viewY Vertical position in view coordinates.
+     * @param viewYQt::Vertical position in view coordinates.
      *
      * @returns viewY transformed to document coordinates, based on the
      *                origin() and zoomLevelY().
@@ -264,7 +265,7 @@ public:
 
 
     /**
-     * @param docX Horizontal position in document coordinates.
+     * @param docXQt::Horizontal position in document coordinates.
      *
      * @returns docX transformed to view coordinates, based on the origin()
      *               and zoomLevelX().
@@ -272,7 +273,7 @@ public:
     double transformDocToViewX (double docX) const;
 
     /**
-     * @param docY Vertical position in document coordinates.
+     * @param docYQt::Vertical position in document coordinates.
      *
      * @returns docY transformed to view coordinates, based on the origin()
      *               and zoomLevelY().
@@ -343,10 +344,10 @@ protected:
 public:
     /**
      * Adds a region (in view coordinates) to the dirty area that is
-     * repainted when the parent @ref kpViewManager is set not to queue
+     * tqrepainted when the tqparent @ref kpViewManager is set not to queue
      * updates.
      *
-     * @param region Region (in view coordinates) that needs repainting.
+     * @param region Region (in view coordinates) that needs tqrepainting.
      */
     void addToQueuedArea (const TQRegion &region);
 
@@ -354,10 +355,10 @@ public:
      * Convenience function.  Same as above.
      *
      * Adds a rectangle (in view coordinates) to the dirty area that is
-     * repainted when the parent @ref kpViewManager is set not to queue
+     * tqrepainted when the tqparent @ref kpViewManager is set not to queue
      * updates.
      *
-     * @param rect Rectangle (in view coordinates) that needs repainting.
+     * @param rect Rectangle (in view coordinates) that needs tqrepainting.
      */
      void addToQueuedArea (const TQRect &rect);
 
@@ -365,11 +366,11 @@ public:
      * Removes the dirty region that has been queued for updating.
      * Does not update the view.
      */
-    void invalidateQueuedArea ();
+    void tqinvalidateQueuedArea ();
 
     /**
      * Updates the part of the view described by dirty region and then
-     * calls invalidateQueuedArea().  Does nothing if @ref kpViewManager
+     * calls tqinvalidateQueuedArea().  Does nothing if @ref kpViewManager
      * is set to queue updates.
      */
     void updateQueuedArea ();

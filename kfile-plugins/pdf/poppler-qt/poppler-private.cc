@@ -23,7 +23,7 @@
 #include "poppler-private.h"
 #include "poppler-link-qt3.h"
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <Outline.h>
 #include <Link.h>
@@ -31,22 +31,22 @@
 namespace Poppler {
 
 /* borrowed from kpdf */
-QString unicodeToQString(Unicode* u, int len)
+TQString tqunicodeToTQString(Unicode* u, int len)
 {
-    QString ret;
+    TQString ret;
     ret.setLength(len);
-    QChar* qch = (QChar*) ret.unicode();
+    TQChar* qch = (TQChar*) ret.tqunicode();
     for (;len;--len)
-      *qch++ = (QChar) *u++;
+      *qch++ = (TQChar) *u++;
     return ret;
 }
 
-QString UnicodeParsedString(GooString *s1)
+TQString UnicodeParsedString(GooString *s1)
 {
     GBool isUnicode;
     int i;
     Unicode u;
-    QString result;
+    TQString result;
     if ( ( s1->getChar(0) & 0xff ) == 0xfe && ( s1->getChar(1) & 0xff ) == 0xff )
     {
         isUnicode = gTrue;
@@ -69,24 +69,24 @@ QString UnicodeParsedString(GooString *s1)
             u = s1->getChar(i) & 0xff;
             ++i;
         }
-        result += unicodeToQString( &u, 1 );
+        result += tqunicodeToTQString( &u, 1 );
     }
     return result;
 }
 
-GooString *QStringToGooString(const QString &s)
+GooString *TQStringToGooString(const TQString &s)
 {
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
-      cstring[i] = s.at(i).unicode();
+      cstring[i] = s.tqat(i).tqunicode();
     GooString *ret = new GooString(cstring, len);
     gfree(cstring);
     return ret;
 }
 
 
-void DocumentData::addTocChildren( QDomDocument * docSyn, QDomNode * parent, GooList * items )
+void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * tqparent, GooList * items )
 {
     int numItems = items->getLength();
     for ( int i = 0; i < numItems; ++i )
@@ -95,15 +95,15 @@ void DocumentData::addTocChildren( QDomDocument * docSyn, QDomNode * parent, Goo
         OutlineItem * outlineItem = (OutlineItem *)items->get( i );
 
         // 1. create element using outlineItem's title as tagName
-        QString name;
+        TQString name;
         Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
-        name = unicodeToQString(uniChar, titleLength);
+        name = tqunicodeToTQString(uniChar, titleLength);
         if ( name.isEmpty() )
             continue;
 
-        QDomElement item = docSyn->createElement( name );
-        parent->appendChild( item );
+        TQDomElement item = docSyn->createElement( name );
+        tqparent->appendChild( item );
 
         // 2. find the page the link refers to
         ::LinkAction * a = outlineItem->getAction();
@@ -118,9 +118,9 @@ void DocumentData::addTocChildren( QDomDocument * docSyn, QDomNode * parent, Goo
                 // get the destination for the page now, but it's VERY time consuming,
                 // so better storing the reference and provide the viewport on demand
                 GooString *s = g->getNamedDest();
-                QChar *charArray = new QChar[s->getLength()];
-                for (int i = 0; i < s->getLength(); ++i) charArray[i] = QChar(s->getCString()[i]);
-                    QString aux(charArray, s->getLength());
+                TQChar *charArray = new TQChar[s->getLength()];
+                for (int i = 0; i < s->getLength(); ++i) charArray[i] = TQChar(s->getCString()[i]);
+                    TQString aux(charArray, s->getLength());
                     item.setAttribute( "DestinationName", aux );
                     delete[] charArray;
                 }
@@ -136,11 +136,11 @@ void DocumentData::addTocChildren( QDomDocument * docSyn, QDomNode * parent, Goo
                 }
             }
 
-        // 3. recursively descend over children
+        // 3. recursively descend over tqchildren
         outlineItem->open();
-        GooList * children = outlineItem->getKids();
-        if ( children )
-            addTocChildren( docSyn, &item, children );
+        GooList * tqchildren = outlineItem->getKids();
+        if ( tqchildren )
+            addTocChildren( docSyn, &item, tqchildren );
     }
 }
 

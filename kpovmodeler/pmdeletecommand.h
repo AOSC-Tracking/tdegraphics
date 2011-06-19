@@ -39,12 +39,12 @@ class PMDeleteInfo
 public:
    /**
     * Creates undo information for the object deletedObject.
-    * The object has to have a parent!
+    * The object has to have a tqparent!
     */
    PMDeleteInfo( PMObject* deletedObject )
    {
       m_pDeletedObject = deletedObject;
-      m_pParent = deletedObject->parent( );
+      m_pParent = deletedObject->tqparent( );
       m_pPrevSibling = deletedObject->prevSibling( );
       m_insertError = false;
    }
@@ -57,9 +57,9 @@ public:
     */
    PMObject* deletedObject( ) const { return m_pDeletedObject; }
    /**
-    * Returns a pointer to the parent of the deleted object
+    * Returns a pointer to the tqparent of the deleted object
     */
-   PMObject* parent( ) const { return m_pParent; }
+   PMObject* tqparent( ) const { return m_pParent; }
    /**
     * Returns the previous sibling of the deleted object
     */

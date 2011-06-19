@@ -43,10 +43,10 @@ TQString SVGGlyphElementImpl::d() const
 /*
 @namespace KSVG
 @begin SVGGlyphElementImpl::s_hashTable 11
- unicode		SVGGlyphElementImpl::Unicode		DontDelete|ReadOnly
+ tqunicode		SVGGlyphElementImpl::Unicode		DontDelete|ReadOnly
  glyph-name		SVGGlyphElementImpl::GlyphName		DontDelete|ReadOnly
  d				SVGGlyphElementImpl::D				DontDelete|ReadOnly
- orientation	SVGGlyphElementImpl::Orientation	DontDelete|ReadOnly
+ orientation	SVGGlyphElementImpl::Qt::Orientation	DontDelete|ReadOnly
  arabic-form	SVGGlyphElementImpl::ArabicForm		DontDelete|ReadOnly
  lang			SVGGlyphElementImpl::Lang			DontDelete|ReadOnly
  horiz-adv-x	SVGGlyphElementImpl::HorizAdvX		DontDelete|ReadOnly

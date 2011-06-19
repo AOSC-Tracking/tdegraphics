@@ -31,23 +31,23 @@ class PMPolynomExponents;
  * TQLabel with a rich text to display a polynom for the quadric,
  * cubic, quartic and polynom objects.
  */
-class PMFormulaLabel : public QWidget
+class PMFormulaLabel : public TQWidget
 {
 public:
    /**
     * Displays the exponents of the @ref PMPolynomExponents
     */
-   PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* parent, const char* name = 0 );
+   PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* tqparent, const char* name = 0 );
    /**
     * Displays the given exponents
     */
-   PMFormulaLabel( int x, int y, int z, TQWidget* parent, const char* name = 0 );
+   PMFormulaLabel( int x, int y, int z, TQWidget* tqparent, const char* name = 0 );
    /**
     * Destructor
     */
    ~PMFormulaLabel( );
-   virtual TQSize sizeHint( ) const;
-   virtual TQSize minimumSizeHint( ) const;
+   virtual TQSize tqsizeHint( ) const;
+   virtual TQSize tqminimumSizeHint( ) const;
    
 protected:
    virtual void drawContents( TQPainter* p );
@@ -58,7 +58,7 @@ private:
    TQFont exponentFont( ) const;
    void calculateSizeHint( );
    
-   TQSize m_sizeHint;
+   TQSize m_tqsizeHint;
    int m_exponents[3];
    
    static TQString s_xyz[3];

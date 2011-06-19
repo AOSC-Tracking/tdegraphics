@@ -26,8 +26,8 @@
 #include <klocale.h>
 #include <tqcheckbox.h>
 
-PMConeEdit::PMConeEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMConeEdit::PMConeEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -36,7 +36,7 @@ void PMConeEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    TQGridLayout* gl;
 
    m_pEnd1 = new PMVectorEdit( "x", "y", "z", this );
@@ -51,13 +51,13 @@ void PMConeEdit::createTopWidgets( )
    gl->addWidget( new TQLabel( i18n( "End 2:" ), this ), 1, 0 );
    gl->addWidget( m_pEnd2, 1, 1 );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   gl = new TQGridLayout( layout, 2, 2 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( tqlayout, 2, 2 );
    gl->addWidget( new TQLabel( i18n( "Radius 1:" ), this ), 0, 0 );
    gl->addWidget( m_pRadius1, 0, 1 );
    gl->addWidget( new TQLabel( i18n( "Radius 2:" ), this ), 1, 0 );
    gl->addWidget( m_pRadius2, 1, 1 );
-   layout->addStretch( 1 );
+   tqlayout->addStretch( 1 );
 
    topLayout( )->addWidget( m_pOpen );
 

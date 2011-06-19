@@ -23,7 +23,7 @@
 
 #include "kxycolorselector.h"
 
-KXYColorSelector::KXYColorSelector(TQWidget *parent, const char *name) : KXYSelector(parent,name) {
+KXYColorSelector::KXYColorSelector(TQWidget *tqparent, const char *name) : KXYSelector(tqparent,name) {
 	setBackgroundMode(NoBackground);
 	setRange(0, 0, COMPONENT_SELECTION_RESOLUTION - 1, COMPONENT_SELECTION_RESOLUTION - 1);
 	setType(TYPE_NONE);
@@ -42,7 +42,7 @@ void KXYColorSelector::setType(const int type) {
 
 void KXYColorSelector::updateContents() {
 	drawPalette(&pixmap);
-	repaint();
+	tqrepaint();
 }
 
 void KXYColorSelector::resizeEvent(TQResizeEvent*) {
@@ -70,9 +70,9 @@ void KXYColorSelector::drawCursor(TQPainter* painter, int x, int y) {
 	TQColor cursorColor;
 	if(( 2*color.red() + 4*color.green() + 1*color.blue() )*1.0/
 		( 2*255 + 4*255 + 1*255 ) > 0.65)
-		cursorColor = Qt::black;
+		cursorColor = TQt::black;
 	else
-		cursorColor = Qt::white;
+		cursorColor = TQt::white;
 	painter->setPen(TQPen( cursorColor ));
 	const int lineBegin = 2;
 	const int lineEnd = 6;
@@ -132,25 +132,25 @@ void KXYColorSelector::setColor(TQColor* const color, const int x, const int y) 
 }
 
 TQColor* KXYColorSelector::standardColorsPalette() {
-	TQColor* palette = new QColor[STANDARD_PALETTE_SIZE];
+	TQColor* palette = new TQColor[STANDARD_PALETTE_SIZE];
 	int i = 0;
-	palette[i++] = Qt::red;
-	palette[i++] = Qt::green;
-	palette[i++] = Qt::blue;
-	palette[i++] = Qt::cyan;
-	palette[i++] = Qt::magenta;
-	palette[i++] = Qt::yellow;
-	palette[i++] = Qt::darkRed;
-	palette[i++] = Qt::darkGreen;
-	palette[i++] = Qt::darkBlue;
-	palette[i++] = Qt::darkCyan;
-	palette[i++] = Qt::darkMagenta;
-	palette[i++] = Qt::darkYellow;
-	palette[i++] = Qt::white;
-	palette[i++] = Qt::lightGray;
-	palette[i++] = Qt::gray;
-	palette[i++] = Qt::darkGray;
-	palette[i++] = Qt::black;
+	palette[i++] = TQt::red;
+	palette[i++] = TQt::green;
+	palette[i++] = TQt::blue;
+	palette[i++] = TQt::cyan;
+	palette[i++] = TQt::magenta;
+	palette[i++] = TQt::yellow;
+	palette[i++] = TQt::darkRed;
+	palette[i++] = TQt::darkGreen;
+	palette[i++] = TQt::darkBlue;
+	palette[i++] = TQt::darkCyan;
+	palette[i++] = TQt::darkMagenta;
+	palette[i++] = TQt::darkYellow;
+	palette[i++] = TQt::white;
+	palette[i++] = TQt::lightGray;
+	palette[i++] = TQt::gray;
+	palette[i++] = TQt::darkGray;
+	palette[i++] = TQt::black;
 	return palette;
 }
 

@@ -31,10 +31,10 @@
 #include <kdebug.h>
 #include "kscanslider.h"
 
-KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
+KScanSlider::KScanSlider( TQWidget *tqparent, const TQString& text,
 			  double min, double max, bool haveStdButt,
 			  int stdValue )
-   : TQFrame( parent ),
+   : TQFrame( tqparent ),
      m_stdValue( stdValue ),
      m_stdButt(0)
 {
@@ -53,15 +53,15 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
 		this, TQT_SLOT(slRevertValue()));
 
        TQToolTip::add( m_stdButt,
-		      i18n( "Revert value back to its standard value %1" ).arg( stdValue ));
+		      i18n( "Revert value back to its standard value %1" ).tqarg( stdValue ));
        hb->addWidget( m_stdButt, 0 );
        hb->addSpacing( 4 );
     }
 
-    slider = new TQSlider( (int) min, (int)max, 1, (int)min, TQSlider::Horizontal, this, "AUTO_SLIDER_" );
+    slider = new TQSlider( (int) min, (int)max, 1, (int)min, Qt::Horizontal, this, "AUTO_SLIDER_" );
     slider->setTickmarks( TQSlider::Below );
-    slider->setTickInterval( int(QMAX( (max-min)/10, 1 )) );
-    slider->setSteps( int(QMAX( (max-min)/20, 1) ), int(QMAX( (max-min)/10, 1) ) );
+    slider->setTickInterval( int(TQMAX( (max-min)/10, 1 )) );
+    slider->setSteps( int(TQMAX( (max-min)/20, 1) ), int(TQMAX( (max-min)/10, 1) ) );
     slider->setMinimumWidth( 140 );
     /* set a buddy */
     l1->setBuddy( slider );
@@ -82,7 +82,7 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
     /* set Value 0 to the widget */
     slider->setValue( (int) min -1 );
 
-    /* Add to layout widget and activate */
+    /* Add to tqlayout widget and activate */
     hb->addWidget( slider, 36 );
     hb->addSpacing( 4 );
     hb->addWidget( m_spin, 0 );
@@ -149,8 +149,8 @@ KScanSlider::~KScanSlider()
 
 /* ====================================================================== */
 
-KScanEntry::KScanEntry( TQWidget *parent, const TQString& text )
- : TQFrame( parent )
+KScanEntry::KScanEntry( TQWidget *tqparent, const TQString& text )
+ : TQFrame( tqparent )
 {
     TQHBoxLayout *hb = new TQHBoxLayout( this );
 
@@ -170,7 +170,7 @@ KScanEntry::KScanEntry( TQWidget *parent, const TQString& text )
 
 TQString  KScanEntry::text( void ) const
 {
-   TQString str = TQString::null;
+   TQString str = TQString();
    // kdDebug(29000) << "entry is "<< entry << endl;
    if(entry)
    {
@@ -213,9 +213,9 @@ void KScanEntry::slReturnPressed( void )
 
 
 
-KScanCombo::KScanCombo( TQWidget *parent, const TQString& text,
+KScanCombo::KScanCombo( TQWidget *tqparent, const TQString& text,
 			const TQStrList& list )
-    : TQHBox( parent ),
+    : TQHBox( tqparent ),
       combo(0)
 {
     createCombo( text );
@@ -224,9 +224,9 @@ KScanCombo::KScanCombo( TQWidget *parent, const TQString& text,
     combolist = list;
 }
 
-KScanCombo::KScanCombo( TQWidget *parent, const TQString& text,
+KScanCombo::KScanCombo( TQWidget *tqparent, const TQString& text,
 			const TQStringList& list )
-    : TQHBox( parent ),
+    : TQHBox( tqparent ),
       combo(0)
 {
     createCombo( text );
@@ -260,7 +260,7 @@ void KScanCombo::createCombo( const TQString& text )
 void KScanCombo::slSetEntry( const TQString &t )
 {
     if( t.isNull() ) 	return;
-    int i = combolist.find( t.local8Bit() );
+    int i = combolist.tqfind( t.local8Bit() );
 
     /* Important to check value to avoid recursive signals ;) */
     if( i == combo->currentItem() )

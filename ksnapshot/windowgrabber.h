@@ -26,9 +26,10 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
-class WindowGrabber : public QDialog
+class WindowGrabber : public TQDialog
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     WindowGrabber();

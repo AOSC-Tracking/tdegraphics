@@ -62,7 +62,7 @@ public:
    virtual PMObject* copy( ) const { return new PMComment( *this ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -75,7 +75,7 @@ public:
    virtual void readAttributes( const PMXMLHelper& h );
 
    /** */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmcomment" ); }
    /** */

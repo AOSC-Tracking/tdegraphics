@@ -30,9 +30,10 @@ class PMLibraryHandle;
 /**
  * This class is the drag and drop object for the icon view
  */
-class PMLibraryIconDrag : public QIconDrag
+class PMLibraryIconDrag : public TQIconDrag
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /** Constructor */
    PMLibraryIconDrag( TQWidget * dragSource, const char* name = 0 ) : TQIconDrag( dragSource, name ) {}
@@ -40,7 +41,7 @@ public:
    /** @return The ith format, or NULL. */
    const char* format( int i ) const;
    /** @return The encoded payload of this object, in the specified MIME format. */
-   TQByteArray encodedData( const char* mime ) const;
+   TQByteArray tqencodedData( const char* mime ) const;
    /** @return True if the information in e can be decoded */
    static bool canDecode( TQMimeSource* e );
    /**
@@ -62,8 +63,9 @@ private:
 class PMLibraryIconView: public KIconView
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMLibraryIconView( TQWidget *parent, const char* name = NULL );
+   PMLibraryIconView( TQWidget *tqparent, const char* name = NULL );
 
    /**
     * Set the library base path
@@ -99,8 +101,8 @@ private:
 class PMLibraryIconViewItem: public KIconViewItem
 {
 public:
-   PMLibraryIconViewItem( TQIconView *parent, const TQString& text, const TQString& path, bool isSubLibrary );
-   PMLibraryIconViewItem( TQIconView *parent, const TQString& text, const TQImage& image, const TQString& path, bool isSubLibrary );
+   PMLibraryIconViewItem( TQIconView *tqparent, const TQString& text, const TQString& path, bool isSubLibrary );
+   PMLibraryIconViewItem( TQIconView *tqparent, const TQString& text, const TQImage& image, const TQString& path, bool isSubLibrary );
 
    /** Get the path of the entry */
    TQString path( ) const { return m_path; }

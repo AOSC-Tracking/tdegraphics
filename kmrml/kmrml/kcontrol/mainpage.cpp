@@ -50,8 +50,8 @@
 using namespace KMrmlConfig;
 
 
-MainPage::MainPage( TQWidget *parent, const char *name )
-    : TQVBox( parent, name ),
+MainPage::MainPage( TQWidget *tqparent, const char *name )
+    : TQVBox( tqparent, name ),
       m_indexer( 0L ),
       m_indexCleaner( 0L ),
       m_progressDialog( 0L ),
@@ -132,7 +132,7 @@ void MainPage::resetDefaults()
 
     m_listBox->clear();
 
-    // slotHostChanged(); not necessary, will be called by Qt signals
+    // slotHostChanged(); not necessary, will be called by TQt signals
     slotUseAuthChanged( m_serverWidget->m_useAuth->isChecked() );
 
     blockSignals( false );
@@ -151,7 +151,7 @@ void MainPage::load()
     m_listBox->clear();
     m_listBox->insertStringList( m_config->indexableDirectories() );
 
-    // slotHostChanged(); not necessary, will be called by Qt signals
+    // slotHostChanged(); not necessary, will be called by TQt signals
     slotUseAuthChanged( m_serverWidget->m_useAuth->isChecked() );
 
     blockSignals( false );
@@ -186,7 +186,7 @@ TQStringList MainPage::difference( const TQStringList& oldIndexDirs,
 {
     TQStringList result;
 
-    TQString slash = TQString::fromLatin1("/");
+    TQString slash = TQString::tqfromLatin1("/");
     TQStringList::ConstIterator oldIt = oldIndexDirs.begin();
     TQString oldDir, newDir;
 
@@ -341,7 +341,7 @@ void MainPage::slotRemoveClicked()
 void MainPage::enableWidgetsFor( const KMrml::ServerSettings& settings )
 {
     TQString host = settings.host;
-    bool enableWidgets = (m_config->hosts().findIndex( host ) > -1);
+    bool enableWidgets = (m_config->hosts().tqfindIndex( host ) > -1);
     m_serverWidget->m_addButton->setEnabled(!enableWidgets && !host.isEmpty());
     m_serverWidget->m_removeButton->setEnabled( enableWidgets &&
                                                 !host.isEmpty() &&
@@ -397,7 +397,7 @@ void MainPage::processIndexDirs( const TQStringList& removeDirs )
 
     if ( !removeDirs.isEmpty() )
     {
-        m_indexCleaner = new IndexCleaner( removeDirs, m_config, this );
+        m_indexCleaner = new IndexCleaner( removeDirs, m_config, TQT_TQOBJECT(this) );
         connect( m_indexCleaner, TQT_SIGNAL( advance( int ) ),
                  m_progressDialog->progressBar(), TQT_SLOT( advance( int ) ));
         connect( m_indexCleaner, TQT_SIGNAL( finished() ),
@@ -437,7 +437,7 @@ void MainPage::slotMaybeIndex()
     m_progressDialog->progressBar()->setProgress( 0 );
 
     // do the indexing
-    m_indexer = new Indexer( m_config, this, "Indexer" );
+    m_indexer = new Indexer( m_config, TQT_TQOBJECT(this), "Indexer" );
     connect( m_indexer, TQT_SIGNAL( progress( int, const TQString& )),
              TQT_SLOT( slotIndexingProgress( int, const TQString& ) ));
     connect( m_indexer, TQT_SIGNAL( finished( int )),
@@ -465,7 +465,7 @@ void MainPage::slotIndexingFinished( int returnCode )
             if ( err )
                 syserr = TQString::fromLocal8Bit( err );
             else
-                syserr = i18n("Unknown error: %1").arg( returnCode );
+                syserr = i18n("Unknown error: %1").tqarg( returnCode );
         }
 
         KMessageBox::detailedError( this, i18n("An error occurred during indexing. The index might be invalid."),

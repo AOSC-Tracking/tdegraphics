@@ -27,9 +27,9 @@
 /* ############################################################################## */
 
 
-ImgScaleDialog::ImgScaleDialog( TQWidget *parent, int curr_sel,
+ImgScaleDialog::ImgScaleDialog( TQWidget *tqparent, int curr_sel,
 				const char *name )
-   :KDialogBase( parent,  name , true, i18n("Zoom"),
+   :KDialogBase( tqparent,  name , true, i18n("Zoom"),
                  Ok|Cancel, Ok, true )
 {
    // setCaption (i18n ("Image Zoom"));
@@ -134,7 +134,7 @@ void ImgScaleDialog::customChanged( const TQString& s )
 // in the button group. The value val is the index of the active
 // button which is translated to the Scale-Size in percent.
 // If custom size is selected, the ScaleSize is read from the
-// QLineedit.
+// TQLineedit.
 //
 void ImgScaleDialog::setSelValue( int val )
 {

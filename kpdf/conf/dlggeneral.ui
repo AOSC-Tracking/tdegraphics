@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>DlgGeneral</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>DlgGeneral</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -30,15 +30,15 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout4</cstring>
+                        <cstring>tqlayout4</cstring>
                     </property>
                     <vbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_ShowSearchBar</cstring>
                             </property>
@@ -49,7 +49,7 @@
                                 <string>Show &amp;search bar in thumbnails list</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_SyncThumbnailsViewport</cstring>
                             </property>
@@ -60,7 +60,7 @@
                                 <string>Link the &amp;thumbnails with the page</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_ShowScrollBars</cstring>
                             </property>
@@ -68,7 +68,7 @@
                                 <string>Show scroll&amp;bars</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_ShowOSD</cstring>
                             </property>
@@ -76,7 +76,7 @@
                                 <string>Show &amp;hints and info messages</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_ObeyDRM</cstring>
                             </property>
@@ -84,7 +84,7 @@
                                 <string>&amp;Obey DRM limitations</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox">
+                        <widget class="TQCheckBox">
                             <property name="name">
                                 <cstring>kcfg_WatchFile</cstring>
                             </property>
@@ -94,15 +94,15 @@
                         </widget>
                     </vbox>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout3_2</cstring>
+                        <cstring>tqlayout3_2</cstring>
                     </property>
                     <vbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLabel">
+                        <widget class="TQLabel">
                             <property name="name">
                                 <cstring>pixmapLabel1_2</cstring>
                             </property>
@@ -128,7 +128,7 @@
                             <property name="sizeType">
                                 <enum>Minimum</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>20</width>
                                     <height>1</height>
@@ -149,7 +149,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>20</height>
@@ -164,8 +164,8 @@
     <include location="local" impldecl="in implementation">dlggeneral.ui.h</include>
 </includes>
 <functions>
-    <function access="protected" specifier="non virtual">showEvent( QShowEvent * )</function>
+    <function access="protected" specifier="non virtual">showEvent( TQShowEvent * )</function>
 </functions>
 <pixmapfunction>DesktopIcon</pixmapfunction>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

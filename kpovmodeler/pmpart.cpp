@@ -99,11 +99,11 @@ TQTime PMDebugTime;
 
 //#define KPM_WITH_OBJECT_LIBRARY
 
-PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
-                TQObject* parent, const char* name, bool readwrite,
+PMPart::PMPart( TQWidget* tqparentWidget, const char* widgetName,
+                TQObject* tqparent, const char* name, bool readwrite,
                 PMShell* shell )
       : DCOPObject( "PMPartIface" ),
-        KParts::ReadWritePart( parent, name ),
+        KParts::ReadWritePart( tqparent, name ),
         m_commandManager( this )
 {
    setPluginLoadingMode( LoadPlugins );
@@ -141,11 +141,11 @@ PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
 
    initActions( );
    initDocument( );
-   initView( parentWidget, widgetName );
+   initView( tqparentWidget, widgetName );
 
    restoreConfig( instance( )->config( ) );
 
-   connect( qApp->clipboard( ), TQT_SIGNAL( dataChanged( ) ),
+   connect( tqApp->tqclipboard( ), TQT_SIGNAL( dataChanged( ) ),
             TQT_SLOT( slotClipboardDataChanged( ) ) );
    slotClipboardDataChanged( );
    connect( &m_commandManager, TQT_SIGNAL( updateUndoRedo( const TQString&, const TQString& ) ),
@@ -161,11 +161,11 @@ PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
    slotObjectChanged( m_pScene, PMCNewSelection, this );
 }
 
-PMPart::PMPart( TQWidget* /*parentWidget*/, const char* /*widgetName*/,
-                TQObject* parent, const char* name, bool readwrite,
+PMPart::PMPart( TQWidget* /*tqparentWidget*/, const char* /*widgetName*/,
+                TQObject* tqparent, const char* name, bool readwrite,
                 bool /*onlyCutPaste*/, PMShell* shell )
       : DCOPObject( "LibraryBrowserIface" ),
-        KParts::ReadWritePart( parent, name ),
+        KParts::ReadWritePart( tqparent, name ),
         m_commandManager( this )
 {
    setPluginLoadingMode( LoadPlugins );
@@ -227,7 +227,7 @@ void PMPart::initCopyPasteActions( )
    m_pPasteAction = KStdAction::paste( this, TQT_SLOT( slotEditPaste( ) ), actionCollection( ) );
 
    m_pDeleteAction =
-      new KAction( i18n( "Delete" ), "edittrash", Qt::Key_Delete,
+      new KAction( i18n( "Delete" ), "edittrash", TQt::Key_Delete,
                    this, TQT_SLOT( slotEditDelete( ) ),
                    actionCollection( ), "edit_delete" );
 
@@ -662,8 +662,8 @@ void PMPart::updateNewObjectActions( )
       bool readWriteParent = false;
 
       if( m_pActiveObject )
-         if( m_pActiveObject->parent( ) )
-            if( !m_pActiveObject->parent( )->isReadOnly( ) )
+         if( m_pActiveObject->tqparent( ) )
+            if( !m_pActiveObject->tqparent( )->isReadOnly( ) )
                readWriteParent = true;
 
       for( ; it.current( ); ++it )
@@ -685,7 +685,7 @@ void PMPart::updateNewObjectActions( )
                      enable = m_pActiveObject->canInsert( insertName, m_pActiveObject->lastChild( ) );
                if( !enable )
                   if( readWriteParent )
-                     enable |= m_pActiveObject->parent( )->canInsert( insertName, m_pActiveObject );
+                     enable |= m_pActiveObject->tqparent( )->canInsert( insertName, m_pActiveObject );
             }
             else
                enable = false;
@@ -701,7 +701,7 @@ void PMPart::updateNewObjectActions( )
                enable = m_pActiveObject->canInsert( TQString( "CSG" ), m_pActiveObject->lastChild( ) );
          if( !enable )
             if( readWriteParent )
-               enable = m_pActiveObject->parent( )->canInsert( TQString( "CSG" ), m_pActiveObject );
+               enable = m_pActiveObject->tqparent( )->canInsert( TQString( "CSG" ), m_pActiveObject );
       }
       else
          enable = false;
@@ -725,13 +725,13 @@ void PMPart::initDocument( )
    newDocument( );
 }
 
-void PMPart::initView( TQWidget* parent, const char* name )
+void PMPart::initView( TQWidget* tqparent, const char* name )
 {
    if( !m_pShell )
    {
       // a part inside konqueror
-      // simple layout
-      m_pView = new PMView( this, parent, name );
+      // simple tqlayout
+      m_pView = new PMView( this, tqparent, name );
       m_pView->show( );
       setWidget( m_pView );
    }
@@ -951,7 +951,7 @@ bool PMPart::exportPovray( const KURL& url )
    if( ok )
    {
       PMPovray35Format format;
-      PMSerializer* dev = format.newSerializer( file );
+      PMSerializer* dev = format.newSerializer( TQT_TQIODEVICE(file) );
       dev->serialize( m_pScene );
       delete dev;
 
@@ -995,7 +995,7 @@ TQString PMPart::activeObjectName( )
          result = tmpObj->type( ) + "/" + result;
 
       // go up in the scene
-      tmpObj = tmpObj->parent( );
+      tmpObj = tmpObj->tqparent( );
       idx = 0;
    }
 
@@ -1023,7 +1023,7 @@ bool PMPart::setActiveObject( const TQString& name )
       tmpObj = activeObject( );
 
    // get the first element
-   pos = objPath.find( '/' );
+   pos = objPath.tqfind( '/' );
    if( pos != -1 )
    {
       pathElem = objPath.mid( 0, pos );
@@ -1032,7 +1032,7 @@ bool PMPart::setActiveObject( const TQString& name )
    else
    {
       pathElem = objPath;
-      objPath = TQString::null;
+      objPath = TQString();
    }
 
    while( !pathElem.isNull( ) )
@@ -1040,17 +1040,17 @@ bool PMPart::setActiveObject( const TQString& name )
       if( !pathElem.isEmpty( ) )
       {
          // Special treatment for brackets
-         firstBracket = pathElem.find( '[' );
+         firstBracket = pathElem.tqfind( '[' );
          if( firstBracket != -1 )
          {
-            lastBracket = pathElem.findRev( ']' );
+            lastBracket = pathElem.tqfindRev( ']' );
             objIndex = pathElem.mid( firstBracket + 1, lastBracket - firstBracket - 1).toInt( );
             pathElem = pathElem.left( firstBracket );
          }
          else
             objIndex = 0;
 
-         // Iterate the children for this element. We stop when there are no more siblings
+         // Iterate the tqchildren for this element. We stop when there are no more siblings
          // or the object is of the correct type and it's index count is also correct
          siblingIndex = 0;
          tmpSibling = tmpObj->firstChild( );
@@ -1070,7 +1070,7 @@ bool PMPart::setActiveObject( const TQString& name )
       }
 
       // Get the next element
-      pos = objPath.find( '/' );
+      pos = objPath.tqfind( '/' );
       if( pos != -1 )
       {
          pathElem = objPath.mid( 0, pos );
@@ -1079,7 +1079,7 @@ bool PMPart::setActiveObject( const TQString& name )
       else
       {
          pathElem = objPath;
-         objPath = TQString::null;
+         objPath = TQString();
       }
    }
    if( tmpObj )
@@ -1240,9 +1240,9 @@ int PMPart::whereToInsert( PMObject* obj, const PMObjectList& list )
       }
    }
 
-   if( obj->parent( ) )
+   if( obj->tqparent( ) )
    {
-      PMObject* p = obj->parent( );
+      PMObject* p = obj->tqparent( );
       if( !p->isReadOnly( ) )
       {
          canInsertAsSibling = p->canInsert( list, obj );
@@ -1301,9 +1301,9 @@ int PMPart::whereToInsert( PMObject* obj, const TQStringList& list )
       }
    }
 
-   if( obj->parent( ) )
+   if( obj->tqparent( ) )
    {
-      PMObject* p = obj->parent( );
+      PMObject* p = obj->tqparent( );
       if( !p->isReadOnly( ) )
       {
          canInsertAsSibling = p->canInsert( list, obj );
@@ -1336,7 +1336,7 @@ int PMPart::whereToInsert( PMObject* obj )
    int insertAs = 0;
    int insertPossibilities = 0;
 
-   if( obj->parent( ) )
+   if( obj->tqparent( ) )
    {
       insertAs |= PMInsertPopup::PMISibling;
       insertPossibilities++;
@@ -1369,14 +1369,14 @@ void PMPart::slotFileImport( )
       TQFile file( fileName );
       if( file.open( IO_ReadOnly ) )
       {
-         PMParser* newParser = selectedFormat->newParser( this, &file );
+         PMParser* newParser = selectedFormat->newParser( this, TQT_TQIODEVICE(&file) );
          if( newParser )
          {
             if( m_pActiveObject )
-               insertFromParser( i18n( "Import %1" ).arg( selectedFormat->description( ) ),
+               insertFromParser( i18n( "Import %1" ).tqarg( selectedFormat->description( ) ),
                                  newParser, m_pActiveObject );
             else
-               insertFromParser( i18n( "Import %1" ).arg( selectedFormat->description( ) ),
+               insertFromParser( i18n( "Import %1" ).tqarg( selectedFormat->description( ) ),
                                  newParser, m_pScene );
             delete newParser;
          }
@@ -1404,7 +1404,7 @@ void PMPart::slotFileExport( )
       TQBuffer buffer( baData );
       buffer.open( IO_WriteOnly );
 
-      PMSerializer* newSer = selectedFormat->newSerializer( &buffer );
+      PMSerializer* newSer = selectedFormat->newSerializer( TQT_TQIODEVICE(&buffer) );
       if( newSer )
       {
          newSer->serialize( m_pScene );
@@ -1450,7 +1450,7 @@ void PMPart::slotEditCut( )
 
    if( sortedList.count( ) > 0 )
    {
-      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::tqclipboard( )->setData( new PMObjectDrag( this, sortedList ) );
       removeSelection( i18n( "Cut" ) );
    }
 
@@ -1472,7 +1472,7 @@ void PMPart::slotEditCopy( )
    const PMObjectList& sortedList = selectedObjects( );
 
    if( sortedList.count( ) > 0 )
-      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::tqclipboard( )->setData( new PMObjectDrag( this, sortedList ) );
 
    emit setStatusBarText( "" );
 }
@@ -1513,7 +1513,7 @@ bool PMPart::dragMoveSelectionTo( PMObject* obj )
                command = new PMMoveCommand( sortedList, obj, hlp );
                break;
             case PMInsertPopup::PMISibling:
-               command = new PMMoveCommand( sortedList, obj->parent( ), obj );
+               command = new PMMoveCommand( sortedList, obj->tqparent( ), obj );
                break;
          }
       }
@@ -1549,7 +1549,7 @@ void PMPart::slotEditPaste( )
 {
    emit setStatusBarText( i18n( "Inserting clipboard contents..." ) );
 
-   pasteOrDrop( i18n( "Paste" ), qApp->clipboard( )->data( ),
+   pasteOrDrop( i18n( "Paste" ), tqApp->tqclipboard( )->data( ),
                 m_pActiveObject );
 
    emit setStatusBarText( "" );
@@ -1600,30 +1600,30 @@ bool PMPart::insertFromParser( const TQString& type, PMParser* parser,
 
    if( success && insertAs )
    {
-      PMObject* parent = 0;
+      PMObject* tqparent = 0;
       PMObject* after = 0;
 
       switch( insertAs )
       {
          case PMInsertPopup::PMIFirstChild:
-            parent = obj;
+            tqparent = obj;
             after = 0;
             break;
          case PMInsertPopup::PMILastChild:
-            parent = obj;
+            tqparent = obj;
             after = obj->lastChild( );
             break;
          case PMInsertPopup::PMISibling:
-            parent = obj->parent( );
+            tqparent = obj->tqparent( );
             after = obj;
             break;
          default:
-            parent = obj;
+            tqparent = obj;
             after = 0;
             break;
       }
 
-      parser->parse( &list, parent, after );
+      parser->parse( &list, tqparent, after );
       success = !( parser->warnings( ) || parser->errors( ) );
 
       if( !success )
@@ -1639,7 +1639,7 @@ bool PMPart::insertFromParser( const TQString& type, PMParser* parser,
          if( success )
          {
             // parsing was successful
-            command = new PMAddCommand( list, parent, after );
+            command = new PMAddCommand( list, tqparent, after );
 
             command->setText( type );
             success = executeCommand( command );
@@ -1850,8 +1850,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
 
    if( mode & PMCRemove )
    {
-      if( obj->parent( ) )
-         if( obj->parent( ) == m_pActiveObject )
+      if( obj->tqparent( ) )
+         if( obj->tqparent( ) == m_pActiveObject )
             m_updateNewObjectActions = true;
       if( m_pNewSelection == obj )
       {
@@ -1859,12 +1859,12 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
             m_pNewSelection = obj->nextSibling( );
          else if( obj->prevSibling( ) )
             m_pNewSelection = obj->nextSibling( );
-         else if( obj->parent( ) )
-            m_pNewSelection = obj->parent( );
+         else if( obj->tqparent( ) )
+            m_pNewSelection = obj->tqparent( );
          else
             m_pNewSelection = 0;
       }
-      if( m_selectedObjects.containsRef( obj ) )
+      if( m_selectedObjects.tqcontainsRef( obj ) )
       {
          m_selectedObjects.removeRef( obj );
          if( m_selectedObjects.isEmpty( ) )
@@ -1873,8 +1873,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
                m_pNewSelection = obj->nextSibling( );
             else if( obj->prevSibling( ) )
                m_pNewSelection = obj->prevSibling( );
-            else if( obj->parent( ) )
-               m_pNewSelection = obj->parent( );
+            else if( obj->tqparent( ) )
+               m_pNewSelection = obj->tqparent( );
             else
                m_pNewSelection = 0;
          }
@@ -1903,7 +1903,7 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
          if( obj->isA( "Declare" ) )
          {
             PMDeclare* decl = ( PMDeclare* ) obj;
-            PMSymbol* s = m_pSymbolTable->find( decl->id( ) );
+            PMSymbol* s = m_pSymbolTable->tqfind( decl->id( ) );
             if( !s )
                m_pSymbolTable->insert( decl->id( ),
                                        new PMSymbol( decl->id( ), decl ) );
@@ -1911,8 +1911,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
          if( obj->type( ) == "Camera" )
             m_bCameraListUpToDate = false;
       }
-      if( obj->parent( ) )
-         if( obj->parent( ) == m_pActiveObject )
+      if( obj->tqparent( ) )
+         if( obj->tqparent( ) == m_pActiveObject )
             m_updateNewObjectActions = true;
       m_numAddedObjects++;
    }
@@ -1977,7 +1977,7 @@ void PMPart::slotIDChanged( PMObject* obj, const TQString& oldID )
    if( obj->isA( "Declare" ) )
    {
       PMDeclare* d = ( PMDeclare* ) obj;
-      PMSymbol* s = m_pSymbolTable->find( oldID );
+      PMSymbol* s = m_pSymbolTable->tqfind( oldID );
       if( s )
       {
          if( s->type( ) == PMSymbol::Object )
@@ -2028,7 +2028,7 @@ void PMPart::slotNewObject( PMObject* newObject, int insertAs )
                break;
             case PMInsertPopup::PMISibling:
                command = new PMAddCommand( list,
-                                           m_pActiveObject->parent( ),
+                                           m_pActiveObject->tqparent( ),
                                            m_pActiveObject );
                break;
             default:
@@ -2508,7 +2508,7 @@ void PMPart::slotClipboardDataChanged( )
 {
    if( isReadWrite( ) )
    {
-      m_canDecode = PMObjectDrag::canDecode( qApp->clipboard( )->data( ), this );
+      m_canDecode = PMObjectDrag::canDecode( tqApp->tqclipboard( )->data( ), this );
       m_pPasteAction->setEnabled( m_canDecode && m_pActiveObject );
    }
    else
@@ -2525,8 +2525,8 @@ void PMPart::clearSelection( )
          m_pNewSelection = it.current( )->nextSibling( );
       else if( it.current( )->prevSibling( ) )
          m_pNewSelection = it.current( )->prevSibling( );
-      else if( it.current( )->parent( ) )
-         m_pNewSelection = it.current( )->parent( );
+      else if( it.current( )->tqparent( ) )
+         m_pNewSelection = it.current( )->tqparent( );
 
       for( ; it.current( ); ++it )
       {
@@ -2537,8 +2537,8 @@ void PMPart::clearSelection( )
                m_pNewSelection = it.current( )->nextSibling( );
             else if( it.current( )->prevSibling( ) )
                m_pNewSelection = it.current( )->prevSibling( );
-            else if( it.current( )->parent( ) )
-               m_pNewSelection = it.current( )->parent( );
+            else if( it.current( )->tqparent( ) )
+               m_pNewSelection = it.current( )->tqparent( );
          }
       }
    }
@@ -2713,7 +2713,7 @@ void PMPart::slotRender( )
       TQBuffer buffer( a );
       buffer.open( IO_WriteOnly );
       PMPovray35Format format;
-      PMSerializer* dev = format.newSerializer( &buffer );
+      PMSerializer* dev = format.newSerializer( TQT_TQIODEVICE(&buffer) );
       dev->serialize( m_pScene );
       delete dev;
 

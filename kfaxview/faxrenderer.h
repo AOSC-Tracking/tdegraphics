@@ -39,6 +39,7 @@ implements only the necessary methods setFile() and drawPage().
 class FaxRenderer : public DocumentRenderer
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
    /** Default constructor
@@ -46,7 +47,7 @@ public:
        This constructor simply prints a message (if debugging is
        enabled) and calls the default constructor.
    */
-   FaxRenderer(TQWidget* parent);
+   FaxRenderer(TQWidget* tqparent);
 
    /** Destructor
 

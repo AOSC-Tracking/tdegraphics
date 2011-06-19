@@ -70,10 +70,10 @@ private:
    bool initDocument( );
    
    /**
-    * Looks for child objects, parses them and appends them to the parent
-    * object. If parent is 0, all objects are appended to the result list.
+    * Looks for child objects, parses them and appends them to the tqparent
+    * object. If tqparent is 0, all objects are appended to the result list.
     */
-   void parseChildObjects( TQDomElement& e, PMObject* parent );
+   void parseChildObjects( TQDomElement& e, PMObject* tqparent );
 
    TQDomDocument* m_pDoc;
    int m_majorDocumentFormat;

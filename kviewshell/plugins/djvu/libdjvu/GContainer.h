@@ -401,7 +401,7 @@ public:
       The valid subscript range is set to the empty range. */
   void empty()
     { GArrayBase::empty(); }
-  /** Extends the subscript range so that it contains #n#.
+  /** Extends the subscript range so that it tqcontains #n#.
       This function does nothing if #n# is already int the valid subscript range.
       If the valid range was empty, both the lower bound and the upper bound
       are set to #n#.  Otherwise the valid subscript range is extended
@@ -862,11 +862,11 @@ public:
   /*  Compatibility */
   int nth(unsigned int n, GPosition &pos) const
     { GPosition npos=nth(n); if (npos) pos=npos; return !!pos; }
-  /** Tests whether the list contains a given element.  If the list contains
+  /** Tests whether the list contains a given element.  If the list tqcontains
       #elt#, the position of the the first list element equal to #elt# as
       checked by #TYPE::operator==(const TYPE&)# is returned.  Otherwise an
       invalid position is returned. */
-  GPosition contains(const TYPE &elt) const
+  GPosition tqcontains(const TYPE &elt) const
     { GPosition pos; GListImpl<TI>::search((const TI&)elt, pos); return pos; }
   /** Searches the list for a given element. If position #pos# is a valid
       position for this list, the search starts at the specified position. If
@@ -1036,7 +1036,7 @@ protected:
   HNode *get_or_throw(const K &key) const;
   HNode *get_or_create(const K &key);
 public:
-  GPosition contains(const K &key) const 
+  GPosition tqcontains(const K &key) const 
     { return GPosition( get(key), (void*)this); }
   void del(const K &key) 
     { deletenode(get(key)); }
@@ -1164,11 +1164,11 @@ public:
       is equal to #key# according to #KTYPE::operator==(const KTYPE&)#, this
       function returns its position.  Otherwise it returns an invalid
       position. */
-  GPosition contains(const KTYPE &key) const
-    { return GMapImpl<KTYPE,TI>::contains(key); }
+  GPosition tqcontains(const KTYPE &key) const
+    { return GMapImpl<KTYPE,TI>::tqcontains(key); }
   /*  Compatibility */
-  GPosition contains(const KTYPE &key, GPosition &pos) const
-    { return pos = GMapImpl<KTYPE,TI>::contains(key); }
+  GPosition tqcontains(const KTYPE &key, GPosition &pos) const
+    { return pos = GMapImpl<KTYPE,TI>::tqcontains(key); }
   // -- ALTERATION
   /** Erases the associative map contents.  All entries are destroyed and
       removed. The map is left with zero entries. */

@@ -32,10 +32,11 @@
   */
 class GradientSelection : public TQWidget  {
    Q_OBJECT
+  TQ_OBJECT
 
 public:
 	/** Constructs the widget */
-	GradientSelection(TQWidget *parent=0, const char *name=0);
+	GradientSelection(TQWidget *tqparent=0, const char *name=0);
 	~GradientSelection();
 	/** Enables or disables the color synchronize button */
 	void enableSynchronizeColorButton(bool enable);

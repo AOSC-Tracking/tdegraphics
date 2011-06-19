@@ -121,7 +121,7 @@ public:
 
   inline void addtag(GP<lt_XMLTags> x);
   inline void addraw(GUTF8String raw);
-  inline GPosition contains(GUTF8String name) const;
+  inline GPosition tqcontains(GUTF8String name) const;
   inline const GPList<lt_XMLTags> & operator [] (const GUTF8String name) const;
   inline const GPList<lt_XMLTags> & operator [] (const GPosition &pos) const;
   static void ParseValues(char const *t, GMap<GUTF8String,GUTF8String> &args,bool downcase=true);
@@ -213,9 +213,9 @@ inline const GMap<GUTF8String,GPList<lt_XMLTags> > &
 lt_XMLTags::get_allTags(void) const { return allTags; }
 
 inline GPosition
-lt_XMLTags::contains(GUTF8String name) const
+lt_XMLTags::tqcontains(GUTF8String name) const
 {
-  return allTags.contains(name);
+  return allTags.tqcontains(name);
 }
 
 inline const GPList<lt_XMLTags> &

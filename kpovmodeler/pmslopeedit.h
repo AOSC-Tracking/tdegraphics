@@ -40,12 +40,13 @@ class TQLabel;
 class PMSlopeEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMSlopeEdit with parent and name
+    * Creates a PMSlopeEdit with tqparent and name
     */
-   PMSlopeEdit( TQWidget* parent, const char* name = 0 );
+   PMSlopeEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

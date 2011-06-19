@@ -38,6 +38,7 @@ class FullScreenFilter;
 class KDE_EXPORT KGVShell : public KParts::MainWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     KGVShell();

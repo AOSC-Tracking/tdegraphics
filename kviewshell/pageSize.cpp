@@ -77,10 +77,10 @@ bool pageSize::setPageSize(const TQString& name)
     }
   }
 
-  // Check if the string contains 'x'. If yes, we assume it is of type
+  // Check if the string tqcontains 'x'. If yes, we assume it is of type
   // "<number>x<number>". If yes, the first number is interpreted as
   // the width in mm, the second as the height in mm
-  if (name.find('x') >= 0) {
+  if (name.tqfind('x') >= 0) {
     bool wok, hok;
     float pageWidth_tmp  = name.section('x',0,0).toFloat(&wok);
     float pageHeight_tmp = name.section('x',1,1).toFloat(&hok);
@@ -95,10 +95,10 @@ bool pageSize::setPageSize(const TQString& name)
     }
   }
   
-  // Check if the string contains ','. If yes, we assume it is of type
+  // Check if the string tqcontains ','. If yes, we assume it is of type
   // "<number><unit>,<number><uni>". The first number is supposed to
   // be the width, the second the height.
-  if (name.find(',') >= 0) {
+  if (name.tqfind(',') >= 0) {
     bool wok, hok;
     float pageWidth_tmp  = distance::convertToMM(name.section(',',0,0), &wok);
     float pageHeight_tmp = distance::convertToMM(name.section(',',1,1), &hok);
@@ -263,7 +263,7 @@ TQString pageSize::formatName() const
   if (currentSize >= 0)
     return staticList[currentSize].name;
   else 
-    return TQString::null;
+    return TQString();
 }
 
 
@@ -304,7 +304,7 @@ TQString pageSize::serialize() const
   if ((currentSize >= 0) && (fabs(staticList[currentSize].height-pageHeight.getLength_in_mm()) <= 0.5))
     return staticList[currentSize].name;
   else 
-    return TQString("%1x%2").arg(pageWidth.getLength_in_mm()).arg(pageHeight.getLength_in_mm());
+    return TQString("%1x%2").tqarg(pageWidth.getLength_in_mm()).tqarg(pageHeight.getLength_in_mm());
 }
 
 

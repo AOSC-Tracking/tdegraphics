@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>kprintDialogPage_DJVUconversionoptions_basewidget</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>kprintDialogPage_DJVUconversionoptions_basewidget</cstring>
     </property>
@@ -16,7 +16,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -32,7 +32,7 @@
                 <string>PostScript language level:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="1" column="0">
+        <widget class="TQLabel" row="1" column="0">
             <property name="name">
                 <cstring>textLabel2</cstring>
             </property>
@@ -48,7 +48,7 @@
                 <string>Render mode:</string>
             </property>
         </widget>
-        <widget class="QComboBox" row="0" column="1">
+        <widget class="TQComboBox" row="0" column="1">
             <item>
                 <property name="text">
                     <string>Level 1 (almost obsolete)</string>
@@ -82,7 +82,7 @@
 &lt;p&gt;&lt;b&gt;Level 3:&lt;/b&gt; Level 3 PostScript files are much smaller and print even faster than Level 2 files. However, Level 3 files are supported only by some modern printers. If Level 3 works for you, this is the best option.&lt;/p&gt;</string>
             </property>
         </widget>
-        <widget class="QComboBox" row="1" column="1">
+        <widget class="TQComboBox" row="1" column="1">
             <item>
                 <property name="text">
                     <string>Print Full Page (default)</string>
@@ -132,7 +132,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>40</height>
@@ -141,5 +141,5 @@
         </spacer>
     </grid>
 </widget>
-<layoutdefaults spacing="6" margin="0"/>
+<tqlayoutdefaults spacing="6" margin="0"/>
 </UI>

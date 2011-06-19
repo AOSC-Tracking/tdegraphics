@@ -182,9 +182,9 @@ SVGRectImpl *SVGUseElementImpl::getBBox()
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(KSVG_TOKEN_NOT_PARSED(Width) && KSVG_TOKEN_NOT_PARSED(Height) && shape)
-			return shape->getBBox();
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(KSVG_TOKEN_NOT_PARSED(Width) && KSVG_TOKEN_NOT_PARSED(Height) && tqshape)
+			return tqshape->getBBox();
 	}
 
 	SVGRectImpl *ret = new SVGRectImpl();
@@ -223,7 +223,7 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 			KURL fragmentUrl(ownerDoc()->baseUrl(), url.string());
 
 			id = fragmentUrl.ref();
-			fragmentUrl.setRef(TQString::null);
+			fragmentUrl.setRef(TQString());
 
 			orig = KSVGLoader::getSVGFragment(fragmentUrl, ownerDoc(), id);
 		}
@@ -243,10 +243,10 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 
 		setReferencedElement(orig);
 
-		// Create a parent, a <g>
-		SVGElementImpl *parent = 0;
+		// Create a tqparent, a <g>
+		SVGElementImpl *tqparent = 0;
 		DOM::Element impl = static_cast<DOM::Document *>(ownerDoc())->createElement("g");
-		parent = SVGDocumentImpl::createElement("g", impl, ownerDoc());
+		tqparent = SVGDocumentImpl::createElement("g", impl, ownerDoc());
 		SVGElementImpl *clone = orig->cloneNode(true);
 
 		// Apply the use-correction
@@ -258,8 +258,8 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 		trans += ")";
 
 		// Apply the transform attribute and render the element
-		parent->setAttributeInternal("transform", trans);
-		parent->setAttribute("transform", trans);
+		tqparent->setAttributeInternal("transform", trans);
+		tqparent->setAttribute("transform", trans);
 
 		// Apply width/height if symbol
 		if(dynamic_cast<SVGSymbolElementImpl *>(clone))
@@ -294,14 +294,14 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 			}
 		}
 
-		appendChild(*parent);
-		parent->appendChild(*clone);
+		appendChild(*tqparent);
+		tqparent->appendChild(*clone);
 
-		setupSubtree(parent, ownerSVGElement(), viewportElement());
+		setupSubtree(tqparent, ownerSVGElement(), viewportElement());
 
 		m_instanceRoot->setCorrespondingElement(clone);
 
-		dynamic_cast<SVGLocatableImpl *>(parent)->updateCachedScreenCTM(screenCTM());
+		dynamic_cast<SVGLocatableImpl *>(tqparent)->updateCachedScreenCTM(screenCTM());
 
 		// Redirect local ecma event handlers to the correspondingElement
 		TQPtrListIterator<SVGRegisteredEventListener> it(eventListeners());
@@ -370,19 +370,19 @@ void SVGUseElementImpl::update(CanvasItemUpdate reason, int param1, int param2)
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(shape)
-			shape->update(reason, param1, param2);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(tqshape)
+			tqshape->update(reason, param1, param2);
 	}
 }
 
-void SVGUseElementImpl::invalidate(KSVGCanvas *c, bool recalc)
+void SVGUseElementImpl::tqinvalidate(KSVGCanvas *c, bool recalc)
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(shape)
-			shape->invalidate(c, recalc);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(tqshape)
+			tqshape->tqinvalidate(c, recalc);
 	}
 }
 
@@ -390,9 +390,9 @@ void SVGUseElementImpl::setReferenced(bool referenced)
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(shape)
-			shape->setReferenced(referenced);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(tqshape)
+			tqshape->setReferenced(referenced);
 	}
 }
 
@@ -400,9 +400,9 @@ void SVGUseElementImpl::draw()
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(shape)
-			shape->draw();
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(tqshape)
+			tqshape->draw();
 	}
 }
 

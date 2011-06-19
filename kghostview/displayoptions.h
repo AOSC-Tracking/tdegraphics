@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2003, Luís Pedro Coelho
+ * Copyright (C) 2003, Luï¿½s Pedro Coelho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ class KDE_EXPORT DisplayOptions
 	void setOverrideOrientation(CDSC_ORIENTATION_ENUM e)  { _overrideOrientation = e; }
 	CDSC_ORIENTATION_ENUM overrideOrientation() const { return _overrideOrientation; }
 
-	void restoreOverridePageMedia() { _overridePageMedia = TQString::null; }
+	void restoreOverridePageMedia() { _overridePageMedia = TQString(); }
 	void setOverridePageMedia(const TQString& newMedia) { _overridePageMedia = newMedia; }
 	const TQString& overridePageMedia() const { return _overridePageMedia; }
 
@@ -103,7 +103,7 @@ class KDE_EXPORT DisplayOptions
 inline
 DisplayOptions::DisplayOptions()
 	:_overrideOrientation( CDSC_ORIENT_UNKNOWN ),
-	 _overridePageMedia ( TQString::null ),
+	 _overridePageMedia ( TQString() ),
 	 _page( 0 )
 {
 	setMagnification( 1.0 );

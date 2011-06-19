@@ -97,11 +97,11 @@ PMMedia::~PMMedia( )
 {
 }
 
-PMMetaObject* PMMedia::metaObject( ) const
+PMMetaObject* PMMedia::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Media", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Media", Base::tqmetaObject( ),
                                         createNewMedia );
       s_pMetaObject->addProperty(
          new PMMediaProperty( "method", &PMMedia::setMethod, &PMMedia::method ) );
@@ -399,9 +399,9 @@ void PMMedia::enableScattering( bool c )
    }
 }
 
-PMDialogEditBase* PMMedia::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMMedia::editWidget( TQWidget* tqparent ) const
 {
-   return new PMMediaEdit( parent );
+   return new PMMediaEdit( tqparent );
 }
 
 void PMMedia::restoreMemento( PMMemento* s )

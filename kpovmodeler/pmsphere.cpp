@@ -71,11 +71,11 @@ TQString PMSphere::description( ) const
    return i18n( "sphere" );
 }
 
-PMMetaObject* PMSphere::metaObject( ) const
+PMMetaObject* PMSphere::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Sphere", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Sphere", Base::tqmetaObject( ),
                                         createNewSphere );
       s_pMetaObject->addProperty(
          new PMSphereProperty( "radius", &PMSphere::setRadius, &PMSphere::radius ) );
@@ -99,10 +99,10 @@ void PMSphere::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMSphere::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMSphere::editWidget( TQWidget* tqparent ) const
 {
 
- return new PMSphereEdit( parent );
+ return new PMSphereEdit( tqparent );
 }
 
 void PMSphere::restoreMemento( PMMemento* s )

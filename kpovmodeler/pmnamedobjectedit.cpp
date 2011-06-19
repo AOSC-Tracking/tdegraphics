@@ -24,8 +24,8 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMNamedObjectEdit::PMNamedObjectEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMNamedObjectEdit::PMNamedObjectEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -34,12 +34,12 @@ void PMNamedObjectEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
    m_pNameEdit = new TQLineEdit( this );
    TQLabel* label = new TQLabel( i18n( "Name:" ), this );
 
-   layout->addWidget( label );
-   layout->addWidget( m_pNameEdit );
+   tqlayout->addWidget( label );
+   tqlayout->addWidget( m_pNameEdit );
 
    connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
             TQT_SLOT( slotNameChanged( const TQString& ) ) );

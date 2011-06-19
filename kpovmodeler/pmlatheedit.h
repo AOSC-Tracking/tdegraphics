@@ -43,12 +43,13 @@ class TQLabel;
 class PMLatheEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMLatheEdit with parent and name
+    * Creates a PMLatheEdit with tqparent and name
     */
-   PMLatheEdit( TQWidget* parent, const char* name = 0 );
+   PMLatheEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

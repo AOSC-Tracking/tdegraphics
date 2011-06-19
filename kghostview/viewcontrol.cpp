@@ -25,10 +25,10 @@
 #include <kbuttonbox.h>
 #include <kseparator.h>
 
-ViewControl::ViewControl( TQWidget *parent, const char *name )
-	: TQDialog( parent, name )
+ViewControl::ViewControl( TQWidget *tqparent, const char *name )
+	: TQDialog( tqparent, name )
 {
-	setFocusPolicy(TQWidget::StrongFocus);
+	setFocusPolicy(TQ_StrongFocus);
 
 	TQBoxLayout *topLayout = new TQVBoxLayout( this, 10 );
 
@@ -36,7 +36,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	vcGroupBox = new TQGroupBox(  this );
 	vcGroupBox->setFrameStyle( TQFrame::NoFrame );
 	//vcGroupBox->setTitle( i18n("Force Changes To") );
-	//vcGroupBox->setAlignment( 1 );
+	//vcGroupBox->tqsetAlignment( 1 );
 
 	topLayout->addWidget( vcGroupBox, 10 );
 
@@ -51,7 +51,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 
 
 	magComboBox = new TQComboBox( FALSE, vcGroupBox );
-	magComboBox->setFixedHeight( magComboBox->sizeHint().height() );
+	magComboBox->setFixedHeight( magComboBox->tqsizeHint().height() );
 
 
 	//magComboBox->hide();
@@ -63,7 +63,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 
 
 	mediaComboBox = new TQComboBox( FALSE, vcGroupBox );
-	mediaComboBox->setFixedHeight( magComboBox->sizeHint().height() );
+	mediaComboBox->setFixedHeight( magComboBox->tqsizeHint().height() );
 
 	connect ( mediaComboBox, TQT_SIGNAL (activated (int)),
 		  this, TQT_SLOT (slotMediaSelection (int)) );
@@ -75,7 +75,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	orientComboBox->insertItem(i18n("Landscape"));
 	orientComboBox->insertItem(i18n("Seascape"));
 	orientComboBox->insertItem(i18n("Upside Down"));
-	orientComboBox->setFixedHeight( magComboBox->sizeHint().height() );
+	orientComboBox->setFixedHeight( magComboBox->tqsizeHint().height() );
 
 	connect ( orientComboBox, TQT_SIGNAL (activated (int)),
 		  this, TQT_SLOT (slotOrientSelection (int)) );
@@ -85,9 +85,9 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 
 	TQLabel* vcLabel;
 	vcLabel = new TQLabel( magComboBox, i18n("&Magnification"), vcGroupBox );
-	vcLabel->setAlignment( AlignRight | AlignVCenter | ShowPrefix );
-	if ( vcLabel->sizeHint().width() > labelWidth )
-		labelWidth = vcLabel->sizeHint().width();
+	vcLabel->tqsetAlignment( AlignRight | AlignVCenter | ShowPrefix );
+	if ( vcLabel->tqsizeHint().width() > labelWidth )
+		labelWidth = vcLabel->tqsizeHint().width();
 	vcLabel->setMinimumWidth( labelWidth );
 
 	vcLabel->hide();
@@ -96,24 +96,24 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 
 
 	vcLabel = new TQLabel( mediaComboBox, i18n("M&edia"), vcGroupBox );
-	vcLabel->setAlignment( AlignRight | AlignVCenter | ShowPrefix );
-	if ( vcLabel->sizeHint().width() > labelWidth )
-		labelWidth = vcLabel->sizeHint().width();
+	vcLabel->tqsetAlignment( AlignRight | AlignVCenter | ShowPrefix );
+	if ( vcLabel->tqsizeHint().width() > labelWidth )
+		labelWidth = vcLabel->tqsizeHint().width();
 	vcLabel->setMinimumWidth( labelWidth );
 
 	grid->addWidget( vcLabel, 1, 0 );
 
-	vcLabel = new TQLabel( orientComboBox, i18n("&Orientation"), vcGroupBox );
-	vcLabel->setAlignment( AlignRight | AlignVCenter | ShowPrefix );
-	if ( vcLabel->sizeHint().width() > labelWidth )
-		labelWidth = vcLabel->sizeHint().width();
+	vcLabel = new TQLabel( orientComboBox, i18n("&Qt::Orientation"), vcGroupBox );
+	vcLabel->tqsetAlignment( AlignRight | AlignVCenter | ShowPrefix );
+	if ( vcLabel->tqsizeHint().width() > labelWidth )
+		labelWidth = vcLabel->tqsizeHint().width();
 	vcLabel->setMinimumWidth( labelWidth );
 
 	grid->addWidget( vcLabel, 2, 0 );
 
-	vcGroupBox->setMinimumHeight( 2*orientComboBox->sizeHint().height()+20 );
+	vcGroupBox->setMinimumHeight( 2*orientComboBox->tqsizeHint().height()+20 );
 	vcGroupBox->setMinimumWidth(
-		40 + labelWidth + orientComboBox->sizeHint().width() );
+		40 + labelWidth + orientComboBox->tqsizeHint().width() );
 
         KSeparator* sep = new KSeparator( KSeparator::HLine, this);
 	topLayout->addWidget( sep );
@@ -130,7 +130,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	connect( closebtn, TQT_SIGNAL(clicked()), TQT_SLOT(reject()) );
 
 
-	bbox->layout();
+	bbox->tqlayout();
 	topLayout->addWidget( bbox );
 
 	topLayout->activate();

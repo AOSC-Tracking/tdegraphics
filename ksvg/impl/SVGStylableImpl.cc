@@ -98,9 +98,9 @@ SVGStylableImpl::~SVGStylableImpl()
 
 void SVGStylableImpl::processStyle()
 {
-	SVGStylableImpl *parentStyle = 0;
+	SVGStylableImpl *tqparentStyle = 0;
 	if(m_object && m_object->ownerDoc())
-		parentStyle = dynamic_cast<SVGStylableImpl *>(m_object->ownerDoc()->getElementFromHandle((*m_object).parentNode().handle()));
+		tqparentStyle = dynamic_cast<SVGStylableImpl *>(m_object->ownerDoc()->getElementFromHandle((*m_object).parentNode().handle()));
 
 	// Spec: default "none"
 	if(~m_flags & SVG_STYLE_FLAG_STROKE)
@@ -109,8 +109,8 @@ void SVGStylableImpl::processStyle()
 		m_strokeColor->ref();
 
 		SVGPaintImpl *strokeColor = 0L;
-		if(parentStyle)
-			strokeColor = parentStyle->getStrokeColor();
+		if(tqparentStyle)
+			strokeColor = tqparentStyle->getStrokeColor();
 
 		if(strokeColor)
 			*m_strokeColor = *strokeColor;
@@ -125,8 +125,8 @@ void SVGStylableImpl::processStyle()
 		m_fillColor->ref();
 
 		SVGPaintImpl *fillColor = 0;
-		if(parentStyle)
-			fillColor = parentStyle->getFillColor();
+		if(tqparentStyle)
+			fillColor = tqparentStyle->getFillColor();
 
 		if(fillColor)
 			*m_fillColor = *fillColor;
@@ -140,8 +140,8 @@ void SVGStylableImpl::processStyle()
 		m_color = new SVGColorImpl(m_object);
 		m_color->ref();
 		SVGColorImpl *color = 0;
-		if(parentStyle)
-			color = parentStyle->getColor();
+		if(tqparentStyle)
+			color = tqparentStyle->getColor();
 
 		if(color)
 			*m_color = *color;
@@ -150,8 +150,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default sRGB
 	if(~m_flags & SVG_STYLE_FLAG_COLOR_INTERPOLATION)
 	{
-		if(parentStyle)
-			m_colorInterpolation = parentStyle->getColorInterpolation();
+		if(tqparentStyle)
+			m_colorInterpolation = tqparentStyle->getColorInterpolation();
 		else
 			m_colorInterpolation = CI_SRGB;
 	}
@@ -163,8 +163,8 @@ void SVGStylableImpl::processStyle()
 		m_strokeWidth->ref();
 
 		SVGAnimatedLengthImpl *strokeWidth = 0;
-		if(parentStyle)
-			strokeWidth = parentStyle->getStrokeWidth();
+		if(tqparentStyle)
+			strokeWidth = tqparentStyle->getStrokeWidth();
 
 		if(strokeWidth)
 			*m_strokeWidth = *strokeWidth;
@@ -175,8 +175,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "4"
 	if(~m_flags & SVG_STYLE_FLAG_STROKE_MITER_LIMIT)
 	{
-		if(parentStyle)
-			m_strokeMiterlimit = parentStyle->getStrokeMiterlimit();
+		if(tqparentStyle)
+			m_strokeMiterlimit = tqparentStyle->getStrokeMiterlimit();
 		else
 			m_strokeMiterlimit = 4;
 	}
@@ -184,8 +184,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "butt"
 	if(~m_flags & SVG_STYLE_FLAG_STROKE_LINE_CAP)
 	{
-		if(parentStyle)
-			m_capStyle = parentStyle->getCapStyle();
+		if(tqparentStyle)
+			m_capStyle = tqparentStyle->getCapStyle();
 		else
 			m_capStyle = PATH_STROKE_CAP_BUTT;
 	}
@@ -193,8 +193,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "miter"
 	if(~m_flags & SVG_STYLE_FLAG_STROKE_LINE_JOIN)
 	{
-		if(parentStyle)
-			m_joinStyle = parentStyle->getJoinStyle();
+		if(tqparentStyle)
+			m_joinStyle = tqparentStyle->getJoinStyle();
 		else
 			m_joinStyle = PATH_STROKE_JOIN_MITER;
 	}
@@ -202,8 +202,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "auto"
 	if(~m_flags & SVG_STYLE_FLAG_CURSOR)
 	{
-		if(parentStyle)
-			m_cursor = parentStyle->getCursor();
+		if(tqparentStyle)
+			m_cursor = tqparentStyle->getCursor();
 		else
 			m_cursor = CURSOR_AUTO;
 	}
@@ -211,8 +211,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "visiblePainted"
 	if(~m_flags & SVG_STYLE_FLAG_POINTER_EVENTS)
 	{
-		if(parentStyle)
-			m_pointerEvents = parentStyle->getPointerEvents();
+		if(tqparentStyle)
+			m_pointerEvents = tqparentStyle->getPointerEvents();
 		else
 			m_pointerEvents = PE_VISIBLE_PAINTED;
 	}
@@ -224,8 +224,8 @@ void SVGStylableImpl::processStyle()
 		m_dashOffset->ref();
 
 		SVGAnimatedLengthImpl *dashOffset = 0;
-		if(parentStyle)
-			dashOffset = parentStyle->getDashOffset();
+		if(tqparentStyle)
+			dashOffset = tqparentStyle->getDashOffset();
 
 		if(dashOffset)
 			*m_dashOffset = *dashOffset;
@@ -237,8 +237,8 @@ void SVGStylableImpl::processStyle()
 	if(~m_flags & SVG_STYLE_FLAG_STROKE_DASH_ARRAY)
 	{
 		SVGAnimatedLengthListImpl *dashArray = 0;
-		if(parentStyle)
-			dashArray = parentStyle->getDashArray();
+		if(tqparentStyle)
+			dashArray = tqparentStyle->getDashArray();
 
 		if(dashArray)
 		{
@@ -256,51 +256,51 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "1" -> 1 == Not opaque
 	if(~m_flags & SVG_STYLE_FLAG_FILL_OPACITY)
 	{
-		if(parentStyle)
-			m_fillOpacity = parentStyle->getFillOpacity();
+		if(tqparentStyle)
+			m_fillOpacity = tqparentStyle->getFillOpacity();
 		else
 			m_fillOpacity = 1;
 	}
 
 	if(~m_flags & SVG_STYLE_FLAG_STROKE_OPACITY)
 	{
-		if(parentStyle)
-			m_strokeOpacity = parentStyle->getStrokeOpacity();
+		if(tqparentStyle)
+			m_strokeOpacity = tqparentStyle->getStrokeOpacity();
 		else
 			m_strokeOpacity = 1;
 	}
 
-	// Fake group opacity by multiplying by our parent's group opacity
+	// Fake group opacity by multiplying by our tqparent's group opacity
 	if(~m_flags & SVG_STYLE_FLAG_OPACITY)
 	{
-		if(parentStyle)
-			m_opacity = parentStyle->getOpacity();
+		if(tqparentStyle)
+			m_opacity = tqparentStyle->getOpacity();
 		else
 			m_opacity = 1;
 	}
 	else
-		if(parentStyle)
-			m_opacity *= parentStyle->getOpacity();
+		if(tqparentStyle)
+			m_opacity *= tqparentStyle->getOpacity();
 
 	if(~m_flags & SVG_STYLE_FLAG_CLIP_PATH)
 		m_clipPath = "";
 
 	if(~m_flags & SVG_STYLE_FLAG_MASK)
-		m_mask = "";
+		m_tqmask = "";
 
 	// Spec: default "nonzero"
 	if(~m_flags & SVG_STYLE_FLAG_FILL_RULE)
 	{
-		if(parentStyle)
-			m_fillRule = parentStyle->getFillRule();
+		if(tqparentStyle)
+			m_fillRule = tqparentStyle->getFillRule();
 		else
 			m_fillRule = RULE_NONZERO;
 	}
 	
 	if(~m_flags & SVG_STYLE_FLAG_CLIP_RULE)
 	{
-		if(parentStyle)
-			m_clipRule = parentStyle->getClipRule();
+		if(tqparentStyle)
+			m_clipRule = tqparentStyle->getClipRule();
 		else
 			m_clipRule = RULE_NONZERO;
 	}
@@ -308,8 +308,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "hidden"
 	if(~m_flags & SVG_STYLE_FLAG_OVERFLOW)
 	{
-		if(parentStyle)
-			m_overflow = parentStyle->getOverflow();
+		if(tqparentStyle)
+			m_overflow = tqparentStyle->getOverflow();
 		else
 			m_overflow = false;
 	}
@@ -322,8 +322,8 @@ void SVGStylableImpl::processStyle()
 
 	if(~m_flags & SVG_STYLE_FLAG_VISIBILITY)
 	{
-		if(parentStyle)
-			m_visible = parentStyle->getVisible();
+		if(tqparentStyle)
+			m_visible = tqparentStyle->getVisible();
 		else
 			m_visible = true;
 	}
@@ -331,8 +331,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "medium"
 	if(~m_flags & SVG_STYLE_FLAG_FONT_SIZE)
 	{
-		if(parentStyle)
-			m_fontSize = parentStyle->getFontSize();
+		if(tqparentStyle)
+			m_fontSize = tqparentStyle->getFontSize();
 		else
 			m_fontSize = fontSizeForText("medium");
 	}
@@ -347,8 +347,8 @@ void SVGStylableImpl::processStyle()
 		}
 
 		SVGStringListImpl *fontFamily = 0;
-		if(parentStyle)
-			fontFamily = parentStyle->getFontFamily();
+		if(tqparentStyle)
+			fontFamily = tqparentStyle->getFontFamily();
 
 		if(fontFamily)
 			*m_fontFamily = *fontFamily;
@@ -364,8 +364,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "normal"
 	if(~m_flags & SVG_STYLE_FLAG_FONT_STYLE)
 	{
-		if(parentStyle)
-			m_fontStyle = parentStyle->getFontStyle();
+		if(tqparentStyle)
+			m_fontStyle = tqparentStyle->getFontStyle();
 		else
 			m_fontStyle = FSNORMAL;
 	}
@@ -373,8 +373,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "normal"
 	if(~m_flags & SVG_STYLE_FLAG_FONT_WEIGHT)
 	{
-		if(parentStyle)
-			m_fontWeight = parentStyle->getFontWeight();
+		if(tqparentStyle)
+			m_fontWeight = tqparentStyle->getFontWeight();
 		else
 			m_fontWeight = "normal";
 	}
@@ -382,8 +382,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "start"
 	if(~m_flags & SVG_STYLE_FLAG_TEXT_ANCHOR)
 	{
-		if(parentStyle)
-			m_textAnchor = parentStyle->getTextAnchor();
+		if(tqparentStyle)
+			m_textAnchor = tqparentStyle->getTextAnchor();
 		else
 			m_textAnchor = TASTART;
 	}
@@ -391,8 +391,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "LTR"
 	if(~m_flags & SVG_STYLE_FLAG_TEXT_DIRECTION)
 	{
-		if(parentStyle)
-			m_textDirection = parentStyle->getTextDirection();
+		if(tqparentStyle)
+			m_textDirection = tqparentStyle->getTextDirection();
 		else
 			m_textDirection = LTR;
 	}
@@ -400,8 +400,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "none"
 	if(~m_flags & SVG_STYLE_FLAG_TEXT_DECORATION)
 	{
-		if(parentStyle)
-			m_textDecoration = parentStyle->getTextDecoration();
+		if(tqparentStyle)
+			m_textDecoration = tqparentStyle->getTextDecoration();
 		else
 			m_textDecoration = TDNONE;
 	}
@@ -409,8 +409,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "baseline"
 	if(~m_flags & SVG_STYLE_FLAG_BASELINE_SHIFT)
 	{
-		if(parentStyle)
-			m_baselineShift = parentStyle->getBaselineShift();
+		if(tqparentStyle)
+			m_baselineShift = tqparentStyle->getBaselineShift();
 		else
 			m_baselineShift = "baseline";
 	}
@@ -418,8 +418,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "lr-tb", FIXME
 	if(~m_flags & SVG_STYLE_FLAG_TEXT_WRITING_MODE)
 	{
-		if(parentStyle)
-			m_textWritingMode = parentStyle->getTextWritingMode();
+		if(tqparentStyle)
+			m_textWritingMode = tqparentStyle->getTextWritingMode();
 		else
 			m_textWritingMode = LR;
 	}
@@ -427,8 +427,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "normal"
 	if(~m_flags & SVG_STYLE_FLAG_TEXT_UNICODE_BIDI)
 	{
-		if(parentStyle)
-			m_textUnicodeBidi = parentStyle->getTextUnicodeBidi();
+		if(tqparentStyle)
+			m_textUnicodeBidi = tqparentStyle->getTextUnicodeBidi();
 		else
 			m_textUnicodeBidi = UBNORMAL;
 	}
@@ -436,8 +436,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "auto"
 	if(~m_flags & SVG_STYLE_FLAG_GLYPH_ORIENTATION_VERTICAL)
 	{
-		if(parentStyle)
-			m_glyphOrientationVertical = parentStyle->getGlyphOrientationVertical();
+		if(tqparentStyle)
+			m_glyphOrientationVertical = tqparentStyle->getGlyphOrientationVertical();
 		else
 			m_glyphOrientationVertical = "auto";
 	}	
@@ -445,8 +445,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "auto"
 	if(~m_flags & SVG_STYLE_FLAG_GLYPH_ORIENTATION_HORIZONTAL)
 	{
-		if(parentStyle)
-			m_glyphOrientationHorizontal = parentStyle->getGlyphOrientationHorizontal();
+		if(tqparentStyle)
+			m_glyphOrientationHorizontal = tqparentStyle->getGlyphOrientationHorizontal();
 		else
 			m_glyphOrientationHorizontal = "auto";
 	}	
@@ -454,8 +454,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "normal"
 	if(~m_flags & SVG_STYLE_FLAG_LETTER_SPACING)
 	{
-		if(parentStyle)
-			m_letterSpacing = parentStyle->getLetterSpacing();
+		if(tqparentStyle)
+			m_letterSpacing = tqparentStyle->getLetterSpacing();
 		else
 			m_letterSpacing = "normal";
 	}
@@ -463,8 +463,8 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "normal"
 	if(~m_flags & SVG_STYLE_FLAG_WORD_SPACING)
 	{
-		if(parentStyle)
-			m_wordSpacing = parentStyle->getWordSpacing();
+		if(tqparentStyle)
+			m_wordSpacing = tqparentStyle->getWordSpacing();
 		else
 			m_wordSpacing = "normal";
 	}
@@ -481,28 +481,28 @@ void SVGStylableImpl::processStyle()
 	// Spec: default "none"
 	if(~m_flags & SVG_STYLE_FLAG_MARKER_START)
 	{
-		if(parentStyle)
-			m_startMarker = parentStyle->getStartMarker();
+		if(tqparentStyle)
+			m_startMarker = tqparentStyle->getStartMarker();
 		else
-			m_startMarker = TQString::null;
+			m_startMarker = TQString();
 	}
 
 	// Spec: default "none"
 	if(~m_flags & SVG_STYLE_FLAG_MARKER_MID)
 	{
-		if(parentStyle)
-			m_midMarker = parentStyle->getMidMarker();
+		if(tqparentStyle)
+			m_midMarker = tqparentStyle->getMidMarker();
 		else
-			m_midMarker = TQString::null;
+			m_midMarker = TQString();
 	}
 
 	// Spec: default "none"
 	if(~m_flags & SVG_STYLE_FLAG_MARKER_END)
 	{
-		if(parentStyle)
-			m_endMarker = parentStyle->getEndMarker();
+		if(tqparentStyle)
+			m_endMarker = tqparentStyle->getEndMarker();
 		else
-			m_endMarker = TQString::null;
+			m_endMarker = TQString();
 	}
 }
 
@@ -532,7 +532,7 @@ TQString SVGStylableImpl::extractUrlId(const TQString &url)
 
 	if(url.startsWith("url(#"))
 	{
-		int idstart = url.find("#") + 1;
+		int idstart = url.tqfind("#") + 1;
 		id = url.mid(idstart, url.length() - idstart - 1);
 	}
 	else
@@ -552,33 +552,33 @@ void SVGStylableImpl::setStartMarker(const TQString &startMarker)
 {
 	if(startMarker.startsWith("url(#"))
 	{
-		int idstart = startMarker.find("#") + 1;
+		int idstart = startMarker.tqfind("#") + 1;
 		m_startMarker = startMarker.mid(idstart, startMarker.length() - idstart - 1);
 	}
 	else if(startMarker == "none")
-		m_startMarker = TQString::null;
+		m_startMarker = TQString();
 }
 
 void SVGStylableImpl::setMidMarker(const TQString &midMarker)
 {
 	if(midMarker.startsWith("url(#"))
 	{
-		int idstart = midMarker.find("#") + 1;
+		int idstart = midMarker.tqfind("#") + 1;
 		m_midMarker = midMarker.mid(idstart, midMarker.length() - idstart - 1);
 	}
 	else if(midMarker == "none")
-		m_midMarker = TQString::null;
+		m_midMarker = TQString();
 }
 
 void SVGStylableImpl::setEndMarker(const TQString &endMarker)
 {
 	if(endMarker.startsWith("url(#"))
 	{
-		int idstart = endMarker.find("#") + 1;
+		int idstart = endMarker.tqfind("#") + 1;
 		m_endMarker = endMarker.mid(idstart, endMarker.length() - idstart - 1);
 	}
 	else if(endMarker == "none")
-		m_endMarker = TQString::null;
+		m_endMarker = TQString();
 }
 
 bool SVGStylableImpl::hasMarkers() const
@@ -600,7 +600,7 @@ void SVGStylableImpl::setColor(const TQString &param, SVGColorImpl *svgColor)
 {
 	if(param.stripWhiteSpace().startsWith("#"))
 	{
-		if(param.contains("icc-color"))
+		if(param.tqcontains("icc-color"))
 		{
 			TQString first = param.left(7);
 			TQString last = param.right(param.length() - 8);
@@ -622,19 +622,19 @@ void SVGStylableImpl::setColor(const TQString &param, SVGColorImpl *svgColor)
 		TQString g = colors[1];
 		TQString b = colors[2].left((colors[2].length() - 1));
 
-		if(r.contains("%"))
+		if(r.tqcontains("%"))
 		{
 			r = r.left(r.length() - 1);
 			r = TQString::number(int((double(255 * r.toDouble()) / 100.0)));
 		}
 		
-		if(g.contains("%"))
+		if(g.tqcontains("%"))
 		{
 			g = g.left(g.length() - 1);
 			g = TQString::number(int((double(255 * g.toDouble()) / 100.0)));
 		}
 
-		if(b.contains("%"))
+		if(b.tqcontains("%"))
 		{
 			b = b.left(b.length() - 1);
 			b = TQString::number(int((double(255 * b.toDouble()) / 100.0)));
@@ -711,7 +711,7 @@ float SVGStylableImpl::fontSizeForText(const TQString &value)
  text-anchor		SVGStylableImpl::TextAnchor			DontDelete|ReadOnly
  direction			SVGStylableImpl::Direction			DontDelete|ReadOnly
  writing-mode		SVGStylableImpl::WritingMode		DontDelete|ReadOnly
- unicode-bidi		SVGStylableImpl::UnicodeBidi		DontDelete|ReadOnly
+ tqunicode-bidi		SVGStylableImpl::UnicodeBidi		DontDelete|ReadOnly
  opacity			SVGStylableImpl::Opacity			DontDelete|ReadOnly
  fill-opacity		SVGStylableImpl::FillOpacity		DontDelete|ReadOnly
  stroke-opacity		SVGStylableImpl::StrokeOpacity		DontDelete|ReadOnly
@@ -737,7 +737,7 @@ float SVGStylableImpl::fontSizeForText(const TQString &value)
  glyph-orientation-vertical	SVGStylableImpl::GlyphOrientationVertical	DontDelete|ReadOnly
  glyph-orientation-horizontal	SVGStylableImpl::GlyphOrientationHorizontal	DontDelete|ReadOnly
  color-interpolation	SVGStylableImpl::ColorInterpolation	DontDelete|ReadOnly
- mask				SVGStylableImpl::Mask	DontDelete|ReadOnly
+ tqmask				SVGStylableImpl::Mask	DontDelete|ReadOnly
 @end
 @namespace KSVG
 @begin SVGStylableImplProto::s_hashTable 2
@@ -946,12 +946,12 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 
 			// Hacks
 			// #1 Replace "'" characters by ""
-			param = param.replace('\'', TQString::null);
+			param = param.tqreplace('\'', TQString());
 			// #2 Replace "MS-Gothic" by "MS Gothic"
-			param = param.replace("MS-Gothic", "MS Gothic");
+			param = param.tqreplace("MS-Gothic", "MS Gothic");
 			// #3 Replace "Helvetica" by "Arial"
-			param = param.replace("Helvetica", "Arial");
-			param = param.replace("helvetica", "Arial");
+			param = param.tqreplace("Helvetica", "Arial");
+			param = param.tqreplace("helvetica", "Arial");
 
 			if(!m_fontFamily)
 			{
@@ -974,7 +974,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 			else if(param == "italic")
 				m_fontStyle = ITALIC;
 			else if(param == "oblique")
-				m_fontStyle = OBLIQUE;
+				m_fontStyle = OBLITQUE;
 			break;
 		case TextDecoration:
 			m_flags |= SVG_STYLE_FLAG_TEXT_DECORATION;
@@ -1006,7 +1006,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 			break;
 		case Direction:
 			m_flags |= SVG_STYLE_FLAG_TEXT_DIRECTION;
-			// Spec: direction is only processed when unicode-bidi
+			// Spec: direction is only processed when tqunicode-bidi
 			//       is set to bidi-override or embedded
 			if(m_textUnicodeBidi == OVERRIDE ||
 				m_textUnicodeBidi == EMBED ||
@@ -1076,7 +1076,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 		case Mask:
 			m_flags |= SVG_STYLE_FLAG_MASK;
 			if(!inherit)
-				m_mask = extractUrlId(param);
+				m_tqmask = extractUrlId(param);
 			break;
 		case MarkerStart:
 			m_flags |= SVG_STYLE_FLAG_MARKER_START;
@@ -1276,16 +1276,16 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 
 	if(redraw)
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_object);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_object);
 		if(inherit)
 			processStyle();
 			
-		if(shape && shape->item())
+		if(tqshape && tqshape->item())
 		{
 			if(update > -1)
-				shape->item()->update(static_cast<CanvasItemUpdate>(update));
+				tqshape->item()->update(static_cast<CanvasItemUpdate>(update));
 			else if(m_object)
-				m_object->ownerDoc()->canvas()->invalidate(shape->item(), false);
+				m_object->ownerDoc()->canvas()->tqinvalidate(tqshape->item(), false);
 		}
 	}
 }

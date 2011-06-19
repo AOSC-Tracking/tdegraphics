@@ -107,11 +107,11 @@ void PMHeightField::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMHeightField::metaObject( ) const
+PMMetaObject* PMHeightField::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "HeightField", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "HeightField", Base::tqmetaObject( ),
                                         createNewHeightField );
       s_pMetaObject->addProperty(
          new PMHeightFieldProperty( "fileName", &PMHeightField::setFileName, &PMHeightField::fileName ) );
@@ -200,9 +200,9 @@ void PMHeightField::setWaterLevel( double wl )
    }
 }
 
-PMDialogEditBase* PMHeightField::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMHeightField::editWidget( TQWidget* tqparent ) const
 {
-   return new PMHeightFieldEdit( parent );
+   return new PMHeightFieldEdit( tqparent );
 }
 
 void PMHeightField::restoreMemento( PMMemento* s )

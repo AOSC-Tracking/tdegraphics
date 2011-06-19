@@ -81,7 +81,7 @@ struct KSVGPlugin::Private
 	unsigned int height;
 };
 
-KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const char *name, unsigned int width, unsigned int height) : KParts::ReadOnlyPart(parent, name)
+KSVGPlugin::KSVGPlugin(TQWidget *wtqparent, const char *, TQObject *tqparent, const char *name, unsigned int width, unsigned int height) : KParts::ReadOnlyPart(tqparent, name)
 {
 	kdDebug(26003) << "KSVGPlugin::KSVGPlugin" << endl;
 	setInstance(KSVGPluginFactory::instance());
@@ -95,7 +95,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 
 	ksvgd->doc = 0;
 
-	ksvgd->window = new KSVGWidget(this, wparent, "Rendering Widget");
+	ksvgd->window = new KSVGWidget(this, wtqparent, "Rendering Widget");
 	connect(ksvgd->window, TQT_SIGNAL(browseURL(const TQString &)), this, TQT_SLOT(browseURL(const TQString &)));
 	ksvgd->window->show();
 
@@ -110,7 +110,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 	if(!ksvgd->canvas)
 		return;
 
-	ksvgd->canvas->setup(ksvgd->backgroundPixmap, ksvgd->window);
+	ksvgd->canvas->setup(TQT_TQPAINTDEVICE(ksvgd->backgroundPixmap), TQT_TQPAINTDEVICE(ksvgd->window));
 
 	ksvgd->zoomInAction = KStdAction::zoomIn(this, TQT_SLOT(slotZoomIn()), actionCollection());
 	ksvgd->zoomOutAction = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()), actionCollection());
@@ -144,7 +144,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 	ksvgd->renderingBackendAction->setItems(items);
 	ksvgd->renderingBackendAction->setCurrentItem(KSVG::CanvasFactory::self()->itemInList(ksvgd->canvas));
 
-	ksvgd->aboutKSVG = new KAboutApplication(KSVGPluginFactory::instance()->aboutData(), wparent);
+	ksvgd->aboutKSVG = new KAboutApplication(KSVGPluginFactory::instance()->aboutData(), wtqparent);
 
 	setXMLFile("ksvgplugin.rc");
 }
@@ -299,7 +299,7 @@ void KSVGPlugin::slotRenderingBackend()
 	if(!ksvgd->canvas)
 		return;
 
-	ksvgd->canvas->setup(ksvgd->backgroundPixmap, ksvgd->window);
+	ksvgd->canvas->setup(TQT_TQPAINTDEVICE(ksvgd->backgroundPixmap), TQT_TQPAINTDEVICE(ksvgd->window));
 	openURL(m_url);
 }
 
@@ -398,7 +398,7 @@ void KSVGPlugin::update()
 void KSVGPlugin::slotSetDescription(const TQString &desc)
 {
 	ksvgd->description = desc;
-	emit setStatusBarText(i18n("Description: %1").arg(desc));
+	emit setStatusBarText(i18n("Description: %1").tqarg(desc));
 }
 
 void KSVGPlugin::slotSetTitle(const TQString &title)
@@ -409,7 +409,7 @@ void KSVGPlugin::slotSetTitle(const TQString &title)
 void KSVGPlugin::slotGotURL(const TQString &text)
 {
 	if(text.isNull() && !ksvgd->description.isEmpty())
-		emit setStatusBarText(i18n("Description: %1").arg(ksvgd->description));
+		emit setStatusBarText(i18n("Description: %1").tqarg(ksvgd->description));
 	else
 		emit setStatusBarText(text);
 }

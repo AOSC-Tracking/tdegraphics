@@ -31,8 +31,9 @@
 class KDrawColors : public KColorGrid
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  KDrawColors(TQWidget *parent);
+  KDrawColors(TQWidget *tqparent);
 
   //bool hasColor(uint);
 
@@ -49,8 +50,9 @@ protected:
 class KCustomColors : public KDrawColors
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  KCustomColors(TQWidget *parent);
+  KCustomColors(TQWidget *tqparent);
   ~KCustomColors();
 
   void addColor(uint);
@@ -69,9 +71,10 @@ protected:
 class KSysColors : public KDrawColors
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
 
-  KSysColors(TQWidget *parent);
+  KSysColors(TQWidget *tqparent);
 
 };
 

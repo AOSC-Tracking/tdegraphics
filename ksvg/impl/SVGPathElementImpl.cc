@@ -678,21 +678,21 @@ SVGPathElementImpl::MarkerData::MarkerData(SVGPathSegListImpl *path)
 				previousCubicY2 = cury + s->y2();
 				break;
 			}
-			case PATHSEG_CURVETO_QUADRATIC_ABS:
+			case PATHSEG_CURVETO_TQUADRATIC_ABS:
 			{
 				SVGPathSegCurvetoQuadraticAbsImpl *s = static_cast<SVGPathSegCurvetoQuadraticAbsImpl *>(segment);
 				previousQuadraticX1 = s->x1();
 				previousQuadraticY1 = s->y1();
 				break;
 			}
-			case PATHSEG_CURVETO_QUADRATIC_REL:
+			case PATHSEG_CURVETO_TQUADRATIC_REL:
 			{
 				SVGPathSegCurvetoQuadraticRelImpl *s = static_cast<SVGPathSegCurvetoQuadraticRelImpl *>(segment);
 				previousQuadraticX1 = curx + s->x1();
 				previousQuadraticY1 = cury + s->y1();
 				break;
 			}
-			case PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS:
+			case PATHSEG_CURVETO_TQUADRATIC_SMOOTH_ABS:
 			{
 				SVGPathSegCurvetoQuadraticSmoothAbsImpl *s = static_cast<SVGPathSegCurvetoQuadraticSmoothAbsImpl *>(segment);
 				s->setPreviousX1(previousQuadraticX1);
@@ -701,7 +701,7 @@ SVGPathElementImpl::MarkerData::MarkerData(SVGPathSegListImpl *path)
 				previousQuadraticY1 = s->y1(cury);
 				break;
 			}
-			case PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL:
+			case PATHSEG_CURVETO_TQUADRATIC_SMOOTH_REL:
 			{
 				SVGPathSegCurvetoQuadraticSmoothRelImpl *s = static_cast<SVGPathSegCurvetoQuadraticSmoothRelImpl *>(segment);
 				s->setPreviousAbsX1(previousQuadraticX1);

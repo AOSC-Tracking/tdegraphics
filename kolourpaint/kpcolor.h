@@ -36,13 +36,13 @@ class TQDataStream;
 
 
 //
-// kpColor is an object-oriented abstraction of QRgb, with the additional
+// kpColor is an object-oriented abstraction of TQRgb, with the additional
 // restriction of following the KolourPaint convention of only supporting
 // totally transparent and totally opaque colors.  It also provides better
 // error handling, reporting (noisy kdError()'s) and recovery.
 //
-// In general, you should pass around kpColor objects instead of QRgb
-// and TQColor.  Only convert an opaque kpColor to a TQColor (using toQColor())
+// In general, you should pass around kpColor objects instead of TQRgb
+// and TQColor.  Only convert an opaque kpColor to a TQColor (using toTQColor())
 // if you need to draw something onscreen.  Constructing a kpColor object
 // from TQColor is probably wrong since onscreen representations of color
 // are not guaranteed to be faithful (due to TQColor color allocation).
@@ -52,7 +52,7 @@ class kpColor
 public:
     kpColor ();
     kpColor (int red, int green, int blue, bool isTransparent = false);
-    kpColor (const QRgb &rgba);
+    kpColor (const TQRgb &rgba);
     kpColor (const kpColor &rhs);
     friend TQDataStream &operator<< (TQDataStream &stream, const kpColor &color);
     friend TQDataStream &operator>> (TQDataStream &stream, kpColor &color);
@@ -81,17 +81,17 @@ public:
 
     // Cast operators will most likely result in careless conversions so
     // use explicit functions instead:
-    QRgb toQRgb () const;
+    TQRgb toTQRgb () const;
 
     // (only valid if isOpaque())
     // (const TQColor & return results in fewer color reallocations)
-    const TQColor &toQColor () const;
+    const TQColor &toTQColor () const;
 
-    TQColor maskColor () const;
+    TQColor tqmaskColor () const;
 
 private:
     bool m_rgbaIsValid;
-    QRgb m_rgba;
+    TQRgb m_rgba;
 
     mutable bool m_colorCacheIsValid;
     mutable TQColor m_colorCache;

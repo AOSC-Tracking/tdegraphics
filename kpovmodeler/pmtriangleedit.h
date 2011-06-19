@@ -38,12 +38,13 @@ class TQPushButton;
 class PMTriangleEdit : public PMGraphicalObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMGraphicalObjectEdit Base;
 public:
    /**
-    * Creates a PMTriangleEdit with parent and name
+    * Creates a PMTriangleEdit with tqparent and name
     */
-   PMTriangleEdit( TQWidget* parent, const char* name = 0 );
+   PMTriangleEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

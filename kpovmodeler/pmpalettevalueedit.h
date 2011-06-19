@@ -32,12 +32,13 @@ class PMIntEdit;
 /**
  * Dialog edit class for @ref PMPaletteValue.
  */
-class PMPaletteValueEdit: public QWidget
+class PMPaletteValueEdit: public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /** */
-   PMPaletteValueEdit( TQWidget* parent, const char* name = 0 );
+   PMPaletteValueEdit( TQWidget* tqparent, const char* name = 0 );
    /** */
    void setIndex( int idx );
    /** */

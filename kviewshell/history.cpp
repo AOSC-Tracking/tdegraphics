@@ -9,7 +9,7 @@
 
 #include "history.h"
 
-HistoryItem::HistoryItem(Q_UINT32 p, Q_UINT32 y)
+HistoryItem::HistoryItem(TQ_UINT32 p, TQ_UINT32 y)
   : page(p), ypos(y)
 {
 }
@@ -23,7 +23,7 @@ History::History()
 {
 }
 
-void History::add(Q_UINT32 page, Q_UINT32 ypos)
+void History::add(TQ_UINT32 page, TQ_UINT32 ypos)
 {
   HistoryItem item(page, ypos);
 

@@ -55,7 +55,7 @@ class SVGRectElementImpl;
  * for attributes <code> x </code> and <code> y</code>.
  *
  * For more info look here : <a href =
- * "http://www.w3.org/TR/SVG/shapes.html#RectElement"> 9.2 The
+ * "http://www.w3.org/TR/SVG/tqshapes.html#RectElement"> 9.2 The
  * 'rect' element</a>.
  */
 class SVGRectElement : public SVGElement,
@@ -130,7 +130,7 @@ public:
 	 * "http://www.w3.org/TR/SVG/implnote.html#ErrorProcessing"> Error
 	 * processing</a>).
 	 *
-	 * See <a href="http://www.w3.org/TR/SVG/shapes.html#RectElement">
+	 * See <a href="http://www.w3.org/TR/SVG/tqshapes.html#RectElement">
 	 * 9.2 The 'rect' element </a> for info about what happens if the
 	 * attribute is not specified.
 	 *
@@ -148,7 +148,7 @@ public:
 	 * "http://www.w3.org/TR/SVG/implnote.html#ErrorProcessing">Error
 	 * processing</a>).
 	 *
-	 * See <a href="http://www.w3.org/TR/SVG/shapes.html#RectElement">
+	 * See <a href="http://www.w3.org/TR/SVG/tqshapes.html#RectElement">
 	 * 9.2 The 'rect' element </a> for info about what happens if the
 	 * attribute is not specified.
 	 *

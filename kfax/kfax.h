@@ -2,7 +2,7 @@
 
     $Id$
 
-    Requires the Qt widget libraries, available at no cost at
+    Requires the TQt widget libraries, available at no cost at
     http://www.troll.no
 
     Copyright (C) 1997 Bernd Johannes Wuebben
@@ -54,11 +54,12 @@ public:
 class TopLevel : public KMainWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 
 public:
 
-    TopLevel( TQWidget *parent=0, const char *name=0 );
+    TopLevel( TQWidget *tqparent=0, const char *name=0 );
     ~TopLevel();
 
     void openNetFile( const KURL& _url);

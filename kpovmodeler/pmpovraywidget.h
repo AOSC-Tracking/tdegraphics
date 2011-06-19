@@ -42,11 +42,12 @@ class KURL;
 class PMPovrayWidget : public KDialog
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Standard constructor
     */
-   PMPovrayWidget( TQWidget* parent = 0, const char* name = 0 );
+   PMPovrayWidget( TQWidget* tqparent = 0, const char* name = 0 );
    /**
     * Destructor
     */
@@ -69,7 +70,7 @@ public slots:
    void slotPovrayOutput( );
 
 protected slots:
-   void slotRenderingFinished( int returnStatus );
+   void slotRenderingFinished( int returntqStatus );
    void slotProgress( int i );
    void slotLineFinished( int line );
    void slotUpdateSpeed( );

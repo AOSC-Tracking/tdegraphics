@@ -53,7 +53,7 @@
 
 kpToolFloodFill::kpToolFloodFill (kpMainWindow *mainWindow)
     : kpTool (i18n ("Flood Fill"), i18n ("Fills regions in the image"),
-              Qt::Key_F,
+              TQt::Key_F,
               mainWindow, "tool_flood_fill"),
       m_currentCommand (0)
 {
@@ -80,7 +80,7 @@ void kpToolFloodFill::beginDraw ()
     kdDebug () << "kpToolFloodFill::beginDraw()" << endl;
 #endif
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     // Flood Fill is an expensive CPU operation so we only fill at a
     // mouse click (beginDraw ()), not on mouse move (virtually draw())

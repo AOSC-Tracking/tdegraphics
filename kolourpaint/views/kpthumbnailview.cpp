@@ -39,12 +39,12 @@ kpThumbnailView::kpThumbnailView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        TQWidget *parent, const char *name)
+        TQWidget *tqparent, const char *name)
 
     : kpView (document, toolToolBar, viewManager,
               buddyView,
               scrollableContainer,
-              parent, name)
+              tqparent, name)
 {
 }
 
@@ -77,7 +77,7 @@ void kpThumbnailView::resizeEvent (TQResizeEvent *e)
                << endl;
 #endif
 
-    // For QResizeEvent's, Qt already throws an entire widget repaint into
+    // For TQResizeEvent's, TQt already throws an entire widget tqrepaint into
     // the event loop.  So eat useless update() calls that can only slow
     // things down.
     // TODO: this doesn't seem to work.

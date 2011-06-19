@@ -37,9 +37,10 @@ class SearchWidget;
 class KMultiPage : public KParts::ReadOnlyPart, virtual public kmultipageInterface
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent, const char *name);
+  KMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent, const char *name);
   virtual ~KMultiPage();
 
   /* returns the scrollview used for the display */
@@ -91,7 +92,7 @@ public:
   should) therefore be re-implemented if you have good code to convert
   your document to PostScript.
 
-  Example: If your document consists of a single A4 page that contains
+  Example: If your document consists of a single A4 page that tqcontains
   a DJVU image of 30KB, then the default implementation would render
   the image in 600dpi, i.e. in about 7000x5000 pixel, and then send
   this huge graphics uncompressed to the printer. A smart
@@ -120,7 +121,7 @@ public:
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1)) )) {
+  if (!printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
     delete printer;
     return;
   }
@@ -154,7 +155,7 @@ public:
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1)) )) {
+  if (!printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
     delete printer;
     return;
   }
@@ -291,8 +292,8 @@ public:
   virtual double calculateFitToHeightZoomValue();
 
   /* Returns the number of columns into which the widgets are aligned. */
-  virtual Q_UINT8 getNrColumns() const { return _scrollView->getNrColumns(); }
-  virtual Q_UINT8 getNrRows() const { return _scrollView->getNrRows(); }
+  virtual TQ_UINT8 getNrColumns() const { return _scrollView->getNrColumns(); }
+  virtual TQ_UINT8 getNrRows() const { return _scrollView->getNrRows(); }
 
   virtual bool overviewMode() const { return _scrollView->overviewMode(); }
 
@@ -425,9 +426,9 @@ public slots:
   */
   void renderModeChanged();
 
-  /* Empties the page cache and --as the name suggests-- repaints all
+  /* Empties the page cache and --as the name suggests-- tqrepaints all
      visible widgets. */
-  void repaintAllVisibleWidgets();
+  void tqrepaintAllVisibleWidgets();
 
   /* Tells the multipage if scrollbars should be used. */
   virtual void slotShowScrollbars(bool);
@@ -485,7 +486,7 @@ public slots:
      makes it a little easier for the user to scroll with the mouse
      wheel or the keyboard without involuntarily moving to another
      page. */
-  virtual void scroll(Q_INT32 deltaInPixel);
+  virtual void scroll(TQ_INT32 deltaInPixel);
 
   virtual void slotEnableMoveTool(bool enable);
 
@@ -564,11 +565,11 @@ protected:
   KPrinter *getPrinter(bool enablePageSizeFeatures=true);
 
 
-  /** Pointer to the parent widget 
+  /** Pointer to the tqparent widget 
 
   This pointer is automatically set by the constructor.
   */
-  TQGuardedPtr<TQWidget> parentWdg;
+  TQGuardedPtr<TQWidget> tqparentWdg;
 
   TQPtrVector<DocumentWidget> widgetList;
 

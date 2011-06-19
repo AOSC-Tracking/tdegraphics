@@ -58,8 +58,8 @@ static const int GripHandleSize = 7;
 
 
 kpGrip::kpGrip (GripType type,
-                TQWidget *parent, const char *name)
-    : TQWidget (parent, name),
+                TQWidget *tqparent, const char *name)
+    : TQWidget (tqparent, name),
       m_type (type),
       m_startPoint (KP_INVALID_POINT),
       m_currentPoint (KP_INVALID_POINT),
@@ -90,19 +90,19 @@ const TQCursor &kpGrip::cursorForType (GripType type)
     switch (type)
     {
     case Bottom:
-        return Qt::sizeVerCursor;
+        return TQt::sizeVerCursor;
         break;  // one day you'll forget
 
     case Right:
-        return Qt::sizeHorCursor;
+        return TQt::sizeHorCursor;
         break;  // one day you'll forget
 
     case BottomRight:
-        return Qt::sizeFDiagCursor;
+        return TQt::sizeFDiagCursor;
         break;  // one day you'll forget
     }
 
-    return Qt::arrowCursor;
+    return TQt::arrowCursor;
 }
 
 
@@ -166,7 +166,7 @@ TQString kpGrip::userMessage () const
 void kpGrip::setUserMessage (const TQString &message)
 {
     // Don't do NOP checking here since another grip might have changed
-    // the message so an apparent NOP for this grip is not a NOP in the
+    // the message so an aptqparent NOP for this grip is not a NOP in the
     // global sense (kpViewScrollableContainer::slotGripStatusMessageChanged()).
 
     m_userMessage = message;
@@ -184,7 +184,7 @@ void kpGrip::updatePixmap ()
         return;
 
     TQPixmap pixmap (width (), height ());
-    pixmap.fill (colorGroup ().highlight ());
+    pixmap.fill (tqcolorGroup ().highlight ());
     kpPixmapFX::ensureTransparentAt (&pixmap, pixmap.rect ());
     const TQRect hr = hotRect ();
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -194,8 +194,8 @@ void kpGrip::updatePixmap ()
         kpPixmapFX::ensureOpaqueAt (&pixmap, hr);
 
     setBackgroundPixmap (pixmap);
-    if (pixmap.mask ())
-        setMask (*pixmap.mask ());
+    if (pixmap.tqmask ())
+        setMask (*pixmap.tqmask ());
 }
 
 
@@ -212,7 +212,7 @@ void kpGrip::cancel ()
     m_currentPoint = KP_INVALID_POINT;
 
     setUserMessage (i18n ("Resize Image: Let go of all the mouse buttons."));
-    setCursor (Qt::arrowCursor);
+    setCursor (TQt::arrowCursor);
     m_shouldReleaseMouseButtons = true;
 
     releaseKeyboard ();
@@ -220,17 +220,17 @@ void kpGrip::cancel ()
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::keyReleaseEvent (TQKeyEvent *e)
 {
     if (m_startPoint != KP_INVALID_POINT &&
-        e->key () == Qt::Key_Escape)
+        e->key () == TQt::Key_Escape)
     {
         cancel ();
     }
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::mousePressEvent (TQMouseEvent *e)
 {
     if (m_startPoint == KP_INVALID_POINT &&
@@ -279,7 +279,7 @@ void kpGrip::mouseMovedTo (const TQPoint &point, bool dueToDragScroll)
                         dueToDragScroll);
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::mouseMoveEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -298,7 +298,7 @@ void kpGrip::mouseMoveEvent (TQMouseEvent *e)
     mouseMovedTo (e->pos (), false/*not due to drag scroll*/);
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::mouseReleaseEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -323,7 +323,7 @@ void kpGrip::mouseReleaseEvent (TQMouseEvent *e)
     if ((e->stateAfter () & Qt::MouseButtonMask) == 0)
     {
         m_shouldReleaseMouseButtons = false;
-        setUserMessage (TQString::null);
+        setUserMessage (TQString());
         setCursor (cursorForType (m_type));
 
         releaseKeyboard ();
@@ -332,7 +332,7 @@ void kpGrip::mouseReleaseEvent (TQMouseEvent *e)
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::resizeEvent (TQResizeEvent *)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -342,7 +342,7 @@ void kpGrip::resizeEvent (TQResizeEvent *)
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::enterEvent (TQEvent * /*e*/)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -362,7 +362,7 @@ void kpGrip::enterEvent (TQEvent * /*e*/)
     }
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::leaveEvent (TQEvent * /*e*/)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -374,12 +374,12 @@ void kpGrip::leaveEvent (TQEvent * /*e*/)
     if (m_startPoint == KP_INVALID_POINT &&
         !m_shouldReleaseMouseButtons)
     {
-        setUserMessage (TQString::null);
+        setUserMessage (TQString());
     }
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpGrip::paintEvent (TQPaintEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER && 0
@@ -390,10 +390,10 @@ void kpGrip::paintEvent (TQPaintEvent *e)
 
 
 // TODO: Are we checking for m_view == 0 often enough?
-kpViewScrollableContainer::kpViewScrollableContainer (kpMainWindow *parent,
+kpViewScrollableContainer::kpViewScrollableContainer (kpMainWindow *tqparent,
                                                       const char *name)
-    : TQScrollView ((TQWidget *) parent, name, Qt::WStaticContents | Qt::WNoAutoErase),
-      m_mainWindow (parent),
+    : TQScrollView ((TQWidget *) tqparent, name, TQt::WStaticContents | TQt::WNoAutoErase),
+      m_mainWindow (tqparent),
       m_contentsXSoon (-1), m_contentsYSoon (-1),
       m_view (0),
       m_bottomGrip (new kpGrip (kpGrip::Bottom, viewport (), "Bottom Grip")),
@@ -500,9 +500,9 @@ void kpViewScrollableContainer::clearStatusMessage ()
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER && 1
     kdDebug () << "kpViewScrollableContainer::clearStatusMessage()" << endl;
 #endif
-    m_bottomRightGrip->setUserMessage (TQString::null);
-    m_bottomGrip->setUserMessage (TQString::null);
-    m_rightGrip->setUserMessage (TQString::null);
+    m_bottomRightGrip->setUserMessage (TQString());
+    m_bottomGrip->setUserMessage (TQString());
+    m_rightGrip->setUserMessage (TQString());
 }
 
 
@@ -518,7 +518,7 @@ TQSize kpViewScrollableContainer::newDocSize (int viewDX, int viewDY) const
     const int docX = (int) m_view->transformViewToDocX (m_view->width () + viewDX);
     const int docY = (int) m_view->transformViewToDocY (m_view->height () + viewDY);
 
-    return TQSize (QMAX (1, docX), QMAX (1, docY));
+    return TQSize (TQMAX (1, docX), TQMAX (1, docY));
 }
 
 
@@ -552,7 +552,7 @@ int kpViewScrollableContainer::bottomResizeLineWidth () const
         return -1;
 
     if (docResizingGrip ()->type () & kpGrip::Bottom)
-        return QMAX (m_view->zoomLevelY () / 100, 1);
+        return TQMAX (m_view->zoomLevelY () / 100, 1);
     else
         return 1;
 }
@@ -567,7 +567,7 @@ int kpViewScrollableContainer::rightResizeLineWidth () const
         return -1;
 
     if (docResizingGrip ()->type () & kpGrip::Right)
-        return QMAX (m_view->zoomLevelX () / 100, 1);
+        return TQMAX (m_view->zoomLevelX () / 100, 1);
     else
         return 1;
 }
@@ -644,7 +644,7 @@ TQRect kpViewScrollableContainer::mapViewToGlobal (const TQRect &viewRect)
 
 
 // protected
-void kpViewScrollableContainer::repaintWidgetAtResizeLineViewRect (
+void kpViewScrollableContainer::tqrepaintWidgetAtResizeLineViewRect (
     TQWidget *widget, const TQRect &resizeLineViewRect)
 {
     const TQRect resizeLineGlobalRect = mapViewToGlobal (resizeLineViewRect);
@@ -660,19 +660,19 @@ void kpViewScrollableContainer::repaintWidgetAtResizeLineViewRect (
 
     if (redrawWidgetRect.isValid ())
     {
-        // TODO: should be "!widget->testWFlags (Qt::WRepaintNoErase)"
+        // TODO: should be "!widget->testWFlags (TQt::WRepaintNoErase)"
         //       but for some reason, doesn't work for viewport().
         const bool erase = !dynamic_cast <kpView *> (widget);
-        widget->repaint (redrawWidgetRect, erase);
+        widget->tqrepaint (redrawWidgetRect, erase);
     }
 }
 
 // protected
-void kpViewScrollableContainer::repaintWidgetAtResizeLines (TQWidget *widget)
+void kpViewScrollableContainer::tqrepaintWidgetAtResizeLines (TQWidget *widget)
 {
-    repaintWidgetAtResizeLineViewRect (widget, rightResizeLineRect ());
-    repaintWidgetAtResizeLineViewRect (widget, bottomResizeLineRect ());
-    repaintWidgetAtResizeLineViewRect (widget, bottomRightResizeLineRect ());
+    tqrepaintWidgetAtResizeLineViewRect (widget, rightResizeLineRect ());
+    tqrepaintWidgetAtResizeLineViewRect (widget, bottomResizeLineRect ());
+    tqrepaintWidgetAtResizeLineViewRect (widget, bottomRightResizeLineRect ());
 }
 
 // protected
@@ -680,12 +680,12 @@ void kpViewScrollableContainer::eraseResizeLines ()
 {
     if (m_resizeRoundedLastViewX >= 0 && m_resizeRoundedLastViewY >= 0)
     {
-        repaintWidgetAtResizeLines (viewport ());
-        repaintWidgetAtResizeLines (m_view);
+        tqrepaintWidgetAtResizeLines (viewport ());
+        tqrepaintWidgetAtResizeLines (m_view);
 
-        repaintWidgetAtResizeLines (m_bottomGrip);
-        repaintWidgetAtResizeLines (m_rightGrip);
-        repaintWidgetAtResizeLines (m_bottomRightGrip);
+        tqrepaintWidgetAtResizeLines (m_bottomGrip);
+        tqrepaintWidgetAtResizeLines (m_rightGrip);
+        tqrepaintWidgetAtResizeLines (m_bottomRightGrip);
     }
 }
 
@@ -702,19 +702,19 @@ void kpViewScrollableContainer::drawResizeLines ()
 
 
     TQPainter p (viewport (), true/*unclipped*/);
-    p.setRasterOp (Qt::NotROP);
+    p.setRasterOp (TQt::NotROP);
 
     const TQRect rightRect = rightResizeLineRect ();
     if (rightRect.isValid ())
-        p.fillRect (mapViewToViewport (rightRect), Qt::white);
+        p.fillRect (mapViewToViewport (rightRect), TQt::white);
 
     const TQRect bottomRect = bottomResizeLineRect ();
     if (bottomRect.isValid ())
-        p.fillRect (mapViewToViewport (bottomRect), Qt::white);
+        p.fillRect (mapViewToViewport (bottomRect), TQt::white);
 
     const TQRect bottomRightRect = bottomRightResizeLineRect ();
     if (bottomRightRect.isValid ())
-        p.fillRect (mapViewToViewport (bottomRightRect), Qt::white);
+        p.fillRect (mapViewToViewport (bottomRightRect), TQt::white);
 
     p.end ();
 }
@@ -816,8 +816,8 @@ void kpViewScrollableContainer::slotGripContinuedDraw (int inViewDX, int inViewD
 
     m_haveMovedFromOriginalDocSize = true;
 
-    updateResizeLines (QMAX (1, QMAX (m_view->width () + viewDX, (int) m_view->transformDocToViewX (1))),
-                       QMAX (1, QMAX (m_view->height () + viewDY, (int) m_view->transformDocToViewY (1))),
+    updateResizeLines (TQMAX (1, TQMAX (m_view->width () + viewDX, (int) m_view->transformDocToViewX (1))),
+                       TQMAX (1, TQMAX (m_view->height () + viewDY, (int) m_view->transformDocToViewY (1))),
                        viewDX, viewDY);
 
     emit continuedDocResize (newDocSize ());
@@ -881,7 +881,7 @@ void kpViewScrollableContainer::recalculateStatusMessage ()
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
     kdDebug () << "kpViewScrollabelContainer::recalculateStatusMessage()" << endl;
-    kdDebug () << "\tQCursor::pos=" << TQCursor::pos ()
+    kdDebug () << "\tTQCursor::pos=" << TQCursor::pos ()
                << " global visibleRect="
                << kpWidgetMapper::toGlobal (this,
                       TQRect (0, 0, visibleWidth (), visibleHeight ()))
@@ -898,23 +898,23 @@ void kpViewScrollableContainer::recalculateStatusMessage ()
     //
     if (kpWidgetMapper::toGlobal (this,
                                   TQRect (0, 0, visibleWidth (), visibleHeight ()))
-            .contains (TQCursor::pos ()))
+            .tqcontains (TQCursor::pos ()))
     {
         if (m_bottomRightGrip->isShown () &&
             m_bottomRightGrip->hotRect (true/*to global*/)
-                .contains (TQCursor::pos ()))
+                .tqcontains (TQCursor::pos ()))
         {
             m_bottomRightGrip->setUserMessage (i18n ("Left drag the handle to resize the image."));
         }
         else if (m_bottomGrip->isShown () &&
                 m_bottomGrip->hotRect (true/*to global*/)
-                    .contains (TQCursor::pos ()))
+                    .tqcontains (TQCursor::pos ()))
         {
             m_bottomGrip->setUserMessage (i18n ("Left drag the handle to resize the image."));
         }
         else if (m_rightGrip->isShown () &&
                 m_rightGrip->hotRect (true/*to global*/)
-                    .contains (TQCursor::pos ()))
+                    .tqcontains (TQCursor::pos ()))
         {
             m_rightGrip->setUserMessage (i18n ("Left drag the handle to resize the image."));
         }
@@ -988,7 +988,7 @@ void kpViewScrollableContainer::connectViewSignals ()
 }
 
 
-// public virtual [base QScrollView]
+// public virtual [base TQScrollView]
 void kpViewScrollableContainer::addChild (TQWidget *widget, int x, int y)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -1119,7 +1119,7 @@ bool kpViewScrollableContainer::beginDragScroll (const TQPoint &/*docPoint*/,
     bool stopDragScroll = true;
     bool scrolled = false;
 
-    if (!noDragScrollRect ().contains (p))
+    if (!noDragScrollRect ().tqcontains (p))
     {
         if (m_dragScrollTimer->isActive ())
         {
@@ -1241,8 +1241,8 @@ bool kpViewScrollableContainer::slotDragScroll (bool *didSomething)
                   << endl;
 #endif
 
-    dx *= dxMultiplier;// * QMAX (1, m_zoomLevel / 100);
-    dy *= dyMultiplier;// * QMAX (1, m_zoomLevel / 100);
+    dx *= dxMultiplier;// * TQMAX (1, m_zoomLevel / 100);
+    dy *= dyMultiplier;// * TQMAX (1, m_zoomLevel / 100);
 
     if (dx || dy)
     {
@@ -1269,7 +1269,7 @@ bool kpViewScrollableContainer::slotDragScroll (bool *didSomething)
 
             // Repaint newly exposed region immediately to reduce tearing
             // of scrollView.
-            m_view->repaint (region, false/*no erase*/);
+            m_view->tqrepaint (region, false/*no erase*/);
         }
     }
 
@@ -1284,7 +1284,7 @@ bool kpViewScrollableContainer::slotDragScroll (bool *didSomething)
     return scrolled;
 }
 
-// protected virtual [base QScrollView]
+// protected virtual [base TQScrollView]
 void kpViewScrollableContainer::contentsDragMoveEvent (TQDragMoveEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -1303,7 +1303,7 @@ bool kpViewScrollableContainer::slotDragScroll ()
 }
 
 
-// protected virtual [base QScrollView]
+// protected virtual [base TQScrollView]
 void kpViewScrollableContainer::contentsMouseMoveEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -1315,7 +1315,7 @@ void kpViewScrollableContainer::contentsMouseMoveEvent (TQMouseEvent *e)
     TQScrollView::contentsMouseMoveEvent (e);
 }
 
-// protected virtual [base QScrollView]
+// protected virtual [base TQScrollView]
 void kpViewScrollableContainer::mouseMoveEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -1328,7 +1328,7 @@ void kpViewScrollableContainer::mouseMoveEvent (TQMouseEvent *e)
 }
 
 
-// protected virtual [base QScrollView]
+// protected virtual [base TQScrollView]
 void kpViewScrollableContainer::contentsWheelEvent (TQWheelEvent *e)
 {
     e->ignore ();
@@ -1348,13 +1348,13 @@ TQRect kpViewScrollableContainer::noDragScrollRect () const
                   height () - DragScrollLeftTopMargin - DragScrollRightBottomMargin);
 }
 
-// protected virtual [base QScrollView]
+// protected virtual [base TQScrollView]
 bool kpViewScrollableContainer::eventFilter (TQObject *watchedObject, TQEvent *event)
 {
     return TQScrollView::eventFilter (watchedObject, event);
 }
 
-// protected virtual [base QScrollView]
+// protected virtual [base TQScrollView]
 void kpViewScrollableContainer::viewportPaintEvent (TQPaintEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -1366,7 +1366,7 @@ void kpViewScrollableContainer::viewportPaintEvent (TQPaintEvent *e)
     TQScrollView::viewportPaintEvent (e);
 }
 
-// protected virtual [base QFrame]
+// protected virtual [base TQFrame]
 void kpViewScrollableContainer::paintEvent (TQPaintEvent *e)
 {
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER && 0
@@ -1378,7 +1378,7 @@ void kpViewScrollableContainer::paintEvent (TQPaintEvent *e)
     TQScrollView::paintEvent (e);
 }
 
-// protected virtual [base QScrollView]
+// protected virtual [base TQScrollView]
 void kpViewScrollableContainer::resizeEvent (TQResizeEvent *e)
 {
     TQScrollView::resizeEvent (e);

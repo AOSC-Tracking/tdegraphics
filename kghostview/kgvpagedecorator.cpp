@@ -23,8 +23,8 @@
 
 #include "kgvpagedecorator.h"
     
-KGVPageDecorator::KGVPageDecorator( TQWidget* parent, const char* name ) : 
-    TQHBox( parent, name ), 
+KGVPageDecorator::KGVPageDecorator( TQWidget* tqparent, const char* name ) : 
+    TQHBox( tqparent, name ), 
     _margin( 5 ), 
     _borderWidth( 1 ), 
     _shadowOffset( 2, 2 )
@@ -63,7 +63,7 @@ void KGVPageDecorator::drawFrame( TQPainter* p )
     if( !r.isValid() ) 
 	return;
     
-    const TQColorGroup& cg = colorGroup();
+    const TQColorGroup& cg = tqcolorGroup();
 
     r.moveCenter( r.center() + _shadowOffset );
     qDrawPlainRect( p, r, cg.shadow(), _shadowOffset.manhattanLength() );

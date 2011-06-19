@@ -21,18 +21,18 @@
 
 
 
-// Constructs a pageSizeWidget_base which is a child of 'parent', with
+// Constructs a pageSizeWidget_base which is a child of 'tqparent', with
 // the name 'name' and widget flags set to 'f'.
-pageSizeWidget::pageSizeWidget( TQWidget* parent,  const char* name, WFlags fl )
-    : pageSizeWidget_base( parent,  name, fl )
+pageSizeWidget::pageSizeWidget( TQWidget* tqparent,  const char* name, WFlags fl )
+    : pageSizeWidget_base( tqparent,  name, fl )
 {
   connect(&chosenSize, TQT_SIGNAL(sizeChanged(const SimplePageSize&)), previewer, TQT_SLOT(setSize(const SimplePageSize&)));
 
-  // Set up the formatChoice QComboBox
+  // Set up the formatChoice TQComboBox
   formatChoice->insertItem(i18n("Custom Size"));
   formatChoice->insertStringList(chosenSize.pageSizeNames());
 
-  // Activate the proper entry in the QComboBox
+  // Activate the proper entry in the TQComboBox
   if (chosenSize.formatName().isNull()) {
     orientationChoice->setEnabled(false);
     formatChoice->setCurrentItem(0);
@@ -57,8 +57,8 @@ pageSizeWidget::pageSizeWidget( TQWidget* parent,  const char* name, WFlags fl )
   // Allow entries between 0 and 1200. More filtering is done by the
   // pageSize class, which silently ignores values which are out of
   // range.
-  widthInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, this, "widthValidator"));
-  heightInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, this, "heightValidator"));
+  widthInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, TQT_TQOBJECT(this), "widthValidator"));
+  heightInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, TQT_TQOBJECT(this), "heightValidator"));
 }
 
 
@@ -120,7 +120,7 @@ void pageSizeWidget::unitsChanged(int)
   if (formatChoice->currentItem() != 0)
     fillTextFields();
   else
-    input(TQString::null);
+    input(TQString());
 }
 
 

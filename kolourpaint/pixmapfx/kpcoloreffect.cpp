@@ -80,7 +80,7 @@ void kpColorEffectCommand::execute ()
     if (!doc)
         return;
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
 
     const TQPixmap oldPixmap = *doc->pixmap (m_actOnSelection);
@@ -107,7 +107,7 @@ void kpColorEffectCommand::unexecute ()
     if (!doc)
         return;
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
 
     TQPixmap newPixmap;
@@ -133,8 +133,8 @@ void kpColorEffectCommand::unexecute ()
 
 kpColorEffectWidget::kpColorEffectWidget (bool actOnSelection,
                                           kpMainWindow *mainWindow,
-                                          TQWidget *parent, const char *name)
-    : TQWidget (parent, name),
+                                          TQWidget *tqparent, const char *name)
+    : TQWidget (tqparent, name),
       m_actOnSelection (actOnSelection),
       m_mainWindow (mainWindow)
 {
@@ -148,7 +148,7 @@ kpColorEffectWidget::~kpColorEffectWidget ()
 // public
 TQString kpColorEffectWidget::caption () const
 {
-    return TQString::null;
+    return TQString();
 }
 
 

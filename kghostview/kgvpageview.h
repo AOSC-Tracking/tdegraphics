@@ -27,12 +27,13 @@
  * will be centered on the viewport. Furthermore it adds the ability to scroll
  * the page by dragging it using the mouse.
  */
-class KGVPageView : public QScrollView
+class KGVPageView : public TQScrollView
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    KGVPageView( TQWidget* parent = 0, const char* name = 0 );
+    KGVPageView( TQWidget* tqparent = 0, const char* name = 0 );
     ~KGVPageView() { ; }
     
     void setPage( TQWidget* );

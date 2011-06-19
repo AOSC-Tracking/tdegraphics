@@ -38,18 +38,18 @@
 using namespace KSVG;
 using namespace KJS;
 
-class AsyncStatus : public ObjectImp
+class AsynctqStatus : public ObjectImp
 {
 public:
-	AsyncStatus() : ObjectImp() { }
+	AsynctqStatus() : ObjectImp() { }
 
 	virtual bool implementsCall() const { return true; }
 	virtual Value call(ExecState *exec, Object &thisObj, const List &args);
 };
 
-Value AsyncStatus::call(ExecState *exec, Object &, const List &args)
+Value AsynctqStatus::call(ExecState *exec, Object &, const List &args)
 {
-	kdDebug(26004) << "[AsyncStatus] " << args[0].toString(exec).ascii() << endl;
+	kdDebug(26004) << "[AsynctqStatus] " << args[0].toString(exec).ascii() << endl;
 
 	if(args[0].toString(exec) == "success")
 		return Number(1);
@@ -163,7 +163,7 @@ TQString KSVGEcma::valueOfEventListener(SVGEventListener *listener) const
 {
 	KSVGEcmaEventListener *event = static_cast<KSVGEcmaEventListener *>(listener);
 	if(!event)
-		return TQString::null;
+		return TQString();
 
 	return event->type();
 }
@@ -175,7 +175,7 @@ void KSVGEcma::addEventListener(KSVGEcmaEventListener *listener)
 
 void KSVGEcma::removeEventListener(KSVGEcmaEventListener *listener)
 {
-	m_ecmaEventListeners.take(m_ecmaEventListeners.find(listener));
+	m_ecmaEventListeners.take(m_ecmaEventListeners.tqfind(listener));
 
 	if(m_ecmaEventListeners.count() == 0)
 		m_hasListeners = false;
@@ -194,7 +194,7 @@ void KSVGEcma::finishedWithEvent(SVGEventImpl *event)
 
 Value KSVGEcma::getUrl(ExecState *exec, ::KURL url)
 {
-	Object *status = new Object(new AsyncStatus());
+	Object *status = new Object(new AsynctqStatus());
 
 	// FIXME: Security issue, allows local testing of getURL(), REMOVE BEFORE RELEASE! (Niko)
 	TQString svgDocument = KSVGLoader::getUrl(url, true);
@@ -214,7 +214,7 @@ Value KSVGEcma::getUrl(ExecState *exec, ::KURL url)
 
 void KSVGEcma::postUrl(ExecState *exec, ::KURL url, const TQString &data, const TQString &mimeType, const TQString &contentEncoding, Object &callBackFunction)
 {
-	Object *status = new Object(new AsyncStatus());
+	Object *status = new Object(new AsynctqStatus());
 	status->put(exec, Identifier("content"), String(""));
     status->put(exec, Identifier("success"), Boolean(false));
 
@@ -224,7 +224,7 @@ void KSVGEcma::postUrl(ExecState *exec, ::KURL url, const TQString &data, const 
 
 	// Support gzip compression
 	if(contentEncoding == "gzip" || contentEncoding == "deflate")
-		byteArray = qCompress(byteArray);
+		byteArray = tqCompress(byteArray);
 
 	KSVGLoader *loader = new KSVGLoader();
 	loader->postUrl(url, byteArray, mimeType, exec, callBackFunction, *status);

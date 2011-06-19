@@ -26,8 +26,8 @@
 #include <kmessagebox.h>
 
 
-PMTextureMapEdit::PMTextureMapEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMTextureMapEdit::PMTextureMapEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
    m_numValues = 0;

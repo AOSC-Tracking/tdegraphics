@@ -60,7 +60,7 @@ TQString KSVGLoader::loadXML(::KURL url)
 		return TQString(contents);
 	}
 
-	return TQString::null;
+	return TQString();
 }
 
 void KSVGLoader::getSVGContent(::KURL url)
@@ -125,17 +125,17 @@ void KSVGLoader::slotResult(KIO::Job *job)
 		if(m_job->error() == 0)
 		{
 			TQString check = static_cast<KIO::TransferJob *>(job)->url().prettyURL();
-			if(check.contains(".svgz") || check.contains(".svg.gz"))
+			if(check.tqcontains(".svgz") || check.tqcontains(".svg.gz"))
 			{
 				// decode the gzipped svg and emit it
-				TQIODevice *dev = KFilterDev::device(new TQBuffer(m_data), "application/x-gzip");
+				TQIODevice *dev = KFilterDev::device(TQT_TQIODEVICE(new TQBuffer(m_data)), "application/x-gzip");
 				dev->open(IO_ReadOnly);
 				emit gotResult(dev);
 			}
 			else
 			{
 				m_job = 0;
-				emit gotResult(new TQBuffer(m_data));
+				emit gotResult(TQT_TQIODEVICE(new TQBuffer(m_data)));
 				m_data.resize(0);
 			}
 		}
@@ -162,7 +162,7 @@ void KSVGLoader::slotResult(KIO::Job *job)
 
 				if(buffer.open(IO_ReadOnly))
 				{
-					const char *imageFormat = TQImageIO::imageFormat(&buffer);
+					const char *imageFormat = TQImageIO::imageFormat(TQT_TQIODEVICE(&buffer));
 
 					if(imageFormat != 0)
 					{
@@ -199,7 +199,7 @@ TQString KSVGLoader::getUrl(::KURL url, bool local)
 	if(local || (!url.prettyURL().isEmpty()) && ((url.protocol() == "http") || (url.protocol() == "https")))
 		return loadXML(url);
 
-	return TQString::null;
+	return TQString();
 }
 
 void KSVGLoader::postUrl(::KURL url, const TQByteArray &data, const TQString &mimeType,  KJS::ExecState *exec, KJS::Object &callBackFunction, KJS::Object &status)
@@ -215,7 +215,7 @@ void KSVGLoader::postUrl(::KURL url, const TQByteArray &data, const TQString &mi
 	connect(job, TQT_SIGNAL(result(KIO::Job *)), TQT_SLOT(slotResult(KIO::Job *)));
 }
 
-class CharacterDataSearcher : public QXmlDefaultHandler
+class CharacterDataSearcher : public TQXmlDefaultHandler
 {
 public:
 	CharacterDataSearcher(const TQString &id) : m_id(id) { }
@@ -289,7 +289,7 @@ TQString KSVGLoader::getCharacterData(::KURL url, const TQString &id)
 
 
 
-class SVGFragmentSearcher : public QXmlDefaultHandler
+class SVGFragmentSearcher : public TQXmlDefaultHandler
 {
 public:
 	SVGFragmentSearcher(SVGDocumentImpl *doc, const TQString &id, ::KURL url) : m_id(id), m_url(url), m_doc(doc) { }
@@ -348,7 +348,7 @@ public:
 						// Convert the id to its mangled version.
 						TQString id = "@fragment@" + m_url.prettyURL() + "@" + value;
 
-						if(m_idMap.contains(id))
+						if(m_idMap.tqcontains(id))
 						{
 							// This is a local reference to an element within the fragment.
 							// Just convert the href.

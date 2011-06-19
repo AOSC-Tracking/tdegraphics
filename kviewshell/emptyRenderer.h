@@ -29,9 +29,10 @@ class RenderedDocumentPage;
 class EmptyRenderer : public DocumentRenderer
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  EmptyRenderer(TQWidget* parent);
+  EmptyRenderer(TQWidget* tqparent);
 
   virtual bool setFile(const TQString &, const KURL &) { return false; }
 

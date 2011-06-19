@@ -86,7 +86,7 @@ bool KCamera::initInformation()
 	int index = gp_abilities_list_lookup_model(m_abilitylist, m_model.local8Bit().data());
 	if(index < 0) {
 		emit error(i18n("Description of abilities for camera %1 is not available."
-					" Configuration options may be incorrect.").arg(m_model));
+					" Configuration options may be incorrect.").tqarg(m_model));
 		return false;
 	}
         gp_abilities_list_get_abilities(m_abilitylist, index, &m_abilities);
@@ -197,7 +197,7 @@ void KCamera::load(KConfig *config)
 		m_model = config->readEntry("Model");
 	if (m_path.isNull())
 		m_path = config->readEntry("Path");
-	invalidateCamera();
+	tqinvalidateCamera();
 }
 
 void KCamera::save(KConfig *config)
@@ -209,7 +209,7 @@ void KCamera::save(KConfig *config)
 
 TQString KCamera::portName()
 {
-	TQString port = m_path.left(m_path.find(":")).lower();
+	TQString port = m_path.left(m_path.tqfind(":")).lower();
 	if (port == "serial") return i18n("Serial");
 	if (port == "usb") return i18n("USB");
 	return i18n("Unknown port");
@@ -223,17 +223,17 @@ void KCamera::setName(const TQString &name)
 void KCamera::setModel(const TQString &model)
 {
 	m_model = model;
-	invalidateCamera();
+	tqinvalidateCamera();
 	initInformation();
 }
 
 void KCamera::setPath(const TQString &path)
 {
 	m_path = path;
-	invalidateCamera();
+	tqinvalidateCamera();
 }
 
-void KCamera::invalidateCamera()
+void KCamera::tqinvalidateCamera()
 {
 	if (m_camera) {
 		gp_camera_free(m_camera);
@@ -270,8 +270,8 @@ CameraAbilities KCamera::abilities()
 
 // ---------- KameraSelectCamera ------------
 
-KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *device)
-	: KDialogBase(parent, "kkameradeviceselect", true, i18n("Select Camera Device"), Ok | Cancel, Ok, true)
+KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *tqparent, KCamera *device)
+	: KDialogBase(tqparent, "kkameradeviceselect", true, i18n("Select Camera Device"), Ok | Cancel, Ok, true)
 {
 	m_device = device;
 	connect(m_device, TQT_SIGNAL(error(const TQString &)),
@@ -282,7 +282,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	TQWidget *page = new TQWidget( this );
 	setMainWidget(page);
 
-	// a layout with vertical boxes
+	// a tqlayout with vertical boxes
 	TQHBoxLayout *topLayout = new TQHBoxLayout(page, 0, KDialog::spacingHint());
 
 	// the models list
@@ -293,7 +293,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	connect(m_modelSel, TQT_SIGNAL(selectionChanged(TQListViewItem *)),
         TQT_SLOT(slot_setModel(TQListViewItem *)));
 	// make sure listview only as wide as it needs to be
-	m_modelSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Maximum,
+	m_modelSel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Maximum,
 		TQSizePolicy::Preferred));
 
 	TQVBoxLayout *rightLayout = new TQVBoxLayout(0L, 0, KDialog::spacingHint());
@@ -347,7 +347,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	for (int i = 0; i < gphoto_ports; i++) {
 		if (gp_port_info_list_get_info(list, i, &info) >= 0) {
 			if (strncmp(info.path, "serial:", 7) == 0)
-				m_serialPortCombo->insertItem(TQString::fromLatin1(info.path).mid(7));
+				m_serialPortCombo->insertItem(TQString::tqfromLatin1(info.path).mid(7));
 		}
 	}
 	gp_port_info_list_free(list);
@@ -403,7 +403,7 @@ void KameraDeviceSelectDialog::save()
 void KameraDeviceSelectDialog::load()
 {
 	TQString path = m_device->path();
-	TQString port = path.left(path.find(":")).lower();
+	TQString port = path.left(path.tqfind(":")).lower();
 
 	if (port == "serial") setPortType(INDEX_SERIAL);
 	if (port == "usb") setPortType(INDEX_USB);
@@ -432,7 +432,7 @@ void KameraDeviceSelectDialog::slot_setModel(TQListViewItem *item)
 	int index = gp_abilities_list_lookup_model(m_device->m_abilitylist, model.local8Bit().data());
 	if(index < 0) {
 		slot_error(i18n("Description of abilities for camera %1 is not available."
-				" Configuration options may be incorrect.").arg(model));
+				" Configuration options may be incorrect.").tqarg(model));
 	}
 	int result = gp_abilities_list_get_abilities(m_device->m_abilitylist, index, &abilities);
 	if (result == GP_OK) {
@@ -452,7 +452,7 @@ void KameraDeviceSelectDialog::slot_setModel(TQListViewItem *item)
 			setPortType(INDEX_USB);
 	} else {
 		slot_error(i18n("Description of abilities for camera %1 is not available."
-			     " Configuration options may be incorrect.").arg(model));
+			     " Configuration options may be incorrect.").tqarg(model));
 	}
 }
 

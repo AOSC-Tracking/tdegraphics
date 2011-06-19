@@ -13,7 +13,7 @@
 #include <tqstring.h>
 
 /**
- * This class represents one line of a font map file, and contains
+ * This class represents one line of a font map file, and tqcontains
  * three pieces of information about a font: its file name, the full
  * name of the font, and the encoding.
  *
@@ -55,7 +55,7 @@ class fontMapEntry {
  * Long time ago, when TeX was only used with MetaFont fonts, the DVI
  * file would specify a font by giving an 8-character name, such as
  * 'cmr10'. The DVI previewer would then locate the associated PK font
- * file, load it, and retrieve the character shaped. Happy times, they
+ * file, load it, and retrieve the character tqshaped. Happy times, they
  * were.
  *
  * Today TeX is also used to access Type1 and TrueType fonts, which do
@@ -92,17 +92,17 @@ class fontMap {
   
   /** find the name of a font file (e.g. 'ubkd8a.pfb') from a TeX font
       name (e.g. 'rpbkd'). This method return a reference to
-      TQString::null if the font could not be found. */
+      TQString() if the font could not be found. */
   const TQString &findFileName(const TQString &TeXName);
   
   /** find the name of a font (e.g. 'URWBookmanL-DemiBold') from a TeX
       font name (e.g. 'rpbkd'). This method return a reference to
-      TQString::null if the font could not be found. */
+      TQString() if the font could not be found. */
   const TQString &findFontName(const TQString &TeXName);
   
   /** find the name of an encoding file for a font (e.g. '8r') from a
       TeX font name (e.g. 'rpbkd'). This method return a reference to
-      TQString::null if the font could not be found. */
+      TQString() if the font could not be found. */
   const TQString &findEncoding(const TQString &TeXName);
 
   /** This method finds the slant of a font. Returns 0.0 if no slant

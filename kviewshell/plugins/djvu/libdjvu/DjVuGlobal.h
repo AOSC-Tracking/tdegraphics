@@ -268,7 +268,7 @@ public:
   const char *task;
   static djvu_progress_callback *set_callback(djvu_progress_callback *ptr=0);
 private:
-  DjVuProgressTask *parent;
+  DjVuProgressTask *tqparent;
   int nsteps;
   int runtostep;
   unsigned long startdate;

@@ -33,8 +33,8 @@
 
 #include "kimageholder.h"
 
-KImageHolder::KImageHolder( TQWidget * parent, const char * name )
-	: TQWidget( parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase )
+KImageHolder::KImageHolder( TQWidget * tqparent, const char * name )
+	: TQWidget( tqparent, name, TQt::WResizeNoErase | TQt::WRepaintNoErase )
 	, m_selected( false )
 	, m_bSelecting( false )
 	, m_scrollTimerId( 0 )
@@ -64,7 +64,7 @@ void KImageHolder::mousePressEvent( TQMouseEvent *ev )
 {
 	//kdDebug( 4620 ) << k_funcinfo << " ev->state() = " << ev->state() << endl;
 	// if the right mouse button is pressed emit the contextPress signal
-	if ( ev->button() == RightButton )
+	if ( ev->button() == Qt::RightButton )
 	{
 		emit contextPress( mapToGlobal( ev->pos() ) );
 		return;
@@ -73,7 +73,7 @@ void KImageHolder::mousePressEvent( TQMouseEvent *ev )
 	if( m_pPixmap == 0 )
 		return;
 
-	if( ev->button() == LeftButton || ev->button() == MidButton )
+	if( ev->button() == Qt::LeftButton || ev->button() == Qt::MidButton )
 	{
 		m_scrollpos = ev->globalPos();
 		m_selectionStartPoint = ev->pos();
@@ -83,20 +83,20 @@ void KImageHolder::mousePressEvent( TQMouseEvent *ev )
 void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 {
 	//FIXME: when scrolling the cursorpos shouldn't change
-	if( this->rect().contains( ev->pos(), false ) )
+	if( TQT_TQRECT_OBJECT(this->rect()).tqcontains( ev->pos(), false ) )
 		emit cursorPos( ev->pos() );
 	//kdDebug( 4620 ) << k_funcinfo << " ev->state() = " << ev->state() << endl;
-	if( ev->state() & LeftButton || ev->state() & MidButton )
+	if( ev->state() & Qt::LeftButton || ev->state() & Qt::MidButton )
 	{
 		// scroll when a modifier and left button or the middle button is pressed
-		if( ev->state() & AltButton || ev->state() & ControlButton || ev->state() & ShiftButton || ev->state() & MidButton )
+		if( ev->state() & AltButton || ev->state() & ControlButton || ev->state() & ShiftButton || ev->state() & Qt::MidButton )
 		{
 			TQPoint difference = m_scrollpos - ev->globalPos();
 			emit wannaScroll( difference.x(), difference.y() );
 		}
 		else // create a selection
 		{
-			TQWidget * parentwidget = ( TQWidget* )parent();
+			TQWidget * tqparentwidget = ( TQWidget* )tqparent();
 			if( ! m_bSelecting )
 			{
 				m_bSelecting = true;
@@ -127,17 +127,17 @@ void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 			//                 -2 => scroll to the left 2 px per 50ms
 			//                  2 => scroll to the right 2 px per 50ms
 			//                 ...
-			m_xOffset = mapTo( parentwidget, ev->pos() ).x();
-			m_yOffset = mapTo( parentwidget, ev->pos() ).y();
+			m_xOffset = mapTo( tqparentwidget, ev->pos() ).x();
+			m_yOffset = mapTo( tqparentwidget, ev->pos() ).y();
 			if( m_xOffset > 0 )
 			{
-				m_xOffset -= parentwidget->width();
+				m_xOffset -= tqparentwidget->width();
 				if( m_xOffset < 0 )
 					m_xOffset = 0;
 			}
 			if( m_yOffset > 0 )
 			{
-				m_yOffset -= parentwidget->height();
+				m_yOffset -= tqparentwidget->height();
 				if( m_yOffset < 0 )
 					m_yOffset = 0;
 			}
@@ -181,7 +181,7 @@ void KImageHolder::mouseReleaseEvent( TQMouseEvent * ev )
 			m_scrollTimerId = 0;
 		}
 	}
-	if( ev->state() & LeftButton || ev->state() & MidButton )
+	if( ev->state() & Qt::LeftButton || ev->state() & Qt::MidButton )
 		if( m_bSelecting )
 			m_bSelecting = false;
 		else
@@ -207,7 +207,7 @@ void KImageHolder::eraseSelect()
 	inner.rBottom() -= 1;
 	r -= inner;
 
-	TQMemArray<TQRect> rects = r.rects();
+	TQMemArray<TQRect> rects = r.tqrects();
 
 	if( m_pDoubleBuffer )
 		for( unsigned int i = 0; i < rects.size(); ++i )
@@ -269,7 +269,7 @@ TQRect KImageHolder::selection() const
 		return TQRect();
 }
 
-TQSize KImageHolder::sizeHint() const
+TQSize KImageHolder::tqsizeHint() const
 {
 	if( m_pPixmap )
 		return m_pPixmap->size();
@@ -282,7 +282,7 @@ void KImageHolder::paintEvent( TQPaintEvent *ev )
 	painter.setClipRegion( ev->region().intersect( m_drawRect ) );
 	if( m_pPixmap )
 	{
-		if( m_pPixmap->mask() )
+		if( m_pPixmap->tqmask() )
 		{
 			if( ! m_pDoubleBuffer )
 			{

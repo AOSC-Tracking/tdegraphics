@@ -27,14 +27,14 @@
 #include <tqptrdict.h>
 
 PMDeleteCommand::PMDeleteCommand( PMObject* obj )
-      : PMCommand( i18n( "Delete %1" ).arg( obj->name( ) ) )
+      : PMCommand( i18n( "Delete %1" ).tqarg( obj->name( ) ) )
 {
    // the scene can not be deleted!
-   if( obj->parent( ) )
+   if( obj->tqparent( ) )
       m_infoList.append( new PMDeleteInfo( obj ) );
    else
    {
-      // object has no parent!
+      // object has no tqparent!
       // top level objects can't be moved, move all child items
       PMObject* tmp;
       for( tmp = obj->firstChild( ); tmp; tmp = tmp->nextSibling( ) )
@@ -55,11 +55,11 @@ PMDeleteCommand::PMDeleteCommand( const PMObjectList& list )
    {
       obj = it.current( );
       
-      if( obj->parent( ) )  
+      if( obj->tqparent( ) )  
          m_infoList.append( new PMDeleteInfo( obj ) );
       else
       {
-         // object has no parent!
+         // object has no tqparent!
          // top level objects can't be moved, move all child items
          PMObject* tmp;
          for( tmp = obj->firstChild( ); tmp; tmp = tmp->nextSibling( ) )
@@ -91,7 +91,7 @@ void PMDeleteCommand::execute( PMCommandManager* theManager )
    {
       PMDeleteInfoListIterator it( m_infoList );
       PMDeleteInfo* info = 0;
-      PMObject* parent;
+      PMObject* tqparent;
       
       if( !m_linksCreated )
       {
@@ -105,8 +105,8 @@ void PMDeleteCommand::execute( PMCommandManager* theManager )
                if( decl )
                {
                   m_links.append( oit.current( ) );
-                  if( !m_linkedDeclares.containsRef( decl ) )
-                     m_linkedDeclares.append( decl );                  
+                  if( !m_linkedDeclares.tqcontainsRef( decl ) )
+                     m_linkedDeclares.append( decl );
                }
             }
          }
@@ -120,23 +120,23 @@ void PMDeleteCommand::execute( PMCommandManager* theManager )
       for( it.toLast( ); it.current( ); --it )
       {
          info = it.current( );
-         parent = info->parent( );
+         tqparent = info->tqparent( );
          // signal has to be emitted before the item is removed
          theManager->cmdObjectChanged( info->deletedObject( ), PMCRemove );
          if( m_firstExecution )
-            if( parent->dataChangeOnInsertRemove( )
-                && !parent->mementoCreated( ) )
-               parent->createMemento( );
-         parent->takeChild( info->deletedObject( ) );
+            if( tqparent->dataChangeOnInsertRemove( )
+                && !tqparent->mementoCreated( ) )
+               tqparent->createMemento( );
+         tqparent->takeChild( info->deletedObject( ) );
       }
 
       if( m_firstExecution )
       {
          for( it.toLast( ); it.current( ); --it )
          {
-            parent = it.current( )->parent( );
-            if( parent->mementoCreated( ) )
-               m_dataChanges.append( parent->takeMemento( ) );
+            tqparent = it.current( )->tqparent( );
+            if( tqparent->mementoCreated( ) )
+               m_dataChanges.append( tqparent->takeMemento( ) );
          }
       }
 
@@ -166,11 +166,11 @@ void PMDeleteCommand::undo( PMCommandManager* theManager )
       for( ; it.current( ); ++it )
       {
          if( it.current( )->prevSibling( ) )
-            it.current( )->parent( )
+            it.current( )->tqparent( )
                ->insertChildAfter( it.current( )->deletedObject( ),
                                    it.current( )->prevSibling( ) );
          else
-            it.current( )->parent( )
+            it.current( )->tqparent( )
                ->insertChild( it.current( )->deletedObject( ), 0 );
          theManager->cmdObjectChanged( it.current( )->deletedObject( ), PMCAdd );
       }
@@ -230,18 +230,18 @@ int PMDeleteCommand::errorFlags( PMPart* )
          {
             insideSelection = false;
             for( obj = links.current( ); obj && !insideSelection;
-                 obj = obj->parent( ) )
+                 obj = obj->tqparent( ) )
             {
-               if( m_deletedObjects.find( obj ) )
+               if( m_deletedObjects.tqfind( obj ) )
                   insideSelection = true;
             }
 
             if( insideSelection )
             {
                bool stop = false;
-               for( obj = links.current( ); obj && !stop; obj = obj->parent( ) )
+               for( obj = links.current( ); obj && !stop; obj = obj->tqparent( ) )
                {
-                  if( m_deletedObjects.find( obj ) )
+                  if( m_deletedObjects.tqfind( obj ) )
                      stop = true;
                   else
                      m_deletedObjects.insert( obj, new bool( true ) );
@@ -256,7 +256,7 @@ int PMDeleteCommand::errorFlags( PMPart* )
       {
          m_errors.prepend( i18n( "The declare \"%1\" can't be removed "
                                  "because of some remaining links." )
-                           .arg( decl->id( ) ) );
+                           .tqarg( decl->id( ) ) );
          
          PMDeleteInfo* tmp = info;
          info = m_infoList.prev( );

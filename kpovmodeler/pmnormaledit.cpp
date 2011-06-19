@@ -27,8 +27,8 @@
 #include <klocale.h>
 
 
-PMNormalEdit::PMNormalEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMNormalEdit::PMNormalEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

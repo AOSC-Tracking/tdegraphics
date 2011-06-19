@@ -43,8 +43,8 @@
 
 const int ImlibWidget::ImlibOffset = 256;
 
-ImlibWidget::ImlibWidget( ImData *_idata, TQWidget *parent, const char *name ) :
-  TQWidget( parent, name, WDestructiveClose )
+ImlibWidget::ImlibWidget( ImData *_idata, TQWidget *tqparent, const char *name ) :
+  TQWidget( tqparent, name, WDestructiveClose )
 {
     idata 		= _idata;
     deleteImData 	= false;
@@ -82,9 +82,9 @@ ImlibWidget::ImlibWidget( ImData *_idata, TQWidget *parent, const char *name ) :
 }
 
 
-ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, TQWidget *parent,
+ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, TQWidget *tqparent,
 			  const char *name )
-    : TQWidget( parent, name, WDestructiveClose )
+    : TQWidget( tqparent, name, WDestructiveClose )
 {
     id              = _id;
     idata           = _idata;
@@ -104,7 +104,7 @@ void ImlibWidget::init()
 {
     int w = 1; // > 0 for XCreateWindow
     int h = 1;
-    myBackgroundColor = Qt::black;
+    myBackgroundColor = TQt::black;
     m_kuim              = 0L;
     m_kuickFile = 0L;
 
@@ -311,18 +311,16 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
     if ( !metadatas.isValid() )
         return false;
 
-    KFileMetaInfoItem metaitem = metadatas.item("Orientation");
+    KFileMetaInfoItem metaitem = metadatas.item("Qt::Orientation");
     if ( !metaitem.isValid()
-#if QT_VERSION >= 0x030100
         || metaitem.value().isNull()
-#endif
         )
         return false;
 
 
     switch ( metaitem.value().toInt() )
     {
-        //  Orientation:
+        //  Qt::Orientation:
         //  1:      normal
         //  2:      flipped horizontally
         //  3:      ROT 180
@@ -438,17 +436,17 @@ void ImlibWidget::setFlipMode( int mode )
 }
 
 
-void ImlibWidget::updateWidget( bool geometryUpdate )
+void ImlibWidget::updateWidget( bool tqgeometryUpdate )
 {
     if ( !m_kuim )
 	return;
 
-//     if ( geometryUpdate )
+//     if ( tqgeometryUpdate )
 //         XUnmapWindow( x11Display(), win );// remove the old image -> no flicker
 
     XSetWindowBackgroundPixmap( x11Display(), win, m_kuim->pixmap() );
 
-    if ( geometryUpdate )
+    if ( tqgeometryUpdate )
 	updateGeometry( m_kuim->width(), m_kuim->height() );
 
     XClearWindow( x11Display(), win );
@@ -477,7 +475,7 @@ void ImlibWidget::setBackgroundColor( const TQColor& color )
 {
     myBackgroundColor = color;
     setPalette( TQPalette( myBackgroundColor ));
-    repaint( false); // FIXME - false? necessary at all?
+    tqrepaint( false); // FIXME - false? necessary at all?
 }
 
 const TQColor& ImlibWidget::backgroundColor() const
@@ -517,23 +515,23 @@ void ImlibWidget::setBusyCursor()
 
 void ImlibWidget::restoreCursor()
 {
-    if ( cursor().shape() == KCursor::waitCursor().shape() ) // only if nobody changed the cursor in the meantime!
+    if ( cursor().shape() == KCursor::waitCursor().tqshape() ) // only if nobody changed the cursor in the meantime!
          setCursor( m_oldCursor );
 }
 
-// Reparenting a widget in Qt in fact means destroying the old X window of the widget
+// Retqparenting a widget in TQt in fact means destroying the old X window of the widget
 // and creating a new one. And since the X window used for the Imlib image is a child
 // of this widget's X window, destroying this widget's X window would mean also
 // destroying the Imlib image X window. Therefore it needs to be temporarily reparented
 // away and reparented back to the new X window.
-// Reparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
-void ImlibWidget::reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt )
+// Retqparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
+void ImlibWidget::reparent( TQWidget* tqparent, WFlags f, const TQPoint& p, bool showIt )
 {
     XWindowAttributes attr;
     XGetWindowAttributes( x11Display(), win, &attr );
     XUnmapWindow( x11Display(), win );
     XReparentWindow( x11Display(), win, attr.root, 0, 0 );
-    TQWidget::reparent( parent, f, p, showIt );
+    TQWidget::reparent( tqparent, f, p, showIt );
     XReparentWindow( x11Display(), win, winId(), attr.x, attr.y );
     if( attr.map_state != IsUnmapped )
         XMapWindow( x11Display(), win );
@@ -604,7 +602,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
     	return 0L;
 
     KuickImage *kuim = 0L;
-    int index = fileList.findIndex( file );
+    int index = fileList.tqfindIndex( file );
     if ( index != -1 ) {
         if ( index == 0 )
             kuim = kuickList.at( 0 );
@@ -641,7 +639,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
         slotIdle();
 	if ( !im ) {
             slotBusy();
-	    im = loadImageWithQt( file->localFile() );
+	    im = loadImageWithTQt( file->localFile() );
             slotIdle();
 	    if ( !im )
 		return 0L;
@@ -668,7 +666,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
 
 // Note: the returned image's filename will not be the real filename (which it usually
 // isn't anyway, according to Imlib's sources).
-ImlibImage * ImageCache::loadImageWithQt( const TQString& fileName ) const
+ImlibImage * ImageCache::loadImageWithTQt( const TQString& fileName ) const
 {
     kdDebug() << "Trying to load " << fileName << " with KImageIO..." << endl;
 
@@ -695,12 +693,12 @@ ImlibImage * ImageCache::loadImageWithQt( const TQString& fileName ) const
     int h = image.height();
 
     for (int y = 0; y < h; y++) {
-	QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
+	TQRgb *scanLine = reinterpret_cast<TQRgb *>( image.scanLine(y) );
 	for (int x = 0; x < w; x++) {
-	    const QRgb& pixel = scanLine[x];
-	    *(newData++) = qRed(pixel);
-	    *(newData++) = qGreen(pixel);
-	    *(newData++) = qBlue(pixel);
+	    const TQRgb& pixel = scanLine[x];
+	    *(newData++) = tqRed(pixel);
+	    *(newData++) = tqGreen(pixel);
+	    *(newData++) = tqBlue(pixel);
 	}
     }
 

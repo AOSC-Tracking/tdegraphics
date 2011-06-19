@@ -35,12 +35,13 @@ class PMCone;
 class PMConeEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMConeEdit with parent and name
+    * Creates a PMConeEdit with tqparent and name
     */
-   PMConeEdit( TQWidget* parent, const char* name = 0 );
+   PMConeEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

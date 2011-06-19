@@ -32,7 +32,7 @@ class DocumentViewport;
  * @short A SplashOutputDev renderer that grabs text and links.
  *
  * This output device:
- * - renders the page using SplashOutputDev (its parent)
+ * - renders the page using SplashOutputDev (its tqparent)
  * - harvests text into a textPage (for searching text)
  * - harvests links and collects them
  * - collects images and collects them
@@ -63,7 +63,7 @@ class KPDFOutputDev : public SplashOutputDev
         virtual void processLink(Link *link, Catalog *catalog);
         //----- image drawing
         virtual void drawImage(GfxState *state, Object *ref, Stream *str, int width, int height,
-                             GfxImageColorMap *colorMap, int *maskColors, GBool inlineImg);
+                             GfxImageColorMap *colorMap, int *tqmaskColors, GBool inlineImg);
 
     private:
         // delete all interal objects and data

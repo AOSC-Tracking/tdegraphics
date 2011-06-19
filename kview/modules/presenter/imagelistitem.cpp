@@ -24,10 +24,10 @@
 
 #include <klistview.h>
 
-ImageListItem::ImageListItem( KListView * parent, const KURL & url )
-	: KListViewItem( parent, parent->lastItem(), url.prettyURL() )
+ImageListItem::ImageListItem( KListView * tqparent, const KURL & url )
+	: KListViewItem( tqparent, tqparent->lastItem(), url.prettyURL() )
 	, m_pImage( 0 )
-	, m_filename( TQString::null )
+	, m_filename( TQString() )
 	, m_url( url )
 {
 	setDragEnabled( true );
@@ -41,11 +41,11 @@ ImageListItem::ImageListItem( KListView * parent, const KURL & url )
 		/*
 		TQString extension;
 		TQString fileName = m_url.fileName();
-		int extensionPos = fileName.findRev( '.' );
+		int extensionPos = fileName.tqfindRev( '.' );
 		if ( extensionPos != -1 )
 			extension = fileName.mid( extensionPos ); // keep the '.'
 		delete m_pTempFile;
-		m_pTempFile = new KTempFile( TQString::null, extension );
+		m_pTempFile = new KTempFile( TQString(), extension );
 		m_filename = m_pTempFile->name();
 
 		m_pJob = KIO::get( m_url, m_pExtension->urlArgs().reload, false );
@@ -70,7 +70,7 @@ const TQImage * ImageListItem::image() const
 const TQString & ImageListItem::file() const
 {
 	if( m_url.isLocalFile() )
-		return TQString::null;
+		return TQString();
 	return m_filename;
 }
 

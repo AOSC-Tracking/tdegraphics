@@ -23,13 +23,13 @@ namespace Poppler {
 class FontInfoData
 {
 	public:
-		QString fontName;
+		TQString fontName;
 		bool isEmbedded;
 		bool isSubset;
 		FontInfo::Type type;
 };
 
-FontInfo::FontInfo( const QString &fontName, const bool isEmbedded, const bool isSubset, Type type )
+FontInfo::FontInfo( const TQString &fontName, const bool isEmbedded, const bool isSubset, Type type )
 {
 	data = new FontInfoData();
 	data->fontName = fontName;
@@ -60,7 +60,7 @@ FontInfo::~FontInfo()
 	delete data;
 }
 
-const QString &FontInfo::name() const
+const TQString &FontInfo::name() const
 {
 	return data->fontName;
 }

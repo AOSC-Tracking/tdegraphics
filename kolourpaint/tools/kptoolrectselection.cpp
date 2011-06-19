@@ -35,7 +35,7 @@ kpToolRectSelection::kpToolRectSelection (kpMainWindow *mainWindow)
     : kpToolSelection (Rectangle,
                        i18n ("Selection (Rectangular)"),
                        i18n ("Makes a rectangular selection"),
-                       Qt::Key_S,
+                       TQt::Key_S,
                        mainWindow, "tool_rect_selection")			 
 {
 }

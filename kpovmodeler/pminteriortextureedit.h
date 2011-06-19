@@ -34,12 +34,13 @@ class PMInteriorTexture;
 class PMInteriorTextureEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMTextureEdit with parent and name
+    * Creates a PMTextureEdit with tqparent and name
     */
-   PMInteriorTextureEdit( TQWidget* parent, const char* name = 0 );
+   PMInteriorTextureEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

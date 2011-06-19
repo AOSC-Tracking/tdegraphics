@@ -23,8 +23,8 @@
  */
 
 #include <poppler-qt.h>
-#include <qfile.h>
-#include <qimage.h>
+#include <tqfile.h>
+#include <tqimage.h>
 #include <config.h>
 #include <GlobalParams.h>
 #include <PDFDoc.h>
@@ -62,18 +62,18 @@ Page::~Page()
   delete data;
 }
 
-void Page::renderToPixmap(QPixmap **q, int x, int y, int w, int h, bool doLinks) const
+void Page::renderToPixmap(TQPixmap **q, int x, int y, int w, int h, bool doLinks) const
 {
   renderToPixmap(q, x, y, w, h, 72.0, 72.0, doLinks);
 }
 
-void Page::renderToPixmap(QPixmap **q, int x, int y, int w, int h, double xres, double yres, bool doLinks) const
+void Page::renderToPixmap(TQPixmap **q, int x, int y, int w, int h, double xres, double yres, bool doLinks) const
 {
-  QImage img = renderToImage(xres, yres, doLinks);
-  *q = new QPixmap( img );
+  TQImage img = renderToImage(xres, yres, doLinks);
+  *q = new TQPixmap( img );
 }
 
-QImage Page::renderToImage(double xres, double yres, bool doLinks) const
+TQImage Page::renderToImage(double xres, double yres, bool doLinks) const
 {
 #if defined(HAVE_SPLASH)
   SplashOutputDev *output_dev;
@@ -89,7 +89,7 @@ QImage Page::renderToImage(double xres, double yres, bool doLinks) const
   int bh = output_dev->getBitmap()->getHeight();
   SplashColorPtr dataPtr = output_dev->getBitmap()->getDataPtr();
   
-  if (QImage::BigEndian == QImage::systemByteOrder())
+  if (TQImage::BigEndian == TQImage::systemByteOrder())
   {
     uchar c;
     int count = bw * bh * 4;
@@ -106,7 +106,7 @@ QImage Page::renderToImage(double xres, double yres, bool doLinks) const
   }
   
   // construct a qimage SHARING the raw bitmap data in memory
-  QImage img( dataPtr, bw, bh, 32, 0, 0, QImage::IgnoreEndian );
+  TQImage img( dataPtr, bw, bh, 32, 0, 0, TQImage::IgnoreEndian );
   img = img.copy();
   // unload underlying xpdf bitmap
   output_dev->startPage( 0, NULL );
@@ -117,16 +117,16 @@ QImage Page::renderToImage(double xres, double yres, bool doLinks) const
   (void)xres;
   (void)doLinks;
 
-  return QImage();
+  return TQImage();
 #endif
 }
 
-QString Page::getText(const Rectangle &r) const
+TQString Page::getText(const Rectangle &r) const
 {
   TextOutputDev *output_dev;
   GooString *s;
   PDFRectangle *rect;
-  QString result;
+  TQString result;
   ::Page *p;
   
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
@@ -147,18 +147,18 @@ QString Page::getText(const Rectangle &r) const
     s = output_dev->getText(r.m_x1, y1, r.m_x2, y2);
   }
 
-  result = QString::fromUtf8(s->getCString());
+  result = TQString::fromUtf8(s->getCString());
 
   delete output_dev;
   delete s;
   return result;
 }
 
-QValueList<TextBox*> Page::textList() const
+TQValueList<TextBox*> Page::textList() const
 {
   TextOutputDev *output_dev;
   
-  QValueList<TextBox*> output_list;
+  TQValueList<TextBox*> output_list;
   
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
 
@@ -175,7 +175,7 @@ QValueList<TextBox*> Page::textList() const
   for (int i = 0; i < word_list->getLength(); i++) {
     TextWord *word = word_list->get(i);
     GooString *word_str = word->getText();
-    QString string = QString::fromUtf8(word_str->getCString());
+    TQString string = TQString::fromUtf8(word_str->getCString());
     delete word_str;
     double xMin, yMin, xMax, yMax;
     word->getBBox(&xMin, &yMin, &xMax, &yMax);
@@ -204,15 +204,15 @@ PageTransition *Page::getTransition() const
   return data->transition;
 }
 
-QSize Page::pageSize() const
+TQSize Page::pageSize() const
 {
   ::Page *p;
 
   p = data->doc->data->doc.getCatalog()->getPage(data->index + 1);
   if ( ( Page::Landscape == orientation() ) || (Page::Seascape == orientation() ) ) {
-    return QSize( (int)p->getCropHeight(), (int)p->getCropWidth() );
+    return TQSize( (int)p->getCropHeight(), (int)p->getCropWidth() );
   } else {
-    return QSize( (int)p->getCropWidth(), (int)p->getCropHeight() );
+    return TQSize( (int)p->getCropWidth(), (int)p->getCropHeight() );
   }
 }
 
@@ -236,9 +236,9 @@ Page::Orientation Page::orientation() const
   }
 }
 
-QValueList<Link*> Page::links() const
+TQValueList<Link*> Page::links() const
 {
-  QValueList<Link*> popplerLinks;
+  TQValueList<Link*> popplerLinks;
 
 #if defined(HAVE_SPLASH)
   Links *xpdfLinks = data->doc->data->doc.getLinks(data->index + 1);
@@ -249,7 +249,7 @@ QValueList<Link*> Page::links() const
     double left, top, right, bottom;
     int leftAux, topAux, rightAux, bottomAux;
     xpdfLink->getRect( &left, &top, &right, &bottom );
-    QRect linkArea;
+    TQRect linkArea;
     
     data->doc->data->m_outputDev->cvtUserToDev( left, top, &leftAux, &topAux );
     data->doc->data->m_outputDev->cvtUserToDev( right, bottom, &rightAux, &bottomAux );
@@ -270,7 +270,7 @@ QValueList<Link*> Page::links() const
         {
           LinkGoTo * g = (LinkGoTo *) a;
           // create link: no ext file, namedDest, object pointer
-          popplerLink = new LinkGoto( linkArea, QString::null, LinkDestination( LinkDestinationData(g->getDest(), g->getNamedDest(), data->doc->data ) ) );
+          popplerLink = new LinkGoto( linkArea, TQString(), LinkDestination( LinkDestinationData(g->getDest(), g->getNamedDest(), data->doc->data ) ) );
         }
         break;
 
@@ -278,7 +278,7 @@ QValueList<Link*> Page::links() const
         {
           LinkGoToR * g = (LinkGoToR *) a;
           // copy link file
-          const QString fileName = UnicodeParsedString( g->getFileName() );
+          const TQString fileName = UnicodeParsedString( g->getFileName() );
           // ceate link: fileName, namedDest, object pointer
           popplerLink = new LinkGoto( linkArea, fileName, LinkDestination( LinkDestinationData(g->getDest(), g->getNamedDest(), data->doc->data ) ) );
         }

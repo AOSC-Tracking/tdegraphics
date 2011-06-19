@@ -18,8 +18,8 @@
 
 #include "simplePageSize.h"
 
-SizePreview::SizePreview( TQWidget *parent, const char *name, WFlags)
-    : TQWidget( parent, name, WStaticContents | WNoAutoErase )
+SizePreview::SizePreview( TQWidget *tqparent, const char *name, WFlags)
+    : TQWidget( tqparent, name, WStaticContents | WNoAutoErase )
 {
   // Set a sane default
   _width = _height = 50.0;
@@ -74,15 +74,15 @@ void SizePreview::paintEvent( TQPaintEvent * )
   pixmap.resize(width(), height());
 
   TQPainter p(&pixmap);
-  p.fillRect(rect(), colorGroup().background());
-  p.setPen(Qt::black);
-  p.setBrush(Qt::white);
+  p.fillRect(rect(), tqcolorGroup().background());
+  p.setPen(TQt::black);
+  p.setBrush(TQt::white);
   p.drawRect(hOffset, vOffset, displayedWidth, displayedHeight);
 
   // mark the textbox; we assume 25mm margin
   int margin = (int)(25.0*displayedWidth/_width + 0.5);
   TQRect textBox(hOffset+margin, vOffset+margin, displayedWidth-2*margin, displayedHeight-2*margin);
-  p.setPen(Qt::lightGray);
+  p.setPen(TQt::lightGray);
   p.drawRect(textBox);
 
   // Draw some dummy "text", represented by black lines
@@ -96,7 +96,7 @@ void SizePreview::paintEvent( TQPaintEvent * )
   KRandomSequence rnd(1); // to generate word widths
 
   p.setClipRect(textBox);
-  p.setPen(Qt::black);
+  p.setPen(TQt::black);
   int count = 1; // Counts lines
   for (int y = vOffset+margin+lineSpacing; y <= vOffset+displayedHeight-margin; y += lineSpacing) {
     // We start each line with its own seed.

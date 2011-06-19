@@ -160,33 +160,33 @@ TQStringList PMRenderMode::commandLineSwitches( ) const
    TQStringList cl;
    TQString tmp;
 
-   cl.append( TQString( "+W%1" ).arg( m_width ) );
-   cl.append( TQString( "+H%1" ).arg( m_height ) );
+   cl.append( TQString( "+W%1" ).tqarg( m_width ) );
+   cl.append( TQString( "+H%1" ).tqarg( m_height ) );
    if( m_subSection )
    {
       if( m_startRow < 1.0 )
          tmp.sprintf( "+SR%4.2f", m_startRow );
       else
-         tmp = TQString( "+SR%1" ).arg( ( int ) ( m_startRow + 0.5 ) );
+         tmp = TQString( "+SR%1" ).tqarg( ( int ) ( m_startRow + 0.5 ) );
       cl.append( tmp );
       if( m_endRow < 1.0 )
          tmp.sprintf( "+ER%4.2f", m_endRow );
       else
-         tmp = TQString( "+ER%1" ).arg( ( int ) ( m_endRow + 0.5 ) );
+         tmp = TQString( "+ER%1" ).tqarg( ( int ) ( m_endRow + 0.5 ) );
       cl.append( tmp );
       
       if( m_startColumn < 1.0 )
          tmp.sprintf( "+SC%4.2f", m_startColumn );
       else
-         tmp = TQString( "+SC%1" ).arg( ( int ) ( m_startColumn + 0.5 ) );
+         tmp = TQString( "+SC%1" ).tqarg( ( int ) ( m_startColumn + 0.5 ) );
       cl.append( tmp );
       if( m_endColumn < 1.0 )
          tmp.sprintf( "+EC%4.2f", m_endColumn );
       else
-         tmp = TQString( "+EC%1" ).arg( ( int ) ( m_endColumn + 0.5 ) );
+         tmp = TQString( "+EC%1" ).tqarg( ( int ) ( m_endColumn + 0.5 ) );
       cl.append( tmp );
    }
-   cl.append( TQString( "+Q%1" ).arg( m_quality ) );
+   cl.append( TQString( "+Q%1" ).tqarg( m_quality ) );
    if( m_radiosity )
       cl.append( TQString( "+QR" ) );
    else
@@ -195,7 +195,7 @@ TQStringList PMRenderMode::commandLineSwitches( ) const
    if( m_antialiasing )
    {
       cl.append( TQString( "+A" ) );
-      cl.append( TQString( "+AM%1" ).arg( m_samplingMethod ) );
+      cl.append( TQString( "+AM%1" ).tqarg( m_samplingMethod ) );
       tmp.sprintf( "+A%5.3f", m_antialiasThreshold );
       cl.append( tmp );
       if( m_antialiasJitter )
@@ -205,7 +205,7 @@ TQStringList PMRenderMode::commandLineSwitches( ) const
       }
       else
          cl.append( TQString( "-J" ) );
-      cl.append( TQString( "+R%1" ).arg( m_antialiasDepth ) );
+      cl.append( TQString( "+R%1" ).tqarg( m_antialiasDepth ) );
    }
    else
       cl.append( TQString( "-A" ) );

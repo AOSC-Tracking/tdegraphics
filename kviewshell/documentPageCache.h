@@ -24,9 +24,10 @@ class TQPixmap;
 class RenderedDocumentPage;
 
 
-class DocumentPageCache: public QObject
+class DocumentPageCache: public TQObject
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
   DocumentPageCache();
@@ -113,7 +114,7 @@ class DocumentPageCache: public QObject
  private:
   /** The maximum of memory used by the cache. (32MB)
       TODO: make this configurable, or detact an appropriate value at startup. */
-  Q_UINT32 maxMemory;
+  TQ_UINT32 maxMemory;
 
   /** This field contains resolution of the display device. In
       principle. In fact, kviewshell implements zooming by calling the

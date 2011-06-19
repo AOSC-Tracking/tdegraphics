@@ -34,12 +34,13 @@ class TQCheckBox;
 class PMCylinderEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMCylinderEdit with parent and name
+    * Creates a PMCylinderEdit with tqparent and name
     */
-   PMCylinderEdit( TQWidget* parent, const char* name = 0 );
+   PMCylinderEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

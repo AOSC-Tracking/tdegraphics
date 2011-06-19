@@ -30,10 +30,11 @@
   */
 class TextEditSelection : public TQWidget  {
    Q_OBJECT
+  TQ_OBJECT
 
 public:
 	/** Constructs the widget */
-	TextEditSelection(TQWidget *parent=0, const char *name=0);
+	TextEditSelection(TQWidget *tqparent=0, const char *name=0);
 	~TextEditSelection();
 	
 signals:
@@ -47,7 +48,7 @@ public slots:
 protected:
 	/** Adds a component line edit */
 	void addComponent(const int index, TQLineEdit* lineEdit, const int maxValue, const TQString& labelString,
-		const int row, const int column, TQGridLayout* layout);
+		const int row, const int column, TQGridLayout* tqlayout);
 	/** sets RGB string in rgbStringLineEdit */
 	void setRgbString(const int red, const int green, const int blue);
 		

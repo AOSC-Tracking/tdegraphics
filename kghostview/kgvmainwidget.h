@@ -23,12 +23,13 @@
 
 class KURL;
 
-class KGVMainWidget : public QWidget
+class KGVMainWidget : public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
     
 public:
-    KGVMainWidget( TQWidget* parent = 0, const char* name = 0 );
+    KGVMainWidget( TQWidget* tqparent = 0, const char* name = 0 );
 
 signals:
     void spacePressed();

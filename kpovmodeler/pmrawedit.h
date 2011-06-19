@@ -35,12 +35,13 @@ class TQMultiLineEdit;
 class PMRawEdit : public PMNamedObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMNamedObjectEdit Base;
 public:
    /**
-    * Creates a PMRawEdit with parent and name
+    * Creates a PMRawEdit with tqparent and name
     */
-   PMRawEdit( TQWidget* parent, const char* name = 0 );
+   PMRawEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

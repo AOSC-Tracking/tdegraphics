@@ -17,8 +17,8 @@
 
 /** \brief Class to represent a page number
     
-The class PageNumber is really nothing but an alias for Q_UINT16, and
-can be casted to and from Q_UINT16. It is used in kviewshell to remind
+The class PageNumber is really nothing but an alias for TQ_UINT16, and
+can be casted to and from TQ_UINT16. It is used in kviewshell to remind
 the programmer of the convention that page numbers start at '1' (for
 'first page'), and that the value '0' means 'illegal page number' or
 'no page number'. Accordingly, the value '0' is also named
@@ -43,13 +43,13 @@ class PageNumber
 
   @param num page number that is set initially
   */
-  PageNumber(Q_UINT16 num) {pgNum = num;}
+  PageNumber(TQ_UINT16 num) {pgNum = num;}
 
-  /** \brief this method implements typecasts from Q_UINT16 */
-  PageNumber &operator=(const Q_UINT16 p) { pgNum = p; return *this; }
+  /** \brief this method implements typecasts from TQ_UINT16 */
+  PageNumber &operator=(const TQ_UINT16 p) { pgNum = p; return *this; }
 
-  /** \brief This method implements typecasts to Q_UINT16 */
-  operator Q_UINT16() const { return pgNum; }
+  /** \brief This method implements typecasts to TQ_UINT16 */
+  operator TQ_UINT16() const { return pgNum; }
 
   /** \brief Checks if the page number is invalid
 
@@ -59,7 +59,7 @@ class PageNumber
 
  private:
   /** \brief Single number that represents the page number */
-  Q_UINT16 pgNum;
+  TQ_UINT16 pgNum;
 };
 
 #endif

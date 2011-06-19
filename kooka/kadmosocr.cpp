@@ -25,8 +25,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -313,12 +313,12 @@ void CRep::partStrings( int line, int graphKnode, TQString soFar )
 
 void CRep::drawCharBox( TQPixmap *pix, const TQRect& r )
 {
-    drawBox( pix, r, TQColor( Qt::red ));
+    drawBox( pix, r, TQColor( TQt::red ));
 }
 
 void CRep::drawLineBox( TQPixmap* pix, const TQRect& r )
 {
-    drawBox( pix, r, TQColor( Qt::blue ));
+    drawBox( pix, r, TQColor( TQt::blue ));
 }
 
 void CRep::drawBox( TQPixmap* pix, const TQRect& r, const TQColor& color )
@@ -356,7 +356,7 @@ KADMOS_ERROR CRep::SetImage(TQImage *Image)
     m_RepData.image.width   = Image->width();
     m_RepData.image.height  = Image->height();
     m_RepData.image.bitsperpixel = Image->depth();
-    m_RepData.image.alignment = 1;
+    m_RepData.image.tqalignment = 1;
     m_RepData.image.fillorder = FILLORDER_MSB2LSB;
     // color
     if( Image->depth() == 1 || (Image->numColors()==2 && Image->depth() == 8) )

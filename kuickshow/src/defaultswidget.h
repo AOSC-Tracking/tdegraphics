@@ -30,12 +30,13 @@ class TQLabel;
 class KComboBox;
 class KIntNumInput;
 
-class DefaultsWidget : public QWidget
+class DefaultsWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  DefaultsWidget( TQWidget *parent, const char *name );
+  DefaultsWidget( TQWidget *tqparent, const char *name );
   ~DefaultsWidget();
 
   void 		loadSettings( const KuickData& data );

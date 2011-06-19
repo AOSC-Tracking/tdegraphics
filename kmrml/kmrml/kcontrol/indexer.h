@@ -28,13 +28,14 @@ class KProcIO;
 
 namespace KMrmlConfig
 {
-    class Indexer : public QObject
+    class Indexer : public TQObject
     {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
         Indexer( const KMrml::Config *config,
-                 TQObject *parent = 0L, const char *name = 0 );
+                 TQObject *tqparent = 0L, const char *name = 0 );
         ~Indexer();
 
         void startIndexing( const TQStringList& dirs );

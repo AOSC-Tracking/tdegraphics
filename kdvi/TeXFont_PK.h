@@ -9,10 +9,10 @@ class glyph;
 
 class TeXFont_PK : public TeXFont {
  public:
-  TeXFont_PK(TeXFontDefinition *parent);
+  TeXFont_PK(TeXFontDefinition *tqparent);
   ~TeXFont_PK();
   
-  glyph* getGlyph(Q_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=Qt::black);
+  glyph* getGlyph(TQ_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=TQt::black);
 
  private:
   FILE         *file;		// open font file or NULL

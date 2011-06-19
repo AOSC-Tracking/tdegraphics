@@ -111,7 +111,7 @@ bool SVGTextElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &, SV
 
 	if(test)
 	{
-		if(m_item->bbox().contains(p))
+		if(m_item->bbox().tqcontains(p))
 		{
 			mev->setTarget(dynamic_cast<SVGElementImpl *>(this));
 			return true;

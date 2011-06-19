@@ -36,41 +36,41 @@
 
 #include "searchWidget.h"
 
-SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
-  : TQWidget(parent, name, fl)
+SearchWidget::SearchWidget(TQWidget* tqparent, const char* name, WFlags fl)
+  : TQWidget(tqparent, name, fl)
 {
   setName("SearchWidget");
 
-  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed);
+  tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed);
 
-  layout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
+  tqlayout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
 
   stopButton = new TQPushButton(this, "stopButton");
   stopButton->setPixmap(KGlobal::iconLoader()->loadIcon("stop", KIcon::Small, KIcon::SizeSmall));
-  layout->addWidget(stopButton);
+  tqlayout->addWidget(stopButton);
 
   searchLabel = new TQLabel(this, "searchLabel");
   searchLabel->setText(i18n("Search:"));
-  layout->addWidget(searchLabel);
+  tqlayout->addWidget(searchLabel);
 
   searchText = new KLineEdit(this, "searchText");
-  layout->addWidget(searchText);
+  tqlayout->addWidget(searchText);
 
   searchLabel->setBuddy(searchText);
 
   findPrevButton = new TQPushButton(this, "findPrevButton");
   findPrevButton->setPixmap(KGlobal::iconLoader()->loadIcon("back", KIcon::NoGroup, KIcon::SizeSmall));
   TQToolTip::add(findPrevButton, i18n("Find previous"));
-  layout->addWidget(findPrevButton);
+  tqlayout->addWidget(findPrevButton);
 
   findNextButton = new TQPushButton(this, "findNextButton");
   findNextButton->setPixmap(KGlobal::iconLoader()->loadIcon("forward", KIcon::NoGroup, KIcon::SizeSmall));
   TQToolTip::add(findNextButton, i18n("Find next"));
-  layout->addWidget(findNextButton);
+  tqlayout->addWidget(findNextButton);
 
   caseSensitiveCheckBox = new TQCheckBox(this, "caseSensitiveCheckBox");
   caseSensitiveCheckBox->setText(i18n("Case sensitive"));
-  layout->addWidget(caseSensitiveCheckBox);
+  tqlayout->addWidget(caseSensitiveCheckBox);
 
   connect(stopButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(stopSearch()));
 
@@ -126,12 +126,12 @@ void SearchWidget::setFocus()
 
 void SearchWidget::keyPressEvent(TQKeyEvent* e)
 {
-  if (e->key() == Qt::Key_Escape)
+  if (e->key() == TQt::Key_Escape)
     emit stopSearch();
 
-  if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
+  if (e->key() == TQt::Key_Return || e->key() == TQt::Key_Enter)
   {
-    if (e->state() == Qt::ShiftButton)
+    if (e->state() == TQt::ShiftButton)
       emit findPrevText();
     else
       emit findNextText();

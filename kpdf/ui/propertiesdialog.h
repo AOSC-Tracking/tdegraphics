@@ -17,7 +17,7 @@ class KPDFDocument;
 class PropertiesDialog : public KDialogBase
 {
   public:
-  	PropertiesDialog( TQWidget *parent, KPDFDocument *doc );
+  	PropertiesDialog( TQWidget *tqparent, KPDFDocument *doc );
 };
 
 #endif

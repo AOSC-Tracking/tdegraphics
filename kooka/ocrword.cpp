@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -76,7 +76,7 @@ TQStringList ocrWordList::stringList()
          * decided. Solution:  KSpell should treat dash-linked words correctly.
          * We live with the problem here that dashes bring confusion ;-)
          */
-        if( (*it).contains( rx ) )
+        if( (*it).tqcontains( rx ) )
             res += TQStringList::split( rx, (*it) );
         else
 #endif
@@ -95,9 +95,9 @@ bool ocrWordList::updateOCRWord( const TQString& from, const TQString& to )
     {
         TQString word = (*it);
         kdDebug(28000) <<  "updateOCRWord in list: Comparing word " << word << endl;
-        if( word.contains( from, true ) ) // case sensitive search
+        if( word.tqcontains( from, true ) ) // case sensitive search
         {
-            word.replace( from, to );
+            word.tqreplace( from, to );
             *it = ocrWord( word );
             res = true;
             break;

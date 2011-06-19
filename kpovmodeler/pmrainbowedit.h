@@ -38,12 +38,13 @@ class TQLabel;
 class PMRainbowEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMRainbowEdit with parent and name
+    * Creates a PMRainbowEdit with tqparent and name
     */
-   PMRainbowEdit( TQWidget* parent, const char* name = 0 );
+   PMRainbowEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

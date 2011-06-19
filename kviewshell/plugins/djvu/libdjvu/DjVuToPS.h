@@ -121,7 +121,7 @@ public:
                 would be your best choice.
              \item[Mode] ({\em COLOR}, {\em FORE}, {\em BACK}, or {\em BW})
                 Specifies how the \Ref{DjVuImage}s will be rendered (all layers,
-                foreground layer, background layer, and the mask respectively)
+                foreground layer, background layer, and the tqmask respectively)
              \item[Color] ({\em TRUE} or {\em FALSE}). Choosing {\em FALSE}
                 converts color images to gray scale.
              \item[Gamma] Printer color correction. 
@@ -308,7 +308,7 @@ public:
       end of printing.  If a \Ref{DjVuDocument} is being printed, this
       callback will be used to report printing progress of every page. To
       learn the number of the page being printed you can use
-      \Ref{set_info_cb}() function.  See \Ref{set_dec_progress_cb}() to find
+      \Ref{set_info_cb}() function.  See \Ref{set_dec_progress_cb}() to tqfind
       out how to learn the decoding progress.
       
       @param cb Callback function to be called

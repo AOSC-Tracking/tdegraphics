@@ -314,7 +314,7 @@ TQImage SVGPatternElementImpl::createTile(SVGShapeImpl *referencingElement, int 
 	if(m_canvas == 0)
 	{
 		m_canvas = CanvasFactory::self()->loadCanvas(image.width(), image.height());
-		m_canvas->setBackgroundColor(qRgba(0, 0, 0, 0));
+		m_canvas->setBackgroundColor(tqRgba(0, 0, 0, 0));
 	}
 
 	m_canvas->setup(image.bits(), image.width(), image.height());
@@ -350,22 +350,22 @@ TQImage SVGPatternElementImpl::createTile(SVGShapeImpl *referencingElement, int 
 	for(DOM::Node node = m_location->firstChild(); !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
-		if(element && shape && style && ok && style->getVisible() && style->getDisplay())
+		if(element && tqshape && style && ok && style->getVisible() && style->getDisplay())
 		{
 			SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(element);
 			if(locatable)
 				locatable->updateCachedScreenCTM(baseMatrix);
 
 			element->createItem(m_canvas);
-			if(shape->item())
+			if(tqshape->item())
 			{
-				shape->item()->setReferenced(true);
-				m_canvas->invalidate(shape->item(), true);
+				tqshape->item()->setReferenced(true);
+				m_canvas->tqinvalidate(tqshape->item(), true);
 			}
 		}
 	}
@@ -433,7 +433,7 @@ void SVGPatternElementImpl::reference(const TQString &href)
 		SVGHelperImpl::copyAttributes(src, this);
 
 		// Spec: Change location to referenced element so we
-		// can take the children elements to render from there
+		// can take the tqchildren elements to render from there
 		if(m_location == this)
 			m_location = src;
 	}
@@ -486,7 +486,7 @@ SVGPatternElementImpl::Tile SVGPatternElementImpl::createTile(SVGShapeImpl *refe
 		TQSize size(imageWidth, imageHeight);
 		TQImage image;
 
-		if(!m_tileCache.find(size, image))
+		if(!m_tileCache.tqfind(size, image))
 		{
 			image = createTile(referencingElement, imageWidth, imageHeight);
 			m_tileCache.insert(size, image, image.width() * image.height() * 4);

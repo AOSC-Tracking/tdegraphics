@@ -21,13 +21,13 @@
 #include "core/page.h"
 #include "conf/settings.h"
 
-PageViewMessage::PageViewMessage( TQWidget * parent )
-    : TQWidget( parent, "pageViewMessage" ), m_timer( 0 )
+PageViewMessage::PageViewMessage( TQWidget * tqparent )
+    : TQWidget( tqparent, "pageViewMessage" ), m_timer( 0 )
 {
-    setFocusPolicy( NoFocus );
+    setFocusPolicy( TQ_NoFocus );
     setBackgroundMode( NoBackground );
     setPaletteBackgroundColor(kapp->palette().color(TQPalette::Active, TQColorGroup::Background));
-    // if the layout is LtR, we can safely place it in the right position
+    // if the tqlayout is LtR, we can safely place it in the right position
     if ( !TQApplication::reverseLayout() )
         move( 10, 10 );
     resize( 0, 0 );
@@ -54,7 +54,7 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
         iconXOffset = 0,
         shadowOffset = 1;
 
-    // load icon (if set) and update geometry
+    // load icon (if set) and update tqgeometry
     TQPixmap symbol;
     if ( icon != None )
     {
@@ -82,46 +82,46 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
             textXOffset = 2 + symbol.width();
         }
         width += 2 + symbol.width();
-        height = QMAX( height, symbol.height() );
+        height = TQMAX( height, symbol.height() );
     }
-    TQRect geometry( 0, 0, width + 10, height + 8 );
+    TQRect tqgeometry( 0, 0, width + 10, height + 8 );
 
-    // resize pixmap, mask and widget
-    static TQBitmap mask;
-    mask.resize( geometry.size() );
-    m_pixmap.resize( geometry.size() );
-    resize( geometry.size() );
+    // resize pixmap, tqmask and widget
+    static TQBitmap tqmask;
+    tqmask.resize( tqgeometry.size() );
+    m_pixmap.resize( tqgeometry.size() );
+    resize( tqgeometry.size() );
 
-    // create and set transparency mask
-    TQPainter maskPainter( &mask);
-    mask.fill( Qt::black );
-    maskPainter.setBrush( Qt::white );
-    maskPainter.drawRoundRect( geometry, 1600 / geometry.width(), 1600 / geometry.height() );
-    setMask( mask );
+    // create and set transparency tqmask
+    TQPainter tqmaskPainter( &tqmask);
+    tqmask.fill( TQt::black );
+    tqmaskPainter.setBrush( TQt::white );
+    tqmaskPainter.drawRoundRect( tqgeometry, 1600 / tqgeometry.width(), 1600 / tqgeometry.height() );
+    setMask( tqmask );
 
     // draw background
     TQPainter bufferPainter( &m_pixmap );
-    bufferPainter.setPen( Qt::black );
+    bufferPainter.setPen( TQt::black );
     bufferPainter.setBrush( paletteBackgroundColor() );
-    bufferPainter.drawRoundRect( geometry, 1600 / geometry.width(), 1600 / geometry.height() );
+    bufferPainter.drawRoundRect( tqgeometry, 1600 / tqgeometry.width(), 1600 / tqgeometry.height() );
 
     // draw icon if present
     if ( !symbol.isNull() )
         bufferPainter.drawPixmap( 5 + iconXOffset, 4, symbol, 0, 0, symbol.width(), symbol.height() );
 
     // draw shadow and text
-    int yText = geometry.height() - height / 2;
+    int yText = tqgeometry.height() - height / 2;
     bufferPainter.setPen( paletteBackgroundColor().dark( 115 ) );
     bufferPainter.drawText( 5 + textXOffset + shadowOffset, yText + 1, message );
     bufferPainter.setPen( foregroundColor() );
     bufferPainter.drawText( 5 + textXOffset, yText, message );
 
-    // if the layout is RtL, we can move it to the right place only after we
+    // if the tqlayout is RtL, we can move it to the right place only after we
     // know how much size it will take
     if ( TQApplication::reverseLayout() )
-        move( parentWidget()->width() - geometry.width() - 10, 10 );
+        move( tqparentWidget()->width() - tqgeometry.width() - 10, 10 );
 
-    // show widget and schedule a repaint
+    // show widget and schedule a tqrepaint
     show();
     update();
 
@@ -168,19 +168,19 @@ int PageViewItem::pageNumber() const
     return m_page->number();
 }
 
-const TQRect& PageViewItem::geometry() const
+const TQRect& PageViewItem::tqgeometry() const
 {
-    return m_geometry;
+    return m_tqgeometry;
 }
 
 int PageViewItem::width() const
 {
-    return m_geometry.width();
+    return m_tqgeometry.width();
 }
 
 int PageViewItem::height() const
 {
-    return m_geometry.height();
+    return m_tqgeometry.height();
 }
 
 double PageViewItem::zoomFactor() const
@@ -190,18 +190,18 @@ double PageViewItem::zoomFactor() const
 
 void PageViewItem::setGeometry( int x, int y, int width, int height )
 {
-    m_geometry.setRect( x, y, width, height );
+    m_tqgeometry.setRect( x, y, width, height );
 }
 
 void PageViewItem::setWHZ( int w, int h, double z )
 {
-    m_geometry.setWidth( w );
-    m_geometry.setHeight( h );
+    m_tqgeometry.setWidth( w );
+    m_tqgeometry.setHeight( h );
     m_zoomFactor = z;
 }
 
 void PageViewItem::moveTo( int x, int y )
 {
-    m_geometry.moveLeft( x );
-    m_geometry.moveTop( y );
+    m_tqgeometry.moveLeft( x );
+    m_tqgeometry.moveTop( y );
 }

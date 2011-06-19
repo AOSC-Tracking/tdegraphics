@@ -41,13 +41,13 @@ extern const int MFResolutions[];
 class DVI_SourceFileAnchor {
  public:
   DVI_SourceFileAnchor() {}
-  DVI_SourceFileAnchor(const TQString& name, Q_UINT32 ln, Q_UINT32 pg, const Length& _distance_from_top)
+  DVI_SourceFileAnchor(const TQString& name, TQ_UINT32 ln, TQ_UINT32 pg, const Length& _distance_from_top)
     : fileName(name), line(ln), page(pg),
       distance_from_top(_distance_from_top) {}
 
   TQString    fileName;
-  Q_UINT32   line;
-  Q_UINT32   page;
+  TQ_UINT32   line;
+  TQ_UINT32   page;
   Length     distance_from_top;
 };
 
@@ -69,7 +69,7 @@ struct framedata {
 /* this information is saved when using virtual fonts */
 
 typedef	void	(dviRenderer::*set_char_proc)(unsigned int, unsigned int);
-typedef void    (dviRenderer::*parseSpecials)(char *, Q_UINT8 *);
+typedef void    (dviRenderer::*parseSpecials)(char *, TQ_UINT8 *);
 
 struct drawinf {
   struct framedata            data;
@@ -85,9 +85,10 @@ struct drawinf {
 class dviRenderer : public DocumentRenderer, bigEndianByteReader
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  dviRenderer(TQWidget *parent);
+  dviRenderer(TQWidget *tqparent);
   ~dviRenderer();
 
   virtual bool	setFile(const TQString &fname, const KURL &base);
@@ -127,7 +128,7 @@ public:
   void          draw_page();
 
 public slots:
-  void          exportPS(const TQString& fname = TQString::null, const TQString& options = TQString::null, KPrinter* printer = 0);
+  void          exportPS(const TQString& fname = TQString(), const TQString& options = TQString(), KPrinter* printer = 0);
   void          exportPDF();
 
   void          showInfo();
@@ -136,7 +137,7 @@ public slots:
   void          embedPostScript();
   void          abortExternalProgramm();
 
-  /** simply emits "setStatusBarText( TQString::null )". This is used
+  /** simply emits "setStatusBarText( TQString() )". This is used
       in dviRenderer::mouseMoveEvent(), see the explanation there. */
   void          clearStatusBar();
 
@@ -179,7 +180,7 @@ private:
   /* This method locates special PDF characters in a string and
      replaces them by UTF8. See Section 3.2.3 of the PDF reference
      guide for information */
-  TQString PDFencodingToQString(const TQString& pdfstring);
+  TQString PDFencodingToTQString(const TQString& pdfstring);
 
   void  setResolution(double resolution_in_DPI);
 
@@ -190,9 +191,9 @@ private:
 
   // @@@ explanation
   void          prescan(parseSpecials specialParser);
-  void          prescan_embedPS(char *cp, Q_UINT8 *);
-  void          prescan_removePageSizeInfo(char *cp, Q_UINT8 *);
-  void          prescan_parseSpecials(char *cp, Q_UINT8 *);
+  void          prescan_embedPS(char *cp, TQ_UINT8 *);
+  void          prescan_removePageSizeInfo(char *cp, TQ_UINT8 *);
+  void          prescan_parseSpecials(char *cp, TQ_UINT8 *);
   void          prescan_ParsePapersizeSpecial(const TQString& cp);
   void          prescan_ParseBackgroundSpecial(const TQString& cp);
   void          prescan_ParseHTMLAnchorSpecial(const TQString& cp);
@@ -211,7 +212,7 @@ private:
 
   /** Utility fields used by the embedPostScript method*/
   KProgressDialog *embedPS_progress;
-  Q_UINT16         embedPS_numOfProgressedFiles;
+  TQ_UINT16         embedPS_numOfProgressedFiles;
 
   /** Shrink factor. Units are not quite clear */
   double	shrinkfactor;
@@ -291,7 +292,7 @@ private:
   /** Data required for handling TPIC specials */ 
   float       penWidth_in_mInch;
   TQPointArray TPIC_path;
-  Q_UINT16    number_of_elements_in_path;
+  TQ_UINT16    number_of_elements_in_path;
   
   struct drawinf	currinf;
   RenderedDocumentPage* currentlyDrawnPage;

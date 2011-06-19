@@ -52,7 +52,7 @@ static TQString nameForType (kpEffectBlurSharpenCommand::Type type)
     else if (type == kpEffectBlurSharpenCommand::Sharpen)
         return i18n ("Sharpen");
     else
-        return TQString::null;
+        return TQString();
 }
 
 
@@ -88,10 +88,10 @@ TQPixmap kpEffectBlurSharpenCommand::apply (const TQPixmap &pixmap,
                << endl;
 #endif
 
-    // (KImageEffect::(blur|sharpen)() ignores mask)
+    // (KImageEffect::(blur|sharpen)() ignores tqmask)
     TQPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
         pixmap,
-        Qt::white/*arbitrarily chosen*/);
+        TQt::white/*arbitrarily chosen*/);
 
 
     TQImage image = kpPixmapFX::convertToImage (usePixmap);
@@ -107,9 +107,9 @@ TQPixmap kpEffectBlurSharpenCommand::apply (const TQPixmap &pixmap,
     TQPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
 
 
-    // KImageEffect::(blur|sharpen)() nukes mask - restore it
-    if (usePixmap.mask ())
-        retPixmap.setMask (*usePixmap.mask ());
+    // KImageEffect::(blur|sharpen)() nukes tqmask - restore it
+    if (usePixmap.tqmask ())
+        retPixmap.setMask (*usePixmap.tqmask ());
 
 
     return retPixmap;
@@ -125,8 +125,8 @@ TQPixmap kpEffectBlurSharpenCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectBlurSharpenWidget::kpEffectBlurSharpenWidget (bool actOnSelection,
                                                       kpMainWindow *mainWindow,
-                                                      TQWidget *parent, const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
+                                                      TQWidget *tqparent, const char *name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
 {
     TQGridLayout *lay = new TQGridLayout (this, 4, 2, marginHint (), spacingHint ());
 
@@ -144,7 +144,7 @@ kpEffectBlurSharpenWidget::kpEffectBlurSharpenWidget (bool actOnSelection,
     lay->addWidget (amountLabel, 0, 0);
     lay->addWidget (m_amountInput, 0, 1);
 
-    lay->addMultiCellWidget (m_typeLabel, 1, 1, 0, 1, Qt::AlignCenter);
+    lay->addMultiCellWidget (m_typeLabel, 1, 1, 0, 1, TQt::AlignCenter);
 
     lay->setColStretch (1, 1);
 
@@ -164,7 +164,7 @@ kpEffectBlurSharpenWidget::~kpEffectBlurSharpenWidget ()
 // public virtual [base kpColorEffectWidget]
 TQString kpEffectBlurSharpenWidget::caption () const
 {
-    return TQString::null;
+    return TQString();
 }
 
 
@@ -281,7 +281,7 @@ int kpEffectBlurSharpenWidget::repeat () const
         const double SharpenMin = 1;
         const double SharpenMax = 2;
 
-        return qRound (SharpenMin +
+        return tqRound (SharpenMin +
                           (m_amountInput->value () - 1) *
                               (SharpenMax - SharpenMin) /
                                   (m_amountInput->maxValue () - 1));

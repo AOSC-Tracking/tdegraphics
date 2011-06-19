@@ -38,12 +38,13 @@ class TQPushButton;
 class PMTextEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMTextEdit with parent and name
+    * Creates a PMTextEdit with tqparent and name
     */
-   PMTextEdit( TQWidget* parent, const char* name = 0 );
+   PMTextEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

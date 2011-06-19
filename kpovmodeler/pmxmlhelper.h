@@ -35,7 +35,7 @@ class PMPart;
 class PMParser;
 
 /**
- * Class for reading attributes out of a @ref QDomElement
+ * Class for reading attributes out of a @ref TQDomElement
  */
 class PMXMLHelper
 {
@@ -46,7 +46,7 @@ public:
    PMXMLHelper( const TQDomElement& e, PMPart* p, PMParser* par,
                 int majorDocumentFormat, int minorDocumentFormat );
    /**
-    * Returns the QDomElement
+    * Returns the TQDomElement
     */
    TQDomElement element( ) const { return m_e; }
 

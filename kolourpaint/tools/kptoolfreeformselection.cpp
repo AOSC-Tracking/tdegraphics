@@ -35,7 +35,7 @@ kpToolFreeFormSelection::kpToolFreeFormSelection (kpMainWindow *mainWindow)
     : kpToolSelection (kpToolSelection::FreeForm,
                        i18n ("Selection (Free-Form)"),
                        i18n ("Makes a free-form selection"),
-                       Qt::Key_M,
+                       TQt::Key_M,
                        mainWindow, "tool_free_form_selection")
 {
 }

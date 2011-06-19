@@ -27,15 +27,16 @@ class TQPaintEvent;
 
 /* DocumentWidget */
 
-class DocumentWidget : public QWidget
+class DocumentWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name);
+  DocumentWidget(TQWidget *tqparent, PageView *sv, DocumentPageCache *cache, const char *name);
 
-  void          setPageNumber(Q_UINT16 pageNr);
-  Q_UINT16      getPageNumber() const {return pageNr;}
+  void          setPageNumber(TQ_UINT16 pageNr);
+  TQ_UINT16      getPageNumber() const {return pageNr;}
 
   /** Returns the size of the widget without the page shadow. */
   TQSize pageSize() const;
@@ -121,7 +122,7 @@ protected:
   int           animationCounter;
   int           flashOffset;
 
-  Q_UINT16      pageNr;
+  TQ_UINT16      pageNr;
 
   /* This timer is used to delay clearing of the statusbar. Clearing
      the statusbar is delayed to avoid awful flickering when the mouse
@@ -156,7 +157,7 @@ protected:
   virtual void setStandardCursor();
 
 private slots:
-  /** This slot emits the signal setStatusBarText(TQString::null) to
+  /** This slot emits the signal setStatusBarText(TQString()) to
       clear the status bar. It is connected to the timeout slot of the
       clearStatusBarTimer. */
   void clearStatusBar();

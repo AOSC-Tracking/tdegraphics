@@ -50,7 +50,7 @@ String	Camera make
 String  Camera model
 String	Date/time
 Size 	Dimensions Width x Height in pixels
-int	Orientation 	1 - "The 0th row is at the visual top of the image,
+int	Qt::Orientation 	1 - "The 0th row is at the visual top of the image,
 			     and the 0th column is the visual left-hand side."
 			2 - "The 0th row is at the visual top of the image,
 			    and the 0th column is the visual right-hand side."

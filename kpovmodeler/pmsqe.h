@@ -17,8 +17,8 @@
 **************************************************************************/
 
 
-#ifndef PMSQE_H
-#define PMSQE_H
+#ifndef PMSTQE_H
+#define PMSTQE_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -58,7 +58,7 @@ public:
    virtual TQString description( ) const;
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
 
    /** */
    virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const;
@@ -67,7 +67,7 @@ public:
    /**
     * Returns a new @ref PMSuperquadricEllipsoidEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
@@ -138,7 +138,7 @@ private:
    /**
     * IDs for @ref PMMementoData
     */
-   enum PMSQEMementoID { PMEastWestExponentID, PMNorthSouthExponentID };
+   enum PMSTQEMementoID { PMEastWestExponentID, PMNorthSouthExponentID };
    double m_eastWestExponent, m_northSouthExponent;
 
    /**

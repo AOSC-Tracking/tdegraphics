@@ -4,7 +4,7 @@ Copyright (c) 2004 Charles Samuels <charles@kde.org>
   This file is hereby licensed under the GNU General Public License version
   2 or later at your option.
 
-  This file is licensed under the Qt Public License version 1 with the
+  This file is licensed under the TQt Public License version 1 with the
   condition that the licensed will be governed under the Laws of California
   (USA) instead of Norway.  Disputes will be settled in Santa Clara county
   courts.
@@ -50,15 +50,15 @@ Copyright (c) 2004 Charles Samuels <charles@kde.org>
 class Previews;
 class PhotoBookPart;
 
-class PhotoBook : public QSplitter
+class PhotoBook : public TQSplitter
 {
-Q_OBJECT	
+TQ_OBJECT	
 	Previews *mList;
 	KAction *mFit;
 	KParts::ReadOnlyPart *mViewer;
 
 public:
-	PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name=0);
+	PhotoBook(TQWidget *tqparent, PhotoBookPart *part, const char *name=0);
 	void openURL(const KURL &url);
 	void updateButton(bool, bool );
 
@@ -73,13 +73,14 @@ signals:
 class Previews : public KFileIconView
 {
 Q_OBJECT
+  TQ_OBJECT
 	
 	KDirLister mDirLister;
 	PhotoBook *mPhotoBook;
 	TQStringList mMimeTypes;
 
 public:
-	Previews(PhotoBook *parent, const TQStringList &mimetypes);
+	Previews(PhotoBook *tqparent, const TQStringList &mimetypes);
 	~Previews();
 	void openURL(const KURL &url);
 
@@ -106,14 +107,15 @@ private slots:
 class PhotoBookPart : public KParts::ReadOnlyPart
 {
 Q_OBJECT
+  TQ_OBJECT
 	PhotoBook *bv;
 	KAction *m_pPreviousAction;
 	KAction *m_pNextAction;
 
 public:
 	PhotoBookPart(
-			TQWidget *parentWidget, const char *widgetName,
-			TQObject *parent, const char *name=0,
+			TQWidget *tqparentWidget, const char *widgetName,
+			TQObject *tqparent, const char *name=0,
 			const TQStringList& args = TQStringList()
 		);
 	~PhotoBookPart();
@@ -131,6 +133,7 @@ typedef KParts::GenericFactory<PhotoBookPart> PhotoBookFactory;
 class PhotoBookBrowserExtension : public KParts::BrowserExtension
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
 	PhotoBookBrowserExtension(PhotoBookPart *p);
 };

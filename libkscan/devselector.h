@@ -54,14 +54,15 @@ class TQCheckBox;
 class DeviceSelector: public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     *  constructs the dialog class
-    *  @param TQWidget *parent - the parent
+    *  @param TQWidget *tqparent - the tqparent
     *  @param TQStrList backends - a list of device names retrieved from the scan device
     *  @param TQStrList scannerNames - a list of corresponding human readable sanner names.
     */
-   DeviceSelector( TQWidget *parent, TQStrList&, const TQStringList& );
+   DeviceSelector( TQWidget *tqparent, TQStrList&, const TQStringList& );
    ~DeviceSelector();
 
    /**

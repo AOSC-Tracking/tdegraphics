@@ -32,15 +32,15 @@
 typedef KGenericFactory<KViewGeneralConfig, TQWidget> KViewGeneralConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewgeneralconfig, KViewGeneralConfigFactory( "kcm_kviewgeneralconfig" ) )
 
-KViewGeneralConfig::KViewGeneralConfig( TQWidget * parent, const char * /*name*/, const TQStringList & args )
-	: KCModule( KViewGeneralConfigFactory::instance(), parent, args )
+KViewGeneralConfig::KViewGeneralConfig( TQWidget * tqparent, const char * /*name*/, const TQStringList & args )
+	: KCModule( KViewGeneralConfigFactory::instance(), tqparent, args )
 {
-	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	TQBoxLayout * tqlayout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 
 	m_pResizeGroup = new TQVButtonGroup( i18n( "Resizing" ), this );
-	m_pResizeGroup->setSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
+	m_pResizeGroup->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
 	connect( m_pResizeGroup, TQT_SIGNAL( clicked( int ) ), this, TQT_SLOT( resizeChanged( int ) ) );
-	layout->addWidget( m_pResizeGroup );
+	tqlayout->addWidget( m_pResizeGroup );
 
 	( void )new TQRadioButton( i18n( "Only resize window" ), m_pResizeGroup );
 	( void )new TQRadioButton( i18n( "Resize image to fit window" ), m_pResizeGroup );

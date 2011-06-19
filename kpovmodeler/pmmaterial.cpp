@@ -43,11 +43,11 @@ PMMaterial::~PMMaterial( )
 {
 }
 
-PMMetaObject* PMMaterial::metaObject( ) const
+PMMetaObject* PMMaterial::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Material", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Material", Base::tqmetaObject( ),
                                         createNewMaterial );
    }
    return s_pMetaObject;
@@ -68,8 +68,8 @@ TQString PMMaterial::description( ) const
    return i18n( "material" );
 }
 
-PMDialogEditBase* PMMaterial::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMMaterial::editWidget( TQWidget* tqparent ) const
 {
-   return new PMMaterialEdit( parent );
+   return new PMMaterialEdit( tqparent );
 }
 

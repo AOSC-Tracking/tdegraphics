@@ -81,7 +81,7 @@ static const char *pointArrayToString (const TQPointArray &pointArray)
 
 static TQPen makeMaskPen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle)
 {
-    return TQPen (color.maskColor (),
+    return TQPen (color.tqmaskColor (),
                  lineWidth == 1 ? 0/*closer to looking width 1*/ : lineWidth, lineStyle,
                  Qt::RoundCap, Qt::RoundJoin);
 }
@@ -90,7 +90,7 @@ static TQPen makePen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyl
 {
     if (color.isOpaque ())
     {
-        return TQPen (color.toQColor (),
+        return TQPen (color.toTQColor (),
                      lineWidth == 1 ? 0/*closer to looking width 1*/ : lineWidth, lineStyle,
                      Qt::RoundCap, Qt::RoundJoin);
     }
@@ -103,7 +103,7 @@ static TQBrush makeMaskBrush (const kpColor &foregroundColor,
                              kpToolWidgetFillStyle *toolWidgetFillStyle)
 {
     if (toolWidgetFillStyle)
-        return toolWidgetFillStyle->maskBrush (foregroundColor, backgroundColor);
+        return toolWidgetFillStyle->tqmaskBrush (foregroundColor, backgroundColor);
     else
         return Qt::NoBrush;
 }
@@ -155,38 +155,38 @@ static TQPixmap pixmap (const TQPixmap &oldPixmap,
     // draw
 
     TQPen pen = makePen (foregroundColor, lineWidth, lineStyle),
-         maskPen = makeMaskPen (foregroundColor, lineWidth, lineStyle);
+         tqmaskPen = makeMaskPen (foregroundColor, lineWidth, lineStyle);
     TQBrush brush = makeBrush (foregroundColor, backgroundColor, toolWidgetFillStyle),
-           maskBrush = makeMaskBrush (foregroundColor, backgroundColor, toolWidgetFillStyle);
+           tqmaskBrush = makeMaskBrush (foregroundColor, backgroundColor, toolWidgetFillStyle);
 
     TQPixmap pixmap = oldPixmap;
-    TQBitmap maskBitmap;
+    TQBitmap tqmaskBitmap;
 
-    TQPainter painter, maskPainter;
+    TQPainter painter, tqmaskPainter;
 
-    if (pixmap.mask () ||
-        (maskPen.style () != Qt::NoPen &&
-         maskPen.color () == Qt::color0/*transparent*/) ||
-        (maskBrush.style () != Qt::NoBrush &&
-         maskBrush.color () == Qt::color0/*transparent*/))
+    if (pixmap.tqmask () ||
+        (tqmaskPen.style () != TQt::NoPen &&
+         tqmaskPen.color () == TQt::color0/*transparent*/) ||
+        (tqmaskBrush.style () != TQt::NoBrush &&
+         tqmaskBrush.color () == TQt::color0/*transparent*/))
     {
-        maskBitmap = kpPixmapFX::getNonNullMask (pixmap);
-        maskPainter.begin (&maskBitmap);
-        maskPainter.setPen (maskPen);
-        maskPainter.setBrush (maskBrush);
+        tqmaskBitmap = kpPixmapFX::getNonNullMask (pixmap);
+        tqmaskPainter.begin (&tqmaskBitmap);
+        tqmaskPainter.setPen (tqmaskPen);
+        tqmaskPainter.setBrush (tqmaskBrush);
 
     #if DEBUG_KP_TOOL_POLYGON && 0
-        kdDebug () << "\tmaskPainter begin because:" << endl
-                   << "\t\tpixmap.mask=" << pixmap.mask () << endl
-                   << "\t\t(maskPenStyle!=NoPen)=" << (maskPen.style () != Qt::NoPen) << endl
-                   << "\t\t(maskPenColor==trans)=" << (maskPen.color () == Qt::color0) << endl
-                   << "\t\t(maskBrushStyle!=NoBrush)=" << (maskBrush.style () != Qt::NoBrush) << endl
-                   << "\t\t(maskBrushColor==trans)=" << (maskBrush.color () == Qt::color0) << endl;
+        kdDebug () << "\ttqmaskPainter begin because:" << endl
+                   << "\t\tpixmap.tqmask=" << pixmap.tqmask () << endl
+                   << "\t\t(tqmaskPenStyle!=NoPen)=" << (tqmaskPen.style () != TQt::NoPen) << endl
+                   << "\t\t(tqmaskPenColor==trans)=" << (tqmaskPen.color () == TQt::color0) << endl
+                   << "\t\t(tqmaskBrushStyle!=NoBrush)=" << (tqmaskBrush.style () != TQt::NoBrush) << endl
+                   << "\t\t(tqmaskBrushColor==trans)=" << (tqmaskBrush.color () == TQt::color0) << endl;
     #endif
     }
 
-    if (pen.style () != Qt::NoPen ||
-        brush.style () != Qt::NoBrush)
+    if (pen.style () != TQt::NoPen ||
+        brush.style () != TQt::NoBrush)
     {
         painter.begin (&pixmap);
         painter.setPen (pen);
@@ -204,11 +204,11 @@ static TQPixmap pixmap (const TQPixmap &oldPixmap,
     if (painter.isActive ())      \
         painter . cmd ;           \
                                   \
-    if (maskPainter.isActive ())  \
-        maskPainter . cmd ;       \
+    if (tqmaskPainter.isActive ())  \
+        tqmaskPainter . cmd ;       \
 }
 
-    // SYNC: Qt bug
+    // SYNC: TQt bug
     if (only1PixelInPointArray (pointsInRect))
     {
         PAINTER_CALL (drawPoint (pointsInRect [0]));
@@ -234,25 +234,25 @@ static TQPixmap pixmap (const TQPixmap &oldPixmap,
                     if (painter.isActive ())
                     {
                         TQPen XORpen = painter.pen ();
-                        XORpen.setColor (Qt::white);
+                        XORpen.setColor (TQt::white);
 
                         painter.setPen (XORpen);
-                        painter.setRasterOp (Qt::XorROP);
+                        painter.setRasterOp (TQt::XorROP);
                     }
 
-                    if (maskPainter.isActive ())
+                    if (tqmaskPainter.isActive ())
                     {
-                        TQPen XORpen = maskPainter.pen ();
+                        TQPen XORpen = tqmaskPainter.pen ();
 
                         // TODO???
                         #if 0
                         if (kpTool::isColorTransparent (foregroundColor))
-                            XORpen.setColor (Qt::color1/*opaque*/);
+                            XORpen.setColor (TQt::color1/*opaque*/);
                         else
-                            XORpen.setColor (Qt::color0/*transparent*/);
+                            XORpen.setColor (TQt::color0/*transparent*/);
                         #endif
 
-                        maskPainter.setPen (XORpen);
+                        tqmaskPainter.setPen (XORpen);
                     }
 
                     PAINTER_CALL (drawLine (pointsInRect [0], pointsInRect [count - 1]));
@@ -288,11 +288,11 @@ static TQPixmap pixmap (const TQPixmap &oldPixmap,
     if (painter.isActive ())
         painter.end ();
 
-    if (maskPainter.isActive ())
-        maskPainter.end ();
+    if (tqmaskPainter.isActive ())
+        tqmaskPainter.end ();
 
-    if (!maskBitmap.isNull ())
-        pixmap.setMask (maskBitmap);
+    if (!tqmaskBitmap.isNull ())
+        pixmap.setMask (tqmaskBitmap);
 
     return pixmap;
 }
@@ -315,7 +315,7 @@ kpToolPolygon::kpToolPolygon (Mode mode,
 
 kpToolPolygon::kpToolPolygon (kpMainWindow *mainWindow)
     : kpTool (i18n ("Polygon"), i18n ("Draws polygons"),
-              Qt::Key_G,
+              TQt::Key_G,
               mainWindow, "tool_polygon"),
       m_mode (Polygon),
       m_toolWidgetFillStyle (0),
@@ -346,7 +346,7 @@ TQString kpToolPolygon::haventBegunShapeUserMessage () const
     case Curve:
         return i18n ("Drag out the start and end points.");
     default:
-        return TQString::null;
+        return TQString();
     }
 }
 
@@ -479,7 +479,7 @@ void kpToolPolygon::beginDraw ()
             break;
 
         default:
-            kdError () << "kpToolPolygon::beginDraw() shape" << endl;
+            kdError () << "kpToolPolygon::beginDraw() tqshape" << endl;
             break;
         }
     }
@@ -565,8 +565,8 @@ void kpToolPolygon::applyModifiers ()
             #define sgn(a) ((a)<0?-1:1)
             // Round distances _before_ adding to any coordinate
             // (ensures consistent rounding behaviour in x & y directions)
-            const int newdx = qRound (dist * cos (angle) * sgn (diffx));
-            const int newdy = qRound (dist * sin (angle) * sgn (diffy));
+            const int newdx = tqRound (dist * cos (angle) * sgn (diffx));
+            const int newdy = tqRound (dist * sin (angle) * sgn (diffy));
             #undef sgn
 
             m_toolLineEndPoint = TQPoint (m_toolLineStartPoint.x () + newdx,
@@ -671,7 +671,7 @@ void kpToolPolygon::cancelShape ()
     endDraw (TQPoint (), TQRect ());
     commandHistory ()->undo ();
 #else
-    viewManager ()->invalidateTempPixmap ();
+    viewManager ()->tqinvalidateTempPixmap ();
 #endif
     m_points.resize (0);
 
@@ -781,7 +781,7 @@ void kpToolPolygon::endShape (const TQPoint &, const TQRect &)
     if (!hasBegunShape ())
         return;
 
-    viewManager ()->invalidateTempPixmap ();
+    viewManager ()->tqinvalidateTempPixmap ();
 
     TQRect boundingRect = kpTool::neededRect (m_points.boundingRect (), m_lineWidth);
 

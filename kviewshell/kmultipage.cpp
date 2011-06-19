@@ -34,8 +34,8 @@
 
 //#define DEBUG_KMULTIPAGE
 
-KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent, const char *name)
-  : DCOPObject("kmultipage"), KParts::ReadOnlyPart(parent, name)
+KMultiPage::KMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent, const char *name)
+  : DCOPObject("kmultipage"), KParts::ReadOnlyPart(tqparent, name)
 {
   // For reasons which I don't understand, the initialization of the
   // DCOPObject above does not work properly, the name is ignored. It
@@ -43,18 +43,18 @@ KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject 
   // This is because of the virtual inheritance. Get rid of it (but it's BC, and this is a lib...) -- DF
   setObjId("kmultipage");
 
-  parentWdg = parentWidget;
+  tqparentWdg = tqparentWidget;
   lastCurrentPage = 0;
   timer_id = -1;
   searchInProgress = false;
   
-  TQVBox* verticalBox = new TQVBox(parentWidget);
-  verticalBox->setFocusPolicy(TQWidget::StrongFocus);
+  TQVBox* verticalBox = new TQVBox(tqparentWidget);
+  verticalBox->setFocusPolicy(TQ_StrongFocus);
   setWidget(verticalBox);
   
   splitterWidget = new TQSplitter(verticalBox, widgetName);
   splitterWidget->setOpaqueResize(false);
-  splitterWidget->setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
+  splitterWidget->tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
   
   // Create SideBar
   sideBar = new TQToolBox(splitterWidget, "sidebar");
@@ -117,7 +117,7 @@ void KMultiPage::readSettings()
 
 void KMultiPage::writeSettings()
 {
-  // Save TOC layout
+  // Save TOC tqlayout
   tableOfContents->writeSettings();
 
   KVSPrefs::setGuiLayout(splitterWidget->sizes());
@@ -146,27 +146,27 @@ void KMultiPage::slotSave()
   // Try to guess the proper ending...
   TQString formats;
   TQString ending;
-  int rindex = m_file.findRev(".");
+  int rindex = m_file.tqfindRev(".");
   if (rindex == -1) {
-    ending = TQString::null;
-    formats = TQString::null;
+    ending = TQString();
+    formats = TQString();
   } else {
     ending = m_file.mid(rindex); // e.g. ".dvi"
     formats = fileFormats().grep(ending).join("\n");
   }
 
-  TQString fileName = KFileDialog::getSaveFileName(TQString::null, formats, 0, i18n("Save File As"));
+  TQString fileName = KFileDialog::getSaveFileName(TQString(), formats, 0, i18n("Save File As"));
 
   if (fileName.isEmpty())
     return;
 
   // Add the ending to the filename. I hope the user likes it that
   // way.
-  if (!ending.isEmpty() && fileName.find(ending) == -1)
+  if (!ending.isEmpty() && fileName.tqfind(ending) == -1)
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
-    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Shall I overwrite that file?").arg(fileName),
+    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Shall I overwrite that file?").tqarg(fileName),
 				       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -198,7 +198,7 @@ bool KMultiPage::closeURL()
   document_history.clear();
   
   // Close the file.
-  renderer->setFile(TQString::null, KURL());
+  renderer->setFile(TQString(), KURL());
   renderer->clear();
   
   // Delete Page Widgets.
@@ -207,7 +207,7 @@ bool KMultiPage::closeURL()
   widgetList.setAutoDelete(false);
   
   // Update ScrollView.
-  scrollView()->layoutPages();
+  scrollView()->tqlayoutPages();
   enableActions(false);
   
   // Clear Thumbnail List.
@@ -216,8 +216,8 @@ bool KMultiPage::closeURL()
   // Clear Table of Contents
   tableOfContents->clear();
   
-  // Clear Status Bar
-  emit setStatusBarText(TQString::null);
+  // Clear tqStatus Bar
+  emit setStatusBarText(TQString());
 
   return true;
 }
@@ -389,7 +389,7 @@ void KMultiPage::generateDocumentWidgets(const PageNumber& _startPage)
 
   // Find out how many widgets are needed, and resize the widgetList accordingly.
   widgetList.setAutoDelete(true);
-  Q_UINT16 oldwidgetListSize = widgetList.size();
+  TQ_UINT16 oldwidgetListSize = widgetList.size();
   if (numberOfPages() == 0)
     widgetList.resize(0);
   else
@@ -406,7 +406,7 @@ void KMultiPage::generateDocumentWidgets(const PageNumber& _startPage)
         // Calculate the number of the first page in the tableau.
         tableauStartPage = startPage - ((startPage - 1) % visiblePages);
         // We cannot have more widgets then pages in the document.
-        visiblePages = QMIN(visiblePages, numberOfPages() - tableauStartPage + 1);
+        visiblePages = TQMIN(visiblePages, numberOfPages() - tableauStartPage + 1);
         if (widgetList.size() != visiblePages)
           widgetList.resize(visiblePages);
         break;
@@ -428,7 +428,7 @@ void KMultiPage::generateDocumentWidgets(const PageNumber& _startPage)
   // Allocate DocumentWidget structures so that all entries of
   // widgetList point to a valid DocumentWidget.
   DocumentWidget *documentWidget;
-  for(Q_UINT16 i=0; i<widgetList.size(); i++) {
+  for(TQ_UINT16 i=0; i<widgetList.size(); i++) {
     documentWidget = widgetList[i];
     if (documentWidget == 0) {
       documentWidget = createDocumentWidget();
@@ -456,7 +456,7 @@ void KMultiPage::generateDocumentWidgets(const PageNumber& _startPage)
   } else {
     // In all other modes, the widgets will be numbered continuously,
     // starting from firstShownPage.
-    for(Q_UINT16 i=0; i<widgetList.size(); i++) {
+    for(TQ_UINT16 i=0; i<widgetList.size(); i++) {
       documentWidget = widgetList[i];
       if (documentWidget != 0) // Paranoia safety check
       {
@@ -536,13 +536,13 @@ bool KMultiPage::gotoPage(const PageNumber& page, int y, bool isLink)
           if (pageWidget != 0)
             pageWidget->setPageNumber(tableauStartPage + i);
         }
-        scrollView()->layoutPages();
+        scrollView()->tqlayoutPages();
       }
     }
     // move scrollview to "page".
     // Make the widget pageWidget visible in the scrollview. Somehow this
     // doesn't seem to trigger the signal contentsMoved in the
-    // QScrollview, so that we better call setCurrentPage() ourselves.
+    // TQScrollview, so that we better call setCurrentPage() ourselves.
     pageWidget = (DocumentWidget*)(widgetList[page % visiblePages]);
 
     scrollView()->moveViewportToWidget(pageWidget, y);
@@ -575,7 +575,7 @@ bool KMultiPage::gotoPage(const PageNumber& page, int y, bool isLink)
     }
 
     pageWidget->setPageNumber(page);
-    scrollView()->layoutPages();
+    scrollView()->tqlayoutPages();
     scrollView()->moveViewportToWidget(pageWidget, y);
   } else {
     // There are multiple widgets, then we are either in the
@@ -689,9 +689,9 @@ void KMultiPage::renderModeChanged()
   pageCache->clear();
 
   generateDocumentWidgets();
-  scrollView()->layoutPages();
+  scrollView()->tqlayoutPages();
 
-  for (Q_UINT16 i=0; i < widgetList.size(); i++)
+  for (TQ_UINT16 i=0; i < widgetList.size(); i++)
   {
     DocumentWidget* documentWidget = widgetList[i];
     if (documentWidget == 0)
@@ -700,20 +700,20 @@ void KMultiPage::renderModeChanged()
     documentWidget->update();
   }
 
-  markList()->repaintThumbnails();
+  markList()->tqrepaintThumbnails();
 }
 
 
-void KMultiPage::repaintAllVisibleWidgets()
+void KMultiPage::tqrepaintAllVisibleWidgets()
 {
 #ifdef DEBUG_KMULTIPAGE
-  kdDebug(1233) << "KMultiPage::repaintAllVisibleWidgets()" << endl;
+  kdDebug(1233) << "KMultiPage::tqrepaintAllVisibleWidgets()" << endl;
 #endif
 
   bool everResized = false;
 
   // Go through the list of widgets and resize them, if necessary
-  for(Q_UINT16 i=0; i<widgetList.size(); i++)
+  for(TQ_UINT16 i=0; i<widgetList.size(); i++)
   {
     DocumentWidget* documentWidget = widgetList[i];
     if (documentWidget == 0)
@@ -732,7 +732,7 @@ void KMultiPage::repaintAllVisibleWidgets()
   // re-aligned. This will automatically update all necessary
   // widgets.
   if (everResized == true)
-    scrollView()->layoutPages(true);
+    scrollView()->tqlayoutPages(true);
 }
 
 
@@ -767,7 +767,7 @@ void KMultiPage::print()
     return;
 
   // initialize the printer using the print dialog
-  if ( printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1))) ) {    
+  if ( printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
     // Now do the printing. 
     TQValueList<int> pageList = printer->pageList();
     if (pageList.isEmpty()) 
@@ -790,7 +790,7 @@ void KMultiPage::print()
 
 	// Printing usually takes a while. This is to keep the GUI
 	// updated.
-	qApp->processEvents();
+	tqApp->processEvents();
 	
 	TQPainter *paint = rdpp.getPainter();
 	if (paint != 0) {
@@ -872,13 +872,13 @@ void KMultiPage::setRenderer(DocumentRenderer* _renderer)
   connect(pageCache, TQT_SIGNAL(paperSizeChanged()), this, TQT_SLOT(renderModeChanged()));
   connect(pageCache, TQT_SIGNAL(textSelected(bool)), this, TQT_SIGNAL(textSelected(bool)));
   connect(renderer, TQT_SIGNAL(documentIsChanged()), this, TQT_SLOT(renderModeChanged()));
-  connect(this, TQT_SIGNAL(zoomChanged()), this, TQT_SLOT(repaintAllVisibleWidgets()));
+  connect(this, TQT_SIGNAL(zoomChanged()), this, TQT_SLOT(tqrepaintAllVisibleWidgets()));
 }
 
 
 void KMultiPage::updateWidgetSize(const PageNumber& pageNumber)
 {
-  for(Q_UINT16 i=0; i<widgetList.size(); i++)
+  for(TQ_UINT16 i=0; i<widgetList.size(); i++)
   {
     DocumentWidget* documentWidget = widgetList[i];
     if (documentWidget == 0)
@@ -891,7 +891,7 @@ void KMultiPage::updateWidgetSize(const PageNumber& pageNumber)
       if (pageSize != documentWidget->pageSize())
       {
         documentWidget->setPageSize(pageSize);
-        scrollView()->layoutPages();
+        scrollView()->tqlayoutPages();
       }
       // We have just one widget per page.
       break;
@@ -1041,7 +1041,7 @@ double KMultiPage::calculateFitToWidthZoomValue()
   // of the viewport and scale the contents by a factor x so that it
   // fits the viewport exactly, then, depending on chosen papersize
   // (landscape, etc.), the contents may be higher than the viewport
-  // and the QScrollview may or may not insert a scrollbar at the
+  // and the TQScrollview may or may not insert a scrollbar at the
   // right. If the scrollbar appears, then the usable width of the
   // viewport becomes smaller, and scaling by x does not really fit
   // the (now smaller page) anymore.
@@ -1081,8 +1081,8 @@ double KMultiPage::calculateFitToWidthZoomValue()
 
 void KMultiPage::prevPage()
 {
-  Q_UINT8 cols = scrollView()->getNrColumns();
-  Q_UINT8 rows = scrollView()->getNrRows();
+  TQ_UINT8 cols = scrollView()->getNrColumns();
+  TQ_UINT8 rows = scrollView()->getNrRows();
 
   PageNumber np = 1;
   if (cols*rows < currentPageNumber())
@@ -1096,10 +1096,10 @@ void KMultiPage::prevPage()
 
 void KMultiPage::nextPage()
 {
-  Q_UINT8 cols = scrollView()->getNrColumns();
-  Q_UINT8 rows = scrollView()->getNrRows();
+  TQ_UINT8 cols = scrollView()->getNrColumns();
+  TQ_UINT8 rows = scrollView()->getNrRows();
 
-  PageNumber np = QMIN(currentPageNumber() + cols*rows, (Q_UINT16)numberOfPages());
+  PageNumber np = TQMIN(currentPageNumber() + cols*rows, (TQ_UINT16)numberOfPages());
 
   gotoPage(np);
 }
@@ -1117,7 +1117,7 @@ void KMultiPage::lastPage()
 }
 
 
-void KMultiPage::scroll(Q_INT32 deltaInPixel)
+void KMultiPage::scroll(TQ_INT32 deltaInPixel)
 {
   TQScrollBar* scrollBar = scrollView()->verticalScrollBar();
   if (scrollBar == 0) {
@@ -1393,8 +1393,8 @@ void KMultiPage::findNextText()
   // start. If nothing is selected, we start at the beginning of the
   // current page. Otherwise, start after the selected text.  TODO:
   // Optimize this to get a better 'user feeling'
-  Q_UINT16 startingPage;
-  Q_UINT16 startingTextItem;
+  TQ_UINT16 startingPage;
+  TQ_UINT16 startingTextItem;
 
   TextSelection userSelection = pageCache->selectedText();
   if (userSelection.isEmpty())
@@ -1427,7 +1427,7 @@ void KMultiPage::findNextText()
 
     if (i != 0)
     {
-      setStatusBarText(i18n("Search page %1 of %2").arg(pageNumber).arg(numberOfPages()));
+      setStatusBarText(i18n("Search page %1 of %2").tqarg(pageNumber).tqarg(numberOfPages()));
       kapp->processEvents();
     }
 
@@ -1461,7 +1461,7 @@ void KMultiPage::findNextText()
     if (searchPage->textBoxList.size() == 0)
       continue;
 
-    foundSelection = searchPage->find(searchText, startingTextItem, case_sensitive);
+    foundSelection = searchPage->tqfind(searchText, startingTextItem, case_sensitive);
 
     if (foundSelection.isEmpty())
     {
@@ -1474,12 +1474,12 @@ void KMultiPage::findNextText()
         int answ = KMessageBox::questionYesNo(scrollView(),
                    i18n("<qt>The search string <strong>%1</strong> could not be found by the "
                         "end of the document. Should the search be restarted from the beginning "
-                        "of the document?</qt>").arg(searchText),
+                        "of the document?</qt>").tqarg(searchText),
                    i18n("Text Not Found"), KStdGuiItem::cont(), KStdGuiItem::cancel());
 
         if (answ != KMessageBox::Yes)
         {
-          setStatusBarText(TQString::null);
+          setStatusBarText(TQString());
           searchInProgress = false;
           if (!cachedPage)
             delete searchPage;
@@ -1491,7 +1491,7 @@ void KMultiPage::findNextText()
     {
       pageCache->selectText(foundSelection);
       gotoPage(pageCache->selectedText());
-      setStatusBarText(TQString::null);
+      setStatusBarText(TQString());
       searchInProgress = false;
       if (!cachedPage)
         delete searchPage;
@@ -1499,8 +1499,8 @@ void KMultiPage::findNextText()
     }
   }
 
-  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").arg(searchText));
-  setStatusBarText(TQString::null);
+  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").tqarg(searchText));
+  setStatusBarText(TQString());
   searchInProgress = false;
   if (!cachedPage)
     delete searchPage;
@@ -1569,7 +1569,7 @@ void KMultiPage::findPrevText()
 
     if (i != 0)
     {
-      setStatusBarText(i18n("Search page %1 of %2").arg(pageNumber).arg(numberOfPages()));
+      setStatusBarText(i18n("Search page %1 of %2").tqarg(pageNumber).tqarg(numberOfPages()));
       kapp->processEvents();
     }
 
@@ -1603,7 +1603,7 @@ void KMultiPage::findPrevText()
     if (searchPage->textBoxList.size() == 0)
       continue;
 
-    foundSelection = searchPage->findRev(searchText, startingTextItem, case_sensitive);
+    foundSelection = searchPage->tqfindRev(searchText, startingTextItem, case_sensitive);
 
     if (foundSelection.isEmpty())
     {
@@ -1616,12 +1616,12 @@ void KMultiPage::findPrevText()
         int answ = KMessageBox::questionYesNo(scrollView(),
                   i18n("<qt>The search string <strong>%1</strong> could not be found by the "
                         "beginning of the document. Should the search be restarted from the end "
-                        "of the document?</qt>").arg(searchText),
+                        "of the document?</qt>").tqarg(searchText),
                   i18n("Text Not Found"), KStdGuiItem::cont(), KStdGuiItem::cancel());
 
         if (answ != KMessageBox::Yes)
         {
-          setStatusBarText(TQString::null);
+          setStatusBarText(TQString());
           searchInProgress = false;
           if (!cachedPage)
             delete searchPage;
@@ -1633,7 +1633,7 @@ void KMultiPage::findPrevText()
     {
       pageCache->selectText(foundSelection);
       gotoPage(pageCache->selectedText());
-      setStatusBarText(TQString::null);
+      setStatusBarText(TQString());
       searchInProgress = false;
       if (!cachedPage)
         delete searchPage;
@@ -1641,8 +1641,8 @@ void KMultiPage::findPrevText()
     }
   }
 
-  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").arg(searchText));
-  setStatusBarText(TQString::null);
+  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").tqarg(searchText));
+  setStatusBarText(TQString());
   searchInProgress = false;
   if (!cachedPage)
     delete searchPage;
@@ -1710,8 +1710,8 @@ void KMultiPage::reload()
     pageCache->clear();
     pageCache->deselectText();
     document_history.clear();
-    emit setStatusBarText(i18n("Reloading file %1").arg(m_file));
-    Q_INT32 pg = currentPageNumber();
+    emit setStatusBarText(i18n("Reloading file %1").tqarg(m_file));
+    TQ_INT32 pg = currentPageNumber();
 
     killTimer(timer_id);
     timer_id = -1;
@@ -1728,7 +1728,7 @@ void KMultiPage::reload()
 
     setCurrentPageNumber(pg);
     setFile(r);
-    emit setStatusBarText(TQString::null);
+    emit setStatusBarText(TQString());
   } else {
     if (timer_id == -1)
       timer_id = startTimer(1000);
@@ -1746,7 +1746,7 @@ bool KMultiPage::openFile()
   pageCache->deselectText();
   document_history.clear();
   pageCache->clear();
-  emit setStatusBarText(i18n("Loading file %1").arg(m_file));
+  emit setStatusBarText(i18n("Loading file %1").tqarg(m_file));
 
   bool r = renderer->setFile(m_file, m_url);
 
@@ -1765,13 +1765,13 @@ bool KMultiPage::openFile()
     // Set Table of Contents
     tableOfContents->setContents(renderer->getBookmarks());
   } else
-    m_file = TQString::null;
+    m_file = TQString();
 
   
   setFile(r);
   
   // Clear Statusbar
-  emit setStatusBarText(TQString::null);
+  emit setStatusBarText(TQString());
   return r;
 }
 
@@ -1810,7 +1810,7 @@ void KMultiPage::wheelEvent(TQWheelEvent *e)
     return;
   }
 
-  Q_INT32 pxl = -(e->delta()*sb->lineStep())/60;
+  TQ_INT32 pxl = -(e->delta()*sb->lineStep())/60;
   if (pxl == 0)
   {
     if (e->delta() > 0)
@@ -1887,9 +1887,9 @@ KPrinter *KMultiPage::getPrinter(bool enablePageSizeFeatures)
       } else
 	it++;
       if (endval == val)
-	range +=  TQString("%1").arg(val);
+	range +=  TQString("%1").tqarg(val);
       else
-	range +=  TQString("%1-%2").arg(val).arg(endval);
+	range +=  TQString("%1-%2").tqarg(val).tqarg(endval);
     } while (it != selectedPageNo.end() );
     printer->setOption( "kde-range", range );
   }
@@ -1901,7 +1901,7 @@ void KMultiPage::doExportText()
 {
   // Generate a suggestion for a reasonable file name
   TQString suggestedName = url().filename();
-  suggestedName = suggestedName.left(suggestedName.find(".")) + ".txt";
+  suggestedName = suggestedName.left(suggestedName.tqfind(".")) + ".txt";
 
   TQString fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.txt|Plain Text (Latin 1) (*.txt)"), scrollView(), i18n("Export File As"));
 
@@ -1912,7 +1912,7 @@ void KMultiPage::doExportText()
   if (finfo.exists())
   {
     int r = KMessageBox::warningContinueCancel (scrollView(),
-                i18n("The file %1\nexists. Do you want to overwrite that file?").arg(fileName),
+                i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
                 i18n("Overwrite File"), i18n("Overwrite"));
 
     if (r == KMessageBox::Cancel)
@@ -1933,7 +1933,7 @@ void KMultiPage::doExportText()
   for(unsigned int page = 1; page <= renderer->totalPages(); page++)
   {
     progress.setProgress(page);
-    qApp->processEvents();
+    tqApp->processEvents();
 
     if (progress.wasCancelled())
       break;

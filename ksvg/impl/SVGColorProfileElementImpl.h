@@ -55,7 +55,7 @@ public:
 	unsigned short renderingIntent() const;
 
 	TQImage *correctImage(TQImage *input);
-	QRgb correctPixel(float r, float g, float b);
+	TQRgb correctPixel(float r, float g, float b);
 
 private:
 	bool loadColorProfile();

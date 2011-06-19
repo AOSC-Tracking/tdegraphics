@@ -40,12 +40,13 @@ class MarkListWidget;
 /****** ThumbnailWidget ******/
 
 
-class ThumbnailWidget : public QWidget
+class ThumbnailWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  ThumbnailWidget(MarkListWidget* parent_, const PageNumber& _pageNumber, DocumentPageCache*);
+  ThumbnailWidget(MarkListWidget* tqparent_, const PageNumber& _pageNumber, DocumentPageCache*);
 
 private:
   virtual void paintEvent(TQPaintEvent*);
@@ -61,7 +62,7 @@ private:
 
   DocumentPageCache* pageCache;
 
-  MarkListWidget* parent;
+  MarkListWidget* tqparent;
 
   TQPixmap thumbnail;
 };
@@ -70,9 +71,10 @@ private:
 /****** MarkListWidget ******/
 
 
-class MarkListWidget : public QWidget
+class MarkListWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   MarkListWidget(TQWidget* _parent, MarkList*, const PageNumber& _pageNumber, DocumentPageCache*, bool _showThumbnail = true);
@@ -121,12 +123,13 @@ private:
 /****** MarkList ******/
 
 
-class MarkList: public QScrollView
+class MarkList: public TQScrollView
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-  MarkList(TQWidget* parent = 0, const char* name = 0);
+  MarkList(TQWidget* tqparent = 0, const char* name = 0);
   virtual ~MarkList();
 
   void setPageCache(DocumentPageCache*);
@@ -137,7 +140,7 @@ public:
 
   PageNumber numberOfPages() { return widgetList.count(); }
 
-  virtual TQSize sizeHint() const { return TQSize(); }
+  virtual TQSize tqsizeHint() const { return TQSize(); }
 
 public slots:
   void setNumberOfPages(int numberOfPages, bool showThumbnails = true);
@@ -148,7 +151,7 @@ public slots:
   void clear();
 
   void slotShowThumbnails(bool);
-  void repaintThumbnails();
+  void tqrepaintThumbnails();
 
   void updateWidgetSize(const PageNumber&);
 

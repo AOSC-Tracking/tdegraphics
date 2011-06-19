@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -64,8 +64,8 @@
 #define CNTRY_CZ i18n( "Czech Republic, Slovakia")
 #define CNTRY_GB i18n( "Great Britain, USA" )
 
-KadmosDialog::KadmosDialog( TQWidget *parent, KSpellConfig *spellConfig )
-    :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
+KadmosDialog::KadmosDialog( TQWidget *tqparent, KSpellConfig *spellConfig )
+    :KOCRBase( tqparent, spellConfig, KDialogBase::Tabbed ),
      m_cbNoise(0),
      m_cbAutoscale(0),
      m_haveNorm(false)
@@ -163,7 +163,7 @@ EngineError KadmosDialog::findClassifiers()
         if( name.startsWith( "ttf" ) )
         {
             TQString lang = name.mid(3,2);
-            if( allCountries.contains(lang) )
+            if( allCountries.tqcontains(lang) )
             {
                 TQString lngCountry = locale->twoAlphaToCountryName(lang);
                 if( lngCountry.isEmpty() )
@@ -188,7 +188,7 @@ EngineError KadmosDialog::findClassifiers()
         else if( name.startsWith( "hand" ) )
         {
             TQString lang = name.mid(4,2);
-            if( allCountries.contains(lang) )
+            if( allCountries.tqcontains(lang) )
             {
                 TQString lngCountry = locale->twoAlphaToCountryName(lang);
                 if( lngCountry.isEmpty() )
@@ -271,7 +271,7 @@ EngineError KadmosDialog::setupGui()
     /* continue page setup on the first page */
     TQVBox *page = ocrPage();
 
-    // Horizontal line
+    //Qt::Horizontal line
     (void) new KSeparator( KSeparator::HLine, page);
 
     // FIXME: dynamic classifier reading.
@@ -422,14 +422,14 @@ bool KadmosDialog::getSelClassifier( TQString& path ) const
         if( res && ! fi.exists() )
         {
             kdDebug(28000) << "Classifier file does not exist" << endl;
-            path = i18n("Classifier file %1 does not exist").arg(classifier);
+            path = i18n("Classifier file %1 does not exist").tqarg(classifier);
             res = false;
         }
 
         if( res && ! fi.isReadable() )
         {
             kdDebug(28000) << "Classifier file could not be read" << endl;
-            path = i18n("Classifier file %1 is not readable").arg(classifier);
+            path = i18n("Classifier file %1 is not readable").tqarg(classifier);
             res = false;
         }
 
@@ -461,7 +461,7 @@ TQString KadmosDialog::getSelClassifierName() const
      /* Get the long text from the combo box */
      TQString selLang = m_cbLang->currentText();
      TQString trans;
-     if( fType != "norm" && m_longCountry2short.contains( selLang ))
+     if( fType != "norm" && m_longCountry2short.tqcontains( selLang ))
      {
          TQString langType = m_longCountry2short[selLang];
          trans = fType+langType+".rec";

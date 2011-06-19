@@ -33,7 +33,7 @@ typedef KGenericFactory<KPnmPlugin> PnmFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pnm, PnmFactory("kfile_pnm"))
 
-KPnmPlugin::KPnmPlugin(TQObject *parent, const char *name, const TQStringList &args) : KFilePlugin(parent, name, args) 
+KPnmPlugin::KPnmPlugin(TQObject *tqparent, const char *name, const TQStringList &args) : KFilePlugin(tqparent, name, args) 
 {
 	makeMimeTypeInfo( "image/x-portable-bitmap" );
 	makeMimeTypeInfo( "image/x-portable-greymap" );
@@ -93,7 +93,7 @@ bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 			comments += '\n';
 		}
 		// image size
-		// unfortunately Qt doesn't have some kind of push-back method for 
+		// unfortunately TQt doesn't have some kind of push-back method for 
 		// TQTextStream, so we need to manually decode the first part of the 
 		// image size.
 		if( c >= '0' && c <= '9' ) {

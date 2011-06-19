@@ -42,16 +42,17 @@ class TQLabel;
  *
  * @author Klaas Freitag <freitag@suse.de>
  */
-class KScanSlider : public QFrame
+class KScanSlider : public TQFrame
 {
    Q_OBJECT
-   Q_PROPERTY( int slider_val READ value WRITE slSetSlider )
+  TQ_OBJECT
+   TQ_PROPERTY( int slider_val READ value WRITE slSetSlider )
 
 public:
    /**
     * Create the slider.
     *
-    * @param parent parent widget
+    * @param tqparent tqparent widget
     * @param text is the text describing the the slider value. If the text
     *        contains a '&', a buddy for the slider will be created.
     * @param min minimum slider value
@@ -60,7 +61,7 @@ public:
     *        appears on the left of the slider.
     * @param stdValue the value to which the standard button resets the slider.
     */
-   KScanSlider( TQWidget *parent, const TQString& text,
+   KScanSlider( TQWidget *tqparent, const TQString& text,
 		double min, double max, bool haveStdButt=false,
 		int stdValue=0);
    /**
@@ -101,8 +102,8 @@ private slots:
    void		slSliderChange( int );
 
 private:
-   QSlider	*slider;
-   QLabel	*l1, *numdisp;
+   TQSlider	*slider;
+   TQLabel	*l1, *numdisp;
    TQSpinBox     *m_spin;
    int          m_stdValue;
    TQPushButton  *m_stdButt;
@@ -114,18 +115,19 @@ private:
 /**
  * a entry field with a prefix text for description.
  */
-class KScanEntry : public QFrame
+class KScanEntry : public TQFrame
 {
    Q_OBJECT
-   Q_PROPERTY( TQString text READ text WRITE slSetEntry )
+  TQ_OBJECT
+   TQ_PROPERTY( TQString text READ text WRITE slSetEntry )
 
 public:
    /**
     * create a new entry field prepended by text.
-    * @param parent the parent widget
+    * @param tqparent the tqparent widget
     * @text the prefix text
     */
-   KScanEntry( TQWidget *parent, const TQString& text );
+   KScanEntry( TQWidget *tqparent, const TQString& text );
    // ~KScanEntry();
 
    /**
@@ -167,21 +169,22 @@ private:
 /**
  * a combobox filled with a decriptional text.
  */
-class KScanCombo : public QHBox
+class KScanCombo : public TQHBox
 {
    Q_OBJECT
-   Q_PROPERTY( TQString cbEntry READ currentText WRITE slSetEntry )
+  TQ_OBJECT
+   TQ_PROPERTY( TQString cbEntry READ currentText WRITE slSetEntry )
 
 public:
    /**
     * create a combobox with prepended text.
     *
-    * @param parent parent widget
+    * @param tqparent tqparent widget
     * @param text the text the combobox is prepended by
     * @param list a stringlist with values the list should contain.
     */
-   KScanCombo( TQWidget *parent, const TQString& text, const TQStrList& list );
-   KScanCombo( TQWidget *parent, const TQString& text, const TQStringList& list );
+   KScanCombo( TQWidget *tqparent, const TQString& text, const TQStrList& list );
+   KScanCombo( TQWidget *tqparent, const TQString& text, const TQStringList& list );
    // ~KScanCombo();
 
    /**
@@ -234,8 +237,8 @@ signals:
 
 private:
     void createCombo( const TQString& text );
-   QComboBox	*combo;
-   QStrList	combolist;
+   TQComboBox	*combo;
+   TQStrList	combolist;
 
    class KScanComboPrivate;
    KScanComboPrivate *d;

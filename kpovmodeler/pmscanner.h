@@ -49,13 +49,13 @@ public:
    /**
     * Returns the token constant for the key if found, otherwise -1
     */
-   int operator[] ( const char* key ) const { return find( key ); }
+   int operator[] ( const char* key ) const { return tqfind( key ); }
    /**
     * Returns the token constant for the key if found, otherwise -1
     */
-   int find( const char* key ) const
+   int tqfind( const char* key ) const
    {
-      int* result = TQAsciiDict<int>::find( key );
+      int* result = TQAsciiDict<int>::tqfind( key );
       if( result )
          return *result;
       return -1;
@@ -64,7 +64,7 @@ public:
 
 
 /**
- * Scanner that scans povray tokens out of a QIODevice
+ * Scanner that scans povray tokens out of a TQIODevice
  */
 class PMScanner
 {

@@ -36,13 +36,14 @@
 class kpToolWidgetBrush : public kpToolWidgetBase
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpToolWidgetBrush (TQWidget *parent, const char *name);
+    kpToolWidgetBrush (TQWidget *tqparent, const char *name);
     virtual ~kpToolWidgetBrush ();
 
 private:
-    TQString brushName (int shape, int whichSize);
+    TQString brushName (int tqshape, int whichSize);
     
 public:
     TQPixmap brush () const;

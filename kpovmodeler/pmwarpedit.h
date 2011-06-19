@@ -40,12 +40,13 @@ class TQLabel;
 class PMWarpEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMWarpEdit with parent and name
+    * Creates a PMWarpEdit with tqparent and name
     */
-   PMWarpEdit( TQWidget* parent, const char* name = 0 );
+   PMWarpEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

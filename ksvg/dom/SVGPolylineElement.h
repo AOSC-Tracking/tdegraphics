@@ -47,10 +47,10 @@ namespace KSVG
 /**
  * The <code>polyline</code> element defines a set of connected
  * straight line segments. Typically, <code>polyline</code> elements
- * define open shapes.
+ * define open tqshapes.
  *
  * For more info look here : <a href =
- * "http://www.w3.org/TR/SVG/shapes.html#PolylineElement">9.6 The
+ * "http://www.w3.org/TR/SVG/tqshapes.html#PolylineElement">9.6 The
  * 'polyline' element</a>.
  */
 class SVGPointList;
@@ -81,7 +81,7 @@ public:
 	/**
 	 * Provides access to the current animated contents of the points
 	 * attribute.
-	 * If the given attribute or property is being animated, contains
+	 * If the given attribute or property is being animated, tqcontains
 	 * the current animated value of the attribute or property.
 	 * If the given attribute or property is not currently being
 	 * animated, contains the same value as <code>points</code>'.

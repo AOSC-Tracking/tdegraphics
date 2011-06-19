@@ -304,13 +304,13 @@ PMReservedWordDict::PMReservedWordDict( PMDictMode mode )
          insert( "prism", new int( PRISM_TOK ) );
          insert( "projected_through", new int( PROJECTED_THROUGH_TOK ) );
          insert( "pwr", new int( PWR_TOK ) );
-         insert( "quadratic_spline", new int( QUADRATIC_SPLINE_TOK ) );
-         insert( "quadric", new int( QUADRIC_TOK ) );
-         insert( "quartic", new int( QUARTIC_TOK ) );
-         insert( "quaternion", new int( QUATERNION_TOK ) );
-         insert( "quick_color", new int( QUICK_COLOR_TOK ) );
-         insert( "quick_colour", new int( QUICK_COLOUR_TOK ) );
-         insert( "quilted", new int( QUILTED_TOK ) );
+         insert( "quadratic_spline", new int( TQUADRATIC_SPLINE_TOK ) );
+         insert( "quadric", new int( TQUADRIC_TOK ) );
+         insert( "quartic", new int( TQUARTIC_TOK ) );
+         insert( "quaternion", new int( TQUATERNION_TOK ) );
+         insert( "quick_color", new int( TQUICK_COLOR_TOK ) );
+         insert( "quick_colour", new int( TQUICK_COLOUR_TOK ) );
+         insert( "quilted", new int( TQUILTED_TOK ) );
          insert( "radial", new int( RADIAL_TOK ) );
          insert( "radians", new int( RADIANS_TOK ) );
          insert( "radiosity", new int( RADIOSITY_TOK ) );
@@ -362,7 +362,7 @@ PMReservedWordDict::PMReservedWordDict( PMDictMode mode )
          insert( "spiral2", new int( SPIRAL2_TOK ) );
          insert( "spotlight", new int( SPOTLIGHT_TOK ) );
          insert( "spotted", new int( SPOTTED_TOK ) );
-         insert( "sqr", new int( SQR_TOK ) );
+         insert( "sqr", new int( STQR_TOK ) );
          insert( "sqrt", new int( SQRT_TOK ) );
          insert( "str", new int( STR_TOK ) );
          insert( "strcmp", new int( STRCMP_TOK ) );
@@ -577,10 +577,10 @@ void PMScanner::scanError( int c )
    m_token = SCANNER_ERROR_TOK;
    if( isprint( c ) )
       m_error = i18n( "Unexpected character '%1' after \"%2\"" )
-         .arg( ( char )c ).arg( m_svalue );
+         .tqarg( ( char )c ).tqarg( m_svalue );
    else
       m_error = i18n( "Unexpected character %1 after \"%2\"" )
-         .arg( c, 4, 16 ).arg( m_svalue );
+         .tqarg( c, 4, 16 ).tqarg( m_svalue );
 
 #ifdef PMSCAN_DEBUG
    kdDebug( PMArea ) << "Line " << m_line << ": Error " << m_error << "\n";

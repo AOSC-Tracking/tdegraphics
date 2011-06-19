@@ -73,7 +73,7 @@ TQImage convertImageDepth (const TQImage &image, int depth, bool dither)
 #endif
 
 
-    // Hack around Qt's braindead TQImage::convertDepth(1, ...) (with
+    // Hack around TQt's braindead TQImage::convertDepth(1, ...) (with
     // dithering off) which produces pathetic results with an image that
     // only has 2 colours - sometimes it just gives a completely black
     // result.  Instead, we simply preserve the 2 colours.  One use case
@@ -84,7 +84,7 @@ TQImage convertImageDepth (const TQImage &image, int depth, bool dither)
     #if DEBUG_KP_EFFECT_REDUCE_COLORS
         kdDebug () << "\tinvoking convert-to-depth 1 hack" << endl;
     #endif
-        QRgb color0, color1;
+        TQRgb color0, color1;
         bool color0Valid = false, color1Valid = false;
 
         bool moreThan2Colors = false;
@@ -101,7 +101,7 @@ TQImage convertImageDepth (const TQImage &image, int depth, bool dither)
         {
             for (int x = 0; x < image.width (); x++)
             {
-                QRgb imagePixel = image.pixel (x, y);
+                TQRgb imagePixel = image.pixel (x, y);
 
                 if (color0Valid && imagePixel == color0)
                     monoImage.setPixel (x, y, 0);
@@ -211,7 +211,7 @@ TQString kpEffectReduceColorsCommand::commandName (int depth, int dither) const
     }
     else
     {
-        return TQString::null;
+        return TQString();
     }
 }
 
@@ -240,12 +240,12 @@ void kpEffectReduceColorsCommand::apply (TQPixmap *destPixmapPtr, int depth, boo
 
     // HACK: The above "image.convertDepth()" erases the Alpha Channel
     //       (at least for monochrome).
-    //       tqpixmap.html says "alpha masks on monochrome images are ignored."
+    //       tqpixmap.html says "alpha tqmasks on monochrome images are ignored."
     //
-    //       Put the mask back.
+    //       Put the tqmask back.
     //
-    if (destPixmapPtr->mask ())
-        pixmap.setMask (*destPixmapPtr->mask ());
+    if (destPixmapPtr->tqmask ())
+        pixmap.setMask (*destPixmapPtr->tqmask ());
 
     *destPixmapPtr = pixmap;
 }
@@ -276,9 +276,9 @@ TQPixmap kpEffectReduceColorsCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectReduceColorsWidget::kpEffectReduceColorsWidget (bool actOnSelection,
                                                         kpMainWindow *mainWindow,
-                                                        TQWidget *parent,
+                                                        TQWidget *tqparent,
                                                         const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
 {
     TQVBoxLayout *lay = new TQVBoxLayout (this, marginHint (), spacingHint ());
 

@@ -16,12 +16,13 @@
 
 class SimplePageSize;
 
-class SizePreview : public QWidget
+class SizePreview : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  SizePreview( TQWidget *parent, const char* name=0, WFlags f=0 );
+  SizePreview( TQWidget *tqparent, const char* name=0, WFlags f=0 );
 
 public slots:
   // Sets the size.

@@ -28,8 +28,8 @@
 #include <tqcheckbox.h>
 #include <klocale.h>
 
-PMIsoSurfaceEdit::PMIsoSurfaceEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMIsoSurfaceEdit::PMIsoSurfaceEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -96,7 +96,7 @@ void PMIsoSurfaceEdit::createTopWidgets( )
    hl->addWidget( new TQLabel( i18n( "Values:" ), this ) );
    for( i = 0; i < 3; i++ )
    {
-      hl->addWidget( new TQLabel( TQString( "P%1" ).arg( i ), this ) );
+      hl->addWidget( new TQLabel( TQString( "P%1" ).tqarg( i ), this ) );
       hl->addWidget( m_pEvaluateValue[i] );
    }
 

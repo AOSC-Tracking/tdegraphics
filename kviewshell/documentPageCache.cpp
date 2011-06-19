@@ -119,7 +119,7 @@ bool DocumentPageCache::isPageCached(const PageNumber& pageNumber, const TQSize&
 
   // Check if the page that we are looking for is in the cache.
   // We are not accessing the page, so we don't want it to be moved into the front.
-  RenderedDocumentPagePixmap* page = LRUCache.find(key, false);
+  RenderedDocumentPagePixmap* page = LRUCache.tqfind(key, false);
 
   if (page)
     return true;
@@ -191,7 +191,7 @@ RenderedDocumentPagePixmap* DocumentPageCache::getPage(const PageNumber& pageNr)
 
   // First check if the page that we are looking for is in the cache
   RenderedDocumentPagePixmap* page;
-  page = LRUCache.find(createKey(pageNr));
+  page = LRUCache.tqfind(createKey(pageNr));
 
   if (page)
     return page;
@@ -220,7 +220,7 @@ RenderedDocumentPagePixmap* DocumentPageCache::getPage(const PageNumber& pageNr)
 
       // We always set the cache capacity to be at least n times the cost of the page we want to insert.
       // Where n is the number of pages that can be visible at the same time at very high zoomlevels.
-      // n depends on the layout mode.
+      // n depends on the tqlayout mode.
       // If these pages are not all in the cache, scrolling the view becomes very slow, because for each
       // paint event the pages need to be rerendered.
       // We set n for each viewmode differently so that the user is able to reduce memory consuption by
@@ -237,7 +237,7 @@ RenderedDocumentPagePixmap* DocumentPageCache::getPage(const PageNumber& pageNr)
         default:
           n = 4;
       }
-      LRUCache.setMaxCost(QMAX(page->memory() * n, maxMemory));
+      LRUCache.setMaxCost(TQMAX(page->memory() * n, maxMemory));
 
       if (!LRUCache.insert(createKey(pageNr), page, page->memory()))
       {

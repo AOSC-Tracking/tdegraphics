@@ -34,7 +34,7 @@
 /**
  * TQListBoxItem for @ref PMObject
  */
-class PMListBoxObject : public QListBoxPixmap
+class PMListBoxObject : public TQListBoxPixmap
 {
 public:
    /**
@@ -84,11 +84,12 @@ private:
 class PMObjectSelect : public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
-    * Creates a selection widget with parent and name
+    * Creates a selection widget with tqparent and name
     */
-   PMObjectSelect( TQWidget* parent = 0, const char* name = 0,
+   PMObjectSelect( TQWidget* tqparent = 0, const char* name = 0,
                    bool modal = true );
    /**
     * Deletes the dialog
@@ -112,13 +113,13 @@ public:
     * Only objects above the object link  are listed.
     */
    static int selectObject( PMObject* link, const TQString& t, PMObject* & obj,
-                            TQWidget* parent = 0 );
+                            TQWidget* tqparent = 0 );
    static int selectObject( PMObject* link, const TQStringList& t,
-                            PMObject* & obj, TQWidget* parent = 0 );
+                            PMObject* & obj, TQWidget* tqparent = 0 );
    static int selectDeclare( PMObject* link, const TQString& declareType,
-                             PMObject* & obj, TQWidget* parent = 0 );
+                             PMObject* & obj, TQWidget* tqparent = 0 );
    static int selectDeclare( PMObject* link, const TQStringList& dt,
-                             PMObject* & obj, TQWidget* parent = 0 );
+                             PMObject* & obj, TQWidget* tqparent = 0 );
    
 protected slots:
    void slotHighlighted( TQListBoxItem* lbi );

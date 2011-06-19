@@ -39,12 +39,13 @@ class TQPushButton;
 class PMHeightFieldEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMHeightFieldEdit with parent and name
+    * Creates a PMHeightFieldEdit with tqparent and name
     */
-   PMHeightFieldEdit( TQWidget* parent, const char* name = 0 );
+   PMHeightFieldEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

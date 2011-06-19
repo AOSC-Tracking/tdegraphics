@@ -52,11 +52,11 @@ TQString PMScene::description( ) const
    return i18n( "scene" );
 }
 
-PMMetaObject* PMScene::metaObject( ) const
+PMMetaObject* PMScene::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Scene", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Scene", Base::tqmetaObject( ),
                                         createNewScene );
    }
    return s_pMetaObject;

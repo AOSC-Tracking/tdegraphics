@@ -109,7 +109,7 @@ void KPDFOutputDev::endPage()
         for (int j = 0; j < bh; j++)
 	{
            getBitmap()->getPixel(i, j, pixel);
-           img->setPixel( i, j, qRgb( pixel[0], pixel[1], pixel[2] ) );
+           img->setPixel( i, j, tqRgb( pixel[0], pixel[1], pixel[2] ) );
 	}
     }
     delete [] pixel;
@@ -172,7 +172,7 @@ void KPDFOutputDev::processLink( Link * link, Catalog * catalog )
 }
 
 void KPDFOutputDev::drawImage( GfxState *state, Object *ref, Stream *str,
-    int _width, int _height, GfxImageColorMap *colorMap, int *maskColors, GBool inlineImg )
+    int _width, int _height, GfxImageColorMap *colorMap, int *tqmaskColors, GBool inlineImg )
 {
     if ( m_generateImages )
     {
@@ -207,7 +207,7 @@ void KPDFOutputDev::drawImage( GfxState *state, Object *ref, Stream *str,
             m_rects.push_back( rect );
         }
     }
-    SplashOutputDev::drawImage( state, ref, str, _width, _height, colorMap, maskColors, inlineImg );
+    SplashOutputDev::drawImage( state, ref, str, _width, _height, colorMap, tqmaskColors, inlineImg );
 }
 //END - OutputDev hooked calls
 
@@ -246,7 +246,7 @@ KPDFLink * KPDFOutputDev::generateLink( LinkAction * a )
             {
             LinkGoTo * g = (LinkGoTo *) a;
             // ceate link: no ext file, namedDest, object pointer
-            link = new KPDFLinkGoto( TQString::null, decodeViewport( g->getNamedDest(), g->getDest() ) );
+            link = new KPDFLinkGoto( TQString(), decodeViewport( g->getNamedDest(), g->getDest() ) );
             }
             break;
 

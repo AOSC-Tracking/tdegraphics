@@ -26,8 +26,8 @@
 
 #include "filefinder.h"
 
-FileFinder::FileFinder( TQWidget *parent, const char *name )
-    : KLineEdit( parent, name )
+FileFinder::FileFinder( TQWidget *tqparent, const char *name )
+    : KLineEdit( tqparent, name )
 {
     // make this widget just as large, as the font is + 8 Pixels
     int height = fontMetrics().height() + 8;
@@ -49,7 +49,7 @@ FileFinder::FileFinder( TQWidget *parent, const char *name )
     comp->setReplaceEnv( true );
     setCompletionObject( comp, false );
     setAutoDeleteCompletionObject( true );
-    setFocusPolicy( ClickFocus );
+    setFocusPolicy( TQ_ClickFocus );
 
     KConfig *config = KGlobal::config();
     KConfigGroupSaver cs( config, "GeneralConfiguration" );
@@ -87,7 +87,7 @@ void FileFinder::keyPressEvent( TQKeyEvent *e )
 void FileFinder::hide()
 {
     KLineEdit::hide();
-    parentWidget()->setFocus();
+    tqparentWidget()->setFocus();
 }
 
 void FileFinder::slotAccept( const TQString& dir )

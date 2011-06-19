@@ -31,9 +31,10 @@ namespace KMrmlConfig
     class KCMKMrml : public KCModule
     {
         Q_OBJECT
+  TQ_OBJECT
     
     public:
-        KCMKMrml(TQWidget *parent, const char *name, const TQStringList &);
+        KCMKMrml(TQWidget *tqparent, const char *name, const TQStringList &);
         virtual ~KCMKMrml();
 
         virtual void defaults();

@@ -28,10 +28,11 @@ class KURLLabel;
 class LogWindow : public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     LogWindow( const TQString& caption,
-               TQWidget* parent = 0, const char* name = 0 );
+               TQWidget* tqparent = 0, const char* name = 0 );
 
 public slots:
     void append( const TQString& message );

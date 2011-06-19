@@ -107,7 +107,7 @@ fmin(float a, float b)
 
 
 DjVuPalette::DjVuPalette()
-  : mask(0), hist(0), pmap(0)
+  : tqmask(0), hist(0), pmap(0)
 {
 }
 
@@ -124,7 +124,7 @@ DjVuPalette::operator=(const DjVuPalette &ref)
     {
       delete hist;
       delete pmap;
-      mask = 0;
+      tqmask = 0;
       palette = ref.palette;
       colordata = ref.colordata;
     }
@@ -132,7 +132,7 @@ DjVuPalette::operator=(const DjVuPalette &ref)
 }
 
 DjVuPalette::DjVuPalette(const DjVuPalette &ref)
-  : mask(0), hist(0), pmap(0)
+  : tqmask(0), hist(0), pmap(0)
 {
   this->operator=(ref);
 }
@@ -147,18 +147,18 @@ DjVuPalette::allocate_hist()
   if (! hist)
     {
       hist = new GMap<int,int>;
-      mask = 0;
+      tqmask = 0;
     }
   else
     {
       GMap<int,int> *old = hist;
       hist = new GMap<int,int>;
-      mask = (mask<<1)|(0x010101);
+      tqmask = (tqmask<<1)|(0x010101);
       for (GPosition p = *old; p; ++p)
         {
           int k = old->key(p);
           int w = (*old)[p];
-          (*hist)[k | mask] += w;
+          (*hist)[k | tqmask] += w;
         }
       delete old;
     }
@@ -540,7 +540,7 @@ DjVuPalette::decode(GP<ByteStream> gbs)
   delete pmap;
   hist = 0;
   pmap = 0;
-  mask = 0;
+  tqmask = 0;
   // Code version
   int version = bs.read8();
   if ( (version & 0x7f) != DJVUPALETTEVERSION)

@@ -28,8 +28,8 @@
 #include <kmessagebox.h>
 
 
-PMPhotonsEdit::PMPhotonsEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMPhotonsEdit::PMPhotonsEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -84,7 +84,7 @@ void PMPhotonsEdit::displayObject( PMObject* o )
       bool readOnly =  o->isReadOnly( );
       m_pDisplayedObject = ( PMPhotons* ) o;
 
-      if ( o->parent( ) && ( o->parent( )->isA( "Light" ) ) )
+      if ( o->tqparent( ) && ( o->tqparent( )->isA( "Light" ) ) )
       {
          m_pLayoutWidget->hide( );
          m_pCollect->hide( );

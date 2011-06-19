@@ -43,11 +43,11 @@ PMInteriorTexture::~PMInteriorTexture( )
 {
 }
 
-PMMetaObject* PMInteriorTexture::metaObject( ) const
+PMMetaObject* PMInteriorTexture::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "InteriorTexture", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "InteriorTexture", Base::tqmetaObject( ),
                                         createNewInteriorTexture );
    }
    return s_pMetaObject;
@@ -68,8 +68,8 @@ TQString PMInteriorTexture::description( ) const
    return i18n( "interior texture" );
 }
 
-PMDialogEditBase* PMInteriorTexture::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMInteriorTexture::editWidget( TQWidget* tqparent ) const
 {
-   return new PMInteriorTextureEdit( parent );
+   return new PMInteriorTextureEdit( tqparent );
 }
 

@@ -31,10 +31,11 @@ class TQLabel;
 class fontProgressDialog : public KDialogBase
 { 
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     fontProgressDialog( const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip,
-			TQWidget* parent = 0, const TQString &name = 0, bool progressbar=true );
+			TQWidget* tqparent = 0, const TQString &name = 0, bool progressbar=true );
     ~fontProgressDialog();
     
     /** The number of steps already done is increased, the text received
@@ -43,7 +44,7 @@ public:
     
     /** Used to initialize the progress bar. If the argument proc is
 	non-zero, the associated process will be killed when the "abort"
-	button is pressed. The FontProgress uses a QGuarderPtr
+	button is pressed. The FontProgress uses a TQGuarderPtr
 	internally, so it is save to delete the KProcIO anytime. */
     void setTotalSteps(int, KProcIO *proc=0);
     

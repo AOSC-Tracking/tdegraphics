@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2003, Luís Pedro Coelho
+ * Copyright (C) 2003, Luï¿½s Pedro Coelho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -68,15 +68,15 @@ namespace {
 TQString DisplayOptions::toString( const DisplayOptions& options )
 {
 	return TQString( qformat )
-		.arg( options.page() )
-		.arg( options.magnification() )
-		.arg( options.overrideOrientation() )
-		.arg( options.overridePageMedia().utf8() );
+		.tqarg( options.page() )
+		.tqarg( options.magnification() )
+		.tqarg( options.overrideOrientation() )
+		.tqarg( options.overridePageMedia().utf8().data() );
 }
 
 bool DisplayOptions::fromString( DisplayOptions& out, const TQString& in )
 {
-	TQRegExp regex( TQString::fromLatin1( rformat ) );
+	TQRegExp regex( TQString::tqfromLatin1( rformat ) );
 	if ( regex.search( in ) < 0 ) return false;
 
 	out.reset();

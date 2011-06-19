@@ -43,12 +43,12 @@ kpZoomedThumbnailView::kpZoomedThumbnailView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        TQWidget *parent, const char *name)
+        TQWidget *tqparent, const char *name)
 
     : kpThumbnailView (document, toolToolBar, viewManager,
                        buddyView,
                        scrollableContainer,
-                       parent, name)
+                       tqparent, name)
 {
     // Call to virtual function - this is why the class is sealed
     adjustToEnvironment ();
@@ -97,8 +97,8 @@ void kpZoomedThumbnailView::adjustToEnvironment ()
     }
 
 
-    int hzoom = QMAX (1, width () * 100 / document ()->width ());
-    int vzoom = QMAX (1, height () * 100 / document ()->height ());
+    int hzoom = TQMAX (1, width () * 100 / document ()->width ());
+    int vzoom = TQMAX (1, height () * 100 / document ()->height ());
 
     // keep aspect ratio
     if (hzoom < vzoom)

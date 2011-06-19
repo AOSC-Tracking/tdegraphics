@@ -20,7 +20,7 @@
  * MetaFont fonts. A DVI file referres to a MetaFont font by giving an
  * at-most-8-character name, such as 'cmr10'. The DVI previewer would
  * then locate the associated PK font file (e.g. cmr10.600pk), load
- * it, and retrieve the character shaped.
+ * it, and retrieve the character tqshaped.
  *
  * Today TeX is also used to access Type1 and TrueType fonts, which it
  * was never designed to do. As in the case of MetaFont font, the DVI
@@ -48,7 +48,7 @@
  * a different name and with a different encoding ---the map file
  * (fontMap.h) can probably see to that.
  *
- * Summing up: this class contains 256 glyph names read from an
+ * Summing up: this class tqcontains 256 glyph names read from an
  * encoding file during the construction of this class.
  *
  * @author Stefan Kebekus   <kebekus@kde.org>

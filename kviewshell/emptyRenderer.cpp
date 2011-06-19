@@ -21,8 +21,8 @@
 
 #include "emptyRenderer.h"
 
-EmptyRenderer::EmptyRenderer(TQWidget* parent)
-  : DocumentRenderer(parent)
+EmptyRenderer::EmptyRenderer(TQWidget* tqparent)
+  : DocumentRenderer(tqparent)
 {
 }
 

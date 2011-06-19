@@ -52,16 +52,16 @@ void PMResourceLocator::clearCache( )
 TQString PMResourceLocator::lookUp( const TQString& file )
 {
    if( file.isEmpty( ) )
-      return TQString::null;
+      return TQString();
 
    kdDebug( PMArea ) << "LookUp: " << file << endl;
    
-   TQString* ps = m_cache.find( file );
+   TQString* ps = m_cache.tqfind( file );
    if( ps )
       return *ps;
 
    bool found = false;
-   TQString fullPath = TQString::null;
+   TQString fullPath = TQString();
    
    if( file[0] == '/' )
    {

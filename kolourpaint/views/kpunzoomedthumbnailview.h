@@ -55,6 +55,7 @@ class kpViewScrollableContainer;
 /*sealed*/ class kpUnzoomedThumbnailView : public kpThumbnailView
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     /**
@@ -65,7 +66,7 @@ public:
             kpViewManager *viewManager,
             kpView *buddyView,
             kpViewScrollableContainer *scrollableContainer,
-            TQWidget *parent, const char *name);
+            TQWidget *tqparent, const char *name);
 
     /**
      * Destructs an unzoomed thumbnail view.
@@ -86,7 +87,7 @@ public slots:
      * container will be visible.
      *
      * It tries to maximise the used area of this view.  Unused areas will
-     * be set to the widget background thanks to the mask.
+     * be set to the widget background thanks to the tqmask.
      *
      * Call this if the size of the document changes.
      * Already connected to buddyViewScrollableContainer()'s

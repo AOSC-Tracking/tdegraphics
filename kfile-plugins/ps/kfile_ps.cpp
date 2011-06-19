@@ -30,9 +30,9 @@ typedef KGenericFactory<KPSPlugin> PSFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_ps, PSFactory("kfile_ps"))
 
-KPSPlugin::KPSPlugin(TQObject *parent, const char *name,
+KPSPlugin::KPSPlugin(TQObject *tqparent, const char *name,
                        const TQStringList &preferredItems) : 
-    KFilePlugin( parent, name, preferredItems )
+    KFilePlugin( tqparent, name, preferredItems )
 {
     kdDebug(7034) << "ps plugin\n";
     

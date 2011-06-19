@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>GSSettingsWidget</class>
 <author>Nadeem Hasan &lt;nhasan@kde.org&gt;</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>GSSettingsWidget</cstring>
     </property>
@@ -46,14 +46,14 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>286</width>
                     <height>20</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QGroupBox" row="1" column="0" rowspan="1" colspan="2">
+        <widget class="TQGroupBox" row="1" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -64,7 +64,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -83,7 +83,7 @@
                         <string>Ghostscript is the basic renderer (i.e. the program which draws)</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>mDetectedVersion</cstring>
                     </property>
@@ -91,7 +91,7 @@
                         <string>(detected gs version: %1)</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel2</cstring>
                     </property>
@@ -110,7 +110,7 @@
                         <string>Anti-aliasing makes the result look better, but it makes the display take longer</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel3</cstring>
                     </property>
@@ -139,14 +139,14 @@
     <include location="global" impldecl="in implementation">kdialog.h</include>
     <include location="local" impldecl="in implementation">gssettingswidget.ui.h</include>
 </includes>
-<signals>
+<Q_SIGNALS>
     <signal>configClicked()</signal>
-</signals>
-<slots>
-    <slot specifier="non virtual">setDetectedVersion( QString v )</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
-<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</Q_SIGNALS>
+<Q_SLOTS>
+    <slot specifier="non virtual">setDetectedVersion( TQString v )</slot>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
+<tqlayoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 <includehints>
     <includehint>kpushbutton.h</includehint>
     <includehint>kurlrequester.h</includehint>

@@ -46,6 +46,7 @@ class kpResizeSignallingLabel;
 class kpToolPreviewDialog : public KDialogBase
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum Features
@@ -62,7 +63,7 @@ public:
                          // (in the Dimensions Group Box) e.g. "After Skew:"
                          const TQString &afterActionText,
                          bool actOnSelection,
-                         kpMainWindow *parent,
+                         kpMainWindow *tqparent,
                          const char *name = 0);
     virtual ~kpToolPreviewDialog ();
 
@@ -76,7 +77,7 @@ public:
 protected:
     kpDocument *document () const;
 
-    // All widgets must have mainWidget() as their parent
+    // All widgets must have mainWidget() as their tqparent
     void addCustomWidgetToFront (TQWidget *w);  // see <reserveTopRow> in ctor
     void addCustomWidget (TQWidget *w);
     void addCustomWidgetToBack (TQWidget *w)

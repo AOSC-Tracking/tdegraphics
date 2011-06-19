@@ -81,6 +81,7 @@ does only the minimal initialization required.
 class FaxMultiPage : public KMultiPage
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   /** Constructor
@@ -89,7 +90,7 @@ public:
   kmultipage. Please have a look at the constructor's source code to
   see how to adjust this for your implementation.
   */
-  FaxMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+  FaxMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
 		   const char *name, const TQStringList& args = TQStringList());
   
   /** Destructor

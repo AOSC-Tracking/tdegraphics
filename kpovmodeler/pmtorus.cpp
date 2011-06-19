@@ -74,11 +74,11 @@ TQString PMTorus::description( ) const
    return i18n( "torus" );
 }
 
-PMMetaObject* PMTorus::metaObject( ) const
+PMMetaObject* PMTorus::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Torus", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Torus", Base::tqmetaObject( ),
                                         createNewTorus );
       s_pMetaObject->addProperty(
          new PMTorusProperty( "minorRadius", &PMTorus::setMinorRadius,
@@ -110,10 +110,10 @@ void PMTorus::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMTorus::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMTorus::editWidget( TQWidget* tqparent ) const
 {
 
- return new PMTorusEdit( parent );
+ return new PMTorusEdit( tqparent );
 }
 
 void PMTorus::restoreMemento( PMMemento* s )

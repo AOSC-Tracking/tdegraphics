@@ -55,7 +55,7 @@ public:
    virtual TQString pixmap( ) const;
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -69,7 +69,7 @@ public:
    /**
     * Returns a new @ref PMDeclareEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
    /**
     * Returns the id of the declare
     */

@@ -54,6 +54,7 @@ class kpToolWidgetSpraycanSize;
 class kpToolToolBar : public KToolBar
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, int colsOrRows = 2, const char *name = 0);

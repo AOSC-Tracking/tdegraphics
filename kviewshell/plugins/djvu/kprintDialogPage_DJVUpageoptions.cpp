@@ -28,8 +28,8 @@
 
 #include "kprintDialogPage_DJVUpageoptions.h"
 
-KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *parent, const char *name )
-  : KPrintDialogPage( parent, name )
+KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *tqparent, const char *name )
+  : KPrintDialogPage( tqparent, name )
 {
   setTitle( i18n("Page Size & Placement") );
 
@@ -40,7 +40,7 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *pa
 
   kprintDialogPage_pageoptions_baseLayout = new TQVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout");
   if (kprintDialogPage_pageoptions_baseLayout == 0) {
-    kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create layout" << endl;
+    kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create tqlayout" << endl;
     return;
   }
 
@@ -70,7 +70,7 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *pa
 
   kprintDialogPage_pageoptions_baseLayout->addStretch();
 
-  resize( TQSize(319, 166).expandedTo(minimumSizeHint()) );
+  resize( TQSize(319, 166).expandedTo(tqminimumSizeHint()) );
   clearWState( WState_Polished );
 }
 

@@ -46,8 +46,8 @@ TQString PMFormulaLabel::s_digit[10] =
 
 TQString PMFormulaLabel::s_nullString = TQString( "= 0" );
 
-PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    m_exponents[0] = exp.exponent( 0 );
    m_exponents[1] = exp.exponent( 1 );
@@ -56,8 +56,8 @@ PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* parent,
    calculateSizeHint( );
 }
 
-PMFormulaLabel::PMFormulaLabel( int x, int y, int z, TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMFormulaLabel::PMFormulaLabel( int x, int y, int z, TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    m_exponents[0] = x;
    m_exponents[1] = y;
@@ -78,13 +78,13 @@ void PMFormulaLabel::drawContents( TQPainter* p )
    
    int sum = m_exponents[0] + m_exponents[1] + m_exponents[2];
    if( sum == 0 )
-      p->drawText( cr, Qt::AlignVCenter | Qt::AlignLeft, s_nullString );
+      p->drawText( cr, TQt::AlignVCenter | TQt::AlignLeft, s_nullString );
    else
    {
       // draw dot
       int center = ( cr.top( ) + cr.bottom( ) ) / 2;
       int rad = c_dotSize / 2;
-      p->setBrush( TQBrush( colorGroup( ).text( ) ) );
+      p->setBrush( TQBrush( tqcolorGroup( ).text( ) ) );
       p->drawEllipse( cr.left( ), center - rad, c_dotSize, c_dotSize );
       cr.setLeft( cr.left( ) + c_dotSize + c_indent );
 
@@ -98,13 +98,13 @@ void PMFormulaLabel::drawContents( TQPainter* p )
          
          if( m_exponents[i] > 0 )
          {
-            p->drawText( cr, Qt::AlignVCenter | Qt::AlignLeft, s_xyz[i] );
+            p->drawText( cr, TQt::AlignVCenter | TQt::AlignLeft, s_xyz[i] );
             cr.setLeft( cr.left( ) + m1.width( s_xyz[i] ) );
             if( m_exponents[i] > 1 )
             {
                cr.setBottom( cr.bottom( ) - up );
                p->setFont( f2 );
-               p->drawText( cr, Qt::AlignVCenter | Qt::AlignLeft,
+               p->drawText( cr, TQt::AlignVCenter | TQt::AlignLeft,
                             s_digit[m_exponents[i]] );
                cr.setLeft( cr.left( ) + m2.width( s_digit[m_exponents[i]] ) + 1 );
                cr.setBottom( cr.bottom( ) + up );
@@ -131,7 +131,7 @@ void PMFormulaLabel::calculateSizeHint( )
 
    TQFontMetrics m1( font( ) );
    if( sum == 0 )
-      m_sizeHint.setWidth( m1.width( s_nullString ) );
+      m_tqsizeHint.setWidth( m1.width( s_nullString ) );
    else
    {
       TQFontMetrics m2( exponentFont( ) );
@@ -146,19 +146,19 @@ void PMFormulaLabel::calculateSizeHint( )
                width += m2.width( s_digit[m_exponents[i]] ) + 1;
          }
       }
-      m_sizeHint.setWidth( width );
+      m_tqsizeHint.setWidth( width );
    }
-   m_sizeHint.setHeight( m1.height( ) + 7 );
+   m_tqsizeHint.setHeight( m1.height( ) + 7 );
 }
 
-TQSize PMFormulaLabel::sizeHint( ) const
+TQSize PMFormulaLabel::tqsizeHint( ) const
 {
-   return minimumSizeHint( );
+   return tqminimumSizeHint( );
 }
 
-TQSize PMFormulaLabel::minimumSizeHint( ) const
+TQSize PMFormulaLabel::tqminimumSizeHint( ) const
 {
-   return m_sizeHint;
+   return m_tqsizeHint;
 }
 
 void PMFormulaLabel::fontChange( const TQFont& )

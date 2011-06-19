@@ -34,6 +34,7 @@ public:
 class ghostscript_interface  : public TQObject 
 {
  Q_OBJECT
+  TQ_OBJECT
 
 public:
   ghostscript_interface();
@@ -62,7 +63,7 @@ public:
   void     graphics(const PageNumber& page, double dpi, long magnification, TQPainter* paint);
 
   // Returns the background color for a certain page. If no color was
-  // set, Qt::white is returned.
+  // set, TQt::white is returned.
   TQColor   getBackgroundColor(const PageNumber& page) const;
 
   TQString  *PostScriptHeaderString;

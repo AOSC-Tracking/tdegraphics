@@ -55,9 +55,9 @@ TQPixmap* waitIcon = 0;
 /****** ThumbnailWidget ******/
 
 ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pageNumber, DocumentPageCache* _pageCache)
-  : TQWidget(_parent), pageNumber(_pageNumber), pageCache(_pageCache), parent(_parent)
+  : TQWidget(_parent), pageNumber(_pageNumber), pageCache(_pageCache), tqparent(_parent)
 {
-  setBackgroundMode(Qt::NoBackground);
+  setBackgroundMode(TQt::NoBackground);
 
   needsUpdating = true;
 
@@ -69,11 +69,11 @@ ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pag
 
 void ThumbnailWidget::paintEvent(TQPaintEvent* e)
 {
-  // Only repaint if the widget is really visible. We need to check this because Qt
+  // Only tqrepaint if the widget is really visible. We need to check this because TQt
   // sends paintEvents to all widgets that have ever been visible in the Scrollview
   // whenever the ScrollView is resized. This also increases the percieved performance
   // only thumbnails that are really needed are rendered.
-  if (!parent->isVisible())
+  if (!tqparent->isVisible())
   {
     //kdDebug() << "Abort Thumbnail drawing for page " << pageNumber << endl;
     return;
@@ -83,9 +83,9 @@ void ThumbnailWidget::paintEvent(TQPaintEvent* e)
   p.setClipRect(e->rect());
 
   // Paint a black border around the widget
-  p.setRasterOp(Qt::CopyROP);
+  p.setRasterOp(TQt::CopyROP);
   p.setBrush(NoBrush);
-  p.setPen(Qt::black);
+  p.setPen(TQt::black);
   p.drawRect(rect());
 
   // Remove 1 pixel from all sides of the rectangle, to eliminate overdraw with
@@ -99,7 +99,7 @@ void ThumbnailWidget::paintEvent(TQPaintEvent* e)
     if (KVSPrefs::changeColors() && KVSPrefs::renderMode() == KVSPrefs::EnumRenderMode::Paper)
       p.fillRect(thumbRect, KVSPrefs::paperColor());
     else
-      p.fillRect(thumbRect, Qt::white);
+      p.fillRect(thumbRect, TQt::white);
 
     // Draw busy indicator.
     // Im not really sure if this is a good idea.
@@ -138,7 +138,7 @@ void ThumbnailWidget::resizeEvent(TQResizeEvent*)
 
 void ThumbnailWidget::setThumbnail()
 {
-  if (!parent->isVisible())
+  if (!tqparent->isVisible())
   {
     // We only want to calculate the thumbnail for widgets that are currently visible.
     // When we are fast scrolling thru the document. Many paint events are created, that
@@ -169,23 +169,23 @@ MarkListWidget::MarkListWidget(TQWidget* _parent, MarkList* _markList, const Pag
   : TQWidget(_parent), showThumbnail(_showThumbnail), pageNumber(_pageNumber),
     pageCache(_pageCache), markList(_markList)
 {
-  TQBoxLayout* layout = new TQVBoxLayout(this, margin);
+  TQBoxLayout* tqlayout = new TQVBoxLayout(this, margin);
 
   thumbnailWidget = 0;
   if (showThumbnail)
   {
     thumbnailWidget = new ThumbnailWidget(this, pageNumber, pageCache);
-    layout->addWidget(thumbnailWidget, 1, Qt::AlignTop);
+    tqlayout->addWidget(thumbnailWidget, 1, TQt::AlignTop);
   }
 
-  TQBoxLayout* bottomLayout = new TQHBoxLayout(layout);
+  TQBoxLayout* bottomLayout = new TQHBoxLayout(tqlayout);
 
-  checkBox = new TQCheckBox(TQString::null, this );
-  checkBox->setFocusPolicy(TQWidget::NoFocus);
+  checkBox = new TQCheckBox(TQString(), this );
+  checkBox->setFocusPolicy(TQ_NoFocus);
   TQToolTip::add(checkBox, i18n("Select for printing"));
-  bottomLayout->addWidget(checkBox, 0, Qt::AlignAuto);
+  bottomLayout->addWidget(checkBox, 0, TQt::AlignAuto);
 
-  pageLabel = new TQLabel(TQString("%1").arg(pageNumber), this);
+  pageLabel = new TQLabel(TQString("%1").tqarg(pageNumber), this);
   bottomLayout->addWidget(pageLabel, 1);
 
   _backgroundColor = KGlobalSettings::baseColor();
@@ -217,18 +217,18 @@ void MarkListWidget::setChecked( bool checked )
 void MarkListWidget::setSelected( bool selected )
 {
     if (selected)
-      setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
+      setPaletteBackgroundColor( TQApplication::tqpalette().active().highlight() );
     else
       setPaletteBackgroundColor( _backgroundColor );
 }
 
 int MarkListWidget::setNewWidth(int width)
 {
-  int height = QMAX(checkBox->height(), pageLabel->height()) + 2*margin;
+  int height = TQMAX(checkBox->height(), pageLabel->height()) + 2*margin;
   if (showThumbnail)
   {
     // Calculate size of Thumbnail
-    int thumbnailWidth = QMIN(width, KVSPrefs::maxThumbnailWidth());
+    int thumbnailWidth = TQMIN(width, KVSPrefs::maxThumbnailWidth());
     int thumbnailHeight = (int)((thumbnailWidth - 2*margin - 2) / pageCache->sizeOfPage(pageNumber).aspectRatio() + 0.5) + 2;
 
     // Resize Thumbnail if necessary
@@ -258,11 +258,11 @@ bool MarkListWidget::isVisible()
 void MarkListWidget::mousePressEvent(TQMouseEvent* e)
 {
   // Select Page
-  if (e->button() == LeftButton)
+  if (e->button() == Qt::LeftButton)
   {
     emit selected(pageNumber);
   }
-  else if (e->button() == RightButton)
+  else if (e->button() == Qt::RightButton)
   {
     emit showPopupMenu(pageNumber, e->globalPos());
   }
@@ -272,21 +272,21 @@ void MarkListWidget::mousePressEvent(TQMouseEvent* e)
 /****** MarkList ******/
 
 
-MarkList::MarkList(TQWidget* parent, const char* name)
-  : TQScrollView(parent, name), clickedThumbnail(0), showThumbnails(true), contextMenu(0)
+MarkList::MarkList(TQWidget* tqparent, const char* name)
+  : TQScrollView(tqparent, name), clickedThumbnail(0), showThumbnails(true), contextMenu(0)
 {
   currentPage = PageNumber::invalidPage;
   widgetList.setAutoDelete(true);
-  setFocusPolicy( TQWidget::StrongFocus );
-  //viewport()->setFocusPolicy( TQWidget::WheelFocus );
+  setFocusPolicy( TQ_StrongFocus );
+  //viewport()->setFocusPolicy( TQ_WheelFocus );
   setResizePolicy(TQScrollView::Manual);
 
   setVScrollBarMode(TQScrollView::AlwaysOn);
   setHScrollBarMode(TQScrollView::AlwaysOff);
 
-  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
+  tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
 
-  viewport()->setBackgroundMode(Qt::PaletteBase);
+  viewport()->setBackgroundMode(TQt::PaletteBase);
   enableClipper(true);
 }
 
@@ -502,7 +502,7 @@ void MarkList::updateWidgetSize(const PageNumber& pageNumber)
 
 void MarkList::mousePressEvent(TQMouseEvent* e)
 {
-  if (e->button() == RightButton)
+  if (e->button() == Qt::RightButton)
   {
     // We call showPopupMenu with an invalid pageNumber to indicate that
     // the mouse does not point at a thumbnailWidget.
@@ -542,7 +542,7 @@ void MarkList::slotShowThumbnails(bool show)
 }
 
 
-void MarkList::repaintThumbnails()
+void MarkList::tqrepaintThumbnails()
 {
   bool show = showThumbnails;
   int numOfPages = widgetList.count();

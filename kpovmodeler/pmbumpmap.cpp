@@ -200,11 +200,11 @@ void PMBumpMap::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBumpMap::metaObject( ) const
+PMMetaObject* PMBumpMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BumpMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BumpMap", Base::tqmetaObject( ),
                                         createNewBumpMap );
 
       PMBitmapTypeProperty* bp = new PMBitmapTypeProperty(
@@ -336,9 +336,9 @@ void PMBumpMap::setBumpSize( double c )
    }
 }
 
-PMDialogEditBase* PMBumpMap::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMBumpMap::editWidget( TQWidget* tqparent ) const
 {
-   return new PMBumpMapEdit( parent );
+   return new PMBumpMapEdit( tqparent );
 }
 
 void PMBumpMap::restoreMemento( PMMemento* s )

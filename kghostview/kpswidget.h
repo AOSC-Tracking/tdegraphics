@@ -43,12 +43,13 @@ class MessagesDialog;
  * @ref ghostscript_interface
  */
 
-class KPSWidget : public QWidget
+class KPSWidget : public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    KPSWidget( TQWidget* parent = 0, const char* name = 0 );
+    KPSWidget( TQWidget* tqparent = 0, const char* name = 0 );
     ~KPSWidget();
 
     /**

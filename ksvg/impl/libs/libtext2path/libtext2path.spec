@@ -31,8 +31,8 @@ make -j
 make install-strip DESTDIR=$RPM_BUILD_ROOT
 
 cd 
-find . -type d | sed '1,2d;s,^\.,\%attr(-\,root\,root) \%dir ,' > /%{name}-master.list
-find . -type f -o -type l | sed 's|^\.||' >> $RPM_BUILD_DIR/%{name}-master.list
+tqfind . -type d | sed '1,2d;s,^\.,\%attr(-\,root\,root) \%dir ,' > /%{name}-master.list
+tqfind . -type f -o -type l | sed 's|^\.||' >> $RPM_BUILD_DIR/%{name}-master.list
 
 %clean
 rm -rf $RPM_BUILD_DIR/%{name}-%{version}

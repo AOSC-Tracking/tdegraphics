@@ -36,7 +36,7 @@ FaxRenderer::FaxRenderer(TQWidget* par)
   : DocumentRenderer(par)
 {
 #ifdef KF_DEBUG
-  kdError() << "FaxRenderer( parent=" << par << " )" << endl;
+  kdError() << "FaxRenderer( tqparent=" << par << " )" << endl;
 #endif
 }
 
@@ -96,8 +96,8 @@ void FaxRenderer::drawPage(double resolution, RenderedDocumentPage* page)
       // problems occur if KViewShell required a shrunken version of
       // the page, e.g. to print multiple pages on one sheet of paper.
 
-      int width_in_pixel = qRound(resolution * psize.width().getLength_in_inch());
-      int height_in_pixel = qRound(resolution * psize.height().getLength_in_inch());
+      int width_in_pixel = tqRound(resolution * psize.width().getLength_in_inch());
+      int height_in_pixel = tqRound(resolution * psize.height().getLength_in_inch());
 
       img = img.smoothScale(width_in_pixel, height_in_pixel);
       foreGroundPaint->drawImage(0, 0, img);
@@ -135,8 +135,8 @@ bool FaxRenderer::setFile(const TQString &fname, const KURL &)
   TQFileInfo fi(fname);
   TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
-    KMessageBox::error( parentWidget,
-			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").arg(filename),
+    KMessageBox::error( tqparentWidget,
+			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").tqarg(filename),
 			i18n("File Error"));
     // the return value 'false' indicates that this operation was not successful.
     mutex.unlock();
@@ -156,12 +156,12 @@ bool FaxRenderer::setFile(const TQString &fname, const KURL &)
     // leaving an error message in fax.errorString(). We try to handle
     // this case gracefully.
     if (fax.errorString().isEmpty())
-      KMessageBox::error( parentWidget,
-			  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").arg(filename),
+      KMessageBox::error( tqparentWidget,
+			  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
 			  i18n("File Error"));
     else
-      KMessageBox::detailedError( parentWidget,
-				  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").arg(filename),
+      KMessageBox::detailedError( tqparentWidget,
+				  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
 				  fax.errorString(),
 				  i18n("File Error"));
     clear();
@@ -178,7 +178,7 @@ bool FaxRenderer::setFile(const TQString &fname, const KURL &)
   Length w,h;
 
   if (numPages != 0) {
-    for(Q_UINT16 pg=0; pg < numPages; pg++) {
+    for(TQ_UINT16 pg=0; pg < numPages; pg++) {
       TQSize pageSize = fax.page_size(pg);
       TQPoint dpi = fax.page_dpi(pg);
       double dpix = dpi.x();

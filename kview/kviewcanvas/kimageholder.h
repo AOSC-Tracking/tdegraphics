@@ -32,11 +32,12 @@ class TQPoint;
  * @short Image widget
  * @version $Id$
  */
-class KImageHolder : public QWidget
+class KImageHolder : public TQWidget
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
-		KImageHolder( TQWidget *parent = 0, const char * name = 0 );
+		KImageHolder( TQWidget *tqparent = 0, const char * name = 0 );
 
 		virtual ~KImageHolder();
 
@@ -56,7 +57,7 @@ class KImageHolder : public QWidget
 		 */
 		TQRect selection() const;
 
-		TQSize sizeHint() const;
+		TQSize tqsizeHint() const;
 
 		void setDrawRect( const TQRect & rect ) { m_drawRect = rect; }
 		const TQRect & drawRect() const { return m_drawRect; }

@@ -35,16 +35,17 @@ class TQPushButton;
 class TQLabel;
 
 /**
- * View layout configuration dialog page
+ * View tqlayout configuration dialog page
  */
 class PMLayoutSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMLayoutSettings( TQWidget* parent, const char* name = 0 );
+   PMLayoutSettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */
@@ -56,19 +57,19 @@ public:
    
 protected slots:
    /**
-    * Called when the browse add layout button is clicked
+    * Called when the browse add tqlayout button is clicked
     */
    void slotAddLayout( );
    /**
-    * Called when the remove layout button is clicked
+    * Called when the remove tqlayout button is clicked
     */
    void slotRemoveLayout( );
    /**
-    * Called when the selected layout changes
+    * Called when the selected tqlayout changes
     */
    void slotLayoutSelected( int i );
    /**
-    * Called when the layout name changes
+    * Called when the tqlayout name changes
     */
    void slotLayoutNameChanged( const TQString& text );
    /**

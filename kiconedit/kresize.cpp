@@ -28,8 +28,8 @@
 
 #include "kresize.h"
 
-KResizeWidget::KResizeWidget( TQWidget* parent, const char* name, 
-    const TQSize& size ) : TQWidget( parent, name )
+KResizeWidget::KResizeWidget( TQWidget* tqparent, const char* name, 
+    const TQSize& size ) : TQWidget( tqparent, name )
 {
   TQHBoxLayout* genLayout = new TQHBoxLayout( this );
 
@@ -37,18 +37,18 @@ KResizeWidget::KResizeWidget( TQWidget* parent, const char* name,
   group->setColumnLayout( 0, Qt::Horizontal );
   genLayout->addWidget( group );
 
-  TQHBoxLayout* layout = new TQHBoxLayout( group->layout(), 6 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( group->tqlayout(), 6 );
 
   m_width = new KIntSpinBox( 1, 200, 1, 1, 10, group );
   m_width->setValue( size.width() );
-  layout->addWidget( m_width, 1 );
+  tqlayout->addWidget( m_width, 1 );
 
   TQLabel* label = new TQLabel( "X", group );
-  layout->addWidget( label );
+  tqlayout->addWidget( label );
 
   m_height = new KIntSpinBox( 1, 200, 1, 1, 10, group);
   m_height->setValue( size.height() );
-  layout->addWidget( m_height, 1 );
+  tqlayout->addWidget( m_height, 1 );
 
   setMinimumSize( 200, 100 );
 }
@@ -62,9 +62,9 @@ const TQSize KResizeWidget::getSize()
   return TQSize( m_width->value(), m_height->value() );
 }
 
-KResizeDialog::KResizeDialog( TQWidget* parent, const char* name, 
+KResizeDialog::KResizeDialog( TQWidget* tqparent, const char* name, 
     const TQSize size )
-    : KDialogBase( parent, name, true, i18n( "Select Size" ), Ok|Cancel )
+    : KDialogBase( tqparent, name, true, i18n( "Select Size" ), Ok|Cancel )
 {
   m_resize = new KResizeWidget( this, "resize widget", size );
 

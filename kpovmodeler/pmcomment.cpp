@@ -108,11 +108,11 @@ void PMComment::setText( const TQString& text )
    }
 }
 
-PMMetaObject* PMComment::metaObject( ) const
+PMMetaObject* PMComment::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Comment", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Comment", Base::tqmetaObject( ),
                                         createNewComment );
       s_pMetaObject->addProperty(
          new PMCommentProperty( "text", &PMComment::setText, &PMComment::text ) );
@@ -143,9 +143,9 @@ void PMComment::readAttributes( const PMXMLHelper& h )
       m_text = e.toText( ).data( );
 }
 
-PMDialogEditBase* PMComment::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMComment::editWidget( TQWidget* tqparent ) const
 {
-   return new PMCommentEdit( parent );
+   return new PMCommentEdit( tqparent );
 }
 
 void PMComment::restoreMemento( PMMemento* s )

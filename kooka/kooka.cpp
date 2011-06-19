@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 #include "kooka.h"
@@ -96,7 +96,7 @@ Kooka::Kooka( const TQCString& deviceToUse)
 
     changeCaption( i18n( "KDE Scanning" ));
 
-    setAutoSaveSettings(  TQString::fromLatin1("General Options"),
+    setAutoSaveSettings(  TQString::tqfromLatin1("General Options"),
                           true );
 }
 
@@ -125,14 +125,14 @@ void Kooka::startup( void )
 void Kooka::setupActions()
 {
 
-    KStdAction::print(this, TQT_SLOT(filePrint()), actionCollection());
-    KStdAction::quit(this , TQT_SLOT(close()), actionCollection());
+    KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(filePrint()), actionCollection());
+    KStdAction::quit(TQT_TQOBJECT(this) , TQT_SLOT(close()), actionCollection());
 
     KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
-    KStdAction::configureToolbars(this, TQT_SLOT(optionsConfigureToolbars()),
+    KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(optionsConfigureToolbars()),
 				  actionCollection());
-    KStdAction::preferences(this, TQT_SLOT(optionsPreferences()), actionCollection());
+    KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(optionsPreferences()), actionCollection());
 
     m_view->createDockMenu(actionCollection(), this, "settings_show_docks" );
 
@@ -161,7 +161,7 @@ actionCollection());
                       actionCollection(), "scaleOriginal" );
     m_view->connectViewerAction( act );
 
-#ifdef QICONSET_HONOUR_ON_OFF
+#ifdef TQICONSET_HONOUR_ON_OFF
     /* The Toggleaction does not seem to handle the on/off icon from TQIconSet */
     TQIconSet lockSet;
     lockSet.setPixmap(BarIcon("lock")  , TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::On );
@@ -180,68 +180,68 @@ actionCollection());
 
     /* thumbview and gallery actions */
     act = new KAction(i18n("Set Zoom..."), "viewmag", 0,
-		       m_view, TQT_SLOT( slIVShowZoomDialog()),
+		       TQT_TQOBJECT(m_view), TQT_SLOT( slIVShowZoomDialog()),
 		       actionCollection(), "showZoomDialog" );
     m_view->connectViewerAction( act );
 
     (void) new KAction(i18n("Create From Selectio&n"), "crop", CTRL+Key_N,
-		       m_view, TQT_SLOT( slCreateNewImgFromSelection() ),
+		       TQT_TQOBJECT(m_view), TQT_SLOT( slCreateNewImgFromSelection() ),
 		       actionCollection(), "createFromSelection" );
 
     (void) new KAction(i18n("Mirror Image &Vertically"), "mirror-vert", CTRL+Key_V,
-		       this, TQT_SLOT( slMirrorVertical() ),
+		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorVertical() ),
 		       actionCollection(), "mirrorVertical" );
 
-    (void) new KAction(i18n("&Mirror Image Horizontally"), "mirror-horiz", CTRL+Key_M,
-		       this, TQT_SLOT( slMirrorHorizontal() ),
+    (void) new KAction(i18n("&Mirror ImageQt::Horizontally"), "mirror-horiz", CTRL+Key_M,
+		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorHorizontal() ),
 		       actionCollection(), "mirrorHorizontal" );
 
     (void) new KAction(i18n("Mirror Image &Both Directions"), "mirror-both", CTRL+Key_B,
-		       this, TQT_SLOT( slMirrorBoth() ),
+		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorBoth() ),
 		       actionCollection(), "mirrorBoth" );
 
     (void) new KAction(i18n("Open Image in &Graphic Application..."), "fileopen", CTRL+Key_G,
-		       m_view, TQT_SLOT( slOpenCurrInGraphApp() ),
+		       TQT_TQOBJECT(m_view), TQT_SLOT( slOpenCurrInGraphApp() ),
 		       actionCollection(), "openInGraphApp" );
 
     act = new KAction(i18n("&Rotate Image Clockwise"), "rotate_cw", CTRL+Key_R,
-		      this, TQT_SLOT( slRotateClockWise() ),
+		      TQT_TQOBJECT(this), TQT_SLOT( slRotateClockWise() ),
 		       actionCollection(), "rotateClockwise" );
     m_view->connectViewerAction( act );
 
     act = new KAction(i18n("Rotate Image Counter-Clock&wise"), "rotate_ccw", CTRL+Key_W,
-		       this, TQT_SLOT( slRotateCounterClockWise() ),
+		       TQT_TQOBJECT(this), TQT_SLOT( slRotateCounterClockWise() ),
 		       actionCollection(), "rotateCounterClockwise" );
     m_view->connectViewerAction( act );
 
     act = new KAction(i18n("Rotate Image 180 &Degrees"), "rotate", CTRL+Key_D,
-		       this, TQT_SLOT( slRotate180() ),
+		       TQT_TQOBJECT(this), TQT_SLOT( slRotate180() ),
 		       actionCollection(), "upsitedown" );
     m_view->connectViewerAction( act );
 
     /* Gallery actions */
     act = new KAction(i18n("&Create Folder..."), "folder_new", 0,
-		      m_view->gallery(), TQT_SLOT( slotCreateFolder() ),
+		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotCreateFolder() ),
 		       actionCollection(), "foldernew" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Save Image..."), "filesave", 0,
-		      m_view->gallery(), TQT_SLOT( slotExportFile() ),
+		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotExportFile() ),
 		       actionCollection(), "saveImage" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Import Image..."), "inline_image", 0,
-		      m_view->gallery(), TQT_SLOT( slotImportFile() ),
+		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotImportFile() ),
 		       actionCollection(), "importImage" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Delete Image"), "edittrash", 0,
-		      m_view->gallery(), TQT_SLOT( slotDeleteItems() ),
+		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotDeleteItems() ),
 		       actionCollection(), "deleteImage" );
     m_view->connectGalleryAction( act );
 
     act = new KAction(i18n("&Unload Image"), "fileclose", 0,
-		      m_view->gallery(), TQT_SLOT( slotUnloadItems() ),
+		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotUnloadItems() ),
 		       actionCollection(), "unloadImage" );
     m_view->connectGalleryAction( act );
 
@@ -257,11 +257,11 @@ actionCollection());
 #endif
 
     (void) new KAction(i18n("Select Scan Device"), "scanner", 0,
-		       m_view, TQT_SLOT( slSelectDevice()),
+		       TQT_TQOBJECT(m_view), TQT_SLOT( slSelectDevice()),
 		       actionCollection(), "selectsource" );
 
     (void) new KAction( i18n("Enable All Warnings && Messages"), 0,
-			this,  TQT_SLOT(slEnableWarnings()),
+			TQT_TQOBJECT(this),  TQT_SLOT(slEnableWarnings()),
 			actionCollection(), "enable_msgs");
 
 
@@ -308,7 +308,7 @@ void Kooka::dragEnterEvent(TQDragEnterEvent *event)
 void Kooka::dropEvent(TQDropEvent *event)
 {
     // this is a very simplistic implementation of a drop event.  we
-    // will only accept a dropped URL.  the Qt dnd code can do *much*
+    // will only accept a dropped URL.  the TQt dnd code can do *much*
     // much more, so please read the docs there
     KURL::List uri;
 

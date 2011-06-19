@@ -64,9 +64,10 @@ private:
 
 typedef TQValueList<SVGTimer *> SVGTimerList;
 class SVGDocumentImpl;
-class SVGTimeScheduler : public QObject
+class SVGTimeScheduler : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
 	SVGTimeScheduler(SVGDocumentImpl *doc);
 	~SVGTimeScheduler();

@@ -39,9 +39,9 @@
    - PMDockWidget                   - IMPORTANT CLASS: the one and only dockwidget class
    - PMDockManager                  - helper class
    - PMDockMainWindow               - IMPORTANT CLASS: a special KMainWindow that can have dockwidgets
-   - PMDockArea                     - like PMDockMainWindow but inherits just QWidget
+   - PMDockArea                     - like PMDockMainWindow but inherits just TQWidget
 
-   IMPORTANT Note: This file compiles also in Qt-only mode by using the NO_KDE2 precompiler definition!
+   IMPORTANT Note: This file compiles also in TQt-only mode by using the NO_KDE2 precompiler definition!
 */
 
 /*
@@ -106,18 +106,19 @@ class TQToolBar;
  *
  * @author Max Judin (documentation: Falk Brettschneider).
  */
-class PMDockWidgetAbstractHeader : public QFrame
+class PMDockWidgetAbstractHeader : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
 
   /**
    * Constructs this.
    *
-   * @param parent the parent widget (usually a dockwidget)
+   * @param tqparent the tqparent widget (usually a dockwidget)
    * @param name   the object instance name
    */
-  PMDockWidgetAbstractHeader( PMDockWidget* parent, const char* name = 0L );
+  PMDockWidgetAbstractHeader( PMDockWidget* tqparent, const char* name = 0L );
 
   /**
    * Destructs this.
@@ -155,19 +156,20 @@ private:
  *
  * @author Max Judin (documentation: Falk Brettschneider).
  */
-class PMDockWidgetAbstractHeaderDrag : public QFrame
+class PMDockWidgetAbstractHeaderDrag : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
 
   /**
    * Constructs this.
    *
-   * @param parent the parent widget (usually a dockwidget header)
+   * @param tqparent the tqparent widget (usually a dockwidget header)
    * @param dock   the dockwidget where it belongs to
    * @param name   the object instance name
    */
-  PMDockWidgetAbstractHeaderDrag( PMDockWidgetAbstractHeader* parent,
+  PMDockWidgetAbstractHeaderDrag( PMDockWidgetAbstractHeader* tqparent,
                                  PMDockWidget* dock, const char* name = 0L );
 
   /**
@@ -203,16 +205,17 @@ private:
 class PMDockWidgetHeaderDrag : public PMDockWidgetAbstractHeaderDrag
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
 
   /**
    * Constructs this.
    *
-   * @param parent the parent widget (usually a dockwidget header)
+   * @param tqparent the tqparent widget (usually a dockwidget header)
    * @param dock   the dockwidget where it belongs to
    * @param name   the object instance name
    */
-  PMDockWidgetHeaderDrag( PMDockWidgetAbstractHeader* parent, PMDockWidget* dock,
+  PMDockWidgetHeaderDrag( PMDockWidgetAbstractHeader* tqparent, PMDockWidget* dock,
                          const char* name = 0L );
 
   /**
@@ -244,15 +247,16 @@ private:
 class PMDockWidgetHeader : public PMDockWidgetAbstractHeader
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
 
   /**
    * Constructs this.
    *
-   * @param parent the parent widget (usually a dockwidget)
+   * @param tqparent the tqparent widget (usually a dockwidget)
    * @param name   the object instance name
    */
-  PMDockWidgetHeader( PMDockWidget* parent, const char* name = 0L );
+  PMDockWidgetHeader( PMDockWidget* tqparent, const char* name = 0L );
 
   /**
    * Destructs this.
@@ -301,9 +305,9 @@ protected slots:
 protected:
 
   /**
-   * A layout manager for placing the embedded buttons (close and stay)
+   * A tqlayout manager for placing the embedded buttons (close and stay)
    */
-  TQHBoxLayout* layout;
+  TQHBoxLayout* tqlayout;
 
   /**
    * a little button for closing (undocking and hiding) the dockwidget
@@ -346,15 +350,16 @@ private:
  *
  * @author Max Judin (documentation: Falk Brettschneider).
  */
-class EXPORT_DOCKCLASS PMDockTabGroup : public QTabWidget
+class EXPORT_DOCKCLASS PMDockTabGroup : public TQTabWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
   /**
    * Constructs this. It just calls the method of the base class.
    */
-  PMDockTabGroup( TQWidget *parent = 0, const char *name = 0 )
-  :TQTabWidget( parent, name ){};
+  PMDockTabGroup( TQWidget *tqparent = 0, const char *name = 0 )
+  :TQTabWidget( tqparent, name ){};
 
   /**
    * Destructs a PMDockTabGroup.
@@ -373,7 +378,7 @@ private:
  * encapsulate the actual widgets (and member of the dockwidget class
  * set).
  *
- * You just grip the double-lined panel, tear it off its parent
+ * You just grip the double-lined panel, tear it off its tqparent
  * widget, drag it somewhere and let it loose. Depending on the
  * position where you leave it, the dockwidget becomes a toplevel
  * window on the desktop (floating mode) or docks to a new widget
@@ -392,7 +397,7 @@ private:
  * PMDockMainWindow* mainWidget;
  * ...
  * PMDockWidget* dock = 0L;
- * dock = mainWidget->createDockWidget( "Any window caption", nicePixmap, 0L, i18n("window caption")); // 0L==no parent
+ * dock = mainWidget->createDockWidget( "Any window caption", nicePixmap, 0L, i18n("window caption")); // 0L==no tqparent
  * TQWidget* actualWidget = new TQWidget( dock);
  * dock->setWidget( actualWidget); // embed it
  * dock->setToolTipString(i18n("That's me")); // available when appearing as tab page
@@ -404,9 +409,10 @@ private:
  *
  * @author Max Judin (documentation: Falk Brettschneider).
  */
-class EXPORT_DOCKCLASS PMDockWidget: public QWidget
+class EXPORT_DOCKCLASS PMDockWidget: public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 friend class PMDockManager;
 friend class PMDockSplitter;
 friend class PMDockMainWindow;
@@ -423,12 +429,12 @@ public:
    * @param dockManager The responsible manager (dock helper)
    * @param name        Object instance name
    * @param pixmap      An icon (for instance shown when docked centered)
-   * @param parent      Parent widget
+   * @param tqparent      Parent widget
    * @param strCaption  Title of the dockwidget window (shown when toplevel)
    * @param strTabPageLabel The title of the tab page (shown when in tab page mode), if it is "", only the icon will be shown, if it is 0L, the label is set to strCaption
    */
   PMDockWidget( PMDockManager* dockManager, const char* name,
-               const TQPixmap &pixmap, TQWidget* parent = 0L, const TQString& strCaption = 0L,
+               const TQPixmap &pixmap, TQWidget* tqparent = 0L, const TQString& strCaption = 0L,
                const TQString& strTabPageLabel = " ", WFlags f = 0);
 
   /**
@@ -462,8 +468,8 @@ public:
    *
    * If the target is null, it will become a toplevel dockwidget at position pos;
    * Note: Docking to another dockwidget means exactly:
-   * A new parent dockwidget will be created, that replaces the target dockwidget and contains another single helper widget (tab widget or panner)
-   * which contains both dockwidgets, this and the target dockwidget. So consider parent<->child relationships change completely during such actions.
+   * A new tqparent dockwidget will be created, that replaces the target dockwidget and contains another single helper widget (tab widget or panner)
+   * which contains both dockwidgets, this and the target dockwidget. So consider tqparent<->child relationships change completely during such actions.
    *
    * @param  target The dockwidget to dock to
    * @param  dockPos One of the DockPositions this is going to dock to
@@ -471,7 +477,7 @@ public:
    * @param  pos The dock position, mainly of interest for docking to the desktop (as toplevel dockwidget)
    * @param  check Only for internal use;
    * @param  tabIndex The position index of the tab widget (when in tab page mode), -1 (default) means append
-   * @return result The group dockwidget that replaces the target dockwidget and will be grandparent of target and @p this.
+   * @return result The group dockwidget that replaces the target dockwidget and will be grandtqparent of target and @p this.
    */
   PMDockWidget* manualDock( PMDockWidget* target, DockPosition dockPos, int spliPos = 50, TQPoint pos = TQPoint(0,0), bool check = false, int tabIndex = -1);
 
@@ -500,7 +506,7 @@ public:
   int dockSite() const
   {
      // no docking if a floating dock widget
-     if( !parent( ) )
+     if( !tqparent( ) )
         return 0;
      return sDocking;
   }
@@ -544,7 +550,7 @@ public:
    * There are reasons that it's impossible:
    * @li It is a (tab) group.
    * @li It is already invisible ;-)
-   * @li The parent of this is the @ref PMDockMainWindow.
+   * @li The tqparent of this is the @ref PMDockMainWindow.
    * @li It isn't able to dock to another widget.
    */
   bool mayBeHide() const;
@@ -554,7 +560,7 @@ public:
    * There are reasons that it's impossible:
    * @li It is a (tab) group.
    * @li It is already visible ;-)
-   * @li The parent of this is the @p PMDockMainWindow.
+   * @li The tqparent of this is the @p PMDockMainWindow.
    */
   bool mayBeShow() const;
 
@@ -606,9 +612,9 @@ public:
    */
   virtual void show();
   /**
-   * @return the parent widget of this if it inherits class PMDockTabGroup
+   * @return the tqparent widget of this if it inherits class PMDockTabGroup
    */
-  PMDockTabGroup* parentDockTabGroup() const;
+  PMDockTabGroup* tqparentDockTabGroup() const;
 
 #ifndef NO_KDE2
 
@@ -626,7 +632,7 @@ public:
    *
    * @param windowType is type of dock window
    */
-  void setDockWindowTransient (TQWidget *parent, bool transientEnabled);
+  void setDockWindowTransient (TQWidget *tqparent, bool transientEnabled);
 
   // MODIFICATION (lpassos)
   /**
@@ -669,7 +675,7 @@ protected:
   /**
    * Checks some conditions and shows or hides the dockwidget header (drag panel).
    * The header is hidden if:
-   * @li the parent widget is the PMDockMainWindow
+   * @li the tqparent widget is the PMDockMainWindow
    * @li this is a (tab) group dockwidget
    * @li it is not able to dock to another dockwidget
    */
@@ -748,7 +754,7 @@ private:
   void setDockTabName( PMDockTabGroup* g);
 
   /**
-   * Reparent to s or set this to the PMDockMainWindow's view if s is that dockmainwindow.
+   * Retqparent to s or set this to the PMDockMainWindow's view if s is that dockmainwindow.
    * If s is O, simply move the widget.
    *
    * @param s the target widget to reparent to
@@ -767,9 +773,9 @@ private:
   TQWidget* widget;
 
   /**
-   * the layout manager that takes care about proper resizing and moving the embedded widget and the header
+   * the tqlayout manager that takes care about proper resizing and moving the embedded widget and the header
    */
-  TQVBoxLayout* layout;
+  TQVBoxLayout* tqlayout;
 
   /**
    * the responsible dockmanager
@@ -799,7 +805,7 @@ private:
   // GROUP data
   TQString firstName;
   TQString lastName;
-  Orientation splitterOrientation;
+  Qt::Orientation splitterOrientation;
   bool isGroup;
   bool isTabGroup;
 
@@ -821,9 +827,10 @@ private:
  *
  * @author Max Judin (documentation: Falk Brettschneider).
  */
-class EXPORT_DOCKCLASS PMDockManager: public QObject
+class EXPORT_DOCKCLASS PMDockManager: public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 friend class PMDockWidget;
 friend class PMDockMainWindow;
 
@@ -836,7 +843,7 @@ public:
    * @li Some state variables are set
    *
    * @param mainWindow the main window controlled by this
-   * @param name the internal QOject name
+   * @param name the internal TQOject name
    */
   PMDockManager( TQWidget* mainWindow, const char* name = 0L );
 
@@ -848,14 +855,14 @@ public:
 #ifndef NO_KDE2
   /**
    * Saves the current state of the dockmanager and of all controlled widgets.
-   * State means here to save the geometry, visibility, parents, internal object names, orientation,
+   * State means here to save the tqgeometry, visibility, tqparents, internal object names, orientation,
    * separator positions, dockwidget-group information, tab widget states (if it is a tab group) and
    * last but not least some necessary things for recovering the dockmainwindow state.
    *
    * @param c the KDE configuration saver
    * @param group the name of the section in KConfig
    */
-  void writeConfig( KConfig* c = 0L, TQString group = TQString::null );
+  void writeConfig( KConfig* c = 0L, TQString group = TQString() );
 
   /**
    * Like writeConfig but reads the whole stuff in.
@@ -865,7 +872,7 @@ public:
    * (TQObject::name) in the childDock variable of
    * PMDockManager. This list in turn contains all
    * PMDockWidgets (according to the PMDockWidget constructor).
-   * So in principle, in order to restore a window layout,
+   * So in principle, in order to restore a window tqlayout,
    * one must first construct all widgets, put each of them in a
    * PMDockWidget and then call readConfig(). And for all that
    * to work, each widget must have a unique name.
@@ -873,21 +880,21 @@ public:
    * @param c the KDE configuration saver
    * @param group the name of the section in KConfig
    */
-  void readConfig ( KConfig* c = 0L, TQString group = TQString::null );
+  void readConfig ( KConfig* c = 0L, TQString group = TQString() );
 #endif
 
   /**
-   * Saves the current dock window layout into a DOM tree below the given element.
+   * Saves the current dock window tqlayout into a DOM tree below the given element.
    */
   void writeConfig(TQDomElement &base);
   /**
-   * Reads the current dock window layout from a DOM tree below the given element.
+   * Reads the current dock window tqlayout from a DOM tree below the given element.
    */
   void readConfig(TQDomElement &base);
 
   /**
    * Shows all encapsulated widgets of all controlled dockwidgets and shows all dockwidgets which are
-   * parent of a dockwidget tab group.
+   * tqparent of a dockwidget tab group.
    */
   void activate();
 
@@ -982,7 +989,7 @@ signals:
   void replaceDock( PMDockWidget* oldDock, PMDockWidget* newDock );
 
   /**
-   * Signals a dockwidget without parent (toplevel) is shown.
+   * Signals a dockwidget without tqparent (toplevel) is shown.
    */
   void setDockDefaultPos( PMDockWidget* );
 
@@ -1036,7 +1043,7 @@ private:
    * Finds the TQWidget recursively at the position given as parameter
    *
    * @param w a variable where the method puts the TQWidget at that position (instead of a return value)
-   * @param p the parent widget where the recursive search should start from
+   * @param p the tqparent widget where the recursive search should start from
    * @param pos global (desktop) position of the wanted dockwidget
    */
   void findChildDockWidget( TQWidget*& w, const TQWidget* p, const TQPoint& pos );
@@ -1046,7 +1053,7 @@ public:
   /**
    * Finds all dockwidgets which are child, grandchild and so on of p.
    *
-   * @param p the parent widget where the recursive search starts from
+   * @param p the tqparent widget where the recursive search starts from
    * @param l the widget list that contains the search result after the return of this method
    */
   void findChildDockWidget( const TQWidget* p, TQWidgetList& l);
@@ -1108,7 +1115,7 @@ private:
   PMDockWidget::DockPosition curPos;
 
   /**
-   * A QList of all objects that are important for docking.
+   * A TQList of all objects that are important for docking.
    * Some serve as group widgets of dockwidgets, others encapsulate normal widgets.
    */
   TQObjectList* childDock;
@@ -1208,6 +1215,7 @@ private:
 class EXPORT_DOCKCLASS PMDockMainWindow : public KMainWindow, virtual public PartBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
 friend class PMDockManager;
 
@@ -1216,14 +1224,14 @@ public:
   /**
    * Constructs a dockmainwindow. It calls its base class constructor and does additional things concerning
    * to the dock stuff:
-   * @li information about the dock state of this' children gets initialized
+   * @li information about the dock state of this' tqchildren gets initialized
    * @li a dockmanager is created...
    * @li ...and gets initialized
    * @li the main dockwidget is set to 0
    *
    * @param name object name
    */
-  PMDockMainWindow( TQWidget* parent = 0L, const char *name = 0L, WFlags f = WType_TopLevel | WDestructiveClose );
+  PMDockMainWindow( TQWidget* tqparent = 0L, const char *name = 0L, WFlags f = WType_TopLevel | WDestructiveClose );
 
   /**
    * Destructs a dockmainwindow.
@@ -1258,19 +1266,19 @@ public:
    *
    * @param name   TQObject name (default dockwidget caption)
    * @param pixmap window icon (for instance shown when docked as tabwidget entry)
-   * @param parent parent widget for the new dockwidget
+   * @param tqparent tqparent widget for the new dockwidget
    * @param strCaption  window title (shown when toplevel)
    * @param strTabPageLabel title of the tab page (visible when in tab page mode), if it is "", only the icon will be shown; if it is 0L, the label is set to strCaption
    * @return    a pointer to the new created dockwidget
    */
-  PMDockWidget* createDockWidget( const TQString& name, const TQPixmap &pixmap, TQWidget* parent = 0L, const TQString& strCaption = 0L, const TQString& strTabPageLabel = " ");
+  PMDockWidget* createDockWidget( const TQString& name, const TQPixmap &pixmap, TQWidget* tqparent = 0L, const TQString& strCaption = 0L, const TQString& strTabPageLabel = " ");
 
   /**
-   * Saves the current dock window layout into a DOM tree below the given element.
+   * Saves the current dock window tqlayout into a DOM tree below the given element.
    */
   void writeDockConfig(TQDomElement &base);
   /**
-   * Reads the current dock window layout from a DOM tree below the given element.
+   * Reads the current dock window tqlayout from a DOM tree below the given element.
    */
   void readDockConfig(TQDomElement &base);
 
@@ -1281,7 +1289,7 @@ public:
    * @param c     KDE class for saving configurations
    * @param group name of section to write to
    */
-  void writeDockConfig( KConfig* c = 0L, TQString group = TQString::null );
+  void writeDockConfig( KConfig* c = 0L, TQString group = TQString() );
 
   /**
    * It reads the current dock state from the given section of KConfig.
@@ -1289,7 +1297,7 @@ public:
    * @param c     KDE class for saving configurations
    * @param group name of section to read from
    */
-  void readDockConfig ( KConfig* c = 0L, TQString group = TQString::null );
+  void readDockConfig ( KConfig* c = 0L, TQString group = TQString() );
 #endif
 
   /**
@@ -1409,16 +1417,17 @@ private:
 /* Joseph Wenninger jowenn@kde.org Experimental (Just all KMainWindow references changed to TQWidget, otherwise nearly exactly the
 same as PMDockMainWindow*/
 
-class EXPORT_DOCKCLASS PMDockArea : public QWidget
+class EXPORT_DOCKCLASS PMDockArea : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 friend class PMDockManager;
 
 public:
 
 
-  PMDockArea( TQWidget* parent = 0L, const char *name = 0L);
+  PMDockArea( TQWidget* tqparent = 0L, const char *name = 0L);
 
   virtual ~PMDockArea();
 
@@ -1428,14 +1437,14 @@ public:
   void setMainDockWidget( PMDockWidget* );
   PMDockWidget* getMainDockWidget(){ return mainDockWidget; }
 
-  PMDockWidget* createDockWidget( const TQString& name, const TQPixmap &pixmap, TQWidget* parent = 0L, const TQString& strCaption = 0L, const TQString& strTabPageLabel = " ");
+  PMDockWidget* createDockWidget( const TQString& name, const TQPixmap &pixmap, TQWidget* tqparent = 0L, const TQString& strCaption = 0L, const TQString& strTabPageLabel = " ");
 
   void writeDockConfig(TQDomElement &base);
   void readDockConfig(TQDomElement &base);
 
 #ifndef NO_KDE2
-  void writeDockConfig( KConfig* c = 0L, TQString group = TQString::null );
-  void readDockConfig ( KConfig* c = 0L, TQString group = TQString::null );
+  void writeDockConfig( KConfig* c = 0L, TQString group = TQString() );
+  void readDockConfig ( KConfig* c = 0L, TQString group = TQString() );
 #endif
 
 

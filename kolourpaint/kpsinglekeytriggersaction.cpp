@@ -119,8 +119,8 @@ void kpSingleKeyTriggersActionInterface::enableSingleKeyTriggers (bool enable)
 kpSingleKeyTriggersAction::kpSingleKeyTriggersAction (const TQString &text,
                             const KShortcut &shortcut,
                             const TQObject *receiver, const char *slot,
-                            KActionCollection *parent, const char *name)
-    : KAction (text, shortcut, receiver, slot, parent, name)
+                            KActionCollection *tqparent, const char *name)
+    : KAction (text, shortcut, receiver, slot, tqparent, name)
 {
 }
 

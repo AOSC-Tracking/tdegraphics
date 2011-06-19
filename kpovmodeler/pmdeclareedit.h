@@ -38,12 +38,13 @@ class TQListBoxItem;
 class PMDeclareEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMDeclareEdit with parent and name
+    * Creates a PMDeclareEdit with tqparent and name
     */
-   PMDeclareEdit( TQWidget* parent, const char* name = 0 );
+   PMDeclareEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -23,9 +23,9 @@
 
 using namespace KMrml;
 
-Browser::Browser( MrmlPart *parent, const char *name )
-    : KParts::BrowserExtension( parent, name ),
-      m_part( parent )
+Browser::Browser( MrmlPart *tqparent, const char *name )
+    : KParts::BrowserExtension( tqparent, name ),
+      m_part( tqparent )
 {
 
 }

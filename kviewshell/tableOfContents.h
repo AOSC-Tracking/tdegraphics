@@ -32,8 +32,8 @@ class Bookmark;
 class TocItem : public KListViewItem
 {
 public:
-  TocItem(TocItem* parent);
-  TocItem(TQListView* parent);
+  TocItem(TocItem* tqparent);
+  TocItem(TQListView* tqparent);
 
   void setAnchor(const Anchor & _anchor) { anchor = _anchor; }
   Anchor getAnchor() { return anchor; }
@@ -46,9 +46,10 @@ private:
 class TableOfContents : public KListView
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  TableOfContents(TQWidget* parent);
+  TableOfContents(TQWidget* tqparent);
   virtual ~TableOfContents();
 
   void setContents(const TQPtrList<Bookmark>& bookmarks);
@@ -60,7 +61,7 @@ signals:
   void gotoPage(const Anchor&);
 
 private:
-  void addItems(const TQPtrList<Bookmark>& bookmarks, TocItem* parent = 0);
+  void addItems(const TQPtrList<Bookmark>& bookmarks, TocItem* tqparent = 0);
 
 private slots:
   void itemClicked(TQListViewItem*);

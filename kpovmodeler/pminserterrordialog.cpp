@@ -25,13 +25,13 @@
 PMInsertErrorDialog::PMInsertErrorDialog(
    int numObj, int numErrors,
    const TQStringList& details,
-   TQWidget* parent /*= 0*/, const char* name /*= 0*/ )
-      : KDialogBase( parent, name, true, i18n( "Insert Errors" ),
+   TQWidget* tqparent /*= 0*/, const char* name /*= 0*/ )
+      : KDialogBase( tqparent, name, true, i18n( "Insert Errors" ),
                      Help | Ok | User1, Ok, false, i18n( "Details" ) )
 {
    TQVBox* page = makeVBoxMainWidget( );
    new TQLabel( i18n( "%1 of %2 objects couldn't be inserted." )
-               .arg( numErrors ).arg( numObj ), page );
+               .tqarg( numErrors ).tqarg( numObj ), page );
    
    m_pDetailsLabel = new TQLabel( i18n( "Objects not inserted:" ), page );
    m_pDetailsLabel->hide( );

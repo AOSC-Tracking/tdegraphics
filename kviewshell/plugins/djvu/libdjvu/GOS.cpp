@@ -167,9 +167,9 @@ finddirsep(const GUTF8String &fname)
 #if defined(UNIX)
   return fname.rsearch('/',0);
 #elif defined(WIN32) || defined(OS2)
-  return fname.rcontains("\\/",0);
+  return fname.rtqcontains("\\/",0);
 #elif defined(macintosh)
-  return fname.rcontains(":/",0);
+  return fname.rtqcontains(":/",0);
 #else
 #error "Define something here for your operating system"
 #endif  
@@ -272,7 +272,7 @@ GOS::ticks()
   return (unsigned long)clk;
 #elif defined(OS2)
   ULONG clk = 0;
-  DosQuerySysInfo(QSV_MS_COUNT, QSV_MS_COUNT, (PVOID)&clk, sizeof(ULONG));
+  DosQuerySysInfo(TQSV_MS_COUNT, TQSV_MS_COUNT, (PVOID)&clk, sizeof(ULONG));
   return clk;
 #elif defined(macintosh)
   return (unsigned long)((double)TickCount()*16.66);

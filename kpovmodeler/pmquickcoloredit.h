@@ -17,8 +17,8 @@
 **************************************************************************/
 
 
-#ifndef PMQUICKCOLOREDIT_H
-#define PMQUICKCOLOREDIT_H
+#ifndef PMTQUICKCOLOREDIT_H
+#define PMTQUICKCOLOREDIT_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -37,12 +37,13 @@ class PMColorEdit;
 class PMQuickColorEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMQuickColorEdit with parent and name
+    * Creates a PMQuickColorEdit with tqparent and name
     */
-   PMQuickColorEdit( TQWidget* parent, const char* name = 0 );
+   PMQuickColorEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

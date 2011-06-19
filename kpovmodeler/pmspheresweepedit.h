@@ -44,12 +44,13 @@ class TQLabel;
 class PMSphereSweepEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSphereSweepEdit with parent and name
+    * Creates a PMSphereSweepEdit with tqparent and name
     */
-   PMSphereSweepEdit( TQWidget* parent, const char* name = 0 );
+   PMSphereSweepEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

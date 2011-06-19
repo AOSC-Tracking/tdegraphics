@@ -22,8 +22,8 @@
 
 #include "scrollbox.h"
 
-ScrollBox::ScrollBox( TQWidget* parent, const char* name )
-    : TQFrame( parent, name )
+ScrollBox::ScrollBox( TQWidget* tqparent, const char* name )
+    : TQFrame( tqparent, name )
 {
     setFrameStyle( Panel | Sunken );
 }
@@ -31,15 +31,15 @@ ScrollBox::ScrollBox( TQWidget* parent, const char* name )
 void ScrollBox::mousePressEvent( TQMouseEvent* e )
 {
     mouse = e->pos();
-    if( e->button() == RightButton )
+    if( e->button() == Qt::RightButton )
 	emit button3Pressed();
-    if( e->button() == MidButton )
+    if( e->button() == Qt::MidButton )
 	emit button2Pressed();
 }
 
 void ScrollBox::mouseMoveEvent( TQMouseEvent* e )
 {
-    if( e->state() != LeftButton )
+    if( e->state() != Qt::LeftButton )
 	return;
 
     int dx = ( e->pos().x() - mouse.x() ) * pagesize.width()  / width();
@@ -57,8 +57,11 @@ void ScrollBox::mouseMoveEvent( TQMouseEvent* e )
 
 void ScrollBox::resizeEvent( TQResizeEvent * )
 {
-    if ( paletteBackgroundPixmap() )
-	setPaletteBackgroundPixmap( paletteBackgroundPixmap()->convertToImage().smoothScale( size() ) );
+    if ( paletteBackgroundPixmap() ) {
+	TQPixmap pm;
+	pm.convertFromImage(paletteBackgroundPixmap()->convertToImage().smoothScale( size() ));
+	setPaletteBackgroundPixmap( pm );
+    }
 }
 
 void ScrollBox::drawContents( TQPainter* paint )
@@ -77,7 +80,7 @@ void ScrollBox::drawContents( TQPainter* paint )
 
     TQRect c( contentsRect() );
 
-    paint -> setPen( Qt::red );
+    paint -> setPen( TQt::red );
 
     int len = pagesize.width();
     int x = c.x() + c.width() * viewpos.x() / len;
@@ -96,19 +99,19 @@ void ScrollBox::setPageSize( const TQSize& s )
 {
     pagesize = s;
     setFixedHeight( s.height() * width() / s.width() );
-    repaint();
+    tqrepaint();
 }
 
 void ScrollBox::setViewSize( const TQSize& s )
 {
     viewsize = s;
-    repaint();
+    tqrepaint();
 }
 
 void ScrollBox::setViewPos( const TQPoint& pos )
 {
     viewpos = pos;
-    repaint();
+    tqrepaint();
 }
 
 void ScrollBox::setThumbnail( TQPixmap img )
@@ -116,7 +119,9 @@ void ScrollBox::setThumbnail( TQPixmap img )
     // The line below is needed to work around certain "features" of styles such as liquid
     // see bug:61711 for more info (LPC, 20 Aug '03)
     setBackgroundOrigin( TQWidget::WidgetOrigin );
-    setPaletteBackgroundPixmap( img.convertToImage().smoothScale( size() ) );
+    TQPixmap pm;
+    pm.convertFromImage(img.convertToImage().smoothScale( size() ));
+    setPaletteBackgroundPixmap( pm );
 }
 
 void ScrollBox::clear()

@@ -58,11 +58,11 @@ PMNormal::~PMNormal( )
 {
 }
 
-PMMetaObject* PMNormal::metaObject( ) const
+PMMetaObject* PMNormal::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Normal", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Normal", Base::tqmetaObject( ),
                                         createNewNormal );
       s_pMetaObject->addProperty(
          new PMNormProperty( "bumpSize", &PMNormal::setBumpSize, &PMNormal::bumpSize ) );
@@ -109,9 +109,9 @@ void PMNormal::readAttributes( const PMXMLHelper& h )
    m_uvMapping = h.boolAttribute( "uv_mapping", false );
 }
 
-PMDialogEditBase* PMNormal::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMNormal::editWidget( TQWidget* tqparent ) const
 {
-   return new PMNormalEdit( parent );
+   return new PMNormalEdit( tqparent );
 }
 
 void PMNormal::enableBumpSize( bool c )

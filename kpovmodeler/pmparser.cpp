@@ -48,7 +48,7 @@ PMParser::PMParser( PMPart* part, const TQByteArray& array )
    m_pPart = part;
    TQBuffer* buffer = new TQBuffer( array );
    buffer->open( IO_ReadOnly );
-   m_pDevice = buffer;
+   m_pDevice = TQT_TQIODEVICE(buffer);
    m_bDeviceCreated = true;
    
    init( );
@@ -107,7 +107,7 @@ void PMParser::printMessage( const PMPMessage messageNum )
 void PMParser::printMessage( const TQString& type, const TQString& msg )
 {
    if( m_lineNum >= 0 )
-      m_messages += PMMessage( i18n( "Line %1: " ).arg( m_lineNum ) + type + ": " + msg );
+      m_messages += PMMessage( i18n( "Line %1: " ).tqarg( m_lineNum ) + type + ": " + msg );
    else
       m_messages += PMMessage( type + ": " + msg );
 }
@@ -122,7 +122,7 @@ void PMParser::printError( const TQString& msg )
    else if( m_errors == s_maxErrors )
    {
       m_messages += PMMessage( i18n( "Maximum of %1 errors reached." )
-                    .arg( s_maxErrors ) );
+                    .tqarg( s_maxErrors ) );
       m_errors++;
    }
 }
@@ -137,7 +137,7 @@ void PMParser::printWarning( const TQString& msg )
    else if( m_warnings == s_maxWarnings )
    {
       m_messages += PMMessage( i18n( "Maximum of %1 warnings reached." )
-                    .arg( s_maxWarnings ) );
+                    .tqarg( s_maxWarnings ) );
       m_warnings++;
    }
 }
@@ -145,18 +145,18 @@ void PMParser::printWarning( const TQString& msg )
 void PMParser::printExpected( const char c, const char* sValue )
 {
    printError( i18n( "'%1' expected, found token '%2' instead." )
-               .arg( c ).arg( sValue ) );
+               .tqarg( c ).tqarg( sValue ) );
 }
 
 void PMParser::printExpected( const TQString& str, const char* sValue )
 {
    printError( i18n( "'%1' expected, found token '%2' instead." )
-               .arg( str ).arg( sValue ) );
+               .tqarg( str ).tqarg( sValue ) );
 }
 
 void PMParser::printUnexpected( const TQString& str )
 {
-   printError( i18n( "Unexpected token '%1'." ).arg( str ) );
+   printError( i18n( "Unexpected token '%1'." ).tqarg( str ) );
 }
 
 void PMParser::printInfo( const TQString& msg )
@@ -177,18 +177,18 @@ int PMParser::errorFlags( ) const
 }
 
 
-void PMParser::parse( PMObjectList* list, PMObject* parent,
+void PMParser::parse( PMObjectList* list, PMObject* tqparent,
                       PMObject* after )
 {
    m_pResultList = list;
-   m_pTopParent = parent;
+   m_pTopParent = tqparent;
    m_pAfter = after;
 
    // find first item, that can be a declare and can be used as link
    // for parsed objects.
-   if( parent )
+   if( tqparent )
    {
-      if( parent->type( ) == "Scene" )
+      if( tqparent->type( ) == "Scene" )
       {
          if( after )
             m_pNextCheckDeclare = after;
@@ -197,19 +197,19 @@ void PMParser::parse( PMObjectList* list, PMObject* parent,
       }
       else
       {
-         PMObject* obj = parent;
+         PMObject* obj = tqparent;
          bool stop = false;
          
-         // go to parents, until the parent is the scene
+         // go to tqparents, until the tqparent is the scene
          // (declares can only be inserted as top level objects)
          do
          {
-            if( obj->parent( ) )
+            if( obj->tqparent( ) )
             {
-               if( obj->parent( )->type( ) == "Scene" )
+               if( obj->tqparent( )->type( ) == "Scene" )
                   stop = true;
                else
-                  obj = obj->parent( );
+                  obj = obj->tqparent( );
             }
             else
             {
@@ -219,7 +219,7 @@ void PMParser::parse( PMObjectList* list, PMObject* parent,
          }
          while( obj && !stop );
 
-         // now obj is the top level parent of the object, where parsed objects
+         // now obj is the top level tqparent of the object, where parsed objects
          // will be inserted
          if( obj )
             m_pNextCheckDeclare = obj->prevSibling( );
@@ -240,22 +240,22 @@ void PMParser::parse( PMObjectList* list, PMObject* parent,
       setFatalError( );
 }
 
-bool PMParser::insertChild( PMObject* child, PMObject* parent )
+bool PMParser::insertChild( PMObject* child, PMObject* tqparent )
 {
    bool inserted = false;
    
-   if( parent )
+   if( tqparent )
    {
-      if( parent->canInsert( child, parent->lastChild( ) ) )
+      if( tqparent->canInsert( child, tqparent->lastChild( ) ) )
       {
-         parent->appendChild( child );
+         tqparent->appendChild( child );
          inserted = true;
       }
       else
       {
          printError( i18n( "Can't insert %1 into %2." )
-                     .arg( child->description( ) )
-                     .arg( parent->description( ) ) );
+                     .tqarg( child->description( ) )
+                     .tqarg( tqparent->description( ) ) );
       }
    }
    else
@@ -270,8 +270,8 @@ bool PMParser::insertChild( PMObject* child, PMObject* parent )
          else
          {
             printError( i18n( "Can't insert %1 into %2." )
-                        .arg( child->description( ) )
-                        .arg( m_pTopParent->description( ) ) );
+                        .tqarg( child->description( ) )
+                        .tqarg( m_pTopParent->description( ) ) );
          }
       }
       else
@@ -304,9 +304,9 @@ bool PMParser::insertChild( PMObject* child, PMObject* parent )
 void PMParser::checkID( PMDeclare* decl )
 {
    PMSymbolTable* st = m_pPart->symbolTable( );
-   PMSymbol* s = m_pLocalST.find( decl->id( ) );
+   PMSymbol* s = m_pLocalST.tqfind( decl->id( ) );
    if( !s )
-      s = st->find( decl->id( ) );
+      s = st->tqfind( decl->id( ) );
    
    if( s )
    {
@@ -336,7 +336,7 @@ void PMParser::checkID( PMDeclare* decl )
 void PMParser::checkID( const TQString& id, const PMValue& v )
 {
    PMSymbolTable* st = m_pPart->symbolTable( );
-   PMSymbol* s = m_pLocalST.find( id );
+   PMSymbol* s = m_pLocalST.tqfind( id );
    
    if( s )
    {
@@ -374,19 +374,19 @@ PMDeclare* PMParser::checkLink( const TQString& id )
    bool ok = false;
 
    // is object declared?
-   PMSymbol* s = m_pLocalST.find( id );
+   PMSymbol* s = m_pLocalST.tqfind( id );
    if( !s )
-      s = t->find( id );
+      s = t->tqfind( id );
    
    if( !s )
-      printError( i18n( "Undefined object \"%1\"." ).arg( id ) );
+      printError( i18n( "Undefined object \"%1\"." ).tqarg( id ) );
    else if( s->type( ) != PMSymbol::Object )
-      printError( i18n( "Undefined object \"%1\"." ).arg( id ) );
+      printError( i18n( "Undefined object \"%1\"." ).tqarg( id ) );
    else
    {
       // the object is declared
       // is the id already in m_okDeclares
-      bool* lok = m_okDeclares.find( id );
+      bool* lok = m_okDeclares.tqfind( id );
       if( lok )
          ok = true;
       else
@@ -409,7 +409,7 @@ PMDeclare* PMParser::checkLink( const TQString& id )
 
       if( !ok )
          printError( i18n( "Object \"%1\" is undefined at that point." )
-                     .arg( id ) );
+                     .tqarg( id ) );
    }
 
    if( ok )
@@ -425,9 +425,9 @@ PMDeclare* PMParser::checkLink( const TQString& id )
 
 PMSymbol* PMParser::getSymbol( const TQString& id ) const
 {
-   PMSymbol* s = m_pLocalST.find( id );
+   PMSymbol* s = m_pLocalST.tqfind( id );
    if( !s )
-      s = m_pPart->symbolTable( )->find( id );
+      s = m_pPart->symbolTable( )->tqfind( id );
    return s;
 }
 

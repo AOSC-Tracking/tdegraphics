@@ -45,12 +45,13 @@ class TQPushButton;
 class PMBumpMapEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMBumpMapEdit with parent and name
+    * Creates a PMBumpMapEdit with tqparent and name
     */
-   PMBumpMapEdit( TQWidget* parent, const char* name = 0 );
+   PMBumpMapEdit( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displayObject( PMObject* o );
    /** */

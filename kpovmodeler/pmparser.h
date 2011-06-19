@@ -81,13 +81,13 @@ public:
     *
     * Appends all parsed objects to the list.
     *
-    * parent is the object where the parsed objects will be inserted as
-    * children behind the object after. These parameters are used to check
+    * tqparent is the object where the parsed objects will be inserted as
+    * tqchildren behind the object after. These parameters are used to check
     * the consistency of declares and links.
     *
-    * Set parent and after to 0 if and only if a document is parsed/opened.
+    * Set tqparent and after to 0 if and only if a document is parsed/opened.
     */
-   void parse( PMObjectList* list, PMObject* parent,
+   void parse( PMObjectList* list, PMObject* tqparent,
                PMObject* after );
    
    /**
@@ -196,12 +196,12 @@ public:
     */
    PMSymbol* getSymbol( const TQString& id ) const;
    /**
-    * Tries to insert obj as child of parent. If parent is 0, the object
+    * Tries to insert obj as child of tqparent. If tqparent is 0, the object
     * will be inserted in the list of top level objects.
     *
     * Returns true if the object could be inserted.
     */
-   bool insertChild( PMObject* obj, PMObject* parent );
+   bool insertChild( PMObject* obj, PMObject* tqparent );
 
 protected:
    /**
@@ -217,8 +217,8 @@ protected:
     */
    PMPart* m_pPart;
    /**
-    * parent object where the parsed top level objects
-    * will be inserted _later_ (not from the parser) as children
+    * tqparent object where the parsed top level objects
+    * will be inserted _later_ (not from the parser) as tqchildren
     */
    const PMObject* m_pTopParent;
    const PMObject* m_pAfter;
@@ -227,7 +227,7 @@ protected:
     */
    PMObjectList* m_pResultList;
    /**
-    * The QIODevice
+    * The TQIODevice
     */
    TQIODevice* m_pDevice;
    /**

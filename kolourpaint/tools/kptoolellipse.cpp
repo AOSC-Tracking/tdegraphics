@@ -33,7 +33,7 @@ kpToolEllipse::kpToolEllipse (kpMainWindow *mainWindow)
     : kpToolRectangle (Ellipse,
                        i18n ("Ellipse"),
                        i18n ("Draws ellipses and circles"),
-                       Qt::Key_E,
+                       TQt::Key_E,
                        mainWindow, "tool_ellipse")
 {
 }

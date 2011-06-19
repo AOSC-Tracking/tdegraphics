@@ -134,7 +134,7 @@ bool SVGElementImpl::hasEventListener(int id, bool local)
 	if(local)
 		return false;
 
-	// Check every parent element
+	// Check every tqparent element
 	for(DOM::Node node = parentNode(); !node.isNull(); node = node.parentNode())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
@@ -328,7 +328,7 @@ TQDict<DOM::DOMString> &SVGElementImpl::attributes()
 // khtml overrides
 void SVGElementImpl::setAttribute(const DOM::DOMString &name, const DOM::DOMString &value)
 {
-	m_attributes.replace(name.string(), new DOM::DOMString(value));
+	m_attributes.tqreplace(name.string(), new DOM::DOMString(value));
 }
 
 // Changes internal value. This will have no effect on getAttribute().
@@ -368,7 +368,7 @@ DOM::DOMString SVGElementImpl::getAttributeInternal(const DOM::DOMString &name)
 
 bool SVGElementImpl::hasAttribute(const DOM::DOMString &name)
 {
-	return m_attributes.find(name.string()) != 0;
+	return m_attributes.tqfind(name.string()) != 0;
 }
 
 bool SVGElementImpl::hasAttributes()
@@ -496,9 +496,9 @@ void SVGElementImpl::setAttributes(bool deep)
 
 bool SVGElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *mev)
 {
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(this);
-	if(shape)
-		return shape->prepareMouseEvent(p, a, mev);
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(this);
+	if(tqshape)
+		return tqshape->prepareMouseEvent(p, a, mev);
 
 	return false;
 }
@@ -518,7 +518,7 @@ bool SVGElementImpl::dispatchEvent(SVGEventImpl *evt, bool tempEvent)
 {
 	evt->setTarget(this);
 
-	// Find out, where to send to -> collect parent nodes
+	// Find out, where to send to -> collect tqparent nodes
 	TQPtrList<SVGElementImpl> nodeChain;
 
 	for(DOM::Element e = *this; !e.isNull(); e = e.parentNode())

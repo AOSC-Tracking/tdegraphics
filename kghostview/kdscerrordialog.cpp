@@ -46,8 +46,8 @@ KDSCErrorHandler::Response KDSCErrorThreshold::error( const KDSCError& err )
 	return Cancel;
 }
     
-KDSCErrorDialog::KDSCErrorDialog( TQWidget* parent ) :
-    KDialog( parent, "dscerrordialog", true ),
+KDSCErrorDialog::KDSCErrorDialog( TQWidget* tqparent ) :
+    KDialog( tqparent, "dscerrordialog", true ),
     _response( Ok )
 {
     TQVBoxLayout* vbox = new TQVBoxLayout( this, marginHint(), spacingHint() );
@@ -97,7 +97,7 @@ KDSCErrorHandler::Response KDSCErrorDialog::error( const KDSCError& err )
 	break;
     }
 
-    _lineNumberLabel->setText( i18n( "On line %1:" ).arg( err.lineNumber() ) );
+    _lineNumberLabel->setText( i18n( "On line %1:" ).tqarg( err.lineNumber() ) );
     _lineLabel->setText( err.line() );
     _descriptionLabel->setText( description( err.type() ) );
     

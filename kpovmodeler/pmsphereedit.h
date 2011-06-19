@@ -36,12 +36,13 @@ class PMFloatEdit ;
 class PMSphereEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSphereEdit with parent and name
+    * Creates a PMSphereEdit with tqparent and name
     */
-   PMSphereEdit( TQWidget* parent, const char* name = 0 );
+   PMSphereEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

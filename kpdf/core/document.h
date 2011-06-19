@@ -47,9 +47,10 @@ class KURL;
  * For a better understanding of hieracies @see README.internals.png
  * @see DocumentObserver, KPDFPage
  */
-class KPDFDocument : public QObject
+class KPDFDocument : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
     public:
         KPDFDocument( TQWidget *widget );
         ~KPDFDocument();
@@ -184,7 +185,7 @@ class DocumentViewport
  * The Info structure can be filled in by generators to display metadata
  * about the currently opened file.
  */
-class DocumentInfo : public QDomDocument
+class DocumentInfo : public TQDomDocument
 {
     public:
         DocumentInfo();
@@ -216,7 +217,7 @@ class DocumentInfo : public QDomDocument
  * - ViewportName: A 'named reference' to the viewport that must be converted
  *      using getMetaData( "NamedViewport", *viewport_name* )
  */
-class DocumentSynopsis : public QDomDocument
+class DocumentSynopsis : public TQDomDocument
 {
     public:
         DocumentSynopsis();

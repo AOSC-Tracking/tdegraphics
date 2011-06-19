@@ -20,7 +20,7 @@
 
 #include "kfloatspinbox.h"
 
-#if defined(QT_ACCESSIBILITY_SUPPORT)
+#if defined(TQT_ACCESSIBILITY_SUPPORT)
 #include <tqaccessible.h>
 #endif
 
@@ -37,8 +37,8 @@ int pow( int a, int b )
 	return ret;
 }
 
-KFloatSpinBox::KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, TQWidget * parent, const char * name )
-	: TQSpinBox( parent, name )
+KFloatSpinBox::KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, TQWidget * tqparent, const char * name )
+	: TQSpinBox( tqparent, name )
 	, m_doselection( true )
 {
 	setRange( minValue, maxValue, step, precision );
@@ -102,7 +102,7 @@ void KFloatSpinBox::valueChange()
 	{
 		updateDisplay();
 		emit valueChanged( value() );
-#if defined(QT_ACCESSIBILITY_SUPPORT)
+#if defined(TQT_ACCESSIBILITY_SUPPORT)
 		TQAccessible::updateAccessibility( this, 0, TQAccessible::ValueChanged );
 #endif
 	}

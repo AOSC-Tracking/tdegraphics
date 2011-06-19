@@ -80,18 +80,19 @@ class RepaintCommand : public KCommand {
 	}
 	
 	TQString name() const {
-		return "repainted";
+		return "tqrepainted";
 	}
     protected:
 	KIconEditGrid* grid;
 	TQRect area;
 };
 
-class KGridView : public QFrame
+class KGridView : public TQFrame
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-  KGridView( TQImage *image, KCommandHistory* history, TQWidget * parent = 0, const char *name = 0);
+  KGridView( TQImage *image, KCommandHistory* history, TQWidget * tqparent = 0, const char *name = 0);
 
   KRuler *hruler() { return _hruler;}
   KRuler *vruler() { return _vruler;}
@@ -131,8 +132,9 @@ protected:
 class KIconEditGrid : public KColorGrid
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-  KIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * parent = 0, const char *name = 0);
+  KIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * tqparent = 0, const char *name = 0);
   virtual ~KIconEditGrid();
 
   enum DrawTool { Line, Freehand, FloodFill, Spray, Rect, FilledRect, Circle,
@@ -189,7 +191,7 @@ public slots:
   void editSelectAll();
   void editClear();
   void getImage(TQImage *image);
-//#if QT_VERSION <= 140
+//#if [[[TQT_VERSION IS DEPRECATED]]] <= 140
   void editResize();
 //#endif
   void setSize(const TQSize s);

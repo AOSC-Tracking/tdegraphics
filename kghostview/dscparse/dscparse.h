@@ -98,7 +98,7 @@ typedef enum {
   CDSC_FOR		= 207,	/* %%For: */
   CDSC_LANGUAGELEVEL	= 208,	/* %%LanguageLevel: */
   CDSC_BOUNDINGBOX	= 209,	/* %%BoundingBox: */
-  CDSC_ORIENTATION	= 210,	/* %%Orientation: */
+  CDSC_ORIENTATION	= 210,	/* %%Qt::Orientation: */
   CDSC_PAGEORDER	= 211,	/* %%PageOrder: */
   CDSC_DOCUMENTMEDIA	= 212,	/* %%DocumentMedia: */
   CDSC_DOCUMENTPAPERSIZES    = 213,	/* %%DocumentPaperSizes: */
@@ -106,7 +106,7 @@ typedef enum {
   CDSC_DOCUMENTPAPERCOLORS   = 215,	/* %%DocumentPaperColors: */
   CDSC_DOCUMENTPAPERWEIGHTS  = 216,	/* %%DocumentPaperWeights: */
   CDSC_DOCUMENTDATA	     = 217,	/* %%DocumentData: */
-  CDSC_REQUIREMENTS	     = 218,	/* IGNORED %%Requirements: */
+  CDSC_RETQUIREMENTS	     = 218,	/* IGNORED %%Requirements: */
   CDSC_DOCUMENTNEEDEDFONTS   = 219,	/* IGNORED %%DocumentNeededFonts: */
   CDSC_DOCUMENTSUPPLIEDFONTS = 220,	/* IGNORED %%DocumentSuppliedFonts: */
   CDSC_HIRESBOUNDINGBOX	     = 221,	/* %%HiResBoundingBox: */
@@ -119,7 +119,7 @@ typedef enum {
 /* Defaults section */
   CDSC_BEGINDEFAULTS	= 401,	/* %%BeginDefaults */
   CDSC_ENDDEFAULTS	= 402,	/* %%EndDefaults */
-/* also %%PageMedia, %%PageOrientation, %%PageBoundingBox */
+/* also %%PageMedia, %%PageQt::Orientation, %%PageBoundingBox */
 
 /* Prolog section */
   CDSC_BEGINPROLOG	= 501,	/* %%BeginProlog */
@@ -150,16 +150,16 @@ typedef enum {
   CDSC_ENDPAGESETUP	= 703,	/* IGNORED %%EndPageSetup */
   CDSC_PAGEMEDIA	= 704,	/* %%PageMedia: */
 /* also %%PaperColor, %%PaperForm, %%PaperWeight, %%PaperSize */
-  CDSC_PAGEORIENTATION	= 705,	/* %%PageOrientation: */
+  CDSC_PAGEORIENTATION	= 705,	/* %%PageQt::Orientation: */
   CDSC_PAGEBOUNDINGBOX	= 706,	/* %%PageBoundingBox: */
 /* also %%Begin/EndFont, %%Begin/EndFeature */
 /* also %%Begin/EndResource, %%Begin/EndProcSet */
   CDSC_INCLUDEFONT	= 707,	/* IGNORED %%IncludeFont: */
-  CDSC_VIEWINGORIENTATION = 708, /* %%ViewingOrientation: */
+  CDSC_VIEWINGORIENTATION = 708, /* %%ViewingQt::Orientation: */
 
 /* Trailer section */
   CDSC_TRAILER		= 800,	/* %%Trailer */
-/* also %%Pages, %%BoundingBox, %%Orientation, %%PageOrder, %%DocumentMedia */ 
+/* also %%Pages, %%BoundingBox, %%Qt::Orientation, %%PageOrder, %%DocumentMedia */ 
 /* %%Page is recognised as an error */
 /* also %%DocumentNeededFonts, %%DocumentSuppliedFonts */
 
@@ -229,7 +229,7 @@ typedef struct CDSCMEDIA_S {
 #define CDSC_KNOWN_MEDIA 46
 extern const CDSCMEDIA dsc_known_media[CDSC_KNOWN_MEDIA];
 
-typedef struct CDSCCTM_S { /* used for %%ViewingOrientation */
+typedef struct CDSCCTM_S { /* used for %%ViewingQt::Orientation */
     float xx;
     float xy;
     float yx;

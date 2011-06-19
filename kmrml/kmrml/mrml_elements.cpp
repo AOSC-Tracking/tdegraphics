@@ -28,7 +28,7 @@ using namespace KMrml;
 //
 // MrmlElement is currently the baseclass for Algorithm and Collection. Both
 // may have a single child-element <query-paradigm-list>, with a number of
-// <query-paradigm> elements as children.
+// <query-paradigm> elements as tqchildren.
 //
 
 MrmlElement::MrmlElement( const TQDomElement& elem )
@@ -144,11 +144,11 @@ Algorithm Algorithm::defaultAlgorithm()
     return algo;
 }
 
-TQDomElement Algorithm::toElement( TQDomElement& parent ) const
+TQDomElement Algorithm::toElement( TQDomElement& tqparent ) const
 {
-    TQDomDocument doc = parent.ownerDocument();
+    TQDomDocument doc = tqparent.ownerDocument();
     TQDomElement algorithm = doc.createElement( MrmlShared::algorithm() );
-    parent.appendChild( algorithm );
+    tqparent.appendChild( algorithm );
     setOtherAttributes( algorithm );
 
     if ( !m_name.isEmpty() )
@@ -194,7 +194,7 @@ bool QueryParadigm::equalMaps( const TQMap<TQString,TQString> m1,
     TQMapConstIterator<TQString,TQString> it = m1.begin();
     for ( ; it != m1.end(); ++it )
     {
-        TQMapConstIterator<TQString,TQString> it2 = m2.find( it.key() );
+        TQMapConstIterator<TQString,TQString> it2 = m2.tqfind( it.key() );
         if ( it2 == m2.end() || it.data() != it2.data() )
             return false;
     }
@@ -242,12 +242,12 @@ bool QueryParadigmList::matches( const QueryParadigmList& other ) const
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 
-TQValueList<TQDomElement> KMrml::directChildElements( const TQDomElement& parent,
+TQValueList<TQDomElement> KMrml::directChildElements( const TQDomElement& tqparent,
                                                     const TQString& tagName )
 {
     TQValueList<TQDomElement> list;
 
-    TQDomNode node = parent.firstChild();
+    TQDomNode node = tqparent.firstChild();
     while ( !node.isNull() )
     {
         if ( node.isElement() && node.nodeName() == tagName )
@@ -259,10 +259,10 @@ TQValueList<TQDomElement> KMrml::directChildElements( const TQDomElement& parent
     return list;
 }
 
-TQDomElement KMrml::firstChildElement( const TQDomElement& parent,
+TQDomElement KMrml::firstChildElement( const TQDomElement& tqparent,
                                       const TQString& tagName )
 {
-    TQDomNode node = parent.firstChild();
+    TQDomNode node = tqparent.firstChild();
     while ( !node.isNull() )
     {
         if ( node.isElement() && node.nodeName() == tagName )

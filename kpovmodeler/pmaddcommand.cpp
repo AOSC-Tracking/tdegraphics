@@ -26,11 +26,11 @@
 
 #include <klocale.h>
 
-PMAddCommand::PMAddCommand( PMObject* obj, PMObject* parent, PMObject* after )
-      : PMCommand( i18n( "Add New %1" ).arg( obj->description( ) ) )
+PMAddCommand::PMAddCommand( PMObject* obj, PMObject* tqparent, PMObject* after )
+      : PMCommand( i18n( "Add New %1" ).tqarg( obj->description( ) ) )
 {
    m_objects.append( obj );
-   m_pParent = parent;
+   m_pParent = tqparent;
    m_pAfter = after;
    m_executed = false;
    m_firstExecution = true;
@@ -38,12 +38,12 @@ PMAddCommand::PMAddCommand( PMObject* obj, PMObject* parent, PMObject* after )
    m_pParentChangeMemento = 0;
 }
 
-PMAddCommand::PMAddCommand( const PMObjectList& list, PMObject* parent,
+PMAddCommand::PMAddCommand( const PMObjectList& list, PMObject* tqparent,
                             PMObject* after )
       : PMCommand( i18n( "Add Objects" ) )
 {
    m_objects = list;
-   m_pParent = parent;
+   m_pParent = tqparent;
    m_pAfter = after;
    m_executed = false;
    m_firstExecution = true;
@@ -116,8 +116,8 @@ void PMAddCommand::execute( PMCommandManager* theManager )
                for( ; links.current( ); ++links )
                {
                   PMObject* l = links.current( );
-                  if( l->parent( ) )
-                     l->parent( )->takeChild( l );
+                  if( l->tqparent( ) )
+                     l->tqparent( )->takeChild( l );
                   else
                      m_objects.removeRef( l );
                   m_insertErrors.append( l );
@@ -186,7 +186,7 @@ void PMAddCommand::undo( PMCommandManager* theManager )
                if( decl )
                {
                   m_links.append( lit.current( ) );
-                  if( !m_linkedDeclares.containsRef( decl ) )
+                  if( !m_linkedDeclares.tqcontainsRef( decl ) )
                      m_linkedDeclares.append( decl );
                }
             }
@@ -204,8 +204,8 @@ void PMAddCommand::undo( PMCommandManager* theManager )
          // signal has to be emitted before the item is removed
          theManager->cmdObjectChanged( obj, PMCRemove );
 
-         if( obj->parent( ) )
-            obj->parent( )->takeChild( obj );
+         if( obj->tqparent( ) )
+            obj->tqparent( )->takeChild( obj );
       }
 
       if( m_pParentChangeMemento )

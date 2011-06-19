@@ -22,8 +22,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -32,9 +32,9 @@
 //-------------------------------------
 
 dwMenuAction::dwMenuAction( const TQString& text, const KShortcut& cut,
-			    KDockWidget *dw,TQObject* parent,
+			    KDockWidget *dw,TQObject* tqparent,
 			    KDockMainWindow *mw, const char* name )
-    :KToggleAction(text,cut,parent,name),m_dw(dw),m_mw(mw)
+    :KToggleAction(text,cut,tqparent,name),m_dw(dw),m_mw(mw)
 {
     connect(this,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotToggled(bool)));
     connect(m_dw->dockManager(),TQT_SIGNAL(change()),this,TQT_SLOT(anDWChanged()));

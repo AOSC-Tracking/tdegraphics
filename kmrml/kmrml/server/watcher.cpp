@@ -56,11 +56,11 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
                     << ": Client AppID is not registered with DCOP: "
                     << clientAppId << endl;
 
-    DaemonData *daemon = m_daemons.find( daemonKey );
+    DaemonData *daemon = m_daemons.tqfind( daemonKey );
 
     if ( daemon )
     {
-        if ( !daemon->apps.find( clientAppId ) )
+        if ( !daemon->apps.tqfind( clientAppId ) )
             daemon->apps.append( clientAppId );
 
         // timeout, commandline and restart values are: first come, first serve
@@ -93,7 +93,7 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
 void Watcher::unrequireDaemon( const TQCString& clientAppId,
                                const TQString& daemonKey )
 {
-    unrequireDaemon( m_daemons.find( daemonKey ), clientAppId );
+    unrequireDaemon( m_daemons.tqfind( daemonKey ), clientAppId );
 }
 
 void Watcher::unrequireDaemon( DaemonData *daemon,
@@ -101,7 +101,7 @@ void Watcher::unrequireDaemon( DaemonData *daemon,
 {
     if ( daemon )
     {
-        daemon->apps.remove( clientAppId );
+        daemon->apps.remove( clientAppId.data() );
         if ( daemon->apps.isEmpty() )
         {
             if ( !daemon->timer )
@@ -146,7 +146,7 @@ void Watcher::slotProcExited( KProcess *proc )
                              i18n("<qt>The server with the command line"
                                   "<br>%1<br>"
                                   "is not available anymore. Do you want to "
-                                  "restart it?" ).arg( daemon->commandline ),
+                                  "restart it?" ).tqarg( daemon->commandline ),
                                             i18n("Service Failure"), i18n("Restart Server"), i18n("Do Not Restart") )
                  == KMessageBox::Yes )
             {
@@ -175,7 +175,7 @@ bool Watcher::startDaemon( DaemonData *daemon )
                       i18n("Unable to start the server with the "
                            "command line"
                            "<br>%1<br>"
-                          "Try again?").arg( daemon->commandline ),
+                          "Try again?").tqarg( daemon->commandline ),
                                          i18n("Service Failure"), i18n("Try Again"), i18n("Do Not Try") )
              == KMessageBox::Yes )
         {
@@ -188,7 +188,7 @@ bool Watcher::startDaemon( DaemonData *daemon )
 
 void Watcher::slotTimeout()
 {
-    TQTimer *timer = static_cast<TQTimer*>( const_cast<TQObject *>( sender() ) );
+    TQTimer *timer = static_cast<TQTimer*>( TQT_TQOBJECT( sender() ) );
     DaemonData *daemon = findDaemonFromTimer( timer );
     if ( daemon )
     {
@@ -243,7 +243,7 @@ void Watcher::slotAppUnregistered( const TQCString& appId )
     TQDictIterator<DaemonData> it( m_daemons );
     for ( ; (daemon = it.current()); ++it )
     {
-        if ( daemon->apps.find( appId ) != -1 )
+        if ( daemon->apps.tqfind( appId ) != -1 )
             unrequireDaemon( daemon, appId );
     }
 }

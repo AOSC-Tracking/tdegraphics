@@ -43,12 +43,13 @@ namespace KMrmlConfig
     class Indexer;
     class IndexCleaner;
 
-    class MainPage : public QVBox
+    class MainPage : public TQVBox
     {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
-        MainPage( TQWidget *parent, const char *name );
+        MainPage( TQWidget *tqparent, const char *name );
         ~MainPage();
 
         void resetDefaults();

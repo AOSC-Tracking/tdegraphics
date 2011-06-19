@@ -38,10 +38,11 @@ class kpMainWindow;
 class kpColorSimilarityDialog : public KDialogBase
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpColorSimilarityDialog (kpMainWindow *mainWindow,
-                             TQWidget *parent,
+                             TQWidget *tqparent,
                              const char *name = 0);
     virtual ~kpColorSimilarityDialog ();
 

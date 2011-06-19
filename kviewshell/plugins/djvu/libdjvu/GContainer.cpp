@@ -237,7 +237,7 @@ GArrayBase::resize(int lo, int hi)
     { traits.copy( traits.lea(ndata, beg-nminlo), 
                    traits.lea(data, beg-minlo),
                    end-beg+1, 1 ); }
-  // free and replace
+  // free and tqreplace
   void *tmp=data;
   data=ndata;
   ndata=tmp;

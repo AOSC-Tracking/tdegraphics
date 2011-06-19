@@ -40,11 +40,11 @@ PMBoundedBy::~PMBoundedBy( )
 {
 }
 
-PMMetaObject* PMBoundedBy::metaObject( ) const
+PMMetaObject* PMBoundedBy::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BoundedBy", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BoundedBy", Base::tqmetaObject( ),
                                         createNewBoundedBy );
       s_pMetaObject->addProperty(
          new PMBoundedByProperty( "clippedBy", 0, &PMBoundedBy::clippedBy ) );
@@ -91,9 +91,9 @@ void PMBoundedBy::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMBoundedBy::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMBoundedBy::editWidget( TQWidget* tqparent ) const
 {
-   return new PMBoundedByEdit( parent );
+   return new PMBoundedByEdit( tqparent );
 }
 
 void PMBoundedBy::childRemoved( PMObject* o )

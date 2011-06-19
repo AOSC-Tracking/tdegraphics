@@ -35,12 +35,13 @@ class TQLabel;
 class PMClippedByEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMClippedByEdit with parent and name
+    * Creates a PMClippedByEdit with tqparent and name
     */
-   PMClippedByEdit( TQWidget* parent, const char* name = 0 );
+   PMClippedByEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

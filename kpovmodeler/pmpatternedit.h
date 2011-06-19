@@ -45,12 +45,13 @@ class TQPushButton;
 class PMPatternEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMPatternEdit with parent and name
+    * Creates a PMPatternEdit with tqparent and name
     */
-   PMPatternEdit( TQWidget* parent, const char* name = 0 );
+   PMPatternEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

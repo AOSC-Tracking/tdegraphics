@@ -82,6 +82,7 @@ public:
 class KuickShow : public KMainWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     KuickShow( const char *name=0 );
@@ -132,7 +133,7 @@ private slots:
     void                slotOpenURL();
     void		slotSetURL( const KURL& );
     void		slotURLComboReturnPressed();
-//     void                invalidateImages( const KFileItemList& items );
+//     void                tqinvalidateImages( const KFileItemList& items );
     void		slotDeleteCurrentImage(ImageWindow *viewer);
     void		slotTrashCurrentImage(ImageWindow *viewer);
     void                slotDeleteCurrentImage();
@@ -155,8 +156,8 @@ private:
     void                delayAction(DelayedRepeatEvent *event);
     void                replayAdvance(DelayedRepeatEvent *event);
 
-    void                performDeleteCurrentImage(TQWidget *parent);
-    void                performTrashCurrentImage(TQWidget *parent);
+    void                performDeleteCurrentImage(TQWidget *tqparent);
+    void                performTrashCurrentImage(TQWidget *tqparent);
 
     uint 		viewItem, renameItem, deleteItem, printItem;
     uint                m_slideshowCycle;

@@ -398,10 +398,10 @@ DjVuFile::notify_chunk_done(const DjVuPort *, const GUTF8String &)
 
 void
 DjVuFile::notify_file_flags_changed(const DjVuFile * src,
-                                    long set_mask, long clr_mask)
+                                    long set_tqmask, long clr_tqmask)
 {
   check();
-  if (set_mask & (DECODE_OK | DECODE_FAILED | DECODE_STOPPED))
+  if (set_tqmask & (DECODE_OK | DECODE_FAILED | DECODE_STOPPED))
   {
     // Signal threads waiting for file termination
     finish_mon.enter();
@@ -414,12 +414,12 @@ DjVuFile::notify_file_flags_changed(const DjVuFile * src,
     chunk_mon.leave();
   }
   
-  if ((set_mask & ALL_DATA_PRESENT) && src!=this &&
+  if ((set_tqmask & ALL_DATA_PRESENT) && src!=this &&
     are_incl_files_created() && is_data_present())
   {
     if (src!=this && are_incl_files_created() && is_data_present())
     {
-      // Check if all children have data
+      // Check if all tqchildren have data
       bool all=true;
       {
         GCriticalSectionLock lock(&inc_files_lock);
@@ -488,7 +488,7 @@ DjVuFile::decode_func(void)
     while(wait_for_finish(0))
     	continue;
     
-    DEBUG_MSG("waiting for children termination\n");
+    DEBUG_MSG("waiting for tqchildren termination\n");
     // Check for termination status
     GCriticalSectionLock lock(&inc_files_lock);
     for(GPosition pos=inc_files_list;pos;++pos)
@@ -928,10 +928,10 @@ DjVuFile::decode_chunk( const GUTF8String &id, const GP<ByteStream> &gbs,
     GP<JB2Dict> fgjd = JB2Dict::create();
     fgjd->decode(gbs);
     this->fgjd = fgjd;
-    desc.format( ERR_MSG("DjVuFile.shape_dict") "\t%d", fgjd->get_shape_count() );
+    desc.format( ERR_MSG("DjVuFile.tqshape_dict") "\t%d", fgjd->get_tqshape_count() );
   } 
   
-  // Sjbz (JB2 encoded mask)
+  // Sjbz (JB2 encoded tqmask)
   else if (chkid=="Sjbz" && (djvu || djvi))
   {
     if (this->fgjb)
@@ -943,19 +943,19 @@ DjVuFile::decode_chunk( const GUTF8String &id, const GP<ByteStream> &gbs,
     // ---- end hack
     fgjb->decode(gbs, static_get_fgjd, (void*)this);
     this->fgjb = fgjb;
-    desc.format( ERR_MSG("DjVuFile.fg_mask") "\t%d\t%d\t%d",
+    desc.format( ERR_MSG("DjVuFile.fg_tqmask") "\t%d\t%d\t%d",
       fgjb->get_width(), fgjb->get_height(),
       get_dpi(fgjb->get_width(), fgjb->get_height()));
   }
   
-  // Smmr (MMR-G4 encoded mask)
+  // Smmr (MMR-G4 encoded tqmask)
   else if (chkid=="Smmr" && (djvu || djvi))
   {
     if (this->fgjb)
       G_THROW( ERR_MSG("DjVuFile.dupl_Sxxx") );
     set_can_compress(true);
     this->fgjb = MMRDecoder::decode(gbs);
-    desc.format( ERR_MSG("DjVuFile.G4_mask") "\t%d\t%d\t%d",
+    desc.format( ERR_MSG("DjVuFile.G4_tqmask") "\t%d\t%d\t%d",
       fgjb->get_width(), fgjb->get_height(),
       get_dpi(fgjb->get_width(), fgjb->get_height()));
   }
@@ -1465,7 +1465,7 @@ DjVuFile::find_ndir(GMap<GURL, void *> & map)
   
   if (dir) return dir;
   
-  if (!map.contains(url))
+  if (!map.tqcontains(url))
   {
     map[url]=0;
     
@@ -1496,7 +1496,7 @@ DjVuFile::decode_ndir(GMap<GURL, void *> & map)
   
   if (dir) return dir;
   
-  if (!map.contains(url))
+  if (!map.tqcontains(url))
   {
     map[url]=0;
     
@@ -1570,7 +1570,7 @@ DjVuFile::get_merged_anno(const GP<DjVuFile> & file,
 {
   DEBUG_MSG("DjVuFile::get_merged_anno()\n");
   GURL url=file->get_url();
-  if (!map.contains(url))
+  if (!map.tqcontains(url))
   {
     ByteStream &str_out=*gstr_out;
     map[url]=0;
@@ -1585,7 +1585,7 @@ DjVuFile::get_merged_anno(const GP<DjVuFile> & file,
       get_merged_anno(list[pos], gstr_out, ignore_list, level+1, max_level, map);
     
     // Now process the DjVuFile's own annotations
-    if (!ignore_list.contains(file->get_url()))
+    if (!ignore_list.tqcontains(file->get_url()))
     {
       if (!file->is_data_present() ||
         file->is_modified() && file->anno)
@@ -1966,7 +1966,7 @@ void
 DjVuFile::move(GMap<GURL, void *> & map, const GURL & dir_url)
 // This function may block for data.
 {
-  if (!map.contains(url))
+  if (!map.tqcontains(url))
   {
     map[url]=0;
     
@@ -2095,7 +2095,7 @@ DjVuFile::contains_chunk(const GUTF8String &chunk_name)
     chunk_name << "'\n");
   DEBUG_MAKE_INDENT(3);
   
-  bool contains=0;
+  bool tqcontains=0;
   const GP<ByteStream> str(data_pool->get_stream());
   GUTF8String chkid;
   const GP<IFFByteStream> giff(IFFByteStream::create(str));
@@ -2112,10 +2112,10 @@ DjVuFile::contains_chunk(const GUTF8String &chunk_name)
     for(;(chunks_left--)&&(chksize=iff.get_chunk(chkid));last_chunk=chunks)
     {
       chunks++;
-      if (chkid==chunk_name) { contains=1; break; }
+      if (chkid==chunk_name) { tqcontains=1; break; }
       iff.seek_close_chunk();
     }
-    if (!contains &&(chunks_number < 0)) chunks_number=last_chunk;
+    if (!tqcontains &&(chunks_number < 0)) chunks_number=last_chunk;
   }
   G_CATCH(ex)
   {
@@ -2125,7 +2125,7 @@ DjVuFile::contains_chunk(const GUTF8String &chunk_name)
   }
   G_ENDCATCH;
   data_pool->clear_stream();
-  return contains;
+  return tqcontains;
 }
 
 bool
@@ -2225,7 +2225,7 @@ DjVuFile::add_djvu_data(IFFByteStream & ostr, GMap<GURL, void *> & map,
                         const bool included_too, const bool no_ndir)
 {
   check();
-  if (map.contains(url)) return;
+  if (map.tqcontains(url)) return;
   bool top_level = !map.size();
   map[url]=0;
   bool processed_annotation = false;

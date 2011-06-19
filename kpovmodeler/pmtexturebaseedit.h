@@ -35,12 +35,13 @@ class PMLinkEdit;
 class PMTextureBaseEdit : public PMNamedObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMNamedObjectEdit Base;
 public:
    /**
-    * Creates a PMTextureBaseEdit with parent and name
+    * Creates a PMTextureBaseEdit with tqparent and name
     */
-   PMTextureBaseEdit( TQWidget* parent, const char* name = 0 );
+   PMTextureBaseEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

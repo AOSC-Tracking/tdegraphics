@@ -12,9 +12,10 @@ class KPrinter;
 class KDVIMultiPage : public KMultiPage
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+  KDVIMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
                 const char *name, const TQStringList& args = TQStringList());
   virtual ~KDVIMultiPage();
 

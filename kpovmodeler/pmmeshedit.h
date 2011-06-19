@@ -36,12 +36,13 @@ class PMVectorEdit;
 class PMMeshEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMMeshEdit with parent and name
+    * Creates a PMMeshEdit with tqparent and name
     */
-   PMMeshEdit( TQWidget* parent, const char* name = 0 );
+   PMMeshEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

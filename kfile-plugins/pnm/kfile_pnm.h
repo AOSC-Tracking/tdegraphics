@@ -27,9 +27,10 @@ class TQStringList;
 class KPnmPlugin: public KFilePlugin
 {
 	Q_OBJECT
+  TQ_OBJECT
     
 public:
-	KPnmPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
+	KPnmPlugin( TQObject *tqparent, const char *name, const TQStringList& preferredItems );
 	virtual bool readInfo( KFileMetaInfo& info, uint );
 
 private:

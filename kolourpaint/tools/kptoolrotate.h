@@ -81,10 +81,11 @@ private:
 class kpToolRotateDialog : public kpToolPreviewDialog
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpToolRotateDialog (bool actOnSelection,
-                        kpMainWindow *parent,
+                        kpMainWindow *tqparent,
                         const char *name = 0);
     virtual ~kpToolRotateDialog ();
 

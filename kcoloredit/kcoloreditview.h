@@ -22,7 +22,7 @@
 #include <config.h>
 #endif 
 
-// include files for Qt
+// include files for TQt
 #include <tqsplitter.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>
@@ -43,14 +43,15 @@ class KColorEditDoc;
  */
 class KColorEditView : public TQSplitter {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     /** Constructor for the main view */
-    KColorEditView(TQWidget *parent = 0, const char *name = 0);
+    KColorEditView(TQWidget *tqparent = 0, const char *name = 0);
     /** Destructor for the main view */
     ~KColorEditView();
 
-    /** returns a pointer to the document connected to the view instance. Mind that this method requires a KColorEditApp instance as a parent
+    /** returns a pointer to the document connected to the view instance. Mind that this method requires a KColorEditApp instance as a tqparent
      * widget to get to the window document pointer by calling the KColorEditApp::getDocument() method.
      *
      * @see KColorEditApp#getDocument

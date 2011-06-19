@@ -70,16 +70,16 @@ SVGMaskElement::~SVGMaskElement()
 		impl->deref();
 }
 
-SVGAnimatedEnumeration SVGMaskElement::maskUnits() const
+SVGAnimatedEnumeration SVGMaskElement::tqmaskUnits() const
 {
 	if(!impl) return SVGAnimatedEnumeration(0);
-	return SVGAnimatedEnumeration(impl->maskUnits());
+	return SVGAnimatedEnumeration(impl->tqmaskUnits());
 }
 
-SVGAnimatedEnumeration SVGMaskElement::maskContentUnits() const
+SVGAnimatedEnumeration SVGMaskElement::tqmaskContentUnits() const
 {
 	if(!impl) return SVGAnimatedEnumeration(0);
-	return SVGAnimatedEnumeration(impl->maskContentUnits());
+	return SVGAnimatedEnumeration(impl->tqmaskContentUnits());
 }
 
 SVGAnimatedLength SVGMaskElement::x() const

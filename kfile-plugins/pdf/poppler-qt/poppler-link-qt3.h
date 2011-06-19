@@ -21,8 +21,8 @@
 #ifndef _POPPLER_LINK_H_
 #define _POPPLER_LINK_H_
 
-#include <qstring.h>
-#include <qrect.h>
+#include <tqstring.h>
+#include <tqrect.h>
 
 namespace Poppler {
 
@@ -44,7 +44,7 @@ class LinkDestination
 		};
 
 		LinkDestination(const LinkDestinationData &data);
-		LinkDestination(const QString &description);
+		LinkDestination(const TQString &description);
 
 		// Accessors.
 		Kind kind() const;
@@ -58,7 +58,7 @@ class LinkDestination
 		bool isChangeTop() const;
 		bool isChangeZoom() const;
 
-		QString toString() const;
+		TQString toString() const;
 
 	private:
 		Kind m_kind; // destination type
@@ -80,7 +80,7 @@ class LinkDestination
 class Link
 {
 	public:
-		Link( const QRect &linkArea );
+		Link( const TQRect &linkArea );
 		
 		// get link type (inherited classes mustreturn an unique identifier)
 		enum LinkType { None, Goto, Execute, Browse, Action, Movie };
@@ -89,10 +89,10 @@ class Link
 		// virtual destructor
 		virtual ~Link();
 		
-		QRect linkArea() const;
+		TQRect linkArea() const;
 		
 	private:
-		QRect m_linkArea;
+		TQRect m_linkArea;
 };
 
 
@@ -100,16 +100,16 @@ class Link
 class LinkGoto : public Link
 {
 	public:
-		LinkGoto( const QRect &linkArea, QString extFileName, const LinkDestination & destination );
+		LinkGoto( const TQRect &linkArea, TQString extFileName, const LinkDestination & destination );
 		
 		// query for goto parameters
 		bool isExternal() const;
-		const QString & fileName() const;
+		const TQString & fileName() const;
 		const LinkDestination & destination() const;
 		LinkType linkType() const;
 
 	private:
-		QString m_extFileName;
+		TQString m_extFileName;
 		LinkDestination m_destination;
 };
 
@@ -118,16 +118,16 @@ class LinkExecute : public Link
 {
 	public:
 		// query for filename / parameters
-		const QString & fileName() const;
-		const QString & parameters() const;
+		const TQString & fileName() const;
+		const TQString & parameters() const;
 
 		// create a Link_Execute
-		LinkExecute( const QRect &linkArea, const QString & file, const QString & params );
+		LinkExecute( const TQRect &linkArea, const TQString & file, const TQString & params );
 		LinkType linkType() const;
 
 	private:
-		QString m_fileName;
-		QString m_parameters;
+		TQString m_fileName;
+		TQString m_parameters;
 };
 
 /** Browse: an URL to open, ranging from 'http://' to 'mailto:' etc.. **/
@@ -135,14 +135,14 @@ class LinkBrowse : public Link
 {
 	public:
 		// query for URL
-		const QString & url() const;
+		const TQString & url() const;
 
 		// create a Link_Browse
-		LinkBrowse( const QRect &linkArea, const QString &url );
+		LinkBrowse( const TQRect &linkArea, const TQString &url );
 		LinkType linkType() const;
 
 	private:
-		QString m_url;
+		TQString m_url;
 };	
 
 /** Action: contains an action to perform on document / viewer **/
@@ -167,7 +167,7 @@ class LinkAction : public Link
 		ActionType actionType() const;
 
 		// create a Link_Action
-		LinkAction( const QRect &linkArea, ActionType actionType );
+		LinkAction( const TQRect &linkArea, ActionType actionType );
 		LinkType linkType() const;
 
 	private:
@@ -179,7 +179,7 @@ class LinkMovie : public Link
 // TODO this (Movie link)
 {
 	public:
-		LinkMovie( const QRect &linkArea );
+		LinkMovie( const TQRect &linkArea );
 		LinkType linkType() const;
 };
 

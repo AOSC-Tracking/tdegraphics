@@ -36,12 +36,13 @@ class TQCheckBox;
 class PMBlobEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMBlobEdit with parent and name
+    * Creates a PMBlobEdit with tqparent and name
     */
-   PMBlobEdit( TQWidget* parent, const char* name = 0 );
+   PMBlobEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

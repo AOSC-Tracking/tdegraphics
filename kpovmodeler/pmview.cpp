@@ -34,12 +34,12 @@
 #include "pmdialogview.h"
 #include "pmglview.h"
 
-PMView::PMView( PMPart* part, TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMView::PMView( PMPart* part, TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    setBackgroundMode( PaletteBase );
 
-   TQVBoxLayout* layout = new TQVBoxLayout( this );
+   TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
    m_pMainSplitter = new TQSplitter( Qt::Horizontal, this, "MainSplitter" );
    m_pTreeEditSplitter = new TQSplitter( Qt::Vertical, m_pMainSplitter,
                                         "TreeEditSplitter" );
@@ -68,8 +68,8 @@ PMView::PMView( PMPart* part, TQWidget* parent, const char* name )
    
    m_pMainSplitter->show( );
 
-   layout->addWidget( m_pMainSplitter );
-   layout->activate( );
+   tqlayout->addWidget( m_pMainSplitter );
+   tqlayout->activate( );
 
    m_pPart = part;
 }

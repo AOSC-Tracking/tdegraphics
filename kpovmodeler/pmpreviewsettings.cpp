@@ -29,19 +29,19 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMPreviewSettings::PMPreviewSettings( TQWidget* parent, const char* name )
-      : PMSettingsDialogPage( parent, name )
+PMPreviewSettings::PMPreviewSettings( TQWidget* tqparent, const char* name )
+      : PMSettingsDialogPage( tqparent, name )
 {
-   TQHBoxLayout* hlayout;
-   TQVBoxLayout* vlayout;
+   TQHBoxLayout* htqlayout;
+   TQVBoxLayout* vtqlayout;
    TQVBoxLayout* gvl;
    TQGridLayout* grid;
    TQGroupBox* gb;
 
-   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
    
-   hlayout = new TQHBoxLayout( vlayout );
-   grid = new TQGridLayout( hlayout, 2, 2 );
+   htqlayout = new TQHBoxLayout( vtqlayout );
+   grid = new TQGridLayout( htqlayout, 2, 2 );
    grid->addWidget( new TQLabel( i18n( "Size:" ), this ), 0, 0 );
    m_pPreviewSize = new PMIntEdit( this );
    m_pPreviewSize->setValidation( true, 10, true, 400 );
@@ -50,10 +50,10 @@ PMPreviewSettings::PMPreviewSettings( TQWidget* parent, const char* name )
    grid->addWidget( new TQLabel( i18n( "Gamma:" ), this ), 1, 0 );
    m_pPreviewGamma = new PMFloatEdit( this );
    grid->addWidget( m_pPreviewGamma, 1, 1 );
-   hlayout->addStretch( 1 );
+   htqlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Rendered Objects" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    m_pPreviewSphere = new TQCheckBox( i18n( "Sphere" ), gb );
@@ -64,52 +64,52 @@ PMPreviewSettings::PMPreviewSettings( TQWidget* parent, const char* name )
    gvl->addWidget( m_pPreviewBox );
 
    gb = new TQGroupBox( i18n( "Wall" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    m_pPreviewWall = new TQCheckBox( i18n( "Enable wall" ), gb );
    gvl->addWidget( m_pPreviewWall );
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Color 1:" ), gb ) );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Color 1:" ), gb ) );
    m_pWallColor1 = new KColorButton( gb );
-   hlayout->addWidget( m_pWallColor1 );
-   hlayout->addWidget( new TQLabel( i18n( "Color 2:" ), gb ) );
+   htqlayout->addWidget( m_pWallColor1 );
+   htqlayout->addWidget( new TQLabel( i18n( "Color 2:" ), gb ) );
    m_pWallColor2 = new KColorButton( gb );
-   hlayout->addWidget( m_pWallColor2 );
-   hlayout->addStretch( 1 );
+   htqlayout->addWidget( m_pWallColor2 );
+   htqlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Floor" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    m_pPreviewFloor = new TQCheckBox( i18n( "Enable floor" ), gb );
    gvl->addWidget( m_pPreviewFloor );
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Color 1:" ), gb ) );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Color 1:" ), gb ) );
    m_pFloorColor1 = new KColorButton( gb );
-   hlayout->addWidget( m_pFloorColor1 );
-   hlayout->addWidget( new TQLabel( i18n( "Color 2:" ), gb ) );
+   htqlayout->addWidget( m_pFloorColor1 );
+   htqlayout->addWidget( new TQLabel( i18n( "Color 2:" ), gb ) );
    m_pFloorColor2 = new KColorButton( gb );
-   hlayout->addWidget( m_pFloorColor2 );
-   hlayout->addStretch( 1 );
+   htqlayout->addWidget( m_pFloorColor2 );
+   htqlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Antialiasing" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    m_pPreviewAA = new TQCheckBox( i18n( "Enable antialiasing" ), gb );
    gvl->addWidget( m_pPreviewAA );
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Depth:" ), gb ) );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Depth:" ), gb ) );
    m_pPreviewAALevel = new PMIntEdit( gb );
    m_pPreviewAALevel->setValidation( true, 1, true, 9 );
-   hlayout->addWidget( m_pPreviewAALevel );
-   hlayout->addWidget( new TQLabel( i18n( "Threshold:" ), gb ) );
+   htqlayout->addWidget( m_pPreviewAALevel );
+   htqlayout->addWidget( new TQLabel( i18n( "Threshold:" ), gb ) );
    m_pPreviewAAThreshold = new PMFloatEdit( gb );
-   hlayout->addWidget( m_pPreviewAAThreshold );
-   hlayout->addStretch( 1 );
+   htqlayout->addWidget( m_pPreviewAAThreshold );
+   htqlayout->addStretch( 1 );
    
-   vlayout->addStretch( 1 );
+   vtqlayout->addStretch( 1 );
 }
 
 void PMPreviewSettings::displaySettings( )

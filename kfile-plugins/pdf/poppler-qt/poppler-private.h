@@ -23,7 +23,7 @@
 #ifndef POPPLER_PRIVATE_H
 #define POPPLER_PRIVATE_H
 
-#include <qdom.h>
+#include <tqdom.h>
 
 #include <config.h>
 #include <Object.h>
@@ -39,11 +39,11 @@ namespace Poppler {
     
 class DocumentData;
 
-QString unicodeToQString(Unicode* u, int len);
+TQString tqunicodeToTQString(Unicode* u, int len);
 
-QString UnicodeParsedString(GooString *s1);
+TQString UnicodeParsedString(GooString *s1);
 
-GooString *QStringToGooString(const QString &s);
+GooString *TQStringToGooString(const TQString &s);
 
 class LinkDestinationData {
   public:
@@ -84,7 +84,7 @@ class DocumentData {
         return m_outputDev;
     }
 
-    void addTocChildren( QDomDocument * docSyn, QDomNode * parent, GooList * items );
+    void addTocChildren( TQDomDocument * docSyn, TQDomNode * tqparent, GooList * items );
 
   class PDFDoc doc;
   bool locked;

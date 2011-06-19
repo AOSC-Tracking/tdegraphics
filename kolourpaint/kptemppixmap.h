@@ -69,7 +69,7 @@ public:
     int height () const;
 
 
-    // Returns whether a call to paint() may change <*destPixmap>'s mask
+    // Returns whether a call to paint() may change <*destPixmap>'s tqmask
     bool mayChangeDocumentMask () const;
 
     /*

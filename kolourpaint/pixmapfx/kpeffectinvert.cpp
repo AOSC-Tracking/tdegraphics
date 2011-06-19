@@ -86,30 +86,30 @@ TQPixmap kpEffectInvertCommand::apply (const TQPixmap &pm, int channels)
 // public static
 void kpEffectInvertCommand::apply (TQImage *destImagePtr, int channels)
 {
-    QRgb mask = qRgba ((channels & Red) ? 0xFF : 0,
+    TQRgb tqmask = tqRgba ((channels & Red) ? 0xFF : 0,
                        (channels & Green) ? 0xFF : 0,
                        (channels & Blue) ? 0xFF : 0,
                        0/*don't invert alpha*/);
 #if DEBUG_KP_EFFECT_INVERT
     kdDebug () << "kpEffectInvertCommand::apply(channels=" << channels
-               << ") mask=" << (int *) mask
+               << ") tqmask=" << (int *) tqmask
                << endl;
 #endif
 
     if (destImagePtr->depth () > 8)
     {
     #if 0
-        // SYNC: TODO: Qt BUG - invertAlpha argument is inverted!!!
-        destImagePtr->invertPixels (true/*no invert alpha (Qt 3.2)*/);
+        // SYNC: TODO: TQt BUG - invertAlpha argument is inverted!!!
+        destImagePtr->invertPixels (true/*no invert alpha (TQt 3.2)*/);
     #else
-        // Above version works for Qt 3.2 at least.
+        // Above version works for TQt 3.2 at least.
         // But this version will always work (slower, though) and supports
         // inverting particular channels.
         for (int y = 0; y < destImagePtr->height (); y++)
         {
             for (int x = 0; x < destImagePtr->width (); x++)
             {
-                destImagePtr->setPixel (x, y, destImagePtr->pixel (x, y) ^ mask);
+                destImagePtr->setPixel (x, y, destImagePtr->pixel (x, y) ^ tqmask);
             }
         }
     #endif
@@ -118,7 +118,7 @@ void kpEffectInvertCommand::apply (TQImage *destImagePtr, int channels)
     {
         for (int i = 0; i < destImagePtr->numColors (); i++)
         {
-            destImagePtr->setColor (i, destImagePtr->color (i) ^ mask);
+            destImagePtr->setColor (i, destImagePtr->color (i) ^ tqmask);
         }
     }
 }
@@ -149,15 +149,15 @@ TQPixmap kpEffectInvertCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectInvertWidget::kpEffectInvertWidget (bool actOnSelection,
                                             kpMainWindow *mainWindow,
-                                            TQWidget *parent,
+                                            TQWidget *tqparent,
                                             const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
 {
     TQVBoxLayout *topLevelLay = new TQVBoxLayout (this, marginHint (), spacingHint ());
 
 
     TQWidget *centerWidget = new TQWidget (this);
-    topLevelLay->addWidget (centerWidget, 0/*stretch*/, Qt::AlignCenter);
+    topLevelLay->addWidget (centerWidget, 0/*stretch*/, TQt::AlignCenter);
 
 
     TQVBoxLayout *centerWidgetLay = new TQVBoxLayout (centerWidget,

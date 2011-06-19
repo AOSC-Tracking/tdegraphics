@@ -43,11 +43,12 @@ class KTempFile;
 class PMPovrayRenderWidget : public PMDragWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Standard constructor
     */
-   PMPovrayRenderWidget( TQWidget* parent = 0, const char* name = 0 );
+   PMPovrayRenderWidget( TQWidget* tqparent = 0, const char* name = 0 );
    /**
     * destructor
     */
@@ -90,7 +91,7 @@ public:
     */
    static void setPovrayLibraryPaths( const TQStringList& slist )
    { s_libraryPaths = slist; }
-   virtual TQSize sizeHint( ) const;
+   virtual TQSize tqsizeHint( ) const;
 
    virtual void startDrag( );
 signals:

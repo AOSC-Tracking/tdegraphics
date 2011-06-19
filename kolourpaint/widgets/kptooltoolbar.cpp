@@ -55,11 +55,11 @@
 #include <kptoolwidgetspraycansize.h>
 
 
-class kpToolButton : public QToolButton
+class kpToolButton : public TQToolButton
 {
 public:
-    kpToolButton (kpTool *tool, TQWidget *parent)
-        : TQToolButton (parent),
+    kpToolButton (kpTool *tool, TQWidget *tqparent)
+        : TQToolButton (tqparent),
           m_tool (tool)
     {
     }
@@ -69,7 +69,7 @@ public:
     }
 
 protected:
-    // virtual [base QWidget]
+    // virtual [base TQWidget]
     void mouseDoubleClickEvent (TQMouseEvent *e)
     {
         if (e->button () == Qt::LeftButton && m_tool)
@@ -144,7 +144,7 @@ kpToolToolBar::kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, i
     setOrientation (orientation ());
 
 #if DEBUG_KP_TOOL_TOOL_BAR
-    kdDebug () << "kpToolToolBar::<ctor> layout tool widgets msec="
+    kdDebug () << "kpToolToolBar::<ctor> tqlayout tool widgets msec="
                << timer.elapsed () << endl;
 #endif
 
@@ -199,7 +199,7 @@ int kpToolToolBar::defaultIconSize ()
 
     if (m_defaultIconSize <= 0)
     {
-        // Adapt according to screen geometry
+        // Adapt according to screen tqgeometry
         const TQRect desktopSize = KGlobalSettings::desktopGeometry (this);
     #if DEBUG_KP_TOOL_TOOL_BAR
         kdDebug () << "\tadapting to screen size=" << desktopSize << endl;
@@ -547,7 +547,7 @@ void kpToolToolBar::slotToolActionToolTipChanged ()
 }
 
 
-// public slot virtual [base QDockWindow]
+// public slot virtual [base TQDockWindow]
 void kpToolToolBar::setOrientation (Qt::Orientation o)
 {
 #if DEBUG_KP_TOOL_TOOL_BAR
@@ -616,7 +616,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
         {
             m_baseLayout->addWidget (*it,
                 0/*stretch*/,
-                o == Qt::Vertical ? Qt::AlignHCenter : Qt::AlignVCenter);
+                o == Qt::Vertical ? TQt::AlignHCenter : TQt::AlignVCenter);
         }
     }
 

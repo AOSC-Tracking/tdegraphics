@@ -8,9 +8,10 @@
 #ifndef INDEXTEST_H
 #define INDEXTEST_H
 
-class IndexTest : public QObject
+class IndexTest : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
     
 public:
     IndexTest();

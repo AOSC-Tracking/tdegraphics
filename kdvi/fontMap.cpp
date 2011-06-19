@@ -26,7 +26,7 @@ fontMap::fontMap()
   // has, like kdvi (and unlike dvips), no built-in fonts.
   
   // Finding ps2pk.map is not easy. In teTeX < 3.0, the kpsewhich
-  // program REQUIRES the option "--format=dvips config". In teTeX =
+  // program RETQUIRES the option "--format=dvips config". In teTeX =
   // 3.0, the option "--format=map" MUST be used. Since there is no
   // way to give both options at the same time, there is seemingly no
   // other way than to try both options one after another. We use the
@@ -78,7 +78,7 @@ fontMap::fontMap()
         encodingName = encodingName.mid(1);
 
       double slant = 0.0;
-      int i = line.find("SlantFont");
+      int i = line.tqfind("SlantFont");
       if (i >= 0) {
 	bool ok;
 	slant = line.left(i).section(' ', -1, -1 ,TQString::SectionSkipEmpty).toDouble(&ok);
@@ -94,11 +94,11 @@ fontMap::fontMap()
       if (encodingName.endsWith(".enc"))
 	entry.fontEncoding = encodingName;
       else
-	entry.fontEncoding = TQString::null;
+	entry.fontEncoding = TQString();
     }
     file.close();
   } else
-    kdError(4300) << TQString("fontMap::fontMap(): The file '%1' could not be opened.").arg(map_fileName) << endl;
+    kdError(4300) << TQString("fontMap::fontMap(): The file '%1' could not be opened.").tqarg(map_fileName) << endl;
   
 #ifdef DEBUG_FONTMAP
   kdDebug(4300) << "FontMap file parsed. Results:" << endl;
@@ -115,40 +115,40 @@ fontMap::fontMap()
 
 const TQString &fontMap::findFileName(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().fontFileName;
   else
-    return TQString::null;
+    return TQString();
 }
 
 
 const TQString &fontMap::findFontName(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().fullFontName;
   else
-    return TQString::null;
+    return TQString();
 }
 
 
 const TQString &fontMap::findEncoding(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().fontEncoding;
   else
-    return TQString::null;
+    return TQString();
 }
 
 
 double fontMap::findSlant(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().slant;

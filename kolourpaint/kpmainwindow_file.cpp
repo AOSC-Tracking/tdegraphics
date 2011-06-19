@@ -67,41 +67,41 @@ void kpMainWindow::setupFileMenuActions ()
 #endif
     KActionCollection *ac = actionCollection ();
 
-    m_actionNew = KStdAction::openNew (this, TQT_SLOT (slotNew ()), ac);
-    m_actionOpen = KStdAction::open (this, TQT_SLOT (slotOpen ()), ac);
+    m_actionNew = KStdAction::openNew (TQT_TQOBJECT(this), TQT_SLOT (slotNew ()), ac);
+    m_actionOpen = KStdAction::open (TQT_TQOBJECT(this), TQT_SLOT (slotOpen ()), ac);
 
-    m_actionOpenRecent = KStdAction::openRecent (this, TQT_SLOT (slotOpenRecent (const KURL &)), ac);
+    m_actionOpenRecent = KStdAction::openRecent (TQT_TQOBJECT(this), TQT_SLOT (slotOpenRecent (const KURL &)), ac);
     m_actionOpenRecent->loadEntries (kapp->config ());
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\trecent URLs=" << m_actionOpenRecent->items () << endl;
 #endif
 
-    m_actionSave = KStdAction::save (this, TQT_SLOT (slotSave ()), ac);
-    m_actionSaveAs = KStdAction::saveAs (this, TQT_SLOT (slotSaveAs ()), ac);
+    m_actionSave = KStdAction::save (TQT_TQOBJECT(this), TQT_SLOT (slotSave ()), ac);
+    m_actionSaveAs = KStdAction::saveAs (TQT_TQOBJECT(this), TQT_SLOT (slotSaveAs ()), ac);
 
     m_actionExport = new KAction (i18n ("E&xport..."), 0,
-        this, TQT_SLOT (slotExport ()), ac, "file_export");
+        TQT_TQOBJECT(this), TQT_SLOT (slotExport ()), ac, "file_export");
 
     m_actionScan = new KAction (i18n ("Scan..."), SmallIcon ("scanner"), 0,
-        this, TQT_SLOT (slotScan ()), ac, "file_scan");
+        TQT_TQOBJECT(this), TQT_SLOT (slotScan ()), ac, "file_scan");
 
     //m_actionRevert = KStdAction::revert (this, TQT_SLOT (slotRevert ()), ac);
     m_actionReload = new KAction (i18n ("Reloa&d"), KStdAccel::reload (),
-        this, TQT_SLOT (slotReload ()), ac, "file_revert");
+        TQT_TQOBJECT(this), TQT_SLOT (slotReload ()), ac, "file_revert");
     slotEnableReload ();
 
-    m_actionPrint = KStdAction::print (this, TQT_SLOT (slotPrint ()), ac);
-    m_actionPrintPreview = KStdAction::printPreview (this, TQT_SLOT (slotPrintPreview ()), ac);
+    m_actionPrint = KStdAction::print (TQT_TQOBJECT(this), TQT_SLOT (slotPrint ()), ac);
+    m_actionPrintPreview = KStdAction::printPreview (TQT_TQOBJECT(this), TQT_SLOT (slotPrintPreview ()), ac);
 
-    m_actionMail = KStdAction::mail (this, TQT_SLOT (slotMail ()), ac);
+    m_actionMail = KStdAction::mail (TQT_TQOBJECT(this), TQT_SLOT (slotMail ()), ac);
 
     m_actionSetAsWallpaperCentered = new KAction (i18n ("Set as Wa&llpaper (Centered)"), 0,
-        this, TQT_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
+        TQT_TQOBJECT(this), TQT_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
     m_actionSetAsWallpaperTiled = new KAction (i18n ("Set as Wallpaper (&Tiled)"), 0,
-        this, TQT_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
+        TQT_TQOBJECT(this), TQT_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
 
-    m_actionClose = KStdAction::close (this, TQT_SLOT (slotClose ()), ac);
-    m_actionQuit = KStdAction::quit (this, TQT_SLOT (slotQuit ()), ac);
+    m_actionClose = KStdAction::close (TQT_TQOBJECT(this), TQT_SLOT (slotClose ()), ac);
+    m_actionQuit = KStdAction::quit (TQT_TQOBJECT(this), TQT_SLOT (slotQuit ()), ac);
 
     m_scanDialog = 0;
 
@@ -247,8 +247,8 @@ TQSize kpMainWindow::defaultDocSize () const
     {
         // Don't get too big or you'll thrash (or even lock up) the computer
         // just by opening a window
-        docSize = TQSize (QMIN (2048, docSize.width ()),
-                         QMIN (2048, docSize.height ()));
+        docSize = TQSize (TQMIN (2048, docSize.width ()),
+                         TQMIN (2048, docSize.height ()));
     }
 
     return docSize;
@@ -370,7 +370,7 @@ void kpMainWindow::slotOpen ()
 
 
     const KURL::List urls = askForOpenURLs (i18n ("Open Image"),
-        m_document ? m_document->url ().url () : TQString::null);
+        m_document ? m_document->url ().url () : TQString());
 
     for (KURL::List::const_iterator it = urls.begin ();
          it != urls.end ();
@@ -548,7 +548,7 @@ bool kpMainWindow::save (bool localOnly)
 {
     if (m_document->url ().isEmpty () ||
         KImageIO::mimeTypes (KImageIO::Writing)
-            .findIndex (m_document->saveOptions ()->mimeType ()) < 0 ||
+            .tqfindIndex (m_document->saveOptions ()->mimeType ()) < 0 ||
         // SYNC: kpDocument::getPixmapFromFile() can't determine quality
         //       from file so it has been set initially to an invalid value.
         (m_document->saveOptions ()->mimeTypeHasConfigurableQuality () &&
@@ -639,7 +639,7 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
     }
 
 #define MIME_TYPE_IS_VALID() (!fdSaveOptions.mimeTypeIsInvalid () &&                 \
-                              mimeTypes.findIndex (fdSaveOptions.mimeType ()) >= 0)
+                              mimeTypes.tqfindIndex (fdSaveOptions.mimeType ()) >= 0)
     if (!MIME_TYPE_IS_VALID ())
     {
     #if DEBUG_KP_MAIN_WINDOW
@@ -658,9 +658,9 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
             kdDebug () << "\tmimeType=" << fdSaveOptions.mimeType ()
                        << " not valid, get hardcoded" << endl;
         #endif
-            if (mimeTypes.findIndex ("image/png") > -1)
+            if (mimeTypes.tqfindIndex ("image/png") > -1)
                 fdSaveOptions.setMimeType ("image/png");
-            else if (mimeTypes.findIndex ("image/x-bmp") > -1)
+            else if (mimeTypes.tqfindIndex ("image/x-bmp") > -1)
                 fdSaveOptions.setMimeType ("image/x-bmp");
             else
                 fdSaveOptions.setMimeType (mimeTypes.first ());
@@ -692,7 +692,7 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
             docMetaInfo,
             this);
 
-    KFileDialog fd (startURL, TQString::null, this, "fd", true/*modal*/,
+    KFileDialog fd (startURL, TQString(), this, "fd", true/*modal*/,
                     saveOptionsWidget);
     saveOptionsWidget->setVisualParent (&fd);
     fd.setCaption (caption);
@@ -898,7 +898,7 @@ bool kpMainWindow::slotReload ()
                                "Reloading will lose all changes since you last saved it.\n"
                                "Are you sure?")
                              .arg (m_document->prettyFilename ()),
-                         TQString::null/*caption*/,
+                         TQString()/*caption*/,
                          i18n ("&Reload"));
         }
         else
@@ -908,7 +908,7 @@ bool kpMainWindow::slotReload ()
                                "Reloading will lose all changes.\n"
                                "Are you sure?")
                              .arg (m_document->prettyFilename ()),
-                         TQString::null/*caption*/,
+                         TQString()/*caption*/,
                          i18n ("&Reload"));
         }
 
@@ -964,7 +964,7 @@ void kpMainWindow::sendFilenameToPrinter (KPrinter *printer)
         int dot;
 
         TQString fileName = url.fileName ();
-        dot = fileName.findRev ('.');
+        dot = fileName.tqfindRev ('.');
 
         // file.ext but not .hidden-file?
         if (dot > 0)
@@ -1045,7 +1045,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
 #endif
 
     // Image DPI invalid (e.g. new image, could not read from file
-    // or Qt3 doesn't implement DPI for JPEG)?
+    // or TQt3 doesn't implement DPI for JPEG)?
     if (pixmapDotsPerMeterX < 1 || pixmapDotsPerMeterY < 1)
     {
         // Even if just one DPI dimension is invalid, mutate both DPI
@@ -1113,7 +1113,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
         / dpiX;
     const double scaleDpiY = (pixmap.height () / (printerHeightMM / 25.4))
         / dpiY;
-    const double scaleDpi = QMAX (scaleDpiX, scaleDpiY);
+    const double scaleDpi = TQMAX (scaleDpiX, scaleDpiY);
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\t\tscaleDpi: x=" << scaleDpiX << " y=" << scaleDpiY
                << " --> scale at " << scaleDpi << " to fit?"
@@ -1145,7 +1145,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
     #endif
         kpPixmapFX::scale (&pixmap,
              pixmap.width (),
-             QMAX (1, qRound (pixmap.height () * dpiX / dpiY)),
+             TQMAX (1, tqRound (pixmap.height () * dpiX / dpiY)),
              false/*don't antialias*/);
 
         dpiY = dpiX;
@@ -1157,7 +1157,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
                    << dpiY << endl;
     #endif
         kpPixmapFX::scale (&pixmap,
-             QMAX (1, qRound (pixmap.width () * dpiY / dpiX)),
+             TQMAX (1, tqRound (pixmap.width () * dpiY / dpiX)),
              pixmap.height (),
              false/*don't antialias*/);
 
@@ -1167,7 +1167,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
 
     // ASSERT: dpiX == dpiY
     // TQPrinter::setResolution() has to be called before TQPrinter::setup().
-    printer->setResolution (QMAX (1, qRound (dpiX)));
+    printer->setResolution (TQMAX (1, tqRound (dpiX)));
 
 
     double originX = 0, originY = 0;
@@ -1199,7 +1199,7 @@ void kpMainWindow::sendPixmapToPrinter (KPrinter *printer,
     // Send pixmap to printer.
     TQPainter painter;
     painter.begin (printer);
-    painter.drawPixmap (qRound (originX), qRound (originY), pixmap);
+    painter.drawPixmap (tqRound (originX), tqRound (originY), pixmap);
     painter.end ();
 }
 
@@ -1224,7 +1224,7 @@ void kpMainWindow::slotPrintPreview ()
     // TODO: get it to reflect default printer's settings
     KPrinter printer (false/*separate settings from ordinary printer*/);
 
-    // TODO: pass "this" as parent
+    // TODO: pass "this" as tqparent
     printer.setPreviewOnly (true);
 
     sendPixmapToPrinter (&printer, false/*don't showPrinterSetupDialog*/);
@@ -1244,7 +1244,7 @@ void kpMainWindow::slotMail ()
         int result = KMessageBox::questionYesNo (this,
                         i18n ("You must save this image before sending it.\n"
                               "Do you want to save it?"),
-                        TQString::null,
+                        TQString(),
                         KStdGuiItem::save (), KStdGuiItem::cancel ());
 
         if (result == KMessageBox::Yes)
@@ -1263,12 +1263,12 @@ void kpMainWindow::slotMail ()
     }
 
     kapp->invokeMailer (
-        TQString::null/*to*/,
-        TQString::null/*cc*/,
-        TQString::null/*bcc*/,
+        TQString()/*to*/,
+        TQString()/*cc*/,
+        TQString()/*bcc*/,
         m_document->prettyFilename()/*subject*/,
-        TQString::null/*body*/,
-        TQString::null/*messageFile*/,
+        TQString()/*body*/,
+        TQString()/*messageFile*/,
         TQStringList (m_document->url ().url ())/*attachments*/);
 }
 
@@ -1297,7 +1297,7 @@ void kpMainWindow::setAsWallpaper (bool centered)
         }
 
         int result = KMessageBox::questionYesNo (this,
-                         question, TQString::null,
+                         question, TQString(),
                          KStdGuiItem::save (), KStdGuiItem::cancel ());
 
         if (result == KMessageBox::Yes)

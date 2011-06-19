@@ -118,7 +118,7 @@ public:
     */
    virtual TQString mimeType( ) const
    {
-      return TQString::null;
+      return TQString();
    }
    /**
     * Returns a list of patterns for the import file dialog

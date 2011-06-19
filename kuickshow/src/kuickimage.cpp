@@ -82,7 +82,7 @@ void KuickImage::rotate( Rotation rot )
     }
 
     else if ( rot == ROT_90 || rot == ROT_270 ) {
-	qSwap( myWidth, myHeight );
+	tqSwap( myWidth, myHeight );
 	Imlib_rotate_image( myId, myIm, -1 );
 
 	if ( rot == ROT_90 ) 		// rotate 90 degrees
@@ -178,7 +178,7 @@ void KuickImage::restoreOriginalSize()
     myIsDirty = true;
 
     if ( myRotation == ROT_90 || myRotation == ROT_270 )
-        qSwap( myWidth, myHeight );
+        tqSwap( myWidth, myHeight );
 }
 
 void KuickImage::resize( int width, int height, KuickImage::ResizeMode mode )
@@ -212,9 +212,9 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 {
 //	qDebug("-- smoothResize: %i x %i", newWidth, newHeight);
 	
-	TQImage *image = newQImage();
-	// Note: TQImage::ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
-	TQImage scaledImage = image->smoothScale(newWidth, newHeight, TQImage::ScaleFree);
+	TQImage *image = newTQImage();
+	// Note: TQ_ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
+	TQImage scaledImage = image->smoothScale(newWidth, newHeight, TQ_ScaleFree);
 		
 	delete image;
 	
@@ -235,11 +235,11 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	return false;
 }
 
-TQImage * KuickImage::newQImage() const
+TQImage * KuickImage::newTQImage() const
 {
 	ImlibImage *im;
 
-//	qDebug("-- newQImage");
+//	qDebug("-- newTQImage");
 
 	if ( myOrigIm != 0L && myRotation == ROT_0 && myFlipMode == FlipNone )
 	{
@@ -257,7 +257,7 @@ TQImage * KuickImage::newQImage() const
 	
 	TQImage *image = new TQImage( w, h, 32 );
 	uchar *rgb = im->rgb_data;
-	QRgb **destImageData = reinterpret_cast<QRgb**>( image->jumpTable() );
+	TQRgb **destImageData = reinterpret_cast<TQRgb**>( image->jumpTable() );
 	
 
 	int byteIndex = 0;
@@ -275,7 +275,7 @@ TQImage * KuickImage::newQImage() const
 		uchar g = rgb[byteIndex++];
 		uchar b = rgb[byteIndex++];
 		
-		QRgb rgbPixel = qRgb( r, g, b );
+		TQRgb rgbPixel = tqRgb( r, g, b );
 		destImageData[destLineIndex][destByteIndex++] = rgbPixel;
 	}
 	
@@ -306,12 +306,12 @@ ImlibImage * KuickImage::toImage( ImlibData *id, TQImage& image )
     int h = image.height();
 
 	for (int y = 0; y < h; y++) {
-		QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
+		TQRgb *scanLine = reinterpret_cast<TQRgb *>( image.scanLine(y) );
 		for (int x = 0; x < w; x++) {
-		    const QRgb& pixel = scanLine[x];
-		    *(newData++) = qRed(pixel);
-		    *(newData++) = qGreen(pixel);
-		    *(newData++) = qBlue(pixel);
+		    const TQRgb& pixel = scanLine[x];
+		    *(newData++) = tqRed(pixel);
+		    *(newData++) = tqGreen(pixel);
+		    *(newData++) = tqBlue(pixel);
 		}
 	}
 
@@ -341,7 +341,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 
 	//TQImage dst(w, h, myIm->depth(), myIm->numColors(), myIm->bitOrder());
 	
-	//QRgb *scanline;
+	//TQRgb *scanline;
 	
 	int basis_ox, basis_oy, basis_xx, basis_yy;
 	
@@ -363,10 +363,10 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	int max_x2 = (myOrigWidth << 12);
 	int max_y2 = (myOrigHeight << 12);
 	
-//	QRgb background = idata->backgroundColor.rgb();
+//	TQRgb background = idata->backgroundColor.rgb();
 	
-//	QRgb **imdata = (QRgb **) myIm->jumpTable();
-//	QRgb *imdata = reinterpret_cast<QRgb*>( myIm->rgb_data );
+//	TQRgb **imdata = (TQRgb **) myIm->jumpTable();
+//	TQRgb *imdata = reinterpret_cast<TQRgb*>( myIm->rgb_data );
 	uchar *imdata = myIm->rgb_data;
 	
 	
@@ -380,15 +380,15 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 //		if ((y2 >= 0  && (y2 >> 12) < myIm->height()) || y >= h)
 //			break;
 //		
-//		scanline = (QRgb*) dst.scanLine(y);
+//		scanline = (TQRgb*) dst.scanLine(y);
 //		for (int i = 0; i < w; i++)
-//			*(scanline++) = background; //qRgb(0,255,0);
+//			*(scanline++) = background; //tqRgb(0,255,0);
 //		y++;
 //	}
 	
 	for (; y < newHeight; y++)
 	{
-//		scanline = (QRgb*) dst.scanLine(y);
+//		scanline = (TQRgb*) dst.scanLine(y);
 	
 		x2 = basis_ox;
 		y2 = basis_oy + y * basis_yy;
@@ -400,7 +400,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 		
 //		while  ((x2 < 0 || (x2 >> 12) >= myIm->width()) && x < w)	//fill the left of the target pixmap with the background color
 //		{
-//			*(scanline++) = background; //qRgb(0,0,255);
+//			*(scanline++) = background; //tqRgb(0,0,255);
 //			x2 += basis_xx;
 //			x++;
 //		}
@@ -425,14 +425,14 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 			unsigned int iwx = 0xfff - wx;
 			unsigned int iwy = 0xfff - wy;
 			
-			QRgb tl = 0, tr = 0, bl = 0, br = 0;
+			TQRgb tl = 0, tr = 0, bl = 0, br = 0;
 			int ind = 0;
 			ind = (left + top * myOrigWidth) * 3;
 			tl  = (imdata[ind] << 16);
 			tl |= (imdata[ind + 1] << 8);
 			tl |= (imdata[ind + 2] << 0);
 			int bar = imdata[ind + 2] << 8;
-			bar = qBlue(bar);
+			bar = tqBlue(bar);
 			
 			ind = (right + top * myOrigWidth) * 3;
 			tr  = (imdata[ind] << 16);
@@ -462,9 +462,9 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 			br=getValidPixel(myIm, right, bottom, x, y);
 			*/
 			
-			unsigned int r = (unsigned int) (qRed(tl) * iwx * iwy + qRed(tr) * wx* iwy + qRed(bl) * iwx * wy + qRed(br) * wx * wy); // NB 12+12+8 == 32
-			unsigned int g = (unsigned int) (qGreen(tl) * iwx * iwy + qGreen(tr) * wx * iwy + qGreen(bl) * iwx * wy + qGreen(br) * wx * wy);
-			unsigned int b = (unsigned int) (qBlue(tl) * iwx * iwy + qBlue(tr) * wx * iwy + qBlue(bl) * iwx * wy + qBlue(br) * wx * wy);
+			unsigned int r = (unsigned int) (tqRed(tl) * iwx * iwy + tqRed(tr) * wx* iwy + tqRed(bl) * iwx * wy + tqRed(br) * wx * wy); // NB 12+12+8 == 32
+			unsigned int g = (unsigned int) (tqGreen(tl) * iwx * iwy + tqGreen(tr) * wx * iwy + tqGreen(bl) * iwx * wy + tqGreen(br) * wx * wy);
+			unsigned int b = (unsigned int) (tqBlue(tl) * iwx * iwy + tqBlue(tr) * wx * iwy + tqBlue(bl) * iwx * wy + tqBlue(br) * wx * wy);
 			
 			// ### endianness
 			//we're actually off by one in 255 here! (254 instead of 255)
@@ -474,7 +474,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 			newImageData[(y * newWidth * 3) + (x * 3) + 0] = (r >> 24);
 			newImageData[(y * newWidth * 3) + (x * 3) + 1] = (g >> 24);
 			newImageData[(y * newWidth * 3) + (x * 3) + 2] = (b >> 24);
-//			*(scanline++) = qRgb(r >> 24, g >> 24, b >> 24); //we're actually off by one in 255 here
+//			*(scanline++) = tqRgb(r >> 24, g >> 24, b >> 24); //we're actually off by one in 255 here
 			
 			x2 += basis_xx;
 			
@@ -488,7 +488,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 		
 //		while  (x < w)	//fill the right of each scanline with the background colour
 //		{
-//			*(scanline++) = background; //qRgb(255,0,0);
+//			*(scanline++) = background; //tqRgb(255,0,0);
 //			x++;
 //		}
 	}
@@ -500,9 +500,9 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 //		if (y >= h)
 //			break;
 //		
-//		scanline = (QRgb*) dst.scanLine(y);
+//		scanline = (TQRgb*) dst.scanLine(y);
 //		for (int i = 0; i < w; i++)
-//			*(scanline++) = background; //qRgb(255,255,0);
+//			*(scanline++) = background; //tqRgb(255,255,0);
 //		y++;
 //	}
 

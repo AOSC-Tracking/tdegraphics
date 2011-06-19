@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -101,8 +101,9 @@ class KookaImage;
 class FormatDialog:public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   FormatDialog( TQWidget *parent, const TQString&, const char * );
+   FormatDialog( TQWidget *tqparent, const TQString&, const char * );
 
 
    TQString      getFormat( ) const;
@@ -129,7 +130,7 @@ private:
    TQComboBox   	*cb_subf;
    TQListBox    	*lb_format;
    TQLabel      	*l_help;
-   QLabel	*l2;
+   TQLabel	*l2;
    TQCheckBox    *cbRemember;
    TQCheckBox    *cbDontAsk;
 };
@@ -144,6 +145,7 @@ private:
 
 class ImgSaver:public TQObject {
    Q_OBJECT
+  TQ_OBJECT
 public:
 	/**
 	 *  constructor of the image-saver object.
@@ -153,8 +155,8 @@ public:
 	 *  @param dir  Name of the save root directory
 	 *  @param name Name of a subdirectory in the saveroot.
 	 **/
-   ImgSaver( TQWidget *parent, const KURL );
-   ImgSaver( TQWidget *parent );
+   ImgSaver( TQWidget *tqparent, const KURL );
+   ImgSaver( TQWidget *tqparent );
 
    TQString     errorString( ImgSaveStat );
    /**

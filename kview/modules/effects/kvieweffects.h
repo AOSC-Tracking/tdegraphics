@@ -13,8 +13,9 @@ namespace KImageViewer { class Viewer; }
 class KViewEffects : public KParts::Plugin
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	KViewEffects( TQObject* parent, const char* name, const TQStringList & );
+	KViewEffects( TQObject* tqparent, const char* name, const TQStringList & );
 	virtual ~KViewEffects();
 
 private slots:

@@ -47,7 +47,7 @@ public:
     */
    PMRenderMode( );
    /**
-    * Reads the attributes from the QDomElement
+    * Reads the attributes from the TQDomElement
     */
    PMRenderMode( const TQDomElement& e );
 

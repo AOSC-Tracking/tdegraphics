@@ -54,7 +54,7 @@ public:
    virtual bool dataChangeOnInsertRemove( ) const { return true; }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -76,7 +76,7 @@ public:
    /**
     * Returns a new @ref PMTextureMapEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
 
    /** */
    virtual void createMemento( );
@@ -153,7 +153,7 @@ public:
    virtual TQString mapType( ) const { return TQString( "Texture" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -193,7 +193,7 @@ public:
    virtual TQString mapType( ) const { return TQString( "Pigment" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -233,7 +233,7 @@ public:
    virtual TQString mapType( ) const { return TQString( "SolidColor" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -274,7 +274,7 @@ public:
    virtual TQString mapType( ) const { return TQString( "Normal" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -314,7 +314,7 @@ public:
    virtual TQString mapType( ) const { return TQString( "Slope" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -354,7 +354,7 @@ public:
    virtual TQString mapType( ) const { return TQString( "Density" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

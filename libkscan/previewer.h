@@ -40,11 +40,12 @@ class TQComboBox;
 class TQRadioButton;
 class TQHBoxLayout;
 
-class Previewer : public QWidget
+class Previewer : public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    Previewer(TQWidget *parent=0, const char *name=0);
+    Previewer(TQWidget *tqparent=0, const char *name=0);
     ~Previewer();
 
     ImageCanvas *getImageCanvas( void ){ return( img_canvas ); }
@@ -88,7 +89,7 @@ private:
 
     TQPoint calcPercent( int, int );
 
-    TQHBoxLayout *layout;
+    TQHBoxLayout *tqlayout;
     ImageCanvas *img_canvas;
     TQComboBox   *pre_format_combo;
     TQMemArray<TQCString> format_ids;

@@ -43,11 +43,11 @@ PMDensity::~PMDensity( )
 {
 }
 
-PMMetaObject* PMDensity::metaObject( ) const
+PMMetaObject* PMDensity::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Density", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Density", Base::tqmetaObject( ),
                                         createNewDensity );
    }
    return s_pMetaObject;
@@ -69,8 +69,8 @@ TQString PMDensity::description( ) const
 }
 
 
-PMDialogEditBase* PMDensity::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMDensity::editWidget( TQWidget* tqparent ) const
 {
-   return new PMDensityEdit( parent );
+   return new PMDensityEdit( tqparent );
 }
 

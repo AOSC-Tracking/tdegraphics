@@ -30,11 +30,12 @@ class TQCheckBox;
 class TQVBox;
 class TQSize;
 
-class ScaleDlg : public QObject
+class ScaleDlg : public TQObject
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
-		ScaleDlg( const TQSize & originalsize, TQVBox * parent, const char * name = 0 );
+		ScaleDlg( const TQSize & originalsize, TQVBox * tqparent, const char * name = 0 );
 		~ScaleDlg();
 
 	private slots:

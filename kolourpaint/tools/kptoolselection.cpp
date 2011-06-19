@@ -141,7 +141,7 @@ TQString kpToolSelection::haventBegunDrawUserMessage () const
         else
             return i18n ("Left drag to scale selection.");
     }
-    else if (sel && sel->contains (m_currentPoint))
+    else if (sel && sel->tqcontains (m_currentPoint))
     {
         if (m_mode == Text)
         {
@@ -300,7 +300,7 @@ void kpToolSelection::beginDraw ()
             }
             viewManager ()->restoreQueueUpdates ();
         }
-        else if (sel->contains (m_currentPoint))
+        else if (sel->tqcontains (m_currentPoint))
         {
             if (m_mode == Text && onSelectionToSelectText () && !controlOrShiftPressed ())
             {
@@ -391,24 +391,24 @@ const TQCursor &kpToolSelection::cursor () const
         {
         case (kpView::Top | kpView::Left):
         case (kpView::Bottom | kpView::Right):
-            return Qt::sizeFDiagCursor;
+            return TQt::sizeFDiagCursor;
 
         case (kpView::Bottom | kpView::Left):
         case (kpView::Top | kpView::Right):
-            return Qt::sizeBDiagCursor;
+            return TQt::sizeBDiagCursor;
 
         case kpView::Top:
         case kpView::Bottom:
-            return Qt::sizeVerCursor;
+            return TQt::sizeVerCursor;
 
         case kpView::Left:
         case kpView::Right:
-            return Qt::sizeHorCursor;
+            return TQt::sizeHorCursor;
         }
 
-        return Qt::arrowCursor;
+        return TQt::arrowCursor;
     }
-    else if (sel && sel->contains (m_currentPoint))
+    else if (sel && sel->tqcontains (m_currentPoint))
     {
     #if DEBUG_KP_TOOL_SELECTION && 1
         kdDebug () << "\tsel contains currentPoint; selecting text? "
@@ -416,16 +416,16 @@ const TQCursor &kpToolSelection::cursor () const
     #endif
 
         if (m_mode == Text && onSelectionToSelectText () && !controlOrShiftPressed ())
-            return Qt::ibeamCursor;
+            return TQt::ibeamCursor;
         else
-            return Qt::sizeAllCursor;
+            return TQt::sizeAllCursor;
     }
     else
     {
     #if DEBUG_KP_TOOL_SELECTION && 1
         kdDebug () << "\tnot on sel" << endl;
     #endif
-        return Qt::crossCursor;
+        return TQt::crossCursor;
     }
 }
 
@@ -617,8 +617,8 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
                                                     mainWindow ()->selectionTransparency ()));
 
             setUserShapePoints (m_startPoint,
-                                TQPoint (QMAX (0, QMIN (m_currentPoint.x (), document ()->width () - 1)),
-                                        QMAX (0, QMIN (m_currentPoint.y (), document ()->height () - 1))));
+                                TQPoint (TQMAX (0, TQMIN (m_currentPoint.x (), document ()->width () - 1)),
+                                        TQMAX (0, TQMIN (m_currentPoint.y (), document ()->height () - 1))));
             break;
         }
         case kpToolSelection::Text:
@@ -646,7 +646,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
                 {
                     if (m_startPoint.x () + minimumWidth - 1 >= document ()->width ())
                     {
-                        minimumWidth = QMAX (kpSelection::minimumWidthForTextStyle (textStyle),
+                        minimumWidth = TQMAX (kpSelection::minimumWidthForTextStyle (textStyle),
                                              document ()->width () - m_startPoint.x ());
                     }
                 }
@@ -654,7 +654,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
                 {
                     if (m_startPoint.x () - minimumWidth + 1 < 0)
                     {
-                        minimumWidth = QMAX (kpSelection::minimumWidthForTextStyle (textStyle),
+                        minimumWidth = TQMAX (kpSelection::minimumWidthForTextStyle (textStyle),
                                              m_startPoint.x () + 1);
                     }
                 }
@@ -664,7 +664,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
                 {
                     if (m_startPoint.y () + minimumHeight - 1 >= document ()->height ())
                     {
-                        minimumHeight = QMAX (kpSelection::minimumHeightForTextStyle (textStyle),
+                        minimumHeight = TQMAX (kpSelection::minimumHeightForTextStyle (textStyle),
                                             document ()->height () - m_startPoint.y ());
                     }
                 }
@@ -672,7 +672,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
                 {
                     if (m_startPoint.y () - minimumHeight + 1 < 0)
                     {
-                        minimumHeight = QMAX (kpSelection::minimumHeightForTextStyle (textStyle),
+                        minimumHeight = TQMAX (kpSelection::minimumHeightForTextStyle (textStyle),
                                             m_startPoint.y () + 1);
                     }
                 }
@@ -845,7 +845,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
         if (!sel->pixmap () && !m_currentPullFromDocumentCommand)
         {
             m_currentPullFromDocumentCommand = new kpToolSelectionPullFromDocumentCommand (
-                TQString::null/*uninteresting child of macro cmd*/,
+                TQString()/*uninteresting child of macro cmd*/,
                 mainWindow ());
             m_currentPullFromDocumentCommand->execute ();
         }
@@ -853,7 +853,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
         if (!m_currentMoveCommand)
         {
             m_currentMoveCommand = new kpToolSelectionMoveCommand (
-                TQString::null/*uninteresting child of macro cmd*/,
+                TQString()/*uninteresting child of macro cmd*/,
                 mainWindow ());
             m_currentMoveCommandIsSmear = false;
         }
@@ -903,7 +903,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
         if (!sel->pixmap () && !m_currentPullFromDocumentCommand)
         {
             m_currentPullFromDocumentCommand = new kpToolSelectionPullFromDocumentCommand (
-                TQString::null/*uninteresting child of macro cmd*/,
+                TQString()/*uninteresting child of macro cmd*/,
                 mainWindow ());
             m_currentPullFromDocumentCommand->execute ();
         }
@@ -929,7 +929,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
             
         int newWidth = oldWidth + userXSign * (thisPoint.x () - m_startPoint.x ());
         
-        newWidth = QMAX (originalSelection.minimumWidth (), newWidth);
+        newWidth = TQMAX (originalSelection.minimumWidth (), newWidth);
         
         
         // Determine new height.
@@ -942,7 +942,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
             
         int newHeight = oldHeight + userYSign * (thisPoint.y () - m_startPoint.y ());
         
-        newHeight = QMAX (originalSelection.minimumHeight (), newHeight);
+        newHeight = TQMAX (originalSelection.minimumHeight (), newHeight);
 
                 
         // Keep aspect ratio?
@@ -954,7 +954,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
                 (userYSign ? double (newHeight) / oldHeight : 0))
             {
                 newHeight = newWidth * oldHeight / oldWidth;
-                newHeight = QMAX (originalSelection.minimumHeight (),
+                newHeight = TQMAX (originalSelection.minimumHeight (),
                                   newHeight);
             }
             // Height changed more than width?
@@ -962,7 +962,7 @@ void kpToolSelection::draw (const TQPoint &inThisPoint, const TQPoint & /*lastPo
             else
             {
                 newWidth = newHeight * oldWidth / oldHeight;
-                newWidth = QMAX (originalSelection.minimumWidth (), newWidth);
+                newWidth = TQMAX (originalSelection.minimumWidth (), newWidth);
             }
         }
             
@@ -1243,7 +1243,7 @@ void kpToolSelection::keyPressEvent (TQKeyEvent *e)
 
     if (document ()->selection () &&
         !hasBegunDraw () &&
-         e->key () == Qt::Key_Escape)
+         e->key () == TQt::Key_Escape)
     {
     #if DEBUG_KP_TOOL_SELECTION && 0
         kdDebug () << "\tescape pressed with sel when not begun draw - deselecting" << endl;
@@ -1307,7 +1307,7 @@ void kpToolSelection::selectionTransparencyChanged (const TQString & /*name*/)
         //       Undo.
         //       The rectangle is no longer invisible.
         //
-        //if (document ()->selection ()->setTransparency (st, true/*check harder for no change in mask*/))
+        //if (document ()->selection ()->setTransparency (st, true/*check harder for no change in tqmask*/))
 
         document ()->selection ()->setTransparency (st);
         if (true)
@@ -1356,7 +1356,7 @@ void kpToolSelection::slotIsOpaqueChanged ()
         kdDebug () << "\thave sel - set transparency" << endl;
     #endif
 
-        TQApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (TQt::waitCursor);
 
         if (hasBegunShape ())
             endShapeInternal ();
@@ -1400,7 +1400,7 @@ void kpToolSelection::slotBackgroundColorChanged (const kpColor &)
         kdDebug () << "\thave sel - set transparency" << endl;
     #endif
 
-        TQApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (TQt::waitCursor);
 
         kpSelectionTransparency st = mainWindow ()->selectionTransparency ();
         kpSelectionTransparency oldST = st;
@@ -1439,7 +1439,7 @@ void kpToolSelection::slotColorSimilarityChanged (double, int)
         kdDebug () << "\thave sel - set transparency" << endl;
     #endif
 
-        TQApplication::setOverrideCursor (Qt::waitCursor);
+        TQApplication::setOverrideCursor (TQt::waitCursor);
 
         kpSelectionTransparency st = mainWindow ()->selectionTransparency ();
         kpSelectionTransparency oldST = st;
@@ -1747,7 +1747,7 @@ void kpToolSelectionTransparencyCommand::execute ()
     if (!doc)
         return;
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     m_mainWindow->setSelectionTransparency (m_st, true/*force colour change*/);
 
@@ -1768,7 +1768,7 @@ void kpToolSelectionTransparencyCommand::unexecute ()
     if (!doc)
         return;
 
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     m_mainWindow->setSelectionTransparency (m_oldST, true/*force colour change*/);
 
@@ -2203,7 +2203,7 @@ void kpToolSelectionResizeScaleCommand::finalize ()
 // public virtual [base kpToolResizeScaleCommand]
 void kpToolSelectionResizeScaleCommand::execute ()
 {
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     killSmoothScaleTimer ();
 
@@ -2218,7 +2218,7 @@ void kpToolSelectionResizeScaleCommand::execute ()
 // public virtual [base kpToolResizeScaleCommand]
 void kpToolSelectionResizeScaleCommand::unexecute ()
 {
-    TQApplication::setOverrideCursor (Qt::waitCursor);
+    TQApplication::setOverrideCursor (TQt::waitCursor);
 
     killSmoothScaleTimer ();
 

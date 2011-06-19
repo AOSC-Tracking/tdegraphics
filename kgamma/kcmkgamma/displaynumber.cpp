@@ -20,16 +20,16 @@
 
 #include "displaynumber.h"
 
-DisplayNumber::DisplayNumber(TQWidget *parent, int digits, \
-    int prec, const char *name) : TQLabel(parent,name) {
+DisplayNumber::DisplayNumber(TQWidget *tqparent, int digits, \
+    int prec, const char *name) : TQLabel(tqparent,name) {
 
   setPrecision(prec);
   setWidth(digits);  
 
   setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
-  setBackgroundMode(Qt::PaletteBase);
-  setAlignment(Qt::AlignCenter);
-  setFocusPolicy(NoFocus);
+  setBackgroundMode(TQt::PaletteBase);
+  tqsetAlignment(TQt::AlignCenter);
+  setFocusPolicy(TQ_NoFocus);
 }
 
 DisplayNumber::~DisplayNumber(){

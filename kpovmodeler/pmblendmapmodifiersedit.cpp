@@ -37,8 +37,8 @@
 #include <kdialog.h>
 #include <kfiledialog.h>
 
-PMBlendMapModifiersEdit::PMBlendMapModifiersEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMBlendMapModifiersEdit::PMBlendMapModifiersEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }

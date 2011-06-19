@@ -56,7 +56,7 @@ void kpMainWindow::addPermanentStatusBarItem (int id, int maxTextLen)
                          maxTextLen); //+ 2/*spaces on either side*/);
 
     sb->insertFixedItem (textWithMaxLen, id, true/*permanent, place on the right*/);
-    sb->changeItem (TQString::null, id);
+    sb->changeItem (TQString(), id);
 }
 
 // private
@@ -67,8 +67,8 @@ void kpMainWindow::createStatusBar ()
     // 9999 pixels "ought to be enough for anybody"
     const int maxDimenLength = 4;
 
-    //sb->insertItem (TQString::null, StatusBarItemMessage, 1/*stretch*/);
-    //sb->setItemAlignment (StatusBarItemMessage, Qt::AlignLeft | Qt::AlignVCenter);
+    //sb->insertItem (TQString(), StatusBarItemMessage, 1/*stretch*/);
+    //sb->setItemAlignment (StatusBarItemMessage, TQt::AlignLeft | TQt::AlignVCenter);
 
     m_statusBarMessageLabel = new kpSqueezedTextLabel (sb);
     //m_statusBarMessageLabel->setShowEllipsis (false);
@@ -137,7 +137,7 @@ void kpMainWindow::setStatusBarShapePoints (const TQPoint &startPoint,
 
     if (startPoint == KP_INVALID_POINT)
     {
-        statusBar ()->changeItem (TQString::null, StatusBarItemShapePoints);
+        statusBar ()->changeItem (TQString(), StatusBarItemShapePoints);
     }
     else if (endPoint == KP_INVALID_POINT)
     {
@@ -185,7 +185,7 @@ void kpMainWindow::setStatusBarShapeSize (const TQSize &size)
 
     if (size == KP_INVALID_SIZE)
     {
-        statusBar ()->changeItem (TQString::null, StatusBarItemShapeSize);
+        statusBar ()->changeItem (TQString(), StatusBarItemShapeSize);
     }
     else
     {
@@ -214,7 +214,7 @@ void kpMainWindow::setStatusBarDocSize (const TQSize &size)
 
     if (size == KP_INVALID_SIZE)
     {
-        statusBar ()->changeItem (TQString::null, StatusBarItemDocSize);
+        statusBar ()->changeItem (TQString(), StatusBarItemDocSize);
     }
     else
     {
@@ -240,7 +240,7 @@ void kpMainWindow::setStatusBarDocDepth (int depth)
 
     if (depth <= 0)
     {
-        statusBar ()->changeItem (TQString::null, StatusBarItemDocDepth);
+        statusBar ()->changeItem (TQString(), StatusBarItemDocDepth);
     }
     else
     {
@@ -264,7 +264,7 @@ void kpMainWindow::setStatusBarZoom (int zoom)
 
     if (zoom <= 0)
     {
-        statusBar ()->changeItem (TQString::null, StatusBarItemZoom);
+        statusBar ()->changeItem (TQString(), StatusBarItemZoom);
     }
     else
     {
@@ -289,7 +289,7 @@ void kpMainWindow::recalculateStatusBarMessage ()
 #endif
 
     // HACK: To work around kpViewScrollableContainer's unreliable
-    //       status messages (which in turn is due to Qt not updating
+    //       status messages (which in turn is due to TQt not updating
     //       TQWidget::hasMouse() on drags and we needing to hack around it)
     if (!scrollViewMessage.isEmpty () &&
         m_scrollView->newDocSize ().isEmpty () &&
@@ -303,7 +303,7 @@ void kpMainWindow::recalculateStatusBarMessage ()
         m_scrollView->clearStatusMessage ();
         m_scrollView->blockSignals (false);
 
-        scrollViewMessage = TQString::null;
+        scrollViewMessage = TQString();
     #if DEBUG_STATUS_BAR && 1
         kdDebug () << "\t\t\tdone" << endl;
     #endif

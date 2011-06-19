@@ -94,7 +94,7 @@ kpDocument::kpDocument (int w, int h, kpMainWindow *mainWindow)
 #endif
 
     m_pixmap = new TQPixmap (w, h);
-    m_pixmap->fill (Qt::white);
+    m_pixmap->fill (TQt::white);
 }
 
 kpDocument::~kpDocument ()
@@ -156,7 +156,7 @@ TQPixmap kpDocument::convertToPixmapAsLosslessAsPossible (
         metaInfo->setDotsPerMeterY (image.dotsPerMeterY ());
         metaInfo->setOffset (image.offset ());
 
-        TQValueList <TQImageTextKeyLang> keyList = image.textList ();
+        TQValueList <TQImageTextKeyLang> keyList = image.tqtextList ();
         for (TQValueList <TQImageTextKeyLang>::const_iterator it = keyList.begin ();
              it != keyList.end ();
              it++)
@@ -179,7 +179,7 @@ TQPixmap kpDocument::convertToPixmapAsLosslessAsPossible (
         {
             for (int x = 0; x < image.width (); x++)
             {
-                const QRgb rgb = image.pixel (x, y);
+                const TQRgb rgb = image.pixel (x, y);
                 fprintf (stderr, " %08X", rgb);
             }
             fprintf (stderr, "\n");
@@ -204,7 +204,7 @@ TQPixmap kpDocument::convertToPixmapAsLosslessAsPossible (
     {
         for (int x = 0; x < image2.width (); x++)
         {
-            const QRgb rgb = image2.pixel (x, y);
+            const TQRgb rgb = image2.pixel (x, y);
             hash += ((x % 2) + 1) * rgb;
             if (rgb != image.pixel (x, y))
             {
@@ -231,12 +231,12 @@ TQPixmap kpDocument::convertToPixmapAsLosslessAsPossible (
 
 // public static
 TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExistDialog,
-                                       TQWidget *parent,
+                                       TQWidget *tqparent,
                                        kpDocumentSaveOptions *saveOptions,
                                        kpDocumentMetaInfo *metaInfo)
 {
 #if DEBUG_KP_DOCUMENT
-    kdDebug () << "kpDocument::getPixmapFromFile(" << url << "," << parent << ")" << endl;
+    kdDebug () << "kpDocument::getPixmapFromFile(" << url << "," << tqparent << ")" << endl;
 #endif
 
     if (saveOptions)
@@ -247,11 +247,11 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
 
 
     TQString tempFile;
-    if (url.isEmpty () || !KIO::NetAccess::download (url, tempFile, parent))
+    if (url.isEmpty () || !KIO::NetAccess::download (url, tempFile, tqparent))
     {
         if (!suppressDoesntExistDialog)
         {
-            KMessageBox::sorry (parent,
+            KMessageBox::sorry (tqparent,
                                 i18n ("Could not open \"%1\".")
                                     .arg (kpDocument::prettyFilenameForURL (url)));
         }
@@ -277,7 +277,7 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
 
         if (detectedMimeType.isEmpty ())
         {
-            KMessageBox::sorry (parent,
+            KMessageBox::sorry (tqparent,
                                 i18n ("Could not open \"%1\" - unknown mimetype.")
                                     .arg (kpDocument::prettyFilenameForURL (url)));
             KIO::NetAccess::removeTempFile (tempFile);
@@ -292,7 +292,7 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
 
     if (image.isNull ())
     {
-        KMessageBox::sorry (parent,
+        KMessageBox::sorry (tqparent,
                             i18n ("Could not open \"%1\" - unsupported image format.\n"
                                   "The file may be corrupt.")
                                 .arg (kpDocument::prettyFilenameForURL (url)));
@@ -310,7 +310,7 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
 
                    " contains translucency which is not fully"
                    " supported. The translucency data will be"
-                   " approximated with a 1-bit transparency mask.")
+                   " approximated with a 1-bit transparency tqmask.")
                  .arg (prettyFilenameForURL (url)),
              i18n ("The image \"%1\""
                    " may have more colors than the current screen mode."
@@ -320,16 +320,16 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
              i18n ("The image \"%1\""
                    " contains translucency which is not fully"
                    " supported. The translucency data will be"
-                   " approximated with a 1-bit transparency mask.")
+                   " approximated with a 1-bit transparency tqmask.")
                 .arg (prettyFilenameForURL (url)),
             "docOpen",
-            parent),
+            tqparent),
         saveOptions,
         metaInfo);
 
     if (newPixmap.isNull ())
     {
-        KMessageBox::sorry (parent,
+        KMessageBox::sorry (tqparent,
                             i18n ("Could not open \"%1\" - out of graphics memory.")
                                 .arg (kpDocument::prettyFilenameForURL (url)));
         return TQPixmap ();
@@ -352,7 +352,7 @@ void kpDocument::openNew (const KURL &url)
     kdDebug () << "KpDocument::openNew (" << url << ")" << endl;
 #endif
 
-    m_pixmap->fill (Qt::white);
+    m_pixmap->fill (TQt::white);
 
     setURL (url, false/*not from url*/);
     *m_saveOptions = kpDocumentSaveOptions ();
@@ -446,13 +446,13 @@ bool kpDocument::save (bool overwritePrompt, bool lossyPrompt)
 // public static
 bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                                       const kpDocumentSaveOptions &saveOptions,
-                                      TQWidget *parent)
+                                      TQWidget *tqparent)
 {
 #if DEBUG_KP_DOCUMENT
     kdDebug () << "kpDocument::lossyPromptContinue()" << endl;
 #endif
 
-#define QUIT_IF_CANCEL(messageBoxCommand)            \
+#define TQUIT_IF_CANCEL(messageBoxCommand)            \
 {                                                    \
     if (messageBoxCommand != KMessageBox::Continue)  \
     {                                                \
@@ -464,8 +464,8 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
     if (lossyType & (kpDocumentSaveOptions::MimeTypeMaximumColorDepthLow |
                      kpDocumentSaveOptions::Quality))
     {
-        QUIT_IF_CANCEL (
-            KMessageBox::warningContinueCancel (parent,
+        TQUIT_IF_CANCEL (
+            KMessageBox::warningContinueCancel (tqparent,
                 i18n ("<qt><p>The <b>%1</b> format may not be able"
                       " to preserve all of the image's color information.</p>"
 
@@ -475,12 +475,12 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                 //       low maximum colour depth
                 i18n ("Lossy File Format"),
                 KStdGuiItem::save (),
-                TQString::fromLatin1 ("SaveInLossyMimeTypeDontAskAgain")));
+                TQString::tqfromLatin1 ("SaveInLossyMimeTypeDontAskAgain")));
     }
     else if (lossyType & kpDocumentSaveOptions::ColorDepthLow)
     {
-        QUIT_IF_CANCEL (
-            KMessageBox::warningContinueCancel (parent,
+        TQUIT_IF_CANCEL (
+            KMessageBox::warningContinueCancel (tqparent,
                 i18n ("<qt><p>Saving the image at the low color depth of %1-bit"
                         " may result in the loss of color information."
 
@@ -490,9 +490,9 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                     .arg (saveOptions.colorDepth ()),
                 i18n ("Low Color Depth"),
                 KStdGuiItem::save (),
-                TQString::fromLatin1 ("SaveAtLowColorDepthDontAskAgain")));
+                TQString::tqfromLatin1 ("SaveAtLowColorDepthDontAskAgain")));
     }
-#undef QUIT_IF_CANCEL
+#undef TQUIT_IF_CANCEL
 
     return true;
 }
@@ -503,7 +503,7 @@ bool kpDocument::savePixmapToDevice (const TQPixmap &pixmap,
                                      const kpDocumentSaveOptions &saveOptions,
                                      const kpDocumentMetaInfo &metaInfo,
                                      bool lossyPrompt,
-                                     TQWidget *parent,
+                                     TQWidget *tqparent,
                                      bool *userCancelled)
 {
     if (userCancelled)
@@ -515,7 +515,7 @@ bool kpDocument::savePixmapToDevice (const TQPixmap &pixmap,
                << " type=" << type << endl;
 #endif
 
-    if (lossyPrompt && !lossyPromptContinue (pixmap, saveOptions, parent))
+    if (lossyPrompt && !lossyPromptContinue (pixmap, saveOptions, tqparent))
     {
         if (userCancelled)
             *userCancelled = true;
@@ -529,7 +529,7 @@ bool kpDocument::savePixmapToDevice (const TQPixmap &pixmap,
 
     TQPixmap pixmapToSave =
         kpPixmapFX::pixmapWithDefinedTransparentPixels (pixmap,
-            Qt::white);  // CONFIG
+            TQt::white);  // CONFIG
     TQImage imageToSave = kpPixmapFX::convertToImage (pixmapToSave);
 
 
@@ -584,7 +584,7 @@ bool kpDocument::savePixmapToDevice (const TQPixmap &pixmap,
     if (!imageToSave.save (device, type.latin1 (), quality))
     {
     #if DEBUG_KP_DOCUMENT
-        kdDebug () << "\tQImage::save() returned false" << endl;
+        kdDebug () << "\tTQImage::save() returned false" << endl;
     #endif
         return false;
     }
@@ -596,16 +596,16 @@ bool kpDocument::savePixmapToDevice (const TQPixmap &pixmap,
     return true;
 }
 
-static void CouldNotCreateTemporaryFileDialog (TQWidget *parent)
+static void CouldNotCreateTemporaryFileDialog (TQWidget *tqparent)
 {
-    KMessageBox::error (parent,
+    KMessageBox::error (tqparent,
                         i18n ("Could not save image - unable to create temporary file."));
 }
 
-static void CouldNotSaveDialog (const KURL &url, TQWidget *parent)
+static void CouldNotSaveDialog (const KURL &url, TQWidget *tqparent)
 {
     // TODO: use file.errorString()
-    KMessageBox::error (parent,
+    KMessageBox::error (tqparent,
                         i18n ("Could not save as \"%1\".")
                             .arg (kpDocument::prettyFilenameForURL (url)));
 }
@@ -617,7 +617,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                                    const kpDocumentMetaInfo &metaInfo,
                                    bool overwritePrompt,
                                    bool lossyPrompt,
-                                   TQWidget *parent)
+                                   TQWidget *tqparent)
 {
     // TODO: Use KIO::NetAccess:mostLocalURL() for accessing home:/ (and other
     //       such local URLs) for efficiency and because only local writes
@@ -628,17 +628,17 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                << ",overwritePrompt=" << overwritePrompt
                << ",lossyPrompt=" << lossyPrompt
                << ")" << endl;
-    saveOptions.printDebug (TQString::fromLatin1 ("\tsaveOptions"));
-    metaInfo.printDebug (TQString::fromLatin1 ("\tmetaInfo"));
+    saveOptions.printDebug (TQString::tqfromLatin1 ("\tsaveOptions"));
+    metaInfo.printDebug (TQString::tqfromLatin1 ("\tmetaInfo"));
 #endif
 
-    if (overwritePrompt && KIO::NetAccess::exists (url, false/*write*/, parent))
+    if (overwritePrompt && KIO::NetAccess::exists (url, false/*write*/, tqparent))
     {
-        int result = KMessageBox::warningContinueCancel (parent,
+        int result = KMessageBox::warningContinueCancel (tqparent,
             i18n ("A document called \"%1\" already exists.\n"
                   "Do you want to overwrite it?")
                 .arg (prettyFilenameForURL (url)),
-            TQString::null,
+            TQString(),
             i18n ("Overwrite"));
 
         if (result != KMessageBox::Continue)
@@ -652,7 +652,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
     }
 
 
-    if (lossyPrompt && !lossyPromptContinue (pixmap, saveOptions, parent))
+    if (lossyPrompt && !lossyPromptContinue (pixmap, saveOptions, tqparent))
     {
     #if DEBUG_KP_DOCUMENT
         kdDebug () << "\treturning false because of lossyPrompt" << endl;
@@ -681,15 +681,15 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                 kdDebug () << "\treturning false because could not open KSaveFile"
                            << " status=" << atomicFileWriter.status () << endl;
             #endif
-                ::CouldNotCreateTemporaryFileDialog (parent);
+                ::CouldNotCreateTemporaryFileDialog (tqparent);
                 return false;
             }
 
             // Write to local temporary file.
-            if (!savePixmapToDevice (pixmap, atomicFileWriter.file (),
+            if (!savePixmapToDevice (pixmap, TQT_TQIODEVICE(atomicFileWriter.file ()),
                                      saveOptions, metaInfo,
                                      false/*no lossy prompt*/,
-                                     parent))
+                                     tqparent))
             {
                 atomicFileWriter.abort ();
 
@@ -697,7 +697,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                 kdDebug () << "\treturning false because could not save pixmap to device"
                             << endl;
             #endif
-                ::CouldNotSaveDialog (url, parent);
+                ::CouldNotSaveDialog (url, tqparent);
                 return false;
             }
 
@@ -710,7 +710,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
             #if DEBUG_KP_DOCUMENT
                 kdDebug () << "\tcould not close KSaveFile" << endl;
             #endif
-                ::CouldNotSaveDialog (url, parent);
+                ::CouldNotSaveDialog (url, tqparent);
                 return false;
             }
         }  // sync KSaveFile.abort()
@@ -729,7 +729,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
         #if DEBUG_KP_DOCUMENT
             kdDebug () << "\treturning false because tempFile empty" << endl;
         #endif
-            ::CouldNotCreateTemporaryFileDialog (parent);
+            ::CouldNotCreateTemporaryFileDialog (tqparent);
             return false;
         }
 
@@ -742,20 +742,20 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                 kdDebug () << "\treturning false because can't open file"
                             << " errorString=" << file.errorString () << endl;
             #endif
-                ::CouldNotCreateTemporaryFileDialog (parent);
+                ::CouldNotCreateTemporaryFileDialog (tqparent);
                 return false;
             }
 
-            if (!savePixmapToDevice (pixmap, &file,
+            if (!savePixmapToDevice (pixmap, TQT_TQIODEVICE(&file),
                                      saveOptions, metaInfo,
                                      false/*no lossy prompt*/,
-                                     parent))
+                                     tqparent))
             {
             #if DEBUG_KP_DOCUMENT
                 kdDebug () << "\treturning false because could not save pixmap to device"
                             << endl;
             #endif
-                ::CouldNotSaveDialog (url, parent);
+                ::CouldNotSaveDialog (url, tqparent);
                 return false;
             }
         }
@@ -765,7 +765,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
         #if DEBUG_KP_DOCUMENT
             kdDebug () << "\treturning false because could not close" << endl;
         #endif
-            ::CouldNotSaveDialog (url, parent);
+            ::CouldNotSaveDialog (url, tqparent);
             return false;
         }
 
@@ -773,12 +773,12 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
         // TODO: No one seems to know how to do this atomically
         //       [http://lists.kde.org/?l=kde-core-devel&m=117845162728484&w=2].
         //       At least, fish:// (ssh) is definitely not atomic.
-        if (!KIO::NetAccess::upload (filename, url, parent))
+        if (!KIO::NetAccess::upload (filename, url, tqparent))
         {
         #if DEBUG_KP_DOCUMENT
             kdDebug () << "\treturning false because could not upload" << endl;
         #endif
-            KMessageBox::error (parent,
+            KMessageBox::error (tqparent,
                                 i18n ("Could not save image - failed to upload."));
             return false;
         }
@@ -1109,22 +1109,22 @@ void kpDocument::setSelection (const kpSelection &selection)
                                 (selection.type () == kpSelection::Text));
 
     // We don't change the Selection Tool if the new selection's
-    // shape is merely different to the current tool's (e.g. rectangular
+    // tqshape is merely different to the current tool's (e.g. rectangular
     // vs elliptical) because:
     //
     // 1. All image selection tools support editing selections of all the
-    //    different shapes anyway.
+    //    different tqshapes anyway.
     // 2. Suppose the user is trying out different drags of selection borders
-    //    and then decides to paste a differently shaped selection before continuing
+    //    and then decides to paste a differently tqshaped selection before continuing
     //    to try out different borders.  If the pasting were to switch to
-    //    a differently shaped tool, the borders drawn after the paste would
-    //    be using a new shape rather than the shape before the paste.  This
+    //    a differently tqshaped tool, the borders drawn after the paste would
+    //    be using a new tqshape rather than the tqshape before the paste.  This
     //    could get irritating so we don't do the switch.
     //
     if (m_mainWindow &&
         (!m_mainWindow->toolIsASelectionTool () || isTextChanged))
     {
-        // Switch to the appropriately shaped selection tool
+        // Switch to the appropriately tqshaped selection tool
         // _before_ we change the selection
         // (all selection tool's ::end() functions nuke the current selection)
         switch (selection.type ())
@@ -1235,7 +1235,7 @@ void kpDocument::setSelection (const kpSelection &selection)
 }
 
 // public
-TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &maskBitmap_) const
+TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &tqmaskBitmap_) const
 {
     kpSelection *sel = selection ();
 
@@ -1259,15 +1259,15 @@ TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &maskBitmap_) const
     }
 
 
-    TQBitmap maskBitmap = maskBitmap_;
-    if (maskBitmap.isNull () &&
+    TQBitmap tqmaskBitmap = tqmaskBitmap_;
+    if (tqmaskBitmap.isNull () &&
         !sel->isRectangular ())
     {
-        maskBitmap = sel->maskForOwnType ();
+        tqmaskBitmap = sel->tqmaskForOwnType ();
 
-        if (maskBitmap.isNull ())
+        if (tqmaskBitmap.isNull ())
         {
-            kdError () << "kpDocument::getSelectedPixmap() could not get mask" << endl;
+            kdError () << "kpDocument::getSelectedPixmap() could not get tqmask" << endl;
             return TQPixmap ();
         }
     }
@@ -1275,7 +1275,7 @@ TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &maskBitmap_) const
 
     TQPixmap selPixmap = getPixmapAt (boundingRect);
 
-    if (!maskBitmap.isNull ())
+    if (!tqmaskBitmap.isNull ())
     {
         // Src Dest = Result
         // -----------------
@@ -1286,9 +1286,9 @@ TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &maskBitmap_) const
         TQBitmap selMaskBitmap = kpPixmapFX::getNonNullMask (selPixmap);
         bitBlt (&selMaskBitmap,
                 TQPoint (0, 0),
-                &maskBitmap,
-                TQRect (0, 0, maskBitmap.width (), maskBitmap.height ()),
-                Qt::AndROP);
+                &tqmaskBitmap,
+                TQRect (0, 0, tqmaskBitmap.width (), tqmaskBitmap.height ()),
+                TQt::AndROP);
         selPixmap.setMask (selMaskBitmap);
     }
 
@@ -1325,17 +1325,17 @@ bool kpDocument::selectionPullFromDocument (const kpColor &backgroundColor)
 
 
     //
-    // Figure out mask for non-rectangular selections
+    // Figure out tqmask for non-rectangular selections
     //
 
-    TQBitmap maskBitmap = sel->maskForOwnType (true/*return null bitmap for rectangular*/);
+    TQBitmap tqmaskBitmap = sel->tqmaskForOwnType (true/*return null bitmap for rectangular*/);
 
 
     //
     // Get selection pixmap from document
     //
 
-    TQPixmap selPixmap = getSelectedPixmap (maskBitmap);
+    TQPixmap selPixmap = getSelectedPixmap (tqmaskBitmap);
 
     if (vm)
         vm->setQueueUpdates ();
@@ -1353,10 +1353,10 @@ bool kpDocument::selectionPullFromDocument (const kpColor &backgroundColor)
     if (backgroundColor.isOpaque ())
     {
         TQPixmap erasePixmap (boundingRect.width (), boundingRect.height ());
-        erasePixmap.fill (backgroundColor.toQColor ());
+        erasePixmap.fill (backgroundColor.toTQColor ());
 
-        if (selTransparentPixmap.mask ())
-            erasePixmap.setMask (*selTransparentPixmap.mask ());
+        if (selTransparentPixmap.tqmask ())
+            erasePixmap.setMask (*selTransparentPixmap.tqmask ());
 
         paintPixmapAt (erasePixmap, boundingRect.topLeft ());
     }

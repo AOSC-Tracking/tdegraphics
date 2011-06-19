@@ -31,8 +31,8 @@
 #include "palette.h"
 #include "loadpalettedlg.h"
 
-LoadPaletteDlg::LoadPaletteDlg(TQWidget *parent, const char *name) 
-        : KDialogBase(parent, name, true, i18n( "Load Palette" ), 
+LoadPaletteDlg::LoadPaletteDlg(TQWidget *tqparent, const char *name) 
+        : KDialogBase(tqparent, name, true, i18n( "Load Palette" ), 
           Ok|Cancel, Ok, true) {
 	fileName = "";
     TQWidget *mainWidget = new TQWidget( this );
@@ -45,7 +45,7 @@ LoadPaletteDlg::LoadPaletteDlg(TQWidget *parent, const char *name)
 	TQStringList palettesList = Palette::kdePalettes();
 	for(TQStringList::Iterator palette = palettesList.begin();
 		palette != palettesList.end(); ++palette) {
-		bool prepend = (*palette).contains( "colors/Custom_Colors" );
+		bool prepend = (*palette).tqcontains( "colors/Custom_Colors" );
 		TQString fileName = locate("config", (*palette));
 		if(prepend) {
 			palettesFileNames.prepend(fileName);

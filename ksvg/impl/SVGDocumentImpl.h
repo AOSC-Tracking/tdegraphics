@@ -72,8 +72,9 @@ class SVGDocumentImpl : public TQObject,
 						public SVGDOMNodeBridge
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
-	SVGDocumentImpl(bool anim = true, bool bFit = false, SVGImageElementImpl *parentImage = 0);
+	SVGDocumentImpl(bool anim = true, bool bFit = false, SVGImageElementImpl *tqparentImage = 0);
 	virtual ~SVGDocumentImpl();
 
 	float screenPixelsPerMillimeterX() const;
@@ -89,7 +90,7 @@ public:
 	void setRootElement(SVGSVGElementImpl *);
 	SVGSVGElementImpl *rootElement() const;
 
-	SVGImageElementImpl *parentImage() const { return m_parentImage; }
+	SVGImageElementImpl *tqparentImage() const { return m_parentImage; }
 
 	SVGWindowImpl *window();
 

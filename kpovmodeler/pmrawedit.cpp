@@ -25,8 +25,8 @@
 #include <kglobalsettings.h>
 #include <klocale.h>
 
-PMRawEdit::PMRawEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMRawEdit::PMRawEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -37,10 +37,8 @@ void PMRawEdit::createTopWidgets( )
 
    topLayout( )->addWidget( new TQLabel( i18n( "Povray code:" ), this ) );
    m_pEdit = new TQMultiLineEdit( this );
-#if ( QT_VERSION >= 300 )
-   m_pEdit->setTextFormat( Qt::PlainText );
+   m_pEdit->setTextFormat( TQt::PlainText );
    m_pEdit->setWordWrap( TQTextEdit::NoWrap );
-#endif
    m_pEdit->setFont( KGlobalSettings::fixedFont( ) );
    topLayout( )->addWidget( m_pEdit, 2 );
    

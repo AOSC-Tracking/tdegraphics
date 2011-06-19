@@ -24,8 +24,8 @@
 #include <tqcolor.h>
 #include <kdialog.h>
 
-PMColorEdit::PMColorEdit( bool filterAndTransmit, TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMColorEdit::PMColorEdit( bool filterAndTransmit, TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    m_bFilterAndTransmit = filterAndTransmit;
 
@@ -106,7 +106,7 @@ void PMColorEdit::updateButton( )
 {
    bool b = m_pButton->signalsBlocked( );
    m_pButton->blockSignals( true );
-   m_pButton->setColor( m_color.toQColor( ) );
+   m_pButton->setColor( m_color.toTQColor( ) );
    m_pButton->blockSignals( b );
 }
 

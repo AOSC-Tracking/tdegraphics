@@ -184,7 +184,7 @@ GRect::recthull(const GRect &rect1, const GRect &rect2)
 }
 
 int
-GRect::contains(const GRect & rect) const
+GRect::tqcontains(const GRect & rect) const
 {
    GRect tmp_rect;
    tmp_rect.intersect(*this, rect);

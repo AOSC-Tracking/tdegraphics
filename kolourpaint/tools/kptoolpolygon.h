@@ -60,6 +60,7 @@ class kpViewManager;
 class kpToolPolygon : public kpTool
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum Mode

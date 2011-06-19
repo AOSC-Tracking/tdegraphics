@@ -57,7 +57,7 @@ PMTrueTypeFont* PMTrueTypeCache::lookUp( const TQString& file )
    if( file.isEmpty( ) )
       return 0;
    
-   PMTrueTypeFont* f = m_cache.find( file );
+   PMTrueTypeFont* f = m_cache.tqfind( file );
    if( !f )
    {
       FT_Face face;
@@ -151,7 +151,7 @@ PMTrueTypeOutline* PMTrueTypeFont::outline( TQChar c )
    if( isValid( ) )
    {
       TQString str( c );
-      ol = m_cache.find( str );
+      ol = m_cache.tqfind( str );
       if( !ol )
       {
          FT_UInt glyphIndex = findGlyphIndex( c );
@@ -217,7 +217,7 @@ FT_UInt PMTrueTypeFont::findGlyphIndex( TQChar c )
 
    if( m_face )
    {
-      // glyphIndex = FT_Get_Char_Index( m_face, c.unicode( ) );
+      // glyphIndex = FT_Get_Char_Index( m_face, c.tqunicode( ) );
       // if( !glyphIndex )
       char ch = c.latin1( );
       if( !ch )

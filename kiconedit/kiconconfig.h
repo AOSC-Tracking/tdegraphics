@@ -41,6 +41,7 @@ class TQComboBox;
 class KTemplateEditDlg : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
   KTemplateEditDlg(TQWidget *);
   ~KTemplateEditDlg() {};
@@ -58,9 +59,10 @@ protected:
   KURLRequester *ln_path;
 };
 
-class KTemplateConfig : public QWidget
+class KTemplateConfig : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
   KTemplateConfig(TQWidget*);
   ~KTemplateConfig();
@@ -78,11 +80,12 @@ protected:
   TQPushButton *btadd, *btedit, *btremove;
 };
 
-class KBackgroundConfig : public QWidget
+class KBackgroundConfig : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  KBackgroundConfig(TQWidget *parent);
+  KBackgroundConfig(TQWidget *tqparent);
   ~KBackgroundConfig();
 
 public slots:
@@ -104,11 +107,12 @@ protected:
   TQLabel *lb_ex;
 };
 
-class KMiscConfig : public QWidget
+class KMiscConfig : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  KMiscConfig(TQWidget *parent);
+  KMiscConfig(TQWidget *tqparent);
   ~KMiscConfig();
 
 public slots:
@@ -133,10 +137,11 @@ protected:
 class KIconConfig : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   
-  KIconConfig(TQWidget *parent);
+  KIconConfig(TQWidget *tqparent);
   ~KIconConfig();
 
 protected slots:

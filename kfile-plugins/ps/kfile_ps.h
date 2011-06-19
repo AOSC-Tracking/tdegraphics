@@ -30,8 +30,9 @@ class TQStringList;
 class KPSPlugin: public KFilePlugin, public KDSCCommentHandler
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    KPSPlugin( TQObject *parent, const char *name,
+    KPSPlugin( TQObject *tqparent, const char *name,
                 const TQStringList& preferredItems );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);

@@ -18,16 +18,17 @@
 #include "kuickdata.h"
 #include "kuickfile.h"
 
-// #include those AFTER Qt-includes!
+// #include those AFTER TQt-includes!
 #include <Imlib.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 // #include <X11/extensions/shape.h>
 
 
-class KuickImage : public QObject
+class KuickImage : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   enum ResizeMode { FAST, SMOOTH };
@@ -66,7 +67,7 @@ private:
   /**
    * Note: caller must delete it!
    */
-  TQImage * 	newQImage() const;
+  TQImage * 	newTQImage() const;
 
   const KuickFile * myFile;
 

@@ -24,7 +24,7 @@
 #include <config.h>
 #endif 
 
-// include files for Qt
+// include files for TQt
 #include <tqwidget.h>
 
 class PMTreeView;
@@ -36,14 +36,15 @@ class KConfig;
 /**
  * The PMView class provides the view widget for the PMPart document class.
  */
-class PMView : public QWidget
+class PMView : public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Constructor for the main view
     */
-   PMView( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
+   PMView( PMPart* part, TQWidget* tqparent = 0, const char* name = 0 );
    /**
     * Destructor for the main view
     */

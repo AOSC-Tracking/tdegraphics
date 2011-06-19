@@ -55,10 +55,10 @@
 typedef KParts::GenericFactory<KViewViewer> KViewViewerFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewviewer, KViewViewerFactory )
 
-KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
-		TQObject *parent, const char *name, const TQStringList & )
-	: KImageViewer::Viewer( parent, name )
-	, m_pParentWidget( parentWidget )
+KViewViewer::KViewViewer( TQWidget *tqparentWidget, const char * /*widgetName*/,
+		TQObject *tqparent, const char *name, const TQStringList & )
+	: KImageViewer::Viewer( tqparent, name )
+	, m_pParentWidget( tqparentWidget )
 	, m_pJob( 0 )
 	, m_pExtension( 0 )
 	, m_pCanvas( 0 )
@@ -69,7 +69,7 @@ KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
 	KImageIO::registerFormats();
 
 	TQWidget * widget =  KParts::ComponentFactory::createInstanceFromQuery<TQWidget>(
-			"KImageViewer/Canvas", TQString::null, m_pParentWidget );
+			"KImageViewer/Canvas", TQString(), TQT_TQOBJECT(m_pParentWidget) );
 	m_pCanvas = static_cast<KImageViewer::Canvas *>( widget->qt_cast( "KImageViewer::Canvas" ) );
 	kdDebug( 4610 ) << "KImageViewer::Canvas at " << m_pCanvas << endl;
 	if( ! ( widget && m_pCanvas ) )
@@ -148,10 +148,10 @@ KViewViewer::~KViewViewer()
 		int res = m_url.isEmpty() ?
 			KMessageBox::warningYesNo( widget(),
 				i18n( "This is a new document.\nDo you want to save it ?" ),
-				TQString::null, KStdGuiItem::saveAs(), KStdGuiItem::discard() ):
+				TQString(), KStdGuiItem::saveAs(), KStdGuiItem::discard() ):
 			KMessageBox::warningYesNo( widget(),
 				i18n( "The document has been modified.\nDo you want to save it ?" ),
-				TQString::null, KStdGuiItem::saveAs(), KStdGuiItem::dontSave() );
+				TQString(), KStdGuiItem::saveAs(), KStdGuiItem::dontSave() );
 
 		if( res == KMessageBox::Yes )
 		{
@@ -259,11 +259,11 @@ bool KViewViewer::openURL( const KURL & url )
 		// Use same extension as remote file. This is important for mimetype-determination (e.g. koffice)
 		TQString extension;
 		TQString fileName = url.fileName();
-		int extensionPos = fileName.findRev( '.' );
+		int extensionPos = fileName.tqfindRev( '.' );
 		if ( extensionPos != -1 )
 			extension = fileName.mid( extensionPos ); // keep the '.'
 		delete m_pTempFile;
-		m_pTempFile = new KTempFile( TQString::null, extension );
+		m_pTempFile = new KTempFile( TQString(), extension );
 		m_file = m_pTempFile->name();
 
 		m_pJob = KIO::get( m_url, m_pExtension->urlArgs().reload, isProgressInfoEnabled() );
@@ -294,7 +294,7 @@ void KViewViewer::newImage( const TQImage & newimg )
 	if( closeURL() )
 	{
 		m_url = "";
-		m_file = TQString::null;
+		m_file = TQString();
 		m_sCaption = i18n( "Title caption when new image selected", "new image" );
 		m_pCanvas->setImage( newimg );
 		if( isReadWrite() )
@@ -397,7 +397,7 @@ bool KViewViewer::openFile()
 		}
 		else
 		{
-			emit setStatusBarText( i18n( "Unknown image format: %1" ).arg( m_url.prettyURL() ) );
+			emit setStatusBarText( i18n( "Unknown image format: %1" ).tqarg( m_url.prettyURL() ) );
 			return false;
 		}
 	}
@@ -406,12 +406,12 @@ bool KViewViewer::openFile()
 		kdDebug( 4610 ) << k_funcinfo << " load from file: " << m_file << endl;
 		if( ! TQFile::exists( m_file ) )
 		{
-			emit setStatusBarText( i18n( "No such file: %1" ).arg( m_file ) );
+			emit setStatusBarText( i18n( "No such file: %1" ).tqarg( m_file ) );
 			return false;
 		}
 		if( TQImage::imageFormat( m_file ) == 0 )
 		{
-			emit setStatusBarText( i18n( "Unknown image format: %1" ).arg( m_file ) );
+			emit setStatusBarText( i18n( "Unknown image format: %1" ).tqarg( m_file ) );
 			return false;
 		}
 		// determine Mime Type
@@ -450,7 +450,7 @@ bool KViewViewer::saveFile()
 	if( ! m_newMimeType.isNull() )
 	{
 		m_mimeType = m_newMimeType;
-		m_newMimeType = TQString::null;
+		m_newMimeType = TQString();
 	}
 	TQString type = KImageIO::typeForMime( m_mimeType );
 	kdDebug( 4610 ) << "save m_pCanvas->image() to " << m_file << " as " << type << endl;
@@ -567,7 +567,7 @@ void KViewViewer::writeSettings()
 void KViewViewer::zoomChanged( double zoom )
 {
 	kdDebug( 4610 ) << k_funcinfo << endl;
-	emit setWindowCaption( m_sCaption + TQString( " (%1%)" ).arg( zoom * 100, 0, 'f', 0 ) );
+	emit setWindowCaption( m_sCaption + TQString( " (%1%)" ).tqarg( zoom * 100, 0, 'f', 0 ) );
 	updateZoomMenu( zoom );
 }
 
@@ -610,7 +610,7 @@ void KViewViewer::slotSave()
 void KViewViewer::slotSaveAs()
 {
 	kdDebug( 4610 ) << k_funcinfo << endl;
-	KFileDialog dlg( TQString::null, TQString::null, widget(), "filedialog", true );
+	KFileDialog dlg( TQString(), TQString(), widget(), "filedialog", true );
 	dlg.setMimeFilter( KImageIO::mimeTypes( KImageIO::Writing ) );
 	dlg.setSelection( m_url.fileName() );
 	dlg.setCaption( i18n( "Save As" ) );
@@ -645,7 +645,7 @@ void KViewViewer::setZoom( const TQString & newZoom )
 	kdDebug( 4610 ) << k_funcinfo << newZoom << endl;
 	double zoom;
 	TQString z = newZoom;
-	z.remove( z.find( '%' ), 1 );
+	z.remove( z.tqfind( '%' ), 1 );
 	if( newZoom == "33%" )
 		zoom = 1.0 / 3.0;
 	else
@@ -667,14 +667,14 @@ void KViewViewer::updateZoomMenu( double zoom )
 		TQStringList itemsList = m_paZoom->items();
 		for( TQStringList::Iterator it = itemsList.begin(); it != itemsList.end(); ++it )
 		{
-			z = ( *it ).replace( TQRegExp( "%" ), "" );
+			z = ( *it ).tqreplace( TQRegExp( "%" ), "" );
 			z = z.simplifyWhiteSpace();
 			val = z.toInt( &ok );
-			if( ok && val > 0 && list.contains( val ) == 0 )
+			if( ok && val > 0 && list.tqcontains( val ) == 0 )
 				list << val;
 		}
 		val = TQString::number( zoom * 100, 'f', 0 ).toInt(); // round/lround from math.h doesn't work - dunno
-		if( list.contains( val ) == 0 )
+		if( list.tqcontains( val ) == 0 )
 			list.append( val );
 
 		qHeapSort( list );
@@ -685,9 +685,9 @@ void KViewViewer::updateZoomMenu( double zoom )
 	}
 
 	// first look if it's a new value (not in the list yet)
-	TQString z = TQString( "%1%" ).arg( zoom * 100, 0, 'f', 0 );
+	TQString z = TQString( "%1%" ).tqarg( zoom * 100, 0, 'f', 0 );
 	TQStringList items = m_paZoom->items();
-	int idx = items.findIndex( z );
+	int idx = items.tqfindIndex( z );
 	if( -1 == idx )
 	{
 		// not found XXX: remove when done
@@ -773,7 +773,7 @@ void KViewViewer::slotResultSaveAs( KIO::Job *job )
 	else
 	{
 		emit completed();
-		KIO::CopyJob * cjob = ::qt_cast<KIO::CopyJob*>( job );
+		KIO::CopyJob * cjob = ::tqqt_cast<KIO::CopyJob*>( job );
 		if( cjob )
 		{
 			m_url = cjob->destURL();
@@ -803,21 +803,21 @@ void KViewViewer::slotFileDirty( const TQString & )
 	if( isModified() && isReadWrite() )
 	{
 		KPassivePopup * pop = new KPassivePopup( m_pParentWidget );
-		TQVBox * vb = pop->standardView( i18n( "Load changed image? - %1" ).arg( kapp->aboutData()->programName() ),
-				TQString::null, kapp->miniIcon() );
+		TQVBox * vb = pop->standardView( i18n( "Load changed image? - %1" ).tqarg( kapp->aboutData()->programName() ),
+				TQString(), kapp->miniIcon() );
 		( void )new TQLabel( i18n( "The image %1 which you have modified has changed on disk.\n"
 								  "Do you want to reload the file and lose your changes?\n"
 								  "If you don't and subsequently save the image, you will lose the\n"
-								  "changes that have already been saved." ).arg( url().fileName() ), vb );
+								  "changes that have already been saved." ).tqarg( url().fileName() ), vb );
 		TQWidget * hb = new TQWidget( vb );
-		TQHBoxLayout * layout = new TQHBoxLayout( hb );
-		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
+		TQHBoxLayout * tqlayout = new TQHBoxLayout( hb );
+		tqlayout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		KPushButton * yes = new KPushButton( i18n("Reload"), hb );
-		layout->addWidget( yes );
-		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
+		tqlayout->addWidget( yes );
+		tqlayout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		KPushButton * no = new KPushButton( i18n("Do Not Reload"), hb );
-		layout->addWidget( no );
-		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
+		tqlayout->addWidget( no );
+		tqlayout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		connect( yes, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotReloadUnmodified() ) );
 		connect( yes, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );
 		connect( no, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );

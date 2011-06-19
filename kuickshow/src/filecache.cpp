@@ -42,7 +42,7 @@ FileCache * FileCache::self()
 KuickFile * FileCache::getFile( const KURL& url )
 {
     TQString urlString = url.prettyURL();
-    KuickFile *file = m_files.find( urlString );
+    KuickFile *file = m_files.tqfind( urlString );
     if ( !file ) {
         file = new KuickFile( url );
         m_files.insert( urlString, file );
@@ -58,7 +58,7 @@ TQString FileCache::tempDir()
 
         if ( !m_tempDir ) {
             kdWarning() << "Unable to create temporary directory for KuickShow" << endl;
-            return TQString::null;
+            return TQString();
         }
     }
     
@@ -68,7 +68,7 @@ TQString FileCache::tempDir()
 
 KTempDir * FileCache::createTempDir()
 {
-    TQString tmpName = TQString::fromLatin1( KGlobal::instance()->instanceName() );
+    TQString tmpName = TQString::tqfromLatin1( KGlobal::instance()->instanceName() );
     tmpName.append( TQString::number( getpid() ) );
     TQString dirName = locateLocal( "tmp", tmpName );
     KTempDir *dir = new KTempDir( dirName );

@@ -13,12 +13,12 @@ function bbox_loop(drawit, number)
 
 	for(var i = 0; i < number; i++)
 	{
-		var shape = doc.getElementById("test-" + i);
-		var bbox = shape.getBBox();
+		var tqshape = doc.getElementById("test-" + i);
+		var bbox = tqshape.getBBox();
 	
 		if(drawit == "true")
 		{
-			draw_it(doc, bbox, shape, i + 1);
+			draw_it(doc, bbox, tqshape, i + 1);
 		}
 		else
 		{
@@ -27,13 +27,13 @@ function bbox_loop(drawit, number)
 	}
 }	
 
-function do_string(shape, number)
+function do_string(tqshape, number)
 {
-	var string = "\nShape " + number + "\nX = " + shape.x + "\nY = " + shape.y + "\nW = " + shape.width + "\nH = " + shape.height;
+	var string = "\nShape " + number + "\nX = " + tqshape.x + "\nY = " + tqshape.y + "\nW = " + tqshape.width + "\nH = " + shape.height;
 	alert(string);
 }
 
-function draw_it(doc, bbox, shape, number)
+function draw_it(doc, bbox, tqshape, number)
 {
 	var element = doc.createElement("rect");
 	element.setAttribute("x", bbox.x);
@@ -45,7 +45,7 @@ function draw_it(doc, bbox, shape, number)
 	element.setAttribute("stroke-width", "3");
 	element.setAttribute("id", "bbox" + number);
 	
-	shape.getParentNode().appendChild(element);
+	tqshape.getParentNode().appendChild(element);
 }
 
 function gen_buttons(evt, number)

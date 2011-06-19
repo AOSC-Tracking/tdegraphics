@@ -50,12 +50,12 @@ kpUnzoomedThumbnailView::kpUnzoomedThumbnailView (
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        TQWidget *parent, const char *name)
+        TQWidget *tqparent, const char *name)
 
     : kpThumbnailView (document, toolToolBar, viewManager,
                        buddyView,
                        scrollableContainer,
-                       parent, name),
+                       tqparent, name),
       d (new kpUnzoomedThumbnailViewPrivate ())
 {
     if (buddyViewScrollableContainer ())
@@ -112,7 +112,7 @@ void kpUnzoomedThumbnailView::adjustToEnvironment ()
     if (document ()->width () > width ())
     {
         x = (int) buddyView ()->transformViewToDocX (scrollViewContentsX);
-        const int rightMostAllowedX = QMAX (0, document ()->width () - width ());
+        const int rightMostAllowedX = TQMAX (0, document ()->width () - width ());
     #if DEBUG_KP_UNZOOMED_THUMBNAIL_VIEW
         kdDebug () << "\tdocX=" << x
                 << " docWidth=" << document ()->width ()
@@ -135,7 +135,7 @@ void kpUnzoomedThumbnailView::adjustToEnvironment ()
     if (document ()->height () > height ())
     {
         y = (int) buddyView ()->transformViewToDocY (scrollViewContentsY);
-        const int bottomMostAllowedY = QMAX (0, document ()->height () - height ());
+        const int bottomMostAllowedY = TQMAX (0, document ()->height () - height ());
     #if DEBUG_KP_UNZOOMED_THUMBNAIL_VIEW
         kdDebug () << "\tdocY=" << y
                     << " docHeight=" << document ()->height ()
@@ -163,12 +163,12 @@ void kpUnzoomedThumbnailView::adjustToEnvironment ()
     TQRect docRect = buddyView ()->transformViewToDoc (
         TQRect (buddyViewScrollableContainer ()->contentsXSoon (),
                buddyViewScrollableContainer ()->contentsYSoon (),
-               QMIN (buddyView ()->width (), buddyViewScrollableContainer ()->visibleWidth ()),
-               QMIN (buddyView ()->height (), buddyViewScrollableContainer ()->visibleHeight ())));
+               TQMIN (buddyView ()->width (), buddyViewScrollableContainer ()->visibleWidth ()),
+               TQMIN (buddyView ()->height (), buddyViewScrollableContainer ()->visibleHeight ())));
 
     x = docRect.x () - (width () - docRect.width ()) / 2;
     kdDebug () << "\tnew suggest x=" << x << endl;
-    const int rightMostAllowedX = QMAX (0, document ()->width () - width ());
+    const int rightMostAllowedX = TQMAX (0, document ()->width () - width ());
     if (x < 0)
         x = 0;
     if (x > rightMostAllowedX)
@@ -176,7 +176,7 @@ void kpUnzoomedThumbnailView::adjustToEnvironment ()
 
     y = docRect.y () - (height () - docRect.height ()) / 2;
     kdDebug () << "\tnew suggest y=" << y << endl;
-    const int bottomMostAllowedY = QMAX (0, document ()->height () - height ());
+    const int bottomMostAllowedY = TQMAX (0, document ()->height () - height ());
     if (y < 0)
         y = 0;
     if (y > bottomMostAllowedY)

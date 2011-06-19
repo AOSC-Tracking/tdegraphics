@@ -68,7 +68,7 @@ public:
     TQValueVector< PageViewItem * > items;
     TQValueList< PageViewItem * > visibleItems;
 
-    // view layout (columns and continuous in Settings), zoom and mouse
+    // view tqlayout (columns and continuous in Settings), zoom and mouse
     PageView::ZoomMode zoomMode;
     float zoomFactor;
     int rotation;
@@ -80,7 +80,7 @@ public:
     TQRect mouseSelectionRect;
     TQColor selectionRectColor;
 
-    // type ahead find
+    // type ahead tqfind
     bool typeAheadActive;
     TQString typeAheadString;
     TQTimer * findTimeoutTimer;
@@ -119,7 +119,7 @@ public:
 
 
 
-class PageViewTip : public QToolTip
+class PageViewTip : public TQToolTip
 {
     public:
         PageViewTip( PageView * view )
@@ -146,8 +146,8 @@ void PageViewTip::maybeTip( const TQPoint &_p )
     PageViewItem * pageItem = m_view->pickItemOnPoint( p.x(), p.y() );
     if ( pageItem && m_view->d->mouseMode == PageView::MouseNormal )
     {
-        double nX = (double)(p.x() - pageItem->geometry().left()) / (double)pageItem->width(),
-               nY = (double)(p.y() - pageItem->geometry().top()) / (double)pageItem->height();
+        double nX = (double)(p.x() - pageItem->tqgeometry().left()) / (double)pageItem->width(),
+               nY = (double)(p.y() - pageItem->tqgeometry().top()) / (double)pageItem->height();
 
         // if over a ObjectRect (of type Link) change cursor to hand
         const ObjectRect * object = pageItem->page()->hasObject( ObjectRect::Link, nX, nY );
@@ -158,8 +158,8 @@ void PageViewTip::maybeTip( const TQPoint &_p )
             TQString strtip = link->linkTip();
             if ( !strtip.isEmpty() )
             {
-                TQRect linkRect = object->geometry( pageItem->width(), pageItem->height() );
-                linkRect.moveBy( - m_view->contentsX() + pageItem->geometry().left(), - m_view->contentsY() + pageItem->geometry().top() );
+                TQRect linkRect = object->tqgeometry( pageItem->width(), pageItem->height() );
+                linkRect.moveBy( - m_view->contentsX() + pageItem->tqgeometry().left(), - m_view->contentsY() + pageItem->tqgeometry().top() );
                 tip( linkRect, strtip );
             }
         }
@@ -173,13 +173,13 @@ void PageViewTip::maybeTip( const TQPoint &_p )
  *  160 - constructor and creating actions plus their connected slots (empty stuff)
  *  70  - DocumentObserver inherited methodes (important)
  *  550 - events: mouse, keyboard, drag/drop
- *  170 - slotRelayoutPages: set contents of the scrollview on continuous/single modes
+ *  170 - slotRetqlayoutPages: set contents of the scrollview on continuous/single modes
  *  100 - zoom: zooming pages in different ways, keeping update the toolbar actions, etc..
  *  other misc functions: only slotRequestVisiblePixmaps and pickItemOnPoint noticeable,
  * and many insignificant stuff like this comment :-)
  */
-PageView::PageView( TQWidget *parent, KPDFDocument *document )
-    : TQScrollView( parent, "KPDF::pageView", WStaticContents | WNoAutoErase )
+PageView::PageView( TQWidget *tqparent, KPDFDocument *document )
+    : TQScrollView( tqparent, "KPDF::pageView", WStaticContents | WNoAutoErase )
 {
     // create and initialize private storage structure
     d = new PageViewPrivate();
@@ -206,9 +206,9 @@ PageView::PageView( TQWidget *parent, KPDFDocument *document )
 
     // widget setup: setup focus, accept drops and track mouse
     viewport()->setFocusProxy( this );
-    viewport()->setFocusPolicy( StrongFocus );
-    //viewport()->setPaletteBackgroundColor( Qt::white );
-    viewport()->setBackgroundMode( Qt::NoBackground );
+    viewport()->setFocusPolicy( TQ_StrongFocus );
+    //viewport()->setPaletteBackgroundColor( TQt::white );
+    viewport()->setBackgroundMode( TQt::NoBackground );
     setResizePolicy( Manual );
     setAcceptDrops( true );
     setDragAutoScroll( false );
@@ -245,16 +245,16 @@ PageView::~PageView()
 void PageView::setupActions( KActionCollection * ac )
 {
     // Zoom actions ( higher scales takes lots of memory! )
-    d->aZoom = new KSelectAction( i18n( "Zoom" ), "viewmag", 0, this, TQT_SLOT( slotZoom() ), ac, "zoom_to" );
+    d->aZoom = new KSelectAction( i18n( "Zoom" ), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotZoom() ), ac, "zoom_to" );
     d->aZoom->setEditable( true );
 #if KDE_IS_VERSION(3,4,89)
     d->aZoom->setMaxComboViewCount( 13 );
 #endif
     updateZoomText();
 
-    KStdAction::zoomIn( this, TQT_SLOT( slotZoomIn() ), ac, "zoom_in" );
+    KStdAction::zoomIn( TQT_TQOBJECT(this), TQT_SLOT( slotZoomIn() ), ac, "zoom_in" );
 
-    KStdAction::zoomOut( this, TQT_SLOT( slotZoomOut() ), ac, "zoom_out" );
+    KStdAction::zoomOut( TQT_TQOBJECT(this), TQT_SLOT( slotZoomOut() ), ac, "zoom_out" );
 
     d->aZoomFitWidth = new KToggleAction( i18n("Fit to Page &Width"), "view_fit_width", 0, ac, "zoom_fit_width" );
     connect( d->aZoomFitWidth, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToWidthToggled( bool ) ) );
@@ -268,10 +268,10 @@ void PageView::setupActions( KActionCollection * ac )
     // rotate actions
     KAction *action;
     action = new KAction( i18n("Rotate Right"), "rotate_cw", KShortcut( "Ctrl+Shift++" ),
-                          this, TQT_SLOT( slotRotateRight() ), ac, "rotate_right" );
+                          TQT_TQOBJECT(this), TQT_SLOT( slotRotateRight() ), ac, "rotate_right" );
 
     action = new KAction( i18n("Rotate Left"), "rotate_ccw", KShortcut( "Ctrl+Shift+-" ),
-                          this, TQT_SLOT( slotRotateLeft() ), ac, "rotate_left" );
+                          TQT_TQOBJECT(this), TQT_SLOT( slotRotateLeft() ), ac, "rotate_left" );
 
     // View-Layout actions
     d->aViewTwoPages = new KToggleAction( i18n("&Two Pages"), "view_left_right", 0, ac, "view_twopages" );
@@ -283,25 +283,25 @@ void PageView::setupActions( KActionCollection * ac )
     d->aViewContinuous->setChecked( KpdfSettings::viewContinuous() );
 
     // Mouse-Mode actions
-    d->aMouseNormal = new KRadioAction( i18n("&Browse Tool"), "mouse", 0, this, TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
+    d->aMouseNormal = new KRadioAction( i18n("&Browse Tool"), "mouse", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
     d->aMouseNormal->setExclusiveGroup( "MouseType" );
     d->aMouseNormal->setChecked( true );
 
-    KToggleAction * mz = new KRadioAction( i18n("&Zoom Tool"), "viewmag", 0, this, TQT_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
+    KToggleAction * mz = new KRadioAction( i18n("&Zoom Tool"), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
     mz->setExclusiveGroup( "MouseType" );
 
-    d->aMouseSelect = new KRadioAction( i18n("&Select Tool"), "frame_edit", 0, this, TQT_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
+    d->aMouseSelect = new KRadioAction( i18n("&Select Tool"), "frame_edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
     d->aMouseSelect->setExclusiveGroup( "MouseType" );
 
-/*    d->aMouseEdit = new KRadioAction( i18n("Draw"), "edit", 0, this, TQT_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
+/*    d->aMouseEdit = new KRadioAction( i18n("Draw"), "edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
     d->aMouseEdit->setExclusiveGroup("MouseType");
     d->aMouseEdit->setEnabled( false ); // implement feature before removing this line*/
 
     // Other actions
-    KAction * su = new KAction( i18n("Scroll Up"), 0, this, TQT_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
+    KAction * su = new KAction( i18n("Scroll Up"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
     su->setShortcut( "Shift+Up" );
 
-    KAction * sd = new KAction( i18n("Scroll Down"), 0, this, TQT_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
+    KAction * sd = new KAction( i18n("Scroll Down"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
     sd->setShortcut( "Shift+Down" );
 }
 
@@ -337,18 +337,18 @@ void PageView::notifySetup( const TQValueVector< KPDFPage * > & pageSet, bool do
     d->items.clear();
     d->visibleItems.clear();
 
-    // create children widgets
+    // create tqchildren widgets
     TQValueVector< KPDFPage * >::const_iterator setIt = pageSet.begin(), setEnd = pageSet.end();
     for ( ; setIt != setEnd; ++setIt )
         d->items.push_back( new PageViewItem( *setIt ) );
 
     if ( pageSet.count() > 0 )
-        // TODO for Enrico: Check if doing always the slotRelayoutPages() is not
+        // TODO for Enrico: Check if doing always the slotRetqlayoutPages() is not
         // suboptimal in some cases, i'd say it is not but a recheck will not hurt
-        // Need slotRelayoutPages() here instead of d->dirtyLayout = true
+        // Need slotRetqlayoutPages() here instead of d->dirtyLayout = true
         // because opening a pdf from another pdf will not trigger a viewportchange
-        // so pages are never relayouted
-        TQTimer::singleShot(0, this, TQT_SLOT(slotRelayoutPages()));
+        // so pages are never retqlayouted
+        TQTimer::singleShot(0, this, TQT_SLOT(slotRetqlayoutPages()));
     else
     {
         // update the mouse cursor when closing because we may have close through a link and
@@ -392,13 +392,13 @@ void PageView::notifyViewportChanged( bool smoothMove )
         return;
     }
 
-    // relayout in "Single Pages" mode or if a relayout is pending
+    // retqlayout in "Single Pages" mode or if a retqlayout is pending
     d->blockPixmapsRequest = true;
     if ( !KpdfSettings::viewContinuous() || d->dirtyLayout )
-        slotRelayoutPages();
+        slotRetqlayoutPages();
 
-    // restore viewport center or use default {x-center,v-top} alignment
-    const TQRect & r = item->geometry();
+    // restore viewport center or use default {x-center,v-top} tqalignment
+    const TQRect & r = item->tqgeometry();
     int newCenterX = r.left(),
         newCenterY = r.top();
     if ( vp.rePos.enabled )
@@ -462,18 +462,18 @@ void PageView::notifyPageChanged( int pageNumber, int changedFlags )
     if ( changedFlags & DocumentObserver::Bookmark )
         return;
 
-    // iterate over visible items: if page(pageNumber) is one of them, repaint it
+    // iterate over visible items: if page(pageNumber) is one of them, tqrepaint it
     TQValueList< PageViewItem * >::iterator iIt = d->visibleItems.begin(), iEnd = d->visibleItems.end();
     for ( ; iIt != iEnd; ++iIt )
         if ( (*iIt)->pageNumber() == pageNumber )
         {
             // update item's rectangle plus the little outline
-            TQRect expandedRect = (*iIt)->geometry();
+            TQRect expandedRect = (*iIt)->tqgeometry();
             expandedRect.addCoords( -1, -1, 3, 3 );
             updateContents( expandedRect );
 
             // if we were "zoom-dragging" do not overwrite the "zoom-drag" cursor
-            if ( cursor().shape() != Qt::SizeVerCursor )
+            if ( cursor().shape() != TQt::SizeVerCursor )
             {
                 // since the page has been regenerated below cursor, update it
                 updateCursor( viewportToContents( mapFromGlobal( TQCursor::pos() ) ) );
@@ -532,10 +532,10 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
     selectionRectInternal.addCoords( 1, 1, -1, -1 );
     // color for blending
     TQColor selBlendColor = (selectionRect.width() > 8 || selectionRect.height() > 8) ?
-                           d->selectionRectColor : Qt::red;
+                           d->selectionRectColor : TQt::red;
 
     // subdivide region into rects
-    TQMemArray<TQRect> allRects = pe->region().rects();
+    TQMemArray<TQRect> allRects = TQRegion(pe->region()).tqrects();
     uint numRects = allRects.count();
 
     // preprocess rects area to see if it worths or not using subdivision
@@ -577,7 +577,7 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
             // 2) Layer 1: pixmap manipulated areas
             // 3) Layer 2: paint (blend) transparent selection
             if ( !selectionRect.isNull() && selectionRect.intersects( contentsRect ) &&
-                 !selectionRectInternal.contains( contentsRect ) )
+                 !selectionRectInternal.tqcontains( contentsRect ) )
             {
                 TQRect blendRect = selectionRectInternal.intersect( contentsRect );
                 // skip rectangles covered by the selection's border
@@ -592,7 +592,7 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
                     TQImage blendedImage = blendedPixmap.convertToImage();
                     KImageEffect::blend( selBlendColor.dark(140), blendedImage, 0.2 );
                     // copy the blended pixmap back to its place
-                    pixmapPainter.drawPixmap( blendRect.left(), blendRect.top(), blendedImage );
+                    pixmapPainter.tqdrawPixmap( blendRect.left(), blendRect.top(), blendedImage );
                 }
                 // draw border (red if the selection is too small)
                 pixmapPainter.setPen( selBlendColor );
@@ -601,7 +601,7 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
             // 4) Layer 3: overlays
             if ( KpdfSettings::debugDrawBoundaries() )
             {
-                pixmapPainter.setPen( Qt::blue );
+                pixmapPainter.setPen( TQt::blue );
                 pixmapPainter.drawRect( contentsRect );
             }
 
@@ -616,15 +616,15 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
             // 2) Layer 1: opaque manipulated ares (filled / contours)
             // 3) Layer 2: paint opaque selection
             if ( !selectionRect.isNull() && selectionRect.intersects( contentsRect ) &&
-                 !selectionRectInternal.contains( contentsRect ) )
+                 !selectionRectInternal.tqcontains( contentsRect ) )
             {
-                screenPainter.setPen( palette().active().highlight().dark(110) );
+                screenPainter.setPen( tqpalette().active().highlight().dark(110) );
                 screenPainter.drawRect( selectionRect );
             }
             // 4) Layer 3: overlays
             if ( KpdfSettings::debugDrawBoundaries() )
             {
-                screenPainter.setPen( Qt::red );
+                screenPainter.setPen( TQt::red );
                 screenPainter.drawRect( contentsRect );
             }
         }
@@ -637,7 +637,7 @@ void PageView::viewportResizeEvent( TQResizeEvent * )
     if ( !d->delayResizeTimer )
     {
         d->delayResizeTimer = new TQTimer( this );
-        connect( d->delayResizeTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotRelayoutPages() ) );
+        connect( d->delayResizeTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotRetqlayoutPages() ) );
     }
     d->delayResizeTimer->start( 333, true );
 }
@@ -647,7 +647,7 @@ void PageView::keyPressEvent( TQKeyEvent * e )
     e->accept();
 
     // if performing a selection or dyn zooming, disable keys handling
-    if ( ( !d->mouseSelectionRect.isNull() && e->key() != Qt::Key_Escape ) || d->mouseMidStartY != -1 )
+    if ( ( !d->mouseSelectionRect.isNull() && e->key() != TQt::Key_Escape ) || d->mouseMidStartY != -1 )
         return;
 
     // handle 'find as you type' (based on khtml/khtmlview.cpp)
@@ -660,9 +660,9 @@ void PageView::keyPressEvent( TQKeyEvent * e )
             {
                 d->typeAheadString = d->typeAheadString.left( d->typeAheadString.length() - 1 );
                 bool found = d->document->searchText( PAGEVIEW_SEARCH_ID, d->typeAheadString, true, false,
-                        KPDFDocument::NextMatch, true, qRgb( 128, 255, 128 ), true );
+                        KPDFDocument::NextMatch, true, tqRgb( 128, 255, 128 ), true );
                 TQString status = found ? i18n("Text found: \"%1\".") : i18n("Text not found: \"%1\".");
-                d->messageWindow->display( status.arg(d->typeAheadString.lower()),
+                d->messageWindow->display( status.tqarg(d->typeAheadString.lower()),
                                            found ? PageViewMessage::Find : PageViewMessage::Warning, 4000 );
                 d->findTimeoutTimer->start( 3000, true );
             }
@@ -682,7 +682,7 @@ void PageView::keyPressEvent( TQKeyEvent * e )
             // because it activates the accel
             releaseKeyboard();
             if ( d->document->continueSearch( PAGEVIEW_SEARCH_ID ) )
-                d->messageWindow->display( i18n("Text found: \"%1\".").arg(d->typeAheadString.lower()),
+                d->messageWindow->display( i18n("Text found: \"%1\".").tqarg(d->typeAheadString.lower()),
                                            PageViewMessage::Find, 3000 );
             d->findTimeoutTimer->start( 3000, true );
             // it is needed to grab the keyboard becase people may have Space assigned to a 
@@ -784,7 +784,7 @@ void PageView::keyPressEvent( TQKeyEvent * e )
         case Key_Right:
             horizontalScrollBar()->addLine();
             break;
-        case Qt::Key_Escape:
+        case TQt::Key_Escape:
             selectionClear();
             d->mousePressPos = TQPoint();
             if ( d->aPrevAction )
@@ -840,19 +840,19 @@ void PageView::contentsMouseMoveEvent( TQMouseEvent * e )
         return;
 
     // if holding mouse mid button, perform zoom
-    if ( (e->state() & MidButton) && d->mouseMidStartY >= 0 )
+    if ( (e->state() & Qt::MidButton) && d->mouseMidStartY >= 0 )
     {
         int deltaY = d->mouseMidStartY - e->globalPos().y();
         d->mouseMidStartY = e->globalPos().y();
         d->zoomFactor *= ( 1.0 + ( (double)deltaY / 500.0 ) );
         updateZoom( ZoomRefreshCurrent );
         // uncomment following line to force a complete redraw
-        viewport()->repaint( false );
+        viewport()->tqrepaint( false );
         return;
     }
 
-    bool leftButton = e->state() & LeftButton,
-         rightButton = e->state() & RightButton;
+    bool leftButton = e->state() & Qt::LeftButton,
+         rightButton = e->state() & Qt::RightButton;
     switch ( d->mouseMode )
     {
         case MouseNormal:
@@ -876,7 +876,7 @@ void PageView::contentsMouseMoveEvent( TQMouseEvent * e )
                 {
                     d->aPrevAction = d->aMouseNormal;
                     d->aMouseSelect->activate();
-                    TQColor selColor = palette().active().highlight().light( 120 );
+                    TQColor selColor = tqpalette().active().highlight().light( 120 );
                     selectionStart( e->x() + deltaX, e->y() + deltaY, selColor, false );
                     selectionEndPoint( e->x(), e->y() );
                     break;
@@ -920,7 +920,7 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
     }
 
     // if pressing mid mouse button while not doing other things, begin 'comtinous zoom' mode
-    if ( e->button() & MidButton )
+    if ( e->button() & Qt::MidButton )
     {
         d->mouseMidStartY = e->globalPos().y();
         setCursor( KCursor::sizeVerCursor() );
@@ -931,8 +931,8 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
     d->mousePressPos = e->globalPos();
 
     // handle mode dependant mouse press actions
-    bool leftButton = e->button() & LeftButton,
-         rightButton = e->button() & RightButton;
+    bool leftButton = e->button() & Qt::LeftButton,
+         rightButton = e->button() & Qt::RightButton;
     switch ( d->mouseMode )
     {
         case MouseNormal:   // drag start / click / link following
@@ -946,7 +946,7 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
 
         case MouseZoom:     // set first corner of the zoom rect
             if ( leftButton )
-                selectionStart( e->x(), e->y(), palette().active().highlight(), false );
+                selectionStart( e->x(), e->y(), tqpalette().active().highlight(), false );
             else if ( rightButton )
                 updateZoom( ZoomOut );
             break;
@@ -954,7 +954,7 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
         case MouseSelect:   // set first corner of the selection rect
             if ( leftButton )
             {
-                TQColor selColor = palette().active().highlight().light( 120 );
+                TQColor selColor = tqpalette().active().highlight().light( 120 );
                 selectionStart( e->x(), e->y(), selColor, false );
             }
             break;
@@ -973,7 +973,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
     if ( d->items.isEmpty() )
     {
         // ..except for right Clicks (emitted even it viewport is empty)
-        if ( e->button() == RightButton )
+        if ( e->button() == Qt::RightButton )
             emit rightClick( 0, e->globalPos() );
         return;
     }
@@ -983,7 +983,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
         return;
 
     // handle mode indepent mid buttom zoom
-    bool midButton = e->button() & MidButton;
+    bool midButton = e->button() & Qt::MidButton;
     if ( midButton && d->mouseMidStartY > 0 )
     {
         d->mouseMidStartY = -1;
@@ -992,13 +992,13 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
         return;
     }
 
-    bool leftButton = e->button() & LeftButton,
-         rightButton = e->button() & RightButton;
+    bool leftButton = e->button() & Qt::LeftButton,
+         rightButton = e->button() & Qt::RightButton;
     switch ( d->mouseMode )
     {
         case MouseNormal:{
             // return the cursor to its normal state after dragging
-            if ( cursor().shape() == Qt::SizeAllCursor )
+            if ( cursor().shape() == TQt::SizeAllCursor )
                 updateCursor( e->pos() );
 
             PageViewItem * pageItem = pickItemOnPoint( e->x(), e->y() );
@@ -1006,8 +1006,8 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
             // if the mouse has not moved since the press, that's a -click-
             if ( leftButton && pageItem && d->mousePressPos == e->globalPos())
             {
-                double nX = (double)(e->x() - pageItem->geometry().left()) / (double)pageItem->width(),
-                       nY = (double)(e->y() - pageItem->geometry().top()) / (double)pageItem->height();
+                double nX = (double)(e->x() - pageItem->tqgeometry().left()) / (double)pageItem->width(),
+                       nY = (double)(e->y() - pageItem->tqgeometry().top()) / (double)pageItem->height();
                 const ObjectRect * linkRect, * imageRect;
                 linkRect = pageItem->page()->hasObject( ObjectRect::Link, nX, nY );
                 if ( linkRect )
@@ -1052,7 +1052,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 }
 
                 // find out new zoom ratio and normalized view center (relative to the contentsRect)
-                double zoom = QMIN( (double)visibleWidth() / (double)selRect.width(), (double)visibleHeight() / (double)selRect.height() );
+                double zoom = TQMIN( (double)visibleWidth() / (double)selRect.width(), (double)visibleHeight() / (double)selRect.height() );
                 double nX = (double)(selRect.left() + selRect.right()) / (2.0 * (double)contentsWidth());
                 double nY = (double)(selRect.top() + selRect.bottom()) / (2.0 * (double)contentsHeight());
 
@@ -1105,16 +1105,16 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
             for ( ; iIt != iEnd; ++iIt )
             {
                 PageViewItem * item = *iIt;
-                const TQRect & itemRect = item->geometry();
-                if ( selectionRect.intersects( itemRect ) )
+                const TQRect & tqitemRect = item->tqgeometry();
+                if ( selectionRect.intersects( tqitemRect ) )
                 {
                     // request the textpage if there isn't one
                     const KPDFPage * kpdfPage = item->page();
                     if ( !kpdfPage->hasSearchPage() )
                         d->document->requestTextPage( kpdfPage->number() );
-                    // grab text in the rect that intersects itemRect
-                    TQRect relativeRect = selectionRect.intersect( itemRect );
-                    relativeRect.moveBy( -itemRect.left(), -itemRect.top() );
+                    // grab text in the rect that intersects tqitemRect
+                    TQRect relativeRect = selectionRect.intersect( tqitemRect );
+                    relativeRect.moveBy( -tqitemRect.left(), -tqitemRect.top() );
                     NormalizedRect normRect( relativeRect, item->width(), item->height() );
                     selectedText += kpdfPage->getText( normRect );
                 }
@@ -1131,7 +1131,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 if ( KpdfSettings::useKTTSD() )
                     menu.insertItem( SmallIcon("kttsd"), i18n( "Speak Text" ), 2 );
             }
-            menu.insertTitle( i18n( "Image (%1 by %2 pixels)" ).arg( selectionRect.width() ).arg( selectionRect.height() ) );
+            menu.insertTitle( i18n( "Image (%1 by %2 pixels)" ).tqarg( selectionRect.width() ).tqarg( selectionRect.height() ) );
             menu.insertItem( SmallIcon("image"), i18n( "Copy to Clipboard" ), 3 );
             menu.insertItem( SmallIcon("filesave"), i18n( "Save to File..." ), 4 );
             int choice = menu.exec( e->globalPos() );
@@ -1147,16 +1147,16 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 if ( choice == 3 )
                 {
                     // [2] copy pixmap to clipboard
-                    QClipboard *cb = TQApplication::clipboard();
-                    cb->setPixmap( copyPix, QClipboard::Clipboard );
+                    TQClipboard *cb = TQApplication::tqclipboard();
+                    cb->setPixmap( copyPix, TQClipboard::Clipboard );
                     if ( cb->supportsSelection() )
-                        cb->setPixmap( copyPix, QClipboard::Selection );
-                    d->messageWindow->display( i18n( "Image [%1x%2] copied to clipboard." ).arg( copyPix.width() ).arg( copyPix.height() ) );
+                        cb->setPixmap( copyPix, TQClipboard::Selection );
+                    d->messageWindow->display( i18n( "Image [%1x%2] copied to clipboard." ).tqarg( copyPix.width() ).tqarg( copyPix.height() ) );
                 }
                 else if ( choice == 4 )
                 {
                     // [3] save pixmap to file
-                    TQString fileName = KFileDialog::getSaveFileName( TQString::null, "image/png image/jpeg", this );
+                    TQString fileName = KFileDialog::getSaveFileName( TQString(), "image/png image/jpeg", this );
                     if ( fileName.isNull() )
                         d->messageWindow->display( i18n( "File not saved." ), PageViewMessage::Warning );
                     else
@@ -1165,7 +1165,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                         if ( type.isNull() )
                             type = "PNG";
                         copyPix.save( fileName, type.latin1() );
-                        d->messageWindow->display( i18n( "Image [%1x%2] saved to %3 file." ).arg( copyPix.width() ).arg( copyPix.height() ).arg( type ) );
+                        d->messageWindow->display( i18n( "Image [%1x%2] saved to %3 file." ).tqarg( copyPix.width() ).tqarg( copyPix.height() ).tqarg( type ) );
                     }
                 }
             }
@@ -1175,10 +1175,10 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 if ( choice == 1 )
                 {
                     // [1] copy text to clipboard
-                    QClipboard *cb = TQApplication::clipboard();
-                    cb->setText( selectedText, QClipboard::Clipboard );
+                    TQClipboard *cb = TQApplication::tqclipboard();
+                    cb->setText( selectedText, TQClipboard::Clipboard );
                     if ( cb->supportsSelection() )
-                        cb->setText( selectedText, QClipboard::Selection );
+                        cb->setText( selectedText, TQClipboard::Selection );
                 }
                 else if ( choice == 2 )
                 {
@@ -1194,7 +1194,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                         TQString error;
                         if (KApplication::startServiceByDesktopName("kttsd", TQStringList(), &error))
                         {
-                            d->messageWindow->display( i18n("Starting KTTSD Failed: %1").arg(error) );
+                            d->messageWindow->display( i18n("Starting KTTSD Failed: %1").tqarg(error) );
                             KpdfSettings::setUseKTTSD(false);
                             KpdfSettings::writeConfig();
                         }
@@ -1221,7 +1221,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 }
             }
 
-            // clear widget selection and invalidate rect
+            // clear widget selection and tqinvalidate rect
             selectionClear();
 
             // restore previous action if came from it using right button
@@ -1323,39 +1323,39 @@ void PageView::paintItems( TQPainter * p, const TQRect & contentsRect )
     for ( ; iIt != iEnd; ++iIt )
     {
         // check if a piece of the page intersects the contents rect
-        if ( !(*iIt)->geometry().intersects( checkRect ) )
+        if ( !(*iIt)->tqgeometry().intersects( checkRect ) )
             continue;
 
         PageViewItem * item = *iIt;
-        TQRect pixmapGeometry = item->geometry();
+        TQRect pixmapGeometry = item->tqgeometry();
 
         // translate the painter so we draw top-left pixmap corner in 0,0
         p->save();
         p->translate( pixmapGeometry.left(), pixmapGeometry.top() );
 
-        // item pixmap and outline geometry
+        // item pixmap and outline tqgeometry
         TQRect outlineGeometry = pixmapGeometry;
         outlineGeometry.addCoords( -1, -1, 3, 3 );
 
         // draw the page outline (little black border and 2px shadow)
-        if ( !pixmapGeometry.contains( contentsRect ) )
+        if ( !pixmapGeometry.tqcontains( contentsRect ) )
         {
             int pixmapWidth = pixmapGeometry.width(),
                 pixmapHeight = pixmapGeometry.height();
             // draw simple outline
-            p->setPen( Qt::black );
+            p->setPen( TQt::black );
             p->drawRect( -1, -1, pixmapWidth + 2, pixmapHeight + 2 );
             // draw bottom/right gradient
             int levels = 2;
-            int r = Qt::gray.red() / (levels + 2),
-                g = Qt::gray.green() / (levels + 2),
-                b = Qt::gray.blue() / (levels + 2);
+            int r = TQt::gray.red() / (levels + 2),
+                g = TQt::gray.green() / (levels + 2),
+                b = TQt::gray.blue() / (levels + 2);
             for ( int i = 0; i < levels; i++ )
             {
                 p->setPen( TQColor( r * (i+2), g * (i+2), b * (i+2) ) );
                 p->drawLine( i, i + pixmapHeight + 1, i + pixmapWidth + 1, i + pixmapHeight + 1 );
                 p->drawLine( i + pixmapWidth + 1, i, i + pixmapWidth + 1, i + pixmapHeight );
-                p->setPen( Qt::gray );
+                p->setPen( TQt::gray );
                 p->drawLine( -1, i + pixmapHeight + 1, i - 1, i + pixmapHeight + 1 );
                 p->drawLine( i + pixmapWidth + 1, -1, i + pixmapWidth + 1, i - 1 );
             }
@@ -1378,10 +1378,10 @@ void PageView::paintItems( TQPainter * p, const TQRect & contentsRect )
     }
 
     // paint with background color the unpainted area
-    TQMemArray<TQRect> backRects = remainingArea.rects();
+    TQMemArray<TQRect> backRects = remainingArea.tqrects();
     uint backRectsNumber = backRects.count();
     for ( uint jr = 0; jr < backRectsNumber; jr++ )
-        p->fillRect( backRects[ jr ], Qt::gray );
+        p->fillRect( backRects[ jr ], TQt::gray );
 }
 
 void PageView::updateItemSize( PageViewItem * item, int colWidth, int rowHeight )
@@ -1407,7 +1407,7 @@ void PageView::updateItemSize( PageViewItem * item, int colWidth, int rowHeight 
     {
         double scaleW = (double)colWidth / (double)width;
         double scaleH = (double)rowHeight / (double)height;
-        zoom = QMIN( scaleW, scaleH );
+        zoom = TQMIN( scaleW, scaleH );
         item->setWHZ( (int)(zoom * width), (int)(zoom * height), zoom );
         d->zoomFactor = zoom;
     }
@@ -1424,7 +1424,7 @@ PageViewItem * PageView::pickItemOnPoint( int x, int y )
     for ( ; iIt != iEnd; ++iIt )
     {
         PageViewItem * i = *iIt;
-        const TQRect & r = i->geometry();
+        const TQRect & r = i->tqgeometry();
         if ( x < r.right() && x > r.left() && y < r.bottom() )
         {
             if ( y > r.top() )
@@ -1465,8 +1465,8 @@ void PageView::selectionEndPoint( int x, int y )
 
     // clip selection to the viewport
     TQRect viewportRect( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
-    x = QMAX( QMIN( x, viewportRect.right() ), viewportRect.left() );
-    y = QMAX( QMIN( y, viewportRect.bottom() ), viewportRect.top() );
+    x = TQMAX( TQMIN( x, viewportRect.right() ), viewportRect.left() );
+    y = TQMAX( TQMIN( y, viewportRect.bottom() ), viewportRect.top() );
     // if selection changed update rect
     if ( d->mouseSelectionRect.right() != x || d->mouseSelectionRect.bottom() != y )
     {
@@ -1485,7 +1485,7 @@ void PageView::selectionEndPoint( int x, int y )
                 compoundRegion -= intersection;
         }
         // tassellate region with rects and enqueue paint events
-        TQMemArray<TQRect> rects = compoundRegion.rects();
+        TQMemArray<TQRect> rects = compoundRegion.tqrects();
         for ( uint i = 0; i < rects.count(); i++ )
             updateContents( rects[i] );
     }
@@ -1513,7 +1513,7 @@ void PageView::updateZoom( ZoomMode newZoomMode )
     {
         case ZoomFixed:{ //ZoomFixed case
             TQString z = d->aZoom->currentText();
-            newFactor = KGlobal::locale()->readNumber( z.remove( z.find( '%' ), 1 ) ) / 100.0;
+            newFactor = KGlobal::locale()->readNumber( z.remove( z.tqfind( '%' ), 1 ) ) / 100.0;
             }break;
         case ZoomIn:
             newFactor += (newFactor > 0.99) ? ( newFactor > 1.99 ? 0.5 : 0.2 ) : 0.1;
@@ -1544,13 +1544,13 @@ void PageView::updateZoom( ZoomMode newZoomMode )
 
     if ( newZoomMode != d->zoomMode || (newZoomMode == ZoomFixed && newFactor != d->zoomFactor ) )
     {
-        // rebuild layout and update the whole viewport
+        // rebuild tqlayout and update the whole viewport
         d->zoomMode = newZoomMode;
         d->zoomFactor = newFactor;
         // be sure to block updates to document's viewport
         bool prevState = d->blockViewport;
         d->blockViewport = true;
-        slotRelayoutPages();
+        slotRetqlayoutPages();
         d->blockViewport = prevState;
         // request pixmaps
         slotRequestVisiblePixmaps();
@@ -1572,7 +1572,7 @@ void PageView::updateZoomText()
 {
     // use current page zoom as zoomFactor if in ZoomFit/* mode
     if ( d->zoomMode != ZoomFixed && d->items.count() > 0 )
-        d->zoomFactor = d->items[ QMAX( 0, (int)d->document->currentPage() ) ]->zoomFactor();
+        d->zoomFactor = d->items[ TQMAX( 0, (int)d->document->currentPage() ) ]->zoomFactor();
     float newFactor = d->zoomFactor;
     d->aZoom->clear();
 
@@ -1599,7 +1599,7 @@ void PageView::updateZoomText()
             selIdx++;
         TQString localValue( KGlobal::locale()->formatNumber( value * 100.0, 2 ) );
         localValue.remove( KGlobal::locale()->decimalSymbol() + double_oh );
-        translated << TQString( "%1%" ).arg( localValue );
+        translated << TQString( "%1%" ).tqarg( localValue );
     }
     d->aZoom->setItems( translated );
 
@@ -1619,8 +1619,8 @@ void PageView::updateCursor( const TQPoint &p )
     PageViewItem * pageItem = pickItemOnPoint( p.x(), p.y() );
     if ( pageItem && d->mouseMode == MouseNormal )
     {
-        double nX = (double)(p.x() - pageItem->geometry().left()) / (double)pageItem->width(),
-               nY = (double)(p.y() - pageItem->geometry().top()) / (double)pageItem->height();
+        double nX = (double)(p.x() - pageItem->tqgeometry().left()) / (double)pageItem->width(),
+               nY = (double)(p.y() - pageItem->tqgeometry().top()) / (double)pageItem->height();
 
         // if over a ObjectRect (of type Link) change cursor to hand
         d->mouseOnRect = pageItem->page()->hasObject( ObjectRect::Link, nX, nY );
@@ -1641,15 +1641,15 @@ void PageView::updateCursor( const TQPoint &p )
 void PageView::doTypeAheadSearch()
 {
     bool found = d->document->searchText( PAGEVIEW_SEARCH_ID, d->typeAheadString, false, false,
-                                          KPDFDocument::NextMatch, true, qRgb( 128, 255, 128 ), true );
+                                          KPDFDocument::NextMatch, true, tqRgb( 128, 255, 128 ), true );
     TQString status = found ? i18n("Text found: \"%1\".") : i18n("Text not found: \"%1\".");
-    d->messageWindow->display( status.arg(d->typeAheadString.lower()),
+    d->messageWindow->display( status.tqarg(d->typeAheadString.lower()),
                                found ? PageViewMessage::Find : PageViewMessage::Warning, 4000 );
     d->findTimeoutTimer->start( 3000, true );
 }
 
 //BEGIN private SLOTS
-void PageView::slotRelayoutPages()
+void PageView::slotRetqlayoutPages()
 // called by: notifySetup, viewportResizeEvent, slotTwoPagesToggled, slotContinuousToggled, updateZoom
 {
     // set an empty container if we have no pages
@@ -1677,7 +1677,7 @@ void PageView::slotRelayoutPages()
         fullHeight = 0;
     TQRect viewportRect( contentsX(), contentsY(), viewportWidth, viewportHeight );
 
-    // set all items geometry and resize contents. handle 'continuous' and 'single' modes separately
+    // set all items tqgeometry and resize contents. handle 'continuous' and 'single' modes separately
     if ( KpdfSettings::viewContinuous() )
     {
         // Here we find out column's width and row's height to compute a table
@@ -1746,7 +1746,7 @@ void PageView::slotRelayoutPages()
     }
     else // viewContinuous is FALSE
     {
-        PageViewItem * currentItem = d->items[ QMAX( 0, (int)d->document->currentPage() ) ];
+        PageViewItem * currentItem = d->items[ TQMAX( 0, (int)d->document->currentPage() ) ];
 
         // setup varialbles for a 1(row) x N(columns) grid
         int nCols = KpdfSettings::viewColumns(),
@@ -1816,11 +1816,11 @@ void PageView::slotRelayoutPages()
             {
                 int prevX = contentsX(),
                     prevY = contentsY();
-                const TQRect & geometry = d->items[ vp.pageNumber ]->geometry();
+                const TQRect & tqgeometry = d->items[ vp.pageNumber ]->tqgeometry();
                 double nX = vp.rePos.enabled ? vp.rePos.normalizedX : 0.5,
                        nY = vp.rePos.enabled ? vp.rePos.normalizedY : 0.0;
-                center( geometry.left() + ROUND( nX * (double)geometry.width() ),
-                        geometry.top() + ROUND( nY * (double)geometry.height() ) );
+                center( tqgeometry.left() + ROUND( nX * (double)tqgeometry.width() ),
+                        tqgeometry.top() + ROUND( nY * (double)tqgeometry.height() ) );
                 // center() usually moves the viewport, that requests pixmaps too.
                 // if that doesn't happen we have to request them by hand
                 if ( prevX == contentsX() && prevY == contentsY() )
@@ -1867,7 +1867,7 @@ void PageView::slotRequestVisiblePixmaps( int newLeft, int newTop )
         PageViewItem * i = *iIt;
 
         // if the item doesn't intersect the viewport, skip it
-        if ( !viewportRect.intersects( i->geometry() ) )
+        if ( !viewportRect.intersects( i->tqgeometry() ) )
             continue;
 
         // add the item to the 'visible list'
@@ -1885,18 +1885,18 @@ void PageView::slotRequestVisiblePixmaps( int newLeft, int newTop )
         // position between the item and the viewport center
         if ( isEvent )
         {
-            const TQRect & geometry = i->geometry();
+            const TQRect & tqgeometry = i->tqgeometry();
             // compute distance between item center and viewport center
-            double distance = hypot( (geometry.left() + geometry.right()) / 2 - viewportCenterX,
-                                     (geometry.top() + geometry.bottom()) / 2 - viewportCenterY );
+            double distance = hypot( (tqgeometry.left() + tqgeometry.right()) / 2 - viewportCenterX,
+                                     (tqgeometry.top() + tqgeometry.bottom()) / 2 - viewportCenterY );
             if ( distance >= minDistance && nearPageNumber != -1 )
                 continue;
             nearPageNumber = i->pageNumber();
             minDistance = distance;
-            if ( geometry.height() > 0 && geometry.width() > 0 )
+            if ( tqgeometry.height() > 0 && tqgeometry.width() > 0 )
             {
-                focusedX = ( viewportCenterX - (double)geometry.left() ) / (double)geometry.width();
-                focusedY = ( viewportCenterY - (double)geometry.top() ) / (double)geometry.height();
+                focusedX = ( viewportCenterX - (double)tqgeometry.left() ) / (double)tqgeometry.width();
+                focusedY = ( viewportCenterY - (double)tqgeometry.top() ) / (double)tqgeometry.height();
             }
         }
     }
@@ -2070,7 +2070,7 @@ void PageView::slotRotateRight()
     // be sure to block updates to document's viewport
     bool prevState = d->blockViewport;
     d->blockViewport = true;
-    slotRelayoutPages();
+    slotRetqlayoutPages();
     d->blockViewport = prevState;
     // request pixmaps
     slotRequestVisiblePixmaps();
@@ -2094,7 +2094,7 @@ void PageView::slotRotateLeft()
     // be sure to block updates to document's viewport
     bool prevState = d->blockViewport;
     d->blockViewport = true;
-    slotRelayoutPages();
+    slotRetqlayoutPages();
     d->blockViewport = prevState;
     // request pixmaps
     slotRequestVisiblePixmaps();
@@ -2108,7 +2108,7 @@ void PageView::slotTwoPagesToggled( bool on )
         KpdfSettings::setViewColumns( newColumns );
         KpdfSettings::writeConfig();
         if ( d->document->pages() > 0 )
-            slotRelayoutPages();
+            slotRetqlayoutPages();
     }
 }
 
@@ -2119,7 +2119,7 @@ void PageView::slotContinuousToggled( bool on )
         KpdfSettings::setViewContinuous( on );
         KpdfSettings::writeConfig();
         if ( d->document->pages() > 0 )
-            slotRelayoutPages();
+            slotRetqlayoutPages();
     }
 }
 

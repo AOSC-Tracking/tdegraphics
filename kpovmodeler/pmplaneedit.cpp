@@ -28,8 +28,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMPlaneEdit::PMPlaneEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMPlaneEdit::PMPlaneEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -38,24 +38,24 @@ void PMPlaneEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
 
    m_pNormal = new PMVectorEdit( "x", "y", "z", this );
    m_pDistance = new PMFloatEdit( this );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( new TQLabel( i18n( "Normal:" ), this ) );
-   layout->addWidget( m_pNormal );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( new TQLabel( i18n( "Normal:" ), this ) );
+   tqlayout->addWidget( m_pNormal );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( new TQLabel( i18n( "Distance:" ), this ) );
-   layout->addWidget( m_pDistance );
-   layout->addStretch( 1 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( new TQLabel( i18n( "Distance:" ), this ) );
+   tqlayout->addWidget( m_pDistance );
+   tqlayout->addStretch( 1 );
 
    TQPushButton* nb = new TQPushButton( i18n( "Normalize" ), this );
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( nb );
-   layout->addStretch( 1 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( nb );
+   tqlayout->addStretch( 1 );
 
    connect( m_pNormal, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pDistance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

@@ -31,10 +31,11 @@
  */
 class ColorSelector : public TQWidget  {
 	Q_OBJECT
+  TQ_OBJECT
 
 public:
 	/** constructs a color selector widget */
-	ColorSelector(TQWidget *parent=0, const char *name=0);
+	ColorSelector(TQWidget *tqparent=0, const char *name=0);
 	~ColorSelector();
 	/** @return the selected color */
 	const Color& color();

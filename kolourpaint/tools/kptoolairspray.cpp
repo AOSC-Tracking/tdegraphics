@@ -60,7 +60,7 @@
 
 kpToolAirSpray::kpToolAirSpray (kpMainWindow *mainWindow)
     : kpTool (i18n ("Spraycan"), i18n ("Sprays graffiti"),
-              Qt::Key_Y,
+              TQt::Key_Y,
               mainWindow, "tool_spraycan"),
       m_currentCommand (0)
 {
@@ -312,21 +312,21 @@ void kpToolAirSprayCommand::addPoints (const TQPointArray &points)
 #endif
 
     TQPixmap pixmap = document ()->getPixmapAt (docRect);
-    TQBitmap mask;
+    TQBitmap tqmask;
 
-    TQPainter painter, maskPainter;
+    TQPainter painter, tqmaskPainter;
 
     if (m_color.isOpaque ())
     {
         painter.begin (&pixmap);
-        painter.setPen (m_color.toQColor ());
+        painter.setPen (m_color.toTQColor ());
     }
 
-    if (pixmap.mask () || m_color.isTransparent ())
+    if (pixmap.tqmask () || m_color.isTransparent ())
     {
-        mask = kpPixmapFX::getNonNullMask (pixmap);
-        maskPainter.begin (&mask);
-        maskPainter.setPen (m_color.maskColor ());
+        tqmask = kpPixmapFX::getNonNullMask (pixmap);
+        tqmaskPainter.begin (&tqmask);
+        tqmaskPainter.setPen (m_color.tqmaskColor ());
     }
 
     for (int i = 0; i < (int) points.count (); i++)
@@ -337,18 +337,18 @@ void kpToolAirSprayCommand::addPoints (const TQPointArray &points)
         if (painter.isActive ())
             painter.drawPoint (pt);
 
-        if (maskPainter.isActive ())
-            maskPainter.drawPoint (pt);
+        if (tqmaskPainter.isActive ())
+            tqmaskPainter.drawPoint (pt);
     }
 
-    if (maskPainter.isActive ())
-        maskPainter.end ();
+    if (tqmaskPainter.isActive ())
+        tqmaskPainter.end ();
 
     if (painter.isActive ())
         painter.end ();
 
-    if (!mask.isNull ())
-        pixmap.setMask (mask);
+    if (!tqmask.isNull ())
+        pixmap.setMask (tqmask);
 
     viewManager ()->setFastUpdates ();
     document ()->setPixmapAt (pixmap, docRect.topLeft ());

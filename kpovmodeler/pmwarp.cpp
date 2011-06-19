@@ -221,11 +221,11 @@ void PMWarp::readAttributes( const PMXMLHelper& h )
    }
 }
 
-PMMetaObject* PMWarp::metaObject( ) const
+PMMetaObject* PMWarp::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Warp", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Warp", Base::tqmetaObject( ),
                                         createNewWarp );
 
       PMWarpTypeProperty* p = new PMWarpTypeProperty(
@@ -467,9 +467,9 @@ void PMWarp::setMajorRadius( const double c )
    }
 }
 
-PMDialogEditBase* PMWarp::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMWarp::editWidget( TQWidget* tqparent ) const
 {
-   return new PMWarpEdit( parent );
+   return new PMWarpEdit( tqparent );
 }
 
 void PMWarp::restoreMemento( PMMemento* s )

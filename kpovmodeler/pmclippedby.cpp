@@ -40,11 +40,11 @@ PMClippedBy::~PMClippedBy( )
 {
 }
 
-PMMetaObject* PMClippedBy::metaObject( ) const
+PMMetaObject* PMClippedBy::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ClippedBy", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "ClippedBy", Base::tqmetaObject( ),
                                         createNewClippedBy );
       s_pMetaObject->addProperty(
          new PMClippedByProperty( "boundedBy", 0, &PMClippedBy::boundedBy ) );
@@ -91,9 +91,9 @@ void PMClippedBy::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMClippedBy::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMClippedBy::editWidget( TQWidget* tqparent ) const
 {
-   return new PMClippedByEdit( parent );
+   return new PMClippedByEdit( tqparent );
 }
 
 void PMClippedBy::childRemoved( PMObject* o )

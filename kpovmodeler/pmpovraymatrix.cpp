@@ -72,11 +72,11 @@ void PMPovrayMatrix::readAttributes( const PMXMLHelper& h )
    m_values.resize( 12 );
 }
 
-PMMetaObject* PMPovrayMatrix::metaObject( ) const
+PMMetaObject* PMPovrayMatrix::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "PovrayMatrix", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "PovrayMatrix", Base::tqmetaObject( ),
                                         createNewPovrayMatrix );
       s_pMetaObject->addProperty(
          new PMPovrayMatrixProperty( "values", &PMPovrayMatrix::setValues, &PMPovrayMatrix::values ) );
@@ -108,9 +108,9 @@ void PMPovrayMatrix::setValues( const PMVector& v )
    }
 }
 
-PMDialogEditBase* PMPovrayMatrix::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMPovrayMatrix::editWidget( TQWidget* tqparent ) const
 {
-   return new PMPovrayMatrixEdit( parent );
+   return new PMPovrayMatrixEdit( tqparent );
 }
 
 void PMPovrayMatrix::restoreMemento( PMMemento* s )

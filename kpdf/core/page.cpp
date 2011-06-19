@@ -74,7 +74,7 @@ void KPDFPage::setRotation( int r )
 
 bool KPDFPage::hasPixmap( int id, int width, int height ) const
 {
-    if ( !m_pixmaps.contains( id ) )
+    if ( !m_pixmaps.tqcontains( id ) )
         return false;
     if ( width == -1 || height == -1 )
         return true;
@@ -98,7 +98,7 @@ bool KPDFPage::hasObjectRect( double x, double y ) const
         return false;
     TQValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
     for ( ; it != end; ++it )
-        if ( (*it)->contains( x, y ) )
+        if ( (*it)->tqcontains( x, y ) )
             return true;
     return false;
 }
@@ -131,11 +131,11 @@ NormalizedRect * KPDFPage::findText( const TQString & text, bool strictCase, Nor
         return 0;
 
     // create a xpf's Unicode (unsigned int) array for the given text
-    const TQChar * str = text.unicode();
+    const TQChar * str = text.tqunicode();
     int len = text.length();
     TQMemArray<Unicode> u(len);
     for (int i = 0; i < len; ++i)
-        u[i] = str[i].unicode();
+        u[i] = str[i].tqunicode();
 
     // find out the direction of search
     enum SearchDir { FromTop, NextMatch, PrevMatch } dir = lastRect ? NextMatch : FromTop;
@@ -175,7 +175,7 @@ NormalizedRect * KPDFPage::findText( const TQString & text, bool strictCase, Nor
 const TQString KPDFPage::getText( const NormalizedRect & rect ) const
 {
     if ( !m_text )
-        return TQString::null;
+        return TQString();
     int left = (int)( rect.left * m_width ),
         top = (int)( rect.top * m_height ),
         right = (int)( rect.right * m_width ),
@@ -190,7 +190,7 @@ const ObjectRect * KPDFPage::hasObject( ObjectRect::ObjectType type, double x, d
 {
     TQValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
     for ( ; it != end; ++it )
-        if ( (*it)->contains( x, y ) )
+        if ( (*it)->tqcontains( x, y ) )
             if ((*it)->objectType() == type) return *it;
     return 0;
 }
@@ -203,7 +203,7 @@ const KPDFPageTransition * KPDFPage::getTransition() const
 
 void KPDFPage::setPixmap( int id, TQPixmap * pixmap )
 {
-    if ( m_pixmaps.contains( id ) )
+    if ( m_pixmaps.tqcontains( id ) )
         delete m_pixmaps[id];
     m_pixmaps[id] = pixmap;
 }
@@ -252,7 +252,7 @@ void KPDFPage::setTransition( KPDFPageTransition * transition )
 
 void KPDFPage::deletePixmap( int id )
 {
-    if ( m_pixmaps.contains( id ) )
+    if ( m_pixmaps.tqcontains( id ) )
     {
         delete m_pixmaps[ id ];
         m_pixmaps.remove( id );
@@ -304,7 +304,7 @@ NormalizedRect::NormalizedRect( const TQRect & r, double xScale, double yScale )
     : left( (double)r.left() / xScale ), top( (double)r.top() / yScale ),
     right( (double)r.right() / xScale ), bottom( (double)r.bottom() / yScale ) {}
 
-bool NormalizedRect::contains( double x, double y ) const
+bool NormalizedRect::tqcontains( double x, double y ) const
 {
     return x >= left && x <= right && y >= top && y <= bottom;
 }
@@ -319,7 +319,7 @@ bool NormalizedRect::intersects( double l, double t, double r, double b ) const
     return (l < right) && (r > left) && (t < bottom) && (b > top);
 }
 
-TQRect NormalizedRect::geometry( int xScale, int yScale ) const
+TQRect NormalizedRect::tqgeometry( int xScale, int yScale ) const
 {
     int l = (int)( left * xScale ),
         t = (int)( top * yScale ),

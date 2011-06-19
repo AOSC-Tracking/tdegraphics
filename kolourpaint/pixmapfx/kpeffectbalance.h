@@ -74,11 +74,12 @@ protected:
 class kpEffectBalanceWidget : public kpColorEffectWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpEffectBalanceWidget (bool actOnSelection,
                            kpMainWindow *mainWindow,
-                           TQWidget *parent, const char *name = 0);
+                           TQWidget *tqparent, const char *name = 0);
     virtual ~kpEffectBalanceWidget ();
 
     virtual TQString caption () const;

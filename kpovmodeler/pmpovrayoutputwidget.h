@@ -34,11 +34,12 @@ class KConfig;
 class PMPovrayOutputWidget : public KDialog
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Standard constructor
     */
-   PMPovrayOutputWidget( TQWidget* parent = 0, const char* name = 0 );
+   PMPovrayOutputWidget( TQWidget* tqparent = 0, const char* name = 0 );
    /**
     * Destructor
     */

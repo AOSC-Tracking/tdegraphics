@@ -14,19 +14,19 @@
 
 class fix_word {
  public:
-  void fromINT32(Q_INT32 val) {value = val;} 
-  void fromDouble(double val) {value = (Q_INT32)(val * (1<<20) + 0.5);}
+  void fromINT32(TQ_INT32 val) {value = val;} 
+  void fromDouble(double val) {value = (TQ_INT32)(val * (1<<20) + 0.5);}
   double toDouble() {return (double(value)) / (double(1<<20));}
 
-  Q_INT32 value;
+  TQ_INT32 value;
 };
 
 class TeXFont_TFM : public TeXFont {
  public:
-  TeXFont_TFM(TeXFontDefinition *parent);
+  TeXFont_TFM(TeXFontDefinition *tqparent);
   ~TeXFont_TFM();
   
-  glyph* getGlyph(Q_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=Qt::black);
+  glyph* getGlyph(TQ_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=TQt::black);
 
  private:
   fix_word characterWidth_in_units_of_design_size[256];

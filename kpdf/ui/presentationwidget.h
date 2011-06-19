@@ -35,8 +35,9 @@ class PresentationFrame;
 class PresentationWidget : public TQDialog, public DocumentObserver
 {
     Q_OBJECT
+  TQ_OBJECT
     public:
-        PresentationWidget( TQWidget * parent, KPDFDocument * doc );
+        PresentationWidget( TQWidget * tqparent, KPDFDocument * doc );
         ~PresentationWidget();
 
         void setupActions( KActionCollection * ac );
@@ -59,7 +60,7 @@ class PresentationWidget : public TQDialog, public DocumentObserver
         void paintEvent( TQPaintEvent * e );
 
     private:
-        const KPDFLink * getLink( int x, int y, TQRect * geometry = 0 ) const;
+        const KPDFLink * getLink( int x, int y, TQRect * tqgeometry = 0 ) const;
         void testCursorOnLink( int x, int y );
         void overlayClick( const TQPoint & position );
         void changePage( int newPage );

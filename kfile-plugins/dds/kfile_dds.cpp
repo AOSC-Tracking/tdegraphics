@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2002 Ignacio Castaño <castano@ludicon.com>
+ * Copyright (C) 2002 Ignacio Castaï¿½o <castano@ludicon.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -35,9 +35,9 @@
 
 typedef KGenericFactory<KDdsPlugin> DdsFactory;
 
-typedef Q_UINT32 uint;
-typedef Q_UINT16 ushort;
-typedef Q_UINT8 uchar;
+typedef TQ_UINT32 uint;
+typedef TQ_UINT16 ushort;
+typedef TQ_UINT8 uchar;
 
 namespace {	// Private.
 
@@ -90,10 +90,10 @@ namespace {	// Private.
 		uint flags;
 		uint fourcc;
 		uint bitcount;
-		uint rmask;
-		uint gmask;
-		uint bmask;
-		uint amask;
+		uint rtqmask;
+		uint gtqmask;
+		uint btqmask;
+		uint atqmask;
 	};
 
 	TQDataStream & operator>> ( TQDataStream & s, DDSPixelFormat & pf )
@@ -102,10 +102,10 @@ namespace {	// Private.
 		s >> pf.flags;
 		s >> pf.fourcc;
 		s >> pf.bitcount;
-		s >> pf.rmask;
-		s >> pf.gmask;
-		s >> pf.bmask;
-		s >> pf.amask;
+		s >> pf.rtqmask;
+		s >> pf.gtqmask;
+		s >> pf.btqmask;
+		s >> pf.atqmask;
 		return s;
 	}
 
@@ -182,8 +182,8 @@ namespace {	// Private.
 K_EXPORT_COMPONENT_FACTORY(kfile_dds, DdsFactory( "kfile_dds" ))
 
 // Constructor, init mime type info.
-KDdsPlugin::KDdsPlugin(TQObject *parent, const char *name, const TQStringList &args) : 
-	KFilePlugin(parent, name, args)
+KDdsPlugin::KDdsPlugin(TQObject *tqparent, const char *name, const TQStringList &args) : 
+	KFilePlugin(tqparent, name, args)
 {
     KFileMimeTypeInfo * info = addMimeTypeInfo( "image/x-dds" );
 
@@ -216,7 +216,7 @@ bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 	TQFile file(info.path());
 
 	if (!file.open(IO_ReadOnly)) {
-		kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
+		kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()).data() << endl;
 		return false;
 	}
 
@@ -227,7 +227,7 @@ bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 	uint fourcc;
 	s >> fourcc;
 	if( fourcc != FOURCC_DDS ) {
-		kdDebug(7034) << TQFile::encodeName(info.path()) << " is not a DDS file." << endl;
+		kdDebug(7034) << TQFile::encodeName(info.path()).data() << " is not a DDS file." << endl;
 		return false;
 	}
 
@@ -237,7 +237,7 @@ bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 
 	// Check image file format.
 	if( s.atEnd() || !IsValid( header ) ) {
-		kdDebug(7034) << TQFile::encodeName(info.path()) << " is not a valid DDS file." << endl;
+		kdDebug(7034) << TQFile::encodeName(info.path()).data() << " is not a valid DDS file." << endl;
 		return false;
 	}
 

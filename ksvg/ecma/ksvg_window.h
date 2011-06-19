@@ -25,14 +25,14 @@
 namespace KSVG {
 
 class SVGDocumentImpl;
-class WindowQObject;
+class WindowTQObject;
 
 // This is currently a fork of khtml's Window object, simplified.
 // However in the long run it could become a base class for it.
 // Author: David Faure <faure@kde.org>
 class Window : public KJS::ObjectImp {
     friend class WindowFunc;
-    friend class WindowQObject;
+    friend class WindowTQObject;
     friend class ScheduledAction;
 public:
     Window(KSVG::SVGDocumentImpl *p);
@@ -81,7 +81,7 @@ public:
     static const struct KJS::HashTable s_hashTable;
 
 private:
-	WindowQObject *winq;
+	WindowTQObject *winq;
     TQGuardedPtr<KSVG::SVGDocumentImpl> m_doc;
 };
 
@@ -98,22 +98,23 @@ public:
 	bool singleShot;
 };
 
-class WindowQObject : public TQObject {
+class WindowTQObject : public TQObject {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	WindowQObject(Window *w);
-	~WindowQObject();
+	WindowTQObject(Window *w);
+	~WindowTQObject();
 	int installTimeout(const KJS::UString &handler, int t, bool singleShot);
 	int installTimeout(const KJS::Value &func, KJS::List args, int t, bool singleShot);
 	void clearTimeout(int timerId, bool delAction = true);
 public slots:
 	void timeoutClose();
 protected slots:
-	void parentDestroyed();
+	void tqparentDestroyed();
 protected:
 	void timerEvent(TQTimerEvent *e);
 private:
-	Window *parent;
+	Window *tqparent;
 	//KHTMLPart *part;        // not guarded, may be dangling
 	TQMap<int, ScheduledAction*> scheduledActions;
 };

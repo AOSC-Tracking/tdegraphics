@@ -32,7 +32,7 @@ namespace MrmlCreator
 
     TQDomElement createMrml( TQDomDocument& doc,
                             const TQString& sessionId,
-                            const TQString& transactionId = TQString::null );
+                            const TQString& transactionId = TQString() );
     TQDomElement configureSession( TQDomElement& mrml,
                                   const KMrml::Algorithm& algo,
                                   const TQString& sessionId );
@@ -41,7 +41,7 @@ namespace MrmlCreator
     /**
      * Creates a <user-relevance-element> with the given attributes set.
      */
-    void createRelevanceElement( TQDomDocument& doc, TQDomElement& parent,
+    void createRelevanceElement( TQDomDocument& doc, TQDomElement& tqparent,
                                  const TQString& url, Relevance relevance );
 
 }

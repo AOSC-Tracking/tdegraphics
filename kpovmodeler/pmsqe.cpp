@@ -80,11 +80,11 @@ void PMSuperquadricEllipsoid::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMSuperquadricEllipsoid::metaObject( ) const
+PMMetaObject* PMSuperquadricEllipsoid::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SuperquadricEllipsoid", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "SuperquadricEllipsoid", Base::tqmetaObject( ),
                                         createNewSuperquadricEllipsoid );
       s_pMetaObject->addProperty(
          new PMSuperquadricEllipsoidProperty( "eastWestExponent",
@@ -133,9 +133,9 @@ void PMSuperquadricEllipsoid::setNorthSouthExponent( double n )
    }
 }
 
-PMDialogEditBase* PMSuperquadricEllipsoid::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMSuperquadricEllipsoid::editWidget( TQWidget* tqparent ) const
 {
-   return new PMSuperquadricEllipsoidEdit( parent );
+   return new PMSuperquadricEllipsoidEdit( tqparent );
 }
 
 void PMSuperquadricEllipsoid::restoreMemento( PMMemento* s )

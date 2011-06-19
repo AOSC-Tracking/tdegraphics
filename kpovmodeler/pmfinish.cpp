@@ -130,11 +130,11 @@ PMFinish::~PMFinish( )
 {
 }
 
-PMMetaObject* PMFinish::metaObject( ) const
+PMMetaObject* PMFinish::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Finish", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Finish", Base::tqmetaObject( ),
                                         createNewFinish );
       s_pMetaObject->addProperty(
          new PMFinishProperty( "ambientColor", &PMFinish::setAmbientColor, &PMFinish::ambientColor ) );
@@ -637,9 +637,9 @@ void PMFinish::setIridTurbulence( double c )
    }
 }
 
-PMDialogEditBase* PMFinish::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMFinish::editWidget( TQWidget* tqparent ) const
 {
-   return new PMFinishEdit( parent );
+   return new PMFinishEdit( tqparent );
 }
 
 void PMFinish::restoreMemento( PMMemento* s )

@@ -25,13 +25,13 @@
 #include "pageSizeWidget.h"
 
 
-pageSizeDialog::pageSizeDialog( TQWidget *parent, pageSize *userPrefdPageSize, const char *name, bool modal)
-  :KDialogBase( parent, name, modal, i18n("Page Size"), Ok|Apply|Cancel, Ok, 
+pageSizeDialog::pageSizeDialog( TQWidget *tqparent, pageSize *userPrefdPageSize, const char *name, bool modal)
+  :KDialogBase( tqparent, name, modal, i18n("Page Size"), Ok|Apply|Cancel, Ok, 
 		true )
 {
   userPreferredPageSize = userPrefdPageSize;
   pageSizeW = new pageSizeWidget(this, "PageSizeWidget");
-  pageSizeW->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)3, (TQSizePolicy::SizeType)3, 0, 0, 
+  pageSizeW->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)3, (TQSizePolicy::SizeType)3, 0, 0, 
 					 pageSizeW->sizePolicy().hasHeightForWidth() ) );
   setMainWidget(pageSizeW);
 }

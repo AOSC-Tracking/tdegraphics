@@ -24,20 +24,20 @@
 #include <klocale.h>
 #include <kdialog.h>
 
-ImageSettings::ImageSettings( TQWidget * parent, const char * name )
-	: KPrintDialogPage( parent, name )
+ImageSettings::ImageSettings( TQWidget * tqparent, const char * name )
+	: KPrintDialogPage( tqparent, name )
 	, m_pFitImage( 0 )
 {
 	setTitle( i18n( "Image Settings" ) );
 
-	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	TQBoxLayout * tqlayout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 	m_pFitImage = new TQCheckBox( i18n( "Fit image to page size" ), this );
 	m_pFitImage->setChecked( true );
-	layout->addWidget( m_pFitImage );
+	tqlayout->addWidget( m_pFitImage );
 	m_pCenter = new TQCheckBox( i18n( "Center image on page" ), this );
 	m_pCenter->setChecked( true );
-	layout->addWidget( m_pCenter );
-	layout->insertStretch( -1, 0 );
+	tqlayout->addWidget( m_pCenter );
+	tqlayout->insertStretch( -1, 0 );
 }
 
 ImageSettings::~ImageSettings()

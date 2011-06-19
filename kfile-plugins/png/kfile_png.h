@@ -29,9 +29,10 @@ class TQStringList;
 class KPngPlugin: public KFilePlugin
 {
     Q_OBJECT
+  TQ_OBJECT
     
 public:
-    KPngPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
+    KPngPlugin( TQObject *tqparent, const char *name, const TQStringList& preferredItems );
 
     virtual bool readInfo( KFileMetaInfo& info, uint );
 };

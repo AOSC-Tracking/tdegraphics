@@ -32,8 +32,8 @@ typedef KGenericFactory<KRgbPlugin> RgbFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_rgb, RgbFactory("kfile_rgb"))
 
 
-KRgbPlugin::KRgbPlugin(TQObject *parent, const char *name, const TQStringList &args) :
-	KFilePlugin(parent, name, args)
+KRgbPlugin::KRgbPlugin(TQObject *tqparent, const char *name, const TQStringList &args) :
+	KFilePlugin(tqparent, name, args)
 {
 	KFileMimeTypeInfo* info = addMimeTypeInfo("image/x-rgb");
 
@@ -71,24 +71,24 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	TQFile file(info.path());
 
 	if (!file.open(IO_ReadOnly)) {
-		kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
+		kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()).data() << endl;
 		return false;
 	}
 
 	TQDataStream dstream(&file);
 
-	Q_UINT16 magic;
-	Q_UINT8  storage;
-	Q_UINT8  bpc;
-	Q_UINT16 dimension;
-	Q_UINT16 xsize;
-	Q_UINT16 ysize;
-	Q_UINT16 zsize;
-	Q_UINT32 pixmin;
-	Q_UINT32 pixmax;
-	Q_UINT32 dummy;
+	TQ_UINT16 magic;
+	TQ_UINT8  storage;
+	TQ_UINT8  bpc;
+	TQ_UINT16 dimension;
+	TQ_UINT16 xsize;
+	TQ_UINT16 ysize;
+	TQ_UINT16 zsize;
+	TQ_UINT32 pixmin;
+	TQ_UINT32 pixmax;
+	TQ_UINT32 dummy;
 	char     imagename[80];
-	Q_UINT32 colormap;
+	TQ_UINT32 colormap;
 
 	dstream >> magic;
 	dstream >> storage;
@@ -103,7 +103,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	dstream.readRawBytes(imagename, 80);
 	imagename[79] = '\0';
 	dstream >> colormap;
-	Q_UINT8 u8;
+	TQ_UINT8 u8;
 	for (uint i = 0; i < 404; i++)
 		dstream >> u8;
 
@@ -134,17 +134,17 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		long compressed = file.size() - 512;
 		long verbatim = xsize * ysize * zsize;
 		appendItem(group, "Compression", i18n("Runlength Encoded")
-				+ TQString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
+				+ TQString(", %1%").tqarg(compressed * 100.0 / verbatim, 0, 'f', 1));
 
 		long k;
-		Q_UINT32 offs;
-		TQMap<Q_UINT32, uint> map;
-		TQMap<Q_UINT32, uint>::Iterator it;
-		TQMap<Q_UINT32, uint>::Iterator end = map.end();
+		TQ_UINT32 offs;
+		TQMap<TQ_UINT32, uint> map;
+		TQMap<TQ_UINT32, uint>::Iterator it;
+		TQMap<TQ_UINT32, uint>::Iterator end = map.end();
 		for (k = 0; k < (ysize * zsize); k++) {
 			dstream >> offs;
-			if ((it = map.find(offs)) != end)
-				map.replace(offs, it.data() + 1);
+			if ((it = map.tqfind(offs)) != end)
+				map.tqreplace(offs, it.data() + 1);
 			else
 				map[offs] = 0;
 		}
@@ -152,7 +152,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 			k += it.data();
 
 		if (k)
-			appendItem(group, "SharedRows", TQString("%1%").arg(k * 100.0
+			appendItem(group, "SharedRows", TQString("%1%").tqarg(k * 100.0
 					/ (ysize * zsize), 0, 'f', 1));
 		else
 			appendItem(group, "SharedRows", i18n("None"));
@@ -173,7 +173,7 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 	TQFile file(info.path());
 
 	if (!file.open(IO_WriteOnly|IO_Raw)) {
-		kdDebug(7034) << "couldn't open " << TQFile::encodeName(info.path()) << endl;
+		kdDebug(7034) << "couldn't open " << TQFile::encodeName(info.path()).data() << endl;
 		return false;
 	}
 
@@ -188,9 +188,9 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 
 	unsigned i;
 	for (i = 0; i < s.length(); i++)
-		dstream << Q_UINT8(s.latin1()[i]);
+		dstream << TQ_UINT8(s.latin1()[i]);
 	for (; i < 80; i++)
-		dstream << Q_UINT8(0);
+		dstream << TQ_UINT8(0);
 
 	file.close();
 	return true;
@@ -199,9 +199,9 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 
 // restrict to 79 ASCII characters
 TQValidator* KRgbPlugin::createValidator(const TQString&, const TQString &,
-		const TQString &, TQObject* parent, const char* name) const
+		const TQString &, TQObject* tqparent, const char* name) const
 {
-	return new TQRegExpValidator(TQRegExp("[\x0020-\x007E]{79}"), parent, name);
+	return new TQRegExpValidator(TQRegExp("[\x0020-\x007E]{79}"), tqparent, name);
 }
 
 

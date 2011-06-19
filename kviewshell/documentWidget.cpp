@@ -65,8 +65,8 @@ TQPixmap* BLShadow = 0;
 } // namespace anon
 
 
-DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name )
-  : TQWidget( parent, name ), indexOfUnderlinedLink(-1)
+DocumentWidget::DocumentWidget(TQWidget *tqparent, PageView *sv, DocumentPageCache *cache, const char *name )
+  : TQWidget( tqparent, name ), indexOfUnderlinedLink(-1)
 {
   moveTool = true;
 
@@ -83,10 +83,10 @@ DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache
   scrollGuide = -1;
 
   setMouseTracking(true);
-  setFocusPolicy(TQWidget::ClickFocus);
+  setFocusPolicy(TQ_ClickFocus);
 
   connect(&clearStatusBarTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(clearStatusBar()));
-  setBackgroundMode(Qt::NoBackground);
+  setBackgroundMode(TQt::NoBackground);
 
   if (!busyIcon)
   {
@@ -103,7 +103,7 @@ DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache
 }
 
 
-void DocumentWidget::setPageNumber(Q_UINT16 nr)
+void DocumentWidget::setPageNumber(TQ_UINT16 nr)
 {
   pageNr = nr;
 
@@ -147,7 +147,7 @@ void DocumentWidget::timerEvent( TQTimerEvent *e )
     animationCounter = 0;
   }
 
-  repaint(flashRect, false);
+  tqrepaint(flashRect, false);
 }
 
 
@@ -160,7 +160,7 @@ void DocumentWidget::flash(int fo)
     animationCounter = 10;
     TQRect flashRect = linkFlashRect();
     flashRect.addCoords(-1, -1, 1, 1);
-    repaint(flashRect, false);
+    tqrepaint(flashRect, false);
   }
   animationCounter = 0;
   flashOffset      = fo;
@@ -195,15 +195,15 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
   p.setClipRegion(e->region());
 
   // Paint a black border around the widget
-  p.setRasterOp(Qt::CopyROP);
+  p.setRasterOp(TQt::CopyROP);
   p.setBrush(NoBrush);
-  p.setPen(Qt::black);
+  p.setPen(TQt::black);
   TQRect outlineRect = pageRect();
   outlineRect.addCoords(-1, -1, 1, 1);
   p.drawRect(outlineRect);
 
   // Paint page shadow
-  TQColor backgroundColor = colorGroup().mid();
+  TQColor backgroundColor = tqcolorGroup().mid();
 
   // (Re-)generate the Pixmaps for the shadow corners, if necessary
   if (backgroundColor != backgroundColorForCorners)
@@ -247,7 +247,7 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
     if (KVSPrefs::changeColors() && KVSPrefs::renderMode() == KVSPrefs::EnumRenderMode::Paper)
       p.fillRect(destRect, KVSPrefs::paperColor());
     else
-      p.fillRect(destRect, Qt::white);
+      p.fillRect(destRect, TQt::white);
 
     // Draw busy indicator.
     // Im not really sure if this is a good idea.
@@ -273,7 +273,7 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
     return;
   }
 
-  TQMemArray<TQRect> damagedRects = e->region().rects();
+  TQMemArray<TQRect> damagedRects = TQRegion(e->region()).tqrects();
   for (unsigned int i = 0; i < damagedRects.count(); i++)
   {
     // Paint the page where it intersects with the damaged area.
@@ -342,9 +342,9 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
 
     p.setPen(NoPen);
     p.setBrush(white);
-    p.setRasterOp(Qt::XorROP);
+    p.setRasterOp(TQt::XorROP);
 
-    TQMemArray<TQRect> selectionRects = selectedRegion.rects();
+    TQMemArray<TQRect> selectionRects = selectedRegion.tqrects();
 
     for (unsigned int i = 0; i < selectionRects.count(); i++)
       p.drawRect(selectionRects[i]);
@@ -355,8 +355,8 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
   {
     // Don't draw over the page shadow
     p.setClipRegion(e->region().intersect(pageRect()));
-    p.setRasterOp(Qt::CopyROP);
-    p.setPen(Qt::red);
+    p.setRasterOp(TQt::CopyROP);
+    p.setPen(TQt::red);
     p.drawLine(1, scrollGuide, pageSize().width(), scrollGuide);
   }
 }
@@ -449,23 +449,23 @@ void DocumentWidget::mousePressEvent ( TQMouseEvent * e )
   }
 
   // Check if the mouse is pressed on a regular hyperlink
-  if (e->button() == LeftButton) {
+  if (e->button() == Qt::LeftButton) {
     if (pageData->hyperLinkList.size() > 0)
       for(unsigned int i = 0; i < pageData->hyperLinkList.size(); i++) {
-        if (pageData->hyperLinkList[i].box.contains(e->pos())) {
+        if (pageData->hyperLinkList[i].box.tqcontains(e->pos())) {
           emit(localLink(pageData->hyperLinkList[i].linkText));
           return;
         }
       }
     if (moveTool)
-      setCursor(Qt::SizeAllCursor);
+      setCursor(TQt::SizeAllCursor);
     else
-      setCursor(Qt::IbeamCursor);
+      setCursor(TQt::IbeamCursor);
   }
 
-  if (e->button() == RightButton || (!moveTool && e->button() == LeftButton))
+  if (e->button() == Qt::RightButton || (!moveTool && e->button() == Qt::LeftButton))
   {
-    setCursor(Qt::IbeamCursor);
+    setCursor(TQt::IbeamCursor);
     // If Shift is not pressed clear the current selection,
     // otherwise modify the existing selection.
     if (!(e->state() & ShiftButton))
@@ -485,7 +485,7 @@ void DocumentWidget::mouseReleaseEvent ( TQMouseEvent *e )
   // otherwise the mouse cursor in the centeringScrollview is wrong
   e->ignore();
 
-  if (e->button() == RightButton || (!moveTool && e->button() == LeftButton))
+  if (e->button() == Qt::RightButton || (!moveTool && e->button() == Qt::LeftButton))
   {
     // If the selectedRectangle is empty then there was only a single right click.
     if (firstSelectedPoint == e->pos())
@@ -537,14 +537,14 @@ void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
     int lastUnderlinedLink = indexOfUnderlinedLink;
     // go through hyperlinks
     for(unsigned int i = 0; i < pageData->hyperLinkList.size(); i++) {
-      if (pageData->hyperLinkList[i].box.contains(e->pos())) {
+      if (pageData->hyperLinkList[i].box.tqcontains(e->pos())) {
         clearStatusBarTimer.stop();
         setCursor(pointingHandCursor);
         TQString link = pageData->hyperLinkList[i].linkText;
         if ( link.startsWith("#") )
           link = link.remove(0,1);
 
-        emit setStatusBarText( i18n("Link to %1").arg(link) );
+        emit setStatusBarText( i18n("Link to %1").tqarg(link) );
 
         indexOfUnderlinedLink = i;
         if (KVSPrefs::underlineLinks() == KVSPrefs::EnumUnderlineLinks::OnlyOnHover &&
@@ -588,7 +588,7 @@ void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
     clearStatusBarTimer.start(200, true); // clear the statusbar after 200 msec.
 
   // Left mouse button pressed -> Text scroll function
-  if ((e->state() & LeftButton) != 0 && moveTool)
+  if ((e->state() & Qt::LeftButton) != 0 && moveTool)
   {
     // Pass the mouse event on to the owner of this widget ---under
     // normal circumstances that is the centeringScrollView which will
@@ -597,7 +597,7 @@ void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
   }
 
   // Right mouse button pressed -> Text copy function
-  if ((e->state() & RightButton) != 0 || (!moveTool && (e->state() & LeftButton != 0)))
+  if ((e->state() & Qt::RightButton) != 0 || (!moveTool && (e->state() & Qt::LeftButton != 0)))
   {
     if (selectedRectangle.isEmpty()) {
       firstSelectedPoint = e->pos();
@@ -660,10 +660,10 @@ void DocumentWidget::updateSelection(const TextSelection& newTextSelection)
 
       selectedRegion = newlySelectedRegion;
 
-      TQMemArray<TQRect> rectangles = updateRegion.rects();
+      TQMemArray<TQRect> rectangles = updateRegion.tqrects();
       for (unsigned int i = 0; i < rectangles.count(); i++)
       {
-        repaint(rectangles[i]);
+        tqrepaint(rectangles[i]);
       }
     }
   }
@@ -672,7 +672,7 @@ void DocumentWidget::updateSelection(const TextSelection& newTextSelection)
 
 void DocumentWidget::clearStatusBar()
 {
-  emit setStatusBarText( TQString::null );
+  emit setStatusBarText( TQString() );
 }
 
 
@@ -745,11 +745,11 @@ void DocumentWidget::setStandardCursor()
 {
   if (moveTool)
   {
-    setCursor(Qt::arrowCursor);
+    setCursor(TQt::arrowCursor);
   }
   else
   {
-    setCursor(Qt::IbeamCursor);
+    setCursor(TQt::IbeamCursor);
   }
 }
 

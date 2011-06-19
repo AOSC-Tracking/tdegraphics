@@ -32,7 +32,7 @@
 /*
 const int c_pmTableRTTI = 14352;
 
-class PMTableItem : public QTableItem
+class PMTableItem : public TQTableItem
 {
 public:
    PMTableItem( TQTable* table );
@@ -54,30 +54,31 @@ private:
 /**
  * Widget that displays a list of vectors, based on @ref TQTable.
  */
-class PMVectorListEdit : public QTable
+class PMVectorListEdit : public TQTable
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Constructor for 3d vectors (x, y, z)
     */
-   PMVectorListEdit( TQWidget* parent, const char* name = 0 );
+   PMVectorListEdit( TQWidget* tqparent, const char* name = 0 );
    /**
     * Constructor for 3d vectors
     */
    PMVectorListEdit( const TQString& c1, const TQString& c2, const TQString& c3,
-                    TQWidget* parent, const char* name = 0 );
+                    TQWidget* tqparent, const char* name = 0 );
    /**
     * Constructor for 2d vectors
     */
    PMVectorListEdit( const TQString& c1, const TQString& c2,
-                    TQWidget* parent, const char* name = 0 );
+                    TQWidget* tqparent, const char* name = 0 );
 
    /**
     * Constructor for 4d vectors
     */
    PMVectorListEdit( const TQString& c1, const TQString& c2, const TQString& c3,
-                     const TQString& c4, TQWidget* parent, const char* name = 0 );
+                     const TQString& c4, TQWidget* tqparent, const char* name = 0 );
    /**
     * Sets and displays the vectors. The widget will automatically
     * resize if no link is set and resize is true.
@@ -136,7 +137,7 @@ public:
    void select( int i, int j );
    /**
     * Blocks/unblocks selection updates. If block is false, the
-    * selection is repainted.
+    * selection is tqrepainted.
     */
    void blockSelectionUpdates( bool block );
 
@@ -146,7 +147,7 @@ public:
    bool isDataValid( );
 
    /** */
-   virtual TQSize sizeHint( ) const;
+   virtual TQSize tqsizeHint( ) const;
    /** */
    bool eventFilter( TQObject* o, TQEvent* e );
 

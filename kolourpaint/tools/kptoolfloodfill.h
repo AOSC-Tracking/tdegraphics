@@ -48,6 +48,7 @@ class kpToolFloodFillCommand;
 class kpToolFloodFill : public kpTool
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpToolFloodFill (kpMainWindow *);

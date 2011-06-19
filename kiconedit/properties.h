@@ -26,7 +26,7 @@
 
 #include "kicongrid.h"
 
-class KIconEditProperties : public QObject
+class KIconEditProperties : public TQObject
 {
 public:
   static KIconEditProperties* self();

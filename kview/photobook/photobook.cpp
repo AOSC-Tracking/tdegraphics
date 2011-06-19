@@ -4,7 +4,7 @@ Copyright (c) 2004,2005 Charles Samuels <charles@kde.org>
   This file is hereby licensed under the GNU General Public License version
   2 or later at your option.
 
-  This file is licensed under the Qt Public License version 1 with the
+  This file is licensed under the TQt Public License version 1 with the
   condition that the licensed will be governed under the Laws of California
   (USA) instead of Norway.  Disputes will be settled in Santa Clara county
   courts.
@@ -44,10 +44,10 @@ Copyright (c) 2004,2005 Charles Samuels <charles@kde.org>
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
 
-Previews::Previews(PhotoBook *parent, const TQStringList &mimetypes)
-	: KFileIconView(parent, 0)
+Previews::Previews(PhotoBook *tqparent, const TQStringList &mimetypes)
+	: KFileIconView(tqparent, 0)
 {
-	mPhotoBook = parent;
+	mPhotoBook = tqparent;
 	mMimeTypes = mimetypes;
 
 	connect(&mDirLister, TQT_SIGNAL(clear()), TQT_SLOT(slotClearView()));
@@ -149,15 +149,15 @@ void Previews::goToFirst()
 
 
 
-PhotoBook::PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name)
-	: TQSplitter(parent, name)
+PhotoBook::PhotoBook(TQWidget *tqparent, PhotoBookPart *part, const char *name)
+	: TQSplitter(tqparent, name)
 {
 	
 	TQStringList mimetypes;
 	
 	KTrader::OfferList offers = KTrader::self()->query(
 			"KImageViewer/Viewer", "KParts/ReadOnlyPart",
-			"DesktopEntryName == 'kviewviewer'", TQString::null
+			"DesktopEntryName == 'kviewviewer'", TQString()
 		);
 
 	for (
@@ -167,7 +167,7 @@ PhotoBook::PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name)
 	{
 		KService::Ptr service = *i;
 		mViewer = KParts::ComponentFactory::
-			createPartInstanceFromService<KParts::ReadOnlyPart>( service, this, 0, this );
+			createPartInstanceFromService<KParts::ReadOnlyPart>( service, this, 0, TQT_TQOBJECT(this) );
 		
 		// is this the correct way to get the supported mimetypes?
 		if (mViewer)
@@ -220,24 +220,24 @@ void PhotoBook::updateButton( bool nextExist, bool previousExit)
 K_EXPORT_COMPONENT_FACTORY(libphotobook, PhotoBookFactory )
 
 PhotoBookPart::PhotoBookPart(
-		TQWidget *parentWidget, const char *widgetName,
-		TQObject *parent, const char *name,
+		TQWidget *tqparentWidget, const char *widgetName,
+		TQObject *tqparent, const char *name,
 		const TQStringList&
 	)
-	: KParts::ReadOnlyPart(parent, name)
+	: KParts::ReadOnlyPart(tqparent, name)
 {
 	setInstance(PhotoBookFactory::instance());
 
 	new PhotoBookBrowserExtension(this);
-	bv = new PhotoBook(parentWidget, this, widgetName);
+	bv = new PhotoBook(tqparentWidget, this, widgetName);
 	setWidget(bv);
 
 	connect(
 			bv, TQT_SIGNAL(emitUpdateButton(bool, bool)),
 			this, TQT_SLOT(slotUpdateButton(bool, bool))
 		);
-	m_pNextAction = KStdAction::next(bv, TQT_SLOT(next()), actionCollection(), "next");
-	m_pPreviousAction = KStdAction::prior(bv, TQT_SLOT(previous()), actionCollection(), "previous");
+	m_pNextAction = KStdAction::next(TQT_TQOBJECT(bv), TQT_SLOT(next()), actionCollection(), "next");
+	m_pPreviousAction = KStdAction::prior(TQT_TQOBJECT(bv), TQT_SLOT(previous()), actionCollection(), "previous");
 
 	setXMLFile( "photobookui.rc" );
 

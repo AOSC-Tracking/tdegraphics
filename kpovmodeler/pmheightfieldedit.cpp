@@ -31,8 +31,8 @@
 #include <kiconloader.h>
 #include <kfiledialog.h>
 
-PMHeightFieldEdit::PMHeightFieldEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMHeightFieldEdit::PMHeightFieldEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -189,7 +189,7 @@ void PMHeightFieldEdit::slotFileNameChanged( const TQString& )
 
 void PMHeightFieldEdit::slotFileNameClicked( )
 {
-   TQString str = KFileDialog::getOpenFileName( TQString::null, TQString::null );
+   TQString str = KFileDialog::getOpenFileName( TQString(), TQString() );
 
    if( !str.isEmpty() )
    {

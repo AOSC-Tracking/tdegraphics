@@ -30,11 +30,12 @@ class TQLabel;
   *@author Klaas Freitag
   */
 
-class MassScanDialog : public QDialog
+class MassScanDialog : public TQDialog
 {
    Q_OBJECT
+  TQ_OBJECT
 public: 
-   MassScanDialog( TQWidget *parent);
+   MassScanDialog( TQWidget *tqparent);
    ~MassScanDialog();
 	
 public slots:

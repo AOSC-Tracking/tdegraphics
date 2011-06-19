@@ -104,7 +104,7 @@ static const int OVERFLOW=32;
 
 // Sorting tresholds
 static const int RANKSORT_THRESH=10;
-static const int QUICKSORT_STACK=512;
+static const int TQUICKSORT_STACK=512;
 static const int PRESORT_THRESH=10;
 static const int PRESORT_DEPTH=8;
 static const int RADIX_THRESH=32768;
@@ -283,8 +283,8 @@ void
 _BSort::quicksort3r(int lo, int hi, int depth)
 {
   /* Initialize stack */
-  int slo[QUICKSORT_STACK];
-  int shi[QUICKSORT_STACK];
+  int slo[TQUICKSORT_STACK];
+  int shi[TQUICKSORT_STACK];
   int sp = 1;
   slo[0] = lo;
   shi[0] = hi;
@@ -342,7 +342,7 @@ _BSort::quicksort3r(int lo, int hi, int depth)
           vswap(hi-tmp+1, h+1, tmp, posn);
           h1 = hi - (h1-h);
           // -- process segments
-          ASSERT(sp+2<QUICKSORT_STACK);
+          ASSERT(sp+2<TQUICKSORT_STACK);
           // ----- middle segment (=?) [l1, h1]
           for(int i=l1;i<=h1;i++) 
             rank[posn[i]] = h1;
@@ -437,9 +437,9 @@ void
 _BSort::quicksort3d(int lo, int hi, int depth)
 {
   /* Initialize stack */
-  int slo[QUICKSORT_STACK];
-  int shi[QUICKSORT_STACK];
-  int sd[QUICKSORT_STACK];
+  int slo[TQUICKSORT_STACK];
+  int shi[TQUICKSORT_STACK];
+  int sd[TQUICKSORT_STACK];
   int sp = 1;
   slo[0] = lo;
   shi[0] = hi;
@@ -518,7 +518,7 @@ _BSort::quicksort3d(int lo, int hi, int depth)
           vswap(hi-tmp+1, h+1, tmp, posn);
           h1 = hi - (h1-h);
           // -- process segments
-          ASSERT(sp+3<QUICKSORT_STACK);
+          ASSERT(sp+3<TQUICKSORT_STACK);
           // ----- middle segment (=?) [l1, h1]
           l = l1; h = h1;
           if (med==0) // special case for marker [slow]

@@ -15,13 +15,13 @@
 class HistoryItem
 {
  public:
-  HistoryItem(Q_UINT32, Q_UINT32);
+  HistoryItem(TQ_UINT32, TQ_UINT32);
   HistoryItem() {}
 
   bool operator== (const HistoryItem& item) const;
 
-  Q_UINT32 page;
-  Q_UINT32 ypos;
+  TQ_UINT32 page;
+  TQ_UINT32 ypos;
 };
 
 inline
@@ -31,14 +31,15 @@ bool operator!=(const HistoryItem& lhs, const HistoryItem& rhs)
 }
 
 
-class History : public QObject
+class History : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   History();
 
-  void          add(Q_UINT32 page, Q_UINT32 ypos);
+  void          add(TQ_UINT32 page, TQ_UINT32 ypos);
   void          clear();
 
   HistoryItem*  forward();

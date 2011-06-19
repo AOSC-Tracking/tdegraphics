@@ -64,8 +64,9 @@ private:
 class KIconListBox : public TQListBox    
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  KIconListBox( TQWidget *parent ) : TQListBox(parent) {} ;
+  KIconListBox( TQWidget *tqparent ) : TQListBox(tqparent) {} ;
   const TQString path(int idx) { return ((KIconListBoxItem*)item(idx))->path(); }
   KIconTemplate& iconTemplate(int idx) { return ((KIconListBoxItem*)item(idx))->iconTemplate(); }
 
@@ -93,11 +94,12 @@ private:
   ~KIconTemplateContainer();
 };
 
-class NewSelect : public QWidget
+class NewSelect : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  NewSelect(TQWidget *parent);
+  NewSelect(TQWidget *tqparent);
   ~NewSelect();
 
 signals:
@@ -112,11 +114,12 @@ protected:
   TQRadioButton *rbscratch, *rbtempl;
 };
 
-class NewFromTemplate : public QWidget
+class NewFromTemplate : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  NewFromTemplate(TQWidget *parent);
+  NewFromTemplate(TQWidget *tqparent);
   ~NewFromTemplate();
 
   const TQString path() { return TQString(templates->path(templates->currentItem())); }
@@ -133,8 +136,9 @@ protected:
 class KNewIcon : public KWizard
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  KNewIcon(TQWidget *parent);
+  KNewIcon(TQWidget *tqparent);
   ~KNewIcon();
 
   enum { Blank = 0, Template = 1};

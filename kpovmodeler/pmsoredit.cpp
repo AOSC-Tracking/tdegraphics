@@ -32,8 +32,8 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 
-PMSurfaceOfRevolutionEdit::PMSurfaceOfRevolutionEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMSurfaceOfRevolutionEdit::PMSurfaceOfRevolutionEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -160,7 +160,7 @@ bool PMSurfaceOfRevolutionEdit::isDataValid( )
          {
             m_pPoints->setCurrentCell( pnr, 1 );            
             KMessageBox::error( this, i18n( "The v coordinate of point %1 and %2 must be different." )
-                                .arg( pnr + 1 ).arg( pnr + 3 ),
+                                .tqarg( pnr + 1 ).tqarg( pnr + 3 ),
                                 i18n( "Error" ) );
             return false;
          }

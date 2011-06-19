@@ -41,11 +41,12 @@ class KGammaTable;
 class GammaDialog : public KDialogBase
 {
    Q_OBJECT
-// FIXME: Doesn't compile with Qt 3 (malte)
-//   Q_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )
+  TQ_OBJECT
+// FIXME: Doesn't compile with TQt 3 (malte)
+//   TQ_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )
       
 public:
-   GammaDialog ( TQWidget *parent );
+   GammaDialog ( TQWidget *tqparent );
    ~GammaDialog( );
 
    KGammaTable *getGt( ) const { return gt; }

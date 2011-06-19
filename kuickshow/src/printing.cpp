@@ -43,23 +43,23 @@
 #include "printing.h"
 #include "version.h"
 
-bool Printing::printImage( ImageWindow& imageWin, TQWidget *parent )
+bool Printing::printImage( ImageWindow& imageWin, TQWidget *tqparent )
 {
     TQString imageURL = imageWin.url().prettyURL();
     KPrinter printer;
     printer.setDocName( imageURL );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
-    KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
+    KPrinter::addDialogPage( new KuickPrintDialogPage( tqparent, "kuick page"));
 
-    if ( printer.setup( parent, i18n("Print %1").arg(printer.docName().section('/', -1)) ) )
+    if ( printer.setup( tqparent, i18n("Print %1").tqarg(printer.docName().section('/', -1)) ) )
     {
-        KTempFile tmpFile( TQString::null, ".png" );
+        KTempFile tmpFile( TQString(), ".png" );
         if ( tmpFile.status() == 0 )
         {
             tmpFile.setAutoDelete( true );
             if ( imageWin.saveImage( tmpFile.name(), true ) )
-                return printImageWithQt( tmpFile.name(), printer,
+                return printImageWithTQt( tmpFile.name(), printer,
                                          imageURL );
         }
 
@@ -69,7 +69,7 @@ bool Printing::printImage( ImageWindow& imageWin, TQWidget *parent )
     return true; // user aborted
 }
 
-bool Printing::printImageWithQt( const TQString& filename, KPrinter& printer,
+bool Printing::printImageWithTQt( const TQString& filename, KPrinter& printer,
                                  const TQString& originalFileName )
 {
     TQImage image( filename );
@@ -109,7 +109,7 @@ bool Printing::printImageWithQt( const TQString& filename, KPrinter& printer,
     bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
     TQSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
-        imagesize.scale( w, h, TQSize::ScaleMin );
+        imagesize.tqscale( w, h, TQSize::ScaleMin );
     }
 
 
@@ -117,28 +117,28 @@ bool Printing::printImageWithQt( const TQString& filename, KPrinter& printer,
     // align image
     //
     bool ok = false;
-    int alignment = printer.option("app-kuickshow-alignment").toInt( &ok );
+    int tqalignment = printer.option("app-kuickshow-tqalignment").toInt( &ok );
     if ( !ok )
-        alignment = Qt::AlignCenter; // default
+        tqalignment = TQt::AlignCenter; // default
 
     int x = 0;
     int y = 0;
 
     // ### need a GUI for this in KuickPrintDialogPage!
-    // x - alignment
-    if ( alignment & Qt::AlignHCenter )
+    // x - tqalignment
+    if ( tqalignment & TQt::AlignHCenter )
         x = (w - imagesize.width())/2;
-    else if ( alignment & Qt::AlignLeft )
+    else if ( tqalignment & TQt::AlignLeft )
         x = 0;
-    else if ( alignment & Qt::AlignRight )
+    else if ( tqalignment & TQt::AlignRight )
         x = w - imagesize.width();
 
-    // y - alignment
-    if ( alignment & Qt::AlignVCenter )
+    // y - tqalignment
+    if ( tqalignment & TQt::AlignVCenter )
         y = (h - imagesize.height())/2;
-    else if ( alignment & Qt::AlignTop )
+    else if ( tqalignment & TQt::AlignTop )
         y = 0;
-    else if ( alignment & Qt::AlignBottom )
+    else if ( tqalignment & TQt::AlignBottom )
         y = h - imagesize.height();
 
     //
@@ -167,7 +167,7 @@ TQString Printing::minimizeString( TQString text, const TQFontMetrics&
                                   metrics, int maxWidth )
 {
     if ( text.length() <= 5 )
-        return TQString::null; // no sense to cut that tiny little string
+        return TQString(); // no sense to cut that tiny little string
 
     bool changed = false;
     while ( metrics.width( text ) > maxWidth )
@@ -181,9 +181,9 @@ TQString Printing::minimizeString( TQString text, const TQFontMetrics&
     {
         int mid = text.length() / 2;
         if ( mid <= 5 ) // sanity check
-            return TQString::null;
+            return TQString();
 
-        text.replace( mid - 1, 3, "..." );
+        text.tqreplace( mid - 1, 3, "..." );
     }
 
     return text;
@@ -194,26 +194,26 @@ TQString Printing::minimizeString( TQString text, const TQFontMetrics&
 ///////////////////////////////////////////////////////////////////
 
 
-KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *parent, const char *name )
-    : KPrintDialogPage( parent, name )
+KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *tqparent, const char *name )
+    : KPrintDialogPage( tqparent, name )
 {
     setTitle( i18n("Image Settings") );
 
-    TQVBoxLayout *layout = new TQVBoxLayout( this );
-    layout->setMargin( KDialog::marginHint() );
-    layout->setSpacing( KDialog::spacingHint() );
+    TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
+    tqlayout->setMargin( KDialog::marginHint() );
+    tqlayout->setSpacing( KDialog::spacingHint() );
 
     m_addFileName = new TQCheckBox( i18n("Print fi&lename below image"), this);
     m_addFileName->setChecked( true );
-    layout->addWidget( m_addFileName );
+    tqlayout->addWidget( m_addFileName );
 
     m_blackwhite = new TQCheckBox ( i18n("Print image in &black and white"), this);
     m_blackwhite->setChecked( false );
-    layout->addWidget (m_blackwhite );
+    tqlayout->addWidget (m_blackwhite );
 
     TQVButtonGroup *group = new TQVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
-    layout->addWidget( group );
+    tqlayout->addWidget( group );
     // m_shrinkToFit = new TQRadioButton( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit = new TQCheckBox( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit->setChecked( true );
@@ -258,7 +258,7 @@ void KuickPrintDialogPage::getOptions( TQMap<TQString,TQString>& opts,
     TQString t = "true";
     TQString f = "false";
 
-//    ### opts["app-kuickshow-alignment"] = ;
+//    ### opts["app-kuickshow-tqalignment"] = ;
     opts["app-kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
     opts["app-kuickshow-blackwhite"] = m_blackwhite->isChecked() ? t : f;
     opts["app-kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;

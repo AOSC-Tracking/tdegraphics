@@ -43,8 +43,8 @@ typedef KGenericFactory<KImageCanvas> KImageCanvasFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewcanvas,
 		KImageCanvasFactory( "kviewcanvas" ) )
 
-KImageCanvas::KImageCanvas( TQWidget * parent, const char * name, const TQStringList & )
-	: TQScrollView( parent, name, WResizeNoErase | WStaticContents )
+KImageCanvas::KImageCanvas( TQWidget * tqparent, const char * name, const TQStringList & )
+	: TQScrollView( tqparent, name, WResizeNoErase | WStaticContents )
 	, m_client( 0 )
 	, m_oldClient( 0 )
 	, m_image( 0 )
@@ -75,7 +75,7 @@ KImageCanvas::KImageCanvas( TQWidget * parent, const char * name, const TQString
 	connect( m_pTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( hideCursor() ) );
 
 	KSettings::Dispatcher::self()->registerInstance(
-			KImageCanvasFactory::instance(), this,
+			KImageCanvasFactory::instance(), TQT_TQOBJECT(this),
 			TQT_SLOT( loadSettings() ) );
 
 	viewport()->setFocusProxy( this );
@@ -321,13 +321,13 @@ TQString KImageCanvas::blendEffectDescription( unsigned int idx ) const
 			return i18n( Defaults::blendEffectDescription[ 4 ] );
 	}
 	kdError( 4620 ) << "Effect description for effect with index " << idx << " doesn't exist\n";
-	return TQString::null;
+	return TQString();
 }
 
 bool KImageCanvas::eventFilter( TQObject * obj, TQEvent * ev )
 {
-	if( ( obj == m_client || obj == m_oldClient ) && ev->type() == TQEvent::MouseMove )
-		mouseMoveEvent( static_cast<TQMouseEvent*>( ev ) );
+	if( ( TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_client) || TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_oldClient) ) && ev->type() == TQEvent::MouseMove )
+		mouseMoveEvent( TQT_TQMOUSEEVENT( ev ) );
 	return TQScrollView::eventFilter( obj, ev );
 }
 
@@ -543,7 +543,7 @@ void KImageCanvas::slotUpdateImage()
 
 		if( m_bSizeChanged || m_bNewImage )
 		{
-			TQSize sh = m_client->sizeHint();
+			TQSize sh = m_client->tqsizeHint();
 			if( ! sh.isValid() )
 				sh = TQSize( 0, 0 );
 			m_client->resize( sh );
@@ -587,7 +587,7 @@ void KImageCanvas::slotUpdateImage()
 
 void KImageCanvas::mouseMoveEvent( TQMouseEvent * )
 {
-	if( m_cursor.shape() == Qt::BlankCursor )
+	if( m_cursor.tqshape() == TQt::BlankCursor )
 	{
 		m_cursor.setShape( Qt::CrossCursor );
 		viewport()->setCursor( m_cursor );
@@ -607,7 +607,7 @@ void KImageCanvas::resizeEvent( TQResizeEvent * ev )
 
 void KImageCanvas::contentsMousePressEvent( TQMouseEvent * ev )
 {
-	if ( ev->button() == RightButton )
+	if ( ev->button() == Qt::RightButton )
 		emit contextPress( ev->globalPos() );
 	TQScrollView::contentsMousePressEvent( ev );
 }
@@ -935,7 +935,7 @@ KImageHolder * KImageCanvas::createNewClient()
 	client->setMouseTracking( true );
 	client->installEventFilter( this );
 	setFocusProxy( client );
-	client->setFocusPolicy( TQWidget::StrongFocus );
+	client->setFocusPolicy( TQ_StrongFocus );
 	client->setFocus();
 
 	addChild( client, 0, 0 );

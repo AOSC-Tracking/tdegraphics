@@ -127,7 +127,7 @@ void SVGAnimateElementImpl::handleTimerEvent()
 	{
 /*		m_from += m_addStep;
 
-		if(m_additive == "replace" && needCombine)
+		if(m_additive == "tqreplace" && needCombine)
 			needCombine = false;
 		
 		applyAttribute(m_attributeName, TQString::number(m_from), needCombine);

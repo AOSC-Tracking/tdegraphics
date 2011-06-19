@@ -33,8 +33,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMDeclareEdit::PMDeclareEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMDeclareEdit::PMDeclareEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
    m_pSelectedObject = 0;
@@ -44,13 +44,13 @@ void PMDeclareEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
    m_pNameEdit = new TQLineEdit( this );
    m_pNameEdit->setMaxLength( 40 );
    TQLabel* label = new TQLabel( i18n( "Identifier:" ), this );
 
-   layout->addWidget( label );
-   layout->addWidget( m_pNameEdit );
+   tqlayout->addWidget( label );
+   tqlayout->addWidget( m_pNameEdit );
 
    connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
             TQT_SLOT( slotNameChanged( const TQString& ) ) );
@@ -67,13 +67,13 @@ void PMDeclareEdit::createBottomWidgets( )
             TQT_SLOT( slotItemSelected( TQListBoxItem* ) ) );
    topLayout( )->addWidget( m_pLinkedObjects, 1 );
 
-   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
    m_pSelectButton = new TQPushButton( i18n( "Select..." ), this );
    m_pSelectButton->setEnabled( false );
 
    connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelect( ) ) );
-   layout->addStretch( );
-   layout->addWidget( m_pSelectButton );
+   tqlayout->addStretch( );
+   tqlayout->addWidget( m_pSelectButton );
 
    Base::createBottomWidgets( );
 }
@@ -162,14 +162,14 @@ bool PMDeclareEdit::isDataValid( )
    // valid identifer!
 
    PMReservedWordDict* dict = PMScanner::reservedWords( );
-   if( dict->find( text.latin1( ) ) != -1 )
+   if( dict->tqfind( text.latin1( ) ) != -1 )
    {
       KMessageBox::error( this, i18n( "You can't use a povray reserved word"
                                       " as an identifier!" ), i18n( "Error" ) );
       return false;
    }
    dict = PMScanner::directives( );
-   if( dict->find( text.latin1( ) ) != -1 )
+   if( dict->tqfind( text.latin1( ) ) != -1 )
    {
       KMessageBox::error( this, i18n( "You can't use a povray directive"
                                       " as an identifier!" ), i18n( "Error" ) );
@@ -178,7 +178,7 @@ bool PMDeclareEdit::isDataValid( )
 
    // no reserved word
    PMSymbolTable* st = part( )->symbolTable( );
-   if( st->find( text ) )
+   if( st->tqfind( text ) )
    {
       KMessageBox::error( this, i18n( "Please enter a unique identifier!" ),
                           i18n( "Error" ) );
@@ -201,6 +201,6 @@ void PMDeclareEdit::slotItemSelected( TQListBoxItem* item )
 void PMDeclareEdit::slotSelect( )
 {
    if( m_pSelectedObject )
-      part( )->slotObjectChanged( m_pSelectedObject, PMCNewSelection, this );
+      part( )->slotObjectChanged( m_pSelectedObject, PMCNewSelection, TQT_TQOBJECT(this) );
 }
 #include "pmdeclareedit.moc"

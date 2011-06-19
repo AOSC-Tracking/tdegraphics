@@ -42,12 +42,13 @@ class TQLabel;
 class PMFogEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMFogEdit with parent and name
+    * Creates a PMFogEdit with tqparent and name
     */
-   PMFogEdit( TQWidget* parent, const char* name = 0 );
+   PMFogEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

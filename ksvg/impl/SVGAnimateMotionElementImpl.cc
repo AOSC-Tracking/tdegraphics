@@ -64,7 +64,7 @@ void SVGAnimateMotionElementImpl::setAttributes()
 /*	if(!m_pathArray)
 	{
 		bool temp;
-		m_pathArray = m_path->preparePath(&temp, p->worldMatrix());
+		m_pathArray = m_path->preparePath(&temp, p->tqworldMatrix());
 	}*/
 //}
 

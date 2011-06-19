@@ -41,12 +41,13 @@ class TQLabel;
 class kpResizeSignallingLabel;
 
 
-class kpDocumentSaveOptionsPreviewDialog : public QWidget
+class kpDocumentSaveOptionsPreviewDialog : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpDocumentSaveOptionsPreviewDialog (TQWidget *parent, const char *name = 0);
+    kpDocumentSaveOptionsPreviewDialog (TQWidget *tqparent, const char *name = 0);
     virtual ~kpDocumentSaveOptionsPreviewDialog ();
 
     TQSize preferredMinimumSize () const;
@@ -92,16 +93,17 @@ class KIntNumInput;
 class KPushButton;
 
 
-class kpDocumentSaveOptionsWidget : public QWidget
+class kpDocumentSaveOptionsWidget : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpDocumentSaveOptionsWidget (const TQPixmap &docPixmap,
                                  const kpDocumentSaveOptions &saveOptions,
                                  const kpDocumentMetaInfo &metaInfo,
-                                 TQWidget *parent, const char *name = 0);
-    kpDocumentSaveOptionsWidget (TQWidget *parent, const char *name = 0);
+                                 TQWidget *tqparent, const char *name = 0);
+    kpDocumentSaveOptionsWidget (TQWidget *tqparent, const char *name = 0);
 private:
     void init ();
 public:
@@ -159,7 +161,7 @@ protected:
     void setMode (Mode mode);
 
 protected slots:
-    void repaintLabels ();
+    void tqrepaintLabels ();
 
 
 protected slots:

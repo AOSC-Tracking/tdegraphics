@@ -29,8 +29,8 @@
 #include <kglobal.h>
 #include <kconfig.h>
 
-KViewPresenterConfModule::KViewPresenterConfModule( TQObject * parent )
-	: KPreferencesModule( "kviewpresenter", parent, "KView Presenter Config Module" )
+KViewPresenterConfModule::KViewPresenterConfModule( TQObject * tqparent )
+	: KPreferencesModule( "kviewpresenter", tqparent, "KView Presenter Config Module" )
 {
 }
 
@@ -49,8 +49,8 @@ void KViewPresenterConfModule::reset()
 
 void KViewPresenterConfModule::createPage( TQFrame * page )
 {
-	TQBoxLayout * layout = new TQVBoxLayout( page, KDialog::marginHint(), KDialog::spacingHint() );
-	layout->setAutoAdd( true );
+	TQBoxLayout * tqlayout = new TQVBoxLayout( page, KDialog::marginHint(), KDialog::spacingHint() );
+	tqlayout->setAutoAdd( true );
 
 	m_pCheckBox = new TQCheckBox( "This is only for testing...", page );
 }

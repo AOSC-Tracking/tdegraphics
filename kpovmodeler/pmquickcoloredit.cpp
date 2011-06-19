@@ -26,8 +26,8 @@
 #include <klocale.h>
 
 
-PMQuickColorEdit::PMQuickColorEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMQuickColorEdit::PMQuickColorEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -36,10 +36,10 @@ void PMQuickColorEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
    m_pColorEdit = new PMColorEdit( false, this );
-   layout->addWidget( new TQLabel( i18n( "Color:" ), this ), 0, AlignTop );
-   layout->addWidget( m_pColorEdit );
+   tqlayout->addWidget( new TQLabel( i18n( "Color:" ), this ), 0, AlignTop );
+   tqlayout->addWidget( m_pColorEdit );
 
    connect( m_pColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }

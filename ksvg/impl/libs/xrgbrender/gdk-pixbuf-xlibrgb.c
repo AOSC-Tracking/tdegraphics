@@ -913,7 +913,7 @@ xlib_rgb_init_with_depth (Display *display, Screen *screen, int prefDepth)
 	  static_image[i]->byte_order = MSBFirst;
 	}
       }
-      /* ok, so apparently, image_info->bpp is actually
+      /* ok, so aptqparently, image_info->bpp is actually
 	 BYTES per pixel.  What fun! */
       switch (static_image[0]->bits_per_pixel) {
       case 1:

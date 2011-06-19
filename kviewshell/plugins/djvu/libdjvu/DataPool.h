@@ -116,7 +116,7 @@ class ByteStream;
     Access to data in a #DataPool# may be direct (Using \Ref{get_data}()
     function) or sequential (See \Ref{get_stream}() function).
 
-    If the #DataPool# is not connected to anything, that is it contains
+    If the #DataPool# is not connected to anything, that is it tqcontains
     some real data, this data can be added to it by means of two
     \Ref{add_data}() functions. One of them adds data sequentially maintaining
     the offset of the last block of data added by it. The other can store

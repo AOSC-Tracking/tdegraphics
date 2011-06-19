@@ -76,11 +76,12 @@ protected:
 class kpEffectFlattenWidget : public kpColorEffectWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpEffectFlattenWidget (bool actOnSelection,
                            kpMainWindow *mainWindow,
-                           TQWidget *parent, const char *name = 0);
+                           TQWidget *tqparent, const char *name = 0);
     virtual ~kpEffectFlattenWidget ();
 
 

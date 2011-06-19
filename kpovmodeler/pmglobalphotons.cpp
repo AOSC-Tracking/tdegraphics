@@ -101,11 +101,11 @@ PMGlobalPhotons::~PMGlobalPhotons( )
 {
 }
 
-PMMetaObject* PMGlobalPhotons::metaObject( ) const
+PMMetaObject* PMGlobalPhotons::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "GlobalPhotons", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "GlobalPhotons", Base::tqmetaObject( ),
                                         createNewGlobalPhotons );
 
       PMNumberProperty* p1 = new PMNumberProperty( "numberType",
@@ -437,9 +437,9 @@ void PMGlobalPhotons::setRadiusMediaMulti( double rmm )
    }
 }
 
-PMDialogEditBase* PMGlobalPhotons::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMGlobalPhotons::editWidget( TQWidget* tqparent ) const
 {
-   return new PMGlobalPhotonsEdit( parent );
+   return new PMGlobalPhotonsEdit( tqparent );
 }
 
 void PMGlobalPhotons::restoreMemento( PMMemento* s )

@@ -31,7 +31,7 @@
  * Class for povray scenes.
  *
  * A document has a PMScene object as top level object. A PMScene can't have
- * a parent
+ * a tqparent
  */
 class PMScene : public PMCompositeObject
 {
@@ -51,7 +51,7 @@ public:
    virtual ~PMScene( );
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

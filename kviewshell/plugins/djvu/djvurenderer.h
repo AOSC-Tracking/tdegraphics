@@ -51,13 +51,14 @@ with 10 empty pages of A4 size and a few anchors and bookmarks.
 class DjVuRenderer : public DocumentRenderer
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
    /** Default constructor
 
        This constructor simply prints a message and calls the default constructor.
    */
-   DjVuRenderer(TQWidget* parent);
+   DjVuRenderer(TQWidget* tqparent);
 
    /** Destructor
 
@@ -113,7 +114,7 @@ public:
   bool convertToPSFile( DjVuToPS &converter, TQString filename, TQValueList<int> &pageList );
 
   /** Deletes pages from the document */
-  void deletePages(Q_UINT16 from, Q_UINT16 to);
+  void deletePages(TQ_UINT16 from, TQ_UINT16 to);
 
   /** Saves the file */
   bool save(const TQString &filename);

@@ -31,11 +31,11 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
-      : PMSettingsDialogPage( parent, name )
+PMLayoutSettings::PMLayoutSettings( TQWidget* tqparent, const char* name )
+      : PMSettingsDialogPage( tqparent, name )
 {
-   TQHBoxLayout* hlayout;
-   TQVBoxLayout* vlayout;
+   TQHBoxLayout* htqlayout;
+   TQVBoxLayout* vtqlayout;
    TQVBoxLayout* gvl;
    TQGridLayout* grid;
    TQGroupBox* gb;
@@ -43,16 +43,16 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    TQHBoxLayout* ghe;
    TQVBoxLayout* gvle;
 
-   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
-   hlayout = new TQHBoxLayout( vlayout );
-   hlayout->addWidget( new TQLabel( i18n( "Default view layout:" ), this ) );
+   htqlayout = new TQHBoxLayout( vtqlayout );
+   htqlayout->addWidget( new TQLabel( i18n( "Default view tqlayout:" ), this ) );
    m_pDefaultLayout = new TQComboBox( this );
-   hlayout->addWidget( m_pDefaultLayout, 1 );
-   hlayout->addStretch( 1 );
+   htqlayout->addWidget( m_pDefaultLayout, 1 );
+   htqlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Available View Layouts" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    
@@ -180,13 +180,13 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    
    ghl->addStretch( 1 );
 
-   vlayout->addStretch( 1 );
+   vtqlayout->addStretch( 1 );
 }
 
 void PMLayoutSettings::displaySettings( )
 {
    PMViewLayoutManager* m = PMViewLayoutManager::theManager( );
-   m_viewLayouts = m->layouts( );
+   m_viewLayouts = m->tqlayouts( );
    m_currentViewLayout = m_viewLayouts.begin( );
    m_defaultViewLayout = m_viewLayouts.begin( );
    for( ; ( m_defaultViewLayout != m_viewLayouts.end( ) ) &&
@@ -210,7 +210,7 @@ bool PMLayoutSettings::validateData( )
       if( ( *lit ).name( ).isEmpty( ) )
       {
          emit showMe( );
-         KMessageBox::error( this, i18n( "View layouts may not have empty names." ),
+         KMessageBox::error( this, i18n( "View tqlayouts may not have empty names." ),
                              i18n( "Error" ) );
          return false;
       }
@@ -220,7 +220,7 @@ bool PMLayoutSettings::validateData( )
          if( ( *eit ).dockPosition( ) != PMDockWidget::DockRight )
          {
             emit showMe( );
-            KMessageBox::error( this, i18n( "The docking position of the first view layout entry has to be 'New Column'." ),
+            KMessageBox::error( this, i18n( "The docking position of the first view tqlayout entry has to be 'New Column'." ),
                                 i18n( "Error" ) );
             return false;
          }
@@ -262,7 +262,7 @@ void PMLayoutSettings::slotAddLayout( )
 
    new_name = i18n( "Unnamed" );
    str.setNum( i );
-   while( m_pViewLayouts->findItem( new_name, Qt::ExactMatch ) )
+   while( m_pViewLayouts->tqfindItem( new_name, TQt::ExactMatch ) )
    {
       new_name = i18n( "Unnamed" ) + str;
       i++;
@@ -275,7 +275,7 @@ void PMLayoutSettings::slotAddLayout( )
    m_currentViewLayout++;
    m_viewLayouts.insert( m_currentViewLayout, l );
    displayLayoutList( );
-   m_pViewLayouts->setCurrentItem( m_pViewLayouts->findItem( new_name, Qt::ExactMatch ) );
+   m_pViewLayouts->setCurrentItem( m_pViewLayouts->tqfindItem( new_name, TQt::ExactMatch ) );
    m_pRemoveLayout->setEnabled( true );
 }
 
@@ -720,8 +720,8 @@ void PMLayoutSettings::slotMoveDownViewEntryClicked( )
 void PMLayoutSettings::displayCustomOptions( )
 {
    // delete an old widget
-   if( m_pCustomOptionsHolder->layout( ) )
-      delete m_pCustomOptionsHolder->layout( );
+   if( m_pCustomOptionsHolder->tqlayout( ) )
+      delete m_pCustomOptionsHolder->tqlayout( );
    if( m_pCustomOptionsWidget )
    {
       delete m_pCustomOptionsWidget;

@@ -102,9 +102,9 @@ kpView::kpView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        TQWidget *parent, const char *name)
+        TQWidget *tqparent, const char *name)
 
-    : TQWidget (parent, name, Qt::WNoAutoErase/*no flicker*/),
+    : TQWidget (tqparent, name, TQt::WNoAutoErase/*no flicker*/),
       d (new kpViewPrivate ())
 {
     d->m_document = document;
@@ -121,8 +121,8 @@ kpView::kpView (kpDocument *document,
     d->m_backBuffer = 0;
 
 
-    setBackgroundMode (Qt::NoBackground);  // no flicker
-    setFocusPolicy (TQWidget::WheelFocus);
+    setBackgroundMode (TQt::NoBackground);  // no flicker
+    setFocusPolicy (TQ_WheelFocus);
     setMouseTracking (true);  // mouseMoveEvent's even when no mousebtn down
     setKeyCompression (true);
     setInputMethodEnabled (true);  // ensure using InputMethod
@@ -385,9 +385,9 @@ void kpView::updateBuddyViewScrollableContainerRectangle ()
             TQRect docRect = buddyView ()->transformViewToDoc (
                 TQRect (buddyViewScrollableContainer ()->contentsXSoon (),
                        buddyViewScrollableContainer ()->contentsYSoon (),
-                       QMIN (buddyView ()->width (),
+                       TQMIN (buddyView ()->width (),
                              buddyViewScrollableContainer ()->visibleWidth ()),
-                       QMIN (buddyView ()->height (),
+                       TQMIN (buddyView ()->height (),
                              buddyViewScrollableContainer ()->visibleHeight ())));
 
 
@@ -462,8 +462,8 @@ TQRect kpView::transformViewToDoc (const TQRect &viewRect) const
         const TQPoint docTopLeft = transformViewToDoc (viewRect.topLeft ());
 
         // (don't call transformViewToDoc[XY]() - need to round up dimensions)
-        const int docWidth = qRound (double (viewRect.width ()) * 100.0 / double (zoomLevelX ()));
-        const int docHeight = qRound (double (viewRect.height ()) * 100.0 / double (zoomLevelY ()));
+        const int docWidth = tqRound (double (viewRect.width ()) * 100.0 / double (zoomLevelX ()));
+        const int docHeight = tqRound (double (viewRect.height ()) * 100.0 / double (zoomLevelY ()));
 
         // (like TQWMatrix::Areas)
         return TQRect (docTopLeft.x (), docTopLeft.y (), docWidth, docHeight);
@@ -505,8 +505,8 @@ TQRect kpView::transformDocToView (const TQRect &docRect) const
         const TQPoint viewTopLeft = transformDocToView (docRect.topLeft ());
 
         // (don't call transformDocToView[XY]() - need to round up dimensions)
-        const int viewWidth = qRound (double (docRect.width ()) * double (zoomLevelX ()) / 100.0);
-        const int viewHeight = qRound (double (docRect.height ()) * double (zoomLevelY ()) / 100.0);
+        const int viewWidth = tqRound (double (docRect.width ()) * double (zoomLevelX ()) / 100.0);
+        const int viewHeight = tqRound (double (docRect.height ()) * double (zoomLevelY ()) / 100.0);
 
         // (like TQWMatrix::Areas)
         return TQRect (viewTopLeft.x (), viewTopLeft.y (), viewWidth, viewHeight);
@@ -590,10 +590,10 @@ void kpView::addToQueuedArea (const TQRect &rect)
 }
 
 // public
-void kpView::invalidateQueuedArea ()
+void kpView::tqinvalidateQueuedArea ()
 {
 #if DEBUG_KP_VIEW && 0
-    kdDebug () << "kpView::invalidateQueuedArea()" << endl;
+    kdDebug () << "kpView::tqinvalidateQueuedArea()" << endl;
 #endif
 
     d->m_queuedUpdateArea = TQRegion ();
@@ -621,7 +621,7 @@ void kpView::updateQueuedArea ()
     if (!d->m_queuedUpdateArea.isNull ())
         vm->updateView (this, d->m_queuedUpdateArea);
 
-    invalidateQueuedArea ();
+    tqinvalidateQueuedArea ();
 }
 
 // public
@@ -668,7 +668,7 @@ bool kpView::mouseOnSelection (const TQPoint &viewPoint) const
     if (!selViewRect.isValid ())
         return false;
 
-    return selViewRect.contains (mouseViewPoint (viewPoint));
+    return selViewRect.tqcontains (mouseViewPoint (viewPoint));
 }
 
 
@@ -678,7 +678,7 @@ int kpView::textSelectionMoveBorderAtomicSize () const
     if (!selection () || !selection ()->isText ())
         return 0;
 
-    return QMAX (4, zoomLevelX () / 100);
+    return TQMAX (4, zoomLevelX () / 100);
 }
 
 // public
@@ -730,7 +730,7 @@ bool kpView::selectionLargeEnoughToHaveResizeHandlesIfAtomicSize (int atomicSize
 // public
 int kpView::selectionResizeHandleAtomicSize () const
 {
-    int atomicSize = QMIN (7, QMAX (4, zoomLevelX () / 100));
+    int atomicSize = TQMIN (7, TQMAX (4, zoomLevelX () / 100));
     while (atomicSize > 0 &&
            !selectionLargeEnoughToHaveResizeHandlesIfAtomicSize (atomicSize))
     {
@@ -783,9 +783,9 @@ TQRegion kpView::selectionResizeHandlesViewRegion (bool forRenderer) const
         if (selection ()->isText () && selection ()->textLines ().size () == 1)
         {
             if (zoomLevelX () <= 150)
-                vertEdgeAtomicLength = QMIN (vertEdgeAtomicLength, QMAX (2, zoomLevelX () / 100));
+                vertEdgeAtomicLength = TQMIN (vertEdgeAtomicLength, TQMAX (2, zoomLevelX () / 100));
             else if (zoomLevelX () <= 250)
-                vertEdgeAtomicLength = QMIN (vertEdgeAtomicLength, QMAX (3, zoomLevelX () / 100));
+                vertEdgeAtomicLength = TQMIN (vertEdgeAtomicLength, TQMAX (3, zoomLevelX () / 100));
         }
     }
 
@@ -874,7 +874,7 @@ int kpView::mouseOnSelectionResizeHandle (const TQPoint &viewPoint) const
 
 
 #define LOCAL_POINT_IN_BOX_AT(x,y)  \
-    TQRect ((x), (y), atomicLength, atomicLength).contains (viewPointRelSel)
+    TQRect ((x), (y), atomicLength, atomicLength).tqcontains (viewPointRelSel)
 
     // Favour the bottom & right and the corners.
     if (LOCAL_POINT_IN_BOX_AT (selViewRect.width () - atomicLength,
@@ -957,7 +957,7 @@ bool kpView::mouseOnSelectionToSelectText (const TQPoint &viewPoint) const
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::mouseMoveEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -969,7 +969,7 @@ void kpView::mouseMoveEvent (TQMouseEvent *e)
     // TODO: This is wrong if you leaveEvent the mainView by mouseMoving on the
     //       mainView, landing on top of the thumbnailView cleverly put on top
     //       of the mainView.
-    setHasMouse (rect ().contains (e->pos ()));
+    setHasMouse (TQT_TQRECT_OBJECT(rect ()).tqcontains (e->pos ()));
 
     if (tool ())
         tool ()->mouseMoveEvent (e);
@@ -977,7 +977,7 @@ void kpView::mouseMoveEvent (TQMouseEvent *e)
     e->accept ();
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::mousePressEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -994,7 +994,7 @@ void kpView::mousePressEvent (TQMouseEvent *e)
     e->accept ();
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::mouseReleaseEvent (TQMouseEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -1003,7 +1003,7 @@ void kpView::mouseReleaseEvent (TQMouseEvent *e)
                << endl;
 #endif
 
-    setHasMouse (rect ().contains (e->pos ()));
+    setHasMouse (TQT_TQRECT_OBJECT(rect ()).tqcontains (e->pos ()));
 
     if (tool ())
         tool ()->mouseReleaseEvent (e);
@@ -1011,7 +1011,7 @@ void kpView::mouseReleaseEvent (TQMouseEvent *e)
     e->accept ();
 }
 
-// public virtual [base QWidget]
+// public virtual [base TQWidget]
 void kpView::wheelEvent (TQWheelEvent *e)
 {
     if (tool ())
@@ -1019,7 +1019,7 @@ void kpView::wheelEvent (TQWheelEvent *e)
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::keyPressEvent (TQKeyEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -1032,7 +1032,7 @@ void kpView::keyPressEvent (TQKeyEvent *e)
     e->accept ();
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::keyReleaseEvent (TQKeyEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -1046,7 +1046,7 @@ void kpView::keyReleaseEvent (TQKeyEvent *e)
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::focusInEvent (TQFocusEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -1056,7 +1056,7 @@ void kpView::focusInEvent (TQFocusEvent *e)
         tool ()->focusInEvent (e);
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::focusOutEvent (TQFocusEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -1067,7 +1067,7 @@ void kpView::focusOutEvent (TQFocusEvent *e)
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::enterEvent (TQEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -1076,7 +1076,7 @@ void kpView::enterEvent (TQEvent *e)
 
     // Don't call setHasMouse(true) as it displays the brush cursor (if
     // active) when dragging open a menu and then dragging
-    // past the extents of the menu due to Qt sending us an EnterEvent.
+    // past the extents of the menu due to TQt sending us an EnterEvent.
     // We're already covered by MouseMoveEvent anyway.
     //
     // But disabling this causes a more serious problem: RMB on a text
@@ -1089,7 +1089,7 @@ void kpView::enterEvent (TQEvent *e)
         tool ()->enterEvent (e);
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::leaveEvent (TQEvent *e)
 {
 #if DEBUG_KP_VIEW && 0
@@ -1102,7 +1102,7 @@ void kpView::leaveEvent (TQEvent *e)
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::dragEnterEvent (TQDragEnterEvent *)
 {
 #if DEBUG_KP_VIEW && 1
@@ -1112,7 +1112,7 @@ void kpView::dragEnterEvent (TQDragEnterEvent *)
     setHasMouse (true);
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::dragLeaveEvent (TQDragLeaveEvent *)
 {
 #if DEBUG_KP_VIEW && 1
@@ -1123,7 +1123,7 @@ void kpView::dragLeaveEvent (TQDragLeaveEvent *)
 }
 
 
-// public virtual [base QWidget]
+// public virtual [base TQWidget]
 void kpView::resize (int w, int h)
 {
 #if DEBUG_KP_VIEW && 1
@@ -1135,7 +1135,7 @@ void kpView::resize (int w, int h)
     TQWidget::resize (w, h);
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_VIEW && 1
@@ -1270,7 +1270,7 @@ void kpView::drawTransparentBackground (TQPainter *painter,
                     col = TQColor (224, 224, 224);
             }
             else
-                col = Qt::white;
+                col = TQt::white;
 
             painter->fillRect (x - rect.x (), y - rect.y (), cellSize, cellSize,
                                col);
@@ -1340,27 +1340,27 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
     if (vm->selectionBorderVisible ())
     {
         TQPainter destPixmapPainter (destPixmap);
-        destPixmapPainter.setRasterOp (Qt::XorROP);
-        destPixmapPainter.setPen (TQPen (Qt::white, 1, Qt::DotLine));
+        destPixmapPainter.setRasterOp (TQt::XorROP);
+        destPixmapPainter.setPen (TQPen (TQt::white, 1, TQt::DotLine));
 
-        destPixmapPainter.setBackgroundMode (TQPainter::OpaqueMode);
-        destPixmapPainter.setBackgroundColor (Qt::blue);
+        destPixmapPainter.setBackgroundMode (Qt::OpaqueMode);
+        destPixmapPainter.setBackgroundColor (TQt::blue);
 
-        TQBitmap maskBitmap;
-        TQPainter maskBitmapPainter;
-        if (destPixmap->mask ())
+        TQBitmap tqmaskBitmap;
+        TQPainter tqmaskBitmapPainter;
+        if (destPixmap->tqmask ())
         {
-            maskBitmap = *destPixmap->mask ();
-            maskBitmapPainter.begin (&maskBitmap);
-            maskBitmapPainter.setPen (Qt::color1/*opaque*/);
+            tqmaskBitmap = *destPixmap->tqmask ();
+            tqmaskBitmapPainter.begin (&tqmaskBitmap);
+            tqmaskBitmapPainter.setPen (TQt::color1/*opaque*/);
         }
 
 
     #define PAINTER_CMD(cmd)                 \
     {                                        \
         destPixmapPainter . cmd;             \
-        if (maskBitmapPainter.isActive ())   \
-            maskBitmapPainter . cmd;         \
+        if (tqmaskBitmapPainter.isActive ())   \
+            tqmaskBitmapPainter . cmd;         \
     }
 
         TQRect boundingRect = sel->boundingRect ();
@@ -1432,7 +1432,7 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
             {
                 destPixmapPainter.save ();
 
-                destPixmapPainter.setRasterOp (Qt::NotROP);
+                destPixmapPainter.setRasterOp (TQt::NotROP);
                 PAINTER_CMD (drawRect (boundingRect.x () - docRect.x (),
                                        boundingRect.y () - docRect.y (),
                                        boundingRect.width (),
@@ -1443,17 +1443,17 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
         }
         else
         {
-            // SYNC: Work around Qt bug: can't draw 1x1 rectangle
+            // SYNC: Work around TQt bug: can't draw 1x1 rectangle
             PAINTER_CMD (drawPoint (boundingRect.topLeft () - docRect.topLeft ()));
         }
 
     #undef PAINTER_CMD
 
         destPixmapPainter.end ();
-        if (maskBitmapPainter.isActive ())
-            maskBitmapPainter.end ();
+        if (tqmaskBitmapPainter.isActive ())
+            tqmaskBitmapPainter.end ();
 
-        destPixmap->setMask (maskBitmap);
+        destPixmap->setMask (tqmaskBitmap);
     }
 
 
@@ -1480,24 +1480,24 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
             {
                 rect.moveBy (-docRect.x (), -docRect.y ());
 
-                TQBitmap maskBitmap;
-                TQPainter destPixmapPainter, maskBitmapPainter;
+                TQBitmap tqmaskBitmap;
+                TQPainter destPixmapPainter, tqmaskBitmapPainter;
 
-                if (destPixmap->mask ())
+                if (destPixmap->tqmask ())
                 {
-                    maskBitmap = *destPixmap->mask ();
-                    maskBitmapPainter.begin (&maskBitmap);
-                    maskBitmapPainter.fillRect (rect, Qt::color1/*opaque*/);
-                    maskBitmapPainter.end ();
+                    tqmaskBitmap = *destPixmap->tqmask ();
+                    tqmaskBitmapPainter.begin (&tqmaskBitmap);
+                    tqmaskBitmapPainter.fillRect (rect, TQt::color1/*opaque*/);
+                    tqmaskBitmapPainter.end ();
                 }
 
                 destPixmapPainter.begin (destPixmap);
-                destPixmapPainter.setRasterOp (Qt::XorROP);
-                destPixmapPainter.fillRect (rect, Qt::white);
+                destPixmapPainter.setRasterOp (TQt::XorROP);
+                destPixmapPainter.fillRect (rect, TQt::white);
                 destPixmapPainter.end ();
 
-                if (!maskBitmap.isNull ())
-                    destPixmap->setMask (maskBitmap);
+                if (!tqmaskBitmap.isNull ())
+                    destPixmap->setMask (tqmaskBitmap);
             }
         }
     }
@@ -1559,16 +1559,16 @@ void kpView::paintEventDrawSelectionResizeHandles (TQPainter *painter, const TQR
     TQColor fillColor;
     if (selectionResizeHandleAtomicSizeCloseToZoomLevel ())
     {
-        fillColor = Qt::blue;
-        painter->setRasterOp (Qt::CopyROP);
+        fillColor = TQt::blue;
+        painter->setRasterOp (TQt::CopyROP);
     }
     else
     {
-        fillColor = Qt::white;
-        painter->setRasterOp (Qt::XorROP);
+        fillColor = TQt::white;
+        painter->setRasterOp (TQt::XorROP);
     }
 
-    TQMemArray <TQRect> rects = selResizeHandlesRegion.rects ();
+    TQMemArray <TQRect> rects = selResizeHandlesRegion.tqrects ();
     for (TQMemArray <TQRect>::ConstIterator it = rects.begin ();
          it != rects.end ();
          it++)
@@ -1607,8 +1607,8 @@ void kpView::paintEventDrawGridLines (TQPainter *painter, const TQRect &viewRect
     int hzoomMultiple = zoomLevelX () / 100;
     int vzoomMultiple = zoomLevelY () / 100;
 
-    TQPen ordinaryPen (Qt::gray);
-    TQPen tileBoundaryPen (Qt::lightGray);
+    TQPen ordinaryPen (TQt::gray);
+    TQPen tileBoundaryPen (TQt::lightGray);
 
     painter->setPen (ordinaryPen);
 
@@ -1622,7 +1622,7 @@ void kpView::paintEventDrawGridLines (TQPainter *painter, const TQRect &viewRect
         if (0 && tileHeight > 0 && y % tileHeight == 0)
         {
             painter->setPen (tileBoundaryPen);
-            //painter.setRasterOp (Qt::XorROP);
+            //painter.setRasterOp (TQt::XorROP);
         }
 
         painter->drawLine (0, y, viewRect.right () - viewRect.left (), y);
@@ -1630,7 +1630,7 @@ void kpView::paintEventDrawGridLines (TQPainter *painter, const TQRect &viewRect
         if (0 && tileHeight > 0 && y % tileHeight == 0)
         {
             painter->setPen (ordinaryPen);
-            //painter.setRasterOp (Qt::CopyROP);
+            //painter.setRasterOp (TQt::CopyROP);
         }
     }
 
@@ -1644,7 +1644,7 @@ void kpView::paintEventDrawGridLines (TQPainter *painter, const TQRect &viewRect
         if (0 && tileWidth > 0 && x % tileWidth == 0)
         {
             painter->setPen (tileBoundaryPen);
-            //painter.setRasterOp (Qt::XorROP);
+            //painter.setRasterOp (TQt::XorROP);
         }
 
         painter->drawLine (x, 0, x, viewRect.bottom () - viewRect.top ());
@@ -1652,7 +1652,7 @@ void kpView::paintEventDrawGridLines (TQPainter *painter, const TQRect &viewRect
         if (0 && tileWidth > 0 && x % tileWidth == 0)
         {
             painter->setPen (ordinaryPen);
-            //painter.setRasterOp (Qt::CopyROP);
+            //painter.setRasterOp (TQt::CopyROP);
         }
     }
 }
@@ -1685,7 +1685,7 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
 // uncomment to cause deliberate flicker (identifies needless updates)
 #if DEBUG_KP_VIEW_RENDERER && 0
     TQPainter flickerPainter (this);
-    flickerPainter.fillRect (viewRect, Qt::red);
+    flickerPainter.fillRect (viewRect, TQt::red);
     flickerPainter.end ();
 #endif
 
@@ -1711,7 +1711,7 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
 
 // uncomment to catch bits of the view that the renderer forgot to update
 #if 0
-    d->m_backBuffer->fill (Qt::green);
+    d->m_backBuffer->fill (TQt::green);
 #endif
 
     TQPainter backBufferPainter;
@@ -1747,11 +1747,11 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
     #endif
     }
 
-    if (docPixmap.mask () ||
+    if (docPixmap.tqmask () ||
         (tempPixmapWillBeRendered && vm->tempPixmap ()->mayChangeDocumentMask ()))
     {
     #if DEBUG_KP_VIEW_RENDERER && 1
-        kdDebug () << "\tmask=" << (bool) docPixmap.mask ()
+        kdDebug () << "\ttqmask=" << (bool) docPixmap.tqmask ()
                    << endl;
     #endif
         paintEventDrawCheckerBoard (&backBufferPainter, viewRect);
@@ -1759,7 +1759,7 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
     else
     {
     #if DEBUG_KP_VIEW_RENDERER && 1
-        kdDebug () << "\tno mask" << endl;
+        kdDebug () << "\tno tqmask" << endl;
     #endif
     }
 
@@ -1820,8 +1820,8 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
     {
         backBufferPainter.save ();
 
-        backBufferPainter.setRasterOp (Qt::XorROP);
-        backBufferPainter.setPen (Qt::white);
+        backBufferPainter.setRasterOp (TQt::XorROP);
+        backBufferPainter.setPen (TQt::white);
         backBufferPainter.translate (-viewRect.x (), -viewRect.y ());
         backBufferPainter.drawRect (bvsvRect);
 
@@ -1850,7 +1850,7 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpView::paintEvent (TQPaintEvent *e)
 {
     // sync: kpViewPrivate
@@ -1888,7 +1888,7 @@ void kpView::paintEvent (TQPaintEvent *e)
 
 
     TQRegion viewRegion = clipRegion ().intersect (e->region ());
-    TQMemArray <TQRect> rects = viewRegion.rects ();
+    TQMemArray <TQRect> rects = viewRegion.tqrects ();
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "\t#rects = " << rects.count () << endl;
 #endif

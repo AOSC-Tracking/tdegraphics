@@ -72,7 +72,7 @@ public:
 
    /**
     * Refreshes the list of libraries.
-    * WARNING: This function invalidates all previously given PMLibraryHandle pointers
+    * WARNING: This function tqinvalidates all previously given PMLibraryHandle pointers
     */
    void refresh( );
    

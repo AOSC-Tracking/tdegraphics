@@ -42,8 +42,8 @@
 #include <kptool.h>
 
 
-kpToolWidgetFillStyle::kpToolWidgetFillStyle (TQWidget *parent, const char *name)
-    : kpToolWidgetBase (parent, name)
+kpToolWidgetFillStyle::kpToolWidgetFillStyle (TQWidget *tqparent, const char *name)
+    : kpToolWidgetBase (tqparent, name)
 {
     setInvertSelectedPixmap ();
 
@@ -71,34 +71,34 @@ kpToolWidgetFillStyle::~kpToolWidgetFillStyle ()
 TQPixmap kpToolWidgetFillStyle::fillStylePixmap (FillStyle fs, int w, int h)
 {
     TQPixmap pixmap ((w <= 0 ? width () : w), (h <= 0 ? height () : h));
-    pixmap.fill (Qt::white);
+    pixmap.fill (TQt::white);
 
     TQPainter painter (&pixmap);
 
-    painter.setPen (TQPen (Qt::black, 2));
+    painter.setPen (TQPen (TQt::black, 2));
     painter.setBrush (brushForFillStyle (fs,
-                                         kpColor (Qt::black.rgb ())/*foreground*/,
-                                         kpColor (Qt::gray.rgb ())/*background*/));
+                                         kpColor (TQt::black.rgb ())/*foreground*/,
+                                         kpColor (TQt::gray.rgb ())/*background*/));
 
     painter.drawRect (2, 2, w - 3, h - 3);
 
     painter.end ();
 
 
-    TQBitmap mask (pixmap.width (), pixmap.height ());
-    mask.fill (Qt::color0);
+    TQBitmap tqmask (pixmap.width (), pixmap.height ());
+    tqmask.fill (TQt::color0);
 
-    painter.begin (&mask);
-    painter.setPen (TQPen (Qt::color1, 2));
+    painter.begin (&tqmask);
+    painter.setPen (TQPen (TQt::color1, 2));
 
     if (fs == FillWithBackground || fs == FillWithForeground)
-        painter.setBrush (Qt::color1);
+        painter.setBrush (TQt::color1);
 
     painter.drawRect (2, 2, w - 3, h - 3);
 
     painter.end ();
 
-    pixmap.setMask (mask);
+    pixmap.setMask (tqmask);
 
     return pixmap;
 }
@@ -121,7 +121,7 @@ TQString kpToolWidgetFillStyle::fillStyleName (FillStyle fs) const
         return i18n ("Fill with Foreground Color");
         break;
     default:
-        return TQString::null;
+        return TQString();
         break;
     }
 }
@@ -139,7 +139,7 @@ kpToolWidgetFillStyle::FillStyle kpToolWidgetFillStyle::fillStyle () const
 }
 
 // public static
-TQBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
+TQBrush kpToolWidgetFillStyle::tqmaskBrushForFillStyle (FillStyle fs,
                                                      const kpColor &foregroundColor,
                                                      const kpColor &backgroundColor)
 {
@@ -152,10 +152,10 @@ TQBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
         return Qt::NoBrush;
         break;
     case FillWithBackground:
-        return TQBrush (backgroundColor.maskColor ());
+        return TQBrush (backgroundColor.tqmaskColor ());
         break;
     case FillWithForeground:
-        return TQBrush (foregroundColor.maskColor ());
+        return TQBrush (foregroundColor.tqmaskColor ());
         break;
     default:
         return Qt::NoBrush;
@@ -163,10 +163,10 @@ TQBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
     }
 }
 
-TQBrush kpToolWidgetFillStyle::maskBrush (const kpColor &foregroundColor,
+TQBrush kpToolWidgetFillStyle::tqmaskBrush (const kpColor &foregroundColor,
                                          const kpColor &backgroundColor)
 {
-    return maskBrushForFillStyle (fillStyle (), foregroundColor, backgroundColor);
+    return tqmaskBrushForFillStyle (fillStyle (), foregroundColor, backgroundColor);
 }
 
 // public static
@@ -186,13 +186,13 @@ TQBrush kpToolWidgetFillStyle::brushForFillStyle (FillStyle fs,
         break;
     case FillWithBackground:
         if (backgroundColor.isOpaque ())
-            return TQBrush (backgroundColor.toQColor ());
+            return TQBrush (backgroundColor.toTQColor ());
         else
             return Qt::NoBrush;
         break;
     case FillWithForeground:
         if (foregroundColor.isOpaque ())
-            return TQBrush (foregroundColor.toQColor ());
+            return TQBrush (foregroundColor.toTQColor ());
         else
             return Qt::NoBrush;
         break;

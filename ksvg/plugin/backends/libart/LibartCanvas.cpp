@@ -187,15 +187,15 @@ CanvasPaintServer *LibartCanvas::createPaintServer(SVGElementImpl *pserver)
 
 void LibartCanvas::drawImage(TQImage image, SVGStylableImpl *style, const SVGMatrixImpl *matrix, const KSVGPolygon& clippingPolygon)
 {
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(style);
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(style);
 
-	if(shape)
+	if(tqshape)
 	{
 		if(image.depth() != 32)
 			image = image.convertDepth(32);
 
 		ArtSVP *imageBorder = svpFromPolygon(clippingPolygon);
-		ArtSVP *clipSvp = clipSingleSVP(imageBorder, shape);
+		ArtSVP *clipSvp = clipSingleSVP(imageBorder, tqshape);
 
 		ArtDRect bbox;
 		art_drect_svp(&bbox, clipSvp);
@@ -214,12 +214,12 @@ void LibartCanvas::drawImage(TQImage image, SVGStylableImpl *style, const SVGMat
 
 			TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-			TQByteArray mask = SVGMaskElementImpl::maskRectangle(shape, screenBBox);
+			TQByteArray tqmask = SVGMaskElementImpl::tqmaskRectangle(tqshape, screenBBox);
 
 			double affine[6];
 			KSVGHelper::matrixToAffine(matrix, affine);
 
-			ksvg_art_rgb_affine_clip(clipSvp, m_buffer + x0 * nrChannels() + y0 * rowStride(), x0, y0, x1 + 1, y1 + 1, rowStride(), nrChannels(), image.bits(), image.width(), image.height(), image.width() * 4, affine, int(style->getOpacity() * 255), (const art_u8 *)mask.data());
+			ksvg_art_rgb_affine_clip(clipSvp, m_buffer + x0 * nrChannels() + y0 * rowStride(), x0, y0, x1 + 1, y1 + 1, rowStride(), nrChannels(), image.bits(), image.width(), image.height(), image.width() * 4, affine, int(style->getOpacity() * 255), (const art_u8 *)tqmask.data());
 		}
 
 		art_svp_free(imageBorder);
@@ -266,10 +266,10 @@ ArtSVP *LibartCanvas::clippingRect(const TQRect &rect, const SVGMatrixImpl *ctm)
 	return result;
 }
 
-ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
+ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *tqshape)
 {
 	ArtSVP *clippedSvp = copy_svp(svp);
-	SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(shape);
+	SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(tqshape);
 
 	if(style)
 	{
@@ -282,7 +282,7 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
 			if(clipPath)
 			{
 				LibartClipPath *lclip = dynamic_cast<LibartClipPath *>(clipPath);
-				reinterpret_cast<SVGClipPathElementImpl *>(clipPath->element())->setBBoxTarget(shape);
+				reinterpret_cast<SVGClipPathElementImpl *>(clipPath->element())->setBBoxTarget(tqshape);
 
 				lclip->init();
 
@@ -296,7 +296,7 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
 		}
 	}
 
-	SVGSVGElementImpl *svg = dynamic_cast<SVGSVGElementImpl *>(shape);
+	SVGSVGElementImpl *svg = dynamic_cast<SVGSVGElementImpl *>(tqshape);
 
 	// Clip outer svg, unless width and height not set
 	if(svg && (!svg->isRootElement() || !svg->getAttribute("width").isEmpty() || !svg->getAttribute("height").isEmpty()) && !svg->getOverflow())
@@ -308,13 +308,13 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
 		clippedSvp = s;
 	}
 
-	if(dynamic_cast<SVGPatternElementImpl *>(shape) != 0)
+	if(dynamic_cast<SVGPatternElementImpl *>(tqshape) != 0)
 	{
 		// TODO: inherit clipping paths into tile space
 	}
-	else if(dynamic_cast<SVGMarkerElementImpl *>(shape) != 0)
+	else if(dynamic_cast<SVGMarkerElementImpl *>(tqshape) != 0)
 	{
-		SVGMarkerElementImpl *marker = static_cast<SVGMarkerElementImpl *>(shape);
+		SVGMarkerElementImpl *marker = static_cast<SVGMarkerElementImpl *>(tqshape);
 
 		if(!marker->clipShape().isEmpty())
 		{
@@ -329,23 +329,23 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
 	}
 	else
 	{
-		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(shape);
-		DOM::Node parentNode = element->parentNode();
+		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(tqshape);
+		DOM::Node tqparentNode = element->parentNode();
 
-		if(!parentNode.isNull())
+		if(!tqparentNode.isNull())
 		{
-			SVGElementImpl *parent = element->ownerDoc()->getElementFromHandle(parentNode.handle());
+			SVGElementImpl *tqparent = element->ownerDoc()->getElementFromHandle(tqparentNode.handle());
 
-			if(parent)
+			if(tqparent)
 			{
-				SVGShapeImpl *parentShape = dynamic_cast<SVGShapeImpl *>(parent);
+				SVGShapeImpl *tqparentShape = dynamic_cast<SVGShapeImpl *>(tqparent);
 
-				if(parentShape)
+				if(tqparentShape)
 				{
 					// Clip against ancestor clipping paths
-					ArtSVP *parentClippedSvp = clipSingleSVP(clippedSvp, parentShape);
+					ArtSVP *tqparentClippedSvp = clipSingleSVP(clippedSvp, tqparentShape);
 					art_svp_free(clippedSvp);
-					clippedSvp = parentClippedSvp;
+					clippedSvp = tqparentClippedSvp;
 				}
 			}
 		}
@@ -354,7 +354,7 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *shape)
 	return clippedSvp;
 }
 
-void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, TQByteArray mask, TQRect screenBBox)
+void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, TQByteArray tqmask, TQRect screenBBox)
 {
 	int x0 = screenBBox.left();
 	int y0 = screenBBox.top();
@@ -363,13 +363,13 @@ void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, TQByteArray mask, TQRect 
 
 	if(m_nrChannels == 3)
 	{
-		if(mask.data())
-			art_ksvg_rgb_svp_alpha_mask(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 3 + y0 * 3 * m_width, m_width * 3, 0, (art_u8 *)mask.data());
+		if(tqmask.data())
+			art_ksvg_rgb_svp_alpha_tqmask(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 3 + y0 * 3 * m_width, m_width * 3, 0, (art_u8 *)tqmask.data());
 		else
 			art_rgb_svp_alpha(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 3 + y0 * 3 * m_width, m_width * 3, 0);
 	}
 	else
-		art_ksvg_rgba_svp_alpha(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 4 + y0 * 4 * m_width, m_width * 4, 0, (art_u8 *)mask.data());
+		art_ksvg_rgba_svp_alpha(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 4 + y0 * 4 * m_width, m_width * 4, 0, (art_u8 *)tqmask.data());
 }
 
 ArtSVP *LibartCanvas::copy_svp(const ArtSVP *svp)

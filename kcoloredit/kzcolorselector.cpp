@@ -23,8 +23,8 @@
 #include "main.h"
 #include "kzcolorselector.h"
 
-KZColorSelector::KZColorSelector(Orientation o, TQWidget *parent, const char *name) :
-	KSelector(o, parent, name) {
+KZColorSelector::KZColorSelector(Qt::Orientation o, TQWidget *tqparent, const char *name) :
+	KSelector(o, tqparent, name) {
 	baseColorH = -1;
 	baseColorS = 0;
 	baseColorV = 0;
@@ -53,7 +53,7 @@ void KZColorSelector::setType(const int type) {
 
 void KZColorSelector::updateContents() {
 	drawPalette(&pixmap);
-	repaint(false);
+	tqrepaint(false);
 }
 
 void KZColorSelector::resizeEvent(TQResizeEvent*) {
@@ -119,25 +119,25 @@ void KZColorSelector::setColor(TQColor* const color, const int y) {
 }
 
 TQColor* KZColorSelector::getStandardColorsPalette() {
-	TQColor* palette = new QColor[( int )STANDARD_PALETTE_SIZE];
+	TQColor* palette = new TQColor[( int )STANDARD_PALETTE_SIZE];
 	int i = 0;
-	palette[i++] = Qt::red;
-	palette[i++] = Qt::green;
-	palette[i++] = Qt::blue;
-	palette[i++] = Qt::cyan;
-	palette[i++] = Qt::magenta;
-	palette[i++] = Qt::yellow;
-	palette[i++] = Qt::darkRed;
-	palette[i++] = Qt::darkGreen;
-	palette[i++] = Qt::darkBlue;
-	palette[i++] = Qt::darkCyan;
-	palette[i++] = Qt::darkMagenta;
-	palette[i++] = Qt::darkYellow;
-	palette[i++] = Qt::white;
-	palette[i++] = Qt::lightGray;
-	palette[i++] = Qt::gray;
-	palette[i++] = Qt::darkGray;
-	palette[i++] = Qt::black;
+	palette[i++] = TQt::red;
+	palette[i++] = TQt::green;
+	palette[i++] = TQt::blue;
+	palette[i++] = TQt::cyan;
+	palette[i++] = TQt::magenta;
+	palette[i++] = TQt::yellow;
+	palette[i++] = TQt::darkRed;
+	palette[i++] = TQt::darkGreen;
+	palette[i++] = TQt::darkBlue;
+	palette[i++] = TQt::darkCyan;
+	palette[i++] = TQt::darkMagenta;
+	palette[i++] = TQt::darkYellow;
+	palette[i++] = TQt::white;
+	palette[i++] = TQt::lightGray;
+	palette[i++] = TQt::gray;
+	palette[i++] = TQt::darkGray;
+	palette[i++] = TQt::black;
 	return palette;
 }
 

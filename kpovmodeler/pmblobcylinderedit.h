@@ -33,12 +33,13 @@ class PMBlobCylinder;
 class PMBlobCylinderEdit : public PMDetailObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDetailObjectEdit Base;
 public:
    /**
-    * Creates a PMBlobCylinderEdit with parent and name
+    * Creates a PMBlobCylinderEdit with tqparent and name
     */
-   PMBlobCylinderEdit( TQWidget* parent, const char* name = 0 );
+   PMBlobCylinderEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

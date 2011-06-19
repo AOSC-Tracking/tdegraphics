@@ -33,7 +33,8 @@
 
 class kpToolEraser : public kpToolPen
 {
-Q_OBJECT	
+Q_OBJECT
+TQ_OBJECT
 
 public:
     kpToolEraser (kpMainWindow *mainWindow);

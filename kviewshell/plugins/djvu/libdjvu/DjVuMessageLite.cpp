@@ -238,7 +238,7 @@ DjVuMessageLite::LookUpSingle( const GUTF8String &Single_Message ) const
     return Single_Message;
 #endif
   //  Isolate the message ID and get the corresponding message text
-  int ending_posn = Single_Message.contains("\t\v");
+  int ending_posn = Single_Message.tqcontains("\t\v");
   if( ending_posn < 0 )
     ending_posn = Single_Message.length();
   GUTF8String msg_text;
@@ -276,7 +276,7 @@ DjVuMessageLite::LookUpSingle( const GUTF8String &Single_Message ) const
       arg=LookUpSingle(Single_Message.substr(start_posn,ending_posn));
     }else
     {
-      ending_posn = Single_Message.contains("\v\t",start_posn);
+      ending_posn = Single_Message.tqcontains("\v\t",start_posn);
       if( ending_posn < 0 )
         ending_posn = Single_Message.length();
       arg=Single_Message.substr(start_posn, ending_posn-start_posn);
@@ -308,11 +308,11 @@ DjVuMessageLite::LookUpID( const GUTF8String &xmsgID,
     if (start > 0)
       msgID = msgID.substr(start, msgID.length() - start);
 #endif
-    GPosition pos=Map.contains(msgID);
+    GPosition pos=Map.tqcontains(msgID);
     if(pos)
     {
       const GP<lt_XMLTags> tag=Map[pos];
-      GPosition valuepos=tag->get_args().contains(valuestring);
+      GPosition valuepos=tag->get_args().tqcontains(valuestring);
       if(valuepos)
       {
         message_text=tag->get_args()[valuepos];
@@ -331,7 +331,7 @@ DjVuMessageLite::LookUpID( const GUTF8String &xmsgID,
           message_text=raw.substr(start_line+1,end_text-start_line-1).fromEscaped();
         }
       }
-      GPosition numberpos=tag->get_args().contains(numberstring);
+      GPosition numberpos=tag->get_args().tqcontains(numberstring);
       if(numberpos)
       {
         message_number=tag->get_args()[numberpos];

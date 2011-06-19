@@ -95,9 +95,9 @@ public:
    double transmit( ) const { return m_colorValue[4]; }
 
    /**
-    * Returns the rgb value as QColor
+    * Returns the rgb value as TQColor
     */
-   TQColor toQColor( ) const;
+   TQColor toTQColor( ) const;
    
    /**
     * Returns a string for serialization

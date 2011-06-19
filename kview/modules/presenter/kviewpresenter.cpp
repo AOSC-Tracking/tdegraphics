@@ -51,8 +51,8 @@
 typedef KGenericFactory<KViewPresenter> KViewPresenterFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_presenterplugin, KViewPresenterFactory( "kviewpresenterplugin" ) )
 
-KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStringList & )
-	: Plugin( parent, name )
+KViewPresenter::KViewPresenter( TQObject* tqparent, const char* name, const TQStringList & )
+	: Plugin( tqparent, name )
 	, m_pImageList( new ImageListDialog() )
 	, m_paFileOpen( 0 )
 	, m_bDontAdd( false )
@@ -62,7 +62,7 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	m_imagelist.setAutoDelete( true );
 
-	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = tqparent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )
@@ -82,17 +82,17 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 		connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ), m_paSlideshow, TQT_SLOT( setChecked( bool ) ) );
 
 		// search for file_open action
-		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( parent->qt_cast( "KXMLGUIClient" ) );
-		if( parentClient )
+		KXMLGUIClient * tqparentClient = static_cast<KXMLGUIClient*>( tqparent->qt_cast( "KXMLGUIClient" ) );
+		if( tqparentClient )
 		{
-			m_paFileOpen = parentClient->actionCollection()->action( "file_open" );
-			m_paFileClose = parentClient->actionCollection()->action( "file_close" );
+			m_paFileOpen = tqparentClient->actionCollection()->action( "file_open" );
+			m_paFileClose = tqparentClient->actionCollection()->action( "file_close" );
 		}
 		if( m_paFileClose )
 			connect( m_paFileClose, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotClose() ) );
 		if( m_paFileOpen )
 		{
-			disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), parent, TQT_SLOT( slotOpenFile() ) );
+			disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), tqparent, TQT_SLOT( slotOpenFile() ) );
 			connect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
 		}
 		else
@@ -150,18 +150,18 @@ KViewPresenter::~KViewPresenter()
 	if( m_paFileOpen )
 	{
 		disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
-		// If the parent() doesn't exist we either leave the "File Open" action
+		// If the tqparent() doesn't exist we either leave the "File Open" action
 		// in an unusable state or KView was just shutting down and therefor we
 		// can ignore this. I've only seen the second one happening and to get
-		// rid of the TQObject::connect warning we do the parent() check.
-		if( parent() )
-			connect( m_paFileOpen, TQT_SIGNAL( activated() ), parent(), TQT_SLOT( slotOpenFile() ) );
+		// rid of the TQObject::connect warning we do the tqparent() check.
+		if( tqparent() )
+			connect( m_paFileOpen, TQT_SIGNAL( activated() ), tqparent(), TQT_SLOT( slotOpenFile() ) );
 	}
 }
 
 bool KViewPresenter::eventFilter( TQObject *obj, TQEvent *ev )
 {
-	if( obj == m_pImageList || obj == m_pImageList->m_pListView || obj == m_pImageList->m_pListView->viewport() || obj == m_pViewer->widget() )
+	if( TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pImageList) || TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pImageList->m_pListView) || TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pImageList->m_pListView->viewport()) || TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pViewer->widget()) )
 	{
 		switch( ev->type() )
 		{
@@ -191,7 +191,7 @@ bool KViewPresenter::eventFilter( TQObject *obj, TQEvent *ev )
 					for( TQStringList::const_iterator it = l.begin(); it != l.end(); ++it )
 					{
 						ImageInfo * info = new ImageInfo( KURL( *it ) );
-						if( ! m_imagelist.contains( info ) )
+						if( ! m_imagelist.tqcontains( info ) )
 						{
 							m_imagelist.inSort( info );
 							( void )new ImageListItem( m_pImageList->m_pListView, KURL( *it ) );
@@ -218,7 +218,7 @@ void KViewPresenter::slotImageOpened( const KURL & url )
 	{
 		kdDebug( 4630 ) << k_funcinfo << "imagelist:" << endl;
 		ImageInfo * info = new ImageInfo( url );
-		if( ! m_imagelist.contains( info ) )
+		if( ! m_imagelist.tqcontains( info ) )
 		{
 			m_imagelist.inSort( info );
 			TQListViewItem * item = new ImageListItem( m_pImageList->m_pListView, url );
@@ -248,7 +248,7 @@ void KViewPresenter::slotOpenFiles()
 	for( ++it; it != urls.end(); ++it )
 	{
 		ImageInfo * info = new ImageInfo( *it );
-		if( ! m_imagelist.contains( info ) )
+		if( ! m_imagelist.tqcontains( info ) )
 		{
 			m_imagelist.inSort( info );
 			( void )new ImageListItem( m_pImageList->m_pListView, *it );
@@ -405,14 +405,14 @@ void KViewPresenter::closeAll()
 
 void KViewPresenter::loadList()
 {
-	KURL url = KFileDialog::getOpenURL( ":load_list", TQString::null, m_pImageList );
+	KURL url = KFileDialog::getOpenURL( ":load_list", TQString(), m_pImageList );
 	if( url.isEmpty() )
 		return;
 
 	TQString tempfile;
 	if( ! KIO::NetAccess::download( url, tempfile, m_pViewer->widget() ) )
 	{
-		KMessageBox::error( m_pImageList, i18n( "Could not load\n%1" ).arg( url.prettyURL() ) );
+		KMessageBox::error( m_pImageList, i18n( "Could not load\n%1" ).tqarg( url.prettyURL() ) );
 		return;
 	}
 	TQFile file( tempfile );
@@ -431,7 +431,7 @@ void KViewPresenter::loadList()
 			{
 				KURL url ( t.readLine() );
 				ImageInfo * info = new ImageInfo( url );
-				if( ! m_imagelist.contains( info ) )
+				if( ! m_imagelist.tqcontains( info ) )
 				{
 					m_imagelist.inSort( info );
 					( void )new ImageListItem( m_pImageList->m_pListView, url );
@@ -442,7 +442,7 @@ void KViewPresenter::loadList()
 		}
 		else
 		{
-			KMessageBox::error( m_pImageList, i18n( "Wrong format\n%1" ).arg( url.prettyURL() ) );
+			KMessageBox::error( m_pImageList, i18n( "Wrong format\n%1" ).tqarg( url.prettyURL() ) );
 		}
 		file.close();
 	}
@@ -451,7 +451,7 @@ void KViewPresenter::loadList()
 
 void KViewPresenter::saveList()
 {
-	KURL url = KFileDialog::getSaveURL( ":save_list", TQString::null, m_pImageList );
+	KURL url = KFileDialog::getSaveURL( ":save_list", TQString(), m_pImageList );
 
 	if( url.isEmpty() )
 		return;

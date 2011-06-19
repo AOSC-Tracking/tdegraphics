@@ -111,7 +111,7 @@ DjVuProgressTask::set_callback(djvu_progress_callback *_callback)
   {
     GMap<void *,GP<DjVuProgressTask::Data> > &map=get_map();
     void *threadID=GThread::current();
-    if(map.contains(threadID))
+    if(map.tqcontains(threadID))
     {
       DjVuProgressTask::Data &data=*(map[threadID]);
       retval=data.callback;
@@ -127,7 +127,7 @@ DjVuProgressTask::set_callback(djvu_progress_callback *_callback)
   {
     GMap<void *,GP<DjVuProgressTask::Data> > &map=get_map();
     void *threadID=GThread::current();
-    if(map.contains(threadID))
+    if(map.tqcontains(threadID))
     {
       DjVuProgressTask::Data &data=*(map[threadID]);
       retval=data.callback;
@@ -142,13 +142,13 @@ DjVuProgressTask::set_callback(djvu_progress_callback *_callback)
 }
 
 DjVuProgressTask::DjVuProgressTask(const char *xtask,int nsteps)
-  : task(xtask),parent(0), nsteps(nsteps), runtostep(0), gdata(0), data(0)
+  : task(xtask),tqparent(0), nsteps(nsteps), runtostep(0), gdata(0), data(0)
 {
   //  gtask=task;
   {
     GMap<void *,GP<DjVuProgressTask::Data> > &map=get_map();
     void *threadID=GThread::current();
-    if(map.contains(threadID))
+    if(map.tqcontains(threadID))
     {
       gdata=new GP<Data>;
       Data &d=*(data=((*(GP<Data> *)gdata)=map[threadID]));
@@ -158,7 +158,7 @@ DjVuProgressTask::DjVuProgressTask(const char *xtask,int nsteps)
         startdate = curdate;
         if (!d.head)
           d.lastsigdate = curdate + INITIAL;
-        parent = d.head;
+        tqparent = d.head;
         d.head = this;
       }
     }
@@ -171,8 +171,8 @@ DjVuProgressTask::~DjVuProgressTask()
   {
     if (data->head != this)
       G_THROW( ERR_MSG("DjVuGlobal.not_compatible") );
-    data->head = parent;
-    if (!parent)
+    data->head = tqparent;
+    if (!tqparent)
     {
       unsigned long curdate = GOS::ticks();
       if((*(data->callback))(data->gtask?data->gtask:"",curdate-startdate, curdate-startdate))
@@ -210,9 +210,9 @@ DjVuProgressTask::signal(unsigned long curdate, unsigned long estdate)
     {
       const unsigned long enddate = startdate+
         (unsigned long)(((float)(estdate-startdate) * (float)nsteps) / (float)inprogress);
-      if (parent)
+      if (tqparent)
       {
-        parent->signal(curdate, enddate);
+        tqparent->signal(curdate, enddate);
       }
       else if (data && data->callback && curdate<enddate)
       {

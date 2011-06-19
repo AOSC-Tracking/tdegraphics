@@ -104,7 +104,7 @@ namespace DJVU {
     \Ref{index_to_color}.  There are also functions for computing a palette
     and quantizing a complete pixmap.
 
-    {\bf Sequences of color indices} -- The DjVuPalette object also contains
+    {\bf Sequences of color indices} -- The DjVuPalette object also tqcontains
     an array \Ref{colordata} optionally containing a sequence of color
     indices.  This array will be encoded and decoded by functions \Ref{encode}
     and \Ref{decode}.  This feature simplifies the implementation of the ``one
@@ -210,7 +210,7 @@ public:
 
 private:
   // Histogram
-  int mask;
+  int tqmask;
   GMap<int,int> *hist;
   // Quantization data
   struct PColor { unsigned char p[4]; };
@@ -240,7 +240,7 @@ DjVuPalette::histogram_clear()
 {
   delete hist;
   hist = 0;
-  mask = 0;
+  tqmask = 0;
 }
 
 inline void 
@@ -250,7 +250,7 @@ DjVuPalette::histogram_add(const unsigned char *bgr, int weight)
     {
       if (!hist || hist->size()>=0x4000) 
         allocate_hist();
-      int key = (bgr[0]<<16)|(bgr[1]<<8)|(bgr[2])|(mask);
+      int key = (bgr[0]<<16)|(bgr[1]<<8)|(bgr[2])|(tqmask);
       (*hist)[key] += weight;
     }
 }  
@@ -271,7 +271,7 @@ DjVuPalette::histogram_norm_and_add(const int *bgr, int weight)
       int p2 = bgr[2]/weight; if (p2>255) p2=255;
       if (!hist || hist->size()>=0x4000) 
         allocate_hist();
-      int key = (p0<<16)|(p1<<8)|(p2)|(mask);
+      int key = (p0<<16)|(p1<<8)|(p2)|(tqmask);
       (*hist)[key] += weight;
     }
 }
@@ -288,7 +288,7 @@ DjVuPalette::color_to_index(const unsigned char *bgr)
   if (! pmap)
     allocate_pmap();
   int key = (bgr[0]<<16)|(bgr[1]<<8)|(bgr[2]);
-  GPosition p = pmap->contains(key);
+  GPosition p = pmap->tqcontains(key);
   if ( p)
     return (*pmap)[p];
   return color_to_index_slow(bgr);

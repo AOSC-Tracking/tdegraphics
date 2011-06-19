@@ -17,7 +17,7 @@
 
 #include "imageselection.h"
 
-ImageSelection::ImageSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
+ImageSelection::ImageSelection(TQWidget *tqparent, const char *name ) : TQWidget(tqparent,name) {
 }
 ImageSelection::~ImageSelection(){
 }

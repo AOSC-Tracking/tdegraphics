@@ -78,7 +78,7 @@ void kpViewManager::registerView (kpView *view)
 #if DEBUG_KP_VIEW_MANAGER && 1
     kdDebug () << "kpViewManager::registerView (" << view << ")" << endl;
 #endif
-    if (view && m_views.findRef (view) < 0)
+    if (view && m_views.tqfindRef (view) < 0)
     {
     #if DEBUG_KP_VIEW_MANAGER && 1
         kdDebug () << "\tadded view" << endl;
@@ -152,7 +152,7 @@ void kpViewManager::setTempPixmap (const kpTempPixmap &tempPixmap)
 }
 
 // public
-void kpViewManager::invalidateTempPixmap ()
+void kpViewManager::tqinvalidateTempPixmap ()
 {
     if (!m_tempPixmap)
         return;
@@ -463,13 +463,13 @@ void kpViewManager::unsetCursor ()
 }
 
 
-kpView *kpViewManager::viewUnderCursor (bool usingQt) const
+kpView *kpViewManager::viewUnderCursor (bool usingTQt) const
 {
-    if (!usingQt)
+    if (!usingTQt)
     {
         kpViewManager *nonConstThis = const_cast <kpViewManager *> (this);
 
-        if (m_viewUnderCursor && nonConstThis->m_views.findRef (m_viewUnderCursor) < 0)
+        if (m_viewUnderCursor && nonConstThis->m_views.tqfindRef (m_viewUnderCursor) < 0)
         {
             kdError () << "kpViewManager::viewUnderCursor(): invalid view" << endl;
             nonConstThis->m_viewUnderCursor = 0;
@@ -628,7 +628,7 @@ void kpViewManager::updateView (kpView *v, const TQRect &viewRect)
     if (!queueUpdates ())
     {
         if (fastUpdates ())
-            v->repaint (viewRect, false/*no erase*/);
+            v->tqrepaint (viewRect, false/*no erase*/);
         else
             v->update (viewRect);
     }
@@ -646,7 +646,7 @@ void kpViewManager::updateView (kpView *v, const TQRegion &viewRegion)
     if (!queueUpdates ())
     {
         if (fastUpdates ())
-            v->repaint (viewRegion, false/*no erase*/);
+            v->tqrepaint (viewRegion, false/*no erase*/);
         else
             v->update (viewRegion.boundingRect ());
     }
@@ -719,7 +719,7 @@ void kpViewManager::updateViews (const TQRect &docRect)
         {
             TQRect viewRect = view->transformDocToView (docRect);
 
-            int diff = qRound (double (QMAX (view->zoomLevelX (), view->zoomLevelY ())) / 100.0) + 1;
+            int diff = tqRound (double (TQMAX (view->zoomLevelX (), view->zoomLevelY ())) / 100.0) + 1;
 
             TQRect newRect = TQRect (viewRect.x () - diff,
                                    viewRect.y () - diff,

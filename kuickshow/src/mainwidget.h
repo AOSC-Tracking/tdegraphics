@@ -25,12 +25,13 @@
 
 class FileView;
 
-class MainWidget : public QWidget
+class MainWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  MainWidget( TQString, TQWidget *parent, const char *name=0L);
+  MainWidget( TQString, TQWidget *tqparent, const char *name=0L);
   ~MainWidget();
 
   FileView* 	getFileBox() { return box; }

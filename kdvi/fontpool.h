@@ -38,6 +38,7 @@ class KShellProcess;
 
 class fontPool : public TQObject {
  Q_OBJECT
+  TQ_OBJECT
 
 public:
  // Default constructor. 
@@ -78,7 +79,7 @@ public:
  // called. Since this is done using a concurrently running process,
  // there is no guarantee that the loading is already performed when
  // the method returns.
- TeXFontDefinition* appendx(const TQString& fontname, Q_UINT32 checksum, Q_UINT32 scale, double enlargement);
+ TeXFontDefinition* appendx(const TQString& fontname, TQ_UINT32 checksum, TQ_UINT32 scale, double enlargement);
  
  // Returns a string in a very basic HTML format which describes the
  // fonts in the pool.
@@ -124,10 +125,10 @@ public:
       channel of pixmaps. Experiments show that --depending of the
       configuration of QT at compile and runtime or the availability
       of the XFt extension, alpha channels are either supported, or
-      silently converted to 1-bit masks. The redering routines in the
+      silently converted to 1-bit tqmasks. The redering routines in the
       TeXFont implementation use this flag to choose the apropriate
       drawing routines for the different setups. */
-  bool QPixmapSupportsAlpha;
+  bool TQPixmapSupportsAlpha;
 
 signals:
   /** Passed through to the top-level kpart. */
@@ -178,13 +179,13 @@ private:
  void locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFound=0);
 
  // This TQString is used internally by the mf_output_receiver()
- // method.  This string is set to TQString::null in locateFonts(bool,
+ // method.  This string is set to TQString() in locateFonts(bool,
  // bool, bool *). Values are set and read by the
  // mf_output_receiver(...)  method
  TQString        MetafontOutput;
 
  // This TQString is used to collect the output of kpsewhich and
- // MetaFont. The string is set to TQString::null in the
+ // MetaFont. The string is set to TQString() in the
  // locateFonts()-method, and content is gathered by the
  // mf_output_receiver(). This string is used by locateFonts() and
  // locateFonts(bool, bool, bool *) to display error messages.

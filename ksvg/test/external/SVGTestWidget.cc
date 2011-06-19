@@ -16,11 +16,11 @@ using namespace KSVG;
 
 SVGTestWidget::SVGTestWidget(const KURL &url)
 {
-	setBackgroundColor(Qt::white);
+	setBackgroundColor(TQt::white);
 	setMouseTracking(true);	
-	setFocusPolicy(WheelFocus);
+	setFocusPolicy(TQ_WheelFocus);
 
-	m_doc = DocumentFactory::self()->requestDocument(this, TQT_SLOT(slotRenderingFinished()));
+	m_doc = DocumentFactory::self()->requestDocument(TQT_TQOBJECT(this), TQT_SLOT(slotRenderingFinished()));
 	if(!m_doc)
 		return;	
 
@@ -29,7 +29,7 @@ SVGTestWidget::SVGTestWidget(const KURL &url)
 	if(!m_canvas)
 		return;
 
-	m_canvas->setup(this, this);
+	m_canvas->setup(TQT_TQPAINTDEVICE(this), TQT_TQPAINTDEVICE(this));
 
 	if(!DocumentFactory::self()->attachCanvas(m_canvas, m_doc))
 		return;
@@ -104,10 +104,10 @@ KSVG::SVGMouseEventImpl *newMouseEvent(SVGDocument *doc, KSVG::SVGEventImpl::Eve
 			event->globalY(), // screenYArg,
 			clientX, // clientXArg
 			clientY, // clientYArg
-			(event->state() & Qt::ControlButton), // ctrlKeyArg
-			(event->state() & Qt::AltButton), // altKeyArg
-			(event->state() & Qt::ShiftButton), // shiftKeyArg
-			(event->state() & Qt::MetaButton), // metaKeyArg
+			(event->state() & TQt::ControlButton), // ctrlKeyArg
+			(event->state() & TQt::AltButton), // altKeyArg
+			(event->state() & TQt::ShiftButton), // shiftKeyArg
+			(event->state() & TQt::MetaButton), // metaKeyArg
 			button, // buttonArg
 			0);
 
@@ -185,7 +185,7 @@ void SVGTestWidget::keyReleaseEvent(TQKeyEvent *event)
 	}
 	SVGSVGElementImpl *root = m_doc->rootElement();
 	if(!root) return;
-	if(event->key() == Qt::Key_Minus)
+	if(event->key() == TQt::Key_Minus)
 	{
 		erase(0, 0, m_canvas->width(), m_canvas->height());
 		float zoomFactor = root->currentScale() / 1.2;
@@ -193,7 +193,7 @@ void SVGTestWidget::keyReleaseEvent(TQKeyEvent *event)
 		m_doc->syncCachedMatrices();
 		m_canvas->update(zoomFactor);
 	}
-	else if(event->key() == Qt::Key_Plus)
+	else if(event->key() == TQt::Key_Plus)
 	{
 		float zoomFactor = root->currentScale() * 1.2;
 		root->setCurrentScale(zoomFactor);

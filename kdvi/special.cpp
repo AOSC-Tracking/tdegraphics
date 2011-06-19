@@ -120,7 +120,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
   
   TQString specType = colorSpec.section(' ', 0, 0);
 
-  if (specType.find("rgb", false) == 0) {
+  if (specType.tqfind("rgb", false) == 0) {
     bool ok;
 
     double r = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -138,7 +138,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
     return TQColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
   }
 
-  if (specType.find("hsb", false) == 0) {
+  if (specType.tqfind("hsb", false) == 0) {
     bool ok;
 
     double h = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -156,7 +156,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
     return TQColor((int)(h*359.0+0.5), (int)(s*255.0+0.5), (int)(b*255.0+0.5), TQColor::Hsv);
   }
 
-  if (specType.find("cmyk", false) == 0) {
+  if (specType.tqfind("cmyk", false) == 0) {
     bool ok;
 
     double c = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -189,7 +189,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
     return TQColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
   }
 
-  if (specType.find("gray", false) == 0) {
+  if (specType.tqfind("gray", false) == 0) {
     bool ok;
 
     double g = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -200,7 +200,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
   }
 
   // Check if the color is one of the known named colors.
-  TQMap<TQString, TQColor>::Iterator f = namedColors.find(specType);
+  TQMap<TQString, TQColor>::Iterator f = namedColors.tqfind(specType);
   if (f != namedColors.end())
     return *f;
   
@@ -222,7 +222,7 @@ void dviRenderer::color_special(const TQString& _cp)
     // Take color off the stack
     if (colorStack.isEmpty())
       printErrorMsgForSpecials( i18n("Error in DVIfile '%1', page %2. Color pop command issued when the color stack is empty." ).
-				arg(dviFile->filename).arg(current_page));
+				tqarg(dviFile->filename).tqarg(current_page));
     else
       colorStack.pop();
     return;
@@ -235,7 +235,7 @@ void dviRenderer::color_special(const TQString& _cp)
     if (col.isValid()) 
       colorStack.push(col); 
     else
-      colorStack.push(Qt::black); 
+      colorStack.push(TQt::black); 
     return;
   }
   
@@ -246,7 +246,7 @@ void dviRenderer::color_special(const TQString& _cp)
   if (col.isValid()) 
     globalColor = col;
   else
-    globalColor = Qt::black;
+    globalColor = TQt::black;
   return;
 }
 
@@ -254,7 +254,7 @@ void dviRenderer::color_special(const TQString& _cp)
 void dviRenderer::html_href_special(const TQString& _cp)
 {
   TQString cp = _cp;
-  cp.truncate(cp.find('"'));
+  cp.truncate(cp.tqfind('"'));
   
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "HTML-special, href " << cp.latin1() << endl;
@@ -292,10 +292,10 @@ void dviRenderer::source_special(const TQString& cp)
 
 void parse_special_argument(const TQString& strg, const char* argument_name, int* variable)
 {
-  int index = strg.find(argument_name);
+  int index = strg.tqfind(argument_name);
   if (index >= 0) {
     TQString tmp = strg.mid(index + strlen(argument_name));
-    index = tmp.find(' ');
+    index = tmp.tqfind(' ');
     if (index >= 0)
       tmp.truncate(index);
 
@@ -308,7 +308,7 @@ void parse_special_argument(const TQString& strg, const char* argument_name, int
       // Maybe we should open a dialog here.
       kdError(4300) << i18n("Malformed parameter in the epsf special command.\n"
                             "Expected a float to follow %1 in %2")
-                       .arg(argument_name).arg(strg) << endl;
+                       .tqarg(argument_name).tqarg(strg) << endl;
   }
 }
 
@@ -327,7 +327,7 @@ void dviRenderer::epsf_special(const TQString& cp)
   // (already the simplifyWhiteSpace() above is wrong). If you have
   // files like this, go away.
   TQString EPSfilename_orig = include_command;
-  EPSfilename_orig.truncate(EPSfilename_orig.find(' '));
+  EPSfilename_orig.truncate(EPSfilename_orig.tqfind(' '));
 
   // Strip enclosing quotation marks which are included by some LaTeX
   // macro packages (but not by others). This probably means that
@@ -348,7 +348,7 @@ void dviRenderer::epsf_special(const TQString& cp)
   int  angle   = 0;
 
   // just to avoid ambiguities; the filename could contain keywords
-  include_command = include_command.mid(include_command.find(' '));
+  include_command = include_command.mid(include_command.tqfind(' '));
   
   parse_special_argument(include_command, "llx=", &llx);
   parse_special_argument(include_command, "lly=", &lly);
@@ -420,19 +420,19 @@ void dviRenderer::epsf_special(const TQString& cp)
     foreGroundPainter->save();
 
     if (TQFile::exists(EPSfilename))
-      foreGroundPainter->setBrush(Qt::lightGray);
+      foreGroundPainter->setBrush(TQt::lightGray);
     else
-      foreGroundPainter->setBrush(Qt::red);
-    foreGroundPainter->setPen(Qt::black);
+      foreGroundPainter->setBrush(TQt::red);
+    foreGroundPainter->setPen(TQt::black);
     foreGroundPainter->drawRoundRect(bbox, 2, 2);
     TQFont f = foreGroundPainter->font();
     f.setPointSize(8);
     foreGroundPainter->setFont(f);
     if (TQFile::exists(EPSfilename))
-      foreGroundPainter->drawText (bbox, (int)(Qt::AlignCenter), EPSfilename_orig, -1);
+      foreGroundPainter->drawText (bbox, (int)(TQt::AlignCenter), EPSfilename_orig, -1);
     else
-      foreGroundPainter->drawText (bbox, (int)(Qt::AlignCenter), 
-				i18n("File not found: \n %1").arg(EPSfilename_orig), -1);
+      foreGroundPainter->drawText (bbox, (int)(TQt::AlignCenter), 
+				i18n("File not found: \n %1").tqarg(EPSfilename_orig), -1);
     foreGroundPainter->restore();
   }
   
@@ -451,9 +451,9 @@ void dviRenderer::TPIC_flushPath_special()
     return;
   }
 
-  TQPen pen(Qt::black, (int)(penWidth_in_mInch*resolutionInDPI/1000.0 + 0.5));  // Sets the pen size in milli-inches
+  TQPen pen(TQt::black, (int)(penWidth_in_mInch*resolutionInDPI/1000.0 + 0.5));  // Sets the pen size in milli-inches
   foreGroundPainter->setPen(pen);
-  foreGroundPainter->drawPolyline(TPIC_path, 0, number_of_elements_in_path);
+  foreGroundPainter->tqdrawPolyline(TPIC_path, 0, number_of_elements_in_path);
   number_of_elements_in_path = 0;
 }
 
@@ -469,12 +469,12 @@ void dviRenderer::TPIC_addPath_special(const TQString& cp)
   bool ok;
   float xKoord = cp_noWhiteSpace.section(' ', 0, 0).toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( TQString("TPIC special; cannot parse first argument in 'pn %1'.").arg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse first argument in 'pn %1'.").tqarg(cp) );
     return;
   }
   float yKoord = cp_noWhiteSpace.section(' ', 1, 1).toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( TQString("TPIC special; cannot parse second argument in 'pn %1'.").arg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse second argument in 'pn %1'.").tqarg(cp) );
     return;
   }
   
@@ -502,7 +502,7 @@ void dviRenderer::TPIC_setPen_special(const TQString& cp)
   bool ok;
   penWidth_in_mInch = cp.stripWhiteSpace().toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( TQString("TPIC special; cannot parse argument in 'pn %1'.").arg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse argument in 'pn %1'.").tqarg(cp) );
     penWidth_in_mInch = 0.0;
     return;
   }
@@ -650,11 +650,11 @@ void dviRenderer::applicationDoSpecial(char *cp)
     // line break is encountered) 
     if (special_command.startsWith("ps:SDict begin [") && special_command.endsWith(" pdfmark end")) {
       if (!currentlyDrawnPage->hyperLinkList.isEmpty()) {
-        // Parse the PostScript literal text string inside parentheses
+        // Parse the PostScript literal text string inside tqparentheses
         // and store it into 'targetName'.  The scanner works
         // according to "PostScript language reference, third edition"
         // - Sec. 3.2.2. The specification is implemented completely:
-        // balanced parentheses and all escape sequences are
+        // balanced tqparentheses and all escape sequences are
         // considered.
         TQString tmpTargetName = special_command.section('(', 1);
         TQString targetName;
@@ -670,7 +670,7 @@ void dviRenderer::applicationDoSpecial(char *cp)
             break;
           targetName += tmpTargetName[i];
         }
-        targetName = PDFencodingToQString(targetName);
+        targetName = PDFencodingToTQString(targetName);
 	
 	TQValueVector<Hyperlink>::iterator it;
         for( it = currentlyDrawnPage->hyperLinkList.begin(); it != currentlyDrawnPage->hyperLinkList.end(); ++it ) 
@@ -700,7 +700,7 @@ void dviRenderer::applicationDoSpecial(char *cp)
       foreGroundPainter->translate(-x,-y);
     } else
       printErrorMsgForSpecials( i18n("Error in DVIfile '%1', page %2. Could not interpret angle in text rotation special." ).
-				arg(dviFile->filename).arg(current_page));
+				tqarg(dviFile->filename).tqarg(current_page));
   }
 
   // The graphicx package marks the end of rotated text with this
@@ -722,6 +722,6 @@ void dviRenderer::applicationDoSpecial(char *cp)
       (strncasecmp(cp, "background", 10) == 0) )
     return;
   
-  printErrorMsgForSpecials(i18n("The special command '%1' is not implemented.").arg(special_command));
+  printErrorMsgForSpecials(i18n("The special command '%1' is not implemented.").tqarg(special_command));
   return;
 }

@@ -69,11 +69,11 @@ void PMSlope::readAttributes( const PMXMLHelper& h )
    m_slope = h.doubleAttribute( "slope", slopeDefault );
 }
 
-PMMetaObject* PMSlope::metaObject( ) const
+PMMetaObject* PMSlope::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Slope", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Slope", Base::tqmetaObject( ),
                                         createNewSlope );
       s_pMetaObject->addProperty(
          new PMSlopeProperty( "height", &PMSlope::setHeight, &PMSlope::height ) );
@@ -113,9 +113,9 @@ void PMSlope::setSlope( const double c )
    }
 }
 
-PMDialogEditBase* PMSlope::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMSlope::editWidget( TQWidget* tqparent ) const
 {
-   return new PMSlopeEdit( parent );
+   return new PMSlopeEdit( tqparent );
 }
 
 void PMSlope::restoreMemento( PMMemento* s )

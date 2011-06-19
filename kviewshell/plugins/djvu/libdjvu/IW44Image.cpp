@@ -638,7 +638,7 @@ IW44Image::Map::alloc(int n)
 short **
 IW44Image::Map::allocp(int n)
 {
-  // Allocate enough room for pointers plus alignment
+  // Allocate enough room for pointers plus tqalignment
   short *p = alloc( (n+1) * sizeof(short*) / sizeof(short) );
   // Align on pointer size
   while ( ((long)p) & (sizeof(short*)-1) )
@@ -934,7 +934,7 @@ IW44Image::Codec::Codec(IW44Image::Map &xmap)
 IW44Image::Codec::~Codec() {}
 
 // is_null_slice
-// -- check if data can be produced for this band/mask
+// -- check if data can be produced for this band/tqmask
 // -- also fills the sure_zero array
 
 int 

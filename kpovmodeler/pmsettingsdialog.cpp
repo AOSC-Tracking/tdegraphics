@@ -40,16 +40,16 @@
 
 //#define KPM_WITH_OBJECT_LIBRARY
 
-PMSettingsDialogPage::PMSettingsDialogPage( TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMSettingsDialogPage::PMSettingsDialogPage( TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
 }
 
 TQSize PMSettingsDialog::s_size = TQSize( 640, 400 );
 
-PMSettingsDialog::PMSettingsDialog( PMPart* part, TQWidget* parent, const char* name )
+PMSettingsDialog::PMSettingsDialog( PMPart* part, TQWidget* tqparent, const char* name )
       : KDialogBase( TreeList, i18n( "Configure" ), Ok | Apply | Cancel | Default, Ok,
-                     parent, name )
+                     tqparent, name )
 {
    TQStringList sl;
    TQWidget* w = 0;
@@ -111,7 +111,7 @@ PMSettingsDialog::PMSettingsDialog( PMPart* part, TQWidget* parent, const char* 
    sl.clear( );
    sl.append( i18n( "View Layout" ) );
    w = addVBoxPage( sl, i18n( "Display Settings for View Layouts" ),
-                    SmallIcon( "pmconfigureviewlayout", 22 ) );
+                    SmallIcon( "pmconfigureviewtqlayout", 22 ) );
    p = new PMLayoutSettings( w );
    registerPage( w, p );
 
@@ -187,13 +187,13 @@ bool PMSettingsDialog::validateData( )
 
 void PMSettingsDialog::saveSettings( )
 {
-   m_repaint = false;
+   m_tqrepaint = false;
 
    TQValueList<PMRegisteredSettingsPage>::const_iterator it;
    for( it = m_pages.begin( ); it != m_pages.end( ); ++it )
       ( *it ).page->applySettings( );
 
-   if( m_repaint )
+   if( m_tqrepaint )
    {
       PMRenderManager* rm = PMRenderManager::theManager( );
       rm->slotRenderingSettingsChanged( );
@@ -229,19 +229,19 @@ void PMSettingsDialog::registerPage( TQWidget* topPage,
    else
    {
       m_pages.push_back( PMRegisteredSettingsPage( topPage, page, i ) );
-      connect( page, TQT_SIGNAL( repaintViews( ) ), TQT_SLOT( slotRepaint( ) ) );
+      connect( page, TQT_SIGNAL( tqrepaintViews( ) ), TQT_SLOT( slotRepaint( ) ) );
       connect( page, TQT_SIGNAL( showMe( ) ), TQT_SLOT( slotShowPage( ) ) );
    }
 }
 
 void PMSettingsDialog::slotRepaint( )
 {
-   m_repaint = true;
+   m_tqrepaint = true;
 }
 
 void PMSettingsDialog::slotShowPage( )
 {
-   const TQObject* w = sender( );
+   const TQObject* w = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender( )));
    if( w )
    {
       int index = findPage( ( const PMSettingsDialogPage* ) w );

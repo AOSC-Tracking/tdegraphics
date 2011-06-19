@@ -29,12 +29,13 @@ class KLineEdit;
 class KIntNumInput;
 
 
-class GeneralWidget : public QWidget
+class GeneralWidget : public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    GeneralWidget( TQWidget *parent, const char *name );
+    GeneralWidget( TQWidget *tqparent, const char *name );
     ~GeneralWidget();
 
     void 	loadSettings( const KuickData& data );

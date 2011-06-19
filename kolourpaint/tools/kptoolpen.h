@@ -48,6 +48,7 @@ class kpViewManager;
 class kpToolPen : public kpTool
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum Mode
@@ -102,11 +103,11 @@ private slots:
     void slotEraserSizeChanged (int size);
 
 private:
-    bool wash (TQPainter *painter, TQPainter *maskPainter,
+    bool wash (TQPainter *painter, TQPainter *tqmaskPainter,
                const TQImage &image,
                const kpColor &colorToReplace,
                const TQRect &imageRect, int plotx, int ploty);
-    bool wash (TQPainter *painter, TQPainter *maskPainter,
+    bool wash (TQPainter *painter, TQPainter *tqmaskPainter,
                const TQImage &image,
                const kpColor &colorToReplace,
                const TQRect &imageRect, const TQRect &drawRect);

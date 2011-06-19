@@ -79,9 +79,9 @@ SVGMatrixImpl *SVGLocatableImpl::getTransformToElement(SVGElementImpl *)
 	return ret;
 }
 
-void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM)
+void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *tqparentScreenCTM)
 {
-	m_cachedScreenCTM->copy(parentScreenCTM);
+	m_cachedScreenCTM->copy(tqparentScreenCTM);
 
 	const SVGMatrixImpl *local = localMatrix();
 
@@ -92,13 +92,13 @@ void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *parentScreenCT
 	// Notify the element
 	onScreenCTMUpdated();
 
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(this);
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(this);
 
-	if(shape)
+	if(tqshape)
 	{
 		// TODO: Update due to matrix animations
-		//if(shape->item())
-		//	shape->item()->update(updateReason);
+		//if(tqshape->item())
+		//	tqshape->item()->update(updateReason);
 
 		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(this);
 
@@ -114,14 +114,14 @@ void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *parentScreenCT
 	}
 }
 
-void SVGLocatableImpl::checkCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM)
+void SVGLocatableImpl::checkCachedScreenCTM(const SVGMatrixImpl *tqparentScreenCTM)
 {
 	if(m_cachedScreenCTMIsValid)
 	{
 		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(this);
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(this);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(this);
 
-		if(shape)
+		if(tqshape)
 		{
 			DOM::Node node = element->firstChild();
 			for(; !node.isNull(); node = node.nextSibling())
@@ -135,7 +135,7 @@ void SVGLocatableImpl::checkCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM
 		}
 	}
 	else
-		updateCachedScreenCTM(parentScreenCTM);
+		updateCachedScreenCTM(tqparentScreenCTM);
 }
 
 // Ecma stuff
@@ -184,9 +184,9 @@ Value SVGLocatableImplProtoFunc::call(ExecState *exec, Object &thisObj, const Li
 				return container->getBBox()->cache(exec);
 			else
 			{
-				SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(obj);
-				if(shape)
-					return shape->getBBox()->cache(exec);
+				SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(obj);
+				if(tqshape)
+					return tqshape->getBBox()->cache(exec);
 				else
 					return obj->getBBox()->cache(exec);
 			}

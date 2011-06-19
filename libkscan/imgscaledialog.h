@@ -32,10 +32,11 @@
 class ImgScaleDialog : public KDialogBase
 {
    Q_OBJECT
-   Q_PROPERTY( int selected READ getSelected WRITE setSelValue )
+  TQ_OBJECT
+   TQ_PROPERTY( int selected READ getSelected WRITE setSelValue )
       
 public:
-   ImgScaleDialog( TQWidget *parent, int curr_sel = 100,
+   ImgScaleDialog( TQWidget *tqparent, int curr_sel = 100,
 		   const char *name = 0 );
 
 public slots:

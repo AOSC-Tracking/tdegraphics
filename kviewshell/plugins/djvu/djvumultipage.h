@@ -87,6 +87,7 @@ required.
 class DjVuMultiPage : public KMultiPage
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   /** Constructor
@@ -95,7 +96,7 @@ public:
   kmultipage. Please have a look at the constructor's source code to
   see how to adjust this for your implementation.
   */
-  DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+  DjVuMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
 		   const char *name, const TQStringList& args = TQStringList());
   
   /** Destructor

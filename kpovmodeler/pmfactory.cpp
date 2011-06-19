@@ -54,9 +54,9 @@ PMFactory::~PMFactory( )
    s_aboutData = 0L;
 }
 
-KParts::Part* PMFactory::createPartObject( TQWidget* parentWidget,
+KParts::Part* PMFactory::createPartObject( TQWidget* tqparentWidget,
                                      const char* widgetName,
-                                     TQObject* parent, const char* name,
+                                     TQObject* tqparent, const char* name,
                                      const char* classname,
                                      const TQStringList& /*args*/ )
 {
@@ -65,8 +65,8 @@ KParts::Part* PMFactory::createPartObject( TQWidget* parentWidget,
    bool readwrite = !( ( strcmp( classname, "Browser/View" ) == 0 )
           || ( strcmp( classname, "KParts::ReadOnlyPart" ) == 0 ) );
 
-   KParts::ReadWritePart *part = new PMPart( parentWidget, widgetName,
-                                             parent, name, readwrite );
+   KParts::ReadWritePart *part = new PMPart( tqparentWidget, widgetName,
+                                             tqparent, name, readwrite );
 
    return part;
 }

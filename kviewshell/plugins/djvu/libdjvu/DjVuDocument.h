@@ -800,7 +800,7 @@ public:
    virtual GP<DjVuFile>	id_to_file(const DjVuPort * source, const GUTF8String &id);
    virtual GP<DataPool>	request_data(const DjVuPort * source, const GURL & url);
    virtual void		notify_file_flags_changed(const DjVuFile * source,
- 			long set_mask, long clr_mask);
+ 			long set_tqmask, long clr_tqmask);
 
    virtual GList<GURL>	get_url_names(void);
    virtual void 	set_recover_errors(ErrorRecoveryAction=ABORT);

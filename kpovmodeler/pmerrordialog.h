@@ -42,9 +42,10 @@ class PMObject;
 class PMErrorDialog : public KDialogBase
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
-    * Creates a modal PMErrorDialog with parent and name.
+    * Creates a modal PMErrorDialog with tqparent and name.
     *
     * messages is the message list. If the list contains a message of type
     * FatalError, the 'Proceed" button will not be shown.
@@ -53,7 +54,7 @@ public:
     * should be continued.
     */
    PMErrorDialog( const PMMessageList& messages, int errorFlags,
-                  TQWidget* parent = 0, const char* name = 0 );
+                  TQWidget* tqparent = 0, const char* name = 0 );
 
    static void saveConfig( KConfig* cfg );
    static void restoreConfig( KConfig* cfg );

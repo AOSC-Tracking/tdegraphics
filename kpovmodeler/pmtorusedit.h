@@ -35,12 +35,13 @@ class TQCheckBox;
 class PMTorusEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSphereEdit with parent and name
+    * Creates a PMSphereEdit with tqparent and name
     */
-   PMTorusEdit( TQWidget* parent, const char* name = 0 );
+   PMTorusEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

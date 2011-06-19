@@ -84,7 +84,7 @@ private:
 	TQString m_SVGFragmentId;
 };
 
-class InputHandler : public QXmlDefaultHandler
+class InputHandler : public TQXmlDefaultHandler
 {
 public:
 	virtual bool startDocument();
@@ -146,13 +146,13 @@ SVGSVGElementImpl *Helper::nextSVGElement(SVGElementImpl *elem)
 SVGSVGElementImpl *Helper::nextSVGElement(DOM::Node elem)
 {
 	DOM::Node foundSVG;
-	DOM::Node shape = elem.parentNode();
+	DOM::Node tqshape = elem.parentNode();
 	
-	for(; !shape.isNull(); shape = shape.parentNode())
+	for(; !tqshape.isNull(); tqshape = tqshape.parentNode())
 	{
-		if(reinterpret_cast<DOM::Element &>(shape).nodeName() == "svg")
+		if(reinterpret_cast<DOM::Element &>(tqshape).nodeName() == "svg")
 		{
-			foundSVG = shape;
+			foundSVG = tqshape;
 			break;
 		}
 	}
@@ -245,7 +245,7 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 					SVGLengthImpl *height = SVGSVGElementImpl::createSVGLength();
 					width->setValueAsString(svg->getAttribute("width").string());
 					height->setValueAsString(svg->getAttribute("height").string());
-					TQString viewbox = TQString("0 0 %1 %2").arg(width->value()).arg(height->value());
+					TQString viewbox = TQString("0 0 %1 %2").tqarg(width->value()).tqarg(height->value());
 					//kdDebug(26001) << "VIEWBOX : " << viewbox.latin1() << endl;
 					svg->setAttribute("viewBox", viewbox);
 					width->deref();
@@ -289,7 +289,7 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 			Helper::self()->doc()->appendChild(*newElement);
 
 		// Special logics:
-		if(qName == "switch" || qName == "pattern" || qName == "mask")
+		if(qName == "switch" || qName == "pattern" || qName == "tqmask")
 			m_noRendering = true;
 	}
 
@@ -300,13 +300,13 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 
 	if(svg && svg->ownerSVGElement() == 0)
 	{
-		SVGImageElementImpl *parentImage = Helper::self()->doc()->parentImage();
+		SVGImageElementImpl *tqparentImage = Helper::self()->doc()->tqparentImage();
 
-		if(parentImage)
+		if(tqparentImage)
 		{
 			// We're being displayed in a document via an 'image' element. Set
 			// us up to fit into it's rectangle.
-			parentImage->setupSVGElement(svg);
+			tqparentImage->setupSVGElement(svg);
 		}
 	}
 
@@ -316,25 +316,25 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 	{
 		// Set up the cached screenCTM
 		SVGLocatableImpl *locatableParent = 0;
-		DOM::Node parentNode = newElement->parentNode();
+		DOM::Node tqparentNode = newElement->parentNode();
 
-		if(!parentNode.isNull())
+		if(!tqparentNode.isNull())
 		{
-			SVGElementImpl *parent = Helper::self()->doc()->getElementFromHandle(parentNode.handle());
+			SVGElementImpl *tqparent = Helper::self()->doc()->getElementFromHandle(tqparentNode.handle());
 
-			if(parent)
-				locatableParent = dynamic_cast<SVGLocatableImpl *>(parent);
+			if(tqparent)
+				locatableParent = dynamic_cast<SVGLocatableImpl *>(tqparent);
 		}
 
-		SVGMatrixImpl *parentMatrix = 0;
+		SVGMatrixImpl *tqparentMatrix = 0;
 
 		if(locatableParent)
-			parentMatrix = locatableParent->getScreenCTM();
+			tqparentMatrix = locatableParent->getScreenCTM();
 		else
-			parentMatrix = SVGSVGElementImpl::createSVGMatrix();
+			tqparentMatrix = SVGSVGElementImpl::createSVGMatrix();
 
-		locatable->updateCachedScreenCTM(parentMatrix);
-		parentMatrix->deref();
+		locatable->updateCachedScreenCTM(tqparentMatrix);
+		tqparentMatrix->deref();
 	}
 
 	m_currentNode = newElement;
@@ -349,7 +349,7 @@ bool InputHandler::endElement(const TQString &, const TQString &, const TQString
 
 	SVGSVGElementImpl *root = Helper::self()->nextSVGElement(*m_currentNode);
 	SVGElementImpl *element = root ? root->ownerDoc()->getElementFromHandle(m_currentNode->handle()) : Helper::self()->doc()->getElementFromHandle(m_currentNode->handle());
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 	SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 	SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
@@ -386,18 +386,18 @@ bool InputHandler::endElement(const TQString &, const TQString &, const TQString
 
 		if(haveCanvas && (tests ? tests->ok() : true))
 		{
-			if((shape && !shape->isContainer()) || (!shape && element))
+			if((tqshape && !tqshape->isContainer()) || (!tqshape && element))
 				element->createItem();
 		}
 	}
 
 	// Special logics:
-	if(qName == "switch" || qName == "pattern" || qName == "mask")
+	if(qName == "switch" || qName == "pattern" || qName == "tqmask")
 	{
 		m_noRendering = false;
 		bool ok = tests ? tests->ok() : true;
 
-		if(haveCanvas && element && style && ok && style->getDisplay() && style->getVisible() && qName == "pattern" || (shape && shape->directRender()))
+		if(haveCanvas && element && style && ok && style->getDisplay() && style->getVisible() && qName == "pattern" || (tqshape && tqshape->directRender()))
 			element->createItem();
 	}
 
@@ -426,10 +426,10 @@ bool InputHandler::fatalError(const TQXmlParseException &e)
 	if(Helper::self()->hasError())
 	{
 		error = Helper::self()->errorDescription();
-		Helper::self()->setErrorDescription(TQString::null);
+		Helper::self()->setErrorDescription(TQString());
 	}
 	else
-		error = TQString("[%1:%2]: FATAL ERROR: %3").arg(e.lineNumber()).arg(e.columnNumber()).arg(e.message());
+		error = TQString("[%1:%2]: FATAL ERROR: %3").tqarg(e.lineNumber()).tqarg(e.columnNumber()).tqarg(e.message());
 
 	kdDebug(26001) << "InputHandler::fatalError, " << error << endl;
 

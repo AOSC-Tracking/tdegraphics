@@ -56,13 +56,14 @@ class kpMainWindow;
 //   used by kpTransparentColorCell
 // - no obscure "current" colour
 //
-class kpDualColorButton : public QFrame
+class kpDualColorButton : public TQFrame
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpDualColorButton (kpMainWindow *mainWindow,
-                       TQWidget *parent, const char *name = 0);
+                       TQWidget *tqparent, const char *name = 0);
     virtual ~kpDualColorButton ();
 
     kpColor color (int which) const;
@@ -90,7 +91,7 @@ public:
     kpColor oldBackgroundColor () const;
 
 public:
-    virtual TQSize sizeHint () const;
+    virtual TQSize tqsizeHint () const;
 
 protected:
     TQRect swapPixmapRect () const;
@@ -118,9 +119,10 @@ protected:
 class kpColorCells : public KColorCells
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpColorCells (TQWidget *parent,
+    kpColorCells (TQWidget *tqparent,
                   Qt::Orientation o = Qt::Horizontal,
                   const char *name = 0);
     virtual ~kpColorCells ();
@@ -152,15 +154,16 @@ protected slots:
 };
 
 
-class kpTransparentColorCell : public QFrame
+class kpTransparentColorCell : public TQFrame
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpTransparentColorCell (TQWidget *parent, const char *name = 0);
+    kpTransparentColorCell (TQWidget *tqparent, const char *name = 0);
     virtual ~kpTransparentColorCell ();
 
-    virtual TQSize sizeHint () const;
+    virtual TQSize tqsizeHint () const;
 
 signals:
     void transparentColorSelected (int mouseButton);
@@ -179,12 +182,13 @@ protected:
 };
 
 
-class kpColorPalette : public QWidget
+class kpColorPalette : public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpColorPalette (TQWidget *parent,
+    kpColorPalette (TQWidget *tqparent,
                     Qt::Orientation o = Qt::Horizontal,
                     const char *name = 0);
     virtual ~kpColorPalette ();
@@ -208,10 +212,11 @@ protected:
 class kpColorSimilarityToolBarItem : public kpColorSimilarityCube
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpColorSimilarityToolBarItem (kpMainWindow *mainWindow,
-                                  TQWidget *parent,
+                                  TQWidget *tqparent,
                                   const char *name = 0);
     virtual ~kpColorSimilarityToolBarItem ();
 
@@ -243,6 +248,7 @@ private:
 class kpColorToolBar : public KToolBar
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpColorToolBar (const TQString &label, kpMainWindow *mainWindow, const char *name = 0);

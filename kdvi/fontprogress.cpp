@@ -22,11 +22,11 @@
 #include <tqvbox.h>
 
 /* 
- *  Constructs a fontProgressDialog which is a child of 'parent', with the 
+ *  Constructs a fontProgressDialog which is a child of 'tqparent', with the 
  *  name 'name' and widget flags set to 'f' 
  */
-fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip, TQWidget* parent, const TQString& name, bool progressbar)
-  : KDialogBase( parent, "Font Generation Progress Dialog", true, name, Cancel, Cancel, true )
+fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip, TQWidget* tqparent, const TQString& name, bool progressbar)
+  : KDialogBase( tqparent, "Font Generation Progress Dialog", true, name, Cancel, Cancel, true )
 {
   setCursor( TQCursor( 3 ) );
 
@@ -42,7 +42,7 @@ fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString
   TQVBox *page = makeVBoxMainWidget();
 
   TextLabel1   = new TQLabel( label, page, "TextLabel2" );
-  TextLabel1->setAlignment( int( TQLabel::AlignCenter ) );
+  TextLabel1->tqsetAlignment( int( TQLabel::AlignCenter ) );
   TQWhatsThis::add( TextLabel1, whatsThis );
   TQToolTip::add( TextLabel1, ttip );
 
@@ -55,13 +55,13 @@ fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString
     ProgressBar1 = NULL;
   
   TextLabel2   = new TQLabel( "", page, "TextLabel2" );
-  TextLabel2->setAlignment( int( TQLabel::AlignCenter ) );
+  TextLabel2->tqsetAlignment( int( TQLabel::AlignCenter ) );
   TQWhatsThis::add( TextLabel2, whatsThis );
   TQToolTip::add( TextLabel2, ttip );
 
   progress = 0;
   procIO = 0;
-  qApp->connect(this, TQT_SIGNAL(finished()), this, TQT_SLOT(killProcIO()));
+  tqApp->connect(this, TQT_SIGNAL(finished()), this, TQT_SLOT(killProcIO()));
 }
 
 
@@ -71,7 +71,7 @@ fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString
 
 fontProgressDialog::~fontProgressDialog()
 {
-    // no need to delete child widgets, Qt does it all for us
+    // no need to delete child widgets, TQt does it all for us
 }
 
 

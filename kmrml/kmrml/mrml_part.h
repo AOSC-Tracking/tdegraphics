@@ -54,16 +54,17 @@ class MrmlView;
 class MrmlPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    enum Status { NeedCollection, CanSearch, InProgress };
+    enum tqStatus { NeedCollection, CanSearch, InProgress };
 
-    MrmlPart( TQWidget *parentWidget, const char *widgetName,
-              TQObject *parent, const char *name, const TQStringList& args );
+    MrmlPart( TQWidget *tqparentWidget, const char *widgetName,
+              TQObject *tqparent, const char *name, const TQStringList& args );
     ~MrmlPart();
 
     TQString sessionId() const { return m_sessionId; }
-    TQString transactionId() const { return TQString::null; } // ###
+    TQString transactionId() const { return TQString(); } // ###
 
     void saveState( TQDataStream& stream );
     void restoreState( TQDataStream& stream );
@@ -115,7 +116,7 @@ private:
     void initHostCombo();
     void enableServerDependentWidgets( bool enable );
 
-    void setStatus( Status status );
+    void settqStatus( tqStatus status );
 
     void contactServer( const KURL& url );
     void downloadReferenceFiles( const KURL::List& downloadList );
@@ -142,7 +143,7 @@ private:
     CollectionList m_collections;
     AlgorithmList m_algorithms;
 
-    Status m_status;
+    tqStatus m_status;
     static uint s_sessionId;
 
 };
@@ -150,6 +151,7 @@ private:
 class PartFactory : public KParts::Factory
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     PartFactory();
@@ -158,9 +160,9 @@ public:
     static KInstance * instance();
 
 protected:
-    virtual KParts::Part * createPartObject( TQWidget *parentWidget = 0,
+    virtual KParts::Part * createPartObject( TQWidget *tqparentWidget = 0,
                                         const char *widgetName = 0,
-                                        TQObject *parent = 0,
+                                        TQObject *tqparent = 0,
                                         const char *name = 0,
                                         const char *classname = "KParts::Part",
                                         const TQStringList& args = TQStringList() );

@@ -47,11 +47,11 @@ PMDetailObject::~PMDetailObject()
 {
 }
 
-PMMetaObject* PMDetailObject::metaObject( ) const
+PMMetaObject* PMDetailObject::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "DetailObject", Base::metaObject( ) );
+      s_pMetaObject = new PMMetaObject( "DetailObject", Base::tqmetaObject( ) );
       s_pMetaObject->addProperty(
             new PMDetailObjectProperty( "globalDetail", &PMDetailObject::setGlobalDetail, &PMDetailObject::globalDetail ) );
       s_pMetaObject->addProperty(

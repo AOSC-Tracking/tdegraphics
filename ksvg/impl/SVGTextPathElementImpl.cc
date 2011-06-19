@@ -104,9 +104,9 @@ void SVGTextPathElementImpl::setAttributes()
 		KSVG_SET_ALT_ATTRIBUTE(Spacing, "exact")
 }
 
-T2P::GlyphLayoutParams *SVGTextPathElementImpl::layoutParams() const
+T2P::GlyphLayoutParams *SVGTextPathElementImpl::tqlayoutParams() const
 {
-	T2P::GlyphLayoutParams *params = SVGTextContentElementImpl::layoutParams();
+	T2P::GlyphLayoutParams *params = SVGTextContentElementImpl::tqlayoutParams();
 	params->setTextPathStartOffset(startOffset()->baseVal()->value());
 	return params;
 }

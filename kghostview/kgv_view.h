@@ -19,7 +19,7 @@
 #ifndef __KGV_VIEW_H
 #define __KGV_VIEW_H
 
-#include <tqcstring.h> // QByteArray
+#include <tqcstring.h> // TQByteArray
 #include <tqfile.h>
 
 #include <kio/job.h>
@@ -55,9 +55,10 @@ class ScrollBox;
 class KGVPart: public KParts::ReadOnlyPart
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-    KGVPart( TQWidget* parentWidget, const char* widgetName,
-             TQObject* parent, const char* name,
+    KGVPart( TQWidget* tqparentWidget, const char* widgetName,
+             TQObject* tqparent, const char* name,
              const TQStringList& args = TQStringList() );
 
     virtual ~KGVPart();
@@ -230,9 +231,10 @@ private:
 class KGVBrowserExtension : public KParts::BrowserExtension
 {
   Q_OBJECT
+  TQ_OBJECT
     friend class KGVPart; // emits our signals
 public:
-    KGVBrowserExtension( KGVPart* parent );
+    KGVBrowserExtension( KGVPart* tqparent );
     virtual ~KGVBrowserExtension() {}
 
 public slots:
@@ -243,6 +245,7 @@ public slots:
 class KGVRun : public KRun
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     KGVRun( const KURL& url, mode_t mode = 0,

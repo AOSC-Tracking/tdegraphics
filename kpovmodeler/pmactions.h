@@ -36,8 +36,9 @@ class TQToolButton;
 class PMComboAction : public KAction
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* parent, const char* name );
+   PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* tqparent, const char* name );
    ~PMComboAction( );
    
    virtual int plug( TQWidget* w, int index = -1 );
@@ -67,8 +68,9 @@ private:
 class PMLabelAction : public KAction
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMLabelAction( const TQString &text, TQObject *parent = 0, const char *name = 0 );
+   PMLabelAction( const TQString &text, TQObject *tqparent = 0, const char *name = 0 );
    
    virtual int plug( TQWidget *widget, int index = -1 );
    virtual void unplug( TQWidget *widget );
@@ -84,8 +86,9 @@ private:
 class PMSpinBoxAction : public KAction
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
-   PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* parent, const char* name );
+   PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* tqparent, const char* name );
    ~PMSpinBoxAction( );
    
    virtual int plug( TQWidget* w, int index = -1 );

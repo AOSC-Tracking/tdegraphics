@@ -129,7 +129,7 @@ void SVGAnimateTransformElementImpl::setAttributes()
 	{
 		TQString test = _values.string();
 
-		if(test.contains(";"))
+		if(test.tqcontains(";"))
 		{
 			SVGLengthImpl *temp = SVGSVGElementImpl::createSVGLength();
 			
@@ -201,7 +201,7 @@ void SVGAnimateTransformElementImpl::handleTimerEvent(bool)
 
 			if(!m_lastTransform.isEmpty())
 			{
-				int pos = trans.find(m_lastTransform);
+				int pos = trans.tqfind(m_lastTransform);
 				
 				TQString extract;
 				extract += trans.mid(0, pos);

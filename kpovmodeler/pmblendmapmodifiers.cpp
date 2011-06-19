@@ -57,11 +57,11 @@ PMBlendMapModifiers::~PMBlendMapModifiers( )
 {
 }
 
-PMMetaObject* PMBlendMapModifiers::metaObject( ) const
+PMMetaObject* PMBlendMapModifiers::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BlendMapModifiers", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BlendMapModifiers", Base::tqmetaObject( ),
                                         createBlendMapModifiers );
       s_pMetaObject->addProperty(
          new PMBlendMapModifiersProperty( "frequencyEnabled", &PMBlendMapModifiers::enableFrequency,
@@ -236,9 +236,9 @@ void PMBlendMapModifiers::setWaveFormType( PMWaveFormType c )
    }
 }
 
-PMDialogEditBase* PMBlendMapModifiers::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMBlendMapModifiers::editWidget( TQWidget* tqparent ) const
 {
-   return new PMBlendMapModifiersEdit( parent );
+   return new PMBlendMapModifiersEdit( tqparent );
 }
 
 void PMBlendMapModifiers::restoreMemento( PMMemento* s )

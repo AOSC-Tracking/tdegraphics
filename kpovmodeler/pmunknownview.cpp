@@ -20,13 +20,13 @@
 #include <tqlayout.h>
 
 PMUnknownView::PMUnknownView( const TQString& viewType,
-                              TQWidget* parent, const char* name )
-      : PMViewBase( parent, name )
+                              TQWidget* tqparent, const char* name )
+      : PMViewBase( tqparent, name )
 {
    TQHBoxLayout* hl = new TQHBoxLayout( this );
    TQLabel* l;
-   l = new TQLabel( i18n( "Unknown view type \"%1\"" ).arg( viewType ), this );
-   l->setAlignment( Qt::AlignCenter );
+   l = new TQLabel( i18n( "Unknown view type \"%1\"" ).tqarg( viewType ), this );
+   l->tqsetAlignment( TQt::AlignCenter );
    hl->addWidget( l );
    m_viewType = viewType;
 }

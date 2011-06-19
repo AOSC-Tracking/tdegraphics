@@ -60,9 +60,9 @@ typedef KGenericFactory<KExrPlugin> ExrFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_exr, ExrFactory("kfile_exr"))
 
-KExrPlugin::KExrPlugin(TQObject *parent, const char *name,
+KExrPlugin::KExrPlugin(TQObject *tqparent, const char *name,
                        const TQStringList &args)
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(tqparent, name, args)
 {
     // set up our mime type
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-exr" );
@@ -193,7 +193,7 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 			for ( unsigned int y=0; y < preview.height(); y++ ) {
 				for ( unsigned int x=0; x < preview.width(); x++ ) {
 					const PreviewRgba &q = preview.pixels()[x+(y*preview.width())];
-					qpreview.setPixel( x, y, qRgba(q.r, q.g, q.b, q.a) );
+					qpreview.setPixel( x, y, tqRgba(q.r, q.g, q.b, q.a) );
 				}
 			}
 			appendItem( infogroup, "Thumbnail", qpreview);
@@ -237,10 +237,10 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 #endif
 			TQString UTCOffset;
 			if (utcOffset(h)>0.0) {
-				UTCOffset.append(TQString("%1").arg(utcOffset(h)/3600, 0, 'f', 1));
+				UTCOffset.append(TQString("%1").tqarg(utcOffset(h)/3600, 0, 'f', 1));
 				UTCOffset.append(" hours behind UTC");
 			} else {
-				UTCOffset.append(TQString("%1").arg(-1.0*utcOffset(h)/3600, 0, 'f', 1));
+				UTCOffset.append(TQString("%1").tqarg(-1.0*utcOffset(h)/3600, 0, 'f', 1));
 				UTCOffset.append(" hours ahead of UTC");
 			}
 			appendItem( stdgroup, "UTC Offset", UTCOffset); 
@@ -264,10 +264,10 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		if ( hasLongitude(h) ) {
 			TQString Longitude;
 			if (longitude(h)<0.0) {
-				Longitude.append(TQString("%1").arg(-1.0*longitude(h),0,'f',3));
+				Longitude.append(TQString("%1").tqarg(-1.0*longitude(h),0,'f',3));
 				Longitude.append(" deg West");
 			} else {
-				Longitude.append(TQString("%1").arg(longitude(h),0,'f',3));
+				Longitude.append(TQString("%1").tqarg(longitude(h),0,'f',3));
 				Longitude.append(" deg East");
 			}
 			appendItem( stdgroup, "Longitude", Longitude);
@@ -275,17 +275,17 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		if ( hasLatitude(h) ) {
 			TQString Latitude;
 			if (latitude(h)<0.0) {
-				Latitude.append(TQString("%1").arg(-1.0*latitude(h),0,'f',3));
+				Latitude.append(TQString("%1").tqarg(-1.0*latitude(h),0,'f',3));
 				Latitude.append(" deg South");
 			} else {
-				Latitude.append(TQString("%1").arg(latitude(h),0,'f',3));
+				Latitude.append(TQString("%1").tqarg(latitude(h),0,'f',3));
 				Latitude.append(" deg North");
 			}
 			appendItem( stdgroup, "Latitude", Latitude );
 		}
 		if ( hasAltitude(h) ) {
 			double Altitude = altitude(h);
-			appendItem( stdgroup, "Altitude", TQString("%1").arg(Altitude,0,'f',1) );
+			appendItem( stdgroup, "Altitude", TQString("%1").tqarg(Altitude,0,'f',1) );
 		}
 		if ( hasIsoSpeed(h) ) {
 			double IsoSpeed = isoSpeed(h);
@@ -344,7 +344,7 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		// This section deals with some special case stuff for a 3D Studio Max
 		// plugin from Splutterfish. The weird construction is an
 		// attempt to to deal with class conversion. C++ string handling
-		// without Qt is a pain...
+		// without TQt is a pain...
 		const StringAttribute *ver3DSM = h.findTypedAttribute <StringAttribute> ("version3dsMax");
 		if (ver3DSM) {
 			std::string ver3DSMstring = ver3DSM->value();

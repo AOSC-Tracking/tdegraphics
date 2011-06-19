@@ -54,22 +54,22 @@ typedef TQPtrListIterator<PMObject> PMObjectListIterator;
  * Used pattern: Composite
  *
  * All list/child functionality is disabled in this class. Objects that
- * can have children has to be inherited from @ref PMCompositeObject.
+ * can have tqchildren has to be inherited from @ref PMCompositeObject.
  */
 class PMObject
 {
    friend class PMCompositeObject;
 public:
    /**
-    * Creates an empty PMObject without parent.
+    * Creates an empty PMObject without tqparent.
     */
    PMObject( PMPart* part );
    /**
-    * Copy constructor. All object pointers (parent, siblings) are set to 0!
+    * Copy constructor. All object pointers (tqparent, siblings) are set to 0!
     */
    PMObject( const PMObject& o );
    /**
-    * Deletes the object and all children.
+    * Deletes the object and all tqchildren.
     */
    virtual ~PMObject( );
 
@@ -85,7 +85,7 @@ public:
    /**
     * Returns the meta object for the class
     */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
 
    /**
     * Returns true if the object is of type t or inherits the object
@@ -110,7 +110,7 @@ public:
     * Returns the name of the object. This is the name that helps
     * the user to identify a object (like "south wall", "floor" ...)
     */
-   virtual TQString name( ) const { return TQString::null; }
+   virtual TQString name( ) const { return TQString(); }
    /**
     * Returns true if the object can have a name
     */
@@ -121,9 +121,9 @@ public:
    virtual bool exportPovray( ) const { return true; }
 
    /**
-    * Returns a pointer to the parent object.
+    * Returns a pointer to the tqparent object.
     */
-   PMObject* parent( ) const { return m_pParent; }
+   PMObject* tqparent( ) const { return m_pParent; }
    /**
     * Returns a pointer to the corresponding part
     */
@@ -157,7 +157,7 @@ public:
    int canInsert( const TQStringList& classes, const PMObject* after ) const;
 
    /**
-    * Returns true if an insert or remove operation of children will
+    * Returns true if an insert or remove operation of tqchildren will
     * change data inside this class
     */
    virtual bool dataChangeOnInsertRemove( ) const { return false; }
@@ -174,7 +174,7 @@ public:
     * Returns a pointer to the child object at position index,
     * or null if the index is out of range.
     */
-   virtual PMObject* childAt( uint ) const { return 0; }
+   virtual PMObject* tqchildAt( uint ) const { return 0; }
    /**
     * Returns the next sibling of that item
     */
@@ -219,7 +219,7 @@ public:
       return false;
    }
    /**
-    * Returns the number of children. 0 in this class
+    * Returns the number of tqchildren. 0 in this class
     */
    virtual int countChildren( ) const { return 0; }
    /**
@@ -235,12 +235,12 @@ public:
 
    /**
     * Called when a child was removed. For classes that have to be informed
-    * when children are removed
+    * when tqchildren are removed
     */
    virtual void childRemoved( PMObject* ) { };
    /**
     * Called when a child was added. For classes that have to be informed
-    * when children are added
+    * when tqchildren are added
     */
    virtual void childAdded( PMObject* ) { };
 
@@ -302,7 +302,7 @@ public:
     * not only this object.
     *
     * If you leave the list empty, only this object was changed.
-    * If you add children or other objects to the list, add this object
+    * If you add tqchildren or other objects to the list, add this object
     * to the list, too, if it was changed!
     *
     * IMPORTANT: When you change additional objects, make sure that
@@ -356,7 +356,7 @@ public:
     */
    virtual void serialize( TQDomElement& e, TQDomDocument& doc ) const = 0;
    /**
-    * Reads the attributes from the QDomElement
+    * Reads the attributes from the TQDomElement
     */
    virtual void readAttributes( const PMXMLHelper& h );
 
@@ -385,7 +385,7 @@ public:
    void setSelected( bool s );
    /**
     * Returns true if this item can be selected. An item cannot be selected
-    * if a parent object is selected
+    * if a tqparent object is selected
     */
    bool isSelectable( );
    /**
@@ -402,7 +402,7 @@ public:
     */
    bool isReadOnly( ) const;
    /**
-    * Makes this object read only, if yes == true. All children will
+    * Makes this object read only, if yes == true. All tqchildren will
     * be read only, too
     */
    void setReadOnly( bool yes = true ) { m_readOnly = yes; }
@@ -411,9 +411,9 @@ public:
     * Creates a new edit widget that can display this object and
     * returns a pointer to it.
     *
-    * The widget will be created as a child of parent.
+    * The widget will be created as a child of tqparent.
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
@@ -470,7 +470,7 @@ public:
 protected:
    /**
     * Adds num to the number of selected objects in this object and all
-    * parent objects. num can be negative.
+    * tqparent objects. num can be negative.
     */
    virtual void adjustSelectedChildren( int /*num*/ ) { };
    /**
@@ -479,7 +479,7 @@ protected:
    PMMemento* m_pMemento;
 private:
    /**
-    * Pointer to the parent object. 0 if the object has no parent.
+    * Pointer to the tqparent object. 0 if the object has no tqparent.
     */
    PMObject* m_pParent;
    /**
@@ -495,7 +495,7 @@ private:
     */
    bool m_selected;
    /**
-    * true if this object is read only. All children will be read only, too
+    * true if this object is read only. All tqchildren will be read only, too
     */
    bool m_readOnly;
    /**

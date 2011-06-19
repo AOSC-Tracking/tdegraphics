@@ -36,13 +36,13 @@
 typedef KGenericFactory<KViewBrowser> KViewBrowserFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_browserplugin, KViewBrowserFactory( "kviewbrowserplugin" ) )
 
-KViewBrowser::KViewBrowser( TQObject* parent, const char* name, const TQStringList & )
-	: Plugin( parent, name )
+KViewBrowser::KViewBrowser( TQObject* tqparent, const char* name, const TQStringList & )
+	: Plugin( tqparent, name )
 	, m_pDirLister( 0 )
 	, m_pFileItemList( 0 )
 	, m_bShowCurrent( false )
 {
-	m_pViewer = static_cast<KImageViewer::Viewer *>( parent );
+	m_pViewer = static_cast<KImageViewer::Viewer *>( tqparent );
 	if( m_pViewer )
 	{
 		m_paBack    = KStdAction::back   ( this, TQT_SLOT( slotBack()    ), actionCollection(), "previous_image" );
@@ -163,7 +163,7 @@ void KViewBrowser::setupDirLister()
 	{
 		TQApplication::setOverrideCursor( WaitCursor );
 		TQString url = m_pViewer->url().prettyURL();
-		int pos = url.findRev( "/" );
+		int pos = url.tqfindRev( "/" );
 		url = url.left( (unsigned int)pos );
 		kdDebug( 4630 ) << "open KDirLister for " << url << endl;
 		m_pDirLister->openURL( KURL( url ));

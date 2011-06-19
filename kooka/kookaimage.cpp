@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -167,7 +167,7 @@ bool KookaImage::loadFromUrl( const KURL& url )
 #endif
    if( !haveTiff )
    {
-      /* Qt can only read one image */
+      /* TQt can only read one image */
       ret = load(filename);
       if( ret )
       {
@@ -205,15 +205,15 @@ void KookaImage::extractNow()
 {
    kdDebug(28000) << "extracting a subimage number " << m_subNo << endl;
 
-   KookaImage *parent = parentImage();
+   KookaImage *tqparent = tqparentImage();
 
-   if( parent )
+   if( tqparent )
    {
-      loadTiffDir( parent->localFileName(), m_subNo );
+      loadTiffDir( tqparent->localFileName(), m_subNo );
    }
    else
    {
-      kdDebug(28000) << "ERR: No parent defined - can not laod subimage" << endl;
+      kdDebug(28000) << "ERR: No tqparent defined - can not laod subimage" << endl;
    }
 }
 
@@ -300,7 +300,7 @@ bool KookaImage::loadTiffDir( const TQString& filename, int no )
 	   float yScalefactor = xReso / yReso;
 	   kdDebug(28000) << "Different resolution x/y, rescaling with factor " << yScalefactor << endl;
 	   /* rescale the image */
-	   *this = smoothScale( imgWidth, int(imgHeight*yScalefactor), TQImage::ScaleFree );
+	   *this = smoothScale( imgWidth, int(imgHeight*yScalefactor), TQ_ScaleFree );
        }
        else
        {
@@ -308,7 +308,7 @@ bool KookaImage::loadTiffDir( const TQString& filename, int no )
 	   float scalefactor = yReso / xReso;
 	   kdDebug(28000) << "Different resolution x/y, rescaling x with factor " << scalefactor << endl;
 	   /* rescale the image */
-	   *this = smoothScale( int(imgWidth*scalefactor), imgHeight, TQImage::ScaleFree );
+	   *this = smoothScale( int(imgWidth*scalefactor), imgHeight, TQ_ScaleFree );
 	   
        }
    }
@@ -328,7 +328,7 @@ KookaImage::~KookaImage()
 
 }
 
-KookaImage* KookaImage::parentImage() const
+KookaImage* KookaImage::tqparentImage() const
 {
    return( m_parent );
 }

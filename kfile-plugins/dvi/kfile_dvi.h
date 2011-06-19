@@ -28,8 +28,9 @@ class TQStringList;
 class KDviPlugin : public KFilePlugin
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	KDviPlugin ( TQObject * parent, const char * name, const TQStringList & preferredItems );
+	KDviPlugin ( TQObject * tqparent, const char * name, const TQStringList & preferredItems );
 
 	virtual bool readInfo (KFileMetaInfo & info, uint what);
 };

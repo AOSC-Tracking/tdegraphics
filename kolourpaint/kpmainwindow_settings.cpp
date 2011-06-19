@@ -57,19 +57,19 @@ void kpMainWindow::setupSettingsMenuActions ()
     createStandardStatusBarAction ();
 
 
-    m_actionFullScreen = KStdAction::fullScreen (this, TQT_SLOT (slotFullScreen ()), ac,
+    m_actionFullScreen = KStdAction::fullScreen (TQT_TQOBJECT(this), TQT_SLOT (slotFullScreen ()), ac,
                                                  this/*window*/);
 
 
     m_actionShowPath = new KToggleAction (i18n ("Show &Path"), 0,
-        this, TQT_SLOT (slotShowPathToggled ()), ac, "settings_show_path");
+        TQT_TQOBJECT(this), TQT_SLOT (slotShowPathToggled ()), ac, "settings_show_path");
     m_actionShowPath->setCheckedState (i18n ("Hide &Path"));
     slotEnableSettingsShowPath ();
 
 
-    m_actionKeyBindings = KStdAction::keyBindings (this, TQT_SLOT (slotKeyBindings ()), ac);
-    m_actionConfigureToolbars = KStdAction::configureToolbars (this, TQT_SLOT (slotConfigureToolBars ()), ac);
-    // m_actionConfigure = KStdAction::preferences (this, TQT_SLOT (slotConfigure ()), ac);
+    m_actionKeyBindings = KStdAction::keyBindings (TQT_TQOBJECT(this), TQT_SLOT (slotKeyBindings ()), ac);
+    m_actionConfigureToolbars = KStdAction::configureToolbars (TQT_TQOBJECT(this), TQT_SLOT (slotConfigureToolBars ()), ac);
+    // m_actionConfigure = KStdAction::preferences (TQT_TQOBJECT(this), TQT_SLOT (slotConfigure ()), ac);
 
 
     enableSettingsMenuDocumentActions (false);
@@ -168,9 +168,9 @@ void kpMainWindow::slotConfigureToolBars ()
     //saveMainWindowSettings (kapp->config (), autoSaveGroup ());
 
     KEditToolbar dialog (actionCollection (),
-                         TQString::null/*default ui.rc file*/,
+                         TQString()/*default ui.rc file*/,
                          true/*global resource*/,
-                         this/*parent*/);
+                         this/*tqparent*/);
     // Clicking on OK after Apply brings up the dialog (below) again.
     // Bug with KEditToolBar.
     dialog.showButtonApply (false);
@@ -195,7 +195,7 @@ void kpMainWindow::slotNewToolBarConfig ()
     KMessageBox::information (this,
         i18n ("You have to restart KolourPaint for these changes to take effect."),
         i18n ("Toolbar Settings Changed"),
-        TQString::fromLatin1 ("ToolBarSettingsChanged"));
+        TQString::tqfromLatin1 ("ToolBarSettingsChanged"));
 
     //createGUI();
     //applyMainWindowSettings (kapp->config (), autoSaveGroup ());

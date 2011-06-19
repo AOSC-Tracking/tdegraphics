@@ -28,41 +28,41 @@
 #include <kcolorbutton.h>
 #include <klocale.h>
 
-PMGridSettings::PMGridSettings( TQWidget* parent, const char* name )
-      : PMSettingsDialogPage( parent, name )
+PMGridSettings::PMGridSettings( TQWidget* tqparent, const char* name )
+      : PMSettingsDialogPage( tqparent, name )
 {
-   TQHBoxLayout* hlayout;
-   TQVBoxLayout* vlayout;
+   TQHBoxLayout* htqlayout;
+   TQVBoxLayout* vtqlayout;
    TQVBoxLayout* gvl;
    TQGridLayout* grid;
    TQGroupBox* gb;
 
-   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
    gb = new TQGroupBox( i18n( "Displayed Grid" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
 
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Color:" ), gb ) );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Color:" ), gb ) );
    m_pGridColor = new KColorButton( gb );
-   hlayout->addWidget( m_pGridColor );
-   hlayout->addStretch( 1 );
+   htqlayout->addWidget( m_pGridColor );
+   htqlayout->addStretch( 1 );
 
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Distance:" ), gb ) );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Distance:" ), gb ) );
    m_pGridDistance = new PMIntEdit( gb );
    m_pGridDistance->setValidation( true, 20, false, 0 );
-   hlayout->addWidget( m_pGridDistance );
-   hlayout->addStretch( 1 );
+   htqlayout->addWidget( m_pGridDistance );
+   htqlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Control Point Grid" ), this );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
 
-   hlayout = new TQHBoxLayout( gvl );
-   grid = new TQGridLayout( hlayout, 3, 2 );
+   htqlayout = new TQHBoxLayout( gvl );
+   grid = new TQGridLayout( htqlayout, 3, 2 );
    grid->addWidget( new TQLabel( i18n( "2D/3D movement:" ), gb ), 0, 0 );
    m_pMoveGrid = new PMFloatEdit( gb );
    m_pMoveGrid->setValidation( true, 0.001, true, 100 );
@@ -78,9 +78,9 @@ PMGridSettings::PMGridSettings( TQWidget* parent, const char* name )
    m_pRotateGrid->setValidation( true, 0.001, true, 180 );
    grid->addWidget( m_pRotateGrid, 2, 1 );
 
-   hlayout->addStretch( 1 );
+   htqlayout->addStretch( 1 );
 
-   vlayout->addStretch( 1 );
+   vtqlayout->addStretch( 1 );
 }
 
 void PMGridSettings::displaySettings( )
@@ -133,23 +133,23 @@ bool PMGridSettings::validateData( )
 
 void PMGridSettings::applySettings( )
 {
-   bool repaint = false;
+   bool tqrepaint = false;
    PMRenderManager* rm = PMRenderManager::theManager( );
    if( rm->gridColor( ) != m_pGridColor->color( ) )
    {
       rm->setGridColor( m_pGridColor->color( ) );
-      repaint = true;
+      tqrepaint = true;
    }
    if( rm->gridDistance( ) != m_pGridDistance->value( ) )
    {
       rm->setGridDistance( m_pGridDistance->value( ) );
-      repaint = true;
+      tqrepaint = true;
    }
    PMControlPoint::setMoveGrid( m_pMoveGrid->value( ) );
    PMControlPoint::setScaleGrid( m_pScaleGrid->value( ) );
    PMControlPoint::setRotateGrid( m_pRotateGrid->value( ) );
-   if( repaint )
-      emit repaintViews( );
+   if( tqrepaint )
+      emit tqrepaintViews( );
 }
 
 #include "pmgridsettings.moc"

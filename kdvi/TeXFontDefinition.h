@@ -1,6 +1,6 @@
 // -*- C++ -*-
 /*
- * The layout of a font information block.
+ * The tqlayout of a font information block.
  * There is one of these for every loaded font or magnification thereof.
  * Duplicates are eliminated:  this is necessary because of possible recursion
  * in virtual fonts.
@@ -35,7 +35,7 @@ class macro {
 
   unsigned char	*pos;		/* address of first byte of macro */
   unsigned char	*end;		/* address of last+1 byte */
-  Q_INT32        dvi_advance_in_units_of_design_size_by_2e20;	/* DVI units to move reference point */
+  TQ_INT32        dvi_advance_in_units_of_design_size_by_2e20;	/* DVI units to move reference point */
   bool          free_me;        // if memory at pos should be returned on destruction
 };
 
@@ -56,7 +56,7 @@ class TeXFontDefinition {
   };
   
 
-  TeXFontDefinition(TQString nfontname, double _displayResolution_in_dpi, Q_UINT32 chk, Q_INT32 _scaled_size_in_DVI_units,
+  TeXFontDefinition(TQString nfontname, double _displayResolution_in_dpi, TQ_UINT32 chk, TQ_INT32 _scaled_size_in_DVI_units,
        class fontPool *pool, double _enlargement);
   ~TeXFontDefinition();
 
@@ -74,7 +74,7 @@ class TeXFontDefinition {
   TQString        fontname;	// name of font, such as "cmr10"
   unsigned char  flags;		// flags byte (see values below)
   double         enlargement;
-  Q_INT32        scaled_size_in_DVI_units;   // Scaled size from the font definition command; in DVI units
+  TQ_INT32        scaled_size_in_DVI_units;   // Scaled size from the font definition command; in DVI units
   set_char_proc  set_char_p;	// proc used to set char
   
   // Resolution of the display device (resolution will usually be
@@ -100,20 +100,20 @@ class TeXFontDefinition {
   /** For FREETYPE fonts, which use a map file, this field will
       contain the full name of the font (e.g. 'Computer Modern'). If
       the name does not exist, or cannot be found, this field will be
-      TQString::null. Only subclasses of TeXFont should write into this
+      TQString(). Only subclasses of TeXFont should write into this
       field. */
   TQString        fullFontName;
 
   /** For FREETYPE fonts, which use a map file, this field will
       contain the full name of the font encoding (e.g. 'TexBase1'). If
       the encoding name does not exist, or cannot be found, this field
-      will be TQString::null. Only subclasses of TeXFont should write
+      will be TQString(). Only subclasses of TeXFont should write
       into this field. */
   TQString        fullEncodingName;
 #endif
 
  private:
-  Q_UINT32       checksum;
+  TQ_UINT32       checksum;
 
   /** This will be set to a human-readable description of the font,
       e.g. "virtual" or "TeX PK", or "Type 1" */

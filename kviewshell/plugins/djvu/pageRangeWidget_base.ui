@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>PageRangeWidget_base</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>PageRangeWidget_base</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLabel">
+        <widget class="TQLabel">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -40,7 +40,7 @@
                 <cstring>from</cstring>
             </property>
         </widget>
-        <widget class="QLabel">
+        <widget class="TQLabel">
             <property name="name">
                 <cstring>textLabel2</cstring>
             </property>
@@ -65,7 +65,7 @@
 </widget>
 <customwidgets>
 </customwidgets>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>

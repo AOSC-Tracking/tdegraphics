@@ -39,12 +39,13 @@ class TQLabel;
 class PMTextureMapEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMTextureMapEdit with parent and name
+    * Creates a PMTextureMapEdit with tqparent and name
     */
-   PMTextureMapEdit( TQWidget* parent, const char* name = 0 );
+   PMTextureMapEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -40,10 +40,11 @@ class TQRadioButton;
 class KCamera : public TQObject {
 	friend class KameraDeviceSelectDialog;
 	Q_OBJECT
+  TQ_OBJECT
 public:
 	KCamera(const TQString &name, const TQString &path);
 	~KCamera();
-	void invalidateCamera();
+	void tqinvalidateCamera();
 	bool configure();
 	void load(KConfig *m_config);
 	void save(KConfig *m_config);
@@ -88,8 +89,9 @@ protected:
 class KameraDeviceSelectDialog : public KDialogBase
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	KameraDeviceSelectDialog(TQWidget *parent, KCamera *device);
+	KameraDeviceSelectDialog(TQWidget *tqparent, KCamera *device);
 	void save();
 	void load();
 protected slots:

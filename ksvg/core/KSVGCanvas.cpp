@@ -181,7 +181,7 @@ void KSVGCanvas::resize(unsigned int w, unsigned int h)
 						{
 							for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 							{
-								if(!drawables.contains(*it))
+								if(!drawables.tqcontains(*it))
 									drawables.append(*it);
 							}
 						}
@@ -203,7 +203,7 @@ void KSVGCanvas::resize(unsigned int w, unsigned int h)
 						{
 							for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 							{
-								if(!drawables.contains(*it))
+								if(!drawables.tqcontains(*it))
 									drawables.append(*it);
 							}
 						}
@@ -254,7 +254,7 @@ void KSVGCanvas::clear(const TQRect &r)
 	if(!r2.isEmpty() && m_buffer)
 	{
 		for(int i = 0; i < r2.height(); i++)
-			memset(m_buffer + int(r2.x() * m_nrChannels) + int((r2.y() + i) * (m_width * m_nrChannels)), qRgba(250, 250, 250, 250), r2.width() * m_nrChannels);
+			memset(m_buffer + int(r2.x() * m_nrChannels) + int((r2.y() + i) * (m_width * m_nrChannels)), tqRgba(250, 250, 250, 250), r2.width() * m_nrChannels);
 	}
 }
 
@@ -284,13 +284,13 @@ void KSVGCanvas::fill()
 		}
 		else
 		{
-			Q_UINT32 *p = reinterpret_cast<Q_UINT32 *>(m_buffer);
-			unsigned char a = qAlpha(m_backgroundColor.rgb());
+			TQ_UINT32 *p = reinterpret_cast<TQ_UINT32 *>(m_buffer);
+			unsigned char a = tqAlpha(m_backgroundColor.rgb());
 
 #if X_BYTE_ORDER == X_LITTLE_ENDIAN
-			Q_UINT32 rgba = (a << 24) | (b << 16) | (g << 8) | r;
+			TQ_UINT32 rgba = (a << 24) | (b << 16) | (g << 8) | r;
 #else
-			Q_UINT32 rgba = (r << 24) | (g << 16) | (b << 8) | a;
+			TQ_UINT32 rgba = (r << 24) | (g << 16) | (b << 8) | a;
 #endif
 			for(int i = 0; i < m_width * m_height; i++)
 				*p++ = rgba;
@@ -302,17 +302,17 @@ void KSVGCanvas::fill()
 void KSVGCanvas::clipToBuffer(int &x0, int &y0, int &x1, int &y1) const
 {
 	// clamp to viewport
-	x0 = QMAX(x0, 0);
-	x0 = QMIN(x0, int(m_width - 1));
+	x0 = TQMAX(x0, 0);
+	x0 = TQMIN(x0, int(m_width - 1));
 
-	y0 = QMAX(y0, 0);
-	y0 = QMIN(y0, int(m_height - 1));
+	y0 = TQMAX(y0, 0);
+	y0 = TQMIN(y0, int(m_height - 1));
 
-	x1 = QMAX(x1, 0);
-	x1 = QMIN(x1, int(m_width - 1));
+	x1 = TQMAX(x1, 0);
+	x1 = TQMIN(x1, int(m_width - 1));
 
-	y1 = QMAX(y1, 0);
-	y1 = QMIN(y1, int(m_height - 1));
+	y1 = TQMAX(y1, 0);
+	y1 = TQMIN(y1, int(m_height - 1));
 }
 
 T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) const
@@ -324,11 +324,11 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 	EFontStyle fontStyle = style->getFontStyle();
 	TQString fontWeight = style->getFontWeight();
 
-	if(fontWeight.contains("bold"))
+	if(fontWeight.tqcontains("bold"))
 		weight |= FC_WEIGHT_DEMIBOLD;
-	if(fontWeight.contains("bolder"))
+	if(fontWeight.tqcontains("bolder"))
 		weight |= FC_WEIGHT_BOLD;
-	if(fontWeight.contains("lighter"))
+	if(fontWeight.tqcontains("lighter"))
 		weight |= FC_WEIGHT_LIGHT;
 
 	bool ok = true;
@@ -341,7 +341,7 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 		slant |= FC_SLANT_ROMAN;
 	else if(fontStyle == ITALIC)
 		slant |= FC_SLANT_ITALIC;
-	else if(fontStyle == OBLIQUE)
+	else if(fontStyle == OBLITQUE)
 		slant |= FC_SLANT_OBLIQUE;
 
 	// Calc font names
@@ -362,9 +362,9 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 	return fontVisualParams;
 }
 
-void KSVGCanvas::invalidate(CanvasItem *item, bool recalc)
+void KSVGCanvas::tqinvalidate(CanvasItem *item, bool recalc)
 {
-	if(m_chunksByItem.find(item) != m_chunksByItem.end())
+	if(m_chunksByItem.tqfind(item) != m_chunksByItem.end())
 	{
 		if(recalc)
 		{
@@ -376,7 +376,7 @@ void KSVGCanvas::invalidate(CanvasItem *item, bool recalc)
 		for(it.toFirst(); it.current(); ++it)
 		{
 			(*it)->setDirty();
-			if(!m_dirtyChunks.contains(*it))
+			if(!m_dirtyChunks.tqcontains(*it))
 				m_dirtyChunks.append(*it);
 		}
 	}
@@ -395,7 +395,7 @@ void KSVGCanvas::insert(CanvasItem *item, int z)
 
 		bool visible = item->isVisible();
 		if(visible)
-			invalidate(item, false);
+			tqinvalidate(item, false);
 
 		if(m_immediateUpdate)
 		{
@@ -429,7 +429,7 @@ void KSVGCanvas::removeFromChunks(CanvasItem *item)
 	for(it.toFirst(); it.current(); ++it)
 	{
 		(*it)->remove(item);
-		if(!m_dirtyChunks.contains(*it))
+		if(!m_dirtyChunks.tqcontains(*it))
 			m_dirtyChunks.append(*it);
 	}
 	m_chunksByItem.remove(item);
@@ -462,15 +462,15 @@ void KSVGCanvas::addToChunks(CanvasItem *item)
 
 unsigned int KSVGCanvas::setElementItemZIndexRecursive(SVGElementImpl *element, unsigned int z)
 {
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 
-	if(shape)
+	if(tqshape)
 	{
-		CanvasItem *item = shape->item();
+		CanvasItem *item = tqshape->item();
 
 		if(item)
 		{
-			SVGImageElementImpl *image = dynamic_cast<SVGImageElementImpl *>(shape);
+			SVGImageElementImpl *image = dynamic_cast<SVGImageElementImpl *>(tqshape);
 
 			if(image && image->svgImageRootElement())
 			{
@@ -481,7 +481,7 @@ unsigned int KSVGCanvas::setElementItemZIndexRecursive(SVGElementImpl *element, 
 			else
 			{
 				item->setZIndex(z);
-				invalidate(item, false);
+				tqinvalidate(item, false);
 				z++;
 			}
 		}
@@ -540,7 +540,7 @@ void KSVGCanvas::update(const TQPoint &panPoint, bool erase)
 			{
 				for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 				{
-					if(!drawables.contains(*it))
+					if(!drawables.tqcontains(*it))
 						drawables.append(*it);
 				}
 			}
@@ -607,7 +607,7 @@ void KSVGCanvas::update(float zoomFactor)
 			{
 				for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 				{
-					if(!drawables.contains(*it))
+					if(!drawables.tqcontains(*it))
 						drawables.append(*it);
 				}
 			}
@@ -666,7 +666,7 @@ void KSVGCanvas::update()
 		for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 		{
 //			kdDebug(26005) << k_funcinfo << " Checking: " << *it << endl;
-			if(!drawables.contains(*it))
+			if(!drawables.tqcontains(*it))
 			{
 //				kdDebug(26005) << k_funcinfo << " Yes, appending to update list!" << endl;
 				drawables.append(*it);
@@ -724,7 +724,7 @@ CanvasItemList KSVGCanvas::collisions(const TQPoint &p, bool exact) const
 	{
 		for(CanvasItemList::Iterator it = list.begin(); it != list.end(); ++it)
 		{
-			if((*it)->fillContains(p) || (*it)->strokeContains(p) || (*it)->bbox().contains(p))
+			if((*it)->fillContains(p) || (*it)->strokeContains(p) || (*it)->bbox().tqcontains(p))
 				result.append(*it);
 		}
 
@@ -740,20 +740,20 @@ void KSVGCanvas::blit(const TQRect &rect, bool direct)
 	{
 		// clamp to viewport
 		int x0 = rect.x();
-		x0 = QMAX(x0, 0);
-		x0 = QMIN(x0, int(m_width - 1));
+		x0 = TQMAX(x0, 0);
+		x0 = TQMIN(x0, int(m_width - 1));
 
 		int y0 = rect.y();
-		y0 = QMAX(y0, 0);
-		y0 = QMIN(y0, int(m_height - 1));
+		y0 = TQMAX(y0, 0);
+		y0 = TQMIN(y0, int(m_height - 1));
 
 		int x1 = rect.x() + rect.width() + 1;
-		x1 = QMAX(x1, 0);
-		x1 = QMIN(x1, int(m_width));
+		x1 = TQMAX(x1, 0);
+		x1 = TQMIN(x1, int(m_width));
 
 		int y1 = rect.y() + rect.height() + 1;
-		y1 = QMAX(y1, 0);
-		y1 = QMIN(y1, int(m_height));
+		y1 = TQMAX(y1, 0);
+		y1 = TQMIN(y1, int(m_height));
 
 		xlib_draw_rgb_image(direct ? m_directWindow->handle() : m_drawWindow->handle(), m_gc, x0, y0, x1 - x0, y1 - y0, XLIB_RGB_DITHER_NONE, m_buffer + (m_width * y0 + x0) * m_nrChannels, m_width * m_nrChannels);
 	}
@@ -766,7 +766,7 @@ void KSVGCanvas::blit()
 
 void KSVGCanvas::ChunkManager::addChunk(CanvasChunk *chunk)
 {
-	TQString key = TQString("%1 %2").arg(chunk->x()).arg(chunk->y());
+	TQString key = TQString("%1 %2").tqarg(chunk->x()).tqarg(chunk->y());
 //	kdDebug(26005) << k_funcinfo << "Adding chunk : " << chunk << endl;
 	m_chunks.insert(key, chunk);
 }
@@ -774,7 +774,7 @@ void KSVGCanvas::ChunkManager::addChunk(CanvasChunk *chunk)
 CanvasChunk *KSVGCanvas::ChunkManager::getChunk(short x, short y) const
 {
 //	kdDebug(26005) << k_funcinfo << "getting chunk from : " << x << ", " << y << endl;
-	TQString key = TQString("%1 %2").arg(x).arg(y);
+	TQString key = TQString("%1 %2").tqarg(x).tqarg(y);
 	return m_chunks[key];
 }
 

@@ -52,9 +52,10 @@ class kpMainWindow;
 class kpSelection;
 
 
-class kpDocument : public QObject
+class kpDocument : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
     kpDocument (int w, int h, kpMainWindow *mainWindow);
@@ -77,7 +78,7 @@ public:
         kpDocumentMetaInfo *metaInfo = 0);
 
     static TQPixmap getPixmapFromFile (const KURL &url, bool suppressDoesntExistDialog,
-                                      TQWidget *parent,
+                                      TQWidget *tqparent,
                                       kpDocumentSaveOptions *saveOptions = 0,
                                       kpDocumentMetaInfo *metaInfo = 0);
     // TODO: fix: open*() should only be called once.
@@ -87,13 +88,13 @@ public:
 
     static bool lossyPromptContinue (const TQPixmap &pixmap,
                                      const kpDocumentSaveOptions &saveOptions,
-                                     TQWidget *parent);
+                                     TQWidget *tqparent);
     static bool savePixmapToDevice (const TQPixmap &pixmap,
                                     TQIODevice *device,
                                     const kpDocumentSaveOptions &saveOptions,
                                     const kpDocumentMetaInfo &metaInfo,
                                     bool lossyPrompt,
-                                    TQWidget *parent,
+                                    TQWidget *tqparent,
                                     bool *userCancelled = 0);
     static bool savePixmapToFile (const TQPixmap &pixmap,
                                   const KURL &url,
@@ -101,7 +102,7 @@ public:
                                   const kpDocumentMetaInfo &metaInfo,
                                   bool overwritePrompt,
                                   bool lossyPrompt,
-                                  TQWidget *parent);
+                                  TQWidget *tqparent);
     bool save (bool overwritePrompt = false, bool lossyPrompt = false);
     bool saveAs (const KURL &url,
                  const kpDocumentSaveOptions &saveOptions,
@@ -188,7 +189,7 @@ public:
     void setSelection (const kpSelection &selection);
 
     // TODO: this always returns opaque pixmap - need transparent ver
-    TQPixmap getSelectedPixmap (const TQBitmap &maskBitmap = TQBitmap ()) const;
+    TQPixmap getSelectedPixmap (const TQBitmap &tqmaskBitmap = TQBitmap ()) const;
 
     bool selectionPullFromDocument (const kpColor &backgroundColor);
     bool selectionDelete ();

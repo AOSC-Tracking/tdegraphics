@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-// include files for Qt
+// include files for TQt
 #include <tqdir.h>
 #include <tqfileinfo.h>
 #include <tqwidget.h>
@@ -31,7 +31,7 @@
 #include "kcoloreditview.h"
 #include "resource.h"
 
-KColorEditDoc::KColorEditDoc(TQWidget *parent, const char *name) : TQObject(parent, name),
+KColorEditDoc::KColorEditDoc(TQWidget *tqparent, const char *name) : TQObject(tqparent, name),
 	m_palette(), m_paletteHistory(&m_palette, 0) {
 	m_pViewList = new TQPtrList<KColorEditView>();
 	m_pViewList->setAutoDelete(true);
@@ -106,10 +106,10 @@ bool KColorEditDoc::saveModified()
 
   if(m_modified)
   {
-    KColorEditApp *window=(KColorEditApp *) parent();
+    KColorEditApp *window=(KColorEditApp *) tqparent();
     int want_save = KMessageBox::warningYesNoCancel(window,
                                          i18n("The current file has been modified.\n"
-                                              "Do you want to save it?"), TQString::null, KStdGuiItem::save(), i18n("Do Not Save"));
+                                              "Do you want to save it?"), TQString(), KStdGuiItem::save(), i18n("Do Not Save"));
     switch(want_save)
     {
       case KMessageBox::Yes:
@@ -175,7 +175,7 @@ bool KColorEditDoc::openDocument(const TQString& filename) {
 		setPaletteCursorPos(m_palette.length());
 		setPaletteSelection(0, 0);
 		slotRedrawAllViews(0, true);
-        KColorEditApp *window=(KColorEditApp*)parent();
+        KColorEditApp *window=(KColorEditApp*)tqparent();
         window->setCaption(m_title);
 	}
 	return true;
@@ -235,7 +235,7 @@ void KColorEditDoc::copyToClipboard(Palette& palette) {
 	TQString text;
 	TQTextOStream stream(&text);
 	palette.save(stream, 0, false);
-	KApplication::clipboard()->setText(text);
+	KApplication::tqclipboard()->setText(text);
 
     emit clipboardChanged();
 }
@@ -260,7 +260,7 @@ void KColorEditDoc::paste() {
 	Palette palettePaste;
 	TQString text;
 	TQTextIStream stream(&text);
-	text = KApplication::clipboard()->text();
+	text = KApplication::tqclipboard()->text();
 	if(palettePaste.load( stream, false )) {
 		m_paletteHistory.paste(paletteCursorPos(), palettePaste);
 		setPaletteSelection(paletteCursorPos(), paletteCursorPos() +
@@ -281,11 +281,11 @@ void KColorEditDoc::insert(int index, const Color& color) {
 	slotRedrawAllViews(0);
 }
 
-void KColorEditDoc::replace(int index, const Color& color) {
+void KColorEditDoc::tqreplace(int index, const Color& color) {
 	Palette paletteReplace;
 	Color* replaceColor = new Color(color);
 	paletteReplace.append(replaceColor);
-	m_paletteHistory.replace(index, paletteReplace);
+	m_paletteHistory.tqreplace(index, paletteReplace);
 	setPaletteSelection(0, 0);
 	setModified(true);
 	slotRedrawAllViews(0);

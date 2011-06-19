@@ -71,17 +71,18 @@ extern int max_dpi;
 
 
 
-class ImageCanvas: public QScrollView
+class ImageCanvas: public TQScrollView
 {
     Q_OBJECT
+  TQ_OBJECT
     Q_ENUMS( PopupIDs )
-    Q_PROPERTY( int brightness READ getBrightness WRITE setBrightness )
-    Q_PROPERTY( int contrast READ getContrast WRITE setContrast )
-    Q_PROPERTY( int gamma READ getGamma WRITE setGamma )
-    Q_PROPERTY( int scale_factor READ getScaleFactor WRITE setScaleFactor )
+    TQ_PROPERTY( int brightness READ getBrightness WRITE setBrightness )
+    TQ_PROPERTY( int contrast READ getContrast WRITE setContrast )
+    TQ_PROPERTY( int gamma READ getGamma WRITE setGamma )
+    TQ_PROPERTY( int scale_factor READ getScaleFactor WRITE setScaleFactor )
 
 public:
-    ImageCanvas( TQWidget *parent = 0,
+    ImageCanvas( TQWidget *tqparent = 0,
                  const TQImage *start_image = 0,
                  const char *name = 0);
     ~ImageCanvas( );
@@ -120,9 +121,9 @@ public slots:
     void toggleAspect( int aspect_in_mind )
         {
             maintain_aspect = aspect_in_mind;
-            repaint();
+            tqrepaint();
         }
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
     void newImage( TQImage* );
     void newImageHoldZoom( TQImage* );
     void deleteView( TQImage *);
@@ -191,8 +192,8 @@ private:
     KPixmapIO	 pixIO;
 #endif
 
-    QWMatrix	 scale_matrix;
-    QWMatrix	 inv_scale_matrix;
+    TQWMatrix	 scale_matrix;
+    TQWMatrix	 inv_scale_matrix;
     TQPixmap       *pmScaled;
     float	 used_yscaler;
     float	 used_xscaler;

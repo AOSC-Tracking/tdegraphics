@@ -34,11 +34,12 @@ class PMFloatEdit;
 class PMGridSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMGridSettings( TQWidget* parent, const char* name = 0 );
+   PMGridSettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

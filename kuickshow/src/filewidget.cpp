@@ -35,8 +35,8 @@
 #undef KeyPress
 #endif
 
-FileWidget::FileWidget( const KURL& url, TQWidget *parent, const char *name )
-    : KDirOperator( url, parent, name ),
+FileWidget::FileWidget( const KURL& url, TQWidget *tqparent, const char *name )
+    : KDirOperator( url, tqparent, name ),
       m_validCompletion( false ),
       m_fileFinder( 0L )
 {
@@ -99,7 +99,7 @@ void FileWidget::initActions()
 
     TQPopupMenu *pMenu = menu->popupMenu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
-    TQMenuItem *mItem = pMenu->findItem( lastItemId );
+    TQMenuItem *mItem = pMenu->tqfindItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )
         menu->insert( sep );
 
@@ -152,7 +152,7 @@ void FileWidget::activatedMenu( const KFileItem *item, const TQPoint& pos )
 void FileWidget::findCompletion( const TQString& text )
 {
     if ( text.at(0) == '/' || text.at(0) == '~' ||
-	 text.find('/') != -1 ) {
+	 text.tqfind('/') != -1 ) {
 	TQString t = m_fileFinder->completion()->makeCompletion( text );
 
 	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
@@ -179,7 +179,7 @@ void FileWidget::findCompletion( const TQString& text )
 bool FileWidget::eventFilter( TQObject *o, TQEvent *e )
 {
     if ( e->type() == TQEvent::KeyPress ) {
-	TQKeyEvent *k = static_cast<TQKeyEvent*>( e );
+	TQKeyEvent *k = TQT_TQKEYEVENT( e );
 	
 	if ( (k->state() & (ControlButton | AltButton)) == 0 ) {
 	    int key = k->key();
@@ -196,7 +196,7 @@ bool FileWidget::eventFilter( TQObject *o, TQEvent *e )
 	    }
 	
 	    const TQString& text = k->text();
-	    if ( !text.isEmpty() && text.unicode()->isPrint() ) {
+	    if ( !text.isEmpty() && text.tqunicode()->isPrint() ) {
                 k->accept();
 		
                 if ( !m_fileFinder ) {
@@ -360,7 +360,7 @@ void FileWidget::slotViewChanged()
 
 void FileWidget::slotItemsCleared()
 {
-    m_currentURL = TQString::null;
+    m_currentURL = TQString();
 }
 
 void FileWidget::slotItemDeleted( KFileItem *item )
@@ -399,7 +399,7 @@ void FileWidget::slotReturnPressed( const TQString& t )
 	setURL( url, true );
     }
 
-    else if ( text.find('/') != (int) text.length() -1 ) { // relative path
+    else if ( text.tqfind('/') != (int) text.length() -1 ) { // relative path
 	TQString dir = m_fileFinder->completion()->replacedPath( text );
 	KURL u( url(), dir );
 	setURL( u, true );
@@ -444,11 +444,11 @@ void FileWidget::slotFinishedLoading()
     else if ( !current )
 	setCurrentItem( view()->items()->getFirst() );
 
-    m_initialName = TQString::null;
+    m_initialName = TQString();
     emit finished();
 }
 
-TQSize FileWidget::sizeHint() const
+TQSize FileWidget::tqsizeHint() const
 {
   return TQSize( 300, 300 );
 }

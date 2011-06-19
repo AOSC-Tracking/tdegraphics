@@ -42,9 +42,9 @@
 
 KameraConfigDialog::KameraConfigDialog(Camera */*camera*/,
 					CameraWidget *widget,
-					TQWidget *parent,
+					TQWidget *tqparent,
 					const char *name) :
-KDialogBase(parent, name, true, TQString::null, Ok|Cancel, Ok ),
+KDialogBase(tqparent, name, true, TQString(), Ok|Cancel, Ok ),
 m_widgetRoot(widget)
 {
     TQFrame *main = makeMainWidget();
@@ -56,9 +56,9 @@ m_widgetRoot(widget)
 	appendWidget(main, widget);
 }
 
-void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
+void KameraConfigDialog::appendWidget(TQWidget *tqparent, CameraWidget *widget)
 {
-	TQWidget *newParent = parent;
+	TQWidget *newParent = tqparent;
 	
 	CameraWidgetType widget_type;
 	const char *widget_name;
@@ -74,7 +74,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 	
 	TQString whats_this = TQString::fromLocal8Bit(widget_info);	// gphoto2 doesn't seem to have any standard for i18n
 
-	// Add this widget to parent
+	// Add this widget to tqparent
 	switch(widget_type) {
 	case GP_WIDGET_WINDOW:
 		{
@@ -85,7 +85,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 	case GP_WIDGET_SECTION:
 		{
 			if (!m_tabWidget)
-				m_tabWidget = new TQTabWidget(parent);
+				m_tabWidget = new TQTabWidget(tqparent);
 			TQWidget *tab = new TQWidget(m_tabWidget);
 			// widgets are to be aligned vertically in the tab
 			TQVBoxLayout *tabLayout = new TQVBoxLayout(tab, marginHint(),
@@ -104,7 +104,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 		{
 			gp_widget_get_value(widget, &widget_value_string);
 
-			TQGrid *grid = new TQGrid(2, Horizontal, parent);
+			TQGrid *grid = new TQGrid(2,Qt::Horizontal, tqparent);
 			grid->setSpacing(spacingHint());
 			new TQLabel(TQString::fromLocal8Bit( widget_label )+":", grid);
 			TQLineEdit *lineEdit = new TQLineEdit(widget_value_string, grid);
@@ -123,13 +123,13 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 			gp_widget_get_range(widget, &widget_low, &widget_high, &widget_increment);
 			gp_widget_get_value(widget, &widget_value_float);
 	
-			TQGroupBox *groupBox = new TQVGroupBox(widget_label, parent);
+			TQGroupBox *groupBox = new TQVGroupBox(widget_label, tqparent);
 			TQSlider *slider = new TQSlider(
 				( int )widget_low,
 				( int )widget_high,
 				( int )widget_increment,
 				( int )widget_value_float,
-				TQSlider::Horizontal,
+				Qt::Horizontal,
 				groupBox );
 			m_wmap.insert(widget, slider);
 		
@@ -142,7 +142,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 		{
 			gp_widget_get_value(widget, &widget_value_int);
 		
-			TQCheckBox *checkBox = new TQCheckBox(widget_label, parent);
+			TQCheckBox *checkBox = new TQCheckBox(widget_label, tqparent);
 			checkBox->setChecked(widget_value_int);
 			m_wmap.insert(widget, checkBox);
 
@@ -160,9 +160,9 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 			// for less than 5 options, align them horizontally
 			TQButtonGroup *buttonGroup;
 			if (count > 4)
-				buttonGroup = new TQVButtonGroup(widget_label, parent);
+				buttonGroup = new TQVButtonGroup(widget_label, tqparent);
 			else
-				buttonGroup = new TQHButtonGroup(widget_label, parent);
+				buttonGroup = new TQHButtonGroup(widget_label, tqparent);
 			
 			for(int i = 0; i < count; ++i) {
 				const char *widget_choice;
@@ -183,7 +183,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 		{
 			gp_widget_get_value(widget, &widget_value_string);
 	
-			TQComboBox *comboBox = new TQComboBox(FALSE, parent);
+			TQComboBox *comboBox = new TQComboBox(FALSE, tqparent);
 			comboBox->clear();
 			for(int i = 0; i < gp_widget_count_choices(widget); ++i) {
 				const char *widget_choice;
@@ -206,14 +206,14 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 			// I can't see a way of implementing this. Since there is
 			// no way of telling which button sent you a signal, we
 			// can't map to the appropriate widget->callback
-			new TQLabel(i18n("Button (not supported by KControl)"), parent);
+			new TQLabel(i18n("Button (not supported by KControl)"), tqparent);
 	
 			break;
 		}
 	case GP_WIDGET_DATE:
 		{
 			// TODO
-			new TQLabel(i18n("Date (not supported by KControl)"), parent);
+			new TQLabel(i18n("Date (not supported by KControl)"), tqparent);
 
 			break;
 		}
@@ -221,14 +221,14 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 		return;
 	}
 
-	// Append all this widgets children
+	// Append all this widgets tqchildren
 	for(int i = 0; i < gp_widget_count_children(widget); ++i) {
 		CameraWidget *widget_child;
 		gp_widget_get_child(widget, i, &widget_child);
 		appendWidget(newParent, widget_child);
 	}
 	
-	// Things that must be done after all children were added
+	// Things that must be done after all tqchildren were added
 /*
 	switch (widget_type) {
 	case GP_WIDGET_SECTION:
@@ -309,7 +309,7 @@ void KameraConfigDialog::updateWidgetValue(CameraWidget *widget)
 
 void KameraConfigDialog::slotOk()
 {
-	// Copy Qt widget values into CameraWidget hierarchy
+	// Copy TQt widget values into CameraWidget hierarchy
 	updateWidgetValue(m_widgetRoot);
 
 	// 'ok' dialog

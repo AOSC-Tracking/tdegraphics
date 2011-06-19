@@ -25,19 +25,20 @@
 
 class TQTimer;
 
-class SizeTip : public QLabel
+class SizeTip : public TQLabel
 {
   public:
-    SizeTip( TQWidget *parent, const char *name=0 );
+    SizeTip( TQWidget *tqparent, const char *name=0 );
     ~SizeTip() {}
 
   void setTip( const TQRect &rect );
   void positionTip( const TQRect &rect );
 };
 
-class RegionGrabber : public QWidget
+class RegionGrabber : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     RegionGrabber();

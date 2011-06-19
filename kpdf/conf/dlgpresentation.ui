@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>DlgPresentation</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>DlgPresentation</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -30,15 +30,15 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <grid>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QSpinBox" row="0" column="1">
+                        <widget class="TQSpinBox" row="0" column="1">
                             <property name="name">
                                 <cstring>kcfg_SlidesAdvanceTime</cstring>
                             </property>
@@ -52,7 +52,7 @@
                                 <number>5</number>
                             </property>
                         </widget>
-                        <widget class="QCheckBox" row="0" column="0">
+                        <widget class="TQCheckBox" row="0" column="0">
                             <property name="name">
                                 <cstring>kcfg_SlidesAdvance</cstring>
                             </property>
@@ -60,7 +60,7 @@
                                 <string>Advance every:</string>
                             </property>
                         </widget>
-                        <widget class="QCheckBox" row="2" column="0">
+                        <widget class="TQCheckBox" row="2" column="0">
                             <property name="name">
                                 <cstring>kcfg_SlidesLoop</cstring>
                             </property>
@@ -72,7 +72,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -83,15 +83,15 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QComboBox" row="1" column="1">
+                <widget class="TQComboBox" row="1" column="1">
                     <item>
                         <property name="text">
-                            <string>Blinds Vertical</string>
+                            <string>BlindsQt::Vertical</string>
                         </property>
                     </item>
                     <item>
                         <property name="text">
-                            <string>Blinds Horizontal</string>
+                            <string>BlindsQt::Horizontal</string>
                         </property>
                     </item>
                     <item>
@@ -136,22 +136,22 @@
                     </item>
                     <item>
                         <property name="text">
-                            <string>Split Horizontal In</string>
+                            <string>SplitQt::Horizontal In</string>
                         </property>
                     </item>
                     <item>
                         <property name="text">
-                            <string>Split Horizontal Out</string>
+                            <string>SplitQt::Horizontal Out</string>
                         </property>
                     </item>
                     <item>
                         <property name="text">
-                            <string>Split Vertical In</string>
+                            <string>SplitQt::Vertical In</string>
                         </property>
                     </item>
                     <item>
                         <property name="text">
-                            <string>Split Vertical Out</string>
+                            <string>SplitQt::Vertical Out</string>
                         </property>
                     </item>
                     <item>
@@ -178,7 +178,7 @@
                         <cstring>kcfg_SlidesTransition</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -186,7 +186,7 @@
                         <string>Default transition:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="0">
+                <widget class="TQLabel" row="2" column="0">
                     <property name="name">
                         <cstring>textLabel2</cstring>
                     </property>
@@ -194,7 +194,7 @@
                         <string>Mouse cursor:</string>
                     </property>
                 </widget>
-                <widget class="QComboBox" row="2" column="1">
+                <widget class="TQComboBox" row="2" column="1">
                     <item>
                         <property name="text">
                             <string>Hidden After Delay</string>
@@ -214,7 +214,7 @@
                         <cstring>kcfg_SlidesCursor</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>textLabel3</cstring>
                     </property>
@@ -230,7 +230,7 @@
                         <string></string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="2">
+                <widget class="TQCheckBox" row="4" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>kcfg_SlidesShowSummary</cstring>
                     </property>
@@ -238,7 +238,7 @@
                         <string>Show s&amp;ummary page</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="2">
+                <widget class="TQCheckBox" row="3" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>kcfg_SlidesShowProgress</cstring>
                     </property>
@@ -258,7 +258,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>1</height>
@@ -275,7 +275,7 @@
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kcolorbutton.h</includehint>
 </includehints>

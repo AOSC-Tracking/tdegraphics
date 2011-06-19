@@ -28,9 +28,10 @@ class KURLCompletion;
 class FileFinder : public KLineEdit
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    FileFinder( TQWidget *parent=0, const char *name=0 );
+    FileFinder( TQWidget *tqparent=0, const char *name=0 );
     ~FileFinder();
 
     KURLCompletion *completion() {

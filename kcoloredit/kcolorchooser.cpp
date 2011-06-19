@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
   
   KColorDialog dlg;
 
-  dlg.setColor(Qt::blue); // Just a color
+  dlg.setColor(TQt::blue); // Just a color
 
   app.connect(&dlg, TQT_SIGNAL(finished()), TQT_SLOT(quit()));
 
@@ -65,6 +65,6 @@ int main(int argc, char *argv[])
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   const  TQColor c = dlg.color();
   if ( args->isSet("print") && c.isValid() ) {
-      std::cout << c.name().utf8().data() << std::endl;
+      std::cout << TQString(c.name()).utf8().data() << std::endl;
   }
 }  

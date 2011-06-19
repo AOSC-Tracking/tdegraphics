@@ -43,12 +43,12 @@ kpZoomedView::kpZoomedView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        TQWidget *parent, const char *name)
+        TQWidget *tqparent, const char *name)
 
     : kpView (document, toolToolBar, viewManager,
               buddyView,
               scrollableContainer,
-              parent, name)
+              tqparent, name)
 {
     // Call to virtual function - this is why the class is sealed
     adjustToEnvironment ();

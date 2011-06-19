@@ -157,11 +157,11 @@ void PMIsoSurface::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMIsoSurface::metaObject( ) const
+PMMetaObject* PMIsoSurface::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "IsoSurface", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "IsoSurface", Base::tqmetaObject( ),
                                         createNewIsoSurface );
       // TODO
       /*
@@ -333,9 +333,9 @@ void PMIsoSurface::setAllIntersections( bool yes )
    }
 }
 
-PMDialogEditBase* PMIsoSurface::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMIsoSurface::editWidget( TQWidget* tqparent ) const
 {
-   return new PMIsoSurfaceEdit( parent );
+   return new PMIsoSurfaceEdit( tqparent );
 }
 
 void PMIsoSurface::restoreMemento( PMMemento* s )

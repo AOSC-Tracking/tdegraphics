@@ -33,15 +33,16 @@ class TQScrollBar;
  */
 class PaletteViewScrolledArea : public TQFrame {
 	Q_OBJECT
+  TQ_OBJECT
 
 public:
 	/** Constructs the widget */
 	PaletteViewScrolledArea(const int defaultCellWidth, const int defaultCellHeight,
 		const int cellSpacing, TQScrollBar* scrollBar,
 		TQScrollBar* hScrollBar, KColorEditView* view,
-		TQWidget* parent = 0, const char* name = 0);
+		TQWidget* tqparent = 0, const char* name = 0);
 	~PaletteViewScrolledArea();
-	/** Sets cells sizes and then calls repaintPalette() */
+	/** Sets cells sizes and then calls tqrepaintPalette() */
 	void redraw();
 
 public slots:
@@ -105,8 +106,8 @@ protected:
 	 *  visible area width
 	 */
 	void setCellsSizes();
-	/** repaints the palette */
-	void repaintPalette();
+	/** tqrepaints the palette */
+	void tqrepaintPalette();
 	/** @return A color index at a given position, -1 if none */
 	int colorIndex(const TQPoint& point) const;
 	/** @return A color at a given position */

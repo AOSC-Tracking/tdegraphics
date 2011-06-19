@@ -186,11 +186,11 @@ void PMMaterialMap::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMMaterialMap::metaObject( ) const
+PMMetaObject* PMMaterialMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "MaterialMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "MaterialMap", Base::tqmetaObject( ),
                                         createNewMaterialMap );
 
       PMBitmapTypeProperty* bp = new PMBitmapTypeProperty(
@@ -296,9 +296,9 @@ void PMMaterialMap::enableOnce( bool c )
    }
 }
 
-PMDialogEditBase* PMMaterialMap::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMMaterialMap::editWidget( TQWidget* tqparent ) const
 {
-   return new PMMaterialMapEdit( parent );
+   return new PMMaterialMapEdit( tqparent );
 }
 
 void PMMaterialMap::restoreMemento( PMMemento* s )

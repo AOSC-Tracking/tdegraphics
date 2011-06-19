@@ -46,7 +46,7 @@
 kpToolText::kpToolText (kpMainWindow *mainWindow)
     : kpToolSelection (Text,
                        i18n ("Text"), i18n ("Writes text"),
-                       Qt::Key_T,
+                       TQt::Key_T,
                        mainWindow, "tool_text"),
       m_isIMStarted (false),
       m_IMStartCursorRow (0),
@@ -193,7 +193,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
 
 
 #define IS_SPACE(c) ((c).isSpace () || (c).isNull ())
-    if (e->key () == Qt::Key_Enter || e->key () == Qt::Key_Return)
+    if (e->key () == TQt::Key_Enter || e->key () == TQt::Key_Return)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tenter pressed" << endl;
@@ -214,7 +214,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
 
         e->accept ();
     }
-    else if (e->key () == Qt::Key_Backspace)
+    else if (e->key () == TQt::Key_Backspace)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tbackspace pressed" << endl;
@@ -235,7 +235,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
 
         e->accept ();
     }
-    else if (e->key () == Qt::Key_Delete)
+    else if (e->key () == TQt::Key_Delete)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tdelete pressed" << endl;
@@ -256,7 +256,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
 
         e->accept ();
     }
-    else if (e->key () == Qt::Key_Up)
+    else if (e->key () == TQt::Key_Up)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tup pressed" << endl;
@@ -268,13 +268,13 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
         if (cursorRow > 0)
         {
             cursorRow--;
-            cursorCol = QMIN (cursorCol, (int) textLines [cursorRow].length ());
+            cursorCol = TQMIN (cursorCol, (int) textLines [cursorRow].length ());
             viewManager ()->setTextCursorPosition (cursorRow, cursorCol);
         }
 
         e->accept ();
     }
-    else if (e->key () == Qt::Key_Down)
+    else if (e->key () == TQt::Key_Down)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tdown pressed" << endl;
@@ -286,13 +286,13 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
         if (cursorRow < (int) textLines.size () - 1)
         {
             cursorRow++;
-            cursorCol = QMIN (cursorCol, (int) textLines [cursorRow].length ());
+            cursorCol = TQMIN (cursorCol, (int) textLines [cursorRow].length ());
             viewManager ()->setTextCursorPosition (cursorRow, cursorCol);
         }
 
         e->accept ();
     }
-    else if (e->key () == Qt::Key_Left)
+    else if (e->key () == TQt::Key_Left)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tleft pressed" << endl;
@@ -318,7 +318,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
         if (hasBegunShape ())
             endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
-        if ((e->state () & Qt::ControlButton) == 0)
+        if ((e->state () & TQt::ControlButton) == 0)
         {
         #if DEBUG_KP_TOOL_TEXT
             kdDebug () << "\tmove single char" << endl;
@@ -367,7 +367,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
         e->accept ();
 
     }
-    else if (e->key () == Qt::Key_Right)
+    else if (e->key () == TQt::Key_Right)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tright pressed" << endl;
@@ -393,7 +393,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
         if (hasBegunShape ())
             endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
-        if ((e->state () & Qt::ControlButton) == 0)
+        if ((e->state () & TQt::ControlButton) == 0)
         {
         #if DEBUG_KP_TOOL_TEXT
             kdDebug () << "\tmove single char" << endl;
@@ -438,7 +438,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
 
         e->accept ();
     }
-    else if (e->key () == Qt::Key_Home)
+    else if (e->key () == TQt::Key_Home)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\thome pressed" << endl;
@@ -447,7 +447,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
         if (hasBegunShape ())
             endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
-        if (e->state () & Qt::ControlButton)
+        if (e->state () & TQt::ControlButton)
             cursorRow = 0;
 
         cursorCol = 0;
@@ -456,7 +456,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
 
         e->accept ();
     }
-    else if (e->key () == Qt::Key_End)
+    else if (e->key () == TQt::Key_End)
     {
     #if DEBUG_KP_TOOL_TEXT
         kdDebug () << "\tend pressed" << endl;
@@ -465,7 +465,7 @@ void kpToolText::keyPressEvent (TQKeyEvent *e)
         if (hasBegunShape ())
             endShape (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
 
-        if (e->state () & Qt::ControlButton)
+        if (e->state () & TQt::ControlButton)
             cursorRow = textLines.size () - 1;
 
         cursorCol = textLines [cursorRow].length ();
@@ -545,7 +545,7 @@ void kpToolText::imStartEvent (TQIMEvent *e)
 
     m_IMStartCursorRow = viewManager ()->textCursorRow ();
     m_IMStartCursorCol = viewManager ()->textCursorCol ();
-    m_IMPreeditStr = TQString::null;
+    m_IMPreeditStr = TQString();
 }
 
 void kpToolText::imComposeEvent (TQIMEvent *e)
@@ -651,7 +651,7 @@ void kpToolText::imEndEvent (TQIMEvent *e)
                 m_deleteCommand->addDelete ();
         }
     }
-    m_IMPreeditStr = TQString::null;
+    m_IMPreeditStr = TQString();
 
     // commit string
     TQString inputStr = e->text();
@@ -1056,7 +1056,7 @@ void kpToolTextInsertCommand::execute ()
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
     TQString text = m_newText;
-    m_newText = TQString::null;
+    m_newText = TQString();
     addText (text);
 }
 
@@ -1242,7 +1242,7 @@ void kpToolTextBackspaceCommand::execute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    m_deletedText = TQString::null;
+    m_deletedText = TQString();
     int oldNumBackspaces = m_numBackspaces;
     m_numBackspaces = 0;
 
@@ -1279,7 +1279,7 @@ void kpToolTextBackspaceCommand::unexecute ()
         }
     }
 
-    m_deletedText = TQString::null;
+    m_deletedText = TQString();
 
     selection ()->setTextLines (textLines);
 
@@ -1350,7 +1350,7 @@ void kpToolTextDeleteCommand::execute ()
 {
     viewManager ()->setTextCursorPosition (m_row, m_col);
 
-    m_deletedText = TQString::null;
+    m_deletedText = TQString();
     int oldNumDeletes = m_numDeletes;
     m_numDeletes = 0;
 
@@ -1383,7 +1383,7 @@ void kpToolTextDeleteCommand::unexecute ()
         }
     }
 
-    m_deletedText = TQString::null;
+    m_deletedText = TQString();
 
     selection ()->setTextLines (textLines);
 

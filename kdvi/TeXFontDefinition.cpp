@@ -31,7 +31,7 @@ extern const int MFResolutions[];
 // #define DEBUG_FONT
 
 
-TeXFontDefinition::TeXFontDefinition(TQString nfontname, double _displayResolution_in_dpi, Q_UINT32 chk, Q_INT32 _scaled_size_in_DVI_units,
+TeXFontDefinition::TeXFontDefinition(TQString nfontname, double _displayResolution_in_dpi, TQ_UINT32 chk, TQ_INT32 _scaled_size_in_DVI_units,
 	   class fontPool *pool, double _enlargement)
 {
 #ifdef DEBUG_FONT
@@ -46,7 +46,7 @@ TeXFontDefinition::TeXFontDefinition(TQString nfontname, double _displayResoluti
   checksum                 = chk;
   flags                    = TeXFontDefinition::FONT_IN_USE;
   file                     = 0; 
-  filename                 = TQString::null;
+  filename                 = TQString();
   scaled_size_in_DVI_units = _scaled_size_in_DVI_units;
   
   macrotable               = 0;
@@ -93,8 +93,8 @@ void TeXFontDefinition::fontNameReceiver(const TQString& fname)
   flags |= TeXFontDefinition::FONT_LOADED;
   filename = fname;
 #ifdef HAVE_FREETYPE
-  fullFontName = TQString::null;
-  fullEncodingName = TQString::null;
+  fullFontName = TQString();
+  fullEncodingName = TQString();
 #endif
 
   file = fopen(TQFile::encodeName(filename), "r");
@@ -105,7 +105,7 @@ void TeXFontDefinition::fontNameReceiver(const TQString& fname)
     TQString filename_test(font_pool->getExtraSearchPath() + "/" + filename);
     file = fopen( TQFile::encodeName(filename_test), "r");
     if (file == 0) {
-      kdError(4300) << i18n("Cannot find font %1, file %2.").arg(fontname).arg(filename) << endl;
+      kdError(4300) << i18n("Cannot find font %1, file %2.").tqarg(fontname).tqarg(filename) << endl;
       return;
     } else
       filename = filename_test;
@@ -121,7 +121,7 @@ void TeXFontDefinition::fontNameReceiver(const TQString& fname)
       font = new TeXFont_PK(this);
       set_char_p = &dviRenderer::set_char;
       if ((checksum != 0) && (checksum != font->checksum)) 
-	kdWarning(4300) << i18n("Checksum mismatch for font file %1").arg(filename) << endl;
+	kdWarning(4300) << i18n("Checksum mismatch for font file %1").tqarg(filename) << endl;
       fontTypeName = "TeX PK";
       return;
     }
@@ -169,7 +169,7 @@ void TeXFontDefinition::fontNameReceiver(const TQString& fname)
 #else
   // If we don't have the FreeType library, we should never have
   // reached this point. Complain, and leave this font blank
-  kdError(4300) << i18n("Cannot recognize format for font file %1").arg(filename) << endl;
+  kdError(4300) << i18n("Cannot recognize format for font file %1").tqarg(filename) << endl;
 #endif
 }
 
@@ -195,7 +195,7 @@ void TeXFontDefinition::reset()
       vf_table.clear();
   }
   
-  filename   = TQString::null;
+  filename   = TQString();
   flags      = TeXFontDefinition::FONT_IN_USE;
   set_char_p = &dviRenderer::set_empty_char;
 }

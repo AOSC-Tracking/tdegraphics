@@ -50,7 +50,7 @@ class LibartCanvas : public KSVGCanvas
 public:
 	LibartCanvas(unsigned int width, unsigned int height);
 
-	void drawSVP(_ArtSVP *svp, art_u32 color, TQByteArray mask, TQRect screenBBox);
+	void drawSVP(_ArtSVP *svp, art_u32 color, TQByteArray tqmask, TQRect screenBBox);
 	void drawImage(TQImage image, SVGStylableImpl *style, const SVGMatrixImpl *matrix, const KSVGPolygon& clippingPolygon);
 
 	virtual T2P::BezierPath *toBezierPath(CanvasItem *item) const;

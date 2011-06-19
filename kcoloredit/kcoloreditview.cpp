@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-// include files for Qt
+// include files for TQt
 #include <tqpainter.h>
 #include <tqlayout.h>
 #include <tqpushbutton.h>
@@ -35,7 +35,7 @@
 #include "kcoloredit.h"
 #include "palette.h"
 
-KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(parent, name) {
+KColorEditView::KColorEditView(TQWidget *tqparent, const char *name) : TQSplitter(tqparent, name) {
 	colorSelector = new ColorSelector(this);
 	colorSelector->slotSetColor(
 		Color( RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, "" ));
@@ -43,7 +43,7 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	TQVBoxLayout* paletteLayout = new TQVBoxLayout(paletteViewArea);
 	paletteView = new PaletteView(16, 16, 2, this, paletteViewArea);
 	paletteLayout->addWidget(paletteView, 10);
-	TQHBoxLayout* layout = new TQHBoxLayout();
+	TQHBoxLayout* tqlayout = new TQHBoxLayout();
 	TQVBoxLayout* addColorLayout = new TQVBoxLayout(4);
 	addColorLayout->setMargin(8);
 	TQHBoxLayout* buttonsLayout = new TQHBoxLayout(4);
@@ -70,7 +70,7 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	//	paletteView, TQT_SLOT( slotCursorFollowsChosenColor(bool) ));
 	//cursorFollowsChosenColor->toggle();
 	paletteView->slotCursorFollowsChosenColor(true);
-	layout->addLayout(addColorLayout, 0);
+	tqlayout->addLayout(addColorLayout, 0);
 	TQVGroupBox* colorAtCursorFrame = new TQVGroupBox(i18n("Color at Cursor"), paletteViewArea);
 	TQWidget* colorAtCursorFrameArea = new TQWidget(colorAtCursorFrame);
 	TQVBoxLayout* colorAtCursorLayout = new TQVBoxLayout(colorAtCursorFrameArea, 4);
@@ -127,10 +127,10 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	colorAtCursorRgbStringLayout->addWidget(colorAtCursorRgbStringValueLabel);
 	colorAtCursorRgbStringLayout->addStretch();
 	colorAtCursorLayout->addLayout(colorAtCursorRgbStringLayout);
-	layout->addWidget(colorAtCursorFrame, 10);
-	layout->addSpacing(8);
+	tqlayout->addWidget(colorAtCursorFrame, 10);
+	tqlayout->addSpacing(8);
 	paletteLayout->addSpacing(4);
-	paletteLayout->addLayout(layout);
+	paletteLayout->addLayout(tqlayout);
 	paletteLayout->addSpacing(4);
 	inColorNameChanging = false;
 	doNotUpdateColorLabels = false;
@@ -145,7 +145,7 @@ void KColorEditView::setColorAtCursorComponentValueLabelSizes(TQLabel* const lab
 }
 
 KColorEditDoc *KColorEditView::document() const {
-  KColorEditApp *theApp=(KColorEditApp *) parentWidget();
+  KColorEditApp *theApp=(KColorEditApp *) tqparentWidget();
 
   return theApp->document();
 }
@@ -234,7 +234,7 @@ void KColorEditView::slotAddColor() {
 
         case REPLACE_COLOR:
             if(index < palette->length())
-                document()->replace(index, color);
+                document()->tqreplace(index, color);
             else
                 document()->insert(index, color);
             break;
@@ -274,7 +274,7 @@ void KColorEditView::slotSetColorName(const TQString& name) {
 				palette->color(cursorPos)->component(Color::BLUE_INDEX),
 				name);
 			doNotUpdateColorLabels = true;
-			document()->replace(cursorPos, newColor);
+			document()->tqreplace(cursorPos, newColor);
 			doNotUpdateColorLabels = false;
 		}
 	}

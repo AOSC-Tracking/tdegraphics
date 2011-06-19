@@ -47,14 +47,15 @@ protected:
 };
 
 
-class MrmlView : public QScrollView
+class MrmlView : public TQScrollView
 {
     friend class MrmlViewItem;
 
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    MrmlView( TQWidget *parent = 0L, const char *name = 0L );
+    MrmlView( TQWidget *tqparent = 0L, const char *name = 0L );
     ~MrmlView();
 
     MrmlViewItem * addItem( const KURL& url, const KURL& thumbURL,
@@ -63,7 +64,7 @@ public:
                             double similarity );
 
 
-    void addRelevanceToQuery( TQDomDocument&, TQDomElement& parent );
+    void addRelevanceToQuery( TQDomDocument&, TQDomElement& tqparent );
 
     void clear();
 
@@ -100,9 +101,10 @@ private:
 };
 
 
-class MrmlViewItem : public QFrame
+class MrmlViewItem : public TQFrame
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum Relevance
@@ -118,13 +120,13 @@ public:
 
     void setPixmap( const TQPixmap& pixmap );
 
-    void createRelevanceElement( TQDomDocument& document, TQDomElement& parent );
+    void createRelevanceElement( TQDomDocument& document, TQDomElement& tqparent );
 
     double similarity() const { return m_similarity; }
 
     void setSimilarity( double value );
 
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
 
     const KURL& url() const { return m_url; }
     const KURL& thumbURL() const { return m_thumbURL; }
@@ -147,7 +149,7 @@ private:
     MrmlView * view() const { return m_view; }
 
     inline int pixmapX() const {
-        return QMAX( margin, (width() - m_pixmap.width()) / 2);
+        return TQMAX( margin, (width() - m_pixmap.width()) / 2);
     }
     inline int pixmapY() const {
         return m_combo->y() - similarityHeight - m_pixmap.height() - margin;

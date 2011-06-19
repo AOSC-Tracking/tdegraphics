@@ -41,7 +41,7 @@ public:
    /**
     * Default constructor
     */
-   PMTreeViewWidget( PMPart* pare, TQWidget* parent, const char* name = 0 );
+   PMTreeViewWidget( PMPart* pare, TQWidget* tqparent, const char* name = 0 );
    
    /** */
    virtual TQString viewType( ) const { return TQString( "treeview" ); }
@@ -52,16 +52,17 @@ public:
 /**
  * Widget that displays the scene as tree view
  */
-class PMTreeView : public QListView
+class PMTreeView : public TQListView
 {
    Q_OBJECT
+  TQ_OBJECT
    friend class PMTreeViewItem;
 public:
    /**
-    * Creates a PMTreeView with parent and name that displays the
+    * Creates a PMTreeView with tqparent and name that displays the
     * document doc
     */
-   PMTreeView( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
+   PMTreeView( PMPart* part, TQWidget* tqparent = 0, const char* name = 0 );
    /**
     * Deletes the PMTreeView
     */
@@ -173,9 +174,9 @@ public:
    virtual TQString viewType( ) const { return TQString( "treeview" ); }
    virtual TQString description( ) const;
    virtual TQString iconName( ) const { return TQString( "pmtreeview" ); }
-   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
+   virtual PMViewBase* newInstance( TQWidget* tqparent, PMPart* part ) const
    {
-      return new PMTreeViewWidget( part, parent );
+      return new PMTreeViewWidget( part, tqparent );
    }
 };
 

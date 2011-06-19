@@ -306,9 +306,9 @@ public:
 
   int rsearch(char const *str, int from=0) const;
 
-  int contains(char const accept[], int from=0) const;
+  int tqcontains(char const accept[], int from=0) const;
 
-  int rcontains(char const accept[], int from=0) const;
+  int rtqcontains(char const accept[], int from=0) const;
 
 protected:
   // Return the next character and increment the source pointer.
@@ -551,11 +551,11 @@ public:
   /** Searches for any of the specified characters in the accept
       string.  It returns #-1# if the none of the characters and
       be found, otherwise the position of the first match. */
-  int contains(const char accept[], const int from=0) const;
+  int tqcontains(const char accept[], const int from=0) const;
   /** Searches for any of the specified characters in the accept
       string.  It returns #-1# if the none of the characters and be
       found, otherwise the position of the last match. */
-  int rcontains(const char accept[], const int from=0) const;
+  int rtqcontains(const char accept[], const int from=0) const;
 
   /** Concatenates strings. Returns a string composed by concatenating
       the characters of strings #s1# and #s2#. */
@@ -1282,12 +1282,12 @@ GBaseString::rsearch(const char *str, const int from) const
 { return ptr?((*this)->rsearch(str,from)):(-1); }
 
 inline int
-GBaseString::contains(const char accept[], const int from) const
-{ return ptr?((*this)->contains(accept,from)):(-1); }
+GBaseString::tqcontains(const char accept[], const int from) const
+{ return ptr?((*this)->tqcontains(accept,from)):(-1); }
 
 inline int
-GBaseString::rcontains(const char accept[], const int from) const
-{ return ptr?((*this)->rcontains(accept,from)):(-1); }
+GBaseString::rtqcontains(const char accept[], const int from) const
+{ return ptr?((*this)->rtqcontains(accept,from)):(-1); }
 
 inline int
 GBaseString::cmp(const GBaseString &s2, const int len) const

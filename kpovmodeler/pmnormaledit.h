@@ -36,12 +36,13 @@ class PMFloatEdit;
 class PMNormalEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMNormalEdit with parent and name
+    * Creates a PMNormalEdit with tqparent and name
     */
-   PMNormalEdit( TQWidget* parent, const char* name = 0 );
+   PMNormalEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

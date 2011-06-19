@@ -43,10 +43,10 @@ typedef KGenericFactory<KBmpPlugin> BmpFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_bmp, BmpFactory( "kfile_bmp" ))
 
-KBmpPlugin::KBmpPlugin(TQObject *parent, const char *name,
+KBmpPlugin::KBmpPlugin(TQObject *tqparent, const char *name,
                        const TQStringList &args)
 
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(tqparent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-bmp" );
 
@@ -83,7 +83,7 @@ bool KBmpPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     if (!file.open(IO_ReadOnly))
     {
-        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()) << endl;
+        kdDebug(7034) << "Couldn't open " << TQFile::encodeName(info.path()).data() << endl;
         return false;
     }
 

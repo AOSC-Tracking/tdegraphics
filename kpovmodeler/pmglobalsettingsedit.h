@@ -39,12 +39,13 @@ class TQComboBox;
 class PMGlobalSettingsEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMGlobalSettingsEdit with parent and name
+    * Creates a PMGlobalSettingsEdit with tqparent and name
     */
-   PMGlobalSettingsEdit( TQWidget* parent, const char* name = 0 );
+   PMGlobalSettingsEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

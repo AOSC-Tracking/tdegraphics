@@ -6,11 +6,12 @@ class TQComboBox;
 class TQPushButton;
 
 
-class ViewControl : public QDialog
+class ViewControl : public TQDialog
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	ViewControl( TQWidget *parent, const char *name );
+	ViewControl( TQWidget *tqparent, const char *name );
 	TQComboBox* magComboBox;
 	TQComboBox* mediaComboBox;
 	TQComboBox* orientComboBox;

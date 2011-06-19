@@ -108,7 +108,7 @@ const ClassInfo KSVG::Window::s_classInfo = { "Window", 0, &s_hashTable, 0 };
 
 KSVG::Window::Window(KSVG::SVGDocumentImpl *p) : ObjectImp(), m_doc(p)
 {
-	winq = new WindowQObject(this);
+	winq = new WindowTQObject(this);
 }
 
 KSVG::Window::~Window()
@@ -278,7 +278,7 @@ void KSVG::Window::clear(ExecState *exec)
 {
 	kdDebug(26004) << "KSVG::Window::clear " << this << endl;
 	delete winq;
-	winq = new WindowQObject(this);;
+	winq = new WindowTQObject(this);;
 	
 	// Get rid of everything, those user vars could hold references to DOM nodes
 	deleteAllProperties(exec);
@@ -330,11 +330,11 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 		case KSVG::Window::_GetURL:
 		{
 			KURL url((const_cast<Window *>(window))->doc()->baseUrl(), args[0].toString(exec).qstring());
-			Value asyncStatus = (const_cast<Window *>(window))->doc()->ecmaEngine()->getUrl(exec, url);
+			Value asynctqStatus = (const_cast<Window *>(window))->doc()->ecmaEngine()->getUrl(exec, url);
 			Object callBackFunction = Object::dynamicCast(args[1]);
 			List callBackArgs;
 
-			callBackArgs.append(asyncStatus);
+			callBackArgs.append(asynctqStatus);
 			callBackFunction.call(exec, callBackFunction, callBackArgs);
 
 			return Undefined();
@@ -392,7 +392,7 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 		    else
 			str2 = KInputDialog::getText(i18n("Prompt"),
 				TQStyleSheet::convertFromPlainText(str),
-				TQString::null, &ok);
+				TQString(), &ok);
 		    if ( ok )
 			return String(str2);
 		    else
@@ -488,18 +488,18 @@ void ScheduledAction::execute(Window *window)
 	}
 }
 
-////////////////////// WindowQObject ////////////////////////
+////////////////////// WindowTQObject ////////////////////////
 
-WindowQObject::WindowQObject(Window *w) : parent(w)
+WindowTQObject::WindowTQObject(Window *w) : tqparent(w)
 {
 }
 
-WindowQObject::~WindowQObject()
+WindowTQObject::~WindowTQObject()
 {
-	parentDestroyed(); // reuse same code
+	tqparentDestroyed(); // reuse same code
 }
 
-void WindowQObject::parentDestroyed()
+void WindowTQObject::tqparentDestroyed()
 {
 	killTimers();
 	
@@ -513,7 +513,7 @@ void WindowQObject::parentDestroyed()
 	scheduledActions.clear();
 }
 
-int WindowQObject::installTimeout(const UString &handler, int t, bool singleShot)
+int WindowTQObject::installTimeout(const UString &handler, int t, bool singleShot)
 {
 	int id = startTimer(t);
 	ScheduledAction *action = new ScheduledAction(handler.qstring(), singleShot);
@@ -521,7 +521,7 @@ int WindowQObject::installTimeout(const UString &handler, int t, bool singleShot
 	return id;
 }
 
-int WindowQObject::installTimeout(const Value &func, List args, int t, bool singleShot)
+int WindowTQObject::installTimeout(const Value &func, List args, int t, bool singleShot)
 {
 	Object objFunc = Object::dynamicCast(func);
 	int id = startTimer(t);
@@ -529,13 +529,13 @@ int WindowQObject::installTimeout(const Value &func, List args, int t, bool sing
 	return id;
 }
 
-void WindowQObject::clearTimeout(int timerId, bool delAction)
+void WindowTQObject::clearTimeout(int timerId, bool delAction)
 {
 	killTimer(timerId);
 	
 	if(delAction)
 	{
-		TQMapIterator<int, ScheduledAction *> it = scheduledActions.find(timerId);
+		TQMapIterator<int, ScheduledAction *> it = scheduledActions.tqfind(timerId);
 		if(it != scheduledActions.end())
 		{
 			ScheduledAction *action = *it;
@@ -545,9 +545,9 @@ void WindowQObject::clearTimeout(int timerId, bool delAction)
 	}
 }
 
-void WindowQObject::timerEvent(TQTimerEvent *e)
+void WindowTQObject::timerEvent(TQTimerEvent *e)
 {
-	TQMapIterator<int, ScheduledAction *> it = scheduledActions.find(e->timerId());
+	TQMapIterator<int, ScheduledAction *> it = scheduledActions.tqfind(e->timerId());
 	if(it != scheduledActions.end())
 	{
 		ScheduledAction *action = *it;
@@ -560,8 +560,8 @@ void WindowQObject::timerEvent(TQTimerEvent *e)
 			scheduledActions.remove(it);
 		}
 		
-		if(parent->doc())
-			action->execute(parent);
+		if(tqparent->doc())
+			action->execute(tqparent);
 		
 		// It is important to test singleShot and not action->singleShot here - the
 		// action could have been deleted already if not single shot and if the
@@ -570,9 +570,9 @@ void WindowQObject::timerEvent(TQTimerEvent *e)
 			delete action;
 	}
 	else
-		kdWarning(6070) << "WindowQObject::timerEvent this=" << this << " timer " << e->timerId() << " not found (" << scheduledActions.count() << " actions in map)" << endl;
+		kdWarning(6070) << "WindowTQObject::timerEvent this=" << this << " timer " << e->timerId() << " not found (" << scheduledActions.count() << " actions in map)" << endl;
 }
 
-void WindowQObject::timeoutClose()
+void WindowTQObject::timeoutClose()
 {
 }

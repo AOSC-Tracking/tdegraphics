@@ -21,8 +21,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -58,8 +58,8 @@ static const char license[] =
 "Kreuzlingen and distribute the resulting executable without\n"
 "including the source code for KADMOS in the source distribution.\n\n"
 "As a special exception, permission is given to link this program\n"
-"with any edition of Qt, and distribute the resulting executable,\n"
-"without including the source code for Qt in the source distribution.\n";
+"with any edition of TQt, and distribute the resulting executable,\n"
+"without including the source code for TQt in the source distribution.\n";
 
 
 static KCmdLineOptions options[] =

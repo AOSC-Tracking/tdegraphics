@@ -26,8 +26,9 @@ class TQCheckBox;
 class ImageSettings : public KPrintDialogPage
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
-		ImageSettings( TQWidget * parent = 0, const char * name = 0 );
+		ImageSettings( TQWidget * tqparent = 0, const char * name = 0 );
 		~ImageSettings();
 
 		void setOptions( const TQMap<TQString, TQString> & opts );

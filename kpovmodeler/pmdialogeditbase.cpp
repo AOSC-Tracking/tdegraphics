@@ -95,8 +95,8 @@ const TQString c_boxCode = TQString(
 const TQString c_globalSettingsCode = TQString(
    "global_settings { assumed_gamma %1 }\n" );
 
-PMDialogEditBase::PMDialogEditBase( TQWidget* parent, const char* name )
-      : TQWidget( parent, name )
+PMDialogEditBase::PMDialogEditBase( TQWidget* tqparent, const char* name )
+      : TQWidget( tqparent, name )
 {
    m_pDisplayedObject = 0;
    m_pPart = 0;
@@ -318,7 +318,7 @@ void PMDialogEditBase::findTextures( PMObject*& global, PMObject*& local ) const
    global = 0;
    local = 0;
 
-   for( o = m_pDisplayedObject; o; o = o->parent( ) )
+   for( o = m_pDisplayedObject; o; o = o->tqparent( ) )
    {
       if( o->type( ) == "Material" || o->type( ) == "Interior" ||
           o->type( ) == "Texture" || o->type( ) == "Pigment" ||
@@ -390,7 +390,7 @@ void PMDialogEditBase::slotTexturePreview( )
       buffer.open( IO_WriteOnly );
       TQTextStream str( &buffer );
       PMPovray31Format format;
-      PMSerializer* dev = format.newSerializer( &buffer );
+      PMSerializer* dev = format.newSerializer( TQT_TQIODEVICE(&buffer) );
       PMRenderMode mode;
       PMObjectList neededDeclares, objectsToCheck;
       TQPtrDict<PMObject> objectsToSerialize( 101 );
@@ -408,8 +408,8 @@ void PMDialogEditBase::slotTexturePreview( )
             {
                link = rit.current( )->linkedObject( );
                if( link )
-                  if( !neededDeclares.containsRef( link ) )
-                     if( !objectsToSerialize.find( link ) )
+                  if( !neededDeclares.tqcontainsRef( link ) )
+                     if( !objectsToSerialize.tqfind( link ) )
                         neededDeclares.append( link );
             }
             objectsToSerialize.insert( it.current( ), it.current( ) );
@@ -427,14 +427,14 @@ void PMDialogEditBase::slotTexturePreview( )
          PMObject* otr = o;
 
          // find the scene
-         while( otr->parent( ) ) otr = otr->parent( );
+         while( otr->tqparent( ) ) otr = otr->tqparent( );
 
          for( otr = otr->firstChild( ); otr && ( numDeclares > 0 );
               otr = otr->nextSibling( ) )
          {
             if( otr->type( ) == "Declare" )
             {
-               if( objectsToSerialize.find( otr ) )
+               if( objectsToSerialize.tqfind( otr ) )
                {
                   dev->serialize( otr );
                   numDeclares--;
@@ -451,17 +451,17 @@ void PMDialogEditBase::slotTexturePreview( )
       str << "union {\n";
       if( s_showBox )
       {
-         str << c_boxCode.arg( numObjects );
+         str << c_boxCode.tqarg( numObjects );
          numObjects++;
       }
       if( s_showCylinder )
       {
-         str << c_cylinderCode.arg( numObjects );
+         str << c_cylinderCode.tqarg( numObjects );
          numObjects++;
       }
       if( s_showSphere )
       {
-         str << c_sphereCode.arg( numObjects );
+         str << c_sphereCode.tqarg( numObjects );
          numObjects++;
       }
 
@@ -495,18 +495,18 @@ void PMDialogEditBase::slotTexturePreview( )
       {
          c1 = PMColor( s_wallColor1 );
          c2 = PMColor( s_wallColor2 );
-         str << c_wallCode.arg( c1.serialize( true ) ).arg( c2.serialize( true ) );
+         str << c_wallCode.tqarg( c1.serialize( true ) ).tqarg( c2.serialize( true ) );
       }
       if( s_showFloor )
       {
          c1 = PMColor( s_floorColor1 );
          c2 = PMColor( s_floorColor2 );
-         str << c_floorCode.arg( c1.serialize( true ) ).arg( c2.serialize( true ) );
+         str << c_floorCode.tqarg( c1.serialize( true ) ).tqarg( c2.serialize( true ) );
       }
 
       str << c_lightCode;
       str << c_cameraCode[numObjects-1];
-      str << c_globalSettingsCode.arg( s_previewGamma );
+      str << c_globalSettingsCode.tqarg( s_previewGamma );
 
       // Set the render mode
       mode.setHeight( s_previewSize );
@@ -519,7 +519,7 @@ void PMDialogEditBase::slotTexturePreview( )
       m_pRenderFrame->setFixedSize( s_previewSize + m_pRenderFrame->frameWidth( ) * 2,
                                     s_previewSize + m_pRenderFrame->frameWidth( ) * 2 );
       m_pRenderFrame->updateGeometry( );
-      m_pTexturePreviewWidget->layout( )->activate( );
+      m_pTexturePreviewWidget->tqlayout( )->activate( );
       emit sizeChanged( );
       m_pOutputWidget->slotClear( );
       m_pRenderWidget->render( scene, mode, m_pPart->url( ) );
@@ -540,9 +540,9 @@ void PMDialogEditBase::slotPreviewFinished( int exitStatus )
       KMessageBox::error( this, i18n( "Povray exited abnormally with "
                                       "exit code %1.\n"
                                       "See the povray output for details." )
-                          .arg( exitStatus ) );
+                          .tqarg( exitStatus ) );
    }
-   else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
+   else if( m_pRenderWidget->povrayOutput( ).tqcontains( "ERROR" ) )
    {
       KMessageBox::error( this, i18n( "There were errors while rendering.\n"
                                       "See the povray output for details." ) );

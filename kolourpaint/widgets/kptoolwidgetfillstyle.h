@@ -38,9 +38,10 @@ class kpColor;
 class kpToolWidgetFillStyle : public kpToolWidgetBase
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpToolWidgetFillStyle (TQWidget *parent, const char *name);
+    kpToolWidgetFillStyle (TQWidget *tqparent, const char *name);
     virtual ~kpToolWidgetFillStyle ();
 
     enum FillStyle
@@ -58,10 +59,10 @@ private:
 public:
     FillStyle fillStyle () const;
 
-    static TQBrush maskBrushForFillStyle (FillStyle fs,
+    static TQBrush tqmaskBrushForFillStyle (FillStyle fs,
                                          const kpColor &foregroundColor,
                                          const kpColor &backgroundColor);
-    TQBrush maskBrush (const kpColor &foregroundColor,
+    TQBrush tqmaskBrush (const kpColor &foregroundColor,
                       const kpColor &backgroundColor);
 
     static TQBrush brushForFillStyle (FillStyle fs,

@@ -27,7 +27,7 @@ public:
     int getLimit() const { return m_limit; }
 
     /**
-     * @return the temporary directory or TQString::null if none available
+     * @return the temporary directory or TQString() if none available
      */
     TQString tempDir();
 

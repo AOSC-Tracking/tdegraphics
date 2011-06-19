@@ -39,8 +39,8 @@
 typedef KGenericFactory<KDviPlugin> DviFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_dvi, DviFactory("kfile_dvi"))
 
-KDviPlugin::KDviPlugin (TQObject * parent, const char * name, const TQStringList & preferredItems)
-  : KFilePlugin(parent, name, preferredItems)
+KDviPlugin::KDviPlugin (TQObject * tqparent, const char * name, const TQStringList & preferredItems)
+  : KFilePlugin(tqparent, name, preferredItems)
 {
   kdDebug(7034) << "dvi plugin" << endl;
   
@@ -62,12 +62,12 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   KFileMetaInfoGroup GeneralGroup = appendGroup(info, "General");
   TQFile f(info.path());
   TQFileInfo f_info;
-  Q_UINT16 bytes_to_read;
-  Q_UINT8 comment_length;
+  TQ_UINT16 bytes_to_read;
+  TQ_UINT8 comment_length;
   TQString comment;
-  Q_UINT16 pages;
-  Q_UINT8 buffer[270]; // buffer for reading data; no data is read with more than 270 bytes
-  Q_UINT32 ptr;
+  TQ_UINT16 pages;
+  TQ_UINT8 buffer[270]; // buffer for reading data; no data is read with more than 270 bytes
+  TQ_UINT32 ptr;
   int i; // running index
   
   // open file and try to get the comment
@@ -79,7 +79,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   }
   
   f_info.setFile(f); // create fileinfoobject
-  bytes_to_read = QMIN(f_info.size(), 270); // check, if the file size is smaller than 270 bytes
+  bytes_to_read = TQMIN(f_info.size(), 270); // check, if the file size is smaller than 270 bytes
   // (if the comment is as large as possible, we don't have to
   // read more than 270 bytes)
   

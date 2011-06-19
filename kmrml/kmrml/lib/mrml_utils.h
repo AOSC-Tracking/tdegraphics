@@ -28,7 +28,7 @@
 
 namespace KMrml
 {
-    class Util : public QObject
+    class Util : public TQObject
     {
     public:
         static Util * self();

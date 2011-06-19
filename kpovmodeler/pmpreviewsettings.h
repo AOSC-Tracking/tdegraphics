@@ -35,11 +35,12 @@ class KColorButton;
 class PMPreviewSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Default constructor
     */
-   PMPreviewSettings( TQWidget* parent, const char* name = 0 );
+   PMPreviewSettings( TQWidget* tqparent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

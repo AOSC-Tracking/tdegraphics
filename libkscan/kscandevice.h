@@ -61,11 +61,12 @@ typedef enum {
  **/
 
 
-class KScanDevice : public QObject
+class KScanDevice : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 
-    /* Hmmm - No Q_PROPS ? */
+    /* Hmmm - No TQ_PROPS ? */
 public:
     /**
      *  KScanDevice - the KDE Scanner Device
@@ -75,7 +76,7 @@ public:
      *
      */
 
-    KScanDevice( TQObject *parent = 0 );
+    KScanDevice( TQObject *tqparent = 0 );
 
     /**
      *  Destructor
@@ -147,7 +148,7 @@ public:
      *  @param TQImage *image - Pointer to a reserved image
      *  @return the state of the operation in KScanStat
      */
-    KScanStat acquire( const TQString& filename = TQString::null );
+    KScanStat acquire( const TQString& filename = TQString() );
 
     /**
      *  returns the default filename of the preview image of this scanner.
@@ -157,7 +158,7 @@ public:
 
     /**
      *  loads the last saved previewed image on this device from the default file
-     *	@return a bitmap as QImage
+     *	@return a bitmap as TQImage
      **/
     TQImage loadPreviewImage();
 
@@ -245,13 +246,13 @@ public:
      *  KScanOption. It is internally connected to the scan device, every
      *  change to the widget is automaticly considered by the scan device.
      *  @param name: Name of the SANE Option
-     *  @param parent: pointer to the parent widget
+     *  @param tqparent: pointer to the tqparent widget
      *  @param desc: pointer to the text appearing as widget text
      *  @param tooltip: tooltip text. If zero, the SANE text will be used.
      **/
-    KScanOption *getGuiElement( const TQCString& name, TQWidget *parent,
-                                const TQString& desc = TQString::null,
-                                const TQString& tooltip = TQString::null );
+    KScanOption *getGuiElement( const TQCString& name, TQWidget *tqparent,
+                                const TQString& desc = TQString(),
+                                const TQString& tooltip = TQString() );
 
     /**
      *  returns the pointer to an already created Scanoption from the
@@ -422,12 +423,12 @@ private:
     KScanStat           createNewImage( SANE_Parameters *p );
 
 // not implemented
-//   QWidget	      *entryField( TQWidget *parent, const TQString& text,
+//   TQWidget	      *entryField( TQWidget *tqparent, const TQString& text,
 //                                    const TQString& tooltip );
     KScanStat           find_options(); // help fct. to process options
     KScanStat           acquire_data( bool isPreview = false );
     TQStrList 	      scanner_avail;  // list of names of all scan dev.
-    QStrList	      option_list;    // list of names of all options
+    TQStrList	      option_list;    // list of names of all options
     TQStrList            dirtyList;     // option changes
 
     inline  TQString optionNotifyString(int) const;
@@ -437,7 +438,7 @@ private:
 
     TQSocketNotifier     *sn;
 
-    SCANSTATUS          scanStatus;
+    SCANSTATUS          scantqStatus;
 
     /* Data for the scan process */
     /* This could/should go to  a small help object */

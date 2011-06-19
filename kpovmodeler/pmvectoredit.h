@@ -32,9 +32,10 @@
 /**
  * Edit widget for @ref PMVector
  */
-class PMVectorEdit : public QWidget
+class PMVectorEdit : public TQWidget
 {
    Q_OBJECT
+  TQ_OBJECT
 public:
    /**
     * Creates an edit widget for 2D vectors.
@@ -43,7 +44,7 @@ public:
     */
    PMVectorEdit( const TQString& descriptionX,
                  const TQString& descriptionY,
-                 TQWidget* parent, const char* name = 0 );
+                 TQWidget* tqparent, const char* name = 0 );
    /**
     * Creates an edit widget for 3D vectors.
     *
@@ -51,7 +52,7 @@ public:
     */
    PMVectorEdit( const TQString& descriptionX,
                  const TQString& descriptionY, const TQString& descriptionZ,
-                 TQWidget* parent, const char* name = 0 );
+                 TQWidget* tqparent, const char* name = 0 );
    /**
     * Creates an edit widget for 4D vectors.
     *
@@ -60,7 +61,7 @@ public:
     */
    PMVectorEdit( const TQString& descriptionA, const TQString& descriptionB,
                  const TQString& descriptionC, const TQString& descriptionD,
-                 TQWidget* parent, const char* name = 0 );
+                 TQWidget* tqparent, const char* name = 0 );
 
    /**
     * Sets the displayed vector
@@ -82,7 +83,7 @@ public:
     */
    void setReadOnly( bool yes = true );
    /**
-    * Reimplemented from QWidget
+    * Reimplemented from TQWidget
     */
    virtual void setEnabled( bool yes );
 signals:

@@ -34,15 +34,15 @@
 
 
 kpResizeSignallingLabel::kpResizeSignallingLabel (const TQString &string,
-                                                  TQWidget *parent,
+                                                  TQWidget *tqparent,
                                                   const char *name)
-    : TQLabel (string, parent, name)
+    : TQLabel (string, tqparent, name)
 {
 }
 
-kpResizeSignallingLabel::kpResizeSignallingLabel (TQWidget *parent,
+kpResizeSignallingLabel::kpResizeSignallingLabel (TQWidget *tqparent,
                                                   const char *name)
-    : TQLabel (parent, name)
+    : TQLabel (tqparent, name)
 {
 }
 
@@ -51,7 +51,7 @@ kpResizeSignallingLabel::~kpResizeSignallingLabel ()
 }
 
 
-// protected virtual [base QLabel]
+// protected virtual [base TQLabel]
 void kpResizeSignallingLabel::resizeEvent (TQResizeEvent *e)
 {
 #if DEBUG_KP_RESIZE_SIGNALLING_LABEL

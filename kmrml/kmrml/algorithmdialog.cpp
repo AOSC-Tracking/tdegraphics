@@ -31,11 +31,11 @@
 
 using namespace KMrml;
 
-class ScrollView : public QScrollView
+class ScrollView : public TQScrollView
 {
 public:
-    ScrollView(TQWidget* parent = 0, const char* name = 0)
-        : TQScrollView(parent, name)
+    ScrollView(TQWidget* tqparent = 0, const char* name = 0)
+        : TQScrollView(tqparent, name)
     {
         setFrameStyle(TQFrame::NoFrame);
         m_frame = new TQFrame(viewport(), "ScrollView::m_frame");
@@ -49,8 +49,8 @@ protected:
     virtual void viewportResizeEvent(TQResizeEvent* ev)
     {
       TQScrollView::viewportResizeEvent(ev);
-      m_frame->resize( kMax(m_frame->sizeHint().width(), ev->size().width()),
-                       kMax(m_frame->sizeHint().height(), ev->size().height()));
+      m_frame->resize( kMax(m_frame->tqsizeHint().width(), ev->size().width()),
+                       kMax(m_frame->tqsizeHint().height(), ev->size().height()));
     };
 
 private:
@@ -60,8 +60,8 @@ private:
 AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
                                   const CollectionList& collections,
                                   const Collection& currentColl,
-                                  TQWidget *parent, const char *name )
-    : KDialogBase( parent, name, false, i18n("Configure Query Algorithms"),
+                                  TQWidget *tqparent, const char *name )
+    : KDialogBase( tqparent, name, false, i18n("Configure Query Algorithms"),
                    Ok | Cancel, Ok, false ),
       m_allAlgorithms( algorithms ),
       m_collections( collections )
@@ -71,7 +71,7 @@ AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
     TQVBoxLayout *mainLayout = new TQVBoxLayout( box, 0, KDialog::spacingHint(),
                                                 "mainLayout");
 
-    TQHBoxLayout *collectionLayout = new TQHBoxLayout( 0L, 0, 0, "coll layout");
+    TQHBoxLayout *collectionLayout = new TQHBoxLayout( 0L, 0, 0, "coll tqlayout");
     collectionLayout->addWidget( new TQLabel( i18n("Collection: "), box ));
 
     m_collectionCombo = new CollectionCombo( box, "collection combo" );
@@ -106,7 +106,7 @@ AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
     mainLayout->activate();
     algoHLayout->move( groupBox->x() + 10, groupBox->y() - 12 );
     
-    box->setMinimumWidth( algoHLayout->sizeHint().width() + 
+    box->setMinimumWidth( algoHLayout->tqsizeHint().width() + 
                           4 * KDialog::spacingHint() );
 }
 

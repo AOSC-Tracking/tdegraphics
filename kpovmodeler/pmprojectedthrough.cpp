@@ -49,11 +49,11 @@ TQString PMProjectedThrough::description( ) const
    return i18n( "projected through" );
 }
 
-PMMetaObject* PMProjectedThrough::metaObject( ) const
+PMMetaObject* PMProjectedThrough::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ProjectedThrough", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "ProjectedThrough", Base::tqmetaObject( ),
                                         createNewProjectedThrough );
       // no properties
    }
@@ -80,9 +80,9 @@ void PMProjectedThrough::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMProjectedThrough::editWidget( TQWidget* parent ) const
+PMDialogEditBase* PMProjectedThrough::editWidget( TQWidget* tqparent ) const
 {
-   return new PMNamedObjectEdit( parent );
+   return new PMNamedObjectEdit( tqparent );
 }
 
 void PMProjectedThrough::restoreMemento( PMMemento* s )

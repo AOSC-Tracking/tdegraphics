@@ -34,12 +34,13 @@ class PMSkySphere;
 class PMSkySphereEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMSkySphereEdit with parent and name
+    * Creates a PMSkySphereEdit with tqparent and name
     */
-   PMSkySphereEdit( TQWidget* parent, const char* name = 0 );
+   PMSkySphereEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

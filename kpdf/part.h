@@ -59,11 +59,12 @@ class BrowserExtension;
 class Part : public KParts::ReadOnlyPart, public DocumentObserver, virtual public kpdf_dcop
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
 	// Default constructor
-	Part(TQWidget* parentWidget, const char* widgetName,
-	     TQObject* parent, const char* name, const TQStringList& args);
+	Part(TQWidget* tqparentWidget, const char* widgetName,
+	     TQObject* tqparent, const char* name, const TQStringList& args);
 
 	// Destructor
 	~Part();
@@ -178,7 +179,7 @@ private:
 	KAction *m_lastPage;
 	KAction *m_historyBack;
 	KAction *m_historyNext;
-	KAction *m_find;
+	KAction *m_tqfind;
 	KAction *m_findNext;
 	KAction *m_saveAs;
 	KAction *m_printPreview;
@@ -196,6 +197,7 @@ private:
 class BrowserExtension : public KParts::BrowserExtension
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
 	BrowserExtension(Part*);

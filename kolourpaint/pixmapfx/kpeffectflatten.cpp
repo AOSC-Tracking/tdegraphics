@@ -131,9 +131,9 @@ TQColor kpEffectFlattenWidget::s_lastColor2;
 
 kpEffectFlattenWidget::kpEffectFlattenWidget (bool actOnSelection,
                                               kpMainWindow *mainWindow,
-                                              TQWidget *parent,
+                                              TQWidget *tqparent,
                                               const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
 {
     if (!s_lastColor1.isValid () || !s_lastColor2.isValid ())
     {
@@ -142,11 +142,11 @@ kpEffectFlattenWidget::kpEffectFlattenWidget (bool actOnSelection,
 
         s_lastColor1 = cfg->readColorEntry (kpSettingFlattenEffectColor1);
         if (!s_lastColor1.isValid ())
-            s_lastColor1 = Qt::red;
+            s_lastColor1 = TQt::red;
 
         s_lastColor2 = cfg->readColorEntry (kpSettingFlattenEffectColor2);
         if (!s_lastColor2.isValid ())
-            s_lastColor2 = Qt::blue;
+            s_lastColor2 = TQt::blue;
     }
 
 

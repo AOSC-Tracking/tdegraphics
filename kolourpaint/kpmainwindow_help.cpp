@@ -57,7 +57,7 @@ void kpMainWindow::setupHelpMenuActions ()
     // -- Thurston
     d->m_actionHelpTakingScreenshots = new KAction (
         i18n ("Acquiring &Screenshots"), 0,
-        this, TQT_SLOT (slotHelpTakingScreenshots ()),
+        TQT_TQOBJECT(this), TQT_SLOT (slotHelpTakingScreenshots ()),
         ac, "help_taking_screenshots");
 
 
@@ -92,7 +92,7 @@ static TQString printScreenShortcutString ()
     else
     {
         // (localised)
-        return KKey (Qt::CTRL + Qt::Key_Print).toString ();
+        return KKey (TQt::CTRL + TQt::Key_Print).toString ();
     }
 }
 
@@ -114,7 +114,7 @@ void kpMainWindow::slotHelpTakingScreenshots ()
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\tdcopApps=" << dcopApps << endl;
 #endif
-    bool isRunningKDE = (dcopApps.findIndex ("kwin") >= 0);
+    bool isRunningKDE = (dcopApps.tqfindIndex ("kwin") >= 0);
 
 #if 0
 {
@@ -188,7 +188,7 @@ void kpMainWindow::slotHelpTakingScreenshots ()
     disconnect (messageLabel, TQT_SIGNAL (linkClicked (const TQString &)),
                 messageLabel, TQT_SLOT (openLink (const TQString &)));
     connect (messageLabel, TQT_SIGNAL (linkClicked (const TQString &)),
-             this, TQT_SLOT (slotHelpTakingScreenshotsFollowLink (const TQString &)));
+             TQT_TQOBJECT(this), TQT_SLOT (slotHelpTakingScreenshotsFollowLink (const TQString &)));
 
     dlg.setMainWidget (messageLabel);
 

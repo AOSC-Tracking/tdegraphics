@@ -40,7 +40,7 @@ class PixmapRequest;
  * class stores the resulting data into 'KPDFPage's. The data will then be
  * displayed by the GUI components (pageView, thumbnailList, etc..).
  */
-class Generator : public QObject
+class Generator : public TQObject
 {
     public:
         /** virtual methods to reimplement **/

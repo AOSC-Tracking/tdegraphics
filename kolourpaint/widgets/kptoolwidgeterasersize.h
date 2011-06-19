@@ -38,9 +38,10 @@ class kpColor;
 class kpToolWidgetEraserSize : public kpToolWidgetBase
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-    kpToolWidgetEraserSize (TQWidget *parent, const char *name);
+    kpToolWidgetEraserSize (TQWidget *tqparent, const char *name);
     virtual ~kpToolWidgetEraserSize ();
 
     int eraserSize () const;

@@ -24,11 +24,12 @@
 
 class KGVMiniWidget;
 
-class MarkListItem : public QWidget
+class MarkListItem : public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    MarkListItem( TQWidget *parent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget*, int );
+    MarkListItem( TQWidget *tqparent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget*, int );
 
     bool isChecked() const;
 
@@ -51,16 +52,17 @@ private:
     bool _requested;
 };
 
-class MarkList: public QTable
+class MarkList: public TQTable
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    MarkList( TQWidget* parent = 0, const char* name = 0, KGVMiniWidget* = 0 );
+    MarkList( TQWidget* tqparent = 0, const char* name = 0, KGVMiniWidget* = 0 );
 
     TQValueList<int> markList() const;
     void insertItem( const TQString& text, int index = -1,
-                     const TQString& tip = TQString::null );
+                     const TQString& tip = TQString() );
 
 public slots:
     void select( int index );

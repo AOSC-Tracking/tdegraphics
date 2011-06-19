@@ -38,12 +38,13 @@ class TQCheckBox;
 class PMGlobalPhotonsEdit : public PMDialogEditBase
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMGlobalPhotonsEdit with parent and name
+    * Creates a PMGlobalPhotonsEdit with tqparent and name
     */
-   PMGlobalPhotonsEdit( TQWidget* parent, const char* name = 0 );
+   PMGlobalPhotonsEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -32,8 +32,8 @@
 //
 // Using KDialogBase in message box mode (gives centered action button)
 //
-InfoDialog::InfoDialog( TQWidget *parent, const char *name, bool modal )
-  :KDialogBase( i18n("Document Information"), Yes, Yes, Yes, parent,
+InfoDialog::InfoDialog( TQWidget *tqparent, const char *name, bool modal )
+  :KDialogBase( i18n("Document Information"), Yes, Yes, Yes, tqparent,
 		name, modal, true, KStdGuiItem::ok() )
 {
   TQFrame *page = makeMainWidget();
@@ -90,7 +90,7 @@ namespace {
 		    "(?:(\\+|\\-)(\\d\\d)\'?(\\d\\d)\'?)?"
 		    "\\)" );
 	if ( exp.exactMatch( dateStr ) ) {
-	    TQStringList list = exp.capturedTexts();
+	    TQStringList list = exp.tqcapturedTexts();
 	    TQStringList::iterator iter = list.begin();
 	    ++iter; // whole string!
 #undef GET

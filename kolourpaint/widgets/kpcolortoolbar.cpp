@@ -61,8 +61,8 @@
  */
 
 kpDualColorButton::kpDualColorButton (kpMainWindow *mainWindow,
-                                      TQWidget *parent, const char *name)
-    : TQFrame (parent, name, Qt::WNoAutoErase/*no flicker*/),
+                                      TQWidget *tqparent, const char *name)
+    : TQFrame (tqparent, name, TQt::WNoAutoErase/*no flicker*/),
       m_mainWindow (mainWindow),
       m_backBuffer (0)
 {
@@ -149,8 +149,8 @@ kpColor kpDualColorButton::oldBackgroundColor () const
 }
 
 
-// public virtual [base QWidget]
-TQSize kpDualColorButton::sizeHint () const
+// public virtual [base TQWidget]
+TQSize kpDualColorButton::tqsizeHint () const
 {
     return TQSize (52, 52);
 }
@@ -200,15 +200,15 @@ TQRect kpDualColorButton::backgroundRect () const
 
 // TODO: drag a colour from this widget
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDualColorButton::dragMoveEvent (TQDragMoveEvent *e)
 {
-    e->accept ((foregroundRect ().contains (e->pos ()) ||
-                backgroundRect ().contains (e->pos ())) &&
+    e->accept ((foregroundRect ().tqcontains (e->pos ()) ||
+                backgroundRect ().tqcontains (e->pos ())) &&
                KColorDrag::canDecode (e));
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDualColorButton::dropEvent (TQDropEvent *e)
 {
     TQColor col;
@@ -216,35 +216,35 @@ void kpDualColorButton::dropEvent (TQDropEvent *e)
 
     if (col.isValid ())
     {
-        if (foregroundRect ().contains (e->pos ()))
+        if (foregroundRect ().tqcontains (e->pos ()))
             setForegroundColor (kpColor (col.rgb ()));
-        else if (backgroundRect ().contains (e->pos ()))
+        else if (backgroundRect ().tqcontains (e->pos ()))
             setBackgroundColor (kpColor (col.rgb ()));
     }
 }
 
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDualColorButton::mousePressEvent (TQMouseEvent * /*e*/)
 {
     // eat right-mouse click to prevent it from getting to the toolbar
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDualColorButton::mouseDoubleClickEvent (TQMouseEvent *e)
 {
     int whichColor = -1;
 
-    if (foregroundRect ().contains (e->pos ()))
+    if (foregroundRect ().tqcontains (e->pos ()))
         whichColor = 0;
-    else if (backgroundRect ().contains (e->pos ()))
+    else if (backgroundRect ().tqcontains (e->pos ()))
         whichColor = 1;
 
     if (whichColor == 0 || whichColor == 1)
     {
-        TQColor col = Qt::black;
+        TQColor col = TQt::black;
         if (color (whichColor).isOpaque ())
-            col = color (whichColor).toQColor ();
+            col = color (whichColor).toTQColor ();
         else
         {
             // TODO: If you double-click on a transparent color and press OK, you get
@@ -257,16 +257,16 @@ void kpDualColorButton::mouseDoubleClickEvent (TQMouseEvent *e)
             //       to opaque colors.
         }
 
-        // TODO: parent
+        // TODO: tqparent
         if (KColorDialog::getColor (col/*ref*/))
             setColor (whichColor, kpColor (col.rgb ()));
     }
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpDualColorButton::mouseReleaseEvent (TQMouseEvent *e)
 {
-    if (swapPixmapRect ().contains (e->pos ()) &&
+    if (swapPixmapRect ().tqcontains (e->pos ()) &&
         m_color [0] != m_color [1])
     {
     #if DEBUG_KP_COLOR_TOOL_BAR && 1
@@ -288,7 +288,7 @@ void kpDualColorButton::mouseReleaseEvent (TQMouseEvent *e)
 }
 
 
-// protected virtual [base QFrame]
+// protected virtual [base TQFrame]
 void kpDualColorButton::drawContents (TQPainter *p)
 {
 #if DEBUG_KP_COLOR_TOOL_BAR && 1
@@ -318,14 +318,14 @@ void kpDualColorButton::drawContents (TQPainter *p)
     else
     {
         backBufferPainter.fillRect (m_backBuffer->rect (),
-                                    colorGroup ().color (TQColorGroup::Background));
+                                    tqcolorGroup ().color (TQColorGroup::Background));
     }
 
     TQPixmap swapPixmap = UserIcon ("colorbutton_swap_16x16");
     if (!isEnabled ())
     {
-        // swapPixmap has a mask after all
-        swapPixmap.fill (colorGroup ().color (TQColorGroup::Dark));
+        // swapPixmap has a tqmask after all
+        swapPixmap.fill (tqcolorGroup ().color (TQColorGroup::Dark));
     }
     backBufferPainter.drawPixmap (swapPixmapRect ().topLeft (), swapPixmap);
 
@@ -337,17 +337,17 @@ void kpDualColorButton::drawContents (TQPainter *p)
     if (isEnabled ())
     {
     #if DEBUG_KP_COLOR_TOOL_BAR && 1
-        kdDebug () << "\tbackgroundColor=" << (int *) m_color [1].toQRgb ()
+        kdDebug () << "\tbackgroundColor=" << (int *) m_color [1].toTQRgb ()
                    << endl;
     #endif
         if (m_color [1].isOpaque ())
-            backBufferPainter.fillRect (bgRectInside, m_color [1].toQColor ());
+            backBufferPainter.fillRect (bgRectInside, m_color [1].toTQColor ());
         else
             backBufferPainter.drawPixmap (bgRectInside, UserIcon ("color_transparent_26x26"));
     }
     else
-        backBufferPainter.fillRect (bgRectInside, colorGroup ().color (TQColorGroup::Button));
-    qDrawShadePanel (&backBufferPainter, bgRect, colorGroup (),
+        backBufferPainter.fillRect (bgRectInside, tqcolorGroup ().color (TQColorGroup::Button));
+    qDrawShadePanel (&backBufferPainter, bgRect, tqcolorGroup (),
                      false/*not sunken*/, 2/*lineWidth*/,
                      0/*never fill*/);
 
@@ -357,17 +357,17 @@ void kpDualColorButton::drawContents (TQPainter *p)
     if (isEnabled ())
     {
     #if DEBUG_KP_COLOR_TOOL_BAR && 1
-        kdDebug () << "\tforegroundColor=" << (int *) m_color [0].toQRgb ()
+        kdDebug () << "\tforegroundColor=" << (int *) m_color [0].toTQRgb ()
                    << endl;
     #endif
         if (m_color [0].isOpaque ())
-            backBufferPainter.fillRect (fgRectInside, m_color [0].toQColor ());
+            backBufferPainter.fillRect (fgRectInside, m_color [0].toTQColor ());
         else
             backBufferPainter.drawPixmap (fgRectInside, UserIcon ("color_transparent_26x26"));
     }
     else
-        backBufferPainter.fillRect (fgRectInside, colorGroup ().color (TQColorGroup::Button));
-    qDrawShadePanel (&backBufferPainter, fgRect, colorGroup (),
+        backBufferPainter.fillRect (fgRectInside, tqcolorGroup ().color (TQColorGroup::Button));
+    qDrawShadePanel (&backBufferPainter, fgRect, tqcolorGroup (),
                      false/*not sunken*/, 2/*lineWidth*/,
                      0/*never fill*/);
 
@@ -421,8 +421,8 @@ static TQColor add (const TQColor &a, const TQColor &b)
 
 
 //
-// make our own colors in case weird ones like "Qt::cyan"
-// (turquoise) get changed by Qt
+// make our own colors in case weird ones like "TQt::cyan"
+// (turquoise) get changed by TQt
 //
 
 // primary colors + B&W
@@ -461,10 +461,10 @@ static bool ownColorsInitialised = false;
  */
 #define rows 2
 #define cols 11
-kpColorCells::kpColorCells (TQWidget *parent,
+kpColorCells::kpColorCells (TQWidget *tqparent,
                             Qt::Orientation o,
                             const char *name)
-    : KColorCells (parent, rows, cols),
+    : KColorCells (tqparent, rows, cols),
       m_mouseButton (-1)
 {
     setName (name);
@@ -657,7 +657,7 @@ void kpColorCells::mouseReleaseEvent (TQMouseEvent *e)
 {
     m_mouseButton = -1;
 
-    Qt::ButtonState button = e->button ();
+    TQt::ButtonState button = e->button ();
 #if DEBUG_KP_COLOR_TOOL_BAR
     kdDebug () << "kpColorCells::mouseReleaseEvent(left="
                << (button & Qt::LeftButton)
@@ -729,7 +729,7 @@ void kpColorCells::slotColorDoubleClicked (int cell)
 
     TQColor color = KColorCells::color (cell);
 
-    // TODO: parent
+    // TODO: tqparent
     if (KColorDialog::getColor (color/*ref*/))
         KColorCells::setColor (cell, color);
 }
@@ -739,8 +739,8 @@ void kpColorCells::slotColorDoubleClicked (int cell)
  * kpTransparentColorCell
  */
 
-kpTransparentColorCell::kpTransparentColorCell (TQWidget *parent, const char *name)
-    : TQFrame (parent, name)
+kpTransparentColorCell::kpTransparentColorCell (TQWidget *tqparent, const char *name)
+    : TQFrame (tqparent, name)
 {
 #if DEBUG_KP_COLOR_TOOL_BAR
     kdDebug () << "kpTransparentColorCell::kpTransparentColorCell()" << endl;
@@ -767,23 +767,23 @@ kpTransparentColorCell::~kpTransparentColorCell ()
 }
 
 
-// public virtual [base QWidget]
-TQSize kpTransparentColorCell::sizeHint () const
+// public virtual [base TQWidget]
+TQSize kpTransparentColorCell::tqsizeHint () const
 {
     return TQSize (m_pixmap.width () + frameWidth () * 2,
                   m_pixmap.height () + frameWidth () * 2);
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpTransparentColorCell::mousePressEvent (TQMouseEvent * /*e*/)
 {
     // eat right-mouse click to prevent it from getting to the toolbar
 }
 
-// protected virtual [base QWidget]
+// protected virtual [base TQWidget]
 void kpTransparentColorCell::mouseReleaseEvent (TQMouseEvent *e)
 {
-    if (rect ().contains (e->pos ()))
+    if (TQT_TQRECT_OBJECT(rect ()).tqcontains (e->pos ()))
     {
         if (e->button () == Qt::LeftButton)
         {
@@ -798,7 +798,7 @@ void kpTransparentColorCell::mouseReleaseEvent (TQMouseEvent *e)
     }
 }
 
-// protected virtual [base QFrame]
+// protected virtual [base TQFrame]
 void kpTransparentColorCell::drawContents (TQPainter *p)
 {
     TQFrame::drawContents (p);
@@ -818,10 +818,10 @@ void kpTransparentColorCell::drawContents (TQPainter *p)
  * kpColorPalette
  */
 
-kpColorPalette::kpColorPalette (TQWidget *parent,
+kpColorPalette::kpColorPalette (TQWidget *tqparent,
                                 Qt::Orientation o,
                                 const char *name)
-    : TQWidget (parent, name),
+    : TQWidget (tqparent, name),
       m_boxLayout (0)
 {
 #if DEBUG_KP_COLOR_TOOL_BAR
@@ -829,7 +829,7 @@ kpColorPalette::kpColorPalette (TQWidget *parent,
 #endif
 
     m_transparentColorCell = new kpTransparentColorCell (this);
-    m_transparentColorCell->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
+    m_transparentColorCell->tqsetSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
     connect (m_transparentColorCell, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
              this, TQT_SIGNAL (foregroundColorChanged (const kpColor &)));
     connect (m_transparentColorCell, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
@@ -863,13 +863,13 @@ void kpColorPalette::setOrientation (Qt::Orientation o)
     if (o == Qt::Horizontal)
     {
         m_boxLayout = new TQBoxLayout (this, TQBoxLayout::LeftToRight, 0/*margin*/, 5/*spacing*/);
-        m_boxLayout->addWidget (m_transparentColorCell, 0/*stretch*/, Qt::AlignVCenter);
+        m_boxLayout->addWidget (m_transparentColorCell, 0/*stretch*/, TQt::AlignVCenter);
         m_boxLayout->addWidget (m_colorCells);
     }
     else
     {
         m_boxLayout = new TQBoxLayout (this, TQBoxLayout::TopToBottom, 0/*margin*/, 5/*spacing*/);
-        m_boxLayout->addWidget (m_transparentColorCell, 0/*stretch*/, Qt::AlignHCenter);
+        m_boxLayout->addWidget (m_transparentColorCell, 0/*stretch*/, TQt::AlignHCenter);
         m_boxLayout->addWidget (m_colorCells);
     }
 
@@ -882,11 +882,11 @@ void kpColorPalette::setOrientation (Qt::Orientation o)
  */
 
 kpColorSimilarityToolBarItem::kpColorSimilarityToolBarItem (kpMainWindow *mainWindow,
-                                                            TQWidget *parent,
+                                                            TQWidget *tqparent,
                                                             const char *name)
     : kpColorSimilarityCube (kpColorSimilarityCube::Depressed |
                              kpColorSimilarityCube::DoubleClickInstructions,
-                             mainWindow, parent, name),
+                             mainWindow, tqparent, name),
       m_mainWindow (mainWindow),
       m_processedColorSimilarity (kpColor::Exact)
 {
@@ -912,7 +912,7 @@ void kpColorSimilarityToolBarItem::setColorSimilarity (double similarity)
 
     kpColorSimilarityCube::setColorSimilarity (similarity);
     if (similarity > 0)
-        TQToolTip::add (this, i18n ("Color similarity: %1%").arg (qRound (similarity * 100)));
+        TQToolTip::add (this, i18n ("Color similarity: %1%").arg (tqRound (similarity * 100)));
     else
         TQToolTip::add (this, i18n ("Color similarity: Exact"));
 
@@ -930,13 +930,13 @@ double kpColorSimilarityToolBarItem::oldColorSimilarity () const
 }
 
 
-// private virtual [base QWidget]
+// private virtual [base TQWidget]
 void kpColorSimilarityToolBarItem::mousePressEvent (TQMouseEvent * /*e*/)
 {
     // eat right-mouse click to prevent it from getting to the toolbar
 }
 
-// private virtual [base QWidget]
+// private virtual [base TQWidget]
 void kpColorSimilarityToolBarItem::mouseDoubleClickEvent (TQMouseEvent * /*e*/)
 {
     kpColorSimilarityDialog dialog (m_mainWindow, this);
@@ -964,7 +964,7 @@ kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow,
                                   5/*margin*/, (10 * 4)/*spacing*/);
 
     m_dualColorButton = new kpDualColorButton (mainWindow, base);
-    m_dualColorButton->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
+    m_dualColorButton->tqsetSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
     connect (m_dualColorButton, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
              this, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)));
     connect (m_dualColorButton, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
@@ -981,7 +981,7 @@ kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow,
     m_boxLayout->addWidget (m_colorPalette, 0/*stretch*/);
 
     m_colorSimilarityToolBarItem = new kpColorSimilarityToolBarItem (mainWindow, base);
-    m_colorSimilarityToolBarItem->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
+    m_colorSimilarityToolBarItem->tqsetSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
     connect (m_colorSimilarityToolBarItem, TQT_SIGNAL (colorSimilarityChanged (double, int)),
              this, TQT_SIGNAL (colorSimilarityChanged (double, int)));
     m_boxLayout->addWidget (m_colorSimilarityToolBarItem, 0/*stretch*/);

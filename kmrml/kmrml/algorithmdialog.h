@@ -32,11 +32,12 @@ namespace KMrml
     class AlgorithmDialog : public KDialogBase
     {
         Q_OBJECT
+  TQ_OBJECT
 
     public:
         AlgorithmDialog( const AlgorithmList&, const CollectionList&,
                          const Collection& currentColl,
-                         TQWidget *parent = 0, const char *name = 0 );
+                         TQWidget *tqparent = 0, const char *name = 0 );
         ~AlgorithmDialog();
 
     private slots:

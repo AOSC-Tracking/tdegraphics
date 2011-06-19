@@ -44,9 +44,9 @@ const double kpColorSimilarityDialog::maximumColorSimilarity = .30;
 
 
 kpColorSimilarityDialog::kpColorSimilarityDialog (kpMainWindow *mainWindow,
-                                                  TQWidget *parent,
+                                                  TQWidget *tqparent,
                                                   const char *name)
-    : KDialogBase (parent, name, true/*modal*/,
+    : KDialogBase (tqparent, name, true/*modal*/,
                    i18n ("Color Similarity"),
                    KDialogBase::Ok | KDialogBase::Cancel),
       m_mainWindow (mainWindow)
@@ -66,7 +66,7 @@ kpColorSimilarityDialog::kpColorSimilarityDialog (kpMainWindow *mainWindow,
 
     TQVBoxLayout *cubeLayout = new TQVBoxLayout (cubeGroupBox, marginHint () * 2, spacingHint ());
     cubeLayout->addWidget (m_colorSimilarityCube, 1/*stretch*/);
-    cubeLayout->addWidget (updatePushButton, 0/*stretch*/, Qt::AlignHCenter);
+    cubeLayout->addWidget (updatePushButton, 0/*stretch*/, TQt::AlignHCenter);
 
 
     connect (updatePushButton, TQT_SIGNAL (clicked ()),
@@ -109,7 +109,7 @@ double kpColorSimilarityDialog::colorSimilarity () const
 // public
 void kpColorSimilarityDialog::setColorSimilarity (double similarity)
 {
-    m_colorSimilarityInput->setValue (qRound (similarity * 100));
+    m_colorSimilarityInput->setValue (tqRound (similarity * 100));
 }
 
 

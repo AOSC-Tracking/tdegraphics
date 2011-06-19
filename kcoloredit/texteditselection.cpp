@@ -24,7 +24,7 @@
 #include "main.h"
 #include "texteditselection.h"
 
-TextEditSelection::TextEditSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
+TextEditSelection::TextEditSelection(TQWidget *tqparent, const char *name ) : TQWidget(tqparent,name) {
 	inChangingComponents = false;
 	TQVBoxLayout* topLayout = new TQVBoxLayout(this, 4);
 	TQGridLayout* componentsLayout = new TQGridLayout(3, 5, 2);
@@ -59,14 +59,14 @@ TextEditSelection::~TextEditSelection(){
 }
 
 void TextEditSelection::addComponent(const int index, TQLineEdit* lineEdit, const int maxValue,
-	const TQString& labelString, const int row, const int column, TQGridLayout* layout) {
+	const TQString& labelString, const int row, const int column, TQGridLayout* tqlayout) {
 	TQLabel* label = new TQLabel(labelString, this);
-	lineEdit->setValidator(new TQIntValidator( 0, maxValue, lineEdit ));
+	lineEdit->setValidator(new TQIntValidator( 0, maxValue, TQT_TQOBJECT(lineEdit) ));
 	lineEditTable[index] = lineEdit;
 	lineEdit->setMinimumWidth(lineEdit->fontMetrics().width( TQString("8888") ));
 	lineEdit->setMaximumWidth(lineEdit->fontMetrics().width( TQString("8888888") ));
-	layout->addWidget(label, row, column*3);
-	layout->addWidget(lineEdit, row, column*3 + 1);
+	tqlayout->addWidget(label, row, column*3);
+	tqlayout->addWidget(lineEdit, row, column*3 + 1);
 }
 
 void TextEditSelection::setRgbString(const int red, const int green, const int blue) {

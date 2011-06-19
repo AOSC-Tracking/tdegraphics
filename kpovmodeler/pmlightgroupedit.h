@@ -35,12 +35,13 @@ class TQCheckBox;
 class PMLightGroupEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
+  TQ_OBJECT
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMLightGroupEdit with parent and name
+    * Creates a PMLightGroupEdit with tqparent and name
     */
-   PMLightGroupEdit( TQWidget* parent, const char* name = 0 );
+   PMLightGroupEdit( TQWidget* tqparent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

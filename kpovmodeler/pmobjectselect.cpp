@@ -84,8 +84,8 @@ PMListBoxObject::~PMListBoxObject( )
 TQSize PMObjectSelect::s_size = TQSize( 200, 300 );
 
 
-PMObjectSelect::PMObjectSelect( TQWidget* parent, const char* name, bool modal )
-      : KDialogBase( parent, name, modal, i18n( "Choose Object" ), Ok | Cancel )
+PMObjectSelect::PMObjectSelect( TQWidget* tqparent, const char* name, bool modal )
+      : KDialogBase( tqparent, name, modal, i18n( "Choose Object" ), Ok | Cancel )
 {
    m_pSelectedObject = 0;
    m_pListBox = new TQListBox( this );
@@ -110,7 +110,7 @@ void PMObjectSelect::addObject( PMObject* obj )
 }
 
 int PMObjectSelect::selectObject( PMObject* link, const TQString& t,
-                                  PMObject* & obj, TQWidget* parent )
+                                  PMObject* & obj, TQWidget* tqparent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -119,7 +119,7 @@ int PMObjectSelect::selectObject( PMObject* link, const TQString& t,
    
    do
    {
-      scene = last->parent( );
+      scene = last->tqparent( );
       if( scene )
       {
          if( scene->type( ) == "Scene" )
@@ -129,7 +129,7 @@ int PMObjectSelect::selectObject( PMObject* link, const TQString& t,
             found = true;
          }
          else
-            last = last->parent( );
+            last = last->tqparent( );
       }
       else
          stop = true;
@@ -138,7 +138,7 @@ int PMObjectSelect::selectObject( PMObject* link, const TQString& t,
    
    if( found )
    {
-      PMObjectSelect s( parent );
+      PMObjectSelect s( tqparent );
 
       PMObject* o = scene->firstChild( );
       bool l = false;
@@ -167,7 +167,7 @@ int PMObjectSelect::selectObject( PMObject* link, const TQString& t,
 
 int PMObjectSelect::selectObject( PMObject* link,
                                   const TQStringList& t,
-                                  PMObject* & obj, TQWidget* parent )
+                                  PMObject* & obj, TQWidget* tqparent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -176,7 +176,7 @@ int PMObjectSelect::selectObject( PMObject* link,
    
    do
    {
-      scene = last->parent( );
+      scene = last->tqparent( );
       if( scene )
       {
          if( scene->type( ) == "Scene" )
@@ -186,7 +186,7 @@ int PMObjectSelect::selectObject( PMObject* link,
             found = true;
          }
          else
-            last = last->parent( );
+            last = last->tqparent( );
       }
       else
          stop = true;
@@ -195,14 +195,14 @@ int PMObjectSelect::selectObject( PMObject* link,
    
    if( found )
    {
-      PMObjectSelect s( parent );
+      PMObjectSelect s( tqparent );
 
       PMObject* o = scene->firstChild( );
       bool l = false;
       
       while( o && !l && last )
       {
-         if( t.findIndex( o->type( ) ) >= 0 )
+         if( t.tqfindIndex( o->type( ) ) >= 0 )
             s.m_pListBox->insertItem( new PMListBoxObject( o ) );
          
          if( o == last )
@@ -223,7 +223,7 @@ int PMObjectSelect::selectObject( PMObject* link,
 }
 
 int PMObjectSelect::selectDeclare( PMObject* link, const TQString& declareType,
-                                   PMObject* & obj, TQWidget* parent )
+                                   PMObject* & obj, TQWidget* tqparent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -232,7 +232,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQString& declareType,
    
    do
    {
-      scene = last->parent( );
+      scene = last->tqparent( );
       if( scene )
       {
          if( scene->type( ) == "Scene" )
@@ -242,7 +242,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQString& declareType,
             found = true;
          }
          else
-            last = last->parent( );
+            last = last->tqparent( );
       }
       else
          stop = true;
@@ -251,7 +251,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQString& declareType,
    
    if( found )
    {
-      PMObjectSelect s( parent );
+      PMObjectSelect s( tqparent );
 
       PMObject* o = scene->firstChild( );
       PMDeclare* decl;
@@ -285,7 +285,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQString& declareType,
 }
 
 int PMObjectSelect::selectDeclare( PMObject* link, const TQStringList& declareTypes,
-                                   PMObject* & obj, TQWidget* parent )
+                                   PMObject* & obj, TQWidget* tqparent )
 {
    PMObject* last = link;
    PMObject* scene;
@@ -294,7 +294,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQStringList& declareTy
    
    do
    {
-      scene = last->parent( );
+      scene = last->tqparent( );
       if( scene )
       {
          if( scene->type( ) == "Scene" )
@@ -304,7 +304,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQStringList& declareTy
             found = true;
          }
          else
-            last = last->parent( );
+            last = last->tqparent( );
       }
       else
          stop = true;
@@ -313,7 +313,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQStringList& declareTy
    
    if( found )
    {
-      PMObjectSelect s( parent );
+      PMObjectSelect s( tqparent );
 
       PMObject* o = scene->firstChild( );
       PMDeclare* decl;
@@ -325,7 +325,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQStringList& declareTy
          if( o->type( ) == "Declare" )
          {
             decl = ( PMDeclare* ) o;
-            if( declareTypes.findIndex( decl->declareType( ) ) >= 0 )
+            if( declareTypes.tqfindIndex( decl->declareType( ) ) >= 0 )
                s.m_pListBox->insertItem( new PMListBoxObject( o ) );
          }
          

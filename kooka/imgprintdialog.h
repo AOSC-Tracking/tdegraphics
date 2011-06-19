@@ -19,8 +19,8 @@
  *  including the source code for KADMOS in the source distribution.       *
  *
  *  As a special exception, permission is given to link this program       *
- *  with any edition of Qt, and distribute the resulting executable,       *
- *  without including the source code for Qt in the source distribution.   *
+ *  with any edition of TQt, and distribute the resulting executable,       *
+ *  without including the source code for TQt in the source distribution.   *
  *                                                                         *
  ***************************************************************************/
 
@@ -53,8 +53,9 @@ class TQCheckBox;
 class ImgPrintDialog: public KPrintDialogPage
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    ImgPrintDialog( KookaImage *img, TQWidget *parent=0L, const char* name=0L );
+    ImgPrintDialog( KookaImage *img, TQWidget *tqparent=0L, const char* name=0L );
 
     void setOptions(const TQMap<TQString,TQString>& opts);
     void getOptions(TQMap<TQString,TQString>& opts, bool include_def = false);

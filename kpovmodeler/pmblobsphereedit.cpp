@@ -24,8 +24,8 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMBlobSphereEdit::PMBlobSphereEdit( TQWidget* parent, const char* name )
-      : Base( parent, name )
+PMBlobSphereEdit::PMBlobSphereEdit( TQWidget* tqparent, const char* name )
+      : Base( tqparent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -34,23 +34,23 @@ void PMBlobSphereEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
 
    m_pCentre = new PMVectorEdit( "x", "y", "z", this );
    m_pRadius = new PMFloatEdit( this );
    m_pStrength = new PMFloatEdit( this );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( new TQLabel( i18n( "Center:" ), this ) );
-   layout->addWidget( m_pCentre );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( new TQLabel( i18n( "Center:" ), this ) );
+   tqlayout->addWidget( m_pCentre );
 
-   layout = new TQHBoxLayout( topLayout( ) );
-   TQGridLayout* gl = new TQGridLayout( layout, 2, 2 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   TQGridLayout* gl = new TQGridLayout( tqlayout, 2, 2 );
    gl->addWidget( new TQLabel( i18n( "Radius:" ), this ), 0, 0 );
    gl->addWidget( m_pRadius, 0, 1 );
    gl->addWidget( new TQLabel( i18n( "Strength:" ), this ), 1, 0 );
    gl->addWidget( m_pStrength, 1, 1 );
-   layout->addStretch( 1 );
+   tqlayout->addStretch( 1 );
 
    connect( m_pCentre, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

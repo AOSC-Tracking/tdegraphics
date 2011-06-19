@@ -26,13 +26,14 @@
 
 class KIntSpinBox;
 
-class KResizeWidget : public QWidget
+class KResizeWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
 
-  KResizeWidget( TQWidget* parent, const char* name, const TQSize& );
+  KResizeWidget( TQWidget* tqparent, const char* name, const TQSize& );
   ~KResizeWidget();
 
   const TQSize getSize();
@@ -46,10 +47,11 @@ private:
 class KResizeDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
   
 public:
 
-  KResizeDialog( TQWidget* parent, const char* name, const TQSize s );
+  KResizeDialog( TQWidget* tqparent, const char* name, const TQSize s );
   ~KResizeDialog();
 
   const TQSize getSize();

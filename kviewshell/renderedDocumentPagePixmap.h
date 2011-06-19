@@ -19,9 +19,10 @@
 
 // This class contains everything documentRenderer needs to know 
 // about a certain page.
-class RenderedDocumentPagePixmap: public RenderedDocumentPage, public QPixmap
+class RenderedDocumentPagePixmap: public RenderedDocumentPage, public TQPixmap
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   RenderedDocumentPagePixmap();

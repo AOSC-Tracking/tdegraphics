@@ -31,12 +31,13 @@ class TQPushButton;
 class TQCheckBox;
 class TQString;
 
-class SearchWidget : public QWidget
+class SearchWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  SearchWidget(TQWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  SearchWidget(TQWidget* tqparent = 0, const char* name = 0, WFlags fl = 0);
   ~SearchWidget();
 
   TQString getText() const;
@@ -67,7 +68,7 @@ private:
   TQPushButton* findPrevButton;
   TQCheckBox* caseSensitiveCheckBox;
 
-  TQHBoxLayout* layout;
+  TQHBoxLayout* tqlayout;
 };
 
 #endif

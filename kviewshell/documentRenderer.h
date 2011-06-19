@@ -48,13 +48,14 @@ thread-safe.
 @author Wilfried Huss, Stefan Kebekus
 */
 
-class DocumentRenderer : public QObject
+class DocumentRenderer : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   /** \brief default constructor */
-  DocumentRenderer(TQWidget* parent);
+  DocumentRenderer(TQWidget* tqparent);
 
   virtual ~DocumentRenderer();
 
@@ -151,7 +152,7 @@ public:
   virtual void clear();
 
 
-  /* Returns true if the current document contains 0 pages. */
+  /* Returns true if the current document tqcontains 0 pages. */
   bool isEmpty() const {return numPages == 0;}
 
   /* Tells if the document was modified after is was loaded. */
@@ -261,7 +262,7 @@ public:
   display device. In principle. In fact, kviewshell implements zooming
   by using values that are not exactly the resolution of the display,
   but multiplied with the zoom factor. Bottom line: the
-  DocumentRenderer should act as if this field indeed contains
+  DocumentRenderer should act as if this field indeed tqcontains
   resolution of the display device.
 
   @param page pointer to a documentPage structure that this method
@@ -361,7 +362,7 @@ signals:
 
   This signal can be emitted if the document or status of this class
   changed internally so that all associated widgets should be
-  repainted. This could be emitted, e.g. if pages are removed from a
+  tqrepainted. This could be emitted, e.g. if pages are removed from a
   document, or if some preferences change that have some direct
   influence on the way the document is rendered.
 
@@ -400,7 +401,7 @@ protected:
   @warning Only the constructor and the methods setFile() and clear()
   may write to this member.
   */
-  Q_UINT16  numPages;
+  TQ_UINT16  numPages;
   
   /** page sizes
 
@@ -441,12 +442,12 @@ protected:
   */
   TQMap<TQString, Anchor> anchorList;
 
-  /** pointer to the parent widget
+  /** pointer to the tqparent widget
 
   This pointer can be used by implementations e.g. to display error
   messages. This pointer can well be zero.
   */
-  TQGuardedPtr<TQWidget> parentWidget;
+  TQGuardedPtr<TQWidget> tqparentWidget;
 
   /** specifies if accessibilityBackgroundColor should be used
 
