@@ -13,8 +13,8 @@ poppler_include_HEADERS =			\
 	poppler-page-transition.h               \
 	poppler-link-qt3.h
 
-lib_LTLIBRARIES = libpoppler-qt.la
-libpoppler_qt_la_SOURCES =			\
+lib_LTLIBRARIES = libpoppler-tqt.la
+libpoppler_tqt_la_SOURCES =			\
 	poppler-document.cc			\
 	poppler-fontinfo.cc			\
 	poppler-link.cc                         \
@@ -24,19 +24,17 @@ libpoppler_qt_la_SOURCES =			\
 	poppler-private.cc			\
 	poppler-private.h
 
-libpoppler_qt_la_LIBADD = 			\
+libpoppler_tqt_la_LIBADD = 			\
 	-lpoppler				\
 	$(QT_LIBS)				\
 	$(FREETYPE_LIBS)			\
 	$(FONTCONFIG_LIBS)
 
-# libpoppler_qt_la_LDFLAGS = -version-info 2:0:0 @create_shared_lib@
-
-test_poppler_qt_SOURCES =			\
+test_poppler_tqt_SOURCES =			\
        test-poppler-qt.cpp
 
-test_poppler_qt_LDADD =				\
+test_poppler_tqt_LDADD =			\
 	$(top_builddir)/poppler/libpoppler.la	\
-	libpoppler-qt.la			\
+	libpoppler-tqt.la			\
 	$(QT_LIBS)				\
 	$(FREETYPE_LIBS)
