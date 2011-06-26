@@ -7,7 +7,7 @@ INCLUDES =					\
 	$(FONTCONFIG_CFLAGS)
 
 
-poppler_includedir = $(includedir)/poppler/qt3
+poppler_includedir = $(includedir)/
 poppler_include_HEADERS =			\
 	poppler-qt.h				\
 	poppler-page-transition.h               \
