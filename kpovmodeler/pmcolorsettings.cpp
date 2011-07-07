@@ -157,7 +157,7 @@ void PMColorSettings::applySettings( )
       tqrepaint = true;
    }
    if( tqrepaint )
-      emit tqrepaintViews( );
+      emit repaintViews( );
 }
 
 #include "pmcolorsettings.moc"

@@ -137,7 +137,7 @@ public:
    void select( int i, int j );
    /**
     * Blocks/unblocks selection updates. If block is false, the
-    * selection is tqrepainted.
+    * selection is repainted.
     */
    void blockSelectionUpdates( bool block );
 

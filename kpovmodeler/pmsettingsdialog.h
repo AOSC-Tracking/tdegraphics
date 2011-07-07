@@ -89,7 +89,7 @@ signals:
     * Emit this signal if a parameter was changed
     * that influences the wire frame rendering.
     */
-   void tqrepaintViews( );
+   void repaintViews( );
    /**
     * Tells the settings dialog to show this page.
     */

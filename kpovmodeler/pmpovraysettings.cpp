@@ -180,7 +180,7 @@ void PMPovraySettings::applySettings( )
       PMPovrayRenderWidget::setPovrayLibraryPaths( plist );
       PMResourceLocator::clearCache( );
       PMText::povrayLibraryPathsChanged( );
-      emit tqrepaintViews( );
+      emit repaintViews( );
    }
 }
 

@@ -644,7 +644,7 @@ TQRect kpViewScrollableContainer::mapViewToGlobal (const TQRect &viewRect)
 
 
 // protected
-void kpViewScrollableContainer::tqrepaintWidgetAtResizeLineViewRect (
+void kpViewScrollableContainer::repaintWidgetAtResizeLineViewRect (
     TQWidget *widget, const TQRect &resizeLineViewRect)
 {
     const TQRect resizeLineGlobalRect = mapViewToGlobal (resizeLineViewRect);
@@ -668,11 +668,11 @@ void kpViewScrollableContainer::tqrepaintWidgetAtResizeLineViewRect (
 }
 
 // protected
-void kpViewScrollableContainer::tqrepaintWidgetAtResizeLines (TQWidget *widget)
+void kpViewScrollableContainer::repaintWidgetAtResizeLines (TQWidget *widget)
 {
-    tqrepaintWidgetAtResizeLineViewRect (widget, rightResizeLineRect ());
-    tqrepaintWidgetAtResizeLineViewRect (widget, bottomResizeLineRect ());
-    tqrepaintWidgetAtResizeLineViewRect (widget, bottomRightResizeLineRect ());
+    repaintWidgetAtResizeLineViewRect (widget, rightResizeLineRect ());
+    repaintWidgetAtResizeLineViewRect (widget, bottomResizeLineRect ());
+    repaintWidgetAtResizeLineViewRect (widget, bottomRightResizeLineRect ());
 }
 
 // protected
@@ -680,12 +680,12 @@ void kpViewScrollableContainer::eraseResizeLines ()
 {
     if (m_resizeRoundedLastViewX >= 0 && m_resizeRoundedLastViewY >= 0)
     {
-        tqrepaintWidgetAtResizeLines (viewport ());
-        tqrepaintWidgetAtResizeLines (m_view);
+        repaintWidgetAtResizeLines (viewport ());
+        repaintWidgetAtResizeLines (m_view);
 
-        tqrepaintWidgetAtResizeLines (m_bottomGrip);
-        tqrepaintWidgetAtResizeLines (m_rightGrip);
-        tqrepaintWidgetAtResizeLines (m_bottomRightGrip);
+        repaintWidgetAtResizeLines (m_bottomGrip);
+        repaintWidgetAtResizeLines (m_rightGrip);
+        repaintWidgetAtResizeLines (m_bottomRightGrip);
     }
 }
 

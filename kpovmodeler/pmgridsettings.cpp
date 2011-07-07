@@ -149,7 +149,7 @@ void PMGridSettings::applySettings( )
    PMControlPoint::setScaleGrid( m_pScaleGrid->value( ) );
    PMControlPoint::setRotateGrid( m_pRotateGrid->value( ) );
    if( tqrepaint )
-      emit tqrepaintViews( );
+      emit repaintViews( );
 }
 
 #include "pmgridsettings.moc"

@@ -80,7 +80,7 @@ class RepaintCommand : public KCommand {
 	}
 	
 	TQString name() const {
-		return "tqrepainted";
+		return "repainted";
 	}
     protected:
 	KIconEditGrid* grid;

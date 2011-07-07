@@ -705,11 +705,11 @@ void kpDocumentSaveOptionsWidget::setMode (Mode mode)
     //       we change the height of "this", causing the text on the labels
     //       to move but the first instance of the text doesn't get erased.
     //       TQt bug.
-    TQTimer::singleShot (0, this, TQT_SLOT (tqrepaintLabels ()));
+    TQTimer::singleShot (0, this, TQT_SLOT (repaintLabels ()));
 }
 
 // protected slot
-void kpDocumentSaveOptionsWidget::tqrepaintLabels ()
+void kpDocumentSaveOptionsWidget::repaintLabels ()
 {
     if (mode () != Quality)
         m_colorDepthLabel->tqrepaint ();

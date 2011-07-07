@@ -344,10 +344,10 @@ protected:
 public:
     /**
      * Adds a region (in view coordinates) to the dirty area that is
-     * tqrepainted when the tqparent @ref kpViewManager is set not to queue
+     * repainted when the tqparent @ref kpViewManager is set not to queue
      * updates.
      *
-     * @param region Region (in view coordinates) that needs tqrepainting.
+     * @param region Region (in view coordinates) that needs repainting.
      */
     void addToQueuedArea (const TQRegion &region);
 
@@ -355,10 +355,10 @@ public:
      * Convenience function.  Same as above.
      *
      * Adds a rectangle (in view coordinates) to the dirty area that is
-     * tqrepainted when the tqparent @ref kpViewManager is set not to queue
+     * repainted when the tqparent @ref kpViewManager is set not to queue
      * updates.
      *
-     * @param rect Rectangle (in view coordinates) that needs tqrepainting.
+     * @param rect Rectangle (in view coordinates) that needs repainting.
      */
      void addToQueuedArea (const TQRect &rect);
 

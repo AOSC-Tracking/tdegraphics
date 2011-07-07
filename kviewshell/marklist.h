@@ -151,7 +151,7 @@ public slots:
   void clear();
 
   void slotShowThumbnails(bool);
-  void tqrepaintThumbnails();
+  void repaintThumbnails();
 
   void updateWidgetSize(const PageNumber&);
 

@@ -171,9 +171,9 @@ protected:
     TQRect mapViewportToGlobal (const TQRect &viewportRect);
     TQRect mapViewToGlobal (const TQRect &viewRect);
 
-    void tqrepaintWidgetAtResizeLineViewRect (TQWidget *widget,
+    void repaintWidgetAtResizeLineViewRect (TQWidget *widget,
                                             const TQRect &resizeLineViewRect);
-    void tqrepaintWidgetAtResizeLines (TQWidget *widget);
+    void repaintWidgetAtResizeLines (TQWidget *widget);
     void eraseResizeLines ();
 
     void drawResizeLines ();

@@ -229,7 +229,7 @@ void PMSettingsDialog::registerPage( TQWidget* topPage,
    else
    {
       m_pages.push_back( PMRegisteredSettingsPage( topPage, page, i ) );
-      connect( page, TQT_SIGNAL( tqrepaintViews( ) ), TQT_SLOT( slotRepaint( ) ) );
+      connect( page, TQT_SIGNAL( repaintViews( ) ), TQT_SLOT( slotRepaint( ) ) );
       connect( page, TQT_SIGNAL( showMe( ) ), TQT_SLOT( slotShowPage( ) ) );
    }
 }

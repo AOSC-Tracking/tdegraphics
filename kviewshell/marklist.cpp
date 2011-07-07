@@ -542,7 +542,7 @@ void MarkList::slotShowThumbnails(bool show)
 }
 
 
-void MarkList::tqrepaintThumbnails()
+void MarkList::repaintThumbnails()
 {
   bool show = showThumbnails;
   int numOfPages = widgetList.count();

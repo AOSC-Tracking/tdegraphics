@@ -157,7 +157,7 @@ public:
     //
     // This is better than TQWidget::setUpdatesEnabled() because
     // restoreQueueUpdates() automatically restores only the regions
-    // of the views that need to be tqrepainted, per view.
+    // of the views that need to be repainted, per view.
     bool queueUpdates () const;
     void setQueueUpdates ();
     void restoreQueueUpdates ();

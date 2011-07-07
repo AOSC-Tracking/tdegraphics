@@ -162,7 +162,7 @@ signals:
     /**
      * signal the tells that the result image was modified.
      */
-    void tqrepaintOCRResImage( );
+    void repaintOCRResImage( );
 
     /**
      * indicates that the text editor holding the text that came through

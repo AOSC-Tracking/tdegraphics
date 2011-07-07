@@ -351,7 +351,7 @@ private:
     */
    void selectControlPoint( PMControlPoint* cp, bool select, bool deselectOthers = true );
    /**
-    * Invalidates the projection and tqrepaints the view
+    * Invalidates the projection and repaints the view
     */
    void tqinvalidateProjection( bool graphicaChange = false );
 

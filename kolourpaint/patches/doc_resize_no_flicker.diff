@@ -117,9 +117,9 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 +
  
  // protected
--void kpViewScrollableContainer::tqrepaintWidgetAtResizeLineViewRect (
+-void kpViewScrollableContainer::repaintWidgetAtResizeLineViewRect (
 -    QWidget *widget, const QRect &resizeLineViewRect)
-+void kpViewScrollableContainer::tqrepaintWidgetRegion (
++void kpViewScrollableContainer::repaintWidgetRegion (
 +    QWidget *widget,
 +    const QRegion &viewRegion)
  {
@@ -153,12 +153,12 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
  }
  
  // protected
--void kpViewScrollableContainer::tqrepaintWidgetAtResizeLines (QWidget *widget)
+-void kpViewScrollableContainer::repaintWidgetAtResizeLines (QWidget *widget)
 +void kpViewScrollableContainer::eraseResizeLines (const QRegion &viewRegion)
  {
--    tqrepaintWidgetAtResizeLineViewRect (widget, rightResizeLineRect ());
--    tqrepaintWidgetAtResizeLineViewRect (widget, bottomResizeLineRect ());
--    tqrepaintWidgetAtResizeLineViewRect (widget, bottomRightResizeLineRect ());
+-    repaintWidgetAtResizeLineViewRect (widget, rightResizeLineRect ());
+-    repaintWidgetAtResizeLineViewRect (widget, bottomResizeLineRect ());
+-    repaintWidgetAtResizeLineViewRect (widget, bottomRightResizeLineRect ());
 -}
 +    if (viewRegion.isEmpty ())
 +        return;
@@ -168,19 +168,19 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 -{
 -    if (m_resizeRoundedLastViewX >= 0 && m_resizeRoundedLastViewY >= 0)
 -    {
--        tqrepaintWidgetAtResizeLines (viewport ());
--        tqrepaintWidgetAtResizeLines (m_view);
+-        repaintWidgetAtResizeLines (viewport ());
+-        repaintWidgetAtResizeLines (m_view);
  
--        tqrepaintWidgetAtResizeLines (m_bottomGrip);
--        tqrepaintWidgetAtResizeLines (m_rightGrip);
--        tqrepaintWidgetAtResizeLines (m_bottomRightGrip);
+-        repaintWidgetAtResizeLines (m_bottomGrip);
+-        repaintWidgetAtResizeLines (m_rightGrip);
+-        repaintWidgetAtResizeLines (m_bottomRightGrip);
 -    }
-+    tqrepaintWidgetRegion (viewport (), viewRegion);
-+    tqrepaintWidgetRegion (m_view, viewRegion);
++    repaintWidgetRegion (viewport (), viewRegion);
++    repaintWidgetRegion (m_view, viewRegion);
 +
-+    tqrepaintWidgetRegion (m_bottomGrip, viewRegion);
-+    tqrepaintWidgetRegion (m_rightGrip, viewRegion);
-+    tqrepaintWidgetRegion (m_bottomRightGrip, viewRegion);
++    repaintWidgetRegion (m_bottomGrip, viewRegion);
++    repaintWidgetRegion (m_rightGrip, viewRegion);
++    repaintWidgetRegion (m_bottomRightGrip, viewRegion);
  }
  
  
@@ -502,11 +502,11 @@ diff -u -p -r1.3 kpviewscrollablecontainer.h
      QRect mapViewToGlobal (const QRect &viewRect);
 +    QRegion mapViewToGlobal (const QRegion &viewRegion);
  
--    void tqrepaintWidgetAtResizeLineViewRect (QWidget *widget,
+-    void repaintWidgetAtResizeLineViewRect (QWidget *widget,
 -                                            const QRect &resizeLineViewRect);
--    void tqrepaintWidgetAtResizeLines (QWidget *widget);
+-    void repaintWidgetAtResizeLines (QWidget *widget);
 -    void eraseResizeLines ();
-+    void tqrepaintWidgetRegion (QWidget *widget,
++    void repaintWidgetRegion (QWidget *widget,
 +        const QRegion &viewRegion);
 +    void eraseResizeLines (const QRegion &viewRegion);
  

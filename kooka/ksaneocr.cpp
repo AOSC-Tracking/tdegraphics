@@ -1328,7 +1328,7 @@ void KSANEOCR::slMisspelling( const TQString& originalword, const TQStringList& 
         /* draw a line under the word to check */
 
         /* copy the source */
-        emit tqrepaintOCRResImage();
+        emit repaintOCRResImage();
     }
     else
     {

@@ -218,7 +218,7 @@ void GradientSelection::slotXyColorSelectorPosChanged(int x, int y) {
 }
 
 void GradientSelection::slotZColorSelectorPosChanged(int y) {
-	bool tqrepaintZColorSelector = false;
+	bool repaintZColorSelector = false;
 	switch(zColorSelectorComponentIndex) {
 		case H_COMPONENT:
 			hComponent = y;
@@ -237,7 +237,7 @@ void GradientSelection::slotZColorSelectorPosChanged(int y) {
 	rgbColor.setHsv(hComponent, sComponent, vComponent);
 	color.setComponents(rgbColor.red(), rgbColor.green(), rgbColor.blue());
 	updateXyColorSelector(false);
-	if(tqrepaintZColorSelector)
+	if(repaintZColorSelector)
 		updateZColorSelector();
 	emit valueChanged(&color);
 }

@@ -324,7 +324,7 @@ void PMTreeView::slotClear( )
 
 void PMTreeView::itemSelected( PMTreeViewItem* item, bool selected )
 {
-   tqrepaintItem( item );
+   repaintItem( item );
 
    if( m_event )
    {

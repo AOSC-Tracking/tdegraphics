@@ -161,7 +161,7 @@ protected:
     void setMode (Mode mode);
 
 protected slots:
-    void tqrepaintLabels ();
+    void repaintLabels ();
 
 
 protected slots:

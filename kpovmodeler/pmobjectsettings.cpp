@@ -544,7 +544,7 @@ void PMObjectSettings::applySettings( )
       tqrepaint = true;
    }
    if( tqrepaint )
-      emit tqrepaintViews( );
+      emit repaintViews( );
 }
 
 #include "pmobjectsettings.moc"

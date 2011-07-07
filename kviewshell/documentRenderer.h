@@ -362,7 +362,7 @@ signals:
 
   This signal can be emitted if the document or status of this class
   changed internally so that all associated widgets should be
-  tqrepainted. This could be emitted, e.g. if pages are removed from a
+  repainted. This could be emitted, e.g. if pages are removed from a
   document, or if some preferences change that have some direct
   influence on the way the document is rendered.
 

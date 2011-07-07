@@ -426,9 +426,9 @@ public slots:
   */
   void renderModeChanged();
 
-  /* Empties the page cache and --as the name suggests-- tqrepaints all
+  /* Empties the page cache and --as the name suggests-- repaints all
      visible widgets. */
-  void tqrepaintAllVisibleWidgets();
+  void repaintAllVisibleWidgets();
 
   /* Tells the multipage if scrollbars should be used. */
   virtual void slotShowScrollbars(bool);

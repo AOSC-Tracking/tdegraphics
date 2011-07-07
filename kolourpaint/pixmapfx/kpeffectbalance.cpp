@@ -499,7 +499,7 @@ void kpEffectBalanceWidget::resetAll ()
         return;
 
     // Prevent multiple settingsChanged() which would normally result in
-    // redundant, expensive preview tqrepaints
+    // redundant, expensive preview repaints
     blockSignals (true);
 
     resetBrightness ();

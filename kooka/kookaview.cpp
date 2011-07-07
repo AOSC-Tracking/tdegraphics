@@ -564,7 +564,7 @@ void KookaView::startOCR( KookaImage *img )
 	  connect( ocrFabric, TQT_SIGNAL( newOCRResultText( const TQString& )),
 		   m_dockOCRText, TQT_SLOT( show() ));
 	  
-          connect( ocrFabric, TQT_SIGNAL( tqrepaintOCRResImage( )),
+          connect( ocrFabric, TQT_SIGNAL( repaintOCRResImage( )),
                    img_canvas, TQT_SLOT(tqrepaint()));
 
 	  connect( ocrFabric, TQT_SIGNAL( clearOCRResultText()),

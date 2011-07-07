@@ -700,14 +700,14 @@ void KMultiPage::renderModeChanged()
     documentWidget->update();
   }
 
-  markList()->tqrepaintThumbnails();
+  markList()->repaintThumbnails();
 }
 
 
-void KMultiPage::tqrepaintAllVisibleWidgets()
+void KMultiPage::repaintAllVisibleWidgets()
 {
 #ifdef DEBUG_KMULTIPAGE
-  kdDebug(1233) << "KMultiPage::tqrepaintAllVisibleWidgets()" << endl;
+  kdDebug(1233) << "KMultiPage::repaintAllVisibleWidgets()" << endl;
 #endif
 
   bool everResized = false;
@@ -872,7 +872,7 @@ void KMultiPage::setRenderer(DocumentRenderer* _renderer)
   connect(pageCache, TQT_SIGNAL(paperSizeChanged()), this, TQT_SLOT(renderModeChanged()));
   connect(pageCache, TQT_SIGNAL(textSelected(bool)), this, TQT_SIGNAL(textSelected(bool)));
   connect(renderer, TQT_SIGNAL(documentIsChanged()), this, TQT_SLOT(renderModeChanged()));
-  connect(this, TQT_SIGNAL(zoomChanged()), this, TQT_SLOT(tqrepaintAllVisibleWidgets()));
+  connect(this, TQT_SIGNAL(zoomChanged()), this, TQT_SLOT(repaintAllVisibleWidgets()));
 }
 
 

@@ -73,10 +73,10 @@ void PaletteViewScrolledArea::slotViewColorNames(bool viewColorNames) {
 
 void PaletteViewScrolledArea::redraw() {
 	//setCellsSizes();
-	tqrepaintPalette();
+	repaintPalette();
 }
 
-void PaletteViewScrolledArea::tqrepaintPalette() {
+void PaletteViewScrolledArea::repaintPalette() {
 	tqrepaint(false);
 }
 
@@ -106,7 +106,7 @@ void PaletteViewScrolledArea::slotScrollTimeout() {
 		else
 			setSelection(selectionEnd, selectionBegin);
 		checkSelectionAutoScroll(cursorPoint.y());
-		tqrepaintPalette();
+		repaintPalette();
 	}
 }
 

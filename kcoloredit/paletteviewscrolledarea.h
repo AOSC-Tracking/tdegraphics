@@ -42,7 +42,7 @@ public:
 		TQScrollBar* hScrollBar, KColorEditView* view,
 		TQWidget* tqparent = 0, const char* name = 0);
 	~PaletteViewScrolledArea();
-	/** Sets cells sizes and then calls tqrepaintPalette() */
+	/** Sets cells sizes and then calls repaintPalette() */
 	void redraw();
 
 public slots:
@@ -106,8 +106,8 @@ protected:
 	 *  visible area width
 	 */
 	void setCellsSizes();
-	/** tqrepaints the palette */
-	void tqrepaintPalette();
+	/** repaints the palette */
+	void repaintPalette();
 	/** @return A color index at a given position, -1 if none */
 	int colorIndex(const TQPoint& point) const;
 	/** @return A color at a given position */
