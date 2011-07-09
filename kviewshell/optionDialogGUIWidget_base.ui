@@ -144,5 +144,5 @@
     <tabstop>kcfg_OverviewModeRows</tabstop>
     <tabstop>kcfg_OverviewModeColumns</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 </UI>

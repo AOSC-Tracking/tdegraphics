@@ -366,11 +366,11 @@ public:
      * Removes the dirty region that has been queued for updating.
      * Does not update the view.
      */
-    void tqinvalidateQueuedArea ();
+    void invalidateQueuedArea ();
 
     /**
      * Updates the part of the view described by dirty region and then
-     * calls tqinvalidateQueuedArea().  Does nothing if @ref kpViewManager
+     * calls invalidateQueuedArea().  Does nothing if @ref kpViewManager
      * is set to queue updates.
      */
     void updateQueuedArea ();

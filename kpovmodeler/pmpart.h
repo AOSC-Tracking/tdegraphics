@@ -76,7 +76,7 @@ public:
     * construtor of PMPart, calls all init functions to create the
     * application.
     */
-   PMPart( TQWidget* tqparentWidget, const char* widgetName,
+   PMPart( TQWidget* parentWidget, const char* widgetName,
            TQObject* tqparent, const char* name, bool readWrite,
            PMShell* shell = 0 );
 
@@ -84,7 +84,7 @@ public:
     * construtor of PMPart, calls all init functions to create the
     * application. It does not create the main widget.
     */
-   PMPart( TQWidget* tqparentWidget, const char* widgetName,
+   PMPart( TQWidget* parentWidget, const char* widgetName,
            TQObject* tqparent, const char* name, bool readWrite,
            bool onlyCutPaste, PMShell* shell = 0 );
 

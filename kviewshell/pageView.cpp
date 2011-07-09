@@ -66,7 +66,7 @@ void PageView::addChild( TQPtrVector<DocumentWidget> *wdgList )
   }
 
   widgetList = wdgList;
-  tqlayoutPages();
+  layoutPages();
 }
 
 
@@ -237,7 +237,7 @@ void PageView::viewportResizeEvent( TQResizeEvent* e )
   if (!widgetList)
     return;
 
-  tqlayoutPages();
+  layoutPages();
 
   emit viewSizeChanged( viewport()->size() );
 }
@@ -295,7 +295,7 @@ void PageView::setFullScreenMode(bool fullScreen)
   }
 }
 
-void PageView::tqlayoutPages(bool zoomChanged)
+void PageView::layoutPages(bool zoomChanged)
 {
   // Paranoid safety check
   if (widgetList == 0)

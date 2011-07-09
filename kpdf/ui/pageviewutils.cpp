@@ -93,10 +93,10 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
     resize( tqgeometry.size() );
 
     // create and set transparency tqmask
-    TQPainter tqmaskPainter( &tqmask);
+    TQPainter maskPainter( &tqmask);
     tqmask.fill( TQt::black );
-    tqmaskPainter.setBrush( TQt::white );
-    tqmaskPainter.drawRoundRect( tqgeometry, 1600 / tqgeometry.width(), 1600 / tqgeometry.height() );
+    maskPainter.setBrush( TQt::white );
+    maskPainter.drawRoundRect( tqgeometry, 1600 / tqgeometry.width(), 1600 / tqgeometry.height() );
     setMask( tqmask );
 
     // draw background
@@ -119,7 +119,7 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
     // if the tqlayout is RtL, we can move it to the right place only after we
     // know how much size it will take
     if ( TQApplication::reverseLayout() )
-        move( tqparentWidget()->width() - tqgeometry.width() - 10, 10 );
+        move( parentWidget()->width() - tqgeometry.width() - 10, 10 );
 
     // show widget and schedule a tqrepaint
     show();

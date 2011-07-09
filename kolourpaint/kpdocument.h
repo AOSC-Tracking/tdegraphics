@@ -189,7 +189,7 @@ public:
     void setSelection (const kpSelection &selection);
 
     // TODO: this always returns opaque pixmap - need transparent ver
-    TQPixmap getSelectedPixmap (const TQBitmap &tqmaskBitmap = TQBitmap ()) const;
+    TQPixmap getSelectedPixmap (const TQBitmap &maskBitmap = TQBitmap ()) const;
 
     bool selectionPullFromDocument (const kpColor &backgroundColor);
     bool selectionDelete ();

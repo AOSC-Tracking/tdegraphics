@@ -13,7 +13,7 @@ static const char SVGDOMNodeBridge__s_hashTableStrings[] = {
     "attributes\0"
     "childNodes\0"
     "firstChild\0"
-    "tqparentNode\0"
+    "parentNode\0"
     "lastChild\0"
     "localName\0"
     "nodeValue\0"

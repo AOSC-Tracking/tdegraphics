@@ -63,7 +63,7 @@ kpThumbnail::kpThumbnail (kpMainWindow *tqparent, const char *name)
     }
 
 
-    TQSize tqlayoutMinimumSize = tqlayout () ? tqlayout ()->tqminimumSize () : TQSize ();
+    TQSize layoutMinimumSize = tqlayout () ? tqlayout ()->tqminimumSize () : TQSize ();
 #if DEBUG_KP_THUMBNAIL
     kdDebug () << "\ttqlayout=" << tqlayout ()
                << " minSize=" << (tqlayout () ? tqlayout ()->tqminimumSize () : TQSize ()) << endl;
@@ -73,8 +73,8 @@ kpThumbnail::kpThumbnail (kpMainWindow *tqparent, const char *name)
 #endif
     if (tqlayout ())
         tqlayout ()->setResizeMode (TQLayout::FreeResize);
-    setMinimumSize (TQMAX (tqlayoutMinimumSize.width (), 64),
-                    TQMAX (tqlayoutMinimumSize.height (), 64));
+    setMinimumSize (TQMAX (layoutMinimumSize.width (), 64),
+                    TQMAX (layoutMinimumSize.height (), 64));
 
 
     // Enable "X" Close Button

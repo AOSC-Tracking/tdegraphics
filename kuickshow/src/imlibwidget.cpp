@@ -519,12 +519,12 @@ void ImlibWidget::restoreCursor()
          setCursor( m_oldCursor );
 }
 
-// Retqparenting a widget in TQt in fact means destroying the old X window of the widget
+// Reparenting a widget in TQt in fact means destroying the old X window of the widget
 // and creating a new one. And since the X window used for the Imlib image is a child
 // of this widget's X window, destroying this widget's X window would mean also
 // destroying the Imlib image X window. Therefore it needs to be temporarily reparented
 // away and reparented back to the new X window.
-// Retqparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
+// Reparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
 void ImlibWidget::reparent( TQWidget* tqparent, WFlags f, const TQPoint& p, bool showIt )
 {
     XWindowAttributes attr;

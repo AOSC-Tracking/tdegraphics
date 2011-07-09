@@ -176,7 +176,7 @@ bool GSCreator::create(const TQString &path, int width, int height, TQImage &img
 {
 // The code in the loop (when testing whether got_sig_term got set)
 // should read some variation of:
-// 		tqparentJob()->wasKilled()
+// 		parentJob()->wasKilled()
 //
 // Unfortunatelly, that's currently impossible without breaking BIC.
 // So we need to catch the signal ourselves.

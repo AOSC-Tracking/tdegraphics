@@ -108,7 +108,7 @@ public slots:
 
     /** Set tqlayout of the page widgets according to the current viewmode and zoomlevel.
         Set zoomChanged = true if the the tqlayout needs updateing because the zoomlevel has changed. */
-    void tqlayoutPages(bool zoomChanged = false);
+    void layoutPages(bool zoomChanged = false);
 
     void slotEnableMoveTool(bool enable);
 

@@ -6,8 +6,8 @@ namespace KSVG {
 
 static const char SVGMaskElementImpl__s_hashTableStrings[] = {
     "\0"
-    "tqmaskContentUnits\0"
-    "tqmaskUnits\0"
+    "maskContentUnits\0"
+    "maskUnits\0"
     "height\0"
     "width\0"
     "x\0"

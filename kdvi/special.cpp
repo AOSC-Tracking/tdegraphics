@@ -650,11 +650,11 @@ void dviRenderer::applicationDoSpecial(char *cp)
     // line break is encountered) 
     if (special_command.startsWith("ps:SDict begin [") && special_command.endsWith(" pdfmark end")) {
       if (!currentlyDrawnPage->hyperLinkList.isEmpty()) {
-        // Parse the PostScript literal text string inside tqparentheses
+        // Parse the PostScript literal text string inside parentheses
         // and store it into 'targetName'.  The scanner works
         // according to "PostScript language reference, third edition"
         // - Sec. 3.2.2. The specification is implemented completely:
-        // balanced tqparentheses and all escape sequences are
+        // balanced parentheses and all escape sequences are
         // considered.
         TQString tmpTargetName = special_command.section('(', 1);
         TQString targetName;

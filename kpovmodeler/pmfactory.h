@@ -33,7 +33,7 @@ public:
    PMFactory( );
    virtual ~PMFactory( );
 
-   virtual KParts::Part* createPartObject( TQWidget* tqparentWidget,
+   virtual KParts::Part* createPartObject( TQWidget* parentWidget,
                                      const char* widgetName,
                                      TQObject* tqparent, const char* name,
                                      const char* classname,

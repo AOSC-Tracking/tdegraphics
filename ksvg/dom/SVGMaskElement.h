@@ -48,8 +48,8 @@ public:
 	SVGMaskElement(SVGMaskElementImpl *other);
 	virtual ~SVGMaskElement();
 
-	SVGAnimatedEnumeration tqmaskUnits() const;
-	SVGAnimatedEnumeration tqmaskContentUnits() const;
+	SVGAnimatedEnumeration maskUnits() const;
+	SVGAnimatedEnumeration maskContentUnits() const;
 	SVGAnimatedLength x() const;
 	SVGAnimatedLength y() const;
 	SVGAnimatedLength width() const;

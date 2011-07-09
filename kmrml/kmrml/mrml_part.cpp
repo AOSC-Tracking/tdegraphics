@@ -90,14 +90,14 @@ KInstance * PartFactory::instance()
     return s_instance;
 }
 
-KParts::Part * PartFactory::createPartObject( TQWidget *tqparentWidget,
+KParts::Part * PartFactory::createPartObject( TQWidget *parentWidget,
                                               const char *widgetName,
                                               TQObject *tqparent,
                                               const char *name,
                                               const char *,
                                               const TQStringList& args )
 {
-    return new MrmlPart( tqparentWidget, widgetName, tqparent, name, args );
+    return new MrmlPart( parentWidget, widgetName, tqparent, name, args );
 }
 
 
@@ -111,7 +111,7 @@ KParts::Part * PartFactory::createPartObject( TQWidget *tqparentWidget,
 
 uint MrmlPart::s_sessionId = 0;
 
-MrmlPart::MrmlPart( TQWidget *tqparentWidget, const char * /* widgetName */,
+MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
                     TQObject *tqparent, const char *name,
                     const TQStringList& /* args */ )
     : KParts::ReadOnlyPart( tqparent, name ),
@@ -126,7 +126,7 @@ MrmlPart::MrmlPart( TQWidget *tqparentWidget, const char * /* widgetName */,
     KConfig *config = PartFactory::instance()->config();
     config->setGroup("MRML Settings");
 
-    TQVBox *box = new TQVBox( tqparentWidget, "main mrml box" );
+    TQVBox *box = new TQVBox( parentWidget, "main mrml box" );
     m_view = new MrmlView( box, "MrmlView" );
     connect( m_view, TQT_SIGNAL( activated( const KURL&, ButtonState )),
              this, TQT_SLOT( slotActivated( const KURL&, ButtonState )));
@@ -677,7 +677,7 @@ void MrmlPart::performQuery( TQDomDocument& doc )
             queryStep.setAttribute("query-type", "at-random");
 
             // remove user-relevance-element-list element for random search
-            relevanceList.tqparentNode().removeChild( relevanceList );
+            relevanceList.parentNode().removeChild( relevanceList );
         }
     }
     else

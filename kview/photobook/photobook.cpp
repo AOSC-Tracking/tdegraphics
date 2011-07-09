@@ -220,7 +220,7 @@ void PhotoBook::updateButton( bool nextExist, bool previousExit)
 K_EXPORT_COMPONENT_FACTORY(libphotobook, PhotoBookFactory )
 
 PhotoBookPart::PhotoBookPart(
-		TQWidget *tqparentWidget, const char *widgetName,
+		TQWidget *parentWidget, const char *widgetName,
 		TQObject *tqparent, const char *name,
 		const TQStringList&
 	)
@@ -229,7 +229,7 @@ PhotoBookPart::PhotoBookPart(
 	setInstance(PhotoBookFactory::instance());
 
 	new PhotoBookBrowserExtension(this);
-	bv = new PhotoBook(tqparentWidget, this, widgetName);
+	bv = new PhotoBook(parentWidget, this, widgetName);
 	setWidget(bv);
 
 	connect(

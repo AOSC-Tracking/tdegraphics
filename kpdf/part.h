@@ -63,7 +63,7 @@ Q_OBJECT
 
 public:
 	// Default constructor
-	Part(TQWidget* tqparentWidget, const char* widgetName,
+	Part(TQWidget* parentWidget, const char* widgetName,
 	     TQObject* tqparent, const char* name, const TQStringList& args);
 
 	// Destructor

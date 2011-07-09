@@ -181,10 +181,10 @@ public:
 
    /**
     * Changes the tqparent library if this is a sub library
-    * @param tqparentPath The new tqparent path for this library
+    * @param parentPath The new tqparent path for this library
     * @return PMLibraryHandle::Ok if successful or the reason for failure
     */
-   PMLibraryHandle::PMResult changeParentLibrary( const TQString& tqparentPath );
+   PMLibraryHandle::PMResult changeParentLibrary( const TQString& parentPath );
 
 private:
 

@@ -55,10 +55,10 @@
 typedef KParts::GenericFactory<KViewViewer> KViewViewerFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewviewer, KViewViewerFactory )
 
-KViewViewer::KViewViewer( TQWidget *tqparentWidget, const char * /*widgetName*/,
+KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
 		TQObject *tqparent, const char *name, const TQStringList & )
 	: KImageViewer::Viewer( tqparent, name )
-	, m_pParentWidget( tqparentWidget )
+	, m_pParentWidget( parentWidget )
 	, m_pJob( 0 )
 	, m_pExtension( 0 )
 	, m_pCanvas( 0 )

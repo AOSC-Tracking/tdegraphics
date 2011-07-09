@@ -1235,7 +1235,7 @@ void kpDocument::setSelection (const kpSelection &selection)
 }
 
 // public
-TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &tqmaskBitmap_) const
+TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &maskBitmap_) const
 {
     kpSelection *sel = selection ();
 
@@ -1259,13 +1259,13 @@ TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &tqmaskBitmap_) const
     }
 
 
-    TQBitmap tqmaskBitmap = tqmaskBitmap_;
-    if (tqmaskBitmap.isNull () &&
+    TQBitmap maskBitmap = maskBitmap_;
+    if (maskBitmap.isNull () &&
         !sel->isRectangular ())
     {
-        tqmaskBitmap = sel->tqmaskForOwnType ();
+        maskBitmap = sel->maskForOwnType ();
 
-        if (tqmaskBitmap.isNull ())
+        if (maskBitmap.isNull ())
         {
             kdError () << "kpDocument::getSelectedPixmap() could not get tqmask" << endl;
             return TQPixmap ();
@@ -1275,7 +1275,7 @@ TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &tqmaskBitmap_) const
 
     TQPixmap selPixmap = getPixmapAt (boundingRect);
 
-    if (!tqmaskBitmap.isNull ())
+    if (!maskBitmap.isNull ())
     {
         // Src Dest = Result
         // -----------------
@@ -1286,8 +1286,8 @@ TQPixmap kpDocument::getSelectedPixmap (const TQBitmap &tqmaskBitmap_) const
         TQBitmap selMaskBitmap = kpPixmapFX::getNonNullMask (selPixmap);
         bitBlt (&selMaskBitmap,
                 TQPoint (0, 0),
-                &tqmaskBitmap,
-                TQRect (0, 0, tqmaskBitmap.width (), tqmaskBitmap.height ()),
+                &maskBitmap,
+                TQRect (0, 0, maskBitmap.width (), maskBitmap.height ()),
                 TQt::AndROP);
         selPixmap.setMask (selMaskBitmap);
     }
@@ -1328,14 +1328,14 @@ bool kpDocument::selectionPullFromDocument (const kpColor &backgroundColor)
     // Figure out tqmask for non-rectangular selections
     //
 
-    TQBitmap tqmaskBitmap = sel->tqmaskForOwnType (true/*return null bitmap for rectangular*/);
+    TQBitmap maskBitmap = sel->maskForOwnType (true/*return null bitmap for rectangular*/);
 
 
     //
     // Get selection pixmap from document
     //
 
-    TQPixmap selPixmap = getSelectedPixmap (tqmaskBitmap);
+    TQPixmap selPixmap = getSelectedPixmap (maskBitmap);
 
     if (vm)
         vm->setQueueUpdates ();

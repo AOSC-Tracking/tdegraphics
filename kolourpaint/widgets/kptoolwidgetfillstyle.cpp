@@ -139,7 +139,7 @@ kpToolWidgetFillStyle::FillStyle kpToolWidgetFillStyle::fillStyle () const
 }
 
 // public static
-TQBrush kpToolWidgetFillStyle::tqmaskBrushForFillStyle (FillStyle fs,
+TQBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
                                                      const kpColor &foregroundColor,
                                                      const kpColor &backgroundColor)
 {
@@ -152,10 +152,10 @@ TQBrush kpToolWidgetFillStyle::tqmaskBrushForFillStyle (FillStyle fs,
         return Qt::NoBrush;
         break;
     case FillWithBackground:
-        return TQBrush (backgroundColor.tqmaskColor ());
+        return TQBrush (backgroundColor.maskColor ());
         break;
     case FillWithForeground:
-        return TQBrush (foregroundColor.tqmaskColor ());
+        return TQBrush (foregroundColor.maskColor ());
         break;
     default:
         return Qt::NoBrush;
@@ -163,10 +163,10 @@ TQBrush kpToolWidgetFillStyle::tqmaskBrushForFillStyle (FillStyle fs,
     }
 }
 
-TQBrush kpToolWidgetFillStyle::tqmaskBrush (const kpColor &foregroundColor,
+TQBrush kpToolWidgetFillStyle::maskBrush (const kpColor &foregroundColor,
                                          const kpColor &backgroundColor)
 {
-    return tqmaskBrushForFillStyle (fillStyle (), foregroundColor, backgroundColor);
+    return maskBrushForFillStyle (fillStyle (), foregroundColor, backgroundColor);
 }
 
 // public static

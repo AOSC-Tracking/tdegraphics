@@ -92,7 +92,7 @@ void kpToolWidgetBase::finishConstruction (int fallBackRow, int fallBackCol)
                << endl;
 #endif
 
-    retqlayoutOptions ();
+    relayoutOptions ();
 
     const TQPair <int, int> rowColPair = defaultSelectedRowAndCol ();
     if (!setSelected (rowColPair.first, rowColPair.second, false/*don't save*/))
@@ -226,10 +226,10 @@ void kpToolWidgetBase::saveSelectedAsDefault () const
 
 
 // public
-void kpToolWidgetBase::retqlayoutOptions ()
+void kpToolWidgetBase::relayoutOptions ()
 {
 #if DEBUG_KP_TOOL_WIDGET_BASE
-    kdDebug () << "kpToolWidgetBase::retqlayoutOptions()" << endl;
+    kdDebug () << "kpToolWidgetBase::relayoutOptions()" << endl;
 #endif
 
     while (!m_pixmaps.isEmpty () && m_pixmaps.last ().count () == 0)

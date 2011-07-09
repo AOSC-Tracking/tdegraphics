@@ -49,9 +49,9 @@ K_EXPORT_COMPONENT_FACTORY(kdvipart, KDVIMultiPageFactory)
 
 
 
-KDVIMultiPage::KDVIMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
+KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
                              const char *name, const TQStringList& args)
-  : KMultiPage(tqparentWidget, widgetName, tqparent, name), DVIRenderer(tqparentWidget)
+  : KMultiPage(parentWidget, widgetName, tqparent, name), DVIRenderer(parentWidget)
 {
   Q_UNUSED(args);
 #ifdef PERFORMANCE_MEASUREMENT
@@ -239,7 +239,7 @@ void KDVIMultiPage::print()
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) ))
+  if (!printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) ))
     return;
 
   // This funny method call is necessary for the KPrinter to return

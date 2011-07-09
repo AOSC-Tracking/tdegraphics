@@ -283,8 +283,8 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
 <includes>
     <include location="global" impldecl="in implementation">kdialog.h</include>
 </includes>
-<tqlayoutdefaults spacing="6" margin="11"/>
-<tqlayoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 <includehints>
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>

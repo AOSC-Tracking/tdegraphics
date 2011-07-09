@@ -152,7 +152,7 @@ void kpViewManager::setTempPixmap (const kpTempPixmap &tempPixmap)
 }
 
 // public
-void kpViewManager::tqinvalidateTempPixmap ()
+void kpViewManager::invalidateTempPixmap ()
 {
     if (!m_tempPixmap)
         return;

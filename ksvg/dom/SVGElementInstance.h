@@ -39,7 +39,7 @@ public:
 
 	SVGElement correspondingElement() const;
 	SVGUseElement correspondingUseElement() const;
-	SVGElementInstance tqparentNode() const;
+	SVGElementInstance parentNode() const;
 	SVGElementInstanceList childNodes() const;
 	SVGElementInstance firstChild() const;
 	SVGElementInstance lastChild() const;

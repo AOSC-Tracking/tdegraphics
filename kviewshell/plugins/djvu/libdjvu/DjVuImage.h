@@ -414,7 +414,7 @@ public:
 private:
   GP<DjVuFile>		file;
   int			rotate_count;
-  bool			retqlayout_sent;
+  bool			relayout_sent;
   
   // HELPERS
   int stencil(GPixmap *pm, const GRect &rect, int subs, double gcorr) const;

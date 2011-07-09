@@ -70,7 +70,7 @@ public:  // (only have to use these if you don't use finishConstruction())
 
     void saveSelectedAsDefault () const;
 
-    void retqlayoutOptions ();
+    void relayoutOptions ();
 
 public:
     int selectedRow () const;

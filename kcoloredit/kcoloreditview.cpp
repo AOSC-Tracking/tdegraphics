@@ -145,7 +145,7 @@ void KColorEditView::setColorAtCursorComponentValueLabelSizes(TQLabel* const lab
 }
 
 KColorEditDoc *KColorEditView::document() const {
-  KColorEditApp *theApp=(KColorEditApp *) tqparentWidget();
+  KColorEditApp *theApp=(KColorEditApp *) parentWidget();
 
   return theApp->document();
 }

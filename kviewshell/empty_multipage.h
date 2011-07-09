@@ -33,7 +33,7 @@ class EmptyMultiPage : public KMultiPage
   TQ_OBJECT
 
 public:
-  EmptyMultiPage(TQWidget* tqparentWidget, const char* widgetName, TQObject* tqparent, const char* name,
+  EmptyMultiPage(TQWidget* parentWidget, const char* widgetName, TQObject* tqparent, const char* name,
                  const TQStringList& args = TQStringList());
 
   virtual TQStringList fileFormats() const { return TQString(); }

@@ -447,7 +447,7 @@ protected:
   This pointer can be used by implementations e.g. to display error
   messages. This pointer can well be zero.
   */
-  TQGuardedPtr<TQWidget> tqparentWidget;
+  TQGuardedPtr<TQWidget> parentWidget;
 
   /** specifies if accessibilityBackgroundColor should be used
 

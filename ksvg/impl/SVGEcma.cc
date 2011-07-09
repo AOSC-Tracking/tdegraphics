@@ -49,7 +49,7 @@ using namespace KSVG;
  nodeName			SVGDOMNodeBridge::NodeName			DontDelete|ReadOnly
  nodeValue			SVGDOMNodeBridge::NodeValue			DontDelete
  nodeType			SVGDOMNodeBridge::NodeType			DontDelete|ReadOnly
- tqparentNode			SVGDOMNodeBridge::ParentNode		DontDelete|ReadOnly
+ parentNode			SVGDOMNodeBridge::ParentNode		DontDelete|ReadOnly
  childNodes			SVGDOMNodeBridge::ChildNodes		DontDelete|ReadOnly
  firstChild			SVGDOMNodeBridge::FirstChild		DontDelete|ReadOnly
  lastChild			SVGDOMNodeBridge::LastChild			DontDelete|ReadOnly

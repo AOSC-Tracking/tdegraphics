@@ -75,7 +75,7 @@ SVGUseElementImpl *SVGElementInstanceImpl::correspondingUseElement() const
 	return m_correspondingUseElement;
 }
 
-SVGElementInstanceImpl *SVGElementInstanceImpl::tqparentNode() const
+SVGElementInstanceImpl *SVGElementInstanceImpl::parentNode() const
 {
 	return m_parentNode;
 }

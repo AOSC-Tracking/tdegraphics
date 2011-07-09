@@ -103,7 +103,7 @@ public:
 
     int size () const;
 
-    TQBitmap tqmaskForOwnType (bool nullForRectangular = false) const;
+    TQBitmap maskForOwnType (bool nullForRectangular = false) const;
 
     // synonyms
     TQPoint topLeft () const;

@@ -1328,7 +1328,7 @@ DjVuDocument::get_thumbnail(int page_num, bool dont_decode)
       }
    }
 
-      // Aptqparently we're out of luck and need to decode the requested
+      // Apparently we're out of luck and need to decode the requested
       // page (unless it's already done and if it's allowed) and render
       // it into the thumbnail. If dont_decode is true, do not attempt
       // to create this file (because this will result in a request for data)

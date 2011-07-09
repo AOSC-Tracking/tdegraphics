@@ -77,7 +77,7 @@ fontPool::fontPool()
   // pixmaps. Experiments show that --depending of the configuration
   // of QT at compile and runtime or the availability of the XFt
   // extension, alpha channels are either supported, or silently
-  // converted to 1-bit tqmasks.
+  // converted to 1-bit masks.
   TQImage start(1, 1, 32); // Generate a 1x1 image, black with alpha=0x10
   start.setAlphaBuffer(true);
   TQ_UINT32 *destScanLine = (TQ_UINT32 *)start.scanLine(0);

@@ -265,8 +265,8 @@ public:
 
       /// Sets the name of the top level chunk to {\em name}
    void		set_name(const GUTF8String &name);
-      /** Adds the chunk {\em chunk} to chunk with name {\em tqparent_name} at
-	  position {\em pos}. {\em tqparent_name} may contain dots, brackets
+      /** Adds the chunk {\em chunk} to chunk with name {\em parent_name} at
+	  position {\em pos}. {\em parent_name} may contain dots, brackets
 	  and colons. All missing chunks in the chain will be created.
 
 	  {\bf Examples:}
@@ -282,7 +282,7 @@ public:
 	     ;; Same thing regardless of the top-level chunk name
 	     m.addChunk("FORM:DJVU[1]", ch);
 	  \end{verbatim} */
-   void		add_chunk(GUTF8String tqparent_name, const GP<GIFFChunk> & chunk, int pos=-1);
+   void		add_chunk(GUTF8String parent_name, const GP<GIFFChunk> & chunk, int pos=-1);
       /** If {\em name}={\em name1}.{\em name2} where {\em name2} doesn't
 	  contain dots, then #addChunk()# will create plain chunk with
 	  name {\em name2} with data {\em buffer} of size {\em length} and

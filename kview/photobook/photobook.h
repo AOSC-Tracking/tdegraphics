@@ -115,7 +115,7 @@ Q_OBJECT
 
 public:
 	PhotoBookPart(
-			TQWidget *tqparentWidget, const char *widgetName,
+			TQWidget *parentWidget, const char *widgetName,
 			TQObject *tqparent, const char *name=0,
 			const TQStringList& args = TQStringList()
 		);

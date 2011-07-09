@@ -33,7 +33,7 @@ class KDE_EXPORT KGVFactory : public KParts::Factory
         static KInstance *instance();
         static KAboutData *aboutData();
 
-        virtual KParts::Part *createPartObject( TQWidget *tqparentWidget, const char *widgetName,
+        virtual KParts::Part *createPartObject( TQWidget *parentWidget, const char *widgetName,
                 TQObject *tqparent, const char *name,
                 const char *className,
                 const TQStringList &args );

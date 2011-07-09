@@ -42,7 +42,7 @@ enum PixelValue
 };
 
 static void setPixel (unsigned char *colorBitmap,
-                      unsigned char *tqmaskBitmap,
+                      unsigned char *maskBitmap,
                       int width,
                       int y, int x, enum PixelValue pv)
 {
@@ -52,32 +52,32 @@ static void setPixel (unsigned char *colorBitmap,
     const int MaskOpaque = 1;
     const int MaskTransparent = 0;
 
-    int colorValue, tqmaskValue;
+    int colorValue, maskValue;
 
     switch (pv)
     {
     case White:
         colorValue = ColorWhite;
-        tqmaskValue = MaskOpaque;
+        maskValue = MaskOpaque;
         break;
 
     case Black:
         colorValue = ColorBlack;
-        tqmaskValue = MaskOpaque;
+        maskValue = MaskOpaque;
         break;
 
     case Transparent:
     default:
         colorValue = ColorWhite;
-        tqmaskValue = MaskTransparent;
+        maskValue = MaskTransparent;
         break;
     }
 
     if (colorValue)
         colorBitmap [y * (width / 8) + (x / 8)] |= (1 << (x % 8));
 
-    if (tqmaskValue)
-        tqmaskBitmap [y * (width / 8) + (x / 8)] |= (1 << (x % 8));
+    if (maskValue)
+        maskBitmap [y * (width / 8) + (x / 8)] |= (1 << (x % 8));
 }
 
 
@@ -90,10 +90,10 @@ const TQCursor *kpMakeCursorLightCross ()
     const int side = 24;
     const int byteSize = (side * side) / 8;
     unsigned char *colorBitmap = new unsigned char [byteSize];
-    unsigned char *tqmaskBitmap = new unsigned char [byteSize];
+    unsigned char *maskBitmap = new unsigned char [byteSize];
 
     memset (colorBitmap, 0, byteSize);
-    memset (tqmaskBitmap, 0, byteSize);
+    memset (maskBitmap, 0, byteSize);
 
     const int oddSide = side - 1;
     const int strokeLen = oddSide * 3 / 8;
@@ -104,7 +104,7 @@ const TQCursor *kpMakeCursorLightCross ()
 
     #define X_(val) (val)
     #define Y_(val) (val)
-    #define DRAW(y,x) setPixel (colorBitmap, tqmaskBitmap, side, (y), (x), pv)
+    #define DRAW(y,x) setPixel (colorBitmap, maskBitmap, side, (y), (x), pv)
         // horizontal
         DRAW (Y_(side / 2), X_(1 + i));
         DRAW (Y_(side / 2), X_(side - 1 - i));
@@ -118,9 +118,9 @@ const TQCursor *kpMakeCursorLightCross ()
     }
 
     TQCursor *cursor = new TQCursor (TQBitmap (side, side, colorBitmap, true/*little endian bit order*/),
-                                   TQBitmap (side, side, tqmaskBitmap, true/*little endian bit order*/));
+                                   TQBitmap (side, side, maskBitmap, true/*little endian bit order*/));
 
-    delete [] tqmaskBitmap;
+    delete [] maskBitmap;
     delete [] colorBitmap;
 
     return cursor;

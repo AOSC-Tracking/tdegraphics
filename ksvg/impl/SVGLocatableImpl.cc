@@ -79,9 +79,9 @@ SVGMatrixImpl *SVGLocatableImpl::getTransformToElement(SVGElementImpl *)
 	return ret;
 }
 
-void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *tqparentScreenCTM)
+void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM)
 {
-	m_cachedScreenCTM->copy(tqparentScreenCTM);
+	m_cachedScreenCTM->copy(parentScreenCTM);
 
 	const SVGMatrixImpl *local = localMatrix();
 
@@ -114,7 +114,7 @@ void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *tqparentScreen
 	}
 }
 
-void SVGLocatableImpl::checkCachedScreenCTM(const SVGMatrixImpl *tqparentScreenCTM)
+void SVGLocatableImpl::checkCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM)
 {
 	if(m_cachedScreenCTMIsValid)
 	{
@@ -135,7 +135,7 @@ void SVGLocatableImpl::checkCachedScreenCTM(const SVGMatrixImpl *tqparentScreenC
 		}
 	}
 	else
-		updateCachedScreenCTM(tqparentScreenCTM);
+		updateCachedScreenCTM(parentScreenCTM);
 }
 
 // Ecma stuff

@@ -40,7 +40,7 @@ public:
 
 	SVGElementImpl *correspondingElement() const;
 	SVGUseElementImpl *correspondingUseElement() const;
-	SVGElementInstanceImpl *tqparentNode() const;
+	SVGElementInstanceImpl *parentNode() const;
 	SVGElementInstanceListImpl *childNodes() const;
 	SVGElementInstanceImpl *firstChild() const;
 	SVGElementInstanceImpl *lastChild() const;

@@ -590,10 +590,10 @@ void kpView::addToQueuedArea (const TQRect &rect)
 }
 
 // public
-void kpView::tqinvalidateQueuedArea ()
+void kpView::invalidateQueuedArea ()
 {
 #if DEBUG_KP_VIEW && 0
-    kdDebug () << "kpView::tqinvalidateQueuedArea()" << endl;
+    kdDebug () << "kpView::invalidateQueuedArea()" << endl;
 #endif
 
     d->m_queuedUpdateArea = TQRegion ();
@@ -621,7 +621,7 @@ void kpView::updateQueuedArea ()
     if (!d->m_queuedUpdateArea.isNull ())
         vm->updateView (this, d->m_queuedUpdateArea);
 
-    tqinvalidateQueuedArea ();
+    invalidateQueuedArea ();
 }
 
 // public
@@ -1346,21 +1346,21 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
         destPixmapPainter.setBackgroundMode (Qt::OpaqueMode);
         destPixmapPainter.setBackgroundColor (TQt::blue);
 
-        TQBitmap tqmaskBitmap;
-        TQPainter tqmaskBitmapPainter;
+        TQBitmap maskBitmap;
+        TQPainter maskBitmapPainter;
         if (destPixmap->tqmask ())
         {
-            tqmaskBitmap = *destPixmap->tqmask ();
-            tqmaskBitmapPainter.begin (&tqmaskBitmap);
-            tqmaskBitmapPainter.setPen (TQt::color1/*opaque*/);
+            maskBitmap = *destPixmap->tqmask ();
+            maskBitmapPainter.begin (&maskBitmap);
+            maskBitmapPainter.setPen (TQt::color1/*opaque*/);
         }
 
 
     #define PAINTER_CMD(cmd)                 \
     {                                        \
         destPixmapPainter . cmd;             \
-        if (tqmaskBitmapPainter.isActive ())   \
-            tqmaskBitmapPainter . cmd;         \
+        if (maskBitmapPainter.isActive ())   \
+            maskBitmapPainter . cmd;         \
     }
 
         TQRect boundingRect = sel->boundingRect ();
@@ -1450,10 +1450,10 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
     #undef PAINTER_CMD
 
         destPixmapPainter.end ();
-        if (tqmaskBitmapPainter.isActive ())
-            tqmaskBitmapPainter.end ();
+        if (maskBitmapPainter.isActive ())
+            maskBitmapPainter.end ();
 
-        destPixmap->setMask (tqmaskBitmap);
+        destPixmap->setMask (maskBitmap);
     }
 
 
@@ -1480,15 +1480,15 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
             {
                 rect.moveBy (-docRect.x (), -docRect.y ());
 
-                TQBitmap tqmaskBitmap;
-                TQPainter destPixmapPainter, tqmaskBitmapPainter;
+                TQBitmap maskBitmap;
+                TQPainter destPixmapPainter, maskBitmapPainter;
 
                 if (destPixmap->tqmask ())
                 {
-                    tqmaskBitmap = *destPixmap->tqmask ();
-                    tqmaskBitmapPainter.begin (&tqmaskBitmap);
-                    tqmaskBitmapPainter.fillRect (rect, TQt::color1/*opaque*/);
-                    tqmaskBitmapPainter.end ();
+                    maskBitmap = *destPixmap->tqmask ();
+                    maskBitmapPainter.begin (&maskBitmap);
+                    maskBitmapPainter.fillRect (rect, TQt::color1/*opaque*/);
+                    maskBitmapPainter.end ();
                 }
 
                 destPixmapPainter.begin (destPixmap);
@@ -1496,8 +1496,8 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
                 destPixmapPainter.fillRect (rect, TQt::white);
                 destPixmapPainter.end ();
 
-                if (!tqmaskBitmap.isNull ())
-                    destPixmap->setMask (tqmaskBitmap);
+                if (!maskBitmap.isNull ())
+                    destPixmap->setMask (maskBitmap);
             }
         }
     }

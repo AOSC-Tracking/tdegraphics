@@ -897,7 +897,7 @@ void PMInsertRuleSystem::loadRules( const TQString& fileName )
    PMRuleClass::s_pPrototypeManager = 0;
 }
 
-bool PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
+bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                     const TQString& className,
                                     const PMObject* after,
                                     const PMObjectList* objectsBetween )
@@ -905,7 +905,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
    bool possible = false;
 
    // find rules for target class
-   PMMetaObject* meta = tqparentObject->tqmetaObject( );
+   PMMetaObject* meta = parentObject->tqmetaObject( );
    for( ; meta && !possible; meta = meta->superClass( ) )
    {
       PMRuleTargetClass* tc = m_rulesDict.tqfind( meta->className( ) );
@@ -917,7 +917,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
          TQStringList::ConstIterator it;
          for( it = exceptions.begin( );
               it != exceptions.end( ) && !exceptionFound; ++it )
-            if( tqparentObject->isA( *it ) )
+            if( parentObject->isA( *it ) )
                exceptionFound = true;
 
          if( !exceptionFound )
@@ -935,7 +935,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
 
                   // count already inserted child objects
                   bool afterInsertPoint = false;
-                  PMObject* o = tqparentObject->firstChild( );
+                  PMObject* o = parentObject->firstChild( );
                   if( !after )
                      afterInsertPoint = true;
                   for( ; o; o = o->nextSibling( ) )
@@ -952,7 +952,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
                   }
 
                   // evaluate condition value
-                  possible = rule->evaluate( tqparentObject );
+                  possible = rule->evaluate( parentObject );
                }
             }
          }
@@ -962,15 +962,15 @@ bool PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
    return possible;
 }
 
-bool PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
+bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                     const PMObject* object,
                                     const PMObject* after,
                                     const PMObjectList* objectsBetween )
 {
-   return canInsert( tqparentObject, object->type( ), after, objectsBetween );
+   return canInsert( parentObject, object->type( ), after, objectsBetween );
 }
 
-int PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
+int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                    const PMObjectList& list,
                                    const PMObject* after )
 {
@@ -978,17 +978,17 @@ int PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
    TQStringList classes;
    for( ; it.current( ); ++it )
       classes.append( it.current( )->type( ) );
-   return canInsert( tqparentObject, classes, after );
+   return canInsert( parentObject, classes, after );
 }
 
-int PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
+int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
                                    const TQStringList& list,
                                    const PMObject* after )
 {
    if( list.size( ) == 1 )
    {
       // more efficient
-      if( canInsert( tqparentObject, list.first( ), after ) )
+      if( canInsert( parentObject, list.first( ), after ) )
          return 1;
       else
          return 0;
@@ -996,7 +996,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
 
    // find rules for target class
    TQPtrList<PMRuleTargetClass> targetClassList;
-   PMMetaObject* meta = tqparentObject->tqmetaObject( );
+   PMMetaObject* meta = parentObject->tqmetaObject( );
    for( ; meta; meta = meta->superClass( ) )
    {
       PMRuleTargetClass* tc = m_rulesDict.tqfind( meta->className( ) );
@@ -1015,7 +1015,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
       {
          rit.current( )->reset( );
          bool afterInsertPoint = false;
-         PMObject* o = tqparentObject->firstChild( );
+         PMObject* o = parentObject->firstChild( );
          if( !after )
             afterInsertPoint = true;
          for( ; o; o = o->nextSibling( ) )
@@ -1041,7 +1041,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* tqparentObject,
          {
             PMRule* rule = rit.current( );
             if( rule->matches( *oit ) )
-               possible = rule->evaluate( tqparentObject );
+               possible = rule->evaluate( parentObject );
          }
       }
       if( possible )

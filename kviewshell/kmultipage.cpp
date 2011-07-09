@@ -34,7 +34,7 @@
 
 //#define DEBUG_KMULTIPAGE
 
-KMultiPage::KMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent, const char *name)
+KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent, const char *name)
   : DCOPObject("kmultipage"), KParts::ReadOnlyPart(tqparent, name)
 {
   // For reasons which I don't understand, the initialization of the
@@ -43,12 +43,12 @@ KMultiPage::KMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObjec
   // This is because of the virtual inheritance. Get rid of it (but it's BC, and this is a lib...) -- DF
   setObjId("kmultipage");
 
-  tqparentWdg = tqparentWidget;
+  parentWdg = parentWidget;
   lastCurrentPage = 0;
   timer_id = -1;
   searchInProgress = false;
   
-  TQVBox* verticalBox = new TQVBox(tqparentWidget);
+  TQVBox* verticalBox = new TQVBox(parentWidget);
   verticalBox->setFocusPolicy(TQ_StrongFocus);
   setWidget(verticalBox);
   
@@ -207,7 +207,7 @@ bool KMultiPage::closeURL()
   widgetList.setAutoDelete(false);
   
   // Update ScrollView.
-  scrollView()->tqlayoutPages();
+  scrollView()->layoutPages();
   enableActions(false);
   
   // Clear Thumbnail List.
@@ -536,7 +536,7 @@ bool KMultiPage::gotoPage(const PageNumber& page, int y, bool isLink)
           if (pageWidget != 0)
             pageWidget->setPageNumber(tableauStartPage + i);
         }
-        scrollView()->tqlayoutPages();
+        scrollView()->layoutPages();
       }
     }
     // move scrollview to "page".
@@ -575,7 +575,7 @@ bool KMultiPage::gotoPage(const PageNumber& page, int y, bool isLink)
     }
 
     pageWidget->setPageNumber(page);
-    scrollView()->tqlayoutPages();
+    scrollView()->layoutPages();
     scrollView()->moveViewportToWidget(pageWidget, y);
   } else {
     // There are multiple widgets, then we are either in the
@@ -689,7 +689,7 @@ void KMultiPage::renderModeChanged()
   pageCache->clear();
 
   generateDocumentWidgets();
-  scrollView()->tqlayoutPages();
+  scrollView()->layoutPages();
 
   for (TQ_UINT16 i=0; i < widgetList.size(); i++)
   {
@@ -732,7 +732,7 @@ void KMultiPage::repaintAllVisibleWidgets()
   // re-aligned. This will automatically update all necessary
   // widgets.
   if (everResized == true)
-    scrollView()->tqlayoutPages(true);
+    scrollView()->layoutPages(true);
 }
 
 
@@ -767,7 +767,7 @@ void KMultiPage::print()
     return;
 
   // initialize the printer using the print dialog
-  if ( printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
+  if ( printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
     // Now do the printing. 
     TQValueList<int> pageList = printer->pageList();
     if (pageList.isEmpty()) 
@@ -891,7 +891,7 @@ void KMultiPage::updateWidgetSize(const PageNumber& pageNumber)
       if (pageSize != documentWidget->pageSize())
       {
         documentWidget->setPageSize(pageSize);
-        scrollView()->tqlayoutPages();
+        scrollView()->layoutPages();
       }
       // We have just one widget per page.
       break;

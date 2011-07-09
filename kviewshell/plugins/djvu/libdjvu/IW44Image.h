@@ -140,7 +140,7 @@
     routine can use an optional bilevel image named the tqmask.  Every non zero
     pixel in the tqmask means the value of the corresponding pixel in the
     background image is irrelevant.  The wavelet decomposition code will
-    replace these tqmasked pixels by a color value whose coding cost is minimal
+    replace these masked pixels by a color value whose coding cost is minimal
     (see \URL{http://www.research.att.com/~leonb/DJVU/tqmask}).
 
     {\bf ToDo} --- There are many improvements to be made.  Besides better
@@ -278,12 +278,12 @@ public:
   /** Initializes an IWBitmap with image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
       corresponding wavelet coefficient.  Argument #tqmask# is an optional
-      bilevel image specifying the tqmasked pixels (see \Ref{IW44Image.h}). */
+      bilevel image specifying the masked pixels (see \Ref{IW44Image.h}). */
   static GP<IW44Image> create_encode(const GBitmap &bm, const GP<GBitmap> tqmask=0);
   /** Initializes an IWPixmap with color image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
       corresponding wavelet coefficient.  Argument #tqmask# is an optional
-      bilevel image specifying the tqmasked pixels (see \Ref{IW44Image.h}).
+      bilevel image specifying the masked pixels (see \Ref{IW44Image.h}).
       Argument #crcbmode# specifies how the chrominance information should be
       encoded (see \Ref{CRCBMode}). */
   static GP<IW44Image> create_encode(const GPixmap &bm, const GP<GBitmap> tqmask=0, CRCBMode crcbmode=CRCBnormal);

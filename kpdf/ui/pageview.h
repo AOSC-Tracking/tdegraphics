@@ -101,7 +101,7 @@ class PageView : public TQScrollView, public DocumentObserver
         void selectionStart( int x, int y, const TQColor & color, bool aboveAll = false );
         void selectionEndPoint( int x, int y );
         void selectionClear();
-        // update internal zoom values and end in a slotRetqlayoutPages();
+        // update internal zoom values and end in a slotRelayoutPages();
         void updateZoom( ZoomMode newZm );
         // update the text on the label using global zoom value or current page's one
         void updateZoomText();
@@ -115,7 +115,7 @@ class PageView : public TQScrollView, public DocumentObserver
 
     private slots:
         // activated either directly or via TQTimer on the viewportResizeEvent
-        void slotRetqlayoutPages();
+        void slotRelayoutPages();
         // activated either directly or via the contentsMoving(int,int) signal
         void slotRequestVisiblePixmaps( int left = -1, int top = -1 );
         // activated by the viewport move timer

@@ -97,14 +97,14 @@ bool kpFloodFill::fill ()
     {
         TQApplication::setOverrideCursor (TQt::waitCursor);
 
-        TQPainter painter, tqmaskPainter;
-        TQBitmap tqmaskBitmap;
+        TQPainter painter, maskPainter;
+        TQBitmap maskBitmap;
 
         if (m_pixmapPtr->tqmask () || m_color.isTransparent ())
         {
-            tqmaskBitmap = kpPixmapFX::getNonNullMask (*m_pixmapPtr);
-            tqmaskPainter.begin (&tqmaskBitmap);
-            tqmaskPainter.setPen (m_color.tqmaskColor ());
+            maskBitmap = kpPixmapFX::getNonNullMask (*m_pixmapPtr);
+            maskPainter.begin (&maskBitmap);
+            maskPainter.setPen (m_color.maskColor ());
         }
 
         if (m_color.isOpaque ())
@@ -124,18 +124,18 @@ bool kpFloodFill::fill ()
             if (painter.isActive ())
                 painter.drawLine (p1, p2);
 
-            if (tqmaskPainter.isActive ())
-                tqmaskPainter.drawLine (p1, p2);
+            if (maskPainter.isActive ())
+                maskPainter.drawLine (p1, p2);
         }
 
         if (painter.isActive ())
             painter.end ();
 
-        if (tqmaskPainter.isActive ())
-            tqmaskPainter.end ();
+        if (maskPainter.isActive ())
+            maskPainter.end ();
 
-        if (!tqmaskBitmap.isNull ())
-            m_pixmapPtr->setMask (tqmaskBitmap);
+        if (!maskBitmap.isNull ())
+            m_pixmapPtr->setMask (maskBitmap);
 
         TQApplication::restoreOverrideCursor ();
     }

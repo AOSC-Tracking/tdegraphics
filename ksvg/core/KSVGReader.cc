@@ -300,13 +300,13 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 
 	if(svg && svg->ownerSVGElement() == 0)
 	{
-		SVGImageElementImpl *tqparentImage = Helper::self()->doc()->tqparentImage();
+		SVGImageElementImpl *parentImage = Helper::self()->doc()->parentImage();
 
-		if(tqparentImage)
+		if(parentImage)
 		{
 			// We're being displayed in a document via an 'image' element. Set
 			// us up to fit into it's rectangle.
-			tqparentImage->setupSVGElement(svg);
+			parentImage->setupSVGElement(svg);
 		}
 	}
 
@@ -316,25 +316,25 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 	{
 		// Set up the cached screenCTM
 		SVGLocatableImpl *locatableParent = 0;
-		DOM::Node tqparentNode = newElement->parentNode();
+		DOM::Node parentNode = newElement->parentNode();
 
-		if(!tqparentNode.isNull())
+		if(!parentNode.isNull())
 		{
-			SVGElementImpl *tqparent = Helper::self()->doc()->getElementFromHandle(tqparentNode.handle());
+			SVGElementImpl *tqparent = Helper::self()->doc()->getElementFromHandle(parentNode.handle());
 
 			if(tqparent)
 				locatableParent = dynamic_cast<SVGLocatableImpl *>(tqparent);
 		}
 
-		SVGMatrixImpl *tqparentMatrix = 0;
+		SVGMatrixImpl *parentMatrix = 0;
 
 		if(locatableParent)
-			tqparentMatrix = locatableParent->getScreenCTM();
+			parentMatrix = locatableParent->getScreenCTM();
 		else
-			tqparentMatrix = SVGSVGElementImpl::createSVGMatrix();
+			parentMatrix = SVGSVGElementImpl::createSVGMatrix();
 
-		locatable->updateCachedScreenCTM(tqparentMatrix);
-		tqparentMatrix->deref();
+		locatable->updateCachedScreenCTM(parentMatrix);
+		parentMatrix->deref();
 	}
 
 	m_currentNode = newElement;

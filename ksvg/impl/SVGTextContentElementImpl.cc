@@ -95,7 +95,7 @@ TQString SVGTextContentElementImpl::textDirectionAwareText()
 	return text;
 }
 
-T2P::GlyphLayoutParams *SVGTextContentElementImpl::tqlayoutParams() const
+T2P::GlyphLayoutParams *SVGTextContentElementImpl::layoutParams() const
 {
 	SVGStylableImpl *style = const_cast<SVGTextContentElementImpl *>(this);
 

@@ -99,7 +99,7 @@ TQTime PMDebugTime;
 
 //#define KPM_WITH_OBJECT_LIBRARY
 
-PMPart::PMPart( TQWidget* tqparentWidget, const char* widgetName,
+PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
                 TQObject* tqparent, const char* name, bool readwrite,
                 PMShell* shell )
       : DCOPObject( "PMPartIface" ),
@@ -141,7 +141,7 @@ PMPart::PMPart( TQWidget* tqparentWidget, const char* widgetName,
 
    initActions( );
    initDocument( );
-   initView( tqparentWidget, widgetName );
+   initView( parentWidget, widgetName );
 
    restoreConfig( instance( )->config( ) );
 
@@ -161,7 +161,7 @@ PMPart::PMPart( TQWidget* tqparentWidget, const char* widgetName,
    slotObjectChanged( m_pScene, PMCNewSelection, this );
 }
 
-PMPart::PMPart( TQWidget* /*tqparentWidget*/, const char* /*widgetName*/,
+PMPart::PMPart( TQWidget* /*parentWidget*/, const char* /*widgetName*/,
                 TQObject* tqparent, const char* name, bool readwrite,
                 bool /*onlyCutPaste*/, PMShell* shell )
       : DCOPObject( "LibraryBrowserIface" ),

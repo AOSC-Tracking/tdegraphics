@@ -110,7 +110,7 @@ public:
 public slots:
 	void timeoutClose();
 protected slots:
-	void tqparentDestroyed();
+	void parentDestroyed();
 protected:
 	void timerEvent(TQTimerEvent *e);
 private:

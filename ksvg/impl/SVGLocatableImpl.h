@@ -52,14 +52,14 @@ public:
 	virtual const SVGMatrixImpl *localMatrix() { return 0; }
 
 	bool cachedScreenCTMIsValid() const { return m_cachedScreenCTMIsValid; }
-	void tqinvalidateCachedMatrices() { m_cachedScreenCTMIsValid = false; }
+	void invalidateCachedMatrices() { m_cachedScreenCTMIsValid = false; }
 
 	// If the cached matrix is invalid, update it and update any child elements
 	// recursively. Otherwise, check child elements recursively.
-	virtual void checkCachedScreenCTM(const SVGMatrixImpl *tqparentScreenCTM);
+	virtual void checkCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM);
 	// Update the cached matrix, and update child element cached matrices,
 	// recursively.
-	virtual void updateCachedScreenCTM(const SVGMatrixImpl *tqparentScreenCTM);
+	virtual void updateCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM);
 
 	// Called immediately after the screen ctm has been updated.
 	virtual void onScreenCTMUpdated() {}

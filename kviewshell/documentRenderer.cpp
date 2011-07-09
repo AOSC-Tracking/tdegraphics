@@ -17,7 +17,7 @@
 
 
 DocumentRenderer::DocumentRenderer(TQWidget* par)
-  : mutex(true), tqparentWidget(par), accessibilityBackground(false),
+  : mutex(true), parentWidget(par), accessibilityBackground(false),
     accessibilityBackgroundColor(TQColor(255,255,255))
 {
   numPages = 0;

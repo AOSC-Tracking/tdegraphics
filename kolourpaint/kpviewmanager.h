@@ -69,7 +69,7 @@ public:
 
     const kpTempPixmap *tempPixmap () const;
     void setTempPixmap (const kpTempPixmap &tempPixmap);
-    void tqinvalidateTempPixmap ();
+    void invalidateTempPixmap ();
 
 
     //

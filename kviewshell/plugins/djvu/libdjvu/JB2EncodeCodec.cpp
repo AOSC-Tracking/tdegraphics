@@ -467,7 +467,7 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
           // Avoid coding null tqshapes/blits
           else if (jshp.bits) 
             {
-              // Make sure all tqparents have been coded
+              // Make sure all parents have been coded
               if (jshp.tqparent>=0 && tqshape2lib[jshp.tqparent]<0)
                 encode_libonly_tqshape(gjim, jshp.tqparent);
               // Allocate library entry when needed

@@ -96,7 +96,7 @@ void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 		}
 		else // create a selection
 		{
-			TQWidget * tqparentwidget = ( TQWidget* )tqparent();
+			TQWidget * parentwidget = ( TQWidget* )tqparent();
 			if( ! m_bSelecting )
 			{
 				m_bSelecting = true;
@@ -127,17 +127,17 @@ void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 			//                 -2 => scroll to the left 2 px per 50ms
 			//                  2 => scroll to the right 2 px per 50ms
 			//                 ...
-			m_xOffset = mapTo( tqparentwidget, ev->pos() ).x();
-			m_yOffset = mapTo( tqparentwidget, ev->pos() ).y();
+			m_xOffset = mapTo( parentwidget, ev->pos() ).x();
+			m_yOffset = mapTo( parentwidget, ev->pos() ).y();
 			if( m_xOffset > 0 )
 			{
-				m_xOffset -= tqparentwidget->width();
+				m_xOffset -= parentwidget->width();
 				if( m_xOffset < 0 )
 					m_xOffset = 0;
 			}
 			if( m_yOffset > 0 )
 			{
-				m_yOffset -= tqparentwidget->height();
+				m_yOffset -= parentwidget->height();
 				if( m_yOffset < 0 )
 					m_yOffset = 0;
 			}

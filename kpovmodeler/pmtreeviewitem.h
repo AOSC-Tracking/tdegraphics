@@ -61,7 +61,7 @@ public:
    PMObject* object( ) const { return m_pObject; }
    /**
     * Returns a key that can be used for sorting, here the index in the
-    * tqparents list of tqchildren
+    * parents list of tqchildren
     */
    virtual TQString key( int column, bool ascending ) const;
    /**

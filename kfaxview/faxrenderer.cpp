@@ -135,7 +135,7 @@ bool FaxRenderer::setFile(const TQString &fname, const KURL &)
   TQFileInfo fi(fname);
   TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
-    KMessageBox::error( tqparentWidget,
+    KMessageBox::error( parentWidget,
 			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").tqarg(filename),
 			i18n("File Error"));
     // the return value 'false' indicates that this operation was not successful.
@@ -156,11 +156,11 @@ bool FaxRenderer::setFile(const TQString &fname, const KURL &)
     // leaving an error message in fax.errorString(). We try to handle
     // this case gracefully.
     if (fax.errorString().isEmpty())
-      KMessageBox::error( tqparentWidget,
+      KMessageBox::error( parentWidget,
 			  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
 			  i18n("File Error"));
     else
-      KMessageBox::detailedError( tqparentWidget,
+      KMessageBox::detailedError( parentWidget,
 				  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
 				  fax.errorString(),
 				  i18n("File Error"));

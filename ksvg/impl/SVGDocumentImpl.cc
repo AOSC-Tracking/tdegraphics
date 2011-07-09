@@ -74,7 +74,7 @@ unsigned int SVGDocumentImpl::elemDictHashSizes [] =
 
 const int SVGDocumentImpl::numElemDictHashSizes = sizeof(elemDictHashSizes) / sizeof(elemDictHashSizes[0]);
 
-SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *tqparentImage) : TQObject(), DOM::DomShared(), DOM::Document(), SVGDOMNodeBridge(static_cast<DOM::Node>(*this))
+SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *parentImage) : TQObject(), DOM::DomShared(), DOM::Document(), SVGDOMNodeBridge(static_cast<DOM::Node>(*this))
 {
 	m_animations = anim;
 
@@ -97,7 +97,7 @@ SVGDocumentImpl::SVGDocumentImpl(bool anim, bool fit, SVGImageElementImpl *tqpar
 	m_resortZIndicesOnFinishedLoading = false;
 	m_fit = fit;
 
-	m_parentImage = tqparentImage;
+	m_parentImage = parentImage;
 	if(m_parentImage)
 		m_parentImage->ref();
 }
@@ -392,9 +392,9 @@ void SVGDocumentImpl::syncCachedMatrices()
 {
 	if(rootElement())
 	{
-		SVGMatrixImpl *tqparentMatrix = SVGSVGElementImpl::createSVGMatrix();
-		rootElement()->checkCachedScreenCTM(tqparentMatrix);
-		tqparentMatrix->deref();
+		SVGMatrixImpl *parentMatrix = SVGSVGElementImpl::createSVGMatrix();
+		rootElement()->checkCachedScreenCTM(parentMatrix);
+		parentMatrix->deref();
 	}
 }
 

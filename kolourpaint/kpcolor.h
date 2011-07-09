@@ -87,7 +87,7 @@ public:
     // (const TQColor & return results in fewer color reallocations)
     const TQColor &toTQColor () const;
 
-    TQColor tqmaskColor () const;
+    TQColor maskColor () const;
 
 private:
     bool m_rgbaIsValid;

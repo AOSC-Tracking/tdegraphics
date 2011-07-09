@@ -40,7 +40,7 @@ class KMultiPage : public KParts::ReadOnlyPart, virtual public kmultipageInterfa
   TQ_OBJECT
 
 public:
-  KMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent, const char *name);
+  KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent, const char *name);
   virtual ~KMultiPage();
 
   /* returns the scrollview used for the display */
@@ -121,7 +121,7 @@ public:
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
+  if (!printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
     delete printer;
     return;
   }
@@ -155,7 +155,7 @@ public:
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
+  if (!printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
     delete printer;
     return;
   }
@@ -569,7 +569,7 @@ protected:
 
   This pointer is automatically set by the constructor.
   */
-  TQGuardedPtr<TQWidget> tqparentWdg;
+  TQGuardedPtr<TQWidget> parentWdg;
 
   TQPtrVector<DocumentWidget> widgetList;
 

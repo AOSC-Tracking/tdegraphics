@@ -167,7 +167,7 @@ void kpToolCropSetImageCommand::execute ()
 
         kpPixmapFX::paintMaskTransparentWithBrush (&newDocPixmap,
             TQPoint (0, 0),
-            m_fromSelection.tqmaskForOwnType ());
+            m_fromSelection.maskForOwnType ());
 
         kpPixmapFX::paintPixmapAt (&newDocPixmap,
             TQPoint (0, 0),

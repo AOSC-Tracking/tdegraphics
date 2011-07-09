@@ -238,15 +238,15 @@ void PMDockSplitter::updateName()
   if ( !initialised ) return;
 
   TQString new_name = TQString( child0->name() ) + "," + child1->name();
-  tqparentWidget()->setName( new_name.latin1() );
-  tqparentWidget()->setCaption( child0->caption() + "," + child1->caption() );
-  tqparentWidget()->tqrepaint( false );
+  parentWidget()->setName( new_name.latin1() );
+  parentWidget()->setCaption( child0->caption() + "," + child1->caption() );
+  parentWidget()->tqrepaint( false );
 
-  ((PMDockWidget*)tqparentWidget())->firstName = child0->name();
-  ((PMDockWidget*)tqparentWidget())->lastName = child1->name();
-  ((PMDockWidget*)tqparentWidget())->splitterOrientation = orientation;
+  ((PMDockWidget*)parentWidget())->firstName = child0->name();
+  ((PMDockWidget*)parentWidget())->lastName = child1->name();
+  ((PMDockWidget*)parentWidget())->splitterOrientation = orientation;
 
-  TQWidget* p = tqparentWidget()->tqparentWidget();
+  TQWidget* p = parentWidget()->parentWidget();
   if ( p != 0L && p->inherits("PMDockSplitter" ) )
     ((PMDockSplitter*)p)->updateName();
 }

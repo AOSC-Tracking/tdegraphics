@@ -124,7 +124,7 @@ art_ksvg_rgba_run_alpha (art_u8 *buf, art_u8 r, art_u8 g, art_u8 b, int alpha, i
 }
 
 static void
-art_ksvg_rgba_tqmask_run_alpha (art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
+art_ksvg_rgba_mask_run_alpha (art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
 {
 	int i;
 	int v;
@@ -330,7 +330,7 @@ art_ksvg_rgba_svp_alpha_opaque_callback(void *callback_data, int y,
 }
 
 static void
-art_ksvg_rgba_svp_alpha_tqmask_callback(void *callback_data, int y,
+art_ksvg_rgba_svp_alpha_mask_callback(void *callback_data, int y,
 																 int start, ArtSVPRenderAAStep *steps, int n_steps)
 {
 	ArtKSVGRgbaSVPAlphaData *data = (ArtKSVGRgbaSVPAlphaData *)callback_data;
@@ -342,7 +342,7 @@ art_ksvg_rgba_svp_alpha_tqmask_callback(void *callback_data, int y,
 	art_u8 r, g, b;
 	int *alphatab;
 	int alpha;
-	art_u8 *tqmaskbuf;
+	art_u8 *maskbuf;
 
 	linebuf = data->buf;
 	x0 = data->x0;
@@ -353,7 +353,7 @@ art_ksvg_rgba_svp_alpha_tqmask_callback(void *callback_data, int y,
 	b = data->b;
 	alphatab = data->alphatab;
 
-	tqmaskbuf = data->tqmask + (y - data->y0) * (data->x1 - data->x0);
+	maskbuf = data->tqmask + (y - data->y0) * (data->x1 - data->x0);
 
 	if(n_steps > 0)
 	{
@@ -362,7 +362,7 @@ art_ksvg_rgba_svp_alpha_tqmask_callback(void *callback_data, int y,
 		{
 			alpha = (running_sum >> 16) & 0xff;
 			if(alpha)
-				art_ksvg_rgba_tqmask_run_alpha (linebuf, tqmaskbuf,
+				art_ksvg_rgba_mask_run_alpha (linebuf, maskbuf,
 													 r, g, b, alphatab[alpha],
 													 run_x1 - x0);
 		}
@@ -376,7 +376,7 @@ art_ksvg_rgba_svp_alpha_tqmask_callback(void *callback_data, int y,
 			{
 				alpha = (running_sum >> 16) & 0xff;
 				if(alpha)
-					art_ksvg_rgba_tqmask_run_alpha (linebuf + (run_x0 - x0) * 4, tqmaskbuf + (run_x0 - x0),
+					art_ksvg_rgba_mask_run_alpha (linebuf + (run_x0 - x0) * 4, maskbuf + (run_x0 - x0),
 														 r, g, b, alphatab[alpha],
 														 run_x1 - run_x0);
 			}
@@ -386,7 +386,7 @@ art_ksvg_rgba_svp_alpha_tqmask_callback(void *callback_data, int y,
 		{
 			alpha = (running_sum >> 16) & 0xff;
 			if(alpha)
-				art_ksvg_rgba_tqmask_run_alpha (linebuf + (run_x1 - x0) * 4, tqmaskbuf + (run_x1 - x0) ,
+				art_ksvg_rgba_mask_run_alpha (linebuf + (run_x1 - x0) * 4, maskbuf + (run_x1 - x0) ,
 													 r, g, b, alphatab[alpha],
 													 x1 - run_x1);
 		}
@@ -395,7 +395,7 @@ art_ksvg_rgba_svp_alpha_tqmask_callback(void *callback_data, int y,
 	{
 		alpha = (running_sum >> 16) & 0xff;
 		if(alpha)
-			art_ksvg_rgba_tqmask_run_alpha (linebuf,	tqmaskbuf,
+			art_ksvg_rgba_mask_run_alpha (linebuf,	maskbuf,
 												 r, g, b, alphatab[alpha],
 												 x1 - x0);
 	}
@@ -472,7 +472,7 @@ art_ksvg_rgba_svp_alpha(const ArtSVP *svp,
 	data.y0 = y0;
 
 	if(tqmask)
-		art_svp_render_aa (svp, x0, y0, x1, y1, art_ksvg_rgba_svp_alpha_tqmask_callback, &data);
+		art_svp_render_aa (svp, x0, y0, x1, y1, art_ksvg_rgba_svp_alpha_mask_callback, &data);
 	else
 	{
 		if (alpha == 255)
@@ -485,7 +485,7 @@ art_ksvg_rgba_svp_alpha(const ArtSVP *svp,
 /* RGB renderers */
 
 static void
-art_ksvg_rgb_tqmask_run_alpha(art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
+art_ksvg_rgb_mask_run_alpha(art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
 {
 	int i;
 	int v;
@@ -515,7 +515,7 @@ art_ksvg_rgb_tqmask_run_alpha(art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, a
 }
 
 static void
-art_ksvg_rgb_svp_alpha_tqmask_callback(void *callback_data, int y,
+art_ksvg_rgb_svp_alpha_mask_callback(void *callback_data, int y,
 																 int start, ArtSVPRenderAAStep *steps, int n_steps)
 {
 	ArtKSVGRgbaSVPAlphaData *data = (ArtKSVGRgbaSVPAlphaData *)callback_data;
@@ -527,7 +527,7 @@ art_ksvg_rgb_svp_alpha_tqmask_callback(void *callback_data, int y,
 	art_u8 r, g, b;
 	int *alphatab;
 	int alpha;
-	art_u8 *tqmaskbuf;
+	art_u8 *maskbuf;
 
 	linebuf = data->buf;
 	x0 = data->x0;
@@ -538,7 +538,7 @@ art_ksvg_rgb_svp_alpha_tqmask_callback(void *callback_data, int y,
 	b = data->b;
 	alphatab = data->alphatab;
 
-	tqmaskbuf = data->tqmask + (y - data->y0) * (data->x1 - data->x0);
+	maskbuf = data->tqmask + (y - data->y0) * (data->x1 - data->x0);
 
 	if(n_steps > 0)
 	{
@@ -547,7 +547,7 @@ art_ksvg_rgb_svp_alpha_tqmask_callback(void *callback_data, int y,
 		{
 			alpha = (running_sum >> 16) & 0xff;
 			if(alpha)
-				art_ksvg_rgb_tqmask_run_alpha (linebuf, tqmaskbuf,
+				art_ksvg_rgb_mask_run_alpha (linebuf, maskbuf,
 													 r, g, b, alphatab[alpha],
 													 run_x1 - x0);
 		}
@@ -561,7 +561,7 @@ art_ksvg_rgb_svp_alpha_tqmask_callback(void *callback_data, int y,
 			{
 				alpha = (running_sum >> 16) & 0xff;
 				if(alpha)
-					art_ksvg_rgb_tqmask_run_alpha (linebuf + (run_x0 - x0) * 3, tqmaskbuf + (run_x0 - x0),
+					art_ksvg_rgb_mask_run_alpha (linebuf + (run_x0 - x0) * 3, maskbuf + (run_x0 - x0),
 														 r, g, b, alphatab[alpha],
 														 run_x1 - run_x0);
 			}
@@ -571,7 +571,7 @@ art_ksvg_rgb_svp_alpha_tqmask_callback(void *callback_data, int y,
 		{
 			alpha = (running_sum >> 16) & 0xff;
 			if(alpha)
-				art_ksvg_rgb_tqmask_run_alpha (linebuf + (run_x1 - x0) * 3, tqmaskbuf + (run_x1 - x0) ,
+				art_ksvg_rgb_mask_run_alpha (linebuf + (run_x1 - x0) * 3, maskbuf + (run_x1 - x0) ,
 													 r, g, b, alphatab[alpha],
 													 x1 - run_x1);
 		}
@@ -580,7 +580,7 @@ art_ksvg_rgb_svp_alpha_tqmask_callback(void *callback_data, int y,
 	{
 		alpha = (running_sum >> 16) & 0xff;
 		if(alpha)
-			art_ksvg_rgb_tqmask_run_alpha (linebuf,	tqmaskbuf,
+			art_ksvg_rgb_mask_run_alpha (linebuf,	maskbuf,
 												 r, g, b, alphatab[alpha],
 												 x1 - x0);
 	}
@@ -654,6 +654,6 @@ art_ksvg_rgb_svp_alpha_tqmask(const ArtSVP *svp,
 	data.x1 = x1;
 	data.y0 = y0;
 
-	art_svp_render_aa(svp, x0, y0, x1, y1, art_ksvg_rgb_svp_alpha_tqmask_callback, &data);
+	art_svp_render_aa(svp, x0, y0, x1, y1, art_ksvg_rgb_svp_alpha_mask_callback, &data);
 }
 

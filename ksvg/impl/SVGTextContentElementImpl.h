@@ -52,7 +52,7 @@ public:
 
 	TQString textDirectionAwareText();
 
-	virtual T2P::GlyphLayoutParams *tqlayoutParams() const;
+	virtual T2P::GlyphLayoutParams *layoutParams() const;
 
 	SVGAnimatedLengthImpl *textLength() const;
 	SVGAnimatedEnumerationImpl *lengthAdjust() const;

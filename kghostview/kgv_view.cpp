@@ -74,7 +74,7 @@ namespace KGV {
     }
 }
 
-KGVPart::KGVPart( TQWidget* tqparentWidget, const char*,
+KGVPart::KGVPart( TQWidget* parentWidget, const char*,
                   TQObject* tqparent, const char* name,
                   const TQStringList &args ) :
     KParts::ReadOnlyPart( tqparent, name ),
@@ -108,7 +108,7 @@ KGVPart::KGVPart( TQWidget* tqparentWidget, const char*,
 	     this, TQT_SLOT( slotDoFileDirty() ) );
 
     // Setup main widget
-    _mainWidget = new KGVMainWidget( tqparentWidget );
+    _mainWidget = new KGVMainWidget( parentWidget );
     _mainWidget->setFocusPolicy( TQ_StrongFocus );
     _mainWidget->installEventFilter( this );
     _mainWidget->setAcceptDrops( true );

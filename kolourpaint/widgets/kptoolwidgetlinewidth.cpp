@@ -52,22 +52,22 @@ kpToolWidgetLineWidth::kpToolWidgetLineWidth (TQWidget *tqparent, const char *na
                         (h <= 0 ? height () : h));
         pixmap.fill (TQt::white);
 
-        TQBitmap tqmaskBitmap (pixmap.width (), pixmap.height ());
-        tqmaskBitmap.fill (TQt::color0/*transparent*/);
+        TQBitmap maskBitmap (pixmap.width (), pixmap.height ());
+        maskBitmap.fill (TQt::color0/*transparent*/);
         
         
-        TQPainter painter (&pixmap), tqmaskPainter (&tqmaskBitmap);
-        painter.setPen (TQt::black), tqmaskPainter.setPen (TQt::color1/*opaque*/);
-        painter.setBrush (TQt::black), tqmaskPainter.setBrush (TQt::color1/*opaque*/);
+        TQPainter painter (&pixmap), maskPainter (&maskBitmap);
+        painter.setPen (TQt::black), maskPainter.setPen (TQt::color1/*opaque*/);
+        painter.setBrush (TQt::black), maskPainter.setBrush (TQt::color1/*opaque*/);
 
         TQRect rect = TQRect (0, (pixmap.height () - lineWidths [i]) / 2,
                             pixmap.width (), lineWidths [i]);
-        painter.drawRect (rect), tqmaskPainter.drawRect (rect);
+        painter.drawRect (rect), maskPainter.drawRect (rect);
 
-        painter.end (), tqmaskPainter.end ();
+        painter.end (), maskPainter.end ();
         
         
-        pixmap.setMask (tqmaskBitmap);
+        pixmap.setMask (maskBitmap);
 
         addOption (pixmap, TQString::number (lineWidths [i]));
         startNewOptionRow ();

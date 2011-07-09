@@ -274,5 +274,5 @@
     <function access="private">init()</function>
 </functions>
 <pixmapfunction>DesktopIcon</pixmapfunction>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 </UI>

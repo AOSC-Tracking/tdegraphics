@@ -614,7 +614,7 @@ public:
   /**
    * @return the tqparent widget of this if it inherits class PMDockTabGroup
    */
-  PMDockTabGroup* tqparentDockTabGroup() const;
+  PMDockTabGroup* parentDockTabGroup() const;
 
 #ifndef NO_KDE2
 
@@ -855,7 +855,7 @@ public:
 #ifndef NO_KDE2
   /**
    * Saves the current state of the dockmanager and of all controlled widgets.
-   * State means here to save the tqgeometry, visibility, tqparents, internal object names, orientation,
+   * State means here to save the tqgeometry, visibility, parents, internal object names, orientation,
    * separator positions, dockwidget-group information, tab widget states (if it is a tab group) and
    * last but not least some necessary things for recovering the dockmainwindow state.
    *

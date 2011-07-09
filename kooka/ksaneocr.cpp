@@ -401,7 +401,7 @@ void KSANEOCR::startOCRAD( )
     *daemon <<  m_tmpOrfName;                   // the orf result file
     *daemon << TQFile::encodeName( m_ocrImagePBM ).data();      // The name of the image
     *daemon << TQString("-l");
-    *daemon << TQString::number( ocrDia->tqlayoutDetectionMode());
+    *daemon << TQString::number( ocrDia->layoutDetectionMode());
 
     KConfig *konf = KGlobal::config ();
     KConfigGroupSaver( konf, CFG_GROUP_OCRAD );

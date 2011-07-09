@@ -353,12 +353,12 @@ PMLibraryHandle::PMResult PMLibraryHandle::deleteSubLibrary( const TQString& sub
    return PMLibraryHandle::NotInLib;
 }
 
-PMLibraryHandle::PMResult PMLibraryHandle::changeParentLibrary( const TQString& tqparentPath )
+PMLibraryHandle::PMResult PMLibraryHandle::changeParentLibrary( const TQString& parentPath )
 {
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
 
-   TQString newPath = tqparentPath + "/" + m_path.section( '/', -1 );
+   TQString newPath = parentPath + "/" + m_path.section( '/', -1 );
    PMLibraryHandle::EntryIterator itr( m_libraries );
    for( ; itr.current( ); ++itr )
    {

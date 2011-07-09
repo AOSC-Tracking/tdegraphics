@@ -314,7 +314,7 @@ void kpToolAirSprayCommand::addPoints (const TQPointArray &points)
     TQPixmap pixmap = document ()->getPixmapAt (docRect);
     TQBitmap tqmask;
 
-    TQPainter painter, tqmaskPainter;
+    TQPainter painter, maskPainter;
 
     if (m_color.isOpaque ())
     {
@@ -325,8 +325,8 @@ void kpToolAirSprayCommand::addPoints (const TQPointArray &points)
     if (pixmap.tqmask () || m_color.isTransparent ())
     {
         tqmask = kpPixmapFX::getNonNullMask (pixmap);
-        tqmaskPainter.begin (&tqmask);
-        tqmaskPainter.setPen (m_color.tqmaskColor ());
+        maskPainter.begin (&tqmask);
+        maskPainter.setPen (m_color.maskColor ());
     }
 
     for (int i = 0; i < (int) points.count (); i++)
@@ -337,12 +337,12 @@ void kpToolAirSprayCommand::addPoints (const TQPointArray &points)
         if (painter.isActive ())
             painter.drawPoint (pt);
 
-        if (tqmaskPainter.isActive ())
-            tqmaskPainter.drawPoint (pt);
+        if (maskPainter.isActive ())
+            maskPainter.drawPoint (pt);
     }
 
-    if (tqmaskPainter.isActive ())
-        tqmaskPainter.end ();
+    if (maskPainter.isActive ())
+        maskPainter.end ();
 
     if (painter.isActive ())
         painter.end ();

@@ -59,7 +59,7 @@ class MrmlPart : public KParts::ReadOnlyPart
 public:
     enum tqStatus { NeedCollection, CanSearch, InProgress };
 
-    MrmlPart( TQWidget *tqparentWidget, const char *widgetName,
+    MrmlPart( TQWidget *parentWidget, const char *widgetName,
               TQObject *tqparent, const char *name, const TQStringList& args );
     ~MrmlPart();
 
@@ -160,7 +160,7 @@ public:
     static KInstance * instance();
 
 protected:
-    virtual KParts::Part * createPartObject( TQWidget *tqparentWidget = 0,
+    virtual KParts::Part * createPartObject( TQWidget *parentWidget = 0,
                                         const char *widgetName = 0,
                                         TQObject *tqparent = 0,
                                         const char *name = 0,

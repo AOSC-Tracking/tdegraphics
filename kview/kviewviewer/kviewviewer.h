@@ -49,7 +49,7 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 	friend class KViewKonqExtension;
 
 	public:
-		KViewViewer( TQWidget * tqparentWidget, const char * widgetName,
+		KViewViewer( TQWidget * parentWidget, const char * widgetName,
 				TQObject * tqparent, const char * name, const TQStringList & );
 		virtual ~KViewViewer();
 

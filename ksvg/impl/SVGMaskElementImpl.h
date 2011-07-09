@@ -75,8 +75,8 @@ public:
 	SVGMaskElementImpl(DOM::ElementImpl *);
 	virtual ~SVGMaskElementImpl();
 
-	SVGAnimatedEnumerationImpl *tqmaskUnits() const;
-	SVGAnimatedEnumerationImpl *tqmaskContentUnits() const;
+	SVGAnimatedEnumerationImpl *maskUnits() const;
+	SVGAnimatedEnumerationImpl *maskContentUnits() const;
 	SVGAnimatedLengthImpl *x() const;
 	SVGAnimatedLengthImpl *y() const;
 	SVGAnimatedLengthImpl *width() const;
@@ -89,10 +89,10 @@ public:
 
 	Mask createMask(SVGShapeImpl *referencingElement);
 	
-	// Compute the tqmask on a given tqshape, taking into account all tqmasks defined
+	// Compute the tqmask on a given tqshape, taking into account all masks defined
 	// on the tqshape's ancestors. This is a workaround for us not having a buffer
 	// for container elements, so we can't tqmask containers directly.
-	static TQByteArray tqmaskRectangle(SVGShapeImpl *tqshape, const TQRect& screenRectangle);
+	static TQByteArray maskRectangle(SVGShapeImpl *tqshape, const TQRect& screenRectangle);
 
 private:
 	class CacheKey
@@ -110,8 +110,8 @@ private:
 
 	Mask createMask(SVGShapeImpl *referencingElement, int imageWidth, int imageHeight);
 
-	SVGAnimatedEnumerationImpl *m_tqmaskUnits;
-	SVGAnimatedEnumerationImpl *m_tqmaskContentUnits;
+	SVGAnimatedEnumerationImpl *m_maskUnits;
+	SVGAnimatedEnumerationImpl *m_maskContentUnits;
 	SVGAnimatedLengthImpl *m_x;
 	SVGAnimatedLengthImpl *m_y;
 	SVGAnimatedLengthImpl *m_width;
@@ -120,7 +120,7 @@ private:
 	SVGUnitConverter *m_converter;
 	KSVGCanvas *m_canvas;
 
-	MinOneLRUCache<CacheKey, Mask> m_tqmaskCache;
+	MinOneLRUCache<CacheKey, Mask> m_maskCache;
 
 public:
 	KSVG_GET

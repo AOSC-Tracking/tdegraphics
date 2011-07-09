@@ -104,21 +104,21 @@ void TOC::notifySetup( const TQValueVector< KPDFPage * > & /*pages*/, bool docum
     emit hasTOC( true );
 }
 
-void TOC::addChildren( const TQDomNode & tqparentNode, KListViewItem * tqparentItem )
+void TOC::addChildren( const TQDomNode & parentNode, KListViewItem * parentItem )
 {
     // keep track of the current listViewItem
     TOCItem * currentItem = 0;
-    TQDomNode n = tqparentNode.firstChild();
+    TQDomNode n = parentNode.firstChild();
     while( !n.isNull() )
     {
         // convert the node to an element (sure it is)
         TQDomElement e = n.toElement();
 
-        // insert the entry as top level (listview tqparented) or 2nd+ level
-        if ( !tqparentItem )
+        // insert the entry as top level (listview parented) or 2nd+ level
+        if ( !parentItem )
             currentItem = new TOCItem( this, currentItem, e );
         else
-            currentItem = new TOCItem( tqparentItem, currentItem, e );
+            currentItem = new TOCItem( parentItem, currentItem, e );
 
         // descend recursively and advance to the next node
         if ( e.hasChildNodes() )

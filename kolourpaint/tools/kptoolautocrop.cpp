@@ -654,7 +654,7 @@ void kpToolAutoCropCommand::unexecute ()
         return;
 
     TQPixmap pixmap (m_oldWidth, m_oldHeight);
-    TQBitmap tqmaskBitmap;
+    TQBitmap maskBitmap;
 
     // restore the position of the centre image
     kpPixmapFX::setPixmapAt (&pixmap, m_contentsRect,
@@ -663,7 +663,7 @@ void kpToolAutoCropCommand::unexecute ()
     // draw the borders
 
     TQPainter painter (&pixmap);
-    TQPainter tqmaskPainter;
+    TQPainter maskPainter;
 
     const kpToolAutoCropBorder *borders [] =
     {
@@ -699,14 +699,14 @@ void kpToolAutoCropCommand::unexecute ()
             }
             else
             {
-                if (tqmaskBitmap.isNull ())
+                if (maskBitmap.isNull ())
                 {
                     // TODO: dangerous when a painter is active on pixmap?
-                    tqmaskBitmap = kpPixmapFX::getNonNullMask (pixmap);
-                    tqmaskPainter.begin (&tqmaskBitmap);
+                    maskBitmap = kpPixmapFX::getNonNullMask (pixmap);
+                    maskPainter.begin (&maskBitmap);
                 }
 
-                tqmaskPainter.fillRect ((*b)->rect (), TQt::color0/*transparent*/);
+                maskPainter.fillRect ((*b)->rect (), TQt::color0/*transparent*/);
             }
         }
         else
@@ -721,7 +721,7 @@ void kpToolAutoCropCommand::unexecute ()
             if (*p)
             {
                 // TODO: We should really edit the tqmask here.  Due to good
-                //       luck (if "tqmaskBitmap" is initialized above, this region
+                //       luck (if "maskBitmap" is initialized above, this region
                 //       will be marked as opaque in the tqmask; if it's not
                 //       initialized, we will be opaque by default), we
                 //       don't actually have to edit the tqmask but this is
@@ -731,13 +731,13 @@ void kpToolAutoCropCommand::unexecute ()
         }
     }
 
-    if (tqmaskPainter.isActive ())
-        tqmaskPainter.end ();
+    if (maskPainter.isActive ())
+        maskPainter.end ();
 
     painter.end ();
 
-    if (!tqmaskBitmap.isNull ())
-        pixmap.setMask (tqmaskBitmap);
+    if (!maskBitmap.isNull ())
+        pixmap.setMask (maskBitmap);
 
 
     if (!m_actOnSelection)

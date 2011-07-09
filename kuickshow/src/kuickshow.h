@@ -133,7 +133,7 @@ private slots:
     void                slotOpenURL();
     void		slotSetURL( const KURL& );
     void		slotURLComboReturnPressed();
-//     void                tqinvalidateImages( const KFileItemList& items );
+//     void                invalidateImages( const KFileItemList& items );
     void		slotDeleteCurrentImage(ImageWindow *viewer);
     void		slotTrashCurrentImage(ImageWindow *viewer);
     void                slotDeleteCurrentImage();

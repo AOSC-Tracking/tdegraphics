@@ -312,7 +312,7 @@ void PMGLView::initializeGL( )
 
       Window p;
       p = RootWindow( display, vi->screen );
-      TQWidget* pw = tqparentWidget( );
+      TQWidget* pw = parentWidget( );
       if( pw )
          p = pw->winId( );
 
@@ -406,7 +406,7 @@ void PMGLView::setScale( double scale )
    if( m_dScale > 0 )
    {
       m_dScale = scale;
-      tqinvalidateProjection( );
+      invalidateProjection( );
    }
    else
       kdError( PMArea ) << "Scale <= 0 in PMGLView::setScale\n";
@@ -415,18 +415,18 @@ void PMGLView::setScale( double scale )
 void PMGLView::setTranslationX( double d )
 {
    m_dTransX = d;
-   tqinvalidateProjection( );
+   invalidateProjection( );
 }
 
 void PMGLView::setTranslationY( double d )
 {
    m_dTransY = d;
-   tqinvalidateProjection( );
+   invalidateProjection( );
 }
 
 void PMGLView::resizeEvent( TQResizeEvent* )
 {
-   tqinvalidateProjection( );
+   invalidateProjection( );
 }
 
 void PMGLView::paintEvent( TQPaintEvent* )
@@ -434,7 +434,7 @@ void PMGLView::paintEvent( TQPaintEvent* )
    tqrepaint( );
 }
 
-void PMGLView::tqinvalidateProjection( bool graphicalChange /*= true*/ )
+void PMGLView::invalidateProjection( bool graphicalChange /*= true*/ )
 {
    m_viewTransformation = PMMatrix::identity( );
 
@@ -698,14 +698,14 @@ void PMGLView::mouseMoveEvent( TQMouseEvent* e )
             m_dTransX += m_scaleIntX * c;
             m_dTransY += m_scaleIntY * c;
             m_dScale *= s;
-            tqinvalidateProjection( );
+            invalidateProjection( );
          }
       }
       else if( m_bTranslateMode )
       {
          m_dTransX += ( e->x( ) - m_mousePos.x( ) ) / m_dScale;
          m_dTransY -= ( e->y( ) - m_mousePos.y( ) ) / m_dScale;
-         tqinvalidateProjection( );
+         invalidateProjection( );
       }
       m_mousePos = e->pos( );
    }
@@ -713,7 +713,7 @@ void PMGLView::mouseMoveEvent( TQMouseEvent* e )
    {
       m_dTransX += ( e->x( ) - m_mousePos.x( ) ) / m_dScale;
       m_dTransY -= ( e->y( ) - m_mousePos.y( ) ) / m_dScale;
-      tqinvalidateProjection( );
+      invalidateProjection( );
 
       m_mousePos = e->pos( );
    }
@@ -799,7 +799,7 @@ void PMGLView::wheelEvent( TQWheelEvent* e )
       m_dTransX += deltaX * c;
       m_dTransY += deltaY * c;
       m_dScale *= s;
-      tqinvalidateProjection( );
+      invalidateProjection( );
    }
 }
 
@@ -858,7 +858,7 @@ void PMGLView::keyPressEvent( TQKeyEvent* e )
       accept = false;
 
    if( accept )
-      tqinvalidateProjection( );
+      invalidateProjection( );
    else
       e->ignore( );
 }
@@ -885,7 +885,7 @@ void PMGLView::slotAutoScroll( )
 
       m_dTransX += pixels * m_autoScrollDirectionX / m_dScale;
       m_dTransY -= pixels * m_autoScrollDirectionY / m_dScale;
-      tqinvalidateProjection( );
+      invalidateProjection( );
 
    if( m_bGraphicalChangeMode )
       if( m_bMultipleSelectionMode )
@@ -1101,7 +1101,7 @@ void PMGLView::setType( PMViewType t )
    if( m_type != t )
       m_viewTransformation = PMMatrix::identity( );
    m_type = t;
-   tqinvalidateProjection( );
+   invalidateProjection( );
 
    emit viewTypeChanged( viewTypeAsString( t ) );
 }
@@ -1109,7 +1109,7 @@ void PMGLView::setType( PMViewType t )
 void PMGLView::setCamera( PMCamera* c )
 {
    m_pCamera = c;
-   tqinvalidateProjection( );
+   invalidateProjection( );
 }
 
 void PMGLView::slotRefresh( )
@@ -1135,7 +1135,7 @@ void PMGLView::slotClear( )
 void PMGLView::slotActiveRenderModeChanged( )
 {
    if( ( m_type == PMViewCamera ) && m_pCamera )
-      tqinvalidateProjection( );
+      invalidateProjection( );
 }
 
 void PMGLView::slotStopRendering( )
@@ -1176,13 +1176,13 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
       {
          if( obj->type( ) == "Camera" )
             if( m_pCamera == ( PMCamera* ) obj )
-               tqinvalidateProjection( );
+               invalidateProjection( );
 
          if( obj->tqparent( ) )
             if( obj->tqparent( )->type( ) == "Camera" )
                if( m_pCamera == ( PMCamera* ) obj->tqparent( ) )
                   if( obj->hasTransformationMatrix( ) )
-                     tqinvalidateProjection( );
+                     invalidateProjection( );
       }
 
       redraw = true;
@@ -1213,7 +1213,7 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
             if( obj->tqparent( )->type( ) == "Camera" )
                if( m_pCamera == ( PMCamera* ) obj->tqparent( ) )
                   if( obj->hasTransformationMatrix( ) )
-                     tqinvalidateProjection( );
+                     invalidateProjection( );
       }
       redraw = true;
    }
@@ -1229,7 +1229,7 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
             if( obj->tqparent( )->type( ) == "Camera" )
                if( m_pCamera == ( PMCamera* ) obj->tqparent( ) )
                   if( obj->hasTransformationMatrix( ) )
-                     tqinvalidateProjection( );
+                     invalidateProjection( );
 
       redraw = true;
    }

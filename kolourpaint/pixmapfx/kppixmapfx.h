@@ -294,7 +294,7 @@ public:
     //
     // Removes <*destPixmapPtr>'s Alpha Channel and attempts to convert it
     // to a tqmask.  KolourPaint - and TQPixmap to a great extent - does not
-    // support Alpha Channels - only tqmasks.  Call this whenever you get
+    // support Alpha Channels - only masks.  Call this whenever you get
     // a pixmap from a foreign source; else all KolourPaint code will
     // exhibit "undefined behaviour".
     //

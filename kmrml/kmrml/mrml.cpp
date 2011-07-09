@@ -214,7 +214,7 @@ bool Mrml::startSession( const KURL& url )
     // desired collection-id
 
     // Wolfgang says, we shouldn't create an own session-id here, as gcc 2.95
-    // aptqparently makes problems in exception handling somehow. So we simply
+    // apparently makes problems in exception handling somehow. So we simply
     // accept the server's session-id.
     TQString msg = mrmlString( TQString() ).tqarg(
         "<open-session user-name=\"%1\" session-name=\"kio_mrml session\" /> \

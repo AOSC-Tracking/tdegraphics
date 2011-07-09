@@ -107,7 +107,7 @@ void CanvasText::handleTSpan(KSVGCanvas *canvas, const SVGMatrixImpl *screenCTM,
 			TQString text = tspan->text();
 			if(!text.isEmpty())
 			{
-				T2P::GlyphLayoutParams *params = tspan->tqlayoutParams();
+				T2P::GlyphLayoutParams *params = tspan->layoutParams();
 
 				if(bMultipleX || bMultipleY)
 				{
@@ -265,7 +265,7 @@ KSVGTextChunk *CanvasText::createTextChunk(KSVGCanvas *canvas, const SVGMatrixIm
 						curx = usex;
 						cury = usey;
 
-						T2P::GlyphLayoutParams *params = tpath->tqlayoutParams();
+						T2P::GlyphLayoutParams *params = tpath->layoutParams();
 
 						if(!params->tb())
 							curx += endx;
@@ -290,7 +290,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 	TQMemArray<double> _cury(1);
 	_cury[0] = double(cury);
 
-	T2P::GlyphLayoutParams *params = m_text->tqlayoutParams();
+	T2P::GlyphLayoutParams *params = m_text->layoutParams();
 	SVGTextPositioningElementImpl *tp = textChunk->getTextElement(0);
 	SVGTextContentElementImpl *tc = textChunk->getTextContentElement(0);
 	SVGTextContentElementImpl *tc0 = tc;
@@ -373,7 +373,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 		}
 
 		{
-			T2P::GlyphLayoutParams *params = tc->tqlayoutParams();
+			T2P::GlyphLayoutParams *params = tc->layoutParams();
 			params->setLetterSpacing(params->letterSpacing() + addLetterSpacing);
 			if(bpath)
 			{
@@ -429,7 +429,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 		return;
 
 	// Draw 'text-decoration'
-	// TODO: Currently just ignore text-decoration on vertical tqlayouts, is that correct?
+	// TODO: Currently just ignore text-decoration on vertical layouts, is that correct?
 	// Underline and overline have to be drawn before the glyphs are rendered
 	if(tc0->getTextDecoration() & UNDERLINE && !params->tb())
 		addTextDecoration(tc0, (curx - anchor), (cury + (glyph->underlinePosition() - glyph->pixelBaseline())),
@@ -444,7 +444,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 		SVGTextContentElementImpl *style = textChunk->getTextContentElement(j);
 
 		// Draw 'text-decoration'
-		// TODO: Currently just ignore text-decoration on vertical tqlayouts, is that correct?
+		// TODO: Currently just ignore text-decoration on vertical layouts, is that correct?
 		// Underline and overline have to be drawn before the glyphs are rendered
 		if(style->getAttribute("text-decoration") == "underline" && !params->tb())
 			addTextDecoration(style, glyph->bboxX() - anchor, (cury + (glyph->underlinePosition() - glyph->pixelBaseline())),

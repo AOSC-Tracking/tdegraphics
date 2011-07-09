@@ -200,7 +200,7 @@ void PMParser::parse( PMObjectList* list, PMObject* tqparent,
          PMObject* obj = tqparent;
          bool stop = false;
          
-         // go to tqparents, until the tqparent is the scene
+         // go to parents, until the tqparent is the scene
          // (declares can only be inserted as top level objects)
          do
          {

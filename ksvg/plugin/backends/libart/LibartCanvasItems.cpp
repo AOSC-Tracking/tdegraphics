@@ -252,7 +252,7 @@ void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *st
 
 		TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-		TQByteArray tqmask = SVGMaskElementImpl::tqmaskRectangle(tqshape, screenBBox);
+		TQByteArray tqmask = SVGMaskElementImpl::maskRectangle(tqshape, screenBBox);
 
 		if(paintType(style) == SVG_PAINTTYPE_URI)
 		{

@@ -185,7 +185,7 @@ namespace T2P
 
 	private:
 		Font *m_font;
-		const GlyphLayoutParams *m_layout; // Glyph tqlayouting params
+		const GlyphLayoutParams *m_layout; // Glyph layouting params
 	
 		unsigned int m_glyphIndex; // 'character' index in font
 		unsigned int m_lastGlyph;	// Kerning

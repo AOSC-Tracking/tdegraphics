@@ -205,7 +205,7 @@ void KookaImage::extractNow()
 {
    kdDebug(28000) << "extracting a subimage number " << m_subNo << endl;
 
-   KookaImage *tqparent = tqparentImage();
+   KookaImage *tqparent = parentImage();
 
    if( tqparent )
    {
@@ -328,7 +328,7 @@ KookaImage::~KookaImage()
 
 }
 
-KookaImage* KookaImage::tqparentImage() const
+KookaImage* KookaImage::parentImage() const
 {
    return( m_parent );
 }

@@ -106,6 +106,6 @@ In case of problems you might want to see its error messages</string>
     <include location="global" impldecl="in implementation">kdialog.h</include>
     <include location="local" impldecl="in implementation">generalsettingswidget.ui.h</include>
 </includes>
-<tqlayoutdefaults spacing="6" margin="11"/>
-<tqlayoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 </UI>

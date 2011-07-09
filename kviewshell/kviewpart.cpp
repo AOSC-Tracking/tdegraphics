@@ -56,7 +56,7 @@
 typedef KParts::GenericFactory<KViewPart> KViewPartFactory;
 K_EXPORT_COMPONENT_FACTORY(kviewerpart, KViewPartFactory)
 
-KViewPart::KViewPart(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
+KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
                      const char *name, const TQStringList& args)
   : KViewPart_Iface(tqparent, name), showSidebar(0), saveAction(0), partManager(0),
     multiPageLibrary(TQString()), aboutDialog(0)
@@ -71,12 +71,12 @@ KViewPart::KViewPart(TQWidget *tqparentWidget, const char *widgetName, TQObject 
   connect(watch, TQT_SIGNAL(dirty(const TQString&)), this, TQT_SLOT(fileChanged(const TQString&)));
   watch->startScan();
 
-  mainWidget = new TQHBox(tqparentWidget, widgetName);
+  mainWidget = new TQHBox(parentWidget, widgetName);
   mainWidget->setFocusPolicy(TQ_StrongFocus);
   setWidget(mainWidget);
 
   // Setup part manager
-  partManager = new KParts::PartManager(tqparentWidget, "PartManager for kviewpart");
+  partManager = new KParts::PartManager(parentWidget, "PartManager for kviewpart");
   setManager(partManager);
   // Don't switch to another part when pressing a mouse button
   partManager->setActivationButtonMask(0);
@@ -113,7 +113,7 @@ KViewPart::KViewPart(TQWidget *tqparentWidget, const char *widgetName, TQObject 
   // If still no MultiPage has been found, report an error and abort.
   if (offers.isEmpty())
   {
-    KMessageBox::error(tqparentWidget, i18n("<qt>No MultiPage found.</qt>"));
+    KMessageBox::error(parentWidget, i18n("<qt>No MultiPage found.</qt>"));
     //    return;
   }
 

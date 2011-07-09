@@ -31,7 +31,7 @@
 #define KSVG_GET_COMMON \
 public: \
     \
-    /* The standard hasProperty call, auto-generated. Looks in hashtable, forwards to tqparents. */ \
+    /* The standard hasProperty call, auto-generated. Looks in hashtable, forwards to parents. */ \
     bool hasProperty(KJS::ExecState *exec, const KJS::Identifier &propertyName) const; \
     \
     /* get() method, called by KSVGBridge::get */ \
@@ -80,7 +80,7 @@ public: \
     /* put() method, called by KSVGBridge::put */ \
     bool put(KJS::ExecState *exec, const KJS::Identifier &propertyName, const KJS::Value &value, int attr); \
 	\
-    /* Called by lookupPut. Auto-generated. Looks in hashtable, forwards to tqparents. */ \
+    /* Called by lookupPut. Auto-generated. Looks in hashtable, forwards to parents. */ \
     bool putInParents(KJS::ExecState *exec, const KJS::Identifier &propertyName, const KJS::Value &value, int attr);
 
 // For classes which inherit a read-write class, but have no readwrite property themselves
@@ -150,7 +150,7 @@ namespace KSVG
 	{
 		const KJS::HashEntry *entry = KJS::Lookup::findEntry(table, propertyName);
 
-		if(!entry) // not found, forward to tqparents
+		if(!entry) // not found, forward to parents
 			return thisObj->getInParents(exec, propertyName, bridge);
 
 		if(entry->attr & KJS::Function)
@@ -174,7 +174,7 @@ namespace KSVG
 	{
 		const KJS::HashEntry *entry = KJS::Lookup::findEntry(table, propertyName);
 
-		if(!entry) // not found, forward to tqparents
+		if(!entry) // not found, forward to parents
 			return thisObj->getInParents(exec, propertyName, bridge);
 
 		if(entry->attr & KJS::Function)
@@ -199,7 +199,7 @@ namespace KSVG
     {
 		const KJS::HashEntry *entry = KJS::Lookup::findEntry(table, propertyName);
 
-		if(!entry) // not found, forward to tqparents
+		if(!entry) // not found, forward to parents
 			return thisObj->putInParents(exec, propertyName, value, attr);
 		else if(entry->attr & KJS::Function) // Function: put as override property
 			return false;

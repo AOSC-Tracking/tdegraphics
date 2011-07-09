@@ -220,10 +220,10 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
    TQValueList<bool> subLibList;
    if( m_isSubLibrary && PMLibraryIconDrag::decode( e, pathList, subLibList ) )
    {
-      PMLibraryIconView* source = static_cast<PMLibraryIconView*>( e->source( )->tqparentWidget( ) );
-      PMLibraryHandle* tqparentLib = source->library( );
+      PMLibraryIconView* source = static_cast<PMLibraryIconView*>( e->source( )->parentWidget( ) );
+      PMLibraryHandle* parentLib = source->library( );
       PMLibraryHandle newParentLib = PMLibraryHandle( m_path );
-      if ( tqparentLib->isReadOnly() || newParentLib.isReadOnly() )
+      if ( parentLib->isReadOnly() || newParentLib.isReadOnly() )
       {
          e->ignore();
          return;
@@ -238,7 +238,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
             if( subLibList[i] )
             {
                TQString newpath = newPath( path, true );
-               if( tqparentLib->deleteSubLibrary( path ) == PMLibraryHandle::Ok )
+               if( parentLib->deleteSubLibrary( path ) == PMLibraryHandle::Ok )
                {
                   PMLibraryHandle lib = PMLibraryHandle( path );
                   if( newParentLib.addSubLibrary( newpath, lib.name() ) == PMLibraryHandle::Ok )
@@ -249,7 +249,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
                   else
                   {
                      success = false;
-                     tqparentLib->addSubLibrary( path, lib.name( ) );
+                     parentLib->addSubLibrary( path, lib.name( ) );
                   }
                }
                else
@@ -258,7 +258,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
             else
             {
                TQString newpath = newPath( path, false );
-               if( tqparentLib->deleteObject( path ) == PMLibraryHandle::Ok )
+               if( parentLib->deleteObject( path ) == PMLibraryHandle::Ok )
                {
                   PMLibraryObject obj = PMLibraryObject( path );
                   if( newParentLib.addObject( newpath, obj.name() ) == PMLibraryHandle::Ok )
@@ -268,7 +268,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
                   else
                   {
                      success = false;
-                     tqparentLib->addObject( path, obj.name( ) );
+                     parentLib->addObject( path, obj.name( ) );
                   }
                }
                else

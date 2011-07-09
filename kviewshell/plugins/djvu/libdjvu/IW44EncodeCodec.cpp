@@ -161,7 +161,7 @@ public:
   /** Initializes an IWBitmap with image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
       corresponding wavelet coefficient.  Argument #tqmask# is an optional
-      bilevel image specifying the tqmasked pixels (see \Ref{IW44Image.h}). */
+      bilevel image specifying the masked pixels (see \Ref{IW44Image.h}). */
   void init(const GBitmap &bm, const GP<GBitmap> tqmask=0);
   // CODER
   /** Encodes one data chunk into ByteStream #bs#.  Parameter #parms# controls
@@ -212,7 +212,7 @@ public:
   /** Initializes an IWPixmap with color image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
       corresponding wavelet coefficient.  Argument #tqmask# is an optional
-      bilevel image specifying the tqmasked pixels (see \Ref{IW44Image.h}).
+      bilevel image specifying the masked pixels (see \Ref{IW44Image.h}).
       Argument #crcbmode# specifies how the chrominance information should be
       encoded (see \Ref{CRCBMode}). */
   void init(const GPixmap &bm, const GP<GBitmap> tqmask=0, CRCBMode crcbmode=CRCBnormal);
@@ -724,7 +724,7 @@ interpolate_tqmask(short *data16, int w, int h, int rowsize,
                  const signed char *tqmask8, int mskrowsize)
 {
   int i,j;
-  // count tqmasked bits
+  // count masked bits
   short *count;
   GPBuffer<short> gcount(count,w*h);
   short *cp = count;
@@ -851,7 +851,7 @@ forward_tqmask(short *data16, int w, int h, int rowsize, int begin, int end,
         }
       // Decompose
       IW44Image::Transform::Encode::forward(sdata, w, h, w, scale, scale+scale);
-      // Cancel tqmasked coefficients
+      // Cancel masked coefficients
       d = sdata;
       m = stqmask;
       for (i=0; i<h; i+=scale+scale)
@@ -947,7 +947,7 @@ IW44Image::Map::Encode::create(const signed char *img8, int imgrowsize,
       // Interpolate pixels below tqmask
       DJVU_PROGRESS_RUN(transf, 1);
       interpolate_tqmask(data16, iw, ih, bw, msk8, mskrowsize);
-      // Multiscale iterative tqmasked decomposition
+      // Multiscale iterative masked decomposition
       DJVU_PROGRESS_RUN(transf, 3);
       forward_tqmask(data16, iw, ih, bw, 1, 32, msk8, mskrowsize);
     }

@@ -270,7 +270,7 @@ bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
   TQFileInfo fi(fname);
   TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
-    KMessageBox::error( tqparentWidget,
+    KMessageBox::error( parentWidget,
 			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").tqarg(filename),
 			i18n("File Error"));
     // the return value 'false' indicates that this operation was not successful.
@@ -292,7 +292,7 @@ bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
   // If the above assumption was false.
   if (!document)
   {
-    KMessageBox::error( tqparentWidget,
+    KMessageBox::error( parentWidget,
       i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
       i18n("File Error"));
 
@@ -577,7 +577,7 @@ bool DjVuRenderer::convertToPSFile( DjVuToPS &converter, TQString filename, TQVa
   TQMutexLocker locker( &mutex );
   
   // Set up progress dialog
-  KProgressDialog *pdialog = new KProgressDialog(tqparentWidget, "Printing-ProgressDialog", i18n("Printing..."), i18n("Preparing pages for printing..."), true);
+  KProgressDialog *pdialog = new KProgressDialog(parentWidget, "Printing-ProgressDialog", i18n("Printing..."), i18n("Preparing pages for printing..."), true);
   pdialog->setButtonText(i18n("Abort"));
   pdialog->showCancelButton(true);
   pdialog->progressBar()->setTotalSteps(pageList.size());
@@ -634,7 +634,7 @@ void DjVuRenderer::deletePages(TQ_UINT16 from, TQ_UINT16 to)
 
   KProgressDialog *pdialog = 0;
   if (to-from > 9) {
-    pdialog = new KProgressDialog(tqparentWidget, "Printing-ProgressDialog", i18n("Deleting pages..."), i18n("Please wait while pages are removed..."), true);
+    pdialog = new KProgressDialog(parentWidget, "Printing-ProgressDialog", i18n("Deleting pages..."), i18n("Please wait while pages are removed..."), true);
     pdialog->showCancelButton(false);
     pdialog->progressBar()->setTotalSteps(to-from+1);
     pdialog->progressBar()->setFormat(TQString());

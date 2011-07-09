@@ -78,10 +78,10 @@ SVGUseElement SVGElementInstance::correspondingUseElement() const
 	return SVGUseElement(impl->correspondingUseElement());
 }
 
-SVGElementInstance SVGElementInstance::tqparentNode() const
+SVGElementInstance SVGElementInstance::parentNode() const
 {
 	if(!impl) return SVGElementInstance(0);
-	return SVGElementInstance(impl->tqparentNode());
+	return SVGElementInstance(impl->parentNode());
 }
 
 SVGElementInstanceList SVGElementInstance::childNodes() const

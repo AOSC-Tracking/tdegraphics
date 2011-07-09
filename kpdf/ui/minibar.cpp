@@ -428,7 +428,7 @@ void HoverButton::paintEvent( TQPaintEvent * e )
     else
     {
         TQPainter p( this );
-        p.fillRect(e->rect(), tqparentWidget() ? tqparentWidget()->tqpalette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
+        p.fillRect(e->rect(), parentWidget() ? parentWidget()->tqpalette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
         drawButtonLabel( &p );
     }
 }

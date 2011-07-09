@@ -166,7 +166,7 @@ void SVGSVGElementImpl::setAttributes()
 	m_viewport->setWidth(width()->baseVal()->value());
 	m_viewport->setHeight(height()->baseVal()->value());
 
-	if(isRootElement() && ownerDoc()->tqparentImage() == 0)
+	if(isRootElement() && ownerDoc()->parentImage() == 0)
 	{
 		if(ownerDoc()->canvas())
 			ownerDoc()->canvas()->setViewportDimension(int(ceil(width()->baseVal()->value() * currentScale())), int(ceil(height()->baseVal()->value() * currentScale())));
@@ -271,7 +271,7 @@ void SVGSVGElementImpl::setCurrentScale(float currentScale)
 	if( m_currentScale != currentScale )
 	{
 		m_currentScale = currentScale;
-		tqinvalidateCachedMatrices();
+		invalidateCachedMatrices();
 
 		if(hasEventListener(SVGEvent::ZOOM_EVENT, true))
 			dispatchEvent(SVGEvent::ZOOM_EVENT, false, false);
@@ -289,7 +289,7 @@ void SVGSVGElementImpl::setCurrentTranslate(const TQPoint &p)
 	{
 		m_currentTranslate->setX(p.x());
 		m_currentTranslate->setY(p.y());
-		tqinvalidateCachedMatrices();
+		invalidateCachedMatrices();
 		if(hasEventListener(SVGEvent::SCROLL_EVENT, true))
 			dispatchEvent(SVGEvent::SCROLL_EVENT, false, false);
 	}

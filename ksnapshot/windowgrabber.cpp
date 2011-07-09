@@ -166,15 +166,15 @@ TQPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
 		contents += TQRegion( w - border, 0, border, h );
 	    }
 
-	    //Get the tqmasked away area.
-	    TQRegion tqmaskedAway = bbox - contents;
-	    TQMemArray<TQRect> tqmaskedAwayRects = tqmaskedAway.tqrects();
+	    //Get the masked away area.
+	    TQRegion maskedAway = bbox - contents;
+	    TQMemArray<TQRect> maskedAwayRects = maskedAway.tqrects();
 
 	    //Construct a bitmap tqmask from the rectangles
 	    TQPainter p(&tqmask);
 	    p.fillRect(0, 0, w, h, TQt::color1);
-	    for (uint pos = 0; pos < tqmaskedAwayRects.count(); pos++)
-		    p.fillRect(tqmaskedAwayRects[pos], TQt::color0);
+	    for (uint pos = 0; pos < maskedAwayRects.count(); pos++)
+		    p.fillRect(maskedAwayRects[pos], TQt::color0);
 	    p.end();
 
 	    pm.setMask(tqmask);

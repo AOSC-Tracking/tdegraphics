@@ -78,7 +78,7 @@ KLineal::KLineal(TQWidget*tqparent,const char* name):KMainWindow(tqparent,name){
   TQWhatsThis::add(this,
   i18n(
   	"This is a tool to measure pixel distances and colors on the screen. "
-  	"It is useful for working on tqlayouts of dialogs, web pages etc."
+  	"It is useful for working on layouts of dialogs, web pages etc."
   ));
   TQBitmap bim = TQBitmap(TQSize(8, 48), cursorBits);
   TQWMatrix m;

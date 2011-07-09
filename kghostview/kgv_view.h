@@ -57,7 +57,7 @@ class KGVPart: public KParts::ReadOnlyPart
   Q_OBJECT
   TQ_OBJECT
 public:
-    KGVPart( TQWidget* tqparentWidget, const char* widgetName,
+    KGVPart( TQWidget* parentWidget, const char* widgetName,
              TQObject* tqparent, const char* name,
              const TQStringList& args = TQStringList() );
 

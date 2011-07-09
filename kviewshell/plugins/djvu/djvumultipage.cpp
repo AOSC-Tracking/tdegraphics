@@ -47,9 +47,9 @@ typedef KParts::GenericFactory<DjVuMultiPage> DjVuMultiPageFactory;
 K_EXPORT_COMPONENT_FACTORY(djvuviewpart, DjVuMultiPageFactory)
 
 
-DjVuMultiPage::DjVuMultiPage(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
+DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
                              const char *name, const TQStringList&)
-  : KMultiPage(tqparentWidget, widgetName, tqparent, name), djvuRenderer(tqparentWidget)
+  : KMultiPage(parentWidget, widgetName, tqparent, name), djvuRenderer(parentWidget)
 {
   /* This is kparts wizardry that cannot be understood by man. Simply
      change the names to match your implementation.  */
@@ -162,7 +162,7 @@ void DjVuMultiPage::slotDeletePages()
   if (numberOfPages() == 0)
     return;
   
-  KDialogBase dialog( tqparentWdg, "urldialog", true, i18n("Delete Pages"), KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+  KDialogBase dialog( parentWdg, "urldialog", true, i18n("Delete Pages"), KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
   PageRangeWidget range( 1, numberOfPages(), currentPageNumber(), &dialog, "range widget" );
   TQToolTip::add( &range, i18n( "Select the pages you wish to delete." ) );
   dialog.setButtonOK(i18n("Delete Pages"));
@@ -220,7 +220,7 @@ void DjVuMultiPage::print()
   printer->addDialogPage( conversionOptions );
   
   // initialize the printer using the print dialog
-  if ( printer->setup(tqparentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
+  if ( printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
     // Now do the printing. 
     TQValueList<int> pageList = printer->pageList();
     if (pageList.isEmpty()) 
@@ -334,7 +334,7 @@ void DjVuMultiPage::slotSave()
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
-    int r = KMessageBox::warningContinueCancel(tqparentWdg, i18n("The file %1\nalready exists. Do you want to overwrite it?").tqarg(fileName),
+    int r = KMessageBox::warningContinueCancel(parentWdg, i18n("The file %1\nalready exists. Do you want to overwrite it?").tqarg(fileName),
 					       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -344,7 +344,7 @@ void DjVuMultiPage::slotSave()
 
   /*
   if (!djvuRenderer.save(fileName) == false)
-    KMessageBox::error( tqparentWdg,
+    KMessageBox::error( parentWdg,
 			i18n("<qt><strong>File error.</strong> Unable to write to the specified file '%1'. The document is <strong>not</strong> saved.</qt>").tqarg(fileName),
 			i18n("File Error"));
   */

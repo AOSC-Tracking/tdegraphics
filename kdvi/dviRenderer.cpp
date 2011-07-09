@@ -79,7 +79,7 @@ dviRenderer::dviRenderer(TQWidget *par)
 
   connect(&font_pool, TQT_SIGNAL( setStatusBarText( const TQString& ) ), this, TQT_SIGNAL( setStatusBarText( const TQString& ) ) );
 
-  tqparentWidget = par;
+  parentWidget = par;
   shrinkfactor = 3;
   current_page = 0;
   resolutionInDPI = 0.0;
@@ -206,7 +206,7 @@ void dviRenderer::drawPage(double resolution, RenderedDocumentPage *page)
   
   page->isEmpty = false;
   if (errorMsg.isEmpty() != true) {
-    KMessageBox::detailedError(tqparentWidget,
+    KMessageBox::detailedError(parentWidget,
 			       i18n("<qt><strong>File corruption!</strong> KDVI had trouble interpreting your DVI file. Most "
 				    "likely this means that the DVI file is broken.</qt>"),
 			       errorMsg, i18n("DVI File Error"));
@@ -260,7 +260,7 @@ void dviRenderer::showThatSourceInformationIsPresent()
   
   if (showMsg) {
     KDialogBase *dialog= new KDialogBase(i18n("KDVI: Information"), KDialogBase::Yes, KDialogBase::Yes, KDialogBase::Yes,
-					 tqparentWidget, "information", true, true,KStdGuiItem::ok() );
+					 parentWidget, "information", true, true,KStdGuiItem::ok() );
     
     TQVBox *topcontents = new TQVBox (dialog);
     topcontents->setSpacing(KDialog::spacingHint()*2);
@@ -311,7 +311,7 @@ void dviRenderer::embedPostScript()
   if (!dviFile)
     return;
 
-  embedPS_progress = new KProgressDialog(tqparentWidget, "embedPSProgressDialog",
+  embedPS_progress = new KProgressDialog(parentWidget, "embedPSProgressDialog",
 					 i18n("Embedding PostScript Files"), TQString(), true);
   if (!embedPS_progress)
     return;
@@ -342,10 +342,10 @@ void dviRenderer::embedPostScript()
 
   if (!errorMsg.isEmpty()) {
     errorMsg = "<qt>" + errorMsg + "</qt>";
-    KMessageBox::detailedError(tqparentWidget, "<qt>" + i18n("Not all PostScript files could be embedded into your document.") + "</qt>", errorMsg);
+    KMessageBox::detailedError(parentWidget, "<qt>" + i18n("Not all PostScript files could be embedded into your document.") + "</qt>", errorMsg);
     errorMsg = TQString();
   } else
-    KMessageBox::information(tqparentWidget, "<qt>" + i18n("All external PostScript files were embedded into your document. You "
+    KMessageBox::information(parentWidget, "<qt>" + i18n("All external PostScript files were embedded into your document. You "
 						 "will probably want to save the DVI file now.") + "</qt>",
 			     TQString(), "embeddingDone");
 
@@ -435,7 +435,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   
   // Make sure the file actually exists.
   if (!fi.exists() || fi.isDir()) {
-    KMessageBox::error( tqparentWidget,
+    KMessageBox::error( parentWidget,
 			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist. "
 			     "KDVI already tried to add the ending '.dvi'.</qt>").tqarg(filename),
 			i18n("File Error!"));
@@ -448,7 +448,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   // the multipage.
   TQString mimetype( KMimeMagic::self()->findFileType( fname )->mimeType() );
   if (mimetype != "application/x-dvi") {
-    KMessageBox::sorry( tqparentWidget,
+    KMessageBox::sorry( parentWidget,
 			i18n( "<qt>Could not open file <nobr><strong>%1</strong></nobr> which has "
 			      "type <strong>%2</strong>. KDVI can only load DVI (.dvi) files.</qt>" )
 			.tqarg( fname )
@@ -459,7 +459,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   // Check if the file is a valid DVI file.
   if (!isValidFile(filename))
   {
-    KMessageBox::sorry( tqparentWidget,
+    KMessageBox::sorry( parentWidget,
                         i18n("<qt>File corruption! KDVI had trouble interpreting your DVI file. Most "
                              "likely this means that the DVI file is broken.</qt>")
                         .tqarg( fname ) );
@@ -477,7 +477,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   if ((dviFile_new->dvi_Data() == NULL)||(dviFile_new->errorMsg.isEmpty() != true)) {
     TQApplication::restoreOverrideCursor();
     if (dviFile_new->errorMsg.isEmpty() != true)
-      KMessageBox::detailedError(tqparentWidget,
+      KMessageBox::detailedError(parentWidget,
 				 i18n("<qt>File corruption! KDVI had trouble interpreting your DVI file. Most "
 				      "likely this means that the DVI file is broken.</qt>"),
 				 dviFile_new->errorMsg, i18n("DVI File Error"));
@@ -637,7 +637,7 @@ Anchor dviRenderer::parseReference(const TQString &reference)
     TQString  refFileName   = splitter.filePath();
     
     if (sourceHyperLinkAnchors.isEmpty()) {
-      KMessageBox::sorry(tqparentWidget, i18n("<qt>You have asked KDVI to locate the place in the DVI file which corresponds to "
+      KMessageBox::sorry(parentWidget, i18n("<qt>You have asked KDVI to locate the place in the DVI file which corresponds to "
 				    "line %1 in the TeX-file <strong>%2</strong>. It seems, however, that the DVI file "
 				    "does not contain the necessary source file information. "
 				    "We refer to the manual of KDVI for a detailed explanation on how to include this "
@@ -680,7 +680,7 @@ Anchor dviRenderer::parseReference(const TQString &reference)
       return Anchor(bestMatch->page, bestMatch->distance_from_top);
     } else
       if (anchorForRefFileFound == false)
-	KMessageBox::sorry(tqparentWidget, i18n("<qt>KDVI was not able to locate the place in the DVI file which corresponds to "
+	KMessageBox::sorry(parentWidget, i18n("<qt>KDVI was not able to locate the place in the DVI file which corresponds to "
 					      "line %1 in the TeX-file <strong>%2</strong>.</qt>").tqarg(refLineNumber).tqarg(refFileName),
 			   i18n( "Could Not Find Reference" ));
       else {
@@ -733,7 +733,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   TQString TeXfile = splitter.filePath();
   if ( ! splitter.fileExists() )
   {
-      KMessageBox::sorry(tqparentWidget, TQString("<qt>") +
+      KMessageBox::sorry(parentWidget, TQString("<qt>") +
 			 i18n("The DVI-file refers to the TeX-file "
 			      "<strong>%1</strong> which could not be found.").tqarg(KShellProcess::quote(TeXfile)) +
 			 TQString("</qt>"),
@@ -743,7 +743,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   
   TQString command = editorCommand;
   if (command.isEmpty() == true) {
-    int r = KMessageBox::warningContinueCancel(tqparentWidget, TQString("<qt>") +
+    int r = KMessageBox::warningContinueCancel(parentWidget, TQString("<qt>") +
 					       i18n("You have not yet specified an editor for inverse search. "
 						    "Please choose your favorite editor in the "
 						    "<strong>DVI options dialog</strong> "

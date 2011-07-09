@@ -347,7 +347,7 @@ static const uchar bitflip[256] = {
   15, 143, 79, 207, 47, 175, 111, 239, 31, 159, 95, 223, 63, 191, 127, 255
 };                                                                              
 
-static TQ_UINT32	bit_tqmasks[33] = {
+static TQ_UINT32	bit_masks[33] = {
 	0x0,		0x1,		0x3,		0x7,
 	0xf,		0x1f,		0x3f,		0x7f,
 	0xff,		0x1ff,		0x3ff,		0x7ff,
@@ -595,12 +595,12 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
 	    h_bit -= count;
 	    word_weight -= count;
 	    if (paint_switch)
-	      word |= bit_tqmasks[count] << word_weight;
+	      word |= bit_masks[count] << word_weight;
 	    count = 0;
 	  } else 
 	    if (count >= h_bit && h_bit <= word_weight) {
 	      if (paint_switch)
-		word |= bit_tqmasks[h_bit] << (word_weight - h_bit);
+		word |= bit_masks[h_bit] << (word_weight - h_bit);
 	      *cp++ = word;
 	      /* "output" row(s) */
 	      for (i = PK_repeat_count * bytes_wide / 4; i > 0; --i) {
@@ -615,7 +615,7 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
 	      h_bit = characterBitmaps[ch]->w;
 	    } else {
 	      if (paint_switch)
-		word |= bit_tqmasks[word_weight];
+		word |= bit_masks[word_weight];
 	      *cp++ = word;
 	      word = 0;
 	      count -= word_weight;
@@ -679,14 +679,14 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
 	while (count > 0) {
 	  if (count < word_weight && count < h_bit) {
 	    if (paint_switch)
-	      word |= bit_tqmasks[count] << (32 - word_weight);
+	      word |= bit_masks[count] << (32 - word_weight);
 	    h_bit -= count;
 	    word_weight -= count;
 	    count = 0;
 	  } else 
 	    if (count >= h_bit && h_bit <= word_weight) {
 	      if (paint_switch)
-		word |= bit_tqmasks[h_bit] << (32 - word_weight);
+		word |= bit_masks[h_bit] << (32 - word_weight);
 	      *cp++ = word;
 	      /* "output" row(s) */
 	      for (i = PK_repeat_count * bytes_wide / 4; i > 0; --i) {
@@ -701,7 +701,7 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
 	      h_bit = characterBitmaps[ch]->w;
 	    } else {
 	      if (paint_switch)
-		word |= bit_tqmasks[word_weight] << (32 - word_weight);
+		word |= bit_masks[word_weight] << (32 - word_weight);
 	      *cp++ = word;
 	      word = 0;
 	      count -= word_weight;

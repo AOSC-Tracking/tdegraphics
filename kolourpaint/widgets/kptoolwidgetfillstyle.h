@@ -59,10 +59,10 @@ private:
 public:
     FillStyle fillStyle () const;
 
-    static TQBrush tqmaskBrushForFillStyle (FillStyle fs,
+    static TQBrush maskBrushForFillStyle (FillStyle fs,
                                          const kpColor &foregroundColor,
                                          const kpColor &backgroundColor);
-    TQBrush tqmaskBrush (const kpColor &foregroundColor,
+    TQBrush maskBrush (const kpColor &foregroundColor,
                       const kpColor &backgroundColor);
 
     static TQBrush brushForFillStyle (FillStyle fs,

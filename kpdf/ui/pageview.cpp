@@ -173,7 +173,7 @@ void PageViewTip::maybeTip( const TQPoint &_p )
  *  160 - constructor and creating actions plus their connected slots (empty stuff)
  *  70  - DocumentObserver inherited methodes (important)
  *  550 - events: mouse, keyboard, drag/drop
- *  170 - slotRetqlayoutPages: set contents of the scrollview on continuous/single modes
+ *  170 - slotRelayoutPages: set contents of the scrollview on continuous/single modes
  *  100 - zoom: zooming pages in different ways, keeping update the toolbar actions, etc..
  *  other misc functions: only slotRequestVisiblePixmaps and pickItemOnPoint noticeable,
  * and many insignificant stuff like this comment :-)
@@ -343,12 +343,12 @@ void PageView::notifySetup( const TQValueVector< KPDFPage * > & pageSet, bool do
         d->items.push_back( new PageViewItem( *setIt ) );
 
     if ( pageSet.count() > 0 )
-        // TODO for Enrico: Check if doing always the slotRetqlayoutPages() is not
+        // TODO for Enrico: Check if doing always the slotRelayoutPages() is not
         // suboptimal in some cases, i'd say it is not but a recheck will not hurt
-        // Need slotRetqlayoutPages() here instead of d->dirtyLayout = true
+        // Need slotRelayoutPages() here instead of d->dirtyLayout = true
         // because opening a pdf from another pdf will not trigger a viewportchange
-        // so pages are never retqlayouted
-        TQTimer::singleShot(0, this, TQT_SLOT(slotRetqlayoutPages()));
+        // so pages are never relayouted
+        TQTimer::singleShot(0, this, TQT_SLOT(slotRelayoutPages()));
     else
     {
         // update the mouse cursor when closing because we may have close through a link and
@@ -395,7 +395,7 @@ void PageView::notifyViewportChanged( bool smoothMove )
     // retqlayout in "Single Pages" mode or if a retqlayout is pending
     d->blockPixmapsRequest = true;
     if ( !KpdfSettings::viewContinuous() || d->dirtyLayout )
-        slotRetqlayoutPages();
+        slotRelayoutPages();
 
     // restore viewport center or use default {x-center,v-top} tqalignment
     const TQRect & r = item->tqgeometry();
@@ -637,7 +637,7 @@ void PageView::viewportResizeEvent( TQResizeEvent * )
     if ( !d->delayResizeTimer )
     {
         d->delayResizeTimer = new TQTimer( this );
-        connect( d->delayResizeTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotRetqlayoutPages() ) );
+        connect( d->delayResizeTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotRelayoutPages() ) );
     }
     d->delayResizeTimer->start( 333, true );
 }
@@ -1550,7 +1550,7 @@ void PageView::updateZoom( ZoomMode newZoomMode )
         // be sure to block updates to document's viewport
         bool prevState = d->blockViewport;
         d->blockViewport = true;
-        slotRetqlayoutPages();
+        slotRelayoutPages();
         d->blockViewport = prevState;
         // request pixmaps
         slotRequestVisiblePixmaps();
@@ -1649,7 +1649,7 @@ void PageView::doTypeAheadSearch()
 }
 
 //BEGIN private SLOTS
-void PageView::slotRetqlayoutPages()
+void PageView::slotRelayoutPages()
 // called by: notifySetup, viewportResizeEvent, slotTwoPagesToggled, slotContinuousToggled, updateZoom
 {
     // set an empty container if we have no pages
@@ -2070,7 +2070,7 @@ void PageView::slotRotateRight()
     // be sure to block updates to document's viewport
     bool prevState = d->blockViewport;
     d->blockViewport = true;
-    slotRetqlayoutPages();
+    slotRelayoutPages();
     d->blockViewport = prevState;
     // request pixmaps
     slotRequestVisiblePixmaps();
@@ -2094,7 +2094,7 @@ void PageView::slotRotateLeft()
     // be sure to block updates to document's viewport
     bool prevState = d->blockViewport;
     d->blockViewport = true;
-    slotRetqlayoutPages();
+    slotRelayoutPages();
     d->blockViewport = prevState;
     // request pixmaps
     slotRequestVisiblePixmaps();
@@ -2108,7 +2108,7 @@ void PageView::slotTwoPagesToggled( bool on )
         KpdfSettings::setViewColumns( newColumns );
         KpdfSettings::writeConfig();
         if ( d->document->pages() > 0 )
-            slotRetqlayoutPages();
+            slotRelayoutPages();
     }
 }
 
@@ -2119,7 +2119,7 @@ void PageView::slotContinuousToggled( bool on )
         KpdfSettings::setViewContinuous( on );
         KpdfSettings::writeConfig();
         if ( d->document->pages() > 0 )
-            slotRetqlayoutPages();
+            slotRelayoutPages();
     }
 }
 

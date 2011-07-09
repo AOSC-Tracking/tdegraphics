@@ -240,7 +240,7 @@ void kpEffectReduceColorsCommand::apply (TQPixmap *destPixmapPtr, int depth, boo
 
     // HACK: The above "image.convertDepth()" erases the Alpha Channel
     //       (at least for monochrome).
-    //       tqpixmap.html says "alpha tqmasks on monochrome images are ignored."
+    //       tqpixmap.html says "alpha masks on monochrome images are ignored."
     //
     //       Put the tqmask back.
     //

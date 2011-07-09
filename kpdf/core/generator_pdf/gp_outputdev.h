@@ -63,7 +63,7 @@ class KPDFOutputDev : public SplashOutputDev
         virtual void processLink(Link *link, Catalog *catalog);
         //----- image drawing
         virtual void drawImage(GfxState *state, Object *ref, Stream *str, int width, int height,
-                             GfxImageColorMap *colorMap, int *tqmaskColors, GBool inlineImg);
+                             GfxImageColorMap *colorMap, int *maskColors, GBool inlineImg);
 
     private:
         // delete all interal objects and data

@@ -353,7 +353,7 @@ void SVGImageElementImpl::onScreenCTMUpdated()
 		SVGMatrixImpl *ctm = getScreenCTM();
 
 		m_svgRoot->setRootParentScreenCTM(ctm);
-		m_svgRoot->tqinvalidateCachedMatrices();
+		m_svgRoot->invalidateCachedMatrices();
 		m_svgRoot->ownerDoc()->syncCachedMatrices();
 	}
 }

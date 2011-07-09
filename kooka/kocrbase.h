@@ -107,7 +107,7 @@ protected:
      * ocr engine used.
      * It calls the virtual subs ocrEngineName, ocrEngineLogo and ocrEngineDesc which
      * must return the approbiate values for the engines.
-     * @return a pointer to a VBox in which further elements can be tqlayouted
+     * @return a pointer to a VBox in which further elements can be layouted
      */
     virtual void ocrIntro();
 

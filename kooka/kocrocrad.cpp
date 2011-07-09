@@ -92,7 +92,7 @@ TQString ocradDialog::ocrEngineDesc() const
 }
 
 
-int ocradDialog::tqlayoutDetectionMode() const
+int ocradDialog::layoutDetectionMode() const
 {
     return m_layoutMode->currentItem();
 }
@@ -131,8 +131,8 @@ EngineError ocradDialog::setupGui()
 
     /** tqlayout detection button **/
     conf->setGroup( CFG_GROUP_OCRAD );
-    int tqlayoutDetect = conf->readNumEntry( CFG_OCRAD_LAYOUT_DETECTION, 0 );
-    kdDebug(28000) << "Layout detection from config: " << tqlayoutDetect << endl;
+    int layoutDetect = conf->readNumEntry( CFG_OCRAD_LAYOUT_DETECTION, 0 );
+    kdDebug(28000) << "Layout detection from config: " << layoutDetect << endl;
 
     (void) new KSeparator( KSeparator::HLine, page);
     TQHBox *hb1 = new TQHBox(page);
@@ -142,7 +142,7 @@ EngineError ocradDialog::setupGui()
     m_layoutMode->insertItem(i18n("No Layout Detection"), 0 );
     m_layoutMode->insertItem(i18n("Column Detection"), 1 );
     m_layoutMode->insertItem(i18n("Full Layout Detection"), 2);
-    m_layoutMode->setCurrentItem(tqlayoutDetect);
+    m_layoutMode->setCurrentItem(layoutDetect);
 
     /** stating the ocrad binary **/
     (void) new KSeparator( KSeparator::HLine, page);

@@ -34,7 +34,7 @@ class KViewPart : public KViewPart_Iface
   TQ_OBJECT
 
 public:
-  KViewPart(TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
+  KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
             const char *name, const TQStringList& args);
   virtual ~KViewPart();
 

@@ -214,7 +214,7 @@ void LibartCanvas::drawImage(TQImage image, SVGStylableImpl *style, const SVGMat
 
 			TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-			TQByteArray tqmask = SVGMaskElementImpl::tqmaskRectangle(tqshape, screenBBox);
+			TQByteArray tqmask = SVGMaskElementImpl::maskRectangle(tqshape, screenBBox);
 
 			double affine[6];
 			KSVGHelper::matrixToAffine(matrix, affine);
@@ -330,22 +330,22 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *tqshape)
 	else
 	{
 		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(tqshape);
-		DOM::Node tqparentNode = element->parentNode();
+		DOM::Node parentNode = element->parentNode();
 
-		if(!tqparentNode.isNull())
+		if(!parentNode.isNull())
 		{
-			SVGElementImpl *tqparent = element->ownerDoc()->getElementFromHandle(tqparentNode.handle());
+			SVGElementImpl *tqparent = element->ownerDoc()->getElementFromHandle(parentNode.handle());
 
 			if(tqparent)
 			{
-				SVGShapeImpl *tqparentShape = dynamic_cast<SVGShapeImpl *>(tqparent);
+				SVGShapeImpl *parentShape = dynamic_cast<SVGShapeImpl *>(tqparent);
 
-				if(tqparentShape)
+				if(parentShape)
 				{
 					// Clip against ancestor clipping paths
-					ArtSVP *tqparentClippedSvp = clipSingleSVP(clippedSvp, tqparentShape);
+					ArtSVP *parentClippedSvp = clipSingleSVP(clippedSvp, parentShape);
 					art_svp_free(clippedSvp);
-					clippedSvp = tqparentClippedSvp;
+					clippedSvp = parentClippedSvp;
 				}
 			}
 		}

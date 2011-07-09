@@ -199,7 +199,7 @@ public:
 	  an exception is thrown. */
    GUTF8String	page_to_id(int page_num) const;
    
-   GUTF8String	insert_file(const GURL &url, const GUTF8String &tqparent_id,
+   GUTF8String	insert_file(const GURL &url, const GUTF8String &parent_id,
 			    int chunk_num=1, DjVuPort *source=0);
       /** Inserts the referenced file into this DjVu document.
 

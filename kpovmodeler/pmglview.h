@@ -353,7 +353,7 @@ private:
    /**
     * Invalidates the projection and repaints the view
     */
-   void tqinvalidateProjection( bool graphicaChange = false );
+   void invalidateProjection( bool graphicaChange = false );
 
    /**
     * Starts multiple selection mode

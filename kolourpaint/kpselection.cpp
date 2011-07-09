@@ -337,11 +337,11 @@ int kpSelection::size () const
 
 
 // public
-TQBitmap kpSelection::tqmaskForOwnType (bool nullForRectangular) const
+TQBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
 {
     if (!m_rect.isValid ())
     {
-        kdError () << "kpSelection::tqmaskForOwnType() boundingRect invalid" << endl;
+        kdError () << "kpSelection::maskForOwnType() boundingRect invalid" << endl;
         return TQBitmap ();
     }
 
@@ -351,17 +351,17 @@ TQBitmap kpSelection::tqmaskForOwnType (bool nullForRectangular) const
         if (nullForRectangular)
             return TQBitmap ();
 
-        TQBitmap tqmaskBitmap (m_rect.width (), m_rect.height ());
-        tqmaskBitmap.fill (TQt::color1/*opaque*/);
-        return tqmaskBitmap;
+        TQBitmap maskBitmap (m_rect.width (), m_rect.height ());
+        maskBitmap.fill (TQt::color1/*opaque*/);
+        return maskBitmap;
     }
 
 
-    TQBitmap tqmaskBitmap (m_rect.width (), m_rect.height ());
-    tqmaskBitmap.fill (TQt::color0/*transparent*/);
+    TQBitmap maskBitmap (m_rect.width (), m_rect.height ());
+    maskBitmap.fill (TQt::color0/*transparent*/);
 
     TQPainter painter;
-    painter.begin (&tqmaskBitmap);
+    painter.begin (&maskBitmap);
     painter.setPen (TQt::color1)/*opaque*/;
     painter.setBrush (TQt::color1/*opaque*/);
 
@@ -379,7 +379,7 @@ TQBitmap kpSelection::tqmaskForOwnType (bool nullForRectangular) const
     painter.end ();
 
 
-    return tqmaskBitmap;
+    return maskBitmap;
 }
 
 
@@ -615,11 +615,11 @@ static TQRgb mostContrastingRGB (TQRgb val)
 }
 
 // private
-static void drawTextLines (TQPainter *painter, TQPainter *tqmaskPainter,
+static void drawTextLines (TQPainter *painter, TQPainter *maskPainter,
                            const TQRect &rect,
                            const TQValueVector <TQString> &textLines)
 {
-    if (!painter->clipRegion ().isEmpty () || !tqmaskPainter->clipRegion ().isEmpty ())
+    if (!painter->clipRegion ().isEmpty () || !maskPainter->clipRegion ().isEmpty ())
     {
         // TODO: fix esp. before making method public
         kdError () << "kpselection.cpp:drawTextLines() can't deal with existing painter clip regions" << endl;
@@ -632,8 +632,8 @@ static void drawTextLines (TQPainter *painter, TQPainter *tqmaskPainter,
     if (painter->isActive ())      \
         painter->cmd;              \
                                    \
-    if (tqmaskPainter->isActive ())  \
-        tqmaskPainter->cmd;          \
+    if (maskPainter->isActive ())  \
+        maskPainter->cmd;          \
 }
 
 

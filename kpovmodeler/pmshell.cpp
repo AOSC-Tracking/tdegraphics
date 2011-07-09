@@ -159,7 +159,7 @@ void PMShell::setupActions( )
                                     "view_new_librarybrowser" );
 #endif
 
-   // Creating the view tqlayouts menu
+   // Creating the view layouts menu
    m_pViewLayoutsAction = new KActionMenu( i18n( "View Layouts" ),
                                            actionCollection( ), "view_layouts_menu" );
    KPopupMenu* menu = m_pViewLayoutsAction->popupMenu( );

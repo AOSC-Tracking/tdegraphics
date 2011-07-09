@@ -56,7 +56,7 @@ KSVGPluginFactory::~KSVGPluginFactory()
 	s_about = 0;
 }
 
-KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *tqparentWidget, const char *wname, TQObject *tqparent, const char *name, const char *, const TQStringList &args)
+KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *parentWidget, const char *wname, TQObject *tqparent, const char *name, const char *, const TQStringList &args)
 {
 	// Get the width and height of the <embed>
 	// TODO : <object>
@@ -72,7 +72,7 @@ KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *tqparentWidget, cons
 			height = r2.cap(3).toUInt(&dummy);
 	}
 	
-	return new KSVGPlugin(tqparentWidget, wname, tqparent, name, width, height);
+	return new KSVGPlugin(parentWidget, wname, tqparent, name, width, height);
 }
 
 KInstance *KSVGPluginFactory::instance()

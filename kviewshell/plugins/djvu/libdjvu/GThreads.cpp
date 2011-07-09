@@ -1397,7 +1397,7 @@ cotask_select(int nfds,
     }
   // reschedule
   cotask_yield();
-  // call select to update tqmasks
+  // call select to update masks
   if (tm)
     {
       tm->tv_sec = maxwait/1000;

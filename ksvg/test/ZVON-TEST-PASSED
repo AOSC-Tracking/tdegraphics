@@ -81,15 +81,15 @@ linking-view-BE-05.svg			o
 linking-xlinkAttr-BE-02.svg		x
 
 Group 11: [Masking] - 21.09.2003
-tqmasking-clipPath-BE-01.svg:		x
-tqmasking-clipPath-BE-02.svg:		x
-tqmasking-clipPath-BE-08.svg:		x
-tqmasking-clipRule-BE-03.svg:		x
-tqmasking-groupOpac-BE-04.svg:	x
-tqmasking-tqmask-BE-05.svg:			x
-tqmasking-tqmask-BE-06.svg:			x
-tqmasking-property-BE-07.svg:		x
-tqmasking-vportClip-BE-09.svg:	x
+masking-clipPath-BE-01.svg:		x
+masking-clipPath-BE-02.svg:		x
+masking-clipPath-BE-08.svg:		x
+masking-clipRule-BE-03.svg:		x
+masking-groupOpac-BE-04.svg:	x
+masking-tqmask-BE-05.svg:			x
+masking-tqmask-BE-06.svg:			x
+masking-property-BE-07.svg:		x
+masking-vportClip-BE-09.svg:	x
 
 Group 12: [Metadata] - 21.09.2003
 metadata-sample-BE-01.svg:		x	PLANE REFERENCE IMAGE LOOKS WRONG - WE MATCH BATIK'S OUTPUT

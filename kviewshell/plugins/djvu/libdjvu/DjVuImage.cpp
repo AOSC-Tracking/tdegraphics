@@ -91,7 +91,7 @@ namespace DJVU {
 //// DJVUIMAGE: CONSTRUCTION
 
 DjVuImage::DjVuImage(void) 
-: rotate_count(-1),retqlayout_sent(false)
+: rotate_count(-1),relayout_sent(false)
 {
 }
 
@@ -423,13 +423,13 @@ DjVuImage::get_long_description() const
 void
 DjVuImage::notify_chunk_done(const DjVuPort *, const GUTF8String & name)
 {
-   if (!retqlayout_sent &&
+   if (!relayout_sent &&
      ( !name.cmp("INFO", 4) ||
        !name.cmp("PMxx", 2) ||
        !name.cmp("BMxx", 2)  ) )
    {
       DjVuPort::get_portcaster()->notify_retqlayout(this);
-      retqlayout_sent=true;
+      relayout_sent=true;
    } 
    else if (!name.cmp("Sxxx", 1) ||
             !name.cmp("BGxx", 2) ||

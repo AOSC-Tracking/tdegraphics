@@ -496,10 +496,10 @@ WindowQObject::WindowQObject(Window *w) : tqparent(w)
 
 WindowQObject::~WindowQObject()
 {
-	tqparentDestroyed(); // reuse same code
+	parentDestroyed(); // reuse same code
 }
 
-void WindowQObject::tqparentDestroyed()
+void WindowQObject::parentDestroyed()
 {
 	killTimers();
 	

@@ -78,7 +78,7 @@ public:
     /**
      * the tqparent image.
      */
-    KookaImage*  tqparentImage() const;
+    KookaImage*  parentImage() const;
 
     /**
      * returns true if this is a subimage.

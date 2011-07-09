@@ -282,9 +282,9 @@ void SVGLengthImpl::convertNumToPx()
 				bool sizeLocal = (style->getFontSize() != -1);
 				bool familyLocal = (style->getFontFamily() && style->getFontFamily()->getFirst());
 				
-				SVGStylableImpl *tqparentStyle = 0;
+				SVGStylableImpl *parentStyle = 0;
 				if((!sizeLocal || !familyLocal) && m_context)
-						tqparentStyle = dynamic_cast<SVGStylableImpl *>(m_context->ownerDoc()->getElementFromHandle(m_context->parentNode().handle()));
+						parentStyle = dynamic_cast<SVGStylableImpl *>(m_context->ownerDoc()->getElementFromHandle(m_context->parentNode().handle()));
 				
 				// Look up font-size in a SAFE way, because at this place
 				// processStyle() has NOT yet been called, so we need
@@ -294,13 +294,13 @@ void SVGLengthImpl::convertNumToPx()
 				
 				if(sizeLocal)
 					useSize = style->getFontSize();
-				else if(tqparentStyle && tqparentStyle->getFontSize() != -1)
-					useSize = tqparentStyle->getFontSize();
+				else if(parentStyle && parentStyle->getFontSize() != -1)
+					useSize = parentStyle->getFontSize();
 			
 				if(familyLocal)
 					useFont = style->getFontFamily()->getFirst()->string();
-				else if(tqparentStyle && tqparentStyle->getFontFamily() && tqparentStyle->getFontFamily()->getFirst())
-					useFont = tqparentStyle->getFontFamily()->getFirst()->string();
+				else if(parentStyle && parentStyle->getFontFamily() && parentStyle->getFontFamily()->getFirst())
+					useFont = parentStyle->getFontFamily()->getFirst()->string();
 				
 				if(m_unitType == SVG_LENGTHTYPE_EMS)
 					m_value = m_valueInSpecifiedUnits * useSize;

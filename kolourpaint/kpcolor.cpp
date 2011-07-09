@@ -354,7 +354,7 @@ const TQColor &kpColor::toTQColor () const
 }
 
 // public
-TQColor kpColor::tqmaskColor () const
+TQColor kpColor::maskColor () const
 {
     return isTransparent () ? TQt::color0 : TQt::color1;
 }

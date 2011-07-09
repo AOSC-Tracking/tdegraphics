@@ -38,7 +38,7 @@
 #include "kocrbase.h"
 
 #define CFG_GROUP_OCRAD "ocrad"
-#define CFG_OCRAD_LAYOUT_DETECTION "tqlayoutDetection"
+#define CFG_OCRAD_LAYOUT_DETECTION "layoutDetection"
 #define CFG_OCRAD_EXTRA_ARGUMENTS  "extraArguments"
 #define CFG_OCRAD_FORMAT "format"
 #define CFG_OCRAD_CHARSET "charset"
@@ -71,7 +71,7 @@ public:
 
     TQString orfUrl() const;
 
-    int tqlayoutDetectionMode() const;
+    int layoutDetectionMode() const;
 
     /**
      * returns the numeric version of the ocrad program.

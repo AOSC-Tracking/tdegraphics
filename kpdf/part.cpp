@@ -113,7 +113,7 @@ using namespace KPDF;
 
 unsigned int Part::m_count = 0;
 
-Part::Part(TQWidget *tqparentWidget, const char *widgetName,
+Part::Part(TQWidget *parentWidget, const char *widgetName,
            TQObject *tqparent, const char *name,
            const TQStringList & /*args*/ )
 	: DCOPObject("kpdf"), KParts::ReadOnlyPart(tqparent, name), m_showMenuBarAction(0), m_showFullScreenAction(0),
@@ -157,7 +157,7 @@ Part::Part(TQWidget *tqparentWidget, const char *widgetName,
 		connect( m_document, TQT_SIGNAL( quit() ), this, TQT_SLOT( cannotQuit() ) );
 
 	// widgets: ^searchbar (toolbar containing label and SearchWidget)
-//	m_searchToolBar = new KToolBar( tqparentWidget, "searchBar" );
+//	m_searchToolBar = new KToolBar( parentWidget, "searchBar" );
 //	m_searchToolBar->boxLayout()->setSpacing( KDialog::spacingHint() );
 //	TQLabel * sLabel = new TQLabel( i18n( "&Search:" ), m_searchToolBar, "kde toolbar widget" );
 //	m_searchWidget = new SearchWidget( m_searchToolBar, m_document );
@@ -165,7 +165,7 @@ Part::Part(TQWidget *tqparentWidget, const char *widgetName,
 //	m_searchToolBar->setStretchableWidget( m_searchWidget );
 
 	// widgets: [] splitter []
-	m_splitter = new TQSplitter( tqparentWidget, widgetName );
+	m_splitter = new TQSplitter( parentWidget, widgetName );
 	m_splitter->setOpaqueResize( true );
 	setWidget( m_splitter );
 	

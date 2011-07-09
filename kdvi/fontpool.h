@@ -125,7 +125,7 @@ public:
       channel of pixmaps. Experiments show that --depending of the
       configuration of QT at compile and runtime or the availability
       of the XFt extension, alpha channels are either supported, or
-      silently converted to 1-bit tqmasks. The redering routines in the
+      silently converted to 1-bit masks. The redering routines in the
       TeXFont implementation use this flag to choose the apropriate
       drawing routines for the different setups. */
   bool TQPixmapSupportsAlpha;

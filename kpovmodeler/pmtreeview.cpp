@@ -804,7 +804,7 @@ bool PMTreeView::targetDisplaysPart( TQWidget* target )
       // find the tree view
       TQWidget* t = target;
       while( t && !t->isA( "PMTreeView" ) )
-         t = t->tqparentWidget( );
+         t = t->parentWidget( );
       if( t )
          if( ( ( PMTreeView* ) t )->part( ) == m_pPart )
             result = true;

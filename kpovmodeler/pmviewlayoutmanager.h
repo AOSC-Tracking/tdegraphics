@@ -198,11 +198,11 @@ private:
 };
 
 /**
- * Singleton that contains the view tqlayouts available.
+ * Singleton that contains the view layouts available.
  *
- * It interacts with @ref PMShell to create the view tqlayouts.
- * The class maintains a list of tqlayouts as well as the name of the default
- * tqlayout. The tqlayouts are stored in a XML file caled viewtqlayouts.xml.
+ * It interacts with @ref PMShell to create the view layouts.
+ * The class maintains a list of layouts as well as the name of the default
+ * tqlayout. The layouts are stored in a XML file caled viewlayouts.xml.
  */
 class PMViewLayoutManager
 {
@@ -217,7 +217,7 @@ public:
    static PMViewLayoutManager* theManager( );
 
    /**
-    * Returns the list of available view tqlayouts
+    * Returns the list of available view layouts
     */
    TQStringList availableLayouts( );
    /**
@@ -237,7 +237,7 @@ public:
     */
    void displayDefaultLayout( PMShell* shell );
    /**
-    * Loads all tqlayouts from the configuration file
+    * Loads all layouts from the configuration file
     */
    void loadData( );
    /**
@@ -261,15 +261,15 @@ public:
     */
    PMViewLayout* findLayout( const TQString& name );
    /**
-    * Returns the list of available tqlayouts
+    * Returns the list of available layouts
     */
-   TQValueList<PMViewLayout> tqlayouts( ) { return m_layouts; }
+   TQValueList<PMViewLayout> layouts( ) { return m_layouts; }
    /**
-    * Sets the list of available tqlayouts
+    * Sets the list of available layouts
     */
    void setLayouts( const TQValueList<PMViewLayout>& l ) { m_layouts = l; }
    /**
-    * Fill the available tqlayouts menu
+    * Fill the available layouts menu
     */
    void fillPopupMenu( KPopupMenu* pMenu );
 private:

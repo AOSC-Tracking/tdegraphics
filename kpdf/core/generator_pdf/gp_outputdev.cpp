@@ -172,7 +172,7 @@ void KPDFOutputDev::processLink( Link * link, Catalog * catalog )
 }
 
 void KPDFOutputDev::drawImage( GfxState *state, Object *ref, Stream *str,
-    int _width, int _height, GfxImageColorMap *colorMap, int *tqmaskColors, GBool inlineImg )
+    int _width, int _height, GfxImageColorMap *colorMap, int *maskColors, GBool inlineImg )
 {
     if ( m_generateImages )
     {
@@ -207,7 +207,7 @@ void KPDFOutputDev::drawImage( GfxState *state, Object *ref, Stream *str,
             m_rects.push_back( rect );
         }
     }
-    SplashOutputDev::drawImage( state, ref, str, _width, _height, colorMap, tqmaskColors, inlineImg );
+    SplashOutputDev::drawImage( state, ref, str, _width, _height, colorMap, maskColors, inlineImg );
 }
 //END - OutputDev hooked calls
 

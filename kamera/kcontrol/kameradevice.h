@@ -44,7 +44,7 @@ class KCamera : public TQObject {
 public:
 	KCamera(const TQString &name, const TQString &path);
 	~KCamera();
-	void tqinvalidateCamera();
+	void invalidateCamera();
 	bool configure();
 	void load(KConfig *m_config);
 	void save(KConfig *m_config);

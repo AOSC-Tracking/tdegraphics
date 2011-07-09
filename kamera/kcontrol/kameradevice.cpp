@@ -197,7 +197,7 @@ void KCamera::load(KConfig *config)
 		m_model = config->readEntry("Model");
 	if (m_path.isNull())
 		m_path = config->readEntry("Path");
-	tqinvalidateCamera();
+	invalidateCamera();
 }
 
 void KCamera::save(KConfig *config)
@@ -223,17 +223,17 @@ void KCamera::setName(const TQString &name)
 void KCamera::setModel(const TQString &model)
 {
 	m_model = model;
-	tqinvalidateCamera();
+	invalidateCamera();
 	initInformation();
 }
 
 void KCamera::setPath(const TQString &path)
 {
 	m_path = path;
-	tqinvalidateCamera();
+	invalidateCamera();
 }
 
-void KCamera::tqinvalidateCamera()
+void KCamera::invalidateCamera()
 {
 	if (m_camera) {
 		gp_camera_free(m_camera);

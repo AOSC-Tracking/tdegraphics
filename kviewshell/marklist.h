@@ -46,7 +46,7 @@ class ThumbnailWidget : public TQWidget
   TQ_OBJECT
 
 public:
-  ThumbnailWidget(MarkListWidget* tqparent_, const PageNumber& _pageNumber, DocumentPageCache*);
+  ThumbnailWidget(MarkListWidget* parent_, const PageNumber& _pageNumber, DocumentPageCache*);
 
 private:
   virtual void paintEvent(TQPaintEvent*);

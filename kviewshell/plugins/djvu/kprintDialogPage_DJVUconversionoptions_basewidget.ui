@@ -141,5 +141,5 @@
         </spacer>
     </grid>
 </widget>
-<tqlayoutdefaults spacing="6" margin="0"/>
+<layoutdefaults spacing="6" margin="0"/>
 </UI>

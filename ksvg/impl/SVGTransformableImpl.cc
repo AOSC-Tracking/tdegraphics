@@ -83,18 +83,18 @@ SVGMatrixImpl *SVGTransformableImpl::getCTM()
 	SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(this);
 	Q_ASSERT(element);
 
-	DOM::Node tqparentNde = element->parentNode();
+	DOM::Node parentNde = element->parentNode();
 
-	if(!tqparentNde.isNull() && tqparentNde.nodeType() != DOM::Node::DOCUMENT_NODE)
+	if(!parentNde.isNull() && parentNde.nodeType() != DOM::Node::DOCUMENT_NODE)
 	{
-		SVGElementImpl *tqparent = element->ownerDoc()->getElementFromHandle(tqparentNde.handle());
+		SVGElementImpl *tqparent = element->ownerDoc()->getElementFromHandle(parentNde.handle());
 		SVGLocatableImpl *locatableParent = dynamic_cast<SVGLocatableImpl *>(tqparent);
 
 		if(locatableParent)
 		{
-			SVGMatrixImpl *tqparentCTM = locatableParent->getCTM();
-			ctm->multiply(tqparentCTM);
-			tqparentCTM->deref();
+			SVGMatrixImpl *parentCTM = locatableParent->getCTM();
+			ctm->multiply(parentCTM);
+			parentCTM->deref();
 		}
 	}
 
@@ -124,7 +124,7 @@ void SVGTransformableImpl::updateLocalMatrix()
 		}
 	}
 
-	tqinvalidateCachedMatrices();
+	invalidateCachedMatrices();
 }
 
 // Ecma stuff

@@ -96,12 +96,12 @@ void dviRenderer::exportPDF()
   TQString suggestedName = dviFile->filename;
   suggestedName = suggestedName.left(suggestedName.tqfind(".")) + ".pdf";
 
-  TQString fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.pdf|Portable Document Format (*.pdf)"), tqparentWidget, i18n("Export File As"));
+  TQString fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.pdf|Portable Document Format (*.pdf)"), parentWidget, i18n("Export File As"));
   if (fileName.isEmpty())
     return;
   TQFileInfo finfo(fileName);
   if (finfo.exists()) {
-    int r = KMessageBox::warningContinueCancel (tqparentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
+    int r = KMessageBox::warningContinueCancel (parentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
 				       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -116,7 +116,7 @@ void dviRenderer::exportPDF()
 					  "a while because dvipdfm needs to generate its own bitmap fonts "
 					  "Please be patient."),
 				     i18n("Waiting for dvipdfm to finish..."),
-				     tqparentWidget, i18n("dvipdfm progress dialog"), false );
+				     parentWidget, i18n("dvipdfm progress dialog"), false );
   if (progress != 0) {
     progress->TextLabel2->setText( i18n("Please be patient") );
     progress->setTotalSteps( dviFile->total_pages );
@@ -177,7 +177,7 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
     return;
 
   if (dviFile->numberOfExternalNONPSFiles != 0) {
-    KMessageBox::sorry( tqparentWidget, 
+    KMessageBox::sorry( parentWidget, 
 			i18n("<qt><P>This DVI file refers to external graphic files which are not in PostScript format, and cannot be handled by the "
 			     "<strong>dvips</strong> program that KDVI uses interally to print or to export to PostScript. The functionality that "
 			     "you require is therefore unavailable in this version of KDVI.</p>"
@@ -195,12 +195,12 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
     TQString suggestedName = dviFile->filename;
     suggestedName = suggestedName.left(suggestedName.tqfind(".")) + ".ps";
 
-    fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.ps|PostScript (*.ps)"), tqparentWidget, i18n("Export File As"));
+    fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.ps|PostScript (*.ps)"), parentWidget, i18n("Export File As"));
     if (fileName.isEmpty())
       return;
     TQFileInfo finfo(fileName);
     if (finfo.exists()) {
-      int r = KMessageBox::warningYesNo (tqparentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
+      int r = KMessageBox::warningYesNo (parentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
 					 i18n("Overwrite File"));
       if (r == KMessageBox::No)
 	return;
@@ -219,7 +219,7 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
 					  "a while because dvips needs to generate its own bitmap fonts "
 					  "Please be patient."),
 				     i18n("Waiting for dvips to finish..."),
-				     tqparentWidget, i18n("dvips progress dialog"), false );
+				     parentWidget, i18n("dvips progress dialog"), false );
   if (progress != 0) {
     progress->TextLabel2->setText( i18n("Please be patient") );
     progress->setTotalSteps( dviFile->total_pages );
@@ -341,7 +341,7 @@ void dviRenderer::dvips_terminated(KProcess *sproc)
   // export_errorString, does not correspond to sproc. In that case,
   // we ingore the return status silently.
   if ((proc == sproc) && (sproc->normalExit() == true) && (sproc->exitStatus() != 0))
-    KMessageBox::error( tqparentWidget, export_errorString );
+    KMessageBox::error( parentWidget, export_errorString );
 
   if (export_printer != 0)
     export_printer->printFiles( TQStringList(export_fileName), true );
@@ -359,7 +359,7 @@ void dviRenderer::editorCommand_terminated(KProcess *sproc)
   // export_errorString, does not correspond to sproc. In that case,
   // we ingore the return status silently.
   if ((proc == sproc) && (sproc->normalExit() == true) && (sproc->exitStatus() != 0))
-    KMessageBox::error( tqparentWidget, export_errorString );
+    KMessageBox::error( parentWidget, export_errorString );
 
   // Let's hope that this is not all too nasty... killing a
   // KShellProcess from a slot that was called from the KShellProcess

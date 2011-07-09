@@ -186,7 +186,7 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* tqparent, const char* name )
 void PMLayoutSettings::displaySettings( )
 {
    PMViewLayoutManager* m = PMViewLayoutManager::theManager( );
-   m_viewLayouts = m->tqlayouts( );
+   m_viewLayouts = m->layouts( );
    m_currentViewLayout = m_viewLayouts.begin( );
    m_defaultViewLayout = m_viewLayouts.begin( );
    for( ; ( m_defaultViewLayout != m_viewLayouts.end( ) ) &&
@@ -210,7 +210,7 @@ bool PMLayoutSettings::validateData( )
       if( ( *lit ).name( ).isEmpty( ) )
       {
          emit showMe( );
-         KMessageBox::error( this, i18n( "View tqlayouts may not have empty names." ),
+         KMessageBox::error( this, i18n( "View layouts may not have empty names." ),
                              i18n( "Error" ) );
          return false;
       }

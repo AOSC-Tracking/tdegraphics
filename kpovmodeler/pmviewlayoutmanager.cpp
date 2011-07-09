@@ -663,7 +663,7 @@ void PMViewLayoutManager::loadData( )
 
    m_layoutsLoaded = true;
 
-   TQString fileName = locate( "data", "kpovmodeler/viewtqlayouts.xml" );
+   TQString fileName = locate( "data", "kpovmodeler/viewlayouts.xml" );
    if( fileName.isEmpty( ) )
    {
       // Generate a default tqlayout
@@ -710,7 +710,7 @@ void PMViewLayoutManager::loadData( )
    TQFile file( fileName );
    if( !file.open( IO_ReadOnly ) )
    {
-      kdError( PMArea ) << i18n( "Could not open the view tqlayouts file." )
+      kdError( PMArea ) << i18n( "Could not open the view layouts file." )
                         << endl;
       return;
    }
@@ -740,16 +740,16 @@ void PMViewLayoutManager::loadData( )
 
 void PMViewLayoutManager::saveData( )
 {
-   TQString fileName = locateLocal( "data", "kpovmodeler/viewtqlayouts.xml" );
+   TQString fileName = locateLocal( "data", "kpovmodeler/viewlayouts.xml" );
    if( fileName.isEmpty( ) )
    {
-      kdError( PMArea ) << i18n( "View tqlayouts not found." ) << endl;
+      kdError( PMArea ) << i18n( "View layouts not found." ) << endl;
       return;
    }
    TQFile file( fileName );
    if( !file.open( IO_WriteOnly ) )
    {
-      kdError( PMArea ) << i18n( "Could not open the view tqlayouts file." )
+      kdError( PMArea ) << i18n( "Could not open the view layouts file." )
                         << endl;
       return;
    }

@@ -82,11 +82,11 @@ KViewPresenter::KViewPresenter( TQObject* tqparent, const char* name, const TQSt
 		connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ), m_paSlideshow, TQT_SLOT( setChecked( bool ) ) );
 
 		// search for file_open action
-		KXMLGUIClient * tqparentClient = static_cast<KXMLGUIClient*>( tqparent->qt_cast( "KXMLGUIClient" ) );
-		if( tqparentClient )
+		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( tqparent->qt_cast( "KXMLGUIClient" ) );
+		if( parentClient )
 		{
-			m_paFileOpen = tqparentClient->actionCollection()->action( "file_open" );
-			m_paFileClose = tqparentClient->actionCollection()->action( "file_close" );
+			m_paFileOpen = parentClient->actionCollection()->action( "file_open" );
+			m_paFileClose = parentClient->actionCollection()->action( "file_close" );
 		}
 		if( m_paFileClose )
 			connect( m_paFileClose, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotClose() ) );

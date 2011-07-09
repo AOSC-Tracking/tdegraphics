@@ -87,7 +87,7 @@ void FileFinder::keyPressEvent( TQKeyEvent *e )
 void FileFinder::hide()
 {
     KLineEdit::hide();
-    tqparentWidget()->setFocus();
+    parentWidget()->setFocus();
 }
 
 void FileFinder::slotAccept( const TQString& dir )

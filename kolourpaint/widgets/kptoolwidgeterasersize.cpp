@@ -78,9 +78,9 @@ kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *tqparent, const char *
         TQBitmap tqmask (previewPixmap.width (), previewPixmap.height ());
         tqmask.fill (TQt::color0/*transparent*/);
 
-        TQPainter tqmaskPainter (&tqmask);
-        tqmaskPainter.fillRect (rect, TQt::color1/*opaque*/);
-        tqmaskPainter.end ();
+        TQPainter maskPainter (&tqmask);
+        maskPainter.fillRect (rect, TQt::color1/*opaque*/);
+        maskPainter.end ();
 
         previewPixmap.setMask (tqmask);
 
@@ -130,19 +130,19 @@ TQPixmap kpToolWidgetEraserSize::cursorPixmap (const kpColor &color) const
 
     if (color.isTransparent ())
     {
-        TQBitmap tqmaskBitmap (pixmap.width (), pixmap.height ());
-        tqmaskBitmap.fill (TQt::color0/*transparent*/);
+        TQBitmap maskBitmap (pixmap.width (), pixmap.height ());
+        maskBitmap.fill (TQt::color0/*transparent*/);
 
 
         if (showBorder)
         {
-            TQPainter tqmaskBitmapPainter (&tqmaskBitmap);
-            tqmaskBitmapPainter.setPen (TQt::color1/*opaque*/);
-            tqmaskBitmapPainter.drawRect (tqmaskBitmap.rect ());
+            TQPainter maskBitmapPainter (&maskBitmap);
+            maskBitmapPainter.setPen (TQt::color1/*opaque*/);
+            maskBitmapPainter.drawRect (maskBitmap.rect ());
         }
 
 
-        pixmap.setMask (tqmaskBitmap);
+        pixmap.setMask (maskBitmap);
     }
 
 

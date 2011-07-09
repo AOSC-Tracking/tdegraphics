@@ -162,7 +162,7 @@ void Converter::selectGlyph(GlyphRenderParams *params)
 	// 2. Load glyph into font's glyphSlot, according to the GlyphLayoutParams
 	int flags = FT_LOAD_NO_SCALE | FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP;
 
-	// 3. Don't pass FT_LOAD_VERTICAL_LAYOUT on TTB tqlayouts when rendering
+	// 3. Don't pass FT_LOAD_VERTICAL_LAYOUT on TTB layouts when rendering
 	// 	  a latin glyph because it needs to be rotated...
 	if(params->tqlayout()->tb())
 	{
@@ -456,7 +456,7 @@ GlyphSet *Converter::calcString(Font *font, const unsigned short *text, unsigned
 	result->m_height = T2PMAX(1, int(bbox.b().y() - bbox.a().y()));
 
 	// Correct bounding box information also on
-	// vertical tqlayouts! (Niko)
+	// vertical layouts! (Niko)
 	if(!params->tb())
 	{
 		if(bpath)
