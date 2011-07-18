@@ -115,7 +115,7 @@ actionCollection());
     // We could, at the user's option, make this connection and kghostview
     // will always resize to fit the width of the page.  But, for now,
     // let's not.
-    // connect ( m_gvpart->widget(), TQT_SIGNAL (tqsizeHintChanged()),	    this, TQT_SLOT (slotResize ()) );
+    // connect ( m_gvpart->widget(), TQT_SIGNAL (sizeHintChanged()),	    this, TQT_SLOT (slotResize ()) );
 
     setCentralWidget( m_gvpart->widget() );
     createGUI( m_gvpart );
