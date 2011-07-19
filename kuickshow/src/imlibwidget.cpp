@@ -436,17 +436,17 @@ void ImlibWidget::setFlipMode( int mode )
 }
 
 
-void ImlibWidget::updateWidget( bool tqgeometryUpdate )
+void ImlibWidget::updateWidget( bool geometryUpdate )
 {
     if ( !m_kuim )
 	return;
 
-//     if ( tqgeometryUpdate )
+//     if ( geometryUpdate )
 //         XUnmapWindow( x11Display(), win );// remove the old image -> no flicker
 
     XSetWindowBackgroundPixmap( x11Display(), win, m_kuim->pixmap() );
 
-    if ( tqgeometryUpdate )
+    if ( geometryUpdate )
 	updateGeometry( m_kuim->width(), m_kuim->height() );
 
     XClearWindow( x11Display(), win );

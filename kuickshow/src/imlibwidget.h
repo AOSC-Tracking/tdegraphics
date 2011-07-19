@@ -138,7 +138,7 @@ protected:
   void 		showImage();
   void          setImageModifier();
   void 		rotate( int );
-  void 		updateWidget( bool tqgeometryUpdate=true );
+  void 		updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
   virtual void  loaded( KuickImage * );
   virtual bool  canZoomTo( int newWidth, int newHeight );
@@ -146,9 +146,9 @@ protected:
 
   void 		closeEvent( TQCloseEvent * );
 
-  inline void	autoUpdate( bool tqgeometryUpdate=false ) {
+  inline void	autoUpdate( bool geometryUpdate=false ) {
     if ( isAutoRendering )
-      updateWidget( tqgeometryUpdate );
+      updateWidget( geometryUpdate );
   }
 
   bool		stillResizing, deleteImData, deleteImlibData;

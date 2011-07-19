@@ -1095,21 +1095,21 @@ void kpMainWindow::updateThumbnail ()
                 const int margin = 20;
                 const int initialWidth = 160, initialHeight = 120;
 
-                TQRect tqgeometryRect (width () - initialWidth - margin * 2,
+                TQRect geometryRect (width () - initialWidth - margin * 2,
                                     m_scrollView->y () + margin,
                                     initialWidth,
                                     initialHeight);
 
             #if DEBUG_KP_MAIN_WINDOW
-                kdDebug () << "\t\tcreating tqgeometry=" << tqgeometryRect << endl;
+                kdDebug () << "\t\tcreating tqgeometry=" << geometryRect << endl;
             #endif
 
-                tqgeometryRect = mapToGlobal (tqgeometryRect);
+                geometryRect = mapToGlobal (geometryRect);
             #if DEBUG_KP_MAIN_WINDOW
-                kdDebug () << "\t\tmap to global=" << tqgeometryRect << endl;
+                kdDebug () << "\t\tmap to global=" << geometryRect << endl;
             #endif
-                m_thumbnail->resize (tqgeometryRect.size ());
-                m_thumbnail->move (tqgeometryRect.topLeft ());
+                m_thumbnail->resize (geometryRect.size ());
+                m_thumbnail->move (geometryRect.topLeft ());
             }
         }
 
