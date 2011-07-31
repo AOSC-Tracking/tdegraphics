@@ -19,6 +19,7 @@
  * Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include <config.h>
 #include <poppler-qt.h>
 #include <tqfile.h>
 #include <GlobalParams.h>
@@ -316,7 +317,7 @@ bool Document::print(const TQString &fileName, TQValueList<int> pageList, double
 
 bool Document::print(const TQString &file, TQValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight)
 {
-#ifdef POPPLER_016
+#ifdef HAVE_POPPLER_016
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), &(data->doc), data->doc.getXRef(), data->doc.getCatalog(), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);
 #else
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), data->doc.getXRef(), data->doc.getCatalog(), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);

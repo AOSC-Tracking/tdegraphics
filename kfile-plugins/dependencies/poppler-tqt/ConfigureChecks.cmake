@@ -6,7 +6,3 @@ check_cxx_source_compiles("
   int main(int, char**) { int a; int b; PSOutputDev *psOut = new PSOutputDev(\"test\", (PDFDoc*)0, (XRef*)0, (Catalog*)0, NULL, 0, 0, psModePS, a, b); } "
   HAVE_POPPLER_016 )
 tde_restore( CMAKE_REQUIRED_INCLUDES CMAKE_REQUIRED_LIBRARIES )
-
-if( HAVE_POPPLER_016 )
-    set( POPPLER_016 1 )
-endif( )

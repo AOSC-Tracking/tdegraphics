@@ -1,5 +1,8 @@
 #cmakedefine VERSION "@VERSION@"
 
+// poppler-tqt
+#cmakedefine HAVE_POPPLER_016
+
 // kpdf, kdvi
 #cmakedefine HAVE_FREETYPE 1
 
