@@ -17,6 +17,7 @@ include_directories(
   ${TQT_INCLUDE_DIRS}
   ${FREETYPE_INCLUDE_DIRS}
   ${FRIBIDI_INCLUDE_DIRS}
+  ${FONTCONFIG_INCLUDE_DIRS}
 )
 
 
@@ -34,4 +35,15 @@ tde_add_library( text2path STATIC_PIC
   SOURCES
     Affine.cpp Rectangle.cpp Font.cpp Glyph.cpp
     GlyphTracer.cpp Converter.cpp QtUnicode.cpp
+)
+
+##### text2path (shared) ########################
+
+tde_add_library( text2path SHARED
+  SOURCES
+    Affine.cpp Rectangle.cpp Font.cpp Glyph.cpp
+    GlyphTracer.cpp Converter.cpp QtUnicode.cpp
+  VERSION 0.0.0
+  LINK ${FREETYPE_LIBRARIES} ${FRIBIDI_LIBRARIES} ${FONTCONFIG_LIBRARIES}
+  DESTINATION ${LIB_INSTALL_DIR}
 )

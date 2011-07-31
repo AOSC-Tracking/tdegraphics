@@ -12,6 +12,7 @@
 include( ConfigureChecks.cmake )
 
 add_subdirectory( pics )
+add_subdirectory( examples )
 
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
@@ -19,6 +20,7 @@ include_directories(
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
   ${GLU_INCLUDE_DIRS}
+  /usr/include/freetype2
 )
 
 link_directories(

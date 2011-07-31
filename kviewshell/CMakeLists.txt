@@ -77,6 +77,7 @@ tde_add_library( kmultipage SHARED AUTOMOC
     documentPageCache.cpp documentWidget.cpp searchWidget.cpp
     selection.cpp documentRenderer.cpp history.cpp kvsprefs.kcfgc
     tableOfContents.cpp kprintDialogPage_pageoptions.cpp
+  VERSION 0.0.0
   LINK kparts-shared kdeprint-shared
   DESTINATION ${LIB_INSTALL_DIR}
 )
@@ -92,6 +93,16 @@ tde_add_kpart( kviewerpart AUTOMOC
     optionDialogAccessibilityWidget.ui simplePageSize.cpp
   LINK ifaces-static kparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
+)
+
+
+##### kviewshell (executable) ##################
+
+tde_add_executable( kviewshell AUTOMOC
+  SOURCES
+    main.cpp
+  LINK kviewshell-static kparts-shared
+  DESTINATION ${BIN_INSTALL_DIR}
 )
 
 

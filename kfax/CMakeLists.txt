@@ -37,3 +37,7 @@ tde_add_executable( kfax AUTOMOC
   LINK kdeui-shared kdeprint-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
+
+#### icons ########################
+
+tde_install_icons( kfax )

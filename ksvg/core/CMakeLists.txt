@@ -37,7 +37,7 @@ install( FILES
 
 install( FILES
     ksvgrenderer.desktop
-  DESTINATION ${SERVICES_INSTALL_DIR} )
+  DESTINATION ${SERVICETYPES_INSTALL_DIR} )
 
 
 ##### ksvgcore (static) #########################

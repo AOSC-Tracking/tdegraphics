@@ -87,3 +87,5 @@ tde_add_executable( kdvi AUTOMOC
   LINK kviewshell-static kparts-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
+
+add_subdirectory( pix )

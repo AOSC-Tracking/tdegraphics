@@ -9,8 +9,4 @@
 #
 #################################################
 
-# poppler-qt
-pkg_search_module( POPPLER_QT poppler-qt )
-if( NOT POPPLER_QT_FOUND )
-  tde_message_fatal( "poppler-qt is required, but was not found on your system" )
-endif( )
+add_subdirectory( poppler-tqt )

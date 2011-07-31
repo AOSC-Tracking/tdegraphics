@@ -31,7 +31,7 @@ link_directories(
 
 tde_install_icons( kfaxview )
 install( FILES kfaxview.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES ${CMAKE_SOURCE_DIR}/kviewshell/kviewshell.rc DESTINATION ${DATA_INSTALL_DIR}/kviewshell )
+install( FILES ${CMAKE_SOURCE_DIR}/kviewshell/kviewshell.rc DESTINATION ${DATA_INSTALL_DIR}/kfaxview/kviewshell.rc )
 install( FILES kfaxmultipage.desktop kfaxmultipage_tiff.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
 

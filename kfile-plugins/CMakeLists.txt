@@ -9,6 +9,7 @@
 #
 #################################################
 
+add_subdirectory( dependencies )
 add_subdirectory( dvi )
 add_subdirectory( png )
 add_subdirectory( ps )

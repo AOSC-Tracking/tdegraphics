@@ -23,6 +23,15 @@ link_directories(
 
 #### kfaximage (library) ########################
 
-tde_add_library( kfaximage STATIC_PIC AUTOMOC
+tde_add_library( kfaximage AUTOMOC
   SOURCES kfaximage.cpp faxexpand.cpp faxinit.cpp
+)
+
+#### kfaximage (shared library) ########################
+
+tde_add_library( kfaximage SHARED AUTOMOC
+  SOURCES kfaximage.cpp faxexpand.cpp faxinit.cpp
+  VERSION 1.0.0
+  LINK kparts-shared ${TQT_LIBRARIES}
+  DESTINATION ${LIB_INSTALL_DIR}
 )

@@ -9,14 +9,12 @@
 #
 #################################################
 
-include( ConfigureChecks.cmake )
-
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_BINARY_DIR}
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
-  ${POPPLER_QT_INCLUDE_DIRS}
+  ${CMAKE_SOURCE_DIR}/kfile-plugins/dependencies/poppler-tqt
 )
 
 link_directories(
@@ -33,6 +31,6 @@ install( FILES kfile_pdf.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
 tde_add_kpart( kfile_pdf AUTOMOC
   SOURCES kfile_pdf.cpp
-  LINK kio-shared ${POPPLER_QT_LIBRARIES}
+  LINK kio-shared -L${CMAKE_BINARY_DIR}/kfile-plugins/dependencies/poppler-tqt -lpoppler-tqt
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

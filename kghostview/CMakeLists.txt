@@ -47,13 +47,14 @@ tde_add_library( kghostviewlib SHARED AUTOMOC
     kgvfactory.cpp  generalsettingswidget.ui gssettingswidget.ui
     thumbnailservice.cpp  configuration.kcfgc
   LINK dscparse-static kdeprint-shared kparts-shared
+  VERSION 0.0.0
   DESTINATION ${LIB_INSTALL_DIR}
 )
 
 
 #### kghostviewpart (module) ####################
 
-tde_add_kpart( kghostviewpart AUTOMOC
+tde_add_kpart( libkghostviewpart AUTOMOC
   SOURCES part_init.cpp
   LINK kghostviewlib-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
