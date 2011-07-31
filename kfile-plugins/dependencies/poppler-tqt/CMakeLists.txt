@@ -11,6 +11,10 @@
 
 project( libpoppler-tqt )
 
+##### configure checks ##########################
+
+include( ConfigureChecks.cmake )
+
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_BINARY_DIR}

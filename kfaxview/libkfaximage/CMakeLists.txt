@@ -23,7 +23,7 @@ link_directories(
 
 #### kfaximage (library) ########################
 
-tde_add_library( kfaximage AUTOMOC
+tde_add_library( kfaximage STATIC_PIC AUTOMOC
   SOURCES kfaximage.cpp faxexpand.cpp faxinit.cpp
 )
 
