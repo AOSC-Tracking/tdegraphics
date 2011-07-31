@@ -23,8 +23,6 @@
 #ifndef __POPPLER_TQT_H__
 #define __POPPLER_TQT_H__
 
-#define POPPLER_016
-
 #include "poppler-link-qt3.h"
 #include "poppler-page-transition.h"
 
