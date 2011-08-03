@@ -84,7 +84,7 @@ KJpegPlugin::KJpegPlugin(TQObject *tqparent, const char *name,
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
 
-  item = addItemInfo( exifGroup, "Qt::Orientation", i18n("Qt::Orientation"),
+  item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
                       TQVariant::Int );
 
   item = addItemInfo( exifGroup, "ColorMode", i18n("Color Mode"),
@@ -242,7 +242,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
                                                ImageInfo.getHeight() ) );
 
     if ( ImageInfo.getOrientation() )
-        appendItem( exifGroup, "Qt::Orientation", ImageInfo.getOrientation() );
+        appendItem( exifGroup, "Orientation", ImageInfo.getOrientation() );
 
     appendItem( exifGroup, "ColorMode", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );

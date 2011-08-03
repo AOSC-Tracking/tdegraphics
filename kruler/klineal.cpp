@@ -152,7 +152,7 @@ KLineal::KLineal(TQWidget*tqparent,const char* name):KMainWindow(tqparent,name){
   oriMenu->insertItem(UserIconSet("kruler-west"), i18n("&West"), this, TQT_SLOT(setWest()), Key_W);
   oriMenu->insertItem(i18n("&Turn Right"), this, TQT_SLOT(turnRight()), Key_R);
   oriMenu->insertItem(i18n("Turn &Left"), this, TQT_SLOT(turnLeft()), Key_L);
-  mMenu->insertItem(i18n("&Qt::Orientation"), oriMenu);
+  mMenu->insertItem(i18n("&Orientation"), oriMenu);
   mLenMenu = new KPopupMenu(this);
   mLenMenu->insertItem(i18n("&Short"), this, TQT_SLOT(setShortLength()), CTRL+Key_S);
   mLenMenu->insertItem(i18n("&Medium"), this, TQT_SLOT(setMediumLength()), CTRL+Key_M);

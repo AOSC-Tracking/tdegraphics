@@ -210,7 +210,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *t
   TQStringList orientations;
   orientations.append(i18n("Portrait"));
   orientations.append(i18n("Landscape"));
-  orientation = new KSelectAction (i18n("Preferred &Qt::Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
+  orientation = new KSelectAction (i18n("Preferred &Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
   orientation->setItems(orientations);
   connect(orientation, TQT_SIGNAL(activated (int)), &userRequestedPaperSize, TQT_SLOT(setOrientation(int)));
 

@@ -222,7 +222,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     // TODO -- disable entry if there aren't any page names
 
     //-- View Menu ----------------------------------------------------------
-    _selectOrientation = new KSelectAction( i18n( "&Qt::Orientation" ), 0, 0, 0,
+    _selectOrientation = new KSelectAction( i18n( "&Orientation" ), 0, 0, 0,
                                     actionCollection(), "orientation_menu" );
     _selectMedia       = new KSelectAction( i18n( "Paper &Size" ), 0, 0, 0,
                                     actionCollection(), "media_menu" );

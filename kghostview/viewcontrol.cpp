@@ -103,7 +103,7 @@ ViewControl::ViewControl( TQWidget *tqparent, const char *name )
 
 	grid->addWidget( vcLabel, 1, 0 );
 
-	vcLabel = new TQLabel( orientComboBox, i18n("&Qt::Orientation"), vcGroupBox );
+	vcLabel = new TQLabel( orientComboBox, i18n("&Orientation"), vcGroupBox );
 	vcLabel->tqsetAlignment( AlignRight | AlignVCenter | ShowPrefix );
 	if ( vcLabel->tqsizeHint().width() > labelWidth )
 		labelWidth = vcLabel->tqsizeHint().width();

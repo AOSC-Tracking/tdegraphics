@@ -311,7 +311,7 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
     if ( !metadatas.isValid() )
         return false;
 
-    KFileMetaInfoItem metaitem = metadatas.item("Qt::Orientation");
+    KFileMetaInfoItem metaitem = metadatas.item("Orientation");
     if ( !metaitem.isValid()
         || metaitem.value().isNull()
         )

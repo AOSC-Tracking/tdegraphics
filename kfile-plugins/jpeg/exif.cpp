@@ -135,7 +135,7 @@ static int BytesPerFormat[] = {0,1,1,2,4,8,1,1,2,4,8,4,8};
   {   0x10F,   "Make"},
   {   0x110,   "Model"},
   {   0x111,   "StripOffsets"},
-  {   0x112,   "Qt::Orientation"},
+  {   0x112,   "Orientation"},
   {   0x115,   "SamplesPerPixel"},
   {   0x116,   "RowsPerStrip"},
   {   0x117,   "StripByteCounts"},
