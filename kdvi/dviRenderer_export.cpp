@@ -94,7 +94,7 @@ void dviRenderer::exportPDF()
 
   // Generate a suggestion for a reasonable file name
   TQString suggestedName = dviFile->filename;
-  suggestedName = suggestedName.left(suggestedName.tqfind(".")) + ".pdf";
+  suggestedName = suggestedName.left(suggestedName.find(".")) + ".pdf";
 
   TQString fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.pdf|Portable Document Format (*.pdf)"), parentWidget, i18n("Export File As"));
   if (fileName.isEmpty())
@@ -193,7 +193,7 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
   if (fname.isEmpty()) {
     // Generate a suggestion for a reasonable file name
     TQString suggestedName = dviFile->filename;
-    suggestedName = suggestedName.left(suggestedName.tqfind(".")) + ".ps";
+    suggestedName = suggestedName.left(suggestedName.find(".")) + ".ps";
 
     fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.ps|PostScript (*.ps)"), parentWidget, i18n("Export File As"));
     if (fileName.isEmpty())

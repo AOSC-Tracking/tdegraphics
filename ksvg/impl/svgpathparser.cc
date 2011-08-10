@@ -100,7 +100,7 @@ SVGPathParser::parseSVG( const TQString &s, bool process )
 	if(!s.isEmpty())
 	{
 		TQString d = s;
-		d = d.tqreplace(',', ' ');
+		d = d.replace(',', ' ');
 		d = d.simplifyWhiteSpace();
 		const char *ptr = d.latin1();
 		const char *end = d.latin1() + d.length() + 1;

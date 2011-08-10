@@ -86,7 +86,7 @@ bool KScanOptSet::backupOption( const KScanOption& opt )
 
   if( retval )
   {
-     KScanOption *newopt = tqfind( optName );
+     KScanOption *newopt = find( optName );
 
      if( newopt )
      {

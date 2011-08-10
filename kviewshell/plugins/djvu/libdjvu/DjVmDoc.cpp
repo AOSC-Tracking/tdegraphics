@@ -109,7 +109,7 @@ save_file(
           {
             incl_str.setat(incl_str.length()-1, 0);
           }
-          GPosition pos=incl.tqcontains(incl_str);
+          GPosition pos=incl.contains(incl_str);
           if(pos)
           { 
             iff_out.get_bytestream()->writestring(incl[pos]);
@@ -174,7 +174,7 @@ DjVmDoc::insert_file(const GP<DjVmDir::File> & f,
 
    if (!f)
      G_THROW( ERR_MSG("DjVmDoc.no_zero_file") );
-   if (data.tqcontains(f->get_load_name()))
+   if (data.contains(f->get_load_name()))
      G_THROW( ERR_MSG("DjVmDoc.no_duplicate") );
 
    char buffer[4];
@@ -224,7 +224,7 @@ DjVmDoc::delete_file(const GUTF8String &id)
    DEBUG_MSG("DjVmDoc::delete_file(): deleting file '" << id << "'\n");
    DEBUG_MAKE_INDENT(3);
    
-   if (!data.tqcontains(id))
+   if (!data.contains(id))
       G_THROW(GUTF8String( ERR_MSG("DjVmDoc.cant_delete") "\t") + id);
    
    data.del(id);
@@ -243,8 +243,8 @@ GP<DataPool>
 DjVmDoc::get_data(const GUTF8String &id) const
 {
   GPosition pos;
-  if (!data.tqcontains(id, pos))
-    G_THROW(GUTF8String( ERR_MSG("DjVmDoc.cant_tqfind") "\t") + id);
+  if (!data.contains(id, pos))
+    G_THROW(GUTF8String( ERR_MSG("DjVmDoc.cant_find") "\t") + id);
   const GP<DataPool> pool(data[pos]);
    // First check that the file is in IFF format
   G_TRY
@@ -298,8 +298,8 @@ DjVmDoc::write(const GP<ByteStream> &gstr,
     for(pos=files_list;pos;++pos)
     {
       GP<DjVmDir::File> file=files_list[pos];
-      if((do_rename=(reserved.tqcontains(file->get_load_name())?true:false))
-		  ||(do_rename=(reserved.tqcontains(file->get_save_name())?true:false)))
+      if((do_rename=(reserved.contains(file->get_load_name())?true:false))
+		  ||(do_rename=(reserved.contains(file->get_save_name())?true:false)))
       {
         break;
       }
@@ -322,7 +322,7 @@ DjVmDoc::write(const GP<ByteStream> &gstr,
         {
           GP<DjVmDir::File> file=files_list[pos];
           const GUTF8String name(::get_name(*file));
-          if(reserved.tqcontains(name))
+          if(reserved.contains(name))
           {
             GUTF8String new_name;
             int series=0;
@@ -337,7 +337,7 @@ DjVmDoc::write(const GP<ByteStream> &gstr,
               {
                 new_name=name+"_"+GUTF8String(++series);
               }
-            } while(reserved.tqcontains(new_name)||this_doc.tqcontains(new_name));
+            } while(reserved.contains(new_name)||this_doc.contains(new_name));
             dir->set_file_name(file->get_load_name(),new_name);
             need_new_list=true;
           }
@@ -353,7 +353,7 @@ DjVmDoc::write(const GP<ByteStream> &gstr,
   {
     GP<DjVmDir::File> file=files_list[pos];
     file->offset=0xffffffff;
-    GPosition data_pos=data.tqcontains(file->get_load_name());
+    GPosition data_pos=data.contains(file->get_load_name());
     if (!data_pos)
       G_THROW( ERR_MSG("DjVmDoc.no_data") "\t" + file->get_load_name());
     if(do_rename)
@@ -541,7 +541,7 @@ DjVmDoc::write_index(const GP<ByteStream> &str)
       GP<DjVmDir::File> file=files_list[pos];
       file->offset=0;
 
-      GPosition data_pos=data.tqcontains(file->get_load_name());
+      GPosition data_pos=data.contains(file->get_load_name());
       if (!data_pos)
 	G_THROW( ERR_MSG("DjVmDoc.no_data") "\t" + file->get_load_name());
       file->size=data[data_pos]->get_length();
@@ -609,7 +609,7 @@ DjVmDoc::save_file(
   GMap<GUTF8String,GUTF8String> *incl) const
 {
   const GUTF8String load_name=file.get_load_name();
-  if(!incl || !incl->tqcontains(load_name))
+  if(!incl || !incl->contains(load_name))
   {
     GMap<GUTF8String,GUTF8String> new_incl;
     const GUTF8String save_name(

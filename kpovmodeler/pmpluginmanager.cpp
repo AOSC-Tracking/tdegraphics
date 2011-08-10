@@ -81,7 +81,7 @@ PMPluginManager* PMPluginManager::theManager( )
 
 void PMPluginManager::registerPart( PMPart* p )
 {
-   if( !m_parts.tqcontainsRef( p ) )
+   if( !m_parts.containsRef( p ) )
    {
       m_parts.append( p );
       Plugin::loadPlugins( p, p, PMFactory::instance( ), false );

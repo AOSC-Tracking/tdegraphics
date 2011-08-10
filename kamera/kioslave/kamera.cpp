@@ -574,7 +574,7 @@ void KameraProtocol::listDir(const KURL &url)
 		gp_list_free (list);
 
 		/* Avoid duplicated entry for usb: and usb:001,042 entries. */
-		if (ports.tqcontains("usb:") && names[ports["usb:"]]!="usb:")
+		if (ports.contains("usb:") && names[ports["usb:"]]!="usb:")
 			ports.remove("usb:");
 
 		for (it = groupList.begin(); it != groupList.end(); it++) {
@@ -606,7 +606,7 @@ void KameraProtocol::listDir(const KURL &url)
 			xurl.setProtocol("camera");
 			xurl.setUser(*it);
 			/* Avoid setting usb:xxx,yyy. */
-			if (m_cfgPath.tqcontains("usb:")>0) {
+			if (m_cfgPath.contains("usb:")>0) {
 				names[*it] = "usb:";
 				xurl.setHost("usb:");
 			} else {

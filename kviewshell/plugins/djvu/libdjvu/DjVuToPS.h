@@ -308,7 +308,7 @@ public:
       end of printing.  If a \Ref{DjVuDocument} is being printed, this
       callback will be used to report printing progress of every page. To
       learn the number of the page being printed you can use
-      \Ref{set_info_cb}() function.  See \Ref{set_dec_progress_cb}() to tqfind
+      \Ref{set_info_cb}() function.  See \Ref{set_dec_progress_cb}() to find
       out how to learn the decoding progress.
       
       @param cb Callback function to be called

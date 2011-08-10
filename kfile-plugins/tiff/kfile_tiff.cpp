@@ -248,7 +248,7 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
 
     int imageBpp = bitsPerSample*samplesPerPixel;
     if (imageAlpha && colorMode==PHOTOMETRIC_RGB)
-        m_colorMode.tqreplace(PHOTOMETRIC_RGB, new TQString(I18N_NOOP("RGBA")));
+        m_colorMode.replace(PHOTOMETRIC_RGB, new TQString(I18N_NOOP("RGBA")));
 
     KFileMetaInfoGroup group = appendGroup(info, "General");
     if (description)

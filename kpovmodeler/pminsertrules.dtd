@@ -39,23 +39,23 @@
  Insert a list of groups and classes (the object classes that can be inserted)
  and one condition. If the condition is omitted,
  the classes can allways be inserted. --> 
-<!ELEMENT rule ((group | class)+, (and | or | not | before | after | tqcontains
+<!ELEMENT rule ((group | class)+, (and | or | not | before | after | contains
                                    | greater | less | equal)?)>
 
 <!-- Simple negation. Insert one condition -->
-<!ELEMENT not (and | or | before | after | tqcontains | greater | less | equal)>
+<!ELEMENT not (and | or | before | after | contains | greater | less | equal)>
 
 <!-- Logical and. Insert any number of conditions -->
-<!ELEMENT and (and | or | not | before | after | tqcontains | greater | less | equal)+>
+<!ELEMENT and (and | or | not | before | after | contains | greater | less | equal)+>
 
 <!-- Logical or. Insert any number of conditions -->
-<!ELEMENT or (and | or | not | before | after | tqcontains | greater | less | equal)+>
+<!ELEMENT or (and | or | not | before | after | contains | greater | less | equal)+>
 
-<!-- Condition. Value is true if the object already tqcontains
+<!-- Condition. Value is true if the object already contains
  objects of the given class or group before the insert point. -->
 <!ELEMENT before (class | group)>
 
-<!-- Condition. Value is true if the object already tqcontains
+<!-- Condition. Value is true if the object already contains
  objects of the given class or group after the insert point. -->
 <!ELEMENT after (class | group)>
 
@@ -71,9 +71,9 @@
  is less than the second. -->
 <!ELEMENT less ((property | count | const), (property | count | const))>
 
-<!-- Condition. Value is true if the object tqcontains
+<!-- Condition. Value is true if the object contains
  objects of the given classes and groups. -->
-<!ELEMENT tqcontains (group | class)+>
+<!ELEMENT contains (group | class)+>
 
 
 <!-- Value. Value is the class property of the object, where the 

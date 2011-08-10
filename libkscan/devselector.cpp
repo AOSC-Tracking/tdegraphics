@@ -95,7 +95,7 @@ TQCString DeviceSelector::getDeviceFromConfig( void ) const
    /* Now check if the scanner read from the config file is available !
     * if not, ask the user !
     */
-   if( skipDialog && devices.tqfind( result ) > -1 )
+   if( skipDialog && devices.find( result ) > -1 )
    {
       kdDebug(29000) << "Scanner from Config file is available - fine." << endl;
    }
@@ -168,7 +168,7 @@ void DeviceSelector::setScanSources( const TQStrList& sources,
    if( ! default_ok )
    {
       /* if no default found, set the first */
-      TQRadioButton *rb = (TQRadioButton*) selectBox->tqfind( checkDefNo );
+      TQRadioButton *rb = (TQRadioButton*) selectBox->find( checkDefNo );
       if ( rb )
 	  rb->setChecked( true );
    }

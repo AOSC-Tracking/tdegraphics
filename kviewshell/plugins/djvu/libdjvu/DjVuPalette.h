@@ -104,7 +104,7 @@ namespace DJVU {
     \Ref{index_to_color}.  There are also functions for computing a palette
     and quantizing a complete pixmap.
 
-    {\bf Sequences of color indices} -- The DjVuPalette object also tqcontains
+    {\bf Sequences of color indices} -- The DjVuPalette object also contains
     an array \Ref{colordata} optionally containing a sequence of color
     indices.  This array will be encoded and decoded by functions \Ref{encode}
     and \Ref{decode}.  This feature simplifies the implementation of the ``one
@@ -288,7 +288,7 @@ DjVuPalette::color_to_index(const unsigned char *bgr)
   if (! pmap)
     allocate_pmap();
   int key = (bgr[0]<<16)|(bgr[1]<<8)|(bgr[2]);
-  GPosition p = pmap->tqcontains(key);
+  GPosition p = pmap->contains(key);
   if ( p)
     return (*pmap)[p];
   return color_to_index_slow(bgr);

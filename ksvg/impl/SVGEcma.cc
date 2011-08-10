@@ -74,7 +74,7 @@ using namespace KSVG;
  isSupported			SVGDOMNodeBridge::IsSupported			DontDelete|Function 2
  addEventListener		SVGDOMNodeBridge::AddEventListener		DontDelete|Function 3
  removeEventListener	SVGDOMNodeBridge::RemoveEventListener	DontDelete|Function 3
- tqcontains				SVGDOMNodeBridge::Contains				DontDelete|Function 1
+ contains				SVGDOMNodeBridge::Contains				DontDelete|Function 1
  getNodeName			SVGDOMNodeBridge::GetNodeName			DontDelete|Function 0
  getNodeValue			SVGDOMNodeBridge::GetNodeValue			DontDelete|Function 0
  getNodeType			SVGDOMNodeBridge::GetNodeType			DontDelete|Function 0
@@ -178,10 +178,10 @@ void removeItem(ExecState *exec, DOM::Node &node)
 void correctHandles(SVGElementImpl *main, DOM::Node &node)
 {
 	DOM::Element old(node.handle());
-	DOM::Element *tqreplace = static_cast<DOM::Element *>(main->ownerDoc()->getElementFromHandle(node.handle()));
+	DOM::Element *replace = static_cast<DOM::Element *>(main->ownerDoc()->getElementFromHandle(node.handle()));
 
-	if(tqreplace && node.nodeType() == DOM::Node::ELEMENT_NODE)
-		*tqreplace = old;
+	if(replace && node.nodeType() == DOM::Node::ELEMENT_NODE)
+		*replace = old;
 
 	if(node.hasChildNodes())
 	{
@@ -556,7 +556,7 @@ Value SVGDOMElementBridgeProtoFunc::call(ExecState *exec, Object &thisObj, const
 		{
 			// For now, we strip the NS part (Rob)
 			DOM::DOMString attr = args[1].toString(exec).string();
-			int pos = attr.string().tqfind(':');
+			int pos = attr.string().find(':');
 			if(pos > -1)
 				attr = attr.string().mid(pos + 1);
 

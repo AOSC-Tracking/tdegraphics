@@ -1179,7 +1179,7 @@ TQImage KIconEditGrid::getSelection(bool cut)
     {
         int x = pntarray[i].x();
         int y = pntarray[i].y();
-        if(img->valid(x, y) && rect.tqcontains(TQPoint(x, y)))
+        if(img->valid(x, y) && rect.contains(TQPoint(x, y)))
         {
             *((uint*)tmp.scanLine(y-ny) + (x-nx)) = *((uint*)img->scanLine(y) + x);
             if(cut)
@@ -1909,7 +1909,7 @@ void KIconEditGrid::drawPointArray(TQPointArray a, DrawAction action)
         int x = a[i].x();
         int y = a[i].y();
 
-        if(img->valid(x, y) && TQT_TQRECT_OBJECT(a.boundingRect()).tqcontains(a[ i ]))
+        if(img->valid(x, y) && TQT_TQRECT_OBJECT(a.boundingRect()).contains(a[ i ]))
         {
             //kdDebug(4640) << "x: " << x << " - y: " << y << endl;
             switch( action )
@@ -2195,7 +2195,7 @@ void KIconEditGrid::mapToKDEPalette()
         {
             if(*l != TRANSPARENT)
             {
-                if(!iconcolors.tqcontains(*l))
+                if(!iconcolors.contains(*l))
                     *l = iconcolors.closestMatch(*l);
             }
         }

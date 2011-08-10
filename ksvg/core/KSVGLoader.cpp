@@ -125,7 +125,7 @@ void KSVGLoader::slotResult(KIO::Job *job)
 		if(m_job->error() == 0)
 		{
 			TQString check = static_cast<KIO::TransferJob *>(job)->url().prettyURL();
-			if(check.tqcontains(".svgz") || check.tqcontains(".svg.gz"))
+			if(check.contains(".svgz") || check.contains(".svg.gz"))
 			{
 				// decode the gzipped svg and emit it
 				TQIODevice *dev = KFilterDev::device(TQT_TQIODEVICE(new TQBuffer(m_data)), "application/x-gzip");
@@ -348,7 +348,7 @@ public:
 						// Convert the id to its mangled version.
 						TQString id = "@fragment@" + m_url.prettyURL() + "@" + value;
 
-						if(m_idMap.tqcontains(id))
+						if(m_idMap.contains(id))
 						{
 							// This is a local reference to an element within the fragment.
 							// Just convert the href.

@@ -120,7 +120,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
   
   TQString specType = colorSpec.section(' ', 0, 0);
 
-  if (specType.tqfind("rgb", false) == 0) {
+  if (specType.find("rgb", false) == 0) {
     bool ok;
 
     double r = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -138,7 +138,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
     return TQColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
   }
 
-  if (specType.tqfind("hsb", false) == 0) {
+  if (specType.find("hsb", false) == 0) {
     bool ok;
 
     double h = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -156,7 +156,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
     return TQColor((int)(h*359.0+0.5), (int)(s*255.0+0.5), (int)(b*255.0+0.5), TQColor::Hsv);
   }
 
-  if (specType.tqfind("cmyk", false) == 0) {
+  if (specType.find("cmyk", false) == 0) {
     bool ok;
 
     double c = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -189,7 +189,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
     return TQColor((int)(r*255.0+0.5), (int)(g*255.0+0.5), (int)(b*255.0+0.5));
   }
 
-  if (specType.tqfind("gray", false) == 0) {
+  if (specType.find("gray", false) == 0) {
     bool ok;
 
     double g = colorSpec.section(' ', 1, 1).toDouble(&ok);
@@ -200,7 +200,7 @@ TQColor dviRenderer::parseColorSpecification(const TQString& colorSpec)
   }
 
   // Check if the color is one of the known named colors.
-  TQMap<TQString, TQColor>::Iterator f = namedColors.tqfind(specType);
+  TQMap<TQString, TQColor>::Iterator f = namedColors.find(specType);
   if (f != namedColors.end())
     return *f;
   
@@ -254,7 +254,7 @@ void dviRenderer::color_special(const TQString& _cp)
 void dviRenderer::html_href_special(const TQString& _cp)
 {
   TQString cp = _cp;
-  cp.truncate(cp.tqfind('"'));
+  cp.truncate(cp.find('"'));
   
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "HTML-special, href " << cp.latin1() << endl;
@@ -292,10 +292,10 @@ void dviRenderer::source_special(const TQString& cp)
 
 void parse_special_argument(const TQString& strg, const char* argument_name, int* variable)
 {
-  int index = strg.tqfind(argument_name);
+  int index = strg.find(argument_name);
   if (index >= 0) {
     TQString tmp = strg.mid(index + strlen(argument_name));
-    index = tmp.tqfind(' ');
+    index = tmp.find(' ');
     if (index >= 0)
       tmp.truncate(index);
 
@@ -327,7 +327,7 @@ void dviRenderer::epsf_special(const TQString& cp)
   // (already the simplifyWhiteSpace() above is wrong). If you have
   // files like this, go away.
   TQString EPSfilename_orig = include_command;
-  EPSfilename_orig.truncate(EPSfilename_orig.tqfind(' '));
+  EPSfilename_orig.truncate(EPSfilename_orig.find(' '));
 
   // Strip enclosing quotation marks which are included by some LaTeX
   // macro packages (but not by others). This probably means that
@@ -348,7 +348,7 @@ void dviRenderer::epsf_special(const TQString& cp)
   int  angle   = 0;
 
   // just to avoid ambiguities; the filename could contain keywords
-  include_command = include_command.mid(include_command.tqfind(' '));
+  include_command = include_command.mid(include_command.find(' '));
   
   parse_special_argument(include_command, "llx=", &llx);
   parse_special_argument(include_command, "lly=", &lly);

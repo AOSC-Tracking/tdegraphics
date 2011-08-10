@@ -36,7 +36,7 @@ public:
 	virtual ~MinOneLRUCache() {}
 
 	void insert(const keyType& key, const valueType& value, int cost);
-	bool tqfind(const keyType& key, valueType& result);
+	bool find(const keyType& key, valueType& result);
 
 	void setMaxTotalCost(int maxTotalCost);
 	int maxTotalCost() const { return m_maxTotalCost; }
@@ -63,7 +63,7 @@ protected:
 
 	typedef TQValueList<CacheItem> CacheItemList;
 
-	typename CacheItemList::iterator tqfind(const keyType& key);
+	typename CacheItemList::iterator find(const keyType& key);
 	void enforceCostConstraint();
 
 	CacheItemList m_items;
@@ -74,7 +74,7 @@ protected:
 template<class keyType, class valueType>
 void MinOneLRUCache<keyType, valueType>::insert(const keyType& key, const valueType& value, int cost)
 {
-	typename CacheItemList::iterator it = tqfind(key);
+	typename CacheItemList::iterator it = find(key);
 
 	if(it != m_items.end())
 	{
@@ -91,10 +91,10 @@ void MinOneLRUCache<keyType, valueType>::insert(const keyType& key, const valueT
 }
 
 template<class keyType, class valueType>
-bool MinOneLRUCache<keyType, valueType>::tqfind(const keyType& key, valueType& result)
+bool MinOneLRUCache<keyType, valueType>::find(const keyType& key, valueType& result)
 {
 	bool foundKey = false;
-	typename CacheItemList::iterator it = tqfind(key);
+	typename CacheItemList::iterator it = find(key);
 
 	if(it != m_items.end())
 	{
@@ -115,7 +115,7 @@ bool MinOneLRUCache<keyType, valueType>::tqfind(const keyType& key, valueType& r
 }
 
 template<class keyType, class valueType>
-typename MinOneLRUCache<keyType, valueType>::CacheItemList::iterator MinOneLRUCache<keyType, valueType>::tqfind(const keyType& key)
+typename MinOneLRUCache<keyType, valueType>::CacheItemList::iterator MinOneLRUCache<keyType, valueType>::find(const keyType& key)
 {
 	typename CacheItemList::iterator it;
 

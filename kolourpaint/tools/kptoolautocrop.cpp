@@ -34,7 +34,7 @@
 //       at the other extreme would not be deemed similar enough.  The
 //       key is to find the median color as the reference but how do
 //       you do this if you don't know which pixels to sample in the first
-//       place (that's what you're trying to tqfind)?  Chicken and egg situation.
+//       place (that's what you're trying to find)?  Chicken and egg situation.
 //
 //       The other heuristic that is in doubt is the use of the average
 //       color in determining the similarity of sides (it is possible

@@ -13,7 +13,7 @@
 #include <tqstring.h>
 
 /**
- * This class represents one line of a font map file, and tqcontains
+ * This class represents one line of a font map file, and contains
  * three pieces of information about a font: its file name, the full
  * name of the font, and the encoding.
  *

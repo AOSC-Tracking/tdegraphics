@@ -56,7 +56,7 @@ TQString PMResourceLocator::lookUp( const TQString& file )
 
    kdDebug( PMArea ) << "LookUp: " << file << endl;
    
-   TQString* ps = m_cache.tqfind( file );
+   TQString* ps = m_cache.find( file );
    if( ps )
       return *ps;
 

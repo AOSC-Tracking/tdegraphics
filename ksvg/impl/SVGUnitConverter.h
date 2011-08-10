@@ -48,7 +48,7 @@ public:
 
 	void modify(SVGAnimatedLengthImpl *obj, const TQString &value)
 	{
-		UnitData *data = m_dict.tqfind(obj);
+		UnitData *data = m_dict.find(obj);
 
 		if(data)
 			data->valueAsString = value;

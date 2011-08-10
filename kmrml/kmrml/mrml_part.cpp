@@ -325,7 +325,7 @@ void MrmlPart::downloadReferenceFiles( const KURL::List& downloadList )
     for ( ; it != downloadList.end(); it++ )
     {
         TQString extension;
-        int index = (*it).fileName().tqfindRev( '.' );
+        int index = (*it).fileName().findRev( '.' );
         if ( index != -1 )
             extension = (*it).fileName().mid( index );
 

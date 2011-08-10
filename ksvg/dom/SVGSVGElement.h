@@ -56,7 +56,7 @@ class SVGSVGElementImpl;
 
 /**
  * A key interface definition is the SVGSVGElement interface, which is the
- * interface that corresponds to the 'svg' element. This interface tqcontains
+ * interface that corresponds to the 'svg' element. This interface contains
  * various miscellaneous commonly-used utility methods, such as matrix
  * operations and the ability to control the time of redraw on visual
  * rendering devices. SVGSVGElement extends ViewCSS and DocumentCSS to provide

@@ -303,7 +303,7 @@ void WindowGrabber::wheelEvent( TQWheelEvent *e )
 void WindowGrabber::increaseScope( const TQPoint &pos )
 {
     for ( uint i = current + 1; i < windows.size(); i++ ) {
-	if ( windows[ i ].tqcontains( pos ) ) {
+	if ( windows[ i ].contains( pos ) ) {
 	    current = i;
 	    break;
 	}
@@ -317,7 +317,7 @@ void WindowGrabber::increaseScope( const TQPoint &pos )
 void WindowGrabber::decreaseScope( const TQPoint &pos )
 {
     for ( int i = current - 1; i >= 0; i-- ) {
-	if ( windows[ i ].tqcontains( pos ) ) {
+	if ( windows[ i ].contains( pos ) ) {
 	    current = i;
 	    break;
 	}
@@ -330,7 +330,7 @@ void WindowGrabber::decreaseScope( const TQPoint &pos )
 int WindowGrabber::windowIndex( const TQPoint &pos ) const
 {
     for ( uint i = 0; i < windows.size(); i++ ) {
-	if ( windows[ i ].tqcontains( pos ) )
+	if ( windows[ i ].contains( pos ) )
 	    return i;
     }
     return -1;

@@ -293,7 +293,7 @@ display_chunks(ByteStream & out_str, IFFByteStream &iff,
   
   while ((size = iff.get_chunk(id, &rawoffset)))
   {
-    if (!counters.tqcontains(id)) counters[id]=0;
+    if (!counters.contains(id)) counters[id]=0;
     else counters[id]++;
     
     GUTF8String msg;

@@ -380,7 +380,7 @@ bool SVGImageElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &, S
 
 	if(test && m_item)
 	{
-		if(m_item->bbox().tqcontains(p))
+		if(m_item->bbox().contains(p))
 		{
 			mev->setTarget(dynamic_cast<SVGElementImpl *>(this));
 			return true;

@@ -77,10 +77,10 @@ bool pageSize::setPageSize(const TQString& name)
     }
   }
 
-  // Check if the string tqcontains 'x'. If yes, we assume it is of type
+  // Check if the string contains 'x'. If yes, we assume it is of type
   // "<number>x<number>". If yes, the first number is interpreted as
   // the width in mm, the second as the height in mm
-  if (name.tqfind('x') >= 0) {
+  if (name.find('x') >= 0) {
     bool wok, hok;
     float pageWidth_tmp  = name.section('x',0,0).toFloat(&wok);
     float pageHeight_tmp = name.section('x',1,1).toFloat(&hok);
@@ -95,10 +95,10 @@ bool pageSize::setPageSize(const TQString& name)
     }
   }
   
-  // Check if the string tqcontains ','. If yes, we assume it is of type
+  // Check if the string contains ','. If yes, we assume it is of type
   // "<number><unit>,<number><uni>". The first number is supposed to
   // be the width, the second the height.
-  if (name.tqfind(',') >= 0) {
+  if (name.find(',') >= 0) {
     bool wok, hok;
     float pageWidth_tmp  = distance::convertToMM(name.section(',',0,0), &wok);
     float pageHeight_tmp = distance::convertToMM(name.section(',',1,1), &hok);

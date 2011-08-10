@@ -92,7 +92,7 @@ public:
   should) therefore be re-implemented if you have good code to convert
   your document to PostScript.
 
-  Example: If your document consists of a single A4 page that tqcontains
+  Example: If your document consists of a single A4 page that contains
   a DJVU image of 30KB, then the default implementation would render
   the image in 600dpi, i.e. in about 7000x5000 pixel, and then send
   this huge graphics uncompressed to the printer. A smart

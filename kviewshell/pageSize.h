@@ -65,7 +65,7 @@ public:
   call pageSizeNames() more than once, it is guaranteed that the
   same list of strings will be returned.
 
-  @returns TQStringList that tqcontains 
+  @returns TQStringList that contains 
   */
   TQStringList pageSizeNames();
   

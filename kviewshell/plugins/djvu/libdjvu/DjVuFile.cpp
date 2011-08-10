@@ -1465,7 +1465,7 @@ DjVuFile::find_ndir(GMap<GURL, void *> & map)
   
   if (dir) return dir;
   
-  if (!map.tqcontains(url))
+  if (!map.contains(url))
   {
     map[url]=0;
     
@@ -1496,7 +1496,7 @@ DjVuFile::decode_ndir(GMap<GURL, void *> & map)
   
   if (dir) return dir;
   
-  if (!map.tqcontains(url))
+  if (!map.contains(url))
   {
     map[url]=0;
     
@@ -1570,7 +1570,7 @@ DjVuFile::get_merged_anno(const GP<DjVuFile> & file,
 {
   DEBUG_MSG("DjVuFile::get_merged_anno()\n");
   GURL url=file->get_url();
-  if (!map.tqcontains(url))
+  if (!map.contains(url))
   {
     ByteStream &str_out=*gstr_out;
     map[url]=0;
@@ -1585,7 +1585,7 @@ DjVuFile::get_merged_anno(const GP<DjVuFile> & file,
       get_merged_anno(list[pos], gstr_out, ignore_list, level+1, max_level, map);
     
     // Now process the DjVuFile's own annotations
-    if (!ignore_list.tqcontains(file->get_url()))
+    if (!ignore_list.contains(file->get_url()))
     {
       if (!file->is_data_present() ||
         file->is_modified() && file->anno)
@@ -1966,7 +1966,7 @@ void
 DjVuFile::move(GMap<GURL, void *> & map, const GURL & dir_url)
 // This function may block for data.
 {
-  if (!map.tqcontains(url))
+  if (!map.contains(url))
   {
     map[url]=0;
     
@@ -2095,7 +2095,7 @@ DjVuFile::contains_chunk(const GUTF8String &chunk_name)
     chunk_name << "'\n");
   DEBUG_MAKE_INDENT(3);
   
-  bool tqcontains=0;
+  bool contains=0;
   const GP<ByteStream> str(data_pool->get_stream());
   GUTF8String chkid;
   const GP<IFFByteStream> giff(IFFByteStream::create(str));
@@ -2112,10 +2112,10 @@ DjVuFile::contains_chunk(const GUTF8String &chunk_name)
     for(;(chunks_left--)&&(chksize=iff.get_chunk(chkid));last_chunk=chunks)
     {
       chunks++;
-      if (chkid==chunk_name) { tqcontains=1; break; }
+      if (chkid==chunk_name) { contains=1; break; }
       iff.seek_close_chunk();
     }
-    if (!tqcontains &&(chunks_number < 0)) chunks_number=last_chunk;
+    if (!contains &&(chunks_number < 0)) chunks_number=last_chunk;
   }
   G_CATCH(ex)
   {
@@ -2125,7 +2125,7 @@ DjVuFile::contains_chunk(const GUTF8String &chunk_name)
   }
   G_ENDCATCH;
   data_pool->clear_stream();
-  return tqcontains;
+  return contains;
 }
 
 bool
@@ -2225,7 +2225,7 @@ DjVuFile::add_djvu_data(IFFByteStream & ostr, GMap<GURL, void *> & map,
                         const bool included_too, const bool no_ndir)
 {
   check();
-  if (map.tqcontains(url)) return;
+  if (map.contains(url)) return;
   bool top_level = !map.size();
   map[url]=0;
   bool processed_annotation = false;

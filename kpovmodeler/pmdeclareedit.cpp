@@ -162,14 +162,14 @@ bool PMDeclareEdit::isDataValid( )
    // valid identifer!
 
    PMReservedWordDict* dict = PMScanner::reservedWords( );
-   if( dict->tqfind( text.latin1( ) ) != -1 )
+   if( dict->find( text.latin1( ) ) != -1 )
    {
       KMessageBox::error( this, i18n( "You can't use a povray reserved word"
                                       " as an identifier!" ), i18n( "Error" ) );
       return false;
    }
    dict = PMScanner::directives( );
-   if( dict->tqfind( text.latin1( ) ) != -1 )
+   if( dict->find( text.latin1( ) ) != -1 )
    {
       KMessageBox::error( this, i18n( "You can't use a povray directive"
                                       " as an identifier!" ), i18n( "Error" ) );
@@ -178,7 +178,7 @@ bool PMDeclareEdit::isDataValid( )
 
    // no reserved word
    PMSymbolTable* st = part( )->symbolTable( );
-   if( st->tqfind( text ) )
+   if( st->find( text ) )
    {
       KMessageBox::error( this, i18n( "Please enter a unique identifier!" ),
                           i18n( "Error" ) );

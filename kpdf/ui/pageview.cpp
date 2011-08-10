@@ -80,7 +80,7 @@ public:
     TQRect mouseSelectionRect;
     TQColor selectionRectColor;
 
-    // type ahead tqfind
+    // type ahead find
     bool typeAheadActive;
     TQString typeAheadString;
     TQTimer * findTimeoutTimer;
@@ -577,7 +577,7 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
             // 2) Layer 1: pixmap manipulated areas
             // 3) Layer 2: paint (blend) transparent selection
             if ( !selectionRect.isNull() && selectionRect.intersects( contentsRect ) &&
-                 !selectionRectInternal.tqcontains( contentsRect ) )
+                 !selectionRectInternal.contains( contentsRect ) )
             {
                 TQRect blendRect = selectionRectInternal.intersect( contentsRect );
                 // skip rectangles covered by the selection's border
@@ -616,7 +616,7 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
             // 2) Layer 1: opaque manipulated ares (filled / contours)
             // 3) Layer 2: paint opaque selection
             if ( !selectionRect.isNull() && selectionRect.intersects( contentsRect ) &&
-                 !selectionRectInternal.tqcontains( contentsRect ) )
+                 !selectionRectInternal.contains( contentsRect ) )
             {
                 screenPainter.setPen( tqpalette().active().highlight().dark(110) );
                 screenPainter.drawRect( selectionRect );
@@ -1338,7 +1338,7 @@ void PageView::paintItems( TQPainter * p, const TQRect & contentsRect )
         outlineGeometry.addCoords( -1, -1, 3, 3 );
 
         // draw the page outline (little black border and 2px shadow)
-        if ( !pixmapGeometry.tqcontains( contentsRect ) )
+        if ( !pixmapGeometry.contains( contentsRect ) )
         {
             int pixmapWidth = pixmapGeometry.width(),
                 pixmapHeight = pixmapGeometry.height();
@@ -1513,7 +1513,7 @@ void PageView::updateZoom( ZoomMode newZoomMode )
     {
         case ZoomFixed:{ //ZoomFixed case
             TQString z = d->aZoom->currentText();
-            newFactor = KGlobal::locale()->readNumber( z.remove( z.tqfind( '%' ), 1 ) ) / 100.0;
+            newFactor = KGlobal::locale()->readNumber( z.remove( z.find( '%' ), 1 ) ) / 100.0;
             }break;
         case ZoomIn:
             newFactor += (newFactor > 0.99) ? ( newFactor > 1.99 ? 0.5 : 0.2 ) : 0.1;

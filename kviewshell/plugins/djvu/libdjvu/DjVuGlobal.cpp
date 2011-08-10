@@ -111,7 +111,7 @@ DjVuProgressTask::set_callback(djvu_progress_callback *_callback)
   {
     GMap<void *,GP<DjVuProgressTask::Data> > &map=get_map();
     void *threadID=GThread::current();
-    if(map.tqcontains(threadID))
+    if(map.contains(threadID))
     {
       DjVuProgressTask::Data &data=*(map[threadID]);
       retval=data.callback;
@@ -127,7 +127,7 @@ DjVuProgressTask::set_callback(djvu_progress_callback *_callback)
   {
     GMap<void *,GP<DjVuProgressTask::Data> > &map=get_map();
     void *threadID=GThread::current();
-    if(map.tqcontains(threadID))
+    if(map.contains(threadID))
     {
       DjVuProgressTask::Data &data=*(map[threadID]);
       retval=data.callback;
@@ -148,7 +148,7 @@ DjVuProgressTask::DjVuProgressTask(const char *xtask,int nsteps)
   {
     GMap<void *,GP<DjVuProgressTask::Data> > &map=get_map();
     void *threadID=GThread::current();
-    if(map.tqcontains(threadID))
+    if(map.contains(threadID))
     {
       gdata=new GP<Data>;
       Data &d=*(data=((*(GP<Data> *)gdata)=map[threadID]));

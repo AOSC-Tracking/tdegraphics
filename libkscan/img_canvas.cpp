@@ -783,7 +783,7 @@ void ImageCanvas::drawHAreaBorder(TQPainter &p,int x1,int x2,int y,int r)
   } else if(!acquired) p.setPen(TQPen(TQColor(150,150,150)));
 
   for(;;) {
-    if(TQT_TQRECT_OBJECT(rect()).tqcontains(TQPoint(x1,y))) {
+    if(TQT_TQRECT_OBJECT(rect()).contains(TQPoint(x1,y))) {
       if( r && acquired ) {
 	int re_x1, re_y;
 	inv_scale_matrix.map( x1+cx, y+cy, &re_x1, &re_y );
@@ -826,7 +826,7 @@ void ImageCanvas::drawVAreaBorder(TQPainter &p, int x, int y1, int y2, int r )
     if( !acquired ) p.setPen( TQPen( TQColor(150,150,150) ) );
 
   for(;;) {
-    if(TQT_TQRECT_OBJECT(rect()).tqcontains( TQPoint(x,y1) )) {
+    if(TQT_TQRECT_OBJECT(rect()).contains( TQPoint(x,y1) )) {
       if( r && acquired ) {
 	int re_y1, re_x;
 	inv_scale_matrix.map( x+cx, y1+cy, &re_x, &re_y1 );
@@ -921,7 +921,7 @@ preview_state ImageCanvas::classifyPoint(int x,int y)
   if(x>=a.left()&&x<=a.right()) {
     if(top) return MOVE_TOP;
     if(bottom) return MOVE_BOTTOM;
-    if(selected->tqcontains(TQPoint(x,y))) return MOVE_WHOLE;
+    if(selected->contains(TQPoint(x,y))) return MOVE_WHOLE;
   }
   return MOVE_NONE;
 }
@@ -1058,7 +1058,7 @@ int ImageCanvas::highlight( const TQRect& rect, const TQPen& pen, const TQBrush&
     saveRect.setRect( rect.x()-2, rect.y()-2, rect.width()+4, rect.height()+4 );
     d->highlightRects.append( saveRect );
 
-    int idx = d->highlightRects.tqfindIndex(saveRect);
+    int idx = d->highlightRects.findIndex(saveRect);
 
     TQRect targetRect = scale_matrix.map( rect );
 

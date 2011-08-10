@@ -1064,29 +1064,29 @@ void LibartPath::init(const SVGMatrixImpl *screenCTM)
 		double cury = m_array[index - 1].y3;
 
 		// Find last subpath
-		int tqfind = -1;
+		int find = -1;
 		for(int i = index - 1; i >= 0; i--)
 		{
 			if(m_array[i].code == ART_MOVETO_OPEN || m_array[i].code == ART_MOVETO)
 			{
-				tqfind = i;
+				find = i;
 				break;
 			}
 		}
 
 		// Fix a problem where the .svg file used floats as values... (sofico.svg)
-		if(curx != m_array[tqfind].x3 && cury != m_array[tqfind].y3)
+		if(curx != m_array[find].x3 && cury != m_array[find].y3)
 		{
-			if((int) curx == (int) m_array[tqfind].x3 && (int) cury == (int) m_array[tqfind].y3)
+			if((int) curx == (int) m_array[find].x3 && (int) cury == (int) m_array[find].y3)
 			{
 				ensureSpace(m_array, index)
 
 				m_array[index].code = ART_LINETO;
-				m_array[index].x3 = m_array[tqfind].x3;
-				m_array[index].y3 = m_array[tqfind].y3;
+				m_array[index].x3 = m_array[find].x3;
+				m_array[index].y3 = m_array[find].y3;
 
-				curx = m_array[tqfind].x3;
-				cury = m_array[tqfind].y3;
+				curx = m_array[find].x3;
+				cury = m_array[find].y3;
 
 				index++;
 			}
@@ -1095,16 +1095,16 @@ void LibartPath::init(const SVGMatrixImpl *screenCTM)
 		// handle filled paths that are not closed explicitly
 		if(m_path->getFillColor()->paintType() != SVG_PAINTTYPE_NONE)
 		{
-			if((int) curx != (int) m_array[tqfind].x3 || (int) cury != (int) m_array[tqfind].y3)
+			if((int) curx != (int) m_array[find].x3 || (int) cury != (int) m_array[find].y3)
 			{
 				ensureSpace(m_array, index)
 
 				m_array[index].code = (ArtPathcode)ART_END2;
-				m_array[index].x3 = m_array[tqfind].x3;
-				m_array[index].y3 = m_array[tqfind].y3;
+				m_array[index].x3 = m_array[find].x3;
+				m_array[index].y3 = m_array[find].y3;
 
-				curx = m_array[tqfind].x3;
-				cury = m_array[tqfind].y3;
+				curx = m_array[find].x3;
+				cury = m_array[find].y3;
 
 				index++;
 			}
@@ -1147,12 +1147,12 @@ void LibartPath::svgMoveTo(double x1, double y1, bool closed, bool)
 	if(index > 0 && !closed)
 	{
 		// Find last subpath
-		int tqfind = -1;
+		int find = -1;
 		for(int i = index - 1; i >= 0; i--)
 		{
 			if(m_array[i].code == ART_MOVETO_OPEN || m_array[i].code == ART_MOVETO)
 			{
-				tqfind = i;
+				find = i;
 				break;
 			}
 		}
@@ -1160,8 +1160,8 @@ void LibartPath::svgMoveTo(double x1, double y1, bool closed, bool)
 		ensureSpace(m_array, index)
 
 		m_array[index].code = (ArtPathcode) ART_END2;
-		m_array[index].x3 = m_array[tqfind].x3;
-		m_array[index].y3 = m_array[tqfind].y3;
+		m_array[index].x3 = m_array[find].x3;
+		m_array[index].y3 = m_array[find].y3;
 
 		index++;
 	}
@@ -1205,25 +1205,25 @@ void LibartPath::svgClosePath()
 	double curx = m_array[index - 1].x3;
 	double cury = m_array[index - 1].y3;
 
-	int tqfind = -1;
+	int find = -1;
 	for(int i = index - 1; i >= 0; i--)
 	{
 		if(m_array[i].code == ART_MOVETO_OPEN || m_array[i].code == ART_MOVETO)
 		{
-			tqfind = i;
+			find = i;
 			break;
 		}
 	}
 
-	if(tqfind != -1)
+	if(find != -1)
 	{
-		if(m_array[tqfind].x3 != curx || m_array[tqfind].y3 != cury)
+		if(m_array[find].x3 != curx || m_array[find].y3 != cury)
 		{
 			ensureSpace(m_array, index)
 
 			m_array[index].code = ART_LINETO;
-			m_array[index].x3 = m_array[tqfind].x3;
-			m_array[index].y3 = m_array[tqfind].y3;
+			m_array[index].x3 = m_array[find].x3;
+			m_array[index].y3 = m_array[find].y3;
 		}
 	}
 }
@@ -1505,10 +1505,10 @@ void LibartText::update(CanvasItemUpdate reason, int param1, int param2)
 			bool strokeOk = stroke && stroke->svp && text->isStroked() && text->getStrokeWidth()->baseVal()->value() > 0; // Spec: A zero value causes no stroke to be painted.
 			if(fillOk || strokeOk)
 			{
-				if(m_fillPainters.tqfind(text))
+				if(m_fillPainters.find(text))
 					m_fillPainters[text]->update(text);
 
-				if(m_strokePainters.tqfind(text))
+				if(m_strokePainters.find(text))
 					m_strokePainters[text]->update(text);
 			}
 			fill = ++it1;
@@ -1574,10 +1574,10 @@ void LibartText::draw()
 
 		if(fillOk || strokeOk)
 		{
-			if(fillOk && m_fillPainters.tqfind(text))
+			if(fillOk && m_fillPainters.find(text))
 				m_fillPainters[text]->draw(m_canvas, fill->svp, text, text);
 
-			if(strokeOk && m_strokePainters.tqfind(text))
+			if(strokeOk && m_strokePainters.find(text))
 				m_strokePainters[text]->draw(m_canvas, stroke->svp, text, text);
 		}
 		fill = ++it1;
@@ -1655,11 +1655,11 @@ void LibartText::renderCallback(SVGTextContentElementImpl *element, const SVGMat
 		m_drawFillItems.append(fillElement);
 		m_drawStrokeItems.append(strokeElement);
 
-		if(!m_fillPainters.tqfind(element) && element->isFilled())
+		if(!m_fillPainters.find(element) && element->isFilled())
 			m_fillPainters.insert(element, new LibartFillPainter(element));
 
 		// Spec: A zero value causes no stroke to be painted.
-		if(!m_strokePainters.tqfind(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
+		if(!m_strokePainters.find(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
 			m_strokePainters.insert(element, new LibartStrokePainter(element));
 	}
 }
@@ -1734,7 +1734,7 @@ void LibartText::addTextDecoration(SVGTextContentElementImpl *element, double x,
 
 			m_drawFillItems.append(fillElement);
 
-			if(!m_fillPainters.tqfind(element) && element->isFilled())
+			if(!m_fillPainters.find(element) && element->isFilled())
 				m_fillPainters.insert(element, new LibartFillPainter(element));
 
 			art_svp_free(temp);
@@ -1752,7 +1752,7 @@ void LibartText::addTextDecoration(SVGTextContentElementImpl *element, double x,
 			m_drawStrokeItems.append(strokeElement);
 
 			// Spec: A zero value causes no stroke to be painted.
-			if(!m_strokePainters.tqfind(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
+			if(!m_strokePainters.find(element) && element->isStroked() && element->getStrokeWidth()->baseVal()->value() > 0)
 				m_strokePainters.insert(element, new LibartStrokePainter(element));
 		}
 		art_free(vec);

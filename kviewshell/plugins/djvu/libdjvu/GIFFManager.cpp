@@ -113,7 +113,7 @@ GIFFChunk::set_name(GUTF8String name)
 
   DEBUG_MSG("auto-setting type to '" << type << "'\n");
 
-  if (name.tqcontains(".[]")>=0)
+  if (name.contains(".[]")>=0)
     G_THROW( ERR_MSG("GIFFManager.bad_char") );
    
   strncpy(GIFFChunk::name, (const char *)name, 4);
@@ -310,7 +310,7 @@ GIFFChunk::get_chunks_number(const GUTF8String &name)
      "' in '" << get_name() << "'\n");
   DEBUG_MAKE_INDENT(3);
 
-  if (name.tqcontains("[]")>=0)
+  if (name.contains("[]")>=0)
     G_THROW( ERR_MSG("GIFFManager.no_brackets") );
   
   int number; 
@@ -497,7 +497,7 @@ GIFFManager::del_chunk(GUTF8String name)
     if (end>start && *end=='.')
       cur_sec=cur_sec->get_chunk(GUTF8String(start, end-start));
     if (!cur_sec)
-      G_THROW( ERR_MSG("GIFFManager.cant_tqfind") "\t"+GUTF8String(name));
+      G_THROW( ERR_MSG("GIFFManager.cant_find") "\t"+GUTF8String(name));
   } while(*end);
    
   if (!start[0])
@@ -631,7 +631,7 @@ GIFFManager::load_file(GP<ByteStream> str)
   if (istr.get_chunk(chunk_id))
   {
     if (chunk_id.substr(0,5) != "FORM:")
-      G_THROW( ERR_MSG("GIFFManager.cant_tqfind2") );
+      G_THROW( ERR_MSG("GIFFManager.cant_find2") );
     set_name(chunk_id);
     load_chunk(istr, top_level);
     istr.close_chunk();

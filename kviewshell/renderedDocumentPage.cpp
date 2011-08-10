@@ -194,7 +194,7 @@ TextSelection RenderedDocumentPage::select(const TQPoint& point)
 
   for (unsigned int i=0; i<textBoxList.size(); i++)
   {
-    if (textBoxList[i].box.tqcontains(point))
+    if (textBoxList[i].box.contains(point))
     {
       selectedTextStart = i;
       selectedTextEnd = i;
@@ -216,7 +216,7 @@ TextSelection RenderedDocumentPage::select(const TQPoint& point)
   return selection;
 }
 
-TextSelection RenderedDocumentPage::tqfind(const TQString& str, int index, bool caseSensitive)
+TextSelection RenderedDocumentPage::find(const TQString& str, int index, bool caseSensitive)
 {
   if (pageText.isNull())
   {
@@ -241,7 +241,7 @@ TextSelection RenderedDocumentPage::tqfind(const TQString& str, int index, bool 
     subIndex += textBoxList[i].text.length();
   }
 
-  int textIndex = pageText.tqfind(str, subIndex, caseSensitive);
+  int textIndex = pageText.find(str, subIndex, caseSensitive);
 
   if (textIndex == -1)
     return selection;
@@ -291,7 +291,7 @@ TextSelection RenderedDocumentPage::tqfind(const TQString& str, int index, bool 
 }
 
 
-TextSelection RenderedDocumentPage::tqfindRev(const TQString& str, int index, bool caseSensitive)
+TextSelection RenderedDocumentPage::findRev(const TQString& str, int index, bool caseSensitive)
 {
   // Negative index means we start the search at the end of the text.
   if (index < 0)
@@ -322,7 +322,7 @@ TextSelection RenderedDocumentPage::tqfindRev(const TQString& str, int index, bo
     subIndex += textBoxList[i].text.length();
   }
 
-  int textIndex = pageText.tqfindRev(str, subIndex, caseSensitive);
+  int textIndex = pageText.findRev(str, subIndex, caseSensitive);
 
   if (textIndex == -1)
     return selection;

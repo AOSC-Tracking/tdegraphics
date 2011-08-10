@@ -490,18 +490,18 @@ int kpSelection::height () const
 }
 
 // public
-bool kpSelection::tqcontains (const TQPoint &point) const
+bool kpSelection::contains (const TQPoint &point) const
 {
     TQRect rect = boundingRect ();
 
 #if DEBUG_KP_SELECTION && 1
-    kdDebug () << "kpSelection::tqcontains(" << point
+    kdDebug () << "kpSelection::contains(" << point
                << ") rect==" << rect
                << " #points=" << m_points.size ()
                << endl;
 #endif
 
-    if (!rect.tqcontains (point))
+    if (!rect.contains (point))
         return false;
 
     // OPT: TQRegion is probably incredibly slow - cache
@@ -514,20 +514,20 @@ bool kpSelection::tqcontains (const TQPoint &point) const
     case kpSelection::Text:
         return true;
     case kpSelection::Ellipse:
-        return TQRegion (m_rect, TQRegion::Ellipse).tqcontains (point);
+        return TQRegion (m_rect, TQRegion::Ellipse).contains (point);
     case kpSelection::Points:
         // TODO: make this always include the border
         //       (draw up a rect sel in this mode to see what I mean)
-        return TQRegion (m_points, false/*even-odd algo*/).tqcontains (point);
+        return TQRegion (m_points, false/*even-odd algo*/).contains (point);
     default:
         return false;
     }
 }
 
 // public
-bool kpSelection::tqcontains (int x, int y)
+bool kpSelection::contains (int x, int y)
 {
-    return tqcontains (TQPoint (x, y));
+    return contains (TQPoint (x, y));
 }
 
 
@@ -1000,7 +1000,7 @@ bool kpSelection::pointIsInTextBorderArea (const TQPoint &globalPoint) const
         return false;
     }
 
-    return (m_rect.tqcontains (globalPoint) && !pointIsInTextArea (globalPoint));
+    return (m_rect.contains (globalPoint) && !pointIsInTextArea (globalPoint));
 }
 
 // public
@@ -1012,7 +1012,7 @@ bool kpSelection::pointIsInTextArea (const TQPoint &globalPoint) const
         return false;
     }
 
-    return textAreaRect ().tqcontains (globalPoint);
+    return textAreaRect ().contains (globalPoint);
 }
 
 

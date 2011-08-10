@@ -146,7 +146,7 @@ void PMRenderManager::addView( PMGLView* view, PMObject* active, PMObject* top,
          restart = true;
       else if( graphicalChange )
       {
-         m_renderTasks.tqfindRef( task );
+         m_renderTasks.findRef( task );
          m_renderTasks.take( );
          m_renderTasks.prepend( task );
          restart = true;
@@ -205,12 +205,12 @@ void PMRenderManager::removeView( PMGLView* view )
 bool PMRenderManager::containsTask( PMGLView* view ) const
 {
    PMRenderTaskListIterator it( m_renderTasks );
-   bool tqcontains = false;
+   bool contains = false;
 
-   for( ; it.current( ) && !tqcontains; ++it )
+   for( ; it.current( ) && !contains; ++it )
       if( it.current( )->view( ) == view )
-         tqcontains = true;
-   return tqcontains;
+         contains = true;
+   return contains;
 }
 
 TQColor PMRenderManager::controlPointColor( int i ) const
@@ -1411,7 +1411,7 @@ void PMRenderManager::renderGrid( )
          glEnd( );
 
          TQString label = TQString( "%1" ).tqarg( x * signx, 0, 'g', 4 );
-         if( approxZero( x ) && label.tqfind( "e-" ) )
+         if( approxZero( x ) && label.find( "e-" ) )
             label = "0";
 
          renderString( label, screenx + 3, height / 2 - fontHeight - 2 );
@@ -1432,7 +1432,7 @@ void PMRenderManager::renderGrid( )
          glEnd( );
 
          TQString label = TQString( "%1" ).tqarg( y * signy, 0, 'g', 4 );
-         if( approxZero( y ) && label.tqfind( "e-" ) )
+         if( approxZero( y ) && label.find( "e-" ) )
             label = "0";
 
          renderString( label, -width / 2 + 3, screeny + 2 );

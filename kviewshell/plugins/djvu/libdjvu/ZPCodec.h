@@ -615,7 +615,7 @@ ZPCodec::IWencoder(const bool bit)
     numbers are much more probable than large numbers.  We will first group
     our numbers into several sets.  Each number is coded by first coding which
     set contains the number and then coding a position within the set.  Each
-    set tqcontains #2^n# numbers that we consider roughly equiprobable.  Since
+    set contains #2^n# numbers that we consider roughly equiprobable.  Since
     the most probable values occur much more often, we want to model their
     probability more precisely. Therefore we use small sets for the most
     probable values and large sets for the least probable values, as

@@ -67,19 +67,19 @@ TQString SVGLangSpaceImpl::handleText(const TQString &data) const
 	{
 		// Spec: What to do here?
 		//		 It will convert all newline and tab characters into space characters
-		result.tqreplace("\n\r", TQString(" "));
-		result.tqreplace("\r\n", TQString(" "));
-		result.tqreplace('\t', ' ');
+		result.replace("\n\r", TQString(" "));
+		result.replace("\r\n", TQString(" "));
+		result.replace('\t', ' ');
 	}
 	else if(xmlspace() == "default")
 	{
 		// Spec: What to do here?
-		//		 First, it will remove all newline characters (tqreplace)
+		//		 First, it will remove all newline characters (replace)
 		//       Then it will convert all tab characters into space characters  (simplifyWhiteSpace)
 		//       Then, it will strip off all leading and trailing space characters (stripWhiteSpace)
 		//       Then, all contiguous space characters will be consolidated. (simplifyWhiteSpace)
-		result.tqreplace('\n', TQString());
-		result.tqreplace('\r', TQString());
+		result.replace('\n', TQString());
+		result.replace('\r', TQString());
 		result = result.stripWhiteSpace().simplifyWhiteSpace();
 	}
 

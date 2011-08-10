@@ -535,7 +535,7 @@ void WindowQObject::clearTimeout(int timerId, bool delAction)
 	
 	if(delAction)
 	{
-		TQMapIterator<int, ScheduledAction *> it = scheduledActions.tqfind(timerId);
+		TQMapIterator<int, ScheduledAction *> it = scheduledActions.find(timerId);
 		if(it != scheduledActions.end())
 		{
 			ScheduledAction *action = *it;
@@ -547,7 +547,7 @@ void WindowQObject::clearTimeout(int timerId, bool delAction)
 
 void WindowQObject::timerEvent(TQTimerEvent *e)
 {
-	TQMapIterator<int, ScheduledAction *> it = scheduledActions.tqfind(e->timerId());
+	TQMapIterator<int, ScheduledAction *> it = scheduledActions.find(e->timerId());
 	if(it != scheduledActions.end())
 	{
 		ScheduledAction *action = *it;

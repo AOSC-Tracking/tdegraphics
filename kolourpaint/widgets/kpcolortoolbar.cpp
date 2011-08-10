@@ -203,8 +203,8 @@ TQRect kpDualColorButton::backgroundRect () const
 // protected virtual [base TQWidget]
 void kpDualColorButton::dragMoveEvent (TQDragMoveEvent *e)
 {
-    e->accept ((foregroundRect ().tqcontains (e->pos ()) ||
-                backgroundRect ().tqcontains (e->pos ())) &&
+    e->accept ((foregroundRect ().contains (e->pos ()) ||
+                backgroundRect ().contains (e->pos ())) &&
                KColorDrag::canDecode (e));
 }
 
@@ -216,9 +216,9 @@ void kpDualColorButton::dropEvent (TQDropEvent *e)
 
     if (col.isValid ())
     {
-        if (foregroundRect ().tqcontains (e->pos ()))
+        if (foregroundRect ().contains (e->pos ()))
             setForegroundColor (kpColor (col.rgb ()));
-        else if (backgroundRect ().tqcontains (e->pos ()))
+        else if (backgroundRect ().contains (e->pos ()))
             setBackgroundColor (kpColor (col.rgb ()));
     }
 }
@@ -235,9 +235,9 @@ void kpDualColorButton::mouseDoubleClickEvent (TQMouseEvent *e)
 {
     int whichColor = -1;
 
-    if (foregroundRect ().tqcontains (e->pos ()))
+    if (foregroundRect ().contains (e->pos ()))
         whichColor = 0;
-    else if (backgroundRect ().tqcontains (e->pos ()))
+    else if (backgroundRect ().contains (e->pos ()))
         whichColor = 1;
 
     if (whichColor == 0 || whichColor == 1)
@@ -266,7 +266,7 @@ void kpDualColorButton::mouseDoubleClickEvent (TQMouseEvent *e)
 // protected virtual [base TQWidget]
 void kpDualColorButton::mouseReleaseEvent (TQMouseEvent *e)
 {
-    if (swapPixmapRect ().tqcontains (e->pos ()) &&
+    if (swapPixmapRect ().contains (e->pos ()) &&
         m_color [0] != m_color [1])
     {
     #if DEBUG_KP_COLOR_TOOL_BAR && 1
@@ -783,7 +783,7 @@ void kpTransparentColorCell::mousePressEvent (TQMouseEvent * /*e*/)
 // protected virtual [base TQWidget]
 void kpTransparentColorCell::mouseReleaseEvent (TQMouseEvent *e)
 {
-    if (TQT_TQRECT_OBJECT(rect ()).tqcontains (e->pos ()))
+    if (TQT_TQRECT_OBJECT(rect ()).contains (e->pos ()))
     {
         if (e->button () == Qt::LeftButton)
         {

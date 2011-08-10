@@ -56,7 +56,7 @@ void ImageNameCombo::slotPathRemove( KFileTreeBranch *branch, const TQString& re
    kdDebug(28000) << "ImageNameCombo: Removing " << path << endl;
    TQString select = currentText();
    
-   if( items.tqcontains( path ))
+   if( items.contains( path ))
    {
       kdDebug(28000) << "ImageNameCombo: Item exists-> deleting" << endl;
       items.remove( path );
@@ -74,7 +74,7 @@ void ImageNameCombo::rewriteList( KFileTreeBranch *branch, const TQString& selTe
       insertItem( branch->pixmap(), *it );
    }
 
-   int index = items.tqfindIndex( selText );
+   int index = items.findIndex( selText );
    setCurrentItem( index );
 }
 

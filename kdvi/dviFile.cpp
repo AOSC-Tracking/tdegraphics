@@ -362,7 +362,7 @@ void dvifile::renumber()
 TQString dvifile::convertPDFtoPS(const TQString &PDFFilename)
 {
   // Check if the PDFFile is known
-  TQMap<TQString, TQString>::Iterator it =  convertedFiles.tqfind(PDFFilename);
+  TQMap<TQString, TQString>::Iterator it =  convertedFiles.find(PDFFilename);
   if (it != convertedFiles.end()) {
     // PDF-File is known. Good.
     return it.data();

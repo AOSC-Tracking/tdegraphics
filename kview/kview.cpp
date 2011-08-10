@@ -499,9 +499,9 @@ void KView::setupActions( TQObject * partobject )
 	if( extension )
 	{
 		TQStrList slotNames = extension->tqmetaObject()->slotNames();
-		if( slotNames.tqcontains( "print()" ) )
+		if( slotNames.contains( "print()" ) )
 			KStdAction::print( extension, TQT_SLOT( print() ), actionCollection(), "print" );
-		if( slotNames.tqcontains( "del()" ) )
+		if( slotNames.contains( "del()" ) )
 			( void )new KAction( i18n( "&Delete" ), "editdelete", SHIFT+Key_Delete,
 								 extension, TQT_SLOT( del() ), actionCollection(), "del" );
 		connect( extension, TQT_SIGNAL( enableAction( const char *, bool ) ), TQT_SLOT( enableAction( const char *, bool ) ) );

@@ -1085,8 +1085,8 @@ do_bitmap(const DjVuImage &dimg, BImager get,
 ///* rotate code ends
 
   // Sanity
-  if (! ( all.tqcontains(rect.xmin, rect.ymin) &&
-          all.tqcontains(rect.xmax-1, rect.ymax-1) ))
+  if (! ( all.contains(rect.xmin, rect.ymin) &&
+          all.contains(rect.xmax-1, rect.ymax-1) ))
     G_THROW( ERR_MSG("DjVuImage.bad_rect") );
   // Check for integral reduction
   int red;
@@ -1151,8 +1151,8 @@ do_pixmap(const DjVuImage &dimg, PImager get,
 ///* rotate code ends
 
   // Sanity
-  if (! ( all.tqcontains(rect.xmin, rect.ymin) &&
-          all.tqcontains(rect.xmax-1, rect.ymax-1) ))
+  if (! ( all.contains(rect.xmin, rect.ymin) &&
+          all.contains(rect.xmax-1, rect.ymax-1) ))
     G_THROW( ERR_MSG("DjVuImage.bad_rect2") );
   // Check for integral reduction
   int red, w=0, h=0, rw=0, rh=0;

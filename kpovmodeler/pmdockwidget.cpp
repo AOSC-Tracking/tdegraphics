@@ -1464,10 +1464,10 @@ PMDockWidget* PMDockManager::findDockWidgetAt( const TQPoint& pos )
     }
     w = p;
   }
-  if ( qt_tqfind_obj_child( TQT_TQOBJECT(w), "PMDockSplitter", "_dock_split_" ) ) return 0L;
-  if ( qt_tqfind_obj_child( TQT_TQOBJECT(w), "PMDockTabGroup", "_dock_tab" ) ) return 0L;
+  if ( qt_find_obj_child( TQT_TQOBJECT(w), "PMDockSplitter", "_dock_split_" ) ) return 0L;
+  if ( qt_find_obj_child( TQT_TQOBJECT(w), "PMDockTabGroup", "_dock_tab" ) ) return 0L;
   if (!childDockWidgetList) return 0L;
-  if ( childDockWidgetList->tqfind(w) != -1 ) return 0L;
+  if ( childDockWidgetList->find(w) != -1 ) return 0L;
   if ( currentDragWidget->isGroup && ((PMDockWidget*)w)->parentDockTabGroup() ) return 0L;
 
   PMDockWidget* www = (PMDockWidget*)w;
@@ -1511,7 +1511,7 @@ void PMDockManager::findChildDockWidget( TQWidget*& ww, const TQWidget* p, const
     while ( it.current() ) {
       if ( it.current()->isWidgetType() ) {
         w = (TQWidget*)it.current();
-        if ( w->isVisible() && w->tqgeometry().tqcontains(pos) ) {
+        if ( w->isVisible() && w->tqgeometry().contains(pos) ) {
           if ( w->inherits("PMDockWidget") ) ww = w;
           findChildDockWidget( ww, w, w->mapFromParent(pos) );
           return;
@@ -1809,8 +1809,8 @@ void PMDockManager::writeConfig(TQDomElement &base)
     nList.first();
     while ( nList.current() ) {
         PMDockWidget *obj = getDockWidgetFromName( nList.current() );
-        if (obj->isGroup && (nameList.tqfind( obj->firstName.latin1() ) == -1
-                             || nameList.tqfind(obj->lastName.latin1()) == -1)) {
+        if (obj->isGroup && (nameList.find( obj->firstName.latin1() ) == -1
+                             || nameList.find(obj->lastName.latin1()) == -1)) {
             // Skip until tqchildren are saved (why?)
             nList.next();
             if ( !nList.current() ) nList.first();
@@ -2034,7 +2034,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
     }
 /*************************************************************************************************/
     if ( obj->isGroup ){
-      if ( findList.tqfind( obj->firstName.latin1() ) != -1 && findList.tqfind( obj->lastName.latin1() ) != -1 ){
+      if ( findList.find( obj->firstName.latin1() ) != -1 && findList.find( obj->lastName.latin1() ) != -1 ){
 
         c->writeEntry( cname+":type", "GROUP");
         if ( !obj->tqparent() ){
@@ -2057,9 +2057,9 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
       } else {
 /*************************************************************************************************/
         //debug("  Skip %s", nList.current());
-        //if ( findList.tqfind( obj->firstName ) == -1 )
+        //if ( findList.find( obj->firstName ) == -1 )
         //  debug("  ? Not found %s", obj->firstName);
-        //if ( findList.tqfind( obj->lastName ) == -1 )
+        //if ( findList.find( obj->lastName ) == -1 )
         //  debug("  ? Not found %s", obj->lastName);
         nList.next();
         if ( !nList.current() ) nList.first();

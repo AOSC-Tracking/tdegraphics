@@ -420,7 +420,7 @@ TQString ScanPackager::itemDirectory( const KFileTreeViewItem* item, bool relati
    if( ! item->isDir() )
    {
       // Cut off the filename in case it is not a dir
-      relativUrl.truncate( relativUrl.tqfindRev( '/' )+1);
+      relativUrl.truncate( relativUrl.findRev( '/' )+1);
    }
    else
    {
@@ -464,7 +464,7 @@ void ScanPackager::slotSelectDirectory( const TQString & dirString )
    kdDebug(28000) << "Trying to decode directory string " << dirString << endl;
 
    TQString searchFor = TQString::tqfromLatin1(" - ");
-   int pos = dirString.tqfind( searchFor );
+   int pos = dirString.find( searchFor );
 
    if( pos > -1 )
    {

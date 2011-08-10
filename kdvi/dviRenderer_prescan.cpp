@@ -60,7 +60,7 @@ void dviRenderer::prescan_embedPS(char *cp, TQ_UINT8 *beginningOfSpecialCommand)
   // (already the simplifyWhiteSpace() above is wrong). If you have
   // files like this, go away.
   TQString EPSfilename = include_command;
-  EPSfilename.truncate(EPSfilename.tqfind(' '));
+  EPSfilename.truncate(EPSfilename.find(' '));
 
   // Strip enclosing quotation marks which are included by some LaTeX
   // macro packages (but not by others). This probably means that
@@ -118,7 +118,7 @@ void dviRenderer::prescan_embedPS(char *cp, TQ_UINT8 *beginningOfSpecialCommand)
   int  angle   = 0;
 
   // just to avoid ambiguities; the filename could contain keywords
-  include_command = include_command.mid(include_command.tqfind(' '));
+  include_command = include_command.mid(include_command.find(' '));
   
   parse_special_argument(include_command, "llx=", &llx);
   parse_special_argument(include_command, "lly=", &lly);
@@ -128,7 +128,7 @@ void dviRenderer::prescan_embedPS(char *cp, TQ_UINT8 *beginningOfSpecialCommand)
   parse_special_argument(include_command, "rhi=", &rhi);
   parse_special_argument(include_command, "angle=", &angle);
 
-  int clip=include_command.tqfind(" clip"); // -1 if clip keyword is not present, >= 0 otherwise
+  int clip=include_command.find(" clip"); // -1 if clip keyword is not present, >= 0 otherwise
 
   // Generate the PostScript commands to be included
   TQString PS = TQString("ps: @beginspecial %1 @llx %2 @lly %3 @urx %4 @ury").tqarg(llx).tqarg(lly).tqarg(urx).tqarg(ury);
@@ -271,7 +271,7 @@ void dviRenderer::prescan_ParseBackgroundSpecial(const TQString& cp)
 void dviRenderer::prescan_ParseHTMLAnchorSpecial(const TQString& _cp)
 {
   TQString cp = _cp;
-  cp.truncate(cp.tqfind('"'));
+  cp.truncate(cp.find('"'));
   Length l;
   l.setLength_in_inch(currinf.data.dvi_v/(resolutionInDPI*shrinkfactor));
   anchorList[cp] = Anchor(current_page+1, l);
@@ -355,14 +355,14 @@ void dviRenderer::prescan_ParsePSSpecial(const TQString& cp)
     if (cp.startsWith("ps:SDict begin /product where{pop product(Distiller)"))
       return; // hyperref tries to work around Distiller bug
     if (cp.startsWith("ps:SDict begin [") && cp.endsWith(" pdfmark end")) {  // hyperref definition of link/anchor/bookmark/etc
-      if (cp.tqcontains("/DEST")) { // The PostScript code defines an anchor
+      if (cp.contains("/DEST")) { // The PostScript code defines an anchor
 	TQString anchorName = cp.section('(', 1, 1).section(')', 0, 0);
 	Length l;
 	l.setLength_in_inch(currinf.data.dvi_v/(resolutionInDPI*shrinkfactor));
 	anchorList[anchorName] = Anchor(current_page+1, l);
       }
       // The PostScript code defines a bookmark
-      if (cp.tqcontains("/Dest") && cp.tqcontains("/Title"))
+      if (cp.contains("/Dest") && cp.contains("/Title"))
 	prebookmarks.append(PreBookmark(PDFencodingToTQString(cp.section('(', 2, 2).section(')', 0, 0)),
 					cp.section('(', 1, 1).section(')', 0, 0), 
 					cp.section('-', 1, 1).section(' ', 0, 0).toUInt()
@@ -374,14 +374,14 @@ void dviRenderer::prescan_ParsePSSpecial(const TQString& cp)
   double PS_H = (currinf.data.dvi_h*300.0)/(65536*1200)-300;
   double PS_V = (currinf.data.dvi_v*300.0)/1200 - 300;
   
-  if (cp.tqfind("ps::[begin]", 0, false) == 0) {
+  if (cp.find("ps::[begin]", 0, false) == 0) {
     PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").tqarg(PS_H).tqarg(PS_V) );
     PostScriptOutPutString->append( TQString(" %1\n").tqarg(cp.mid(11)) );
   } else {
-    if (cp.tqfind("ps::[end]", 0, false) == 0) {
+    if (cp.find("ps::[end]", 0, false) == 0) {
       PostScriptOutPutString->append( TQString(" %1\n").tqarg(cp.mid(9)) );
     } else {
-      if (cp.tqfind("ps::", 0, false) == 0) {
+      if (cp.find("ps::", 0, false) == 0) {
 	PostScriptOutPutString->append( TQString(" %1\n").tqarg(cp.mid(4)) );
       } else {
 	PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").tqarg(PS_H).tqarg(PS_V) );
@@ -406,7 +406,7 @@ void dviRenderer::prescan_ParsePSFileSpecial(const TQString& cp)
   // (already the simplifyWhiteSpace() above is wrong). If you have
   // files like this, go away.
   TQString EPSfilename = include_command;
-  EPSfilename.truncate(EPSfilename.tqfind(' '));
+  EPSfilename.truncate(EPSfilename.find(' '));
 
   // Strip enclosing quotation marks which are included by some LaTeX
   // macro packages (but not by others). This probably means that
@@ -444,7 +444,7 @@ void dviRenderer::prescan_ParsePSFileSpecial(const TQString& cp)
   int  angle   = 0;
   
   // just to avoid ambiguities; the filename could contain keywords
-  include_command = include_command.mid(include_command.tqfind(' '));
+  include_command = include_command.mid(include_command.find(' '));
   
   parse_special_argument(include_command, "llx=", &llx);
   parse_special_argument(include_command, "lly=", &lly);
@@ -454,7 +454,7 @@ void dviRenderer::prescan_ParsePSFileSpecial(const TQString& cp)
   parse_special_argument(include_command, "rhi=", &rhi);
   parse_special_argument(include_command, "angle=", &angle);
   
-  int clip=include_command.tqfind(" clip"); // -1 if clip keyword is not present, >= 0 otherwise
+  int clip=include_command.find(" clip"); // -1 if clip keyword is not present, >= 0 otherwise
   
   if (TQFile::exists(EPSfilename)) {
     double PS_H = (currinf.data.dvi_h*300.0)/(65536*1200)-300;
@@ -631,7 +631,7 @@ void dviRenderer::prescan(parseSpecials specialParser)
     }
 
     if (FNTNUM0 <= ch && ch <= (unsigned char) (FNTNUM0 + 63)) {
-      currinf.fontp = currinf.fonttable->tqfind(ch - FNTNUM0);
+      currinf.fontp = currinf.fonttable->find(ch - FNTNUM0);
       if (currinf.fontp == NULL) {
 	errorMsg = i18n("The DVI code referred to font #%1, which was not previously defined.").tqarg(ch - FNTNUM0);
 	return;
@@ -750,7 +750,7 @@ void dviRenderer::prescan(parseSpecials specialParser)
     case FNT2:
     case FNT3:
     case FNT4:
-      currinf.fontp = currinf.fonttable->tqfind(readUINT(ch - FNT1 + 1));
+      currinf.fontp = currinf.fonttable->find(readUINT(ch - FNT1 + 1));
       if (currinf.fontp == NULL) 
 	return;
       currinf.set_char_p = currinf.fontp->set_char_p;

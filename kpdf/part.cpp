@@ -151,7 +151,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	connect( m_document, TQT_SIGNAL( openURL(const KURL &) ), this, TQT_SLOT( openURLFromDocument(const KURL &) ) );
 	connect( m_document, TQT_SIGNAL( close() ), this, TQT_SLOT( close() ) );
 	
-	if (tqparent && tqparent->tqmetaObject()->slotNames(true).tqcontains("slotQuit()"))
+	if (tqparent && tqparent->tqmetaObject()->slotNames(true).contains("slotQuit()"))
 		connect( m_document, TQT_SIGNAL( quit() ), tqparent, TQT_SLOT( slotQuit() ) );
 	else
 		connect( m_document, TQT_SIGNAL( quit() ), this, TQT_SLOT( cannotQuit() ) );
@@ -278,8 +278,8 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_historyNext->setWhatsThis( i18n( "Go to the place you were after" ) );
 
 	// Find and other actions
-	m_tqfind = KStdAction::find( this, TQT_SLOT( slotFind() ), ac, "tqfind" );
-	m_tqfind->setEnabled( false );
+	m_find = KStdAction::find( this, TQT_SLOT( slotFind() ), ac, "find" );
+	m_find->setEnabled( false );
 
 	m_findNext = KStdAction::findNext( this, TQT_SLOT( slotFindNext() ), ac, "find_next" );
 	m_findNext->setEnabled( false );
@@ -452,7 +452,7 @@ bool Part::openFile()
     bool ok = m_document->openDocument( m_file, url(), mime );
 
     // update one-time actions
-    m_tqfind->setEnabled( ok && m_document-> supportsSearching());
+    m_find->setEnabled( ok && m_document-> supportsSearching());
     m_findNext->setEnabled( ok && m_document-> supportsSearching());
     m_saveAs->setEnabled( ok );
     m_printPreview->setEnabled( ok );
@@ -552,7 +552,7 @@ bool Part::closeURL()
     }
 
     slotHidePresentation();
-    m_tqfind->setEnabled( false );
+    m_find->setEnabled( false );
     m_findNext->setEnabled( false );
     m_saveAs->setEnabled( false );
     m_printPreview->setEnabled( false );

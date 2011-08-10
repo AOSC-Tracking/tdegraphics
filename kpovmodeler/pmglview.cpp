@@ -1064,7 +1064,7 @@ PMVector PMGLView::mousePosition( PMControlPoint* cp, int x, int y )
    result[1] = screenToInternalY( y );
    if( cp )
    {
-      index = m_controlPoints.tqfindRef( cp );
+      index = m_controlPoints.findRef( cp );
       if( index >= 0 )
       {
          p = m_controlPointsPosition.at( ( uint ) index );

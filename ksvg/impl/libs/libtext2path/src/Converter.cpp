@@ -90,7 +90,7 @@ void Converter::setKerning(bool mode)
 SharedFont Converter::requestFont(const FontVisualParams *params)
 {
 	std::string cacheKey = cacheFontKey(params);
-	SharedFont cached = m_fontCache.tqfind(cacheKey);
+	SharedFont cached = m_fontCache.find(cacheKey);
 
 	// If not available in cache, create new one and cache it :)
 	if(cached)
@@ -122,7 +122,7 @@ GlyphAffinePair *Converter::requestGlyph(GlyphRenderParams *params, Rectangle &b
 	// 	  needed to generate the cache lookup key
 	selectGlyph(params);
 
-	SharedGlyph cached = m_glyphCache.tqfind(cacheGlyphKey(params));
+	SharedGlyph cached = m_glyphCache.find(cacheGlyphKey(params));
 
 	// If not available in cache, render new one and cache it :)
 	// If we're mixing ie. japanese and latin characters (TTB tqlayout),

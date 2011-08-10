@@ -56,7 +56,7 @@ public:
   bool hasGrid() { return hasgrid; }
   uint numColors() { return numcolors.size(); }
   uint colors( uint *c ) { c = numcolors.data(); return numcolors.size(); }
-  bool tqcontains(uint c) { return numcolors.tqcontains(c); }
+  bool contains(uint c) { return numcolors.contains(c); }
   uint colorAt(int idx) { return gridcolors.at(idx); }
   uint *data() {return numcolors.data(); }
   void fill(uint color);

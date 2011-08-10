@@ -53,7 +53,7 @@ PMErrorDialog::PMErrorDialog( const PMMessageList& messages, int errorFlags,
       PMObject* obj = pit.current( )->linkedObject( );
       for( ; obj; obj = obj->tqparent( ) )
       {
-         TQPtrList<PMMessage>* pList = m_messageDict.tqfind( obj );
+         TQPtrList<PMMessage>* pList = m_messageDict.find( obj );
          if( !pList )
          {
             pList = new TQPtrList<PMMessage>;

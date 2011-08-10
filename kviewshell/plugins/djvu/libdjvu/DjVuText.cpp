@@ -383,7 +383,7 @@ DjVuTXT::Zone::get_text_with_rect(const GRect &box,
                                   int &string_start, int &string_end) const
 {
   GPosition pos=tqchildren;
-  if(pos?box.tqcontains(rect):intersects_zone(box,rect))
+  if(pos?box.contains(rect):intersects_zone(box,rect))
   {
     const int text_end=text_start+text_length;
     if(string_start == string_end)
@@ -617,7 +617,7 @@ DjVuTXT::find_text_in_rect(GRect target_rect, GUTF8String &text) const
 	    {
 	       GRect rect=words[p]->rect;
 	       if(rect.intersect(rect,target_rect))
-	       //if (target_rect.tqcontains(words[p]->rect))
+	       //if (target_rect.contains(words[p]->rect))
 		  zone_list.append(words[p]);
 	    }
 	 } else
@@ -631,7 +631,7 @@ DjVuTXT::find_text_in_rect(GRect target_rect, GUTF8String &text) const
 		  {
 		     GRect rect=words[p]->rect;
 		     if(rect.intersect(rect,target_rect))
-			//if (target_rect.tqcontains(words[p]->rect))
+			//if (target_rect.contains(words[p]->rect))
 		     {
 			start=false;
 			zone_list.append(words[p]);
@@ -648,7 +648,7 @@ DjVuTXT::find_text_in_rect(GRect target_rect, GUTF8String &text) const
 		  {
 		     GRect rect=words[p]->rect;
 		     if(rect.intersect(rect,target_rect))
-			//if(target_rect.tqcontains(words[p]->rect) )
+			//if(target_rect.contains(words[p]->rect) )
 		     {
 			end=false;
 			zone_list.append(words[p]);

@@ -187,7 +187,7 @@ DataPool::OpenFiles_File::add_pool(GP<DataPool> &pool)
    DEBUG_MSG("DataPool::OpenFiles_File::add_pool: pool=" << (void *) pool << "\n");
    DEBUG_MAKE_INDENT(3);
    GCriticalSectionLock lock(&pools_lock);
-   if (!pools_list.tqcontains(pool))
+   if (!pools_list.contains(pool))
      pools_list.append(pool);
    return pools_list.size();
 }
@@ -381,14 +381,14 @@ FCPools::add_pool(const GURL &url, GP<DataPool> pool)
    if (url.is_local_file_url())
    {
       GPList<DataPool> list;
-      GPosition pos(map.tqcontains(url));
+      GPosition pos(map.contains(url));
       if (! pos)
       {
         map[url]=list;
-        pos=map.tqcontains(url);
+        pos=map.contains(url);
       }
       GPList<DataPool> &plist=map[pos];
-      if (!plist.tqcontains(pool))
+      if (!plist.contains(pool))
         plist.append(pool);
    }
   clean();
@@ -403,7 +403,7 @@ FCPools::get_pool(const GURL &url, int start, int length)
   if (url.is_local_file_url())
   {
     GCriticalSectionLock lock(&map_lock);
-    GPosition pos(map.tqcontains(url));
+    GPosition pos(map.contains(url));
     if (pos)
     {
       GPList<DataPool> &plist=map[pos];
@@ -433,7 +433,7 @@ FCPools::del_pool(const GURL &url, GP<DataPool> pool)
    if (url.is_local_file_url())
    {
       GPosition pos;
-      if (map.tqcontains(url, pos))
+      if (map.contains(url, pos))
       {
 	 GPList<DataPool> &list=map[pos];
 	 GPosition list_pos;
@@ -458,7 +458,7 @@ FCPools::load_file(const GURL &url)
    if (url.is_local_file_url())
    {
       GPosition pos;
-      if (map.tqcontains(url, pos))
+      if (map.contains(url, pos))
       {
 	    // We make here a copy of the list because DataPool::load_file()
 	    // will call FCPools::del_pool(), which will modify the list

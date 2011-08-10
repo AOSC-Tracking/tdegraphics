@@ -197,7 +197,7 @@ PMVector PM2DControlPoint::to3D( const PMVector& v ) const
 
 void PM2DControlPoint::addLinkedPoint( PM2DControlPoint* p )
 {
-   if( !m_linkedPoints.tqcontainsRef( p ) )
+   if( !m_linkedPoints.containsRef( p ) )
       m_linkedPoints.append( p );
 }
 

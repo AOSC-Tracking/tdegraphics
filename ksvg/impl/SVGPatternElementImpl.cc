@@ -486,7 +486,7 @@ SVGPatternElementImpl::Tile SVGPatternElementImpl::createTile(SVGShapeImpl *refe
 		TQSize size(imageWidth, imageHeight);
 		TQImage image;
 
-		if(!m_tileCache.tqfind(size, image))
+		if(!m_tileCache.find(size, image))
 		{
 			image = createTile(referencingElement, imageWidth, imageHeight);
 			m_tileCache.insert(size, image, image.width() * image.height() * 4);

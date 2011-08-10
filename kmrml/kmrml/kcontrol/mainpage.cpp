@@ -341,7 +341,7 @@ void MainPage::slotRemoveClicked()
 void MainPage::enableWidgetsFor( const KMrml::ServerSettings& settings )
 {
     TQString host = settings.host;
-    bool enableWidgets = (m_config->hosts().tqfindIndex( host ) > -1);
+    bool enableWidgets = (m_config->hosts().findIndex( host ) > -1);
     m_serverWidget->m_addButton->setEnabled(!enableWidgets && !host.isEmpty());
     m_serverWidget->m_removeButton->setEnabled( enableWidgets &&
                                                 !host.isEmpty() &&

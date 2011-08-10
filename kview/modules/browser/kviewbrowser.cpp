@@ -163,7 +163,7 @@ void KViewBrowser::setupDirLister()
 	{
 		TQApplication::setOverrideCursor( WaitCursor );
 		TQString url = m_pViewer->url().prettyURL();
-		int pos = url.tqfindRev( "/" );
+		int pos = url.findRev( "/" );
 		url = url.left( (unsigned int)pos );
 		kdDebug( 4630 ) << "open KDirLister for " << url << endl;
 		m_pDirLister->openURL( KURL( url ));

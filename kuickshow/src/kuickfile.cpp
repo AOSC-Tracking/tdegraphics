@@ -67,7 +67,7 @@ bool KuickFile::download()
 
     TQString ext;
     TQString fileName = m_url.fileName();
-    int extIndex = fileName.tqfindRev('.');
+    int extIndex = fileName.findRev('.');
     if ( extIndex > 0 )
         ext = fileName.mid( extIndex + 1 );
 

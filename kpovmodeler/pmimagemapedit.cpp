@@ -535,7 +535,7 @@ void PMImageMapEdit::slotAddFilterEntry( )
 
    if( button )
    {
-      int index = m_filterAddButtons.tqfindRef( button );
+      int index = m_filterAddButtons.findRef( button );
       if( index >= 0 )
       {
          entriesFilters = filters( );
@@ -561,7 +561,7 @@ void PMImageMapEdit::slotRemoveFilterEntry( )
 
    if( button )
    {
-      int index = m_filterRemoveButtons.tqfindRef( button );
+      int index = m_filterRemoveButtons.findRef( button );
       if( index >= 0 )
       {
          entriesFilters = filters( );
@@ -583,7 +583,7 @@ void PMImageMapEdit::slotAddTransmitEntry( )
 
    if( button )
    {
-      int index = m_transmitAddButtons.tqfindRef( button );
+      int index = m_transmitAddButtons.findRef( button );
       if( index >= 0 )
       {
          entriesTransmits = transmits( );
@@ -609,7 +609,7 @@ void PMImageMapEdit::slotRemoveTransmitEntry( )
 
    if( button )
    {
-      int index = m_transmitRemoveButtons.tqfindRef( button );
+      int index = m_transmitRemoveButtons.findRef( button );
       if( index >= 0 )
       {
          entriesTransmits = transmits( );

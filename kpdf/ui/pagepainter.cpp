@@ -26,7 +26,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     TQPixmap * pixmap = 0;
 
     // if a pixmap is present for given id, use it
-    if ( page->m_pixmaps.tqcontains( id ) )
+    if ( page->m_pixmaps.contains( id ) )
         pixmap = page->m_pixmaps[ id ];
 
     // else find the closest match using pixmaps of other IDs (great optim!)

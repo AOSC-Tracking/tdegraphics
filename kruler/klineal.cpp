@@ -451,7 +451,7 @@ void KLineal::enterEvent(TQEvent * /*inEvent*/) {
 * overwritten to switch the value label and line cursor off
 */
 void KLineal::leaveEvent(TQEvent * /*inEvent*/) {
-  if (!tqgeometry().tqcontains(TQCursor::pos())) {
+  if (!tqgeometry().contains(TQCursor::pos())) {
     hideLabel();
   }
 }

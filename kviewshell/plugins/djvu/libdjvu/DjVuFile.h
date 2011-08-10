@@ -442,7 +442,7 @@ public:
 	  {\bf Warning.} Included files are normally created during decoding.
 	  Before that they do not exist.   If you call this function at
 	  that time and set #only_created# to #FALSE# then it will have to
-	  read all the data from this file in order to tqfind #INCL# chunks,
+	  read all the data from this file in order to find #INCL# chunks,
 	  which may block your application, if not all data is available.
 
 	  @param only_created If #TRUE#, the file will not try to process

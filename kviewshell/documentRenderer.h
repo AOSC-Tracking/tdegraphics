@@ -152,7 +152,7 @@ public:
   virtual void clear();
 
 
-  /* Returns true if the current document tqcontains 0 pages. */
+  /* Returns true if the current document contains 0 pages. */
   bool isEmpty() const {return numPages == 0;}
 
   /* Tells if the document was modified after is was loaded. */
@@ -262,7 +262,7 @@ public:
   display device. In principle. In fact, kviewshell implements zooming
   by using values that are not exactly the resolution of the display,
   but multiplied with the zoom factor. Bottom line: the
-  DocumentRenderer should act as if this field indeed tqcontains
+  DocumentRenderer should act as if this field indeed contains
   resolution of the display device.
 
   @param page pointer to a documentPage structure that this method

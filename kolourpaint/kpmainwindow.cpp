@@ -939,7 +939,7 @@ void kpMainWindow::dropEvent (TQDropEvent *e)
             #endif
                 if (m_thumbnailView &&
                     kpWidgetMapper::toGlobal (m_thumbnailView, m_thumbnailView->rect ())
-                        .tqcontains (globalPos))
+                        .contains (globalPos))
                 {
                     // TODO: Code will never get executed.
                     //       Thumbnail doesn't accept drops.
@@ -947,13 +947,13 @@ void kpMainWindow::dropEvent (TQDropEvent *e)
                 }
                 else if (m_mainView &&
                          kpWidgetMapper::toGlobal (m_mainView, m_mainView->rect ())
-                             .tqcontains (globalPos) &&
+                             .contains (globalPos) &&
                          m_scrollView &&
                          kpWidgetMapper::toGlobal (m_scrollView,
                              TQRect (0, 0,
                                     m_scrollView->visibleWidth (),
                                     m_scrollView->visibleHeight ()))
-                             .tqcontains (globalPos))
+                             .contains (globalPos))
                 {
                     view = m_mainView;
                 }
@@ -967,7 +967,7 @@ void kpMainWindow::dropEvent (TQDropEvent *e)
 
             // viewUnderCursor() is hacky and can return a view when we aren't
             // over one thanks to drags.
-            if (m_document && m_document->rect ().tqcontains (docPoint))
+            if (m_document && m_document->rect ().contains (docPoint))
             {
                 selTopLeft = docPoint;
 

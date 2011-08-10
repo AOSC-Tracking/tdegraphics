@@ -337,7 +337,7 @@ void PMPovrayWidget::slotRenderingFinished( int returntqStatus )
                                       "See the povray output for details." )
                           .tqarg( returntqStatus ) );
    }
-   else if( m_pRenderWidget->povrayOutput( ).tqcontains( "ERROR" ) )
+   else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
    {
       KMessageBox::error( this, i18n( "There were errors while rendering.\n"
                                       "See the povray output for details." ) );

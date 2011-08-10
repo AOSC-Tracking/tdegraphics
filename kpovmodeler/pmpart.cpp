@@ -1023,7 +1023,7 @@ bool PMPart::setActiveObject( const TQString& name )
       tmpObj = activeObject( );
 
    // get the first element
-   pos = objPath.tqfind( '/' );
+   pos = objPath.find( '/' );
    if( pos != -1 )
    {
       pathElem = objPath.mid( 0, pos );
@@ -1040,10 +1040,10 @@ bool PMPart::setActiveObject( const TQString& name )
       if( !pathElem.isEmpty( ) )
       {
          // Special treatment for brackets
-         firstBracket = pathElem.tqfind( '[' );
+         firstBracket = pathElem.find( '[' );
          if( firstBracket != -1 )
          {
-            lastBracket = pathElem.tqfindRev( ']' );
+            lastBracket = pathElem.findRev( ']' );
             objIndex = pathElem.mid( firstBracket + 1, lastBracket - firstBracket - 1).toInt( );
             pathElem = pathElem.left( firstBracket );
          }
@@ -1070,7 +1070,7 @@ bool PMPart::setActiveObject( const TQString& name )
       }
 
       // Get the next element
-      pos = objPath.tqfind( '/' );
+      pos = objPath.find( '/' );
       if( pos != -1 )
       {
          pathElem = objPath.mid( 0, pos );
@@ -1864,7 +1864,7 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
          else
             m_pNewSelection = 0;
       }
-      if( m_selectedObjects.tqcontainsRef( obj ) )
+      if( m_selectedObjects.containsRef( obj ) )
       {
          m_selectedObjects.removeRef( obj );
          if( m_selectedObjects.isEmpty( ) )
@@ -1903,7 +1903,7 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
          if( obj->isA( "Declare" ) )
          {
             PMDeclare* decl = ( PMDeclare* ) obj;
-            PMSymbol* s = m_pSymbolTable->tqfind( decl->id( ) );
+            PMSymbol* s = m_pSymbolTable->find( decl->id( ) );
             if( !s )
                m_pSymbolTable->insert( decl->id( ),
                                        new PMSymbol( decl->id( ), decl ) );
@@ -1977,7 +1977,7 @@ void PMPart::slotIDChanged( PMObject* obj, const TQString& oldID )
    if( obj->isA( "Declare" ) )
    {
       PMDeclare* d = ( PMDeclare* ) obj;
-      PMSymbol* s = m_pSymbolTable->tqfind( oldID );
+      PMSymbol* s = m_pSymbolTable->find( oldID );
       if( s )
       {
          if( s->type( ) == PMSymbol::Object )

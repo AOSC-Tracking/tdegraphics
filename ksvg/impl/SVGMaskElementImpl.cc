@@ -420,7 +420,7 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	{
 		CacheKey key(referencingElement, imageWidth, imageHeight);
 
-		if(!m_maskCache.tqfind(key, tqmask))
+		if(!m_maskCache.find(key, tqmask))
 		{
 			tqmask = createMask(referencingElement, imageWidth, imageHeight);
 			m_maskCache.insert(key, tqmask, imageWidth * imageHeight);

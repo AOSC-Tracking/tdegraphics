@@ -84,7 +84,7 @@ static const char SVGDOMNodeBridgeProto__s_hashTableStrings[] = {
     "cloneNode\0"
     "getPrefix\0"
     "normalize\0"
-    "tqcontains\0"
+    "contains\0"
 };
 
 

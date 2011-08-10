@@ -281,7 +281,7 @@ int PMMoveCommand::errorFlags( PMPart* )
                for( obj = links.current( ); obj && !insideSelection;
                     obj = obj->tqparent( ) )
                {
-                  if( deletedObjects.tqfind( obj ) )
+                  if( deletedObjects.find( obj ) )
                      insideSelection = true;
                }
 
@@ -290,7 +290,7 @@ int PMMoveCommand::errorFlags( PMPart* )
                   bool stop = false;
                   for( obj = links.current( ); obj && !stop; obj = obj->tqparent( ) )
                   {
-                     if( deletedObjects.tqfind( obj ) )
+                     if( deletedObjects.find( obj ) )
                         stop = true;
                      else
                         deletedObjects.insert( obj, new bool( true ) );
@@ -327,7 +327,7 @@ int PMMoveCommand::errorFlags( PMPart* )
                      // check if insert point is before the top level
                      // tqparent object
                      
-                     if( !objectsAfterInsertPosition.tqfind( obj ) )
+                     if( !objectsAfterInsertPosition.find( obj ) )
                      {
                         stop = false;
                         obj = obj->prevSibling( );
@@ -335,7 +335,7 @@ int PMMoveCommand::errorFlags( PMPart* )
                         {
                            if( obj == m_pAfter )
                               stop = true;
-                           else if( objectsAfterInsertPosition.tqfind( obj ) )
+                           else if( objectsAfterInsertPosition.find( obj ) )
                               stop = true;
                            else
                               obj = obj->prevSibling( );
@@ -419,13 +419,13 @@ int PMMoveCommand::errorFlags( PMPart* )
 
          if( linked )
          {
-            if( !deletedObjects.tqfind( linked ) )
+            if( !deletedObjects.find( linked ) )
             {
                // Object is linked to a declare and the declare
                // will not be moved.
                // Check, if the insert point is after the declare
 
-               if( !declaresBeforeInsertPosition.tqfind( linked ) )
+               if( !declaresBeforeInsertPosition.find( linked ) )
                   ok = false;
             }
          }

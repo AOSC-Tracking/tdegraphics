@@ -45,7 +45,7 @@ LoadPaletteDlg::LoadPaletteDlg(TQWidget *tqparent, const char *name)
 	TQStringList palettesList = Palette::kdePalettes();
 	for(TQStringList::Iterator palette = palettesList.begin();
 		palette != palettesList.end(); ++palette) {
-		bool prepend = (*palette).tqcontains( "colors/Custom_Colors" );
+		bool prepend = (*palette).contains( "colors/Custom_Colors" );
 		TQString fileName = locate("config", (*palette));
 		if(prepend) {
 			palettesFileNames.prepend(fileName);

@@ -240,7 +240,7 @@ GetModulePath( void )
      {
        retval=GURL::UTF8(xprogramname,paths[pos]);
        const GUTF8String path(retval.get_string());
-       if(!pathMAP.tqcontains(path))
+       if(!pathMAP.contains(path))
        {
          if(retval.is_file())
            break;
@@ -263,7 +263,7 @@ appendPath(const GURL &url,
            GList<GURL> &list)
 {
   if( !url.is_empty() 
-      && !map.tqcontains(url.get_string()) && url.is_dir() )
+      && !map.contains(url.get_string()) && url.is_dir() )
     {
       map[url.get_string()]=0;
       list.append(url);
@@ -375,14 +375,14 @@ DjVuMessage::GetProfilePaths(void)
           for(pos=localemaps;pos;++pos) 
           {
             const GMap<GUTF8String,GP<lt_XMLTags> > &localemap=localemaps[pos];
-            GPosition pos=localemap.tqcontains(sublocale);
+            GPosition pos=localemap.contains(sublocale);
             if(!pos)
-              pos=localemap.tqcontains(downcasesublocale);
+              pos=localemap.contains(downcasesublocale);
             if(pos)
             {
               const GMap<GUTF8String,GUTF8String>&args
                 = localemap[pos]->get_args();
-              pos = args.tqcontains(srcstring);
+              pos = args.contains(srcstring);
               if (pos)
               {
                 const GUTF8String src(args[pos]);
@@ -496,7 +496,7 @@ getbodies(
           for(GPosition pos=includes;pos;++pos)
           {
             const GUTF8String file=includes.key(pos);
-            if(! map.tqcontains(file))
+            if(! map.contains(file))
             {
               GList<GURL> xpaths;
               xpaths.append(url.base());

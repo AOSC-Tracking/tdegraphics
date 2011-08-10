@@ -266,7 +266,7 @@ void kpToolPen::hover (const TQPoint &point)
     }
 
 #if DEBUG_KP_TOOL_PEN && 0
-    if (document ()->rect ().tqcontains (point))
+    if (document ()->rect ().contains (point))
     {
         TQImage image = kpPixmapFX::convertToImage (*document ()->pixmap ());
 
@@ -538,7 +538,7 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
 
             bool didSomething = wash (&painter, &maskPainter,
                                       image,
-                                      color (1 - m_mouseButton)/*color to tqreplace*/,
+                                      color (1 - m_mouseButton)/*color to replace*/,
                                       rect, rect);
 
             if (painter.isActive ())

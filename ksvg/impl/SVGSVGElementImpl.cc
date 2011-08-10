@@ -382,7 +382,7 @@ DOM::NodeList SVGSVGElementImpl::getEnclosureList(SVGRectImpl *rect, SVGElementI
 			{
 				// TODO : add the tqshape to list if the test succeeds
 				SVGRectImpl *current = tqshape->getBBox();
-				if(rect->qrect().tqcontains(current->qrect(), true))
+				if(rect->qrect().contains(current->qrect(), true))
 					kdDebug() << "tqshape : " << element->nodeName().string() << " is fully enclosed" << endl;
 
 				current->deref();
@@ -412,7 +412,7 @@ bool SVGSVGElementImpl::checkEnclosure(SVGElementImpl *element, SVGRectImpl *rec
 		return false;
 
 	SVGRectImpl *current = tqshape->getBBox();
-	bool result = rect->qrect().tqcontains(current->qrect());
+	bool result = rect->qrect().contains(current->qrect());
 	current->deref();
 	return result;
 }

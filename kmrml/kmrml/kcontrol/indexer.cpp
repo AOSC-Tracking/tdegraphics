@@ -93,14 +93,14 @@ void Indexer::processNext()
 
     TQString cmd = m_config->addCollectionCommandLine().simplifyWhiteSpace().stripWhiteSpace();
 
-    // in the commandline, tqreplace %d with the directory to process and
+    // in the commandline, replace %d with the directory to process and
     // %t with the thumbnail dir
-    int index = cmd.tqfind( "%d" ); // ### TQFile::encodeName()?
+    int index = cmd.find( "%d" ); // ### TQFile::encodeName()?
     if ( index != -1 )
-        cmd.tqreplace( index, 2, TQUOTE( m_currentDir ) );
-    index = cmd.tqfind( "%t" );
+        cmd.replace( index, 2, TQUOTE( m_currentDir ) );
+    index = cmd.find( "%t" );
     if ( index != -1 )
-        cmd.tqreplace( index, 2, TQUOTE(m_currentDir + "_thumbnails") );
+        cmd.replace( index, 2, TQUOTE(m_currentDir + "_thumbnails") );
 
 //     qDebug("****** command: %s", cmd.latin1());
 #if KDE_VERSION >= 306

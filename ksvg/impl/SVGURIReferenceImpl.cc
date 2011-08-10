@@ -50,7 +50,7 @@ SVGAnimatedStringImpl *SVGURIReferenceImpl::href() const
 
 bool SVGURIReferenceImpl::parseURIReference(const TQString &urireference, TQString &uri, TQString &elementreference)
 {
-	int seperator = urireference.tqfind("#");
+	int seperator = urireference.find("#");
 
 	if(seperator == -1)
 		return false;
@@ -71,14 +71,14 @@ TQString SVGURIReferenceImpl::getTarget(const TQString &url)
 {
 	if(url.startsWith("url(")) // URI References, ie. fill:url(#target)
 	{
-		unsigned int start = url.tqfind("#") + 1;
-		unsigned int end = url.tqfindRev(")");
+		unsigned int start = url.find("#") + 1;
+		unsigned int end = url.findRev(")");
 
 		return url.mid(start, end - start);
 	}
-	else if(url.tqfind("#") > -1)	// format is #target
+	else if(url.find("#") > -1)	// format is #target
 	{
-		unsigned int start = url.tqfind("#") + 1;
+		unsigned int start = url.find("#") + 1;
 
 		return url.mid(start, url.length() - start);
 	}

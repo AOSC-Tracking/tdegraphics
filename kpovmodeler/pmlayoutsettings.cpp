@@ -262,7 +262,7 @@ void PMLayoutSettings::slotAddLayout( )
 
    new_name = i18n( "Unnamed" );
    str.setNum( i );
-   while( m_pViewLayouts->tqfindItem( new_name, TQt::ExactMatch ) )
+   while( m_pViewLayouts->findItem( new_name, TQt::ExactMatch ) )
    {
       new_name = i18n( "Unnamed" ) + str;
       i++;
@@ -275,7 +275,7 @@ void PMLayoutSettings::slotAddLayout( )
    m_currentViewLayout++;
    m_viewLayouts.insert( m_currentViewLayout, l );
    displayLayoutList( );
-   m_pViewLayouts->setCurrentItem( m_pViewLayouts->tqfindItem( new_name, TQt::ExactMatch ) );
+   m_pViewLayouts->setCurrentItem( m_pViewLayouts->findItem( new_name, TQt::ExactMatch ) );
    m_pRemoveLayout->setEnabled( true );
 }
 

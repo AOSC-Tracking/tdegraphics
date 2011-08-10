@@ -735,7 +735,7 @@ void TopLevel::printIt( KPrinter &printer, TQPainter &painter )
 
     ++currentpage;
     // should this page be printed ?
-    if (printer.pageList().tqfindIndex(currentpage) < 0)
+    if (printer.pageList().findIndex(currentpage) < 0)
 	continue;
 
     XImage *Image = Pimage(pn);

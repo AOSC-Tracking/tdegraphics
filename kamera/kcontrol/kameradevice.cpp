@@ -209,7 +209,7 @@ void KCamera::save(KConfig *config)
 
 TQString KCamera::portName()
 {
-	TQString port = m_path.left(m_path.tqfind(":")).lower();
+	TQString port = m_path.left(m_path.find(":")).lower();
 	if (port == "serial") return i18n("Serial");
 	if (port == "usb") return i18n("USB");
 	return i18n("Unknown port");
@@ -403,7 +403,7 @@ void KameraDeviceSelectDialog::save()
 void KameraDeviceSelectDialog::load()
 {
 	TQString path = m_device->path();
-	TQString port = path.left(path.tqfind(":")).lower();
+	TQString port = path.left(path.find(":")).lower();
 
 	if (port == "serial") setPortType(INDEX_SERIAL);
 	if (port == "usb") setPortType(INDEX_USB);

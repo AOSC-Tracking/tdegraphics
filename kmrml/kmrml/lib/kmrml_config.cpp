@@ -137,7 +137,7 @@ ServerSettings Config::settingsForHost( const TQString& host ) const
 void Config::addSettings( const ServerSettings& settings )
 {
     TQString host = settings.host;
-    if ( m_hostList.tqfind( host ) == m_hostList.end() )
+    if ( m_hostList.find( host ) == m_hostList.end() )
         m_hostList.append( host );
 
     m_config->setGroup( CONFIG_GROUP );
@@ -181,13 +181,13 @@ TQString Config::addCollectionCommandLine() const
     m_config->setGroup( CONFIG_GROUP );
     TQString cmd = m_config->readEntry( "AddCollection Commandline",
                                        DEFAULT_ADDCOLLECTION_CMD );
-    int index = cmd.tqfind( "%h" );
+    int index = cmd.find( "%h" );
     if ( index != -1 )
-        cmd.tqreplace( index, 2, TQUOTE( mrmldDataDir() ) );
+        cmd.replace( index, 2, TQUOTE( mrmldDataDir() ) );
 
-    index = cmd.tqfind( "%e" );
+    index = cmd.find( "%e" );
     if ( index != -1 )
-        cmd.tqreplace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
+        cmd.replace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
 
     return cmd;
 }
@@ -203,13 +203,13 @@ TQString Config::removeCollectionCommandLine() const
     m_config->setGroup( CONFIG_GROUP );
     TQString cmd = m_config->readEntry( "RemoveCollection Commandline",
                                        DEFAULT_REMOVECOLLECTION_CMD );
-    int index = cmd.tqfind( "%h" );
+    int index = cmd.find( "%h" );
     if ( index != -1 )
-        cmd.tqreplace( index, 2, TQUOTE( mrmldDataDir() ) );
+        cmd.replace( index, 2, TQUOTE( mrmldDataDir() ) );
 
-    index = cmd.tqfind( "%e" );
+    index = cmd.find( "%e" );
     if ( index != -1 )
-        cmd.tqreplace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
+        cmd.replace( index, 2, TQTextCodec::codecForLocale()->mimeName() );
 
     return cmd;
 }
@@ -231,17 +231,17 @@ TQString Config::mrmldCommandline() const
                                        DEFAULT_MRMLD_CMD );
 
     // add data directory and port to the commandline
-    int index = cmd.tqfind( "%p" );
+    int index = cmd.find( "%p" );
     if ( index != -1 )
     {
         TQString port = settings.autoPort ?
                   TQString() : TQString::number( settings.configuredPort );
-        cmd.tqreplace( index, 2, port );
+        cmd.replace( index, 2, port );
     }
-    index = cmd.tqfind( "%d" );
+    index = cmd.find( "%d" );
     if ( index != -1 )
     {
-        cmd.tqreplace( index, 2, TQUOTE( mrmldDataDir() ) );
+        cmd.replace( index, 2, TQUOTE( mrmldDataDir() ) );
     }
 
     qDebug("***** commandline: %s", cmd.latin1());

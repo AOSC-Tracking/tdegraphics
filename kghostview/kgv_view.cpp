@@ -85,13 +85,13 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _isGuiInitialized( false ),
     _isFileDirty( false ),
     _stickyOptions( false ),
-    _embeddedInKGhostView( !args.tqcontains( "KParts::ReadOnlyPart" ) ),
+    _embeddedInKGhostView( !args.contains( "KParts::ReadOnlyPart" ) ),
     _customZoomIndex( -1 )
 {
     setInstance( KGVFactory::instance() );
 
     // Don't show the progress info dialog if we're embedded in Konqueror.
-    setProgressInfoEnabled( !args.tqcontains( "Browser/View") );
+    setProgressInfoEnabled( !args.contains( "Browser/View") );
 
     _document = new KGVDocument( this );
     connect( _document, TQT_SIGNAL( fileChangeFailed() ),
@@ -582,7 +582,7 @@ void KGVPart::updateZoomActions()
 	    first != last;
 	    ++first ) {
 	TQString cur = *first;
-	cur.remove(  cur.tqfind(  '%' ), 1 );
+	cur.remove(  cur.find(  '%' ), 1 );
 	cur = cur.simplifyWhiteSpace();
 	bool ok = false;
 	double z = cur.toDouble(&ok);
@@ -682,7 +682,7 @@ void KGVPart::openURLContinue()
 	// mimetype-determination (e.g. koffice)
 	TQString extension;
 	TQString fileName = m_url.fileName();
-	int extensionPos = fileName.tqfindRev( '.' );
+	int extensionPos = fileName.findRev( '.' );
 	if( extensionPos != -1 )
 	    extension = fileName.mid( extensionPos ); // keep the '.'
 	KTempFile tempFile( TQString(), extension );
@@ -901,7 +901,7 @@ void KGVPart::slotZoom( const TQString& nz )
 {
     TQString z = nz;
     double zoom;
-    z.remove(  z.tqfind(  '%' ), 1 );
+    z.remove(  z.find(  '%' ), 1 );
     zoom = KGlobal::locale()->readNumber(  z ) / 100;
     kdDebug( 4500 ) << "ZOOM = "  << nz << ", setting zoom = " << zoom << endl;
 
@@ -968,7 +968,7 @@ void KGVPart::setDisplayOptions( const DisplayOptions& options )
     _docManager->setDisplayOptions( options );
     _selectOrientation->setCurrentItem( options.overrideOrientation()  );
     TQStringList medias = document()->mediaNames();
-    TQStringList::Iterator now = medias.tqfind( options.overridePageMedia() );
+    TQStringList::Iterator now = medias.find( options.overridePageMedia() );
     if ( now != medias.end() ){
 	// The options are displayed in inverted order.
 	// Therefore, size() - index gets you the display index

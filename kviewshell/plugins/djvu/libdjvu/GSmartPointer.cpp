@@ -187,7 +187,7 @@ GPBase::assign (const GPBase &sptr)
 
 
 void
-GPBufferBase::tqreplace(void *nptr,const size_t n)
+GPBufferBase::replace(void *nptr,const size_t n)
 {
   resize(0,0);
   ptr=nptr;

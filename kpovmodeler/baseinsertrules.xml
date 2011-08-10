@@ -182,11 +182,11 @@
     </rule>
     <rule>
       <class name="Texture"/>
-      <tqcontains><class name="Texture"/></tqcontains>
+      <contains><class name="Texture"/></contains>
     </rule>
     <rule>
       <class name="InteriorTexture"/>
-      <tqcontains><class name="InteriorTexture"/></tqcontains>
+      <contains><class name="InteriorTexture"/></contains>
     </rule>
   </targetclass>
 
@@ -211,16 +211,16 @@
       <class name="SolidColor"/>
       <class name="ColorList"/>
       <class name="DensityList"/>
-      <not><tqcontains><group name="Sum"/></tqcontains></not>
+      <not><contains><group name="Sum"/></contains></not>
     </rule>
     <rule>
       <class name="Pattern"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="Pattern"/>
             <group name="ListPattern"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><after><group name="Map"/></after></not>
         <not><after><class name="Warp"/></after></not>
@@ -236,11 +236,11 @@
       <group name="Map"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <group name="Map"/>
             <group name="ListPattern"/>
             <class name="SolidColor"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><before><class name="Pattern"/></before></not>
       </and>
@@ -297,15 +297,15 @@
     </rule>
     <rule>
       <class name="LooksLike"/>
-      <not><tqcontains><class name="LooksLike"/></tqcontains></not>
+      <not><contains><class name="LooksLike"/></contains></not>
     </rule>
     <rule>
       <class name="ProjectedThrough"/>
-      <not><tqcontains><class name="ProjectedThrough"/></tqcontains></not>
+      <not><contains><class name="ProjectedThrough"/></contains></not>
     </rule>
     <rule>
       <class name="Photons"/>
-      <not><tqcontains><class name="Photons"/></tqcontains></not>
+      <not><contains><class name="Photons"/></contains></not>
     </rule>
   </targetclass>
 
@@ -420,9 +420,9 @@
     <rule>
       <class name="GraphicalObject"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="GraphicalObject"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
   </targetclass>
@@ -435,9 +435,9 @@
     <rule>
       <class name="GraphicalObject"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="GraphicalObject"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
   </targetclass>
@@ -450,9 +450,9 @@
     <rule>
       <class name="GraphicalObject"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="GraphicalObject"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
   </targetclass>
@@ -485,7 +485,7 @@
     <rule>
       <class name="BumpMap"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="BumpMap"/>
           <class name="NormalList"/>
           <class name="Pattern"/>
@@ -493,31 +493,31 @@
           <class name="SlopeMap"/>
           <class name="Warp"/>
           <class name="BlendMapModifiers"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="NormalList"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="BumpMap"/>
           <class name="NormalList"/>
           <class name="Pattern"/>
           <class name="NormalMap"/>
           <class name="SlopeMap"/>
           <class name="Warp"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Pattern"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="BumpMap"/>
             <class name="NormalList"/>
             <class name="Pattern"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><after><class name="NormalMap"/></after></not>
         <not><after><class name="SlopeMap"/></after></not>
@@ -534,11 +534,11 @@
       <class name="NormalMap"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="BumpMap"/>
             <class name="NormalMap"/>
             <class name="NormalList"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><after><class name="SlopeMap"/></after></not>
         <not><after><class name="BlendMapModifiers"/></after></not>
@@ -549,11 +549,11 @@
       <class name="SlopeMap"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="BumpMap"/>
             <class name="SlopeMap"/>
             <class name="NormalList"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><after><class name="BlendMapModifiers"/></after></not>
         <not><after><group name="Transformations"/></after></not>
@@ -563,14 +563,14 @@
     <rule>
       <class name="BlendMapModifiers"/>
       <and>
-        <not><tqcontains><class name="BlendMapModifiers"/></tqcontains></not>
+        <not><contains><class name="BlendMapModifiers"/></contains></not>
         <or>
           <not>
-            <tqcontains>
+            <contains>
               <class name="BumpMap"/>
               <class name="NormalMap"/>
               <class name="SlopeMap"/>
-            </tqcontains>
+            </contains>
           </not>
           <after><class name="NormalMap"/></after>
           <after><class name="SlopeMap"/></after>
@@ -613,17 +613,17 @@
     <rule>
       <group name="Color"/>
       <group name="ListPattern"/>
-      <not><tqcontains><group name="Sum"/></tqcontains></not>
+      <not><contains><group name="Sum"/></contains></not>
     </rule>
     <rule>
       <class name="Pattern"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <group name="Color"/>
             <class name="Pattern"/>
             <group name="ListPattern"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><after><group name="Map"/></after></not>
         <not><after><class name="Warp"/></after></not>
@@ -639,11 +639,11 @@
       <group name="Map"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <group name="Map"/>
             <group name="ListPattern"/>
             <group name="Color"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><before><class name="Pattern"/></before></not>
       </and>
@@ -652,10 +652,10 @@
       <class name="BlendMapModifiers"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="BlendMapModifiers"/>
             <group name="Color"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><before><group name="Map"/></before></not>
         <not><before><class name="Pattern"/></before></not>
@@ -695,18 +695,18 @@
     </rule>
     <rule>
       <class name="GlobalSettings"/>
-      <not><tqcontains><class name="GlobalSettings"/></tqcontains></not>
+      <not><contains><class name="GlobalSettings"/></contains></not>
     </rule>
   </targetclass>
 
   <targetclass name="GlobalSettings">
     <rule>
       <class name="Radiosity"/>
-      <not><tqcontains><class name="Radiosity"/></tqcontains></not>
+      <not><contains><class name="Radiosity"/></contains></not>
     </rule>
     <rule>
       <class name="GlobalPhotons"/>
-      <not><tqcontains><class name="GlobalPhotons"/></tqcontains></not>
+      <not><contains><class name="GlobalPhotons"/></contains></not>
     </rule>
   </targetclass>
 
@@ -734,56 +734,56 @@
     <rule>
       <class name="MaterialMap"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <group name="SumPigment"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Pigment"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <class name="Pigment"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Normal"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <class name="Normal"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Finish"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <class name="Finish"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Pattern"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="Pattern"/>
             <class name="TextureList"/>
             <group name="SumPigment"/>
             <class name="MaterialMap"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><after><class name="TextureMap"/></after></not>
         <not><after><class name="Warp"/></after></not>
@@ -795,12 +795,12 @@
       <class name="TextureMap"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="TextureMap"/>
             <class name="TextureList"/>
             <group name="SumPigment"/>
             <class name="MaterialMap"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><before><class name="Pattern"/></before></not>
         <not><after><class name="BlendMapModifiers"/></after></not>
@@ -809,12 +809,12 @@
     <rule>
       <class name="TextureList"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <group name="SumPigment"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
@@ -829,10 +829,10 @@
       <class name="BlendMapModifiers"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="MaterialMap"/>
             <class name="BlendMapModifiers"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><before><class name="TextureMap"/></before></not>
         <not><before><class name="Pattern"/></before></not>
@@ -860,56 +860,56 @@
     <rule>
       <class name="MaterialMap"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <group name="SumPigment"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Pigment"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <class name="Pigment"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Normal"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <class name="Normal"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Finish"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <class name="Finish"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
       <class name="Pattern"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="Pattern"/>
             <class name="TextureList"/>
             <group name="SumPigment"/>
             <class name="MaterialMap"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><after><class name="TextureMap"/></after></not>
         <not><after><class name="Warp"/></after></not>
@@ -921,12 +921,12 @@
       <class name="TextureMap"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="TextureMap"/>
             <class name="TextureList"/>
             <group name="SumPigment"/>
             <class name="MaterialMap"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><before><class name="Pattern"/></before></not>
         <not><after><class name="BlendMapModifiers"/></after></not>
@@ -935,12 +935,12 @@
     <rule>
       <class name="TextureList"/>
       <not>
-        <tqcontains>
+        <contains>
           <class name="TextureList"/>
           <group name="SumMap"/>
           <group name="SumPigment"/>
           <class name="MaterialMap"/>
-        </tqcontains>
+        </contains>
       </not>
     </rule>
     <rule>
@@ -955,10 +955,10 @@
       <class name="BlendMapModifiers"/>
       <and>
         <not>
-          <tqcontains>
+          <contains>
             <class name="MaterialMap"/>
             <class name="BlendMapModifiers"/>
-          </tqcontains>
+          </contains>
         </not>
         <not><before><class name="TextureMap"/></before></not>
         <not><before><class name="Pattern"/></before></not>

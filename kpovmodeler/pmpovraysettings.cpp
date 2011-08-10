@@ -193,7 +193,7 @@ void PMPovraySettings::slotAddPath( )
       TQString path = KFileDialog::getExistingDirectory( TQString(), this );
       if( !path.isEmpty( ) )
       {
-         TQListBoxItem* item = m_pLibraryPaths->tqfindItem( path, ExactMatch );
+         TQListBoxItem* item = m_pLibraryPaths->findItem( path, ExactMatch );
          if( !item )
          {
             m_pLibraryPaths->insertItem( path, m_selectionIndex + 1 );
@@ -250,7 +250,7 @@ void PMPovraySettings::slotEditPath( )
       TQString path = KFileDialog::getExistingDirectory( text, this );
       if( !path.isEmpty( ) )
       {
-         TQListBoxItem* item = m_pLibraryPaths->tqfindItem( path, ExactMatch );
+         TQListBoxItem* item = m_pLibraryPaths->findItem( path, ExactMatch );
          if( !item )
             m_pLibraryPaths->changeItem( path, m_selectionIndex );
          else if( item != lbi )

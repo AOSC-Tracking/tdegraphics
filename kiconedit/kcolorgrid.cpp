@@ -269,7 +269,7 @@ void KColorGrid::setColor( int colNum, uint col, bool update )
     return;
 
   //kdDebug(4640) << "KColorGrid::setColor - before adding" << endl;
-  if(!numcolors.tqcontains(col))
+  if(!numcolors.contains(col))
   {
     //kdDebug(4640) << "KColorGrid::setColor() - adding " << //  col << " - " << tqRed(col) << " " << tqGreen(col) << " " << tqBlue(col) << endl;
     numcolors.append(col);
@@ -279,9 +279,9 @@ void KColorGrid::setColor( int colNum, uint col, bool update )
   }  
 
   //kdDebug(4640) << "KColorGrid::setColor - before removing" << endl;
-  if(!gridcolors.tqcontains(oldcolor))
+  if(!gridcolors.contains(oldcolor))
   {
-    int idx = numcolors.tqfind(oldcolor);
+    int idx = numcolors.find(oldcolor);
     if(idx != -1)
     {
       //kdDebug(4640) << "KColorGrid::setColor() - removing " << //  oldcolor << " - " << tqRed(oldcolor) << " " << tqGreen(oldcolor) << " " << tqBlue(oldcolor) << endl;
@@ -317,7 +317,7 @@ void KColorGrid::updateColors()
   for(int i = 0; i < (int)gridcolors.size(); i++)
   {
     uint col = gridcolors.at(i);
-    if(!numcolors.tqcontains(col))
+    if(!numcolors.contains(col))
       numcolors.append(col);
   }
   emit colorschanged(numcolors.size(), numcolors.data());

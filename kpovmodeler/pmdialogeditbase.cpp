@@ -408,8 +408,8 @@ void PMDialogEditBase::slotTexturePreview( )
             {
                link = rit.current( )->linkedObject( );
                if( link )
-                  if( !neededDeclares.tqcontainsRef( link ) )
-                     if( !objectsToSerialize.tqfind( link ) )
+                  if( !neededDeclares.containsRef( link ) )
+                     if( !objectsToSerialize.find( link ) )
                         neededDeclares.append( link );
             }
             objectsToSerialize.insert( it.current( ), it.current( ) );
@@ -434,7 +434,7 @@ void PMDialogEditBase::slotTexturePreview( )
          {
             if( otr->type( ) == "Declare" )
             {
-               if( objectsToSerialize.tqfind( otr ) )
+               if( objectsToSerialize.find( otr ) )
                {
                   dev->serialize( otr );
                   numDeclares--;
@@ -542,7 +542,7 @@ void PMDialogEditBase::slotPreviewFinished( int exitStatus )
                                       "See the povray output for details." )
                           .tqarg( exitStatus ) );
    }
-   else if( m_pRenderWidget->povrayOutput( ).tqcontains( "ERROR" ) )
+   else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
    {
       KMessageBox::error( this, i18n( "There were errors while rendering.\n"
                                       "See the povray output for details." ) );

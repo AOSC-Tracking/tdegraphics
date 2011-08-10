@@ -119,7 +119,7 @@ bool DocumentPageCache::isPageCached(const PageNumber& pageNumber, const TQSize&
 
   // Check if the page that we are looking for is in the cache.
   // We are not accessing the page, so we don't want it to be moved into the front.
-  RenderedDocumentPagePixmap* page = LRUCache.tqfind(key, false);
+  RenderedDocumentPagePixmap* page = LRUCache.find(key, false);
 
   if (page)
     return true;
@@ -191,7 +191,7 @@ RenderedDocumentPagePixmap* DocumentPageCache::getPage(const PageNumber& pageNr)
 
   // First check if the page that we are looking for is in the cache
   RenderedDocumentPagePixmap* page;
-  page = LRUCache.tqfind(createKey(pageNr));
+  page = LRUCache.find(createKey(pageNr));
 
   if (page)
     return page;

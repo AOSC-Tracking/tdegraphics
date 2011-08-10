@@ -575,7 +575,7 @@ TQString PMVector::serializeXML( ) const
 bool PMVector::loadXML( const TQString& str )
 {
    int i;
-   int size = str.tqcontains( ' ' ) + 1;
+   int size = str.contains( ' ' ) + 1;
    TQString tmp( str );
    TQTextStream s( &tmp, IO_ReadOnly );
    TQString val;

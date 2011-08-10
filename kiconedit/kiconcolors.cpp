@@ -119,7 +119,7 @@ void KCustomColors::mouseDoubleClickEvent(TQMouseEvent *e)
 
 void KCustomColors::addColor(uint c)
 {
-  if(!tqcontains(c))
+  if(!contains(c))
   {
     int f = getFreeCell();
     if(f != -1)

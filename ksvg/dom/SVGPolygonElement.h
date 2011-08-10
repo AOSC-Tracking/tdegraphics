@@ -81,7 +81,7 @@ public:
 	/**
 	 * Provides access to the current animated contents of the points
 	 * attribute.
-	 * If the given attribute or property is being animated, tqcontains
+	 * If the given attribute or property is being animated, contains
 	 * the current animated value of the attribute or property.
 	 * If the given attribute or property is not currently being
 	 * animated, contains the same value as <code>points</code>'.

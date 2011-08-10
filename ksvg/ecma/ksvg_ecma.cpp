@@ -175,7 +175,7 @@ void KSVGEcma::addEventListener(KSVGEcmaEventListener *listener)
 
 void KSVGEcma::removeEventListener(KSVGEcmaEventListener *listener)
 {
-	m_ecmaEventListeners.take(m_ecmaEventListeners.tqfind(listener));
+	m_ecmaEventListeners.take(m_ecmaEventListeners.find(listener));
 
 	if(m_ecmaEventListeners.count() == 0)
 		m_hasListeners = false;

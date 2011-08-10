@@ -398,7 +398,7 @@ void SVGColorImpl::setRGBColorICCColor(const DOM::DOMString &rgbColor, const DOM
 	TQColor color;
 
 	TQString content = iccColor.string().right(iccColor.string().length() - 10);
-	TQString iccTarget = content.mid(0, content.tqfind(','));
+	TQString iccTarget = content.mid(0, content.find(','));
 
 	TQStringList colors = TQStringList::split(',', content);
 	TQString r = colors[1];

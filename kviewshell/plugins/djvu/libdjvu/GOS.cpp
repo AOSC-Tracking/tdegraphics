@@ -167,9 +167,9 @@ finddirsep(const GUTF8String &fname)
 #if defined(UNIX)
   return fname.rsearch('/',0);
 #elif defined(WIN32) || defined(OS2)
-  return fname.rtqcontains("\\/",0);
+  return fname.rcontains("\\/",0);
 #elif defined(macintosh)
-  return fname.rtqcontains(":/",0);
+  return fname.rcontains(":/",0);
 #else
 #error "Define something here for your operating system"
 #endif  

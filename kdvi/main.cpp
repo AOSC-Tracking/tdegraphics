@@ -98,7 +98,7 @@ int main(int argc, char** argv)
       QCStringList apps = app.dcopClient()->registeredApplications();
       for ( QCStringList::Iterator it = apps.begin(); it != apps.end(); ++it ) 
       {
-        if ((*it).tqfind("kviewshell") == 0) 
+        if ((*it).find("kviewshell") == 0) 
         {
           TQByteArray data, replyData;
           TQCString replyType;

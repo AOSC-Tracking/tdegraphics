@@ -361,7 +361,7 @@ void DjVuRenderer::getAnnotations(RenderedDocumentPage* page, GP<DjVuImage> djvu
       TQString comment((const char*)map[pos]->comment);
 
       // Create an anchor for this link.
-      if (!anchorList.tqcontains(url))
+      if (!anchorList.contains(url))
 	{
 	  // For now we only accept links to pages in the same document.
 	  if(url[0] == '#' && target == "_self")

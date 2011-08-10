@@ -4658,7 +4658,7 @@ bool PMPovrayParser::parseNormalMap( PMNormalMap* normalMap )
    {
       oldConsumed = m_consumedTokens;
 
-      //  If we tqfind '}' no need to search for an entry
+      //  If we find '}' no need to search for an entry
       if( m_token != '}' && parseToken( '[' ) )
       {
          if( !parseFloat( f_number1 ) )
@@ -4958,7 +4958,7 @@ bool PMPovrayParser::parseSlopeMap( PMSlopeMap* slopeMap )
    {
       oldConsumed = m_consumedTokens;
 
-      //  If we tqfind '}' no need to search for an entry
+      //  If we find '}' no need to search for an entry
       if( m_token != '}' && parseToken( '[' ) )
       {
          if( !parseFloat( f_number1 ) )
@@ -5014,7 +5014,7 @@ bool PMPovrayParser::parseDensityMap( PMDensityMap* densityMap )
    {
       oldConsumed = m_consumedTokens;
 
-      //  If we tqfind '}' no need to search for an entry
+      //  If we find '}' no need to search for an entry
       if( m_token != '}' && parseToken( '[' ) )
       {
          if( !parseFloat( f_number1 ) )

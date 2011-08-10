@@ -127,8 +127,8 @@ public:
 
     // (for non-rectangular selections, may return false even if
     //  kpView::onSelectionResizeHandle())
-    bool tqcontains (const TQPoint &point) const;
-    bool tqcontains (int x, int y);
+    bool contains (const TQPoint &point) const;
+    bool contains (int x, int y);
 
 
     // (Avoid using for text selections since text selection may

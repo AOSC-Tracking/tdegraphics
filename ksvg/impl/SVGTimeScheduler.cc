@@ -92,7 +92,7 @@ void SVGTimer::notifyAll()
 			animation->handleTimerEvent();
 
 			SVGElementImpl *target = animation->targetElement();
-			if(!elements.tqcontains(target))
+			if(!elements.contains(target))
 				elements.append(target);
 		}
 	}

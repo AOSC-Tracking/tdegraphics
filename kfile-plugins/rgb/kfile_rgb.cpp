@@ -143,8 +143,8 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		TQMap<TQ_UINT32, uint>::Iterator end = map.end();
 		for (k = 0; k < (ysize * zsize); k++) {
 			dstream >> offs;
-			if ((it = map.tqfind(offs)) != end)
-				map.tqreplace(offs, it.data() + 1);
+			if ((it = map.find(offs)) != end)
+				map.replace(offs, it.data() + 1);
 			else
 				map[offs] = 0;
 		}

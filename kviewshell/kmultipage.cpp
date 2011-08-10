@@ -146,7 +146,7 @@ void KMultiPage::slotSave()
   // Try to guess the proper ending...
   TQString formats;
   TQString ending;
-  int rindex = m_file.tqfindRev(".");
+  int rindex = m_file.findRev(".");
   if (rindex == -1) {
     ending = TQString();
     formats = TQString();
@@ -162,7 +162,7 @@ void KMultiPage::slotSave()
 
   // Add the ending to the filename. I hope the user likes it that
   // way.
-  if (!ending.isEmpty() && fileName.tqfind(ending) == -1)
+  if (!ending.isEmpty() && fileName.find(ending) == -1)
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
@@ -1461,7 +1461,7 @@ void KMultiPage::findNextText()
     if (searchPage->textBoxList.size() == 0)
       continue;
 
-    foundSelection = searchPage->tqfind(searchText, startingTextItem, case_sensitive);
+    foundSelection = searchPage->find(searchText, startingTextItem, case_sensitive);
 
     if (foundSelection.isEmpty())
     {
@@ -1603,7 +1603,7 @@ void KMultiPage::findPrevText()
     if (searchPage->textBoxList.size() == 0)
       continue;
 
-    foundSelection = searchPage->tqfindRev(searchText, startingTextItem, case_sensitive);
+    foundSelection = searchPage->findRev(searchText, startingTextItem, case_sensitive);
 
     if (foundSelection.isEmpty())
     {
@@ -1901,7 +1901,7 @@ void KMultiPage::doExportText()
 {
   // Generate a suggestion for a reasonable file name
   TQString suggestedName = url().filename();
-  suggestedName = suggestedName.left(suggestedName.tqfind(".")) + ".txt";
+  suggestedName = suggestedName.left(suggestedName.find(".")) + ".txt";
 
   TQString fileName = KFileDialog::getSaveFileName(suggestedName, i18n("*.txt|Plain Text (Latin 1) (*.txt)"), scrollView(), i18n("Export File As"));
 

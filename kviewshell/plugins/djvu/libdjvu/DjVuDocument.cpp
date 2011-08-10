@@ -1368,7 +1368,7 @@ add_to_cache(const GP<DjVuFile> & f, GMap<GURL, void *> & map,
    DEBUG_MSG("DjVuDocument::add_to_cache(): url='" << url << "'\n");
    DEBUG_MAKE_INDENT(3);
    
-   if (!map.tqcontains(url))
+   if (!map.contains(url))
    {
       map[url]=0;
       cache->add_file(f);
@@ -1530,7 +1530,7 @@ add_file_to_djvm(const GP<DjVuFile> & file, bool page,
 {
    GURL url=file->get_url();
 
-   if (!map.tqcontains(url))
+   if (!map.contains(url))
    {
       map[url]=0;
 
@@ -1586,7 +1586,7 @@ static void
 local_get_url_names(DjVuFile * f,const GMap<GURL, void *> & map,GMap<GURL,void *> &tmpmap)
 {
    GURL url=f->get_url();
-   if (!map.tqcontains(url) && !tmpmap.tqcontains(url))
+   if (!map.contains(url) && !tmpmap.contains(url))
    {
       tmpmap[url]=0;
       f->process_incl_chunks();

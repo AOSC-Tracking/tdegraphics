@@ -507,7 +507,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   TQString includePath;
   if (!baseURL.isLocalFile()) {
     includePath = filename;
-    includePath.truncate(includePath.tqfindRev('/'));
+    includePath.truncate(includePath.findRev('/'));
   }
   PS_interface->setIncludePath(includePath);
   
@@ -629,7 +629,7 @@ Anchor dviRenderer::parseReference(const TQString &reference)
   // points to line number 1111 in the file "Filename". KDVI then
   // looks for source specials of the form "src:xxxxFilename", and
   // tries to find the special with the biggest xxxx
-  if (reference.tqfind("src:",0,false) == 0) {
+  if (reference.find("src:",0,false) == 0) {
   
     // Extract the file name and the numeral part from the reference string
     DVI_SourceFileSplitter splitter(reference, dviFile->filename);
@@ -651,7 +651,7 @@ Anchor dviRenderer::parseReference(const TQString &reference)
     // whose line number is the biggest among those that are smaller
     // than the refLineNumber. That way, the position in the DVI file
     // which is highlighted is always a little further up than the
-    // position in the editor, e.g. if the DVI file tqcontains
+    // position in the editor, e.g. if the DVI file contains
     // positional information at the beginning of every paragraph,
     // KDVI jumps to the beginning of the paragraph that the cursor is
     // in, and never to the next paragraph. If source file anchors for
@@ -756,7 +756,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
     else
       return;
   }
-  command = command.tqreplace( "%l", TQString::number(splitter.line()) ).tqreplace( "%f", KShellProcess::quote(TeXfile) );
+  command = command.replace( "%l", TQString::number(splitter.line()) ).replace( "%f", KShellProcess::quote(TeXfile) );
   
 #ifdef DEBUG_SPECIAL
   kdDebug(4300) << "Calling program: " << command << endl;
@@ -810,27 +810,27 @@ TQString dviRenderer::PDFencodingToTQString(const TQString& _pdfstring)
   // replaces them by UTF8. See Section 3.2.3 of the PDF reference
   // guide for information.
   TQString pdfstring = _pdfstring;
-  pdfstring = pdfstring.tqreplace("\\n", "\n");
-  pdfstring = pdfstring.tqreplace("\\r", "\n");
-  pdfstring = pdfstring.tqreplace("\\t", "\t");
-  pdfstring = pdfstring.tqreplace("\\f", "\f");
-  pdfstring = pdfstring.tqreplace("\\(", "(");
-  pdfstring = pdfstring.tqreplace("\\)", ")");
-  pdfstring = pdfstring.tqreplace("\\\\", "\\");
+  pdfstring = pdfstring.replace("\\n", "\n");
+  pdfstring = pdfstring.replace("\\r", "\n");
+  pdfstring = pdfstring.replace("\\t", "\t");
+  pdfstring = pdfstring.replace("\\f", "\f");
+  pdfstring = pdfstring.replace("\\(", "(");
+  pdfstring = pdfstring.replace("\\)", ")");
+  pdfstring = pdfstring.replace("\\\\", "\\");
   
   // Now replace octal character codes with the characters they encode
   int pos;
   TQRegExp rx( "(\\\\)(\\d\\d\\d)" );  // matches "\xyz" where x,y,z are numbers
   while((pos = rx.search( pdfstring )) != -1) {
-    pdfstring = pdfstring.tqreplace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
+    pdfstring = pdfstring.replace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
   }
   rx.setPattern( "(\\\\)(\\d\\d)" );  // matches "\xy" where x,y are numbers
   while((pos = rx.search( pdfstring )) != -1) {
-    pdfstring = pdfstring.tqreplace(pos, 3, TQChar(rx.cap(2).toInt(0,8)));
+    pdfstring = pdfstring.replace(pos, 3, TQChar(rx.cap(2).toInt(0,8)));
   }
   rx.setPattern( "(\\\\)(\\d)" );  // matches "\x" where x is a number
   while((pos = rx.search( pdfstring )) != -1) {
-    pdfstring = pdfstring.tqreplace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
+    pdfstring = pdfstring.replace(pos, 4, TQChar(rx.cap(2).toInt(0,8)));
   }
   return pdfstring;
 }

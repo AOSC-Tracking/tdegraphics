@@ -423,12 +423,12 @@ bool PDFGenerator::print( KPrinter& printer )
     marginBottom = (int)printer.option("kde-margin-bottom").toDouble();
     bool forceRasterize = printer.option("kde-kpdf-forceRaster").toInt();
 
-    if (ps.tqfind(TQRegExp("w\\d+h\\d+")) == 0)
+    if (ps.find(TQRegExp("w\\d+h\\d+")) == 0)
     {
         // size not supported by TQt, CUPS gives us the size as wWIDTHhHEIGHT, at least on the printers i tester
         // remove the w
         ps = ps.mid(1);
-        int hPos = ps.tqfind("h");
+        int hPos = ps.find("h");
         paperWidth = ps.left(hPos).toInt();
         paperHeight = ps.mid(hPos+1).toInt();
     }

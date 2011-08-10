@@ -163,7 +163,7 @@ EngineError KadmosDialog::findClassifiers()
         if( name.startsWith( "ttf" ) )
         {
             TQString lang = name.mid(3,2);
-            if( allCountries.tqcontains(lang) )
+            if( allCountries.contains(lang) )
             {
                 TQString lngCountry = locale->twoAlphaToCountryName(lang);
                 if( lngCountry.isEmpty() )
@@ -188,7 +188,7 @@ EngineError KadmosDialog::findClassifiers()
         else if( name.startsWith( "hand" ) )
         {
             TQString lang = name.mid(4,2);
-            if( allCountries.tqcontains(lang) )
+            if( allCountries.contains(lang) )
             {
                 TQString lngCountry = locale->twoAlphaToCountryName(lang);
                 if( lngCountry.isEmpty() )
@@ -461,7 +461,7 @@ TQString KadmosDialog::getSelClassifierName() const
      /* Get the long text from the combo box */
      TQString selLang = m_cbLang->currentText();
      TQString trans;
-     if( fType != "norm" && m_longCountry2short.tqcontains( selLang ))
+     if( fType != "norm" && m_longCountry2short.contains( selLang ))
      {
          TQString langType = m_longCountry2short[selLang];
          trans = fType+langType+".rec";

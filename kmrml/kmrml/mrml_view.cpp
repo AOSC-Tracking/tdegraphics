@@ -120,7 +120,7 @@ void MrmlView::clear()
 TQPixmap * MrmlView::getPixmap( const KURL& url )
 {
     TQString u = url.url();
-    TQPixmap *pix = m_pixmapCache.tqfind( u );
+    TQPixmap *pix = m_pixmapCache.find( u );
     if ( pix )
         return pix;
 
@@ -130,7 +130,7 @@ TQPixmap * MrmlView::getPixmap( const KURL& url )
              p = m_unavailablePixmap;
 
         m_pixmapCache.insert( u, p );
-        return m_pixmapCache.tqfind( u );
+        return m_pixmapCache.find( u );
     }
     else { // remote url, download with KIO
         Loader::self()->requestDownload( url );

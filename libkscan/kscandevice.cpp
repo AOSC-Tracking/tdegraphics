@@ -240,7 +240,7 @@ KScanStat KScanDevice::openDevice( const TQCString& backend )
    if( backend.isEmpty() ) return KSCAN_ERR_PARAM;
 
    // search for scanner
-   int indx = scanner_avail.tqfind( backend );
+   int indx = scanner_avail.find( backend );
 
    if( indx < 0 ) {
       stat = KSCAN_ERR_NO_DEVICE;
@@ -570,7 +570,7 @@ void KScanDevice::slSetDirty( const TQCString& name )
 {
    if( optionExists( name ) )
    {
-      if( dirtyList.tqfind( name ) == -1 )
+      if( dirtyList.find( name ) == -1 )
       {
 	 kdDebug(29000)<< "Setting dirty <" << name << ">" << endl;
 	 /* item not found */
@@ -675,7 +675,7 @@ const TQString KScanDevice::previewFile()
 
    TQString fname = dir + TQString::tqfromLatin1(".previews/");
    TQString sname( getScannerName(shortScannerName()) );
-   sname.tqreplace( '/', "_");
+   sname.replace( '/', "_");
 
    return fname+sname;
 }

@@ -207,7 +207,7 @@ TQString KookaPreferences::tryFindBinary( const TQString& bin, const TQString& c
     if( res != "notFound" )
     {
         TQFileInfo fi( res );
-        if( fi.exists() && fi.isExecutable() && !fi.isDir() && res.tqcontains(bin) )
+        if( fi.exists() && fi.isExecutable() && !fi.isDir() && res.contains(bin) )
         {
             return res;
         }
@@ -272,7 +272,7 @@ void KookaPreferences::checkOCRBinarySilent( const TQString& cmd )
 #endif
 bool KookaPreferences::checkOCRBinIntern( const TQString& cmd, const TQString& tool, bool show_msg )
 {
-   if( ! cmd.tqcontains( tool )) return false;
+   if( ! cmd.contains( tool )) return false;
 
    bool ret = true;
    TQFileInfo fi( cmd );

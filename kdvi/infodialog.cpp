@@ -89,7 +89,7 @@ void infoDialog::setFontInfo(fontPool *fp)
 void infoDialog::outputReceiver(const TQString& _op)
 {
   TQString op = _op;
-  op = op.tqreplace( TQRegExp("<"), "&lt;" );
+  op = op.replace( TQRegExp("<"), "&lt;" );
 
   if (MFOutputReceived == false) {
     TextLabel3->setText("<b>"+headline+"</b><br>");
@@ -99,7 +99,7 @@ void infoDialog::outputReceiver(const TQString& _op)
   // It seems that the TQTextView wants that we append only full lines.
   // We see to that.
   pool = pool+op;
-  int idx = pool.tqfindRev("\n");
+  int idx = pool.findRev("\n");
 
   while(idx != -1) {
     TQString line = pool.left(idx);
@@ -108,9 +108,9 @@ void infoDialog::outputReceiver(const TQString& _op)
     // If the Output of the kpsewhich program contains a line starting
     // with "kpathsea:", this means that a new MetaFont-run has been
     // started. We filter these lines out and print them in boldface.
-    int startlineindex = line.tqfind("kpathsea:");
+    int startlineindex = line.find("kpathsea:");
     if (startlineindex != -1) {
-      int endstartline  = line.tqfind("\n",startlineindex);
+      int endstartline  = line.find("\n",startlineindex);
       TQString startLine = line.mid(startlineindex,endstartline-startlineindex);
       if (MFOutputReceived)
 	TextLabel3->append("<hr>\n<b>"+startLine+"</b>");
@@ -119,7 +119,7 @@ void infoDialog::outputReceiver(const TQString& _op)
     TextLabel3->append(line.mid(endstartline));
     } else
       TextLabel3->append(line);
-    idx = pool.tqfindRev("\n");
+    idx = pool.findRev("\n");
   }
 
   MFOutputReceived = true;

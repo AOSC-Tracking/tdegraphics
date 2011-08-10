@@ -208,7 +208,7 @@ DjVuPort::DjVuPort()
 {
   DjVuPortcaster *pcaster = get_portcaster();
   GCriticalSectionLock lock(& pcaster->map_lock );
-  GPosition p = pcaster->cont_map.tqcontains(this);
+  GPosition p = pcaster->cont_map.contains(this);
   if (!p) G_THROW( ERR_MSG("DjVuPort.not_alloc") );
   pcaster->cont_map[p] = (void*)this;
 }
@@ -217,7 +217,7 @@ DjVuPort::DjVuPort(const DjVuPort & port)
 {
   DjVuPortcaster *pcaster = get_portcaster();
   GCriticalSectionLock lock(& pcaster->map_lock );
-  GPosition p = pcaster->cont_map.tqcontains(this);
+  GPosition p = pcaster->cont_map.contains(this);
   if (!p) G_THROW( ERR_MSG("DjVuPort.not_alloc") );
   pcaster->cont_map[p] = (void*)this;
   pcaster->copy_routes(this, &port);
@@ -259,7 +259,7 @@ DjVuPortcaster::is_port_alive(DjVuPort *port)
 {
    GP<DjVuPort> gp_port;
    GCriticalSectionLock lock(&map_lock);
-   GPosition pos=cont_map.tqcontains(port);
+   GPosition pos=cont_map.contains(port);
    if (pos && cont_map[pos] && ((DjVuPort *) port)->get_count()>0)
       gp_port=port;
    return gp_port;
@@ -302,7 +302,7 @@ DjVuPortcaster::alias_to_port(const GUTF8String &alias)
 {
    GCriticalSectionLock lock(&map_lock);
    GPosition pos;
-   if (a2p_map.tqcontains(alias, pos))
+   if (a2p_map.contains(alias, pos))
    {
       DjVuPort * port=(DjVuPort *) a2p_map[pos];
       GP<DjVuPort> gp_port=is_port_alive(port);
@@ -344,10 +344,10 @@ DjVuPortcaster::del_port(const DjVuPort * port)
   clear_aliases(port);
   
   // Update "contents map"
-  if (cont_map.tqcontains(port, pos)) cont_map.del(pos);
+  if (cont_map.contains(port, pos)) cont_map.del(pos);
   
   // Update "route map"
-  if (route_map.tqcontains(port, pos))
+  if (route_map.contains(port, pos))
   {
     delete (GList<void *> *) route_map[pos];
     route_map.del(pos);
@@ -372,12 +372,12 @@ DjVuPortcaster::add_route(const DjVuPort * src, DjVuPort * dst)
       // Adds route src->dst
 {
    GCriticalSectionLock lock(&map_lock);
-   if (cont_map.tqcontains(src) && src->get_count()>0 &&
-       cont_map.tqcontains(dst) && dst->get_count()>0)
+   if (cont_map.contains(src) && src->get_count()>0 &&
+       cont_map.contains(dst) && dst->get_count()>0)
    {
-      if (!route_map.tqcontains(src)) route_map[src]=new GList<void *>();
+      if (!route_map.contains(src)) route_map[src]=new GList<void *>();
       GList<void *> & list=*(GList<void *> *) route_map[src];
-      if (!list.tqcontains(dst)) list.append(dst);
+      if (!list.contains(dst)) list.append(dst);
    }
 }
 
@@ -387,7 +387,7 @@ DjVuPortcaster::del_route(const DjVuPort * src, DjVuPort * dst)
 {
   GCriticalSectionLock lock(&map_lock);
   
-  if (route_map.tqcontains(src))
+  if (route_map.contains(src))
   {
     GList<void *> & list=*(GList<void *> *) route_map[src];
     GPosition pos;
@@ -408,8 +408,8 @@ DjVuPortcaster::copy_routes(DjVuPort * dst, const DjVuPort * src)
 {
   GCriticalSectionLock lock(&map_lock);
   
-  if (!cont_map.tqcontains(src) || src->get_count()<=0 ||
-    !cont_map.tqcontains(dst) || dst->get_count()<=0) return;
+  if (!cont_map.contains(src) || src->get_count()<=0 ||
+    !cont_map.contains(dst) || dst->get_count()<=0) return;
   
   for(GPosition pos=route_map;pos;++pos)
   {
@@ -430,13 +430,13 @@ DjVuPortcaster::add_to_closure(GMap<const void *, void *> & set,
   // Assuming that the map's already locked
   // GCriticalSectionLock lock(&map_lock);
   set[dst]= (void*) (unsigned long) distance;
-  if (route_map.tqcontains(dst))
+  if (route_map.contains(dst))
     {
       GList<void *> & list=*(GList<void *> *) route_map[dst];
       for(GPosition pos=list;pos;++pos)
         {
           DjVuPort * new_dst=(DjVuPort *) list[pos];
-          if (!set.tqcontains(new_dst)) 
+          if (!set.contains(new_dst)) 
             add_to_closure(set, new_dst, distance+1);
         }
    }
@@ -447,7 +447,7 @@ DjVuPortcaster::compute_closure(const DjVuPort * src, GPList<DjVuPort> &list, bo
 {
    GCriticalSectionLock lock(&map_lock);
    GMap<const void*, void*> set;
-   if (route_map.tqcontains(src))
+   if (route_map.contains(src))
    {
       GList<void *> & list=*(GList<void *> *) route_map[src];
       for(GPosition pos=list;pos;++pos)
@@ -688,7 +688,7 @@ DjVuMemoryPort::request_data(const DjVuPort * source, const GURL & url)
    GCriticalSectionLock lk(&lock);
    GP<DataPool> pool;
    GPosition pos;
-   if (map.tqcontains(url, pos))
+   if (map.contains(url, pos))
       pool=map[pos];
    return pool;
 }

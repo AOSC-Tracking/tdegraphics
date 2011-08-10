@@ -74,7 +74,7 @@ void KPDFPage::setRotation( int r )
 
 bool KPDFPage::hasPixmap( int id, int width, int height ) const
 {
-    if ( !m_pixmaps.tqcontains( id ) )
+    if ( !m_pixmaps.contains( id ) )
         return false;
     if ( width == -1 || height == -1 )
         return true;
@@ -98,7 +98,7 @@ bool KPDFPage::hasObjectRect( double x, double y ) const
         return false;
     TQValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
     for ( ; it != end; ++it )
-        if ( (*it)->tqcontains( x, y ) )
+        if ( (*it)->contains( x, y ) )
             return true;
     return false;
 }
@@ -190,7 +190,7 @@ const ObjectRect * KPDFPage::hasObject( ObjectRect::ObjectType type, double x, d
 {
     TQValueList< ObjectRect * >::const_iterator it = m_rects.begin(), end = m_rects.end();
     for ( ; it != end; ++it )
-        if ( (*it)->tqcontains( x, y ) )
+        if ( (*it)->contains( x, y ) )
             if ((*it)->objectType() == type) return *it;
     return 0;
 }
@@ -203,7 +203,7 @@ const KPDFPageTransition * KPDFPage::getTransition() const
 
 void KPDFPage::setPixmap( int id, TQPixmap * pixmap )
 {
-    if ( m_pixmaps.tqcontains( id ) )
+    if ( m_pixmaps.contains( id ) )
         delete m_pixmaps[id];
     m_pixmaps[id] = pixmap;
 }
@@ -252,7 +252,7 @@ void KPDFPage::setTransition( KPDFPageTransition * transition )
 
 void KPDFPage::deletePixmap( int id )
 {
-    if ( m_pixmaps.tqcontains( id ) )
+    if ( m_pixmaps.contains( id ) )
     {
         delete m_pixmaps[ id ];
         m_pixmaps.remove( id );
@@ -304,7 +304,7 @@ NormalizedRect::NormalizedRect( const TQRect & r, double xScale, double yScale )
     : left( (double)r.left() / xScale ), top( (double)r.top() / yScale ),
     right( (double)r.right() / xScale ), bottom( (double)r.bottom() / yScale ) {}
 
-bool NormalizedRect::tqcontains( double x, double y ) const
+bool NormalizedRect::contains( double x, double y ) const
 {
     return x >= left && x <= right && y >= top && y <= bottom;
 }

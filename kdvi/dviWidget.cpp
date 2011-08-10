@@ -53,7 +53,7 @@ void DVIWidget::mousePressEvent(TQMouseEvent* e)
 
     for(unsigned int i=0; i<pageData->sourceHyperLinkList.size(); i++)
     {
-      if (pageData->sourceHyperLinkList[i].box.tqcontains(e->pos()))
+      if (pageData->sourceHyperLinkList[i].box.contains(e->pos()))
       {
         emit(SRCLink(pageData->sourceHyperLinkList[i].linkText, e, this));
         e->accept();
@@ -99,7 +99,7 @@ void DVIWidget::mouseMoveEvent(TQMouseEvent* e)
     
     // Check if the cursor hovers over a sourceHyperlink.
     for(unsigned int i=0; i<pageData->sourceHyperLinkList.size(); i++) {
-      if (pageData->sourceHyperLinkList[i].box.tqcontains(e->pos())) {
+      if (pageData->sourceHyperLinkList[i].box.contains(e->pos())) {
 	clearStatusBarTimer.stop();
 	
 	// The macro-package srcltx gives a special like "src:99 test.tex"

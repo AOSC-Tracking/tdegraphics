@@ -78,7 +78,7 @@ void kpViewManager::registerView (kpView *view)
 #if DEBUG_KP_VIEW_MANAGER && 1
     kdDebug () << "kpViewManager::registerView (" << view << ")" << endl;
 #endif
-    if (view && m_views.tqfindRef (view) < 0)
+    if (view && m_views.findRef (view) < 0)
     {
     #if DEBUG_KP_VIEW_MANAGER && 1
         kdDebug () << "\tadded view" << endl;
@@ -469,7 +469,7 @@ kpView *kpViewManager::viewUnderCursor (bool usingTQt) const
     {
         kpViewManager *nonConstThis = const_cast <kpViewManager *> (this);
 
-        if (m_viewUnderCursor && nonConstThis->m_views.tqfindRef (m_viewUnderCursor) < 0)
+        if (m_viewUnderCursor && nonConstThis->m_views.findRef (m_viewUnderCursor) < 0)
         {
             kdError () << "kpViewManager::viewUnderCursor(): invalid view" << endl;
             nonConstThis->m_viewUnderCursor = 0;

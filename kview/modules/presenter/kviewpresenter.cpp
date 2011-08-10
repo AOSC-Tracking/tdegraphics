@@ -191,7 +191,7 @@ bool KViewPresenter::eventFilter( TQObject *obj, TQEvent *ev )
 					for( TQStringList::const_iterator it = l.begin(); it != l.end(); ++it )
 					{
 						ImageInfo * info = new ImageInfo( KURL( *it ) );
-						if( ! m_imagelist.tqcontains( info ) )
+						if( ! m_imagelist.contains( info ) )
 						{
 							m_imagelist.inSort( info );
 							( void )new ImageListItem( m_pImageList->m_pListView, KURL( *it ) );
@@ -218,7 +218,7 @@ void KViewPresenter::slotImageOpened( const KURL & url )
 	{
 		kdDebug( 4630 ) << k_funcinfo << "imagelist:" << endl;
 		ImageInfo * info = new ImageInfo( url );
-		if( ! m_imagelist.tqcontains( info ) )
+		if( ! m_imagelist.contains( info ) )
 		{
 			m_imagelist.inSort( info );
 			TQListViewItem * item = new ImageListItem( m_pImageList->m_pListView, url );
@@ -248,7 +248,7 @@ void KViewPresenter::slotOpenFiles()
 	for( ++it; it != urls.end(); ++it )
 	{
 		ImageInfo * info = new ImageInfo( *it );
-		if( ! m_imagelist.tqcontains( info ) )
+		if( ! m_imagelist.contains( info ) )
 		{
 			m_imagelist.inSort( info );
 			( void )new ImageListItem( m_pImageList->m_pListView, *it );
@@ -431,7 +431,7 @@ void KViewPresenter::loadList()
 			{
 				KURL url ( t.readLine() );
 				ImageInfo * info = new ImageInfo( url );
-				if( ! m_imagelist.tqcontains( info ) )
+				if( ! m_imagelist.contains( info ) )
 				{
 					m_imagelist.inSort( info );
 					( void )new ImageListItem( m_pImageList->m_pListView, url );

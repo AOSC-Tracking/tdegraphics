@@ -183,7 +183,7 @@ TQString Printing::minimizeString( TQString text, const TQFontMetrics&
         if ( mid <= 5 ) // sanity check
             return TQString();
 
-        text.tqreplace( mid - 1, 3, "..." );
+        text.replace( mid - 1, 3, "..." );
     }
 
     return text;

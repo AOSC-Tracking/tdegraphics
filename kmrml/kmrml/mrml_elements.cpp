@@ -194,7 +194,7 @@ bool QueryParadigm::equalMaps( const TQMap<TQString,TQString> m1,
     TQMapConstIterator<TQString,TQString> it = m1.begin();
     for ( ; it != m1.end(); ++it )
     {
-        TQMapConstIterator<TQString,TQString> it2 = m2.tqfind( it.key() );
+        TQMapConstIterator<TQString,TQString> it2 = m2.find( it.key() );
         if ( it2 == m2.end() || it.data() != it2.data() )
             return false;
     }

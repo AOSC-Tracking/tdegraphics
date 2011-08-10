@@ -30,7 +30,7 @@ KStaticDeleter<PMDocumentationMap> PMDocumentationMap::s_staticDeleter;
 
 TQString PMDocumentationVersion::documentation( const TQString& className ) const
 {
-   if( m_map.tqcontains( className ) )
+   if( m_map.contains( className ) )
       return m_map[className];
    return m_index;
 }

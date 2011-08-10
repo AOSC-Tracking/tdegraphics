@@ -56,11 +56,11 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
                     << ": Client AppID is not registered with DCOP: "
                     << clientAppId << endl;
 
-    DaemonData *daemon = m_daemons.tqfind( daemonKey );
+    DaemonData *daemon = m_daemons.find( daemonKey );
 
     if ( daemon )
     {
-        if ( !daemon->apps.tqfind( clientAppId ) )
+        if ( !daemon->apps.find( clientAppId ) )
             daemon->apps.append( clientAppId );
 
         // timeout, commandline and restart values are: first come, first serve
@@ -93,7 +93,7 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
 void Watcher::unrequireDaemon( const TQCString& clientAppId,
                                const TQString& daemonKey )
 {
-    unrequireDaemon( m_daemons.tqfind( daemonKey ), clientAppId );
+    unrequireDaemon( m_daemons.find( daemonKey ), clientAppId );
 }
 
 void Watcher::unrequireDaemon( DaemonData *daemon,
@@ -243,7 +243,7 @@ void Watcher::slotAppUnregistered( const TQCString& appId )
     TQDictIterator<DaemonData> it( m_daemons );
     for ( ; (daemon = it.current()); ++it )
     {
-        if ( daemon->apps.tqfind( appId ) != -1 )
+        if ( daemon->apps.find( appId ) != -1 )
             unrequireDaemon( daemon, appId );
     }
 }

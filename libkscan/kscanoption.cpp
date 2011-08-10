@@ -732,7 +732,7 @@ bool KScanOption::set( const TQCString& c_string )
    TQRegExp re( "\\d+, \\d+, \\d+" );
    re.setMinimal(true);
    
-   if( TQString(c_string).tqcontains( re ))
+   if( TQString(c_string).contains( re ))
    {
       TQStringList relist = TQStringList::split( ", ", TQString(c_string) );
       

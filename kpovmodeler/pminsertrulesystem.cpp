@@ -136,7 +136,7 @@ bool isCondition( TQDomElement& e )
 {
    return( e.tagName( ) == "not" || e.tagName( ) == "and" ||
            e.tagName( ) == "or" || e.tagName( ) == "before" ||
-           e.tagName( ) == "after" || e.tagName( ) == "tqcontains" ||
+           e.tagName( ) == "after" || e.tagName( ) == "contains" ||
            e.tagName( ) == "greater" || e.tagName( ) == "less" ||
            e.tagName( ) == "equal" );
 }
@@ -168,7 +168,7 @@ PMRuleCondition* newCondition( TQDomElement& e,
       return new PMRuleBefore( e, globalGroups, localGroups );
    if( e.tagName( ) == "after" )
       return new PMRuleAfter( e, globalGroups, localGroups );
-   if( e.tagName( ) == "tqcontains" )
+   if( e.tagName( ) == "contains" )
       return new PMRuleContains( e, globalGroups, localGroups );
    if( e.tagName( ) == "greater" )
       return new PMRuleGreater( e, globalGroups, localGroups );
@@ -383,7 +383,7 @@ PMRuleBefore::PMRuleBefore( TQDomElement& e,
                             TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
-   m_tqcontains = false;
+   m_contains = false;
    TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
@@ -405,23 +405,23 @@ PMRuleBefore::~PMRuleBefore( )
 
 bool PMRuleBefore::evaluate( const PMObject* )
 {
-   return m_tqcontains;
+   return m_contains;
 }
 
 void PMRuleBefore::countChildProtected( const TQString& className,
                                         bool afterInsertPoint )
 {
-   if( afterInsertPoint && !m_tqcontains )
+   if( afterInsertPoint && !m_contains )
    {
       TQPtrListIterator<PMRuleCategory> it( m_categories );
-      for( ; it.current( ) && !m_tqcontains; ++it )
-         m_tqcontains = it.current( )->matches( className );
+      for( ; it.current( ) && !m_contains; ++it )
+         m_contains = it.current( )->matches( className );
    }
 }
 
 void PMRuleBefore::resetProtected( )
 {
-   m_tqcontains = false;
+   m_contains = false;
 }
 
 PMRuleAfter::PMRuleAfter( TQDomElement& e,
@@ -429,7 +429,7 @@ PMRuleAfter::PMRuleAfter( TQDomElement& e,
                           TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
-   m_tqcontains = false;
+   m_contains = false;
    TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
@@ -451,23 +451,23 @@ PMRuleAfter::~PMRuleAfter( )
 
 bool PMRuleAfter::evaluate( const PMObject* )
 {
-   return m_tqcontains;
+   return m_contains;
 }
 
 void PMRuleAfter::countChildProtected( const TQString& className,
                                        bool afterInsertPoint )
 {
-   if( !afterInsertPoint && !m_tqcontains )
+   if( !afterInsertPoint && !m_contains )
    {
       TQPtrListIterator<PMRuleCategory> it( m_categories );
-      for( ; it.current( ) && !m_tqcontains; ++it )
-         m_tqcontains = it.current( )->matches( className );
+      for( ; it.current( ) && !m_contains; ++it )
+         m_contains = it.current( )->matches( className );
    }
 }
 
 void PMRuleAfter::resetProtected( )
 {
-   m_tqcontains = false;
+   m_contains = false;
 }
 
 PMRuleContains::PMRuleContains( TQDomElement& e,
@@ -475,7 +475,7 @@ PMRuleContains::PMRuleContains( TQDomElement& e,
                                 TQPtrList<PMRuleDefineGroup>& localGroups )
       : PMRuleCondition( )
 {
-   m_tqcontains = false;
+   m_contains = false;
    TQDomNode m = e.firstChild( );
    while( !m.isNull( ) )
    {
@@ -497,22 +497,22 @@ PMRuleContains::~PMRuleContains( )
 
 bool PMRuleContains::evaluate( const PMObject* )
 {
-   return m_tqcontains;
+   return m_contains;
 }
 
 void PMRuleContains::countChildProtected( const TQString& className, bool )
 {
-   if( !m_tqcontains )
+   if( !m_contains )
    {
       TQPtrListIterator<PMRuleCategory> it( m_categories );
-      for( ; it.current( ) && !m_tqcontains; ++it )
-         m_tqcontains = it.current( )->matches( className );
+      for( ; it.current( ) && !m_contains; ++it )
+         m_contains = it.current( )->matches( className );
    }
 }
 
 void PMRuleContains::resetProtected( )
 {
-   m_tqcontains = false;
+   m_contains = false;
 }
 
 PMRuleCompare::PMRuleCompare( TQDomElement& e,
@@ -829,7 +829,7 @@ PMInsertRuleSystem::~PMInsertRuleSystem( )
 void PMInsertRuleSystem::loadRules( const TQString& fileName )
 {
    PMRuleClass::s_pPrototypeManager = m_pPart->prototypeManager( );
-   if( m_loadedFiles.tqfind( fileName ) != m_loadedFiles.end( ) )
+   if( m_loadedFiles.find( fileName ) != m_loadedFiles.end( ) )
       return;
    m_loadedFiles.push_back( fileName );
 
@@ -877,7 +877,7 @@ void PMInsertRuleSystem::loadRules( const TQString& fileName )
                PMRuleTargetClass* target = 0;
 
                if( !m_rulesDict.isEmpty( ) )
-                  target = m_rulesDict.tqfind( className );
+                  target = m_rulesDict.find( className );
 
                if( target )
                   target->appendRules( ce, m_groups );
@@ -908,7 +908,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
    PMMetaObject* meta = parentObject->tqmetaObject( );
    for( ; meta && !possible; meta = meta->superClass( ) )
    {
-      PMRuleTargetClass* tc = m_rulesDict.tqfind( meta->className( ) );
+      PMRuleTargetClass* tc = m_rulesDict.find( meta->className( ) );
       if( tc )
       {
          // check the exception list
@@ -999,7 +999,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
    PMMetaObject* meta = parentObject->tqmetaObject( );
    for( ; meta; meta = meta->superClass( ) )
    {
-      PMRuleTargetClass* tc = m_rulesDict.tqfind( meta->className( ) );
+      PMRuleTargetClass* tc = m_rulesDict.find( meta->className( ) );
       if( tc )
          targetClassList.append( tc );
    }

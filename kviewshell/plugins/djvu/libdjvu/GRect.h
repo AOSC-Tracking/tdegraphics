@@ -209,11 +209,11 @@ public:
       contains all pixels with horizontal pixel coordinates in range #xmin#
       (inclusive) to #xmax# (exclusive) and vertical coordinates #ymin#
       (inclusive) to #ymax# (exclusive). */
-  int  tqcontains(int x, int y) const;
+  int  contains(int x, int y) const;
   /** Returns true if this rectangle contains the passed rectangle #rect#.
       The function basically checks, that the intersection of this rectangle
       with #rect# is #rect#. */
-  int  tqcontains(const GRect & rect) const;
+  int  contains(const GRect & rect) const;
   /** Returns true if rectangles #r1# and #r2# are equal. */
   friend int operator==(const GRect & r1, const GRect & r2);
   /** Returns true if rectangles #r1# and #r2# are not equal. */
@@ -379,7 +379,7 @@ GRect::area() const
 }
 
 inline int
-GRect::tqcontains(int x, int y) const
+GRect::contains(int x, int y) const
 {
   return (x>=xmin && x<xmax && y>=ymin && y<ymax);
 }

@@ -112,7 +112,7 @@ void PaletteToolBar::addColors( uint n, uint *c )
 
 void PaletteToolBar::addColor( uint color )
 {
-    if( !m_sysColors->tqcontains( color ) )
+    if( !m_sysColors->contains( color ) )
         m_customColors->addColor( color );
 }
 

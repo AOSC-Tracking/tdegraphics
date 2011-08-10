@@ -69,12 +69,12 @@ void SVGAnimatedPointsImpl::parsePoints(TQString _points, SVGPointListImpl *poin
 
 	_points = _points.simplifyWhiteSpace();
 
-	if(_points.tqcontains(",,") || _points.tqcontains(", ,"))
+	if(_points.contains(",,") || _points.contains(", ,"))
 		return;
 
-	_points.tqreplace(',', ' ');
-	_points.tqreplace('\r', TQString());
-	_points.tqreplace('\n', TQString());
+	_points.replace(',', ' ');
+	_points.replace('\r', TQString());
+	_points.replace('\n', TQString());
 
 	_points = _points.simplifyWhiteSpace();
 

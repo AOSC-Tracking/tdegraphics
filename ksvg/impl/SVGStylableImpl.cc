@@ -532,7 +532,7 @@ TQString SVGStylableImpl::extractUrlId(const TQString &url)
 
 	if(url.startsWith("url(#"))
 	{
-		int idstart = url.tqfind("#") + 1;
+		int idstart = url.find("#") + 1;
 		id = url.mid(idstart, url.length() - idstart - 1);
 	}
 	else
@@ -552,7 +552,7 @@ void SVGStylableImpl::setStartMarker(const TQString &startMarker)
 {
 	if(startMarker.startsWith("url(#"))
 	{
-		int idstart = startMarker.tqfind("#") + 1;
+		int idstart = startMarker.find("#") + 1;
 		m_startMarker = startMarker.mid(idstart, startMarker.length() - idstart - 1);
 	}
 	else if(startMarker == "none")
@@ -563,7 +563,7 @@ void SVGStylableImpl::setMidMarker(const TQString &midMarker)
 {
 	if(midMarker.startsWith("url(#"))
 	{
-		int idstart = midMarker.tqfind("#") + 1;
+		int idstart = midMarker.find("#") + 1;
 		m_midMarker = midMarker.mid(idstart, midMarker.length() - idstart - 1);
 	}
 	else if(midMarker == "none")
@@ -574,7 +574,7 @@ void SVGStylableImpl::setEndMarker(const TQString &endMarker)
 {
 	if(endMarker.startsWith("url(#"))
 	{
-		int idstart = endMarker.tqfind("#") + 1;
+		int idstart = endMarker.find("#") + 1;
 		m_endMarker = endMarker.mid(idstart, endMarker.length() - idstart - 1);
 	}
 	else if(endMarker == "none")
@@ -600,7 +600,7 @@ void SVGStylableImpl::setColor(const TQString &param, SVGColorImpl *svgColor)
 {
 	if(param.stripWhiteSpace().startsWith("#"))
 	{
-		if(param.tqcontains("icc-color"))
+		if(param.contains("icc-color"))
 		{
 			TQString first = param.left(7);
 			TQString last = param.right(param.length() - 8);
@@ -622,19 +622,19 @@ void SVGStylableImpl::setColor(const TQString &param, SVGColorImpl *svgColor)
 		TQString g = colors[1];
 		TQString b = colors[2].left((colors[2].length() - 1));
 
-		if(r.tqcontains("%"))
+		if(r.contains("%"))
 		{
 			r = r.left(r.length() - 1);
 			r = TQString::number(int((double(255 * r.toDouble()) / 100.0)));
 		}
 		
-		if(g.tqcontains("%"))
+		if(g.contains("%"))
 		{
 			g = g.left(g.length() - 1);
 			g = TQString::number(int((double(255 * g.toDouble()) / 100.0)));
 		}
 
-		if(b.tqcontains("%"))
+		if(b.contains("%"))
 		{
 			b = b.left(b.length() - 1);
 			b = TQString::number(int((double(255 * b.toDouble()) / 100.0)));
@@ -946,12 +946,12 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 
 			// Hacks
 			// #1 Replace "'" characters by ""
-			param = param.tqreplace('\'', TQString());
+			param = param.replace('\'', TQString());
 			// #2 Replace "MS-Gothic" by "MS Gothic"
-			param = param.tqreplace("MS-Gothic", "MS Gothic");
+			param = param.replace("MS-Gothic", "MS Gothic");
 			// #3 Replace "Helvetica" by "Arial"
-			param = param.tqreplace("Helvetica", "Arial");
-			param = param.tqreplace("helvetica", "Arial");
+			param = param.replace("Helvetica", "Arial");
+			param = param.replace("helvetica", "Arial");
 
 			if(!m_fontFamily)
 			{

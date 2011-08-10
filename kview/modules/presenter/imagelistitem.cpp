@@ -41,7 +41,7 @@ ImageListItem::ImageListItem( KListView * tqparent, const KURL & url )
 		/*
 		TQString extension;
 		TQString fileName = m_url.fileName();
-		int extensionPos = fileName.tqfindRev( '.' );
+		int extensionPos = fileName.findRev( '.' );
 		if ( extensionPos != -1 )
 			extension = fileName.mid( extensionPos ); // keep the '.'
 		delete m_pTempFile;

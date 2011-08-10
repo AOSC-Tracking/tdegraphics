@@ -400,11 +400,11 @@ void KSnapshot::autoincFilename()
 	TQString numAsStr= name.mid(start, len);
 	TQString number = TQString::number(numAsStr.toInt() + 1);
 	number = number.rightJustify( len, '0');
-	name.tqreplace(start, len, number );
+	name.replace(start, len, number );
     }
     else {
         // no number
-        start = name.tqfindRev('.');
+        start = name.findRev('.');
         if (start != -1) {
             // has a . somewhere, e.g. it has an extension
             name.insert(start, '1');

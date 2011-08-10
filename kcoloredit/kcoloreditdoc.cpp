@@ -281,11 +281,11 @@ void KColorEditDoc::insert(int index, const Color& color) {
 	slotRedrawAllViews(0);
 }
 
-void KColorEditDoc::tqreplace(int index, const Color& color) {
+void KColorEditDoc::replace(int index, const Color& color) {
 	Palette paletteReplace;
 	Color* replaceColor = new Color(color);
 	paletteReplace.append(replaceColor);
-	m_paletteHistory.tqreplace(index, paletteReplace);
+	m_paletteHistory.replace(index, paletteReplace);
 	setPaletteSelection(0, 0);
 	setModified(true);
 	slotRedrawAllViews(0);

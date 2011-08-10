@@ -64,14 +64,14 @@ void ghostscript_interface::setPostScript(const PageNumber& page, const TQString
   kdDebug(4300) << "ghostscript_interface::setPostScript( " << page << ", ... )" << endl;
 #endif
 
-  if (pageList.tqfind(page) == 0) {
+  if (pageList.find(page) == 0) {
     pageInfo *info = new pageInfo(PostScript);
     // Check if dict is big enough
     if (pageList.count() > pageList.size() -2)
       pageList.resize(pageList.size()*2);
     pageList.insert(page, info);
   } else 
-    *(pageList.tqfind(page)->PostScriptString) = PostScript;
+    *(pageList.find(page)->PostScriptString) = PostScript;
 }
 
 
@@ -88,7 +88,7 @@ void ghostscript_interface::setBackgroundColor(const PageNumber& page, const TQC
   kdDebug(4300) << "ghostscript_interface::setBackgroundColor( " << page << ", " << background_color << " )" << endl;
 #endif
 
-  if (pageList.tqfind(page) == 0) {
+  if (pageList.find(page) == 0) {
     pageInfo *info = new pageInfo(TQString());
     info->background = background_color;
     if (permanent)
@@ -98,9 +98,9 @@ void ghostscript_interface::setBackgroundColor(const PageNumber& page, const TQC
       pageList.resize(pageList.size()*2);
     pageList.insert(page, info);
   } else {
-    pageList.tqfind(page)->background = background_color;
+    pageList.find(page)->background = background_color;
     if (permanent)
-      pageList.tqfind(page)->permanentBackground = background_color;
+      pageList.find(page)->permanentBackground = background_color;
   }
 }
 
@@ -109,10 +109,10 @@ void ghostscript_interface::restoreBackgroundColor(const PageNumber& page)
 #ifdef DEBUG_PSGS
   kdDebug(4300) << "ghostscript_interface::restoreBackgroundColor( " << page << " )" << endl;
 #endif
-  if (pageList.tqfind(page) == 0)
+  if (pageList.find(page) == 0)
     return;
 
-  pageInfo *info = pageList.tqfind(page);
+  pageInfo *info = pageList.find(page);
   info->background = info->permanentBackground;
 }
 
@@ -124,10 +124,10 @@ TQColor ghostscript_interface::getBackgroundColor(const PageNumber& page) const 
   kdDebug(4300) << "ghostscript_interface::getBackgroundColor( " << page << " )" << endl;
 #endif
 
-  if (pageList.tqfind(page) == 0) 
+  if (pageList.find(page) == 0) 
     return TQt::white;
   else 
-    return pageList.tqfind(page)->background;
+    return pageList.find(page)->background;
 }
 
 
@@ -151,7 +151,7 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
 
   emit(setStatusBarText(i18n("Generating PostScript graphics...")));
   
-  pageInfo *info = pageList.tqfind(page);
+  pageInfo *info = pageList.find(page);
 
   // Generate a PNG-file
   // Step 1: Write the PostScriptString to a File
@@ -239,7 +239,7 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
     // ghostscript. If so, try again with another device.
     TQString GSoutput;
     while(proc.readln(GSoutput) != -1) {
-      if (GSoutput.tqcontains("Unknown device")) {
+      if (GSoutput.contains("Unknown device")) {
 	kdDebug(4300) << TQString("The version of ghostview installed on this computer does not support "
 				   "the '%1' ghostview device driver.").tqarg(*gsDevice) << endl;
 	knownDevices.remove(gsDevice);
@@ -293,7 +293,7 @@ void ghostscript_interface::graphics(const PageNumber& page, double dpi, long ma
   pixel_page_w = paint->viewport().width();
   pixel_page_h = paint->viewport().height();
 
-  pageInfo *info = pageList.tqfind(page);
+  pageInfo *info = pageList.find(page);
 
   // No PostScript? Then return immediately.
   if ((info == 0) || (info->PostScriptString->isEmpty())) {
@@ -317,7 +317,7 @@ void ghostscript_interface::graphics(const PageNumber& page, double dpi, long ma
 
 TQString ghostscript_interface::locateEPSfile(const TQString &filename, const KURL &base)
 {
-  // If the base URL indicates that the DVI file is local, try to tqfind
+  // If the base URL indicates that the DVI file is local, try to find
   // the graphics file in the directory where the DVI file resides
   if (base.isLocalFile()) {
     TQString path = base.path();       // -> "/bar/foo.dvi"

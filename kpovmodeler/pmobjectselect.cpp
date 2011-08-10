@@ -202,7 +202,7 @@ int PMObjectSelect::selectObject( PMObject* link,
       
       while( o && !l && last )
       {
-         if( t.tqfindIndex( o->type( ) ) >= 0 )
+         if( t.findIndex( o->type( ) ) >= 0 )
             s.m_pListBox->insertItem( new PMListBoxObject( o ) );
          
          if( o == last )
@@ -325,7 +325,7 @@ int PMObjectSelect::selectDeclare( PMObject* link, const TQStringList& declareTy
          if( o->type( ) == "Declare" )
          {
             decl = ( PMDeclare* ) o;
-            if( declareTypes.tqfindIndex( decl->declareType( ) ) >= 0 )
+            if( declareTypes.findIndex( decl->declareType( ) ) >= 0 )
                s.m_pListBox->insertItem( new PMListBoxObject( o ) );
          }
          

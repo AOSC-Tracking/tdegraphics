@@ -26,7 +26,7 @@ my %excludes = (
 # List headers, and exclude the ones listed above
 my @headers = ();
 my $incdir=$here;
-opendir (INCS, $incdir) or die "Couldn't tqfind $incdir";
+opendir (INCS, $incdir) or die "Couldn't find $incdir";
 foreach $filename (readdir(INCS)) {
     $entry = $incdir."/".$filename;
     if ( ( -e $entry or -l $entry )         # A real file or a symlink

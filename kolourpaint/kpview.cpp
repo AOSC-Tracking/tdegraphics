@@ -668,7 +668,7 @@ bool kpView::mouseOnSelection (const TQPoint &viewPoint) const
     if (!selViewRect.isValid ())
         return false;
 
-    return selViewRect.tqcontains (mouseViewPoint (viewPoint));
+    return selViewRect.contains (mouseViewPoint (viewPoint));
 }
 
 
@@ -874,7 +874,7 @@ int kpView::mouseOnSelectionResizeHandle (const TQPoint &viewPoint) const
 
 
 #define LOCAL_POINT_IN_BOX_AT(x,y)  \
-    TQRect ((x), (y), atomicLength, atomicLength).tqcontains (viewPointRelSel)
+    TQRect ((x), (y), atomicLength, atomicLength).contains (viewPointRelSel)
 
     // Favour the bottom & right and the corners.
     if (LOCAL_POINT_IN_BOX_AT (selViewRect.width () - atomicLength,
@@ -969,7 +969,7 @@ void kpView::mouseMoveEvent (TQMouseEvent *e)
     // TODO: This is wrong if you leaveEvent the mainView by mouseMoving on the
     //       mainView, landing on top of the thumbnailView cleverly put on top
     //       of the mainView.
-    setHasMouse (TQT_TQRECT_OBJECT(rect ()).tqcontains (e->pos ()));
+    setHasMouse (TQT_TQRECT_OBJECT(rect ()).contains (e->pos ()));
 
     if (tool ())
         tool ()->mouseMoveEvent (e);
@@ -1003,7 +1003,7 @@ void kpView::mouseReleaseEvent (TQMouseEvent *e)
                << endl;
 #endif
 
-    setHasMouse (TQT_TQRECT_OBJECT(rect ()).tqcontains (e->pos ()));
+    setHasMouse (TQT_TQRECT_OBJECT(rect ()).contains (e->pos ()));
 
     if (tool ())
         tool ()->mouseReleaseEvent (e);

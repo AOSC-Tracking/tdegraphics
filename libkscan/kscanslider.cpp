@@ -260,7 +260,7 @@ void KScanCombo::createCombo( const TQString& text )
 void KScanCombo::slSetEntry( const TQString &t )
 {
     if( t.isNull() ) 	return;
-    int i = combolist.tqfind( t.local8Bit() );
+    int i = combolist.find( t.local8Bit() );
 
     /* Important to check value to avoid recursive signals ;) */
     if( i == combo->currentItem() )

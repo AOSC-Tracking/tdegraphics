@@ -99,7 +99,7 @@ void FileWidget::initActions()
 
     TQPopupMenu *pMenu = menu->popupMenu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
-    TQMenuItem *mItem = pMenu->tqfindItem( lastItemId );
+    TQMenuItem *mItem = pMenu->findItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )
         menu->insert( sep );
 
@@ -152,7 +152,7 @@ void FileWidget::activatedMenu( const KFileItem *item, const TQPoint& pos )
 void FileWidget::findCompletion( const TQString& text )
 {
     if ( text.at(0) == '/' || text.at(0) == '~' ||
-	 text.tqfind('/') != -1 ) {
+	 text.find('/') != -1 ) {
 	TQString t = m_fileFinder->completion()->makeCompletion( text );
 
 	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
@@ -399,7 +399,7 @@ void FileWidget::slotReturnPressed( const TQString& t )
 	setURL( url, true );
     }
 
-    else if ( text.tqfind('/') != (int) text.length() -1 ) { // relative path
+    else if ( text.find('/') != (int) text.length() -1 ) { // relative path
 	TQString dir = m_fileFinder->completion()->replacedPath( text );
 	KURL u( url(), dir );
 	setURL( u, true );

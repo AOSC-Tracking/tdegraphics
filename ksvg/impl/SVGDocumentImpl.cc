@@ -252,7 +252,7 @@ void SVGDocumentImpl::slotSVGContent(TQIODevice *dev)
 	args.getURLMode = false;
 
 	TQString url = m_baseURL.prettyURL();
-	int pos = url.tqfind('#'); // url can become like this.svg#svgView(viewBox(63,226,74,74)), get part after '#'
+	int pos = url.find('#'); // url can become like this.svg#svgView(viewBox(63,226,74,74)), get part after '#'
 	if(pos > -1)
 		args.SVGFragmentId = url.mid(pos + 1);
 		
@@ -358,7 +358,7 @@ void SVGDocumentImpl::checkFinishedLoading()
 
 void SVGDocumentImpl::addForwardReferencingUseElement(SVGUseElementImpl *use)
 {
-	if(!m_forwardReferencingUseElements.tqcontains(use))
+	if(!m_forwardReferencingUseElements.contains(use))
 		m_forwardReferencingUseElements.append(use);
 }
 

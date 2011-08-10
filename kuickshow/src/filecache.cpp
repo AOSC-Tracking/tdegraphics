@@ -42,7 +42,7 @@ FileCache * FileCache::self()
 KuickFile * FileCache::getFile( const KURL& url )
 {
     TQString urlString = url.prettyURL();
-    KuickFile *file = m_files.tqfind( urlString );
+    KuickFile *file = m_files.find( urlString );
     if ( !file ) {
         file = new KuickFile( url );
         m_files.insert( urlString, file );

@@ -76,7 +76,7 @@ TQStringList ocrWordList::stringList()
          * decided. Solution:  KSpell should treat dash-linked words correctly.
          * We live with the problem here that dashes bring confusion ;-)
          */
-        if( (*it).tqcontains( rx ) )
+        if( (*it).contains( rx ) )
             res += TQStringList::split( rx, (*it) );
         else
 #endif
@@ -95,9 +95,9 @@ bool ocrWordList::updateOCRWord( const TQString& from, const TQString& to )
     {
         TQString word = (*it);
         kdDebug(28000) <<  "updateOCRWord in list: Comparing word " << word << endl;
-        if( word.tqcontains( from, true ) ) // case sensitive search
+        if( word.contains( from, true ) ) // case sensitive search
         {
-            word.tqreplace( from, to );
+            word.replace( from, to );
             *it = ocrWord( word );
             res = true;
             break;

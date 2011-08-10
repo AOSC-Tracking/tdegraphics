@@ -173,7 +173,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *t
   exportTextAction = new KAction(i18n("Text..."), 0, this, TQT_SLOT(mp_exportText()), actionCollection(), "export_text");
 
   // edit menu
-  findTextAction = KStdAction::find(this, TQT_SLOT(mp_showFindTextDialog()), actionCollection(), "tqfind");
+  findTextAction = KStdAction::find(this, TQT_SLOT(mp_showFindTextDialog()), actionCollection(), "find");
   findNextAction = KStdAction::findNext(this, TQT_SLOT(mp_findNextText()), actionCollection(), "findnext");
   findNextAction->setEnabled(false);
   findPrevAction = KStdAction::findPrev(this, TQT_SLOT(mp_findPrevText()), actionCollection(), "findprev");
@@ -553,10 +553,10 @@ TQStringList KViewPart::fileFormats() const
 
   for(TQStringList::Iterator it = supportedPattern.begin(); it != supportedPattern.end(); ++it )
   {
-    if ((*it).tqfind(".gz", -3) == -1) // Paranoia safety check
+    if ((*it).find(".gz", -3) == -1) // Paranoia safety check
       compressedPattern.append(*it + ".gz");
 
-    if ((bzip2Available) && ((*it).tqfind(".bz2", -4) == -1)) // Paranoia safety check
+    if ((bzip2Available) && ((*it).find(".bz2", -4) == -1)) // Paranoia safety check
       compressedPattern.append(*it + ".bz2");
   }
 
@@ -613,7 +613,7 @@ bool KViewPart::openFile()
     for (TQStringList::Iterator it = supportedPatterns.begin(); it != supportedPatterns.end(); ++it)
     {
       // Only consider patterns starting with "*."
-      if ((*it).tqfind("*.") == 0)
+      if ((*it).find("*.") == 0)
       {
         // Remove first Letter from string
         endings.append((*it).mid(2).stripWhiteSpace());
@@ -1382,7 +1382,7 @@ void KViewPart::writeSettings()
 
 void KViewPart::connectNotify ( const char *sig )
 {
-  if (TQString(sig).tqcontains("pageChanged"))
+  if (TQString(sig).contains("pageChanged"))
     pageChangeIsConnected = true;
 }
 

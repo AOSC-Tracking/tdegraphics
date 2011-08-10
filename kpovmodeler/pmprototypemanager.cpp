@@ -148,7 +148,7 @@ void PMPrototypeManager::addPrototype( PMObject* obj )
       return;
 
    PMMetaObject* tqmetaObject = obj->tqmetaObject( );
-   PMMetaObject* m2 = m_metaDict.tqfind( tqmetaObject->className( ) );
+   PMMetaObject* m2 = m_metaDict.find( tqmetaObject->className( ) );
    if( m2 )
    {
       kdError( PMArea ) << "PMPrototypeManager: Class '"
@@ -168,7 +168,7 @@ void PMPrototypeManager::addPrototype( PMObject* obj )
       // insert the meta object and all super classes into the hash table
       while( tqmetaObject )
       {
-         if( m_metaDict.tqfind( tqmetaObject->className( ) ) )
+         if( m_metaDict.find( tqmetaObject->className( ) ) )
             tqmetaObject = 0;
          else
          {
@@ -206,7 +206,7 @@ PMObject* PMPrototypeManager::newObject( const TQString& name ) const
    if( name.isEmpty( ) )
       return 0;
 
-   PMMetaObject* meta = m_metaDict.tqfind( name );
+   PMMetaObject* meta = m_metaDict.find( name );
    if( !meta )
       return 0;
    return meta->newObject( m_pPart );
@@ -216,7 +216,7 @@ PMMetaObject* PMPrototypeManager::tqmetaObject( const TQString& name ) const
 {
    if( name.isNull( ) )
       return 0;
-   return m_metaDict.tqfind( name );
+   return m_metaDict.find( name );
 }
 
 bool PMPrototypeManager::isA( const TQString& className,
@@ -236,7 +236,7 @@ bool PMPrototypeManager::isA( PMMetaObject* c,
 
 TQString PMPrototypeManager::className( const TQString& lowercase ) const
 {
-   TQMap<TQString, TQString>::const_iterator it = m_lowerCaseDict.tqfind( lowercase );
+   TQMap<TQString, TQString>::const_iterator it = m_lowerCaseDict.find( lowercase );
    if( it != m_lowerCaseDict.end( ) )
       return *it;
    return TQString();

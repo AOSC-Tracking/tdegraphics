@@ -547,7 +547,7 @@ void ScanParams::slSourceSelect( void )
       sources = so.getList();
 #undef CHEAT_FOR_DEBUGGING
 #ifdef CHEAT_FOR_DEBUGGING
-      if( sources.tqfind( "Automatic Document Feeder" ) == -1)
+      if( sources.find( "Automatic Document Feeder" ) == -1)
           sources.append( "Automatic Document Feeder" );
 #endif
 

@@ -105,7 +105,7 @@ void PMDeleteCommand::execute( PMCommandManager* theManager )
                if( decl )
                {
                   m_links.append( oit.current( ) );
-                  if( !m_linkedDeclares.tqcontainsRef( decl ) )
+                  if( !m_linkedDeclares.containsRef( decl ) )
                      m_linkedDeclares.append( decl );
                }
             }
@@ -232,7 +232,7 @@ int PMDeleteCommand::errorFlags( PMPart* )
             for( obj = links.current( ); obj && !insideSelection;
                  obj = obj->tqparent( ) )
             {
-               if( m_deletedObjects.tqfind( obj ) )
+               if( m_deletedObjects.find( obj ) )
                   insideSelection = true;
             }
 
@@ -241,7 +241,7 @@ int PMDeleteCommand::errorFlags( PMPart* )
                bool stop = false;
                for( obj = links.current( ); obj && !stop; obj = obj->tqparent( ) )
                {
-                  if( m_deletedObjects.tqfind( obj ) )
+                  if( m_deletedObjects.find( obj ) )
                      stop = true;
                   else
                      m_deletedObjects.insert( obj, new bool( true ) );

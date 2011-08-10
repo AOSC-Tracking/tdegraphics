@@ -48,7 +48,7 @@
  * a different name and with a different encoding ---the map file
  * (fontMap.h) can probably see to that.
  *
- * Summing up: this class tqcontains 256 glyph names read from an
+ * Summing up: this class contains 256 glyph names read from an
  * encoding file during the construction of this class.
  *
  * @author Stefan Kebekus   <kebekus@kde.org>

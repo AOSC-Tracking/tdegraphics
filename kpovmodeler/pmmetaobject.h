@@ -402,7 +402,7 @@ public:
     */
    PMPropertyBase* property( const TQString& name ) const
    {
-      return m_propertiesDict.tqfind( name );
+      return m_propertiesDict.find( name );
    }
 
 private:

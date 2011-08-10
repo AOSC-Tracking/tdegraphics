@@ -344,7 +344,7 @@ void PMShell::slotDockWidgetClosed( )
    const TQObject* o = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender( )));
    if( o && o->inherits( "PMDockWidget" ) )
    {
-      if( m_objectsToDelete.tqcontainsRef( o ) == 0 )
+      if( m_objectsToDelete.containsRef( o ) == 0 )
       {
          m_objectsToDelete.append( o );
          TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT( slotDeleteClosedObjects( ) ) );
@@ -602,7 +602,7 @@ void PMShell::setCaption( const TQString& caption )
    else
    {
       if( !m_pPathAction->isChecked( ) )
-         tmp = caption.right( caption.length( ) - caption.tqfindRev( '/' ) - 1 );
+         tmp = caption.right( caption.length( ) - caption.findRev( '/' ) - 1 );
       else
          tmp = caption;
    }
@@ -656,7 +656,7 @@ bool PMShell::overwriteURL( const KURL& u )
 
 void PMShell::slotSelectedLayout( int id )
 {
-   TQMenuItem* menu = m_pViewLayoutsAction->popupMenu( )->tqfindItem( id );
+   TQMenuItem* menu = m_pViewLayoutsAction->popupMenu( )->findItem( id );
    PMViewLayoutManager::theManager( )->displayLayout( menu->text( ), this );
 }
 

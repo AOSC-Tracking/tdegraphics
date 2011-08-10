@@ -46,7 +46,7 @@ fontPool::fontPool()
 	       i18n( "KDVI is currently generating bitmap fonts..." ),
 	       i18n( "Aborts the font generation. Don't do this." ),
 	       i18n( "KDVI is currently generating bitmap fonts which are needed to display your document. "
-		     "For this, KDVI uses a number of external programs, such as MetaFont. You can tqfind "
+		     "For this, KDVI uses a number of external programs, such as MetaFont. You can find "
 		     "the output of these programs later in the document info dialog." ),
 	       i18n( "KDVI is generating fonts. Please wait." ),
 	       0 )
@@ -558,32 +558,32 @@ void fontPool::mf_output_receiver(KProcess *, char *buffer, int buflen)
   // We'd like to print only full lines of text.
   int numleft;
   bool show_prog = false;
-  while( (numleft = MetafontOutput.tqfind('\n')) != -1) {
+  while( (numleft = MetafontOutput.find('\n')) != -1) {
     TQString line = MetafontOutput.left(numleft+1);
 #ifdef DEBUG_FONTPOOL
     kdDebug(4300) << "MF OUTPUT RECEIVED: " << line;
 #endif
     // Search for a line which marks the beginning of a MetaFont run
     // and show the progress dialog at the end of this method.
-    if (line.tqfind("kpathsea:") == 0)
+    if (line.find("kpathsea:") == 0)
       show_prog = true;
 
     // If the Output of the kpsewhich program contains a line starting
     // with "kpathsea:", this means that a new MetaFont-run has been
     // started. We filter these lines out and update the display
     // accordingly.
-    int startlineindex = line.tqfind("kpathsea:");
+    int startlineindex = line.find("kpathsea:");
     if (startlineindex != -1) {
-      int endstartline  = line.tqfind("\n",startlineindex);
+      int endstartline  = line.find("\n",startlineindex);
       TQString startLine = line.mid(startlineindex,endstartline-startlineindex);
 
       // The last word in the startline is the name of the font which we
       // are generating. The second-to-last word is the resolution in
       // dots per inch. Display this info in the text label below the
       // progress bar.
-      int lastblank     = startLine.tqfindRev(' ');
+      int lastblank     = startLine.findRev(' ');
       TQString fontName  = startLine.mid(lastblank+1);
-      int secondblank   = startLine.tqfindRev(' ',lastblank-1);
+      int secondblank   = startLine.findRev(' ',lastblank-1);
       TQString dpi       = startLine.mid(secondblank+1,lastblank-secondblank-1);
 
       progress.show();

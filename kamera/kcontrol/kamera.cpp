@@ -184,7 +184,7 @@ void KKameraConfig::load(bool useDefaults )
 	for (it = groupList.begin(); it != groupList.end(); it++) {
 		if (*it != "<default>")	{
 			m_config->setGroup(*it);
-			if (m_config->readEntry("Path").tqcontains("usb:"))
+			if (m_config->readEntry("Path").contains("usb:"))
 				continue;
 
 			kcamera = new KCamera(*it,m_config->readEntry("Path"));
@@ -218,7 +218,7 @@ void KKameraConfig::load(bool useDefaults )
 		if (!strcmp(value,"usb:"))
 			names[model] = value;
 	}
-	if (ports.tqcontains("usb:") && names[ports["usb:"]]!="usb:")
+	if (ports.contains("usb:") && names[ports["usb:"]]!="usb:")
 		ports.remove("usb:");
 
 	TQMap<TQString,TQString>::iterator portit;
@@ -268,15 +268,15 @@ void KKameraConfig::afterCameraOperation(void)
 TQString KKameraConfig::suggestName(const TQString &name)
 {
 	TQString new_name = name;
-	new_name.tqreplace("/", ""); // we cannot have a slash in a URI's host
+	new_name.replace("/", ""); // we cannot have a slash in a URI's host
 
-	if (!m_devices.tqcontains(new_name)) return new_name;
+	if (!m_devices.contains(new_name)) return new_name;
 	
 	// try new names with a number appended until we find a free one
 	int i = 1;
 	while (i++ < 0xffff) {
 		new_name = name + " (" + TQString::number(i) + ")";
-		if (!m_devices.tqcontains(new_name)) return new_name;
+		if (!m_devices.contains(new_name)) return new_name;
 	}
 
 	return TQString();
@@ -302,7 +302,7 @@ void KKameraConfig::slot_addCamera()
 void KKameraConfig::slot_removeCamera()
 {
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.tqcontains(name)) {
+	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		m_devices.remove(name);
 		delete m_device;
@@ -317,7 +317,7 @@ void KKameraConfig::slot_testCamera()
 	beforeCameraOperation();
 
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.tqcontains(name)) {
+	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		if (m_device->test())
 			KMessageBox::information(this, i18n("Camera test was successful."));
@@ -329,7 +329,7 @@ void KKameraConfig::slot_testCamera()
 void KKameraConfig::slot_configureCamera()
 {
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.tqcontains(name)) {
+	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		m_device->configure();
 	}
@@ -339,7 +339,7 @@ void KKameraConfig::slot_cameraSummary()
 {
 	TQString summary;
 	TQString name = m_deviceSel->currentItem()->text();
-	if (m_devices.tqcontains(name)) {
+	if (m_devices.contains(name)) {
 		KCamera *m_device = m_devices[name];
 		summary = m_device->summary();
 		if (!summary.isNull()) {

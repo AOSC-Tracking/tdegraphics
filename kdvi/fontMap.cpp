@@ -78,7 +78,7 @@ fontMap::fontMap()
         encodingName = encodingName.mid(1);
 
       double slant = 0.0;
-      int i = line.tqfind("SlantFont");
+      int i = line.find("SlantFont");
       if (i >= 0) {
 	bool ok;
 	slant = line.left(i).section(' ', -1, -1 ,TQString::SectionSkipEmpty).toDouble(&ok);
@@ -115,7 +115,7 @@ fontMap::fontMap()
 
 const TQString &fontMap::findFileName(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().fontFileName;
@@ -126,7 +126,7 @@ const TQString &fontMap::findFileName(const TQString &TeXName)
 
 const TQString &fontMap::findFontName(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().fullFontName;
@@ -137,7 +137,7 @@ const TQString &fontMap::findFontName(const TQString &TeXName)
 
 const TQString &fontMap::findEncoding(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().fontEncoding;
@@ -148,7 +148,7 @@ const TQString &fontMap::findEncoding(const TQString &TeXName)
 
 double fontMap::findSlant(const TQString &TeXName)
 {
-  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.tqfind(TeXName);
+  TQMap<TQString, fontMapEntry>::Iterator it = fontMapEntries.find(TeXName);
   
   if (it != fontMapEntries.end())
     return it.data().slant;

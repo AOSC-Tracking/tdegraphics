@@ -118,7 +118,7 @@ public:
   GPBufferBase(void *&,const size_t n,const size_t t);
   void swap(GPBufferBase &p);
   void resize(const size_t n,const size_t t);
-  void tqreplace(void *nptr,const size_t n);
+  void replace(void *nptr,const size_t n);
   void set(const size_t t,const char c);
   ~GPBufferBase();
   operator int(void) const { return ptr ? num : 0; }

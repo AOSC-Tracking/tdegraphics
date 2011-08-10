@@ -85,7 +85,7 @@ TQString PMSymbolTable::findNewID( const TQString& prefix )
    TQString testID;
    unsigned int number;
    
-   int* lastNumber = m_lastID.tqfind( prefix );
+   int* lastNumber = m_lastID.find( prefix );
    if( lastNumber )
       number = *lastNumber + 1;
    else
@@ -95,7 +95,7 @@ TQString PMSymbolTable::findNewID( const TQString& prefix )
    do
    {
       testID = prefix + TQString( "%1" ).tqarg( number );
-      symbol = tqfind( testID );
+      symbol = find( testID );
       if( symbol )
          number++;
    }

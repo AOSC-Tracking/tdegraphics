@@ -234,7 +234,7 @@ void KColorEditView::slotAddColor() {
 
         case REPLACE_COLOR:
             if(index < palette->length())
-                document()->tqreplace(index, color);
+                document()->replace(index, color);
             else
                 document()->insert(index, color);
             break;
@@ -274,7 +274,7 @@ void KColorEditView::slotSetColorName(const TQString& name) {
 				palette->color(cursorPos)->component(Color::BLUE_INDEX),
 				name);
 			doNotUpdateColorLabels = true;
-			document()->tqreplace(cursorPos, newColor);
+			document()->replace(cursorPos, newColor);
 			doNotUpdateColorLabels = false;
 		}
 	}

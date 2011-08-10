@@ -74,9 +74,9 @@ void IndexCleaner::startNext()
     TQString dir = m_dirs.first();
     m_dirs.pop_front();
 
-    int index = cmd.tqfind( "%d" );
+    int index = cmd.find( "%d" );
     if ( index != -1 )
-        cmd.tqreplace( index, 2, TQUOTE( dir ) );
+        cmd.replace( index, 2, TQUOTE( dir ) );
     else // no %d? What else can we do?
         cmd.append( TQString::tqfromLatin1(" ") + TQUOTE( dir ) );
 

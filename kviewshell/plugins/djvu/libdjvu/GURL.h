@@ -106,7 +106,7 @@ namespace DJVU {
     to the same file name. Compare #file:/dir/file.djvu# and
     #file://localhost/dir/file.djvu#.
 
-    To simplify a developer's life we have created this class, which tqcontains
+    To simplify a developer's life we have created this class, which contains
     inside a canonical representation of URLs.
 
     File URLs are converted to internal format with the help of \Ref{GOS} class.

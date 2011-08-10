@@ -452,7 +452,7 @@ void DocumentWidget::mousePressEvent ( TQMouseEvent * e )
   if (e->button() == Qt::LeftButton) {
     if (pageData->hyperLinkList.size() > 0)
       for(unsigned int i = 0; i < pageData->hyperLinkList.size(); i++) {
-        if (pageData->hyperLinkList[i].box.tqcontains(e->pos())) {
+        if (pageData->hyperLinkList[i].box.contains(e->pos())) {
           emit(localLink(pageData->hyperLinkList[i].linkText));
           return;
         }
@@ -537,7 +537,7 @@ void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
     int lastUnderlinedLink = indexOfUnderlinedLink;
     // go through hyperlinks
     for(unsigned int i = 0; i < pageData->hyperLinkList.size(); i++) {
-      if (pageData->hyperLinkList[i].box.tqcontains(e->pos())) {
+      if (pageData->hyperLinkList[i].box.contains(e->pos())) {
         clearStatusBarTimer.stop();
         setCursor(pointingHandCursor);
         TQString link = pageData->hyperLinkList[i].linkText;

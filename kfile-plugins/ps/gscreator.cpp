@@ -234,7 +234,7 @@ bool GSCreator::create(const TQString &path, int width, int height, TQImage &img
   }
 
   const bool is_encapsulated = no_dvi &&
-    (path.tqfind(TQRegExp("\\.epsi?$", false, false)) > 0) &&
+    (path.find(TQRegExp("\\.epsi?$", false, false)) > 0) &&
     (dsc.bbox()->width() > 0) && (dsc.bbox()->height() > 0) && 
     (dsc.page_count() <= 1);
 

@@ -302,7 +302,7 @@ PMLibraryHandle::PMResult PMLibraryHandle::createNewSubLibrary( const TQString /
    if( m_readOnly )
       return PMLibraryHandle::ReadOnlyLib;
 
-   if( m_libraries.tqfind( subLibName ) )
+   if( m_libraries.find( subLibName ) )
       return PMLibraryHandle::ExistingDir;
 
    s = s+ "/libXXXXXX";
@@ -364,14 +364,14 @@ PMLibraryHandle::PMResult PMLibraryHandle::changeParentLibrary( const TQString& 
    {
       PMLibraryHandle lib = PMLibraryHandle( *itr.current( ) );
       lib.changeParentLibrary( newPath );
-      m_libraries.tqreplace( itr.currentKey( ), new TQString( newPath + "/" + lib.path( ) ) );
+      m_libraries.replace( itr.currentKey( ), new TQString( newPath + "/" + lib.path( ) ) );
    }
 
    PMLibraryHandle::EntryIterator objItr( m_objects );
    for( ; objItr.current( ); ++objItr )
    {
       TQString test = newPath + "/" + objItr.current( )->section( '/', -1 );
-      m_objects.tqreplace( objItr.currentKey( ), new TQString( newPath + "/" + objItr.current( )->section( '/', -1 ) ) );
+      m_objects.replace( objItr.currentKey( ), new TQString( newPath + "/" + objItr.current( )->section( '/', -1 ) ) );
    }
 
    saveLibraryInfo( );

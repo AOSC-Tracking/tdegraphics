@@ -549,7 +549,7 @@ void kpToolWidgetBase::mousePressEvent (TQMouseEvent *e)
     {
         for (int j = 0; j < (int) m_pixmapRects [i].count (); j++)
         {
-            if (m_pixmapRects [i][j].tqcontains (e->pos ()))
+            if (m_pixmapRects [i][j].contains (e->pos ()))
             {
                 setSelected (i, j);
                 e->accept ();

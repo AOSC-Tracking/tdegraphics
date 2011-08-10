@@ -304,9 +304,9 @@ bool PMParser::insertChild( PMObject* child, PMObject* tqparent )
 void PMParser::checkID( PMDeclare* decl )
 {
    PMSymbolTable* st = m_pPart->symbolTable( );
-   PMSymbol* s = m_pLocalST.tqfind( decl->id( ) );
+   PMSymbol* s = m_pLocalST.find( decl->id( ) );
    if( !s )
-      s = st->tqfind( decl->id( ) );
+      s = st->find( decl->id( ) );
    
    if( s )
    {
@@ -336,7 +336,7 @@ void PMParser::checkID( PMDeclare* decl )
 void PMParser::checkID( const TQString& id, const PMValue& v )
 {
    PMSymbolTable* st = m_pPart->symbolTable( );
-   PMSymbol* s = m_pLocalST.tqfind( id );
+   PMSymbol* s = m_pLocalST.find( id );
    
    if( s )
    {
@@ -374,9 +374,9 @@ PMDeclare* PMParser::checkLink( const TQString& id )
    bool ok = false;
 
    // is object declared?
-   PMSymbol* s = m_pLocalST.tqfind( id );
+   PMSymbol* s = m_pLocalST.find( id );
    if( !s )
-      s = t->tqfind( id );
+      s = t->find( id );
    
    if( !s )
       printError( i18n( "Undefined object \"%1\"." ).tqarg( id ) );
@@ -386,7 +386,7 @@ PMDeclare* PMParser::checkLink( const TQString& id )
    {
       // the object is declared
       // is the id already in m_okDeclares
-      bool* lok = m_okDeclares.tqfind( id );
+      bool* lok = m_okDeclares.find( id );
       if( lok )
          ok = true;
       else
@@ -425,9 +425,9 @@ PMDeclare* PMParser::checkLink( const TQString& id )
 
 PMSymbol* PMParser::getSymbol( const TQString& id ) const
 {
-   PMSymbol* s = m_pLocalST.tqfind( id );
+   PMSymbol* s = m_pLocalST.find( id );
    if( !s )
-      s = m_pPart->symbolTable( )->tqfind( id );
+      s = m_pPart->symbolTable( )->find( id );
    return s;
 }
 

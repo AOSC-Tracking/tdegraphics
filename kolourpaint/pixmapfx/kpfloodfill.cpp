@@ -196,7 +196,7 @@ bool kpFloodFill::prepare ()
     kdDebug () << "\tperforming NOP check" << endl;
 #endif
 
-    // get the color we need to tqreplace
+    // get the color we need to replace
     if (m_processedColorSimilarity == 0 && m_color == m_colorToChange)
     {
         // need to do absolutely nothing (this is a significant optimisation

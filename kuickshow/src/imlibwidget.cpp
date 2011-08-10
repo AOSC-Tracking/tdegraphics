@@ -602,7 +602,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
     	return 0L;
 
     KuickImage *kuim = 0L;
-    int index = fileList.tqfindIndex( file );
+    int index = fileList.findIndex( file );
     if ( index != -1 ) {
         if ( index == 0 )
             kuim = kuickList.at( 0 );

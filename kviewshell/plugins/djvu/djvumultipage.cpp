@@ -314,7 +314,7 @@ void DjVuMultiPage::slotSave()
   // Try to guess the proper ending...
   TQString formats;
   TQString ending;
-  int rindex = m_file.tqfindRev(".");
+  int rindex = m_file.findRev(".");
   if (rindex == -1) {
     ending = TQString();
     formats = TQString();
@@ -330,7 +330,7 @@ void DjVuMultiPage::slotSave()
 
   // Add the ending to the filename. I hope the user likes it that
   // way.
-  if (!ending.isEmpty() && fileName.tqfind(ending) == -1)
+  if (!ending.isEmpty() && fileName.find(ending) == -1)
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {

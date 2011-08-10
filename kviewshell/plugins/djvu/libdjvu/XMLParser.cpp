@@ -301,7 +301,7 @@ lt_XMLParser::Impl::ChangeAnno(
   const GP<DjVuAnno> ganno(DjVuAnno::create());
   DjVuAnno &anno=*ganno;
   GPosition map_pos;
-  map_pos=map.tqcontains(areatag);
+  map_pos=map.contains(areatag);
   if(dfile.contains_anno())
   {
     GP<ByteStream> annobs=dfile.get_merged_anno();
@@ -350,7 +350,7 @@ lt_XMLParser::Impl::ChangeAnno(
         // with no matching y).
         // ******************************************************
         {
-          GPosition coords_pos=args.tqcontains("coords");
+          GPosition coords_pos=args.contains("coords");
           if(coords_pos)
           {
             GList<int> raw_coords;
@@ -375,7 +375,7 @@ lt_XMLParser::Impl::ChangeAnno(
         }
         GUTF8String tqshape;
         {
-          GPosition tqshape_pos=args.tqcontains("tqshape");
+          GPosition tqshape_pos=args.contains("tqshape");
           if(tqshape_pos)
           {
             tqshape=args[tqshape_pos];
@@ -494,23 +494,23 @@ lt_XMLParser::Impl::ChangeAnno(
         if(a)
         {
           GPosition pos;
-          if((pos=args.tqcontains("href")))
+          if((pos=args.contains("href")))
           {
             a->url=args[pos];
           }
-          if((pos=args.tqcontains("target")))
+          if((pos=args.contains("target")))
           {
             a->target=args[pos];
           }
-          if((pos=args.tqcontains("alt")))
+          if((pos=args.contains("alt")))
           {
             a->comment=args[pos];
           }
-          if((pos=args.tqcontains("bordertype")))
+          if((pos=args.contains("bordertype")))
           {
             GUTF8String b=args[pos];
             static const GMap<GUTF8String,GMapArea::BorderType> typeMap=BorderTypeMap();
-            if((pos=typeMap.tqcontains(b)))
+            if((pos=typeMap.contains(b)))
             {
               a->border_type=typeMap[pos];
             }else
@@ -518,16 +518,16 @@ lt_XMLParser::Impl::ChangeAnno(
               G_THROW( (ERR_MSG("XMLAnno.unknown_border") "\t")+b );
             }
           }
-          a->border_always_visible=!!args.tqcontains("visible");
-          if((pos=args.tqcontains("bordercolor")))
+          a->border_always_visible=!!args.contains("visible");
+          if((pos=args.contains("bordercolor")))
           {
             a->border_color=convertToColor(args[pos]);
           }
-          if((pos=args.tqcontains("highlight")))
+          if((pos=args.contains("highlight")))
           {
             a->hilite_color=convertToColor(args[pos]);
           }
-          if((pos=args.tqcontains("border")))
+          if((pos=args.contains("border")))
           {
              a->border_width=args[pos].toInt(); //atoi(args[pos]);
           }
@@ -548,7 +548,7 @@ lt_XMLParser::Impl::get_file(const GURL &url,GUTF8String id)
   GP<DjVuDocument> doc;
   GCriticalSectionLock lock(&xmlparser_lock);
   {
-    GPosition pos=m_docs.tqcontains(url.get_string());
+    GPosition pos=m_docs.contains(url.get_string());
     if(pos)
     {
       doc=m_docs[pos];
@@ -572,10 +572,10 @@ lt_XMLParser::Impl::get_file(const GURL &url,GUTF8String id)
     }
   }
   const GURL fileurl(doc->id_to_url(id));
-  GPosition dpos(m_files.tqcontains(fileurl.get_string()));
+  GPosition dpos(m_files.contains(fileurl.get_string()));
   if(!dpos)
   {
-    if(!doc->get_id_list().tqcontains(id))
+    if(!doc->get_id_list().contains(id))
     {
       G_THROW( ERR_MSG("XMLAnno.bad_page") );
     }
@@ -622,7 +622,7 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
     GURL codebase;
     {
       DEBUG_MSG("Setting up codebase... m_codebase = " << m_codebase << "\n");
-      GPosition codebasePos=args.tqcontains("codebase");
+      GPosition codebasePos=args.contains("codebase");
       // If user specified a codebase attribute, assume it is correct (absolute URL):
       //  the GURL constructor will throw an exception if it isn't
       if(codebasePos)
@@ -642,11 +642,11 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
     //  URL (for now, just a path and file name).  If it's absolute,
     //  our GURL will adequately wrap it.  If it's relative, we need
     //  to use the codebase attribute to form an absolute URL first.
-    GPosition datapos=args.tqcontains("data");
+    GPosition datapos=args.contains("data");
     if(datapos)
     {
       bool isDjVuType=false;
-      GPosition typePos(args.tqcontains("type"));
+      GPosition typePos(args.contains("type"));
       if(typePos)
       {
         if(args[typePos] != mimetype)
@@ -659,12 +659,12 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
       const GURL url=GURL::UTF8(args[datapos],(args[datapos][0] == '/')?codebase.base():codebase);
       int width;
       {
-        GPosition widthPos=args.tqcontains("width");
+        GPosition widthPos=args.contains("width");
         width=(widthPos)?args[widthPos].toInt():0;
       }
       int height;
       {
-        GPosition heightPos=args.tqcontains("height");
+        GPosition heightPos=args.contains("height");
         height=(heightPos)?args[heightPos].toInt():0;
       }
       GUTF8String gamma;
@@ -672,17 +672,17 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
       GUTF8String page;
       GUTF8String do_ocr;
       {
-        GPosition paramPos(GObject.tqcontains(paramtag));
+        GPosition paramPos(GObject.contains(paramtag));
         if(paramPos)
         {
           const GPList<lt_XMLTags> Params(GObject[paramPos]);
           for(GPosition loc=Params;loc;++loc)
           {
             const GMap<GUTF8String,GUTF8String> &pargs=Params[loc]->get_args();
-            GPosition namepos=pargs.tqcontains("name");
+            GPosition namepos=pargs.contains("name");
             if(namepos)
             {
-              GPosition valuepos=pargs.tqcontains("value");
+              GPosition valuepos=pargs.contains("value");
               if(valuepos)
               {
                 const GUTF8String name=pargs[namepos].downcase();
@@ -691,19 +691,19 @@ lt_XMLParser::Impl::parse(const lt_XMLTags &tags)
                 {
                   GMap<GUTF8String,GUTF8String> args;
                   lt_XMLTags::ParseValues(value,args,true);
-                  if(args.tqcontains("page"))
+                  if(args.contains("page"))
                   {
                     page=args["page"];
                   }
-                  if(args.tqcontains("dpi"))
+                  if(args.contains("dpi"))
                   {
                     dpi=args["dpi"];
                   }
-                  if(args.tqcontains("gamma"))
+                  if(args.contains("gamma"))
                   {
                     gamma=args["gamma"];
                   }
-                  if(args.tqcontains("ocr"))
+                  if(args.contains("ocr"))
                   {
                     do_ocr=args["ocr"];
                   }
@@ -749,14 +749,14 @@ lt_XMLParser::Impl::parse_anno(
 {
   GP<lt_XMLTags> map;
   {
-    GPosition usemappos=GObject.get_args().tqcontains("usemap");
+    GPosition usemappos=GObject.get_args().contains("usemap");
     if(usemappos)
     {
       const GUTF8String mapname(GObject.get_args()[usemappos]);
-      GPosition mappos=Maps.tqcontains(mapname);
+      GPosition mappos=Maps.contains(mapname);
       if(!mappos)
       {
-        G_THROW((ERR_MSG("XMLAnno.map_tqfind") "\t")+mapname );
+        G_THROW((ERR_MSG("XMLAnno.map_find") "\t")+mapname );
       }else
       {
         map=Maps[mappos];
@@ -838,7 +838,7 @@ make_child_layer(
   default_rect.ymin=max(tqparent.rect.ymax,tqparent.rect.ymin);
   default_rect.ymax=min(tqparent.rect.ymax,tqparent.rect.ymin);
   // Now if there are coordinates, use those.
-  GPosition pos(tag.get_args().tqcontains("coords"));
+  GPosition pos(tag.get_args().contains("coords"));
   if(pos)
   {
     GList<int> rectArgs;
@@ -1062,7 +1062,7 @@ lt_XMLParser::Impl::parse_text(
   const lt_XMLTags &GObject,
   DjVuFile &dfile )
 {
-  GPosition textPos = GObject.tqcontains(hiddentexttag);
+  GPosition textPos = GObject.contains(hiddentexttag);
   if(textPos)
   {
     // loop through the hidden text - there should only be one 
@@ -1078,7 +1078,7 @@ lt_XMLParser::Impl::parse_meta(
   const lt_XMLTags &GObject,
   DjVuFile &dfile )
 {
-  GPosition metaPos = GObject.tqcontains(metadatatag);
+  GPosition metaPos = GObject.contains(metadatatag);
   if(metaPos)
   {
     // loop through the hidden text - there should only be one 

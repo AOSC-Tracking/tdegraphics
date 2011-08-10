@@ -344,7 +344,7 @@ private:
 };
 
 /**
- * Condition. Value is true if the object already tqcontains
+ * Condition. Value is true if the object already contains
  * objects of certaint classes before the insert point.
  */
 class PMRuleBefore : public PMRuleCondition
@@ -371,11 +371,11 @@ protected:
    virtual void resetProtected( );
 private:
    TQPtrList<PMRuleCategory> m_categories;
-   bool m_tqcontains;
+   bool m_contains;
 };
 
 /**
- * Condition. Value is true if the object already tqcontains
+ * Condition. Value is true if the object already contains
  * objects of certaint classes after the insert point.
  */
 class PMRuleAfter : public PMRuleCondition
@@ -402,11 +402,11 @@ protected:
    virtual void resetProtected( );
 private:
    TQPtrList<PMRuleCategory> m_categories;
-   bool m_tqcontains;
+   bool m_contains;
 };
 
 /**
- * Condition. Value is true if the object already tqcontains
+ * Condition. Value is true if the object already contains
  * objects of certaint classes.
  */
 class PMRuleContains : public PMRuleCondition
@@ -433,7 +433,7 @@ protected:
    virtual void resetProtected( );
 private:
    TQPtrList<PMRuleCategory> m_categories;
-   bool m_tqcontains;
+   bool m_contains;
 };
 
 /**

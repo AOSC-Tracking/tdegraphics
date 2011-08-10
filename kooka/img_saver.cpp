@@ -176,7 +176,7 @@ void FormatDialog::check_subformat( const TQString & format )
 
 void FormatDialog::setSelectedFormat( TQString fo )
 {
-   TQListBoxItem *item = lb_format->tqfindItem( fo );
+   TQListBoxItem *item = lb_format->findItem( fo );
 
    if( item )
    {
@@ -728,7 +728,7 @@ TQString ImgSaver::extension( const KURL& url )
 {
    TQString extension = url.fileName();
 
-   int dotPos = extension.tqfindRev( '.' );
+   int dotPos = extension.findRev( '.' );
    if( dotPos > 0 )
    {
       int len = extension.length();

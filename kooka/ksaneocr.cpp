@@ -890,7 +890,7 @@ bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
 			{
 			    /* Read one line per character */
 			    TQString charLine = stream.readLine();
-			    int semiPos = charLine.tqfind(';');
+			    int semiPos = charLine.find(';');
 			    if( semiPos == -1 )
 			    {
 				kdDebug(28000) << "invalid line: " << charLine << endl;
@@ -906,7 +906,7 @@ bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
 
                                 // find the amount of alternatives.
                                 int altCount = 0;
-                                int h = results.tqfind(',');  // search the first comma
+                                int h = results.find(',');  // search the first comma
                                 if( h > -1 ) {
                                     // kdDebug(28000) << "Results of count search: " << results.left(h) << endl;
                                     altCount = results.left(h).toInt();

@@ -181,7 +181,7 @@ void KSVGCanvas::resize(unsigned int w, unsigned int h)
 						{
 							for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 							{
-								if(!drawables.tqcontains(*it))
+								if(!drawables.contains(*it))
 									drawables.append(*it);
 							}
 						}
@@ -203,7 +203,7 @@ void KSVGCanvas::resize(unsigned int w, unsigned int h)
 						{
 							for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 							{
-								if(!drawables.tqcontains(*it))
+								if(!drawables.contains(*it))
 									drawables.append(*it);
 							}
 						}
@@ -324,11 +324,11 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 	EFontStyle fontStyle = style->getFontStyle();
 	TQString fontWeight = style->getFontWeight();
 
-	if(fontWeight.tqcontains("bold"))
+	if(fontWeight.contains("bold"))
 		weight |= FC_WEIGHT_DEMIBOLD;
-	if(fontWeight.tqcontains("bolder"))
+	if(fontWeight.contains("bolder"))
 		weight |= FC_WEIGHT_BOLD;
-	if(fontWeight.tqcontains("lighter"))
+	if(fontWeight.contains("lighter"))
 		weight |= FC_WEIGHT_LIGHT;
 
 	bool ok = true;
@@ -364,7 +364,7 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 
 void KSVGCanvas::tqinvalidate(CanvasItem *item, bool recalc)
 {
-	if(m_chunksByItem.tqfind(item) != m_chunksByItem.end())
+	if(m_chunksByItem.find(item) != m_chunksByItem.end())
 	{
 		if(recalc)
 		{
@@ -376,7 +376,7 @@ void KSVGCanvas::tqinvalidate(CanvasItem *item, bool recalc)
 		for(it.toFirst(); it.current(); ++it)
 		{
 			(*it)->setDirty();
-			if(!m_dirtyChunks.tqcontains(*it))
+			if(!m_dirtyChunks.contains(*it))
 				m_dirtyChunks.append(*it);
 		}
 	}
@@ -429,7 +429,7 @@ void KSVGCanvas::removeFromChunks(CanvasItem *item)
 	for(it.toFirst(); it.current(); ++it)
 	{
 		(*it)->remove(item);
-		if(!m_dirtyChunks.tqcontains(*it))
+		if(!m_dirtyChunks.contains(*it))
 			m_dirtyChunks.append(*it);
 	}
 	m_chunksByItem.remove(item);
@@ -540,7 +540,7 @@ void KSVGCanvas::update(const TQPoint &panPoint, bool erase)
 			{
 				for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 				{
-					if(!drawables.tqcontains(*it))
+					if(!drawables.contains(*it))
 						drawables.append(*it);
 				}
 			}
@@ -607,7 +607,7 @@ void KSVGCanvas::update(float zoomFactor)
 			{
 				for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 				{
-					if(!drawables.tqcontains(*it))
+					if(!drawables.contains(*it))
 						drawables.append(*it);
 				}
 			}
@@ -666,7 +666,7 @@ void KSVGCanvas::update()
 		for(CanvasItemList::ConstIterator it = chunk->list().begin(); it != chunk->list().end(); ++it)
 		{
 //			kdDebug(26005) << k_funcinfo << " Checking: " << *it << endl;
-			if(!drawables.tqcontains(*it))
+			if(!drawables.contains(*it))
 			{
 //				kdDebug(26005) << k_funcinfo << " Yes, appending to update list!" << endl;
 				drawables.append(*it);
@@ -724,7 +724,7 @@ CanvasItemList KSVGCanvas::collisions(const TQPoint &p, bool exact) const
 	{
 		for(CanvasItemList::Iterator it = list.begin(); it != list.end(); ++it)
 		{
-			if((*it)->fillContains(p) || (*it)->strokeContains(p) || (*it)->bbox().tqcontains(p))
+			if((*it)->fillContains(p) || (*it)->strokeContains(p) || (*it)->bbox().contains(p))
 				result.append(*it);
 		}
 

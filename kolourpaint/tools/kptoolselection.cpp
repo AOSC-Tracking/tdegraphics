@@ -141,7 +141,7 @@ TQString kpToolSelection::haventBegunDrawUserMessage () const
         else
             return i18n ("Left drag to scale selection.");
     }
-    else if (sel && sel->tqcontains (m_currentPoint))
+    else if (sel && sel->contains (m_currentPoint))
     {
         if (m_mode == Text)
         {
@@ -300,7 +300,7 @@ void kpToolSelection::beginDraw ()
             }
             viewManager ()->restoreQueueUpdates ();
         }
-        else if (sel->tqcontains (m_currentPoint))
+        else if (sel->contains (m_currentPoint))
         {
             if (m_mode == Text && onSelectionToSelectText () && !controlOrShiftPressed ())
             {
@@ -408,7 +408,7 @@ const TQCursor &kpToolSelection::cursor () const
 
         return TQt::arrowCursor;
     }
-    else if (sel && sel->tqcontains (m_currentPoint))
+    else if (sel && sel->contains (m_currentPoint))
     {
     #if DEBUG_KP_TOOL_SELECTION && 1
         kdDebug () << "\tsel contains currentPoint; selecting text? "

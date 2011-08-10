@@ -186,7 +186,7 @@ void PMAddCommand::undo( PMCommandManager* theManager )
                if( decl )
                {
                   m_links.append( lit.current( ) );
-                  if( !m_linkedDeclares.tqcontainsRef( decl ) )
+                  if( !m_linkedDeclares.containsRef( decl ) )
                      m_linkedDeclares.append( decl );
                }
             }

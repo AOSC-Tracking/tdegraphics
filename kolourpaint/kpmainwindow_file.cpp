@@ -548,7 +548,7 @@ bool kpMainWindow::save (bool localOnly)
 {
     if (m_document->url ().isEmpty () ||
         KImageIO::mimeTypes (KImageIO::Writing)
-            .tqfindIndex (m_document->saveOptions ()->mimeType ()) < 0 ||
+            .findIndex (m_document->saveOptions ()->mimeType ()) < 0 ||
         // SYNC: kpDocument::getPixmapFromFile() can't determine quality
         //       from file so it has been set initially to an invalid value.
         (m_document->saveOptions ()->mimeTypeHasConfigurableQuality () &&
@@ -639,7 +639,7 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
     }
 
 #define MIME_TYPE_IS_VALID() (!fdSaveOptions.mimeTypeIsInvalid () &&                 \
-                              mimeTypes.tqfindIndex (fdSaveOptions.mimeType ()) >= 0)
+                              mimeTypes.findIndex (fdSaveOptions.mimeType ()) >= 0)
     if (!MIME_TYPE_IS_VALID ())
     {
     #if DEBUG_KP_MAIN_WINDOW
@@ -658,9 +658,9 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
             kdDebug () << "\tmimeType=" << fdSaveOptions.mimeType ()
                        << " not valid, get hardcoded" << endl;
         #endif
-            if (mimeTypes.tqfindIndex ("image/png") > -1)
+            if (mimeTypes.findIndex ("image/png") > -1)
                 fdSaveOptions.setMimeType ("image/png");
-            else if (mimeTypes.tqfindIndex ("image/x-bmp") > -1)
+            else if (mimeTypes.findIndex ("image/x-bmp") > -1)
                 fdSaveOptions.setMimeType ("image/x-bmp");
             else
                 fdSaveOptions.setMimeType (mimeTypes.first ());
@@ -964,7 +964,7 @@ void kpMainWindow::sendFilenameToPrinter (KPrinter *printer)
         int dot;
 
         TQString fileName = url.fileName ();
-        dot = fileName.tqfindRev ('.');
+        dot = fileName.findRev ('.');
 
         // file.ext but not .hidden-file?
         if (dot > 0)

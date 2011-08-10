@@ -396,7 +396,7 @@ static bool mimeTypeSupportsProperty (const TQString &mimeType,
     const TQStringList mimeTypeList = mimeTypesSupportingProperty (
         property, defaultMimeTypesWithPropertyList);
 
-    return mimeTypeList.tqcontains (mimeType);
+    return mimeTypeList.contains (mimeType);
 }
 
 

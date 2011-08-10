@@ -404,7 +404,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
                        << endl; 
         #endif
         
-            if (vuc->clipRegion ().tqcontains (viewPoint))
+            if (vuc->clipRegion ().contains (viewPoint))
             {
                 const TQPoint globalPoint =
                     kpWidgetMapper::toGlobal (vuc, viewPoint);

@@ -259,7 +259,7 @@ bool KViewViewer::openURL( const KURL & url )
 		// Use same extension as remote file. This is important for mimetype-determination (e.g. koffice)
 		TQString extension;
 		TQString fileName = url.fileName();
-		int extensionPos = fileName.tqfindRev( '.' );
+		int extensionPos = fileName.findRev( '.' );
 		if ( extensionPos != -1 )
 			extension = fileName.mid( extensionPos ); // keep the '.'
 		delete m_pTempFile;
@@ -645,7 +645,7 @@ void KViewViewer::setZoom( const TQString & newZoom )
 	kdDebug( 4610 ) << k_funcinfo << newZoom << endl;
 	double zoom;
 	TQString z = newZoom;
-	z.remove( z.tqfind( '%' ), 1 );
+	z.remove( z.find( '%' ), 1 );
 	if( newZoom == "33%" )
 		zoom = 1.0 / 3.0;
 	else
@@ -667,14 +667,14 @@ void KViewViewer::updateZoomMenu( double zoom )
 		TQStringList itemsList = m_paZoom->items();
 		for( TQStringList::Iterator it = itemsList.begin(); it != itemsList.end(); ++it )
 		{
-			z = ( *it ).tqreplace( TQRegExp( "%" ), "" );
+			z = ( *it ).replace( TQRegExp( "%" ), "" );
 			z = z.simplifyWhiteSpace();
 			val = z.toInt( &ok );
-			if( ok && val > 0 && list.tqcontains( val ) == 0 )
+			if( ok && val > 0 && list.contains( val ) == 0 )
 				list << val;
 		}
 		val = TQString::number( zoom * 100, 'f', 0 ).toInt(); // round/lround from math.h doesn't work - dunno
-		if( list.tqcontains( val ) == 0 )
+		if( list.contains( val ) == 0 )
 			list.append( val );
 
 		qHeapSort( list );
@@ -687,7 +687,7 @@ void KViewViewer::updateZoomMenu( double zoom )
 	// first look if it's a new value (not in the list yet)
 	TQString z = TQString( "%1%" ).tqarg( zoom * 100, 0, 'f', 0 );
 	TQStringList items = m_paZoom->items();
-	int idx = items.tqfindIndex( z );
+	int idx = items.findIndex( z );
 	if( -1 == idx )
 	{
 		// not found XXX: remove when done

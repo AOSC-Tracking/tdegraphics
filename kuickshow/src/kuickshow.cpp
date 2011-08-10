@@ -319,7 +319,7 @@ void KuickShow::initGUI( const KURL& startDir )
     TQPopupMenu *mainPopup = mainActionMenu->popupMenu();
     int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
     int separatorId = mainPopup->idAt( sortingIndex + 1 );
-    TQMenuItem *separatorItem = mainPopup->tqfindItem( separatorId );
+    TQMenuItem *separatorItem = mainPopup->findItem( separatorId );
     if ( separatorItem && separatorItem->isSeparator() )
         mainPopup->removeItem( separatorId );
     mainActionMenu->remove( sortingMenu );

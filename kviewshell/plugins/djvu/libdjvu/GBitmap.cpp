@@ -348,7 +348,7 @@ GBitmap::donate_data(unsigned char *data, int w, int h)
   ncolumns = w;
   border = 0;
   bytes_per_row = w;
-  gbytes_data.tqreplace(data,w*h);
+  gbytes_data.replace(data,w*h);
   bytes = bytes_data;
   rlelength = 0;
 }
@@ -363,7 +363,7 @@ GBitmap::donate_rle(unsigned char *rledata, unsigned int rledatalen, int w, int 
   border = 0;
   bytes_per_row = w;
 //  rle = rledata;
-  grle.tqreplace(rledata,rledatalen);
+  grle.replace(rledata,rledatalen);
   rlelength = rledatalen;
 }
 

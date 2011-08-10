@@ -75,7 +75,7 @@ void SVGFitToViewBoxImpl::parseViewBox(const TQString &s)
 
 	// allow for viewbox def with ',' or whitespace
 	TQString viewbox(s);
-	TQStringList points = TQStringList::split(' ', viewbox.tqreplace(',', ' ').simplifyWhiteSpace());
+	TQStringList points = TQStringList::split(' ', viewbox.replace(',', ' ').simplifyWhiteSpace());
 
 	viewBox()->baseVal()->setX(points[0].toFloat());
 	viewBox()->baseVal()->setY(points[1].toFloat());

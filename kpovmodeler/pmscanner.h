@@ -49,13 +49,13 @@ public:
    /**
     * Returns the token constant for the key if found, otherwise -1
     */
-   int operator[] ( const char* key ) const { return tqfind( key ); }
+   int operator[] ( const char* key ) const { return find( key ); }
    /**
     * Returns the token constant for the key if found, otherwise -1
     */
-   int tqfind( const char* key ) const
+   int find( const char* key ) const
    {
-      int* result = TQAsciiDict<int>::tqfind( key );
+      int* result = TQAsciiDict<int>::find( key );
       if( result )
          return *result;
       return -1;

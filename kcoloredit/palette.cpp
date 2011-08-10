@@ -108,14 +108,14 @@ bool Palette::load(TQTextStream& stream, bool loadName /* = true */) {
 	int lineNum = 0;
 	while (!stream.atEnd()) {
 		TQString string = stream.readLine().append(' ');
-		if(string.tqfind( TQRegExp("[^\\s]") ) == -1 ||
+		if(string.find( TQRegExp("[^\\s]") ) == -1 ||
 			string.stripWhiteSpace().at( 0 ) == '#' ||
 			( loadName && lineNum == 0 )) {
 			if(loadName && lineNum == 0)
 				setName(string.stripWhiteSpace());
 		} else {
 			Color* newColor = new Color();
-			int position = string.tqfind(TQRegExp( "[^\\s]" ));
+			int position = string.find(TQRegExp( "[^\\s]" ));
 			for(int componentIndex = 0; componentIndex < Color::COMPONENTS_NUM;
 				++componentIndex) {
 				if(position == -1) {
@@ -123,7 +123,7 @@ bool Palette::load(TQTextStream& stream, bool loadName /* = true */) {
 					result = false;
 					break;
 				}
-				int endPosition = string.tqfind(TQRegExp( "\\s" ), position);
+				int endPosition = string.find(TQRegExp( "\\s" ), position);
 				if(endPosition == -1) {
 					m_errorString = i18n("Invalid format");
 					result = false;
@@ -139,7 +139,7 @@ bool Palette::load(TQTextStream& stream, bool loadName /* = true */) {
 					break;
 				}
 				newColor->setComponent(componentIndex, componentValue);
-				position = string.tqfind(TQRegExp( "[^\\s]" ), endPosition);
+				position = string.find(TQRegExp( "[^\\s]" ), endPosition);
 			}
 			if(!result) {
 				delete newColor;

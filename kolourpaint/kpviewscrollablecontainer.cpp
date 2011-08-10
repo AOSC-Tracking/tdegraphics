@@ -898,23 +898,23 @@ void kpViewScrollableContainer::recalculateStatusMessage ()
     //
     if (kpWidgetMapper::toGlobal (this,
                                   TQRect (0, 0, visibleWidth (), visibleHeight ()))
-            .tqcontains (TQCursor::pos ()))
+            .contains (TQCursor::pos ()))
     {
         if (m_bottomRightGrip->isShown () &&
             m_bottomRightGrip->hotRect (true/*to global*/)
-                .tqcontains (TQCursor::pos ()))
+                .contains (TQCursor::pos ()))
         {
             m_bottomRightGrip->setUserMessage (i18n ("Left drag the handle to resize the image."));
         }
         else if (m_bottomGrip->isShown () &&
                 m_bottomGrip->hotRect (true/*to global*/)
-                    .tqcontains (TQCursor::pos ()))
+                    .contains (TQCursor::pos ()))
         {
             m_bottomGrip->setUserMessage (i18n ("Left drag the handle to resize the image."));
         }
         else if (m_rightGrip->isShown () &&
                 m_rightGrip->hotRect (true/*to global*/)
-                    .tqcontains (TQCursor::pos ()))
+                    .contains (TQCursor::pos ()))
         {
             m_rightGrip->setUserMessage (i18n ("Left drag the handle to resize the image."));
         }
@@ -1119,7 +1119,7 @@ bool kpViewScrollableContainer::beginDragScroll (const TQPoint &/*docPoint*/,
     bool stopDragScroll = true;
     bool scrolled = false;
 
-    if (!noDragScrollRect ().tqcontains (p))
+    if (!noDragScrollRect ().contains (p))
     {
         if (m_dragScrollTimer->isActive ())
         {

@@ -242,7 +242,7 @@ void PresentationWidget::mousePressEvent( TQMouseEvent * e )
             return;
 
         // handle clicking on top-right overlay
-        if ( m_overlayGeometry.tqcontains( e->pos() ) )
+        if ( m_overlayGeometry.contains( e->pos() ) )
         {
             overlayClick( e->pos() );
             return;
@@ -290,7 +290,7 @@ void PresentationWidget::mouseMoveEvent( TQMouseEvent * e )
         if ( e->y() <= (tqgeometry().top() + 1) )
             m_topBar->show();
         // handle "dragging the wheel" if clicking on its tqgeometry
-        else if ( e->state() == Qt::LeftButton && m_overlayGeometry.tqcontains( e->pos() ) )
+        else if ( e->state() == Qt::LeftButton && m_overlayGeometry.contains( e->pos() ) )
             overlayClick( e->pos() );
     }
 }
@@ -963,7 +963,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
 /** ONLY the TRANSITIONS GENERATION function from here on **/
 void PresentationWidget::initTransition( const KPDFPageTransition *transition )
 {
-    // if it's just a 'tqreplace' transition, tqrepaint the screen
+    // if it's just a 'replace' transition, tqrepaint the screen
     if ( transition->type() == KPDFPageTransition::Replace )
     {
         update();
@@ -1175,7 +1175,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
             m_transitionDelay = (int)( (totalTime * 1000) / steps );
         } break;
 
-            // dissolve: tqreplace 'random' rects
+            // dissolve: replace 'random' rects
         case KPDFPageTransition::Dissolve:
         {
             const int gridXsteps = 50;

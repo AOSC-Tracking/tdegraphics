@@ -112,7 +112,7 @@ class KColorEditDoc : public TQObject
 		/** Inserts a color at index */
 		void insert(int index, const Color& color);
 		/** Replaces a color at index */
-		void tqreplace(int index, const Color& color);
+		void replace(int index, const Color& color);
 
 	protected:
 		/** Sets an error string if an IO operation was unsuccesfull */

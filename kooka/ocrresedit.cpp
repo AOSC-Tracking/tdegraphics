@@ -75,11 +75,11 @@ void ocrResEdit::slSelectWord( int line, const ocrWord& word )
    if( line < paragraphs() )
    {
       TQString editLine = text(line);
-      int cnt = editLine.tqcontains( word);
+      int cnt = editLine.contains( word);
 
       if( cnt > 0 )
       {
-	 int pos = editLine.tqfind(word);
+	 int pos = editLine.find(word);
 	 setCursorPosition( line, pos );
 	 setSelection( line, pos, line, pos + word.length());
       }
@@ -96,11 +96,11 @@ void ocrResEdit::slReplaceWord( int line, const TQString& wordFrom,
     if( line < paragraphs() )
     {
         TQString editLine = text(line);
-        int cnt = editLine.tqcontains( wordFrom );
+        int cnt = editLine.contains( wordFrom );
 
         if( cnt > 0 )
         {
-            int pos = editLine.tqfind(wordFrom);
+            int pos = editLine.find(wordFrom);
             setSelection( line, pos, line, pos+wordFrom.length());
 
             TQColor saveCol = this->color();

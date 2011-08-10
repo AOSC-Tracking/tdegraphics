@@ -37,7 +37,7 @@ public:
 	/** Pastes a stream at index. Uses undo/redo history */
 	void paste(const int index, EDITABLE_STREAM& pasteStream);
 	/** Replaces a stream at index. Uses undo/redo history */
-	void tqreplace(const int index, EDITABLE_STREAM& replaceStream);
+	void replace(const int index, EDITABLE_STREAM& replaceStream);
 	/** @return Whether undo possible */
 	bool undoPossible();
 	/** @return Whether redo possible */
@@ -76,7 +76,7 @@ template <class EDITABLE_STREAM> void
 }
 
 template <class EDITABLE_STREAM> void
-	EditableStreamHistory<EDITABLE_STREAM>::tqreplace(const int index, EDITABLE_STREAM& replaceStream) {
+	EditableStreamHistory<EDITABLE_STREAM>::replace(const int index, EDITABLE_STREAM& replaceStream) {
 	m_editableStream->cut(index, replaceStream.length());
 	m_editableStream->paste(index, replaceStream);
 }

@@ -1538,14 +1538,14 @@ GUTF8String::fromEscaped( const GMap<GUTF8String,GUTF8String> ConvMap ) const
         }
       }else
       {  
-        GPosition map_entry = ConvMap.tqcontains( key );
+        GPosition map_entry = ConvMap.contains( key );
         if( map_entry )
         {                           // Found in the conversion map, substitute
           ret += ConvMap[map_entry];
         } else
         {
           static const GMap<GUTF8String,GUTF8String> &Basic = BasicMap();
-          GPosition map_entry = Basic.tqcontains( key );
+          GPosition map_entry = Basic.contains( key );
           if ( map_entry )
           {
             ret += Basic[map_entry];
@@ -1799,7 +1799,7 @@ GStringRep::rsearch(char const *ptr, int from) const
 }
 
 int
-GStringRep::tqcontains(const char accept[],int from) const
+GStringRep::contains(const char accept[],int from) const
 {
   if(from<0)
   {
@@ -1821,10 +1821,10 @@ GStringRep::tqcontains(const char accept[],int from) const
 }
 
 int
-GStringRep::rtqcontains(const char accept[],int from) const
+GStringRep::rcontains(const char accept[],int from) const
 {
   int retval=(-1);
-  while((from=tqcontains(accept,from)) >= 0)
+  while((from=contains(accept,from)) >= 0)
   {
     retval=from++;
   }
