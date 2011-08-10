@@ -35,8 +35,8 @@
 #include <klocale.h>
 
 
-kpToolWidgetOpaqueOrTransparent::kpToolWidgetOpaqueOrTransparent (TQWidget *tqparent, const char *name)
-    : kpToolWidgetBase (tqparent, name)
+kpToolWidgetOpaqueOrTransparent::kpToolWidgetOpaqueOrTransparent (TQWidget *parent, const char *name)
+    : kpToolWidgetBase (parent, name)
 {
     setInvertSelectedPixmap (false);
 

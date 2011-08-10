@@ -73,7 +73,7 @@ namespace KSVG
 		LibartPaintServer() : CanvasPaintServer() {}
 		virtual ~LibartPaintServer() {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox) = 0;
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox) = 0;
 
 		_ArtRender *createRenderer(TQRect rect, KSVGCanvas *c);
 	};
@@ -99,7 +99,7 @@ namespace KSVG
 	public:
 		LibartLinearGradient(SVGLinearGradientElementImpl *linear) : LibartGradient(linear), m_linear(linear) {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
 
 	protected:
 		SVGLinearGradientElementImpl *m_linear;
@@ -110,7 +110,7 @@ namespace KSVG
 	public:
 		LibartRadialGradient(SVGRadialGradientElementImpl *radial) : LibartGradient(radial), m_radial(radial) {}
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
 
 	protected:
 		SVGRadialGradientElementImpl *m_radial;
@@ -125,7 +125,7 @@ namespace KSVG
 		virtual void finalizePaintServer();
 		virtual void reference(const TQString &href);
 
-		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox);
+		virtual void render(KSVGCanvas *c, _ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox);
 
 	protected:
 		SVGPatternElementImpl *m_pattern;

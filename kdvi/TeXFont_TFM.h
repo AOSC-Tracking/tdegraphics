@@ -23,7 +23,7 @@ class fix_word {
 
 class TeXFont_TFM : public TeXFont {
  public:
-  TeXFont_TFM(TeXFontDefinition *tqparent);
+  TeXFont_TFM(TeXFontDefinition *parent);
   ~TeXFont_TFM();
   
   glyph* getGlyph(TQ_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=TQt::black);

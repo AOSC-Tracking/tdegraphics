@@ -56,7 +56,7 @@ PMFactory::~PMFactory( )
 
 KParts::Part* PMFactory::createPartObject( TQWidget* parentWidget,
                                      const char* widgetName,
-                                     TQObject* tqparent, const char* name,
+                                     TQObject* parent, const char* name,
                                      const char* classname,
                                      const TQStringList& /*args*/ )
 {
@@ -66,7 +66,7 @@ KParts::Part* PMFactory::createPartObject( TQWidget* parentWidget,
           || ( strcmp( classname, "KParts::ReadOnlyPart" ) == 0 ) );
 
    KParts::ReadWritePart *part = new PMPart( parentWidget, widgetName,
-                                             tqparent, name, readwrite );
+                                             parent, name, readwrite );
 
    return part;
 }

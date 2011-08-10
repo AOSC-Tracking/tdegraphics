@@ -464,7 +464,7 @@ struct _ksvgArtRgbAffineClipAlphaData
 	int src_width;
 	int src_height;
 	int src_rowstride;
-	const art_u8 *tqmask;
+	const art_u8 *mask;
 	int y0;
 };
 
@@ -592,7 +592,7 @@ ksvg_art_rgb_affine_clip_callback (void *callback_data, int y,
 }
 
 static
-void ksvg_art_rgb_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int x0, int x1, int y, const double inv[6],
+void ksvg_art_rgb_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *mask, int x0, int x1, int y, const double inv[6],
 	int alpha, const art_u8 *src, int src_rowstride, int src_width, int src_height)
 {
 	const art_u8 *src_p;
@@ -626,7 +626,7 @@ void ksvg_art_rgb_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int 
 			srcAlpha = alpha * src_p[3] + 0x80;
 			srcAlpha = (srcAlpha + (srcAlpha >> 8)) >> 8;
 
-			srcAlpha = (srcAlpha * *tqmask++) + 0x80;
+			srcAlpha = (srcAlpha * *mask++) + 0x80;
 			srcAlpha = (srcAlpha + (srcAlpha >> 8)) >> 8;
 
 			d = *dst_p;
@@ -656,7 +656,7 @@ void ksvg_art_rgb_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int 
 		else
 		{
 			dst_p += 3;
-			tqmask++;
+			mask++;
 		}
 	}
 }
@@ -680,7 +680,7 @@ ksvg_art_rgb_affine_clip_mask_callback (void *callback_data, int y,
 	x1 = data->x1;
 
 	alphatab = data->alphatab;
-	maskbuf = data->tqmask + (y - data->y0) * (x1 - x0);
+	maskbuf = data->mask + (y - data->y0) * (x1 - x0);
 
 	if(n_steps > 0)
 	{
@@ -853,7 +853,7 @@ ksvg_art_rgba_affine_clip_callback (void *callback_data, int y,
 }
 
 static
-void ksvg_art_rgba_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int x0, int x1, int y, const double inv[6],
+void ksvg_art_rgba_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *mask, int x0, int x1, int y, const double inv[6],
 	int alpha, const art_u8 *src, int src_rowstride, int src_width, int src_height)
 {
 	const art_u8 *src_p;
@@ -887,7 +887,7 @@ void ksvg_art_rgba_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int
 			srcAlpha = alpha * src_p[3] + 0x80;
 			srcAlpha = (srcAlpha + (srcAlpha >> 8)) >> 8;
 
-			srcAlpha = (srcAlpha * *tqmask++) + 0x80;
+			srcAlpha = (srcAlpha * *mask++) + 0x80;
 			srcAlpha = (srcAlpha + (srcAlpha >> 8)) >> 8;
 
 			d = *dst_p;
@@ -924,7 +924,7 @@ void ksvg_art_rgba_affine_clip_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int
 		else
 		{
 			dst_p += 4;
-			tqmask++;
+			mask++;
 		}
 	}
 }
@@ -948,7 +948,7 @@ ksvg_art_rgba_affine_clip_mask_callback (void *callback_data, int y,
 	x1 = data->x1;
 
 	alphatab = data->alphatab;
-	maskbuf = data->tqmask + (y - data->y0) * (x1 - x0);
+	maskbuf = data->mask + (y - data->y0) * (x1 - x0);
 
 	if(n_steps > 0)
 	{
@@ -1030,7 +1030,7 @@ void ksvg_art_rgb_affine_clip(const ArtSVP *svp, art_u8 *dst, int x0, int y0, in
 		const art_u8 *src,
 		int src_width, int src_height, int src_rowstride,
 		const double affine[6],
-		int alpha, const art_u8 *tqmask)
+		int alpha, const art_u8 *mask)
 {
 	ksvgArtRgbAffineClipAlphaData data;
 	int i;
@@ -1052,7 +1052,7 @@ void ksvg_art_rgb_affine_clip(const ArtSVP *svp, art_u8 *dst, int x0, int y0, in
 	data.x0 = x0;
 	data.x1 = x1;
 	data.y0 = y0;
-	data.tqmask = tqmask;
+	data.mask = mask;
 
 	art_affine_invert(data.inv, affine);
 
@@ -1063,14 +1063,14 @@ void ksvg_art_rgb_affine_clip(const ArtSVP *svp, art_u8 *dst, int x0, int y0, in
 
 	if(dst_channels == 3)
 	{
-		if(tqmask)
+		if(mask)
 			art_svp_render_aa(svp, x0, y0, x1, y1, ksvg_art_rgb_affine_clip_mask_callback, &data);
 		else
 			art_svp_render_aa(svp, x0, y0, x1, y1, ksvg_art_rgb_affine_clip_callback, &data);
 	}
 	else
 	{
-		if(tqmask)
+		if(mask)
 			art_svp_render_aa(svp, x0, y0, x1, y1, ksvg_art_rgba_affine_clip_mask_callback, &data);
 		else
 			art_svp_render_aa(svp, x0, y0, x1, y1, ksvg_art_rgba_affine_clip_callback, &data);
@@ -1228,7 +1228,7 @@ ksvg_art_rgb_texture_callback (void *callback_data, int y,
 }
 
 static
-void ksvg_art_rgb_texture_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int x0, int x1, int y, const double inv[6],
+void ksvg_art_rgb_texture_mask_run(art_u8 *dst_p, const art_u8 *mask, int x0, int x1, int y, const double inv[6],
 	int alpha, const art_u8 *src, int src_rowstride, int src_width, int src_height)
 {
 	const art_u8 *src_p;
@@ -1277,11 +1277,11 @@ void ksvg_art_rgb_texture_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int x0, 
 		/* Pattern source is in RGBA format, premultiplied.
 		 * alpha represents fill/stroke/group opacity.
 		 *
-		 * Multiply source alpha by 'alpha' and tqmask value then composite over.
-		 * For each channel, d = d + alpha * tqmask * (s - srcAlpha * d).
+		 * Multiply source alpha by 'alpha' and mask value then composite over.
+		 * For each channel, d = d + alpha * mask * (s - srcAlpha * d).
 		 */
 		
-		am = (alpha * *tqmask++) + 0x80;
+		am = (alpha * *mask++) + 0x80;
 		am = (am + (am >> 8)) >> 8;
 
 		srcAlpha = src_p[3];
@@ -1341,7 +1341,7 @@ ksvg_art_rgb_texture_mask_callback (void *callback_data, int y,
 
 	alphatab = data->alphatab;
 
-	maskbuf = data->tqmask + (y - data->y0) * (x1 - x0);
+	maskbuf = data->mask + (y - data->y0) * (x1 - x0);
 
 	if(n_steps > 0)
 	{
@@ -1545,7 +1545,7 @@ ksvg_art_rgba_texture_callback (void *callback_data, int y,
 }
 
 static
-void ksvg_art_rgba_texture_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int x0, int x1, int y, const double inv[6],
+void ksvg_art_rgba_texture_mask_run(art_u8 *dst_p, const art_u8 *mask, int x0, int x1, int y, const double inv[6],
 	int alpha, const art_u8 *src, int src_rowstride, int src_width, int src_height)
 {
 	const art_u8 *src_p;
@@ -1594,11 +1594,11 @@ void ksvg_art_rgba_texture_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int x0,
 		/* Pattern source is in RGBA format, premultiplied.
 		 * alpha represents fill/stroke/group opacity.
 		 *
-		 * Multiply source alpha by 'alpha' and tqmask value then composite over.
-		 * For each channel, d = d + alpha * tqmask * (s - srcAlpha * d).
+		 * Multiply source alpha by 'alpha' and mask value then composite over.
+		 * For each channel, d = d + alpha * mask * (s - srcAlpha * d).
 		 */
 		
-		am = (alpha * *tqmask++) + 0x80;
+		am = (alpha * *mask++) + 0x80;
 		am = (am + (am >> 8)) >> 8;
 
 		srcAlpha = src_p[3];
@@ -1636,7 +1636,7 @@ void ksvg_art_rgba_texture_mask_run(art_u8 *dst_p, const art_u8 *tqmask, int x0,
 
 		*dst_p++ = d + tmp2;
 
-		/* dstAlpha = dstAlpha + srcAlpha * alpha * tqmask * (1 - dstAlpha) */
+		/* dstAlpha = dstAlpha + srcAlpha * alpha * mask * (1 - dstAlpha) */
 		d = *dst_p;
 
 		tmp = srcAlpha * am + 0x80;
@@ -1670,7 +1670,7 @@ ksvg_art_rgba_texture_mask_callback (void *callback_data, int y,
 
 	alphatab = data->alphatab;
 
-	maskbuf = data->tqmask + (y - data->y0) * (x1 - x0);
+	maskbuf = data->mask + (y - data->y0) * (x1 - x0);
 
 	if(n_steps > 0)
 	{
@@ -1756,7 +1756,7 @@ void ksvg_art_rgb_texture(const ArtSVP *svp, art_u8 *dst, int x0, int y0, int x1
 		ArtFilterLevel level,
 		ArtAlphaGamma *alphaGamma,
 		int alpha,
-		const art_u8 *tqmask)
+		const art_u8 *mask)
 {
 	ksvgArtRgbAffineClipAlphaData data;
 	int i;
@@ -1790,10 +1790,10 @@ void ksvg_art_rgb_texture(const ArtSVP *svp, art_u8 *dst, int x0, int y0, int x1
 	data.src_height = src_height;
 	data.src_rowstride = src_rowstride;
 
-	data.tqmask = tqmask;
+	data.mask = mask;
 	data.y0 = y0;
 
-	if(tqmask)
+	if(mask)
 	{
 		if(dst_channels == 3)
 			art_svp_render_aa(svp, x0, y0, x1, y1, ksvg_art_rgb_texture_mask_callback, &data);

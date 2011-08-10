@@ -47,11 +47,11 @@ class KColorEditView : public TQSplitter {
 
   public:
     /** Constructor for the main view */
-    KColorEditView(TQWidget *tqparent = 0, const char *name = 0);
+    KColorEditView(TQWidget *parent = 0, const char *name = 0);
     /** Destructor for the main view */
     ~KColorEditView();
 
-    /** returns a pointer to the document connected to the view instance. Mind that this method requires a KColorEditApp instance as a tqparent
+    /** returns a pointer to the document connected to the view instance. Mind that this method requires a KColorEditApp instance as a parent
      * widget to get to the window document pointer by calling the KColorEditApp::getDocument() method.
      *
      * @see KColorEditApp#getDocument

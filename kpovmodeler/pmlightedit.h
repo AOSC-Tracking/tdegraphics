@@ -45,9 +45,9 @@ class PMLightEdit : public PMNamedObjectEdit
    typedef PMNamedObjectEdit Base;
 public:
    /**
-    * Creates a PMLightEdit with tqparent and name
+    * Creates a PMLightEdit with parent and name
     */
-   PMLightEdit( TQWidget* tqparent, const char* name = 0 );
+   PMLightEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

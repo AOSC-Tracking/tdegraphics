@@ -30,7 +30,7 @@ class KBmpPlugin: public KFilePlugin
   TQ_OBJECT
     
 public:
-    KBmpPlugin( TQObject *tqparent, const char *name, const TQStringList& args );
+    KBmpPlugin( TQObject *parent, const char *name, const TQStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

@@ -40,7 +40,7 @@ public:
    /**
     * Default constructor
     */
-   PMPovraySettings( TQWidget* tqparent, const char* name = 0 );
+   PMPovraySettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

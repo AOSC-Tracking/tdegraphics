@@ -25,8 +25,8 @@
 #include <klocale.h>
 
 
-PMSkySphereEdit::PMSkySphereEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMSkySphereEdit::PMSkySphereEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

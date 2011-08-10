@@ -34,8 +34,8 @@ typedef KGenericFactory<KTiffPlugin> TiffFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_tiff, TiffFactory("kfile_tiff"))
 
-KTiffPlugin::KTiffPlugin(TQObject *tqparent, const char *name,
-        const TQStringList &args) : KFilePlugin(tqparent, name, args)
+KTiffPlugin::KTiffPlugin(TQObject *parent, const char *name,
+        const TQStringList &args) : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "TIFF file meta info plugin" << endl;
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/tiff" );
@@ -90,7 +90,7 @@ KTiffPlugin::KTiffPlugin(TQObject *tqparent, const char *name,
     m_colorMode.insert(PHOTOMETRIC_PALETTE,
                 new TQString(I18N_NOOP("Palette color")));
     m_colorMode.insert(PHOTOMETRIC_MASK,
-                new TQString(I18N_NOOP("Transparency tqmask")));
+                new TQString(I18N_NOOP("Transparency mask")));
     m_colorMode.insert(PHOTOMETRIC_SEPARATED,
                 new TQString(I18N_NOOP("Color separations")));
     m_colorMode.insert(PHOTOMETRIC_YCBCR,

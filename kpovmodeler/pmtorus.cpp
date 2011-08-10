@@ -110,10 +110,10 @@ void PMTorus::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMTorus::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMTorus::editWidget( TQWidget* parent ) const
 {
 
- return new PMTorusEdit( tqparent );
+ return new PMTorusEdit( parent );
 }
 
 void PMTorus::restoreMemento( PMMemento* s )

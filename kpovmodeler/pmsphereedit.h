@@ -40,9 +40,9 @@ class PMSphereEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSphereEdit with tqparent and name
+    * Creates a PMSphereEdit with parent and name
     */
-   PMSphereEdit( TQWidget* tqparent, const char* name = 0 );
+   PMSphereEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

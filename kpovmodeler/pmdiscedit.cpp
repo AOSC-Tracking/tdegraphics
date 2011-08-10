@@ -27,8 +27,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMDiscEdit::PMDiscEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMDiscEdit::PMDiscEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

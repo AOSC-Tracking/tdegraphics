@@ -40,9 +40,9 @@ class PMBlobEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMBlobEdit with tqparent and name
+    * Creates a PMBlobEdit with parent and name
     */
-   PMBlobEdit( TQWidget* tqparent, const char* name = 0 );
+   PMBlobEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

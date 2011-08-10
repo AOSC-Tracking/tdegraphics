@@ -176,9 +176,9 @@ void PMCone::setOpen( bool op )
    }
 }
 
-PMDialogEditBase* PMCone::editWidget( TQWidget * tqparent ) const
+PMDialogEditBase* PMCone::editWidget( TQWidget * parent ) const
 {
-    return new PMConeEdit( tqparent );
+    return new PMConeEdit( parent );
 }
 
 void PMCone::restoreMemento( PMMemento * s )

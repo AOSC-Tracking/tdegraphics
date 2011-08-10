@@ -61,11 +61,11 @@ class PMObject
    friend class PMCompositeObject;
 public:
    /**
-    * Creates an empty PMObject without tqparent.
+    * Creates an empty PMObject without parent.
     */
    PMObject( PMPart* part );
    /**
-    * Copy constructor. All object pointers (tqparent, siblings) are set to 0!
+    * Copy constructor. All object pointers (parent, siblings) are set to 0!
     */
    PMObject( const PMObject& o );
    /**
@@ -121,9 +121,9 @@ public:
    virtual bool exportPovray( ) const { return true; }
 
    /**
-    * Returns a pointer to the tqparent object.
+    * Returns a pointer to the parent object.
     */
-   PMObject* tqparent( ) const { return m_pParent; }
+   PMObject* parent( ) const { return m_pParent; }
    /**
     * Returns a pointer to the corresponding part
     */
@@ -385,7 +385,7 @@ public:
    void setSelected( bool s );
    /**
     * Returns true if this item can be selected. An item cannot be selected
-    * if a tqparent object is selected
+    * if a parent object is selected
     */
    bool isSelectable( );
    /**
@@ -411,9 +411,9 @@ public:
     * Creates a new edit widget that can display this object and
     * returns a pointer to it.
     *
-    * The widget will be created as a child of tqparent.
+    * The widget will be created as a child of parent.
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view
@@ -470,7 +470,7 @@ public:
 protected:
    /**
     * Adds num to the number of selected objects in this object and all
-    * tqparent objects. num can be negative.
+    * parent objects. num can be negative.
     */
    virtual void adjustSelectedChildren( int /*num*/ ) { };
    /**
@@ -479,7 +479,7 @@ protected:
    PMMemento* m_pMemento;
 private:
    /**
-    * Pointer to the tqparent object. 0 if the object has no tqparent.
+    * Pointer to the parent object. 0 if the object has no parent.
     */
    PMObject* m_pParent;
    /**

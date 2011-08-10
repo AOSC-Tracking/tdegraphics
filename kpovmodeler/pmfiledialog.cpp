@@ -22,13 +22,13 @@
 #include <kfilefiltercombo.h>
 
 
-PMFileDialog::PMFileDialog( const TQString& startDir, const TQString& filter, TQWidget* tqparent, const char* name, bool modal )
-      : KFileDialog( startDir, filter, tqparent, name, modal )
+PMFileDialog::PMFileDialog( const TQString& startDir, const TQString& filter, TQWidget* parent, const char* name, bool modal )
+      : KFileDialog( startDir, filter, parent, name, modal )
 {
 
 }
 
-TQString PMFileDialog::getImportFileName( TQWidget* tqparent, PMPart* part,
+TQString PMFileDialog::getImportFileName( TQWidget* parent, PMPart* part,
                                          PMIOFormat*& format )
 {
    PMIOManager* manager = part->ioManager( );
@@ -52,7 +52,7 @@ TQString PMFileDialog::getImportFileName( TQWidget* tqparent, PMPart* part,
       }
    }
 
-   PMFileDialog dlg( TQString(), filter, tqparent, "import file dialog", true );
+   PMFileDialog dlg( TQString(), filter, parent, "import file dialog", true );
    dlg.setOperationMode( Opening );
    dlg.setMode( KFile::File | KFile::LocalOnly );
    dlg.setCaption( i18n( "Import" ) );
@@ -64,7 +64,7 @@ TQString PMFileDialog::getImportFileName( TQWidget* tqparent, PMPart* part,
    return dlg.selectedFile( );
 }
 
-TQString PMFileDialog::getExportFileName( TQWidget* tqparent, PMPart* part,
+TQString PMFileDialog::getExportFileName( TQWidget* parent, PMPart* part,
                                          PMIOFormat*& format, TQString& selectedFilter )
 {
    PMIOManager* manager = part->ioManager( );
@@ -88,7 +88,7 @@ TQString PMFileDialog::getExportFileName( TQWidget* tqparent, PMPart* part,
       }
    }
 
-   PMFileDialog dlg( TQString(), filter, tqparent, "export file dialog", true );
+   PMFileDialog dlg( TQString(), filter, parent, "export file dialog", true );
    dlg.setOperationMode( Saving );
    dlg.setMode( KFile::File | KFile::LocalOnly );
    dlg.setCaption( i18n( "Export" ) );

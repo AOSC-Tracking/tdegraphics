@@ -33,9 +33,9 @@
 #include <klocale.h>
 
 KViewKonqExtension::KViewKonqExtension( KImageViewer::Canvas * canvas,
-		KViewViewer *tqparent, const char *name )
-	: KParts::BrowserExtension( tqparent, name ),
-	m_pViewer( tqparent ),
+		KViewViewer *parent, const char *name )
+	: KParts::BrowserExtension( parent, name ),
+	m_pViewer( parent ),
 	m_pCanvas( canvas )
 {
     KGlobal::locale()->insertCatalogue("kview");
@@ -68,7 +68,7 @@ void KViewKonqExtension::print()
 	printer.addDialogPage( new ImageSettings );
 	printer.setDocName( "KView: " + m_pViewer->url().fileName( false ) );
 
-	if ( !printer.setup( ((KViewViewer *)tqparent())->widget(), i18n("Print %1").tqarg(m_pViewer->url().fileName( false )) ) )
+	if ( !printer.setup( ((KViewViewer *)parent())->widget(), i18n("Print %1").tqarg(m_pViewer->url().fileName( false )) ) )
 		return;
 
 	TQPainter painter;

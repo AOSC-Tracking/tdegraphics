@@ -38,9 +38,9 @@ class PMCylinderEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMCylinderEdit with tqparent and name
+    * Creates a PMCylinderEdit with parent and name
     */
-   PMCylinderEdit( TQWidget* tqparent, const char* name = 0 );
+   PMCylinderEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -158,7 +158,7 @@ private:
 
 	TQMap<TQString, SVGElementImpl *> m_map;
 
-	// Transformation provided by the 'tqparent' of the outermost svg element
+	// Transformation provided by the 'parent' of the outermost svg element
 	SVGMatrixImpl *m_rootParentScreenCTM;
 
 	SVGMatrixImpl *m_localMatrix;

@@ -17,7 +17,7 @@ class TeXFont {
  public:
   TeXFont(TeXFontDefinition *_parent)
     {
-      tqparent       = _parent;
+      parent       = _parent;
       errorMessage = TQString();
     };
   
@@ -42,7 +42,7 @@ class TeXFont {
    
  protected:
   glyph              glyphtable[TeXFontDefinition::max_num_of_chars_in_font];
-  TeXFontDefinition *tqparent;
+  TeXFontDefinition *parent;
 };
 
 #endif

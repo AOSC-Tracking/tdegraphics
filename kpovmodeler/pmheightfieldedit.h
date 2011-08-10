@@ -43,9 +43,9 @@ class PMHeightFieldEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMHeightFieldEdit with tqparent and name
+    * Creates a PMHeightFieldEdit with parent and name
     */
-   PMHeightFieldEdit( TQWidget* tqparent, const char* name = 0 );
+   PMHeightFieldEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

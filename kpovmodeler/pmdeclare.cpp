@@ -131,9 +131,9 @@ void PMDeclare::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMDeclare::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMDeclare::editWidget( TQWidget* parent ) const
 {
-   return new PMDeclareEdit( tqparent );
+   return new PMDeclareEdit( parent );
 }
 
 void PMDeclare::setID( const TQString& newID )

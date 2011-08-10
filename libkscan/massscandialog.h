@@ -35,7 +35,7 @@ class MassScanDialog : public TQDialog
    Q_OBJECT
   TQ_OBJECT
 public: 
-   MassScanDialog( TQWidget *tqparent);
+   MassScanDialog( TQWidget *parent);
    ~MassScanDialog();
 	
 public slots:

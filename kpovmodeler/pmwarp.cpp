@@ -467,9 +467,9 @@ void PMWarp::setMajorRadius( const double c )
    }
 }
 
-PMDialogEditBase* PMWarp::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMWarp::editWidget( TQWidget* parent ) const
 {
-   return new PMWarpEdit( tqparent );
+   return new PMWarpEdit( parent );
 }
 
 void PMWarp::restoreMemento( PMMemento* s )

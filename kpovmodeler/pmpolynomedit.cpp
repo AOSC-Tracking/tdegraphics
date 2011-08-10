@@ -29,8 +29,8 @@
 #include <klocale.h>
 #include <kdialog.h>
 
-PMPolynomEdit::PMPolynomEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMPolynomEdit::PMPolynomEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
    m_currentOrder = 0;

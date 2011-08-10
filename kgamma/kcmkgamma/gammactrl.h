@@ -34,7 +34,7 @@ class GammaCtrl : public TQHBox  {
   TQ_OBJECT
   public:
     /** construktor */
-    GammaCtrl(TQWidget *tqparent=0, XVidExtWrap *xvid=0, int channel=0, \
+    GammaCtrl(TQWidget *parent=0, XVidExtWrap *xvid=0, int channel=0, \
       const TQString& mingamma="0.40", const TQString& maxgamma="3.50", \
       const TQString& setgamma="1.00", const char *name=0 );
     /** destruktor */

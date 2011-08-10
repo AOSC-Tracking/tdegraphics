@@ -63,7 +63,7 @@ public:
                          // (in the Dimensions Group Box) e.g. "After Skew:"
                          const TQString &afterActionText,
                          bool actOnSelection,
-                         kpMainWindow *tqparent,
+                         kpMainWindow *parent,
                          const char *name = 0);
     virtual ~kpToolPreviewDialog ();
 
@@ -77,7 +77,7 @@ public:
 protected:
     kpDocument *document () const;
 
-    // All widgets must have mainWidget() as their tqparent
+    // All widgets must have mainWidget() as their parent
     void addCustomWidgetToFront (TQWidget *w);  // see <reserveTopRow> in ctor
     void addCustomWidget (TQWidget *w);
     void addCustomWidgetToBack (TQWidget *w)

@@ -384,7 +384,7 @@ void KGVMiniWidget::showPage( int pagenumber )
 
     kdDebug(4500) << "KGVMiniWidget::showPage( " << pagenumber << " )" << endl;
 
-    TQT_TQWIDGET( _psWidget->tqparent() )->show();
+    TQT_TQWIDGET( _psWidget->parent() )->show();
 
     _psWidget->setFileName(_document->fileName(), dsc()->isStructured() );
     _psWidget->clear();

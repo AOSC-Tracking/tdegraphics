@@ -381,7 +381,7 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Dict> &gjim)
           DJVU_PROGRESS_RUN(jb2code, (tqshapeno-firsttqshape)|0xff);
           // Code tqshape
           JB2Shape &jshp = jim.get_tqshape(tqshapeno);
-          rectype=(jshp.tqparent >= 0)
+          rectype=(jshp.parent >= 0)
             ?MATCHED_REFINE_LIBRARY_ONLY:NEW_MARK_LIBRARY_ONLY;
           code_record(rectype, gjim, &jshp);
           add_library(tqshapeno, jshp);
@@ -423,7 +423,7 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
       // Determine tqshapes that go into library (tqshapeno>=firsttqshape)
       //  tqshape2lib is -2 if used by one blit
       //  tqshape2lib is -3 if used by more than one blit
-      //  tqshape2lib is -4 if used as a tqparent
+      //  tqshape2lib is -4 if used as a parent
       for (i=0; i<nblit; i++)
         {
           JB2Blit *jblt = jim.get_blit(i);
@@ -432,11 +432,11 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
             continue;
           if (tqshape2lib[tqshapeno] >= -2) 
             tqshape2lib[tqshapeno] -= 1;
-          tqshapeno = jim.get_tqshape(tqshapeno).tqparent;
+          tqshapeno = jim.get_tqshape(tqshapeno).parent;
           while (tqshapeno>=firsttqshape && tqshape2lib[tqshapeno]>=-3)
             {
               tqshape2lib[tqshapeno] = -4;
-              tqshapeno = jim.get_tqshape(tqshapeno).tqparent;
+              tqshapeno = jim.get_tqshape(tqshapeno).parent;
             }
         }
       // Code headers.
@@ -468,13 +468,13 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
           else if (jshp.bits) 
             {
               // Make sure all parents have been coded
-              if (jshp.tqparent>=0 && tqshape2lib[jshp.tqparent]<0)
-                encode_libonly_tqshape(gjim, jshp.tqparent);
+              if (jshp.parent>=0 && tqshape2lib[jshp.parent]<0)
+                encode_libonly_tqshape(gjim, jshp.parent);
               // Allocate library entry when needed
 #define LIBRARY_CONTAINS_ALL
               int libraryp = 0;
 #ifdef LIBRARY_CONTAINS_MARKS // baseline
-              if (jshp.tqparent >= -1)
+              if (jshp.parent >= -1)
                 libraryp = 1;
 #endif
 #ifdef LIBRARY_CONTAINS_SHARED // worse             
@@ -485,12 +485,12 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
               libraryp = 1;
 #endif
               // Test all blit cases
-              if (jshp.tqparent<-1 && !libraryp)
+              if (jshp.parent<-1 && !libraryp)
                 {
                   int rectype = NON_MARK_DATA;
                   code_record(rectype, gjim, &jshp, jblt);
                 }
-              else if (jshp.tqparent < 0)
+              else if (jshp.parent < 0)
                 {
                   int rectype = (libraryp ? NEW_MARK : NEW_MARK_IMAGE_ONLY);
                   code_record(rectype, gjim, &jshp, jblt);
@@ -530,15 +530,15 @@ JB2Dict::JB2Codec::Encode::encode_libonly_tqshape(
     G_THROW( ERR_MSG("JB2Image.bad_number") );
   }
   JB2Image &jim=*gjim;
-  // Recursively encode tqparent tqshape
+  // Recursively encode parent tqshape
   JB2Shape &jshp = jim.get_tqshape(tqshapeno);
-  if (jshp.tqparent>=0 && tqshape2lib[jshp.tqparent]<0)
-    encode_libonly_tqshape(gjim, jshp.tqparent);
+  if (jshp.parent>=0 && tqshape2lib[jshp.parent]<0)
+    encode_libonly_tqshape(gjim, jshp.parent);
   // Test that library tqshape must be encoded
   if (tqshape2lib[tqshapeno] < 0)
     {
       // Code library entry
-      int rectype=(jshp.tqparent >= 0)
+      int rectype=(jshp.parent >= 0)
             ?NEW_MARK_LIBRARY_ONLY:MATCHED_REFINE_LIBRARY_ONLY;
       code_record(rectype, gjim, &jshp, 0);      
       // Add tqshape to library

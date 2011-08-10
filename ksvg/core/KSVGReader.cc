@@ -289,7 +289,7 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 			Helper::self()->doc()->appendChild(*newElement);
 
 		// Special logics:
-		if(qName == "switch" || qName == "pattern" || qName == "tqmask")
+		if(qName == "switch" || qName == "pattern" || qName == "mask")
 			m_noRendering = true;
 	}
 
@@ -320,10 +320,10 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 
 		if(!parentNode.isNull())
 		{
-			SVGElementImpl *tqparent = Helper::self()->doc()->getElementFromHandle(parentNode.handle());
+			SVGElementImpl *parent = Helper::self()->doc()->getElementFromHandle(parentNode.handle());
 
-			if(tqparent)
-				locatableParent = dynamic_cast<SVGLocatableImpl *>(tqparent);
+			if(parent)
+				locatableParent = dynamic_cast<SVGLocatableImpl *>(parent);
 		}
 
 		SVGMatrixImpl *parentMatrix = 0;
@@ -392,7 +392,7 @@ bool InputHandler::endElement(const TQString &, const TQString &, const TQString
 	}
 
 	// Special logics:
-	if(qName == "switch" || qName == "pattern" || qName == "tqmask")
+	if(qName == "switch" || qName == "pattern" || qName == "mask")
 	{
 		m_noRendering = false;
 		bool ok = tests ? tests->ok() : true;

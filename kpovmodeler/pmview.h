@@ -44,7 +44,7 @@ public:
    /**
     * Constructor for the main view
     */
-   PMView( PMPart* part, TQWidget* tqparent = 0, const char* name = 0 );
+   PMView( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
    /**
     * Destructor for the main view
     */

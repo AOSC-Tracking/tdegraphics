@@ -12,8 +12,8 @@ class KViewPart_Iface : public KParts::ReadOnlyPart
   Q_OBJECT
   TQ_OBJECT
 public:
-  KViewPart_Iface(TQObject *tqparent, const char *name)
-    : KParts::ReadOnlyPart(tqparent, name) {}
+  KViewPart_Iface(TQObject *parent, const char *name)
+    : KParts::ReadOnlyPart(parent, name) {}
 
   virtual ~KViewPart_Iface() {}
 

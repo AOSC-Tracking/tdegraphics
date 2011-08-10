@@ -92,7 +92,7 @@ class KGridView : public TQFrame
     Q_OBJECT
   TQ_OBJECT
 public:
-  KGridView( TQImage *image, KCommandHistory* history, TQWidget * tqparent = 0, const char *name = 0);
+  KGridView( TQImage *image, KCommandHistory* history, TQWidget * parent = 0, const char *name = 0);
 
   KRuler *hruler() { return _hruler;}
   KRuler *vruler() { return _vruler;}
@@ -134,7 +134,7 @@ class KIconEditGrid : public KColorGrid
     Q_OBJECT
   TQ_OBJECT
 public:
-  KIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * tqparent = 0, const char *name = 0);
+  KIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * parent = 0, const char *name = 0);
   virtual ~KIconEditGrid();
 
   enum DrawTool { Line, Freehand, FloodFill, Spray, Rect, FilledRect, Circle,

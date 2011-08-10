@@ -66,7 +66,7 @@ public:
     kpSingleKeyTriggersAction (const TQString &text,
                                const KShortcut &shortcut,
                                const TQObject *receiver, const char *slot,
-                               KActionCollection *tqparent, const char *name);
+                               KActionCollection *parent, const char *name);
     virtual ~kpSingleKeyTriggersAction ();
 
 

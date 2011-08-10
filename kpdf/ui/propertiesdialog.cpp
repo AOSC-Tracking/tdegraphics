@@ -19,8 +19,8 @@
 #include "propertiesdialog.h"
 #include "core/document.h"
 
-PropertiesDialog::PropertiesDialog(TQWidget *tqparent, KPDFDocument *doc)
-  : KDialogBase( Tabbed, i18n( "Unknown File" ), Ok, Ok, tqparent, 0, true, true )
+PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
+  : KDialogBase( Tabbed, i18n( "Unknown File" ), Ok, Ok, parent, 0, true, true )
 {
   // Properties
   TQFrame *page = addPage(i18n("Properties"));

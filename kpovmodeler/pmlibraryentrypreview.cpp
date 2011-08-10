@@ -39,8 +39,8 @@
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
-PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* tqparent ) :
-   TQWidget( tqparent )
+PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :
+   TQWidget( parent )
 {
    setAcceptDrops( true );
    m_pPart = new PMPart( this, "treeview", NULL, "part", false, true );

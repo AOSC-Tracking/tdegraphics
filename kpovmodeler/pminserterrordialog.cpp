@@ -25,8 +25,8 @@
 PMInsertErrorDialog::PMInsertErrorDialog(
    int numObj, int numErrors,
    const TQStringList& details,
-   TQWidget* tqparent /*= 0*/, const char* name /*= 0*/ )
-      : KDialogBase( tqparent, name, true, i18n( "Insert Errors" ),
+   TQWidget* parent /*= 0*/, const char* name /*= 0*/ )
+      : KDialogBase( parent, name, true, i18n( "Insert Errors" ),
                      Help | Ok | User1, Ok, false, i18n( "Details" ) )
 {
    TQVBox* page = makeVBoxMainWidget( );

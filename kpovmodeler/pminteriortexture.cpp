@@ -68,8 +68,8 @@ TQString PMInteriorTexture::description( ) const
    return i18n( "interior texture" );
 }
 
-PMDialogEditBase* PMInteriorTexture::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMInteriorTexture::editWidget( TQWidget* parent ) const
 {
-   return new PMInteriorTextureEdit( tqparent );
+   return new PMInteriorTextureEdit( parent );
 }
 

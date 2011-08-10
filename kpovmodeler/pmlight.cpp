@@ -564,9 +564,9 @@ void PMLight::setMediaAttenuation( bool y )
    }
 }
 
-PMDialogEditBase* PMLight::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMLight::editWidget( TQWidget* parent ) const
 {
-   return new PMLightEdit( tqparent );
+   return new PMLightEdit( parent );
 }
 
 void PMLight::restoreMemento( PMMemento* s )

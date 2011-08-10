@@ -29,7 +29,7 @@ class KCameraRawPlugin: public KFilePlugin {
   TQ_OBJECT
 
 public:
-    KCameraRawPlugin(TQObject *tqparent, const char *name, const TQStringList& args);
+    KCameraRawPlugin(TQObject *parent, const char *name, const TQStringList& args);
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:

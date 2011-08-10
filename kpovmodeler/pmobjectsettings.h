@@ -39,7 +39,7 @@ public:
    /**
     * Default constructor
     */
-   PMObjectSettings( TQWidget* tqparent, const char* name = 0 );
+   PMObjectSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

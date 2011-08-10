@@ -26,7 +26,7 @@
 class KColorEditView;
 
 /** This is a Palette class view widget.
-  * Its tqparent is KColorEditView
+  * Its parent is KColorEditView
   * @author Artur Rataj
   */
 class PaletteView : public TQFrame {
@@ -38,7 +38,7 @@ public:
 	 *  The effective cell sizes may be adjusted to fit the widget sizes.
 	 */
 	PaletteView(const int defaultCellWidth, const int defaultCellHeight, const int cellSpacing,
-			KColorEditView* view, TQWidget *tqparent = 0, const char *name=0);
+			KColorEditView* view, TQWidget *parent = 0, const char *name=0);
 	~PaletteView();
 	/** Calls redraw() in scrolledArea */
 	void redraw();

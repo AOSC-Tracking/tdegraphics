@@ -41,9 +41,9 @@ class PMGraphicalObjectEdit : public PMDetailObjectEdit
    typedef PMDetailObjectEdit Base;
 public:
    /**
-    * Creates a PMGraphicalObjectEdit with tqparent and name
+    * Creates a PMGraphicalObjectEdit with parent and name
     */
-   PMGraphicalObjectEdit( TQWidget* tqparent, const char* name = 0 );
+   PMGraphicalObjectEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

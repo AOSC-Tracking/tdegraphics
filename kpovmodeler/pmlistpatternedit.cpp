@@ -31,8 +31,8 @@
 #include <kmessagebox.h>
 
 
-PMListPatternEdit::PMListPatternEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMListPatternEdit::PMListPatternEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

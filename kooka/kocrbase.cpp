@@ -59,10 +59,10 @@
 #include <tqgroupbox.h>
 #include <tqcheckbox.h>
 
-KOCRBase::KOCRBase( TQWidget *tqparent, KSpellConfig *spellConfig,
+KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
                     KDialogBase::DialogType face )
    :KDialogBase( face, i18n("Optical Character Recognition"),
-		 User2|Close|User1, User1, tqparent,0, false, true,
+		 User2|Close|User1, User1, parent,0, false, true,
 		 KGuiItem( i18n("Start OCR" ), "launch",
 			   i18n("Start the Optical Character Recognition process" )),
                  KGuiItem( i18n("Cancel" ), "stopocr",
@@ -98,11 +98,11 @@ KOCRBase::KOCRBase( TQWidget *tqparent, KSpellConfig *spellConfig,
 }
 
 
-KAnimWidget* KOCRBase::getAnimation(TQWidget *tqparent)
+KAnimWidget* KOCRBase::getAnimation(TQWidget *parent)
 {
    if( ! m_animation )
    {
-      m_animation = new KAnimWidget( TQString("kde"), 48, tqparent, "ANIMATION" );
+      m_animation = new KAnimWidget( TQString("kde"), 48, parent, "ANIMATION" );
    }
    return( m_animation );
 }

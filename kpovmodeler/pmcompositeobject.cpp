@@ -96,7 +96,7 @@ PMObject* PMCompositeObject::tqchildAt( uint index ) const
 
 int PMCompositeObject::findChild( PMObject* o )
 {
-   if( o->tqparent( ) != this )
+   if( o->parent( ) != this )
       return -1;
 
    PMObject* tmp;

@@ -56,7 +56,7 @@ public:
 	{
 	public:
 		Mask() : m_width(0), m_height(0) {}
-		Mask(const TQByteArray& tqmask, const TQWMatrix& screenToMask, int width, int height);
+		Mask(const TQByteArray& mask, const TQWMatrix& screenToMask, int width, int height);
 		~Mask() {}
 	
 		bool isEmpty() const { return m_width == 0; }
@@ -68,7 +68,7 @@ public:
 	private:
 		int m_width;
 		int m_height;
-		TQByteArray m_tqmask;
+		TQByteArray m_mask;
 		TQWMatrix m_screenToMask;
 	};
 
@@ -89,9 +89,9 @@ public:
 
 	Mask createMask(SVGShapeImpl *referencingElement);
 	
-	// Compute the tqmask on a given tqshape, taking into account all masks defined
+	// Compute the mask on a given tqshape, taking into account all masks defined
 	// on the tqshape's ancestors. This is a workaround for us not having a buffer
-	// for container elements, so we can't tqmask containers directly.
+	// for container elements, so we can't mask containers directly.
 	static TQByteArray maskRectangle(SVGShapeImpl *tqshape, const TQRect& screenRectangle);
 
 private:
@@ -137,7 +137,7 @@ public:
 	void putValueProperty(KJS::ExecState *exec, int token, const KJS::Value &value, int attr);
 };
 
-KSVG_REGISTER_ELEMENT(SVGMaskElementImpl, "tqmask")
+KSVG_REGISTER_ELEMENT(SVGMaskElementImpl, "mask")
 
 inline unsigned char SVGMaskElementImpl::Mask::value(int screenX, int screenY) const
 {
@@ -146,7 +146,7 @@ inline unsigned char SVGMaskElementImpl::Mask::value(int screenX, int screenY) c
 	m_screenToMask.map(screenX, screenY, &x, &y);
 
 	if(x >= 0 && x < m_width && y >= 0 && y < m_height)
-		return m_tqmask[x + y * m_width];
+		return m_mask[x + y * m_width];
 	else
 		return 0;
 }

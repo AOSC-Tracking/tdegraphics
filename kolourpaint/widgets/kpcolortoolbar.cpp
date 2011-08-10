@@ -61,8 +61,8 @@
  */
 
 kpDualColorButton::kpDualColorButton (kpMainWindow *mainWindow,
-                                      TQWidget *tqparent, const char *name)
-    : TQFrame (tqparent, name, TQt::WNoAutoErase/*no flicker*/),
+                                      TQWidget *parent, const char *name)
+    : TQFrame (parent, name, TQt::WNoAutoErase/*no flicker*/),
       m_mainWindow (mainWindow),
       m_backBuffer (0)
 {
@@ -257,7 +257,7 @@ void kpDualColorButton::mouseDoubleClickEvent (TQMouseEvent *e)
             //       to opaque colors.
         }
 
-        // TODO: tqparent
+        // TODO: parent
         if (KColorDialog::getColor (col/*ref*/))
             setColor (whichColor, kpColor (col.rgb ()));
     }
@@ -324,7 +324,7 @@ void kpDualColorButton::drawContents (TQPainter *p)
     TQPixmap swapPixmap = UserIcon ("colorbutton_swap_16x16");
     if (!isEnabled ())
     {
-        // swapPixmap has a tqmask after all
+        // swapPixmap has a mask after all
         swapPixmap.fill (tqcolorGroup ().color (TQColorGroup::Dark));
     }
     backBufferPainter.drawPixmap (swapPixmapRect ().topLeft (), swapPixmap);
@@ -461,10 +461,10 @@ static bool ownColorsInitialised = false;
  */
 #define rows 2
 #define cols 11
-kpColorCells::kpColorCells (TQWidget *tqparent,
+kpColorCells::kpColorCells (TQWidget *parent,
                             Qt::Orientation o,
                             const char *name)
-    : KColorCells (tqparent, rows, cols),
+    : KColorCells (parent, rows, cols),
       m_mouseButton (-1)
 {
     setName (name);
@@ -729,7 +729,7 @@ void kpColorCells::slotColorDoubleClicked (int cell)
 
     TQColor color = KColorCells::color (cell);
 
-    // TODO: tqparent
+    // TODO: parent
     if (KColorDialog::getColor (color/*ref*/))
         KColorCells::setColor (cell, color);
 }
@@ -739,8 +739,8 @@ void kpColorCells::slotColorDoubleClicked (int cell)
  * kpTransparentColorCell
  */
 
-kpTransparentColorCell::kpTransparentColorCell (TQWidget *tqparent, const char *name)
-    : TQFrame (tqparent, name)
+kpTransparentColorCell::kpTransparentColorCell (TQWidget *parent, const char *name)
+    : TQFrame (parent, name)
 {
 #if DEBUG_KP_COLOR_TOOL_BAR
     kdDebug () << "kpTransparentColorCell::kpTransparentColorCell()" << endl;
@@ -818,10 +818,10 @@ void kpTransparentColorCell::drawContents (TQPainter *p)
  * kpColorPalette
  */
 
-kpColorPalette::kpColorPalette (TQWidget *tqparent,
+kpColorPalette::kpColorPalette (TQWidget *parent,
                                 Qt::Orientation o,
                                 const char *name)
-    : TQWidget (tqparent, name),
+    : TQWidget (parent, name),
       m_boxLayout (0)
 {
 #if DEBUG_KP_COLOR_TOOL_BAR
@@ -882,11 +882,11 @@ void kpColorPalette::setOrientation (Qt::Orientation o)
  */
 
 kpColorSimilarityToolBarItem::kpColorSimilarityToolBarItem (kpMainWindow *mainWindow,
-                                                            TQWidget *tqparent,
+                                                            TQWidget *parent,
                                                             const char *name)
     : kpColorSimilarityCube (kpColorSimilarityCube::Depressed |
                              kpColorSimilarityCube::DoubleClickInstructions,
-                             mainWindow, tqparent, name),
+                             mainWindow, parent, name),
       m_mainWindow (mainWindow),
       m_processedColorSimilarity (kpColor::Exact)
 {

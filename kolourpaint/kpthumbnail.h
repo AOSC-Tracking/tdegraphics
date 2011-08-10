@@ -41,7 +41,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpThumbnail (kpMainWindow *tqparent, const char *name = 0);
+    kpThumbnail (kpMainWindow *parent, const char *name = 0);
     virtual ~kpThumbnail ();
 
 public:

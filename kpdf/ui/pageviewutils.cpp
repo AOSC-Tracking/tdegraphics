@@ -21,8 +21,8 @@
 #include "core/page.h"
 #include "conf/settings.h"
 
-PageViewMessage::PageViewMessage( TQWidget * tqparent )
-    : TQWidget( tqparent, "pageViewMessage" ), m_timer( 0 )
+PageViewMessage::PageViewMessage( TQWidget * parent )
+    : TQWidget( parent, "pageViewMessage" ), m_timer( 0 )
 {
     setFocusPolicy( TQ_NoFocus );
     setBackgroundMode( NoBackground );
@@ -86,18 +86,18 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
     }
     TQRect tqgeometry( 0, 0, width + 10, height + 8 );
 
-    // resize pixmap, tqmask and widget
-    static TQBitmap tqmask;
-    tqmask.resize( tqgeometry.size() );
+    // resize pixmap, mask and widget
+    static TQBitmap mask;
+    mask.resize( tqgeometry.size() );
     m_pixmap.resize( tqgeometry.size() );
     resize( tqgeometry.size() );
 
-    // create and set transparency tqmask
-    TQPainter maskPainter( &tqmask);
-    tqmask.fill( TQt::black );
+    // create and set transparency mask
+    TQPainter maskPainter( &mask);
+    mask.fill( TQt::black );
     maskPainter.setBrush( TQt::white );
     maskPainter.drawRoundRect( tqgeometry, 1600 / tqgeometry.width(), 1600 / tqgeometry.height() );
-    setMask( tqmask );
+    setMask( mask );
 
     // draw background
     TQPainter bufferPainter( &m_pixmap );

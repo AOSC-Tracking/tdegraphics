@@ -801,8 +801,8 @@ void KGVDocument::pdf2psExited( KProcess* process )
 }
 */
 
-Pdf2dsc::Pdf2dsc( const TQString& ghostscriptPath, TQObject* tqparent, const char* name ) :
-    TQObject( tqparent, name ),
+Pdf2dsc::Pdf2dsc( const TQString& ghostscriptPath, TQObject* parent, const char* name ) :
+    TQObject( parent, name ),
     _process( 0 ),
     _ghostscriptPath( ghostscriptPath )
 {}

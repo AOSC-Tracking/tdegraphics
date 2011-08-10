@@ -128,7 +128,7 @@ public:
         //
         //           " contains translucency which is not fully"
         //           " supported. The translucency data will be"
-        //           " approximated with a 1-bit transparency tqmask.")
+        //           " approximated with a 1-bit transparency mask.")
         //
         // <moreColorsThanDisplayMessage>:
         //     i18n ("The (image \"example.jpg\"|image from the clipboard)"
@@ -140,21 +140,21 @@ public:
         //     i18n ("The (image \"example.jpg\"|image from the clipboard)"
         //           " contains translucency which is not fully"
         //           " supported. The translucency data will be"
-        //           " approximated with a 1-bit transparency tqmask.")
+        //           " approximated with a 1-bit transparency mask.")
         //
         // <dontAskAgainPrefix>:
         //
         //     Don'tAskAgain ID for dialog.
         //
-        // <tqparent>:
+        // <parent>:
         //
-        //     Dialog tqparent
+        //     Dialog parent
         //
         WarnAboutLossInfo (const TQString &moreColorsThanDisplayAndHasAlphaChannelMessage,
                 const TQString &moreColorsThanDisplayMessage,
                 const TQString &hasAlphaChannelMessage,
                 const TQString &dontAskAgainPrefix,
-                TQWidget *tqparent)
+                TQWidget *parent)
             :
                 m_moreColorsThanDisplayAndHasAlphaChannelMessage (
                     moreColorsThanDisplayAndHasAlphaChannelMessage),
@@ -164,7 +164,7 @@ public:
                     hasAlphaChannelMessage),
                 m_dontAskAgainPrefix (
                     dontAskAgainPrefix),
-                m_parent (tqparent),
+                m_parent (parent),
                 m_isValid (true)
         {
         }
@@ -227,7 +227,7 @@ public:
 
     // Sets the RGB values of the pixels where <pixmap> is transparent to
     // <transparentColor>.  This has visually no effect on the <pixmap>
-    // unless the tqmask is lost.
+    // unless the mask is lost.
     static TQPixmap pixmapWithDefinedTransparentPixels (const TQPixmap &pixmap,
         const TQColor &transparentColor);
 
@@ -238,19 +238,19 @@ public:
 
 
     //
-    // Returns the pixel and tqmask data found at the <rect> in <pm>.
+    // Returns the pixel and mask data found at the <rect> in <pm>.
     //
     static TQPixmap getPixmapAt (const TQPixmap &pm, const TQRect &rect);
 
     //
-    // Sets the pixel and tqmask data at <destRect> in <*destPixmapPtr>
+    // Sets the pixel and mask data at <destRect> in <*destPixmapPtr>
     // to <srcPixmap>.
     //
     static void setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
                              const TQPixmap &srcPixmap);
 
     //
-    // Sets the pixel and tqmask data at the rectangle in <*destPixmapPtr>,
+    // Sets the pixel and mask data at the rectangle in <*destPixmapPtr>,
     // with the top-left <destAt> and dimensions <srcPixmap.rect()>,
     // to <srcPixmap>.
     //
@@ -261,7 +261,7 @@ public:
 
     //
     // Draws <srcPixmap> on top of <*destPixmapPtr> at <destAt>.
-    // The tqmask of <*destPixmapPtr> is adjusted so that all opaque
+    // The mask of <*destPixmapPtr> is adjusted so that all opaque
     // pixels in <srcPixmap> will be opaque in <*destPixmapPtr>.
     //
     static void paintPixmapAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
@@ -293,7 +293,7 @@ public:
 
     //
     // Removes <*destPixmapPtr>'s Alpha Channel and attempts to convert it
-    // to a tqmask.  KolourPaint - and TQPixmap to a great extent - does not
+    // to a mask.  KolourPaint - and TQPixmap to a great extent - does not
     // support Alpha Channels - only masks.  Call this whenever you get
     // a pixmap from a foreign source; else all KolourPaint code will
     // exhibit "undefined behaviour".
@@ -301,8 +301,8 @@ public:
     static void ensureNoAlphaChannel (TQPixmap *destPixmapPtr);
 
     //
-    // Returns <pm>'s tqmask or a fully opaque tqmask (with <pm>'s dimensions)
-    // if <pm> does not have a tqmask.
+    // Returns <pm>'s mask or a fully opaque mask (with <pm>'s dimensions)
+    // if <pm> does not have a mask.
     //
     static TQBitmap getNonNullMask (const TQPixmap &pm);
 
@@ -312,7 +312,7 @@ public:
     static void ensureTransparentAt (TQPixmap *destPixmapPtr, const TQRect &destRect);
 
     //
-    // Sets the tqmask of <*destPixmapPtr> at the rectangle, with the
+    // Sets the mask of <*destPixmapPtr> at the rectangle, with the
     // top-left <destAt> and dimensions <srcMaskBitmap.rect()>,
     // to transparent where <brushBitmap> is opaque.
     //

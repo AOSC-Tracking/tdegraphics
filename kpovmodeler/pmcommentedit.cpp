@@ -23,8 +23,8 @@
 #include <tqmultilineedit.h>
 #include <kglobalsettings.h>
 
-PMCommentEdit::PMCommentEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMCommentEdit::PMCommentEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

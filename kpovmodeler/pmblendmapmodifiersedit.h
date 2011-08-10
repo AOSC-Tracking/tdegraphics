@@ -47,9 +47,9 @@ class PMBlendMapModifiersEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMBlendMapModifiersEdit with tqparent and name
+    * Creates a PMBlendMapModifiersEdit with parent and name
     */
-   PMBlendMapModifiersEdit( TQWidget* tqparent, const char* name = 0 );
+   PMBlendMapModifiersEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

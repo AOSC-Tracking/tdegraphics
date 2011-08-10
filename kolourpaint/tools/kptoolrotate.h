@@ -85,7 +85,7 @@ Q_OBJECT
 
 public:
     kpToolRotateDialog (bool actOnSelection,
-                        kpMainWindow *tqparent,
+                        kpMainWindow *parent,
                         const char *name = 0);
     virtual ~kpToolRotateDialog ();
 

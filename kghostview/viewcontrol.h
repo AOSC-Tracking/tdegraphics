@@ -11,7 +11,7 @@ class ViewControl : public TQDialog
 	Q_OBJECT
   TQ_OBJECT
 public:
-	ViewControl( TQWidget *tqparent, const char *name );
+	ViewControl( TQWidget *parent, const char *name );
 	TQComboBox* magComboBox;
 	TQComboBox* mediaComboBox;
 	TQComboBox* orientComboBox;

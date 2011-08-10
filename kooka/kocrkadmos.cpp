@@ -64,8 +64,8 @@
 #define CNTRY_CZ i18n( "Czech Republic, Slovakia")
 #define CNTRY_GB i18n( "Great Britain, USA" )
 
-KadmosDialog::KadmosDialog( TQWidget *tqparent, KSpellConfig *spellConfig )
-    :KOCRBase( tqparent, spellConfig, KDialogBase::Tabbed ),
+KadmosDialog::KadmosDialog( TQWidget *parent, KSpellConfig *spellConfig )
+    :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
      m_cbNoise(0),
      m_cbAutoscale(0),
      m_haveNorm(false)

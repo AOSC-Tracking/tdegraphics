@@ -43,9 +43,9 @@ class PMBicubicPatchEdit : public PMGraphicalObjectEdit
    typedef PMGraphicalObjectEdit Base;
 public:
    /**
-    * Creates a PMBicubicPatchEdit with tqparent and name
+    * Creates a PMBicubicPatchEdit with parent and name
     */
-   PMBicubicPatchEdit( TQWidget* tqparent, const char* name = 0 );
+   PMBicubicPatchEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

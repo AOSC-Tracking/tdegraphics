@@ -47,9 +47,9 @@ class PMSurfaceOfRevolutionEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSurfaceOfRevolutionEdit with tqparent and name
+    * Creates a PMSurfaceOfRevolutionEdit with parent and name
     */
-   PMSurfaceOfRevolutionEdit( TQWidget* tqparent, const char* name = 0 );
+   PMSurfaceOfRevolutionEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

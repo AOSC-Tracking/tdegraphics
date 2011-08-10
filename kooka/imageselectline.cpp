@@ -47,8 +47,8 @@
  * together in a row. The button opens a file selector box to pick a file.
  */
 
-ImageSelectLine::ImageSelectLine( TQWidget *tqparent, const TQString& text )
-   : TQHBox( tqparent )
+ImageSelectLine::ImageSelectLine( TQWidget *parent, const TQString& text )
+   : TQHBox( parent )
 {
    setSpacing( 5 );
    (void) new TQLabel( text, this );

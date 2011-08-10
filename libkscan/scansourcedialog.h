@@ -39,7 +39,7 @@ class ScanSourceDialog : public KDialogBase
    Q_OBJECT
   TQ_OBJECT
 public:
-   ScanSourceDialog( TQWidget *tqparent, const TQStrList, ADF_BEHAVE );
+   ScanSourceDialog( TQWidget *parent, const TQStrList, ADF_BEHAVE );
    ~ScanSourceDialog();
 
    // void 	fillWithSources( TQStrList *list );

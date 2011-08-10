@@ -1618,7 +1618,7 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
                                  const TQString &text,
                                  const TQString &caption,
                                  const TQString &continueButtonText,
-                                 TQWidget *tqparent)
+                                 TQWidget *parent)
 {
 #if DEBUG_KP_TOOL
     kdDebug () << "kpTool::warnIfBigImageSize()"
@@ -1648,7 +1648,7 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
     if (kpPixmapFX::pixmapSize (newWidth, newHeight, TQPixmap::defaultDepth ()) >=
         KP_BIG_IMAGE_SIZE)
     {
-        int accept = KMessageBox::warningContinueCancel (tqparent,
+        int accept = KMessageBox::warningContinueCancel (parent,
             text,
             caption,
             continueButtonText,

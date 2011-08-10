@@ -119,7 +119,7 @@ public:
     bool mimeTypeHasConfigurableQuality () const;
 
 
-    // TODO: checking for tqmask loss due to format e.g. BMP
+    // TODO: checking for mask loss due to format e.g. BMP
     enum LossyType
     {
         LossLess = 0,
@@ -127,7 +127,7 @@ public:
         // mimeTypeMaximumColorDepth() < <pixmap>.depth()
         MimeTypeMaximumColorDepthLow = 1,
         // i.e. colorDepth() < <pixmap>.depth() ||
-        //      colorDepth() < 32 && <pixmap>.tqmask()
+        //      colorDepth() < 32 && <pixmap>.mask()
         ColorDepthLow = 2,
         // i.e. mimeTypeHasConfigurableQuality()
         Quality = 4

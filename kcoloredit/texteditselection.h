@@ -34,7 +34,7 @@ class TextEditSelection : public TQWidget  {
 
 public:
 	/** Constructs the widget */
-	TextEditSelection(TQWidget *tqparent=0, const char *name=0);
+	TextEditSelection(TQWidget *parent=0, const char *name=0);
 	~TextEditSelection();
 	
 signals:

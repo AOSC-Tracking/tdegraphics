@@ -410,8 +410,8 @@ void PMPov31SerDeclare( const PMObject* object, const PMMetaObject* tqmetaObject
 void PMPov31SerDensity( const PMObject* object, const PMMetaObject* tqmetaObject, PMOutputDevice* dev )
 {
    bool bObject = true;
-   if( object->tqparent( ) )
-      if( object->tqparent( )->type( ) == "DensityMap" )
+   if( object->parent( ) )
+      if( object->parent( )->type( ) == "DensityMap" )
          bObject = false;
 
    if( bObject )
@@ -1260,8 +1260,8 @@ void PMPov31SerNormal( const PMObject* object, const PMMetaObject* tqmetaObject,
    TQString str1;
    bool bObject = true;
 
-   if( o->tqparent( ) )
-      if( o->tqparent( )->type( ) == "NormalMap" )
+   if( o->parent( ) )
+      if( o->parent( )->type( ) == "NormalMap" )
          bObject = false;
 
    if( bObject )
@@ -1404,9 +1404,9 @@ void PMPov31SerPattern( const PMObject* object, const PMMetaObject*, PMOutputDev
          break;
    }
    // depth
-   if( o->tqparent( ) )
+   if( o->parent( ) )
    {
-      if( o->depth( ) && o->tqparent( )->type( ) == "Normal" )
+      if( o->depth( ) && o->parent( )->type( ) == "Normal" )
       {
          str.setNum( o->depth( ) );
          dev->writeLine( str );
@@ -1458,8 +1458,8 @@ void PMPov31SerPigment( const PMObject* object, const PMMetaObject* tqmetaObject
    PMPigment* o = ( PMPigment* ) object;
 
    bool bObject = true;
-   if( o->tqparent( ) )
-      if( o->tqparent( )->type( ) == "PigmentMap" )
+   if( o->parent( ) )
+      if( o->parent( )->type( ) == "PigmentMap" )
          bObject = false;
 
    if( bObject )
@@ -1892,8 +1892,8 @@ void PMPov31SerTexture( const PMObject* object, const PMMetaObject* tqmetaObject
    PMTexture* o = ( PMTexture* ) object;
 
    bool bObject = true;
-   if( o->tqparent( ) )
-      if( o->tqparent( )->type( ) == "TextureMap" )
+   if( o->parent( ) )
+      if( o->parent( )->type( ) == "TextureMap" )
          bObject = false;
 
    if( bObject )

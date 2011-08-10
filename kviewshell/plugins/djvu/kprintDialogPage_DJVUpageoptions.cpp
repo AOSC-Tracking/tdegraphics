@@ -28,8 +28,8 @@
 
 #include "kprintDialogPage_DJVUpageoptions.h"
 
-KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *tqparent, const char *name )
-  : KPrintDialogPage( tqparent, name )
+KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *parent, const char *name )
+  : KPrintDialogPage( parent, name )
 {
   setTitle( i18n("Page Size & Placement") );
 

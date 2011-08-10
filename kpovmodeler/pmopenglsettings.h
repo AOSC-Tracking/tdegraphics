@@ -37,7 +37,7 @@ public:
    /**
     * Default constructor
     */
-   PMOpenGLSettings( TQWidget* tqparent, const char* name = 0 );
+   PMOpenGLSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

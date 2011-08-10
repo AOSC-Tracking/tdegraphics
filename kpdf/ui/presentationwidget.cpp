@@ -52,8 +52,8 @@ struct PresentationFrame
 };
 
 
-PresentationWidget::PresentationWidget( TQWidget * tqparent, KPDFDocument * doc )
-    : TQDialog( tqparent, "presentationWidget", true, WDestructiveClose | WStyle_NoBorder),
+PresentationWidget::PresentationWidget( TQWidget * parent, KPDFDocument * doc )
+    : TQDialog( parent, "presentationWidget", true, WDestructiveClose | WStyle_NoBorder),
     m_pressedLink( 0 ), m_handCursor( false ), m_document( doc ), m_frameIndex( -1 )
 {
     // set look and tqgeometry

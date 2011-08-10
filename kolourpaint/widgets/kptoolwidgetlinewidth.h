@@ -37,7 +37,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpToolWidgetLineWidth (TQWidget *tqparent, const char *name);
+    kpToolWidgetLineWidth (TQWidget *parent, const char *name);
     virtual ~kpToolWidgetLineWidth ();
 
     int lineWidth () const;

@@ -52,7 +52,7 @@ public:
    /**
     * Create the slider.
     *
-    * @param tqparent tqparent widget
+    * @param parent parent widget
     * @param text is the text describing the the slider value. If the text
     *        contains a '&', a buddy for the slider will be created.
     * @param min minimum slider value
@@ -61,7 +61,7 @@ public:
     *        appears on the left of the slider.
     * @param stdValue the value to which the standard button resets the slider.
     */
-   KScanSlider( TQWidget *tqparent, const TQString& text,
+   KScanSlider( TQWidget *parent, const TQString& text,
 		double min, double max, bool haveStdButt=false,
 		int stdValue=0);
    /**
@@ -124,10 +124,10 @@ class KScanEntry : public TQFrame
 public:
    /**
     * create a new entry field prepended by text.
-    * @param tqparent the tqparent widget
+    * @param parent the parent widget
     * @text the prefix text
     */
-   KScanEntry( TQWidget *tqparent, const TQString& text );
+   KScanEntry( TQWidget *parent, const TQString& text );
    // ~KScanEntry();
 
    /**
@@ -179,12 +179,12 @@ public:
    /**
     * create a combobox with prepended text.
     *
-    * @param tqparent tqparent widget
+    * @param parent parent widget
     * @param text the text the combobox is prepended by
     * @param list a stringlist with values the list should contain.
     */
-   KScanCombo( TQWidget *tqparent, const TQString& text, const TQStrList& list );
-   KScanCombo( TQWidget *tqparent, const TQString& text, const TQStringList& list );
+   KScanCombo( TQWidget *parent, const TQString& text, const TQStrList& list );
+   KScanCombo( TQWidget *parent, const TQString& text, const TQStringList& list );
    // ~KScanCombo();
 
    /**

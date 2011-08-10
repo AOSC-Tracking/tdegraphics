@@ -29,8 +29,8 @@
 #include <kglobal.h>
 #include <kconfig.h>
 
-KViewPresenterConfModule::KViewPresenterConfModule( TQObject * tqparent )
-	: KPreferencesModule( "kviewpresenter", tqparent, "KView Presenter Config Module" )
+KViewPresenterConfModule::KViewPresenterConfModule( TQObject * parent )
+	: KPreferencesModule( "kviewpresenter", parent, "KView Presenter Config Module" )
 {
 }
 

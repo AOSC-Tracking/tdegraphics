@@ -432,9 +432,9 @@ void PMGlobalSettings::setRecursionLimit( int c )
    }
 }
 
-PMDialogEditBase* PMGlobalSettings::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMGlobalSettings::editWidget( TQWidget* parent ) const
 {
-   return new PMGlobalSettingsEdit( tqparent );
+   return new PMGlobalSettingsEdit( parent );
 }
 
 void PMGlobalSettings::restoreMemento( PMMemento* s )

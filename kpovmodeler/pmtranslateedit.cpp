@@ -24,8 +24,8 @@
 #include <klocale.h>
 
 
-PMTranslateEdit::PMTranslateEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMTranslateEdit::PMTranslateEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

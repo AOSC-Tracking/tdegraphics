@@ -28,14 +28,14 @@
 #include <cassert>
 #include <cstring>
 
-ThumbnailService::ThumbnailService( KGVMiniWidget* tqparent, const char* name ) :
-	TQObject( tqparent, name ),
-	_mini( tqparent ),
+ThumbnailService::ThumbnailService( KGVMiniWidget* parent, const char* name ) :
+	TQObject( parent, name ),
+	_mini( parent ),
 	timer_( new TQTimer( this ) ),
 	_busy( false ),
 	_enabled( false )
 {
-	_thumbnailDrawer = new KPSWidget( tqparent->_part->widget(), "thumbnail-drawer" );
+	_thumbnailDrawer = new KPSWidget( parent->_part->widget(), "thumbnail-drawer" );
 	_thumbnailDrawer->readSettings();
 	connect(  _thumbnailDrawer, TQT_SIGNAL(  newPageImage(  TQPixmap ) ), TQT_SLOT( slotDone( TQPixmap ) ) );
 	connect( timer_, TQT_SIGNAL( timeout() ), TQT_SLOT( processOne() ) );

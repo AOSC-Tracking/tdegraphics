@@ -934,7 +934,7 @@ IW44Image::Codec::Codec(IW44Image::Map &xmap)
 IW44Image::Codec::~Codec() {}
 
 // is_null_slice
-// -- check if data can be produced for this band/tqmask
+// -- check if data can be produced for this band/mask
 // -- also fills the sure_zero array
 
 int 

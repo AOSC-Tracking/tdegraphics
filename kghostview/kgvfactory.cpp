@@ -53,7 +53,7 @@ KInstance *KGVFactory::s_instance;
 KAboutData *KGVFactory::s_aboutData;
 
 KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *widgetName,
-        TQObject *tqparent, const char *name,
+        TQObject *parent, const char *name,
         const char *className,
         const TQStringList &args_ )
 {
@@ -70,7 +70,7 @@ KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *
     }
     KGVPart *part = KDEPrivate::ConcreteFactory<KGVPart>::create( parentWidget,
             widgetName,
-            tqparent,
+            parent,
             name,
             className,
             args );

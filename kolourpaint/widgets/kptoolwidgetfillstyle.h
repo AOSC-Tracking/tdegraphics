@@ -41,7 +41,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpToolWidgetFillStyle (TQWidget *tqparent, const char *name);
+    kpToolWidgetFillStyle (TQWidget *parent, const char *name);
     virtual ~kpToolWidgetFillStyle ();
 
     enum FillStyle

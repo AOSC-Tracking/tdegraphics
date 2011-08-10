@@ -25,7 +25,7 @@ class TQCheckBox;
 class KPrintDialogPage_DJVUPageOptions : public KPrintDialogPage
 {
  public:
-  KPrintDialogPage_DJVUPageOptions( TQWidget *tqparent = 0, const char *name = 0 );
+  KPrintDialogPage_DJVUPageOptions( TQWidget *parent = 0, const char *name = 0 );
   
   void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false );
   void setOptions( const TQMap<TQString,TQString>& opts );

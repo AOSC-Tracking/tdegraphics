@@ -29,19 +29,19 @@
 #include <klocale.h>
 #include <tqptrdict.h>
 
-PMMoveCommand::PMMoveCommand( PMObject* obj, PMObject* tqparent, PMObject* after )
+PMMoveCommand::PMMoveCommand( PMObject* obj, PMObject* parent, PMObject* after )
       : PMCommand( i18n( "Move %1" ).tqarg( obj->description( ) ) )
 {
-   m_pParent = tqparent;
+   m_pParent = parent;
    m_pAfter = after;
 
-   if( obj->tqparent( ) )
+   if( obj->parent( ) )
    {
       m_infoList.append( new PMDeleteInfo( obj ) );
    }
    else
    {
-      // object has no tqparent!
+      // object has no parent!
       // top level objects can't be moved, move all child items
       PMObject* tmp;
       for( tmp = obj->firstChild( ); tmp; tmp = tmp->nextSibling( ) )
@@ -52,7 +52,7 @@ PMMoveCommand::PMMoveCommand( PMObject* obj, PMObject* tqparent, PMObject* after
    m_firstExecution = true;
 }
 
-PMMoveCommand::PMMoveCommand( const PMObjectList& list, PMObject* tqparent,
+PMMoveCommand::PMMoveCommand( const PMObjectList& list, PMObject* parent,
                             PMObject* after )
       : PMCommand( i18n( "Move Objects" ) )
 {
@@ -60,11 +60,11 @@ PMMoveCommand::PMMoveCommand( const PMObjectList& list, PMObject* tqparent,
 
    for( ; it.current( ); ++it )
    {
-      if( it.current( )->tqparent( ) )
+      if( it.current( )->parent( ) )
          m_infoList.append( new PMDeleteInfo( it.current( ) ) );
       else
       {
-         // object has no tqparent!
+         // object has no parent!
          // top level objects can't be moved, move all child items
          PMObject* tmp;
          for( tmp = it.current( )->firstChild( ); tmp; tmp = tmp->nextSibling( ) )
@@ -72,7 +72,7 @@ PMMoveCommand::PMMoveCommand( const PMObjectList& list, PMObject* tqparent,
       }
    }  
 
-   m_pParent = tqparent;
+   m_pParent = parent;
    m_pAfter = after;
    m_executed = false;
    m_firstExecution = true;
@@ -97,19 +97,19 @@ void PMMoveCommand::execute( PMCommandManager* theManager )
       PMObject* obj;
       bool error = false;
       PMDeleteInfo* info = 0;
-      PMObject* tqparent;
+      PMObject* parent;
    
       for( it.toLast( ); it.current( ); --it )
       {
          info = it.current( );
-         tqparent = info->tqparent( );
+         parent = info->parent( );
          // signal has to be emitted before the item is removed
          theManager->cmdObjectChanged( info->deletedObject( ), PMCRemove );
          if( m_firstExecution )
-            if( tqparent->dataChangeOnInsertRemove( )
-                && !tqparent->mementoCreated( ) )
-               tqparent->createMemento( );
-         tqparent->takeChild( info->deletedObject( ) );
+            if( parent->dataChangeOnInsertRemove( )
+                && !parent->mementoCreated( ) )
+               parent->createMemento( );
+         parent->takeChild( info->deletedObject( ) );
       }
 
       // insert at new position
@@ -165,10 +165,10 @@ void PMMoveCommand::execute( PMCommandManager* theManager )
          for( it.toLast( ); it.current( ); --it )
          {
             info = it.current( );
-            tqparent = info->tqparent( );
+            parent = info->parent( );
 
-            if( tqparent->mementoCreated( ) )
-               m_dataChanges.append( tqparent->takeMemento( ) );
+            if( parent->mementoCreated( ) )
+               m_dataChanges.append( parent->takeMemento( ) );
          }
       }
 
@@ -197,18 +197,18 @@ void PMMoveCommand::undo( PMCommandManager* theManager )
          // signal has to be emitted before the item is removed
          obj = it.current( )->deletedObject( );
          theManager->cmdObjectChanged( obj, PMCRemove );
-         if( obj->tqparent( ) )
-            obj->tqparent( )->takeChild( obj );
+         if( obj->parent( ) )
+            obj->parent( )->takeChild( obj );
       }
       
       for( it.toFirst( ); it.current( ); ++it )
       {
          obj = it.current( )->deletedObject( );
          if( it.current( )->prevSibling( ) )
-            it.current( )->tqparent( )
+            it.current( )->parent( )
                ->insertChildAfter( obj, it.current( )->prevSibling( ) );
          else
-            it.current( )->tqparent( )->insertChild( obj, 0 );
+            it.current( )->parent( )->insertChild( obj, 0 );
          theManager->cmdObjectChanged( obj, PMCAdd );
       }
 
@@ -279,7 +279,7 @@ int PMMoveCommand::errorFlags( PMPart* )
             {
                insideSelection = false;
                for( obj = links.current( ); obj && !insideSelection;
-                    obj = obj->tqparent( ) )
+                    obj = obj->parent( ) )
                {
                   if( deletedObjects.find( obj ) )
                      insideSelection = true;
@@ -288,7 +288,7 @@ int PMMoveCommand::errorFlags( PMPart* )
                if( insideSelection )
                {
                   bool stop = false;
-                  for( obj = links.current( ); obj && !stop; obj = obj->tqparent( ) )
+                  for( obj = links.current( ); obj && !stop; obj = obj->parent( ) )
                   {
                      if( deletedObjects.find( obj ) )
                         stop = true;
@@ -305,17 +305,17 @@ int PMMoveCommand::errorFlags( PMPart* )
                   if( m_pAfter )
                   {
                      // insert point is not the first item
-                     // find the top level tqparent item
+                     // find the top level parent item
                      stop = false;
                      obj = links.current( );
                      do
                      {
-                        if( obj->tqparent( ) )
+                        if( obj->parent( ) )
                         {
-                           if( obj->tqparent( )->type( ) == "Scene" )
+                           if( obj->parent( )->type( ) == "Scene" )
                               stop = true;
                            else
-                              obj = obj->tqparent( );
+                              obj = obj->parent( );
                         }
                         else
                            stop = true; // error
@@ -325,7 +325,7 @@ int PMMoveCommand::errorFlags( PMPart* )
                      PMObject* topParent = obj;
 
                      // check if insert point is before the top level
-                     // tqparent object
+                     // parent object
                      
                      if( !objectsAfterInsertPosition.find( obj ) )
                      {
@@ -383,12 +383,12 @@ int PMMoveCommand::errorFlags( PMPart* )
       obj = m_pParent;
       do
       {
-         if( obj->tqparent( ) )
+         if( obj->parent( ) )
          {
-            if( obj->tqparent( )->type( ) == "Scene" )
+            if( obj->parent( )->type( ) == "Scene" )
                stop = true;
             else
-               obj = obj->tqparent( );
+               obj = obj->parent( );
          }
          else
             stop = true; // error

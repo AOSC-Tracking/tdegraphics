@@ -67,7 +67,7 @@ public:
    /**
     * Returns a new @ref PMScaleEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmscale" ); }
 

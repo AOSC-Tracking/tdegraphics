@@ -392,9 +392,9 @@ void PMPrism::setPoints( const TQValueList< TQValueList<PMVector> >& points )
    }
 }
 
-PMDialogEditBase* PMPrism::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMPrism::editWidget( TQWidget* parent ) const
 {
-   return new PMPrismEdit( tqparent );
+   return new PMPrismEdit( parent );
 }
 
 void PMPrism::createMemento( )

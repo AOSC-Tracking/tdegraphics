@@ -25,8 +25,8 @@
 #include <kbuttonbox.h>
 #include <kseparator.h>
 
-ViewControl::ViewControl( TQWidget *tqparent, const char *name )
-	: TQDialog( tqparent, name )
+ViewControl::ViewControl( TQWidget *parent, const char *name )
+	: TQDialog( parent, name )
 {
 	setFocusPolicy(TQ_StrongFocus);
 

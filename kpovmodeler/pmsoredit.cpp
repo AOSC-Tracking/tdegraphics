@@ -32,8 +32,8 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 
-PMSurfaceOfRevolutionEdit::PMSurfaceOfRevolutionEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMSurfaceOfRevolutionEdit::PMSurfaceOfRevolutionEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

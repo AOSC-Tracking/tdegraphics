@@ -62,11 +62,11 @@ void PMViewFactory::addViewType( PMViewTypeFactory* vt )
 }
 
 PMViewBase* PMViewFactory::newViewInstance( const TQString& viewType,
-                                            TQWidget* tqparent, PMPart* part ) const
+                                            TQWidget* parent, PMPart* part ) const
 {
    PMViewTypeFactory* f = m_dict.find( viewType );
    if( f )
-      return f->newInstance( tqparent, part );
+      return f->newInstance( parent, part );
 
    kdError( PMArea ) << "Unknown view type \"" << viewType << "\"" << endl;
    return 0;

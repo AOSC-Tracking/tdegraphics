@@ -34,8 +34,8 @@
 typedef KGenericFactory<KViewCanvasConfig, TQWidget> KViewCanvasConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewcanvasconfig, KViewCanvasConfigFactory( "kcm_kviewcanvasconfig" ) )
 
-KViewCanvasConfig::KViewCanvasConfig( TQWidget * tqparent, const char *, const TQStringList & args )
-	: KCModule( KViewCanvasConfigFactory::instance(), tqparent, args )
+KViewCanvasConfig::KViewCanvasConfig( TQWidget * parent, const char *, const TQStringList & args )
+	: KCModule( KViewCanvasConfigFactory::instance(), parent, args )
 	, m_config( new KConfig( "kviewcanvasrc" ) )
 {
 	TQBoxLayout * tqlayout = new TQVBoxLayout( this );

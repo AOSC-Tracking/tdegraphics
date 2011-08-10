@@ -17,8 +17,8 @@
 
 #include "pmdragwidget.h"
 
-PMDragWidget::PMDragWidget( TQWidget* tqparent, const char* name, WFlags f )
-      : TQWidget( tqparent, name, f )
+PMDragWidget::PMDragWidget( TQWidget* parent, const char* name, WFlags f )
+      : TQWidget( parent, name, f )
 {
    dragging = false;
 }

@@ -150,13 +150,13 @@ void SVGDOMNodeBridge::putValueProperty(ExecState *exec, int token, const Value 
 // triggered by one of the child nodes
 void updateTextItem(ExecState *exec, const DOM::Node node)
 {
-	DOM::Node tqparent;
-	while(!(tqparent = node.parentNode()).isNull())
+	DOM::Node parent;
+	while(!(parent = node.parentNode()).isNull())
 	{
-		DOM::DOMString name = tqparent.nodeName();
+		DOM::DOMString name = parent.nodeName();
 		if(name == "text" || name == "tspan" || name == "tref")
 		{
-			SVGHelperImpl::updateItem(exec, tqparent);
+			SVGHelperImpl::updateItem(exec, parent);
 			break;
 		}
 	}
@@ -304,7 +304,7 @@ Value appendHelper(ExecState *exec, DOM::Node node, DOM::Node newNode)
 
 		// Get some SVGElementImpl's
 		SVGElementImpl *nodeElement = doc->getElementFromHandle(newNode.handle());
-		// TODO : extra check needed to see if the new elements tqparent is already appended
+		// TODO : extra check needed to see if the new elements parent is already appended
 		// in the doc. Not really nice, should be some other way? (Rob)
 		if(nodeElement && !nodeElement->parentNode().parentNode().isNull())
 		{

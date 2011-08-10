@@ -24,8 +24,8 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMSuperquadricEllipsoidEdit::PMSuperquadricEllipsoidEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMSuperquadricEllipsoidEdit::PMSuperquadricEllipsoidEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

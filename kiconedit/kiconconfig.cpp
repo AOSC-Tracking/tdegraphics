@@ -52,8 +52,8 @@ static inline TQPixmap loadIcon( const char * name )
     ->loadIcon( TQString::tqfromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
 }
 
-KTemplateEditDlg::KTemplateEditDlg(TQWidget *tqparent) 
-    : KDialogBase(tqparent, "KTemplateEditDlg", true, i18n( "Icon Template" ),
+KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent) 
+    : KDialogBase(parent, "KTemplateEditDlg", true, i18n( "Icon Template" ),
       Ok|Cancel )
 {
   TQFrame *frame = makeMainWidget();
@@ -112,7 +112,7 @@ TQString KTemplateEditDlg::path()
   return ln_path->url();
 }
 
-KTemplateConfig::KTemplateConfig(TQWidget *tqparent) : TQWidget(tqparent)
+KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
 {
   kdDebug(4640) << "KTemplateConfig constructor" << endl;
 
@@ -224,8 +224,8 @@ void KTemplateConfig::edit()
   }
 }
 
-KBackgroundConfig::KBackgroundConfig( TQWidget* tqparent )
-  : TQWidget( tqparent )
+KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
+  : TQWidget( parent )
 {
   kdDebug(4640) << "KBackgroundConfig - constructor" << endl;
 
@@ -373,7 +373,7 @@ void KBackgroundConfig::selectPixmap()
   }
 }
 
-KMiscConfig::KMiscConfig(TQWidget *tqparent) : TQWidget(tqparent)
+KMiscConfig::KMiscConfig(TQWidget *parent) : TQWidget(parent)
 {
   kdDebug(4640) << "KMiscConfig - constructor" << endl;
 
@@ -524,14 +524,14 @@ void KMiscConfig::slotTransparencyDisplayType(int id)
   }
 }
 
-KIconConfig::KIconConfig(TQWidget *tqparent)
+KIconConfig::KIconConfig(TQWidget *parent)
   : KDialogBase(KDialogBase::IconList, i18n("Configure"),
                          KDialogBase::Help |
                          KDialogBase::Ok |
                          KDialogBase::Apply |
                          KDialogBase::Cancel,
                          KDialogBase::Ok,
-                         tqparent, "configDialog", true, true)
+                         parent, "configDialog", true, true)
 {
   setHelp(TQString());
   //KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());

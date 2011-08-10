@@ -46,7 +46,7 @@ class GammaDialog : public KDialogBase
 //   TQ_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )
       
 public:
-   GammaDialog ( TQWidget *tqparent );
+   GammaDialog ( TQWidget *parent );
    ~GammaDialog( );
 
    KGammaTable *getGt( ) const { return gt; }

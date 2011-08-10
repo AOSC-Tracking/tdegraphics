@@ -185,13 +185,13 @@ public:
 	 * corresponds to this 'svg' element. When the user agent is actually
 	 * rendering the content,  then the position and size values represent the
 	 * actual values when rendering.  The position and size values are unitless
-	 * values in the coordinate system of  the tqparent element. If no tqparent element
+	 * values in the coordinate system of  the parent element. If no parent element
 	 * exists (i.e., 'svg' element represents  the root of the document tree), if
 	 * this SVG document is embedded as part of  another document (e.g., via the
 	 * HTML 'object' element), then the position and  size are unitless values in
-	 * the coordinate system of the tqparent document. (If  the tqparent uses CSS or
+	 * the coordinate system of the parent document. (If  the parent uses CSS or
 	 * XSL tqlayout, then unitless values represent pixel units  for the current CSS
-	 * or XSL viewport, as described in the CSS2 specification.)  If the tqparent
+	 * or XSL viewport, as described in the CSS2 specification.)  If the parent
 	 * element does not have a coordinate system, then the user agent  should
 	 * provide reasonable default values for this attribute.
 	 *

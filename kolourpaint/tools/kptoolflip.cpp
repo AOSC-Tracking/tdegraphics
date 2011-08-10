@@ -149,8 +149,8 @@ void kpToolFlipCommand::flip ()
 bool kpToolFlipDialog::s_lastIsVerticalFlip = true;
 
 
-kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, TQWidget *tqparent)
-    : KDialogBase (tqparent, 0/*name*/, true/*modal*/,
+kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, TQWidget *parent)
+    : KDialogBase (parent, 0/*name*/, true/*modal*/,
                    actOnSelection ? i18n ("Flip Selection") : i18n ("Flip Image"),
                    KDialogBase::Ok | KDialogBase::Cancel)
 {

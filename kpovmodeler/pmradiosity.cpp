@@ -356,9 +356,9 @@ void PMRadiosity::setRecursionLimit( int c )
    }
 }
 
-PMDialogEditBase* PMRadiosity::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMRadiosity::editWidget( TQWidget* parent ) const
 {
-   return new PMRadiosityEdit( tqparent );
+   return new PMRadiosityEdit( parent );
 }
 
 void PMRadiosity::restoreMemento( PMMemento* s )

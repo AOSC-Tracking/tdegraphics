@@ -180,8 +180,8 @@ public:
    bool isSubLibrary( ) const { return m_subLibrary; }
 
    /**
-    * Changes the tqparent library if this is a sub library
-    * @param parentPath The new tqparent path for this library
+    * Changes the parent library if this is a sub library
+    * @param parentPath The new parent path for this library
     * @return PMLibraryHandle::Ok if successful or the reason for failure
     */
    PMLibraryHandle::PMResult changeParentLibrary( const TQString& parentPath );

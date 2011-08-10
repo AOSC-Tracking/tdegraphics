@@ -27,8 +27,8 @@
 #include <klocale.h>
 
 
-PMInteriorEdit::PMInteriorEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMInteriorEdit::PMInteriorEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

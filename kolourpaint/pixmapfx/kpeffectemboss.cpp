@@ -75,7 +75,7 @@ TQPixmap kpEffectEmbossCommand::apply (const TQPixmap &pixmap,
                << endl;
 #endif
 
-    // (KImageEffect::emboss() ignores tqmask)
+    // (KImageEffect::emboss() ignores mask)
     TQPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
         pixmap,
         TQt::white/*arbitrarily chosen*/);
@@ -91,9 +91,9 @@ TQPixmap kpEffectEmbossCommand::apply (const TQPixmap &pixmap,
     TQPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
 
 
-    // KImageEffect::emboss() nukes tqmask - restore it
-    if (usePixmap.tqmask ())
-        retPixmap.setMask (*usePixmap.tqmask ());
+    // KImageEffect::emboss() nukes mask - restore it
+    if (usePixmap.mask ())
+        retPixmap.setMask (*usePixmap.mask ());
 
 
     return retPixmap;
@@ -109,8 +109,8 @@ TQPixmap kpEffectEmbossCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectEmbossWidget::kpEffectEmbossWidget (bool actOnSelection,
                                             kpMainWindow *mainWindow,
-                                            TQWidget *tqparent, const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
+                                            TQWidget *parent, const char *name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
     TQGridLayout *lay = new TQGridLayout (this, 4, 2, marginHint (), spacingHint ());
 

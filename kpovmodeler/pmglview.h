@@ -62,7 +62,7 @@ public:
     * Constructor
     */
    PMGLView( PMPart* part, PMViewType t,
-             TQWidget* tqparent = 0, const char* name = 0, WFlags f = 0 );
+             TQWidget* parent = 0, const char* name = 0, WFlags f = 0 );
    /**
     * Destructor
     */
@@ -559,9 +559,9 @@ public:
    virtual TQString description( ) const;
    virtual TQString description( PMViewOptions* ) const;
    virtual TQString iconName( ) const { return TQString( "pmglview" ); }
-   virtual PMViewBase* newInstance( TQWidget* tqparent, PMPart* part ) const
+   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
    {
-      return new PMGLView( part, PMGLView::PMViewPosX, tqparent );
+      return new PMGLView( part, PMGLView::PMViewPosX, parent );
    }
    virtual PMViewOptions* newOptionsInstance( ) const;
    virtual PMViewOptionsWidget* newOptionsWidget( TQWidget*, PMViewOptions* );
@@ -578,7 +578,7 @@ public:
    /**
     * Default constructor
     */
-   PMGLViewOptionsWidget( TQWidget* tqparent, PMViewOptions* o );
+   PMGLViewOptionsWidget( TQWidget* parent, PMViewOptions* o );
 
 protected slots:
    void slotGLViewTypeChanged( int );

@@ -87,9 +87,9 @@ class PMObjectSelect : public KDialogBase
   TQ_OBJECT
 public:
    /**
-    * Creates a selection widget with tqparent and name
+    * Creates a selection widget with parent and name
     */
-   PMObjectSelect( TQWidget* tqparent = 0, const char* name = 0,
+   PMObjectSelect( TQWidget* parent = 0, const char* name = 0,
                    bool modal = true );
    /**
     * Deletes the dialog
@@ -113,13 +113,13 @@ public:
     * Only objects above the object link  are listed.
     */
    static int selectObject( PMObject* link, const TQString& t, PMObject* & obj,
-                            TQWidget* tqparent = 0 );
+                            TQWidget* parent = 0 );
    static int selectObject( PMObject* link, const TQStringList& t,
-                            PMObject* & obj, TQWidget* tqparent = 0 );
+                            PMObject* & obj, TQWidget* parent = 0 );
    static int selectDeclare( PMObject* link, const TQString& declareType,
-                             PMObject* & obj, TQWidget* tqparent = 0 );
+                             PMObject* & obj, TQWidget* parent = 0 );
    static int selectDeclare( PMObject* link, const TQStringList& dt,
-                             PMObject* & obj, TQWidget* tqparent = 0 );
+                             PMObject* & obj, TQWidget* parent = 0 );
    
 protected slots:
    void slotHighlighted( TQListBoxItem* lbi );

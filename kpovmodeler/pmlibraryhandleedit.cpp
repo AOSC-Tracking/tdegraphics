@@ -36,8 +36,8 @@
 
 TQSize PMLibraryHandleEdit::s_size = TQSize( 600, 400 );
 
-PMLibraryHandleEdit::PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget* tqparent, const char* name )
-      : KDialogBase( tqparent, name, true, i18n( "Create Library" ),
+PMLibraryHandleEdit::PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget* parent, const char* name )
+      : KDialogBase( parent, name, true, i18n( "Create Library" ),
                      Ok | Cancel, Ok )
 {
    m_pLibrary = lib;

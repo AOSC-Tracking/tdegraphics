@@ -22,8 +22,8 @@
 
 #include "scrollbox.h"
 
-ScrollBox::ScrollBox( TQWidget* tqparent, const char* name )
-    : TQFrame( tqparent, name )
+ScrollBox::ScrollBox( TQWidget* parent, const char* name )
+    : TQFrame( parent, name )
 {
     setFrameStyle( Panel | Sunken );
 }

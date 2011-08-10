@@ -47,7 +47,7 @@ static const char SVGStylableImpl__s_hashTableStrings[] = {
     "stroke\0"
     "clip\0"
     "fill\0"
-    "tqmask\0"
+    "mask\0"
 };
 
 

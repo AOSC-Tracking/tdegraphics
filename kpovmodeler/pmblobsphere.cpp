@@ -107,9 +107,9 @@ void PMBlobSphere::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMBlobSphere::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBlobSphere::editWidget( TQWidget* parent ) const
 {
-   return new PMBlobSphereEdit( tqparent );
+   return new PMBlobSphereEdit( parent );
 }
 
 void PMBlobSphere::restoreMemento( PMMemento* s )

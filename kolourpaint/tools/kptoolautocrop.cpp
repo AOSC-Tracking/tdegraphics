@@ -720,11 +720,11 @@ void kpToolAutoCropCommand::unexecute ()
             // and the other branch would execute.
             if (*p)
             {
-                // TODO: We should really edit the tqmask here.  Due to good
+                // TODO: We should really edit the mask here.  Due to good
                 //       luck (if "maskBitmap" is initialized above, this region
-                //       will be marked as opaque in the tqmask; if it's not
+                //       will be marked as opaque in the mask; if it's not
                 //       initialized, we will be opaque by default), we
-                //       don't actually have to edit the tqmask but this is
+                //       don't actually have to edit the mask but this is
                 //       highly error-prone.
                 painter.drawPixmap ((*b)->rect (), **p);
             }

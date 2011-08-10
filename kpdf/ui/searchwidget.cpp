@@ -28,8 +28,8 @@
 #define LEDIT_ID    2
 #define FIND_ID     3
 
-SearchWidget::SearchWidget( TQWidget * tqparent, KPDFDocument * document )
-    : KToolBar( tqparent, "iSearchBar" ), m_document( document ),
+SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
+    : KToolBar( parent, "iSearchBar" ), m_document( document ),
     m_searchType( 0 ), m_caseSensitive( false )
 {
     // change toolbar appearance

@@ -866,12 +866,12 @@ void PMViewLayoutManager::removeLayout( const TQString& name )
 }
 
 
-PMSaveViewLayoutDialog::PMSaveViewLayoutDialog( PMShell* tqparent,
+PMSaveViewLayoutDialog::PMSaveViewLayoutDialog( PMShell* parent,
                                                 const char* name )
-      : KDialogBase( tqparent, name, true, i18n( "Save View Layout" ),
+      : KDialogBase( parent, name, true, i18n( "Save View Layout" ),
                      KDialogBase::Ok | KDialogBase::Cancel )
 {
-   m_pShell = tqparent;
+   m_pShell = parent;
 
    setButtonOK( KStdGuiItem::save() );
    enableButtonOK( false );

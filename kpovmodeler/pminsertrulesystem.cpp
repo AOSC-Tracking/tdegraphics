@@ -767,12 +767,12 @@ bool PMRule::matches( const TQString& className )
    return m;
 }
 
-bool PMRule::evaluate( const PMObject* tqparent )
+bool PMRule::evaluate( const PMObject* parent )
 {
    if( !m_pCondition )
       return true;
    else
-      return m_pCondition->evaluate( tqparent );
+      return m_pCondition->evaluate( parent );
 }
 
 PMRuleTargetClass::PMRuleTargetClass( TQDomElement& e,

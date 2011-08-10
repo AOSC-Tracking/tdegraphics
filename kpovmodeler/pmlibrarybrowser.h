@@ -53,7 +53,7 @@ public:
    /**
     * Default constructor
     */
-   PMLibraryBrowserView( PMPart* part, TQWidget* tqparent, const char* name = 0 );
+   PMLibraryBrowserView( PMPart* part, TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual TQString viewType( ) const { return TQString( "librarybrowserview" ); }
@@ -69,7 +69,7 @@ class PMLibraryBrowserViewWidget: public TQWidget
    Q_OBJECT
   TQ_OBJECT
 public:
-   PMLibraryBrowserViewWidget( TQWidget *tqparent, const char* name = NULL );
+   PMLibraryBrowserViewWidget( TQWidget *parent, const char* name = NULL );
 
 private slots:
    void resizeEvent( TQResizeEvent* ev );
@@ -112,9 +112,9 @@ public:
    virtual TQString viewType( ) const { return TQString( "librarybrowserview" ); }
    virtual TQString description( ) const;
    virtual TQString iconName( ) const { return TQString( "pmlibrarybrowserview" ); }
-   virtual PMViewBase* newInstance( TQWidget* tqparent, PMPart* part ) const
+   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const
    {
-      return new PMLibraryBrowserView( part, tqparent );
+      return new PMLibraryBrowserView( part, parent );
    }
 };
 

@@ -242,10 +242,10 @@ void kpEffectReduceColorsCommand::apply (TQPixmap *destPixmapPtr, int depth, boo
     //       (at least for monochrome).
     //       tqpixmap.html says "alpha masks on monochrome images are ignored."
     //
-    //       Put the tqmask back.
+    //       Put the mask back.
     //
-    if (destPixmapPtr->tqmask ())
-        pixmap.setMask (*destPixmapPtr->tqmask ());
+    if (destPixmapPtr->mask ())
+        pixmap.setMask (*destPixmapPtr->mask ());
 
     *destPixmapPtr = pixmap;
 }
@@ -276,9 +276,9 @@ TQPixmap kpEffectReduceColorsCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectReduceColorsWidget::kpEffectReduceColorsWidget (bool actOnSelection,
                                                         kpMainWindow *mainWindow,
-                                                        TQWidget *tqparent,
+                                                        TQWidget *parent,
                                                         const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
     TQVBoxLayout *lay = new TQVBoxLayout (this, marginHint (), spacingHint ());
 

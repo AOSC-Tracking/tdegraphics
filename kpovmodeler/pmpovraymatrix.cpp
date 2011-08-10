@@ -108,9 +108,9 @@ void PMPovrayMatrix::setValues( const PMVector& v )
    }
 }
 
-PMDialogEditBase* PMPovrayMatrix::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMPovrayMatrix::editWidget( TQWidget* parent ) const
 {
-   return new PMPovrayMatrixEdit( tqparent );
+   return new PMPovrayMatrixEdit( parent );
 }
 
 void PMPovrayMatrix::restoreMemento( PMMemento* s )

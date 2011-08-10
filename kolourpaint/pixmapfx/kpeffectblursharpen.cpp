@@ -88,7 +88,7 @@ TQPixmap kpEffectBlurSharpenCommand::apply (const TQPixmap &pixmap,
                << endl;
 #endif
 
-    // (KImageEffect::(blur|sharpen)() ignores tqmask)
+    // (KImageEffect::(blur|sharpen)() ignores mask)
     TQPixmap usePixmap = kpPixmapFX::pixmapWithDefinedTransparentPixels (
         pixmap,
         TQt::white/*arbitrarily chosen*/);
@@ -107,9 +107,9 @@ TQPixmap kpEffectBlurSharpenCommand::apply (const TQPixmap &pixmap,
     TQPixmap retPixmap = kpPixmapFX::convertToPixmap (image);
 
 
-    // KImageEffect::(blur|sharpen)() nukes tqmask - restore it
-    if (usePixmap.tqmask ())
-        retPixmap.setMask (*usePixmap.tqmask ());
+    // KImageEffect::(blur|sharpen)() nukes mask - restore it
+    if (usePixmap.mask ())
+        retPixmap.setMask (*usePixmap.mask ());
 
 
     return retPixmap;
@@ -125,8 +125,8 @@ TQPixmap kpEffectBlurSharpenCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectBlurSharpenWidget::kpEffectBlurSharpenWidget (bool actOnSelection,
                                                       kpMainWindow *mainWindow,
-                                                      TQWidget *tqparent, const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
+                                                      TQWidget *parent, const char *name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
     TQGridLayout *lay = new TQGridLayout (this, 4, 2, marginHint (), spacingHint ());
 

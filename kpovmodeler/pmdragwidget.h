@@ -36,7 +36,7 @@ class PMDragWidget : public TQWidget
    Q_OBJECT
   TQ_OBJECT
 public:
-   PMDragWidget( TQWidget* tqparent = 0, const char* name = 0, WFlags f = 0 );
+   PMDragWidget( TQWidget* parent = 0, const char* name = 0, WFlags f = 0 );
    
    virtual void startDrag( );
 

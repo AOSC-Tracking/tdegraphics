@@ -26,8 +26,8 @@
 
 #include "filefinder.h"
 
-FileFinder::FileFinder( TQWidget *tqparent, const char *name )
-    : KLineEdit( tqparent, name )
+FileFinder::FileFinder( TQWidget *parent, const char *name )
+    : KLineEdit( parent, name )
 {
     // make this widget just as large, as the font is + 8 Pixels
     int height = fontMetrics().height() + 8;

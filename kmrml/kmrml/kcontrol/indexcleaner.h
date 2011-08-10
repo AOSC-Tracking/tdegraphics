@@ -27,7 +27,7 @@ namespace KMrmlConfig
 
     public:
         IndexCleaner( const TQStringList& dirs, const KMrml::Config *config,
-                      TQObject *tqparent = 0, const char *name = 0 );
+                      TQObject *parent = 0, const char *name = 0 );
         ~IndexCleaner();
 
         void start();

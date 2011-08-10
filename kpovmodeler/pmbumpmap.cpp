@@ -336,9 +336,9 @@ void PMBumpMap::setBumpSize( double c )
    }
 }
 
-PMDialogEditBase* PMBumpMap::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBumpMap::editWidget( TQWidget* parent ) const
 {
-   return new PMBumpMapEdit( tqparent );
+   return new PMBumpMapEdit( parent );
 }
 
 void PMBumpMap::restoreMemento( PMMemento* s )

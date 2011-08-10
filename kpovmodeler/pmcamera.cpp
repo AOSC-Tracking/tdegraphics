@@ -443,9 +443,9 @@ void PMCamera::setExportPovray( bool ex )
    }
 }
 
-PMDialogEditBase* PMCamera::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMCamera::editWidget( TQWidget* parent ) const
 {
-   return new PMCameraEdit( tqparent );
+   return new PMCameraEdit( parent );
 }
 
 void PMCamera::restoreMemento( PMMemento* s )

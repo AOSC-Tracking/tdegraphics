@@ -55,7 +55,7 @@ class PageViewItem
 class PageViewMessage : public TQWidget
 {
     public:
-        PageViewMessage( TQWidget * tqparent );
+        PageViewMessage( TQWidget * parent );
 
         enum Icon { None, Info, Warning, Error, Find };
         void display( const TQString & message, Icon icon = Info, int durationMs = 4000 );

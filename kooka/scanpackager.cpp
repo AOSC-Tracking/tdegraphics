@@ -71,7 +71,7 @@
 
 /* ----------------------------------------------------------------------- */
 /* Constructor Scan Packager */
-ScanPackager::ScanPackager( TQWidget *tqparent ) : KFileTreeView( tqparent )
+ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
 {
    // TODO:
    setItemsRenameable (true );
@@ -531,7 +531,7 @@ void ScanPackager::slClicked( TQListViewItem *newItem )
 	 }
 	 else
 	 {
-	    emit( showThumbnails(  static_cast<KFileTreeViewItem*>(item->tqparent())));
+	    emit( showThumbnails(  static_cast<KFileTreeViewItem*>(item->parent())));
 	 }
       }
       else
@@ -854,7 +854,7 @@ void ScanPackager::slAddImage( TQImage *img, KookaImageMeta* )
 
    TQString s;
    /* Count amount of tqchildren of the father */
-   TQListViewItem *paps = curr->tqparent();
+   TQListViewItem *paps = curr->parent();
    if( curr->isDir() ) /* take only father if the is no directory */
       paps = curr;
 
@@ -1012,7 +1012,7 @@ void ScanPackager::slotImportFile()
 
     if( ! curr->isDir() )
     {
-        KFileTreeViewItem *pa = static_cast<KFileTreeViewItem*>(curr->tqparent());
+        KFileTreeViewItem *pa = static_cast<KFileTreeViewItem*>(curr->parent());
         impTarget = pa->url();
     }
     kdDebug(28000) << "Importing to " << impTarget.url() << endl;
@@ -1239,12 +1239,12 @@ void ScanPackager::contentsDragMoveEvent( TQDragMoveEvent *e )
    }
 
    TQListViewItem *afterme = 0;
-   TQListViewItem *tqparent = 0;
+   TQListViewItem *parent = 0;
 
-   findDrop( e->pos(), tqparent, afterme );
+   findDrop( e->pos(), parent, afterme );
 
    // "afterme" is 0 when aiming at a directory itself
-   TQListViewItem *item = afterme ? afterme : tqparent;
+   TQListViewItem *item = afterme ? afterme : parent;
 
    if( item )
    {

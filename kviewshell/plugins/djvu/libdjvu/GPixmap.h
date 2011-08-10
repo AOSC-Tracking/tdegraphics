@@ -306,13 +306,13 @@ public:
       #Alpha# denotes the gray value, in range #[0,1]#, represented by the
       corresponding pixel of bitmap #bm#. */
   void attenuate(const GBitmap *bm, int x, int y);
-  /** Blits solid color #color# through transparency tqmask #bm#.  
+  /** Blits solid color #color# through transparency mask #bm#.  
       Bitmap #bm# is positionned at location #x#,#y# over this color image.
       The matching color image pixels are then modified by adding color
       #color# multiplied by #Alpha#, where #Alpha# denotes the gray value, in
       range #[0,1]#, represented by the corresponding pixel of bitmap #bm#. */
   void blit(const GBitmap *bm, int x, int y, const GPixel *color);
-  /** Blits pixmap #color# through transparency tqmask #bm#.
+  /** Blits pixmap #color# through transparency mask #bm#.
       Bitmap #bm# is positionned at location #x#,#y# over this color image.
       The matching color image pixels are then modified by adding the
       corresponding pixel color in pixmap #color#, multiplied by #Alpha#,

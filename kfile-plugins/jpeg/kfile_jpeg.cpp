@@ -44,9 +44,9 @@ typedef KGenericFactory<KJpegPlugin> JpegFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_jpeg, JpegFactory("kfile_jpeg"))
 
-KJpegPlugin::KJpegPlugin(TQObject *tqparent, const char *name,
+KJpegPlugin::KJpegPlugin(TQObject *parent, const char *name,
                        const TQStringList &args )
-    : KFilePlugin(tqparent, name, args)
+    : KFilePlugin(parent, name, args)
 {
   kdDebug(7034) << "jpeg plugin\n";
 
@@ -148,12 +148,12 @@ KJpegPlugin::KJpegPlugin(TQObject *tqparent, const char *name,
 }
 
 TQValidator* KJpegPlugin::createValidator(const KFileMetaInfoItem& /*item*/,
-                                        TQObject */*tqparent*/,
+                                        TQObject */*parent*/,
                                          const char */*name*/ ) const
 {
     // no need to return a validator that validates everything as OK :)
 //     if (item.isEditable())
-//         return new TQRegExpValidator(TQRegExp(".*"), tqparent, name);
+//         return new TQRegExpValidator(TQRegExp(".*"), parent, name);
 //     else
     return 0L;
 }

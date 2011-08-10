@@ -333,9 +333,9 @@ void PMIsoSurface::setAllIntersections( bool yes )
    }
 }
 
-PMDialogEditBase* PMIsoSurface::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMIsoSurface::editWidget( TQWidget* parent ) const
 {
-   return new PMIsoSurfaceEdit( tqparent );
+   return new PMIsoSurfaceEdit( parent );
 }
 
 void PMIsoSurface::restoreMemento( PMMemento* s )

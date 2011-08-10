@@ -106,8 +106,8 @@ bool PMGLView::s_bDirect = true;
 
 
 PMGLView::PMGLView( PMPart* part, PMViewType t,
-                    TQWidget* tqparent, const char* name, WFlags f )
-      : PMViewBase( tqparent, name, f | TQt::WWinOwnDC | TQt::WRepaintNoErase )
+                    TQWidget* parent, const char* name, WFlags f )
+      : PMViewBase( parent, name, f | TQt::WWinOwnDC | TQt::WRepaintNoErase )
 {
    m_pPart = part;
    m_type = t;
@@ -1178,9 +1178,9 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
             if( m_pCamera == ( PMCamera* ) obj )
                invalidateProjection( );
 
-         if( obj->tqparent( ) )
-            if( obj->tqparent( )->type( ) == "Camera" )
-               if( m_pCamera == ( PMCamera* ) obj->tqparent( ) )
+         if( obj->parent( ) )
+            if( obj->parent( )->type( ) == "Camera" )
+               if( m_pCamera == ( PMCamera* ) obj->parent( ) )
                   if( obj->hasTransformationMatrix( ) )
                      invalidateProjection( );
       }
@@ -1209,9 +1209,9 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
          if( obj->type( ) == "Camera" )
             if( !m_pCamera )
                setCamera( ( PMCamera* ) obj );
-         if( obj->tqparent( ) )
-            if( obj->tqparent( )->type( ) == "Camera" )
-               if( m_pCamera == ( PMCamera* ) obj->tqparent( ) )
+         if( obj->parent( ) )
+            if( obj->parent( )->type( ) == "Camera" )
+               if( m_pCamera == ( PMCamera* ) obj->parent( ) )
                   if( obj->hasTransformationMatrix( ) )
                      invalidateProjection( );
       }
@@ -1225,9 +1225,9 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
             setCamera( 0 );
 
       if( m_type == PMGLView::PMViewCamera )
-         if( obj->tqparent( ) )
-            if( obj->tqparent( )->type( ) == "Camera" )
-               if( m_pCamera == ( PMCamera* ) obj->tqparent( ) )
+         if( obj->parent( ) )
+            if( obj->parent( )->type( ) == "Camera" )
+               if( m_pCamera == ( PMCamera* ) obj->parent( ) )
                   if( obj->hasTransformationMatrix( ) )
                      invalidateProjection( );
 
@@ -1296,7 +1296,7 @@ PMObject* PMGLView::topLevelRenderingObject( PMObject* o ) const
          else if( obj->isA( "Scene" ) || obj->isA( "Declare" ) )
             stop = true;
          else
-            obj = obj->tqparent( );
+            obj = obj->parent( );
       }
       while( !stop );
    }
@@ -1760,10 +1760,10 @@ TQString PMGLViewFactory::description( PMViewOptions* vo ) const
    return description( );
 }
 
-PMViewOptionsWidget* PMGLViewFactory::newOptionsWidget( TQWidget* tqparent,
+PMViewOptionsWidget* PMGLViewFactory::newOptionsWidget( TQWidget* parent,
                                                         PMViewOptions* o )
 {
-   return new PMGLViewOptionsWidget( tqparent, o );
+   return new PMGLViewOptionsWidget( parent, o );
 }
 
 PMViewOptions* PMGLViewFactory::newOptionsInstance( ) const
@@ -1772,9 +1772,9 @@ PMViewOptions* PMGLViewFactory::newOptionsInstance( ) const
    return o;
 }
 
-PMGLViewOptionsWidget::PMGLViewOptionsWidget( TQWidget* tqparent,
+PMGLViewOptionsWidget::PMGLViewOptionsWidget( TQWidget* parent,
                                               PMViewOptions* o )
-      : PMViewOptionsWidget( tqparent )
+      : PMViewOptionsWidget( parent )
 {
    m_pOptions = ( PMGLViewOptions* ) o;
 

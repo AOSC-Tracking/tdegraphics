@@ -64,7 +64,7 @@ public:
    /**
     * Returns a new @ref PMBoundedByEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the name of the pixmap that is displayed in the tree view
     * and dialog view

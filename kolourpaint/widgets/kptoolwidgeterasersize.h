@@ -41,7 +41,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpToolWidgetEraserSize (TQWidget *tqparent, const char *name);
+    kpToolWidgetEraserSize (TQWidget *parent, const char *name);
     virtual ~kpToolWidgetEraserSize ();
 
     int eraserSize () const;

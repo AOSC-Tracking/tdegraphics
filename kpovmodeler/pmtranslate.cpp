@@ -101,9 +101,9 @@ void PMTranslate::setTranslation( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMTranslate::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMTranslate::editWidget( TQWidget* parent ) const
 {
-   return new PMTranslateEdit( tqparent );
+   return new PMTranslateEdit( parent );
 }
 
 void PMTranslate::restoreMemento( PMMemento* s )

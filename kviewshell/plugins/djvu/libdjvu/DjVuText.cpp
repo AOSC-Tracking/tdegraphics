@@ -183,14 +183,14 @@ DjVuTXT::Zone::memuse() const
 #ifndef NEED_DECODER_ONLY
 void 
 DjVuTXT::Zone::encode(
-  const GP<ByteStream> &gbs, const Zone * tqparent, const Zone * prev) const
+  const GP<ByteStream> &gbs, const Zone * parent, const Zone * prev) const
 {
   ByteStream &bs=*gbs;
   // Encode type
   bs.write8(ztype);
   
   // Modify text_start and bounding rectangle based on the context
-  // (whether there is a previous non-zero same-level-child or tqparent)
+  // (whether there is a previous non-zero same-level-child or parent)
   int start=text_start;
   int x=rect.xmin, y=rect.ymin;
   int width=rect.width(), height=rect.height();
@@ -212,13 +212,13 @@ DjVuTXT::Zone::encode(
       y=y-prev->rect.ymin;
     }
     start-=prev->text_start+prev->text_length;
-  } else if (tqparent)
+  } else if (parent)
   {
-    // Encode offset from the upper left corner of the tqparent
+    // Encode offset from the upper left corner of the parent
     // in the coord system in that corner with x to the right and y down
-    x=x-tqparent->rect.xmin;
-    y=tqparent->rect.ymax-(y+height);
-    start-=tqparent->text_start;
+    x=x-parent->rect.xmin;
+    y=parent->rect.ymax-(y+height);
+    start-=parent->text_start;
   }
   // Encode rectangle
   bs.write16(0x8000+x);
@@ -243,7 +243,7 @@ DjVuTXT::Zone::encode(
 
 void 
 DjVuTXT::Zone::decode(const GP<ByteStream> &gbs, int maxtext,
-		      const Zone * tqparent, const Zone * prev)
+		      const Zone * parent, const Zone * prev)
 {
   ByteStream &bs=*gbs;
   // Decode type
@@ -273,11 +273,11 @@ DjVuTXT::Zone::decode(const GP<ByteStream> &gbs, int maxtext,
       y=y+prev->rect.ymin;
     }
     text_start+=prev->text_start+prev->text_length;
-  } else if (tqparent)
+  } else if (parent)
   {
-    x=x+tqparent->rect.xmin;
-    y=tqparent->rect.ymax-(y+height);
-    text_start+=tqparent->text_start;
+    x=x+parent->rect.xmin;
+    y=parent->rect.ymax-(y+height);
+    text_start+=parent->text_start;
   }
   rect=GRect(x, y, width, height);
   // Get tqchildren size
@@ -484,12 +484,12 @@ DjVuTXT::Zone::get_smallest(GList<GRect> &list, const int padding) const
 }
 
 void
-DjVuTXT::get_zones(int zone_type, const Zone *tqparent, 
+DjVuTXT::get_zones(int zone_type, const Zone *parent, 
                    GList<Zone *> & zone_list) const 
-   // get all the zones of  type zone_type under zone node tqparent
+   // get all the zones of  type zone_type under zone node parent
 {
-   // search all branches under tqparent
-   const Zone *zone=tqparent;
+   // search all branches under parent
+   const Zone *zone=parent;
    for( int cur_ztype=zone->ztype; cur_ztype<zone_type; ++cur_ztype )
    {
       GPosition pos;

@@ -937,7 +937,7 @@ MMRDecoder::decode(GP<ByteStream> gbs)
 	  tqshape.bits = blocks[b];
 	  if (tqshape.bits) 
 	    {
-	      tqshape.tqparent = -1;
+	      tqshape.parent = -1;
 	      tqshape.bits->compress();
 	      JB2Blit blit;
 	      blit.left = b*blocksize;

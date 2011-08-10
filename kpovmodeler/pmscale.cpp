@@ -102,9 +102,9 @@ void PMScale::setScale( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMScale::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMScale::editWidget( TQWidget* parent ) const
 {
-   return new PMScaleEdit( tqparent );
+   return new PMScaleEdit( parent );
 }
 
 void PMScale::restoreMemento( PMMemento* s )

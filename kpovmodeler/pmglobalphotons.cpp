@@ -437,9 +437,9 @@ void PMGlobalPhotons::setRadiusMediaMulti( double rmm )
    }
 }
 
-PMDialogEditBase* PMGlobalPhotons::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMGlobalPhotons::editWidget( TQWidget* parent ) const
 {
-   return new PMGlobalPhotonsEdit( tqparent );
+   return new PMGlobalPhotonsEdit( parent );
 }
 
 void PMGlobalPhotons::restoreMemento( PMMemento* s )

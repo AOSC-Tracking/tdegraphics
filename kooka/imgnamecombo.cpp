@@ -38,8 +38,8 @@
 #include "imgnamecombo.h"
 #include "img_saver.h"
 
-ImageNameCombo::ImageNameCombo( TQWidget *tqparent )
-   : KComboBox( tqparent )
+ImageNameCombo::ImageNameCombo( TQWidget *parent )
+   : KComboBox( parent )
 {
    setInsertionPolicy( TQComboBox::AtTop );
 }

@@ -45,8 +45,8 @@ extern "C"{
 #endif
 
 
-ScanSourceDialog::ScanSourceDialog( TQWidget *tqparent, const TQStrList list, ADF_BEHAVE adfBehave )
- : KDialogBase( tqparent, "SOURCE_DIALOG", true, i18n("Scan Source Selection"),
+ScanSourceDialog::ScanSourceDialog( TQWidget *parent, const TQStrList list, ADF_BEHAVE adfBehave )
+ : KDialogBase( parent, "SOURCE_DIALOG", true, i18n("Scan Source Selection"),
 		Ok|Cancel,Ok, true)
 {
    TQVBox *vbox = makeVBoxMainWidget();

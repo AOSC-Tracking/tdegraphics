@@ -40,7 +40,7 @@ class PageView : public TQScrollView
   TQ_OBJECT
 
 public:
-    PageView( TQWidget* tqparent = 0, const char* name = 0 );
+    PageView( TQWidget* parent = 0, const char* name = 0 );
     ~PageView() {}
 
     void addChild( TQPtrVector<DocumentWidget> *wdgList );

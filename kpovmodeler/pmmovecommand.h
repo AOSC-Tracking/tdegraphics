@@ -39,23 +39,23 @@ public:
    /**
     * Command that moves one PMObject.
     *
-    * The object obj will be inserted as child of tqparent after
+    * The object obj will be inserted as child of parent after
     * the object after.
     *
     * If after is 0, the object becomes the first child.
     */
-   PMMoveCommand( PMObject* obj, PMObject* tqparent, PMObject* after );
+   PMMoveCommand( PMObject* obj, PMObject* parent, PMObject* after );
    
    /**
     * Command that moves a list of new PMObjects.
     * The objects don't have to be siblings of each other.
     *
-    * The object in the list will be inserted as tqchildren of tqparent after
+    * The object in the list will be inserted as tqchildren of parent after
     * the object after.
     *
     * If after is 0, the objects will be inserted as first tqchildren.
     */
-   PMMoveCommand( const PMObjectList& list, PMObject* tqparent, PMObject* after );
+   PMMoveCommand( const PMObjectList& list, PMObject* parent, PMObject* after );
    /**
     * Deletes the command.
     */

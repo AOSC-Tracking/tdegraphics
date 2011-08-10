@@ -95,7 +95,7 @@ class PDFGenerator : public Generator
         TQString getDocumentInfo( const TQString & data, bool canReturnNull = false ) const;
         TQString getDocumentDate( const TQString & data ) const;
         // private function for creating the document synopsis hieracy
-        void addSynopsisChildren( TQDomNode * tqparent, GList * items );
+        void addSynopsisChildren( TQDomNode * parent, GList * items );
         // private function for creating the transition information
         void addTransition( int pageNumber, KPDFPage * page );
         // (async related) receive data from the generator thread

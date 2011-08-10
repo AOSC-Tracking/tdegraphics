@@ -137,11 +137,11 @@
     {\bf Masking} --- When we create a DjVu image, we often know that certain
     pixels of the background image are going to be covered by foreground
     objects like text or drawings.  The DjVu IW44 wavelet decomposition
-    routine can use an optional bilevel image named the tqmask.  Every non zero
-    pixel in the tqmask means the value of the corresponding pixel in the
+    routine can use an optional bilevel image named the mask.  Every non zero
+    pixel in the mask means the value of the corresponding pixel in the
     background image is irrelevant.  The wavelet decomposition code will
     replace these masked pixels by a color value whose coding cost is minimal
-    (see \URL{http://www.research.att.com/~leonb/DJVU/tqmask}).
+    (see \URL{http://www.research.att.com/~leonb/DJVU/mask}).
 
     {\bf ToDo} --- There are many improvements to be made.  Besides better
     quantization algorithms (such as trellis quantization and bitrate
@@ -277,16 +277,16 @@ public:
   virtual ~IW44Image();
   /** Initializes an IWBitmap with image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
-      corresponding wavelet coefficient.  Argument #tqmask# is an optional
+      corresponding wavelet coefficient.  Argument #mask# is an optional
       bilevel image specifying the masked pixels (see \Ref{IW44Image.h}). */
-  static GP<IW44Image> create_encode(const GBitmap &bm, const GP<GBitmap> tqmask=0);
+  static GP<IW44Image> create_encode(const GBitmap &bm, const GP<GBitmap> mask=0);
   /** Initializes an IWPixmap with color image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
-      corresponding wavelet coefficient.  Argument #tqmask# is an optional
+      corresponding wavelet coefficient.  Argument #mask# is an optional
       bilevel image specifying the masked pixels (see \Ref{IW44Image.h}).
       Argument #crcbmode# specifies how the chrominance information should be
       encoded (see \Ref{CRCBMode}). */
-  static GP<IW44Image> create_encode(const GPixmap &bm, const GP<GBitmap> tqmask=0, CRCBMode crcbmode=CRCBnormal);
+  static GP<IW44Image> create_encode(const GPixmap &bm, const GP<GBitmap> mask=0, CRCBMode crcbmode=CRCBnormal);
   // ACCESS
   /** Returns the width of the IWBitmap image. */
   int get_width(void) const;

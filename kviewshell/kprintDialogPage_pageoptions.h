@@ -24,7 +24,7 @@ class TQVBoxLayout;
 class KPrintDialogPage_PageOptions : public KPrintDialogPage
 {
  public:
-  KPrintDialogPage_PageOptions( TQWidget *tqparent = 0, const char *name = 0 );
+  KPrintDialogPage_PageOptions( TQWidget *parent = 0, const char *name = 0 );
   
   void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false );
   void setOptions( const TQMap<TQString,TQString>& opts );

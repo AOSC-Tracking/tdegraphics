@@ -58,8 +58,8 @@ static const int GripHandleSize = 7;
 
 
 kpGrip::kpGrip (GripType type,
-                TQWidget *tqparent, const char *name)
-    : TQWidget (tqparent, name),
+                TQWidget *parent, const char *name)
+    : TQWidget (parent, name),
       m_type (type),
       m_startPoint (KP_INVALID_POINT),
       m_currentPoint (KP_INVALID_POINT),
@@ -166,7 +166,7 @@ TQString kpGrip::userMessage () const
 void kpGrip::setUserMessage (const TQString &message)
 {
     // Don't do NOP checking here since another grip might have changed
-    // the message so an aptqparent NOP for this grip is not a NOP in the
+    // the message so an apparent NOP for this grip is not a NOP in the
     // global sense (kpViewScrollableContainer::slotGripStatusMessageChanged()).
 
     m_userMessage = message;
@@ -194,8 +194,8 @@ void kpGrip::updatePixmap ()
         kpPixmapFX::ensureOpaqueAt (&pixmap, hr);
 
     setBackgroundPixmap (pixmap);
-    if (pixmap.tqmask ())
-        setMask (*pixmap.tqmask ());
+    if (pixmap.mask ())
+        setMask (*pixmap.mask ());
 }
 
 
@@ -390,10 +390,10 @@ void kpGrip::paintEvent (TQPaintEvent *e)
 
 
 // TODO: Are we checking for m_view == 0 often enough?
-kpViewScrollableContainer::kpViewScrollableContainer (kpMainWindow *tqparent,
+kpViewScrollableContainer::kpViewScrollableContainer (kpMainWindow *parent,
                                                       const char *name)
-    : TQScrollView ((TQWidget *) tqparent, name, TQt::WStaticContents | TQt::WNoAutoErase),
-      m_mainWindow (tqparent),
+    : TQScrollView ((TQWidget *) parent, name, TQt::WStaticContents | TQt::WNoAutoErase),
+      m_mainWindow (parent),
       m_contentsXSoon (-1), m_contentsYSoon (-1),
       m_view (0),
       m_bottomGrip (new kpGrip (kpGrip::Bottom, viewport (), "Bottom Grip")),

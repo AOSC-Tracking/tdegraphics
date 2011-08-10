@@ -18,8 +18,8 @@
 
 #include "simplePageSize.h"
 
-SizePreview::SizePreview( TQWidget *tqparent, const char *name, WFlags)
-    : TQWidget( tqparent, name, WStaticContents | WNoAutoErase )
+SizePreview::SizePreview( TQWidget *parent, const char *name, WFlags)
+    : TQWidget( parent, name, WStaticContents | WNoAutoErase )
 {
   // Set a sane default
   _width = _height = 50.0;

@@ -516,36 +516,36 @@ public:
 
       /** Returns the value of the flags */
    operator long(void) const;
-      /** Modifies the flags by ORing them with the provided tqmask. A broadcast
+      /** Modifies the flags by ORing them with the provided mask. A broadcast
 	  will be sent after the modification is done. */
-   GSafeFlags &	operator|=(long tqmask);
-      /** Modifies the flags by ANDing them with the provided tqmask. A broadcast
+   GSafeFlags &	operator|=(long mask);
+      /** Modifies the flags by ANDing them with the provided mask. A broadcast
 	  will be sent after the modification is done. */
-   GSafeFlags &	operator&=(long tqmask);
+   GSafeFlags &	operator&=(long mask);
 
-      /** If all bits mentioned in #set_tqmask# are set in the flags and all
-	  bits mentioned in #clr_tqmask# are cleared in the flags, it sets all
-	  bits from #set_tqmask1# in the flags, clears all flags from
-	  #clr_tqmask1# in the flags and returns #TRUE#. Otherwise returns
+      /** If all bits mentioned in #set_mask# are set in the flags and all
+	  bits mentioned in #clr_mask# are cleared in the flags, it sets all
+	  bits from #set_mask1# in the flags, clears all flags from
+	  #clr_mask1# in the flags and returns #TRUE#. Otherwise returns
 	  #FALSE#. */
-   bool	test_and_modify(long set_tqmask, long clr_tqmask,
-			long set_tqmask1, long clr_tqmask1);
+   bool	test_and_modify(long set_mask, long clr_mask,
+			long set_mask1, long clr_mask1);
 
-      /** Waits until all bits mentioned in #set_tqmask# are set in the flags
+      /** Waits until all bits mentioned in #set_mask# are set in the flags
 	  and all bits mentioned in #clr_flags# are cleared in the flags.
-	  After that it sets bits from #set_tqmask1# and clears bits from
-	  #clr_tqmask1# in the flags. */
-   void	wait_and_modify(long set_tqmask, long clr_tqmask,
-			long set_tqmask1, long clr_tqmask1);
+	  After that it sets bits from #set_mask1# and clears bits from
+	  #clr_mask1# in the flags. */
+   void	wait_and_modify(long set_mask, long clr_mask,
+			long set_mask1, long clr_mask1);
 
-      /** Waits until all bits set in #set_tqmask# are set in the flags and
-	  all bits mentioned in #clr_tqmask# are cleared in the flags. */
-   void	wait_for_flags(long set_tqmask, long clr_tqmask=0) const;
+      /** Waits until all bits set in #set_mask# are set in the flags and
+	  all bits mentioned in #clr_mask# are cleared in the flags. */
+   void	wait_for_flags(long set_mask, long clr_mask=0) const;
 
-      /** Modifies the flags by setting all bits mentioned in #set_tqmask#
-	  and clearing all bits mentioned in #clr_tqmask#. If the flags have
+      /** Modifies the flags by setting all bits mentioned in #set_mask#
+	  and clearing all bits mentioned in #clr_mask#. If the flags have
 	  actually been modified, a broadcast will be sent. */
-   void	modify(long set_tqmask, long clr_tqmask);
+   void	modify(long set_mask, long clr_mask);
 };
 
 inline
@@ -555,28 +555,28 @@ GSafeFlags::GSafeFlags(long xflags)
 }
 
 inline void
-GSafeFlags::wait_for_flags(long set_tqmask, long clr_tqmask) const
+GSafeFlags::wait_for_flags(long set_mask, long clr_mask) const
 {
-   ((GSafeFlags *) this)->wait_and_modify(set_tqmask, clr_tqmask, 0, 0);
+   ((GSafeFlags *) this)->wait_and_modify(set_mask, clr_mask, 0, 0);
 }
 
 inline void
-GSafeFlags::modify(long set_tqmask, long clr_tqmask)
+GSafeFlags::modify(long set_mask, long clr_mask)
 {
-   test_and_modify(0, 0, set_tqmask, clr_tqmask);
+   test_and_modify(0, 0, set_mask, clr_mask);
 }
 
 inline GSafeFlags &
-GSafeFlags::operator|=(long tqmask)
+GSafeFlags::operator|=(long mask)
 {
-   test_and_modify(0, 0, tqmask, 0);
+   test_and_modify(0, 0, mask, 0);
    return *this;
 }
 
 inline GSafeFlags &
-GSafeFlags::operator&=(long tqmask)
+GSafeFlags::operator&=(long mask)
 {
-   test_and_modify(0, 0, 0, ~tqmask);
+   test_and_modify(0, 0, 0, ~mask);
    return *this;
 }
 

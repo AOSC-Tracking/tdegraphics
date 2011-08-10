@@ -35,7 +35,7 @@
 #include "kcoloredit.h"
 #include "palette.h"
 
-KColorEditView::KColorEditView(TQWidget *tqparent, const char *name) : TQSplitter(tqparent, name) {
+KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(parent, name) {
 	colorSelector = new ColorSelector(this);
 	colorSelector->slotSetColor(
 		Color( RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, "" ));

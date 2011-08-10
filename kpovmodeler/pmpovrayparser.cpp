@@ -191,7 +191,7 @@ bool PMPovrayParser::parseBool( )
    return true;
 }
 
-bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
+bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                                         int max /* = -1 */ )
 {
    PMObject* child = 0;
@@ -202,10 +202,10 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
 
    do
    {
-      if( !m_bLastPMCommentEmpty && tqparent )
+      if( !m_bLastPMCommentEmpty && parent )
       {
-         if( tqparent->isA( "NamedObject" ) )
-            ( ( PMNamedObject* ) tqparent )->setName( m_lastPMComment );
+         if( parent->isA( "NamedObject" ) )
+            ( ( PMNamedObject* ) parent )->setName( m_lastPMComment );
          m_bLastPMCommentEmpty = true;
       }
       if( m_skippedComments.count( ) > 0 )
@@ -230,8 +230,8 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                error = !parseBox( ( PMBox* ) child );
                break;
             case SPHERE_TOK:
-               if( ( tqparent && ( tqparent->type( ) == "Blob" ) )
-                   || ( !tqparent && m_pTopParent
+               if( ( parent && ( parent->type( ) == "Blob" ) )
+                   || ( !parent && m_pTopParent
                         && ( m_pTopParent->type( ) == "Blob" ) ) )
                {
                   child = new PMBlobSphere( m_pPart );
@@ -244,8 +244,8 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                }
                break;
             case CYLINDER_TOK:
-               if( ( tqparent && ( tqparent->type( ) == "Blob" ) )
-                   || ( !tqparent && m_pTopParent
+               if( ( parent && ( parent->type( ) == "Blob" ) )
+                   || ( !parent && m_pTopParent
                         && ( m_pTopParent->type( ) == "Blob" ) ) )
                {
                   child = new PMBlobCylinder( m_pPart );
@@ -378,14 +378,14 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                child = new PMPattern( m_pPart );
                {
                   bool normal = true;
-                  if( tqparent && ( tqparent->type( ) != "Normal" ) )
+                  if( parent && ( parent->type( ) != "Normal" ) )
                      normal = false;
                   error = !parsePattern( ( PMPattern* ) child, normal );
                }
                break;
             case TURBULENCE_TOK:
                //  Search for a PMPattern in the object's tqchildren
-               child = tqparent->firstChild( );
+               child = parent->firstChild( );
                while( child && !child->isA( "Pattern" ) )
                   child = child->nextSibling( );
                if( child )
@@ -409,7 +409,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
             case CUBIC_WAVE_TOK:
             case POLY_WAVE_TOK:
                //  Search for a PMBlendMapModifiers in the object's tqchildren
-               child = tqparent->firstChild( );
+               child = parent->firstChild( );
                while( child && !child->isA( "BlendMapModifiers" ) )
                   child = child->nextSibling( );
                if( child )
@@ -478,7 +478,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                int expect = 0;
                PMListPattern::PMListType type = PMListPattern::ListPatternChecker;
 
-               if( tqparent && tqparent->type( ) == "Normal" )
+               if( parent && parent->type( ) == "Normal" )
                   normal = true;
                else if( m_pTopParent && m_pTopParent->type( ) == "Normal" )
                   normal = true;
@@ -640,7 +640,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                error = !parseMatrix( ( PMPovrayMatrix* ) child );
                break;
             case BOUNDED_BY_TOK:
-               if( tqparent && ( tqparent->type( ) == "ClippedBy" ) )
+               if( parent && ( parent->type( ) == "ClippedBy" ) )
                   finished = true;
                else
                {
@@ -649,7 +649,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                }
                break;
             case CLIPPED_BY_TOK:
-               if( tqparent && ( tqparent->type( ) == "BoundedBy" ) )
+               if( parent && ( parent->type( ) == "BoundedBy" ) )
                   finished = true;
                else
                {
@@ -666,7 +666,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                error = !parseRadiosity( ( PMRadiosity* ) child );
                break;
             case PHOTONS_TOK:
-               if ( tqparent && ( tqparent->type( ) == "GlobalSettings" ) )
+               if ( parent && ( parent->type( ) == "GlobalSettings" ) )
                {
                   child = new PMGlobalPhotons( m_pPart );
                   error = !parseGlobalPhotons( ( PMGlobalPhotons* ) child );
@@ -791,7 +791,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
                   printExpected( i18n( "identifier" ), m_pScanner->sValue( ) );
                break;
             case OBJECT_TOK:
-               error = !parseObject( tqparent );
+               error = !parseObject( parent );
                noChild = true;
                break;
             case RAW_POVRAY_TOK:
@@ -808,7 +808,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* tqparent,
          error = true;
       if( child )
       {
-         if( !insertChild( child, tqparent ) )
+         if( !insertChild( child, parent ) )
          {
             delete child;
             child = 0;
@@ -6572,7 +6572,7 @@ bool PMPovrayParser::parseDeclare( PMDeclare* decl )
    return !error;
 }
 
-bool PMPovrayParser::parseObject( PMCompositeObject* tqparent )
+bool PMPovrayParser::parseObject( PMCompositeObject* parent )
 {
    PMObject* child;
    bool error = false;
@@ -6586,23 +6586,23 @@ bool PMPovrayParser::parseObject( PMCompositeObject* tqparent )
          case ID_TOK:
             child = new PMObjectLink( m_pPart );
             error = !parseObjectLink( ( PMObjectLink* ) child );
-            if( !insertChild( child, tqparent ) )
+            if( !insertChild( child, parent ) )
                delete child;
             break;
          default:
          {
             PMObject* lastChild = 0;
-            if( tqparent )
-               lastChild = tqparent->lastChild( );
+            if( parent )
+               lastChild = parent->lastChild( );
             else
                lastChild = m_pResultList->last( );
 
-            error = !parseChildObjects( tqparent, 1 );
+            error = !parseChildObjects( parent, 1 );
             if( !error )
             {
                PMObject* newLast = 0;
-               if( tqparent )
-                  newLast = tqparent->lastChild( );
+               if( parent )
+                  newLast = parent->lastChild( );
                else
                   newLast = m_pResultList->last( );
 

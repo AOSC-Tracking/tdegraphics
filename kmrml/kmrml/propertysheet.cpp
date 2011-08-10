@@ -105,7 +105,7 @@ void PropertySheet::initFromDOM( const TQDomElement& elem )
         m_subSheets.append( new PropertySheet( *it ) );
 }
 
-TQWidget * PropertySheet::createWidget( TQWidget */*tqparent*/, const char */*name*/ )
+TQWidget * PropertySheet::createWidget( TQWidget */*parent*/, const char */*name*/ )
 {
     TQWidget *w = 0L;
 

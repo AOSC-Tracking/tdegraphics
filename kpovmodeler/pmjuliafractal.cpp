@@ -272,9 +272,9 @@ void PMJuliaFractal::setExponent( const PMVector& e )
    }
 }
 
-PMDialogEditBase* PMJuliaFractal::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMJuliaFractal::editWidget( TQWidget* parent ) const
 {
-   return new PMJuliaFractalEdit( tqparent );
+   return new PMJuliaFractalEdit( parent );
 }
 
 void PMJuliaFractal::restoreMemento( PMMemento* s )

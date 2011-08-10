@@ -25,8 +25,8 @@
 
 #include <klocale.h>
 
-PMMeshEdit::PMMeshEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMMeshEdit::PMMeshEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

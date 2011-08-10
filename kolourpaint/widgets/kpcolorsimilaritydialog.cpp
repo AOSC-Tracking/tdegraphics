@@ -44,9 +44,9 @@ const double kpColorSimilarityDialog::maximumColorSimilarity = .30;
 
 
 kpColorSimilarityDialog::kpColorSimilarityDialog (kpMainWindow *mainWindow,
-                                                  TQWidget *tqparent,
+                                                  TQWidget *parent,
                                                   const char *name)
-    : KDialogBase (tqparent, name, true/*modal*/,
+    : KDialogBase (parent, name, true/*modal*/,
                    i18n ("Color Similarity"),
                    KDialogBase::Ok | KDialogBase::Cancel),
       m_mainWindow (mainWindow)

@@ -26,8 +26,8 @@ class KSnapshotPreview : public TQLabel
   TQ_OBJECT
 
     public:
-        KSnapshotPreview(TQWidget *tqparent, const char *name = 0)
-            : TQLabel(tqparent, name)
+        KSnapshotPreview(TQWidget *parent, const char *name = 0)
+            : TQLabel(parent, name)
         {
             tqsetAlignment(AlignHCenter | AlignVCenter);
             setCursor(TQCursor(TQt::PointingHandCursor));
@@ -40,13 +40,13 @@ class KSnapshotPreview : public TQLabel
             // does unexpected things when painting directly onto the pixmap
             TQPixmap pixmap(pm);
             TQPixmap handle(15, 15);
-            TQBitmap tqmask(15, 15, true);
+            TQBitmap mask(15, 15, true);
 
             {
-                TQPainter p(&tqmask);
+                TQPainter p(&mask);
                 tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), tqpalette().active());
                 p.end();
-                handle.setMask(tqmask);
+                handle.setMask(mask);
             }
 
             {
@@ -95,7 +95,7 @@ class KSnapshot : public KDialogBase, virtual public KSnapshotIface
   TQ_OBJECT
 
 public:
-  KSnapshot(TQWidget *tqparent= 0, const char *name= 0, bool grabCurrent=false);
+  KSnapshot(TQWidget *parent= 0, const char *name= 0, bool grabCurrent=false);
   ~KSnapshot();
 
   enum CaptureMode { FullScreen=0, WindowUnderCursor=1, Region=2, ChildWindow=3 };

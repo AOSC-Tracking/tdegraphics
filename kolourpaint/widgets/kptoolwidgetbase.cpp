@@ -45,8 +45,8 @@
 #include <kpeffectinvert.h>
 
 
-kpToolWidgetBase::kpToolWidgetBase (TQWidget *tqparent, const char *name)
-    : TQFrame (tqparent, name),
+kpToolWidgetBase::kpToolWidgetBase (TQWidget *parent, const char *name)
+    : TQFrame (parent, name),
       m_invertSelectedPixmap (true),
       m_selectedRow (-1), m_selectedCol (-1)
 {

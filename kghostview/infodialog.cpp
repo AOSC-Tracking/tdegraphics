@@ -32,8 +32,8 @@
 //
 // Using KDialogBase in message box mode (gives centered action button)
 //
-InfoDialog::InfoDialog( TQWidget *tqparent, const char *name, bool modal )
-  :KDialogBase( i18n("Document Information"), Yes, Yes, Yes, tqparent,
+InfoDialog::InfoDialog( TQWidget *parent, const char *name, bool modal )
+  :KDialogBase( i18n("Document Information"), Yes, Yes, Yes, parent,
 		name, modal, true, KStdGuiItem::ok() )
 {
   TQFrame *page = makeMainWidget();

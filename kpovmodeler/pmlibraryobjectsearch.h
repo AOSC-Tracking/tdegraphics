@@ -41,7 +41,7 @@ class PMLibraryObjectSearch: public TQWidget
    Q_OBJECT
   TQ_OBJECT
 public:
-   PMLibraryObjectSearch( TQWidget *tqparent );
+   PMLibraryObjectSearch( TQWidget *parent );
 
 private slots:
    void slotSearchButtonPressed( );

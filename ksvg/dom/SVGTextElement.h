@@ -61,7 +61,7 @@ class SVGTextElementImpl;
  * features that apply to tqshapes such as paths and rectangles also
  * apply to <code>text</code> elements.
  *
- * It is possible to apply a gradient, pattern, clipping path, tqmask or
+ * It is possible to apply a gradient, pattern, clipping path, mask or
  * filter to text.When one of these facilities is applied to text and
  * keyword objectBoundingBox is used to specify a graphical effect
  * relative to the "object bounding box", then the object bounding box

@@ -29,13 +29,13 @@ class KJpegPlugin: public KFilePlugin
   TQ_OBJECT
 
 public:
-    KJpegPlugin( TQObject *tqparent, const char *name,
+    KJpegPlugin( TQObject *parent, const char *name,
                 const TQStringList& args );
 
     virtual bool readInfo ( KFileMetaInfo& info, uint what );
     virtual bool writeInfo( const KFileMetaInfo& info ) const;
     virtual TQValidator* createValidator( const KFileMetaInfoItem& item,
-                                         TQObject* tqparent, const char* name) const;
+                                         TQObject* parent, const char* name) const;
     
 private:
     TQDateTime parseDateTime( const TQString& string ); 

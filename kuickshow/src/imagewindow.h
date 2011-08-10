@@ -41,9 +41,9 @@ class ImageWindow : public ImlibWidget
   TQ_OBJECT
 
 public:
-  ImageWindow( ImData *_idata, ImlibData *id, TQWidget *tqparent=0,
+  ImageWindow( ImData *_idata, ImlibData *id, TQWidget *parent=0,
 	       const char *name=0 );
-  ImageWindow( ImData *_idata=0, TQWidget *tqparent=0, const char *name=0 );
+  ImageWindow( ImData *_idata=0, TQWidget *parent=0, const char *name=0 );
 
   bool 		showNextImage( KuickFile * file );
   bool 		showNextImage( const KURL& url );

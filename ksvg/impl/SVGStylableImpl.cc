@@ -270,7 +270,7 @@ void SVGStylableImpl::processStyle()
 			m_strokeOpacity = 1;
 	}
 
-	// Fake group opacity by multiplying by our tqparent's group opacity
+	// Fake group opacity by multiplying by our parent's group opacity
 	if(~m_flags & SVG_STYLE_FLAG_OPACITY)
 	{
 		if(parentStyle)
@@ -286,7 +286,7 @@ void SVGStylableImpl::processStyle()
 		m_clipPath = "";
 
 	if(~m_flags & SVG_STYLE_FLAG_MASK)
-		m_tqmask = "";
+		m_mask = "";
 
 	// Spec: default "nonzero"
 	if(~m_flags & SVG_STYLE_FLAG_FILL_RULE)
@@ -737,7 +737,7 @@ float SVGStylableImpl::fontSizeForText(const TQString &value)
  glyph-orientation-vertical	SVGStylableImpl::GlyphOrientationVertical	DontDelete|ReadOnly
  glyph-orientation-horizontal	SVGStylableImpl::GlyphOrientationHorizontal	DontDelete|ReadOnly
  color-interpolation	SVGStylableImpl::ColorInterpolation	DontDelete|ReadOnly
- tqmask				SVGStylableImpl::Mask	DontDelete|ReadOnly
+ mask				SVGStylableImpl::Mask	DontDelete|ReadOnly
 @end
 @namespace KSVG
 @begin SVGStylableImplProto::s_hashTable 2
@@ -1076,7 +1076,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 		case Mask:
 			m_flags |= SVG_STYLE_FLAG_MASK;
 			if(!inherit)
-				m_tqmask = extractUrlId(param);
+				m_mask = extractUrlId(param);
 			break;
 		case MarkerStart:
 			m_flags |= SVG_STYLE_FLAG_MARKER_START;

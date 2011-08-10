@@ -22,7 +22,7 @@ class TOC : public KListView, public DocumentObserver
 Q_OBJECT
   TQ_OBJECT
     public:
-        TOC(TQWidget *tqparent, KPDFDocument *document);
+        TOC(TQWidget *parent, KPDFDocument *document);
         ~TOC();
 
         // inherited from DocumentObserver

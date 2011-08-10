@@ -243,10 +243,10 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 
 		setReferencedElement(orig);
 
-		// Create a tqparent, a <g>
-		SVGElementImpl *tqparent = 0;
+		// Create a parent, a <g>
+		SVGElementImpl *parent = 0;
 		DOM::Element impl = static_cast<DOM::Document *>(ownerDoc())->createElement("g");
-		tqparent = SVGDocumentImpl::createElement("g", impl, ownerDoc());
+		parent = SVGDocumentImpl::createElement("g", impl, ownerDoc());
 		SVGElementImpl *clone = orig->cloneNode(true);
 
 		// Apply the use-correction
@@ -258,8 +258,8 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 		trans += ")";
 
 		// Apply the transform attribute and render the element
-		tqparent->setAttributeInternal("transform", trans);
-		tqparent->setAttribute("transform", trans);
+		parent->setAttributeInternal("transform", trans);
+		parent->setAttribute("transform", trans);
 
 		// Apply width/height if symbol
 		if(dynamic_cast<SVGSymbolElementImpl *>(clone))
@@ -294,14 +294,14 @@ void SVGUseElementImpl::createItem(KSVGCanvas *c)
 			}
 		}
 
-		appendChild(*tqparent);
-		tqparent->appendChild(*clone);
+		appendChild(*parent);
+		parent->appendChild(*clone);
 
-		setupSubtree(tqparent, ownerSVGElement(), viewportElement());
+		setupSubtree(parent, ownerSVGElement(), viewportElement());
 
 		m_instanceRoot->setCorrespondingElement(clone);
 
-		dynamic_cast<SVGLocatableImpl *>(tqparent)->updateCachedScreenCTM(screenCTM());
+		dynamic_cast<SVGLocatableImpl *>(parent)->updateCachedScreenCTM(screenCTM());
 
 		// Redirect local ecma event handlers to the correspondingElement
 		TQPtrListIterator<SVGRegisteredEventListener> it(eventListeners());

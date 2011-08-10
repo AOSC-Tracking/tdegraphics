@@ -399,9 +399,9 @@ void PMMedia::enableScattering( bool c )
    }
 }
 
-PMDialogEditBase* PMMedia::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMMedia::editWidget( TQWidget* parent ) const
 {
-   return new PMMediaEdit( tqparent );
+   return new PMMediaEdit( parent );
 }
 
 void PMMedia::restoreMemento( PMMemento* s )

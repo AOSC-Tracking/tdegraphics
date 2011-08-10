@@ -70,8 +70,8 @@ public:
    /**
     * Default constructor
     */
-   PMViewOptionsWidget( TQWidget* tqparent, const char* name = 0 )
-         : TQWidget( tqparent, name )
+   PMViewOptionsWidget( TQWidget* parent, const char* name = 0 )
+         : TQWidget( parent, name )
    {
    }
 
@@ -96,8 +96,8 @@ public:
    /**
     * Default constructor
     */
-   PMViewBase( TQWidget* tqparent, const char* name = 0, WFlags f = 0 )
-         : TQWidget( tqparent, name, f )
+   PMViewBase( TQWidget* parent, const char* name = 0, WFlags f = 0 )
+         : TQWidget( parent, name, f )
    {
    }
    /**

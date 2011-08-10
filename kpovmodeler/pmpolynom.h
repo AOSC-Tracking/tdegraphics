@@ -67,7 +67,7 @@ public:
    /**
     * Returns a new @ref PMPolynomEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual void restoreMemento( PMMemento* s );
 

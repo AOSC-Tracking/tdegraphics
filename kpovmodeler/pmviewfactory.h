@@ -72,7 +72,7 @@ public:
    /**
     * Returns a new view instance
     */
-   virtual PMViewBase* newInstance( TQWidget* tqparent, PMPart* part ) const = 0;
+   virtual PMViewBase* newInstance( TQWidget* parent, PMPart* part ) const = 0;
    /**
     * Creates a config object for the view type.
     * If the view doesn't have special attributes, the function returns 0;
@@ -116,7 +116,7 @@ public:
     * Returns a new view of type viewType if available
     */
    PMViewBase* newViewInstance( const TQString& viewType,
-                                TQWidget* tqparent, PMPart* part ) const;
+                                TQWidget* parent, PMPart* part ) const;
    /**
     * Returns a new view option instance for the given view type
     */

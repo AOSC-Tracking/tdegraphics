@@ -170,7 +170,7 @@ void kpMainWindow::slotConfigureToolBars ()
     KEditToolbar dialog (actionCollection (),
                          TQString()/*default ui.rc file*/,
                          true/*global resource*/,
-                         this/*tqparent*/);
+                         this/*parent*/);
     // Clicking on OK after Apply brings up the dialog (below) again.
     // Bug with KEditToolBar.
     dialog.showButtonApply (false);

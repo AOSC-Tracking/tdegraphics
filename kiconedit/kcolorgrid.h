@@ -43,7 +43,7 @@ private:
     Q_OBJECT
   TQ_OBJECT
 public:
-  KColorGrid( TQWidget * tqparent = 0, const char *name = 0, int spacing = 0);
+  KColorGrid( TQWidget * parent = 0, const char *name = 0, int spacing = 0);
   virtual ~KColorGrid() {};
 
   enum GridState { Plain, Shaded };

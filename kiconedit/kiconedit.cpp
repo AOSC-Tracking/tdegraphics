@@ -451,7 +451,7 @@ void KIconEdit::updateAccels()
     actionCollection()->readShortcutSettings();
 }
 
-TQWidget *KIconEdit::createContainer( TQWidget *tqparent, int index,
+TQWidget *KIconEdit::createContainer( TQWidget *parent, int index,
         const TQDomElement &element, int &id )
 {
     if ( element.attribute( "name" ) == "paletteToolBar" )
@@ -461,7 +461,7 @@ TQWidget *KIconEdit::createContainer( TQWidget *tqparent, int index,
         return m_paletteToolBar;
     }
 
-    return KXMLGUIBuilder::createContainer( tqparent, index, element, id );
+    return KXMLGUIBuilder::createContainer( parent, index, element, id );
 }
 
 bool KIconEdit::setupStatusBar()

@@ -856,7 +856,7 @@ TQString PDFGenerator::getDocumentDate( const TQString & data ) const
     return result;
 }
 
-void PDFGenerator::addSynopsisChildren( TQDomNode * tqparent, GList * items )
+void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
 {
     int numItems = items->getLength();
     for ( int i = 0; i < numItems; ++i )
@@ -872,7 +872,7 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * tqparent, GList * items )
         if ( name.isEmpty() )
             continue;
         TQDomElement item = docSyn.createElement( name );
-        tqparent->appendChild( item );
+        parent->appendChild( item );
 
         // 2. find the page the link refers to
         LinkAction * a = outlineItem->getAction();

@@ -34,7 +34,7 @@ class FileWidget : public KDirOperator
 public:
     enum WhichItem { Previous, Next, Current };
 
-    FileWidget( const KURL& url, TQWidget *tqparent = 0L, const char *name = 0L );
+    FileWidget( const KURL& url, TQWidget *parent = 0L, const char *name = 0L );
     ~FileWidget();
 
     bool hasFiles() const;

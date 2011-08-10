@@ -37,7 +37,7 @@ class SearchWidget : public TQWidget
   TQ_OBJECT
 
 public:
-  SearchWidget(TQWidget* tqparent = 0, const char* name = 0, WFlags fl = 0);
+  SearchWidget(TQWidget* parent = 0, const char* name = 0, WFlags fl = 0);
   ~SearchWidget();
 
   TQString getText() const;

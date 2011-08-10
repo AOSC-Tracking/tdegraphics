@@ -71,7 +71,7 @@ dviRenderer::dviRenderer(TQWidget *par)
   : DocumentRenderer(par), info(new infoDialog(par))
 {
 #ifdef DEBUG_DVIRENDERER
-  kdDebug(4300) << "dviRenderer( tqparent=" << par << " )" << endl;
+  kdDebug(4300) << "dviRenderer( parent=" << par << " )" << endl;
 #endif
 
   // initialize the dvi machinery

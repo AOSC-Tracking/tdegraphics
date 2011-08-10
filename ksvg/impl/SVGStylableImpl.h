@@ -225,7 +225,7 @@ public:
 	STYLE_GET(TQString, WordSpacing, m_wordSpacing)
 	STYLE_GET(TQString, FontWeight, m_fontWeight)
 	STYLE_GET(TQString, ClipPath, m_clipPath)
-	STYLE_GET(TQString, Mask, m_tqmask)
+	STYLE_GET(TQString, Mask, m_mask)
 	STYLE_GET(TQString, StartMarker, m_startMarker)
 	STYLE_GET(TQString, MidMarker, m_midMarker)
 	STYLE_GET(TQString, EndMarker, m_endMarker)
@@ -255,7 +255,7 @@ public:
 	STYLE_GET_OPTIM(EColorInterpolation, ColorInterpolation, m_colorInterpolation, 1)
 	
 	STYLE_HAS(ClipPath, m_clipPath)
-	STYLE_HAS(Mask, m_tqmask)
+	STYLE_HAS(Mask, m_mask)
 	STYLE_HAS(StartMarker, m_startMarker)
 	STYLE_HAS(MidMarker, m_midMarker)
 	STYLE_HAS(EndMarker, m_endMarker)

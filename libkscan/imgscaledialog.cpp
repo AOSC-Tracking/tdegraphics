@@ -27,9 +27,9 @@
 /* ############################################################################## */
 
 
-ImgScaleDialog::ImgScaleDialog( TQWidget *tqparent, int curr_sel,
+ImgScaleDialog::ImgScaleDialog( TQWidget *parent, int curr_sel,
 				const char *name )
-   :KDialogBase( tqparent,  name , true, i18n("Zoom"),
+   :KDialogBase( parent,  name , true, i18n("Zoom"),
                  Ok|Cancel, Ok, true )
 {
    // setCaption (i18n ("Image Zoom"));

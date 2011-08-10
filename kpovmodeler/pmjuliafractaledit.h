@@ -43,9 +43,9 @@ class PMJuliaFractalEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMJuliaFractalEdit with tqparent and name
+    * Creates a PMJuliaFractalEdit with parent and name
     */
-   PMJuliaFractalEdit( TQWidget* tqparent, const char* name = 0 );
+   PMJuliaFractalEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

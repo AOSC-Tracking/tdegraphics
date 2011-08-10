@@ -38,8 +38,8 @@ static const char FAXMAGIC[]   = "\000PC Research, Inc\000\000\000\000\000\000";
 static const char littleTIFF[] = "\x49\x49\x2a\x00";
 static const char bigTIFF[]    = "\x4d\x4d\x00\x2a";
 
-KFaxImage::KFaxImage( const TQString &filename, TQObject *tqparent, const char *name )
-   : TQObject(tqparent,name)
+KFaxImage::KFaxImage( const TQString &filename, TQObject *parent, const char *name )
+   : TQObject(parent,name)
 {
   KGlobal::locale()->insertCatalogue( TQString::tqfromLatin1("libkfaximage") );
   loadImage(filename);

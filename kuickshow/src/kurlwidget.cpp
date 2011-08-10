@@ -23,8 +23,8 @@
 
 #include "kurlwidget.h"
 
-KURLWidget::KURLWidget(const TQString& text, TQWidget *tqparent, const char *name)
-    : KURLLabel( tqparent, name )
+KURLWidget::KURLWidget(const TQString& text, TQWidget *parent, const char *name)
+    : KURLLabel( parent, name )
 {
     setText( text );
     connect( this, TQT_SIGNAL( leftClickedURL() ), TQT_SLOT( run() ));

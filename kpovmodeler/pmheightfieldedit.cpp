@@ -31,8 +31,8 @@
 #include <kiconloader.h>
 #include <kfiledialog.h>
 
-PMHeightFieldEdit::PMHeightFieldEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMHeightFieldEdit::PMHeightFieldEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

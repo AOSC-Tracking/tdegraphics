@@ -65,12 +65,12 @@ TQDomElement MrmlCreator::addRelevanceList( TQDomElement& query )
  * Creates a <user-relevance-element> with the given attributes set.
  */
 void MrmlCreator::createRelevanceElement( TQDomDocument& doc,
-                                          TQDomElement& tqparent,
+                                          TQDomElement& parent,
                                           const TQString& url,
                                           Relevance relevance )
 {
     TQDomElement element = doc.createElement( "user-relevance-element" );
     element.setAttribute( "image-location", url );
     element.setAttribute( "user-relevance", TQString::number( relevance ) );
-    tqparent.appendChild( element );
+    parent.appendChild( element );
 }

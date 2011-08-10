@@ -47,8 +47,8 @@
 #define ID_CUSTOM 2
 #define ID_FIT_PAGE 3
 
-ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *tqparent, const char* name )
-    : KPrintDialogPage( tqparent, name ),
+ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* name )
+    : KPrintDialogPage( parent, name ),
       m_image(img),
       m_ignoreSignal(false)
 {

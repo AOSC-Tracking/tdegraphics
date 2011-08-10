@@ -88,7 +88,7 @@ class dviRenderer : public DocumentRenderer, bigEndianByteReader
   TQ_OBJECT
 
 public:
-  dviRenderer(TQWidget *tqparent);
+  dviRenderer(TQWidget *parent);
   ~dviRenderer();
 
   virtual bool	setFile(const TQString &fname, const KURL &base);

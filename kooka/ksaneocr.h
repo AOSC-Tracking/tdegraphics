@@ -82,7 +82,7 @@ public:
     KSANEOCR( TQWidget*, KConfig *);
     ~KSANEOCR();
 
-    bool startOCRVisible( TQWidget* tqparent=0);
+    bool startOCRVisible( TQWidget* parent=0);
 
     void finishedOCRVisible( bool );
 

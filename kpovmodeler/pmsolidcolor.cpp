@@ -97,9 +97,9 @@ void PMSolidColor::setColor( const PMColor& c )
    }
 }
 
-PMDialogEditBase* PMSolidColor::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMSolidColor::editWidget( TQWidget* parent ) const
 {
-   return new PMSolidColorEdit( tqparent );
+   return new PMSolidColorEdit( parent );
 }
 
 void PMSolidColor::restoreMemento( PMMemento* s )

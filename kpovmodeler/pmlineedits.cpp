@@ -19,8 +19,8 @@
 #include <kmessagebox.h>
 #include <klocale.h>
 
-PMFloatEdit::PMFloatEdit( TQWidget* tqparent, const char* name /*= 0*/ )
-      : TQLineEdit( tqparent, name )
+PMFloatEdit::PMFloatEdit( TQWidget* parent, const char* name /*= 0*/ )
+      : TQLineEdit( parent, name )
 {
    m_bCheckLower = false;
    m_bCheckUpper = false;
@@ -129,8 +129,8 @@ void PMFloatEdit::slotEditTextChanged( const TQString& /*t*/ )
 
 
 
-PMIntEdit::PMIntEdit( TQWidget* tqparent, const char* name /*= 0*/ )
-      : TQLineEdit( tqparent, name )
+PMIntEdit::PMIntEdit( TQWidget* parent, const char* name /*= 0*/ )
+      : TQLineEdit( parent, name )
 {
    m_bCheckLower = false;
    m_bCheckUpper = false;

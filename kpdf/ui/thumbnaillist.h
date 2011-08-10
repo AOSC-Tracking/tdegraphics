@@ -32,7 +32,7 @@ class ThumbnailList : public TQScrollView, public DocumentObserver
 Q_OBJECT
   TQ_OBJECT
 	public:
-		ThumbnailList(TQWidget *tqparent, KPDFDocument *document);
+		ThumbnailList(TQWidget *parent, KPDFDocument *document);
 		~ThumbnailList();
 
         // inherited: return thumbnails observer id
@@ -101,7 +101,7 @@ Q_OBJECT
 class ThumbnailsBox : public TQVBox
 {
 	public:
-		ThumbnailsBox( TQWidget * tqparent ) : TQVBox( tqparent ) {};
+		ThumbnailsBox( TQWidget * parent ) : TQVBox( parent ) {};
 		TQSize tqsizeHint() const { return TQSize(); }
 };
 
@@ -116,7 +116,7 @@ class ThumbnailsBox : public TQVBox
 class ThumbnailController : public KToolBar
 {
     public:
-        ThumbnailController( TQWidget * tqparent, ThumbnailList * thumbnailList );
+        ThumbnailController( TQWidget * parent, ThumbnailList * thumbnailList );
 };
 
 #endif

@@ -66,7 +66,7 @@ public:
    /**
     * Returns a new @ref PMRotateEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmrotate" ); }
 

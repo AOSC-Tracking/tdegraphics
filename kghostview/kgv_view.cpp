@@ -75,9 +75,9 @@ namespace KGV {
 }
 
 KGVPart::KGVPart( TQWidget* parentWidget, const char*,
-                  TQObject* tqparent, const char* name,
+                  TQObject* parent, const char* name,
                   const TQStringList &args ) :
-    KParts::ReadOnlyPart( tqparent, name ),
+    KParts::ReadOnlyPart( parent, name ),
     _fitTimer( new TQTimer( this ) ),
     _job( 0 ),
     _mimetypeScanner( 0 ),
@@ -979,8 +979,8 @@ void KGVPart::setDisplayOptions( const DisplayOptions& options )
 }
 
 
-KGVBrowserExtension::KGVBrowserExtension( KGVPart *tqparent ) :
-    KParts::BrowserExtension( tqparent, "KGVBrowserExtension" )
+KGVBrowserExtension::KGVBrowserExtension( KGVPart *parent ) :
+    KParts::BrowserExtension( parent, "KGVBrowserExtension" )
 {
     emit enableAction( "print", true );
     setURLDropHandlingEnabled( true );
@@ -988,7 +988,7 @@ KGVBrowserExtension::KGVBrowserExtension( KGVPart *tqparent ) :
 
 void KGVBrowserExtension::print()
 {
-    ((KGVPart *)tqparent())->document()->print();
+    ((KGVPart *)parent())->document()->print();
 }
 
 

@@ -39,7 +39,7 @@ public:
    /**
     * Standard constructor
     */
-   PMPovrayOutputWidget( TQWidget* tqparent = 0, const char* name = 0 );
+   PMPovrayOutputWidget( TQWidget* parent = 0, const char* name = 0 );
    /**
     * Destructor
     */

@@ -192,9 +192,9 @@ void PMPhotons::setAreaLight( bool al )
    }
 }
 
-PMDialogEditBase* PMPhotons::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMPhotons::editWidget( TQWidget* parent ) const
 {
-   return new PMPhotonsEdit( tqparent );
+   return new PMPhotonsEdit( parent );
 }
 
 void PMPhotons::restoreMemento( PMMemento* s )

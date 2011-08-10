@@ -576,22 +576,22 @@ DjVuPortcaster::notify_chunk_done(const DjVuPort * source, const GUTF8String &na
 
 void
 DjVuPortcaster::notify_file_flags_changed(const DjVuFile * source,
-					  long set_tqmask, long clr_tqmask)
+					  long set_mask, long clr_mask)
 {
    GPList<DjVuPort> list;
    compute_closure(source, list);
    for(GPosition pos=list; pos; ++pos)
-     list[pos]->notify_file_flags_changed(source, set_tqmask, clr_tqmask);
+     list[pos]->notify_file_flags_changed(source, set_mask, clr_mask);
 }
 
 void
 DjVuPortcaster::notify_doc_flags_changed(const DjVuDocument * source,
-					 long set_tqmask, long clr_tqmask)
+					 long set_mask, long clr_mask)
 {
    GPList<DjVuPort> list;
    compute_closure(source, list);
    for(GPosition pos=list; pos; ++pos)
-     list[pos]->notify_doc_flags_changed(source, set_tqmask, clr_tqmask);
+     list[pos]->notify_doc_flags_changed(source, set_mask, clr_mask);
 }
 
 void

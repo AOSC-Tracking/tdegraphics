@@ -160,9 +160,9 @@ public:
   Encode(void);
   /** Initializes an IWBitmap with image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
-      corresponding wavelet coefficient.  Argument #tqmask# is an optional
+      corresponding wavelet coefficient.  Argument #mask# is an optional
       bilevel image specifying the masked pixels (see \Ref{IW44Image.h}). */
-  void init(const GBitmap &bm, const GP<GBitmap> tqmask=0);
+  void init(const GBitmap &bm, const GP<GBitmap> mask=0);
   // CODER
   /** Encodes one data chunk into ByteStream #bs#.  Parameter #parms# controls
       how much data is generated.  The chunk data is written to ByteStream
@@ -211,11 +211,11 @@ public:
   Encode(void);
   /** Initializes an IWPixmap with color image #bm#.  This constructor
       performs the wavelet decomposition of image #bm# and records the
-      corresponding wavelet coefficient.  Argument #tqmask# is an optional
+      corresponding wavelet coefficient.  Argument #mask# is an optional
       bilevel image specifying the masked pixels (see \Ref{IW44Image.h}).
       Argument #crcbmode# specifies how the chrominance information should be
       encoded (see \Ref{CRCBMode}). */
-  void init(const GPixmap &bm, const GP<GBitmap> tqmask=0, CRCBMode crcbmode=CRCBnormal);
+  void init(const GPixmap &bm, const GP<GBitmap> mask=0, CRCBMode crcbmode=CRCBnormal);
   // CODER
   /** Encodes one data chunk into ByteStream #bs#.  Parameter #parms# controls
       how much data is generated.  The chunk data is written to ByteStream
@@ -720,17 +720,17 @@ IW44Image::Transform::Encode::RGB_to_Cr(const GPixel *p, int w, int h, int rowsi
 
 
 static void
-interpolate_tqmask(short *data16, int w, int h, int rowsize,
-                 const signed char *tqmask8, int mskrowsize)
+interpolate_mask(short *data16, int w, int h, int rowsize,
+                 const signed char *mask8, int mskrowsize)
 {
   int i,j;
   // count masked bits
   short *count;
   GPBuffer<short> gcount(count,w*h);
   short *cp = count;
-  for (i=0; i<h; i++, cp+=w, tqmask8+=mskrowsize)
+  for (i=0; i<h; i++, cp+=w, mask8+=mskrowsize)
     for (j=0; j<w; j++)
-      cp[j] = (tqmask8[j] ? 0 : 0x1000);
+      cp[j] = (mask8[j] ? 0 : 0x1000);
   // copy image
   short *sdata;
   GPBuffer<short> gsdata(sdata,w*h);
@@ -820,8 +820,8 @@ interpolate_tqmask(short *data16, int w, int h, int rowsize,
 
 
 static void
-forward_tqmask(short *data16, int w, int h, int rowsize, int begin, int end,
-             const signed char *tqmask8, int mskrowsize )
+forward_mask(short *data16, int w, int h, int rowsize, int begin, int end,
+             const signed char *mask8, int mskrowsize )
 {
   int i,j;
   signed char *m;
@@ -830,12 +830,12 @@ forward_tqmask(short *data16, int w, int h, int rowsize, int begin, int end,
   // Allocate buffers
   short *sdata;
   GPBuffer<short> gsdata(sdata,w*h);
-  signed char *stqmask;
-  GPBuffer<signed char> gstqmask(stqmask,w*h);
-  // Copy tqmask
-  m = stqmask;
-  for (i=0; i<h; i+=1, m+=w, tqmask8+=mskrowsize)
-    memcpy((void*)m, (void*)tqmask8, w);
+  signed char *smask;
+  GPBuffer<signed char> gsmask(smask,w*h);
+  // Copy mask
+  m = smask;
+  for (i=0; i<h; i+=1, m+=w, mask8+=mskrowsize)
+    memcpy((void*)m, (void*)mask8, w);
   // Loop over scale
   for (int scale=begin; scale<end; scale<<=1)
     {
@@ -853,7 +853,7 @@ forward_tqmask(short *data16, int w, int h, int rowsize, int begin, int end,
       IW44Image::Transform::Encode::forward(sdata, w, h, w, scale, scale+scale);
       // Cancel masked coefficients
       d = sdata;
-      m = stqmask;
+      m = smask;
       for (i=0; i<h; i+=scale+scale)
         {
           for (j=scale; j<w; j+=scale+scale)
@@ -875,7 +875,7 @@ forward_tqmask(short *data16, int w, int h, int rowsize, int begin, int end,
       // Correct visible pixels
       p = data16;
       d = sdata;
-      m = stqmask;
+      m = smask;
       for (i=0; i<h; i+=scale)
         {
           for (j=0; j<w; j+=scale)
@@ -897,8 +897,8 @@ forward_tqmask(short *data16, int w, int h, int rowsize, int begin, int end,
           p += rowsize * scale;
           d += w * scale;
         }
-      // Compute new tqmask for next scale
-      m = stqmask;
+      // Compute new mask for next scale
+      m = smask;
       signed char *m0 = m;
       signed char *m1 = m;
       for (i=0; i<h; i+=scale+scale)
@@ -941,15 +941,15 @@ IW44Image::Map::Encode::create(const signed char *img8, int imgrowsize,
   for (i=ih; i<bh; i++)
     for (j=0; j<bw; j++)
       *p++ = 0;
-  // Handle bittqmask
+  // Handle bitmask
   if (msk8)
     {
-      // Interpolate pixels below tqmask
+      // Interpolate pixels below mask
       DJVU_PROGRESS_RUN(transf, 1);
-      interpolate_tqmask(data16, iw, ih, bw, msk8, mskrowsize);
+      interpolate_mask(data16, iw, ih, bw, msk8, mskrowsize);
       // Multiscale iterative masked decomposition
       DJVU_PROGRESS_RUN(transf, 3);
-      forward_tqmask(data16, iw, ih, bw, 1, 32, msk8, mskrowsize);
+      forward_mask(data16, iw, ih, bw, 1, 32, msk8, mskrowsize);
     }
   else
     {
@@ -1393,11 +1393,11 @@ IW44Image::create_encode(const ImageType itype)
 }
 
 GP<IW44Image>
-IW44Image::create_encode(const GBitmap &bm, const GP<GBitmap> tqmask)
+IW44Image::create_encode(const GBitmap &bm, const GP<GBitmap> mask)
 {
   IWBitmap::Encode *bit=new IWBitmap::Encode();
   GP<IW44Image> retval=bit;
-  bit->init(bm, tqmask);
+  bit->init(bm, mask);
   return retval;
 }
 
@@ -1412,7 +1412,7 @@ IWBitmap::Encode::~Encode()
 }
 
 void
-IWBitmap::Encode::init(const GBitmap &bm, const GP<GBitmap> gtqmask)
+IWBitmap::Encode::init(const GBitmap &bm, const GP<GBitmap> gmask)
 {
   // Free
   close_codec();
@@ -1430,14 +1430,14 @@ IWBitmap::Encode::init(const GBitmap &bm, const GP<GBitmap> gtqmask)
   for (i=0; i<256; i++)
     bconv[i] = max(0,min(255,i*255/g)) - 128;
   // Perform decomposition
-  // Prepare tqmask information
+  // Prepare mask information
   const signed char *msk8 = 0;
   int mskrowsize = 0;
-  GBitmap *tqmask=gtqmask;
-  if (gtqmask)
+  GBitmap *mask=gmask;
+  if (gmask)
   {
-    msk8 = (const signed char*)((*tqmask)[0]);
-    mskrowsize = tqmask->rowsize();
+    msk8 = (const signed char*)((*mask)[0]);
+    mskrowsize = mask->rowsize();
   }
   // Prepare a buffer of signed bytes
   for (i=0; i<h; i++)
@@ -1556,11 +1556,11 @@ IWBitmap::Encode::encode_iff(IFFByteStream &iff, int nchunks, const IWEncoderPar
 
 GP<IW44Image>
 IW44Image::create_encode(
-  const GPixmap &pm, const GP<GBitmap> gtqmask, CRCBMode crcbmode)
+  const GPixmap &pm, const GP<GBitmap> gmask, CRCBMode crcbmode)
 {
   IWPixmap::Encode *pix=new IWPixmap::Encode();
   GP<IW44Image> retval=pix;
-  pix->init(pm, gtqmask,(IWPixmap::Encode::CRCBMode)crcbmode);
+  pix->init(pm, gmask,(IWPixmap::Encode::CRCBMode)crcbmode);
   return retval;
 }
 
@@ -1574,7 +1574,7 @@ IWPixmap::Encode::~Encode()
 }
 
 void
-IWPixmap::Encode::init(const GPixmap &pm, const GP<GBitmap> gtqmask, CRCBMode crcbmode)
+IWPixmap::Encode::init(const GPixmap &pm, const GP<GBitmap> gmask, CRCBMode crcbmode)
 {
   /* Free */
   close_codec();
@@ -1598,14 +1598,14 @@ IWPixmap::Encode::init(const GPixmap &pm, const GP<GBitmap> gtqmask, CRCBMode cr
     case CRCBnormal: crcb_half=0; crcb_delay=10; break;
     case CRCBfull:   crcb_half=0; crcb_delay= 0; break;
     }
-  // Prepare tqmask information
+  // Prepare mask information
   const signed char *msk8 = 0;
   int mskrowsize = 0;
-  GBitmap *tqmask=gtqmask;
-  if (tqmask)
+  GBitmap *mask=gmask;
+  if (mask)
   {
-    msk8 = (signed char const *)((*tqmask)[0]);
-    mskrowsize = tqmask->rowsize();
+    msk8 = (signed char const *)((*mask)[0]);
+    mskrowsize = mask->rowsize();
   }
   // Fill buffer with luminance information
   DJVU_PROGRESS_TASK(create,"initialize pixmap",3);

@@ -25,8 +25,8 @@
 class TOCItem : public KListViewItem
 {
     public:
-        TOCItem( KListView *tqparent, TOCItem *after, const TQDomElement & e )
-            : KListViewItem( tqparent, after, e.tagName() ), m_element( e )
+        TOCItem( KListView *parent, TOCItem *after, const TQDomElement & e )
+            : KListViewItem( parent, after, e.tagName() ), m_element( e )
         {
 #ifdef TOC_ENABLE_PAGE_COLUMN
             if ( e.hasAttribute( "Page" ) )
@@ -35,8 +35,8 @@ class TOCItem : public KListViewItem
             setMultiLinesEnabled(true);
         }
 
-        TOCItem( KListViewItem *tqparent, TOCItem *after, const TQDomElement & e )
-            : KListViewItem( tqparent, after, e.tagName() ), m_element( e )
+        TOCItem( KListViewItem *parent, TOCItem *after, const TQDomElement & e )
+            : KListViewItem( parent, after, e.tagName() ), m_element( e )
         {
 #ifdef TOC_ENABLE_PAGE_COLUMN
             if ( e.hasAttribute( "Page" ) )
@@ -54,7 +54,7 @@ class TOCItem : public KListViewItem
         TQDomElement m_element;
 };
 
-TOC::TOC(TQWidget *tqparent, KPDFDocument *document) : KListView(tqparent), m_document(document)
+TOC::TOC(TQWidget *parent, KPDFDocument *document) : KListView(parent), m_document(document)
 {
     addColumn( i18n("Topic") );
 #ifdef TOC_ENABLE_PAGE_COLUMN

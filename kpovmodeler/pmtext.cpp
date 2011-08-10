@@ -162,9 +162,9 @@ void PMText::setOffset( const PMVector& o )
    }
 }
 
-PMDialogEditBase* PMText::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMText::editWidget( TQWidget* parent ) const
 {
-   return new PMTextEdit( tqparent );
+   return new PMTextEdit( parent );
 }
 
 void PMText::restoreMemento( PMMemento* s )

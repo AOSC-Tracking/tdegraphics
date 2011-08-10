@@ -30,8 +30,8 @@
 #include "kiconcolors.h"
 #include "palettetoolbar.h"
 
-PaletteToolBar::PaletteToolBar( TQWidget *tqparent, const char *name )
-    : KToolBar( tqparent, name )
+PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
+    : KToolBar( parent, name )
 {
   TQWidget *base = new TQWidget( this );
 

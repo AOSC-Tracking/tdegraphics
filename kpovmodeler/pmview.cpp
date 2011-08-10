@@ -34,8 +34,8 @@
 #include "pmdialogview.h"
 #include "pmglview.h"
 
-PMView::PMView( PMPart* part, TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+PMView::PMView( PMPart* part, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    setBackgroundMode( PaletteBase );
 

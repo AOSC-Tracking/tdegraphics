@@ -38,9 +38,9 @@
 #include "pmobjectdrag.h"
 
 
-PMTreeViewWidget::PMTreeViewWidget( PMPart* part, TQWidget* tqparent /*= 0*/,
+PMTreeViewWidget::PMTreeViewWidget( PMPart* part, TQWidget* parent /*= 0*/,
                                     const char* name /*=0*/ )
-      : PMViewBase( tqparent, name )
+      : PMViewBase( parent, name )
 {
    TQHBoxLayout* hl = new TQHBoxLayout( this );
    PMTreeView* tv = new PMTreeView( part, this );
@@ -52,9 +52,9 @@ TQString PMTreeViewWidget::description( ) const
    return i18n( "Object Tree" );
 }
 
-PMTreeView::PMTreeView( PMPart* part, TQWidget* tqparent /*= 0*/,
+PMTreeView::PMTreeView( PMPart* part, TQWidget* parent /*= 0*/,
                         const char* name /*= 0*/ )
-      : TQListView( tqparent, name )
+      : TQListView( parent, name )
 {
    addColumn( i18n( "Objects" ) );
    header( )->hide( );
@@ -106,15 +106,15 @@ void PMTreeView::slotObjectChanged( PMObject* obj, const int mode,
       if( ( mode & PMCAdd ) && !( mode & PMCInsertError ) )
       {
          // object was added
-         if( !obj->tqparent( ) )
+         if( !obj->parent( ) )
          {
-            // object has no tqparent, append it as top level item
+            // object has no parent, append it as top level item
             pTreeItem = new PMTreeViewItem( obj, this );
          }
          else
          {
-            // find the tqparent in the listview
-            TQListViewItem* pParentTreeItem = findObject( obj->tqparent( ) );
+            // find the parent in the listview
+            TQListViewItem* pParentTreeItem = findObject( obj->parent( ) );
             if( pParentTreeItem )
             {
                PMObject* hObj = obj->prevSibling( );
@@ -186,7 +186,7 @@ void PMTreeView::slotObjectChanged( PMObject* obj, const int mode,
          if( pTreeItem )
          {
              PMTreeViewItem* p;
-             for( p = pTreeItem->tqparent( ); p; p = p->tqparent( ) )
+             for( p = pTreeItem->parent( ); p; p = p->parent( ) )
                  p->setOpen( true );
              pTreeItem->setSelected( true );
              setCurrentItem( pTreeItem );
@@ -238,7 +238,7 @@ PMTreeViewItem* PMTreeView::findObject( const PMObject* obj )
 {
    PMTreeViewItem* pTreeItem = 0;
 
-   if( !obj->tqparent( ) )
+   if( !obj->parent( ) )
    {
       // top level object
       pTreeItem = ( PMTreeViewItem* ) firstChild( );
@@ -248,7 +248,7 @@ PMTreeViewItem* PMTreeView::findObject( const PMObject* obj )
    }
    else
    {
-      pTreeItem = findObject( obj->tqparent( ) );
+      pTreeItem = findObject( obj->parent( ) );
       if( pTreeItem )
       {
          pTreeItem = ( PMTreeViewItem* ) pTreeItem->firstChild( );
@@ -269,7 +269,7 @@ void PMTreeView::selectItem( TQListViewItem* /*sitem*/ )
 
    m_pSelectedObject = ( ( PMTreeViewItem* ) sitem )->object( );
 
-   for( pItem = sitem->tqparent( ); pItem; pItem = pItem->tqparent( ) )
+   for( pItem = sitem->parent( ); pItem; pItem = pItem->parent( ) )
       pItem->setOpen( true );
    ensureItemVisible( sitem );
    setCurrentItem( sitem );
@@ -389,11 +389,11 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
       else if( ( e->state( ) & ShiftButton ) && oldCurrent && m_pLastSelected )
       {
          if( ( oldCurrent != m_pLastSelected ) &&
-             ( oldCurrent->tqparent( ) == m_pLastSelected->tqparent( ) ) )
+             ( oldCurrent->parent( ) == m_pLastSelected->parent( ) ) )
          {
             specialAction = true;
 
-            // shift click, old current item has the same tqparent
+            // shift click, old current item has the same parent
             // as the new selection. Select all items between the two
             // items
             if( m_pLastSelected->object( )->isSelectable( ) )
@@ -628,8 +628,8 @@ void PMTreeView::viewportDragMoveEvent( TQDragMoveEvent *e )
             accept = false;
             if( !obj->isReadOnly( ) )
                accept = true;
-            if( obj->tqparent( ) )
-               if( !obj->tqparent( )->isReadOnly( ) )
+            if( obj->parent( ) )
+               if( !obj->parent( )->isReadOnly( ) )
                   accept = true;
          }
       }
@@ -733,7 +733,7 @@ void PMTreeView::keyPressEvent( TQKeyEvent* e )
             accept = true;
             break;
          case TQt::Key_Left:
-            newSelection = current->tqparent( );
+            newSelection = current->parent( );
             accept = true;
             break;
          case TQt::Key_Right:

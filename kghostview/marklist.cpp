@@ -32,8 +32,8 @@
 
 #include "kgv_miniwidget.h"
 
-MarkListItem::MarkListItem(TQWidget *tqparent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget* miniW, int pageNum)
-    : TQWidget( tqparent ),
+MarkListItem::MarkListItem(TQWidget *parent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget* miniW, int pageNum)
+    : TQWidget( parent ),
     _miniWidget( miniW ),
     _pageNum( pageNum ),
     _requested( false )
@@ -113,8 +113,8 @@ void MarkListItem::paintEvent( TQPaintEvent* )
 
 /* MarkList */
 
-MarkList::MarkList( TQWidget* tqparent, const char* name, KGVMiniWidget* mini)
-    : TQTable( tqparent, name ),
+MarkList::MarkList( TQWidget* parent, const char* name, KGVMiniWidget* mini)
+    : TQTable( parent, name ),
     _selected ( -1 ),
 _miniWidget( mini )
 {

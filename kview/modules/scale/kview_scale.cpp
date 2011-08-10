@@ -35,12 +35,12 @@
 typedef KGenericFactory<KViewScale> KViewScaleFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_scale, KViewScaleFactory( "kview_scale" ) )
 
-KViewScale::KViewScale( TQObject* tqparent, const char* name, const TQStringList & )
-	: Plugin( tqparent, name )
+KViewScale::KViewScale( TQObject* parent, const char* name, const TQStringList & )
+	: Plugin( parent, name )
 	, m_pViewer( 0 )
 	, m_pCanvas( 0 )
 {
-	m_pViewer = static_cast<KImageViewer::Viewer *>( tqparent );
+	m_pViewer = static_cast<KImageViewer::Viewer *>( parent );
 	if( m_pViewer )
 	{
 		kdDebug( 4630 ) << "m_pViewer->canvas() = " << m_pViewer->canvas() << endl;

@@ -296,9 +296,9 @@ void PMMaterialMap::enableOnce( bool c )
    }
 }
 
-PMDialogEditBase* PMMaterialMap::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMMaterialMap::editWidget( TQWidget* parent ) const
 {
-   return new PMMaterialMapEdit( tqparent );
+   return new PMMaterialMapEdit( parent );
 }
 
 void PMMaterialMap::restoreMemento( PMMemento* s )

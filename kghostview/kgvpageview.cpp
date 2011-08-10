@@ -22,8 +22,8 @@
 
 #include "kgvpageview.h"
 
-KGVPageView::KGVPageView( TQWidget* tqparent, const char* name )
-  : TQScrollView( tqparent, name )
+KGVPageView::KGVPageView( TQWidget* parent, const char* name )
+  : TQScrollView( parent, name )
 {
     _page = 0;
 

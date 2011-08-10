@@ -30,7 +30,7 @@ class KViewPresenterConfModule : public KPreferencesModule
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		KViewPresenterConfModule( TQObject * tqparent );
+		KViewPresenterConfModule( TQObject * parent );
 		~KViewPresenterConfModule();
 
 	signals:

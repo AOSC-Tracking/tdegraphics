@@ -47,7 +47,7 @@ class dwMenuAction:public KToggleAction
 public:
    dwMenuAction( const TQString& text,
 		 const KShortcut& cut = KShortcut(),
-		 KDockWidget *dw=0, TQObject* tqparent = 0,
+		 KDockWidget *dw=0, TQObject* parent = 0,
 		 KDockMainWindow * mw=0, const char* name = 0 );
    virtual ~dwMenuAction();
 

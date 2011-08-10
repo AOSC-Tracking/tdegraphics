@@ -80,8 +80,8 @@ TQCString palette2String( Configuration::EnumPalette::type palette )
 }
 
 
-KPSWidget::KPSWidget( TQWidget* tqparent, const char* name ) : 
-    TQWidget           ( tqparent, name ),
+KPSWidget::KPSWidget( TQWidget* parent, const char* name ) : 
+    TQWidget           ( parent, name ),
     _gsWindow         ( None ),
     _usePipe          ( false ),
     _doubleBuffer     ( false ),

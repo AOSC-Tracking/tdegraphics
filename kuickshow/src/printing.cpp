@@ -43,16 +43,16 @@
 #include "printing.h"
 #include "version.h"
 
-bool Printing::printImage( ImageWindow& imageWin, TQWidget *tqparent )
+bool Printing::printImage( ImageWindow& imageWin, TQWidget *parent )
 {
     TQString imageURL = imageWin.url().prettyURL();
     KPrinter printer;
     printer.setDocName( imageURL );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
-    KPrinter::addDialogPage( new KuickPrintDialogPage( tqparent, "kuick page"));
+    KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
 
-    if ( printer.setup( tqparent, i18n("Print %1").tqarg(printer.docName().section('/', -1)) ) )
+    if ( printer.setup( parent, i18n("Print %1").tqarg(printer.docName().section('/', -1)) ) )
     {
         KTempFile tmpFile( TQString(), ".png" );
         if ( tmpFile.status() == 0 )
@@ -194,8 +194,8 @@ TQString Printing::minimizeString( TQString text, const TQFontMetrics&
 ///////////////////////////////////////////////////////////////////
 
 
-KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *tqparent, const char *name )
-    : KPrintDialogPage( tqparent, name )
+KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *parent, const char *name )
+    : KPrintDialogPage( parent, name )
 {
     setTitle( i18n("Image Settings") );
 

@@ -43,8 +43,8 @@ static const int COL_FILENAME = 1;
 typedef KGenericFactory<KCMKMrml, TQWidget> MrmlFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kmrml, MrmlFactory("kmrml") )
 
-KCMKMrml::KCMKMrml(TQWidget *tqparent, const char *name, const TQStringList & ):
-    KCModule(MrmlFactory::instance(), tqparent, name)
+KCMKMrml::KCMKMrml(TQWidget *parent, const char *name, const TQStringList & ):
+    KCModule(MrmlFactory::instance(), parent, name)
 {
     KAboutData* ab = new KAboutData(
         "kcmkmrml",

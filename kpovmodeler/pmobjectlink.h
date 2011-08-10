@@ -80,7 +80,7 @@ public:
    /**
     * Returns a new @ref PMObjectLinkEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmobjectlink" ); }
 

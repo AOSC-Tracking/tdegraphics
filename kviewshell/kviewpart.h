@@ -34,7 +34,7 @@ class KViewPart : public KViewPart_Iface
   TQ_OBJECT
 
 public:
-  KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
+  KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
             const char *name, const TQStringList& args);
   virtual ~KViewPart();
 
@@ -245,7 +245,7 @@ class KViewPartExtension : public KParts::BrowserExtension
 
 public:
 
-  KViewPartExtension(KViewPart *tqparent);
+  KViewPartExtension(KViewPart *parent);
   virtual ~KViewPartExtension() {}
 
 };

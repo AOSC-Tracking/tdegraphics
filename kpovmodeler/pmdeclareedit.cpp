@@ -33,8 +33,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMDeclareEdit::PMDeclareEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMDeclareEdit::PMDeclareEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
    m_pSelectedObject = 0;

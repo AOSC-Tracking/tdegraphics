@@ -75,7 +75,7 @@ public:
    virtual void readAttributes( const PMXMLHelper& h );
 
    /** */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmcomment" ); }
    /** */

@@ -21,10 +21,10 @@
 
 
 
-// Constructs a pageSizeWidget_base which is a child of 'tqparent', with
+// Constructs a pageSizeWidget_base which is a child of 'parent', with
 // the name 'name' and widget flags set to 'f'.
-pageSizeWidget::pageSizeWidget( TQWidget* tqparent,  const char* name, WFlags fl )
-    : pageSizeWidget_base( tqparent,  name, fl )
+pageSizeWidget::pageSizeWidget( TQWidget* parent,  const char* name, WFlags fl )
+    : pageSizeWidget_base( parent,  name, fl )
 {
   connect(&chosenSize, TQT_SIGNAL(sizeChanged(const SimplePageSize&)), previewer, TQT_SLOT(setSize(const SimplePageSize&)));
 

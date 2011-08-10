@@ -43,9 +43,9 @@ class PMTextureMapEdit : public PMTextureBaseEdit
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMTextureMapEdit with tqparent and name
+    * Creates a PMTextureMapEdit with parent and name
     */
-   PMTextureMapEdit( TQWidget* tqparent, const char* name = 0 );
+   PMTextureMapEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

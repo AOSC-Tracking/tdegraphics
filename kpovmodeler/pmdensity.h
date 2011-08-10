@@ -59,7 +59,7 @@ public:
    /**
     * Returns a new @ref PMDensityEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmdensity" ); }
 

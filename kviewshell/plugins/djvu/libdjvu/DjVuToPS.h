@@ -121,7 +121,7 @@ public:
                 would be your best choice.
              \item[Mode] ({\em COLOR}, {\em FORE}, {\em BACK}, or {\em BW})
                 Specifies how the \Ref{DjVuImage}s will be rendered (all layers,
-                foreground layer, background layer, and the tqmask respectively)
+                foreground layer, background layer, and the mask respectively)
              \item[Color] ({\em TRUE} or {\em FALSE}). Choosing {\em FALSE}
                 converts color images to gray scale.
              \item[Gamma] Printer color correction. 

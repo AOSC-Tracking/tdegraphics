@@ -114,9 +114,9 @@ void PMBox::setCorner2( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMBox::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBox::editWidget( TQWidget* parent ) const
 {
-   return new PMBoxEdit( tqparent );
+   return new PMBoxEdit( parent );
 }
 
 void PMBox::restoreMemento( PMMemento* s )

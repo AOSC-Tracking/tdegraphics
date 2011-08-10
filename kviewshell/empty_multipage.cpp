@@ -26,9 +26,9 @@
 
 K_EXPORT_COMPONENT_FACTORY(emptymultipagepart, EmptyMultiPageFactory)
 
-EmptyMultiPage::EmptyMultiPage(TQWidget* parentWidget, const char* widgetName, TQObject* tqparent, const char* name,
+EmptyMultiPage::EmptyMultiPage(TQWidget* parentWidget, const char* widgetName, TQObject* parent, const char* name,
                                const TQStringList& args)
-  : KMultiPage(parentWidget, widgetName, tqparent, name), emptyRenderer(parentWidget)
+  : KMultiPage(parentWidget, widgetName, parent, name), emptyRenderer(parentWidget)
 {
   Q_UNUSED(args);
   setInstance(EmptyMultiPageFactory::instance());

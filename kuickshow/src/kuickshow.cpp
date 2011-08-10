@@ -631,7 +631,7 @@ void KuickShow::slotTrashCurrentImage(ImageWindow *viewer)
     performTrashCurrentImage(viewer);
 }
 
-void KuickShow::performDeleteCurrentImage(TQWidget *tqparent)
+void KuickShow::performDeleteCurrentImage(TQWidget *parent)
 {
     assert(fileWidget != 0L);
 
@@ -640,7 +640,7 @@ void KuickShow::performDeleteCurrentImage(TQWidget *tqparent)
     list.append (item);
 
     if (KMessageBox::warningContinueCancel(
-            tqparent,
+            parent,
             i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>").tqarg(item->url().pathOrURL()),
             i18n("Delete File"),
             KStdGuiItem::del(),
@@ -654,7 +654,7 @@ void KuickShow::performDeleteCurrentImage(TQWidget *tqparent)
     fileWidget->del(list, false, false);
 }
 
-void KuickShow::performTrashCurrentImage(TQWidget *tqparent)
+void KuickShow::performTrashCurrentImage(TQWidget *parent)
 {
     assert(fileWidget != 0L);
 
@@ -665,7 +665,7 @@ void KuickShow::performTrashCurrentImage(TQWidget *tqparent)
     list.append (item);
 
     if (KMessageBox::warningContinueCancel(
-            tqparent,
+            parent,
             i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>").tqarg(item->url().pathOrURL()),
             i18n("Trash File"),
             KGuiItem(i18n("to trash", "&Trash"),"edittrash"),
@@ -676,7 +676,7 @@ void KuickShow::performTrashCurrentImage(TQWidget *tqparent)
     }
 
     tryShowNextImage();
-    fileWidget->trash(list, tqparent, false, false);
+    fileWidget->trash(list, parent, false, false);
 }
 
 void KuickShow::tryShowNextImage()

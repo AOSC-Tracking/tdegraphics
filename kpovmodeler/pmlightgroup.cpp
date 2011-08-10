@@ -103,9 +103,9 @@ void PMLightGroup::setGlobalLights( bool gl )
    }
 }
 
-PMDialogEditBase* PMLightGroup::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMLightGroup::editWidget( TQWidget* parent ) const
 {
-   return new PMLightGroupEdit( tqparent );
+   return new PMLightGroupEdit( parent );
 }
 
 void PMLightGroup::restoreMemento( PMMemento* s )

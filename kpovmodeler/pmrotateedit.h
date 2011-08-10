@@ -39,9 +39,9 @@ class PMRotateEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMRotateEdit with tqparent and name
+    * Creates a PMRotateEdit with parent and name
     */
-   PMRotateEdit( TQWidget* tqparent, const char* name = 0 );
+   PMRotateEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

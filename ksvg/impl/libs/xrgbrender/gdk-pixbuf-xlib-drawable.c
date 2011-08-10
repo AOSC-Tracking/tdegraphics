@@ -1103,7 +1103,7 @@ xlib_window_is_viewable (Window w)
 	XWindowAttributes wa;
 
 	while (w != 0) {
-		Window tqparent, root, *tqchildren;
+		Window parent, root, *tqchildren;
 		int ntqchildren;
 
 		XGetWindowAttributes (gdk_pixbuf_dpy, w, &wa);
@@ -1111,16 +1111,16 @@ xlib_window_is_viewable (Window w)
 			return 0;
 
 		if (!XQueryTree (gdk_pixbuf_dpy, w, &root,
-				 &tqparent, &tqchildren, &ntqchildren))
+				 &parent, &tqchildren, &ntqchildren))
 			return 0;
 
 		if (ntqchildren > 0)
 			XFree (tqchildren);
 
-		if (tqparent == root)
+		if (parent == root)
 			return 1;
 
-		w = tqparent;
+		w = parent;
 	}
 
 	return 0;

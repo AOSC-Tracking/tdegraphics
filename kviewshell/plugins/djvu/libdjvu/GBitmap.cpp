@@ -814,19 +814,19 @@ GBitmap::read_pbm_raw(ByteStream &bs)
   for (int n = nrows-1; n>=0; n--) 
     {
       unsigned char acc = 0;
-      unsigned char tqmask = 0;
+      unsigned char mask = 0;
       for (int c = 0; c<ncolumns; c++)
         {
-          if (!tqmask) 
+          if (!mask) 
             {
               bs.read(&acc, 1);
-              tqmask = (unsigned char)0x80;
+              mask = (unsigned char)0x80;
             }
-          if (acc & tqmask)
+          if (acc & mask)
             row[c] = 1;
           else
             row[c] = 0;
-          tqmask >>= 1;
+          mask >>= 1;
         }
       row -= bytes_per_row;
     }
@@ -1037,18 +1037,18 @@ GBitmap::rle_get_bitmap (
 {
   const int obyte_def=invert?0xff:0;
   const int obyte_ndef=invert?0:0xff;
-  int tqmask=0x80,obyte=0;
+  int mask=0x80,obyte=0;
   for(int c=ncolumns;c > 0 ;)
   {
     int x=read_run(runs);
     c-=x;
     while((x--)>0)
     {
-      if(!(tqmask>>=1))
+      if(!(mask>>=1))
       {
         *(bitmap++) = obyte^obyte_def;
         obyte=0;
-        tqmask=0x80;
+        mask=0x80;
         for(;x>=8;x-=8)
         {
           *(bitmap++)=obyte_def;
@@ -1061,19 +1061,19 @@ GBitmap::rle_get_bitmap (
       c-=x;
       while((x--)>0)
       {
-        obyte|=tqmask;
-        if(!(tqmask>>=1))
+        obyte|=mask;
+        if(!(mask>>=1))
         {
           *(bitmap++)=obyte^obyte_def;
           obyte=0;
-          tqmask=0x80;
+          mask=0x80;
           for(;(x>8);x-=8)
             *(bitmap++)=obyte_ndef;
         }
       }
     }
   }
-  if(tqmask != 0x80)
+  if(mask != 0x80)
   {
     *(bitmap++)=obyte^obyte_def;
   }

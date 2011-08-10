@@ -28,8 +28,8 @@
 const int c_minValue = -1000;
 const int c_maxValue = 1000;
 
-PMGraphicalObjectEdit::PMGraphicalObjectEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMGraphicalObjectEdit::PMGraphicalObjectEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -143,7 +143,7 @@ void PMGraphicalObjectEdit::slotLevelChanged( int )
 
 void PMGraphicalObjectEdit::recalculateResultingVisibility( )
 {
-   PMObject* o = m_pDisplayedObject->tqparent( );
+   PMObject* o = m_pDisplayedObject->parent( );
    PMGraphicalObject* go = 0;
    int level = 0;
    bool absoluteFound = false;
@@ -152,7 +152,7 @@ void PMGraphicalObjectEdit::recalculateResultingVisibility( )
    if( !m_pRelativeVisibility->isChecked( ) )
       absoluteFound = true;
 
-   for( ; o && !absoluteFound; o = o->tqparent( ) )
+   for( ; o && !absoluteFound; o = o->parent( ) )
    {
       if( o->isA( "GraphicalObject" ) )
       {

@@ -88,7 +88,7 @@ public:
    /**
     * Returns a new @ref PMPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /**
     * Gets the pattern type

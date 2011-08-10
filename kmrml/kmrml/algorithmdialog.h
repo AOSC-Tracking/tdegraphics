@@ -37,7 +37,7 @@ namespace KMrml
     public:
         AlgorithmDialog( const AlgorithmList&, const CollectionList&,
                          const Collection& currentColl,
-                         TQWidget *tqparent = 0, const char *name = 0 );
+                         TQWidget *parent = 0, const char *name = 0 );
         ~AlgorithmDialog();
 
     private slots:

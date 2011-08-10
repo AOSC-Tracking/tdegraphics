@@ -9,7 +9,7 @@ class glyph;
 
 class TeXFont_PK : public TeXFont {
  public:
-  TeXFont_PK(TeXFontDefinition *tqparent);
+  TeXFont_PK(TeXFontDefinition *parent);
   ~TeXFont_PK();
   
   glyph* getGlyph(TQ_UINT16 character, bool generateCharacterPixmap=false, const TQColor& color=TQt::black);

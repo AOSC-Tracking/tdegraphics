@@ -31,10 +31,10 @@
 #include <kdebug.h>
 #include "kscanslider.h"
 
-KScanSlider::KScanSlider( TQWidget *tqparent, const TQString& text,
+KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
 			  double min, double max, bool haveStdButt,
 			  int stdValue )
-   : TQFrame( tqparent ),
+   : TQFrame( parent ),
      m_stdValue( stdValue ),
      m_stdButt(0)
 {
@@ -149,8 +149,8 @@ KScanSlider::~KScanSlider()
 
 /* ====================================================================== */
 
-KScanEntry::KScanEntry( TQWidget *tqparent, const TQString& text )
- : TQFrame( tqparent )
+KScanEntry::KScanEntry( TQWidget *parent, const TQString& text )
+ : TQFrame( parent )
 {
     TQHBoxLayout *hb = new TQHBoxLayout( this );
 
@@ -213,9 +213,9 @@ void KScanEntry::slReturnPressed( void )
 
 
 
-KScanCombo::KScanCombo( TQWidget *tqparent, const TQString& text,
+KScanCombo::KScanCombo( TQWidget *parent, const TQString& text,
 			const TQStrList& list )
-    : TQHBox( tqparent ),
+    : TQHBox( parent ),
       combo(0)
 {
     createCombo( text );
@@ -224,9 +224,9 @@ KScanCombo::KScanCombo( TQWidget *tqparent, const TQString& text,
     combolist = list;
 }
 
-KScanCombo::KScanCombo( TQWidget *tqparent, const TQString& text,
+KScanCombo::KScanCombo( TQWidget *parent, const TQString& text,
 			const TQStringList& list )
-    : TQHBox( tqparent ),
+    : TQHBox( parent ),
       combo(0)
 {
     createCombo( text );

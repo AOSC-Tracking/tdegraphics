@@ -81,7 +81,7 @@ struct KSVGPlugin::Private
 	unsigned int height;
 };
 
-KSVGPlugin::KSVGPlugin(TQWidget *wtqparent, const char *, TQObject *tqparent, const char *name, unsigned int width, unsigned int height) : KParts::ReadOnlyPart(tqparent, name)
+KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const char *name, unsigned int width, unsigned int height) : KParts::ReadOnlyPart(parent, name)
 {
 	kdDebug(26003) << "KSVGPlugin::KSVGPlugin" << endl;
 	setInstance(KSVGPluginFactory::instance());
@@ -95,7 +95,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wtqparent, const char *, TQObject *tqparent, co
 
 	ksvgd->doc = 0;
 
-	ksvgd->window = new KSVGWidget(this, wtqparent, "Rendering Widget");
+	ksvgd->window = new KSVGWidget(this, wparent, "Rendering Widget");
 	connect(ksvgd->window, TQT_SIGNAL(browseURL(const TQString &)), this, TQT_SLOT(browseURL(const TQString &)));
 	ksvgd->window->show();
 
@@ -144,7 +144,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wtqparent, const char *, TQObject *tqparent, co
 	ksvgd->renderingBackendAction->setItems(items);
 	ksvgd->renderingBackendAction->setCurrentItem(KSVG::CanvasFactory::self()->itemInList(ksvgd->canvas));
 
-	ksvgd->aboutKSVG = new KAboutApplication(KSVGPluginFactory::instance()->aboutData(), wtqparent);
+	ksvgd->aboutKSVG = new KAboutApplication(KSVGPluginFactory::instance()->aboutData(), wparent);
 
 	setXMLFile("ksvgplugin.rc");
 }

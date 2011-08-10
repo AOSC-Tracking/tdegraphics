@@ -23,8 +23,8 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMClippedByEdit::PMClippedByEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMClippedByEdit::PMClippedByEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

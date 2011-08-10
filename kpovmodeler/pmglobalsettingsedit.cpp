@@ -29,8 +29,8 @@
 #include <kdialog.h>
 #include <kmessagebox.h>
 
-PMGlobalSettingsEdit::PMGlobalSettingsEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMGlobalSettingsEdit::PMGlobalSettingsEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

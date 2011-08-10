@@ -31,8 +31,8 @@
 #include "palette.h"
 #include "loadpalettedlg.h"
 
-LoadPaletteDlg::LoadPaletteDlg(TQWidget *tqparent, const char *name) 
-        : KDialogBase(tqparent, name, true, i18n( "Load Palette" ), 
+LoadPaletteDlg::LoadPaletteDlg(TQWidget *parent, const char *name) 
+        : KDialogBase(parent, name, true, i18n( "Load Palette" ), 
           Ok|Cancel, Ok, true) {
 	fileName = "";
     TQWidget *mainWidget = new TQWidget( this );

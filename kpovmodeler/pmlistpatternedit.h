@@ -42,9 +42,9 @@ class PMListPatternEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMListPatternEdit with tqparent and name
+    * Creates a PMListPatternEdit with parent and name
     */
-   PMListPatternEdit( TQWidget* tqparent, const char* name = 0 );
+   PMListPatternEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

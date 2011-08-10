@@ -41,9 +41,9 @@ class PMQuickColorEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMQuickColorEdit with tqparent and name
+    * Creates a PMQuickColorEdit with parent and name
     */
-   PMQuickColorEdit( TQWidget* tqparent, const char* name = 0 );
+   PMQuickColorEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

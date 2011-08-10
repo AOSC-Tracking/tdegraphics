@@ -1391,12 +1391,12 @@ DjVuDocument::add_to_cache(const GP<DjVuFile> & f)
 
 void
 DjVuDocument::notify_file_flags_changed(const DjVuFile * source,
-					long set_tqmask, long clr_tqmask)
+					long set_mask, long clr_mask)
 {
       // Don't check here if the document is initialized or not.
       // This function may be called when it's not.
       // check();
-   if (set_tqmask & DjVuFile::DECODE_OK)
+   if (set_mask & DjVuFile::DECODE_OK)
    {
       set_file_aliases(source);
       if (cache) add_to_cache((DjVuFile *) source);
@@ -1414,7 +1414,7 @@ DjVuDocument::notify_file_flags_changed(const DjVuFile * source,
       process_threqs();
    }
    
-   if (set_tqmask & DjVuFile::DATA_PRESENT)
+   if (set_mask & DjVuFile::DATA_PRESENT)
       process_threqs();		// May be we can extract thumbnails now
 }
 

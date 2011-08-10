@@ -28,23 +28,23 @@
 #include "pmobjectselect.h"
 
 PMLinkEdit::PMLinkEdit( const TQString& declareType,
-                        TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+                        TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_declareTypes.append( declareType );
    init( );
 }
 
 PMLinkEdit::PMLinkEdit( const TQStringList& declareTypes,
-                        TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+                        TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_declareTypes = declareTypes;
    init( );
 }
 
-PMLinkEdit::PMLinkEdit( TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+PMLinkEdit::PMLinkEdit( TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    init( );
 }

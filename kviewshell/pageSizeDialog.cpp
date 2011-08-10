@@ -25,8 +25,8 @@
 #include "pageSizeWidget.h"
 
 
-pageSizeDialog::pageSizeDialog( TQWidget *tqparent, pageSize *userPrefdPageSize, const char *name, bool modal)
-  :KDialogBase( tqparent, name, modal, i18n("Page Size"), Ok|Apply|Cancel, Ok, 
+pageSizeDialog::pageSizeDialog( TQWidget *parent, pageSize *userPrefdPageSize, const char *name, bool modal)
+  :KDialogBase( parent, name, modal, i18n("Page Size"), Ok|Apply|Cancel, Ok, 
 		true )
 {
   userPreferredPageSize = userPrefdPageSize;

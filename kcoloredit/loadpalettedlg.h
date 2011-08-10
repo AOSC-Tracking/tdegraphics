@@ -32,7 +32,7 @@ class LoadPaletteDlg : public KDialogBase  {
 public:
 	/** constructs the dialog
 	 */
-	LoadPaletteDlg(TQWidget *tqparent = 0, const char *name = 0);
+	LoadPaletteDlg(TQWidget *parent = 0, const char *name = 0);
 	~LoadPaletteDlg();
 	/** @return the fetched file name
 	 */

@@ -71,7 +71,7 @@ public:
     * Returns true if the object contains the child object o
     */
    virtual bool containsChild( PMObject* o ) const
-   { return ( ( PMObject* )this == o->tqparent( ) ); }
+   { return ( ( PMObject* )this == o->parent( ) ); }
    /**
     * Returns the index of the object or -1 if not found
     */
@@ -135,7 +135,7 @@ public:
 protected:
    /**
     * Adds num to the number of selected objects in this object and all
-    * tqparent objects. num can be negative.
+    * parent objects. num can be negative.
     */
    virtual void adjustSelectedChildren( int num );
 

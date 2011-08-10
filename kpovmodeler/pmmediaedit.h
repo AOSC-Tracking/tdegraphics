@@ -44,9 +44,9 @@ class PMMediaEdit : public PMTextureBaseEdit
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMMediaEdit with tqparent and name
+    * Creates a PMMediaEdit with parent and name
     */
-   PMMediaEdit( TQWidget* tqparent, const char* name = 0 );
+   PMMediaEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

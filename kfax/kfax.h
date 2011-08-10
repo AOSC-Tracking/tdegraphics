@@ -59,7 +59,7 @@ class TopLevel : public KMainWindow
 
 public:
 
-    TopLevel( TQWidget *tqparent=0, const char *name=0 );
+    TopLevel( TQWidget *parent=0, const char *name=0 );
     ~TopLevel();
 
     void openNetFile( const KURL& _url);

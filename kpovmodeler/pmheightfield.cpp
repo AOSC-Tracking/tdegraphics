@@ -200,9 +200,9 @@ void PMHeightField::setWaterLevel( double wl )
    }
 }
 
-PMDialogEditBase* PMHeightField::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMHeightField::editWidget( TQWidget* parent ) const
 {
-   return new PMHeightFieldEdit( tqparent );
+   return new PMHeightFieldEdit( parent );
 }
 
 void PMHeightField::restoreMemento( PMMemento* s )

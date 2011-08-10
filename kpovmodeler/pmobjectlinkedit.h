@@ -39,9 +39,9 @@ class PMObjectLinkEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMObjectLinkEdit with tqparent and name
+    * Creates a PMObjectLinkEdit with parent and name
     */
-   PMObjectLinkEdit( TQWidget* tqparent, const char* name = 0 );
+   PMObjectLinkEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

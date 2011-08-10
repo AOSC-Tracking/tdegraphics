@@ -67,8 +67,8 @@ void RepaintCommand::execute()
         grid->update( area);
 }
 
-KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *tqparent, const char *name)
-: TQFrame(tqparent, name)
+KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *parent, const char *name)
+: TQFrame(parent, name)
 {
   _corner = 0L;
   _hruler = _vruler = 0L;
@@ -290,8 +290,8 @@ void KGridView::resizeEvent(TQResizeEvent*)
 }
 
 
-KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *tqparent, const char *name)
- : KColorGrid(tqparent, name, 1)
+KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *parent, const char *name)
+ : KColorGrid(parent, name, 1)
 {
     img = image;
     history = h;
@@ -1426,7 +1426,7 @@ void KIconEditGrid::setSize(const TQSize s)
 
 void KIconEditGrid::createCursors()
 {
-  TQBitmap tqmask(22, 22);
+  TQBitmap mask(22, 22);
   TQPixmap pix;
 
   cursor_normal = TQCursor(arrowCursor);
@@ -1439,8 +1439,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    tqmask = TQPixmap(pix.createHeuristicMask());
-    pix.setMask(tqmask);
+    mask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(mask);
     cursor_colorpicker = TQCursor(pix, 1, 21);
   }
 
@@ -1452,8 +1452,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    tqmask = TQPixmap(pix.createHeuristicMask());
-    pix.setMask(tqmask);
+    mask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(mask);
     cursor_paint = TQCursor(pix, 0, 19);
   }
 
@@ -1465,8 +1465,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    tqmask = TQPixmap(pix.createHeuristicMask());
-    pix.setMask(tqmask);
+    mask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(mask);
     cursor_flood = TQCursor(pix, 3, 20);
   }
 
@@ -1478,8 +1478,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    tqmask = TQPixmap(pix.createHeuristicMask());
-    pix.setMask(tqmask);
+    mask = TQPixmap(pix.createHeuristicMask());
+    pix.setMask(mask);
     cursor_aim = TQCursor(pix, 10, 10);
   }
 
@@ -1491,8 +1491,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    tqmask = TQPixmap(pix.createHeuristicMask(true));
-    pix.setMask(tqmask);
+    mask = TQPixmap(pix.createHeuristicMask(true));
+    pix.setMask(mask);
     cursor_spray = TQCursor(pix, 0, 20);
   }
 
@@ -1504,8 +1504,8 @@ void KIconEditGrid::createCursors()
   }
   else
   {
-    tqmask = TQPixmap(pix.createHeuristicMask(true));
-    pix.setMask(tqmask);
+    mask = TQPixmap(pix.createHeuristicMask(true));
+    pix.setMask(mask);
     cursor_erase = TQCursor(pix, 1, 16);
   }
 }

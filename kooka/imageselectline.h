@@ -45,7 +45,7 @@ class ImageSelectLine:public TQHBox
    Q_OBJECT
   TQ_OBJECT
 public:
-   ImageSelectLine( TQWidget *tqparent, const TQString& text );
+   ImageSelectLine( TQWidget *parent, const TQString& text );
 
    KURL selectedURL() const;
    void setURL( const KURL& );

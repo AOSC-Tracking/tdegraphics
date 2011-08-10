@@ -32,7 +32,7 @@ namespace KMrml
   TQ_OBJECT
 
     public:
-        AlgorithmCombo( TQWidget *tqparent, const char *name = 0 );
+        AlgorithmCombo( TQWidget *parent, const char *name = 0 );
         ~AlgorithmCombo();
 
         void setAlgorithms( const AlgorithmList * algorithms );

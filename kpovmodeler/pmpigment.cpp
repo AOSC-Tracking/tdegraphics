@@ -72,9 +72,9 @@ TQString PMPigment::description( ) const
    return i18n( "pigment" );
 }
 
-PMDialogEditBase* PMPigment::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMPigment::editWidget( TQWidget* parent ) const
 {
-   return new PMPigmentEdit( tqparent );
+   return new PMPigmentEdit( parent );
 }
 
 void PMPigment::serialize( TQDomElement& e, TQDomDocument& doc ) const

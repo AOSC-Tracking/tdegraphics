@@ -24,8 +24,8 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMBoxEdit::PMBoxEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMBoxEdit::PMBoxEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

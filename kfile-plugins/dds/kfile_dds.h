@@ -30,7 +30,7 @@ class KDdsPlugin: public KFilePlugin
   TQ_OBJECT
     
 public:
-    KDdsPlugin( TQObject *tqparent, const char *name, const TQStringList& args );
+    KDdsPlugin( TQObject *parent, const char *name, const TQStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

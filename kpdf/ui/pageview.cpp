@@ -178,8 +178,8 @@ void PageViewTip::maybeTip( const TQPoint &_p )
  *  other misc functions: only slotRequestVisiblePixmaps and pickItemOnPoint noticeable,
  * and many insignificant stuff like this comment :-)
  */
-PageView::PageView( TQWidget *tqparent, KPDFDocument *document )
-    : TQScrollView( tqparent, "KPDF::pageView", WStaticContents | WNoAutoErase )
+PageView::PageView( TQWidget *parent, KPDFDocument *document )
+    : TQScrollView( parent, "KPDF::pageView", WStaticContents | WNoAutoErase )
 {
     // create and initialize private storage structure
     d = new PageViewPrivate();

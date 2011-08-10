@@ -15,8 +15,8 @@ using namespace KMrmlConfig;
 
 IndexCleaner::IndexCleaner( const TQStringList& dirs,
                             const KMrml::Config *config,
-                            TQObject *tqparent, const char *name )
-    : TQObject( tqparent, name ),
+                            TQObject *parent, const char *name )
+    : TQObject( parent, name ),
       m_dirs( dirs ),
       m_config( config ),
       m_process( 0L )

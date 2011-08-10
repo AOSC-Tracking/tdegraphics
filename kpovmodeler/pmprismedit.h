@@ -49,9 +49,9 @@ class PMPrismEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMPrismEdit with tqparent and name
+    * Creates a PMPrismEdit with parent and name
     */
-   PMPrismEdit( TQWidget* tqparent, const char* name = 0 );
+   PMPrismEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Destructor
     */

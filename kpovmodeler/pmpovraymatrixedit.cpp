@@ -25,8 +25,8 @@
 #include <klocale.h>
 
 
-PMPovrayMatrixEdit::PMPovrayMatrixEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMPovrayMatrixEdit::PMPovrayMatrixEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

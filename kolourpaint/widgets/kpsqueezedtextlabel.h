@@ -40,8 +40,8 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpSqueezedTextLabel (TQWidget *tqparent, const char *name = 0);
-    kpSqueezedTextLabel (const TQString &text, TQWidget *tqparent, const char *name = 0);
+    kpSqueezedTextLabel (TQWidget *parent, const char *name = 0);
+    kpSqueezedTextLabel (const TQString &text, TQWidget *parent, const char *name = 0);
 
     virtual TQSize tqminimumSizeHint () const;
 

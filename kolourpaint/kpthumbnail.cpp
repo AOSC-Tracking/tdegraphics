@@ -45,21 +45,21 @@
 
 
 // TODO: get out of the Alt+Tab list
-kpThumbnail::kpThumbnail (kpMainWindow *tqparent, const char *name)
-    : TQDockWindow (TQDockWindow::OutsideDock, tqparent, name),
-      m_mainWindow (tqparent),
+kpThumbnail::kpThumbnail (kpMainWindow *parent, const char *name)
+    : TQDockWindow (TQDockWindow::OutsideDock, parent, name),
+      m_mainWindow (parent),
       m_view (0)
 {
-    if (!tqparent)
-        kdError () << "kpThumbnail::kpThumbnail() requires tqparent" << endl;
+    if (!parent)
+        kdError () << "kpThumbnail::kpThumbnail() requires parent" << endl;
 
-    if (tqparent)
+    if (parent)
     {
         // Prevent thumbnail from docking - it's _really_ irritating otherwise
-        tqparent->leftDock ()->setAcceptDockWindow (this, false);
-        tqparent->rightDock ()->setAcceptDockWindow (this, false);
-        tqparent->topDock ()->setAcceptDockWindow (this, false);
-        tqparent->bottomDock ()->setAcceptDockWindow (this, false);
+        parent->leftDock ()->setAcceptDockWindow (this, false);
+        parent->rightDock ()->setAcceptDockWindow (this, false);
+        parent->topDock ()->setAcceptDockWindow (this, false);
+        parent->bottomDock ()->setAcceptDockWindow (this, false);
     }
 
 

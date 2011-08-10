@@ -142,9 +142,9 @@ bool PMObject::takeChild( uint )
    return false;
 }
 
-PMDialogEditBase* PMObject::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMObject::editWidget( TQWidget* parent ) const
 {
-   return new PMDialogEditBase( tqparent );
+   return new PMDialogEditBase( parent );
 //   return 0;
 }
 
@@ -177,7 +177,7 @@ PMMatrix PMObject::transformedWith( ) const
    else if( o->nextSibling( ) )
       o = o->nextSibling( );
    else
-      o = o->tqparent( );
+      o = o->parent( );
 
    while( o )
    {
@@ -187,7 +187,7 @@ PMMatrix PMObject::transformedWith( ) const
       if( o->nextSibling( ) )
          o = o->nextSibling( );
       else
-         o = o->tqparent( );
+         o = o->parent( );
    }
 
    return result;

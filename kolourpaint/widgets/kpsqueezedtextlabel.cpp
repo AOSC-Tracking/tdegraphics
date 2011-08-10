@@ -38,14 +38,14 @@
 #include <klocale.h>
 
 
-kpSqueezedTextLabel::kpSqueezedTextLabel (TQWidget *tqparent, const char *name)
-    : TQLabel (tqparent, name),
+kpSqueezedTextLabel::kpSqueezedTextLabel (TQWidget *parent, const char *name)
+    : TQLabel (parent, name),
       m_showEllipsis (true)
 {
 }
 
-kpSqueezedTextLabel::kpSqueezedTextLabel (const TQString &text, TQWidget *tqparent, const char *name)
-    : TQLabel (tqparent, name),
+kpSqueezedTextLabel::kpSqueezedTextLabel (const TQString &text, TQWidget *parent, const char *name)
+    : TQLabel (parent, name),
       m_showEllipsis (true)
 {
     setText (text);

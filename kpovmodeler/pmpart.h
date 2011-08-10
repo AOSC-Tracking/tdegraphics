@@ -77,7 +77,7 @@ public:
     * application.
     */
    PMPart( TQWidget* parentWidget, const char* widgetName,
-           TQObject* tqparent, const char* name, bool readWrite,
+           TQObject* parent, const char* name, bool readWrite,
            PMShell* shell = 0 );
 
    /**
@@ -85,7 +85,7 @@ public:
     * application. It does not create the main widget.
     */
    PMPart( TQWidget* parentWidget, const char* widgetName,
-           TQObject* tqparent, const char* name, bool readWrite,
+           TQObject* parent, const char* name, bool readWrite,
            bool onlyCutPaste, PMShell* shell = 0 );
 
    /**
@@ -771,7 +771,7 @@ protected:
     * creates the widget of the part instance and sets
     * it as the view
     */
-   void initView( TQWidget* tqparent, const char* name );
+   void initView( TQWidget* parent, const char* name );
    /**
     * initializes the documents contents
     */
@@ -1029,8 +1029,8 @@ class PMBrowserExtension : public KParts::BrowserExtension
   TQ_OBJECT
    friend class PMPart;
 public:
-   PMBrowserExtension( PMPart* tqparent )
-      : KParts::BrowserExtension( tqparent, "PMBrowserExtension" )
+   PMBrowserExtension( PMPart* parent )
+      : KParts::BrowserExtension( parent, "PMBrowserExtension" )
    {
        KGlobal::locale()->insertCatalogue("kpovmodeler");
    }

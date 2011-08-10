@@ -69,8 +69,8 @@ TQString PMSkySphere::description( ) const
    return i18n( "skysphere" );
 }
 
-PMDialogEditBase* PMSkySphere::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMSkySphere::editWidget( TQWidget* parent ) const
 {
-   return new PMSkySphereEdit( tqparent );
+   return new PMSkySphereEdit( parent );
 }
 

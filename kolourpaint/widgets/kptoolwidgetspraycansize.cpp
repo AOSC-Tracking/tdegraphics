@@ -44,8 +44,8 @@
 
 static int spraycanSizes [] = {9, 17, 29};
 
-kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *tqparent, const char *name)
-    : kpToolWidgetBase (tqparent, name)
+kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *parent, const char *name)
+    : kpToolWidgetBase (parent, name)
 {
 #if DEBUG_KP_TOOL_WIDGET_SPRAYCAN_SIZE
     kdDebug () << "kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize() CALLED!" << endl;
@@ -69,10 +69,10 @@ kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *tqparent, const ch
 
         TQImage image = kpPixmapFX::convertToImage (pixmap);
 
-        TQBitmap tqmask (pixmap.width (), pixmap.height ());
-        tqmask.fill (TQt::color0);
+        TQBitmap mask (pixmap.width (), pixmap.height ());
+        mask.fill (TQt::color0);
 
-        painter.begin (&tqmask);
+        painter.begin (&mask);
         painter.setPen (TQt::color1);
         
         for (int y = 0; y < image.height (); y++)
@@ -86,7 +86,7 @@ kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *tqparent, const ch
 
         painter.end ();
 
-        pixmap.setMask (tqmask);
+        pixmap.setMask (mask);
         
         addOption (pixmap, i18n ("%1x%2").arg (s).arg (s)/*tooltip*/);
         if (i == 1)

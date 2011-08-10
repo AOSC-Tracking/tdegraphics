@@ -29,8 +29,8 @@
 #include "kprintDialogPage_DJVUconversionoptions.h"
 #include "kprintDialogPage_DJVUconversionoptions_basewidget.h"
 
-KPrintDialogPage_DJVUConversionOptions::KPrintDialogPage_DJVUConversionOptions( TQWidget *tqparent, const char *name )
-  : KPrintDialogPage( tqparent, name )
+KPrintDialogPage_DJVUConversionOptions::KPrintDialogPage_DJVUConversionOptions( TQWidget *parent, const char *name )
+  : KPrintDialogPage( parent, name )
 {
   setTitle( i18n("DJVU to PS Conversion") );
 

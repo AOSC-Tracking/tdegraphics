@@ -44,7 +44,7 @@ class PageView : public TQScrollView, public DocumentObserver
         friend class PageViewTip;
 
     public:
-        PageView( TQWidget *tqparent, KPDFDocument *document );
+        PageView( TQWidget *parent, KPDFDocument *document );
         ~PageView();
 
         // Zoom mode ( last 4 are internally used only! )

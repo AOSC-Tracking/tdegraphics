@@ -49,7 +49,7 @@ class KPSWidget : public TQWidget
   TQ_OBJECT
 
 public:
-    KPSWidget( TQWidget* tqparent = 0, const char* name = 0 );
+    KPSWidget( TQWidget* parent = 0, const char* name = 0 );
     ~KPSWidget();
 
     /**

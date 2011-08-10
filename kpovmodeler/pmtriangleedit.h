@@ -42,9 +42,9 @@ class PMTriangleEdit : public PMGraphicalObjectEdit
    typedef PMGraphicalObjectEdit Base;
 public:
    /**
-    * Creates a PMTriangleEdit with tqparent and name
+    * Creates a PMTriangleEdit with parent and name
     */
-   PMTriangleEdit( TQWidget* tqparent, const char* name = 0 );
+   PMTriangleEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

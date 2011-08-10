@@ -51,25 +51,25 @@ extern "C" {
     }
 }
 
-ScanDialogFactory::ScanDialogFactory( TQObject *tqparent, const char *name )
-    : KScanDialogFactory( tqparent, name )
+ScanDialogFactory::ScanDialogFactory( TQObject *parent, const char *name )
+    : KScanDialogFactory( parent, name )
 {
     setName( "ScanDialogFactory" );
     KGlobal::locale()->insertCatalogue( TQString::tqfromLatin1("libkscan") );
 }
 
-KScanDialog * ScanDialogFactory::createDialog( TQWidget *tqparent,
+KScanDialog * ScanDialogFactory::createDialog( TQWidget *parent,
 					       const char *name, bool modal)
 {
-    return new ScanDialog( tqparent, name, modal );
+    return new ScanDialog( parent, name, modal );
 }
 
 
 ///////////////////////////////////////////////////////////////////
 
 
-ScanDialog::ScanDialog( TQWidget *tqparent, const char *name, bool modal )
-   : KScanDialog( Tabbed, Close|Help, tqparent, name, modal ),
+ScanDialog::ScanDialog( TQWidget *parent, const char *name, bool modal )
+   : KScanDialog( Tabbed, Close|Help, parent, name, modal ),
      good_scan_connect(false)
 {
     TQVBox *page = addVBoxPage( i18n("&Scanning") );

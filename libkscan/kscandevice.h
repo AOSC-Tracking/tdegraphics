@@ -76,7 +76,7 @@ public:
      *
      */
 
-    KScanDevice( TQObject *tqparent = 0 );
+    KScanDevice( TQObject *parent = 0 );
 
     /**
      *  Destructor
@@ -246,11 +246,11 @@ public:
      *  KScanOption. It is internally connected to the scan device, every
      *  change to the widget is automaticly considered by the scan device.
      *  @param name: Name of the SANE Option
-     *  @param tqparent: pointer to the tqparent widget
+     *  @param parent: pointer to the parent widget
      *  @param desc: pointer to the text appearing as widget text
      *  @param tooltip: tooltip text. If zero, the SANE text will be used.
      **/
-    KScanOption *getGuiElement( const TQCString& name, TQWidget *tqparent,
+    KScanOption *getGuiElement( const TQCString& name, TQWidget *parent,
                                 const TQString& desc = TQString(),
                                 const TQString& tooltip = TQString() );
 
@@ -423,7 +423,7 @@ private:
     KScanStat           createNewImage( SANE_Parameters *p );
 
 // not implemented
-//   TQWidget	      *entryField( TQWidget *tqparent, const TQString& text,
+//   TQWidget	      *entryField( TQWidget *parent, const TQString& text,
 //                                    const TQString& tooltip );
     KScanStat           find_options(); // help fct. to process options
     KScanStat           acquire_data( bool isPreview = false );

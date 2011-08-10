@@ -39,9 +39,9 @@ class PMScaleEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMScaleEdit with tqparent and name
+    * Creates a PMScaleEdit with parent and name
     */
-   PMScaleEdit( TQWidget* tqparent, const char* name = 0 );
+   PMScaleEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

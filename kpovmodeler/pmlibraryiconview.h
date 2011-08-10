@@ -65,7 +65,7 @@ class PMLibraryIconView: public KIconView
    Q_OBJECT
   TQ_OBJECT
 public:
-   PMLibraryIconView( TQWidget *tqparent, const char* name = NULL );
+   PMLibraryIconView( TQWidget *parent, const char* name = NULL );
 
    /**
     * Set the library base path
@@ -101,8 +101,8 @@ private:
 class PMLibraryIconViewItem: public KIconViewItem
 {
 public:
-   PMLibraryIconViewItem( TQIconView *tqparent, const TQString& text, const TQString& path, bool isSubLibrary );
-   PMLibraryIconViewItem( TQIconView *tqparent, const TQString& text, const TQImage& image, const TQString& path, bool isSubLibrary );
+   PMLibraryIconViewItem( TQIconView *parent, const TQString& text, const TQString& path, bool isSubLibrary );
+   PMLibraryIconViewItem( TQIconView *parent, const TQString& text, const TQImage& image, const TQString& path, bool isSubLibrary );
 
    /** Get the path of the entry */
    TQString path( ) const { return m_path; }

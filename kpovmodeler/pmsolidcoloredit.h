@@ -39,9 +39,9 @@ class PMSolidColorEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMSolidColorEdit with tqparent and name
+    * Creates a PMSolidColorEdit with parent and name
     */
-   PMSolidColorEdit( TQWidget* tqparent, const char* name = 0 );
+   PMSolidColorEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -45,7 +45,7 @@ class PMLibraryEntryPreview: public TQWidget
   TQ_OBJECT
 public:
    /** Constructor */
-   PMLibraryEntryPreview( TQWidget *tqparent );
+   PMLibraryEntryPreview( TQWidget *parent );
    /** Destructor */
    ~PMLibraryEntryPreview( );
 

@@ -158,9 +158,9 @@ void PMPolynom::cleanUp( ) const
    Base::cleanUp( );
 }
 
-PMDialogEditBase* PMPolynom::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMPolynom::editWidget( TQWidget* parent ) const
 {
-   return new PMPolynomEdit( tqparent );
+   return new PMPolynomEdit( parent );
 }
 
 void PMPolynom::setPolynomOrder( int o )

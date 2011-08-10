@@ -28,8 +28,8 @@
 
 #include <kglobalsettings.h>
 
-SizeTip::SizeTip( TQWidget *tqparent, const char *name )
-    : TQLabel( tqparent, name, WStyle_Customize | WX11BypassWM |
+SizeTip::SizeTip( TQWidget *parent, const char *name )
+    : TQLabel( parent, name, WStyle_Customize | WX11BypassWM |
       WStyle_StaysOnTop | WStyle_NoBorder | WStyle_Tool )
 {
   setMargin( 2 );

@@ -398,7 +398,7 @@ void kpToolPen::globalDraw ()
         }
 
         if (backgroundColor ().isTransparent () ||
-            document ()->pixmap ()->tqmask ())
+            document ()->pixmap ()->mask ())
         {
             maskBitmap = kpPixmapFX::getNonNullMask (*document ()->pixmap ());
             maskPainter.begin (&maskBitmap);
@@ -475,10 +475,10 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
             }
             else
             {
-                TQBitmap tqmask (1, 1);
-                tqmask.fill (TQt::color0/*transparent*/);
+                TQBitmap mask (1, 1);
+                mask.fill (TQt::color0/*transparent*/);
 
-                pixmap.setMask (tqmask);
+                pixmap.setMask (mask);
             }
 
             // draw onto doc
@@ -529,7 +529,7 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
             }
 
             if (color (m_mouseButton).isTransparent () ||
-                pixmap.tqmask ())
+                pixmap.mask ())
             {
                 maskBitmap = kpPixmapFX::getNonNullMask (pixmap);
                 maskPainter.begin (&maskBitmap);
@@ -606,7 +606,7 @@ void kpToolPen::draw (const TQPoint &thisPoint, const TQPoint &lastPoint, const 
                 painter.setPen (c.toTQColor ());
             }
 
-            if (transparent || pixmap.tqmask ())
+            if (transparent || pixmap.mask ())
             {
                 maskBitmap = kpPixmapFX::getNonNullMask (pixmap);
                 maskPainter.begin (&maskBitmap);
@@ -966,7 +966,7 @@ void kpToolPen::slotEraserSizeChanged (int size)
     for (int i = 0; i < 2; i++)
     {
         // Note: No matter what, the eraser's brush pixmap is never given
-        //       a tqmask.
+        //       a mask.
         //
         // With a transparent color, since we don't fill anything, the
         // resize by itself will leave us with garbage pixels.  This

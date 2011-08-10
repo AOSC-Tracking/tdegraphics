@@ -53,8 +53,8 @@
 
 
 
-ScanParams::ScanParams( TQWidget *tqparent, const char *name )
-   : TQVBox( tqparent, name ),
+ScanParams::ScanParams( TQWidget *parent, const char *name )
+   : TQVBox( parent, name ),
      m_firstGTEdit( true )
 {
    /* first some initialisation and debug messages */

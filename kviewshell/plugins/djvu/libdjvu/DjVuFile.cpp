@@ -398,10 +398,10 @@ DjVuFile::notify_chunk_done(const DjVuPort *, const GUTF8String &)
 
 void
 DjVuFile::notify_file_flags_changed(const DjVuFile * src,
-                                    long set_tqmask, long clr_tqmask)
+                                    long set_mask, long clr_mask)
 {
   check();
-  if (set_tqmask & (DECODE_OK | DECODE_FAILED | DECODE_STOPPED))
+  if (set_mask & (DECODE_OK | DECODE_FAILED | DECODE_STOPPED))
   {
     // Signal threads waiting for file termination
     finish_mon.enter();
@@ -414,7 +414,7 @@ DjVuFile::notify_file_flags_changed(const DjVuFile * src,
     chunk_mon.leave();
   }
   
-  if ((set_tqmask & ALL_DATA_PRESENT) && src!=this &&
+  if ((set_mask & ALL_DATA_PRESENT) && src!=this &&
     are_incl_files_created() && is_data_present())
   {
     if (src!=this && are_incl_files_created() && is_data_present())
@@ -931,7 +931,7 @@ DjVuFile::decode_chunk( const GUTF8String &id, const GP<ByteStream> &gbs,
     desc.format( ERR_MSG("DjVuFile.tqshape_dict") "\t%d", fgjd->get_tqshape_count() );
   } 
   
-  // Sjbz (JB2 encoded tqmask)
+  // Sjbz (JB2 encoded mask)
   else if (chkid=="Sjbz" && (djvu || djvi))
   {
     if (this->fgjb)
@@ -943,19 +943,19 @@ DjVuFile::decode_chunk( const GUTF8String &id, const GP<ByteStream> &gbs,
     // ---- end hack
     fgjb->decode(gbs, static_get_fgjd, (void*)this);
     this->fgjb = fgjb;
-    desc.format( ERR_MSG("DjVuFile.fg_tqmask") "\t%d\t%d\t%d",
+    desc.format( ERR_MSG("DjVuFile.fg_mask") "\t%d\t%d\t%d",
       fgjb->get_width(), fgjb->get_height(),
       get_dpi(fgjb->get_width(), fgjb->get_height()));
   }
   
-  // Smmr (MMR-G4 encoded tqmask)
+  // Smmr (MMR-G4 encoded mask)
   else if (chkid=="Smmr" && (djvu || djvi))
   {
     if (this->fgjb)
       G_THROW( ERR_MSG("DjVuFile.dupl_Sxxx") );
     set_can_compress(true);
     this->fgjb = MMRDecoder::decode(gbs);
-    desc.format( ERR_MSG("DjVuFile.G4_tqmask") "\t%d\t%d\t%d",
+    desc.format( ERR_MSG("DjVuFile.G4_mask") "\t%d\t%d\t%d",
       fgjb->get_width(), fgjb->get_height(),
       get_dpi(fgjb->get_width(), fgjb->get_height()));
   }

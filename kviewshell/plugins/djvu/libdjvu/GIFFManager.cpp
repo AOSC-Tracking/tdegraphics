@@ -180,13 +180,13 @@ GIFFChunk::add_chunk(const GP<GIFFChunk> & chunk, int position)
 
   if (!type.length())
   {
-    DEBUG_MSG("Converting the tqparent to FORM\n");
+    DEBUG_MSG("Converting the parent to FORM\n");
     type="FORM";
   }
 
   if (chunk->get_type()=="PROP")
   {
-    DEBUG_MSG("Converting the tqparent to LIST\n");
+    DEBUG_MSG("Converting the parent to LIST\n");
     type="LIST";
   }
 

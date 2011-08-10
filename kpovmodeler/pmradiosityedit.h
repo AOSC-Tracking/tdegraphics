@@ -41,9 +41,9 @@ class PMRadiosityEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMRadiosityEdit with tqparent and name
+    * Creates a PMRadiosityEdit with parent and name
     */
-   PMRadiosityEdit( TQWidget* tqparent, const char* name = 0 );
+   PMRadiosityEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

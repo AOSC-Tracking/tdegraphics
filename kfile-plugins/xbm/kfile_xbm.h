@@ -30,7 +30,7 @@ class KXbmPlugin: public KFilePlugin
   TQ_OBJECT
     
 public:
-    KXbmPlugin( TQObject *tqparent, const char *name, const TQStringList& args );
+    KXbmPlugin( TQObject *parent, const char *name, const TQStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
     

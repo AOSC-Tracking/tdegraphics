@@ -284,9 +284,9 @@ void PMFog::setUp( const PMVector& c )
    }
 }
 
-PMDialogEditBase* PMFog::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMFog::editWidget( TQWidget* parent ) const
 {
-   return new PMFogEdit( tqparent );
+   return new PMFogEdit( parent );
 }
 
 void PMFog::restoreMemento( PMMemento* s )

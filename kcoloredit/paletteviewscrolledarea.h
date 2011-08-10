@@ -40,7 +40,7 @@ public:
 	PaletteViewScrolledArea(const int defaultCellWidth, const int defaultCellHeight,
 		const int cellSpacing, TQScrollBar* scrollBar,
 		TQScrollBar* hScrollBar, KColorEditView* view,
-		TQWidget* tqparent = 0, const char* name = 0);
+		TQWidget* parent = 0, const char* name = 0);
 	~PaletteViewScrolledArea();
 	/** Sets cells sizes and then calls repaintPalette() */
 	void redraw();

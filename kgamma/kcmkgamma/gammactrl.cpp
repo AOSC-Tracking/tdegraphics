@@ -26,9 +26,9 @@
 #include "displaynumber.h"
 #include "gammactrl.moc"
 
-GammaCtrl::GammaCtrl(TQWidget *tqparent, XVidExtWrap *xvid, int channel, \
+GammaCtrl::GammaCtrl(TQWidget *parent, XVidExtWrap *xvid, int channel, \
   const TQString& mingamma, const TQString& maxgamma, const TQString& setgamma, \
-  const char *name) : TQHBox(tqparent, name)
+  const char *name) : TQHBox(parent, name)
 {
   int maxslider = (int)( ( maxgamma.toDouble() - mingamma.toDouble() \
                   + 0.0005 ) * 20 );

@@ -25,8 +25,8 @@
 #include <kglobalsettings.h>
 #include <klocale.h>
 
-PMRawEdit::PMRawEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMRawEdit::PMRawEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

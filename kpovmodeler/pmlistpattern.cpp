@@ -178,9 +178,9 @@ void PMListPattern::setMortar( double n )
    }
 }
 
-PMDialogEditBase* PMListPattern::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMListPattern::editWidget( TQWidget* parent ) const
 {
-   return new PMListPatternEdit( tqparent );
+   return new PMListPatternEdit( parent );
 }
 
 void PMListPattern::restoreMemento( PMMemento* s )
@@ -462,8 +462,8 @@ void PMNormalList::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMNormalList::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMNormalList::editWidget( TQWidget* parent ) const
 {
-   return new PMListPatternEdit( tqparent );
+   return new PMListPatternEdit( parent );
 }
 

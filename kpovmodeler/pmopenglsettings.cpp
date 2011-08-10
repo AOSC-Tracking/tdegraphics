@@ -25,8 +25,8 @@
 #include <tqlabel.h>
 #include <klocale.h>
 
-PMOpenGLSettings::PMOpenGLSettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMOpenGLSettings::PMOpenGLSettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 

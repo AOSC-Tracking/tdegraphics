@@ -37,7 +37,7 @@ class DispGamma : public TQWidget  {
     Q_OBJECT
   TQ_OBJECT
 public: 
-    DispGamma( TQWidget *tqparent );
+    DispGamma( TQWidget *parent );
     ~DispGamma();
 
     TQSize tqsizeHint( void );

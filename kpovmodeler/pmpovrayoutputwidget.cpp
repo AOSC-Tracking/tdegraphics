@@ -30,8 +30,8 @@
 
 TQSize PMPovrayOutputWidget::s_size = TQSize( 400, 400 );
 
-PMPovrayOutputWidget::PMPovrayOutputWidget( TQWidget* tqparent, const char* name )
-      : KDialog( tqparent, name )
+PMPovrayOutputWidget::PMPovrayOutputWidget( TQWidget* parent, const char* name )
+      : KDialog( parent, name )
 {
    TQVBoxLayout* topLayout = new TQVBoxLayout( this, KDialog::marginHint( ), KDialog::spacingHint( ) );
 

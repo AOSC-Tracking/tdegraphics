@@ -27,8 +27,8 @@
 #include "SVGDocumentImpl.h"
 #include "SVGSVGElementImpl.h"
 
-KSVGWidget::KSVGWidget(KSVGPlugin *part, TQWidget *tqparent, const char *name)
-: TQWidget(tqparent, name), m_part(part)
+KSVGWidget::KSVGWidget(KSVGPlugin *part, TQWidget *parent, const char *name)
+: TQWidget(parent, name), m_part(part)
 {
 	setMouseTracking(true);	
 	setFocusPolicy(TQ_WheelFocus);

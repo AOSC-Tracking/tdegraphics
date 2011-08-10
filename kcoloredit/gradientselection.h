@@ -36,7 +36,7 @@ class GradientSelection : public TQWidget  {
 
 public:
 	/** Constructs the widget */
-	GradientSelection(TQWidget *tqparent=0, const char *name=0);
+	GradientSelection(TQWidget *parent=0, const char *name=0);
 	~GradientSelection();
 	/** Enables or disables the color synchronize button */
 	void enableSynchronizeColorButton(bool enable);

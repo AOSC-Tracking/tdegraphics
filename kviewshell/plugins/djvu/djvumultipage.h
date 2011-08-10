@@ -96,7 +96,7 @@ public:
   kmultipage. Please have a look at the constructor's source code to
   see how to adjust this for your implementation.
   */
-  DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
+  DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
 		   const char *name, const TQStringList& args = TQStringList());
   
   /** Destructor

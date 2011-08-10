@@ -47,7 +47,7 @@ class KDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
 		/**
 		 * KImageCanvas Constructor
 		 */
-		KImageCanvas( TQWidget * tqparent, const char * name, const TQStringList & args );
+		KImageCanvas( TQWidget * parent, const char * name, const TQStringList & args );
 
 		/**
 		 * KImageCanvas Destructor

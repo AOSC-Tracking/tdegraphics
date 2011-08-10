@@ -142,7 +142,7 @@ DjVuProgressTask::set_callback(djvu_progress_callback *_callback)
 }
 
 DjVuProgressTask::DjVuProgressTask(const char *xtask,int nsteps)
-  : task(xtask),tqparent(0), nsteps(nsteps), runtostep(0), gdata(0), data(0)
+  : task(xtask),parent(0), nsteps(nsteps), runtostep(0), gdata(0), data(0)
 {
   //  gtask=task;
   {
@@ -158,7 +158,7 @@ DjVuProgressTask::DjVuProgressTask(const char *xtask,int nsteps)
         startdate = curdate;
         if (!d.head)
           d.lastsigdate = curdate + INITIAL;
-        tqparent = d.head;
+        parent = d.head;
         d.head = this;
       }
     }
@@ -171,8 +171,8 @@ DjVuProgressTask::~DjVuProgressTask()
   {
     if (data->head != this)
       G_THROW( ERR_MSG("DjVuGlobal.not_compatible") );
-    data->head = tqparent;
-    if (!tqparent)
+    data->head = parent;
+    if (!parent)
     {
       unsigned long curdate = GOS::ticks();
       if((*(data->callback))(data->gtask?data->gtask:"",curdate-startdate, curdate-startdate))
@@ -210,9 +210,9 @@ DjVuProgressTask::signal(unsigned long curdate, unsigned long estdate)
     {
       const unsigned long enddate = startdate+
         (unsigned long)(((float)(estdate-startdate) * (float)nsteps) / (float)inprogress);
-      if (tqparent)
+      if (parent)
       {
-        tqparent->signal(curdate, enddate);
+        parent->signal(curdate, enddate);
       }
       else if (data && data->callback && curdate<enddate)
       {

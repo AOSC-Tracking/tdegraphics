@@ -91,9 +91,9 @@ void PMBoundedBy::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMBoundedBy::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBoundedBy::editWidget( TQWidget* parent ) const
 {
-   return new PMBoundedByEdit( tqparent );
+   return new PMBoundedByEdit( parent );
 }
 
 void PMBoundedBy::childRemoved( PMObject* o )

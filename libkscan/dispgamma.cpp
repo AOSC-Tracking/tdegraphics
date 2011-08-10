@@ -22,7 +22,7 @@
 
 #include "dispgamma.h"
 
-DispGamma::DispGamma( TQWidget *tqparent ) : TQWidget( tqparent )
+DispGamma::DispGamma( TQWidget *parent ) : TQWidget( parent )
 {
     vals = 0;
     margin = 10;

@@ -20,8 +20,8 @@
 
 #include "displaynumber.h"
 
-DisplayNumber::DisplayNumber(TQWidget *tqparent, int digits, \
-    int prec, const char *name) : TQLabel(tqparent,name) {
+DisplayNumber::DisplayNumber(TQWidget *parent, int digits, \
+    int prec, const char *name) : TQLabel(parent,name) {
 
   setPrecision(prec);
   setWidth(digits);  

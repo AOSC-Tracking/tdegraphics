@@ -49,7 +49,7 @@ namespace KMrmlConfig
   TQ_OBJECT
 
     public:
-        MainPage( TQWidget *tqparent, const char *name );
+        MainPage( TQWidget *parent, const char *name );
         ~MainPage();
 
         void resetDefaults();

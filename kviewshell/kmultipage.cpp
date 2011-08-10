@@ -34,8 +34,8 @@
 
 //#define DEBUG_KMULTIPAGE
 
-KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent, const char *name)
-  : DCOPObject("kmultipage"), KParts::ReadOnlyPart(tqparent, name)
+KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent, const char *name)
+  : DCOPObject("kmultipage"), KParts::ReadOnlyPart(parent, name)
 {
   // For reasons which I don't understand, the initialization of the
   // DCOPObject above does not work properly, the name is ignored. It

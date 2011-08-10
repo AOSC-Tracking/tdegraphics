@@ -43,8 +43,8 @@
 
 const int ImlibWidget::ImlibOffset = 256;
 
-ImlibWidget::ImlibWidget( ImData *_idata, TQWidget *tqparent, const char *name ) :
-  TQWidget( tqparent, name, WDestructiveClose )
+ImlibWidget::ImlibWidget( ImData *_idata, TQWidget *parent, const char *name ) :
+  TQWidget( parent, name, WDestructiveClose )
 {
     idata 		= _idata;
     deleteImData 	= false;
@@ -82,9 +82,9 @@ ImlibWidget::ImlibWidget( ImData *_idata, TQWidget *tqparent, const char *name )
 }
 
 
-ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, TQWidget *tqparent,
+ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, TQWidget *parent,
 			  const char *name )
-    : TQWidget( tqparent, name, WDestructiveClose )
+    : TQWidget( parent, name, WDestructiveClose )
 {
     id              = _id;
     idata           = _idata;
@@ -525,13 +525,13 @@ void ImlibWidget::restoreCursor()
 // destroying the Imlib image X window. Therefore it needs to be temporarily reparented
 // away and reparented back to the new X window.
 // Reparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
-void ImlibWidget::reparent( TQWidget* tqparent, WFlags f, const TQPoint& p, bool showIt )
+void ImlibWidget::reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt )
 {
     XWindowAttributes attr;
     XGetWindowAttributes( x11Display(), win, &attr );
     XUnmapWindow( x11Display(), win );
     XReparentWindow( x11Display(), win, attr.root, 0, 0 );
-    TQWidget::reparent( tqparent, f, p, showIt );
+    TQWidget::reparent( parent, f, p, showIt );
     XReparentWindow( x11Display(), win, winId(), attr.x, attr.y );
     if( attr.map_state != IsUnmapped )
         XMapWindow( x11Display(), win );

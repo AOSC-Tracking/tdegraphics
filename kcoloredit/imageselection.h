@@ -31,7 +31,7 @@ class ImageSelection : public TQWidget  {
 
 public:
 	/** constructs the widget */
-	ImageSelection(TQWidget *tqparent=0, const char *name=0);
+	ImageSelection(TQWidget *parent=0, const char *name=0);
 	~ImageSelection();
 	
 signals:

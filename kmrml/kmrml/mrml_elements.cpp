@@ -144,11 +144,11 @@ Algorithm Algorithm::defaultAlgorithm()
     return algo;
 }
 
-TQDomElement Algorithm::toElement( TQDomElement& tqparent ) const
+TQDomElement Algorithm::toElement( TQDomElement& parent ) const
 {
-    TQDomDocument doc = tqparent.ownerDocument();
+    TQDomDocument doc = parent.ownerDocument();
     TQDomElement algorithm = doc.createElement( MrmlShared::algorithm() );
-    tqparent.appendChild( algorithm );
+    parent.appendChild( algorithm );
     setOtherAttributes( algorithm );
 
     if ( !m_name.isEmpty() )
@@ -242,12 +242,12 @@ bool QueryParadigmList::matches( const QueryParadigmList& other ) const
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 
-TQValueList<TQDomElement> KMrml::directChildElements( const TQDomElement& tqparent,
+TQValueList<TQDomElement> KMrml::directChildElements( const TQDomElement& parent,
                                                     const TQString& tagName )
 {
     TQValueList<TQDomElement> list;
 
-    TQDomNode node = tqparent.firstChild();
+    TQDomNode node = parent.firstChild();
     while ( !node.isNull() )
     {
         if ( node.isElement() && node.nodeName() == tagName )
@@ -259,10 +259,10 @@ TQValueList<TQDomElement> KMrml::directChildElements( const TQDomElement& tqpare
     return list;
 }
 
-TQDomElement KMrml::firstChildElement( const TQDomElement& tqparent,
+TQDomElement KMrml::firstChildElement( const TQDomElement& parent,
                                       const TQString& tagName )
 {
-    TQDomNode node = tqparent.firstChild();
+    TQDomNode node = parent.firstChild();
     while ( !node.isNull() )
     {
         if ( node.isElement() && node.nodeName() == tagName )

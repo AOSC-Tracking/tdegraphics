@@ -109,7 +109,7 @@ KScanOption *KScanDevice::getExistingGuiElement( const TQCString& name )
 
    ------------------------------------------------------------------------- */
 
-KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *tqparent,
+KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *parent,
 					 const TQString& desc,
 					 const TQString& tooltip )
 {
@@ -132,7 +132,7 @@ KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *tqpare
       /** store new gui-elem in list of all gui-elements */
       gui_elements.append( so );
 
-      w = so->createWidget( tqparent, desc, tooltip );
+      w = so->createWidget( parent, desc, tooltip );
       if( w )
       {
 	 connect( so,   TQT_SIGNAL( optionChanged( KScanOption* ) ),
@@ -163,8 +163,8 @@ KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *tqpare
 // ---------------------------------------------------------------------------
 
 
-KScanDevice::KScanDevice( TQObject *tqparent )
-   : TQObject( tqparent )
+KScanDevice::KScanDevice( TQObject *parent )
+   : TQObject( parent )
 {
     SANE_Status sane_stat = sane_init(NULL, NULL );
 

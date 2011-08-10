@@ -58,11 +58,11 @@ class DeviceSelector: public KDialogBase
 public:
    /**
     *  constructs the dialog class
-    *  @param TQWidget *tqparent - the tqparent
+    *  @param TQWidget *parent - the parent
     *  @param TQStrList backends - a list of device names retrieved from the scan device
     *  @param TQStrList scannerNames - a list of corresponding human readable sanner names.
     */
-   DeviceSelector( TQWidget *tqparent, TQStrList&, const TQStringList& );
+   DeviceSelector( TQWidget *parent, TQStrList&, const TQStringList& );
    ~DeviceSelector();
 
    /**

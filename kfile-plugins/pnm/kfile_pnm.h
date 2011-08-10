@@ -30,7 +30,7 @@ class KPnmPlugin: public KFilePlugin
   TQ_OBJECT
     
 public:
-	KPnmPlugin( TQObject *tqparent, const char *name, const TQStringList& preferredItems );
+	KPnmPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
 	virtual bool readInfo( KFileMetaInfo& info, uint );
 
 private:

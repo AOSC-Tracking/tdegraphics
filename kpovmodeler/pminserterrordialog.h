@@ -39,11 +39,11 @@ class PMInsertErrorDialog : public KDialogBase
   TQ_OBJECT
 public:
    /**
-    * Creates a modal PMInsertErrorDialog with tqparent and name.
+    * Creates a modal PMInsertErrorDialog with parent and name.
     */
    PMInsertErrorDialog( int NumberOfObjects, int NumberOfInsertErrors,
                        const TQStringList& details,
-                       TQWidget* tqparent = 0, const char* name = 0 );
+                       TQWidget* parent = 0, const char* name = 0 );
 protected slots:
    void slotUser1( );
  

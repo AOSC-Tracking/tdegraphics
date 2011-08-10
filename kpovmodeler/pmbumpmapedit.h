@@ -49,9 +49,9 @@ class PMBumpMapEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMBumpMapEdit with tqparent and name
+    * Creates a PMBumpMapEdit with parent and name
     */
-   PMBumpMapEdit( TQWidget* tqparent, const char* name = 0 );
+   PMBumpMapEdit( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displayObject( PMObject* o );
    /** */

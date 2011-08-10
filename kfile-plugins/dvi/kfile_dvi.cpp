@@ -39,8 +39,8 @@
 typedef KGenericFactory<KDviPlugin> DviFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_dvi, DviFactory("kfile_dvi"))
 
-KDviPlugin::KDviPlugin (TQObject * tqparent, const char * name, const TQStringList & preferredItems)
-  : KFilePlugin(tqparent, name, preferredItems)
+KDviPlugin::KDviPlugin (TQObject * parent, const char * name, const TQStringList & preferredItems)
+  : KFilePlugin(parent, name, preferredItems)
 {
   kdDebug(7034) << "dvi plugin" << endl;
   

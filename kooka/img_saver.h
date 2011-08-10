@@ -103,7 +103,7 @@ class FormatDialog:public KDialogBase
    Q_OBJECT
   TQ_OBJECT
 public:
-   FormatDialog( TQWidget *tqparent, const TQString&, const char * );
+   FormatDialog( TQWidget *parent, const TQString&, const char * );
 
 
    TQString      getFormat( ) const;
@@ -155,8 +155,8 @@ public:
 	 *  @param dir  Name of the save root directory
 	 *  @param name Name of a subdirectory in the saveroot.
 	 **/
-   ImgSaver( TQWidget *tqparent, const KURL );
-   ImgSaver( TQWidget *tqparent );
+   ImgSaver( TQWidget *parent, const KURL );
+   ImgSaver( TQWidget *parent );
 
    TQString     errorString( ImgSaveStat );
    /**

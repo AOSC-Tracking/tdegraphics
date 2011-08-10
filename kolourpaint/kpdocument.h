@@ -78,7 +78,7 @@ public:
         kpDocumentMetaInfo *metaInfo = 0);
 
     static TQPixmap getPixmapFromFile (const KURL &url, bool suppressDoesntExistDialog,
-                                      TQWidget *tqparent,
+                                      TQWidget *parent,
                                       kpDocumentSaveOptions *saveOptions = 0,
                                       kpDocumentMetaInfo *metaInfo = 0);
     // TODO: fix: open*() should only be called once.
@@ -88,13 +88,13 @@ public:
 
     static bool lossyPromptContinue (const TQPixmap &pixmap,
                                      const kpDocumentSaveOptions &saveOptions,
-                                     TQWidget *tqparent);
+                                     TQWidget *parent);
     static bool savePixmapToDevice (const TQPixmap &pixmap,
                                     TQIODevice *device,
                                     const kpDocumentSaveOptions &saveOptions,
                                     const kpDocumentMetaInfo &metaInfo,
                                     bool lossyPrompt,
-                                    TQWidget *tqparent,
+                                    TQWidget *parent,
                                     bool *userCancelled = 0);
     static bool savePixmapToFile (const TQPixmap &pixmap,
                                   const KURL &url,
@@ -102,7 +102,7 @@ public:
                                   const kpDocumentMetaInfo &metaInfo,
                                   bool overwritePrompt,
                                   bool lossyPrompt,
-                                  TQWidget *tqparent);
+                                  TQWidget *parent);
     bool save (bool overwritePrompt = false, bool lossyPrompt = false);
     bool saveAs (const KURL &url,
                  const kpDocumentSaveOptions &saveOptions,

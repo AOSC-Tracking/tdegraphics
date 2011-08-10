@@ -61,11 +61,11 @@ void getWindowsRecursive( std::vector<TQRect>& windows, Window w,
 	    windows.push_back( r );
 	}
 
-	Window root, tqparent;
+	Window root, parent;
 	Window* tqchildren;
 	unsigned int ntqchildren;
 
-	if( XQueryTree( qt_xdisplay(), w, &root, &tqparent, &tqchildren, &ntqchildren ) != 0 ) {
+	if( XQueryTree( qt_xdisplay(), w, &root, &parent, &tqchildren, &ntqchildren ) != 0 ) {
             for( unsigned int i = 0; i < ntqchildren; ++i ) {
                 getWindowsRecursive( windows, tqchildren[ i ], x, y, depth + 1 );
 	    }
@@ -94,11 +94,11 @@ Window findRealWindow( Window w, int depth = 0 )
 	if( type != None )
 	    return w;
     }
-    Window root, tqparent;
+    Window root, parent;
     Window* tqchildren;
     unsigned int ntqchildren;
     Window ret = None;
-    if( XQueryTree( qt_xdisplay(), w, &root, &tqparent, &tqchildren, &ntqchildren ) != 0 ) {
+    if( XQueryTree( qt_xdisplay(), w, &root, &parent, &tqchildren, &ntqchildren ) != 0 ) {
 	for( unsigned int i = 0;
 	     i < ntqchildren && ret == None;
 	     ++i )
@@ -114,11 +114,11 @@ Window windowUnderCursor( bool includeDecorations = true )
 {
     Window root;
     Window child;
-    uint tqmask;
+    uint mask;
     int rootX, rootY, winX, winY;
     XGrabServer( qt_xdisplay() );
     XQueryPointer( qt_xdisplay(), qt_xrootwin(), &root, &child,
-		   &rootX, &rootY, &winX, &winY, &tqmask );
+		   &rootX, &rootY, &winX, &winY, &mask );
     if( child == None )
 	child = qt_xrootwin();
     if( !includeDecorations ) {
@@ -138,8 +138,8 @@ TQPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
     int tmp1, tmp2;
     //Check whether the extension is available
     if ( XShapeQueryExtension( qt_xdisplay(), &tmp1, &tmp2 ) ) {
-	TQBitmap tqmask( w, h );
-	//As the first step, get the tqmask from XShape.
+	TQBitmap mask( w, h );
+	//As the first step, get the mask from XShape.
 	int count, order;
 	XRectangle* rects = XShapeGetRectangles( qt_xdisplay(), child,
 						 ShapeBounding, &count, &order );
@@ -148,7 +148,7 @@ TQPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
 	//Since the border area is part of the window, we use bounding
 	// to limit our work region
 	if (rects) {
-	    //Create a TQRegion from the rectangles describing the bounding tqmask.
+	    //Create a TQRegion from the rectangles describing the bounding mask.
 	    TQRegion contents;
 	    for ( int pos = 0; pos < count; pos++ )
 		contents += TQRegion( rects[pos].x, rects[pos].y,
@@ -170,14 +170,14 @@ TQPixmap grabWindow( Window child, int x, int y, uint w, uint h, uint border )
 	    TQRegion maskedAway = bbox - contents;
 	    TQMemArray<TQRect> maskedAwayRects = maskedAway.tqrects();
 
-	    //Construct a bitmap tqmask from the rectangles
-	    TQPainter p(&tqmask);
+	    //Construct a bitmap mask from the rectangles
+	    TQPainter p(&mask);
 	    p.fillRect(0, 0, w, h, TQt::color1);
 	    for (uint pos = 0; pos < maskedAwayRects.count(); pos++)
 		    p.fillRect(maskedAwayRects[pos], TQt::color0);
 	    p.end();
 
-	    pm.setMask(tqmask);
+	    pm.setMask(mask);
 	}
     }
 #endif
@@ -218,16 +218,16 @@ TQPixmap WindowGrabber::grabCurrent( bool includeDecorations )
     XGrabServer( qt_xdisplay() );
     Window child = windowUnderCursor( includeDecorations );
     XGetGeometry( qt_xdisplay(), child, &root, &x, &y, &w, &h, &border, &depth );
-    Window tqparent;
+    Window parent;
     Window* tqchildren;
     unsigned int ntqchildren;
-    if( XQueryTree( qt_xdisplay(), child, &root, &tqparent,
+    if( XQueryTree( qt_xdisplay(), child, &root, &parent,
                     &tqchildren, &ntqchildren ) != 0 ) {
 	if( tqchildren != NULL )
 	    XFree( tqchildren );
 	int newx, newy;
 	Window dummy;
-	if( XTranslateCoordinates( qt_xdisplay(), tqparent, qt_xrootwin(),
+	if( XTranslateCoordinates( qt_xdisplay(), parent, qt_xrootwin(),
 	    x, y, &newx, &newy, &dummy )) {
 	    x = newx;
 	    y = newy;

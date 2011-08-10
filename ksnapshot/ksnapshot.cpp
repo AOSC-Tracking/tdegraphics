@@ -58,9 +58,9 @@
 
 #define kApp KApplication::kApplication()
 
-KSnapshot::KSnapshot(TQWidget *tqparent, const char *name, bool grabCurrent)
+KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
   : DCOPObject("interface"), 
-    KDialogBase(tqparent, name, true, TQString(), Help|User1, User1, 
+    KDialogBase(parent, name, true, TQString(), Help|User1, User1, 
     true, KStdGuiItem::quit() )
 {
     grabber = new TQWidget( 0, 0, WStyle_Customize | WX11BypassWM );

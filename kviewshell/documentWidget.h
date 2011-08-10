@@ -33,7 +33,7 @@ class DocumentWidget : public TQWidget
   TQ_OBJECT
 
 public:
-  DocumentWidget(TQWidget *tqparent, PageView *sv, DocumentPageCache *cache, const char *name);
+  DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name);
 
   void          setPageNumber(TQ_UINT16 pageNr);
   TQ_UINT16      getPageNumber() const {return pageNr;}

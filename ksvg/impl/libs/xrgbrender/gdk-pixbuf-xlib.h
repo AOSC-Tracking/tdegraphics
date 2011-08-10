@@ -61,7 +61,7 @@ void gdk_pixbuf_xlib_render_to_drawable_alpha (GdkPixbuf *pixbuf,
 					       XlibRgbDither dither,
 					       int x_dither, int y_dither);
 
-void gdk_pixbuf_xlib_render_pixmap_and_tqmask (GdkPixbuf *pixbuf,
+void gdk_pixbuf_xlib_render_pixmap_and_mask (GdkPixbuf *pixbuf,
 					     Pixmap *pixmap_return,
 					     Pixmap *mask_return,
 					     int alpha_threshold);

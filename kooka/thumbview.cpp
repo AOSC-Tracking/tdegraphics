@@ -47,8 +47,8 @@
 
 
 
-ThumbView::ThumbView( TQWidget *tqparent, const char *name )
-   : TQVBox( tqparent ),
+ThumbView::ThumbView( TQWidget *parent, const char *name )
+   : TQVBox( parent ),
      m_iconView(0),
      m_job(0)
 {
@@ -238,7 +238,7 @@ void  ThumbView::slCheckForUpdate( KFileItem *kfit )
    bool haveItem = false;
 
    /* iterate over all icon items and compare urls.
-    * TODO: Check the tqparent url to avoid iteration over all */
+    * TODO: Check the parent url to avoid iteration over all */
    for ( TQIconViewItem *item = m_iconView->firstItem(); item && !haveItem;
 	 item = item->nextItem() )
    {
@@ -269,7 +269,7 @@ bool ThumbView::deleteImage( KFileItem *kfit )
    bool haveItem = false;
 
    /* iterate over all icon items and compare urls.
-    * TODO: Check the tqparent url to avoid iteration over all */
+    * TODO: Check the parent url to avoid iteration over all */
    for ( TQIconViewItem *item = m_iconView->firstItem(); item && !haveItem; item = item->nextItem() )
    {
       if( searchUrl == static_cast<ThumbViewItem*>(item)->itemUrl() )

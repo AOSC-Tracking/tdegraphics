@@ -37,7 +37,7 @@ struct _ArtKSVGRgbaSVPAlphaData {
   art_u8 r, g, b, alpha;
   art_u32 rgba;
   art_u8 *buf;
-	art_u8 *tqmask;
+	art_u8 *mask;
   int rowstride;
   int x0, x1;
 	int y0;
@@ -124,7 +124,7 @@ art_ksvg_rgba_run_alpha (art_u8 *buf, art_u8 r, art_u8 g, art_u8 b, int alpha, i
 }
 
 static void
-art_ksvg_rgba_mask_run_alpha (art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
+art_ksvg_rgba_mask_run_alpha (art_u8 *buf, art_u8 *mask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
 {
 	int i;
 	int v;
@@ -136,7 +136,7 @@ art_ksvg_rgba_mask_run_alpha (art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, a
 
 	for(i = 0; i < n; i++)
 	{
-		am = (alpha * *tqmask++) + 0x80;
+		am = (alpha * *mask++) + 0x80;
 		am = (am + (am >> 8)) >> 8;
 
 		v = *buf;
@@ -353,7 +353,7 @@ art_ksvg_rgba_svp_alpha_mask_callback(void *callback_data, int y,
 	b = data->b;
 	alphatab = data->alphatab;
 
-	maskbuf = data->tqmask + (y - data->y0) * (data->x1 - data->x0);
+	maskbuf = data->mask + (y - data->y0) * (data->x1 - data->x0);
 
 	if(n_steps > 0)
 	{
@@ -436,7 +436,7 @@ art_ksvg_rgba_svp_alpha(const ArtSVP *svp,
 		   art_u32 rgba,
 		   art_u8 *buf, int rowstride,
 		   ArtAlphaGamma *alphagamma,
-			 art_u8 *tqmask)
+			 art_u8 *mask)
 {
   ArtKSVGRgbaSVPAlphaData data;
   int r, g, b;
@@ -454,7 +454,7 @@ art_ksvg_rgba_svp_alpha(const ArtSVP *svp,
   data.b = b;
   data.alpha = alpha;
   data.rgba = rgba;
-	data.tqmask = tqmask;
+	data.mask = mask;
 
   a = 0x8000;
   da = (alpha * 66051 + 0x80) >> 8; /* 66051 equals 2 ^ 32 / (255 * 255) */
@@ -471,7 +471,7 @@ art_ksvg_rgba_svp_alpha(const ArtSVP *svp,
   data.x1 = x1;
 	data.y0 = y0;
 
-	if(tqmask)
+	if(mask)
 		art_svp_render_aa (svp, x0, y0, x1, y1, art_ksvg_rgba_svp_alpha_mask_callback, &data);
 	else
 	{
@@ -485,7 +485,7 @@ art_ksvg_rgba_svp_alpha(const ArtSVP *svp,
 /* RGB renderers */
 
 static void
-art_ksvg_rgb_mask_run_alpha(art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
+art_ksvg_rgb_mask_run_alpha(art_u8 *buf, art_u8 *mask, art_u8 r, art_u8 g, art_u8 b, int alpha, int n)
 {
 	int i;
 	int v;
@@ -497,7 +497,7 @@ art_ksvg_rgb_mask_run_alpha(art_u8 *buf, art_u8 *tqmask, art_u8 r, art_u8 g, art
 
 	for(i = 0; i < n; i++)
 	{
-		am = (alpha * *tqmask++) + 0x80;
+		am = (alpha * *mask++) + 0x80;
 		am = (am + (am >> 8)) >> 8;
 
 		v = *buf;
@@ -538,7 +538,7 @@ art_ksvg_rgb_svp_alpha_mask_callback(void *callback_data, int y,
 	b = data->b;
 	alphatab = data->alphatab;
 
-	maskbuf = data->tqmask + (y - data->y0) * (data->x1 - data->x0);
+	maskbuf = data->mask + (y - data->y0) * (data->x1 - data->x0);
 
 	if(n_steps > 0)
 	{
@@ -616,12 +616,12 @@ art_ksvg_rgb_svp_alpha_mask_callback(void *callback_data, int y,
  * @alphagamma is NULL.
  **/
 void
-art_ksvg_rgb_svp_alpha_tqmask(const ArtSVP *svp,
+art_ksvg_rgb_svp_alpha_mask(const ArtSVP *svp,
 												int x0, int y0, int x1, int y1,
 												art_u32 rgba,
 												art_u8 *buf, int rowstride,
 												ArtAlphaGamma *alphagamma,
-												art_u8 *tqmask)
+												art_u8 *mask)
 {
 	ArtKSVGRgbaSVPAlphaData data;
 	int r, g, b, alpha;
@@ -637,7 +637,7 @@ art_ksvg_rgb_svp_alpha_tqmask(const ArtSVP *svp,
 	data.g = g;
 	data.b = b;
 	data.alpha = alpha;
-	data.tqmask = tqmask;
+	data.mask = mask;
 
 	a = 0x8000;
 	da = (alpha * 66051 + 0x80) >> 8;	/* 66051 equals 2 ^ 32 / (255 * 255) */

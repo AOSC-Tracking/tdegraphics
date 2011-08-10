@@ -50,7 +50,7 @@ class KDE_EXPORT Viewer : public KParts::ReadWritePart
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		Viewer( TQObject * tqparent = 0, const char * name = 0 );
+		Viewer( TQObject * parent = 0, const char * name = 0 );
 
 		virtual ~Viewer();
 

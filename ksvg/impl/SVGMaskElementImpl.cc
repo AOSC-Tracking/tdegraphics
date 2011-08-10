@@ -274,7 +274,7 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 
 	SVGMatrixImpl *baseMatrix = SVGSVGElementImpl::createSVGMatrix();
 
-	// Set the scale to map the tqmask onto the image
+	// Set the scale to map the mask onto the image
 	double xScale = static_cast<double>(imageWidth) / width()->baseVal()->value();
 	double yScale = static_cast<double>(imageHeight) / height()->baseVal()->value();
 
@@ -338,13 +338,13 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 		// Note: r and b reversed
 		//TQImage maskImage(reinterpret_cast<unsigned char *>(imageBits), imageWidth, imageHeight, 32, 0, 0, TQImage::IgnoreEndian);
 		//maskImage.setAlphaBuffer(true);
-		//maskImage.save("tqmask.png", "PNG");
+		//maskImage.save("mask.png", "PNG");
 	}
 
 	TQByteArray maskData(imageWidth * imageHeight);
     const double epsilon = DBL_EPSILON;
 
-	// Convert the rgba image into an 8-bit tqmask, according to the specs.
+	// Convert the rgba image into an 8-bit mask, according to the specs.
 	for(int i = 0; i < imageWidth * imageHeight; i++)
 	{
 		TQ_UINT32 rgba = imageBits[i];
@@ -388,7 +388,7 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	baseMatrix->deref();
 	bbox->deref();
 
-	// The screenToMask matrix is calculated each time the tqmask is used so we don't
+	// The screenToMask matrix is calculated each time the mask is used so we don't
 	// need to set it here.
 	TQWMatrix tempMatrix;
 
@@ -414,19 +414,19 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	int imageWidth = static_cast<int>(width()->baseVal()->value() * xScale + 0.5);
 	int imageHeight = static_cast<int>(height()->baseVal()->value() * yScale + 0.5);
 
-	Mask tqmask;
+	Mask mask;
 
 	if(imageWidth > 0 && imageHeight > 0)
 	{
 		CacheKey key(referencingElement, imageWidth, imageHeight);
 
-		if(!m_maskCache.find(key, tqmask))
+		if(!m_maskCache.find(key, mask))
 		{
-			tqmask = createMask(referencingElement, imageWidth, imageHeight);
-			m_maskCache.insert(key, tqmask, imageWidth * imageHeight);
+			mask = createMask(referencingElement, imageWidth, imageHeight);
+			m_maskCache.insert(key, mask, imageWidth * imageHeight);
 		}
 
-		// Generate a tqmask-coordinates to screen-coordinates matrix
+		// Generate a mask-coordinates to screen-coordinates matrix
 		SVGMatrixImpl *matrix = 0;
 		if(locatableRef)
 			matrix = locatableRef->getScreenCTM();
@@ -447,10 +447,10 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 		TQWMatrix screenToMask = matrix->qmatrix().invert();
 		matrix->deref();
 
-		tqmask.setScreenToMask(screenToMask);
+		mask.setScreenToMask(screenToMask);
 	}
 	
-	return tqmask;
+	return mask;
 }
 
 TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRect& screenRectangle)
@@ -471,11 +471,11 @@ TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRec
 
 				if(maskElement)
 				{
-					SVGMaskElementImpl::Mask tqmask = maskElement->createMask(tqshape);
+					SVGMaskElementImpl::Mask mask = maskElement->createMask(tqshape);
 					
-					if(!tqmask.isEmpty())
+					if(!mask.isEmpty())
 					{
-						TQByteArray maskData = tqmask.rectangle(screenRectangle);
+						TQByteArray maskData = mask.rectangle(screenRectangle);
 
 						if(cumulativeMask.size() == 0)
 							cumulativeMask = maskData;
@@ -483,7 +483,7 @@ TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRec
 						{
 							int size = cumulativeMask.size();
 
-							// Multiply into the cumulative tqmask (using fast divide by 255)
+							// Multiply into the cumulative mask (using fast divide by 255)
 							for(int i = 0; i < size; i++)
 							{
 								int tmp = maskData[i] * cumulativeMask[i] + 0x80;
@@ -499,10 +499,10 @@ TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRec
 
 		if(!parentNode.isNull())
 		{
-			SVGElementImpl *tqparent = tqshape->ownerDoc()->getElementFromHandle(parentNode.handle());
+			SVGElementImpl *parent = tqshape->ownerDoc()->getElementFromHandle(parentNode.handle());
 
-			if(tqparent)
-				tqshape = dynamic_cast<SVGShapeImpl *>(tqparent);
+			if(parent)
+				tqshape = dynamic_cast<SVGShapeImpl *>(parent);
 			else
 				tqshape = 0;
 		}
@@ -514,8 +514,8 @@ TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRec
 	return cumulativeMask;
 }
 
-SVGMaskElementImpl::Mask::Mask(const TQByteArray& tqmask, const TQWMatrix& screenToMask, int width, int height)
-	:	m_width(width), m_height(height), m_tqmask(tqmask), m_screenToMask(screenToMask)
+SVGMaskElementImpl::Mask::Mask(const TQByteArray& mask, const TQWMatrix& screenToMask, int width, int height)
+	:	m_width(width), m_height(height), m_mask(mask), m_screenToMask(screenToMask)
 {
 }
 

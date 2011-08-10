@@ -345,9 +345,9 @@ void PMTriangle::enableUV( bool yes )
    }
 }
 
-PMDialogEditBase* PMTriangle::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMTriangle::editWidget( TQWidget* parent ) const
 {
-   return new PMTriangleEdit( tqparent );
+   return new PMTriangleEdit( parent );
 }
 
 void PMTriangle::restoreMemento( PMMemento* s )

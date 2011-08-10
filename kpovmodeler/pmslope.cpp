@@ -113,9 +113,9 @@ void PMSlope::setSlope( const double c )
    }
 }
 
-PMDialogEditBase* PMSlope::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMSlope::editWidget( TQWidget* parent ) const
 {
-   return new PMSlopeEdit( tqparent );
+   return new PMSlopeEdit( parent );
 }
 
 void PMSlope::restoreMemento( PMMemento* s )

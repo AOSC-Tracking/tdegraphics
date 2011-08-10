@@ -410,7 +410,7 @@ public:
                                     const TQString &text,
                                     const TQString &caption,
                                     const TQString &continueButtonText,
-                                    TQWidget *tqparent);
+                                    TQWidget *parent);
 
 
 protected:

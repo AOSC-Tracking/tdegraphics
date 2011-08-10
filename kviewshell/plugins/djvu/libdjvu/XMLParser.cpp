@@ -782,10 +782,10 @@ static inline TYPE min(TYPE a,TYPE b) { return (a<b)?a:b; }
 
 // used to build the zone tree
 // true is returned if the GRect is known for this object,
-// and false, if the rectangle's size is just the tqparent size.
+// and false, if the rectangle's size is just the parent size.
 static bool
 make_child_layer(
-  DjVuTXT::Zone &tqparent,
+  DjVuTXT::Zone &parent,
   const lt_XMLTags &tag, ByteStream &bs,
   const int height, const double ws, const double hs)
 {
@@ -799,32 +799,32 @@ make_child_layer(
   const GUTF8String name(tag.get_name());
   if(name == wordtag)
   {
-    self_ptr=tqparent.append_child();
+    self_ptr=parent.append_child();
     self_ptr->ztype = DjVuTXT::WORD;
     sepchar=' ';
   }else if(name == linetag)
   {
-    self_ptr=tqparent.append_child();
+    self_ptr=parent.append_child();
     self_ptr->ztype = DjVuTXT::LINE;
     sepchar=DjVuTXT::end_of_line;
   }else if(name == paragraphtag)
   {
-    self_ptr=tqparent.append_child();
+    self_ptr=parent.append_child();
     self_ptr->ztype = DjVuTXT::PARAGRAPH;
     sepchar=DjVuTXT::end_of_paragraph;
   }else if(name == regiontag)
   {
-    self_ptr=tqparent.append_child();
+    self_ptr=parent.append_child();
     self_ptr->ztype = DjVuTXT::REGION;
     sepchar=DjVuTXT::end_of_region;
   }else if(name == pagecolumntag)
   {
-    self_ptr=tqparent.append_child();
+    self_ptr=parent.append_child();
     self_ptr->ztype = DjVuTXT::COLUMN;
     sepchar=DjVuTXT::end_of_column;
   }else
   {
-    self_ptr = &tqparent;
+    self_ptr = &parent;
     self_ptr->ztype = DjVuTXT::PAGE;
     sepchar=0;
   }
@@ -833,10 +833,10 @@ make_child_layer(
   int &xmin=self.rect.xmin, &ymin=self.rect.ymin, 
     &xmax=self.rect.xmax, &ymax=self.rect.ymax;
   GRect default_rect;
-  default_rect.xmin=max(tqparent.rect.xmax,tqparent.rect.xmin);
-  default_rect.xmax=min(tqparent.rect.xmax,tqparent.rect.xmin);
-  default_rect.ymin=max(tqparent.rect.ymax,tqparent.rect.ymin);
-  default_rect.ymax=min(tqparent.rect.ymax,tqparent.rect.ymin);
+  default_rect.xmin=max(parent.rect.xmax,parent.rect.xmin);
+  default_rect.xmax=min(parent.rect.xmax,parent.rect.xmin);
+  default_rect.ymin=max(parent.rect.ymax,parent.rect.ymin);
+  default_rect.ymax=min(parent.rect.ymax,parent.rect.ymin);
   // Now if there are coordinates, use those.
   GPosition pos(tag.get_args().contains("coords"));
   if(pos)
@@ -926,7 +926,7 @@ make_child_layer(
         }else
         {
           // If the child doesn't have coordinates, we need to use a box
-          // at least as big as the tqparent's coordinates.
+          // at least as big as the parent's coordinates.
           xmin=min(save_rect.xmin,default_rect.xmax);
           xmax=max(save_rect.xmax,default_rect.xmin);
           ymin=min(save_rect.ymin,default_rect.ymax);
@@ -952,10 +952,10 @@ make_child_layer(
       self.text_length = bs.tell() - self.text_start;
     }
   }
-  tqparent.rect.xmin=min(xmin,tqparent.rect.xmin);
-  tqparent.rect.ymin=min(ymin,tqparent.rect.ymin);
-  tqparent.rect.xmax=max(xmax,tqparent.rect.xmax);
-  tqparent.rect.ymax=max(ymax,tqparent.rect.ymax);
+  parent.rect.xmin=min(xmin,parent.rect.xmin);
+  parent.rect.ymin=min(ymin,parent.rect.ymin);
+  parent.rect.xmax=max(xmax,parent.rect.xmax);
+  parent.rect.ymax=max(ymax,parent.rect.ymax);
   if(xmin>xmax)
   {
     const int t=xmin;
@@ -1029,11 +1029,11 @@ lt_XMLParser::Impl::ChangeText(
     const int h=info->height;
     const int w=info->width;
     txt->page_zone.text_start = 0;
-    DjVuTXT::Zone &tqparent=txt->page_zone;
-    tqparent.rect.xmin=0;
-    tqparent.rect.ymin=0;
-    tqparent.rect.ymax=h;
-    tqparent.rect.xmax=w;
+    DjVuTXT::Zone &parent=txt->page_zone;
+    parent.rect.xmin=0;
+    parent.rect.ymin=0;
+    parent.rect.ymax=h;
+    parent.rect.xmax=w;
     double ws=1.0;
     if(width && width != w)
     {
@@ -1044,7 +1044,7 @@ lt_XMLParser::Impl::ChangeText(
     {
       hs=((double)h)/((double)height);
     }
-    make_child_layer(tqparent, tags, *textbs, h, ws,hs);
+    make_child_layer(parent, tags, *textbs, h, ws,hs);
     textbs->write8(0);
     long len = textbs->tell();
     txt->page_zone.text_length = len;

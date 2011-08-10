@@ -23,7 +23,7 @@
 #include "pageRangeWidget.h"
 
 
-PageRangeWidget::PageRangeWidget( TQ_UINT16 _from, TQ_UINT16 _to, TQ_UINT16 _current, TQWidget *tqparent, const char *name) : PageRangeWidget_base(tqparent, name)
+PageRangeWidget::PageRangeWidget( TQ_UINT16 _from, TQ_UINT16 _to, TQ_UINT16 _current, TQWidget *parent, const char *name) : PageRangeWidget_base(parent, name)
 {
   // Paranoid security checks
   if ((from == 0) || (to == 0))

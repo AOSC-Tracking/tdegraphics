@@ -102,9 +102,9 @@ kpView::kpView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        TQWidget *tqparent, const char *name)
+        TQWidget *parent, const char *name)
 
-    : TQWidget (tqparent, name, TQt::WNoAutoErase/*no flicker*/),
+    : TQWidget (parent, name, TQt::WNoAutoErase/*no flicker*/),
       d (new kpViewPrivate ())
 {
     d->m_document = document;
@@ -1348,9 +1348,9 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
 
         TQBitmap maskBitmap;
         TQPainter maskBitmapPainter;
-        if (destPixmap->tqmask ())
+        if (destPixmap->mask ())
         {
-            maskBitmap = *destPixmap->tqmask ();
+            maskBitmap = *destPixmap->mask ();
             maskBitmapPainter.begin (&maskBitmap);
             maskBitmapPainter.setPen (TQt::color1/*opaque*/);
         }
@@ -1483,9 +1483,9 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
                 TQBitmap maskBitmap;
                 TQPainter destPixmapPainter, maskBitmapPainter;
 
-                if (destPixmap->tqmask ())
+                if (destPixmap->mask ())
                 {
-                    maskBitmap = *destPixmap->tqmask ();
+                    maskBitmap = *destPixmap->mask ();
                     maskBitmapPainter.begin (&maskBitmap);
                     maskBitmapPainter.fillRect (rect, TQt::color1/*opaque*/);
                     maskBitmapPainter.end ();
@@ -1747,11 +1747,11 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
     #endif
     }
 
-    if (docPixmap.tqmask () ||
+    if (docPixmap.mask () ||
         (tempPixmapWillBeRendered && vm->tempPixmap ()->mayChangeDocumentMask ()))
     {
     #if DEBUG_KP_VIEW_RENDERER && 1
-        kdDebug () << "\ttqmask=" << (bool) docPixmap.tqmask ()
+        kdDebug () << "\tmask=" << (bool) docPixmap.mask ()
                    << endl;
     #endif
         paintEventDrawCheckerBoard (&backBufferPainter, viewRect);
@@ -1759,7 +1759,7 @@ void kpView::paintEventDrawRect (const TQRect &viewRect)
     else
     {
     #if DEBUG_KP_VIEW_RENDERER && 1
-        kdDebug () << "\tno tqmask" << endl;
+        kdDebug () << "\tno mask" << endl;
     #endif
     }
 

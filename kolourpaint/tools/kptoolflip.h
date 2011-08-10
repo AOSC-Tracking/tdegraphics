@@ -68,7 +68,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpToolFlipDialog (bool actOnSelection, TQWidget *tqparent);
+    kpToolFlipDialog (bool actOnSelection, TQWidget *parent);
     ~kpToolFlipDialog ();
 
 private:

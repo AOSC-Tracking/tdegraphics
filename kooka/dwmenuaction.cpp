@@ -32,9 +32,9 @@
 //-------------------------------------
 
 dwMenuAction::dwMenuAction( const TQString& text, const KShortcut& cut,
-			    KDockWidget *dw,TQObject* tqparent,
+			    KDockWidget *dw,TQObject* parent,
 			    KDockMainWindow *mw, const char* name )
-    :KToggleAction(text,cut,tqparent,name),m_dw(dw),m_mw(mw)
+    :KToggleAction(text,cut,parent,name),m_dw(dw),m_mw(mw)
 {
     connect(this,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotToggled(bool)));
     connect(m_dw->dockManager(),TQT_SIGNAL(change()),this,TQT_SLOT(anDWChanged()));

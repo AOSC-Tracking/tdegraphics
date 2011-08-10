@@ -81,7 +81,7 @@ public:
             kpViewManager *viewManager,
             kpView *buddyView,
             kpViewScrollableContainer *scrollableContainer,
-            TQWidget *tqparent, const char *name);
+            TQWidget *parent, const char *name);
 
     /**
      * Destructs this view.  Informs the viewManager() that the mouse
@@ -344,7 +344,7 @@ protected:
 public:
     /**
      * Adds a region (in view coordinates) to the dirty area that is
-     * repainted when the tqparent @ref kpViewManager is set not to queue
+     * repainted when the parent @ref kpViewManager is set not to queue
      * updates.
      *
      * @param region Region (in view coordinates) that needs repainting.
@@ -355,7 +355,7 @@ public:
      * Convenience function.  Same as above.
      *
      * Adds a rectangle (in view coordinates) to the dirty area that is
-     * repainted when the tqparent @ref kpViewManager is set not to queue
+     * repainted when the parent @ref kpViewManager is set not to queue
      * updates.
      *
      * @param rect Rectangle (in view coordinates) that needs repainting.

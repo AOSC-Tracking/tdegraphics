@@ -230,20 +230,20 @@ public:
 	  \end{itemize}
 	  
 	  @param source \Ref{DjVuFile}, which flags have been changed
-	  @param set_tqmask bits, which have been set
-	  @param clr_tqmask bits, which have been cleared */
+	  @param set_mask bits, which have been set
+	  @param clr_mask bits, which have been cleared */
    virtual void		notify_file_flags_changed(const class DjVuFile * source,
-						  long set_tqmask, long clr_tqmask);
+						  long set_mask, long clr_mask);
 
       /** This notification is sent after the \Ref{DjVuDocument} flags have
 	  been changed. This happens, for example, after it receives enough
 	  data and can determine its structure (#BUNDLED#, #OLD_INDEXED#, etc.).
 
 	  @param source \Ref{DjVuDocument}, which flags have been changed
-	  @param set_tqmask bits, which have been set
-	  @param clr_tqmask bits, which have been cleared */
+	  @param set_mask bits, which have been set
+	  @param clr_mask bits, which have been cleared */
    virtual void		notify_doc_flags_changed(const class DjVuDocument * source,
-						 long set_tqmask, long clr_tqmask);
+						 long set_mask, long clr_mask);
    
       /** This notification is sent from time to time while decoding is in
 	  progress. The purpose is obvious: to provide a way to know how much
@@ -459,13 +459,13 @@ public:
 	  function in each of the ports from the destination list starting from
 	  the closest. */
    virtual void		notify_file_flags_changed(const class DjVuFile * source,
-						  long set_tqmask, long clr_tqmask);
+						  long set_mask, long clr_mask);
 
       /** Computes destination list for #source# and calls the corresponding
 	  function in each of the ports from the destination list starting from
 	  the closest. */
    virtual void		notify_doc_flags_changed(const class DjVuDocument * source,
-						 long set_tqmask, long clr_tqmask);
+						 long set_mask, long clr_mask);
    
       /** Computes destination list for #source# and calls the corresponding
 	  function in each of the ports from the destination list starting from

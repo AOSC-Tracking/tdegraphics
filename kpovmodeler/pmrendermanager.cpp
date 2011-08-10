@@ -416,8 +416,8 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
          m_selected = true;
          m_pDeselectObject = objectToRender;
          if( objectToRender->hasTransformationMatrix( ) )
-            if( objectToRender->tqparent( ) )
-               m_pDeselectObject = objectToRender->tqparent( );
+            if( objectToRender->parent( ) )
+               m_pDeselectObject = objectToRender->parent( );
       }
    }
 

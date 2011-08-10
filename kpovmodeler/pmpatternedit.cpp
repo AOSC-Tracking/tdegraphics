@@ -38,8 +38,8 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 
-PMPatternEdit::PMPatternEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMPatternEdit::PMPatternEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }
@@ -510,7 +510,7 @@ void PMPatternEdit::displayObject( PMObject* o )
       m_pLambdaEdit->setValue( m_pDisplayedObject->lambda( ) );
       m_pLambdaEdit->setReadOnly( readOnly );
 
-      if( o->tqparent( ) && ( o->tqparent( )->type( ) == "Normal" ) )
+      if( o->parent( ) && ( o->parent( )->type( ) == "Normal" ) )
       {
          m_pDepthEdit->setValue( m_pDisplayedObject->depth( ) );
          m_pDepthEdit->setReadOnly( readOnly );
@@ -685,8 +685,8 @@ void PMPatternEdit::saveContents( )
       m_pDisplayedObject->setOmega( m_pOmegaEdit->value( ) );
       m_pDisplayedObject->setLambda( m_pLambdaEdit->value( ) );
 
-      if( m_pDisplayedObject->tqparent( ) &&
-          ( m_pDisplayedObject->tqparent( )->type( ) == "Normal" ) )
+      if( m_pDisplayedObject->parent( ) &&
+          ( m_pDisplayedObject->parent( )->type( ) == "Normal" ) )
          m_pDisplayedObject->setDepth( m_pDepthEdit->value( ) );
    }
 }
@@ -740,8 +740,8 @@ bool PMPatternEdit::isDataValid( )
       if( !m_pOmegaEdit->isDataValid( ) ) return false;
       if( !m_pLambdaEdit->isDataValid( ) ) return false;
    }
-   if( m_pDisplayedObject->tqparent( ) &&
-       m_pDisplayedObject->tqparent( )->type( ) == "Normal" &&
+   if( m_pDisplayedObject->parent( ) &&
+       m_pDisplayedObject->parent( )->type( ) == "Normal" &&
        !m_pDepthEdit->isDataValid( ) )
       return false;
 

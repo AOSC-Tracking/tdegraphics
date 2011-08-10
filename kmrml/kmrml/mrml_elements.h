@@ -106,7 +106,7 @@ namespace KMrml
             m_collectionId = id;
         }
 
-        TQDomElement toElement( TQDomElement& tqparent ) const;
+        TQDomElement toElement( TQDomElement& parent ) const;
         const PropertySheet& propertySheet() const;
 
         static Algorithm defaultAlgorithm();
@@ -221,9 +221,9 @@ namespace KMrml
     };
 
 
-    TQValueList<TQDomElement> directChildElements( const TQDomElement& tqparent,
+    TQValueList<TQDomElement> directChildElements( const TQDomElement& parent,
                                                  const TQString& tagName);
-    TQDomElement firstChildElement( const TQDomElement& tqparent,
+    TQDomElement firstChildElement( const TQDomElement& parent,
                                    const TQString& tagName );
 
 

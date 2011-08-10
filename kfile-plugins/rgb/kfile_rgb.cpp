@@ -32,8 +32,8 @@ typedef KGenericFactory<KRgbPlugin> RgbFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_rgb, RgbFactory("kfile_rgb"))
 
 
-KRgbPlugin::KRgbPlugin(TQObject *tqparent, const char *name, const TQStringList &args) :
-	KFilePlugin(tqparent, name, args)
+KRgbPlugin::KRgbPlugin(TQObject *parent, const char *name, const TQStringList &args) :
+	KFilePlugin(parent, name, args)
 {
 	KFileMimeTypeInfo* info = addMimeTypeInfo("image/x-rgb");
 
@@ -199,9 +199,9 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 
 // restrict to 79 ASCII characters
 TQValidator* KRgbPlugin::createValidator(const TQString&, const TQString &,
-		const TQString &, TQObject* tqparent, const char* name) const
+		const TQString &, TQObject* parent, const char* name) const
 {
-	return new TQRegExpValidator(TQRegExp("[\x0020-\x007E]{79}"), tqparent, name);
+	return new TQRegExpValidator(TQRegExp("[\x0020-\x007E]{79}"), parent, name);
 }
 
 

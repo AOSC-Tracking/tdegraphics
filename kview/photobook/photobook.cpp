@@ -44,10 +44,10 @@ Copyright (c) 2004,2005 Charles Samuels <charles@kde.org>
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
 
-Previews::Previews(PhotoBook *tqparent, const TQStringList &mimetypes)
-	: KFileIconView(tqparent, 0)
+Previews::Previews(PhotoBook *parent, const TQStringList &mimetypes)
+	: KFileIconView(parent, 0)
 {
-	mPhotoBook = tqparent;
+	mPhotoBook = parent;
 	mMimeTypes = mimetypes;
 
 	connect(&mDirLister, TQT_SIGNAL(clear()), TQT_SLOT(slotClearView()));
@@ -149,8 +149,8 @@ void Previews::goToFirst()
 
 
 
-PhotoBook::PhotoBook(TQWidget *tqparent, PhotoBookPart *part, const char *name)
-	: TQSplitter(tqparent, name)
+PhotoBook::PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name)
+	: TQSplitter(parent, name)
 {
 	
 	TQStringList mimetypes;
@@ -221,10 +221,10 @@ K_EXPORT_COMPONENT_FACTORY(libphotobook, PhotoBookFactory )
 
 PhotoBookPart::PhotoBookPart(
 		TQWidget *parentWidget, const char *widgetName,
-		TQObject *tqparent, const char *name,
+		TQObject *parent, const char *name,
 		const TQStringList&
 	)
-	: KParts::ReadOnlyPart(tqparent, name)
+	: KParts::ReadOnlyPart(parent, name)
 {
 	setInstance(PhotoBookFactory::instance());
 

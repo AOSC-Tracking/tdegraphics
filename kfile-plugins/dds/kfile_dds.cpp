@@ -90,10 +90,10 @@ namespace {	// Private.
 		uint flags;
 		uint fourcc;
 		uint bitcount;
-		uint rtqmask;
-		uint gtqmask;
-		uint btqmask;
-		uint atqmask;
+		uint rmask;
+		uint gmask;
+		uint bmask;
+		uint amask;
 	};
 
 	TQDataStream & operator>> ( TQDataStream & s, DDSPixelFormat & pf )
@@ -102,10 +102,10 @@ namespace {	// Private.
 		s >> pf.flags;
 		s >> pf.fourcc;
 		s >> pf.bitcount;
-		s >> pf.rtqmask;
-		s >> pf.gtqmask;
-		s >> pf.btqmask;
-		s >> pf.atqmask;
+		s >> pf.rmask;
+		s >> pf.gmask;
+		s >> pf.bmask;
+		s >> pf.amask;
 		return s;
 	}
 
@@ -182,8 +182,8 @@ namespace {	// Private.
 K_EXPORT_COMPONENT_FACTORY(kfile_dds, DdsFactory( "kfile_dds" ))
 
 // Constructor, init mime type info.
-KDdsPlugin::KDdsPlugin(TQObject *tqparent, const char *name, const TQStringList &args) : 
-	KFilePlugin(tqparent, name, args)
+KDdsPlugin::KDdsPlugin(TQObject *parent, const char *name, const TQStringList &args) : 
+	KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo * info = addMimeTypeInfo( "image/x-dds" );
 

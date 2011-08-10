@@ -526,7 +526,7 @@ void PMPov35SerPhotons( const PMObject* object, const PMMetaObject*, PMOutputDev
 
    dev->objectBegin( "photons" );
 
-   if( o->tqparent( ) && ( o->tqparent( )->type( ) == "Light" ) )
+   if( o->parent( ) && ( o->parent( )->type( ) == "Light" ) )
    {
       if( o->refraction( ) )
          dev->writeLine( TQString( "refraction on" ) );
@@ -779,9 +779,9 @@ void PMPov35SerPattern( const PMObject* object, const PMMetaObject*, PMOutputDev
          break;
    }
    // depth
-   if( o->tqparent( ) )
+   if( o->parent( ) )
    {
-      if( o->depth( ) && o->tqparent( )->type( ) == "Normal" )
+      if( o->depth( ) && o->parent( )->type( ) == "Normal" )
       {
          str.setNum( o->depth( ) );
          dev->writeLine( str );
@@ -894,9 +894,9 @@ void PMPov35SerNormal( const PMObject* object, const PMMetaObject* tqmetaObject,
    TQString str1;
    bool bObject = true;
 
-   if( o->tqparent( ) )
+   if( o->parent( ) )
    {
-      if( o->tqparent( )->type( ) == "NormalMap" )
+      if( o->parent( )->type( ) == "NormalMap" )
          bObject = false;
    }
 
@@ -1356,8 +1356,8 @@ void PMPov35SerPigment( const PMObject* object, const PMMetaObject* tqmetaObject
    PMPigment* o = ( PMPigment* ) object;
 
    bool bObject = true;
-   if( o->tqparent( ) )
-      if( o->tqparent( )->type( ) == "PigmentMap" )
+   if( o->parent( ) )
+      if( o->parent( )->type( ) == "PigmentMap" )
          bObject = false;
 
    if( bObject )
@@ -1376,8 +1376,8 @@ void PMPov35SerTexture( const PMObject* object, const PMMetaObject* tqmetaObject
    PMTexture* o = ( PMTexture* ) object;
 
    bool bObject = true;
-   if( o->tqparent( ) )
-      if( o->tqparent( )->type( ) == "TextureMap" )
+   if( o->parent( ) )
+      if( o->parent( )->type( ) == "TextureMap" )
          bObject = false;
 
    if( bObject )

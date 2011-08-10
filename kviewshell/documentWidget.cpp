@@ -65,8 +65,8 @@ TQPixmap* BLShadow = 0;
 } // namespace anon
 
 
-DocumentWidget::DocumentWidget(TQWidget *tqparent, PageView *sv, DocumentPageCache *cache, const char *name )
-  : TQWidget( tqparent, name ), indexOfUnderlinedLink(-1)
+DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name )
+  : TQWidget( parent, name ), indexOfUnderlinedLink(-1)
 {
   moveTool = true;
 

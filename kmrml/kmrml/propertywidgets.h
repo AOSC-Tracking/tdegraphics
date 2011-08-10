@@ -32,7 +32,7 @@ namespace KMrml
         
     public:
         IntegerWidget( const PropertySheet& sheet, 
-                       TQWidget *tqparent = tqparent, const char *name = 0L );
+                       TQWidget *parent = parent, const char *name = 0L );
         ~IntegerWidget();
 
         int value() const;
@@ -48,7 +48,7 @@ namespace KMrml
         
     public:
         ComboWidget( const PropertySheet& sheet, 
-                     TQWidget *tqparent = tqparent, const char *name = 0L );
+                     TQWidget *parent = parent, const char *name = 0L );
         ~ComboWidget();
         
         TQString value() const;
@@ -64,7 +64,7 @@ namespace KMrml
         
     public:
         CheckBoxWidget( const PropertySheet& sheet, 
-                        TQWidget *tqparent = tqparent, const char *name = 0L );
+                        TQWidget *parent = parent, const char *name = 0L );
         ~CheckBoxWidget();
         
         bool value();
@@ -82,7 +82,7 @@ namespace KMrml
         
     public:
         LineEditWidget( const PropertySheet& sheet, 
-                        TQWidget *tqparent = tqparent, const char *name = 0L );
+                        TQWidget *parent = parent, const char *name = 0L );
         ~LineEditWidget();
         
         TQString value();
@@ -98,7 +98,7 @@ namespace KMrml
         
     public:
         ListBoxWidget( const PropertySheet& sheet, 
-                       TQWidget *tqparent = tqparent, const char *name = 0L );
+                       TQWidget *parent = parent, const char *name = 0L );
         ~ListBoxWidget();
         
         TQStringList values();

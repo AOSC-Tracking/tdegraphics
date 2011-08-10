@@ -133,9 +133,9 @@ void PMSuperquadricEllipsoid::setNorthSouthExponent( double n )
    }
 }
 
-PMDialogEditBase* PMSuperquadricEllipsoid::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMSuperquadricEllipsoid::editWidget( TQWidget* parent ) const
 {
-   return new PMSuperquadricEllipsoidEdit( tqparent );
+   return new PMSuperquadricEllipsoidEdit( parent );
 }
 
 void PMSuperquadricEllipsoid::restoreMemento( PMMemento* s )

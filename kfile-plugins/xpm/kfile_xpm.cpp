@@ -32,8 +32,8 @@ K_EXPORT_COMPONENT_FACTORY(kfile_xpm, xpmFactory( "kfile_xpm" ))
 
 //--------------------------------------------------------------------------------
 
-xpmPlugin::xpmPlugin(TQObject *tqparent, const char *name, const TQStringList &args)
-  : KFilePlugin(tqparent, name, args)
+xpmPlugin::xpmPlugin(TQObject *parent, const char *name, const TQStringList &args)
+  : KFilePlugin(parent, name, args)
 {
   KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xpm" );
 

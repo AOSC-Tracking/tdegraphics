@@ -54,8 +54,8 @@
 
 
 
-ocradDialog::ocradDialog( TQWidget *tqparent, KSpellConfig *spellConfig )
-    :KOCRBase( tqparent, spellConfig, KDialogBase::Tabbed ),
+ocradDialog::ocradDialog( TQWidget *parent, KSpellConfig *spellConfig )
+    :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
      m_ocrCmd( TQString()),
      m_orfUrlRequester(0L),
      m_layoutMode(0),

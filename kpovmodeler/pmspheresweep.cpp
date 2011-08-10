@@ -290,9 +290,9 @@ void PMSphereSweep::setRadii( const TQValueList<double>& radii )
    }
 }
 
-PMDialogEditBase* PMSphereSweep::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMSphereSweep::editWidget( TQWidget* parent ) const
 {
-   return new PMSphereSweepEdit( tqparent );
+   return new PMSphereSweepEdit( parent );
 }
 
 void PMSphereSweep::createMemento( )

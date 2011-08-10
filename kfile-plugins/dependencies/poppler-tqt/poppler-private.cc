@@ -86,7 +86,7 @@ GooString *TQStringToGooString(const TQString &s)
 }
 
 
-void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * tqparent, GooList * items )
+void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, GooList * items )
 {
     int numItems = items->getLength();
     for ( int i = 0; i < numItems; ++i )
@@ -103,7 +103,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * tqparent,
             continue;
 
         TQDomElement item = docSyn->createElement( name );
-        tqparent->appendChild( item );
+        parent->appendChild( item );
 
         // 2. find the page the link refers to
         ::LinkAction * a = outlineItem->getAction();

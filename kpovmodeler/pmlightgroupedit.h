@@ -39,9 +39,9 @@ class PMLightGroupEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMLightGroupEdit with tqparent and name
+    * Creates a PMLightGroupEdit with parent and name
     */
-   PMLightGroupEdit( TQWidget* tqparent, const char* name = 0 );
+   PMLightGroupEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -49,9 +49,9 @@ const double kpColorSimilarityCube::colorCubeDiagonalDistance =
 
 kpColorSimilarityCube::kpColorSimilarityCube (int look,
                                               kpMainWindow *mainWindow,
-                                              TQWidget *tqparent,
+                                              TQWidget *parent,
                                               const char *name)
-    : TQFrame (tqparent, name, TQt::WNoAutoErase/*no flicker*/),
+    : TQFrame (parent, name, TQt::WNoAutoErase/*no flicker*/),
       m_mainWindow (mainWindow),
       m_colorSimilarity (-1)
 {

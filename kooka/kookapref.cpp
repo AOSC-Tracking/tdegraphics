@@ -176,12 +176,12 @@ void KookaPreferences::setupOCRPage()
     }
 }
 
-KURLRequester* KookaPreferences::binaryCheckBox( TQWidget *tqparent, const TQString& program )
+KURLRequester* KookaPreferences::binaryCheckBox( TQWidget *parent, const TQString& program )
 {
-    TQHBox *hbox = new TQHBox( tqparent );
+    TQHBox *hbox = new TQHBox( parent );
 
     (void) new TQLabel( i18n("Select the %1 binary to use:").tqarg( program ), hbox );
-    KURLRequester* urlRequester = new KURLRequester( tqparent );
+    KURLRequester* urlRequester = new KURLRequester( parent );
     urlRequester->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
 
     TQToolTip::add( urlRequester,

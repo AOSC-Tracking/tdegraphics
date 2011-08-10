@@ -35,7 +35,7 @@ class ScanDialog : public KScanDialog
   TQ_OBJECT
 
 public:
-   ScanDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
+   ScanDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
    ~ScanDialog();
 
    virtual bool setup();
@@ -72,10 +72,10 @@ private:
 class ScanDialogFactory : public KScanDialogFactory
 {
 public:
-   ScanDialogFactory( TQObject *tqparent=0, const char *name=0 );
+   ScanDialogFactory( TQObject *parent=0, const char *name=0 );
 
 protected:
-   virtual KScanDialog * createDialog( TQWidget *tqparent=0, const char *name=0,
+   virtual KScanDialog * createDialog( TQWidget *parent=0, const char *name=0,
 				       bool modal=false );
 
 

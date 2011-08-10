@@ -41,9 +41,9 @@
 #include "devselector.h"
 
 
-DeviceSelector::DeviceSelector( TQWidget *tqparent, TQStrList& devList,
+DeviceSelector::DeviceSelector( TQWidget *parent, TQStrList& devList,
 				const TQStringList& hrdevList )
-    : KDialogBase( tqparent,  "DeviceSel", true, i18n("Welcome to Kooka"),
+    : KDialogBase( parent,  "DeviceSel", true, i18n("Welcome to Kooka"),
 		   Ok|Cancel, Ok, true )
 {
    kdDebug(29000) << "Starting DevSelector!" << endl;

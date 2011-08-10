@@ -28,7 +28,7 @@ class DisplayNumber : public TQLabel  {
    Q_OBJECT
   TQ_OBJECT
 public: 
-  DisplayNumber(TQWidget *tqparent=0, int digits=0, int prec=0, const char *name=0);
+  DisplayNumber(TQWidget *parent=0, int digits=0, int prec=0, const char *name=0);
   ~DisplayNumber();
   void setFont( const TQFont & f );
   void setNum(double num);

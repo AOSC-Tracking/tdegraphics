@@ -39,9 +39,9 @@ class PMBoxEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMBoxEdit with tqparent and name
+    * Creates a PMBoxEdit with parent and name
     */
-   PMBoxEdit( TQWidget* tqparent, const char* name = 0 );
+   PMBoxEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

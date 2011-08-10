@@ -82,7 +82,7 @@ class ImageCanvas: public TQScrollView
     TQ_PROPERTY( int scale_factor READ getScaleFactor WRITE setScaleFactor )
 
 public:
-    ImageCanvas( TQWidget *tqparent = 0,
+    ImageCanvas( TQWidget *parent = 0,
                  const TQImage *start_image = 0,
                  const char *name = 0);
     ~ImageCanvas( );

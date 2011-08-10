@@ -28,7 +28,7 @@ class KViewViewerPluginsConfig : public KSettings::PluginPage
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		KViewViewerPluginsConfig( TQWidget * tqparent, const char * name = 0, const TQStringList & args = TQStringList() );
+		KViewViewerPluginsConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );
 		~KViewViewerPluginsConfig();
 	private:
 		KConfig * m_config;

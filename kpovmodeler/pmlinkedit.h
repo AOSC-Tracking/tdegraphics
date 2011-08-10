@@ -37,21 +37,21 @@ class PMLinkEdit : public TQWidget
   TQ_OBJECT
 public:
    /**
-    * Creates a link edit widget with tqparent and name.
+    * Creates a link edit widget with parent and name.
     *
     * Allows the selection of declares of type declareType.
     */
-   PMLinkEdit( const TQString& declareType, TQWidget* tqparent, const char* name = 0 );
+   PMLinkEdit( const TQString& declareType, TQWidget* parent, const char* name = 0 );
    /**
-    * Creates a link edit widget with tqparent and name.
+    * Creates a link edit widget with parent and name.
     *
     * Allows the selection of declares of type declares.
     */
-   PMLinkEdit( const TQStringList& declares, TQWidget* tqparent, const char* name = 0 );
+   PMLinkEdit( const TQStringList& declares, TQWidget* parent, const char* name = 0 );
    /**
-    * Creates a link edit widget with tqparent and name.
+    * Creates a link edit widget with parent and name.
     */
-   PMLinkEdit( TQWidget* tqparent, const char* name = 0 );
+   PMLinkEdit( TQWidget* parent, const char* name = 0 );
 
    /**
     * Sets the displayed object and displays the link

@@ -109,9 +109,9 @@ void PMNormal::readAttributes( const PMXMLHelper& h )
    m_uvMapping = h.boolAttribute( "uv_mapping", false );
 }
 
-PMDialogEditBase* PMNormal::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMNormal::editWidget( TQWidget* parent ) const
 {
-   return new PMNormalEdit( tqparent );
+   return new PMNormalEdit( parent );
 }
 
 void PMNormal::enableBumpSize( bool c )

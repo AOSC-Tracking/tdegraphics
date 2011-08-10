@@ -40,7 +40,7 @@ class KMultiPage : public KParts::ReadOnlyPart, virtual public kmultipageInterfa
   TQ_OBJECT
 
 public:
-  KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent, const char *name);
+  KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent, const char *name);
   virtual ~KMultiPage();
 
   /* returns the scrollview used for the display */
@@ -565,7 +565,7 @@ protected:
   KPrinter *getPrinter(bool enablePageSizeFeatures=true);
 
 
-  /** Pointer to the tqparent widget 
+  /** Pointer to the parent widget 
 
   This pointer is automatically set by the constructor.
   */

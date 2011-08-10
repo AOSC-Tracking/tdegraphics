@@ -46,7 +46,7 @@ public:
 
     kpColorSimilarityCube (int look,
                            kpMainWindow *mainWindow,
-                           TQWidget *tqparent,
+                           TQWidget *parent,
                            const char *name = 0);
     virtual ~kpColorSimilarityCube ();
 

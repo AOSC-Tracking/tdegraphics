@@ -55,8 +55,8 @@ extern "C"
 	}
 }
 
-KGamma::KGamma(TQWidget *tqparent, const char *name, const TQStringList&)
-    :KCModule(tqparent,name)
+KGamma::KGamma(TQWidget *parent, const char *name, const TQStringList&)
+    :KCModule(parent,name)
 {
   bool ok;
   GammaCorrection = true;

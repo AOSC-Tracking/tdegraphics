@@ -33,7 +33,7 @@ class KSVGWidget : public TQWidget
 Q_OBJECT
   TQ_OBJECT
 public:
-	KSVGWidget(KSVGPlugin *part, TQWidget *tqparent, const char *name);
+	KSVGWidget(KSVGPlugin *part, TQWidget *parent, const char *name);
 	virtual ~KSVGWidget();
 
 	KSVGPlugin *part() const;

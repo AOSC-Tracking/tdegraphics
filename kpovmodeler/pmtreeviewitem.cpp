@@ -24,34 +24,34 @@
 #include "pmfactory.h"
 #include "pmtexturemap.h"
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListView* tqparent )
-      : TQListViewItem( tqparent )
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListView* parent )
+      : TQListViewItem( parent )
 {
    m_pObject = object;
    setDescriptions( );
    initSelection( );
 }
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListViewItem* tqparent )
-      : TQListViewItem( tqparent )
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListViewItem* parent )
+      : TQListViewItem( parent )
 {
    m_pObject = object;
    setDescriptions( );
    initSelection( );
 }
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListView* tqparent,
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListView* parent,
                                 TQListViewItem* after )
-      : TQListViewItem( tqparent, after )
+      : TQListViewItem( parent, after )
 {
    m_pObject = object;
    setDescriptions( );
    initSelection( );
 }
 
-PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListViewItem* tqparent,
+PMTreeViewItem::PMTreeViewItem( PMObject* object, TQListViewItem* parent,
                    TQListViewItem* after )
-      : TQListViewItem( tqparent, after )
+      : TQListViewItem( parent, after )
 {
    m_pObject = object;
    setDescriptions( );
@@ -72,11 +72,11 @@ void PMTreeViewItem::setDescriptions( )
    else
       text = m_pObject->description( );
    
-   if( m_pObject->tqparent( ) )
+   if( m_pObject->parent( ) )
    {
-      if( m_pObject->tqparent( )->isA( "TextureMapBase" ) )
+      if( m_pObject->parent( )->isA( "TextureMapBase" ) )
       {
-         PMTextureMapBase* tm = ( PMTextureMapBase* ) m_pObject->tqparent( );
+         PMTextureMapBase* tm = ( PMTextureMapBase* ) m_pObject->parent( );
          if( m_pObject->type( ) == tm->mapType( ) )
             text = TQString( "[%1] " ).tqarg( tm->mapValue( m_pObject ), 4, 'f', 2 ) + text;
       }
@@ -87,8 +87,8 @@ void PMTreeViewItem::setDescriptions( )
 TQString PMTreeViewItem::key( int, bool ) const
 {
    TQString result;
-   if( m_pObject->tqparent( ) )
-      result.sprintf( "%06i", m_pObject->tqparent( )->findChild( m_pObject ) );
+   if( m_pObject->parent( ) )
+      result.sprintf( "%06i", m_pObject->parent( )->findChild( m_pObject ) );
    else
       result = "000000";
    return result;

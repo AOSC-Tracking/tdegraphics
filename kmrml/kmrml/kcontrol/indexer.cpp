@@ -36,8 +36,8 @@
 using namespace KMrmlConfig;
 
 Indexer::Indexer( const KMrml::Config* config,
-                  TQObject *tqparent, const char *name )
-    : TQObject( tqparent, name ),
+                  TQObject *parent, const char *name )
+    : TQObject( parent, name ),
       m_config( config ),
       m_dirCount( 0 )
 {

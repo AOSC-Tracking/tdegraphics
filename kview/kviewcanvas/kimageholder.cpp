@@ -33,8 +33,8 @@
 
 #include "kimageholder.h"
 
-KImageHolder::KImageHolder( TQWidget * tqparent, const char * name )
-	: TQWidget( tqparent, name, TQt::WResizeNoErase | TQt::WRepaintNoErase )
+KImageHolder::KImageHolder( TQWidget * parent, const char * name )
+	: TQWidget( parent, name, TQt::WResizeNoErase | TQt::WRepaintNoErase )
 	, m_selected( false )
 	, m_bSelecting( false )
 	, m_scrollTimerId( 0 )
@@ -96,7 +96,7 @@ void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 		}
 		else // create a selection
 		{
-			TQWidget * parentwidget = ( TQWidget* )tqparent();
+			TQWidget * parentwidget = ( TQWidget* )parent();
 			if( ! m_bSelecting )
 			{
 				m_bSelecting = true;
@@ -282,7 +282,7 @@ void KImageHolder::paintEvent( TQPaintEvent *ev )
 	painter.setClipRegion( ev->region().intersect( m_drawRect ) );
 	if( m_pPixmap )
 	{
-		if( m_pPixmap->tqmask() )
+		if( m_pPixmap->mask() )
 		{
 			if( ! m_pDoubleBuffer )
 			{

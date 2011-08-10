@@ -218,13 +218,13 @@ int kpToolSkewDialog::s_lastHorizontalAngle = 0,
     kpToolSkewDialog::s_lastVerticalAngle = 0;
 
 
-kpToolSkewDialog::kpToolSkewDialog (bool actOnSelection, kpMainWindow *tqparent,
+kpToolSkewDialog::kpToolSkewDialog (bool actOnSelection, kpMainWindow *parent,
                                     const char *name)
     : kpToolPreviewDialog (kpToolPreviewDialog::AllFeatures,
                            false/*don't reserve top row*/,
                            actOnSelection ? i18n ("Skew Selection") : i18n ("Skew Image"),
                            i18n ("After Skew:"),
-                           actOnSelection, tqparent, name)
+                           actOnSelection, parent, name)
 {
     // Too confusing - disable for now
     s_lastHorizontalAngle = s_lastVerticalAngle = 0;

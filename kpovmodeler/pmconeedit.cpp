@@ -26,8 +26,8 @@
 #include <klocale.h>
 #include <tqcheckbox.h>
 
-PMConeEdit::PMConeEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMConeEdit::PMConeEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

@@ -80,18 +80,18 @@ extern void oops(TQString message);
 
 
 
-TeXFont_PK::TeXFont_PK(TeXFontDefinition *tqparent)
-  : TeXFont(tqparent)
+TeXFont_PK::TeXFont_PK(TeXFontDefinition *parent)
+  : TeXFont(parent)
 {
 #ifdef DEBUG_PK
-  kdDebug(4300) << "TeXFont_PK::TeXFont_PK( tqparent=" << tqparent << ")" << endl;
+  kdDebug(4300) << "TeXFont_PK::TeXFont_PK( parent=" << parent << ")" << endl;
 #endif
 
   for(unsigned int i=0; i<TeXFontDefinition::max_num_of_chars_in_font; i++)
     characterBitmaps[i] = 0;
-  file = fopen(TQFile::encodeName(tqparent->filename), "r");
+  file = fopen(TQFile::encodeName(parent->filename), "r");
   if (file == 0) 
-    kdError(4300) << i18n("Cannot open font file %1.").tqarg(tqparent->filename) << endl;
+    kdError(4300) << i18n("Cannot open font file %1.").tqarg(parent->filename) << endl;
 #ifdef DEBUG_PK
   else
     kdDebug(4300) << "TeXFont_PK::TeXFont_PK(): file opened successfully" << endl;
@@ -136,7 +136,7 @@ glyph* TeXFont_PK::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const TQ
     // If the character is not defined in the PK file, mark the
     // character as missing, and print an error message
     if (g->addr == 0) {
-      kdError(4300) << i18n("TexFont_PK::operator[]: Character %1 not defined in font %2").tqarg(ch).tqarg(tqparent->filename) << endl;
+      kdError(4300) << i18n("TexFont_PK::operator[]: Character %1 not defined in font %2").tqarg(ch).tqarg(parent->filename) << endl;
       g->addr = -1;
       return g;
     }
@@ -163,7 +163,7 @@ glyph* TeXFont_PK::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const TQ
       ((g->shrunkenCharacter.isNull()) || (color != g->color)) &&
       (characterBitmaps[ch]->w != 0)) {
     g->color = color;
-    double shrinkFactor = 1200 / tqparent->displayResolution_in_dpi;
+    double shrinkFactor = 1200 / parent->displayResolution_in_dpi;
     
     // All is fine? Then we rescale the bitmap in order to produce the
     // required pixmap.  Rescaling a character, however, is an art
@@ -270,7 +270,7 @@ glyph* TeXFont_PK::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const TQ
     im32.setAlphaBuffer(true);
     // Do TQPixmaps fully support the alpha channel? If yes, we use
     // that. Otherwise, use other routines as a fallback
-    if (tqparent->font_pool->TQPixmapSupportsAlpha) {
+    if (parent->font_pool->TQPixmapSupportsAlpha) {
       // If the alpha channel is properly supported, we set the
       // character glyph to a colored rectangle, and define the
       // character outline only using the alpha channel. That ensures
@@ -283,7 +283,7 @@ glyph* TeXFont_PK::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const TQ
       }
     } else {
       // If the alpha channel is not supported... QT seems to turn the
-      // alpha channel into a crude bitmap which is used to tqmask the
+      // alpha channel into a crude bitmap which is used to mask the
       // resulting TQPixmap. In this case, we define the character
       // outline using the image data, and use the alpha channel only
       // to store "maximally opaque" or "completely transparent"
@@ -454,7 +454,7 @@ void TeXFont_PK::PK_skip_specials()
       case PK_NOOP :
 	break;
       default :
-	oops(i18n("Unexpected %1 in PK file %2").tqarg(PK_flag_byte).tqarg(tqparent->filename) );
+	oops(i18n("Unexpected %1 in PK file %2").tqarg(PK_flag_byte).tqarg(parent->filename) );
 	break;
       }
     }
@@ -521,7 +521,7 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
     w = num(fp, n);
     h = num(fp, n);
     if (w > 0x7fff || h > 0x7fff)
-      oops(i18n("The character %1 is too large in file %2").tqarg(ch).tqarg(tqparent->filename));
+      oops(i18n("The character %1 is too large in file %2").tqarg(ch).tqarg(parent->filename));
     characterBitmaps[ch]->w = w;
     characterBitmaps[ch]->h = h;
   }
@@ -626,9 +626,9 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
 	paint_switch = 1 - paint_switch;
       }
       if (cp != ((TQ_UINT32 *) (characterBitmaps[ch]->bits + bytes_wide * characterBitmaps[ch]->h)))
-	oops(i18n("Wrong number of bits stored:  char. %1, font %2").tqarg(ch).tqarg(tqparent->filename));
+	oops(i18n("Wrong number of bits stored:  char. %1, font %2").tqarg(ch).tqarg(parent->filename));
       if (rows_left != 0 || h_bit != characterBitmaps[ch]->w)
-	oops(i18n("Bad pk file (%1), too many bits").tqarg(tqparent->filename));
+	oops(i18n("Bad pk file (%1), too many bits").tqarg(parent->filename));
     }
     
     // The data in the bitmap is now in the processor's bit order,
@@ -712,9 +712,9 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
 	paint_switch = 1 - paint_switch;
       }
       if (cp != ((TQ_UINT32 *) (characterBitmaps[ch]->bits + bytes_wide * characterBitmaps[ch]->h)))
-	oops(i18n("Wrong number of bits stored:  char. %1, font %2").tqarg(ch).tqarg(tqparent->filename));
+	oops(i18n("Wrong number of bits stored:  char. %1, font %2").tqarg(ch).tqarg(parent->filename));
       if (rows_left != 0 || h_bit != characterBitmaps[ch]->w)
-	oops(i18n("Bad pk file (%1), too many bits").tqarg(tqparent->filename));
+	oops(i18n("Bad pk file (%1), too many bits").tqarg(parent->filename));
     }
   } // endif: big or small Endian?
 }

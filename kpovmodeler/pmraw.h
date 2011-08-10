@@ -72,7 +72,7 @@ public:
    virtual void cleanUp( ) const;
 
    /** */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmraw" ); }
    /** */

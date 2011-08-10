@@ -637,9 +637,9 @@ void PMFinish::setIridTurbulence( double c )
    }
 }
 
-PMDialogEditBase* PMFinish::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMFinish::editWidget( TQWidget* parent ) const
 {
-   return new PMFinishEdit( tqparent );
+   return new PMFinishEdit( parent );
 }
 
 void PMFinish::restoreMemento( PMMemento* s )

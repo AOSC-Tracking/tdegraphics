@@ -28,7 +28,7 @@ class TQTimer;
 class SizeTip : public TQLabel
 {
   public:
-    SizeTip( TQWidget *tqparent, const char *name=0 );
+    SizeTip( TQWidget *parent, const char *name=0 );
     ~SizeTip() {}
 
   void setTip( const TQRect &rect );

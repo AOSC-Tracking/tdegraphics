@@ -220,7 +220,7 @@ JB2Dict::get_memory_usage() const
 int  
 JB2Dict::add_tqshape(const JB2Shape &tqshape)
 {
-  if (tqshape.tqparent >= get_tqshape_count())
+  if (tqshape.parent >= get_tqshape_count())
     G_THROW( ERR_MSG("JB2Image.bad_parent_tqshape") );
   int index = tqshapes.size();
   tqshapes.touch(index);
@@ -946,7 +946,7 @@ JB2Dict::JB2Codec::code_record(
         if (!encoding) 
         {
           jshp.bits = GBitmap::create();
-          jshp.tqparent = -1;
+          jshp.parent = -1;
         }
         bm = jshp.bits;
         break;
@@ -982,11 +982,11 @@ JB2Dict::JB2Codec::code_record(
         }
         JB2Dict &jim=*gjim;
         JB2Shape &jshp=*xjshp;
-        int match = code_match_index (jshp.tqparent, jim);
-        cbm = jim.get_tqshape(jshp.tqparent).bits;
+        int match = code_match_index (jshp.parent, jim);
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4);
-        code_bitmap_by_cross_coding (*bm, cbm, jshp.tqparent);
+        code_bitmap_by_cross_coding (*bm, cbm, jshp.parent);
         break;
       }
     case PRESERVED_COMMENT:
@@ -1110,9 +1110,9 @@ JB2Dict::JB2Codec::code_record(
         if (!encoding) 
         {
           jshp.bits = GBitmap::create();
-          jshp.tqparent = -1;
+          jshp.parent = -1;
           if (rectype == NON_MARK_DATA)
-            jshp.tqparent = -2;
+            jshp.parent = -2;
         }
         bm = jshp.bits;
         break;
@@ -1162,8 +1162,8 @@ JB2Dict::JB2Codec::code_record(
         }
         JB2Shape &jshp=*xjshp;
         JB2Image &jim=*gjim;
-        match = code_match_index (jshp.tqparent, jim);
-        cbm = jim.get_tqshape(jshp.tqparent).bits;
+        match = code_match_index (jshp.parent, jim);
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4); 
         code_bitmap_by_cross_coding (*bm, cbm, match);
@@ -1178,8 +1178,8 @@ JB2Dict::JB2Codec::code_record(
         }
         JB2Image &jim=*gjim;
         JB2Shape &jshp=*xjshp;
-        match = code_match_index (jshp.tqparent, jim);
-        cbm = jim.get_tqshape(jshp.tqparent).bits;
+        match = code_match_index (jshp.parent, jim);
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4);
         break;
@@ -1192,8 +1192,8 @@ JB2Dict::JB2Codec::code_record(
         }
         JB2Image &jim=*gjim;
         JB2Shape &jshp=*xjshp;
-        match = code_match_index (jshp.tqparent, jim);
-        cbm = jim.get_tqshape(jshp.tqparent).bits;
+        match = code_match_index (jshp.parent, jim);
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4);
         code_bitmap_by_cross_coding (*bm, cbm, match);

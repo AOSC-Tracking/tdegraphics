@@ -36,7 +36,7 @@ FaxRenderer::FaxRenderer(TQWidget* par)
   : DocumentRenderer(par)
 {
 #ifdef KF_DEBUG
-  kdError() << "FaxRenderer( tqparent=" << par << " )" << endl;
+  kdError() << "FaxRenderer( parent=" << par << " )" << endl;
 #endif
 }
 

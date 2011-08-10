@@ -49,9 +49,9 @@ class PMImageMapEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMImageMapEdit with tqparent and name
+    * Creates a PMImageMapEdit with parent and name
     */
-   PMImageMapEdit( TQWidget* tqparent, const char* name = 0 );
+   PMImageMapEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -46,8 +46,8 @@ KDSCErrorHandler::Response KDSCErrorThreshold::error( const KDSCError& err )
 	return Cancel;
 }
     
-KDSCErrorDialog::KDSCErrorDialog( TQWidget* tqparent ) :
-    KDialog( tqparent, "dscerrordialog", true ),
+KDSCErrorDialog::KDSCErrorDialog( TQWidget* parent ) :
+    KDialog( parent, "dscerrordialog", true ),
     _response( Ok )
 {
     TQVBoxLayout* vbox = new TQVBoxLayout( this, marginHint(), spacingHint() );

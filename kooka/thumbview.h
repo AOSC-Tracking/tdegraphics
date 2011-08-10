@@ -63,7 +63,7 @@ class ThumbView: public TQVBox /* KIconView */
 
 public:
 
-   ThumbView( TQWidget *tqparent, const char *name=0 );
+   ThumbView( TQWidget *parent, const char *name=0 );
    ~ThumbView();
 
    void setCurrentDir( const KURL& s)

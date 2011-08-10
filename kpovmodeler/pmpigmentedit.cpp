@@ -25,8 +25,8 @@
 #include <klocale.h>
 
 
-PMPigmentEdit::PMPigmentEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMPigmentEdit::PMPigmentEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

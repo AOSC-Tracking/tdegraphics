@@ -30,11 +30,11 @@ PMDeleteCommand::PMDeleteCommand( PMObject* obj )
       : PMCommand( i18n( "Delete %1" ).tqarg( obj->name( ) ) )
 {
    // the scene can not be deleted!
-   if( obj->tqparent( ) )
+   if( obj->parent( ) )
       m_infoList.append( new PMDeleteInfo( obj ) );
    else
    {
-      // object has no tqparent!
+      // object has no parent!
       // top level objects can't be moved, move all child items
       PMObject* tmp;
       for( tmp = obj->firstChild( ); tmp; tmp = tmp->nextSibling( ) )
@@ -55,11 +55,11 @@ PMDeleteCommand::PMDeleteCommand( const PMObjectList& list )
    {
       obj = it.current( );
       
-      if( obj->tqparent( ) )  
+      if( obj->parent( ) )  
          m_infoList.append( new PMDeleteInfo( obj ) );
       else
       {
-         // object has no tqparent!
+         // object has no parent!
          // top level objects can't be moved, move all child items
          PMObject* tmp;
          for( tmp = obj->firstChild( ); tmp; tmp = tmp->nextSibling( ) )
@@ -91,7 +91,7 @@ void PMDeleteCommand::execute( PMCommandManager* theManager )
    {
       PMDeleteInfoListIterator it( m_infoList );
       PMDeleteInfo* info = 0;
-      PMObject* tqparent;
+      PMObject* parent;
       
       if( !m_linksCreated )
       {
@@ -120,23 +120,23 @@ void PMDeleteCommand::execute( PMCommandManager* theManager )
       for( it.toLast( ); it.current( ); --it )
       {
          info = it.current( );
-         tqparent = info->tqparent( );
+         parent = info->parent( );
          // signal has to be emitted before the item is removed
          theManager->cmdObjectChanged( info->deletedObject( ), PMCRemove );
          if( m_firstExecution )
-            if( tqparent->dataChangeOnInsertRemove( )
-                && !tqparent->mementoCreated( ) )
-               tqparent->createMemento( );
-         tqparent->takeChild( info->deletedObject( ) );
+            if( parent->dataChangeOnInsertRemove( )
+                && !parent->mementoCreated( ) )
+               parent->createMemento( );
+         parent->takeChild( info->deletedObject( ) );
       }
 
       if( m_firstExecution )
       {
          for( it.toLast( ); it.current( ); --it )
          {
-            tqparent = it.current( )->tqparent( );
-            if( tqparent->mementoCreated( ) )
-               m_dataChanges.append( tqparent->takeMemento( ) );
+            parent = it.current( )->parent( );
+            if( parent->mementoCreated( ) )
+               m_dataChanges.append( parent->takeMemento( ) );
          }
       }
 
@@ -166,11 +166,11 @@ void PMDeleteCommand::undo( PMCommandManager* theManager )
       for( ; it.current( ); ++it )
       {
          if( it.current( )->prevSibling( ) )
-            it.current( )->tqparent( )
+            it.current( )->parent( )
                ->insertChildAfter( it.current( )->deletedObject( ),
                                    it.current( )->prevSibling( ) );
          else
-            it.current( )->tqparent( )
+            it.current( )->parent( )
                ->insertChild( it.current( )->deletedObject( ), 0 );
          theManager->cmdObjectChanged( it.current( )->deletedObject( ), PMCAdd );
       }
@@ -230,7 +230,7 @@ int PMDeleteCommand::errorFlags( PMPart* )
          {
             insideSelection = false;
             for( obj = links.current( ); obj && !insideSelection;
-                 obj = obj->tqparent( ) )
+                 obj = obj->parent( ) )
             {
                if( m_deletedObjects.find( obj ) )
                   insideSelection = true;
@@ -239,7 +239,7 @@ int PMDeleteCommand::errorFlags( PMPart* )
             if( insideSelection )
             {
                bool stop = false;
-               for( obj = links.current( ); obj && !stop; obj = obj->tqparent( ) )
+               for( obj = links.current( ); obj && !stop; obj = obj->parent( ) )
                {
                   if( m_deletedObjects.find( obj ) )
                      stop = true;

@@ -281,9 +281,9 @@ void PMInterior::enableFadePower( bool c )
    }
 }
 
-PMDialogEditBase* PMInterior::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMInterior::editWidget( TQWidget* parent ) const
 {
-   return new PMInteriorEdit( tqparent );
+   return new PMInteriorEdit( parent );
 }
 
 void PMInterior::restoreMemento( PMMemento* s )

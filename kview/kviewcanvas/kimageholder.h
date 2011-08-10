@@ -37,7 +37,7 @@ class KImageHolder : public TQWidget
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		KImageHolder( TQWidget *tqparent = 0, const char * name = 0 );
+		KImageHolder( TQWidget *parent = 0, const char * name = 0 );
 
 		virtual ~KImageHolder();
 

@@ -62,7 +62,7 @@ public:
                   kpViewManager *viewManager,
                   kpView *buddyView,
                   kpViewScrollableContainer *scrollableContainer,
-                  TQWidget *tqparent, const char *name);
+                  TQWidget *parent, const char *name);
 
     /**
      * Destructs an unzoomed view.

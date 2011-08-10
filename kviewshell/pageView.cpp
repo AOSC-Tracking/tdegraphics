@@ -30,8 +30,8 @@
 #include "pageView.h"
 #include "pageNumber.h"
 
-PageView::PageView( TQWidget* tqparent, const char* name )
-  : TQScrollView( tqparent, name, WStaticContents | WNoAutoErase)
+PageView::PageView( TQWidget* parent, const char* name )
+  : TQScrollView( parent, name, WStaticContents | WNoAutoErase)
 {
   moveTool = true;
 

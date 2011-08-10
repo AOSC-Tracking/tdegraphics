@@ -37,9 +37,9 @@ class PMDiscEdit : public PMGraphicalObjectEdit
    typedef PMGraphicalObjectEdit Base;
 public:
    /**
-    * Creates a PMPlaneEdit with tqparent and name
+    * Creates a PMPlaneEdit with parent and name
     */
-   PMDiscEdit( TQWidget* tqparent, const char* name = 0 );
+   PMDiscEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

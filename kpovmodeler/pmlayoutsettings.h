@@ -45,7 +45,7 @@ public:
    /**
     * Default constructor
     */
-   PMLayoutSettings( TQWidget* tqparent, const char* name = 0 );
+   PMLayoutSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

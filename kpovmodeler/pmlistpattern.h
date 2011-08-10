@@ -69,7 +69,7 @@ public:
    /**
     * Returns a new @ref PMListPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /**
     * Returns the color list type
@@ -313,7 +313,7 @@ public:
    /**
     * Returns a new @ref PMListPatternEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmnormallist" ); }

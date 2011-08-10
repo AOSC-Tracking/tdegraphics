@@ -59,14 +59,14 @@ int kpEffectsDialog::s_lastHeight = 620;
 
 
 kpEffectsDialog::kpEffectsDialog (bool actOnSelection,
-                                  kpMainWindow *tqparent,
+                                  kpMainWindow *parent,
                                   const char *name)
     : kpToolPreviewDialog (kpToolPreviewDialog::Preview,
                            true/*reserve top row*/,
                            TQString()/*caption*/,
                            TQString()/*afterActionText (no Dimensions Group Box)*/,
                            actOnSelection,
-                           tqparent,
+                           parent,
                            name),
       m_delayedUpdateTimer (new TQTimer (this)),
       m_effectsComboBox (0),

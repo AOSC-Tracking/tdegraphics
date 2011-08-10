@@ -163,7 +163,7 @@ class Pdf2dsc : public TQObject
   TQ_OBJECT
 	
 public:
-    Pdf2dsc( const TQString& ghostscriptPath, TQObject* tqparent = 0, const char* name = 0 );
+    Pdf2dsc( const TQString& ghostscriptPath, TQObject* parent = 0, const char* name = 0 );
     ~Pdf2dsc();
     
     void run( const TQString& pdfName, const TQString& dscName );

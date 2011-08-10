@@ -53,9 +53,9 @@ public:
 
     KookaImage( );
     /**
-     * creating a subimage for a tqparent image.
+     * creating a subimage for a parent image.
      * @param subNo contains the sequence number of subimages to create.
-     * @param p is the tqparent image.
+     * @param p is the parent image.
      */
     KookaImage(  int subNo, KookaImage *p );
     KookaImage( 	const TQImage& img );
@@ -76,7 +76,7 @@ public:
     int         	subImagesCount() const;
 
     /**
-     * the tqparent image.
+     * the parent image.
      */
     KookaImage*  parentImage() const;
 
@@ -144,7 +144,7 @@ private:
     bool                loadTiffDir( const TQString&, int );
 
     /* if subNo is 0, the image is the one and only. If it is larger than 0, the
-     * tqparent contains the filename */
+     * parent contains the filename */
     int                 m_subNo;
 
     /* In case being a subimage */

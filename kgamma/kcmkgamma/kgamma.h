@@ -30,7 +30,7 @@ class KGamma: public KCModule
    Q_OBJECT
   TQ_OBJECT
    public:
-      KGamma(TQWidget *tqparent, const char *name, const TQStringList&);
+      KGamma(TQWidget *parent, const char *name, const TQStringList&);
       virtual ~KGamma();
 
       void load();

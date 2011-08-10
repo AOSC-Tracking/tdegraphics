@@ -34,8 +34,8 @@
 class PMComboBox : public TQComboBox
 {
 public:
-   PMComboBox( TQWidget* tqparent, const char* name = 0 )
-         : TQComboBox( tqparent, name )
+   PMComboBox( TQWidget* parent, const char* name = 0 )
+         : TQComboBox( parent, name )
    {
    }
 
@@ -52,8 +52,8 @@ public:
 };
 
 PMComboAction::PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
-                              TQObject* tqparent, const char* name )
-      : KAction( text, accel, tqparent, name )
+                              TQObject* parent, const char* name )
+      : KAction( text, accel, parent, name )
 {
    m_receiver = receiver;
    m_member = member;
@@ -120,8 +120,8 @@ void PMComboAction::unplug( TQWidget *w )
 class PMToolBarLabel : public TQToolButton
 {
 public:
-   PMToolBarLabel( const TQString& text, TQWidget* tqparent = 0, const char* name = 0 )
-         : TQToolButton( tqparent, name )
+   PMToolBarLabel( const TQString& text, TQWidget* parent = 0, const char* name = 0 )
+         : TQToolButton( parent, name )
    {
       setText( text );
    }
@@ -143,8 +143,8 @@ protected:
    }
 };
 
-PMLabelAction::PMLabelAction( const TQString &text, TQObject *tqparent, const char *name )
-    : KAction( text, 0, tqparent, name )
+PMLabelAction::PMLabelAction( const TQString &text, TQObject *parent, const char *name )
+    : KAction( text, 0, parent, name )
 {
    m_button = 0;
 }
@@ -193,8 +193,8 @@ void PMLabelAction::unplug( TQWidget *widget )
 
 
 PMSpinBoxAction::PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
-                                  TQObject* tqparent, const char* name )
-      : KAction( text, accel, tqparent, name )
+                                  TQObject* parent, const char* name )
+      : KAction( text, accel, parent, name )
 {
    m_receiver = receiver;
    m_member = member;

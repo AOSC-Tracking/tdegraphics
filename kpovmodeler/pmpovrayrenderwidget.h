@@ -48,7 +48,7 @@ public:
    /**
     * Standard constructor
     */
-   PMPovrayRenderWidget( TQWidget* tqparent = 0, const char* name = 0 );
+   PMPovrayRenderWidget( TQWidget* parent = 0, const char* name = 0 );
    /**
     * destructor
     */

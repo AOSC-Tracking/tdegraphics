@@ -34,8 +34,8 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 
-PMPrismEdit::PMPrismEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMPrismEdit::PMPrismEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
    m_lastSplineType = 0;

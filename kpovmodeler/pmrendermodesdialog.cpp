@@ -37,8 +37,8 @@
 
 TQSize PMRenderModesDialog::s_size = TQSize( 300, 200 );
 
-PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, TQWidget* tqparent, const char* name )
-      : KDialogBase( tqparent, name, true, i18n( "Render Modes" ),
+PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, TQWidget* parent, const char* name )
+      : KDialogBase( parent, name, true, i18n( "Render Modes" ),
                      Ok | Cancel, Ok )
 {
    m_selectionIndex = modes->at( );
@@ -239,8 +239,8 @@ const char* qualityString[numQuality] =
 const int c_qualityToIndex[12] = { 0, 0, 1, 1, 2, 3, 4, 4, 5, 6, 7, 8 };
 const int c_indexToQuality[numQuality] = { 0, 2, 4, 5, 6, 8, 9, 10, 11 };
 
-PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* tqparent, const char* name )
-      : KDialogBase( tqparent, name, true, i18n( "Render Modes" ),
+PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent, const char* name )
+      : KDialogBase( parent, name, true, i18n( "Render Modes" ),
                      Ok | Cancel, Ok )
 {
    m_pMode = mode;

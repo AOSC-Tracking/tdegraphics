@@ -38,7 +38,7 @@ class ocrResEdit : public TQTextEdit
     Q_OBJECT
   TQ_OBJECT
 public:
-    ocrResEdit( TQWidget  *tqparent );
+    ocrResEdit( TQWidget  *parent );
 
 public slots:
     void slUpdateOCRResult( int line, const TQString& wordFrom,

@@ -35,8 +35,8 @@
 #include <kdialog.h>
 #include <kfiledialog.h>
 
-PMPaletteValueEdit::PMPaletteValueEdit( TQWidget* tqparent, const char* name ) 
-      : TQWidget( tqparent, name )
+PMPaletteValueEdit::PMPaletteValueEdit( TQWidget* parent, const char* name ) 
+      : TQWidget( parent, name )
 {
    TQLabel* lbl;
    TQHBoxLayout* tqlayout;

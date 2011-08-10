@@ -44,10 +44,10 @@ typedef KGenericFactory<KTgaPlugin> TgaFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_tga, TgaFactory( "kfile_tga" ))
 
-KTgaPlugin::KTgaPlugin(TQObject *tqparent, const char *name,
+KTgaPlugin::KTgaPlugin(TQObject *parent, const char *name,
                        const TQStringList &args)
 
-    : KFilePlugin(tqparent, name, args)
+    : KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-targa" );
 

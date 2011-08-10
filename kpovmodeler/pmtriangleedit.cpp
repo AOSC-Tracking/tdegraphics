@@ -27,8 +27,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMTriangleEdit::PMTriangleEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMTriangleEdit::PMTriangleEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

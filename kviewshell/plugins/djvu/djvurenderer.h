@@ -58,7 +58,7 @@ public:
 
        This constructor simply prints a message and calls the default constructor.
    */
-   DjVuRenderer(TQWidget* tqparent);
+   DjVuRenderer(TQWidget* parent);
 
    /** Destructor
 

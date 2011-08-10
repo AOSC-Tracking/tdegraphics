@@ -91,9 +91,9 @@ void PMClippedBy::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMClippedBy::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMClippedBy::editWidget( TQWidget* parent ) const
 {
-   return new PMClippedByEdit( tqparent );
+   return new PMClippedByEdit( parent );
 }
 
 void PMClippedBy::childRemoved( PMObject* o )

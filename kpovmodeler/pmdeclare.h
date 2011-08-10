@@ -69,7 +69,7 @@ public:
    /**
     * Returns a new @ref PMDeclareEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /**
     * Returns the id of the declare
     */

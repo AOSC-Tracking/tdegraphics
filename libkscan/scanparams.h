@@ -49,7 +49,7 @@ class ScanParams : public TQVBox
    Q_OBJECT
   TQ_OBJECT
 public:
-   ScanParams( TQWidget *tqparent, const char *name = 0);
+   ScanParams( TQWidget *parent, const char *name = 0);
    ~ScanParams();
 #if 0
    TQSize tqsizeHint( );

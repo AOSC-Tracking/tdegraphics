@@ -46,8 +46,8 @@ TQString PMFormulaLabel::s_digit[10] =
 
 TQString PMFormulaLabel::s_nullString = TQString( "= 0" );
 
-PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_exponents[0] = exp.exponent( 0 );
    m_exponents[1] = exp.exponent( 1 );
@@ -56,8 +56,8 @@ PMFormulaLabel::PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* tqparen
    calculateSizeHint( );
 }
 
-PMFormulaLabel::PMFormulaLabel( int x, int y, int z, TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+PMFormulaLabel::PMFormulaLabel( int x, int y, int z, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_exponents[0] = x;
    m_exponents[1] = y;

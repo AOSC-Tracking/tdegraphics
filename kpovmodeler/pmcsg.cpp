@@ -169,9 +169,9 @@ void PMCSG::setCSGType( const PMCSGType t )
    }
 }
 
-PMDialogEditBase* PMCSG::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMCSG::editWidget( TQWidget* parent ) const
 {
-   return new PMCSGEdit( tqparent );
+   return new PMCSGEdit( parent );
 }
 
 void PMCSG::restoreMemento( PMMemento* s )

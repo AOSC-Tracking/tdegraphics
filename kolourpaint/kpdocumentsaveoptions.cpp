@@ -545,7 +545,7 @@ int kpDocumentSaveOptions::isLossyForSaving (const TQPixmap &pixmap) const
     if (mimeTypeHasConfigurableColorDepth () &&
         !colorDepthIsInvalid () /*TODO: prevent*/ &&
         (colorDepth () < pixmap.depth () ||
-         colorDepth () < 32 && pixmap.tqmask ()))
+         colorDepth () < 32 && pixmap.mask ()))
     {
         ret |= ColorDepthLow;
     }

@@ -25,7 +25,7 @@
 
 #include "kiconcolors.h"
 
-KDrawColors::KDrawColors(TQWidget *tqparent) : KColorGrid(tqparent, 0, 3)
+KDrawColors::KDrawColors(TQWidget *parent) : KColorGrid(parent, 0, 3)
 {
   kdDebug(4640) << "KDrawColors - constructor" << endl;
   setCellSize(17);
@@ -65,7 +65,7 @@ void KDrawColors::mouseReleaseEvent( TQMouseEvent *e )
   emit newColor(colorAt(cell)|OPAQUE_MASK);
 }
 
-KSysColors::KSysColors(TQWidget *tqparent) : KDrawColors(tqparent)
+KSysColors::KSysColors(TQWidget *parent) : KDrawColors(parent)
 {
   kdDebug(4640) << "KSysColors - constructor" << endl;
 
@@ -85,7 +85,7 @@ KSysColors::KSysColors(TQWidget *tqparent) : KDrawColors(tqparent)
   kdDebug(4640) << "KSysColors - constructor - done" << endl;
 }
 
-KCustomColors::KCustomColors(TQWidget *tqparent) : KDrawColors(tqparent)
+KCustomColors::KCustomColors(TQWidget *parent) : KDrawColors(parent)
 {
   kdDebug(4640) << "KCustomColors - constructor" << endl;
   setNumRows(3);

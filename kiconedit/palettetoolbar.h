@@ -35,7 +35,7 @@ class PaletteToolBar : public KToolBar
   TQ_OBJECT
 
   public:
-    PaletteToolBar( TQWidget *tqparent, const char *name = 0L );
+    PaletteToolBar( TQWidget *parent, const char *name = 0L );
 
   signals:
     void newColor( uint c );

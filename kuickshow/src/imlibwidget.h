@@ -80,8 +80,8 @@ class ImlibWidget : public TQWidget
 
 public:
 
-  ImlibWidget( ImData *_idata=0, TQWidget *tqparent=0, const char *name=0 );
-  ImlibWidget( ImData *_idata, ImlibData *id, TQWidget *tqparent=0,
+  ImlibWidget( ImData *_idata=0, TQWidget *parent=0, const char *name=0 );
+  ImlibWidget( ImData *_idata, ImlibData *id, TQWidget *parent=0,
 	       const char *name=0 );
   virtual ~ImlibWidget();
 
@@ -121,7 +121,7 @@ public:
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
-  virtual void  reparent( TQWidget* tqparent, WFlags f, const TQPoint& p, bool showIt = FALSE );
+  virtual void  reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt = FALSE );
 
 public slots:
   void	        rotate90();

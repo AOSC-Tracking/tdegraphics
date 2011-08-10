@@ -43,9 +43,9 @@ class PMFinishEdit : public PMTextureBaseEdit
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMFinishEdit with tqparent and name
+    * Creates a PMFinishEdit with parent and name
     */
-   PMFinishEdit( TQWidget* tqparent, const char* name = 0 );
+   PMFinishEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

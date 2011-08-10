@@ -30,7 +30,7 @@ class AboutWidget : public TQVBox
   TQ_OBJECT
 
 public:
-    AboutWidget(TQWidget *tqparent = 0, const char *name = 0);
+    AboutWidget(TQWidget *parent = 0, const char *name = 0);
 
 protected:
     ~AboutWidget();

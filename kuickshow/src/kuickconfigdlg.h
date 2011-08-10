@@ -36,7 +36,7 @@ class KuickConfigDialog : public KDialogBase
   TQ_OBJECT
 
 public:
-    KuickConfigDialog( KActionCollection *coll, TQWidget *tqparent=0,
+    KuickConfigDialog( KActionCollection *coll, TQWidget *parent=0,
 		       const char *name=0, bool modal=true);
     ~KuickConfigDialog();
 

@@ -21,10 +21,10 @@
 #include "optionDialogFontsWidget.h"
 
 
-// Constructs a optionDialogWidget_base which is a child of 'tqparent', with
+// Constructs a optionDialogWidget_base which is a child of 'parent', with
 // the name 'name' and widget flags set to 'f'.
-optionDialogFontsWidget::optionDialogFontsWidget( TQWidget* tqparent,  const char* name, WFlags fl )
-    : optionDialogFontsWidget_base( tqparent,  name, fl )
+optionDialogFontsWidget::optionDialogFontsWidget( TQWidget* parent,  const char* name, WFlags fl )
+    : optionDialogFontsWidget_base( parent,  name, fl )
 {
 #ifndef HAVE_FREETYPE
   kcfg_UseType1Fonts->setChecked(false);

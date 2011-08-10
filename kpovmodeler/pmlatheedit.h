@@ -47,9 +47,9 @@ class PMLatheEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMLatheEdit with tqparent and name
+    * Creates a PMLatheEdit with parent and name
     */
-   PMLatheEdit( TQWidget* tqparent, const char* name = 0 );
+   PMLatheEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

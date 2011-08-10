@@ -139,9 +139,9 @@ void PMBlob::setHierarchy( bool h )
    }
 }
 
-PMDialogEditBase* PMBlob::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBlob::editWidget( TQWidget* parent ) const
 {
-   return new PMBlobEdit( tqparent );
+   return new PMBlobEdit( parent );
 }
 
 void PMBlob::restoreMemento( PMMemento* s )

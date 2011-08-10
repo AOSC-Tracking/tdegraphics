@@ -55,7 +55,7 @@ class ImgPrintDialog: public KPrintDialogPage
     Q_OBJECT
   TQ_OBJECT
 public:
-    ImgPrintDialog( KookaImage *img, TQWidget *tqparent=0L, const char* name=0L );
+    ImgPrintDialog( KookaImage *img, TQWidget *parent=0L, const char* name=0L );
 
     void setOptions(const TQMap<TQString,TQString>& opts);
     void getOptions(TQMap<TQString,TQString>& opts, bool include_def = false);

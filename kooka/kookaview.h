@@ -77,7 +77,7 @@ public:
     /**
      * Default constructor
      */
-    KookaView(KParts::DockMainWindow *tqparent, const TQCString& deviceToUse);
+    KookaView(KParts::DockMainWindow *parent, const TQCString& deviceToUse);
 
     /**
      * Destructor

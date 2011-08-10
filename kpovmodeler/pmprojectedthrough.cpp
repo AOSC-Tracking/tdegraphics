@@ -80,9 +80,9 @@ void PMProjectedThrough::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMProjectedThrough::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMProjectedThrough::editWidget( TQWidget* parent ) const
 {
-   return new PMNamedObjectEdit( tqparent );
+   return new PMNamedObjectEdit( parent );
 }
 
 void PMProjectedThrough::restoreMemento( PMMemento* s )

@@ -31,7 +31,7 @@ class MainWidget : public TQWidget
   TQ_OBJECT
 
 public:
-  MainWidget( TQString, TQWidget *tqparent, const char *name=0L);
+  MainWidget( TQString, TQWidget *parent, const char *name=0L);
   ~MainWidget();
 
   FileView* 	getFileBox() { return box; }

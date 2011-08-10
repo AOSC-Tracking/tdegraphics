@@ -49,9 +49,9 @@ K_EXPORT_COMPONENT_FACTORY(kdvipart, KDVIMultiPageFactory)
 
 
 
-KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
+KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
                              const char *name, const TQStringList& args)
-  : KMultiPage(parentWidget, widgetName, tqparent, name), DVIRenderer(parentWidget)
+  : KMultiPage(parentWidget, widgetName, parent, name), DVIRenderer(parentWidget)
 {
   Q_UNUSED(args);
 #ifdef PERFORMANCE_MEASUREMENT
@@ -213,7 +213,7 @@ void KDVIMultiPage::addConfigDialogs(KConfigDialog* configDialog)
 
 void KDVIMultiPage::preferencesChanged()
 {
-  // Call method from tqparent class
+  // Call method from parent class
   KMultiPage::preferencesChanged();
 #ifdef  KDVI_MULTIPAGE_DEBUG
   kdDebug(4300) << "preferencesChanged" << endl;

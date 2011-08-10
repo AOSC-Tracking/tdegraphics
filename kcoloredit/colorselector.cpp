@@ -30,7 +30,7 @@
 #include "texteditselection.h"
 #include "colorselector.h"
 
-ColorSelector::ColorSelector(TQWidget *tqparent, const char *name ) : TQWidget(tqparent, name) {
+ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(parent, name) {
 	fComponentsMode = false;
 	TQVBoxLayout* topLayout = new TQVBoxLayout(this, 4);
 	/*

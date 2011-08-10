@@ -29,8 +29,8 @@
 
 
 
-SizeIndicator::SizeIndicator( TQWidget *tqparent, long  thres, long crit )
-   :TQLabel( tqparent )
+SizeIndicator::SizeIndicator( TQWidget *parent, long  thres, long crit )
+   :TQLabel( parent )
 {
    sizeInByte = -1;
    setFrameStyle( TQFrame::Box | TQFrame::Sunken );

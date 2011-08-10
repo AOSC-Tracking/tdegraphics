@@ -34,15 +34,15 @@
 
 
 kpResizeSignallingLabel::kpResizeSignallingLabel (const TQString &string,
-                                                  TQWidget *tqparent,
+                                                  TQWidget *parent,
                                                   const char *name)
-    : TQLabel (string, tqparent, name)
+    : TQLabel (string, parent, name)
 {
 }
 
-kpResizeSignallingLabel::kpResizeSignallingLabel (TQWidget *tqparent,
+kpResizeSignallingLabel::kpResizeSignallingLabel (TQWidget *parent,
                                                   const char *name)
-    : TQLabel (tqparent, name)
+    : TQLabel (parent, name)
 {
 }
 

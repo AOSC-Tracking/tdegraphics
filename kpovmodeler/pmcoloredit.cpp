@@ -24,8 +24,8 @@
 #include <tqcolor.h>
 #include <kdialog.h>
 
-PMColorEdit::PMColorEdit( bool filterAndTransmit, TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+PMColorEdit::PMColorEdit( bool filterAndTransmit, TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_bFilterAndTransmit = filterAndTransmit;
 

@@ -36,7 +36,7 @@ class ImageWindow;
 class Printing
 {
 public:
-    static bool printImage( ImageWindow& imageWin, TQWidget *tqparent = 0L);
+    static bool printImage( ImageWindow& imageWin, TQWidget *parent = 0L);
     static bool printImageWithTQt( const TQString& filename, KPrinter& printer,
                                   const TQString& originalFileName );
 
@@ -53,7 +53,7 @@ class KuickPrintDialogPage : public KPrintDialogPage
   TQ_OBJECT
 
 public:
-    KuickPrintDialogPage( TQWidget *tqparent = 0L, const char *name = 0 );
+    KuickPrintDialogPage( TQWidget *parent = 0L, const char *name = 0 );
     ~KuickPrintDialogPage();
 
     virtual void getOptions(TQMap<TQString,TQString>& opts, bool incldef = false);

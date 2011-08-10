@@ -39,7 +39,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpToolWidgetBrush (TQWidget *tqparent, const char *name);
+    kpToolWidgetBrush (TQWidget *parent, const char *name);
     virtual ~kpToolWidgetBrush ();
 
 private:

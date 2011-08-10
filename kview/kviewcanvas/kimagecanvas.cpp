@@ -43,8 +43,8 @@ typedef KGenericFactory<KImageCanvas> KImageCanvasFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewcanvas,
 		KImageCanvasFactory( "kviewcanvas" ) )
 
-KImageCanvas::KImageCanvas( TQWidget * tqparent, const char * name, const TQStringList & )
-	: TQScrollView( tqparent, name, WResizeNoErase | WStaticContents )
+KImageCanvas::KImageCanvas( TQWidget * parent, const char * name, const TQStringList & )
+	: TQScrollView( parent, name, WResizeNoErase | WStaticContents )
 	, m_client( 0 )
 	, m_oldClient( 0 )
 	, m_image( 0 )

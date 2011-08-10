@@ -68,8 +68,8 @@ TQString PMMaterial::description( ) const
    return i18n( "material" );
 }
 
-PMDialogEditBase* PMMaterial::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMMaterial::editWidget( TQWidget* parent ) const
 {
-   return new PMMaterialEdit( tqparent );
+   return new PMMaterialEdit( parent );
 }
 

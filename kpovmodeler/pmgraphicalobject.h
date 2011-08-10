@@ -101,7 +101,7 @@ public:
     */
    void setVisibilityLevel( int level );
    /**
-    * Returns true if the visibility level is relative to the objects tqparent
+    * Returns true if the visibility level is relative to the objects parent
     */
    bool isVisibilityLevelRelative( ) const { return m_relativeVisibility; }
    /**

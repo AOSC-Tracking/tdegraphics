@@ -42,7 +42,7 @@ Q_OBJECT
 
 public:
     kpColorSimilarityDialog (kpMainWindow *mainWindow,
-                             TQWidget *tqparent,
+                             TQWidget *parent,
                              const char *name = 0);
     virtual ~kpColorSimilarityDialog ();
 

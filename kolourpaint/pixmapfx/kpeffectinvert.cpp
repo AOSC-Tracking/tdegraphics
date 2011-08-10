@@ -86,13 +86,13 @@ TQPixmap kpEffectInvertCommand::apply (const TQPixmap &pm, int channels)
 // public static
 void kpEffectInvertCommand::apply (TQImage *destImagePtr, int channels)
 {
-    TQRgb tqmask = tqRgba ((channels & Red) ? 0xFF : 0,
+    TQRgb mask = tqRgba ((channels & Red) ? 0xFF : 0,
                        (channels & Green) ? 0xFF : 0,
                        (channels & Blue) ? 0xFF : 0,
                        0/*don't invert alpha*/);
 #if DEBUG_KP_EFFECT_INVERT
     kdDebug () << "kpEffectInvertCommand::apply(channels=" << channels
-               << ") tqmask=" << (int *) tqmask
+               << ") mask=" << (int *) mask
                << endl;
 #endif
 
@@ -109,7 +109,7 @@ void kpEffectInvertCommand::apply (TQImage *destImagePtr, int channels)
         {
             for (int x = 0; x < destImagePtr->width (); x++)
             {
-                destImagePtr->setPixel (x, y, destImagePtr->pixel (x, y) ^ tqmask);
+                destImagePtr->setPixel (x, y, destImagePtr->pixel (x, y) ^ mask);
             }
         }
     #endif
@@ -118,7 +118,7 @@ void kpEffectInvertCommand::apply (TQImage *destImagePtr, int channels)
     {
         for (int i = 0; i < destImagePtr->numColors (); i++)
         {
-            destImagePtr->setColor (i, destImagePtr->color (i) ^ tqmask);
+            destImagePtr->setColor (i, destImagePtr->color (i) ^ mask);
         }
     }
 }
@@ -149,9 +149,9 @@ TQPixmap kpEffectInvertCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectInvertWidget::kpEffectInvertWidget (bool actOnSelection,
                                             kpMainWindow *mainWindow,
-                                            TQWidget *tqparent,
+                                            TQWidget *parent,
                                             const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
     TQVBoxLayout *topLevelLay = new TQVBoxLayout (this, marginHint (), spacingHint ());
 

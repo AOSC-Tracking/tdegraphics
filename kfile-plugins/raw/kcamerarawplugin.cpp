@@ -83,9 +83,9 @@ bool KCameraRawPlugin::createPreview(const TQString &path, TQImage &img)
   return true;	
 }
 
-KCameraRawPlugin::KCameraRawPlugin(TQObject *tqparent, const char *name,
+KCameraRawPlugin::KCameraRawPlugin(TQObject *parent, const char *name,
 				   const TQStringList &args )
-    : KFilePlugin(tqparent, name, args)
+    : KFilePlugin(parent, name, args)
 {
   kdDebug(7034) << "KCameraRawPlugin c'tor" << endl;
 

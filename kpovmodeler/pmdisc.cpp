@@ -176,9 +176,9 @@ void PMDisc::setHoleRadius( double hradius )
    }
 }
 
-PMDialogEditBase* PMDisc::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMDisc::editWidget( TQWidget* parent ) const
 {
-   return new PMDiscEdit( tqparent );
+   return new PMDiscEdit( parent );
 }
 
 void PMDisc::restoreMemento( PMMemento* s )

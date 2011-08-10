@@ -42,9 +42,9 @@ class PMGlobalPhotonsEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMGlobalPhotonsEdit with tqparent and name
+    * Creates a PMGlobalPhotonsEdit with parent and name
     */
-   PMGlobalPhotonsEdit( TQWidget* tqparent, const char* name = 0 );
+   PMGlobalPhotonsEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

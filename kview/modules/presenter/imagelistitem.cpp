@@ -24,8 +24,8 @@
 
 #include <klistview.h>
 
-ImageListItem::ImageListItem( KListView * tqparent, const KURL & url )
-	: KListViewItem( tqparent, tqparent->lastItem(), url.prettyURL() )
+ImageListItem::ImageListItem( KListView * parent, const KURL & url )
+	: KListViewItem( parent, parent->lastItem(), url.prettyURL() )
 	, m_pImage( 0 )
 	, m_filename( TQString() )
 	, m_url( url )

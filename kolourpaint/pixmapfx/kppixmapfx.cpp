@@ -556,7 +556,7 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
 TQPixmap kpPixmapFX::pixmapWithDefinedTransparentPixels (const TQPixmap &pixmap,
                                                         const TQColor &transparentColor)
 {
-    if (!pixmap.tqmask ())
+    if (!pixmap.mask ())
         return pixmap;
 
     TQPixmap retPixmap (pixmap.width (), pixmap.height ());
@@ -566,7 +566,7 @@ TQPixmap kpPixmapFX::pixmapWithDefinedTransparentPixels (const TQPixmap &pixmap,
     p.drawPixmap (TQPoint (0, 0), pixmap);
     p.end ();
 
-    retPixmap.setMask (*pixmap.tqmask ());
+    retPixmap.setMask (*pixmap.mask ());
     return retPixmap;
 }
 
@@ -583,7 +583,7 @@ TQPixmap kpPixmapFX::getPixmapAt (const TQPixmap &pm, const TQRect &rect)
 
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "kpPixmapFX::getPixmapAt(pm.hasMask="
-               << (pm.tqmask () ? 1 : 0)
+               << (pm.mask () ? 1 : 0)
                << ",rect="
                << rect
                << ")"
@@ -614,14 +614,14 @@ TQPixmap kpPixmapFX::getPixmapAt (const TQPixmap &pm, const TQRect &rect)
 
     const TQPoint destTopLeft = validSrcRect.topLeft () - rect.topLeft ();
 
-    // copy data _and_ tqmask (if avail)
+    // copy data _and_ mask (if avail)
     copyBlt (&retPixmap, /* dest */
              destTopLeft.x (), destTopLeft.y (), /* dest pt */
              &pm, /* src */
              validSrcRect.x (), validSrcRect.y (), /* src pt */
              validSrcRect.width (), validSrcRect.height ());
 
-    if (wouldHaveUndefinedPixels && retPixmap.tqmask () && !pm.tqmask ())
+    if (wouldHaveUndefinedPixels && retPixmap.mask () && !pm.mask ())
     {
     #if DEBUG_KP_PIXMAP_FX && 0
         kdDebug () << "\tensure opaque in valid region" << endl;
@@ -633,7 +633,7 @@ TQPixmap kpPixmapFX::getPixmapAt (const TQPixmap &pm, const TQRect &rect)
 
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "\tretPixmap.hasMask="
-               << (retPixmap.tqmask () ? 1 : 0)
+               << (retPixmap.mask () ? 1 : 0)
                << endl;
 #endif
 
@@ -652,19 +652,19 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
     kdDebug () << "kpPixmapFX::setPixmapAt(destPixmap->rect="
                << destPixmapPtr->rect ()
                << ",destPixmap->hasMask="
-               << (destPixmapPtr->tqmask () ? 1 : 0)
+               << (destPixmapPtr->mask () ? 1 : 0)
                << ",destRect="
                << destRect
                << ",srcPixmap.rect="
                << srcPixmap.rect ()
                << ",srcPixmap.hasMask="
-               << (srcPixmap.tqmask () ? 1 : 0)
+               << (srcPixmap.mask () ? 1 : 0)
                << ")"
                << endl;
 #endif
 
 #if DEBUG_KP_PIXMAP_FX && 0
-    if (destPixmapPtr->tqmask ())
+    if (destPixmapPtr->mask ())
     {
         TQImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
         int numTrans = 0;
@@ -687,7 +687,7 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
     //       result in a opaque image, except for that single transparent pixel???
     //       TQt bug on boundary case?
 
-    // copy data _and_ tqmask
+    // copy data _and_ mask
     copyBlt (destPixmapPtr,
              destAt.x (), destAt.y (),
              &srcPixmap,
@@ -700,23 +700,23 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
             0, 0,
             destRect.width (), destRect.height (),
             TQt::CopyROP,
-            true/*ignore tqmask*/);
+            true/*ignore mask*/);
 
-    if (srcPixmap.tqmask ())
+    if (srcPixmap.mask ())
     {
-        TQBitmap tqmask = getNonNullMask (*destPixmapPtr);
-        bitBlt (TQT_TQPAINTDEVICE(&tqmask),
+        TQBitmap mask = getNonNullMask (*destPixmapPtr);
+        bitBlt (TQT_TQPAINTDEVICE(&mask),
                 destRect.x (), destRect.y (),
-                TQT_TQPAINTDEVICE(const_cast<TQBitmap*>(srcPixmap.tqmask ())),
+                TQT_TQPAINTDEVICE(const_cast<TQBitmap*>(srcPixmap.mask ())),
                 0, 0,
                 destRect.width (), destRect.height (),
                 TQt::CopyROP,
-                true/*ignore tqmask*/);
-        destPixmapPtr->setMask (tqmask);
+                true/*ignore mask*/);
+        destPixmapPtr->setMask (mask);
     }
 #endif
 
-    if (destPixmapPtr->tqmask () && !srcPixmap.tqmask ())
+    if (destPixmapPtr->mask () && !srcPixmap.mask ())
     {
     #if DEBUG_KP_PIXMAP_FX && 0
         kdDebug () << "\t\topaque'ing dest rect" << endl;
@@ -726,9 +726,9 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
 
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "\tdestPixmap->hasMask="
-               << (destPixmapPtr->tqmask () ? 1 : 0)
+               << (destPixmapPtr->mask () ? 1 : 0)
                << endl;
-    if (destPixmapPtr->tqmask ())
+    if (destPixmapPtr->mask ())
     {
         TQImage image = kpPixmapFX::convertToImage (*destPixmapPtr);
         int numTrans = 0;
@@ -772,7 +772,7 @@ void kpPixmapFX::paintPixmapAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
     if (!destPixmapPtr)
         return;
 
-    // Copy src (masked by src's tqmask) on top of dest.
+    // Copy src (masked by src's mask) on top of dest.
     bitBlt (destPixmapPtr, /* dest */
             destAt.x (), destAt.y (), /* dest pt */
             &srcPixmap, /* src */
@@ -852,8 +852,8 @@ void kpPixmapFX::ensureNoAlphaChannel (TQPixmap *destPixmapPtr)
 // public static
 TQBitmap kpPixmapFX::getNonNullMask (const TQPixmap &pm)
 {
-    if (pm.tqmask ())
-        return *pm.tqmask ();
+    if (pm.mask ())
+        return *pm.mask ();
     else
     {
         TQBitmap maskBitmap (pm.width (), pm.height ());
@@ -934,10 +934,10 @@ void kpPixmapFX::paintMaskTransparentWithBrush (TQPixmap *destPixmapPtr, int des
 // public static
 void kpPixmapFX::ensureOpaqueAt (TQPixmap *destPixmapPtr, const TQRect &destRect)
 {
-    if (!destPixmapPtr || !destPixmapPtr->tqmask ()/*already opaque*/)
+    if (!destPixmapPtr || !destPixmapPtr->mask ()/*already opaque*/)
         return;
 
-    TQBitmap maskBitmap = *destPixmapPtr->tqmask ();
+    TQBitmap maskBitmap = *destPixmapPtr->mask ();
 
     TQPainter p (&maskBitmap);
 
@@ -955,16 +955,16 @@ void kpPixmapFX::ensureOpaqueAt (TQPixmap *destPixmapPtr, const TQRect &destRect
 void kpPixmapFX::ensureOpaqueAt (TQPixmap *destPixmapPtr, const TQPoint &destAt,
                                  const TQPixmap &srcPixmap)
 {
-    if (!destPixmapPtr || !destPixmapPtr->tqmask ()/*already opaque*/)
+    if (!destPixmapPtr || !destPixmapPtr->mask ()/*already opaque*/)
         return;
 
-    TQBitmap destMask = *destPixmapPtr->tqmask ();
+    TQBitmap destMask = *destPixmapPtr->mask ();
 
-    if (srcPixmap.tqmask ())
+    if (srcPixmap.mask ())
     {
         bitBlt (&destMask, /* dest */
                 destAt, /* dest pt */
-                srcPixmap.tqmask (), /* src */
+                srcPixmap.mask (), /* src */
                 TQRect (0, 0, srcPixmap.width (), srcPixmap.height ()), /* src rect */
                 TQt::OrROP/*if either is opaque, it's opaque*/);
     }
@@ -1064,7 +1064,7 @@ void kpPixmapFX::fill (TQPixmap *destPixmapPtr, const kpColor &color)
 
     if (color.isOpaque ())
     {
-        destPixmapPtr->setMask (TQBitmap ());  // no tqmask = opaque
+        destPixmapPtr->setMask (TQBitmap ());  // no mask = opaque
         destPixmapPtr->fill (color.toTQColor ());
     }
     else
@@ -1117,7 +1117,7 @@ void kpPixmapFX::resize (TQPixmap *destPixmapPtr, int w, int h,
             painter.setBrush (backgroundColor.toTQColor ());
         }
 
-        if (backgroundColor.isTransparent () || destPixmapPtr->tqmask ())
+        if (backgroundColor.isTransparent () || destPixmapPtr->mask ())
         {
             maskBitmap = kpPixmapFX::getNonNullMask (*destPixmapPtr);
             maskPainter.begin (&maskBitmap);
@@ -1375,7 +1375,7 @@ static TQPixmap xForm (const TQPixmap &pm, const TQWMatrix &transformMatrix_,
     if (backgroundColor.isOpaque ())
         newPixmap.fill (backgroundColor.toTQColor ());
 
-    if (backgroundColor.isTransparent () || pm.tqmask ())
+    if (backgroundColor.isTransparent () || pm.mask ())
     {
         newBitmapMask.resize (newPixmap.width (), newPixmap.height ());
         newBitmapMask.fill (backgroundColor.maskColor ());

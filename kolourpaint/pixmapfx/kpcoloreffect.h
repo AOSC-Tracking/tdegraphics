@@ -79,7 +79,7 @@ Q_OBJECT
 public:
     kpColorEffectWidget (bool actOnSelection,
                          kpMainWindow *mainWindow,
-                         TQWidget *tqparent, const char *name = 0);
+                         TQWidget *parent, const char *name = 0);
     virtual ~kpColorEffectWidget ();
 
 signals:

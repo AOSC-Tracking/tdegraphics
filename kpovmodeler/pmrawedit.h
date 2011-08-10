@@ -39,9 +39,9 @@ class PMRawEdit : public PMNamedObjectEdit
    typedef PMNamedObjectEdit Base;
 public:
    /**
-    * Creates a PMRawEdit with tqparent and name
+    * Creates a PMRawEdit with parent and name
     */
-   PMRawEdit( TQWidget* tqparent, const char* name = 0 );
+   PMRawEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

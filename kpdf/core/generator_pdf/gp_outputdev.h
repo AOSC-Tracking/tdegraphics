@@ -32,7 +32,7 @@ class DocumentViewport;
  * @short A SplashOutputDev renderer that grabs text and links.
  *
  * This output device:
- * - renders the page using SplashOutputDev (its tqparent)
+ * - renders the page using SplashOutputDev (its parent)
  * - harvests text into a textPage (for searching text)
  * - harvests links and collects them
  * - collects images and collects them

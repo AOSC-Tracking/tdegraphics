@@ -189,9 +189,9 @@ void PMMesh::setInsideVector( const PMVector& iv )
    }
 }
 
-PMDialogEditBase* PMMesh::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMMesh::editWidget( TQWidget* parent ) const
 {
-   return new PMMeshEdit( tqparent );
+   return new PMMeshEdit( parent );
 }
 
 void PMMesh::createMemento( )

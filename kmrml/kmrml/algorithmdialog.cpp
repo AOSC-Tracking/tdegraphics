@@ -34,8 +34,8 @@ using namespace KMrml;
 class ScrollView : public TQScrollView
 {
 public:
-    ScrollView(TQWidget* tqparent = 0, const char* name = 0)
-        : TQScrollView(tqparent, name)
+    ScrollView(TQWidget* parent = 0, const char* name = 0)
+        : TQScrollView(parent, name)
     {
         setFrameStyle(TQFrame::NoFrame);
         m_frame = new TQFrame(viewport(), "ScrollView::m_frame");
@@ -60,8 +60,8 @@ private:
 AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
                                   const CollectionList& collections,
                                   const Collection& currentColl,
-                                  TQWidget *tqparent, const char *name )
-    : KDialogBase( tqparent, name, false, i18n("Configure Query Algorithms"),
+                                  TQWidget *parent, const char *name )
+    : KDialogBase( parent, name, false, i18n("Configure Query Algorithms"),
                    Ok | Cancel, Ok, false ),
       m_allAlgorithms( algorithms ),
       m_collections( collections )

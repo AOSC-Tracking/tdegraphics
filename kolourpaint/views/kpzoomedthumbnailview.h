@@ -61,7 +61,7 @@ public:
             kpViewManager *viewManager,
             kpView *buddyView,
             kpViewScrollableContainer *scrollableContainer,
-            TQWidget *tqparent, const char *name);
+            TQWidget *parent, const char *name);
 
     /**
      * Destructs a zoomed thumbnail view.
@@ -78,7 +78,7 @@ public:
 public slots:
     /**
      * Changes its zoom level to accommodate the display of entire document
-     * in the view.  It maintains aspect by changing the origin and tqmask.
+     * in the view.  It maintains aspect by changing the origin and mask.
      *
      * Call this if the size of the document changes.
      * Already called by @ref kpThumbnailView resizeEvent().

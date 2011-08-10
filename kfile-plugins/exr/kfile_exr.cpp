@@ -60,9 +60,9 @@ typedef KGenericFactory<KExrPlugin> ExrFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_exr, ExrFactory("kfile_exr"))
 
-KExrPlugin::KExrPlugin(TQObject *tqparent, const char *name,
+KExrPlugin::KExrPlugin(TQObject *parent, const char *name,
                        const TQStringList &args)
-    : KFilePlugin(tqparent, name, args)
+    : KFilePlugin(parent, name, args)
 {
     // set up our mime type
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-exr" );

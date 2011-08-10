@@ -30,7 +30,7 @@ class KIcoPlugin: public KFilePlugin
   TQ_OBJECT
     
 public:
-    KIcoPlugin( TQObject *tqparent, const char *name, const TQStringList& args );
+    KIcoPlugin( TQObject *parent, const char *name, const TQStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

@@ -1307,7 +1307,7 @@ void kpToolSelection::selectionTransparencyChanged (const TQString & /*name*/)
         //       Undo.
         //       The rectangle is no longer invisible.
         //
-        //if (document ()->selection ()->setTransparency (st, true/*check harder for no change in tqmask*/))
+        //if (document ()->selection ()->setTransparency (st, true/*check harder for no change in mask*/))
 
         document ()->selection ()->setTransparency (st);
         if (true)

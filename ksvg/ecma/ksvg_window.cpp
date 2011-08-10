@@ -490,7 +490,7 @@ void ScheduledAction::execute(Window *window)
 
 ////////////////////// WindowQObject ////////////////////////
 
-WindowQObject::WindowQObject(Window *w) : tqparent(w)
+WindowQObject::WindowQObject(Window *w) : parent(w)
 {
 }
 
@@ -560,8 +560,8 @@ void WindowQObject::timerEvent(TQTimerEvent *e)
 			scheduledActions.remove(it);
 		}
 		
-		if(tqparent->doc())
-			action->execute(tqparent);
+		if(parent->doc())
+			action->execute(parent);
 		
 		// It is important to test singleShot and not action->singleShot here - the
 		// action could have been deleted already if not single shot and if the

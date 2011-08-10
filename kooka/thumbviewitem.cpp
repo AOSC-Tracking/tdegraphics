@@ -32,10 +32,10 @@
 #include "thumbview.h"
 #include "thumbviewitem.h"
 
-ThumbViewItem::ThumbViewItem(TQIconView *tqparent, const TQString &text,
+ThumbViewItem::ThumbViewItem(TQIconView *parent, const TQString &text,
 			     const TQPixmap &pixmap,
 			     KFileItem *fi )
-   :KFileIconViewItem( tqparent, text, pixmap,fi )
+   :KFileIconViewItem( parent, text, pixmap,fi )
 {
 
 }

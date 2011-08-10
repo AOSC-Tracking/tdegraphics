@@ -160,9 +160,9 @@ void PMCylinder::setOpen( bool op )
    }
 }
 
-PMDialogEditBase* PMCylinder::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMCylinder::editWidget( TQWidget* parent ) const
 {
-   return new PMCylinderEdit( tqparent );
+   return new PMCylinderEdit( parent );
 }
 
 void PMCylinder::restoreMemento( PMMemento* s )

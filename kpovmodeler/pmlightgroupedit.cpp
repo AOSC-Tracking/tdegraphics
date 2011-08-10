@@ -24,8 +24,8 @@
 #include <tqcheckbox.h>
 #include <klocale.h>
 
-PMLightGroupEdit::PMLightGroupEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMLightGroupEdit::PMLightGroupEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

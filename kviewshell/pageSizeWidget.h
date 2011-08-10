@@ -22,7 +22,7 @@ class pageSizeWidget : public pageSizeWidget_base
   TQ_OBJECT
 
 public:
-  pageSizeWidget( TQWidget* tqparent = 0, const char* name = 0, WFlags fl = 0 );
+  pageSizeWidget( TQWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 
   // Sets the page size. If the dialog is already shown, updates all
   // the GUI. Accepts the same strings as input as the setPageSize()

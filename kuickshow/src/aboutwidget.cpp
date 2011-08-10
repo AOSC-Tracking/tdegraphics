@@ -31,8 +31,8 @@
 
 #include "aboutwidget.h"
 
-AboutWidget::AboutWidget( TQWidget *tqparent, const char *name )
-    : TQVBox( tqparent, name, TQt::WShowModal )
+AboutWidget::AboutWidget( TQWidget *parent, const char *name )
+    : TQVBox( parent, name, TQt::WShowModal )
 {
     KWin::setType( winId(), NET::Override );
     KWin::setState( winId(), NET::SkipTaskbar );

@@ -28,8 +28,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMPlaneEdit::PMPlaneEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMPlaneEdit::PMPlaneEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

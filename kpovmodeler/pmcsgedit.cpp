@@ -24,8 +24,8 @@
 #include <tqcombobox.h>
 #include <klocale.h>
 
-PMCSGEdit::PMCSGEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMCSGEdit::PMCSGEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

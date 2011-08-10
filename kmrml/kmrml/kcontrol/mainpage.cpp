@@ -50,8 +50,8 @@
 using namespace KMrmlConfig;
 
 
-MainPage::MainPage( TQWidget *tqparent, const char *name )
-    : TQVBox( tqparent, name ),
+MainPage::MainPage( TQWidget *parent, const char *name )
+    : TQVBox( parent, name ),
       m_indexer( 0L ),
       m_indexCleaner( 0L ),
       m_progressDialog( 0L ),

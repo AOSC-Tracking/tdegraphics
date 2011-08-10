@@ -32,7 +32,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  PageRangeWidget( TQ_UINT16 _from, TQ_UINT16 _to, TQ_UINT16 _current, TQWidget *tqparent = 0, const char *name = 0 );
+  PageRangeWidget( TQ_UINT16 _from, TQ_UINT16 _to, TQ_UINT16 _current, TQWidget *parent = 0, const char *name = 0 );
 
   TQ_UINT16 getFrom() const {return (from == 0) ? 0 : from->value(); }
   TQ_UINT16 getTo() const {return (to == 0) ? 0 : to->value(); }

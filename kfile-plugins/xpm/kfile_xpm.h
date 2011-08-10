@@ -37,7 +37,7 @@ class xpmPlugin: public KFilePlugin
   TQ_OBJECT
 
   public:
-    xpmPlugin(TQObject *tqparent, const char *name, const TQStringList& args);
+    xpmPlugin(TQObject *parent, const char *name, const TQStringList& args);
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 };

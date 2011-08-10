@@ -27,8 +27,8 @@
 #include "logwindow.h"
 
 LogWindow::LogWindow( const TQString& caption, 
-                      TQWidget* tqparent, const char* name) :
-    KDialogBase( tqparent, name, false, caption, User1|Close, Close, false, 
+                      TQWidget* parent, const char* name) :
+    KDialogBase( parent, name, false, caption, User1|Close, Close, false, 
                  KStdGuiItem::clear() )
 {
     TQVBox * display = makeVBoxMainWidget();

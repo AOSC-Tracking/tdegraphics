@@ -134,7 +134,7 @@ bool SVGElementImpl::hasEventListener(int id, bool local)
 	if(local)
 		return false;
 
-	// Check every tqparent element
+	// Check every parent element
 	for(DOM::Node node = parentNode(); !node.isNull(); node = node.parentNode())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
@@ -518,7 +518,7 @@ bool SVGElementImpl::dispatchEvent(SVGEventImpl *evt, bool tempEvent)
 {
 	evt->setTarget(this);
 
-	// Find out, where to send to -> collect tqparent nodes
+	// Find out, where to send to -> collect parent nodes
 	TQPtrList<SVGElementImpl> nodeChain;
 
 	for(DOM::Element e = *this; !e.isNull(); e = e.parentNode())

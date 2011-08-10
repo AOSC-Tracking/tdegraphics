@@ -253,9 +253,9 @@ void PMSurfaceOfRevolution::setPoints( const TQValueList<PMVector>& points )
    }
 }
 
-PMDialogEditBase* PMSurfaceOfRevolution::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMSurfaceOfRevolution::editWidget( TQWidget* parent ) const
 {
-   return new PMSurfaceOfRevolutionEdit( tqparent );
+   return new PMSurfaceOfRevolutionEdit( parent );
 }
 
 void PMSurfaceOfRevolution::createMemento( )

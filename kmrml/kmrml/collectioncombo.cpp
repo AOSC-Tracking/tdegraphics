@@ -22,8 +22,8 @@
 
 using namespace KMrml;
 
-CollectionCombo::CollectionCombo( TQWidget *tqparent, const char *name )
-    : KComboBox( false, tqparent, name ),
+CollectionCombo::CollectionCombo( TQWidget *parent, const char *name )
+    : KComboBox( false, parent, name ),
       m_collections( 0L )
 {
     connect( this, TQT_SIGNAL( activated( const TQString& ) ),

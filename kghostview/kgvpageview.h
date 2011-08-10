@@ -33,7 +33,7 @@ class KGVPageView : public TQScrollView
   TQ_OBJECT
 
 public:
-    KGVPageView( TQWidget* tqparent = 0, const char* name = 0 );
+    KGVPageView( TQWidget* parent = 0, const char* name = 0 );
     ~KGVPageView() { ; }
     
     void setPage( TQWidget* );

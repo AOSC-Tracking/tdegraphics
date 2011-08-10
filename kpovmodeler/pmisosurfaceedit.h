@@ -45,9 +45,9 @@ class PMIsoSurfaceEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMIsoSurfaceEdit with tqparent and name
+    * Creates a PMIsoSurfaceEdit with parent and name
     */
-   PMIsoSurfaceEdit( TQWidget* tqparent, const char* name = 0 );
+   PMIsoSurfaceEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

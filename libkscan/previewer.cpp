@@ -106,8 +106,8 @@ public:
     TQMemArray<long> m_widthSum;
 };
 
-Previewer::Previewer(TQWidget *tqparent, const char *name )
-    : TQWidget(tqparent,name)
+Previewer::Previewer(TQWidget *parent, const char *name )
+    : TQWidget(parent,name)
 {
     d = new PreviewerPrivate();
 

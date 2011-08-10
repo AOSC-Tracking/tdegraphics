@@ -31,7 +31,7 @@ namespace KMrml
   TQ_OBJECT
 
     public:
-        Browser( MrmlPart *tqparent, const char *name );
+        Browser( MrmlPart *parent, const char *name );
         ~Browser();
 
         virtual void saveState( TQDataStream& stream );

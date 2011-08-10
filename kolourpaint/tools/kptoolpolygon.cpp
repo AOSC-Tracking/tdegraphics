@@ -164,7 +164,7 @@ static TQPixmap pixmap (const TQPixmap &oldPixmap,
 
     TQPainter painter, maskPainter;
 
-    if (pixmap.tqmask () ||
+    if (pixmap.mask () ||
         (maskPen.style () != TQt::NoPen &&
          maskPen.color () == TQt::color0/*transparent*/) ||
         (maskBrush.style () != TQt::NoBrush &&
@@ -177,7 +177,7 @@ static TQPixmap pixmap (const TQPixmap &oldPixmap,
 
     #if DEBUG_KP_TOOL_POLYGON && 0
         kdDebug () << "\tmaskPainter begin because:" << endl
-                   << "\t\tpixmap.tqmask=" << pixmap.tqmask () << endl
+                   << "\t\tpixmap.mask=" << pixmap.mask () << endl
                    << "\t\t(maskPenStyle!=NoPen)=" << (maskPen.style () != TQt::NoPen) << endl
                    << "\t\t(maskPenColor==trans)=" << (maskPen.color () == TQt::color0) << endl
                    << "\t\t(maskBrushStyle!=NoBrush)=" << (maskBrush.style () != TQt::NoBrush) << endl

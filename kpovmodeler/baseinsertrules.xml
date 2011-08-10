@@ -166,7 +166,7 @@
     </rule>
     <rule>
       <group name="ObjectModifier"/>
-      <not><tqparent><class name="Mesh"/></tqparent></not>
+      <not><parent><class name="Mesh"/></parent></not>
     </rule>
   </targetclass>
 

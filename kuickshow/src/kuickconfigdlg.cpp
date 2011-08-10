@@ -38,11 +38,11 @@
 #include "kuickdata.h"
 
 
-KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, TQWidget *tqparent,
+KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, TQWidget *parent,
 				      const char *name, bool modal )
     : KDialogBase( Tabbed, i18n("Configure"),
 		     Help | Default | Ok | Apply | Cancel, Ok,
-		     tqparent, name, modal )
+		     parent, name, modal )
 {
     coll = _coll;
     TQVBox *box = addVBoxPage( i18n("&General") );

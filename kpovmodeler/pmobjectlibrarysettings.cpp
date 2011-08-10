@@ -33,8 +33,8 @@
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 
-PMObjectLibrarySettings::PMObjectLibrarySettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMObjectLibrarySettings::PMObjectLibrarySettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 

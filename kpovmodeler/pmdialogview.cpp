@@ -39,8 +39,8 @@
 #include <tqscrollview.h>
 #include <tqlabel.h>
 
-PMDialogEditContent::PMDialogEditContent( TQWidget* tqparent, const char* name )
-      : TQScrollView( tqparent, name )
+PMDialogEditContent::PMDialogEditContent( TQWidget* parent, const char* name )
+      : TQScrollView( parent, name )
 {
    m_pContents = 0;
    setVScrollBarMode( AlwaysOff );
@@ -111,8 +111,8 @@ void PMDialogEditContent::resizeEvent( TQResizeEvent* /* ev */ )
    calculateSize( );
 }
 
-PMDialogView::PMDialogView( PMPart* part, TQWidget* tqparent, const char* name )
-      : PMViewBase( tqparent, name )
+PMDialogView::PMDialogView( PMPart* part, TQWidget* parent, const char* name )
+      : PMViewBase( parent, name )
 {
    m_pDisplayedWidget = 0;
    m_unsavedData = false;

@@ -23,8 +23,8 @@
 
 #include "kgvpagedecorator.h"
     
-KGVPageDecorator::KGVPageDecorator( TQWidget* tqparent, const char* name ) : 
-    TQHBox( tqparent, name ), 
+KGVPageDecorator::KGVPageDecorator( TQWidget* parent, const char* name ) : 
+    TQHBox( parent, name ), 
     _margin( 5 ), 
     _borderWidth( 1 ), 
     _shadowOffset( 2, 2 )

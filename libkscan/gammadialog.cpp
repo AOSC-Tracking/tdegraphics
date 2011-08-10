@@ -29,8 +29,8 @@
 
 #include "gammadialog.h"
 
-GammaDialog::GammaDialog( TQWidget *tqparent ) :
-   KDialogBase( tqparent,  "GammaDialog", true, i18n("Custom Gamma Tables"),
+GammaDialog::GammaDialog( TQWidget *parent ) :
+   KDialogBase( parent,  "GammaDialog", true, i18n("Custom Gamma Tables"),
 		 Ok|Cancel|Apply, Ok, true )
 {
     gt = new KGammaTable();

@@ -28,7 +28,7 @@
 class ProgressWidget : public TQWidget
 {
     public:
-        ProgressWidget( MiniBar * tqparent );
+        ProgressWidget( MiniBar * parent );
         void setProgress( float percentage );
 
     protected:
@@ -46,7 +46,7 @@ class ProgressWidget : public TQWidget
 class PagesEdit : public TQLineEdit
 {
     public:
-        PagesEdit( MiniBar * tqparent );
+        PagesEdit( MiniBar * parent );
         void setPagesNumber( int pages );
         void setText( const TQString & );
 
@@ -67,7 +67,7 @@ class PagesEdit : public TQLineEdit
 class HoverButton : public TQPushButton
 {
     public:
-        HoverButton( TQWidget * tqparent );
+        HoverButton( TQWidget * parent );
 
     protected:
         void paintEvent( TQPaintEvent * e );
@@ -78,8 +78,8 @@ class HoverButton : public TQPushButton
 
 /** MiniBar **/
 
-MiniBar::MiniBar( TQWidget * tqparent, KPDFDocument * document )
-    : TQFrame( tqparent, "miniBar" ), m_document( document ),
+MiniBar::MiniBar( TQWidget * parent, KPDFDocument * document )
+    : TQFrame( parent, "miniBar" ), m_document( document ),
     m_currentPage( -1 )
 {
     // left spacer
@@ -127,7 +127,7 @@ MiniBar::MiniBar( TQWidget * tqparent, KPDFDocument * document )
     connect( m_nextButton, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( nextPage() ) );
 
     // widget starts hidden (will be shown after opening a document)
-    tqparent->hide();
+    parent->hide();
 }
 
 MiniBar::~MiniBar()
@@ -146,7 +146,7 @@ void MiniBar::notifySetup( const TQValueVector< KPDFPage * > & pageVector, bool 
     if ( pages < 1 )
     {
         m_currentPage = -1;
-        TQT_TQWIDGET( tqparent() )->hide();
+        TQT_TQWIDGET( parent() )->hide();
         return;
     }
 
@@ -171,7 +171,7 @@ void MiniBar::notifySetup( const TQValueVector< KPDFPage * > & pageVector, bool 
     m_pagesButton->setText( TQString::number( pages ) );
     m_prevButton->setEnabled( false );
     m_nextButton->setEnabled( false );
-    TQT_TQWIDGET( tqparent() )->show();
+    TQT_TQWIDGET( parent() )->show();
 }
 
 void MiniBar::notifyViewportChanged( bool /*smoothMove*/ )
@@ -259,9 +259,9 @@ void MiniBar::slotEmitPrevPage()
 
 /** ProgressWidget **/
 
-ProgressWidget::ProgressWidget( MiniBar * tqparent )
-    : TQWidget( tqparent, "progress", WNoAutoErase ),
-    m_miniBar( tqparent ), m_progressPercentage( -1 )
+ProgressWidget::ProgressWidget( MiniBar * parent )
+    : TQWidget( parent, "progress", WNoAutoErase ),
+    m_miniBar( parent ), m_progressPercentage( -1 )
 {
     setFixedHeight( 4 );
     setMouseTracking( true );
@@ -325,8 +325,8 @@ void ProgressWidget::paintEvent( TQPaintEvent * e )
 
 /** PagesEdit **/
 
-PagesEdit::PagesEdit( MiniBar * tqparent )
-    : TQLineEdit( tqparent ), m_miniBar( tqparent ), m_eatClick( false )
+PagesEdit::PagesEdit( MiniBar * parent )
+    : TQLineEdit( parent ), m_miniBar( parent ), m_eatClick( false )
 {
     // customize look
     setFrameShadow( TQFrame::Raised );
@@ -398,8 +398,8 @@ void PagesEdit::wheelEvent( TQWheelEvent * e )
 
 /** HoverButton **/
 
-HoverButton::HoverButton( TQWidget * tqparent )
-    : TQPushButton( tqparent )
+HoverButton::HoverButton( TQWidget * parent )
+    : TQPushButton( parent )
 {
     setMouseTracking( true );
 #if KDE_IS_VERSION(3,3,90)

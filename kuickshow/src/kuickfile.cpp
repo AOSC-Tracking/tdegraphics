@@ -94,7 +94,7 @@ bool KuickFile::download()
     return m_job != 0L;
 }
 
-KuickFile::DownloadtqStatus KuickFile::waitForDownload( TQWidget *tqparent )
+KuickFile::DownloadtqStatus KuickFile::waitForDownload( TQWidget *parent )
 {
     if ( isAvailable() )
         return OK;
@@ -104,7 +104,7 @@ KuickFile::DownloadtqStatus KuickFile::waitForDownload( TQWidget *tqparent )
             return ERROR;
     }
 
-    KProgressDialog *dialog = new KProgressDialog( tqparent );
+    KProgressDialog *dialog = new KProgressDialog( parent );
     dialog->setModal( true );
     dialog->setCaption( i18n("Downloading %1...").tqarg( m_url.fileName() ) );
     dialog->setLabel( i18n("Please wait while downloading\n%1").tqarg( m_url.prettyURL() ));

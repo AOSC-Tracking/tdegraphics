@@ -34,8 +34,8 @@
 #include <kdialog.h>
 #include <klistview.h>
 
-PMLibraryObjectSearch::PMLibraryObjectSearch( TQWidget* tqparent ) :
-   TQWidget( tqparent, "" )
+PMLibraryObjectSearch::PMLibraryObjectSearch( TQWidget* parent ) :
+   TQWidget( parent, "" )
 {
    setMinimumSize( 780, 300 );
    setMaximumSize( 800, 400 );

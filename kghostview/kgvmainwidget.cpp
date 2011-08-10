@@ -20,8 +20,8 @@
 #include <kurl.h>
 #include <kurldrag.h>
 
-KGVMainWidget::KGVMainWidget( TQWidget* tqparent, const char* name )
-  : TQWidget( tqparent, name ) {}
+KGVMainWidget::KGVMainWidget( TQWidget* parent, const char* name )
+  : TQWidget( parent, name ) {}
 
 void KGVMainWidget::keyPressEvent( TQKeyEvent* event )
 {

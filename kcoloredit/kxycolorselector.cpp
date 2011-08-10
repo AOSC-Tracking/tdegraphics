@@ -23,7 +23,7 @@
 
 #include "kxycolorselector.h"
 
-KXYColorSelector::KXYColorSelector(TQWidget *tqparent, const char *name) : KXYSelector(tqparent,name) {
+KXYColorSelector::KXYColorSelector(TQWidget *parent, const char *name) : KXYSelector(parent,name) {
 	setBackgroundMode(NoBackground);
 	setRange(0, 0, COMPONENT_SELECTION_RESOLUTION - 1, COMPONENT_SELECTION_RESOLUTION - 1);
 	setType(TYPE_NONE);

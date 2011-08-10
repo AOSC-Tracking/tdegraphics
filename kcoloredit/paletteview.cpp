@@ -21,8 +21,8 @@
 #include "paletteview.h"
 
 PaletteView::PaletteView(const int defaultCellWidth, const int defaultCellHeight, const int cellSpacing,
-	KColorEditView* view, TQWidget *tqparent, const char *name) :
-	TQFrame(tqparent, name, TQWidget::WResizeNoErase*0) {
+	KColorEditView* view, TQWidget *parent, const char *name) :
+	TQFrame(parent, name, TQWidget::WResizeNoErase*0) {
 	setFrameStyle(StyledPanel|Sunken);
 	setLineWidth(2);
 	TQGridLayout* topLayout = new TQGridLayout(this, 2, 2);

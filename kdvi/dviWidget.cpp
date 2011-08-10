@@ -22,8 +22,8 @@
 #include "renderedDviPagePixmap.h"
 #include "selection.h"
 
-DVIWidget::DVIWidget(TQWidget* tqparent, PageView* sv, DocumentPageCache* cache, const char* name)
-  : DocumentWidget(tqparent, sv, cache, name)
+DVIWidget::DVIWidget(TQWidget* parent, PageView* sv, DocumentPageCache* cache, const char* name)
+  : DocumentWidget(parent, sv, cache, name)
 {
 }
 
@@ -74,7 +74,7 @@ void DVIWidget::mousePressEvent(TQMouseEvent* e)
     e->accept();
   }
 
-  // Call implementation from tqparent
+  // Call implementation from parent
   DocumentWidget::mousePressEvent(e);
 }
 

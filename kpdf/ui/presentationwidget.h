@@ -37,7 +37,7 @@ class PresentationWidget : public TQDialog, public DocumentObserver
     Q_OBJECT
   TQ_OBJECT
     public:
-        PresentationWidget( TQWidget * tqparent, KPDFDocument * doc );
+        PresentationWidget( TQWidget * parent, KPDFDocument * doc );
         ~PresentationWidget();
 
         void setupActions( KActionCollection * ac );

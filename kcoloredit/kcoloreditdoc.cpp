@@ -31,7 +31,7 @@
 #include "kcoloreditview.h"
 #include "resource.h"
 
-KColorEditDoc::KColorEditDoc(TQWidget *tqparent, const char *name) : TQObject(tqparent, name),
+KColorEditDoc::KColorEditDoc(TQWidget *parent, const char *name) : TQObject(parent, name),
 	m_palette(), m_paletteHistory(&m_palette, 0) {
 	m_pViewList = new TQPtrList<KColorEditView>();
 	m_pViewList->setAutoDelete(true);
@@ -106,7 +106,7 @@ bool KColorEditDoc::saveModified()
 
   if(m_modified)
   {
-    KColorEditApp *window=(KColorEditApp *) tqparent();
+    KColorEditApp *window=(KColorEditApp *) parent();
     int want_save = KMessageBox::warningYesNoCancel(window,
                                          i18n("The current file has been modified.\n"
                                               "Do you want to save it?"), TQString(), KStdGuiItem::save(), i18n("Do Not Save"));
@@ -175,7 +175,7 @@ bool KColorEditDoc::openDocument(const TQString& filename) {
 		setPaletteCursorPos(m_palette.length());
 		setPaletteSelection(0, 0);
 		slotRedrawAllViews(0, true);
-        KColorEditApp *window=(KColorEditApp*)tqparent();
+        KColorEditApp *window=(KColorEditApp*)parent();
         window->setCaption(m_title);
 	}
 	return true;

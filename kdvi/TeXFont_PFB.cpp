@@ -26,28 +26,28 @@
 //#define DEBUG_PFB 1
 
 
-TeXFont_PFB::TeXFont_PFB(TeXFontDefinition *tqparent, fontEncoding *enc, double slant)
-  : TeXFont(tqparent)
+TeXFont_PFB::TeXFont_PFB(TeXFontDefinition *parent, fontEncoding *enc, double slant)
+  : TeXFont(parent)
 {
 #ifdef DEBUG_PFB
   if (enc != 0)
-    kdDebug(4300) << "TeXFont_PFB::TeXFont_PFB( tqparent=" << tqparent << ", encoding=" << enc->encodingFullName << " )" << endl;
+    kdDebug(4300) << "TeXFont_PFB::TeXFont_PFB( parent=" << parent << ", encoding=" << enc->encodingFullName << " )" << endl;
   else
-    kdDebug(4300) << "TeXFont_PFB::TeXFont_PFB( tqparent=" << tqparent << ", encoding=0 )" << endl;
+    kdDebug(4300) << "TeXFont_PFB::TeXFont_PFB( parent=" << parent << ", encoding=0 )" << endl;
 #endif
 
   fatalErrorInFontLoading = false;
 
-  int error = FT_New_Face( tqparent->font_pool->FreeType_library, tqparent->filename.local8Bit(), 0, &face );
+  int error = FT_New_Face( parent->font_pool->FreeType_library, parent->filename.local8Bit(), 0, &face );
   
   if ( error == FT_Err_Unknown_File_Format ) {
-    errorMessage = i18n("The font file %1 could be opened and read, but its font format is unsupported.").tqarg(tqparent->filename);
+    errorMessage = i18n("The font file %1 could be opened and read, but its font format is unsupported.").tqarg(parent->filename);
     kdError(4300) << errorMessage << endl;
     fatalErrorInFontLoading = true;
     return;
   } else 
     if ( error ) {
-      errorMessage = i18n("The font file %1 is broken, or it could not be opened or read.").tqarg(tqparent->filename);
+      errorMessage = i18n("The font file %1 is broken, or it could not be opened or read.").tqarg(parent->filename);
       kdError(4300) << errorMessage << endl;
       fatalErrorInFontLoading = true;
       return;
@@ -66,7 +66,7 @@ TeXFont_PFB::TeXFont_PFB(TeXFontDefinition *tqparent, fontEncoding *enc, double 
   }
   
   if (face->family_name != 0)
-    tqparent->fullFontName = face->family_name;
+    parent->fullFontName = face->family_name;
 
   // Finally, we need to set up the charMap array, which maps TeX
   // character codes to glyph indices in the font. (Remark: the
@@ -74,8 +74,8 @@ TeXFont_PFB::TeXFont_PFB(TeXFontDefinition *tqparent, fontEncoding *enc, double 
   // TeX is only able to address character codes 0-255 while
   // e.g. Type1 fonts may contain several thousands of characters)
   if (enc != 0) {
-    tqparent->fullEncodingName = enc->encodingFullName.remove(TQString::tqfromLatin1( "Encoding" ));
-    tqparent->fullEncodingName = enc->encodingFullName.remove(TQString::tqfromLatin1( "encoding" ));
+    parent->fullEncodingName = enc->encodingFullName.remove(TQString::tqfromLatin1( "Encoding" ));
+    parent->fullEncodingName = enc->encodingFullName.remove(TQString::tqfromLatin1( "encoding" ));
 
     // An encoding vector is given for this font, i.e. an array of
     // character names (such as: 'parenleft' or 'dotlessj'). We use
@@ -159,16 +159,16 @@ glyph *TeXFont_PFB::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const T
   
   if ((generateCharacterPixmap == true) && ((g->shrunkenCharacter.isNull()) || (color != g->color)) ) {
     int error;
-    unsigned int res =  (unsigned int)(tqparent->displayResolution_in_dpi/tqparent->enlargement +0.5);
+    unsigned int res =  (unsigned int)(parent->displayResolution_in_dpi/parent->enlargement +0.5);
     g->color = color;
 
     // Character height in 1/64th of points (reminder: 1 pt = 1/72 inch)
     // Only approximate, may vary from file to file!!!! @@@@@
 
-    long int characterSize_in_printers_points_by_64 = (long int)((64.0*72.0*tqparent->scaled_size_in_DVI_units*tqparent->font_pool->getCMperDVIunit())/2.54 + 0.5 ); 
+    long int characterSize_in_printers_points_by_64 = (long int)((64.0*72.0*parent->scaled_size_in_DVI_units*parent->font_pool->getCMperDVIunit())/2.54 + 0.5 ); 
     error = FT_Set_Char_Size(face, 0, characterSize_in_printers_points_by_64, res, res );
     if (error) {
-      TQString msg = i18n("FreeType reported an error when setting the character size for font file %1.").tqarg(tqparent->filename);
+      TQString msg = i18n("FreeType reported an error when setting the character size for font file %1.").tqarg(parent->filename);
       if (errorMessage.isEmpty())
 	errorMessage = msg;
       kdError(4300) << msg << endl;
@@ -178,13 +178,13 @@ glyph *TeXFont_PFB::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const T
     }
     
     // load glyph image into the slot and erase the previous one
-    if (tqparent->font_pool->getUseFontHints() == true)
+    if (parent->font_pool->getUseFontHints() == true)
       error = FT_Load_Glyph(face, charMap[ch], FT_LOAD_DEFAULT ); 
     else
       error = FT_Load_Glyph(face, charMap[ch], FT_LOAD_NO_HINTING );
 
     if (error) {
-      TQString msg = i18n("FreeType is unable to load glyph #%1 from font file %2.").tqarg(ch).tqarg(tqparent->filename);
+      TQString msg = i18n("FreeType is unable to load glyph #%1 from font file %2.").tqarg(ch).tqarg(parent->filename);
       if (errorMessage.isEmpty())
 	errorMessage = msg;
       kdError(4300) << msg << endl;
@@ -196,7 +196,7 @@ glyph *TeXFont_PFB::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const T
     // convert to an anti-aliased bitmap
     error = FT_Render_Glyph( face->glyph, ft_render_mode_normal );
     if (error) {
-      TQString msg = i18n("FreeType is unable to render glyph #%1 from font file %2.").tqarg(ch).tqarg(tqparent->filename);
+      TQString msg = i18n("FreeType is unable to render glyph #%1 from font file %2.").tqarg(ch).tqarg(parent->filename);
       if (errorMessage.isEmpty())
 	errorMessage = msg;
       kdError(4300) << msg << endl;
@@ -210,7 +210,7 @@ glyph *TeXFont_PFB::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const T
     if ((slot->bitmap.width == 0) || (slot->bitmap.rows == 0)) {
       if (errorMessage.isEmpty())
 	errorMessage = i18n("Glyph #%1 is empty.").tqarg(ch);
-      kdError(4300) << i18n("Glyph #%1 from font file %2 is empty.").tqarg(ch).tqarg(tqparent->filename) << endl;
+      kdError(4300) << i18n("Glyph #%1 from font file %2 is empty.").tqarg(ch).tqarg(parent->filename) << endl;
       g->shrunkenCharacter.resize( 15, 15 );
       g->shrunkenCharacter.fill(TQColor(255, 0, 0));
       g->x2 = 0;
@@ -221,7 +221,7 @@ glyph *TeXFont_PFB::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const T
 
       // Do TQPixmaps fully support the alpha channel? If yes, we use
       // that. Otherwise, use other routines as a fallback
-      if (tqparent->font_pool->TQPixmapSupportsAlpha) {
+      if (parent->font_pool->TQPixmapSupportsAlpha) {
 	// If the alpha channel is properly supported, we set the
 	// character glyph to a colored rectangle, and define the
 	// character outline only using the alpha channel. That
@@ -239,7 +239,7 @@ glyph *TeXFont_PFB::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const T
 	}
       } else {
 	// If the alpha channel is not supported... QT seems to turn
-	// the alpha channel into a crude bitmap which is used to tqmask
+	// the alpha channel into a crude bitmap which is used to mask
 	// the resulting TQPixmap. In this case, we define the
 	// character outline using the image data, and use the alpha
 	// channel only to store "maximally opaque" or "completely
@@ -279,7 +279,7 @@ glyph *TeXFont_PFB::getGlyph(TQ_UINT16 ch, bool generateCharacterPixmap, const T
   if (g->dvi_advance_in_units_of_design_size_by_2e20 == 0) {
     int error = FT_Load_Glyph(face, charMap[ch], FT_LOAD_NO_SCALE);
     if (error) {
-      TQString msg = i18n("FreeType is unable to load metric for glyph #%1 from font file %2.").tqarg(ch).tqarg(tqparent->filename);
+      TQString msg = i18n("FreeType is unable to load metric for glyph #%1 from font file %2.").tqarg(ch).tqarg(parent->filename);
       if (errorMessage.isEmpty())
 	errorMessage = msg;
       kdError(4300) << msg << endl;

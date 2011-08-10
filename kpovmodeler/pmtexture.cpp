@@ -72,9 +72,9 @@ TQString PMTexture::description( ) const
    return i18n( "texture" );
 }
 
-PMDialogEditBase* PMTexture::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMTexture::editWidget( TQWidget* parent ) const
 {
-   return new PMTextureEdit( tqparent );
+   return new PMTextureEdit( parent );
 }
 
 void PMTexture::serialize( TQDomElement& e, TQDomDocument& doc ) const

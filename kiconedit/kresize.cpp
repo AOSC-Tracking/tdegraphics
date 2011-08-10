@@ -28,8 +28,8 @@
 
 #include "kresize.h"
 
-KResizeWidget::KResizeWidget( TQWidget* tqparent, const char* name, 
-    const TQSize& size ) : TQWidget( tqparent, name )
+KResizeWidget::KResizeWidget( TQWidget* parent, const char* name, 
+    const TQSize& size ) : TQWidget( parent, name )
 {
   TQHBoxLayout* genLayout = new TQHBoxLayout( this );
 
@@ -62,9 +62,9 @@ const TQSize KResizeWidget::getSize()
   return TQSize( m_width->value(), m_height->value() );
 }
 
-KResizeDialog::KResizeDialog( TQWidget* tqparent, const char* name, 
+KResizeDialog::KResizeDialog( TQWidget* parent, const char* name, 
     const TQSize size )
-    : KDialogBase( tqparent, name, true, i18n( "Select Size" ), Ok|Cancel )
+    : KDialogBase( parent, name, true, i18n( "Select Size" ), Ok|Cancel )
 {
   m_resize = new KResizeWidget( this, "resize widget", size );
 

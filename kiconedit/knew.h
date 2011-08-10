@@ -66,7 +66,7 @@ class KIconListBox : public TQListBox
   Q_OBJECT
   TQ_OBJECT
 public:
-  KIconListBox( TQWidget *tqparent ) : TQListBox(tqparent) {} ;
+  KIconListBox( TQWidget *parent ) : TQListBox(parent) {} ;
   const TQString path(int idx) { return ((KIconListBoxItem*)item(idx))->path(); }
   KIconTemplate& iconTemplate(int idx) { return ((KIconListBoxItem*)item(idx))->iconTemplate(); }
 
@@ -99,7 +99,7 @@ class NewSelect : public TQWidget
   Q_OBJECT
   TQ_OBJECT
 public:
-  NewSelect(TQWidget *tqparent);
+  NewSelect(TQWidget *parent);
   ~NewSelect();
 
 signals:
@@ -119,7 +119,7 @@ class NewFromTemplate : public TQWidget
   Q_OBJECT
   TQ_OBJECT
 public:
-  NewFromTemplate(TQWidget *tqparent);
+  NewFromTemplate(TQWidget *parent);
   ~NewFromTemplate();
 
   const TQString path() { return TQString(templates->path(templates->currentItem())); }
@@ -138,7 +138,7 @@ class KNewIcon : public KWizard
   Q_OBJECT
   TQ_OBJECT
 public:
-  KNewIcon(TQWidget *tqparent);
+  KNewIcon(TQWidget *parent);
   ~KNewIcon();
 
   enum { Blank = 0, Template = 1};

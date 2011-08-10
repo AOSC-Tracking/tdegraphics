@@ -167,9 +167,9 @@ void PMObjectLink::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMObjectLink::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMObjectLink::editWidget( TQWidget* parent ) const
 {
-   return new PMObjectLinkEdit( tqparent );
+   return new PMObjectLinkEdit( parent );
 }
 
 void PMObjectLink::restoreMemento( PMMemento* s )

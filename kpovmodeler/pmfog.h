@@ -66,7 +66,7 @@ public:
    /**
     * Returns a new @ref PMFogEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmfog" ); }
 

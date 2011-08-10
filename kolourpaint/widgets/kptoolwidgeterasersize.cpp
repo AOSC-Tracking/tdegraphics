@@ -44,8 +44,8 @@ static int eraserSizes [] = {2, 3, 5, 9, 17, 29};
 static const int numEraserSizes = int (sizeof (eraserSizes) / sizeof (eraserSizes [0]));
 
 
-kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *tqparent, const char *name)
-    : kpToolWidgetBase (tqparent, name)
+kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *parent, const char *name)
+    : kpToolWidgetBase (parent, name)
 {
     setInvertSelectedPixmap ();
 
@@ -75,14 +75,14 @@ kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *tqparent, const char *
         painter.fillRect (rect, TQt::black);
         painter.end ();
 
-        TQBitmap tqmask (previewPixmap.width (), previewPixmap.height ());
-        tqmask.fill (TQt::color0/*transparent*/);
+        TQBitmap mask (previewPixmap.width (), previewPixmap.height ());
+        mask.fill (TQt::color0/*transparent*/);
 
-        TQPainter maskPainter (&tqmask);
+        TQPainter maskPainter (&mask);
         maskPainter.fillRect (rect, TQt::color1/*opaque*/);
         maskPainter.end ();
 
-        previewPixmap.setMask (tqmask);
+        previewPixmap.setMask (mask);
 
 
         addOption (previewPixmap, i18n ("%1x%2").arg (s).arg (s)/*tooltip*/);

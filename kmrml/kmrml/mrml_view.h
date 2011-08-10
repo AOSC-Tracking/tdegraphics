@@ -55,7 +55,7 @@ class MrmlView : public TQScrollView
   TQ_OBJECT
 
 public:
-    MrmlView( TQWidget *tqparent = 0L, const char *name = 0L );
+    MrmlView( TQWidget *parent = 0L, const char *name = 0L );
     ~MrmlView();
 
     MrmlViewItem * addItem( const KURL& url, const KURL& thumbURL,
@@ -64,7 +64,7 @@ public:
                             double similarity );
 
 
-    void addRelevanceToQuery( TQDomDocument&, TQDomElement& tqparent );
+    void addRelevanceToQuery( TQDomDocument&, TQDomElement& parent );
 
     void clear();
 
@@ -120,7 +120,7 @@ public:
 
     void setPixmap( const TQPixmap& pixmap );
 
-    void createRelevanceElement( TQDomDocument& document, TQDomElement& tqparent );
+    void createRelevanceElement( TQDomDocument& document, TQDomElement& parent );
 
     double similarity() const { return m_similarity; }
 

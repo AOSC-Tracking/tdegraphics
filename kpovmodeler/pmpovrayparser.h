@@ -160,14 +160,14 @@ private:
 
 
    /**
-    * Looks for child objects, parses them and appends them to the tqparent
-    * object. If tqparent is 0, all objects are appended to the result list.
+    * Looks for child objects, parses them and appends them to the parent
+    * object. If parent is 0, all objects are appended to the result list.
     *
     * If max is > 0, then the maximum number of parsed objects is max.
     *
     * Returns true if there where no objects or parsing was successful.
     */
-   bool parseChildObjects( PMCompositeObject* tqparent, int max = -1 );
+   bool parseChildObjects( PMCompositeObject* parent, int max = -1 );
 
 
    /**
@@ -491,7 +491,7 @@ private:
    /**
     * Parse function for object keywords
     */
-   bool parseObject( PMCompositeObject* tqparent );
+   bool parseObject( PMCompositeObject* parent );
 
    // POV-Ray 3.5 objects
    bool parseIsoSurface( PMIsoSurface* iso );

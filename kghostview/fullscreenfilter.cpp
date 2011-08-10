@@ -22,16 +22,16 @@
 #include "kgv_miniwidget.h"
 #include "kgvpageview.h"
 
-FullScreenFilter::FullScreenFilter( KGVShell& tqparent )
-	:TQObject( &tqparent, "full-screen-filter" ),
-	 tqparent( tqparent )
+FullScreenFilter::FullScreenFilter( KGVShell& parent )
+	:TQObject( &parent, "full-screen-filter" ),
+	 parent( parent )
 {
 }
 
 bool FullScreenFilter::eventFilter( TQObject* /*object*/, TQEvent* ev) {
 	if ( TQKeyEvent* keyevent = dynamic_cast<TQKeyEvent*>( ev ) ) {
 		if ( keyevent->key() == Key_Escape ) {
-			tqparent.setFullScreen( false );
+			parent.setFullScreen( false );
 			keyevent->accept();
 			return true;
 		}
@@ -39,9 +39,9 @@ bool FullScreenFilter::eventFilter( TQObject* /*object*/, TQEvent* ev) {
 	if ( TQMouseEvent* mouseevent = dynamic_cast<TQMouseEvent*>( ev ) ) {
 		if ( mouseevent->stateAfter() & mouseevent->button() & Qt::LeftButton ) {
 			// if ( The whole image is visible at once )
-			if ( tqparent.m_gvpart->pageView()->contentsHeight() <= tqparent.m_gvpart->widget()->height() &&
-			     tqparent.m_gvpart->pageView()->contentsWidth() <= tqparent.m_gvpart->widget()->width() ) {
-				tqparent.m_gvpart->miniWidget()->nextPage();
+			if ( parent.m_gvpart->pageView()->contentsHeight() <= parent.m_gvpart->widget()->height() &&
+			     parent.m_gvpart->pageView()->contentsWidth() <= parent.m_gvpart->widget()->width() ) {
+				parent.m_gvpart->miniWidget()->nextPage();
 				mouseevent->accept();
 				return true;
 			}

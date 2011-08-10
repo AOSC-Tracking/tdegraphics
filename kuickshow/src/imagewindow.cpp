@@ -74,15 +74,15 @@
 
 TQCursor *ImageWindow::s_handCursor = 0L;
 
-ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, TQWidget *tqparent,
+ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, TQWidget *parent,
 			  const char *name )
-    : ImlibWidget( _idata, id, tqparent, name )
+    : ImlibWidget( _idata, id, parent, name )
 {
     init();
 }
 
-ImageWindow::ImageWindow( ImData *_idata, TQWidget *tqparent, const char *name )
-    : ImlibWidget( _idata, tqparent, name )
+ImageWindow::ImageWindow( ImData *_idata, TQWidget *parent, const char *name )
+    : ImlibWidget( _idata, parent, name )
 {
     init();
 }

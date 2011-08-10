@@ -40,8 +40,8 @@
 TQString PMPovrayRenderWidget::s_povrayCommand = c_defaultPovrayCommand;
 TQStringList PMPovrayRenderWidget::s_libraryPaths;
 
-PMPovrayRenderWidget::PMPovrayRenderWidget( TQWidget* tqparent, const char* name )
-      : PMDragWidget( tqparent, name )
+PMPovrayRenderWidget::PMPovrayRenderWidget( TQWidget* parent, const char* name )
+      : PMDragWidget( parent, name )
 {
    m_pProcess = 0;
    m_bSuspended = false;

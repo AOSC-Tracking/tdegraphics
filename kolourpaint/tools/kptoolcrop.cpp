@@ -132,7 +132,7 @@ void kpToolCropSetImageCommand::execute ()
         //
         // The selection is deleted.
         //
-        // TODO: Do not introduce a tqmask if the result will not contain
+        // TODO: Do not introduce a mask if the result will not contain
         //       any transparent pixels.
         //
 

@@ -39,9 +39,9 @@ class PMPigmentEdit : public PMTextureBaseEdit
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMPigmentEdit with tqparent and name
+    * Creates a PMPigmentEdit with parent and name
     */
-   PMPigmentEdit( TQWidget* tqparent, const char* name = 0 );
+   PMPigmentEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -55,7 +55,7 @@ class DocumentRenderer : public TQObject
 
 public:
   /** \brief default constructor */
-  DocumentRenderer(TQWidget* tqparent);
+  DocumentRenderer(TQWidget* parent);
 
   virtual ~DocumentRenderer();
 
@@ -442,7 +442,7 @@ protected:
   */
   TQMap<TQString, Anchor> anchorList;
 
-  /** pointer to the tqparent widget
+  /** pointer to the parent widget
 
   This pointer can be used by implementations e.g. to display error
   messages. This pointer can well be zero.

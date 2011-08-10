@@ -185,13 +185,13 @@ public:
       function returns a null pointer until the decoder actually processes an
       #"BGjp"# chunk. */
   GP<GPixmap>     get_bgpm() const;
-  /** Returns a pointer to the tqmask of the foreground component of a DjVu
-      image. The tqmask of the foreground component is always a JB2 image in
+  /** Returns a pointer to the mask of the foreground component of a DjVu
+      image. The mask of the foreground component is always a JB2 image in
       this implementation. This function returns a null pointer until the
       decoder actually processes an #"Sjbz"# chunk. */
   GP<JB2Image>    get_fgjb() const;
   /** Returns a pointer to the colors of the foreground component of a DjVu
-      image. The tqmask of the foreground component is always a small pixmap in
+      image. The mask of the foreground component is always a small pixmap in
       this implementation. This function returns a null pointer until the
       decoder actually processes an #"FG44"# chunk. */
   GP<GPixmap>     get_fgpm() const;
@@ -284,7 +284,7 @@ public:
       \begin{verbatim}
       DJVU Image (2325x3156) version 17:
        0.0 Kb   'INFO'  Page information.
-       17.3 Kb  'Sjbz'  JB2 foreground tqmask (2325x3156)
+       17.3 Kb  'Sjbz'  JB2 foreground mask (2325x3156)
        2.5 Kb   'BG44'  IW44 background (775x1052)
        1.0 Kb   'FG44'  IW44 foreground colors (194x263)
        3.0 Kb   'BG44'  IW44 background (part 2).
@@ -318,7 +318,7 @@ public:
   /** This function returns true if this object contains a well formed {\em
       Bilevel DjVu Image}.  Calling function #get_bitmap# on a well formed
       bilevel image should always return a non zero value.  Note that function
-      #get_bitmap# works as soon as a foreground tqmask component is present,
+      #get_bitmap# works as soon as a foreground mask component is present,
       regardless of the fact that the image follows the rules or not. */
   int is_legal_bilevel() const;
   /** This function returns true if this object contains a well formed {\em
@@ -351,7 +351,7 @@ public:
       This function returns a null pointer if there is not enough information
       in the DjVu image to properly render the desired image. */
   GP<GPixmap>  get_pixmap(const GRect &rect, const GRect &all, double gamma=0) const;
-  /** Renders the tqmask of the foreground layer of the DjVu image.  This
+  /** Renders the mask of the foreground layer of the DjVu image.  This
       functions is a wrapper for \Ref{JB2Image::get_bitmap}.  Argument #align#
       specified the tqalignment of the rows of the returned images.  Setting
       #align# to #4#, for instance, will adjust the bitmap border in order to

@@ -35,7 +35,7 @@ public:
 
    virtual KParts::Part* createPartObject( TQWidget* parentWidget,
                                      const char* widgetName,
-                                     TQObject* tqparent, const char* name,
+                                     TQObject* parent, const char* name,
                                      const char* classname,
                                      const TQStringList& args );
    

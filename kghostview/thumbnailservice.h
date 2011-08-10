@@ -32,7 +32,7 @@ class ThumbnailService : public TQObject {
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		ThumbnailService( KGVMiniWidget* tqparent, const char* name = 0 );
+		ThumbnailService( KGVMiniWidget* parent, const char* name = 0 );
 		~ThumbnailService();
 
 	public slots:

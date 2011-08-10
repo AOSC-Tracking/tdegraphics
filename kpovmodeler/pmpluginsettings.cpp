@@ -28,8 +28,8 @@
 class PMPluginListViewItem : public TQListViewItem
 {
 public:
-   PMPluginListViewItem( TQListView* tqparent, PMPluginInfo* info )
-         : TQListViewItem( tqparent, info->name( ), info->description( ) )
+   PMPluginListViewItem( TQListView* parent, PMPluginInfo* info )
+         : TQListViewItem( parent, info->name( ), info->description( ) )
    {
       m_info = info;
       m_enabled = info->enabled( );
@@ -51,8 +51,8 @@ public:
    bool m_enabled;
 };
 
-PMPluginSettings::PMPluginSettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 

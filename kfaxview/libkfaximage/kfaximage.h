@@ -64,7 +64,7 @@ public:
      *  @see: numPages
      */
 
-    KFaxImage( const TQString &filename = TQString(), TQObject *tqparent = 0, const char *name = 0 );
+    KFaxImage( const TQString &filename = TQString(), TQObject *parent = 0, const char *name = 0 );
 
     /**
      *  Destructor

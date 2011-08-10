@@ -26,8 +26,8 @@
 #include "slideshowwidget.h"
 
 
-SlideShowWidget::SlideShowWidget( TQWidget *tqparent, const char *name )
-    : TQWidget( tqparent, name )
+SlideShowWidget::SlideShowWidget( TQWidget *parent, const char *name )
+    : TQWidget( parent, name )
 {
 //     setTitle( i18n("Slideshow") );
 

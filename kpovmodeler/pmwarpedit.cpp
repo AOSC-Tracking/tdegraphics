@@ -29,8 +29,8 @@
 #include <kdialog.h>
 
 
-PMWarpEdit::PMWarpEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMWarpEdit::PMWarpEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

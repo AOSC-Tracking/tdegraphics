@@ -44,9 +44,9 @@ class PMSlopeEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMSlopeEdit with tqparent and name
+    * Creates a PMSlopeEdit with parent and name
     */
-   PMSlopeEdit( TQWidget* tqparent, const char* name = 0 );
+   PMSlopeEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

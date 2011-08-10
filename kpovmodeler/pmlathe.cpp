@@ -261,9 +261,9 @@ void PMLathe::setPoints( const TQValueList<PMVector>& points )
    }
 }
 
-PMDialogEditBase* PMLathe::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMLathe::editWidget( TQWidget* parent ) const
 {
-   return new PMLatheEdit( tqparent );
+   return new PMLatheEdit( parent );
 }
 
 void PMLathe::createMemento( )

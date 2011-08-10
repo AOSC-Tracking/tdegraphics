@@ -32,7 +32,7 @@ class SearchWidget : public KToolBar
     Q_OBJECT
   TQ_OBJECT
     public:
-        SearchWidget( TQWidget *tqparent, KPDFDocument *document );
+        SearchWidget( TQWidget *parent, KPDFDocument *document );
         void clearText();
 
     private:

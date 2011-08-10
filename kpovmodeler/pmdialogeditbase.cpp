@@ -95,8 +95,8 @@ const TQString c_boxCode = TQString(
 const TQString c_globalSettingsCode = TQString(
    "global_settings { assumed_gamma %1 }\n" );
 
-PMDialogEditBase::PMDialogEditBase( TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+PMDialogEditBase::PMDialogEditBase( TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    m_pDisplayedObject = 0;
    m_pPart = 0;
@@ -318,7 +318,7 @@ void PMDialogEditBase::findTextures( PMObject*& global, PMObject*& local ) const
    global = 0;
    local = 0;
 
-   for( o = m_pDisplayedObject; o; o = o->tqparent( ) )
+   for( o = m_pDisplayedObject; o; o = o->parent( ) )
    {
       if( o->type( ) == "Material" || o->type( ) == "Interior" ||
           o->type( ) == "Texture" || o->type( ) == "Pigment" ||
@@ -427,7 +427,7 @@ void PMDialogEditBase::slotTexturePreview( )
          PMObject* otr = o;
 
          // find the scene
-         while( otr->tqparent( ) ) otr = otr->tqparent( );
+         while( otr->parent( ) ) otr = otr->parent( );
 
          for( otr = otr->firstChild( ); otr && ( numDeclares > 0 );
               otr = otr->nextSibling( ) )

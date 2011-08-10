@@ -76,7 +76,7 @@ class ScanPackager : public KFileTreeView
     Q_OBJECT
   TQ_OBJECT
 public:
-    ScanPackager( TQWidget *tqparent);
+    ScanPackager( TQWidget *parent);
     ~ScanPackager();
     virtual TQString getImgName( TQString name_on_disk );
 
@@ -143,7 +143,7 @@ private:
    KFileTreeViewItem *spFindItem( SearchType type, const TQString name, const KFileTreeBranch* branch = 0 );
    TQString       itemDirectory( const KFileTreeViewItem*, bool relativ = false ) const;
 
-   // int 	        readDir( TQListViewItem *tqparent, TQString dir_to_read );
+   // int 	        readDir( TQListViewItem *parent, TQString dir_to_read );
     void         showContextMenu( TQPoint p, bool show_folder = true );
 
     TQString      m_currImportDir;

@@ -102,9 +102,9 @@ void PMRotate::setRotation( const PMVector& p )
    }
 }
 
-PMDialogEditBase* PMRotate::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMRotate::editWidget( TQWidget* parent ) const
 {
-   return new PMRotateEdit( tqparent );
+   return new PMRotateEdit( parent );
 }
 
 void PMRotate::restoreMemento( PMMemento* s )

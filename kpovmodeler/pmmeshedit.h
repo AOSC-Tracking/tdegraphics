@@ -40,9 +40,9 @@ class PMMeshEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMMeshEdit with tqparent and name
+    * Creates a PMMeshEdit with parent and name
     */
-   PMMeshEdit( TQWidget* tqparent, const char* name = 0 );
+   PMMeshEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

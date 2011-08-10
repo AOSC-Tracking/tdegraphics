@@ -456,12 +456,12 @@ store_doc_setup(ByteStream &str)
       write(str,
             "%% -- procs for foreground layer\n"
             "/g {gsave 0 0 0 0 5 index 5 index setcachedevice\n"
-            "    true [1 0 0 1 0 0] 5 4 roll imagetqmask grestore\n"
+            "    true [1 0 0 1 0 0] 5 4 roll imagemask grestore\n"
             "} bind def\n"
             "/gn {gsave 0 0 0 0 6 index 6 index setcachedevice\n"
             "  true [1 0 0 1 0 0] 3 2 roll 5 1 roll \n"
             "  { 1 sub 0 index 2 add 1 index  1 add roll\n"
-            "  } imagetqmask grestore pop \n"
+            "  } imagemask grestore pop \n"
             "} bind def\n"
             "/c {setcolor rmoveto glyphshow} bind def\n"
             "/s {rmoveto glyphshow} bind def\n"
@@ -1180,22 +1180,22 @@ print_fg(ByteStream &str,
       {  
         unsigned char * row_bits = (*bitmap)[current_row];
         unsigned char acc = 0;
-        unsigned char tqmask = 0;
+        unsigned char mask = 0;
         for(int current_col=0; current_col<columns; current_col++)
         {
-          if (tqmask == 0)
-            tqmask = 0x80;
+          if (mask == 0)
+            mask = 0x80;
           if (row_bits[current_col])
-            acc |= tqmask;
-          tqmask >>= 1;
-          if (tqmask == 0)
+            acc |= mask;
+          mask >>= 1;
+          if (mask == 0)
           {
             *s=acc;
             s++;
-            acc = tqmask = 0;
+            acc = mask = 0;
           }
         }
-        if (tqmask != 0)
+        if (mask != 0)
         {
           *s=acc;
           s++;
@@ -1584,16 +1584,16 @@ print_image_lev1(ByteStream &str,
                 {
                   unsigned char *pix = (*bm)[y];
                   unsigned char acc = 0;
-                  unsigned char tqmask = 0;
+                  unsigned char mask = 0;
                   char *data;
                   for (int x=grectBand.width(); x>0; x--, pix++)
                     {
-                      if (tqmask == 0)
-                        tqmask = 0x80;
+                      if (mask == 0)
+                        mask = 0x80;
                       if (! *pix)
-                        acc |= tqmask;
-                      tqmask >>= 1;
-                      if (tqmask == 0)
+                        acc |= mask;
+                      mask >>= 1;
+                      if (mask == 0)
                         {
                           data = bin2hex[acc];
                           acc = 0;
@@ -1607,7 +1607,7 @@ print_image_lev1(ByteStream &str,
                             }
                         }
                     }
-                  if (tqmask != 0) 
+                  if (mask != 0) 
                     {
                       data = bin2hex[acc];
                       *buf_ptr++ = data[0];
@@ -2230,10 +2230,10 @@ create(void)
 void 
 DjVuToPS::DecodePort::
 notify_file_flags_changed(const DjVuFile *source, 
-                          long set_tqmask, long clr_tqmask)
+                          long set_mask, long clr_mask)
 {
   // WARNING! This function is called from another thread
-  if (set_tqmask & (DjVuFile::DECODE_OK | 
+  if (set_mask & (DjVuFile::DECODE_OK | 
                   DjVuFile::DECODE_FAILED | 
                   DjVuFile::DECODE_STOPPED ))
     {

@@ -60,7 +60,7 @@ public:
     enum tqStatus { NeedCollection, CanSearch, InProgress };
 
     MrmlPart( TQWidget *parentWidget, const char *widgetName,
-              TQObject *tqparent, const char *name, const TQStringList& args );
+              TQObject *parent, const char *name, const TQStringList& args );
     ~MrmlPart();
 
     TQString sessionId() const { return m_sessionId; }
@@ -162,7 +162,7 @@ public:
 protected:
     virtual KParts::Part * createPartObject( TQWidget *parentWidget = 0,
                                         const char *widgetName = 0,
-                                        TQObject *tqparent = 0,
+                                        TQObject *parent = 0,
                                         const char *name = 0,
                                         const char *classname = "KParts::Part",
                                         const TQStringList& args = TQStringList() );

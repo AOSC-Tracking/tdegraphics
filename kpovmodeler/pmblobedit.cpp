@@ -25,8 +25,8 @@
 #include <tqcheckbox.h>
 #include <klocale.h>
 
-PMBlobEdit::PMBlobEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMBlobEdit::PMBlobEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

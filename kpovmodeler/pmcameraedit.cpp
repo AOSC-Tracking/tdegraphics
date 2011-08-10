@@ -30,8 +30,8 @@
 #include <kmessagebox.h>
 
 
-PMCameraEdit::PMCameraEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMCameraEdit::PMCameraEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

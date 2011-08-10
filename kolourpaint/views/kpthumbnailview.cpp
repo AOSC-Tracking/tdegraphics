@@ -39,12 +39,12 @@ kpThumbnailView::kpThumbnailView (kpDocument *document,
         kpViewManager *viewManager,
         kpView *buddyView,
         kpViewScrollableContainer *scrollableContainer,
-        TQWidget *tqparent, const char *name)
+        TQWidget *parent, const char *name)
 
     : kpView (document, toolToolBar, viewManager,
               buddyView,
               scrollableContainer,
-              tqparent, name)
+              parent, name)
 {
 }
 

@@ -357,7 +357,7 @@ void KPDFDocument::reparseConfig()
 
 TQWidget *KPDFDocument::widget() const
 {
-    return TQT_TQWIDGET(tqparent());
+    return TQT_TQWIDGET(parent());
 }
 
 bool KPDFDocument::isOpened() const

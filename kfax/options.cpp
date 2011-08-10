@@ -48,8 +48,8 @@
 #include "kfax.h"
 #include "options.h"
 
-OptionsDialog::OptionsDialog( TQWidget *tqparent, const char *name)
-    : KDialogBase( tqparent, name, true, i18n("Configure"), Ok|Cancel)
+OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
+    : KDialogBase( parent, name, true, i18n("Configure"), Ok|Cancel)
 {
   TQWidget *mainWidget = new TQWidget(this);
   setMainWidget(mainWidget);

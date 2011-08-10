@@ -33,8 +33,8 @@
 
 #include "generalwidget.h"
 
-GeneralWidget::GeneralWidget( TQWidget *tqparent, const char *name )
-  : TQWidget( tqparent, name )
+GeneralWidget::GeneralWidget( TQWidget *parent, const char *name )
+  : TQWidget( parent, name )
 {
   TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
   tqlayout->setSpacing( KDialog::spacingHint() );

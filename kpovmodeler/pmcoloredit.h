@@ -42,7 +42,7 @@ public:
    /**
     * Creates an edit widget for rgbft colors.
     */
-   PMColorEdit( bool filterAndTransmit, TQWidget* tqparent, const char* name = 0 );
+   PMColorEdit( bool filterAndTransmit, TQWidget* parent, const char* name = 0 );
    
    /**
     * Sets the displayed color

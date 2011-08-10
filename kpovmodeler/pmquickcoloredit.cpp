@@ -26,8 +26,8 @@
 #include <klocale.h>
 
 
-PMQuickColorEdit::PMQuickColorEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMQuickColorEdit::PMQuickColorEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

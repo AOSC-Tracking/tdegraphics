@@ -87,9 +87,9 @@ typedef KGenericFactory<KPngPlugin> PngFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"))
 
-KPngPlugin::KPngPlugin(TQObject *tqparent, const char *name,
+KPngPlugin::KPngPlugin(TQObject *parent, const char *name,
                        const TQStringList &args)
-    : KFilePlugin(tqparent, name, args)
+    : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "png plugin\n";
 

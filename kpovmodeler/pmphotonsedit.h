@@ -41,9 +41,9 @@ class PMPhotonsEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMPhotonsEdit with tqparent and name
+    * Creates a PMPhotonsEdit with parent and name
     */
-   PMPhotonsEdit( TQWidget* tqparent, const char* name = 0 );
+   PMPhotonsEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

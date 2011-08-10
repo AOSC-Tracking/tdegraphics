@@ -72,10 +72,10 @@ public:
     TQValueList<TQRect> highlightRects;
 };
 
-ImageCanvas::ImageCanvas(TQWidget *tqparent,
+ImageCanvas::ImageCanvas(TQWidget *parent,
 			 const TQImage *start_image,
 			 const char *name 	):
-   TQScrollView( tqparent, name ),
+   TQScrollView( parent, name ),
    m_contextMenu(0)
 {
     d = new ImageCanvasPrivate();

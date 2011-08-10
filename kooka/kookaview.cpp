@@ -82,7 +82,7 @@
 #define STARTUP_IMG_SELECTION   "SelectedImageOnStartup"
 
 
-KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceToUse)
+KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToUse)
    : TQObject(),
      m_ocrResultImg(0),
      ocrFabric(0),
@@ -93,21 +93,21 @@ KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceT
      m_dockRecent(0),
      m_dockPreview(0),
      m_dockOCRText(0),
-     m_mainWindow(tqparent),
+     m_mainWindow(parent),
      m_ocrResEdit(0)
 {
    KIconLoader *loader = KGlobal::iconLoader();
    scan_params = 0L;
    preview_canvas = 0L;
 
-   m_mainDock = tqparent->createDockWidget( "Kookas MainDock",
+   m_mainDock = parent->createDockWidget( "Kookas MainDock",
                                           loader->loadIcon( "folder_image", KIcon::Small ),
                                           0L, i18n("Image Viewer"));
    m_mainDock->setEnableDocking(KDockWidget::DockNone );
    m_mainDock->setDockSite( KDockWidget::DockFullSite );
 
-   tqparent->setView( m_mainDock);
-   tqparent->setMainDockWidget( m_mainDock);
+   parent->setView( m_mainDock);
+   parent->setMainDockWidget( m_mainDock);
 
    img_canvas  = new ImageCanvas( m_mainDock );
    img_canvas->setMinimumSize(100,200);
@@ -121,7 +121,7 @@ KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceT
    m_mainDock->setWidget( img_canvas );
 
    /** Thumbview **/
-   m_dockThumbs = tqparent->createDockWidget( "Thumbs",
+   m_dockThumbs = parent->createDockWidget( "Thumbs",
 					    loader->loadIcon( "thumbnail", KIcon::Small ),
 					    0L,  i18n("Thumbnails"));
    m_dockThumbs->setDockSite(KDockWidget::DockFullSite );
@@ -136,7 +136,7 @@ KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceT
 
    /** Packager Dock **/
    /* A new packager to contain the already scanned images */
-   m_dockPackager = tqparent->createDockWidget( "Scanpackager",
+   m_dockPackager = parent->createDockWidget( "Scanpackager",
 					    loader->loadIcon( "palette_color", KIcon::Small ),
 					    0L, i18n("Gallery"));
    m_dockPackager->setDockSite(KDockWidget::DockFullSite);
@@ -155,7 +155,7 @@ KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceT
    /*
     * Create a Kombobox that holds the last folders visible even on the preview page
     */
-   m_dockRecent  = tqparent->createDockWidget( "Recent",
+   m_dockRecent  = parent->createDockWidget( "Recent",
 					     loader->loadIcon( "image", KIcon::Small ),
 					     0L, i18n("Gallery Folders"));
 
@@ -184,7 +184,7 @@ KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceT
 	    packager, TQT_SLOT(slotSelectDirectory( const TQString& )));
 
    /* the object from the kscan lib to handle low level scanning */
-   m_dockScanParam = tqparent->createDockWidget( "Scan Parameter",
+   m_dockScanParam = parent->createDockWidget( "Scan Parameter",
  					     loader->loadIcon( "folder", KIcon::Small ),
  					     0L, i18n("Scan Parameter"));
    //
@@ -203,7 +203,7 @@ KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceT
     * the complete scanner options dialog
     * scan_params must be zero for that */
 
-   m_dockPreview = tqparent->createDockWidget( "Preview ",
+   m_dockPreview = parent->createDockWidget( "Preview ",
 					   loader->loadIcon( "viewmag", KIcon::Small ),
 					   0L, i18n("Scan Preview"));
 
@@ -222,7 +222,7 @@ KookaView::KookaView( KParts::DockMainWindow *tqparent, const TQCString& deviceT
 
    /* Create a text editor part for ocr results */
 
-   m_dockOCRText = tqparent->createDockWidget( "OCRResults",
+   m_dockOCRText = parent->createDockWidget( "OCRResults",
                                              loader->loadIcon("edit", KIcon::Small ),
                                              0L, i18n("OCR Result Text"));
    // m_textEdit
@@ -876,7 +876,7 @@ void KookaView::slShowThumbnails(KFileTreeViewItem *dirKfi, bool forceRedraw )
       }
       else
       {
-	 kftvi = static_cast<KFileTreeViewItem*>(static_cast<TQListViewItem*>(kftvi)->tqparent());
+	 kftvi = static_cast<KFileTreeViewItem*>(static_cast<TQListViewItem*>(kftvi)->parent());
 	 dirKfi = kftvi;
 	 forceRedraw = true;
 	 packager->setSelected( static_cast<TQListViewItem*>(dirKfi), true );

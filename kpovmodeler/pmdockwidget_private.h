@@ -44,7 +44,7 @@ class PMDockSplitter : public TQWidget
   Q_OBJECT
   TQ_OBJECT
 public:
-  PMDockSplitter(TQWidget *tqparent= 0, const char *name= 0, Qt::Orientation orient=Qt::Vertical, int pos= 50, bool highResolution=false);  
+  PMDockSplitter(TQWidget *parent= 0, const char *name= 0, Qt::Orientation orient=Qt::Vertical, int pos= 50, bool highResolution=false);  
   virtual ~PMDockSplitter(){};
 
   void activate(TQWidget *c0, TQWidget *c1 = 0L);
@@ -99,7 +99,7 @@ class PMDockButton_Private : public TQPushButton
   Q_OBJECT
   TQ_OBJECT
 public:
-  PMDockButton_Private( TQWidget *tqparent=0, const char *name=0 );
+  PMDockButton_Private( TQWidget *parent=0, const char *name=0 );
   ~PMDockButton_Private();
 
 protected:

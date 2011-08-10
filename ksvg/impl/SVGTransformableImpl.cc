@@ -87,8 +87,8 @@ SVGMatrixImpl *SVGTransformableImpl::getCTM()
 
 	if(!parentNde.isNull() && parentNde.nodeType() != DOM::Node::DOCUMENT_NODE)
 	{
-		SVGElementImpl *tqparent = element->ownerDoc()->getElementFromHandle(parentNde.handle());
-		SVGLocatableImpl *locatableParent = dynamic_cast<SVGLocatableImpl *>(tqparent);
+		SVGElementImpl *parent = element->ownerDoc()->getElementFromHandle(parentNde.handle());
+		SVGLocatableImpl *locatableParent = dynamic_cast<SVGLocatableImpl *>(parent);
 
 		if(locatableParent)
 		{

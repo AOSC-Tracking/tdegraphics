@@ -64,7 +64,7 @@ public:
    /**
     * Returns a new @ref PMTextureEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
    /** */
    virtual TQString pixmap( ) const { return TQString( "pmtexture" ); }
 

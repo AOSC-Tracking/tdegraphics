@@ -685,7 +685,7 @@ void kpSelection::paintOpaqueText (TQPixmap *destPixmap, const TQRect &docRect) 
     TQBitmap destPixmapMask;
     TQPainter destPixmapPainter, destPixmapMaskPainter;
 
-    if (destPixmap->tqmask ())
+    if (destPixmap->mask ())
     {
         if (m_textStyle.effectiveBackgroundColor ().isTransparent ())
         {
@@ -701,7 +701,7 @@ void kpSelection::paintOpaqueText (TQPixmap *destPixmap, const TQRect &docRect) 
                     m_textStyle.foregroundColor ().toTQColor ()));
         }
 
-        destPixmapMask = *destPixmap->tqmask ();
+        destPixmapMask = *destPixmap->mask ();
         destPixmapMaskPainter.begin (&destPixmapMask);
         destPixmapMaskPainter.translate (-docRect.x (), -docRect.y ());
         destPixmapMaskPainter.setPen (TQt::color1/*opaque*/);
@@ -782,7 +782,7 @@ TQPixmap kpSelection::transparentForegroundTextPixmap () const
     // TQt::color0/*transparent*/ (but TQt::color1 seems Ok).
     // So we draw in a contrasting color to the background so that
     // we can identify the transparent pixels for manually creating
-    // the tqmask.
+    // the mask.
     pixmapPainter.setPen (
         TQColor (mostContrastingRGB (m_textStyle.effectiveBackgroundColor ().toTQRgb () & TQRGB_MASK)));
     pixmapPainter.setFont (font);
@@ -1252,7 +1252,7 @@ void kpSelection::calculateTransparencyMask ()
     if (isText ())
     {
     #if DEBUG_KP_SELECTION
-        kdDebug () << "\ttext - no need for transparency tqmask" << endl;
+        kdDebug () << "\ttext - no need for transparency mask" << endl;
     #endif
         m_transparencyMask.resize (0, 0);
         return;
@@ -1261,7 +1261,7 @@ void kpSelection::calculateTransparencyMask ()
     if (!m_pixmap)
     {
     #if DEBUG_KP_SELECTION
-        kdDebug () << "\tno pixmap - no need for transparency tqmask" << endl;
+        kdDebug () << "\tno pixmap - no need for transparency mask" << endl;
     #endif
         m_transparencyMask.resize (0, 0);
         return;
@@ -1270,7 +1270,7 @@ void kpSelection::calculateTransparencyMask ()
     if (m_transparency.isOpaque ())
     {
     #if DEBUG_KP_SELECTION
-        kdDebug () << "\topaque - no need for transparency tqmask" << endl;
+        kdDebug () << "\topaque - no need for transparency mask" << endl;
     #endif
         m_transparencyMask.resize (0, 0);
         return;
@@ -1433,7 +1433,7 @@ void kpSelection::flip (bool horiz, bool vert)
     if (!m_transparencyMask.isNull ())
     {
     #if DEBUG_KP_SELECTION && 1
-        kdDebug () << "\thave transparency tqmask - flipping that" << endl;
+        kdDebug () << "\thave transparency mask - flipping that" << endl;
     #endif
         kpPixmapFX::flip (TQT_TQPIXMAP(&m_transparencyMask), horiz, vert);
     }

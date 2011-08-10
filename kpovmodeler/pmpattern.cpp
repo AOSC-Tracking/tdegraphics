@@ -982,9 +982,9 @@ void PMPattern::setDepth( const double c )
    }
 }
 
-PMDialogEditBase* PMPattern::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMPattern::editWidget( TQWidget* parent ) const
 {
-   return new PMPatternEdit( tqparent );
+   return new PMPatternEdit( parent );
 }
 
 void PMPattern::restoreMemento( PMMemento* s )

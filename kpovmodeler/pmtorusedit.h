@@ -39,9 +39,9 @@ class PMTorusEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSphereEdit with tqparent and name
+    * Creates a PMSphereEdit with parent and name
     */
-   PMTorusEdit( TQWidget* tqparent, const char* name = 0 );
+   PMTorusEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

@@ -23,8 +23,8 @@
 #include <tqcombobox.h>
 #include <klocale.h>
 
-PMDetailObjectEdit::PMDetailObjectEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMDetailObjectEdit::PMDetailObjectEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

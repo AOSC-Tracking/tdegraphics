@@ -131,9 +131,9 @@ TQColor kpEffectFlattenWidget::s_lastColor2;
 
 kpEffectFlattenWidget::kpEffectFlattenWidget (bool actOnSelection,
                                               kpMainWindow *mainWindow,
-                                              TQWidget *tqparent,
+                                              TQWidget *parent,
                                               const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
     if (!s_lastColor1.isValid () || !s_lastColor2.isValid ())
     {

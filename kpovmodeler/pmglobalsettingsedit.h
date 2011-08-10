@@ -43,9 +43,9 @@ class PMGlobalSettingsEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMGlobalSettingsEdit with tqparent and name
+    * Creates a PMGlobalSettingsEdit with parent and name
     */
-   PMGlobalSettingsEdit( TQWidget* tqparent, const char* name = 0 );
+   PMGlobalSettingsEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

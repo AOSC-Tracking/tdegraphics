@@ -24,15 +24,15 @@
 typedef KGenericFactory<KViewEffects> KViewEffectsFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_effectsplugin, KViewEffectsFactory( "kvieweffectsplugin" ) )
 
-KViewEffects::KViewEffects( TQObject* tqparent, const char* name, const TQStringList & )
-	: Plugin( tqparent, name )
+KViewEffects::KViewEffects( TQObject* parent, const char* name, const TQStringList & )
+	: Plugin( parent, name )
 	, m_gamma( 0.5 ), m_lastgamma( -1.0 )
 	, m_opacity( 50 ), m_lastopacity( -1 )
 	, m_intensity( 50 ), m_lastintensity( -1 )
 	, m_color( white )
 	, m_image( 0 )
 {
-	TQObjectList * viewerList = tqparent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )

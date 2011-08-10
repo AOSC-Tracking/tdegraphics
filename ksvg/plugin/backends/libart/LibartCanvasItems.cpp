@@ -252,7 +252,7 @@ void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *st
 
 		TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-		TQByteArray tqmask = SVGMaskElementImpl::maskRectangle(tqshape, screenBBox);
+		TQByteArray mask = SVGMaskElementImpl::maskRectangle(tqshape, screenBBox);
 
 		if(paintType(style) == SVG_PAINTTYPE_URI)
 		{
@@ -263,11 +263,11 @@ void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *st
 				pserver->setBBoxTarget(tqshape);
 				if(!pserver->finalized())
 					pserver->finalizePaintServer();
-				pserver->render(canvas, clippedSvp, opacity(style), tqmask, screenBBox);
+				pserver->render(canvas, clippedSvp, opacity(style), mask, screenBBox);
 			}
 		}
 		else
-			canvas->drawSVP(clippedSvp, m_color, tqmask, screenBBox);
+			canvas->drawSVP(clippedSvp, m_color, mask, screenBBox);
 	}
 
 	art_svp_free(clippedSvp);
@@ -1899,7 +1899,7 @@ void LibartGradient::reference(const TQString &)
 {
 }
 
-void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox)
+void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
 {
 	if(!m_stops.isEmpty())
 	{
@@ -2022,9 +2022,9 @@ void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 		art_render_svp(render, svp);
 		art_ksvg_render_gradient_linear(render, linear, ART_FILTER_HYPER);
 
-		if(tqmask.data())
+		if(mask.data())
 			art_render_mask(render, screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1,
-				(const art_u8 *)tqmask.data(), screenBBox.width());
+				(const art_u8 *)mask.data(), screenBBox.width());
 
 		art_render_invoke(render);
 
@@ -2032,7 +2032,7 @@ void LibartLinearGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 	}
 }
 
-void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox)
+void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
 {
 	if(!m_stops.isEmpty())
 	{
@@ -2158,9 +2158,9 @@ void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 		art_render_svp(render, svp);
 		art_ksvg_render_gradient_radial(render, radial, ART_FILTER_HYPER);
 
-		if(tqmask.data())
+		if(mask.data())
 			art_render_mask(render, screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1,
-				(const art_u8 *)tqmask.data(), screenBBox.width());
+				(const art_u8 *)mask.data(), screenBBox.width());
 
 		art_render_invoke(render);
 
@@ -2184,7 +2184,7 @@ void LibartPattern::reference(const TQString &href)
 	m_pattern->reference(href);
 }
 
-void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray tqmask, TQRect screenBBox)
+void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArray mask, TQRect screenBBox)
 {
 	SVGPatternElementImpl::Tile tile = m_pattern->createTile(getBBoxTarget());
 
@@ -2202,7 +2202,7 @@ void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArra
 
 		int alpha = int(opacity * 255 + 0.5);
 
-		ksvg_art_rgb_texture(svp, c->renderingBuffer() + screenBBox.x() * c->nrChannels() + screenBBox.y() * c->rowStride(), screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1, c->rowStride(), c->nrChannels(), tile.image().bits(), tile.image().width(), tile.image().height(), tile.image().width() * 4, affine, ART_FILTER_NEAREST, 0L, alpha, (art_u8 *)tqmask.data());
+		ksvg_art_rgb_texture(svp, c->renderingBuffer() + screenBBox.x() * c->nrChannels() + screenBBox.y() * c->rowStride(), screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1, c->rowStride(), c->nrChannels(), tile.image().bits(), tile.image().width(), tile.image().height(), tile.image().width() * 4, affine, ART_FILTER_NEAREST, 0L, alpha, (art_u8 *)mask.data());
 	}
 }
 

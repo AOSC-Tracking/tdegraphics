@@ -38,8 +38,8 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 
-PMImageMapEdit::PMImageMapEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMImageMapEdit::PMImageMapEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

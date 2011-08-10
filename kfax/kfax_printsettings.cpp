@@ -24,8 +24,8 @@
 #include <tqlayout.h>
 #include <tqwhatsthis.h>
 
-KFAXPrintSettings::KFAXPrintSettings(TQWidget *tqparent, const char *name)
-: KPrintDialogPage(tqparent, name)
+KFAXPrintSettings::KFAXPrintSettings(TQWidget *parent, const char *name)
+: KPrintDialogPage(parent, name)
 {
 	TQString whatsThisScaleFullPage = i18n( "<qt>"
 		"<p><strong>'Ignore Paper Margins'</strong></p>"

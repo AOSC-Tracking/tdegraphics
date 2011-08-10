@@ -57,8 +57,8 @@ void PMTableItem::paint( TQPainter* p, const TQColorGroup& cg,
 }
 */
 
-PMVectorListEdit::PMVectorListEdit( TQWidget* tqparent, const char* name )
-      : TQTable( 1, 3, tqparent, name )
+PMVectorListEdit::PMVectorListEdit( TQWidget* parent, const char* name )
+      : TQTable( 1, 3, parent, name )
 {
    init( 3 );
 
@@ -70,8 +70,8 @@ PMVectorListEdit::PMVectorListEdit( TQWidget* tqparent, const char* name )
 
 PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
                                     const TQString& c3, const TQString& c4,
-                                    TQWidget* tqparent, const char* name )
-      : TQTable( 1, 4, tqparent, name )
+                                    TQWidget* parent, const char* name )
+      : TQTable( 1, 4, parent, name )
 {
    init( 4 );
 
@@ -83,9 +83,9 @@ PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
 }
 
 PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
-                                    const TQString& c3, TQWidget* tqparent,
+                                    const TQString& c3, TQWidget* parent,
                                     const char* name )
-      : TQTable( 1, 3, tqparent, name )
+      : TQTable( 1, 3, parent, name )
 {
    init( 3 );
 
@@ -96,8 +96,8 @@ PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
 }
 
 PMVectorListEdit::PMVectorListEdit( const TQString& c1, const TQString& c2,
-                                    TQWidget* tqparent, const char* name )
-      : TQTable( 1, 2, tqparent, name )
+                                    TQWidget* parent, const char* name )
+      : TQTable( 1, 2, parent, name )
 {
    init( 2 );
 
@@ -342,8 +342,8 @@ void PMVectorListEdit::blockSelectionUpdates( bool block )
 
 bool PMVectorListEdit::eventFilter( TQObject* o, TQEvent* e )
 {
-   if( e->type( ) == TQEvent::Wheel && tqparent( ) )
-      return TQApplication::sendEvent( tqparent( ), e );
+   if( e->type( ) == TQEvent::Wheel && parent( ) )
+      return TQApplication::sendEvent( parent( ), e );
    if( e->type( ) == TQEvent::MouseButtonPress
        && ( ( TQMouseEvent* ) e )->button( ) == Qt::RightButton )
    {

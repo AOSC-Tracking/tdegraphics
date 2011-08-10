@@ -59,9 +59,9 @@ SVGShapeImpl::~SVGShapeImpl()
 
 bool SVGShapeImpl::directRender()
 {
-	SVGShapeImpl *tqparent = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(parentNode().handle()));
-	if(tqparent)
-		return tqparent->directRender();
+	SVGShapeImpl *parent = dynamic_cast<SVGShapeImpl *>(ownerDoc()->getElementFromHandle(parentNode().handle()));
+	if(parent)
+		return parent->directRender();
 	else
 		return true;
 }

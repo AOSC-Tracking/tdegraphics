@@ -80,9 +80,9 @@ void PMLooksLike::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMLooksLike::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMLooksLike::editWidget( TQWidget* parent ) const
 {
-   return new PMNamedObjectEdit( tqparent );
+   return new PMNamedObjectEdit( parent );
 }
 
 void PMLooksLike::restoreMemento( PMMemento* s )

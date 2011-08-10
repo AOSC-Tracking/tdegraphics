@@ -143,9 +143,9 @@ void PMComment::readAttributes( const PMXMLHelper& h )
       m_text = e.toText( ).data( );
 }
 
-PMDialogEditBase* PMComment::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMComment::editWidget( TQWidget* parent ) const
 {
-   return new PMCommentEdit( tqparent );
+   return new PMCommentEdit( parent );
 }
 
 void PMComment::restoreMemento( PMMemento* s )

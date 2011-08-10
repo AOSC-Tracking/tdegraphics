@@ -183,26 +183,26 @@ void KSANEOCR::slLineBox( const TQRect& )
  * starts visual ocr process. Depending on the ocr engine, this function creates
  * a new dialog, and shows it.
  */
-bool KSANEOCR::startOCRVisible( TQWidget *tqparent )
+bool KSANEOCR::startOCRVisible( TQWidget *parent )
 {
    if( visibleOCRRunning ) return( false );
    bool res = true;
 
-   m_parent = tqparent;
+   m_parent = parent;
 
    if( m_ocrEngine == GOCR )
    {
-       m_ocrProcessDia = new KGOCRDialog ( tqparent, m_spellInitialConfig );
+       m_ocrProcessDia = new KGOCRDialog ( parent, m_spellInitialConfig );
    }
    else if( m_ocrEngine == OCRAD )
    {
-       m_ocrProcessDia = new ocradDialog( tqparent, m_spellInitialConfig );
+       m_ocrProcessDia = new ocradDialog( parent, m_spellInitialConfig );
    }
    else if( m_ocrEngine == KADMOS )
    {
 #ifdef HAVE_KADMOS
 /*** Kadmos Engine OCR ***/
-       m_ocrProcessDia = new KadmosDialog( tqparent, m_spellInitialConfig );
+       m_ocrProcessDia = new KadmosDialog( parent, m_spellInitialConfig );
 #else
        KMessageBox::sorry(0, i18n("This version of Kooka was not compiled with KADMOS support.\n"
            "Please select another OCR engine in Kooka's options dialog."));

@@ -27,8 +27,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMJuliaFractalEdit::PMJuliaFractalEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMJuliaFractalEdit::PMJuliaFractalEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

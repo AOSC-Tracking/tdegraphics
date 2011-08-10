@@ -99,10 +99,10 @@ void PMSphere::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMDialogEditBase* PMSphere::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMSphere::editWidget( TQWidget* parent ) const
 {
 
- return new PMSphereEdit( tqparent );
+ return new PMSphereEdit( parent );
 }
 
 void PMSphere::restoreMemento( PMMemento* s )

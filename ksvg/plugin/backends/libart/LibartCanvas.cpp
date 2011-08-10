@@ -214,12 +214,12 @@ void LibartCanvas::drawImage(TQImage image, SVGStylableImpl *style, const SVGMat
 
 			TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-			TQByteArray tqmask = SVGMaskElementImpl::maskRectangle(tqshape, screenBBox);
+			TQByteArray mask = SVGMaskElementImpl::maskRectangle(tqshape, screenBBox);
 
 			double affine[6];
 			KSVGHelper::matrixToAffine(matrix, affine);
 
-			ksvg_art_rgb_affine_clip(clipSvp, m_buffer + x0 * nrChannels() + y0 * rowStride(), x0, y0, x1 + 1, y1 + 1, rowStride(), nrChannels(), image.bits(), image.width(), image.height(), image.width() * 4, affine, int(style->getOpacity() * 255), (const art_u8 *)tqmask.data());
+			ksvg_art_rgb_affine_clip(clipSvp, m_buffer + x0 * nrChannels() + y0 * rowStride(), x0, y0, x1 + 1, y1 + 1, rowStride(), nrChannels(), image.bits(), image.width(), image.height(), image.width() * 4, affine, int(style->getOpacity() * 255), (const art_u8 *)mask.data());
 		}
 
 		art_svp_free(imageBorder);
@@ -334,11 +334,11 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *tqshape)
 
 		if(!parentNode.isNull())
 		{
-			SVGElementImpl *tqparent = element->ownerDoc()->getElementFromHandle(parentNode.handle());
+			SVGElementImpl *parent = element->ownerDoc()->getElementFromHandle(parentNode.handle());
 
-			if(tqparent)
+			if(parent)
 			{
-				SVGShapeImpl *parentShape = dynamic_cast<SVGShapeImpl *>(tqparent);
+				SVGShapeImpl *parentShape = dynamic_cast<SVGShapeImpl *>(parent);
 
 				if(parentShape)
 				{
@@ -354,7 +354,7 @@ ArtSVP *LibartCanvas::clipSingleSVP(ArtSVP *svp, SVGShapeImpl *tqshape)
 	return clippedSvp;
 }
 
-void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, TQByteArray tqmask, TQRect screenBBox)
+void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, TQByteArray mask, TQRect screenBBox)
 {
 	int x0 = screenBBox.left();
 	int y0 = screenBBox.top();
@@ -363,13 +363,13 @@ void LibartCanvas::drawSVP(ArtSVP *svp, art_u32 color, TQByteArray tqmask, TQRec
 
 	if(m_nrChannels == 3)
 	{
-		if(tqmask.data())
-			art_ksvg_rgb_svp_alpha_tqmask(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 3 + y0 * 3 * m_width, m_width * 3, 0, (art_u8 *)tqmask.data());
+		if(mask.data())
+			art_ksvg_rgb_svp_alpha_mask(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 3 + y0 * 3 * m_width, m_width * 3, 0, (art_u8 *)mask.data());
 		else
 			art_rgb_svp_alpha(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 3 + y0 * 3 * m_width, m_width * 3, 0);
 	}
 	else
-		art_ksvg_rgba_svp_alpha(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 4 + y0 * 4 * m_width, m_width * 4, 0, (art_u8 *)tqmask.data());
+		art_ksvg_rgba_svp_alpha(svp, x0, y0, x1 + 1, y1 + 1, color, m_buffer + x0 * 4 + y0 * 4 * m_width, m_width * 4, 0, (art_u8 *)mask.data());
 }
 
 ArtSVP *LibartCanvas::copy_svp(const ArtSVP *svp)

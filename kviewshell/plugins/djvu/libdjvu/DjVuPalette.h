@@ -210,7 +210,7 @@ public:
 
 private:
   // Histogram
-  int tqmask;
+  int mask;
   GMap<int,int> *hist;
   // Quantization data
   struct PColor { unsigned char p[4]; };
@@ -240,7 +240,7 @@ DjVuPalette::histogram_clear()
 {
   delete hist;
   hist = 0;
-  tqmask = 0;
+  mask = 0;
 }
 
 inline void 
@@ -250,7 +250,7 @@ DjVuPalette::histogram_add(const unsigned char *bgr, int weight)
     {
       if (!hist || hist->size()>=0x4000) 
         allocate_hist();
-      int key = (bgr[0]<<16)|(bgr[1]<<8)|(bgr[2])|(tqmask);
+      int key = (bgr[0]<<16)|(bgr[1]<<8)|(bgr[2])|(mask);
       (*hist)[key] += weight;
     }
 }  
@@ -271,7 +271,7 @@ DjVuPalette::histogram_norm_and_add(const int *bgr, int weight)
       int p2 = bgr[2]/weight; if (p2>255) p2=255;
       if (!hist || hist->size()>=0x4000) 
         allocate_hist();
-      int key = (p0<<16)|(p1<<8)|(p2)|(tqmask);
+      int key = (p0<<16)|(p1<<8)|(p2)|(mask);
       (*hist)[key] += weight;
     }
 }

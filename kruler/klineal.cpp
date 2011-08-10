@@ -67,7 +67,7 @@ static const uchar cursorBits[] = {
 * create the thingy with no borders and set up
 * its members
 */
-KLineal::KLineal(TQWidget*tqparent,const char* name):KMainWindow(tqparent,name){
+KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
 	if (!name) {
 		name = "klineal";
 	}

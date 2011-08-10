@@ -39,7 +39,7 @@ public:
    /**
     * Default constructor
     */
-   PMPluginSettings( TQWidget* tqparent, const char* name = 0 );
+   PMPluginSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

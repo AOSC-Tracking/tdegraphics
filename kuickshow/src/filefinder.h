@@ -31,7 +31,7 @@ class FileFinder : public KLineEdit
   TQ_OBJECT
 
 public:
-    FileFinder( TQWidget *tqparent=0, const char *name=0 );
+    FileFinder( TQWidget *parent=0, const char *name=0 );
     ~FileFinder();
 
     KURLCompletion *completion() {

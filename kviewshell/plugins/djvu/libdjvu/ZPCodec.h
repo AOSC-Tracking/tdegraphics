@@ -716,7 +716,7 @@ ZPCodec::IWencoder(const bool bit)
 
    Adaptation on the other hand is a great simplification.  A good data
    compression program must (a) represent the data in order to make its
-   predictability aptqparent, and (b) perform the predictions and generate the
+   predictability apparent, and (b) perform the predictions and generate the
    code bits.  The ZP-Coder is an efficient and effortless solution for
    implementing task (b).
 

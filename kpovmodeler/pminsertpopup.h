@@ -39,13 +39,13 @@ public:
    /**
     * Creates a popup menu
     *
-    * @param tqparent The tqparent widget
+    * @param parent The parent widget
     * @param multipleObjects True if more than one object will be inserted
     * @param items Which items to display. Can be a bitwise combination
     *              of PMIFirstChild, PMILastChild, PMISibling.
     * @param name Internal name of the popup menu
     */
-   PMInsertPopup( TQWidget* tqparent, bool multipleObjects,
+   PMInsertPopup( TQWidget* parent, bool multipleObjects,
                   int items = PMIFirstChild | PMILastChild | PMISibling,
                   bool canInsertAllAsFirstChildren = true,
                   bool canInsertAllAsLastChildren = true,
@@ -59,7 +59,7 @@ public:
    /**
     * Popups a PMInsertPopup menu
     *
-    * @param tqparent The tqparent widget
+    * @param parent The parent widget
     * @param multipleObjects True if more than one object will be inserted
     * @param items Which items to display. Can be a bitwise combination
     *              of PMIFirstChild, PMILastChild, PMISibling.
@@ -70,7 +70,7 @@ public:
     *
     * Returns the selected item or 0 if no item was selected.
     */
-   static int choosePlace( TQWidget* tqparent, bool multipleObjects,
+   static int choosePlace( TQWidget* parent, bool multipleObjects,
                            int items = PMIFirstChild | PMILastChild
                            | PMISibling, 
                            bool canInsertAllAsFirstChildren = true,

@@ -160,9 +160,9 @@ void PMBlobCylinder::setStrength( double s )
    }
 }
 
-PMDialogEditBase* PMBlobCylinder::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBlobCylinder::editWidget( TQWidget* parent ) const
 {
-   return new PMBlobCylinderEdit( tqparent );
+   return new PMBlobCylinderEdit( parent );
 }
 
 void PMBlobCylinder::restoreMemento( PMMemento* s )

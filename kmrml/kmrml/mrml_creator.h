@@ -41,7 +41,7 @@ namespace MrmlCreator
     /**
      * Creates a <user-relevance-element> with the given attributes set.
      */
-    void createRelevanceElement( TQDomDocument& doc, TQDomElement& tqparent,
+    void createRelevanceElement( TQDomDocument& doc, TQDomElement& parent,
                                  const TQString& url, Relevance relevance );
 
 }

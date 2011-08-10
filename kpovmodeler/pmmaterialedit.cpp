@@ -25,8 +25,8 @@
 #include <klocale.h>
 
 
-PMMaterialEdit::PMMaterialEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMMaterialEdit::PMMaterialEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

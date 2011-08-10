@@ -236,9 +236,9 @@ void PMBlendMapModifiers::setWaveFormType( PMWaveFormType c )
    }
 }
 
-PMDialogEditBase* PMBlendMapModifiers::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBlendMapModifiers::editWidget( TQWidget* parent ) const
 {
-   return new PMBlendMapModifiersEdit( tqparent );
+   return new PMBlendMapModifiersEdit( parent );
 }
 
 void PMBlendMapModifiers::restoreMemento( PMMemento* s )

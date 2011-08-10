@@ -92,12 +92,12 @@ KInstance * PartFactory::instance()
 
 KParts::Part * PartFactory::createPartObject( TQWidget *parentWidget,
                                               const char *widgetName,
-                                              TQObject *tqparent,
+                                              TQObject *parent,
                                               const char *name,
                                               const char *,
                                               const TQStringList& args )
 {
-    return new MrmlPart( parentWidget, widgetName, tqparent, name, args );
+    return new MrmlPart( parentWidget, widgetName, parent, name, args );
 }
 
 
@@ -112,9 +112,9 @@ KParts::Part * PartFactory::createPartObject( TQWidget *parentWidget,
 uint MrmlPart::s_sessionId = 0;
 
 MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
-                    TQObject *tqparent, const char *name,
+                    TQObject *parent, const char *name,
                     const TQStringList& /* args */ )
-    : KParts::ReadOnlyPart( tqparent, name ),
+    : KParts::ReadOnlyPart( parent, name ),
       m_job( 0L ),
       m_status( NeedCollection )
 {

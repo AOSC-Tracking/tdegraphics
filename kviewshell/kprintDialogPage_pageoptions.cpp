@@ -20,8 +20,8 @@
 #include "kprintDialogPage_pageoptions.h"
 
   
-KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *tqparent, const char *name )
-  : KPrintDialogPage( tqparent, name )
+KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *parent, const char *name )
+  : KPrintDialogPage( parent, name )
 {
   setTitle( i18n("Page Size & Placement") );
 

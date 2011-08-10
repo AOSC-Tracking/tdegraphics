@@ -31,8 +31,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMLayoutSettings::PMLayoutSettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQHBoxLayout* htqlayout;
    TQVBoxLayout* vtqlayout;

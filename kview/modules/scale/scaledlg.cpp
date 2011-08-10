@@ -37,8 +37,8 @@
 
 #define ONEINCHINMM 2.54
 
-ScaleDlg::ScaleDlg( const TQSize & origsize, TQVBox * tqparent, const char * name )
-	: TQObject( tqparent, name )
+ScaleDlg::ScaleDlg( const TQSize & origsize, TQVBox * parent, const char * name )
+	: TQObject( parent, name )
 	, m_origsize( origsize )
 	, m_newsizeunit( 0 )
 	, m_newsizeunit2( 0 )
@@ -48,8 +48,8 @@ ScaleDlg::ScaleDlg( const TQSize & origsize, TQVBox * tqparent, const char * nam
 	, m_resx( 72 )
 	, m_resy( 72 )
 {
-	TQGroupBox * pixelgroup = new TQGroupBox( i18n( "Pixel Dimensions" ), tqparent );
-	TQGroupBox * printgroup = new TQGroupBox( i18n( "Print Size && Display Units" ), tqparent );
+	TQGroupBox * pixelgroup = new TQGroupBox( i18n( "Pixel Dimensions" ), parent );
+	TQGroupBox * printgroup = new TQGroupBox( i18n( "Print Size && Display Units" ), parent );
 
 	TQGridLayout * pixelgroupgrid = new TQGridLayout( pixelgroup, 1, 1,
 			KDialog::marginHint(), KDialog::spacingHint() );

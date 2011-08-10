@@ -35,7 +35,7 @@ class KViewBrowser : public KParts::Plugin
 	Q_OBJECT
   TQ_OBJECT
 public:
-	KViewBrowser( TQObject* tqparent, const char* name, const TQStringList & );
+	KViewBrowser( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewBrowser();
 
 private slots:

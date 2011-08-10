@@ -39,9 +39,9 @@ class PMCommentEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMCommentEdit with tqparent and name
+    * Creates a PMCommentEdit with parent and name
     */
-   PMCommentEdit( TQWidget* tqparent, const char* name = 0 );
+   PMCommentEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

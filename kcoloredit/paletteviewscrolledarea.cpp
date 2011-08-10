@@ -38,8 +38,8 @@
 
 PaletteViewScrolledArea::PaletteViewScrolledArea(const int defaultCellWidth,
 	const int defaultCellHeight, const int cellSpacing, TQScrollBar* scrollBar,
-	TQScrollBar* hScrollBar, KColorEditView* view, TQWidget* tqparent, const char* name)
-	: TQFrame(tqparent, name) {
+	TQScrollBar* hScrollBar, KColorEditView* view, TQWidget* parent, const char* name)
+	: TQFrame(parent, name) {
 	this->defaultCellWidth = defaultCellWidth;
 	this->defaultCellHeight = defaultCellHeight;
 	this->cellSpacing = cellSpacing;

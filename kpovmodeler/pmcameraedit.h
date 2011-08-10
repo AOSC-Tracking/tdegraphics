@@ -45,9 +45,9 @@ class PMCameraEdit : public PMNamedObjectEdit
    typedef PMNamedObjectEdit Base;
 public:
    /**
-    * Creates a PMCameraEdit with tqparent and name
+    * Creates a PMCameraEdit with parent and name
     */
-   PMCameraEdit( TQWidget* tqparent, const char* name = 0 );
+   PMCameraEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

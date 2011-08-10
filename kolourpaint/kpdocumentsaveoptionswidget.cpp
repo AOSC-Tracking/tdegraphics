@@ -62,15 +62,15 @@ const TQSize kpDocumentSaveOptionsPreviewDialog::s_pixmapLabelMinimumSize (25, 2
 
 
 kpDocumentSaveOptionsPreviewDialog::kpDocumentSaveOptionsPreviewDialog (
-        TQWidget *tqparent,
+        TQWidget *parent,
         const char *name)
-    : TQWidget (tqparent, name,
+    : TQWidget (parent, name,
                TQt::WType_TopLevel |
                TQt::WStyle_Customize |
                    TQt::WStyle_DialogBorder |
                    TQt::WStyle_Title),
 #if 0
-KDialogBase (tqparent, name, false/*non-modal*/,
+KDialogBase (parent, name, false/*non-modal*/,
                    i18n ("Save Preview"),
                    0/*no buttons*/),
 #endif
@@ -270,9 +270,9 @@ kpDocumentSaveOptionsWidget::kpDocumentSaveOptionsWidget (
         const TQPixmap &docPixmap,
         const kpDocumentSaveOptions &saveOptions,
         const kpDocumentMetaInfo &metaInfo,
-        TQWidget *tqparent, const char *name)
-    : TQWidget (tqparent, name),
-      m_visualParent (tqparent)
+        TQWidget *parent, const char *name)
+    : TQWidget (parent, name),
+      m_visualParent (parent)
 {
     init ();
     setDocumentSaveOptions (saveOptions);
@@ -281,9 +281,9 @@ kpDocumentSaveOptionsWidget::kpDocumentSaveOptionsWidget (
 }
 
 kpDocumentSaveOptionsWidget::kpDocumentSaveOptionsWidget (
-        TQWidget *tqparent, const char *name)
-    : TQWidget (tqparent, name),
-      m_visualParent (tqparent)
+        TQWidget *parent, const char *name)
+    : TQWidget (parent, name),
+      m_visualParent (parent)
 {
     init ();
 }

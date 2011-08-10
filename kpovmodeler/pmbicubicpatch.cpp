@@ -365,9 +365,9 @@ PMVector PMBicubicPatch::uvVector( int i ) const
    return PMVector( 0.0, 0.0 );
 }
 
-PMDialogEditBase* PMBicubicPatch::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMBicubicPatch::editWidget( TQWidget* parent ) const
 {
-   return new PMBicubicPatchEdit( tqparent );
+   return new PMBicubicPatchEdit( parent );
 }
 
 void PMBicubicPatch::restoreMemento( PMMemento* s )

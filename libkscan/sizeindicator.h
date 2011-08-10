@@ -50,7 +50,7 @@ public:
     *  @param crit: Critical value, not yet used.
 
     */
-   SizeIndicator( TQWidget *tqparent, long thres = DEFAULT_THRESHOLD,
+   SizeIndicator( TQWidget *parent, long thres = DEFAULT_THRESHOLD,
 		  long crit = DEFAULT_CRITICAL );
    /**
     *  destructor does not really do much yet.

@@ -927,7 +927,7 @@ void kpCommandHistory::redo ()
         // Not completely obvious but what else can we do?
         //
         // Ignoring the request would not be intuitive for tools like
-        // Polygon & Polyline (where it's not always aptqparent to the user
+        // Polygon & Polyline (where it's not always apparent to the user
         // that s/he's still drawing a tqshape even though the mouse isn't
         // down).
         m_mainWindow->tool ()->cancelShapeInternal ();

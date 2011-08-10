@@ -58,7 +58,7 @@ class KGVPart: public KParts::ReadOnlyPart
   TQ_OBJECT
 public:
     KGVPart( TQWidget* parentWidget, const char* widgetName,
-             TQObject* tqparent, const char* name,
+             TQObject* parent, const char* name,
              const TQStringList& args = TQStringList() );
 
     virtual ~KGVPart();
@@ -234,7 +234,7 @@ class KGVBrowserExtension : public KParts::BrowserExtension
   TQ_OBJECT
     friend class KGVPart; // emits our signals
 public:
-    KGVBrowserExtension( KGVPart* tqparent );
+    KGVBrowserExtension( KGVPart* parent );
     virtual ~KGVBrowserExtension() {}
 
 public slots:

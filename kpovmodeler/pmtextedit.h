@@ -42,9 +42,9 @@ class PMTextEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMTextEdit with tqparent and name
+    * Creates a PMTextEdit with parent and name
     */
-   PMTextEdit( TQWidget* tqparent, const char* name = 0 );
+   PMTextEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

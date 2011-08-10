@@ -56,9 +56,9 @@
 typedef KParts::GenericFactory<KViewPart> KViewPartFactory;
 K_EXPORT_COMPONENT_FACTORY(kviewerpart, KViewPartFactory)
 
-KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
+KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
                      const char *name, const TQStringList& args)
-  : KViewPart_Iface(tqparent, name), showSidebar(0), saveAction(0), partManager(0),
+  : KViewPart_Iface(parent, name), showSidebar(0), saveAction(0), partManager(0),
     multiPageLibrary(TQString()), aboutDialog(0)
 {
   KGlobal::locale()->insertCatalogue("kviewshell");
@@ -161,7 +161,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *t
     emit setStatusBarText(TQString());
     return;
   }
-  // Make the KViewPart the tqparent of the MultiPage.
+  // Make the KViewPart the parent of the MultiPage.
   // So the Partmanager treats it as a nested KPart.
   insertChild(multiPage);
 
@@ -1491,8 +1491,8 @@ void KViewPart::slotEnableMoveTool(bool enable)
 }
 
 
-KViewPartExtension::KViewPartExtension(KViewPart *tqparent)
-  : KParts::BrowserExtension( tqparent, "KViewPartExtension")
+KViewPartExtension::KViewPartExtension(KViewPart *parent)
+  : KParts::BrowserExtension( parent, "KViewPartExtension")
 {
 }
 

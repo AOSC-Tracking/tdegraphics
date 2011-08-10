@@ -22,8 +22,8 @@
 #include <tqpainter.h>
 #include <tqcursor.h>
 
-PMDockSplitter::PMDockSplitter(TQWidget *tqparent, const char *name, Qt::Orientation orient, int pos, bool highResolution)
-: TQWidget(tqparent, name)
+PMDockSplitter::PMDockSplitter(TQWidget *parent, const char *name, Qt::Orientation orient, int pos, bool highResolution)
+: TQWidget(parent, name)
 {
   divider = 0L;
   child0 = 0L;
@@ -288,8 +288,8 @@ bool PMDockSplitter::highResolution() const
 
 
 /*************************************************************************/
-PMDockButton_Private::PMDockButton_Private( TQWidget *tqparent, const char * name )
-:TQPushButton( tqparent, name )
+PMDockButton_Private::PMDockButton_Private( TQWidget *parent, const char * name )
+:TQPushButton( parent, name )
 {
   moveMouse = false;
   setFocusPolicy( TQ_NoFocus );

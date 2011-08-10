@@ -37,8 +37,8 @@
 
 using namespace KMrml;
 
-MrmlView::MrmlView( TQWidget *tqparent, const char *name )
-    : TQScrollView( tqparent, name )
+MrmlView::MrmlView( TQWidget *parent, const char *name )
+    : TQScrollView( parent, name )
 {
     setStaticBackground( true );
     setResizePolicy( Manual );
@@ -103,11 +103,11 @@ MrmlViewItem * MrmlView::addItem( const KURL& url, const KURL& thumbURL,
 }
 
 void MrmlView::addRelevanceToQuery( TQDomDocument& document,
-                                    TQDomElement& tqparent )
+                                    TQDomElement& parent )
 {
     TQPtrListIterator<MrmlViewItem> it( m_items );
     for( ; it.current(); ++it ) {
-        it.current()->createRelevanceElement( document, tqparent );
+        it.current()->createRelevanceElement( document, parent );
     }
 }
 
@@ -439,13 +439,13 @@ bool MrmlViewItem::hitsPixmap( const TQPoint& pos ) const
 }
 
 void MrmlViewItem::createRelevanceElement( TQDomDocument& document,
-                                           TQDomElement& tqparent )
+                                           TQDomElement& parent )
 {
     int rel = m_combo->currentItem();
     if ( rel == Neutral )
         return;
 
-    MrmlCreator::createRelevanceElement( document, tqparent, m_url.url(),
+    MrmlCreator::createRelevanceElement( document, parent, m_url.url(),
         (rel == Relevant) ? MrmlCreator::Relevant : MrmlCreator::Irrelevant );
 }
 

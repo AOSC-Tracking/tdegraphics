@@ -32,10 +32,10 @@ class KSVGPluginFactory : public KParts::Factory
 Q_OBJECT
   TQ_OBJECT
 public:
-	KSVGPluginFactory(TQObject *tqparent = 0, const char *name = 0);
+	KSVGPluginFactory(TQObject *parent = 0, const char *name = 0);
 	virtual ~KSVGPluginFactory();
 	
-	virtual KParts::Part *createPartObject(TQWidget *parentWidget = 0, const char *widgetName = 0, TQObject *tqparent = 0, const char *name = 0, const char *classname = "KParts::Part", const TQStringList &args = TQStringList());
+	virtual KParts::Part *createPartObject(TQWidget *parentWidget = 0, const char *widgetName = 0, TQObject *parent = 0, const char *name = 0, const char *classname = "KParts::Part", const TQStringList &args = TQStringList());
 	
 	static KInstance *instance();
 
@@ -51,7 +51,7 @@ Q_OBJECT
 friend class KSVGPlugin;
 
 public:
-	KSVGPluginBrowserExtension(KSVGPlugin *tqparent);
+	KSVGPluginBrowserExtension(KSVGPlugin *parent);
 	virtual ~KSVGPluginBrowserExtension();
 };
 

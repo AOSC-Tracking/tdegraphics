@@ -148,10 +148,10 @@ public:
     /** Finds the smallest rectangles and appends them to the list. */
     void get_smallest(GList<GRect> &list) const;
     /** Finds the smallest rectangles and appends them to the list after 
-        padding the smallest unit to fit width or height for the tqparent rectangle
+        padding the smallest unit to fit width or height for the parent rectangle
         and adding the number of specified pixels. */
     void get_smallest(GList<GRect> &list,const int padding) const;
-    /// Find out this Zone's tqparent.
+    /// Find out this Zone's parent.
     const Zone *get_parent(void) const;
   private:
     friend class DjVuTXT;
@@ -161,9 +161,9 @@ public:
     unsigned int memuse() const;
     static const int version;
     void encode(const GP<ByteStream> &bs, 
-                const Zone * tqparent=0, const Zone * prev=0) const;
+                const Zone * parent=0, const Zone * prev=0) const;
     void decode(const GP<ByteStream> &bs, int maxtext,
-                const Zone * tqparent=0, const Zone * prev=0);
+                const Zone * parent=0, const Zone * prev=0);
   };
   /** Textual data for this page.  
       The content of this string is encoded using the UTF8 code.
@@ -207,9 +207,9 @@ public:
   GList<Zone*> find_text_in_rect(GRect target_rect, GUTF8String &text) const;
   /** Find the text specified by the rectangle. */
   GList<GRect> find_text_with_rect(const GRect &box, GUTF8String &text, const int padding=0) const;
-  /** Get all zones of zone type zone_type under node tqparent. 
+  /** Get all zones of zone type zone_type under node parent. 
       zone_list contains the return value. */
-  void get_zones(int zone_type, const Zone *tqparent, GList<Zone *> & zone_list) const;
+  void get_zones(int zone_type, const Zone *parent, GList<Zone *> & zone_list) const;
   /** Returns the number of bytes needed by this data structure. It's
       used by caching routines to estimate the size of a \Ref{DjVuImage}. */
   unsigned int get_memory_usage() const;

@@ -38,22 +38,22 @@ public:
    /**
     * Command that adds a new PMObject.
     *
-    * The object obj will be inserted as child of tqparent after
+    * The object obj will be inserted as child of parent after
     * the object after.
     *
     * If after is 0, the object becomes the first child.
     */
-   PMAddCommand( PMObject* obj, PMObject* tqparent, PMObject* after );
+   PMAddCommand( PMObject* obj, PMObject* parent, PMObject* after );
    
    /**
     * Command that adds a list of new PMObjects.
     *
-    * The object in the list will be inserted as tqchildren of tqparent after
+    * The object in the list will be inserted as tqchildren of parent after
     * the object after.
     *
     * If after is 0, the objects will be inserted as first tqchildren.
     */
-   PMAddCommand( const PMObjectList& list, PMObject* tqparent, PMObject* after );
+   PMAddCommand( const PMObjectList& list, PMObject* parent, PMObject* after );
    /**
     * Deletes the command. The inserted object will be deleted, if
     the command was not executed (or undo-ed) */

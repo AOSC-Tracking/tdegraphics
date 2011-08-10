@@ -39,9 +39,9 @@ class PMBoundedByEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMBoundedByEdit with tqparent and name
+    * Creates a PMBoundedByEdit with parent and name
     */
-   PMBoundedByEdit( TQWidget* tqparent, const char* name = 0 );
+   PMBoundedByEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

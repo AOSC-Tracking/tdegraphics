@@ -43,10 +43,10 @@ typedef KGenericFactory<KBmpPlugin> BmpFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_bmp, BmpFactory( "kfile_bmp" ))
 
-KBmpPlugin::KBmpPlugin(TQObject *tqparent, const char *name,
+KBmpPlugin::KBmpPlugin(TQObject *parent, const char *name,
                        const TQStringList &args)
 
-    : KFilePlugin(tqparent, name, args)
+    : KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-bmp" );
 

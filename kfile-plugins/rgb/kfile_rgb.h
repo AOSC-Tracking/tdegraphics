@@ -30,12 +30,12 @@ class KRgbPlugin : public KFilePlugin
   TQ_OBJECT
 
 public:
-	KRgbPlugin(TQObject *tqparent, const char *name, const TQStringList& args);
+	KRgbPlugin(TQObject *parent, const char *name, const TQStringList& args);
 	virtual bool readInfo(KFileMetaInfo& info, uint what);
 	virtual bool writeInfo(const KFileMetaInfo& info) const;
 	virtual TQValidator* createValidator(const TQString& mimetype,
 			const TQString &group, const TQString &key,
-			TQObject* tqparent, const char* name) const;
+			TQObject* parent, const char* name) const;
 
 };
 

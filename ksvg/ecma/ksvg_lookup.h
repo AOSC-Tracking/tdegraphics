@@ -37,7 +37,7 @@ public: \
     /* get() method, called by KSVGBridge::get */ \
     KJS::Value get(KJS::ExecState *exec, const KJS::Identifier &propertyName, const KJS::ObjectImp* bridge) const; \
     \
-    /* Called by lookupGet(). Auto-generated. Forwards to the tqparent which has the given property. */ \
+    /* Called by lookupGet(). Auto-generated. Forwards to the parent which has the given property. */ \
     KJS::Value getInParents(KJS::ExecState *exec, const KJS::Identifier &propertyName, const KJS::ObjectImp* bridge) const; \
     \
     KJS::Object prototype(KJS::ExecState *exec) const;\
@@ -59,7 +59,7 @@ public: \
     KSVG_GET_COMMON \
     virtual KJS::Value cache(KJS::ExecState *exec) const;
 
-// For classes without properties, but with a tqparent class to forward to
+// For classes without properties, but with a parent class to forward to
 #define KSVG_FORWARDGET \
 public: \
     \
@@ -127,7 +127,7 @@ namespace KSVG
 	 *
 	 * This method does it all (looking in the hashtable, checking for function
 	 * overrides, creating the function or retrieving from cache, calling
-	 * getValueProperty in case of a non-function property, forwarding to tqparent[s] if
+	 * getValueProperty in case of a non-function property, forwarding to parent[s] if
 	 * unknown property).
 	 *
 	 * Template arguments:
@@ -256,14 +256,14 @@ namespace KSVG
     } \
     const KJS::ClassInfo ClassProto::info = { ClassName, 0, &s_hashTable, 0 }; \
 
-// same as KSVG_IMPLEMENT_PROTOTYPE but with a tqparent class to forward calls to
+// same as KSVG_IMPLEMENT_PROTOTYPE but with a parent class to forward calls to
 // Not used within KSVG up to now - each class does a self proto lookup in generateddata.cpp
 #define KSVG_IMPLEMENT_PROTOTYPE_WITH_PARENT(ClassName,ClassProto,ClassFunc,ParentProto) \
     KJS::Value KSVG::ClassProto::get(KJS::ExecState *exec, const KJS::Identifier &propertyName) const \
     { \
       KJS::Value val = lookupGetFunction<ClassFunc,KJS::ObjectImp>(exec, propertyName, &s_hashTable, this ); \
       if ( val.type() != UndefinedType ) return val; \
-      /* Not found -> forward request to "tqparent" prototype */ \
+      /* Not found -> forward request to "parent" prototype */ \
       return ParentProto::self(exec).get( exec, propertyName ); \
     } \
     bool KSVG::ClassProto::hasProperty(KJS::ExecState *exec, const KJS::Identifier &propertyName) const \
@@ -310,7 +310,7 @@ namespace KSVG
 
 // To be used in all call() implementations!
 // Can't use if (!thisObj.inherits(&ClassName::s_classInfo) since we don't
-// use the (single-tqparent) inheritance of ClassInfo...
+// use the (single-parent) inheritance of ClassInfo...
 #define KSVG_CHECK_THIS(ClassName) KSVG_CHECK(ClassName, thisObj)
 
 #endif

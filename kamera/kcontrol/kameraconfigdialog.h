@@ -37,13 +37,13 @@ class KameraConfigDialog : public KDialogBase
   TQ_OBJECT
 public:
 	KameraConfigDialog(Camera *camera, CameraWidget *widget,
-			   TQWidget *tqparent = 0, const char *name = 0);
+			   TQWidget *parent = 0, const char *name = 0);
 
 private slots:
 	void slotOk();
 
 private:
-	void appendWidget(TQWidget *tqparent, CameraWidget *widget);
+	void appendWidget(TQWidget *parent, CameraWidget *widget);
 	void updateWidgetValue(CameraWidget *widget);
 	
 	TQMap<CameraWidget *, TQWidget *> m_wmap;

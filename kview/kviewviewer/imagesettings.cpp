@@ -24,8 +24,8 @@
 #include <klocale.h>
 #include <kdialog.h>
 
-ImageSettings::ImageSettings( TQWidget * tqparent, const char * name )
-	: KPrintDialogPage( tqparent, name )
+ImageSettings::ImageSettings( TQWidget * parent, const char * name )
+	: KPrintDialogPage( parent, name )
 	, m_pFitImage( 0 )
 {
 	setTitle( i18n( "Image Settings" ) );

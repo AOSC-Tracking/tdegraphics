@@ -40,9 +40,9 @@ class PMNormalEdit : public PMTextureBaseEdit
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMNormalEdit with tqparent and name
+    * Creates a PMNormalEdit with parent and name
     */
-   PMNormalEdit( TQWidget* tqparent, const char* name = 0 );
+   PMNormalEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

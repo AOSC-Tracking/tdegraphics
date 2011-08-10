@@ -126,9 +126,9 @@ void PMPlane::setDistance( double distance )
    }
 }
 
-PMDialogEditBase* PMPlane::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMPlane::editWidget( TQWidget* parent ) const
 {
-   return new PMPlaneEdit( tqparent );
+   return new PMPlaneEdit( parent );
 }
 
 void PMPlane::restoreMemento( PMMemento* s )

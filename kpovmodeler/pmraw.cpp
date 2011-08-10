@@ -104,9 +104,9 @@ void PMRaw::readAttributes( const PMXMLHelper& h )
       m_code = e.toText( ).data( );
 }
 
-PMDialogEditBase* PMRaw::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMRaw::editWidget( TQWidget* parent ) const
 {
-   return new PMRawEdit( tqparent );
+   return new PMRawEdit( parent );
 }
 
 void PMRaw::restoreMemento( PMMemento* s )

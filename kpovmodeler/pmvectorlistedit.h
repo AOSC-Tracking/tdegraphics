@@ -62,23 +62,23 @@ public:
    /**
     * Constructor for 3d vectors (x, y, z)
     */
-   PMVectorListEdit( TQWidget* tqparent, const char* name = 0 );
+   PMVectorListEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Constructor for 3d vectors
     */
    PMVectorListEdit( const TQString& c1, const TQString& c2, const TQString& c3,
-                    TQWidget* tqparent, const char* name = 0 );
+                    TQWidget* parent, const char* name = 0 );
    /**
     * Constructor for 2d vectors
     */
    PMVectorListEdit( const TQString& c1, const TQString& c2,
-                    TQWidget* tqparent, const char* name = 0 );
+                    TQWidget* parent, const char* name = 0 );
 
    /**
     * Constructor for 4d vectors
     */
    PMVectorListEdit( const TQString& c1, const TQString& c2, const TQString& c3,
-                     const TQString& c4, TQWidget* tqparent, const char* name = 0 );
+                     const TQString& c4, TQWidget* parent, const char* name = 0 );
    /**
     * Sets and displays the vectors. The widget will automatically
     * resize if no link is set and resize is true.

@@ -27,8 +27,8 @@ typedef KGenericFactory<KPdfPlugin> PdfFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pdf, PdfFactory("kfile_pdf"))
 
-KPdfPlugin::KPdfPlugin(TQObject *tqparent, const char *name, const TQStringList &preferredItems)
-    : KFilePlugin(tqparent, name, preferredItems)
+KPdfPlugin::KPdfPlugin(TQObject *parent, const char *name, const TQStringList &preferredItems)
+    : KFilePlugin(parent, name, preferredItems)
 {
     kdDebug(7034) << "pdf plugin\n";
 

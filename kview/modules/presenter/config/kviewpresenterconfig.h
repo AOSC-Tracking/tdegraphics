@@ -28,7 +28,7 @@ class KViewPresenterConfig : public KCModule
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		KViewPresenterConfig( TQWidget * tqparent, const char * name = 0, const TQStringList & args = TQStringList() );
+		KViewPresenterConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );
 		~KViewPresenterConfig();
 
 		virtual void load();

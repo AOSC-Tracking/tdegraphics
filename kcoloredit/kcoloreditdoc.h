@@ -51,7 +51,7 @@ class KColorEditDoc : public TQObject
 
   public:
     /** Constructor for the fileclass of the application */
-    KColorEditDoc(TQWidget *tqparent, const char *name=0);
+    KColorEditDoc(TQWidget *parent, const char *name=0);
     /** Destructor for the fileclass of the application */
     ~KColorEditDoc();
 

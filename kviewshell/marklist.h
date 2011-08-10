@@ -62,7 +62,7 @@ private:
 
   DocumentPageCache* pageCache;
 
-  MarkListWidget* tqparent;
+  MarkListWidget* parent;
 
   TQPixmap thumbnail;
 };
@@ -129,7 +129,7 @@ class MarkList: public TQScrollView
   TQ_OBJECT
 
 public:
-  MarkList(TQWidget* tqparent = 0, const char* name = 0);
+  MarkList(TQWidget* parent = 0, const char* name = 0);
   virtual ~MarkList();
 
   void setPageCache(DocumentPageCache*);

@@ -85,7 +85,7 @@ class KBackgroundConfig : public TQWidget
   Q_OBJECT
   TQ_OBJECT
 public:
-  KBackgroundConfig(TQWidget *tqparent);
+  KBackgroundConfig(TQWidget *parent);
   ~KBackgroundConfig();
 
 public slots:
@@ -112,7 +112,7 @@ class KMiscConfig : public TQWidget
   Q_OBJECT
   TQ_OBJECT
 public:
-  KMiscConfig(TQWidget *tqparent);
+  KMiscConfig(TQWidget *parent);
   ~KMiscConfig();
 
 public slots:
@@ -141,7 +141,7 @@ class KIconConfig : public KDialogBase
 
 public:
   
-  KIconConfig(TQWidget *tqparent);
+  KIconConfig(TQWidget *parent);
   ~KIconConfig();
 
 protected slots:

@@ -58,8 +58,8 @@
 
 
 
-KGOCRDialog::KGOCRDialog( TQWidget *tqparent, KSpellConfig *spellConfig )
-    :KOCRBase( tqparent, spellConfig, KDialogBase::Tabbed ),
+KGOCRDialog::KGOCRDialog( TQWidget *parent, KSpellConfig *spellConfig )
+    :KOCRBase( parent, spellConfig, KDialogBase::Tabbed ),
      m_ocrCmd( TQString())
 {
    kdDebug(28000) << "Starting KOCR-Start-Dialog!" << endl;

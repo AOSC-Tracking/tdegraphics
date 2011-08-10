@@ -51,8 +51,8 @@
 typedef KGenericFactory<KViewPresenter> KViewPresenterFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_presenterplugin, KViewPresenterFactory( "kviewpresenterplugin" ) )
 
-KViewPresenter::KViewPresenter( TQObject* tqparent, const char* name, const TQStringList & )
-	: Plugin( tqparent, name )
+KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStringList & )
+	: Plugin( parent, name )
 	, m_pImageList( new ImageListDialog() )
 	, m_paFileOpen( 0 )
 	, m_bDontAdd( false )
@@ -62,7 +62,7 @@ KViewPresenter::KViewPresenter( TQObject* tqparent, const char* name, const TQSt
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	m_imagelist.setAutoDelete( true );
 
-	TQObjectList * viewerList = tqparent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )
@@ -82,7 +82,7 @@ KViewPresenter::KViewPresenter( TQObject* tqparent, const char* name, const TQSt
 		connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ), m_paSlideshow, TQT_SLOT( setChecked( bool ) ) );
 
 		// search for file_open action
-		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( tqparent->qt_cast( "KXMLGUIClient" ) );
+		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( parent->qt_cast( "KXMLGUIClient" ) );
 		if( parentClient )
 		{
 			m_paFileOpen = parentClient->actionCollection()->action( "file_open" );
@@ -92,7 +92,7 @@ KViewPresenter::KViewPresenter( TQObject* tqparent, const char* name, const TQSt
 			connect( m_paFileClose, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotClose() ) );
 		if( m_paFileOpen )
 		{
-			disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), tqparent, TQT_SLOT( slotOpenFile() ) );
+			disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), parent, TQT_SLOT( slotOpenFile() ) );
 			connect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
 		}
 		else
@@ -150,12 +150,12 @@ KViewPresenter::~KViewPresenter()
 	if( m_paFileOpen )
 	{
 		disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
-		// If the tqparent() doesn't exist we either leave the "File Open" action
+		// If the parent() doesn't exist we either leave the "File Open" action
 		// in an unusable state or KView was just shutting down and therefor we
 		// can ignore this. I've only seen the second one happening and to get
-		// rid of the TQObject::connect warning we do the tqparent() check.
-		if( tqparent() )
-			connect( m_paFileOpen, TQT_SIGNAL( activated() ), tqparent(), TQT_SLOT( slotOpenFile() ) );
+		// rid of the TQObject::connect warning we do the parent() check.
+		if( parent() )
+			connect( m_paFileOpen, TQT_SIGNAL( activated() ), parent(), TQT_SLOT( slotOpenFile() ) );
 	}
 }
 

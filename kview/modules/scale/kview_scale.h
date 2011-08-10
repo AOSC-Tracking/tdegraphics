@@ -33,7 +33,7 @@ class KViewScale : public KParts::Plugin
 	Q_OBJECT
   TQ_OBJECT
 public:
-	KViewScale( TQObject* tqparent, const char* name, const TQStringList & );
+	KViewScale( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewScale();
 
 private slots:

@@ -72,7 +72,7 @@ public:
      * immediately.
      * @return true when the download has finished or false when the user aborted the dialog
      */
-    KuickFile::DownloadtqStatus waitForDownload( TQWidget *tqparent );
+    KuickFile::DownloadtqStatus waitForDownload( TQWidget *parent );
 
 //    bool needsDownload();
 

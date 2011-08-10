@@ -100,7 +100,7 @@ bool kpFloodFill::fill ()
         TQPainter painter, maskPainter;
         TQBitmap maskBitmap;
 
-        if (m_pixmapPtr->tqmask () || m_color.isTransparent ())
+        if (m_pixmapPtr->mask () || m_color.isTransparent ())
         {
             maskBitmap = kpPixmapFX::getNonNullMask (*m_pixmapPtr);
             maskPainter.begin (&maskBitmap);

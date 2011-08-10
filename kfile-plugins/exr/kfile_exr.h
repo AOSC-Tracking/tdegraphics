@@ -32,7 +32,7 @@ class KExrPlugin: public KFilePlugin
   TQ_OBJECT
     
 public:
-    KExrPlugin( TQObject *tqparent, const char *name, const TQStringList& preferredItems );
+    KExrPlugin( TQObject *parent, const char *name, const TQStringList& preferredItems );
 
     virtual bool readInfo( KFileMetaInfo& info, uint );
 };

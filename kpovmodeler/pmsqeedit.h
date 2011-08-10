@@ -39,9 +39,9 @@ class PMSuperquadricEllipsoidEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSuperquadricEllipsoidEdit with tqparent and name
+    * Creates a PMSuperquadricEllipsoidEdit with parent and name
     */
-   PMSuperquadricEllipsoidEdit( TQWidget* tqparent, const char* name = 0 );
+   PMSuperquadricEllipsoidEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

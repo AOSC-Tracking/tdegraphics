@@ -42,9 +42,9 @@ class PMRainbowEdit : public PMTextureBaseEdit
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMRainbowEdit with tqparent and name
+    * Creates a PMRainbowEdit with parent and name
     */
-   PMRainbowEdit( TQWidget* tqparent, const char* name = 0 );
+   PMRainbowEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

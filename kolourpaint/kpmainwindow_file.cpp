@@ -1224,7 +1224,7 @@ void kpMainWindow::slotPrintPreview ()
     // TODO: get it to reflect default printer's settings
     KPrinter printer (false/*separate settings from ordinary printer*/);
 
-    // TODO: pass "this" as tqparent
+    // TODO: pass "this" as parent
     printer.setPreviewOnly (true);
 
     sendPixmapToPrinter (&printer, false/*don't showPrinterSetupDialog*/);

@@ -44,9 +44,9 @@ class PMWarpEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMWarpEdit with tqparent and name
+    * Creates a PMWarpEdit with parent and name
     */
-   PMWarpEdit( TQWidget* tqparent, const char* name = 0 );
+   PMWarpEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

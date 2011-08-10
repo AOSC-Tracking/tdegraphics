@@ -42,8 +42,8 @@
 #include <kptool.h>
 
 
-kpToolWidgetFillStyle::kpToolWidgetFillStyle (TQWidget *tqparent, const char *name)
-    : kpToolWidgetBase (tqparent, name)
+kpToolWidgetFillStyle::kpToolWidgetFillStyle (TQWidget *parent, const char *name)
+    : kpToolWidgetBase (parent, name)
 {
     setInvertSelectedPixmap ();
 
@@ -85,10 +85,10 @@ TQPixmap kpToolWidgetFillStyle::fillStylePixmap (FillStyle fs, int w, int h)
     painter.end ();
 
 
-    TQBitmap tqmask (pixmap.width (), pixmap.height ());
-    tqmask.fill (TQt::color0);
+    TQBitmap mask (pixmap.width (), pixmap.height ());
+    mask.fill (TQt::color0);
 
-    painter.begin (&tqmask);
+    painter.begin (&mask);
     painter.setPen (TQPen (TQt::color1, 2));
 
     if (fs == FillWithBackground || fs == FillWithForeground)
@@ -98,7 +98,7 @@ TQPixmap kpToolWidgetFillStyle::fillStylePixmap (FillStyle fs, int w, int h)
 
     painter.end ();
 
-    pixmap.setMask (tqmask);
+    pixmap.setMask (mask);
 
     return pixmap;
 }

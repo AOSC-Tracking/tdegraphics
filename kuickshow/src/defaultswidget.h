@@ -36,7 +36,7 @@ class DefaultsWidget : public TQWidget
   TQ_OBJECT
 
 public:
-  DefaultsWidget( TQWidget *tqparent, const char *name );
+  DefaultsWidget( TQWidget *parent, const char *name );
   ~DefaultsWidget();
 
   void 		loadSettings( const KuickData& data );

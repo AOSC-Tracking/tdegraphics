@@ -39,7 +39,7 @@ public:
    /**
     * Default constructor
     */
-   PMGridSettings( TQWidget* tqparent, const char* name = 0 );
+   PMGridSettings( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displaySettings( );
    /** */

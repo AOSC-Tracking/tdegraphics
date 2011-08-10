@@ -31,7 +31,7 @@
  * Class for povray scenes.
  *
  * A document has a PMScene object as top level object. A PMScene can't have
- * a tqparent
+ * a parent
  */
 class PMScene : public PMCompositeObject
 {

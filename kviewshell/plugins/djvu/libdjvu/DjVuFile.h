@@ -215,9 +215,9 @@ public:
    GP<IW44Image>	bg44;
       /// Pointer to the background component of DjVu image (Raw).
    GP<GPixmap>		bgpm;
-      /// Pointer to the tqmask of foreground component of DjVu image (JB2 encoded).
+      /// Pointer to the mask of foreground component of DjVu image (JB2 encoded).
    GP<JB2Image>		fgjb;
-      /// Pointer to the optional tqshape dictionary for the tqmask (JB2 encoded).
+      /// Pointer to the optional tqshape dictionary for the mask (JB2 encoded).
    GP<JB2Dict>		fgjd;
       /// Pointer to a colors layer for the foreground component of DjVu image.
    GP<GPixmap>		fgpm;
@@ -610,7 +610,7 @@ public:
    virtual bool		inherits(const GUTF8String &class_name) const;
    virtual void		notify_chunk_done(const DjVuPort * source, const GUTF8String &name);
    virtual void		notify_file_flags_changed(const DjVuFile * source,
-						  long set_tqmask, long clr_tqmask);
+						  long set_mask, long clr_mask);
    virtual void		set_recover_errors(const ErrorRecoveryAction=ABORT);
    virtual void		set_verbose_eof(const bool verbose_eof=true);
    virtual void		report_error(const GException &ex,const bool=true);

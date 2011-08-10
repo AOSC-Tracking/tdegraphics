@@ -29,8 +29,8 @@
 #include <kdialog.h>
 
 
-PMFinishEdit::PMFinishEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMFinishEdit::PMFinishEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

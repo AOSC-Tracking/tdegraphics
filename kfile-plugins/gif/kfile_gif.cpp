@@ -42,9 +42,9 @@ typedef KGenericFactory<KGifPlugin> GifFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_gif, GifFactory("kfile_gif"))
 
-KGifPlugin::KGifPlugin(TQObject *tqparent, const char *name,
+KGifPlugin::KGifPlugin(TQObject *parent, const char *name,
                        const TQStringList &args)
-    : KFilePlugin(tqparent, name, args)
+    : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "gif KFileMetaInfo plugin\n";
 

@@ -24,7 +24,7 @@
 class KGVPageDecorator : public TQHBox
 {
 public:
-    KGVPageDecorator( TQWidget* tqparent = 0, const char* name = 0 );
+    KGVPageDecorator( TQWidget* parent = 0, const char* name = 0 );
     ~KGVPageDecorator() { ; }
 
     unsigned int margin()      const;
@@ -49,13 +49,13 @@ protected:
     virtual void drawFrame( TQPainter* );
     
     /**
-     * Draw the tqmask of both the frame and the contents in order to create a 
+     * Draw the mask of both the frame and the contents in order to create a 
      * partially transparent frame.
      */ 
     virtual void drawMask( TQPainter* );
     
     /**
-     * Reimplemented from TQWidget. It uses @ref drawMask() to draw the tqmask
+     * Reimplemented from TQWidget. It uses @ref drawMask() to draw the mask
      * of the frame when transparency is required.
      */
     virtual void updateMask();

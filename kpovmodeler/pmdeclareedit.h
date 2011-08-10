@@ -42,9 +42,9 @@ class PMDeclareEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMDeclareEdit with tqparent and name
+    * Creates a PMDeclareEdit with parent and name
     */
-   PMDeclareEdit( TQWidget* tqparent, const char* name = 0 );
+   PMDeclareEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

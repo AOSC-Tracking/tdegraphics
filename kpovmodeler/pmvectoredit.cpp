@@ -28,8 +28,8 @@
 
 PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
                             const TQString& descriptionY,
-                            TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+                            TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    unsigned int i;
    TQHBoxLayout* tqlayout;
@@ -66,8 +66,8 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
 PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
                             const TQString& descriptionY,
                             const TQString& descriptionZ,
-                            TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+                            TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    unsigned int i;
    TQHBoxLayout* tqlayout;
@@ -114,8 +114,8 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionA,
                             const TQString& descriptionB,
                             const TQString& descriptionC,
                             const TQString& descriptionD,
-                            TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+                            TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
    unsigned int i;
    TQHBoxLayout* tqlayout;

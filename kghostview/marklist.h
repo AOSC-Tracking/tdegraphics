@@ -29,7 +29,7 @@ class MarkListItem : public TQWidget
     Q_OBJECT
   TQ_OBJECT
 public:
-    MarkListItem( TQWidget *tqparent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget*, int );
+    MarkListItem( TQWidget *parent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget*, int );
 
     bool isChecked() const;
 
@@ -58,7 +58,7 @@ class MarkList: public TQTable
   TQ_OBJECT
 
 public:
-    MarkList( TQWidget* tqparent = 0, const char* name = 0, KGVMiniWidget* = 0 );
+    MarkList( TQWidget* parent = 0, const char* name = 0, KGVMiniWidget* = 0 );
 
     TQValueList<int> markList() const;
     void insertItem( const TQString& text, int index = -1,

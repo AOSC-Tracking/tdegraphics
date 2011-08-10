@@ -535,7 +535,7 @@ public:
    /**
     * Returns the conditions value.
     */
-   bool evaluate( const PMObject* tqparent );
+   bool evaluate( const PMObject* parent );
 
 private:
    TQPtrList<PMRuleCategory> m_categories;

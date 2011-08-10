@@ -459,9 +459,9 @@ void PMImageMap::setTransmits( const TQValueList<PMPaletteValue>& c )
    }
 }
 
-PMDialogEditBase* PMImageMap::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMImageMap::editWidget( TQWidget* parent ) const
 {
-   return new PMImageMapEdit( tqparent );
+   return new PMImageMapEdit( parent );
 }
 
 void PMImageMap::restoreMemento( PMMemento* s )

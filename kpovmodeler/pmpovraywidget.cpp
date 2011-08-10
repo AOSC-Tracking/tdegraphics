@@ -40,8 +40,8 @@
 const int timerIntervall = 1000;
 bool PMPovrayWidget::s_imageFormatsRegistered = false;
 
-PMPovrayWidget::PMPovrayWidget( TQWidget* tqparent, const char* name )
-      : KDialog( tqparent, name )
+PMPovrayWidget::PMPovrayWidget( TQWidget* parent, const char* name )
+      : KDialog( parent, name )
 {
    TQVBoxLayout* topLayout = new TQVBoxLayout( this, KDialog::marginHint( ), KDialog::spacingHint( ) );
    topLayout->addStretch( );

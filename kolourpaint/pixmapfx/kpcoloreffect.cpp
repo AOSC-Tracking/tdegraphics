@@ -133,8 +133,8 @@ void kpColorEffectCommand::unexecute ()
 
 kpColorEffectWidget::kpColorEffectWidget (bool actOnSelection,
                                           kpMainWindow *mainWindow,
-                                          TQWidget *tqparent, const char *name)
-    : TQWidget (tqparent, name),
+                                          TQWidget *parent, const char *name)
+    : TQWidget (parent, name),
       m_actOnSelection (actOnSelection),
       m_mainWindow (mainWindow)
 {

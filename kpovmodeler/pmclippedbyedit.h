@@ -39,9 +39,9 @@ class PMClippedByEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMClippedByEdit with tqparent and name
+    * Creates a PMClippedByEdit with parent and name
     */
-   PMClippedByEdit( TQWidget* tqparent, const char* name = 0 );
+   PMClippedByEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

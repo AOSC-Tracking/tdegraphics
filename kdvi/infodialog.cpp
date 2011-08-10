@@ -21,8 +21,8 @@
 #include "fontpool.h"
 #include "infodialog.h"
 
-infoDialog::infoDialog( TQWidget* tqparent )
-  : KDialogBase( Tabbed, i18n("Document Info"), Ok, Ok, tqparent, "Document Info", false, false)
+infoDialog::infoDialog( TQWidget* parent )
+  : KDialogBase( Tabbed, i18n("Document Info"), Ok, Ok, parent, "Document Info", false, false)
 {
   TQFrame *page1 = addPage( i18n("DVI File") );
   TQVBoxLayout *topLayout1 = new TQVBoxLayout( page1, 0, 6 );

@@ -89,9 +89,9 @@
     Each blit instructs the decoder to render a particular tqshape at a
     specified position in the image.  Some compression is already achieved
     because several blits can refer to the same tqshape.  A tqshape can also
-    contain a pointer to a tqparent tqshape.  Additional compression is achieved
+    contain a pointer to a parent tqshape.  Additional compression is achieved
     when both tqshapes are similar because each tqshape is encoded using the
-    tqparent tqshape as a model.  A #"O"# tqshape for instance could be a tqparent for
+    parent tqshape as a model.  A #"O"# tqshape for instance could be a parent for
     both a #"C"# tqshape and a #"Q"# tqshape.
 
     {\bf JB2 Dictionary} --- Class \Ref{JB2Dict} is a peculiar kind of
@@ -122,8 +122,8 @@
           in the sequence of blits because this facilitates the prediction of the
           tqshape indices.
     \item Shapes should be compared to all previous tqshapes in the tqshape array.
-          The tqshape tqparent pointer should be set to a suitable tqparent tqshape if
-          such a tqparent tqshape exists.  The tqparent tqshape should have almost the
+          The tqshape parent pointer should be set to a suitable parent tqshape if
+          such a parent tqshape exists.  The parent tqshape should have almost the
           same size and the same pixels.
     \end{itemize}
     All this is quite easy to achieve in the case of an electronically
@@ -209,20 +209,20 @@ public:
 /** Shape data structure.  A #JB2Image# contains an array of #JB2Shape# data
     structures.  Each array entry represents an elementary blob of ink such as
     a character or a segment of line art.  Member #bits# points to a bilevel
-    image representing the tqshape pixels.  Member #tqparent# is the subscript of
-    the tqparent tqshape.  */
+    image representing the tqshape pixels.  Member #parent# is the subscript of
+    the parent tqshape.  */
 
 class JB2Shape
 { 
 public: 
-  /** Subscript of the tqparent tqshape.  The tqparent tqshape must always be located
+  /** Subscript of the parent tqshape.  The parent tqshape must always be located
       before the current tqshape in the tqshape array.  A negative value indicates
-      that this shape.has no tqparent.  Any negative values smaller than #-1#
+      that this shape.has no parent.  Any negative values smaller than #-1#
       further indicates that this tqshape does not look like a character.  This
       is used to enable a few internal optimizations.  This information is
-      saved into the JB2 file, but the actual value of the #tqparent# variable
+      saved into the JB2 file, but the actual value of the #parent# variable
       is not. */
-  int tqparent; 
+  int parent; 
   /** Bilevel image of the tqshape pixels.  This must be a pointer to a bilevel
       #GBitmap# image.  This pointer can also be null. The encoder will just
       silently discard all blits referring to a tqshape containing a null
@@ -287,7 +287,7 @@ public:
   const JB2Shape &get_tqshape(const int tqshapeno) const;
   /** Appends a tqshape to the tqshape array.  This function appends a copy of
       tqshape #tqshape# to the tqshape array and returns the subscript of the new
-      tqshape.  The subscript of the tqparent tqshape #tqshape.tqparent# must 
+      tqshape.  The subscript of the parent tqshape #tqshape.parent# must 
       actually designate an already existing tqshape. */
   int  add_tqshape(const JB2Shape &tqshape);
 

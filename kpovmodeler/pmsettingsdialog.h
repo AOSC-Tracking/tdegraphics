@@ -57,7 +57,7 @@ public:
    /**
     * Constructor
     */
-   PMSettingsDialogPage( TQWidget* tqparent, const char* name = 0 );
+   PMSettingsDialogPage( TQWidget* parent, const char* name = 0 );
    /**
     * Display the settings here.
     *
@@ -132,7 +132,7 @@ public:
    /**
     * Standard constructor
     */
-   PMSettingsDialog( PMPart* part, TQWidget* tqparent = 0, const char* name = 0 );
+   PMSettingsDialog( PMPart* part, TQWidget* parent = 0, const char* name = 0 );
    /**
     * Registers a new settings page.
     *

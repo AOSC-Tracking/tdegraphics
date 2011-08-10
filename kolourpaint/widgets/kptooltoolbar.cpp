@@ -58,8 +58,8 @@
 class kpToolButton : public TQToolButton
 {
 public:
-    kpToolButton (kpTool *tool, TQWidget *tqparent)
-        : TQToolButton (tqparent),
+    kpToolButton (kpTool *tool, TQWidget *parent)
+        : TQToolButton (parent),
           m_tool (tool)
     {
     }

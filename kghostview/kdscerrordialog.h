@@ -45,7 +45,7 @@ class KDSCErrorDialog : public KDialog, public KDSCErrorHandler
   TQ_OBJECT
 	
 public:
-    KDSCErrorDialog( TQWidget* tqparent = 0 );
+    KDSCErrorDialog( TQWidget* parent = 0 );
     
     Response error( const KDSCError& );
 

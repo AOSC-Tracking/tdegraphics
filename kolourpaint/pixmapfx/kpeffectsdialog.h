@@ -52,7 +52,7 @@ Q_OBJECT
 
 public:
     kpEffectsDialog (bool actOnSelection,
-                     kpMainWindow *tqparent,
+                     kpMainWindow *parent,
                      const char *name = 0);
     virtual ~kpEffectsDialog ();
 

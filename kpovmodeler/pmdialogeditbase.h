@@ -63,7 +63,7 @@ public:
     * No widgets are created within the constructor! You have to call
     * @ref createWidgets after creating a new edit widget.
     */
-   PMDialogEditBase( TQWidget* tqparent, const char* name = 0 );
+   PMDialogEditBase( TQWidget* parent, const char* name = 0 );
    /**
     * Destructor
     */

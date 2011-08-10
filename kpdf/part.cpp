@@ -114,9 +114,9 @@ using namespace KPDF;
 unsigned int Part::m_count = 0;
 
 Part::Part(TQWidget *parentWidget, const char *widgetName,
-           TQObject *tqparent, const char *name,
+           TQObject *parent, const char *name,
            const TQStringList & /*args*/ )
-	: DCOPObject("kpdf"), KParts::ReadOnlyPart(tqparent, name), m_showMenuBarAction(0), m_showFullScreenAction(0),
+	: DCOPObject("kpdf"), KParts::ReadOnlyPart(parent, name), m_showMenuBarAction(0), m_showFullScreenAction(0),
 	m_actionsSearched(false), m_searchStarted(false)
 {
 	// connect the started signal to tell the job the mimetypes we like
@@ -151,8 +151,8 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	connect( m_document, TQT_SIGNAL( openURL(const KURL &) ), this, TQT_SLOT( openURLFromDocument(const KURL &) ) );
 	connect( m_document, TQT_SIGNAL( close() ), this, TQT_SLOT( close() ) );
 	
-	if (tqparent && tqparent->tqmetaObject()->slotNames(true).contains("slotQuit()"))
-		connect( m_document, TQT_SIGNAL( quit() ), tqparent, TQT_SLOT( slotQuit() ) );
+	if (parent && parent->tqmetaObject()->slotNames(true).contains("slotQuit()"))
+		connect( m_document, TQT_SIGNAL( quit() ), parent, TQT_SLOT( slotQuit() ) );
 	else
 		connect( m_document, TQT_SIGNAL( quit() ), this, TQT_SLOT( cannotQuit() ) );
 
@@ -634,7 +634,7 @@ void Part::slotDoFileDirty()
 
 void Part::close()
 {
-  if (tqparent() && strcmp(tqparent()->name(), "KPDF::Shell") == 0)
+  if (parent() && strcmp(parent()->name(), "KPDF::Shell") == 0)
   {
     closeURL();
   }
@@ -1085,8 +1085,8 @@ void Part::saveDocumentRestoreInfo(KConfig* config)
 /*
 * BrowserExtension class
 */
-BrowserExtension::BrowserExtension(Part* tqparent)
-  : KParts::BrowserExtension( tqparent, "KPDF::BrowserExtension" )
+BrowserExtension::BrowserExtension(Part* parent)
+  : KParts::BrowserExtension( parent, "KPDF::BrowserExtension" )
 {
 	emit enableAction("print", true);
 	setURLDropHandlingEnabled(true);
@@ -1094,7 +1094,7 @@ BrowserExtension::BrowserExtension(Part* tqparent)
 
 void BrowserExtension::print()
 {
-	static_cast<Part*>(tqparent())->slotPrint();
+	static_cast<Part*>(parent())->slotPrint();
 }
 
 #include "part.moc"

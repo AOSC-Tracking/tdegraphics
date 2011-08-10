@@ -270,8 +270,8 @@ CameraAbilities KCamera::abilities()
 
 // ---------- KameraSelectCamera ------------
 
-KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *tqparent, KCamera *device)
-	: KDialogBase(tqparent, "kkameradeviceselect", true, i18n("Select Camera Device"), Ok | Cancel, Ok, true)
+KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *device)
+	: KDialogBase(parent, "kkameradeviceselect", true, i18n("Select Camera Device"), Ok | Cancel, Ok, true)
 {
 	m_device = device;
 	connect(m_device, TQT_SIGNAL(error(const TQString &)),

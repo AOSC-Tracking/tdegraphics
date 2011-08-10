@@ -35,7 +35,7 @@ namespace KMrmlConfig
 
     public:
         Indexer( const KMrml::Config *config,
-                 TQObject *tqparent = 0L, const char *name = 0 );
+                 TQObject *parent = 0L, const char *name = 0 );
         ~Indexer();
 
         void startIndexing( const TQStringList& dirs );

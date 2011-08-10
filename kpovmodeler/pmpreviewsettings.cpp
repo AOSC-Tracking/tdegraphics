@@ -29,8 +29,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-PMPreviewSettings::PMPreviewSettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMPreviewSettings::PMPreviewSettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQHBoxLayout* htqlayout;
    TQVBoxLayout* vtqlayout;

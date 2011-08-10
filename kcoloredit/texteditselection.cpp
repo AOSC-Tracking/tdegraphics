@@ -24,7 +24,7 @@
 #include "main.h"
 #include "texteditselection.h"
 
-TextEditSelection::TextEditSelection(TQWidget *tqparent, const char *name ) : TQWidget(tqparent,name) {
+TextEditSelection::TextEditSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
 	inChangingComponents = false;
 	TQVBoxLayout* topLayout = new TQVBoxLayout(this, 4);
 	TQGridLayout* componentsLayout = new TQGridLayout(3, 5, 2);

@@ -71,9 +71,9 @@ namespace KMrml
         }
         void initFromDOM( const TQDomElement& elem );
 
-        void toElement( TQDomElement& tqparent );
+        void toElement( TQDomElement& parent );
 
-        TQWidget * createWidget( TQWidget *tqparent, const char *name = 0 );
+        TQWidget * createWidget( TQWidget *parent, const char *name = 0 );
 
     private:
         static Visibility getVisibility( const TQString& value );

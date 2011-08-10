@@ -35,8 +35,8 @@
 #undef KeyPress
 #endif
 
-FileWidget::FileWidget( const KURL& url, TQWidget *tqparent, const char *name )
-    : KDirOperator( url, tqparent, name ),
+FileWidget::FileWidget( const KURL& url, TQWidget *parent, const char *name )
+    : KDirOperator( url, parent, name ),
       m_validCompletion( false ),
       m_fileFinder( 0L )
 {

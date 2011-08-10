@@ -22,7 +22,7 @@ class SizePreview : public TQWidget
   TQ_OBJECT
 
 public:
-  SizePreview( TQWidget *tqparent, const char* name=0, WFlags f=0 );
+  SizePreview( TQWidget *parent, const char* name=0, WFlags f=0 );
 
 public slots:
   // Sets the size.

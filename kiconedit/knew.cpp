@@ -153,9 +153,9 @@ int KIconListBoxItem::width(const TQListBox *lb ) const
   return pm.width() + lb->fontMetrics().width( text() ) + 6;
 }
 
-NewSelect::NewSelect(TQWidget *tqparent) : TQWidget( tqparent )
+NewSelect::NewSelect(TQWidget *parent) : TQWidget( parent )
 {
-  wiz = (KWizard*) tqparent;
+  wiz = (KWizard*) parent;
   grp = new TQButtonGroup( this );
   connect( grp, TQT_SIGNAL( clicked( int ) ), TQT_SLOT( buttonClicked( int ) ) );
   grp->setExclusive( true );
@@ -189,10 +189,10 @@ void NewSelect::buttonClicked(int id)
   emit iconopenstyle(id);
 }
 
-NewFromTemplate::NewFromTemplate( TQWidget* tqparent )
-  : TQWidget( tqparent )
+NewFromTemplate::NewFromTemplate( TQWidget* parent )
+  : TQWidget( parent )
 {
-  wiz = (KWizard*) tqparent;
+  wiz = (KWizard*) parent;
   
   TQVBoxLayout* ml = new TQVBoxLayout(this);
   
@@ -223,8 +223,8 @@ void NewFromTemplate::checkSelection( int )
     wiz->finishButton()->setEnabled( false );
 }
 
-KNewIcon::KNewIcon( TQWidget* tqparent )
-  : KWizard( tqparent, 0, true )
+KNewIcon::KNewIcon( TQWidget* parent )
+  : KWizard( parent, 0, true )
 {
   //kdDebug(4640) << "KNewIcon" << endl;
   setCaption( i18n( "Create New Icon" ) );

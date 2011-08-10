@@ -59,7 +59,7 @@ TQ_OBJECT
 	KParts::ReadOnlyPart *mViewer;
 
 public:
-	PhotoBook(TQWidget *tqparent, PhotoBookPart *part, const char *name=0);
+	PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name=0);
 	void openURL(const KURL &url);
 	void updateButton(bool, bool );
 
@@ -81,7 +81,7 @@ class Previews : public KFileIconView
 	TQStringList mMimeTypes;
 
 public:
-	Previews(PhotoBook *tqparent, const TQStringList &mimetypes);
+	Previews(PhotoBook *parent, const TQStringList &mimetypes);
 	~Previews();
 	void openURL(const KURL &url);
 
@@ -116,7 +116,7 @@ Q_OBJECT
 public:
 	PhotoBookPart(
 			TQWidget *parentWidget, const char *widgetName,
-			TQObject *tqparent, const char *name=0,
+			TQObject *parent, const char *name=0,
 			const TQStringList& args = TQStringList()
 		);
 	~PhotoBookPart();

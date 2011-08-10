@@ -58,7 +58,7 @@ extern "C" {
 			const art_u8 *src,
 			int src_width, int src_height, int src_rowstride,
 			const double affine[6],
-			int alpha, const art_u8 *tqmask);
+			int alpha, const art_u8 *mask);
 
 	void ksvg_art_rgb_texture(const ArtSVP *svp, art_u8 *dst, int x0, int y0, int x1, int y1, int dst_rowstride,
 		int dst_channels,
@@ -68,7 +68,7 @@ extern "C" {
 		ArtFilterLevel level,
 		ArtAlphaGamma *alphaGamma,
 		int alpha,
-		const art_u8 *tqmask);
+		const art_u8 *mask);
 
 	void ksvg_art_svp_move(ArtSVP *svp, int dx, int dy);
 

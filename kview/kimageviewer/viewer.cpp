@@ -22,8 +22,8 @@
 
 namespace KImageViewer
 {
-	Viewer::Viewer( TQObject * tqparent, const char * name )
-		: KParts::ReadWritePart( tqparent, name )
+	Viewer::Viewer( TQObject * parent, const char * name )
+		: KParts::ReadWritePart( parent, name )
 	{
 	}
 

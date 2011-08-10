@@ -36,8 +36,8 @@
 
 /* -------------------- ocrResEdit -------------------- */
 
-ocrResEdit::ocrResEdit( TQWidget *tqparent )
-    : TQTextEdit(tqparent)
+ocrResEdit::ocrResEdit( TQWidget *parent )
+    : TQTextEdit(parent)
 {
     m_updateColor.setNamedColor( "SeaGreen");
     m_ignoreColor.setNamedColor( "CadetBlue4" );

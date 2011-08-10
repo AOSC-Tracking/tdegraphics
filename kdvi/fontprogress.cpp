@@ -22,11 +22,11 @@
 #include <tqvbox.h>
 
 /* 
- *  Constructs a fontProgressDialog which is a child of 'tqparent', with the 
+ *  Constructs a fontProgressDialog which is a child of 'parent', with the 
  *  name 'name' and widget flags set to 'f' 
  */
-fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip, TQWidget* tqparent, const TQString& name, bool progressbar)
-  : KDialogBase( tqparent, "Font Generation Progress Dialog", true, name, Cancel, Cancel, true )
+fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip, TQWidget* parent, const TQString& name, bool progressbar)
+  : KDialogBase( parent, "Font Generation Progress Dialog", true, name, Cancel, Cancel, true )
 {
   setCursor( TQCursor( 3 ) );
 

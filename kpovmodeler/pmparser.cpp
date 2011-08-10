@@ -177,18 +177,18 @@ int PMParser::errorFlags( ) const
 }
 
 
-void PMParser::parse( PMObjectList* list, PMObject* tqparent,
+void PMParser::parse( PMObjectList* list, PMObject* parent,
                       PMObject* after )
 {
    m_pResultList = list;
-   m_pTopParent = tqparent;
+   m_pTopParent = parent;
    m_pAfter = after;
 
    // find first item, that can be a declare and can be used as link
    // for parsed objects.
-   if( tqparent )
+   if( parent )
    {
-      if( tqparent->type( ) == "Scene" )
+      if( parent->type( ) == "Scene" )
       {
          if( after )
             m_pNextCheckDeclare = after;
@@ -197,19 +197,19 @@ void PMParser::parse( PMObjectList* list, PMObject* tqparent,
       }
       else
       {
-         PMObject* obj = tqparent;
+         PMObject* obj = parent;
          bool stop = false;
          
-         // go to parents, until the tqparent is the scene
+         // go to parents, until the parent is the scene
          // (declares can only be inserted as top level objects)
          do
          {
-            if( obj->tqparent( ) )
+            if( obj->parent( ) )
             {
-               if( obj->tqparent( )->type( ) == "Scene" )
+               if( obj->parent( )->type( ) == "Scene" )
                   stop = true;
                else
-                  obj = obj->tqparent( );
+                  obj = obj->parent( );
             }
             else
             {
@@ -219,7 +219,7 @@ void PMParser::parse( PMObjectList* list, PMObject* tqparent,
          }
          while( obj && !stop );
 
-         // now obj is the top level tqparent of the object, where parsed objects
+         // now obj is the top level parent of the object, where parsed objects
          // will be inserted
          if( obj )
             m_pNextCheckDeclare = obj->prevSibling( );
@@ -240,22 +240,22 @@ void PMParser::parse( PMObjectList* list, PMObject* tqparent,
       setFatalError( );
 }
 
-bool PMParser::insertChild( PMObject* child, PMObject* tqparent )
+bool PMParser::insertChild( PMObject* child, PMObject* parent )
 {
    bool inserted = false;
    
-   if( tqparent )
+   if( parent )
    {
-      if( tqparent->canInsert( child, tqparent->lastChild( ) ) )
+      if( parent->canInsert( child, parent->lastChild( ) ) )
       {
-         tqparent->appendChild( child );
+         parent->appendChild( child );
          inserted = true;
       }
       else
       {
          printError( i18n( "Can't insert %1 into %2." )
                      .tqarg( child->description( ) )
-                     .tqarg( tqparent->description( ) ) );
+                     .tqarg( parent->description( ) ) );
       }
    }
    else

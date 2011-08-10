@@ -29,7 +29,7 @@ class KGVMainWidget : public TQWidget
   TQ_OBJECT
     
 public:
-    KGVMainWidget( TQWidget* tqparent = 0, const char* name = 0 );
+    KGVMainWidget( TQWidget* parent = 0, const char* name = 0 );
 
 signals:
     void spacePressed();

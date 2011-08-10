@@ -253,8 +253,8 @@ TQPixmap kpEffectBalanceCommand::applyColorEffect (const TQPixmap &pixmap)
 
 kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
                                               kpMainWindow *mainWindow,
-                                              TQWidget *tqparent, const char *name)
-    : kpColorEffectWidget (actOnSelection, mainWindow, tqparent, name)
+                                              TQWidget *parent, const char *name)
+    : kpColorEffectWidget (actOnSelection, mainWindow, parent, name)
 {
     TQGridLayout *lay = new TQGridLayout (this, 5, 5, marginHint (), spacingHint ());
 

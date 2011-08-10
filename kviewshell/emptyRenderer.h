@@ -32,7 +32,7 @@ class EmptyRenderer : public DocumentRenderer
   TQ_OBJECT
 
 public:
-  EmptyRenderer(TQWidget* tqparent);
+  EmptyRenderer(TQWidget* parent);
 
   virtual bool setFile(const TQString &, const KURL &) { return false; }
 

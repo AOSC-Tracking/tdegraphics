@@ -31,8 +31,8 @@
 #include "imlibwidget.h"
 #include "defaultswidget.h"
 
-DefaultsWidget::DefaultsWidget( TQWidget *tqparent, const char *name)
-  : TQWidget( tqparent, name )
+DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
+  : TQWidget( parent, name )
 {
   imFiltered = 0L;
 

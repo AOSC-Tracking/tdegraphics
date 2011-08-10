@@ -890,7 +890,7 @@ void KameraProtocol::translateFileToUDS(UDSEntry &udsEntry, const CameraFileInfo
 		atom.m_long = 0;
 		atom.m_long |= (info.file.permissions & GP_FILE_PERM_READ) ? (S_IRUSR | S_IRGRP | S_IROTH) : 0;
 		// we cannot represent individual FP_FILE_PERM_DELETE permission in the Unix access scheme
-		// since the tqparent directory's write permission defines that
+		// since the parent directory's write permission defines that
 		udsEntry.append(atom);
 	} else {
 		// basic permissions, in case the camera doesn't provide permissions info

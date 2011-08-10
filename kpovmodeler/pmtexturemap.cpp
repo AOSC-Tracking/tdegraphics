@@ -158,9 +158,9 @@ void PMTextureMapBase::cleanUp( ) const
    Base::cleanUp( );
 }
 
-PMDialogEditBase* PMTextureMapBase::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMTextureMapBase::editWidget( TQWidget* parent ) const
 {
-   return new PMTextureMapEdit( tqparent );
+   return new PMTextureMapEdit( parent );
 }
 
 void PMTextureMapBase::restoreMemento( PMMemento* s )

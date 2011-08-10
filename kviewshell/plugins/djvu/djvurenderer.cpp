@@ -62,7 +62,7 @@ DjVuRenderer::DjVuRenderer(TQWidget* par)
   : DocumentRenderer(par)
 {
 #ifdef KF_DEBUG
-  kdError() << "DjVuRenderer( tqparent=" << par << " )" << endl;
+  kdError() << "DjVuRenderer( parent=" << par << " )" << endl;
 #endif
 
   PPMstream = ByteStream::create();

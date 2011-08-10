@@ -84,7 +84,7 @@ class DocumentData {
         return m_outputDev;
     }
 
-    void addTocChildren( TQDomDocument * docSyn, TQDomNode * tqparent, GooList * items );
+    void addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, GooList * items );
 
   class PDFDoc doc;
   bool locked;

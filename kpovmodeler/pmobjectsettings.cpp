@@ -44,8 +44,8 @@
 #include <klocale.h>
 
 
-PMObjectSettings::PMObjectSettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMObjectSettings::PMObjectSettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQHBoxLayout* htqlayout;
    TQVBoxLayout* vtqlayout;

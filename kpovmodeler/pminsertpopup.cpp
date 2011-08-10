@@ -21,11 +21,11 @@
 #include <kiconloader.h>
 #include <tqcursor.h>
 
-PMInsertPopup::PMInsertPopup( TQWidget* tqparent, bool multipleObjects,
+PMInsertPopup::PMInsertPopup( TQWidget* parent, bool multipleObjects,
                               int items, bool canInsertAllAsFirstChildren,
                               bool canInsertAllAsLastChildren,
                               bool canInsertAllAsSiblings, const char* name )
-      : KPopupMenu( tqparent, name )
+      : KPopupMenu( parent, name )
 {
    TQString itemText;
    if( multipleObjects )
@@ -71,13 +71,13 @@ PMInsertPopup::PMInsertPopup( TQWidget* tqparent, bool multipleObjects,
    }
 }
 
-int PMInsertPopup::choosePlace( TQWidget* tqparent, bool multipleObjects,
+int PMInsertPopup::choosePlace( TQWidget* parent, bool multipleObjects,
                                 int items, bool canInsertAllAsFirstChildren,
                                 bool canInsertAllAsLastChildren,
                                 bool canInsertAllAsSiblings )
 {
    int result;
-   PMInsertPopup* popup = new PMInsertPopup( tqparent, multipleObjects, items,
+   PMInsertPopup* popup = new PMInsertPopup( parent, multipleObjects, items,
                                              canInsertAllAsFirstChildren,
                                              canInsertAllAsLastChildren,
                                              canInsertAllAsSiblings );

@@ -76,7 +76,7 @@ public:
    /**
     * Returns a new @ref PMTextureMapEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /** */
    virtual void createMemento( );

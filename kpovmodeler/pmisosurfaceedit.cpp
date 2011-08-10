@@ -28,8 +28,8 @@
 #include <tqcheckbox.h>
 #include <klocale.h>
 
-PMIsoSurfaceEdit::PMIsoSurfaceEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMIsoSurfaceEdit::PMIsoSurfaceEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

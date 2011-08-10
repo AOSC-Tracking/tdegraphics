@@ -30,7 +30,7 @@
 class ThumbnailWidget : public TQWidget
 {
     public:
-        ThumbnailWidget( TQWidget * tqparent, const KPDFPage * page, ThumbnailList * tl );
+        ThumbnailWidget( TQWidget * parent, const KPDFPage * page, ThumbnailList * tl );
 
         // set internal parameters to fit the page in the given width
         void resizeFitWidth( int width );
@@ -63,8 +63,8 @@ class ThumbnailWidget : public TQWidget
 
 /** ThumbnailList implementation **/
 
-ThumbnailList::ThumbnailList( TQWidget *tqparent, KPDFDocument *document )
-	: TQScrollView( tqparent, "KPDF::Thumbnails", WNoAutoErase | WStaticContents ),
+ThumbnailList::ThumbnailList( TQWidget *parent, KPDFDocument *document )
+	: TQScrollView( parent, "KPDF::Thumbnails", WNoAutoErase | WStaticContents ),
 	m_document( document ), m_selected( 0 ), m_delayTimer( 0 ), m_bookmarkOverlay( 0 )
 {
 	// set scrollbars
@@ -452,8 +452,8 @@ void ThumbnailList::delayedRequestVisiblePixmaps( int delayMs )
 
 /** ThumbnailWidget implementation **/
 
-ThumbnailWidget::ThumbnailWidget( TQWidget * tqparent, const KPDFPage * kp, ThumbnailList * tl )
-    : TQWidget( tqparent, 0, WNoAutoErase ), m_tl( tl ), m_page( kp ),
+ThumbnailWidget::ThumbnailWidget( TQWidget * parent, const KPDFPage * kp, ThumbnailList * tl )
+    : TQWidget( parent, 0, WNoAutoErase ), m_tl( tl ), m_page( kp ),
     m_selected( false ), m_pixmapWidth( 10 ), m_pixmapHeight( 10 )
 {
     m_labelNumber = m_page->number() + 1;
@@ -552,8 +552,8 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
 
 #define FILTERB_ID  1
 
-ThumbnailController::ThumbnailController( TQWidget * tqparent, ThumbnailList * list )
-    : KToolBar( tqparent, "ThumbsControlBar" )
+ThumbnailController::ThumbnailController( TQWidget * parent, ThumbnailList * list )
+    : KToolBar( parent, "ThumbsControlBar" )
 {
     // change toolbar appearance
     setMargin( 3 );

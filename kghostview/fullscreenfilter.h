@@ -30,14 +30,14 @@ class FullScreenFilter : public TQObject {
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		FullScreenFilter( KGVShell& tqparent );
+		FullScreenFilter( KGVShell& parent );
 
 		/** 
 		 * @reimplemented
 		 */
 		virtual bool eventFilter( TQObject*, TQEvent* );
 	private:
-		KGVShell& tqparent;
+		KGVShell& parent;
 };
 
 

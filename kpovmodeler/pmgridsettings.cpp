@@ -28,8 +28,8 @@
 #include <kcolorbutton.h>
 #include <klocale.h>
 
-PMGridSettings::PMGridSettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMGridSettings::PMGridSettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQHBoxLayout* htqlayout;
    TQVBoxLayout* vtqlayout;

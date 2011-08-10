@@ -205,15 +205,15 @@ void KookaImage::extractNow()
 {
    kdDebug(28000) << "extracting a subimage number " << m_subNo << endl;
 
-   KookaImage *tqparent = parentImage();
+   KookaImage *parent = parentImage();
 
-   if( tqparent )
+   if( parent )
    {
-      loadTiffDir( tqparent->localFileName(), m_subNo );
+      loadTiffDir( parent->localFileName(), m_subNo );
    }
    else
    {
-      kdDebug(28000) << "ERR: No tqparent defined - can not laod subimage" << endl;
+      kdDebug(28000) << "ERR: No parent defined - can not laod subimage" << endl;
    }
 }
 

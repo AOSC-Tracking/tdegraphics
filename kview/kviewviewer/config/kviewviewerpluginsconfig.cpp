@@ -30,8 +30,8 @@
 typedef KGenericFactory<KViewViewerPluginsConfig, TQWidget> KViewViewerPluginsConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewviewerpluginsconfig, KViewViewerPluginsConfigFactory( "kcm_kviewviewerpluginsconfig" ) )
 
-KViewViewerPluginsConfig::KViewViewerPluginsConfig( TQWidget * tqparent, const char *, const TQStringList & args )
-	: KSettings::PluginPage( KViewViewerPluginsConfigFactory::instance(), tqparent, args )
+KViewViewerPluginsConfig::KViewViewerPluginsConfig( TQWidget * parent, const char *, const TQStringList & args )
+	: KSettings::PluginPage( KViewViewerPluginsConfigFactory::instance(), parent, args )
 {
 	m_config = new KSimpleConfig( "kviewviewerrc" );
 	pluginSelector()->addPlugins( TQString::fromAscii( "kviewviewer" ), i18n( "Viewer" ), TQString(), m_config );

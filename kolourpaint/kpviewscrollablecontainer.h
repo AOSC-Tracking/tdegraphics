@@ -58,7 +58,7 @@ public:
     };
 
     kpGrip (GripType type,
-            TQWidget *tqparent, const char *name = 0);
+            TQWidget *parent, const char *name = 0);
     virtual ~kpGrip ();
 
     GripType type () const;
@@ -119,7 +119,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpViewScrollableContainer (kpMainWindow *tqparent, const char *name = 0);
+    kpViewScrollableContainer (kpMainWindow *parent, const char *name = 0);
     virtual ~kpViewScrollableContainer ();
 
     // Same as contentsX() and contentsY() except that after

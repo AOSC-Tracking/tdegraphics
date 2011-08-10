@@ -47,9 +47,9 @@ typedef KParts::GenericFactory<DjVuMultiPage> DjVuMultiPageFactory;
 K_EXPORT_COMPONENT_FACTORY(djvuviewpart, DjVuMultiPageFactory)
 
 
-DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
+DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
                              const char *name, const TQStringList&)
-  : KMultiPage(parentWidget, widgetName, tqparent, name), djvuRenderer(parentWidget)
+  : KMultiPage(parentWidget, widgetName, parent, name), djvuRenderer(parentWidget)
 {
   /* This is kparts wizardry that cannot be understood by man. Simply
      change the names to match your implementation.  */

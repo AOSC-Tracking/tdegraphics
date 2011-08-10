@@ -33,7 +33,7 @@ class KResizeWidget : public TQWidget
 
 public:
 
-  KResizeWidget( TQWidget* tqparent, const char* name, const TQSize& );
+  KResizeWidget( TQWidget* parent, const char* name, const TQSize& );
   ~KResizeWidget();
 
   const TQSize getSize();
@@ -51,7 +51,7 @@ class KResizeDialog : public KDialogBase
   
 public:
 
-  KResizeDialog( TQWidget* tqparent, const char* name, const TQSize s );
+  KResizeDialog( TQWidget* parent, const char* name, const TQSize s );
   ~KResizeDialog();
 
   const TQSize getSize();

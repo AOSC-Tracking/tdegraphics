@@ -293,7 +293,7 @@ class PMSaveViewLayoutDialog : public KDialogBase
    Q_OBJECT
   TQ_OBJECT
 public:
-   PMSaveViewLayoutDialog( PMShell* tqparent, const char* name = 0 );
+   PMSaveViewLayoutDialog( PMShell* parent, const char* name = 0 );
    ~PMSaveViewLayoutDialog( );
 protected slots:
    virtual void slotOk( );

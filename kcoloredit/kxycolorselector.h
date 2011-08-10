@@ -47,7 +47,7 @@ public:
 	/** Constructs a two-dimensional color component selector widget,
 	 *  with a type TYPE_NONE and ranges 0 .. MAX_COLOR_COMPONENT_VALUE
 	 */
-	KXYColorSelector(TQWidget *tqparent=0, const char *name=0);
+	KXYColorSelector(TQWidget *parent=0, const char *name=0);
 	~KXYColorSelector();
 	/** Set the type of the selector */
 	void setType(const int type);

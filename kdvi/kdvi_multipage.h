@@ -15,7 +15,7 @@ class KDVIMultiPage : public KMultiPage
   TQ_OBJECT
 
 public:
-  KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
+  KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,
                 const char *name, const TQStringList& args = TQStringList());
   virtual ~KDVIMultiPage();
 

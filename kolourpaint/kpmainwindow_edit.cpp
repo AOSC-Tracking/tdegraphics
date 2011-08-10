@@ -72,7 +72,7 @@ kpPixmapFX::WarnAboutLossInfo kpMainWindow::pasteWarnAboutLossInfo ()
 
                      " contains translucency which is not fully"
                      " supported. The translucency data will be"
-                     " approximated with a 1-bit transparency tqmask."),
+                     " approximated with a 1-bit transparency mask."),
                i18n ("The image to be pasted"
                      " may have more colors than the current screen mode."
                      " In order to display it, some colors may be changed."
@@ -80,7 +80,7 @@ kpPixmapFX::WarnAboutLossInfo kpMainWindow::pasteWarnAboutLossInfo ()
                i18n ("The image to be pasted"
                      " contains translucency which is not fully"
                      " supported. The translucency data will be"
-                     " approximated with a 1-bit transparency tqmask."),
+                     " approximated with a 1-bit transparency mask."),
                "paste",
                this);
 }
@@ -215,7 +215,7 @@ void kpMainWindow::slotCopy ()
 
     kpSelection sel = *m_document->selection ();
     // Transparency doesn't get sent across the aether so nuke it now
-    // so that transparency tqmask doesn't get needlessly recalculated
+    // so that transparency mask doesn't get needlessly recalculated
     // if we ever call sel.setPixmap().
     sel.setTransparency (kpSelectionTransparency ());
 
@@ -256,12 +256,12 @@ void kpMainWindow::slotCopy ()
         else
             rawPixmap = m_document->getSelectedPixmap ();
         
-        // Some apps, such as OpenOffice.org 2.0.4, ignore the image tqmask
+        // Some apps, such as OpenOffice.org 2.0.4, ignore the image mask
         // when pasting.  For transparent pixels, the uninitialized RGB
         // values are used.  Fix this by initializing those values to a
         // neutral color -- white.
         //
-        // Strangely enough, OpenOffice.org respects the tqmask when inserting
+        // Strangely enough, OpenOffice.org respects the mask when inserting
         // an image from a file, as opposed to pasting one from the clipboard.
         sel.setPixmap (
             kpPixmapFX::pixmapWithDefinedTransparentPixels (

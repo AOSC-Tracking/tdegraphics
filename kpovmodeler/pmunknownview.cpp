@@ -20,8 +20,8 @@
 #include <tqlayout.h>
 
 PMUnknownView::PMUnknownView( const TQString& viewType,
-                              TQWidget* tqparent, const char* name )
-      : PMViewBase( tqparent, name )
+                              TQWidget* parent, const char* name )
+      : PMViewBase( parent, name )
 {
    TQHBoxLayout* hl = new TQHBoxLayout( this );
    TQLabel* l;

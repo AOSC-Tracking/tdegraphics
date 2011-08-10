@@ -48,9 +48,9 @@ class PMSphereSweepEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMSphereSweepEdit with tqparent and name
+    * Creates a PMSphereSweepEdit with parent and name
     */
-   PMSphereSweepEdit( TQWidget* tqparent, const char* name = 0 );
+   PMSphereSweepEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

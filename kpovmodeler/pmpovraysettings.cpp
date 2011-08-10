@@ -35,8 +35,8 @@
 #include <kmessagebox.h>
 #include <kfiledialog.h>
 
-PMPovraySettings::PMPovraySettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    m_selectionIndex = 0;
 

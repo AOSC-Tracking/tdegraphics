@@ -14,7 +14,7 @@ class KViewTemplate : public KParts::Plugin
 	Q_OBJECT
   TQ_OBJECT
 public:
-	KViewTemplate( TQObject* tqparent, const char* name, const TQStringList & );
+	KViewTemplate( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewTemplate();
 
 private slots:

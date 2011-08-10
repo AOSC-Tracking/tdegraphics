@@ -39,9 +39,9 @@ class PMTranslateEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMTranslateEdit with tqparent and name
+    * Creates a PMTranslateEdit with parent and name
     */
-   PMTranslateEdit( TQWidget* tqparent, const char* name = 0 );
+   PMTranslateEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

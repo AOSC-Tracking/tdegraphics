@@ -104,8 +104,8 @@ void PMLibraryIconDrag::append( const TQIconDragItem &item, const TQRect &pr,
    m_subLibs.append( isSubLibrary );
 }
 
-PMLibraryIconView::PMLibraryIconView( TQWidget* tqparent, const char* name )
-      : KIconView( tqparent, name )
+PMLibraryIconView::PMLibraryIconView( TQWidget* parent, const char* name )
+      : KIconView( parent, name )
 {
    m_pLibrary = NULL;
    m_pCurrentLibrary = NULL;
@@ -192,15 +192,15 @@ TQDragObject* PMLibraryIconView::dragObject( )
    return drag;
 }
 
-PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *tqparent, const TQString &text, const TQString& path, bool isSubLibrary )
-   : KIconViewItem( tqparent, text )
+PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *parent, const TQString &text, const TQString& path, bool isSubLibrary )
+   : KIconViewItem( parent, text )
 {
    m_path = path;
    m_isSubLibrary = isSubLibrary;
 }
 
-PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *tqparent, const TQString &text, const TQImage& image, const TQString& path, bool isSubLibrary )
-   : KIconViewItem( tqparent, text, image )
+PMLibraryIconViewItem::PMLibraryIconViewItem( TQIconView *parent, const TQString &text, const TQImage& image, const TQString& path, bool isSubLibrary )
+   : KIconViewItem( parent, text, image )
 {
    m_path = path;
    m_isSubLibrary = isSubLibrary;

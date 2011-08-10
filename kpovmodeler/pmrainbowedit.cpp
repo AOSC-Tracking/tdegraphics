@@ -30,8 +30,8 @@
 #include <kmessagebox.h>
 
 
-PMRainbowEdit::PMRainbowEdit( TQWidget* tqparent, const char* name )
-      : Base( tqparent, name )
+PMRainbowEdit::PMRainbowEdit( TQWidget* parent, const char* name )
+      : Base( parent, name )
 {
    m_pDisplayedObject = 0;
 }

@@ -25,8 +25,8 @@
 #include <kcolorbutton.h>
 #include <klocale.h>
 
-PMColorSettings::PMColorSettings( TQWidget* tqparent, const char* name )
-      : PMSettingsDialogPage( tqparent, name )
+PMColorSettings::PMColorSettings( TQWidget* parent, const char* name )
+      : PMSettingsDialogPage( parent, name )
 {
    TQHBoxLayout* htqlayout;
    TQVBoxLayout* vtqlayout;

@@ -58,8 +58,8 @@
 #include "previewer.h"
 #include "kookaimage.h"
 
-FormatDialog::FormatDialog( TQWidget *tqparent, const TQString&, const char *name )
-   :KDialogBase( tqparent, name, true,
+FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name )
+   :KDialogBase( parent, name, true,
                  /* Tabbed,*/ i18n( "Kooka Save Assistant" ),
 		 Ok|Cancel, Ok )
 
@@ -218,8 +218,8 @@ void FormatDialog::buildHelp( void )
 
 /* ********************************************************************** */
 
-ImgSaver::ImgSaver(  TQWidget *tqparent, const KURL dir_name )
-   : TQObject( tqparent )
+ImgSaver::ImgSaver(  TQWidget *parent, const KURL dir_name )
+   : TQObject( parent )
 {
 
    if( dir_name.isEmpty() || dir_name.protocol() != "file" )
@@ -250,8 +250,8 @@ ImgSaver::ImgSaver(  TQWidget *tqparent, const KURL dir_name )
 }
 
 
-ImgSaver::ImgSaver( TQWidget *tqparent )
-   :TQObject( tqparent )
+ImgSaver::ImgSaver( TQWidget *parent )
+   :TQObject( parent )
 {
    directory = Previewer::galleryRoot();
    createDir( directory );
@@ -395,7 +395,7 @@ TQString ImgSaver::createFilename( TQString format )
 }
 
 /**
- *   This function gets a filename from the tqparent. The filename must not be relative.
+ *   This function gets a filename from the parent. The filename must not be relative.
  **/
 ImgSaveStat ImgSaver::saveImage( TQImage *image, const KURL& filename, const TQString& imgFormat )
 {

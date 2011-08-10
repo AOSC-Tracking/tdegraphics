@@ -24,7 +24,7 @@
 #include "main.h"
 #include "gradientselection.h"
 
-GradientSelection::GradientSelection(TQWidget *tqparent, const char *name ) : TQWidget(tqparent,name) {
+GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
 	TQGridLayout* topLayout = new TQGridLayout(this, 2, 2, 0);
 	TQHBoxLayout* tqlayout = new TQHBoxLayout(0);
 	tqlayout->setMargin(3);

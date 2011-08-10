@@ -63,7 +63,7 @@ Q_OBJECT
 
 public:
     kpDualColorButton (kpMainWindow *mainWindow,
-                       TQWidget *tqparent, const char *name = 0);
+                       TQWidget *parent, const char *name = 0);
     virtual ~kpDualColorButton ();
 
     kpColor color (int which) const;
@@ -122,7 +122,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpColorCells (TQWidget *tqparent,
+    kpColorCells (TQWidget *parent,
                   Qt::Orientation o = Qt::Horizontal,
                   const char *name = 0);
     virtual ~kpColorCells ();
@@ -160,7 +160,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpTransparentColorCell (TQWidget *tqparent, const char *name = 0);
+    kpTransparentColorCell (TQWidget *parent, const char *name = 0);
     virtual ~kpTransparentColorCell ();
 
     virtual TQSize tqsizeHint () const;
@@ -188,7 +188,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpColorPalette (TQWidget *tqparent,
+    kpColorPalette (TQWidget *parent,
                     Qt::Orientation o = Qt::Horizontal,
                     const char *name = 0);
     virtual ~kpColorPalette ();
@@ -216,7 +216,7 @@ Q_OBJECT
 
 public:
     kpColorSimilarityToolBarItem (kpMainWindow *mainWindow,
-                                  TQWidget *tqparent,
+                                  TQWidget *parent,
                                   const char *name = 0);
     virtual ~kpColorSimilarityToolBarItem ();
 

@@ -86,7 +86,7 @@ public:
    /**
     * Returns a new @ref PMImageMapEdit
     */
-   virtual PMDialogEditBase* editWidget( TQWidget* tqparent ) const;
+   virtual PMDialogEditBase* editWidget( TQWidget* parent ) const;
 
    /**
     * Gets the bitmap type

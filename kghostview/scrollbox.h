@@ -28,7 +28,7 @@ class ScrollBox: public TQFrame
   TQ_OBJECT
 
 public:
-    ScrollBox( TQWidget* tqparent = 0, const char* name = 0 );
+    ScrollBox( TQWidget* parent = 0, const char* name = 0 );
 
 public slots:
     void setPageSize( const TQSize& );

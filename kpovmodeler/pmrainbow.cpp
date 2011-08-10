@@ -347,9 +347,9 @@ void PMRainbow::enableFalloffAngle( bool c )
    }
 }
 
-PMDialogEditBase* PMRainbow::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMRainbow::editWidget( TQWidget* parent ) const
 {
-   return new PMRainbowEdit( tqparent );
+   return new PMRainbowEdit( parent );
 }
 
 void PMRainbow::restoreMemento( PMMemento* s )

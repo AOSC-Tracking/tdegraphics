@@ -36,24 +36,24 @@ class PMTreeViewItem : public TQListViewItem
 {
 public:
    /**
-    * Constructs a new top-level list view item in the TQListView tqparent.
+    * Constructs a new top-level list view item in the TQListView parent.
     */
-   PMTreeViewItem( PMObject* object, TQListView* tqparent );
+   PMTreeViewItem( PMObject* object, TQListView* parent );
    /**
-    * Constructs a new list view item which is a child of tqparent and
-    * first in the tqparent's list of tqchildren.
+    * Constructs a new list view item which is a child of parent and
+    * first in the parent's list of tqchildren.
     */
-   PMTreeViewItem( PMObject* object, TQListViewItem* tqparent );
+   PMTreeViewItem( PMObject* object, TQListViewItem* parent );
    /**
-    * Constructs a list view item which is a child of tqparent
-    * and is after after in the tqparent's list of tqchildren.
+    * Constructs a list view item which is a child of parent
+    * and is after after in the parent's list of tqchildren.
     */
-   PMTreeViewItem( PMObject* object, TQListView* tqparent, TQListViewItem* after );
+   PMTreeViewItem( PMObject* object, TQListView* parent, TQListViewItem* after );
    /**
-    * Constructs a list view item which is a child of tqparent
-    * and is after after in the tqparent's list of tqchildren.
+    * Constructs a list view item which is a child of parent
+    * and is after after in the parent's list of tqchildren.
     */
-   PMTreeViewItem( PMObject* object, TQListViewItem* tqparent,
+   PMTreeViewItem( PMObject* object, TQListViewItem* parent,
                    TQListViewItem* after );
    /**
     * Returns the connected @ref PMObject
@@ -65,11 +65,11 @@ public:
     */
    virtual TQString key( int column, bool ascending ) const;
    /**
-    * Returns a pointer to the tqparent item
+    * Returns a pointer to the parent item
     */
-   PMTreeViewItem* tqparent( )
+   PMTreeViewItem* parent( )
    {
-      return ( PMTreeViewItem* ) TQListViewItem::tqparent( );
+      return ( PMTreeViewItem* ) TQListViewItem::parent( );
    }
    void setSelected( bool select );
    

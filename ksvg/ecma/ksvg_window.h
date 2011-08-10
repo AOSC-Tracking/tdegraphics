@@ -114,7 +114,7 @@ protected slots:
 protected:
 	void timerEvent(TQTimerEvent *e);
 private:
-	Window *tqparent;
+	Window *parent;
 	//KHTMLPart *part;        // not guarded, may be dangling
 	TQMap<int, ScheduledAction*> scheduledActions;
 };

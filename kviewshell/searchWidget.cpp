@@ -36,8 +36,8 @@
 
 #include "searchWidget.h"
 
-SearchWidget::SearchWidget(TQWidget* tqparent, const char* name, WFlags fl)
-  : TQWidget(tqparent, name, fl)
+SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
+  : TQWidget(parent, name, fl)
 {
   setName("SearchWidget");
 

@@ -69,8 +69,8 @@ TQString PMDensity::description( ) const
 }
 
 
-PMDialogEditBase* PMDensity::editWidget( TQWidget* tqparent ) const
+PMDialogEditBase* PMDensity::editWidget( TQWidget* parent ) const
 {
-   return new PMDensityEdit( tqparent );
+   return new PMDensityEdit( parent );
 }
 

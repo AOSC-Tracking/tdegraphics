@@ -32,7 +32,7 @@ namespace KMrml
   TQ_OBJECT
 
     public:
-        CollectionCombo( TQWidget *tqparent, const char *name = 0 );
+        CollectionCombo( TQWidget *parent, const char *name = 0 );
         ~CollectionCombo();
 
         void setCollections( const CollectionList * collections );

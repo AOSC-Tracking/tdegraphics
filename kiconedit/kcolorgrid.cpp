@@ -69,8 +69,8 @@ uint KColorArray::closestMatch(uint color)
   return c|OPAQUE_MASK;
 }
 
-KColorGrid::KColorGrid(TQWidget *tqparent, const char *name, int space)
- : TQWidget(tqparent, name, TQt::WResizeNoErase|TQt::WRepaintNoErase)
+KColorGrid::KColorGrid(TQWidget *parent, const char *name, int space)
+ : TQWidget(parent, name, TQt::WResizeNoErase|TQt::WRepaintNoErase)
 {
   //kdDebug(4640) << "KColorGrid - constructor" << endl;
   s = space;

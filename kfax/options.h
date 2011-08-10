@@ -61,7 +61,7 @@ class OptionsDialog : public KDialogBase {
   TQ_OBJECT
 
 public:
-    OptionsDialog( TQWidget *tqparent = 0, const char *name = 0);
+    OptionsDialog( TQWidget *parent = 0, const char *name = 0);
 
     struct optionsinfo* getInfo();
     void setWidgets(struct optionsinfo *oi);

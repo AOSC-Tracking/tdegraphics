@@ -41,7 +41,7 @@ class KFileTreeViewItem;
 class ThumbViewItem: public KFileIconViewItem
 {
 public:
-   ThumbViewItem( TQIconView *tqparent,
+   ThumbViewItem( TQIconView *parent,
 		  const TQString &text,
 		  const TQPixmap &pixmap,
 		  KFileItem *fi );

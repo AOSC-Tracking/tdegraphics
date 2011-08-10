@@ -55,7 +55,7 @@ TQPixmap* waitIcon = 0;
 /****** ThumbnailWidget ******/
 
 ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pageNumber, DocumentPageCache* _pageCache)
-  : TQWidget(_parent), pageNumber(_pageNumber), pageCache(_pageCache), tqparent(_parent)
+  : TQWidget(_parent), pageNumber(_pageNumber), pageCache(_pageCache), parent(_parent)
 {
   setBackgroundMode(TQt::NoBackground);
 
@@ -73,7 +73,7 @@ void ThumbnailWidget::paintEvent(TQPaintEvent* e)
   // sends paintEvents to all widgets that have ever been visible in the Scrollview
   // whenever the ScrollView is resized. This also increases the percieved performance
   // only thumbnails that are really needed are rendered.
-  if (!tqparent->isVisible())
+  if (!parent->isVisible())
   {
     //kdDebug() << "Abort Thumbnail drawing for page " << pageNumber << endl;
     return;
@@ -138,7 +138,7 @@ void ThumbnailWidget::resizeEvent(TQResizeEvent*)
 
 void ThumbnailWidget::setThumbnail()
 {
-  if (!tqparent->isVisible())
+  if (!parent->isVisible())
   {
     // We only want to calculate the thumbnail for widgets that are currently visible.
     // When we are fast scrolling thru the document. Many paint events are created, that
@@ -272,8 +272,8 @@ void MarkListWidget::mousePressEvent(TQMouseEvent* e)
 /****** MarkList ******/
 
 
-MarkList::MarkList(TQWidget* tqparent, const char* name)
-  : TQScrollView(tqparent, name), clickedThumbnail(0), showThumbnails(true), contextMenu(0)
+MarkList::MarkList(TQWidget* parent, const char* name)
+  : TQScrollView(parent, name), clickedThumbnail(0), showThumbnails(true), contextMenu(0)
 {
   currentPage = PageNumber::invalidPage;
   widgetList.setAutoDelete(true);

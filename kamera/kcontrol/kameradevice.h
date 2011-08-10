@@ -91,7 +91,7 @@ class KameraDeviceSelectDialog : public KDialogBase
 	Q_OBJECT
   TQ_OBJECT
 public:
-	KameraDeviceSelectDialog(TQWidget *tqparent, KCamera *device);
+	KameraDeviceSelectDialog(TQWidget *parent, KCamera *device);
 	void save();
 	void load();
 protected slots:

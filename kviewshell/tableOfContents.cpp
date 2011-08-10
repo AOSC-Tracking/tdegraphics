@@ -28,19 +28,19 @@
 #include "kvsprefs.h"
 
 
-TocItem::TocItem(TocItem* tqparent)
-  : KListViewItem(tqparent)
+TocItem::TocItem(TocItem* parent)
+  : KListViewItem(parent)
 {
 }
 
-TocItem::TocItem(TQListView* tqparent)
-  : KListViewItem(tqparent)
+TocItem::TocItem(TQListView* parent)
+  : KListViewItem(parent)
 {
 }
 
 
-TableOfContents::TableOfContents(TQWidget* tqparent)
-  : KListView(tqparent)
+TableOfContents::TableOfContents(TQWidget* parent)
+  : KListView(parent)
 {
   addColumn(i18n("Topic"));
   addColumn(i18n("Page"));
@@ -79,7 +79,7 @@ void TableOfContents::setContents(const TQPtrList<Bookmark>& bookmarks)
   addItems(bookmarks);
 }
 
-void TableOfContents::addItems(const TQPtrList<Bookmark>& _bookmarks, TocItem* tqparent)
+void TableOfContents::addItems(const TQPtrList<Bookmark>& _bookmarks, TocItem* parent)
 {
   kdDebug(1223) << "TableOfContents::setContents()" << endl;
   if (_bookmarks.isEmpty())
@@ -90,10 +90,10 @@ void TableOfContents::addItems(const TQPtrList<Bookmark>& _bookmarks, TocItem* t
   TQPtrList<Bookmark> bookmarks = _bookmarks;
   for (Bookmark* current = bookmarks.last(); current; current = bookmarks.prev() ) {
     TocItem* item;
-    if (!tqparent)
+    if (!parent)
       item = new TocItem(this);
     else
-      item = new TocItem(tqparent);
+      item = new TocItem(parent);
     
     item->setText(0, current->bookmarkText);
     if (current->position.page != 0)

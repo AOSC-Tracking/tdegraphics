@@ -46,9 +46,9 @@ class PMMaterialMapEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMMaterialMapEdit with tqparent and name
+    * Creates a PMMaterialMapEdit with parent and name
     */
-   PMMaterialMapEdit( TQWidget* tqparent, const char* name = 0 );
+   PMMaterialMapEdit( TQWidget* parent, const char* name = 0 );
    /** */
    virtual void displayObject( PMObject* o );
    /** */

@@ -38,8 +38,8 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpResizeSignallingLabel (const TQString &string, TQWidget *tqparent, const char *name = 0);
-    kpResizeSignallingLabel (TQWidget *tqparent, const char *name = 0);
+    kpResizeSignallingLabel (const TQString &string, TQWidget *parent, const char *name = 0);
+    kpResizeSignallingLabel (TQWidget *parent, const char *name = 0);
     virtual ~kpResizeSignallingLabel ();
 
 signals:

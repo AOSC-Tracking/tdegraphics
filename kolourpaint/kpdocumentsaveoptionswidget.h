@@ -47,7 +47,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    kpDocumentSaveOptionsPreviewDialog (TQWidget *tqparent, const char *name = 0);
+    kpDocumentSaveOptionsPreviewDialog (TQWidget *parent, const char *name = 0);
     virtual ~kpDocumentSaveOptionsPreviewDialog ();
 
     TQSize preferredMinimumSize () const;
@@ -102,8 +102,8 @@ public:
     kpDocumentSaveOptionsWidget (const TQPixmap &docPixmap,
                                  const kpDocumentSaveOptions &saveOptions,
                                  const kpDocumentMetaInfo &metaInfo,
-                                 TQWidget *tqparent, const char *name = 0);
-    kpDocumentSaveOptionsWidget (TQWidget *tqparent, const char *name = 0);
+                                 TQWidget *parent, const char *name = 0);
+    kpDocumentSaveOptionsWidget (TQWidget *parent, const char *name = 0);
 private:
     void init ();
 public:

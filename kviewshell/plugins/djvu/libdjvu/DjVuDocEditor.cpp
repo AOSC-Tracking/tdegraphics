@@ -468,7 +468,7 @@ DjVuDocEditor::insert_file(const GURL &file_url, const GUTF8String &parent_id,
       // Strip any INCL chunks
    file_pool=strip_incl_chunks(file_pool);
 
-      // Check if tqparent ID is valid
+      // Check if parent ID is valid
    GP<DjVmDir::File> parent_frec(dir->id_to_file(parent_id));
    if (!parent_frec)
      parent_frec=dir->name_to_file(parent_id);
@@ -499,7 +499,7 @@ DjVuDocEditor::insert_file(const GURL &file_url, const GUTF8String &parent_id,
       files_map[id]=f;
    }
 
-      // And insert it into the tqparent DjVuFile
+      // And insert it into the parent DjVuFile
    parent_file->insert_file(id, chunk_num);
 
    return id;
@@ -966,7 +966,7 @@ DjVuDocEditor::remove_file(const GUTF8String &id, bool remove_unref,
                            GMap<GUTF8String, void *> & ref_map)
       // Private function, which will remove file with ID id.
       //
-      // If will also remove all INCL chunks in tqparent files pointing
+      // If will also remove all INCL chunks in parent files pointing
       // to this one
       //
       // Finally, if remove_unref is TRUE, we will go down the files
@@ -982,9 +982,9 @@ DjVuDocEditor::remove_file(const GUTF8String &id, bool remove_unref,
       for(GPosition pos=*parents;pos;++pos)
       {
          const GUTF8String parent_id((*parents).key(pos));
-         const GP<DjVuFile> tqparent(get_djvu_file(parent_id));
-         if (tqparent)
-           tqparent->unlink_file(id);
+         const GP<DjVuFile> parent(get_djvu_file(parent_id));
+         if (parent)
+           parent->unlink_file(id);
       }
       delete parents;
       parents=0;

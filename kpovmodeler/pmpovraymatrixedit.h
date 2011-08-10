@@ -39,9 +39,9 @@ class PMPovrayMatrixEdit : public PMDialogEditBase
    typedef PMDialogEditBase Base;
 public:
    /**
-    * Creates a PMPovrayMatrixEdit with tqparent and name
+    * Creates a PMPovrayMatrixEdit with parent and name
     */
-   PMPovrayMatrixEdit( TQWidget* tqparent, const char* name = 0 );
+   PMPovrayMatrixEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

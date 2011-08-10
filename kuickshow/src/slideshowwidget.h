@@ -29,7 +29,7 @@ class SlideShowWidget : public TQWidget
     Q_OBJECT
   TQ_OBJECT
 public:
-    SlideShowWidget( TQWidget *tqparent, const char *name );
+    SlideShowWidget( TQWidget *parent, const char *name );
     ~SlideShowWidget();
 
     virtual void loadSettings( const KuickData& data );

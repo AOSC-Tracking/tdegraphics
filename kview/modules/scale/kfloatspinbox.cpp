@@ -37,8 +37,8 @@ int pow( int a, int b )
 	return ret;
 }
 
-KFloatSpinBox::KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, TQWidget * tqparent, const char * name )
-	: TQSpinBox( tqparent, name )
+KFloatSpinBox::KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, TQWidget * parent, const char * name )
+	: TQSpinBox( parent, name )
 	, m_doselection( true )
 {
 	setRange( minValue, maxValue, step, precision );

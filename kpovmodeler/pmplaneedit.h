@@ -38,9 +38,9 @@ class PMPlaneEdit : public PMSolidObjectEdit
    typedef PMSolidObjectEdit Base;
 public:
    /**
-    * Creates a PMPlaneEdit with tqparent and name
+    * Creates a PMPlaneEdit with parent and name
     */
-   PMPlaneEdit( TQWidget* tqparent, const char* name = 0 );
+   PMPlaneEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );

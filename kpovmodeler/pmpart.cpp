@@ -100,10 +100,10 @@ TQTime PMDebugTime;
 //#define KPM_WITH_OBJECT_LIBRARY
 
 PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
-                TQObject* tqparent, const char* name, bool readwrite,
+                TQObject* parent, const char* name, bool readwrite,
                 PMShell* shell )
       : DCOPObject( "PMPartIface" ),
-        KParts::ReadWritePart( tqparent, name ),
+        KParts::ReadWritePart( parent, name ),
         m_commandManager( this )
 {
    setPluginLoadingMode( LoadPlugins );
@@ -162,10 +162,10 @@ PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
 }
 
 PMPart::PMPart( TQWidget* /*parentWidget*/, const char* /*widgetName*/,
-                TQObject* tqparent, const char* name, bool readwrite,
+                TQObject* parent, const char* name, bool readwrite,
                 bool /*onlyCutPaste*/, PMShell* shell )
       : DCOPObject( "LibraryBrowserIface" ),
-        KParts::ReadWritePart( tqparent, name ),
+        KParts::ReadWritePart( parent, name ),
         m_commandManager( this )
 {
    setPluginLoadingMode( LoadPlugins );
@@ -662,8 +662,8 @@ void PMPart::updateNewObjectActions( )
       bool readWriteParent = false;
 
       if( m_pActiveObject )
-         if( m_pActiveObject->tqparent( ) )
-            if( !m_pActiveObject->tqparent( )->isReadOnly( ) )
+         if( m_pActiveObject->parent( ) )
+            if( !m_pActiveObject->parent( )->isReadOnly( ) )
                readWriteParent = true;
 
       for( ; it.current( ); ++it )
@@ -685,7 +685,7 @@ void PMPart::updateNewObjectActions( )
                      enable = m_pActiveObject->canInsert( insertName, m_pActiveObject->lastChild( ) );
                if( !enable )
                   if( readWriteParent )
-                     enable |= m_pActiveObject->tqparent( )->canInsert( insertName, m_pActiveObject );
+                     enable |= m_pActiveObject->parent( )->canInsert( insertName, m_pActiveObject );
             }
             else
                enable = false;
@@ -701,7 +701,7 @@ void PMPart::updateNewObjectActions( )
                enable = m_pActiveObject->canInsert( TQString( "CSG" ), m_pActiveObject->lastChild( ) );
          if( !enable )
             if( readWriteParent )
-               enable = m_pActiveObject->tqparent( )->canInsert( TQString( "CSG" ), m_pActiveObject );
+               enable = m_pActiveObject->parent( )->canInsert( TQString( "CSG" ), m_pActiveObject );
       }
       else
          enable = false;
@@ -725,13 +725,13 @@ void PMPart::initDocument( )
    newDocument( );
 }
 
-void PMPart::initView( TQWidget* tqparent, const char* name )
+void PMPart::initView( TQWidget* parent, const char* name )
 {
    if( !m_pShell )
    {
       // a part inside konqueror
       // simple tqlayout
-      m_pView = new PMView( this, tqparent, name );
+      m_pView = new PMView( this, parent, name );
       m_pView->show( );
       setWidget( m_pView );
    }
@@ -995,7 +995,7 @@ TQString PMPart::activeObjectName( )
          result = tmpObj->type( ) + "/" + result;
 
       // go up in the scene
-      tmpObj = tmpObj->tqparent( );
+      tmpObj = tmpObj->parent( );
       idx = 0;
    }
 
@@ -1240,9 +1240,9 @@ int PMPart::whereToInsert( PMObject* obj, const PMObjectList& list )
       }
    }
 
-   if( obj->tqparent( ) )
+   if( obj->parent( ) )
    {
-      PMObject* p = obj->tqparent( );
+      PMObject* p = obj->parent( );
       if( !p->isReadOnly( ) )
       {
          canInsertAsSibling = p->canInsert( list, obj );
@@ -1301,9 +1301,9 @@ int PMPart::whereToInsert( PMObject* obj, const TQStringList& list )
       }
    }
 
-   if( obj->tqparent( ) )
+   if( obj->parent( ) )
    {
-      PMObject* p = obj->tqparent( );
+      PMObject* p = obj->parent( );
       if( !p->isReadOnly( ) )
       {
          canInsertAsSibling = p->canInsert( list, obj );
@@ -1336,7 +1336,7 @@ int PMPart::whereToInsert( PMObject* obj )
    int insertAs = 0;
    int insertPossibilities = 0;
 
-   if( obj->tqparent( ) )
+   if( obj->parent( ) )
    {
       insertAs |= PMInsertPopup::PMISibling;
       insertPossibilities++;
@@ -1513,7 +1513,7 @@ bool PMPart::dragMoveSelectionTo( PMObject* obj )
                command = new PMMoveCommand( sortedList, obj, hlp );
                break;
             case PMInsertPopup::PMISibling:
-               command = new PMMoveCommand( sortedList, obj->tqparent( ), obj );
+               command = new PMMoveCommand( sortedList, obj->parent( ), obj );
                break;
          }
       }
@@ -1600,30 +1600,30 @@ bool PMPart::insertFromParser( const TQString& type, PMParser* parser,
 
    if( success && insertAs )
    {
-      PMObject* tqparent = 0;
+      PMObject* parent = 0;
       PMObject* after = 0;
 
       switch( insertAs )
       {
          case PMInsertPopup::PMIFirstChild:
-            tqparent = obj;
+            parent = obj;
             after = 0;
             break;
          case PMInsertPopup::PMILastChild:
-            tqparent = obj;
+            parent = obj;
             after = obj->lastChild( );
             break;
          case PMInsertPopup::PMISibling:
-            tqparent = obj->tqparent( );
+            parent = obj->parent( );
             after = obj;
             break;
          default:
-            tqparent = obj;
+            parent = obj;
             after = 0;
             break;
       }
 
-      parser->parse( &list, tqparent, after );
+      parser->parse( &list, parent, after );
       success = !( parser->warnings( ) || parser->errors( ) );
 
       if( !success )
@@ -1639,7 +1639,7 @@ bool PMPart::insertFromParser( const TQString& type, PMParser* parser,
          if( success )
          {
             // parsing was successful
-            command = new PMAddCommand( list, tqparent, after );
+            command = new PMAddCommand( list, parent, after );
 
             command->setText( type );
             success = executeCommand( command );
@@ -1850,8 +1850,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
 
    if( mode & PMCRemove )
    {
-      if( obj->tqparent( ) )
-         if( obj->tqparent( ) == m_pActiveObject )
+      if( obj->parent( ) )
+         if( obj->parent( ) == m_pActiveObject )
             m_updateNewObjectActions = true;
       if( m_pNewSelection == obj )
       {
@@ -1859,8 +1859,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
             m_pNewSelection = obj->nextSibling( );
          else if( obj->prevSibling( ) )
             m_pNewSelection = obj->nextSibling( );
-         else if( obj->tqparent( ) )
-            m_pNewSelection = obj->tqparent( );
+         else if( obj->parent( ) )
+            m_pNewSelection = obj->parent( );
          else
             m_pNewSelection = 0;
       }
@@ -1873,8 +1873,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
                m_pNewSelection = obj->nextSibling( );
             else if( obj->prevSibling( ) )
                m_pNewSelection = obj->prevSibling( );
-            else if( obj->tqparent( ) )
-               m_pNewSelection = obj->tqparent( );
+            else if( obj->parent( ) )
+               m_pNewSelection = obj->parent( );
             else
                m_pNewSelection = 0;
          }
@@ -1911,8 +1911,8 @@ void PMPart::slotObjectChanged( PMObject* obj, const int m,
          if( obj->type( ) == "Camera" )
             m_bCameraListUpToDate = false;
       }
-      if( obj->tqparent( ) )
-         if( obj->tqparent( ) == m_pActiveObject )
+      if( obj->parent( ) )
+         if( obj->parent( ) == m_pActiveObject )
             m_updateNewObjectActions = true;
       m_numAddedObjects++;
    }
@@ -2028,7 +2028,7 @@ void PMPart::slotNewObject( PMObject* newObject, int insertAs )
                break;
             case PMInsertPopup::PMISibling:
                command = new PMAddCommand( list,
-                                           m_pActiveObject->tqparent( ),
+                                           m_pActiveObject->parent( ),
                                            m_pActiveObject );
                break;
             default:
@@ -2525,8 +2525,8 @@ void PMPart::clearSelection( )
          m_pNewSelection = it.current( )->nextSibling( );
       else if( it.current( )->prevSibling( ) )
          m_pNewSelection = it.current( )->prevSibling( );
-      else if( it.current( )->tqparent( ) )
-         m_pNewSelection = it.current( )->tqparent( );
+      else if( it.current( )->parent( ) )
+         m_pNewSelection = it.current( )->parent( );
 
       for( ; it.current( ); ++it )
       {
@@ -2537,8 +2537,8 @@ void PMPart::clearSelection( )
                m_pNewSelection = it.current( )->nextSibling( );
             else if( it.current( )->prevSibling( ) )
                m_pNewSelection = it.current( )->prevSibling( );
-            else if( it.current( )->tqparent( ) )
-               m_pNewSelection = it.current( )->tqparent( );
+            else if( it.current( )->parent( ) )
+               m_pNewSelection = it.current( )->parent( );
          }
       }
    }

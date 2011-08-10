@@ -18,7 +18,7 @@ class optionDialogFontsWidget : public optionDialogFontsWidget_base
   TQ_OBJECT
     
  public:
-  optionDialogFontsWidget( TQWidget* tqparent = 0, const char* name = 0, WFlags fl = 0 );
+  optionDialogFontsWidget( TQWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
   ~optionDialogFontsWidget();
 };
 

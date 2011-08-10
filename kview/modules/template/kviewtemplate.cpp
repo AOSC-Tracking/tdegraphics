@@ -15,10 +15,10 @@
 typedef KGenericFactory<KViewTemplate> KViewTemplateFactory;
 K_EXPORT_COMPONENT_FACTORY( kview_templateplugin, KViewTemplateFactory( "kviewtemplateplugin" ) )
 
-KViewTemplate::KViewTemplate( TQObject* tqparent, const char* name, const TQStringList & )
-	: Plugin( tqparent, name )
+KViewTemplate::KViewTemplate( TQObject* parent, const char* name, const TQStringList & )
+	: Plugin( parent, name )
 {
-	TQObjectList * viewerList = tqparent->queryList( 0, "KImageViewer Part", false, false );
+	TQObjectList * viewerList = parent->queryList( 0, "KImageViewer Part", false, false );
 	m_pViewer = static_cast<KImageViewer::Viewer *>( viewerList->getFirst() );
 	delete viewerList;
 	if( m_pViewer )

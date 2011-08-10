@@ -37,11 +37,11 @@ public:
    /**
     * Displays the exponents of the @ref PMPolynomExponents
     */
-   PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* tqparent, const char* name = 0 );
+   PMFormulaLabel( const PMPolynomExponents& exp, TQWidget* parent, const char* name = 0 );
    /**
     * Displays the given exponents
     */
-   PMFormulaLabel( int x, int y, int z, TQWidget* tqparent, const char* name = 0 );
+   PMFormulaLabel( int x, int y, int z, TQWidget* parent, const char* name = 0 );
    /**
     * Destructor
     */

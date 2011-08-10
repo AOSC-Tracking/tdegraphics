@@ -149,7 +149,7 @@ public:
     *
     **/
 
-  TQWidget *createWidget( TQWidget *tqparent,
+  TQWidget *createWidget( TQWidget *parent,
 			 const TQString& w_desc = TQString(),
 			 const TQString& tooltip = TQString() );
 
@@ -238,9 +238,9 @@ private:
   bool       initOption( const TQCString& new_name );
   void       *allocBuffer( long );
 
-  TQWidget    *entryField ( TQWidget *tqparent, const TQString& text );
-  TQWidget    *KSaneSlider( TQWidget *tqparent, const TQString& text );
-  TQWidget    *comboBox   ( TQWidget *tqparent, const TQString& text );
+  TQWidget    *entryField ( TQWidget *parent, const TQString& text );
+  TQWidget    *KSaneSlider( TQWidget *parent, const TQString& text );
+  TQWidget    *comboBox   ( TQWidget *parent, const TQString& text );
 	
   const      SANE_Option_Descriptor *desc;
   TQCString    name;

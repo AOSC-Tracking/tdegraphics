@@ -156,8 +156,8 @@ private:
     void                delayAction(DelayedRepeatEvent *event);
     void                replayAdvance(DelayedRepeatEvent *event);
 
-    void                performDeleteCurrentImage(TQWidget *tqparent);
-    void                performTrashCurrentImage(TQWidget *tqparent);
+    void                performDeleteCurrentImage(TQWidget *parent);
+    void                performTrashCurrentImage(TQWidget *parent);
 
     uint 		viewItem, renameItem, deleteItem, printItem;
     uint                m_slideshowCycle;

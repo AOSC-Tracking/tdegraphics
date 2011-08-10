@@ -40,16 +40,16 @@
 
 //#define KPM_WITH_OBJECT_LIBRARY
 
-PMSettingsDialogPage::PMSettingsDialogPage( TQWidget* tqparent, const char* name )
-      : TQWidget( tqparent, name )
+PMSettingsDialogPage::PMSettingsDialogPage( TQWidget* parent, const char* name )
+      : TQWidget( parent, name )
 {
 }
 
 TQSize PMSettingsDialog::s_size = TQSize( 640, 400 );
 
-PMSettingsDialog::PMSettingsDialog( PMPart* part, TQWidget* tqparent, const char* name )
+PMSettingsDialog::PMSettingsDialog( PMPart* part, TQWidget* parent, const char* name )
       : KDialogBase( TreeList, i18n( "Configure" ), Ok | Apply | Cancel | Default, Ok,
-                     tqparent, name )
+                     parent, name )
 {
    TQStringList sl;
    TQWidget* w = 0;

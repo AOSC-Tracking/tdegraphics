@@ -39,7 +39,7 @@ public:
    /**
     * Simple constructor
     */
-   PMFloatEdit( TQWidget* tqparent, const char* name = 0 );
+   PMFloatEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Sets the validation for the lineedit.
     *
@@ -96,7 +96,7 @@ public:
    /**
     * Simple constructor
     */
-   PMIntEdit( TQWidget* tqparent, const char* name = 0 );
+   PMIntEdit( TQWidget* parent, const char* name = 0 );
    /**
     * Sets the validation for the lineedit.
     *

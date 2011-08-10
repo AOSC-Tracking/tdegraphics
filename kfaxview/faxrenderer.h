@@ -47,7 +47,7 @@ public:
        This constructor simply prints a message (if debugging is
        enabled) and calls the default constructor.
    */
-   FaxRenderer(TQWidget* tqparent);
+   FaxRenderer(TQWidget* parent);
 
    /** Destructor
 

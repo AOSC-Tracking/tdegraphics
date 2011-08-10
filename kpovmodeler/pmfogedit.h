@@ -46,9 +46,9 @@ class PMFogEdit : public PMTextureBaseEdit
    typedef PMTextureBaseEdit Base;
 public:
    /**
-    * Creates a PMFogEdit with tqparent and name
+    * Creates a PMFogEdit with parent and name
     */
-   PMFogEdit( TQWidget* tqparent, const char* name = 0 );
+   PMFogEdit( TQWidget* parent, const char* name = 0 );
 
    /** */
    virtual void displayObject( PMObject* o );
