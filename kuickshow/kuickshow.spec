@@ -1,7 +1,7 @@
 %define version 0.8.5
 %define release 1
 %define serial  1
-%define prefix /opt/kde3
+%define prefix /opt/trinity
 
 Name:      kuickshow
 Summary:   KuickShow -- A very fast image viewer/browser

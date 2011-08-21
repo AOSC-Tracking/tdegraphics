@@ -1,7 +1,7 @@
 %define version 0.3
 %define release 1
 %define serial  1
-%define prefix  /opt/kde3
+%define prefix  /opt/trinity
 
 Name:      kmrml
 Summary:   MRML for KDE -- Content based image retrieval
@@ -30,7 +30,7 @@ With those, you can search for images by giving an example
 image and let the server look up similar images. The query
 result can be refined by giving positive/negative feedback.
  
-Install with '--prefix $KDEDIR' unless you have KDE in /opt/kde3
+Install with '--prefix $KDEDIR' unless you have KDE in /opt/trinity
 
 %prep
 rm -rf $RPM_BUILD_ROOT

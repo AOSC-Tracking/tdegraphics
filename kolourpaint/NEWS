@@ -63,7 +63,7 @@ KolourPaint 1.4.6_relight (Frozen 2007-01-13)
 
    * Fix crash triggered by rapidly deselecting the selection after
      drag-scaling it (Bug #117866)
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
 KolourPaint 1.4.5_relight (Frozen 2006-09-19)
 
@@ -83,7 +83,7 @@ KolourPaint 1.4.2_relight (Frozen 2006-03-12)
      - Respect image DPI
      - Fit image to page if image is too big
      - Centre image on page
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
 KolourPaint 1.4.1_relight (Frozen 2006-01-15)
 
@@ -101,15 +101,15 @@ KolourPaint 1.4_relight (Frozen 2005-11-08)
 
    * Prevent accidental drags in the Colour Palette from pasting text
      containing the colour code
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Cells in the bottom row and cells in the rightmost column of the Colour
      Palette are now the same size as the other cells
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Text drops to the empty part of the scrollview will not be placed
      outside the document
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Rename icons from "hi" to "cr" - back to the state of 1.0 (Danny Allen)
      but leave application icons as "hi" (Jonathan Riddell)
@@ -117,25 +117,25 @@ KolourPaint 1.4_relight (Frozen 2005-11-08)
    * Enforce text box font height to prevent e.g. Chinese characters in
      buggy fonts from enlarging the text box and putting the cursor out of
      sync with the text
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Clicking in a text box selects a character based on its midpoint -
      not leftmost point - to be consistent with all text editors
      (esp. noticeable with big fonts)
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Return and Numpad 5 Key now draw
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Tool Actions placed outside the Tool Box resize with their toolbars
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Ensure Color Similarity maximum is 30, not 29 due to gcc4
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Tool Box traps right clicks (for the RMB Menu) on top of tool options
      widgets and the empty part of the Tool Box
-     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Correct and update image format associations to all formats supported
      by KDE 3.5 (kdelibs/kimgio/:r466654)
@@ -151,15 +151,15 @@ KolourPaint 1.4_light Series (branches/KDE/3.4/)
 
 KolourPaint 1.4_light (Frozen 2005-02-22)
    * Antialias text when the text box has a transparent background (Bug #24)
-     [later backported to branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [later backported to branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Add Unzoomed Thumbnail Mode and Thumbnail Rectangle
    * Add RMB context menu for when a selection tool is active (closing KDE
      Bug #92882)
    * More intuitive "Set as Image" behaviour (esp. with selection borders).
      Thanks to Michael Lake for the feedback.
-     [later backported to branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [later backported to branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * InputMethod support
-     [later backported to branches/kolourpaint/1.2_kde3/]
+     [later backported to branches/kolourpaint/1.2_trinity/]
    * Save "More Effects" dialog's last effect to config file
    * Save "Resize / Scale" dialog's last "Keep aspect ratio" setting to
      config file
@@ -169,51 +169,51 @@ KolourPaint 1.4_light (Frozen 2005-02-22)
        document)
      - When creating freeform selections, include the starting point; also
        avoids a QRegion crash with constructing 1-point regions
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Fix other selection bugs:
      - When the user drags very quickly on a resize handle, resize the
        selection instead of moving it
      - Draw resize handles above the grid lines - not below - so that the
        handles are always visible if they are supposed to be there
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Smaller selection and text box resize handles (visually not
      actually) - covers up fewer selected pixels, doesn't cover up text
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Restore mouse cursor after deselecting selection/text tools
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Empty text clipboard fixes:
      - Don't get stuck on a wait cursor after attempting to paste empty
        text into a text box
      - Prevent pasting text from creating a new text box if text is empty
      - Prevent copying of empty text box
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Speed up renderer (most noticeable with diagonal drag-scrolling at
      high zoom)
      - Don't paint anything outside of the view's visible region
        (previously, clipped only on view _widget_ region)
      - Region-aware: paint component rectangles of the update region,
        rather than the bounding rectangle
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * When changing between colour depth and quality widgets in the save
      filedialog, make sure "Convert to:" and "Quality:" are correctly
      rendered (hacking around a Qt redraw glitch)
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Fix crash after using the Colour Picker if it was the first used tool
-     [kolourpaint-1.2.2_kde3-color_picker_crash.diff]
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [kolourpaint-1.2.2_trinity-color_picker_crash.diff]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Fix crash due to text box when scaling image behind it
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Even when the thumbnail has focus (and not the main window), blink the
      text cursor in all views
-     [kolourpaint-1.2.2_kde3-thumbnail_blink_text_cursor.diff]
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [kolourpaint-1.2.2_trinity-thumbnail_blink_text_cursor.diff]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Correct "Soften" and "Sharpen" commands' command history names
    * Correct invert commands' command history names
    * Fix remaining untranslatable strings (closing KDE Bug #85785)
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Update image format associations to all formats supported by KDE 3.4
    * Remove unused images in doc directory
-     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_kde3/]
+     [also in branches/KDE/3.3/, branches/kolourpaint/1.2_trinity/]
    * Correct kolourpaint.desktop "Terminal=" and "Categories=" syntax
      (Benjamin Meyer)
 

@@ -48,8 +48,8 @@ Installation of the Classifier Files:
 KADMOS needs classifier files for the ocr process which come with
 the KADMOS developer's toolkit. The classifier files need to be installed
 in the KDE application data directory for Kooka in a subdirectory named
-classifiers. If your KDE installation goes to /opt/kde3/, this is for
-example /opt/kde3/share/apps/kooka/classifiers. Kooka picks the 
+classifiers. If your KDE installation goes to /opt/trinity/, this is for
+example /opt/trinity/share/apps/kooka/classifiers. Kooka picks the 
 available classifiers up automatically.
 
 The classifiers are named in the following way:
