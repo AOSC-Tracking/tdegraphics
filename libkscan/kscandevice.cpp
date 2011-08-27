@@ -533,7 +533,7 @@ KScanStat KScanDevice::apply( KScanOption *opt, bool isGammaTable )
       }
       else
       {
-	 kdDebug(29000) << "tqStatus of sane is bad: " << sane_strstatus( sane_stat )
+	 kdDebug(29000) << "Status of sane is bad: " << sane_strstatus( sane_stat )
 			<< " for option " << oname << endl;
 
       }

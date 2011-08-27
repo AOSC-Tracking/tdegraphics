@@ -422,13 +422,13 @@ void KIconEdit::slotUpdateZoom( int s )
 
 void KIconEdit::slotUpdateStatusPos(int x, int y)
 {
-    TQString str = i18n("tqStatus Position", "%1, %2").tqarg(x).tqarg(y);
+    TQString str = i18n("Status Position", "%1, %2").tqarg(x).tqarg(y);
     statusbar->changeItem( str, 0);
 }
 
 void KIconEdit::slotUpdateStatusSize(int x, int y)
 {
-    TQString str = i18n("tqStatus Size", "%1 x %2").tqarg(x).tqarg(y);
+    TQString str = i18n("Status Size", "%1 x %2").tqarg(x).tqarg(y);
     statusbar->changeItem( str, 1);
 }
 

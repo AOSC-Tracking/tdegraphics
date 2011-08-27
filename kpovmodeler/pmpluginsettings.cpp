@@ -67,7 +67,7 @@ PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
             TQT_SLOT( slotSelectionChanged( ) ) );
    m_pPluginsList->addColumn( i18n( "Name" ) );
    m_pPluginsList->addColumn( i18n( "Description" ) );
-   m_pPluginsList->addColumn( i18n( "tqStatus" ) );
+   m_pPluginsList->addColumn( i18n( "Status" ) );
    gvl->addWidget( m_pPluginsList, 1 );
 
    TQHBoxLayout* hl = new TQHBoxLayout( gvl );
