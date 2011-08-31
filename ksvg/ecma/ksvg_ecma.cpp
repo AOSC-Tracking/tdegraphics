@@ -49,7 +49,7 @@ public:
 
 Value AsynctqStatus::call(ExecState *exec, Object &, const List &args)
 {
-	kdDebug(26004) << "[AsynctqStatus] " << args[0].toString(exec).ascii() << endl;
+	kdDebug(26004) << "[AsyncStatus] " << args[0].toString(exec).ascii() << endl;
 
 	if(args[0].toString(exec) == "success")
 		return Number(1);
