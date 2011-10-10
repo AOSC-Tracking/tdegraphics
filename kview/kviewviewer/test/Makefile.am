@@ -5,5 +5,5 @@ METASOURCES = AUTO
 check_PROGRAMS = test
 
 test_SOURCES = main.cpp test.cpp
-test_LDFLAGS = $(KDE_RPATH) $(all_libraries)
+test_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
 test_LDADD   = $(LIB_KPARTS)
