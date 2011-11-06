@@ -279,7 +279,7 @@ Mon Mar  5 00:12:45 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 	image window
 
 	* Makefile.am
-	build as KLM (kdeinit-loadable-module) to speed up startup
+	build as KLM (tdeinit-loadable-module) to speed up startup
 
 	* hah! Adding two lines makes browsing about twice as fast :)
 	Well, equally as fast as the KDE1 version at least ;) The new caching
@@ -404,7 +404,7 @@ Fri Nov  3 01:49:57 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 	the window works properly again. NETWM/KWin handling is better now.
 	Also better handling of non-loadable files. 
 
-	Will make it a kdeinit-loadable module (KLM) for fast startup-times
+	Will make it a tdeinit-loadable module (KLM) for fast startup-times
 	later.
 	
 	Finally using it again reminds me how fast it is compared to, erm, the

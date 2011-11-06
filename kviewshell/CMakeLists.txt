@@ -78,7 +78,7 @@ tde_add_library( kmultipage SHARED AUTOMOC
     selection.cpp documentRenderer.cpp history.cpp kvsprefs.kcfgc
     tableOfContents.cpp kprintDialogPage_pageoptions.cpp
   VERSION 0.0.0
-  LINK kparts-shared kdeprint-shared
+  LINK kparts-shared tdeprint-shared
   DESTINATION ${LIB_INSTALL_DIR}
 )
 

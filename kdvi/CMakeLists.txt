@@ -75,7 +75,7 @@ tde_add_kpart( kdvipart AUTOMOC
     TeXFont_PFB.cpp TeXFont_TFM.cpp TeXFontDefinition.cpp
     dviWidget.cpp dvisourcesplitter.cpp prefs.kcfgc
   LINK
-    kmultipage-shared kdeprint-shared kparts-shared ${FREETYPE_LIBRARIES}
+    kmultipage-shared tdeprint-shared kparts-shared ${FREETYPE_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

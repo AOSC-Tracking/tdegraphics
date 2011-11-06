@@ -6,5 +6,5 @@
 kde_MODULES = kpovmodeler
 
 kpovmodeler_FILES = *.h 
-kpovmodeler_LIBS = -lkdeui -lkparts -lkdecore -ldcop -lkfile -lkio -lqt -p
+kpovmodeler_LIBS = -ltdeui -lkparts -ltdecore -ldcop -lkfile -lkio -lqt -p
 kpovmodeler_PATH = .

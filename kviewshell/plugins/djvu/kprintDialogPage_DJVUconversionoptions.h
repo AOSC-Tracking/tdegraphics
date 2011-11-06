@@ -21,7 +21,7 @@
 #ifndef KPRINTDIALOGPAGE_DJVUCONVERSIONOPTIONS_H
 #define KPRINTDIALOGPAGE_DJVUCONVERSIONOPTIONS_H
 
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 
 class kprintDialogPage_DJVUconversionoptions_basewidget;

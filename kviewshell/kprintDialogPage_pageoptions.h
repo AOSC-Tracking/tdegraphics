@@ -11,7 +11,7 @@
 #ifndef KPRINTDIALOGPAGE_PAGEOPTIONS_H
 #define KPRINTDIALOGPAGE_PAGEOPTIONS_H
 
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 class TQCheckBox;
 class TQVBoxLayout;

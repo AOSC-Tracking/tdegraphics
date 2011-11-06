@@ -31,6 +31,6 @@ install( FILES
 
 tde_add_kpart( kcm_kviewcanvasconfig AUTOMOC
   SOURCES generalconfigwidget.ui confmodules.cpp
-  LINK kdeui-shared
+  LINK tdeui-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

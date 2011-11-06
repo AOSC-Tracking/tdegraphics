@@ -52,6 +52,6 @@ tde_add_executable( kcoloredit AUTOMOC
 
 tde_add_executable( kcolorchooser AUTOMOC
   SOURCES kcolorchooser.cpp
-  LINK kdeui-shared
+  LINK tdeui-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

@@ -60,6 +60,6 @@ tde_add_executable( kolourpaint AUTOMOC
   LINK
     kolourpainttools-static kolourpaintpixmapfx-static kolourpaintcursors-static
     kolourpaintviews-static kolourpaintwidgets-static
-    kdeprint-shared
+    tdeprint-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

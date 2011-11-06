@@ -19,7 +19,7 @@
 #ifndef IMAGESETTINGS_H
 #define IMAGESETTINGS_H
 
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 class TQCheckBox;
 

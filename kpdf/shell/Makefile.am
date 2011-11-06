@@ -5,7 +5,7 @@ METASOURCES = AUTO
 bin_PROGRAMS = kpdf
 
 kpdf_SOURCES = main.cpp shell.cpp
-kpdf_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kpdf_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kpdf_LDADD   = $(LIB_KPARTS)
 
 EXTRA_DIST = kpdf.desktop

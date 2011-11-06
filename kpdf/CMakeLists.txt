@@ -45,7 +45,7 @@ tde_add_kpart( libkpdfpart AUTOMOC
   LINK
     kpdfconf-static kpdfui-static kpdfcore-static generatorkimgio-static
     generatorpdf-static xpdf-static goo-static splash-static fofi-static
-    kutils-shared kdeprint-shared kparts-shared ${PAPER_LIBRARY} ${XFT_LIBRARIES}
+    kutils-shared tdeprint-shared kparts-shared ${PAPER_LIBRARY} ${XFT_LIBRARIES}
   DEPENDENCIES kpdfconf-static
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

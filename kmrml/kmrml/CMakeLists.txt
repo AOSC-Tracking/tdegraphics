@@ -54,9 +54,9 @@ tde_add_kpart( libkmrmlpart AUTOMOC
 )
 
 
-##### mrmlsearch (kdeinit) ######################
+##### mrmlsearch (tdeinit) ######################
 
-tde_add_kdeinit_executable( mrmlsearch AUTOMOC
+tde_add_tdeinit_executable( mrmlsearch AUTOMOC
   SOURCES mrmlsearch.cpp
-  LINK kmrmlstuff-static kdecore-shared
+  LINK kmrmlstuff-static tdecore-shared
 )

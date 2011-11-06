@@ -11,7 +11,7 @@
 #define KPRINTDIALOGPAGE_DJVUPAGEOPTIONS_H
 
 
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 
 class TQVBoxLayout;

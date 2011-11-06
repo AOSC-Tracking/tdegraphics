@@ -30,7 +30,7 @@ servicemenudir = $(kde_datadir)/konqueror/servicemenus
 #############################################
 bin_PROGRAMS = 
 lib_LTLIBRARIES = 
-kdeinit_LTLIBRARIES = mrmlsearch.la
+tdeinit_LTLIBRARIES = mrmlsearch.la
 
 mrmlsearch_la_LIBADD = $(LIB_KMRMLSTUFF) $(LIB_KDECORE)
 mrmlsearch_la_LDFLAGS = $(all_libraries) -module -avoid-version

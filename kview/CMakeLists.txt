@@ -35,9 +35,9 @@ install( FILES kview.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES kviewui.rc DESTINATION ${DATA_INSTALL_DIR}/kview )
 
 
-##### kview (kdeinit) ###########################
+##### kview (tdeinit) ###########################
 
-tde_add_kdeinit_executable( kview AUTOMOC
+tde_add_tdeinit_executable( kview AUTOMOC
   SOURCES kview.cpp main.cpp
   LINK kparts-shared kutils-shared
 )

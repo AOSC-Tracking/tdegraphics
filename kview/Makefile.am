@@ -6,7 +6,7 @@ METASOURCES = AUTO
 
 bin_PROGRAMS =
 lib_LTLIBRARIES =
-kdeinit_LTLIBRARIES = kview.la
+tdeinit_LTLIBRARIES = kview.la
 
 noinst_HEADERS = kview.h
 

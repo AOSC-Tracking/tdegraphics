@@ -2,7 +2,7 @@
 
 bin_PROGRAMS =
 lib_LTLIBRARIES =
-kdeinit_LTLIBRARIES = kuickshow.la
+tdeinit_LTLIBRARIES = kuickshow.la
 
 # set the include path for X, qt and KDE
 INCLUDES = $(all_includes)

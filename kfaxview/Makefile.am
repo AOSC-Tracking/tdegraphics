@@ -12,7 +12,7 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = kfaxview
 kfaxview_SOURCES = main.cpp
-kfaxview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kfaxview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kfaxview_LDADD = ../kviewshell/libifaces.la ../kviewshell/libkviewshell.la -lkparts
 
 # this is where the desktop file will go
@@ -23,7 +23,7 @@ shellrcdir = $(kde_datadir)/kfaxview
 
 kde_module_LTLIBRARIES = kfaxviewpart.la
 kfaxviewpart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
-kfaxviewpart_la_LIBADD = -lkdeprint -lkparts $(top_builddir)/kviewshell/libkmultipage.la libkfaximage/libkfaximage.la
+kfaxviewpart_la_LIBADD = -ltdeprint -lkparts $(top_builddir)/kviewshell/libkmultipage.la libkfaximage/libkfaximage.la
 kfaxviewpart_la_SOURCES = faxmultipage.cpp faxrenderer.cpp
 
 partdir = $(kde_datadir)/kfaxview

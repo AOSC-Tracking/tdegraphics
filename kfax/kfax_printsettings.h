@@ -20,7 +20,7 @@
 #ifndef KFAX_PRINTSETTINGS_H
 #define KFAX_PRINTSETTINGS_H
 
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 class TQCheckBox;
 

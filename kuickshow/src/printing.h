@@ -22,7 +22,7 @@
 #include <tqfontmetrics.h>
 #include <tqstring.h>
 
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 class TQCheckBox;
 class TQRadioButton;

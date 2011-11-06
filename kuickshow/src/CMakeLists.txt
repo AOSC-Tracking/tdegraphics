@@ -27,14 +27,14 @@ tde_install_icons( kuickshow )
 install( FILES kuickshow.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 
 
-##### kuickshow (kdeinit) #######################
+##### kuickshow (tdeinit) #######################
 
-tde_add_kdeinit_executable( kuickshow AUTOMOC
+tde_add_tdeinit_executable( kuickshow AUTOMOC
   SOURCES
     kuickshow.cpp aboutwidget.cpp generalwidget.cpp kuickconfigdlg.cpp
     main.cpp defaultswidget.cpp imagewindow.cpp kuickdata.cpp
     imdata.cpp filefinder.cpp kurlwidget.cpp filewidget.cpp kuick.cpp
     imlibwidget.cpp slideshowwidget.cpp printing.cpp kuickfile.cpp
     kuickimage.cpp filecache.cpp
-  LINK kdeprint-shared ${IMLIB_LIBRARIES}
+  LINK tdeprint-shared ${IMLIB_LIBRARIES}
 )

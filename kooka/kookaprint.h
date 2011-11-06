@@ -31,7 +31,7 @@
 #include <tqmap.h>
 #include <tqstring.h>
 #include <kprinter.h>
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 class KookaImage;
 class KPrinter;

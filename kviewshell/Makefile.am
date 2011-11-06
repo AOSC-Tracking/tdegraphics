@@ -30,7 +30,7 @@ libkmultipage_la_SOURCES = kmultipage.cpp pageView.cpp marklist.cpp kmultipageIn
 kde_kcfg_DATA = kviewshell.kcfg
 
 libkmultipage_la_LDFLAGS = $(all_libraries)
-libkmultipage_la_LIBADD = $(LIB_KFILE) -lkdeprint -lkparts
+libkmultipage_la_LIBADD = $(LIB_KFILE) -ltdeprint -lkparts
 
 emptymultipagepart_la_SOURCES = empty_multipage.cpp emptyRenderer.cpp
 emptymultipagepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
@@ -39,7 +39,7 @@ emptymultipagepart_la_LIBADD = -lkparts libkmultipage.la
 libkviewshell_la_SOURCES = kviewshell.cpp
 
 kviewshell_SOURCES = main.cpp
-kviewshell_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kviewshell_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kviewshell_LDADD = libkviewshell.la ./libifaces.la -lkparts
 
 kviewshellinclude_HEADERS = anchor.h bookmark.h pageView.h documentPageCache.h documentRenderer.h documentWidget.h \

@@ -30,6 +30,6 @@ INSTALL( FILES daemonwatcher.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kded )
 
 tde_add_kpart( kded_daemonwatcher AUTOMOC
   SOURCES watcher.cpp watcher.skel
-  LINK kmrmlstuff-static kparts-shared kio-shared kdeinit_kded-shared
+  LINK kmrmlstuff-static kparts-shared kio-shared tdeinit_kded-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

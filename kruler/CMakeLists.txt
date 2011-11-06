@@ -35,6 +35,6 @@ install( FILES uninstall.desktop DESTINATION ${APPS_INSTALL_DIR}/Graphics RENAME
 
 tde_add_executable( kruler AUTOMOC
   SOURCES klineal.cpp main.cpp
-  LINK kdeui-shared
+  LINK tdeui-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

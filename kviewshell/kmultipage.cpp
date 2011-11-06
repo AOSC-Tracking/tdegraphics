@@ -639,7 +639,7 @@ void KMultiPage::handleLocalLink(const TQString &linkText)
       TQStringList args;
       args << "openURL";
       args << Link_Url.toString();
-      kapp->kdeinitExec("kfmclient", args);
+      kapp->tdeinitExec("kfmclient", args);
     }
   }
 }

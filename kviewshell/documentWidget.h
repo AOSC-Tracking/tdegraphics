@@ -177,7 +177,7 @@ private:
   static TQColor backgroundColorForCorners;
 
   /** The following tables store grey values for roundish shadow
-      corners. They were shamelessly stolen from kdelibs/kdefx/kstyle.cpp. */
+      corners. They were shamelessly stolen from kdelibs/tdefx/kstyle.cpp. */
   static const int bottom_right_corner[16];
   static const int bottom_left_corner[16];
   static const int shadow_strip[4];

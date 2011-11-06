@@ -35,6 +35,6 @@ tde_add_kpart( libkviewviewer AUTOMOC
   SOURCES
     printimagesettings.ui imagesettings.cpp
     kviewkonqextension.cpp kviewviewer.cpp
-  LINK kimageviewer-shared kutils-shared kdeprint-shared
+  LINK kimageviewer-shared kutils-shared tdeprint-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

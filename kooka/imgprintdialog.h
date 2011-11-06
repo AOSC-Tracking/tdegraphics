@@ -29,7 +29,7 @@
 
 #include <tqmap.h>
 #include <tqcheckbox.h>
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 
 #include "kookaimage.h"
 

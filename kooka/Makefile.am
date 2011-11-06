@@ -16,8 +16,8 @@ kooka_SOURCES =	main.cpp kooka.cpp kookaview.cpp kookapref.cpp 		\
 		kocrocrad.cpp
 # 		pagesetup.cpp 
 
-kooka_LDADD   = $(LIB_KFILE) -lkdeprint -lktexteditor $(LIBTIFF) $(top_builddir)/libkscan/libkscan.la $(KADMOS_LIB) $(LIB_KSPELL)
-kooka_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kooka_LDADD   = $(LIB_KFILE) -ltdeprint -lktexteditor $(LIBTIFF) $(top_builddir)/libkscan/libkscan.la $(KADMOS_LIB) $(LIB_KSPELL)
+kooka_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 
 INCLUDES         = -I$(top_srcdir)/libkscan $(all_includes) $(LIBSANE_INCLUDES) $(KADMOS_INC)
 

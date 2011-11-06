@@ -369,7 +369,7 @@ void KGamma::save() {
           Arguments += rgamma[assign[i]] + " " + ggamma[assign[i]] + " " + \
           bgamma[assign[i]] + " ";
         rootProcess->clearArguments();
-        *rootProcess << "kdesu" << Arguments;
+        *rootProcess << "tdesu" << Arguments;
         rootProcess->start();
       }
     }

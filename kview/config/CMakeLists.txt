@@ -32,6 +32,6 @@ install( FILES kview.setdlg DESTINATION ${DATA_INSTALL_DIR}/kview )
 
 tde_add_kpart( kcm_kviewgeneralconfig AUTOMOC
   SOURCES kviewconfmodules.cpp
-  LINK kdeui-shared
+  LINK tdeui-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

@@ -393,7 +393,7 @@ SVGPathParser::parseSVG( const TQString &s, bool process )
 
 // This works by converting the SVG arc to "simple" beziers.
 // For each bezier found a svgToCurve call is done.
-// Adapted from Niko's code in kdelibs/kdecore/svgicons.
+// Adapted from Niko's code in kdelibs/tdecore/svgicons.
 // Maybe this can serve in some shared lib? (Rob)
 void
 SVGPathParser::calculateArc(bool relative, double &curx, double &cury, double angle, double x, double y, double r1, double r2, bool largeArcFlag, bool sweepFlag)

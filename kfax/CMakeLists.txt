@@ -34,7 +34,7 @@ tde_add_executable( kfax AUTOMOC
   SOURCES
     options.cpp kfax.cpp faxexpand.cpp faxinit.cpp
     faxinput.cpp viewfax.cpp kfax_printsettings.cpp
-  LINK kdeui-shared kdeprint-shared
+  LINK tdeui-shared tdeprint-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 

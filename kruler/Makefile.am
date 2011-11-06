@@ -4,7 +4,7 @@ INCLUDES= $(all_includes)
 
 bin_PROGRAMS = kruler
 kruler_METASOURCES = AUTO
-kruler_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kruler_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kruler_LDADD   = $(LIB_KDEUI)
 kruler_SOURCES = klineal.cpp main.cpp 
 

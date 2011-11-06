@@ -39,7 +39,7 @@
 #include <kdirwatch.h>
 #include <kinstance.h>
 #include <kprinter.h>
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 #include <kstdaction.h>
 #include <kdeversion.h>
 #include <kparts/genericfactory.h>
