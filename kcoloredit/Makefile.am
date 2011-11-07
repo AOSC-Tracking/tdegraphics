@@ -6,16 +6,16 @@ kcoloredit_SOURCES = kzcolorselector.cpp imageselection.cpp \
 	editablestreamhistory.cpp color.cpp palette.cpp loadpalettedlg.cpp \
 	kcoloreditview.cpp kcoloreditdoc.cpp kcoloredit.cpp main.cpp
 kcoloredit_METASOURCES = AUTO
-kcoloredit_LDADD = $(LIB_KDEUI) $(LIB_KFILE)
-kcoloredit_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kcoloredit_LDADD = $(LIB_TDEUI) $(LIB_KFILE)
+kcoloredit_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 
 rcdir = $(kde_datadir)/kcoloredit
 rc_DATA = kcoloreditui.rc
 
 bin_PROGRAMS = kcoloredit kcolorchooser
 kcolorchooser_SOURCES = kcolorchooser.cpp
-kcolorchooser_LDADD = $(LIB_KDEUI)
-kcolorchooser_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kcolorchooser_LDADD = $(LIB_TDEUI)
+kcolorchooser_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 
 noinst_HEADERS = color.h colorselector.h editablestreamhistory.h \
 	gradientselection.h imageselection.h kcoloredit.h kcoloreditdoc.h \

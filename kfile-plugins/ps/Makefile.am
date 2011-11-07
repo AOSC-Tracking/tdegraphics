@@ -13,7 +13,7 @@ kfile_ps_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 kfile_ps_la_LIBADD = $(LIB_KIO) ../../kghostview/libdscparse.la
 
 gsthumbnail_la_SOURCES = gscreator.cpp
-gsthumbnail_la_LIBADD = $(LIB_KDECORE) ../../kghostview/libdscparse.la
+gsthumbnail_la_LIBADD = $(LIB_TDECORE) ../../kghostview/libdscparse.la
 gsthumbnail_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 
 # let automoc handle all of the meta source files (moc)

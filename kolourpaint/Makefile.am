@@ -39,8 +39,8 @@ kolourpaint_SOURCES = kolourpaint.cpp \
     kpviewmanager.cpp \
     kpviewscrollablecontainer.cpp \
     kpwidgetmapper.cpp
-kolourpaint_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
-kolourpaint_LDADD = $(LIB_KDEPRINT) \
+kolourpaint_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kolourpaint_LDADD = $(LIB_TDEPRINT) \
     cursors/libkolourpaintcursors.la \
     pixmapfx/libkolourpaintpixmapfx.la \
     tools/libkolourpainttools.la \

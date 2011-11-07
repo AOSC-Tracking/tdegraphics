@@ -9,7 +9,7 @@ noinst_HEADERS = kviewconfmodules.h
 
 kcm_kviewgeneralconfig_la_SOURCES = kviewconfmodules.cpp
 kcm_kviewgeneralconfig_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-kcm_kviewgeneralconfig_la_LIBADD = $(LIB_KDEUI)
+kcm_kviewgeneralconfig_la_LIBADD = $(LIB_TDEUI)
 
 kcm_kviewgeneralconfig_DATA = kviewgeneralconfig.desktop
 kcm_kviewgeneralconfigdir = $(kde_servicesdir)/kconfiguredialog

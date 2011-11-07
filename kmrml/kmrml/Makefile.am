@@ -32,7 +32,7 @@ bin_PROGRAMS =
 lib_LTLIBRARIES = 
 tdeinit_LTLIBRARIES = mrmlsearch.la
 
-mrmlsearch_la_LIBADD = $(LIB_KMRMLSTUFF) $(LIB_KDECORE)
+mrmlsearch_la_LIBADD = $(LIB_KMRMLSTUFF) $(LIB_TDECORE)
 mrmlsearch_la_LDFLAGS = $(all_libraries) -module -avoid-version
 mrmlsearch_la_SOURCES = mrmlsearch.cpp
 

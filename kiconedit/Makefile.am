@@ -11,7 +11,7 @@ kiconedit_SOURCES = utils.cpp main.cpp kiconedit.cpp kicongrid.cpp \
 kiconedit_METASOURCES = AUTO
 
 # the library search path. 
-kiconedit_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kiconedit_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kiconedit_LDADD = $(LIB_KFILE) -ltdeprint
 
 DISTCLEANFILES = *~ .deps/* .libs/*

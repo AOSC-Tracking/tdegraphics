@@ -28,7 +28,7 @@ libkghostviewlib_la_SOURCES = kgvshell.cpp kgvdocument.cpp kgv_miniwidget.cpp \
 libkghostviewpart_la_SOURCES = part_init.cpp
 
 kghostview_SOURCES = main.cpp
-kghostview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kghostview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kghostview_LDADD = libkghostviewlib.la
 
 libdscparse_la_LDFLAGS = $(all_libraries) -no-undefined

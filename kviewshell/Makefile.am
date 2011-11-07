@@ -39,7 +39,7 @@ emptymultipagepart_la_LIBADD = -lkparts libkmultipage.la
 libkviewshell_la_SOURCES = kviewshell.cpp
 
 kviewshell_SOURCES = main.cpp
-kviewshell_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kviewshell_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kviewshell_LDADD = libkviewshell.la ./libifaces.la -lkparts
 
 kviewshellinclude_HEADERS = anchor.h bookmark.h pageView.h documentPageCache.h documentRenderer.h documentWidget.h \

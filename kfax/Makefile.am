@@ -1,5 +1,5 @@
-AM_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
-LDADD      = $(LIB_KFILE) $(LIB_KDEPRINT) -lm
+AM_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+LDADD      = $(LIB_KFILE) $(LIB_TDEPRINT) -lm
 INCLUDES   = $(all_includes)
 
 ####### Files

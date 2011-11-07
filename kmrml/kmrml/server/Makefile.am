@@ -4,7 +4,7 @@ INCLUDES = $(all_includes)
 kded_daemonwatcher_la_SOURCES = watcher.cpp watcher.skel
 # watcher.stub
 kded_daemonwatcher_la_LDFLAGS = $(all_libraries) -module -avoid-version
-kded_daemonwatcher_la_LIBADD = $(LIB_KSYCOCA) $(LIB_KDEUI)
+kded_daemonwatcher_la_LIBADD = $(LIB_KSYCOCA) $(LIB_TDEUI)
 
 METASOURCES = AUTO
 

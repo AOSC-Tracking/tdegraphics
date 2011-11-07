@@ -6,6 +6,6 @@ noinst_HEADERS = kmrml_config.h mrml_shared.h mrml_utils.h watcher_stub.h
 METASOURCES = AUTO
 
 libkmrmlstuff_la_LDFLAGS = $(all_libraries) -no-undefined
-libkmrmlstuff_la_LIBADD = $(LIB_KDECORE)
+libkmrmlstuff_la_LIBADD = $(LIB_TDECORE)
 
 INCLUDES = -I$(top_srcdir) $(all_includes)

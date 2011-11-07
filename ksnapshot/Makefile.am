@@ -2,8 +2,8 @@ bin_PROGRAMS= ksnapshot
 
 INCLUDES = -DKSNAPVERSION="\"0.7\"" $(all_includes)
 
-ksnapshot_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
-ksnapshot_LDADD = $(LIB_KDEPRINT)
+ksnapshot_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+ksnapshot_LDADD = $(LIB_TDEPRINT)
 
 ksnapshot_SOURCES = ksnapshotiface.skel main.cpp ksnapshot.cpp \
     regiongrabber.cpp windowgrabber.cpp ksnapshotwidget.ui

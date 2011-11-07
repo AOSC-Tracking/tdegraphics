@@ -15,7 +15,7 @@ xdg_apps_DATA = kcmkmrml.desktop
 
 #check_PROGRAMS = indextest
 #indextest_SOURCES = indextest.cpp indexer.cpp
-#indextest_LDADD = $(LIB_KMRMLSTUFF) $(LIB_KDECORE)
+#indextest_LDADD = $(LIB_KMRMLSTUFF) $(LIB_TDECORE)
 #indextest_LDFLAGS = $(all_libraries)
 
 
