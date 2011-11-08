@@ -34,7 +34,7 @@
 #include <kimageio.h>
 #include <kfiledialog.h>
 #include <klocale.h>
-#include <kwinmodule.h>
+#include <twinmodule.h>
 #include <kmenubar.h>
 #include <kstatusbar.h>
 #include <kdebug.h>

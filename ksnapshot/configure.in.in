@@ -1,4 +1,4 @@
-dnl Check for the X shaped windows extension - test taken from kdebase/kwin/clients/keramik
+dnl Check for the X shaped windows extension - test taken from kdebase/twin/clients/keramik
 KDE_CHECK_HEADERS(X11/extensions/shape.h,,,
 [
 #include <X11/Xlib.h>

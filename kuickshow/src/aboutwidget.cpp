@@ -22,7 +22,7 @@
 #include <tqgroupbox.h>
 #include <tqlabel.h>
 
-#include <kwin.h>
+#include <twin.h>
 #include <kstandarddirs.h>
 
 #include "imlibwidget.h"

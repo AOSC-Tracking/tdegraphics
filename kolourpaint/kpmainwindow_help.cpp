@@ -70,13 +70,13 @@ void kpMainWindow::enableHelpMenuDocumentActions (bool /*enable*/)
 }
 
 
-// SYNC: kdebase/kwin/kwinbindings.cpp
+// SYNC: kdebase/twin/twinbindings.cpp
 static TQString printScreenShortcutString ()
 {
     KConfigGroupSaver cfgGroupSaver (KGlobal::config (), "Global Shortcuts");
     KConfigBase *cfg = cfgGroupSaver.config ();
 
-    // TODO: i18n() entry name?  kwinbindings.cpp seems to but it doesn't
+    // TODO: i18n() entry name?  twinbindings.cpp seems to but it doesn't
     //       make sense.
     const TQString cfgEntryString = cfg->readEntry ("Desktop Screenshot");
 
@@ -108,13 +108,13 @@ void kpMainWindow::slotHelpTakingScreenshots ()
         tool ()->endShapeInternal ();
 
 
-    // TODO: Totally bogus logic if kwin not running under same user as KolourPaint.
+    // TODO: Totally bogus logic if twin not running under same user as KolourPaint.
     // SYNC: KWin contains PrintScreen key logic
     QCStringList dcopApps = KApplication::dcopClient ()->registeredApplications ();
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\tdcopApps=" << dcopApps << endl;
 #endif
-    bool isRunningKDE = (dcopApps.findIndex ("kwin") >= 0);
+    bool isRunningKDE = (dcopApps.findIndex ("twin") >= 0);
 
 #if 0
 {
@@ -172,7 +172,7 @@ void kpMainWindow::slotHelpTakingScreenshots ()
         );
     }
 
-    // TODO: Totally bogus logic if kwin not running under same user as KolourPaint.
+    // TODO: Totally bogus logic if twin not running under same user as KolourPaint.
     message = message.arg (::printScreenShortcutString ());
 
     // Add extra vertical space

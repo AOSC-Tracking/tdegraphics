@@ -56,7 +56,7 @@
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
 #include <ktempfile.h>
-#include <kwin.h>
+#include <twin.h>
 #include <netwm.h>
 #include <kurldrag.h>
 #include <kio/netaccess.h>

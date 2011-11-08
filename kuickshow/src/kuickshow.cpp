@@ -57,7 +57,7 @@
 #include <kurlcombobox.h>
 #include <kurlcompletion.h>
 #include <kurldrag.h>
-#include <kwin.h>
+#include <twin.h>
 #include <kstdguiitem.h>
 
 #include <kdebug.h>

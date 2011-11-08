@@ -29,7 +29,7 @@
 #include <knotifyclient.h>
 #include <kpopupmenu.h>
 #include <kstandarddirs.h>
-#include <kwin.h>
+#include <twin.h>
 #include <kstdguiitem.h>
 
 #include <tqbitmap.h>

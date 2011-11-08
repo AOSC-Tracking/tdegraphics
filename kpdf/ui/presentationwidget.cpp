@@ -24,7 +24,7 @@
 #include <kiconloader.h>
 #include <kimageeffect.h>
 #include <kmessagebox.h>
-#include <kwin.h>
+#include <twin.h>
 
 // system includes
 #include <stdlib.h>

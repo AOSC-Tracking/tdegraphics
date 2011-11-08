@@ -40,7 +40,7 @@
 #include <kpopupmenu.h>
 #include <kparts/componentfactory.h>
 
-#include <kwin.h>
+#include <twin.h>
 
 #include <tqcursor.h>
 

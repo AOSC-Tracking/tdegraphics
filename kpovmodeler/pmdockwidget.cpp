@@ -34,7 +34,7 @@
 #include <kglobal.h>
 #include <ktoolbar.h>
 #include <kpopupmenu.h>
-#include <kwin.h>
+#include <twin.h>
 #include <kdebug.h>
 #ifdef TQ_WS_X11
 #include <X11/X.h>

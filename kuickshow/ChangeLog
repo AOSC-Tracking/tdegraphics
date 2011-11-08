@@ -312,7 +312,7 @@ Sun Mar  4 13:57:52 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 	hack around QWidget::move() resizing us -> we just ignore that 
 	resizeEvent. Gives less flicker when switching into window-mode.
 
-	* initial fullscreen mode works again as well (hacking around a kwin
+	* initial fullscreen mode works again as well (hacking around a twin
 	"limitation")
 
 Sun Mar  4 10:50:23 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
@@ -387,7 +387,7 @@ Wed Jan 10 23:39:14 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 Fri Nov  3 14:32:53 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/imagewindow.cpp (setFullscreen): 
-	cool, no need to workaround kwin's auto-maximization needed,
+	cool, no need to workaround twin's auto-maximization needed,
 	setMinimumSize() does it! Thanks Matthias Ettrich!
 
 Fri Nov  3 13:23:41 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
@@ -400,7 +400,7 @@ Fri Nov  3 13:23:41 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 Fri Nov  3 01:49:57 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/*: some more work on the KDE2 port/integration. Workarounds for
-	kwin's auto-maximization added. Fullscreen works. Moving images inside
+	twin's auto-maximization added. Fullscreen works. Moving images inside
 	the window works properly again. NETWM/KWin handling is better now.
 	Also better handling of non-loadable files. 
 

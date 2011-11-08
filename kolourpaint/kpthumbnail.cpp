@@ -31,7 +31,7 @@
 #include <kpthumbnail.h>
 
 #include <tqdockarea.h>
-#include <tqdockwindow.h>
+#include <tqdoctwindow.h>
 #include <tqtimer.h>
 
 #include <kdebug.h>

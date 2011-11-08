@@ -38,7 +38,7 @@
 #include <kimageio.h>
 #include <kiconloader.h>
 #include <kdebug.h>
-#include <kwin.h>
+#include <twin.h>
 
 #include "kooka.h"
 #include "version.h"

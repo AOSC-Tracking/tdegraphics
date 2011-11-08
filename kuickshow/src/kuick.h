@@ -22,8 +22,8 @@
 #include <tqrect.h>
 #include <tqsize.h>
 
-#include <kwin.h>
-#include <kwinmodule.h>
+#include <twin.h>
+#include <twinmodule.h>
 
 class Kuick
 {
