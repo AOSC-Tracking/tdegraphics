@@ -29,7 +29,7 @@
 #ifndef __kp_thumbnail_h__
 #define __kp_thumbnail_h__
 
-#include <tqdoctwindow.h>
+#include <tqdockwindow.h>
 
 class kpMainWindow;
 class kpThumbnailView;
