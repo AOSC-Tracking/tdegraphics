@@ -1,6 +1,6 @@
 /* This file is part of the KDE libraries
    Copyright (C) 2000 Max Judin <novaprint@mtu-net.ru>
-   Copyright (C) 2000 Falk Brettschneider <falk@kdevelop.org>
+   Copyright (C) 2000 Falk Brettschneider <falk@tdevelop.org>
    Modified 2002 Andreas Zehender <zehender@kde.org>
 
    This library is free software; you can redistribute it and/or
@@ -21,11 +21,11 @@
 /*
    activities:
    -----------
-   03/2002                 : Copied from kdelibs. Slightly different docking
+   03/2002                 : Copied from tdelibs. Slightly different docking
                            ; behavior by Andreas Zehender <zehender@kde.org>
    05/2001 -               : useful patches, bugfixes by Christoph Cullmann <crossfire@babylon2k.de>,
                              Joseph Wenninger <jowenn@bigfoot.com> and  Falk Brettschneider
-   03/2001 - 05/2001       : maintained and enhanced by Falk Brettschneider <falk@kdevelop.org>
+   03/2001 - 05/2001       : maintained and enhanced by Falk Brettschneider <falk@tdevelop.org>
    03/2000                 : class documentation added by Falk Brettschneider <gigafalk@yahoo.com>
    10/1999 - 03/2000       : programmed by Max Judin <novaprint@mtu-net.ru>
 

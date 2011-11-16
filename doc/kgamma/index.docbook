@@ -3,7 +3,7 @@
  "dtd/kdex.dtd" [
   <!ENTITY kgamma '<application>KGamma</application>'>
   <!ENTITY kappname "&kgamma;">
-  <!ENTITY package "kdegraphics">
+  <!ENTITY package "tdegraphics">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 ]>

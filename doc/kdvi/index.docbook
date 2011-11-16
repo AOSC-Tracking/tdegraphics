@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN"
  "dtd/kdex.dtd" [
   <!ENTITY kappname "&kdvi;">
-  <!ENTITY package "kdegraphics">
+  <!ENTITY package "tdegraphics">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 ]>

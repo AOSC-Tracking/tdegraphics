@@ -20,7 +20,7 @@ Version 0.1.1
     - "Revert file" now works
 
 Version 0.2
-  - Ported to Qt 3.0 / KDE 3.0, moved to the kdegraphics package
+  - Ported to Qt 3.0 / KDE 3.0, moved to the tdegraphics package
   - Dock widgets
   - Qt OpenGL extension removed
   - Key navigation in the tree view

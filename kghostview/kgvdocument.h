@@ -114,7 +114,7 @@ protected:
      * Else, it does nothing and returns false.
      *
      * What type of files this is able to uncompress will depend on the
-     * kdelibs installed. Generally it will work for .gz and .bz2
+     * tdelibs installed. Generally it will work for .gz and .bz2
      */
     bool uncompressFile();
     void openPSFile(const TQString &file=TQString());

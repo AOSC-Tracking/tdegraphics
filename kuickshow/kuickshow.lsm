@@ -13,6 +13,6 @@ Alternate-site: ftp://ftp.kde.org/pub/kde/stable/apps/graphics/
 Primary-site:   http://devel-home.kde.org/~pfeiffer/kuickshow/
                 xxxxxx  kuickshow-0.8.5.tar.gz
                 xxx     kuickshow-0.8.5.lsm
-Platform:       Unix. Needs Qt >= 3.0.4, KDE (kdelibs) >= 3.0 and Imlib 1.x
+Platform:       Unix. Needs Qt >= 3.0.4, KDE (tdelibs) >= 3.0 and Imlib 1.x
 Copying-policy: GPL
 End

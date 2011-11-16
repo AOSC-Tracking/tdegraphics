@@ -424,7 +424,7 @@ void kpMainWindow::slotScan ()
         // [takes about 500ms on 350Mhz]
         m_scanDialog = KScanDialog::getScanDialog (this, "scandialog", true/*modal*/);
 
-        // No scanning support (kdegraphics/libkscan) installed?
+        // No scanning support (tdegraphics/libkscan) installed?
         // [Remove $KDEDIR/share/servicetypes/kscan.desktop and
         //         $KDEDIR/share/services/scanservice.desktop to simulate this]
         if (!m_scanDialog)
@@ -1330,7 +1330,7 @@ void kpMainWindow::setAsWallpaper (bool centered)
 
     // write position:
     //
-    // SYNC: kdebase/kcontrol/background/bgsettings.h:
+    // SYNC: tdebase/kcontrol/background/bgsettings.h:
     // 1 = Centered
     // 2 = Tiled
     // 6 = Scaled
@@ -1349,8 +1349,8 @@ void kpMainWindow::setAsWallpaper (bool centered)
     dataStream << int (centered ? 1 : 2);
 
 
-    // I'm going to all this trouble because the user might not have kdebase
-    // installed so kdebase/kdesktop/KBackgroundIface.h might not be around
+    // I'm going to all this trouble because the user might not have tdebase
+    // installed so tdebase/kdesktop/KBackgroundIface.h might not be around
     // to be compiled in (where user == developer :))
     if (!KApplication::dcopClient ()->send ("kdesktop", "KBackgroundIface",
                                             "setWallpaper(TQString,int)", data))

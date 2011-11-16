@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kcoloredit "<application>KColorEdit</application>">
   <!ENTITY kappname "&kcoloredit;">
-  <!ENTITY package "kdegraphics">
+  <!ENTITY package "tdegraphics">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"> <!-- Change language only here --> 
 ]

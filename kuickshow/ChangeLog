@@ -99,7 +99,7 @@ Sat Aug  4 03:37:50 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 	* added support for objprelink in the specfile
 	(copy the tarball to your rpm-dir/SOURCES and rpm -ba kuickshow.spec)
 
-	* Fixed some bugs coming from kdelibs 2.1.x vs. 2.2 handling
+	* Fixed some bugs coming from tdelibs 2.1.x vs. 2.2 handling
 	Thanks a lot to Robert Charbonneau <etriaph@kdesktop.org>
 	and another anonymous helper from #kde for testing and useful
 	feedback.
@@ -123,7 +123,7 @@ Wed Jul 11 17:19:38 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* made background color in viewer configurable
 
-	* added delete-action again for users of older kdelibs
+	* added delete-action again for users of older tdelibs
 
 	* fixed some bugs in the filefinder widget
 	
@@ -413,7 +413,7 @@ Fri Nov  3 01:49:57 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 Thu Aug 31 01:48:55 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/*: started reworking/rewriting the whole stuff to make it KDE2
-	ready. Now I have to pay for rewriting so much of kdelibs/kfile... 
+	ready. Now I have to pay for rewriting so much of tdelibs/kfile... 
 	The good thing is: it's mostly about removing stuff from KuickShow
 	because the functionality is already in libkfile, now :)
 

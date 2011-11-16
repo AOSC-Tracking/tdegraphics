@@ -20,7 +20,7 @@ Because I'm still debugging, there are a few hacks in the code such as
 
 Index: kpviewscrollablecontainer.cpp
 ===================================================================
-RCS file: /home/kde/kdegraphics/kolourpaint/kpviewscrollablecontainer.cpp,v
+RCS file: /home/kde/tdegraphics/kolourpaint/kpviewscrollablecontainer.cpp,v
 retrieving revision 1.7
 diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 --- kpviewscrollablecontainer.cpp	29 Jul 2004 12:47:15 -0000	1.7
@@ -473,7 +473,7 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
  #include <kpviewscrollablecontainer.moc>
 Index: kpviewscrollablecontainer.h
 ===================================================================
-RCS file: /home/kde/kdegraphics/kolourpaint/kpviewscrollablecontainer.h,v
+RCS file: /home/kde/tdegraphics/kolourpaint/kpviewscrollablecontainer.h,v
 retrieving revision 1.3
 diff -u -p -r1.3 kpviewscrollablecontainer.h
 --- kpviewscrollablecontainer.h	19 Jul 2004 05:00:47 -0000	1.3
@@ -538,7 +538,7 @@ diff -u -p -r1.3 kpviewscrollablecontainer.h
  };
 Index: kpwidgetmapper.cpp
 ===================================================================
-RCS file: /home/kde/kdegraphics/kolourpaint/kpwidgetmapper.cpp,v
+RCS file: /home/kde/tdegraphics/kolourpaint/kpwidgetmapper.cpp,v
 retrieving revision 1.1
 diff -u -p -r1.1 kpwidgetmapper.cpp
 --- kpwidgetmapper.cpp	10 Jul 2004 11:38:09 -0000	1.1
@@ -588,7 +588,7 @@ diff -u -p -r1.1 kpwidgetmapper.cpp
  }  // namespace kpWidgetMapper {
 Index: kpwidgetmapper.h
 ===================================================================
-RCS file: /home/kde/kdegraphics/kolourpaint/kpwidgetmapper.h,v
+RCS file: /home/kde/tdegraphics/kolourpaint/kpwidgetmapper.h,v
 retrieving revision 1.1
 diff -u -p -r1.1 kpwidgetmapper.h
 --- kpwidgetmapper.h	10 Jul 2004 11:38:09 -0000	1.1

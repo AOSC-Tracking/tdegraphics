@@ -1,7 +1,7 @@
 #include <tqfile.h>
 
 #include <kdebug.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kinstance.h>
 #include <klocale.h>
 #include <kprogress.h>

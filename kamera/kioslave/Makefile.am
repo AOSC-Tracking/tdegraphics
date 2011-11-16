@@ -1,5 +1,5 @@
 # $Id$
-# Makefile for kdebase/kioslave/kamera
+# Makefile for tdebase/kioslave/kamera
 
 INCLUDES= -I$(srcdir)/../.. -I$(srcdir)/.. $(all_includes) $(GPHOTO2_INCS)
 

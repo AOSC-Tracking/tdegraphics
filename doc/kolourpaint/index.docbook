@@ -7,7 +7,7 @@
   <!ENTITY Thurston.Dang
 "<personname><firstname>Thurston</firstname><surname>Dang</surname></personname>">
   <!ENTITY Thurston.Dang.mail "<email>thurston_dang@users.sourceforge.net</email>">
-  <!ENTITY package "kdegraphics">
+  <!ENTITY package "tdegraphics">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 ]>
@@ -59,7 +59,7 @@
 
 <keywordset>
 <keyword>kolourpaint</keyword>
-<keyword>kdegraphics</keyword>
+<keyword>tdegraphics</keyword>
 </keywordset>
 
 </bookinfo>

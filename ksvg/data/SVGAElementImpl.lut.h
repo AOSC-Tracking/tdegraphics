@@ -1,4 +1,4 @@
-/* Automatically generated from impl/SVGAElementImpl.cc using ../../kdelibs/kjs/create_hash_table. DO NOT EDIT ! */
+/* Automatically generated from impl/SVGAElementImpl.cc using ../../tdelibs/kjs/create_hash_table. DO NOT EDIT ! */
 
 using namespace KJS;
 

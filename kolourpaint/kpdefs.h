@@ -37,7 +37,7 @@
 #include <tqsize.h>
 #include <tqstring.h>
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 
 #define KP_IS_TQT_3_3 ([[[TQT_VERSION IS DEPRECATED]]] >= 0x030300 && 1)

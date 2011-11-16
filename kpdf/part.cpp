@@ -41,7 +41,7 @@
 #include <kprinter.h>
 #include <tdeprint/kprintdialogpage.h>
 #include <kstdaction.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kparts/genericfactory.h>
 #include <kurldrag.h>
 #include <kfiledialog.h>

@@ -4,7 +4,7 @@
 
 1998-11-13  Alex Zepeda  <garbanzo@hooked.net>
 
-	* Makefile.cvs (all): Use an updated Makefile.cvs from kdenetwork that
+	* Makefile.cvs (all): Use an updated Makefile.cvs from tdenetwork that
 	tests for the admin directory.
 
 	* configure.in.1: Remove comment about this being Alpha (quality)

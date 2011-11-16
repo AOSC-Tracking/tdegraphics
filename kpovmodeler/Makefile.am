@@ -242,7 +242,7 @@ EXTRA_DIST = kpovmodeler.desktop
 
 
 # make messages.po. Move this one to ../po/ and "make merge" in po
-# the -x is for skipping messages already translated in kdelibs
+# the -x is for skipping messages already translated in tdelibs
 messages: rc.cpp
 	$(XGETTEXT) *.cpp -o $(podir)/kpovmodeler.pot
 

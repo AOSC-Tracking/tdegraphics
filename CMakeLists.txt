@@ -14,7 +14,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 ##### general package setup #####################
 
-project( kdegraphics )
+project( tdegraphics )
 set( VERSION 3.5.13 )
 
 
@@ -93,7 +93,7 @@ set( CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined" )
 set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 
 
-##### kdegraphics directories ###################
+##### tdegraphics directories ###################
 
 if( BUILD_KFILE_PLUGINS OR BUILD_GHOSTKVIEW )
   add_subdirectory( kghostview/dscparse )

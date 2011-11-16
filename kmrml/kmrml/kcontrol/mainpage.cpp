@@ -34,7 +34,7 @@
 #include <kprogress.h>
 #include <kurlrequester.h>
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kdebug.h>
 #include <kio/slaveconfig.h>
 #include <kio/ioslave_defaults.h> // MAX_PORT_VALUE

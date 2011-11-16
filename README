@@ -1,14 +1,14 @@
 In this file:
 
-* About kdegraphics
+* About tdegraphics
 * Common Mistakes
 * Debugging
 * More Info
 
 
-About kdegraphics
+About tdegraphics
 -----------------
-kdegraphics is a collection of graphic oriented applications:
+tdegraphics is a collection of graphic oriented applications:
 
 * debian
     Files needed to create Debian packages.

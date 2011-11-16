@@ -70,7 +70,7 @@ void kpMainWindow::enableHelpMenuDocumentActions (bool /*enable*/)
 }
 
 
-// SYNC: kdebase/twin/twinbindings.cpp
+// SYNC: tdebase/twin/twinbindings.cpp
 static TQString printScreenShortcutString ()
 {
     KConfigGroupSaver cfgGroupSaver (KGlobal::config (), "Global Shortcuts");

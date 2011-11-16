@@ -2,12 +2,12 @@
 
 AM_INIT_AUTOMAKE(kgamma,1.0.2)
 
-dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
-dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
-dnl CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS" dnl __kdevelop[exc]__
+dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __tdevelop[noopt]__
+dnl CFLAGS="$NOOPT_CFLAGS" dnl __tdevelop[noopt]__
+dnl CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS" dnl __tdevelop[exc]__
 
-dnl KDE_NEED_FLEX dnl __kdevelop__
-dnl AC_PROG_YACC dnl __kdevelop__
+dnl KDE_NEED_FLEX dnl __tdevelop__
+dnl AC_PROG_YACC dnl __tdevelop__
 
 dnl This test is taken from the aktion configure.in.in
 dnl Modified by Michael v.Ostheim

@@ -2,7 +2,7 @@
 @mainpage The KDE Graphics API Reference
 
 The kviewshell is a document viewing application contained in the
-kdegraphics package. It cannot load documents itself, but relies on
+tdegraphics package. It cannot load documents itself, but relies on
 plugins that support various document formats.  Currently, there are
 plugins for TeX DVI, for FAX, and for AT&T's DJVU format. Some of the
 plugins come with clones of the kviewshell programm (kdvi, kfaxview)
@@ -20,12 +20,12 @@ Writing KDE libraries and the associated makefiles can be rather
 complicated. We have therefore provided a well-documented reference
 implementation, the FAX plugin.  This is a fine example for a simple
 kviewshell plugin, and a very good starting point for your own
-implementation.  It can be found in the kdegraphics source tree under
+implementation.  It can be found in the tdegraphics source tree under
 <a
-href="http://websvn.kde.org/trunk/KDE/kdegraphics/kfaxview">kfaxview</a>. If
+href="http://websvn.kde.org/trunk/KDE/tdegraphics/kfaxview">kfaxview</a>. If
 you are looking for a plugin with more functionality, you might
 consider the DJVU plugin, contained in <a
-href="http://websvn.kde.org/trunk/KDE/kdegraphics/kviewshell/plugins/djvu">kviewshell/plugins/kdjview</a>.
+href="http://websvn.kde.org/trunk/KDE/tdegraphics/kviewshell/plugins/djvu">kviewshell/plugins/kdjview</a>.
 The DVI plugin is, for historical reasons, rather involved and cannot
 be recommended as an example.
 	
@@ -48,7 +48,7 @@ tailor to suit your needs.
 - If your file type is not known to KDE, then you need to provide a
 .desktop file for the mime type you wish to support. Search the KDE
 control center for "mime type" to get a list of known types. Since the
-list of mime types that are contained in the kdelibs package is quite
+list of mime types that are contained in the tdelibs package is quite
 long, it is quite likely that your file type is already known.
 
 - Provide one or more .desktop files that relate mime-types with your

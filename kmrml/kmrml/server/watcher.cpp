@@ -20,7 +20,7 @@
 
 #include <kapplication.h>
 #include <kdebug.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 

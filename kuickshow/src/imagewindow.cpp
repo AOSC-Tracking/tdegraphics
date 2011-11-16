@@ -40,7 +40,7 @@
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kdebug.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #ifdef KDE_USE_FINAL
 #undef Unsorted
 #endif

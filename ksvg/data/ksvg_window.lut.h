@@ -1,4 +1,4 @@
-/* Automatically generated from ecma/ksvg_window.cpp using ../../kdelibs/kjs/create_hash_table. DO NOT EDIT ! */
+/* Automatically generated from ecma/ksvg_window.cpp using ../../tdelibs/kjs/create_hash_table. DO NOT EDIT ! */
 
 using namespace KJS;
 

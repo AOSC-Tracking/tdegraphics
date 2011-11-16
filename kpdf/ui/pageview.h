@@ -14,7 +14,7 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
-// This file follows coding style described in kdebase/kicker/HACKING
+// This file follows coding style described in tdebase/kicker/HACKING
 
 #ifndef _KPDF_PAGEVIEW_H_
 #define _KPDF_PAGEVIEW_H_

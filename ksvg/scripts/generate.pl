@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-my $kalyptusdir = "../../../kdebindings/kalyptus";
+my $kalyptusdir = "../../../tdebindings/kalyptus";
 
 use File::Basename;
 

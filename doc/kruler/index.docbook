@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kappname "&kruler;">
-  <!ENTITY package "kdegraphics">
+  <!ENTITY package "tdegraphics">
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
   <!ENTITY % addindex "IGNORE">
 ]>
@@ -44,7 +44,7 @@
 <keywordset>
 <keyword>KDE</keyword>
 <keyword>KRuler</keyword>
-<keyword>kdegraphics</keyword>
+<keyword>tdegraphics</keyword>
 </keywordset>
 
 </bookinfo>

@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2003, Luís Pedro Coelho,
- * based on kdelibs/kparts/genericfactory.h
+ * based on tdelibs/kparts/genericfactory.h
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

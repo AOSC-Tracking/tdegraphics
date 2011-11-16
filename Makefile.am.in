@@ -1,4 +1,4 @@
-## kdegraphics/Makefile.am $Id$
+## tdegraphics/Makefile.am $Id$
 ## (C) 1997 Stephan Kulow
 
 AUTOMAKE_OPTIONS = foreign 1.6.1
@@ -10,7 +10,7 @@ COMPILE_AFTER_kviewshell = kdvi kfaxview
 
 DISTCLEANFILES = inst-apps
 
-EXTRA_DIST = admin debian kdebase.spec.in README.pam kde.pamd 
+EXTRA_DIST = admin debian tdebase.spec.in README.pam kde.pamd 
 
 dist-hook:
 	cd $(top_distdir) && perl $(top_srcdir)/admin/am_edit -padmin

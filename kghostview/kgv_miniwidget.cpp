@@ -24,7 +24,7 @@
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kinstance.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 

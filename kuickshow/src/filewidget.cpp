@@ -18,7 +18,7 @@
 
 #include <tqkeycode.h>
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -89,7 +89,7 @@ void FileWidget::initActions()
     menu->insert( coll->action("kuick_showFullscreen"), index++ );
     menu->insert( sep, index++ );
 
-    // support for older kdelibs, remove somewhen...
+    // support for older tdelibs, remove somewhen...
     if ( coll->action("kuick_delete") )
         menu->insert( coll->action("kuick_delete"), 9 );
 

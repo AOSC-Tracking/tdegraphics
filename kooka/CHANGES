@@ -56,7 +56,7 @@ scanned with about 150 dpi.
 
 /* ================================================================================ */
 
--> Released version 0.3 in kdegraphics/kooka for KDE 2.2
+-> Released version 0.3 in tdegraphics/kooka for KDE 2.2
 The released version does actually not have too many new 
 
 - July 2001, Klaas Freitag <freitag@suse.de>
@@ -82,7 +82,7 @@ the preview page.
 
 Nov 2001:
 Replaced the old ScanPackager object by a new one based on the new KFileTreeView
-Widget in kdelibs/kfile. Hopefully soon full KURL support and more than one image
+Widget in tdelibs/kfile. Hopefully soon full KURL support and more than one image
 repository.
 
 Nov 2001:

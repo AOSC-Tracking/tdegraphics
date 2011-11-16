@@ -1,4 +1,4 @@
-/* Automatically generated from impl/SVGPathSegImpl.cc using ../../kdelibs/kjs/create_hash_table. DO NOT EDIT ! */
+/* Automatically generated from impl/SVGPathSegImpl.cc using ../../tdelibs/kjs/create_hash_table. DO NOT EDIT ! */
 
 using namespace KJS;
 

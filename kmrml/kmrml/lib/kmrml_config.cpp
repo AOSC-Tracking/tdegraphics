@@ -28,7 +28,7 @@
 
 #include "kmrml_config.h"
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #if TDE_VERSION < 307
   #define TQUOTE( x ) x
 #else

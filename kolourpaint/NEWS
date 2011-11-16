@@ -138,7 +138,7 @@ KolourPaint 1.4_relight (Frozen 2005-11-08)
      [also in branches/KDE/3.[34]/, branches/kolourpaint/1.2_trinity/]
 
    * Correct and update image format associations to all formats supported
-     by KDE 3.5 (kdelibs/kimgio/:r466654)
+     by KDE 3.5 (tdelibs/kimgio/:r466654)
 
    * String fixes (Stefan Winter)
      [also in branches/KDE/3.4/]

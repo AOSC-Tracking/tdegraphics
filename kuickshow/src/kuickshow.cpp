@@ -35,7 +35,7 @@
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kcursor.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kfiledialog.h>
 #include <kfilemetainfo.h>
 #include <kglobal.h>

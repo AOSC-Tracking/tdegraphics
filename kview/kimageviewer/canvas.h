@@ -38,7 +38,7 @@ namespace KImageViewer
  *
  * @author Matthias Kretz <kretz@kde.org>
  *
- * You'll find an implementation in kdegraphics (KView). You may
+ * You'll find an implementation in tdegraphics (KView). You may
  * still use this interface in your program but it will only work
  * if you have an implementation installed.
  *

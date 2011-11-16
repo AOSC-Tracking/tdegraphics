@@ -4,7 +4,7 @@
 #include <kmrml_config.h>
 #include "indexcleaner.h"
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #if TDE_VERSION < 306
   #define TQUOTE( x ) x
 #else

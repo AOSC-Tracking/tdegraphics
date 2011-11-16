@@ -75,7 +75,7 @@ should have
 * an exteremely well-defined reference implementation for a trivial
 file format, either one that is actually useful (kfax, perhaps), or
 one that serves only demonstration purposes and that goes into the
-kdesdk module
+tdesdk module
 
 
 

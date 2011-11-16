@@ -18,7 +18,7 @@
 #include <tqpainter.h>
 #include <kiconloader.h>
 #include <kaccelmanager.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 // local includes
 #include "core/document.h"
