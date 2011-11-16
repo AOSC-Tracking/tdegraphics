@@ -41,7 +41,7 @@
 
 
 #define KP_IS_TQT_3_3 ([[[TQT_VERSION IS DEPRECATED]]] >= 0x030300 && 1)
-#define KP_IS_KDE_3_3 ((KDE_VERSION_MAJOR >= 3 && KDE_VERSION_MINOR >= 3) && 1)
+#define KP_IS_KDE_3_3 ((TDE_VERSION_MAJOR >= 3 && TDE_VERSION_MINOR >= 3) && 1)
 
 
 // approx. 2896x2896x32bpp or 3344x3344x24bpp (TODO: 24==32?) or 4096*4096x16bpp

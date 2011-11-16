@@ -1125,7 +1125,7 @@ void KuickShow::about()
 
     aboutWidget->adjustSize();
 
-#if KDE_VERSION >= 310
+#if TDE_VERSION >= 310
     KDialog::centerOnScreen( aboutWidget );
 #else
 // Not fixed because it must be dead code now.

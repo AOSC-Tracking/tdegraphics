@@ -29,7 +29,7 @@
 #include "kmrml_config.h"
 
 #include <kdeversion.h>
-#if KDE_VERSION < 307
+#if TDE_VERSION < 307
   #define TQUOTE( x ) x
 #else
   #define TQUOTE( x ) KProcess::quote( x )

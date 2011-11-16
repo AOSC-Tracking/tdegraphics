@@ -70,7 +70,7 @@ MainPage::MainPage( TQWidget *parent, const char *name )
 
     m_serverWidget->m_portInput->setRange( 0, MAX_PORT_VALUE );
 
-#if KDE_VERSION >= 306
+#if TDE_VERSION >= 306
     KURLRequester *requester = new KURLRequester( this, "dir requester" );
     requester->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     requester->setURL( KGlobalSettings::documentPath() );

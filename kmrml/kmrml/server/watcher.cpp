@@ -74,7 +74,7 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
         m_daemons.insert( daemonKey, daemon );
         daemon->apps.append( clientAppId );
 
-#if KDE_VERSION >= 306
+#if TDE_VERSION >= 306
         daemon->process = new KProcess();
         daemon->process->setUseShell( true );
 #else

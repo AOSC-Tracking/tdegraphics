@@ -42,7 +42,7 @@ FileWidget::FileWidget( const KURL& url, TQWidget *parent, const char *name )
 {
     setEnableDirHighlighting( true );
 
-#if KDE_VERSION >= 310
+#if TDE_VERSION >= 310
     setViewConfig( KGlobal::config(), "Filebrowser" );
 #endif
     readConfig( KGlobal::config(), "Filebrowser" );

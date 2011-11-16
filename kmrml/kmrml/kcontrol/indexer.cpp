@@ -27,7 +27,7 @@
 #include "indexer.h"
 
 #include <kdeversion.h>
-#if KDE_VERSION < 306
+#if TDE_VERSION < 306
   #define TQUOTE( x ) x
 #else
   #define TQUOTE( x ) KProcess::quote( x )
@@ -42,7 +42,7 @@ Indexer::Indexer( const KMrml::Config* config,
       m_dirCount( 0 )
 {
     m_process = new KProcIO();
-#if KDE_VERSION >= 306
+#if TDE_VERSION >= 306
     m_process->setUseShell( true );
 #endif
     m_process->setEnvironment( "LC_ALL", "C" );
@@ -103,7 +103,7 @@ void Indexer::processNext()
         cmd.replace( index, 2, TQUOTE(m_currentDir + "_thumbnails") );
 
 //     qDebug("****** command: %s", cmd.latin1());
-#if KDE_VERSION >= 306
+#if TDE_VERSION >= 306
     *m_process << cmd;
 #else
      TQStringList params = TQStringList::split( ' ', cmd );

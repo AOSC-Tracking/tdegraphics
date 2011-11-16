@@ -151,7 +151,7 @@ bool PMPovrayWidget::render( const TQByteArray& scene, const PMRenderMode& m,
       w += 16;
       h += 16;
 
-#if ( ( KDE_VERSION_MAJOR == 3 ) && ( KDE_VERSION_MINOR <= 1 ) )
+#if ( ( TDE_VERSION_MAJOR == 3 ) && ( TDE_VERSION_MINOR <= 1 ) )
       TQWidget* dw = TQApplication::desktop( );
       if( w > dw->width( ) )
          w = dw->width( );

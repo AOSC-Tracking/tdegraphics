@@ -5,7 +5,7 @@
 #include "indexcleaner.h"
 
 #include <kdeversion.h>
-#if KDE_VERSION < 306
+#if TDE_VERSION < 306
   #define TQUOTE( x ) x
 #else
   #define TQUOTE( x ) KProcess::quote( x )
@@ -60,7 +60,7 @@ void IndexCleaner::startNext()
         return;
     }
 
-#if KDE_VERSION < 306
+#if TDE_VERSION < 306
     m_process = new KShellProcess();
 #else
     m_process = new KProcess();

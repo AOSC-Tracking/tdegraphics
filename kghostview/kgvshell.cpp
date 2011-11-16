@@ -85,12 +85,12 @@ KGVShell::KGVShell() :
     _showMenuBarAction = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotShowMenubar() ), actionCollection() );
 
     /*---- Settings -------------------------------------------------------*/
-#if KDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
+#if TDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
     createStandardStatusBarAction();
 #endif
     setAutoSaveSettings();
     setStandardToolBarMenuEnabled(true);
-#if KDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
+#if TDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
     m_fullScreenAction = KStdAction::fullScreen( TQT_TQOBJECT(this), TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 #else
     m_fullScreenAction = new KToggleAction( this, TQT_SLOT( slotUpdateFullScreen() ) );
@@ -338,7 +338,7 @@ void KGVShell::slotUpdateFullScreen()
 	kapp->removeEventFilter( m_fsFilter );
 	m_gvpart->updateFullScreen( false );
 	menuBar()->show();
-#if KDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
+#if TDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
 	KToggleAction *statusbarAction = dynamic_cast<KToggleAction *>(actionCollection()->action(KStdAction::name(KStdAction::ShowStatusbar)));
 	assert( statusbarAction );
 	if (statusbarAction->isChecked()) statusBar()->show();

@@ -925,7 +925,7 @@ void ImageWindow::saveImage()
     TQCheckBox *keepSize = new TQCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
     KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this, "filedialog", true
-#if KDE_VERSION >= 310
+#if TDE_VERSION >= 310
                      ,keepSize
 #endif
                    );
@@ -962,7 +962,7 @@ void ImageWindow::saveImage()
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
 
-#if KDE_VERSION < 310
+#if TDE_VERSION < 310
     delete keepSize;
 #endif
 }

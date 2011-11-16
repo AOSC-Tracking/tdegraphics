@@ -113,7 +113,7 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
                << "+K0.0" << "+KFI1" << "+KFF1" << "+KI0.0" << "+KF0.0"
                << "+SF1" << "+EF1" << "-KC" << "-D";
 
-#if ( ( KDE_VERSION_MAJOR == 2 ) && ( KDE_VERSION_MINOR >= 9 ) ) || ( KDE_VERSION_MAJOR == 3 )
+#if ( ( TDE_VERSION_MAJOR == 2 ) && ( TDE_VERSION_MINOR >= 9 ) ) || ( TDE_VERSION_MAJOR == 3 )
    if( !documentURL.isEmpty( ) && documentURL.isLocalFile( ) )
       m_pProcess->setWorkingDirectory( documentURL.directory( ) );
 #endif
@@ -407,7 +407,7 @@ TQSize PMPovrayRenderWidget::tqsizeHint( ) const
 void PMPovrayRenderWidget::saveConfig( KConfig* cfg )
 {
    cfg->setGroup( "Povray" );
-#if ( ( KDE_VERSION_MAJOR == 3 ) && ( KDE_VERSION_MINOR <= 1 ) )
+#if ( ( TDE_VERSION_MAJOR == 3 ) && ( TDE_VERSION_MINOR <= 1 ) )
    cfg->writeEntry( "PovrayCommand", s_povrayCommand );
    cfg->writeEntry( "LibraryPaths", s_libraryPaths );
 #else
@@ -419,7 +419,7 @@ void PMPovrayRenderWidget::saveConfig( KConfig* cfg )
 void PMPovrayRenderWidget::restoreConfig( KConfig* cfg )
 {
    cfg->setGroup( "Povray" );
-#if ( ( KDE_VERSION_MAJOR == 3 ) && ( KDE_VERSION_MINOR <= 1 ) )
+#if ( ( TDE_VERSION_MAJOR == 3 ) && ( TDE_VERSION_MINOR <= 1 ) )
    s_povrayCommand = cfg->readEntry( "PovrayCommand", s_povrayCommand );
    s_libraryPaths = cfg->readListEntry( "LibraryPaths" );
 #else
