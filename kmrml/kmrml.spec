@@ -30,7 +30,7 @@ With those, you can search for images by giving an example
 image and let the server look up similar images. The query
 result can be refined by giving positive/negative feedback.
  
-Install with '--prefix $KDEDIR' unless you have KDE in /opt/trinity
+Install with '--prefix $TDEDIR' unless you have KDE in /opt/trinity
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -38,7 +38,7 @@ rm -rf $RPM_BUILD_ROOT
 %setup -n kmrml-%{version}
 
 %build
-export KDEDIR=%{prefix}
+export TDEDIR=%{prefix}
 CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -malign-functions=2 -malign-jumps=2 -malign-loops=2 -pipe" LDFLAGS=-s ./configure --prefix=%{prefix} --enable-final --disable-debug
 mkdir -p $RPM_BUILD_ROOT
 make

@@ -9,7 +9,7 @@ Writing the Plugin
 ==================
 
 You have to derive your plugin from KParts::Plugin and install the rc file under
-the directory "data" (KDEDIR/share/apps/ usually)+"instancename/kpartplugins/"
+the directory "data" (TDEDIR/share/apps/ usually)+"instancename/kpartplugins/"
 (where instancename can be either kview or kviewviewer). If you install it under
 kviewviewer the plugin will be loaded for the KPart (meaning it get's loaded in
 e.g. Konqueror).  If you install it under kview it only get's loaded when

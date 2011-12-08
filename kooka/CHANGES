@@ -86,7 +86,7 @@ Widget in tdelibs/kfile. Hopefully soon full KURL support and more than one imag
 repository.
 
 Nov 2001:
-Moved preview image to a hidden directory under $KDEHOME/share/apps/ScanImages/.previews
+Moved preview image to a hidden directory under $TDEHOME/share/apps/ScanImages/.previews
 That makes the preview images invisible in the Packager.
 
 /* ================================================================================ */

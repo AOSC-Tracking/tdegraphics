@@ -331,7 +331,7 @@ public slots:
 
     /**
      * stores the info bit in a config file for the currently connected
-     * scanner. For this, the config file $KDEHOME/.kde/share/config/scannerrc
+     * scanner. For this, the config file $TDEHOME/.kde/share/config/scannerrc
      * is opened, a group is created that identifies the scanner and the
      * device where it is connected. The information is stored into that group.
      */

@@ -31,7 +31,7 @@ It is fully configurable through dialogs.
 Besides that, it offers a nice filebrowser with basic filemanager capabilities
 like renaming, deleting, creating directories, ...
  
-Install with '--prefix $KDEDIR' unless you have the kde-config program.
+Install with '--prefix $TDEDIR' unless you have the kde-config program.
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -45,7 +45,7 @@ if test -z "$PREFIX"; then
   PREFIX=`kde-config --prefix`
 fi
 
-export KDEDIR="$PREFIX"
+export TDEDIR="$PREFIX"
 CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -pipe" LDFLAGS=-s ./configure --prefix="$PREFIX" --enable-final --disable-debug
 mkdir -p $RPM_BUILD_ROOT
 make

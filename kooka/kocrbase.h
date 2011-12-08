@@ -69,7 +69,7 @@ public:
 
     /**
      * @return the filename (without path) of the logo of the ocr engine.
-     * the logo needs to be installed in $KDEDIR/share/apps/kooka/pics
+     * the logo needs to be installed in $TDEDIR/share/apps/kooka/pics
      */
     virtual TQString ocrEngineLogo() const { return TQString(); }
 

@@ -425,8 +425,8 @@ void kpMainWindow::slotScan ()
         m_scanDialog = KScanDialog::getScanDialog (this, "scandialog", true/*modal*/);
 
         // No scanning support (tdegraphics/libkscan) installed?
-        // [Remove $KDEDIR/share/servicetypes/kscan.desktop and
-        //         $KDEDIR/share/services/scanservice.desktop to simulate this]
+        // [Remove $TDEDIR/share/servicetypes/kscan.desktop and
+        //         $TDEDIR/share/services/scanservice.desktop to simulate this]
         if (!m_scanDialog)
         {
         #if DEBUG_KP_MAIN_WINDOW
