@@ -46,7 +46,7 @@
 #include <kinputdialog.h>
 
 #include <tqdir.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqfileinfo.h>
 #include <tqimage.h>
 #include <tqmessagebox.h>
@@ -116,7 +116,7 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
    Q_CHECK_PTR(l_help);
    l_help->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
    l_help->setText( i18n("-No format selected-" ));
-   l_help->tqsetAlignment( AlignVCenter | AlignHCenter );
+   l_help->setAlignment( AlignVCenter | AlignHCenter );
    l_help->setMinimumWidth(230);
 
    // Insert Selbox for subformat
@@ -208,11 +208,11 @@ TQCString FormatDialog::getSubFormat( ) const
 #include "formathelp.h"
 void FormatDialog::buildHelp( void )
 {
-   format_help.insert( TQString::tqfromLatin1("BMP"), HELP_BMP );
-   format_help.insert( TQString::tqfromLatin1("PNM"), HELP_PNM );
-   format_help.insert( TQString::tqfromLatin1("JPEG"), HELP_JPG );
-   format_help.insert( TQString::tqfromLatin1("JPG"), HELP_JPG );
-   format_help.insert( TQString::tqfromLatin1("EPS"), HELP_EPS );
+   format_help.insert( TQString::fromLatin1("BMP"), HELP_BMP );
+   format_help.insert( TQString::fromLatin1("PNM"), HELP_PNM );
+   format_help.insert( TQString::fromLatin1("JPEG"), HELP_JPG );
+   format_help.insert( TQString::fromLatin1("JPG"), HELP_JPG );
+   format_help.insert( TQString::fromLatin1("EPS"), HELP_EPS );
 }
 
 
@@ -276,14 +276,14 @@ void ImgSaver::createDir( const TQString& dir )
       if( KIO::mkdir( KURL(dir)))
       {
         KMessageBox::sorry(0, i18n("The folder\n%1\n does not exist and could not be created;\n"
-                        "please check the permissions.").tqarg(dir));
+                        "please check the permissions.").arg(dir));
       }
    }
 #if 0
    if( ! fi.isWritable() )
    {
         KMessageBox::sorry(0, i18n("The directory\n%1\n is not writeable;\nplease check the permissions.")
-                .tqarg(dir));
+                .arg(dir));
    }
 #endif
 }
@@ -766,7 +766,7 @@ bool ImgSaver::renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt,  TQWi
 
 	 TQString s;
 	 s = i18n("The filename you supplied has no file extension.\nShould the correct one be added automatically? ");
-	 s += i18n( "That would result in the new filename: %1" ).tqarg( fName);
+	 s += i18n( "That would result in the new filename: %1" ).arg( fName);
 
 	 result = KMessageBox::questionYesNo(overWidget, s, i18n( "Extension Missing"),
 					     i18n("Add Extension"), i18n("Do Not Add"),
@@ -863,7 +863,7 @@ bool ImgSaver::copyImage( const KURL& fromUrl, const KURL& toUrl, TQWidget *over
 
       TQString s;
       s = i18n("The filename you supplied has no file extension.\nShould the correct one be added automatically? ");
-      s += i18n( "That would result in the new filename: %1" ).tqarg( fName);
+      s += i18n( "That would result in the new filename: %1" ).arg( fName);
 
       result = KMessageBox::questionYesNo(overWidget, s, i18n( "Extension Missing"),
 					  i18n("Add Extension"), i18n("Do Not Add"),

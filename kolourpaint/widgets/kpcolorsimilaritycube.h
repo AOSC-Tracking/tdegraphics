@@ -55,7 +55,7 @@ public:
     double colorSimilarity () const;
     void setColorSimilarity (double similarity);
 
-    virtual TQSize tqsizeHint () const;
+    virtual TQSize sizeHint () const;
 
 protected:
     TQColor color (int redOrGreenOrBlue, int baseBrightness, int similarityDirection) const;

@@ -35,7 +35,7 @@ MainWidget::~MainWidget()
 }
 
 
-// for now, no tqlayout managers
+// for now, no layout managers
 void MainWidget::resizeEvent( TQResizeEvent * )
 {
   box->resize( width(), height() );

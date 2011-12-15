@@ -34,10 +34,10 @@
 #include <limits.h>
 
 #include <tqapplication.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 #include <tqcursor.h>
 #include <tqevent.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpainter.h>
 #include <tqpixmap.h>
 
@@ -153,7 +153,7 @@ void kpTool::createAction ()
     m_action = new kpToolAction (text (), iconName (), shortcutForKey (m_key),
                                  this, TQT_SLOT (slotActionActivated ()),
                                  m_mainWindow->actionCollection (), name ());
-    m_action->setExclusiveGroup (TQString::tqfromLatin1 ("Tool Box Actions"));
+    m_action->setExclusiveGroup (TQString::fromLatin1 ("Tool Box Actions"));
     m_action->setWhatsThis (description ());
 
     connect (m_action, TQT_SIGNAL (toolTipChanged (const TQString &)),
@@ -744,7 +744,7 @@ void kpTool::endDrawInternal (const TQPoint &thisPoint, const TQRect &normalized
 // private
 void kpTool::endShapeInternal (const TQPoint &thisPoint, const TQRect &normalizedRect)
 {
-    endDrawInternal (thisPoint, normalizedRect, true/*end tqshape*/);
+    endDrawInternal (thisPoint, normalizedRect, true/*end shape*/);
 }
 
 // virtual
@@ -944,7 +944,7 @@ void kpTool::mousePressEvent (TQMouseEvent *e)
 
     if (m_mainWindow && e->button () == Qt::MidButton)
     {
-        const TQString text = TQApplication::tqclipboard ()->text (TQClipboard::Selection);
+        const TQString text = TQApplication::clipboard ()->text (TQClipboard::Selection);
     #if DEBUG_KP_TOOL && 1
         kdDebug () << "\tMMB pasteText='" << text << "'" << endl;
     #endif
@@ -1046,7 +1046,7 @@ void kpTool::mouseMoveEvent (TQMouseEvent *e)
                << " viewUnderCursorTQt=" << (v1 ? v1->name () : "(none)")
                << " viewUnderStartPoint=" << (v2 ? v2->name () : "(none)")
                << endl;
-    kdDebug () << "\ttqfocusWidget=" << kapp->tqfocusWidget () << endl;
+    kdDebug () << "\tfocusWidget=" << kapp->focusWidget () << endl;
 #endif
 
     TQt::ButtonState buttonState = e->stateAfter ();
@@ -1154,7 +1154,7 @@ void kpTool::wheelEvent (TQWheelEvent *e)
     if ((e->state () & TQt::ControlButton) == 0)
         return;
     
-    // If drawing, bye; don't care if a tqshape in progress though.
+    // If drawing, bye; don't care if a shape in progress though.
     if (hasBegunDraw ())
         return;
         
@@ -1652,7 +1652,7 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
             text,
             caption,
             continueButtonText,
-            TQString::tqfromLatin1 ("BigImageDontAskAgain"));
+            TQString::fromLatin1 ("BigImageDontAskAgain"));
 
         return (accept == KMessageBox::Continue);
     }

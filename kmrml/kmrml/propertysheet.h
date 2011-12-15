@@ -34,7 +34,7 @@ namespace KMrml
         {
             MultiSet = 1,       // ??
             Subset,             // radio-button/combobox or listbox
-            SetElement,         // CheckBox -> disables/enables tqchildren?
+            SetElement,         // CheckBox -> disables/enables children?
             Boolean,            // CheckBox
             Numeric,            // Slider/Spinbox
             Textual,            // lineedit

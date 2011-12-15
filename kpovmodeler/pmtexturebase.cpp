@@ -49,11 +49,11 @@ PMTextureBase::~PMTextureBase( )
 {
 }
 
-PMMetaObject* PMTextureBase::tqmetaObject( ) const
+PMMetaObject* PMTextureBase::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureBase", Base::tqmetaObject( ) );
+      s_pMetaObject = new PMMetaObject( "TextureBase", Base::metaObject( ) );
       s_pMetaObject->addProperty(
          new PMTextureBaseProperty( "linkedObject", &PMTextureBase::setLinkedObjectProperty,
                          &PMTextureBase::linkedObjectProperty ) );
@@ -150,7 +150,7 @@ void PMTextureBase::readAttributes( const PMXMLHelper& h )
          }
          else
             h.parser( )->printError( i18n( "Declare \"%1\" has wrong type." )
-                                     .tqarg( id ) );
+                                     .arg( id ) );
       }
    }
 }

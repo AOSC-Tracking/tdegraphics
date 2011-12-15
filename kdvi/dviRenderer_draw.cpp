@@ -292,7 +292,7 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
       if (FNTNUM0 <= ch && ch <= (unsigned char) (FNTNUM0 + 63)) {
 	currinf.fontp = currinf.fonttable->find(ch - FNTNUM0);
 	if (currinf.fontp == NULL) {
-	  errorMsg = i18n("The DVI code referred to font #%1, which was not previously defined.").tqarg(ch - FNTNUM0);
+	  errorMsg = i18n("The DVI code referred to font #%1, which was not previously defined.").arg(ch - FNTNUM0);
 	  return;
 	}
 	currinf.set_char_p = currinf.fontp->set_char_p;
@@ -567,7 +567,7 @@ void dviRenderer::draw_part(double current_dimconv, bool is_vfmacro)
 	  break;
 	  
 	default:
-	  errorMsg = i18n("The unknown op-code %1 was encountered.").tqarg(ch);
+	  errorMsg = i18n("The unknown op-code %1 was encountered.").arg(ch);
 	  return;
 	} /* end switch*/
       } /* end else (ch not a SETCHAR or FNTNUM) */

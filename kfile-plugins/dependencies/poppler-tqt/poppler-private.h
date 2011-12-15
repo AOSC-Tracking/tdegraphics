@@ -39,7 +39,7 @@ namespace Poppler {
     
 class DocumentData;
 
-TQString tqunicodeToTQString(Unicode* u, int len);
+TQString unicodeToTQString(Unicode* u, int len);
 
 TQString UnicodeParsedString(GooString *s1);
 

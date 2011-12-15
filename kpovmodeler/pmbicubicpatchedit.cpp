@@ -23,7 +23,7 @@
 #include "pmvectorlistedit.h"
 #include "pmpart.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
@@ -39,32 +39,32 @@ void PMBicubicPatchEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
 
    m_pType = new TQComboBox( false, this );
    m_pType->insertItem( i18n( "Normal (type 0)" ) );
    m_pType->insertItem( i18n( "Preprocessed (type 1)" ) );
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( new TQLabel( i18n( "Type:" ), this ) );
-   tqlayout->addWidget( m_pType );
-   tqlayout->addStretch( 1 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Type:" ), this ) );
+   layout->addWidget( m_pType );
+   layout->addStretch( 1 );
 
    m_pUSteps = new PMIntEdit( this );
    m_pUSteps->setValidation( true, 0, false, 0 );
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( new TQLabel( i18n( "Steps:" ) + " u", this ) );
-   tqlayout->addWidget( m_pUSteps );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Steps:" ) + " u", this ) );
+   layout->addWidget( m_pUSteps );
    m_pVSteps = new PMIntEdit( this );
    m_pVSteps->setValidation( true, 0, false, 0 );
-   tqlayout->addWidget( new TQLabel( "v", this ) );
-   tqlayout->addWidget( m_pVSteps );
+   layout->addWidget( new TQLabel( "v", this ) );
+   layout->addWidget( m_pVSteps );
 
    m_pFlatness = new PMFloatEdit( this );
    m_pFlatness->setValidation( true, 0.0, false, 0.0 );
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( new TQLabel( i18n( "Flatness:" ), this ) );
-   tqlayout->addWidget( m_pFlatness );
-   tqlayout->addStretch( 1 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Flatness:" ), this ) );
+   layout->addWidget( m_pFlatness );
+   layout->addStretch( 1 );
 
    topLayout( )->addWidget( new TQLabel( i18n( "Points:" ), this ) );
 

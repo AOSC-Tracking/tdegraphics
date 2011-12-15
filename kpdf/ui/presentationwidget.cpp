@@ -43,12 +43,12 @@
 #define ENABLE_PROGRESS_OVERLAY
 
 
-// a frame contains a pointer to the page object, its tqgeometry and the
+// a frame contains a pointer to the page object, its geometry and the
 // transition effect to the next frame
 struct PresentationFrame
 {
     const KPDFPage * page;
-    TQRect tqgeometry;
+    TQRect geometry;
 };
 
 
@@ -56,7 +56,7 @@ PresentationWidget::PresentationWidget( TQWidget * parent, KPDFDocument * doc )
     : TQDialog( parent, "presentationWidget", true, WDestructiveClose | WStyle_NoBorder),
     m_pressedLink( 0 ), m_handCursor( false ), m_document( doc ), m_frameIndex( -1 )
 {
-    // set look and tqgeometry
+    // set look and geometry
     setBackgroundMode( TQt::NoBackground );
 
     m_width = -1;
@@ -124,7 +124,7 @@ void PresentationWidget::notifySetup( const TQValueVector< KPDFPage * > & pageSe
     {
         PresentationFrame * frame = new PresentationFrame();
         frame->page = *setIt;
-        // calculate frame tqgeometry keeping constant aspect ratio
+        // calculate frame geometry keeping constant aspect ratio
         float pageRatio = frame->page->ratio();
         int pageWidth = m_width,
             pageHeight = m_height;
@@ -132,7 +132,7 @@ void PresentationWidget::notifySetup( const TQValueVector< KPDFPage * > & pageSe
             pageWidth = (int)( (float)pageHeight / pageRatio );
         else
             pageHeight = (int)( (float)pageWidth * pageRatio );
-        frame->tqgeometry.setRect( (m_width - pageWidth) / 2,
+        frame->geometry.setRect( (m_width - pageWidth) / 2,
                                  (m_height - pageHeight) / 2,
                                  pageWidth, pageHeight );
         // add the frame to the vector
@@ -145,11 +145,11 @@ void PresentationWidget::notifySetup( const TQValueVector< KPDFPage * > & pageSe
     if ( info )
     {
         if ( !info->get( "title" ).isNull() )
-            m_metaStrings += i18n( "Title: %1" ).tqarg( info->get( "title" ) );
+            m_metaStrings += i18n( "Title: %1" ).arg( info->get( "title" ) );
         if ( !info->get( "author" ).isNull() )
-            m_metaStrings += i18n( "Author: %1" ).tqarg( info->get( "author" ) );
+            m_metaStrings += i18n( "Author: %1" ).arg( info->get( "author" ) );
     }
-    m_metaStrings += i18n( "Pages: %1" ).tqarg( m_document->pages() );
+    m_metaStrings += i18n( "Pages: %1" ).arg( m_document->pages() );
     m_metaStrings += i18n( "Click to begin" );
 }
 
@@ -287,9 +287,9 @@ void PresentationWidget::mouseMoveEvent( TQMouseEvent * e )
     else
     {
         // show the bar if reaching top 2 pixels
-        if ( e->y() <= (tqgeometry().top() + 1) )
+        if ( e->y() <= (geometry().top() + 1) )
             m_topBar->show();
-        // handle "dragging the wheel" if clicking on its tqgeometry
+        // handle "dragging the wheel" if clicking on its geometry
         else if ( e->state() == Qt::LeftButton && m_overlayGeometry.contains( e->pos() ) )
             overlayClick( e->pos() );
     }
@@ -314,7 +314,7 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
         m_topBar->alignItemRight( 1 );
         m_topBar->hide();
         // change topbar background color
-        TQPalette p = m_topBar->tqpalette();
+        TQPalette p = m_topBar->palette();
         p.setColor( TQPalette::Active, TQColorGroup::Button, TQt::gray );
         p.setColor( TQPalette::Active, TQColorGroup::Background, TQt::darkGray );
         m_topBar->setPalette( p );
@@ -330,12 +330,12 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
     }
 
     // check painting rect consistancy
-    TQRect r = pe->rect().intersect( tqgeometry() );
+    TQRect r = pe->rect().intersect( geometry() );
     if ( r.isNull() || m_lastRenderedPixmap.isNull() )
         return;
 
     // blit the pixmap to the screen
-    TQMemArray<TQRect> allRects = TQRegion(pe->region()).tqrects();
+    TQMemArray<TQRect> allRects = TQRegion(pe->region()).rects();
     uint numRects = allRects.count();
     for ( uint i = 0; i < numRects; i++ )
     {
@@ -370,18 +370,18 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
 // </widget events>
 
 
-const KPDFLink * PresentationWidget::getLink( int x, int y, TQRect * tqgeometry ) const
+const KPDFLink * PresentationWidget::getLink( int x, int y, TQRect * geometry ) const
 {
     // no links on invalid pages
-    if ( tqgeometry && !tqgeometry->isNull() )
-        tqgeometry->setRect( 0, 0, -1, -1 );
+    if ( geometry && !geometry->isNull() )
+        geometry->setRect( 0, 0, -1, -1 );
     if ( m_frameIndex < 0 || m_frameIndex >= (int)m_frames.size() )
         return 0;
 
-    // get frame, page and tqgeometry
+    // get frame, page and geometry
     const PresentationFrame * frame = m_frames[ m_frameIndex ];
     const KPDFPage * page = frame->page;
-    const TQRect & frameGeometry = frame->tqgeometry;
+    const TQRect & frameGeometry = frame->geometry;
 
     // compute normalized x and y
     double nx = (double)(x - frameGeometry.left()) / (double)frameGeometry.width();
@@ -396,11 +396,11 @@ const KPDFLink * PresentationWidget::getLink( int x, int y, TQRect * tqgeometry 
     if ( !object )
         return 0;
 
-    // compute link tqgeometry if destination rect present
-    if ( tqgeometry )
+    // compute link geometry if destination rect present
+    if ( geometry )
     {
-        *tqgeometry = object->tqgeometry( frameGeometry.width(), frameGeometry.height() );
-        tqgeometry->moveBy( frameGeometry.left(), frameGeometry.top() );
+        *geometry = object->geometry( frameGeometry.width(), frameGeometry.height() );
+        geometry->moveBy( frameGeometry.left(), frameGeometry.top() );
     }
 
     // return the link pointer
@@ -416,7 +416,7 @@ void PresentationWidget::testCursorOnLink( int x, int y )
     // only react on changes (in/out from a link)
     if ( (link && !m_handCursor) || (!link && m_handCursor) )
     {
-        // change cursor tqshape
+        // change cursor shape
         m_handCursor = link != 0;
         setCursor( m_handCursor ? KCursor::handCursor() : KCursor::arrowCursor());
 
@@ -451,8 +451,8 @@ void PresentationWidget::changePage( int newPage )
     // check if pixmap exists or else request it
     m_frameIndex = newPage;
     PresentationFrame * frame = m_frames[ m_frameIndex ];
-    int pixW = frame->tqgeometry.width();
-    int pixH = frame->tqgeometry.height();
+    int pixW = frame->geometry.width();
+    int pixH = frame->geometry.height();
 
     // if pixmap not inside the KPDFPage we request it and wait for
     // notifyPixmapChanged call or else we can proceed to pixmap generation
@@ -470,16 +470,16 @@ void PresentationWidget::changePage( int newPage )
             if (newPage + 1 < (int)m_document->pages())
             {
                 PresentationFrame *nextFrame = m_frames[ newPage + 1 ];
-                pixW = nextFrame->tqgeometry.width();
-                pixH = nextFrame->tqgeometry.height();
+                pixW = nextFrame->geometry.width();
+                pixH = nextFrame->geometry.height();
                 if ( !nextFrame->page->hasPixmap( PRESENTATION_ID, pixW, pixH ) )
                     requests.push_back( new PixmapRequest( PRESENTATION_ID, newPage + 1, pixW, pixH, PRESENTATION_PRELOAD_PRIO, true ) );
             }
             if (newPage - 1 >= 0)
             {
                 PresentationFrame *prevFrame = m_frames[ newPage - 1 ];
-                pixW = prevFrame->tqgeometry.width();
-                pixH = prevFrame->tqgeometry.height();
+                pixW = prevFrame->geometry.width();
+                pixH = prevFrame->geometry.height();
                 if ( !prevFrame->page->hasPixmap( PRESENTATION_ID, pixW, pixH ) )
                     requests.push_back( new PixmapRequest( PRESENTATION_ID, newPage - 1, pixW, pixH, PRESENTATION_PRELOAD_PRIO, true ) );
             }
@@ -595,7 +595,7 @@ void PresentationWidget::generateContentsPage( int pageNum, TQPainter & p )
     PresentationFrame * frame = m_frames[ pageNum ];
 
     // translate painter and contents rect
-    TQRect geom( frame->tqgeometry );
+    TQRect geom( frame->geometry );
     p.translate( geom.left(), geom.top() );
     geom.moveBy( -geom.left(), -geom.top() );
 
@@ -605,11 +605,11 @@ void PresentationWidget::generateContentsPage( int pageNum, TQPainter & p )
                                      &p, geom, geom.width(), geom.height() );
 
     // restore painter
-    p.translate( -frame->tqgeometry.left(), -frame->tqgeometry.top() );
+    p.translate( -frame->geometry.left(), -frame->geometry.top() );
 
     // fill unpainted areas with background color
     TQRegion unpainted( TQRect( 0, 0, m_width, m_height ) );
-    TQMemArray<TQRect> rects = TQRegion(unpainted.subtract( frame->tqgeometry )).tqrects();
+    TQMemArray<TQRect> rects = TQRegion(unpainted.subtract( frame->geometry )).rects();
     for ( uint i = 0; i < rects.count(); i++ )
     {
         const TQRect & r = rects[i];
@@ -622,7 +622,7 @@ inline int qt_div255(int x) { return (x + (x>>8) + 0x80) >> 8; }
 void PresentationWidget::generateOverlay()
 {
 #ifdef ENABLE_PROGRESS_OVERLAY
-    // calculate overlay tqgeometry and resize pixmap if needed
+    // calculate overlay geometry and resize pixmap if needed
     int side = m_width / 16;
     m_overlayGeometry.setRect( m_width - side - 4, 4, side, side );
     if ( m_lastRenderedOverlay.width() != side )
@@ -690,9 +690,9 @@ void PresentationWidget::generateOverlay()
 
     // generate a 2 colors pixmap using mixing shadow (made with highlight color)
     // and image (made with highlightedText color)
-    TQColor color = tqpalette().active().highlightedText();
+    TQColor color = palette().active().highlightedText();
     int red = color.red(), green = color.green(), blue = color.blue();
-    color = tqpalette().active().highlight();
+    color = palette().active().highlight();
     int sRed = color.red(), sGreen = color.green(), sBlue = color.blue();
     // pointers
     unsigned int * data = (unsigned int *)image.bits(),
@@ -725,7 +725,7 @@ void PresentationWidget::generateOverlay()
     m_lastRenderedOverlay.convertFromImage( image );
 
     // start the autohide timer
-    tqrepaint( m_overlayGeometry, false /*clear*/ ); // toggle with next line
+    repaint( m_overlayGeometry, false /*clear*/ ); // toggle with next line
     //update( m_overlayGeometry );
     m_overlayHideTimer->start( 2500, true );
 #endif
@@ -837,14 +837,14 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::BlindsHorizontal:
         {
             KPDFPageTransition transition( KPDFPageTransition::Blinds );
-            transition.tqsetAlignment( KPDFPageTransition::Horizontal );
+            transition.setAlignment( KPDFPageTransition::Horizontal );
             return transition;
             break;
         }
         case KpdfSettings::EnumSlidesTransition::BlindsVertical:
         {
             KPDFPageTransition transition( KPDFPageTransition::Blinds );
-            transition.tqsetAlignment( KPDFPageTransition::Vertical );
+            transition.setAlignment( KPDFPageTransition::Vertical );
             return transition;
             break;
         }
@@ -896,7 +896,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitHorizontalIn:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Horizontal );
+            transition.setAlignment( KPDFPageTransition::Horizontal );
             transition.setDirection( KPDFPageTransition::Inward );
             return transition;
             break;
@@ -904,7 +904,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitHorizontalOut:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Horizontal );
+            transition.setAlignment( KPDFPageTransition::Horizontal );
             transition.setDirection( KPDFPageTransition::Outward );
             return transition;
             break;
@@ -912,7 +912,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitVerticalIn:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Vertical );
+            transition.setAlignment( KPDFPageTransition::Vertical );
             transition.setDirection( KPDFPageTransition::Inward );
             return transition;
             break;
@@ -920,7 +920,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitVerticalOut:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Vertical );
+            transition.setAlignment( KPDFPageTransition::Vertical );
             transition.setDirection( KPDFPageTransition::Outward );
             return transition;
             break;
@@ -963,7 +963,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
 /** ONLY the TRANSITIONS GENERATION function from here on **/
 void PresentationWidget::initTransition( const KPDFPageTransition *transition )
 {
-    // if it's just a 'replace' transition, tqrepaint the screen
+    // if it's just a 'replace' transition, repaint the screen
     if ( transition->type() == KPDFPageTransition::Replace )
     {
         update();
@@ -971,7 +971,7 @@ void PresentationWidget::initTransition( const KPDFPageTransition *transition )
     }
 
     const bool isInward = transition->direction() == KPDFPageTransition::Inward;
-    const bool isHorizontal = transition->tqalignment() == KPDFPageTransition::Horizontal;
+    const bool isHorizontal = transition->alignment() == KPDFPageTransition::Horizontal;
     const float totalTime = transition->duration();
 
     m_transitionRects.clear();

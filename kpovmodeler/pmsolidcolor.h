@@ -54,7 +54,7 @@ public:
    virtual TQString description( ) const;
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

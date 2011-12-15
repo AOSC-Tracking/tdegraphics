@@ -133,12 +133,12 @@ void kpColorSimilarityCube::setColorSimilarity (double similarity)
 
     m_colorSimilarity = similarity;
 
-    tqrepaint (false/*no erase*/);
+    repaint (false/*no erase*/);
 }
 
 
 // protected virtual [base TQWidget]
-TQSize kpColorSimilarityCube::tqsizeHint () const
+TQSize kpColorSimilarityCube::sizeHint () const
 {
     return TQSize (52, 52);
 }
@@ -247,8 +247,8 @@ void kpColorSimilarityCube::drawFace (TQPainter *p,
     #if DEBUG_KP_COLOR_SIMILARITY_CUBE
         kdDebug () << "\tnot enabled - making us grey" << endl;
     #endif
-        colors [0] = tqcolorGroup ().background ();
-        colors [1] = tqcolorGroup ().background ();
+        colors [0] = colorGroup ().background ();
+        colors [1] = colorGroup ().background ();
     }
 
 #if DEBUG_KP_COLOR_SIMILARITY_CUBE
@@ -274,7 +274,7 @@ void kpColorSimilarityCube::drawContents (TQPainter *p)
     TQRect cr (contentsRect ());
 
     TQPixmap backBuffer (cr.width (), cr.height ());
-    backBuffer.fill (tqcolorGroup ().background ());
+    backBuffer.fill (colorGroup ().background ());
 
     TQPainter backBufferPainter (&backBuffer);
 

@@ -60,7 +60,7 @@
             <property name="name">
                 <cstring>m_pListView</cstring>
             </property>
-            <property name="tqminimumSize">
+            <property name="minimumSize">
                 <size>
                     <width>400</width>
                     <height>0</height>
@@ -140,7 +140,7 @@
                     <property name="sizeType">
                         <enum>Fixed</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>16</width>
                             <height>20</height>
@@ -188,7 +188,7 @@
                     <property name="sizeType">
                         <enum>MinimumExpanding</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>20</width>
                             <height>80</height>

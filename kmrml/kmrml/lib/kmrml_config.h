@@ -108,7 +108,7 @@ namespace KMrml
 
         TQString settingsGroup( const TQString& host ) const
         {
-            return TQString::tqfromLatin1( "SettingsFor: " ).append( host );
+            return TQString::fromLatin1( "SettingsFor: " ).append( host );
         }
 
         bool m_serverStartedIndividually;

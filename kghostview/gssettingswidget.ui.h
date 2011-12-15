@@ -9,6 +9,6 @@
 
 void GSSettingsWidget::setDetectedVersion( TQString v)
 {
-    mDetectedVersion->setText(mDetectedVersion->text().tqarg( v ));
+    mDetectedVersion->setText(mDetectedVersion->text().arg( v ));
 }
 

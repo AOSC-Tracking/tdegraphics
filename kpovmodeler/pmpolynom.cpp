@@ -130,11 +130,11 @@ void PMPolynom::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMPolynom::tqmetaObject( ) const
+PMMetaObject* PMPolynom::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Polynom", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Polynom", Base::metaObject( ),
                                         createNewPolynom );
       s_pMetaObject->addProperty(
          new PMPolynomProperty( "polynomOrder", &PMPolynom::setPolynomOrder,

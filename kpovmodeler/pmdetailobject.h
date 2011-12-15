@@ -43,7 +43,7 @@ public:
    virtual ~PMDetailObject();
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

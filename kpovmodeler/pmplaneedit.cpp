@@ -21,7 +21,7 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
 #include <tqcheckbox.h>
@@ -38,24 +38,24 @@ void PMPlaneEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
 
    m_pNormal = new PMVectorEdit( "x", "y", "z", this );
    m_pDistance = new PMFloatEdit( this );
 
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( new TQLabel( i18n( "Normal:" ), this ) );
-   tqlayout->addWidget( m_pNormal );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Normal:" ), this ) );
+   layout->addWidget( m_pNormal );
 
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( new TQLabel( i18n( "Distance:" ), this ) );
-   tqlayout->addWidget( m_pDistance );
-   tqlayout->addStretch( 1 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Distance:" ), this ) );
+   layout->addWidget( m_pDistance );
+   layout->addStretch( 1 );
 
    TQPushButton* nb = new TQPushButton( i18n( "Normalize" ), this );
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( nb );
-   tqlayout->addStretch( 1 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( nb );
+   layout->addStretch( 1 );
 
    connect( m_pNormal, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pDistance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

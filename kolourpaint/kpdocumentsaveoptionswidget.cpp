@@ -34,7 +34,7 @@
 #include <tqbuffer.h>
 #include <tqimage.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtimer.h>
 
 #include <kcombobox.h>
@@ -712,9 +712,9 @@ void kpDocumentSaveOptionsWidget::setMode (Mode mode)
 void kpDocumentSaveOptionsWidget::repaintLabels ()
 {
     if (mode () != Quality)
-        m_colorDepthLabel->tqrepaint ();
+        m_colorDepthLabel->repaint ();
     if (mode () == Quality)
-        m_qualityLabel->tqrepaint ();
+        m_qualityLabel->repaint ();
 }
 
 
@@ -767,7 +767,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
         if (m_previewDialogLastRelativeGeometry.isEmpty ())
         {
         #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-            kdDebug () << "\tread cfg preview dialog last rel tqgeometry" << endl;
+            kdDebug () << "\tread cfg preview dialog last rel geometry" << endl;
         #endif
             KConfigGroupSaver cfgGroupSaver (KGlobal::config (), kpSettingsGroupPreviewSave);
             KConfigBase *cfg = cfgGroupSaver.config ();
@@ -826,7 +826,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
 
 
     #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-        kdDebug () << "\ttqgeometry after show="
+        kdDebug () << "\tgeometry after show="
                    << TQRect (m_previewDialog->x (), m_previewDialog->y (),
                               m_previewDialog->width (), m_previewDialog->height ())
                    << endl;
@@ -852,7 +852,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
         cfg->sync ();
 
     #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-        kdDebug () << "\tsaving preview tqgeometry "
+        kdDebug () << "\tsaving preview geometry "
                    << m_previewDialogLastRelativeGeometry
                    << " (TQt would have us believe "
                    << kpWidgetMapper::fromGlobal (m_visualParent,
@@ -942,7 +942,7 @@ void kpDocumentSaveOptionsWidget::updatePreviewDialogLastRelativeGeometry ()
     else
     {
     #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
-        kdDebug () << "\tnot visible - ignoring tqgeometry" << endl;
+        kdDebug () << "\tnot visible - ignoring geometry" << endl;
     #endif
     }
 }

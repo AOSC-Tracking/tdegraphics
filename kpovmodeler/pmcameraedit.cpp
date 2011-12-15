@@ -21,7 +21,7 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
@@ -40,7 +40,7 @@ void PMCameraEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQGridLayout* tqlayout;
+   TQGridLayout* layout;
    TQLabel* label;
 
    m_pCameraType = new TQComboBox( false, this );
@@ -75,28 +75,28 @@ void PMCameraEdit::createTopWidgets( )
    hl->addWidget( m_pCylinderTypeLabel );
    hl->addWidget( m_pCylinderType );
 
-   tqlayout = new TQGridLayout( topLayout( ), 7, 2 );
-   tqlayout->addWidget( new TQLabel( i18n( "Location:" ), this ), 0, 0 );
-   tqlayout->addWidget( m_pLocation, 0, 1 );
+   layout = new TQGridLayout( topLayout( ), 7, 2 );
+   layout->addWidget( new TQLabel( i18n( "Location:" ), this ), 0, 0 );
+   layout->addWidget( m_pLocation, 0, 1 );
 
-   tqlayout->addWidget( new TQLabel( i18n( "Sky:" ), this ), 1, 0 );
-   tqlayout->addWidget( m_pSky, 1, 1 );
+   layout->addWidget( new TQLabel( i18n( "Sky:" ), this ), 1, 0 );
+   layout->addWidget( m_pSky, 1, 1 );
 
-   tqlayout->addWidget( new TQLabel( i18n( "Direction:" ), this ), 2, 0 );
-   tqlayout->addWidget( m_pDirection, 2, 1 );
+   layout->addWidget( new TQLabel( i18n( "Direction:" ), this ), 2, 0 );
+   layout->addWidget( m_pDirection, 2, 1 );
 
-   tqlayout->addWidget( new TQLabel( i18n( "Right:" ), this ), 3, 0 );
-   tqlayout->addWidget( m_pRight, 3, 1 );
+   layout->addWidget( new TQLabel( i18n( "Right:" ), this ), 3, 0 );
+   layout->addWidget( m_pRight, 3, 1 );
 
-   tqlayout->addWidget( new TQLabel( i18n( "Up:" ), this ), 4, 0 );
-   tqlayout->addWidget( m_pUp, 4, 1 );
+   layout->addWidget( new TQLabel( i18n( "Up:" ), this ), 4, 0 );
+   layout->addWidget( m_pUp, 4, 1 );
 
-   tqlayout->addWidget( new TQLabel( i18n( "Look at:" ), this ), 5, 0 );
-   tqlayout->addWidget( m_pLookAt, 5, 1 );
+   layout->addWidget( new TQLabel( i18n( "Look at:" ), this ), 5, 0 );
+   layout->addWidget( m_pLookAt, 5, 1 );
 
    m_pEnableAngle = new TQCheckBox( i18n( "Angle:" ), this );
-   tqlayout->addWidget( m_pEnableAngle, 6, 0 );
-   tqlayout->addWidget( m_pAngle, 6, 1, AlignLeft );
+   layout->addWidget( m_pEnableAngle, 6, 0 );
+   layout->addWidget( m_pAngle, 6, 1, AlignLeft );
 
    m_pFocalBlur = new TQCheckBox( i18n( "Focal blur" ), this );
    topLayout( )->addWidget( m_pFocalBlur );
@@ -116,27 +116,27 @@ void PMCameraEdit::createTopWidgets( )
    m_pVariance->setValidation( true, 0, false, 0 );
    m_focalWidgets.append( m_pVariance );
 
-   tqlayout = new TQGridLayout( topLayout( ), 5, 2 );
+   layout = new TQGridLayout( topLayout( ), 5, 2 );
    label = new TQLabel( i18n( "Aperture:" ), this );
    m_focalWidgets.append( label );
-   tqlayout->addWidget( label, 0, 0 );
-   tqlayout->addWidget( m_pAperture, 0, 1 );
+   layout->addWidget( label, 0, 0 );
+   layout->addWidget( m_pAperture, 0, 1 );
    label = new TQLabel( i18n( "Blur samples:" ), this );
    m_focalWidgets.append( label );
-   tqlayout->addWidget( label, 1, 0 );
-   tqlayout->addWidget( m_pBlurSamples, 1, 1 );
+   layout->addWidget( label, 1, 0 );
+   layout->addWidget( m_pBlurSamples, 1, 1 );
    label = new TQLabel( i18n( "Focal point:" ), this );
    m_focalWidgets.append( label );
-   tqlayout->addWidget( label, 2, 0 );
-   tqlayout->addWidget( m_pFocalPoint, 2, 1 );
+   layout->addWidget( label, 2, 0 );
+   layout->addWidget( m_pFocalPoint, 2, 1 );
    label = new TQLabel( i18n( "Confidence:" ), this );
    m_focalWidgets.append( label );
-   tqlayout->addWidget( label, 3, 0 );
-   tqlayout->addWidget( m_pConfidence, 3, 1 );
+   layout->addWidget( label, 3, 0 );
+   layout->addWidget( m_pConfidence, 3, 1 );
    label = new TQLabel( i18n( "Variance:" ), this );
    m_focalWidgets.append( label );
-   tqlayout->addWidget( label, 4, 0 );
-   tqlayout->addWidget( m_pVariance, 4, 1 );
+   layout->addWidget( label, 4, 0 );
+   layout->addWidget( m_pVariance, 4, 1 );
 
    m_pExport = new TQCheckBox( i18n( "Export to renderer" ), this );
    topLayout( )->addWidget( m_pExport );

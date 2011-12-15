@@ -228,11 +228,11 @@ void PMTriangle::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMTriangle::tqmetaObject( ) const
+PMMetaObject* PMTriangle::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Triangle", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Triangle", Base::metaObject( ),
                                         createNewTriangle );
       s_pMetaObject->addProperty(
          new PMTriangleProperty( "smooth", &PMTriangle::setSmoothTriangle,

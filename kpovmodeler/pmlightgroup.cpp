@@ -69,11 +69,11 @@ void PMLightGroup::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMLightGroup::tqmetaObject( ) const
+PMMetaObject* PMLightGroup::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "LightGroup", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "LightGroup", Base::metaObject( ),
                                         createNewLightGroup );
 
       s_pMetaObject->addProperty( new PMLightGroupProperty( "globalLights",

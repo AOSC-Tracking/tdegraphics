@@ -19,7 +19,7 @@
 #include "pmcommentedit.h"
 #include "pmcomment.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqmultilineedit.h>
 #include <kglobalsettings.h>
 

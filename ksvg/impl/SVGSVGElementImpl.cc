@@ -372,18 +372,18 @@ DOM::NodeList SVGSVGElementImpl::getEnclosureList(SVGRectImpl *rect, SVGElementI
 	for(; !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
-		if(tqshape)
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+		if(shape)
 		{
-			if(tqshape->isContainer())
+			if(shape->isContainer())
 				// TODO : pass it on to container::getEnclosureList() which should return a NodeList
-				kdDebug() << "!tqshape" << endl;
+				kdDebug() << "!shape" << endl;
 			else
 			{
-				// TODO : add the tqshape to list if the test succeeds
-				SVGRectImpl *current = tqshape->getBBox();
+				// TODO : add the shape to list if the test succeeds
+				SVGRectImpl *current = shape->getBBox();
 				if(rect->qrect().contains(current->qrect(), true))
-					kdDebug() << "tqshape : " << element->nodeName().string() << " is fully enclosed" << endl;
+					kdDebug() << "shape : " << element->nodeName().string() << " is fully enclosed" << endl;
 
 				current->deref();
 			}
@@ -395,11 +395,11 @@ DOM::NodeList SVGSVGElementImpl::getEnclosureList(SVGRectImpl *rect, SVGElementI
 
 bool SVGSVGElementImpl::checkIntersection(SVGElementImpl *element, SVGRectImpl *rect)
 {
-	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
-	if(!tqshape)
+	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+	if(!shape)
 		return false;
 
-	SVGRectImpl *current = tqshape->getBBox();
+	SVGRectImpl *current = shape->getBBox();
 	bool result = rect->qrect().intersects(current->qrect());
 	current->deref();
 	return result;
@@ -407,11 +407,11 @@ bool SVGSVGElementImpl::checkIntersection(SVGElementImpl *element, SVGRectImpl *
 
 bool SVGSVGElementImpl::checkEnclosure(SVGElementImpl *element, SVGRectImpl *rect)
 {
-	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
-	if(!tqshape)
+	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+	if(!shape)
 		return false;
 
-	SVGRectImpl *current = tqshape->getBBox();
+	SVGRectImpl *current = shape->getBBox();
 	bool result = rect->qrect().contains(current->qrect());
 	current->deref();
 	return result;
@@ -672,7 +672,7 @@ bool SVGSVGElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &a, SV
 		elem = (*it)->element();
 		if(elem)
 		{
-			// Check if mouse is over a certain tqshape...
+			// Check if mouse is over a certain shape...
 			// mop: once an element has been found check eventlisteners and leave immediately
 			ret = elem->prepareMouseEvent(p, userA, mev);
 			if(ret) break;
@@ -693,7 +693,7 @@ bool SVGSVGElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &a, SV
 			dorerender = true; // mop: if it has the event then rerender
 		}
 
-		// If a mouse "moves" over a tqshape, it's also "over" the tqshape
+		// If a mouse "moves" over a shape, it's also "over" the shape
 		if(mev->id() == SVGEvent::MOUSEMOVE_EVENT)
 		{
 			mev->target()->setMouseOver(true);
@@ -742,7 +742,7 @@ bool SVGSVGElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &a, SV
 			}
 		}
 
-		// The mouse is over a tqshape, so we have a target..we need to register that for a mouseout
+		// The mouse is over a shape, so we have a target..we need to register that for a mouseout
 		ownerDoc()->setLastTarget(mev->target());
 	}
 

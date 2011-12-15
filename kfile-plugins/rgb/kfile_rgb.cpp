@@ -134,7 +134,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		long compressed = file.size() - 512;
 		long verbatim = xsize * ysize * zsize;
 		appendItem(group, "Compression", i18n("Runlength Encoded")
-				+ TQString(", %1%").tqarg(compressed * 100.0 / verbatim, 0, 'f', 1));
+				+ TQString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
 
 		long k;
 		TQ_UINT32 offs;
@@ -152,7 +152,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 			k += it.data();
 
 		if (k)
-			appendItem(group, "SharedRows", TQString("%1%").tqarg(k * 100.0
+			appendItem(group, "SharedRows", TQString("%1%").arg(k * 100.0
 					/ (ysize * zsize), 0, 'f', 1));
 		else
 			appendItem(group, "SharedRows", i18n("None"));

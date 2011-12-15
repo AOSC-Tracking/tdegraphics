@@ -216,11 +216,11 @@ bool Mrml::startSession( const KURL& url )
     // Wolfgang says, we shouldn't create an own session-id here, as gcc 2.95
     // apparently makes problems in exception handling somehow. So we simply
     // accept the server's session-id.
-    TQString msg = mrmlString( TQString() ).tqarg(
+    TQString msg = mrmlString( TQString() ).arg(
         "<open-session user-name=\"%1\" session-name=\"kio_mrml session\" /> \
          <get-algorithms />                                                  \
          <get-collections />                                                 \
-         </mrml>" ).tqarg( user( url ));
+         </mrml>" ).arg( user( url ));
 
     TQCString utf8 = msg.utf8();
 //     qDebug(":::Writing: %s", utf8.data());
@@ -240,13 +240,13 @@ TQString Mrml::mrmlString( const TQString& sessionId, const TQString& transactio
          </mrml>";
 
     if ( sessionId.isEmpty() ) // when we don't have one yet
-        return msg.tqarg( "<mrml>%1" );
+        return msg.arg( "<mrml>%1" );
 
     if ( transactionId.isNull() )
-        return msg.tqarg( "<mrml session-id=\"%1\">%1" ).tqarg( sessionId );
+        return msg.arg( "<mrml session-id=\"%1\">%1" ).arg( sessionId );
     else
-        return msg.tqarg( "<mrml session-id=\"%1\" transaction-id=\"%1\">%1")
-                  .tqarg( sessionId ).tqarg( transactionId );
+        return msg.arg( "<mrml session-id=\"%1\" transaction-id=\"%1\">%1")
+                  .arg( sessionId ).arg( transactionId );
 }
 
 void Mrml::emitData( const TQCString& msg )

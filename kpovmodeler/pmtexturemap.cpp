@@ -22,7 +22,7 @@
 #include "pmxmlhelper.h"
 #include "pmmapmemento.h"
 
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <klocale.h>
 
 class PMValueProperty : public PMPropertyBase
@@ -119,7 +119,7 @@ TQString PMTextureMapBase::valuesToString( ) const
       str.setNum( *it );
       ++it;
       for( ; it != m_mapValues.end( ); ++it )
-         str += TQString( " %1" ).tqarg( *it );
+         str += TQString( " %1" ).arg( *it );
    }
    return str;
 }
@@ -138,11 +138,11 @@ void PMTextureMapBase::stringToValues( const TQString& str )
    }
 }
 
-PMMetaObject* PMTextureMapBase::tqmetaObject( ) const
+PMMetaObject* PMTextureMapBase::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureMapBase", Base::tqmetaObject( ) );
+      s_pMetaObject = new PMMetaObject( "TextureMapBase", Base::metaObject( ) );
       s_pMetaObject->addProperty( new PMValueProperty( ) );
    }
    return s_pMetaObject;
@@ -342,11 +342,11 @@ PMTextureMap::~PMTextureMap( )
 {
 }
 
-PMMetaObject* PMTextureMap::tqmetaObject( ) const
+PMMetaObject* PMTextureMap::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureMap", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "TextureMap", Base::metaObject( ),
                                         createNewTextureMap );
    }
    return s_pMetaObject;
@@ -388,11 +388,11 @@ PMPigmentMap::~PMPigmentMap( )
 {
 }
 
-PMMetaObject* PMPigmentMap::tqmetaObject( ) const
+PMMetaObject* PMPigmentMap::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "PigmentMap", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "PigmentMap", Base::metaObject( ),
                                         createNewPigmentMap );
    }
    return s_pMetaObject;
@@ -434,11 +434,11 @@ PMColorMap::~PMColorMap( )
 {
 }
 
-PMMetaObject* PMColorMap::tqmetaObject( ) const
+PMMetaObject* PMColorMap::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ColorMap", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "ColorMap", Base::metaObject( ),
                                         createNewColorMap );
    }
    return s_pMetaObject;
@@ -480,11 +480,11 @@ PMNormalMap::~PMNormalMap( )
 {
 }
 
-PMMetaObject* PMNormalMap::tqmetaObject( ) const
+PMMetaObject* PMNormalMap::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "NormalMap", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "NormalMap", Base::metaObject( ),
                                         createNewNormalMap );
    }
    return s_pMetaObject;
@@ -526,11 +526,11 @@ PMSlopeMap::~PMSlopeMap( )
 {
 }
 
-PMMetaObject* PMSlopeMap::tqmetaObject( ) const
+PMMetaObject* PMSlopeMap::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SlopeMap", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "SlopeMap", Base::metaObject( ),
                                         createNewSlopeMap );
    }
    return s_pMetaObject;
@@ -572,11 +572,11 @@ PMDensityMap::~PMDensityMap( )
 {
 }
 
-PMMetaObject* PMDensityMap::tqmetaObject( ) const
+PMMetaObject* PMDensityMap::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "DensityMap", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "DensityMap", Base::metaObject( ),
                                         createNewDensityMap );
    }
    return s_pMetaObject;

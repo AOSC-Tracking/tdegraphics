@@ -179,7 +179,7 @@ private:
    bool validateData( );
    void saveSettings( );
    int findPage( const PMSettingsDialogPage* page );
-   bool m_tqrepaint;
+   bool m_repaint;
    TQValueList<PMRegisteredSettingsPage> m_pages;
    PMPart* m_pPart;
    

@@ -20,7 +20,7 @@
 */
 
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqwhatsthis.h>
 #include <tqpainter.h>
 
@@ -42,7 +42,7 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   m_lblPreview = new TQLabel( base );
   m_lblPreview->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_lblPreview->setFixedHeight( 64 );
-  m_lblPreview->tqsetAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
+  m_lblPreview->setAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
   TQWhatsThis::add(m_lblPreview, i18n( "Preview\n\nThis is a 1:1 preview"
       " of the current icon" ) );
   m_layout->addWidget( m_lblPreview );
@@ -50,31 +50,31 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   m_currentColorView = new TQLabel( base );
   m_currentColorView->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_currentColorView->setFixedHeight( 24 );
-  m_currentColorView->tqsetAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
+  m_currentColorView->setAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
   TQWhatsThis::add(m_currentColorView, i18n( "Current color\n\nThis is the currently selected color" ) );
   m_layout->addWidget( m_currentColorView );
 
-  TQVBoxLayout *vtqlayout = new TQVBoxLayout( m_layout, 0 );
+  TQVBoxLayout *vlayout = new TQVBoxLayout( m_layout, 0 );
   TQLabel *l = new TQLabel( i18n( "System colors:" ), base );
-  vtqlayout->addWidget( l );
+  vlayout->addWidget( l );
   m_sysColors = new KSysColors( base );
   TQWhatsThis::add(m_sysColors, i18n( "System colors\n\nHere you can select"
       " colors from the KDE icon palette" ) );
 
-  vtqlayout->addWidget( m_sysColors );
+  vlayout->addWidget( m_sysColors );
 
   connect( m_sysColors, TQT_SIGNAL( newColor(uint) ), 
       TQT_SIGNAL( newColor(uint) ) );
 
-  vtqlayout = new TQVBoxLayout( m_layout, 0 );
+  vlayout = new TQVBoxLayout( m_layout, 0 );
   l = new TQLabel( i18n( "Custom colors:" ), base );
-  vtqlayout->addWidget( l );
+  vlayout->addWidget( l );
   m_customColors = new KCustomColors( base );
   TQWhatsThis::add(m_customColors, i18n( "Custom colors\n\nHere you can"
       " build a palette of custom colors.\nDouble-click on a box to edit"
       " the color" ) );
 
-  vtqlayout->addWidget( m_customColors );
+  vlayout->addWidget( m_customColors );
 
   connect( m_customColors, TQT_SIGNAL( newColor(uint) ), 
       TQT_SIGNAL( newColor(uint) ) );

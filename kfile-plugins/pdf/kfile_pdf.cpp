@@ -83,16 +83,16 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     if (doc->isEncrypted())
     {
     	enc = i18n("Yes (Can Print:%1 Can Copy:%2 Can Change:%3 Can Add notes:%4)")
-    	.tqarg(doc->okToPrint() ? i18n("Yes") : i18n("No"))
-    	.tqarg(doc->okToCopy() ? i18n("Yes") : i18n("No"))
-    	.tqarg(doc->okToChange() ? i18n("Yes") : i18n("No"))
-    	.tqarg(doc->okToAddNotes() ? i18n("Yes") : i18n("No"));
+    	.arg(doc->okToPrint() ? i18n("Yes") : i18n("No"))
+    	.arg(doc->okToCopy() ? i18n("Yes") : i18n("No"))
+    	.arg(doc->okToChange() ? i18n("Yes") : i18n("No"))
+    	.arg(doc->okToAddNotes() ? i18n("Yes") : i18n("No"));
     }
     else enc = i18n("No");
     
     appendItem(generalGroup, "Protected", enc );
     appendItem(generalGroup, "Linearized", doc->isLinearized() ? i18n("Yes") : i18n("No") );
-    TQString versionString = TQString("%1").tqarg( doc->getPDFVersion(), 0, 'f', 1 );
+    TQString versionString = TQString("%1").arg( doc->getPDFVersion(), 0, 'f', 1 );
     appendItem(generalGroup, "Version", versionString );
 
     delete doc;

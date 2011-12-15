@@ -336,7 +336,7 @@ private:
    /**
     * Repaints the view
     */
-   void tqrepaint( bool graphicalChange = false );
+   void repaint( bool graphicalChange = false );
    /**
     * Starts a graphical change
     */
@@ -568,7 +568,7 @@ public:
 };
 
 /**
- * Configuration widget for the view tqlayout settings dialog
+ * Configuration widget for the view layout settings dialog
  */
 class PMGLViewOptionsWidget : public PMViewOptionsWidget
 {

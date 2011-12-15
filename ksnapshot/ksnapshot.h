@@ -29,7 +29,7 @@ class KSnapshotPreview : public TQLabel
         KSnapshotPreview(TQWidget *parent, const char *name = 0)
             : TQLabel(parent, name)
         {
-            tqsetAlignment(AlignHCenter | AlignVCenter);
+            setAlignment(AlignHCenter | AlignVCenter);
             setCursor(TQCursor(TQt::PointingHandCursor));
         }
         virtual ~KSnapshotPreview() {}
@@ -44,14 +44,14 @@ class KSnapshotPreview : public TQLabel
 
             {
                 TQPainter p(&mask);
-                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), tqpalette().active());
+                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
                 p.end();
                 handle.setMask(mask);
             }
 
             {
                 TQPainter p(&handle);
-                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), tqpalette().active());
+                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
                 p.end();
             }
 

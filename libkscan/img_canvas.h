@@ -121,9 +121,9 @@ public slots:
     void toggleAspect( int aspect_in_mind )
         {
             maintain_aspect = aspect_in_mind;
-            tqrepaint();
+            repaint();
         }
-    virtual TQSize tqsizeHint() const;
+    virtual TQSize sizeHint() const;
     void newImage( TQImage* );
     void newImageHoldZoom( TQImage* );
     void deleteView( TQImage *);

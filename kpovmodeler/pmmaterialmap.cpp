@@ -186,11 +186,11 @@ void PMMaterialMap::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMMaterialMap::tqmetaObject( ) const
+PMMetaObject* PMMaterialMap::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "MaterialMap", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "MaterialMap", Base::metaObject( ),
                                         createNewMaterialMap );
 
       PMBitmapTypeProperty* bp = new PMBitmapTypeProperty(

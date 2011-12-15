@@ -110,7 +110,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
                     <property name="sizeType">
                         <enum>MinimumExpanding</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>0</width>
                             <height>0</height>
@@ -127,7 +127,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
                     <property name="sizeType">
                         <enum>MinimumExpanding</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>0</width>
                             <height>0</height>
@@ -138,7 +138,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
         </widget>
         <widget class="TQLayoutWidget" row="2" column="0" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>tqlayout3</cstring>
+                <cstring>layout3</cstring>
             </property>
             <vbox>
                 <property name="name">
@@ -181,7 +181,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
         </widget>
         <widget class="TQLayoutWidget" row="0" column="0">
             <property name="name">
-                <cstring>tqlayout4</cstring>
+                <cstring>layout4</cstring>
             </property>
             <vbox>
                 <property name="name">
@@ -239,7 +239,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
                             <verstretch>0</verstretch>
                         </sizepolicy>
                     </property>
-                    <property name="tqminimumSize">
+                    <property name="minimumSize">
                         <size>
                             <width>32</width>
                             <height>32</height>
@@ -259,7 +259,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>151</width>
                             <height>21</height>

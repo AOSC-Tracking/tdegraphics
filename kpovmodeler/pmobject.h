@@ -54,7 +54,7 @@ typedef TQPtrListIterator<PMObject> PMObjectListIterator;
  * Used pattern: Composite
  *
  * All list/child functionality is disabled in this class. Objects that
- * can have tqchildren has to be inherited from @ref PMCompositeObject.
+ * can have children has to be inherited from @ref PMCompositeObject.
  */
 class PMObject
 {
@@ -69,7 +69,7 @@ public:
     */
    PMObject( const PMObject& o );
    /**
-    * Deletes the object and all tqchildren.
+    * Deletes the object and all children.
     */
    virtual ~PMObject( );
 
@@ -85,7 +85,7 @@ public:
    /**
     * Returns the meta object for the class
     */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
 
    /**
     * Returns true if the object is of type t or inherits the object
@@ -157,7 +157,7 @@ public:
    int canInsert( const TQStringList& classes, const PMObject* after ) const;
 
    /**
-    * Returns true if an insert or remove operation of tqchildren will
+    * Returns true if an insert or remove operation of children will
     * change data inside this class
     */
    virtual bool dataChangeOnInsertRemove( ) const { return false; }
@@ -174,7 +174,7 @@ public:
     * Returns a pointer to the child object at position index,
     * or null if the index is out of range.
     */
-   virtual PMObject* tqchildAt( uint ) const { return 0; }
+   virtual PMObject* childAt( uint ) const { return 0; }
    /**
     * Returns the next sibling of that item
     */
@@ -219,7 +219,7 @@ public:
       return false;
    }
    /**
-    * Returns the number of tqchildren. 0 in this class
+    * Returns the number of children. 0 in this class
     */
    virtual int countChildren( ) const { return 0; }
    /**
@@ -235,12 +235,12 @@ public:
 
    /**
     * Called when a child was removed. For classes that have to be informed
-    * when tqchildren are removed
+    * when children are removed
     */
    virtual void childRemoved( PMObject* ) { };
    /**
     * Called when a child was added. For classes that have to be informed
-    * when tqchildren are added
+    * when children are added
     */
    virtual void childAdded( PMObject* ) { };
 
@@ -302,7 +302,7 @@ public:
     * not only this object.
     *
     * If you leave the list empty, only this object was changed.
-    * If you add tqchildren or other objects to the list, add this object
+    * If you add children or other objects to the list, add this object
     * to the list, too, if it was changed!
     *
     * IMPORTANT: When you change additional objects, make sure that
@@ -402,7 +402,7 @@ public:
     */
    bool isReadOnly( ) const;
    /**
-    * Makes this object read only, if yes == true. All tqchildren will
+    * Makes this object read only, if yes == true. All children will
     * be read only, too
     */
    void setReadOnly( bool yes = true ) { m_readOnly = yes; }
@@ -495,7 +495,7 @@ private:
     */
    bool m_selected;
    /**
-    * true if this object is read only. All tqchildren will be read only, too
+    * true if this object is read only. All children will be read only, too
     */
    bool m_readOnly;
    /**

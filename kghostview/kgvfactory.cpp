@@ -64,7 +64,7 @@ KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *
      *
      * as we did before.
      */
-    args << TQString::tqfromLatin1( className );
+    args << TQString::fromLatin1( className );
     if ( !strcmp( className, "Browser/View" ) ) {
 	    className = "KParts::ReadOnlyPart";
     }

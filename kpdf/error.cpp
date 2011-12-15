@@ -32,7 +32,7 @@ void CDECL error(int pos, char *msg, ...) {
     return;
   }
   if (pos >= 0) {
-    emsg = TQString("Error (%1): ").tqarg(pos);
+    emsg = TQString("Error (%1): ").arg(pos);
   } else {
     emsg = "Error: ";
   }

@@ -216,11 +216,11 @@ void PMSphereSweep::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMSphereSweep::tqmetaObject( ) const
+PMMetaObject* PMSphereSweep::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SphereSweep", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "SphereSweep", Base::metaObject( ),
                                         createNewSphereSweep );
       s_pMetaObject->addProperty(
          new PMSphereSweepProperty( "tolerance", &PMSphereSweep::setTolerance, &PMSphereSweep::tolerance ) );
@@ -434,19 +434,19 @@ void PMSphereSweep::controlPoints( PMControlPointList& list )
         it != m_points.end( ) && it2 != m_radii.end( ); ++it, ++it2, ++nr )
    {
       PM3DControlPoint* p = new PM3DControlPoint( *it, i++,
-                                                  i18n( "Center %1" ).tqarg( nr ) );
+                                                  i18n( "Center %1" ).arg( nr ) );
       list.append( p );
       list.append( new PMDistanceControlPoint( p, PMVector( 1.0, 0.0, 0.0 ),
                                                *it2, i++,
-                                               i18n( "Radius %1 (x)" ).tqarg( nr ),
+                                               i18n( "Radius %1 (x)" ).arg( nr ),
                                                true ) );
       list.append( new PMDistanceControlPoint( p, PMVector( 0.0, 1.0, 0.0 ),
                                                *it2, i++,
-                                               i18n( "Radius %1 (y)" ).tqarg( nr ),
+                                               i18n( "Radius %1 (y)" ).arg( nr ),
                                                true ) );
       list.append( new PMDistanceControlPoint( p, PMVector( 0.0, 0.0, 1.0 ),
                                                *it2, i++,
-                                               i18n( "Radius %1 (z)" ).tqarg( nr ),
+                                               i18n( "Radius %1 (z)" ).arg( nr ),
                                                true ) );
    }
 }

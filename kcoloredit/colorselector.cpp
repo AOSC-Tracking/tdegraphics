@@ -17,7 +17,7 @@
 
 #include <math.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 /* #include <tqtabwidget.h> */
 #include <tqradiobutton.h>
 #include <tqlabel.h>
@@ -53,7 +53,7 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	topLayout->addWidget(gradientSelection, 10);
 	KSeparator* hLine = new KSeparator(KSeparator::HLine, this);
 	topLayout->addWidget(hLine);
-	TQHBoxLayout* tqlayout = new TQHBoxLayout();
+	TQHBoxLayout* layout = new TQHBoxLayout();
 	TextEditSelection* textEditSelection = new TextEditSelection(this);
 	connect(textEditSelection, TQT_SIGNAL( valueChanged(Color*) ), TQT_SLOT( slotSetColor(Color*) ));
 	connect(this, TQT_SIGNAL( valueChanged(Color*) ), textEditSelection, TQT_SLOT( slotSetValue(Color*) ));
@@ -88,17 +88,17 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	colorChangeLayout->addStretch(10);
 	colorChangeLayout->addWidget(colorChangeSliderWidget);
 	colorChangeLayout->addStretch(10);
-	tqlayout->addLayout(colorChangeLayout, 10);
+	layout->addLayout(colorChangeLayout, 10);
 	m_color.setComponents(RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE, RGB_MAX_COMPONENT_VALUE);
 	slotColorReplace();
 	KSeparator* vLine = new KSeparator(KSeparator::VLine, this);
-	tqlayout->addWidget(vLine);
-	tqlayout->addWidget(textEditSelection, 1);
+	layout->addWidget(vLine);
+	layout->addWidget(textEditSelection, 1);
 	colorPatch = new KColorPatch(this);
 	connect(colorPatch, TQT_SIGNAL( colorChanged(const TQColor&) ), TQT_SLOT( slotSetColor(const TQColor&) ));
 	colorPatch->setMinimumSize(80, 64);
-	tqlayout->addWidget(colorPatch, 10);
-	topLayout->addLayout(tqlayout);
+	layout->addWidget(colorPatch, 10);
+	topLayout->addLayout(layout);
 }
 ColorSelector::~ColorSelector() {
 }

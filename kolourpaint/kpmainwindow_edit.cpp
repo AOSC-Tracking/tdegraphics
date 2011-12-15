@@ -28,7 +28,7 @@
 #include <kpmainwindow.h>
 
 #include <tqapplication.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 #include <tqdatetime.h>
 #include <tqfontmetrics.h>
 #include <tqimage.h>
@@ -129,7 +129,7 @@ void kpMainWindow::setupEditMenuActions ()
 
     // Paste should always be enabled, as long as there is something paste
     // (independent of whether we have a document or not)
-    connect (TQApplication::tqclipboard (), TQT_SIGNAL (dataChanged ()),
+    connect (TQApplication::clipboard (), TQT_SIGNAL (dataChanged ()),
              TQT_TQOBJECT(this), TQT_SLOT (slotEnablePaste ()));
     slotEnablePaste ();
 }
@@ -223,7 +223,7 @@ void kpMainWindow::slotCopy ()
     {
         if (!sel.text ().isEmpty ())
         {
-            TQApplication::tqclipboard ()->setData (new TQTextDrag (sel.text ()),
+            TQApplication::clipboard ()->setData (new TQTextDrag (sel.text ()),
                                                  TQClipboard::Clipboard);
 
             // SYNC: Normally, users highlight text and press CTRL+C.
@@ -243,7 +243,7 @@ void kpMainWindow::slotCopy ()
             //       Once we change KolourPaint to support highlighted text
             //       and CTRL+C to copy only the highlighted text, delete
             //       this code.
-            TQApplication::tqclipboard ()->setData (new TQTextDrag (sel.text ()),
+            TQApplication::clipboard ()->setData (new TQTextDrag (sel.text ()),
                                                  TQClipboard::Selection);
         }
     }
@@ -268,7 +268,7 @@ void kpMainWindow::slotCopy ()
                 rawPixmap,
                 TQt::white));  // CONFIG
         
-        TQApplication::tqclipboard ()->setData (new kpSelectionDrag (sel),
+        TQApplication::clipboard ()->setData (new kpSelectionDrag (sel),
                                              TQClipboard::Clipboard);
     }
 
@@ -288,7 +288,7 @@ static bool HasSomethingToPaste (kpMainWindow *mw)
 
     bool hasSomething = false;
 
-    TQMimeSource *ms = TQApplication::tqclipboard ()->data (TQClipboard::Clipboard);
+    TQMimeSource *ms = TQApplication::clipboard ()->data (TQClipboard::Clipboard);
     if (ms)
     {
         // It's faster to test for TQTextDrag::canDecode() first due to the
@@ -311,7 +311,7 @@ static bool HasSomethingToPaste (kpMainWindow *mw)
     return hasSomething;
 }
 
-// HACK: SYNC: Non-TQt apps do not cause TQApplication::tqtqclipboard() to
+// HACK: SYNC: Non-TQt apps do not cause TQApplication::tqclipboard() to
 //             emit dataChanged().  We don't want to have our paste
 //             action disabled when we can actually paste something.
 //
@@ -683,7 +683,7 @@ void kpMainWindow::slotPaste ()
     // Acquire the pixmap
     //
 
-    TQMimeSource *ms = TQApplication::tqclipboard ()->data (TQClipboard::Clipboard);
+    TQMimeSource *ms = TQApplication::clipboard ()->data (TQClipboard::Clipboard);
     if (!ms)
     {
         kdError () << "kpMainWindow::slotPaste() without mimeSource" << endl;

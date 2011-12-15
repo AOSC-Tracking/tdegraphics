@@ -50,11 +50,11 @@ const char* PMLibraryIconDrag::format( int i ) const
    }
 }
 
-TQByteArray PMLibraryIconDrag::tqencodedData( const char* mime ) const
+TQByteArray PMLibraryIconDrag::encodedData( const char* mime ) const
 {
    TQByteArray a;
    if ( TQString( mime ) == "application/x-qiconlist" )
-      a = TQIconDrag::tqencodedData( mime );
+      a = TQIconDrag::encodedData( mime );
    else if ( TQString( mime ) == "text/sublib-list" )
    {
       TQString s , l;
@@ -80,7 +80,7 @@ bool PMLibraryIconDrag::canDecode( TQMimeSource* e )
 
 bool PMLibraryIconDrag::decode( TQMimeSource* e, TQStringList& strList, TQValueList<bool>& subLibList )
 {
-   TQByteArray a = e->tqencodedData( "text/sublib-list" );
+   TQByteArray a = e->encodedData( "text/sublib-list" );
    if( a.isEmpty( ) )
       return false;
 
@@ -277,7 +277,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
 
             if( !success )
             {
-               KMessageBox::error( 0, i18n( "Error moving \"%1\" to \"%2\"" ).tqarg( path ).tqarg( m_path ) );
+               KMessageBox::error( 0, i18n( "Error moving \"%1\" to \"%2\"" ).arg( path ).arg( m_path ) );
                e->ignore( );
                return;
             }

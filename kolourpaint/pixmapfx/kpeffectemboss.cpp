@@ -33,7 +33,7 @@
 #include <tqcheckbox.h>
 #include <tqimage.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpixmap.h>
 #include <tqpushbutton.h>
 

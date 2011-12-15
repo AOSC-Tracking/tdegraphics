@@ -58,11 +58,11 @@ TQString PMObjectLink::description( ) const
    return i18n( "object link" );
 }
 
-PMMetaObject* PMObjectLink::tqmetaObject( ) const
+PMMetaObject* PMObjectLink::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ObjectLink", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "ObjectLink", Base::metaObject( ),
                                         createNewObjectLink );
       s_pMetaObject->addProperty(
          new PMObjectLinkProperty( "linkedObject", &PMObjectLink::setLinkedObjectProperty,
@@ -161,7 +161,7 @@ void PMObjectLink::readAttributes( const PMXMLHelper& h )
          }
          else
             h.parser( )->printError( i18n( "Declare \"%1\" has wrong type." )
-                                     .tqarg( id ) );
+                                     .arg( id ) );
       }
    }
    Base::readAttributes( h );

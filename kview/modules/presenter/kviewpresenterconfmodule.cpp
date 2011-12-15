@@ -20,7 +20,7 @@
 
 #include "kviewpresenterconfmodule.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcheckbox.h>
 #include <tqframe.h>
 
@@ -49,8 +49,8 @@ void KViewPresenterConfModule::reset()
 
 void KViewPresenterConfModule::createPage( TQFrame * page )
 {
-	TQBoxLayout * tqlayout = new TQVBoxLayout( page, KDialog::marginHint(), KDialog::spacingHint() );
-	tqlayout->setAutoAdd( true );
+	TQBoxLayout * layout = new TQVBoxLayout( page, KDialog::marginHint(), KDialog::spacingHint() );
+	layout->setAutoAdd( true );
 
 	m_pCheckBox = new TQCheckBox( "This is only for testing...", page );
 }

@@ -296,22 +296,22 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
-		if(element && tqshape && style && ok && style->getVisible() && style->getDisplay())
+		if(element && shape && style && ok && style->getVisible() && style->getDisplay())
 		{
 			SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(element);
 			if(locatable)
 				locatable->updateCachedScreenCTM(baseMatrix);
 
 			element->createItem(m_canvas);
-			if(tqshape->item())
+			if(shape->item())
 			{
-				tqshape->item()->setReferenced(true);
-				m_canvas->tqinvalidate(tqshape->item(), true);
+				shape->item()->setReferenced(true);
+				m_canvas->invalidate(shape->item(), true);
 			}
 		}
 	}
@@ -321,15 +321,15 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	for(DOM::Node node = firstChild(); !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
-		if(element && tqshape && style && ok && style->getVisible() && style->getDisplay())
+		if(element && shape && style && ok && style->getVisible() && style->getDisplay())
 		{
-			if(tqshape)
-				tqshape->removeItem(m_canvas);
+			if(shape)
+				shape->removeItem(m_canvas);
 		}
 	}
 
@@ -453,17 +453,17 @@ SVGMaskElementImpl::Mask SVGMaskElementImpl::createMask(SVGShapeImpl *referencin
 	return mask;
 }
 
-TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRect& screenRectangle)
+TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *shape, const TQRect& screenRectangle)
 {
 	TQByteArray cumulativeMask;
 
 	do
 	{
-		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(tqshape);
+		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(shape);
 
 		if(style && style->hasMask())
 		{
-			SVGElementImpl *element = tqshape->ownerDoc()->rootElement()->getElementById(style->getMask());
+			SVGElementImpl *element = shape->ownerDoc()->rootElement()->getElementById(style->getMask());
 
 			if(element)
 			{
@@ -471,7 +471,7 @@ TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRec
 
 				if(maskElement)
 				{
-					SVGMaskElementImpl::Mask mask = maskElement->createMask(tqshape);
+					SVGMaskElementImpl::Mask mask = maskElement->createMask(shape);
 					
 					if(!mask.isEmpty())
 					{
@@ -495,21 +495,21 @@ TQByteArray SVGMaskElementImpl::maskRectangle(SVGShapeImpl *tqshape, const TQRec
 			}
 		}
 
-		DOM::Node parentNode = tqshape->parentNode();
+		DOM::Node parentNode = shape->parentNode();
 
 		if(!parentNode.isNull())
 		{
-			SVGElementImpl *parent = tqshape->ownerDoc()->getElementFromHandle(parentNode.handle());
+			SVGElementImpl *parent = shape->ownerDoc()->getElementFromHandle(parentNode.handle());
 
 			if(parent)
-				tqshape = dynamic_cast<SVGShapeImpl *>(parent);
+				shape = dynamic_cast<SVGShapeImpl *>(parent);
 			else
-				tqshape = 0;
+				shape = 0;
 		}
 		else
-			tqshape = 0;
+			shape = 0;
 
-	} while(tqshape);
+	} while(shape);
 
 	return cumulativeMask;
 }

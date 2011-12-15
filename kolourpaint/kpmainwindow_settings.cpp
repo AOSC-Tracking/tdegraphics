@@ -195,7 +195,7 @@ void kpMainWindow::slotNewToolBarConfig ()
     KMessageBox::information (this,
         i18n ("You have to restart KolourPaint for these changes to take effect."),
         i18n ("Toolbar Settings Changed"),
-        TQString::tqfromLatin1 ("ToolBarSettingsChanged"));
+        TQString::fromLatin1 ("ToolBarSettingsChanged"));
 
     //createGUI();
     //applyMainWindowSettings (kapp->config (), autoSaveGroup ());

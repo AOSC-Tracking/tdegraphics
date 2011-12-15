@@ -93,11 +93,11 @@ void PMBlobCylinder::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBlobCylinder::tqmetaObject( ) const
+PMMetaObject* PMBlobCylinder::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BlobCylinder", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "BlobCylinder", Base::metaObject( ),
                                         createNewBlobCylinder );
       s_pMetaObject->addProperty(
          new PMBlobCylinderProperty( "end1", &PMBlobCylinder::setEnd1,

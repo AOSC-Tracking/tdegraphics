@@ -20,7 +20,7 @@
 
 #include <tqwidget.h>
 #include <tqlineedit.h>
-#include <tqlayout.h>
+#include <layout.h>
 
 #include "color.h"
 
@@ -48,7 +48,7 @@ public slots:
 protected:
 	/** Adds a component line edit */
 	void addComponent(const int index, TQLineEdit* lineEdit, const int maxValue, const TQString& labelString,
-		const int row, const int column, TQGridLayout* tqlayout);
+		const int row, const int column, TQGridLayout* layout);
 	/** sets RGB string in rgbStringLineEdit */
 	void setRgbString(const int red, const int green, const int blue);
 		

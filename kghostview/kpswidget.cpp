@@ -333,7 +333,7 @@ void KPSWidget::setupWidget()
     // Make sure the properties are updated immediately.
     XSync( x11Display(), false );
 
-    tqrepaint();
+    repaint();
 
     _widgetDirty = false;
 }
@@ -343,7 +343,7 @@ bool KPSWidget::startInterpreter()
     setupWidget();
 
     _process = new KProcess;
-    if ( _doubleBuffer ) _process->setEnvironment( "GHOSTVIEW", TQString(  "%1 %2" ).tqarg( winId() ).tqarg( _backgroundPixmap.handle() ) );
+    if ( _doubleBuffer ) _process->setEnvironment( "GHOSTVIEW", TQString(  "%1 %2" ).arg( winId() ).arg( _backgroundPixmap.handle() ) );
     else _process->setEnvironment( "GHOSTVIEW", TQString::number( winId() ) );
 
     *_process << _ghostscriptPath.local8Bit();
@@ -420,7 +420,7 @@ void KPSWidget::slotProcessExited( KProcess* process )
     {
 	kdDebug( 4500 ) << "KPSWidget::slotProcessExited(): looks like it was not a clean exit." << endl;
 	if ( process->normalExit() ) {
-	    emit ghostscriptError( TQString( i18n( "Exited with error code %1." ).tqarg( process->exitStatus() ) ) );
+	    emit ghostscriptError( TQString( i18n( "Exited with error code %1." ).arg( process->exitStatus() ) ) );
 	} else {
 	    emit ghostscriptError( TQString( i18n( "Process killed or crashed." ) ) );
 	}

@@ -31,11 +31,11 @@
 namespace Poppler {
 
 /* borrowed from kpdf */
-TQString tqunicodeToTQString(Unicode* u, int len)
+TQString unicodeToTQString(Unicode* u, int len)
 {
     TQString ret;
     ret.setLength(len);
-    TQChar* qch = (TQChar*) ret.tqunicode();
+    TQChar* qch = (TQChar*) ret.unicode();
     for (;len;--len)
       *qch++ = (TQChar) *u++;
     return ret;
@@ -69,7 +69,7 @@ TQString UnicodeParsedString(GooString *s1)
             u = s1->getChar(i) & 0xff;
             ++i;
         }
-        result += tqunicodeToTQString( &u, 1 );
+        result += unicodeToTQString( &u, 1 );
     }
     return result;
 }
@@ -79,7 +79,7 @@ GooString *TQStringToGooString(const TQString &s)
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
-      cstring[i] = s.tqat(i).tqunicode();
+      cstring[i] = s.at(i).unicode();
     GooString *ret = new GooString(cstring, len);
     gfree(cstring);
     return ret;
@@ -98,7 +98,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, G
         TQString name;
         Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
-        name = tqunicodeToTQString(uniChar, titleLength);
+        name = unicodeToTQString(uniChar, titleLength);
         if ( name.isEmpty() )
             continue;
 
@@ -136,11 +136,11 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, G
                 }
             }
 
-        // 3. recursively descend over tqchildren
+        // 3. recursively descend over children
         outlineItem->open();
-        GooList * tqchildren = outlineItem->getKids();
-        if ( tqchildren )
-            addTocChildren( docSyn, &item, tqchildren );
+        GooList * children = outlineItem->getKids();
+        if ( children )
+            addTocChildren( docSyn, &item, children );
     }
 }
 

@@ -41,17 +41,17 @@ public:
    PMTreeViewItem( PMObject* object, TQListView* parent );
    /**
     * Constructs a new list view item which is a child of parent and
-    * first in the parent's list of tqchildren.
+    * first in the parent's list of children.
     */
    PMTreeViewItem( PMObject* object, TQListViewItem* parent );
    /**
     * Constructs a list view item which is a child of parent
-    * and is after after in the parent's list of tqchildren.
+    * and is after after in the parent's list of children.
     */
    PMTreeViewItem( PMObject* object, TQListView* parent, TQListViewItem* after );
    /**
     * Constructs a list view item which is a child of parent
-    * and is after after in the parent's list of tqchildren.
+    * and is after after in the parent's list of children.
     */
    PMTreeViewItem( PMObject* object, TQListViewItem* parent,
                    TQListViewItem* after );
@@ -61,7 +61,7 @@ public:
    PMObject* object( ) const { return m_pObject; }
    /**
     * Returns a key that can be used for sorting, here the index in the
-    * parents list of tqchildren
+    * parents list of children
     */
    virtual TQString key( int column, bool ascending ) const;
    /**

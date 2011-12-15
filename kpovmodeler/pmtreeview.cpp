@@ -20,7 +20,7 @@
 
 #include <tqlistview.h>
 #include <tqheader.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpopupmenu.h>
 #include <tqcursor.h>
 
@@ -292,7 +292,7 @@ void PMTreeView::addChildItems( PMTreeViewItem* item )
       else
          // first child
          listItem = new PMTreeViewItem( obj, item );
-      // recursive call, if child has tqchildren
+      // recursive call, if child has children
       if( obj->countChildren( ) > 0 )
          addChildItems( listItem );
    }

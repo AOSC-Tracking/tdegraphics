@@ -20,7 +20,7 @@
 #include "pmtexturemap.h"
 #include "pmlineedits.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <klocale.h>
 #include <kmessagebox.h>

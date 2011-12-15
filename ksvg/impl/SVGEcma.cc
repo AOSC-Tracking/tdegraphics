@@ -169,9 +169,9 @@ void removeItem(ExecState *exec, DOM::Node &node)
 	SVGDocumentImpl *doc = KSVG::Window::retrieveActive(exec)->doc();
 
 	// Update canvas
-	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(doc->getElementFromHandle(node.handle()));
-	if(tqshape && tqshape->item())
-		doc->canvas()->removeItem(tqshape->item());
+	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(doc->getElementFromHandle(node.handle()));
+	if(shape && shape->item())
+		doc->canvas()->removeItem(shape->item());
 }
 
 // parseXML + getURL() need all these 5 functions to work properly

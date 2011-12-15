@@ -86,11 +86,11 @@ PMRadiosity::~PMRadiosity( )
 {
 }
 
-PMMetaObject* PMRadiosity::tqmetaObject( ) const
+PMMetaObject* PMRadiosity::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Radiosity", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Radiosity", Base::metaObject( ),
                                         createNewRadiosity );
       s_pMetaObject->addProperty(
          new PMRadiosityProperty( "adcBailout", &PMRadiosity::setAdcBailout, &PMRadiosity::adcBailout ) );

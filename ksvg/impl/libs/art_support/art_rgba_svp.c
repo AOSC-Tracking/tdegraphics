@@ -415,7 +415,7 @@ art_ksvg_rgba_svp_alpha_mask_callback(void *callback_data, int y,
  * @rowstride: Rowstride of @buf buffer.
  * @alphagamma: #ArtAlphaGamma for gamma-correcting the compositing.
  *
- * Renders the tqshape specified with @svp over the @buf RGB buffer.
+ * Renders the shape specified with @svp over the @buf RGB buffer.
  * @x1 - @x0 specifies the width, and @y1 - @y0 specifies the height,
  * of the rectangle rendered. The new pixels are stored starting at
  * the first byte of @buf. Thus, the @x0 and @y0 parameters specify
@@ -600,7 +600,7 @@ art_ksvg_rgb_svp_alpha_mask_callback(void *callback_data, int y,
  * @rowstride: Rowstride of @buf buffer.
  * @alphagamma: #ArtAlphaGamma for gamma-correcting the compositing.
  *
- * Renders the tqshape specified with @svp over the @buf RGB buffer.
+ * Renders the shape specified with @svp over the @buf RGB buffer.
  * @x1 - @x0 specifies the width, and @y1 - @y0 specifies the height,
  * of the rectangle rendered. The new pixels are stored starting at
  * the first byte of @buf. Thus, the @x0 and @y0 parameters specify

@@ -22,7 +22,7 @@
 #include "pmobjectselect.h"
 #include "pmlinkedit.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 
 PMObjectLinkEdit::PMObjectLinkEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

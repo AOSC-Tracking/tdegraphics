@@ -46,7 +46,7 @@
 #include <tqsize.h>
 #include <tqscrollbar.h>
 #include <tqstyle.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 #include <tqdragobject.h>
 #include <tqvaluelist.h>
 #include <tqtimer.h>
@@ -89,7 +89,7 @@ KView::KView()
 		connect( part->widget(), TQT_SIGNAL( contextPress( const TQPoint & ) ),
 				TQT_SLOT( contextPress( const TQPoint & ) ) );
 
-		connect( TQApplication::tqclipboard(), TQT_SIGNAL( dataChanged() ),
+		connect( TQApplication::clipboard(), TQT_SIGNAL( dataChanged() ),
 				TQT_SLOT( clipboardDataChanged() ) );
 
 		connect( m_pViewer, TQT_SIGNAL( started( KIO::Job * ) ),
@@ -120,7 +120,7 @@ KView::KView()
 		// create status bar (hidden by default)
 		statusBar()->insertItem( "", STATUSBAR_SPEED_ID, 0, true );
 		statusBar()->setItemFixed( STATUSBAR_SPEED_ID,
-				8 + fontMetrics().width( i18n( "%1/s" ).tqarg( KIO::convertSize( 999000 ) ) ) );
+				8 + fontMetrics().width( i18n( "%1/s" ).arg( KIO::convertSize( 999000 ) ) ) );
 		statusBar()->insertItem( "", STATUSBAR_CURSOR_ID, 0, true );
 		statusBar()->setItemFixed( STATUSBAR_CURSOR_ID, 8 + fontMetrics().width( "8888, 8888" ) );
 		statusBar()->insertItem( "", STATUSBAR_SIZE_ID, 0, true );
@@ -163,13 +163,13 @@ void KView::load( const KURL & url )
 		if( url.isLocalFile() )
 		{
 			// XXX: this code is what
-			//KRecentDirs::add( TQString::tqfromLatin1( ":load_image" ), url.directory() );
+			//KRecentDirs::add( TQString::fromLatin1( ":load_image" ), url.directory() );
 			// would do:
 			TQString directory = url.directory();
-			TQString key = TQString::tqfromLatin1( "load_image" );
+			TQString key = TQString::fromLatin1( "load_image" );
 			KConfig * config = KGlobal::config();
 
-			config->setGroup( TQString::tqfromLatin1( "Recent Dirs" ) );
+			config->setGroup( TQString::fromLatin1( "Recent Dirs" ) );
 			TQStringList result = config->readPathListEntry( key );
 			// make sure the dir is first in history
 			result.remove( directory );
@@ -208,7 +208,7 @@ TQSize KView::sizeForCentralWidgetSize( TQSize size )
 	if( ! mb->isHidden() )
 	{
 		size.rheight() += mb->heightForWidth( width() );
-		if( tqstyle().tqstyleHint( TQStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
+		if( tqstyle().styleHint( TQStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
 			size.rheight() += dockWindowsMovable() ? 1 : 2;
 	}
 	kdDebug( 4600 ) << "added Menubar:           " << size << endl;
@@ -262,7 +262,7 @@ bool KView::eventFilter( TQObject * obj, TQEvent * ev )
 void KView::imageSizeChanged( const TQSize & /*size*/ )
 {
 	TQSize size = m_pCanvas->imageSize();
-	statusBar()->changeItem( TQString( "%1 x %2" ).tqarg( size.width() ).tqarg( size.height() ), STATUSBAR_SIZE_ID );
+	statusBar()->changeItem( TQString( "%1 x %2" ).arg( size.width() ).arg( size.height() ), STATUSBAR_SIZE_ID );
 	handleResize();
 }
 
@@ -272,7 +272,7 @@ void KView::selectionChanged( const TQRect & rect )
 	if( rect.isNull() )
 		statusBar()->changeItem( TQString(), STATUSBAR_SELECTION_ID );
 	else
-		statusBar()->changeItem( TQString( "%1, %2 - %3 x %4" ).tqarg( rect.x() ).tqarg( rect.y() ).tqarg( rect.width() ).tqarg( rect.height() ), STATUSBAR_SELECTION_ID );
+		statusBar()->changeItem( TQString( "%1, %2 - %3 x %4" ).arg( rect.x() ).arg( rect.y() ).arg( rect.width() ).arg( rect.height() ), STATUSBAR_SELECTION_ID );
 	action( "crop" )->setEnabled( ! rect.isNull() );
 }
 
@@ -301,7 +301,7 @@ void KView::slotClose()
 
 void KView::slotCopy()
 {
-	TQClipboard *cb = TQApplication::tqclipboard();
+	TQClipboard *cb = TQApplication::clipboard();
 	cb->setSelectionMode( false );
 
 	TQRect selectarea = m_pCanvas->selection();
@@ -320,7 +320,7 @@ void KView::slotCopy()
 void KView::slotPaste()
 {
 	// Get TQImage from clipboard and create a new image.
-	TQClipboard *cb = TQApplication::tqclipboard();
+	TQClipboard *cb = TQApplication::clipboard();
     TQImage img = cb->image();
 	if( ! img.isNull() )
 		m_pViewer->newImage( img );
@@ -412,7 +412,7 @@ void KView::enableAction( const char * name, bool b )
 
 void KView::clipboardDataChanged()
 {
-	TQClipboard * cb = TQApplication::tqclipboard();
+	TQClipboard * cb = TQApplication::clipboard();
 	cb->setSelectionMode( false );
 	bool hasImage = TQImageDrag::canDecode( cb->data( TQClipboard::Clipboard ) );
 	m_paPaste->setEnabled( hasImage );
@@ -466,7 +466,7 @@ void KView::speedProgress( KIO::Job *, unsigned long bytesPerSecond )
 	TQString sizeStr;
 
 	if( bytesPerSecond > 0 )
-		sizeStr = i18n( "%1/s" ).tqarg( KIO::convertSize( bytesPerSecond ) );
+		sizeStr = i18n( "%1/s" ).arg( KIO::convertSize( bytesPerSecond ) );
 	else
 		sizeStr = i18n( "Stalled" );
 
@@ -483,7 +483,7 @@ void KView::slotSetStatusBarText( const TQString & msg )
 
 void KView::cursorPos( const TQPoint & pos )
 {
-	statusBar()->changeItem( TQString( "%1, %2" ).tqarg( pos.x() ).tqarg( pos.y() ), STATUSBAR_CURSOR_ID );
+	statusBar()->changeItem( TQString( "%1, %2" ).arg( pos.x() ).arg( pos.y() ), STATUSBAR_CURSOR_ID );
 }
 
 void KView::setupActions( TQObject * partobject )
@@ -498,7 +498,7 @@ void KView::setupActions( TQObject * partobject )
 	TQObject * extension = partobject->child( 0, "KParts::BrowserExtension", false );
 	if( extension )
 	{
-		TQStrList slotNames = extension->tqmetaObject()->slotNames();
+		TQStrList slotNames = extension->metaObject()->slotNames();
 		if( slotNames.contains( "print()" ) )
 			KStdAction::print( extension, TQT_SLOT( print() ), actionCollection(), "print" );
 		if( slotNames.contains( "del()" ) )
@@ -614,7 +614,7 @@ void KView::fitWindowToImage()
 			winsize.setWidth( workarea.width() );
 	}
 
-	TQRect winrect( tqgeometry() );
+	TQRect winrect( geometry() );
 	winrect.setSize( winsize );
 
 	int xdiff = winrect.x() + winrect.width()  - workarea.x() - workarea.width();
@@ -653,7 +653,7 @@ TQSize KView::barSize( int mainwinwidth, BarSizeFrom from )
 				width += toolBar()->width();
 				break;
 			case KToolBar::Flat:
-				height += kapp->tqstyle().tqpixelMetric( TQStyle::PM_DockWindowHandleExtent );
+				height += kapp->tqstyle().pixelMetric( TQStyle::PM_DockWindowHandleExtent );
 				break;
 			case KToolBar::Floating:
 				break;

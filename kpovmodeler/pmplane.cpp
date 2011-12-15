@@ -82,11 +82,11 @@ void PMPlane::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMPlane::tqmetaObject( ) const
+PMMetaObject* PMPlane::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Plane", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Plane", Base::metaObject( ),
                                         createNewPlane );
       s_pMetaObject->addProperty(
          new PMPlaneProperty( "normal", &PMPlane::setNormal, &PMPlane::normal ) );

@@ -18,7 +18,7 @@
 
 #include "kviewconfmodules.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvbuttongroup.h>
 #include <tqradiobutton.h>
 
@@ -35,12 +35,12 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kviewgeneralconfig, KViewGeneralConfigFactory( "
 KViewGeneralConfig::KViewGeneralConfig( TQWidget * parent, const char * /*name*/, const TQStringList & args )
 	: KCModule( KViewGeneralConfigFactory::instance(), parent, args )
 {
-	TQBoxLayout * tqlayout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 
 	m_pResizeGroup = new TQVButtonGroup( i18n( "Resizing" ), this );
-	m_pResizeGroup->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
+	m_pResizeGroup->setSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
 	connect( m_pResizeGroup, TQT_SIGNAL( clicked( int ) ), this, TQT_SLOT( resizeChanged( int ) ) );
-	tqlayout->addWidget( m_pResizeGroup );
+	layout->addWidget( m_pResizeGroup );
 
 	( void )new TQRadioButton( i18n( "Only resize window" ), m_pResizeGroup );
 	( void )new TQRadioButton( i18n( "Resize image to fit window" ), m_pResizeGroup );

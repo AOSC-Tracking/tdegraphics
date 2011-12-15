@@ -21,7 +21,7 @@
 #include <tqfontmetrics.h>
 #include <tqgrid.h>
 #include <tqhbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqimage.h>
 #include <kimageeffect.h>
 #include <tqpaintdevicemetrics.h>
@@ -52,7 +52,7 @@ bool Printing::printImage( ImageWindow& imageWin, TQWidget *parent )
 
     KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
 
-    if ( printer.setup( parent, i18n("Print %1").tqarg(printer.docName().section('/', -1)) ) )
+    if ( printer.setup( parent, i18n("Print %1").arg(printer.docName().section('/', -1)) ) )
     {
         KTempFile tmpFile( TQString(), ".png" );
         if ( tmpFile.status() == 0 )
@@ -109,7 +109,7 @@ bool Printing::printImageWithTQt( const TQString& filename, KPrinter& printer,
     bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
     TQSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
-        imagesize.tqscale( w, h, TQSize::ScaleMin );
+        imagesize.scale( w, h, TQSize::ScaleMin );
     }
 
 
@@ -117,28 +117,28 @@ bool Printing::printImageWithTQt( const TQString& filename, KPrinter& printer,
     // align image
     //
     bool ok = false;
-    int tqalignment = printer.option("app-kuickshow-tqalignment").toInt( &ok );
+    int alignment = printer.option("app-kuickshow-alignment").toInt( &ok );
     if ( !ok )
-        tqalignment = TQt::AlignCenter; // default
+        alignment = TQt::AlignCenter; // default
 
     int x = 0;
     int y = 0;
 
     // ### need a GUI for this in KuickPrintDialogPage!
-    // x - tqalignment
-    if ( tqalignment & TQt::AlignHCenter )
+    // x - alignment
+    if ( alignment & TQt::AlignHCenter )
         x = (w - imagesize.width())/2;
-    else if ( tqalignment & TQt::AlignLeft )
+    else if ( alignment & TQt::AlignLeft )
         x = 0;
-    else if ( tqalignment & TQt::AlignRight )
+    else if ( alignment & TQt::AlignRight )
         x = w - imagesize.width();
 
-    // y - tqalignment
-    if ( tqalignment & TQt::AlignVCenter )
+    // y - alignment
+    if ( alignment & TQt::AlignVCenter )
         y = (h - imagesize.height())/2;
-    else if ( tqalignment & TQt::AlignTop )
+    else if ( alignment & TQt::AlignTop )
         y = 0;
-    else if ( tqalignment & TQt::AlignBottom )
+    else if ( alignment & TQt::AlignBottom )
         y = h - imagesize.height();
 
     //
@@ -199,21 +199,21 @@ KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *parent, const char *name )
 {
     setTitle( i18n("Image Settings") );
 
-    TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
-    tqlayout->setMargin( KDialog::marginHint() );
-    tqlayout->setSpacing( KDialog::spacingHint() );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
+    layout->setMargin( KDialog::marginHint() );
+    layout->setSpacing( KDialog::spacingHint() );
 
     m_addFileName = new TQCheckBox( i18n("Print fi&lename below image"), this);
     m_addFileName->setChecked( true );
-    tqlayout->addWidget( m_addFileName );
+    layout->addWidget( m_addFileName );
 
     m_blackwhite = new TQCheckBox ( i18n("Print image in &black and white"), this);
     m_blackwhite->setChecked( false );
-    tqlayout->addWidget (m_blackwhite );
+    layout->addWidget (m_blackwhite );
 
     TQVButtonGroup *group = new TQVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
-    tqlayout->addWidget( group );
+    layout->addWidget( group );
     // m_shrinkToFit = new TQRadioButton( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit = new TQCheckBox( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit->setChecked( true );
@@ -258,7 +258,7 @@ void KuickPrintDialogPage::getOptions( TQMap<TQString,TQString>& opts,
     TQString t = "true";
     TQString f = "false";
 
-//    ### opts["app-kuickshow-tqalignment"] = ;
+//    ### opts["app-kuickshow-alignment"] = ;
     opts["app-kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
     opts["app-kuickshow-blackwhite"] = m_blackwhite->isChecked() ? t : f;
     opts["app-kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;

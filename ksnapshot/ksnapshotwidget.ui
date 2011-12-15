@@ -23,7 +23,7 @@
             <property name="name">
                 <cstring>lblImage</cstring>
             </property>
-            <property name="tqminimumSize">
+            <property name="minimumSize">
                 <size>
                     <width>200</width>
                     <height>130</height>
@@ -107,7 +107,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="tqsizeHint">
+            <property name="sizeHint">
                 <size>
                     <width>156</width>
                     <height>16</height>
@@ -163,7 +163,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
         </widget>
         <widget class="TQLayoutWidget" row="0" column="3">
             <property name="name">
-                <cstring>tqlayout1</cstring>
+                <cstring>layout1</cstring>
             </property>
             <vbox>
                 <property name="name">
@@ -193,7 +193,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>16</width>
                             <height>16</height>

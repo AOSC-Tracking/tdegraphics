@@ -70,7 +70,7 @@ kpToolAutoCropBorder::kpToolAutoCropBorder (const TQPixmap *pixmapPtr,
     : m_pixmapPtr (pixmapPtr),
       m_processedColorSimilarity (processedColorSimilarity)
 {
-    tqinvalidate ();
+    invalidate ();
 }
 
 
@@ -280,7 +280,7 @@ bool kpToolAutoCropBorder::exists () const
 }
 
 // public
-void kpToolAutoCropBorder::tqinvalidate ()
+void kpToolAutoCropBorder::invalidate ()
 {
     m_rect = TQRect ();
     m_referenceColor = kpColor::invalid;
@@ -374,7 +374,7 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow)
     //       and regression testing.
     //
     // TODO: e.g. When the top fills entire rect but bot doesn't we could
-    //       tqinvalidate top and continue autocrop.
+    //       invalidate top and continue autocrop.
     int numRegions = 0;
     if (!leftBorder.calculate (true/*x*/, +1/*going right*/) ||
         leftBorder.fillsEntirePixmap () ||
@@ -439,7 +439,7 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow)
         #if DEBUG_KP_TOOL_AUTO_CROP
             kdDebug () << "\tignoring left border" << endl;
         #endif
-            leftBorder.tqinvalidate ();
+            leftBorder.invalidate ();
         }
     }
 
@@ -454,7 +454,7 @@ bool kpToolAutoCrop (kpMainWindow *mainWindow)
         #if DEBUG_KP_TOOL_AUTO_CROP
             kdDebug () << "\tignoring top border" << endl;
         #endif
-            topBorder.tqinvalidate ();
+            topBorder.invalidate ();
         }
     }
 

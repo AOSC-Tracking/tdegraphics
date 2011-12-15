@@ -65,11 +65,11 @@ void PMSolidColor::readAttributes( const PMXMLHelper& h )
    m_color = h.colorAttribute( "color", colorDefault );
 }
 
-PMMetaObject* PMSolidColor::tqmetaObject( ) const
+PMMetaObject* PMSolidColor::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SolidColor", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "SolidColor", Base::metaObject( ),
                                         createNewSolidColor );
       s_pMetaObject->addProperty(
          new PMSolidColorProperty( "color", &PMSolidColor::setColor, &PMSolidColor::color ) );

@@ -76,11 +76,11 @@ PMInterior::~PMInterior( )
 {
 }
 
-PMMetaObject* PMInterior::tqmetaObject( ) const
+PMMetaObject* PMInterior::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Interior", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Interior", Base::metaObject( ),
                                         createNewInterior );
       s_pMetaObject->addProperty(
          new PMInteriorProperty( "ior", &PMInterior::setIor, &PMInterior::ior ) );

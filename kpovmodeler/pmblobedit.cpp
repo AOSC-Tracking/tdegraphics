@@ -20,7 +20,7 @@
 #include "pmblob.h"
 #include "pmlineedits.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <klocale.h>

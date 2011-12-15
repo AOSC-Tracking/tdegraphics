@@ -57,7 +57,7 @@ public:
     */
    virtual TQString listObjectType( ) const = 0;
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -150,7 +150,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Texture" ); }
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -189,7 +189,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Pigment" ); }
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -228,7 +228,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "SolidColor" ); }
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -267,7 +267,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Density" ); }
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -306,7 +306,7 @@ public:
    virtual TQString listObjectType( ) const { return TQString( "Normal" ); }
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

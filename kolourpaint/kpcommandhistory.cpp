@@ -257,13 +257,13 @@ kpCommandHistoryBase::kpCommandHistoryBase (bool doReadConfig,
     : d (new kpCommandHistoryBasePrivate ())
 {
     m_actionUndo = new KToolBarPopupAction (undoActionText (),
-        TQString::tqfromLatin1 ("undo"),
+        TQString::fromLatin1 ("undo"),
         KStdAccel::shortcut (KStdAccel::Undo),
         this, TQT_SLOT (undo ()),
         ac, KStdAction::name (KStdAction::Undo));
 
     m_actionRedo = new KToolBarPopupAction (redoActionText (),
-        TQString::tqfromLatin1 ("redo"),
+        TQString::fromLatin1 ("redo"),
         KStdAccel::shortcut (KStdAccel::Redo),
         this, TQT_SLOT (redo ()),
         ac, KStdAction::name (KStdAction::Redo));
@@ -763,7 +763,7 @@ void kpCommandHistoryBase::trimCommandLists ()
             -m_documentRestoredPosition > (int) m_undoCommandList.size ())
         {
         #if DEBUG_KP_COMMAND_HISTORY
-            kdDebug () << "\t\t\ttqinvalidate documentRestoredPosition" << endl;
+            kdDebug () << "\t\t\tinvalidate documentRestoredPosition" << endl;
         #endif
             m_documentRestoredPosition = INT_MAX;
         }
@@ -911,7 +911,7 @@ void kpCommandHistory::undo ()
     if (m_mainWindow && m_mainWindow->toolHasBegunShape ())
     {
     #if DEBUG_KP_COMMAND_HISTORY
-        kdDebug () << "\thas begun tqshape - cancel draw" << endl;
+        kdDebug () << "\thas begun shape - cancel draw" << endl;
     #endif
         m_mainWindow->tool ()->cancelShapeInternal ();
     }
@@ -928,7 +928,7 @@ void kpCommandHistory::redo ()
         //
         // Ignoring the request would not be intuitive for tools like
         // Polygon & Polyline (where it's not always apparent to the user
-        // that s/he's still drawing a tqshape even though the mouse isn't
+        // that s/he's still drawing a shape even though the mouse isn't
         // down).
         m_mainWindow->tool ()->cancelShapeInternal ();
     }

@@ -27,7 +27,7 @@
 #include <tqwhatsthis.h>
 #include <tqscrollview.h>
 #include <tqbitmap.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 #include <tqdatetime.h>
 
 #include <kiconloader.h>
@@ -1035,7 +1035,7 @@ void KIconEditGrid::load( TQImage *image)
             setColor((y*numCols())+x, *l, false);
         }
         //kdDebug(4640) << "Row: " << y << endl;
-        kapp->tqprocessEvents(200);
+        kapp->processEvents(200);
     }
 
     updateColors();
@@ -1044,7 +1044,7 @@ void KIconEditGrid::load( TQImage *image)
     emit changed(pixmap());
     setUpdatesEnabled(true);
     emit needPainting();
-    //tqrepaint(viewRect(), false);
+    //repaint(viewRect(), false);
     history->clear();
 }
 
@@ -1118,7 +1118,7 @@ TQImage KIconEditGrid::clipboardImage(bool &ok)
   {
     TQCString format = fileFormats.current();
     TQCString type = "image/" + format.lower();
-    if (kapp->tqclipboard()->data()->provides(type ) )
+    if (kapp->clipboard()->data()->provides(type ) )
     {
       oneIsSupported = true;
     }
@@ -1379,7 +1379,7 @@ void KIconEditGrid::editPasteAsNew()
             *img = tmp;
             load(img);
             setModified(true);
-            //tqrepaint(viewRect(), false);
+            //repaint(viewRect(), false);
   
             p = *img;
             emit changed(TQPixmap(p));

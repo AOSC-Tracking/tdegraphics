@@ -27,7 +27,7 @@
 #ifndef _OCR_RESEDIT_
 #define _OCR_RESEDIT_
 
-#include <tqtextedit.h>
+#include <textedit.h>
 
 class TQString;
 class TQColor;

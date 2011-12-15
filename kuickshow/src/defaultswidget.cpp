@@ -19,7 +19,7 @@
 #include <tqcheckbox.h>
 #include <tqgroupbox.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvgroupbox.h>
 
 #include <kcombobox.h>
@@ -92,7 +92,7 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   // --
 
   gbPreview = new TQGroupBox( i18n("Preview"), this );
-  gbPreview->tqsetAlignment( AlignCenter );
+  gbPreview->setAlignment( AlignCenter );
 
   lbImOrig = new TQLabel( i18n("Original"), gbPreview );
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
@@ -105,13 +105,13 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   ////////////////
 
 
-  // tqlayout management
+  // layout management
   TQVBoxLayout *mainLayout = new TQVBoxLayout( this, 0,
-            KDialog::spacingHint(), "main tqlayout" );
+            KDialog::spacingHint(), "main layout" );
 
-  TQVBoxLayout *gbScaleLayout = new TQVBoxLayout( gbScale->tqlayout(),
+  TQVBoxLayout *gbScaleLayout = new TQVBoxLayout( gbScale->layout(),
             KDialog::spacingHint());
-  TQVBoxLayout *gbGeometryLayout = new TQVBoxLayout(gbGeometry->tqlayout(),
+  TQVBoxLayout *gbGeometryLayout = new TQVBoxLayout(gbGeometry->layout(),
             KDialog::spacingHint());
   TQGridLayout *gbPreviewLayout = new TQGridLayout(gbPreview, 2, 3, 0,
             KDialog::spacingHint());

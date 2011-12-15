@@ -87,11 +87,11 @@ PMRainbow::~PMRainbow( )
 {
 }
 
-PMMetaObject* PMRainbow::tqmetaObject( ) const
+PMMetaObject* PMRainbow::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Rainbow", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Rainbow", Base::metaObject( ),
                                         createNewRainbow );
       s_pMetaObject->addProperty(
          new PMRainbowProperty( "direction", &PMRainbow::setDirection, &PMRainbow::direction ) );

@@ -22,7 +22,7 @@
 #include "pmlineedits.h"
 #include "pmformulalabel.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcheckbox.h>
 #include <tqspinbox.h>
 #include <tqlabel.h>
@@ -96,8 +96,8 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
    {
       if( m_currentOrder > 0 )
       {
-         if( m_pPolyWidget->tqlayout( ) )
-            delete m_pPolyWidget->tqlayout( );
+         if( m_pPolyWidget->layout( ) )
+            delete m_pPolyWidget->layout( );
          
          m_labels.setAutoDelete( true );
          m_labels.clear( );

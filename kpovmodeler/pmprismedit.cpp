@@ -23,7 +23,7 @@
 #include "pmvectorlistedit.h"
 #include "pmpart.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqtooltip.h>
 #include <tqcombobox.h>
@@ -206,7 +206,7 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
       {
          // create all edits for one sub prism
          hl = new TQHBoxLayout( tvl );
-         label = new TQLabel( i18n( "Sub prism %1:" ).tqarg( spnr + 1 ),
+         label = new TQLabel( i18n( "Sub prism %1:" ).arg( spnr + 1 ),
                              m_pEditWidget );
          hl->addWidget( label );
          hl->addStretch( 1 );
@@ -332,8 +332,8 @@ void PMPrismEdit::deleteEdits( )
    m_points.clear( );
    m_points.setAutoDelete( false );
    
-   if( m_pEditWidget->tqlayout( ) )
-      delete m_pEditWidget->tqlayout( );
+   if( m_pEditWidget->layout( ) )
+      delete m_pEditWidget->layout( );
 }
 
 TQValueList< TQValueList<PMVector> > PMPrismEdit::splinePoints( )

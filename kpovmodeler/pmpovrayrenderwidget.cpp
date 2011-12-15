@@ -28,7 +28,7 @@
 #include <ktempfile.h>
 #include <tqcolor.h>
 #include <tqpainter.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqdragobject.h>
 
 #ifdef KDE_NO_COMPAT
@@ -134,7 +134,7 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
    m_image.setAlphaBuffer( m_renderMode.alpha( ) );
    m_image.fill( tqRgb( 0, 0, 0 ) );
    m_bPixmapUpToDate = false;
-   tqrepaint( );
+   repaint( );
 
    if( !m_pProcess->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
    {
@@ -393,7 +393,7 @@ void PMPovrayRenderWidget::cleanup( )
    m_pTempFile = 0;
 }
 
-TQSize PMPovrayRenderWidget::tqsizeHint( ) const
+TQSize PMPovrayRenderWidget::sizeHint( ) const
 {
    TQSize s;
    if( m_image.isNull( ) )
@@ -401,7 +401,7 @@ TQSize PMPovrayRenderWidget::tqsizeHint( ) const
    else
       s = m_image.size( );
 
-   return s.expandedTo( tqminimumSize( ) );
+   return s.expandedTo( minimumSize( ) );
 }
 
 void PMPovrayRenderWidget::saveConfig( KConfig* cfg )

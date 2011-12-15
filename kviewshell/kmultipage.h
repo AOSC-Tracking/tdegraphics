@@ -121,7 +121,7 @@ public:
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
+  if (!printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1)) )) {
     delete printer;
     return;
   }
@@ -155,7 +155,7 @@ public:
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) )) {
+  if (!printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1)) )) {
     delete printer;
     return;
   }

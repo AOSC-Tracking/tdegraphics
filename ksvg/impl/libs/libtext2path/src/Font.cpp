@@ -141,7 +141,7 @@ std::string Font::buildRequest(const FontVisualParams *fontParams, int &id)
 			FcPatternAddString(pattern, FC_FAMILY, reinterpret_cast<const FcChar8 *>(string.c_str()));
 	}
 
-	// Always load vertical tqlayout
+	// Always load vertical layout
 	FcPatternAddBool(pattern, FC_VERTICAL_LAYOUT, true);
 
 	// Disable hinting
@@ -208,7 +208,7 @@ bool Font::load(const FontVisualParams *fontParams)
 		return false;
 	}
 
-	// Choose tqunicode charmap
+	// Choose unicode charmap
 	for(int charmap = 0; charmap < m_fontFace->num_charmaps; charmap++)
 	{
 		if(m_fontFace->charmaps[charmap]->encoding == ft_encoding_unicode)
@@ -217,7 +217,7 @@ bool Font::load(const FontVisualParams *fontParams)
 
 			if(error)
 			{
-				std::cout << "Font::load(), unable to select tqunicode charmap. Aborting!" << std::endl;
+				std::cout << "Font::load(), unable to select unicode charmap. Aborting!" << std::endl;
 
 				FT_Done_Face(m_fontFace);
 				m_fontFace = 0;

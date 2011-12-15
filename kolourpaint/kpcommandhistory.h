@@ -222,16 +222,16 @@ private:
 
 // Intercepts Undo/Redo requests:
 //
-// If the user is currently drawing a tqshape, it cancels it.
+// If the user is currently drawing a shape, it cancels it.
 // Else it passes on the Undo/Redo request to kpCommandHistoryBase.
 //
 // TODO: This is wrong.  It won't work if the Undo action is disabled,
 //       for instance.
 //
 //       Maybe the real solution is to call kpCommandHistoryBase::addCommand()
-//       as _soon_ as the tqshape starts - not after it ends.  But the
+//       as _soon_ as the shape starts - not after it ends.  But the
 //       trouble with this solution is that if the user Undoes/cancels
-//       the tqshape s/he's currently drawing, it would replace a Redo
+//       the shape s/he's currently drawing, it would replace a Redo
 //       slot in the history.  Arguably you shouldn't be able to Redo
 //       something you never finished drawing.
 //

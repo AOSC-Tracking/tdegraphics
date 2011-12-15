@@ -54,7 +54,7 @@ kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *parent, const char
     for (int i = 0; i < int (sizeof (spraycanSizes) / sizeof (spraycanSizes [0])); i++)
     {
         int s = spraycanSizes [i];
-        TQString iconName = TQString ("tool_spraycan_%1x%1").tqarg (s).tqarg(s);
+        TQString iconName = TQString ("tool_spraycan_%1x%1").arg (s).arg(s);
         
     #if DEBUG_KP_TOOL_WIDGET_SPRAYCAN_SIZE
         kdDebug () << "\ticonName=" << iconName << endl;

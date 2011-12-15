@@ -36,7 +36,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_ARC_ABS; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "A"; }
-	virtual TQString toString() const { return TQString("A %1 %2 %3 %4 %5 %6 %7").tqarg(m_r1).tqarg(m_r2).tqarg(m_angle).tqarg(m_largeArcFlag).tqarg(m_sweepFlag).tqarg(m_x).tqarg(m_y); }
+	virtual TQString toString() const { return TQString("A %1 %2 %3 %4 %5 %6 %7").arg(m_r1).arg(m_r2).arg(m_angle).arg(m_largeArcFlag).arg(m_sweepFlag).arg(m_x).arg(m_y); }
 
 	void setX(double x);
 	double x() const;
@@ -94,7 +94,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_ARC_REL; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "a"; }
-	virtual TQString toString() const { return TQString("a %1 %2 %3 %4 %5 %6 %7").tqarg(m_r1).tqarg(m_r2).tqarg(m_angle).tqarg(m_largeArcFlag).tqarg(m_sweepFlag).tqarg(m_x).tqarg(m_y); }
+	virtual TQString toString() const { return TQString("a %1 %2 %3 %4 %5 %6 %7").arg(m_r1).arg(m_r2).arg(m_angle).arg(m_largeArcFlag).arg(m_sweepFlag).arg(m_x).arg(m_y); }
 
 	void setX(double x);
 	double x() const;

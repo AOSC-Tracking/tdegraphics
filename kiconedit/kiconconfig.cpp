@@ -21,7 +21,7 @@
 #include <stdlib.h>
 
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlineedit.h>
 #include <tqvbox.h>
 #include <tqbuttongroup.h>
@@ -49,7 +49,7 @@
 static inline TQPixmap loadIcon( const char * name )
 {
   return KGlobal::instance()->iconLoader()
-    ->loadIcon( TQString::tqfromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
+    ->loadIcon( TQString::fromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
 }
 
 KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent) 
@@ -60,9 +60,9 @@ KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent)
   TQVBoxLayout *ml = new TQVBoxLayout(frame);
   TQGroupBox *grp = new TQGroupBox(i18n("Template"), frame);
   grp->setColumnLayout(0, Qt::Vertical);
-  grp->tqlayout()->setSpacing(spacingHint());
-  grp->tqlayout()->setMargin(marginHint());
-  TQGridLayout *l = new TQGridLayout(grp->tqlayout());
+  grp->layout()->setSpacing(spacingHint());
+  grp->layout()->setMargin(marginHint());
+  TQGridLayout *l = new TQGridLayout(grp->layout());
 
   ln_name = new TQLineEdit( grp );
   connect( ln_name, TQT_SIGNAL( textChanged( const TQString & ) ), 
@@ -130,7 +130,7 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
   TQVBoxLayout* ml = new TQVBoxLayout( this );
   ml->addWidget( grp );
 
-  TQVBoxLayout* l = new  TQVBoxLayout( grp->tqlayout(), KDialog::spacingHint() );
+  TQVBoxLayout* l = new  TQVBoxLayout( grp->layout(), KDialog::spacingHint() );
   l->addWidget( templates );
 
   for( unsigned int i = 0; i <  KIconTemplateContainer::self()->count(); i++ )
@@ -151,7 +151,7 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
 	
   bbox->addStretch( 1 );
 	
-  bbox->tqlayout();
+  bbox->layout();
   l->addWidget( bbox );
 }
 
@@ -246,11 +246,11 @@ KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
 
   TQGroupBox *grp1 = new TQGroupBox( i18n( "Select Background" ), this );
   grp1->setColumnLayout(0, Qt::Vertical );
-  grp1->tqlayout()->setSpacing( KDialog::spacingHint() );
-  grp1->tqlayout()->setMargin( KDialog::marginHint() );
+  grp1->layout()->setSpacing( KDialog::spacingHint() );
+  grp1->layout()->setMargin( KDialog::marginHint() );
   mainLayout->addWidget( grp1 );
 
-  TQGridLayout *grp1Layout = new TQGridLayout( grp1->tqlayout(), 3, 2 );
+  TQGridLayout *grp1Layout = new TQGridLayout( grp1->layout(), 3, 2 );
 
   TQButtonGroup* btngrp = new TQButtonGroup( grp1 );
   btngrp->setExclusive( true );
@@ -548,8 +548,8 @@ KIconConfig::KIconConfig(TQWidget *parent)
 
   TQSize min(300, 400);
 
-  if (300 < tqsizeHint().width()) { min.setWidth(tqsizeHint().width()); }
-  if (400 < tqsizeHint().height()) { min.setHeight(tqsizeHint().height()); }
+  if (300 < sizeHint().width()) { min.setWidth(sizeHint().width()); }
+  if (400 < sizeHint().height()) { min.setHeight(sizeHint().height()); }
 
   resize(min);
 }

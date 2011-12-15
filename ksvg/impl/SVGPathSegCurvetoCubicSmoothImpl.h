@@ -36,7 +36,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_CURVETO_CUBIC_SMOOTH_ABS; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "S"; }
-	virtual TQString toString() const { return TQString("S %1 %2 %3 %4").tqarg(m_x2).tqarg(m_y2).tqarg(m_x).tqarg(m_y); }
+	virtual TQString toString() const { return TQString("S %1 %2 %3 %4").arg(m_x2).arg(m_y2).arg(m_x).arg(m_y); }
 
 	void setX(const double &);
 	double x() const;
@@ -88,7 +88,7 @@ public:
 
 	virtual unsigned short pathSegType() const { return PATHSEG_CURVETO_CUBIC_SMOOTH_REL; }
 	virtual DOM::DOMString pathSegTypeAsLetter() const { return "s"; }
-	virtual TQString toString() const { return TQString("s %1 %2 %3 %4").tqarg(m_x2).tqarg(m_y2).tqarg(m_x).tqarg(m_y); }
+	virtual TQString toString() const { return TQString("s %1 %2 %3 %4").arg(m_x2).arg(m_y2).arg(m_x).arg(m_y); }
 
 	void setX(const double &);
 	double x() const;

@@ -49,7 +49,7 @@ public:
 	virtual bool isContainer() const { return false; }
 
 	virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0);
-	virtual void tqinvalidate(KSVGCanvas *c, bool recalc);
+	virtual void invalidate(KSVGCanvas *c, bool recalc);
 	virtual void setReferenced(bool referenced);
 	virtual void draw();
 	virtual void blit(KSVGCanvas *);

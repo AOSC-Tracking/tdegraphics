@@ -80,12 +80,12 @@ protected:
 class MarkerHelper
 {
 protected:
-	void doStartMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle = 0.0);
-	void doMidMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle = 0.0);
-	void doEndMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle = 0.0);
+	void doStartMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle = 0.0);
+	void doMidMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle = 0.0);
+	void doEndMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle = 0.0);
 
 private:
-	void doMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle, const TQString &marker);
+	void doMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle, const TQString &marker);
 };
 
 class CanvasText : public CanvasItem

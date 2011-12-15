@@ -26,7 +26,7 @@
 
 /* $Id$ */
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqfileinfo.h>
 #include <tqtooltip.h>

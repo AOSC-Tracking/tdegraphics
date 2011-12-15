@@ -134,7 +134,7 @@ class DjVuNavDir;
     {\bf Inclusion} is also a new feature specifically designed for a
     multipage document. Indeed, inside a given document there can be a lot
     of things shared between its pages. Examples can be the document
-    annotation (\Ref{DjVuAnno}) and other things like shared tqshapes and
+    annotation (\Ref{DjVuAnno}) and other things like shared shapes and
     dictionary (to be implemented). To avoid putting these chunks into
     every page, we have invented new chunk called #INCL# which purpose is
     to make the decoder open the specified file and decode it.
@@ -217,7 +217,7 @@ public:
    GP<GPixmap>		bgpm;
       /// Pointer to the mask of foreground component of DjVu image (JB2 encoded).
    GP<JB2Image>		fgjb;
-      /// Pointer to the optional tqshape dictionary for the mask (JB2 encoded).
+      /// Pointer to the optional shape dictionary for the mask (JB2 encoded).
    GP<JB2Dict>		fgjd;
       /// Pointer to a colors layer for the foreground component of DjVu image.
    GP<GPixmap>		fgpm;
@@ -648,7 +648,7 @@ private:
      const GP<ByteStream> &str, bool djvi, bool djvu, bool iw44);
    int		get_dpi(int w, int h);
 
-      // Functions dealing with the tqshape directory (fgjd)
+      // Functions dealing with the shape directory (fgjd)
    static GP<JB2Dict> static_get_fgjd(void *);
    GP<JB2Dict> get_fgjd(int block=0);
 

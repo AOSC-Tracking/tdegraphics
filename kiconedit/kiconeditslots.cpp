@@ -195,7 +195,7 @@ void KIconEdit::slotPrint()
 {
     KPrinter printer;
 
-    if ( printer.setup(this, i18n("Print %1").tqarg(icon->url().section('/', -1))) )
+    if ( printer.setup(this, i18n("Print %1").arg(icon->url().section('/', -1))) )
     {
         int margin = 10, yPos = 0;
         printer.setCreator("KDE Icon Editor");
@@ -422,13 +422,13 @@ void KIconEdit::slotUpdateZoom( int s )
 
 void KIconEdit::slotUpdateStatusPos(int x, int y)
 {
-    TQString str = i18n("Status Position", "%1, %2").tqarg(x).tqarg(y);
+    TQString str = i18n("Status Position", "%1, %2").arg(x).arg(y);
     statusbar->changeItem( str, 0);
 }
 
 void KIconEdit::slotUpdateStatusSize(int x, int y)
 {
-    TQString str = i18n("Status Size", "%1 x %2").tqarg(x).tqarg(y);
+    TQString str = i18n("Status Size", "%1 x %2").arg(x).arg(y);
     statusbar->changeItem( str, 1);
 }
 
@@ -443,13 +443,13 @@ void KIconEdit::slotUpdateStatusScaling(int s)
 
 void KIconEdit::slotUpdateStatusColors(uint)
 {
-    TQString str = i18n("Colors: %1").tqarg(grid->numColors());
+    TQString str = i18n("Colors: %1").arg(grid->numColors());
     statusbar->changeItem( str, 3);
 }
 
 void KIconEdit::slotUpdateStatusColors(uint n, uint *)
 {
-    TQString str = i18n("Colors: %1").tqarg(n);
+    TQString str = i18n("Colors: %1").arg(n);
     statusbar->changeItem( str, 3);
 }
 

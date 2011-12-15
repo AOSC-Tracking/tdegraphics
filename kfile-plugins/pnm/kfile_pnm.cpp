@@ -22,7 +22,7 @@
 #include <math.h>
 #include <kgenericfactory.h>
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 static const char* formats[] = {
 	I18N_NOOP("plain"),

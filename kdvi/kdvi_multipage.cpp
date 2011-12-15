@@ -161,7 +161,7 @@ void KDVIMultiPage::slotSave()
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
-    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
+    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Do you want to overwrite that file?").arg(fileName),
                        i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -239,7 +239,7 @@ void KDVIMultiPage::print()
 
   // Show the printer options dialog. Return immediately if the user
   // aborts.
-  if (!printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1)) ))
+  if (!printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1)) ))
     return;
 
   // This funny method call is necessary for the KPrinter to return
@@ -379,7 +379,7 @@ void KDVIMultiPage::print()
       dvips_options +=  TQString(",");
     else
       commaflag = 1;
-    dvips_options += TQString("%1").tqarg(*it);
+    dvips_options += TQString("%1").arg(*it);
   }
 
   // Now print. For that, export the DVI-File to PostScript. Note that

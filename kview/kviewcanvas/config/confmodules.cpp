@@ -20,7 +20,7 @@
 #include "generalconfigwidget.h"
 #include "defaults.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcheckbox.h>
 #include <tqframe.h>
 
@@ -38,8 +38,8 @@ KViewCanvasConfig::KViewCanvasConfig( TQWidget * parent, const char *, const TQS
 	: KCModule( KViewCanvasConfigFactory::instance(), parent, args )
 	, m_config( new KConfig( "kviewcanvasrc" ) )
 {
-	TQBoxLayout * tqlayout = new TQVBoxLayout( this );
-	tqlayout->setAutoAdd( true );
+	TQBoxLayout * layout = new TQVBoxLayout( this );
+	layout->setAutoAdd( true );
 
 	m_pWidget = new GeneralConfigWidget( this );
 	m_pWidget->m_pMinWidth ->setRange( 1, 200 );

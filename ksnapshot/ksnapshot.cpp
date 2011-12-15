@@ -26,7 +26,7 @@
 #include <tqbitmap.h>
 #include <tqdragobject.h>
 #include <tqimage.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 #include <tqvbox.h>
 
 #include <kaccel.h>
@@ -162,7 +162,7 @@ bool KSnapshot::save( const KURL& url )
 {
     if ( KIO::NetAccess::exists( url, false, this ) ) {
         const TQString title = i18n( "File Exists" );
-        const TQString text = i18n( "<qt>Do you really want to overwrite <b>%1</b>?</qt>" ).tqarg(url.prettyURL());
+        const TQString text = i18n( "<qt>Do you really want to overwrite <b>%1</b>?</qt>" ).arg(url.prettyURL());
         if (KMessageBox::Continue != KMessageBox::warningContinueCancel( this, text, title, i18n("Overwrite") ) ) 
         {
             return false;
@@ -199,7 +199,7 @@ bool KSnapshot::save( const KURL& url )
 
 	TQString caption = i18n("Unable to save image");
 	TQString text = i18n("KSnapshot was unable to save the image to\n%1.")
-	               .tqarg(url.prettyURL());
+	               .arg(url.prettyURL());
 	KMessageBox::error(this, text, caption);
     }
 
@@ -241,7 +241,7 @@ void KSnapshot::slotSaveAs()
 
 void KSnapshot::slotCopy()
 {
-    TQClipboard *cb = TQApplication::tqclipboard();
+    TQClipboard *cb = TQApplication::clipboard();
     cb->setPixmap( snapshot );
 }
 

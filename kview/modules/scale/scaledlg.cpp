@@ -21,7 +21,7 @@
 #include "scaledlg.h"
 
 #include <tqvbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqspinbox.h>
 #include <tqcheckbox.h>
@@ -61,53 +61,53 @@ ScaleDlg::ScaleDlg( const TQSize & origsize, TQVBox * parent, const char * name 
 	pixelgroupgrid->addRowSpacing( 0, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "Original width:" ), pixelgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( label, 1, 0 );
 	label = new TQLabel( i18n( "Height:" ), pixelgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( label, 2, 0 );
 
 	pixelgroupgrid->addRowSpacing( 3, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "New width:" ), pixelgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( label, 4, 0 );
 	label = new TQLabel( i18n( "Height:" ), pixelgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( label, 5, 0 );
 
 	pixelgroupgrid->addRowSpacing( 6, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "Ratio X:" ), pixelgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( label, 7, 0 );
 	label = new TQLabel( i18n( "Y:" ), pixelgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( label, 8, 0 );
 
 	printgroupgrid->addRowSpacing( 0, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "New width:" ), printgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	printgroupgrid->addWidget( label, 1, 0 );
 	label = new TQLabel( i18n( "Height:" ), printgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	printgroupgrid->addWidget( label, 2, 0 );
 
 	printgroupgrid->addRowSpacing( 3, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "Resolution X:" ), printgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	printgroupgrid->addWidget( label, 4, 0 );
 	label = new TQLabel( i18n( "Y:" ), printgroup );
-    label->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    label->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	printgroupgrid->addWidget( label, 5, 0 );
 
 	m_pOldWidth = new TQLabel( TQString::number( origsize.width() ), pixelgroup );
-    m_pOldWidth->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_pOldWidth->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( m_pOldWidth, 1, 1 );
 	m_pOldHeight = new TQLabel( TQString::number( origsize.height() ), pixelgroup );
-    m_pOldHeight->tqsetAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
+    m_pOldHeight->setAlignment( int( TQLabel::AlignVCenter | TQLabel::AlignRight ) );
 	pixelgroupgrid->addWidget( m_pOldHeight, 2, 1 );
 
 	m_pNewWidth = new KFloatSpinBox( 1.0, 100000.0, 10.0, 0, pixelgroup );

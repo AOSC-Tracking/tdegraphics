@@ -28,7 +28,7 @@ DisplayNumber::DisplayNumber(TQWidget *parent, int digits, \
 
   setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
   setBackgroundMode(TQt::PaletteBase);
-  tqsetAlignment(TQt::AlignCenter);
+  setAlignment(TQt::AlignCenter);
   setFocusPolicy(TQ_NoFocus);
 }
 

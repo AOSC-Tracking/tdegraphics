@@ -49,11 +49,11 @@ TQString PMProjectedThrough::description( ) const
    return i18n( "projected through" );
 }
 
-PMMetaObject* PMProjectedThrough::tqmetaObject( ) const
+PMMetaObject* PMProjectedThrough::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ProjectedThrough", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "ProjectedThrough", Base::metaObject( ),
                                         createNewProjectedThrough );
       // no properties
    }

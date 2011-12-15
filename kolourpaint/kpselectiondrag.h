@@ -56,7 +56,7 @@ protected:
 public:
     virtual const char *format (int which = 0) const;
     virtual bool provides (const char *mimeType) const;
-    virtual TQByteArray tqencodedData (const char *mimeType) const;
+    virtual TQByteArray encodedData (const char *mimeType) const;
 
     static bool canDecode (const TQMimeSource *e);
     static bool decode (const TQMimeSource *e, TQImage &img);

@@ -19,7 +19,7 @@
 #include "imagesettings.h"
 
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 
 #include <klocale.h>
 #include <kdialog.h>
@@ -30,14 +30,14 @@ ImageSettings::ImageSettings( TQWidget * parent, const char * name )
 {
 	setTitle( i18n( "Image Settings" ) );
 
-	TQBoxLayout * tqlayout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
+	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 	m_pFitImage = new TQCheckBox( i18n( "Fit image to page size" ), this );
 	m_pFitImage->setChecked( true );
-	tqlayout->addWidget( m_pFitImage );
+	layout->addWidget( m_pFitImage );
 	m_pCenter = new TQCheckBox( i18n( "Center image on page" ), this );
 	m_pCenter->setChecked( true );
-	tqlayout->addWidget( m_pCenter );
-	tqlayout->insertStretch( -1, 0 );
+	layout->addWidget( m_pCenter );
+	layout->insertStretch( -1, 0 );
 }
 
 ImageSettings::~ImageSettings()

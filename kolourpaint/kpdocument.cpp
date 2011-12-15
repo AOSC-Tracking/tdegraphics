@@ -35,7 +35,7 @@
 
 #include <tqcolor.h>
 #include <tqbitmap.h>
-#include <tqbrush.h>
+#include <brush.h>
 #include <tqfile.h>
 #include <tqimage.h>
 #include <tqpixmap.h>
@@ -156,7 +156,7 @@ TQPixmap kpDocument::convertToPixmapAsLosslessAsPossible (
         metaInfo->setDotsPerMeterY (image.dotsPerMeterY ());
         metaInfo->setOffset (image.offset ());
 
-        TQValueList <TQImageTextKeyLang> keyList = image.tqtextList ();
+        TQValueList <TQImageTextKeyLang> keyList = image.textList ();
         for (TQValueList <TQImageTextKeyLang>::const_iterator it = keyList.begin ();
              it != keyList.end ();
              it++)
@@ -475,7 +475,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                 //       low maximum colour depth
                 i18n ("Lossy File Format"),
                 KStdGuiItem::save (),
-                TQString::tqfromLatin1 ("SaveInLossyMimeTypeDontAskAgain")));
+                TQString::fromLatin1 ("SaveInLossyMimeTypeDontAskAgain")));
     }
     else if (lossyType & kpDocumentSaveOptions::ColorDepthLow)
     {
@@ -490,7 +490,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                     .arg (saveOptions.colorDepth ()),
                 i18n ("Low Color Depth"),
                 KStdGuiItem::save (),
-                TQString::tqfromLatin1 ("SaveAtLowColorDepthDontAskAgain")));
+                TQString::fromLatin1 ("SaveAtLowColorDepthDontAskAgain")));
     }
 #undef TQUIT_IF_CANCEL
 
@@ -628,8 +628,8 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                << ",overwritePrompt=" << overwritePrompt
                << ",lossyPrompt=" << lossyPrompt
                << ")" << endl;
-    saveOptions.printDebug (TQString::tqfromLatin1 ("\tsaveOptions"));
-    metaInfo.printDebug (TQString::tqfromLatin1 ("\tmetaInfo"));
+    saveOptions.printDebug (TQString::fromLatin1 ("\tsaveOptions"));
+    metaInfo.printDebug (TQString::fromLatin1 ("\tmetaInfo"));
 #endif
 
     if (overwritePrompt && KIO::NetAccess::exists (url, false/*write*/, parent))
@@ -1109,22 +1109,22 @@ void kpDocument::setSelection (const kpSelection &selection)
                                 (selection.type () == kpSelection::Text));
 
     // We don't change the Selection Tool if the new selection's
-    // tqshape is merely different to the current tool's (e.g. rectangular
+    // shape is merely different to the current tool's (e.g. rectangular
     // vs elliptical) because:
     //
     // 1. All image selection tools support editing selections of all the
-    //    different tqshapes anyway.
+    //    different shapes anyway.
     // 2. Suppose the user is trying out different drags of selection borders
-    //    and then decides to paste a differently tqshaped selection before continuing
+    //    and then decides to paste a differently shaped selection before continuing
     //    to try out different borders.  If the pasting were to switch to
-    //    a differently tqshaped tool, the borders drawn after the paste would
-    //    be using a new tqshape rather than the tqshape before the paste.  This
+    //    a differently shaped tool, the borders drawn after the paste would
+    //    be using a new shape rather than the shape before the paste.  This
     //    could get irritating so we don't do the switch.
     //
     if (m_mainWindow &&
         (!m_mainWindow->toolIsASelectionTool () || isTextChanged))
     {
-        // Switch to the appropriately tqshaped selection tool
+        // Switch to the appropriately shaped selection tool
         // _before_ we change the selection
         // (all selection tool's ::end() functions nuke the current selection)
         switch (selection.type ())

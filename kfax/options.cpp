@@ -27,7 +27,7 @@
 
 #include <stdio.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <klocale.h>
 #include <knuminput.h>
 #include <tqdir.h>
@@ -60,28 +60,28 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   bg->setColumnLayout( 0, Qt::Horizontal );
   mainLayout->addWidget( bg );
 
-  TQVBoxLayout *vbl = new TQVBoxLayout(bg->tqlayout());
+  TQVBoxLayout *vbl = new TQVBoxLayout(bg->layout());
 
   TQHBoxLayout *hbl1 = new TQHBoxLayout();
 
   vbl->addLayout( hbl1 );
 
   displaylabel = new TQLabel(i18n("Display options:"), bg,"displaylabel");
-  displaylabel->setFixedSize( displaylabel->tqsizeHint() );
+  displaylabel->setFixedSize( displaylabel->sizeHint() );
   hbl1->addWidget( displaylabel );
 
   landscape = new TQCheckBox(i18n("Landscape"), bg,"Landscape");
-  landscape->setFixedSize( landscape->tqsizeHint() );
+  landscape->setFixedSize( landscape->sizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( landscape );
 
   flip = new TQCheckBox(i18n("Upside down"), bg,"upsidedown");
-  flip->setFixedSize( flip->tqsizeHint() );
+  flip->setFixedSize( flip->sizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( flip );
 
   invert = new TQCheckBox(i18n("Invert"), bg,"invert");
-  invert->setFixedSize( invert->tqsizeHint() );
+  invert->setFixedSize( invert->sizeHint() );
   hbl1->addSpacing( 10 );
   hbl1->addWidget( invert );
 
@@ -139,7 +139,7 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   rawgroup->setFrameStyle(TQFrame::NoFrame);
 
   rawlabel = new TQLabel(i18n("Raw fax format:"),rawgroup,"rawlabel");
-  rawlabel->setFixedSize( rawlabel->tqsizeHint() );
+  rawlabel->setFixedSize( rawlabel->sizeHint() );
   hbl4->addWidget( rawlabel );
 
   g3 = new TQRadioButton("G3",rawgroup,"g3");

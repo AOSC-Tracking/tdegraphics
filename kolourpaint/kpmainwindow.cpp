@@ -157,7 +157,7 @@ void kpMainWindow::readThumbnailSettings ()
 
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\t\tThumbnail Settings: shown=" << m_configThumbnailShown
-               << " tqgeometry=" << m_configThumbnailGeometry
+               << " geometry=" << m_configThumbnailGeometry
                << " zoomed=" << m_configZoomedThumbnail
                << " showRectangle=" << d->m_configThumbnailShowRectangle
                << endl;
@@ -731,7 +731,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
         connect (m_document, TQT_SIGNAL (selectionIsTextChanged (bool)),
                  this, TQT_SLOT (slotImageMenuUpdateDueToSelection ()));
 
-        // tqStatus bar
+        // Status bar
         connect (m_document, TQT_SIGNAL (documentOpened ()),
                  this, TQT_SLOT (recalculateStatusBar ()));
 
@@ -808,7 +808,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
             #endif
                 slotCreateThumbnail ();
             }
-            // this' tqgeometry is weird ATM
+            // this' geometry is weird ATM
             else
             {
             #if DEBUG_KP_MAIN_WINDOW

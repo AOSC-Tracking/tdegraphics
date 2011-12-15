@@ -309,14 +309,14 @@ void GlyphRenderParams::setFont(Font *font)
 	m_font = font;
 }
 	
-const GlyphLayoutParams *GlyphRenderParams::tqlayout() const
+const GlyphLayoutParams *GlyphRenderParams::layout() const
 {
 	return m_layout;
 }
 
-void GlyphRenderParams::setLayout(const GlyphLayoutParams *tqlayout)
+void GlyphRenderParams::setLayout(const GlyphLayoutParams *layout)
 {
-	m_layout = tqlayout;
+	m_layout = layout;
 }
 
 unsigned int GlyphRenderParams::glyphIndex() const

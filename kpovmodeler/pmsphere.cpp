@@ -71,11 +71,11 @@ TQString PMSphere::description( ) const
    return i18n( "sphere" );
 }
 
-PMMetaObject* PMSphere::tqmetaObject( ) const
+PMMetaObject* PMSphere::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Sphere", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Sphere", Base::metaObject( ),
                                         createNewSphere );
       s_pMetaObject->addProperty(
          new PMSphereProperty( "radius", &PMSphere::setRadius, &PMSphere::radius ) );

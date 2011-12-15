@@ -68,7 +68,7 @@ void KViewKonqExtension::print()
 	printer.addDialogPage( new ImageSettings );
 	printer.setDocName( "KView: " + m_pViewer->url().fileName( false ) );
 
-	if ( !printer.setup( ((KViewViewer *)parent())->widget(), i18n("Print %1").tqarg(m_pViewer->url().fileName( false )) ) )
+	if ( !printer.setup( ((KViewViewer *)parent())->widget(), i18n("Print %1").arg(m_pViewer->url().fileName( false )) ) )
 		return;
 
 	TQPainter painter;

@@ -380,7 +380,7 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 				params->setTextPathStartOffset(pathAdvance);
 				if(tp && tp->dy()->baseVal()->numberOfItems() > 0)
 					pathDy += tp->dy()->baseVal()->getItem(0)->value();
-				TQString shift = TQString("%1%%").tqarg((pathDy / font->fontParams()->size()) * -100.0);
+				TQString shift = TQString("%1%%").arg((pathDy / font->fontParams()->size()) * -100.0);
 				params->setBaselineShift(shift.latin1());
 			}
 
@@ -484,26 +484,26 @@ void CanvasText::createGlyphs(KSVGTextChunk *textChunk, KSVGCanvas *canvas, cons
 
 // #####
 
-void MarkerHelper::doMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle, const TQString &markerId)
+void MarkerHelper::doMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle, const TQString &markerId)
 {
-	SVGMarkerElementImpl *marker = dynamic_cast<SVGMarkerElementImpl *>(tqshape->ownerSVGElement()->getElementById(markerId));
+	SVGMarkerElementImpl *marker = dynamic_cast<SVGMarkerElementImpl *>(shape->ownerSVGElement()->getElementById(markerId));
 	if(marker)
-		marker->draw(tqshape, x, y, style->getStrokeWidth()->baseVal()->value(), angle);
+		marker->draw(shape, x, y, style->getStrokeWidth()->baseVal()->value(), angle);
 }
 
-void MarkerHelper::doStartMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle)
+void MarkerHelper::doStartMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle)
 {
-	doMarker(tqshape, style, x, y, angle, style->getStartMarker());
+	doMarker(shape, style, x, y, angle, style->getStartMarker());
 }
 
-void MarkerHelper::doMidMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle)
+void MarkerHelper::doMidMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle)
 {
-	doMarker(tqshape, style, x, y, angle, style->getMidMarker());
+	doMarker(shape, style, x, y, angle, style->getMidMarker());
 }
 
-void MarkerHelper::doEndMarker(SVGShapeImpl *tqshape, SVGStylableImpl *style, double x, double y, double angle)
+void MarkerHelper::doEndMarker(SVGShapeImpl *shape, SVGStylableImpl *style, double x, double y, double angle)
 {
-	doMarker(tqshape, style, x, y, angle, style->getEndMarker());
+	doMarker(shape, style, x, y, angle, style->getEndMarker());
 }
 
 // vim:ts=4:noet

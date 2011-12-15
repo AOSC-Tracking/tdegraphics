@@ -15,11 +15,11 @@
 #include <string.h>
 
 #include <tqcheckbox.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 #include <tqcursor.h>
 #include <tqlabel.h>
 #include <tqfileinfo.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqmessagebox.h>
 #include <tqpaintdevice.h>
 #include <tqpainter.h>
@@ -277,7 +277,7 @@ void dviRenderer::showThatSourceInformationIsPresent()
     TQLabel *label2 = new TQLabel( i18n("<qt>This DVI file contains source file information. You may click into the text with the "
 				      "middle mouse button, and an editor will open the TeX-source file immediately.</qt>"),
 				 contents);
-    label2->setMinimumSize(label2->tqsizeHint());
+    label2->setMinimumSize(label2->sizeHint());
     lay->add( label2 );
     lay->addStretch(1);
     TQSize extraSize = TQSize(50,30);
@@ -437,7 +437,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
   if (!fi.exists() || fi.isDir()) {
     KMessageBox::error( parentWidget,
 			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist. "
-			     "KDVI already tried to add the ending '.dvi'.</qt>").tqarg(filename),
+			     "KDVI already tried to add the ending '.dvi'.</qt>").arg(filename),
 			i18n("File Error!"));
     return false;
   }
@@ -451,8 +451,8 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
     KMessageBox::sorry( parentWidget,
 			i18n( "<qt>Could not open file <nobr><strong>%1</strong></nobr> which has "
 			      "type <strong>%2</strong>. KDVI can only load DVI (.dvi) files.</qt>" )
-			.tqarg( fname )
-			.tqarg( mimetype ) );
+			.arg( fname )
+			.arg( mimetype ) );
     return false;
   }
   
@@ -462,7 +462,7 @@ bool dviRenderer::setFile(const TQString &fname, const KURL &base)
     KMessageBox::sorry( parentWidget,
                         i18n("<qt>File corruption! KDVI had trouble interpreting your DVI file. Most "
                              "likely this means that the DVI file is broken.</qt>")
-                        .tqarg( fname ) );
+                        .arg( fname ) );
     return false;
   }
 
@@ -641,7 +641,7 @@ Anchor dviRenderer::parseReference(const TQString &reference)
 				    "line %1 in the TeX-file <strong>%2</strong>. It seems, however, that the DVI file "
 				    "does not contain the necessary source file information. "
 				    "We refer to the manual of KDVI for a detailed explanation on how to include this "
-				    "information. Press the F1 key to open the manual.</qt>").tqarg(refLineNumber).tqarg(refFileName),
+				    "information. Press the F1 key to open the manual.</qt>").arg(refLineNumber).arg(refFileName),
 			 i18n("Could Not Find Reference"));
       mutex.unlock();
       return Anchor();
@@ -681,7 +681,7 @@ Anchor dviRenderer::parseReference(const TQString &reference)
     } else
       if (anchorForRefFileFound == false)
 	KMessageBox::sorry(parentWidget, i18n("<qt>KDVI was not able to locate the place in the DVI file which corresponds to "
-					      "line %1 in the TeX-file <strong>%2</strong>.</qt>").tqarg(refLineNumber).tqarg(refFileName),
+					      "line %1 in the TeX-file <strong>%2</strong>.</qt>").arg(refLineNumber).arg(refFileName),
 			   i18n( "Could Not Find Reference" ));
       else {
 	mutex.unlock();
@@ -735,7 +735,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   {
       KMessageBox::sorry(parentWidget, TQString("<qt>") +
 			 i18n("The DVI-file refers to the TeX-file "
-			      "<strong>%1</strong> which could not be found.").tqarg(KShellProcess::quote(TeXfile)) +
+			      "<strong>%1</strong> which could not be found.").arg(KShellProcess::quote(TeXfile)) +
 			 TQString("</qt>"),
 			 i18n( "Could Not Find File" ));
       return;
@@ -786,7 +786,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
 			    "for inverse search, reported an error. You might wish to look at the <strong>document info "
 			    "dialog</strong> which you will find in the File-Menu for a precise error report. The "
 			    "manual for KDVI contains a detailed explanation how to set up your editor for use with KDVI, "
-			    "and a list of common problems.</qt>").tqarg(command);
+			    "and a list of common problems.</qt>").arg(command);
   
   info->clear(i18n("Starting the editor..."));
   

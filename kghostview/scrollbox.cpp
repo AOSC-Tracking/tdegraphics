@@ -99,19 +99,19 @@ void ScrollBox::setPageSize( const TQSize& s )
 {
     pagesize = s;
     setFixedHeight( s.height() * width() / s.width() );
-    tqrepaint();
+    repaint();
 }
 
 void ScrollBox::setViewSize( const TQSize& s )
 {
     viewsize = s;
-    tqrepaint();
+    repaint();
 }
 
 void ScrollBox::setViewPos( const TQPoint& pos )
 {
     viewpos = pos;
-    tqrepaint();
+    repaint();
 }
 
 void ScrollBox::setThumbnail( TQPixmap img )

@@ -20,7 +20,7 @@
 #include "pmgraphicalobject.h"
 
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqspinbox.h>
 #include <klocale.h>
@@ -162,7 +162,7 @@ void PMGraphicalObjectEdit::recalculateResultingVisibility( )
             absoluteFound = true;
       }
    }
-   m_pResultingVisibility->setText( TQString( "(%1)" ).tqarg( level ) );
+   m_pResultingVisibility->setText( TQString( "(%1)" ).arg( level ) );
 }
 
 #include "pmgraphicalobjectedit.moc"

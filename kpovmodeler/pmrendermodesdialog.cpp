@@ -24,7 +24,7 @@
 #include <tqlineedit.h>
 #include <tqtabwidget.h>
 #include <tqvbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
 

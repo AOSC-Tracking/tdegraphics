@@ -22,7 +22,7 @@
 
 #include "pmdebug.h"
 
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqstring.h>
 
 PMColor::PMColor( )

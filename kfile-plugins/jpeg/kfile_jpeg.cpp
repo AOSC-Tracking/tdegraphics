@@ -178,7 +178,7 @@ bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
     */
     /*
         The jpeg standard does not regulate the contents of the COM block.
-        I'm assuming the best thing to do here is write as tqunicode utf-8,
+        I'm assuming the best thing to do here is write as unicode utf-8,
         which is fully backwards compatible with readers expecting ascii.
         Readers expecting a national character set are out of luck...
     */

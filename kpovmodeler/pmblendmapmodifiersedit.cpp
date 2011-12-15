@@ -25,7 +25,7 @@
 #include "pmvector.h"
 
 #include <tqwidget.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcombobox.h>
 #include <tqlabel.h>
 #include <tqlineedit.h>

@@ -305,9 +305,9 @@ protected slots:
 protected:
 
   /**
-   * A tqlayout manager for placing the embedded buttons (close and stay)
+   * A layout manager for placing the embedded buttons (close and stay)
    */
-  TQHBoxLayout* tqlayout;
+  TQHBoxLayout* layout;
 
   /**
    * a little button for closing (undocking and hiding) the dockwidget
@@ -773,9 +773,9 @@ private:
   TQWidget* widget;
 
   /**
-   * the tqlayout manager that takes care about proper resizing and moving the embedded widget and the header
+   * the layout manager that takes care about proper resizing and moving the embedded widget and the header
    */
-  TQVBoxLayout* tqlayout;
+  TQVBoxLayout* layout;
 
   /**
    * the responsible dockmanager
@@ -855,7 +855,7 @@ public:
 #ifndef NO_KDE2
   /**
    * Saves the current state of the dockmanager and of all controlled widgets.
-   * State means here to save the tqgeometry, visibility, parents, internal object names, orientation,
+   * State means here to save the geometry, visibility, parents, internal object names, orientation,
    * separator positions, dockwidget-group information, tab widget states (if it is a tab group) and
    * last but not least some necessary things for recovering the dockmainwindow state.
    *
@@ -872,7 +872,7 @@ public:
    * (TQObject::name) in the childDock variable of
    * PMDockManager. This list in turn contains all
    * PMDockWidgets (according to the PMDockWidget constructor).
-   * So in principle, in order to restore a window tqlayout,
+   * So in principle, in order to restore a window layout,
    * one must first construct all widgets, put each of them in a
    * PMDockWidget and then call readConfig(). And for all that
    * to work, each widget must have a unique name.
@@ -884,11 +884,11 @@ public:
 #endif
 
   /**
-   * Saves the current dock window tqlayout into a DOM tree below the given element.
+   * Saves the current dock window layout into a DOM tree below the given element.
    */
   void writeConfig(TQDomElement &base);
   /**
-   * Reads the current dock window tqlayout from a DOM tree below the given element.
+   * Reads the current dock window layout from a DOM tree below the given element.
    */
   void readConfig(TQDomElement &base);
 
@@ -1224,7 +1224,7 @@ public:
   /**
    * Constructs a dockmainwindow. It calls its base class constructor and does additional things concerning
    * to the dock stuff:
-   * @li information about the dock state of this' tqchildren gets initialized
+   * @li information about the dock state of this' children gets initialized
    * @li a dockmanager is created...
    * @li ...and gets initialized
    * @li the main dockwidget is set to 0
@@ -1274,11 +1274,11 @@ public:
   PMDockWidget* createDockWidget( const TQString& name, const TQPixmap &pixmap, TQWidget* parent = 0L, const TQString& strCaption = 0L, const TQString& strTabPageLabel = " ");
 
   /**
-   * Saves the current dock window tqlayout into a DOM tree below the given element.
+   * Saves the current dock window layout into a DOM tree below the given element.
    */
   void writeDockConfig(TQDomElement &base);
   /**
-   * Reads the current dock window tqlayout from a DOM tree below the given element.
+   * Reads the current dock window layout from a DOM tree below the given element.
    */
   void readDockConfig(TQDomElement &base);
 

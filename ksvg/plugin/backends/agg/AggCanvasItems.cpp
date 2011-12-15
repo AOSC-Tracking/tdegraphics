@@ -239,13 +239,13 @@ void AggShape::update(CanvasItemUpdate reason, int param1, int param2)
 			m_fillPainter->update(m_style);
 		if(m_strokePainter)
 			m_strokePainter->update(m_style);
-		m_canvas->tqinvalidate(this, false);
+		m_canvas->invalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		freeSVPs();
 		init();
-		m_canvas->tqinvalidate(this, true);
+		m_canvas->invalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 		init();
@@ -257,13 +257,13 @@ void AggShape::update(CanvasItemUpdate reason, int param1, int param2)
 	else if(reason == UPDATE_LINEWIDTH)
 	{
 		init();
-		m_canvas->tqinvalidate(this, true);
+		m_canvas->invalidate(this, true);
 	}
 }
 
-void AggShape::draw(SVGShapeImpl *tqshape)
+void AggShape::draw(SVGShapeImpl *shape)
 {
-	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !tqshape->directRender()))
+	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !shape->directRender()))
 		return;
 
 	//if(!m_strokeSVP && (!m_fillSVP || !m_style->isFilled()))
@@ -292,14 +292,14 @@ void AggShape::draw(SVGShapeImpl *tqshape)
 	m_curved.approximation_scale(pow(m_transform.scale(), 0.75));
 
 	if(m_fillPainter)
-		m_fillPainter->draw(m_canvas, m_curved_trans, m_style, tqshape);
+		m_fillPainter->draw(m_canvas, m_curved_trans, m_style, shape);
 	if(m_strokePainter)
-		m_strokePainter->draw(m_canvas, m_curved_stroked_trans, m_style, tqshape);
+		m_strokePainter->draw(m_canvas, m_curved_stroked_trans, m_style, shape);
 }
 
-bool AggShape::isVisible(SVGShapeImpl *tqshape)
+bool AggShape::isVisible(SVGShapeImpl *shape)
 {
-	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && tqshape->directRender());
+	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && shape->directRender());
 }
 
 void AggShape::calcSVPs(const SVGMatrixImpl *matrix)
@@ -376,14 +376,14 @@ void AggStrokePaintServer::update(SVGStylableImpl *style)
 }
 
 template<class VertexSource>
-void AggStrokePaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *tqshape)
+void AggStrokePaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *shape)
 {
 	canvas->m_ras.reset();
 	if(style->getStrokeColor()->paintType() == SVG_PAINTTYPE_URI)
 	{
-		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(tqshape->ownerDoc(), style->getStrokeColor()->uri().string()));
+		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(shape->ownerDoc(), style->getStrokeColor()->uri().string()));
 		if(!pserver) return;
-		pserver->setBBoxTarget(tqshape);
+		pserver->setBBoxTarget(shape);
 
 		// TODO : Clipping
 		if(!pserver->finalized())
@@ -425,14 +425,14 @@ void AggFillPaintServer::update(SVGStylableImpl *style)
 }
 
 template<class VertexSource>
-void AggFillPaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *tqshape)
+void AggFillPaintServer::draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *shape)
 {
 	canvas->m_ras.reset();
 	if(style->getFillColor()->paintType() == SVG_PAINTTYPE_URI)
 	{
-		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(tqshape->ownerDoc(), style->getFillColor()->uri().string()));
+		AggPaintServer *pserver = static_cast<AggPaintServer *>(SVGPaintServerImpl::paintServer(shape->ownerDoc(), style->getFillColor()->uri().string()));
 		if(!pserver) return;
-		pserver->setBBoxTarget(tqshape);
+		pserver->setBBoxTarget(shape);
 
 		// TODO : Clipping
 		if(!pserver->finalized())
@@ -1166,13 +1166,13 @@ void AggText::update(CanvasItemUpdate reason, int param1, int param2)
 
 			svpelement = ++it;
 		}
-		m_canvas->tqinvalidate(this, false);
+		m_canvas->invalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		clearCurved();
 		init();
-		m_canvas->tqinvalidate(this, true);
+		m_canvas->invalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 	{

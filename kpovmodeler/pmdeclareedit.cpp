@@ -23,10 +23,10 @@
 #include "pmscanner.h"
 #include "pmobjectselect.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlineedit.h>
 #include <tqlabel.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqpushbutton.h>
 #include <tqlistbox.h>
 
@@ -44,13 +44,13 @@ void PMDeclareEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pNameEdit = new TQLineEdit( this );
    m_pNameEdit->setMaxLength( 40 );
    TQLabel* label = new TQLabel( i18n( "Identifier:" ), this );
 
-   tqlayout->addWidget( label );
-   tqlayout->addWidget( m_pNameEdit );
+   layout->addWidget( label );
+   layout->addWidget( m_pNameEdit );
 
    connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
             TQT_SLOT( slotNameChanged( const TQString& ) ) );
@@ -67,13 +67,13 @@ void PMDeclareEdit::createBottomWidgets( )
             TQT_SLOT( slotItemSelected( TQListBoxItem* ) ) );
    topLayout( )->addWidget( m_pLinkedObjects, 1 );
 
-   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pSelectButton = new TQPushButton( i18n( "Select..." ), this );
    m_pSelectButton->setEnabled( false );
 
    connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelect( ) ) );
-   tqlayout->addStretch( );
-   tqlayout->addWidget( m_pSelectButton );
+   layout->addStretch( );
+   layout->addWidget( m_pSelectButton );
 
    Base::createBottomWidgets( );
 }

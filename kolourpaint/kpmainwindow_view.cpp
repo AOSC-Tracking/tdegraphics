@@ -289,7 +289,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
             // Ordinary flicker is better than the whole view moving
             TQPainter p (m_mainView);
             p.fillRect (m_mainView->rect (),
-                        m_scrollView->viewport ()->tqcolorGroup ().background ());
+                        m_scrollView->viewport ()->colorGroup ().background ());
         }
     }
 
@@ -842,13 +842,13 @@ void kpMainWindow::slotSaveThumbnailGeometry ()
     TQRect rect (m_thumbnail->x (), m_thumbnail->y (),
                 m_thumbnail->width (), m_thumbnail->height ());
 #if DEBUG_KP_MAIN_WINDOW
-    kdDebug () << "\tthumbnail relative tqgeometry=" << rect << endl;
+    kdDebug () << "\tthumbnail relative geometry=" << rect << endl;
 #endif
 
     m_configThumbnailGeometry = mapFromGlobal (rect);
 
 #if DEBUG_KP_MAIN_WINDOW
-    kdDebug () << "\tCONFIG: saving thumbnail tqgeometry "
+    kdDebug () << "\tCONFIG: saving thumbnail geometry "
                 << m_configThumbnailGeometry
                 << endl;
 #endif
@@ -1067,11 +1067,11 @@ void kpMainWindow::updateThumbnail ()
         kdDebug () << "\tcreating thumbnail" << endl;
     #endif
 
-        // Read last saved tqgeometry before creating thumbnail & friends
+        // Read last saved geometry before creating thumbnail & friends
         // in case they call notifyThumbnailGeometryChanged()
         TQRect thumbnailGeometry = m_configThumbnailGeometry;
     #if DEBUG_KP_MAIN_WINDOW
-        kdDebug () << "\t\tlast used tqgeometry=" << thumbnailGeometry << endl;
+        kdDebug () << "\t\tlast used geometry=" << thumbnailGeometry << endl;
     #endif
 
         m_thumbnail = new kpThumbnail (this, "thumbnail");
@@ -1084,9 +1084,9 @@ void kpMainWindow::updateThumbnail ()
         if (!thumbnailGeometry.isEmpty () &&
             TQRect (0, 0, width (), height ()).intersects (thumbnailGeometry))
         {
-            const TQRect tqgeometry = mapToGlobal (thumbnailGeometry);
-            m_thumbnail->resize (tqgeometry.size ());
-            m_thumbnail->move (tqgeometry.topLeft ());
+            const TQRect geometry = mapToGlobal (thumbnailGeometry);
+            m_thumbnail->resize (geometry.size ());
+            m_thumbnail->move (geometry.topLeft ());
         }
         else
         {
@@ -1101,7 +1101,7 @@ void kpMainWindow::updateThumbnail ()
                                     initialHeight);
 
             #if DEBUG_KP_MAIN_WINDOW
-                kdDebug () << "\t\tcreating tqgeometry=" << geometryRect << endl;
+                kdDebug () << "\t\tcreating geometry=" << geometryRect << endl;
             #endif
 
                 geometryRect = mapToGlobal (geometryRect);

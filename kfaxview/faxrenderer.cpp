@@ -136,7 +136,7 @@ bool FaxRenderer::setFile(const TQString &fname, const KURL &)
   TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
     KMessageBox::error( parentWidget,
-			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").tqarg(filename),
+			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").arg(filename),
 			i18n("File Error"));
     // the return value 'false' indicates that this operation was not successful.
     mutex.unlock();
@@ -157,11 +157,11 @@ bool FaxRenderer::setFile(const TQString &fname, const KURL &)
     // this case gracefully.
     if (fax.errorString().isEmpty())
       KMessageBox::error( parentWidget,
-			  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
+			  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").arg(filename),
 			  i18n("File Error"));
     else
       KMessageBox::detailedError( parentWidget,
-				  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
+				  i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").arg(filename),
 				  fax.errorString(),
 				  i18n("File Error"));
     clear();

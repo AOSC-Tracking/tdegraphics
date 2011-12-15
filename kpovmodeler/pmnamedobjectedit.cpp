@@ -19,7 +19,7 @@
 #include "pmnamedobjectedit.h"
 #include "pmnamedobject.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlineedit.h>
 #include <tqlabel.h>
 #include <klocale.h>
@@ -34,12 +34,12 @@ void PMNamedObjectEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pNameEdit = new TQLineEdit( this );
    TQLabel* label = new TQLabel( i18n( "Name:" ), this );
 
-   tqlayout->addWidget( label );
-   tqlayout->addWidget( m_pNameEdit );
+   layout->addWidget( label );
+   layout->addWidget( m_pNameEdit );
 
    connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
             TQT_SLOT( slotNameChanged( const TQString& ) ) );

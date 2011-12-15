@@ -22,7 +22,7 @@
 #include "pmvector.h"
 
 #include <tqwidget.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcombobox.h>
 #include <tqlabel.h>
 #include "pmlineedits.h"
@@ -41,39 +41,39 @@ void PMListPatternEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQVBoxLayout* vtqlayout = new TQVBoxLayout( topLayout( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( topLayout( ) );
 
    /* Field for Pattern List type */
-   TQHBoxLayout* tqlayout = new TQHBoxLayout( vtqlayout );
+   TQHBoxLayout* layout = new TQHBoxLayout( vlayout );
    TQLabel* label = new TQLabel( i18n( "Type:" ), this );
    m_pTypeCombo = new TQComboBox( false, this );
    m_pTypeCombo->insertItem( i18n( "Checkers" ) );
    m_pTypeCombo->insertItem( i18n( "Brick" ) );
    m_pTypeCombo->insertItem( i18n( "Hexagon" ) );
-   tqlayout->addWidget( label, 0, AlignTop );
-   tqlayout->addWidget( m_pTypeCombo );
-   tqlayout->addStretch( 1 );
+   layout->addWidget( label, 0, AlignTop );
+   layout->addWidget( m_pTypeCombo );
+   layout->addStretch( 1 );
 
    /* The depth field */
-   tqlayout = new TQHBoxLayout( vtqlayout );
+   layout = new TQHBoxLayout( vlayout );
    m_pDepthLabel = new TQLabel( i18n( "Depth:" ), this );
    m_pDepth = new PMFloatEdit( this );
-   tqlayout->addWidget( m_pDepthLabel );
-   tqlayout->addWidget( m_pDepth );
-   tqlayout->addStretch( 1 );
+   layout->addWidget( m_pDepthLabel );
+   layout->addWidget( m_pDepth );
+   layout->addStretch( 1 );
 
    /* The brick information */
-   TQHBoxLayout* bricklayout = new TQHBoxLayout( vtqlayout );
+   TQHBoxLayout* bricklayout = new TQHBoxLayout( vlayout );
    m_pBrickSizeLabel = new TQLabel( i18n( "Brick size:" ), this );
    m_pBrickSize = new PMVectorEdit( "x", "y", "z", this );
    bricklayout->addWidget( m_pBrickSizeLabel );
    bricklayout->addWidget( m_pBrickSize );
-   tqlayout = new TQHBoxLayout( vtqlayout );
+   layout = new TQHBoxLayout( vlayout );
    m_pMortarLabel = new TQLabel( i18n( "Mortar:" ), this );
    m_pMortar = new PMFloatEdit( this );
-   tqlayout->addWidget( m_pMortarLabel );
-   tqlayout->addWidget( m_pMortar );
-   tqlayout->addStretch( 1 );
+   layout->addWidget( m_pMortarLabel );
+   layout->addWidget( m_pMortar );
+   layout->addStretch( 1 );
 
    /* connect all signals to slots/signals */
    connect( m_pBrickSize, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
@@ -161,7 +161,7 @@ void PMListPatternEdit::saveContents( )
 
 bool PMListPatternEdit::isDataValid( )
 {
-   int tqchildren = 0;
+   int children = 0;
    PMObject* o;
 
    if( !m_pBrickSize->isDataValid( ) )
@@ -172,13 +172,13 @@ bool PMListPatternEdit::isDataValid( )
    // count child objects
    for( o = m_pDisplayedObject->firstChild( ); o; o = o->nextSibling( ) )
       if( o->type( ) == m_pDisplayedObject->listObjectType( ) )
-         tqchildren++;
+         children++;
 
    switch( m_pTypeCombo->currentItem( ) )
    {
       case 0:
       case 1:
-         if( tqchildren > 2 )
+         if( children > 2 )
          {
             KMessageBox::error( this, i18n( "You can have at most two child"
                                             " items for that list type!" ),

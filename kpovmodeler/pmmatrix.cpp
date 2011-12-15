@@ -22,7 +22,7 @@
 #include "pmvector.h"
 #include "pmdebug.h"
 
-#include <tqtextstream.h>
+#include <textstream.h>
 
 PMMatrix::PMMatrix( )
 {

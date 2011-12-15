@@ -222,7 +222,7 @@ void dviRenderer::color_special(const TQString& _cp)
     // Take color off the stack
     if (colorStack.isEmpty())
       printErrorMsgForSpecials( i18n("Error in DVIfile '%1', page %2. Color pop command issued when the color stack is empty." ).
-				tqarg(dviFile->filename).tqarg(current_page));
+				arg(dviFile->filename).arg(current_page));
     else
       colorStack.pop();
     return;
@@ -308,7 +308,7 @@ void parse_special_argument(const TQString& strg, const char* argument_name, int
       // Maybe we should open a dialog here.
       kdError(4300) << i18n("Malformed parameter in the epsf special command.\n"
                             "Expected a float to follow %1 in %2")
-                       .tqarg(argument_name).tqarg(strg) << endl;
+                       .arg(argument_name).arg(strg) << endl;
   }
 }
 
@@ -432,7 +432,7 @@ void dviRenderer::epsf_special(const TQString& cp)
       foreGroundPainter->drawText (bbox, (int)(TQt::AlignCenter), EPSfilename_orig, -1);
     else
       foreGroundPainter->drawText (bbox, (int)(TQt::AlignCenter), 
-				i18n("File not found: \n %1").tqarg(EPSfilename_orig), -1);
+				i18n("File not found: \n %1").arg(EPSfilename_orig), -1);
     foreGroundPainter->restore();
   }
   
@@ -453,7 +453,7 @@ void dviRenderer::TPIC_flushPath_special()
 
   TQPen pen(TQt::black, (int)(penWidth_in_mInch*resolutionInDPI/1000.0 + 0.5));  // Sets the pen size in milli-inches
   foreGroundPainter->setPen(pen);
-  foreGroundPainter->tqdrawPolyline(TPIC_path, 0, number_of_elements_in_path);
+  foreGroundPainter->drawPolyline(TPIC_path, 0, number_of_elements_in_path);
   number_of_elements_in_path = 0;
 }
 
@@ -469,12 +469,12 @@ void dviRenderer::TPIC_addPath_special(const TQString& cp)
   bool ok;
   float xKoord = cp_noWhiteSpace.section(' ', 0, 0).toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( TQString("TPIC special; cannot parse first argument in 'pn %1'.").tqarg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse first argument in 'pn %1'.").arg(cp) );
     return;
   }
   float yKoord = cp_noWhiteSpace.section(' ', 1, 1).toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( TQString("TPIC special; cannot parse second argument in 'pn %1'.").tqarg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse second argument in 'pn %1'.").arg(cp) );
     return;
   }
   
@@ -502,7 +502,7 @@ void dviRenderer::TPIC_setPen_special(const TQString& cp)
   bool ok;
   penWidth_in_mInch = cp.stripWhiteSpace().toFloat(&ok);
   if (ok == false) {
-    printErrorMsgForSpecials( TQString("TPIC special; cannot parse argument in 'pn %1'.").tqarg(cp) );
+    printErrorMsgForSpecials( TQString("TPIC special; cannot parse argument in 'pn %1'.").arg(cp) );
     penWidth_in_mInch = 0.0;
     return;
   }
@@ -700,7 +700,7 @@ void dviRenderer::applicationDoSpecial(char *cp)
       foreGroundPainter->translate(-x,-y);
     } else
       printErrorMsgForSpecials( i18n("Error in DVIfile '%1', page %2. Could not interpret angle in text rotation special." ).
-				tqarg(dviFile->filename).tqarg(current_page));
+				arg(dviFile->filename).arg(current_page));
   }
 
   // The graphicx package marks the end of rotated text with this
@@ -722,6 +722,6 @@ void dviRenderer::applicationDoSpecial(char *cp)
       (strncasecmp(cp, "background", 10) == 0) )
     return;
   
-  printErrorMsgForSpecials(i18n("The special command '%1' is not implemented.").tqarg(special_command));
+  printErrorMsgForSpecials(i18n("The special command '%1' is not implemented.").arg(special_command));
   return;
 }

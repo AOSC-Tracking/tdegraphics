@@ -76,7 +76,7 @@ public:
     static const TQString& attribute()           { return *m_attribute; }
     static const TQString& attributeName()       { return *m_attributeName; }
     static const TQString& attributeValue()      { return *m_attributeValue; }
-    static const TQString& tqchildren()            { return *m_tqchildren; }
+    static const TQString& children()            { return *m_children; }
     static const TQString& none()                { return *m_none; }
 
     static const TQString& visibility()          { return *m_visibility; }
@@ -139,7 +139,7 @@ private:
     static const TQString * m_attribute;
     static const TQString * m_attributeName;
     static const TQString * m_attributeValue;
-    static const TQString * m_tqchildren;
+    static const TQString * m_children;
     static const TQString * m_none;
 
     static const TQString * m_visibility;

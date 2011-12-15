@@ -112,7 +112,7 @@ path-lines-BE-01.svg:			x
 
 Group 16: [Rendering] - 21.09.2003
 rendering-orderGr-BE-01.svg:	x
-rendering-tqshape-BE-03.svg:		x
+rendering-shape-BE-03.svg:		x
 rendering-text-BE-02.svg:		x
 
 Group 17: [Script] - 21.09.2003
@@ -120,12 +120,12 @@ script-eventDom-BE-01.svg:		x
 script-uiEvents-BE-02.svg:		x
 
 Group 18: [Shapes] - 21.09.2003
-tqshapes-circle-BE-03.svg:		x
-tqshapes-ellipse-BE-02.svg:		x
-tqshapes-line-BE-04.svg:			x
-tqshapes-polygon-BE-05.svg:		x
-tqshapes-polyline-BE-06.svg:		x
-tqshapes-rect-BE-01.svg:			x
+shapes-circle-BE-03.svg:		x
+shapes-ellipse-BE-02.svg:		x
+shapes-line-BE-04.svg:			x
+shapes-polygon-BE-05.svg:		x
+shapes-polyline-BE-06.svg:		x
+shapes-rect-BE-01.svg:			x
 
 Group 19: [Structure] - 21.09.2003
 structure-allElem-BE-09.svg:	x
@@ -146,8 +146,8 @@ style-selector-BE-02.svg:		o
 style-selector-BE-03.svg:		o
 
 Group 21: [Text] - 29.09.2003
-text-tqalignment-BE-10.svg:		x
-text-tqalignment-BE-11.svg:		x
+text-alignment-BE-10.svg:		x
+text-alignment-BE-11.svg:		x
 text-altGlyph-BE-07.svg:		o	FONTS SUPPORT MISSING
 text-decoration-BE-12.svg:		x
 text-extTref-BE-18.svg:			x

@@ -30,7 +30,7 @@
 #include <errno.h>
 
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 
 #include <kdebug.h>
 #include <kinstance.h>
@@ -55,7 +55,7 @@ extern "C"
 {
 	KDE_EXPORT int kdemain(int argc, char **argv);
 
-	static void frontendCameratqStatus(GPContext *context, const char *format, va_list args, void *data);
+	static void frontendCameraStatus(GPContext *context, const char *format, va_list args, void *data);
 	static unsigned int frontendProgressStart(
 		GPContext *context, float totalsize, const char *format,
 		va_list args, void *data
@@ -242,7 +242,7 @@ void KameraProtocol::get(const KURL &url)
 
 #undef GPHOTO_TEXT_FILE
 	// emit info message
-	infoMessage( i18n("Retrieving data from camera <b>%1</b>").tqarg(url.user()) );
+	infoMessage( i18n("Retrieving data from camera <b>%1</b>").arg(url.user()) );
 
 	// Note: There's no need to re-read directory for each get() anymore
 	gp_file_new(&m_file);
@@ -795,7 +795,7 @@ void KameraProtocol::setHost(const TQString& host, int port, const TQString& use
 		}
 
 		// register gphoto2 callback functions
-		gp_context_set_status_func(m_context, frontendCameratqStatus, this);
+		gp_context_set_status_func(m_context, frontendCameraStatus, this);
 		gp_context_set_progress_funcs(m_context, frontendProgressStart, frontendProgressUpdate, NULL, this);
 		// gp_camera_set_message_func(m_camera, ..., this)
 
@@ -881,7 +881,7 @@ void KameraProtocol::translateFileToUDS(UDSEntry &udsEntry, const CameraFileInfo
 
 	if (info.file.fields & GP_FILE_INFO_TYPE) {
 		atom.m_uds = UDS_MIME_TYPE;
-		atom.m_str = TQString::tqfromLatin1(info.file.type);
+		atom.m_str = TQString::fromLatin1(info.file.type);
 		udsEntry.append(atom);
 	}
 
@@ -1028,7 +1028,7 @@ unsigned int frontendProgressStart(
 }
 
 // this callback function is activated on every status message from gphoto2
-static void frontendCameratqStatus(GPContext * /*context*/, const char *format, va_list args, void *data)
+static void frontendCameraStatus(GPContext * /*context*/, const char *format, va_list args, void *data)
 {
 	KameraProtocol *object = (KameraProtocol*)data;
 	char *status;

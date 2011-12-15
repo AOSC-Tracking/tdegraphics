@@ -245,7 +245,7 @@ void ScanPackager::slotDecorate( KFileTreeViewItem* item )
 	 }
 
 	 /* set image size in pixels */
-	 TQString t = i18n( "%1 x %2" ).tqarg( img->width()).tqarg(img->height());
+	 TQString t = i18n( "%1 x %2" ).arg( img->width()).arg(img->height());
 	 item->setText( 1, t );
 	 kdDebug( 28000) << "Image loaded and decorated!" << endl;
       }
@@ -463,7 +463,7 @@ void ScanPackager::slotSelectDirectory( const TQString & dirString )
 {
    kdDebug(28000) << "Trying to decode directory string " << dirString << endl;
 
-   TQString searchFor = TQString::tqfromLatin1(" - ");
+   TQString searchFor = TQString::fromLatin1(" - ");
    int pos = dirString.find( searchFor );
 
    if( pos > -1 )
@@ -600,7 +600,7 @@ void ScanPackager::loadImageForItem( KFileTreeViewItem *item )
                   prevItem = subImgItem;
 
                   subImgItem->setPixmap( 0, loader->loadIcon( "editcopy", KIcon::Small ));
-                  subImgItem->setText( 0, i18n("Sub-image %1").tqarg( i ) );
+                  subImgItem->setText( 0, i18n("Sub-image %1").arg( i ) );
                   KookaImage  *subImgImg = new KookaImage( i, img );
                   subImgImg->setFileItem( newKfi );
                   newKfi->setExtraData( (void*) this, (void*) subImgImg );
@@ -853,7 +853,7 @@ void ScanPackager::slAddImage( TQImage *img, KookaImageMeta* )
    m_nextUrlToShow = lurl;
 
    TQString s;
-   /* Count amount of tqchildren of the father */
+   /* Count amount of children of the father */
    TQListViewItem *paps = curr->parent();
    if( curr->isDir() ) /* take only father if the is no directory */
       paps = curr;
@@ -861,7 +861,7 @@ void ScanPackager::slAddImage( TQImage *img, KookaImageMeta* )
    if( paps )
    {
       int childcount = paps->childCount();
-      s = i18n("%1 images").tqarg(childcount);
+      s = i18n("%1 images").arg(childcount);
       paps->setText( 1, s);
       setOpen( paps, true );
    }
@@ -1136,7 +1136,7 @@ void ScanPackager::slotDeleteItems( )
       s = i18n("Do you really want to delete this image?\nIt cannot be restored!" );
       if( item->isDir() )
       {
-	 s = i18n("Do you really want to delete the folder %1\nand all the images inside?").tqarg("");
+	 s = i18n("Do you really want to delete the folder %1\nand all the images inside?").arg("");
       }
       result = KMessageBox::warningContinueCancel(this, s, i18n( "Delete Collection Item"),
 					  KStdGuiItem::del(), "AskForDeleteFiles" );
@@ -1214,7 +1214,7 @@ TQString ScanPackager::getImgName( TQString name_on_disk )
    TQString s;
    (void) name_on_disk;
 
-   s = i18n("image %1").tqarg(img_counter++);
+   s = i18n("image %1").arg(img_counter++);
    return( s );
 }
 

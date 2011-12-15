@@ -19,7 +19,7 @@
 
 #include "pmpluginmanager.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgroupbox.h>
 #include <tqlistview.h>
 #include <tqpushbutton.h>
@@ -33,14 +33,14 @@ public:
    {
       m_info = info;
       m_enabled = info->enabled( );
-      settqStatus( );
+      setStatus( );
    }
-   void toggletqStatus( )
+   void toggleStatus( )
    {
       m_enabled = !m_enabled;
-      settqStatus( );
+      setStatus( );
    }
-   void settqStatus( )
+   void setStatus( )
    {
       if( m_enabled )
          setText( 2, i18n( "loaded" ) );
@@ -54,10 +54,10 @@ public:
 PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
    TQGroupBox* gb = new TQGroupBox( i18n( "Installed Plugins" ), this );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
 
    TQVBoxLayout* gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
@@ -77,7 +77,7 @@ PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
    hl->addWidget( m_pToggle );
    hl->addStretch( 1 );
 
-   vtqlayout->addStretch( 1 );
+   vlayout->addStretch( 1 );
 }
 
 void PMPluginSettings::displaySettings( )
@@ -122,7 +122,7 @@ void PMPluginSettings::slotToggle( )
       ( PMPluginListViewItem* ) m_pPluginsList->currentItem( );
    if( item )
    {
-      item->toggletqStatus( );
+      item->toggleStatus( );
    
       if( item->m_enabled )
          m_pToggle->setText( i18n( "Deactivate" ) );

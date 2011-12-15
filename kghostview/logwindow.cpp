@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <tqtextedit.h>
+#include <textedit.h>
 #include <tqlabel.h>
 #include <tqvbox.h>
 

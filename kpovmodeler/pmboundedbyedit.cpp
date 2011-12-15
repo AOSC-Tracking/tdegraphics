@@ -19,7 +19,7 @@
 #include "pmboundedbyedit.h"
 #include "pmboundedby.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <klocale.h>
 

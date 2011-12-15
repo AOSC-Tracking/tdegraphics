@@ -163,7 +163,7 @@ void KColorGrid::resizeEvent(TQResizeEvent *)
 }
 */
 
-TQSize KColorGrid::tqsizeHint() const
+TQSize KColorGrid::sizeHint() const
 {
   return TQSize(totalwidth, totalheight);
 }
@@ -293,14 +293,14 @@ void KColorGrid::setColor( int colNum, uint col, bool update )
   }
 
   //kdDebug(4640) << "KColorGrid::setColor - before updateCell" << endl;
-  tqrepaint((colNum%numCols())*cellsize,(colNum/numCols())*cellsize,  cellsize, cellsize);
+  repaint((colNum%numCols())*cellsize,(colNum/numCols())*cellsize,  cellsize, cellsize);
   //updateCell( colNum/numCols(), colNum%numCols(), false );
   //kdDebug(4640) << "KColorGrid::setColor - after updateCell" << endl;
 }
 
 void KColorGrid::updateCell( int row, int col, bool  )
 {
-    //kdDebug(4640) << "updateCell - before tqrepaint" << endl;
+    //kdDebug(4640) << "updateCell - before repaint" << endl;
   TQWMatrix matrix;
   TQPainter p;
   p.begin( this );
@@ -330,6 +330,6 @@ void KColorGrid::setCellSize( int s )
   totalheight = (numRows() * s) + 1;
   resize(totalwidth, totalheight);
   if ( isVisible() )
-    tqrepaint(viewRect(), false);
+    repaint(viewRect(), false);
 }
 #include "kcolorgrid.moc"

@@ -20,7 +20,7 @@
 #include "pmsolidobject.h"
 
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <klocale.h>
 
 PMSolidObjectEdit::PMSolidObjectEdit( TQWidget* parent, const char* name )

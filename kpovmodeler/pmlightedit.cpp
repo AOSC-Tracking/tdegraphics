@@ -22,7 +22,7 @@
 #include "pmlineedits.h"
 #include "pmcoloredit.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqcheckbox.h>

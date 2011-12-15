@@ -154,7 +154,7 @@ public:
     */
    TQPtrListIterator<PMRuleBase> childIterator( ) const
    {
-      return TQPtrListIterator<PMRuleBase>( m_tqchildren );
+      return TQPtrListIterator<PMRuleBase>( m_children );
    }
 protected:
    /**
@@ -170,7 +170,7 @@ protected:
    /**
     * Add all child nodes to this list.
     */
-   TQPtrList<PMRuleBase> m_tqchildren;
+   TQPtrList<PMRuleBase> m_children;
 };
 
 /**

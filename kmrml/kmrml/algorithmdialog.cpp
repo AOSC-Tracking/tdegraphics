@@ -22,7 +22,7 @@
 
 #include <tqhbox.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqscrollview.h>
 #include <tqvbox.h>
 #include <tqvgroupbox.h>
@@ -49,8 +49,8 @@ protected:
     virtual void viewportResizeEvent(TQResizeEvent* ev)
     {
       TQScrollView::viewportResizeEvent(ev);
-      m_frame->resize( kMax(m_frame->tqsizeHint().width(), ev->size().width()),
-                       kMax(m_frame->tqsizeHint().height(), ev->size().height()));
+      m_frame->resize( kMax(m_frame->sizeHint().width(), ev->size().width()),
+                       kMax(m_frame->sizeHint().height(), ev->size().height()));
     };
 
 private:
@@ -71,7 +71,7 @@ AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
     TQVBoxLayout *mainLayout = new TQVBoxLayout( box, 0, KDialog::spacingHint(),
                                                 "mainLayout");
 
-    TQHBoxLayout *collectionLayout = new TQHBoxLayout( 0L, 0, 0, "coll tqlayout");
+    TQHBoxLayout *collectionLayout = new TQHBoxLayout( 0L, 0, 0, "coll layout");
     collectionLayout->addWidget( new TQLabel( i18n("Collection: "), box ));
 
     m_collectionCombo = new CollectionCombo( box, "collection combo" );
@@ -106,7 +106,7 @@ AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
     mainLayout->activate();
     algoHLayout->move( groupBox->x() + 10, groupBox->y() - 12 );
     
-    box->setMinimumWidth( algoHLayout->tqsizeHint().width() + 
+    box->setMinimumWidth( algoHLayout->sizeHint().width() + 
                           4 * KDialog::spacingHint() );
 }
 

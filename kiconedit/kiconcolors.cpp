@@ -43,7 +43,7 @@ void KDrawColors::paintCell( TQPainter *painter, int row, int col )
   int d = spacing();
 
   qDrawShadePanel( painter, d, d, cellSize()-d, cellSize()-d,
-                tqcolorGroup(), true, 1, &brush);
+                colorGroup(), true, 1, &brush);
   if ( row * numCols() + col == selected)
      painter->drawWinFocusRect( d+1, d+1, cellSize()-(2*d)+1, cellSize()-(2*d)+1 );
 }

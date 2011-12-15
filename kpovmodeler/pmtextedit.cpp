@@ -21,7 +21,7 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqlineedit.h>
 #include <tqpushbutton.h>

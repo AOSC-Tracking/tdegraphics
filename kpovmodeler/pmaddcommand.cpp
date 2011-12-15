@@ -27,7 +27,7 @@
 #include <klocale.h>
 
 PMAddCommand::PMAddCommand( PMObject* obj, PMObject* parent, PMObject* after )
-      : PMCommand( i18n( "Add New %1" ).tqarg( obj->description( ) ) )
+      : PMCommand( i18n( "Add New %1" ).arg( obj->description( ) ) )
 {
    m_objects.append( obj );
    m_pParent = parent;

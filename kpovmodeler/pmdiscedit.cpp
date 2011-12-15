@@ -21,7 +21,7 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
 #include <klocale.h>
@@ -37,7 +37,7 @@ void PMDiscEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
    TQGridLayout* gl;
 
    m_pCenter = new PMVectorEdit( "x", "y", "z", this );
@@ -53,18 +53,18 @@ void PMDiscEdit::createTopWidgets( )
    gl->addWidget( new TQLabel( i18n( "Normal:" ), this ), 1, 0 );
    gl->addWidget( m_pNormal, 1, 1 );
    
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   gl = new TQGridLayout( tqlayout, 2, 2 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( layout, 2, 2 );
    gl->addWidget( new TQLabel( i18n( "Radius:" ), this ), 0, 0 );
    gl->addWidget( m_pRadius, 0, 1 );
    gl->addWidget( new TQLabel( i18n( "Hole radius:" ), this ), 1, 0 );
    gl->addWidget( m_pHRadius, 1, 1 );
-   tqlayout->addStretch( 1 );
+   layout->addStretch( 1 );
 
    TQPushButton* nb = new TQPushButton( i18n( "Normalize" ), this );
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( nb );
-   tqlayout->addStretch( 1 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( nb );
+   layout->addStretch( 1 );
 
    connect( m_pCenter, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pNormal, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

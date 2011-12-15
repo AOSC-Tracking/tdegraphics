@@ -20,7 +20,7 @@
 #include "pmtriangle.h"
 #include "pmvectoredit.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqpushbutton.h>
@@ -55,21 +55,21 @@ void PMTriangleEdit::createTopWidgets( )
    for( i = 0; i < 3; i++ )
    {
       m_pPoint[i] = new PMVectorEdit( "x", "y", "z", this );
-      gl->addWidget( new TQLabel( i18n( "Point %1:" ).tqarg( i+1 ), this ),
+      gl->addWidget( new TQLabel( i18n( "Point %1:" ).arg( i+1 ), this ),
                      i * 3, 0 );
       gl->addWidget( m_pPoint[i], i * 3, 1 );
       connect( m_pPoint[i], TQT_SIGNAL( dataChanged( ) ),
                TQT_SIGNAL( dataChanged( ) ) );
 
       m_pNormal[i] = new PMVectorEdit( "x", "y", "z", this );
-      m_pNormalLabel[i] = new TQLabel( i18n( "Normal %1:" ).tqarg( i+1 ), this );
+      m_pNormalLabel[i] = new TQLabel( i18n( "Normal %1:" ).arg( i+1 ), this );
       gl->addWidget( m_pNormalLabel[i], i * 3 + 1, 0 );
       gl->addWidget( m_pNormal[i], i * 3 + 1, 1 );
       connect( m_pNormal[i], TQT_SIGNAL( dataChanged( ) ),
                TQT_SIGNAL( dataChanged( ) ) );
 
       m_pUVVector[i] = new PMVectorEdit( "u", "v", this );
-      m_pUVVectorLabel[i] = new TQLabel( i18n( "UV vector %1:" ).tqarg( i+1 ), this );
+      m_pUVVectorLabel[i] = new TQLabel( i18n( "UV vector %1:" ).arg( i+1 ), this );
       gl->addWidget( m_pUVVectorLabel[i], i * 3 + 2,  0 );
       gl->addWidget( m_pUVVector[i], i * 3 + 2, 1 );
       connect( m_pUVVector[i], TQT_SIGNAL( dataChanged( ) ),

@@ -252,7 +252,7 @@ KGVShell::openStdin()
     if( _tmpFile->status() != 0 ) {
 	KMessageBox::error( this,
 		i18n( "Could not create temporary file: %1" )
-		.tqarg( strerror( _tmpFile->status() ) ) );
+		.arg( strerror( _tmpFile->status() ) ) );
 	return;
     }
 
@@ -269,7 +269,7 @@ KGVShell::openStdin()
     if( read != 0 ) {
 	KMessageBox::error( this,
 		i18n( "Could not open standard input stream: %1" )
-		.tqarg( strerror( errno ) ) );
+		.arg( strerror( errno ) ) );
 	return;
     }
 
@@ -309,7 +309,7 @@ void KGVShell::slotMaximize()
 
 void KGVShell::slotResize()
 {
-    resize( m_gvpart->pageView()->tqsizeHint().width(), height() );
+    resize( m_gvpart->pageView()->sizeHint().width(), height() );
 }
 
 void KGVShell::setFullScreen( bool useFullScreen )

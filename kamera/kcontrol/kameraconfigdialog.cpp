@@ -20,7 +20,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 */
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgrid.h>
 #include <tqlabel.h>
 #include <tqvgroupbox.h>
@@ -221,14 +221,14 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 		return;
 	}
 
-	// Append all this widgets tqchildren
+	// Append all this widgets children
 	for(int i = 0; i < gp_widget_count_children(widget); ++i) {
 		CameraWidget *widget_child;
 		gp_widget_get_child(widget, i, &widget_child);
 		appendWidget(newParent, widget_child);
 	}
 	
-	// Things that must be done after all tqchildren were added
+	// Things that must be done after all children were added
 /*
 	switch (widget_type) {
 	case GP_WIDGET_SECTION:

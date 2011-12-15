@@ -19,7 +19,7 @@
 #include "pmlightgroupedit.h"
 #include "pmlightgroup.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <klocale.h>
@@ -34,12 +34,12 @@ void PMLightGroupEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
    m_pGlobalLights = new TQCheckBox( i18n( "Global lights" ), this );
 
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( m_pGlobalLights );
-   tqlayout->addStretch( 1 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( m_pGlobalLights );
+   layout->addStretch( 1 );
 
    connect( m_pGlobalLights, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }

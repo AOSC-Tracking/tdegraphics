@@ -21,7 +21,7 @@
 #include "pmvectoredit.h"
 #include "pmlineedits.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <klocale.h>
 #include <tqcheckbox.h>
@@ -36,7 +36,7 @@ void PMConeEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
    TQGridLayout* gl;
 
    m_pEnd1 = new PMVectorEdit( "x", "y", "z", this );
@@ -51,13 +51,13 @@ void PMConeEdit::createTopWidgets( )
    gl->addWidget( new TQLabel( i18n( "End 2:" ), this ), 1, 0 );
    gl->addWidget( m_pEnd2, 1, 1 );
 
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   gl = new TQGridLayout( tqlayout, 2, 2 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( layout, 2, 2 );
    gl->addWidget( new TQLabel( i18n( "Radius 1:" ), this ), 0, 0 );
    gl->addWidget( m_pRadius1, 0, 1 );
    gl->addWidget( new TQLabel( i18n( "Radius 2:" ), this ), 1, 0 );
    gl->addWidget( m_pRadius2, 1, 1 );
-   tqlayout->addStretch( 1 );
+   layout->addStretch( 1 );
 
    topLayout( )->addWidget( m_pOpen );
 

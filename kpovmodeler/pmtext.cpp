@@ -89,11 +89,11 @@ void PMText::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMText::tqmetaObject( ) const
+PMMetaObject* PMText::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Text", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Text", Base::metaObject( ),
                                         createNewText );
       s_pMetaObject->addProperty(
          new PMTextProperty( "font", &PMText::setFont, &PMText::font ) );

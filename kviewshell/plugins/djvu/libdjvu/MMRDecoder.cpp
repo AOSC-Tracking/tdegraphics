@@ -933,16 +933,16 @@ MMRDecoder::decode(GP<ByteStream> gbs)
       // Insert blocks into JB2Image
       for (int b=0; b<blocksperline; b++)
 	{
-	  JB2Shape tqshape;
-	  tqshape.bits = blocks[b];
-	  if (tqshape.bits) 
+	  JB2Shape shape;
+	  shape.bits = blocks[b];
+	  if (shape.bits) 
 	    {
-	      tqshape.parent = -1;
-	      tqshape.bits->compress();
+	      shape.parent = -1;
+	      shape.bits->compress();
 	      JB2Blit blit;
 	      blit.left = b*blocksize;
 	      blit.bottom = line+1;
-	      blit.tqshapeno = jimg->add_tqshape(tqshape);
+	      blit.shapeno = jimg->add_shape(shape);
 	      jimg->add_blit(blit);
 	    }
 	}

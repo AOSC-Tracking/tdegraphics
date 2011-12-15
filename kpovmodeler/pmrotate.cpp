@@ -66,11 +66,11 @@ void PMRotate::readAttributes( const PMXMLHelper& h )
    m_rotate = h.vectorAttribute( "value", rotateDefault );
 }
 
-PMMetaObject* PMRotate::tqmetaObject( ) const
+PMMetaObject* PMRotate::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Rotate", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Rotate", Base::metaObject( ),
                                         createNewRotate );
       s_pMetaObject->addProperty(
          new PMRotateProperty( "rotation", &PMRotate::setRotation, &PMRotate::rotation ) );

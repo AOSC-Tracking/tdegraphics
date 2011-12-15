@@ -153,13 +153,13 @@ MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
 
     m_algoButton = new TQPushButton( TQString(), m_panel );
     m_algoButton->setPixmap( SmallIcon("configure") );
-    m_algoButton->setFixedSize( m_algoButton->tqsizeHint() );
+    m_algoButton->setFixedSize( m_algoButton->sizeHint() );
     connect( m_algoButton, TQT_SIGNAL( clicked() ),
              TQT_SLOT( slotConfigureAlgorithm() ));
     TQToolTip::add( m_algoButton, i18n("Configure algorithm") );
 
     TQWidget *spacer = new TQWidget( m_panel );
-    spacer->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::MinimumExpanding,
+    spacer->setSizePolicy( TQSizePolicy( TQSizePolicy::MinimumExpanding,
                                         TQSizePolicy::Minimum ) );
 
     int resultSize = config->readNumEntry( "Result-size", 20 );
@@ -172,7 +172,7 @@ MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
 
     m_startButton = new TQPushButton( TQString(), tmp );
     connect( m_startButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotStartClicked() ));
-    settqStatus( NeedCollection );
+    setStatus( NeedCollection );
 
     setWidget( box );
 
@@ -206,7 +206,7 @@ void MrmlPart::initCollections( const TQDomElement& elem )
         KMessageBox::information( widget(),
                                i18n("There is no image collection available\n"
                                     "at %1.\n"), i18n("No Image Collection"));
-        settqStatus( NeedCollection );
+        setStatus( NeedCollection );
     }
     else
         m_collectionCombo->updateGeometry(); // adjust the entire grid
@@ -229,7 +229,7 @@ bool MrmlPart::openURL( const KURL& url )
 
     m_url = url;
     TQString host = url.host().isEmpty() ?
-                   TQString::tqfromLatin1("localhost") : url.host();
+                   TQString::fromLatin1("localhost") : url.host();
 
     m_hostCombo->setCurrentItem( host );
 
@@ -285,8 +285,8 @@ bool MrmlPart::openURL( const KURL& url )
                  == KMessageBox::Yes )
             {
                 KApplication::tdeinitExec( "kcmshell",
-                                           TQString::tqfromLatin1("kcmkmrml"));
-                settqStatus( NeedCollection );
+                                           TQString::fromLatin1("kcmkmrml"));
+                setStatus( NeedCollection );
                 return false;
             }
         }
@@ -308,9 +308,9 @@ void MrmlPart::contactServer( const KURL& url )
     m_job->addMetaData( MrmlShared::kio_task(), MrmlShared::kio_initialize() );
 
     TQString host = url.host().isEmpty() ?
-                   TQString::tqfromLatin1("localhost") : url.host();
+                   TQString::fromLatin1("localhost") : url.host();
 
-    slotSetStatusBar( i18n("Connecting to indexing server at %1...").tqarg( host ));
+    slotSetStatusBar( i18n("Connecting to indexing server at %1...").arg( host ));
 }
 
 //
@@ -376,7 +376,7 @@ bool MrmlPart::closeURL()
         m_job = 0L;
     }
 
-    settqStatus( NeedCollection );
+    setStatus( NeedCollection );
 
     return true;
 }
@@ -400,7 +400,7 @@ KIO::TransferJob * MrmlPart::transferJob( const KURL& url )
 
     emit started( job );
     emit setWindowCaption( url.prettyURL() );
-    settqStatus( InProgress );
+    setStatus( InProgress );
 
     return job;
 }
@@ -423,7 +423,7 @@ void MrmlPart::slotResult( KIO::Job *job )
     bool auto_random = m_view->isEmpty() && m_queryList.isEmpty();
     m_random->setChecked( auto_random );
     m_random->setEnabled( !auto_random );
-    settqStatus( job->error() ? NeedCollection : CanSearch );
+    setStatus( job->error() ? NeedCollection : CanSearch );
 
     if ( !job->error() && !m_queryList.isEmpty() ) {
         // we have a connection and we got a list of relevant URLs to query for
@@ -495,7 +495,7 @@ void MrmlPart::parseMrml( TQDomDocument& doc )
                 else if ( tagName == "error" ) {
                     KMessageBox::information( widget(),
                                        i18n("Server returned error:\n%1\n")
-                                       .tqarg( elem.attribute( "message" )),
+                                       .arg( elem.attribute( "message" )),
                                               i18n("Server Error") );
                 }
 
@@ -776,7 +776,7 @@ void MrmlPart::slotHostComboActivated( const TQString& host )
     openURL( settings.getUrl() );
 }
 
-void MrmlPart::settqStatus( tqStatus status )
+void MrmlPart::setStatus( Status status )
 {
     switch ( status )
     {

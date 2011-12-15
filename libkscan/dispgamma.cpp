@@ -35,7 +35,7 @@ DispGamma::~DispGamma()
 
 void DispGamma::resizeEvent (TQResizeEvent* )
 {
-    tqrepaint();
+    repaint();
 }
 
 void DispGamma::paintEvent( TQPaintEvent *ev )
@@ -49,11 +49,11 @@ void DispGamma::paintEvent( TQPaintEvent *ev )
 
     p.setClipRect( ev->rect());
 
-    p.setPen( tqcolorGroup().highlight() );
-    p.setBrush( tqcolorGroup().base() );
+    p.setPen( colorGroup().highlight() );
+    p.setBrush( colorGroup().base() );
     // Backgrond
     p.drawRect( 0,0, w, 256 );
-    p.setPen( TQPen(tqcolorGroup().midlight(), 1, DotLine));
+    p.setPen( TQPen(colorGroup().midlight(), 1, DotLine));
     // horizontal Grid
     for( int l = 1; l < 5; l++ )
             p.drawLine( 1, l*51, 255, l*51 );
@@ -63,7 +63,7 @@ void DispGamma::paintEvent( TQPaintEvent *ev )
             p.drawLine( l*51, 2, l*51, 255 );
 
     // draw gamma-Line
-    p.setPen( tqcolorGroup().highlight() );
+    p.setPen( colorGroup().highlight() );
     p.moveTo( 1, vals->at(1) );
     for( int i = 2; i < w-1; i++ )
     {
@@ -73,7 +73,7 @@ void DispGamma::paintEvent( TQPaintEvent *ev )
 }
 
 
-TQSize DispGamma::tqsizeHint( void )
+TQSize DispGamma::sizeHint( void )
 {
     return TQSize( 256 + 2*margin,256 + 2 * margin );
 }

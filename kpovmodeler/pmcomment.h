@@ -62,7 +62,7 @@ public:
    virtual PMObject* copy( ) const { return new PMComment( *this ); }
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

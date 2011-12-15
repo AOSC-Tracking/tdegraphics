@@ -356,7 +356,7 @@ KADMOS_ERROR CRep::SetImage(TQImage *Image)
     m_RepData.image.width   = Image->width();
     m_RepData.image.height  = Image->height();
     m_RepData.image.bitsperpixel = Image->depth();
-    m_RepData.image.tqalignment = 1;
+    m_RepData.image.alignment = 1;
     m_RepData.image.fillorder = FILLORDER_MSB2LSB;
     // color
     if( Image->depth() == 1 || (Image->numColors()==2 && Image->depth() == 8) )

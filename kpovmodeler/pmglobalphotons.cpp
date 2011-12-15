@@ -101,11 +101,11 @@ PMGlobalPhotons::~PMGlobalPhotons( )
 {
 }
 
-PMMetaObject* PMGlobalPhotons::tqmetaObject( ) const
+PMMetaObject* PMGlobalPhotons::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "GlobalPhotons", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "GlobalPhotons", Base::metaObject( ),
                                         createNewGlobalPhotons );
 
       PMNumberProperty* p1 = new PMNumberProperty( "numberType",

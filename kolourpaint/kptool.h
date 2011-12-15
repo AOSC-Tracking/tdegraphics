@@ -341,7 +341,7 @@ protected:
 
 
     /*
-     * User Notifications (tqStatus Bar)
+     * User Notifications (Status Bar)
      */
 
 public:

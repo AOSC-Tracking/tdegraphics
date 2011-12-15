@@ -37,7 +37,7 @@
 #include "pmheightfield.h"
 #include "pmtext.h"
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcheckbox.h>
 #include <tqgroupbox.h>
 #include <tqlabel.h>
@@ -47,188 +47,188 @@
 PMObjectSettings::PMObjectSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   TQHBoxLayout* htqlayout;
-   TQVBoxLayout* vtqlayout;
+   TQHBoxLayout* hlayout;
+   TQVBoxLayout* vlayout;
    TQVBoxLayout* gvl;
    TQGridLayout* grid;
    TQGroupBox* gb;
 
-   vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
    gb = new TQGroupBox( i18n( "Subdivisions" ), this );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    grid = new TQGridLayout( gvl, 13, 3 );
 
    grid->addWidget( new TQLabel( i18n( "Sphere:" ), gb ), 0, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 0, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 0, 2 );
    grid->addWidget( new TQLabel( "u", gb ), 0, 1 );
    m_pSphereUSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSphereUSteps );
+   hlayout->addWidget( m_pSphereUSteps );
    m_pSphereUSteps->setValidation( true, 2, true, 32 );
-   htqlayout->addWidget( new TQLabel( "v", gb ) );
+   hlayout->addWidget( new TQLabel( "v", gb ) );
    m_pSphereVSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSphereVSteps );
+   hlayout->addWidget( m_pSphereVSteps );
    m_pSphereVSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Cylinder:" ), gb ), 1, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 1, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 1, 2 );
    m_pCylinderSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pCylinderSteps );
+   hlayout->addWidget( m_pCylinderSteps );
    m_pCylinderSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Cone:" ), gb ), 2, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 2, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 2, 2 );
    m_pConeSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pConeSteps );
+   hlayout->addWidget( m_pConeSteps );
    m_pConeSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Torus:" ), gb ), 3, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 3, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 3, 2 );
    grid->addWidget( new TQLabel( "u", gb ), 3, 1 );
    m_pTorusUSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pTorusUSteps );
+   hlayout->addWidget( m_pTorusUSteps );
    m_pTorusUSteps->setValidation( true, 2, true, 16 );
-   htqlayout->addWidget( new TQLabel( "v", gb ) );
+   hlayout->addWidget( new TQLabel( "v", gb ) );
    m_pTorusVSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pTorusVSteps );
+   hlayout->addWidget( m_pTorusVSteps );
    m_pTorusVSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Disc:" ), gb ), 4, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 4, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 4, 2 );
    m_pDiscSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pDiscSteps );
+   hlayout->addWidget( m_pDiscSteps );
    m_pDiscSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Blob sphere:" ), gb ), 5, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 5, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 5, 2 );
    grid->addWidget( new TQLabel( "u", gb ), 5, 1 );
    m_pBlobSphereUSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pBlobSphereUSteps );
+   hlayout->addWidget( m_pBlobSphereUSteps );
    m_pBlobSphereUSteps->setValidation( true, 2, true, 32 );
-   htqlayout->addWidget( new TQLabel( "v", gb ) );
+   hlayout->addWidget( new TQLabel( "v", gb ) );
    m_pBlobSphereVSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pBlobSphereVSteps );
+   hlayout->addWidget( m_pBlobSphereVSteps );
    m_pBlobSphereVSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Blob cylinder:" ), gb ), 6, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 6, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 6, 2 );
    grid->addWidget( new TQLabel( "u", gb ), 6, 1 );
    m_pBlobCylinderUSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pBlobCylinderUSteps );
+   hlayout->addWidget( m_pBlobCylinderUSteps );
    m_pBlobCylinderUSteps->setValidation( true, 2, true, 32 );
-   htqlayout->addWidget( new TQLabel( "v", gb ) );
+   hlayout->addWidget( new TQLabel( "v", gb ) );
    m_pBlobCylinderVSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pBlobCylinderVSteps );
+   hlayout->addWidget( m_pBlobCylinderVSteps );
    m_pBlobCylinderVSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Lathe:" ), gb ), 7, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 7, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 7, 2 );
    grid->addWidget( new TQLabel( "u", gb ), 7, 1 );
    m_pLatheUSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pLatheUSteps );
+   hlayout->addWidget( m_pLatheUSteps );
    m_pLatheUSteps->setValidation( true, 1, true, 16 );
-   htqlayout->addWidget( new TQLabel( "v", gb ) );
+   hlayout->addWidget( new TQLabel( "v", gb ) );
    m_pLatheRSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pLatheRSteps );
+   hlayout->addWidget( m_pLatheRSteps );
    m_pLatheRSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Surface of revolution:" ), gb ), 8, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 8, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 8, 2 );
    grid->addWidget( new TQLabel( "u", gb ), 8, 1 );
    m_pSorUSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSorUSteps );
+   hlayout->addWidget( m_pSorUSteps );
    m_pSorUSteps->setValidation( true, 1, true, 16 );
-   htqlayout->addWidget( new TQLabel( "v", gb ) );
+   hlayout->addWidget( new TQLabel( "v", gb ) );
    m_pSorRSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSorRSteps );
+   hlayout->addWidget( m_pSorRSteps );
    m_pSorRSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Prism:" ), gb ), 9, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 9, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 9, 2 );
    m_pPrismSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pPrismSteps );
+   hlayout->addWidget( m_pPrismSteps );
    m_pPrismSteps->setValidation( true, 1, true, 16 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Superquadric ellipsoid:" ), gb ), 10, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 10, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 10, 2 );
    grid->addWidget( new TQLabel( "u", gb ), 10, 1 );
    m_pSqeUSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSqeUSteps );
+   hlayout->addWidget( m_pSqeUSteps );
    m_pSqeUSteps->setValidation( true, 2, true, 8 );
-   htqlayout->addWidget( new TQLabel( "v", gb ) );
+   hlayout->addWidget( new TQLabel( "v", gb ) );
    m_pSqeVSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSqeVSteps );
+   hlayout->addWidget( m_pSqeVSteps );
    m_pSqeVSteps->setValidation( true, 2, true, 8 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Sphere sweep:" ), gb ), 11, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 11, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 11, 2 );
    grid->addWidget( new TQLabel( "r", gb ), 11, 1 );
    m_pSphereSweepRSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSphereSweepRSteps );
+   hlayout->addWidget( m_pSphereSweepRSteps );
    m_pSphereSweepRSteps->setValidation( true, 4, true, 64 );
-   htqlayout->addWidget( new TQLabel( "s", gb ) );
+   hlayout->addWidget( new TQLabel( "s", gb ) );
    m_pSphereSweepSSteps = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pSphereSweepSSteps );
+   hlayout->addWidget( m_pSphereSweepSSteps );
    m_pSphereSweepSSteps->setValidation( true, 1, true, 16 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    grid->addWidget( new TQLabel( i18n( "Heightfield:" ), gb ), 12, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 12, 2 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 12, 2 );
    m_pHeightFieldVariance = new PMIntEdit( gb );
-   htqlayout->addWidget( m_pHeightFieldVariance );
+   hlayout->addWidget( m_pHeightFieldVariance );
    m_pHeightFieldVariance->setValidation( true, 1, true, 16 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Sizes" ), this );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
 
    grid = new TQGridLayout( gvl, 1, 2 );
 
    grid->addWidget( new TQLabel( i18n( "Plane:" ), gb ), 0, 0 );
-   htqlayout = new TQHBoxLayout( );
-   grid->addLayout( htqlayout, 0, 1 );
+   hlayout = new TQHBoxLayout( );
+   grid->addLayout( hlayout, 0, 1 );
    m_pPlaneSize = new PMFloatEdit( gb );
-   htqlayout->addWidget( m_pPlaneSize );
+   hlayout->addWidget( m_pPlaneSize );
    m_pPlaneSize->setValidation( true, 0.1, false, 0.0 );
-   htqlayout->addStretch( 1 );
+   hlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Camera Views" ), this );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
 
    m_pHighDetailCameraViews = new TQCheckBox( i18n( "High detail for enhanced projections" ), gb );
    gvl->addWidget( m_pHighDetailCameraViews );
 
-   vtqlayout->addStretch( 1 );
+   vlayout->addStretch( 1 );
 }
 
 void PMObjectSettings::displaySettings( )
@@ -425,125 +425,125 @@ bool PMObjectSettings::validateData( )
 
 void PMObjectSettings::applySettings( )
 {
-   bool tqrepaint = false;
+   bool repaint = false;
 
    PMRenderManager* rm = PMRenderManager::theManager( );
    if( rm->highDetailCameraViews( ) != m_pHighDetailCameraViews->isChecked( ) )
    {
       rm->setHighDetailCameraViews( m_pHighDetailCameraViews->isChecked( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphere::uSteps( ) != m_pSphereUSteps->value( ) )
    {
       PMSphere::setUSteps( m_pSphereUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphere::vSteps( ) != m_pSphereVSteps->value( ) )
    {
       PMSphere::setVSteps( m_pSphereVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMCylinder::steps( ) != m_pCylinderSteps->value( ) )
    {
       PMCylinder::setSteps( m_pCylinderSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMCone::steps( ) != m_pConeSteps->value( ) )
    {
       PMCone::setSteps( m_pConeSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMTorus::uSteps( ) != m_pTorusUSteps->value( ) )
    {
       PMTorus::setUSteps( m_pTorusUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMTorus::vSteps( ) != m_pTorusVSteps->value( ) )
    {
       PMTorus::setVSteps( m_pTorusVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMDisc::steps( ) != m_pDiscSteps->value( ) )
    {
       PMDisc::setSteps( m_pDiscSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobSphere::uSteps( ) != m_pBlobSphereUSteps->value( ) )
    {
       PMBlobSphere::setUSteps( m_pBlobSphereUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobSphere::vSteps( ) != m_pBlobSphereVSteps->value( ) )
    {
       PMBlobSphere::setVSteps( m_pBlobSphereVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobCylinder::uSteps( ) != m_pBlobCylinderUSteps->value( ) )
    {
       PMBlobCylinder::setUSteps( m_pBlobCylinderUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobCylinder::vSteps( ) != m_pBlobCylinderVSteps->value( ) )
    {
       PMBlobCylinder::setVSteps( m_pBlobCylinderVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMPlane::planeSize( ) != m_pPlaneSize->value( ) )
    {
       PMPlane::setPlaneSize( m_pPlaneSize->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMLathe::sSteps( ) != m_pLatheUSteps->value( ) )
    {
       PMLathe::setSSteps( m_pLatheUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMLathe::rSteps( ) != m_pLatheRSteps->value( ) )
    {
       PMLathe::setRSteps( m_pLatheRSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSurfaceOfRevolution::sSteps( ) != m_pSorUSteps->value( ) )
    {
       PMSurfaceOfRevolution::setSSteps( m_pSorUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSurfaceOfRevolution::rSteps( ) != m_pSorRSteps->value( ) )
    {
       PMSurfaceOfRevolution::setRSteps( m_pSorRSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMPrism::sSteps( ) != m_pPrismSteps->value( ) )
    {
       PMPrism::setSSteps( m_pPrismSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSuperquadricEllipsoid::uSteps( ) != m_pSqeUSteps->value( ) )
    {
       PMSuperquadricEllipsoid::setUSteps( m_pSqeUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSuperquadricEllipsoid::vSteps( ) != m_pSqeVSteps->value( ) )
    {
       PMSuperquadricEllipsoid::setVSteps( m_pSqeVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphereSweep::rSteps( ) != m_pSphereSweepRSteps->value( ) )
    {
       PMSphereSweep::setRSteps( m_pSphereSweepRSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphereSweep::sSteps( ) != m_pSphereSweepSSteps->value( ) )
    {
       PMSphereSweep::setSSteps( m_pSphereSweepSSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMHeightField::variance( ) != m_pHeightFieldVariance->value( ) )
    {
       PMHeightField::setVariance( m_pHeightFieldVariance->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
-   if( tqrepaint )
+   if( repaint )
       emit repaintViews( );
 }
 

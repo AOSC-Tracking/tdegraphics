@@ -19,7 +19,7 @@
 
 #include <tqframe.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqdatetime.h>
 #include <tqregexp.h>
 
@@ -90,7 +90,7 @@ namespace {
 		    "(?:(\\+|\\-)(\\d\\d)\'?(\\d\\d)\'?)?"
 		    "\\)" );
 	if ( exp.exactMatch( dateStr ) ) {
-	    TQStringList list = exp.tqcapturedTexts();
+	    TQStringList list = exp.capturedTexts();
 	    TQStringList::iterator iter = list.begin();
 	    ++iter; // whole string!
 #undef GET

@@ -220,7 +220,7 @@ void DjVuMultiPage::print()
   printer->addDialogPage( conversionOptions );
   
   // initialize the printer using the print dialog
-  if ( printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
+  if ( printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1))) ) {    
     // Now do the printing. 
     TQValueList<int> pageList = printer->pageList();
     if (pageList.isEmpty()) 
@@ -334,7 +334,7 @@ void DjVuMultiPage::slotSave()
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
-    int r = KMessageBox::warningContinueCancel(parentWdg, i18n("The file %1\nalready exists. Do you want to overwrite it?").tqarg(fileName),
+    int r = KMessageBox::warningContinueCancel(parentWdg, i18n("The file %1\nalready exists. Do you want to overwrite it?").arg(fileName),
 					       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -345,7 +345,7 @@ void DjVuMultiPage::slotSave()
   /*
   if (!djvuRenderer.save(fileName) == false)
     KMessageBox::error( parentWdg,
-			i18n("<qt><strong>File error.</strong> Unable to write to the specified file '%1'. The document is <strong>not</strong> saved.</qt>").tqarg(fileName),
+			i18n("<qt><strong>File error.</strong> Unable to write to the specified file '%1'. The document is <strong>not</strong> saved.</qt>").arg(fileName),
 			i18n("File Error"));
   */
   

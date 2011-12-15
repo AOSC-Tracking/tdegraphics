@@ -43,11 +43,11 @@ PMDensity::~PMDensity( )
 {
 }
 
-PMMetaObject* PMDensity::tqmetaObject( ) const
+PMMetaObject* PMDensity::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Density", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Density", Base::metaObject( ),
                                         createNewDensity );
    }
    return s_pMetaObject;

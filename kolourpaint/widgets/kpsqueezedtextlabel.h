@@ -43,7 +43,7 @@ public:
     kpSqueezedTextLabel (TQWidget *parent, const char *name = 0);
     kpSqueezedTextLabel (const TQString &text, TQWidget *parent, const char *name = 0);
 
-    virtual TQSize tqminimumSizeHint () const;
+    virtual TQSize minimumSizeHint () const;
 
     // TODO: maybe text() should return the full text?
     TQString fullText () const;

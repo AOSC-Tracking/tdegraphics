@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpushbutton.h>
 #include <tqspinbox.h>
 #include <tqtooltip.h>
@@ -53,7 +53,7 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
 		this, TQT_SLOT(slRevertValue()));
 
        TQToolTip::add( m_stdButt,
-		      i18n( "Revert value back to its standard value %1" ).tqarg( stdValue ));
+		      i18n( "Revert value back to its standard value %1" ).arg( stdValue ));
        hb->addWidget( m_stdButt, 0 );
        hb->addSpacing( 4 );
     }
@@ -82,7 +82,7 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
     /* set Value 0 to the widget */
     slider->setValue( (int) min -1 );
 
-    /* Add to tqlayout widget and activate */
+    /* Add to layout widget and activate */
     hb->addWidget( slider, 36 );
     hb->addSpacing( 4 );
     hb->addWidget( m_spin, 0 );

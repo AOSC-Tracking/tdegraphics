@@ -138,7 +138,7 @@
                         </widget>
                         <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>tqlayout5</cstring>
+                                <cstring>layout5</cstring>
                             </property>
                             <hbox>
                                 <property name="name">
@@ -154,7 +154,7 @@
                                     <property name="sizeType">
                                         <enum>Fixed</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>16</width>
                                             <height>20</height>
@@ -196,7 +196,7 @@
                                     <property name="sizeType">
                                         <enum>Expanding</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>30</width>
                                             <height>20</height>
@@ -215,7 +215,7 @@
                         </widget>
                         <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>tqlayout2</cstring>
+                                <cstring>layout2</cstring>
                             </property>
                             <grid>
                                 <property name="name">
@@ -234,7 +234,7 @@
                                     <property name="sizeType">
                                         <enum>Expanding</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>48</width>
                                             <height>21</height>
@@ -262,7 +262,7 @@
                                     <property name="sizeType">
                                         <enum>Fixed</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>16</width>
                                             <height>20</height>
@@ -290,7 +290,7 @@
                                     <property name="sizeType">
                                         <enum>Expanding</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>48</width>
                                             <height>21</height>
@@ -318,7 +318,7 @@
                                     <property name="sizeType">
                                         <enum>Fixed</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>16</width>
                                             <height>20</height>
@@ -348,7 +348,7 @@
                         </widget>
                         <widget class="TQLayoutWidget">
                             <property name="name">
-                                <cstring>tqlayout5</cstring>
+                                <cstring>layout5</cstring>
                             </property>
                             <grid>
                                 <property name="name">
@@ -375,7 +375,7 @@
                                     <property name="sizeType">
                                         <enum>Expanding</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>48</width>
                                             <height>21</height>
@@ -392,7 +392,7 @@
                                     <property name="sizeType">
                                         <enum>Fixed</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>16</width>
                                             <height>20</height>
@@ -409,7 +409,7 @@
                                     <property name="sizeType">
                                         <enum>Fixed</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>16</width>
                                             <height>20</height>
@@ -426,7 +426,7 @@
                                     <property name="sizeType">
                                         <enum>Expanding</enum>
                                     </property>
-                                    <property name="tqsizeHint">
+                                    <property name="sizeHint">
                                         <size>
                                             <width>48</width>
                                             <height>21</height>

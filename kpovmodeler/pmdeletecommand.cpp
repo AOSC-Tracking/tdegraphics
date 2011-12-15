@@ -27,7 +27,7 @@
 #include <tqptrdict.h>
 
 PMDeleteCommand::PMDeleteCommand( PMObject* obj )
-      : PMCommand( i18n( "Delete %1" ).tqarg( obj->name( ) ) )
+      : PMCommand( i18n( "Delete %1" ).arg( obj->name( ) ) )
 {
    // the scene can not be deleted!
    if( obj->parent( ) )
@@ -256,7 +256,7 @@ int PMDeleteCommand::errorFlags( PMPart* )
       {
          m_errors.prepend( i18n( "The declare \"%1\" can't be removed "
                                  "because of some remaining links." )
-                           .tqarg( decl->id( ) ) );
+                           .arg( decl->id( ) ) );
          
          PMDeleteInfo* tmp = info;
          info = m_infoList.prev( );

@@ -72,7 +72,7 @@ void PMSerializer::printError( const TQString& msg )
    else if( m_errors == s_maxErrors )
    {
       m_messages += PMMessage( i18n( "Maximum of %1 errors reached." )
-                    .tqarg( s_maxErrors ) );
+                    .arg( s_maxErrors ) );
       m_errors++;
    }
 }
@@ -87,7 +87,7 @@ void PMSerializer::printWarning( const TQString& msg )
    else if( m_warnings == s_maxWarnings )
    {
       m_messages += PMMessage( i18n( "Maximum of %1 warnings reached." )
-                    .tqarg( s_maxWarnings ) );
+                    .arg( s_maxWarnings ) );
       m_warnings++;
    }
 }

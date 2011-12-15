@@ -394,7 +394,7 @@ void PMRenderManager::renderTask( )
 
 void PMRenderManager::renderObject( PMObject* objectToRender )
 {
-   bool tqchildren = false;
+   bool children = false;
    PMGraphicalObject* go = 0;
 
    m_objectToRenderStack.append( objectToRender );
@@ -426,8 +426,8 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
    {
       PMObject* obj = 0;
 
-      tqchildren = objectToRender->lastChild( ) || objectToRender->linkedObject( );
-      if( tqchildren )
+      children = objectToRender->lastChild( ) || objectToRender->linkedObject( );
+      if( children )
       {
          bool stop;
 
@@ -438,7 +438,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
             matrix = new PMMatrix( PMMatrix::modelviewMatrix( ) );
          m_matrixStack.push( matrix );
 
-         // render the tqchildren and the linked object
+         // render the children and the linked object
          obj = objectToRender->lastChild( );
          while( obj && !m_bStopTask && !m_bStartTask )
          {
@@ -469,7 +469,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
 
       if( !m_bStopTask && !m_bStartTask )
       {
-         // tqchildren of the object are rendered
+         // children of the object are rendered
          // render the object
 
          if( objectToRender == m_pCurrentTask->activeObject( ) )
@@ -538,7 +538,7 @@ void PMRenderManager::renderObject( PMObject* objectToRender )
    }
    if( !m_bStopTask && !m_bStartTask )
    {
-      if( tqchildren )
+      if( children )
       {
          PMMatrix* matrix = m_matrixStack.pop( );
 
@@ -1410,7 +1410,7 @@ void PMRenderManager::renderGrid( )
          glVertex2d( screenx, height/2 );
          glEnd( );
 
-         TQString label = TQString( "%1" ).tqarg( x * signx, 0, 'g', 4 );
+         TQString label = TQString( "%1" ).arg( x * signx, 0, 'g', 4 );
          if( approxZero( x ) && label.find( "e-" ) )
             label = "0";
 
@@ -1431,7 +1431,7 @@ void PMRenderManager::renderGrid( )
          glVertex2d( width/2, screeny );
          glEnd( );
 
-         TQString label = TQString( "%1" ).tqarg( y * signy, 0, 'g', 4 );
+         TQString label = TQString( "%1" ).arg( y * signy, 0, 'g', 4 );
          if( approxZero( y ) && label.find( "e-" ) )
             label = "0";
 

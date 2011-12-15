@@ -43,11 +43,11 @@ PMMaterial::~PMMaterial( )
 {
 }
 
-PMMetaObject* PMMaterial::tqmetaObject( ) const
+PMMetaObject* PMMaterial::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Material", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Material", Base::metaObject( ),
                                         createNewMaterial );
    }
    return s_pMetaObject;

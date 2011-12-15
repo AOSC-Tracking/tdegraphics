@@ -74,7 +74,7 @@ void SizePreview::paintEvent( TQPaintEvent * )
   pixmap.resize(width(), height());
 
   TQPainter p(&pixmap);
-  p.fillRect(rect(), tqcolorGroup().background());
+  p.fillRect(rect(), colorGroup().background());
   p.setPen(TQt::black);
   p.setBrush(TQt::white);
   p.drawRect(hOffset, vOffset, displayedWidth, displayedHeight);

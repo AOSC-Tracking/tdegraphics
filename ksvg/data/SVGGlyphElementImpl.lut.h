@@ -13,7 +13,7 @@ static const char SVGGlyphElementImpl__s_hashTableStrings[] = {
     "orientation\0"
     "glyph-name\0"
     "vert-adv-y\0"
-    "tqunicode\0"
+    "unicode\0"
     "lang\0"
     "d\0"
 };

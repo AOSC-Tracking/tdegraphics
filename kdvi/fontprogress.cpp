@@ -14,7 +14,7 @@
 #include <tqapplication.h>
 #include <tqframe.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvariant.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
@@ -42,7 +42,7 @@ fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString
   TQVBox *page = makeVBoxMainWidget();
 
   TextLabel1   = new TQLabel( label, page, "TextLabel2" );
-  TextLabel1->tqsetAlignment( int( TQLabel::AlignCenter ) );
+  TextLabel1->setAlignment( int( TQLabel::AlignCenter ) );
   TQWhatsThis::add( TextLabel1, whatsThis );
   TQToolTip::add( TextLabel1, ttip );
 
@@ -55,7 +55,7 @@ fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString
     ProgressBar1 = NULL;
   
   TextLabel2   = new TQLabel( "", page, "TextLabel2" );
-  TextLabel2->tqsetAlignment( int( TQLabel::AlignCenter ) );
+  TextLabel2->setAlignment( int( TQLabel::AlignCenter ) );
   TQWhatsThis::add( TextLabel2, whatsThis );
   TQToolTip::add( TextLabel2, ttip );
 

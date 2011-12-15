@@ -21,7 +21,7 @@
 #define GAMMADIALOG_H
 
 #include <tqwidget.h>
-#include <tqlayout.h>
+#include <layout.h>
 
 #include <kgammatable.h>
 #include <kdialogbase.h>

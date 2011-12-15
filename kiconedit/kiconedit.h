@@ -65,7 +65,7 @@ public:
   KIconEdit( const TQImage image, const char *name = "kiconedit");
   ~KIconEdit();
 
-  virtual TQSize tqsizeHint() const;
+  virtual TQSize sizeHint() const;
   static WindowList windowList;
 
 signals:

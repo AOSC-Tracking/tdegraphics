@@ -18,7 +18,7 @@
 
 #include <tqcheckbox.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtooltip.h>
 #include <tqvgroupbox.h>
 
@@ -36,8 +36,8 @@
 GeneralWidget::GeneralWidget( TQWidget *parent, const char *name )
   : TQWidget( parent, name )
 {
-  TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
-  tqlayout->setSpacing( KDialog::spacingHint() );
+  TQVBoxLayout *layout = new TQVBoxLayout( this );
+  layout->setSpacing( KDialog::spacingHint() );
 
   TQPixmap pixmap = UserIcon( "logo" );
   KURLLabel *logo = new KURLLabel( this );
@@ -50,7 +50,7 @@ GeneralWidget::GeneralWidget( TQWidget *parent, const char *name )
   connect( logo, TQT_SIGNAL( leftClickedURL( const TQString & ) ),
             TQT_SLOT( slotURLClicked( const TQString & ) ) );
 
-  tqlayout->addWidget( logo, 0, AlignRight );
+  layout->addWidget( logo, 0, AlignRight );
 
   cbFullscreen = new TQCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
 
@@ -70,17 +70,17 @@ GeneralWidget::GeneralWidget( TQWidget *parent, const char *name )
   gridLayout->addWidget( l1, 1, 0 );
   gridLayout->addWidget( editFilter, 1, 1 );
 
-  tqlayout->addWidget( cbFullscreen );
-  tqlayout->addWidget( cbPreload );
-  tqlayout->addWidget( cbLastdir );
-  tqlayout->addLayout( gridLayout );
+  layout->addWidget( cbFullscreen );
+  layout->addWidget( cbPreload );
+  layout->addWidget( cbLastdir );
+  layout->addLayout( gridLayout );
 
   ////////////////////////////////////////////////////////////////////////
 
   TQVGroupBox *gbox2 = new TQVGroupBox( i18n("Quality/Speed"),
 				     this, "qualitybox" );
-  tqlayout->addWidget( gbox2 );
-  tqlayout->addStretch();
+  layout->addWidget( gbox2 );
+  layout->addStretch();
 
   cbSmoothScale = new TQCheckBox( i18n("Smooth scaling"), gbox2, "smoothscale" );
   cbFastRender = new TQCheckBox( i18n("Fast rendering"), gbox2, "fastrender" );

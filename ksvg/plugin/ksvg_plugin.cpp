@@ -398,7 +398,7 @@ void KSVGPlugin::update()
 void KSVGPlugin::slotSetDescription(const TQString &desc)
 {
 	ksvgd->description = desc;
-	emit setStatusBarText(i18n("Description: %1").tqarg(desc));
+	emit setStatusBarText(i18n("Description: %1").arg(desc));
 }
 
 void KSVGPlugin::slotSetTitle(const TQString &title)
@@ -409,7 +409,7 @@ void KSVGPlugin::slotSetTitle(const TQString &title)
 void KSVGPlugin::slotGotURL(const TQString &text)
 {
 	if(text.isNull() && !ksvgd->description.isEmpty())
-		emit setStatusBarText(i18n("Description: %1").tqarg(ksvgd->description));
+		emit setStatusBarText(i18n("Description: %1").arg(ksvgd->description));
 	else
 		emit setStatusBarText(text);
 }

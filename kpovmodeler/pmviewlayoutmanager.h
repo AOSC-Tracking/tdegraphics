@@ -108,8 +108,8 @@ private:
 /**
  * Class used internally by @ref PMViewLayoutManager
  *
- * This class maintains a named tqlayout. It basically stores all views
- * associated with that tqlayout.
+ * This class maintains a named layout. It basically stores all views
+ * associated with that layout.
  */
 class PMViewLayout
 {
@@ -143,12 +143,12 @@ public:
     */
    void displayLayout( PMShell* shell );
    /**
-    * Sets the name of the tqlayout
+    * Sets the name of the layout
     */
    void setName( const TQString& n );
    /**
     *
-    * Add a new entry to the tqlayout. By default it adds the entry at the end
+    * Add a new entry to the layout. By default it adds the entry at the end
     * of the list. If a position is given it adds the entry at the indicated
     * position
     */
@@ -179,7 +179,7 @@ public:
    void normalize( );
 
    /**
-    * Extracts the view tqlayout from the current window
+    * Extracts the view layout from the current window
     */
    static PMViewLayout extractViewLayout( PMShell* shell );
 private:
@@ -202,7 +202,7 @@ private:
  *
  * It interacts with @ref PMShell to create the view layouts.
  * The class maintains a list of layouts as well as the name of the default
- * tqlayout. The layouts are stored in a XML file caled viewlayouts.xml.
+ * layout. The layouts are stored in a XML file caled viewlayouts.xml.
  */
 class PMViewLayoutManager
 {
@@ -221,11 +221,11 @@ public:
     */
    TQStringList availableLayouts( );
    /**
-    * Sets the default tqlayout
+    * Sets the default layout
     */
    void setDefaultLayout( const TQString& name );
    /**
-    * Returns the default tqlayout
+    * Returns the default layout
     */
    TQString defaultLayout( ) const { return m_defaultLayout; }
    /**
@@ -233,7 +233,7 @@ public:
     */
    void displayLayout( const TQString& name, PMShell* shell );
    /**
-    * Displays the tqlayout indicated as default
+    * Displays the layout indicated as default
     */
    void displayDefaultLayout( PMShell* shell );
    /**
@@ -241,23 +241,23 @@ public:
     */
    void loadData( );
    /**
-    * Saves the current tqlayout collection to the configuration file
+    * Saves the current layout collection to the configuration file
     */
    void saveData( );
    /**
-    * Add a new empty tqlayout
+    * Add a new empty layout
     */
    void addLayout( const TQString& name );
    /**
-    * Add a new tqlayout
+    * Add a new layout
     */
    void addLayout( const PMViewLayout& l ) { m_layouts.append( l ); }
    /**
-    * Remove a tqlayout
+    * Remove a layout
     */
    void removeLayout( const TQString& name );
    /**
-    * Get a known tqlayout
+    * Get a known layout
     */
    PMViewLayout* findLayout( const TQString& name );
    /**

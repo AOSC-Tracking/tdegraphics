@@ -19,7 +19,7 @@
 #include <tqprinter.h>
 #include <tqpainter.h>
 #include <tqsplitter.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <kconfig.h>
 #include <kdialog.h>
@@ -39,7 +39,7 @@ PMView::PMView( PMPart* part, TQWidget* parent, const char* name )
 {
    setBackgroundMode( PaletteBase );
 
-   TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
+   TQVBoxLayout* layout = new TQVBoxLayout( this );
    m_pMainSplitter = new TQSplitter( Qt::Horizontal, this, "MainSplitter" );
    m_pTreeEditSplitter = new TQSplitter( Qt::Vertical, m_pMainSplitter,
                                         "TreeEditSplitter" );
@@ -68,8 +68,8 @@ PMView::PMView( PMPart* part, TQWidget* parent, const char* name )
    
    m_pMainSplitter->show( );
 
-   tqlayout->addWidget( m_pMainSplitter );
-   tqlayout->activate( );
+   layout->addWidget( m_pMainSplitter );
+   layout->activate( );
 
    m_pPart = part;
 }
