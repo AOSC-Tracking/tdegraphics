@@ -272,11 +272,11 @@ void PMPrism::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMPrism::metaObject( ) const
+PMMetaObject* PMPrism::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Prism", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Prism", Base::tqmetaObject( ),
                                         createNewPrism );
       s_pMetaObject->addProperty(
          new PMPrismProperty( "sturm", &PMPrism::setSturm, &PMPrism::sturm ) );
@@ -645,7 +645,7 @@ void PMPrism::controlPoints( PMControlPointList& list )
          for( i2 = 0; it2 != ( *it1 ).end( ); ++it2, ++i2 )
          {
             cp = new PM2DControlPoint( *it2, PM2DControlPoint::PM2DXZ, i2,
-                                       i18n( "Point %1.%2" ).arg( i1 + 1 ).arg( i2 + 1 ) );
+                                       i18n( "Point %1.%2" ).tqarg( i1 + 1 ).tqarg( i2 + 1 ) );
             if( i2 == 0 )
                firstPoint = cp;
             else if( i2 == 1 )
@@ -678,7 +678,7 @@ void PMPrism::controlPoints( PMControlPointList& list )
          {
             int i2mod4 = i2 % 4;
             cp = new PM2DControlPoint( *it2, PM2DControlPoint::PM2DXZ, i2,
-                                       i18n( "Point %1.%2" ).arg( i1 + 1 ).arg( i2 + 1 ) );
+                                       i18n( "Point %1.%2" ).tqarg( i1 + 1 ).tqarg( i2 + 1 ) );
             if( i2mod4 == 0 )
                firstPoint = cp;
             if( i2mod4 == 2 )

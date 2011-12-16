@@ -31,7 +31,7 @@ PMInsertErrorDialog::PMInsertErrorDialog(
 {
    TQVBox* page = makeVBoxMainWidget( );
    new TQLabel( i18n( "%1 of %2 objects couldn't be inserted." )
-               .arg( numErrors ).arg( numObj ), page );
+               .tqarg( numErrors ).tqarg( numObj ), page );
    
    m_pDetailsLabel = new TQLabel( i18n( "Objects not inserted:" ), page );
    m_pDetailsLabel->hide( );

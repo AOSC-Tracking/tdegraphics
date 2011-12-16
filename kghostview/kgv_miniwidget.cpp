@@ -441,7 +441,7 @@ void KGVMiniWidget::showPage( int pagenumber )
 	    /*
 	    KNotifyClient::userEvent
 	      (i18n("KGhostview cannot load the document, \"%1\".\n"
-		    "It appears to be broken.").arg( _fileName ),
+		    "It appears to be broken.").tqarg( _fileName ),
 	       KNotifyClient::Messagebox);
 	    _psWidget->disableInterpreter();
 	    _psFile=0;
@@ -486,13 +486,13 @@ void KGVMiniWidget::updateStatusBarText( int pageNumber )
 	else
 	    if( !_usePageLabels || document()->format() == KGVDocument::PDF )
 		text = i18n( "Page %1 of %2" )
-		       .arg( pageNumber + 1 )
-		       .arg( dsc()->page_count() );
+		       .tqarg( pageNumber + 1 )
+		       .tqarg( dsc()->page_count() );
 	    else
 		text = i18n( "Page %1 (%2 of %3)" )
-		       .arg( dsc()->page()[ _options.page() ].label )
-		       .arg( pageNumber + 1 )
-		       .arg( dsc()->page_count() );
+		       .tqarg( dsc()->page()[ _options.page() ].label )
+		       .tqarg( pageNumber + 1 )
+		       .tqarg( dsc()->page_count() );
 
 	emit setStatusBarText( text );
     }
@@ -534,7 +534,7 @@ void KGVMiniWidget::buildTOC()
 	}
     }
     else {
-	marklist->insertItem( TQString::fromLatin1( "1" ), 0 );
+	marklist->insertItem( TQString::tqfromLatin1( "1" ), 0 );
     }
 }
 

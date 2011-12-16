@@ -17,7 +17,7 @@
 
 #include <tqstring.h>
 #include <tqstringlist.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqregexp.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>

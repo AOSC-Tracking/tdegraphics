@@ -77,7 +77,7 @@ void kpThumbnailView::resizeEvent (TQResizeEvent *e)
                << endl;
 #endif
 
-    // For TQResizeEvent's, TQt already throws an entire widget repaint into
+    // For TQResizeEvent's, TQt already throws an entire widget tqrepaint into
     // the event loop.  So eat useless update() calls that can only slow
     // things down.
     // TODO: this doesn't seem to work.

@@ -139,7 +139,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             {
                 case KpdfSettings::EnumRenderMode::Inverted:
                     // Invert image pixels using TQImage internal function
-                    backImage.invertPixels(false);
+                    backImage.tqinvertPixels(false);
                     break;
                 case KpdfSettings::EnumRenderMode::Recolor:
                     // Recolor image using KImageEffect::flatten with dither:0
@@ -178,7 +178,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             for ( ; hIt != hEnd; ++hIt )
             {
                 HighlightRect * r = *hIt;
-                TQRect highlightRect = r->geometry( width, height );
+                TQRect highlightRect = r->tqgeometry( width, height );
                 if ( highlightRect.isValid() && highlightRect.intersects( limits ) )
                 {
                     // find out the rect to highlight on pixmap
@@ -213,7 +213,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     // 3. visually enchance links and images if requested
     if ( enhanceLinks || enhanceImages )
     {
-        TQColor normalColor = TQApplication::palette().active().highlight();
+        TQColor normalColor = TQApplication::tqpalette().active().highlight();
         TQColor lightColor = normalColor.light( 140 );
         // enlarging limits for intersection is like growing the 'rectGeometry' below
         TQRect limitsEnlarged = limits;
@@ -226,7 +226,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             if ( (enhanceLinks && rect->objectType() == ObjectRect::Link) ||
                  (enhanceImages && rect->objectType() == ObjectRect::Image) )
             {
-                TQRect rectGeometry = rect->geometry( width, height );
+                TQRect rectGeometry = rect->tqgeometry( width, height );
                 if ( rectGeometry.intersects( limitsEnlarged ) )
                 {
                     // expand rect and draw inner border

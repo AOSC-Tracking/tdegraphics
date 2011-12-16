@@ -108,8 +108,8 @@ DjVuTXT::Zone::append_child()
   empty.text_start = 0;
   empty.text_length = 0;
   empty.zone_parent=this;
-  children.append(empty);
-  return & children[children.lastpos()];
+  tqchildren.append(empty);
+  return & tqchildren[tqchildren.lastpos()];
 }
 
 void
@@ -117,8 +117,8 @@ DjVuTXT::Zone::cleartext()
 {
   text_start = 0;
   text_length = 0;
-  for (GPosition i=children; i; ++i)
-    children[i].cleartext();
+  for (GPosition i=tqchildren; i; ++i)
+    tqchildren[i].cleartext();
 }
 
 void
@@ -128,8 +128,8 @@ DjVuTXT::Zone::normtext(const char *instr, GUTF8String &outstr)
     {
       // Descend collecting text below
       text_start = outstr.length();
-      for (GPosition i=children; i; ++i)
-        children[i].normtext(instr, outstr);
+      for (GPosition i=tqchildren; i; ++i)
+        tqchildren[i].normtext(instr, outstr);
       text_length = outstr.length() - text_start;
       // Ignore empty zones
       if (text_length == 0)
@@ -142,8 +142,8 @@ DjVuTXT::Zone::normtext(const char *instr, GUTF8String &outstr)
       outstr = outstr + GUTF8String(instr+text_start, text_length);
       text_start = new_start;
       // Clear textual information on lower level nodes
-      for (GPosition i=children; i; ++i)
-        children[i].cleartext();
+      for (GPosition i=tqchildren; i; ++i)
+        tqchildren[i].cleartext();
     }
   // Determine standard separator
   char sep;
@@ -174,8 +174,8 @@ unsigned int
 DjVuTXT::Zone::memuse() const
 {
   int memuse = sizeof(*this);
-  for (GPosition i=children; i; ++i)
-    memuse += children[i].memuse();
+  for (GPosition i=tqchildren; i; ++i)
+    memuse += tqchildren[i].memuse();
   return memuse;
 }
 
@@ -228,15 +228,15 @@ DjVuTXT::Zone::encode(
   // Encode text info
   bs.write16(0x8000+start);
   bs.write24(text_length);
-  // Encode number of children
-  bs.write24(children.size());
+  // Encode number of tqchildren
+  bs.write24(tqchildren.size());
   
   const Zone * prev_child=0;
-  // Encode all children
-  for (GPosition i=children; i; ++i)
+  // Encode all tqchildren
+  for (GPosition i=tqchildren; i; ++i)
   {
-    children[i].encode(gbs, this, prev_child);
-    prev_child=&children[i];
+    tqchildren[i].encode(gbs, this, prev_child);
+    prev_child=&tqchildren[i];
   }
 }
 #endif
@@ -280,16 +280,16 @@ DjVuTXT::Zone::decode(const GP<ByteStream> &gbs, int maxtext,
     text_start+=parent->text_start;
   }
   rect=GRect(x, y, width, height);
-  // Get children size
+  // Get tqchildren size
   int size = bs.read24();
 
   // Checks
   if (rect.isempty() || text_start<0 || text_start+text_length>maxtext )
     G_THROW( ERR_MSG("DjVuText.corrupt_text") );
 
-  // Process children
+  // Process tqchildren
   const Zone * prev_child=0;
-  children.empty();
+  tqchildren.empty();
   while (size-- > 0) 
   {
     Zone *z = append_child();
@@ -311,7 +311,7 @@ DjVuTXT::has_valid_zones() const
 {
   if (!textUTF8)
     return false;
-  if (page_zone.children.isempty() || page_zone.rect.isempty()) 
+  if (page_zone.tqchildren.isempty() || page_zone.rect.isempty()) 
     return false;
   return true;
 }
@@ -382,7 +382,7 @@ void
 DjVuTXT::Zone::get_text_with_rect(const GRect &box, 
                                   int &string_start, int &string_end) const
 {
-  GPosition pos=children;
+  GPosition pos=tqchildren;
   if(pos?box.contains(rect):intersects_zone(box,rect))
   {
     const int text_end=text_start+text_length;
@@ -401,7 +401,7 @@ DjVuTXT::Zone::get_text_with_rect(const GRect &box,
   {
     do
     {
-      children[pos].get_text_with_rect(box,string_start,string_end);
+      tqchildren[pos].get_text_with_rect(box,string_start,string_end);
     } while(++pos);
   }
 }
@@ -419,18 +419,18 @@ DjVuTXT::Zone::find_zones(GList<Zone *> &list,
         }
       else if(text_start < string_end)
         {
-          if (children.size())
-            for (GPosition pos=children; pos; ++pos)
-              children[pos].find_zones(list,string_start,string_end);
+          if (tqchildren.size())
+            for (GPosition pos=tqchildren; pos; ++pos)
+              tqchildren[pos].find_zones(list,string_start,string_end);
           else
             list.append(const_cast<Zone *>(this));
         }
     }
   else if( text_end > string_start)
     {
-      if (children.size())
-        for (GPosition pos=children; pos; ++pos)
-          children[pos].find_zones(list,string_start,string_end);
+      if (tqchildren.size())
+        for (GPosition pos=tqchildren; pos; ++pos)
+          tqchildren[pos].find_zones(list,string_start,string_end);
       else
         list.append(const_cast<Zone *>(this));
     }
@@ -439,11 +439,11 @@ DjVuTXT::Zone::find_zones(GList<Zone *> &list,
 void
 DjVuTXT::Zone::get_smallest(GList<GRect> &list) const
 {
-  GPosition pos=children;
+  GPosition pos=tqchildren;
   if(pos)
     {
       do {
-        children[pos].get_smallest(list);
+        tqchildren[pos].get_smallest(list);
       } while (++pos);
     }
   else
@@ -455,11 +455,11 @@ DjVuTXT::Zone::get_smallest(GList<GRect> &list) const
 void
 DjVuTXT::Zone::get_smallest(GList<GRect> &list, const int padding) const
 {
-  GPosition pos=children;
+  GPosition pos=tqchildren;
   if(pos)
     {
       do {
-        children[pos].get_smallest(list,padding);
+        tqchildren[pos].get_smallest(list,padding);
       } while (++pos);
     }
   else if(zone_parent && zone_parent->ztype >= PARAGRAPH)
@@ -493,17 +493,17 @@ DjVuTXT::get_zones(int zone_type, const Zone *parent,
    for( int cur_ztype=zone->ztype; cur_ztype<zone_type; ++cur_ztype )
    {
       GPosition pos;
-      for(pos=zone->children; pos; ++pos)
+      for(pos=zone->tqchildren; pos; ++pos)
       {
-	 Zone *zcur=(Zone *)&zone->children[pos];
+	 Zone *zcur=(Zone *)&zone->tqchildren[pos];
 	 if ( zcur->ztype == zone_type )
 	 {
 	    GPosition zpos=zone_list;
 	    if ( !zone_list.search(zcur,zpos) )
 	       zone_list.append(zcur);
 	 }
-	 else if ( zone->children[pos].ztype < zone_type )
-	    get_zones(zone_type, &zone->children[pos], zone_list);
+	 else if ( zone->tqchildren[pos].ztype < zone_type )
+	    get_zones(zone_type, &zone->tqchildren[pos], zone_list);
       }
    }
 }
@@ -864,7 +864,7 @@ static void
 writeText( ByteStream & str_out,
            const GUTF8String &textUTF8,
            const DjVuTXT::ZoneType zlayer,
-           const GList<DjVuTXT::Zone> &children,
+           const GList<DjVuTXT::Zone> &tqchildren,
            const int WindowHeight )
 {
 //  assert( txt->has_valid_zones() );
@@ -873,12 +873,12 @@ writeText( ByteStream & str_out,
   //  Beginning tags for missing layers
   int layer=(int)zlayer;
   //  Output the next layer
-  for(GPosition pos=children ; pos ; ++pos )
+  for(GPosition pos=tqchildren ; pos ; ++pos )
   {
-    str_out.writestring(tolayer(layer,children[pos].ztype));
+    str_out.writestring(tolayer(layer,tqchildren[pos].ztype));
     writeText( str_out,
                 textUTF8,
-                children[pos],
+                tqchildren[pos],
                 WindowHeight );
   }
   str_out.writestring(tolayer(layer,zlayer));
@@ -893,7 +893,7 @@ writeText( ByteStream & str_out,
 //  DEBUG_MSG( "--zonetype=" << zone.ztype << "\n" );
 
   const GUTF8String xindent(indent( 2 * zone.ztype + 2 ));
-  GPosition pos=zone.children;
+  GPosition pos=zone.tqchildren;
   // Build attribute string
   if( ! pos )
   {
@@ -908,7 +908,7 @@ writeText( ByteStream & str_out,
     str_out.writestring(end_tag(zone.ztype));
   } else
   {
-    writeText(str_out,textUTF8,zone.ztype,zone.children,WindowHeight);
+    writeText(str_out,textUTF8,zone.ztype,zone.tqchildren,WindowHeight);
   }
 }
 
@@ -917,7 +917,7 @@ DjVuTXT::writeText(ByteStream &str_out,const int height) const
 {
   if(has_valid_zones())
   {
-    ::writeText(str_out,textUTF8,DjVuTXT::PAGE,page_zone.children,height);
+    ::writeText(str_out,textUTF8,DjVuTXT::PAGE,page_zone.tqchildren,height);
   }else
   {
     str_out.writestring(start_tag(DjVuTXT::PAGE));

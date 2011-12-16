@@ -496,9 +496,9 @@ void SVGElementImpl::setAttributes(bool deep)
 
 bool SVGElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &a, SVGMouseEventImpl *mev)
 {
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(this);
-	if(shape)
-		return shape->prepareMouseEvent(p, a, mev);
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(this);
+	if(tqshape)
+		return tqshape->prepareMouseEvent(p, a, mev);
 
 	return false;
 }

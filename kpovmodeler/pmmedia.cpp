@@ -97,11 +97,11 @@ PMMedia::~PMMedia( )
 {
 }
 
-PMMetaObject* PMMedia::metaObject( ) const
+PMMetaObject* PMMedia::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Media", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Media", Base::tqmetaObject( ),
                                         createNewMedia );
       s_pMetaObject->addProperty(
          new PMMediaProperty( "method", &PMMedia::setMethod, &PMMedia::method ) );

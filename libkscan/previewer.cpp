@@ -24,11 +24,11 @@
 #include <tqtooltip.h>
 #include <tqpopupmenu.h>
 #include <tqfile.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqcombobox.h>
 #include <tqradiobutton.h>
 #include <tqgroupbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -119,10 +119,10 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     htop->addWidget( frame );
 
     TQVBoxLayout *top = new TQVBoxLayout( frame, KDialog::marginHint(), KDialog::spacingHint() );
-    layout = new TQHBoxLayout( KDialog::spacingHint() );
-    top->addLayout( layout, 9 );
+    tqlayout = new TQHBoxLayout( KDialog::spacingHint() );
+    top->addLayout( tqlayout, 9 );
     TQVBoxLayout *left = new TQVBoxLayout( KDialog::spacingHint() );
-    layout->addLayout( left, 2 );
+    tqlayout->addLayout( left, 2 );
 
     /* Load autoselection values from Config file */
     KConfig *cfg = KGlobal::config();
@@ -141,8 +141,8 @@ Previewer::Previewer(TQWidget *parent, const char *name )
 
     img_canvas->setDefaultScaleKind( ImageCanvas::DYNAMIC );
     img_canvas->enableContextMenu(true);
-    img_canvas->repaint();
-    layout->addWidget( img_canvas, 6 );
+    img_canvas->tqrepaint();
+    tqlayout->addWidget( img_canvas, 6 );
 
     /* Actions for the previewer zoom */
     KAction *act;
@@ -477,11 +477,11 @@ void Previewer::slNewDimen(TQRect r)
         selectionHeightMm = (overallHeight / 1000 * r.height());
 
    TQString s;
-   s = i18n("width %1 mm").arg( int(selectionWidthMm));
+   s = i18n("width %1 mm").tqarg( int(selectionWidthMm));
    emit(setScanWidth(s));
 
    kdDebug(29000) << "Setting new Dimension " << s << endl;
-   s = i18n("height %1 mm").arg(int(selectionHeightMm));
+   s = i18n("height %1 mm").tqarg(int(selectionHeightMm));
    emit(setScanHeight(s));
 
    recalcFileSize( );

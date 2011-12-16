@@ -66,7 +66,7 @@ kpToolWidgetEraserSize::kpToolWidgetEraserSize (TQWidget *parent, const char *na
         TQPixmap previewPixmap (s, s);
         if (i < 3)
         {
-            // HACK: kpToolWidgetBase's layout code sucks and gives uneven spacing
+            // HACK: kpToolWidgetBase's tqlayout code sucks and gives uneven spacing
             previewPixmap.resize ((width () - 4) / 3, 9);
         }
 

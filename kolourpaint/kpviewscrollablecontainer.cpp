@@ -184,7 +184,7 @@ void kpGrip::updatePixmap ()
         return;
 
     TQPixmap pixmap (width (), height ());
-    pixmap.fill (colorGroup ().highlight ());
+    pixmap.fill (tqcolorGroup ().highlight ());
     kpPixmapFX::ensureTransparentAt (&pixmap, pixmap.rect ());
     const TQRect hr = hotRect ();
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER
@@ -663,7 +663,7 @@ void kpViewScrollableContainer::repaintWidgetAtResizeLineViewRect (
         // TODO: should be "!widget->testWFlags (TQt::WRepaintNoErase)"
         //       but for some reason, doesn't work for viewport().
         const bool erase = !dynamic_cast <kpView *> (widget);
-        widget->repaint (redrawWidgetRect, erase);
+        widget->tqrepaint (redrawWidgetRect, erase);
     }
 }
 
@@ -1269,7 +1269,7 @@ bool kpViewScrollableContainer::slotDragScroll (bool *didSomething)
 
             // Repaint newly exposed region immediately to reduce tearing
             // of scrollView.
-            m_view->repaint (region, false/*no erase*/);
+            m_view->tqrepaint (region, false/*no erase*/);
         }
     }
 

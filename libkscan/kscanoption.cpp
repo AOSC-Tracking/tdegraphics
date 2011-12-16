@@ -26,7 +26,7 @@
 #include <tqcheckbox.h>
 #include <tqlineedit.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqimage.h>
 #include <tqregexp.h>

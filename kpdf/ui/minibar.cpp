@@ -13,7 +13,7 @@
 #include <tqpushbutton.h>
 #include <tqlabel.h>
 #include <tqlineedit.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqvalidator.h>
 #include <tqpainter.h>
 #include <kiconloader.h>
@@ -87,7 +87,7 @@ MiniBar::MiniBar( TQWidget * parent, KPDFDocument * document )
     TQSpacerItem * spacerL = new TQSpacerItem( 20, 10, TQSizePolicy::Expanding );
     horLayout->addItem( spacerL );
 
-    // central 2r by 3c grid layout that contains all components
+    // central 2r by 3c grid tqlayout that contains all components
     TQGridLayout * gridLayout = new TQGridLayout( 0, 3,5, 2,1 );
      // top spacer 6x6 px
 //     TQSpacerItem * spacerTop = new TQSpacerItem( 6, 6, TQSizePolicy::Fixed, TQSizePolicy::Fixed );
@@ -198,7 +198,7 @@ void MiniBar::notifyViewportChanged( bool /*smoothMove*/ )
 void MiniBar::resizeEvent( TQResizeEvent * e )
 {
     // auto-hide 'prev' and 'next' buttons if not enough space
-    const TQSize & myHint = minimumSizeHint();
+    const TQSize & myHint = tqminimumSizeHint();
     bool shown = m_prevButton->isVisible() && m_nextButton->isVisible();
     if ( shown && e->size().width() < myHint.width() )
     {
@@ -208,7 +208,7 @@ void MiniBar::resizeEvent( TQResizeEvent * e )
     }
     else if ( !shown )
     {
-        int histeresis = m_prevButton->sizeHint().width() * 2 + 2;
+        int histeresis = m_prevButton->tqsizeHint().width() * 2 + 2;
         if ( e->size().width() > (myHint.width() + histeresis) )
         {
             m_prevButton->show();
@@ -308,17 +308,17 @@ void ProgressWidget::paintEvent( TQPaintEvent * e )
     // paint rects and a separator line
     TQPainter p( this );
     if ( cRect.isValid() )
-        p.fillRect( cRect, palette().active().highlightedText() );
+        p.fillRect( cRect, tqpalette().active().highlightedText() );
     if ( fRect.isValid() )
-        p.fillRect( fRect, palette().active().highlight() );
+        p.fillRect( fRect, tqpalette().active().highlight() );
     if ( l && l != w  )
     {
-        p.setPen( palette().active().highlight().dark( 120 ) );
+        p.setPen( tqpalette().active().highlight().dark( 120 ) );
         int delta = TQApplication::reverseLayout() ? w - l : l;
         p.drawLine( delta, 0, delta, h );
     }
     // draw a frame-like outline
-    //p.setPen( palette().active().mid() );
+    //p.setPen( tqpalette().active().mid() );
     //p.drawRect( 0,0, w, h );
 }
 
@@ -337,7 +337,7 @@ PagesEdit::PagesEdit( MiniBar * parent )
     setValidator( m_validator );
 
     // customize text properties
-    setAlignment( TQt::AlignCenter );
+    tqsetAlignment( TQt::AlignCenter );
     setMaxLength( 4 );
 }
 
@@ -372,7 +372,7 @@ void PagesEdit::focusOutEvent( TQFocusEvent * e )
 {
     // change background color to a dark tone
     setLineWidth( 1 );
-    setPaletteBackgroundColor( palette().active().background().light( 105 ) );
+    setPaletteBackgroundColor( tqpalette().active().background().light( 105 ) );
     // restore text
     TQLineEdit::setText( backString );
     // call default handler
@@ -428,7 +428,7 @@ void HoverButton::paintEvent( TQPaintEvent * e )
     else
     {
         TQPainter p( this );
-        p.fillRect(e->rect(), parentWidget() ? parentWidget()->palette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
+        p.fillRect(e->rect(), parentWidget() ? parentWidget()->tqpalette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
         drawButtonLabel( &p );
     }
 }

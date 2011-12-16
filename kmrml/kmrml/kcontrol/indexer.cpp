@@ -112,7 +112,7 @@ void Indexer::processNext()
          *m_process << *it;
 #endif
 
-    emit progress( 0, i18n("<qt>Next Folder: <br><b>%1</b>").arg( m_currentDir ));
+    emit progress( 0, i18n("<qt>Next Folder: <br><b>%1</b>").tqarg( m_currentDir ));
     m_process->start();
 }
 
@@ -160,7 +160,7 @@ void Indexer::slotCanRead( KProcIO *proc )
                     if ( ok )
                     {
                         uint dirsLeft = m_dirs.count();
-                        TQString message = i18n( "<qt>Processing folder %1 of %2: <br><b>%3</b><br>File %4 of %5.</qt>").arg( m_dirCount - dirsLeft ).arg( m_dirCount).arg( m_currentDir ).arg( currentFile ).arg( numFiles );
+                        TQString message = i18n( "<qt>Processing folder %1 of %2: <br><b>%3</b><br>File %4 of %5.</qt>").tqarg( m_dirCount - dirsLeft ).tqarg( m_dirCount).tqarg( m_currentDir ).tqarg( currentFile ).tqarg( numFiles );
                         emit progress( perc, message );
                     }
                 }

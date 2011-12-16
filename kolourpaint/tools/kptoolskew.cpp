@@ -34,7 +34,7 @@
 #include <tqapplication.h>
 #include <tqgroupbox.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpushbutton.h>
 #include <tqwmatrix.h>
 

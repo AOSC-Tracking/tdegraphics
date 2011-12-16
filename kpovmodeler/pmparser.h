@@ -82,7 +82,7 @@ public:
     * Appends all parsed objects to the list.
     *
     * parent is the object where the parsed objects will be inserted as
-    * children behind the object after. These parameters are used to check
+    * tqchildren behind the object after. These parameters are used to check
     * the consistency of declares and links.
     *
     * Set parent and after to 0 if and only if a document is parsed/opened.
@@ -218,7 +218,7 @@ protected:
    PMPart* m_pPart;
    /**
     * parent object where the parsed top level objects
-    * will be inserted _later_ (not from the parser) as children
+    * will be inserted _later_ (not from the parser) as tqchildren
     */
    const PMObject* m_pTopParent;
    const PMObject* m_pAfter;

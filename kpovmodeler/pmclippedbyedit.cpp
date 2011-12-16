@@ -19,7 +19,7 @@
 #include "pmclippedbyedit.h"
 #include "pmclippedby.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <klocale.h>
 

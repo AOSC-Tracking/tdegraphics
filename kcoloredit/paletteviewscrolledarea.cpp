@@ -19,7 +19,7 @@
 #include <tqptrlist.h>
 #include <tqcolor.h>
 #include <tqcursor.h>
-#include <brush.h>
+#include <tqbrush.h>
 #include <tqpainter.h>
 #include <tqpixmap.h>
 #include <tqpen.h>
@@ -77,7 +77,7 @@ void PaletteViewScrolledArea::redraw() {
 }
 
 void PaletteViewScrolledArea::repaintPalette() {
-	repaint(false);
+	tqrepaint(false);
 }
 
 void PaletteViewScrolledArea::checkSelectionAutoScroll(const int mousePosY) {
@@ -220,7 +220,7 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	setCellsSizes();
 	TQPixmap pixmap(size());
 	TQPainter painter;
-	painter.begin(TQT_TQPAINTDEVICE(&pixmap), this);
+	painter.tqbegin(TQT_TQPAINTDEVICE(&pixmap), this);
 	TQFontMetrics fontMetrics = painter.fontMetrics();
 	int maxLineWidth;
 	if(viewColorNames) {
@@ -249,12 +249,12 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	int lastRow = (posY + height() - 1 + rowHeight - 1)/rowHeight;
 	if(viewColorNames)
 		painter.fillRect(0, 0, rowWidth, height(),
-        TQBrush( TQFrame::palette().active().base() ));
-	TQBrush normalBackgroundBrush(TQFrame::palette().active().background());
-	TQBrush selectedBackgroundBrush(TQFrame::palette().active().highlight());
+        TQBrush( TQFrame::tqpalette().active().base() ));
+	TQBrush normalBackgroundBrush(TQFrame::tqpalette().active().background());
+	TQBrush selectedBackgroundBrush(TQFrame::tqpalette().active().highlight());
 	TQBrush foregroundBrush;
-	TQBrush cursorBrush(TQFrame::palette().active().foreground());
-	TQPen backgroundPen(TQFrame::palette().active().foreground());
+	TQBrush cursorBrush(TQFrame::tqpalette().active().foreground());
+	TQPen backgroundPen(TQFrame::tqpalette().active().foreground());
 	int min = selectionMin();
 	int max = selectionMax();
 	int fontAscent = fontMetrics.ascent();

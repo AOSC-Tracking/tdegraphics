@@ -236,21 +236,21 @@ void SVGMarkerElementImpl::draw(SVGShapeImpl *referencingElement, double x, doub
 	for(; !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
-		if(element && shape && style && ok && style->getVisible() && style->getDisplay())
+		if(element && tqshape && style && ok && style->getVisible() && style->getDisplay())
 		{
 			SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(element);
 			if(locatable)
 				locatable->updateCachedScreenCTM(mtx);
 
-			shape->update(UPDATE_TRANSFORM);
-			shape->setReferenced(true);
-			shape->draw();
-			shape->setReferenced(false);
+			tqshape->update(UPDATE_TRANSFORM);
+			tqshape->setReferenced(true);
+			tqshape->draw();
+			tqshape->setReferenced(false);
 		}
 	}
 

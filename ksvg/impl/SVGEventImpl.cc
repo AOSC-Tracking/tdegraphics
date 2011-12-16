@@ -43,7 +43,7 @@ SVGEventImpl::SVGEventImpl()
 	m_defaultPrevented = false;
 	m_id = SVGEvent::UNKNOWN_EVENT;
 	m_eventPhase = 0;
-	m_createTime = TQDateTime::currentDateTime();
+	m_createTime = TQDateTime::tqcurrentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;
@@ -62,7 +62,7 @@ SVGEventImpl::SVGEventImpl(SVGEvent::EventId _id, bool canBubbleArg, bool cancel
 	m_defaultPrevented = false;
 	m_id = _id;
 	m_eventPhase = 0;
-	m_createTime = TQDateTime::currentDateTime();
+	m_createTime = TQDateTime::tqcurrentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;
@@ -507,17 +507,17 @@ SVGKeyEventImpl::SVGKeyEventImpl(TQKeyEvent *key, DOM::AbstractView &view, SVGEv
 			break;
 	}
 
-	// m_keyVal should contain the unicode value
+	// m_keyVal should contain the tqunicode value
 	// of the pressed key if available.
 	if (!key->text().isNull())
-		m_keyVal = TQString(key->text()).unicode()[0];
+		m_keyVal = TQString(key->text()).tqunicode()[0];
 
 	//  m_numPad = ???
 
 	// key->state returns enum ButtonState, which is ShiftButton, ControlButton and AltButton or'ed together.
 	m_modifier = key->state();
 
-	// key->text() returns the unicode sequence as a TQString
+	// key->text() returns the tqunicode sequence as a TQString
 	m_outputString = DOM::DOMString(key->text());
 }
 

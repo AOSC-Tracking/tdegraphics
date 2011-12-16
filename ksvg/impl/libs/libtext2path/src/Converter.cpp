@@ -125,7 +125,7 @@ GlyphAffinePair *Converter::requestGlyph(GlyphRenderParams *params, Rectangle &b
 	SharedGlyph cached = m_glyphCache.find(cacheGlyphKey(params));
 
 	// If not available in cache, render new one and cache it :)
-	// If we're mixing ie. japanese and latin characters (TTB layout),
+	// If we're mixing ie. japanese and latin characters (TTB tqlayout),
 	// then we also have to re-calculate the glyph again with the appropriate rotation matrix (Niko)
 	if(!cached || !onlyLatin)
 		cached = calcGlyph(params, affine, onlyLatin);
@@ -164,11 +164,11 @@ void Converter::selectGlyph(GlyphRenderParams *params)
 
 	// 3. Don't pass FT_LOAD_VERTICAL_LAYOUT on TTB layouts when rendering
 	// 	  a latin glyph because it needs to be rotated...
-	if(params->layout()->tb())
+	if(params->tqlayout()->tb())
 	{
 		Script script;
 		SCRIPT_FOR_CHAR(script, params->character())
-		if(script != Latin || params->layout()->glyphOrientationVertical() == 0)
+		if(script != Latin || params->tqlayout()->glyphOrientationVertical() == 0)
 			flags |= FT_LOAD_VERTICAL_LAYOUT;
 	}
 
@@ -193,7 +193,7 @@ SharedGlyph Converter::calcGlyph(const GlyphRenderParams *params, Affine &affine
 		affine.dx() += kx + affine.m21() * ky;
 
 		// Only apply y kerning in TB mode
-		if(params->layout()->tb())
+		if(params->tqlayout()->tb())
 			affine.dy() += kx + affine.m22() * ky;
 	}
 
@@ -206,7 +206,7 @@ SharedGlyph Converter::calcGlyph(const GlyphRenderParams *params, Affine &affine
 	traceAffine.scale(1000.0 / params->font()->fontFace()->units_per_EM);
 
 	// 3b. Enable character rotation, if needed
-	if(params->layout()->tb())
+	if(params->tqlayout()->tb())
 	{
 		Script script;
 		SCRIPT_FOR_CHAR(script, params->character())
@@ -214,7 +214,7 @@ SharedGlyph Converter::calcGlyph(const GlyphRenderParams *params, Affine &affine
 		{
 			FT_Matrix matrix;
 
-			double angle = deg2rad * params->layout()->glyphOrientationVertical();
+			double angle = deg2rad * params->tqlayout()->glyphOrientationVertical();
 			matrix.xx = (FT_Fixed)( cos(angle) * 0x10000L);
 			matrix.xy = (FT_Fixed)(-sin(angle) * 0x10000L);
 			matrix.yx = (FT_Fixed)( sin(angle) * 0x10000L);
@@ -257,21 +257,21 @@ GlyphSet *Converter::calcString(Font *font, const unsigned short *text, unsigned
 	if(params->useBidi())
 	{
 		FriBidiCharType baseDir = FRIBIDI_TYPE_N;
-		FriBidiChar *unicodeIn = new FriBidiChar[length + 1];
-		FriBidiChar *unicodeOut = new FriBidiChar[length + 1];
+		FriBidiChar *tqunicodeIn = new FriBidiChar[length + 1];
+		FriBidiChar *tqunicodeOut = new FriBidiChar[length + 1];
 		bidi = new unsigned short[length + 1];	
 
 		for(unsigned int i = 0; i < length; i++)
-			unicodeIn[i] = text[i];
+			tqunicodeIn[i] = text[i];
 	
-		fribidi_log2vis(unicodeIn, length, &baseDir, unicodeOut, 0, 0, 0); 
+		fribidi_log2vis(tqunicodeIn, length, &baseDir, tqunicodeOut, 0, 0, 0); 
 	
 		for(unsigned int i = 0; i < length; i++)
-			bidi[i] = unicodeOut[i];
+			bidi[i] = tqunicodeOut[i];
 
 		bidi[length] = 0;
-		delete []unicodeIn;
-		delete []unicodeOut;
+		delete []tqunicodeIn;
+		delete []tqunicodeOut;
 	}
 	else
 		bidi = const_cast<unsigned short *>(text);
@@ -302,7 +302,7 @@ GlyphSet *Converter::calcString(Font *font, const unsigned short *text, unsigned
 	int pixelUnderlineThickness = T2PMAX(1, (int) ((font->fontFace()->underline_thickness * fontSize / font->fontFace()->units_per_EM) * affine.m22()));
 
 	// 3. Prepare needed variables for the rendering loop
-	// 	  - rendering params (layout, font...)
+	// 	  - rendering params (tqlayout, font...)
 	// 	  - bounding box (per glyph, overall)
 	// 	  - glyph matrix (overall)
 	// 	  - resulting glyph sets

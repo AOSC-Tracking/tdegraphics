@@ -256,7 +256,7 @@ void dvifile::prepare_pages()
    while (i > 0) {
     command_pointer  = dvi_Data() + page_offset[i--];
     if (readUINT8() != BOP) {
-      errorMsg = i18n("The page %1 does not start with the BOP command.").arg(i+1);
+      errorMsg = i18n("The page %1 does not start with the BOP command.").tqarg(i+1);
       return;
     }
     command_pointer += 10 * 4;

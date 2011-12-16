@@ -42,7 +42,7 @@
 #include <kparts/part.h>
 #include <assert.h>
 #include <kdebug.h>
-#include <stylesheet.h>
+#include <tqstylesheet.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kinputdialog.h>
@@ -330,11 +330,11 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 		case KSVG::Window::_GetURL:
 		{
 			KURL url((const_cast<Window *>(window))->doc()->baseUrl(), args[0].toString(exec).qstring());
-			Value asyncStatus = (const_cast<Window *>(window))->doc()->ecmaEngine()->getUrl(exec, url);
+			Value asynctqStatus = (const_cast<Window *>(window))->doc()->ecmaEngine()->getUrl(exec, url);
 			Object callBackFunction = Object::dynamicCast(args[1]);
 			List callBackArgs;
 
-			callBackArgs.append(asyncStatus);
+			callBackArgs.append(asynctqStatus);
 			callBackFunction.call(exec, callBackFunction, callBackArgs);
 
 			return Undefined();

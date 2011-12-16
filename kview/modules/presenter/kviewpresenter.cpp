@@ -24,7 +24,7 @@
 
 #include <tqvbox.h>
 #include <tqobjectlist.h>
-#include <signalslotimp.h>
+#include <tqsignalslotimp.h>
 #include <tqtimer.h>
 #include <tqevent.h>
 #include <tqdragobject.h>
@@ -412,7 +412,7 @@ void KViewPresenter::loadList()
 	TQString tempfile;
 	if( ! KIO::NetAccess::download( url, tempfile, m_pViewer->widget() ) )
 	{
-		KMessageBox::error( m_pImageList, i18n( "Could not load\n%1" ).arg( url.prettyURL() ) );
+		KMessageBox::error( m_pImageList, i18n( "Could not load\n%1" ).tqarg( url.prettyURL() ) );
 		return;
 	}
 	TQFile file( tempfile );
@@ -442,7 +442,7 @@ void KViewPresenter::loadList()
 		}
 		else
 		{
-			KMessageBox::error( m_pImageList, i18n( "Wrong format\n%1" ).arg( url.prettyURL() ) );
+			KMessageBox::error( m_pImageList, i18n( "Wrong format\n%1" ).tqarg( url.prettyURL() ) );
 		}
 		file.close();
 	}

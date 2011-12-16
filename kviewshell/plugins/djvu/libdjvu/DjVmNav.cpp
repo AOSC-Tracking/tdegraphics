@@ -147,13 +147,13 @@ DjVmNav::DjVuBookMark::encode(const GP<ByteStream> &gstr)
   ByteStream &bs=*gstr;
 #ifdef DJVMNAV_WITH_256LIMIT
   if (count>255)
-    G_THROW("Excessive number of children in bookmark tree");
+    G_THROW("Excessive number of tqchildren in bookmark tree");
   bs.write8(count);
   textsize = displayname.length();
   bs.write24( textsize );
 #else
   if (count>65535)
-    G_THROW("Excessive number of children in bookmark tree");
+    G_THROW("Excessive number of tqchildren in bookmark tree");
   bs.write8( count & 0xff );
   bs.write8( (count>>8) & 0xff );
   textsize = displayname.length();

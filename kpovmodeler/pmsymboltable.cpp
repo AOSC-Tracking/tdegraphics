@@ -94,7 +94,7 @@ TQString PMSymbolTable::findNewID( const TQString& prefix )
    // find next free id
    do
    {
-      testID = prefix + TQString( "%1" ).arg( number );
+      testID = prefix + TQString( "%1" ).tqarg( number );
       symbol = find( testID );
       if( symbol )
          number++;

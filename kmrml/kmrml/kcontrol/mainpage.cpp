@@ -186,7 +186,7 @@ TQStringList MainPage::difference( const TQStringList& oldIndexDirs,
 {
     TQStringList result;
 
-    TQString slash = TQString::fromLatin1("/");
+    TQString slash = TQString::tqfromLatin1("/");
     TQStringList::ConstIterator oldIt = oldIndexDirs.begin();
     TQString oldDir, newDir;
 
@@ -465,7 +465,7 @@ void MainPage::slotIndexingFinished( int returnCode )
             if ( err )
                 syserr = TQString::fromLocal8Bit( err );
             else
-                syserr = i18n("Unknown error: %1").arg( returnCode );
+                syserr = i18n("Unknown error: %1").tqarg( returnCode );
         }
 
         KMessageBox::detailedError( this, i18n("An error occurred during indexing. The index might be invalid."),

@@ -20,7 +20,7 @@
 #include "pmglobalphotons.h"
 #include "pmlineedits.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqcombobox.h>

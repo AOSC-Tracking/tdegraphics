@@ -36,7 +36,7 @@ fontEncoding::fontEncoding(const TQString &encName)
   encFileName = encFileName.stripWhiteSpace();
 
   if (encFileName.isEmpty()) {
-    kdError(4300) << TQString("fontEncoding::fontEncoding(...): The file '%1' could not be found by kpsewhich.").arg(encName) << endl;
+    kdError(4300) << TQString("fontEncoding::fontEncoding(...): The file '%1' could not be found by kpsewhich.").tqarg(encName) << endl;
     return;
   }
 
@@ -76,7 +76,7 @@ fontEncoding::fontEncoding(const TQString &encName)
     for(; i<256; i++)
       glyphNameVector[i] = ".notdef";
   } else {
-    kdError(4300) << TQString("fontEncoding::fontEncoding(...): The file '%1' could not be opened.").arg(encFileName) << endl;
+    kdError(4300) << TQString("fontEncoding::fontEncoding(...): The file '%1' could not be opened.").tqarg(encFileName) << endl;
     return;
   }
 

@@ -18,7 +18,7 @@
 
 #include "pmoutputdevice.h"
 #include "pmpovrayformat.h"
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <klocale.h>
 
 unsigned int PMOutputDevice::s_indentOffset = 3;
@@ -55,22 +55,22 @@ void PMOutputDevice::callSerialization( const PMObject* o, const PMMetaObject* m
       info->call( o, mo, this );
    else
    {
-      if( mo == o->metaObject( ) )
+      if( mo == o->tqmetaObject( ) )
       {
          printError( i18n( "The object \"%1\" doesn't support %2." )
-                     .arg( o->description( ) ).arg( description( ) ) );
+                     .tqarg( o->description( ) ).tqarg( description( ) ) );
       }
       else
       {
          printError( i18n( "The class \"%1\" doesn't support %2." )
-                     .arg( o->description( ) ).arg( mo->className( ) ) );
+                     .tqarg( o->description( ) ).tqarg( mo->className( ) ) );
       }
    }
 }
 
 void PMOutputDevice::serialize( PMObject* o )
 {
-   callSerialization( o, o->metaObject( ) );
+   callSerialization( o, o->tqmetaObject( ) );
 }
 
 void PMOutputDevice::close( )

@@ -711,7 +711,7 @@ float SVGStylableImpl::fontSizeForText(const TQString &value)
  text-anchor		SVGStylableImpl::TextAnchor			DontDelete|ReadOnly
  direction			SVGStylableImpl::Direction			DontDelete|ReadOnly
  writing-mode		SVGStylableImpl::WritingMode		DontDelete|ReadOnly
- unicode-bidi		SVGStylableImpl::UnicodeBidi		DontDelete|ReadOnly
+ tqunicode-bidi		SVGStylableImpl::UnicodeBidi		DontDelete|ReadOnly
  opacity			SVGStylableImpl::Opacity			DontDelete|ReadOnly
  fill-opacity		SVGStylableImpl::FillOpacity		DontDelete|ReadOnly
  stroke-opacity		SVGStylableImpl::StrokeOpacity		DontDelete|ReadOnly
@@ -1006,7 +1006,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 			break;
 		case Direction:
 			m_flags |= SVG_STYLE_FLAG_TEXT_DIRECTION;
-			// Spec: direction is only processed when unicode-bidi
+			// Spec: direction is only processed when tqunicode-bidi
 			//       is set to bidi-override or embedded
 			if(m_textUnicodeBidi == OVERRIDE ||
 				m_textUnicodeBidi == EMBED ||
@@ -1276,16 +1276,16 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 
 	if(redraw)
 	{
-		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_object);
+		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_object);
 		if(inherit)
 			processStyle();
 			
-		if(shape && shape->item())
+		if(tqshape && tqshape->item())
 		{
 			if(update > -1)
-				shape->item()->update(static_cast<CanvasItemUpdate>(update));
+				tqshape->item()->update(static_cast<CanvasItemUpdate>(update));
 			else if(m_object)
-				m_object->ownerDoc()->canvas()->invalidate(shape->item(), false);
+				m_object->ownerDoc()->canvas()->tqinvalidate(tqshape->item(), false);
 		}
 	}
 }

@@ -200,11 +200,11 @@ void PMBumpMap::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBumpMap::metaObject( ) const
+PMMetaObject* PMBumpMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BumpMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BumpMap", Base::tqmetaObject( ),
                                         createNewBumpMap );
 
       PMBitmapTypeProperty* bp = new PMBitmapTypeProperty(

@@ -9,7 +9,7 @@
 #include <config.h>
 
 #include <tqapplication.h>
-#include <clipboard.h>
+#include <tqclipboard.h>
 
 #include "selection.h"
 
@@ -30,8 +30,8 @@ void TextSelection::set(const PageNumber& pageNr, TQ_INT32 start, TQ_INT32 end, 
     selectedText = TQString();
 
   if (page != 0) {
-    TQApplication::clipboard()->setSelectionMode(true);
-    TQApplication::clipboard()->setText(selectedText);
+    TQApplication::tqclipboard()->setSelectionMode(true);
+    TQApplication::tqclipboard()->setText(selectedText);
   }
 }
 
@@ -53,8 +53,8 @@ bool TextSelection::operator!= (const TextSelection& s) const
 void TextSelection::copyText() const
 {
   if (!isEmpty()) {
-    TQApplication::clipboard()->setSelectionMode(false);
-    TQApplication::clipboard()->setText(selectedText);
+    TQApplication::tqclipboard()->setSelectionMode(false);
+    TQApplication::tqclipboard()->setText(selectedText);
   }
 }
 

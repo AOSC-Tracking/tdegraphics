@@ -18,7 +18,7 @@
 
 #include <tqdir.h>
 #include <tqfile.h>
-#include <textcodec.h>
+#include <tqtextcodec.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -104,7 +104,7 @@ bool Config::sync()
 void Config::setDefaultHost( const TQString& host )
 {
     m_defaultHost = host.isEmpty() ?
-                    TQString::fromLatin1(DEFAULT_HOST) : host;
+                    TQString::tqfromLatin1(DEFAULT_HOST) : host;
 
     m_config->setGroup( CONFIG_GROUP );
     m_config->writeEntry( "Default Host", m_defaultHost );

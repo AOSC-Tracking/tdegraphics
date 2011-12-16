@@ -100,11 +100,11 @@ void PMCone::readAttributes( const PMXMLHelper & h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMCone::metaObject( ) const
+PMMetaObject* PMCone::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Cone", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Cone", Base::tqmetaObject( ),
                                         createNewCone );
       s_pMetaObject->addProperty(
          new PMConeProperty( "end1", &PMCone::setEnd1, &PMCone::end1 ) );

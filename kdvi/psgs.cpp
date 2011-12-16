@@ -211,11 +211,11 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
   TQStringList argus;
   argus << "gs";
   argus << "-dSAFER" << "-dPARANOIDSAFER" << "-dDELAYSAFER" << "-dNOPAUSE" << "-dBATCH";
-  argus << TQString("-sDEVICE=%1").arg(*gsDevice);
-  argus << TQString("-sOutputFile=%1").arg(filename);
-  argus << TQString("-sExtraIncludePath=%1").arg(includePath);
-  argus << TQString("-g%1x%2").arg(pixel_page_w).arg(pixel_page_h); // page size in pixels
-  argus << TQString("-r%1").arg(resolution);                       // resolution in dpi
+  argus << TQString("-sDEVICE=%1").tqarg(*gsDevice);
+  argus << TQString("-sOutputFile=%1").tqarg(filename);
+  argus << TQString("-sExtraIncludePath=%1").tqarg(includePath);
+  argus << TQString("-g%1x%2").tqarg(pixel_page_w).tqarg(pixel_page_h); // page size in pixels
+  argus << TQString("-r%1").tqarg(resolution);                       // resolution in dpi
   argus << "-c" << "<< /PermitFileReading [ ExtraIncludePath ] /PermitFileWriting [] /PermitFileControl [] >> setuserparams .locksafe";
   argus << "-f" << PSfile.name();
   
@@ -241,7 +241,7 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
     while(proc.readln(GSoutput) != -1) {
       if (GSoutput.contains("Unknown device")) {
 	kdDebug(4300) << TQString("The version of ghostview installed on this computer does not support "
-				   "the '%1' ghostview device driver.").arg(*gsDevice) << endl;
+				   "the '%1' ghostview device driver.").tqarg(*gsDevice) << endl;
 	knownDevices.remove(gsDevice);
 	gsDevice = knownDevices.begin();
 	if (knownDevices.isEmpty())
@@ -267,7 +267,7 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
 					  "drivers. Note that KDVI needs to be restarted to re-enable PostScript support."
 					  "</p></qt>"));
 	else {
-	  kdDebug(4300) << TQString("KDVI will now try to use the '%1' device driver.").arg(*gsDevice) << endl;
+	  kdDebug(4300) << TQString("KDVI will now try to use the '%1' device driver.").tqarg(*gsDevice) << endl;
 	  gs_generate_graphics_file(page, filename, magnification);
 	}
 	return;

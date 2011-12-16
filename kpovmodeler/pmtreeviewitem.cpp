@@ -78,7 +78,7 @@ void PMTreeViewItem::setDescriptions( )
       {
          PMTextureMapBase* tm = ( PMTextureMapBase* ) m_pObject->parent( );
          if( m_pObject->type( ) == tm->mapType( ) )
-            text = TQString( "[%1] " ).arg( tm->mapValue( m_pObject ), 4, 'f', 2 ) + text;
+            text = TQString( "[%1] " ).tqarg( tm->mapValue( m_pObject ), 4, 'f', 2 ) + text;
       }
    }
    setText( 0, text );
@@ -113,5 +113,5 @@ void PMTreeViewItem::initSelection( )
 {
    TQListViewItem::setSelected( m_pObject->isSelected( ) );
 //   if( m_pObject->isSelected( ) )
-//      repaint( );
+//      tqrepaint( );
 }

@@ -30,7 +30,7 @@
 #include <kptoolpreviewdialog.h>
 
 #include <tqapplication.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqgroupbox.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
@@ -389,7 +389,7 @@ void kpToolPreviewDialog::updatePreview ()
         m_previewPixmapLabel->setPixmap (previewPixmap);
 
         // immediate update esp. for expensive previews
-        m_previewPixmapLabel->repaint (false/*no erase*/);
+        m_previewPixmapLabel->tqrepaint (false/*no erase*/);
 
 #if DEBUG_KP_TOOL_PREVIEW_DIALOG
     kdDebug () << "\tafter TQLabel::setPixmap() previewPixmapLabel: w="

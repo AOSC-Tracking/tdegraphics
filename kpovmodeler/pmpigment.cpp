@@ -45,11 +45,11 @@ PMPigment::~PMPigment( )
 {
 }
 
-PMMetaObject* PMPigment::metaObject( ) const
+PMMetaObject* PMPigment::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Pigment", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Pigment", Base::tqmetaObject( ),
                                         createNewPigment );
       s_pMetaObject->addProperty(
          new PMPigmentProperty( "uvMapping", &PMPigment::setUVMapping, &PMPigment::uvMapping ) );

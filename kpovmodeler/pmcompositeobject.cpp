@@ -67,10 +67,10 @@ PMCompositeObject::~PMCompositeObject( )
       delete m_pViewStructure;
 }
 
-PMMetaObject* PMCompositeObject::metaObject( ) const
+PMMetaObject* PMCompositeObject::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
-      s_pMetaObject = new PMMetaObject( "CompositeObject", Base::metaObject( ) );
+      s_pMetaObject = new PMMetaObject( "CompositeObject", Base::tqmetaObject( ) );
    return s_pMetaObject;
 }
 
@@ -84,7 +84,7 @@ void PMCompositeObject::cleanUp( ) const
    Base::cleanUp( );
 }
 
-PMObject* PMCompositeObject::childAt( uint index ) const
+PMObject* PMCompositeObject::tqchildAt( uint index ) const
 {
    PMObject* tmp;
    uint i = 0;
@@ -136,7 +136,7 @@ bool PMCompositeObject::insertChild( PMObject* o, int i )
       }
       else
       {
-         PMObject* tmp = childAt( ( uint ) ( i - 1 ) );
+         PMObject* tmp = tqchildAt( ( uint ) ( i - 1 ) );
          if( !tmp )
          {
             kdError( PMArea ) << "Index too big" << "\n";
@@ -272,7 +272,7 @@ bool PMCompositeObject::takeChild( PMObject* o )
 
 bool PMCompositeObject::takeChild( uint i )
 {
-   PMObject* tmp = childAt( i );
+   PMObject* tmp = tqchildAt( i );
    if( tmp )
       return takeChild( tmp );
    kdError( PMArea ) << "Index too big";

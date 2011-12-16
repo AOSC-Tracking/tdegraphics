@@ -57,7 +57,7 @@ class MrmlPart : public KParts::ReadOnlyPart
   TQ_OBJECT
 
 public:
-    enum Status { NeedCollection, CanSearch, InProgress };
+    enum tqStatus { NeedCollection, CanSearch, InProgress };
 
     MrmlPart( TQWidget *parentWidget, const char *widgetName,
               TQObject *parent, const char *name, const TQStringList& args );
@@ -116,7 +116,7 @@ private:
     void initHostCombo();
     void enableServerDependentWidgets( bool enable );
 
-    void setStatus( Status status );
+    void settqStatus( tqStatus status );
 
     void contactServer( const KURL& url );
     void downloadReferenceFiles( const KURL::List& downloadList );
@@ -143,7 +143,7 @@ private:
     CollectionList m_collections;
     AlgorithmList m_algorithms;
 
-    Status m_status;
+    tqStatus m_status;
     static uint s_sessionId;
 
 };

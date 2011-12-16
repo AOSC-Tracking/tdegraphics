@@ -35,7 +35,7 @@
 #include <tqfontmetrics.h>
 #include <tqimage.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpixmap.h>
 #include <tqpushbutton.h>
 
@@ -275,9 +275,9 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
     // TODO: This is what should be shown in the m_gammaInput spinbox
     m_gammaLabel = new TQLabel (this);
     // TODO: This doesn't seem to be wide enough with some fonts so the
-    //       whole layout moves when we drag the gamma slider.
+    //       whole tqlayout moves when we drag the gamma slider.
     m_gammaLabel->setMinimumWidth (m_gammaLabel->fontMetrics ().width (" 10.00 "));
-    m_gammaLabel->setAlignment (m_gammaLabel->alignment () | TQt::AlignRight);
+    m_gammaLabel->tqsetAlignment (m_gammaLabel->tqalignment () | TQt::AlignRight);
     TQPushButton *gammaResetPushButton = new TQPushButton (i18n ("Rese&t"), this);
 
 
@@ -438,7 +438,7 @@ void kpEffectBalanceWidget::recalculateGammaLabel ()
                          'f'/*[-]9.9*/,
                          2/*precision*/) +
         " ");
-    m_gammaLabel->repaint ();
+    m_gammaLabel->tqrepaint ();
 }
 
 

@@ -304,7 +304,7 @@ TQString pageSize::serialize() const
   if ((currentSize >= 0) && (fabs(staticList[currentSize].height-pageHeight.getLength_in_mm()) <= 0.5))
     return staticList[currentSize].name;
   else 
-    return TQString("%1x%2").arg(pageWidth.getLength_in_mm()).arg(pageHeight.getLength_in_mm());
+    return TQString("%1x%2").tqarg(pageWidth.getLength_in_mm()).tqarg(pageHeight.getLength_in_mm());
 }
 
 

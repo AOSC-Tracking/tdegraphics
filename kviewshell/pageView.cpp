@@ -499,10 +499,10 @@ void PageView::viewportPaintEvent(TQPaintEvent* e)
       DocumentWidget* item = widgetList->at(i);
 
       // Check if the Widget needs to be updated.
-      if (!item->geometry().intersects(e->rect()))
+      if (!item->tqgeometry().intersects(e->rect()))
         continue;
 
-      TQRect widgetGeometry = item->geometry();
+      TQRect widgetGeometry = item->tqgeometry();
 
       // Draw the widget.
       if (e->rect().intersects(widgetGeometry))
@@ -521,10 +521,10 @@ void PageView::viewportPaintEvent(TQPaintEvent* e)
   // Paint the background.
   TQPainter p(viewport());
 
-  TQMemArray<TQRect> backgroundRects = backgroundArea.rects();
+  TQMemArray<TQRect> backgroundRects = backgroundArea.tqrects();
 
   for (unsigned int i = 0; i < backgroundRects.count(); i++)
-    p.fillRect(backgroundRects[i], colorGroup().mid());
+    p.fillRect(backgroundRects[i], tqcolorGroup().mid());
 }
 
 

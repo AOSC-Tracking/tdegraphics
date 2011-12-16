@@ -32,7 +32,7 @@
 
 #include <tqcheckbox.h>
 #include <tqimage.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpixmap.h>
 
 #include <kdebug.h>

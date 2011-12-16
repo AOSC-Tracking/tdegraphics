@@ -82,7 +82,7 @@ ThumbnailList::ThumbnailList( TQWidget *parent, KPDFDocument *document )
 	setDragAutoScroll( false );
 
 	// set contents background to the 'base' color
-	viewport()->setPaletteBackgroundColor( palette().active().base() );
+	viewport()->setPaletteBackgroundColor( tqpalette().active().base() );
 
 	setFrameStyle( StyledPanel | Raised );
 	connect( this, TQT_SIGNAL(contentsMoving(int, int)), this, TQT_SLOT(slotRequestVisiblePixmaps(int, int)) );
@@ -199,7 +199,7 @@ void ThumbnailList::notifyPageChanged( int pageNumber, int /*changedFlags*/ )
     //if ( !(changedFlags & DocumentObserver::Pixmap) )
     //    return;
 
-    // iterate over visible items: if page(pageNumber) is one of them, repaint it
+    // iterate over visible items: if page(pageNumber) is one of them, tqrepaint it
     TQValueList<ThumbnailWidget *>::iterator vIt = m_visibleThumbnails.begin(), vEnd = m_visibleThumbnails.end();
     for ( ; vIt != vEnd; ++vIt )
         if ( (*vIt)->pageNumber() == pageNumber )
@@ -362,7 +362,7 @@ void ThumbnailList::viewportResizeEvent( TQResizeEvent * e )
 	else if ( e->size().height() <= e->oldSize().height() )
 		return;
 
-	// invalidate the bookmark overlay
+	// tqinvalidate the bookmark overlay
 	if ( m_bookmarkOverlay )
 	{
 		delete m_bookmarkOverlay;
@@ -495,9 +495,9 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
     TQPainter p( this );
 
     // draw the bottom label + highlight mark
-    TQColor fillColor = m_selected ? palette().active().highlight() : palette().active().base();
+    TQColor fillColor = m_selected ? tqpalette().active().highlight() : tqpalette().active().base();
     p.fillRect( 0, 0, width, height, fillColor );
-    p.setPen( m_selected ? palette().active().highlightedText() : palette().active().text() );
+    p.setPen( m_selected ? tqpalette().active().highlightedText() : tqpalette().active().text() );
     p.drawText( 0, m_pixmapHeight + m_margin, width, m_labelHeight, TQt::AlignCenter, TQString::number( m_labelNumber ) );
 
     // draw page outline and pixmap
@@ -509,7 +509,7 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
         p.setPen( isBookmarked ? TQColor( 0xFF8000 ) : TQt::black );
         p.drawRect( m_margin/2 - 1, m_margin/2 - 1, m_pixmapWidth + 2, m_pixmapHeight + 2 );
         // draw the clear rect
-        p.setPen( isBookmarked ? TQColor( 0x804000 ) : palette().active().base() );
+        p.setPen( isBookmarked ? TQColor( 0x804000 ) : tqpalette().active().base() );
         // draw the bottom and right shadow edges
         if ( !isBookmarked )
         {

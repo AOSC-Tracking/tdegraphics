@@ -428,7 +428,7 @@ DjVuImage::notify_chunk_done(const DjVuPort *, const GUTF8String & name)
        !name.cmp("PMxx", 2) ||
        !name.cmp("BMxx", 2)  ) )
    {
-      DjVuPort::get_portcaster()->notify_relayout(this);
+      DjVuPort::get_portcaster()->notify_retqlayout(this);
       relayout_sent=true;
    } 
    else if (!name.cmp("Sxxx", 1) ||
@@ -461,7 +461,7 @@ public:
   GP<DataPool> request_data(const DjVuPort *src, const GURL & url);
   void notify_chunk_done(const DjVuPort *, const GUTF8String &name);
   void notify_redisplay(const class DjVuImage * source);
-  void notify_relayout(const class DjVuImage * source);
+  void notify_retqlayout(const class DjVuImage * source);
 };
 
 DjVuImageNotifier::DjVuImageNotifier(DjVuInterface *notifier)
@@ -485,10 +485,10 @@ DjVuImageNotifier::notify_redisplay(const class DjVuImage * source)
 }
 
 void 
-DjVuImageNotifier::notify_relayout(const class DjVuImage * source)
+DjVuImageNotifier::notify_retqlayout(const class DjVuImage * source)
 {
   if (notifier)
-    notifier->notify_relayout();
+    notifier->notify_retqlayout();
 }
 
 void 
@@ -848,17 +848,17 @@ DjVuImage::stencil(GPixmap *pm, const GRect &rect,
       for (int blitno = 0; blitno < jimg->get_blit_count(); blitno++)
         {
           const JB2Blit *pblit = jimg->get_blit(blitno);
-          const JB2Shape  &pshape = jimg->get_shape(pblit->shapeno);
-          if (pshape.bits &&
+          const JB2Shape  &ptqshape = jimg->get_tqshape(pblit->tqshapeno);
+          if (ptqshape.bits &&
               pblit->left <= rect.xmax * subsample &&
               pblit->bottom <= rect.ymax * subsample &&
-              pblit->left + (int)pshape.bits->columns() >= rect.xmin * subsample &&
-              pblit->bottom + (int)pshape.bits->rows() >= rect.ymin * subsample )
+              pblit->left + (int)ptqshape.bits->columns() >= rect.xmin * subsample &&
+              pblit->bottom + (int)ptqshape.bits->rows() >= rect.ymin * subsample )
             {
               // Record component list
               if (fgbc) components.append(blitno);
               // Blit
-              bm->blit(pshape.bits, 
+              bm->blit(ptqshape.bits, 
                        pblit->left - rxmin, pblit->bottom - rymin, 
                        subsample);
             }
@@ -902,9 +902,9 @@ DjVuImage::stencil(GPixmap *pm, const GRect &rect,
               lastx = pblit->left;
               if (fg->colordata[blitno] == colorindex)
                 {
-                  const JB2Shape  &pshape = jimg->get_shape(pblit->shapeno);
+                  const JB2Shape  &ptqshape = jimg->get_tqshape(pblit->tqshapeno);
                   GRect rect(pblit->left, pblit->bottom, 
-                             pshape.bits->columns(), pshape.bits->rows());
+                             ptqshape.bits->columns(), ptqshape.bits->rows());
                   comprect.recthull(comprect, rect);
                   compset.insert_before(nullpos, components, pos);
                   continue;
@@ -927,8 +927,8 @@ DjVuImage::stencil(GPixmap *pm, const GRect &rect,
             {
               int blitno = compset[pos];
               const JB2Blit *pblit = jimg->get_blit(blitno);
-              const JB2Shape  &pshape = jimg->get_shape(pblit->shapeno);
-              bm->blit(pshape.bits, 
+              const JB2Shape  &ptqshape = jimg->get_tqshape(pblit->tqshapeno);
+              bm->blit(ptqshape.bits, 
                        pblit->left - rxmin, pblit->bottom - rymin, 
                        subsample);
             }

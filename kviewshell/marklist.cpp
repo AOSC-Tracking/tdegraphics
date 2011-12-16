@@ -22,7 +22,7 @@
 #include <tqcheckbox.h>
 #include <tqimage.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqlabel.h>
 #include <tqwhatsthis.h>
@@ -69,7 +69,7 @@ ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pag
 
 void ThumbnailWidget::paintEvent(TQPaintEvent* e)
 {
-  // Only repaint if the widget is really visible. We need to check this because TQt
+  // Only tqrepaint if the widget is really visible. We need to check this because TQt
   // sends paintEvents to all widgets that have ever been visible in the Scrollview
   // whenever the ScrollView is resized. This also increases the percieved performance
   // only thumbnails that are really needed are rendered.
@@ -169,23 +169,23 @@ MarkListWidget::MarkListWidget(TQWidget* _parent, MarkList* _markList, const Pag
   : TQWidget(_parent), showThumbnail(_showThumbnail), pageNumber(_pageNumber),
     pageCache(_pageCache), markList(_markList)
 {
-  TQBoxLayout* layout = new TQVBoxLayout(this, margin);
+  TQBoxLayout* tqlayout = new TQVBoxLayout(this, margin);
 
   thumbnailWidget = 0;
   if (showThumbnail)
   {
     thumbnailWidget = new ThumbnailWidget(this, pageNumber, pageCache);
-    layout->addWidget(thumbnailWidget, 1, TQt::AlignTop);
+    tqlayout->addWidget(thumbnailWidget, 1, TQt::AlignTop);
   }
 
-  TQBoxLayout* bottomLayout = new TQHBoxLayout(layout);
+  TQBoxLayout* bottomLayout = new TQHBoxLayout(tqlayout);
 
   checkBox = new TQCheckBox(TQString(), this );
   checkBox->setFocusPolicy(TQ_NoFocus);
   TQToolTip::add(checkBox, i18n("Select for printing"));
   bottomLayout->addWidget(checkBox, 0, TQt::AlignAuto);
 
-  pageLabel = new TQLabel(TQString("%1").arg(pageNumber), this);
+  pageLabel = new TQLabel(TQString("%1").tqarg(pageNumber), this);
   bottomLayout->addWidget(pageLabel, 1);
 
   _backgroundColor = KGlobalSettings::baseColor();
@@ -217,7 +217,7 @@ void MarkListWidget::setChecked( bool checked )
 void MarkListWidget::setSelected( bool selected )
 {
     if (selected)
-      setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
+      setPaletteBackgroundColor( TQApplication::tqpalette().active().highlight() );
     else
       setPaletteBackgroundColor( _backgroundColor );
 }
@@ -284,7 +284,7 @@ MarkList::MarkList(TQWidget* parent, const char* name)
   setVScrollBarMode(TQScrollView::AlwaysOn);
   setHScrollBarMode(TQScrollView::AlwaysOff);
 
-  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
+  tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
 
   viewport()->setBackgroundMode(TQt::PaletteBase);
   enableClipper(true);

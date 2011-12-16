@@ -21,7 +21,7 @@
 
 */
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 #include <kgenericfactory.h>
 #include <ksimpleconfig.h>
@@ -96,7 +96,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	// set the kcontrol module buttons
 	setButtons(Help | Apply | Cancel | Ok);
 
-	// create a layout with two vertical boxes
+	// create a tqlayout with two vertical boxes
 	TQVBoxLayout *topLayout = new TQVBoxLayout(this, 0, 0);
 	topLayout->setAutoAdd(true);
 	
@@ -113,7 +113,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	connect(m_deviceSel, TQT_SIGNAL(selectionChanged(TQIconViewItem *)),
 		TQT_SLOT(slot_deviceSelected(TQIconViewItem *)));
 
-	m_deviceSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
+	m_deviceSel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
 	
 	// create actions
 	KAction *act;

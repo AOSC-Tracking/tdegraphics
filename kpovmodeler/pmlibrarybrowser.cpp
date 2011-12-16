@@ -18,7 +18,7 @@
 
 #include "pmlibrarybrowser.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqsplitter.h>

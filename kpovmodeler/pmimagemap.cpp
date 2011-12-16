@@ -275,11 +275,11 @@ void PMImageMap::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMImageMap::metaObject( ) const
+PMMetaObject* PMImageMap::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ImageMap", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "ImageMap", Base::tqmetaObject( ),
                                         createNewImageMap );
 
       PMBitmapTypeProperty* bp = new PMBitmapTypeProperty(

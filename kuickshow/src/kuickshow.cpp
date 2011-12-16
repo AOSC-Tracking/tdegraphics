@@ -24,7 +24,7 @@
 #include <tqdialog.h>
 #include <tqglobal.h>
 #include <tqkeycode.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqsize.h>
 #include <tqstring.h>
 
@@ -133,7 +133,7 @@ KuickShow::KuickShow( const char *name )
         if ( KMessageBox::warningYesNo(
                  this,
                  i18n("Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", 
-                      "Do you really want to display these %n images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", numArgs).arg(KStdGuiItem::no().plainText()),
+                      "Do you really want to display these %n images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", numArgs).tqarg(KStdGuiItem::no().plainText()),
                  i18n("Display Multiple Images?"))
              != KMessageBox::Yes )
         {
@@ -253,7 +253,7 @@ void KuickShow::initGUI( const KURL& startDir )
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configure %1...").arg( KGlobal::instance()->aboutData()->programName() ), "configure",
+    KAction *configure = new KAction( i18n("Configure %1...").tqarg( KGlobal::instance()->aboutData()->programName() ), "configure",
                                       KShortcut(),
                                       TQT_TQOBJECT(this), TQT_SLOT( configuration() ),
                                       coll, "kuick_configure" );
@@ -552,7 +552,7 @@ bool KuickShow::showImage( const KFileItem *fi,
                      this, TQT_SLOT (slotTrashCurrentImage (ImageWindow *)));
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
-                // after showing, otherwise we get some bogus geometry()
+                // after showing, otherwise we get some bogus tqgeometry()
                 m_viewer->move( Kuick::workArea().topLeft() );
             }
 
@@ -641,7 +641,7 @@ void KuickShow::performDeleteCurrentImage(TQWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>").arg(item->url().pathOrURL()),
+            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>").tqarg(item->url().pathOrURL()),
             i18n("Delete File"),
             KStdGuiItem::del(),
             "Kuick_delete_current_image")
@@ -666,7 +666,7 @@ void KuickShow::performTrashCurrentImage(TQWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>").arg(item->url().pathOrURL()),
+            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>").tqarg(item->url().pathOrURL()),
             i18n("Trash File"),
             KGuiItem(i18n("to trash", "&Trash"),"edittrash"),
             "Kuick_trash_current_image")

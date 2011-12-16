@@ -74,11 +74,11 @@ TQString PMTorus::description( ) const
    return i18n( "torus" );
 }
 
-PMMetaObject* PMTorus::metaObject( ) const
+PMMetaObject* PMTorus::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Torus", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Torus", Base::tqmetaObject( ),
                                         createNewTorus );
       s_pMetaObject->addProperty(
          new PMTorusProperty( "minorRadius", &PMTorus::setMinorRadius,

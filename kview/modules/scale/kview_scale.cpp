@@ -64,9 +64,9 @@ void KViewScale::slotScaleDlg()
 	KDialogBase dlg( m_pViewer->widget(), "KView scale dialog", true, i18n( "Scale Image" ), KDialogBase::Ok|KDialogBase::Cancel );
 	ScaleDlg widget( m_pCanvas->imageSize(), dlg.makeVBoxMainWidget() );
 #if 0
-	TQVBox * layout = dlg.makeVBoxMainWidget();
+	TQVBox * tqlayout = dlg.makeVBoxMainWidget();
 
-	TQGroupBox * pixelgroup = new TQGroupBox( i18n( "Pixel Dimensions" ), layout );
+	TQGroupBox * pixelgroup = new TQGroupBox( i18n( "Pixel Dimensions" ), tqlayout );
 	TQGridLayout * pixelgroupgrid = new TQGridLayout( pixelgroup, 1, 1, 0, KDialog::spacingHint() );
 	pixelgroupgrid->setSpacing( KDialog::spacingHint() );
 	pixelgroupgrid->setMargin( KDialog::marginHint() );
@@ -75,21 +75,21 @@ void KViewScale::slotScaleDlg()
 
 	// show original width
 	label = new TQLabel( i18n( "Original width:" ), pixelgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 0, 0 );
 	pixelgroupgrid->addWidget( new TQLabel( TQString::number( imagesize.width() ), pixelgroup ), 0, 1 );
 	label = new TQLabel( i18n( "Height:" ), pixelgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 1, 0 );
 	pixelgroupgrid->addWidget( new TQLabel( TQString::number( imagesize.height() ), pixelgroup ), 1, 1 );
 
 	pixelgroupgrid->addRowSpacing( 2, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "New width:" ), pixelgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 3, 0 );
 	label = new TQLabel( i18n( "Height:" ), pixelgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 4, 0 );
 	TQSpinBox * newwidth = new TQSpinBox( 1, 100000, 1, pixelgroup );
 	pixelgroupgrid->addWidget( newwidth, 3, 1 );
@@ -103,10 +103,10 @@ void KViewScale::slotScaleDlg()
 	pixelgroupgrid->addRowSpacing( 5, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "Ratio X:" ), pixelgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 6, 0 );
 	label = new TQLabel( i18n( "Y:" ), pixelgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	pixelgroupgrid->addWidget( label, 7, 0 );
 	TQSpinBox * ratiox = new TQSpinBox( pixelgroup );
 	ratiox->setValidator( new TQDoubleValidator( 0.0001, 10000, 4, ratiox ) );
@@ -116,16 +116,16 @@ void KViewScale::slotScaleDlg()
 	pixelgroupgrid->addWidget( ratioy, 7, 1 );
 	pixelgroupgrid->addMultiCellWidget( new TQCheckBox( i18n( "Link" ), pixelgroup ), 6, 7, 2, 2, TQt::AlignVCenter );
 
-	TQGroupBox * printgroup = new TQGroupBox( i18n( "Print Size && Display Units" ), layout );
+	TQGroupBox * printgroup = new TQGroupBox( i18n( "Print Size && Display Units" ), tqlayout );
 	TQGridLayout * printgroupgrid = new TQGridLayout( printgroup, 1, 1, 0, KDialog::spacingHint() );
 	printgroupgrid->setSpacing( KDialog::spacingHint() );
 	printgroupgrid->setMargin( KDialog::marginHint() );
 
 	label = new TQLabel( i18n( "New width:" ), printgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 0, 0 );
 	label = new TQLabel( i18n( "Height:" ), printgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 1, 0 );
 	TQSpinBox * newwidth2 = new TQSpinBox( printgroup );
 	printgroupgrid->addWidget( newwidth2, 0, 1 );
@@ -139,10 +139,10 @@ void KViewScale::slotScaleDlg()
 	printgroupgrid->addRowSpacing( 2, KDialog::spacingHint() );
 
 	label = new TQLabel( i18n( "Resolution X:" ), printgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 3, 0 );
 	label = new TQLabel( i18n( "Y:" ), printgroup );
-	label->setAlignment( TQLabel::AlignRight );
+	label->tqsetAlignment( TQLabel::AlignRight );
 	printgroupgrid->addWidget( label, 4, 0 );
 	TQSpinBox * resx = new TQSpinBox( printgroup );
 	printgroupgrid->addWidget( resx, 3, 1 );

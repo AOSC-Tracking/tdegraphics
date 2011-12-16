@@ -21,7 +21,7 @@
 #include <klocale.h>
 #include <tqbuttongroup.h>
 #include <tqcheckbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
 #include <kdebug.h>
@@ -40,7 +40,7 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *pa
 
   kprintDialogPage_pageoptions_baseLayout = new TQVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout");
   if (kprintDialogPage_pageoptions_baseLayout == 0) {
-    kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create layout" << endl;
+    kdError(1223) << "KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions() cannot create tqlayout" << endl;
     return;
   }
 
@@ -70,7 +70,7 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *pa
 
   kprintDialogPage_pageoptions_baseLayout->addStretch();
 
-  resize( TQSize(319, 166).expandedTo(minimumSizeHint()) );
+  resize( TQSize(319, 166).expandedTo(tqminimumSizeHint()) );
   clearWState( WState_Polished );
 }
 

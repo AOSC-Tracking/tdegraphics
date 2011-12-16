@@ -20,7 +20,7 @@
 */
 
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqgroupbox.h>
 
 #include <klocale.h>
@@ -37,18 +37,18 @@ KResizeWidget::KResizeWidget( TQWidget* parent, const char* name,
   group->setColumnLayout( 0, Qt::Horizontal );
   genLayout->addWidget( group );
 
-  TQHBoxLayout* layout = new TQHBoxLayout( group->layout(), 6 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( group->tqlayout(), 6 );
 
   m_width = new KIntSpinBox( 1, 200, 1, 1, 10, group );
   m_width->setValue( size.width() );
-  layout->addWidget( m_width, 1 );
+  tqlayout->addWidget( m_width, 1 );
 
   TQLabel* label = new TQLabel( "X", group );
-  layout->addWidget( label );
+  tqlayout->addWidget( label );
 
   m_height = new KIntSpinBox( 1, 200, 1, 1, 10, group);
   m_height->setValue( size.height() );
-  layout->addWidget( m_height, 1 );
+  tqlayout->addWidget( m_height, 1 );
 
   setMinimumSize( 200, 100 );
 }

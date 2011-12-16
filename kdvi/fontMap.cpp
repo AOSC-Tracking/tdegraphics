@@ -98,7 +98,7 @@ fontMap::fontMap()
     }
     file.close();
   } else
-    kdError(4300) << TQString("fontMap::fontMap(): The file '%1' could not be opened.").arg(map_fileName) << endl;
+    kdError(4300) << TQString("fontMap::fontMap(): The file '%1' could not be opened.").tqarg(map_fileName) << endl;
   
 #ifdef DEBUG_FONTMAP
   kdDebug(4300) << "FontMap file parsed. Results:" << endl;

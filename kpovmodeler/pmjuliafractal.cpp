@@ -112,11 +112,11 @@ void PMJuliaFractal::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMJuliaFractal::metaObject( ) const
+PMMetaObject* PMJuliaFractal::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "JuliaFractal", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "JuliaFractal", Base::tqmetaObject( ),
                                         createNewJuliaFractal );
       s_pMetaObject->addProperty(
          new PMJuliaFractalProperty( "juliaParameter", &PMJuliaFractal::setJuliaParameter,

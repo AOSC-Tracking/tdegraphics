@@ -20,7 +20,7 @@
 #include "pmmesh.h"
 #include "pmvectoredit.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 
 #include <klocale.h>
@@ -35,17 +35,17 @@ void PMMeshEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    m_pHierarchy = new TQCheckBox( i18n( "Hierarchy" ), this );
    m_pEnableInsideVector = new TQCheckBox( i18n( "Inside vector:" ), this );
    m_pInsideVector = new PMVectorEdit( "x", "y", "z", this );
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( m_pHierarchy );
-   layout->addStretch( 1 );
-   layout = new TQHBoxLayout( topLayout( ) );
-   layout->addWidget( m_pEnableInsideVector );
-   layout->addWidget( m_pInsideVector );
-   layout->addStretch( 1 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( m_pHierarchy );
+   tqlayout->addStretch( 1 );
+   tqlayout = new TQHBoxLayout( topLayout( ) );
+   tqlayout->addWidget( m_pEnableInsideVector );
+   tqlayout->addWidget( m_pInsideVector );
+   tqlayout->addStretch( 1 );
 
    connect( m_pHierarchy, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pEnableInsideVector, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotInsideVectorClicked( ) ) );

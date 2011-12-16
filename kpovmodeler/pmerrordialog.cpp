@@ -21,7 +21,7 @@
 
 #include <klocale.h>
 #include <tqlabel.h>
-#include <textedit.h>
+#include <tqtextedit.h>
 
 #include <kconfig.h>
 

@@ -17,7 +17,7 @@
 
 #include "pmunknownview.h"
 #include <klocale.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 PMUnknownView::PMUnknownView( const TQString& viewType,
                               TQWidget* parent, const char* name )
@@ -25,8 +25,8 @@ PMUnknownView::PMUnknownView( const TQString& viewType,
 {
    TQHBoxLayout* hl = new TQHBoxLayout( this );
    TQLabel* l;
-   l = new TQLabel( i18n( "Unknown view type \"%1\"" ).arg( viewType ), this );
-   l->setAlignment( TQt::AlignCenter );
+   l = new TQLabel( i18n( "Unknown view type \"%1\"" ).tqarg( viewType ), this );
+   l->tqsetAlignment( TQt::AlignCenter );
    hl->addWidget( l );
    m_viewType = viewType;
 }

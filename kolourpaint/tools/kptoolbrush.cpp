@@ -32,7 +32,7 @@
 kpToolBrush::kpToolBrush (kpMainWindow *mainWindow)
     : kpToolPen (kpToolPen::Brush,
                  i18n ("Brush"),
-                 i18n ("Draw using brushes of different shapes and sizes"),
+                 i18n ("Draw using brushes of different tqshapes and sizes"),
                  TQt::Key_B,
                  mainWindow, "tool_brush")
 {

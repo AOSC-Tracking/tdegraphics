@@ -18,7 +18,7 @@
 #include "pmlinkedit.h"
 #include <tqlineedit.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kpushbutton.h>
@@ -64,12 +64,12 @@ void PMLinkEdit::init( )
    m_pIDEdit->setReadOnly( true );
    grid->addWidget( m_pIDEdit, 0, 1 );
 
-   TQHBoxLayout* layout = new TQHBoxLayout( );
-   grid->addLayout( layout, 1, 1 );
+   TQHBoxLayout* tqlayout = new TQHBoxLayout( );
+   grid->addLayout( tqlayout, 1, 1 );
    m_pSelectButton = new TQPushButton( i18n( "Select..." ), this );
-   layout->addWidget( m_pSelectButton );
+   tqlayout->addWidget( m_pSelectButton );
    m_pClearButton = new KPushButton( KStdGuiItem::clear(), this );
-   layout->addWidget( m_pClearButton );
+   tqlayout->addWidget( m_pClearButton );
 
    connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelectClicked( ) ) );
    connect( m_pClearButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotClearClicked( ) ) );

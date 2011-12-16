@@ -11,7 +11,7 @@
 #include <kprinter.h>
 #include <kstdaction.h>
 #include <tqobject.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpaintdevicemetrics.h>
 #include <tqprogressdialog.h>
 #include <tqsplitter.h>
@@ -54,7 +54,7 @@ KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject 
   
   splitterWidget = new TQSplitter(verticalBox, widgetName);
   splitterWidget->setOpaqueResize(false);
-  splitterWidget->setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
+  splitterWidget->tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
   
   // Create SideBar
   sideBar = new TQToolBox(splitterWidget, "sidebar");
@@ -117,7 +117,7 @@ void KMultiPage::readSettings()
 
 void KMultiPage::writeSettings()
 {
-  // Save TOC layout
+  // Save TOC tqlayout
   tableOfContents->writeSettings();
 
   KVSPrefs::setGuiLayout(splitterWidget->sizes());
@@ -166,7 +166,7 @@ void KMultiPage::slotSave()
     fileName = fileName+ending;
 
   if (TQFile(fileName).exists()) {
-    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Shall I overwrite that file?").arg(fileName),
+    int r = KMessageBox::warningContinueCancel (0, i18n("The file %1\nexists. Shall I overwrite that file?").tqarg(fileName),
 				       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -216,7 +216,7 @@ bool KMultiPage::closeURL()
   // Clear Table of Contents
   tableOfContents->clear();
   
-  // Clear Status Bar
+  // Clear tqStatus Bar
   emit setStatusBarText(TQString());
 
   return true;
@@ -767,7 +767,7 @@ void KMultiPage::print()
     return;
 
   // initialize the printer using the print dialog
-  if ( printer->setup(parentWdg, i18n("Print %1").arg(m_file.section('/', -1))) ) {    
+  if ( printer->setup(parentWdg, i18n("Print %1").tqarg(m_file.section('/', -1))) ) {    
     // Now do the printing. 
     TQValueList<int> pageList = printer->pageList();
     if (pageList.isEmpty()) 
@@ -1427,7 +1427,7 @@ void KMultiPage::findNextText()
 
     if (i != 0)
     {
-      setStatusBarText(i18n("Search page %1 of %2").arg(pageNumber).arg(numberOfPages()));
+      setStatusBarText(i18n("Search page %1 of %2").tqarg(pageNumber).tqarg(numberOfPages()));
       kapp->processEvents();
     }
 
@@ -1474,7 +1474,7 @@ void KMultiPage::findNextText()
         int answ = KMessageBox::questionYesNo(scrollView(),
                    i18n("<qt>The search string <strong>%1</strong> could not be found by the "
                         "end of the document. Should the search be restarted from the beginning "
-                        "of the document?</qt>").arg(searchText),
+                        "of the document?</qt>").tqarg(searchText),
                    i18n("Text Not Found"), KStdGuiItem::cont(), KStdGuiItem::cancel());
 
         if (answ != KMessageBox::Yes)
@@ -1499,7 +1499,7 @@ void KMultiPage::findNextText()
     }
   }
 
-  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").arg(searchText));
+  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").tqarg(searchText));
   setStatusBarText(TQString());
   searchInProgress = false;
   if (!cachedPage)
@@ -1569,7 +1569,7 @@ void KMultiPage::findPrevText()
 
     if (i != 0)
     {
-      setStatusBarText(i18n("Search page %1 of %2").arg(pageNumber).arg(numberOfPages()));
+      setStatusBarText(i18n("Search page %1 of %2").tqarg(pageNumber).tqarg(numberOfPages()));
       kapp->processEvents();
     }
 
@@ -1616,7 +1616,7 @@ void KMultiPage::findPrevText()
         int answ = KMessageBox::questionYesNo(scrollView(),
                   i18n("<qt>The search string <strong>%1</strong> could not be found by the "
                         "beginning of the document. Should the search be restarted from the end "
-                        "of the document?</qt>").arg(searchText),
+                        "of the document?</qt>").tqarg(searchText),
                   i18n("Text Not Found"), KStdGuiItem::cont(), KStdGuiItem::cancel());
 
         if (answ != KMessageBox::Yes)
@@ -1641,7 +1641,7 @@ void KMultiPage::findPrevText()
     }
   }
 
-  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").arg(searchText));
+  KMessageBox::sorry(scrollView(), i18n("<qt>The search string <strong>%1</strong> could not be found.</qt>").tqarg(searchText));
   setStatusBarText(TQString());
   searchInProgress = false;
   if (!cachedPage)
@@ -1710,7 +1710,7 @@ void KMultiPage::reload()
     pageCache->clear();
     pageCache->deselectText();
     document_history.clear();
-    emit setStatusBarText(i18n("Reloading file %1").arg(m_file));
+    emit setStatusBarText(i18n("Reloading file %1").tqarg(m_file));
     TQ_INT32 pg = currentPageNumber();
 
     killTimer(timer_id);
@@ -1746,7 +1746,7 @@ bool KMultiPage::openFile()
   pageCache->deselectText();
   document_history.clear();
   pageCache->clear();
-  emit setStatusBarText(i18n("Loading file %1").arg(m_file));
+  emit setStatusBarText(i18n("Loading file %1").tqarg(m_file));
 
   bool r = renderer->setFile(m_file, m_url);
 
@@ -1887,9 +1887,9 @@ KPrinter *KMultiPage::getPrinter(bool enablePageSizeFeatures)
       } else
 	it++;
       if (endval == val)
-	range +=  TQString("%1").arg(val);
+	range +=  TQString("%1").tqarg(val);
       else
-	range +=  TQString("%1-%2").arg(val).arg(endval);
+	range +=  TQString("%1-%2").tqarg(val).tqarg(endval);
     } while (it != selectedPageNo.end() );
     printer->setOption( "kde-range", range );
   }
@@ -1912,7 +1912,7 @@ void KMultiPage::doExportText()
   if (finfo.exists())
   {
     int r = KMessageBox::warningContinueCancel (scrollView(),
-                i18n("The file %1\nexists. Do you want to overwrite that file?").arg(fileName),
+                i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
                 i18n("Overwrite File"), i18n("Overwrite"));
 
     if (r == KMessageBox::Cancel)

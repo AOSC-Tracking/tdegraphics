@@ -32,7 +32,7 @@
 #include <kptooltoolbar.h>
 
 #include <tqbuttongroup.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqdatetime.h>
 #include <tqtoolbutton.h>
 #include <tqtooltip.h>
@@ -144,7 +144,7 @@ kpToolToolBar::kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, i
     setOrientation (orientation ());
 
 #if DEBUG_KP_TOOL_TOOL_BAR
-    kdDebug () << "kpToolToolBar::<ctor> layout tool widgets msec="
+    kdDebug () << "kpToolToolBar::<ctor> tqlayout tool widgets msec="
                << timer.elapsed () << endl;
 #endif
 
@@ -199,7 +199,7 @@ int kpToolToolBar::defaultIconSize ()
 
     if (m_defaultIconSize <= 0)
     {
-        // Adapt according to screen geometry
+        // Adapt according to screen tqgeometry
         const TQRect desktopSize = KGlobalSettings::desktopGeometry (this);
     #if DEBUG_KP_TOOL_TOOL_BAR
         kdDebug () << "\tadapting to screen size=" << desktopSize << endl;

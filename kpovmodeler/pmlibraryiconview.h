@@ -41,7 +41,7 @@ public:
    /** @return The ith format, or NULL. */
    const char* format( int i ) const;
    /** @return The encoded payload of this object, in the specified MIME format. */
-   TQByteArray encodedData( const char* mime ) const;
+   TQByteArray tqencodedData( const char* mime ) const;
    /** @return True if the information in e can be decoded */
    static bool canDecode( TQMimeSource* e );
    /**

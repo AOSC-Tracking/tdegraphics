@@ -33,7 +33,7 @@
 #include <tqgroupbox.h>
 #include <tqhbox.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtimer.h>
 
 #include <kapplication.h>
@@ -255,23 +255,23 @@ void kpEffectsDialog::selectEffect (int which)
         // Don't resize the preview when showing the widget:
         // TODO: actually work
 
-        TQSize previewGroupBoxMinSize = m_previewGroupBox->minimumSize ();
-        TQSize previewGroupBoxMaxSize = m_previewGroupBox->maximumSize ();
+        TQSize previewGroupBoxMinSize = m_previewGroupBox->tqminimumSize ();
+        TQSize previewGroupBoxMaxSize = m_previewGroupBox->tqmaximumSize ();
         TQLayout::ResizeMode previewGroupBoxResizeMode = 
-            m_previewGroupBox->layout () ?
-                m_previewGroupBox->layout ()->resizeMode () :
+            m_previewGroupBox->tqlayout () ?
+                m_previewGroupBox->tqlayout ()->tqresizeMode () :
                 TQLayout::Auto;
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tpreviewGroupBox: minSize=" << previewGroupBoxMinSize
                    << " maxSize=" << previewGroupBoxMaxSize
                    << " size=" << m_previewGroupBox->size ()
-                   << " layout=" << m_previewGroupBox->layout ()
+                   << " tqlayout=" << m_previewGroupBox->tqlayout ()
                    << " resizeMode=" << previewGroupBoxResizeMode
                    << endl;
     #endif
 
-        if (m_previewGroupBox->layout ())
-            m_previewGroupBox->layout ()->setResizeMode (TQLayout::FreeResize);
+        if (m_previewGroupBox->tqlayout ())
+            m_previewGroupBox->tqlayout ()->setResizeMode (TQLayout::FreeResize);
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter set resizeMode, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;
@@ -300,8 +300,8 @@ void kpEffectsDialog::selectEffect (int which)
         kdDebug () << "\tafter set fixedSize, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;
     #endif
-        if (m_previewGroupBox->layout ())
-            m_previewGroupBox->layout ()->setResizeMode (previewGroupBoxResizeMode);
+        if (m_previewGroupBox->tqlayout ())
+            m_previewGroupBox->tqlayout ()->setResizeMode (previewGroupBoxResizeMode);
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter restore resizeMode, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;

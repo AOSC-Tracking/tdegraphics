@@ -20,7 +20,7 @@
 #include "pmdockwidget_private.h"
 
 #include <tqapplication.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpainter.h>
 #include <tqobjectlist.h>
 #include <tqstrlist.h>
@@ -154,7 +154,7 @@ PMDockMainWindow::~PMDockMainWindow()
 // kparts/dockmainwindow stuff
 void PMDockMainWindow::createGUI( Part * part )
 {
-  kdDebug(1000) << TQString("DockMainWindow::createGUI for %1").arg(part?part->name():"0L") << endl;
+  kdDebug(1000) << TQString("DockMainWindow::createGUI for %1").tqarg(part?part->name():"0L") << endl;
 
   KXMLGUIFactory *factory = guiFactory();
 
@@ -164,7 +164,7 @@ void PMDockMainWindow::createGUI( Part * part )
 
   if ( d->m_activePart )
   {
-    kdDebug(1000) << TQString("deactivating GUI for %1").arg(d->m_activePart->name()) << endl;
+    kdDebug(1000) << TQString("deactivating GUI for %1").tqarg(d->m_activePart->name()) << endl;
 
     GUIActivateEvent ev( false );
     TQApplication::sendEvent( d->m_activePart, &ev );
@@ -337,7 +337,7 @@ void PMDockWidgetHeaderDrag::paintEvent( TQPaintEvent* )
 
   paint.begin( this );
 
-  tqstyle().tqdrawPrimitive (TQStyle::PE_DockWindowHandle, &paint, TQRect(0,0,width(), height()), colorGroup());
+  tqstyle().tqdrawPrimitive (TQStyle::PE_DockWindowHandle, &paint, TQRect(0,0,width(), height()), tqcolorGroup());
 
   paint.end();
 }
@@ -350,8 +350,8 @@ PMDockWidgetAbstractHeader::PMDockWidgetAbstractHeader( PMDockWidget* parent, co
 PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
 :PMDockWidgetAbstractHeader( parent, name )
 {
-  layout = new TQHBoxLayout( this );
-  layout->setResizeMode( TQLayout::Minimum );
+  tqlayout = new TQHBoxLayout( this );
+  tqlayout->setResizeMode( TQLayout::Minimum );
 
   drag = new PMDockWidgetHeaderDrag( this, parent );
 
@@ -386,13 +386,13 @@ PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
   toDesktopButton->setFixedSize(buttonWidth,buttonHeight);
   connect( toDesktopButton, TQT_SIGNAL(clicked()), parent, TQT_SLOT(toDesktop()));
 
-  layout->addWidget( drag );
-  layout->addWidget( dockbackButton );
-  layout->addWidget( toDesktopButton );
-  layout->addWidget( stayButton );
-  layout->addWidget( closeButton );
-  layout->activate();
-  drag->setFixedHeight( layout->minimumSize().height() );
+  tqlayout->addWidget( drag );
+  tqlayout->addWidget( dockbackButton );
+  tqlayout->addWidget( toDesktopButton );
+  tqlayout->addWidget( stayButton );
+  tqlayout->addWidget( closeButton );
+  tqlayout->activate();
+  drag->setFixedHeight( tqlayout->tqminimumSize().height() );
 }
 
 void PMDockWidgetHeader::setTopLevel( bool isTopLevel )
@@ -415,7 +415,7 @@ void PMDockWidgetHeader::setTopLevel( bool isTopLevel )
     closeButton->show();
     toDesktopButton->show();
   }
-  layout->activate();
+  tqlayout->activate();
   updateGeometry();
 }
 
@@ -423,20 +423,20 @@ void PMDockWidgetHeader::setDragPanel( PMDockWidgetHeaderDrag* nd )
 {
   if ( !nd ) return;
 
-  delete layout;
-  layout = new TQHBoxLayout( this );
-  layout->setResizeMode( TQLayout::Minimum );
+  delete tqlayout;
+  tqlayout = new TQHBoxLayout( this );
+  tqlayout->setResizeMode( TQLayout::Minimum );
 
   delete drag;
   drag = nd;
 
-  layout->addWidget( drag );
-  layout->addWidget( dockbackButton );
-  layout->addWidget( toDesktopButton );
-  layout->addWidget( stayButton );
-  layout->addWidget( closeButton );
-  layout->activate();
-  drag->setFixedHeight( layout->minimumSize().height() );
+  tqlayout->addWidget( drag );
+  tqlayout->addWidget( dockbackButton );
+  tqlayout->addWidget( toDesktopButton );
+  tqlayout->addWidget( stayButton );
+  tqlayout->addWidget( closeButton );
+  tqlayout->activate();
+  drag->setFixedHeight( tqlayout->tqminimumSize().height() );
 }
 
 void PMDockWidgetHeader::slotStayClicked()
@@ -459,12 +459,12 @@ void PMDockWidgetHeader::setDragEnabled(bool b)
 #ifndef NO_KDE2
 void PMDockWidgetHeader::saveConfig( KConfig* c )
 {
-  c->writeEntry( TQString("%1%2").arg(parent()->name()).arg(":stayButton"), stayButton->isOn() );
+  c->writeEntry( TQString("%1%2").tqarg(parent()->name()).tqarg(":stayButton"), stayButton->isOn() );
 }
 
 void PMDockWidgetHeader::loadConfig( KConfig* c )
 {
-  setDragEnabled( !c->readBoolEntry( TQString("%1%2").arg(parent()->name()).arg(":stayButton"), false ) );
+  setDragEnabled( !c->readBoolEntry( TQString("%1%2").tqarg(parent()->name()).tqarg(":stayButton"), false ) );
 }
 #endif
 
@@ -481,8 +481,8 @@ PMDockWidget::PMDockWidget( PMDockManager* dockManager, const char* name, const 
 
   d->_parent = parent;
 
-  layout = new TQVBoxLayout( this );
-  layout->setResizeMode( TQLayout::Minimum );
+  tqlayout = new TQVBoxLayout( this );
+  tqlayout->setResizeMode( TQLayout::Minimum );
 
   manager = dockManager;
   manager->childDock->append( TQT_TQOBJECT(this) );
@@ -538,15 +538,15 @@ void PMDockWidget::setHeader( PMDockWidgetAbstractHeader* h )
 
   if ( header ){
     delete header;
-    delete layout;
+    delete tqlayout;
     header = h;
-    layout = new TQVBoxLayout( this );
-    layout->setResizeMode( TQLayout::Minimum );
-    layout->addWidget( header );
+    tqlayout = new TQVBoxLayout( this );
+    tqlayout->setResizeMode( TQLayout::Minimum );
+    tqlayout->addWidget( header );
      setWidget( widget );
   } else {
     header = h;
-    layout->addWidget( header );
+    tqlayout->addWidget( header );
   }
 }
 
@@ -584,7 +584,7 @@ void PMDockWidget::applyToWidget( TQWidget* s, const TQPoint& p )
   }
 
   if ( s == manager->main ){
-      setGeometry( TQRect(TQPoint(0,0), manager->main->geometry().size()) );
+      setGeometry( TQRect(TQPoint(0,0), manager->main->tqgeometry().size()) );
   }
 
   if ( !s )
@@ -777,7 +777,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
   // MODIFICATION (Zehender):
   // If DockPosition is DockLeft or DockRight, add the widget
   // left or right of the target, so that a new vertical splitter
-  // (a splitter with horizontal widget layout :-) is created
+  // (a splitter with horizontal widget tqlayout :-) is created
   // that spawns the full height of the main view
 
   if( ( dockPos == PMDockWidget::DockLeft ) ||
@@ -829,7 +829,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
   if ( !parentDock ){
     // dock to a toplevel dockwidget means newDock is toplevel now
     newDock->move( target->frameGeometry().topLeft() );
-    newDock->resize( target->geometry().size() );
+    newDock->resize( target->tqgeometry().size() );
     if ( target->isVisibleToTLW() ) newDock->show();
   }
 
@@ -1086,13 +1086,13 @@ void PMDockWidget::setWidget( TQWidget* mw )
   }
 
   widget = mw;
-  delete layout;
+  delete tqlayout;
 
-  layout = new TQVBoxLayout( this );
-  layout->setResizeMode( TQLayout::Minimum );
+  tqlayout = new TQVBoxLayout( this );
+  tqlayout->setResizeMode( TQLayout::Minimum );
 
-  layout->addWidget( header );
-  layout->addWidget( widget,1 );
+  tqlayout->addWidget( header );
+  tqlayout->addWidget( widget,1 );
 }
 
 void PMDockWidget::setDockTabName( PMDockTabGroup* tab )
@@ -1110,7 +1110,7 @@ void PMDockWidget::setDockTabName( PMDockTabGroup* tab )
   tab->parentWidget()->setName( listOfName.utf8() );
   tab->parentWidget()->setCaption( listOfCaption );
 
-  tab->parentWidget()->repaint( false ); // PMDockWidget->repaint
+  tab->parentWidget()->tqrepaint( false ); // PMDockWidget->tqrepaint
   if ( tab->parentWidget()->parent() )
     if ( tab->parentWidget()->parent()->inherits("PMDockSplitter") )
       ((PMDockSplitter*)(tab->parentWidget()->parent()))->updateName();
@@ -1168,13 +1168,13 @@ void PMDockWidget::loseFormerBrotherDockWidget()
     TQObject::disconnect( formerBrotherDockWidget, TQT_SIGNAL(iMBeingClosed()),
                          this, TQT_SLOT(loseFormerBrotherDockWidget()) );
   formerBrotherDockWidget = 0L;
-  repaint();
+  tqrepaint();
 }
 
 void PMDockWidget::dockBack()
 {
   if( formerBrotherDockWidget) {
-    // search all children if it tries to dock back to a child
+    // search all tqchildren if it tries to dock back to a child
     bool found = false;
     TQObjectList* cl = queryList("PMDockWidget");
     TQObjectListIt it( *cl );
@@ -1316,21 +1316,21 @@ void PMDockManager::activate()
 bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
 {
 /* This doesn't seem to fullfill any sense, other than breaking
-   TQMainWindow's layout all over the place
+   TQMainWindow's tqlayout all over the place
    The first child of the mainwindow is not necessarily a meaningful
    content widget but in TQt3's TQMainWindow it can easily be a TQToolBar.
-   In short: TQMainWindow knows how to layout its children, no need to
+   In short: TQMainWindow knows how to tqlayout its tqchildren, no need to
    mess that up.
 
    >>>>>I need this in the PMDockArea at the moment (JoWenn)
 
-  if ( obj == main && event->type() == TQEvent::Resize && dynamic_cast<PMDockArea*>(main) && main->children() ){
+  if ( obj == main && event->type() == TQEvent::Resize && dynamic_cast<PMDockArea*>(main) && main->tqchildren() ){
 #ifndef NO_KDE2
-    kdDebug()<<"PMDockManager::eventFilter(): main is a PMDockArea and there are children"<<endl;
+    kdDebug()<<"PMDockManager::eventFilter(): main is a PMDockArea and there are tqchildren"<<endl;
 #endif
-    TQWidget* fc = (TQWidget*)main->children()->getFirst();
+    TQWidget* fc = (TQWidget*)main->tqchildren()->getFirst();
     if ( fc )
-      fc->setGeometry( TQRect(TQPoint(0,0), main->geometry().size()) );
+      fc->setGeometry( TQRect(TQPoint(0,0), main->tqgeometry().size()) );
   }
 */
 
@@ -1356,7 +1356,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
             findChildDockWidget( curdw, *childDockWidgetList );
 
             d->oldDragRect = TQRect();
-            d->dragRect = TQRect(curdw->geometry());
+            d->dragRect = TQRect(curdw->tqgeometry());
             TQPoint p = curdw->mapToGlobal(TQPoint(0,0));
             d->dragRect.moveTopLeft(p);
             drawDragRectangle();
@@ -1377,7 +1377,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
           if (d->readyToDrag) {
               d->readyToDrag = false;
               d->oldDragRect = TQRect();
-              d->dragRect = TQRect(curdw->geometry());
+              d->dragRect = TQRect(curdw->tqgeometry());
               TQPoint p = curdw->mapToGlobal(TQPoint(0,0));
               d->dragRect.moveTopLeft(p);
               drawDragRectangle();
@@ -1398,7 +1398,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
             break;
           } else {
             if (dropCancel && curdw) {
-              d->dragRect = TQRect(curdw->geometry());
+              d->dragRect = TQRect(curdw->tqgeometry());
               TQPoint p = curdw->mapToGlobal(TQPoint(0,0));
               d->dragRect.moveTopLeft(p);
             }else
@@ -1454,7 +1454,7 @@ PMDockWidget* PMDockManager::findDockWidgetAt( const TQPoint& pos )
     return 0L;
   }
 #if defined(_OS_WIN32_) || defined(Q_OS_WIN32)
-  p = p->topLevelWidget();
+  p = p->tqtopLevelWidget();
 #endif
   TQWidget* w = 0L;
   findChildDockWidget( w, p, p->mapFromGlobal(pos) );
@@ -1511,7 +1511,7 @@ void PMDockManager::findChildDockWidget( TQWidget*& ww, const TQWidget* p, const
     while ( it.current() ) {
       if ( it.current()->isWidgetType() ) {
         w = (TQWidget*)it.current();
-        if ( w->isVisible() && w->geometry().contains(pos) ) {
+        if ( w->isVisible() && w->tqgeometry().contains(pos) ) {
           if ( w->inherits("PMDockWidget") ) ww = w;
           findChildDockWidget( ww, w, w->mapFromParent(pos) );
           return;
@@ -1692,7 +1692,7 @@ static TQDomElement createStringEntry(TQDomDocument &doc, const TQString &tagNam
 
 static TQDomElement createBoolEntry(TQDomDocument &doc, const TQString &tagName, bool b)
 {
-    return createStringEntry(doc, tagName, TQString::fromLatin1(b? "true" : "false"));
+    return createStringEntry(doc, tagName, TQString::tqfromLatin1(b? "true" : "false"));
 }
 
 
@@ -1731,7 +1731,7 @@ static TQDomElement createListEntry(TQDomDocument &doc, const TQString &tagName,
     TQStrListIterator it(list);
     for (; it.current(); ++it) {
         TQDomElement subel = doc.createElement(subTagName);
-        subel.appendChild(doc.createTextNode(TQString::fromLatin1(it.current())));
+        subel.appendChild(doc.createTextNode(TQString::tqfromLatin1(it.current())));
         el.appendChild(subel);
     }
 
@@ -1801,7 +1801,7 @@ void PMDockManager::writeConfig(TQDomElement &base)
     PMDockWidget *obj1;
     while ( (obj1=(PMDockWidget*)it.current()) ) {
         if ( TQT_BASE_OBJECT(obj1->parent()) == TQT_BASE_OBJECT(main) )
-            mainWidgetStr = TQString::fromLatin1(obj1->name());
+            mainWidgetStr = TQString::tqfromLatin1(obj1->name());
         nList.append(obj1->name());
         ++it;
     }
@@ -1811,7 +1811,7 @@ void PMDockManager::writeConfig(TQDomElement &base)
         PMDockWidget *obj = getDockWidgetFromName( nList.current() );
         if (obj->isGroup && (nameList.find( obj->firstName.latin1() ) == -1
                              || nameList.find(obj->lastName.latin1()) == -1)) {
-            // Skip until children are saved (why?)
+            // Skip until tqchildren are saved (why?)
             nList.next();
             if ( !nList.current() ) nList.first();
             continue;
@@ -1841,7 +1841,7 @@ void PMDockManager::writeConfig(TQDomElement &base)
             groupEl = doc.createElement("dock");
         }
 
-        groupEl.appendChild(createStringEntry(doc, "name", TQString::fromLatin1(obj->name())));
+        groupEl.appendChild(createStringEntry(doc, "name", TQString::tqfromLatin1(obj->name())));
         groupEl.appendChild(createBoolEntry(doc, "hasParent", obj->parent()));
         if ( !obj->parent() ) {
             groupEl.appendChild(createRectEntry(doc, "geometry", TQRect(main->frameGeometry().topLeft(), main->size())));
@@ -2039,7 +2039,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
         c->writeEntry( cname+":type", "GROUP");
         if ( !obj->parent() ){
           c->writeEntry( cname+":parent", "___null___");
-          c->writeEntry( cname+":geometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
+          c->writeEntry( cname+":tqgeometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
           c->writeEntry( cname+":visible", obj->isVisible());
         } else {
           c->writeEntry( cname+":parent", "yes");
@@ -2070,7 +2070,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
         c->writeEntry( cname+":type", "TAB_GROUP");
         if ( !obj->parent() ){
           c->writeEntry( cname+":parent", "___null___");
-          c->writeEntry( cname+":geometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
+          c->writeEntry( cname+":tqgeometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
           c->writeEntry( cname+":visible", obj->isVisible());
         } else {
           c->writeEntry( cname+":parent", "yes");
@@ -2090,7 +2090,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
 /*************************************************************************************************/
         if ( !obj->parent() ){
           c->writeEntry( cname+":type", "NULL_DOCK");
-          c->writeEntry( cname+":geometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
+          c->writeEntry( cname+":tqgeometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
           c->writeEntry( cname+":visible", obj->isVisible());
         } else {
           c->writeEntry( cname+":type", "DOCK");
@@ -2200,7 +2200,7 @@ void PMDockManager::readConfig( KConfig* c, TQString group )
     }
 
     if ( type == "NULL_DOCK" || c->readEntry( oname + ":parent") == "___null___" ){
-      TQRect r = c->readRectEntry( oname + ":geometry" );
+      TQRect r = c->readRectEntry( oname + ":tqgeometry" );
       obj = getDockWidgetFromName( oname );
       obj->applyToWidget( 0L );
       obj->setGeometry(r);
@@ -2372,14 +2372,14 @@ void PMDockManager::drawDragRectangle()
     PMDockMainWindow* pMain = 0L;
     PMDockWidget* pTLDockWdg = 0L;
     TQWidget* topWdg;
-    if (pDockWdgAtRect->topLevelWidget() == main) {
+    if (pDockWdgAtRect->tqtopLevelWidget() == main) {
       isOverMainWdg = true;
       topWdg = pMain = (PMDockMainWindow*) main;
       unclipped = pMain->testWFlags( WPaintUnclipped );
       pMain->setWFlags( WPaintUnclipped );
     }
     else {
-      topWdg = pTLDockWdg = (PMDockWidget*) pDockWdgAtRect->topLevelWidget();
+      topWdg = pTLDockWdg = (PMDockWidget*) pDockWdgAtRect->tqtopLevelWidget();
       unclipped = pTLDockWdg->testWFlags( WPaintUnclipped );
       pTLDockWdg->setWFlags( WPaintUnclipped );
     }
@@ -2481,11 +2481,11 @@ void PMDockArea::resizeEvent(TQResizeEvent *rsize)
     delete list;
 #if 0
     PMDockSplitter *split;
-//    for (unsigned int i=0;i<children()->count();i++)
+//    for (unsigned int i=0;i<tqchildren()->count();i++)
     {
-//    	TQPtrList<TQObject> list(children());
-//       TQObject *obj=((TQPtrList<TQObject*>)children())->at(i);
-	TQObject *obj=children()->getFirst();
+//    	TQPtrList<TQObject> list(tqchildren());
+//       TQObject *obj=((TQPtrList<TQObject*>)tqchildren())->at(i);
+	TQObject *obj=tqchildren()->getFirst();
        if (split=dynamic_cast<PMDockSplitter*>(obj))
        {
           split->setGeometry( TQRect(TQPoint(0,0), size() ));

@@ -21,7 +21,7 @@
 #include <cassert>
 
 #include <tqimage.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqlabel.h>
 #include <tqwhatsthis.h>
@@ -81,7 +81,7 @@ void MarkListItem::setPixmap( TQPixmap thumbnail )
 void MarkListItem::setSelected( bool selected )
 {
     if (selected)
-	setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
+	setPaletteBackgroundColor( TQApplication::tqpalette().active().highlight() );
     else
 	setPaletteBackgroundColor( _backgroundColor );
 }

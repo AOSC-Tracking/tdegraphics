@@ -53,11 +53,11 @@ kpSqueezedTextLabel::kpSqueezedTextLabel (const TQString &text, TQWidget *parent
 
 
 // public virtual
-TQSize kpSqueezedTextLabel::minimumSizeHint () const
+TQSize kpSqueezedTextLabel::tqminimumSizeHint () const
 {
 #if DEBUG_KP_STQUEEZED_TEXT_LABEL && 1
-    kdDebug () << "kpSqueezedTextLabel::minimumSizeHint() qLabel prefers"
-               << TQLabel::minimumSizeHint () << endl;
+    kdDebug () << "kpSqueezedTextLabel::tqminimumSizeHint() qLabel prefers"
+               << TQLabel::tqminimumSizeHint () << endl;
 #endif
     return TQSize (-1/*no minimum width*/, TQLabel::minimumHeight ());
 }

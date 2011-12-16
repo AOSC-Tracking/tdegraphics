@@ -42,8 +42,8 @@ class PMPart;
  * PMCRemove: An object was removed. A signal with this constant has
  * to be emitted _before_ the object is removed.
  *
- * PMCChildren: Some children are added or removed. Do not use. Use PMCAdd and
- * PMCRemove for all childrens.
+ * PMCChildren: Some tqchildren are added or removed. Do not use. Use PMCAdd and
+ * PMCRemove for all tqchildrens.
  *
  * PMCData: Data (for dialog views) is changed
  *

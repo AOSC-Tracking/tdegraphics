@@ -175,10 +175,10 @@ TQPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
         KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
         KConfigBase *cfg = cfgGroupSaver.config ();
 
-        TQString nameString = TQString::fromLatin1 (name ());
+        TQString nameString = TQString::tqfromLatin1 (name ());
 
-        row = cfg->readNumEntry (nameString + TQString::fromLatin1 (" Row"), -1);
-        col = cfg->readNumEntry (nameString + TQString::fromLatin1 (" Col"), -1);
+        row = cfg->readNumEntry (nameString + TQString::tqfromLatin1 (" Row"), -1);
+        col = cfg->readNumEntry (nameString + TQString::tqfromLatin1 (" Col"), -1);
     }
 
 #if DEBUG_KP_TOOL_WIDGET_BASE
@@ -218,9 +218,9 @@ void kpToolWidgetBase::saveSelectedAsDefault () const
     KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
-    TQString nameString = TQString::fromLatin1 (name ());
-    cfg->writeEntry (nameString + TQString::fromLatin1 (" Row"), m_selectedRow);
-    cfg->writeEntry (nameString + TQString::fromLatin1 (" Col"), m_selectedCol);
+    TQString nameString = TQString::tqfromLatin1 (name ());
+    cfg->writeEntry (nameString + TQString::tqfromLatin1 (" Row"), m_selectedRow);
+    cfg->writeEntry (nameString + TQString::tqfromLatin1 (" Col"), m_selectedCol);
     cfg->sync ();
 }
 

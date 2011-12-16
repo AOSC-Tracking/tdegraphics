@@ -24,7 +24,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqfileinfo.h>
 #include <tqtooltip.h>
@@ -422,14 +422,14 @@ bool KadmosDialog::getSelClassifier( TQString& path ) const
         if( res && ! fi.exists() )
         {
             kdDebug(28000) << "Classifier file does not exist" << endl;
-            path = i18n("Classifier file %1 does not exist").arg(classifier);
+            path = i18n("Classifier file %1 does not exist").tqarg(classifier);
             res = false;
         }
 
         if( res && ! fi.isReadable() )
         {
             kdDebug(28000) << "Classifier file could not be read" << endl;
-            path = i18n("Classifier file %1 is not readable").arg(classifier);
+            path = i18n("Classifier file %1 is not readable").tqarg(classifier);
             res = false;
         }
 

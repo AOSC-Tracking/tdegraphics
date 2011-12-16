@@ -169,7 +169,7 @@
                     <property name="text">
                         <string>What is 'inverse search'? </string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignVCenter|AlignRight</set>
                     </property>
                     <property name="url" stdset="0">
@@ -186,7 +186,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>390</width>
                             <height>21</height>

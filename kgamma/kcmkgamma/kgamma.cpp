@@ -20,7 +20,7 @@
 #include <tqlabel.h>
 #include <tqpixmap.h>
 #include <tqstring.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqstringlist.h>
 #include <tqdir.h>
 #include <tqcheckbox.h>
@@ -157,37 +157,37 @@ void KGamma::setupUI() {
     pic1->setMinimumSize(530, 171);
     pic1->setBackgroundPixmap(background);
     pic1->setPixmap(TQPixmap(locate("data", "kgamma/pics/greyscale.png")));
-    pic1->setAlignment(AlignCenter);
+    pic1->tqsetAlignment(AlignCenter);
     stack->addWidget( pic1, 0 );
 
     TQLabel *pic2 = new TQLabel(stack);
     pic2->setBackgroundPixmap(background);
     pic2->setPixmap(TQPixmap(locate("data", "kgamma/pics/rgbscale.png")));
-    pic2->setAlignment(AlignCenter);
+    pic2->tqsetAlignment(AlignCenter);
     stack->addWidget( pic2, 1 );
 
     TQLabel *pic3 = new TQLabel(stack);
     pic3->setBackgroundPixmap(background);
     pic3->setPixmap(TQPixmap(locate("data", "kgamma/pics/cmyscale.png")));
-    pic3->setAlignment(AlignCenter);
+    pic3->tqsetAlignment(AlignCenter);
     stack->addWidget( pic3, 2 );
 
     TQLabel *pic4 = new TQLabel(stack);
     pic4->setBackgroundPixmap(background);
     pic4->setPixmap(TQPixmap(locate("data", "kgamma/pics/darkgrey.png")));
-    pic4->setAlignment(AlignCenter);
+    pic4->tqsetAlignment(AlignCenter);
     stack->addWidget( pic4, 3 );
 
     TQLabel *pic5 = new TQLabel(stack);
     pic5->setBackgroundPixmap(background);
     pic5->setPixmap(TQPixmap(locate("data", "kgamma/pics/midgrey.png")));
-    pic5->setAlignment(AlignCenter);
+    pic5->tqsetAlignment(AlignCenter);
     stack->addWidget( pic5, 4 );
 
     TQLabel *pic6 = new TQLabel(stack);
     pic6->setBackgroundPixmap(background);
     pic6->setPixmap(TQPixmap(locate("data", "kgamma/pics/lightgrey.png")));
-    pic6->setAlignment(AlignCenter);
+    pic6->tqsetAlignment(AlignCenter);
     stack->addWidget( pic6, 5 );
 
     topLayout->addWidget(stack, 10);
@@ -264,7 +264,7 @@ void KGamma::setupUI() {
 
     screenselect = new TQComboBox( options );
     for ( int i = 0; i < ScreenCount; i++ )
-      screenselect->insertItem( i18n("Screen %1").arg(i+1) );
+      screenselect->insertItem( i18n("Screen %1").tqarg(i+1) );
     screenselect->setCurrentItem(currentScreen);
     connect(screenselect, TQT_SIGNAL(activated(int)), TQT_SLOT(changeScreen(int)));
 
@@ -279,7 +279,7 @@ void KGamma::setupUI() {
     TQLabel *error = new TQLabel(this);
     error->setText(i18n("Gamma correction is not supported by your"
     " graphics hardware or driver."));
-    error->setAlignment(AlignCenter);
+    error->tqsetAlignment(AlignCenter);
     topLayout->addWidget(error);
   }
 }
@@ -351,7 +351,7 @@ void KGamma::save() {
 
     if ( !xf86cfgbox->isChecked() ) { //write gamma settings to the users config
       for (int i = 0; i < ScreenCount; i++) {
-        config->setGroup( TQString("Screen %1").arg(i) );
+        config->setGroup( TQString("Screen %1").tqarg(i) );
         config->writeEntry("rgamma", rgamma[i]);
         config->writeEntry("ggamma", ggamma[i]);
         config->writeEntry("bgamma", bgamma[i]);
@@ -405,7 +405,7 @@ bool KGamma::loadUserSettings() {
   KConfig *config = new KConfig("kgammarc");
 
   for (int i = 0; i < ScreenCount; i++) {
-    config->setGroup(TQString( "Screen %1" ).arg(i) );
+    config->setGroup(TQString( "Screen %1" ).tqarg(i) );
     rgamma[i] = config->readEntry("rgamma");
     ggamma[i] = config->readEntry("ggamma");
     bgamma[i] = config->readEntry("bgamma");
@@ -610,7 +610,7 @@ extern "C"
 
       for (int i = 0; i < xv._ScreenCount(); i++) {
         xv.setScreen(i);
-        config->setGroup( TQString("Screen %1").arg(i) );
+        config->setGroup( TQString("Screen %1").tqarg(i) );
 
         if ((rgamma = config->readEntry("rgamma").toFloat()))
           xv.setGamma(XVidExtWrap::Red, rgamma);

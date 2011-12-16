@@ -68,7 +68,7 @@ private:
   TQPushButton* findPrevButton;
   TQCheckBox* caseSensitiveCheckBox;
 
-  TQHBoxLayout* layout;
+  TQHBoxLayout* tqlayout;
 };
 
 #endif

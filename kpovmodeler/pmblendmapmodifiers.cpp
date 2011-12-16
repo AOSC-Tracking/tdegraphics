@@ -57,11 +57,11 @@ PMBlendMapModifiers::~PMBlendMapModifiers( )
 {
 }
 
-PMMetaObject* PMBlendMapModifiers::metaObject( ) const
+PMMetaObject* PMBlendMapModifiers::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BlendMapModifiers", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BlendMapModifiers", Base::tqmetaObject( ),
                                         createBlendMapModifiers );
       s_pMetaObject->addProperty(
          new PMBlendMapModifiersProperty( "frequencyEnabled", &PMBlendMapModifiers::enableFrequency,

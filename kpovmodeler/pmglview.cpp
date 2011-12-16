@@ -31,7 +31,7 @@
 #include <tqcursor.h>
 #include <tqcolor.h>
 #include <tqglobal.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqdom.h>
@@ -326,7 +326,7 @@ void PMGLView::initializeGL( )
       Window* colorMapWindows = 0;
       Window* newWindows = 0;
       int num;
-      if( XGetWMColormapWindows( display, topLevelWidget( )->winId( ),
+      if( XGetWMColormapWindows( display, tqtopLevelWidget( )->winId( ),
                                  &colorMapWindows, &num ) )
       {
          // create a new list and append the new window
@@ -357,7 +357,7 @@ void PMGLView::initializeGL( )
       // tell TQt to use this window
       create( w );
 
-      XSetWMColormapWindows( display, topLevelWidget( )->winId( ),
+      XSetWMColormapWindows( display, tqtopLevelWidget( )->winId( ),
                              newWindows, num );
       delete[] newWindows;
 
@@ -367,7 +367,7 @@ void PMGLView::initializeGL( )
    {
       TQVBoxLayout* topLayout = new TQVBoxLayout( this );
       TQLabel* label = new TQLabel( i18n( "No OpenGL support" ), this );
-      label->setAlignment( TQt::AlignCenter );
+      label->tqsetAlignment( TQt::AlignCenter );
       topLayout->addWidget( label );
    }
 
@@ -431,7 +431,7 @@ void PMGLView::resizeEvent( TQResizeEvent* )
 
 void PMGLView::paintEvent( TQPaintEvent* )
 {
-   repaint( );
+   tqrepaint( );
 }
 
 void PMGLView::invalidateProjection( bool graphicalChange /*= true*/ )
@@ -480,7 +480,7 @@ void PMGLView::invalidateProjection( bool graphicalChange /*= true*/ )
       recalculateControlPointPosition( );
    }
    m_projectionUpToDate = false;
-   repaint( graphicalChange );
+   tqrepaint( graphicalChange );
 }
 
 void PMGLView::enableTranslateMode( bool yes )
@@ -900,7 +900,7 @@ void PMGLView::slotAutoScroll( )
       if( m_bGraphicalChangeMode )
          graphicalChange( mapFromGlobal( TQCursor::pos( ) ) );
       else
-         repaint( );
+         tqrepaint( );
 
       m_lastAutoScrollUpdate = now;
    }
@@ -1118,7 +1118,7 @@ void PMGLView::slotRefresh( )
       if( !m_pCamera )
          setCamera( m_pPart->firstCamera( ) );
 
-   repaint( );
+   tqrepaint( );
 }
 
 void PMGLView::slotClear( )
@@ -1238,10 +1238,10 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
       redraw = true;
 
    if( redraw )
-      repaint( TQT_BASE_OBJECT(sender) == TQT_BASE_OBJECT(this) );
+      tqrepaint( TQT_BASE_OBJECT(sender) == TQT_BASE_OBJECT(this) );
 }
 
-void PMGLView::repaint( bool graphicalChange )
+void PMGLView::tqrepaint( bool graphicalChange )
 {
    if( isValid( ) )
    {
@@ -1754,7 +1754,7 @@ TQString PMGLViewFactory::description( PMViewOptions* vo ) const
    if( vo && vo->viewType( ) == "glview" )
    {
       PMGLViewOptions* o = ( PMGLViewOptions* ) vo;
-      return i18n( "3D View (%1)" ).arg(
+      return i18n( "3D View (%1)" ).tqarg(
          PMGLView::viewTypeAsString( o->glViewType( ) ) );
    }
    return description( );

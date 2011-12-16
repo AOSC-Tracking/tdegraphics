@@ -188,7 +188,7 @@ PMDockWidget* PMShell::createView( const TQString& t, PMViewOptions* o,
       PMViewFactory::theFactory( )->viewFactory( t );
 
    m_viewNumber++;
-   TQString name = TQString( "View (%1)" ).arg( m_viewNumber );
+   TQString name = TQString( "View (%1)" ).tqarg( m_viewNumber );
 
    if( factory )
    {
@@ -231,7 +231,7 @@ PMDockWidget* PMShell::createTreeView( )
 {
    PMDockWidget* dock = 0;
    m_numTreeViews++;
-   TQString name = TQString( "Object Tree (%1)" ).arg( m_numTreeViews );
+   TQString name = TQString( "Object Tree (%1)" ).tqarg( m_numTreeViews );
    dock = createDockWidget( name, SmallIcon( "pmtreeview" ),
                             0L, i18n( "Object Tree" ), i18n( "Object Tree" ) );
    dock->setDockSite( PMDockWidget::DockFullSite );
@@ -248,7 +248,7 @@ PMDockWidget* PMShell::createDialogView( )
 {
    PMDockWidget* dock = 0;
    m_numDialogViews++;
-   TQString name = TQString( "Object Properties (%1)" ).arg( m_numDialogViews );
+   TQString name = TQString( "Object Properties (%1)" ).tqarg( m_numDialogViews );
    dock = createDockWidget( name, SmallIcon( "pmdialogview" ),
                             0L, i18n( "Object Properties" ), i18n( "Object Properties" ) );
    dock->setDockSite( PMDockWidget::DockFullSite );
@@ -265,7 +265,7 @@ PMDockWidget* PMShell::create3DView( PMGLView::PMViewType t )
 {
    PMDockWidget* dock = 0;
    m_numGLViews++;
-   TQString name = TQString( "3D View (%1)" ).arg( m_numGLViews );
+   TQString name = TQString( "3D View (%1)" ).tqarg( m_numGLViews );
    dock = createDockWidget( name, SmallIcon( "pmglview" ),
                             0L, i18n( "3D View" ), i18n( "3D View" ) );
    dock->setDockSite( PMDockWidget::DockFullSite );

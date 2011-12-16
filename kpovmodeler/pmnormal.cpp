@@ -58,11 +58,11 @@ PMNormal::~PMNormal( )
 {
 }
 
-PMMetaObject* PMNormal::metaObject( ) const
+PMMetaObject* PMNormal::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Normal", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Normal", Base::tqmetaObject( ),
                                         createNewNormal );
       s_pMetaObject->addProperty(
          new PMNormProperty( "bumpSize", &PMNormal::setBumpSize, &PMNormal::bumpSize ) );

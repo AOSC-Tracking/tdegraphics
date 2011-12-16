@@ -222,10 +222,10 @@ void KIconEdit::writeConfig()
     saveMainWindowSettings( config, "MainWindowSettings" );
 }
 
-TQSize KIconEdit::sizeHint() const
+TQSize KIconEdit::tqsizeHint() const
 {
     if(gridview)
-        return gridview->sizeHint();
+        return gridview->tqsizeHint();
     else
         return TQSize(-1, -1);
 }
@@ -477,7 +477,7 @@ bool KIconEdit::setupStatusBar()
     statusbar->insertFixedItem("99999,99999", 0, true);
     statusbar->insertFixedItem("99999 x 99999", 1, true);
     statusbar->insertFixedItem(" 1:999", 2, true);
-    str = i18n("Colors: %1").arg(9999999);
+    str = i18n("Colors: %1").tqarg(9999999);
     statusbar->insertFixedItem(str, 3, true);
     statusbar->insertItem("", 4);
 

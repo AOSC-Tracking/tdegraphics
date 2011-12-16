@@ -81,11 +81,11 @@ PMFog::~PMFog( )
 {
 }
 
-PMMetaObject* PMFog::metaObject( ) const
+PMMetaObject* PMFog::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Fog", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Fog", Base::tqmetaObject( ),
                                         createNewFog );
       s_pMetaObject->addProperty(
          new PMFogProperty( "fogType", &PMFog::setFogType, &PMFog::fogType ) );

@@ -21,7 +21,7 @@
 #include "pmmatrix.h"
 #include "pmdebug.h"
 
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <stdio.h>
 #include <stdlib.h>
 

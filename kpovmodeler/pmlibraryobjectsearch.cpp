@@ -24,7 +24,7 @@
 #include <tqlabel.h>
 #include <tqlineedit.h>
 #include <tqpushbutton.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpixmap.h>
 #include <tqimage.h>
 #include <tqframe.h>

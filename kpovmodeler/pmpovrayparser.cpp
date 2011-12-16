@@ -384,7 +384,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                }
                break;
             case TURBULENCE_TOK:
-               //  Search for a PMPattern in the object's children
+               //  Search for a PMPattern in the object's tqchildren
                child = parent->firstChild( );
                while( child && !child->isA( "Pattern" ) )
                   child = child->nextSibling( );
@@ -408,7 +408,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
             case SCALLOP_WAVE_TOK:
             case CUBIC_WAVE_TOK:
             case POLY_WAVE_TOK:
-               //  Search for a PMBlendMapModifiers in the object's children
+               //  Search for a PMBlendMapModifiers in the object's tqchildren
                child = parent->firstChild( );
                while( child && !child->isA( "BlendMapModifiers" ) )
                   child = child->nextSibling( );
@@ -972,7 +972,7 @@ bool PMPovrayParser::parseNumericItem( PMValue& v, bool checkForBool /*=false*/ 
          else
          {
             printError( i18n( "Undefined identifier \"%1\"." )
-                        .arg( m_pScanner->sValue( ) ) );
+                        .tqarg( m_pScanner->sValue( ) ) );
             nextToken( );
          }
          break;
@@ -2587,7 +2587,7 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
       if( vector.size( ) != ( unsigned ) c_polynomSize[order] )
       {
          printError( i18n( "%1 coefficients are needed for a polynom with order %2" )
-                     .arg( c_polynomSize[order] ).arg( order ) );
+                     .tqarg( c_polynomSize[order] ).tqarg( order ) );
          vector.resize( c_polynomSize[order] );
       }
       pNewPoly->setCoefficients( vector );
@@ -2883,7 +2883,7 @@ bool PMPovrayParser::parseLathe( PMLathe* pNewLathe )
 
    if( nump < minp )
       printError( i18n( "At least %1 points are needed for that spline type" )
-                  .arg( minp ) );
+                  .tqarg( minp ) );
    else if( ( pNewLathe->splineType( ) == PMLathe::BezierSpline ) &&
             ( ( nump % 4 ) != 0 ) )
       printError( i18n( "Bezier splines need 4 points for each segment" ) );
@@ -3231,7 +3231,7 @@ bool PMPovrayParser::parseSor( PMSurfaceOfRevolution* pNewSor )
             if( approxZero( ( *it1 )[1] - ( *it3 )[1], c_sorTolerance ) )
             {
                printError( i18n( "The v coordinate of point %1 and %2 must be different; fixed" )
-                           .arg( pnr + 1 ).arg( pnr + 3 ) );
+                           .tqarg( pnr + 1 ).tqarg( pnr + 3 ) );
                if( pnr == 0 )
                   ( *it1 )[1] = ( *it3 )[1] - c_sorTolerance;
                else

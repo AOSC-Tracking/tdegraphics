@@ -41,7 +41,7 @@ static const char bigTIFF[]    = "\x4d\x4d\x00\x2a";
 KFaxImage::KFaxImage( const TQString &filename, TQObject *parent, const char *name )
    : TQObject(parent,name)
 {
-  KGlobal::locale()->insertCatalogue( TQString::fromLatin1("libkfaximage") );
+  KGlobal::locale()->insertCatalogue( TQString::tqfromLatin1("libkfaximage") );
   loadImage(filename);
 }
 
@@ -327,7 +327,7 @@ KFaxImage::notetiff()
 	    case 279:		/* StripByteCounts */
 		if (count != nstrips) {
 		  str = i18n("In file %1\nStripsPerImage tag 273=%2,tag279=%3\n")
-			      .arg(filename()).arg(nstrips).arg(count);
+			      .tqarg(filename()).tqarg(nstrips).tqarg(count);
 		  kfaxerror(str);
 		  goto realbad;
 		}
@@ -403,7 +403,7 @@ KFaxImage::notetiff()
 void
 KFaxImage::badfile(pagenode *pn)
 {
-  kfaxerror(i18n("%1: Bad Fax File").arg(filename()));
+  kfaxerror(i18n("%1: Bad Fax File").tqarg(filename()));
   FreeImage(pn);
 }
 

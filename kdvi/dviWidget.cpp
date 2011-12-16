@@ -112,7 +112,7 @@ void DVIWidget::mouseMoveEvent(TQMouseEvent* e)
 	  if (cp[i].isDigit() == false)
 	    break;
 	
-	emit setStatusBarText( i18n("line %1 of %2").arg(cp.left(i)).arg(cp.mid(i).simplifyWhiteSpace()) );
+	emit setStatusBarText( i18n("line %1 of %2").tqarg(cp.left(i)).tqarg(cp.mid(i).simplifyWhiteSpace()) );
 	return;
       }
     }

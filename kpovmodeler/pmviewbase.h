@@ -60,7 +60,7 @@ public:
 
 /**
  * Base class for configuration widgets for view types
- * for the layout settings dialog page
+ * for the tqlayout settings dialog page
  */
 class PMViewOptionsWidget : public TQWidget
 {

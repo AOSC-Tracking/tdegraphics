@@ -143,10 +143,10 @@ bool kpSelectionDrag::provides (const char *mimeType) const
 }
 
 // public virtual [base TQMimeSource]
-TQByteArray kpSelectionDrag::encodedData (const char *mimeType) const
+TQByteArray kpSelectionDrag::tqencodedData (const char *mimeType) const
 {
 #if DEBUG_KP_SELECTION_DRAG
-    kdDebug () << "kpSelectionDrag::encodedData(" << mimeType << ")" << endl;
+    kdDebug () << "kpSelectionDrag::tqencodedData(" << mimeType << ")" << endl;
 #endif
 
     if (!mimeType)
@@ -192,7 +192,7 @@ TQByteArray kpSelectionDrag::encodedData (const char *mimeType) const
             }
             else
             {
-                kdError () << "kpSelectionDrag::encodedData(" << mimeType << ")"
+                kdError () << "kpSelectionDrag::tqencodedData(" << mimeType << ")"
                            << " kpSelectionDrag(TQImage) could not decode data into TQImage"
                            << endl;
                 stream << kpSelection ();
@@ -207,7 +207,7 @@ TQByteArray kpSelectionDrag::encodedData (const char *mimeType) const
         kdDebug () << "\twant it as TQImage in TQByteArray" << endl;
     #endif
 
-        return TQImageDrag::encodedData (mimeType);
+        return TQImageDrag::tqencodedData (mimeType);
     }
 }
 
@@ -255,7 +255,7 @@ bool kpSelectionDrag::decode (const TQMimeSource *e, kpSelection &sel,
     #if DEBUG_KP_SELECTION_DRAG
         kdDebug () << "\tmimeSource provides selection - just return it in TQByteArray" << endl;
     #endif
-        TQByteArray data = e->encodedData (kpSelectionDrag::selectionMimeType);
+        TQByteArray data = e->tqencodedData (kpSelectionDrag::selectionMimeType);
         TQDataStream stream (data, IO_ReadOnly);
 
         // (no need for wali as kpSelection's by definition only support TQPixmap's)

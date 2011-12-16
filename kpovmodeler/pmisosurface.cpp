@@ -157,11 +157,11 @@ void PMIsoSurface::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMIsoSurface::metaObject( ) const
+PMMetaObject* PMIsoSurface::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "IsoSurface", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "IsoSurface", Base::tqmetaObject( ),
                                         createNewIsoSurface );
       // TODO
       /*

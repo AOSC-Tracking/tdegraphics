@@ -70,7 +70,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
 
         if(!url.isValid()) // Giving up
         {
-            TQString msg = i18n("The URL: %1 \nseems to be malformed.\n").arg(url.url());
+            TQString msg = i18n("The URL: %1 \nseems to be malformed.\n").tqarg(url.url());
             KMessageBox::sorry((TQWidget*)parent(), msg);
             return false;
         }
@@ -86,7 +86,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
     {
         if(!KIO::NetAccess::download( url, filename, (TQWidget*)parent() ))
         {
-            TQString msg = i18n("There was an error loading:\n%1\n").arg(url.prettyURL());
+            TQString msg = i18n("There was an error loading:\n%1\n").tqarg(url.prettyURL());
             KMessageBox::error((TQWidget*)parent(), msg);
             return false;
         }
@@ -101,7 +101,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
 
     if(!loadedOk) 
     {
-          TQString msg = i18n("There was an error loading:\n%1\n").arg(url.prettyURL());
+          TQString msg = i18n("There was an error loading:\n%1\n").tqarg(url.prettyURL());
           KMessageBox::error((TQWidget*)parent(), msg);
     }
     else
@@ -208,7 +208,7 @@ bool KIconEditIcon::saveAs(const TQImage *image)
     {
         int r=KMessageBox::warningContinueCancel(TQT_TQWIDGET(parent()),
             i18n( "A file named \"%1\" already exists. "
-                  "Overwrite it?" ).arg(file),
+                  "Overwrite it?" ).tqarg(file),
             i18n( "Overwrite File?" ),
             i18n( "&Overwrite" ) );
   
@@ -265,7 +265,7 @@ bool KIconEditIcon::save(const TQImage *image, const TQString &_filename)
     }
     else 
     {
-        TQString msg = i18n("There was an error saving:\n%1\n").arg(str);
+        TQString msg = i18n("There was an error saving:\n%1\n").tqarg(str);
         KMessageBox::error((TQWidget*)parent(), msg);
         kdDebug(4640) << "KIconEditIcon::save - " << msg << endl;
     }

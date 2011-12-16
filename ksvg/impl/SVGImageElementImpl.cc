@@ -320,10 +320,10 @@ void SVGImageElementImpl::removeItem(KSVGCanvas *c)
 void SVGImageElementImpl::setupSVGElement(SVGSVGElementImpl *svg)
 {
 	// Set up the root svg for an svg image.
-	svg->setAttributeInternal("x", TQString("%1").arg(x()->baseVal()->value()));
-	svg->setAttributeInternal("y", TQString("%1").arg(y()->baseVal()->value()));
-	svg->setAttributeInternal("width", TQString("%1").arg(width()->baseVal()->value()));
-	svg->setAttributeInternal("height", TQString("%1").arg(height()->baseVal()->value()));
+	svg->setAttributeInternal("x", TQString("%1").tqarg(x()->baseVal()->value()));
+	svg->setAttributeInternal("y", TQString("%1").tqarg(y()->baseVal()->value()));
+	svg->setAttributeInternal("width", TQString("%1").tqarg(width()->baseVal()->value()));
+	svg->setAttributeInternal("height", TQString("%1").tqarg(height()->baseVal()->value()));
 
 	TQString par = getAttribute("preserveAspectRatio").string().stripWhiteSpace();
 
@@ -408,7 +408,7 @@ void SVGImageElementImpl::setImage(TQImage *image)
 
 		if(m_item)
 		{
-			ownerDoc()->canvas()->invalidate(m_item, false);
+			ownerDoc()->canvas()->tqinvalidate(m_item, false);
 			ownerDoc()->rerender();
 		}
 	}
@@ -508,12 +508,12 @@ void SVGImageElementImpl::applyColorProfile(SVGColorProfileElementImpl *profile,
 
 	if(image->m_image)
 	{
-		// Image is already painted, we apply the color profile and repaint it
+		// Image is already painted, we apply the color profile and tqrepaint it
 		image->applyColorProfile();
 
 		if(image->item())
 		{
-			image->ownerDoc()->canvas()->invalidate(image->item(), false);
+			image->ownerDoc()->canvas()->tqinvalidate(image->item(), false);
 			image->ownerDoc()->rerender();
 		}
 	}

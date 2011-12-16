@@ -23,7 +23,7 @@
 #include "pmvector.h"
 #include "pmmath.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 #include <klocale.h>

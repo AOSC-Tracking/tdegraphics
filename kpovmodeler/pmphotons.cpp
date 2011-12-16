@@ -60,11 +60,11 @@ PMPhotons::~PMPhotons( )
 {
 }
 
-PMMetaObject* PMPhotons::metaObject( ) const
+PMMetaObject* PMPhotons::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Photons", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Photons", Base::tqmetaObject( ),
                                        createNewPhotons );
 
       s_pMetaObject->addProperty( new PMPhotonsProperty( "target",

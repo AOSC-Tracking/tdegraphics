@@ -76,7 +76,7 @@ public:
    virtual TQString pixmap( ) const { return TQString( "pmpattern" ); }
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

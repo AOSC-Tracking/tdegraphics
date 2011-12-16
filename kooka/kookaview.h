@@ -31,7 +31,7 @@
 #include "kookaiface.h"
 #include <kdockwidget.h>
 #include <tqtabwidget.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqimage.h>
 #include <tqsplitter.h>
 

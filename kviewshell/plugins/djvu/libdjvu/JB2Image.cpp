@@ -110,7 +110,7 @@ protected:
   void code_comment(GUTF8String &comment);
   void code_record_type(int &rectype);
   int code_match_index(int &index, JB2Dict &jim);
-  void code_inherited_shape_count(JB2Dict &jim);
+  void code_inherited_tqshape_count(JB2Dict &jim);
   void code_image_size(JB2Dict &jim);
   void code_image_size(JB2Image &jim);
   void code_absolute_location(JB2Blit *jblt,  int rows, int columns);
@@ -136,28 +136,28 @@ private:
 
 
 JB2Dict::JB2Dict()
-  : inherited_shapes(0)
+  : inherited_tqshapes(0)
 {
 }
 
 void
 JB2Dict::init()
 {
-  inherited_shapes = 0;
+  inherited_tqshapes = 0;
   inherited_dict = 0;
-  shapes.empty();
+  tqshapes.empty();
 }
 
 JB2Shape &
-JB2Dict::get_shape(const int shapeno)
+JB2Dict::get_tqshape(const int tqshapeno)
 {
   JB2Shape *retval;
-  if(shapeno >= inherited_shapes)
+  if(tqshapeno >= inherited_tqshapes)
   {
-    retval=&shapes[shapeno - inherited_shapes];
+    retval=&tqshapes[tqshapeno - inherited_tqshapes];
   }else if(inherited_dict)
   {
-    retval=&(inherited_dict->get_shape(shapeno));
+    retval=&(inherited_dict->get_tqshape(tqshapeno));
   }else
   {
     G_THROW( ERR_MSG("JB2Image.bad_number") );
@@ -166,15 +166,15 @@ JB2Dict::get_shape(const int shapeno)
 }
 
 const JB2Shape &
-JB2Dict::get_shape(const int shapeno) const
+JB2Dict::get_tqshape(const int tqshapeno) const
 {
   const JB2Shape *retval;
-  if(shapeno >= inherited_shapes)
+  if(tqshapeno >= inherited_tqshapes)
   {
-    retval=&shapes[shapeno - inherited_shapes];
+    retval=&tqshapes[tqshapeno - inherited_tqshapes];
   }else if(inherited_dict)
   {
-    retval=&(inherited_dict->get_shape(shapeno));
+    retval=&(inherited_dict->get_tqshape(tqshapeno));
   }else
   {
     G_THROW( ERR_MSG("JB2Image.bad_number") );
@@ -185,16 +185,16 @@ JB2Dict::get_shape(const int shapeno) const
 void 
 JB2Dict::set_inherited_dict(const GP<JB2Dict> &dict)
 {
-  if (shapes.size() > 0)
+  if (tqshapes.size() > 0)
     G_THROW( ERR_MSG("JB2Image.cant_set") );
   if (inherited_dict)
     G_THROW( ERR_MSG("JB2Image.cant_change") );
   inherited_dict = dict; 
-  inherited_shapes = dict->get_shape_count();
+  inherited_tqshapes = dict->get_tqshape_count();
   // Make sure that inherited bitmaps are marked as shared
-  for (int i=0; i<inherited_shapes; i++)
+  for (int i=0; i<inherited_tqshapes; i++)
     {
-      JB2Shape &jshp = dict->get_shape(i);
+      JB2Shape &jshp = dict->get_tqshape(i);
       if (jshp.bits) jshp.bits->share();
     }
 }
@@ -202,30 +202,30 @@ JB2Dict::set_inherited_dict(const GP<JB2Dict> &dict)
 void
 JB2Dict::compress()
 {
-  for (int i=shapes.lbound(); i<=shapes.hbound(); i++)
-    shapes[i].bits->compress();
+  for (int i=tqshapes.lbound(); i<=tqshapes.hbound(); i++)
+    tqshapes[i].bits->compress();
 }
 
 unsigned int
 JB2Dict::get_memory_usage() const
 {
   unsigned int usage = sizeof(JB2Dict);
-  usage += sizeof(JB2Shape) * shapes.size();
-  for (int i=shapes.lbound(); i<=shapes.hbound(); i++)
-    if (shapes[i].bits)
-      usage += shapes[i].bits->get_memory_usage();
+  usage += sizeof(JB2Shape) * tqshapes.size();
+  for (int i=tqshapes.lbound(); i<=tqshapes.hbound(); i++)
+    if (tqshapes[i].bits)
+      usage += tqshapes[i].bits->get_memory_usage();
   return usage;
 }
 
 int  
-JB2Dict::add_shape(const JB2Shape &shape)
+JB2Dict::add_tqshape(const JB2Shape &tqshape)
 {
-  if (shape.parent >= get_shape_count())
-    G_THROW( ERR_MSG("JB2Image.bad_parent_shape") );
-  int index = shapes.size();
-  shapes.touch(index);
-  shapes[index] = shape;
-  return index + inherited_shapes;
+  if (tqshape.parent >= get_tqshape_count())
+    G_THROW( ERR_MSG("JB2Image.bad_parent_tqshape") );
+  int index = tqshapes.size();
+  tqshapes.touch(index);
+  tqshapes[index] = tqshape;
+  return index + inherited_tqshapes;
 }
 
 void 
@@ -277,8 +277,8 @@ JB2Image::set_dimension(int awidth, int aheight)
 int  
 JB2Image::add_blit(const JB2Blit &blit)
 {
-  if (blit.shapeno >= (unsigned int)get_shape_count())
-    G_THROW( ERR_MSG("JB2Image.bad_shape") );
+  if (blit.tqshapeno >= (unsigned int)get_tqshape_count())
+    G_THROW( ERR_MSG("JB2Image.bad_tqshape") );
   int index = blits.size();
   blits.touch(index);
   blits[index] = blit;
@@ -298,9 +298,9 @@ JB2Image::get_bitmap(int subsample, int align) const
   for (int blitno = 0; blitno < get_blit_count(); blitno++)
     {
       const JB2Blit *pblit = get_blit(blitno);
-      const JB2Shape  &pshape = get_shape(pblit->shapeno);
-      if (pshape.bits)
-        bm->blit(pshape.bits, pblit->left, pblit->bottom, subsample);
+      const JB2Shape  &ptqshape = get_tqshape(pblit->tqshapeno);
+      if (ptqshape.bits)
+        bm->blit(ptqshape.bits, pblit->left, pblit->bottom, subsample);
     }
   return bm;
 }
@@ -320,9 +320,9 @@ JB2Image::get_bitmap(const GRect &rect, int subsample, int align, int dispy) con
   for (int blitno = 0; blitno < get_blit_count(); blitno++)
     {
       const JB2Blit *pblit = get_blit(blitno);
-      const JB2Shape  &pshape = get_shape(pblit->shapeno);
-      if (pshape.bits)
-        bm->blit(pshape.bits, pblit->left-rxmin, pblit->bottom-rymin+dispy, subsample);
+      const JB2Shape  &ptqshape = get_tqshape(pblit->tqshapeno);
+      if (ptqshape.bits)
+        bm->blit(ptqshape.bits, pblit->left-rxmin, pblit->bottom-rymin+dispy, subsample);
     }
   return bm;
 }
@@ -397,7 +397,7 @@ JB2Dict::JB2Codec::JB2Codec(const bool xencoding)
     abs_size_x(0),
     abs_size_y(0),
     image_size_dist(0),
-    inherited_shape_count_dist(0),
+    inherited_tqshape_count_dist(0),
     offset_type_dist(0),
     rel_loc_x_current(0),
     rel_loc_x_last(0),
@@ -428,7 +428,7 @@ JB2Dict::JB2Codec::reset_numcoder()
   abs_size_x = 0;
   abs_size_y = 0;
   image_size_dist = 0;
-  inherited_shape_count_dist = 0;
+  inherited_tqshape_count_dist = 0;
   rel_loc_x_current = 0;
   rel_loc_x_last = 0;
   rel_loc_y_current = 0;
@@ -573,27 +573,27 @@ JB2Dict::JB2Codec::Decode::code_comment(GUTF8String &comment)
 void
 JB2Dict::JB2Codec::init_library(JB2Dict &jim)
 {
-  int nshape = jim.get_inherited_shape_count();
-  shape2lib.resize(0,nshape-1);
-  lib2shape.resize(0,nshape-1);
-  libinfo.resize(0,nshape-1);
-  for (int i=0; i<nshape; i++)
+  int ntqshape = jim.get_inherited_tqshape_count();
+  tqshape2lib.resize(0,ntqshape-1);
+  lib2tqshape.resize(0,ntqshape-1);
+  libinfo.resize(0,ntqshape-1);
+  for (int i=0; i<ntqshape; i++)
     {
-      shape2lib[i] = i;
-      lib2shape[i] = i;
-      JB2Shape &jshp = jim.get_shape(i);
+      tqshape2lib[i] = i;
+      lib2tqshape[i] = i;
+      JB2Shape &jshp = jim.get_tqshape(i);
       libinfo[i].compute_bounding_box(*(jshp.bits));
     }
 }
 
 int 
-JB2Dict::JB2Codec::add_library(const int shapeno, JB2Shape &jshp)
+JB2Dict::JB2Codec::add_library(const int tqshapeno, JB2Shape &jshp)
 {
-  const int libno = lib2shape.hbound() + 1;
-  lib2shape.touch(libno);
-  lib2shape[libno] = shapeno;
-  shape2lib.touch(shapeno);
-  shape2lib[shapeno] = libno;
+  const int libno = lib2tqshape.hbound() + 1;
+  lib2tqshape.touch(libno);
+  lib2tqshape[libno] = tqshapeno;
+  tqshape2lib.touch(tqshapeno);
+  tqshape2lib[tqshapeno] = libno;
   libinfo.touch(libno);
   libinfo[libno].compute_bounding_box(*(jshp.bits));
   return libno;
@@ -611,8 +611,8 @@ JB2Dict::JB2Codec::Decode::code_record_type(int &rectype)
 int 
 JB2Dict::JB2Codec::Decode::code_match_index(int &index, JB2Dict &)
 {
-    int match=CodeNum(0, lib2shape.hbound(), dist_match_index);
-    index = lib2shape[match];
+    int match=CodeNum(0, lib2tqshape.hbound(), dist_match_index);
+    index = lib2tqshape[match];
     return match;
 }
 
@@ -638,9 +638,9 @@ JB2Dict::JB2Codec::update_short_list(const int v)
 
 
 void
-JB2Dict::JB2Codec::Decode::code_inherited_shape_count(JB2Dict &jim)
+JB2Dict::JB2Codec::Decode::code_inherited_tqshape_count(JB2Dict &jim)
 {
-  int size=CodeNum(0, BIGPOSITIVE, inherited_shape_count_dist);
+  int size=CodeNum(0, BIGPOSITIVE, inherited_tqshape_count_dist);
     {
       GP<JB2Dict> dict = jim.get_inherited_dict();
       if (!dict && size>0)
@@ -653,7 +653,7 @@ JB2Dict::JB2Codec::Decode::code_inherited_shape_count(JB2Dict &jim)
         }
       if (!dict && size>0)
         G_THROW( ERR_MSG("JB2Image.need_dict") );
-      if (dict && size!=dict->get_shape_count())
+      if (dict && size!=dict->get_tqshape_count())
         G_THROW( ERR_MSG("JB2Image.bad_dict") );
     }
 }
@@ -927,7 +927,7 @@ JB2Dict::JB2Codec::code_record(
 {
   GP<GBitmap> cbm;
   GP<GBitmap> bm;
-  int shapeno = -1;
+  int tqshapeno = -1;
 
   // Code record type
   code_record_type(rectype);
@@ -983,7 +983,7 @@ JB2Dict::JB2Codec::code_record(
         JB2Dict &jim=*gjim;
         JB2Shape &jshp=*xjshp;
         int match = code_match_index (jshp.parent, jim);
-        cbm = jim.get_shape(jshp.parent).bits;
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4);
         code_bitmap_by_cross_coding (*bm, cbm, jshp.parent);
@@ -1003,12 +1003,12 @@ JB2Dict::JB2Codec::code_record(
       {
         if (! gotstartrecordp)
         {
-	  // Indicates need for a shape dictionary
+	  // Indicates need for a tqshape dictionary
           if(!gjim)
           {
              G_THROW( ERR_MSG("JB2Image.bad_number") );
           }
-	  code_inherited_shape_count(*gjim);
+	  code_inherited_tqshape_count(*gjim);
         }else
 	  // Reset all numerical contexts to zero
 	  reset_numcoder();
@@ -1026,7 +1026,7 @@ JB2Dict::JB2Codec::code_record(
   // Post-coding action
   if (!encoding)
     {
-      // add shape to dictionary
+      // add tqshape to dictionary
       switch(rectype)
         {
         case NEW_MARK_LIBRARY_ONLY:
@@ -1037,8 +1037,8 @@ JB2Dict::JB2Codec::code_record(
                G_THROW( ERR_MSG("JB2Image.bad_number") );
             }
             JB2Shape &jshp=*xjshp;
-            shapeno = gjim->add_shape(jshp);
-            add_library(shapeno, jshp);
+            tqshapeno = gjim->add_tqshape(jshp);
+            add_library(tqshapeno, jshp);
             break;
           }
         }
@@ -1064,10 +1064,10 @@ JB2Dict::JB2Codec::Decode::code(const GP<JB2Dict> &gjim)
       // THIS IS THE DECODING PART
       // -------------------------
       int rectype;
-      JB2Shape tmpshape;
+      JB2Shape tmptqshape;
       do
         {
-          code_record(rectype, gjim, &tmpshape);        
+          code_record(rectype, gjim, &tmptqshape);        
         } 
       while(rectype != END_OF_DATA);
       if (!gotstartrecordp)
@@ -1085,7 +1085,7 @@ JB2Dict::JB2Codec::code_record(
 {
   GP<GBitmap> bm;
   GP<GBitmap> cbm;
-  int shapeno = -1;
+  int tqshapeno = -1;
   int match;
 
   // Code record type
@@ -1163,7 +1163,7 @@ JB2Dict::JB2Codec::code_record(
         JB2Shape &jshp=*xjshp;
         JB2Image &jim=*gjim;
         match = code_match_index (jshp.parent, jim);
-        cbm = jim.get_shape(jshp.parent).bits;
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4); 
         code_bitmap_by_cross_coding (*bm, cbm, match);
@@ -1179,7 +1179,7 @@ JB2Dict::JB2Codec::code_record(
         JB2Image &jim=*gjim;
         JB2Shape &jshp=*xjshp;
         match = code_match_index (jshp.parent, jim);
-        cbm = jim.get_shape(jshp.parent).bits;
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4);
         break;
@@ -1193,7 +1193,7 @@ JB2Dict::JB2Codec::code_record(
         JB2Image &jim=*gjim;
         JB2Shape &jshp=*xjshp;
         match = code_match_index (jshp.parent, jim);
-        cbm = jim.get_shape(jshp.parent).bits;
+        cbm = jim.get_tqshape(jshp.parent).bits;
         LibRect &l = libinfo[match];
         code_relative_mark_size (*bm, l.right-l.left+1, l.top-l.bottom+1, 4);
         code_bitmap_by_cross_coding (*bm, cbm, match);
@@ -1203,15 +1203,15 @@ JB2Dict::JB2Codec::code_record(
     case MATCHED_COPY:
       {
         int temp;
-        if (encoding) temp = jblt->shapeno;
+        if (encoding) temp = jblt->tqshapeno;
         if(!gjim)
         {
            G_THROW( ERR_MSG("JB2Image.bad_number") );
         }
         JB2Image &jim=*gjim;
         match = code_match_index (temp, jim);
-        if (!encoding) jblt->shapeno = temp;
-        bm = jim.get_shape(jblt->shapeno).bits;
+        if (!encoding) jblt->tqshapeno = temp;
+        bm = jim.get_tqshape(jblt->tqshapeno).bits;
         LibRect &l = libinfo[match];
         jblt->left += l.left;
         jblt->bottom += l.bottom;
@@ -1248,8 +1248,8 @@ JB2Dict::JB2Codec::code_record(
         }
         JB2Image &jim=*gjim;
         if (! gotstartrecordp)
-	  // Indicates need for a shape dictionary
-	  code_inherited_shape_count(jim);
+	  // Indicates need for a tqshape dictionary
+	  code_inherited_tqshape_count(jim);
 	else
 	  // Reset all numerical contexts to zero
 	  reset_numcoder();
@@ -1268,7 +1268,7 @@ JB2Dict::JB2Codec::code_record(
   // Post-coding action
   if (!encoding)
     {
-      // add shape to image
+      // add tqshape to image
       switch(rectype)
         {
         case NEW_MARK:
@@ -1284,13 +1284,13 @@ JB2Dict::JB2Codec::code_record(
               G_THROW( ERR_MSG("JB2Image.bad_number") );
             }
             JB2Shape &jshp=*xjshp;
-            shapeno = gjim->add_shape(jshp);
-            shape2lib.touch(shapeno);
-            shape2lib[shapeno] = -1;
+            tqshapeno = gjim->add_tqshape(jshp);
+            tqshape2lib.touch(tqshapeno);
+            tqshape2lib[tqshapeno] = -1;
             break;
           }
         }
-      // add shape to library
+      // add tqshape to library
       switch(rectype)
         {
         case NEW_MARK:
@@ -1301,7 +1301,7 @@ JB2Dict::JB2Codec::code_record(
           {
             G_THROW( ERR_MSG("JB2Image.bad_number") );
           }
-          add_library(shapeno, *xjshp);
+          add_library(tqshapeno, *xjshp);
           break;
         }
       // make sure everything is compacted
@@ -1316,7 +1316,7 @@ JB2Dict::JB2Codec::code_record(
         case MATCHED_REFINE:
         case MATCHED_REFINE_IMAGE_ONLY:
         case NON_MARK_DATA:
-          jblt->shapeno = shapeno;
+          jblt->tqshapeno = tqshapeno;
         case MATCHED_COPY:
           if(!gjim)
           {
@@ -1344,10 +1344,10 @@ JB2Dict::JB2Codec::Decode::code(const GP<JB2Image> &gjim)
       // -------------------------
       int rectype;
       JB2Blit tmpblit;
-      JB2Shape tmpshape;
+      JB2Shape tmptqshape;
       do
         {
-          code_record(rectype, gjim, &tmpshape, &tmpblit);        
+          code_record(rectype, gjim, &tmptqshape, &tmpblit);        
         } 
       while(rectype!=END_OF_DATA);
       if (!gotstartrecordp)

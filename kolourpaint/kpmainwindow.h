@@ -640,7 +640,7 @@ private slots:
 
 
     /*
-     * Status Bar
+     * tqStatus Bar
      */
 
 private:

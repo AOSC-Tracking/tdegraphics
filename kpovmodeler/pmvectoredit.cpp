@@ -19,7 +19,7 @@
 #include "pmvectoredit.h"
 #include "pmdebug.h"
 #include <tqstring.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
@@ -32,7 +32,7 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
       : TQWidget( parent, name )
 {
    unsigned int i;
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    TQLabel* label;
 
    m_edits.resize( 2 );
@@ -43,24 +43,24 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
                TQT_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
-   layout = new TQHBoxLayout( this );
+   tqlayout = new TQHBoxLayout( this );
 
    if( !descriptionX.isEmpty( ) )
    {
       label = new TQLabel( descriptionX, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[0] );
-   layout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_edits[0] );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
 
    if( !descriptionY.isEmpty( ) )
    {
       label = new TQLabel( descriptionY, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[1] );
+   tqlayout->addWidget( m_edits[1] );
 }
 
 PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
@@ -70,7 +70,7 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
       : TQWidget( parent, name )
 {
    unsigned int i;
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    TQLabel* label;
 
    m_edits.resize( 3 );
@@ -81,33 +81,33 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
                TQT_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
-   layout = new TQHBoxLayout( this );
+   tqlayout = new TQHBoxLayout( this );
 
    if( !descriptionX.isEmpty( ) )
    {
       label = new TQLabel( descriptionX, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[0] );
-   layout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_edits[0] );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
 
    if( !descriptionY.isEmpty( ) )
    {
       label = new TQLabel( descriptionY, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[1] );
-   layout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_edits[1] );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
 
    if( !descriptionZ.isEmpty( ) )
    {
       label = new TQLabel( descriptionZ, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[2] );
+   tqlayout->addWidget( m_edits[2] );
 }
 
 PMVectorEdit::PMVectorEdit( const TQString& descriptionA,
@@ -118,7 +118,7 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionA,
       : TQWidget( parent, name )
 {
    unsigned int i;
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
    TQLabel* label;
 
    m_edits.resize( 4 );
@@ -129,42 +129,42 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionA,
                TQT_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
-   layout = new TQHBoxLayout( this );
+   tqlayout = new TQHBoxLayout( this );
 
    if( !descriptionA.isEmpty( ) )
    {
       label = new TQLabel( descriptionA, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[0] );
-   layout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_edits[0] );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
 
    if( !descriptionB.isEmpty( ) )
    {
       label = new TQLabel( descriptionB, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[1] );
-   layout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_edits[1] );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
 
    if( !descriptionC.isEmpty( ) )
    {
       label = new TQLabel( descriptionC, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[2] );
-   layout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_edits[2] );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
 
    if( !descriptionD.isEmpty( ) )
    {
       label = new TQLabel( descriptionD, this );
-      layout->addWidget( label );
-      layout->addSpacing( KDialog::spacingHint( ) );
+      tqlayout->addWidget( label );
+      tqlayout->addSpacing( KDialog::spacingHint( ) );
    }
-   layout->addWidget( m_edits[3] );
+   tqlayout->addWidget( m_edits[3] );
 }
 
 void PMVectorEdit::setVector( const PMVector& v, int precision )

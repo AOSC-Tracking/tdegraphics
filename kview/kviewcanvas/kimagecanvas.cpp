@@ -543,7 +543,7 @@ void KImageCanvas::slotUpdateImage()
 
 		if( m_bSizeChanged || m_bNewImage )
 		{
-			TQSize sh = m_client->sizeHint();
+			TQSize sh = m_client->tqsizeHint();
 			if( ! sh.isValid() )
 				sh = TQSize( 0, 0 );
 			m_client->resize( sh );
@@ -587,7 +587,7 @@ void KImageCanvas::slotUpdateImage()
 
 void KImageCanvas::mouseMoveEvent( TQMouseEvent * )
 {
-	if( m_cursor.shape() == TQt::BlankCursor )
+	if( m_cursor.tqshape() == TQt::BlankCursor )
 	{
 		m_cursor.setShape( Qt::CrossCursor );
 		viewport()->setCursor( m_cursor );

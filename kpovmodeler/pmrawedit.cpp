@@ -19,7 +19,7 @@
 #include "pmrawedit.h"
 #include "pmraw.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqmultilineedit.h>
 #include <kglobalsettings.h>

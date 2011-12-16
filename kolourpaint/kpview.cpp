@@ -1568,7 +1568,7 @@ void kpView::paintEventDrawSelectionResizeHandles (TQPainter *painter, const TQR
         painter->setRasterOp (TQt::XorROP);
     }
 
-    TQMemArray <TQRect> rects = selResizeHandlesRegion.rects ();
+    TQMemArray <TQRect> rects = selResizeHandlesRegion.tqrects ();
     for (TQMemArray <TQRect>::ConstIterator it = rects.begin ();
          it != rects.end ();
          it++)
@@ -1888,7 +1888,7 @@ void kpView::paintEvent (TQPaintEvent *e)
 
 
     TQRegion viewRegion = clipRegion ().intersect (e->region ());
-    TQMemArray <TQRect> rects = viewRegion.rects ();
+    TQMemArray <TQRect> rects = viewRegion.tqrects ();
 #if DEBUG_KP_VIEW_RENDERER && 1
     kdDebug () << "\t#rects = " << rects.count () << endl;
 #endif

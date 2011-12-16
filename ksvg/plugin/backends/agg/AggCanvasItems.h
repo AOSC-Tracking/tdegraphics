@@ -270,7 +270,7 @@ namespace KSVG
 		AggFillPaintServer(SVGStylableImpl *style);
 		void update(SVGStylableImpl *style);
 		template<class VertexSource>
-		void draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *shape);
+		void draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *tqshape);
 
 	private:
 		agg::rgba8 m_color;
@@ -282,7 +282,7 @@ namespace KSVG
 		AggStrokePaintServer(SVGStylableImpl *style);
 		void update(SVGStylableImpl *style);
 		template<class VertexSource>
-		void draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *shape);
+		void draw(AggCanvas *canvas, VertexSource &vs, SVGStylableImpl *style, SVGShapeImpl *tqshape);
 
 	private:
 		agg::rgba8 m_color;
@@ -311,11 +311,11 @@ namespace KSVG
 		virtual bool fillContains(const TQPoint &p);
 		virtual bool strokeContains(const TQPoint &p);
 		virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0);
-		void draw(SVGShapeImpl *shape);
+		void draw(SVGShapeImpl *tqshape);
 		void calcSVPs(const SVGMatrixImpl *matrix);
 		virtual void init();
 		virtual void init(const SVGMatrixImpl *);
-		bool isVisible(SVGShapeImpl *shape);
+		bool isVisible(SVGShapeImpl *tqshape);
 
 		void setRenderContext(RenderContext context) { m_context = context; }
 

@@ -35,7 +35,7 @@
 
 #include <tqbitmap.h>
 #include <tqcursor.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpainter.h>
 #include <tqpoint.h>
 #include <tqpushbutton.h>
@@ -479,7 +479,7 @@ void kpToolPolygon::beginDraw ()
             break;
 
         default:
-            kdError () << "kpToolPolygon::beginDraw() shape" << endl;
+            kdError () << "kpToolPolygon::beginDraw() tqshape" << endl;
             break;
         }
     }

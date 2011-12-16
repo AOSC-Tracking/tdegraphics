@@ -29,7 +29,7 @@
 #include "pmdebug.h"
 
 // Fixed widths are calculated wrong in a toolbar.
-// Fixed sizeHint for the combo box to return
+// Fixed tqsizeHint for the combo box to return
 // at least the minimum size
 class PMComboBox : public TQComboBox
 {
@@ -39,15 +39,15 @@ public:
    {
    }
 
-   virtual TQSize minimumSizeHint( ) const
+   virtual TQSize tqminimumSizeHint( ) const
    {
-      TQSize s = TQComboBox::minimumSizeHint( );
-      return s.expandedTo( minimumSize( ) );
+      TQSize s = TQComboBox::tqminimumSizeHint( );
+      return s.expandedTo( tqminimumSize( ) );
    }
-   virtual TQSize sizeHint( ) const
+   virtual TQSize tqsizeHint( ) const
    {
-      TQSize s = TQComboBox::sizeHint( );
-      return s.expandedTo( minimumSize( ) );
+      TQSize s = TQComboBox::tqsizeHint( );
+      return s.expandedTo( tqminimumSize( ) );
    }
 };
 
@@ -126,7 +126,7 @@ public:
       setText( text );
    }
 protected:
-   TQSize sizeHint( ) const
+   TQSize tqsizeHint( ) const
    {
       int w = fontMetrics( ).width( text( ) );
       int h = fontMetrics( ).height( );
@@ -135,10 +135,10 @@ protected:
    void drawButton( TQPainter* p )
    {
       // Draw the background
-      tqstyle( ).drawComplexControl( TQStyle::CC_ToolButton, p, this, rect( ), colorGroup( ),
+      tqstyle( ).tqdrawComplexControl( TQStyle::CC_ToolButton, p, this, rect( ), tqcolorGroup( ),
                                    TQStyle::Style_Enabled, TQStyle::SC_ToolButton );
       // Draw the label
-      tqstyle( ).drawControl( TQStyle::CE_ToolButtonLabel, p, this, rect( ), colorGroup( ),
+      tqstyle( ).tqdrawControl( TQStyle::CE_ToolButtonLabel, p, this, rect( ), tqcolorGroup( ),
                             TQStyle::Style_Enabled );
    }
 };

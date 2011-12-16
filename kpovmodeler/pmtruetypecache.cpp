@@ -217,7 +217,7 @@ FT_UInt PMTrueTypeFont::findGlyphIndex( TQChar c )
 
    if( m_face )
    {
-      // glyphIndex = FT_Get_Char_Index( m_face, c.unicode( ) );
+      // glyphIndex = FT_Get_Char_Index( m_face, c.tqunicode( ) );
       // if( !glyphIndex )
       char ch = c.latin1( );
       if( !ch )

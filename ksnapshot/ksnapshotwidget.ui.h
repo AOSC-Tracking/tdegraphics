@@ -47,7 +47,7 @@ void KSnapshotWidget::setPreview( const TQPixmap &pm )
     TQToolTip::remove( lblImage );
     TQToolTip::add( lblImage,
         TQString( "Preview of the snapshot image (%1 x %2)" )
-        .arg( pm.width() ).arg( pm.height() ) );
+        .tqarg( pm.width() ).tqarg( pm.height() ) );
 
     lblImage->setPixmap( img );
     lblImage->adjustSize();

@@ -31,7 +31,7 @@
 #include <kptoolwidgetfillstyle.h>
 
 #include <tqbitmap.h>
-#include <brush.h>
+#include <tqbrush.h>
 #include <tqpainter.h>
 
 #include <kdebug.h>

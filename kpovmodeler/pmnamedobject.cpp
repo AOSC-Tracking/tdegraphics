@@ -39,11 +39,11 @@ PMNamedObject::~PMNamedObject( )
 {
 }
 
-PMMetaObject* PMNamedObject::metaObject( ) const
+PMMetaObject* PMNamedObject::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "NamedObject", Base::metaObject( ) );
+      s_pMetaObject = new PMMetaObject( "NamedObject", Base::tqmetaObject( ) );
       s_pMetaObject->addProperty(
          new PMNamedObjectProperty( "name", &PMNamedObject::setName, &PMNamedObject::name ) );
    }

@@ -68,7 +68,7 @@ TQString FileCache::tempDir()
 
 KTempDir * FileCache::createTempDir()
 {
-    TQString tmpName = TQString::fromLatin1( KGlobal::instance()->instanceName() );
+    TQString tmpName = TQString::tqfromLatin1( KGlobal::instance()->instanceName() );
     tmpName.append( TQString::number( getpid() ) );
     TQString dirName = locateLocal( "tmp", tmpName );
     KTempDir *dir = new KTempDir( dirName );

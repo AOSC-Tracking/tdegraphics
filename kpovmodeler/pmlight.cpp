@@ -268,11 +268,11 @@ void PMLight::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMLight::metaObject( ) const
+PMMetaObject* PMLight::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Light", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Light", Base::tqmetaObject( ),
                                         createNewLight );
       PMTypeProperty* p = new PMTypeProperty( "lightType", &PMLight::setLightType,
                                               &PMLight::lightType );

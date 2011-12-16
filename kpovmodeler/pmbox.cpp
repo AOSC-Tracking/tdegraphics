@@ -76,11 +76,11 @@ void PMBox::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBox::metaObject( ) const
+PMMetaObject* PMBox::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Box", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Box", Base::tqmetaObject( ),
                                         createNewBox );
       s_pMetaObject->addProperty(
          new PMBoxProperty( "corner1", &PMBox::setCorner1, &PMBox::corner1 ) );

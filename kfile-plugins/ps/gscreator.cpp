@@ -521,7 +521,7 @@ bool GSCreator::getEPSIPreview(const TQString &path, long start, long
     return false;
   }
 
-  TQString previewstr = TQString::fromLatin1(buf);
+  TQString previewstr = TQString::tqfromLatin1(buf);
   free(buf);
 
   int offset = 0;

@@ -79,10 +79,10 @@ void SearchWidget::clearText()
 void SearchWidget::slotTextChanged( const TQString & text )
 {
     // if 0<length<3 set 'red' text and send a blank string to document
-    TQColor color = text.length() > 0 && text.length() < 3 ? TQt::darkRed : palette().active().text();
+    TQColor color = text.length() > 0 && text.length() < 3 ? TQt::darkRed : tqpalette().active().text();
     KLineEdit * lineEdit = getLined( LEDIT_ID );
     lineEdit->setPaletteForegroundColor( color );
-    lineEdit->setPaletteBackgroundColor( palette().active().base() );
+    lineEdit->setPaletteBackgroundColor( tqpalette().active().base() );
     m_inputDelayTimer->stop();
     m_inputDelayTimer->start(333, true);
 }

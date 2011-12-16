@@ -17,7 +17,7 @@
 
 #include <string.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqstring.h>
 #include <tqstringlist.h>

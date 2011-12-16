@@ -40,11 +40,11 @@ PMClippedBy::~PMClippedBy( )
 {
 }
 
-PMMetaObject* PMClippedBy::metaObject( ) const
+PMMetaObject* PMClippedBy::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ClippedBy", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "ClippedBy", Base::tqmetaObject( ),
                                         createNewClippedBy );
       s_pMetaObject->addProperty(
          new PMClippedByProperty( "boundedBy", 0, &PMClippedBy::boundedBy ) );

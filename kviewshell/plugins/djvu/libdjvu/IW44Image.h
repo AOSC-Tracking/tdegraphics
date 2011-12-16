@@ -618,7 +618,7 @@ public:
              int pixsep=1, int fast=0);
   // array of blocks
   IW44Image::Block *blocks;
-  // geometry
+  // tqgeometry
   int iw, ih;
   int bw, bh;
   int nb;

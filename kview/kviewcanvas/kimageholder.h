@@ -57,7 +57,7 @@ class KImageHolder : public TQWidget
 		 */
 		TQRect selection() const;
 
-		TQSize sizeHint() const;
+		TQSize tqsizeHint() const;
 
 		void setDrawRect( const TQRect & rect ) { m_drawRect = rect; }
 		const TQRect & drawRect() const { return m_drawRect; }

@@ -221,11 +221,11 @@ void PMWarp::readAttributes( const PMXMLHelper& h )
    }
 }
 
-PMMetaObject* PMWarp::metaObject( ) const
+PMMetaObject* PMWarp::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Warp", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Warp", Base::tqmetaObject( ),
                                         createNewWarp );
 
       PMWarpTypeProperty* p = new PMWarpTypeProperty(

@@ -46,12 +46,12 @@ public:
     */
    PMGraphicalObject( const PMGraphicalObject& o );
    /**
-    * Deletes the object and all children
+    * Deletes the object and all tqchildren
     */
    virtual ~PMGraphicalObject( );
 
    /** */
-   virtual PMMetaObject* metaObject( ) const;
+   virtual PMMetaObject* tqmetaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

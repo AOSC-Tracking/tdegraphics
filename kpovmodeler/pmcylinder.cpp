@@ -97,11 +97,11 @@ void PMCylinder::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMCylinder::metaObject( ) const
+PMMetaObject* PMCylinder::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Cylinder", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Cylinder", Base::tqmetaObject( ),
                                         createNewCylinder );
       s_pMetaObject->addProperty(
          new PMCylinderProperty( "end1", &PMCylinder::setEnd1, &PMCylinder::end1 ) );

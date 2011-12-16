@@ -23,7 +23,7 @@
 #include "pmvectorlistedit.h"
 #include "pmpart.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqtooltip.h>
 #include <tqcombobox.h>

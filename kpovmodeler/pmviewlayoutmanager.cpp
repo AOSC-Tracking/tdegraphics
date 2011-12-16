@@ -32,7 +32,7 @@
 #include <tqwidgetlist.h>
 #include <tqlistbox.h>
 #include <tqlineedit.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 
 #include "pmshell.h"
@@ -443,7 +443,7 @@ void PMViewLayout::normalize( )
 
 PMViewLayout PMViewLayout::extractViewLayout( PMShell* shell )
 {
-   PMViewLayout layout;
+   PMViewLayout tqlayout;
 
    TQValueList< TQValueList< PMViewLayoutEntry > > cols;
    cols.append( TQValueList< PMViewLayoutEntry >( ) );
@@ -457,7 +457,7 @@ PMViewLayout PMViewLayout::extractViewLayout( PMShell* shell )
 
    for( cit = cols.begin( ); cit != cols.end( ); ++cit )
       for( eit = ( *cit ).begin( ); eit != ( *cit ).end( ); ++eit )
-         layout.addEntry( *eit );
+         tqlayout.addEntry( *eit );
 
    // find floating widgets
    TQPtrList<PMDockWidget> list;
@@ -495,11 +495,11 @@ PMViewLayout PMViewLayout::extractViewLayout( PMShell* shell )
             invalid = true;
 
          if( !invalid )
-            layout.addEntry( e );
+            tqlayout.addEntry( e );
       }
    }
 
-   return layout;
+   return tqlayout;
 }
 
 void PMViewLayout::recursiveExtractColumns(
@@ -666,7 +666,7 @@ void PMViewLayoutManager::loadData( )
    TQString fileName = locate( "data", "kpovmodeler/viewlayouts.xml" );
    if( fileName.isEmpty( ) )
    {
-      // Generate a default layout
+      // Generate a default tqlayout
       // I have a feeling this shouldn't be here but hey, it works for now
       // TODO Must find a way to move this cleanly to PMShell
       PMViewLayout a;
@@ -763,7 +763,7 @@ void PMViewLayoutManager::saveData( )
    {
       TQDomElement l;
 
-      l = doc.createElement( "viewlayout" );
+      l = doc.createElement( "viewtqlayout" );
       ( *it ).saveData( l, doc );
       e.appendChild( l );
    }
@@ -810,7 +810,7 @@ void PMViewLayoutManager::displayLayout( const TQString& name, PMShell* shell )
             flist.remove( );
          }
       }
-      // Create the new layout
+      // Create the new tqlayout
       v_layout->displayLayout( shell );
       m_layoutDisplayed = true;
    }
@@ -879,7 +879,7 @@ PMSaveViewLayoutDialog::PMSaveViewLayoutDialog( PMShell* parent,
    TQWidget* w = new TQWidget( this );
    TQVBoxLayout* vl = new TQVBoxLayout( w, 0, KDialog::spacingHint( ) );
 
-   TQLabel* l = new TQLabel( i18n( "Enter view layout name:" ), w );
+   TQLabel* l = new TQLabel( i18n( "Enter view tqlayout name:" ), w );
    vl->addWidget( l );
 
    m_pLayoutName = new TQLineEdit( w );
@@ -907,13 +907,13 @@ void PMSaveViewLayoutDialog::slotOk( )
    TQString name = m_pLayoutName->text( );
 
    PMViewLayoutManager* m = PMViewLayoutManager::theManager( );
-   PMViewLayout* layout = m->findLayout( name );
+   PMViewLayout* tqlayout = m->findLayout( name );
 
    PMViewLayout newLayout = PMViewLayout::extractViewLayout( m_pShell );
    newLayout.setName( name );
 
-   if( layout )
-      *layout = newLayout;
+   if( tqlayout )
+      *tqlayout = newLayout;
    else
       m->addLayout( newLayout );
 

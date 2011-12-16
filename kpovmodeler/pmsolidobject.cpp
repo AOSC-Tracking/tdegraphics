@@ -43,11 +43,11 @@ PMSolidObject::~PMSolidObject( )
 {
 }
 
-PMMetaObject* PMSolidObject::metaObject( ) const
+PMMetaObject* PMSolidObject::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SolidObject", Base::metaObject( ) );
+      s_pMetaObject = new PMMetaObject( "SolidObject", Base::tqmetaObject( ) );
       s_pMetaObject->addProperty(
          new PMSolidObjectProperty( "inverse", &PMSolidObject::setInverse, &PMSolidObject::inverse ) );
       s_pMetaObject->addProperty(

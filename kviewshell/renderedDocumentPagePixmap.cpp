@@ -71,7 +71,7 @@ TQPixmap RenderedDocumentPagePixmap::accessiblePixmap()
     {
       case KVSPrefs::EnumRenderMode::Inverted:
         // Invert image pixels using TQImage internal function
-        backImage.invertPixels(false);
+        backImage.tqinvertPixels(false);
         break;
       case KVSPrefs::EnumRenderMode::Recolor:
         // Recolor image using KImageEffect::flatten with dither:0

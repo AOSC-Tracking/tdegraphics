@@ -362,7 +362,7 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 	return fontVisualParams;
 }
 
-void KSVGCanvas::invalidate(CanvasItem *item, bool recalc)
+void KSVGCanvas::tqinvalidate(CanvasItem *item, bool recalc)
 {
 	if(m_chunksByItem.find(item) != m_chunksByItem.end())
 	{
@@ -395,7 +395,7 @@ void KSVGCanvas::insert(CanvasItem *item, int z)
 
 		bool visible = item->isVisible();
 		if(visible)
-			invalidate(item, false);
+			tqinvalidate(item, false);
 
 		if(m_immediateUpdate)
 		{
@@ -462,15 +462,15 @@ void KSVGCanvas::addToChunks(CanvasItem *item)
 
 unsigned int KSVGCanvas::setElementItemZIndexRecursive(SVGElementImpl *element, unsigned int z)
 {
-	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
+	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
 
-	if(shape)
+	if(tqshape)
 	{
-		CanvasItem *item = shape->item();
+		CanvasItem *item = tqshape->item();
 
 		if(item)
 		{
-			SVGImageElementImpl *image = dynamic_cast<SVGImageElementImpl *>(shape);
+			SVGImageElementImpl *image = dynamic_cast<SVGImageElementImpl *>(tqshape);
 
 			if(image && image->svgImageRootElement())
 			{
@@ -481,7 +481,7 @@ unsigned int KSVGCanvas::setElementItemZIndexRecursive(SVGElementImpl *element, 
 			else
 			{
 				item->setZIndex(z);
-				invalidate(item, false);
+				tqinvalidate(item, false);
 				z++;
 			}
 		}
@@ -766,7 +766,7 @@ void KSVGCanvas::blit()
 
 void KSVGCanvas::ChunkManager::addChunk(CanvasChunk *chunk)
 {
-	TQString key = TQString("%1 %2").arg(chunk->x()).arg(chunk->y());
+	TQString key = TQString("%1 %2").tqarg(chunk->x()).tqarg(chunk->y());
 //	kdDebug(26005) << k_funcinfo << "Adding chunk : " << chunk << endl;
 	m_chunks.insert(key, chunk);
 }
@@ -774,7 +774,7 @@ void KSVGCanvas::ChunkManager::addChunk(CanvasChunk *chunk)
 CanvasChunk *KSVGCanvas::ChunkManager::getChunk(short x, short y) const
 {
 //	kdDebug(26005) << k_funcinfo << "getting chunk from : " << x << ", " << y << endl;
-	TQString key = TQString("%1 %2").arg(x).arg(y);
+	TQString key = TQString("%1 %2").tqarg(x).tqarg(y);
 	return m_chunks[key];
 }
 

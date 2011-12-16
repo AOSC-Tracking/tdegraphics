@@ -50,10 +50,10 @@ public:
     * Command that moves a list of new PMObjects.
     * The objects don't have to be siblings of each other.
     *
-    * The object in the list will be inserted as children of parent after
+    * The object in the list will be inserted as tqchildren of parent after
     * the object after.
     *
-    * If after is 0, the objects will be inserted as first children.
+    * If after is 0, the objects will be inserted as first tqchildren.
     */
    PMMoveCommand( const PMObjectList& list, PMObject* parent, PMObject* after );
    /**

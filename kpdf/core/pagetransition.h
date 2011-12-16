@@ -51,7 +51,7 @@ class KPDFPageTransition
         inline int duration() const { return m_duration; }
 
         // Get dimension in which the transition effect occurs.
-        inline Alignment alignment() const { return m_alignment; }
+        inline Alignment tqalignment() const { return m_tqalignment; }
 
         // Get direction of motion of the transition effect.
         inline Direction direction() const { return m_direction; }
@@ -67,7 +67,7 @@ class KPDFPageTransition
 
         inline void setType( Type type ) { m_type = type; }
         inline void setDuration( int duration ) { m_duration = duration; }
-        inline void setAlignment( Alignment alignment ) { m_alignment = alignment; }
+        inline void tqsetAlignment( Alignment tqalignment ) { m_tqalignment = tqalignment; }
         inline void setDirection( Direction direction ) { m_direction = direction; }
         inline void setAngle( int angle ) { m_angle = angle; }
         inline void setScale( double scale ) { m_scale = scale; }
@@ -76,7 +76,7 @@ class KPDFPageTransition
     private:
         Type m_type;
         int m_duration;
-        Alignment m_alignment;
+        Alignment m_tqalignment;
         Direction m_direction;
         int m_angle;
         double m_scale;

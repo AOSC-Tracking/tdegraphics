@@ -47,7 +47,7 @@ GammaDialog::GammaDialog( TQWidget *parent ) :
     gtDisp->setValueRef( gt->getArrayPtr() );
     gtDisp->resize( 280, 280 );
 
-    connect( gt, TQT_SIGNAL(tableChanged()), gtDisp, TQT_SLOT( repaint()));
+    connect( gt, TQT_SIGNAL(tableChanged()), gtDisp, TQT_SLOT( tqrepaint()));
 
     // setCaption( i18n( "Gamma Table" ));
 

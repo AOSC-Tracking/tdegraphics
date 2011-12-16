@@ -21,7 +21,7 @@
 
 #include <tqapplication.h>
 #include <tqpainter.h>
-#include <palette.h>
+#include <tqpalette.h>
 #include <tqstyle.h>
 #include <tqtimer.h>
 #include <tqtooltip.h>
@@ -41,8 +41,8 @@ SizeTip::SizeTip( TQWidget *parent, const char *name )
 
 void SizeTip::setTip( const TQRect &rect )
 {
-  TQString tip = TQString( "%1x%2" ).arg( rect.width() )
-      .arg( rect.height() );
+  TQString tip = TQString( "%1x%2" ).tqarg( rect.width() )
+      .tqarg( rect.height() );
 
   setText( tip );
   adjustSize();
@@ -52,7 +52,7 @@ void SizeTip::setTip( const TQRect &rect )
 
 void SizeTip::positionTip( const TQRect &rect )
 {
-  TQRect tipRect = geometry();
+  TQRect tipRect = tqgeometry();
   tipRect.moveTopLeft( TQPoint( 0, 0 ) );
 
   if ( rect.intersects( tipRect ) )
@@ -61,7 +61,7 @@ void SizeTip::positionTip( const TQRect &rect )
 
     tipRect.moveCenter( TQPoint( deskR.width()/2, deskR.height()/2 ) );
     if ( !rect.contains( tipRect, true ) && rect.intersects( tipRect ) )
-      tipRect.moveBottomRight( geometry().bottomRight() );
+      tipRect.moveBottomRight( tqgeometry().bottomRight() );
   }
 
   move( tipRect.topLeft() );
@@ -92,7 +92,7 @@ void RegionGrabber::initGrabber()
   TQDesktopWidget desktopWidget;
   TQRect desktopSize;
   if ( desktopWidget.isVirtualDesktop() )
-    desktopSize = desktopWidget.geometry();
+    desktopSize = desktopWidget.tqgeometry();
   else
     desktopSize = desktopWidget.screenGeometry( qt_xrootwin() );
 
@@ -168,8 +168,8 @@ void RegionGrabber::drawRubber()
   p.setPen( TQPen( color0, 1 ) );
   p.setBrush( NoBrush );
 
-  tqstyle().tqdrawPrimitive( TQStyle::PE_FocusRect, &p, grabRect, colorGroup(),
-      TQStyle::Style_Default, TQStyleOption( colorGroup().base() ) );
+  tqstyle().tqdrawPrimitive( TQStyle::PE_FocusRect, &p, grabRect, tqcolorGroup(),
+      TQStyle::Style_Default, TQStyleOption( tqcolorGroup().base() ) );
 
   p.end();
 }

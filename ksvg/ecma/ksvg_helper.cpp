@@ -33,7 +33,7 @@ KJS::UString::UString(const DOM::DOMString &d)
 
 	unsigned int len = d.length();
 	KJS::UChar *dat = new UChar[len];
-	memcpy(dat, d.unicode(), len * sizeof(UChar));
+	memcpy(dat, d.tqunicode(), len * sizeof(UChar));
 	rep = KJS::UString::Rep::create(dat, len);
 }
 
@@ -41,7 +41,7 @@ KJS::UString::UString(const TQString &d)
 {
 	unsigned int len = d.length();
 	KJS::UChar *dat = new UChar[len];
-	memcpy(dat, d.unicode(), len * sizeof(UChar));
+	memcpy(dat, d.tqunicode(), len * sizeof(UChar));
 	rep = KJS::UString::Rep::create(dat, len);
 }
 

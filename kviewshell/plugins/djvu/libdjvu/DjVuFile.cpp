@@ -419,7 +419,7 @@ DjVuFile::notify_file_flags_changed(const DjVuFile * src,
   {
     if (src!=this && are_incl_files_created() && is_data_present())
     {
-      // Check if all children have data
+      // Check if all tqchildren have data
       bool all=true;
       {
         GCriticalSectionLock lock(&inc_files_lock);
@@ -488,7 +488,7 @@ DjVuFile::decode_func(void)
     while(wait_for_finish(0))
     	continue;
     
-    DEBUG_MSG("waiting for children termination\n");
+    DEBUG_MSG("waiting for tqchildren termination\n");
     // Check for termination status
     GCriticalSectionLock lock(&inc_files_lock);
     for(GPosition pos=inc_files_list;pos;++pos)
@@ -928,7 +928,7 @@ DjVuFile::decode_chunk( const GUTF8String &id, const GP<ByteStream> &gbs,
     GP<JB2Dict> fgjd = JB2Dict::create();
     fgjd->decode(gbs);
     this->fgjd = fgjd;
-    desc.format( ERR_MSG("DjVuFile.shape_dict") "\t%d", fgjd->get_shape_count() );
+    desc.format( ERR_MSG("DjVuFile.tqshape_dict") "\t%d", fgjd->get_tqshape_count() );
   } 
   
   // Sjbz (JB2 encoded mask)

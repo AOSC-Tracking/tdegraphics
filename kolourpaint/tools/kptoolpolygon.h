@@ -29,7 +29,7 @@
 #ifndef __kptoolpolygon_h__
 #define __kptoolpolygon_h__
 
-#include <brush.h>
+#include <tqbrush.h>
 #include <tqpen.h>
 #include <tqobject.h>
 #include <tqpixmap.h>

@@ -107,7 +107,7 @@ void PMParser::printMessage( const PMPMessage messageNum )
 void PMParser::printMessage( const TQString& type, const TQString& msg )
 {
    if( m_lineNum >= 0 )
-      m_messages += PMMessage( i18n( "Line %1: " ).arg( m_lineNum ) + type + ": " + msg );
+      m_messages += PMMessage( i18n( "Line %1: " ).tqarg( m_lineNum ) + type + ": " + msg );
    else
       m_messages += PMMessage( type + ": " + msg );
 }
@@ -122,7 +122,7 @@ void PMParser::printError( const TQString& msg )
    else if( m_errors == s_maxErrors )
    {
       m_messages += PMMessage( i18n( "Maximum of %1 errors reached." )
-                    .arg( s_maxErrors ) );
+                    .tqarg( s_maxErrors ) );
       m_errors++;
    }
 }
@@ -137,7 +137,7 @@ void PMParser::printWarning( const TQString& msg )
    else if( m_warnings == s_maxWarnings )
    {
       m_messages += PMMessage( i18n( "Maximum of %1 warnings reached." )
-                    .arg( s_maxWarnings ) );
+                    .tqarg( s_maxWarnings ) );
       m_warnings++;
    }
 }
@@ -145,18 +145,18 @@ void PMParser::printWarning( const TQString& msg )
 void PMParser::printExpected( const char c, const char* sValue )
 {
    printError( i18n( "'%1' expected, found token '%2' instead." )
-               .arg( c ).arg( sValue ) );
+               .tqarg( c ).tqarg( sValue ) );
 }
 
 void PMParser::printExpected( const TQString& str, const char* sValue )
 {
    printError( i18n( "'%1' expected, found token '%2' instead." )
-               .arg( str ).arg( sValue ) );
+               .tqarg( str ).tqarg( sValue ) );
 }
 
 void PMParser::printUnexpected( const TQString& str )
 {
-   printError( i18n( "Unexpected token '%1'." ).arg( str ) );
+   printError( i18n( "Unexpected token '%1'." ).tqarg( str ) );
 }
 
 void PMParser::printInfo( const TQString& msg )
@@ -254,8 +254,8 @@ bool PMParser::insertChild( PMObject* child, PMObject* parent )
       else
       {
          printError( i18n( "Can't insert %1 into %2." )
-                     .arg( child->description( ) )
-                     .arg( parent->description( ) ) );
+                     .tqarg( child->description( ) )
+                     .tqarg( parent->description( ) ) );
       }
    }
    else
@@ -270,8 +270,8 @@ bool PMParser::insertChild( PMObject* child, PMObject* parent )
          else
          {
             printError( i18n( "Can't insert %1 into %2." )
-                        .arg( child->description( ) )
-                        .arg( m_pTopParent->description( ) ) );
+                        .tqarg( child->description( ) )
+                        .tqarg( m_pTopParent->description( ) ) );
          }
       }
       else
@@ -379,9 +379,9 @@ PMDeclare* PMParser::checkLink( const TQString& id )
       s = t->find( id );
    
    if( !s )
-      printError( i18n( "Undefined object \"%1\"." ).arg( id ) );
+      printError( i18n( "Undefined object \"%1\"." ).tqarg( id ) );
    else if( s->type( ) != PMSymbol::Object )
-      printError( i18n( "Undefined object \"%1\"." ).arg( id ) );
+      printError( i18n( "Undefined object \"%1\"." ).tqarg( id ) );
    else
    {
       // the object is declared
@@ -409,7 +409,7 @@ PMDeclare* PMParser::checkLink( const TQString& id )
 
       if( !ok )
          printError( i18n( "Object \"%1\" is undefined at that point." )
-                     .arg( id ) );
+                     .tqarg( id ) );
    }
 
    if( ok )

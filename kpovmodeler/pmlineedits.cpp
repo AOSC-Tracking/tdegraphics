@@ -67,28 +67,28 @@ bool PMFloatEdit::isDataValid( )
          if( m_bCheckLower && m_bCheckUpper )
             KMessageBox::error( this, i18n( "Please enter a float value "
                                             "between %1 and %2" )
-                                .arg( m_lowerValue ).arg( m_upperValue ),
+                                .tqarg( m_lowerValue ).tqarg( m_upperValue ),
                                 i18n( "Error" ) );
          else if( m_bCheckLower )
          {
             if( m_lowerOp == OpGreaterEqual )
                KMessageBox::error( this, i18n( "Please enter a float value "
-                                               ">= %1" ).arg( m_lowerValue ),
+                                               ">= %1" ).tqarg( m_lowerValue ),
                                    i18n( "Error" ) );
             else
                KMessageBox::error( this, i18n( "Please enter a float value "
-                                               "> %1" ).arg( m_lowerValue ),
+                                               "> %1" ).tqarg( m_lowerValue ),
                                    i18n( "Error" ) );
          }
          else
          {
             if( m_upperOp == OpLessEqual )
                KMessageBox::error( this, i18n( "Please enter a float value "
-                                               "<= %1" ).arg( m_upperValue ),
+                                               "<= %1" ).tqarg( m_upperValue ),
                                    i18n( "Error" ) );
             else
                KMessageBox::error( this, i18n( "Please enter a float value "
-                                               "< %1" ).arg( m_upperValue ),
+                                               "< %1" ).tqarg( m_upperValue ),
                                    i18n( "Error" ) );
          }
       }
@@ -183,15 +183,15 @@ bool PMIntEdit::isDataValid( )
          if( m_bCheckLower && m_bCheckUpper )
             KMessageBox::error( this, i18n( "Please enter an integer value "
                                             "between %1 and %2" )
-                                .arg( m_lowerValue ).arg( m_upperValue ),
+                                .tqarg( m_lowerValue ).tqarg( m_upperValue ),
                                 i18n( "Error" ) );
          else if( m_bCheckLower )
             KMessageBox::error( this, i18n( "Please enter an integer value "
-                                            ">= %1" ).arg( m_lowerValue ),
+                                            ">= %1" ).tqarg( m_lowerValue ),
                                 i18n( "Error" ) );
          else
             KMessageBox::error( this, i18n( "Please enter an integer value "
-                                            "<= %1" ).arg( m_upperValue ),
+                                            "<= %1" ).tqarg( m_upperValue ),
                                 i18n( "Error" ) );
       }
    }

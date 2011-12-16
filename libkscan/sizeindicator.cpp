@@ -19,7 +19,7 @@
 
 #include "sizeindicator.h"
 
-#include <palette.h>
+#include <tqpalette.h>
 #include <tqimage.h>
 
 #include <kimageeffect.h>
@@ -34,7 +34,7 @@ SizeIndicator::SizeIndicator( TQWidget *parent, long  thres, long crit )
 {
    sizeInByte = -1;
    setFrameStyle( TQFrame::Box | TQFrame::Sunken );
-   setMinimumWidth( fontMetrics().width( TQString::fromLatin1("MMM.MM MB") ));
+   setMinimumWidth( fontMetrics().width( TQString::tqfromLatin1("MMM.MM MB") ));
    setCritical( crit );
    threshold = thres;
 
@@ -79,7 +79,7 @@ void SizeIndicator::setSizeInByte( long newSize )
       fwidth = 2;
    }
 
-   t = unit.arg( sizer, fwidth, 'f', precision);
+   t = unit.tqarg( sizer, fwidth, 'f', precision);
    setText(t);
 
 }
@@ -100,7 +100,7 @@ void SizeIndicator::drawContents( TQPainter *p )
       warnColor.setHsv( 0, c, c );
 
       p->drawImage( 0,0,
-		    KImageEffect::unbalancedGradient( s, colorGroup().background(),
+		    KImageEffect::unbalancedGradient( s, tqcolorGroup().background(),
 						      warnColor, KImageEffect::CrossDiagonalGradient, 200,200 ));
    }
    /* Displaying the text */

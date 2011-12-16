@@ -44,14 +44,14 @@ PMDeclare::PMDeclare( const PMDeclare& d )
 {
    m_id = d.m_id; // CAUTION! Duplication of the id which has to be unique
    m_pDeclareType = 0; // will be set automatically in the
-   // base constuctor when the children are copied
+   // base constuctor when the tqchildren are copied
 }
 
-PMMetaObject* PMDeclare::metaObject( ) const
+PMMetaObject* PMDeclare::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Declare", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Declare", Base::tqmetaObject( ),
                                         createNewDeclare );
       s_pMetaObject->addProperty(
          new PMDeclareProperty( "id", &PMDeclare::setID, &PMDeclare::id ) );
@@ -180,9 +180,9 @@ void PMDeclare::updateDeclareType( )
    if( o )
    {
       if( o->isA( "GraphicalObject" ) )
-         type = m->metaObject( "GraphicalObject" );
+         type = m->tqmetaObject( "GraphicalObject" );
       else
-         type = o->metaObject( );
+         type = o->tqmetaObject( );
    }
    setDeclareType( type );
 }

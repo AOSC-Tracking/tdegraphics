@@ -47,10 +47,10 @@ namespace KSVG
 /**
  * The <code>polyline</code> element defines a set of connected
  * straight line segments. Typically, <code>polyline</code> elements
- * define open shapes.
+ * define open tqshapes.
  *
  * For more info look here : <a href =
- * "http://www.w3.org/TR/SVG/shapes.html#PolylineElement">9.6 The
+ * "http://www.w3.org/TR/SVG/tqshapes.html#PolylineElement">9.6 The
  * 'polyline' element</a>.
  */
 class SVGPointList;

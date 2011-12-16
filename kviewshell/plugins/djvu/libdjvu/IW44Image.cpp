@@ -638,7 +638,7 @@ IW44Image::Map::alloc(int n)
 short **
 IW44Image::Map::allocp(int n)
 {
-  // Allocate enough room for pointers plus alignment
+  // Allocate enough room for pointers plus tqalignment
   short *p = alloc( (n+1) * sizeof(short*) / sizeof(short) );
   // Align on pointer size
   while ( ((long)p) & (sizeof(short*)-1) )

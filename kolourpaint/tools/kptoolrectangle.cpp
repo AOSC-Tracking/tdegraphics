@@ -108,7 +108,7 @@ static TQPixmap pixmap (const kpToolRectangle::Mode mode,
     if (startPoint != endPoint)
     {
     #if DEBUG_KP_TOOL_RECTANGLE && 1
-        kdDebug () << "\tdraw shape" << endl;
+        kdDebug () << "\tdraw tqshape" << endl;
     #endif
 
         // TODO: Rectangle of pen width 1, height 1 and width X is rendered

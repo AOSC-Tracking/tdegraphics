@@ -32,7 +32,7 @@
 
 #include <tqimage.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpixmap.h>
 #include <tqpushbutton.h>
 

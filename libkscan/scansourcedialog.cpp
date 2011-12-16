@@ -25,7 +25,7 @@
 
 #include <tqlabel.h>
 #include <tqpushbutton.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqvbox.h>
 #include <tqhbox.h>
 #include <tqradiobutton.h>

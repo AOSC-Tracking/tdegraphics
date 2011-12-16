@@ -130,11 +130,11 @@ void PMCSG::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMCSG::metaObject( ) const
+PMMetaObject* PMCSG::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "CSG", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "CSG", Base::tqmetaObject( ),
                                         createNewCSG );
       PMCSGTypeProperty* p = new PMCSGTypeProperty( "csgType", &PMCSG::setCSGType, &PMCSG::csgType );
       p->addEnumValue( "union", CSGUnion );

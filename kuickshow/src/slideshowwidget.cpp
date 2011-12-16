@@ -17,7 +17,7 @@
 */
 
 #include <tqcheckbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -31,8 +31,8 @@ SlideShowWidget::SlideShowWidget( TQWidget *parent, const char *name )
 {
 //     setTitle( i18n("Slideshow") );
 
-    TQVBoxLayout *layout = new TQVBoxLayout( this );
-    layout->setSpacing( KDialog::spacingHint() );
+    TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
+    tqlayout->setSpacing( KDialog::spacingHint() );
 
     m_fullScreen = new TQCheckBox( i18n("Switch to &full-screen"), this );
     m_startWithCurrent = new TQCheckBox( i18n("S&tart with current image"), this);
@@ -48,11 +48,11 @@ SlideShowWidget::SlideShowWidget( TQWidget *parent, const char *name )
     m_cycles->setSpecialValueText( i18n("infinite") );
     m_cycles->setRange( 0, 500 );
     
-    layout->addWidget( m_fullScreen );
-    layout->addWidget( m_startWithCurrent );
-    layout->addWidget( m_delayTime );
-    layout->addWidget( m_cycles );
-    layout->addStretch( 1 );
+    tqlayout->addWidget( m_fullScreen );
+    tqlayout->addWidget( m_startWithCurrent );
+    tqlayout->addWidget( m_delayTime );
+    tqlayout->addWidget( m_cycles );
+    tqlayout->addStretch( 1 );
 
     loadSettings( *kdata );
 }

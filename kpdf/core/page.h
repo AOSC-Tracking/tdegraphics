@@ -36,7 +36,7 @@ class NormalizedRect
         bool intersects( const NormalizedRect & normRect ) const;
         bool intersects( double l, double t, double r, double b ) const;
 
-        TQRect geometry( int xScale, int yScale ) const;
+        TQRect tqgeometry( int xScale, int yScale ) const;
 };
 
 /**

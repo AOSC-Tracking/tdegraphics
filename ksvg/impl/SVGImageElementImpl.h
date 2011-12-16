@@ -86,7 +86,7 @@ public:
 
 	virtual SVGRectImpl *getBBox();
 	
-	// Screen-space clipping shape
+	// Screen-space clipping tqshape
 	KSVGPolygon clippingShape();
 
 	void onScreenCTMUpdated();

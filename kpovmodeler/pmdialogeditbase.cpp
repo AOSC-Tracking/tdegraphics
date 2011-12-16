@@ -18,7 +18,7 @@
 
 #include "pmdialogeditbase.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqpushbutton.h>
 #include <tqlabel.h>
@@ -451,17 +451,17 @@ void PMDialogEditBase::slotTexturePreview( )
       str << "union {\n";
       if( s_showBox )
       {
-         str << c_boxCode.arg( numObjects );
+         str << c_boxCode.tqarg( numObjects );
          numObjects++;
       }
       if( s_showCylinder )
       {
-         str << c_cylinderCode.arg( numObjects );
+         str << c_cylinderCode.tqarg( numObjects );
          numObjects++;
       }
       if( s_showSphere )
       {
-         str << c_sphereCode.arg( numObjects );
+         str << c_sphereCode.tqarg( numObjects );
          numObjects++;
       }
 
@@ -495,18 +495,18 @@ void PMDialogEditBase::slotTexturePreview( )
       {
          c1 = PMColor( s_wallColor1 );
          c2 = PMColor( s_wallColor2 );
-         str << c_wallCode.arg( c1.serialize( true ) ).arg( c2.serialize( true ) );
+         str << c_wallCode.tqarg( c1.serialize( true ) ).tqarg( c2.serialize( true ) );
       }
       if( s_showFloor )
       {
          c1 = PMColor( s_floorColor1 );
          c2 = PMColor( s_floorColor2 );
-         str << c_floorCode.arg( c1.serialize( true ) ).arg( c2.serialize( true ) );
+         str << c_floorCode.tqarg( c1.serialize( true ) ).tqarg( c2.serialize( true ) );
       }
 
       str << c_lightCode;
       str << c_cameraCode[numObjects-1];
-      str << c_globalSettingsCode.arg( s_previewGamma );
+      str << c_globalSettingsCode.tqarg( s_previewGamma );
 
       // Set the render mode
       mode.setHeight( s_previewSize );
@@ -519,7 +519,7 @@ void PMDialogEditBase::slotTexturePreview( )
       m_pRenderFrame->setFixedSize( s_previewSize + m_pRenderFrame->frameWidth( ) * 2,
                                     s_previewSize + m_pRenderFrame->frameWidth( ) * 2 );
       m_pRenderFrame->updateGeometry( );
-      m_pTexturePreviewWidget->layout( )->activate( );
+      m_pTexturePreviewWidget->tqlayout( )->activate( );
       emit sizeChanged( );
       m_pOutputWidget->slotClear( );
       m_pRenderWidget->render( scene, mode, m_pPart->url( ) );
@@ -540,7 +540,7 @@ void PMDialogEditBase::slotPreviewFinished( int exitStatus )
       KMessageBox::error( this, i18n( "Povray exited abnormally with "
                                       "exit code %1.\n"
                                       "See the povray output for details." )
-                          .arg( exitStatus ) );
+                          .tqarg( exitStatus ) );
    }
    else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
    {

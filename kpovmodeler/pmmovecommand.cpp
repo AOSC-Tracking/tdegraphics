@@ -30,7 +30,7 @@
 #include <tqptrdict.h>
 
 PMMoveCommand::PMMoveCommand( PMObject* obj, PMObject* parent, PMObject* after )
-      : PMCommand( i18n( "Move %1" ).arg( obj->description( ) ) )
+      : PMCommand( i18n( "Move %1" ).tqarg( obj->description( ) ) )
 {
    m_pParent = parent;
    m_pAfter = after;
@@ -356,10 +356,10 @@ int PMMoveCommand::errorFlags( PMPart* )
       {
          if( declareInsertError )
             m_errors.prepend( i18n( "Can't insert the declare \"%1\" at that point." )
-                              .arg( decl->id( ) ) );
+                              .tqarg( decl->id( ) ) );
          else
             m_errors.prepend( i18n( "The declare \"%1\" can't be moved behind linked objects." )
-                              .arg( decl->id( ) ) );
+                              .tqarg( decl->id( ) ) );
          
          PMDeleteInfo* tmp = info;
          info = m_infoList.prev( );
@@ -450,8 +450,8 @@ int PMMoveCommand::errorFlags( PMPart* )
                                    "contains a link to the declare \"%3\" "
                                    "and the insert point is not after "
                                    "the declare." )
-                             .arg( obj->description( ) ).arg( name )
-                             .arg( decl->id( ) ) );
+                             .tqarg( obj->description( ) ).tqarg( name )
+                             .tqarg( decl->id( ) ) );
          }
          else
             kdError( PMArea ) << "linked is 0 in PMMoveCommand::errorFlags\n";

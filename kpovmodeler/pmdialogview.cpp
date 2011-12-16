@@ -33,7 +33,7 @@
 #include <krun.h>
 #include <kstdguiitem.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpushbutton.h>
 #include <tqgroupbox.h>
 #include <tqscrollview.h>
@@ -69,7 +69,7 @@ void PMDialogEditContent::calculateSize( )
    int fw = lineWidth( ) * 2;
    if( m_pContents )
    {
-      TQSize newSize = m_pContents->minimumSizeHint( );
+      TQSize newSize = m_pContents->tqminimumSizeHint( );
 
       setVScrollBarMode( AlwaysOff );
       setHScrollBarMode( AlwaysOff );
@@ -314,10 +314,10 @@ void PMDialogView::slotDataChanged( )
 
 void PMDialogView::slotSizeChanged( )
 {
-   // force recalculating of the layout
+   // force recalculating of the tqlayout
    if( m_pDisplayedWidget )
-      if( m_pDisplayedWidget->layout( ) )
-         m_pDisplayedWidget->layout( )->activate( );
+      if( m_pDisplayedWidget->tqlayout( ) )
+         m_pDisplayedWidget->tqlayout( )->activate( );
    m_pHelper->calculateSize( );
 }
 

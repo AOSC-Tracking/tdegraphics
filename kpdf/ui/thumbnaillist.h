@@ -102,7 +102,7 @@ class ThumbnailsBox : public TQVBox
 {
 	public:
 		ThumbnailsBox( TQWidget * parent ) : TQVBox( parent ) {};
-		TQSize sizeHint() const { return TQSize(); }
+		TQSize tqsizeHint() const { return TQSize(); }
 };
 
 /**

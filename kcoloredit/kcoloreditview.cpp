@@ -17,7 +17,7 @@
 
 // include files for TQt
 #include <tqpainter.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpushbutton.h>
 #include <tqvgroupbox.h>
 #include <tqlineedit.h>
@@ -43,7 +43,7 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	TQVBoxLayout* paletteLayout = new TQVBoxLayout(paletteViewArea);
 	paletteView = new PaletteView(16, 16, 2, this, paletteViewArea);
 	paletteLayout->addWidget(paletteView, 10);
-	TQHBoxLayout* layout = new TQHBoxLayout();
+	TQHBoxLayout* tqlayout = new TQHBoxLayout();
 	TQVBoxLayout* addColorLayout = new TQVBoxLayout(4);
 	addColorLayout->setMargin(8);
 	TQHBoxLayout* buttonsLayout = new TQHBoxLayout(4);
@@ -70,7 +70,7 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	//	paletteView, TQT_SLOT( slotCursorFollowsChosenColor(bool) ));
 	//cursorFollowsChosenColor->toggle();
 	paletteView->slotCursorFollowsChosenColor(true);
-	layout->addLayout(addColorLayout, 0);
+	tqlayout->addLayout(addColorLayout, 0);
 	TQVGroupBox* colorAtCursorFrame = new TQVGroupBox(i18n("Color at Cursor"), paletteViewArea);
 	TQWidget* colorAtCursorFrameArea = new TQWidget(colorAtCursorFrame);
 	TQVBoxLayout* colorAtCursorLayout = new TQVBoxLayout(colorAtCursorFrameArea, 4);
@@ -127,10 +127,10 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	colorAtCursorRgbStringLayout->addWidget(colorAtCursorRgbStringValueLabel);
 	colorAtCursorRgbStringLayout->addStretch();
 	colorAtCursorLayout->addLayout(colorAtCursorRgbStringLayout);
-	layout->addWidget(colorAtCursorFrame, 10);
-	layout->addSpacing(8);
+	tqlayout->addWidget(colorAtCursorFrame, 10);
+	tqlayout->addSpacing(8);
 	paletteLayout->addSpacing(4);
-	paletteLayout->addLayout(layout);
+	paletteLayout->addLayout(tqlayout);
 	paletteLayout->addSpacing(4);
 	inColorNameChanging = false;
 	doNotUpdateColorLabels = false;

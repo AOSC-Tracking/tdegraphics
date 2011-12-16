@@ -75,7 +75,7 @@ public:
 	void update(const TQPoint &panPoint, bool erase = true);
 	void resize(unsigned int w, unsigned int h);
 	void retune(unsigned int csh, unsigned int csv);
-	void invalidate(CanvasItem *item, bool recalc = true);
+	void tqinvalidate(CanvasItem *item, bool recalc = true);
 	CanvasItemList collisions(const TQPoint &p, bool exact = false) const;
 
 	void setBackgroundColor(const TQColor &c) { m_backgroundColor = c; }
@@ -126,7 +126,7 @@ public:
 	T2P::FontVisualParams *fontVisualParams(SVGStylableImpl *style) const;
 	virtual T2P::BezierPath *toBezierPath(CanvasItem *item) const { Q_UNUSED(item); return 0; }
 
-	// Assign z indices to the element and its children, starting with z, and 
+	// Assign z indices to the element and its tqchildren, starting with z, and 
 	// return the next z value to be used.
 	unsigned int setElementItemZIndexRecursive(SVGElementImpl *element, unsigned int z);
 

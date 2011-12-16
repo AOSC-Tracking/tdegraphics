@@ -20,7 +20,7 @@
 
 #include <tqheader.h>
 #include <tqapplication.h>
-#include <palette.h>
+#include <tqpalette.h>
 #include <tqpainter.h>
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -53,7 +53,7 @@ void PMTableItem::paint( TQPainter* p, const TQColorGroup& cg,
    else
       p->setPen( cg.text( ) );
    p->drawText( x + 2, 0, w - x - 4, h,
-                wordWrap( ) ? ( alignment( ) | WordBreak ) : alignment( ), text( ) );
+                wordWrap( ) ? ( tqalignment( ) | WordBreak ) : tqalignment( ), text( ) );
 }
 */
 
@@ -121,7 +121,7 @@ void PMVectorListEdit::init( int dimensions )
       setColumnStretchable( i, true );
    connect( this, TQT_SIGNAL( valueChanged( int, int ) ),
             TQT_SLOT( slotTextChanged( int, int ) ) );
-   setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
+   tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
 }
 
 void PMVectorListEdit::setVectors( const TQValueList<PMVector>& l,
@@ -256,7 +256,7 @@ void PMVectorListEdit::setLink( int p1, int p2 )
    if( p2 >= 0 )
    {
       m_disabled[p2] = true;
-      str = TQString( "%1 (=%2)" ).arg( p2 + 1 ).arg( p1 + 1 );
+      str = TQString( "%1 (=%2)" ).tqarg( p2 + 1 ).tqarg( p1 + 1 );
       h->setLabel( p2, str );
       if( !isReadOnly( ) )
          setRowReadOnly( p2, true );
@@ -315,11 +315,11 @@ bool PMVectorListEdit::isDataValid( )
    return valid;
 }
 
-TQSize PMVectorListEdit::sizeHint( ) const
+TQSize PMVectorListEdit::tqsizeHint( ) const
 {
    return TQSize( c_columnWidth * m_dimension + frameWidth( ) * 2,
                  frameWidth( ) * 2 + horizontalHeader( )->height( )
-                 + verticalHeader( )->sizeHint( ).height( ) );
+                 + verticalHeader( )->tqsizeHint( ).height( ) );
 }
 
 void PMVectorListEdit::slotTextChanged( int, int )

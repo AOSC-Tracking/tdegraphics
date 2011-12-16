@@ -72,11 +72,11 @@ TQString PMBlobSphere::description( ) const
    return i18n( "blob sphere" );
 }
 
-PMMetaObject* PMBlobSphere::metaObject( ) const
+PMMetaObject* PMBlobSphere::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BlobSphere", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "BlobSphere", Base::tqmetaObject( ),
                                         createNewBlobSphere );
       s_pMetaObject->addProperty(
          new PMBlobSphereProperty( "center", &PMBlobSphere::setCentre,

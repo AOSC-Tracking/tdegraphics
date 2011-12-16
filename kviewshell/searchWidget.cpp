@@ -23,7 +23,7 @@
 #include <tqlabel.h>
 #include <tqpushbutton.h>
 #include <tqcheckbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
 
@@ -41,36 +41,36 @@ SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
 {
   setName("SearchWidget");
 
-  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed);
+  tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed);
 
-  layout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
+  tqlayout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
 
   stopButton = new TQPushButton(this, "stopButton");
   stopButton->setPixmap(KGlobal::iconLoader()->loadIcon("stop", KIcon::Small, KIcon::SizeSmall));
-  layout->addWidget(stopButton);
+  tqlayout->addWidget(stopButton);
 
   searchLabel = new TQLabel(this, "searchLabel");
   searchLabel->setText(i18n("Search:"));
-  layout->addWidget(searchLabel);
+  tqlayout->addWidget(searchLabel);
 
   searchText = new KLineEdit(this, "searchText");
-  layout->addWidget(searchText);
+  tqlayout->addWidget(searchText);
 
   searchLabel->setBuddy(searchText);
 
   findPrevButton = new TQPushButton(this, "findPrevButton");
   findPrevButton->setPixmap(KGlobal::iconLoader()->loadIcon("back", KIcon::NoGroup, KIcon::SizeSmall));
   TQToolTip::add(findPrevButton, i18n("Find previous"));
-  layout->addWidget(findPrevButton);
+  tqlayout->addWidget(findPrevButton);
 
   findNextButton = new TQPushButton(this, "findNextButton");
   findNextButton->setPixmap(KGlobal::iconLoader()->loadIcon("forward", KIcon::NoGroup, KIcon::SizeSmall));
   TQToolTip::add(findNextButton, i18n("Find next"));
-  layout->addWidget(findNextButton);
+  tqlayout->addWidget(findNextButton);
 
   caseSensitiveCheckBox = new TQCheckBox(this, "caseSensitiveCheckBox");
   caseSensitiveCheckBox->setText(i18n("Case sensitive"));
-  layout->addWidget(caseSensitiveCheckBox);
+  tqlayout->addWidget(caseSensitiveCheckBox);
 
   connect(stopButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(stopSearch()));
 

@@ -63,7 +63,7 @@ void KGVPageDecorator::drawFrame( TQPainter* p )
     if( !r.isValid() ) 
 	return;
     
-    const TQColorGroup& cg = colorGroup();
+    const TQColorGroup& cg = tqcolorGroup();
 
     r.moveCenter( r.center() + _shadowOffset );
     qDrawPlainRect( p, r, cg.shadow(), _shadowOffset.manhattanLength() );

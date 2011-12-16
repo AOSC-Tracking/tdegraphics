@@ -181,15 +181,15 @@ PMRuleCondition* newCondition( TQDomElement& e,
 
 PMRuleBase::~PMRuleBase( )
 {
-   m_children.setAutoDelete( true );
-   m_children.clear( );
+   m_tqchildren.setAutoDelete( true );
+   m_tqchildren.clear( );
 }
 
 void PMRuleBase::countChild( const TQString& className, bool afterInsertPoint )
 {
    countChildProtected( className, afterInsertPoint );
 
-   TQPtrListIterator<PMRuleBase> it( m_children );
+   TQPtrListIterator<PMRuleBase> it( m_tqchildren );
    for( ; it.current( ); ++it )
       it.current( )->countChild( className, afterInsertPoint );
 }
@@ -198,7 +198,7 @@ void PMRuleBase::reset( )
 {
    resetProtected( );
 
-   TQPtrListIterator<PMRuleBase> it( m_children );
+   TQPtrListIterator<PMRuleBase> it( m_tqchildren );
    for( ; it.current( ); ++it )
       it.current( )->reset( );
 }
@@ -302,7 +302,7 @@ PMRuleNot::PMRuleNot( TQDomElement& e,
          if( isCondition( me ) )
          {
             m_pChild = newCondition( me, globalGroups, localGroups );
-            m_children.append( m_pChild );
+            m_tqchildren.append( m_pChild );
          }
       }
       m = m.nextSibling( );
@@ -330,7 +330,7 @@ PMRuleAnd::PMRuleAnd( TQDomElement& e,
          if( isCondition( me ) )
          {
             PMRuleCondition* c = newCondition( me, globalGroups, localGroups );
-            m_children.append( c );
+            m_tqchildren.append( c );
             m_conditions.append( c );
          }
       }
@@ -361,7 +361,7 @@ PMRuleOr::PMRuleOr( TQDomElement& e,
          if( isCondition( me ) )
          {
             PMRuleCondition* c = newCondition( me, globalGroups, localGroups );
-            m_children.append( c );
+            m_tqchildren.append( c );
             m_conditions.append( c );
          }
       }
@@ -533,7 +533,7 @@ PMRuleCompare::PMRuleCompare( TQDomElement& e,
          if( isValue( me ) )
          {
             m_pValue[i] = newValue( me, globalGroups, localGroups );
-            m_children.append( m_pValue[i] );
+            m_tqchildren.append( m_pValue[i] );
             i++;
          }
       }
@@ -745,7 +745,7 @@ PMRule::PMRule( TQDomElement& e,
          else if( isCondition( me ) )
          {
             m_pCondition = newCondition( me, globalGroups, localGroups );
-            m_children.append( m_pCondition );
+            m_tqchildren.append( m_pCondition );
          }
       }
       m = m.nextSibling( );
@@ -905,7 +905,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
    bool possible = false;
 
    // find rules for target class
-   PMMetaObject* meta = parentObject->metaObject( );
+   PMMetaObject* meta = parentObject->tqmetaObject( );
    for( ; meta && !possible; meta = meta->superClass( ) )
    {
       PMRuleTargetClass* tc = m_rulesDict.find( meta->className( ) );
@@ -996,7 +996,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
 
    // find rules for target class
    TQPtrList<PMRuleTargetClass> targetClassList;
-   PMMetaObject* meta = parentObject->metaObject( );
+   PMMetaObject* meta = parentObject->tqmetaObject( );
    for( ; meta; meta = meta->superClass( ) )
    {
       PMRuleTargetClass* tc = m_rulesDict.find( meta->className( ) );
@@ -1006,7 +1006,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
    if( targetClassList.isEmpty( ) )
       return 0; // not rules found
 
-   // count already inserted children
+   // count already inserted tqchildren
    TQPtrListIterator<PMRuleTargetClass> tit( targetClassList );
    for( ; tit.current( ); ++tit ) // ... for all target classes
    {

@@ -143,7 +143,7 @@ void PMXMLParser::parseChildObjects( TQDomElement& e, PMObject* parent )
                delete obj;
          }
          else if( ce.tagName( ) != "extra_data" )
-            printError( i18n( "Unknown object %1" ).arg( ce.tagName( ) ) );
+            printError( i18n( "Unknown object %1" ).tqarg( ce.tagName( ) ) );
       }
       c = c.nextSibling( );
    }

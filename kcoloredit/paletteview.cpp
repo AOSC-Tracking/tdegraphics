@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <layout.h>
+#include <tqlayout.h>
 
 #include "kcoloreditview.h"
 #include "paletteview.h"

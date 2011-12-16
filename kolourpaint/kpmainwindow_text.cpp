@@ -80,7 +80,7 @@ void kpMainWindow::readAndApplyTextSettings ()
     KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupText);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
-    m_actionTextFontFamily->setFont (cfg->readEntry (kpSettingFontFamily, TQString::fromLatin1 ("Times")));
+    m_actionTextFontFamily->setFont (cfg->readEntry (kpSettingFontFamily, TQString::tqfromLatin1 ("Times")));
     m_actionTextFontSize->setFontSize (cfg->readNumEntry (kpSettingFontSize, 14));
     m_actionTextBold->setChecked (cfg->readBoolEntry (kpSettingBold, false));
     m_actionTextItalic->setChecked (cfg->readBoolEntry (kpSettingItalic, false));

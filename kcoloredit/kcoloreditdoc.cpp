@@ -19,7 +19,7 @@
 #include <tqdir.h>
 #include <tqfileinfo.h>
 #include <tqwidget.h>
-#include <clipboard.h>
+#include <tqclipboard.h>
 
 // include files for KDE
 #include <klocale.h>
@@ -235,7 +235,7 @@ void KColorEditDoc::copyToClipboard(Palette& palette) {
 	TQString text;
 	TQTextOStream stream(&text);
 	palette.save(stream, 0, false);
-	KApplication::clipboard()->setText(text);
+	KApplication::tqclipboard()->setText(text);
 
     emit clipboardChanged();
 }
@@ -260,7 +260,7 @@ void KColorEditDoc::paste() {
 	Palette palettePaste;
 	TQString text;
 	TQTextIStream stream(&text);
-	text = KApplication::clipboard()->text();
+	text = KApplication::tqclipboard()->text();
 	if(palettePaste.load( stream, false )) {
 		m_paletteHistory.paste(paletteCursorPos(), palettePaste);
 		setPaletteSelection(paletteCursorPos(), paletteCursorPos() +

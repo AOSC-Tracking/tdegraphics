@@ -22,7 +22,7 @@
 #include "pmdebug.h"
 
 #include <tqwidget.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcombobox.h>
 #include <tqlabel.h>
 #include <tqlineedit.h>
@@ -39,21 +39,21 @@ PMPaletteValueEdit::PMPaletteValueEdit( TQWidget* parent, const char* name )
       : TQWidget( parent, name )
 {
    TQLabel* lbl;
-   TQHBoxLayout* layout;
+   TQHBoxLayout* tqlayout;
 
    m_pIndexEdit = new PMIntEdit( this );
    m_pValueEdit = new PMFloatEdit( this );
 
-   layout = new TQHBoxLayout( this );
+   tqlayout = new TQHBoxLayout( this );
    lbl = new TQLabel( i18n( "Index" ), this );
-   layout->addWidget( lbl );
-   layout->addSpacing( KDialog::spacingHint( ) );
-   layout->addWidget( m_pIndexEdit );
-   layout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( lbl );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_pIndexEdit );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
    lbl = new TQLabel( i18n( "Value" ), this );
-   layout->addWidget( lbl );
-   layout->addSpacing( KDialog::spacingHint( ) );
-   layout->addWidget( m_pValueEdit );
+   tqlayout->addWidget( lbl );
+   tqlayout->addSpacing( KDialog::spacingHint( ) );
+   tqlayout->addWidget( m_pValueEdit );
 
    connect( m_pIndexEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pValueEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

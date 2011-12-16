@@ -169,7 +169,7 @@ public:
     //       Be more robust when external enforcement fails.
     static int minimumWidthForTextStyle (const kpTextStyle &);
     static int minimumHeightForTextStyle (const kpTextStyle &);
-    static TQSize minimumSizeForTextStyle (const kpTextStyle &);
+    static TQSize tqminimumSizeForTextStyle (const kpTextStyle &);
 
     static int preferredMinimumWidthForTextStyle (const kpTextStyle &textStyle);
     static int preferredMinimumHeightForTextStyle (const kpTextStyle &textStyle);
@@ -177,7 +177,7 @@ public:
 
     int minimumWidth () const;
     int minimumHeight () const;
-    TQSize minimumSize () const;
+    TQSize tqminimumSize () const;
 
     int textRowForPoint (const TQPoint &globalPoint) const;
     int textColForPoint (const TQPoint &globalPoint) const;

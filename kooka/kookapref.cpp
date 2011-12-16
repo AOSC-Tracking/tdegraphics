@@ -36,7 +36,7 @@
 #include <kcolorbutton.h>
 #include <kstandarddirs.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtooltip.h>
 #include <tqvgroupbox.h>
 #include <tqgrid.h>
@@ -149,7 +149,7 @@ void KookaPreferences::setupOCRPage()
 #endif
     top->addWidget( kgp );
     TQWidget *spaceEater = new TQWidget( page );
-    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
+    spaceEater->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     top->addWidget( spaceEater );
 
     /*
@@ -180,13 +180,13 @@ KURLRequester* KookaPreferences::binaryCheckBox( TQWidget *parent, const TQStrin
 {
     TQHBox *hbox = new TQHBox( parent );
 
-    (void) new TQLabel( i18n("Select the %1 binary to use:").arg( program ), hbox );
+    (void) new TQLabel( i18n("Select the %1 binary to use:").tqarg( program ), hbox );
     KURLRequester* urlRequester = new KURLRequester( parent );
     urlRequester->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
 
     TQToolTip::add( urlRequester,
                    i18n( "Enter the path to %1, the optical-character-recognition "
-			 "command line tool.").arg(program));
+			 "command line tool.").tqarg(program));
     return urlRequester;
 }
 
@@ -418,8 +418,8 @@ void KookaPreferences::setupThumbnailPage()
 
    /* Frame Stuff */
    int frameWidth = konf->readNumEntry( THUMB_MARGIN, 3 );
-   TQColor col1    = konf->readColorEntry( MARGIN_COLOR1, &(colorGroup().base()));
-   TQColor col2    = konf->readColorEntry( MARGIN_COLOR2, &(colorGroup().foreground()));
+   TQColor col1    = konf->readColorEntry( MARGIN_COLOR1, &(tqcolorGroup().base()));
+   TQColor col2    = konf->readColorEntry( MARGIN_COLOR2, &(tqcolorGroup().foreground()));
 
    TQGrid *fGrid = new TQGrid( 2, hgb3 );
    fGrid->setSpacing( 2 );
@@ -457,7 +457,7 @@ void KookaPreferences::slotApply( void )
     /* ** startup options ** */
 
    /** write the global one, to read from libkscan also */
-   konf->setGroup(TQString::fromLatin1(GROUP_STARTUP));
+   konf->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
    bool cbVal = !(cbShowScannerSelection->isChecked());
    kdDebug(28000) << "Writing for " << STARTUP_SKIP_ASK << ": " << cbVal << endl;
    konf->writeEntry( STARTUP_SKIP_ASK, cbVal, true, true ); /* global flag goes to kdeglobals */
@@ -532,8 +532,8 @@ void KookaPreferences::slotDefault( void )
     m_tileSelector->setURL( KURL(bgImg) );
     m_thumbWidth->setValue( 100 );
     m_thumbHeight->setValue( 120 );
-    TQColor col1    = TQColor( colorGroup().base());
-    TQColor col2    = TQColor( colorGroup().foreground());
+    TQColor col1    = TQColor( tqcolorGroup().base());
+    TQColor col2    = TQColor( tqcolorGroup().foreground());
 
     m_frameWidth->setValue( 3 );
     m_colButt1->setColor( col1 );

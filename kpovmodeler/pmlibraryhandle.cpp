@@ -24,7 +24,7 @@
 #include <tqdir.h>
 #include <tqfile.h>
 #include <tqdom.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqimage.h>
 
 #include <klocale.h>

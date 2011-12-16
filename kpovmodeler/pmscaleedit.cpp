@@ -20,7 +20,7 @@
 #include "pmscale.h"
 #include "pmvectoredit.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <klocale.h>
 
 

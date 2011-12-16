@@ -18,12 +18,12 @@ KPDFLink::~KPDFLink()
 
 TQString KPDFLinkGoto::linkTip() const
 {
-    return m_extFileName.isEmpty() ? ( m_vp.pageNumber != -1 ? i18n( "Go to page %1" ).arg( m_vp.pageNumber + 1 ) : TQString() ) : i18n("Open external file");
+    return m_extFileName.isEmpty() ? ( m_vp.pageNumber != -1 ? i18n( "Go to page %1" ).tqarg( m_vp.pageNumber + 1 ) : TQString() ) : i18n("Open external file");
 }
 
 TQString KPDFLinkExecute::linkTip() const
 {
-    return i18n( "Execute '%1'..." ).arg( m_fileName );
+    return i18n( "Execute '%1'..." ).tqarg( m_fileName );
 }
 
 TQString KPDFLinkBrowse::linkTip() const

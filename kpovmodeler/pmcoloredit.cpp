@@ -20,7 +20,7 @@
 #include <kcolorbutton.h>
 #include <klocale.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcolor.h>
 #include <kdialog.h>
 

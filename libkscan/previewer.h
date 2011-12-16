@@ -89,7 +89,7 @@ private:
 
     TQPoint calcPercent( int, int );
 
-    TQHBoxLayout *layout;
+    TQHBoxLayout *tqlayout;
     ImageCanvas *img_canvas;
     TQComboBox   *pre_format_combo;
     TQMemArray<TQCString> format_ids;

@@ -628,7 +628,7 @@ void kpViewManager::updateView (kpView *v, const TQRect &viewRect)
     if (!queueUpdates ())
     {
         if (fastUpdates ())
-            v->repaint (viewRect, false/*no erase*/);
+            v->tqrepaint (viewRect, false/*no erase*/);
         else
             v->update (viewRect);
     }
@@ -646,7 +646,7 @@ void kpViewManager::updateView (kpView *v, const TQRegion &viewRegion)
     if (!queueUpdates ())
     {
         if (fastUpdates ())
-            v->repaint (viewRegion, false/*no erase*/);
+            v->tqrepaint (viewRegion, false/*no erase*/);
         else
             v->update (viewRegion.boundingRect ());
     }

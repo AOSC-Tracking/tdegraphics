@@ -20,7 +20,7 @@
 #include "pmtexture.h"
 #include "pmlinkedit.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <klocale.h>
 

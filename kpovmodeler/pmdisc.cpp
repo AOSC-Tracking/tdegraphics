@@ -96,11 +96,11 @@ void PMDisc::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMDisc::metaObject( ) const
+PMMetaObject* PMDisc::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Disc", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Disc", Base::tqmetaObject( ),
                                         createNewDisc );
       s_pMetaObject->addProperty(
          new PMDiscProperty( "center", &PMDisc::setCenter, &PMDisc::center ) );

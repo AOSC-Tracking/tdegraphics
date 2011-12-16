@@ -107,11 +107,11 @@ void PMHeightField::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMHeightField::metaObject( ) const
+PMMetaObject* PMHeightField::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "HeightField", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "HeightField", Base::tqmetaObject( ),
                                         createNewHeightField );
       s_pMetaObject->addProperty(
          new PMHeightFieldProperty( "fileName", &PMHeightField::setFileName, &PMHeightField::fileName ) );

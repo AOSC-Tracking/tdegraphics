@@ -25,7 +25,7 @@
 #include "pmvector.h"
 
 #include <tqwidget.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcombobox.h>
 #include <tqlabel.h>
 #include <tqlineedit.h>
@@ -48,12 +48,12 @@ void PMPatternEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQGridLayout* layout;
+   TQGridLayout* tqlayout;
    TQHBoxLayout* hl;
    TQVBoxLayout* vl;
    TQGridLayout* gl;
 
-   layout = new TQGridLayout( topLayout( ), 12, 2 );
+   tqlayout = new TQGridLayout( topLayout( ), 12, 2 );
    hl = new TQHBoxLayout( KDialog::spacingHint( ) );
    hl->addWidget( new TQLabel( i18n( "Type:" ), this ) );
    m_pTypeCombo = new TQComboBox( false, this );
@@ -88,12 +88,12 @@ void PMPatternEdit::createTopWidgets( )
    m_pTypeCombo->insertItem( i18n( "Wrinkles" ) );
    hl->addWidget( m_pTypeCombo );
    hl->addStretch( 1 );
-   layout->addMultiCellLayout( hl, 0, 0, 0, 1 );
+   tqlayout->addMultiCellLayout( hl, 0, 0, 0, 1 );
 
    m_pAgateTurbulenceLabel = new TQLabel( i18n( "Turbulence:" ), this );
-   layout->addWidget( m_pAgateTurbulenceLabel, 1, 0 );
+   tqlayout->addWidget( m_pAgateTurbulenceLabel, 1, 0 );
    m_pAgateTurbulenceEdit = new PMFloatEdit( this );
-   layout->addWidget( m_pAgateTurbulenceEdit, 1, 1, AlignLeft );
+   tqlayout->addWidget( m_pAgateTurbulenceEdit, 1, 1, AlignLeft );
 
    m_pCrackleWidget = new TQWidget( this );
    vl = new TQVBoxLayout( m_pCrackleWidget, 0, KDialog::spacingHint( ) );
@@ -114,7 +114,7 @@ void PMPatternEdit::createTopWidgets( )
    m_pCrackleSolid = new TQCheckBox( i18n( "Solid:" ), m_pCrackleWidget );
    gl->addMultiCellWidget( m_pCrackleSolid, 2, 2, 0, 1 );
    hl->addStretch( 1 );
-   layout->addMultiCellWidget( m_pCrackleWidget, 2, 2, 0, 1 );
+   tqlayout->addMultiCellWidget( m_pCrackleWidget, 2, 2, 0, 1 );
 
    m_pDensityWidget = new TQWidget( this );
    vl = new TQVBoxLayout( m_pDensityWidget, 0, KDialog::spacingHint( ) );
@@ -132,17 +132,17 @@ void PMPatternEdit::createTopWidgets( )
    m_pDensityInterpolate->insertItem( i18n( "Trilinear" ) );
    hl->addWidget( m_pDensityInterpolate );
    hl->addStretch( 1 );
-   layout->addMultiCellWidget( m_pDensityWidget, 3, 3, 0, 1 );
+   tqlayout->addMultiCellWidget( m_pDensityWidget, 3, 3, 0, 1 );
 
    m_pGradientLabel = new TQLabel( i18n( "Gradient:" ), this );
-   layout->addWidget( m_pGradientLabel, 4, 0 );
+   tqlayout->addWidget( m_pGradientLabel, 4, 0 );
    m_pGradientEdit = new PMVectorEdit( "x", "y", "z", this );
-   layout->addWidget( m_pGradientEdit, 4, 1 );
+   tqlayout->addWidget( m_pGradientEdit, 4, 1 );
 
    m_pJuliaComplexLabel = new TQLabel( i18n( "Complex number:" ), this );
-   layout->addWidget( m_pJuliaComplexLabel, 5, 0 );
+   tqlayout->addWidget( m_pJuliaComplexLabel, 5, 0 );
    m_pJuliaComplex = new PMVectorEdit( "Real", "Imaginary", this );
-   layout->addWidget( m_pJuliaComplex, 5, 1 );
+   tqlayout->addWidget( m_pJuliaComplex, 5, 1 );
 
    m_pFractalWidget = new TQWidget( this );
    vl = new TQVBoxLayout( m_pFractalWidget, 0, KDialog::spacingHint( ) );
@@ -195,7 +195,7 @@ void PMPatternEdit::createTopWidgets( )
    m_pFractalIntFactor = new PMFloatEdit( m_pFractalWidget );
    gl->addWidget( m_pFractalIntFactor, 1, 3 );
    hl->addStretch( 1 );
-   layout->addMultiCellWidget( m_pFractalWidget, 6, 6, 0, 1 );
+   tqlayout->addMultiCellWidget( m_pFractalWidget, 6, 6, 0, 1 );
 
    m_pQuiltControlsLabel = new TQLabel( i18n( "Quilt controls:" ), this );
    m_pQuiltControl0Edit = new PMFloatEdit( this );
@@ -204,8 +204,8 @@ void PMPatternEdit::createTopWidgets( )
    hl->addWidget( m_pQuiltControl0Edit );
    hl->addWidget( m_pQuiltControl1Edit );
    hl->addStretch( 1 );
-   layout->addWidget( m_pQuiltControlsLabel, 7, 0 );
-   layout->addLayout( hl, 7, 1 );
+   tqlayout->addWidget( m_pQuiltControlsLabel, 7, 0 );
+   tqlayout->addLayout( hl, 7, 1 );
 
    m_pSlopeWidget = new TQWidget( this );
    vl = new TQVBoxLayout( m_pSlopeWidget, 0, KDialog::spacingHint( ) );
@@ -240,17 +240,17 @@ void PMPatternEdit::createTopWidgets( )
    m_pSlopeHiAlt = new PMFloatEdit( m_pSlopeWidget );
    gl->addWidget( m_pSlopeHiAlt, 1, 1 );
    hl->addStretch( 1 );
-   layout->addMultiCellWidget( m_pSlopeWidget, 8, 8, 0, 1 );
+   tqlayout->addMultiCellWidget( m_pSlopeWidget, 8, 8, 0, 1 );
 
    m_pSpiralNumberLabel = new TQLabel( i18n( "Spiral number:" ), this );
    m_pSpiralNumberEdit = new PMIntEdit( this );
-   layout->addWidget( m_pSpiralNumberLabel, 9, 0 );
-   layout->addWidget( m_pSpiralNumberEdit, 9, 1, AlignLeft );
+   tqlayout->addWidget( m_pSpiralNumberLabel, 9, 0 );
+   tqlayout->addWidget( m_pSpiralNumberEdit, 9, 1, AlignLeft );
 
    m_pDepthLabel = new TQLabel( i18n( "Depth:" ), this );
    m_pDepthEdit = new PMFloatEdit( this );
-   layout->addWidget( m_pDepthLabel, 10, 0 );
-   layout->addWidget( m_pDepthEdit, 10, 1, AlignLeft );
+   tqlayout->addWidget( m_pDepthLabel, 10, 0 );
+   tqlayout->addWidget( m_pDepthEdit, 10, 1, AlignLeft );
 
    m_pNoiseGeneratorLabel = new TQLabel( i18n( "Noise generator:" ), this );
    m_pNoiseGenerator = new TQComboBox( false, this );
@@ -258,8 +258,8 @@ void PMPatternEdit::createTopWidgets( )
    m_pNoiseGenerator->insertItem( i18n( "Original" ) );
    m_pNoiseGenerator->insertItem( i18n( "Range Corrected" ) );
    m_pNoiseGenerator->insertItem( i18n( "Perlin" ) );
-   layout->addWidget( m_pNoiseGeneratorLabel, 11, 0 );
-   layout->addWidget( m_pNoiseGenerator, 11, 1 );
+   tqlayout->addWidget( m_pNoiseGeneratorLabel, 11, 0 );
+   tqlayout->addWidget( m_pNoiseGenerator, 11, 1 );
 
    m_pEnableTurbulenceEdit = new TQCheckBox( i18n( "Turbulence" ), this );
    topLayout( )->addWidget( m_pEnableTurbulenceEdit );

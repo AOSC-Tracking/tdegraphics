@@ -22,7 +22,7 @@
 #include "pmcommentedit.h"
 #include "pmmemento.h"
 
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <klocale.h>
 
 PMDefinePropertyClass( PMComment, PMCommentProperty );
@@ -108,11 +108,11 @@ void PMComment::setText( const TQString& text )
    }
 }
 
-PMMetaObject* PMComment::metaObject( ) const
+PMMetaObject* PMComment::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Comment", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Comment", Base::tqmetaObject( ),
                                         createNewComment );
       s_pMetaObject->addProperty(
          new PMCommentProperty( "text", &PMComment::setText, &PMComment::text ) );

@@ -20,7 +20,7 @@
 #include <tqfileinfo.h>
 #include <tqframe.h>
 #include <tqtable.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqregexp.h>
 
 #include <kaction.h>
@@ -264,7 +264,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     for ( TQValueList<double>::iterator first = mags.begin(), last = mags.end();
 	    first != last;
 	    ++first ) {
-        TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( *first * 100.0, 2 ));
+        TQString str = TQString( "%1%" ).tqarg( KGlobal::locale()->formatNumber( *first * 100.0, 2 ));
         str.remove( KGlobal::locale()->decimalSymbol() + "00" );
         zooms << str;
 	if ( *first == 1.0 ) idx = cur;
@@ -600,7 +600,7 @@ void KGVPart::updateZoomActions()
     }
 
     // Show percentage that isn't predefined
-    TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( zoom, 2 ));
+    TQString str = TQString( "%1%" ).tqarg( KGlobal::locale()->formatNumber( zoom, 2 ));
     str.remove( KGlobal::locale()->decimalSymbol() + "00" );
     items.insert( items.at(idx), 1, str );
     _zoomTo->setItems( items );
@@ -750,8 +750,8 @@ void KGVPart::slotGhostscriptError( const TQString& error )
 				"Below are any error messages which were received from Ghostscript "
 				"(<nobr><strong>%2</strong></nobr>) "
 				"which may help you.</qt>" )
-		    .arg( error )
-		    .arg( Configuration::interpreter() ),
+		    .tqarg( error )
+		    .tqarg( Configuration::interpreter() ),
 	   true );
     // The true above makes it show a "configure gs" option, but maybe we
     // should trigger an auto-redetection?

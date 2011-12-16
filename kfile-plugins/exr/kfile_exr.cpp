@@ -237,10 +237,10 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 #endif
 			TQString UTCOffset;
 			if (utcOffset(h)>0.0) {
-				UTCOffset.append(TQString("%1").arg(utcOffset(h)/3600, 0, 'f', 1));
+				UTCOffset.append(TQString("%1").tqarg(utcOffset(h)/3600, 0, 'f', 1));
 				UTCOffset.append(" hours behind UTC");
 			} else {
-				UTCOffset.append(TQString("%1").arg(-1.0*utcOffset(h)/3600, 0, 'f', 1));
+				UTCOffset.append(TQString("%1").tqarg(-1.0*utcOffset(h)/3600, 0, 'f', 1));
 				UTCOffset.append(" hours ahead of UTC");
 			}
 			appendItem( stdgroup, "UTC Offset", UTCOffset); 
@@ -264,10 +264,10 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		if ( hasLongitude(h) ) {
 			TQString Longitude;
 			if (longitude(h)<0.0) {
-				Longitude.append(TQString("%1").arg(-1.0*longitude(h),0,'f',3));
+				Longitude.append(TQString("%1").tqarg(-1.0*longitude(h),0,'f',3));
 				Longitude.append(" deg West");
 			} else {
-				Longitude.append(TQString("%1").arg(longitude(h),0,'f',3));
+				Longitude.append(TQString("%1").tqarg(longitude(h),0,'f',3));
 				Longitude.append(" deg East");
 			}
 			appendItem( stdgroup, "Longitude", Longitude);
@@ -275,17 +275,17 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		if ( hasLatitude(h) ) {
 			TQString Latitude;
 			if (latitude(h)<0.0) {
-				Latitude.append(TQString("%1").arg(-1.0*latitude(h),0,'f',3));
+				Latitude.append(TQString("%1").tqarg(-1.0*latitude(h),0,'f',3));
 				Latitude.append(" deg South");
 			} else {
-				Latitude.append(TQString("%1").arg(latitude(h),0,'f',3));
+				Latitude.append(TQString("%1").tqarg(latitude(h),0,'f',3));
 				Latitude.append(" deg North");
 			}
 			appendItem( stdgroup, "Latitude", Latitude );
 		}
 		if ( hasAltitude(h) ) {
 			double Altitude = altitude(h);
-			appendItem( stdgroup, "Altitude", TQString("%1").arg(Altitude,0,'f',1) );
+			appendItem( stdgroup, "Altitude", TQString("%1").tqarg(Altitude,0,'f',1) );
 		}
 		if ( hasIsoSpeed(h) ) {
 			double IsoSpeed = isoSpeed(h);

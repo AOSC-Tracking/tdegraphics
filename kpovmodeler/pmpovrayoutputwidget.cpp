@@ -17,8 +17,8 @@
 
 #include "pmpovrayoutputwidget.h"
 
-#include <textedit.h>
-#include <layout.h>
+#include <tqtextedit.h>
+#include <tqlayout.h>
 
 #include <klocale.h>
 #include <kglobalsettings.h>

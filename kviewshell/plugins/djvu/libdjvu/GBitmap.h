@@ -365,7 +365,7 @@ public:
       discussion, the position is (#x/subsample#,#y/subsample#).  In other
       words, you can position the blit with a sub-pixel resolution.  The
       resulting anti-aliasing changes are paramount to the image quality. */
-  void blit(const GBitmap *shape, int x, int y, int subsample);
+  void blit(const GBitmap *tqshape, int x, int y, int subsample);
   //@}
   
   /** @name Saving images.  

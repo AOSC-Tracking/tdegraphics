@@ -10,9 +10,9 @@
 #include <klocale.h>
 #include <tqfile.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqregexp.h>
-#include <textview.h>
+#include <tqtextview.h>
 #include <tqtooltip.h>
 #include <tqvariant.h>
 #include <tqwhatsthis.h>
@@ -64,17 +64,17 @@ void infoDialog::setDVIData(dvifile *dviFile)
     text = i18n("There is no DVI file loaded at the moment.");
   else {
     text.append("<table WIDTH=\"100%\" NOSAVE >");
-    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("Filename")).arg(dviFile->filename));
+    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("Filename")).tqarg(dviFile->filename));
 
     TQFile file(dviFile->filename);
     if (file.exists())
-      text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("File Size")).arg(KIO::convertSize(file.size())));
+      text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("File Size")).tqarg(KIO::convertSize(file.size())));
     else
-      text.append(TQString("<tr><td><b> </b></td> <td>%1</td></tr>").arg(i18n("The file does no longer exist.")));
+      text.append(TQString("<tr><td><b> </b></td> <td>%1</td></tr>").tqarg(i18n("The file does no longer exist.")));
 
     text.append(TQString("<tr><td><b>  </b></td> <td>  </td></tr>"));
-    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("#Pages")).arg(dviFile->total_pages));
-    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("Generator/Date")).arg(dviFile->generatorString));
+    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("#Pages")).tqarg(dviFile->total_pages));
+    text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").tqarg(i18n("Generator/Date")).tqarg(dviFile->generatorString));
   } // else (dviFile == NULL)
 
   TextLabel1->setText( text );

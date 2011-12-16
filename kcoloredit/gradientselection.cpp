@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqframe.h>
 #include <tqradiobutton.h>
 #include <tqcolor.h>
@@ -26,13 +26,13 @@
 
 GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWidget(parent,name) {
 	TQGridLayout* topLayout = new TQGridLayout(this, 2, 2, 0);
-	TQHBoxLayout* layout = new TQHBoxLayout(0);
-	layout->setMargin(3);
+	TQHBoxLayout* tqlayout = new TQHBoxLayout(0);
+	tqlayout->setMargin(3);
 	xyColorSelector = new KXYColorSelector(this);
 	connect(xyColorSelector, TQT_SIGNAL( valueChanged(int, int) ),
 		TQT_SLOT( slotXyColorSelectorPosChanged(int, int) ));
-	layout->addWidget(xyColorSelector);
-	topLayout->addLayout(layout, 0, 0);
+	tqlayout->addWidget(xyColorSelector);
+	topLayout->addLayout(tqlayout, 0, 0);
 	topLayout->setRowStretch(0, 10);
 	topLayout->setRowStretch(1, 0);
 	TQVBoxLayout* xyColorSelectorLayout = new TQVBoxLayout();

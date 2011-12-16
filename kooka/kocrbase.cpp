@@ -24,7 +24,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqfileinfo.h>
 #include <tqtooltip.h>
@@ -129,7 +129,7 @@ void KOCRBase::imgIntro()
     m_previewPix = new TQLabel( m_imgHBox );
     m_previewPix->setPixmap(TQPixmap());
     m_previewPix->setFixedSize(m_previewSize);
-    m_previewPix->setAlignment( TQt::AlignCenter );
+    m_previewPix->tqsetAlignment( TQt::AlignCenter );
     m_previewPix->setFrameStyle( TQFrame::Panel | TQFrame::Sunken );
     // m_previewPix->resize(m_previewSize);
 
@@ -164,7 +164,7 @@ void KOCRBase::ocrIntro( )
         hb_cap->setSpacing( KDialog::spacingHint());
 
         TQLabel *imgLab = new TQLabel( hb_cap );
-        imgLab->setAlignment( TQt::AlignHCenter | TQt::AlignTop  );
+        imgLab->tqsetAlignment( TQt::AlignHCenter | TQt::AlignTop  );
         imgLab->setPixmap( pix );
         pa = hb_cap;
     }
@@ -188,7 +188,7 @@ void KOCRBase::spellCheckIntro()
     KSpellConfig *sCfg = new KSpellConfig( m_gbSpellOpts, "SPELLCHK", m_spellConfig, false );
     /* A space eater */
     TQWidget *spaceEater = new TQWidget(m_spellchkPage);
-    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
+    spaceEater->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
 
     /* connect toggle button */
     connect( m_cbWantCheck, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slWantSpellcheck(bool)));
@@ -285,7 +285,7 @@ void KOCRBase::introduceImage( KookaImage* img)
         }
     }
     TQWidget *spaceEater = new TQWidget( m_metaBox );
-    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
+    spaceEater->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     m_metaBox->show();
 }
 

@@ -165,7 +165,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   mMenu->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), helpMenu());
   mMenu->insertSeparator();
   mMenu->insertItem(SmallIcon( "exit" ), KStdGuiItem::quit().text(), kapp, TQT_SLOT(quit()), CTRL+Key_Q);
-  mLastClickPos = geometry().topLeft()+TQPoint(width()/2, height()/2);
+  mLastClickPos = tqgeometry().topLeft()+TQPoint(width()/2, height()/2);
 }
 
 KLineal::~KLineal(){
@@ -293,7 +293,7 @@ void KLineal::setOrientation(int inOrientation) {
     mLenMenu->changeItem(FULLSCREENID, mOrientation % 2 ? i18n("&Full Screen Height") : i18n("&Full Screen Width"));
   setCursor(mCurrentCursor);
   setupBackground();
-  repaint();
+  tqrepaint();
 }
 void KLineal::setNorth() {
   setOrientation(North);
@@ -390,7 +390,7 @@ void KLineal::choseFont() {
 void KLineal::setFont(TQFont &font) {
 	mScaleFont = font;
 	saveSettings();
-  repaint();
+  tqrepaint();
 }
 
 
@@ -451,7 +451,7 @@ void KLineal::enterEvent(TQEvent * /*inEvent*/) {
 * overwritten to switch the value label and line cursor off
 */
 void KLineal::leaveEvent(TQEvent * /*inEvent*/) {
-  if (!geometry().contains(TQCursor::pos())) {
+  if (!tqgeometry().contains(TQCursor::pos())) {
     hideLabel();
   }
 }
@@ -569,7 +569,7 @@ void KLineal::mousePressEvent(TQMouseEvent *inEvent) {
   mLastClickPos = TQCursor::pos();
   hideLabel();
 
-  TQRect gr = geometry();
+  TQRect gr = tqgeometry();
   mDragOffset = mLastClickPos - TQPoint(gr.left(), gr.top());
   if (inEvent->button() == Qt::LeftButton) {
     if (!mDragging) {

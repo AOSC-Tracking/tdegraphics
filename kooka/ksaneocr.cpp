@@ -60,7 +60,7 @@
 #include <tqpaintdevice.h>
 #include <tqpainter.h>
 #include <tqpen.h>
-#include <brush.h>
+#include <tqbrush.h>
 #include <tqfileinfo.h>
 
 /*
@@ -814,11 +814,11 @@ bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
     TQFileInfo fi( fileName );
     if( ! fi.exists() ) {
         error = true;
-        errStr = i18n("The orf %1 does not exist.").arg(fileName);
+        errStr = i18n("The orf %1 does not exist.").tqarg(fileName);
     }
     if( ! error && ! fi.isReadable() ) {
         error = true;
-        errStr = i18n("Permission denied on file %1.").arg(fileName);
+        errStr = i18n("Permission denied on file %1.").tqarg(fileName);
     }
 
 

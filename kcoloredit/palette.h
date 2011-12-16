@@ -19,7 +19,7 @@
 #define PALETTE_H
 
 #include <tqstring.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqfile.h>
 
 #include "color.h"

@@ -953,14 +953,14 @@ print_fg_2layer(ByteStream &str,
               if (options.get_color())
                 {
                   write(str,"/%d %d %d %f %f %f c\n",
-                        blit->shapeno, 
+                        blit->tqshapeno, 
                         blit->left-currentx, blit->bottom-currenty,
                         ramp[p.r]/255.0, ramp[p.g]/255.0, ramp[p.b]/255.0);
                 } 
               else
                 {
                   write(str,"/%d %d %d %f c\n",
-                        blit->shapeno, 
+                        blit->tqshapeno, 
                         blit->left-currentx, blit->bottom-currenty,
                         ramp[GRAY(p.r, p.g, p.b)]/255.0);
                 }
@@ -968,7 +968,7 @@ print_fg_2layer(ByteStream &str,
           else
             {
               write(str,"/%d %d %d s\n", 
-                    blit->shapeno, 
+                    blit->tqshapeno, 
                     blit->left-currentx, blit->bottom-currenty);
             }
           currentx = blit->left;
@@ -1047,8 +1047,8 @@ print_fg_3layer(ByteStream &str,
                 {
                   JB2Blit *blit = jb2->get_blit(current_blit);
                   GRect rect2(blit->left, blit->bottom,
-                              jb2->get_shape(blit->shapeno).bits->columns(),
-                              jb2->get_shape(blit->shapeno).bits->rows());
+                              jb2->get_tqshape(blit->tqshapeno).bits->columns(),
+                              jb2->get_tqshape(blit->tqshapeno).bits->rows());
                   if (rect2.intersect(rect1,rect2)) 
                     break;
                 }
@@ -1087,12 +1087,12 @@ print_fg_3layer(ByteStream &str,
                 {
                   JB2Blit *blit = jb2->get_blit(current_blit);
                   GRect rect2(blit->left, blit->bottom,
-                              jb2->get_shape(blit->shapeno).bits->columns(),
-                              jb2->get_shape(blit->shapeno).bits->rows()); 
+                              jb2->get_tqshape(blit->tqshapeno).bits->columns(),
+                              jb2->get_tqshape(blit->tqshapeno).bits->rows()); 
                   if (rect2.intersect(rect1,rect2)) 
                     {   
                       write(str,"/%d %d %d s\n",
-                            blit->shapeno, 
+                            blit->tqshapeno, 
                             blit->left-currentx, blit->bottom-currenty);
                       currentx = blit->left;
                       currenty = blit->bottom;
@@ -1113,27 +1113,27 @@ print_fg(ByteStream &str,
   GP<JB2Image> jb2=dimg->get_fgjb();
   if (! jb2) return;
   int num_blits = jb2->get_blit_count();
-  int num_shapes = jb2->get_shape_count();
-  unsigned char *dict_shapes = 0;
+  int num_tqshapes = jb2->get_tqshape_count();
+  unsigned char *dict_tqshapes = 0;
   unsigned char *blit_list = 0;
-  GPBuffer<unsigned char> gdict_shapes(dict_shapes,num_shapes);
+  GPBuffer<unsigned char> gdict_tqshapes(dict_tqshapes,num_tqshapes);
   GPBuffer<unsigned char> gblit_list(blit_list,num_blits);
-  for(int i=0; i<num_shapes; i++)
+  for(int i=0; i<num_tqshapes; i++)
   {
-    dict_shapes[i]=0;
+    dict_tqshapes[i]=0;
   }
   for(int current_blit=0; current_blit<num_blits; current_blit++)
   {
     JB2Blit *blit = jb2->get_blit(current_blit);
-    JB2Shape *shape = & jb2->get_shape(blit->shapeno);
+    JB2Shape *tqshape = & jb2->get_tqshape(blit->tqshapeno);
     blit_list[current_blit] = 0;
-    if (! shape->bits) 
+    if (! tqshape->bits) 
       continue;
     GRect rect2(blit->left, blit->bottom, 
-      shape->bits->columns(), shape->bits->rows());
+      tqshape->bits->columns(), tqshape->bits->rows());
     if (rect2.intersect(rect2, prn_rect))
     {
-      dict_shapes[blit->shapeno] = 1;
+      dict_tqshapes[blit->tqshapeno] = 1;
       blit_list[current_blit] = 1;
     }
   }
@@ -1152,13 +1152,13 @@ print_fg(ByteStream &str,
     "0 1 1 {Encoding exch /.notdef put} for \n"
     "CharStrings begin\n"
     "/.notdef {} def\n",
-    num_shapes+1);
-  for(int current_shape=0; current_shape<num_shapes; current_shape++)
+    num_tqshapes+1);
+  for(int current_tqshape=0; current_tqshape<num_tqshapes; current_tqshape++)
   {
-    if (dict_shapes[current_shape])
+    if (dict_tqshapes[current_tqshape])
     {
-      JB2Shape *shape = & jb2->get_shape(current_shape);
-      GP<GBitmap> bitmap = shape->bits;
+      JB2Shape *tqshape = & jb2->get_tqshape(current_tqshape);
+      GP<GBitmap> bitmap = tqshape->bits;
       int rows = bitmap->rows();
       int columns = bitmap->columns();
       int nbytes = (columns+7)/8*rows+1;
@@ -1173,7 +1173,7 @@ print_fg(ByteStream &str,
       GPBuffer<unsigned char> gs_start(s_start,nbytes);
       unsigned char *s_ascii;
       GPBuffer<unsigned char> gs_ascii(s_ascii,nbytes*2);
-      write(str,"/%d {",current_shape);
+      write(str,"/%d {",current_tqshape);
 
       unsigned char *s = s_start;
       for(int current_row=0; current_row<rows; current_row++)
@@ -1942,8 +1942,8 @@ print_txt_sub(DjVuTXT &txt, DjVuTXT::Zone &zone,
     default:
       separator = 0; break;
     }
-  // Zone children
-  if (zone.children.isempty()) 
+  // Zone tqchildren
+  if (zone.tqchildren.isempty()) 
     {
       const char *data = (const char*)txt.textUTF8 + zone.text_start;
       int length = zone.text_length;
@@ -1968,8 +1968,8 @@ print_txt_sub(DjVuTXT &txt, DjVuTXT::Zone &zone,
           message.format("%d F\n",zone.rect.ymax-zone.rect.ymin);
           out.write((const char*)message,message.length());
         }
-      for (GPosition pos=zone.children; pos; ++pos)
-        print_txt_sub(txt, zone.children[pos], out,lastx,lasty);
+      for (GPosition pos=zone.tqchildren; pos; ++pos)
+        print_txt_sub(txt, zone.tqchildren[pos], out,lastx,lasty);
     }
 }
 

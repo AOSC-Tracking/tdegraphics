@@ -65,7 +65,7 @@ public:
 
   virtual void setCellSize( int s );
   virtual int cellSize() { return cellsize; }
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 
   void setSize(const TQSize s) { setNumRows(s.height()); setNumCols(s.width()); }
 

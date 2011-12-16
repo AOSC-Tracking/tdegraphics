@@ -53,7 +53,7 @@ const TQString * MrmlShared::m_element = 0L;
 const TQString * MrmlShared::m_attribute = 0L;
 const TQString * MrmlShared::m_attributeName = 0L;
 const TQString * MrmlShared::m_attributeValue = 0L;
-const TQString * MrmlShared::m_children = 0L;
+const TQString * MrmlShared::m_tqchildren = 0L;
 const TQString * MrmlShared::m_none = 0L;
 
 const TQString * MrmlShared::m_multiSet = 0L;
@@ -141,7 +141,7 @@ void MrmlShared::init()
     m_attribute = new TQString ( "attribute" ) ;
     m_attributeName = new TQString ( "attribute-name" ) ;
     m_attributeValue = new TQString ( "attribute-value" ) ;
-    m_children = new TQString ( "children" ) ;
+    m_tqchildren = new TQString ( "tqchildren" ) ;
     m_none = new TQString ( "none" ) ;
 
     m_multiSet = new TQString ( "multi-set" ) ;
@@ -215,7 +215,7 @@ void MrmlShared::cleanup()
     delete m_attribute;
     delete m_attributeName;
     delete m_attributeValue;
-    delete m_children;
+    delete m_tqchildren;
     delete m_none;
 
     delete m_visibility;

@@ -138,7 +138,7 @@ namespace KSVG
 		virtual ~LibartPainter() {}
 		
 		void update(SVGStylableImpl *style);
-		void draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *shape);
+		void draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *tqshape);
 
 		virtual float opacity(SVGStylableImpl *style) const = 0;
 		virtual unsigned short paintType(SVGStylableImpl *style) const = 0;
@@ -195,8 +195,8 @@ namespace KSVG
 		virtual bool fillContains(const TQPoint &p);
 		virtual bool strokeContains(const TQPoint &p);
 		virtual void update(CanvasItemUpdate reason, int param1 = 0, int param2 = 0);
-		void draw(SVGShapeImpl *shape);
-		bool isVisible(SVGShapeImpl *shape);
+		void draw(SVGShapeImpl *tqshape);
+		bool isVisible(SVGShapeImpl *tqshape);
 
 		virtual void init();
 		virtual void init(const SVGMatrixImpl *);

@@ -55,7 +55,7 @@ class fontMapEntry {
  * Long time ago, when TeX was only used with MetaFont fonts, the DVI
  * file would specify a font by giving an 8-character name, such as
  * 'cmr10'. The DVI previewer would then locate the associated PK font
- * file, load it, and retrieve the character shaped. Happy times, they
+ * file, load it, and retrieve the character tqshaped. Happy times, they
  * were.
  *
  * Today TeX is also used to access Type1 and TrueType fonts, which do

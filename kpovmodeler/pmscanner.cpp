@@ -577,10 +577,10 @@ void PMScanner::scanError( int c )
    m_token = SCANNER_ERROR_TOK;
    if( isprint( c ) )
       m_error = i18n( "Unexpected character '%1' after \"%2\"" )
-         .arg( ( char )c ).arg( m_svalue );
+         .tqarg( ( char )c ).tqarg( m_svalue );
    else
       m_error = i18n( "Unexpected character %1 after \"%2\"" )
-         .arg( c, 4, 16 ).arg( m_svalue );
+         .tqarg( c, 4, 16 ).tqarg( m_svalue );
 
 #ifdef PMSCAN_DEBUG
    kdDebug( PMArea ) << "Line " << m_line << ": Error " << m_error << "\n";

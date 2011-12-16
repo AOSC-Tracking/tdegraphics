@@ -207,7 +207,7 @@ void KImageHolder::eraseSelect()
 	inner.rBottom() -= 1;
 	r -= inner;
 
-	TQMemArray<TQRect> rects = r.rects();
+	TQMemArray<TQRect> rects = r.tqrects();
 
 	if( m_pDoubleBuffer )
 		for( unsigned int i = 0; i < rects.size(); ++i )
@@ -269,7 +269,7 @@ TQRect KImageHolder::selection() const
 		return TQRect();
 }
 
-TQSize KImageHolder::sizeHint() const
+TQSize KImageHolder::tqsizeHint() const
 {
 	if( m_pPixmap )
 		return m_pPixmap->size();

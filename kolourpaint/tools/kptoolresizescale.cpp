@@ -40,7 +40,7 @@
 #include <tqgroupbox.h>
 #include <tqhbox.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpoint.h>
 #include <tqpointarray.h>
 #include <tqpushbutton.h>
@@ -665,17 +665,17 @@ void kpToolResizeScaleDialog::createOperationGroupBox (TQWidget *baseWidget)
     // TODO: ALT+R doesn't select the button.
     m_resizeButton = new TQToolButton (m_operationGroupBox);
     toolButtonSetLook (m_resizeButton,
-                       TQString::fromLatin1 ("resize"),
+                       TQString::tqfromLatin1 ("resize"),
                        i18n ("&Resize"));
 
     m_scaleButton = new TQToolButton (m_operationGroupBox);
     toolButtonSetLook (m_scaleButton,
-                       TQString::fromLatin1 ("scale"),
+                       TQString::tqfromLatin1 ("scale"),
                        i18n ("&Scale"));
 
     m_smoothScaleButton = new TQToolButton (m_operationGroupBox);
     toolButtonSetLook (m_smoothScaleButton,
-                       TQString::fromLatin1 ("smooth_scale"),
+                       TQString::tqfromLatin1 ("smooth_scale"),
                        i18n ("S&mooth Scale"));
 
 
@@ -684,9 +684,9 @@ void kpToolResizeScaleDialog::createOperationGroupBox (TQWidget *baseWidget)
     //m_smoothScaleLabel = new TQLabel (i18n ("S&mooth scale"), m_operationGroupBox);
 
 
-    //m_resizeLabel->setAlignment (m_resizeLabel->alignment () | TQt::ShowPrefix);
-    //m_scaleLabel->setAlignment (m_scaleLabel->alignment () | TQt::ShowPrefix);
-    //m_smoothScaleLabel->setAlignment (m_smoothScaleLabel->alignment () | TQt::ShowPrefix);
+    //m_resizeLabel->tqsetAlignment (m_resizeLabel->tqalignment () | TQt::ShowPrefix);
+    //m_scaleLabel->tqsetAlignment (m_scaleLabel->tqalignment () | TQt::ShowPrefix);
+    //m_smoothScaleLabel->tqsetAlignment (m_smoothScaleLabel->tqalignment () | TQt::ShowPrefix);
 
 
     TQButtonGroup *resizeScaleButtonGroup = new TQButtonGroup (baseWidget);
@@ -727,9 +727,9 @@ void kpToolResizeScaleDialog::createDimensionsGroupBox (TQWidget *baseWidget)
     m_dimensionsGroupBox = new TQGroupBox (i18n ("Dimensions"), baseWidget);
 
     TQLabel *widthLabel = new TQLabel (i18n ("Width:"), m_dimensionsGroupBox);
-    widthLabel->setAlignment (widthLabel->alignment () | TQt::AlignHCenter);
+    widthLabel->tqsetAlignment (widthLabel->tqalignment () | TQt::AlignHCenter);
     TQLabel *heightLabel = new TQLabel (i18n ("Height:"), m_dimensionsGroupBox);
-    heightLabel->setAlignment (heightLabel->alignment () | TQt::AlignHCenter);
+    heightLabel->tqsetAlignment (heightLabel->tqalignment () | TQt::AlignHCenter);
 
     TQLabel *originalLabel = new TQLabel (i18n ("Original:"), m_dimensionsGroupBox);
     m_originalWidthInput = new KIntNumInput (

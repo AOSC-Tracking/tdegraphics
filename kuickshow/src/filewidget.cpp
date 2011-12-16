@@ -196,7 +196,7 @@ bool FileWidget::eventFilter( TQObject *o, TQEvent *e )
 	    }
 	
 	    const TQString& text = k->text();
-	    if ( !text.isEmpty() && text.unicode()->isPrint() ) {
+	    if ( !text.isEmpty() && text.tqunicode()->isPrint() ) {
                 k->accept();
 		
                 if ( !m_fileFinder ) {
@@ -448,7 +448,7 @@ void FileWidget::slotFinishedLoading()
     emit finished();
 }
 
-TQSize FileWidget::sizeHint() const
+TQSize FileWidget::tqsizeHint() const
 {
   return TQSize( 300, 300 );
 }

@@ -30,7 +30,7 @@
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqprogressbar.h>
 #include <tqlabel.h>
 #include <tqscrollview.h>
@@ -140,13 +140,13 @@ bool PMPovrayWidget::render( const TQByteArray& scene, const PMRenderMode& m,
       int w, h;
 
       w = maxSize.width( ) + KDialog::spacingHint( ) * 2;
-      h = maxSize.height( ) + m_pSaveButton->sizeHint( ).height( ) * 2
+      h = maxSize.height( ) + m_pSaveButton->tqsizeHint( ).height( ) * 2
          + KDialog::spacingHint( ) * 6;
-      if( m_pProgressLabel->sizeHint( ).height( )
-          > m_pProgressBar->sizeHint( ).height( ) )
-         h += m_pProgressLabel->sizeHint( ).height( );
+      if( m_pProgressLabel->tqsizeHint( ).height( )
+          > m_pProgressBar->tqsizeHint( ).height( ) )
+         h += m_pProgressLabel->tqsizeHint( ).height( );
       else
-         h += m_pProgressBar->sizeHint( ).height( );
+         h += m_pProgressBar->tqsizeHint( ).height( );
 
       w += 16;
       h += 16;
@@ -319,11 +319,11 @@ void PMPovrayWidget::slotPovrayOutput( )
    m_pPovrayOutputWidget->show( );
 }
 
-void PMPovrayWidget::slotRenderingFinished( int returnStatus )
+void PMPovrayWidget::slotRenderingFinished( int returntqStatus )
 {
-   kdDebug( PMArea ) << "Povray exited with status " << returnStatus << endl;
+   kdDebug( PMArea ) << "Povray exited with status " << returntqStatus << endl;
    m_bRunning = false;
-   if( returnStatus == 0 )
+   if( returntqStatus == 0 )
       m_pSaveButton->setEnabled( true );
    m_pStopButton->setEnabled( false );
    m_pSuspendButton->setEnabled( false );
@@ -331,11 +331,11 @@ void PMPovrayWidget::slotRenderingFinished( int returnStatus )
    m_pProgressLabel->setText( i18n( "finished" ) );
    m_pProgressTimer->stop( );
 
-   if( ( returnStatus != 0 ) && !m_stopped )
+   if( ( returntqStatus != 0 ) && !m_stopped )
    {
       KMessageBox::error( this, i18n( "Povray exited abnormally.\n"
                                       "See the povray output for details." )
-                          .arg( returnStatus ) );
+                          .tqarg( returntqStatus ) );
    }
    else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
    {
@@ -405,7 +405,7 @@ void PMPovrayWidget::showSpeed( double pps )
    else
       num.setNum( pps, 'g', 3 );
 
-   m_pProgressLabel->setText( i18n( "running, %1 pixels/second" ).arg( num ) );
+   m_pProgressLabel->setText( i18n( "running, %1 pixels/second" ).tqarg( num ) );
 }
 
 #include "pmpovraywidget.moc"

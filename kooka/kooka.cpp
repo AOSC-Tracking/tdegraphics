@@ -96,7 +96,7 @@ Kooka::Kooka( const TQCString& deviceToUse)
 
     changeCaption( i18n( "KDE Scanning" ));
 
-    setAutoSaveSettings(  TQString::fromLatin1("General Options"),
+    setAutoSaveSettings(  TQString::tqfromLatin1("General Options"),
                           true );
 }
 

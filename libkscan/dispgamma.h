@@ -40,7 +40,7 @@ public:
     DispGamma( TQWidget *parent );
     ~DispGamma();
 
-    TQSize sizeHint( void );
+    TQSize tqsizeHint( void );
     TQSizePolicy sizePolicy( void );
 
     void setValueRef( TQMemArray<SANE_Word> *newVals )

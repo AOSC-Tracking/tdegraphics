@@ -525,11 +525,11 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
         switch(Tag){
 
             case TAG_MAKE:
-                ExifData::CameraMake = TQString::fromLatin1((const char*)ValuePtr, 31);
+                ExifData::CameraMake = TQString::tqfromLatin1((const char*)ValuePtr, 31);
                 break;
 
             case TAG_MODEL:
-                ExifData::CameraModel = TQString::fromLatin1((const char*)ValuePtr, 39);
+                ExifData::CameraModel = TQString::tqfromLatin1((const char*)ValuePtr, 39);
 		break;
 
             case TAG_ORIENTATION:
@@ -537,7 +537,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 break;
 
             case TAG_DATETIME_ORIGINAL:
-		DateTime = TQString::fromLatin1((const char*)ValuePtr, 19);
+		DateTime = TQString::tqfromLatin1((const char*)ValuePtr, 19);
                 break;
 
             case TAG_USERCOMMENT:
@@ -558,12 +558,12 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                         int c;
                         c = (ValuePtr)[a];
                         if (c != '\0' && c != ' '){
-                            UserComment = TQString::fromLatin1((const char*)(a+ValuePtr), 199);
+                            UserComment = TQString::tqfromLatin1((const char*)(a+ValuePtr), 199);
                             break;
                         }
                     }
                 }else{
-                    UserComment = TQString::fromLatin1((const char*)ValuePtr, 199);
+                    UserComment = TQString::tqfromLatin1((const char*)ValuePtr, 199);
                 }
                 break;
 
@@ -803,7 +803,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
             // printf("Exif section in Motorola order\n");
             MotorolaOrder = 1;
         }else{
-            throw FatalError("Invalid Exif alignment marker.");
+            throw FatalError("Invalid Exif tqalignment marker.");
         }
     }
 

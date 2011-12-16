@@ -23,7 +23,7 @@
 #include "pmmemento.h"
 
 #include <klocale.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 
 PMDefinePropertyClass( PMRaw, PMRawProperty );
 
@@ -69,11 +69,11 @@ void PMRaw::setCode( const TQString& code )
    }
 }
 
-PMMetaObject* PMRaw::metaObject( ) const
+PMMetaObject* PMRaw::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Raw", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "Raw", Base::tqmetaObject( ),
                                         createNewRaw );
       s_pMetaObject->addProperty(
          new PMRawProperty( "code", &PMRaw::setCode, &PMRaw::code ) );

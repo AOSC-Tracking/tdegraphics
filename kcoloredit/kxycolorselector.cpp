@@ -42,7 +42,7 @@ void KXYColorSelector::setType(const int type) {
 
 void KXYColorSelector::updateContents() {
 	drawPalette(&pixmap);
-	repaint();
+	tqrepaint();
 }
 
 void KXYColorSelector::resizeEvent(TQResizeEvent*) {

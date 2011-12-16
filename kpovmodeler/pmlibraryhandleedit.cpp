@@ -20,9 +20,9 @@
 #include <tqpushbutton.h>
 #include <tqcheckbox.h>
 #include <tqlineedit.h>
-#include <textedit.h>
+#include <tqtextedit.h>
 #include <tqvbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 
 #include <klocale.h>

@@ -20,7 +20,7 @@
 #include "pmdensity.h"
 #include "pmlinkedit.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <klocale.h>
 

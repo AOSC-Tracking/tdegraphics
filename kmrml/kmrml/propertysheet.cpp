@@ -98,10 +98,10 @@ void PropertySheet::initFromDOM( const TQDomElement& elem )
     m_minSubsetSize = toInt( elem.attribute( MrmlShared::minSubsetSize() ));
     m_maxSubsetSize = toInt( elem.attribute( MrmlShared::maxSubsetSize() ));
 
-    TQValueList<TQDomElement> children =
+    TQValueList<TQDomElement> tqchildren =
         KMrml::directChildElements( elem, MrmlShared::propertySheet() );
-    TQValueListConstIterator<TQDomElement> it = children.begin();
-    for ( ; it != children.end(); ++it )
+    TQValueListConstIterator<TQDomElement> it = tqchildren.begin();
+    for ( ; it != tqchildren.end(); ++it )
         m_subSheets.append( new PropertySheet( *it ) );
 }
 
@@ -190,7 +190,7 @@ PropertySheet::SendType PropertySheet::getSendType( const TQString& value )
         type = AttributeName;
     else if ( value == MrmlShared::attributeValue() )
         type = AttributeValue;
-    else if ( value == MrmlShared::children() )
+    else if ( value == MrmlShared::tqchildren() )
         type = Children;
     else if ( value == MrmlShared::none() )
         type = None;

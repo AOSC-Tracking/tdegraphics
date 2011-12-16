@@ -115,7 +115,7 @@ private:
 
 /** The DjVuBookMark.
     Each entry in the Navigation chunk (NAVM) is a bookmark.  A bookmark
-    contains a count of immediate children, a display string and a url.
+    contains a count of immediate tqchildren, a display string and a url.
 **/
 
 class DjVmNav::DjVuBookMark : public GPEnabled
@@ -131,7 +131,7 @@ public:
   void encode(const GP<ByteStream> &stream);
   void dump(const GP<ByteStream> &stream);
   void decode(const GP<ByteStream> &stream);
-  int count;	           // count of immediate children.
+  int count;	           // count of immediate tqchildren.
   GUTF8String displayname; // example:  "Section 3.5 - Encryption"
   GUTF8String url;	   // url, may be blank or relative.
 };

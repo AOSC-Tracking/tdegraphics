@@ -43,7 +43,7 @@ public:
     virtual ~kpToolWidgetBrush ();
 
 private:
-    TQString brushName (int shape, int whichSize);
+    TQString brushName (int tqshape, int whichSize);
     
 public:
     TQPixmap brush () const;

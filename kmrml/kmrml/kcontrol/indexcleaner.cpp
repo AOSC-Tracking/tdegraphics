@@ -78,7 +78,7 @@ void IndexCleaner::startNext()
     if ( index != -1 )
         cmd.replace( index, 2, TQUOTE( dir ) );
     else // no %d? What else can we do?
-        cmd.append( TQString::fromLatin1(" ") + TQUOTE( dir ) );
+        cmd.append( TQString::tqfromLatin1(" ") + TQUOTE( dir ) );
 
     *m_process << cmd;
 

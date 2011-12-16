@@ -26,7 +26,7 @@
 #include <ksvg_ecma.h>
 #include <ksvg_scriptinterpreter.h>
 
-#include <stylesheet.h>
+#include <tqstylesheet.h>
 
 #include <kurl.h>
 #include <kmessagebox.h>
@@ -133,9 +133,9 @@ DOM::DOMString SVGWindowImpl::printNode(const DOM::Node &node, unsigned short le
 		TQDictIterator<DOM::DOMString> it(elem->attributes());
 		for(;it.current(); ++it)
 		         ret += " " + it.currentKey() + "=\"" + it.current()->string() + '\"';
-		if(elem->firstChild().isNull()) // no children
+		if(elem->firstChild().isNull()) // no tqchildren
 			ret += " />\n";
-		else // handle children
+		else // handle tqchildren
 		{
 			ret += ">\n";
 			for(DOM::Node child = node.firstChild();!child.isNull();child = child.nextSibling())

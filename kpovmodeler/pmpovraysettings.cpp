@@ -23,7 +23,7 @@
 #include "pmresourcelocator.h"
 #include "pmtext.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlineedit.h>
 #include <tqpushbutton.h>
 #include <tqlistbox.h>
@@ -40,60 +40,60 @@ PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
 {
    m_selectionIndex = 0;
 
-   TQHBoxLayout* hlayout;
-   TQVBoxLayout* vlayout;
+   TQHBoxLayout* htqlayout;
+   TQVBoxLayout* vtqlayout;
    TQVBoxLayout* gvl;
    TQGroupBox* gb;
 
-   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
    gb = new TQGroupBox( i18n( "Povray Command" ), this );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Command:" ), gb ) );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Command:" ), gb ) );
    m_pPovrayCommand = new TQLineEdit( gb );
-   hlayout->addWidget( m_pPovrayCommand );
+   htqlayout->addWidget( m_pPovrayCommand );
    m_pBrowsePovrayCommand = new TQPushButton( gb );
    m_pBrowsePovrayCommand->setPixmap( SmallIcon( "fileopen" ) );
    connect( m_pBrowsePovrayCommand, TQT_SIGNAL( clicked( ) ),
             TQT_SLOT( slotBrowsePovrayCommand( ) ) );
-   hlayout->addWidget( m_pBrowsePovrayCommand );
-   vlayout->addWidget( gb );
+   htqlayout->addWidget( m_pBrowsePovrayCommand );
+   vtqlayout->addWidget( gb );
 
    gb = new TQGroupBox( i18n( "Povray User Documentation" ), this );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Path:" ), gb ) );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Path:" ), gb ) );
    m_pDocumentationPath = new TQLineEdit( gb );
-   hlayout->addWidget( m_pDocumentationPath );
+   htqlayout->addWidget( m_pDocumentationPath );
    m_pBrowseDocumentationPath = new TQPushButton( gb );
    m_pBrowseDocumentationPath->setPixmap( SmallIcon( "fileopen" ) );
    connect( m_pBrowseDocumentationPath, TQT_SIGNAL( clicked( ) ),
             TQT_SLOT( slotBrowsePovrayDocumentation( ) ) );
-   hlayout->addWidget( m_pBrowseDocumentationPath );
-   vlayout->addWidget( gb );
-   hlayout = new TQHBoxLayout( gvl );
-   hlayout->addWidget( new TQLabel( i18n( "Version:" ), gb ) );
+   htqlayout->addWidget( m_pBrowseDocumentationPath );
+   vtqlayout->addWidget( gb );
+   htqlayout = new TQHBoxLayout( gvl );
+   htqlayout->addWidget( new TQLabel( i18n( "Version:" ), gb ) );
    m_pDocumentationVersion = new TQComboBox( false, gb );
    TQValueList<TQString> versions = PMDocumentationMap::theMap( )->availableVersions( );
    TQValueListIterator<TQString> it;
    for( it = versions.begin( ); it != versions.end( ); ++it )
       m_pDocumentationVersion->insertItem( *it );
-   hlayout->addWidget( m_pDocumentationVersion );
-   hlayout->addStretch( );
+   htqlayout->addWidget( m_pDocumentationVersion );
+   htqlayout->addStretch( );
 
    gb = new TQGroupBox( i18n( "Library Paths" ), this );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
-   hlayout = new TQHBoxLayout( gvl );
+   htqlayout = new TQHBoxLayout( gvl );
    m_pLibraryPaths = new TQListBox( gb );
    connect( m_pLibraryPaths, TQT_SIGNAL( highlighted( int ) ),
             TQT_SLOT( slotPathSelected( int ) ) );
-   hlayout->addWidget( m_pLibraryPaths );
+   htqlayout->addWidget( m_pLibraryPaths );
 
-   TQVBoxLayout* bl = new TQVBoxLayout( hlayout );
+   TQVBoxLayout* bl = new TQVBoxLayout( htqlayout );
    m_pAddLibraryPath = new TQPushButton( i18n( "Add..." ), gb );
    connect( m_pAddLibraryPath, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPath( ) ) );
    bl->addWidget( m_pAddLibraryPath );
@@ -113,9 +113,9 @@ PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
             TQT_SLOT( slotPathDown( ) ) );
    bl->addWidget( m_pLibraryPathDown );
    bl->addStretch( 1 );
-   vlayout->addWidget( gb );
+   vtqlayout->addWidget( gb );
 
-   vlayout->addStretch( 1 );
+   vtqlayout->addStretch( 1 );
 }
 
 void PMPovraySettings::displaySettings( )

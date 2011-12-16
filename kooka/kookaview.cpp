@@ -47,7 +47,7 @@
 #endif
 #include <tqlabel.h>
 #include <tqpainter.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqsplitter.h>
 #include <tqstrlist.h>
 #include <tqpaintdevice.h>
@@ -164,7 +164,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    TQHBox *recentBox = new TQHBox( m_dockRecent );
    recentBox->setMargin(KDialog::marginHint());
    TQLabel *lab = new TQLabel( i18n("Gallery:"), recentBox );
-   lab->setSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
+   lab->tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
    recentFolder = new ImageNameCombo( recentBox );
 
    m_dockRecent->setWidget( recentBox );
@@ -277,7 +277,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    packager->openRoots();
 
-   /* Status Bar */
+   /* tqStatus Bar */
    KStatusBar *statBar = m_mainWindow->statusBar();
 
    // statBar->insertItem(TQString("1"), SBAR_ZOOM,  0, true );
@@ -472,7 +472,7 @@ void KookaView::print()
     printer.setUsePrinterResolution(true);
     printer.addDialogPage( new ImgPrintDialog( img ));
 
-    if( printer.setup( m_mainWindow, i18n("Print %1").arg(img->localFileName().section('/', -1)) ))
+    if( printer.setup( m_mainWindow, i18n("Print %1").tqarg(img->localFileName().section('/', -1)) ))
     {
 	KookaPrint kookaprint( &printer );
 	kookaprint.printImage(img);
@@ -565,7 +565,7 @@ void KookaView::startOCR( KookaImage *img )
 		   m_dockOCRText, TQT_SLOT( show() ));
 	  
           connect( ocrFabric, TQT_SIGNAL( repaintOCRResImage( )),
-                   img_canvas, TQT_SLOT(repaint()));
+                   img_canvas, TQT_SLOT(tqrepaint()));
 
 	  connect( ocrFabric, TQT_SIGNAL( clearOCRResultText()),
 		   m_ocrResEdit, TQT_SLOT(clear()));
@@ -842,7 +842,7 @@ void KookaView::slShowAImage( KookaImage *img )
        ocrFabric->slSetImage( img );
    }
 
-   /* Status Bar */
+   /* tqStatus Bar */
    KStatusBar *statBar = m_mainWindow->statusBar();
    if( img_canvas )
        statBar->changeItem( img_canvas->imageInfoString(), StatusImage );
@@ -913,7 +913,7 @@ void KookaView::slShowThumbnails(KFileTreeViewItem *dirKfi, bool forceRedraw )
  */
 void KookaView::slStartLoading( const KURL& url )
 {
-   emit( signalChangeStatusbar( i18n("Loading %1" ).arg( url.prettyURL() ) ));
+   emit( signalChangeStatusbar( i18n("Loading %1" ).tqarg( url.prettyURL() ) ));
 
    // if( m_stack->visibleWidget() != img_canvas )
    // {

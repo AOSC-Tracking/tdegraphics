@@ -1403,12 +1403,12 @@ static TQPixmap xForm (const TQPixmap &pm, const TQWMatrix &transformMatrix_,
     painter.setWorldMatrix (transformMatrix);
 #if DEBUG_KP_PIXMAP_FX && 0
     kdDebug () << "\ttranslate top=" << painter.xForm (TQPoint (0, 0)) << endl;
-    kdDebug () << "\tmatrix: m11=" << painter.worldMatrix ().m11 ()
-               << " m12=" << painter.worldMatrix ().m12 ()
-               << " m21=" << painter.worldMatrix ().m21 ()
-               << " m22=" << painter.worldMatrix ().m22 ()
-               << " dx=" << painter.worldMatrix ().dx ()
-               << " dy=" << painter.worldMatrix ().dy ()
+    kdDebug () << "\tmatrix: m11=" << painter.tqworldMatrix ().m11 ()
+               << " m12=" << painter.tqworldMatrix ().m12 ()
+               << " m21=" << painter.tqworldMatrix ().m21 ()
+               << " m22=" << painter.tqworldMatrix ().m22 ()
+               << " dx=" << painter.tqworldMatrix ().dx ()
+               << " dy=" << painter.tqworldMatrix ().dy ()
                << endl;
 #endif
     painter.drawPixmap (TQPoint (0, 0), pm);

@@ -51,7 +51,7 @@ class SVGAnimatedLength;
  * point and radius.
  *
  * For more info look here : <a href =
- * "http://www.w3.org/TR/SVG/shapes.html#CircleElement">9.3 The
+ * "http://www.w3.org/TR/SVG/tqshapes.html#CircleElement">9.3 The
  * 'circle' element</a>.
  */
 class SVGCircleElement : public SVGElement,

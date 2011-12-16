@@ -49,11 +49,11 @@ TQString PMLooksLike::description( ) const
    return i18n( "looks like" );
 }
 
-PMMetaObject* PMLooksLike::metaObject( ) const
+PMMetaObject* PMLooksLike::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "LooksLike", Base::metaObject( ),
+      s_pMetaObject = new PMMetaObject( "LooksLike", Base::tqmetaObject( ),
                                         createNewLooksLike );
       // no properties
    }

@@ -66,7 +66,7 @@ public:
 
 	/**
 	 * Returns the tight bounding box in current user space (i.e., after application of
-	 * the <code>transform</code> attribute, if any) on the geometry of all contained graphics
+	 * the <code>transform</code> attribute, if any) on the tqgeometry of all contained graphics
 	 * elements, exclusive of stroke-width and filter effects).
 	 *
 	 * @return An SVGRect object that defines the bounding box.

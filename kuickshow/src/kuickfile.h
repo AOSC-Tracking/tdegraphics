@@ -27,7 +27,7 @@ class KuickFile : public TQObject
   TQ_OBJECT
 
 public:
-	enum DownloadStatus
+	enum DownloadtqStatus
 	{
 		OK = 1,
 		CANCELED,
@@ -72,7 +72,7 @@ public:
      * immediately.
      * @return true when the download has finished or false when the user aborted the dialog
      */
-    KuickFile::DownloadStatus waitForDownload( TQWidget *parent );
+    KuickFile::DownloadtqStatus waitForDownload( TQWidget *parent );
 
 //    bool needsDownload();
 

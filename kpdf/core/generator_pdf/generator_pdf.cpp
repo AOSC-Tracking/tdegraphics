@@ -209,7 +209,7 @@ const DocumentInfo * PDFGenerator::generateDocumentInfo()
         if ( pdfdoc )
         {
             docInfo.set( "format", i18n( "PDF v. <version>", "PDF v. %1" )
-                         .arg( TQString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
+                         .tqarg( TQString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
             docInfo.set( "encryption", pdfdoc->isEncrypted() ? i18n( "Encrypted" ) : i18n( "Unencrypted" ),
                          i18n("Security") );
             docInfo.set( "optimization", pdfdoc->isLinearized() ? i18n( "Yes" ) : i18n( "No" ),
@@ -457,7 +457,7 @@ bool PDFGenerator::print( KPrinter& printer )
     {
         pstitle = m_document->currentDocument().fileName( false );
     }
-    // this looks non-unicode-safe and it is. anything other than ASCII is not specified
+    // this looks non-tqunicode-safe and it is. anything other than ASCII is not specified
     // and some printers actually stop printing when they encounter non-ASCII characters in the
     // Postscript %%Title tag
     TQCString pstitle8Bit = pstitle.latin1();
@@ -528,14 +528,14 @@ static GString *TQStringToGString(const TQString &s) {
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
-      cstring[i] = s.at(i).unicode();
+      cstring[i] = s.tqat(i).tqunicode();
     return new GString(cstring, len);
 }
 
-static TQString unicodeToTQString(Unicode* u, int len) {
+static TQString tqunicodeToTQString(Unicode* u, int len) {
     TQString ret;
     ret.setLength(len);
-    TQChar* qch = (TQChar*) ret.unicode();
+    TQChar* qch = (TQChar*) ret.tqunicode();
     for (;len;--len)
       *qch++ = (TQChar) *u++;
     return ret;
@@ -568,7 +568,7 @@ static TQString UnicodeParsedString(GString *s1) {
             u = s1->getChar(i) & 0xff;
             ++i;
         }
-        result += unicodeToTQString( &u, 1 );
+        result += tqunicodeToTQString( &u, 1 );
     }
     return result;
 }
@@ -868,7 +868,7 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
         TQString name;
         Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
-        name = unicodeToTQString(uniChar, titleLength);
+        name = tqunicodeToTQString(uniChar, titleLength);
         if ( name.isEmpty() )
             continue;
         TQDomElement item = docSyn.createElement( name );
@@ -909,11 +909,11 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
 
         item.setAttribute( "Open", TQVariant( (bool)outlineItem->isOpen() ).toString() );
 
-        // 3. recursively descend over children
+        // 3. recursively descend over tqchildren
         outlineItem->open();
-        GList * children = outlineItem->getKids();
-        if ( children )
-            addSynopsisChildren( &item, children );
+        GList * tqchildren = outlineItem->getKids();
+        if ( tqchildren )
+            addSynopsisChildren( &item, tqchildren );
     }
 }
 
@@ -1017,10 +1017,10 @@ void PDFGenerator::addTransition( int pageNumber, KPDFPage * page )
 
     switch ( pdfTransition->getAlignment() ) {
         case PageTransition::Horizontal:
-            transition->setAlignment( KPDFPageTransition::Horizontal );
+            transition->tqsetAlignment( KPDFPageTransition::Horizontal );
             break;
         case PageTransition::Vertical:
-            transition->setAlignment( KPDFPageTransition::Vertical );
+            transition->tqsetAlignment( KPDFPageTransition::Vertical );
             break;
     }
 

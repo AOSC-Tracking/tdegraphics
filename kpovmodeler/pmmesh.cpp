@@ -133,11 +133,11 @@ void PMMesh::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMMesh::metaObject( ) const
+PMMetaObject* PMMesh::tqmetaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Mesh", Base::metaObject( ), createNewMesh );
+      s_pMetaObject = new PMMetaObject( "Mesh", Base::tqmetaObject( ), createNewMesh );
 
       s_pMetaObject->addProperty(
          new PMMeshProperty( "hierarchy", &PMMesh::setHierarchy, &PMMesh::hierarchy ) );
@@ -236,7 +236,7 @@ void PMMesh::restoreMemento( PMMemento* s )
       TQPtrList<PMMemento> list = m->triangleMementos( );
       TQPtrListIterator<PMMemento> Itr( list );
       for ( int i = 0; i < numChildren && ( tm = Itr.current( ) ) != 0; ++i, ++Itr )
-         childAt( i )->restoreMemento( tm );
+         tqchildAt( i )->restoreMemento( tm );
    }
 
    Base::restoreMemento( s );
@@ -259,10 +259,10 @@ void PMMesh::controlPoints( PMControlPointList& list )
    m_pointToPointList.clear( );
    for ( unsigned i = 0; i < numChildren; ++i )
    {
-      if ( childAt( i )->isA( "Triangle" ) )
+      if ( tqchildAt( i )->isA( "Triangle" ) )
       {
 
-         obj = ( PMTriangle * ) childAt( i );
+         obj = ( PMTriangle * ) tqchildAt( i );
          ptp.object = obj;
          for ( unsigned j = 0; j < 3; ++j )
          {
@@ -353,9 +353,9 @@ void PMMesh::controlPointsChangedList( PMControlPointList& list, PMObjectList& o
 
    for ( int i = 0; i < numChildren && validTriangles; ++i )
    {
-      if ( childAt( i )->isA( "Triangle" ) )
+      if ( tqchildAt( i )->isA( "Triangle" ) )
       {
-         obj = ( PMTriangle* )childAt( i );
+         obj = ( PMTriangle* )tqchildAt( i );
          obj->createMemento( );
          objList.append( obj );
          validNormal = false;
@@ -538,7 +538,7 @@ void PMMesh::controlPointsChangedList( PMControlPointList& list, PMObjectList& o
             {
                if ( ( tm = mementoList.getLast( ) ) )
                {
-                  childAt( j )->restoreMemento( tm );
+                  tqchildAt( j )->restoreMemento( tm );
                   delete tm;
                   mementoList.removeLast( );
                }

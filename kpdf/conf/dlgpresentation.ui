@@ -32,7 +32,7 @@
                 </property>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <grid>
                         <property name="name">
@@ -258,7 +258,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>1</height>

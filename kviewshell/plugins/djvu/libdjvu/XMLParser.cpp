@@ -373,20 +373,20 @@ lt_XMLParser::Impl::ChangeAnno(
             }
           }
         }
-        GUTF8String shape;
+        GUTF8String tqshape;
         {
-          GPosition shape_pos=args.contains("shape");
-          if(shape_pos)
+          GPosition tqshape_pos=args.contains("tqshape");
+          if(tqshape_pos)
           {
-            shape=args[shape_pos];
+            tqshape=args[tqshape_pos];
           }
         }
         GP<GMapArea> a;
-        if(shape == "default")
+        if(tqshape == "default")
         {
           GRect rect(0,0,w,h);
           a=GMapRect::create(rect);
-        }else if(!shape.length() || shape == "rect")
+        }else if(!tqshape.length() || tqshape == "rect")
         {
           int xx[4];
           int i=0;
@@ -420,7 +420,7 @@ lt_XMLParser::Impl::ChangeAnno(
           }
           GRect rect(xmin,ymin,xmax-xmin,ymax-ymin);
           a=GMapRect::create(rect);
-        }else if(shape == "circle")
+        }else if(tqshape == "circle")
         {
           int xx[4];
           int i=0;
@@ -440,7 +440,7 @@ lt_XMLParser::Impl::ChangeAnno(
           int x=xx[0],y=xx[1],rx=xx[2],ry=(h-xx[3])-1;
           GRect rect(x-rx,y-ry,2*rx,2*ry);
           a=GMapOval::create(rect);
-        }else if(shape == "oval")
+        }else if(tqshape == "oval")
         {
           int xx[4];
           int i=0;
@@ -474,7 +474,7 @@ lt_XMLParser::Impl::ChangeAnno(
           }
           GRect rect(xmin,ymin,xmax-xmin,ymax-ymin);
           a=GMapOval::create(rect);
-        }else if(shape == "poly")
+        }else if(tqshape == "poly")
         {
           GP<GMapPoly> p=GMapPoly::create();
           for(GPosition poly_pos=coords;poly_pos;++poly_pos)
@@ -489,7 +489,7 @@ lt_XMLParser::Impl::ChangeAnno(
           a=p;
         }else
         {
-          G_THROW( ( ERR_MSG("XMLAnno.unknown_shape") "\t")+shape );
+          G_THROW( ( ERR_MSG("XMLAnno.unknown_tqshape") "\t")+tqshape );
         }
         if(a)
         {

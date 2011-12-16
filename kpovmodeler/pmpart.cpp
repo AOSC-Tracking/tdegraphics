@@ -20,9 +20,9 @@
 #include <tqapplication.h>
 #include <tqdir.h>
 #include <tqstrlist.h>
-#include <clipboard.h>
+#include <tqclipboard.h>
 #include <tqfile.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqmessagebox.h>
 #include <tqcombobox.h>
 #include <tqspinbox.h>
@@ -145,7 +145,7 @@ PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
 
    restoreConfig( instance( )->config( ) );
 
-   connect( tqApp->clipboard( ), TQT_SIGNAL( dataChanged( ) ),
+   connect( tqApp->tqclipboard( ), TQT_SIGNAL( dataChanged( ) ),
             TQT_SLOT( slotClipboardDataChanged( ) ) );
    slotClipboardDataChanged( );
    connect( &m_commandManager, TQT_SIGNAL( updateUndoRedo( const TQString&, const TQString& ) ),
@@ -730,7 +730,7 @@ void PMPart::initView( TQWidget* parent, const char* name )
    if( !m_pShell )
    {
       // a part inside konqueror
-      // simple layout
+      // simple tqlayout
       m_pView = new PMView( this, parent, name );
       m_pView->show( );
       setWidget( m_pView );
@@ -1050,7 +1050,7 @@ bool PMPart::setActiveObject( const TQString& name )
          else
             objIndex = 0;
 
-         // Iterate the children for this element. We stop when there are no more siblings
+         // Iterate the tqchildren for this element. We stop when there are no more siblings
          // or the object is of the correct type and it's index count is also correct
          siblingIndex = 0;
          tmpSibling = tmpObj->firstChild( );
@@ -1373,10 +1373,10 @@ void PMPart::slotFileImport( )
          if( newParser )
          {
             if( m_pActiveObject )
-               insertFromParser( i18n( "Import %1" ).arg( selectedFormat->description( ) ),
+               insertFromParser( i18n( "Import %1" ).tqarg( selectedFormat->description( ) ),
                                  newParser, m_pActiveObject );
             else
-               insertFromParser( i18n( "Import %1" ).arg( selectedFormat->description( ) ),
+               insertFromParser( i18n( "Import %1" ).tqarg( selectedFormat->description( ) ),
                                  newParser, m_pScene );
             delete newParser;
          }
@@ -1450,7 +1450,7 @@ void PMPart::slotEditCut( )
 
    if( sortedList.count( ) > 0 )
    {
-      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::tqclipboard( )->setData( new PMObjectDrag( this, sortedList ) );
       removeSelection( i18n( "Cut" ) );
    }
 
@@ -1472,7 +1472,7 @@ void PMPart::slotEditCopy( )
    const PMObjectList& sortedList = selectedObjects( );
 
    if( sortedList.count( ) > 0 )
-      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::tqclipboard( )->setData( new PMObjectDrag( this, sortedList ) );
 
    emit setStatusBarText( "" );
 }
@@ -1549,7 +1549,7 @@ void PMPart::slotEditPaste( )
 {
    emit setStatusBarText( i18n( "Inserting clipboard contents..." ) );
 
-   pasteOrDrop( i18n( "Paste" ), tqApp->clipboard( )->data( ),
+   pasteOrDrop( i18n( "Paste" ), tqApp->tqclipboard( )->data( ),
                 m_pActiveObject );
 
    emit setStatusBarText( "" );
@@ -2508,7 +2508,7 @@ void PMPart::slotClipboardDataChanged( )
 {
    if( isReadWrite( ) )
    {
-      m_canDecode = PMObjectDrag::canDecode( tqApp->clipboard( )->data( ), this );
+      m_canDecode = PMObjectDrag::canDecode( tqApp->tqclipboard( )->data( ), this );
       m_pPasteAction->setEnabled( m_canDecode && m_pActiveObject );
    }
    else

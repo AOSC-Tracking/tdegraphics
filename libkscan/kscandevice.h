@@ -438,7 +438,7 @@ private:
 
     TQSocketNotifier     *sn;
 
-    SCANSTATUS          scanStatus;
+    SCANSTATUS          scantqStatus;
 
     /* Data for the scan process */
     /* This could/should go to  a small help object */

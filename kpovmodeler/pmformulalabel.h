@@ -46,8 +46,8 @@ public:
     * Destructor
     */
    ~PMFormulaLabel( );
-   virtual TQSize sizeHint( ) const;
-   virtual TQSize minimumSizeHint( ) const;
+   virtual TQSize tqsizeHint( ) const;
+   virtual TQSize tqminimumSizeHint( ) const;
    
 protected:
    virtual void drawContents( TQPainter* p );
@@ -58,7 +58,7 @@ private:
    TQFont exponentFont( ) const;
    void calculateSizeHint( );
    
-   TQSize m_sizeHint;
+   TQSize m_tqsizeHint;
    int m_exponents[3];
    
    static TQString s_xyz[3];
