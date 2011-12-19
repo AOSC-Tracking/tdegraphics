@@ -101,7 +101,7 @@ void dviRenderer::exportPDF()
     return;
   TQFileInfo finfo(fileName);
   if (finfo.exists()) {
-    int r = KMessageBox::warningContinueCancel (parentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
+    int r = KMessageBox::warningContinueCancel (parentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").arg(fileName),
 				       i18n("Overwrite File"), i18n("Overwrite"));
     if (r == KMessageBox::Cancel)
       return;
@@ -137,12 +137,12 @@ void dviRenderer::exportPDF()
   export_errorString = i18n("<qt>The external program 'dvipdf', which was used to export the file, reported an error. "
 			    "You might wish to look at the <strong>document info dialog</strong> which you will "
 			    "find in the File-Menu for a precise error report.</qt>") ;
-  info->clear(i18n("Export: %1 to PDF").tqarg(KShellProcess::quote(dviFile->filename)));
+  info->clear(i18n("Export: %1 to PDF").arg(KShellProcess::quote(dviFile->filename)));
 
   proc->clearArguments();
   finfo.setFile(dviFile->filename);
-  *proc << TQString("cd %1; dvipdfm").tqarg(KShellProcess::quote(finfo.dirPath(true)));
-  *proc << TQString("-o %1").tqarg(KShellProcess::quote(fileName));
+  *proc << TQString("cd %1; dvipdfm").arg(KShellProcess::quote(finfo.dirPath(true)));
+  *proc << TQString("-o %1").arg(KShellProcess::quote(fileName));
   *proc << KShellProcess::quote(dviFile->filename);
   proc->closeStdin();
   if (proc->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false) {
@@ -200,7 +200,7 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
       return;
     TQFileInfo finfo(fileName);
     if (finfo.exists()) {
-      int r = KMessageBox::warningYesNo (parentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").tqarg(fileName),
+      int r = KMessageBox::warningYesNo (parentWidget, i18n("The file %1\nexists. Do you want to overwrite that file?").arg(fileName),
 					 i18n("Overwrite File"));
       if (r == KMessageBox::No)
 	return;
@@ -300,17 +300,17 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
   export_errorString = i18n("<qt>The external program 'dvips', which was used to export the file, reported an error. "
 			    "You might wish to look at the <strong>document info dialog</strong> which you will "
 			    "find in the File-Menu for a precise error report.</qt>") ;
-  info->clear(i18n("Export: %1 to PostScript").tqarg(KShellProcess::quote(dviFile->filename)));
+  info->clear(i18n("Export: %1 to PostScript").arg(KShellProcess::quote(dviFile->filename)));
   
   proc->clearArguments();
   TQFileInfo finfo(dviFile->filename);
-  *proc << TQString("cd %1; dvips").tqarg(KShellProcess::quote(finfo.dirPath(true)));
+  *proc << TQString("cd %1; dvips").arg(KShellProcess::quote(finfo.dirPath(true)));
   if (printer == 0)
     *proc << "-z"; // export Hyperlinks
   if (options.isEmpty() == false)
     *proc << options;
-  *proc << TQString("%1").tqarg(KShellProcess::quote(sourceFileName));
-  *proc << TQString("-o %1").tqarg(KShellProcess::quote(fileName));
+  *proc << TQString("%1").arg(KShellProcess::quote(sourceFileName));
+  *proc << TQString("-o %1").arg(KShellProcess::quote(fileName));
   proc->closeStdin();
   if (proc->start(KProcess::NotifyOnExit, KProcess::Stderr) == false) {
     kdError(4300) << "dvips failed to start" << endl;

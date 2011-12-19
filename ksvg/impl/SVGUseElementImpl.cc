@@ -182,9 +182,9 @@ SVGRectImpl *SVGUseElementImpl::getBBox()
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(KSVG_TOKEN_NOT_PARSED(Width) && KSVG_TOKEN_NOT_PARSED(Height) && tqshape)
-			return tqshape->getBBox();
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(KSVG_TOKEN_NOT_PARSED(Width) && KSVG_TOKEN_NOT_PARSED(Height) && shape)
+			return shape->getBBox();
 	}
 
 	SVGRectImpl *ret = new SVGRectImpl();
@@ -370,19 +370,19 @@ void SVGUseElementImpl::update(CanvasItemUpdate reason, int param1, int param2)
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(tqshape)
-			tqshape->update(reason, param1, param2);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(shape)
+			shape->update(reason, param1, param2);
 	}
 }
 
-void SVGUseElementImpl::tqinvalidate(KSVGCanvas *c, bool recalc)
+void SVGUseElementImpl::invalidate(KSVGCanvas *c, bool recalc)
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(tqshape)
-			tqshape->tqinvalidate(c, recalc);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(shape)
+			shape->invalidate(c, recalc);
 	}
 }
 
@@ -390,9 +390,9 @@ void SVGUseElementImpl::setReferenced(bool referenced)
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(tqshape)
-			tqshape->setReferenced(referenced);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(shape)
+			shape->setReferenced(referenced);
 	}
 }
 
@@ -400,9 +400,9 @@ void SVGUseElementImpl::draw()
 {
 	if(m_instanceRoot)
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
-		if(tqshape)
-			tqshape->draw();
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_instanceRoot->correspondingElement());
+		if(shape)
+			shape->draw();
 	}
 }
 

@@ -41,13 +41,13 @@ void SVGSwitchElementImpl::createItem(KSVGCanvas *c)
 	for(; !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 		SVGStylableImpl *style = dynamic_cast<SVGStylableImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
 
-		if(element && tqshape && ok && style->getVisible() && style->getDisplay() && (tqshape->directRender() || !directRender()))
+		if(element && shape && ok && style->getVisible() && style->getDisplay() && (shape->directRender() || !directRender()))
 		{
 			element->createItem(c);
 			break;

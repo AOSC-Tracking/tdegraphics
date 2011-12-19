@@ -53,7 +53,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-    // it turns out that these tqshapes are all really the same thing
+    // it turns out that these shapes are all really the same thing
     // (same options, same feel) - the only real difference is the
     // drawing functions (a one line change)
     enum Mode {Rectangle, RoundedRectangle, Ellipse};

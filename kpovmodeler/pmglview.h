@@ -336,7 +336,7 @@ private:
    /**
     * Repaints the view
     */
-   void tqrepaint( bool graphicalChange = false );
+   void repaint( bool graphicalChange = false );
    /**
     * Starts a graphical change
     */

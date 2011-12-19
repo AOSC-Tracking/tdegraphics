@@ -479,7 +479,7 @@ void kpToolPolygon::beginDraw ()
             break;
 
         default:
-            kdError () << "kpToolPolygon::beginDraw() tqshape" << endl;
+            kdError () << "kpToolPolygon::beginDraw() shape" << endl;
             break;
         }
     }

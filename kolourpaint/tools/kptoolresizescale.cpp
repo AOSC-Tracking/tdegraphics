@@ -684,9 +684,9 @@ void kpToolResizeScaleDialog::createOperationGroupBox (TQWidget *baseWidget)
     //m_smoothScaleLabel = new TQLabel (i18n ("S&mooth scale"), m_operationGroupBox);
 
 
-    //m_resizeLabel->setAlignment (m_resizeLabel->tqalignment () | TQt::ShowPrefix);
-    //m_scaleLabel->setAlignment (m_scaleLabel->tqalignment () | TQt::ShowPrefix);
-    //m_smoothScaleLabel->setAlignment (m_smoothScaleLabel->tqalignment () | TQt::ShowPrefix);
+    //m_resizeLabel->setAlignment (m_resizeLabel->alignment () | TQt::ShowPrefix);
+    //m_scaleLabel->setAlignment (m_scaleLabel->alignment () | TQt::ShowPrefix);
+    //m_smoothScaleLabel->setAlignment (m_smoothScaleLabel->alignment () | TQt::ShowPrefix);
 
 
     TQButtonGroup *resizeScaleButtonGroup = new TQButtonGroup (baseWidget);
@@ -727,9 +727,9 @@ void kpToolResizeScaleDialog::createDimensionsGroupBox (TQWidget *baseWidget)
     m_dimensionsGroupBox = new TQGroupBox (i18n ("Dimensions"), baseWidget);
 
     TQLabel *widthLabel = new TQLabel (i18n ("Width:"), m_dimensionsGroupBox);
-    widthLabel->setAlignment (widthLabel->tqalignment () | TQt::AlignHCenter);
+    widthLabel->setAlignment (widthLabel->alignment () | TQt::AlignHCenter);
     TQLabel *heightLabel = new TQLabel (i18n ("Height:"), m_dimensionsGroupBox);
-    heightLabel->setAlignment (heightLabel->tqalignment () | TQt::AlignHCenter);
+    heightLabel->setAlignment (heightLabel->alignment () | TQt::AlignHCenter);
 
     TQLabel *originalLabel = new TQLabel (i18n ("Original:"), m_dimensionsGroupBox);
     m_originalWidthInput = new KIntNumInput (

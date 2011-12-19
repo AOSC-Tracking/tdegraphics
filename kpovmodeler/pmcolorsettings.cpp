@@ -118,21 +118,21 @@ bool PMColorSettings::validateData( )
 
 void PMColorSettings::applySettings( )
 {
-   bool tqrepaint = false;
+   bool repaint = false;
    int i;
    
    PMRenderManager* rm = PMRenderManager::theManager( );
    if( rm->backgroundColor( ) != m_pBackgroundColor->color( ) )
    {
       rm->setBackgroundColor( m_pBackgroundColor->color( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    for( i = 0; i < 2; i++ )
    {
       if( rm->graphicalObjectColor( i ) != m_pGraphicalObjectsColor[i]->color( ) )
       {
          rm->setGraphicalObjectColor( i, m_pGraphicalObjectsColor[i]->color( ) );
-         tqrepaint = true;
+         repaint = true;
       }
    }
    for( i = 0; i < 2; i++ )
@@ -140,7 +140,7 @@ void PMColorSettings::applySettings( )
       if( rm->controlPointColor( i ) != m_pControlPointsColor[i]->color( ) )
       {
          rm->setControlPointColor( i, m_pControlPointsColor[i]->color( ) );
-         tqrepaint = true;
+         repaint = true;
       }
    }
    for( i = 0; i < 3; i++ )
@@ -148,15 +148,15 @@ void PMColorSettings::applySettings( )
       if( rm->axesColor( i ) != m_pAxesColor[i]->color( ) )
       {
          rm->setAxesColor( i, m_pAxesColor[i]->color( ) );
-         tqrepaint = true;
+         repaint = true;
       }
    }
    if( rm->fieldOfViewColor( ) != m_pFieldOfViewColor->color( ) )
    {
       rm->setFieldOfViewColor( m_pFieldOfViewColor->color( ) );
-      tqrepaint = true;
+      repaint = true;
    }
-   if( tqrepaint )
+   if( repaint )
       emit repaintViews( );
 }
 

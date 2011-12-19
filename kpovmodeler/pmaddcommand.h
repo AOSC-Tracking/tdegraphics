@@ -48,10 +48,10 @@ public:
    /**
     * Command that adds a list of new PMObjects.
     *
-    * The object in the list will be inserted as tqchildren of parent after
+    * The object in the list will be inserted as children of parent after
     * the object after.
     *
-    * If after is 0, the objects will be inserted as first tqchildren.
+    * If after is 0, the objects will be inserted as first children.
     */
    PMAddCommand( const PMObjectList& list, PMObject* parent, PMObject* after );
    /**

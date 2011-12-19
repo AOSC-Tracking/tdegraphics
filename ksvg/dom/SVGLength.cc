@@ -77,7 +77,7 @@ void SVGLength::setValue(float value)
 	{
 		impl->setValue(value);
 
-		// Automatic updating of the tqshape if any value is changed, imagine:
+		// Automatic updating of the shape if any value is changed, imagine:
 		// SVGCircleElement c; [...] c.r().baseVal().setValue(150);
 		if(impl->context() && dynamic_cast<SVGShapeImpl *>(impl->context()))
 			dynamic_cast<SVGShapeImpl *>(impl->context())->update(UPDATE_TRANSFORM, 0, 0);

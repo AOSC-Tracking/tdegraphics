@@ -98,7 +98,7 @@ void KGVDocument::doOpenFile()
 	KMessageBox::sorry( _part->widget(),
 		i18n( "<qt>Could not open <nobr><strong>%1</strong></nobr>: "
 		      "File does not exist.</qt>" )
-		.tqarg( _fileName ) );
+		.arg( _fileName ) );
 	emit canceled( TQString() );
 	return;
     }
@@ -107,7 +107,7 @@ void KGVDocument::doOpenFile()
     	KMessageBox::sorry( _part->widget(),
 		i18n( "<qt>Could not open <nobr><strong>%1</strong></nobr>: "
 		      "Permission denied.</qt>" )
-		.tqarg( _fileName ) );
+		.arg( _fileName ) );
 	emit canceled( TQString() );
 	return;
     }
@@ -132,7 +132,7 @@ void KGVDocument::doOpenFile()
 	if( _tmpDSC->status() != 0 ) {
 	    KMessageBox::error( _part->widget(),
 		    i18n( "Could not create temporary file: %1" )
-		    .tqarg( strerror( _tmpDSC->status() ) ) );
+		    .arg( strerror( _tmpDSC->status() ) ) );
 	    emit canceled( TQString() );
 	    return;
 	}
@@ -159,8 +159,8 @@ void KGVDocument::doOpenFile()
 	              "which has type <strong>%2</strong>. KGhostview can "
 	              "only load PostScript (.ps, .eps) and Portable "
 	              "Document Format (.pdf) files.</qt>" )
-		      .tqarg( _fileName )
-		      .tqarg( _mimetype ) );
+		      .arg( _fileName )
+		      .arg( _mimetype ) );
 	emit canceled( TQString() );
 	return;
     }
@@ -190,7 +190,7 @@ bool KGVDocument::uncompressFile()
     {
 	KMessageBox::error( _part->widget(),
 		i18n( "<qt>Could not uncompress <nobr><strong>%1</strong></nobr>.</qt>" )
-		.tqarg( _fileName ) );
+		.arg( _fileName ) );
 	emit canceled( TQString() );
 	return false;
     }
@@ -201,7 +201,7 @@ bool KGVDocument::uncompressFile()
     {
 	KMessageBox::error( _part->widget(),
 		i18n( "Could not create temporary file: %2" )
-		.tqarg( strerror( _tmpUnzipped->status() ) ) );
+		.arg( strerror( _tmpUnzipped->status() ) ) );
 	emit canceled( TQString() );
 	return false;
     }
@@ -221,7 +221,7 @@ bool KGVDocument::uncompressFile()
     {
 	KMessageBox::error( _part->widget(),
 	    i18n( "<qt>Could not uncompress <nobr><strong>%1</strong></nobr>.</qt>" )
-	    .tqarg( _fileName ) );
+	    .arg( _fileName ) );
 	emit canceled( TQString() );
 	return false;
     }
@@ -239,7 +239,7 @@ void KGVDocument::openPDFFileContinue( bool pdf2dscResult )
     {
 	KMessageBox::error( _part->widget(),
 		i18n( "<qt>Could not open file <nobr><strong>%1</strong></nobr>.</qt>" ) 
-		.tqarg( _part->url().url() ) );
+		.arg( _part->url().url() ) );
 	emit canceled( TQString() );
 	return;
     }
@@ -260,8 +260,8 @@ void KGVDocument::openPSFile(const TQString &file)
     {
 	KMessageBox::error( _part->widget(),
 		i18n( "<qt>Error opening file <nobr><strong>%1</strong></nobr>: %2</qt>" )
-		.tqarg( _part->url().url() )
-		.tqarg( strerror( errno ) ) );
+		.arg( _part->url().url() )
+		.arg( strerror( errno ) ) );
 	emit canceled( "" );
 	return;
     }
@@ -497,7 +497,7 @@ TQString KGVDocument::pageListToRange( const PageList& pageList )
 	    if( bss == ess )
 		range += TQString::number( *ess );
 	    else
-		range += TQString( "%1-%2" ).tqarg( *bss ).tqarg( *ess );
+		range += TQString( "%1-%2" ).arg( *bss ).arg( *ess );
 
 	    bss = it;
 	}
@@ -521,7 +521,7 @@ void KGVDocument::print()
 	printer.setOption( "kde-range", 
 	                    pageListToRange( _part->markList()->markList() ) );
 
-	if( printer.setup( _part->widget(), i18n("Print %1").tqarg(_part->url().fileName()) ) ) 
+	if( printer.setup( _part->widget(), i18n("Print %1").arg(_part->url().fileName()) ) ) 
 	{
 	    KTempFile tf( TQString(), ".ps" );
 	    if( tf.status() == 0 ) 
@@ -548,7 +548,7 @@ void KGVDocument::print()
     {
 	printer.setPageSelection( KPrinter::SystemSide );
 	
-	if( printer.setup( _part->widget(), i18n("Print %1").tqarg(_part->url().fileName()) ) )
+	if( printer.setup( _part->widget(), i18n("Print %1").arg(_part->url().fileName()) ) )
 	    printer.printFiles( _fileName );
     }
 }
@@ -775,13 +775,13 @@ void KGVDocument::runPdf2ps( const TQString& pdfName,
     process << _interpreterPath
 	    << "-dNODISPLAY"
 	    << "-dTQUIET"
-	    << TQString( "-sPDFname=%1" ).tqarg( pdfName )
+	    << TQString( "-sPDFname=%1" ).arg( pdfName )
 	    << TQString( "-sDSCnamale locale( "kghostview" );
     _fallBackPageMedia = pageSizeToString( 
               static_cast< TQPrinter::PageSize >( locale.pageSize() ) );
     
     _usePageLabels = false;
-e=%1" ).tqarg( dscName )
+e=%1" ).arg( dscName )
 	    << "pdf2dsc.ps"
 	    << "-c"
 	    << "quit";
@@ -823,8 +823,8 @@ void Pdf2dsc::run( const TQString& pdfName, const TQString& dscName )
               << "-dDELAYSAFER"
               << "-dNODISPLAY"
               << "-dTQUIET"
-              << TQString( "-sPDFname=%1" ).tqarg( pdfName )
-              << TQString( "-sDSCname=%1" ).tqarg( dscName )
+              << TQString( "-sPDFname=%1" ).arg( pdfName )
+              << TQString( "-sDSCname=%1" ).arg( dscName )
               << "-c"
               << "<< /PermitFileReading [ PDFname ] /PermitFileWriting [ DSCname ] /PermitFileControl [] >> setuserparams .locksafe"
               << "-f"

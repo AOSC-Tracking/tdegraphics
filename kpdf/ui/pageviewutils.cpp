@@ -54,7 +54,7 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
         iconXOffset = 0,
         shadowOffset = 1;
 
-    // load icon (if set) and update tqgeometry
+    // load icon (if set) and update geometry
     TQPixmap symbol;
     if ( icon != None )
     {
@@ -84,33 +84,33 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
         width += 2 + symbol.width();
         height = TQMAX( height, symbol.height() );
     }
-    TQRect tqgeometry( 0, 0, width + 10, height + 8 );
+    TQRect geometry( 0, 0, width + 10, height + 8 );
 
     // resize pixmap, mask and widget
     static TQBitmap mask;
-    mask.resize( tqgeometry.size() );
-    m_pixmap.resize( tqgeometry.size() );
-    resize( tqgeometry.size() );
+    mask.resize( geometry.size() );
+    m_pixmap.resize( geometry.size() );
+    resize( geometry.size() );
 
     // create and set transparency mask
     TQPainter maskPainter( &mask);
     mask.fill( TQt::black );
     maskPainter.setBrush( TQt::white );
-    maskPainter.drawRoundRect( tqgeometry, 1600 / tqgeometry.width(), 1600 / tqgeometry.height() );
+    maskPainter.drawRoundRect( geometry, 1600 / geometry.width(), 1600 / geometry.height() );
     setMask( mask );
 
     // draw background
     TQPainter bufferPainter( &m_pixmap );
     bufferPainter.setPen( TQt::black );
     bufferPainter.setBrush( paletteBackgroundColor() );
-    bufferPainter.drawRoundRect( tqgeometry, 1600 / tqgeometry.width(), 1600 / tqgeometry.height() );
+    bufferPainter.drawRoundRect( geometry, 1600 / geometry.width(), 1600 / geometry.height() );
 
     // draw icon if present
     if ( !symbol.isNull() )
         bufferPainter.drawPixmap( 5 + iconXOffset, 4, symbol, 0, 0, symbol.width(), symbol.height() );
 
     // draw shadow and text
-    int yText = tqgeometry.height() - height / 2;
+    int yText = geometry.height() - height / 2;
     bufferPainter.setPen( paletteBackgroundColor().dark( 115 ) );
     bufferPainter.drawText( 5 + textXOffset + shadowOffset, yText + 1, message );
     bufferPainter.setPen( foregroundColor() );
@@ -119,9 +119,9 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
     // if the tqlayout is RtL, we can move it to the right place only after we
     // know how much size it will take
     if ( TQApplication::reverseLayout() )
-        move( parentWidget()->width() - tqgeometry.width() - 10, 10 );
+        move( parentWidget()->width() - geometry.width() - 10, 10 );
 
-    // show widget and schedule a tqrepaint
+    // show widget and schedule a repaint
     show();
     update();
 
@@ -168,19 +168,19 @@ int PageViewItem::pageNumber() const
     return m_page->number();
 }
 
-const TQRect& PageViewItem::tqgeometry() const
+const TQRect& PageViewItem::geometry() const
 {
-    return m_tqgeometry;
+    return m_geometry;
 }
 
 int PageViewItem::width() const
 {
-    return m_tqgeometry.width();
+    return m_geometry.width();
 }
 
 int PageViewItem::height() const
 {
-    return m_tqgeometry.height();
+    return m_geometry.height();
 }
 
 double PageViewItem::zoomFactor() const
@@ -190,18 +190,18 @@ double PageViewItem::zoomFactor() const
 
 void PageViewItem::setGeometry( int x, int y, int width, int height )
 {
-    m_tqgeometry.setRect( x, y, width, height );
+    m_geometry.setRect( x, y, width, height );
 }
 
 void PageViewItem::setWHZ( int w, int h, double z )
 {
-    m_tqgeometry.setWidth( w );
-    m_tqgeometry.setHeight( h );
+    m_geometry.setWidth( w );
+    m_geometry.setHeight( h );
     m_zoomFactor = z;
 }
 
 void PageViewItem::moveTo( int x, int y )
 {
-    m_tqgeometry.moveLeft( x );
-    m_tqgeometry.moveTop( y );
+    m_geometry.moveLeft( x );
+    m_geometry.moveTop( y );
 }

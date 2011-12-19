@@ -297,7 +297,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_showPresentation = new KAction( i18n("P&resentation"), "kpresenter_kpr", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
 	m_showPresentation->setEnabled( false );
 
-	// attach the actions of the tqchildren widgets too
+	// attach the actions of the children widgets too
 	m_pageView->setupActions( ac );
 
 	// apply configuration (both internal settings and GUI configured items)
@@ -510,7 +510,7 @@ bool Part::openURL(const KURL &url)
     // these setWindowCaption calls only work for local files
     if ( !b )
     {
-        KMessageBox::error( widget(), i18n("Could not open %1").tqarg( url.prettyURL() ) );
+        KMessageBox::error( widget(), i18n("Could not open %1").arg( url.prettyURL() ) );
         emit setWindowCaption("");
     }
     else
@@ -806,17 +806,17 @@ void Part::slotSaveFileAs()
     {
         if (saveURL == url())
         {
-            KMessageBox::information( widget(), i18n("You are trying to overwrite \"%1\" with itself. This is not allowed. Please save it in another location.").tqarg(saveURL.filename()) );
+            KMessageBox::information( widget(), i18n("You are trying to overwrite \"%1\" with itself. This is not allowed. Please save it in another location.").arg(saveURL.filename()) );
             return;
         }
         if ( KIO::NetAccess::exists( saveURL, false, widget() ) )
         {
-            if (KMessageBox::warningContinueCancel( widget(), i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?").tqarg(saveURL.filename()), TQString(), i18n("Overwrite")) != KMessageBox::Continue)
+            if (KMessageBox::warningContinueCancel( widget(), i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?").arg(saveURL.filename()), TQString(), i18n("Overwrite")) != KMessageBox::Continue)
                 return;
         }
 
         if ( !KIO::NetAccess::file_copy( m_file, saveURL, -1, true ) )
-            KMessageBox::information( 0, i18n("File could not be saved in '%1'. Try to save it to another location.").tqarg( saveURL.prettyURL() ) );
+            KMessageBox::information( 0, i18n("File could not be saved in '%1'. Try to save it to another location.").arg( saveURL.prettyURL() ) );
     }
 }
 
@@ -939,7 +939,7 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 	KPopupMenu *popup = new KPopupMenu( widget(), "rmb popup" );
 	if (page)
 	{
-		popup->insertTitle( i18n( "Page %1" ).tqarg( page->number() + 1 ) );
+		popup->insertTitle( i18n( "Page %1" ).arg( page->number() + 1 ) );
         if ( page->hasBookmark() )
 			popup->insertItem( SmallIcon("bookmark"), i18n("Remove Bookmark"), 1 );
 		else

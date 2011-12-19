@@ -152,7 +152,7 @@ void DeviceSelector::setScanSources( const TQStrList& sources,
    TQStringList::ConstIterator it2 = hrSources.begin();
    for ( ; it.current(); ++it, ++it2 )
    {
-      TQString text = TQString::fromLatin1("&%1. %2\n%3").tqarg(1+nr).tqarg( TQString::fromLocal8Bit(*it) ).tqarg( *it2 );
+      TQString text = TQString::fromLatin1("&%1. %2\n%3").arg(1+nr).arg( TQString::fromLocal8Bit(*it) ).arg( *it2 );
       TQRadioButton *rb = new TQRadioButton( text, selectBox );
       selectBox->insert( rb );
 

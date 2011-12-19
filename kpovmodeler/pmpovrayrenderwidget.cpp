@@ -134,7 +134,7 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
    m_image.setAlphaBuffer( m_renderMode.alpha( ) );
    m_image.fill( tqRgb( 0, 0, 0 ) );
    m_bPixmapUpToDate = false;
-   tqrepaint( );
+   repaint( );
 
    if( !m_pProcess->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
    {

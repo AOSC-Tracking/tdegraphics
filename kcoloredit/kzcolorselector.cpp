@@ -53,7 +53,7 @@ void KZColorSelector::setType(const int type) {
 
 void KZColorSelector::updateContents() {
 	drawPalette(&pixmap);
-	tqrepaint(false);
+	repaint(false);
 }
 
 void KZColorSelector::resizeEvent(TQResizeEvent*) {

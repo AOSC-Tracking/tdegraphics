@@ -855,7 +855,7 @@ public:
 #ifndef NO_KDE2
   /**
    * Saves the current state of the dockmanager and of all controlled widgets.
-   * State means here to save the tqgeometry, visibility, parents, internal object names, orientation,
+   * State means here to save the geometry, visibility, parents, internal object names, orientation,
    * separator positions, dockwidget-group information, tab widget states (if it is a tab group) and
    * last but not least some necessary things for recovering the dockmainwindow state.
    *
@@ -1224,7 +1224,7 @@ public:
   /**
    * Constructs a dockmainwindow. It calls its base class constructor and does additional things concerning
    * to the dock stuff:
-   * @li information about the dock state of this' tqchildren gets initialized
+   * @li information about the dock state of this' children gets initialized
    * @li a dockmanager is created...
    * @li ...and gets initialized
    * @li the main dockwidget is set to 0

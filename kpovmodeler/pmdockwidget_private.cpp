@@ -183,7 +183,7 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
         } else {
           xpos = factor * checkValue( mapFromGlobal(mev->globalPos()).y() ) / height();
           resizeEvent(0);
-          divider->tqrepaint(true);
+          divider->repaint(true);
         }
       } else {
         if (!mOpaqueResize) {
@@ -192,7 +192,7 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
         } else {
           xpos = factor * checkValue( mapFromGlobal( mev->globalPos()).x() ) / width();
           resizeEvent(0);
-          divider->tqrepaint(true);
+          divider->repaint(true);
         }
       }
       handled= true;
@@ -204,11 +204,11 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
       if (orientation ==Qt::Horizontal){
         xpos = factor* checkValue( mapFromGlobal(mev->globalPos()).y() ) / height();
         resizeEvent(0);
-        divider->tqrepaint(true);
+        divider->repaint(true);
       } else {
         xpos = factor* checkValue( mapFromGlobal(mev->globalPos()).x() ) / width();
         resizeEvent(0);
-        divider->tqrepaint(true);
+        divider->repaint(true);
       }
       handled= true;
       break;
@@ -221,7 +221,7 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
 bool PMDockSplitter::event( TQEvent* e )
 {
   if ( e->type() == TQEvent::LayoutHint ){
-    // change tqchildren min/max size
+    // change children min/max size
     setupMinMaxSize();
     setSeparatorPos(xpos);
   }
@@ -240,7 +240,7 @@ void PMDockSplitter::updateName()
   TQString new_name = TQString( child0->name() ) + "," + child1->name();
   parentWidget()->setName( new_name.latin1() );
   parentWidget()->setCaption( child0->caption() + "," + child1->caption() );
-  parentWidget()->tqrepaint( false );
+  parentWidget()->repaint( false );
 
   ((PMDockWidget*)parentWidget())->firstName = child0->name();
   ((PMDockWidget*)parentWidget())->lastName = child1->name();
@@ -328,13 +328,13 @@ void PMDockButton_Private::drawButton( TQPainter* p )
 void PMDockButton_Private::enterEvent( TQEvent * )
 {
   moveMouse = true;
-  tqrepaint();
+  repaint();
 }
 
 void PMDockButton_Private::leaveEvent( TQEvent * )
 {
   moveMouse = false;
-  tqrepaint();
+  repaint();
 }
 
 /*************************************************************************/

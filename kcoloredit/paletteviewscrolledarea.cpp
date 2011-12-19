@@ -77,7 +77,7 @@ void PaletteViewScrolledArea::redraw() {
 }
 
 void PaletteViewScrolledArea::repaintPalette() {
-	tqrepaint(false);
+	repaint(false);
 }
 
 void PaletteViewScrolledArea::checkSelectionAutoScroll(const int mousePosY) {
@@ -220,7 +220,7 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	setCellsSizes();
 	TQPixmap pixmap(size());
 	TQPainter painter;
-	painter.tqbegin(TQT_TQPAINTDEVICE(&pixmap), this);
+	painter.begin(TQT_TQPAINTDEVICE(&pixmap), this);
 	TQFontMetrics fontMetrics = painter.fontMetrics();
 	int maxLineWidth;
 	if(viewColorNames) {

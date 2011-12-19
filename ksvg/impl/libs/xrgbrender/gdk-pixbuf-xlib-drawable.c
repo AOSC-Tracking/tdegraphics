@@ -1103,19 +1103,19 @@ xlib_window_is_viewable (Window w)
 	XWindowAttributes wa;
 
 	while (w != 0) {
-		Window parent, root, *tqchildren;
-		int ntqchildren;
+		Window parent, root, *children;
+		int nchildren;
 
 		XGetWindowAttributes (gdk_pixbuf_dpy, w, &wa);
 		if (wa.map_state != IsViewable)
 			return 0;
 
 		if (!XQueryTree (gdk_pixbuf_dpy, w, &root,
-				 &parent, &tqchildren, &ntqchildren))
+				 &parent, &children, &nchildren))
 			return 0;
 
-		if (ntqchildren > 0)
-			XFree (tqchildren);
+		if (nchildren > 0)
+			XFree (children);
 
 		if (parent == root)
 			return 1;

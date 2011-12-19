@@ -587,7 +587,7 @@ void KImageCanvas::slotUpdateImage()
 
 void KImageCanvas::mouseMoveEvent( TQMouseEvent * )
 {
-	if( m_cursor.tqshape() == TQt::BlankCursor )
+	if( m_cursor.shape() == TQt::BlankCursor )
 	{
 		m_cursor.setShape( Qt::CrossCursor );
 		viewport()->setCursor( m_cursor );

@@ -58,13 +58,13 @@ void SVGHelperImpl::updateItem(KJS::ExecState *exec, const DOM::Node node)
 	SVGDocumentImpl *doc = Window::retrieveActive(exec)->doc();
 
 	// Update canvas, recursively if needed
-	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(doc->getElementFromHandle(node.handle()));
+	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(doc->getElementFromHandle(node.handle()));
 
-	if(tqshape && tqshape->item())
+	if(shape && shape->item())
 	{
-		tqshape->item()->update(UPDATE_TRANSFORM);
-		tqshape->item()->draw();
-		tqshape->blit(doc->canvas());
+		shape->item()->update(UPDATE_TRANSFORM);
+		shape->item()->draw();
+		shape->blit(doc->canvas());
 	}
 
 	if(const_cast<DOM::Node &>(node).hasChildNodes())

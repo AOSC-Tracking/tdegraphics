@@ -207,7 +207,7 @@ void KImageHolder::eraseSelect()
 	inner.rBottom() -= 1;
 	r -= inner;
 
-	TQMemArray<TQRect> rects = r.tqrects();
+	TQMemArray<TQRect> rects = r.rects();
 
 	if( m_pDoubleBuffer )
 		for( unsigned int i = 0; i < rects.size(); ++i )

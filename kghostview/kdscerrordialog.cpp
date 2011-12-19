@@ -97,7 +97,7 @@ KDSCErrorHandler::Response KDSCErrorDialog::error( const KDSCError& err )
 	break;
     }
 
-    _lineNumberLabel->setText( i18n( "On line %1:" ).tqarg( err.lineNumber() ) );
+    _lineNumberLabel->setText( i18n( "On line %1:" ).arg( err.lineNumber() ) );
     _lineLabel->setText( err.line() );
     _descriptionLabel->setText( description( err.type() ) );
     

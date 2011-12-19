@@ -68,10 +68,10 @@ namespace {
 TQString DisplayOptions::toString( const DisplayOptions& options )
 {
 	return TQString( qformat )
-		.tqarg( options.page() )
-		.tqarg( options.magnification() )
-		.tqarg( options.overrideOrientation() )
-		.tqarg( options.overridePageMedia().utf8().data() );
+		.arg( options.page() )
+		.arg( options.magnification() )
+		.arg( options.overrideOrientation() )
+		.arg( options.overridePageMedia().utf8().data() );
 }
 
 bool DisplayOptions::fromString( DisplayOptions& out, const TQString& in )

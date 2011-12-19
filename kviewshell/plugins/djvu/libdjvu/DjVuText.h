@@ -133,8 +133,8 @@ public:
     int text_start;
     /** Length of the zone text in string #textUTF8#. */
     int text_length;
-    /** List of tqchildren zone. */
-    GList<Zone> tqchildren;
+    /** List of children zone. */
+    GList<Zone> children;
     /** Appends another subzone inside this zone.  The new zone is initialized
         with an empty rectangle, empty text, and has the same type as this
         zone. */

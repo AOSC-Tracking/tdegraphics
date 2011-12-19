@@ -167,7 +167,7 @@ void ImgPrintDialog::setOptions(const TQMap<TQString,TQString>& opts)
     m_sizeH->setValue( help );
 
     help = opts[OPT_SCREEN_RES].toInt();
-    m_screenRes->setText(i18n( "Screen resolution: %1 dpi").tqarg(help));
+    m_screenRes->setText(i18n( "Screen resolution: %1 dpi").arg(help));
 
     help = opts[OPT_PSGEN_DRAFT].toInt();
     m_psDraft->setChecked( help == 1 );

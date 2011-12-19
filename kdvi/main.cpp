@@ -77,14 +77,14 @@ int main(int argc, char** argv)
 
       if (!url.isValid()) 
       {
-        kdError(4300) << TQString(I18N_NOOP("The URL %1 is not well-formed.")).tqarg(args->arg(0)) << endl;
+        kdError(4300) << TQString(I18N_NOOP("The URL %1 is not well-formed.")).arg(args->arg(0)) << endl;
         return -1;
       }
 
       if (!url.isLocalFile()) 
       {
         kdError(4300) << TQString(I18N_NOOP("The URL %1 does not point to a local file. You can only specify local "
-             "files if you are using the '--unique' option.")).tqarg(args->arg(0)) << endl;
+             "files if you are using the '--unique' option.")).arg(args->arg(0)) << endl;
         return -1;
       }
 

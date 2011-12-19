@@ -161,7 +161,7 @@ void PMObjectLink::readAttributes( const PMXMLHelper& h )
          }
          else
             h.parser( )->printError( i18n( "Declare \"%1\" has wrong type." )
-                                     .tqarg( id ) );
+                                     .arg( id ) );
       }
    }
    Base::readAttributes( h );

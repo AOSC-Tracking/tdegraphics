@@ -549,10 +549,10 @@ void PMLathe::controlPoints( PMControlPointList& list )
             lastPoint = cp;
             if( d == 0 )
                cp = new PM2DControlPoint( *it, PM2DControlPoint::PM2DXY, i,
-                                          i18n( "Point %1 (xy)" ).tqarg( i + 1 ) );
+                                          i18n( "Point %1 (xy)" ).arg( i + 1 ) );
             else
                cp = new PM2DControlPoint( *it, PM2DControlPoint::PM2DZY, i,
-                                          i18n( "Point %1 (xy)" ).tqarg( i + 1 ) );
+                                          i18n( "Point %1 (xy)" ).arg( i + 1 ) );
 
             if( i == 0 )
                firstPoint = cp;
@@ -573,10 +573,10 @@ void PMLathe::controlPoints( PMControlPointList& list )
             int imod4 = i % 4;
             if( d == 0 )
                cp = new PM2DControlPoint( *it, PM2DControlPoint::PM2DXY, i,
-                                          i18n( "Point %1 (xy)" ).tqarg( i + 1 ) );
+                                          i18n( "Point %1 (xy)" ).arg( i + 1 ) );
             else
                cp = new PM2DControlPoint( *it, PM2DControlPoint::PM2DZY, i,
-                                          i18n( "Point %1 (xy)" ).tqarg( i + 1 ) );
+                                          i18n( "Point %1 (xy)" ).arg( i + 1 ) );
             switch( imod4 )
             {
                case 0:

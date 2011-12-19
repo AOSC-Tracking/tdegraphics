@@ -314,7 +314,7 @@ bool ScanDialog::setup()
 
        kfg->setGroup( GROUP_STARTUP );
        /* Since this is a vertical splitter, only the width is important */
-       TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).tqarg( r.width());
+       TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
        kdDebug(29000) << "Read Splitter-Sizes " << key  << endl;
        splitter->setSizes( kfg->readIntListEntry( key ));
     }
@@ -336,7 +336,7 @@ void ScanDialog::slotClose()
 
 	 kfg->setGroup( GROUP_STARTUP );
 	 /* Since this is a vertical splitter, only the width is important */
-	 TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).tqarg( r.width());
+	 TQString key = TQString::fromLatin1( SCANDIA_SPLITTER_SIZES ).arg( r.width());
 	 kfg->writeEntry( key, splitter->sizes(), true, true);
       }
    }

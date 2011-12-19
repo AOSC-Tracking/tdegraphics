@@ -180,13 +180,13 @@ KURLRequester* KookaPreferences::binaryCheckBox( TQWidget *parent, const TQStrin
 {
     TQHBox *hbox = new TQHBox( parent );
 
-    (void) new TQLabel( i18n("Select the %1 binary to use:").tqarg( program ), hbox );
+    (void) new TQLabel( i18n("Select the %1 binary to use:").arg( program ), hbox );
     KURLRequester* urlRequester = new KURLRequester( parent );
     urlRequester->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
 
     TQToolTip::add( urlRequester,
                    i18n( "Enter the path to %1, the optical-character-recognition "
-			 "command line tool.").tqarg(program));
+			 "command line tool.").arg(program));
     return urlRequester;
 }
 

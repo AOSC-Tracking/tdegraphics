@@ -425,125 +425,125 @@ bool PMObjectSettings::validateData( )
 
 void PMObjectSettings::applySettings( )
 {
-   bool tqrepaint = false;
+   bool repaint = false;
 
    PMRenderManager* rm = PMRenderManager::theManager( );
    if( rm->highDetailCameraViews( ) != m_pHighDetailCameraViews->isChecked( ) )
    {
       rm->setHighDetailCameraViews( m_pHighDetailCameraViews->isChecked( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphere::uSteps( ) != m_pSphereUSteps->value( ) )
    {
       PMSphere::setUSteps( m_pSphereUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphere::vSteps( ) != m_pSphereVSteps->value( ) )
    {
       PMSphere::setVSteps( m_pSphereVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMCylinder::steps( ) != m_pCylinderSteps->value( ) )
    {
       PMCylinder::setSteps( m_pCylinderSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMCone::steps( ) != m_pConeSteps->value( ) )
    {
       PMCone::setSteps( m_pConeSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMTorus::uSteps( ) != m_pTorusUSteps->value( ) )
    {
       PMTorus::setUSteps( m_pTorusUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMTorus::vSteps( ) != m_pTorusVSteps->value( ) )
    {
       PMTorus::setVSteps( m_pTorusVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMDisc::steps( ) != m_pDiscSteps->value( ) )
    {
       PMDisc::setSteps( m_pDiscSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobSphere::uSteps( ) != m_pBlobSphereUSteps->value( ) )
    {
       PMBlobSphere::setUSteps( m_pBlobSphereUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobSphere::vSteps( ) != m_pBlobSphereVSteps->value( ) )
    {
       PMBlobSphere::setVSteps( m_pBlobSphereVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobCylinder::uSteps( ) != m_pBlobCylinderUSteps->value( ) )
    {
       PMBlobCylinder::setUSteps( m_pBlobCylinderUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMBlobCylinder::vSteps( ) != m_pBlobCylinderVSteps->value( ) )
    {
       PMBlobCylinder::setVSteps( m_pBlobCylinderVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMPlane::planeSize( ) != m_pPlaneSize->value( ) )
    {
       PMPlane::setPlaneSize( m_pPlaneSize->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMLathe::sSteps( ) != m_pLatheUSteps->value( ) )
    {
       PMLathe::setSSteps( m_pLatheUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMLathe::rSteps( ) != m_pLatheRSteps->value( ) )
    {
       PMLathe::setRSteps( m_pLatheRSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSurfaceOfRevolution::sSteps( ) != m_pSorUSteps->value( ) )
    {
       PMSurfaceOfRevolution::setSSteps( m_pSorUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSurfaceOfRevolution::rSteps( ) != m_pSorRSteps->value( ) )
    {
       PMSurfaceOfRevolution::setRSteps( m_pSorRSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMPrism::sSteps( ) != m_pPrismSteps->value( ) )
    {
       PMPrism::setSSteps( m_pPrismSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSuperquadricEllipsoid::uSteps( ) != m_pSqeUSteps->value( ) )
    {
       PMSuperquadricEllipsoid::setUSteps( m_pSqeUSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSuperquadricEllipsoid::vSteps( ) != m_pSqeVSteps->value( ) )
    {
       PMSuperquadricEllipsoid::setVSteps( m_pSqeVSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphereSweep::rSteps( ) != m_pSphereSweepRSteps->value( ) )
    {
       PMSphereSweep::setRSteps( m_pSphereSweepRSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMSphereSweep::sSteps( ) != m_pSphereSweepSSteps->value( ) )
    {
       PMSphereSweep::setSSteps( m_pSphereSweepSSteps->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( PMHeightField::variance( ) != m_pHeightFieldVariance->value( ) )
    {
       PMHeightField::setVariance( m_pHeightFieldVariance->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
-   if( tqrepaint )
+   if( repaint )
       emit repaintViews( );
 }
 

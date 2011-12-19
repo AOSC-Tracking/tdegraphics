@@ -44,7 +44,7 @@ PMDeclare::PMDeclare( const PMDeclare& d )
 {
    m_id = d.m_id; // CAUTION! Duplication of the id which has to be unique
    m_pDeclareType = 0; // will be set automatically in the
-   // base constuctor when the tqchildren are copied
+   // base constuctor when the children are copied
 }
 
 PMMetaObject* PMDeclare::metaObject( ) const

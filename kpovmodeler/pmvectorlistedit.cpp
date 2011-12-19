@@ -53,7 +53,7 @@ void PMTableItem::paint( TQPainter* p, const TQColorGroup& cg,
    else
       p->setPen( cg.text( ) );
    p->drawText( x + 2, 0, w - x - 4, h,
-                wordWrap( ) ? ( tqalignment( ) | WordBreak ) : tqalignment( ), text( ) );
+                wordWrap( ) ? ( alignment( ) | WordBreak ) : alignment( ), text( ) );
 }
 */
 
@@ -256,7 +256,7 @@ void PMVectorListEdit::setLink( int p1, int p2 )
    if( p2 >= 0 )
    {
       m_disabled[p2] = true;
-      str = TQString( "%1 (=%2)" ).tqarg( p2 + 1 ).tqarg( p1 + 1 );
+      str = TQString( "%1 (=%2)" ).arg( p2 + 1 ).arg( p1 + 1 );
       h->setLabel( p2, str );
       if( !isReadOnly( ) )
          setRowReadOnly( p2, true );

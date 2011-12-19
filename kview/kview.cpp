@@ -120,7 +120,7 @@ KView::KView()
 		// create status bar (hidden by default)
 		statusBar()->insertItem( "", STATUSBAR_SPEED_ID, 0, true );
 		statusBar()->setItemFixed( STATUSBAR_SPEED_ID,
-				8 + fontMetrics().width( i18n( "%1/s" ).tqarg( KIO::convertSize( 999000 ) ) ) );
+				8 + fontMetrics().width( i18n( "%1/s" ).arg( KIO::convertSize( 999000 ) ) ) );
 		statusBar()->insertItem( "", STATUSBAR_CURSOR_ID, 0, true );
 		statusBar()->setItemFixed( STATUSBAR_CURSOR_ID, 8 + fontMetrics().width( "8888, 8888" ) );
 		statusBar()->insertItem( "", STATUSBAR_SIZE_ID, 0, true );
@@ -262,7 +262,7 @@ bool KView::eventFilter( TQObject * obj, TQEvent * ev )
 void KView::imageSizeChanged( const TQSize & /*size*/ )
 {
 	TQSize size = m_pCanvas->imageSize();
-	statusBar()->changeItem( TQString( "%1 x %2" ).tqarg( size.width() ).tqarg( size.height() ), STATUSBAR_SIZE_ID );
+	statusBar()->changeItem( TQString( "%1 x %2" ).arg( size.width() ).arg( size.height() ), STATUSBAR_SIZE_ID );
 	handleResize();
 }
 
@@ -272,7 +272,7 @@ void KView::selectionChanged( const TQRect & rect )
 	if( rect.isNull() )
 		statusBar()->changeItem( TQString(), STATUSBAR_SELECTION_ID );
 	else
-		statusBar()->changeItem( TQString( "%1, %2 - %3 x %4" ).tqarg( rect.x() ).tqarg( rect.y() ).tqarg( rect.width() ).tqarg( rect.height() ), STATUSBAR_SELECTION_ID );
+		statusBar()->changeItem( TQString( "%1, %2 - %3 x %4" ).arg( rect.x() ).arg( rect.y() ).arg( rect.width() ).arg( rect.height() ), STATUSBAR_SELECTION_ID );
 	action( "crop" )->setEnabled( ! rect.isNull() );
 }
 
@@ -466,7 +466,7 @@ void KView::speedProgress( KIO::Job *, unsigned long bytesPerSecond )
 	TQString sizeStr;
 
 	if( bytesPerSecond > 0 )
-		sizeStr = i18n( "%1/s" ).tqarg( KIO::convertSize( bytesPerSecond ) );
+		sizeStr = i18n( "%1/s" ).arg( KIO::convertSize( bytesPerSecond ) );
 	else
 		sizeStr = i18n( "Stalled" );
 
@@ -483,7 +483,7 @@ void KView::slotSetStatusBarText( const TQString & msg )
 
 void KView::cursorPos( const TQPoint & pos )
 {
-	statusBar()->changeItem( TQString( "%1, %2" ).tqarg( pos.x() ).tqarg( pos.y() ), STATUSBAR_CURSOR_ID );
+	statusBar()->changeItem( TQString( "%1, %2" ).arg( pos.x() ).arg( pos.y() ), STATUSBAR_CURSOR_ID );
 }
 
 void KView::setupActions( TQObject * partobject )
@@ -614,7 +614,7 @@ void KView::fitWindowToImage()
 			winsize.setWidth( workarea.width() );
 	}
 
-	TQRect winrect( tqgeometry() );
+	TQRect winrect( geometry() );
 	winrect.setSize( winsize );
 
 	int xdiff = winrect.x() + winrect.width()  - workarea.x() - workarea.width();

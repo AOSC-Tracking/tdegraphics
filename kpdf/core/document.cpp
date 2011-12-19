@@ -118,7 +118,7 @@ KPDFDocument::KPDFDocument(TQWidget *widget)
     TQStringList::Iterator it = list.begin();
     while( it != list.end() )
     {
-        d->kimgioMimes << KMimeType::findByPath(TQString("foo.%1").tqarg(*it), 0, true)->name();
+        d->kimgioMimes << KMimeType::findByPath(TQString("foo.%1").arg(*it), 0, true)->name();
         ++it;
     }
 }
@@ -331,7 +331,7 @@ void KPDFDocument::reparseConfig()
     // reparse generator config and if something changed clear KPDFPages
     if ( generator && generator->reparseConfig() )
     {
-        // tqinvalidate pixmaps
+        // invalidate pixmaps
         TQValueVector<KPDFPage*>::iterator it = pages_vector.begin(), end = pages_vector.end();
         for ( ; it != end; ++it )
             (*it)->deletePixmapsAndRects();
@@ -712,7 +712,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             }
         }
 
-        // reset cursor to previous tqshape
+        // reset cursor to previous shape
         TQApplication::restoreOverrideCursor();
 
         // send page lists if found anything new
@@ -764,7 +764,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             }
         }
 
-        // reset cursor to previous tqshape
+        // reset cursor to previous shape
         TQApplication::restoreOverrideCursor();
 
         // if a match has been found..
@@ -793,7 +793,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             }
         }
         else if ( !noDialogs )
-            KMessageBox::information( widget(), i18n("No matches found for '%1'.").tqarg( text ) );
+            KMessageBox::information( widget(), i18n("No matches found for '%1'.").arg( text ) );
     }
     // 3. PREVMATCH //TODO
     else if ( type == PrevMatch )
@@ -865,7 +865,7 @@ bool KPDFDocument::searchText( int searchID, const TQString & text, bool fromSta
             }
         }
 
-        // reset cursor to previous tqshape
+        // reset cursor to previous shape
         TQApplication::restoreOverrideCursor();
 
         // send page lists to update observers (since some filter on bookmarks)
@@ -1016,7 +1016,7 @@ void KPDFDocument::processLink( const KPDFLink * link )
                 KRun::run( *ptr, lst );
             }
             else
-                KMessageBox::information( widget(), i18n( "No application found for opening file of mimetype %1." ).tqarg( mime->name() ) );
+                KMessageBox::information( widget(), i18n( "No application found for opening file of mimetype %1." ).arg( mime->name() ) );
             } break;
 
         case KPDFLink::Action: {

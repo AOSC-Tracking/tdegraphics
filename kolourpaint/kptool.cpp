@@ -744,7 +744,7 @@ void kpTool::endDrawInternal (const TQPoint &thisPoint, const TQRect &normalized
 // private
 void kpTool::endShapeInternal (const TQPoint &thisPoint, const TQRect &normalizedRect)
 {
-    endDrawInternal (thisPoint, normalizedRect, true/*end tqshape*/);
+    endDrawInternal (thisPoint, normalizedRect, true/*end shape*/);
 }
 
 // virtual
@@ -1154,7 +1154,7 @@ void kpTool::wheelEvent (TQWheelEvent *e)
     if ((e->state () & TQt::ControlButton) == 0)
         return;
     
-    // If drawing, bye; don't care if a tqshape in progress though.
+    // If drawing, bye; don't care if a shape in progress though.
     if (hasBegunDraw ())
         return;
         

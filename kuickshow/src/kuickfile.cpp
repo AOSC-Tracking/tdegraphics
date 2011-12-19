@@ -106,8 +106,8 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( TQWidget *parent )
 
     KProgressDialog *dialog = new KProgressDialog( parent );
     dialog->setModal( true );
-    dialog->setCaption( i18n("Downloading %1...").tqarg( m_url.fileName() ) );
-    dialog->setLabel( i18n("Please wait while downloading\n%1").tqarg( m_url.prettyURL() ));
+    dialog->setCaption( i18n("Downloading %1...").arg( m_url.fileName() ) );
+    dialog->setLabel( i18n("Please wait while downloading\n%1").arg( m_url.prettyURL() ));
     dialog->setAllowCancel( true );
     dialog->setAutoClose( true );
 

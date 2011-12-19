@@ -35,7 +35,7 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
 
   // mime name based on mimetype id
   TQString mimeName = info->get( "mimeType" ).section( '/', -1 ).upper();
-  setCaption( i18n("%1 Properties").tqarg( mimeName ) );
+  setCaption( i18n("%1 Properties").arg( mimeName ) );
 
   TQDomElement docElement = info->documentElement();
 
@@ -50,7 +50,7 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
         continue;
 
     // create labels and tqlayout them
-    TQLabel *key = new TQLabel( i18n( "%1:" ).tqarg( titleString ), page );
+    TQLabel *key = new TQLabel( i18n( "%1:" ).arg( titleString ), page );
     TQLabel *value = new KSqueezedTextLabel( valueString, page );
     tqlayout->addWidget( key, row, 0, AlignRight );
     tqlayout->addWidget( value, row, 1 );

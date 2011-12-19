@@ -92,13 +92,13 @@ void SVGLocatableImpl::updateCachedScreenCTM(const SVGMatrixImpl *parentScreenCT
 	// Notify the element
 	onScreenCTMUpdated();
 
-	SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(this);
+	SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(this);
 
-	if(tqshape)
+	if(shape)
 	{
 		// TODO: Update due to matrix animations
-		//if(tqshape->item())
-		//	tqshape->item()->update(updateReason);
+		//if(shape->item())
+		//	shape->item()->update(updateReason);
 
 		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(this);
 
@@ -119,9 +119,9 @@ void SVGLocatableImpl::checkCachedScreenCTM(const SVGMatrixImpl *parentScreenCTM
 	if(m_cachedScreenCTMIsValid)
 	{
 		SVGElementImpl *element = dynamic_cast<SVGElementImpl *>(this);
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(this);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(this);
 
-		if(tqshape)
+		if(shape)
 		{
 			DOM::Node node = element->firstChild();
 			for(; !node.isNull(); node = node.nextSibling())
@@ -184,9 +184,9 @@ Value SVGLocatableImplProtoFunc::call(ExecState *exec, Object &thisObj, const Li
 				return container->getBBox()->cache(exec);
 			else
 			{
-				SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(obj);
-				if(tqshape)
-					return tqshape->getBBox()->cache(exec);
+				SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(obj);
+				if(shape)
+					return shape->getBBox()->cache(exec);
 				else
 					return obj->getBBox()->cache(exec);
 			}

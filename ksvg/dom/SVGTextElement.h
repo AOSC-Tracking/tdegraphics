@@ -58,7 +58,7 @@ class SVGTextElementImpl;
  * the characters. Since <code>text</code> elements are rendered using the
  * same rendering methods as other graphics elements, all of the same
  * coordinate system transformations, painting, clipping and masking
- * features that apply to tqshapes such as paths and rectangles also
+ * features that apply to shapes such as paths and rectangles also
  * apply to <code>text</code> elements.
  *
  * It is possible to apply a gradient, pattern, clipping path, mask or

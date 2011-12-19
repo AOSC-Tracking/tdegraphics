@@ -431,7 +431,7 @@ void PMGLView::resizeEvent( TQResizeEvent* )
 
 void PMGLView::paintEvent( TQPaintEvent* )
 {
-   tqrepaint( );
+   repaint( );
 }
 
 void PMGLView::invalidateProjection( bool graphicalChange /*= true*/ )
@@ -480,7 +480,7 @@ void PMGLView::invalidateProjection( bool graphicalChange /*= true*/ )
       recalculateControlPointPosition( );
    }
    m_projectionUpToDate = false;
-   tqrepaint( graphicalChange );
+   repaint( graphicalChange );
 }
 
 void PMGLView::enableTranslateMode( bool yes )
@@ -900,7 +900,7 @@ void PMGLView::slotAutoScroll( )
       if( m_bGraphicalChangeMode )
          graphicalChange( mapFromGlobal( TQCursor::pos( ) ) );
       else
-         tqrepaint( );
+         repaint( );
 
       m_lastAutoScrollUpdate = now;
    }
@@ -1118,7 +1118,7 @@ void PMGLView::slotRefresh( )
       if( !m_pCamera )
          setCamera( m_pPart->firstCamera( ) );
 
-   tqrepaint( );
+   repaint( );
 }
 
 void PMGLView::slotClear( )
@@ -1238,10 +1238,10 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
       redraw = true;
 
    if( redraw )
-      tqrepaint( TQT_BASE_OBJECT(sender) == TQT_BASE_OBJECT(this) );
+      repaint( TQT_BASE_OBJECT(sender) == TQT_BASE_OBJECT(this) );
 }
 
-void PMGLView::tqrepaint( bool graphicalChange )
+void PMGLView::repaint( bool graphicalChange )
 {
    if( isValid( ) )
    {
@@ -1754,7 +1754,7 @@ TQString PMGLViewFactory::description( PMViewOptions* vo ) const
    if( vo && vo->viewType( ) == "glview" )
    {
       PMGLViewOptions* o = ( PMGLViewOptions* ) vo;
-      return i18n( "3D View (%1)" ).tqarg(
+      return i18n( "3D View (%1)" ).arg(
          PMGLView::viewTypeAsString( o->glViewType( ) ) );
    }
    return description( );

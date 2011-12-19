@@ -101,9 +101,9 @@ void SVGTimer::notifyAll()
 	TQValueList<SVGElementImpl *>::iterator it2;
 	for(it2 = elements.begin(); it2 != elements.end(); ++it2)
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(*it2);
-		if(tqshape && tqshape->item())
-			tqshape->item()->update(UPDATE_TRANSFORM);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(*it2);
+		if(shape && shape->item())
+			shape->item()->update(UPDATE_TRANSFORM);
 	}
 }
 

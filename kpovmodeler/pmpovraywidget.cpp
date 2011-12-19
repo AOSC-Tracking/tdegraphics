@@ -335,7 +335,7 @@ void PMPovrayWidget::slotRenderingFinished( int returnStatus )
    {
       KMessageBox::error( this, i18n( "Povray exited abnormally.\n"
                                       "See the povray output for details." )
-                          .tqarg( returnStatus ) );
+                          .arg( returnStatus ) );
    }
    else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
    {
@@ -405,7 +405,7 @@ void PMPovrayWidget::showSpeed( double pps )
    else
       num.setNum( pps, 'g', 3 );
 
-   m_pProgressLabel->setText( i18n( "running, %1 pixels/second" ).tqarg( num ) );
+   m_pProgressLabel->setText( i18n( "running, %1 pixels/second" ).arg( num ) );
 }
 
 #include "pmpovraywidget.moc"

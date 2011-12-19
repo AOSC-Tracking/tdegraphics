@@ -475,7 +475,7 @@ void ImlibWidget::setBackgroundColor( const TQColor& color )
 {
     myBackgroundColor = color;
     setPalette( TQPalette( myBackgroundColor ));
-    tqrepaint( false); // FIXME - false? necessary at all?
+    repaint( false); // FIXME - false? necessary at all?
 }
 
 const TQColor& ImlibWidget::backgroundColor() const
@@ -515,7 +515,7 @@ void ImlibWidget::setBusyCursor()
 
 void ImlibWidget::restoreCursor()
 {
-    if ( cursor().shape() == KCursor::waitCursor().tqshape() ) // only if nobody changed the cursor in the meantime!
+    if ( cursor().shape() == KCursor::waitCursor().shape() ) // only if nobody changed the cursor in the meantime!
          setCursor( m_oldCursor );
 }
 

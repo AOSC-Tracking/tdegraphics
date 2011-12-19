@@ -178,7 +178,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             for ( ; hIt != hEnd; ++hIt )
             {
                 HighlightRect * r = *hIt;
-                TQRect highlightRect = r->tqgeometry( width, height );
+                TQRect highlightRect = r->geometry( width, height );
                 if ( highlightRect.isValid() && highlightRect.intersects( limits ) )
                 {
                     // find out the rect to highlight on pixmap
@@ -226,7 +226,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             if ( (enhanceLinks && rect->objectType() == ObjectRect::Link) ||
                  (enhanceImages && rect->objectType() == ObjectRect::Image) )
             {
-                TQRect rectGeometry = rect->tqgeometry( width, height );
+                TQRect rectGeometry = rect->geometry( width, height );
                 if ( rectGeometry.intersects( limitsEnlarged ) )
                 {
                     // expand rect and draw inner border

@@ -53,7 +53,7 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
 		this, TQT_SLOT(slRevertValue()));
 
        TQToolTip::add( m_stdButt,
-		      i18n( "Revert value back to its standard value %1" ).tqarg( stdValue ));
+		      i18n( "Revert value back to its standard value %1" ).arg( stdValue ));
        hb->addWidget( m_stdButt, 0 );
        hb->addSpacing( 4 );
     }

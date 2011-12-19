@@ -213,7 +213,7 @@ public:
 	  @param source The sender of the request */
    virtual void		notify_redisplay(const class DjVuImage * source);
 
-      /** This notification is sent by \ref{DjVuImage} when its tqgeometry
+      /** This notification is sent by \ref{DjVuImage} when its geometry
 	  has been changed as a result of decoding. It may be used to
 	  implement progressive redisplay. */
    virtual void		notify_retqlayout(const class DjVuImage * source);

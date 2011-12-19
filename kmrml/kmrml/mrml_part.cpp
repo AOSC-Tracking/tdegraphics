@@ -310,7 +310,7 @@ void MrmlPart::contactServer( const KURL& url )
     TQString host = url.host().isEmpty() ?
                    TQString::fromLatin1("localhost") : url.host();
 
-    slotSetStatusBar( i18n("Connecting to indexing server at %1...").tqarg( host ));
+    slotSetStatusBar( i18n("Connecting to indexing server at %1...").arg( host ));
 }
 
 //
@@ -495,7 +495,7 @@ void MrmlPart::parseMrml( TQDomDocument& doc )
                 else if ( tagName == "error" ) {
                     KMessageBox::information( widget(),
                                        i18n("Server returned error:\n%1\n")
-                                       .tqarg( elem.attribute( "message" )),
+                                       .arg( elem.attribute( "message" )),
                                               i18n("Server Error") );
                 }
 

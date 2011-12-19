@@ -803,7 +803,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
             // printf("Exif section in Motorola order\n");
             MotorolaOrder = 1;
         }else{
-            throw FatalError("Invalid Exif tqalignment marker.");
+            throw FatalError("Invalid Exif alignment marker.");
         }
     }
 

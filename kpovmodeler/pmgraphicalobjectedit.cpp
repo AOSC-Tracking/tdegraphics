@@ -162,7 +162,7 @@ void PMGraphicalObjectEdit::recalculateResultingVisibility( )
             absoluteFound = true;
       }
    }
-   m_pResultingVisibility->setText( TQString( "(%1)" ).tqarg( level ) );
+   m_pResultingVisibility->setText( TQString( "(%1)" ).arg( level ) );
 }
 
 #include "pmgraphicalobjectedit.moc"

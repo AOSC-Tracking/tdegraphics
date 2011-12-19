@@ -353,7 +353,7 @@ public:
   GP<GPixmap>  get_pixmap(const GRect &rect, const GRect &all, double gamma=0) const;
   /** Renders the mask of the foreground layer of the DjVu image.  This
       functions is a wrapper for \Ref{JB2Image::get_bitmap}.  Argument #align#
-      specified the tqalignment of the rows of the returned images.  Setting
+      specified the alignment of the rows of the returned images.  Setting
       #align# to #4#, for instance, will adjust the bitmap border in order to
       make sure that each row of the returned image starts on a word (four
       byte) boundary.  This function returns a null pointer if there is not

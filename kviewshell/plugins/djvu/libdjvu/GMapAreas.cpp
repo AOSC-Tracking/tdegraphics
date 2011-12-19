@@ -953,7 +953,7 @@ static GUTF8String
 GMapArea2xmltag(const GMapArea &area,const GUTF8String &coords)
 {
   GUTF8String retval("<AREA coords=\""
-    +coords+"\" tqshape=\""+area.get_tqshape_name()+"\" "
+    +coords+"\" shape=\""+area.get_shape_name()+"\" "
     +"alt=\""+area.comment.toEscaped()+"\" ");
   if(area.url.length())
   {

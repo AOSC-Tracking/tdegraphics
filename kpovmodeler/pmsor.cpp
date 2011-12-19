@@ -421,7 +421,7 @@ void PMSurfaceOfRevolution::controlPoints( PMControlPointList& list )
    {
       lastPoint = cp;
       cp = new PMSorControlPoint( lastPoint, *it, PMSorControlPoint::PM2DXY, i,
-                                  i18n( "Point %1 (xy)" ).tqarg( i + 1 ) );
+                                  i18n( "Point %1 (xy)" ).arg( i + 1 ) );
       tmp1.append( cp );
    }
 
@@ -432,7 +432,7 @@ void PMSurfaceOfRevolution::controlPoints( PMControlPointList& list )
    {
       lastPoint = cp;
       cp = new PMSorControlPoint( lastPoint, *it, PMSorControlPoint::PM2DZY, i,
-                                  i18n( "Point %1 (yz)" ).tqarg( i + 1 ) );
+                                  i18n( "Point %1 (yz)" ).arg( i + 1 ) );
       tmp2.append( cp );
    }
 

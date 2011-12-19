@@ -69,7 +69,7 @@ ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pag
 
 void ThumbnailWidget::paintEvent(TQPaintEvent* e)
 {
-  // Only tqrepaint if the widget is really visible. We need to check this because TQt
+  // Only repaint if the widget is really visible. We need to check this because TQt
   // sends paintEvents to all widgets that have ever been visible in the Scrollview
   // whenever the ScrollView is resized. This also increases the percieved performance
   // only thumbnails that are really needed are rendered.
@@ -185,7 +185,7 @@ MarkListWidget::MarkListWidget(TQWidget* _parent, MarkList* _markList, const Pag
   TQToolTip::add(checkBox, i18n("Select for printing"));
   bottomLayout->addWidget(checkBox, 0, TQt::AlignAuto);
 
-  pageLabel = new TQLabel(TQString("%1").tqarg(pageNumber), this);
+  pageLabel = new TQLabel(TQString("%1").arg(pageNumber), this);
   bottomLayout->addWidget(pageLabel, 1);
 
   _backgroundColor = KGlobalSettings::baseColor();

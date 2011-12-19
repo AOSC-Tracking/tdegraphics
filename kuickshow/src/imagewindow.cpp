@@ -310,8 +310,8 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 	
     TQString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%3 (%1 x %2)" );
-    caption = caption.tqarg( m_kuim->originalWidth() ).
-              tqarg( m_kuim->originalHeight() ).tqarg( m_kuim->url().prettyURL() );
+    caption = caption.arg( m_kuim->originalWidth() ).
+              arg( m_kuim->originalHeight() ).arg( m_kuim->url().prettyURL() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
@@ -403,7 +403,7 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //     XUnmapWindow();
 //     XSetWindowBackgroundPixmap()
 //     resize window to fit image size, center image
-//     XClearWindow(); // tqrepaint
+//     XClearWindow(); // repaint
 //     XMapWindow(), XSync();
 //
 bool ImageWindow::showNextImage( const KURL& url )
@@ -412,7 +412,7 @@ bool ImageWindow::showNextImage( const KURL& url )
     switch ( file->waitForDownload( this ) ) {
     	case KuickFile::ERROR:
     	{
-    	    TQString tmp = i18n("Unable to download the image from %1.").tqarg(url.prettyURL());
+    	    TQString tmp = i18n("Unable to download the image from %1.").arg(url.prettyURL());
 	        emit sigImageError( file, tmp );
 	        return false;
     	}
@@ -430,7 +430,7 @@ bool ImageWindow::showNextImage( KuickFile *file )
     if ( !loadImage( file ) ) {
    	    TQString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.").tqarg(file->url().prettyURL());
+                       "your Imlib is not installed properly.").arg(file->url().prettyURL());
         emit sigImageError( file, tmp );
         return false;
     }
@@ -1203,7 +1203,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
         return KMessageBox::warningContinueCancel(
             this,
             i18n("You are about to view a very large image (%1 x %2 pixels), which can be very resource-consuming and even make your computer hang.\nDo you want to continue?")
-            .tqarg( newWidth ).tqarg( newHeight ),
+            .arg( newWidth ).arg( newHeight ),
             TQString(),
             KStdGuiItem::cont(),
             "ImageWindow_confirm_very_large_window"

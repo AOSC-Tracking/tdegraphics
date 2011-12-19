@@ -848,17 +848,17 @@ DjVuImage::stencil(GPixmap *pm, const GRect &rect,
       for (int blitno = 0; blitno < jimg->get_blit_count(); blitno++)
         {
           const JB2Blit *pblit = jimg->get_blit(blitno);
-          const JB2Shape  &ptqshape = jimg->get_tqshape(pblit->tqshapeno);
-          if (ptqshape.bits &&
+          const JB2Shape  &pshape = jimg->get_shape(pblit->shapeno);
+          if (pshape.bits &&
               pblit->left <= rect.xmax * subsample &&
               pblit->bottom <= rect.ymax * subsample &&
-              pblit->left + (int)ptqshape.bits->columns() >= rect.xmin * subsample &&
-              pblit->bottom + (int)ptqshape.bits->rows() >= rect.ymin * subsample )
+              pblit->left + (int)pshape.bits->columns() >= rect.xmin * subsample &&
+              pblit->bottom + (int)pshape.bits->rows() >= rect.ymin * subsample )
             {
               // Record component list
               if (fgbc) components.append(blitno);
               // Blit
-              bm->blit(ptqshape.bits, 
+              bm->blit(pshape.bits, 
                        pblit->left - rxmin, pblit->bottom - rymin, 
                        subsample);
             }
@@ -902,9 +902,9 @@ DjVuImage::stencil(GPixmap *pm, const GRect &rect,
               lastx = pblit->left;
               if (fg->colordata[blitno] == colorindex)
                 {
-                  const JB2Shape  &ptqshape = jimg->get_tqshape(pblit->tqshapeno);
+                  const JB2Shape  &pshape = jimg->get_shape(pblit->shapeno);
                   GRect rect(pblit->left, pblit->bottom, 
-                             ptqshape.bits->columns(), ptqshape.bits->rows());
+                             pshape.bits->columns(), pshape.bits->rows());
                   comprect.recthull(comprect, rect);
                   compset.insert_before(nullpos, components, pos);
                   continue;
@@ -927,8 +927,8 @@ DjVuImage::stencil(GPixmap *pm, const GRect &rect,
             {
               int blitno = compset[pos];
               const JB2Blit *pblit = jimg->get_blit(blitno);
-              const JB2Shape  &ptqshape = jimg->get_tqshape(pblit->tqshapeno);
-              bm->blit(ptqshape.bits, 
+              const JB2Shape  &pshape = jimg->get_shape(pblit->shapeno);
+              bm->blit(pshape.bits, 
                        pblit->left - rxmin, pblit->bottom - rymin, 
                        subsample);
             }

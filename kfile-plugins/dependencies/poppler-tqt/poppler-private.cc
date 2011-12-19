@@ -79,7 +79,7 @@ GooString *TQStringToGooString(const TQString &s)
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
-      cstring[i] = s.tqat(i).tqunicode();
+      cstring[i] = s.at(i).tqunicode();
     GooString *ret = new GooString(cstring, len);
     gfree(cstring);
     return ret;
@@ -136,11 +136,11 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, G
                 }
             }
 
-        // 3. recursively descend over tqchildren
+        // 3. recursively descend over children
         outlineItem->open();
-        GooList * tqchildren = outlineItem->getKids();
-        if ( tqchildren )
-            addTocChildren( docSyn, &item, tqchildren );
+        GooList * children = outlineItem->getKids();
+        if ( children )
+            addTocChildren( docSyn, &item, children );
     }
 }
 

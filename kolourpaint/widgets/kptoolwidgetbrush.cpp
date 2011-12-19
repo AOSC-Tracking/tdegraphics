@@ -59,7 +59,7 @@ kpToolWidgetBrush::kpToolWidgetBrush (TQWidget *parent, const char *name)
 
     TQPixmap *pm = m_brushBitmaps;
     
-    for (int tqshape = 0; tqshape < BRUSH_SIZE_NUM_ROWS; tqshape++)
+    for (int shape = 0; shape < BRUSH_SIZE_NUM_ROWS; shape++)
     {
         for (int i = 0; i < BRUSH_SIZE_NUM_COLS; i++)
         {
@@ -68,7 +68,7 @@ kpToolWidgetBrush::kpToolWidgetBrush (TQWidget *parent, const char *name)
             pm->resize ((w <= 0 ? width () : w),
                         (h <= 0 ? height () : h));
 
-            const int s = brushSize [tqshape][i];
+            const int s = brushSize [shape][i];
             TQRect rect;
             
             if (s >= pm->width () || s >= pm->height ())
@@ -92,7 +92,7 @@ kpToolWidgetBrush::kpToolWidgetBrush (TQWidget *parent, const char *name)
             painter.setBrush (TQt::black);
 
             // sync: <brushes>
-            switch (tqshape)
+            switch (shape)
             {
             case 0:
                 painter.drawEllipse (rect);
@@ -110,7 +110,7 @@ kpToolWidgetBrush::kpToolWidgetBrush (TQWidget *parent, const char *name)
             painter.end ();
 
             pm->setMask (pm->createHeuristicMask ());
-            addOption (*pm, brushName (tqshape, i)/*tooltip*/);
+            addOption (*pm, brushName (shape, i)/*tooltip*/);
 
             pm++;
         }
@@ -127,38 +127,38 @@ kpToolWidgetBrush::~kpToolWidgetBrush ()
 
 
 // private
-TQString kpToolWidgetBrush::brushName (int tqshape, int whichSize)
+TQString kpToolWidgetBrush::brushName (int shape, int whichSize)
 {
-    int s = brushSize [tqshape][whichSize];
+    int s = brushSize [shape][whichSize];
     
     if (s == 1)
         return i18n ("1x1");
     
-    TQString tqshapeName;
+    TQString shapeName;
 
     // sync: <brushes>
-    switch (tqshape)
+    switch (shape)
     {
     case 0:
-        tqshapeName = i18n ("Circle");
+        shapeName = i18n ("Circle");
         break;
     case 1:
-        tqshapeName = i18n ("Square");
+        shapeName = i18n ("Square");
         break;
     case 2:
-        // TODO: is this really the name of a tqshape? :)
-        tqshapeName = i18n ("Slash");
+        // TODO: is this really the name of a shape? :)
+        shapeName = i18n ("Slash");
         break;
     case 3:
-        // TODO: is this really the name of a tqshape? :)
-        tqshapeName = i18n ("Backslash");
+        // TODO: is this really the name of a shape? :)
+        shapeName = i18n ("Backslash");
         break;
     }
     
-    if (tqshapeName.isEmpty ())
+    if (shapeName.isEmpty ())
         return TQString();
     
-    return i18n ("%1x%2 %3").arg (s).arg (s).arg (tqshapeName);
+    return i18n ("%1x%2 %3").arg (s).arg (s).arg (shapeName);
 }
 
 TQPixmap kpToolWidgetBrush::brush () const

@@ -147,8 +147,8 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
          // TODO: should be "!widget->testWFlags (Qt::WRepaintNoErase)"
          //       but for some reason, doesn't work for viewport().
          const bool erase = !dynamic_cast <kpView *> (widget);
--        widget->tqrepaint (redrawWidgetRect, erase);
-+        widget->tqrepaint (redrawWidgetRegion, erase);
+-        widget->repaint (redrawWidgetRect, erase);
++        widget->repaint (redrawWidgetRegion, erase);
      }
  }
  

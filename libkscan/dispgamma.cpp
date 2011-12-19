@@ -35,7 +35,7 @@ DispGamma::~DispGamma()
 
 void DispGamma::resizeEvent (TQResizeEvent* )
 {
-    tqrepaint();
+    repaint();
 }
 
 void DispGamma::paintEvent( TQPaintEvent *ev )

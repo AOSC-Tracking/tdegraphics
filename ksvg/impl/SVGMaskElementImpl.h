@@ -89,10 +89,10 @@ public:
 
 	Mask createMask(SVGShapeImpl *referencingElement);
 	
-	// Compute the mask on a given tqshape, taking into account all masks defined
-	// on the tqshape's ancestors. This is a workaround for us not having a buffer
+	// Compute the mask on a given shape, taking into account all masks defined
+	// on the shape's ancestors. This is a workaround for us not having a buffer
 	// for container elements, so we can't mask containers directly.
-	static TQByteArray maskRectangle(SVGShapeImpl *tqshape, const TQRect& screenRectangle);
+	static TQByteArray maskRectangle(SVGShapeImpl *shape, const TQRect& screenRectangle);
 
 private:
 	class CacheKey

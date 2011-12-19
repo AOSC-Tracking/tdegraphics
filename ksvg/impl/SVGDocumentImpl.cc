@@ -112,9 +112,9 @@ SVGDocumentImpl::~SVGDocumentImpl()
 	DOM::Node node = firstChild();
 	for(; !node.isNull(); node = node.nextSibling())
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(getElementFromHandle(node.handle()));
-		if(tqshape)
-			killList.append(tqshape);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(getElementFromHandle(node.handle()));
+		if(shape)
+			killList.append(shape);
 	}
 
 	SVGShapeImpl *rend = 0;
@@ -478,7 +478,7 @@ bool SVGDocumentImpl::dispatchRecursiveEvent(SVGEvent::EventId id, DOM::Node sta
 	
 		if(element && element->hasChildNodes())
 		{
-			// Dispatch to all tqchildren
+			// Dispatch to all children
 			eventExecuted = dispatchRecursiveEvent(id, element->lastChild()) ? true : eventExecuted;
 
 			// Dispatch, locally

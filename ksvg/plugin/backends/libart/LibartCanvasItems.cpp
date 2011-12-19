@@ -129,9 +129,9 @@ TQRect LibartShape::bbox() const
 	return rect;
 }
 
-bool LibartShape::isVisible(SVGShapeImpl *tqshape)
+bool LibartShape::isVisible(SVGShapeImpl *shape)
 {
-	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && tqshape->directRender());
+	return m_referenced || (m_style->getVisible() && m_style->getDisplay() && shape->directRender());
 }
 
 bool LibartShape::fillContains(const TQPoint &p)
@@ -160,12 +160,12 @@ void LibartShape::update(CanvasItemUpdate reason, int param1, int param2)
 			m_fillPainter->update(m_style);
 		if(m_strokePainter)
 			m_strokePainter->update(m_style);
-		m_canvas->tqinvalidate(this, false);
+		m_canvas->invalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		reset();
-		m_canvas->tqinvalidate(this, true);
+		m_canvas->invalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 		reset();
@@ -184,13 +184,13 @@ void LibartShape::update(CanvasItemUpdate reason, int param1, int param2)
 			m_strokeSVP = 0;
 		}
 		init();
-		m_canvas->tqinvalidate(this, true);
+		m_canvas->invalidate(this, true);
 	}
 }
 
-void LibartShape::draw(SVGShapeImpl *tqshape)
+void LibartShape::draw(SVGShapeImpl *shape)
 {
-	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !tqshape->directRender()))
+	if(!m_referenced && (!m_style->getVisible() || !m_style->getDisplay() || !shape->directRender()))
 		return;
 
 	bool fillOk = m_fillSVP && m_style->isFilled();
@@ -199,10 +199,10 @@ void LibartShape::draw(SVGShapeImpl *tqshape)
 	if(fillOk || strokeOk)
 	{
 		if(m_fillPainter && m_fillSVP)
-			m_fillPainter->draw(m_canvas, m_fillSVP, m_style, tqshape);
+			m_fillPainter->draw(m_canvas, m_fillSVP, m_style, shape);
 
 		if(m_strokePainter && m_strokeSVP)
-			m_strokePainter->draw(m_canvas, m_strokeSVP, m_style, tqshape);
+			m_strokePainter->draw(m_canvas, m_strokeSVP, m_style, shape);
 	}
 }
 
@@ -230,9 +230,9 @@ void LibartPainter::update(SVGStylableImpl *style)
 	}
 }
 
-void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *tqshape)
+void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *style, SVGShapeImpl *shape)
 {
-	ArtSVP *clippedSvp = canvas->clipSingleSVP(svp, tqshape);
+	ArtSVP *clippedSvp = canvas->clipSingleSVP(svp, shape);
 
 	// Clipping
 	ArtDRect bbox;
@@ -252,15 +252,15 @@ void LibartPainter::draw(LibartCanvas *canvas, _ArtSVP *svp, SVGStylableImpl *st
 
 		TQRect screenBBox(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 
-		TQByteArray mask = SVGMaskElementImpl::maskRectangle(tqshape, screenBBox);
+		TQByteArray mask = SVGMaskElementImpl::maskRectangle(shape, screenBBox);
 
 		if(paintType(style) == SVG_PAINTTYPE_URI)
 		{
-			LibartPaintServer *pserver = static_cast<LibartPaintServer *>(SVGPaintServerImpl::paintServer(tqshape->ownerDoc(), paintUri(style)));
+			LibartPaintServer *pserver = static_cast<LibartPaintServer *>(SVGPaintServerImpl::paintServer(shape->ownerDoc(), paintUri(style)));
 
 			if(pserver)
 			{
-				pserver->setBBoxTarget(tqshape);
+				pserver->setBBoxTarget(shape);
 				if(!pserver->finalized())
 					pserver->finalizePaintServer();
 				pserver->render(canvas, clippedSvp, opacity(style), mask, screenBBox);
@@ -1285,28 +1285,28 @@ void LibartClipPath::init()
 	for(; !node.isNull(); node = node.nextSibling())
 	{
 		SVGElementImpl *element = m_clipPath->ownerDoc()->getElementFromHandle(node.handle());
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(element);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(element);
 		SVGTestsImpl *tests = dynamic_cast<SVGTestsImpl *>(element);
 
 		bool ok = tests ? tests->ok() : true;
 
-		if(element && tqshape && ok && !tqshape->isContainer())
+		if(element && shape && ok && !shape->isContainer())
 		{
-			LibartClipItem *clipElement = dynamic_cast<LibartClipItem *>(tqshape->item());
+			LibartClipItem *clipElement = dynamic_cast<LibartClipItem *>(shape->item());
 			
-			if(dynamic_cast<LibartText *>(tqshape->item()))
+			if(dynamic_cast<LibartText *>(shape->item()))
 			{
 				// The cast to a clipElement above is failing when it is valid. But only
 				// in the plugin - svgdisplay works fine. What's going on? (Adrian)
-				clipElement = dynamic_cast<LibartText *>(tqshape->item());
+				clipElement = dynamic_cast<LibartText *>(shape->item());
 			}
 
 			if(clipElement)
 			{
 				clipElement->setRenderContext(CLIPPING);
 
-				// Push coordinate system down to tqchildren.
-				SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(tqshape);
+				// Push coordinate system down to children.
+				SVGLocatableImpl *locatable = dynamic_cast<SVGLocatableImpl *>(shape);
 				if(locatable)
 					locatable->updateCachedScreenCTM(clipMatrix);
 
@@ -1514,13 +1514,13 @@ void LibartText::update(CanvasItemUpdate reason, int param1, int param2)
 			fill = ++it1;
 			stroke = ++it2;
 		}
-		m_canvas->tqinvalidate(this, false);
+		m_canvas->invalidate(this, false);
 	}
 	else if(reason == UPDATE_TRANSFORM)
 	{
 		clearSVPs();
 		init();
-		m_canvas->tqinvalidate(this, true);
+		m_canvas->invalidate(this, true);
 	}
 	else if(reason == UPDATE_ZOOM)
 	{
@@ -2085,7 +2085,7 @@ void LibartRadialGradient::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQB
 			// Here we're undoing the unit-converter's work because putting the
 			// bounding box transform into the matrix here lets the gradient transform
 			// sit at the right point in the chain to work with bounding box coordinates.
-			// It also produces the elliptical tqshape due to the non-uniform scaling.
+			// It also produces the elliptical shape due to the non-uniform scaling.
 			SVGRectImpl *userBBox = getBBoxTarget()->getBBox();
 
 			double width = userBBox->width();

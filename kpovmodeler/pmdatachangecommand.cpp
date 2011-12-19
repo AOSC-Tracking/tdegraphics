@@ -28,7 +28,7 @@ PMDataChangeCommand::PMDataChangeCommand( PMMemento* memento )
    TQString text = memento->originator( )->name( );
    if( text.isEmpty( ) )
       text = memento->originator( )->description( );
-   setText( i18n( "Change %1" ).tqarg( text ) );
+   setText( i18n( "Change %1" ).arg( text ) );
 
    // the data is already changed when the command is created
    m_executed = true;

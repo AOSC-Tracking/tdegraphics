@@ -48,11 +48,11 @@ class SVGPointList;
 class SVGPolygonElementImpl;
 
 /**
- * The <code>polygon</code> element defines a closed tqshape consisting
+ * The <code>polygon</code> element defines a closed shape consisting
  * of connected straight line segments.
  *
  * For more info look here : <a href =
- * "http://www.w3.org/TR/SVG/tqshapes.html#PolylineElement">9.7 The
+ * "http://www.w3.org/TR/SVG/shapes.html#PolylineElement">9.7 The
  * 'polygon' element</a>.
  */
 class SVGPolygonElement : public SVGElement,

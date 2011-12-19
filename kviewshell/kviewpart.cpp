@@ -98,7 +98,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
     offers = KTrader::self()->query(
         TQString::fromLatin1("KViewShell/MultiPage" ),
         TQString("([X-KDE-MultiPageVersion] == %1) and "
-                "([X-KDE-MimeTypes] == '%2')").tqarg(MULTIPAGE_VERSION).tqarg(defaultMimeType));
+                "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(defaultMimeType));
   }
 
   // If no default MimeType is given or no MultiPage has been found, try to load the Empty MultiPage.
@@ -107,7 +107,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
     offers = KTrader::self()->query(
         TQString::fromLatin1("KViewShell/MultiPage" ),
         TQString("([X-KDE-MultiPageVersion] == %1) and "
-                "([X-KDE-EmptyMultiPage] == 1)").tqarg(MULTIPAGE_VERSION));
+                "([X-KDE-EmptyMultiPage] == 1)").arg(MULTIPAGE_VERSION));
   }
 
   // If still no MultiPage has been found, report an error and abort.
@@ -137,7 +137,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
       break;
     case KParts::ComponentFactory::ErrNoLibrary:
       reason = i18n("<qt><p>The specified library <b>%1</b> could not be loaded. The error message returned was:</p>"
-		    "<p><b>%2</b></p></qt>").tqarg(service->library()).tqarg(KLibLoader::self()->lastErrorMessage());
+		    "<p><b>%2</b></p></qt>").arg(service->library()).arg(KLibLoader::self()->lastErrorMessage());
       break;
     case KParts::ComponentFactory::ErrNoFactory:
       reason = i18n("<qt>The library does not export a factory for creating components.</qt>");
@@ -155,7 +155,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
 			"question. If that does not help, you could file an error report, either to the "
 			"provider of your software (e.g. the vendor of your Linux distribution), or "
 			"directly to the authors of the software. The entry <b>Report Bug...</b> in the "
-			"<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").tqarg(m_file).tqarg(service->library());
+			"<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library());
     TQString caption = i18n("Error Initializing Software Component");
     KMessageBox::detailedError(mainWidget, text, reason, caption);
     emit setStatusBarText(TQString());
@@ -420,9 +420,9 @@ TQString KViewPart::pageSizeDescription()
   TQString size = " ";
   if (s.formatNumber() == -1) {
     if (KGlobal::locale()-> measureSystem() == KLocale::Metric)
-      size += TQString("%1x%2 mm").tqarg(s.width().getLength_in_mm(), 0, 'f', 0).tqarg(s.height().getLength_in_mm(), 0, 'f', 0);
+      size += TQString("%1x%2 mm").arg(s.width().getLength_in_mm(), 0, 'f', 0).arg(s.height().getLength_in_mm(), 0, 'f', 0);
     else
-      size += TQString("%1x%2 in").tqarg(s.width().getLength_in_inch(), 0, 'g', 2).tqarg(s.height().getLength_in_inch(), 0, 'g', 2);
+      size += TQString("%1x%2 in").arg(s.width().getLength_in_inch(), 0, 'g', 2).arg(s.height().getLength_in_inch(), 0, 'g', 2);
   } else {
     size += s.formatName() + "/";
     if (s.getOrientation() == 0)
@@ -472,7 +472,7 @@ TQStringList KViewPart::supportedMimeTypes()
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage"),
-      TQString("([X-KDE-MultiPageVersion] == %1)").tqarg(MULTIPAGE_VERSION)
+      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -517,7 +517,7 @@ TQStringList KViewPart::fileFormats() const
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage"),
-      TQString("([X-KDE-MultiPageVersion] == %1)").tqarg(MULTIPAGE_VERSION)
+      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -642,7 +642,7 @@ bool KViewPart::openFile()
     // If we still have not found a file. Show an error message and return.
     if (!fi.exists())
     {
-      KMessageBox::error(mainWidget, i18n("<qt>File <nobr><strong>%1</strong></nobr> does not exist.</qt>").tqarg(m_file));
+      KMessageBox::error(mainWidget, i18n("<qt>File <nobr><strong>%1</strong></nobr> does not exist.</qt>").arg(m_file));
       emit setStatusBarText(TQString());
       return false;
     }
@@ -651,7 +651,7 @@ bool KViewPart::openFile()
 
   // Set the window caption now, before we do any uncompression and generation of temporary files.
   tmpFileURL.setPath(m_file);
-  emit setStatusBarText(i18n("Loading '%1'...").tqarg(tmpFileURL.prettyURL()));
+  emit setStatusBarText(i18n("Loading '%1'...").arg(tmpFileURL.prettyURL()));
   emit setWindowCaption( tmpFileURL.prettyURL() ); // set Window caption WITHOUT the reference part!
 
   // Check if the file is compressed
@@ -678,7 +678,7 @@ bool KViewPart::openFile()
     if(tmpUnzipped->status() != 0)
     {
       KMessageBox::error(mainWidget, i18n("<qt><strong>File Error!</strong> Could not create temporary file "
-                         "<nobr><strong>%1</strong></nobr>.</qt>").tqarg(strerror(tmpUnzipped->status())));
+                         "<nobr><strong>%1</strong></nobr>.</qt>").arg(strerror(tmpUnzipped->status())));
       emit setWindowCaption(TQString());
       emit setStatusBarText(TQString());
       return false;
@@ -700,7 +700,7 @@ bool KViewPart::openFile()
     {
       KMessageBox::detailedError(mainWidget, i18n("<qt><strong>File Error!</strong> Could not open the file "
           "<nobr><strong>%1</strong></nobr> for uncompression. "
-          "The file will not be loaded.</qt>").tqarg(m_file),
+          "The file will not be loaded.</qt>").arg(m_file),
           i18n("<qt>This error typically occurs if you do not have enough permissions to read the file. "
           "You can check ownership and permissions if you right-click on the file in the Konqueror "
           "file manager and then choose the 'Properties' menu.</qt>"));
@@ -712,7 +712,7 @@ bool KViewPart::openFile()
 
     KProgressDialog* prog = new KProgressDialog(0L, "uncompress-progress",
         i18n("Uncompressing..."),
-        i18n("<qt>Uncompressing the file <nobr><strong>%1</strong></nobr>. Please wait.</qt>").tqarg(m_file));
+        i18n("<qt>Uncompressing the file <nobr><strong>%1</strong></nobr>. Please wait.</qt>").arg(m_file));
 
     prog->progressBar()->setTotalSteps((int) fi.size()/1024);
     prog->progressBar()->setProgress(0);
@@ -746,7 +746,7 @@ bool KViewPart::openFile()
     if ((read != 0) || (tmpUnzipped->file()->size() == 0))
     {
       KMessageBox::detailedError(mainWidget, i18n("<qt><strong>File Error!</strong> Could not uncompress "
-          "the file <nobr><strong>%1</strong></nobr>. The file will not be loaded.</qt>").tqarg( m_file ),
+          "the file <nobr><strong>%1</strong></nobr>. The file will not be loaded.</qt>").arg( m_file ),
           i18n("<qt>This error typically occurs if the file is corrupt. "
           "If you want to be sure, try to decompress the file manually using command-line tools.</qt>"));
       emit setWindowCaption(TQString());
@@ -770,13 +770,13 @@ bool KViewPart::openFile()
   KTrader::OfferList offers = KTrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage" ),
   TQString("([X-KDE-MultiPageVersion] == %1) and "
-          "([X-KDE-MimeTypes] == '%2')").tqarg(MULTIPAGE_VERSION).tqarg(mimetype->name()));
+          "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(mimetype->name()));
 
   if (offers.isEmpty()) {
     KMessageBox::detailedError(mainWidget, i18n("<qt>The document <b>%1</b> cannot be shown because "
-						"its file type is not supported.</qt>").tqarg(m_file),
+						"its file type is not supported.</qt>").arg(m_file),
 			       i18n("<qt>The file has mime type <b>%1</b> which is not supported by "
-				    "any of the installed KViewShell plugins.</qt>").tqarg(mimetype->name()));
+				    "any of the installed KViewShell plugins.</qt>").arg(mimetype->name()));
     emit setWindowCaption(TQString());
     emit setStatusBarText(TQString());
     return false;
@@ -813,7 +813,7 @@ bool KViewPart::openFile()
 	reason = i18n("<qt>The specified service provides no shared library.</qt>");
 	break;
       case KParts::ComponentFactory::ErrNoLibrary:
-	reason = i18n("<qt><p>The specified library <b>%1</b> could not be loaded. The error message returned was:</p> <p><b>%2</b></p></qt>").tqarg(service->library()).tqarg(KLibLoader::self()->lastErrorMessage());
+	reason = i18n("<qt><p>The specified library <b>%1</b> could not be loaded. The error message returned was:</p> <p><b>%2</b></p></qt>").arg(service->library()).arg(KLibLoader::self()->lastErrorMessage());
 	break;
       case KParts::ComponentFactory::ErrNoFactory:
 	reason = i18n("<qt>The library does not export a factory for creating components.</qt>");
@@ -832,7 +832,7 @@ bool KViewPart::openFile()
 			  "question. If that does not help, you could file an error report, either to the "
 			  "provider of your software (e.g. the vendor of your Linux distribution), or "
 			  "directly to the authors of the software. The entry <b>Report Bug...</b> in the "
-			  "<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").tqarg(m_file).tqarg(service->library()).tqarg(mimetype->name());
+			  "<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library()).arg(mimetype->name());
       TQString caption = i18n("Error Initializing Software Component");
       if (reason.isEmpty())
 	KMessageBox::error(mainWidget, text, caption);
@@ -900,7 +900,7 @@ bool KViewPart::openFile()
   }
 
   checkActions();
-  emit zoomChanged(TQString("%1%").tqarg((int)(_zoomVal.value()*100.0+0.5)));
+  emit zoomChanged(TQString("%1%").arg((int)(_zoomVal.value()*100.0+0.5)));
   emit setStatusBarText(TQString());
   return r;
 }
@@ -994,7 +994,7 @@ void KViewPart::pageInfo(int numpages, int currentpage)
   updateZoomLevel();
 
   // ATTN: The string here must be the same as in setPage() below
-  TQString pageString = i18n("Page %1 of %2").tqarg(currentpage).tqarg(numpages);
+  TQString pageString = i18n("Page %1 of %2").arg(currentpage).arg(numpages);
   if (pageChangeIsConnected) {
     emit pageChanged(pageString);
     emit sizeChanged(pageSizeDescription());
@@ -1397,7 +1397,7 @@ void KViewPart::setStatusBarTextFromMultiPage( const TQString &msg )
     {
       int currentPage = multiPage->currentPageNumber();
       int numberOfPages = multiPage->numberOfPages();
-      emit setStatusBarText(i18n("Page %1 of %2").tqarg(currentPage).tqarg(numberOfPages));
+      emit setStatusBarText(i18n("Page %1 of %2").arg(currentPage).arg(numberOfPages));
     }
   }
   else

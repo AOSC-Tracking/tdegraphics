@@ -160,7 +160,7 @@ bool PMSurfaceOfRevolutionEdit::isDataValid( )
          {
             m_pPoints->setCurrentCell( pnr, 1 );            
             KMessageBox::error( this, i18n( "The v coordinate of point %1 and %2 must be different." )
-                                .tqarg( pnr + 1 ).tqarg( pnr + 3 ),
+                                .arg( pnr + 1 ).arg( pnr + 3 ),
                                 i18n( "Error" ) );
             return false;
          }

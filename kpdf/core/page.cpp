@@ -319,7 +319,7 @@ bool NormalizedRect::intersects( double l, double t, double r, double b ) const
     return (l < right) && (r > left) && (t < bottom) && (b > top);
 }
 
-TQRect NormalizedRect::tqgeometry( int xScale, int yScale ) const
+TQRect NormalizedRect::geometry( int xScale, int yScale ) const
 {
     int l = (int)( left * xScale ),
         t = (int)( top * yScale ),

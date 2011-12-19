@@ -69,7 +69,7 @@ public:
 
     bool fillsEntirePixmap () const;
     bool exists () const;
-    void tqinvalidate ();
+    void invalidate ();
 
 private:
     const TQPixmap *m_pixmapPtr;

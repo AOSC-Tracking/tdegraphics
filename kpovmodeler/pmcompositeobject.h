@@ -44,7 +44,7 @@ public:
     */
    PMCompositeObject( const PMCompositeObject& o );
    /**
-    * Deletes the object and all tqchildren.
+    * Deletes the object and all children.
     */
    virtual ~PMCompositeObject( );
 
@@ -96,7 +96,7 @@ public:
     */
    virtual bool appendChild( PMObject* );
    /**
-    * Returns the number of tqchildren.
+    * Returns the number of children.
     */
    virtual int countChildren( ) const;
    /**

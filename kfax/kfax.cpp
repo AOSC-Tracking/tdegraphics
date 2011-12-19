@@ -701,7 +701,7 @@ void TopLevel::print(){
   printer.setFullPage( true );
   printer.setUsePrinterResolution( true );
   printer.setCreator( i18n("KFax") + " " KFAXVERSION );
-  printer.setDocName( TQString("%1 - %2").tqarg(firstpage->name).tqarg(i18n("KFax")));
+  printer.setDocName( TQString("%1 - %2").arg(firstpage->name).arg(i18n("KFax")));
   printer.setDocFileName( firstpage->name );
   printer.setPageSelection( KPrinter::ApplicationSide );
   printer.setMinMax( 1, pages ); 
@@ -792,11 +792,11 @@ void TopLevel::printIt( KPrinter &printer, TQPainter &painter )
     TQSize scaledImageSize = size;
     if (size.width() > maxSize.width() || size.height() > maxSize.height() ) {
 	// Image does not fit - scale it and print centered
-	scaledImageSize.tqscale( maxSize, TQSize::ScaleMin );
+	scaledImageSize.scale( maxSize, TQSize::ScaleMin );
 	kdDebug() << "Image does not fit - scaling to " << maxSize << endl;
     } else {
 	// Image does fit - print it in original size, but centered
-	scaledImageSize.tqscale( size, TQSize::ScaleMin );
+	scaledImageSize.scale( size, TQSize::ScaleMin );
 	kdDebug() << "Image does fit - scaling to " << size << endl;
     }
     kdDebug() << "Final image size " << scaledImageSize << endl;
@@ -846,7 +846,7 @@ void TopLevel::openNetFile( const KURL &u)
 
   if ( u.isLocalFile() )
   {
-    TQString string = i18n("Loading '%1'").tqarg(u.path());
+    TQString string = i18n("Loading '%1'").arg(u.path());
     statusbar->message(string);
     openadd( u.path());
     statusbar->clear();
@@ -1441,17 +1441,17 @@ void TopLevel::uiUpdate(){
 	currentpage = pages;
     }
 
-    TQString pagestr = i18n("Page: %1 of %2").tqarg(currentpage).tqarg(pages);
+    TQString pagestr = i18n("Page: %1 of %2").arg(currentpage).arg(pages);
 
     statusbar->changeItem(pagestr, ID_PAGE_NO);
 
     if(Image){
-      TQString wh = i18n("W: %1 H: %2").tqarg(Image->width).tqarg(Image->height);
+      TQString wh = i18n("W: %1 H: %2").arg(Image->width).arg(Image->height);
       statusbar->changeItem(wh, ID_INS_OVR);
     }
 
-    TQString resolution = i18n("Res: %1").tqarg(thispage->vres?i18n("Fine"):i18n("Normal"));
-    // TODO: resolution += TQString("%1x%2").tqarg(thispage->dpiX).tqarg(thispage->dpiY);
+    TQString resolution = i18n("Res: %1").arg(thispage->vres?i18n("Fine"):i18n("Normal"));
+    // TODO: resolution += TQString("%1x%2").arg(thispage->dpiX).arg(thispage->dpiY);
     statusbar->changeItem(resolution, ID_GENERAL);
 
     statusbar->changeItem(thispage->name, ID_FNAME);

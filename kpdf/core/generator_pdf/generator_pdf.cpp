@@ -209,7 +209,7 @@ const DocumentInfo * PDFGenerator::generateDocumentInfo()
         if ( pdfdoc )
         {
             docInfo.set( "format", i18n( "PDF v. <version>", "PDF v. %1" )
-                         .tqarg( TQString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
+                         .arg( TQString::number( pdfdoc->getPDFVersion() ) ), i18n( "Format" ) );
             docInfo.set( "encryption", pdfdoc->isEncrypted() ? i18n( "Encrypted" ) : i18n( "Unencrypted" ),
                          i18n("Security") );
             docInfo.set( "optimization", pdfdoc->isLinearized() ? i18n( "Yes" ) : i18n( "No" ),
@@ -528,7 +528,7 @@ static GString *TQStringToGString(const TQString &s) {
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
-      cstring[i] = s.tqat(i).tqunicode();
+      cstring[i] = s.at(i).tqunicode();
     return new GString(cstring, len);
 }
 
@@ -909,11 +909,11 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
 
         item.setAttribute( "Open", TQVariant( (bool)outlineItem->isOpen() ).toString() );
 
-        // 3. recursively descend over tqchildren
+        // 3. recursively descend over children
         outlineItem->open();
-        GList * tqchildren = outlineItem->getKids();
-        if ( tqchildren )
-            addSynopsisChildren( &item, tqchildren );
+        GList * children = outlineItem->getKids();
+        if ( children )
+            addSynopsisChildren( &item, children );
     }
 }
 

@@ -125,10 +125,10 @@ void SVGShapeImpl::update(CanvasItemUpdate reason, int param1, int param2)
 		m_item->update(reason, param1, param2);
 }
 
-void SVGShapeImpl::tqinvalidate(KSVGCanvas *c, bool recalc)
+void SVGShapeImpl::invalidate(KSVGCanvas *c, bool recalc)
 {
 	if(m_item && c)
-		c->tqinvalidate(m_item, recalc);
+		c->invalidate(m_item, recalc);
 }
 
 void SVGShapeImpl::setReferenced(bool referenced)

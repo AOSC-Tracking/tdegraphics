@@ -84,7 +84,7 @@ void dviRenderer::prescan_embedPS(char *cp, TQ_UINT8 *beginningOfSpecialCommand)
 
   TQString originalFName = EPSfilename;
 
-  embedPS_progress->setLabel(i18n("Embedding %1").tqarg(EPSfilename));  
+  embedPS_progress->setLabel(i18n("Embedding %1").arg(EPSfilename));  
   tqApp->processEvents();
 
   
@@ -102,7 +102,7 @@ void dviRenderer::prescan_embedPS(char *cp, TQ_UINT8 *beginningOfSpecialCommand)
     for(page=0; page < dviFile->total_pages; page++) 
       if ((dviFile->page_offset[page] <= currentOffset) && (currentOffset <= dviFile->page_offset[page+1]))
 	break;
-    errorMsg += i18n("Page %1: The PostScript file <strong>%2</strong> could not be found.<br>").tqarg(page+1).tqarg(originalFName);
+    errorMsg += i18n("Page %1: The PostScript file <strong>%2</strong> could not be found.<br>").arg(page+1).arg(originalFName);
     embedPS_progress->progressBar()->advance(1);
     tqApp->processEvents();
     return;
@@ -131,13 +131,13 @@ void dviRenderer::prescan_embedPS(char *cp, TQ_UINT8 *beginningOfSpecialCommand)
   int clip=include_command.find(" clip"); // -1 if clip keyword is not present, >= 0 otherwise
 
   // Generate the PostScript commands to be included
-  TQString PS = TQString("ps: @beginspecial %1 @llx %2 @lly %3 @urx %4 @ury").tqarg(llx).tqarg(lly).tqarg(urx).tqarg(ury);
+  TQString PS = TQString("ps: @beginspecial %1 @llx %2 @lly %3 @urx %4 @ury").arg(llx).arg(lly).arg(urx).arg(ury);
   if (rwi != 0)
-    PS.append( TQString(" %1 @rwi").tqarg(rwi) );
+    PS.append( TQString(" %1 @rwi").arg(rwi) );
   if (rhi != 0)
-    PS.append( TQString(" %1 @rhi").tqarg(rhi) );
+    PS.append( TQString(" %1 @rhi").arg(rhi) );
   if (angle != 0)
-    PS.append( TQString(" %1 @angle").tqarg(angle) );
+    PS.append( TQString(" %1 @angle").arg(angle) );
   if (clip != -1)
     PS.append(" @clip");
   PS.append( " @setspecial\n" );
@@ -252,7 +252,7 @@ void dviRenderer::prescan_ParsePapersizeSpecial(const TQString& _cp)
     dviFile->suggestedPageSize = new pageSize;
     dviFile->suggestedPageSize->setPageSize(cp);
   } else 
-    printErrorMsgForSpecials(i18n("The papersize data '%1' could not be parsed.").tqarg(cp));
+    printErrorMsgForSpecials(i18n("The papersize data '%1' could not be parsed.").arg(cp));
 
   return;
 }
@@ -297,7 +297,7 @@ void dviRenderer::prescan_ParsePSHeaderSpecial(const TQString& cp)
   }
   
   if (TQFile::exists(_file))
-    PS_interface->PostScriptHeaderString->append( TQString(" (%1) run\n").tqarg(_file) );
+    PS_interface->PostScriptHeaderString->append( TQString(" (%1) run\n").arg(_file) );
 }
 
 
@@ -321,7 +321,7 @@ void dviRenderer::prescan_ParsePSQuoteSpecial(const TQString& cp)
   
   double PS_H = (currinf.data.dvi_h*300.0)/(65536*1200)-300;
   double PS_V = (currinf.data.dvi_v*300.0)/1200 - 300;
-  PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").tqarg(PS_H).tqarg(PS_V) );
+  PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
   PostScriptOutPutString->append( " @beginspecial @setspecial \n" );
   PostScriptOutPutString->append( cp );
   PostScriptOutPutString->append( " @endspecial \n" );
@@ -375,17 +375,17 @@ void dviRenderer::prescan_ParsePSSpecial(const TQString& cp)
   double PS_V = (currinf.data.dvi_v*300.0)/1200 - 300;
   
   if (cp.find("ps::[begin]", 0, false) == 0) {
-    PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").tqarg(PS_H).tqarg(PS_V) );
-    PostScriptOutPutString->append( TQString(" %1\n").tqarg(cp.mid(11)) );
+    PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
+    PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(11)) );
   } else {
     if (cp.find("ps::[end]", 0, false) == 0) {
-      PostScriptOutPutString->append( TQString(" %1\n").tqarg(cp.mid(9)) );
+      PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(9)) );
     } else {
       if (cp.find("ps::", 0, false) == 0) {
-	PostScriptOutPutString->append( TQString(" %1\n").tqarg(cp.mid(4)) );
+	PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(4)) );
       } else {
-	PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").tqarg(PS_H).tqarg(PS_V) );
-	PostScriptOutPutString->append( TQString(" %1\n").tqarg(cp.mid(3)) );
+	PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
+	PostScriptOutPutString->append( TQString(" %1\n").arg(cp.mid(3)) );
       }
     }
   }
@@ -459,22 +459,22 @@ void dviRenderer::prescan_ParsePSFileSpecial(const TQString& cp)
   if (TQFile::exists(EPSfilename)) {
     double PS_H = (currinf.data.dvi_h*300.0)/(65536*1200)-300;
     double PS_V = (currinf.data.dvi_v*300.0)/1200 - 300;
-    PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").tqarg(PS_H).tqarg(PS_V) );
+    PostScriptOutPutString->append( TQString(" %1 %2 moveto\n").arg(PS_H).arg(PS_V) );
     PostScriptOutPutString->append( "@beginspecial " );
-    PostScriptOutPutString->append( TQString(" %1 @llx").tqarg(llx) );
-    PostScriptOutPutString->append( TQString(" %1 @lly").tqarg(lly) );
-    PostScriptOutPutString->append( TQString(" %1 @urx").tqarg(urx) );
-    PostScriptOutPutString->append( TQString(" %1 @ury").tqarg(ury) );
+    PostScriptOutPutString->append( TQString(" %1 @llx").arg(llx) );
+    PostScriptOutPutString->append( TQString(" %1 @lly").arg(lly) );
+    PostScriptOutPutString->append( TQString(" %1 @urx").arg(urx) );
+    PostScriptOutPutString->append( TQString(" %1 @ury").arg(ury) );
     if (rwi != 0)
-      PostScriptOutPutString->append( TQString(" %1 @rwi").tqarg(rwi) );
+      PostScriptOutPutString->append( TQString(" %1 @rwi").arg(rwi) );
     if (rhi != 0)
-      PostScriptOutPutString->append( TQString(" %1 @rhi").tqarg(rhi) );
+      PostScriptOutPutString->append( TQString(" %1 @rhi").arg(rhi) );
     if (angle != 0)
-      PostScriptOutPutString->append( TQString(" %1 @angle").tqarg(angle) );
+      PostScriptOutPutString->append( TQString(" %1 @angle").arg(angle) );
     if (clip != -1)
       PostScriptOutPutString->append(" @clip");
     PostScriptOutPutString->append( " @setspecial \n" );
-    PostScriptOutPutString->append( TQString(" (%1) run\n").tqarg(EPSfilename) );
+    PostScriptOutPutString->append( TQString(" (%1) run\n").arg(EPSfilename) );
     PostScriptOutPutString->append( "@endspecial \n" );
   }
   
@@ -633,7 +633,7 @@ void dviRenderer::prescan(parseSpecials specialParser)
     if (FNTNUM0 <= ch && ch <= (unsigned char) (FNTNUM0 + 63)) {
       currinf.fontp = currinf.fonttable->find(ch - FNTNUM0);
       if (currinf.fontp == NULL) {
-	errorMsg = i18n("The DVI code referred to font #%1, which was not previously defined.").tqarg(ch - FNTNUM0);
+	errorMsg = i18n("The DVI code referred to font #%1, which was not previously defined.").arg(ch - FNTNUM0);
 	return;
       }
       currinf.set_char_p = currinf.fontp->set_char_p;

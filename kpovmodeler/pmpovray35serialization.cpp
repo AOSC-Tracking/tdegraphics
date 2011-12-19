@@ -102,8 +102,8 @@ void PMPov35SerIsoSurface( const PMObject* object, const PMMetaObject* metaObjec
    }
    if( o->evaluate( ) )
    {
-      str = TQString( "%1, %2, %3" ).tqarg( o->evaluateValue( 0 ) )
-            .tqarg( o->evaluateValue( 1 ) ).tqarg( o->evaluateValue( 2 ) );
+      str = TQString( "%1, %2, %3" ).arg( o->evaluateValue( 0 ) )
+            .arg( o->evaluateValue( 1 ) ).arg( o->evaluateValue( 2 ) );
       dev->writeLine( "evaluate " + str );
    }
    if( o->allIntersections( ) )
@@ -145,10 +145,10 @@ void PMPov35SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
    if( ( o->lightType( ) == PMLight::SpotLight ) ||
        ( o->lightType( ) == PMLight::CylinderLight ) )
    {
-      dev->writeLine( TQString( "radius %1" ).tqarg( o->radius( ) ) );
-      dev->writeLine( TQString( "falloff %1" ).tqarg( o->falloff( ) ) );
+      dev->writeLine( TQString( "radius %1" ).arg( o->radius( ) ) );
+      dev->writeLine( TQString( "falloff %1" ).arg( o->falloff( ) ) );
       if( o->tightness( ) != c_defaultLightTightness )
-         dev->writeLine( TQString( "tightness %1" ).tqarg( o->tightness( ) ) );
+         dev->writeLine( TQString( "tightness %1" ).arg( o->tightness( ) ) );
       dev->writeLine( TQString( "point_at " ) + o->pointAt( ).serialize( ) );
    }
 
@@ -156,9 +156,9 @@ void PMPov35SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
    {
       dev->writeLine( TQString( "area_light " ) + o->axis1( ).serialize( )
                      + TQString( ", " ) + o->axis2( ).serialize( )
-                     + TQString( ", %1, %2" ).tqarg( o->size1( ) ).tqarg( o->size2( ) ) );
+                     + TQString( ", %1, %2" ).arg( o->size1( ) ).arg( o->size2( ) ) );
       if( o->adaptive( ) != c_defaultLightAdaptive )
-         dev->writeLine( TQString( "adaptive %1" ).tqarg( o->adaptive( ) ) );
+         dev->writeLine( TQString( "adaptive %1" ).arg( o->adaptive( ) ) );
       if( o->jitter( ) )
          dev->writeLine( TQString( "jitter" ) );
       if ( o->areaType( ) == PMLight::Circular )
@@ -169,8 +169,8 @@ void PMPov35SerLight( const PMObject* object, const PMMetaObject* metaObject, PM
 
    if( o->fading( ) )
    {
-      dev->writeLine( TQString( "fade_distance %1" ).tqarg( o->fadeDistance( ) ) );
-      dev->writeLine( TQString( "fade_power %1" ).tqarg( o->fadePower( ) ) );
+      dev->writeLine( TQString( "fade_distance %1" ).arg( o->fadeDistance( ) ) );
+      dev->writeLine( TQString( "fade_power %1" ).arg( o->fadePower( ) ) );
    }
 
    if( !o->mediaInteraction( ) )

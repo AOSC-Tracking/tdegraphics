@@ -40,7 +40,7 @@ public:
 	virtual void removeItem(KSVGCanvas *c);
 
 	virtual void update(CanvasItemUpdate reason, int param1, int param2);
-	virtual void tqinvalidate(KSVGCanvas *c, bool recalc);
+	virtual void invalidate(KSVGCanvas *c, bool recalc);
 	virtual void setReferenced(bool referenced);
 	virtual void draw();
 

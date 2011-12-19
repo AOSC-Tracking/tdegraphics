@@ -28,7 +28,7 @@ using namespace KMrml;
 //
 // MrmlElement is currently the baseclass for Algorithm and Collection. Both
 // may have a single child-element <query-paradigm-list>, with a number of
-// <query-paradigm> elements as tqchildren.
+// <query-paradigm> elements as children.
 //
 
 MrmlElement::MrmlElement( const TQDomElement& elem )

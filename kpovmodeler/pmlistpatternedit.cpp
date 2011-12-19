@@ -161,7 +161,7 @@ void PMListPatternEdit::saveContents( )
 
 bool PMListPatternEdit::isDataValid( )
 {
-   int tqchildren = 0;
+   int children = 0;
    PMObject* o;
 
    if( !m_pBrickSize->isDataValid( ) )
@@ -172,13 +172,13 @@ bool PMListPatternEdit::isDataValid( )
    // count child objects
    for( o = m_pDisplayedObject->firstChild( ); o; o = o->nextSibling( ) )
       if( o->type( ) == m_pDisplayedObject->listObjectType( ) )
-         tqchildren++;
+         children++;
 
    switch( m_pTypeCombo->currentItem( ) )
    {
       case 0:
       case 1:
-         if( tqchildren > 2 )
+         if( children > 2 )
          {
             KMessageBox::error( this, i18n( "You can have at most two child"
                                             " items for that list type!" ),

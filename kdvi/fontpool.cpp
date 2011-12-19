@@ -187,12 +187,12 @@ TQString fontPool::status()
 
   text.append("<table WIDTH=\"100%\" NOSAVE >");
   text.append( TQString("<tr><td><b>%1</b></td> <td><b>%2</b></td> <td><b>%3</b></td> <td><b>%4</b> <td><b>%5</b></td> <td><b>%6</b></td></tr>")
-	       .tqarg(i18n("TeX Name"))
-	       .tqarg(i18n("Family"))
-	       .tqarg(i18n("Zoom"))
-	       .tqarg(i18n("Type"))
-	       .tqarg(i18n("Encoding"))
-	       .tqarg(i18n("Comment")) );
+	       .arg(i18n("TeX Name"))
+	       .arg(i18n("Family"))
+	       .arg(i18n("Zoom"))
+	       .arg(i18n("Type"))
+	       .arg(i18n("Encoding"))
+	       .arg(i18n("Comment")) );
 
  TeXFontDefinition *fontp = fontList.first();
   while ( fontp != 0 ) {
@@ -210,12 +210,12 @@ TQString fontPool::status()
 
 #ifdef HAVE_FREETYPE
     tmp << TQString ("<tr><td>%1</td> <td>%2</td> <td>%3%</td> <td>%4</td> <td>%5</td> <td>%6</td></tr>")
-      .tqarg(fontp->fontname)
-      .tqarg(fontp->getFullFontName())
-      .tqarg((int)(fontp->enlargement*100 + 0.5))
-      .tqarg(fontp->getFontTypeName())
-      .tqarg(encoding)
-      .tqarg(errMsg);
+      .arg(fontp->fontname)
+      .arg(fontp->getFullFontName())
+      .arg((int)(fontp->enlargement*100 + 0.5))
+      .arg(fontp->getFontTypeName())
+      .arg(encoding)
+      .arg(errMsg);
 #endif
 
     fontp=fontList.next();
@@ -280,7 +280,7 @@ void fontPool::locateFonts()
   // present an error message to the user.
   if (!areFontsLocated()) {
     markFontsAsLocated();
-    TQString details = TQString("<qt><p><b>PATH:</b> %1</p>%2</qt>").tqarg(getenv("PATH")).tqarg(kpsewhichOutput);
+    TQString details = TQString("<qt><p><b>PATH:</b> %1</p>%2</qt>").arg(getenv("PATH")).arg(kpsewhichOutput);
     KMessageBox::detailedError( 0, i18n("<qt><p>KDVI was not able to locate all the font files "
 					"which are necessary to display the current DVI file. "
 					"Your document might be unreadable.</p></qt>"),
@@ -330,17 +330,17 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
       numFontsInJob++;
       
       if (locateTFMonly == true)
-	shellProcessCmdLine += KShellProcess::quote(TQString("%1.tfm").tqarg(fontp->fontname));
+	shellProcessCmdLine += KShellProcess::quote(TQString("%1.tfm").arg(fontp->fontname));
       else {
 #ifdef HAVE_FREETYPE
 	if (FreeType_could_be_loaded == true) {
 	  const TQString &filename = fontsByTeXName.findFileName(fontp->fontname);
 	  if (!filename.isEmpty())
-	    shellProcessCmdLine += KShellProcess::quote(TQString("%1").tqarg(filename));
+	    shellProcessCmdLine += KShellProcess::quote(TQString("%1").arg(filename));
 	}
 #endif
-	shellProcessCmdLine += KShellProcess::quote(TQString("%1.vf").tqarg(fontp->fontname));
-	shellProcessCmdLine += KShellProcess::quote(TQString("%1.1200pk").tqarg(fontp->fontname));
+	shellProcessCmdLine += KShellProcess::quote(TQString("%1.vf").arg(fontp->fontname));
+	shellProcessCmdLine += KShellProcess::quote(TQString("%1.1200pk").arg(fontp->fontname));
       }
     }
     fontp=fontList.next();
@@ -363,7 +363,7 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
 			"and your document might by unreadable. If this error is reproducable "
 			"please report the issue to the KDVI developers using the 'Help' menu.<p>" );
     TQApplication::restoreOverrideCursor();
-    KMessageBox::error( 0, TQString("<qt>%1%2</qt>").tqarg(importanceOfKPSEWHICH).tqarg(msg),
+    KMessageBox::error( 0, TQString("<qt>%1%2</qt>").arg(importanceOfKPSEWHICH).arg(msg),
 			i18n("Problem locating fonts - KDVI") );
     markFontsAsLocated();
     return;
@@ -399,9 +399,9 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
 			  "typesetting system. If TeX is not installed on your system, you could install the TeTeX distribution (www.tetex.org). "
 			  "If you are sure that TeX is installed, please try to use the kpsewhich program from the command line to check if it "
 			  "really works.</p>");
-      TQString details = TQString("<qt><p><b>PATH:</b> %1</p>%2</qt>").tqarg(getenv("PATH")).tqarg(kpsewhichOutput);
+      TQString details = TQString("<qt><p><b>PATH:</b> %1</p>%2</qt>").arg(getenv("PATH")).arg(kpsewhichOutput);
       
-      KMessageBox::detailedError( 0, TQString("<qt>%1%2</qt>").tqarg(importanceOfKPSEWHICH).tqarg(msg), details,
+      KMessageBox::detailedError( 0, TQString("<qt>%1%2</qt>").arg(importanceOfKPSEWHICH).arg(msg), details,
 				  i18n("Problem locating fonts - KDVI") );
       // This makes sure the we don't try to run kpsewhich again
       markFontsAsLocated();
@@ -587,7 +587,7 @@ void fontPool::mf_output_receiver(KProcess *, char *buffer, int buflen)
       TQString dpi       = startLine.mid(secondblank+1,lastblank-secondblank-1);
 
       progress.show();
-      progress.increaseNumSteps( i18n("Currently generating %1 at %2 dpi").tqarg(fontName).tqarg(dpi) );
+      progress.increaseNumSteps( i18n("Currently generating %1 at %2 dpi").arg(fontName).arg(dpi) );
     }
     MetafontOutput = MetafontOutput.remove(0,numleft+1);
   }

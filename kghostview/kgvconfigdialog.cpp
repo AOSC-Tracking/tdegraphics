@@ -114,8 +114,8 @@ namespace {
 			"which are impossible to resolve. Please upgrade to a newer version.\n"
 			"KGhostView will try to work with it, but it may not display any files at all.\n"
 			"Version %2 seems to be appropriate on your system, although newer versions will work as well." )
-		    .tqarg( version )
-		    .tqarg( recommended ) );
+		    .arg( version )
+		    .arg( recommended ) );
 	}
 	if ( version < TQString::number( 7.00 ) ) 
 	{

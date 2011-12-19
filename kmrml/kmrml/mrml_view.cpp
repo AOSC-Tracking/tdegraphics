@@ -307,10 +307,10 @@ MrmlViewItem::MrmlViewItem( const KURL& url, const KURL& thumbURL,
     /*
     if ( similarity > -1 )
         TQToolTip::add( this, TQString::fromLatin1("<qt>%1<br>%1</qt>")
-                       .tqarg( url )
-                       .tqarg(i18n("Similarity: %1").tqarg( TQString::number(similarity))));
+                       .arg( url )
+                       .arg(i18n("Similarity: %1").arg( TQString::number(similarity))));
     else
-        TQToolTip::add( this, TQString::fromLatin1("<qt>%1</qt>").tqarg( url ) );
+        TQToolTip::add( this, TQString::fromLatin1("<qt>%1</qt>").arg( url ) );
     */
 
     setMinimumSize( 130, 130 ); // ###

@@ -397,7 +397,7 @@ bool KViewViewer::openFile()
 		}
 		else
 		{
-			emit setStatusBarText( i18n( "Unknown image format: %1" ).tqarg( m_url.prettyURL() ) );
+			emit setStatusBarText( i18n( "Unknown image format: %1" ).arg( m_url.prettyURL() ) );
 			return false;
 		}
 	}
@@ -406,12 +406,12 @@ bool KViewViewer::openFile()
 		kdDebug( 4610 ) << k_funcinfo << " load from file: " << m_file << endl;
 		if( ! TQFile::exists( m_file ) )
 		{
-			emit setStatusBarText( i18n( "No such file: %1" ).tqarg( m_file ) );
+			emit setStatusBarText( i18n( "No such file: %1" ).arg( m_file ) );
 			return false;
 		}
 		if( TQImage::imageFormat( m_file ) == 0 )
 		{
-			emit setStatusBarText( i18n( "Unknown image format: %1" ).tqarg( m_file ) );
+			emit setStatusBarText( i18n( "Unknown image format: %1" ).arg( m_file ) );
 			return false;
 		}
 		// determine Mime Type
@@ -567,7 +567,7 @@ void KViewViewer::writeSettings()
 void KViewViewer::zoomChanged( double zoom )
 {
 	kdDebug( 4610 ) << k_funcinfo << endl;
-	emit setWindowCaption( m_sCaption + TQString( " (%1%)" ).tqarg( zoom * 100, 0, 'f', 0 ) );
+	emit setWindowCaption( m_sCaption + TQString( " (%1%)" ).arg( zoom * 100, 0, 'f', 0 ) );
 	updateZoomMenu( zoom );
 }
 
@@ -685,7 +685,7 @@ void KViewViewer::updateZoomMenu( double zoom )
 	}
 
 	// first look if it's a new value (not in the list yet)
-	TQString z = TQString( "%1%" ).tqarg( zoom * 100, 0, 'f', 0 );
+	TQString z = TQString( "%1%" ).arg( zoom * 100, 0, 'f', 0 );
 	TQStringList items = m_paZoom->items();
 	int idx = items.findIndex( z );
 	if( -1 == idx )
@@ -803,12 +803,12 @@ void KViewViewer::slotFileDirty( const TQString & )
 	if( isModified() && isReadWrite() )
 	{
 		KPassivePopup * pop = new KPassivePopup( m_pParentWidget );
-		TQVBox * vb = pop->standardView( i18n( "Load changed image? - %1" ).tqarg( kapp->aboutData()->programName() ),
+		TQVBox * vb = pop->standardView( i18n( "Load changed image? - %1" ).arg( kapp->aboutData()->programName() ),
 				TQString(), kapp->miniIcon() );
 		( void )new TQLabel( i18n( "The image %1 which you have modified has changed on disk.\n"
 								  "Do you want to reload the file and lose your changes?\n"
 								  "If you don't and subsequently save the image, you will lose the\n"
-								  "changes that have already been saved." ).tqarg( url().fileName() ), vb );
+								  "changes that have already been saved." ).arg( url().fileName() ), vb );
 		TQWidget * hb = new TQWidget( vb );
 		TQHBoxLayout * tqlayout = new TQHBoxLayout( hb );
 		tqlayout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );

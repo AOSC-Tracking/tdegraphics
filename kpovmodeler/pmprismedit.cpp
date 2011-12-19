@@ -206,7 +206,7 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
       {
          // create all edits for one sub prism
          hl = new TQHBoxLayout( tvl );
-         label = new TQLabel( i18n( "Sub prism %1:" ).tqarg( spnr + 1 ),
+         label = new TQLabel( i18n( "Sub prism %1:" ).arg( spnr + 1 ),
                              m_pEditWidget );
          hl->addWidget( label );
          hl->addStretch( 1 );

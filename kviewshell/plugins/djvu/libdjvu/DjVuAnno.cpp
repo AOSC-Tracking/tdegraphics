@@ -978,16 +978,16 @@ DjVuANT::get_mode(GLParser & parser)
   return retval;
 }
 
-static inline DjVuANT::tqalignment
+static inline DjVuANT::alignment
 legal_halign(const int i)
 {
-  DjVuANT::tqalignment retval;
-  switch((DjVuANT::tqalignment)i)
+  DjVuANT::alignment retval;
+  switch((DjVuANT::alignment)i)
   {
   case DjVuANT::ALIGN_LEFT:
   case DjVuANT::ALIGN_CENTER:
   case DjVuANT::ALIGN_RIGHT:
-    retval=(DjVuANT::tqalignment)i;
+    retval=(DjVuANT::alignment)i;
     break;
   default:
     retval=DjVuANT::ALIGN_UNSPEC;
@@ -996,16 +996,16 @@ legal_halign(const int i)
   return retval;
 }
 
-static inline DjVuANT::tqalignment
+static inline DjVuANT::alignment
 legal_valign(const int i)
 {
-  DjVuANT::tqalignment retval;
-  switch((DjVuANT::tqalignment)i)
+  DjVuANT::alignment retval;
+  switch((DjVuANT::alignment)i)
   {
   case DjVuANT::ALIGN_CENTER:
   case DjVuANT::ALIGN_TOP:
   case DjVuANT::ALIGN_BOTTOM:
-    retval=(DjVuANT::tqalignment)i;
+    retval=(DjVuANT::alignment)i;
     break;
   default:
     retval=DjVuANT::ALIGN_UNSPEC;
@@ -1014,12 +1014,12 @@ legal_valign(const int i)
   return retval;
 }
 
-DjVuANT::tqalignment
+DjVuANT::alignment
 DjVuANT::get_hor_align(GLParser & parser)
 {
   DEBUG_MSG("DjVuAnt::get_hor_align(): getting hor page alignemnt ...\n");
   DEBUG_MAKE_INDENT(3);
-  tqalignment retval=ALIGN_UNSPEC;
+  alignment retval=ALIGN_UNSPEC;
   G_TRY
   {
     GP<GLObject> obj=parser.get_object(ALIGN_TAG);
@@ -1030,7 +1030,7 @@ DjVuANT::get_hor_align(GLParser & parser)
       
       for(int i=(int)ALIGN_UNSPEC;(i<align_strings_size);++i)
       {
-        const tqalignment j=legal_halign(i);
+        const alignment j=legal_halign(i);
         if((i == (int)j)&&(align == align_strings[i]))
         {
           retval=j;
@@ -1048,18 +1048,18 @@ DjVuANT::get_hor_align(GLParser & parser)
 #ifndef NDEBUG
   if(retval == ALIGN_UNSPEC)
   {
-    DEBUG_MSG("resetting tqalignment to ALIGN_UNSPEC\n");
+    DEBUG_MSG("resetting alignment to ALIGN_UNSPEC\n");
   }
 #endif // NDEBUG
   return retval;
 }
 
-DjVuANT::tqalignment
+DjVuANT::alignment
 DjVuANT::get_ver_align(GLParser & parser)
 {
   DEBUG_MSG("DjVuAnt::get_ver_align(): getting vert page alignemnt ...\n");
   DEBUG_MAKE_INDENT(3);
-  tqalignment retval=ALIGN_UNSPEC;
+  alignment retval=ALIGN_UNSPEC;
   G_TRY
   {
     GP<GLObject> obj=parser.get_object(ALIGN_TAG);
@@ -1069,7 +1069,7 @@ DjVuANT::get_ver_align(GLParser & parser)
       DEBUG_MSG("ver_align='" << align << "'\n");
       for(int i=(int)ALIGN_UNSPEC;(i<align_strings_size);++i)
       {
-        const tqalignment j=legal_valign(i);
+        const alignment j=legal_valign(i);
         if((i == (int)j)&&(align == align_strings[i]))
         {
           retval=j;
@@ -1087,7 +1087,7 @@ DjVuANT::get_ver_align(GLParser & parser)
 #ifndef NDEBUG
   if(retval == ALIGN_UNSPEC)
   {
-    DEBUG_MSG("resetting tqalignment to ALIGN_UNSPEC\n");
+    DEBUG_MSG("resetting alignment to ALIGN_UNSPEC\n");
   }
 #endif // NDEBUG
   return retval;
@@ -1166,38 +1166,38 @@ DjVuANT::get_map_areas(GLParser & parser)
           DEBUG_MSG("found maparea '" << comment << "' (" <<
             url << ":" << target << ")\n");
         
-          GLObject * tqshape=obj[2];
+          GLObject * shape=obj[2];
           GP<GMapArea> map_area;
-          if (tqshape->get_type()==GLObject::LIST)
+          if (shape->get_type()==GLObject::LIST)
           {
-            if (tqshape->get_name()==GMapArea::RECT_TAG)
+            if (shape->get_name()==GMapArea::RECT_TAG)
             {
               DEBUG_MSG("it's a rectangle.\n");
-              GRect grect((*tqshape)[0]->get_number(),
-                          (*tqshape)[1]->get_number(),
-                          (*tqshape)[2]->get_number(),
-                          (*tqshape)[3]->get_number());
+              GRect grect((*shape)[0]->get_number(),
+                          (*shape)[1]->get_number(),
+                          (*shape)[2]->get_number(),
+                          (*shape)[3]->get_number());
               GP<GMapRect> map_rect=GMapRect::create(grect);
               map_area=(GMapRect *)map_rect;
-            } else if (tqshape->get_name()==GMapArea::POLY_TAG)
+            } else if (shape->get_name()==GMapArea::POLY_TAG)
             {
               DEBUG_MSG("it's a polygon.\n");
-              int points=tqshape->get_list().size()/2;
+              int points=shape->get_list().size()/2;
               GTArray<int> xx(points-1), yy(points-1);
               for(int i=0;i<points;i++)
               {
-                xx[i]=(*tqshape)[2*i]->get_number();
-                yy[i]=(*tqshape)[2*i+1]->get_number();
+                xx[i]=(*shape)[2*i]->get_number();
+                yy[i]=(*shape)[2*i+1]->get_number();
               }
               GP<GMapPoly> map_poly=GMapPoly::create(xx,yy,points);
               map_area=(GMapPoly *)map_poly;
-            } else if (tqshape->get_name()==GMapArea::OVAL_TAG)
+            } else if (shape->get_name()==GMapArea::OVAL_TAG)
             {
               DEBUG_MSG("it's an ellipse.\n");
-              GRect grect((*tqshape)[0]->get_number(),
-                          (*tqshape)[1]->get_number(),
-                          (*tqshape)[2]->get_number(),
-                          (*tqshape)[3]->get_number());
+              GRect grect((*shape)[0]->get_number(),
+                          (*shape)[1]->get_number(),
+                          (*shape)[2]->get_number(),
+                          (*shape)[3]->get_number());
               GP<GMapOval> map_oval=GMapOval::create(grect);
               map_area=(GMapOval *)map_oval;
             }

@@ -199,7 +199,7 @@ void ThumbnailList::notifyPageChanged( int pageNumber, int /*changedFlags*/ )
     //if ( !(changedFlags & DocumentObserver::Pixmap) )
     //    return;
 
-    // iterate over visible items: if page(pageNumber) is one of them, tqrepaint it
+    // iterate over visible items: if page(pageNumber) is one of them, repaint it
     TQValueList<ThumbnailWidget *>::iterator vIt = m_visibleThumbnails.begin(), vEnd = m_visibleThumbnails.end();
     for ( ; vIt != vEnd; ++vIt )
         if ( (*vIt)->pageNumber() == pageNumber )
@@ -362,7 +362,7 @@ void ThumbnailList::viewportResizeEvent( TQResizeEvent * e )
 	else if ( e->size().height() <= e->oldSize().height() )
 		return;
 
-	// tqinvalidate the bookmark overlay
+	// invalidate the bookmark overlay
 	if ( m_bookmarkOverlay )
 	{
 		delete m_bookmarkOverlay;

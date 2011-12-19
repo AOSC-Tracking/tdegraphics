@@ -146,7 +146,7 @@ void Watcher::slotProcExited( KProcess *proc )
                              i18n("<qt>The server with the command line"
                                   "<br>%1<br>"
                                   "is not available anymore. Do you want to "
-                                  "restart it?" ).tqarg( daemon->commandline ),
+                                  "restart it?" ).arg( daemon->commandline ),
                                             i18n("Service Failure"), i18n("Restart Server"), i18n("Do Not Restart") )
                  == KMessageBox::Yes )
             {
@@ -175,7 +175,7 @@ bool Watcher::startDaemon( DaemonData *daemon )
                       i18n("Unable to start the server with the "
                            "command line"
                            "<br>%1<br>"
-                          "Try again?").tqarg( daemon->commandline ),
+                          "Try again?").arg( daemon->commandline ),
                                          i18n("Service Failure"), i18n("Try Again"), i18n("Do Not Try") )
              == KMessageBox::Yes )
         {

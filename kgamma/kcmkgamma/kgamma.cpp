@@ -264,7 +264,7 @@ void KGamma::setupUI() {
 
     screenselect = new TQComboBox( options );
     for ( int i = 0; i < ScreenCount; i++ )
-      screenselect->insertItem( i18n("Screen %1").tqarg(i+1) );
+      screenselect->insertItem( i18n("Screen %1").arg(i+1) );
     screenselect->setCurrentItem(currentScreen);
     connect(screenselect, TQT_SIGNAL(activated(int)), TQT_SLOT(changeScreen(int)));
 
@@ -351,7 +351,7 @@ void KGamma::save() {
 
     if ( !xf86cfgbox->isChecked() ) { //write gamma settings to the users config
       for (int i = 0; i < ScreenCount; i++) {
-        config->setGroup( TQString("Screen %1").tqarg(i) );
+        config->setGroup( TQString("Screen %1").arg(i) );
         config->writeEntry("rgamma", rgamma[i]);
         config->writeEntry("ggamma", ggamma[i]);
         config->writeEntry("bgamma", bgamma[i]);
@@ -405,7 +405,7 @@ bool KGamma::loadUserSettings() {
   KConfig *config = new KConfig("kgammarc");
 
   for (int i = 0; i < ScreenCount; i++) {
-    config->setGroup(TQString( "Screen %1" ).tqarg(i) );
+    config->setGroup(TQString( "Screen %1" ).arg(i) );
     rgamma[i] = config->readEntry("rgamma");
     ggamma[i] = config->readEntry("ggamma");
     bgamma[i] = config->readEntry("bgamma");
@@ -610,7 +610,7 @@ extern "C"
 
       for (int i = 0; i < xv._ScreenCount(); i++) {
         xv.setScreen(i);
-        config->setGroup( TQString("Screen %1").tqarg(i) );
+        config->setGroup( TQString("Screen %1").arg(i) );
 
         if ((rgamma = config->readEntry("rgamma").toFloat()))
           xv.setGamma(XVidExtWrap::Red, rgamma);

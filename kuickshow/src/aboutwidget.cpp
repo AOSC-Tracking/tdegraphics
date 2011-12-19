@@ -84,7 +84,7 @@ bool AboutWidget::eventFilter( TQObject *o, TQEvent *e )
 {
     if ( e->type() == TQEvent::MouseButtonPress ) {
         TQMouseEvent *ev = TQT_TQMOUSEEVENT( e );
-        if ( !m_homepage->tqgeometry().contains( ev->pos() ) ) {
+        if ( !m_homepage->geometry().contains( ev->pos() ) ) {
             deleteLater();
             return true;
         }

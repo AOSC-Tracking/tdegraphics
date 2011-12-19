@@ -79,7 +79,7 @@ void SizeIndicator::setSizeInByte( long newSize )
       fwidth = 2;
    }
 
-   t = unit.tqarg( sizer, fwidth, 'f', precision);
+   t = unit.arg( sizer, fwidth, 'f', precision);
    setText(t);
 
 }

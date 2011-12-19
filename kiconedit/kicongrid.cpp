@@ -1044,7 +1044,7 @@ void KIconEditGrid::load( TQImage *image)
     emit changed(pixmap());
     setUpdatesEnabled(true);
     emit needPainting();
-    //tqrepaint(viewRect(), false);
+    //repaint(viewRect(), false);
     history->clear();
 }
 
@@ -1379,7 +1379,7 @@ void KIconEditGrid::editPasteAsNew()
             *img = tmp;
             load(img);
             setModified(true);
-            //tqrepaint(viewRect(), false);
+            //repaint(viewRect(), false);
   
             p = *img;
             emit changed(TQPixmap(p));

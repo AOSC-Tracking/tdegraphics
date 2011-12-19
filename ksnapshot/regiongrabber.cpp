@@ -41,8 +41,8 @@ SizeTip::SizeTip( TQWidget *parent, const char *name )
 
 void SizeTip::setTip( const TQRect &rect )
 {
-  TQString tip = TQString( "%1x%2" ).tqarg( rect.width() )
-      .tqarg( rect.height() );
+  TQString tip = TQString( "%1x%2" ).arg( rect.width() )
+      .arg( rect.height() );
 
   setText( tip );
   adjustSize();
@@ -52,7 +52,7 @@ void SizeTip::setTip( const TQRect &rect )
 
 void SizeTip::positionTip( const TQRect &rect )
 {
-  TQRect tipRect = tqgeometry();
+  TQRect tipRect = geometry();
   tipRect.moveTopLeft( TQPoint( 0, 0 ) );
 
   if ( rect.intersects( tipRect ) )
@@ -61,7 +61,7 @@ void SizeTip::positionTip( const TQRect &rect )
 
     tipRect.moveCenter( TQPoint( deskR.width()/2, deskR.height()/2 ) );
     if ( !rect.contains( tipRect, true ) && rect.intersects( tipRect ) )
-      tipRect.moveBottomRight( tqgeometry().bottomRight() );
+      tipRect.moveBottomRight( geometry().bottomRight() );
   }
 
   move( tipRect.topLeft() );
@@ -92,7 +92,7 @@ void RegionGrabber::initGrabber()
   TQDesktopWidget desktopWidget;
   TQRect desktopSize;
   if ( desktopWidget.isVirtualDesktop() )
-    desktopSize = desktopWidget.tqgeometry();
+    desktopSize = desktopWidget.geometry();
   else
     desktopSize = desktopWidget.screenGeometry( qt_xrootwin() );
 

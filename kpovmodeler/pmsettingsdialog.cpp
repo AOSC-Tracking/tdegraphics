@@ -187,13 +187,13 @@ bool PMSettingsDialog::validateData( )
 
 void PMSettingsDialog::saveSettings( )
 {
-   m_tqrepaint = false;
+   m_repaint = false;
 
    TQValueList<PMRegisteredSettingsPage>::const_iterator it;
    for( it = m_pages.begin( ); it != m_pages.end( ); ++it )
       ( *it ).page->applySettings( );
 
-   if( m_tqrepaint )
+   if( m_repaint )
    {
       PMRenderManager* rm = PMRenderManager::theManager( );
       rm->slotRenderingSettingsChanged( );
@@ -236,7 +236,7 @@ void PMSettingsDialog::registerPage( TQWidget* topPage,
 
 void PMSettingsDialog::slotRepaint( )
 {
-   m_tqrepaint = true;
+   m_repaint = true;
 }
 
 void PMSettingsDialog::slotShowPage( )

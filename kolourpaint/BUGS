@@ -27,8 +27,8 @@ This file lists known bugs in this version that are not considered
    manifestations of the current QSpinBox behaviour.
 
 6. a) The undo history and document modified state are not updated during
-      the drawing of multi-segment tqshapes (Polygon, Connected Lines,
-      Curve).  They are however updated after tqshapes' completion.
+      the drawing of multi-segment shapes (Polygon, Connected Lines,
+      Curve).  They are however updated after shapes' completion.
 
    b) The text and brush-like tools set the document modified flag even if
       user cancels the draw operation.
@@ -37,7 +37,7 @@ This file lists known bugs in this version that are not considered
       still marked as modified (because 2 commands - the create selection
       and the move - were added but only one was undone).
 
-7. Certain tqshapes may have the wrong size (usually only a pixel off and
+7. Certain shapes may have the wrong size (usually only a pixel off and
    only in extreme cases) e.g. an ellipse of height 1 always has a width 1
    pixel less than it should be.  This is a Qt bug.
 

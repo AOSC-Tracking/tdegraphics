@@ -814,11 +814,11 @@ bool KSANEOCR::readORF( const TQString& fileName, TQString& errStr )
     TQFileInfo fi( fileName );
     if( ! fi.exists() ) {
         error = true;
-        errStr = i18n("The orf %1 does not exist.").tqarg(fileName);
+        errStr = i18n("The orf %1 does not exist.").arg(fileName);
     }
     if( ! error && ! fi.isReadable() ) {
         error = true;
-        errStr = i18n("Permission denied on file %1.").tqarg(fileName);
+        errStr = i18n("Permission denied on file %1.").arg(fileName);
     }
 
 

@@ -277,7 +277,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
 
             if( !success )
             {
-               KMessageBox::error( 0, i18n( "Error moving \"%1\" to \"%2\"" ).tqarg( path ).tqarg( m_path ) );
+               KMessageBox::error( 0, i18n( "Error moving \"%1\" to \"%2\"" ).arg( path ).arg( m_path ) );
                e->ignore( );
                return;
             }

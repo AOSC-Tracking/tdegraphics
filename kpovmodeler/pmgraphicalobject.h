@@ -46,7 +46,7 @@ public:
     */
    PMGraphicalObject( const PMGraphicalObject& o );
    /**
-    * Deletes the object and all tqchildren
+    * Deletes the object and all children
     */
    virtual ~PMGraphicalObject( );
 

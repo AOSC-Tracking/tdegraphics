@@ -651,7 +651,7 @@ DjVuDocEditor::insert_file(const GP<DataPool> &file_pool,
 
          // Good. Before we continue with the included files we want to
          // complete insertion of this one. Notice, that insertion of
-         // tqchildren may fail, in which case we will have to modify
+         // children may fail, in which case we will have to modify
          // data for this file to get rid of invalid INCL
 
          // Create a file record with the chosen ID
@@ -994,7 +994,7 @@ DjVuDocEditor::remove_file(const GUTF8String &id, bool remove_unref,
       // We will accumulate errors here.
    GUTF8String errors;
 
-      // Now modify the ref_map and process tqchildren if necessary
+      // Now modify the ref_map and process children if necessary
    GP<DjVuFile> file=get_djvu_file(id);
    if (file)
    {

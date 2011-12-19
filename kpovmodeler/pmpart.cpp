@@ -1050,7 +1050,7 @@ bool PMPart::setActiveObject( const TQString& name )
          else
             objIndex = 0;
 
-         // Iterate the tqchildren for this element. We stop when there are no more siblings
+         // Iterate the children for this element. We stop when there are no more siblings
          // or the object is of the correct type and it's index count is also correct
          siblingIndex = 0;
          tmpSibling = tmpObj->firstChild( );
@@ -1373,10 +1373,10 @@ void PMPart::slotFileImport( )
          if( newParser )
          {
             if( m_pActiveObject )
-               insertFromParser( i18n( "Import %1" ).tqarg( selectedFormat->description( ) ),
+               insertFromParser( i18n( "Import %1" ).arg( selectedFormat->description( ) ),
                                  newParser, m_pActiveObject );
             else
-               insertFromParser( i18n( "Import %1" ).tqarg( selectedFormat->description( ) ),
+               insertFromParser( i18n( "Import %1" ).arg( selectedFormat->description( ) ),
                                  newParser, m_pScene );
             delete newParser;
          }

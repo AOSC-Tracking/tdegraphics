@@ -154,7 +154,7 @@ PMDockMainWindow::~PMDockMainWindow()
 // kparts/dockmainwindow stuff
 void PMDockMainWindow::createGUI( Part * part )
 {
-  kdDebug(1000) << TQString("DockMainWindow::createGUI for %1").tqarg(part?part->name():"0L") << endl;
+  kdDebug(1000) << TQString("DockMainWindow::createGUI for %1").arg(part?part->name():"0L") << endl;
 
   KXMLGUIFactory *factory = guiFactory();
 
@@ -164,7 +164,7 @@ void PMDockMainWindow::createGUI( Part * part )
 
   if ( d->m_activePart )
   {
-    kdDebug(1000) << TQString("deactivating GUI for %1").tqarg(d->m_activePart->name()) << endl;
+    kdDebug(1000) << TQString("deactivating GUI for %1").arg(d->m_activePart->name()) << endl;
 
     GUIActivateEvent ev( false );
     TQApplication::sendEvent( d->m_activePart, &ev );
@@ -459,12 +459,12 @@ void PMDockWidgetHeader::setDragEnabled(bool b)
 #ifndef NO_KDE2
 void PMDockWidgetHeader::saveConfig( KConfig* c )
 {
-  c->writeEntry( TQString("%1%2").tqarg(parent()->name()).tqarg(":stayButton"), stayButton->isOn() );
+  c->writeEntry( TQString("%1%2").arg(parent()->name()).arg(":stayButton"), stayButton->isOn() );
 }
 
 void PMDockWidgetHeader::loadConfig( KConfig* c )
 {
-  setDragEnabled( !c->readBoolEntry( TQString("%1%2").tqarg(parent()->name()).tqarg(":stayButton"), false ) );
+  setDragEnabled( !c->readBoolEntry( TQString("%1%2").arg(parent()->name()).arg(":stayButton"), false ) );
 }
 #endif
 
@@ -584,7 +584,7 @@ void PMDockWidget::applyToWidget( TQWidget* s, const TQPoint& p )
   }
 
   if ( s == manager->main ){
-      setGeometry( TQRect(TQPoint(0,0), manager->main->tqgeometry().size()) );
+      setGeometry( TQRect(TQPoint(0,0), manager->main->geometry().size()) );
   }
 
   if ( !s )
@@ -829,7 +829,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
   if ( !parentDock ){
     // dock to a toplevel dockwidget means newDock is toplevel now
     newDock->move( target->frameGeometry().topLeft() );
-    newDock->resize( target->tqgeometry().size() );
+    newDock->resize( target->geometry().size() );
     if ( target->isVisibleToTLW() ) newDock->show();
   }
 
@@ -1110,7 +1110,7 @@ void PMDockWidget::setDockTabName( PMDockTabGroup* tab )
   tab->parentWidget()->setName( listOfName.utf8() );
   tab->parentWidget()->setCaption( listOfCaption );
 
-  tab->parentWidget()->tqrepaint( false ); // PMDockWidget->tqrepaint
+  tab->parentWidget()->repaint( false ); // PMDockWidget->repaint
   if ( tab->parentWidget()->parent() )
     if ( tab->parentWidget()->parent()->inherits("PMDockSplitter") )
       ((PMDockSplitter*)(tab->parentWidget()->parent()))->updateName();
@@ -1168,13 +1168,13 @@ void PMDockWidget::loseFormerBrotherDockWidget()
     TQObject::disconnect( formerBrotherDockWidget, TQT_SIGNAL(iMBeingClosed()),
                          this, TQT_SLOT(loseFormerBrotherDockWidget()) );
   formerBrotherDockWidget = 0L;
-  tqrepaint();
+  repaint();
 }
 
 void PMDockWidget::dockBack()
 {
   if( formerBrotherDockWidget) {
-    // search all tqchildren if it tries to dock back to a child
+    // search all children if it tries to dock back to a child
     bool found = false;
     TQObjectList* cl = queryList("PMDockWidget");
     TQObjectListIt it( *cl );
@@ -1319,18 +1319,18 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
    TQMainWindow's tqlayout all over the place
    The first child of the mainwindow is not necessarily a meaningful
    content widget but in TQt3's TQMainWindow it can easily be a TQToolBar.
-   In short: TQMainWindow knows how to tqlayout its tqchildren, no need to
+   In short: TQMainWindow knows how to tqlayout its children, no need to
    mess that up.
 
    >>>>>I need this in the PMDockArea at the moment (JoWenn)
 
-  if ( obj == main && event->type() == TQEvent::Resize && dynamic_cast<PMDockArea*>(main) && main->tqchildren() ){
+  if ( obj == main && event->type() == TQEvent::Resize && dynamic_cast<PMDockArea*>(main) && main->children() ){
 #ifndef NO_KDE2
-    kdDebug()<<"PMDockManager::eventFilter(): main is a PMDockArea and there are tqchildren"<<endl;
+    kdDebug()<<"PMDockManager::eventFilter(): main is a PMDockArea and there are children"<<endl;
 #endif
-    TQWidget* fc = (TQWidget*)main->tqchildren()->getFirst();
+    TQWidget* fc = (TQWidget*)main->children()->getFirst();
     if ( fc )
-      fc->setGeometry( TQRect(TQPoint(0,0), main->tqgeometry().size()) );
+      fc->setGeometry( TQRect(TQPoint(0,0), main->geometry().size()) );
   }
 */
 
@@ -1356,7 +1356,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
             findChildDockWidget( curdw, *childDockWidgetList );
 
             d->oldDragRect = TQRect();
-            d->dragRect = TQRect(curdw->tqgeometry());
+            d->dragRect = TQRect(curdw->geometry());
             TQPoint p = curdw->mapToGlobal(TQPoint(0,0));
             d->dragRect.moveTopLeft(p);
             drawDragRectangle();
@@ -1377,7 +1377,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
           if (d->readyToDrag) {
               d->readyToDrag = false;
               d->oldDragRect = TQRect();
-              d->dragRect = TQRect(curdw->tqgeometry());
+              d->dragRect = TQRect(curdw->geometry());
               TQPoint p = curdw->mapToGlobal(TQPoint(0,0));
               d->dragRect.moveTopLeft(p);
               drawDragRectangle();
@@ -1398,7 +1398,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
             break;
           } else {
             if (dropCancel && curdw) {
-              d->dragRect = TQRect(curdw->tqgeometry());
+              d->dragRect = TQRect(curdw->geometry());
               TQPoint p = curdw->mapToGlobal(TQPoint(0,0));
               d->dragRect.moveTopLeft(p);
             }else
@@ -1511,7 +1511,7 @@ void PMDockManager::findChildDockWidget( TQWidget*& ww, const TQWidget* p, const
     while ( it.current() ) {
       if ( it.current()->isWidgetType() ) {
         w = (TQWidget*)it.current();
-        if ( w->isVisible() && w->tqgeometry().contains(pos) ) {
+        if ( w->isVisible() && w->geometry().contains(pos) ) {
           if ( w->inherits("PMDockWidget") ) ww = w;
           findChildDockWidget( ww, w, w->mapFromParent(pos) );
           return;
@@ -1811,7 +1811,7 @@ void PMDockManager::writeConfig(TQDomElement &base)
         PMDockWidget *obj = getDockWidgetFromName( nList.current() );
         if (obj->isGroup && (nameList.find( obj->firstName.latin1() ) == -1
                              || nameList.find(obj->lastName.latin1()) == -1)) {
-            // Skip until tqchildren are saved (why?)
+            // Skip until children are saved (why?)
             nList.next();
             if ( !nList.current() ) nList.first();
             continue;
@@ -2039,7 +2039,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
         c->writeEntry( cname+":type", "GROUP");
         if ( !obj->parent() ){
           c->writeEntry( cname+":parent", "___null___");
-          c->writeEntry( cname+":tqgeometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
+          c->writeEntry( cname+":geometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
           c->writeEntry( cname+":visible", obj->isVisible());
         } else {
           c->writeEntry( cname+":parent", "yes");
@@ -2070,7 +2070,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
         c->writeEntry( cname+":type", "TAB_GROUP");
         if ( !obj->parent() ){
           c->writeEntry( cname+":parent", "___null___");
-          c->writeEntry( cname+":tqgeometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
+          c->writeEntry( cname+":geometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
           c->writeEntry( cname+":visible", obj->isVisible());
         } else {
           c->writeEntry( cname+":parent", "yes");
@@ -2090,7 +2090,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
 /*************************************************************************************************/
         if ( !obj->parent() ){
           c->writeEntry( cname+":type", "NULL_DOCK");
-          c->writeEntry( cname+":tqgeometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
+          c->writeEntry( cname+":geometry", TQRect(obj->frameGeometry().topLeft(), obj->size()) );
           c->writeEntry( cname+":visible", obj->isVisible());
         } else {
           c->writeEntry( cname+":type", "DOCK");
@@ -2200,7 +2200,7 @@ void PMDockManager::readConfig( KConfig* c, TQString group )
     }
 
     if ( type == "NULL_DOCK" || c->readEntry( oname + ":parent") == "___null___" ){
-      TQRect r = c->readRectEntry( oname + ":tqgeometry" );
+      TQRect r = c->readRectEntry( oname + ":geometry" );
       obj = getDockWidgetFromName( oname );
       obj->applyToWidget( 0L );
       obj->setGeometry(r);
@@ -2481,11 +2481,11 @@ void PMDockArea::resizeEvent(TQResizeEvent *rsize)
     delete list;
 #if 0
     PMDockSplitter *split;
-//    for (unsigned int i=0;i<tqchildren()->count();i++)
+//    for (unsigned int i=0;i<children()->count();i++)
     {
-//    	TQPtrList<TQObject> list(tqchildren());
-//       TQObject *obj=((TQPtrList<TQObject*>)tqchildren())->at(i);
-	TQObject *obj=tqchildren()->getFirst();
+//    	TQPtrList<TQObject> list(children());
+//       TQObject *obj=((TQPtrList<TQObject*>)children())->at(i);
+	TQObject *obj=children()->getFirst();
        if (split=dynamic_cast<PMDockSplitter*>(obj))
        {
           split->setGeometry( TQRect(TQPoint(0,0), size() ));

@@ -226,9 +226,9 @@ void ImageCanvas::newImage( TQImage *new_image )
    }
 
 
-   kdDebug(29000) << "going to tqrepaint!" << endl;
-   tqrepaint( true );
-   kdDebug(29000) << "tqrepaint ok" << endl;
+   kdDebug(29000) << "going to repaint!" << endl;
+   repaint( true );
+   kdDebug(29000) << "repaint ok" << endl;
 }
 
 TQSize ImageCanvas::sizeHint() const
@@ -295,7 +295,7 @@ void ImageCanvas::handle_popup( int item )
       default: break;
    }
    update_scaled_pixmap();
-   tqrepaint();
+   repaint();
 }
 
 
@@ -1022,7 +1022,7 @@ const TQString ImageCanvas::imageInfoString( int w, int h, int d )
         else
             return TQString("-");
     }
-    return i18n("%1x%2 pixel, %3 bit").tqarg(w).tqarg(h).tqarg(d);
+    return i18n("%1x%2 pixel, %3 bit").arg(w).arg(h).arg(d);
 }
 
 
@@ -1043,7 +1043,7 @@ const TQString ImageCanvas::scaleKindString()
         return i18n("Fit Height");
         break;
     case ZOOM:
-        return i18n("Zoom to %1 %%").tqarg( TQString::number(getScaleFactor()));
+        return i18n("Zoom to %1 %%").arg( TQString::number(getScaleFactor()));
         break;
     default:
         return i18n("Unknown scaling!");

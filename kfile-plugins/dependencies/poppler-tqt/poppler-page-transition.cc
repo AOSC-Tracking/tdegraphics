@@ -68,7 +68,7 @@ int PageTransition::duration() const
   return data->pt->getDuration();
 }
 
-PageTransition::Alignment PageTransition::tqalignment() const
+PageTransition::Alignment PageTransition::alignment() const
 {
   return (Poppler::PageTransition::Alignment)data->pt->getAlignment();
 }

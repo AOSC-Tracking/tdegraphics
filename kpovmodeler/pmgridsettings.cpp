@@ -133,22 +133,22 @@ bool PMGridSettings::validateData( )
 
 void PMGridSettings::applySettings( )
 {
-   bool tqrepaint = false;
+   bool repaint = false;
    PMRenderManager* rm = PMRenderManager::theManager( );
    if( rm->gridColor( ) != m_pGridColor->color( ) )
    {
       rm->setGridColor( m_pGridColor->color( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    if( rm->gridDistance( ) != m_pGridDistance->value( ) )
    {
       rm->setGridDistance( m_pGridDistance->value( ) );
-      tqrepaint = true;
+      repaint = true;
    }
    PMControlPoint::setMoveGrid( m_pMoveGrid->value( ) );
    PMControlPoint::setScaleGrid( m_pScaleGrid->value( ) );
    PMControlPoint::setRotateGrid( m_pRotateGrid->value( ) );
-   if( tqrepaint )
+   if( repaint )
       emit repaintViews( );
 }
 

@@ -96,7 +96,7 @@ void PMIsoSurfaceEdit::createTopWidgets( )
    hl->addWidget( new TQLabel( i18n( "Values:" ), this ) );
    for( i = 0; i < 3; i++ )
    {
-      hl->addWidget( new TQLabel( TQString( "P%1" ).tqarg( i ), this ) );
+      hl->addWidget( new TQLabel( TQString( "P%1" ).arg( i ), this ) );
       hl->addWidget( m_pEvaluateValue[i] );
    }
 

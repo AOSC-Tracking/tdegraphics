@@ -141,7 +141,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
 
     img_canvas->setDefaultScaleKind( ImageCanvas::DYNAMIC );
     img_canvas->enableContextMenu(true);
-    img_canvas->tqrepaint();
+    img_canvas->repaint();
     tqlayout->addWidget( img_canvas, 6 );
 
     /* Actions for the previewer zoom */
@@ -477,11 +477,11 @@ void Previewer::slNewDimen(TQRect r)
         selectionHeightMm = (overallHeight / 1000 * r.height());
 
    TQString s;
-   s = i18n("width %1 mm").tqarg( int(selectionWidthMm));
+   s = i18n("width %1 mm").arg( int(selectionWidthMm));
    emit(setScanWidth(s));
 
    kdDebug(29000) << "Setting new Dimension " << s << endl;
-   s = i18n("height %1 mm").tqarg(int(selectionHeightMm));
+   s = i18n("height %1 mm").arg(int(selectionHeightMm));
    emit(setScanHeight(s));
 
    recalcFileSize( );

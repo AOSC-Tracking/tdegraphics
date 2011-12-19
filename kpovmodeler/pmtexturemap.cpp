@@ -119,7 +119,7 @@ TQString PMTextureMapBase::valuesToString( ) const
       str.setNum( *it );
       ++it;
       for( ; it != m_mapValues.end( ); ++it )
-         str += TQString( " %1" ).tqarg( *it );
+         str += TQString( " %1" ).arg( *it );
    }
    return str;
 }

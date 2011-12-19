@@ -51,7 +51,7 @@ class SVGLineElementImpl;
  * one point and ends at another.
  *
  * For more info look here : <a href =
- * "http://www.w3.org/TR/SVG/tqshapes.html#CircleElement">9.5 The
+ * "http://www.w3.org/TR/SVG/shapes.html#CircleElement">9.5 The
  * 'line' element</a>.
  */
 class SVGLineElement : public SVGElement,

@@ -58,12 +58,12 @@ void PMOutputDevice::callSerialization( const PMObject* o, const PMMetaObject* m
       if( mo == o->metaObject( ) )
       {
          printError( i18n( "The object \"%1\" doesn't support %2." )
-                     .tqarg( o->description( ) ).tqarg( description( ) ) );
+                     .arg( o->description( ) ).arg( description( ) ) );
       }
       else
       {
          printError( i18n( "The class \"%1\" doesn't support %2." )
-                     .tqarg( o->description( ) ).tqarg( mo->className( ) ) );
+                     .arg( o->description( ) ).arg( mo->className( ) ) );
       }
    }
 }

@@ -451,17 +451,17 @@ void PMDialogEditBase::slotTexturePreview( )
       str << "union {\n";
       if( s_showBox )
       {
-         str << c_boxCode.tqarg( numObjects );
+         str << c_boxCode.arg( numObjects );
          numObjects++;
       }
       if( s_showCylinder )
       {
-         str << c_cylinderCode.tqarg( numObjects );
+         str << c_cylinderCode.arg( numObjects );
          numObjects++;
       }
       if( s_showSphere )
       {
-         str << c_sphereCode.tqarg( numObjects );
+         str << c_sphereCode.arg( numObjects );
          numObjects++;
       }
 
@@ -495,18 +495,18 @@ void PMDialogEditBase::slotTexturePreview( )
       {
          c1 = PMColor( s_wallColor1 );
          c2 = PMColor( s_wallColor2 );
-         str << c_wallCode.tqarg( c1.serialize( true ) ).tqarg( c2.serialize( true ) );
+         str << c_wallCode.arg( c1.serialize( true ) ).arg( c2.serialize( true ) );
       }
       if( s_showFloor )
       {
          c1 = PMColor( s_floorColor1 );
          c2 = PMColor( s_floorColor2 );
-         str << c_floorCode.tqarg( c1.serialize( true ) ).tqarg( c2.serialize( true ) );
+         str << c_floorCode.arg( c1.serialize( true ) ).arg( c2.serialize( true ) );
       }
 
       str << c_lightCode;
       str << c_cameraCode[numObjects-1];
-      str << c_globalSettingsCode.tqarg( s_previewGamma );
+      str << c_globalSettingsCode.arg( s_previewGamma );
 
       // Set the render mode
       mode.setHeight( s_previewSize );
@@ -540,7 +540,7 @@ void PMDialogEditBase::slotPreviewFinished( int exitStatus )
       KMessageBox::error( this, i18n( "Povray exited abnormally with "
                                       "exit code %1.\n"
                                       "See the povray output for details." )
-                          .tqarg( exitStatus ) );
+                          .arg( exitStatus ) );
    }
    else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
    {

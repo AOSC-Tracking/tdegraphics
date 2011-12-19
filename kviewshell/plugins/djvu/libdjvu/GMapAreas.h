@@ -86,12 +86,12 @@ namespace DJVU {
 
     The currently supported areas can be rectangular (\Ref{GMapRect}),
     elliptical (\Ref{GMapOval}) and polygonal (\Ref{GMapPoly}). Every
-    map area besides the definition of its tqshape contains information
+    map area besides the definition of its shape contains information
     about display style and optional {\bf URL}, which it may refer to.
     If this {\bf URL} is not empty then the map area will work like a
     hyperlink.
 
-    The classes also implement some useful functions to ease tqgeometry
+    The classes also implement some useful functions to ease geometry
     manipulations
 
     @memo Definition of base map area classes
@@ -247,10 +247,10 @@ public:
 
    virtual GUTF8String get_xmltag(const int height) const=0;
 
-      /// Virtual function returning the tqshape type.
-   virtual MapAreaType const get_tqshape_type( void ) const { return UNKNOWN; };
-      /// Virtual function returning the tqshape name.
-   virtual char const * const	get_tqshape_name(void) const=0;
+      /// Virtual function returning the shape type.
+   virtual MapAreaType const get_shape_type( void ) const { return UNKNOWN; };
+      /// Virtual function returning the shape name.
+   virtual char const * const	get_shape_name(void) const=0;
       /// Virtual function generating a copy of this object
    virtual GP<GMapArea>	get_copy(void) const=0;
       /// Virtual function generating a list of defining coordinates
@@ -305,7 +305,7 @@ public:
       /// Returns the height of the rectangle
    int		get_height(void) const { return ymax-ymin; }
 
-      /// Changes the #GMapRect#'s tqgeometry
+      /// Changes the #GMapRect#'s geometry
    GMapRect & operator=(const GRect & rect);
 
       /// Returns \Ref{GRect} describing the map area's rectangle
@@ -313,9 +313,9 @@ public:
    
    virtual GUTF8String get_xmltag(const int height) const;
       /// Returns MapRect
-   virtual MapAreaType const get_tqshape_type( void ) const { return RECT; };
+   virtual MapAreaType const get_shape_type( void ) const { return RECT; };
       /// Returns #"rect"#
-   virtual char const * const	get_tqshape_name(void) const;
+   virtual char const * const	get_shape_name(void) const;
       /// Returns a copy of the rectangle
    virtual GP<GMapArea>	get_copy(void) const;
       /// Virtual function maps rectangle from one area to another using mapper
@@ -392,9 +392,9 @@ public:
 
    virtual GUTF8String get_xmltag(const int height) const;
       /// Returns MapPoly
-   virtual MapAreaType const get_tqshape_type( void ) const { return POLY; };
+   virtual MapAreaType const get_shape_type( void ) const { return POLY; };
       /// Returns #"poly"# all the time
-   virtual char const * const 	get_tqshape_name(void) const;
+   virtual char const * const 	get_shape_name(void) const;
       /// Returns a copy of the polygon
    virtual GP<GMapArea>	get_copy(void) const;
       /// Virtual function generating a list of defining coordinates
@@ -458,9 +458,9 @@ public:
 
    virtual GUTF8String get_xmltag(const int height) const;
       /// Returns MapOval
-   virtual MapAreaType const get_tqshape_type( void ) const { return OVAL; };
+   virtual MapAreaType const get_shape_type( void ) const { return OVAL; };
       /// Returns #"oval"#
-   virtual char const * const get_tqshape_name(void) const;
+   virtual char const * const get_shape_name(void) const;
       /// Returns a copy of the oval
    virtual GP<GMapArea>	get_copy(void) const;
       /// Virtual function maps oval from one area to another using mapper
@@ -509,7 +509,7 @@ inline char const * const
 GMapRect::gma_check_object(void)  const{ return ""; }
 
 inline char const * const 
-GMapRect::get_tqshape_name(void) const { return RECT_TAG; }
+GMapRect::get_shape_name(void) const { return RECT_TAG; }
 
 inline int
 GMapPoly::get_points_num(void) const { return points; }
@@ -524,7 +524,7 @@ inline int
 GMapPoly::get_y(int i) const { return yy[i]; }
 
 inline char const * const
-GMapPoly::get_tqshape_name(void) const { return POLY_TAG; }
+GMapPoly::get_shape_name(void) const { return POLY_TAG; }
 
 inline int
 GMapOval::get_a(void) const { return a; }
@@ -551,7 +551,7 @@ inline int
 GMapOval::gma_get_ymax(void) const { return ymax; }
 
 inline char const * const
-GMapOval::get_tqshape_name(void) const { return OVAL_TAG; }
+GMapOval::get_shape_name(void) const { return OVAL_TAG; }
 
 //@}
 

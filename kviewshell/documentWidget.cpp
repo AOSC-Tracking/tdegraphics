@@ -147,7 +147,7 @@ void DocumentWidget::timerEvent( TQTimerEvent *e )
     animationCounter = 0;
   }
 
-  tqrepaint(flashRect, false);
+  repaint(flashRect, false);
 }
 
 
@@ -160,7 +160,7 @@ void DocumentWidget::flash(int fo)
     animationCounter = 10;
     TQRect flashRect = linkFlashRect();
     flashRect.addCoords(-1, -1, 1, 1);
-    tqrepaint(flashRect, false);
+    repaint(flashRect, false);
   }
   animationCounter = 0;
   flashOffset      = fo;
@@ -273,7 +273,7 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
     return;
   }
 
-  TQMemArray<TQRect> damagedRects = TQRegion(e->region()).tqrects();
+  TQMemArray<TQRect> damagedRects = TQRegion(e->region()).rects();
   for (unsigned int i = 0; i < damagedRects.count(); i++)
   {
     // Paint the page where it intersects with the damaged area.
@@ -345,7 +345,7 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
     p.setBrush(white);
     p.setRasterOp(TQt::XorROP);
 
-    TQMemArray<TQRect> selectionRects = selectedRegion.tqrects();
+    TQMemArray<TQRect> selectionRects = selectedRegion.rects();
 
     for (unsigned int i = 0; i < selectionRects.count(); i++)
       p.drawRect(selectionRects[i]);
@@ -545,7 +545,7 @@ void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
         if ( link.startsWith("#") )
           link = link.remove(0,1);
 
-        emit setStatusBarText( i18n("Link to %1").tqarg(link) );
+        emit setStatusBarText( i18n("Link to %1").arg(link) );
 
         indexOfUnderlinedLink = i;
         if (KVSPrefs::underlineLinks() == KVSPrefs::EnumUnderlineLinks::OnlyOnHover &&
@@ -661,10 +661,10 @@ void DocumentWidget::updateSelection(const TextSelection& newTextSelection)
 
       selectedRegion = newlySelectedRegion;
 
-      TQMemArray<TQRect> rectangles = updateRegion.tqrects();
+      TQMemArray<TQRect> rectangles = updateRegion.rects();
       for (unsigned int i = 0; i < rectangles.count(); i++)
       {
-        tqrepaint(rectangles[i]);
+        repaint(rectangles[i]);
       }
     }
   }

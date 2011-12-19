@@ -389,7 +389,7 @@ void kpToolPreviewDialog::updatePreview ()
         m_previewPixmapLabel->setPixmap (previewPixmap);
 
         // immediate update esp. for expensive previews
-        m_previewPixmapLabel->tqrepaint (false/*no erase*/);
+        m_previewPixmapLabel->repaint (false/*no erase*/);
 
 #if DEBUG_KP_TOOL_PREVIEW_DIALOG
     kdDebug () << "\tafter TQLabel::setPixmap() previewPixmapLabel: w="

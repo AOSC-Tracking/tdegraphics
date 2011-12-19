@@ -271,7 +271,7 @@ bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
   TQString   filename = fi.absFilePath();
   if (!fi.exists() || fi.isDir()) {
     KMessageBox::error( parentWidget,
-			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").tqarg(filename),
+			i18n("<qt><strong>File error.</strong> The specified file '%1' does not exist.</qt>").arg(filename),
 			i18n("File Error"));
     // the return value 'false' indicates that this operation was not successful.
     return false;
@@ -293,7 +293,7 @@ bool DjVuRenderer::setFile(const TQString &fname, const KURL &)
   if (!document)
   {
     KMessageBox::error( parentWidget,
-      i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").tqarg(filename),
+      i18n("<qt><strong>File error.</strong> The specified file '%1' could not be loaded.</qt>").arg(filename),
       i18n("File Error"));
 
     clear();
@@ -348,7 +348,7 @@ void DjVuRenderer::getAnnotations(RenderedDocumentPage* page, GP<DjVuImage> djvu
     for (GPosition pos = map; pos; ++pos)
     {
       // Currently we only support rectangular links
-      if (!map[pos]->get_tqshape_type() == GMapArea::RECT)
+      if (!map[pos]->get_shape_type() == GMapArea::RECT)
         continue;
 
       GRect rect = map[pos]->get_bound_rect();
@@ -461,7 +461,7 @@ GP<DjVuTXT> DjVuRenderer::getText(PageNumber pageNumber)
 
 void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& text, DjVuTXT::Zone& zone, TQSize& djvuPageSize)
 {
-  if (zone.tqchildren.isempty())
+  if (zone.children.isempty())
   {
     int pageWidth = page->width();
     int pageHeight = page->height();
@@ -481,9 +481,9 @@ void DjVuRenderer::fillInText(RenderedDocumentPage* page, const GP<DjVuTXT>& tex
   }
   else
   {
-    for (GPosition pos=zone.tqchildren; pos; ++pos)
+    for (GPosition pos=zone.children; pos; ++pos)
     {
-      fillInText(page, text, zone.tqchildren[pos], djvuPageSize);
+      fillInText(page, text, zone.children[pos], djvuPageSize);
     }
   }
 }
@@ -657,7 +657,7 @@ void DjVuRenderer::deletePages(TQ_UINT16 from, TQ_UINT16 to)
     for(TQ_UINT16 i=from; i<=to; i++) {
       document_new->remove_page(from-1); 
       pdialog->progressBar()->setProgress(i-from);
-      pdialog->progressBar()->setFormat(i18n("deleting page %1").tqarg(i));
+      pdialog->progressBar()->setFormat(i18n("deleting page %1").arg(i));
       kapp->processEvents();
     }
     delete pdialog;
@@ -705,7 +705,7 @@ void DjVuRenderer::printerInfoCallBack(int page_num, int page_count, int, DjVuTo
   KProgressDialog *pdialog = (KProgressDialog *)pd;
   
   pdialog->progressBar()->setProgress(page_count);
-  pdialog->progressBar()->setFormat(i18n("processing page %1").tqarg(page_num+1));
+  pdialog->progressBar()->setFormat(i18n("processing page %1").arg(page_num+1));
   pdialog->show();
   
   if (pdialog->wasCancelled())

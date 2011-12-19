@@ -1276,16 +1276,16 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 
 	if(redraw)
 	{
-		SVGShapeImpl *tqshape = dynamic_cast<SVGShapeImpl *>(m_object);
+		SVGShapeImpl *shape = dynamic_cast<SVGShapeImpl *>(m_object);
 		if(inherit)
 			processStyle();
 			
-		if(tqshape && tqshape->item())
+		if(shape && shape->item())
 		{
 			if(update > -1)
-				tqshape->item()->update(static_cast<CanvasItemUpdate>(update));
+				shape->item()->update(static_cast<CanvasItemUpdate>(update));
 			else if(m_object)
-				m_object->ownerDoc()->canvas()->tqinvalidate(tqshape->item(), false);
+				m_object->ownerDoc()->canvas()->invalidate(shape->item(), false);
 		}
 	}
 }
