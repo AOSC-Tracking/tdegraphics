@@ -153,7 +153,7 @@ void kpTool::createAction ()
     m_action = new kpToolAction (text (), iconName (), shortcutForKey (m_key),
                                  this, TQT_SLOT (slotActionActivated ()),
                                  m_mainWindow->actionCollection (), name ());
-    m_action->setExclusiveGroup (TQString::tqfromLatin1 ("Tool Box Actions"));
+    m_action->setExclusiveGroup (TQString::fromLatin1 ("Tool Box Actions"));
     m_action->setWhatsThis (description ());
 
     connect (m_action, TQT_SIGNAL (toolTipChanged (const TQString &)),
@@ -1046,7 +1046,7 @@ void kpTool::mouseMoveEvent (TQMouseEvent *e)
                << " viewUnderCursorTQt=" << (v1 ? v1->name () : "(none)")
                << " viewUnderStartPoint=" << (v2 ? v2->name () : "(none)")
                << endl;
-    kdDebug () << "\ttqfocusWidget=" << kapp->tqfocusWidget () << endl;
+    kdDebug () << "\tfocusWidget=" << kapp->focusWidget () << endl;
 #endif
 
     TQt::ButtonState buttonState = e->stateAfter ();
@@ -1652,7 +1652,7 @@ bool kpTool::warnIfBigImageSize (int oldWidth, int oldHeight,
             text,
             caption,
             continueButtonText,
-            TQString::tqfromLatin1 ("BigImageDontAskAgain"));
+            TQString::fromLatin1 ("BigImageDontAskAgain"));
 
         return (accept == KMessageBox::Continue);
     }

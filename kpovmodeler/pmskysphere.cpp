@@ -44,11 +44,11 @@ PMSkySphere::~PMSkySphere( )
 {
 }
 
-PMMetaObject* PMSkySphere::tqmetaObject( ) const
+PMMetaObject* PMSkySphere::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SkySphere", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "SkySphere", Base::metaObject( ),
                                         createNewSkySphere );
    }
    return s_pMetaObject;

@@ -209,11 +209,11 @@ void PMBicubicPatch::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBicubicPatch::tqmetaObject( ) const
+PMMetaObject* PMBicubicPatch::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "BicubicPatch", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "BicubicPatch", Base::metaObject( ),
                                         createNewBicubicPatch );
       s_pMetaObject->addProperty(
          new PMBicubicPatchProperty( "patchType", &PMBicubicPatch::setPatchType,

@@ -33,14 +33,14 @@ public:
    {
       m_info = info;
       m_enabled = info->enabled( );
-      settqStatus( );
+      setStatus( );
    }
-   void toggletqStatus( )
+   void toggleStatus( )
    {
       m_enabled = !m_enabled;
-      settqStatus( );
+      setStatus( );
    }
-   void settqStatus( )
+   void setStatus( )
    {
       if( m_enabled )
          setText( 2, i18n( "loaded" ) );
@@ -122,7 +122,7 @@ void PMPluginSettings::slotToggle( )
       ( PMPluginListViewItem* ) m_pPluginsList->currentItem( );
    if( item )
    {
-      item->toggletqStatus( );
+      item->toggleStatus( );
    
       if( item->m_enabled )
          m_pToggle->setText( i18n( "Deactivate" ) );

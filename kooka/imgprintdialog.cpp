@@ -127,7 +127,7 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* n
 
 
     TQWidget *spaceEater = new TQWidget( this );
-    spaceEater->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
+    spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
     tqlayout->addWidget( spaceEater );
 
     /* Set start values */

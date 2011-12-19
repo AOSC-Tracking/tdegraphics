@@ -277,7 +277,7 @@ void dviRenderer::showThatSourceInformationIsPresent()
     TQLabel *label2 = new TQLabel( i18n("<qt>This DVI file contains source file information. You may click into the text with the "
 				      "middle mouse button, and an editor will open the TeX-source file immediately.</qt>"),
 				 contents);
-    label2->setMinimumSize(label2->tqsizeHint());
+    label2->setMinimumSize(label2->sizeHint());
     lay->add( label2 );
     lay->addStretch(1);
     TQSize extraSize = TQSize(50,30);

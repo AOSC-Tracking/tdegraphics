@@ -905,7 +905,7 @@ bool PMInsertRuleSystem::canInsert( const PMObject* parentObject,
    bool possible = false;
 
    // find rules for target class
-   PMMetaObject* meta = parentObject->tqmetaObject( );
+   PMMetaObject* meta = parentObject->metaObject( );
    for( ; meta && !possible; meta = meta->superClass( ) )
    {
       PMRuleTargetClass* tc = m_rulesDict.find( meta->className( ) );
@@ -996,7 +996,7 @@ int PMInsertRuleSystem::canInsert( const PMObject* parentObject,
 
    // find rules for target class
    TQPtrList<PMRuleTargetClass> targetClassList;
-   PMMetaObject* meta = parentObject->tqmetaObject( );
+   PMMetaObject* meta = parentObject->metaObject( );
    for( ; meta; meta = meta->superClass( ) )
    {
       PMRuleTargetClass* tc = m_rulesDict.find( meta->className( ) );

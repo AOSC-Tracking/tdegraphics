@@ -543,7 +543,7 @@ void KImageCanvas::slotUpdateImage()
 
 		if( m_bSizeChanged || m_bNewImage )
 		{
-			TQSize sh = m_client->tqsizeHint();
+			TQSize sh = m_client->sizeHint();
 			if( ! sh.isValid() )
 				sh = TQSize( 0, 0 );
 			m_client->resize( sh );

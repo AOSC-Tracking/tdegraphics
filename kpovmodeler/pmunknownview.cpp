@@ -26,7 +26,7 @@ PMUnknownView::PMUnknownView( const TQString& viewType,
    TQHBoxLayout* hl = new TQHBoxLayout( this );
    TQLabel* l;
    l = new TQLabel( i18n( "Unknown view type \"%1\"" ).tqarg( viewType ), this );
-   l->tqsetAlignment( TQt::AlignCenter );
+   l->setAlignment( TQt::AlignCenter );
    hl->addWidget( l );
    m_viewType = viewType;
 }

@@ -222,10 +222,10 @@ void KIconEdit::writeConfig()
     saveMainWindowSettings( config, "MainWindowSettings" );
 }
 
-TQSize KIconEdit::tqsizeHint() const
+TQSize KIconEdit::sizeHint() const
 {
     if(gridview)
-        return gridview->tqsizeHint();
+        return gridview->sizeHint();
     else
         return TQSize(-1, -1);
 }

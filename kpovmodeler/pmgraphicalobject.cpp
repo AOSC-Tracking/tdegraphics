@@ -60,11 +60,11 @@ PMGraphicalObject::~PMGraphicalObject( )
 {
 }
 
-PMMetaObject* PMGraphicalObject::tqmetaObject( ) const
+PMMetaObject* PMGraphicalObject::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "GraphicalObject", Base::tqmetaObject( ) );
+      s_pMetaObject = new PMMetaObject( "GraphicalObject", Base::metaObject( ) );
       s_pMetaObject->addProperty(
          new PMGraphicalObjectProperty( "noShadow", &PMGraphicalObject::setNoShadow,
                          &PMGraphicalObject::noShadow ) );

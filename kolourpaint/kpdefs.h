@@ -65,71 +65,71 @@
 // Settings
 //
 
-#define kpSettingsGroupGeneral TQString::tqfromLatin1 ("General Settings")
-#define kpSettingFirstTime TQString::tqfromLatin1 ("First Time")
-#define kpSettingShowGrid TQString::tqfromLatin1 ("Show Grid")
-#define kpSettingShowPath TQString::tqfromLatin1 ("Show Path")
-#define kpSettingColorSimilarity TQString::tqfromLatin1 ("Color Similarity")
-#define kpSettingDitherOnOpen TQString::tqfromLatin1 ("Dither on Open if Screen is 15/16bpp and Image Num Colors More Than")
-#define kpSettingPrintImageCenteredOnPage TQString::tqfromLatin1 ("Print Image Centered On Page")
+#define kpSettingsGroupGeneral TQString::fromLatin1 ("General Settings")
+#define kpSettingFirstTime TQString::fromLatin1 ("First Time")
+#define kpSettingShowGrid TQString::fromLatin1 ("Show Grid")
+#define kpSettingShowPath TQString::fromLatin1 ("Show Path")
+#define kpSettingColorSimilarity TQString::fromLatin1 ("Color Similarity")
+#define kpSettingDitherOnOpen TQString::fromLatin1 ("Dither on Open if Screen is 15/16bpp and Image Num Colors More Than")
+#define kpSettingPrintImageCenteredOnPage TQString::fromLatin1 ("Print Image Centered On Page")
 
-#define kpSettingsGroupFileSaveAs TQString::tqfromLatin1 ("File/Save As")
-#define kpSettingsGroupFileExport TQString::tqfromLatin1 ("File/Export")
-#define kpSettingsGroupEditCopyTo TQString::tqfromLatin1 ("Edit/Copy To")
+#define kpSettingsGroupFileSaveAs TQString::fromLatin1 ("File/Save As")
+#define kpSettingsGroupFileExport TQString::fromLatin1 ("File/Export")
+#define kpSettingsGroupEditCopyTo TQString::fromLatin1 ("Edit/Copy To")
 
-#define kpSettingForcedMimeType TQString::tqfromLatin1 ("Forced MimeType")
-#define kpSettingForcedColorDepth TQString::tqfromLatin1 ("Forced Color Depth")
-#define kpSettingForcedDither TQString::tqfromLatin1 ("Forced Dither")
-#define kpSettingForcedQuality TQString::tqfromLatin1 ("Forced Quality")
+#define kpSettingForcedMimeType TQString::fromLatin1 ("Forced MimeType")
+#define kpSettingForcedColorDepth TQString::fromLatin1 ("Forced Color Depth")
+#define kpSettingForcedDither TQString::fromLatin1 ("Forced Dither")
+#define kpSettingForcedQuality TQString::fromLatin1 ("Forced Quality")
 
-#define kpSettingLastDocSize TQString::tqfromLatin1 ("Last Document Size")
+#define kpSettingLastDocSize TQString::fromLatin1 ("Last Document Size")
 
-#define kpSettingMoreEffectsLastEffect TQString::tqfromLatin1 ("More Effects - Last Effect")
+#define kpSettingMoreEffectsLastEffect TQString::fromLatin1 ("More Effects - Last Effect")
 
-#define kpSettingResizeScaleLastKeepAspect TQString::tqfromLatin1 ("Resize Scale - Last Keep Aspect")
-
-
-#define kpSettingsGroupMimeTypeProperties TQString::tqfromLatin1 ("MimeType Properties Version 1.2-2")
-#define kpSettingMimeTypeMaximumColorDepth TQString::tqfromLatin1 ("Maximum Color Depth")
-#define kpSettingMimeTypeHasConfigurableColorDepth TQString::tqfromLatin1 ("Configurable Color Depth")
-#define kpSettingMimeTypeHasConfigurableQuality TQString::tqfromLatin1 ("Configurable Quality Setting")
+#define kpSettingResizeScaleLastKeepAspect TQString::fromLatin1 ("Resize Scale - Last Keep Aspect")
 
 
-#define kpSettingsGroupUndoRedo TQString::tqfromLatin1 ("Undo/Redo Settings")
-#define kpSettingUndoMinLimit TQString::tqfromLatin1 ("Min Limit")
-#define kpSettingUndoMaxLimit TQString::tqfromLatin1 ("Max Limit")
-#define kpSettingUndoMaxLimitSizeLimit TQString::tqfromLatin1 ("Max Limit Size Limit")
+#define kpSettingsGroupMimeTypeProperties TQString::fromLatin1 ("MimeType Properties Version 1.2-2")
+#define kpSettingMimeTypeMaximumColorDepth TQString::fromLatin1 ("Maximum Color Depth")
+#define kpSettingMimeTypeHasConfigurableColorDepth TQString::fromLatin1 ("Configurable Color Depth")
+#define kpSettingMimeTypeHasConfigurableQuality TQString::fromLatin1 ("Configurable Quality Setting")
 
 
-#define kpSettingsGroupThumbnail TQString::tqfromLatin1 ("Thumbnail Settings")
-#define kpSettingThumbnailShown TQString::tqfromLatin1 ("Shown")
-#define kpSettingThumbnailGeometry TQString::tqfromLatin1 ("Geometry")
-#define kpSettingThumbnailZoomed TQString::tqfromLatin1 ("Zoomed")
-#define kpSettingThumbnailShowRectangle TQString::tqfromLatin1 ("ShowRectangle")
+#define kpSettingsGroupUndoRedo TQString::fromLatin1 ("Undo/Redo Settings")
+#define kpSettingUndoMinLimit TQString::fromLatin1 ("Min Limit")
+#define kpSettingUndoMaxLimit TQString::fromLatin1 ("Max Limit")
+#define kpSettingUndoMaxLimitSizeLimit TQString::fromLatin1 ("Max Limit Size Limit")
 
 
-#define kpSettingsGroupPreviewSave TQString::tqfromLatin1 ("Save Preview Settings")
-#define kpSettingPreviewSaveGeometry TQString::tqfromLatin1 ("Geometry")
-#define kpSettingPreviewSaveUpdateDelay TQString::tqfromLatin1 ("Update Delay")
+#define kpSettingsGroupThumbnail TQString::fromLatin1 ("Thumbnail Settings")
+#define kpSettingThumbnailShown TQString::fromLatin1 ("Shown")
+#define kpSettingThumbnailGeometry TQString::fromLatin1 ("Geometry")
+#define kpSettingThumbnailZoomed TQString::fromLatin1 ("Zoomed")
+#define kpSettingThumbnailShowRectangle TQString::fromLatin1 ("ShowRectangle")
 
 
-#define kpSettingsGroupTools TQString::tqfromLatin1 ("Tool Settings")
-#define kpSettingLastTool TQString::tqfromLatin1 ("Last Used Tool")
-#define kpSettingToolBoxIconSize TQString::tqfromLatin1 ("Tool Box Icon Size")
+#define kpSettingsGroupPreviewSave TQString::fromLatin1 ("Save Preview Settings")
+#define kpSettingPreviewSaveGeometry TQString::fromLatin1 ("Geometry")
+#define kpSettingPreviewSaveUpdateDelay TQString::fromLatin1 ("Update Delay")
 
 
-#define kpSettingsGroupText TQString::tqfromLatin1 ("Text Settings")
-#define kpSettingFontFamily TQString::tqfromLatin1 ("Font Family")
-#define kpSettingFontSize TQString::tqfromLatin1 ("Font Size")
-#define kpSettingBold TQString::tqfromLatin1 ("Bold")
-#define kpSettingItalic TQString::tqfromLatin1 ("Italic")
-#define kpSettingUnderline TQString::tqfromLatin1 ("Underline")
-#define kpSettingStrikeThru TQString::tqfromLatin1 ("Strike Thru")
+#define kpSettingsGroupTools TQString::fromLatin1 ("Tool Settings")
+#define kpSettingLastTool TQString::fromLatin1 ("Last Used Tool")
+#define kpSettingToolBoxIconSize TQString::fromLatin1 ("Tool Box Icon Size")
 
 
-#define kpSettingsGroupFlattenEffect TQString::tqfromLatin1 ("Flatten Effect Settings")
-#define kpSettingFlattenEffectColor1 TQString::tqfromLatin1 ("Color1")
-#define kpSettingFlattenEffectColor2 TQString::tqfromLatin1 ("Color2")
+#define kpSettingsGroupText TQString::fromLatin1 ("Text Settings")
+#define kpSettingFontFamily TQString::fromLatin1 ("Font Family")
+#define kpSettingFontSize TQString::fromLatin1 ("Font Size")
+#define kpSettingBold TQString::fromLatin1 ("Bold")
+#define kpSettingItalic TQString::fromLatin1 ("Italic")
+#define kpSettingUnderline TQString::fromLatin1 ("Underline")
+#define kpSettingStrikeThru TQString::fromLatin1 ("Strike Thru")
+
+
+#define kpSettingsGroupFlattenEffect TQString::fromLatin1 ("Flatten Effect Settings")
+#define kpSettingFlattenEffectColor1 TQString::fromLatin1 ("Color1")
+#define kpSettingFlattenEffectColor2 TQString::fromLatin1 ("Color2")
 
 
 //
@@ -140,11 +140,11 @@
 //
 // This key only exists if the document does.  If it exists, it can be empty.
 // The URL need not point to a file that exists e.g. "kolourpaint doesnotexist.png".
-#define kpSessionSettingDocumentUrl TQString::tqfromLatin1 ("Session Document Url")
+#define kpSessionSettingDocumentUrl TQString::fromLatin1 ("Session Document Url")
 
 // The size of a document which is not from a URL e.g. "kolourpaint doesnotexist.png".
 // This key does not exist for documents from URLs.
-#define kpSessionSettingNotFromUrlDocumentSize TQString::tqfromLatin1 ("Session Not-From-Url Document Size")
+#define kpSessionSettingNotFromUrlDocumentSize TQString::fromLatin1 ("Session Not-From-Url Document Size")
 
 
 #endif  // __kp_defs_h__

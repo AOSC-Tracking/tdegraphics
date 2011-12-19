@@ -186,7 +186,7 @@ TQStringList MainPage::difference( const TQStringList& oldIndexDirs,
 {
     TQStringList result;
 
-    TQString slash = TQString::tqfromLatin1("/");
+    TQString slash = TQString::fromLatin1("/");
     TQStringList::ConstIterator oldIt = oldIndexDirs.begin();
     TQString oldDir, newDir;
 

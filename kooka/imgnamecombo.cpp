@@ -51,7 +51,7 @@ ImageNameCombo::~ImageNameCombo()
 
 void ImageNameCombo::slotPathRemove( KFileTreeBranch *branch, const TQString& relPath )
 {
-   TQString path = branch->name() + TQString::tqfromLatin1(" - ") + relPath;
+   TQString path = branch->name() + TQString::fromLatin1(" - ") + relPath;
 
    kdDebug(28000) << "ImageNameCombo: Removing " << path << endl;
    TQString select = currentText();
@@ -82,7 +82,7 @@ void ImageNameCombo::slotGalleryPathChanged( KFileTreeBranch* branch, const TQSt
 {
    TQString newPath;
 
-   newPath = branch->name() + TQString::tqfromLatin1(" - ") + relativPath;
+   newPath = branch->name() + TQString::fromLatin1(" - ") + relativPath;
 
    kdDebug( 28000) << "Inserting " << newPath << " to combobox" << endl;
 

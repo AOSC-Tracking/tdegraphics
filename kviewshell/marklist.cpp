@@ -284,7 +284,7 @@ MarkList::MarkList(TQWidget* parent, const char* name)
   setVScrollBarMode(TQScrollView::AlwaysOn);
   setHScrollBarMode(TQScrollView::AlwaysOff);
 
-  tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
+  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
 
   viewport()->setBackgroundMode(TQt::PaletteBase);
   enableClipper(true);

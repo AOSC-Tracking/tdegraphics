@@ -592,7 +592,7 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
                     TQImage blendedImage = blendedPixmap.convertToImage();
                     KImageEffect::blend( selBlendColor.dark(140), blendedImage, 0.2 );
                     // copy the blended pixmap back to its place
-                    pixmapPainter.tqdrawPixmap( blendRect.left(), blendRect.top(), blendedImage );
+                    pixmapPainter.drawPixmap( blendRect.left(), blendRect.top(), blendedImage );
                 }
                 // draw border (red if the selection is too small)
                 pixmapPainter.setPen( selBlendColor );
@@ -1105,16 +1105,16 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
             for ( ; iIt != iEnd; ++iIt )
             {
                 PageViewItem * item = *iIt;
-                const TQRect & tqitemRect = item->tqgeometry();
-                if ( selectionRect.intersects( tqitemRect ) )
+                const TQRect & itemRect = item->tqgeometry();
+                if ( selectionRect.intersects( itemRect ) )
                 {
                     // request the textpage if there isn't one
                     const KPDFPage * kpdfPage = item->page();
                     if ( !kpdfPage->hasSearchPage() )
                         d->document->requestTextPage( kpdfPage->number() );
-                    // grab text in the rect that intersects tqitemRect
-                    TQRect relativeRect = selectionRect.intersect( tqitemRect );
-                    relativeRect.moveBy( -tqitemRect.left(), -tqitemRect.top() );
+                    // grab text in the rect that intersects itemRect
+                    TQRect relativeRect = selectionRect.intersect( itemRect );
+                    relativeRect.moveBy( -itemRect.left(), -itemRect.top() );
                     NormalizedRect normRect( relativeRect, item->width(), item->height() );
                     selectedText += kpdfPage->getText( normRect );
                 }

@@ -147,7 +147,7 @@ public:
    bool isDataValid( );
 
    /** */
-   virtual TQSize tqsizeHint( ) const;
+   virtual TQSize sizeHint( ) const;
    /** */
    bool eventFilter( TQObject* o, TQEvent* e );
 

@@ -56,7 +56,7 @@ public:
     * Returns the encoded payload of this object, in the
     * specified MIME format.
     */
-   virtual TQByteArray tqencodedData( const char* ) const;
+   virtual TQByteArray encodedData( const char* ) const;
    /**
     * Returns the ith format, or NULL.
     */

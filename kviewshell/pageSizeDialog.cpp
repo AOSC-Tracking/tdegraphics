@@ -31,7 +31,7 @@ pageSizeDialog::pageSizeDialog( TQWidget *parent, pageSize *userPrefdPageSize, c
 {
   userPreferredPageSize = userPrefdPageSize;
   pageSizeW = new pageSizeWidget(this, "PageSizeWidget");
-  pageSizeW->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)3, (TQSizePolicy::SizeType)3, 0, 0, 
+  pageSizeW->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)3, (TQSizePolicy::SizeType)3, 0, 0, 
 					 pageSizeW->sizePolicy().hasHeightForWidth() ) );
   setMainWidget(pageSizeW);
 }

@@ -393,7 +393,7 @@ void PMPovrayRenderWidget::cleanup( )
    m_pTempFile = 0;
 }
 
-TQSize PMPovrayRenderWidget::tqsizeHint( ) const
+TQSize PMPovrayRenderWidget::sizeHint( ) const
 {
    TQSize s;
    if( m_image.isNull( ) )
@@ -401,7 +401,7 @@ TQSize PMPovrayRenderWidget::tqsizeHint( ) const
    else
       s = m_image.size( );
 
-   return s.expandedTo( tqminimumSize( ) );
+   return s.expandedTo( minimumSize( ) );
 }
 
 void PMPovrayRenderWidget::saveConfig( KConfig* cfg )

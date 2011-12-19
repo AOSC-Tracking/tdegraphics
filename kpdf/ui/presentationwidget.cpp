@@ -837,14 +837,14 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::BlindsHorizontal:
         {
             KPDFPageTransition transition( KPDFPageTransition::Blinds );
-            transition.tqsetAlignment( KPDFPageTransition::Horizontal );
+            transition.setAlignment( KPDFPageTransition::Horizontal );
             return transition;
             break;
         }
         case KpdfSettings::EnumSlidesTransition::BlindsVertical:
         {
             KPDFPageTransition transition( KPDFPageTransition::Blinds );
-            transition.tqsetAlignment( KPDFPageTransition::Vertical );
+            transition.setAlignment( KPDFPageTransition::Vertical );
             return transition;
             break;
         }
@@ -896,7 +896,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitHorizontalIn:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Horizontal );
+            transition.setAlignment( KPDFPageTransition::Horizontal );
             transition.setDirection( KPDFPageTransition::Inward );
             return transition;
             break;
@@ -904,7 +904,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitHorizontalOut:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Horizontal );
+            transition.setAlignment( KPDFPageTransition::Horizontal );
             transition.setDirection( KPDFPageTransition::Outward );
             return transition;
             break;
@@ -912,7 +912,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitVerticalIn:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Vertical );
+            transition.setAlignment( KPDFPageTransition::Vertical );
             transition.setDirection( KPDFPageTransition::Inward );
             return transition;
             break;
@@ -920,7 +920,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         case KpdfSettings::EnumSlidesTransition::SplitVerticalOut:
         {
             KPDFPageTransition transition( KPDFPageTransition::Split );
-            transition.tqsetAlignment( KPDFPageTransition::Vertical );
+            transition.setAlignment( KPDFPageTransition::Vertical );
             transition.setDirection( KPDFPageTransition::Outward );
             return transition;
             break;

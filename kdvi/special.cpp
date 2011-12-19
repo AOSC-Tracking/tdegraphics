@@ -453,7 +453,7 @@ void dviRenderer::TPIC_flushPath_special()
 
   TQPen pen(TQt::black, (int)(penWidth_in_mInch*resolutionInDPI/1000.0 + 0.5));  // Sets the pen size in milli-inches
   foreGroundPainter->setPen(pen);
-  foreGroundPainter->tqdrawPolyline(TPIC_path, 0, number_of_elements_in_path);
+  foreGroundPainter->drawPolyline(TPIC_path, 0, number_of_elements_in_path);
   number_of_elements_in_path = 0;
 }
 

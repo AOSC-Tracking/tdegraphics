@@ -140,7 +140,7 @@ public:
 
   PageNumber numberOfPages() { return widgetList.count(); }
 
-  virtual TQSize tqsizeHint() const { return TQSize(); }
+  virtual TQSize sizeHint() const { return TQSize(); }
 
 public slots:
   void setNumberOfPages(int numberOfPages, bool showThumbnails = true);

@@ -70,7 +70,7 @@ KPrintDialogPage_DJVUPageOptions::KPrintDialogPage_DJVUPageOptions( TQWidget *pa
 
   kprintDialogPage_pageoptions_baseLayout->addStretch();
 
-  resize( TQSize(319, 166).expandedTo(tqminimumSizeHint()) );
+  resize( TQSize(319, 166).expandedTo(minimumSizeHint()) );
   clearWState( WState_Polished );
 }
 

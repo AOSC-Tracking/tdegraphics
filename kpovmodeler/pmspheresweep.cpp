@@ -216,11 +216,11 @@ void PMSphereSweep::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMSphereSweep::tqmetaObject( ) const
+PMMetaObject* PMSphereSweep::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SphereSweep", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "SphereSweep", Base::metaObject( ),
                                         createNewSphereSweep );
       s_pMetaObject->addProperty(
          new PMSphereSweepProperty( "tolerance", &PMSphereSweep::setTolerance, &PMSphereSweep::tolerance ) );

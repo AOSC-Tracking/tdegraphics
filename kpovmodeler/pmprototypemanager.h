@@ -111,13 +111,13 @@ public:
     * not exist.
     * @see PMMetaObject
     */
-   PMMetaObject* tqmetaObject( const TQString& name ) const;
+   PMMetaObject* metaObject( const TQString& name ) const;
    /**
     * Returns true if the class exists
     */
    bool existsClass( const TQString& name ) const
    {
-      return tqmetaObject( name );
+      return metaObject( name );
    }
    /**
     * Returns true if the second class is a base class for

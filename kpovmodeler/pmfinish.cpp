@@ -130,11 +130,11 @@ PMFinish::~PMFinish( )
 {
 }
 
-PMMetaObject* PMFinish::tqmetaObject( ) const
+PMMetaObject* PMFinish::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Finish", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Finish", Base::metaObject( ),
                                         createNewFinish );
       s_pMetaObject->addProperty(
          new PMFinishProperty( "ambientColor", &PMFinish::setAmbientColor, &PMFinish::ambientColor ) );

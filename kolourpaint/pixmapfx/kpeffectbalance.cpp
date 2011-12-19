@@ -277,7 +277,7 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
     // TODO: This doesn't seem to be wide enough with some fonts so the
     //       whole tqlayout moves when we drag the gamma slider.
     m_gammaLabel->setMinimumWidth (m_gammaLabel->fontMetrics ().width (" 10.00 "));
-    m_gammaLabel->tqsetAlignment (m_gammaLabel->tqalignment () | TQt::AlignRight);
+    m_gammaLabel->setAlignment (m_gammaLabel->tqalignment () | TQt::AlignRight);
     TQPushButton *gammaResetPushButton = new TQPushButton (i18n ("Rese&t"), this);
 
 

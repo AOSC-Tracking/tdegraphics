@@ -293,7 +293,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	connect(m_modelSel, TQT_SIGNAL(selectionChanged(TQListViewItem *)),
         TQT_SLOT(slot_setModel(TQListViewItem *)));
 	// make sure listview only as wide as it needs to be
-	m_modelSel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Maximum,
+	m_modelSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Maximum,
 		TQSizePolicy::Preferred));
 
 	TQVBoxLayout *rightLayout = new TQVBoxLayout(0L, 0, KDialog::spacingHint());
@@ -347,7 +347,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	for (int i = 0; i < gphoto_ports; i++) {
 		if (gp_port_info_list_get_info(list, i, &info) >= 0) {
 			if (strncmp(info.path, "serial:", 7) == 0)
-				m_serialPortCombo->insertItem(TQString::tqfromLatin1(info.path).mid(7));
+				m_serialPortCombo->insertItem(TQString::fromLatin1(info.path).mid(7));
 		}
 	}
 	gp_port_info_list_free(list);

@@ -55,7 +55,7 @@ void PMOutputDevice::callSerialization( const PMObject* o, const PMMetaObject* m
       info->call( o, mo, this );
    else
    {
-      if( mo == o->tqmetaObject( ) )
+      if( mo == o->metaObject( ) )
       {
          printError( i18n( "The object \"%1\" doesn't support %2." )
                      .tqarg( o->description( ) ).tqarg( description( ) ) );
@@ -70,7 +70,7 @@ void PMOutputDevice::callSerialization( const PMObject* o, const PMMetaObject* m
 
 void PMOutputDevice::serialize( PMObject* o )
 {
-   callSerialization( o, o->tqmetaObject( ) );
+   callSerialization( o, o->metaObject( ) );
 }
 
 void PMOutputDevice::close( )

@@ -289,7 +289,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
             // Ordinary flicker is better than the whole view moving
             TQPainter p (m_mainView);
             p.fillRect (m_mainView->rect (),
-                        m_scrollView->viewport ()->tqcolorGroup ().background ());
+                        m_scrollView->viewport ()->colorGroup ().background ());
         }
     }
 

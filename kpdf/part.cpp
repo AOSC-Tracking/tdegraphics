@@ -151,7 +151,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	connect( m_document, TQT_SIGNAL( openURL(const KURL &) ), this, TQT_SLOT( openURLFromDocument(const KURL &) ) );
 	connect( m_document, TQT_SIGNAL( close() ), this, TQT_SLOT( close() ) );
 	
-	if (parent && parent->tqmetaObject()->slotNames(true).contains("slotQuit()"))
+	if (parent && parent->metaObject()->slotNames(true).contains("slotQuit()"))
 		connect( m_document, TQT_SIGNAL( quit() ), parent, TQT_SLOT( slotQuit() ) );
 	else
 		connect( m_document, TQT_SIGNAL( quit() ), this, TQT_SLOT( cannotQuit() ) );

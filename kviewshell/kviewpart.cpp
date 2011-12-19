@@ -96,7 +96,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
     // If a default MimeType is specified try to load a MultiPage supporting it.
     TQString defaultMimeType = args.first();
     offers = KTrader::self()->query(
-        TQString::tqfromLatin1("KViewShell/MultiPage" ),
+        TQString::fromLatin1("KViewShell/MultiPage" ),
         TQString("([X-KDE-MultiPageVersion] == %1) and "
                 "([X-KDE-MimeTypes] == '%2')").tqarg(MULTIPAGE_VERSION).tqarg(defaultMimeType));
   }
@@ -105,7 +105,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   if (offers.isEmpty())
   {
     offers = KTrader::self()->query(
-        TQString::tqfromLatin1("KViewShell/MultiPage" ),
+        TQString::fromLatin1("KViewShell/MultiPage" ),
         TQString("([X-KDE-MultiPageVersion] == %1) and "
                 "([X-KDE-EmptyMultiPage] == 1)").tqarg(MULTIPAGE_VERSION));
   }
@@ -471,7 +471,7 @@ TQStringList KViewPart::supportedMimeTypes()
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      TQString::tqfromLatin1("KViewShell/MultiPage"),
+      TQString::fromLatin1("KViewShell/MultiPage"),
       TQString("([X-KDE-MultiPageVersion] == %1)").tqarg(MULTIPAGE_VERSION)
   );
 
@@ -516,7 +516,7 @@ TQStringList KViewPart::fileFormats() const
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      TQString::tqfromLatin1("KViewShell/MultiPage"),
+      TQString::fromLatin1("KViewShell/MultiPage"),
       TQString("([X-KDE-MultiPageVersion] == %1)").tqarg(MULTIPAGE_VERSION)
   );
 
@@ -768,7 +768,7 @@ bool KViewPart::openFile()
 
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
-      TQString::tqfromLatin1("KViewShell/MultiPage" ),
+      TQString::fromLatin1("KViewShell/MultiPage" ),
   TQString("([X-KDE-MultiPageVersion] == %1) and "
           "([X-KDE-MimeTypes] == '%2')").tqarg(MULTIPAGE_VERSION).tqarg(mimetype->name()));
 

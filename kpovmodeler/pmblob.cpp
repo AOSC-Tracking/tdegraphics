@@ -77,11 +77,11 @@ void PMBlob::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMBlob::tqmetaObject( ) const
+PMMetaObject* PMBlob::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Blob", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Blob", Base::metaObject( ),
                                         createNewBlob );
       s_pMetaObject->addProperty(
          new PMBlobProperty( "threshold", &PMBlob::setThreshold, &PMBlob::threshold ) );

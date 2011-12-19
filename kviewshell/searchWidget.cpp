@@ -41,7 +41,7 @@ SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
 {
   setName("SearchWidget");
 
-  tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed);
+  setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed);
 
   tqlayout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
 

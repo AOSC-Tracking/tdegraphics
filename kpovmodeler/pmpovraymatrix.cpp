@@ -72,11 +72,11 @@ void PMPovrayMatrix::readAttributes( const PMXMLHelper& h )
    m_values.resize( 12 );
 }
 
-PMMetaObject* PMPovrayMatrix::tqmetaObject( ) const
+PMMetaObject* PMPovrayMatrix::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "PovrayMatrix", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "PovrayMatrix", Base::metaObject( ),
                                         createNewPovrayMatrix );
       s_pMetaObject->addProperty(
          new PMPovrayMatrixProperty( "values", &PMPovrayMatrix::setValues, &PMPovrayMatrix::values ) );

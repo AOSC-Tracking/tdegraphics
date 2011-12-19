@@ -82,10 +82,10 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
   }
 
   // current width: left column + right column + dialog borders
-  int width = tqlayout->tqminimumSize().width() + valMaxWidth + marginHint() + spacingHint() + marginHint() + 30;
+  int width = tqlayout->minimumSize().width() + valMaxWidth + marginHint() + spacingHint() + marginHint() + 30;
   if (page2Layout)
   {
-    width = TQMAX( width, page2Layout->tqsizeHint().width() + marginHint() + spacingHint() + 31 );
+    width = TQMAX( width, page2Layout->sizeHint().width() + marginHint() + spacingHint() + 31 );
   }
   // stay inside the 2/3 of the screen width
   TQRect screenContainer = KGlobalSettings::desktopGeometry( this );

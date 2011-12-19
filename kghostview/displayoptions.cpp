@@ -76,7 +76,7 @@ TQString DisplayOptions::toString( const DisplayOptions& options )
 
 bool DisplayOptions::fromString( DisplayOptions& out, const TQString& in )
 {
-	TQRegExp regex( TQString::tqfromLatin1( rformat ) );
+	TQRegExp regex( TQString::fromLatin1( rformat ) );
 	if ( regex.search( in ) < 0 ) return false;
 
 	out.reset();

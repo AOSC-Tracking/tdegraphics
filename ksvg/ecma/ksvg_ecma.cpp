@@ -38,16 +38,16 @@
 using namespace KSVG;
 using namespace KJS;
 
-class AsynctqStatus : public ObjectImp
+class AsyncStatus : public ObjectImp
 {
 public:
-	AsynctqStatus() : ObjectImp() { }
+	AsyncStatus() : ObjectImp() { }
 
 	virtual bool implementsCall() const { return true; }
 	virtual Value call(ExecState *exec, Object &thisObj, const List &args);
 };
 
-Value AsynctqStatus::call(ExecState *exec, Object &, const List &args)
+Value AsyncStatus::call(ExecState *exec, Object &, const List &args)
 {
 	kdDebug(26004) << "[AsyncStatus] " << args[0].toString(exec).ascii() << endl;
 
@@ -194,7 +194,7 @@ void KSVGEcma::finishedWithEvent(SVGEventImpl *event)
 
 Value KSVGEcma::getUrl(ExecState *exec, ::KURL url)
 {
-	Object *status = new Object(new AsynctqStatus());
+	Object *status = new Object(new AsyncStatus());
 
 	// FIXME: Security issue, allows local testing of getURL(), REMOVE BEFORE RELEASE! (Niko)
 	TQString svgDocument = KSVGLoader::getUrl(url, true);
@@ -214,7 +214,7 @@ Value KSVGEcma::getUrl(ExecState *exec, ::KURL url)
 
 void KSVGEcma::postUrl(ExecState *exec, ::KURL url, const TQString &data, const TQString &mimeType, const TQString &contentEncoding, Object &callBackFunction)
 {
-	Object *status = new Object(new AsynctqStatus());
+	Object *status = new Object(new AsyncStatus());
 	status->put(exec, Identifier("content"), String(""));
     status->put(exec, Identifier("success"), Boolean(false));
 

@@ -165,11 +165,11 @@ void PMCamera::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMCamera::tqmetaObject( ) const
+PMMetaObject* PMCamera::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Camera", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Camera", Base::metaObject( ),
                                         createNewCamera );
       s_pMetaObject->addProperty(
          new PMCameraProperty( "location", &PMCamera::setLocation,

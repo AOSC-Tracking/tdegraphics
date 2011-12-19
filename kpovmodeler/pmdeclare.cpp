@@ -47,11 +47,11 @@ PMDeclare::PMDeclare( const PMDeclare& d )
    // base constuctor when the tqchildren are copied
 }
 
-PMMetaObject* PMDeclare::tqmetaObject( ) const
+PMMetaObject* PMDeclare::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Declare", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Declare", Base::metaObject( ),
                                         createNewDeclare );
       s_pMetaObject->addProperty(
          new PMDeclareProperty( "id", &PMDeclare::setID, &PMDeclare::id ) );
@@ -180,9 +180,9 @@ void PMDeclare::updateDeclareType( )
    if( o )
    {
       if( o->isA( "GraphicalObject" ) )
-         type = m->tqmetaObject( "GraphicalObject" );
+         type = m->metaObject( "GraphicalObject" );
       else
-         type = o->tqmetaObject( );
+         type = o->metaObject( );
    }
    setDeclareType( type );
 }

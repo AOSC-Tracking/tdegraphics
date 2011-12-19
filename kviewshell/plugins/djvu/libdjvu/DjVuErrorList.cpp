@@ -102,7 +102,7 @@ DjVuErrorList::notify_error(const DjVuPort * source, const GUTF8String & msg)
 bool
 DjVuErrorList::notify_status(const DjVuPort * source, const GUTF8String &msg)
 {
-  tqStatus.append(msg);
+  Status.append(msg);
   return 1;
 }  
 
@@ -120,16 +120,16 @@ DjVuErrorList::GetError(void)
 }
 
 GUTF8String
-DjVuErrorList::GettqStatus(void)
+DjVuErrorList::GetStatus(void)
 {
-  GUTF8String PrevtqStatus;
+  GUTF8String PrevStatus;
   GPosition pos;
-  if((pos=tqStatus))
+  if((pos=Status))
   {
-    PrevtqStatus=tqStatus[pos];
-    tqStatus.del(pos);
+    PrevStatus=Status[pos];
+    Status.del(pos);
   }
-  return PrevtqStatus;
+  return PrevStatus;
 }
 
 GP<DataPool>

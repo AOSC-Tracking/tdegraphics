@@ -91,14 +91,14 @@ bool ThumbView::readSettings()
    bool dirty = false;
 
    TQColor color;
-   color = cfg->readColorEntry( MARGIN_COLOR1, &(tqcolorGroup().base()));
+   color = cfg->readColorEntry( MARGIN_COLOR1, &(colorGroup().base()));
    if( color != m_marginColor1 )
    {
       dirty = true;
       m_marginColor1 = color;
    }
 
-   color = cfg->readColorEntry( MARGIN_COLOR2, &(tqcolorGroup().foreground()));
+   color = cfg->readColorEntry( MARGIN_COLOR2, &(colorGroup().foreground()));
    if( color != m_marginColor2 )
    {
       dirty = true;

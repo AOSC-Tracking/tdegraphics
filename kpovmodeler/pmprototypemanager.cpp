@@ -147,33 +147,33 @@ void PMPrototypeManager::addPrototype( PMObject* obj )
    if( !obj )
       return;
 
-   PMMetaObject* tqmetaObject = obj->tqmetaObject( );
-   PMMetaObject* m2 = m_metaDict.find( tqmetaObject->className( ) );
+   PMMetaObject* metaObject = obj->metaObject( );
+   PMMetaObject* m2 = m_metaDict.find( metaObject->className( ) );
    if( m2 )
    {
       kdError( PMArea ) << "PMPrototypeManager: Class '"
-                        << tqmetaObject->className( )
+                        << metaObject->className( )
                         << "' already registered." << endl;
    }
    else
    {
-      if( tqmetaObject->isAbstract( ) )
+      if( metaObject->isAbstract( ) )
          kdError( PMArea ) << "PMPrototypeManager: The meta object for the prototype "
-                           << tqmetaObject->className( )
+                           << metaObject->className( )
                            << " doesn't have a factory method" << endl;
 
-      m_prototypes.append( tqmetaObject );
-      m_lowerCaseDict[tqmetaObject->className( ).lower( )] = tqmetaObject->className( );
+      m_prototypes.append( metaObject );
+      m_lowerCaseDict[metaObject->className( ).lower( )] = metaObject->className( );
 
       // insert the meta object and all super classes into the hash table
-      while( tqmetaObject )
+      while( metaObject )
       {
-         if( m_metaDict.find( tqmetaObject->className( ) ) )
-            tqmetaObject = 0;
+         if( m_metaDict.find( metaObject->className( ) ) )
+            metaObject = 0;
          else
          {
-            m_metaDict.insert( tqmetaObject->className( ), tqmetaObject );
-            tqmetaObject = tqmetaObject->superClass( );
+            m_metaDict.insert( metaObject->className( ), metaObject );
+            metaObject = metaObject->superClass( );
          }
       }
    }
@@ -184,7 +184,7 @@ void PMPrototypeManager::addDeclarationType( const TQString& className,
                                              const TQString& description,
                                              const TQString& pixmap )
 {
-   PMMetaObject* m = tqmetaObject( className );
+   PMMetaObject* m = metaObject( className );
    if( !m )
       kdError( PMArea ) << "PMPrototypeManager::addDeclarationType: Unknown class " << className << endl;
    else
@@ -212,7 +212,7 @@ PMObject* PMPrototypeManager::newObject( const TQString& name ) const
    return meta->newObject( m_pPart );
 }
 
-PMMetaObject* PMPrototypeManager::tqmetaObject( const TQString& name ) const
+PMMetaObject* PMPrototypeManager::metaObject( const TQString& name ) const
 {
    if( name.isNull( ) )
       return 0;
@@ -222,13 +222,13 @@ PMMetaObject* PMPrototypeManager::tqmetaObject( const TQString& name ) const
 bool PMPrototypeManager::isA( const TQString& className,
                               const TQString& baseClass ) const
 {
-   return isA( tqmetaObject( className ), baseClass );
+   return isA( metaObject( className ), baseClass );
 }
 
 bool PMPrototypeManager::isA( PMMetaObject* c,
                               const TQString& baseClass ) const
 {
-   PMMetaObject* bc = tqmetaObject( baseClass );
+   PMMetaObject* bc = metaObject( baseClass );
    while( c && c != bc )
       c = c->superClass( );
    return( c && ( c == bc ) );

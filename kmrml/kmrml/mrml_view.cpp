@@ -57,7 +57,7 @@ MrmlView::MrmlView( TQWidget *parent, const char *name )
     // query result image
     TQLabel l( i18n( "No thumbnail available" ), 0L );
     l.setFixedSize( 80, 80 );
-    l.tqsetAlignment( WordBreak | AlignCenter );
+    l.setAlignment( WordBreak | AlignCenter );
 //     l.setFrameStyle( TQLabel::Box | TQLabel::Plain );
 //     l.setLineWidth( 1 );
     l.setPaletteBackgroundColor( TQt::white );
@@ -176,7 +176,7 @@ void MrmlView::slotLayout()
     TQPtrListIterator<MrmlViewItem> it( m_items );
 
     for ( ; it.current(); ++it ) {
-        itemWidth = TQMAX( itemWidth, it.current()->tqsizeHint().width() );
+        itemWidth = TQMAX( itemWidth, it.current()->sizeHint().width() );
     }
 
     if ( itemWidth == 0 )
@@ -202,7 +202,7 @@ void MrmlView::slotLayout()
         if ( item == 0 )
             rowIt = it;
 
-        rowHeight = TQMAX( rowHeight, it.current()->tqsizeHint().height() );
+        rowHeight = TQMAX( rowHeight, it.current()->sizeHint().height() );
         addChild( it.current(), margin + item * itemWidth, y );
         it.current()->show();
 
@@ -306,11 +306,11 @@ MrmlViewItem::MrmlViewItem( const KURL& url, const KURL& thumbURL,
 
     /*
     if ( similarity > -1 )
-        TQToolTip::add( this, TQString::tqfromLatin1("<qt>%1<br>%1</qt>")
+        TQToolTip::add( this, TQString::fromLatin1("<qt>%1<br>%1</qt>")
                        .tqarg( url )
                        .tqarg(i18n("Similarity: %1").tqarg( TQString::number(similarity))));
     else
-        TQToolTip::add( this, TQString::tqfromLatin1("<qt>%1</qt>").tqarg( url ) );
+        TQToolTip::add( this, TQString::fromLatin1("<qt>%1</qt>").tqarg( url ) );
     */
 
     setMinimumSize( 130, 130 ); // ###
@@ -342,14 +342,14 @@ void MrmlViewItem::paintEvent( TQPaintEvent *e )
 
     if ( m_similarity >= 0 ) {
         TQPainter p( this );
-        TQPen pen( tqcolorGroup().highlight(), 1, TQPen::SolidLine );
+        TQPen pen( colorGroup().highlight(), 1, TQPen::SolidLine );
         p.setPen( pen );
         int x = margin;
         int y = m_combo->y() - similarityHeight - 2;
         int w = (int) (similarityFullWidth * m_similarity);
         int h = similarityHeight;
         p.drawRect( x, y, similarityFullWidth, h );
-        p.fillRect( x, y, w, h, tqcolorGroup().highlight() );
+        p.fillRect( x, y, w, h, colorGroup().highlight() );
     }
 }
 
@@ -361,7 +361,7 @@ void MrmlViewItem::resizeEvent( TQResizeEvent *e )
     m_combo->move( width()/2 - m_combo->width()/2, y );
 }
 
-TQSize MrmlViewItem::tqsizeHint() const
+TQSize MrmlViewItem::sizeHint() const
 {
     int w = TQMAX( TQMAX(minimumHeight(), m_combo->width()), m_pixmap.width() );
     w += 2 * margin;

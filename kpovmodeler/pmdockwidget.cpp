@@ -337,7 +337,7 @@ void PMDockWidgetHeaderDrag::paintEvent( TQPaintEvent* )
 
   paint.begin( this );
 
-  tqstyle().tqdrawPrimitive (TQStyle::PE_DockWindowHandle, &paint, TQRect(0,0,width(), height()), tqcolorGroup());
+  tqstyle().tqdrawPrimitive (TQStyle::PE_DockWindowHandle, &paint, TQRect(0,0,width(), height()), colorGroup());
 
   paint.end();
 }
@@ -392,7 +392,7 @@ PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
   tqlayout->addWidget( stayButton );
   tqlayout->addWidget( closeButton );
   tqlayout->activate();
-  drag->setFixedHeight( tqlayout->tqminimumSize().height() );
+  drag->setFixedHeight( tqlayout->minimumSize().height() );
 }
 
 void PMDockWidgetHeader::setTopLevel( bool isTopLevel )
@@ -436,7 +436,7 @@ void PMDockWidgetHeader::setDragPanel( PMDockWidgetHeaderDrag* nd )
   tqlayout->addWidget( stayButton );
   tqlayout->addWidget( closeButton );
   tqlayout->activate();
-  drag->setFixedHeight( tqlayout->tqminimumSize().height() );
+  drag->setFixedHeight( tqlayout->minimumSize().height() );
 }
 
 void PMDockWidgetHeader::slotStayClicked()
@@ -1454,7 +1454,7 @@ PMDockWidget* PMDockManager::findDockWidgetAt( const TQPoint& pos )
     return 0L;
   }
 #if defined(_OS_WIN32_) || defined(Q_OS_WIN32)
-  p = p->tqtopLevelWidget();
+  p = p->topLevelWidget();
 #endif
   TQWidget* w = 0L;
   findChildDockWidget( w, p, p->mapFromGlobal(pos) );
@@ -1692,7 +1692,7 @@ static TQDomElement createStringEntry(TQDomDocument &doc, const TQString &tagNam
 
 static TQDomElement createBoolEntry(TQDomDocument &doc, const TQString &tagName, bool b)
 {
-    return createStringEntry(doc, tagName, TQString::tqfromLatin1(b? "true" : "false"));
+    return createStringEntry(doc, tagName, TQString::fromLatin1(b? "true" : "false"));
 }
 
 
@@ -1731,7 +1731,7 @@ static TQDomElement createListEntry(TQDomDocument &doc, const TQString &tagName,
     TQStrListIterator it(list);
     for (; it.current(); ++it) {
         TQDomElement subel = doc.createElement(subTagName);
-        subel.appendChild(doc.createTextNode(TQString::tqfromLatin1(it.current())));
+        subel.appendChild(doc.createTextNode(TQString::fromLatin1(it.current())));
         el.appendChild(subel);
     }
 
@@ -1801,7 +1801,7 @@ void PMDockManager::writeConfig(TQDomElement &base)
     PMDockWidget *obj1;
     while ( (obj1=(PMDockWidget*)it.current()) ) {
         if ( TQT_BASE_OBJECT(obj1->parent()) == TQT_BASE_OBJECT(main) )
-            mainWidgetStr = TQString::tqfromLatin1(obj1->name());
+            mainWidgetStr = TQString::fromLatin1(obj1->name());
         nList.append(obj1->name());
         ++it;
     }
@@ -1841,7 +1841,7 @@ void PMDockManager::writeConfig(TQDomElement &base)
             groupEl = doc.createElement("dock");
         }
 
-        groupEl.appendChild(createStringEntry(doc, "name", TQString::tqfromLatin1(obj->name())));
+        groupEl.appendChild(createStringEntry(doc, "name", TQString::fromLatin1(obj->name())));
         groupEl.appendChild(createBoolEntry(doc, "hasParent", obj->parent()));
         if ( !obj->parent() ) {
             groupEl.appendChild(createRectEntry(doc, "geometry", TQRect(main->frameGeometry().topLeft(), main->size())));
@@ -2372,14 +2372,14 @@ void PMDockManager::drawDragRectangle()
     PMDockMainWindow* pMain = 0L;
     PMDockWidget* pTLDockWdg = 0L;
     TQWidget* topWdg;
-    if (pDockWdgAtRect->tqtopLevelWidget() == main) {
+    if (pDockWdgAtRect->topLevelWidget() == main) {
       isOverMainWdg = true;
       topWdg = pMain = (PMDockMainWindow*) main;
       unclipped = pMain->testWFlags( WPaintUnclipped );
       pMain->setWFlags( WPaintUnclipped );
     }
     else {
-      topWdg = pTLDockWdg = (PMDockWidget*) pDockWdgAtRect->tqtopLevelWidget();
+      topWdg = pTLDockWdg = (PMDockWidget*) pDockWdgAtRect->topLevelWidget();
       unclipped = pTLDockWdg->testWFlags( WPaintUnclipped );
       pTLDockWdg->setWFlags( WPaintUnclipped );
     }

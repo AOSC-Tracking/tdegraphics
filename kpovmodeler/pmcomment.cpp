@@ -108,11 +108,11 @@ void PMComment::setText( const TQString& text )
    }
 }
 
-PMMetaObject* PMComment::tqmetaObject( ) const
+PMMetaObject* PMComment::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Comment", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Comment", Base::metaObject( ),
                                         createNewComment );
       s_pMetaObject->addProperty(
          new PMCommentProperty( "text", &PMComment::setText, &PMComment::text ) );

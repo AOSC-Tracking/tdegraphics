@@ -269,7 +269,7 @@ TQRect KImageHolder::selection() const
 		return TQRect();
 }
 
-TQSize KImageHolder::tqsizeHint() const
+TQSize KImageHolder::sizeHint() const
 {
 	if( m_pPixmap )
 		return m_pPixmap->size();

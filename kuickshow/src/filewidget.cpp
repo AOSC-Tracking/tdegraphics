@@ -448,7 +448,7 @@ void FileWidget::slotFinishedLoading()
     emit finished();
 }
 
-TQSize FileWidget::tqsizeHint() const
+TQSize FileWidget::sizeHint() const
 {
   return TQSize( 300, 300 );
 }

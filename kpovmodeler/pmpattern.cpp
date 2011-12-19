@@ -453,11 +453,11 @@ void PMPattern::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMPattern::tqmetaObject( ) const
+PMMetaObject* PMPattern::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Pattern", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Pattern", Base::metaObject( ),
                                         createNewPattern );
       s_pMetaObject->addProperty(
          new PMPatternProperty( "agateTurbulence", &PMPattern::setAgateTurbulence, &PMPattern::agateTurbulence ) );

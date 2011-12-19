@@ -67,7 +67,7 @@ class KPDFPageTransition
 
         inline void setType( Type type ) { m_type = type; }
         inline void setDuration( int duration ) { m_duration = duration; }
-        inline void tqsetAlignment( Alignment tqalignment ) { m_tqalignment = tqalignment; }
+        inline void setAlignment( Alignment tqalignment ) { m_tqalignment = tqalignment; }
         inline void setDirection( Direction direction ) { m_direction = direction; }
         inline void setAngle( int angle ) { m_angle = angle; }
         inline void setScale( double scale ) { m_scale = scale; }

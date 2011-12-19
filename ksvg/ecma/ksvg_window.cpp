@@ -330,11 +330,11 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 		case KSVG::Window::_GetURL:
 		{
 			KURL url((const_cast<Window *>(window))->doc()->baseUrl(), args[0].toString(exec).qstring());
-			Value asynctqStatus = (const_cast<Window *>(window))->doc()->ecmaEngine()->getUrl(exec, url);
+			Value asyncStatus = (const_cast<Window *>(window))->doc()->ecmaEngine()->getUrl(exec, url);
 			Object callBackFunction = Object::dynamicCast(args[1]);
 			List callBackArgs;
 
-			callBackArgs.append(asynctqStatus);
+			callBackArgs.append(asyncStatus);
 			callBackFunction.call(exec, callBackFunction, callBackArgs);
 
 			return Undefined();

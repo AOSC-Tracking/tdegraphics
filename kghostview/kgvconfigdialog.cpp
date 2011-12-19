@@ -120,7 +120,7 @@ namespace {
 	if ( version < TQString::number( 7.00 ) ) 
 	{
 	    TQStringList arguments = TQStringList::split( ' ', Configuration::antialiasingArguments() );
-	    arguments.remove( TQString::tqfromLatin1( "-dMaxBitmap=10000000" ) );
+	    arguments.remove( TQString::fromLatin1( "-dMaxBitmap=10000000" ) );
 	    TQString antiAliasArgs = arguments.join( " " );
 
 	    Configuration::setAntialiasingArguments( antiAliasArgs );
@@ -140,9 +140,9 @@ void  ConfigDialog::showSettings( KGVPart* main ) {
     KConfigDialog* dialog = new KConfigDialog( 0, name,
 	    Configuration::self(), KDialogBase::IconList );
     dialog->addPage( new GeneralSettingsWidget( 0, "general-settings" ),
-	    i18n( "General" ), TQString::tqfromLatin1( "kghostview" ) );
+	    i18n( "General" ), TQString::fromLatin1( "kghostview" ) );
     GSSettingsWidget *gssw = new GSSettingsWidget( 0, "gs-settings" );
-    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), TQString::tqfromLatin1( "pdf" ) );
+    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), TQString::fromLatin1( "pdf" ) );
 
     gssw->setDetectedVersion(Configuration::version());
 

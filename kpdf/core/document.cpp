@@ -1067,7 +1067,7 @@ void KPDFDocument::processLink( const KPDFLink * link )
         case KPDFLink::Browse: {
             const KPDFLinkBrowse * browse = static_cast< const KPDFLinkBrowse * >( link );
             // if the url is a mailto one, invoke mailer
-            if ( browse->url().tqstartsWith( "mailto:", false ) )
+            if ( browse->url().startsWith( "mailto:", false ) )
                 kapp->invokeMailer( browse->url() );
             else
             {

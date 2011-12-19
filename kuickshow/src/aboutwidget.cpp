@@ -41,7 +41,7 @@ AboutWidget::AboutWidget( TQWidget *parent, const char *name )
 
     TQGroupBox *gBox = new TQGroupBox( 1,Qt::Horizontal, this);
     gBox->setGeometry( 10, 10, width()-20, height()-20 );
-    gBox->tqsetAlignment( AlignHCenter );
+    gBox->setAlignment( AlignHCenter );
     gBox->installEventFilter( this );
 
     gBox->setPalette( TQPalette( TQColor( white ) ) );
@@ -57,14 +57,14 @@ AboutWidget::AboutWidget( TQWidget *parent, const char *name )
 
     TQLabel *authors = new TQLabel("Kuickshow " KUICKSHOWVERSION
 				 " was brought to you by", gBox);
-    authors->tqsetAlignment( AlignCenter );
+    authors->setAlignment( AlignCenter );
 
     m_homepage = new KURLWidget("Carsten Pfeiffer", gBox);
     m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
-    m_homepage->tqsetAlignment( AlignCenter );
+    m_homepage->setAlignment( AlignCenter );
 
     TQLabel *copy = new TQLabel("(C) 1998-2006", gBox);
-    copy->tqsetAlignment( AlignCenter );
+    copy->setAlignment( AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
     if ( im->loadImage( file ) )

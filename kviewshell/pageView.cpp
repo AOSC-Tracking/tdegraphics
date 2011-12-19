@@ -524,7 +524,7 @@ void PageView::viewportPaintEvent(TQPaintEvent* e)
   TQMemArray<TQRect> backgroundRects = backgroundArea.tqrects();
 
   for (unsigned int i = 0; i < backgroundRects.count(); i++)
-    p.fillRect(backgroundRects[i], tqcolorGroup().mid());
+    p.fillRect(backgroundRects[i], colorGroup().mid());
 }
 
 

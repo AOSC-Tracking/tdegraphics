@@ -29,7 +29,7 @@ class KSnapshotPreview : public TQLabel
         KSnapshotPreview(TQWidget *parent, const char *name = 0)
             : TQLabel(parent, name)
         {
-            tqsetAlignment(AlignHCenter | AlignVCenter);
+            setAlignment(AlignHCenter | AlignVCenter);
             setCursor(TQCursor(TQt::PointingHandCursor));
         }
         virtual ~KSnapshotPreview() {}

@@ -272,11 +272,11 @@ void PMPrism::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMPrism::tqmetaObject( ) const
+PMMetaObject* PMPrism::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Prism", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Prism", Base::metaObject( ),
                                         createNewPrism );
       s_pMetaObject->addProperty(
          new PMPrismProperty( "sturm", &PMPrism::setSturm, &PMPrism::sturm ) );

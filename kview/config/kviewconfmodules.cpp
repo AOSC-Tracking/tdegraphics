@@ -38,7 +38,7 @@ KViewGeneralConfig::KViewGeneralConfig( TQWidget * parent, const char * /*name*/
 	TQBoxLayout * tqlayout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 
 	m_pResizeGroup = new TQVButtonGroup( i18n( "Resizing" ), this );
-	m_pResizeGroup->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
+	m_pResizeGroup->setSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
 	connect( m_pResizeGroup, TQT_SIGNAL( clicked( int ) ), this, TQT_SLOT( resizeChanged( int ) ) );
 	tqlayout->addWidget( m_pResizeGroup );
 

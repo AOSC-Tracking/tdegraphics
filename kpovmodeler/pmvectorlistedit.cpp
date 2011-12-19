@@ -121,7 +121,7 @@ void PMVectorListEdit::init( int dimensions )
       setColumnStretchable( i, true );
    connect( this, TQT_SIGNAL( valueChanged( int, int ) ),
             TQT_SLOT( slotTextChanged( int, int ) ) );
-   tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
+   setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
 }
 
 void PMVectorListEdit::setVectors( const TQValueList<PMVector>& l,
@@ -315,11 +315,11 @@ bool PMVectorListEdit::isDataValid( )
    return valid;
 }
 
-TQSize PMVectorListEdit::tqsizeHint( ) const
+TQSize PMVectorListEdit::sizeHint( ) const
 {
    return TQSize( c_columnWidth * m_dimension + frameWidth( ) * 2,
                  frameWidth( ) * 2 + horizontalHeader( )->height( )
-                 + verticalHeader( )->tqsizeHint( ).height( ) );
+                 + verticalHeader( )->sizeHint( ).height( ) );
 }
 
 void PMVectorListEdit::slotTextChanged( int, int )

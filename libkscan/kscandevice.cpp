@@ -175,7 +175,7 @@ KScanDevice::KScanDevice( TQObject *parent )
     gui_elements.setAutoDelete( true );
 
     scanner_initialised = false;  /* stays false until openDevice. */
-    scantqStatus = SSTAT_SILENT;
+    scanStatus = SSTAT_SILENT;
 
     data         = 0; /* temporary image data buffer while scanning */
     sn           = 0; /* socket notifier for async scanning         */
@@ -282,7 +282,7 @@ void KScanDevice::slCloseDevice( )
    scanner_name = UNDEF_SCANNERNAME;
    if( scanner_handle )
    {
-      if( scantqStatus != SSTAT_SILENT )
+      if( scanStatus != SSTAT_SILENT )
       {
          kdDebug(29000) << "Scanner is still active, calling cancel !" << endl;
          sane_cancel( scanner_handle );
@@ -659,11 +659,11 @@ void KScanDevice::slReloadAll( )
 void KScanDevice::slStopScanning( void )
 {
     kdDebug(29000) << "Attempt to stop scanning" << endl;
-    if( scantqStatus == SSTAT_IN_PROGRESS )
+    if( scanStatus == SSTAT_IN_PROGRESS )
     {
 	emit( sigScanFinished( KSCAN_CANCELLED ));
     }
-    scantqStatus = SSTAT_STOP_NOW;
+    scanStatus = SSTAT_STOP_NOW;
 }
 
 
@@ -673,7 +673,7 @@ const TQString KScanDevice::previewFile()
    if( !dir.endsWith("/") )
       dir += "/";
 
-   TQString fname = dir + TQString::tqfromLatin1(".previews/");
+   TQString fname = dir + TQString::fromLatin1(".previews/");
    TQString sname( getScannerName(shortScannerName()) );
    sname.replace( '/', "_");
 
@@ -1090,7 +1090,7 @@ KScanStat KScanDevice::acquire_data( bool isPreview )
    if( stat == KSCAN_OK )
    {
       overall_bytes 	= 0;
-      scantqStatus = SSTAT_IN_PROGRESS;
+      scanStatus = SSTAT_IN_PROGRESS;
       pixel_x 		    = 0;
       pixel_y 		    = 0;
       overall_bytes         = 0;
@@ -1115,7 +1115,7 @@ KScanStat KScanDevice::acquire_data( bool isPreview )
 	 do
 	 {
 	    doProcessABlock();
-	    if( scantqStatus != SSTAT_SILENT )
+	    if( scanStatus != SSTAT_SILENT )
 	    {
 	       sane_stat = sane_get_parameters( scanner_handle, &sane_scan_param );
 	       kdDebug(29000) << "--ProcessABlock-Loop" << endl;
@@ -1126,7 +1126,7 @@ KScanStat KScanDevice::acquire_data( bool isPreview )
 	       kdDebug(29000) << "pixels_per_line : " << sane_scan_param.pixels_per_line << endl;
 	       kdDebug(29000) << "bytes_per_line : " << sane_scan_param.bytes_per_line << endl;
 	    }
-	 } while ( scantqStatus != SSTAT_SILENT );
+	 } while ( scanStatus != SSTAT_SILENT );
       }
    }
 
@@ -1410,9 +1410,9 @@ void KScanDevice::doProcessABlock( void )
 	}
      }
 
-     if( goOn && scantqStatus == SSTAT_STOP_NOW )
+     if( goOn && scanStatus == SSTAT_STOP_NOW )
      {
-	/* scantqStatus is set to SSTAT_STOP_NOW due to hitting slStopScanning   */
+	/* scanStatus is set to SSTAT_STOP_NOW due to hitting slStopScanning   */
 	/* Mostly that one is fired by the STOP-Button in the progress dialog. */
 
 	/* This is also hit after the normal finish of the scan. Most probably,
@@ -1421,7 +1421,7 @@ void KScanDevice::doProcessABlock( void )
 	 */
 	kdDebug(29000) << "Stopping the scan progress !" << endl;
 	goOn = false;
-	scantqStatus = SSTAT_SILENT;
+	scanStatus = SSTAT_SILENT;
 	emit( sigScanFinished( KSCAN_OK ));
      }
 
@@ -1435,13 +1435,13 @@ void KScanDevice::doProcessABlock( void )
      {
 	/** Everythings okay, the picture is ready **/
 	kdDebug(29000) << "last frame reached - scan successful" << endl;
-	scantqStatus = SSTAT_SILENT;
+	scanStatus = SSTAT_SILENT;
 	emit( sigScanFinished( KSCAN_OK ));
      }
      else
      {
 	/** EOF und nicht letzter Frame -> Parameter neu belegen und neu starten **/
-	scantqStatus = SSTAT_NEXT_FRAME;
+	scanStatus = SSTAT_NEXT_FRAME;
 	kdDebug(29000) << "EOF, but another frame to scan" << endl;
 
      }
@@ -1449,7 +1449,7 @@ void KScanDevice::doProcessABlock( void )
 
   if( sane_stat == SANE_STATUS_CANCELLED )
   {
-     scantqStatus = SSTAT_STOP_NOW;
+     scanStatus = SSTAT_STOP_NOW;
      kdDebug(29000) << "Scan was cancelled" << endl;
 
      // stat = KSCAN_CANCELLED;

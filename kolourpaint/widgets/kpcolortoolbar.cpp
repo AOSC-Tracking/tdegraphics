@@ -150,7 +150,7 @@ kpColor kpDualColorButton::oldBackgroundColor () const
 
 
 // public virtual [base TQWidget]
-TQSize kpDualColorButton::tqsizeHint () const
+TQSize kpDualColorButton::sizeHint () const
 {
     return TQSize (52, 52);
 }
@@ -318,14 +318,14 @@ void kpDualColorButton::drawContents (TQPainter *p)
     else
     {
         backBufferPainter.fillRect (m_backBuffer->rect (),
-                                    tqcolorGroup ().color (TQColorGroup::Background));
+                                    colorGroup ().color (TQColorGroup::Background));
     }
 
     TQPixmap swapPixmap = UserIcon ("colorbutton_swap_16x16");
     if (!isEnabled ())
     {
         // swapPixmap has a mask after all
-        swapPixmap.fill (tqcolorGroup ().color (TQColorGroup::Dark));
+        swapPixmap.fill (colorGroup ().color (TQColorGroup::Dark));
     }
     backBufferPainter.drawPixmap (swapPixmapRect ().topLeft (), swapPixmap);
 
@@ -346,8 +346,8 @@ void kpDualColorButton::drawContents (TQPainter *p)
             backBufferPainter.drawPixmap (bgRectInside, UserIcon ("color_transparent_26x26"));
     }
     else
-        backBufferPainter.fillRect (bgRectInside, tqcolorGroup ().color (TQColorGroup::Button));
-    qDrawShadePanel (&backBufferPainter, bgRect, tqcolorGroup (),
+        backBufferPainter.fillRect (bgRectInside, colorGroup ().color (TQColorGroup::Button));
+    qDrawShadePanel (&backBufferPainter, bgRect, colorGroup (),
                      false/*not sunken*/, 2/*lineWidth*/,
                      0/*never fill*/);
 
@@ -366,8 +366,8 @@ void kpDualColorButton::drawContents (TQPainter *p)
             backBufferPainter.drawPixmap (fgRectInside, UserIcon ("color_transparent_26x26"));
     }
     else
-        backBufferPainter.fillRect (fgRectInside, tqcolorGroup ().color (TQColorGroup::Button));
-    qDrawShadePanel (&backBufferPainter, fgRect, tqcolorGroup (),
+        backBufferPainter.fillRect (fgRectInside, colorGroup ().color (TQColorGroup::Button));
+    qDrawShadePanel (&backBufferPainter, fgRect, colorGroup (),
                      false/*not sunken*/, 2/*lineWidth*/,
                      0/*never fill*/);
 
@@ -768,7 +768,7 @@ kpTransparentColorCell::~kpTransparentColorCell ()
 
 
 // public virtual [base TQWidget]
-TQSize kpTransparentColorCell::tqsizeHint () const
+TQSize kpTransparentColorCell::sizeHint () const
 {
     return TQSize (m_pixmap.width () + frameWidth () * 2,
                   m_pixmap.height () + frameWidth () * 2);
@@ -829,7 +829,7 @@ kpColorPalette::kpColorPalette (TQWidget *parent,
 #endif
 
     m_transparentColorCell = new kpTransparentColorCell (this);
-    m_transparentColorCell->tqsetSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
+    m_transparentColorCell->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
     connect (m_transparentColorCell, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
              this, TQT_SIGNAL (foregroundColorChanged (const kpColor &)));
     connect (m_transparentColorCell, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
@@ -964,7 +964,7 @@ kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow,
                                   5/*margin*/, (10 * 4)/*spacing*/);
 
     m_dualColorButton = new kpDualColorButton (mainWindow, base);
-    m_dualColorButton->tqsetSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
+    m_dualColorButton->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
     connect (m_dualColorButton, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
              this, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)));
     connect (m_dualColorButton, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
@@ -981,7 +981,7 @@ kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow,
     m_boxLayout->addWidget (m_colorPalette, 0/*stretch*/);
 
     m_colorSimilarityToolBarItem = new kpColorSimilarityToolBarItem (mainWindow, base);
-    m_colorSimilarityToolBarItem->tqsetSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
+    m_colorSimilarityToolBarItem->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
     connect (m_colorSimilarityToolBarItem, TQT_SIGNAL (colorSimilarityChanged (double, int)),
              this, TQT_SIGNAL (colorSimilarityChanged (double, int)));
     m_boxLayout->addWidget (m_colorSimilarityToolBarItem, 0/*stretch*/);

@@ -164,7 +164,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    TQHBox *recentBox = new TQHBox( m_dockRecent );
    recentBox->setMargin(KDialog::marginHint());
    TQLabel *lab = new TQLabel( i18n("Gallery:"), recentBox );
-   lab->tqsetSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
+   lab->setSizePolicy( TQSizePolicy(TQSizePolicy::Fixed, TQSizePolicy::Fixed) );
    recentFolder = new ImageNameCombo( recentBox );
 
    m_dockRecent->setWidget( recentBox );
@@ -277,7 +277,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    packager->openRoots();
 
-   /* tqStatus Bar */
+   /* Status Bar */
    KStatusBar *statBar = m_mainWindow->statusBar();
 
    // statBar->insertItem(TQString("1"), SBAR_ZOOM,  0, true );
@@ -842,7 +842,7 @@ void KookaView::slShowAImage( KookaImage *img )
        ocrFabric->slSetImage( img );
    }
 
-   /* tqStatus Bar */
+   /* Status Bar */
    KStatusBar *statBar = m_mainWindow->statusBar();
    if( img_canvas )
        statBar->changeItem( img_canvas->imageInfoString(), StatusImage );

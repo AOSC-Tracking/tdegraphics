@@ -114,11 +114,11 @@ void PMListPattern::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMListPattern::tqmetaObject( ) const
+PMMetaObject* PMListPattern::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ListPattern", Base::tqmetaObject( ) );
+      s_pMetaObject = new PMMetaObject( "ListPattern", Base::metaObject( ) );
 
       PMListTypeProperty* p = new PMListTypeProperty(
          "listType", &PMListPattern::setListType,
@@ -228,11 +228,11 @@ PMTextureList::~PMTextureList( )
 {
 }
 
-PMMetaObject* PMTextureList::tqmetaObject( ) const
+PMMetaObject* PMTextureList::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureList", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "TextureList", Base::metaObject( ),
                                         createNewTextureList );
    }
    return s_pMetaObject;
@@ -267,11 +267,11 @@ PMPigmentList::~PMPigmentList( )
 {
 }
 
-PMMetaObject* PMPigmentList::tqmetaObject( ) const
+PMMetaObject* PMPigmentList::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "PigmentList", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "PigmentList", Base::metaObject( ),
                                         createNewPigmentList );
    }
    return s_pMetaObject;
@@ -306,11 +306,11 @@ PMColorList::~PMColorList( )
 {
 }
 
-PMMetaObject* PMColorList::tqmetaObject( ) const
+PMMetaObject* PMColorList::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ColorList", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "ColorList", Base::metaObject( ),
                                         createNewColorList );
    }
    return s_pMetaObject;
@@ -345,11 +345,11 @@ PMDensityList::~PMDensityList( )
 {
 }
 
-PMMetaObject* PMDensityList::tqmetaObject( ) const
+PMMetaObject* PMDensityList::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "DensityList", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "DensityList", Base::metaObject( ),
                                         createNewDensityList );
    }
    return s_pMetaObject;
@@ -388,11 +388,11 @@ PMNormalList::~PMNormalList( )
 {
 }
 
-PMMetaObject* PMNormalList::tqmetaObject( ) const
+PMMetaObject* PMNormalList::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "NormalList", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "NormalList", Base::metaObject( ),
                                         createNewNormalList );
       s_pMetaObject->addProperty(
          new PMNormalListProperty( "depth", &PMNormalList::setDepth,

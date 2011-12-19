@@ -43,7 +43,7 @@ SVGEventImpl::SVGEventImpl()
 	m_defaultPrevented = false;
 	m_id = SVGEvent::UNKNOWN_EVENT;
 	m_eventPhase = 0;
-	m_createTime = TQDateTime::tqcurrentDateTime();
+	m_createTime = TQDateTime::currentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;
@@ -62,7 +62,7 @@ SVGEventImpl::SVGEventImpl(SVGEvent::EventId _id, bool canBubbleArg, bool cancel
 	m_defaultPrevented = false;
 	m_id = _id;
 	m_eventPhase = 0;
-	m_createTime = TQDateTime::tqcurrentDateTime();
+	m_createTime = TQDateTime::currentDateTime();
 	m_defaultHandled = false;
 
 	m_target = 0;

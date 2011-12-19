@@ -84,7 +84,7 @@ void PMFormulaLabel::drawContents( TQPainter* p )
       // draw dot
       int center = ( cr.top( ) + cr.bottom( ) ) / 2;
       int rad = c_dotSize / 2;
-      p->setBrush( TQBrush( tqcolorGroup( ).text( ) ) );
+      p->setBrush( TQBrush( colorGroup( ).text( ) ) );
       p->drawEllipse( cr.left( ), center - rad, c_dotSize, c_dotSize );
       cr.setLeft( cr.left( ) + c_dotSize + c_indent );
 
@@ -131,7 +131,7 @@ void PMFormulaLabel::calculateSizeHint( )
 
    TQFontMetrics m1( font( ) );
    if( sum == 0 )
-      m_tqsizeHint.setWidth( m1.width( s_nullString ) );
+      m_sizeHint.setWidth( m1.width( s_nullString ) );
    else
    {
       TQFontMetrics m2( exponentFont( ) );
@@ -146,19 +146,19 @@ void PMFormulaLabel::calculateSizeHint( )
                width += m2.width( s_digit[m_exponents[i]] ) + 1;
          }
       }
-      m_tqsizeHint.setWidth( width );
+      m_sizeHint.setWidth( width );
    }
-   m_tqsizeHint.setHeight( m1.height( ) + 7 );
+   m_sizeHint.setHeight( m1.height( ) + 7 );
 }
 
-TQSize PMFormulaLabel::tqsizeHint( ) const
+TQSize PMFormulaLabel::sizeHint( ) const
 {
-   return tqminimumSizeHint( );
+   return minimumSizeHint( );
 }
 
-TQSize PMFormulaLabel::tqminimumSizeHint( ) const
+TQSize PMFormulaLabel::minimumSizeHint( ) const
 {
-   return m_tqsizeHint;
+   return m_sizeHint;
 }
 
 void PMFormulaLabel::fontChange( const TQFont& )

@@ -309,7 +309,7 @@ void KGVShell::slotMaximize()
 
 void KGVShell::slotResize()
 {
-    resize( m_gvpart->pageView()->tqsizeHint().width(), height() );
+    resize( m_gvpart->pageView()->sizeHint().width(), height() );
 }
 
 void KGVShell::setFullScreen( bool useFullScreen )

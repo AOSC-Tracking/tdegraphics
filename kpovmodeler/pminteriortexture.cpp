@@ -43,11 +43,11 @@ PMInteriorTexture::~PMInteriorTexture( )
 {
 }
 
-PMMetaObject* PMInteriorTexture::tqmetaObject( ) const
+PMMetaObject* PMInteriorTexture::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "InteriorTexture", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "InteriorTexture", Base::metaObject( ),
                                         createNewInteriorTexture );
    }
    return s_pMetaObject;

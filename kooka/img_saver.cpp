@@ -116,7 +116,7 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
    Q_CHECK_PTR(l_help);
    l_help->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
    l_help->setText( i18n("-No format selected-" ));
-   l_help->tqsetAlignment( AlignVCenter | AlignHCenter );
+   l_help->setAlignment( AlignVCenter | AlignHCenter );
    l_help->setMinimumWidth(230);
 
    // Insert Selbox for subformat
@@ -208,11 +208,11 @@ TQCString FormatDialog::getSubFormat( ) const
 #include "formathelp.h"
 void FormatDialog::buildHelp( void )
 {
-   format_help.insert( TQString::tqfromLatin1("BMP"), HELP_BMP );
-   format_help.insert( TQString::tqfromLatin1("PNM"), HELP_PNM );
-   format_help.insert( TQString::tqfromLatin1("JPEG"), HELP_JPG );
-   format_help.insert( TQString::tqfromLatin1("JPG"), HELP_JPG );
-   format_help.insert( TQString::tqfromLatin1("EPS"), HELP_EPS );
+   format_help.insert( TQString::fromLatin1("BMP"), HELP_BMP );
+   format_help.insert( TQString::fromLatin1("PNM"), HELP_PNM );
+   format_help.insert( TQString::fromLatin1("JPEG"), HELP_JPG );
+   format_help.insert( TQString::fromLatin1("JPG"), HELP_JPG );
+   format_help.insert( TQString::fromLatin1("EPS"), HELP_EPS );
 }
 
 

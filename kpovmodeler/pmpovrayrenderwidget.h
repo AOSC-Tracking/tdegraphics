@@ -91,7 +91,7 @@ public:
     */
    static void setPovrayLibraryPaths( const TQStringList& slist )
    { s_libraryPaths = slist; }
-   virtual TQSize tqsizeHint( ) const;
+   virtual TQSize sizeHint( ) const;
 
    virtual void startDrag( );
 signals:

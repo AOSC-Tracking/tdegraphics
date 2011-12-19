@@ -65,11 +65,11 @@ void PMTranslate::readAttributes( const PMXMLHelper& h )
    m_move = h.vectorAttribute( "value", moveDefault );
 }
 
-PMMetaObject* PMTranslate::tqmetaObject( ) const
+PMMetaObject* PMTranslate::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Translate", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Translate", Base::metaObject( ),
                                         createNewTranslate );
       s_pMetaObject->addProperty(
          new PMTranslateProperty( "translation", &PMTranslate::setTranslation, &PMTranslate::translation ) );

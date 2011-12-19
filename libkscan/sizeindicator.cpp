@@ -34,7 +34,7 @@ SizeIndicator::SizeIndicator( TQWidget *parent, long  thres, long crit )
 {
    sizeInByte = -1;
    setFrameStyle( TQFrame::Box | TQFrame::Sunken );
-   setMinimumWidth( fontMetrics().width( TQString::tqfromLatin1("MMM.MM MB") ));
+   setMinimumWidth( fontMetrics().width( TQString::fromLatin1("MMM.MM MB") ));
    setCritical( crit );
    threshold = thres;
 
@@ -100,7 +100,7 @@ void SizeIndicator::drawContents( TQPainter *p )
       warnColor.setHsv( 0, c, c );
 
       p->drawImage( 0,0,
-		    KImageEffect::unbalancedGradient( s, tqcolorGroup().background(),
+		    KImageEffect::unbalancedGradient( s, colorGroup().background(),
 						      warnColor, KImageEffect::CrossDiagonalGradient, 200,200 ));
    }
    /* Displaying the text */

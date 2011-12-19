@@ -70,7 +70,7 @@ DeviceSelector::DeviceSelector( TQWidget *parent, TQStrList& devList,
 				 page, "CBOX_SKIP_ON_START" );
 
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
+   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    cbSkipDialog->setChecked( skipDialog );
 
@@ -81,7 +81,7 @@ DeviceSelector::DeviceSelector( TQWidget *parent, TQStrList& devList,
 TQCString DeviceSelector::getDeviceFromConfig( void ) const
 {
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
+   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    
    TQCString result;
@@ -126,7 +126,7 @@ TQCString DeviceSelector::getSelectedDevice( void ) const
 
    /* Store scanner selection settings */
    KConfig *c = KGlobal::config();
-   c->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
+   c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    /* Write both the scan device and the skip-start-dialog flag global. */
    c->writeEntry( STARTUP_SCANDEV, dev, true, true );
    c->writeEntry( STARTUP_SKIP_ASK, getShouldSkip(), true, true );
@@ -141,7 +141,7 @@ void DeviceSelector::setScanSources( const TQStrList& sources,
 {
    bool default_ok = false;
    KConfig *gcfg = KGlobal::config();
-   gcfg->setGroup(TQString::tqfromLatin1(GROUP_STARTUP));
+   gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    TQCString defstr = gcfg->readEntry( STARTUP_SCANDEV, "" ).local8Bit();
 
    /* Selector-Stuff*/
@@ -152,7 +152,7 @@ void DeviceSelector::setScanSources( const TQStrList& sources,
    TQStringList::ConstIterator it2 = hrSources.begin();
    for ( ; it.current(); ++it, ++it2 )
    {
-      TQString text = TQString::tqfromLatin1("&%1. %2\n%3").tqarg(1+nr).tqarg( TQString::fromLocal8Bit(*it) ).tqarg( *it2 );
+      TQString text = TQString::fromLatin1("&%1. %2\n%3").tqarg(1+nr).tqarg( TQString::fromLocal8Bit(*it) ).tqarg( *it2 );
       TQRadioButton *rb = new TQRadioButton( text, selectBox );
       selectBox->insert( rb );
 

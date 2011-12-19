@@ -534,7 +534,7 @@ void KGVMiniWidget::buildTOC()
 	}
     }
     else {
-	marklist->insertItem( TQString::tqfromLatin1( "1" ), 0 );
+	marklist->insertItem( TQString::fromLatin1( "1" ), 0 );
     }
 }
 

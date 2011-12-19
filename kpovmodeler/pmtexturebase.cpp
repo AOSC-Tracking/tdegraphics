@@ -49,11 +49,11 @@ PMTextureBase::~PMTextureBase( )
 {
 }
 
-PMMetaObject* PMTextureBase::tqmetaObject( ) const
+PMMetaObject* PMTextureBase::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "TextureBase", Base::tqmetaObject( ) );
+      s_pMetaObject = new PMMetaObject( "TextureBase", Base::metaObject( ) );
       s_pMetaObject->addProperty(
          new PMTextureBaseProperty( "linkedObject", &PMTextureBase::setLinkedObjectProperty,
                          &PMTextureBase::linkedObjectProperty ) );

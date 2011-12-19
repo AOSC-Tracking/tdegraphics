@@ -163,7 +163,7 @@ void KColorGrid::resizeEvent(TQResizeEvent *)
 }
 */
 
-TQSize KColorGrid::tqsizeHint() const
+TQSize KColorGrid::sizeHint() const
 {
   return TQSize(totalwidth, totalheight);
 }

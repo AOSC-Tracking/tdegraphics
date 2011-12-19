@@ -257,13 +257,13 @@ kpCommandHistoryBase::kpCommandHistoryBase (bool doReadConfig,
     : d (new kpCommandHistoryBasePrivate ())
 {
     m_actionUndo = new KToolBarPopupAction (undoActionText (),
-        TQString::tqfromLatin1 ("undo"),
+        TQString::fromLatin1 ("undo"),
         KStdAccel::shortcut (KStdAccel::Undo),
         this, TQT_SLOT (undo ()),
         ac, KStdAction::name (KStdAction::Undo));
 
     m_actionRedo = new KToolBarPopupAction (redoActionText (),
-        TQString::tqfromLatin1 ("redo"),
+        TQString::fromLatin1 ("redo"),
         KStdAccel::shortcut (KStdAccel::Redo),
         this, TQT_SLOT (redo ()),
         ac, KStdAction::name (KStdAction::Redo));

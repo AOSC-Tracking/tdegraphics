@@ -326,7 +326,7 @@ void PMGLView::initializeGL( )
       Window* colorMapWindows = 0;
       Window* newWindows = 0;
       int num;
-      if( XGetWMColormapWindows( display, tqtopLevelWidget( )->winId( ),
+      if( XGetWMColormapWindows( display, topLevelWidget( )->winId( ),
                                  &colorMapWindows, &num ) )
       {
          // create a new list and append the new window
@@ -357,7 +357,7 @@ void PMGLView::initializeGL( )
       // tell TQt to use this window
       create( w );
 
-      XSetWMColormapWindows( display, tqtopLevelWidget( )->winId( ),
+      XSetWMColormapWindows( display, topLevelWidget( )->winId( ),
                              newWindows, num );
       delete[] newWindows;
 
@@ -367,7 +367,7 @@ void PMGLView::initializeGL( )
    {
       TQVBoxLayout* topLayout = new TQVBoxLayout( this );
       TQLabel* label = new TQLabel( i18n( "No OpenGL support" ), this );
-      label->tqsetAlignment( TQt::AlignCenter );
+      label->setAlignment( TQt::AlignCenter );
       topLayout->addWidget( label );
    }
 

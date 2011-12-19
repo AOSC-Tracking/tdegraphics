@@ -463,7 +463,7 @@ void ScanPackager::slotSelectDirectory( const TQString & dirString )
 {
    kdDebug(28000) << "Trying to decode directory string " << dirString << endl;
 
-   TQString searchFor = TQString::tqfromLatin1(" - ");
+   TQString searchFor = TQString::fromLatin1(" - ");
    int pos = dirString.find( searchFor );
 
    if( pos > -1 )

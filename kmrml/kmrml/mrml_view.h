@@ -126,7 +126,7 @@ public:
 
     void setSimilarity( double value );
 
-    virtual TQSize tqsizeHint() const;
+    virtual TQSize sizeHint() const;
 
     const KURL& url() const { return m_url; }
     const KURL& thumbURL() const { return m_thumbURL; }

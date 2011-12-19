@@ -194,11 +194,11 @@ void PMSurfaceOfRevolution::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMSurfaceOfRevolution::tqmetaObject( ) const
+PMMetaObject* PMSurfaceOfRevolution::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SurfaceOfRevolution", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "SurfaceOfRevolution", Base::metaObject( ),
                                         createNewSurfaceOfRevolution );
       s_pMetaObject->addProperty(
          new PMSurfaceOfRevolutionProperty( "sturm", &PMSurfaceOfRevolution::setSturm,

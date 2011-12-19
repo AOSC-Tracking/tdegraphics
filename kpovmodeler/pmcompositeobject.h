@@ -49,7 +49,7 @@ public:
    virtual ~PMCompositeObject( );
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 
@@ -65,7 +65,7 @@ public:
     * Returns a pointer to the child object at position index,
     * or null if the index is out of range.
     */
-   virtual PMObject* tqchildAt( uint index ) const;
+   virtual PMObject* childAt( uint index ) const;
 
    /**
     * Returns true if the object contains the child object o

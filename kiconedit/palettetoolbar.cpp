@@ -42,7 +42,7 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   m_lblPreview = new TQLabel( base );
   m_lblPreview->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_lblPreview->setFixedHeight( 64 );
-  m_lblPreview->tqsetAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
+  m_lblPreview->setAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
   TQWhatsThis::add(m_lblPreview, i18n( "Preview\n\nThis is a 1:1 preview"
       " of the current icon" ) );
   m_layout->addWidget( m_lblPreview );
@@ -50,7 +50,7 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   m_currentColorView = new TQLabel( base );
   m_currentColorView->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
   m_currentColorView->setFixedHeight( 24 );
-  m_currentColorView->tqsetAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
+  m_currentColorView->setAlignment( TQt::AlignHCenter|TQt::AlignVCenter );
   TQWhatsThis::add(m_currentColorView, i18n( "Current color\n\nThis is the currently selected color" ) );
   m_layout->addWidget( m_currentColorView );
 

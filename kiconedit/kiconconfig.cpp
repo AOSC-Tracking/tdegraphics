@@ -49,7 +49,7 @@
 static inline TQPixmap loadIcon( const char * name )
 {
   return KGlobal::instance()->iconLoader()
-    ->loadIcon( TQString::tqfromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
+    ->loadIcon( TQString::fromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
 }
 
 KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent) 
@@ -548,8 +548,8 @@ KIconConfig::KIconConfig(TQWidget *parent)
 
   TQSize min(300, 400);
 
-  if (300 < tqsizeHint().width()) { min.setWidth(tqsizeHint().width()); }
-  if (400 < tqsizeHint().height()) { min.setHeight(tqsizeHint().height()); }
+  if (300 < sizeHint().width()) { min.setWidth(sizeHint().width()); }
+  if (400 < sizeHint().height()) { min.setHeight(sizeHint().height()); }
 
   resize(min);
 }

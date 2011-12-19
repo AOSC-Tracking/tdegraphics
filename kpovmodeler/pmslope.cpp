@@ -69,11 +69,11 @@ void PMSlope::readAttributes( const PMXMLHelper& h )
    m_slope = h.doubleAttribute( "slope", slopeDefault );
 }
 
-PMMetaObject* PMSlope::tqmetaObject( ) const
+PMMetaObject* PMSlope::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Slope", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Slope", Base::metaObject( ),
                                         createNewSlope );
       s_pMetaObject->addProperty(
          new PMSlopeProperty( "height", &PMSlope::setHeight, &PMSlope::height ) );

@@ -113,7 +113,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	connect(m_deviceSel, TQT_SIGNAL(selectionChanged(TQIconViewItem *)),
 		TQT_SLOT(slot_deviceSelected(TQIconViewItem *)));
 
-	m_deviceSel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
+	m_deviceSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
 	
 	// create actions
 	KAction *act;

@@ -140,13 +140,13 @@ bool PMPovrayWidget::render( const TQByteArray& scene, const PMRenderMode& m,
       int w, h;
 
       w = maxSize.width( ) + KDialog::spacingHint( ) * 2;
-      h = maxSize.height( ) + m_pSaveButton->tqsizeHint( ).height( ) * 2
+      h = maxSize.height( ) + m_pSaveButton->sizeHint( ).height( ) * 2
          + KDialog::spacingHint( ) * 6;
-      if( m_pProgressLabel->tqsizeHint( ).height( )
-          > m_pProgressBar->tqsizeHint( ).height( ) )
-         h += m_pProgressLabel->tqsizeHint( ).height( );
+      if( m_pProgressLabel->sizeHint( ).height( )
+          > m_pProgressBar->sizeHint( ).height( ) )
+         h += m_pProgressLabel->sizeHint( ).height( );
       else
-         h += m_pProgressBar->tqsizeHint( ).height( );
+         h += m_pProgressBar->sizeHint( ).height( );
 
       w += 16;
       h += 16;
@@ -319,11 +319,11 @@ void PMPovrayWidget::slotPovrayOutput( )
    m_pPovrayOutputWidget->show( );
 }
 
-void PMPovrayWidget::slotRenderingFinished( int returntqStatus )
+void PMPovrayWidget::slotRenderingFinished( int returnStatus )
 {
-   kdDebug( PMArea ) << "Povray exited with status " << returntqStatus << endl;
+   kdDebug( PMArea ) << "Povray exited with status " << returnStatus << endl;
    m_bRunning = false;
-   if( returntqStatus == 0 )
+   if( returnStatus == 0 )
       m_pSaveButton->setEnabled( true );
    m_pStopButton->setEnabled( false );
    m_pSuspendButton->setEnabled( false );
@@ -331,11 +331,11 @@ void PMPovrayWidget::slotRenderingFinished( int returntqStatus )
    m_pProgressLabel->setText( i18n( "finished" ) );
    m_pProgressTimer->stop( );
 
-   if( ( returntqStatus != 0 ) && !m_stopped )
+   if( ( returnStatus != 0 ) && !m_stopped )
    {
       KMessageBox::error( this, i18n( "Povray exited abnormally.\n"
                                       "See the povray output for details." )
-                          .tqarg( returntqStatus ) );
+                          .tqarg( returnStatus ) );
    }
    else if( m_pRenderWidget->povrayOutput( ).contains( "ERROR" ) )
    {

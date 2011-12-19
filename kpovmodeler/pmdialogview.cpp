@@ -69,7 +69,7 @@ void PMDialogEditContent::calculateSize( )
    int fw = lineWidth( ) * 2;
    if( m_pContents )
    {
-      TQSize newSize = m_pContents->tqminimumSizeHint( );
+      TQSize newSize = m_pContents->minimumSizeHint( );
 
       setVScrollBarMode( AlwaysOff );
       setHScrollBarMode( AlwaysOff );

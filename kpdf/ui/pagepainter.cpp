@@ -139,7 +139,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
             {
                 case KpdfSettings::EnumRenderMode::Inverted:
                     // Invert image pixels using TQImage internal function
-                    backImage.tqinvertPixels(false);
+                    backImage.invertPixels(false);
                     break;
                 case KpdfSettings::EnumRenderMode::Recolor:
                     // Recolor image using KImageEffect::flatten with dither:0

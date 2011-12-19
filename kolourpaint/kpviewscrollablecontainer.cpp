@@ -184,7 +184,7 @@ void kpGrip::updatePixmap ()
         return;
 
     TQPixmap pixmap (width (), height ());
-    pixmap.fill (tqcolorGroup ().highlight ());
+    pixmap.fill (colorGroup ().highlight ());
     kpPixmapFX::ensureTransparentAt (&pixmap, pixmap.rect ());
     const TQRect hr = hotRect ();
 #if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER

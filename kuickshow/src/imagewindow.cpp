@@ -1128,7 +1128,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )
     {
-        return KGlobalSettings::desktopGeometry(tqtopLevelWidget()).width();
+        return KGlobalSettings::desktopGeometry(topLevelWidget()).width();
     } else
 	return Kuick::workArea().width();
 }
@@ -1137,7 +1137,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 int ImageWindow::desktopHeight( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen ) {
-        return KGlobalSettings::desktopGeometry(tqtopLevelWidget()).height();
+        return KGlobalSettings::desktopGeometry(topLevelWidget()).height();
     } else {
 	return Kuick::workArea().height();
     }
@@ -1146,7 +1146,7 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
 TQSize ImageWindow::maxImageSize() const
 {
     if ( myIsFullscreen ) {
-        return KGlobalSettings::desktopGeometry(tqtopLevelWidget()).size();
+        return KGlobalSettings::desktopGeometry(topLevelWidget()).size();
     }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
@@ -1193,7 +1193,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     if ( !ImlibWidget::canZoomTo( newWidth, newHeight ) )
         return false;
     
-    TQSize desktopSize = KGlobalSettings::desktopGeometry(tqtopLevelWidget()).size();
+    TQSize desktopSize = KGlobalSettings::desktopGeometry(topLevelWidget()).size();
 
     int desktopArea = desktopSize.width() * desktopSize.height();
     int imageArea = newWidth * newHeight;

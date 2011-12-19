@@ -63,12 +63,12 @@ kpThumbnail::kpThumbnail (kpMainWindow *parent, const char *name)
     }
 
 
-    TQSize layoutMinimumSize = tqlayout () ? tqlayout ()->tqminimumSize () : TQSize ();
+    TQSize layoutMinimumSize = tqlayout () ? tqlayout ()->minimumSize () : TQSize ();
 #if DEBUG_KP_THUMBNAIL
     kdDebug () << "\ttqlayout=" << tqlayout ()
-               << " minSize=" << (tqlayout () ? tqlayout ()->tqminimumSize () : TQSize ()) << endl;
+               << " minSize=" << (tqlayout () ? tqlayout ()->minimumSize () : TQSize ()) << endl;
     kdDebug () << "\tboxLayout=" << boxLayout ()
-               << " minSize=" << (boxLayout () ? boxLayout ()->tqminimumSize () : TQSize ())
+               << " minSize=" << (boxLayout () ? boxLayout ()->minimumSize () : TQSize ())
                << endl;
 #endif
     if (tqlayout ())

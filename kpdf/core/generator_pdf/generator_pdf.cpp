@@ -1017,10 +1017,10 @@ void PDFGenerator::addTransition( int pageNumber, KPDFPage * page )
 
     switch ( pdfTransition->getAlignment() ) {
         case PageTransition::Horizontal:
-            transition->tqsetAlignment( KPDFPageTransition::Horizontal );
+            transition->setAlignment( KPDFPageTransition::Horizontal );
             break;
         case PageTransition::Vertical:
-            transition->tqsetAlignment( KPDFPageTransition::Vertical );
+            transition->setAlignment( KPDFPageTransition::Vertical );
             break;
     }
 

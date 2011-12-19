@@ -67,11 +67,11 @@ void PMQuickColor::readAttributes( const PMXMLHelper& h )
    m_color = h.colorAttribute( "quickcolor", colorDefault );
 }
 
-PMMetaObject* PMQuickColor::tqmetaObject( ) const
+PMMetaObject* PMQuickColor::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "QuickColor", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "QuickColor", Base::metaObject( ),
                                         createNewQuickColor );
       s_pMetaObject->addProperty(
          new PMQuickColorProperty( "color", &PMQuickColor::setColor, &PMQuickColor::color ) );

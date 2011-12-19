@@ -156,7 +156,7 @@ TQPixmap kpDocument::convertToPixmapAsLosslessAsPossible (
         metaInfo->setDotsPerMeterY (image.dotsPerMeterY ());
         metaInfo->setOffset (image.offset ());
 
-        TQValueList <TQImageTextKeyLang> keyList = image.tqtextList ();
+        TQValueList <TQImageTextKeyLang> keyList = image.textList ();
         for (TQValueList <TQImageTextKeyLang>::const_iterator it = keyList.begin ();
              it != keyList.end ();
              it++)
@@ -475,7 +475,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                 //       low maximum colour depth
                 i18n ("Lossy File Format"),
                 KStdGuiItem::save (),
-                TQString::tqfromLatin1 ("SaveInLossyMimeTypeDontAskAgain")));
+                TQString::fromLatin1 ("SaveInLossyMimeTypeDontAskAgain")));
     }
     else if (lossyType & kpDocumentSaveOptions::ColorDepthLow)
     {
@@ -490,7 +490,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                     .arg (saveOptions.colorDepth ()),
                 i18n ("Low Color Depth"),
                 KStdGuiItem::save (),
-                TQString::tqfromLatin1 ("SaveAtLowColorDepthDontAskAgain")));
+                TQString::fromLatin1 ("SaveAtLowColorDepthDontAskAgain")));
     }
 #undef TQUIT_IF_CANCEL
 
@@ -628,8 +628,8 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                << ",overwritePrompt=" << overwritePrompt
                << ",lossyPrompt=" << lossyPrompt
                << ")" << endl;
-    saveOptions.printDebug (TQString::tqfromLatin1 ("\tsaveOptions"));
-    metaInfo.printDebug (TQString::tqfromLatin1 ("\tmetaInfo"));
+    saveOptions.printDebug (TQString::fromLatin1 ("\tsaveOptions"));
+    metaInfo.printDebug (TQString::fromLatin1 ("\tmetaInfo"));
 #endif
 
     if (overwritePrompt && KIO::NetAccess::exists (url, false/*write*/, parent))

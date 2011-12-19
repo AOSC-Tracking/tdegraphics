@@ -126,13 +126,13 @@ public:
   inline GList<GUTF8String> GetStatusList(void);
 
      /// Just clear the list.
-  inline void CleartqStatus(void);
+  inline void ClearStatus(void);
 
      /// Get one status message and clear that message from the list.
-  GUTF8String GettqStatus(void);
+  GUTF8String GetStatus(void);
 
      /// Check if there are any more status messages.
-  inline bool HastqStatus(void) const;
+  inline bool HasStatus(void) const;
 
      /** This gets the data.  We can't use the simple port's request
        data since we want to allow the user to specify the ByteStream. */
@@ -143,7 +143,7 @@ private:
   GURL pool_url;
   GP<DataPool> pool;
   GList<GUTF8String> Errors;
-  GList<GUTF8String> tqStatus;
+  GList<GUTF8String> Status;
 private: //dummy stuff
   static GURL set_stream(ByteStream *);
 };
@@ -167,22 +167,22 @@ DjVuErrorList::ClearError(void)
 inline GList<GUTF8String>
 DjVuErrorList::GetStatusList(void)
 {
-  GList<GUTF8String> retval=(const GList<GUTF8String>)tqStatus;
-  tqStatus.empty();
+  GList<GUTF8String> retval=(const GList<GUTF8String>)Status;
+  Status.empty();
   return retval;
 }
 
 inline void
-DjVuErrorList::CleartqStatus(void)
-{ tqStatus.empty(); }
+DjVuErrorList::ClearStatus(void)
+{ Status.empty(); }
 
 inline bool
 DjVuErrorList::HasError(void) const
 { return !Errors.isempty(); }
 
 inline bool
-DjVuErrorList::HastqStatus(void) const
-{ return !tqStatus.isempty(); }
+DjVuErrorList::HasStatus(void) const
+{ return !Status.isempty(); }
 
 
 #ifdef HAVE_NAMESPACES

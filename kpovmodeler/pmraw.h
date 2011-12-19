@@ -67,7 +67,7 @@ public:
    virtual void readAttributes( const PMXMLHelper& h );
 
    /** */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
    /** */
    virtual void cleanUp( ) const;
 

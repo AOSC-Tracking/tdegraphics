@@ -59,24 +59,24 @@ PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :
    gl->setColStretch( 1, 1 );
    TQLabel* lbl = new TQLabel( i18n( "Name: " ), this );
    m_pName = new TQLineEdit( this );
-   m_pName->tqsetAlignment( TQt::AlignLeft );
+   m_pName->setAlignment( TQt::AlignLeft );
    m_pName->setReadOnly( true );
    gl->addWidget( lbl, 0, 0 );
    gl->addWidget( m_pName, 0, 1 );
 
    lbl = new TQLabel( i18n( "Description:" ), this );
-   lbl->tqsetAlignment( TQt::AlignTop );
+   lbl->setAlignment( TQt::AlignTop );
    m_pDescription = new TQMultiLineEdit( this );
-   m_pDescription->tqsetAlignment( TQt::AlignTop  | TQt::AlignLeft |
+   m_pDescription->setAlignment( TQt::AlignTop  | TQt::AlignLeft |
                                  TQt::WordBreak | TQt::DontClip );
    m_pDescription->setReadOnly( true );
    gl->addWidget( lbl, 1, 0 );
    gl->addWidget( m_pDescription, 1, 1 );
 
    m_pKeywordsLabel = new TQLabel( i18n( "Keywords:" ), this );
-   m_pKeywordsLabel->tqsetAlignment( TQt::AlignTop );
+   m_pKeywordsLabel->setAlignment( TQt::AlignTop );
    m_pKeywords = new TQMultiLineEdit( this );
-   m_pKeywords->tqsetAlignment( TQt::AlignTop  | TQt::AlignLeft |
+   m_pKeywords->setAlignment( TQt::AlignTop  | TQt::AlignLeft |
                                  TQt::WordBreak | TQt::DontClip );
    m_pKeywords->setReadOnly( true );
    gl->addWidget( m_pKeywordsLabel, 2, 0 );
@@ -302,7 +302,7 @@ bool PMLibraryEntryPreview::saveIfNeeded( bool forceSave )
 
             // Add them to the object to save.
             PMObjectDrag drag( m_pPart, sortedList );
-            objToSave.setObjects( drag.tqencodedData( "application/x-kpovmodeler" ) );
+            objToSave.setObjects( drag.encodedData( "application/x-kpovmodeler" ) );
 
             // Add the preview image
             objToSave.setPreview( m_image.copy( ) );

@@ -70,7 +70,7 @@ public slots:
    void slotPovrayOutput( );
 
 protected slots:
-   void slotRenderingFinished( int returntqStatus );
+   void slotRenderingFinished( int returnStatus );
    void slotProgress( int i );
    void slotLineFinished( int line );
    void slotUpdateSpeed( );

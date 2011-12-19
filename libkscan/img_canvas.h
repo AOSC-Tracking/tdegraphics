@@ -123,7 +123,7 @@ public slots:
             maintain_aspect = aspect_in_mind;
             tqrepaint();
         }
-    virtual TQSize tqsizeHint() const;
+    virtual TQSize sizeHint() const;
     void newImage( TQImage* );
     void newImageHoldZoom( TQImage* );
     void deleteView( TQImage *);

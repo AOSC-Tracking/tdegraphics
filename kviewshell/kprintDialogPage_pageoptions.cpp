@@ -91,7 +91,7 @@ KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *parent, co
   }
 
   
-  resize( TQSize(319, 166).expandedTo(tqminimumSizeHint()) );
+  resize( TQSize(319, 166).expandedTo(minimumSizeHint()) );
   clearWState( WState_Polished );
 }
 

@@ -58,11 +58,11 @@ TQString PMObjectLink::description( ) const
    return i18n( "object link" );
 }
 
-PMMetaObject* PMObjectLink::tqmetaObject( ) const
+PMMetaObject* PMObjectLink::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "ObjectLink", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "ObjectLink", Base::metaObject( ),
                                         createNewObjectLink );
       s_pMetaObject->addProperty(
          new PMObjectLinkProperty( "linkedObject", &PMObjectLink::setLinkedObjectProperty,

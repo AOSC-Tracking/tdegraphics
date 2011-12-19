@@ -120,7 +120,7 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    (void ) new TQLabel( cap, hb );
    m_led = new KLed( hb );
    m_led->setState( KLed::Off );
-   m_led->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ));
+   m_led->setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ));
 
 
    (void) new KSeparator( KSeparator::HLine, this);
@@ -501,9 +501,9 @@ TQScrollView *ScanParams::scannerParams( )
    }
 
    TQWidget *spacer = new TQWidget( pbox );
-   spacer->tqsetSizePolicy(TQSizePolicy::Minimum, TQSizePolicy::Expanding);
+   spacer->setSizePolicy(TQSizePolicy::Minimum, TQSizePolicy::Expanding);
 
-   pbox->setMinimumWidth( pbox->tqsizeHint().width() );
+   pbox->setMinimumWidth( pbox->sizeHint().width() );
    sv->setMinimumWidth( pbox->minimumWidth() );
    sv->addChild( pbox );
 
@@ -591,7 +591,7 @@ void ScanParams::slFileSelect( void )
 	   fi_item = filterList.next() )
       {
 
-	 filter.append( TQString::tqfromLatin1( prefix + fi_item.lower()) );
+	 filter.append( TQString::fromLatin1( prefix + fi_item.lower()) );
       }
    }
    else
@@ -638,7 +638,7 @@ void ScanParams::slVirtScanModeSelect( int id )
 	 kdDebug(29000) << "Found File in Filename-Option: " << vf << endl;
 
 	 TQFileInfo fi( vf );
-	 if( fi.extension() != TQString::tqfromLatin1("pnm") )
+	 if( fi.extension() != TQString::fromLatin1("pnm") )
 	    virt_filename->set(TQCString(""));
       }
    } else {
@@ -695,7 +695,7 @@ void ScanParams::virtualScannerParams( void )
       TQHBoxLayout *hb = new TQHBoxLayout();
       top->addLayout( hb );
       w = virt_filename->widget();
-      w->setMinimumHeight( (w->tqsizeHint()).height());
+      w->setMinimumHeight( (w->sizeHint()).height());
       connect( w, TQT_SIGNAL(returnPressed()), this,
 	       TQT_SLOT( slCheckGlob()));
 

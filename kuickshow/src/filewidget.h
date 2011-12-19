@@ -71,7 +71,7 @@ protected:
     virtual bool eventFilter( TQObject *o, TQEvent * );
     virtual void resizeEvent( TQResizeEvent * );
     virtual void activatedMenu( const KFileItem *, const TQPoint& );
-    virtual TQSize tqsizeHint() const;
+    virtual TQSize sizeHint() const;
 
 private slots:
     void slotReturnPressed( const TQString& text );

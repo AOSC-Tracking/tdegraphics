@@ -45,11 +45,11 @@ PMTexture::~PMTexture( )
 {
 }
 
-PMMetaObject* PMTexture::tqmetaObject( ) const
+PMMetaObject* PMTexture::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Texture", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Texture", Base::metaObject( ),
                                         createNewTexture );
       s_pMetaObject->addProperty(
          new PMTextureProperty( "uvMapping", &PMTexture::setUVMapping, &PMTexture::uvMapping ) );

@@ -163,13 +163,13 @@ void KView::load( const KURL & url )
 		if( url.isLocalFile() )
 		{
 			// XXX: this code is what
-			//KRecentDirs::add( TQString::tqfromLatin1( ":load_image" ), url.directory() );
+			//KRecentDirs::add( TQString::fromLatin1( ":load_image" ), url.directory() );
 			// would do:
 			TQString directory = url.directory();
-			TQString key = TQString::tqfromLatin1( "load_image" );
+			TQString key = TQString::fromLatin1( "load_image" );
 			KConfig * config = KGlobal::config();
 
-			config->setGroup( TQString::tqfromLatin1( "Recent Dirs" ) );
+			config->setGroup( TQString::fromLatin1( "Recent Dirs" ) );
 			TQStringList result = config->readPathListEntry( key );
 			// make sure the dir is first in history
 			result.remove( directory );
@@ -208,7 +208,7 @@ TQSize KView::sizeForCentralWidgetSize( TQSize size )
 	if( ! mb->isHidden() )
 	{
 		size.rheight() += mb->heightForWidth( width() );
-		if( tqstyle().tqstyleHint( TQStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
+		if( tqstyle().styleHint( TQStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
 			size.rheight() += dockWindowsMovable() ? 1 : 2;
 	}
 	kdDebug( 4600 ) << "added Menubar:           " << size << endl;
@@ -498,7 +498,7 @@ void KView::setupActions( TQObject * partobject )
 	TQObject * extension = partobject->child( 0, "KParts::BrowserExtension", false );
 	if( extension )
 	{
-		TQStrList slotNames = extension->tqmetaObject()->slotNames();
+		TQStrList slotNames = extension->metaObject()->slotNames();
 		if( slotNames.contains( "print()" ) )
 			KStdAction::print( extension, TQT_SLOT( print() ), actionCollection(), "print" );
 		if( slotNames.contains( "del()" ) )
@@ -653,7 +653,7 @@ TQSize KView::barSize( int mainwinwidth, BarSizeFrom from )
 				width += toolBar()->width();
 				break;
 			case KToolBar::Flat:
-				height += kapp->tqstyle().tqpixelMetric( TQStyle::PM_DockWindowHandleExtent );
+				height += kapp->tqstyle().pixelMetric( TQStyle::PM_DockWindowHandleExtent );
 				break;
 			case KToolBar::Floating:
 				break;

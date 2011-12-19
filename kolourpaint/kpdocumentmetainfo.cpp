@@ -82,7 +82,7 @@ kpDocumentMetaInfo &kpDocumentMetaInfo::operator= (const kpDocumentMetaInfo &rhs
 void kpDocumentMetaInfo::printDebug (const TQString &prefix) const
 {
     const TQString usedPrefix = !prefix.isEmpty () ?
-                                   prefix + TQString::tqfromLatin1 (":") :
+                                   prefix + TQString::fromLatin1 (":") :
                                    TQString();
 
     kdDebug () << usedPrefix << endl;

@@ -203,7 +203,7 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
   p.drawRect(outlineRect);
 
   // Paint page shadow
-  TQColor backgroundColor = tqcolorGroup().mid();
+  TQColor backgroundColor = colorGroup().mid();
 
   // (Re-)generate the Pixmaps for the shadow corners, if necessary
   if (backgroundColor != backgroundColorForCorners)

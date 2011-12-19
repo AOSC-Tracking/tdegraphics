@@ -86,9 +86,9 @@ void KCMKMrml::checkGiftInstallation()
         KMessageBox::error( this, errorMessage );
         m_mainPage->hide();
         TQLabel *errorLabel = new TQLabel( errorMessage, this );
-        errorLabel->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
+        errorLabel->setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
         KURLLabel *urlLabel = new KURLLabel( "http://www.gnu.org/software/gift", TQString(), this ); 
-        urlLabel->tqsetSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ) );
+        urlLabel->setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ) );
         connect( urlLabel, TQT_SIGNAL( leftClickedURL( const TQString& )), kapp, TQT_SLOT( invokeBrowser( const TQString& )) );
         TQLayout *l = tqlayout();
         l->addItem( new TQSpacerItem( 0, 10, TQSizePolicy::Minimum, TQSizePolicy::Expanding ) );

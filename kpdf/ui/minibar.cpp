@@ -198,7 +198,7 @@ void MiniBar::notifyViewportChanged( bool /*smoothMove*/ )
 void MiniBar::resizeEvent( TQResizeEvent * e )
 {
     // auto-hide 'prev' and 'next' buttons if not enough space
-    const TQSize & myHint = tqminimumSizeHint();
+    const TQSize & myHint = minimumSizeHint();
     bool shown = m_prevButton->isVisible() && m_nextButton->isVisible();
     if ( shown && e->size().width() < myHint.width() )
     {
@@ -208,7 +208,7 @@ void MiniBar::resizeEvent( TQResizeEvent * e )
     }
     else if ( !shown )
     {
-        int histeresis = m_prevButton->tqsizeHint().width() * 2 + 2;
+        int histeresis = m_prevButton->sizeHint().width() * 2 + 2;
         if ( e->size().width() > (myHint.width() + histeresis) )
         {
             m_prevButton->show();
@@ -337,7 +337,7 @@ PagesEdit::PagesEdit( MiniBar * parent )
     setValidator( m_validator );
 
     // customize text properties
-    tqsetAlignment( TQt::AlignCenter );
+    setAlignment( TQt::AlignCenter );
     setMaxLength( 4 );
 }
 

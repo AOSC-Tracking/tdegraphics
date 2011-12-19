@@ -255,11 +255,11 @@ void kpEffectsDialog::selectEffect (int which)
         // Don't resize the preview when showing the widget:
         // TODO: actually work
 
-        TQSize previewGroupBoxMinSize = m_previewGroupBox->tqminimumSize ();
-        TQSize previewGroupBoxMaxSize = m_previewGroupBox->tqmaximumSize ();
+        TQSize previewGroupBoxMinSize = m_previewGroupBox->minimumSize ();
+        TQSize previewGroupBoxMaxSize = m_previewGroupBox->maximumSize ();
         TQLayout::ResizeMode previewGroupBoxResizeMode = 
             m_previewGroupBox->tqlayout () ?
-                m_previewGroupBox->tqlayout ()->tqresizeMode () :
+                m_previewGroupBox->tqlayout ()->resizeMode () :
                 TQLayout::Auto;
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tpreviewGroupBox: minSize=" << previewGroupBoxMinSize

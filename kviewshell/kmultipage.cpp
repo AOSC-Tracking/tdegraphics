@@ -54,7 +54,7 @@ KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject 
   
   splitterWidget = new TQSplitter(verticalBox, widgetName);
   splitterWidget->setOpaqueResize(false);
-  splitterWidget->tqsetSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
+  splitterWidget->setSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::MinimumExpanding);
   
   // Create SideBar
   sideBar = new TQToolBox(splitterWidget, "sidebar");
@@ -216,7 +216,7 @@ bool KMultiPage::closeURL()
   // Clear Table of Contents
   tableOfContents->clear();
   
-  // Clear tqStatus Bar
+  // Clear Status Bar
   emit setStatusBarText(TQString());
 
   return true;

@@ -231,7 +231,7 @@ void ImageCanvas::newImage( TQImage *new_image )
    kdDebug(29000) << "tqrepaint ok" << endl;
 }
 
-TQSize ImageCanvas::tqsizeHint() const
+TQSize ImageCanvas::sizeHint() const
 {
    return( TQSize( 2, 2 ));
 }
@@ -379,7 +379,7 @@ void ImageCanvas::drawContents( TQPainter * p, int clipx, int clipy, int clipw, 
     // p->scale( used_xscaler, used_yscaler );
     // p->scale( used_xscaler, used_yscaler );
     if ( x2 >= x1 && y2 >= y1 ) {
-    	p->tqdrawPixmap( x1, y1, *pmScaled, x1, y1 ); //, clipw, cliph);
+    	p->drawPixmap( x1, y1, *pmScaled, x1, y1 ); //, clipw, cliph);
         // p->setBrush( red );
         // p->drawRect( x1, y1, clipw, cliph );
     }
@@ -675,7 +675,7 @@ void ImageCanvas::update_scaled_pixmap( void )
     if( scaleKind() == DYNAMIC )
         kdDebug(28000) << "Scaling DYNAMIC" << endl;
     TQSize noSBSize( visibleWidth(), visibleHeight());
-    const int sbWidth = kapp->tqstyle().tqpixelMetric( TQStyle::PM_ScrollBarExtent );
+    const int sbWidth = kapp->tqstyle().pixelMetric( TQStyle::PM_ScrollBarExtent );
 
     // if( verticalScrollBar()->visible() ) noSBSize.width()+=sbWidth;
     // if( horizontalScrollBar()->visible() ) noSBSize.height()+=sbWidth;

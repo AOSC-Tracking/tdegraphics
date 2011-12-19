@@ -731,7 +731,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
         connect (m_document, TQT_SIGNAL (selectionIsTextChanged (bool)),
                  this, TQT_SLOT (slotImageMenuUpdateDueToSelection ()));
 
-        // tqStatus bar
+        // Status bar
         connect (m_document, TQT_SIGNAL (documentOpened ()),
                  this, TQT_SLOT (recalculateStatusBar ()));
 

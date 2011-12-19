@@ -373,7 +373,7 @@ TQBitmap kpSelection::maskForOwnType (bool nullForRectangular) const
         points.detach ();
         points.translate (-m_rect.x (), -m_rect.y ());
 
-        painter.tqdrawPolygon (points, false/*even-odd algo*/);
+        painter.drawPolygon (points, false/*even-odd algo*/);
     }
 
     painter.end ();
@@ -921,7 +921,7 @@ TQString kpSelection::textForTextLines (const TQValueVector <TQString> &textLine
          it != textLines_.end ();
          it++)
     {
-        bigString += TQString::tqfromLatin1 ("\n");
+        bigString += TQString::fromLatin1 ("\n");
         bigString += (*it);
     }
 
@@ -1049,7 +1049,7 @@ int kpSelection::minimumHeightForTextStyle (const kpTextStyle &)
 }
 
 // public static
-TQSize kpSelection::tqminimumSizeForTextStyle (const kpTextStyle &textStyle)
+TQSize kpSelection::minimumSizeForTextStyle (const kpTextStyle &textStyle)
 {
     return TQSize (minimumWidthForTextStyle (textStyle),
                   minimumHeightForTextStyle (textStyle));
@@ -1061,7 +1061,7 @@ int kpSelection::preferredMinimumWidthForTextStyle (const kpTextStyle &textStyle
 {
     const int about15CharsWidth =
         textStyle.fontMetrics ().width (
-            TQString::tqfromLatin1 ("1234567890abcde"));
+            TQString::fromLatin1 ("1234567890abcde"));
 
     const int preferredMinWidth =
         TQMAX (150,
@@ -1108,7 +1108,7 @@ int kpSelection::minimumHeight () const
 }
 
 // public
-TQSize kpSelection::tqminimumSize () const
+TQSize kpSelection::minimumSize () const
 {
     return TQSize (minimumWidth (), minimumHeight ());
 }

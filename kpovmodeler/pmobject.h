@@ -85,7 +85,7 @@ public:
    /**
     * Returns the meta object for the class
     */
-   virtual PMMetaObject* tqmetaObject( ) const;
+   virtual PMMetaObject* metaObject( ) const;
 
    /**
     * Returns true if the object is of type t or inherits the object
@@ -174,7 +174,7 @@ public:
     * Returns a pointer to the child object at position index,
     * or null if the index is out of range.
     */
-   virtual PMObject* tqchildAt( uint ) const { return 0; }
+   virtual PMObject* childAt( uint ) const { return 0; }
    /**
     * Returns the next sibling of that item
     */

@@ -104,11 +104,11 @@ PMGlobalSettings::~PMGlobalSettings( )
 {
 }
 
-PMMetaObject* PMGlobalSettings::tqmetaObject( ) const
+PMMetaObject* PMGlobalSettings::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "GlobalSettings", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "GlobalSettings", Base::metaObject( ),
                                         createNewGlobalSettings );
       s_pMetaObject->addProperty(
          new PMGlobalSettingsProperty( "adcBailout", &PMGlobalSettings::setAdcBailout, &PMGlobalSettings::adcBailout ) );

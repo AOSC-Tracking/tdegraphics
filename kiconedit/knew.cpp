@@ -173,7 +173,7 @@ NewSelect::NewSelect(TQWidget *parent) : TQWidget( parent )
   l->addWidget( rbtempl, 1 );
   //l->addWidget(rbtempl, 5, AlignLeft);
   
-  //grp->setMinimumSize(grp->tqchildrenRect().size());
+  //grp->setMinimumSize(grp->childrenRect().size());
   
   grp->setButton( 0 );
 }

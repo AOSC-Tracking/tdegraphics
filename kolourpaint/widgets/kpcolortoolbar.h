@@ -91,7 +91,7 @@ public:
     kpColor oldBackgroundColor () const;
 
 public:
-    virtual TQSize tqsizeHint () const;
+    virtual TQSize sizeHint () const;
 
 protected:
     TQRect swapPixmapRect () const;
@@ -163,7 +163,7 @@ public:
     kpTransparentColorCell (TQWidget *parent, const char *name = 0);
     virtual ~kpTransparentColorCell ();
 
-    virtual TQSize tqsizeHint () const;
+    virtual TQSize sizeHint () const;
 
 signals:
     void transparentColorSelected (int mouseButton);

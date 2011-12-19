@@ -198,11 +198,11 @@ void PMLathe::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMLathe::tqmetaObject( ) const
+PMMetaObject* PMLathe::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "Lathe", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "Lathe", Base::metaObject( ),
                                         createNewLathe );
       s_pMetaObject->addProperty(
          new PMLatheProperty( "sturm", &PMLathe::setSturm, &PMLathe::sturm ) );

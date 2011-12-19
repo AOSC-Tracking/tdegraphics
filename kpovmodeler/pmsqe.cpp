@@ -80,11 +80,11 @@ void PMSuperquadricEllipsoid::readAttributes( const PMXMLHelper& h )
    Base::readAttributes( h );
 }
 
-PMMetaObject* PMSuperquadricEllipsoid::tqmetaObject( ) const
+PMMetaObject* PMSuperquadricEllipsoid::metaObject( ) const
 {
    if( !s_pMetaObject )
    {
-      s_pMetaObject = new PMMetaObject( "SuperquadricEllipsoid", Base::tqmetaObject( ),
+      s_pMetaObject = new PMMetaObject( "SuperquadricEllipsoid", Base::metaObject( ),
                                         createNewSuperquadricEllipsoid );
       s_pMetaObject->addProperty(
          new PMSuperquadricEllipsoidProperty( "eastWestExponent",

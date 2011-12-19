@@ -69,20 +69,20 @@ void PMDockSplitter::setupMinMaxSize()
   // Set the minimum and maximum sizes
   int minx, maxx, miny, maxy;
   if (orientation ==Qt::Horizontal) {
-    miny = child0->tqminimumSize().height() + child1->tqminimumSize().height()+4;
-    maxy = child0->tqmaximumSize().height() + child1->tqmaximumSize().height()+4;
-    minx = (child0->tqminimumSize().width() > child1->tqminimumSize().width()) ? child0->tqminimumSize().width() : child1->tqminimumSize().width();
-    maxx = (child0->tqmaximumSize().width() > child1->tqmaximumSize().width()) ? child0->tqmaximumSize().width() : child1->tqmaximumSize().width();
+    miny = child0->minimumSize().height() + child1->minimumSize().height()+4;
+    maxy = child0->maximumSize().height() + child1->maximumSize().height()+4;
+    minx = (child0->minimumSize().width() > child1->minimumSize().width()) ? child0->minimumSize().width() : child1->minimumSize().width();
+    maxx = (child0->maximumSize().width() > child1->maximumSize().width()) ? child0->maximumSize().width() : child1->maximumSize().width();
 
     miny = (miny > 4) ? miny : 4;
     maxy = (maxy < 32000) ? maxy : 32000;
     minx = (minx > 2) ? minx : 2;
     maxx = (maxx < 32000) ? maxx : 32000;
   } else {
-    minx = child0->tqminimumSize().width() + child1->tqminimumSize().width()+4;
-    maxx = child0->tqmaximumSize().width() + child1->tqmaximumSize().width()+4;
-    miny = (child0->tqminimumSize().height() > child1->tqminimumSize().height()) ? child0->tqminimumSize().height() : child1->tqminimumSize().height();
-    maxy = (child0->tqmaximumSize().height() > child1->tqmaximumSize().height()) ? child0->tqmaximumSize().height() : child1->tqmaximumSize().height();
+    minx = child0->minimumSize().width() + child1->minimumSize().width()+4;
+    maxx = child0->maximumSize().width() + child1->maximumSize().width()+4;
+    miny = (child0->minimumSize().height() > child1->minimumSize().height()) ? child0->minimumSize().height() : child1->minimumSize().height();
+    maxy = (child0->maximumSize().height() > child1->maximumSize().height()) ? child0->maximumSize().height() : child1->maximumSize().height();
 
     minx = (minx > 4) ? minx : 4;
     maxx = (maxx < 32000) ? maxx : 32000;
@@ -143,15 +143,15 @@ int PMDockSplitter::checkValue( int position ) const
 {
   if (initialised){
     if (orientation ==Qt::Vertical){
-      if (position < (child0->tqminimumSize().width()))
-        position = child0->tqminimumSize().width();
-      if ((width()-4-position) < (child1->tqminimumSize().width()))
-        position = width() - (child1->tqminimumSize().width()) -4;
+      if (position < (child0->minimumSize().width()))
+        position = child0->minimumSize().width();
+      if ((width()-4-position) < (child1->minimumSize().width()))
+        position = width() - (child1->minimumSize().width()) -4;
     } else {
-      if (position < (child0->tqminimumSize().height()))
-        position = (child0->tqminimumSize().height());
-      if ((height()-4-position) < (child1->tqminimumSize().height()))
-        position = height() - (child1->tqminimumSize().height()) -4;
+      if (position < (child0->minimumSize().height()))
+        position = (child0->minimumSize().height());
+      if ((height()-4-position) < (child1->minimumSize().height()))
+        position = height() - (child1->minimumSize().height()) -4;
     }
   }
 
@@ -301,7 +301,7 @@ PMDockButton_Private::~PMDockButton_Private()
 
 void PMDockButton_Private::drawButton( TQPainter* p )
 {
-  p->fillRect( 0,0, width(), height(), TQBrush(tqcolorGroup().brush(TQColorGroup::Background)) );
+  p->fillRect( 0,0, width(), height(), TQBrush(colorGroup().brush(TQColorGroup::Background)) );
   p->drawPixmap( (width() - pixmap()->width()) / 2, (height() - pixmap()->height()) / 2, *pixmap() );
   if ( moveMouse && !isDown() ){
     p->setPen( white );
@@ -309,12 +309,12 @@ void PMDockButton_Private::drawButton( TQPainter* p )
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );
 
-    p->setPen( tqcolorGroup().dark() );
+    p->setPen( colorGroup().dark() );
     p->lineTo( width() - 1, height() - 1 );
     p->lineTo( 0, height() - 1 );
   }
   if ( isOn() || isDown() ){
-    p->setPen( tqcolorGroup().dark() );
+    p->setPen( colorGroup().dark() );
     p->moveTo( 0, height() - 1 );
     p->lineTo( 0, 0 );
     p->lineTo( width() - 1, 0 );

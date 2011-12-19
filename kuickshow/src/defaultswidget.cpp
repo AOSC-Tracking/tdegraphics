@@ -92,7 +92,7 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   // --
 
   gbPreview = new TQGroupBox( i18n("Preview"), this );
-  gbPreview->tqsetAlignment( AlignCenter );
+  gbPreview->setAlignment( AlignCenter );
 
   lbImOrig = new TQLabel( i18n("Original"), gbPreview );
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );

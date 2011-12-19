@@ -52,7 +52,7 @@ public:
    ScanParams( TQWidget *parent, const char *name = 0);
    ~ScanParams();
 #if 0
-   TQSize tqsizeHint( );
+   TQSize sizeHint( );
 #endif
    bool connectDevice( KScanDevice* );
 

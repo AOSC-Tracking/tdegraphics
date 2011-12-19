@@ -1035,7 +1035,7 @@ void KIconEditGrid::load( TQImage *image)
             setColor((y*numCols())+x, *l, false);
         }
         //kdDebug(4640) << "Row: " << y << endl;
-        kapp->tqprocessEvents(200);
+        kapp->processEvents(200);
     }
 
     updateColors();

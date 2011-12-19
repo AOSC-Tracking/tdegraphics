@@ -157,37 +157,37 @@ void KGamma::setupUI() {
     pic1->setMinimumSize(530, 171);
     pic1->setBackgroundPixmap(background);
     pic1->setPixmap(TQPixmap(locate("data", "kgamma/pics/greyscale.png")));
-    pic1->tqsetAlignment(AlignCenter);
+    pic1->setAlignment(AlignCenter);
     stack->addWidget( pic1, 0 );
 
     TQLabel *pic2 = new TQLabel(stack);
     pic2->setBackgroundPixmap(background);
     pic2->setPixmap(TQPixmap(locate("data", "kgamma/pics/rgbscale.png")));
-    pic2->tqsetAlignment(AlignCenter);
+    pic2->setAlignment(AlignCenter);
     stack->addWidget( pic2, 1 );
 
     TQLabel *pic3 = new TQLabel(stack);
     pic3->setBackgroundPixmap(background);
     pic3->setPixmap(TQPixmap(locate("data", "kgamma/pics/cmyscale.png")));
-    pic3->tqsetAlignment(AlignCenter);
+    pic3->setAlignment(AlignCenter);
     stack->addWidget( pic3, 2 );
 
     TQLabel *pic4 = new TQLabel(stack);
     pic4->setBackgroundPixmap(background);
     pic4->setPixmap(TQPixmap(locate("data", "kgamma/pics/darkgrey.png")));
-    pic4->tqsetAlignment(AlignCenter);
+    pic4->setAlignment(AlignCenter);
     stack->addWidget( pic4, 3 );
 
     TQLabel *pic5 = new TQLabel(stack);
     pic5->setBackgroundPixmap(background);
     pic5->setPixmap(TQPixmap(locate("data", "kgamma/pics/midgrey.png")));
-    pic5->tqsetAlignment(AlignCenter);
+    pic5->setAlignment(AlignCenter);
     stack->addWidget( pic5, 4 );
 
     TQLabel *pic6 = new TQLabel(stack);
     pic6->setBackgroundPixmap(background);
     pic6->setPixmap(TQPixmap(locate("data", "kgamma/pics/lightgrey.png")));
-    pic6->tqsetAlignment(AlignCenter);
+    pic6->setAlignment(AlignCenter);
     stack->addWidget( pic6, 5 );
 
     topLayout->addWidget(stack, 10);
@@ -279,7 +279,7 @@ void KGamma::setupUI() {
     TQLabel *error = new TQLabel(this);
     error->setText(i18n("Gamma correction is not supported by your"
     " graphics hardware or driver."));
-    error->tqsetAlignment(AlignCenter);
+    error->setAlignment(AlignCenter);
     topLayout->addWidget(error);
   }
 }
