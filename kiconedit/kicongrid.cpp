@@ -1118,7 +1118,7 @@ TQImage KIconEditGrid::clipboardImage(bool &ok)
   {
     TQCString format = fileFormats.current();
     TQCString type = "image/" + format.lower();
-    if (kapp->tqclipboard()->data()->provides(type ) )
+    if (kapp->clipboard()->data()->provides(type ) )
     {
       oneIsSupported = true;
     }

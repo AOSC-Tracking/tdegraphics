@@ -144,7 +144,7 @@ kpToolToolBar::kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, i
     setOrientation (orientation ());
 
 #if DEBUG_KP_TOOL_TOOL_BAR
-    kdDebug () << "kpToolToolBar::<ctor> tqlayout tool widgets msec="
+    kdDebug () << "kpToolToolBar::<ctor> layout tool widgets msec="
                << timer.elapsed () << endl;
 #endif
 

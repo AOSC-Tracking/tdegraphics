@@ -54,10 +54,10 @@ public:
 PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
    TQGroupBox* gb = new TQGroupBox( i18n( "Installed Plugins" ), this );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
 
    TQVBoxLayout* gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
@@ -77,7 +77,7 @@ PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
    hl->addWidget( m_pToggle );
    hl->addStretch( 1 );
 
-   vtqlayout->addStretch( 1 );
+   vlayout->addStretch( 1 );
 }
 
 void PMPluginSettings::displaySettings( )

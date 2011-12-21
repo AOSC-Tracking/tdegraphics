@@ -111,7 +111,7 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    /* initialise own widgets */
    cb_gray_preview = 0;
 
-   /* A top tqlayout box */
+   /* A top layout box */
    // TQVBoxLayout *top = new TQVBoxLayout(this, 6);
    TQHBox *hb = new TQHBox( this );
    hb->setSpacing( KDialog::spacingHint() );
@@ -160,7 +160,7 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slStartScan()) );
    pb = kbb->addButton( i18n( "&Preview Scan" ));
    connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slAcquirePreview()) );
-   kbb->tqlayout();
+   kbb->layout();
 
    /* Initialise the progress dialog */
    progressDialog = new TQProgressDialog( i18n("Scanning in progress"),

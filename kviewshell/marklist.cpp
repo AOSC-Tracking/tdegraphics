@@ -169,16 +169,16 @@ MarkListWidget::MarkListWidget(TQWidget* _parent, MarkList* _markList, const Pag
   : TQWidget(_parent), showThumbnail(_showThumbnail), pageNumber(_pageNumber),
     pageCache(_pageCache), markList(_markList)
 {
-  TQBoxLayout* tqlayout = new TQVBoxLayout(this, margin);
+  TQBoxLayout* layout = new TQVBoxLayout(this, margin);
 
   thumbnailWidget = 0;
   if (showThumbnail)
   {
     thumbnailWidget = new ThumbnailWidget(this, pageNumber, pageCache);
-    tqlayout->addWidget(thumbnailWidget, 1, TQt::AlignTop);
+    layout->addWidget(thumbnailWidget, 1, TQt::AlignTop);
   }
 
-  TQBoxLayout* bottomLayout = new TQHBoxLayout(tqlayout);
+  TQBoxLayout* bottomLayout = new TQHBoxLayout(layout);
 
   checkBox = new TQCheckBox(TQString(), this );
   checkBox->setFocusPolicy(TQ_NoFocus);

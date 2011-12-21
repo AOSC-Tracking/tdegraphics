@@ -129,7 +129,7 @@ EngineError ocradDialog::setupGui()
     else
         m_ocrCmd = res;
 
-    /** tqlayout detection button **/
+    /** layout detection button **/
     conf->setGroup( CFG_GROUP_OCRAD );
     int layoutDetect = conf->readNumEntry( CFG_OCRAD_LAYOUT_DETECTION, 0 );
     kdDebug(28000) << "Layout detection from config: " << layoutDetect << endl;
@@ -137,7 +137,7 @@ EngineError ocradDialog::setupGui()
     (void) new KSeparator( KSeparator::HLine, page);
     TQHBox *hb1 = new TQHBox(page);
     hb1->setSpacing( KDialog::spacingHint() );
-    (void) new TQLabel( i18n("OCRAD tqlayout analysis mode: "), hb1);
+    (void) new TQLabel( i18n("OCRAD layout analysis mode: "), hb1);
     m_layoutMode = new TQComboBox(hb1);
     m_layoutMode->insertItem(i18n("No Layout Detection"), 0 );
     m_layoutMode->insertItem(i18n("Column Detection"), 1 );

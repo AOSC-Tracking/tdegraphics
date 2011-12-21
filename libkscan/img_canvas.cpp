@@ -675,7 +675,7 @@ void ImageCanvas::update_scaled_pixmap( void )
     if( scaleKind() == DYNAMIC )
         kdDebug(28000) << "Scaling DYNAMIC" << endl;
     TQSize noSBSize( visibleWidth(), visibleHeight());
-    const int sbWidth = kapp->tqstyle().pixelMetric( TQStyle::PM_ScrollBarExtent );
+    const int sbWidth = kapp->style().pixelMetric( TQStyle::PM_ScrollBarExtent );
 
     // if( verticalScrollBar()->visible() ) noSBSize.width()+=sbWidth;
     // if( horizontalScrollBar()->visible() ) noSBSize.height()+=sbWidth;

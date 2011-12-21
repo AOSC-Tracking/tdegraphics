@@ -145,7 +145,7 @@ PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
 
    restoreConfig( instance( )->config( ) );
 
-   connect( tqApp->tqclipboard( ), TQT_SIGNAL( dataChanged( ) ),
+   connect( tqApp->clipboard( ), TQT_SIGNAL( dataChanged( ) ),
             TQT_SLOT( slotClipboardDataChanged( ) ) );
    slotClipboardDataChanged( );
    connect( &m_commandManager, TQT_SIGNAL( updateUndoRedo( const TQString&, const TQString& ) ),
@@ -730,7 +730,7 @@ void PMPart::initView( TQWidget* parent, const char* name )
    if( !m_pShell )
    {
       // a part inside konqueror
-      // simple tqlayout
+      // simple layout
       m_pView = new PMView( this, parent, name );
       m_pView->show( );
       setWidget( m_pView );
@@ -1450,7 +1450,7 @@ void PMPart::slotEditCut( )
 
    if( sortedList.count( ) > 0 )
    {
-      TQApplication::tqclipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
       removeSelection( i18n( "Cut" ) );
    }
 
@@ -1472,7 +1472,7 @@ void PMPart::slotEditCopy( )
    const PMObjectList& sortedList = selectedObjects( );
 
    if( sortedList.count( ) > 0 )
-      TQApplication::tqclipboard( )->setData( new PMObjectDrag( this, sortedList ) );
+      TQApplication::clipboard( )->setData( new PMObjectDrag( this, sortedList ) );
 
    emit setStatusBarText( "" );
 }
@@ -1549,7 +1549,7 @@ void PMPart::slotEditPaste( )
 {
    emit setStatusBarText( i18n( "Inserting clipboard contents..." ) );
 
-   pasteOrDrop( i18n( "Paste" ), tqApp->tqclipboard( )->data( ),
+   pasteOrDrop( i18n( "Paste" ), tqApp->clipboard( )->data( ),
                 m_pActiveObject );
 
    emit setStatusBarText( "" );
@@ -2508,7 +2508,7 @@ void PMPart::slotClipboardDataChanged( )
 {
    if( isReadWrite( ) )
    {
-      m_canDecode = PMObjectDrag::canDecode( tqApp->tqclipboard( )->data( ), this );
+      m_canDecode = PMObjectDrag::canDecode( tqApp->clipboard( )->data( ), this );
       m_pPasteAction->setEnabled( m_canDecode && m_pActiveObject );
    }
    else

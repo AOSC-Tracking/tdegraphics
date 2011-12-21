@@ -117,7 +117,7 @@ void KMultiPage::readSettings()
 
 void KMultiPage::writeSettings()
 {
-  // Save TOC tqlayout
+  // Save TOC layout
   tableOfContents->writeSettings();
 
   KVSPrefs::setGuiLayout(splitterWidget->sizes());

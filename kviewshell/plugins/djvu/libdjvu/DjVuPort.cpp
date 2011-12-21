@@ -557,12 +557,12 @@ DjVuPortcaster::notify_redisplay(const DjVuImage * source)
 }
 
 void
-DjVuPortcaster::notify_retqlayout(const DjVuImage * source)
+DjVuPortcaster::notify_relayout(const DjVuImage * source)
 {
    GPList<DjVuPort> list;
    compute_closure(source, list);
    for(GPosition pos=list; pos; ++pos)
-     list[pos]->notify_retqlayout(source);
+     list[pos]->notify_relayout(source);
 }
 
 void
@@ -626,7 +626,7 @@ void
 DjVuPort::notify_redisplay(const DjVuImage *) {}
 
 void
-DjVuPort::notify_retqlayout(const DjVuImage *) {}
+DjVuPort::notify_relayout(const DjVuImage *) {}
 
 void
 DjVuPort::notify_chunk_done(const DjVuPort *, const GUTF8String &) {}

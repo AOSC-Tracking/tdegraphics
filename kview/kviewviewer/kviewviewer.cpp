@@ -810,14 +810,14 @@ void KViewViewer::slotFileDirty( const TQString & )
 								  "If you don't and subsequently save the image, you will lose the\n"
 								  "changes that have already been saved." ).arg( url().fileName() ), vb );
 		TQWidget * hb = new TQWidget( vb );
-		TQHBoxLayout * tqlayout = new TQHBoxLayout( hb );
-		tqlayout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
+		TQHBoxLayout * layout = new TQHBoxLayout( hb );
+		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		KPushButton * yes = new KPushButton( i18n("Reload"), hb );
-		tqlayout->addWidget( yes );
-		tqlayout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
+		layout->addWidget( yes );
+		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		KPushButton * no = new KPushButton( i18n("Do Not Reload"), hb );
-		tqlayout->addWidget( no );
-		tqlayout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
+		layout->addWidget( no );
+		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
 		connect( yes, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotReloadUnmodified() ) );
 		connect( yes, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );
 		connect( no, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );

@@ -37,18 +37,18 @@ KResizeWidget::KResizeWidget( TQWidget* parent, const char* name,
   group->setColumnLayout( 0, Qt::Horizontal );
   genLayout->addWidget( group );
 
-  TQHBoxLayout* tqlayout = new TQHBoxLayout( group->tqlayout(), 6 );
+  TQHBoxLayout* layout = new TQHBoxLayout( group->layout(), 6 );
 
   m_width = new KIntSpinBox( 1, 200, 1, 1, 10, group );
   m_width->setValue( size.width() );
-  tqlayout->addWidget( m_width, 1 );
+  layout->addWidget( m_width, 1 );
 
   TQLabel* label = new TQLabel( "X", group );
-  tqlayout->addWidget( label );
+  layout->addWidget( label );
 
   m_height = new KIntSpinBox( 1, 200, 1, 1, 10, group);
   m_height->setValue( size.height() );
-  tqlayout->addWidget( m_height, 1 );
+  layout->addWidget( m_height, 1 );
 
   setMinimumSize( 200, 100 );
 }

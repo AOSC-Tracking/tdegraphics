@@ -54,27 +54,27 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   TQWhatsThis::add(m_currentColorView, i18n( "Current color\n\nThis is the currently selected color" ) );
   m_layout->addWidget( m_currentColorView );
 
-  TQVBoxLayout *vtqlayout = new TQVBoxLayout( m_layout, 0 );
+  TQVBoxLayout *vlayout = new TQVBoxLayout( m_layout, 0 );
   TQLabel *l = new TQLabel( i18n( "System colors:" ), base );
-  vtqlayout->addWidget( l );
+  vlayout->addWidget( l );
   m_sysColors = new KSysColors( base );
   TQWhatsThis::add(m_sysColors, i18n( "System colors\n\nHere you can select"
       " colors from the KDE icon palette" ) );
 
-  vtqlayout->addWidget( m_sysColors );
+  vlayout->addWidget( m_sysColors );
 
   connect( m_sysColors, TQT_SIGNAL( newColor(uint) ), 
       TQT_SIGNAL( newColor(uint) ) );
 
-  vtqlayout = new TQVBoxLayout( m_layout, 0 );
+  vlayout = new TQVBoxLayout( m_layout, 0 );
   l = new TQLabel( i18n( "Custom colors:" ), base );
-  vtqlayout->addWidget( l );
+  vlayout->addWidget( l );
   m_customColors = new KCustomColors( base );
   TQWhatsThis::add(m_customColors, i18n( "Custom colors\n\nHere you can"
       " build a palette of custom colors.\nDouble-click on a box to edit"
       " the color" ) );
 
-  vtqlayout->addWidget( m_customColors );
+  vlayout->addWidget( m_customColors );
 
   connect( m_customColors, TQT_SIGNAL( newColor(uint) ), 
       TQT_SIGNAL( newColor(uint) ) );

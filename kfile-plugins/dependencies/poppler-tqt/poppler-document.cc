@@ -190,7 +190,7 @@ TQString Document::getInfo( const TQString & type ) const
 	u = s1->getChar(i) & 0xff;
 	++i;
       }
-      result += tqunicodeToTQString( &u, 1 );
+      result += unicodeToTQString( &u, 1 );
     }
     obj.free();
     info.free();

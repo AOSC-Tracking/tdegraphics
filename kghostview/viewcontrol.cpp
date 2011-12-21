@@ -130,7 +130,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	connect( closebtn, TQT_SIGNAL(clicked()), TQT_SLOT(reject()) );
 
 
-	bbox->tqlayout();
+	bbox->layout();
 	topLayout->addWidget( bbox );
 
 	topLayout->activate();

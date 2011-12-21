@@ -235,7 +235,7 @@ void KColorEditDoc::copyToClipboard(Palette& palette) {
 	TQString text;
 	TQTextOStream stream(&text);
 	palette.save(stream, 0, false);
-	KApplication::tqclipboard()->setText(text);
+	KApplication::clipboard()->setText(text);
 
     emit clipboardChanged();
 }
@@ -260,7 +260,7 @@ void KColorEditDoc::paste() {
 	Palette palettePaste;
 	TQString text;
 	TQTextIStream stream(&text);
-	text = KApplication::tqclipboard()->text();
+	text = KApplication::clipboard()->text();
 	if(palettePaste.load( stream, false )) {
 		m_paletteHistory.paste(paletteCursorPos(), palettePaste);
 		setPaletteSelection(paletteCursorPos(), paletteCursorPos() +

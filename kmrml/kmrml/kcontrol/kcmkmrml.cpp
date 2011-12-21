@@ -58,11 +58,11 @@ KCMKMrml::KCMKMrml(TQWidget *parent, const char *name, const TQStringList & ):
     ab->addAuthor( "Carsten Pfeiffer", 0, "pfeiffer@kde.org" );
     setAboutData( ab );
 
-    TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
-    tqlayout->setSpacing( KDialog::spacingHint() );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
+    layout->setSpacing( KDialog::spacingHint() );
     m_mainPage = new MainPage( this, "main page" );
 
-    tqlayout->addWidget( m_mainPage );
+    layout->addWidget( m_mainPage );
 
     connect( m_mainPage, TQT_SIGNAL( changed( bool ) ), TQT_SIGNAL( changed( bool )));
 
@@ -90,7 +90,7 @@ void KCMKMrml::checkGiftInstallation()
         KURLLabel *urlLabel = new KURLLabel( "http://www.gnu.org/software/gift", TQString(), this ); 
         urlLabel->setSizePolicy( TQSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Fixed ) );
         connect( urlLabel, TQT_SIGNAL( leftClickedURL( const TQString& )), kapp, TQT_SLOT( invokeBrowser( const TQString& )) );
-        TQLayout *l = tqlayout();
+        TQLayout *l = layout();
         l->addItem( new TQSpacerItem( 0, 10, TQSizePolicy::Minimum, TQSizePolicy::Expanding ) );
         l->add( errorLabel );
         l->add( urlLabel );

@@ -241,7 +241,7 @@ void KSnapshot::slotSaveAs()
 
 void KSnapshot::slotCopy()
 {
-    TQClipboard *cb = TQApplication::tqclipboard();
+    TQClipboard *cb = TQApplication::clipboard();
     cb->setPixmap( snapshot );
 }
 

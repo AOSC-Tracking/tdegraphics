@@ -68,7 +68,7 @@ public:
     TQValueVector< PageViewItem * > items;
     TQValueList< PageViewItem * > visibleItems;
 
-    // view tqlayout (columns and continuous in Settings), zoom and mouse
+    // view layout (columns and continuous in Settings), zoom and mouse
     PageView::ZoomMode zoomMode;
     float zoomFactor;
     int rotation;
@@ -392,7 +392,7 @@ void PageView::notifyViewportChanged( bool smoothMove )
         return;
     }
 
-    // retqlayout in "Single Pages" mode or if a retqlayout is pending
+    // relayout in "Single Pages" mode or if a relayout is pending
     d->blockPixmapsRequest = true;
     if ( !KpdfSettings::viewContinuous() || d->dirtyLayout )
         slotRelayoutPages();
@@ -1147,7 +1147,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 if ( choice == 3 )
                 {
                     // [2] copy pixmap to clipboard
-                    TQClipboard *cb = TQApplication::tqclipboard();
+                    TQClipboard *cb = TQApplication::clipboard();
                     cb->setPixmap( copyPix, TQClipboard::Clipboard );
                     if ( cb->supportsSelection() )
                         cb->setPixmap( copyPix, TQClipboard::Selection );
@@ -1175,7 +1175,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 if ( choice == 1 )
                 {
                     // [1] copy text to clipboard
-                    TQClipboard *cb = TQApplication::tqclipboard();
+                    TQClipboard *cb = TQApplication::clipboard();
                     cb->setText( selectedText, TQClipboard::Clipboard );
                     if ( cb->supportsSelection() )
                         cb->setText( selectedText, TQClipboard::Selection );
@@ -1544,7 +1544,7 @@ void PageView::updateZoom( ZoomMode newZoomMode )
 
     if ( newZoomMode != d->zoomMode || (newZoomMode == ZoomFixed && newFactor != d->zoomFactor ) )
     {
-        // rebuild tqlayout and update the whole viewport
+        // rebuild layout and update the whole viewport
         d->zoomMode = newZoomMode;
         d->zoomFactor = newFactor;
         // be sure to block updates to document's viewport

@@ -80,12 +80,12 @@ class PDFOptionsPage : public KPrintDialogPage
        PDFOptionsPage()
        {
            setTitle( i18n( "PDF Options" ) );
-           TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
+           TQVBoxLayout *layout = new TQVBoxLayout(this);
            m_forceRaster = new TQCheckBox(i18n("Force rasterization"), this);
            TQToolTip::add(m_forceRaster, i18n("Rasterize into an image before printing"));
            TQWhatsThis::add(m_forceRaster, i18n("Forces the rasterization of each page into an image before printing it. This usually gives somewhat worse results, but is useful when printing documents that appear to print incorrectly."));
-           tqlayout->addWidget(m_forceRaster);
-           tqlayout->addStretch(1);
+           layout->addWidget(m_forceRaster);
+           layout->addStretch(1);
        }
 
        void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false )
@@ -186,7 +186,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 
 	int index;
 	// [left toolbox: Table of Contents] | []
-	// dummy wrapper with tqlayout to enable horizontal scroll bars (bug: 147233)
+	// dummy wrapper with layout to enable horizontal scroll bars (bug: 147233)
 	TQWidget *tocWrapper = new TQWidget(m_toolBox);
 	TQVBoxLayout *tocWrapperLayout = new TQVBoxLayout(tocWrapper);
 	m_tocFrame = new TOC( tocWrapper, m_document );

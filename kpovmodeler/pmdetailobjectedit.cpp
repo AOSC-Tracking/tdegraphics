@@ -33,7 +33,7 @@ void PMDetailObjectEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pGlobalDetail = new TQCheckBox( i18n( "Global detail" ), this );
    m_pLocalDetailLevelLabel = new TQLabel( i18n( "Detail level:" ), this );
    m_pLocalDetailLevel = new TQComboBox( this );
@@ -43,10 +43,10 @@ void PMDetailObjectEdit::createTopWidgets( )
    m_pLocalDetailLevel->insertItem( i18n( "High" ) );
    m_pLocalDetailLevel->insertItem( i18n( "Very High" ) );
 
-   tqlayout->addWidget( m_pGlobalDetail );
-   tqlayout->addWidget( m_pLocalDetailLevelLabel );
-   tqlayout->addWidget( m_pLocalDetailLevel );
-   tqlayout->addStretch( );
+   layout->addWidget( m_pGlobalDetail );
+   layout->addWidget( m_pLocalDetailLevelLabel );
+   layout->addWidget( m_pLocalDetailLevel );
+   layout->addStretch( );
 
    connect( m_pGlobalDetail, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotGlobalDetailClicked( ) ) );
    connect( m_pLocalDetailLevel, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );

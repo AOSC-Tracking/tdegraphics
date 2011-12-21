@@ -190,7 +190,7 @@ public:
 	 * this SVG document is embedded as part of  another document (e.g., via the
 	 * HTML 'object' element), then the position and  size are unitless values in
 	 * the coordinate system of the parent document. (If  the parent uses CSS or
-	 * XSL tqlayout, then unitless values represent pixel units  for the current CSS
+	 * XSL layout, then unitless values represent pixel units  for the current CSS
 	 * or XSL viewport, as described in the CSS2 specification.)  If the parent
 	 * element does not have a coordinate system, then the user agent  should
 	 * provide reasonable default values for this attribute.

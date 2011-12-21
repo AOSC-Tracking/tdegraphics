@@ -89,7 +89,7 @@ KView::KView()
 		connect( part->widget(), TQT_SIGNAL( contextPress( const TQPoint & ) ),
 				TQT_SLOT( contextPress( const TQPoint & ) ) );
 
-		connect( TQApplication::tqclipboard(), TQT_SIGNAL( dataChanged() ),
+		connect( TQApplication::clipboard(), TQT_SIGNAL( dataChanged() ),
 				TQT_SLOT( clipboardDataChanged() ) );
 
 		connect( m_pViewer, TQT_SIGNAL( started( KIO::Job * ) ),
@@ -208,7 +208,7 @@ TQSize KView::sizeForCentralWidgetSize( TQSize size )
 	if( ! mb->isHidden() )
 	{
 		size.rheight() += mb->heightForWidth( width() );
-		if( tqstyle().styleHint( TQStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
+		if( style().styleHint( TQStyle::SH_MainWindow_SpaceBelowMenuBar, this ) )
 			size.rheight() += dockWindowsMovable() ? 1 : 2;
 	}
 	kdDebug( 4600 ) << "added Menubar:           " << size << endl;
@@ -301,7 +301,7 @@ void KView::slotClose()
 
 void KView::slotCopy()
 {
-	TQClipboard *cb = TQApplication::tqclipboard();
+	TQClipboard *cb = TQApplication::clipboard();
 	cb->setSelectionMode( false );
 
 	TQRect selectarea = m_pCanvas->selection();
@@ -320,7 +320,7 @@ void KView::slotCopy()
 void KView::slotPaste()
 {
 	// Get TQImage from clipboard and create a new image.
-	TQClipboard *cb = TQApplication::tqclipboard();
+	TQClipboard *cb = TQApplication::clipboard();
     TQImage img = cb->image();
 	if( ! img.isNull() )
 		m_pViewer->newImage( img );
@@ -412,7 +412,7 @@ void KView::enableAction( const char * name, bool b )
 
 void KView::clipboardDataChanged()
 {
-	TQClipboard * cb = TQApplication::tqclipboard();
+	TQClipboard * cb = TQApplication::clipboard();
 	cb->setSelectionMode( false );
 	bool hasImage = TQImageDrag::canDecode( cb->data( TQClipboard::Clipboard ) );
 	m_paPaste->setEnabled( hasImage );
@@ -653,7 +653,7 @@ TQSize KView::barSize( int mainwinwidth, BarSizeFrom from )
 				width += toolBar()->width();
 				break;
 			case KToolBar::Flat:
-				height += kapp->tqstyle().pixelMetric( TQStyle::PM_DockWindowHandleExtent );
+				height += kapp->style().pixelMetric( TQStyle::PM_DockWindowHandleExtent );
 				break;
 			case KToolBar::Floating:
 				break;

@@ -247,8 +247,8 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    TQPixmap removeButtonPixmap = SmallIcon( "pmremovepoint" );
 
    // First let's deal with the filter entries...
-   if( m_pFiltersWidget->tqlayout( ) )
-      delete m_pFiltersWidget->tqlayout( );
+   if( m_pFiltersWidget->layout( ) )
+      delete m_pFiltersWidget->layout( );
 
    m_filterEntries.setAutoDelete( true );
    m_filterAddButtons.setAutoDelete( true );
@@ -313,8 +313,8 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    m_transmitRemoveButtons.setAutoDelete( false );
 
    // recreate the entry edits
-   if( m_pTransmitsWidget->tqlayout( ) )
-      delete m_pTransmitsWidget->tqlayout( );
+   if( m_pTransmitsWidget->layout( ) )
+      delete m_pTransmitsWidget->layout( );
 
    gl = new TQGridLayout( m_pTransmitsWidget, ntransmits + 1, 3, 0, KDialog::spacingHint( ) );
 

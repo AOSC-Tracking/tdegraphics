@@ -105,13 +105,13 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   ////////////////
 
 
-  // tqlayout management
+  // layout management
   TQVBoxLayout *mainLayout = new TQVBoxLayout( this, 0,
-            KDialog::spacingHint(), "main tqlayout" );
+            KDialog::spacingHint(), "main layout" );
 
-  TQVBoxLayout *gbScaleLayout = new TQVBoxLayout( gbScale->tqlayout(),
+  TQVBoxLayout *gbScaleLayout = new TQVBoxLayout( gbScale->layout(),
             KDialog::spacingHint());
-  TQVBoxLayout *gbGeometryLayout = new TQVBoxLayout(gbGeometry->tqlayout(),
+  TQVBoxLayout *gbGeometryLayout = new TQVBoxLayout(gbGeometry->layout(),
             KDialog::spacingHint());
   TQGridLayout *gbPreviewLayout = new TQGridLayout(gbPreview, 2, 3, 0,
             KDialog::spacingHint());

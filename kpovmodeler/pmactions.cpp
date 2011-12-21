@@ -135,10 +135,10 @@ protected:
    void drawButton( TQPainter* p )
    {
       // Draw the background
-      tqstyle( ).drawComplexControl( TQStyle::CC_ToolButton, p, this, rect( ), colorGroup( ),
+      style( ).drawComplexControl( TQStyle::CC_ToolButton, p, this, rect( ), colorGroup( ),
                                    TQStyle::Style_Enabled, TQStyle::SC_ToolButton );
       // Draw the label
-      tqstyle( ).drawControl( TQStyle::CE_ToolButtonLabel, p, this, rect( ), colorGroup( ),
+      style( ).drawControl( TQStyle::CE_ToolButtonLabel, p, this, rect( ), colorGroup( ),
                             TQStyle::Style_Enabled );
    }
 };

@@ -87,7 +87,7 @@ MiniBar::MiniBar( TQWidget * parent, KPDFDocument * document )
     TQSpacerItem * spacerL = new TQSpacerItem( 20, 10, TQSizePolicy::Expanding );
     horLayout->addItem( spacerL );
 
-    // central 2r by 3c grid tqlayout that contains all components
+    // central 2r by 3c grid layout that contains all components
     TQGridLayout * gridLayout = new TQGridLayout( 0, 3,5, 2,1 );
      // top spacer 6x6 px
 //     TQSpacerItem * spacerTop = new TQSpacerItem( 6, 6, TQSizePolicy::Fixed, TQSizePolicy::Fixed );
@@ -318,7 +318,7 @@ void ProgressWidget::paintEvent( TQPaintEvent * e )
         p.drawLine( delta, 0, delta, h );
     }
     // draw a frame-like outline
-    //p.setPen( tqpalette().active().mid() );
+    //p.setPen( palette().active().mid() );
     //p.drawRect( 0,0, w, h );
 }
 
@@ -372,7 +372,7 @@ void PagesEdit::focusOutEvent( TQFocusEvent * e )
 {
     // change background color to a dark tone
     setLineWidth( 1 );
-    setPaletteBackgroundColor( tqpalette().active().background().light( 105 ) );
+    setPaletteBackgroundColor( palette().active().background().light( 105 ) );
     // restore text
     TQLineEdit::setText( backString );
     // call default handler
@@ -428,7 +428,7 @@ void HoverButton::paintEvent( TQPaintEvent * e )
     else
     {
         TQPainter p( this );
-        p.fillRect(e->rect(), parentWidget() ? parentWidget()->tqpalette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
+        p.fillRect(e->rect(), parentWidget() ? parentWidget()->palette().brush(TQPalette::Active, TQColorGroup::Background) : paletteBackgroundColor());
         drawButtonLabel( &p );
     }
 }

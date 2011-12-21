@@ -258,20 +258,20 @@ void kpEffectsDialog::selectEffect (int which)
         TQSize previewGroupBoxMinSize = m_previewGroupBox->minimumSize ();
         TQSize previewGroupBoxMaxSize = m_previewGroupBox->maximumSize ();
         TQLayout::ResizeMode previewGroupBoxResizeMode = 
-            m_previewGroupBox->tqlayout () ?
-                m_previewGroupBox->tqlayout ()->resizeMode () :
+            m_previewGroupBox->layout () ?
+                m_previewGroupBox->layout ()->resizeMode () :
                 TQLayout::Auto;
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tpreviewGroupBox: minSize=" << previewGroupBoxMinSize
                    << " maxSize=" << previewGroupBoxMaxSize
                    << " size=" << m_previewGroupBox->size ()
-                   << " tqlayout=" << m_previewGroupBox->tqlayout ()
+                   << " layout=" << m_previewGroupBox->layout ()
                    << " resizeMode=" << previewGroupBoxResizeMode
                    << endl;
     #endif
 
-        if (m_previewGroupBox->tqlayout ())
-            m_previewGroupBox->tqlayout ()->setResizeMode (TQLayout::FreeResize);
+        if (m_previewGroupBox->layout ())
+            m_previewGroupBox->layout ()->setResizeMode (TQLayout::FreeResize);
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter set resizeMode, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;
@@ -300,8 +300,8 @@ void kpEffectsDialog::selectEffect (int which)
         kdDebug () << "\tafter set fixedSize, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;
     #endif
-        if (m_previewGroupBox->tqlayout ())
-            m_previewGroupBox->tqlayout ()->setResizeMode (previewGroupBoxResizeMode);
+        if (m_previewGroupBox->layout ())
+            m_previewGroupBox->layout ()->setResizeMode (previewGroupBoxResizeMode);
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter restore resizeMode, previewGroupBox.size="
                    << m_previewGroupBox->size () << endl;

@@ -96,7 +96,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	// set the kcontrol module buttons
 	setButtons(Help | Apply | Cancel | Ok);
 
-	// create a tqlayout with two vertical boxes
+	// create a layout with two vertical boxes
 	TQVBoxLayout *topLayout = new TQVBoxLayout(this, 0, 0);
 	topLayout->setAutoAdd(true);
 	

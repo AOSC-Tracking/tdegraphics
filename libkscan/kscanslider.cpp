@@ -82,7 +82,7 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
     /* set Value 0 to the widget */
     slider->setValue( (int) min -1 );
 
-    /* Add to tqlayout widget and activate */
+    /* Add to layout widget and activate */
     hb->addWidget( slider, 36 );
     hb->addSpacing( 4 );
     hb->addWidget( m_spin, 0 );

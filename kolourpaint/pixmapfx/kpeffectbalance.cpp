@@ -275,7 +275,7 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
     // TODO: This is what should be shown in the m_gammaInput spinbox
     m_gammaLabel = new TQLabel (this);
     // TODO: This doesn't seem to be wide enough with some fonts so the
-    //       whole tqlayout moves when we drag the gamma slider.
+    //       whole layout moves when we drag the gamma slider.
     m_gammaLabel->setMinimumWidth (m_gammaLabel->fontMetrics ().width (" 10.00 "));
     m_gammaLabel->setAlignment (m_gammaLabel->alignment () | TQt::AlignRight);
     TQPushButton *gammaResetPushButton = new TQPushButton (i18n ("Rese&t"), this);

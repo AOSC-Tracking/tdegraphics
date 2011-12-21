@@ -35,12 +35,12 @@ void PMSolidColorEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pColorEdit = new PMColorEdit( true, this );
    TQLabel* label = new TQLabel( i18n( "Color:" ), this );
 
-   tqlayout->addWidget( label, 0, AlignTop );
-   tqlayout->addWidget( m_pColorEdit );
+   layout->addWidget( label, 0, AlignTop );
+   layout->addWidget( m_pColorEdit );
 
    connect( m_pColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }

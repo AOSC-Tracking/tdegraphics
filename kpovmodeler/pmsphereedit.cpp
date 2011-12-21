@@ -36,19 +36,19 @@ void PMSphereEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
 
    m_pCentre = new PMVectorEdit( "x", "y", "z", this );
    m_pRadius = new PMFloatEdit( this );
 
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( new TQLabel( i18n( "Center:" ), this ) );
-   tqlayout->addWidget( m_pCentre );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Center:" ), this ) );
+   layout->addWidget( m_pCentre );
 
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   tqlayout->addWidget( new TQLabel( i18n( "Radius:" ), this ) );
-   tqlayout->addWidget( m_pRadius );
-   tqlayout->addStretch( 1 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   layout->addWidget( new TQLabel( i18n( "Radius:" ), this ) );
+   layout->addWidget( m_pRadius );
+   layout->addStretch( 1 );
 
    connect( m_pCentre, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

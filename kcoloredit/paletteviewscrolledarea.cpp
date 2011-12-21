@@ -249,12 +249,12 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	int lastRow = (posY + height() - 1 + rowHeight - 1)/rowHeight;
 	if(viewColorNames)
 		painter.fillRect(0, 0, rowWidth, height(),
-        TQBrush( TQFrame::tqpalette().active().base() ));
-	TQBrush normalBackgroundBrush(TQFrame::tqpalette().active().background());
+        TQBrush( TQFrame::palette().active().base() ));
+	TQBrush normalBackgroundBrush(TQFrame::palette().active().background());
 	TQBrush selectedBackgroundBrush(TQFrame::tqpalette().active().highlight());
 	TQBrush foregroundBrush;
-	TQBrush cursorBrush(TQFrame::tqpalette().active().foreground());
-	TQPen backgroundPen(TQFrame::tqpalette().active().foreground());
+	TQBrush cursorBrush(TQFrame::palette().active().foreground());
+	TQPen backgroundPen(TQFrame::palette().active().foreground());
 	int min = selectionMin();
 	int max = selectionMax();
 	int fontAscent = fontMetrics.ascent();

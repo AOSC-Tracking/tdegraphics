@@ -282,7 +282,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	TQWidget *page = new TQWidget( this );
 	setMainWidget(page);
 
-	// a tqlayout with vertical boxes
+	// a layout with vertical boxes
 	TQHBoxLayout *topLayout = new TQHBoxLayout(page, 0, KDialog::spacingHint());
 
 	// the models list

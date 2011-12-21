@@ -131,11 +131,11 @@ NormalizedRect * KPDFPage::findText( const TQString & text, bool strictCase, Nor
         return 0;
 
     // create a xpf's Unicode (unsigned int) array for the given text
-    const TQChar * str = text.tqunicode();
+    const TQChar * str = text.unicode();
     int len = text.length();
     TQMemArray<Unicode> u(len);
     for (int i = 0; i < len; ++i)
-        u[i] = str[i].tqunicode();
+        u[i] = str[i].unicode();
 
     // find out the direction of search
     enum SearchDir { FromTop, NextMatch, PrevMatch } dir = lastRect ? NextMatch : FromTop;

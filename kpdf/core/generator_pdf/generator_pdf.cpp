@@ -457,7 +457,7 @@ bool PDFGenerator::print( KPrinter& printer )
     {
         pstitle = m_document->currentDocument().fileName( false );
     }
-    // this looks non-tqunicode-safe and it is. anything other than ASCII is not specified
+    // this looks non-unicode-safe and it is. anything other than ASCII is not specified
     // and some printers actually stop printing when they encounter non-ASCII characters in the
     // Postscript %%Title tag
     TQCString pstitle8Bit = pstitle.latin1();
@@ -528,14 +528,14 @@ static GString *TQStringToGString(const TQString &s) {
     int len = s.length();
     char *cstring = (char *)gmallocn(s.length(), sizeof(char));
     for (int i = 0; i < len; ++i)
-      cstring[i] = s.at(i).tqunicode();
+      cstring[i] = s.at(i).unicode();
     return new GString(cstring, len);
 }
 
-static TQString tqunicodeToTQString(Unicode* u, int len) {
+static TQString unicodeToTQString(Unicode* u, int len) {
     TQString ret;
     ret.setLength(len);
-    TQChar* qch = (TQChar*) ret.tqunicode();
+    TQChar* qch = (TQChar*) ret.unicode();
     for (;len;--len)
       *qch++ = (TQChar) *u++;
     return ret;
@@ -568,7 +568,7 @@ static TQString UnicodeParsedString(GString *s1) {
             u = s1->getChar(i) & 0xff;
             ++i;
         }
-        result += tqunicodeToTQString( &u, 1 );
+        result += unicodeToTQString( &u, 1 );
     }
     return result;
 }
@@ -868,7 +868,7 @@ void PDFGenerator::addSynopsisChildren( TQDomNode * parent, GList * items )
         TQString name;
         Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
-        name = tqunicodeToTQString(uniChar, titleLength);
+        name = unicodeToTQString(uniChar, titleLength);
         if ( name.isEmpty() )
             continue;
         TQDomElement item = docSyn.createElement( name );

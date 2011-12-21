@@ -71,7 +71,7 @@ AlgorithmDialog::AlgorithmDialog( const AlgorithmList& algorithms,
     TQVBoxLayout *mainLayout = new TQVBoxLayout( box, 0, KDialog::spacingHint(),
                                                 "mainLayout");
 
-    TQHBoxLayout *collectionLayout = new TQHBoxLayout( 0L, 0, 0, "coll tqlayout");
+    TQHBoxLayout *collectionLayout = new TQHBoxLayout( 0L, 0, 0, "coll layout");
     collectionLayout->addWidget( new TQLabel( i18n("Collection: "), box ));
 
     m_collectionCombo = new CollectionCombo( box, "collection combo" );

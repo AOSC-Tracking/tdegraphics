@@ -27,7 +27,7 @@ PageViewMessage::PageViewMessage( TQWidget * parent )
     setFocusPolicy( TQ_NoFocus );
     setBackgroundMode( NoBackground );
     setPaletteBackgroundColor(kapp->palette().color(TQPalette::Active, TQColorGroup::Background));
-    // if the tqlayout is LtR, we can safely place it in the right position
+    // if the layout is LtR, we can safely place it in the right position
     if ( !TQApplication::reverseLayout() )
         move( 10, 10 );
     resize( 0, 0 );
@@ -116,7 +116,7 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
     bufferPainter.setPen( foregroundColor() );
     bufferPainter.drawText( 5 + textXOffset, yText, message );
 
-    // if the tqlayout is RtL, we can move it to the right place only after we
+    // if the layout is RtL, we can move it to the right place only after we
     // know how much size it will take
     if ( TQApplication::reverseLayout() )
         move( parentWidget()->width() - geometry.width() - 10, 10 );

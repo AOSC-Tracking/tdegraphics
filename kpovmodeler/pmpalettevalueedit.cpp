@@ -39,21 +39,21 @@ PMPaletteValueEdit::PMPaletteValueEdit( TQWidget* parent, const char* name )
       : TQWidget( parent, name )
 {
    TQLabel* lbl;
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
 
    m_pIndexEdit = new PMIntEdit( this );
    m_pValueEdit = new PMFloatEdit( this );
 
-   tqlayout = new TQHBoxLayout( this );
+   layout = new TQHBoxLayout( this );
    lbl = new TQLabel( i18n( "Index" ), this );
-   tqlayout->addWidget( lbl );
-   tqlayout->addSpacing( KDialog::spacingHint( ) );
-   tqlayout->addWidget( m_pIndexEdit );
-   tqlayout->addSpacing( KDialog::spacingHint( ) );
+   layout->addWidget( lbl );
+   layout->addSpacing( KDialog::spacingHint( ) );
+   layout->addWidget( m_pIndexEdit );
+   layout->addSpacing( KDialog::spacingHint( ) );
    lbl = new TQLabel( i18n( "Value" ), this );
-   tqlayout->addWidget( lbl );
-   tqlayout->addSpacing( KDialog::spacingHint( ) );
-   tqlayout->addWidget( m_pValueEdit );
+   layout->addWidget( lbl );
+   layout->addSpacing( KDialog::spacingHint( ) );
+   layout->addWidget( m_pValueEdit );
 
    connect( m_pIndexEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pValueEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

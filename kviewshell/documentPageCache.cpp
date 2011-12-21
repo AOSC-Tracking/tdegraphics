@@ -220,7 +220,7 @@ RenderedDocumentPagePixmap* DocumentPageCache::getPage(const PageNumber& pageNr)
 
       // We always set the cache capacity to be at least n times the cost of the page we want to insert.
       // Where n is the number of pages that can be visible at the same time at very high zoomlevels.
-      // n depends on the tqlayout mode.
+      // n depends on the layout mode.
       // If these pages are not all in the cache, scrolling the view becomes very slow, because for each
       // paint event the pages need to be rerendered.
       // We set n for each viewmode differently so that the user is able to reduce memory consuption by

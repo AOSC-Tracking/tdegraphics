@@ -568,7 +568,7 @@ public:
 };
 
 /**
- * Configuration widget for the view tqlayout settings dialog
+ * Configuration widget for the view layout settings dialog
  */
 class PMGLViewOptionsWidget : public PMViewOptionsWidget
 {

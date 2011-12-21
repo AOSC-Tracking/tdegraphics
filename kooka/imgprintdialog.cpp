@@ -53,9 +53,9 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* n
       m_ignoreSignal(false)
 {
     setTitle(i18n("Image Printing"));
-    TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
-    // tqlayout->setMargin( KDialog::marginHint() );
-    // tqlayout->setSpacing( KDialog::spacingHint() );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
+    // layout->setMargin( KDialog::marginHint() );
+    // layout->setSpacing( KDialog::spacingHint() );
 
     m_scaleRadios = new TQButtonGroup( 2, Qt::Vertical, i18n("Image Print Size"), this );
     m_scaleRadios->setRadioButtonExclusive(true);
@@ -84,11 +84,11 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* n
     TQToolTip::add( m_rbFitPage, i18n("Printout uses maximum space on the selected pager. Aspect ratio is maintained."));
     m_scaleRadios->insert( m_rbFitPage, ID_FIT_PAGE );
 
-    tqlayout->addWidget( m_scaleRadios );
+    layout->addWidget( m_scaleRadios );
 
 
     TQHBoxLayout *hbox = new TQHBoxLayout( this );
-    tqlayout->addLayout( hbox );
+    layout->addLayout( hbox );
 
     /** Box for Image Resolutions **/
     TQVGroupBox *group1 = new TQVGroupBox( i18n("Resolutions"), this );
@@ -128,7 +128,7 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* n
 
     TQWidget *spaceEater = new TQWidget( this );
     spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
-    tqlayout->addWidget( spaceEater );
+    layout->addWidget( spaceEater );
 
     /* Set start values */
     m_rbScreen->setChecked(true);

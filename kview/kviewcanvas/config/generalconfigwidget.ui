@@ -138,7 +138,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
         </widget>
         <widget class="TQLayoutWidget" row="2" column="0" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>tqlayout3</cstring>
+                <cstring>layout3</cstring>
             </property>
             <vbox>
                 <property name="name">
@@ -181,7 +181,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
         </widget>
         <widget class="TQLayoutWidget" row="0" column="0">
             <property name="name">
-                <cstring>tqlayout4</cstring>
+                <cstring>layout4</cstring>
             </property>
             <vbox>
                 <property name="name">

@@ -44,14 +44,14 @@ class KSnapshotPreview : public TQLabel
 
             {
                 TQPainter p(&mask);
-                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), tqpalette().active());
+                style().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
                 p.end();
                 handle.setMask(mask);
             }
 
             {
                 TQPainter p(&handle);
-                tqstyle().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), tqpalette().active());
+                style().tqdrawPrimitive(TQStyle::PE_SizeGrip, &p, TQRect(0, 0, 15, 15), palette().active());
                 p.end();
             }
 

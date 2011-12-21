@@ -95,7 +95,7 @@ Small dialog which enables scanning source selection, e.g. Flatbed, automatic do
 
 - ScanParams\n
 The ScanParams class is the actual core of the
- KScan Library in terms of interface tqlayout. The ScanParams class provides a ready-to-use interface for the selected scanner.\n
+ KScan Library in terms of interface layout. The ScanParams class provides a ready-to-use interface for the selected scanner.\n
 \n
  The scanner device is analyzed in this class and dynamically generates an interface, according to the device's properties, containing the most important operational elements. These are currently
 

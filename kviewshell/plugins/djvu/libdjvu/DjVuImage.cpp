@@ -428,7 +428,7 @@ DjVuImage::notify_chunk_done(const DjVuPort *, const GUTF8String & name)
        !name.cmp("PMxx", 2) ||
        !name.cmp("BMxx", 2)  ) )
    {
-      DjVuPort::get_portcaster()->notify_retqlayout(this);
+      DjVuPort::get_portcaster()->notify_relayout(this);
       relayout_sent=true;
    } 
    else if (!name.cmp("Sxxx", 1) ||
@@ -461,7 +461,7 @@ public:
   GP<DataPool> request_data(const DjVuPort *src, const GURL & url);
   void notify_chunk_done(const DjVuPort *, const GUTF8String &name);
   void notify_redisplay(const class DjVuImage * source);
-  void notify_retqlayout(const class DjVuImage * source);
+  void notify_relayout(const class DjVuImage * source);
 };
 
 DjVuImageNotifier::DjVuImageNotifier(DjVuInterface *notifier)
@@ -485,10 +485,10 @@ DjVuImageNotifier::notify_redisplay(const class DjVuImage * source)
 }
 
 void 
-DjVuImageNotifier::notify_retqlayout(const class DjVuImage * source)
+DjVuImageNotifier::notify_relayout(const class DjVuImage * source)
 {
   if (notifier)
-    notifier->notify_retqlayout();
+    notifier->notify_relayout();
 }
 
 void 

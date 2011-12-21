@@ -20,7 +20,7 @@ scanned with about 150 dpi.
   via mime mechanism of KDE (KRun). OCR-Parameter get stored via KConfig.
   OCR may be performed on the entire image or the selection.
 
-* Reworked the save assistant: New tqlayout and fully KDE2-Compliant.
+* Reworked the save assistant: New layout and fully KDE2-Compliant.
   Still no new Image format help texts.
 
 * Reworked the startup dialog: Allows to select the scan device from a

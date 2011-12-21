@@ -944,7 +944,7 @@ void kpTool::mousePressEvent (TQMouseEvent *e)
 
     if (m_mainWindow && e->button () == Qt::MidButton)
     {
-        const TQString text = TQApplication::tqclipboard ()->text (TQClipboard::Selection);
+        const TQString text = TQApplication::clipboard ()->text (TQClipboard::Selection);
     #if DEBUG_KP_TOOL && 1
         kdDebug () << "\tMMB pasteText='" << text << "'" << endl;
     #endif

@@ -111,7 +111,7 @@ PMSettingsDialog::PMSettingsDialog( PMPart* part, TQWidget* parent, const char* 
    sl.clear( );
    sl.append( i18n( "View Layout" ) );
    w = addVBoxPage( sl, i18n( "Display Settings for View Layouts" ),
-                    SmallIcon( "pmconfigureviewtqlayout", 22 ) );
+                    SmallIcon( "pmconfigureviewlayout", 22 ) );
    p = new PMLayoutSettings( w );
    registerPage( w, p );
 

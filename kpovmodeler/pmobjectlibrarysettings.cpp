@@ -36,16 +36,16 @@
 PMObjectLibrarySettings::PMObjectLibrarySettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   TQVBoxLayout* vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   TQVBoxLayout* vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
    TQGroupBox* gb = new TQGroupBox( i18n( "Libraries" ), this );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
 
-   TQHBoxLayout* htqlayout = new TQHBoxLayout( gb, KDialog::marginHint( ) + 5, KDialog::spacingHint( ) );
+   TQHBoxLayout* hlayout = new TQHBoxLayout( gb, KDialog::marginHint( ) + 5, KDialog::spacingHint( ) );
    m_pObjectLibraries = new TQListBox( gb );
    connect( m_pObjectLibraries, TQT_SIGNAL( selectionChanged( ) ), TQT_SLOT( slotObjectLibraryChanged( ) ) );
-   htqlayout->addWidget( m_pObjectLibraries );
-   TQVBoxLayout* gvl = new TQVBoxLayout( htqlayout );
+   hlayout->addWidget( m_pObjectLibraries );
+   TQVBoxLayout* gvl = new TQVBoxLayout( hlayout );
    m_pCreateObjectLibrary = new TQPushButton( i18n( "Create..." ), gb );
    connect( m_pCreateObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCreateObjectLibrary( ) ) );
    gvl->addWidget( m_pCreateObjectLibrary );
@@ -77,9 +77,9 @@ PMObjectLibrarySettings::PMObjectLibrarySettings( TQWidget* parent, const char* 
    grid->addWidget( m_pLibraryDescription, 2, 1 );
    grid->addMultiCellWidget( m_pReadOnlyText, 3, 3, 0, 1 );
    grid->setColStretch( 1, 1 );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
 
-   vtqlayout->addStretch( 1 );
+   vlayout->addStretch( 1 );
 }
 
 void PMObjectLibrarySettings::displaySettings( )

@@ -24,12 +24,12 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
 {
   // Properties
   TQFrame *page = addPage(i18n("Properties"));
-  TQGridLayout *tqlayout = new TQGridLayout( page, 2, 2, marginHint(), spacingHint() );
+  TQGridLayout *layout = new TQGridLayout( page, 2, 2, marginHint(), spacingHint() );
 
   // get document info, if not present display blank data and a warning
   const DocumentInfo * info = doc->documentInfo();
   if ( !info ) {
-    tqlayout->addWidget( new TQLabel( i18n( "No document opened." ), page ), 0, 0 );
+    layout->addWidget( new TQLabel( i18n( "No document opened." ), page ), 0, 0 );
     return;
   }
 
@@ -49,11 +49,11 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
     if ( titleString.isEmpty() || valueString.isEmpty() )
         continue;
 
-    // create labels and tqlayout them
+    // create labels and layout them
     TQLabel *key = new TQLabel( i18n( "%1:" ).arg( titleString ), page );
     TQLabel *value = new KSqueezedTextLabel( valueString, page );
-    tqlayout->addWidget( key, row, 0, AlignRight );
-    tqlayout->addWidget( value, row, 1 );
+    layout->addWidget( key, row, 0, AlignRight );
+    layout->addWidget( value, row, 1 );
     row++;
 
     // refine maximum width of 'value' labels
@@ -66,8 +66,8 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
     TQLabel *key = new TQLabel( i18n( "Pages:" ), page );
     TQLabel *value = new TQLabel( TQString::number( doc->pages() ), page );
 
-    tqlayout->addWidget( key, row, 0 );
-    tqlayout->addWidget( value, row, 1 );
+    layout->addWidget( key, row, 0 );
+    layout->addWidget( value, row, 1 );
   }
 
   // Fonts
@@ -82,7 +82,7 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
   }
 
   // current width: left column + right column + dialog borders
-  int width = tqlayout->minimumSize().width() + valMaxWidth + marginHint() + spacingHint() + marginHint() + 30;
+  int width = layout->minimumSize().width() + valMaxWidth + marginHint() + spacingHint() + marginHint() + 30;
   if (page2Layout)
   {
     width = TQMAX( width, page2Layout->sizeHint().width() + marginHint() + spacingHint() + 31 );

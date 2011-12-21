@@ -34,8 +34,8 @@
 PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )
 {
-   TQHBoxLayout* htqlayout;
-   TQVBoxLayout* vtqlayout;
+   TQHBoxLayout* hlayout;
+   TQVBoxLayout* vlayout;
    TQVBoxLayout* gvl;
    TQGridLayout* grid;
    TQGroupBox* gb;
@@ -43,16 +43,16 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    TQHBoxLayout* ghe;
    TQVBoxLayout* gvle;
 
-   vtqlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
+   vlayout = new TQVBoxLayout( this, 0, KDialog::spacingHint( ) );
 
-   htqlayout = new TQHBoxLayout( vtqlayout );
-   htqlayout->addWidget( new TQLabel( i18n( "Default view tqlayout:" ), this ) );
+   hlayout = new TQHBoxLayout( vlayout );
+   hlayout->addWidget( new TQLabel( i18n( "Default view layout:" ), this ) );
    m_pDefaultLayout = new TQComboBox( this );
-   htqlayout->addWidget( m_pDefaultLayout, 1 );
-   htqlayout->addStretch( 1 );
+   hlayout->addWidget( m_pDefaultLayout, 1 );
+   hlayout->addStretch( 1 );
 
    gb = new TQGroupBox( i18n( "Available View Layouts" ), this );
-   vtqlayout->addWidget( gb );
+   vlayout->addWidget( gb );
    gvl = new TQVBoxLayout( gb, KDialog::marginHint( ), KDialog::spacingHint( ) );
    gvl->addSpacing( 10 );
    
@@ -180,7 +180,7 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    
    ghl->addStretch( 1 );
 
-   vtqlayout->addStretch( 1 );
+   vlayout->addStretch( 1 );
 }
 
 void PMLayoutSettings::displaySettings( )
@@ -220,7 +220,7 @@ bool PMLayoutSettings::validateData( )
          if( ( *eit ).dockPosition( ) != PMDockWidget::DockRight )
          {
             emit showMe( );
-            KMessageBox::error( this, i18n( "The docking position of the first view tqlayout entry has to be 'New Column'." ),
+            KMessageBox::error( this, i18n( "The docking position of the first view layout entry has to be 'New Column'." ),
                                 i18n( "Error" ) );
             return false;
          }
@@ -720,8 +720,8 @@ void PMLayoutSettings::slotMoveDownViewEntryClicked( )
 void PMLayoutSettings::displayCustomOptions( )
 {
    // delete an old widget
-   if( m_pCustomOptionsHolder->tqlayout( ) )
-      delete m_pCustomOptionsHolder->tqlayout( );
+   if( m_pCustomOptionsHolder->layout( ) )
+      delete m_pCustomOptionsHolder->layout( );
    if( m_pCustomOptionsWidget )
    {
       delete m_pCustomOptionsWidget;

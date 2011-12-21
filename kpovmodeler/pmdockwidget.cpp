@@ -337,7 +337,7 @@ void PMDockWidgetHeaderDrag::paintEvent( TQPaintEvent* )
 
   paint.begin( this );
 
-  tqstyle().tqdrawPrimitive (TQStyle::PE_DockWindowHandle, &paint, TQRect(0,0,width(), height()), colorGroup());
+  style().tqdrawPrimitive (TQStyle::PE_DockWindowHandle, &paint, TQRect(0,0,width(), height()), colorGroup());
 
   paint.end();
 }
@@ -350,8 +350,8 @@ PMDockWidgetAbstractHeader::PMDockWidgetAbstractHeader( PMDockWidget* parent, co
 PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
 :PMDockWidgetAbstractHeader( parent, name )
 {
-  tqlayout = new TQHBoxLayout( this );
-  tqlayout->setResizeMode( TQLayout::Minimum );
+  layout = new TQHBoxLayout( this );
+  layout->setResizeMode( TQLayout::Minimum );
 
   drag = new PMDockWidgetHeaderDrag( this, parent );
 
@@ -386,12 +386,12 @@ PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
   toDesktopButton->setFixedSize(buttonWidth,buttonHeight);
   connect( toDesktopButton, TQT_SIGNAL(clicked()), parent, TQT_SLOT(toDesktop()));
 
-  tqlayout->addWidget( drag );
-  tqlayout->addWidget( dockbackButton );
-  tqlayout->addWidget( toDesktopButton );
-  tqlayout->addWidget( stayButton );
-  tqlayout->addWidget( closeButton );
-  tqlayout->activate();
+  layout->addWidget( drag );
+  layout->addWidget( dockbackButton );
+  layout->addWidget( toDesktopButton );
+  layout->addWidget( stayButton );
+  layout->addWidget( closeButton );
+  layout->activate();
   drag->setFixedHeight( tqlayout->minimumSize().height() );
 }
 
@@ -415,7 +415,7 @@ void PMDockWidgetHeader::setTopLevel( bool isTopLevel )
     closeButton->show();
     toDesktopButton->show();
   }
-  tqlayout->activate();
+  layout->activate();
   updateGeometry();
 }
 
@@ -423,19 +423,19 @@ void PMDockWidgetHeader::setDragPanel( PMDockWidgetHeaderDrag* nd )
 {
   if ( !nd ) return;
 
-  delete tqlayout;
-  tqlayout = new TQHBoxLayout( this );
-  tqlayout->setResizeMode( TQLayout::Minimum );
+  delete layout;
+  layout = new TQHBoxLayout( this );
+  layout->setResizeMode( TQLayout::Minimum );
 
   delete drag;
   drag = nd;
 
-  tqlayout->addWidget( drag );
-  tqlayout->addWidget( dockbackButton );
-  tqlayout->addWidget( toDesktopButton );
-  tqlayout->addWidget( stayButton );
-  tqlayout->addWidget( closeButton );
-  tqlayout->activate();
+  layout->addWidget( drag );
+  layout->addWidget( dockbackButton );
+  layout->addWidget( toDesktopButton );
+  layout->addWidget( stayButton );
+  layout->addWidget( closeButton );
+  layout->activate();
   drag->setFixedHeight( tqlayout->minimumSize().height() );
 }
 
@@ -481,8 +481,8 @@ PMDockWidget::PMDockWidget( PMDockManager* dockManager, const char* name, const 
 
   d->_parent = parent;
 
-  tqlayout = new TQVBoxLayout( this );
-  tqlayout->setResizeMode( TQLayout::Minimum );
+  layout = new TQVBoxLayout( this );
+  layout->setResizeMode( TQLayout::Minimum );
 
   manager = dockManager;
   manager->childDock->append( TQT_TQOBJECT(this) );
@@ -538,15 +538,15 @@ void PMDockWidget::setHeader( PMDockWidgetAbstractHeader* h )
 
   if ( header ){
     delete header;
-    delete tqlayout;
+    delete layout;
     header = h;
-    tqlayout = new TQVBoxLayout( this );
-    tqlayout->setResizeMode( TQLayout::Minimum );
-    tqlayout->addWidget( header );
+    layout = new TQVBoxLayout( this );
+    layout->setResizeMode( TQLayout::Minimum );
+    layout->addWidget( header );
      setWidget( widget );
   } else {
     header = h;
-    tqlayout->addWidget( header );
+    layout->addWidget( header );
   }
 }
 
@@ -777,7 +777,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
   // MODIFICATION (Zehender):
   // If DockPosition is DockLeft or DockRight, add the widget
   // left or right of the target, so that a new vertical splitter
-  // (a splitter with horizontal widget tqlayout :-) is created
+  // (a splitter with horizontal widget layout :-) is created
   // that spawns the full height of the main view
 
   if( ( dockPos == PMDockWidget::DockLeft ) ||
@@ -1086,13 +1086,13 @@ void PMDockWidget::setWidget( TQWidget* mw )
   }
 
   widget = mw;
-  delete tqlayout;
+  delete layout;
 
-  tqlayout = new TQVBoxLayout( this );
-  tqlayout->setResizeMode( TQLayout::Minimum );
+  layout = new TQVBoxLayout( this );
+  layout->setResizeMode( TQLayout::Minimum );
 
-  tqlayout->addWidget( header );
-  tqlayout->addWidget( widget,1 );
+  layout->addWidget( header );
+  layout->addWidget( widget,1 );
 }
 
 void PMDockWidget::setDockTabName( PMDockTabGroup* tab )
@@ -1316,10 +1316,10 @@ void PMDockManager::activate()
 bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
 {
 /* This doesn't seem to fullfill any sense, other than breaking
-   TQMainWindow's tqlayout all over the place
+   TQMainWindow's layout all over the place
    The first child of the mainwindow is not necessarily a meaningful
    content widget but in TQt3's TQMainWindow it can easily be a TQToolBar.
-   In short: TQMainWindow knows how to tqlayout its children, no need to
+   In short: TQMainWindow knows how to layout its children, no need to
    mess that up.
 
    >>>>>I need this in the PMDockArea at the moment (JoWenn)

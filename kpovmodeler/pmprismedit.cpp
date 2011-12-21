@@ -332,8 +332,8 @@ void PMPrismEdit::deleteEdits( )
    m_points.clear( );
    m_points.setAutoDelete( false );
    
-   if( m_pEditWidget->tqlayout( ) )
-      delete m_pEditWidget->tqlayout( );
+   if( m_pEditWidget->layout( ) )
+      delete m_pEditWidget->layout( );
 }
 
 TQValueList< TQValueList<PMVector> > PMPrismEdit::splinePoints( )

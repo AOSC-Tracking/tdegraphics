@@ -314,10 +314,10 @@ void PMDialogView::slotDataChanged( )
 
 void PMDialogView::slotSizeChanged( )
 {
-   // force recalculating of the tqlayout
+   // force recalculating of the layout
    if( m_pDisplayedWidget )
-      if( m_pDisplayedWidget->tqlayout( ) )
-         m_pDisplayedWidget->tqlayout( )->activate( );
+      if( m_pDisplayedWidget->layout( ) )
+         m_pDisplayedWidget->layout( )->activate( );
    m_pHelper->calculateSize( );
 }
 

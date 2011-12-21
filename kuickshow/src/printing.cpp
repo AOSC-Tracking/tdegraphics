@@ -199,21 +199,21 @@ KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *parent, const char *name )
 {
     setTitle( i18n("Image Settings") );
 
-    TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
-    tqlayout->setMargin( KDialog::marginHint() );
-    tqlayout->setSpacing( KDialog::spacingHint() );
+    TQVBoxLayout *layout = new TQVBoxLayout( this );
+    layout->setMargin( KDialog::marginHint() );
+    layout->setSpacing( KDialog::spacingHint() );
 
     m_addFileName = new TQCheckBox( i18n("Print fi&lename below image"), this);
     m_addFileName->setChecked( true );
-    tqlayout->addWidget( m_addFileName );
+    layout->addWidget( m_addFileName );
 
     m_blackwhite = new TQCheckBox ( i18n("Print image in &black and white"), this);
     m_blackwhite->setChecked( false );
-    tqlayout->addWidget (m_blackwhite );
+    layout->addWidget (m_blackwhite );
 
     TQVButtonGroup *group = new TQVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
-    tqlayout->addWidget( group );
+    layout->addWidget( group );
     // m_shrinkToFit = new TQRadioButton( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit = new TQCheckBox( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit->setChecked( true );

@@ -314,7 +314,7 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
         m_topBar->alignItemRight( 1 );
         m_topBar->hide();
         // change topbar background color
-        TQPalette p = m_topBar->tqpalette();
+        TQPalette p = m_topBar->palette();
         p.setColor( TQPalette::Active, TQColorGroup::Button, TQt::gray );
         p.setColor( TQPalette::Active, TQColorGroup::Background, TQt::darkGray );
         m_topBar->setPalette( p );

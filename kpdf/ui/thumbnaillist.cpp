@@ -82,7 +82,7 @@ ThumbnailList::ThumbnailList( TQWidget *parent, KPDFDocument *document )
 	setDragAutoScroll( false );
 
 	// set contents background to the 'base' color
-	viewport()->setPaletteBackgroundColor( tqpalette().active().base() );
+	viewport()->setPaletteBackgroundColor( palette().active().base() );
 
 	setFrameStyle( StyledPanel | Raised );
 	connect( this, TQT_SIGNAL(contentsMoving(int, int)), this, TQT_SLOT(slotRequestVisiblePixmaps(int, int)) );
@@ -509,7 +509,7 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
         p.setPen( isBookmarked ? TQColor( 0xFF8000 ) : TQt::black );
         p.drawRect( m_margin/2 - 1, m_margin/2 - 1, m_pixmapWidth + 2, m_pixmapHeight + 2 );
         // draw the clear rect
-        p.setPen( isBookmarked ? TQColor( 0x804000 ) : tqpalette().active().base() );
+        p.setPen( isBookmarked ? TQColor( 0x804000 ) : palette().active().base() );
         // draw the bottom and right shadow edges
         if ( !isBookmarked )
         {

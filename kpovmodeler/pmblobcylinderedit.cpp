@@ -36,7 +36,7 @@ void PMBlobCylinderEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
    
-   TQHBoxLayout* tqlayout;
+   TQHBoxLayout* layout;
    TQGridLayout* gl;
 
    m_pEnd1 = new PMVectorEdit( "x", "y", "z", this );
@@ -50,13 +50,13 @@ void PMBlobCylinderEdit::createTopWidgets( )
    gl->addWidget( new TQLabel( i18n( "End 2:" ), this ), 1, 0 );
    gl->addWidget( m_pEnd2, 1, 1 );
 
-   tqlayout = new TQHBoxLayout( topLayout( ) );
-   gl = new TQGridLayout( tqlayout, 2, 2 );
+   layout = new TQHBoxLayout( topLayout( ) );
+   gl = new TQGridLayout( layout, 2, 2 );
    gl->addWidget( new TQLabel( i18n( "Radius:" ), this ), 0, 0 );
    gl->addWidget( m_pRadius, 0, 1 );
    gl->addWidget( new TQLabel( i18n( "Strength:" ), this ), 1, 0 );
    gl->addWidget( m_pStrength, 1, 1 );
-   tqlayout->addStretch( 1 );
+   layout->addStretch( 1 );
 
    connect( m_pEnd1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
    connect( m_pEnd2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

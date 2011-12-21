@@ -60,7 +60,7 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   bg->setColumnLayout( 0, Qt::Horizontal );
   mainLayout->addWidget( bg );
 
-  TQVBoxLayout *vbl = new TQVBoxLayout(bg->tqlayout());
+  TQVBoxLayout *vbl = new TQVBoxLayout(bg->layout());
 
   TQHBoxLayout *hbl1 = new TQHBoxLayout();
 

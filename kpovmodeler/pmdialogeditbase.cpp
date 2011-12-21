@@ -519,7 +519,7 @@ void PMDialogEditBase::slotTexturePreview( )
       m_pRenderFrame->setFixedSize( s_previewSize + m_pRenderFrame->frameWidth( ) * 2,
                                     s_previewSize + m_pRenderFrame->frameWidth( ) * 2 );
       m_pRenderFrame->updateGeometry( );
-      m_pTexturePreviewWidget->tqlayout( )->activate( );
+      m_pTexturePreviewWidget->layout( )->activate( );
       emit sizeChanged( );
       m_pOutputWidget->slotClear( );
       m_pRenderWidget->render( scene, mode, m_pPart->url( ) );

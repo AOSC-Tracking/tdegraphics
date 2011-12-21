@@ -171,8 +171,8 @@ namespace T2P
 		Font *font() const;
 		void setFont(Font *font);
 		
-		const GlyphLayoutParams *tqlayout() const;
-		void setLayout(const GlyphLayoutParams *tqlayout);
+		const GlyphLayoutParams *layout() const;
+		void setLayout(const GlyphLayoutParams *layout);
 		
 		unsigned int glyphIndex() const;
 		void setGlyphIndex(unsigned int glyphIndex);

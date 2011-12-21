@@ -33,7 +33,7 @@ KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions( TQWidget *parent, co
 
   kprintDialogPage_pageoptions_baseLayout = new TQVBoxLayout( this, 11, 6, "kprintDialogPage_pageoptions_baseLayout"); 
   if (kprintDialogPage_pageoptions_baseLayout == 0) {
-    kdError(1223) << "KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions() cannot create tqlayout" << endl;
+    kdError(1223) << "KPrintDialogPage_PageOptions::KPrintDialogPage_PageOptions() cannot create layout" << endl;
     return;
   }
     

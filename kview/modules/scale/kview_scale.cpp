@@ -64,9 +64,9 @@ void KViewScale::slotScaleDlg()
 	KDialogBase dlg( m_pViewer->widget(), "KView scale dialog", true, i18n( "Scale Image" ), KDialogBase::Ok|KDialogBase::Cancel );
 	ScaleDlg widget( m_pCanvas->imageSize(), dlg.makeVBoxMainWidget() );
 #if 0
-	TQVBox * tqlayout = dlg.makeVBoxMainWidget();
+	TQVBox * layout = dlg.makeVBoxMainWidget();
 
-	TQGroupBox * pixelgroup = new TQGroupBox( i18n( "Pixel Dimensions" ), tqlayout );
+	TQGroupBox * pixelgroup = new TQGroupBox( i18n( "Pixel Dimensions" ), layout );
 	TQGridLayout * pixelgroupgrid = new TQGridLayout( pixelgroup, 1, 1, 0, KDialog::spacingHint() );
 	pixelgroupgrid->setSpacing( KDialog::spacingHint() );
 	pixelgroupgrid->setMargin( KDialog::marginHint() );
@@ -116,7 +116,7 @@ void KViewScale::slotScaleDlg()
 	pixelgroupgrid->addWidget( ratioy, 7, 1 );
 	pixelgroupgrid->addMultiCellWidget( new TQCheckBox( i18n( "Link" ), pixelgroup ), 6, 7, 2, 2, TQt::AlignVCenter );
 
-	TQGroupBox * printgroup = new TQGroupBox( i18n( "Print Size && Display Units" ), tqlayout );
+	TQGroupBox * printgroup = new TQGroupBox( i18n( "Print Size && Display Units" ), layout );
 	TQGridLayout * printgroupgrid = new TQGridLayout( printgroup, 1, 1, 0, KDialog::spacingHint() );
 	printgroupgrid->setSpacing( KDialog::spacingHint() );
 	printgroupgrid->setMargin( KDialog::marginHint() );

@@ -36,10 +36,10 @@ void PMQuickColorEdit::createTopWidgets( )
 {
    Base::createTopWidgets( );
 
-   TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout( ) );
+   TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pColorEdit = new PMColorEdit( false, this );
-   tqlayout->addWidget( new TQLabel( i18n( "Color:" ), this ), 0, AlignTop );
-   tqlayout->addWidget( m_pColorEdit );
+   layout->addWidget( new TQLabel( i18n( "Color:" ), this ), 0, AlignTop );
+   layout->addWidget( m_pColorEdit );
 
    connect( m_pColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
 }
