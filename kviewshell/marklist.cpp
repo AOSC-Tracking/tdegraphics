@@ -217,7 +217,7 @@ void MarkListWidget::setChecked( bool checked )
 void MarkListWidget::setSelected( bool selected )
 {
     if (selected)
-      setPaletteBackgroundColor( TQApplication::tqpalette().active().highlight() );
+      setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
     else
       setPaletteBackgroundColor( _backgroundColor );
 }

@@ -392,7 +392,7 @@ PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
   layout->addWidget( stayButton );
   layout->addWidget( closeButton );
   layout->activate();
-  drag->setFixedHeight( tqlayout->minimumSize().height() );
+  drag->setFixedHeight( layout->minimumSize().height() );
 }
 
 void PMDockWidgetHeader::setTopLevel( bool isTopLevel )
@@ -436,7 +436,7 @@ void PMDockWidgetHeader::setDragPanel( PMDockWidgetHeaderDrag* nd )
   layout->addWidget( stayButton );
   layout->addWidget( closeButton );
   layout->activate();
-  drag->setFixedHeight( tqlayout->minimumSize().height() );
+  drag->setFixedHeight( layout->minimumSize().height() );
 }
 
 void PMDockWidgetHeader::slotStayClicked()

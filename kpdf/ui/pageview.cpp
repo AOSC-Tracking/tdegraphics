@@ -618,7 +618,7 @@ void PageView::viewportPaintEvent( TQPaintEvent * pe )
             if ( !selectionRect.isNull() && selectionRect.intersects( contentsRect ) &&
                  !selectionRectInternal.contains( contentsRect ) )
             {
-                screenPainter.setPen( tqpalette().active().highlight().dark(110) );
+                screenPainter.setPen( palette().active().highlight().dark(110) );
                 screenPainter.drawRect( selectionRect );
             }
             // 4) Layer 3: overlays
@@ -876,7 +876,7 @@ void PageView::contentsMouseMoveEvent( TQMouseEvent * e )
                 {
                     d->aPrevAction = d->aMouseNormal;
                     d->aMouseSelect->activate();
-                    TQColor selColor = tqpalette().active().highlight().light( 120 );
+                    TQColor selColor = palette().active().highlight().light( 120 );
                     selectionStart( e->x() + deltaX, e->y() + deltaY, selColor, false );
                     selectionEndPoint( e->x(), e->y() );
                     break;
@@ -946,7 +946,7 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
 
         case MouseZoom:     // set first corner of the zoom rect
             if ( leftButton )
-                selectionStart( e->x(), e->y(), tqpalette().active().highlight(), false );
+                selectionStart( e->x(), e->y(), palette().active().highlight(), false );
             else if ( rightButton )
                 updateZoom( ZoomOut );
             break;
@@ -954,7 +954,7 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
         case MouseSelect:   // set first corner of the selection rect
             if ( leftButton )
             {
-                TQColor selColor = tqpalette().active().highlight().light( 120 );
+                TQColor selColor = palette().active().highlight().light( 120 );
                 selectionStart( e->x(), e->y(), selColor, false );
             }
             break;

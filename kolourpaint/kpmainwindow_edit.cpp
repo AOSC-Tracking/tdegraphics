@@ -311,7 +311,7 @@ static bool HasSomethingToPaste (kpMainWindow *mw)
     return hasSomething;
 }
 
-// HACK: SYNC: Non-TQt apps do not cause TQApplication::tqclipboard() to
+// HACK: SYNC: Non-TQt apps do not cause TQApplication::clipboard() to
 //             emit dataChanged().  We don't want to have our paste
 //             action disabled when we can actually paste something.
 //

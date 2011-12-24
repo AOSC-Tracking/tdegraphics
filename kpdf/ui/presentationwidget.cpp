@@ -690,9 +690,9 @@ void PresentationWidget::generateOverlay()
 
     // generate a 2 colors pixmap using mixing shadow (made with highlight color)
     // and image (made with highlightedText color)
-    TQColor color = tqpalette().active().highlightedText();
+    TQColor color = palette().active().highlightedText();
     int red = color.red(), green = color.green(), blue = color.blue();
-    color = tqpalette().active().highlight();
+    color = palette().active().highlight();
     int sRed = color.red(), sGreen = color.green(), sBlue = color.blue();
     // pointers
     unsigned int * data = (unsigned int *)image.bits(),

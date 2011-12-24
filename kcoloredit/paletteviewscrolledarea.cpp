@@ -251,7 +251,7 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 		painter.fillRect(0, 0, rowWidth, height(),
         TQBrush( TQFrame::palette().active().base() ));
 	TQBrush normalBackgroundBrush(TQFrame::palette().active().background());
-	TQBrush selectedBackgroundBrush(TQFrame::tqpalette().active().highlight());
+	TQBrush selectedBackgroundBrush(TQFrame::palette().active().highlight());
 	TQBrush foregroundBrush;
 	TQBrush cursorBrush(TQFrame::palette().active().foreground());
 	TQPen backgroundPen(TQFrame::palette().active().foreground());

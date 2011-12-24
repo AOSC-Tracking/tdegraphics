@@ -495,9 +495,9 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
     TQPainter p( this );
 
     // draw the bottom label + highlight mark
-    TQColor fillColor = m_selected ? tqpalette().active().highlight() : tqpalette().active().base();
+    TQColor fillColor = m_selected ? palette().active().highlight() : palette().active().base();
     p.fillRect( 0, 0, width, height, fillColor );
-    p.setPen( m_selected ? tqpalette().active().highlightedText() : tqpalette().active().text() );
+    p.setPen( m_selected ? palette().active().highlightedText() : palette().active().text() );
     p.drawText( 0, m_pixmapHeight + m_margin, width, m_labelHeight, TQt::AlignCenter, TQString::number( m_labelNumber ) );
 
     // draw page outline and pixmap

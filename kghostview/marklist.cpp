@@ -81,7 +81,7 @@ void MarkListItem::setPixmap( TQPixmap thumbnail )
 void MarkListItem::setSelected( bool selected )
 {
     if (selected)
-	setPaletteBackgroundColor( TQApplication::tqpalette().active().highlight() );
+	setPaletteBackgroundColor( TQApplication::palette().active().highlight() );
     else
 	setPaletteBackgroundColor( _backgroundColor );
 }

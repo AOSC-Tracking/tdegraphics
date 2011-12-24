@@ -308,12 +308,12 @@ void ProgressWidget::paintEvent( TQPaintEvent * e )
     // paint rects and a separator line
     TQPainter p( this );
     if ( cRect.isValid() )
-        p.fillRect( cRect, tqpalette().active().highlightedText() );
+        p.fillRect( cRect, palette().active().highlightedText() );
     if ( fRect.isValid() )
-        p.fillRect( fRect, tqpalette().active().highlight() );
+        p.fillRect( fRect, palette().active().highlight() );
     if ( l && l != w  )
     {
-        p.setPen( tqpalette().active().highlight().dark( 120 ) );
+        p.setPen( palette().active().highlight().dark( 120 ) );
         int delta = TQApplication::reverseLayout() ? w - l : l;
         p.drawLine( delta, 0, delta, h );
     }

@@ -213,7 +213,7 @@ void PagePainter::paintPageOnPainter( const KPDFPage * page, int id, int flags,
     // 3. visually enchance links and images if requested
     if ( enhanceLinks || enhanceImages )
     {
-        TQColor normalColor = TQApplication::tqpalette().active().highlight();
+        TQColor normalColor = TQApplication::palette().active().highlight();
         TQColor lightColor = normalColor.light( 140 );
         // enlarging limits for intersection is like growing the 'rectGeometry' below
         TQRect limitsEnlarged = limits;
