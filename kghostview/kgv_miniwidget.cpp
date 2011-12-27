@@ -29,7 +29,7 @@
 #include <kmessagebox.h>
 
 // KLineEditDlg is depricated as of 3.2. use KInputDialog instead
-#if TDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
+#if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
   #include <kinputdialog.h>
 #else
   #include <tqvalidator.h>
@@ -115,7 +115,7 @@ void KGVMiniWidget::setPSWidget( KPSWidget* psWidget )
 
 void KGVMiniWidget::goToPage()
 {
-#if TDE_VERSION >= KDE_MAKE_VERSION(3,1,90)
+#if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
 	int num;
 	bool ok = false;
 	num = KInputDialog::getInteger(i18n("Go to Page"), i18n("Page:"), 1,

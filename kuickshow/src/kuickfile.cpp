@@ -160,7 +160,7 @@ void KuickFile::slotResult( KIO::Job *job )
 
 	    if ( m_progress ) {
 	        m_progress->setProgress( 100 );
-#define BUGGY_VERSION KDE_MAKE_VERSION(3,5,2)
+#define BUGGY_VERSION TDE_MAKE_VERSION(3,5,2)
 	        if ( KDE::version() <= BUGGY_VERSION ) {
 	            m_progress->topLevelWidget()->hide(); // ### workaround broken KProgressDialog
 	        }
