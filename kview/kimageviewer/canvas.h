@@ -29,6 +29,7 @@ class TQPoint;
 class TQWidget;
 
 #include <tqstring.h>
+#include <tqobjdefs.h>
 #include <kdemacros.h>
 namespace KImageViewer
 {
