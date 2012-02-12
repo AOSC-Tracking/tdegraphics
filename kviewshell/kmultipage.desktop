@@ -32,7 +32,7 @@ Name[zh_CN]=KViewShell 多页
 Name[zh_HK]=KViewShell 多頁
 
 [PropertyDef::X-KDE-MimeTypes]
-Type=QString
+Type=TQString
 
 [PropertyDef::X-KDE-MultiPageVersion]
 Type=int

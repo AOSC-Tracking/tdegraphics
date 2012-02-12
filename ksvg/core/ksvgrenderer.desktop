@@ -53,4 +53,4 @@ Comment[zh_HK]=KSVG 合成後端
 Comment[zh_TW]=KSVG 上色後端介面
 
 [PropertyDef::X-KSVG-InternalName]
-Type=QString
+Type=TQString
