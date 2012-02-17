@@ -28,7 +28,7 @@
   */
 class KXYColorSelector : public KXYSelector  {
    Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	/** The types of the selector. They specify a color component subset */

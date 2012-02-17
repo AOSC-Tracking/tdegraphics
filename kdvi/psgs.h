@@ -34,7 +34,7 @@ public:
 class ghostscript_interface  : public TQObject 
 {
  Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   ghostscript_interface();

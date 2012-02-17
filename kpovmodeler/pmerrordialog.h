@@ -42,7 +42,7 @@ class PMObject;
 class PMErrorDialog : public KDialogBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates a modal PMErrorDialog with parent and name.

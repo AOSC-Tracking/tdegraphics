@@ -28,7 +28,7 @@ class KGVShell;
  */
 class FullScreenFilter : public TQObject {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		FullScreenFilter( KGVShell& parent );
 

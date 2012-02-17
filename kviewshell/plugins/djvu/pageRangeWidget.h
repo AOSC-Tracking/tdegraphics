@@ -29,7 +29,7 @@
 class PageRangeWidget : public PageRangeWidget_base
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   PageRangeWidget( TQ_UINT16 _from, TQ_UINT16 _to, TQ_UINT16 _current, TQWidget *parent = 0, const char *name = 0 );

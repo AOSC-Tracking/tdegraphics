@@ -34,7 +34,7 @@ class KConfig;
 class PMPovrayOutputWidget : public KDialog
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Standard constructor

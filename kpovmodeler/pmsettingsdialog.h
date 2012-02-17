@@ -52,7 +52,7 @@ class PMViewLayoutEntry;
 class PMSettingsDialogPage : public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Constructor
@@ -127,7 +127,7 @@ public:
 class PMSettingsDialog : public KDialogBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Standard constructor

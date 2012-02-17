@@ -23,7 +23,7 @@ namespace KMrmlConfig
     class IndexCleaner : public TQObject
     {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         IndexCleaner( const TQStringList& dirs, const KMrml::Config *config,

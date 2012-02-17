@@ -54,7 +54,7 @@ class TQGroupBox;
 class KOCRBase: public KDialogBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     KOCRBase( TQWidget *, KSpellConfig *spellConfig,
               KDialogBase::DialogType face = KDialogBase::Plain );

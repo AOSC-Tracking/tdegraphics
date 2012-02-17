@@ -84,7 +84,7 @@ private:
 class PMObjectSelect : public KDialogBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates a selection widget with parent and name

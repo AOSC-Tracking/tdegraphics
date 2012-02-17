@@ -37,7 +37,7 @@ class PageNumber;
 class PageView : public TQScrollView
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     PageView( TQWidget* parent = 0, const char* name = 0 );

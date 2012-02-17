@@ -28,7 +28,7 @@ class KInstance;
 class PMFactory : public KParts::Factory
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    PMFactory( );
    virtual ~PMFactory( );

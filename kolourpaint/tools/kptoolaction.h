@@ -38,7 +38,7 @@ class kpToolAction : public KToggleAction,
                      public kpSingleKeyTriggersActionInterface
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolAction (const TQString &text,

@@ -28,7 +28,7 @@ class KProcess;
 class KGamma: public KCModule
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    public:
       KGamma(TQWidget *parent, const char *name, const TQStringList&);
       virtual ~KGamma();

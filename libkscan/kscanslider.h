@@ -45,7 +45,7 @@ class TQLabel;
 class KScanSlider : public TQFrame
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    TQ_PROPERTY( int slider_val READ value WRITE slSetSlider )
 
 public:
@@ -118,7 +118,7 @@ private:
 class KScanEntry : public TQFrame
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    TQ_PROPERTY( TQString text READ text WRITE slSetEntry )
 
 public:
@@ -172,7 +172,7 @@ private:
 class KScanCombo : public TQHBox
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    TQ_PROPERTY( TQString cbEntry READ currentText WRITE slSetEntry )
 
 public:

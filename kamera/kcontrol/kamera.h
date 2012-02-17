@@ -47,7 +47,7 @@ class KPopupMenu;
 class KKameraConfig : public KCModule
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	friend class KameraDeviceSelectDialog;
 
 public:

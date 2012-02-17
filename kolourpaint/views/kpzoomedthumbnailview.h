@@ -50,7 +50,7 @@
 /*sealed*/ class kpZoomedThumbnailView : public kpThumbnailView
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     /**

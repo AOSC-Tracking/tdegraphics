@@ -107,7 +107,7 @@ protected:
 class kpToolResizeScaleDialog : public KDialogBase
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolResizeScaleDialog (kpMainWindow *mainWindow);

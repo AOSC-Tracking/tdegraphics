@@ -38,7 +38,7 @@ class MarkList;
 class KGVMiniWidget : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     KGVMiniWidget( KGVPart* part, const char* name = 0 );

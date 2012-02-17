@@ -29,7 +29,7 @@ class KIntSpinBox;
 class KResizeWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 
@@ -47,7 +47,7 @@ private:
 class KResizeDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
 public:
 

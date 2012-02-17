@@ -31,7 +31,7 @@ class TQLabel;
 class fontProgressDialog : public KDialogBase
 { 
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     fontProgressDialog( const TQString& helpIndex, const TQString& label, const TQString& abortTip, const TQString& whatsThis, const TQString& ttip,

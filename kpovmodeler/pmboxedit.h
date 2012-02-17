@@ -35,7 +35,7 @@ class PMVectorEdit;
 class PMBoxEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    typedef PMSolidObjectEdit Base;
 public:
    /**

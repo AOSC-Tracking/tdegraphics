@@ -37,7 +37,7 @@ class PMLibraryHandle;
 class PMLibraryHandleEdit: public KDialogBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Construct a dialog to edit the properties of lib. The library will be

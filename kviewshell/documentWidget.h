@@ -30,7 +30,7 @@ class TQPaintEvent;
 class DocumentWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache *cache, const char *name);

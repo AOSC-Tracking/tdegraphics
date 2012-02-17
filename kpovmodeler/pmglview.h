@@ -51,7 +51,7 @@ class TQComboBox;
 class PMGLView : public PMViewBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Type of the view
@@ -573,7 +573,7 @@ public:
 class PMGLViewOptionsWidget : public PMViewOptionsWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Default constructor

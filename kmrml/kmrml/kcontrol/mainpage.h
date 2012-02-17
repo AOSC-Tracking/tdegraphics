@@ -46,7 +46,7 @@ namespace KMrmlConfig
     class MainPage : public TQVBox
     {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         MainPage( TQWidget *parent, const char *name );

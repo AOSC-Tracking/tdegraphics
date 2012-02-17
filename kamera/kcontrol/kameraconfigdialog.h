@@ -34,7 +34,7 @@ extern "C" {
 class KameraConfigDialog : public KDialogBase
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	KameraConfigDialog(Camera *camera, CameraWidget *widget,
 			   TQWidget *parent = 0, const char *name = 0);

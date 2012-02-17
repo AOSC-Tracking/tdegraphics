@@ -43,7 +43,7 @@
 class dwMenuAction:public KToggleAction
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    dwMenuAction( const TQString& text,
 		 const KShortcut& cut = KShortcut(),

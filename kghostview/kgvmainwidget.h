@@ -26,7 +26,7 @@ class KURL;
 class KGVMainWidget : public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     
 public:
     KGVMainWidget( TQWidget* parent = 0, const char* name = 0 );

@@ -55,7 +55,7 @@ class kpSelection;
 class kpDocument : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpDocument (int w, int h, kpMainWindow *mainWindow);

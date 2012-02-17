@@ -64,7 +64,7 @@ private:
 class KIconListBox : public TQListBox    
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KIconListBox( TQWidget *parent ) : TQListBox(parent) {} ;
   const TQString path(int idx) { return ((KIconListBoxItem*)item(idx))->path(); }
@@ -97,7 +97,7 @@ private:
 class NewSelect : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   NewSelect(TQWidget *parent);
   ~NewSelect();
@@ -117,7 +117,7 @@ protected:
 class NewFromTemplate : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   NewFromTemplate(TQWidget *parent);
   ~NewFromTemplate();
@@ -136,7 +136,7 @@ protected:
 class KNewIcon : public KWizard
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KNewIcon(TQWidget *parent);
   ~KNewIcon();

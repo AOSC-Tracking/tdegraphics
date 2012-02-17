@@ -31,7 +31,7 @@ class TQCheckBox;
 class KFAXPrintSettings : public KPrintDialogPage
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	KFAXPrintSettings(TQWidget *parent = 0, const char *name = 0);
 	~KFAXPrintSettings();

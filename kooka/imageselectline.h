@@ -43,7 +43,7 @@ class TQStringList;
 class ImageSelectLine:public TQHBox
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    ImageSelectLine( TQWidget *parent, const TQString& text );
 

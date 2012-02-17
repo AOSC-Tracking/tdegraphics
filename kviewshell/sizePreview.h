@@ -19,7 +19,7 @@ class SimplePageSize;
 class SizePreview : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   SizePreview( TQWidget *parent, const char* name=0, WFlags f=0 );

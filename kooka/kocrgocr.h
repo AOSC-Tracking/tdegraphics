@@ -45,7 +45,7 @@ class KSpellConfig;
 class KGOCRDialog: public KOCRBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     KGOCRDialog( TQWidget*, KSpellConfig* );
     ~KGOCRDialog();

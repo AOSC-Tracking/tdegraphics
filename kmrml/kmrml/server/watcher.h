@@ -61,7 +61,7 @@ namespace KMrml
     class Watcher : public KDEDModule
     {
         Q_OBJECT
-//        TQ_OBJECT
+//        
         K_DCOP
 
     public:

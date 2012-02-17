@@ -34,7 +34,7 @@ class PMInteriorTexture;
 class PMInteriorTextureEdit : public PMTextureBaseEdit
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    typedef PMTextureBaseEdit Base;
 public:
    /**

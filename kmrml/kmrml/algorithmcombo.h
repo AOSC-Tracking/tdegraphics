@@ -29,7 +29,7 @@ namespace KMrml
     class AlgorithmCombo : public KComboBox
     {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         AlgorithmCombo( TQWidget *parent, const char *name = 0 );

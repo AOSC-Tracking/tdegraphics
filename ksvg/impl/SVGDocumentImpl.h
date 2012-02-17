@@ -72,7 +72,7 @@ class SVGDocumentImpl : public TQObject,
 						public SVGDOMNodeBridge
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	SVGDocumentImpl(bool anim = true, bool bFit = false, SVGImageElementImpl *parentImage = 0);
 	virtual ~SVGDocumentImpl();

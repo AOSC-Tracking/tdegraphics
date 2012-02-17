@@ -73,7 +73,7 @@ struct PCXHEADER
 class KPcxPlugin: public KFilePlugin
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   KPcxPlugin(TQObject *parent, const char *name, const TQStringList& args);

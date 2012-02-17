@@ -55,7 +55,7 @@ class SVGDocumentImpl;
 class KSVGLoader : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	KSVGLoader();
 	~KSVGLoader();

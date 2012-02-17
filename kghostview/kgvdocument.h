@@ -34,7 +34,7 @@ class Pdf2dsc;
 class KGVDocument : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     enum Format { PS, PDF };
@@ -160,7 +160,7 @@ private:
 class Pdf2dsc : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 	
 public:
     Pdf2dsc( const TQString& ghostscriptPath, TQObject* parent = 0, const char* name = 0 );

@@ -64,7 +64,7 @@ typedef enum {
 class KScanDevice : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
     /* Hmmm - No TQ_PROPS ? */
 public:

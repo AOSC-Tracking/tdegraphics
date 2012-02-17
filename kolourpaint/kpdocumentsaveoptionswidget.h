@@ -44,7 +44,7 @@ class kpResizeSignallingLabel;
 class kpDocumentSaveOptionsPreviewDialog : public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpDocumentSaveOptionsPreviewDialog (TQWidget *parent, const char *name = 0);
@@ -96,7 +96,7 @@ class KPushButton;
 class kpDocumentSaveOptionsWidget : public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpDocumentSaveOptionsWidget (const TQPixmap &docPixmap,

@@ -32,7 +32,7 @@ class KCustomColors;
 class PaletteToolBar : public KToolBar
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     PaletteToolBar( TQWidget *parent, const char *name = 0L );

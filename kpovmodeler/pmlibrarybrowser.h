@@ -48,7 +48,7 @@ typedef TQDict<TQString> TQStringDict;
 class PMLibraryBrowserView : public PMViewBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Default constructor
@@ -67,7 +67,7 @@ public:
 class PMLibraryBrowserViewWidget: public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    PMLibraryBrowserViewWidget( TQWidget *parent, const char* name = NULL );
 

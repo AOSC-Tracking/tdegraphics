@@ -55,7 +55,7 @@ class ScrollBox;
 class KGVPart: public KParts::ReadOnlyPart
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
     KGVPart( TQWidget* parentWidget, const char* widgetName,
              TQObject* parent, const char* name,
@@ -231,7 +231,7 @@ private:
 class KGVBrowserExtension : public KParts::BrowserExtension
 {
   Q_OBJECT
-  TQ_OBJECT
+  
     friend class KGVPart; // emits our signals
 public:
     KGVBrowserExtension( KGVPart* parent );
@@ -245,7 +245,7 @@ public slots:
 class KGVRun : public KRun
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     KGVRun( const KURL& url, mode_t mode = 0,

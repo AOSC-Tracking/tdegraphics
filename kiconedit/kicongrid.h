@@ -90,7 +90,7 @@ class RepaintCommand : public KCommand {
 class KGridView : public TQFrame
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KGridView( TQImage *image, KCommandHistory* history, TQWidget * parent = 0, const char *name = 0);
 
@@ -132,7 +132,7 @@ protected:
 class KIconEditGrid : public KColorGrid
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * parent = 0, const char *name = 0);
   virtual ~KIconEditGrid();

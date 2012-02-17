@@ -91,7 +91,7 @@ protected:
 class kpEffectInvertWidget : public kpColorEffectWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpEffectInvertWidget (bool actOnSelection,

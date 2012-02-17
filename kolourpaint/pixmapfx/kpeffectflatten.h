@@ -76,7 +76,7 @@ protected:
 class kpEffectFlattenWidget : public kpColorEffectWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpEffectFlattenWidget (bool actOnSelection,

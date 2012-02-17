@@ -38,7 +38,7 @@ class kpColor;
 class kpToolWidgetFillStyle : public kpToolWidgetBase
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolWidgetFillStyle (TQWidget *parent, const char *name);

@@ -58,7 +58,7 @@ class kpToolToolBar;
 class kpTool : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpTool (const TQString &text, const TQString &description,

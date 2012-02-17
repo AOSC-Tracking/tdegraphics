@@ -20,7 +20,7 @@ class KPDFDocument;
 class TOC : public KListView, public DocumentObserver
 {
 Q_OBJECT
-  TQ_OBJECT
+  
     public:
         TOC(TQWidget *parent, KPDFDocument *document);
         ~TOC();

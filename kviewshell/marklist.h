@@ -43,7 +43,7 @@ class MarkListWidget;
 class ThumbnailWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   ThumbnailWidget(MarkListWidget* parent_, const PageNumber& _pageNumber, DocumentPageCache*);
@@ -74,7 +74,7 @@ private:
 class MarkListWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   MarkListWidget(TQWidget* _parent, MarkList*, const PageNumber& _pageNumber, DocumentPageCache*, bool _showThumbnail = true);
@@ -126,7 +126,7 @@ private:
 class MarkList: public TQScrollView
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   MarkList(TQWidget* parent = 0, const char* name = 0);

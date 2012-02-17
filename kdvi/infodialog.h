@@ -20,7 +20,7 @@ class TQWidget;
 class infoDialog : public KDialogBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     infoDialog( TQWidget* parent = 0 );

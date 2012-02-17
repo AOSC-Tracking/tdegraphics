@@ -291,7 +291,7 @@ private:
 class PMSaveViewLayoutDialog : public KDialogBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    PMSaveViewLayoutDialog( PMShell* parent, const char* name = 0 );
    ~PMSaveViewLayoutDialog( );

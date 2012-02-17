@@ -11,7 +11,7 @@
 class IndexTest : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     
 public:
     IndexTest();

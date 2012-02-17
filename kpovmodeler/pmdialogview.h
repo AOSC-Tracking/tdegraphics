@@ -43,7 +43,7 @@ class TQLabel;
 class PMDialogEditContent : public TQScrollView
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    PMDialogEditContent( TQWidget* parent, const char* name = 0 );
    void setContents( TQWidget* wid );
@@ -64,7 +64,7 @@ private:
 class PMDialogView : public PMViewBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates a new PMDialogView widget

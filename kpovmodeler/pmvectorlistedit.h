@@ -57,7 +57,7 @@ private:
 class PMVectorListEdit : public TQTable
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Constructor for 3d vectors (x, y, z)

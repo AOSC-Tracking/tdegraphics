@@ -133,7 +133,7 @@ private:
 class kpCommandHistoryBase : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpCommandHistoryBase (bool doReadConfig, KActionCollection *ac);
@@ -239,7 +239,7 @@ private:
 class kpCommandHistory : public kpCommandHistoryBase
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpCommandHistory (bool doReadConfig, kpMainWindow *mainWindow);

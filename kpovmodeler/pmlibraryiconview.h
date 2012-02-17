@@ -33,7 +33,7 @@ class PMLibraryHandle;
 class PMLibraryIconDrag : public TQIconDrag
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /** Constructor */
    PMLibraryIconDrag( TQWidget * dragSource, const char* name = 0 ) : TQIconDrag( dragSource, name ) {}
@@ -63,7 +63,7 @@ private:
 class PMLibraryIconView: public KIconView
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    PMLibraryIconView( TQWidget *parent, const char* name = NULL );
 

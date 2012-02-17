@@ -16,7 +16,7 @@ class TQLabel;
 class KViewShell : public KParts::MainWindow
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   KStatusBar *statusbar;

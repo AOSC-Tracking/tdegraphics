@@ -30,7 +30,7 @@ class m_inputDelayTimer;
 class SearchWidget : public KToolBar
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
         SearchWidget( TQWidget *parent, KPDFDocument *document );
         void clearText();

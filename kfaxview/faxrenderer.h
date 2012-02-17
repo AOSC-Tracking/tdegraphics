@@ -39,7 +39,7 @@ implements only the necessary methods setFile() and drawPage().
 class FaxRenderer : public DocumentRenderer
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
    /** Default constructor

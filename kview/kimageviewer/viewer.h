@@ -48,7 +48,7 @@ namespace KImageViewer
 class KDE_EXPORT Viewer : public KParts::ReadWritePart
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		Viewer( TQObject * parent = 0, const char * name = 0 );
 

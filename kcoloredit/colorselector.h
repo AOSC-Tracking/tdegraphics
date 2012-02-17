@@ -31,7 +31,7 @@
  */
 class ColorSelector : public TQWidget  {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	/** constructs a color selector widget */

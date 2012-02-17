@@ -31,7 +31,7 @@ class XVidExtWrap;
 class GammaCtrl : public TQHBox  {
 
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     /** construktor */
     GammaCtrl(TQWidget *parent=0, XVidExtWrap *xvid=0, int channel=0, \

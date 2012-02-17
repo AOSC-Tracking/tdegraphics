@@ -53,7 +53,7 @@ class pagenode;
 class KDE_EXPORT KFaxImage : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 

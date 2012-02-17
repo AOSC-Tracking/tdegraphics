@@ -29,7 +29,7 @@ class KConfig;
 class KViewCanvasConfig : public KCModule
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		KViewCanvasConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );
 		~KViewCanvasConfig();

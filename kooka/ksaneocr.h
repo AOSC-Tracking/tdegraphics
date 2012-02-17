@@ -75,7 +75,7 @@ typedef enum{ ENG_ERROR, ENG_OK, ENG_DATA_MISSING, ENG_BAD_SETUP } EngineError;
 class KSANEOCR : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     enum OCREngines{ GOCR, OCRAD, KADMOS };
 

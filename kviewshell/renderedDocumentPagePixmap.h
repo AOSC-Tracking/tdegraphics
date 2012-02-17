@@ -22,7 +22,7 @@
 class RenderedDocumentPagePixmap: public RenderedDocumentPage, public TQPixmap
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   RenderedDocumentPagePixmap();

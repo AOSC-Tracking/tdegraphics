@@ -41,7 +41,7 @@ class TQCheckBox;
 class PMCameraEdit : public PMNamedObjectEdit
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    typedef PMNamedObjectEdit Base;
 public:
    /**

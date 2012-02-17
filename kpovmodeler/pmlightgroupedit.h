@@ -35,7 +35,7 @@ class TQCheckBox;
 class PMLightGroupEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    typedef PMSolidObjectEdit Base;
 public:
    /**

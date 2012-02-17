@@ -36,7 +36,7 @@ namespace KPDF
   class Shell : public KParts::MainWindow
   {
     Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     /**

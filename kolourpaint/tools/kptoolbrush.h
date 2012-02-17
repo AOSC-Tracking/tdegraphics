@@ -34,7 +34,7 @@
 class kpToolBrush : public kpToolPen
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolBrush (kpMainWindow *mainWindow);

@@ -35,7 +35,7 @@ class TQMultiLineEdit;
 class PMRawEdit : public PMNamedObjectEdit
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    typedef PMNamedObjectEdit Base;
 public:
    /**

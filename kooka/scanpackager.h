@@ -74,7 +74,7 @@ private:
 class ScanPackager : public KFileTreeView
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ScanPackager( TQWidget *parent);
     ~ScanPackager();

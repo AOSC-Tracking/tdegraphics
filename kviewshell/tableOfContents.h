@@ -46,7 +46,7 @@ private:
 class TableOfContents : public KListView
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   TableOfContents(TQWidget* parent);

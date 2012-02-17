@@ -58,7 +58,7 @@ class KIntNumInput;
 class OptionsDialog : public KDialogBase {
 
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     OptionsDialog( TQWidget *parent = 0, const char *name = 0);

@@ -36,7 +36,7 @@ class kpMainWindow;
 class kpToolEllipse : public kpToolRectangle
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolEllipse (kpMainWindow *);

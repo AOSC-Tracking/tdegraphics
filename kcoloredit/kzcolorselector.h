@@ -29,7 +29,7 @@
  */
 class KZColorSelector : public KSelector {
    Q_OBJECT
-  TQ_OBJECT
+  
 	
 public:
 	/** Selector type constants */

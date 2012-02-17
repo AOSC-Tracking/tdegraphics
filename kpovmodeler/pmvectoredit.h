@@ -35,7 +35,7 @@
 class PMVectorEdit : public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates an edit widget for 2D vectors.

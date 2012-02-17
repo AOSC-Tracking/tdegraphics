@@ -69,7 +69,7 @@ namespace Kadmos {
     class CRep : public TQObject
     {
         Q_OBJECT
-  TQ_OBJECT
+  
     public:
         CRep();
         virtual ~CRep();

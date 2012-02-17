@@ -44,7 +44,7 @@ class TQPainter;
 class kpToolWidgetBase : public TQFrame
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolWidgetBase (TQWidget *parent, const char *name);  // must provide a name for config to work

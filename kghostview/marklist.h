@@ -27,7 +27,7 @@ class KGVMiniWidget;
 class MarkListItem : public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     MarkListItem( TQWidget *parent, const TQString &text, const TQString &tip, const TQColor &color, KGVMiniWidget*, int );
 
@@ -55,7 +55,7 @@ private:
 class MarkList: public TQTable
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     MarkList( TQWidget* parent = 0, const char* name = 0, KGVMiniWidget* = 0 );

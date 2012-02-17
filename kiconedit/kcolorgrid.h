@@ -41,7 +41,7 @@ class KColorGrid : public TQWidget
 {
 private:
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KColorGrid( TQWidget * parent = 0, const char *name = 0, int spacing = 0);
   virtual ~KColorGrid() {};

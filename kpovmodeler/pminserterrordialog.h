@@ -36,7 +36,7 @@ class TQLabel;
 class PMInsertErrorDialog : public KDialogBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates a modal PMInsertErrorDialog with parent and name.

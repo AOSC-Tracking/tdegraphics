@@ -31,7 +31,7 @@ class KColorEditView;
   */
 class PaletteView : public TQFrame {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	/** Constructs a palette view widget, with a default cells sizes and spacing.

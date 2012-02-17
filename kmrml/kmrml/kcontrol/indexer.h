@@ -31,7 +31,7 @@ namespace KMrmlConfig
     class Indexer : public TQObject
     {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         Indexer( const KMrml::Config *config,

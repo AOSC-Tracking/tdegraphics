@@ -38,7 +38,7 @@ class PMPart;
 class PMFileDialog : public KFileDialog
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Default constructor, use the static methods

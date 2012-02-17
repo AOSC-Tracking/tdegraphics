@@ -35,7 +35,7 @@
 class kpResizeSignallingLabel : public TQLabel
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpResizeSignallingLabel (const TQString &string, TQWidget *parent, const char *name = 0);

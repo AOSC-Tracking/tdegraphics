@@ -31,7 +31,7 @@ namespace KImageViewer { class Viewer; }
 class KViewScanner : public KParts::Plugin
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	KViewScanner( TQObject* parent, const char* name, const TQStringList & );
 	virtual ~KViewScanner();

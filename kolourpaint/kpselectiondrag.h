@@ -38,7 +38,7 @@
 class kpSelectionDrag : public TQImageDrag
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpSelectionDrag (TQWidget *dragSource = 0, const char *name = 0);

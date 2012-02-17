@@ -54,7 +54,7 @@ class MrmlView;
 class MrmlPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     enum Status { NeedCollection, CanSearch, InProgress };
@@ -151,7 +151,7 @@ private:
 class PartFactory : public KParts::Factory
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     PartFactory();

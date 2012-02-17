@@ -59,7 +59,7 @@ class kpMainWindow;
 class kpDualColorButton : public TQFrame
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpDualColorButton (kpMainWindow *mainWindow,
@@ -119,7 +119,7 @@ protected:
 class kpColorCells : public KColorCells
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpColorCells (TQWidget *parent,
@@ -157,7 +157,7 @@ protected slots:
 class kpTransparentColorCell : public TQFrame
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpTransparentColorCell (TQWidget *parent, const char *name = 0);
@@ -185,7 +185,7 @@ protected:
 class kpColorPalette : public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpColorPalette (TQWidget *parent,
@@ -212,7 +212,7 @@ protected:
 class kpColorSimilarityToolBarItem : public kpColorSimilarityCube
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpColorSimilarityToolBarItem (kpMainWindow *mainWindow,
@@ -248,7 +248,7 @@ private:
 class kpColorToolBar : public KToolBar
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpColorToolBar (const TQString &label, kpMainWindow *mainWindow, const char *name = 0);

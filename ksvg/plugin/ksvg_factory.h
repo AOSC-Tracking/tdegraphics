@@ -30,7 +30,7 @@ class KInstance;
 class KSVGPluginFactory : public KParts::Factory
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	KSVGPluginFactory(TQObject *parent = 0, const char *name = 0);
 	virtual ~KSVGPluginFactory();
@@ -47,7 +47,7 @@ private:
 class KSVGPluginBrowserExtension : public KParts::BrowserExtension
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 friend class KSVGPlugin;
 
 public:

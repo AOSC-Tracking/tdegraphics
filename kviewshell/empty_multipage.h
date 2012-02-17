@@ -30,7 +30,7 @@
 class EmptyMultiPage : public KMultiPage
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   EmptyMultiPage(TQWidget* parentWidget, const char* widgetName, TQObject* parent, const char* name,

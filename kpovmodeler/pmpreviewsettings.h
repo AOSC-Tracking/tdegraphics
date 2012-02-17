@@ -35,7 +35,7 @@ class KColorButton;
 class PMPreviewSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Default constructor

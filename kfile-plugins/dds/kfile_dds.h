@@ -27,7 +27,7 @@ class TQStringList;
 class KDdsPlugin: public KFilePlugin
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     
 public:
     KDdsPlugin( TQObject *parent, const char *name, const TQStringList& args );

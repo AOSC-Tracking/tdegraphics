@@ -47,7 +47,7 @@ class kpTempPixmap;
 class kpViewManager : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpViewManager (kpMainWindow *mainWindow);

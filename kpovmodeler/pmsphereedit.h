@@ -36,7 +36,7 @@ class PMFloatEdit ;
 class PMSphereEdit : public PMSolidObjectEdit
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    typedef PMSolidObjectEdit Base;
 public:
    /**

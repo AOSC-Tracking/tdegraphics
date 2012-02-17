@@ -52,7 +52,7 @@ class MrmlView : public TQScrollView
     friend class MrmlViewItem;
 
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     MrmlView( TQWidget *parent = 0L, const char *name = 0L );
@@ -104,7 +104,7 @@ private:
 class MrmlViewItem : public TQFrame
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     enum Relevance

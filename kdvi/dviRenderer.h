@@ -85,7 +85,7 @@ struct drawinf {
 class dviRenderer : public DocumentRenderer, bigEndianByteReader
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   dviRenderer(TQWidget *parent);

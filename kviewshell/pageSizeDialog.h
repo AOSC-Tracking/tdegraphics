@@ -29,7 +29,7 @@ class pageSize;
 class pageSizeDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
     
 public:
   // Constructs the page size Dialog. The pointer userPrefdPageSize

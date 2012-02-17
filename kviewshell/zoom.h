@@ -18,7 +18,7 @@
 class Zoom : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   /** Initializs the zoom with a default of 100% */

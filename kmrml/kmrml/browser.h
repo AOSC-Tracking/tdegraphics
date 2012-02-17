@@ -28,7 +28,7 @@ namespace KMrml
     class Browser : public KParts::BrowserExtension
     {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         Browser( MrmlPart *parent, const char *name );

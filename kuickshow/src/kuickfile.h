@@ -24,7 +24,7 @@ namespace KIO {
 class KuickFile : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	enum DownloadStatus

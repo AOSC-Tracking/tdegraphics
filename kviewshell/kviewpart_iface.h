@@ -10,7 +10,7 @@ class TQStringList;
 class KViewPart_Iface : public KParts::ReadOnlyPart
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KViewPart_Iface(TQObject *parent, const char *name)
     : KParts::ReadOnlyPart(parent, name) {}

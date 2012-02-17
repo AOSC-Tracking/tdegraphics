@@ -35,7 +35,7 @@ class PMIntEdit;
 class PMPaletteValueEdit: public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /** */
    PMPaletteValueEdit( TQWidget* parent, const char* name = 0 );

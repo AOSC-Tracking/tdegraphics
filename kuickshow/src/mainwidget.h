@@ -28,7 +28,7 @@ class FileView;
 class MainWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   MainWidget( TQString, TQWidget *parent, const char *name=0L);

@@ -88,7 +88,7 @@ class kpZoomedView;
 class kpMainWindow : public KMainWindow
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     // Opens a new window with a blank document.

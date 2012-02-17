@@ -59,7 +59,7 @@ class CanvasPaintServer;
 class KSVGCanvas : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	KSVGCanvas(unsigned int width, unsigned int height);
 	virtual ~KSVGCanvas();

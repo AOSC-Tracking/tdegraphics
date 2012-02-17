@@ -19,7 +19,7 @@ class TQDoubleValidator;
 class pageSizeWidget : public pageSizeWidget_base
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   pageSizeWidget( TQWidget* parent = 0, const char* name = 0, WFlags fl = 0 );

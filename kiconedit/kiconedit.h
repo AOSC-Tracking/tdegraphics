@@ -59,7 +59,7 @@ class PaletteToolBar;
 class KIconEdit : public KMainWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KIconEdit( KURL url = KURL(), const char *name = "kiconedit");
   KIconEdit( const TQImage image, const char *name = "kiconedit");

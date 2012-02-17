@@ -51,7 +51,7 @@ with 10 empty pages of A4 size and a few anchors and bookmarks.
 class DjVuRenderer : public DocumentRenderer
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
    /** Default constructor

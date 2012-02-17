@@ -82,7 +82,7 @@ public:
 class KuickShow : public KMainWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     KuickShow( const char *name=0 );

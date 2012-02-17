@@ -46,7 +46,7 @@ class MessagesDialog;
 class KPSWidget : public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     KPSWidget( TQWidget* parent = 0, const char* name = 0 );

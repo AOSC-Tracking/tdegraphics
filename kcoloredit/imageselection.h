@@ -27,7 +27,7 @@
   */
 class ImageSelection : public TQWidget  {
    Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	/** constructs the widget */

@@ -34,7 +34,7 @@ class TQPushButton;
 class PMLinkEdit : public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates a link edit widget with parent and name.

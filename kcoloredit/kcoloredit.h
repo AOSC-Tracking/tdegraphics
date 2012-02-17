@@ -54,7 +54,7 @@ class KColorEditView;
 class KColorEditApp : public KMainWindow
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   friend class KColorEditView;
 

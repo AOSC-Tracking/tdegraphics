@@ -13,7 +13,7 @@ namespace KImageViewer { class Canvas; };
 class KImageViewerTest : public KParts::MainWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     KImageViewerTest();
     virtual ~KImageViewerTest();

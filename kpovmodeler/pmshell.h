@@ -43,7 +43,7 @@ class PMViewOptions;
 class PMShell : public PMDockMainWindow
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
    /**

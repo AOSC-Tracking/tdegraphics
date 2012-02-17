@@ -38,7 +38,7 @@ class kpThumbnailView;
 class kpThumbnail : public TQDockWindow
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpThumbnail (kpMainWindow *parent, const char *name = 0);

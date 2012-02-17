@@ -23,7 +23,7 @@ class KSnapshotWidget;
 class KSnapshotPreview : public TQLabel
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         KSnapshotPreview(TQWidget *parent, const char *name = 0)
@@ -92,7 +92,7 @@ class KSnapshotPreview : public TQLabel
 class KSnapshot : public KDialogBase, virtual public KSnapshotIface
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   KSnapshot(TQWidget *parent= 0, const char *name= 0, bool grabCurrent=false);

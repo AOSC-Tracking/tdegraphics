@@ -9,7 +9,7 @@ class TQPushButton;
 class ViewControl : public TQDialog
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	ViewControl( TQWidget *parent, const char *name );
 	TQComboBox* magComboBox;

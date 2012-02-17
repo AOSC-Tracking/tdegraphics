@@ -55,7 +55,7 @@ private:
 class KookaPrint:public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     KookaPrint(KPrinter*);
 

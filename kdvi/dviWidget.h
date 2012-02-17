@@ -23,7 +23,7 @@ class textSelection;
 class DVIWidget : public DocumentWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public: 
   DVIWidget(TQWidget* parent, PageView* sv, DocumentPageCache* cache, const char* name);

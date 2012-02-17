@@ -60,7 +60,7 @@ class kpSingleKeyTriggersAction : public KAction,
                                   public kpSingleKeyTriggersActionInterface
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpSingleKeyTriggersAction (const TQString &text,

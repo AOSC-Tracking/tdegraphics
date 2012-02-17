@@ -96,7 +96,7 @@ typedef TQPtrListIterator<PMRenderTask> PMRenderTaskListIterator;
 class PMRenderManager : public TQObject
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Returns a pointer to the render manager

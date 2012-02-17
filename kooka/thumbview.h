@@ -59,7 +59,7 @@ class KIO::PreviewJob;
 class ThumbView: public TQVBox /* KIconView */
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 

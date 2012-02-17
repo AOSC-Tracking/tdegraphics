@@ -27,7 +27,7 @@ class TQLabel;
 class InfoDialog : public KDialogBase 
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     InfoDialog( TQWidget *parent=0, const char *name=0, bool modal=true );

@@ -37,7 +37,7 @@ class TQColor;
 class PMColorEdit : public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates an edit widget for rgbft colors.

@@ -100,7 +100,7 @@ public:
 
 class WindowQObject : public TQObject {
 	Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	WindowQObject(Window *w);
 	~WindowQObject();

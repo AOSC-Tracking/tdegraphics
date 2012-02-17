@@ -73,7 +73,7 @@ protected:
 class kpEffectReduceColorsWidget : public kpColorEffectWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpEffectReduceColorsWidget (bool actOnSelection,

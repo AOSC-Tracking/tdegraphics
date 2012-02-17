@@ -32,7 +32,7 @@ namespace KMrml
     class AlgorithmDialog : public KDialogBase
     {
         Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         AlgorithmDialog( const AlgorithmList&, const CollectionList&,

@@ -27,7 +27,7 @@ class KURLWidget;
 class AboutWidget : public TQVBox
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     AboutWidget(TQWidget *parent = 0, const char *name = 0);

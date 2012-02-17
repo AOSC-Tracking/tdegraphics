@@ -53,7 +53,7 @@ class PhotoBookPart;
 class PhotoBook : public TQSplitter
 {
 Q_OBJECT
-TQ_OBJECT
+
 	Previews *mList;
 	KAction *mFit;
 	KParts::ReadOnlyPart *mViewer;
@@ -74,7 +74,7 @@ signals:
 class Previews : public KFileIconView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 	
 	KDirLister mDirLister;
 	PhotoBook *mPhotoBook;
@@ -108,7 +108,7 @@ private slots:
 class PhotoBookPart : public KParts::ReadOnlyPart
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 	PhotoBook *bv;
 	KAction *m_pPreviousAction;
 	KAction *m_pNextAction;
@@ -134,7 +134,7 @@ typedef KParts::GenericFactory<PhotoBookPart> PhotoBookFactory;
 class PhotoBookBrowserExtension : public KParts::BrowserExtension
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	PhotoBookBrowserExtension(PhotoBookPart *p);
 };

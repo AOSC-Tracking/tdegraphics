@@ -54,7 +54,7 @@ class PMPovrayOutputWidget;
 class PMDialogEditBase : public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Creates a new PMDialogEditBase widget objectType is

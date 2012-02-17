@@ -32,7 +32,7 @@
 
 class KLineal : public KMainWindow {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   enum { North=0, West=1, South=2, East=3 };
   /** constructor */

@@ -37,7 +37,7 @@ class SearchWidget;
 class KMultiPage : public KParts::ReadOnlyPart, virtual public kmultipageInterface
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent, const char *name);

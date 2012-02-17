@@ -32,7 +32,7 @@ class TQSplitter;
 class ScanDialog : public KScanDialog
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
    ScanDialog( TQWidget *parent=0, const char *name=0, bool modal=false );

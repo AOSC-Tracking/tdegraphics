@@ -25,7 +25,7 @@
 class ScrollBox: public TQFrame
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     ScrollBox( TQWidget* parent = 0, const char* name = 0 );

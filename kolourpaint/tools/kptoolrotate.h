@@ -81,7 +81,7 @@ private:
 class kpToolRotateDialog : public kpToolPreviewDialog
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolRotateDialog (bool actOnSelection,

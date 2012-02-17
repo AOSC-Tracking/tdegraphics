@@ -42,7 +42,7 @@ class SVGScriptElementImpl : public TQObject,
 							 public SVGExternalResourcesRequiredImpl
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 	SVGScriptElementImpl(DOM::ElementImpl *);
 	virtual ~SVGScriptElementImpl();

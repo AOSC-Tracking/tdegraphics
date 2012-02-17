@@ -28,7 +28,7 @@ namespace KMrml
     class IntegerWidget : public TQHBox
     {
         Q_OBJECT
-  TQ_OBJECT
+  
         
     public:
         IntegerWidget( const PropertySheet& sheet, 
@@ -44,7 +44,7 @@ namespace KMrml
     class ComboWidget : public TQHBox
     {
         Q_OBJECT
-  TQ_OBJECT
+  
         
     public:
         ComboWidget( const PropertySheet& sheet, 
@@ -60,7 +60,7 @@ namespace KMrml
     class CheckBoxWidget : public TQHBox
     {
         Q_OBJECT
-  TQ_OBJECT
+  
         
     public:
         CheckBoxWidget( const PropertySheet& sheet, 
@@ -78,7 +78,7 @@ namespace KMrml
     class LineEditWidget : public TQHBox
     {
         Q_OBJECT
-  TQ_OBJECT
+  
         
     public:
         LineEditWidget( const PropertySheet& sheet, 
@@ -94,7 +94,7 @@ namespace KMrml
     class ListBoxWidget : public TQHBox
     {
         Q_OBJECT
-  TQ_OBJECT
+  
         
     public:
         ListBoxWidget( const PropertySheet& sheet, 

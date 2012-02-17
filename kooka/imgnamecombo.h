@@ -41,7 +41,7 @@ class KFileBranch;
 class ImageNameCombo: public KComboBox
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    ImageNameCombo( TQWidget* );
    ~ImageNameCombo();

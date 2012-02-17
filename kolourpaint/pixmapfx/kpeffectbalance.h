@@ -74,7 +74,7 @@ protected:
 class kpEffectBalanceWidget : public kpColorEffectWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpEffectBalanceWidget (bool actOnSelection,

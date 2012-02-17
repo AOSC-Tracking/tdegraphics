@@ -55,7 +55,7 @@ public:
 class PMTreeView : public TQListView
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    friend class PMTreeViewItem;
 public:
    /**

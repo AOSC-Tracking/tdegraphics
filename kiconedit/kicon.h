@@ -46,7 +46,7 @@ class TQImage;
 class KIconEditIcon : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KIconEditIcon(TQObject*, const TQImage*, KURL url = KURL() );
   ~KIconEditIcon();

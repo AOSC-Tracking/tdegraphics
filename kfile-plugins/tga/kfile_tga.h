@@ -27,7 +27,7 @@ class TQStringList;
 class KTgaPlugin: public KFilePlugin
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     
 public:
     KTgaPlugin( TQObject *parent, const char *name, const TQStringList& args );

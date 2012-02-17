@@ -29,7 +29,7 @@ class RenderedDocumentPage;
 class EmptyRenderer : public DocumentRenderer
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   EmptyRenderer(TQWidget* parent);

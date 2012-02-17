@@ -87,7 +87,7 @@ required.
 class DjVuMultiPage : public KMultiPage
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   /** Constructor

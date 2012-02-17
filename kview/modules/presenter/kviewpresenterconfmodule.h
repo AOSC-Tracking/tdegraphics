@@ -28,7 +28,7 @@ class TQCheckBox;
 class KViewPresenterConfModule : public KPreferencesModule
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		KViewPresenterConfModule( TQObject * parent );
 		~KViewPresenterConfModule();

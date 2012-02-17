@@ -50,7 +50,7 @@ class kpViewManager;
 class kpToolRectangle : public kpTool
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     // it turns out that these shapes are all really the same thing

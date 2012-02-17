@@ -35,7 +35,7 @@ class PMVectorEdit;
 class PMRotateEdit : public PMDialogEditBase
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    typedef PMDialogEditBase Base;
 public:
    /**

@@ -45,7 +45,7 @@ class TQCache;
 class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIface
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	friend class KViewKonqExtension;
 
 	public:

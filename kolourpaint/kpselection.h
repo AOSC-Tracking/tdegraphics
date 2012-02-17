@@ -55,7 +55,7 @@ class TQSize;
 class kpSelection : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     enum Type

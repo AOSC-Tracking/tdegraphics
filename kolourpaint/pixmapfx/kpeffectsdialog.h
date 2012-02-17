@@ -48,7 +48,7 @@ class kpMainWindow;
 class kpEffectsDialog : public kpToolPreviewDialog
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpEffectsDialog (bool actOnSelection,

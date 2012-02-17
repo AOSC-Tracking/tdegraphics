@@ -70,7 +70,7 @@ class KProcess;
 class PMPart : public KParts::ReadWritePart, virtual public PMPartIface
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * construtor of PMPart, calls all init functions to create the
@@ -1026,7 +1026,7 @@ private:
 class PMBrowserExtension : public KParts::BrowserExtension
 {
    Q_OBJECT
-  TQ_OBJECT
+  
    friend class PMPart;
 public:
    PMBrowserExtension( PMPart* parent )

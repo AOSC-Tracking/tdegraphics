@@ -50,7 +50,7 @@ class KURL;
 class KPDFDocument : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
         KPDFDocument( TQWidget *widget );
         ~KPDFDocument();

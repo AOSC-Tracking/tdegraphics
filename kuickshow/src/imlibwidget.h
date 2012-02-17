@@ -37,7 +37,7 @@ class KuickImage;
 class ImageCache : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   ImageCache( ImlibData *id, int maxImages=1 );
@@ -76,7 +76,7 @@ class TQColor;
 class ImlibWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 

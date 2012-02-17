@@ -36,7 +36,7 @@
 class kpToolWidgetBrush : public kpToolWidgetBase
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolWidgetBrush (TQWidget *parent, const char *name);

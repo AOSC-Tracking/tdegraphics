@@ -26,7 +26,7 @@
 class KJpegPlugin: public KFilePlugin
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     KJpegPlugin( TQObject *parent, const char *name,

@@ -39,7 +39,7 @@ class KListView;
 class PMLibraryObjectSearch: public TQWidget
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    PMLibraryObjectSearch( TQWidget *parent );
 

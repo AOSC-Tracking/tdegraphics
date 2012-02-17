@@ -69,7 +69,7 @@ class ocrResEdit;
 class KookaView : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     typedef enum { MirrorVertical, MirrorHorizontal, MirrorBoth } MirrorType;
     typedef enum { StatusTemp, StatusImage } StatusBarIDs;

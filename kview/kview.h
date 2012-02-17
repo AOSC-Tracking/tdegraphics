@@ -43,7 +43,7 @@ class KProgress;
 class KView : public KParts::MainWindow
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		KView();
 		virtual ~KView();

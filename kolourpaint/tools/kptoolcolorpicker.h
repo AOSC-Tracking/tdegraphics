@@ -42,7 +42,7 @@ class kpColorToolBar;
 class kpToolColorPicker : public kpTool
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     kpToolColorPicker (kpMainWindow *);

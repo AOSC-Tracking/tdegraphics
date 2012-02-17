@@ -81,7 +81,7 @@ does only the minimal initialization required.
 class FaxMultiPage : public KMultiPage
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   /** Constructor

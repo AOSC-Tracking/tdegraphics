@@ -46,7 +46,7 @@ class kpResizeSignallingLabel;
 class kpToolPreviewDialog : public KDialogBase
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     enum Features

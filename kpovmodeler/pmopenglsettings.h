@@ -32,7 +32,7 @@ class TQCheckBox;
 class PMOpenGLSettings : public PMSettingsDialogPage
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 public:
    /**
     * Default constructor
