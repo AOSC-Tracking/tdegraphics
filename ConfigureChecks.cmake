@@ -9,6 +9,8 @@
 #
 #################################################
 
+tde_setup_architecture_flags( )
+
 # freetype2
 if( BUILD_KDVI OR BUILD_KPDF OR BUILD_KSVG )
   pkg_search_module( FREETYPE freetype2 )
