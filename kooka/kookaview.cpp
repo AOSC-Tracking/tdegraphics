@@ -192,7 +192,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    m_dockScanParam->setWidget( 0 ); // later
    sane = new KScanDevice( TQT_TQOBJECT(m_dockScanParam) );
-   Q_CHECK_PTR(sane);
+   TQ_CHECK_PTR(sane);
 
    m_dockScanParam->manualDock( m_dockRecent,              // dock target
 				KDockWidget::DockBottom, // dock site
@@ -342,7 +342,7 @@ bool KookaView::slSelectDevice( const TQCString& useDevice )
 
       /* This connects to the selected scanner */
       scan_params = new ScanParams( m_dockScanParam );
-      Q_CHECK_PTR(scan_params);
+      TQ_CHECK_PTR(scan_params);
 
       if( sane->openDevice( selDevice ) == KSCAN_OK )
       {
@@ -587,7 +587,7 @@ void KookaView::startOCR( KookaImage *img )
 
       }
 
-      Q_CHECK_PTR( ocrFabric );
+      TQ_CHECK_PTR( ocrFabric );
       ocrFabric->slSetImage( img );
 
       if( !ocrFabric->startOCRVisible(m_mainDock) )

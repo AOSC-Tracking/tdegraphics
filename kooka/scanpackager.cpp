@@ -152,7 +152,7 @@ KFileTreeBranch* ScanPackager::openRoot( const KURL& root, bool  )
 				loader->loadIcon( "folder_image", KIcon::Small ),
 				false /* do not showHidden */ );
 
-   // Q_CHECK_PTR( m_defaultBranch );
+   // TQ_CHECK_PTR( m_defaultBranch );
    m_defaultBranch->setOpenPixmap( loader->loadIcon( "folder_blue_open", KIcon::Small ));
 
    setDirOnlyMode( m_defaultBranch, false );

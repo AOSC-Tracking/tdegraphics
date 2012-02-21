@@ -128,7 +128,7 @@ void KGVDocument::doOpenFile()
      || _mimetype == "application/x-pdf" ) // see bug:67474
     {
 	_tmpDSC = new KTempFile( TQString(), ".ps" );
-	Q_CHECK_PTR( _tmpDSC );
+	TQ_CHECK_PTR( _tmpDSC );
 	if( _tmpDSC->status() != 0 ) {
 	    KMessageBox::error( _part->widget(),
 		    i18n( "Could not create temporary file: %1" )
@@ -196,7 +196,7 @@ bool KGVDocument::uncompressFile()
     }
 
     _tmpUnzipped = new KTempFile;
-    Q_CHECK_PTR( _tmpUnzipped );
+    TQ_CHECK_PTR( _tmpUnzipped );
     if( _tmpUnzipped->status() != 0 ) 
     {
 	KMessageBox::error( _part->widget(),

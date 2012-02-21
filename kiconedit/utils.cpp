@@ -37,7 +37,7 @@ void setupImageHandlers()
 
   kdDebug(4640) << "Initializing formats" << endl;
   formats = new imageFormats;
-  Q_CHECK_PTR(formats);
+  TQ_CHECK_PTR(formats);
   formats->setAutoDelete(true);
   formats->append(new imageFormat("GIF", "GIF",  "gif"));
 #ifdef HAVE_LIBJPEG

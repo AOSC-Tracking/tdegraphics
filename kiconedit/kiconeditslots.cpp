@@ -71,7 +71,7 @@ void KIconEdit::slotNewWin(const TQString & url)
     //kdDebug(4640) << "KIconEdit::openNewWin() - " << url << endl;
 
     KIconEdit *w = new KIconEdit(KURL(url), "kiconedit");
-    Q_CHECK_PTR(w);
+    TQ_CHECK_PTR(w);
 }
 
 

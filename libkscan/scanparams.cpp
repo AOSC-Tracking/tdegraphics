@@ -139,7 +139,7 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
 
       /* load the startup scanoptions */
       startupOptset = new KScanOptSet( DEFAULT_OPTIONSET );
-      Q_CHECK_PTR( startupOptset );
+      TQ_CHECK_PTR( startupOptset );
 
       if( !startupOptset->load( "Startup" ) )
       {
@@ -241,7 +241,7 @@ TQScrollView *ScanParams::scannerParams( )
       /* Pretty-Pixmap */
 
       KScanCombo *cb = (KScanCombo*) so->widget();
-      Q_CHECK_PTR(cb);
+      TQ_CHECK_PTR(cb);
             // the following strings are not translatable since the sane library does not translate them.
             // so, if we want icons, we have to keep them non-translated for now.
       cb->slSetIcon( pixLineArt, "Line art" );
@@ -463,7 +463,7 @@ TQScrollView *ScanParams::scannerParams( )
    (void) new TQWidget( hb1 ); /* dummy widget to eat space */
 
    pb_edit_gtable = new TQPushButton( i18n("Edit..."), hb1 );
-   Q_CHECK_PTR(pb_edit_gtable);
+   TQ_CHECK_PTR(pb_edit_gtable);
 
    connect( pb_edit_gtable, TQT_SIGNAL( clicked () ),
 	    this, TQT_SLOT( slEditCustGamma () ) );
@@ -1003,7 +1003,7 @@ void ScanParams::slAcquirePreview( void )
     slMaximalScanSize();
 
     if( ! sane_device ) kdDebug(29000) << "Aeetsch: sane_device is 0 !" << endl;
-    Q_CHECK_PTR( sane_device );
+    TQ_CHECK_PTR( sane_device );
     KScanStat stat = sane_device->acquirePreview( gray_preview );
 
     if( stat != KSCAN_OK )

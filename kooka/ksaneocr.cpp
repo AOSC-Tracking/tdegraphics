@@ -394,7 +394,7 @@ void KSANEOCR::startOCRAD( )
     }
 
     daemon = new KProcess;
-    Q_CHECK_PTR(daemon);
+    TQ_CHECK_PTR(daemon);
 
     *daemon << cmd;
     *daemon << TQString("-x");
@@ -532,7 +532,7 @@ void KSANEOCR::startOCRProcess( void )
        }
 
        daemon = new KProcess;
-       Q_CHECK_PTR(daemon);
+       TQ_CHECK_PTR(daemon);
        m_ocrResultText = "";
 
        connect(daemon, TQT_SIGNAL(processExited(KProcess *)),

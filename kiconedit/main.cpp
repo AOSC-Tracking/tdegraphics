@@ -71,13 +71,13 @@ int main(int argc, char **argv)
     for(int i = 0; i < args->count(); i++)
     {
         KIconEdit *ki = new KIconEdit(args->url(i), "kiconedit");
-        Q_CHECK_PTR(ki);
+        TQ_CHECK_PTR(ki);
     }
 
     if (args->count() == 0)
     {
         KIconEdit *ki = new KIconEdit;
-        Q_CHECK_PTR(ki);
+        TQ_CHECK_PTR(ki);
     }
     args->clear();
   }

@@ -299,7 +299,7 @@ EngineError KadmosDialog::setupGui()
     innerBox->setSpacing( KDialog::spacingHint());
 
     TQButtonGroup *cbGroup = new TQButtonGroup( 1, Qt::Horizontal, i18n("OCR Modifier"), innerBox );
-    Q_CHECK_PTR(cbGroup);
+    TQ_CHECK_PTR(cbGroup);
 
     m_cbNoise = new TQCheckBox( i18n( "Enable automatic noise reduction" ), cbGroup );
     m_cbAutoscale = new TQCheckBox( i18n( "Enable automatic scaling"), cbGroup );

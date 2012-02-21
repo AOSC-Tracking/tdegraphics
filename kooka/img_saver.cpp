@@ -69,15 +69,15 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
    // TQFrame *page = addPage( TQString( "Save the image") );
    TQFrame *page = new TQFrame( this );
    page->setFrameStyle( TQFrame::Box | TQFrame::Sunken );
-   Q_CHECK_PTR( page );
+   TQ_CHECK_PTR( page );
    setMainWidget( page );
 
    TQVBoxLayout *bigdad = new TQVBoxLayout( page, marginHint(), spacingHint());
-   Q_CHECK_PTR(bigdad);
+   TQ_CHECK_PTR(bigdad);
 
    // some nice words
    TQLabel *l0 = new TQLabel( page );
-   Q_CHECK_PTR(l0);
+   TQ_CHECK_PTR(l0);
    l0->setText( i18n( "<B>Save Assistant</B><P>Select an image format to save the scanned image." ));
    bigdad->addWidget( l0 );
 
@@ -87,19 +87,19 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
    // Layout-Boxes
    // TQHBoxLayout *hl1= new TQHBoxLayout( );  // Caption
    TQHBoxLayout *lhBigMiddle = new TQHBoxLayout( spacingHint() );  // Big middle
-   Q_CHECK_PTR(lhBigMiddle);
+   TQ_CHECK_PTR(lhBigMiddle);
    bigdad->addLayout( lhBigMiddle );
    TQVBoxLayout *lvFormatSel = new TQVBoxLayout( spacingHint() );  // Selection List
-   Q_CHECK_PTR(lvFormatSel);
+   TQ_CHECK_PTR(lvFormatSel);
    lhBigMiddle->addLayout( lvFormatSel );
 
    // Insert Scrolled List for formats
    TQLabel *l1 = new TQLabel( page );
-   Q_CHECK_PTR(l1);
+   TQ_CHECK_PTR(l1);
    l1->setText( i18n( "Available image formats:" ));
 
    lb_format = new TQListBox( page, "ListBoxFormats" );
-   Q_CHECK_PTR(lb_format);
+   TQ_CHECK_PTR(lb_format);
 
 #ifdef USE_KIMAGEIO
    TQStringList fo = KImageIO::types();
@@ -113,7 +113,7 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
 
    // Insert label for helptext
    l_help = new TQLabel( page );
-   Q_CHECK_PTR(l_help);
+   TQ_CHECK_PTR(l_help);
    l_help->setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
    l_help->setText( i18n("-No format selected-" ));
    l_help->setAlignment( AlignVCenter | AlignHCenter );
@@ -121,18 +121,18 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
 
    // Insert Selbox for subformat
    l2 = new TQLabel( page );
-   Q_CHECK_PTR(l2);
+   TQ_CHECK_PTR(l2);
    l2->setText( i18n( "Select the image sub-format" ));
    cb_subf = new TQComboBox( page, "ComboSubFormat" );
-   Q_CHECK_PTR( cb_subf );
+   TQ_CHECK_PTR( cb_subf );
 
    // Checkbox to store setting
    cbDontAsk  = new TQCheckBox(i18n("Don't ask again for the save format if it is defined."),
 			      page );
-   Q_CHECK_PTR( cbDontAsk );
+   TQ_CHECK_PTR( cbDontAsk );
 
    TQFrame *hl = new TQFrame(page);
-   Q_CHECK_PTR( hl );
+   TQ_CHECK_PTR( hl );
    hl->setFrameStyle( TQFrame::HLine|TQFrame::Sunken );
 
    // bigdad->addWidget( l_caption, 1 );
@@ -553,7 +553,7 @@ bool ImgSaver::isRememberedFormat( picType type, TQString format ) const
 TQString ImgSaver::getFormatForType( picType type ) const
 {
    KConfig *konf = KGlobal::config ();
-   Q_CHECK_PTR( konf );
+   TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
 
    TQString f;
@@ -583,7 +583,7 @@ TQString ImgSaver::getFormatForType( picType type ) const
 void ImgSaver::storeFormatForType( picType type, TQString format, bool ask )
 {
    KConfig *konf = KGlobal::config ();
-   Q_CHECK_PTR( konf );
+   TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
 
    konf->writeEntry( OP_FILE_ASK_FORMAT, ask );
@@ -692,7 +692,7 @@ void ImgSaver::readConfig( void )
 {
 
    KConfig *konf = KGlobal::config ();
-   Q_CHECK_PTR( konf );
+   TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
    ask_for_format = konf->readBoolEntry( OP_FILE_ASK_FORMAT, true );
 

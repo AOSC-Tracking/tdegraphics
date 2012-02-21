@@ -79,10 +79,10 @@ KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *parent,
   KIconEditProperties *props = KIconEditProperties::self();
 
   viewport = new TQScrollView(this);
-  Q_CHECK_PTR(viewport);
+  TQ_CHECK_PTR(viewport);
 
   _grid = new KIconEditGrid(image, history, viewport->viewport());
-  Q_CHECK_PTR(_grid);
+  TQ_CHECK_PTR(_grid);
   viewport->addChild(_grid);
   _grid->setGrid(props->showGrid());
   _grid->setCellSize(props->gridScale());
@@ -1372,7 +1372,7 @@ void KIconEditGrid::editPasteAsNew()
         if(isModified())
         {
             KIconEdit *w = new KIconEdit(tmp);
-            Q_CHECK_PTR(w);
+            TQ_CHECK_PTR(w);
         }
         else
         {

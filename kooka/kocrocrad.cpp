@@ -102,7 +102,7 @@ EngineError ocradDialog::setupGui()
     KOCRBase::setupGui();
 
     TQVBox *page = ocrPage();
-    Q_CHECK_PTR( page );
+    TQ_CHECK_PTR( page );
 
     KConfig *conf = KGlobal::config ();
     conf->setGroup( CFG_GROUP_OCR_DIA );
