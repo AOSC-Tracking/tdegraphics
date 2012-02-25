@@ -43,7 +43,7 @@ tde_setup_paths( )
 ##### optional stuff ############################
 
 option( WITH_T1LIB "Enable t1lib support" OFF )
-option( WITH_LIBPAPER "Enable libpaper support" OFF )
+option( WITH_PAPER "Enable libpaper support" OFF )
 OPTION( WITH_TIFF "Enable tiff support (kfile-plugins)" OFF )
 OPTION( WITH_OPENEXR "Enable openexr support (kfile-plugins)" OFF )
 OPTION( WITH_PDF "Enable pdf support (kfile-plugins)" OFF )
