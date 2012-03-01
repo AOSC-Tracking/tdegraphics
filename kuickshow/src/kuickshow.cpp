@@ -1228,14 +1228,14 @@ void KuickShow::initImlib()
     if ( !id ) {
         initImlibParams( idata, &par );
 
-        qWarning("*** KuickShow: Whoops, can't initialize imlib, trying my own palettefile now.");
+        tqWarning("*** KuickShow: Whoops, can't initialize imlib, trying my own palettefile now.");
         TQString paletteFile = locate( "data", "kuickshow/im_palette.pal" );
-        // ### - does the qstrdup() cure the segfault in imlib eventually?
-        char *file = qstrdup( paletteFile.local8Bit() );
+        // ### - does the tqstrdup() cure the segfault in imlib eventually?
+        char *file = tqstrdup( paletteFile.local8Bit() );
         par.palettefile = file;
         par.flags |= PARAMS_PALETTEFILE;
 
-        qWarning("Palettefile: %s", par.palettefile );
+        tqWarning("Palettefile: %s", par.palettefile );
 
         id = Imlib_init_with_params( x11Display(), &par );
 

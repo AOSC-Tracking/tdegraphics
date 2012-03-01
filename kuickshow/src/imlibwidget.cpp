@@ -109,7 +109,7 @@ void ImlibWidget::init()
     m_kuickFile = 0L;
 
     if ( !id )
-	qFatal("ImlibWidget: Imlib not initialized, aborting.");
+	tqFatal("ImlibWidget: Imlib not initialized, aborting.");
 
     setAutoRender( true );
 
@@ -198,7 +198,7 @@ bool ImlibWidget::loadImage( KuickFile * file )
 
 bool ImlibWidget::cacheImage( const KURL& url )
 {
-//    qDebug("cache image: %s", url.url().latin1());
+//    tqDebug("cache image: %s", url.url().latin1());
     KuickFile *file = FileCache::self()->getFile( url );
     if ( file->isAvailable() )
         return cacheImage( file );
@@ -213,7 +213,7 @@ bool ImlibWidget::cacheImage( const KURL& url )
 
 bool ImlibWidget::cacheImage( KuickFile * file )
 {
-//    qDebug("cache image: %s", file->url().url().latin1());
+//    tqDebug("cache image: %s", file->url().url().latin1());
     KuickImage *kuim = loadImageInternal( file );
     if ( kuim ) {
         kuim->renderPixmap();
@@ -632,7 +632,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
 
 // #ifndef NDEBUG
 //         gettimeofday( &tms2, NULL );
-//         qDebug("*** LOADING image: %s, took %ld ms", file.latin1(),
+//         tqDebug("*** LOADING image: %s, took %ld ms", file.latin1(),
 //                (tms2.tv_usec - tms1.tv_usec)/1000);
 // #endif	
 
@@ -655,7 +655,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
     }
 
     if ( kuickList.count() > (uint) myMaxImages ) {
-//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).latin1());
+//         tqDebug(":::: now removing from cache: %s", (*fileList.fromLast()).latin1());
 	kuickList.removeLast();
 	fileList.remove( fileList.fromLast() );
     }

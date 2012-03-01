@@ -433,7 +433,7 @@ const CDSCMEDIA* KGVDocument::findMediaByName( const TQString& mediaName ) const
     if( dsc()->media() ) {
 	for( unsigned int i = 0; i < dsc()->media_count(); i++ ) {
 	    if( dsc()->media()[i] && dsc()->media()[i]->name
-	     && qstricmp( mediaName.local8Bit(), 
+	     && tqstricmp( mediaName.local8Bit(), 
 	                  dsc()->media()[i]->name ) == 0 ) {
 		return dsc()->media()[i];
 	    }
@@ -443,7 +443,7 @@ const CDSCMEDIA* KGVDocument::findMediaByName( const TQString& mediaName ) const
     /* Try our known media */
     const CDSCMEDIA *m = dsc_known_media;
     while( m->name ) {
-        if( qstricmp( mediaName.local8Bit(), m->name ) == 0 ) {
+        if( tqstricmp( mediaName.local8Bit(), m->name ) == 0 ) {
 	    return m;
 	}
 	m++;

@@ -290,7 +290,7 @@ void KScanOption::slWidgetChange( int i )
  */
 void KScanOption::slRedrawWidget( KScanOption *so )
 {
-  // qDebug( "Checking widget %s", (const char*) so->getName());
+  // tqDebug( "Checking widget %s", (const char*) so->getName());
   int     help = 0;
   TQString string;
 	
@@ -413,7 +413,7 @@ void KScanOption::slReload( void )
 KScanOption::~KScanOption()
 {
 #ifdef MEM_DEBUG
-   qDebug( "M: FREEing %d byte of option <%s>", buffer_size, (const char*) getName());
+   tqDebug( "M: FREEing %d byte of option <%s>", buffer_size, (const char*) getName());
 #endif
 }
 
@@ -757,7 +757,7 @@ bool KScanOption::set( const TQCString& c_string )
 	   if( buffer_size >= c_string.length() )
 	   {
 	       memset( buffer, 0, buffer_size );
-	       qstrncpy( (char*) buffer, (const char*) c_string, buffer_size );
+	       tqstrncpy( (char*) buffer, (const char*) c_string, buffer_size );
 	       ret = true;
 	   }
 	   else
@@ -892,7 +892,7 @@ bool KScanOption::get( int *val ) const
       return( false );
     }
 
-  // qDebug( "option::get returns %d", *val );
+  // tqDebug( "option::get returns %d", *val );
   return( true );
 }
 
@@ -971,7 +971,7 @@ TQStrList KScanOption::getList( ) const
 
       while( *sstring )
       {
-	 // qDebug( "This is in the stringlist: %s", *sstring );
+	 // tqDebug( "This is in the stringlist: %s", *sstring );
 	 strList.append( *sstring );
 	 sstring++;
       }
@@ -1181,7 +1181,7 @@ void *KScanOption::allocBuffer( long size )
   if( size < 1 ) return( 0 );
 
 #ifdef MEM_DEBUG
-  qDebug( "M: Reserving %ld bytes of mem for <%s>", size, (const char*) getName() );
+  tqDebug( "M: Reserving %ld bytes of mem for <%s>", size, (const char*) getName() );
 #endif
 
   void *r = new char[ size ];

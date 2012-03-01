@@ -387,13 +387,13 @@ KScanStat KScanDevice::find_options()
 #if 0
 		 KScanOption *newOpt = new KScanOption( d->name );
 		 const TQString qq = newOpt->get();
-		 qDebug( "INIT: <%s> = <%s>", d->name, qq );
+		 tqDebug( "INIT: <%s> = <%s>", d->name, qq );
 		 allOptionSet->insert( d->name, newOpt );
 #endif
 	      }
 	      else if( d->type == SANE_TYPE_GROUP )
 	      {
-	      	// qDebug( "######### Group found: %s ########", d->title );
+	      	// tqDebug( "######### Group found: %s ########", d->title );
 	      }
 	      else
 		 kdDebug(29000) << "Unable to detect option " << endl;
@@ -510,7 +510,7 @@ KScanStat KScanDevice::apply( KScanOption *opt, bool isGammaTable )
 	    kdDebug(29000) << "* Setting status to reload options" << endl;
 	    stat = KSCAN_RELOAD;
 #if 0
-	    qDebug( "Emitting sigOptionChanged()" );
+	    tqDebug( "Emitting sigOptionChanged()" );
 	    emit( sigOptionsChanged() );
 #endif
 	 }
@@ -867,7 +867,7 @@ void KScanDevice::prepareScan( void )
 
     while ( it.current() )
     {
-       // qDebug( "%s -> %d", it.currentKey().latin1(), *it.current() );
+       // tqDebug( "%s -> %d", it.currentKey().latin1(), *it.current() );
        int descriptor = *it.current();
 
        const SANE_Option_Descriptor *d = sane_get_option_descriptor( scanner_handle, descriptor );
@@ -1274,14 +1274,14 @@ void KScanDevice::doProcessABlock( void )
 
      if( goOn && bytes_written < 1 )
      {
-	// qDebug( "No bytes written -> leaving out !" );
+	// tqDebug( "No bytes written -> leaving out !" );
 	goOn = false;  /** No more data -> leave ! **/
      }
 
      if( goOn )
      {
 	overall_bytes += bytes_written;
-	// qDebug( "Bytes read: %d, bytes written: %d", bytes_written, rest_bytes );
+	// tqDebug( "Bytes read: %d, bytes written: %d", bytes_written, rest_bytes );
 
 	rptr = data; // + rest_bytes;
 
@@ -1333,7 +1333,7 @@ void KScanDevice::doProcessABlock( void )
 		       {
 			  chan = (eight_pix & 0x80)> 0 ? 0:1;
 			  eight_pix = eight_pix << 1;
-			    	//qDebug( "Setting on %d, %d: %d", pixel_x, pixel_y, chan );
+			    	//tqDebug( "Setting on %d, %d: %d", pixel_x, pixel_y, chan );
 			  img->setPixel( pixel_x, pixel_y, chan );
 			  pixel_x++;
 			  if( pixel_x  >= sane_scan_param.pixels_per_line )
@@ -1417,7 +1417,7 @@ void KScanDevice::doProcessABlock( void )
 
 	/* This is also hit after the normal finish of the scan. Most probably,
 	 * the TQSocketnotifier fires for a few times after the scan has been
-	 * cancelled.  Does it matter ? To see it, just uncomment the qDebug msg.
+	 * cancelled.  Does it matter ? To see it, just uncomment the tqDebug msg.
 	 */
 	kdDebug(29000) << "Stopping the scan progress !" << endl;
 	goOn = false;

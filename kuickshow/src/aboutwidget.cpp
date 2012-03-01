@@ -72,7 +72,7 @@ AboutWidget::AboutWidget( TQWidget *parent, const char *name )
     else {
 	delete im;
 	im = 0L;
-	qWarning( "KuickShow: about-image not found/unreadable." );
+	tqWarning( "KuickShow: about-image not found/unreadable." );
     }
 }
 

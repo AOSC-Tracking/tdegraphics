@@ -102,7 +102,7 @@ void Indexer::processNext()
     if ( index != -1 )
         cmd.replace( index, 2, TQUOTE(m_currentDir + "_thumbnails") );
 
-//     qDebug("****** command: %s", cmd.latin1());
+//     tqDebug("****** command: %s", cmd.latin1());
 #if TDE_VERSION >= 306
     *m_process << cmd;
 #else
@@ -139,9 +139,9 @@ void Indexer::slotCanRead( KProcIO *proc )
             // cut off "PROGRESS: "
             line = line.mid( sprogress.length() );
             line = line.simplifyWhiteSpace().stripWhiteSpace();
-//              qDebug("*** START LINE ***");
-//              qDebug("%s", line.latin1());
-//              qDebug("*** END LINE ***");
+//              tqDebug("*** START LINE ***");
+//              tqDebug("%s", line.latin1());
+//              tqDebug("*** END LINE ***");
 
             // case 1: image processing, below 99%
             if ( line.at( line.length() -1 ) == ')' )
@@ -154,7 +154,7 @@ void Indexer::slotCanRead( KProcIO *proc )
                     TQString numFiles = regxp.cap( 2 );
                     TQString percent = regxp.cap( 3 );
 
-//                     qDebug( "current: %s, number: %s, percent: %s", currentFile.latin1(), numFiles.latin1(), percent.latin1());
+//                     tqDebug( "current: %s, number: %s, percent: %s", currentFile.latin1(), numFiles.latin1(), percent.latin1());
                     bool ok = false;
                     int perc = percent.toInt( &ok );
                     if ( ok )

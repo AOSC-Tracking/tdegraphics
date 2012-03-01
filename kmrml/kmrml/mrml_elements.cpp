@@ -131,7 +131,7 @@ Algorithm::Algorithm( const TQDomElement& elem )
     TQDomElement propsElem = firstChildElement(elem, MrmlShared::propertySheet());
     m_propertySheet.initFromDOM( propsElem );
 
-    qDebug("############# new algorithm: name: %s, id: %s, type: %s", m_name.latin1(), m_id.latin1(), m_type.latin1());
+    tqDebug("############# new algorithm: name: %s, id: %s, type: %s", m_name.latin1(), m_id.latin1(), m_type.latin1());
 }
 
 Algorithm Algorithm::defaultAlgorithm()

@@ -88,7 +88,7 @@ bool Mrml::checkLocalServer( const KURL& url )
 
 void Mrml::get( const KURL& url )
 {
-//      qDebug("******* getting: %s (user: %s)", url.url().latin1(), url.user().latin1());
+//      tqDebug("******* getting: %s (user: %s)", url.url().latin1(), url.user().latin1());
 
     if ( !checkLocalServer( url ) )
     {
@@ -105,7 +105,7 @@ tryConnect:
 
     if ( connectToHost( url.host(), port(url), sendError ) )
     {
-//         qDebug(" connected!");
+//         tqDebug(" connected!");
 
         TQString task = metaData( MrmlShared::kio_task() );
 
@@ -171,7 +171,7 @@ TQCString Mrml::readAll()
         data.append( buf );
     }
 
-//     qDebug("*** readAll()::: %i, %s", data.length(), data.data());
+//     tqDebug("*** readAll()::: %i, %s", data.length(), data.data());
     return data;
 }
 
@@ -223,7 +223,7 @@ bool Mrml::startSession( const KURL& url )
          </mrml>" ).arg( user( url ));
 
     TQCString utf8 = msg.utf8();
-//     qDebug(":::Writing: %s", utf8.data());
+//     tqDebug(":::Writing: %s", utf8.data());
     write( utf8, utf8.length() );
 
     emitData( readAll() );

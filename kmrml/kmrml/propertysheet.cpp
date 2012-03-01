@@ -128,7 +128,7 @@ TQWidget * PropertySheet::createWidget( TQWidget */*parent*/, const char */*name
         }
 
         default:
-            qDebug("** can't create widget for type: %i", m_type);
+            tqDebug("** can't create widget for type: %i", m_type);
     }
 
     return w;

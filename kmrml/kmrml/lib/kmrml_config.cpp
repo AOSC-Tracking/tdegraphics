@@ -244,7 +244,7 @@ TQString Config::mrmldCommandline() const
         cmd.replace( index, 2, TQUOTE( mrmldDataDir() ) );
     }
 
-    qDebug("***** commandline: %s", cmd.latin1());
+    tqDebug("***** commandline: %s", cmd.latin1());
 
     return cmd;
 }
@@ -322,7 +322,7 @@ unsigned short int ServerSettings::port() const
         {
             TQString line;
             (void) file.readLine( line, 6 );
-//             qDebug("**** read: %s", line.latin1());
+//             tqDebug("**** read: %s", line.latin1());
 
             file.close();
 

@@ -26,12 +26,12 @@ IndexTest::~IndexTest()
 
 void IndexTest::slotFinished( bool success )
 {
-    qDebug("##### FINISHED: %i", success );
+    tqDebug("##### FINISHED: %i", success );
 }
 
 void IndexTest::slotProgress( int percent, const TQString& message )
 {
-    qDebug("--- progress: %i: %s", percent, message.latin1());
+    tqDebug("--- progress: %i: %s", percent, message.latin1());
 }
 
 int main( int argc, char **argv )

@@ -66,7 +66,7 @@ extern "C" KDE_EXPORT int kdemain( int argc, char **argv )
     query = KURL::encode_string_no_slash( query );
     query.prepend( "?relevant=" ); // this is not encoded!
     url.setQuery( query );
-    qDebug("***** Query: %s ** URL: %s", query.latin1(), url.url().latin1());
+    tqDebug("***** Query: %s ** URL: %s", query.latin1(), url.url().latin1());
 
     return execlp( "kfmclient",
                    "kfmclient", "openURL", TQFile::encodeName(url.url()).data(),

@@ -43,7 +43,7 @@ Util::Util()
     {
         DCOPClient::setMainClient( new DCOPClient() );
         if ( !DCOPClient::mainClient()->attach() )
-            qWarning( "kio_mrml: Can't attach to DCOP Server.");
+            tqWarning( "kio_mrml: Can't attach to DCOP Server.");
     }
 }
 

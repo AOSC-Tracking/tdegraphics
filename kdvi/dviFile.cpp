@@ -338,7 +338,7 @@ void dvifile::renumber()
   // orderings.
   int wordSize;
   bool bigEndian;
-  qSysInfo (&wordSize, &bigEndian);
+  tqSysInfo (&wordSize, &bigEndian);
 
   for(TQ_UINT32 i=1; i<=total_pages; i++) {
     TQ_UINT8 *ptr = dviData.data() + page_offset[i-1]+1;

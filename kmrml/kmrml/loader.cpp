@@ -78,7 +78,7 @@ void Loader::slotData( KIO::Job *job, const TQByteArray& data )
         if ( !buffer.isOpen() )
             buffer.open( IO_ReadWrite );
         if ( !buffer.isOpen() ) {
-            qDebug("********* EEK, can't open buffer for thumbnail download!");
+            tqDebug("********* EEK, can't open buffer for thumbnail download!");
             return;
         }
 

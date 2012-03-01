@@ -554,7 +554,7 @@ void TeXFont_PK::read_PK_char(unsigned int ch)
   
   int wordSize;
   bool bigEndian;
-  qSysInfo (&wordSize, &bigEndian);
+  tqSysInfo (&wordSize, &bigEndian);
   
   if (bigEndian) { 
     // Routine for big Endian machines. Applies e.g. to Motorola and

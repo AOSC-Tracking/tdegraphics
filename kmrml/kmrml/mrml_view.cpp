@@ -84,12 +84,12 @@ MrmlViewItem * MrmlView::addItem( const KURL& url, const KURL& thumbURL,
                                   double similarity )
 {
     if ( !url.isValid() ) {
-        qWarning( "MrmlPart: received malformed URL from query: %s",
+        tqWarning( "MrmlPart: received malformed URL from query: %s",
                   url.prettyURL().isNull() ? "(null)" : url.prettyURL().latin1() );
         return 0L;
     }
 
-//     qDebug("** url: %s", thumbURL.url().latin1());
+//     tqDebug("** url: %s", thumbURL.url().latin1());
 
     MrmlViewItem *item = new MrmlViewItem( url, thumbURL, similarity, this );
     TQPixmap *pixmap = getPixmap( thumbURL );

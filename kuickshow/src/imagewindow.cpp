@@ -288,7 +288,7 @@ void ImageWindow::setFullscreen( bool enable )
 
 void ImageWindow::updateGeometry( int imWidth, int imHeight )
 {
-//     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
+//     tqDebug("::updateGeometry: %i, %i", imWidth, imHeight);
     //  XMoveWindow( x11Display(), win, 0, 0 );
     XResizeWindow( x11Display(), win, imWidth, imHeight );
 

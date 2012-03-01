@@ -223,7 +223,7 @@ bool MrmlPart::openURL( const KURL& url )
     closeURL();
 
     if ( url.protocol() != "mrml" || !url.isValid() ) {
-        qWarning("MrmlPart::openURL: cannot handle url: %s", url.prettyURL().latin1());
+        tqWarning("MrmlPart::openURL: cannot handle url: %s", url.prettyURL().latin1());
         return false; // what to do with that?
     }
 
@@ -416,7 +416,7 @@ void MrmlPart::slotResult( KIO::Job *job )
         emit completed();
     else {
         emit canceled( job->errorString() );
-//         qDebug("*** canceled: error: %s", job->errorString().latin1());
+//         tqDebug("*** canceled: error: %s", job->errorString().latin1());
     }
 
 
@@ -475,7 +475,7 @@ void MrmlPart::parseMrml( TQDomDocument& doc )
     if ( !mrml.isNull() ) {
         TQDomNode child = mrml.firstChild();
         for ( ; !child.isNull(); child = child.nextSibling() ) {
-//             qDebug("**** HERE %s", child.nodeName().latin1());
+//             tqDebug("**** HERE %s", child.nodeName().latin1());
             if ( child.isElement() ) {
                 TQDomElement elem = child.toElement();
 
@@ -582,9 +582,9 @@ void MrmlPart::createQuery( const KURL::List * relevantItems )
                                                 transactionId() );
 
     Collection coll = currentCollection();
-//     qDebug("** collection: name: %s, id: %s, valid: %i", coll.name().latin1(), coll.id().latin1(), coll.isValid());
+//     tqDebug("** collection: name: %s, id: %s, valid: %i", coll.name().latin1(), coll.id().latin1(), coll.isValid());
     Algorithm algo = firstAlgorithmForCollection( coll );
-//     qDebug("** algorithm: name: %s, id: %s, valid: %i, collection-id: %s", algo.name().latin1(), algo.id().latin1(), algo.isValid(), algo.collectionId().latin1());
+//     tqDebug("** algorithm: name: %s, id: %s, valid: %i, collection-id: %s", algo.name().latin1(), algo.id().latin1(), algo.isValid(), algo.collectionId().latin1());
 
     if ( algo.isValid() )
     {
@@ -639,7 +639,7 @@ Algorithm MrmlPart::firstAlgorithmForCollection( const Collection& coll ) const
         }
     }
 
-    qDebug("#################### -> ADEFAULT!");
+    tqDebug("#################### -> ADEFAULT!");
     Algorithm algo = Algorithm::defaultAlgorithm();
     algo.setCollectionId( coll.id() );
     return algo;
@@ -691,7 +691,7 @@ void MrmlPart::performQuery( TQDomDocument& doc )
     slotSetStatusBar( randomSearch ? i18n("Random search...") :
                                      i18n("Searching...") );
     m_job->addMetaData( MrmlShared::kio_task(), MrmlShared::kio_startQuery() );
-    qDebug("\n\nSending XML:\n%s", doc.toString().latin1());
+    tqDebug("\n\nSending XML:\n%s", doc.toString().latin1());
     m_job->addMetaData( MrmlShared::mrml_data(), doc.toString() );
 }
 

@@ -47,7 +47,7 @@ void KuickImage::renderPixmap()
     if ( !myIsDirty )
 	return;
 
-//     qDebug("### rendering: %s", myFilename.latin1());
+//     tqDebug("### rendering: %s", myFilename.latin1());
 
     if ( myPixmap )
 	Imlib_free_pixmap( myId, myPixmap );
@@ -64,7 +64,7 @@ void KuickImage::renderPixmap()
 
 // #ifndef NDEBUG
 //     gettimeofday( &tms2, NULL );
-//     qDebug("*** rendering image: %s, took %ld ms", myFilename.latin1(),
+//     tqDebug("*** rendering image: %s, took %ld ms", myFilename.latin1(),
 //            (tms2.tv_usec - tms1.tv_usec)/1000);
 // #endif
 
@@ -164,7 +164,7 @@ void KuickImage::restoreOriginalSize()
 	if (myWidth == myOrigWidth && myHeight == myOrigHeight)
 		return;
 
-//	qDebug("-- restoreOriginalSize");
+//	tqDebug("-- restoreOriginalSize");
 
 	if ( myOrigIm != 0L )
 	{
@@ -200,7 +200,7 @@ void KuickImage::resize( int width, int height, KuickImage::ResizeMode mode )
 
 void KuickImage::fastResize( int width, int height )
 {
-//	qDebug("-- fastResize: %i x %i", width, height );
+//	tqDebug("-- fastResize: %i x %i", width, height );
 	
 	// lazy resizing (only done when rendering pixmap)
     myWidth   = width;
@@ -210,7 +210,7 @@ void KuickImage::fastResize( int width, int height )
 
 bool KuickImage::smoothResize( int newWidth, int newHeight )
 {
-//	qDebug("-- smoothResize: %i x %i", newWidth, newHeight);
+//	tqDebug("-- smoothResize: %i x %i", newWidth, newHeight);
 	
 	TQImage *image = newTQImage();
 	// Note: TQ_ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
@@ -239,7 +239,7 @@ TQImage * KuickImage::newTQImage() const
 {
 	ImlibImage *im;
 
-//	qDebug("-- newTQImage");
+//	tqDebug("-- newTQImage");
 
 	if ( myOrigIm != 0L && myRotation == ROT_0 && myFlipMode == FlipNone )
 	{
@@ -356,7 +356,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	basis_xx = (int) (4096.0 / scalex);
 	basis_yy = (int) (4096.0 / scaley);
 
-	//qDebug("Basis: (%d, %d), (%d, 0), (0, %d)", basis_ox, basis_oy, basis_xx, basis_yy);
+	//tqDebug("Basis: (%d, %d), (%d, 0), (0, %d)", basis_ox, basis_oy, basis_xx, basis_yy);
 		
 	int x2, y2;
 	
