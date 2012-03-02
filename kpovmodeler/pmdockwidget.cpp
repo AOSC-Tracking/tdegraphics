@@ -594,7 +594,7 @@ void PMDockWidget::applyToWidget( TQWidget* s, const TQPoint& p )
 #ifndef NO_KDE2
 #ifdef TQ_WS_X11
     if (d->transient && d->_parent)
-      XSetTransientForHint( qt_xdisplay(), winId(), d->_parent->winId() );
+      XSetTransientForHint( tqt_xdisplay(), winId(), d->_parent->winId() );
 
     KWin::setType( winId(), d->windowType );
 #endif

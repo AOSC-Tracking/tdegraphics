@@ -1631,7 +1631,7 @@ bool PMRenderManager::hasOpenGL( )
 {
    if( !s_hasOpenGLChecked )
    {
-      s_hasOpenGL = ( glXQueryExtension( qt_xdisplay( ), 0, 0 ) != 0 );
+      s_hasOpenGL = ( glXQueryExtension( tqt_xdisplay( ), 0, 0 ) != 0 );
       s_hasOpenGLChecked = true;
    }
 

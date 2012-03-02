@@ -37,7 +37,7 @@
 
 const int MOUSECURSORHIDETIME = 3000;
 
-//extern bool qt_use_xrender;
+//extern bool tqt_use_xrender;
 
 typedef KGenericFactory<KImageCanvas> KImageCanvasFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewcanvas,
@@ -723,7 +723,7 @@ void KImageCanvas::timerEvent( TQTimerEvent * ev )
 				break;
 			case AlphaBlend:
 				finishNewClient();
-				//if( qt_use_xrender )
+				//if( tqt_use_xrender )
 				//{
 				//}
 				//else

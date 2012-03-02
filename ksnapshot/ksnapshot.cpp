@@ -83,7 +83,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     grabber->grabMouse( waitCursor );
 
     if ( !grabCurrent )
-	snapshot = TQPixmap::grabWindow( qt_xrootwin() );
+	snapshot = TQPixmap::grabWindow( tqt_xrootwin() );
     else {
 	mainWidget->setMode( WindowUnderCursor );
 	mainWidget->setIncludeDecorations( true );
@@ -454,7 +454,7 @@ void KSnapshot::performGrab()
 	snapshot = WindowGrabber::grabCurrent( mainWidget->includeDecorations() );
     }
     else {
-	snapshot = TQPixmap::grabWindow( qt_xrootwin() );
+	snapshot = TQPixmap::grabWindow( tqt_xrootwin() );
     }
     updatePreview();
     TQApplication::restoreOverrideCursor();

@@ -86,7 +86,7 @@ RegionGrabber::~RegionGrabber()
 
 void RegionGrabber::initGrabber()
 {
-  pixmap = TQPixmap::grabWindow( qt_xrootwin() );
+  pixmap = TQPixmap::grabWindow( tqt_xrootwin() );
   setPaletteBackgroundPixmap( pixmap );
 
   TQDesktopWidget desktopWidget;
@@ -94,7 +94,7 @@ void RegionGrabber::initGrabber()
   if ( desktopWidget.isVirtualDesktop() )
     desktopSize = desktopWidget.geometry();
   else
-    desktopSize = desktopWidget.screenGeometry( qt_xrootwin() );
+    desktopSize = desktopWidget.screenGeometry( tqt_xrootwin() );
 
   setGeometry( desktopSize );
   showFullScreen();

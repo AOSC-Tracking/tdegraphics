@@ -2088,7 +2088,7 @@ DisplayFontParam *GlobalParams::getDisplayFont(GString *fontName) {
 		FC_SLANT, FcTypeInteger, slant, FC_WEIGHT, FcTypeInteger, weight,
 		FC_WIDTH, FcTypeInteger, width, FC_LANG, FcTypeString, "xx", (char*)0);
 	if (!p) goto fin;
-	m = XftFontMatch(qt_xdisplay(),qt_xscreen(),p,&res);
+	m = XftFontMatch(tqt_xdisplay(),tqt_xscreen(),p,&res);
 	if (!m) goto fin;
 	res = FcPatternGetString (m, FC_FILE, 0, &s);
 	if (res != FcResultMatch || !s)  goto fin; 

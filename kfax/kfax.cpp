@@ -1662,7 +1662,7 @@ int main (int argc, char **argv)
 
   MyApp a;
 
-  qtdisplay = qt_xdisplay();
+  qtdisplay = tqt_xdisplay();
 
   viewfaxmain();
 
