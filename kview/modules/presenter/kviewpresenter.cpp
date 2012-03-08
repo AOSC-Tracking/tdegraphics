@@ -82,7 +82,7 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 		connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ), m_paSlideshow, TQT_SLOT( setChecked( bool ) ) );
 
 		// search for file_open action
-		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( parent->qt_cast( "KXMLGUIClient" ) );
+		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( parent->tqt_cast( "KXMLGUIClient" ) );
 		if( parentClient )
 		{
 			m_paFileOpen = parentClient->actionCollection()->action( "file_open" );

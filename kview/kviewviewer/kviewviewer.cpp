@@ -70,7 +70,7 @@ KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
 
 	TQWidget * widget =  KParts::ComponentFactory::createInstanceFromQuery<TQWidget>(
 			"KImageViewer/Canvas", TQString(), TQT_TQOBJECT(m_pParentWidget) );
-	m_pCanvas = static_cast<KImageViewer::Canvas *>( widget->qt_cast( "KImageViewer::Canvas" ) );
+	m_pCanvas = static_cast<KImageViewer::Canvas *>( widget->tqt_cast( "KImageViewer::Canvas" ) );
 	kdDebug( 4610 ) << "KImageViewer::Canvas at " << m_pCanvas << endl;
 	if( ! ( widget && m_pCanvas ) )
 	{
@@ -318,7 +318,7 @@ void KViewViewer::reload()
 
 bool KViewViewer::eventFilter( TQObject * o, TQEvent * e )
 {
-	KImageViewer::Canvas * canvas = static_cast<KImageViewer::Canvas*>( o->qt_cast( "KImageViewer::Canvas" ) );
+	KImageViewer::Canvas * canvas = static_cast<KImageViewer::Canvas*>( o->tqt_cast( "KImageViewer::Canvas" ) );
 	if( canvas )
 	{
 		// intercept drops onto the Canvas

@@ -48,7 +48,7 @@ namespace KImageViewer
  *
  * <pre>
    TQWidget * widget = KParts::ComponentFactory::createInstanceFromQuery<TQWidget>( "KImageViewer/Canvas", TQString(), this );
-   m_canvas = static_cast<KImageViewer::Canvas *>( widget->qt_cast( "KImageViewer::Canvas" ) );
+   m_canvas = static_cast<KImageViewer::Canvas *>( widget->tqt_cast( "KImageViewer::Canvas" ) );
    if( ! ( widget && m_canvas ) )
    {
      KMessageBox::error( this, "Could not find the Canvas!" );

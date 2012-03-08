@@ -1464,8 +1464,8 @@ PMDockWidget* PMDockManager::findDockWidgetAt( const TQPoint& pos )
     }
     w = p;
   }
-  if ( qt_find_obj_child( TQT_TQOBJECT(w), "PMDockSplitter", "_dock_split_" ) ) return 0L;
-  if ( qt_find_obj_child( TQT_TQOBJECT(w), "PMDockTabGroup", "_dock_tab" ) ) return 0L;
+  if ( tqt_find_obj_child( TQT_TQOBJECT(w), "PMDockSplitter", "_dock_split_" ) ) return 0L;
+  if ( tqt_find_obj_child( TQT_TQOBJECT(w), "PMDockTabGroup", "_dock_tab" ) ) return 0L;
   if (!childDockWidgetList) return 0L;
   if ( childDockWidgetList->find(w) != -1 ) return 0L;
   if ( currentDragWidget->isGroup && ((PMDockWidget*)w)->parentDockTabGroup() ) return 0L;
