@@ -182,10 +182,10 @@ void ImageWindow::setupActions()
                  TQT_TQOBJECT(this), TQT_SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
-    new KAction( i18n("FlipQt::Horizontally"), Key_Asterisk,
+    new KAction( i18n("Flip Horizontally"), Key_Asterisk,
                  TQT_TQOBJECT(this), TQT_SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
-    new KAction( i18n("FlipQt::Vertically"), Key_Slash,
+    new KAction( i18n("Flip Vertically"), Key_Slash,
                  TQT_TQOBJECT(this), TQT_SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
