@@ -32,7 +32,7 @@ link_directories(
 
 install( FILES
     poppler-qt.h poppler-page-transition.h poppler-link-qt3.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/tde )
+  DESTINATION ${INCLUDE_INSTALL_DIR} )
 
 ##### poppler-tqt (shared) ############################
 
