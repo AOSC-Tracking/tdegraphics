@@ -111,7 +111,7 @@ public:
 	SVGAnimatedLength width();
 
 	/**
-	 * The heigth of the rectangle. A negative value is an error (see
+	 * The height of the rectangle. A negative value is an error (see
 	 * <a href =
 	 * "http://www.w3.org/TR/SVG/implnote.html#ErrorProcessing">
 	 * Error processing</a>). A value of zero disables rendering of
