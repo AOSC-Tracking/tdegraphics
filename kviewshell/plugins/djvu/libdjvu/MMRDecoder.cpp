@@ -807,7 +807,7 @@ MMRDecoder::scanrle(const bool invert, const unsigned char **endptr)
         *p = 0; p++;
       }
     }
-  // Encode lenghts using the RLE format
+  // Encode lengths using the RLE format
   for(int a0=0;a0 < width;)
   {
     int count = *xr++;
