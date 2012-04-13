@@ -28,9 +28,9 @@
 
 #include <tdeversion.h>
 #if TDE_VERSION < 306
-  #define TQUOTE( x ) x
+  #define QUOTE( x ) x
 #else
-  #define TQUOTE( x ) KProcess::quote( x )
+  #define QUOTE( x ) KProcess::quote( x )
 #endif
 
 using namespace KMrmlConfig;
@@ -97,10 +97,10 @@ void Indexer::processNext()
     // %t with the thumbnail dir
     int index = cmd.find( "%d" ); // ### TQFile::encodeName()?
     if ( index != -1 )
-        cmd.replace( index, 2, TQUOTE( m_currentDir ) );
+        cmd.replace( index, 2, QUOTE( m_currentDir ) );
     index = cmd.find( "%t" );
     if ( index != -1 )
-        cmd.replace( index, 2, TQUOTE(m_currentDir + "_thumbnails") );
+        cmd.replace( index, 2, QUOTE(m_currentDir + "_thumbnails") );
 
 //     tqDebug("****** command: %s", cmd.latin1());
 #if TDE_VERSION >= 306

@@ -52,7 +52,7 @@
 
 #define ID_FILE_PRINT               10080
 
-#define ID_FILE_TQUIT                10100
+#define ID_FILE_QUIT                10100
 
 
 ///////////////////////////////////////////////////////////////////

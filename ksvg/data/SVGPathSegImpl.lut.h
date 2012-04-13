@@ -28,12 +28,12 @@ namespace KSVG {
 
 static const char SVGPathSegImplConstructor__s_hashTableStrings[] = {
     "\0"
-    "PATHSEG_CURVETO_TQUADRATIC_SMOOTH_ABS\0"
-    "PATHSEG_CURVETO_TQUADRATIC_SMOOTH_REL\0"
+    "PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS\0"
+    "PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL\0"
     "PATHSEG_CURVETO_CUBIC_SMOOTH_ABS\0"
     "PATHSEG_CURVETO_CUBIC_SMOOTH_REL\0"
-    "PATHSEG_CURVETO_TQUADRATIC_ABS\0"
-    "PATHSEG_CURVETO_TQUADRATIC_REL\0"
+    "PATHSEG_CURVETO_QUADRATIC_ABS\0"
+    "PATHSEG_CURVETO_QUADRATIC_REL\0"
     "PATHSEG_LINETO_HORIZONTAL_ABS\0"
     "PATHSEG_LINETO_HORIZONTAL_REL\0"
     "PATHSEG_LINETO_VERTICAL_ABS\0"
@@ -56,7 +56,7 @@ static const struct HashEntry SVGPathSegImplConstructor__s_hashTableEntries[] = 
    { 317, KSVG::PATHSEG_CURVETO_CUBIC_ABS, DontDelete|ReadOnly, 0, -1 },
    { 0, 0, 0, 0, -1 },
    { 0, 0, 0, 0, -1 },
-   { 171, KSVG::PATHSEG_CURVETO_TQUADRATIC_REL, DontDelete|ReadOnly, 0, 27 },
+   { 171, KSVG::PATHSEG_CURVETO_QUADRATIC_REL, DontDelete|ReadOnly, 0, 27 },
    { 479, KSVG::PATHSEG_ARC_REL, DontDelete|ReadOnly, 0, -1 },
    { 495, KSVG::PATHSEG_UNKNOWN, DontDelete|ReadOnly, 0, 23 },
    { 369, KSVG::PATHSEG_LINETO_ABS, DontDelete|ReadOnly, 0, -1 },
@@ -73,14 +73,14 @@ static const struct HashEntry SVGPathSegImplConstructor__s_hashTableEntries[] = 
    { 75, KSVG::PATHSEG_CURVETO_CUBIC_SMOOTH_ABS, DontDelete|ReadOnly, 0, -1 },
    { 231, KSVG::PATHSEG_LINETO_HORIZONTAL_REL, DontDelete|ReadOnly, 0, -1 },
    { 388, KSVG::PATHSEG_LINETO_REL, DontDelete|ReadOnly, 0, -1 },
-   { 38, KSVG::PATHSEG_CURVETO_TQUADRATIC_SMOOTH_REL, DontDelete|ReadOnly, 0, -1 },
+   { 38, KSVG::PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL, DontDelete|ReadOnly, 0, -1 },
    { 407, KSVG::PATHSEG_MOVETO_ABS, DontDelete|ReadOnly, 0, -1 },
    { 445, KSVG::PATHSEG_CLOSEPATH, DontDelete|ReadOnly, 0, 25 },
-   { 141, KSVG::PATHSEG_CURVETO_TQUADRATIC_ABS, DontDelete|ReadOnly, 0, 26 },
+   { 141, KSVG::PATHSEG_CURVETO_QUADRATIC_ABS, DontDelete|ReadOnly, 0, 26 },
    { 201, KSVG::PATHSEG_LINETO_HORIZONTAL_ABS, DontDelete|ReadOnly, 0, -1 },
    { 261, KSVG::PATHSEG_LINETO_VERTICAL_ABS, DontDelete|ReadOnly, 0, -1 },
    { 289, KSVG::PATHSEG_LINETO_VERTICAL_REL, DontDelete|ReadOnly, 0, -1 },
-   { 1, KSVG::PATHSEG_CURVETO_TQUADRATIC_SMOOTH_ABS, DontDelete|ReadOnly, 0, -1 }
+   { 1, KSVG::PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS, DontDelete|ReadOnly, 0, -1 }
 };
 
 const struct HashTable SVGPathSegImplConstructor::s_hashTable = { 2, 29, SVGPathSegImplConstructor__s_hashTableEntries, 23, SVGPathSegImplConstructor__s_hashTableStrings};

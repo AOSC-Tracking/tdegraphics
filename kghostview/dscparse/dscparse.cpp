@@ -2197,7 +2197,7 @@ dsc_scan_comments(CDSC *dsc)
 	    dsc_unknown(dsc);
     }
     else if (IS_DSC(line, "%%Requirements:")) {
-	dsc->id = CDSC_RETQUIREMENTS;
+	dsc->id = CDSC_REQUIREMENTS;
 	/* ignore */
     }
     else if (IS_DSC(line, "%%DocumentNeededFonts:")) {

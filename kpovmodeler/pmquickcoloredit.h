@@ -17,8 +17,8 @@
 **************************************************************************/
 
 
-#ifndef PMTQUICKCOLOREDIT_H
-#define PMTQUICKCOLOREDIT_H
+#ifndef PMQUICKCOLOREDIT_H
+#define PMQUICKCOLOREDIT_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

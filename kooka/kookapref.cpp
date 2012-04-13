@@ -316,7 +316,7 @@ void KookaPreferences::setupStartupPage()
 
     /* Query for network scanner (Checkbox) */
     cbNetQuery = new TQCheckBox( i18n("Query network for available scanners"),
-				page,  "CB_NET_TQUERY" );
+				page,  "CB_NET_QUERY" );
     TQToolTip::add( cbNetQuery,
 		   i18n( "Check this if you want a network query for available scanners.\nNote that this does not mean a query over the entire network but only the stations configured for SANE!" ));
     cbNetQuery->setChecked( ! (konf->readBoolEntry( STARTUP_ONLY_LOCAL, false )) );
@@ -356,7 +356,7 @@ void KookaPreferences::setupSaveFormatPage( )
 
    /* Skip the format asking if a format entry  exists */
    cbSkipFormatAsk = new TQCheckBox( i18n("Always display image save assistant"),
-				     page,  "CB_IMGASSIST_TQUERY" );
+				     page,  "CB_IMGASSIST_QUERY" );
    cbSkipFormatAsk->setChecked( konf->readBoolEntry( OP_FILE_ASK_FORMAT, true  ));
    TQToolTip::add( cbSkipFormatAsk, i18n("Check this if you want to see the image save assistant even if there is a default format for the image type." ));
    top->addWidget( cbSkipFormatAsk );

@@ -341,7 +341,7 @@ T2P::FontVisualParams *KSVGCanvas::fontVisualParams(SVGStylableImpl *style) cons
 		slant |= FC_SLANT_ROMAN;
 	else if(fontStyle == ITALIC)
 		slant |= FC_SLANT_ITALIC;
-	else if(fontStyle == OBLITQUE)
+	else if(fontStyle == OBLIQUE)
 		slant |= FC_SLANT_OBLIQUE;
 
 	// Calc font names

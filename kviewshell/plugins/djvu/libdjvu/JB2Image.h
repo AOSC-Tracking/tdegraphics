@@ -501,7 +501,7 @@ JB2Image::get_blit(int blitno) const
     These extensions are described below by reference to the ICFDD
     proposal dated August 1999.  Both extension make use of the unused
     record type value #9# (cf. ICFDD page 24) which has been renamed
-    #RETQUIRED_DICT_OR_RESET#.
+    #REQUIRED_DICT_OR_RESET#.
 
     {\bf Shared Shape Dictionaries} --- This extension provides
     support for sharing symbol definitions between the pages of a
@@ -515,7 +515,7 @@ JB2Image::get_blit(int blitno) const
     by the following records.  The first record usually is a ``Start
     Of Image'' record describing the size of the image.
 
-    Starting with version 21, a #RETQUIRED_DICT_OR_RESET# (9) record
+    Starting with version 21, a #REQUIRED_DICT_OR_RESET# (9) record
     type can appear {\em before} the #START_OF_DATA# (0) record.  The
     record type field is followed by a single number arithmetically
     encoded (cf. ICFDD page 26) using a sixteenth context (cf. ICFDD
@@ -548,7 +548,7 @@ JB2Image::get_blit(int blitno) const
     contexts. These contexts are normally allocated when they are used
     for the first time (cf. ICFDD informative note, page 27).
 
-    Starting with version 21, a #RETQUIRED_DICT_OR_RESET# (9) record
+    Starting with version 21, a #REQUIRED_DICT_OR_RESET# (9) record
     type can appear {\em after} the #START_OF_DATA# (0) record.  The
     decoder should proceed with the next record after {\em clearing
     all binary contexts used for coding numbers}.  This operation
@@ -556,7 +556,7 @@ JB2Image::get_blit(int blitno) const
     numbers can be deallocated.
   
     Starting with version 21, the JB2 encoder should insert a
-    #RETQUIRED_DICT_OR_RESET# record type whenever the number of these
+    #REQUIRED_DICT_OR_RESET# record type whenever the number of these
     allocated binary contexts exceeds #20000#.  Only very large
     documents ever reach such a large number of allocated binary
     contexts (e.g large maps).  Hardware implementation however can

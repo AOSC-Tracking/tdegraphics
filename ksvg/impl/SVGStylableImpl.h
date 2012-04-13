@@ -162,7 +162,7 @@ enum EUnicodeBidi
 
 enum EFontStyle
 {
-	FSNORMAL, ITALIC, OBLITQUE
+	FSNORMAL, ITALIC, OBLIQUE
 };
 
 enum ETextWritingMode

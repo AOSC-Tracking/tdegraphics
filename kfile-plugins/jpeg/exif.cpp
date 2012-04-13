@@ -116,7 +116,7 @@ static int BytesPerFormat[] = {0,1,1,2,4,8,1,1,2,4,8,4,8};
 #define TAG_WHITEBALANCE      0x9208
 #define TAG_METERING_MODE     0x9207
 #define TAG_EXPOSURE_PROGRAM  0x8822
-#define TAG_ISO_ETQUIVALENT    0x8827
+#define TAG_ISO_EQUIVALENT    0x8827
 #define TAG_COMPRESSION_LEVEL 0x9102
 
 #define TAG_THUMBNAIL_OFFSET  0x0201
@@ -660,7 +660,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 ExifData::ExposureProgram = (int)ConvertAnyFormat(ValuePtr, Format);
                 break;
 
-            case TAG_ISO_ETQUIVALENT:
+            case TAG_ISO_EQUIVALENT:
                 ExifData::ISOequivalent = (int)ConvertAnyFormat(ValuePtr, Format);
                 if ( ExifData::ISOequivalent < 50 ) ExifData::ISOequivalent *= 200;
                 break;

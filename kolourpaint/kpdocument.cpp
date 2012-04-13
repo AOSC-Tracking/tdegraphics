@@ -452,7 +452,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
     kdDebug () << "kpDocument::lossyPromptContinue()" << endl;
 #endif
 
-#define TQUIT_IF_CANCEL(messageBoxCommand)            \
+#define QUIT_IF_CANCEL(messageBoxCommand)            \
 {                                                    \
     if (messageBoxCommand != KMessageBox::Continue)  \
     {                                                \
@@ -464,7 +464,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
     if (lossyType & (kpDocumentSaveOptions::MimeTypeMaximumColorDepthLow |
                      kpDocumentSaveOptions::Quality))
     {
-        TQUIT_IF_CANCEL (
+        QUIT_IF_CANCEL (
             KMessageBox::warningContinueCancel (parent,
                 i18n ("<qt><p>The <b>%1</b> format may not be able"
                       " to preserve all of the image's color information.</p>"
@@ -479,7 +479,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
     }
     else if (lossyType & kpDocumentSaveOptions::ColorDepthLow)
     {
-        TQUIT_IF_CANCEL (
+        QUIT_IF_CANCEL (
             KMessageBox::warningContinueCancel (parent,
                 i18n ("<qt><p>Saving the image at the low color depth of %1-bit"
                         " may result in the loss of color information."
@@ -492,7 +492,7 @@ bool kpDocument::lossyPromptContinue (const TQPixmap &pixmap,
                 KStdGuiItem::save (),
                 TQString::fromLatin1 ("SaveAtLowColorDepthDontAskAgain")));
     }
-#undef TQUIT_IF_CANCEL
+#undef QUIT_IF_CANCEL
 
     return true;
 }

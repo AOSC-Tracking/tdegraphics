@@ -289,9 +289,9 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                child = new PMPlane( m_pPart );
                error = !parsePlane( ( PMPlane* ) child );
                break;
-            case TQUADRIC_TOK:
+            case QUADRIC_TOK:
             case CUBIC_TOK:
-            case TQUARTIC_TOK:
+            case QUARTIC_TOK:
             case POLY_TOK:
                child = new PMPolynom( m_pPart );
                error = !parsePolynom( ( PMPolynom* ) child );
@@ -364,7 +364,7 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
             case MARBLE_TOK:
             case ONION_TOK:
             case PLANAR_TOK:
-            case TQUILTED_TOK:
+            case QUILTED_TOK:
             case RADIAL_TOK:
             case RIPPLES_TOK:
             case SLOPE_TOK:
@@ -733,9 +733,9 @@ bool PMPovrayParser::parseChildObjects( PMCompositeObject* parent,
                         case SMOOTH_TRIANGLE_TOK:
                            // infinite solid
                         case PLANE_TOK:
-                        case TQUADRIC_TOK:
+                        case QUADRIC_TOK:
                         case CUBIC_TOK:
-                        case TQUARTIC_TOK:
+                        case QUARTIC_TOK:
                         case POLY_TOK:
                            // csg
                         case UNION_TOK:
@@ -2331,7 +2331,7 @@ bool PMPovrayParser::parseJuliaFractal( PMJuliaFractal* pNewFractal )
 
       switch( m_token )
       {
-         case TQUATERNION_TOK:
+         case QUATERNION_TOK:
             pNewFractal->setAlgebraType( PMJuliaFractal::Quaternion );
             nextToken( );
             break;
@@ -2515,8 +2515,8 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
 
    pNewPoly->setSturm( false );
 
-   if( ( m_token == TQUADRIC_TOK ) || ( m_token == CUBIC_TOK ) ||
-       ( m_token == TQUARTIC_TOK ) || ( m_token == POLY_TOK ) )
+   if( ( m_token == QUADRIC_TOK ) || ( m_token == CUBIC_TOK ) ||
+       ( m_token == QUARTIC_TOK ) || ( m_token == POLY_TOK ) )
    {
       nextToken( );
       if( !parseToken( '{' ) )
@@ -2525,7 +2525,7 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
    else
       printExpected( "poly", m_pScanner->sValue( ) );
 
-   if( type == TQUADRIC_TOK )
+   if( type == QUADRIC_TOK )
    {
       c = PMVector( 10 );
       pNewPoly->setPolynomOrder( 2 );
@@ -2565,7 +2565,7 @@ bool PMPovrayParser::parsePolynom( PMPolynom* pNewPoly )
    {
       if( type == CUBIC_TOK )
          order = 3;
-      else if( type == TQUARTIC_TOK )
+      else if( type == QUARTIC_TOK )
          order = 4;
       else
       {
@@ -2846,7 +2846,7 @@ bool PMPovrayParser::parseLathe( PMLathe* pNewLathe )
             nextToken( );
             minp = 2;
             break;
-         case TQUADRATIC_SPLINE_TOK:
+         case QUADRATIC_SPLINE_TOK:
             pNewLathe->setSplineType( PMLathe::QuadraticSpline );
             nextToken( );
             minp = 3;
@@ -2934,7 +2934,7 @@ bool PMPovrayParser::parsePrism( PMPrism* pNewPrism )
             nextToken( );
             minp = 3;
             break;
-         case TQUADRATIC_SPLINE_TOK:
+         case QUADRATIC_SPLINE_TOK:
             pNewPrism->setSplineType( PMPrism::QuadraticSpline );
             nextToken( );
             minp = 4;
@@ -3911,7 +3911,7 @@ bool PMPovrayParser::parsePattern( PMPattern* pattern, bool normal )
             pattern->setPatternType( PMPattern::PatternPlanar );
             type = true;
             break;
-         case TQUILTED_TOK:
+         case QUILTED_TOK:
             nextToken( );
             pattern->setPatternType( PMPattern::PatternQuilted );
             type = true;
@@ -6436,9 +6436,9 @@ bool PMPovrayParser::parseDeclare( PMDeclare* decl )
          child = new PMPlane( m_pPart );
          error = !parsePlane( ( PMPlane* ) child );
          break;
-      case TQUADRIC_TOK:
+      case QUADRIC_TOK:
       case CUBIC_TOK:
-      case TQUARTIC_TOK:
+      case QUARTIC_TOK:
       case POLY_TOK:
          child = new PMPolynom( m_pPart );
          error = !parsePolynom( ( PMPolynom* ) child );

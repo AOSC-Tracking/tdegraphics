@@ -354,7 +354,7 @@ JB2Image::decode(const GP<ByteStream> &gbs, JB2DecoderCallback *cb, void *arg)
 #define MATCHED_REFINE_IMAGE_ONLY       (6)
 #define MATCHED_COPY                    (7)
 #define NON_MARK_DATA                   (8)
-#define RETQUIRED_DICT_OR_RESET          (9)
+#define REQUIRED_DICT_OR_RESET          (9)
 #define PRESERVED_COMMENT               (10)
 #define END_OF_DATA                     (11)
 
@@ -999,7 +999,7 @@ JB2Dict::JB2Codec::code_record(
         code_comment(jim.comment);
         break;
       }
-    case RETQUIRED_DICT_OR_RESET:
+    case REQUIRED_DICT_OR_RESET:
       {
         if (! gotstartrecordp)
         {
@@ -1240,7 +1240,7 @@ JB2Dict::JB2Codec::code_record(
         code_comment(jim.comment);
         break;
       }
-    case RETQUIRED_DICT_OR_RESET:
+    case REQUIRED_DICT_OR_RESET:
       {
         if(!gjim)
         {

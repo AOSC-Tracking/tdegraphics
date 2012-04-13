@@ -493,7 +493,7 @@ void KPSWidget::readSettings()
     if( !Configuration::platformFonts() )
 	arguments << "-dNOPLATFONTS";
 
-    arguments << "-dNOPAUSE" << "-dTQUIET" << "-dSAFER" << "-dPARANOIDSAFER";
+    arguments << "-dNOPAUSE" << "-dQUIET" << "-dSAFER" << "-dPARANOIDSAFER";
 
     setGhostscriptArguments( arguments );
 

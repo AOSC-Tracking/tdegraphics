@@ -193,7 +193,7 @@ public:
 	DocumentPaperColors   = CDSC_DOCUMENTPAPERCOLORS,
 	DocumentPaperWeights  = CDSC_DOCUMENTPAPERWEIGHTS,
 	DocumentData          = CDSC_DOCUMENTDATA,
-	Requirements          = CDSC_RETQUIREMENTS,
+	Requirements          = CDSC_REQUIREMENTS,
 	DocumentNeededFonts   = CDSC_DOCUMENTNEEDEDFONTS,
 	DocumentSuppliedFonts = CDSC_DOCUMENTSUPPLIEDFONTS,
 	HiResBoundingBox      = CDSC_HIRESBOUNDINGBOX,

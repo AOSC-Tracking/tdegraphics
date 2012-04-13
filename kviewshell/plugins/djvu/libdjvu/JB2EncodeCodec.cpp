@@ -166,7 +166,7 @@ JB2Image::encode(const GP<ByteStream> &gbs) const
 #define MATCHED_REFINE_IMAGE_ONLY       (6)
 #define MATCHED_COPY                    (7)
 #define NON_MARK_DATA                   (8)
-#define RETQUIRED_DICT_OR_RESET          (9)
+#define REQUIRED_DICT_OR_RESET          (9)
 #define PRESERVED_COMMENT               (10)
 #define END_OF_DATA                     (11)
 
@@ -364,7 +364,7 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Dict> &gjim)
       int nshape = jim.get_shape_count();
       init_library(jim);
       // Code headers.
-      int rectype = RETQUIRED_DICT_OR_RESET;
+      int rectype = REQUIRED_DICT_OR_RESET;
       if (jim.get_inherited_shape_count() > 0)
         code_record(rectype, gjim, 0);
       rectype = START_OF_DATA;
@@ -388,7 +388,7 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Dict> &gjim)
 	  // Check numcoder status
 	  if (cur_ncell > CELLCHUNK) 
 	    {
-	      rectype = RETQUIRED_DICT_OR_RESET;
+	      rectype = REQUIRED_DICT_OR_RESET;
 	      code_record(rectype, 0, 0);	      
 	    }
         }
@@ -440,7 +440,7 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
             }
         }
       // Code headers.
-      int rectype = RETQUIRED_DICT_OR_RESET;
+      int rectype = REQUIRED_DICT_OR_RESET;
       if (jim.get_inherited_shape_count() > 0)
         code_record(rectype, gjim, 0, 0);
       rectype = START_OF_DATA;
@@ -507,7 +507,7 @@ JB2Dict::JB2Codec::Encode::code(const GP<JB2Image> &gjim)
 	  // Check numcoder status
 	  if (cur_ncell > CELLCHUNK) 
 	    {
-	      rectype = RETQUIRED_DICT_OR_RESET;
+	      rectype = REQUIRED_DICT_OR_RESET;
 	      code_record(rectype, 0, 0);
 	    }
         }
@@ -546,7 +546,7 @@ JB2Dict::JB2Codec::Encode::encode_libonly_shape(
       // Check numcoder status
       if (cur_ncell > CELLCHUNK) 
 	{
-	  rectype = RETQUIRED_DICT_OR_RESET;
+	  rectype = REQUIRED_DICT_OR_RESET;
 	  code_record(rectype, 0, 0);
 	}
     }

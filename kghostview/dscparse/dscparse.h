@@ -106,7 +106,7 @@ typedef enum {
   CDSC_DOCUMENTPAPERCOLORS   = 215,	/* %%DocumentPaperColors: */
   CDSC_DOCUMENTPAPERWEIGHTS  = 216,	/* %%DocumentPaperWeights: */
   CDSC_DOCUMENTDATA	     = 217,	/* %%DocumentData: */
-  CDSC_RETQUIREMENTS	     = 218,	/* IGNORED %%Requirements: */
+  CDSC_REQUIREMENTS	     = 218,	/* IGNORED %%Requirements: */
   CDSC_DOCUMENTNEEDEDFONTS   = 219,	/* IGNORED %%DocumentNeededFonts: */
   CDSC_DOCUMENTSUPPLIEDFONTS = 220,	/* IGNORED %%DocumentSuppliedFonts: */
   CDSC_HIRESBOUNDINGBOX	     = 221,	/* %%HiResBoundingBox: */

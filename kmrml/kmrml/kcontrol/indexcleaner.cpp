@@ -6,9 +6,9 @@
 
 #include <tdeversion.h>
 #if TDE_VERSION < 306
-  #define TQUOTE( x ) x
+  #define QUOTE( x ) x
 #else
-  #define TQUOTE( x ) KProcess::quote( x )
+  #define QUOTE( x ) KProcess::quote( x )
 #endif
 
 using namespace KMrmlConfig;
@@ -76,9 +76,9 @@ void IndexCleaner::startNext()
 
     int index = cmd.find( "%d" );
     if ( index != -1 )
-        cmd.replace( index, 2, TQUOTE( dir ) );
+        cmd.replace( index, 2, QUOTE( dir ) );
     else // no %d? What else can we do?
-        cmd.append( TQString::fromLatin1(" ") + TQUOTE( dir ) );
+        cmd.append( TQString::fromLatin1(" ") + QUOTE( dir ) );
 
     *m_process << cmd;
 

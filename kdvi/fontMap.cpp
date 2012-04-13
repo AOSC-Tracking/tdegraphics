@@ -26,7 +26,7 @@ fontMap::fontMap()
   // has, like kdvi (and unlike dvips), no built-in fonts.
   
   // Finding ps2pk.map is not easy. In teTeX < 3.0, the kpsewhich
-  // program RETQUIRES the option "--format=dvips config". In teTeX =
+  // program REQUIRES the option "--format=dvips config". In teTeX =
   // 3.0, the option "--format=map" MUST be used. Since there is no
   // way to give both options at the same time, there is seemingly no
   // other way than to try both options one after another. We use the

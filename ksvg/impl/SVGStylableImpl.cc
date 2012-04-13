@@ -974,7 +974,7 @@ void SVGStylableImpl::putValueProperty(ExecState *exec, int token, const Value &
 			else if(param == "italic")
 				m_fontStyle = ITALIC;
 			else if(param == "oblique")
-				m_fontStyle = OBLITQUE;
+				m_fontStyle = OBLIQUE;
 			break;
 		case TextDecoration:
 			m_flags |= SVG_STYLE_FLAG_TEXT_DECORATION;

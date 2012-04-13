@@ -30,9 +30,9 @@
 
 #include <tdeversion.h>
 #if TDE_VERSION < 307
-  #define TQUOTE( x ) x
+  #define QUOTE( x ) x
 #else
-  #define TQUOTE( x ) KProcess::quote( x )
+  #define QUOTE( x ) KProcess::quote( x )
 #endif
 
 using namespace KMrml;
@@ -183,7 +183,7 @@ TQString Config::addCollectionCommandLine() const
                                        DEFAULT_ADDCOLLECTION_CMD );
     int index = cmd.find( "%h" );
     if ( index != -1 )
-        cmd.replace( index, 2, TQUOTE( mrmldDataDir() ) );
+        cmd.replace( index, 2, QUOTE( mrmldDataDir() ) );
 
     index = cmd.find( "%e" );
     if ( index != -1 )
@@ -205,7 +205,7 @@ TQString Config::removeCollectionCommandLine() const
                                        DEFAULT_REMOVECOLLECTION_CMD );
     int index = cmd.find( "%h" );
     if ( index != -1 )
-        cmd.replace( index, 2, TQUOTE( mrmldDataDir() ) );
+        cmd.replace( index, 2, QUOTE( mrmldDataDir() ) );
 
     index = cmd.find( "%e" );
     if ( index != -1 )
@@ -241,7 +241,7 @@ TQString Config::mrmldCommandline() const
     index = cmd.find( "%d" );
     if ( index != -1 )
     {
-        cmd.replace( index, 2, TQUOTE( mrmldDataDir() ) );
+        cmd.replace( index, 2, QUOTE( mrmldDataDir() ) );
     }
 
     tqDebug("***** commandline: %s", cmd.latin1());

@@ -774,7 +774,7 @@ void KGVDocument::runPdf2ps( const TQString& pdfName,
     KProcess process;
     process << _interpreterPath
 	    << "-dNODISPLAY"
-	    << "-dTQUIET"
+	    << "-dQUIET"
 	    << TQString( "-sPDFname=%1" ).arg( pdfName )
 	    << TQString( "-sDSCnamale locale( "kghostview" );
     _fallBackPageMedia = pageSizeToString( 
@@ -822,7 +822,7 @@ void Pdf2dsc::run( const TQString& pdfName, const TQString& dscName )
               << "-dPARANOIDSAFER"
               << "-dDELAYSAFER"
               << "-dNODISPLAY"
-              << "-dTQUIET"
+              << "-dQUIET"
               << TQString( "-sPDFname=%1" ).arg( pdfName )
               << TQString( "-sDSCname=%1" ).arg( dscName )
               << "-c"
