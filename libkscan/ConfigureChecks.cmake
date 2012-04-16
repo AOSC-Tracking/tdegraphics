@@ -39,8 +39,14 @@ if( SANE_INCLUDE_DIRS )
   string( REGEX REPLACE "(^| )-I" ";" SANE_INCLUDE_DIRS "${SANE_INCLUDE_DIRS}" )
 endif( )
 if( SANE_LIBRARIES )
-  string( REGEX REPLACE "(^| )-l" ";" SANE_LIBRARIES "${SANE_LIBRARIES}" )
-  string( REPLACE " " "" SANE_LIBRARIES "${SANE_LIBRARIES}" )
+  ## remove all spaces and replace whitespace with ';'
+  string( REGEX REPLACE "[ ]+" ";" SANE_LIBRARIES "${SANE_LIBRARIES}" )
+  ## remove all non-library information
+  string( REGEX REPLACE ";[-][^l]([^ ;])+" "" SANE_LIBRARIES "${SANE_LIBRARIES}" )
+  ## remove multiple ';'
+  string( REGEX REPLACE "[;]+" ";" SANE_LIBRARIES "${SANE_LIBRARIES}" )
+  ## remove '-l'
+  string( REGEX REPLACE "-l" "" SANE_LIBRARIES "${SANE_LIBRARIES}" )
 endif( )
 
 if( NOT HAVE_SANE )
