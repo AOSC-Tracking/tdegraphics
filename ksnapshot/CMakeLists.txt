@@ -40,6 +40,6 @@ tde_add_executable( ksnapshot AUTOMOC
   SOURCES
     ksnapshotiface.skel main.cpp ksnapshot.cpp regiongrabber.cpp
     windowgrabber.cpp ksnapshotwidget.ui
-  LINK tdeprint-shared
+  LINK tdeprint-shared ${XEXT_LIBRARIES}
   DESTINATION ${BIN_INSTALL_DIR}
 )
