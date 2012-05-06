@@ -1,3 +1,13 @@
+# Poppler
+if( BUILD_KPDF )
+  pkg_search_module( POPPLER poppler )
+  if( POPPLER_FOUND )
+    set( HAVE_POPPLER 1 )
+  else( )
+    tde_message_fatal( "poppler is required, but was not found on your system" )
+  endif( )
+endif( )
+
 tde_save( CMAKE_REQUIRED_INCLUDES CMAKE_REQUIRED_LIBRARIES )
 set( CMAKE_REQUIRED_INCLUDES ${DBUS_TQT_INCLUDE_DIRS} ${TQT_INCLUDE_DIRS} ${QT_INCLUDE_DIRS})
 set( CMAKE_REQUIRED_LIBRARIES ${DBUS_TQT_LDFLAGS} ${TQT_LDFLAGS} ${QT_LDFLAGS} "-lpoppler" )

@@ -21,7 +21,7 @@ include_directories(
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
   ${CMAKE_SOURCE_DIR}/kfile-plugins/dependencies/poppler-tqt
-  /usr/include/poppler
+  ${POPPLER_INCLUDE_DIRS}
 )
 
 link_directories(
