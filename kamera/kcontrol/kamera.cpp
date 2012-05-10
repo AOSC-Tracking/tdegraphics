@@ -408,7 +408,7 @@ TQString KKameraConfig::quickHelp() const
 	  "appear in the list of <i>Supported Cameras</i>, go to the\n"
 	  "<a href=\"http://www.gphoto.org\">GPhoto web site</a> for a possible update.<br><br>\n"
 	  "To view and download images from the digital camera, go to address\n"
-	  "<a href=\"camera:/\">camera:/</a> in Konqueror and other KDE applications.");
+	  "<a href=\"camera:/\">camera:/</a> in Konqueror and other TDE applications.");
 }
 
 void KKameraConfig::slot_error(const TQString &message)
