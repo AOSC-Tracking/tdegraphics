@@ -31,7 +31,7 @@
 #include "ksnapshot.h"
 
 static const char description[] =
-	I18N_NOOP("KDE Screenshot Utility");
+	I18N_NOOP("TDE Screenshot Utility");
 
 static KCmdLineOptions options[] =
 {

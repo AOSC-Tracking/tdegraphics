@@ -5,7 +5,7 @@
 #include <klocale.h>
 
 static const char description[] =
-    I18N_NOOP("A KDE KPart Application");
+    I18N_NOOP("A TDE KPart Application");
 
 static const char version[] = "v0.1";
 

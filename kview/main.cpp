@@ -23,7 +23,7 @@
 #include <kcmdlineargs.h>
 #include <klocale.h>
 
-static const char description[] = I18N_NOOP( "KDE Image Viewer" );
+static const char description[] = I18N_NOOP( "TDE Image Viewer" );
 
 static KCmdLineOptions options[] =
 {

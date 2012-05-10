@@ -62,7 +62,7 @@ int main (int argc, char *argv [])
         "kolourpaint",
         I18N_NOOP ("KolourPaint"),
         kpVersionText,
-        I18N_NOOP ("Paint Program for KDE"),
+        I18N_NOOP ("Paint Program for TDE"),
         KAboutData::License_Custom,
         0/*copyright statement - see licence instead*/,
         0/*no free text*/,

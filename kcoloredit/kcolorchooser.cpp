@@ -31,7 +31,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "kcolordialog.h"
 
 static const char description[] =
-	I18N_NOOP("KDE Color Chooser");
+	I18N_NOOP("TDE Color Chooser");
 
 static const char version[] = "v1.0.1";
 

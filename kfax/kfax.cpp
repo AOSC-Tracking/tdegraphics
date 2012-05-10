@@ -1619,7 +1619,7 @@ void setFaxDefaults(){
 }
 
 static const char description[] =
-        I18N_NOOP("KDE G3/G4 Fax Viewer");
+        I18N_NOOP("TDE G3/G4 Fax Viewer");
 
 static KCmdLineOptions options[] =
 {

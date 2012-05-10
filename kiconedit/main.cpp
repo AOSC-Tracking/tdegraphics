@@ -32,7 +32,7 @@
 #include "properties.h"
 
 static const char description[] =
-	I18N_NOOP("KDE Icon Editor");
+	I18N_NOOP("TDE Icon Editor");
 
 static KCmdLineOptions options[] =
 {

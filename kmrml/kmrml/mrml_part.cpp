@@ -834,7 +834,7 @@ KAboutData * MrmlPart::createAboutData()
 {
     KAboutData *data = new KAboutData(
         "kmrml",
-        I18N_NOOP("MRML Client for KDE"),
+        I18N_NOOP("MRML Client for TDE"),
         KMRML_VERSION,
         I18N_NOOP("A tool to search for images by their content"),
         KAboutData::License_GPL,

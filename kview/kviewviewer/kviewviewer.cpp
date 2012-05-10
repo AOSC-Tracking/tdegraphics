@@ -170,7 +170,7 @@ KViewViewer::~KViewViewer()
 KAboutData * KViewViewer::createAboutData()
 {
 	KAboutData * aboutData  = new KAboutData( "kviewviewer", I18N_NOOP( "KView" ),
-			KVIEW_VERSION, I18N_NOOP( "KDE Image Viewer Part" ),
+			KVIEW_VERSION, I18N_NOOP( "TDE Image Viewer Part" ),
 			KAboutData::License_GPL,
 			I18N_NOOP("(c) 1997-2002, The KView Developers") );
 	aboutData->addAuthor( "Matthias Kretz", I18N_NOOP( "Maintainer" ), "kretz@kde.org" );
