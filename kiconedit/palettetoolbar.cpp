@@ -59,7 +59,7 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   vlayout->addWidget( l );
   m_sysColors = new KSysColors( base );
   TQWhatsThis::add(m_sysColors, i18n( "System colors\n\nHere you can select"
-      " colors from the KDE icon palette" ) );
+      " colors from the TDE icon palette" ) );
 
   vlayout->addWidget( m_sysColors );
 
