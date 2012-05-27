@@ -750,7 +750,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
 						    "which you will find in the <strong>Settings</strong>-menu.") +
 					       TQString("</qt>"),
 					       i18n("Need to Specify Editor"),
-					       i18n("Use KDE's Editor Kate for Now"));
+					       i18n("Use TDE's Editor Kate for Now"));
     if (r == KMessageBox::Continue)
       command = "kate %f";
     else
