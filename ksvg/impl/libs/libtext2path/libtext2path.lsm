@@ -1,16 +1,14 @@
 Begin4
-Title:          libtext2path -- Some description
-Version:        0.1
-Entered-date:   YYYY-MM-DD
-Description:    
-Keywords:       KDE3 Qt
+Title:          libtext2path
+Version:        R14.0.0
+Entered-date:   2010-05-10
+Description:    Converts FreeType glyphs to bezier paths
+Keywords:       TDE Qt
 Author:         Nikolas Zimmermann <wildfox@kde.org>
-Maintained-by:  Nikolas Zimmermann <wildfox@kde.org>
-Home-page:      
-Alternate-site: 
-Primary-site:   ftp://ftp.kde.org/pub/kde/unstable/apps/utils
-                xxxxxx  libtext2path-0.1.tar.gz
-                xxx     libtext2path-0.1.lsm
-Platform:       Linux. Needs KDE 2.x
+Maintained-by:  The Trinity Desktop Environment (TDE) http://www.trinitydesktop.org/
+Primary-site:   http://git.trinitydesktop.org/cgit/
+Alternate-site:
+Original-site:  http://ww.kde.org/
+Platforms:      Linux and other Unices running TDE
 Copying-policy: GPL
 End

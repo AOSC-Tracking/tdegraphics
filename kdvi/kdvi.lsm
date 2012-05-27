@@ -1,14 +1,14 @@
-Begin3
+Begin4
 Title:          kdvi
-Version:        0.4
-Entered-date:   October 15, 1997
-Description:    TeX DVI previewer for the K Desktop Environment
-Keywords:       KDE, TeX, DVI, X11, Qt
+Version:        R14.0.0
+Entered-date:   2010-05-10
+Description:    TeX DVI previewer for the Trinity Desktop Environment
+Keywords:       TDE, TeX, DVI, X11, Qt
 Author:         Markku Hihnala <mah@ee.oulu.fi>
-Maintained-by:  Markku Hihnala <mah@ee.oulu.fi>
-Primary-site:   ftp://ftp.kde.org/pub/kde/
-Alternate-site: 
-Original-site:  ftp://ftp.kde.org/pub/kde/
-Platforms:      Unix, Qt
+Maintained-by:  The Trinity Desktop Environment (TDE) http://www.trinitydesktop.org/
+Primary-site:   http://git.trinitydesktop.org/cgit/
+Alternate-site:
+Original-site:  http://www.kde.org/
+Platforms:      Linux and other Unices running TDE
 Copying-policy: GPL
 End
