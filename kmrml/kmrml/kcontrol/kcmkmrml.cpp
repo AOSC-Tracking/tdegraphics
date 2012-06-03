@@ -131,7 +131,7 @@ void KCMKMrml::save()
 TQString KCMKMrml::quickHelp() const
 {
     return i18n("<h1>Image Index</h1>"
-                "KDE can make use of the GNU Image Finding Tool (GIFT) to "
+                "TDE can make use of the GNU Image Finding Tool (GIFT) to "
                 "perform queries based not just on filenames, but on "
                 "file content."
                 "<p>For example, you can search for an image by giving an example "

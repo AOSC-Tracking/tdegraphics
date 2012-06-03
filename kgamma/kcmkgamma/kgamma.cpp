@@ -588,7 +588,7 @@ TQString KGamma::quickHelp() const
     " You may need to correct the brightness and contrast settings of your"
     " monitor for good results. The test images help you to find proper"
     " settings.<br> You can save them system-wide to XF86Config (root access"
-    " is required for that) or to your own KDE settings. On multi head"
+    " is required for that) or to your own TDE settings. On multi head"
     " systems you can correct the gamma values separately for all screens.");
 }
 
