@@ -150,12 +150,12 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
     TQString text = i18n("<qt><p><b>Problem:</b> The document <b>%1</b> cannot be shown.</p>"
 			"<p><b>Reason:</b> The software component <b>%2</b> which is required to "
 			"display your files could not be initialized. This could point to "
-			"serious misconfiguration of your KDE system, or to damaged program files.</p>"
+			"serious misconfiguration of your TDE system, or to damaged program files.</p>"
 			"<p><b>What you can do:</b> You could try to re-install the software packages in "
 			"question. If that does not help, you could file an error report, either to the "
 			"provider of your software (e.g. the vendor of your Linux distribution), or "
 			"directly to the authors of the software. The entry <b>Report Bug...</b> in the "
-			"<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library());
+			"<b>Help</b> menu helps you to contact the TDE programmers.</p></qt>").arg(m_file).arg(service->library());
     TQString caption = i18n("Error Initializing Software Component");
     KMessageBox::detailedError(mainWidget, text, reason, caption);
     emit setStatusBarText(TQString());
@@ -492,7 +492,7 @@ TQStringList KViewPart::supportedMimeTypes()
   // The kviewshell is also able to read compressed files and to
   // uncompress them on the fly.
 
-  // Check if this version of KDE supports bzip2
+  // Check if this version of TDE supports bzip2
   bool bzip2Available = (KFilterBase::findFilterByMimeType( "application/x-bzip2" ) != 0L);
 
   supportedMimeTypes << "application/x-gzip";
@@ -544,9 +544,9 @@ TQStringList KViewPart::fileFormats() const
   // uncompress them on the fly. Thus, we modify the list of supported
   // file formats which we obtain from the multipages to include
   // compressed files like "*.dvi.gz". We add "*.dvi.bz2" if support
-  // for bzip2 is compiled into KDE.
+  // for bzip2 is compiled into TDE.
 
-  // Check if this version of KDE supports bzip2
+  // Check if this version of TDE supports bzip2
   bool bzip2Available = (KFilterBase::findFilterByMimeType( "application/x-bzip2" ) != 0L);
 
   TQStringList compressedPattern;
@@ -826,13 +826,13 @@ bool KViewPart::openFile()
       TQString text = i18n("<qt><p><b>Problem:</b> The document <b>%1</b> cannot be shown.</p>"
 			  "<p><b>Reason:</b> The software "
 			  "component <b>%2</b> which is required to display files of type <b>%3</b> could "
-			  "not be initialized. This could point to serious misconfiguration of your KDE "
+			  "not be initialized. This could point to serious misconfiguration of your TDE "
 			  "system, or to damaged program files.</p>"
 			  "<p><b>What you can do:</b> You could try to re-install the software packages in "
 			  "question. If that does not help, you could file an error report, either to the "
 			  "provider of your software (e.g. the vendor of your Linux distribution), or "
 			  "directly to the authors of the software. The entry <b>Report Bug...</b> in the "
-			  "<b>Help</b> menu helps you to contact the KDE programmers.</p></qt>").arg(m_file).arg(service->library()).arg(mimetype->name());
+			  "<b>Help</b> menu helps you to contact the TDE programmers.</p></qt>").arg(m_file).arg(service->library()).arg(mimetype->name());
       TQString caption = i18n("Error Initializing Software Component");
       if (reason.isEmpty())
 	KMessageBox::error(mainWidget, text, caption);
