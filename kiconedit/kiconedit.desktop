@@ -92,4 +92,4 @@ Type=Application
 Terminal=false
 
 X-DCOP-ServiceType=Multi
-Categories=Qt;KDE;Graphics;
+Categories=Qt;TDE;Graphics;

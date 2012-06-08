@@ -58,6 +58,6 @@ Name[zh_CN]=KView 图像查看器部件
 Name[zh_HK]=KView 圖像檢視器器件
 Name[zh_TW]=KView 影像檢視器界面工具
 Name[zu]=I-widget Yombukisi Wesithombe se-KView
-X-KDE-Library=libkviewcanvas
+X-TDE-Library=libkviewcanvas
 InitialPreference=2
 ServiceTypes=KImageViewer/Canvas

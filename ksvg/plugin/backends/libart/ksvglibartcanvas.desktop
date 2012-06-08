@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KSVG/Renderer
-X-KDE-Library=libksvgrendererlibart
+X-TDE-Library=libksvgrendererlibart
 X-KSVG-InternalName=libart
 Name=KSVG Rendering Backend - Libart
 Name[ar]=خلفية الرسم ل KSVG - Libart

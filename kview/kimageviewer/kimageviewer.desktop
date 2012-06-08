@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KImageViewer/Viewer
-X-KDE-Derived=KParts/ReadWritePart
+X-TDE-ServiceType=KImageViewer/Viewer
+X-TDE-Derived=KParts/ReadWritePart
 Icon=image
 Comment=Embeddable Image Viewer Component
 Comment[af]=Inlegbare Beeld Aansig Komponent

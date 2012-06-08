@@ -3,8 +3,8 @@ Exec=kcmshell kcmkmrml
 Icon=folder_image
 Type=Application
 
-X-KDE-ModuleType=Library
-X-KDE-Library=kmrml
+X-TDE-ModuleType=Library
+X-TDE-Library=kmrml
 
 Name=Image Index
 Name[ar]=فهرس الصور
@@ -173,4 +173,4 @@ Keywords[zh_HK]=Images,Search,Query,Find,Gift,kmrml,mrml,CBIR,圖像,搜尋,查�
 Keywords[zh_TW]=Images,Search,Query,Find,Gift,kmrml,mrml,CBIR,影像,搜尋,查詢,尋找
 Keywords[zu]=Izithombe,Funa,Buza,Thola,Isipho,kmrml,mrml,CBIR
 
-Categories=Qt;KDE;Settings;X-KDE-settings-system;
+Categories=Qt;TDE;Settings;X-TDE-settings-system;

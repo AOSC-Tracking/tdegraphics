@@ -7,5 +7,5 @@ Name[zh_TW]=KPDF 檢視器
 MimeType=application/pdf
 InitialPreference=7
 ServiceTypes=KParts/ReadOnlyPart
-X-KDE-Library=libkpdfpart
+X-TDE-Library=libkpdfpart
 Type=Service

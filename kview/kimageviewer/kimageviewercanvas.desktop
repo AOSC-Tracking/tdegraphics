@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KImageViewer/Canvas
+X-TDE-ServiceType=KImageViewer/Canvas
 Comment=Embeddable Image Viewer Canvas (widget that shows an image)
 Comment[af]=Inlegbare Beeld Aansig Kanvas (gui-element wat vertoon 'n Beeld)
 Comment[ar]= مساحة رسم لعرض الصور قابلة للدمج (كائن يعرض صورة)

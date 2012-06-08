@@ -3,13 +3,13 @@ Icon=browser
 Type=Service
 ServiceTypes=KPluginInfo
 
-X-KDE-PluginInfo-Author=Matthias Kretz
-X-KDE-PluginInfo-Email=kretz@kde.org
-X-KDE-PluginInfo-Name=kviewbrowser
-X-KDE-PluginInfo-Category=General
-X-KDE-PluginInfo-Version=1.0
-X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
+X-TDE-PluginInfo-Author=Matthias Kretz
+X-TDE-PluginInfo-Email=kretz@kde.org
+X-TDE-PluginInfo-Name=kviewbrowser
+X-TDE-PluginInfo-Category=General
+X-TDE-PluginInfo-Version=1.0
+X-TDE-PluginInfo-License=GPL
+X-TDE-PluginInfo-EnabledByDefault=true
 
 Name=Browser
 Name[af]=Blaaier

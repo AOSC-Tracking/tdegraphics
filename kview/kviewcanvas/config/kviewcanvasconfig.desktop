@@ -3,13 +3,13 @@ Icon=kview
 Type=Service
 ServiceTypes=KCModule
 
-X-KDE-ModuleType=Library
-X-KDE-Library=kviewcanvasconfig
-X-KDE-FactoryName=KViewCanvasConfigFactory
-X-KDE-ParentApp=kview
-X-KDE-ParentComponents=kviewcanvas
-X-KDE-Weight=1
-X-KDE-CfgDlgHierarchy=Viewer
+X-TDE-ModuleType=Library
+X-TDE-Library=kviewcanvasconfig
+X-TDE-FactoryName=KViewCanvasConfigFactory
+X-TDE-ParentApp=kview
+X-TDE-ParentComponents=kviewcanvas
+X-TDE-Weight=1
+X-TDE-CfgDlgHierarchy=Viewer
 
 Name=Viewer
 Name[ar]=العارض

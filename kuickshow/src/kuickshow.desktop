@@ -90,4 +90,4 @@ GenericName[zh_HK]=圖像檢視器
 GenericName[zh_TW]=影像檢視程式
 GenericName[zu]=Umbonisi Womfanekiso
 X-DCOP-ServiceType=Multi
-Categories=Qt;KDE;Graphics;
+Categories=Qt;TDE;Graphics;

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KSVG/Renderer
-X-KDE-Library=libksvgrendereragg
+X-TDE-Library=libksvgrendereragg
 X-KSVG-InternalName=agg
 Name=KSVG Rendering Backend - Anti Grain Geometry
 Name[ar]=خلفية رسم ل KSVG - هندسة Anti Grain

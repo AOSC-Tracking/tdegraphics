@@ -59,6 +59,6 @@ Name[zh_HK]=PDF 資訊
 Name[zh_TW]=PDF 資訊
 Name[zu]=Ulwazi lwe-PDF
 ServiceTypes=KFilePlugin
-X-KDE-Library=kfile_pdf
+X-TDE-Library=kfile_pdf
 MimeType=application/pdf
 PreferredItems=Title,Subject,Author,Keywords,Creator,Producer,CreationDate,ModificationDate,Pages,Protected,Linearized,Version

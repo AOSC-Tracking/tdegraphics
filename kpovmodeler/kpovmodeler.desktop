@@ -55,5 +55,5 @@ Path=
 ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart,Browser/View,KPovModeler/Document
 Terminal=false
 Type=Application
-X-KDE-Library=libkpovmodelerpart
-Categories=Qt;KDE;Graphics;
+X-TDE-Library=libkpovmodelerpart
+Categories=Qt;TDE;Graphics;

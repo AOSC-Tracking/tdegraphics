@@ -115,4 +115,4 @@ Name[zh_HK]=KView 圖像檢視器
 Name[zh_TW]=KView 影像檢視器
 ServiceTypes=KImageViewer/Viewer,KParts/ReadWritePart,Browser/View
 InitialPreference=3
-X-KDE-Library=libkviewviewer
+X-TDE-Library=libkviewviewer

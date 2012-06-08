@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KSVG/Renderer
-X-KDE-Derived=
+X-TDE-ServiceType=KSVG/Renderer
+X-TDE-Derived=
 Comment=KSVG Rendering Backend
 Comment[ar]=خلفية رسم KSVG
 Comment[bs]=KSVG renderiranje

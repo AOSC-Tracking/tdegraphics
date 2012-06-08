@@ -3,12 +3,12 @@ Icon=mypluginicon
 Type=Service
 ServiceTypes=KPluginInfo
 
-X-KDE-PluginInfo-Author=Your Name
-X-KDE-PluginInfo-Email=Your@address
-X-KDE-PluginInfo-Name=kviewtemplate
-X-KDE-PluginInfo-Version=0.1
-X-KDE-PluginInfo-License=Public Domain
-X-KDE-PluginInfo-EnabledByDefault=true
+X-TDE-PluginInfo-Author=Your Name
+X-TDE-PluginInfo-Email=Your@address
+X-TDE-PluginInfo-Name=kviewtemplate
+X-TDE-PluginInfo-Version=0.1
+X-TDE-PluginInfo-License=Public Domain
+X-TDE-PluginInfo-EnabledByDefault=true
 
 Name=Template
 Name[af]=Werkvoorbeeld

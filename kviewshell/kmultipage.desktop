@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Service
-X-KDE-ServiceType=KViewShell/MultiPage
+X-TDE-ServiceType=KViewShell/MultiPage
 Name=KViewShell MultiPage
 Name[da]=KViewShell Multiside
 Name[de]=KViewShell Mehrfachseiten
@@ -31,11 +31,11 @@ Name[tr]=KViewShell ÇokluSayfa
 Name[zh_CN]=KViewShell 多页
 Name[zh_HK]=KViewShell 多頁
 
-[PropertyDef::X-KDE-MimeTypes]
+[PropertyDef::X-TDE-MimeTypes]
 Type=TQString
 
-[PropertyDef::X-KDE-MultiPageVersion]
+[PropertyDef::X-TDE-MultiPageVersion]
 Type=int
 
-[PropertyDef::X-KDE-EmptyMultiPage]
+[PropertyDef::X-TDE-EmptyMultiPage]
 Type=int

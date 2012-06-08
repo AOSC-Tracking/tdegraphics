@@ -97,8 +97,8 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
     TQString defaultMimeType = args.first();
     offers = KTrader::self()->query(
         TQString::fromLatin1("KViewShell/MultiPage" ),
-        TQString("([X-KDE-MultiPageVersion] == %1) and "
-                "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(defaultMimeType));
+        TQString("([X-TDE-MultiPageVersion] == %1) and "
+                "([X-TDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(defaultMimeType));
   }
 
   // If no default MimeType is given or no MultiPage has been found, try to load the Empty MultiPage.
@@ -106,8 +106,8 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   {
     offers = KTrader::self()->query(
         TQString::fromLatin1("KViewShell/MultiPage" ),
-        TQString("([X-KDE-MultiPageVersion] == %1) and "
-                "([X-KDE-EmptyMultiPage] == 1)").arg(MULTIPAGE_VERSION));
+        TQString("([X-TDE-MultiPageVersion] == %1) and "
+                "([X-TDE-EmptyMultiPage] == 1)").arg(MULTIPAGE_VERSION));
   }
 
   // If still no MultiPage has been found, report an error and abort.
@@ -472,7 +472,7 @@ TQStringList KViewPart::supportedMimeTypes()
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage"),
-      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
+      TQString("([X-TDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -483,7 +483,7 @@ TQStringList KViewPart::supportedMimeTypes()
     for (; iterator != end; ++iterator)
     {
       KService::Ptr service = *iterator;
-      TQString mimeType = service->property("X-KDE-MimeTypes").toString();
+      TQString mimeType = service->property("X-TDE-MimeTypes").toString();
       supportedMimeTypes << mimeType;
 
     }
@@ -517,7 +517,7 @@ TQStringList KViewPart::fileFormats() const
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage"),
-      TQString("([X-KDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
+      TQString("([X-TDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
@@ -528,7 +528,7 @@ TQStringList KViewPart::fileFormats() const
     for (; iterator != end; ++iterator)
     {
       KService::Ptr service = *iterator;
-      TQString mimeType = service->property("X-KDE-MimeTypes").toString();
+      TQString mimeType = service->property("X-TDE-MimeTypes").toString();
       supportedMimeTypes << mimeType;
 
       TQStringList pattern = KMimeType::mimeType(mimeType)->patterns();
@@ -769,8 +769,8 @@ bool KViewPart::openFile()
   // Search for service
   KTrader::OfferList offers = KTrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage" ),
-  TQString("([X-KDE-MultiPageVersion] == %1) and "
-          "([X-KDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(mimetype->name()));
+  TQString("([X-TDE-MultiPageVersion] == %1) and "
+          "([X-TDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(mimetype->name()));
 
   if (offers.isEmpty()) {
     KMessageBox::detailedError(mainWidget, i18n("<qt>The document <b>%1</b> cannot be shown because "

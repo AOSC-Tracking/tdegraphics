@@ -83,5 +83,5 @@ GenericName[zh_HK]=PS/PDF 檢視器
 GenericName[zh_TW]=PS/PDF 檢視器
 GenericName[zu]=Umboniseli we PS/PDF
 Terminal=false
-Categories=Qt;KDE;Graphics;
+Categories=Qt;TDE;Graphics;
 NoDisplay=true

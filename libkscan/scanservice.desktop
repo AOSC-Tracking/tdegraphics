@@ -65,6 +65,6 @@ Name[zh_CN]=TDE 扫描服务
 Name[zh_HK]=TDE 掃描服務
 Name[zh_TW]=TDE 掃描服務
 Name[zu]=Umsebenzi Lokuhlola lwe-TDE
-X-KDE-Library=libkscan
+X-TDE-Library=libkscan
 InitialPreference=2
 ServiceTypes=KScan/KScanDialog

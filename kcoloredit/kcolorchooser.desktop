@@ -105,4 +105,4 @@ Name[zh_TW]=KColorChooser 顏色選擇器
 Name[zu]=Umkhethi Wombala ka K
 
 X-DCOP-ServiceType=Multi
-Categories=Qt;KDE;Graphics;
+Categories=Qt;TDE;Graphics;

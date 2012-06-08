@@ -61,6 +61,6 @@ Name[zh_HK]=PostScript 資訊
 Name[zh_TW]=PostScript 資訊
 Name[zu]=Ulwazi Lwesi-PostScript
 ServiceTypes=KFilePlugin
-X-KDE-Library=kfile_ps
+X-TDE-Library=kfile_ps
 MimeType=application/postscript;image/x-eps
 PreferredItems=Title,Creator,CreationDate,For,Pages

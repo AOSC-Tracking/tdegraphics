@@ -81,5 +81,5 @@ Comment[zh_TW]=可調整的向量圖形檢視器
 Comment[zu]=Umbonisi wemidwebo Onenani Elibalekayo
 Type=Service
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
-X-KDE-Library=libksvgplugin
+X-TDE-Library=libksvgplugin
 InitialPreference=11

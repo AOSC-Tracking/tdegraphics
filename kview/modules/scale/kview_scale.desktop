@@ -61,12 +61,12 @@ Name[zh_TW]=縮放
 Name[zu]=Isikali
 Comment=Filter to scale the image
 Comment[af]=Filter na skaal die beeld
-Comment[ar]=فلتر لتكبير أو تصغير الصورة 
+Comment[ar]=فلتر لتكبير أو تصغير الصورة
 Comment[bg]=Филтър за мащабиране на изображения
 Comment[bs]=Filter za skaliranje slike
 Comment[ca]=Filtre per escalar la imatge
 Comment[cs]=Filtr ke změně měřítka obrázku
-Comment[cy]=Hidl i raddio'r ddelwedd 
+Comment[cy]=Hidl i raddio'r ddelwedd
 Comment[da]=Filter til at skalere billedet
 Comment[de]=Ein Filter zum Skalieren von Bildern
 Comment[el]=Φίλτρο για την κλιμάκωση της εικόνας
@@ -119,7 +119,7 @@ Comment[zh_TW]=用來縮放影像的濾鏡
 Comment[zu]=Hluza isithombe esikaleni
 Type=Plugin
 
-[X-KDE Plugin Info]
+[X-TDE Plugin Info]
 Author=Matthias Kretz
 Email=kretz@kde.org
 PluginName=kview_scale

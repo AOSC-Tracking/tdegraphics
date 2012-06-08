@@ -3,12 +3,12 @@ Icon=scanner
 Type=Service
 ServiceTypes=KPluginInfo
 
-X-KDE-PluginInfo-Author=Matthias Kretz
-X-KDE-PluginInfo-Email=kretz@kde.org
-X-KDE-PluginInfo-Name=kviewscanner
-X-KDE-PluginInfo-Version=1.0
-X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=false
+X-TDE-PluginInfo-Author=Matthias Kretz
+X-TDE-PluginInfo-Email=kretz@kde.org
+X-TDE-PluginInfo-Name=kviewscanner
+X-TDE-PluginInfo-Version=1.0
+X-TDE-PluginInfo-License=GPL
+X-TDE-PluginInfo-EnabledByDefault=false
 
 Name=Scanner
 Name[af]=Skandeerder

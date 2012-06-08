@@ -3,13 +3,13 @@ Icon=kview
 Type=Service
 ServiceTypes=KCModule
 
-X-KDE-ModuleType=Library
-X-KDE-Library=kviewgeneralconfig
-X-KDE-FactoryName=KViewGeneralConfigFactory
-X-KDE-ParentApp=kview
-X-KDE-ParentComponents=kview
-X-KDE-Weight=5
-X-KDE-CfgDlgHierarchy=Application
+X-TDE-ModuleType=Library
+X-TDE-Library=kviewgeneralconfig
+X-TDE-FactoryName=KViewGeneralConfigFactory
+X-TDE-ParentApp=kview
+X-TDE-ParentComponents=kview
+X-TDE-Weight=5
+X-TDE-CfgDlgHierarchy=Application
 
 Name=Application
 Name[ar]=التطبيق

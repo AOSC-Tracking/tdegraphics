@@ -3,10 +3,10 @@ Icon=kpresenter
 Type=Service
 ServiceTypes=KCModule
 
-X-KDE-ModuleType=Library
-X-KDE-Library=kviewpresenterconfig
-X-KDE-FactoryName=KViewPresenterConfigFactory
-X-KDE-ParentComponents=kviewpresenter
+X-TDE-ModuleType=Library
+X-TDE-Library=kviewpresenterconfig
+X-TDE-FactoryName=KViewPresenterConfigFactory
+X-TDE-ParentComponents=kviewpresenter
 
 Name=Name
 Name[ar]=اسم

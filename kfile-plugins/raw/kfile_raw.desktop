@@ -48,6 +48,6 @@ Name[zh_HK]=RAW 相機檔案
 Name[zh_TW]=原始相機檔
 ServiceTypes=KFilePlugin
 MimeType=image/x-raw
-X-KDE-Library=kfile_raw
+X-TDE-Library=kfile_raw
 CacheThumbnail=false
 SupportsThumbnail=true

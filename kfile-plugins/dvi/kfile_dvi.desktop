@@ -56,5 +56,5 @@ Name[zh_HK]=DVI 資訊
 Name[zh_TW]=DVI 資訊
 ServiceTypes=KFilePlugin
 Type=Service
-X-KDE-Library=kfile_dvi
+X-TDE-Library=kfile_dvi
 PreferredItems=Title,Author,Subject,Creator,Producer,CreationDate,ModDate,Keywords

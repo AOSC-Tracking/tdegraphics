@@ -3,13 +3,13 @@ Icon=plugin
 Type=Service
 ServiceTypes=KCModule
 
-X-KDE-ModuleType=Library
-X-KDE-Library=kviewviewerpluginsconfig
-X-KDE-FactoryName=KViewViewerPluginsConfigFactory
-X-KDE-ParentApp=kview
-X-KDE-ParentComponents=kviewviewer
-X-KDE-Weight=2
-X-KDE-CfgDlgHierarchy=Viewer
+X-TDE-ModuleType=Library
+X-TDE-Library=kviewviewerpluginsconfig
+X-TDE-FactoryName=KViewViewerPluginsConfigFactory
+X-TDE-ParentApp=kview
+X-TDE-ParentComponents=kviewviewer
+X-TDE-Weight=2
+X-TDE-CfgDlgHierarchy=Viewer
 
 Name=Plugins
 Name[ar]=البرامج المساعدة

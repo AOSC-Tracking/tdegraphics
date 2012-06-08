@@ -57,4 +57,4 @@ Icon=html
 Type=MimeType
 MimeType=text/mrml
 Patterns=*.mrml;*.MRML;
-X-KDE-AutoEmbed=true
+X-TDE-AutoEmbed=true
