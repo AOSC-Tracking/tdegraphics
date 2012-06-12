@@ -28,6 +28,12 @@ link_directories(
   ${TQT_LIBRARY_DIRS}
 )
 
+##### pc files ##################################
+
+configure_file( poppler-tqt.pc.cmake poppler-tqt.pc @ONLY )
+
+install( FILES ${CMAKE_CURRENT_BINARY_DIR}/poppler-tqt.pc DESTINATION ${PKGCONFIG_INSTALL_DIR} )
+
 ##### headers ###################################
 
 install( FILES
