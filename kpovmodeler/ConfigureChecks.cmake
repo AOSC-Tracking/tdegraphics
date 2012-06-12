@@ -12,7 +12,11 @@
 # glu
 pkg_search_module( GLU glu )
 if( NOT GLU_FOUND )
-  tde_message_fatal( "glu is required, but was not found on your system" )
+  check_include_file ( GL/glu.h HAVE_GLU )
+  if( NOT HAVE_GLU )
+    tde_message_fatal( "glu is required, but was not found on your system" )
+  endif ( )
+  set( GLU_LIBRARIES "-lGL -lGLU" )
 endif( )
 
 
