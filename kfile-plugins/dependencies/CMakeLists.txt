@@ -9,4 +9,6 @@
 #
 #################################################
 
-add_subdirectory( poppler-tqt )
+if( WITH_PDF )
+  add_subdirectory( poppler-tqt )
+endif ( )
