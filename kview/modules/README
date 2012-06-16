@@ -34,7 +34,7 @@ Name=Coolplugin
 Comment=This is a very cool plugin doing foo and bar
 Type=Plugin
 
-[X-KDE Plugin Info]
+[X-TDE Plugin Info]
 Author=Matthias Kretz
 Email=kretz@kde.org
 PluginName=kviewcool
