@@ -317,17 +317,19 @@ bool Document::print(const TQString &fileName, TQValueList<int> pageList, double
 
 bool Document::print(const TQString &file, TQValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight)
 {
-#ifdef HAVE_POPPLER_016
+#ifdef HAVE_POPPLER_020
+  PSOutputDev *psOut = new PSOutputDev(file.latin1(), &(data->doc), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);
+#elif HAVE_POPPLER_016
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), &(data->doc), data->doc.getXRef(), data->doc.getCatalog(), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);
 #else
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), data->doc.getXRef(), data->doc.getCatalog(), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);
 #endif
-  
+
   if (psOut->isOk()) {
     TQValueList<int>::iterator it;
     for (it = pageList.begin(); it != pageList.end(); ++it )
       data->doc.displayPage(psOut, *it, hDPI, vDPI, rotate, gFalse, gTrue, gTrue);
-    
+
     delete psOut;
     return true;
   } else {

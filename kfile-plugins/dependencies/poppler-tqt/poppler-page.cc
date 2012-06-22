@@ -128,8 +128,12 @@ TQString Page::getText(const Rectangle &r) const
   PDFRectangle *rect;
   TQString result;
   ::Page *p;
-  
+
+#ifdef HAVE_POPPLER_020
+  output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
+#else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
+#endif
   data->doc->data->doc.displayPageSlice(output_dev, data->index + 1, 72, 72,
       0, false, false, false, -1, -1, -1, -1);
   p = data->doc->data->doc.getCatalog()->getPage(data->index + 1);
@@ -159,8 +163,12 @@ TQValueList<TextBox*> Page::textList() const
   TextOutputDev *output_dev;
   
   TQValueList<TextBox*> output_list;
-  
+
+#ifdef HAVE_POPPLER_020
+  output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
+#else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
+#endif
 
   data->doc->data->doc.displayPageSlice(output_dev, data->index + 1, 72, 72,
       0, false, false, false, -1, -1, -1, -1);
