@@ -88,7 +88,7 @@ TQImage Page::renderToImage(double xres, double yres, bool doLinks) const
   int bw = output_dev->getBitmap()->getWidth();
   int bh = output_dev->getBitmap()->getHeight();
   SplashColorPtr dataPtr = output_dev->getBitmap()->getDataPtr();
-  
+
   if (TQImage::BigEndian == TQImage::systemByteOrder())
   {
     uchar c;
@@ -104,7 +104,7 @@ TQImage Page::renderToImage(double xres, double yres, bool doLinks) const
       dataPtr[k+2] = c;
     }
   }
-  
+
   // construct a qimage SHARING the raw bitmap data in memory
   TQImage img( dataPtr, bw, bh, 32, 0, 0, TQImage::IgnoreEndian );
   img = img.copy();
@@ -128,8 +128,12 @@ TQString Page::getText(const Rectangle &r) const
   PDFRectangle *rect;
   TQString result;
   ::Page *p;
-  
+
+#if defined(HAVE_POPPLER_020)
+  output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
+#else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
+#endif
   data->doc->data->doc.displayPageSlice(output_dev, data->index + 1, 72, 72,
       0, false, false, false, -1, -1, -1, -1);
   p = data->doc->data->doc.getCatalog()->getPage(data->index + 1);
@@ -157,21 +161,25 @@ TQString Page::getText(const Rectangle &r) const
 TQValueList<TextBox*> Page::textList() const
 {
   TextOutputDev *output_dev;
-  
+
   TQValueList<TextBox*> output_list;
-  
+
+#if defined(HAVE_POPPLER_020)
+  output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
+#else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
+#endif
 
   data->doc->data->doc.displayPageSlice(output_dev, data->index + 1, 72, 72,
       0, false, false, false, -1, -1, -1, -1);
 
   TextWordList *word_list = output_dev->makeWordList();
-  
+
   if (!word_list) {
     delete output_dev;
     return output_list;
   }
-  
+
   for (int i = 0; i < word_list->getLength(); i++) {
     TextWord *word = word_list->get(i);
     GooString *word_str = word->getText();
@@ -179,21 +187,21 @@ TQValueList<TextBox*> Page::textList() const
     delete word_str;
     double xMin, yMin, xMax, yMax;
     word->getBBox(&xMin, &yMin, &xMax, &yMax);
-    
+
     TextBox* text_box = new TextBox(string, Rectangle(xMin, yMin, xMax, yMax));
-    
+
     output_list.append(text_box);
   }
-  
+
   delete word_list;
   delete output_dev;
-  
+
   return output_list;
 }
 
 PageTransition *Page::getTransition() const
 {
-  if (!data->transition) 
+  if (!data->transition)
   {
     Object o;
     PageTransitionParams params;
@@ -245,12 +253,12 @@ TQValueList<Link*> Page::links() const
   for (int i = 0; i < xpdfLinks->getNumLinks(); ++i)
   {
     ::Link *xpdfLink = xpdfLinks->getLink(i);
-    
+
     double left, top, right, bottom;
     int leftAux, topAux, rightAux, bottomAux;
     xpdfLink->getRect( &left, &top, &right, &bottom );
     TQRect linkArea;
-    
+
     data->doc->data->m_outputDev->cvtUserToDev( left, top, &leftAux, &topAux );
     data->doc->data->m_outputDev->cvtUserToDev( right, bottom, &rightAux, &bottomAux );
     linkArea.setLeft(leftAux);
@@ -317,7 +325,7 @@ TQValueList<Link*> Page::links() const
               popplerLink = new LinkAction( linkArea, LinkAction::Presentation );
           else if ( !strcmp( name, "Close" ) )
           {
-              // acroread closes the document always, doesnt care whether 
+              // acroread closes the document always, doesnt care whether
               // its presentation mode or not
               // popplerLink = new LinkAction( linkArea, LinkAction::EndPresentation );
               popplerLink = new LinkAction( linkArea, LinkAction::Close );
@@ -346,7 +354,7 @@ TQValueList<Link*> Page::links() const
         break;
       }
     }
-    
+
     if (popplerLink)
     {
       popplerLinks.append(popplerLink);
@@ -355,7 +363,7 @@ TQValueList<Link*> Page::links() const
 
   delete xpdfLinks;
 #endif
-  
+
   return popplerLinks;
 }
 
