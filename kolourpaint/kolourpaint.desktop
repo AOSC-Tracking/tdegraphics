@@ -5,7 +5,7 @@ Name[nb]=KPaint
 Name[ne]=रङ पेन्ट
 Name[pa]=ਕੇ-ਰੰਗ-ਪੇਂਟ
 Name[sv]=Kolourpaint
-Name[ta]=நிற பெயின்ட் 
+Name[ta]=நிற பெயின்ட்
 Name[zh_TW]=KolourPaint 小畫家
 GenericName=Paint Program
 GenericName[af]=Verf Program
@@ -34,7 +34,7 @@ GenericName[hr]=Program za slikanje
 GenericName[hu]=Rajzolóprogram
 GenericName[is]=Teikniforrit
 GenericName[it]=Programma di disegno
-GenericName[ja]=ペイントプログラム
+GenericName[ja]=ペイントプログラ�
 GenericName[kk]=Сурет салу бағдарламасы
 GenericName[km]=កម្មវិធី​គូរ
 GenericName[lt]=Piešimo programa
@@ -81,8 +81,7 @@ Exec=kolourpaint %u
 DocPath=kolourpaint/index.html
 
 # SYNC: Run branches/kolourpaint/control/scripts/gen_mimetype_line.sh in
-#       the version of tdelibs/kimgio/ (e.g. KDE 3.5) KolourPaint is
-#       shipped with.
+#       the version of tdelibs/kimgio/ KolourPaint is shipped with.
 MimeType=image/fax-g3;image/gif;image/jp2;image/jpeg;image/png;image/tiff;image/x-bmp;image/x-dds;image/x-eps;image/x-exr;image/x-hdr;image/x-ico;image/x-pcx;image/x-portable-bitmap;image/x-portable-greymap;image/x-portable-pixmap;image/x-rgb;image/x-targa;image/x-vnd.adobe.photoshop;image/x-xbm;image/x-xcf-gimp;image/x-xpm;video/x-mng;
 
 Categories=Qt;TDE;Graphics;
