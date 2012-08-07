@@ -966,7 +966,7 @@ void TopLevel::handle_X_event(XEvent Event)
 	break;
       Lasttime = Event.xkey.time;
       ExpectConfNotify = 0;
-      switch(XKeycodeToKeysym(qtdisplay, Event.xkey.keycode, 0)) {
+      switch(XkbKeycodeToKeysym(qtdisplay, Event.xkey.keycode, 0, 0)) {
       case XK_m:
 	mirrorPage();
 	if (Event.xkey.state & ShiftMask)
