@@ -9,4 +9,6 @@
 #
 #################################################
 
-tde_create_handbook( DESTINATION kuickshow )
+if( BUILD_KUICKSHOW )
+  tde_create_handbook( DESTINATION kuickshow )
+endif( )
