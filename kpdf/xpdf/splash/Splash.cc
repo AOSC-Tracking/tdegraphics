@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "gmem.h"
 #include "SplashErrorCodes.h"
 #include "SplashMath.h"
@@ -1501,6 +1502,11 @@ SplashError Splash::fillWithPattern(SplashPath *path, GBool eo,
     xPath->aaScale();
   }
   xPath->sort();
+  if (!&xPath->segs[0])
+  {
+    delete xPath;
+    return splashErrEmptyPath;
+  }
   scanner = new SplashXPathScanner(xPath, eo);
 
   // get the min and max x and y values
@@ -1937,7 +1943,10 @@ SplashError Splash::fillImageMask(SplashImageMaskSource src, void *srcData,
   xq = w % scaledWidth;
 
   // allocate pixel buffer
-  pixBuf = (SplashColorPtr)gmalloc((yp + 1) * w);
+  if (yp < 0 || yp > INT_MAX - 1) {
+    return splashErrBadArg;
+  }
+  pixBuf = (SplashColorPtr)gmallocn(yp + 1, w);
 
   // initialize the pixel pipe
   pipeInit(&pipe, 0, 0, state->fillPattern, NULL, state->fillAlpha,
@@ -2233,9 +2242,12 @@ SplashError Splash::drawImage(SplashImageSource src, void *srcData,
   xq = w % scaledWidth;
 
   // allocate pixel buffers
-  colorBuf = (SplashColorPtr)gmalloc((yp + 1) * w * nComps);
+  if (yp < 0 || yp > INT_MAX - 1 || w > INT_MAX / nComps) {
+    return splashErrBadArg;
+  }
+  colorBuf = (SplashColorPtr)gmallocn(yp + 1, w * nComps);
   if (srcAlpha) {
-    alphaBuf = (Guchar *)gmalloc((yp + 1) * w);
+    alphaBuf = (Guchar *)gmallocn(yp + 1, w);
   } else {
     alphaBuf = NULL;
   }

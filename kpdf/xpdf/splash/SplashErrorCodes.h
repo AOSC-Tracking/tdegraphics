@@ -31,4 +31,6 @@
 
 #define splashErrZeroImage       9      // image of 0x0
 
+#define splashErrBadArg          9	// bad argument
+
 #endif

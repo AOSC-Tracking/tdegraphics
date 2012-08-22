@@ -224,7 +224,7 @@ void FoFiType1::parse() {
 		code = code * 8 + (*p2 - '0');
 	      }
 	    }
-	    if (code < 256) {
+	    if (code >= 0 && code < 256) {
 	      for (p = p2; *p == ' ' || *p == '\t'; ++p) ;
 	      if (*p == '/') {
 		++p;
@@ -235,9 +235,14 @@ void FoFiType1::parse() {
 	    }
 	  }
 	} else {
-	  if (strtok(buf, " \t") &&
-	      (p = strtok(NULL, " \t\n\r")) && !strcmp(p, "def")) {
-	    break;
+	  p = strtok(buf, " \t\n\r");
+	  if (p)
+	  {
+	    if (!strcmp(p, "def")) break;
+	    if (!strcmp(p, "readonly")) break;
+	    // the spec does not says this but i'm mantaining old xpdf behaviour that accepts "foo def" as end of the encoding array
+	    p = strtok(buf, " \t\n\r");
+	    if (p && !strcmp(p, "def")) break;
 	  }
 	}
       }
