@@ -77,5 +77,6 @@ private:
 	int m_fileSize;
 	CameraFile *m_file;
 	bool actiondone, cameraopen;
+	bool m_modelSpecified;
 };
 #endif

@@ -91,6 +91,7 @@ m_camera(NULL)
 	m_context = gp_context_new();
 	actiondone = true;
 	cameraopen = false;
+	m_modelSpecified = true;
 	m_lockfile = locateLocal("tmp", "kamera");
 	idletime = 0;
 }
@@ -163,6 +164,10 @@ bool KameraProtocol::openCamera(TQString &str) {
 			::unlink(m_lockfile.utf8());
 			setTimeoutSpecialCommand(1);
 			kdDebug(7123) << "openCamera succeeded at " << getpid() << endl;
+			if (!m_modelSpecified) {
+				gp_camera_get_abilities(m_camera, &m_abilities);
+				m_modelSpecified = true;
+			}
 			cameraopen = true;
 		}
 	}
@@ -761,12 +766,13 @@ void KameraProtocol::setHost(const TQString& host, int port, const TQString& use
 		idx = gp_abilities_list_lookup_model(abilities_list, tocstr(user));
 		if (idx < 0) {
 			gp_abilities_list_free(abilities_list);
-			kdDebug(7123) << "Unable to get abilities for model: " << user << endl;
-			error(KIO::ERR_UNKNOWN, gp_result_as_string(idx));
-			return;
+			kdDebug(7123) << "Unable to get abilities for model: " << user << ", falling back to automatic model detection" << endl;
+			m_modelSpecified = false;
 		}
-		gp_abilities_list_get_abilities(abilities_list, idx, &m_abilities);
-		gp_abilities_list_free(abilities_list);
+		if (m_modelSpecified) {
+			gp_abilities_list_get_abilities(abilities_list, idx, &m_abilities);
+			gp_abilities_list_free(abilities_list);
+		}
 
 		// fetch port
 		GPPortInfoList *port_info_list;
@@ -800,7 +806,9 @@ void KameraProtocol::setHost(const TQString& host, int port, const TQString& use
 		// gp_camera_set_message_func(m_camera, ..., this)
 
 		// set model and port
-		gp_camera_set_abilities(m_camera, m_abilities);
+		if (m_modelSpecified) {
+			gp_camera_set_abilities(m_camera, m_abilities);
+		}
 		gp_camera_set_port_info(m_camera, port_info);
 		gp_camera_set_port_speed(m_camera, 0); // TODO: the value needs to be configurable
 		kdDebug(7123) << "Opening camera model " << user << " at " << host << endl;
