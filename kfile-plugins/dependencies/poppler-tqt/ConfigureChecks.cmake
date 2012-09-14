@@ -9,8 +9,8 @@ if( BUILD_KPDF )
 endif( )
 
 tde_save( CMAKE_REQUIRED_INCLUDES CMAKE_REQUIRED_LIBRARIES )
-set( CMAKE_REQUIRED_INCLUDES ${DBUS_TQT_INCLUDE_DIRS} ${TQT_INCLUDE_DIRS} ${QT_INCLUDE_DIRS})
-set( CMAKE_REQUIRED_LIBRARIES ${DBUS_TQT_LDFLAGS} ${TQT_LDFLAGS} ${QT_LDFLAGS} "-lpoppler" )
+set( CMAKE_REQUIRED_INCLUDES ${DBUS_TQT_INCLUDE_DIRS} ${TQT_INCLUDE_DIRS} ${QT_INCLUDE_DIRS} ${POPPLER_INCLUDE_DIRS})
+set( CMAKE_REQUIRED_LIBRARIES ${DBUS_TQT_LDFLAGS} ${TQT_LDFLAGS} ${QT_LDFLAGS} ${POPPLER_LDFLAGS} )
 check_cxx_source_compiles("
   #include <poppler/PSOutputDev.h>
   int main(int, char**) { int a; int b; PSOutputDev *psOut = new PSOutputDev(\"test\", (PDFDoc*)0, (XRef*)0, (Catalog*)0, NULL, 0, 0, psModePS, a, b); } "
