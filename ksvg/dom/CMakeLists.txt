@@ -68,6 +68,7 @@ install( FILES
     SVGTextPositioningElement.h SVGTitleElement.h SVGTransform.h SVGTransformList.h
     SVGTransformable.h SVGURIReference.h SVGUnitTypes.h SVGUseElement.h
     SVGVKernElement.h SVGViewElement.h SVGViewSpec.h SVGWindow.h SVGZoomAndPan.h
+    SVGZoomEvent.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/dom )
 
 

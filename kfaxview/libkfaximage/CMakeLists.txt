@@ -35,3 +35,10 @@ tde_add_library( kfaximage SHARED AUTOMOC
   LINK kparts-shared ${TQT_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
+
+##### headers ###################################
+
+install( FILES
+  kfaximage.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)
