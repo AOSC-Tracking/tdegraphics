@@ -75,7 +75,7 @@ class ImageCanvas: public TQScrollView
 {
     Q_OBJECT
   
-    Q_ENUMS( PopupIDs )
+    TQ_ENUMS( PopupIDs )
     TQ_PROPERTY( int brightness READ getBrightness WRITE setBrightness )
     TQ_PROPERTY( int contrast READ getContrast WRITE setContrast )
     TQ_PROPERTY( int gamma READ getGamma WRITE setGamma )
