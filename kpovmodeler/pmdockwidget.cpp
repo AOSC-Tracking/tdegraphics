@@ -2546,6 +2546,6 @@ void PMDockArea::virtual_hook( int, void* )
 { /*KMainWindow::virtual_hook( id, data );*/ }
 
 
-#ifndef NO_INCLUDE_TQMOCFILES // for TQt-only projects, because tmake doesn't take this name
+#ifndef NO_INCLUDE_MOCFILES // for TQt-only projects, because tmake doesn't take this name
 #include "pmdockwidget.moc"
 #endif
