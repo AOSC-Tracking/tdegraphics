@@ -295,7 +295,7 @@ void SVGColorImpl::setRGBColor(const DOM::DOMString &rgbColor)
 		setRGBColor(245, 255, 250);
 	else if(rgbColor == "mistyrose")
 		setRGBColor(255, 228, 225);
-	else if(rgbColor == "tqmoccasin")
+	else if(rgbColor == "moccasin")
 		setRGBColor(255, 228, 181);
 	else if(rgbColor == "navajowhite")
 		setRGBColor(255, 222, 173);
