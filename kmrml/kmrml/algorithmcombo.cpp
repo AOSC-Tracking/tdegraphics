@@ -22,7 +22,7 @@
 
 using namespace KMrml;
 
-// ### copycat of CollectionCombo... tqmoc can't handle templates unfortunately..
+// ### copycat of CollectionCombo... moc can't handle templates unfortunately..
 // could use base-class MrmlElement....
 
 AlgorithmCombo::AlgorithmCombo( TQWidget *parent, const char *name )
