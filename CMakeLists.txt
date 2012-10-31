@@ -49,8 +49,26 @@ OPTION( WITH_OPENEXR "Enable openexr support (kfile-plugins)" OFF )
 OPTION( WITH_PDF "Enable pdf support (kfile-plugins)" OFF )
 
 
-##### user requested modules ####################
+##### options comments ##########################
 
+# WITH_T1LIB   affects kpdf
+# WITH_T1LIB   description adds support for t1lb, a library for decoding
+#                          t1 fonts. If it is disabled or missing the freetype
+#                          library is used as a fallback implementation.
+#                          It is safe to disable this option. You shouldn't
+#                          lose any end-user functionality.
+# WITH_PAPER   affects kpdf
+# WITH_PAPER   description this library is only used to set some default
+#                          parameters of paper according to system settings.
+# WITH_TIFF    affects kfile-plugins(tiff)
+# WITH_OPENEXR affects kfile-plugins(exr)
+# WITH_PDF     affects kfile-plugins(pdf dependencies/poppler-tqt)
+
+# NOTE: It seems that libtiff was planned to be used in
+#       kviewshell(plugins/djvu) but isn't yet implemented
+
+
+##### user requested modules ####################
 
 option( BUILD_ALL "Build all" OFF )
 option( BUILD_DOC "Build documentation" ${BUILD_ALL} )
