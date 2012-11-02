@@ -9,7 +9,7 @@
 #
 #################################################
 
-project( libksane )
+project( libkscan )
 
 include( ConfigureChecks.cmake )
 
