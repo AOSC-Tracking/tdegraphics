@@ -635,7 +635,7 @@ size of the thumbnails if you are scanning many pages from a book.
 than in many other applications. Click the
 <guilabel>Gallery</guilabel> tab to open a small file browser. This is
 the folder <filename
-class="directory">~/.kde/share/apps/ScanImages/</filename> In the
+class="directory">~/.trinity/share/apps/ScanImages/</filename> In the
 lower portion of the window, your current subfolder in the gallery
 is shown. This is where all scanned images are first saved as
 files. When starting &kooka; for the first time, you will only see the
@@ -656,7 +656,7 @@ it will retain its original format. At present,
 
 ><para>If you do not want to use this method of managing your images
 in <filename
-class="directory">~/.kde/share/apps/ScanImages/</filename>, you can,
+class="directory">~/.trinity/share/apps/ScanImages/</filename>, you can,
 of course, save them to another location. To do this,
 <mousebutton>right</mousebutton> click the
 image name and select <guilabel>Save</guilabel>.  Choose any path

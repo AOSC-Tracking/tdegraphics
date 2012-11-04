@@ -21,7 +21,7 @@
 // from Konqueror and creates a query of the form
 // mrml://host.com/?relevant=url1;url2;url3;url4....
 // By default, the mrml URL is mrml://localhost", but you can override that
-// by editing ~/.kde/share/config/kio_mrmlrc and adding
+// by editing ~/.trinity/share/config/kio_mrmlrc and adding
 // [MRML Settings]
 // Default URL=mrml://url.to.your.giftserver.com
 //
