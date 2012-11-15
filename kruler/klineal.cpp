@@ -241,6 +241,34 @@ void KLineal::setupBackground() {
   mLabel->setErasePixmap(bgPixmap);
 }
 
+void KLineal::setupCursor() {
+  switch(mOrientation) {
+  case North:
+    mLabel->move(4, height()-mLabel->height()-4);
+    mColorLabel->move(mLabel->pos() + TQPoint(0, -20));
+    mCurrentCursor = mNorthCursor;
+    break;
+  case South:
+    mLabel->move(4, 4);
+    mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
+    mCurrentCursor = mSouthCursor;
+    break;
+  case East:
+    mLabel->move(4, 4);
+    mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
+    mCurrentCursor = mEastCursor;
+    break;
+  case West:
+    mLabel->move(width()-mLabel->width()-4, 4);
+    mColorLabel->move(mLabel->pos() + TQPoint(-5, 20));
+    mCurrentCursor = mWestCursor;
+    break;
+  }
+  if (mLenMenu)
+    mLenMenu->changeItem(FULLSCREENID, mOrientation % 2 ? i18n("&Full Screen Height") : i18n("&Full Screen Width"));
+  setCursor(mCurrentCursor);
+}
+
 void KLineal::setOrientation(int inOrientation) {
   TQRect r = frameGeometry();
   int nineties = (int)inOrientation - (int)mOrientation;
@@ -267,31 +295,7 @@ void KLineal::setOrientation(int inOrientation) {
 
   setGeometry(r);
   mOrientation = (inOrientation + 4) % 4;
-  switch(mOrientation) {
-  case North:
-    mLabel->move(4, height()-mLabel->height()-4);
-    mColorLabel->move(mLabel->pos() + TQPoint(0, -20));
-    mCurrentCursor = mNorthCursor;
-    break;
-  case South:
-    mLabel->move(4, 4);
-    mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
-    mCurrentCursor = mSouthCursor;
-    break;
-  case East:
-    mLabel->move(4, 4);
-    mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
-    mCurrentCursor = mEastCursor;
-    break;
-  case West:
-    mLabel->move(width()-mLabel->width()-4, 4);
-    mColorLabel->move(mLabel->pos() + TQPoint(-5, 20));
-    mCurrentCursor = mWestCursor;
-    break;
-  }
-  if (mLenMenu)
-    mLenMenu->changeItem(FULLSCREENID, mOrientation % 2 ? i18n("&Full Screen Height") : i18n("&Full Screen Width"));
-  setCursor(mCurrentCursor);
+  setupCursor();
   setupBackground();
   repaint();
 }
@@ -741,6 +745,17 @@ void KLineal::paintEvent(TQPaintEvent * /*inEvent*/) {
   painter.begin(this);
   drawScale(painter);
   painter.end();
+}
+
+void KLineal::readProperties(KConfig *cfg) {
+    mOrientation = cfg->readNumEntry("Orientation", South);
+    setupCursor();
+    setupBackground();
+    repaint();
+}
+
+void KLineal::saveProperties(KConfig* cfg) {
+    cfg->writeEntry("Orientation", mOrientation);
 }
 
 #include "klineal.moc"

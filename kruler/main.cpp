@@ -9,6 +9,17 @@
 
 #include "klineal.h"
 
+#define RESTORE_RULERS(type) {				\
+	int n = 1;					\
+	while (KMainWindow::canBeRestored(n)) {		\
+		type* ruler = new type;			\
+		ruler->restore(n);			\
+		a.setMainWidget(ruler);			\
+		ruler->show();				\
+		n++;					\
+	}						\
+}
+
 static const char homePageURL[] =
 	"http://www.snafu.de/~till/";
 static const char freeFormText[] =
@@ -40,9 +51,14 @@ int main(int argc, char *argv[])
 
 	KApplication a;
 
-  KLineal *ruler = new KLineal();
-  a.setMainWidget(ruler);
-  ruler->show();
+  if (a.isRestored()) {
+    RESTORE_RULERS(KLineal)
+  }
+  else {
+    KLineal *ruler = new KLineal();
+    a.setMainWidget(ruler);
+    ruler->show();
+  }
 
   return a.exec();
 }

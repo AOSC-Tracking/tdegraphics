@@ -44,8 +44,9 @@ public:
   TQPoint pos();
   int x();
   int y();
+
 protected:
-	void keyPressEvent(TQKeyEvent *e);
+  void keyPressEvent(TQKeyEvent *e);
   void mousePressEvent(TQMouseEvent *e);
   void mouseReleaseEvent(TQMouseEvent *e);
   void mouseMoveEvent(TQMouseEvent *e);
@@ -54,10 +55,14 @@ protected:
   void leaveEvent(TQEvent *e);
   void setupBackground();
 
+  // session management
+  virtual void saveProperties( KConfig *config );
+  virtual void readProperties( KConfig *config );
 
 private:
   void drawScale(TQPainter &painter);
   void reLength(int percentOfScreen);
+  void setupCursor();
   bool mDragging;
   TQPoint mLastClickPos;
   TQPoint mDragOffset;
@@ -79,7 +84,8 @@ private:
   TQCursor mDragCursor;
   KColorDialog mColorSelector;
   TQFont mScaleFont;
-	bool _clicked;
+  bool _clicked;
+
 public slots:
   void setOrientation(int);
   void setNorth();
