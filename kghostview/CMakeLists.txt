@@ -10,6 +10,7 @@
 #################################################
 
 add_subdirectory( data )
+add_subdirectory( dscparse )
 
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}

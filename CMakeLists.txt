@@ -113,7 +113,8 @@ set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 
 ##### tdegraphics directories ###################
 
-if( BUILD_KFILE_PLUGINS OR BUILD_GHOSTKVIEW )
+# kfile-plugins/ps requires dscparse-static library
+if( BUILD_KFILE_PLUGINS AND NOT BUILD_KGHOSTVIEW )
   add_subdirectory( kghostview/dscparse )
 endif( )
 
