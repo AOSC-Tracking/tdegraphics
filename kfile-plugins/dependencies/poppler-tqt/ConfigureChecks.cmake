@@ -1,11 +1,9 @@
 # Poppler
-if( BUILD_KPDF )
-  pkg_search_module( POPPLER poppler )
-  if( POPPLER_FOUND )
-    set( HAVE_POPPLER 1 )
-  else( )
-    tde_message_fatal( "poppler is required, but was not found on your system" )
-  endif( )
+pkg_search_module( POPPLER poppler )
+if( POPPLER_FOUND )
+  set( HAVE_POPPLER 1 )
+else( )
+  tde_message_fatal( "poppler is required, but was not found on your system" )
 endif( )
 
 tde_save( CMAKE_REQUIRED_INCLUDES CMAKE_REQUIRED_LIBRARIES )
