@@ -41,7 +41,7 @@ namespace {
 	const size_t numberOfMagnifications = ( sizeof( allowedMagnifications ) / sizeof( allowedMagnifications[ 0 ] ) );
 }
 
-DisplayOptions DisplayOptions::parse( KCmdLineArgs* args )
+DisplayOptions DisplayOptions::parse( TDECmdLineArgs* args )
 {
 	DisplayOptions res;
 #define CHECK_ORIENTATION( tag, value ) \

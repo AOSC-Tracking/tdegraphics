@@ -48,8 +48,8 @@ int main(int argc, char** argv)
     about.addCredit("Derek Noonburg", I18N_NOOP("Xpdf author"), 0, "http://www.foolabs.com/xpdf/");
     about.addCredit("Marco Martin", I18N_NOOP("Icon"), 0, "m4rt@libero.it");
 
-    KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineArgs::addCmdLineOptions( options );
+    TDECmdLineArgs::init(argc, argv, &about);
+    TDECmdLineArgs::addCmdLineOptions( options );
     KApplication app;
 
     // see if we are starting with session management
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
         RESTORE(KPDF::Shell);
     } else {
         // no session.. just start up normally
-        KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+        TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs();
 
         if (args->count() == 0)
         {

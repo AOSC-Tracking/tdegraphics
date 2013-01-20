@@ -49,8 +49,8 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     about.addCredit( "Rober Hamberger", 0, "rh474@bingo-ev.de" );
     about.addCredit( "Thorsten Scheuermann", 0, "uddn@rz.uni-karlsruhe.de" );
 
-    KCmdLineArgs::init( argc, argv, &about );
-    KCmdLineArgs::addCmdLineOptions( options );
+    TDECmdLineArgs::init( argc, argv, &about );
+    TDECmdLineArgs::addCmdLineOptions( options );
 
     KApplication app;
 

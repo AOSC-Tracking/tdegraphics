@@ -48,8 +48,8 @@ int main(int argc, char** argv)
   about.addCredit ("Philipp Lehmann", I18N_NOOP("Testing and bug reporting."));
   about.addCredit ("Wilfried Huss", I18N_NOOP("Re-organisation of source code."));
 
-  KCmdLineArgs::init(argc, argv, &about);
-  KCmdLineArgs::addCmdLineOptions(options);
+  TDECmdLineArgs::init(argc, argv, &about);
+  TDECmdLineArgs::addCmdLineOptions(options);
   KApplication app;
 
   // see if we are starting with session management
@@ -59,7 +59,7 @@ int main(int argc, char** argv)
   }
   else
   {
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs();
 
     if (args->isSet("unique"))
     {

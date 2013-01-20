@@ -21,7 +21,7 @@
 #include <tqvaluelist.h>
 #include "dscparse_adapter.h"
 #include <kdemacros.h>
-class KCmdLineArgs;
+class TDECmdLineArgs;
 class KConfig;
 
 class KDE_EXPORT DisplayOptions 
@@ -67,7 +67,7 @@ class KDE_EXPORT DisplayOptions
 	/** 
 	 * Parses command line options.
 	 */
-	static DisplayOptions parse ( KCmdLineArgs * );
+	static DisplayOptions parse ( TDECmdLineArgs * );
 	/**
 	 * Transforms the object in a string representation.
 	 * Useful for storing in config files, for example.

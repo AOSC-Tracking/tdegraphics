@@ -62,8 +62,8 @@ int main(int argc, char **argv)
 		   I18N_NOOP("DCOP-Interface, major improvements"),
 		   "kebekus@kde.org");
 
-  KCmdLineArgs::init(argc, argv, &about);
-  KCmdLineArgs::addCmdLineOptions( options ); // Add my own options.
+  TDECmdLineArgs::init(argc, argv, &about);
+  TDECmdLineArgs::addCmdLineOptions( options ); // Add my own options.
   KApplication app;
 
   // see if we are starting with session management
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
   }
   else
   {
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
     if (args->isSet("unique")){
       // With --unique, we need one argument.

@@ -1658,8 +1658,8 @@ int main (int argc, char **argv)
   aboutData.addCredit( "Helge Deller", I18N_NOOP( "Printing Rewrite, lots of code "
       "cleanups and fixes"), "deller@kde.org" );
 
-  KCmdLineArgs::init(argc, argv, &aboutData);
-  KCmdLineArgs::addCmdLineOptions( options );
+  TDECmdLineArgs::init(argc, argv, &aboutData);
+  TDECmdLineArgs::addCmdLineOptions( options );
 
   MyApp a;
 

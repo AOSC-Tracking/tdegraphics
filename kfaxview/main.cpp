@@ -68,8 +68,8 @@ int main(int argc, char** argv)
                    I18N_NOOP("Fax file loading"),
                    "deller@gmx.de");
 
-  KCmdLineArgs::init(argc, argv, &about);
-  KCmdLineArgs::addCmdLineOptions(options);
+  TDECmdLineArgs::init(argc, argv, &about);
+  TDECmdLineArgs::addCmdLineOptions(options);
   KApplication app;
 
   // see if we are starting with session management
@@ -79,7 +79,7 @@ int main(int argc, char** argv)
   }
   else
   {
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs();
 
     if (args->isSet("unique"))
     {

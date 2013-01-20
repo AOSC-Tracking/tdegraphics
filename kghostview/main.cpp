@@ -45,10 +45,10 @@ static KCmdLineOptions options[] =
 
 int main( int argc, char** argv )
 {
-    KCmdLineArgs::init( argc, argv, KGVPart::createAboutData() );
-    KCmdLineArgs::addCmdLineOptions( options );
+    TDECmdLineArgs::init( argc, argv, KGVPart::createAboutData() );
+    TDECmdLineArgs::addCmdLineOptions( options );
     KApplication app;
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs();
 
     if( kapp->isRestored() )
 	RESTORE( KGVShell )

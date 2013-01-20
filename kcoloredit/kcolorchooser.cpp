@@ -48,8 +48,8 @@ int main(int argc, char *argv[])
 		version, description, KAboutData::License_BSD,
 		"(c) 2000, Waldo Bastian");
   aboutData.addAuthor("Waldo Bastian",0, "bastian@kde.org");
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options );
+  TDECmdLineArgs::init( argc, argv, &aboutData );
+  TDECmdLineArgs::addCmdLineOptions( options );
 
   KApplication app;
   
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
   dlg.show();
   app.exec();
 
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
   const  TQColor c = dlg.color();
   if ( args->isSet("print") && c.isValid() ) {
       std::cout << TQString(c.name()).utf8().data() << std::endl;

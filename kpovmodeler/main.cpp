@@ -39,12 +39,12 @@ int main( int argc, char* argv[] )
 {
    PMShell* shell = 0;
 
-   KCmdLineArgs::init( argc, argv, PMFactory::aboutData( ) );
-   KCmdLineArgs::addCmdLineOptions( options );
+   TDECmdLineArgs::init( argc, argv, PMFactory::aboutData( ) );
+   TDECmdLineArgs::addCmdLineOptions( options );
 
    KApplication app;
 
-   KCmdLineArgs* args = KCmdLineArgs::parsedArgs( );
+   TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs( );
 
    if( !args->isSet( "-opengl" ) )
       PMRenderManager::disableOpenGL( );

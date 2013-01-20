@@ -51,9 +51,9 @@ int main(int argc, char **argv)
   aboutData.addCredit( "Nadeem Hasan", I18N_NOOP("Region Grabbing\nReworked GUI"),
       "nhasan@kde.org" );
 
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  TDECmdLineArgs::init( argc, argv, &aboutData );
+  TDECmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+  TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
   KApplication app;
 

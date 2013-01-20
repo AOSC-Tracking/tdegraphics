@@ -81,15 +81,15 @@ int main( int argc, char *argv[] )
    about.addAuthor( "Mat Colton", I18N_NOOP("graphics, web"), "mat@colton.de" );
    about.setLicenseText( license );
 
-   KCmdLineArgs::init(argc, argv, &about);
-   KCmdLineArgs::addCmdLineOptions( options ); // Add my own options.
+   TDECmdLineArgs::init(argc, argv, &about);
+   TDECmdLineArgs::addCmdLineOptions( options ); // Add my own options.
 
    KApplication app;
    KGlobal::locale()->insertCatalogue("libkscan");
    KImageIO::registerFormats();
    KIconLoader *loader = KGlobal::iconLoader();
 
-   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+   TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
    TQCString  devToUse = args->getOption( "d" );
    if( args->isSet("g") )
    {

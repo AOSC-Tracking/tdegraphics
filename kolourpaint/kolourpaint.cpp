@@ -173,8 +173,8 @@ int main (int argc, char *argv [])
     aboutData.addCredit ("Michele");
 
 
-    KCmdLineArgs::init (argc, argv, &aboutData);
-    KCmdLineArgs::addCmdLineOptions (cmdLineOptions);
+    TDECmdLineArgs::init (argc, argv, &aboutData);
+    TDECmdLineArgs::addCmdLineOptions (cmdLineOptions);
 
     KApplication app;
 
@@ -205,7 +205,7 @@ int main (int argc, char *argv [])
     else
     {
         kpMainWindow *mainWindow;
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs ();
+        TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs ();
 
         if (args->count () >= 1)
         {

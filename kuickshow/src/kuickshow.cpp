@@ -119,7 +119,7 @@ KuickShow::KuickShow( const char *name )
     bool isDir = false; // true if we get a directory on the commandline
 
     // parse commandline options
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
     // files to display
     // either a directory to display, an absolute path, a relative path, or a URL

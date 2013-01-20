@@ -54,8 +54,8 @@ int main(int argc, char **argv)
       "Lots of fixes and cleanup", "nhasan@nadmm.com" );
   aboutData.addCredit( "Adrian Page", I18N_NOOP("Bug fixes and GUI tidy up"),
       "Adrian.Page@tesco.net" );
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+  TDECmdLineArgs::init( argc, argv, &aboutData );
+  TDECmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 
   KApplication a;
 
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
   }
   else
   {
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
     for(int i = 0; i < args->count(); i++)
     {
         KIconEdit *ki = new KIconEdit(args->url(i), "kiconedit");

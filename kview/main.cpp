@@ -40,15 +40,15 @@ extern "C" KDE_EXPORT int kdemain( int argc, char ** argv )
 	about.addAuthor( "Matthias Kretz", I18N_NOOP( "Maintainer" ), "kretz@kde.org" );
 	about.addAuthor( "Sirtaj Singh Kang", I18N_NOOP( "started it all" ), "taj@kde.org" );
 	about.addAuthor( "Simon Hausmann", 0, "hausmann@kde.org" );
-	KCmdLineArgs::init( argc, argv, &about );
-	KCmdLineArgs::addCmdLineOptions( options );
+	TDECmdLineArgs::init( argc, argv, &about );
+	TDECmdLineArgs::addCmdLineOptions( options );
 	KApplication app;
 
 	if( app.isRestored() )
 		RESTORE( KView )
 	else
 	{
-		KCmdLineArgs * args = KCmdLineArgs::parsedArgs();
+		TDECmdLineArgs * args = TDECmdLineArgs::parsedArgs();
 
 		KView * kview = new KView;
 		kview->show();

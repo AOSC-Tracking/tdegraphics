@@ -19,15 +19,15 @@ int main(int argc, char **argv)
 {
     KAboutData about("kimageviewertest", I18N_NOOP("KImageViewerTest"), version, description, KAboutData::License_GPL, "(C) 2001 Matthias Kretz", 0, 0, "kretz@kde.org");
     about.addAuthor( "Matthias Kretz", 0, "kretz@kde.org" );
-    KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineArgs::addCmdLineOptions( options );
+    TDECmdLineArgs::init(argc, argv, &about);
+    TDECmdLineArgs::addCmdLineOptions( options );
     KApplication app;
 
     if (app.isRestored())
         RESTORE(KImageViewerTest)
     else
     {
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+        TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
         if ( args->count() == 0 )
         {

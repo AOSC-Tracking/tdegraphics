@@ -165,7 +165,7 @@ int viewfaxmain()
     /* TODO Do I need to know this: */
     defaultpage.expander = g31expand;
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
     if (args->isSet("height"))
     {
@@ -234,7 +234,7 @@ int viewfaxmain()
     }
 
     if (defaultpage.expander == g4expand && defaultpage.height == 0) {
-	KCmdLineArgs::usage("--height value is required to interpret raw g4 faxes\n");
+	TDECmdLineArgs::usage("--height value is required to interpret raw g4 faxes\n");
     }
 
     firstpage = lastpage = thispage = helppage = auxpage =  0;

@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
 		homePageURL);
   aboutData.addAuthor("Till Krech",I18N_NOOP("Programming"), "till@snafu.de");
   aboutData.addCredit("Gunnstein Lye",I18N_NOOP("Initial port to KDE 2"), "gl@ez.no");
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+  TDECmdLineArgs::init( argc, argv, &aboutData );
+  TDECmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 
 	KApplication a;
 
