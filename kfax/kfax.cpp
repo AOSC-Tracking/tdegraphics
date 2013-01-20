@@ -160,7 +160,7 @@ bool buttondown;
 
 bool MyApp::x11EventFilter( XEvent * ev)
 {
-  if (KApplication::x11EventFilter(ev))
+  if (TDEApplication::x11EventFilter(ev))
     return TRUE;
 
   if (ev->type  ==  ButtonRelease){

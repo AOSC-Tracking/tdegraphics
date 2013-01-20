@@ -52,7 +52,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     TDECmdLineArgs::init( argc, argv, &about );
     TDECmdLineArgs::addCmdLineOptions( options );
 
-    KApplication app;
+    TDEApplication app;
 
     if ( app.isRestored() ) {
         (new KuickShow())->restore( 1, false ); // don't show automatically

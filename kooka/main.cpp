@@ -84,7 +84,7 @@ int main( int argc, char *argv[] )
    TDECmdLineArgs::init(argc, argv, &about);
    TDECmdLineArgs::addCmdLineOptions( options ); // Add my own options.
 
-   KApplication app;
+   TDEApplication app;
    KGlobal::locale()->insertCatalogue("libkscan");
    KImageIO::registerFormats();
    KIconLoader *loader = KGlobal::iconLoader();

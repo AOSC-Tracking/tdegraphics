@@ -46,7 +46,7 @@ class TQScrollBar;
 
 typedef KToolBar::BarPosition BarPosition;
 
-class MyApp:public KApplication {
+class MyApp:public TDEApplication {
 public:
    virtual bool x11EventFilter( XEvent * );
 };

@@ -284,7 +284,7 @@ bool MrmlPart::openURL( const KURL& url )
                                             "kmrml_ask_configure_gift" )
                  == KMessageBox::Yes )
             {
-                KApplication::tdeinitExec( "kcmshell",
+                TDEApplication::tdeinitExec( "kcmshell",
                                            TQString::fromLatin1("kcmkmrml"));
                 setStatus( NeedCollection );
                 return false;

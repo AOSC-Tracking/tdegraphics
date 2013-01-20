@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 
   TDECmdLineArgs::init(argc, argv, &about);
   TDECmdLineArgs::addCmdLineOptions( options ); // Add my own options.
-  KApplication app;
+  TDEApplication app;
 
   // see if we are starting with session management
   if (app.isRestored())

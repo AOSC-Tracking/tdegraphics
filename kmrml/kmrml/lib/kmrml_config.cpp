@@ -94,7 +94,7 @@ bool Config::sync()
     return notifySlaves;
 
     // This moved to kcontrol/MainPage::save() so we don't have to link against
-    // KIO and need a full KApplication instance to work (so that the tiny
+    // KIO and need a full TDEApplication instance to work (so that the tiny
     // mrmlsearch binary can also use this class)
     // tell the ioslaves about the new configuration
 //     if ( notifySlaves )

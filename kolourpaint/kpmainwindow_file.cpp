@@ -1352,7 +1352,7 @@ void kpMainWindow::setAsWallpaper (bool centered)
     // I'm going to all this trouble because the user might not have tdebase
     // installed so tdebase/kdesktop/KBackgroundIface.h might not be around
     // to be compiled in (where user == developer :))
-    if (!KApplication::dcopClient ()->send ("kdesktop", "KBackgroundIface",
+    if (!TDEApplication::dcopClient ()->send ("kdesktop", "KBackgroundIface",
                                             "setWallpaper(TQString,int)", data))
     {
         KMessageBox::sorry (this, i18n ("Could not change wallpaper."));

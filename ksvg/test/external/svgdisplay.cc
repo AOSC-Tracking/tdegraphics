@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	KURL url = args->url(0);
-	KApplication a( argc, argv );
+	TDEApplication a( argc, argv );
 	SVGTestWidget *w = new SVGTestWidget(url);
 	a.setMainWidget(w);
 	w->show();

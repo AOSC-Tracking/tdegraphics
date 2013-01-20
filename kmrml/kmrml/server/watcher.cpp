@@ -34,15 +34,15 @@ Watcher::Watcher( const TQCString& name )
     m_daemons.setAutoDelete( true );
 
     // safety, for clients that die without unregistering
-    KApplication::dcopClient()->setNotifications( true );
-    connect( KApplication::dcopClient(),
+    TDEApplication::dcopClient()->setNotifications( true );
+    connect( TDEApplication::dcopClient(),
              TQT_SIGNAL( applicationRemoved( const TQCString& )),
              TQT_SLOT( slotAppUnregistered( const TQCString& )));
 }
 
 Watcher::~Watcher()
 {
-    KApplication::dcopClient()->setNotifications( false );
+    TDEApplication::dcopClient()->setNotifications( false );
 }
 
 bool Watcher::requireDaemon( const TQCString& clientAppId,
@@ -51,7 +51,7 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
                              uint timeout /* seconds */,
                              int restartOnFailure )
 {
-    if ( !KApplication::dcopClient()->isApplicationRegistered( clientAppId ) )
+    if ( !TDEApplication::dcopClient()->isApplicationRegistered( clientAppId ) )
         kdWarning() << "Watcher::requireDaemon: " << daemonKey
                     << ": Client AppID is not registered with DCOP: "
                     << clientAppId << endl;

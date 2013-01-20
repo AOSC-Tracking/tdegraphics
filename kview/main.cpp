@@ -42,7 +42,7 @@ extern "C" KDE_EXPORT int kdemain( int argc, char ** argv )
 	about.addAuthor( "Simon Hausmann", 0, "hausmann@kde.org" );
 	TDECmdLineArgs::init( argc, argv, &about );
 	TDECmdLineArgs::addCmdLineOptions( options );
-	KApplication app;
+	TDEApplication app;
 
 	if( app.isRestored() )
 		RESTORE( KView )

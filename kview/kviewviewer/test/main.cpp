@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     about.addAuthor( "Matthias Kretz", 0, "kretz@kde.org" );
     TDECmdLineArgs::init(argc, argv, &about);
     TDECmdLineArgs::addCmdLineOptions( options );
-    KApplication app;
+    TDEApplication app;
 
     if (app.isRestored())
         RESTORE(Test)

@@ -56,7 +56,7 @@
 
 #include <kglobal.h>
 
-#define kApp KApplication::kApplication()
+#define kApp TDEApplication::kApplication()
 
 KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
   : DCOPObject("interface"), 

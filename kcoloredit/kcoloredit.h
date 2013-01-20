@@ -44,7 +44,7 @@ class KColorEditView;
   * KColorEditApp reimplements the methods that KMainWindow provides for main window handling and supports
   * full session management as well as keyboard accelerator configuration by using KAccel.
   * @see KMainWindow
-  * @see KApplication
+  * @see TDEApplication
   * @see KConfig
   * @see KAccel
   *
@@ -85,7 +85,7 @@ class KColorEditApp : public KMainWindow
     void initActions();
 
     /** initMenuBar creates the menubar and inserts the menupopups as well as creating the helpMenu.
-     * @see KApplication#getHelpMenu
+     * @see TDEApplication#getHelpMenu
      */
     void initStatusBar();
     /** initializes the document object of the main window that is connected to the view in initView().

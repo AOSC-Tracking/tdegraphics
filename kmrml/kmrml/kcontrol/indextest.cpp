@@ -36,7 +36,7 @@ void IndexTest::slotProgress( int percent, const TQString& message )
 
 int main( int argc, char **argv )
 {
-    KApplication app( argc, argv, "indextest" );
+    TDEApplication app( argc, argv, "indextest" );
     IndexTest *test = new IndexTest();
 
     return app.exec();

@@ -57,7 +57,7 @@ int main(int argc, char **argv)
   TDECmdLineArgs::init( argc, argv, &aboutData );
   TDECmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 
-  KApplication a;
+  TDEApplication a;
 
 //  setSignalHandler(signalHandler);
 

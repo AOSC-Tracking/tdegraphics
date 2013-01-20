@@ -499,12 +499,12 @@ void kpTool::beginInternal ()
         m_beganDraw = false;
 
 
-        uint keyState = KApplication::keyboardModifiers ();
+        uint keyState = TDEApplication::keyboardModifiers ();
 
-        m_shiftPressed = (keyState & KApplication::ShiftModifier);
-        m_controlPressed = (keyState & KApplication::ControlModifier);
+        m_shiftPressed = (keyState & TDEApplication::ShiftModifier);
+        m_controlPressed = (keyState & TDEApplication::ControlModifier);
 
-        // TODO: Can't do much about ALT - unless it's always KApplication::Modifier1?
+        // TODO: Can't do much about ALT - unless it's always TDEApplication::Modifier1?
         //       Ditto for everywhere else where I set SHIFT & CTRL but not alt.
         m_altPressed = false;
     }
@@ -1372,12 +1372,12 @@ void kpTool::keyUpdateModifierState (TQKeyEvent *e)
     #if DEBUG_KP_TOOL && 0
         kdDebug () << "\t\tmodifiers not changed - figure out the truth" << endl;
     #endif
-        uint keyState = KApplication::keyboardModifiers ();
+        uint keyState = TDEApplication::keyboardModifiers ();
 
-        setShiftPressed (keyState & KApplication::ShiftModifier);
-        setControlPressed (keyState & KApplication::ControlModifier);
+        setShiftPressed (keyState & TDEApplication::ShiftModifier);
+        setControlPressed (keyState & TDEApplication::ControlModifier);
 
-        // TODO: Can't do much about ALT - unless it's always KApplication::Modifier1?
+        // TODO: Can't do much about ALT - unless it's always TDEApplication::Modifier1?
         //       Ditto for everywhere else where I set SHIFT & CTRL but not alt.
         setAltPressed (e->stateAfter () & TQt::AltButton);
     }

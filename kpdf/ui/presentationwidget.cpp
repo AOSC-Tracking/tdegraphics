@@ -890,7 +890,7 @@ const KPDFPageTransition PresentationWidget::defaultTransition( int type ) const
         }
         case KpdfSettings::EnumSlidesTransition::Random:
         {
-            return defaultTransition( KApplication::random() % 18 );
+            return defaultTransition( TDEApplication::random() % 18 );
             break;
         }
         case KpdfSettings::EnumSlidesTransition::SplitHorizontalIn:

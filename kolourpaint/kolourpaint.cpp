@@ -176,7 +176,7 @@ int main (int argc, char *argv [])
     TDECmdLineArgs::init (argc, argv, &aboutData);
     TDECmdLineArgs::addCmdLineOptions (cmdLineOptions);
 
-    KApplication app;
+    TDEApplication app;
 
 
     // mainly for changing wallpaper :)

@@ -55,7 +55,7 @@ int main(int argc, char **argv)
   TDECmdLineArgs::addCmdLineOptions( options ); // Add our own options.
   TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
-  KApplication app;
+  TDEApplication app;
 
   KImageIO::registerFormats();
 

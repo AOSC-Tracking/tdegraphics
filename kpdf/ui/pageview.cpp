@@ -1192,7 +1192,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                     if (!client->isApplicationRegistered("kttsd"))
                     {
                         TQString error;
-                        if (KApplication::startServiceByDesktopName("kttsd", TQStringList(), &error))
+                        if (TDEApplication::startServiceByDesktopName("kttsd", TQStringList(), &error))
                         {
                             d->messageWindow->display( i18n("Starting KTTSD Failed: %1").arg(error) );
                             KpdfSettings::setUseKTTSD(false);

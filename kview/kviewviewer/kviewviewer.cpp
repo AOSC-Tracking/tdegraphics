@@ -861,7 +861,7 @@ void KViewViewer::switchBlendEffect()
 		m_pCanvas->setBlendEffect( 0 );
 	else
 	{
-		unsigned int num = KApplication::random() % m_vEffects.size();
+		unsigned int num = TDEApplication::random() % m_vEffects.size();
 		m_pCanvas->setBlendEffect( m_vEffects[ num ] );
 	}
 }

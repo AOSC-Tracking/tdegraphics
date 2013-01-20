@@ -391,7 +391,7 @@ void KViewPresenter::shuffle()
 		listview->takeItem( item );
 	}
 	while( ! items.isEmpty() )
-		listview->insertItem( items.take( KApplication::random() % items.count() ) );
+		listview->insertItem( items.take( TDEApplication::random() % items.count() ) );
 }
 
 void KViewPresenter::closeAll()

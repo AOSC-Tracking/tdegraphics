@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 	
-	KApplication a(argc, argv);
+	TDEApplication a(argc, argv);
 	(void) new Worker(args->url(0));
 	return a.exec();
 }
