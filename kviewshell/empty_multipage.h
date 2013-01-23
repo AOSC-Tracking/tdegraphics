@@ -41,7 +41,7 @@ public:
   /// opens a file
   virtual bool openFile() { return false; }
 
-  static KAboutData* createAboutData();
+  static TDEAboutData* createAboutData();
 
 private:
   EmptyRenderer emptyRenderer;

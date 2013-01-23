@@ -167,11 +167,11 @@ KViewViewer::~KViewViewer()
 	delete m_pBuffer;
 }
 
-KAboutData * KViewViewer::createAboutData()
+TDEAboutData * KViewViewer::createAboutData()
 {
-	KAboutData * aboutData  = new KAboutData( "kviewviewer", I18N_NOOP( "KView" ),
+	TDEAboutData * aboutData  = new TDEAboutData( "kviewviewer", I18N_NOOP( "KView" ),
 			KVIEW_VERSION, I18N_NOOP( "TDE Image Viewer Part" ),
-			KAboutData::License_GPL,
+			TDEAboutData::License_GPL,
 			I18N_NOOP("(c) 1997-2002, The KView Developers") );
 	aboutData->addAuthor( "Matthias Kretz", I18N_NOOP( "Maintainer" ), "kretz@kde.org" );
 	aboutData->addAuthor( "Sirtaj Singh Kang", I18N_NOOP( "started it all" ), "taj@kde.org" );
@@ -743,7 +743,7 @@ void KViewViewer::slotDel()
 class PopupGUIClient : public KXMLGUIClient
 {
 	public:
-		PopupGUIClient( KInstance *inst, const TQString &doc )
+		PopupGUIClient( TDEInstance *inst, const TQString &doc )
 		{
 			setInstance( inst );
 			setXML( doc );

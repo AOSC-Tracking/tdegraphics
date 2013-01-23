@@ -119,7 +119,7 @@ public:
   This member returns a structure that contains information about the
   authors of the implementation
   */
-  static KAboutData* createAboutData();
+  static TDEAboutData* createAboutData();
 
   /** Re-implementation of the print method */
   virtual void print();

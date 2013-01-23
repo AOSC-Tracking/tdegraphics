@@ -66,7 +66,7 @@ extern "C"
     }
 }
 
-KInstance * PartFactory::s_instance = 0L;
+TDEInstance * PartFactory::s_instance = 0L;
 
 PartFactory::PartFactory()
     : KParts::Factory()
@@ -81,10 +81,10 @@ PartFactory::~PartFactory()
     s_instance = 0L;
 }
 
-KInstance * PartFactory::instance()
+TDEInstance * PartFactory::instance()
 {
     if ( !s_instance ) {
-        s_instance = new KInstance( "kmrml" );
+        s_instance = new TDEInstance( "kmrml" );
         KGlobal::locale()->insertCatalogue( "kmrml" );
     }
     return s_instance;
@@ -830,14 +830,14 @@ void MrmlPart::restoreState( TQDataStream& stream )
     m_url = url;
 }
 
-KAboutData * MrmlPart::createAboutData()
+TDEAboutData * MrmlPart::createAboutData()
 {
-    KAboutData *data = new KAboutData(
+    TDEAboutData *data = new TDEAboutData(
         "kmrml",
         I18N_NOOP("MRML Client for TDE"),
         KMRML_VERSION,
         I18N_NOOP("A tool to search for images by their content"),
-        KAboutData::License_GPL,
+        TDEAboutData::License_GPL,
         I18N_NOOP("(c) 2001-2002, Carsten Pfeiffer"),
         0,
         I18N_NOOP("http://devel-home.kde.org/~pfeiffer/kmrml/") );

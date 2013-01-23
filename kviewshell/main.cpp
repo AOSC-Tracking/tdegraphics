@@ -34,8 +34,8 @@ static const char description[] = I18N_NOOP("Generic framework for viewer applic
 
 int main(int argc, char **argv)
 {
-  KAboutData about ("kviewshell", I18N_NOOP("KViewShell"), "0.6",
-		    description, KAboutData::License_GPL,
+  TDEAboutData about ("kviewshell", I18N_NOOP("KViewShell"), "0.6",
+		    description, TDEAboutData::License_GPL,
 		    "(C) 2000, Matthias Hoelzer-Kluepfel\n"
                     "(C) 2004-2005, Wilfried Huss",
 		    I18N_NOOP("Displays various document formats. "

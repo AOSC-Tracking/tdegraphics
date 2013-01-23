@@ -24,8 +24,8 @@
 #include <kparts/factory.h>
 #include <kparts/browserextension.h>
 
-class KAboutData;
-class KInstance;
+class TDEAboutData;
+class TDEInstance;
 
 class KSVGPluginFactory : public KParts::Factory
 {
@@ -37,11 +37,11 @@ public:
 	
 	virtual KParts::Part *createPartObject(TQWidget *parentWidget = 0, const char *widgetName = 0, TQObject *parent = 0, const char *name = 0, const char *classname = "KParts::Part", const TQStringList &args = TQStringList());
 	
-	static KInstance *instance();
+	static TDEInstance *instance();
 
 private:
-	static KInstance *s_instance;
-	static KAboutData *s_about;
+	static TDEInstance *s_instance;
+	static TDEAboutData *s_about;
 };
 
 class KSVGPluginBrowserExtension : public KParts::BrowserExtension

@@ -21,7 +21,7 @@
 
 #include <kcmodule.h>
 
-class KAboutData;
+class TDEAboutData;
 class KURLRequester;
 
 namespace KMrmlConfig

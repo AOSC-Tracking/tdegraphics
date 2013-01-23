@@ -10,7 +10,7 @@
 
 	* kimagecanvas.cpp:
 		Fix checkBounds() to always keep the aspect ratio.
-		Create the factory with it's own KInstance.
+		Create the factory with it's own TDEInstance.
 	* kimagecanvas.{h,cpp}:
 		New method boundImageTo( QSize ). Fits the image into the
 		requested width and height.

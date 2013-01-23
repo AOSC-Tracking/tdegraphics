@@ -73,8 +73,8 @@ static KCmdLineOptions options[] =
 
 int main( int argc, char *argv[] )
 {
-   KAboutData about("kooka", I18N_NOOP("Kooka"), KOOKA_VERSION, I18N_NOOP(description),
-		    KAboutData::License_GPL_V2, "(C) 2000 Klaas Freitag", 0,
+   TDEAboutData about("kooka", I18N_NOOP("Kooka"), KOOKA_VERSION, I18N_NOOP(description),
+		    TDEAboutData::License_GPL_V2, "(C) 2000 Klaas Freitag", 0,
 		    I18N_NOOP("http://kooka.kde.org"));
 
    about.addAuthor( "Klaas Freitag", I18N_NOOP("developer"), "freitag@suse.de" );

@@ -38,7 +38,7 @@ class PMPluginWorkaround : public Plugin
 {
 public:
    PMPluginWorkaround( ) : Plugin( 0, 0 ) { };
-   static TQValueList<Plugin::PluginInfo> installedPlugins( const KInstance* instance )
+   static TQValueList<Plugin::PluginInfo> installedPlugins( const TDEInstance* instance )
    {
       return pluginInfos( instance );
    }

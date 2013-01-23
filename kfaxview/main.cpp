@@ -50,8 +50,8 @@ static const char description[] = I18N_NOOP("A previewer for Fax files.");
 
 int main(int argc, char** argv)
 {
-  KAboutData about ("kfaxview", I18N_NOOP("KFaxView"), "3.5",
-                    description, KAboutData::License_GPL,
+  TDEAboutData about ("kfaxview", I18N_NOOP("KFaxView"), "3.5",
+                    description, TDEAboutData::License_GPL,
                     "Stephan Kebekus, Helge Deller",
                     I18N_NOOP("Fax-G3 plugin for the KViewShell document viewer framework."));
 

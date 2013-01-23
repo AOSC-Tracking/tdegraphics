@@ -42,8 +42,8 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char **argv)
 {
-  KAboutData aboutData( "kiconedit", I18N_NOOP("KIconEdit"),
-    VERSION, description, KAboutData::License_GPL,
+  TDEAboutData aboutData( "kiconedit", I18N_NOOP("KIconEdit"),
+    VERSION, description, TDEAboutData::License_GPL,
     "(c) 1998, Thomas Tanghus");
 
   aboutData.addAuthor("Thomas Tanghus",0, "tanghus@kde.org");

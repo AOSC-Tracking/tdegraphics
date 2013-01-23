@@ -40,8 +40,8 @@ extern "C"
 	}
 }
 
-KInstance *KSVGPluginFactory::s_instance = 0;
-KAboutData *KSVGPluginFactory::s_about = 0;
+TDEInstance *KSVGPluginFactory::s_instance = 0;
+TDEAboutData *KSVGPluginFactory::s_about = 0;
 
 KSVGPluginFactory::KSVGPluginFactory(TQObject *parent, const char *name) : KParts::Factory(parent, name)
 {
@@ -75,16 +75,16 @@ KParts::Part *KSVGPluginFactory::createPartObject(TQWidget *parentWidget, const 
 	return new KSVGPlugin(parentWidget, wname, parent, name, width, height);
 }
 
-KInstance *KSVGPluginFactory::instance()
+TDEInstance *KSVGPluginFactory::instance()
 {
 	if(!s_instance)
 	{
-		s_about = new KAboutData("ksvg", I18N_NOOP("KSVG"), "0.1", "KSVG\nFreedom for veKtors",KAboutData::License_GPL_V2,"(c) 2001-2003, The KSVG Team",0,"http://svg.kde.org");
+		s_about = new TDEAboutData("ksvg", I18N_NOOP("KSVG"), "0.1", "KSVG\nFreedom for veKtors",TDEAboutData::License_GPL_V2,"(c) 2001-2003, The KSVG Team",0,"http://svg.kde.org");
 		s_about->addAuthor("Rob Buis", 0, "buis@kde.org");
 		s_about->addAuthor("Nikolas Zimmermann", 0, "wildfox@kde.org");
 		s_about->addCredit("Adrian Page", 0);
 		s_about->addCredit("Andreas Streichardt", 0, "mop@spaceregents.de");
-		s_instance = new KInstance(s_about);
+		s_instance = new TDEInstance(s_about);
 	}
 	
 	return s_instance;

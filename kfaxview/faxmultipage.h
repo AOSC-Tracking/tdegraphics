@@ -111,7 +111,7 @@ public:
   This member returns a structure that contains information about the
   authors of the implementation
   */
-  static KAboutData* createAboutData();
+  static TDEAboutData* createAboutData();
   
  private:
   /** This member holds the renderer which is used by the demo implementation */

@@ -34,7 +34,7 @@ class TQCheckBox;
 class TQHGroupBox;
 class TQPushButton;
 
-class KAboutData;
+class TDEAboutData;
 class KComboBox;
 class KIntNumInput;
 
@@ -69,7 +69,7 @@ public:
     void saveState( TQDataStream& stream );
     void restoreState( TQDataStream& stream );
 
-    static KAboutData *createAboutData();
+    static TDEAboutData *createAboutData();
 
 public slots:
     virtual bool openURL( const KURL& );
@@ -157,7 +157,7 @@ public:
     PartFactory();
     ~PartFactory();
 
-    static KInstance * instance();
+    static TDEInstance * instance();
 
 protected:
     virtual KParts::Part * createPartObject( TQWidget *parentWidget = 0,
@@ -168,7 +168,7 @@ protected:
                                         const TQStringList& args = TQStringList() );
 
 private:
-    static KInstance * s_instance;
+    static TDEInstance * s_instance;
 
 };
 

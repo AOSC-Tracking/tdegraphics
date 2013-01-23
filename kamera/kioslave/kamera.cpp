@@ -67,7 +67,7 @@ extern "C"
 
 int kdemain(int argc, char **argv)
 {
-	KInstance	instance("kio_kamera");
+	TDEInstance	instance("kio_kamera");
 
 	if(argc != 4) {
 		kdDebug(7123) << "Usage: kio_kamera protocol "

@@ -55,7 +55,7 @@ extern "C" KDE_EXPORT int kdemain( int argc, char **argv )
         query.append( path );
     }
 
-    KInstance instance( "kio_mrml" );
+    TDEInstance instance( "kio_mrml" );
 
     KMrml::Config config( instance.config() );
     KMrml::ServerSettings settings = config.defaultSettings();

@@ -1404,11 +1404,11 @@ void KViewPart::setStatusBarTextFromMultiPage( const TQString &msg )
     emit setStatusBarText(msg);
 }
 
-KAboutData* KViewPart::createAboutData()
+TDEAboutData* KViewPart::createAboutData()
 {
-  return new KAboutData("kviewerpart", I18N_NOOP("Document Viewer Part"),
+  return new TDEAboutData("kviewerpart", I18N_NOOP("Document Viewer Part"),
                         "0.6", I18N_NOOP(""),
-                        KAboutData::License_GPL,
+                        TDEAboutData::License_GPL,
                         I18N_NOOP("Copyright (c) 2005 Wilfried Huss"));
 }
 

@@ -44,8 +44,8 @@ static KCmdLineOptions options[] =
 int main(int argc, char *argv[])
 {
   KLocale::setMainCatalogue("tdelibs"); 
-  KAboutData aboutData( "kcolorchooser", I18N_NOOP("KColorChooser"),
-		version, description, KAboutData::License_BSD,
+  TDEAboutData aboutData( "kcolorchooser", I18N_NOOP("KColorChooser"),
+		version, description, TDEAboutData::License_BSD,
 		"(c) 2000, Waldo Bastian");
   aboutData.addAuthor("Waldo Bastian",0, "bastian@kde.org");
   TDECmdLineArgs::init( argc, argv, &aboutData );

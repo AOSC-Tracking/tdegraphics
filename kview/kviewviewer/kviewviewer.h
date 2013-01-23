@@ -35,7 +35,7 @@ class KAction;
 class KActionMenu;
 class KToggleAction;
 class KSelectAction;
-class KAboutData;
+class TDEAboutData;
 class TQBuffer;
 class TQSize;
 class KDirWatch;
@@ -54,7 +54,7 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		virtual ~KViewViewer();
 
 		KImageViewer::Canvas * canvas() const { return m_pCanvas; }
-		static KAboutData * createAboutData();
+		static TDEAboutData * createAboutData();
 		virtual void setReadWrite( bool readwrite = true );
 		KParts::BrowserExtension * browserExtension() const { return m_pExtension; }
 

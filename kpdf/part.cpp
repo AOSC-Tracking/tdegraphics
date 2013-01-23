@@ -383,12 +383,12 @@ KURL Part::currentDocument()
 }
 
 //this don't go anywhere but is required by genericfactory.h
-KAboutData* Part::createAboutData()
+TDEAboutData* Part::createAboutData()
 {
 	// the non-i18n name here must be the same as the directory in
 	// which the part's rc file is installed ('partrcdir' in the
 	// Makefile)
-	KAboutData* aboutData = new KAboutData("kpdfpart", I18N_NOOP("KPDF::Part"), "0.1");
+	TDEAboutData* aboutData = new TDEAboutData("kpdfpart", I18N_NOOP("KPDF::Part"), "0.1");
 	aboutData->addAuthor("Wilco Greven", 0, "greven@kde.org");
 	return aboutData;
 }

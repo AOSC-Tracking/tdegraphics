@@ -262,12 +262,12 @@ bool PhotoBookPart::openURL(const KURL &url)
 }
 
 
-KAboutData* PhotoBookPart::createAboutData()
+TDEAboutData* PhotoBookPart::createAboutData()
 {
-	return new KAboutData(
+	return new TDEAboutData(
 			"photobook", I18N_NOOP("Photo Book"),
 			"1.0", I18N_NOOP("Easily browse a folder of photographs"),
-			KAboutData::License_GPL,
+			TDEAboutData::License_GPL,
 			I18N_NOOP("Copyright (c) 2004,2005 Charles Samuels <charles@kde.org>")
 		);
 }

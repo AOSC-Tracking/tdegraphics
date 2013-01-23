@@ -39,7 +39,7 @@ extern "C" {
     KDE_EXPORT int kdemain( int argc, char **argv )
     {
         KLocale::setMainCatalogue("tdelibs");
-        KInstance instance( "kio_mrml" );
+        TDEInstance instance( "kio_mrml" );
         KGlobal::locale()->insertCatalogue( "kmrml" );
 
         kdDebug() << "Starting MRML " << getpid() << endl;

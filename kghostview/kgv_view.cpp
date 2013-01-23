@@ -364,12 +364,12 @@ KGVPart::~KGVPart()
     writeSettings();
 }
 
-KAboutData* KGVPart::createAboutData()
+TDEAboutData* KGVPart::createAboutData()
 {
-    KAboutData* about = new KAboutData( "kghostview", I18N_NOOP( "KGhostView"),
+    TDEAboutData* about = new TDEAboutData( "kghostview", I18N_NOOP( "KGhostView"),
             KGHOSTVIEW_VERSION,
             I18N_NOOP( "Viewer for PostScript (.ps, .eps) and Portable Document Format (.pdf) files"),
-            KAboutData::License_GPL,
+            TDEAboutData::License_GPL,
             "(C) 1998 Mark Donohoe, (C) 1999-2000 David Sweet, "
             "(C) 2000-2003 Wilco Greven",
             I18N_NOOP( "KGhostView displays, prints, and saves "

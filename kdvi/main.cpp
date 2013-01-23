@@ -31,8 +31,8 @@ static const char description[] = I18N_NOOP("A previewer for Device Independent 
 
 int main(int argc, char** argv)
 {
-  KAboutData about ("kdvi", I18N_NOOP("KDVI"), "1.4",
-                    description, KAboutData::License_GPL,
+  TDEAboutData about ("kdvi", I18N_NOOP("KDVI"), "1.4",
+                    description, TDEAboutData::License_GPL,
                     "Markku Hinhala, Stephan Kebekus",
                     I18N_NOOP("This program displays Device Independent (DVI) files which are produced by the TeX typesetting system.\n"
                     "This KDVI version is based on original code from KDVI version 0.43 and xdvik."));

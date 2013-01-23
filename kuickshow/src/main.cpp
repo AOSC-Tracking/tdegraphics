@@ -38,10 +38,10 @@ static KCmdLineOptions options[] =
 
 extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {
-    KAboutData about(
+    TDEAboutData about(
 	  "kuickshow", I18N_NOOP( "KuickShow" ), KUICKSHOWVERSION,
 	  I18N_NOOP("A fast and versatile image viewer" ),
-	  KAboutData::License_GPL, "(c) 1998-2006, Carsten Pfeiffer",
+	  TDEAboutData::License_GPL, "(c) 1998-2006, Carsten Pfeiffer",
 	  0 /*text*/, "http://devel-home.kde.org/~pfeiffer/" );
 
     about.addAuthor( "Carsten Pfeiffer", 0, "pfeiffer@kde.org",

@@ -33,7 +33,7 @@ class KConfig;
 class KDirWatch;
 class KToggleAction;
 class KSelectAction;
-class KAboutData;
+class TDEAboutData;
 class KPrinter;
 
 class ThumbnailList;
@@ -73,7 +73,7 @@ public:
     uint observerId() const { return PART_ID; }
     void notifyViewportChanged( bool smoothMove );
 
-	static KAboutData* createAboutData();
+	static TDEAboutData* createAboutData();
 
 	ASYNC goToPage(uint page);
 	ASYNC openDocument(KURL doc);

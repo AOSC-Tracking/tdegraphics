@@ -1649,8 +1649,8 @@ static KCmdLineOptions options[] =
 
 int main (int argc, char **argv)
 {
-  KAboutData aboutData( "kfax", I18N_NOOP("KFax"),
-      KFAXVERSION, description, KAboutData::License_GPL,
+  TDEAboutData aboutData( "kfax", I18N_NOOP("KFax"),
+      KFAXVERSION, description, TDEAboutData::License_GPL,
       "(c) 1997-98 Bernd Johannes Wuebben");
   aboutData.addAuthor( "Bernd Johannes Wuebben", 0, "wuebben@kde.org" );
   aboutData.addCredit( "Nadeem Hasan", I18N_NOOP( "UI Rewrite, lots of code "

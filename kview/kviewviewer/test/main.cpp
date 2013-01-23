@@ -17,7 +17,7 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char **argv)
 {
-    KAboutData about("kviewviewertest", I18N_NOOP("KView Viewer Test"), version, description, KAboutData::License_GPL, "(C) 2001 Matthias Kretz", 0, 0, "kretz@kde.org");
+    TDEAboutData about("kviewviewertest", I18N_NOOP("KView Viewer Test"), version, description, TDEAboutData::License_GPL, "(C) 2001 Matthias Kretz", 0, 0, "kretz@kde.org");
     about.addAuthor( "Matthias Kretz", 0, "kretz@kde.org" );
     TDECmdLineArgs::init(argc, argv, &about);
     TDECmdLineArgs::addCmdLineOptions( options );

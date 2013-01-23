@@ -33,9 +33,9 @@ static KCmdLineOptions options[] =
 
 extern "C" KDE_EXPORT int kdemain( int argc, char ** argv )
 {
-	KAboutData about( "kview", I18N_NOOP( "KView" ),
+	TDEAboutData about( "kview", I18N_NOOP( "KView" ),
 			KVIEW_VERSION, description,
-			KAboutData::License_GPL,
+			TDEAboutData::License_GPL,
 			I18N_NOOP( "(c) 1997-2002, The KView Developers" ) );
 	about.addAuthor( "Matthias Kretz", I18N_NOOP( "Maintainer" ), "kretz@kde.org" );
 	about.addAuthor( "Sirtaj Singh Kang", I18N_NOOP( "started it all" ), "taj@kde.org" );

@@ -122,7 +122,7 @@ public:
 	~PhotoBookPart();
 
 	virtual bool openURL(const KURL &url);
-	static KAboutData* createAboutData();
+	static TDEAboutData* createAboutData();
 	virtual bool openFile();
 
 public slots:

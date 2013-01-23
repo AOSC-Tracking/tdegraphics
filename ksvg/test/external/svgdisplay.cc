@@ -13,7 +13,7 @@ static KCmdLineOptions options[] =
 int main(int argc, char **argv)
 {
 
-	KAboutData *about = new KAboutData( "KSVG test app", I18N_NOOP("KSVG test"), "0.1", I18N_NOOP("KSVG standalone test app") );
+	TDEAboutData *about = new TDEAboutData( "KSVG test app", I18N_NOOP("KSVG test"), "0.1", I18N_NOOP("KSVG standalone test app") );
 	TDECmdLineArgs::init(argc, argv, about);
 	TDECmdLineArgs::addCmdLineOptions( options );
 	TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();

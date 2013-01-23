@@ -35,8 +35,8 @@ extern "C"
 
 static const char description[] = I18N_NOOP( "Modeler for POV-Ray Scenes" );
 
-KInstance* PMFactory::s_instance = 0L;
-KAboutData* PMFactory::s_aboutData = 0L;
+TDEInstance* PMFactory::s_instance = 0L;
+TDEAboutData* PMFactory::s_aboutData = 0L;
 
 PMFactory::PMFactory( )
 {
@@ -71,21 +71,21 @@ KParts::Part* PMFactory::createPartObject( TQWidget* parentWidget,
    return part;
 }
 
-KInstance* PMFactory::instance( )
+TDEInstance* PMFactory::instance( )
 {
    if( !s_instance )
-      s_instance = new KInstance( aboutData( ) );
+      s_instance = new TDEInstance( aboutData( ) );
    return s_instance;
 }
 
-const KAboutData* PMFactory::aboutData( )
+const TDEAboutData* PMFactory::aboutData( )
 {
    if( !s_aboutData )
    {
       s_aboutData =
-         new KAboutData( "kpovmodeler", I18N_NOOP( "KPovModeler" ),
+         new TDEAboutData( "kpovmodeler", I18N_NOOP( "KPovModeler" ),
                          KPOVMODELER_VERSION, description,
-                         KAboutData::License_GPL, "(c) 2001-2006, Andreas Zehender" );
+                         TDEAboutData::License_GPL, "(c) 2001-2006, Andreas Zehender" );
       s_aboutData->addAuthor( "Andreas Zehender", 0,
                               "zehender@kde.org", "http://www.azweb.de" );
       s_aboutData->addAuthor( "Luis Passos Carvalho", I18N_NOOP( "Textures" ),

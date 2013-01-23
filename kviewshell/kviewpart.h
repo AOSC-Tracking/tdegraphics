@@ -9,13 +9,13 @@
 #include <kparts/browserextension.h>
 #include <tqtimer.h>
 
-class KAboutData;
+class TDEAboutData;
 class KAboutDialog;
 class KAccel;
 class KAction;
 class KConfig;
 class KDirWatch;
-class KInstance;
+class TDEInstance;
 class KMultiPage;
 class KRadioAction;
 class KSelectAction;
@@ -38,7 +38,7 @@ public:
             const char *name, const TQStringList& args);
   virtual ~KViewPart();
 
-  static KAboutData* createAboutData();
+  static TDEAboutData* createAboutData();
 
   bool isValid() { return multiPage; }
 

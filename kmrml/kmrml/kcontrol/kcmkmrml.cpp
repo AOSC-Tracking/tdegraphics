@@ -46,12 +46,12 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kmrml, MrmlFactory("kmrml") )
 KCMKMrml::KCMKMrml(TQWidget *parent, const char *name, const TQStringList & ):
     KCModule(MrmlFactory::instance(), parent, name)
 {
-    KAboutData* ab = new KAboutData(
+    TDEAboutData* ab = new TDEAboutData(
         "kcmkmrml",
         I18N_NOOP("KCMKMrml"),
         KMRML_VERSION,
         I18N_NOOP("Advanced Search Control Module"),
-            KAboutData::License_GPL,
+            TDEAboutData::License_GPL,
         I18N_NOOP( "Copyright 2002, Carsten Pfeiffer" ),
         0,
         "http://devel-home.kde.org/~pfeiffer/kmrml/" );

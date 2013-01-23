@@ -42,15 +42,15 @@ KGVFactory::~KGVFactory()
     s_self = 0;
 }
 
-KInstance *KGVFactory::createInstance()
+TDEInstance *KGVFactory::createInstance()
 {
-    KInstance* res = new KInstance( aboutData() );
+    TDEInstance* res = new TDEInstance( aboutData() );
     return res;
 }
 
 KGVFactory *KGVFactory::s_self;
-KInstance *KGVFactory::s_instance;
-KAboutData *KGVFactory::s_aboutData;
+TDEInstance *KGVFactory::s_instance;
+TDEAboutData *KGVFactory::s_aboutData;
 
 KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *widgetName,
         TQObject *parent, const char *name,
@@ -84,19 +84,19 @@ KParts::Part *KGVFactory::createPartObject( TQWidget *parentWidget, const char *
     return part;
 }
 
-KInstance *KGVFactory::instance()
+TDEInstance *KGVFactory::instance()
 {
     if ( !s_instance )
     {
         if ( s_self )
             s_instance = s_self->createInstance();
         else
-            s_instance = new KInstance( aboutData() );
+            s_instance = new TDEInstance( aboutData() );
     }
     return s_instance;
 }
 
-KAboutData *KGVFactory::aboutData()
+TDEAboutData *KGVFactory::aboutData()
 {
     if ( !s_aboutData )
         s_aboutData = KGVPart::createAboutData();

@@ -22,16 +22,16 @@
 #include <kparts/factory.h>
 #include <kparts/part.h>
 
-class KInstance;
-class KAboutData;
+class TDEInstance;
+class TDEAboutData;
 
 class KDE_EXPORT KGVFactory : public KParts::Factory
 {
     public:
         KGVFactory();
         virtual ~KGVFactory();
-        static KInstance *instance();
-        static KAboutData *aboutData();
+        static TDEInstance *instance();
+        static TDEAboutData *aboutData();
 
         virtual KParts::Part *createPartObject( TQWidget *parentWidget, const char *widgetName,
                 TQObject *parent, const char *name,
@@ -39,11 +39,11 @@ class KDE_EXPORT KGVFactory : public KParts::Factory
                 const TQStringList &args );
 
     protected:
-        virtual KInstance *createInstance();
+        virtual TDEInstance *createInstance();
     private:
         static KGVFactory*s_self;
-        static KInstance *s_instance;
-        static KAboutData *s_aboutData;
+        static TDEInstance *s_instance;
+        static TDEAboutData *s_aboutData;
 };
 
 #endif

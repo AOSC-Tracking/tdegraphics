@@ -37,11 +37,11 @@ EmptyMultiPage::EmptyMultiPage(TQWidget* parentWidget, const char* widgetName, T
   setRenderer(&emptyRenderer);
 }
 
-KAboutData* EmptyMultiPage::createAboutData()
+TDEAboutData* EmptyMultiPage::createAboutData()
 {
-  return new KAboutData("emptymultipage", I18N_NOOP("Empty Multipage"),
+  return new TDEAboutData("emptymultipage", I18N_NOOP("Empty Multipage"),
   "1.0", I18N_NOOP(""),
-  KAboutData::License_GPL,
+  TDEAboutData::License_GPL,
   I18N_NOOP("Copyright (c) 2005 Wilfried Huss"));
 }
 

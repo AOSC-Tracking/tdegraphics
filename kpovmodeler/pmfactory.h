@@ -22,8 +22,8 @@
 
 #include <kparts/factory.h>
 
-class KAboutData;
-class KInstance;
+class TDEAboutData;
+class TDEInstance;
 
 class PMFactory : public KParts::Factory
 {
@@ -39,11 +39,11 @@ public:
                                      const char* classname,
                                      const TQStringList& args );
    
-   static KInstance* instance( );
-   static const KAboutData* aboutData( );
+   static TDEInstance* instance( );
+   static const TDEAboutData* aboutData( );
 private:
-   static KInstance* s_instance;
-   static KAboutData* s_aboutData;
+   static TDEInstance* s_instance;
+   static TDEAboutData* s_aboutData;
 };
 
 #endif

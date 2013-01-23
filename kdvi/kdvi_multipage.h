@@ -34,7 +34,7 @@ public:
 
   virtual void addConfigDialogs(KConfigDialog* configDialog);
 
-  static KAboutData* createAboutData();
+  static TDEAboutData* createAboutData();
 
 private:
   virtual DocumentWidget* createDocumentWidget();

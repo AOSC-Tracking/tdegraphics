@@ -42,8 +42,8 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char **argv)
 {
-  KAboutData aboutData( "ksnapshot", I18N_NOOP("KSnapshot"),
-    KSNAPVERSION, description, KAboutData::License_GPL,
+  TDEAboutData aboutData( "ksnapshot", I18N_NOOP("KSnapshot"),
+    KSNAPVERSION, description, TDEAboutData::License_GPL,
     "(c) 1997-2004, Richard J. Moore,\n(c) 2000, Matthias Ettrich,\n(c) 2002-2003 Aaron J. Seigo");
   aboutData.addAuthor("Richard J. Moore",0, "rich@kde.org");
   aboutData.addAuthor("Matthias Ettrich",0, "ettrich@kde.org");

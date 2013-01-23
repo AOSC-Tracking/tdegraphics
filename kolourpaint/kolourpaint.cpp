@@ -57,20 +57,20 @@ static const KCmdLineOptions cmdLineOptions [] =
 
 int main (int argc, char *argv [])
 {
-    KAboutData aboutData
+    TDEAboutData aboutData
     (
         "kolourpaint",
         I18N_NOOP ("KolourPaint"),
         kpVersionText,
         I18N_NOOP ("Paint Program for TDE"),
-        KAboutData::License_Custom,
+        TDEAboutData::License_Custom,
         0/*copyright statement - see licence instead*/,
         0/*no free text*/,
         "http://www.kolourpaint.org/"
     );
 
 
-    // this is _not_ the same as KAboutData::License_BSD
+    // this is _not_ the same as TDEAboutData::License_BSD
     aboutData.setLicenseText (kpLicenseText);
 
 

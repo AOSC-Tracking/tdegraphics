@@ -55,12 +55,12 @@ FaxMultiPage::~FaxMultiPage()
 }
 
 
-KAboutData* FaxMultiPage::createAboutData()
+TDEAboutData* FaxMultiPage::createAboutData()
 {
   /* You obviously want to change this to match your setup */
-  KAboutData* about = new KAboutData("kfaxview", I18N_NOOP("KFaxView"), "0.1",
+  TDEAboutData* about = new TDEAboutData("kfaxview", I18N_NOOP("KFaxView"), "0.1",
 				     I18N_NOOP("KViewshell Fax Plugin."),
-				     KAboutData::License_GPL,
+				     TDEAboutData::License_GPL,
 				     "Stefan Kebekus",
 				     I18N_NOOP("This program previews fax (g3) files."));
 

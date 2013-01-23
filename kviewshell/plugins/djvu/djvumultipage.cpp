@@ -89,12 +89,12 @@ DjVuMultiPage::~DjVuMultiPage()
 }
 
 
-KAboutData* DjVuMultiPage::createAboutData()
+TDEAboutData* DjVuMultiPage::createAboutData()
 {
   /* You obviously want to change this to match your setup */
-  KAboutData* about = new KAboutData("djvumultipage", I18N_NOOP("KDjView"), "0.1",
+  TDEAboutData* about = new TDEAboutData("djvumultipage", I18N_NOOP("KDjView"), "0.1",
                           I18N_NOOP("KViewshell DjVu Plugin."),
-                          KAboutData::License_GPL,
+                          TDEAboutData::License_GPL,
                           "Wilfried Huss",
                           I18N_NOOP("This program displays DjVu files."));
 

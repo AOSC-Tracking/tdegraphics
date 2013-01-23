@@ -31,11 +31,11 @@
 class TQFrame;
 class TQWidget;
 
-class KAboutData;
+class TDEAboutData;
 class KAction;
 class KActionCollection;
 class KDirWatch;
-class KInstance;
+class TDEInstance;
 class KPopupMenu;
 class KSelectAction;
 class KToggleAction;
@@ -77,7 +77,7 @@ public:
      */
     virtual bool closeURL();
 
-    KDE_EXPORT static KAboutData* createAboutData();
+    KDE_EXPORT static TDEAboutData* createAboutData();
 
 public slots:
     /**

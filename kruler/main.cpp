@@ -37,10 +37,10 @@ int main(int argc, char *argv[])
 {
 
 
-  KAboutData aboutData( "kruler", I18N_NOOP("TDE Screen Ruler"),
+  TDEAboutData aboutData( "kruler", I18N_NOOP("TDE Screen Ruler"),
     VERSION,
 		I18N_NOOP("A screen ruler for the Trinity Desktop Environment"),
-		KAboutData::License_GPL,
+		TDEAboutData::License_GPL,
     "(c) 2000, Till Krech",
 		freeFormText,
 		homePageURL);

@@ -31,12 +31,12 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char** argv)
 {
-    KAboutData about(
+    TDEAboutData about(
         "kpdf",
         I18N_NOOP("KPDF"),
         version,
         description,
-        KAboutData::License_GPL,
+        TDEAboutData::License_GPL,
         "(C) 2002 Wilco Greven, Christophe Devriese\n(C) 2004-2005 Albert Astals Cid, Enrico Ros");
 
     about.addAuthor("Wilco Greven", 0, "greven@kde.org");
