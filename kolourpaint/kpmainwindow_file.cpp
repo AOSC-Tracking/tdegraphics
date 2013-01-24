@@ -997,7 +997,7 @@ static bool shouldPrintImageCenteredOnPage ()
 #endif
     bool ret;
 
-    KConfigGroupSaver cfgGroupSaver (KGlobal::config (),
+    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
                                      kpSettingsGroupGeneral);
     KConfigBase *cfg = cfgGroupSaver.config ();
 

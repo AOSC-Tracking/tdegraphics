@@ -41,7 +41,7 @@ static const char bigTIFF[]    = "\x4d\x4d\x00\x2a";
 KFaxImage::KFaxImage( const TQString &filename, TQObject *parent, const char *name )
    : TQObject(parent,name)
 {
-  KGlobal::locale()->insertCatalogue( TQString::fromLatin1("libkfaximage") );
+  TDEGlobal::locale()->insertCatalogue( TQString::fromLatin1("libkfaximage") );
   loadImage(filename);
 }
 

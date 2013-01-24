@@ -1513,7 +1513,7 @@ void PageView::updateZoom( ZoomMode newZoomMode )
     {
         case ZoomFixed:{ //ZoomFixed case
             TQString z = d->aZoom->currentText();
-            newFactor = KGlobal::locale()->readNumber( z.remove( z.find( '%' ), 1 ) ) / 100.0;
+            newFactor = TDEGlobal::locale()->readNumber( z.remove( z.find( '%' ), 1 ) ) / 100.0;
             }break;
         case ZoomIn:
             newFactor += (newFactor > 0.99) ? ( newFactor > 1.99 ? 0.5 : 0.2 ) : 0.1;
@@ -1597,8 +1597,8 @@ void PageView::updateZoomText()
             inserted = true;
         if ( !inserted )
             selIdx++;
-        TQString localValue( KGlobal::locale()->formatNumber( value * 100.0, 2 ) );
-        localValue.remove( KGlobal::locale()->decimalSymbol() + double_oh );
+        TQString localValue( TDEGlobal::locale()->formatNumber( value * 100.0, 2 ) );
+        localValue.remove( TDEGlobal::locale()->decimalSymbol() + double_oh );
         translated << TQString( "%1%" ).arg( localValue );
     }
     d->aZoom->setItems( translated );

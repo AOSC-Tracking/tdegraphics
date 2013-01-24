@@ -94,7 +94,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     grabber->releaseMouse();
     grabber->hide();
 
-    KConfig *conf=KGlobal::config();
+    KConfig *conf=TDEGlobal::config();
     conf->setGroup("GENERAL");
     mainWidget->setDelay(conf->readNumEntry("delay",0));
     mainWidget->setMode( conf->readNumEntry( "mode", 0 ) );
@@ -110,7 +110,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     connect( &updateTimer, TQT_SIGNAL( timeout() ), TQT_TQOBJECT(this), TQT_SLOT(  updatePreview() ) );
     TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT( updateCaption() ) );
 
-    KHelpMenu *helpMenu = new KHelpMenu(this, KGlobal::instance()->aboutData(), false);
+    KHelpMenu *helpMenu = new KHelpMenu(this, TDEGlobal::instance()->aboutData(), false);
 
     TQPushButton *helpButton = actionButton( Help );
     helpButton->setPopup(helpMenu->menu());
@@ -361,7 +361,7 @@ void KSnapshot::slotWindowGrabbed( const TQPixmap &pix )
 
 void KSnapshot::closeEvent( TQCloseEvent * e )
 {
-    KConfig *conf=KGlobal::config();
+    KConfig *conf=TDEGlobal::config();
     conf->setGroup("GENERAL");
     conf->writeEntry("delay",mainWidget->delay());
     conf->writeEntry("mode",mainWidget->mode());

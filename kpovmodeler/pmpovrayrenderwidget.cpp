@@ -86,13 +86,13 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
    dstr->writeRawBytes( scene.data( ), scene.size( ) );
    m_pTempFile->close( );
 
-   m_pProcess = new KProcess( );
-   connect( m_pProcess, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-            TQT_SLOT( slotPovrayImage( KProcess*, char*, int ) ) );
-   connect( m_pProcess, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-            TQT_SLOT( slotPovrayMessage( KProcess*, char*, int ) ) );
-   connect( m_pProcess, TQT_SIGNAL( processExited( KProcess* ) ),
-            TQT_SLOT( slotRenderingFinished( KProcess* ) ) );
+   m_pProcess = new TDEProcess( );
+   connect( m_pProcess, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+            TQT_SLOT( slotPovrayImage( TDEProcess*, char*, int ) ) );
+   connect( m_pProcess, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+            TQT_SLOT( slotPovrayMessage( TDEProcess*, char*, int ) ) );
+   connect( m_pProcess, TQT_SIGNAL( processExited( TDEProcess* ) ),
+            TQT_SLOT( slotRenderingFinished( TDEProcess* ) ) );
 
    *m_pProcess << s_povrayCommand;
 
@@ -136,7 +136,7 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
    m_bPixmapUpToDate = false;
    repaint( );
 
-   if( !m_pProcess->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+   if( !m_pProcess->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
    {
       KMessageBox::error( this, i18n( "Couldn't call povray.\n"
                                       "Please check your installation "
@@ -179,7 +179,7 @@ void PMPovrayRenderWidget::resumeRendering( )
    }
 }
 
-void PMPovrayRenderWidget::slotPovrayMessage( KProcess*,
+void PMPovrayRenderWidget::slotPovrayMessage( TDEProcess*,
                                               char* buffer, int buflen )
 {
    TQString str;
@@ -188,7 +188,7 @@ void PMPovrayRenderWidget::slotPovrayMessage( KProcess*,
    emit povrayMessage( str );
 }
 
-void PMPovrayRenderWidget::slotPovrayImage( KProcess*, char* buffer, int buflen )
+void PMPovrayRenderWidget::slotPovrayImage( TDEProcess*, char* buffer, int buflen )
 {
    int index = 0;
    int i;
@@ -349,7 +349,7 @@ void PMPovrayRenderWidget::setPixel( int x, int y, uint c )
 }
 
 /**
-void PMPovrayRenderWidget::slotWroteStdin( KProcess* )
+void PMPovrayRenderWidget::slotWroteStdin( TDEProcess* )
 {
    if( m_pProcess )
       m_pProcess->closeStdin( );
@@ -357,7 +357,7 @@ void PMPovrayRenderWidget::slotWroteStdin( KProcess* )
 }
 */
 
-void PMPovrayRenderWidget::slotRenderingFinished( KProcess* )
+void PMPovrayRenderWidget::slotRenderingFinished( TDEProcess* )
 {
    if( m_pProcess->normalExit( ) )
       emit( finished( m_pProcess->exitStatus( ) ) );

@@ -46,7 +46,7 @@ namespace {
     TQString getGSVersion( TQString fullPathToExec )
     {
 	TQString res;
-	TQString chkVersion = KProcess::quote(fullPathToExec) + " --version";
+	TQString chkVersion = TDEProcess::quote(fullPathToExec) + " --version";
 	FILE* p = popen( TQFile::encodeName(chkVersion), "r" );
 	if( p ) {
 	    // FIXME: a badly configured interpreter can hang us

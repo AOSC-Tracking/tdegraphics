@@ -81,7 +81,7 @@ KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
     kdDebug(28000) << "OCR Base Dialog!" << endl;
     // Layout-Boxes
 
-    KConfig *konf = KGlobal::config ();
+    KConfig *konf = TDEGlobal::config ();
     KConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
     m_userWantsSpellCheck = konf->readBoolEntry(CFG_WANT_KSPELL, true);
 
@@ -359,7 +359,7 @@ void KOCRBase::slWantSpellcheck( bool wantIt )
     }
     m_userWantsSpellCheck = wantIt;
 
-    KConfig *konf = KGlobal::config ();
+    KConfig *konf = TDEGlobal::config ();
     KConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
     konf->writeEntry( CFG_WANT_KSPELL, wantIt );
 }

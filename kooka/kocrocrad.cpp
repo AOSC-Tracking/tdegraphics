@@ -104,7 +104,7 @@ EngineError ocradDialog::setupGui()
     TQVBox *page = ocrPage();
     TQ_CHECK_PTR( page );
 
-    KConfig *conf = KGlobal::config ();
+    KConfig *conf = TDEGlobal::config ();
     conf->setGroup( CFG_GROUP_OCR_DIA );
 
     //Qt::Horizontal line
@@ -177,7 +177,7 @@ ocradDialog::~ocradDialog()
 
 void ocradDialog::writeConfig( void )
 {
-   KConfig *conf = KGlobal::config ();
+   KConfig *conf = TDEGlobal::config ();
    conf->setGroup( CFG_GROUP_OCR_DIA );
 
    conf->writeEntry( CFG_OCRAD_BINARY, TQString(getOCRCmd()));
@@ -207,22 +207,22 @@ void ocradDialog::version( const TQString& exe )
 {
     if( m_proc ) delete m_proc;
 
-    m_proc = new KProcess;
+    m_proc = new TDEProcess;
 
     kdDebug(28000) << "Using " << exe << " as command" << endl;
     *m_proc << exe;
     *m_proc << TQString("-V");
 
-    connect( m_proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
-             this,     TQT_SLOT(slReceiveStdIn(KProcess *, char *, int )));
+    connect( m_proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int )),
+             this,     TQT_SLOT(slReceiveStdIn(TDEProcess *, char *, int )));
 
-    if( ! m_proc->start( KProcess::NotifyOnExit, KProcess::Stdout ) )
+    if( ! m_proc->start( TDEProcess::NotifyOnExit, TDEProcess::Stdout ) )
     {
         slReceiveStdIn( 0, (char*) "unknown", 7 );
     }
 }
 
-void ocradDialog::slReceiveStdIn( KProcess*, char *buffer, int buflen)
+void ocradDialog::slReceiveStdIn( TDEProcess*, char *buffer, int buflen)
 {
     TQString vstr = TQString::fromUtf8(buffer, buflen);
 

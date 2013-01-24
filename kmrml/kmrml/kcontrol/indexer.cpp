@@ -30,7 +30,7 @@
 #if TDE_VERSION < 306
   #define QUOTE( x ) x
 #else
-  #define QUOTE( x ) KProcess::quote( x )
+  #define QUOTE( x ) TDEProcess::quote( x )
 #endif
 
 using namespace KMrmlConfig;
@@ -46,8 +46,8 @@ Indexer::Indexer( const KMrml::Config* config,
     m_process->setUseShell( true );
 #endif
     m_process->setEnvironment( "LC_ALL", "C" );
-    connect( m_process, TQT_SIGNAL( processExited( KProcess * )),
-             TQT_SLOT( processFinished( KProcess * )));
+    connect( m_process, TQT_SIGNAL( processExited( TDEProcess * )),
+             TQT_SLOT( processFinished( TDEProcess * )));
     connect( m_process, TQT_SIGNAL( readReady( KProcIO * )),
              TQT_SLOT( slotCanRead( KProcIO * )) );
 }
@@ -67,7 +67,7 @@ void Indexer::startIndexing( const TQStringList& dirs )
     processNext();
 }
 
-void Indexer::processFinished( KProcess *proc )
+void Indexer::processFinished( TDEProcess *proc )
 {
     // still more directories to index?
     if ( !m_dirs.isEmpty() )
@@ -118,9 +118,9 @@ void Indexer::processNext()
 
 void Indexer::slotCanRead( KProcIO *proc )
 {
-    static const TQString& sprogress = KGlobal::staticQString("PROGRESS: ");
+    static const TQString& sprogress = TDEGlobal::staticQString("PROGRESS: ");
     static const TQString& r1 = /* PROGRESS: 1 of 6 done (15%) */
-        KGlobal::staticQString( "(\\d+) of (\\d+) done \\((\\d+)%\\)" );
+        TDEGlobal::staticQString( "(\\d+) of (\\d+) done \\((\\d+)%\\)" );
 
     TQString line;
     int bytes = -1;

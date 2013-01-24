@@ -52,7 +52,7 @@
 class KOCRBase;
 class KookaImage;
 class KTempFile;
-class KProcess;
+class TDEProcess;
 class TQRect;
 class TQPixmap;
 class TQStringList;
@@ -222,13 +222,13 @@ private slots:
 
     void slotKadmosResult();
     void startOCRProcess( void );
-    void gocrStdIn(KProcess*, char* buffer, int buflen);
-    void gocrStdErr(KProcess*, char* buffer, int buflen);
-    void gocrExited(KProcess*);
+    void gocrStdIn(TDEProcess*, char* buffer, int buflen);
+    void gocrStdErr(TDEProcess*, char* buffer, int buflen);
+    void gocrExited(TDEProcess*);
 
-    void ocradStdIn(KProcess*, char* buffer, int buflen);
-    void ocradStdErr(KProcess*, char* buffer, int buflen);
-    void ocradExited(KProcess*);
+    void ocradStdIn(TDEProcess*, char* buffer, int buflen);
+    void ocradStdErr(TDEProcess*, char* buffer, int buflen);
+    void ocradExited(TDEProcess*);
 
     /*
      * reads orf files from a file and fills the result structures
@@ -241,7 +241,7 @@ private:
 
 
     KOCRBase        *m_ocrProcessDia;
-    KProcess        *daemon;
+    TDEProcess        *daemon;
     bool             visibleOCRRunning;
     KTempFile       *m_tmpFile;
 

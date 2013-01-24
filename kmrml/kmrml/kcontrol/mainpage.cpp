@@ -73,7 +73,7 @@ MainPage::MainPage( TQWidget *parent, const char *name )
 #if TDE_VERSION >= 306
     KURLRequester *requester = new KURLRequester( this, "dir requester" );
     requester->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
-    requester->setURL( KGlobalSettings::documentPath() );
+    requester->setURL( TDEGlobalSettings::documentPath() );
     connect( requester, TQT_SIGNAL( openFileDialog( KURLRequester * )),
              TQT_SLOT( slotRequesterClicked( KURLRequester * )));
 

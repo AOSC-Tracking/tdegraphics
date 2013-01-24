@@ -37,7 +37,7 @@ PMPovrayOutputWidget::PMPovrayOutputWidget( TQWidget* parent, const char* name )
 
    m_pTextView = new TQTextEdit( this );
    topLayout->addWidget( m_pTextView, 1 );
-   m_pTextView->setFont( KGlobalSettings::fixedFont( ) );
+   m_pTextView->setFont( TDEGlobalSettings::fixedFont( ) );
    m_pTextView->setTextFormat( TQt::PlainText );
    m_pTextView->setReadOnly( true );
 

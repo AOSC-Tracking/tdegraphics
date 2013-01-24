@@ -10,7 +10,7 @@ using namespace KMrmlConfig;
 
 IndexTest::IndexTest()
 {
-    KMrml::Config *config = new KMrml::Config( KGlobal::config() );
+    KMrml::Config *config = new KMrml::Config( TDEGlobal::config() );
     Indexer *indexer = new Indexer( *config, this );
     connect( indexer, TQT_SIGNAL( finished( bool )), TQT_SLOT( slotFinished( bool )));
     connect( indexer, TQT_SIGNAL( progress( int, const TQString& )),

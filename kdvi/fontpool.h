@@ -20,7 +20,7 @@
 #include FT_FREETYPE_H
 #endif
 
-class KProcess;
+class TDEProcess;
 class KShellProcess;
 
 
@@ -210,7 +210,7 @@ private slots:
   // transmitted to the fontpool via this slot. This method calles
   // suitable methods in the fontProgres Dialog, and collects the
   // output of MetaFontt int the "MetafontOutput" member
- void mf_output_receiver(KProcess *, char *, int);
+ void mf_output_receiver(TDEProcess *, char *, int);
 };
 
 #endif //ifndef _FONTPOOL_H

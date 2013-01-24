@@ -292,7 +292,7 @@ void dviRenderer::prescan_ParsePSHeaderSpecial(const TQString& cp)
     // Otherwise, use kpsewhich to find the eps file.
     KProcIO proc;
     proc << "kpsewhich" << cp;
-    proc.start(KProcess::Block);
+    proc.start(TDEProcess::Block);
     proc.readln(_file);
   }
   

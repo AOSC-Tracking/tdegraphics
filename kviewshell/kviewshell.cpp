@@ -288,7 +288,7 @@ void KViewShell::slotConfigureKeys()
 
 void KViewShell::slotEditToolbar()
 {
-  saveMainWindowSettings( KGlobal::config(), autoSaveGroup() );
+  saveMainWindowSettings( TDEGlobal::config(), autoSaveGroup() );
   KEditToolbar dlg(factory());
   connect( &dlg, TQT_SIGNAL( newToolbarConfig() ), TQT_SLOT( slotNewToolbarConfig() ) );
   dlg.exec();
@@ -297,7 +297,7 @@ void KViewShell::slotEditToolbar()
 
 void KViewShell::slotNewToolbarConfig()
 {
-  applyMainWindowSettings( KGlobal::config(), autoSaveGroup() );
+  applyMainWindowSettings( TDEGlobal::config(), autoSaveGroup() );
 }
 
 void KViewShell::dragEnterEvent(TQDragEnterEvent *event)

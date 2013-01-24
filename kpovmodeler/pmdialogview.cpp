@@ -281,7 +281,7 @@ void PMDialogView::slotHelp( )
       {
          // Instead of calling invokeBrowser run konqueror directly.
          // invokeBrowser was ignoring html anchors.
-         url = "konqueror " + KProcess::quote(url);
+         url = "konqueror " + TDEProcess::quote(url);
          KRun::runCommand( url );
       }
    }

@@ -137,7 +137,7 @@ kpEffectFlattenWidget::kpEffectFlattenWidget (bool actOnSelection,
 {
     if (!s_lastColor1.isValid () || !s_lastColor2.isValid ())
     {
-        KConfigGroupSaver cfgGroupSaver (KGlobal::config (), kpSettingsGroupFlattenEffect);
+        KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupFlattenEffect);
         KConfigBase *cfg = cfgGroupSaver.config ();
 
         s_lastColor1 = cfg->readColorEntry (kpSettingFlattenEffectColor1);
@@ -183,7 +183,7 @@ kpEffectFlattenWidget::~kpEffectFlattenWidget ()
     s_lastColor2 = color2 ();
 
 
-    KConfigGroupSaver cfgGroupSaver (KGlobal::config (), kpSettingsGroupFlattenEffect);
+    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupFlattenEffect);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingFlattenEffectColor1, s_lastColor1);

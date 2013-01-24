@@ -28,7 +28,7 @@ fontEncoding::fontEncoding(const TQString &encName)
   KProcIO proc;
   TQString encFileName;
   proc << "kpsewhich" << encName;
-  if (proc.start(KProcess::Block) == false) {
+  if (proc.start(TDEProcess::Block) == false) {
     kdError(4300) << "fontEncoding::fontEncoding(...): kpsewhich could not be started." << endl;
     return;
   }

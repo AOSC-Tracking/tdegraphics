@@ -75,7 +75,7 @@ Kooka::Kooka( const TQCString& deviceToUse)
     setXMLFile( "kookaui.rc", true );
 
     setAcceptDrops(false); // Waba: Not (yet?) supported
-    KConfig *konf = KGlobal::config ();
+    KConfig *konf = TDEGlobal::config ();
     readDockConfig ( konf, DOCK_SIZES );
 
     // then, setup our actions
@@ -109,7 +109,7 @@ void Kooka::createMyGUI( KParts::Part *part )
 
 Kooka::~Kooka()
 {
-   KConfig *konf = KGlobal::config ();
+   KConfig *konf = TDEGlobal::config ();
    m_view->slCloseScanDevice();
    writeDockConfig ( konf, DOCK_SIZES );
    delete m_printer;
@@ -385,7 +385,7 @@ void Kooka::optionsShowPreviewer()
 void Kooka::optionsConfigureToolbars()
 {
     // use the standard toolbar editor
-    saveMainWindowSettings(KGlobal::config(), autoSaveGroup());
+    saveMainWindowSettings(TDEGlobal::config(), autoSaveGroup());
     KEditToolbar dlg(factory());
     connect(&dlg, TQT_SIGNAL(newToolbarConfig()), TQT_SLOT(newToolbarConfig()));
     dlg.exec();
@@ -394,7 +394,7 @@ void Kooka::optionsConfigureToolbars()
 void Kooka::newToolbarConfig()
 {
     // OK/Apply pressed in the toolbar editor
-    applyMainWindowSettings(KGlobal::config(), autoSaveGroup());
+    applyMainWindowSettings(TDEGlobal::config(), autoSaveGroup());
 }
 
 void Kooka::optionsPreferences()

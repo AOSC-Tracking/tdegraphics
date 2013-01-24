@@ -62,7 +62,7 @@ KookaPreferences::KookaPreferences()
     // this is the base class for your preferences dialog.  it is now
     // a Treelist dialog.. but there are a number of other
     // possibilities (including Tab, Swallow, and just Plain)
-    konf = KGlobal::config ();
+    konf = TDEGlobal::config ();
 
     setupStartupPage();
     setupSaveFormatPage();
@@ -200,7 +200,7 @@ TQString KookaPreferences::tryFindBinary( const TQString& bin, const TQString& c
 {
 
     /* First check the config files for an entry */
-    KConfig *cfg = KGlobal::config();
+    KConfig *cfg = TDEGlobal::config();
     cfg->setGroup(CFG_GROUP_OCR_DIA);
     TQString res = cfg->readPathEntry( configKey /* CFG_GOCR_BINARY */, "notFound" );
 

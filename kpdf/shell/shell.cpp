@@ -92,7 +92,7 @@ void Shell::init()
   connect( m_part, TQT_SIGNAL( enablePrintAction(bool) ), m_printAction, TQT_SLOT( setEnabled(bool)));
   
   readSettings();
-  if (!KGlobal::config()->hasGroup("MainWindow"))
+  if (!TDEGlobal::config()->hasGroup("MainWindow"))
   {
     KMainWindowInterface kmwi(this);
     kmwi.maximize();
@@ -127,21 +127,21 @@ void Shell::openURL( const KURL & url )
 
 void Shell::readSettings()
 {
-    m_recent->loadEntries( KGlobal::config() );
+    m_recent->loadEntries( TDEGlobal::config() );
     m_recent->setEnabled( true ); // force enabling
     m_recent->setToolTip( i18n("Click to open a file\nClick and hold to open a recent file") );
 
-    KGlobal::config()->setDesktopGroup();
-    bool fullScreen = KGlobal::config()->readBoolEntry( "FullScreen", false );
+    TDEGlobal::config()->setDesktopGroup();
+    bool fullScreen = TDEGlobal::config()->readBoolEntry( "FullScreen", false );
     setFullScreen( fullScreen );
 }
 
 void Shell::writeSettings()
 {
-    m_recent->saveEntries( KGlobal::config() );
-    KGlobal::config()->setDesktopGroup();
-    KGlobal::config()->writeEntry( "FullScreen", m_fullScreenAction->isChecked());
-    KGlobal::config()->sync();
+    m_recent->saveEntries( TDEGlobal::config() );
+    TDEGlobal::config()->setDesktopGroup();
+    TDEGlobal::config()->writeEntry( "FullScreen", m_fullScreenAction->isChecked());
+    TDEGlobal::config()->sync();
 }
 
 void Shell::setupActions()
@@ -204,7 +204,7 @@ Shell::optionsConfigureToolbars()
   void
 Shell::applyNewToolbarConfig()
 {
-  applyMainWindowSettings(KGlobal::config(), "MainWindow");
+  applyMainWindowSettings(TDEGlobal::config(), "MainWindow");
 }
 
 void Shell::slotQuit()

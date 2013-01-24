@@ -90,7 +90,7 @@ DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache
 
   if (!busyIcon)
   {
-    busyIcon = new TQPixmap(KGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
+    busyIcon = new TQPixmap(TDEGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
 
     URShadow = new TQPixmap();
     BRShadow = new TQPixmap();
@@ -316,7 +316,7 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
 #ifdef DEBUG_DOCUMENTWIDGET
         kdDebug(1223) << "Underline hyperlink \"" << pageData->hyperLinkList[i].linkText << "\"" << endl;
 #endif
-        p.fillRect(x, y, w, h, KGlobalSettings::linkColor());
+        p.fillRect(x, y, w, h, TDEGlobalSettings::linkColor());
       }
     }
   }

@@ -345,7 +345,7 @@ bool KGVDocument::convertFromPDF( const TQString& saveFileName,
 {
     // TODO -- timeout/fail on this conversion (it can hang on a bad pdf)
     // TODO -- use output from gs (leave out -q) to drive a progress bar
-    KProcess process;
+    TDEProcess process;
     process << _interpreterPath
             << "-q"
             << "-dNOPAUSE"
@@ -367,7 +367,7 @@ bool KGVDocument::convertFromPDF( const TQString& saveFileName,
     for ( ; it != args.end() ; ++it )
         kdDebug(4500) << ( *it ) << endl;*/
 
-    if( !process.start( KProcess::Block ) )
+    if( !process.start( TDEProcess::Block ) )
     {
 	kdError() << "convertFromPDF: Couldn't start gs process" << endl;
 	// TODO -- error message (gs not found?)
@@ -771,7 +771,7 @@ bool KGVDocument::psCopyDoc( const TQString& inputFile,
 void KGVDocument::runPdf2ps( const TQString& pdfName, 
                                const TQString& dscName )
 {
-    KProcess process;
+    TDEProcess process;
     process << _interpreterPath
 	    << "-dNODISPLAY"
 	    << "-dQUIET"
@@ -786,14 +786,14 @@ e=%1" ).arg( dscName )
 	    << "-c"
 	    << "quit";
 
-    connect( &process, TQT_SIGNAL( processExited( KProcess* ) ),
-	     this, TQT_SLOT( pdf2psExited( KProcess* ) ) );
+    connect( &process, TQT_SIGNAL( processExited( TDEProcess* ) ),
+	     this, TQT_SLOT( pdf2psExited( TDEProcess* ) ) );
 
     kdDebug(4500) << "KGVDocument: pdf2ps started" << endl;
-    process.start( KProcess::NotifyOnExit );
+    process.start( TDEProcess::NotifyOnExit );
 }
 
-void KGVDocument::pdf2psExited( KProcess* process )
+void KGVDocument::pdf2psExited( TDEProcess* process )
 {
     kdDebug(4500) << "KGVDocument: pdf2ps exited" << endl;
     
@@ -816,7 +816,7 @@ void Pdf2dsc::run( const TQString& pdfName, const TQString& dscName )
 {
     kill();
 
-    _process = new KProcess;
+    _process = new TDEProcess;
     *_process << _ghostscriptPath
               << "-dSAFER"
               << "-dPARANOIDSAFER"
@@ -832,11 +832,11 @@ void Pdf2dsc::run( const TQString& pdfName, const TQString& dscName )
               << "-c"
               << "quit";
 
-    connect( _process, TQT_SIGNAL( processExited( KProcess* ) ),
+    connect( _process, TQT_SIGNAL( processExited( TDEProcess* ) ),
 	     this, TQT_SLOT( processExited() ) );
 
     kdDebug(4500) << "Pdf2dsc: started" << endl;
-    _process->start( KProcess::NotifyOnExit );
+    _process->start( TDEProcess::NotifyOnExit );
 }
 
 void Pdf2dsc::kill()

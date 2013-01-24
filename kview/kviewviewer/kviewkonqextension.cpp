@@ -38,7 +38,7 @@ KViewKonqExtension::KViewKonqExtension( KImageViewer::Canvas * canvas,
 	m_pViewer( parent ),
 	m_pCanvas( canvas )
 {
-    KGlobal::locale()->insertCatalogue("kview");
+    TDEGlobal::locale()->insertCatalogue("kview");
 }
 
 void KViewKonqExtension::setXYOffset( int x, int y )

@@ -82,7 +82,7 @@ void PMLibraryManager::scanLibraries( )
    TQStringList libraryDirectories;
    
    // Search for sub directories in /usr/share/kpovmodeler/library
-   libraryDirectories = KGlobal::dirs( )->findDirs( "data", "kpovmodeler/library" );
+   libraryDirectories = TDEGlobal::dirs( )->findDirs( "data", "kpovmodeler/library" );
 
    for( TQStringList::Iterator i = libraryDirectories.begin( ); i != libraryDirectories.end( ); ++i )
    {

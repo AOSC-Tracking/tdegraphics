@@ -377,7 +377,7 @@ TQString dvifile::convertPDFtoPS(const TQString &PDFFilename)
   // Use pdf2ps to do the conversion
   KProcIO proc;
   proc << "pdf2ps" << PDFFilename << convertedFileName;
-  if (proc.start(KProcess::Block) == false) 
+  if (proc.start(TDEProcess::Block) == false) 
     convertedFileName = TQString(); // Indicates that conversion failed, won't try again.
   if (!TQFile::exists(convertedFileName))
     convertedFileName = TQString(); // Indicates that conversion failed, won't try again.

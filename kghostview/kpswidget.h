@@ -30,7 +30,7 @@
 
 #include <X11/X.h>
 
-class KProcess;
+class TDEProcess;
 
 class KGVConfigDialog;
 class MessagesDialog;
@@ -201,10 +201,10 @@ protected:
     void setPalette( Configuration::EnumPalette::type );
 
 protected slots:
-    void gs_input( KProcess* );
-    void gs_output( KProcess*, char* buffer, int len );
+    void gs_input( TDEProcess* );
+    void gs_output( TDEProcess*, char* buffer, int len );
     void interpreterFailed();
-    void slotProcessExited( KProcess* );
+    void slotProcessExited( TDEProcess* );
 	
 private:
     Window _gsWindow; // Destination of ghostscript messages.
@@ -246,7 +246,7 @@ private:
      */
     bool _widgetDirty;
 
-    KProcess* _process;
+    TDEProcess* _process;
     char* _buffer;
  
     std::queue<Record> _inputQueue;

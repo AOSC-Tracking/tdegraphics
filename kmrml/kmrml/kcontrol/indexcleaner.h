@@ -11,7 +11,7 @@
 #include <tqobject.h>
 #include <tqstringlist.h>
 
-class KProcess;
+class TDEProcess;
 
 namespace KMrml
 {
@@ -37,7 +37,7 @@ namespace KMrmlConfig
         void finished();
 
     private slots:
-        void slotExited( KProcess * );
+        void slotExited( TDEProcess * );
 
     private:
         int m_stepSize;
@@ -45,7 +45,7 @@ namespace KMrmlConfig
 
         TQStringList m_dirs;
         const KMrml::Config *m_config;
-        KProcess *m_process;
+        TDEProcess *m_process;
     };
 
 }

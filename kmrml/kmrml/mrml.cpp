@@ -40,7 +40,7 @@ extern "C" {
     {
         KLocale::setMainCatalogue("tdelibs");
         TDEInstance instance( "kio_mrml" );
-        KGlobal::locale()->insertCatalogue( "kmrml" );
+        TDEGlobal::locale()->insertCatalogue( "kmrml" );
 
         kdDebug() << "Starting MRML " << getpid() << endl;
 
@@ -62,7 +62,7 @@ const int Mrml::bufsize = 8192;
 
 Mrml::Mrml( const TQCString& pool_socket, const TQCString& app_socket )
     : TCPSlaveBase( 12789, "mrml", pool_socket, app_socket ),
-      m_config( KGlobal::config() )
+      m_config( TDEGlobal::config() )
 {
     MrmlShared::ref();
 }

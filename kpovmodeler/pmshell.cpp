@@ -531,7 +531,7 @@ void PMShell::slotSettings( )
 
 void PMShell::slotConfigureToolbars( )
 {
-   saveMainWindowSettings( KGlobal::config( ), "Appearance" );
+   saveMainWindowSettings( TDEGlobal::config( ), "Appearance" );
    KEditToolbar dlg( factory( ) );
    connect( &dlg, TQT_SIGNAL( newToolbarConfig( ) ),
             this, TQT_SLOT( slotNewToolbarConfig( ) ) );
@@ -543,22 +543,22 @@ void PMShell::slotNewToolbarConfig( )
    createGUI( 0 );
    createShellGUI( false );
    createGUI( m_pPart );
-   applyMainWindowSettings( KGlobal::config( ), "Appearance" );
+   applyMainWindowSettings( TDEGlobal::config( ), "Appearance" );
 }
 
 void PMShell::updateGUI( )
 {
-   saveMainWindowSettings( KGlobal::config( ), "Appearance" );
+   saveMainWindowSettings( TDEGlobal::config( ), "Appearance" );
    createGUI( 0 );
    createShellGUI( false );
    createGUI( m_pPart );
-   applyMainWindowSettings( KGlobal::config( ), "Appearance" );
+   applyMainWindowSettings( TDEGlobal::config( ), "Appearance" );
 }
 
 void PMShell::saveOptions( )
 {
    kdDebug( PMArea ) << "Saving configuration" << endl;
-   KConfig* config = KGlobal::config( );
+   KConfig* config = TDEGlobal::config( );
 
    // set group
    config->setGroup( "Appearance" );

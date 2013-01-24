@@ -82,7 +82,7 @@ KGamma::KGamma(TQWidget *parent, const char *name, const TQStringList&)
       }
       xv->setScreen(currentScreen);
 
-      rootProcess = new KProcess;
+      rootProcess = new TDEProcess;
       setupUI();
       saved = false;
 

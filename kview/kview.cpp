@@ -105,7 +105,7 @@ KView::KView()
 
 		connect( m_pCanvas->widget(), TQT_SIGNAL( cursorPos( const TQPoint & ) ), TQT_SLOT( cursorPos( const TQPoint & ) ) );
 
-		m_paRecent->loadEntries( KGlobal::config() );
+		m_paRecent->loadEntries( TDEGlobal::config() );
 		if (!initialGeometrySet())
 			resize(500, 350);
 		readSettings();
@@ -151,8 +151,8 @@ KView::KView()
 
 KView::~KView()
 {
-	saveSettings( KGlobal::config() );
-	KGlobal::config()->sync();
+	saveSettings( TDEGlobal::config() );
+	TDEGlobal::config()->sync();
 }
 
 void KView::load( const KURL & url )
@@ -167,7 +167,7 @@ void KView::load( const KURL & url )
 			// would do:
 			TQString directory = url.directory();
 			TQString key = TQString::fromLatin1( "load_image" );
-			KConfig * config = KGlobal::config();
+			KConfig * config = TDEGlobal::config();
 
 			config->setGroup( TQString::fromLatin1( "Recent Dirs" ) );
 			TQStringList result = config->readPathListEntry( key );
@@ -243,7 +243,7 @@ void KView::readSettings() // KConfig * config )
 {
 	// read settings from config/kviewrc
 	kdDebug( 4600 ) << k_funcinfo << endl;
-	KConfigGroup cfgGroup( KGlobal::config(), "KView General" );
+	KConfigGroup cfgGroup( TDEGlobal::config(), "KView General" );
 	m_nResizeMode = cfgGroup.readNumEntry( "Resize Mode", 2 );
 	kdDebug( 4600 ) << "m_nResizeMode = " << m_nResizeMode << endl;
 	loadPlugins();
@@ -346,16 +346,16 @@ void KView::slotUpdateFullScreen( bool set )
 	m_bFullscreen = set;
 	if( set )
 	{ // switch to FullScreen mode
-		saveMainWindowSettings( KGlobal::config(), "nonFullScreen MainWindow" );
+		saveMainWindowSettings( TDEGlobal::config(), "nonFullScreen MainWindow" );
 		showFullScreen();
-		applyMainWindowSettings( KGlobal::config(), "FullScreen MainWindow" );
+		applyMainWindowSettings( TDEGlobal::config(), "FullScreen MainWindow" );
 		m_paShowMenubar->setChecked( ! menuBar()->isHidden() );
 	}
 	else
 	{ // leave FullScreen mode
-		saveMainWindowSettings( KGlobal::config(), "FullScreen MainWindow" );
+		saveMainWindowSettings( TDEGlobal::config(), "FullScreen MainWindow" );
 		showNormal();
-		applyMainWindowSettings( KGlobal::config(), "nonFullScreen MainWindow" );
+		applyMainWindowSettings( TDEGlobal::config(), "nonFullScreen MainWindow" );
 		m_paShowMenubar->setChecked( ! menuBar()->isHidden() );
 		handleResize();
 	}
@@ -378,14 +378,14 @@ void KView::slotPreferences()
 	{
 		dlg = new KSettings::Dialog( this );
 		//dlg = new KConfigureDialog( KConfigureDialog::Configurable, this );
-		//dlg->addPluginInfos( KPluginInfo::fromKPartsInstanceName( instance()->instanceName(), KGlobal::config(), "KParts Plugins" ) );
+		//dlg->addPluginInfos( KPluginInfo::fromKPartsInstanceName( instance()->instanceName(), TDEGlobal::config(), "KParts Plugins" ) );
 	}
 	dlg->show();
 }
 
 void KView::slotConfigureToolbars()
 {
-	saveMainWindowSettings( KGlobal::config(), "MainWindow" );
+	saveMainWindowSettings( TDEGlobal::config(), "MainWindow" );
 	KEditToolbar dlg( factory() );
 	connect( &dlg, TQT_SIGNAL( newToolbarConfig() ), TQT_SLOT( slotNewToolbarConfig() ) );
 	dlg.exec();
@@ -393,12 +393,12 @@ void KView::slotConfigureToolbars()
 
 void KView::slotNewToolbarConfig()
 {
-	applyMainWindowSettings( KGlobal::config(), "MainWindow" );
+	applyMainWindowSettings( TDEGlobal::config(), "MainWindow" );
 }
 
 void KView::reloadConfig()
 {
-	readSettings(); //KGlobal::config() );
+	readSettings(); //TDEGlobal::config() );
 }
 
 void KView::enableAction( const char * name, bool b )

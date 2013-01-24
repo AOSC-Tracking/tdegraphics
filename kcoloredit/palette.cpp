@@ -47,7 +47,7 @@ void Palette::init() {
 
 TQStringList Palette::kdePalettes() {
 	TQStringList paletteList;
-	KGlobal::dirs()->findAllResources("config", palettesDir + "/*", false, true, paletteList);
+	TDEGlobal::dirs()->findAllResources("config", palettesDir + "/*", false, true, paletteList);
 	return paletteList;
 }
 

@@ -335,7 +335,7 @@ ImgSaveStat ImgSaver::saveImage( TQImage *image )
    kdDebug(28000) << "saveImage: Directory is " << directory << endl;
    TQString filename = createFilename( format );
 
-   KConfig *konf = KGlobal::config ();
+   KConfig *konf = TDEGlobal::config ();
    konf->setGroup( OP_FILE_GROUP );
 
    if( konf->readBoolEntry( OP_ASK_FILENAME, false ) )
@@ -425,7 +425,7 @@ ImgSaveStat ImgSaver::saveImage( TQImage *image, const KURL& filename, const TQS
 TQString ImgSaver::findFormat( picType type )
 {
    TQString format;
-   KConfig *konf = KGlobal::config ();
+   KConfig *konf = TDEGlobal::config ();
    konf->setGroup( OP_FILE_GROUP );
 
    if( type == PT_THUMBNAIL )
@@ -552,7 +552,7 @@ bool ImgSaver::isRememberedFormat( picType type, TQString format ) const
 
 TQString ImgSaver::getFormatForType( picType type ) const
 {
-   KConfig *konf = KGlobal::config ();
+   KConfig *konf = TDEGlobal::config ();
    TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
 
@@ -582,7 +582,7 @@ TQString ImgSaver::getFormatForType( picType type ) const
 
 void ImgSaver::storeFormatForType( picType type, TQString format, bool ask )
 {
-   KConfig *konf = KGlobal::config ();
+   KConfig *konf = TDEGlobal::config ();
    TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
 
@@ -691,7 +691,7 @@ ImgSaveStat ImgSaver::save( TQImage *image, const TQString &filename,
 void ImgSaver::readConfig( void )
 {
 
-   KConfig *konf = KGlobal::config ();
+   KConfig *konf = TDEGlobal::config ();
    TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
    ask_for_format = konf->readBoolEntry( OP_FILE_ASK_FORMAT, true );

@@ -299,7 +299,7 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
 {
     if (m_width == -1)
     {
-        TQRect d = KGlobalSettings::desktopGeometry(this);
+        TQRect d = TDEGlobalSettings::desktopGeometry(this);
         m_width = d.width();
         m_height = d.height();
 

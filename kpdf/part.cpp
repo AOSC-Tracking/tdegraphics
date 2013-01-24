@@ -127,7 +127,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	connect(this, TQT_SIGNAL(canceled(const TQString &)), this, TQT_SLOT(emitWindowCaption()));
 	
 	// load catalog for translation
-	KGlobal::locale()->insertCatalogue("kpdf");
+	TDEGlobal::locale()->insertCatalogue("kpdf");
 
 	// create browser extension (for printing when embedded into browser)
 	m_bExtension = new BrowserExtension(this);
@@ -428,11 +428,11 @@ bool Part::openFile()
                     tf.close();
                     m_temporaryLocalFile = tf.name();
 
-                    KProcess *p = new KProcess;
+                    TDEProcess *p = new TDEProcess;
                     *p << app;
                     *p << m_file << m_temporaryLocalFile;
                     m_pageView->showText(i18n("Converting from ps to pdf..."), 0);
-                    connect(p, TQT_SIGNAL(processExited(KProcess *)), this, TQT_SLOT(psTransformEnded()));
+                    connect(p, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(psTransformEnded()));
                     p -> start();
                     return true;
                 }

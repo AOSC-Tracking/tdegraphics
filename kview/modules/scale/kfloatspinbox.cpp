@@ -86,12 +86,12 @@ void KFloatSpinBox::setValueBlocking( float value )
 
 TQString KFloatSpinBox::mapValueToText( int value )
 {
-	return KGlobal::locale()->formatNumber( (float)value / (float)m_factor, 4 );
+	return TDEGlobal::locale()->formatNumber( (float)value / (float)m_factor, 4 );
 }
 
 int KFloatSpinBox::mapTextToValue( bool * ok )
 {
-	return (int)( m_factor * KGlobal::locale()->readNumber( text(), ok ) );
+	return (int)( m_factor * TDEGlobal::locale()->readNumber( text(), ok ) );
 }
 
 void KFloatSpinBox::valueChange()

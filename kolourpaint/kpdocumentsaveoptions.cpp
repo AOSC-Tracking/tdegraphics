@@ -371,7 +371,7 @@ static TQStringList mimeTypesSupportingProperty (const TQString &property,
 {
     TQStringList mimeTypeList;
 
-    KConfigGroupSaver cfgGroupSaver (KGlobal::config (),
+    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
                                      kpSettingsGroupMimeTypeProperties);
     KConfigBase *cfg = cfgGroupSaver.config ();
 

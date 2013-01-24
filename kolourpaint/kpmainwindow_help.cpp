@@ -73,7 +73,7 @@ void kpMainWindow::enableHelpMenuDocumentActions (bool /*enable*/)
 // SYNC: tdebase/twin/twinbindings.cpp
 static TQString printScreenShortcutString ()
 {
-    KConfigGroupSaver cfgGroupSaver (KGlobal::config (), "Global Shortcuts");
+    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), "Global Shortcuts");
     KConfigBase *cfg = cfgGroupSaver.config ();
 
     // TODO: i18n() entry name?  twinbindings.cpp seems to but it doesn't

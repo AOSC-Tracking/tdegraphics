@@ -48,7 +48,7 @@
 // little helper:
 static inline TQPixmap loadIcon( const char * name )
 {
-  return KGlobal::instance()->iconLoader()
+  return TDEGlobal::instance()->iconLoader()
     ->loadIcon( TQString::fromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
 }
 

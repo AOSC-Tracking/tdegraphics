@@ -157,7 +157,7 @@ void kpDocumentSaveOptionsPreviewDialog::setFilePixmapAndSize (const TQPixmap &p
     const TQString alternateText6 = i18n ("%1B (%2%)");
     const TQString alternateText7 = i18n ("%1B (approx. %2%)");
     m_fileSizeLabel->setText (i18n ("%1 bytes (approx. %2%)")
-                                   .arg (KGlobal::locale ()->formatLong (m_fileSize))
+                                   .arg (TDEGlobal::locale ()->formatLong (m_fileSize))
                                    .arg (percent));
 }
 
@@ -742,7 +742,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
                  this, TQT_SLOT (hidePreview ()));
 
 
-        KConfigGroupSaver cfgGroupSaver (KGlobal::config (), kpSettingsGroupPreviewSave);
+        KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
         KConfigBase *cfg = cfgGroupSaver.config ();
 
         if (cfg->hasKey (kpSettingPreviewSaveUpdateDelay))
@@ -769,7 +769,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
         #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
             kdDebug () << "\tread cfg preview dialog last rel geometry" << endl;
         #endif
-            KConfigGroupSaver cfgGroupSaver (KGlobal::config (), kpSettingsGroupPreviewSave);
+            KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
             KConfigBase *cfg = cfgGroupSaver.config ();
 
             m_previewDialogLastRelativeGeometry = cfg->readRectEntry (
@@ -845,7 +845,7 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
     {
         m_updatePreviewDialogLastRelativeGeometryTimer->stop ();
 
-        KConfigGroupSaver cfgGroupSaver (KGlobal::config (), kpSettingsGroupPreviewSave);
+        KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
         KConfigBase *cfg = cfgGroupSaver.config ();
 
         cfg->writeEntry (kpSettingPreviewSaveGeometry, m_previewDialogLastRelativeGeometry);

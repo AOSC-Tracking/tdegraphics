@@ -62,7 +62,7 @@ class KSelectAction;
 class PMComboAction;
 class PMSpinBoxAction;
 class PMLabelAction;
-class KProcess;
+class TDEProcess;
 
 /**
  * The part for kpovmodeler (povray document)
@@ -1032,7 +1032,7 @@ public:
    PMBrowserExtension( PMPart* parent )
       : KParts::BrowserExtension( parent, "PMBrowserExtension" )
    {
-       KGlobal::locale()->insertCatalogue("kpovmodeler");
+       TDEGlobal::locale()->insertCatalogue("kpovmodeler");
    }
 
    virtual ~PMBrowserExtension( )

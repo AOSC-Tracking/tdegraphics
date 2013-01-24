@@ -842,7 +842,7 @@ TQString PDFGenerator::getDocumentDate( const TQString & data ) const
             TQDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
             TQTime t( hour, min, sec );
             if ( d.isValid() && t.isValid() )
-                result = KGlobal::locale()->formatDateTime( TQDateTime(d, t), false, true );
+                result = TDEGlobal::locale()->formatDateTime( TQDateTime(d, t), false, true );
             else
                 result = s;
         }

@@ -541,8 +541,8 @@ void PMTreeView::viewportMouseMoveEvent( TQMouseEvent *e )
       int y = e->pos( ).y( );
 
       //Is it time to start a drag?
-      if( abs( x - m_pressedPos.x( ) ) > KGlobalSettings::dndEventDelay( ) ||
-           abs( y - m_pressedPos.y( ) ) > KGlobalSettings::dndEventDelay( ) )
+      if( abs( x - m_pressedPos.x( ) ) > TDEGlobalSettings::dndEventDelay( ) ||
+           abs( y - m_pressedPos.y( ) ) > TDEGlobalSettings::dndEventDelay( ) )
       {
          m_selectOnReleaseEvent = false;
 

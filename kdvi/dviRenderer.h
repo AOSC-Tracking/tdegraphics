@@ -30,7 +30,7 @@ class infoDialog;
 class KAction;
 class KDVIMultiPage;
 class KPrinter;
-class KProcess;
+class TDEProcess;
 class KProgressDialog;
 class KShellProcess;
 class PreBookmark;
@@ -145,9 +145,9 @@ public slots:
   virtual void  getText(RenderedDocumentPage* page);
 
   /** Slots used in conjunction with external programs */
-  void          dvips_output_receiver(KProcess *, char *buffer, int buflen);
-  void          dvips_terminated(KProcess *);
-  void          editorCommand_terminated(KProcess *);
+  void          dvips_output_receiver(TDEProcess *, char *buffer, int buflen);
+  void          dvips_terminated(TDEProcess *);
+  void          editorCommand_terminated(TDEProcess *);
 
 signals:
   /** Passed through to the top-level kpart. */

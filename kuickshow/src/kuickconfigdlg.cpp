@@ -81,7 +81,7 @@ void KuickConfigDialog::applyConfig()
     imageKeyChooser->save();
     browserKeyChooser->save();
 
-    KGlobal::config()->sync();
+    TDEGlobal::config()->sync();
 }
 
 

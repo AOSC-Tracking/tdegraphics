@@ -32,7 +32,7 @@
 #if TDE_VERSION < 307
   #define QUOTE( x ) x
 #else
-  #define QUOTE( x ) KProcess::quote( x )
+  #define QUOTE( x ) TDEProcess::quote( x )
 #endif
 
 using namespace KMrml;
@@ -251,7 +251,7 @@ TQString Config::mrmldCommandline() const
 
 TQString Config::mrmldDataDir()
 {
-    TQString dir = KGlobal::dirs()->saveLocation( "data",
+    TQString dir = TDEGlobal::dirs()->saveLocation( "data",
                                                  "kmrml/mrmld-data/" );
     if ( dir.isEmpty() ) // fallback
         dir = TQDir::homeDirPath() + "/";

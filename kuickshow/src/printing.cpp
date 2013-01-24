@@ -82,7 +82,7 @@ bool Printing::printImageWithTQt( const TQString& filename, KPrinter& printer,
     p.begin( &printer );
 
     TQPaintDeviceMetrics metrics( &printer );
-    p.setFont( KGlobalSettings::generalFont() );
+    p.setFont( TDEGlobalSettings::generalFont() );
     TQFontMetrics fm = p.fontMetrics();
 
     int w = metrics.width();

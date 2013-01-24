@@ -114,7 +114,7 @@ KuickShow::KuickShow( const char *name )
     connect( m_slideTimer, TQT_SIGNAL( timeout() ), TQT_SLOT( nextSlide() ));
 
 
-    KConfig *kc = KGlobal::config();
+    KConfig *kc = TDEGlobal::config();
 
     bool isDir = false; // true if we get a directory on the commandline
 
@@ -253,7 +253,7 @@ void KuickShow::initGUI( const KURL& startDir )
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configure %1...").arg( KGlobal::instance()->aboutData()->programName() ), "configure",
+    KAction *configure = new KAction( i18n("Configure %1...").arg( TDEGlobal::instance()->aboutData()->programName() ), "configure",
                                       KShortcut(),
                                       TQT_TQOBJECT(this), TQT_SLOT( configuration() ),
                                       coll, "kuick_configure" );
@@ -374,7 +374,7 @@ void KuickShow::initGUI( const KURL& startDir )
 
     fileWidget->setFocus();
 
-    KConfig *kc = KGlobal::config();
+    KConfig *kc = TDEGlobal::config();
     kc->setGroup("SessionSettings");
     bool oneWindow = kc->readBoolEntry("OpenImagesInActiveWindow", true );
     oneWindowAction->setChecked( oneWindow );
@@ -1197,7 +1197,7 @@ void KuickShow::saveProperties( KConfig *kc )
 
 void KuickShow::saveSettings()
 {
-    KConfig *kc = KGlobal::config();
+    KConfig *kc = TDEGlobal::config();
 
     kc->setGroup("SessionSettings");
     if ( oneWindowAction )

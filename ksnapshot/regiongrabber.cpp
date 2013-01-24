@@ -57,7 +57,7 @@ void SizeTip::positionTip( const TQRect &rect )
 
   if ( rect.intersects( tipRect ) )
   {
-    TQRect deskR = KGlobalSettings::desktopGeometry( TQPoint( 0, 0 ) );
+    TQRect deskR = TDEGlobalSettings::desktopGeometry( TQPoint( 0, 0 ) );
 
     tipRect.moveCenter( TQPoint( deskR.width()/2, deskR.height()/2 ) );
     if ( !rect.contains( tipRect, true ) && rect.intersects( tipRect ) )

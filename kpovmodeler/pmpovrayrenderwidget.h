@@ -31,7 +31,7 @@
 #include "pmrendermode.h"
 #include "pmdragwidget.h"
 
-class KProcess;
+class TDEProcess;
 class KConfig;
 class KURL;
 class KTempFile;
@@ -130,19 +130,19 @@ protected slots:
    /**
     * Receive povray messages
     */
-   void slotPovrayMessage( KProcess* proc, char* buffer, int buflen );
+   void slotPovrayMessage( TDEProcess* proc, char* buffer, int buflen );
    /**
     * Receive rendered image
     */
-   void slotPovrayImage( KProcess* proc, char* buffer, int buflen );
+   void slotPovrayImage( TDEProcess* proc, char* buffer, int buflen );
    /**
     * Called when output has been written to the povray process
     */
-   //void slotWroteStdin( KProcess* proc );
+   //void slotWroteStdin( TDEProcess* proc );
    /**
     * Called when the process has finished
     */
-   void slotRenderingFinished( KProcess* proc );
+   void slotRenderingFinished( TDEProcess* proc );
    
 protected:
    virtual void paintEvent( TQPaintEvent* );
@@ -151,7 +151,7 @@ private:
    void setPixel( int x, int y, uint c );
    void cleanup( );
    
-   KProcess* m_pProcess;
+   TDEProcess* m_pProcess;
    bool m_bSuspended;
    PMRenderMode m_renderMode;
    TQImage m_image;

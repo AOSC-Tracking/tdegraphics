@@ -342,7 +342,7 @@ bool KPSWidget::startInterpreter()
 {
     setupWidget();
 
-    _process = new KProcess;
+    _process = new TDEProcess;
     if ( _doubleBuffer ) _process->setEnvironment( "GHOSTVIEW", TQString(  "%1 %2" ).arg( winId() ).arg( _backgroundPixmap.handle() ) );
     else _process->setEnvironment( "GHOSTVIEW", TQString::number( winId() ) );
 
@@ -358,21 +358,21 @@ bool KPSWidget::startInterpreter()
     else
 	*_process << _fileName << "-c" << "quit";
 
-    connect( _process, TQT_SIGNAL( processExited( KProcess* ) ),
-             this, TQT_SLOT( slotProcessExited( KProcess* ) ) );
-    connect( _process, TQT_SIGNAL( receivedStdout( KProcess*, char*, int ) ),
-             this, TQT_SLOT( gs_output( KProcess*, char*, int ) ) );
-    connect( _process, TQT_SIGNAL( receivedStderr( KProcess*, char*, int ) ),
-             this, TQT_SLOT( gs_output( KProcess*, char*, int ) ) );
-    connect( _process, TQT_SIGNAL( wroteStdin( KProcess*) ),
-             this, TQT_SLOT( gs_input( KProcess* ) ) );
+    connect( _process, TQT_SIGNAL( processExited( TDEProcess* ) ),
+             this, TQT_SLOT( slotProcessExited( TDEProcess* ) ) );
+    connect( _process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( gs_output( TDEProcess*, char*, int ) ) );
+    connect( _process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQT_SLOT( gs_output( TDEProcess*, char*, int ) ) );
+    connect( _process, TQT_SIGNAL( wroteStdin( TDEProcess*) ),
+             this, TQT_SLOT( gs_input( TDEProcess* ) ) );
 
     kapp->flushX();
 
     // Finally fire up the interpreter.
     kdDebug(4500) << "KPSWidget: starting interpreter" << endl;
-    if( _process->start( KProcess::NotifyOnExit, 
-              _usePipe ? KProcess::All : KProcess::AllOutput ) ) 
+    if( _process->start( TDEProcess::NotifyOnExit, 
+              _usePipe ? TDEProcess::All : TDEProcess::AllOutput ) ) 
     {
 	_interpreterBusy = true;
 	setCursor( waitCursor );
@@ -412,7 +412,7 @@ void KPSWidget::interpreterFailed()
     stopInterpreter();
 }
 
-void KPSWidget::slotProcessExited( KProcess* process )
+void KPSWidget::slotProcessExited( TDEProcess* process )
 {
     kdDebug(4500) << "KPSWidget: process exited" << endl;
 
@@ -430,12 +430,12 @@ void KPSWidget::slotProcessExited( KProcess* process )
     }
 }
 
-void KPSWidget::gs_output( KProcess*, char* buffer, int len )
+void KPSWidget::gs_output( TDEProcess*, char* buffer, int len )
 {
     emit output( buffer, len );
 }
 
-void KPSWidget::gs_input( KProcess* process )
+void KPSWidget::gs_input( TDEProcess* process )
 {
     kdDebug(4500) << "KPSWidget::gs_input" << endl;
 

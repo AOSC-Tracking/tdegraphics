@@ -125,7 +125,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     layout->addLayout( left, 2 );
 
     /* Load autoselection values from Config file */
-    KConfig *cfg = KGlobal::config();
+    KConfig *cfg = TDEGlobal::config();
     cfg->setGroup( GROUP_STARTUP );
 
     /* Units etc. TODO: get from Config */
@@ -305,7 +305,7 @@ bool Previewer::setPreviewImage( const TQImage &image )
 
 TQString Previewer::galleryRoot()
 {
-   TQString dir = (KGlobal::dirs())->saveLocation( "data", "ScanImages", true );
+   TQString dir = (TDEGlobal::dirs())->saveLocation( "data", "ScanImages", true );
 
    if( !dir.endsWith("/") )
       dir += "/";

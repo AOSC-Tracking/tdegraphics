@@ -75,7 +75,7 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
         daemon->apps.append( clientAppId );
 
 #if TDE_VERSION >= 306
-        daemon->process = new KProcess();
+        daemon->process = new TDEProcess();
         daemon->process->setUseShell( true );
 #else
         daemon->process = new KShellProcess();
@@ -84,8 +84,8 @@ bool Watcher::requireDaemon( const TQCString& clientAppId,
         daemon->process->setEnvironment( "LANG", "C" );
         daemon->process->setEnvironment( "LANGUAGE", "C" );
         *daemon->process << commandline;
-        connect( daemon->process, TQT_SIGNAL( processExited( KProcess * ) ),
-                 TQT_SLOT( slotProcExited( KProcess * )));
+        connect( daemon->process, TQT_SIGNAL( processExited( TDEProcess * ) ),
+                 TQT_SLOT( slotProcExited( TDEProcess * )));
         return startDaemon( daemon );
     }
 }
@@ -128,7 +128,7 @@ TQStringList Watcher::runningDaemons() const
     return result;
 }
 
-void Watcher::slotProcExited( KProcess *proc )
+void Watcher::slotProcExited( TDEProcess *proc )
 {
     DaemonData *daemon = findDaemonFromProcess( proc );
 
@@ -166,7 +166,7 @@ void Watcher::slotProcExited( KProcess *proc )
 
 bool Watcher::startDaemon( DaemonData *daemon )
 {
-    if ( daemon->process->start( KProcess::NotifyOnExit ) )
+    if ( daemon->process->start( TDEProcess::NotifyOnExit ) )
         return true;
 
     else
@@ -194,8 +194,8 @@ void Watcher::slotTimeout()
     {
         if ( daemon->apps.isEmpty() )
         {
-            // the daemon and KProcess might get deleted by killing the
-            // KProcess (through slotProcExited()), so don't dereference
+            // the daemon and TDEProcess might get deleted by killing the
+            // TDEProcess (through slotProcExited()), so don't dereference
             // daemon after proc->kill()
             TQString key = daemon->daemonKey;
 
@@ -208,7 +208,7 @@ void Watcher::slotTimeout()
     }
 }
 
-DaemonData * Watcher::findDaemonFromProcess( KProcess *proc )
+DaemonData * Watcher::findDaemonFromProcess( TDEProcess *proc )
 {
     DaemonData *daemon;
     TQDictIterator<DaemonData> it( m_daemons );
@@ -265,7 +265,7 @@ void Watcher::emitFailure( DaemonData *daemon )
     if ( daemon )
     {
         daemonDied( daemon->daemonKey, daemon->process->pid() );
-        m_daemons.remove( daemon->daemonKey ); // deletes daemon + KProcess
+        m_daemons.remove( daemon->daemonKey ); // deletes daemon + TDEProcess
     }
 }
 

@@ -8,7 +8,7 @@
 #if TDE_VERSION < 306
   #define QUOTE( x ) x
 #else
-  #define QUOTE( x ) KProcess::quote( x )
+  #define QUOTE( x ) TDEProcess::quote( x )
 #endif
 
 using namespace KMrmlConfig;
@@ -39,7 +39,7 @@ void IndexCleaner::start()
     startNext();
 }
 
-void IndexCleaner::slotExited( KProcess *proc )
+void IndexCleaner::slotExited( TDEProcess *proc )
 {
     emit advance( m_stepSize );
 
@@ -63,11 +63,11 @@ void IndexCleaner::startNext()
 #if TDE_VERSION < 306
     m_process = new KShellProcess();
 #else
-    m_process = new KProcess();
+    m_process = new TDEProcess();
     m_process->setUseShell( true );
 #endif
-    connect( m_process, TQT_SIGNAL( processExited( KProcess * )),
-             TQT_SLOT( slotExited( KProcess * ) ));
+    connect( m_process, TQT_SIGNAL( processExited( TDEProcess * )),
+             TQT_SLOT( slotExited( TDEProcess * ) ));
 
     TQString cmd = m_config->removeCollectionCommandLine();
 

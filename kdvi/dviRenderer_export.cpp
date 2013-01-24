@@ -61,8 +61,8 @@ void dviRenderer::exportPDF()
   // has been called meanwhile. See also the exportPS method.
   if (proc != 0) {
     // Make sure all further output of the programm is ignored
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), 0, 0);
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
     proc = 0;
   }
 
@@ -130,9 +130,9 @@ void dviRenderer::exportPDF()
   }
   tqApp->disconnect( this, TQT_SIGNAL(mySignal()), 0, 0 );
 
-  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(processExited(KProcess *)), this, TQT_SLOT(dvips_terminated(KProcess *)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(dvips_terminated(TDEProcess *)));
 
   export_errorString = i18n("<qt>The external program 'dvipdf', which was used to export the file, reported an error. "
 			    "You might wish to look at the <strong>document info dialog</strong> which you will "
@@ -145,7 +145,7 @@ void dviRenderer::exportPDF()
   *proc << TQString("-o %1").arg(KShellProcess::quote(fileName));
   *proc << KShellProcess::quote(dviFile->filename);
   proc->closeStdin();
-  if (proc->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false) {
+  if (proc->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false) {
     kdError(4300) << "dvipdfm failed to start" << endl;
     return;
   }
@@ -167,8 +167,8 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
   // enough to ignore the exit status of the editor if another command
   // has been called meanwhile. See also the exportPDF method.
   if (proc != 0) {
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), 0, 0);
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
     proc = 0;
   }
 
@@ -294,9 +294,9 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
     return;
   }
   
-  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(processExited(KProcess *)), this, TQT_SLOT(dvips_terminated(KProcess *)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(dvips_terminated(TDEProcess *)));
   export_errorString = i18n("<qt>The external program 'dvips', which was used to export the file, reported an error. "
 			    "You might wish to look at the <strong>document info dialog</strong> which you will "
 			    "find in the File-Menu for a precise error report.</qt>") ;
@@ -312,7 +312,7 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
   *proc << TQString("%1").arg(KShellProcess::quote(sourceFileName));
   *proc << TQString("-o %1").arg(KShellProcess::quote(fileName));
   proc->closeStdin();
-  if (proc->start(KProcess::NotifyOnExit, KProcess::Stderr) == false) {
+  if (proc->start(TDEProcess::NotifyOnExit, TDEProcess::Stderr) == false) {
     kdError(4300) << "dvips failed to start" << endl;
     return;
   }
@@ -320,7 +320,7 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
 }
 
 
-void dviRenderer::dvips_output_receiver(KProcess *, char *buffer, int buflen)
+void dviRenderer::dvips_output_receiver(TDEProcess *, char *buffer, int buflen)
 {
   // Paranoia.
   if (buflen < 0)
@@ -333,7 +333,7 @@ void dviRenderer::dvips_output_receiver(KProcess *, char *buffer, int buflen)
 }
 
 
-void dviRenderer::dvips_terminated(KProcess *sproc)
+void dviRenderer::dvips_terminated(TDEProcess *sproc)
 {
   // Give an error message from the message string. However, if the
   // sproc is not the "current external process of interest", i.e. not
@@ -351,7 +351,7 @@ void dviRenderer::dvips_terminated(KProcess *sproc)
 }
 
 
-void dviRenderer::editorCommand_terminated(KProcess *sproc)
+void dviRenderer::editorCommand_terminated(TDEProcess *sproc)
 {
   // Give an error message from the message string. However, if the
   // sproc is not the "current external process of interest", i.e. not
@@ -372,7 +372,7 @@ void dviRenderer::editorCommand_terminated(KProcess *sproc)
 
 void dviRenderer::abortExternalProgramm()
 {
-  delete proc; // Deleting the KProcess kills the child.
+  delete proc; // Deleting the TDEProcess kills the child.
   proc = 0;
   
   if (export_tmpFileName.isEmpty() != true) {

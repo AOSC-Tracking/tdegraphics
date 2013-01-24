@@ -93,7 +93,7 @@ EngineError KGOCRDialog::setupGui()
     TQVBox *page = ocrPage();
     TQ_CHECK_PTR( page );
 
-    KConfig *conf = KGlobal::config ();
+    KConfig *conf = TDEGlobal::config ();
     conf->setGroup( CFG_GROUP_OCR_DIA );
 
     //Qt::Horizontal line
@@ -179,7 +179,7 @@ KGOCRDialog::~KGOCRDialog()
 
 void KGOCRDialog::writeConfig( void )
 {
-   KConfig *conf = KGlobal::config ();
+   KConfig *conf = TDEGlobal::config ();
    conf->setGroup( CFG_GROUP_OCR_DIA );
 
    conf->writeEntry( CFG_GOCR_BINARY, TQString(getOCRCmd()));

@@ -63,7 +63,7 @@ ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pag
 
   if (!waitIcon)
   {
-    waitIcon = new TQPixmap(KGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
+    waitIcon = new TQPixmap(TDEGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
   }
 }
 
@@ -188,11 +188,11 @@ MarkListWidget::MarkListWidget(TQWidget* _parent, MarkList* _markList, const Pag
   pageLabel = new TQLabel(TQString("%1").arg(pageNumber), this);
   bottomLayout->addWidget(pageLabel, 1);
 
-  _backgroundColor = KGlobalSettings::baseColor();
+  _backgroundColor = TDEGlobalSettings::baseColor();
 
   // Alternate between colors.
-  if ((pageNumber % 2 == 0) && KGlobalSettings::alternateBackgroundColor().isValid())
-    _backgroundColor = KGlobalSettings::alternateBackgroundColor();
+  if ((pageNumber % 2 == 0) && TDEGlobalSettings::alternateBackgroundColor().isValid())
+    _backgroundColor = TDEGlobalSettings::alternateBackgroundColor();
 
   setPaletteBackgroundColor( _backgroundColor );
 

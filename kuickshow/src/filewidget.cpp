@@ -43,16 +43,16 @@ FileWidget::FileWidget( const KURL& url, TQWidget *parent, const char *name )
     setEnableDirHighlighting( true );
 
 #if TDE_VERSION >= 310
-    setViewConfig( KGlobal::config(), "Filebrowser" );
+    setViewConfig( TDEGlobal::config(), "Filebrowser" );
 #endif
-    readConfig( KGlobal::config(), "Filebrowser" );
+    readConfig( TDEGlobal::config(), "Filebrowser" );
     setView( KFile::Default );
 
     // setOnlyDoubleClickSelectsFiles( true );
     reloadConfiguration();
 
-    completionObject()->setCompletionMode( KGlobalSettings::CompletionAuto );
-    dirCompletionObject()->setCompletionMode( KGlobalSettings::CompletionAuto);
+    completionObject()->setCompletionMode( TDEGlobalSettings::CompletionAuto );
+    dirCompletionObject()->setCompletionMode( TDEGlobalSettings::CompletionAuto);
 
     slotViewChanged();
     connect( this, TQT_SIGNAL( viewChanged( KFileView * )),
@@ -155,8 +155,8 @@ void FileWidget::findCompletion( const TQString& text )
 	 text.find('/') != -1 ) {
 	TQString t = m_fileFinder->completion()->makeCompletion( text );
 
-	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
-            m_fileFinder->completionMode() == KGlobalSettings::CompletionPopupAuto)
+	if (m_fileFinder->completionMode() == TDEGlobalSettings::CompletionPopup ||
+            m_fileFinder->completionMode() == TDEGlobalSettings::CompletionPopupAuto)
 	    m_fileFinder->setCompletedItems(
 			      m_fileFinder->completion()->allMatches() );
 	else

@@ -37,7 +37,7 @@ KIconTemplateContainer* KIconTemplateContainer::instance = 0;
 
 void createStandardTemplates(KIconTemplateContainer *list)
 {
-    KIconLoader *kil = KGlobal::iconLoader();
+    KIconLoader *kil = TDEGlobal::iconLoader();
 
     KIconTemplate it;
     it.path = kil->iconPath("standard", KIcon::User);

@@ -85,7 +85,7 @@ KSANEOCR::KSANEOCR( TQWidget*, KConfig *cfg ):
     m_applyFilter(false),
     m_unlinkORF(true)
 {
-    KConfig *konf = KGlobal::config ();
+    KConfig *konf = TDEGlobal::config ();
     m_ocrEngine = OCRAD;
     m_img = 0L;
     m_tmpFile = 0L;
@@ -393,7 +393,7 @@ void KSANEOCR::startOCRAD( )
 	daemon = 0;
     }
 
-    daemon = new KProcess;
+    daemon = new TDEProcess;
     TQ_CHECK_PTR(daemon);
 
     *daemon << cmd;
@@ -403,7 +403,7 @@ void KSANEOCR::startOCRAD( )
     *daemon << TQString("-l");
     *daemon << TQString::number( ocrDia->layoutDetectionMode());
 
-    KConfig *konf = KGlobal::config ();
+    KConfig *konf = TDEGlobal::config ();
     KConfigGroupSaver( konf, CFG_GROUP_OCRAD );
 
     TQString format = konf->readEntry( CFG_OCRAD_FORMAT, "utf8");
@@ -425,14 +425,14 @@ void KSANEOCR::startOCRAD( )
 
     m_ocrResultText = "";
 
-    connect(daemon, TQT_SIGNAL(processExited(KProcess *)),
-	    this,   TQT_SLOT(  ocradExited(KProcess*)));
-    connect(daemon, TQT_SIGNAL(receivedStdout(KProcess *, char*, int)),
-	    this,   TQT_SLOT(  ocradStdIn(KProcess*, char*, int)));
-    connect(daemon, TQT_SIGNAL(receivedStderr(KProcess *, char*, int)),
-	    this,   TQT_SLOT(  ocradStdErr(KProcess*, char*, int)));
+    connect(daemon, TQT_SIGNAL(processExited(TDEProcess *)),
+	    this,   TQT_SLOT(  ocradExited(TDEProcess*)));
+    connect(daemon, TQT_SIGNAL(receivedStdout(TDEProcess *, char*, int)),
+	    this,   TQT_SLOT(  ocradStdIn(TDEProcess*, char*, int)));
+    connect(daemon, TQT_SIGNAL(receivedStderr(TDEProcess *, char*, int)),
+	    this,   TQT_SLOT(  ocradStdErr(TDEProcess*, char*, int)));
 
-    if (!daemon->start(KProcess::NotifyOnExit, KProcess::All))
+    if (!daemon->start(TDEProcess::NotifyOnExit, TDEProcess::All))
     {
 	kdDebug(28000) <<  "Error starting ocrad-daemon!" << endl;
     }
@@ -445,7 +445,7 @@ void KSANEOCR::startOCRAD( )
 }
 
 
-void KSANEOCR::ocradExited(KProcess* )
+void KSANEOCR::ocradExited(TDEProcess* )
 {
     kdDebug(28000) << "ocrad exit " << endl;
     TQString err;
@@ -462,14 +462,14 @@ void KSANEOCR::ocradExited(KProcess* )
 
 }
 
-void KSANEOCR::ocradStdErr(KProcess*, char* buffer, int buflen)
+void KSANEOCR::ocradStdErr(TDEProcess*, char* buffer, int buflen)
 {
    TQString errorBuffer = TQString::fromLocal8Bit(buffer, buflen);
    kdDebug(28000) << "ocrad says on stderr: " << errorBuffer << endl;
 
 }
 
-void KSANEOCR::ocradStdIn(KProcess*, char* buffer, int buflen)
+void KSANEOCR::ocradStdIn(TDEProcess*, char* buffer, int buflen)
 {
    TQString errorBuffer = TQString::fromLocal8Bit(buffer, buflen);
    kdDebug(28000) << "ocrad says on stdin: " << errorBuffer << endl;
@@ -531,16 +531,16 @@ void KSANEOCR::startOCRProcess( void )
            daemon = 0;
        }
 
-       daemon = new KProcess;
+       daemon = new TDEProcess;
        TQ_CHECK_PTR(daemon);
        m_ocrResultText = "";
 
-       connect(daemon, TQT_SIGNAL(processExited(KProcess *)),
-               this,   TQT_SLOT(  gocrExited(KProcess*)));
-       connect(daemon, TQT_SIGNAL(receivedStdout(KProcess *, char*, int)),
-               this,   TQT_SLOT(  gocrStdIn(KProcess*, char*, int)));
-       connect(daemon, TQT_SIGNAL(receivedStderr(KProcess *, char*, int)),
-               this,   TQT_SLOT(  gocrStdErr(KProcess*, char*, int)));
+       connect(daemon, TQT_SIGNAL(processExited(TDEProcess *)),
+               this,   TQT_SLOT(  gocrExited(TDEProcess*)));
+       connect(daemon, TQT_SIGNAL(receivedStdout(TDEProcess *, char*, int)),
+               this,   TQT_SLOT(  gocrStdIn(TDEProcess*, char*, int)));
+       connect(daemon, TQT_SIGNAL(receivedStderr(TDEProcess *, char*, int)),
+               this,   TQT_SLOT(  gocrStdErr(TDEProcess*, char*, int)));
 
        TQString opt;
        *daemon << TQFile::encodeName(cmd).data();
@@ -570,7 +570,7 @@ void KSANEOCR::startOCRProcess( void )
 
        m_ocrCurrLine = 0;  // Important in gocrStdIn to store the results
 
-       if (!daemon->start(KProcess::NotifyOnExit, KProcess::All))
+       if (!daemon->start(TDEProcess::NotifyOnExit, TDEProcess::All))
        {
            kdDebug(28000) <<  "Error starting daemon!" << endl;
        }
@@ -715,7 +715,7 @@ void KSANEOCR::slotKadmosResult()
 /*
  *
  */
-void KSANEOCR::gocrExited(KProcess* d)
+void KSANEOCR::gocrExited(TDEProcess* d)
 {
    kdDebug(28000) << "daemonExited start !" << endl;
 
@@ -1051,7 +1051,7 @@ void KSANEOCR::cleanUpFiles( void )
 }
 
 
-void KSANEOCR::gocrStdErr(KProcess*, char* buffer, int buflen)
+void KSANEOCR::gocrStdErr(TDEProcess*, char* buffer, int buflen)
 {
    TQString errorBuffer = TQString::fromLocal8Bit(buffer, buflen);
    kdDebug(28000) << "gocr says: " << errorBuffer << endl;
@@ -1059,7 +1059,7 @@ void KSANEOCR::gocrStdErr(KProcess*, char* buffer, int buflen)
 }
 
 
-void KSANEOCR::gocrStdIn(KProcess*, char* buffer, int buflen)
+void KSANEOCR::gocrStdIn(TDEProcess*, char* buffer, int buflen)
 {
     TQString aux = TQString::fromLocal8Bit(buffer, buflen);
 

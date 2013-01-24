@@ -54,7 +54,7 @@ namespace KMrml
         uint timeout;
         TQStrList apps;
         int restartOnFailure;
-        KProcess *process;
+        TDEProcess *process;
         TQTimer *timer;
     };
 
@@ -90,14 +90,14 @@ namespace KMrml
 
     private:
         void unrequireDaemon( DaemonData *daemon, const TQCString& clientAppId);
-        DaemonData *findDaemonFromProcess( KProcess *proc );
+        DaemonData *findDaemonFromProcess( TDEProcess *proc );
         DaemonData *findDaemonFromTimer( TQTimer *timer );
 
         void emitExited( DaemonData *daemon );
         void emitFailure( DaemonData *daemon );
 
     private slots:
-        void slotProcExited( KProcess *proc );
+        void slotProcExited( TDEProcess *proc );
         void slotAppUnregistered( const TQCString& appId );
 
         TQDict<DaemonData> m_daemons;

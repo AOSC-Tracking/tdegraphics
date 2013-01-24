@@ -92,7 +92,7 @@ bool SVGTestsImpl::ok()
 	for(unsigned int i = 0;i < m_systemLanguage->numberOfItems();i++)
 	{
 		TQString value = m_systemLanguage->getItem(i)->string();
-		if(value.isEmpty() || value != (KGlobal::locale()->language()).left(2))
+		if(value.isEmpty() || value != (TDEGlobal::locale()->language()).left(2))
 			return false;
 	}
 	return true;

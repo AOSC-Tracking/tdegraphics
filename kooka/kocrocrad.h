@@ -48,7 +48,7 @@
 
 class KSpellConfig;
 class KURLRequester;
-class KProcess;
+class TDEProcess;
 class TQLabel;
 class TQComboBox;
 
@@ -92,7 +92,7 @@ private:
     void version( const TQString& exe );
 
 private slots:
-    void slReceiveStdIn( KProcess *proc, char *buffer, int buflen);
+    void slReceiveStdIn( TDEProcess *proc, char *buffer, int buflen);
 
 private:
 
@@ -100,7 +100,7 @@ private:
     KURLRequester *m_orfUrlRequester;
     TQComboBox      *m_layoutMode;
     TQLabel         *m_binaryLabel;
-    KProcess       *m_proc;
+    TDEProcess       *m_proc;
     int             m_version;
 };
 

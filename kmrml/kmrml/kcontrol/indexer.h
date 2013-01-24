@@ -23,7 +23,7 @@
 
 #include <kmrml_config.h>
 
-class KProcess;
+class TDEProcess;
 class KProcIO;
 
 namespace KMrmlConfig
@@ -48,7 +48,7 @@ namespace KMrmlConfig
 
     private slots:
         void slotCanRead( KProcIO * );
-        void processFinished( KProcess * );
+        void processFinished( TDEProcess * );
 
     private:
         void processNext();

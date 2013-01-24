@@ -33,7 +33,7 @@ fontMap::fontMap()
   // teTeX 3.0 format first.
   KProcIO proc;
   proc << "kpsewhich" << "--format=map" << "ps2pk.map";
-  if (proc.start(KProcess::Block) == false) {
+  if (proc.start(TDEProcess::Block) == false) {
     kdError(4700) << "fontMap::fontMap(): kpsewhich could not be started." << endl;
     return;
   }
@@ -45,7 +45,7 @@ fontMap::fontMap()
     // Map file not found? Then we try the teTeX < 3.0 way of finding
     // the file.
     proc << "kpsewhich" << "--format=dvips config" << "ps2pk.map";
-    if (proc.start(KProcess::Block) == false) {
+    if (proc.start(TDEProcess::Block) == false) {
       kdError(4700) << "fontMap::fontMap(): kpsewhich could not be started." << endl;
       return;
     }

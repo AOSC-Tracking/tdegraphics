@@ -175,7 +175,7 @@ int kpToolToolBar::defaultIconSize ()
 #endif
 
 
-    KConfigGroupSaver cfgGroupSaver (KGlobal::config (),
+    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
                                      kpSettingsGroupTools);
     KConfigBase *cfg = cfgGroupSaver.config ();
 
@@ -200,7 +200,7 @@ int kpToolToolBar::defaultIconSize ()
     if (m_defaultIconSize <= 0)
     {
         // Adapt according to screen geometry
-        const TQRect desktopSize = KGlobalSettings::desktopGeometry (this);
+        const TQRect desktopSize = TDEGlobalSettings::desktopGeometry (this);
     #if DEBUG_KP_TOOL_TOOL_BAR
         kdDebug () << "\tadapting to screen size=" << desktopSize << endl;
     #endif

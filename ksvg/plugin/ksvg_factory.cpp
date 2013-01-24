@@ -35,7 +35,7 @@ extern "C"
 {
 	void *init_libksvgplugin()
 	{
-		KGlobal::locale()->insertCatalogue("ksvgplugin");
+		TDEGlobal::locale()->insertCatalogue("ksvgplugin");
 		return new KSVGPluginFactory();
 	}
 }

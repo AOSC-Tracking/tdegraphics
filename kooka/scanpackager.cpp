@@ -117,7 +117,7 @@ ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
    m_currImportDir = m_currCopyDir;
 
    /* Preload frequently used icons */
-   KIconLoader *loader = KGlobal::iconLoader();
+   KIconLoader *loader = TDEGlobal::iconLoader();
    m_floppyPixmap = loader->loadIcon( "3floppy_unmount", KIcon::Small );
    m_grayPixmap   = loader->loadIcon( "palette_gray", KIcon::Small );
    m_bwPixmap     = loader->loadIcon( "palette_lineart", KIcon::Small );
@@ -145,7 +145,7 @@ void ScanPackager::openRoots()
 
 KFileTreeBranch* ScanPackager::openRoot( const KURL& root, bool  )
 {
-   KIconLoader *loader = KGlobal::iconLoader();
+   KIconLoader *loader = TDEGlobal::iconLoader();
 
    /* working on the global branch. FIXME */
    m_defaultBranch = addBranch( root, i18n("Kooka Gallery"),
@@ -581,7 +581,7 @@ void ScanPackager::loadImageForItem( KFileTreeViewItem *item )
           kdDebug(28000) << "subImage-count: " << img->subImagesCount() << endl;
           if( img->subImagesCount() > 1 )
           {
-              KIconLoader *loader = KGlobal::iconLoader();
+              KIconLoader *loader = TDEGlobal::iconLoader();
               kdDebug(28000) << "SubImages existing!" << endl;
 
               /* Start at the image with index 1, that makes  one less than are actually in the

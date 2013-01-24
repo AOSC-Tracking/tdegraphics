@@ -264,8 +264,8 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     for ( TQValueList<double>::iterator first = mags.begin(), last = mags.end();
 	    first != last;
 	    ++first ) {
-        TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( *first * 100.0, 2 ));
-        str.remove( KGlobal::locale()->decimalSymbol() + "00" );
+        TQString str = TQString( "%1%" ).arg( TDEGlobal::locale()->formatNumber( *first * 100.0, 2 ));
+        str.remove( TDEGlobal::locale()->decimalSymbol() + "00" );
         zooms << str;
 	if ( *first == 1.0 ) idx = cur;
 	++cur;
@@ -600,8 +600,8 @@ void KGVPart::updateZoomActions()
     }
 
     // Show percentage that isn't predefined
-    TQString str = TQString( "%1%" ).arg( KGlobal::locale()->formatNumber( zoom, 2 ));
-    str.remove( KGlobal::locale()->decimalSymbol() + "00" );
+    TQString str = TQString( "%1%" ).arg( TDEGlobal::locale()->formatNumber( zoom, 2 ));
+    str.remove( TDEGlobal::locale()->decimalSymbol() + "00" );
     items.insert( items.at(idx), 1, str );
     _zoomTo->setItems( items );
     _zoomTo->setCurrentItem( idx );
@@ -902,7 +902,7 @@ void KGVPart::slotZoom( const TQString& nz )
     TQString z = nz;
     double zoom;
     z.remove(  z.find(  '%' ), 1 );
-    zoom = KGlobal::locale()->readNumber(  z ) / 100;
+    zoom = TDEGlobal::locale()->readNumber(  z ) / 100;
     kdDebug( 4500 ) << "ZOOM = "  << nz << ", setting zoom = " << zoom << endl;
 
     DisplayOptions options = miniWidget()->displayOptions();

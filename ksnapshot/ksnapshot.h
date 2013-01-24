@@ -74,7 +74,7 @@ class KSnapshotPreview : public TQLabel
         void mouseMoveEvent(TQMouseEvent * e)
         {
             if (mClickPt != TQPoint(0, 0) &&
-                (e->pos() - mClickPt).manhattanLength() > KGlobalSettings::dndEventDelay())
+                (e->pos() - mClickPt).manhattanLength() > TDEGlobalSettings::dndEventDelay())
             {
                 mClickPt = TQPoint(0, 0);
                 emit startDrag();

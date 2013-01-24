@@ -86,7 +86,7 @@ ThumbView::~ThumbView()
 
 bool ThumbView::readSettings()
 {
-   KConfig *cfg = KGlobal::config();
+   KConfig *cfg = TDEGlobal::config();
    cfg->setGroup( THUMB_GROUP );
    bool dirty = false;
 
@@ -481,7 +481,7 @@ void ThumbView::clear()
 
 void ThumbView::saveConfig()
 {
-   KConfig *cfg = KGlobal::config();
+   KConfig *cfg = TDEGlobal::config();
    cfg->setGroup( THUMB_GROUP );
 
    cfg->writeEntry( MARGIN_COLOR1, m_marginColor1 );

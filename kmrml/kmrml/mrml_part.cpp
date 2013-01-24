@@ -85,7 +85,7 @@ TDEInstance * PartFactory::instance()
 {
     if ( !s_instance ) {
         s_instance = new TDEInstance( "kmrml" );
-        KGlobal::locale()->insertCatalogue( "kmrml" );
+        TDEGlobal::locale()->insertCatalogue( "kmrml" );
     }
     return s_instance;
 }

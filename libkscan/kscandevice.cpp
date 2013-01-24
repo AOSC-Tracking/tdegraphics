@@ -187,7 +187,7 @@ KScanDevice::KScanDevice( TQObject *parent )
     pixel_y = 0;
     scanner_name = 0L;
 
-    KConfig *konf = KGlobal::config ();
+    KConfig *konf = TDEGlobal::config ();
     konf->setGroup( GROUP_STARTUP );
     bool netaccess = konf->readBoolEntry( STARTUP_ONLY_LOCAL, false );
     kdDebug(29000) << "Query for network scanners " << (netaccess ? "Not enabled" : "Enabled") << endl;
@@ -669,7 +669,7 @@ void KScanDevice::slStopScanning( void )
 
 const TQString KScanDevice::previewFile()
 {
-   TQString dir = (KGlobal::dirs())->saveLocation( "data", "ScanImages", true );
+   TQString dir = (TDEGlobal::dirs())->saveLocation( "data", "ScanImages", true );
    if( !dir.endsWith("/") )
       dir += "/";
 

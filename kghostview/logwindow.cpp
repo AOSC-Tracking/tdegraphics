@@ -43,7 +43,7 @@ LogWindow::LogWindow( const TQString& caption,
     _logView->setTextFormat( TQt::PlainText );
     _logView->setReadOnly( true );
     _logView->setWordWrap( TQTextEdit::NoWrap );
-    _logView->setFont( KGlobalSettings::fixedFont() );
+    _logView->setFont( TDEGlobalSettings::fixedFont() );
     _logView->setMinimumWidth( 80 * fontMetrics().width( " " ) );
 
     connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( clear() ) );

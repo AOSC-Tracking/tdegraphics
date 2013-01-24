@@ -96,7 +96,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   setMaximumSize(8000,8000);
   KConfig *cfg = kapp->config();
   TQColor defaultColor = DEFAULT_RULER_COLOR;
-  TQFont defaultFont(KGlobalSettings::generalFont().family(), 8);
+  TQFont defaultFont(TDEGlobalSettings::generalFont().family(), 8);
   defaultFont.setPixelSize(8);
   if (cfg) {
       cfg->setGroup(CFG_GROUP_SETTINGS);
@@ -114,7 +114,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   mLabel = new TQLabel(this);
   mLabel->setGeometry(0,height()-12,32,12);
   mLabel->setBackgroundOrigin(ParentOrigin);
-  TQFont labelFont(KGlobalSettings::generalFont().family(), 10);
+  TQFont labelFont(TDEGlobalSettings::generalFont().family(), 10);
   labelFont.setPixelSize(10);
   mLabel->setFont(labelFont);
   TQWhatsThis::add(mLabel,
@@ -125,7 +125,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   mColorLabel->resize(45,12);
   mColorLabel->setPaletteBackgroundColor(mColor);
   mColorLabel->hide();
-  TQFont colorFont(KGlobalSettings::fixedFont().family(), 10);
+  TQFont colorFont(TDEGlobalSettings::fixedFont().family(), 10);
   colorFont.setPixelSize(10);
   mColorLabel->setFont(colorFont);
   mColorLabel->move(mLabel->pos() + TQPoint(0, 20));
@@ -283,7 +283,7 @@ void KLineal::setOrientation(int inOrientation) {
    
   rotateRect(r, center, nineties);
 
-  TQRect desktop = KGlobalSettings::desktopGeometry(this);
+  TQRect desktop = TDEGlobalSettings::desktopGeometry(this);
   if (r.top() < desktop.top())
      r.moveTop( desktop.top() );
   if (r.bottom() > desktop.bottom())
@@ -321,7 +321,7 @@ void KLineal::reLength(int percentOfScreen) {
   if (percentOfScreen < 10) {
     return;
   }
-  TQRect r = KGlobalSettings::desktopGeometry(this);
+  TQRect r = TDEGlobalSettings::desktopGeometry(this);
 
   if (mOrientation == North || mOrientation == South) {
     mLongEdgeLen = r.width() * percentOfScreen / 100;
@@ -351,7 +351,7 @@ void KLineal::setFullLength() {
   reLength(100);
 }
 void KLineal::choseColor() {
-  TQRect r = KGlobalSettings::desktopGeometry(this);
+  TQRect r = TDEGlobalSettings::desktopGeometry(this);
 
   TQPoint pos = TQCursor::pos();
   if (pos.x() + mColorSelector.width() > r.width()) {

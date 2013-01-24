@@ -193,7 +193,7 @@ KGVShell::saveProperties( KConfig* config )
 void
 KGVShell::readSettings()
 {
-    recent->loadEntries( KGlobal::config() );
+    recent->loadEntries( TDEGlobal::config() );
     TQStringList items = recent->items();
 
 // Code copied from kviewshell.cpp:
@@ -210,10 +210,10 @@ KGVShell::readSettings()
         }
     }
 
-    applyMainWindowSettings(KGlobal::config(), "MainWindow");
+    applyMainWindowSettings(TDEGlobal::config(), "MainWindow");
 
-    KGlobal::config()->setDesktopGroup();
-    bool fullScreen = KGlobal::config()->readBoolEntry( "FullScreen", false );
+    TDEGlobal::config()->setDesktopGroup();
+    bool fullScreen = TDEGlobal::config()->readBoolEntry( "FullScreen", false );
     setFullScreen( fullScreen );
     _showMenuBarAction->setChecked( menuBar()->isVisible() );
 }
@@ -221,14 +221,14 @@ KGVShell::readSettings()
 void
 KGVShell::writeSettings()
 {
-    saveMainWindowSettings(KGlobal::config(), "MainWindow");
+    saveMainWindowSettings(TDEGlobal::config(), "MainWindow");
 
-    recent->saveEntries( KGlobal::config() );
+    recent->saveEntries( TDEGlobal::config() );
 
-    KGlobal::config()->setDesktopGroup();
-    KGlobal::config()->writeEntry( "FullScreen", m_fullScreenAction->isChecked());
+    TDEGlobal::config()->setDesktopGroup();
+    TDEGlobal::config()->writeEntry( "FullScreen", m_fullScreenAction->isChecked());
 
-    KGlobal::config()->sync();
+    TDEGlobal::config()->sync();
 }
 
 void
@@ -350,7 +350,7 @@ void KGVShell::slotUpdateFullScreen()
 
 void KGVShell::slotConfigureToolbars()
 {
-    saveMainWindowSettings( KGlobal::config(), "MainWindow" );
+    saveMainWindowSettings( TDEGlobal::config(), "MainWindow" );
     KEditToolbar dlg( factory() );
     connect(&dlg,TQT_SIGNAL(newToolbarConfig()),this,TQT_SLOT(slotNewToolbarConfig()));
     dlg.exec();
@@ -358,7 +358,7 @@ void KGVShell::slotConfigureToolbars()
 
 void KGVShell::slotNewToolbarConfig()
 {
-    applyMainWindowSettings( KGlobal::config(), "MainWindow" );
+    applyMainWindowSettings( TDEGlobal::config(), "MainWindow" );
 }
 
 void KGVShell::slotRMBClick()

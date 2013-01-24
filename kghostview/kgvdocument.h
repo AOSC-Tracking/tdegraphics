@@ -176,7 +176,7 @@ protected slots:
     void processExited();
 
 private:
-    KProcess* _process;
+    TDEProcess* _process;
     TQString   _ghostscriptPath;
 };
 

@@ -75,8 +75,8 @@ KCMKMrml::~KCMKMrml()
 
 void KCMKMrml::checkGiftInstallation()
 {
-    TQString giftExe = KGlobal::dirs()->findExe( "gift" );
-    TQString giftAddCollectionExe = KGlobal::dirs()->findExe( "gift-add-collection.pl" );
+    TQString giftExe = TDEGlobal::dirs()->findExe( "gift" );
+    TQString giftAddCollectionExe = TDEGlobal::dirs()->findExe( "gift-add-collection.pl" );
 
     if ( giftExe.isEmpty() || giftAddCollectionExe.isEmpty() )
     {

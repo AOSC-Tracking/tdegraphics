@@ -405,7 +405,7 @@ void MrmlViewItem::mouseMoveEvent( TQMouseEvent *e )
 
     if ( (e->state() & Qt::LeftButton) && !pressedPos.isNull() ) {
         TQPoint dist = e->pos() - pressedPos;
-        if ( dist.manhattanLength() > KGlobalSettings::dndEventDelay() ) {
+        if ( dist.manhattanLength() > TDEGlobalSettings::dndEventDelay() ) {
             // start drag here
             KURL::List urls;
             // ### support multiple files?
@@ -421,7 +421,7 @@ void MrmlViewItem::mouseReleaseEvent( TQMouseEvent *e )
 {
     if ( hitsPixmap( e->pos() )) {
         TQPoint dist = e->pos() - pressedPos;
-        if ( dist.manhattanLength() < KGlobalSettings::dndEventDelay() ) {
+        if ( dist.manhattanLength() < TDEGlobalSettings::dndEventDelay() ) {
             emit view()->activated( m_url, e->button() );
         }
     }

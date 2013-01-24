@@ -304,8 +304,8 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
   // If PK fonts are generated, the kpsewhich command will re-route
   // the output of MetaFont into its stderr. Here we make sure this
   // output is intercepted and parsed.
-  tqApp->connect(&kpsewhichIO, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)),
-		this, TQT_SLOT(mf_output_receiver(KProcess *, char *, int)));
+  tqApp->connect(&kpsewhichIO, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)),
+		this, TQT_SLOT(mf_output_receiver(TDEProcess *, char *, int)));
   
   
   kpsewhichIO.setUseShell(true);
@@ -357,7 +357,7 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
   kpsewhichIO << shellProcessCmdLine;
   TQString importanceOfKPSEWHICH = i18n("<p>KDVI relies on the <b>kpsewhich</b> program to locate font files "
 				       "on your hard disc and to generate PK fonts, if necessary.</p>");
-  if (kpsewhichIO.start(KProcess::NotifyOnExit, false) == false) {
+  if (kpsewhichIO.start(TDEProcess::NotifyOnExit, false) == false) {
     TQString msg = i18n(	"<p>The shell process for the kpsewhich program could not "
 			"be started. Consequently, some font files could not be found, "
 			"and your document might by unreadable. If this error is reproducable "
@@ -544,7 +544,7 @@ void fontPool::release_fonts()
 }
 
 
-void fontPool::mf_output_receiver(KProcess *, char *buffer, int buflen)
+void fontPool::mf_output_receiver(TDEProcess *, char *buffer, int buflen)
 {
   // Paranoia.
   if (buflen < 0)

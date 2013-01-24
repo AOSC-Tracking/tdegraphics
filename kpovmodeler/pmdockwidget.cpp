@@ -179,7 +179,7 @@ void PMDockMainWindow::createGUI( Part * part )
 
   if( !d->m_bShellGUIActivated )
   {
-    loadPlugins( TQT_TQOBJECT(this), this, KGlobal::instance() );
+    loadPlugins( TQT_TQOBJECT(this), this, TDEGlobal::instance() );
     createShellGUI();
     d->m_bShellGUIActivated = true;
   }
@@ -2003,7 +2003,7 @@ void PMDockManager::readConfig(TQDomElement &base)
 void PMDockManager::writeConfig( KConfig* c, TQString group )
 {
   //debug("BEGIN Write Config");
-  if ( !c ) c = KGlobal::config();
+  if ( !c ) c = TDEGlobal::config();
   if ( group.isEmpty() ) group = "dock_setting_default";
 
   c->setGroup( group );
@@ -2121,7 +2121,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
 #include <tqmessagebox.h>
 void PMDockManager::readConfig( KConfig* c, TQString group )
 {
-  if ( !c ) c = KGlobal::config();
+  if ( !c ) c = TDEGlobal::config();
   if ( group.isEmpty() ) group = "dock_setting_default";
 
   c->setGroup( group );

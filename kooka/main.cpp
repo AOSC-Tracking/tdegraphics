@@ -85,9 +85,9 @@ int main( int argc, char *argv[] )
    TDECmdLineArgs::addCmdLineOptions( options ); // Add my own options.
 
    TDEApplication app;
-   KGlobal::locale()->insertCatalogue("libkscan");
+   TDEGlobal::locale()->insertCatalogue("libkscan");
    KImageIO::registerFormats();
-   KIconLoader *loader = KGlobal::iconLoader();
+   KIconLoader *loader = TDEGlobal::iconLoader();
 
    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
    TQCString  devToUse = args->getOption( "d" );

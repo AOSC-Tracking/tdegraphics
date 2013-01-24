@@ -100,7 +100,7 @@ EngineError KadmosDialog::findClassifiers()
 {
     findClassifierPath();
 
-    KLocale *locale = KGlobal::locale();
+    KLocale *locale = TDEGlobal::locale();
     TQStringList allCountries = locale->allLanguagesTwoAlpha ();
     for ( TQStringList::Iterator it = allCountries.begin();
           it != allCountries.end(); ++it )
@@ -236,7 +236,7 @@ EngineError KadmosDialog::findClassifierPath()
     KStandardDirs stdDir;
     EngineError err = ENG_OK;
 
-    KConfig *conf = KGlobal::config ();
+    KConfig *conf = TDEGlobal::config ();
     KConfigGroupSaver gs( conf, CFG_GROUP_KADMOS );
 
     m_customClassifierPath = conf->readPathEntry( CFG_KADMOS_CLASSIFIER_PATH );
@@ -341,7 +341,7 @@ void KadmosDialog::slFontChanged( int id )
 {
     m_cbLang->clear();
 
-    KConfig *conf = KGlobal::config ();
+    KConfig *conf = TDEGlobal::config ();
     KConfigGroupSaver gs( conf, CFG_GROUP_KADMOS );
 
 

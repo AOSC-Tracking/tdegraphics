@@ -224,7 +224,7 @@ void ghostscript_interface::gs_generate_graphics_file(const PageNumber& page, co
 #endif
 
   proc << argus;
-  if (proc.start(KProcess::Block) == false) {
+  if (proc.start(TDEProcess::Block) == false) {
     // Starting ghostscript did not work. 
     // TODO: Issue error message, switch PS support off.
     kdError(4300) << "ghostview could not be started" << endl;
@@ -331,7 +331,7 @@ TQString ghostscript_interface::locateEPSfile(const TQString &filename, const KU
   TQString EPSfilename;
   KProcIO proc;
   proc << "kpsewhich" << filename;
-  proc.start(KProcess::Block);
+  proc.start(TDEProcess::Block);
   proc.readln(EPSfilename);
 
   return EPSfilename.stripWhiteSpace();

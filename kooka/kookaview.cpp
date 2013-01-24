@@ -96,7 +96,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
      m_mainWindow(parent),
      m_ocrResEdit(0)
 {
-   KIconLoader *loader = KGlobal::iconLoader();
+   KIconLoader *loader = TDEGlobal::iconLoader();
    scan_params = 0L;
    preview_canvas = 0L;
 
@@ -294,7 +294,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
 KookaView::~KookaView()
 {
-   saveProperties( KGlobal::config () );
+   saveProperties( TDEGlobal::config () );
    delete preview_canvas;
 
    kdDebug(28000)<< "Finished saving config data" << endl;
@@ -438,7 +438,7 @@ void KookaView::loadStartupImage( void )
    kdDebug( 28000) << "Starting to load startup image" << endl;
 
    /* Now set the configured stuff */
-   KConfig *konf = KGlobal::config ();
+   KConfig *konf = TDEGlobal::config ();
    if( konf )
    {
       konf->setGroup(GROUP_STARTUP);
@@ -555,7 +555,7 @@ void KookaView::startOCR( KookaImage *img )
    {
       if( ocrFabric == 0L )
       {
-          ocrFabric = new KSANEOCR( m_mainDock, KGlobal::config() );
+          ocrFabric = new KSANEOCR( m_mainDock, TDEGlobal::config() );
           ocrFabric->setImageCanvas( img_canvas );
 
           connect( ocrFabric, TQT_SIGNAL( newOCRResultText( const TQString& )),

@@ -767,8 +767,8 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   // henceforth dimiss the output of the older programm. "If it
   // hasn't failed until now, we don't care."
   if (proc != 0) {
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), 0, 0);
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
     proc = 0;
   }
   
@@ -778,9 +778,9 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
     kdError(4300) << "Could not allocate ShellProcess for the editor command." << endl;
     return;
   }
-  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(KProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(processExited(KProcess *)), this, TQT_SLOT(editorCommand_terminated(KProcess *)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(editorCommand_terminated(TDEProcess *)));
   // Merge the editor-specific editor message here.
   export_errorString = i18n("<qt>The external program<br><br><tt><strong>%1</strong></tt><br/><br/>which was used to call the editor "
 			    "for inverse search, reported an error. You might wish to look at the <strong>document info "
@@ -797,7 +797,7 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   proc->clearArguments();
   *proc << command;
   proc->closeStdin();
-  if (proc->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false) {
+  if (proc->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false) {
     kdError(4300) << "Editor failed to start" << endl;
     return;
   }

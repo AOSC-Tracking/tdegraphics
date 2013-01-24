@@ -61,7 +61,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   : KViewPart_Iface(parent, name), showSidebar(0), saveAction(0), partManager(0),
     multiPageLibrary(TQString()), aboutDialog(0)
 {
-  KGlobal::locale()->insertCatalogue("kviewshell");
+  TDEGlobal::locale()->insertCatalogue("kviewshell");
 
   tmpUnzipped = 0L;
   pageChangeIsConnected = false;
@@ -419,7 +419,7 @@ TQString KViewPart::pageSizeDescription()
 
   TQString size = " ";
   if (s.formatNumber() == -1) {
-    if (KGlobal::locale()-> measureSystem() == KLocale::Metric)
+    if (TDEGlobal::locale()-> measureSystem() == KLocale::Metric)
       size += TQString("%1x%2 mm").arg(s.width().getLength_in_mm(), 0, 'f', 0).arg(s.height().getLength_in_mm(), 0, 'f', 0);
     else
       size += TQString("%1x%2 in").arg(s.width().getLength_in_inch(), 0, 'g', 2).arg(s.height().getLength_in_inch(), 0, 'g', 2);

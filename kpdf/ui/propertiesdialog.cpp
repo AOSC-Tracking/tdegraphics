@@ -88,7 +88,7 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
     width = TQMAX( width, page2Layout->sizeHint().width() + marginHint() + spacingHint() + 31 );
   }
   // stay inside the 2/3 of the screen width
-  TQRect screenContainer = KGlobalSettings::desktopGeometry( this );
+  TQRect screenContainer = TDEGlobalSettings::desktopGeometry( this );
   width = TQMIN( width, 2*screenContainer.width()/3 );
   resize(width, 1);
 }

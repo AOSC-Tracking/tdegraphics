@@ -353,7 +353,7 @@ void KViewPresenter::makeCurrent( TQListViewItem * item )
 	else
 	{
 		m_pCurrentItem = static_cast<ImageListItem*>( item );
-		m_pCurrentItem->setPixmap( 0, KGlobal::iconLoader()->loadIcon( "1rightarrow", KIcon::Small ) );
+		m_pCurrentItem->setPixmap( 0, TDEGlobal::iconLoader()->loadIcon( "1rightarrow", KIcon::Small ) );
 		m_pImageList->m_pListView->ensureItemVisible( m_pCurrentItem );
 	}
 }

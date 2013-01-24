@@ -36,7 +36,7 @@ void PMCommentEdit::createTopWidgets( )
    m_pEdit = new TQMultiLineEdit( this );
    m_pEdit->setTextFormat( TQt::PlainText );
    m_pEdit->setWordWrap( TQTextEdit::NoWrap );
-   m_pEdit->setFont( KGlobalSettings::fixedFont( ) );
+   m_pEdit->setFont( TDEGlobalSettings::fixedFont( ) );
    topLayout( )->addWidget( m_pEdit, 2 );
    
    connect( m_pEdit, TQT_SIGNAL( textChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );

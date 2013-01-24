@@ -649,7 +649,7 @@ void KViewViewer::setZoom( const TQString & newZoom )
 	if( newZoom == "33%" )
 		zoom = 1.0 / 3.0;
 	else
-		zoom = KGlobal::locale()->readNumber( z ) / 100;
+		zoom = TDEGlobal::locale()->readNumber( z ) / 100;
 
 	m_pCanvas->setZoom( zoom );
 }

@@ -158,7 +158,7 @@ bool PMPovrayWidget::render( const TQByteArray& scene, const PMRenderMode& m,
       if( h > dw->height( ) )
          h = dw->height( );
 #else
-      TQRect dw = KGlobalSettings::desktopGeometry(this);
+      TQRect dw = TDEGlobalSettings::desktopGeometry(this);
       if( w > dw.width() )
          w = dw.width();
       if( h > dw.height() )
