@@ -19,7 +19,7 @@
 #ifndef KVIEWCONFMODULES_H
 #define KVIEWCONFMODULES_H
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 class TQVButtonGroup;
 

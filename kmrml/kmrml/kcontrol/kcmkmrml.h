@@ -19,7 +19,7 @@
 #ifndef KCMKMRML_H
 #define KCMKMRML_H
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 class TDEAboutData;
 class KURLRequester;

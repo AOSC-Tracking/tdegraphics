@@ -19,7 +19,7 @@
 #ifndef CONFMODULES_H
 #define CONFMODULES_H
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqptrlist.h>
 
 class GeneralConfigWidget;

@@ -17,7 +17,7 @@
 #ifndef KGAMMA_H_
 #define KGAMMA_H_
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 class GammaCtrl;
 class TQCheckBox;

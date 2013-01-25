@@ -19,7 +19,7 @@
 #ifndef KVIEWPRESENTERCONFIG_H
 #define KVIEWPRESENTERCONFIG_H
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 class TQCheckBox;
 

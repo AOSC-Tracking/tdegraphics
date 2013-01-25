@@ -23,7 +23,7 @@
 #ifndef __kamera_h__
 #define __kamera_h__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <gphoto2.h>
 
 class TQWidget;
