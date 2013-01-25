@@ -54,14 +54,14 @@ class KView : public KParts::MainWindow
 
 	protected:
 		bool queryClose();
-		void saveProperties( KConfig * );
-		void readProperties( KConfig * );
-		void saveSettings( KConfig * );
+		void saveProperties( TDEConfig * );
+		void readProperties( TDEConfig * );
+		void saveSettings( TDEConfig * );
 
 		virtual bool eventFilter( TQObject *, TQEvent * );
 
 	protected slots:
-		void readSettings(); //KConfig * );
+		void readSettings(); //TDEConfig * );
 		void imageSizeChanged( const TQSize & );
 		void selectionChanged( const TQRect & );
 		void contextPress( const TQPoint & );
@@ -79,12 +79,12 @@ class KView : public KParts::MainWindow
 		void reloadConfig();
 		void enableAction( const char *, bool );
 		void clipboardDataChanged();
-		void jobStarted( KIO::Job * );
+		void jobStarted( TDEIO::Job * );
 		void jobCompleted();
 		void jobCompleted( bool );
 		void jobCanceled( const TQString & );
-		void loadingProgress( KIO::Job *, unsigned long );
-		void speedProgress( KIO::Job *, unsigned long );
+		void loadingProgress( TDEIO::Job *, unsigned long );
+		void speedProgress( TDEIO::Job *, unsigned long );
 		void slotSetStatusBarText( const TQString & );
 		void cursorPos( const TQPoint & ); // write the cursor pos to the statusbar
 		void loadPlugins();

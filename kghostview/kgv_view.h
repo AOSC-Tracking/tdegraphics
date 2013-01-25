@@ -135,8 +135,8 @@ public slots:
     void setDisplayOptions( const DisplayOptions& opts );
 
 protected slots:
-    void slotData( KIO::Job*, const TQByteArray& );
-    void slotJobFinished( KIO::Job* );
+    void slotData( TDEIO::Job*, const TQByteArray& );
+    void slotJobFinished( TDEIO::Job* );
 
     void slotMimetypeFinished( const TQString& );
     void slotMimetypeError();
@@ -209,7 +209,7 @@ private:
     KPopupMenu*    _popup;
 
     TQFile             _tmpFile;
-    KIO::TransferJob* _job;
+    TDEIO::TransferJob* _job;
     KDirWatch*        _fileWatcher;
     KGVRun*           _mimetypeScanner;
     TQTimer*           _dirtyHandler;

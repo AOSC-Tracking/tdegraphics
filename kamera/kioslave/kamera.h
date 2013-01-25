@@ -29,7 +29,7 @@
 
 class KSimpleConfig;
 
-class KameraProtocol : public KIO::SlaveBase
+class KameraProtocol : public TDEIO::SlaveBase
 {
 public:
 	KameraProtocol(const TQCString &pool, const TQCString &app);
@@ -63,9 +63,9 @@ private:
 
 	void statRoot(void);
 	void statRegular(const KURL &url);
-	void translateTextToUDS(KIO::UDSEntry &udsEntry, const TQString &info, const char *txt);
-	void translateFileToUDS(KIO::UDSEntry &udsEntry, const CameraFileInfo &info, TQString name);
-	void translateDirectoryToUDS(KIO::UDSEntry &udsEntry, const TQString &dirname);
+	void translateTextToUDS(TDEIO::UDSEntry &udsEntry, const TQString &info, const char *txt);
+	void translateFileToUDS(TDEIO::UDSEntry &udsEntry, const CameraFileInfo &info, TQString name);
+	void translateDirectoryToUDS(TDEIO::UDSEntry &udsEntry, const TQString &dirname);
 	bool cameraSupportsPreview(void);
 	bool cameraSupportsDel(void);
 	bool cameraSupportsPut(void);

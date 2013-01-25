@@ -72,8 +72,8 @@ signals:
   void newname(const TQString &);
 
 public slots:
-  virtual void saveProperties(KConfig*);
-  virtual void readProperties(KConfig*);
+  virtual void saveProperties(TDEConfig*);
+  virtual void readProperties(TDEConfig*);
   void updateProperties();
 
 protected slots:

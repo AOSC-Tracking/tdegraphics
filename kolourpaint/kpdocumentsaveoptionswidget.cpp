@@ -742,8 +742,8 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
                  this, TQT_SLOT (hidePreview ()));
 
 
-        KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         if (cfg->hasKey (kpSettingPreviewSaveUpdateDelay))
         {
@@ -769,8 +769,8 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
         #if DEBUG_KP_DOCUMENT_SAVE_OPTIONS_WIDGET
             kdDebug () << "\tread cfg preview dialog last rel geometry" << endl;
         #endif
-            KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
-            KConfigBase *cfg = cfgGroupSaver.config ();
+            TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
+            TDEConfigBase *cfg = cfgGroupSaver.config ();
 
             m_previewDialogLastRelativeGeometry = cfg->readRectEntry (
                 kpSettingPreviewSaveGeometry);
@@ -845,8 +845,8 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
     {
         m_updatePreviewDialogLastRelativeGeometryTimer->stop ();
 
-        KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         cfg->writeEntry (kpSettingPreviewSaveGeometry, m_previewDialogLastRelativeGeometry);
         cfg->sync ();

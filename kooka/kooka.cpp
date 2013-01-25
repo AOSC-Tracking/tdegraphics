@@ -75,7 +75,7 @@ Kooka::Kooka( const TQCString& deviceToUse)
     setXMLFile( "kookaui.rc", true );
 
     setAcceptDrops(false); // Waba: Not (yet?) supported
-    KConfig *konf = TDEGlobal::config ();
+    TDEConfig *konf = TDEGlobal::config ();
     readDockConfig ( konf, DOCK_SIZES );
 
     // then, setup our actions
@@ -109,7 +109,7 @@ void Kooka::createMyGUI( KParts::Part *part )
 
 Kooka::~Kooka()
 {
-   KConfig *konf = TDEGlobal::config ();
+   TDEConfig *konf = TDEGlobal::config ();
    m_view->slCloseScanDevice();
    writeDockConfig ( konf, DOCK_SIZES );
    delete m_printer;
@@ -271,7 +271,7 @@ actionCollection());
 }
 
 
-void Kooka::saveProperties(KConfig *config)
+void Kooka::saveProperties(TDEConfig *config)
 {
     // the 'config' object points to the session managed
     // config file.  anything you write here will be available
@@ -285,7 +285,7 @@ void Kooka::saveProperties(KConfig *config)
    m_view->saveProperties( config );
 }
 
-void Kooka::readProperties(KConfig *config)
+void Kooka::readProperties(TDEConfig *config)
 {
    (void) config;
     // the 'config' object points to the session managed

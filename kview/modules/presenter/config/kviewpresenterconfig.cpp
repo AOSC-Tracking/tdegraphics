@@ -32,7 +32,7 @@ typedef KGenericFactory<KViewPresenterConfig, TQWidget> KViewPresenterConfigFact
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewpresenterconfig, KViewPresenterConfigFactory( "kcm_kviewpresenterconfig" ) )
 
 KViewPresenterConfig::KViewPresenterConfig( TQWidget * parent, const char *, const TQStringList & args )
-	: KCModule( KViewPresenterConfigFactory::instance(), parent, args )
+	: TDECModule( KViewPresenterConfigFactory::instance(), parent, args )
 {
 	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 	layout->setAutoAdd( true );

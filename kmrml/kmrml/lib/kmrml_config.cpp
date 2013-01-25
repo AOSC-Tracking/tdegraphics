@@ -54,13 +54,13 @@ const int DEFAULT_PORT = 12789;
 
 Config::Config()
 {
-    m_ownConfig = new KConfig( "kio_mrmlrc", false, false );
+    m_ownConfig = new TDEConfig( "kio_mrmlrc", false, false );
     m_config = m_ownConfig;
 
     init();
 }
 
-Config::Config( KConfig *config )
+Config::Config( TDEConfig *config )
     : m_config( config ),
       m_ownConfig( 0L )
 {
@@ -98,7 +98,7 @@ bool Config::sync()
     // mrmlsearch binary can also use this class)
     // tell the ioslaves about the new configuration
 //     if ( notifySlaves )
-//         KIO::SlaveConfig::self()->reset();
+//         TDEIO::SlaveConfig::self()->reset();
 }
 
 void Config::setDefaultHost( const TQString& host )
@@ -117,7 +117,7 @@ ServerSettings Config::settingsForLocalHost() const
 
 ServerSettings Config::settingsForHost( const TQString& host ) const
 {
-    KConfigGroup config( m_config, settingsGroup( host ) );
+    TDEConfigGroup config( m_config, settingsGroup( host ) );
     ServerSettings settings;
 
     settings.host = host;

@@ -229,8 +229,8 @@ bool FileWidget::eventFilter( TQObject *o, TQEvent *e )
 }
 
 
-// KIO::NetAccess::stat() does NOT give us the right mimetype, while
-// KIO::NetAccess::mimetype() does. So we have this hacklet to tell
+// TDEIO::NetAccess::stat() does NOT give us the right mimetype, while
+// TDEIO::NetAccess::mimetype() does. So we have this hacklet to tell
 // showImage that the KFileItem is really an image.
 #define IS_IMAGE 5
 #define MY_TYPE 55

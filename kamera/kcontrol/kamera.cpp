@@ -49,7 +49,7 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kamera, KKameraConfigFactory( "kcmkamera" ) )
 KKameraConfig *KKameraConfig::m_instance = NULL;
 
 KKameraConfig::KKameraConfig(TQWidget *parent, const char *name, const TQStringList &)
-	: KCModule(KKameraConfigFactory::instance(), parent, name)
+	: TDECModule(KKameraConfigFactory::instance(), parent, name)
 {
 	m_devicePopup = new KPopupMenu(this);
 	m_actions = new KActionCollection(this);

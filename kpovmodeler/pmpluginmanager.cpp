@@ -47,7 +47,7 @@ public:
 PMPluginManager::PMPluginManager( )
 {
    // find installed plugins
-   KConfigGroup cfgGroup( PMFactory::instance( )->config( ),
+   TDEConfigGroup cfgGroup( PMFactory::instance( )->config( ),
                           "KParts Plugins" );
    TQValueList<Plugin::PluginInfo> plugins
       = PMPluginWorkaround::installedPlugins( PMFactory::instance( ) );
@@ -95,7 +95,7 @@ void PMPluginManager::removePart( PMPart* p )
 
 void PMPluginManager::updatePlugins( )
 {
-   KConfigGroup cfgGroup( PMFactory::instance( )->config( ),
+   TDEConfigGroup cfgGroup( PMFactory::instance( )->config( ),
                           "KParts Plugins" );
    TQPtrListIterator<PMPluginInfo> pit( m_plugins );
    for( ; *pit; ++pit )

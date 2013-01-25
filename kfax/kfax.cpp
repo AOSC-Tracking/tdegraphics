@@ -828,7 +828,7 @@ void TopLevel::saveNetFile( const KURL& dest)
     statusbar->message( i18n( "Saving..." ) );
    
     KURL source = KURL::fromPathOrURL(thispage->pathname);
-    bool ok = KIO::NetAccess::file_copy( source, dest, -1, true, false, this);
+    bool ok = TDEIO::NetAccess::file_copy( source, dest, -1, true, false, this);
 
     statusbar->clear();
 
@@ -856,13 +856,13 @@ void TopLevel::openNetFile( const KURL &u)
   {
     statusbar->message(i18n("Downloading..."));
     TQString tmpFile = TQString();
-    if ( KIO::NetAccess::download( u, tmpFile, this ) )
+    if ( TDEIO::NetAccess::download( u, tmpFile, this ) )
     {
       openadd( tmpFile );
       setCaption( u.prettyURL() );
     }
     statusbar->clear();
-    KIO::NetAccess::removeTempFile( tmpFile );
+    TDEIO::NetAccess::removeTempFile( tmpFile );
   }
 }
 

@@ -27,7 +27,7 @@
 #include <kdialogbase.h>
 #include <config.h>
 
-class KConfig;
+class TDEConfig;
 class TQString;
 class KListView;
 class TQWidgetStack;
@@ -46,8 +46,8 @@ public:
 	~KCamera();
 	void invalidateCamera();
 	bool configure();
-	void load(KConfig *m_config);
-	void save(KConfig *m_config);
+	void load(TDEConfig *m_config);
+	void save(TDEConfig *m_config);
 	bool test();
 	TQStringList supportedPorts();
 
@@ -78,7 +78,7 @@ protected:
 //	int frontend_prompt(Camera *camera, CameraWidget *widgets);
 
 	Camera *m_camera;
-//	KConfig *m_config;
+//	TDEConfig *m_config;
 	TQString m_name; // the camera's real name
 	TQString m_model;
 	TQString m_path;

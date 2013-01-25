@@ -33,7 +33,7 @@
 class TQPixmap;
 class TQString;
 
-class KConfigBase;
+class TDEConfigBase;
 
 
 class kpDocumentSaveOptions
@@ -84,24 +84,24 @@ public:
 
 
     // (All assume that <config>'s group has been set)
-    // (None of them call KConfigBase::reparseConfig() nor KConfigBase::sync())
+    // (None of them call TDEConfigBase::reparseConfig() nor TDEConfigBase::sync())
 
-    static TQString defaultMimeType (KConfigBase *config);
-    static void saveDefaultMimeType (KConfigBase *config, const TQString &mimeType);
+    static TQString defaultMimeType (TDEConfigBase *config);
+    static void saveDefaultMimeType (TDEConfigBase *config, const TQString &mimeType);
 
-    static int defaultColorDepth (KConfigBase *config);
-    static void saveDefaultColorDepth (KConfigBase *config, int colorDepth);
+    static int defaultColorDepth (TDEConfigBase *config);
+    static void saveDefaultColorDepth (TDEConfigBase *config, int colorDepth);
 
-    static int defaultDither (KConfigBase *config);
-    static void saveDefaultDither (KConfigBase *config, bool dither);
+    static int defaultDither (TDEConfigBase *config);
+    static void saveDefaultDither (TDEConfigBase *config, bool dither);
 
-    static int defaultQuality (KConfigBase *config);
-    static void saveDefaultQuality (KConfigBase *config, int quality);
+    static int defaultQuality (TDEConfigBase *config);
+    static void saveDefaultQuality (TDEConfigBase *config, int quality);
 
 
-    static kpDocumentSaveOptions defaultDocumentSaveOptions (KConfigBase *config);
+    static kpDocumentSaveOptions defaultDocumentSaveOptions (TDEConfigBase *config);
     // (returns true if it encountered a difference (and saved it to <config>))
-    static bool saveDefaultDifferences (KConfigBase *config,
+    static bool saveDefaultDifferences (TDEConfigBase *config,
                                         const kpDocumentSaveOptions &oldDocInfo,
                                         const kpDocumentSaveOptions &newDocInfo);
 

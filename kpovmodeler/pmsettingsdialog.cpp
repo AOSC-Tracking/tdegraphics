@@ -200,13 +200,13 @@ void PMSettingsDialog::saveSettings( )
    }
 }
 
-void PMSettingsDialog::saveConfig( KConfig* cfg )
+void PMSettingsDialog::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
    cfg->writeEntry( "SettingsDialogSize", s_size );
 }
 
-void PMSettingsDialog::restoreConfig( KConfig* cfg )
+void PMSettingsDialog::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 

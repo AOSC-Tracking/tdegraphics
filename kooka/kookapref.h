@@ -29,7 +29,7 @@
 #include <kdialogbase.h>
 #include <tqframe.h>
 
-class KConfig;
+class TDEConfig;
 class TQLabel;
 class KIntNumInput;
 class KColorButton;
@@ -78,7 +78,7 @@ private:
     TQCheckBox *cbSkipFormatAsk;
     TQCheckBox *cbFilenameAsk;
     TQCheckBox *cbShowScannerSelection;
-    KConfig   *konf;
+    TDEConfig   *konf;
     TQCheckBox *cbReadStartupImage;
 
     KIntNumInput *m_thumbWidth;

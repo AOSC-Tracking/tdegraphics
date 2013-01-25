@@ -28,7 +28,7 @@ namespace KMrmlConfig
 {
     class MainPage;
 
-    class KCMKMrml : public KCModule
+    class KCMKMrml : public TDECModule
     {
         Q_OBJECT
   

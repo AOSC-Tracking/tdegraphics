@@ -14,18 +14,18 @@
 #include "conf/settings.h"
 
 class TQWidget;
-class KConfigSkeleton;
+class TDEConfigSkeleton;
 
 class DlgGeneral;
 class DlgPerformance;
 class DlgAccessibility;
 class DlgPresentation;
 
-class PreferencesDialog : public KConfigDialog
+class PreferencesDialog : public TDEConfigDialog
 {
 
     public:
-        PreferencesDialog( TQWidget * parent, KConfigSkeleton * config );
+        PreferencesDialog( TQWidget * parent, TDEConfigSkeleton * config );
 
     protected:
 //      void updateSettings(); // Called when OK/Apply is pressed.

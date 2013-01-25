@@ -19,15 +19,15 @@
 #ifndef IMBLIBCONFIG_H
 #define IMBLIBCONFIG_H
 
-class KConfig;
+class TDEConfig;
 class ImData
 {
 public:
   ImData();
   ~ImData() {};
 
-  void 		load( KConfig *kc );
-  void 		save( KConfig *kc );
+  void 		load( TDEConfig *kc );
+  void 		save( TDEConfig *kc );
 
   // new stuff..........
 

@@ -94,7 +94,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   mCurrentCursor = mNorthCursor;
   setMinimumSize(60,60);
   setMaximumSize(8000,8000);
-  KConfig *cfg = kapp->config();
+  TDEConfig *cfg = kapp->config();
   TQColor defaultColor = DEFAULT_RULER_COLOR;
   TQFont defaultFont(TDEGlobalSettings::generalFont().family(), 8);
   defaultFont.setPixelSize(8);
@@ -420,7 +420,7 @@ void KLineal::setColor(const TQColor &color) {
 * save the ruler color to the config file
 */
 void KLineal::saveSettings() {
-  KConfig *cfg = kapp->config(); // new KConfig(locateLocal("config", kapp->name()+"rc"));
+  TDEConfig *cfg = kapp->config(); // new TDEConfig(locateLocal("config", kapp->name()+"rc"));
   if (cfg) {
       TQColor color = mColor;
       cfg->setGroup(CFG_GROUP_SETTINGS);
@@ -747,14 +747,14 @@ void KLineal::paintEvent(TQPaintEvent * /*inEvent*/) {
   painter.end();
 }
 
-void KLineal::readProperties(KConfig *cfg) {
+void KLineal::readProperties(TDEConfig *cfg) {
     mOrientation = cfg->readNumEntry("Orientation", South);
     setupCursor();
     setupBackground();
     repaint();
 }
 
-void KLineal::saveProperties(KConfig* cfg) {
+void KLineal::saveProperties(TDEConfig* cfg) {
     cfg->writeEntry("Orientation", mOrientation);
 }
 

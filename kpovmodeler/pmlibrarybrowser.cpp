@@ -227,8 +227,8 @@ void PMLibraryBrowserViewWidget::slotDeleteClicked( )
    {
       case PMLibraryHandle::Ok:
       {
-         KIO::Job *job = KIO::del( sel->path() );
-         connect( job, TQT_SIGNAL( result( KIO::Job * ) ), TQT_SLOT( slotJobResult( KIO::Job * ) ) );
+         TDEIO::Job *job = TDEIO::del( sel->path() );
+         connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ), TQT_SLOT( slotJobResult( TDEIO::Job * ) ) );
       }
       break;
       case PMLibraryHandle::ReadOnlyLib:
@@ -289,7 +289,7 @@ void PMLibraryBrowserViewWidget::slotNewSubLibraryClicked( )
    }
 }
 
-void PMLibraryBrowserViewWidget::slotJobResult( KIO::Job * job )
+void PMLibraryBrowserViewWidget::slotJobResult( TDEIO::Job * job )
 {
    if( job->error( ) )
       job->showErrorDialog( this );

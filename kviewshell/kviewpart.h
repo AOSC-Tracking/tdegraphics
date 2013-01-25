@@ -13,7 +13,7 @@ class TDEAboutData;
 class KAboutDialog;
 class KAccel;
 class KAction;
-class KConfig;
+class TDEConfig;
 class KDirWatch;
 class TDEInstance;
 class KMultiPage;
@@ -75,7 +75,7 @@ public slots:
   void reload();
 
   void restoreDocument(const KURL &url, int page);
-  void saveDocumentRestoreInfo(KConfig* config);
+  void saveDocumentRestoreInfo(TDEConfig* config);
 
 protected slots:
   void slotShowSidebar();

@@ -35,7 +35,7 @@
 #include "pmdockwidget.h"
 #include "pmviewbase.h"
 
-class KConfig;
+class TDEConfig;
 class TQDomElement;
 class TQLineEdit;
 class PMShell;

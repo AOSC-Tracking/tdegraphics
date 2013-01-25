@@ -125,7 +125,7 @@ KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
 
 		m_popupDoc = KXMLGUIFactory::readConfigFile( "kviewpopup.rc", true, instance() );
 
-		KConfigGroup cfgGroup( instance()->config(), "Settings" );
+		TDEConfigGroup cfgGroup( instance()->config(), "Settings" );
 		bool hideBars = cfgGroup.readBoolEntry( "hideScrollbars", false );
 		m_pCanvas->hideScrollbars( hideBars );
 		m_paShowScrollbars->setChecked( ! hideBars );
@@ -200,10 +200,10 @@ bool KViewViewer::saveAs( const KURL & kurl )
 	{
 		kdDebug( 4610 ) << "copy image from " << m_file << " to " << kurl.prettyURL() << endl;
 
-		KIO::Job * job = KIO::copy( KURL( m_file ), kurl, isProgressInfoEnabled() );
+		TDEIO::Job * job = TDEIO::copy( KURL( m_file ), kurl, isProgressInfoEnabled() );
 		emit started( job );
-		connect( job, TQT_SIGNAL( result( KIO::Job * ) ),
-				this, TQT_SLOT( slotResultSaveAs( KIO::Job * ) ) );
+		connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ),
+				this, TQT_SLOT( slotResultSaveAs( TDEIO::Job * ) ) );
 		return true;
 	}
 	kdDebug( 4610 ) << "call KParts::ReadWritePart::saveAs( " << kurl.prettyURL() << " )" << endl;
@@ -266,10 +266,10 @@ bool KViewViewer::openURL( const KURL & url )
 		m_pTempFile = new KTempFile( TQString(), extension );
 		m_file = m_pTempFile->name();
 
-		m_pJob = KIO::get( m_url, m_pExtension->urlArgs().reload, isProgressInfoEnabled() );
+		m_pJob = TDEIO::get( m_url, m_pExtension->urlArgs().reload, isProgressInfoEnabled() );
 		emit started( m_pJob );
-		connect( m_pJob, TQT_SIGNAL( result( KIO::Job * ) ), TQT_SLOT( slotJobFinished ( KIO::Job * ) ) );
-		connect( m_pJob, TQT_SIGNAL( data( KIO::Job *, const TQByteArray & ) ), TQT_SLOT( slotData( KIO::Job *, const TQByteArray & ) ) );
+		connect( m_pJob, TQT_SIGNAL( result( TDEIO::Job * ) ), TQT_SLOT( slotJobFinished ( TDEIO::Job * ) ) );
+		connect( m_pJob, TQT_SIGNAL( data( TDEIO::Job *, const TQByteArray & ) ), TQT_SLOT( slotData( TDEIO::Job *, const TQByteArray & ) ) );
 		return true;
 	}
 }
@@ -534,7 +534,7 @@ void KViewViewer::guiActivateEvent( KParts::GUIActivateEvent * event )
 
 void KViewViewer::readSettings()
 {
-	KConfigGroup cfgGroup( instance()->config(), "Settings" );
+	TDEConfigGroup cfgGroup( instance()->config(), "Settings" );
 	m_pCanvas->setFastScale( ! cfgGroup.readBoolEntry( "Smooth Scaling", ! m_pCanvas->fastScale() ) );
 	m_pCanvas->setKeepAspectRatio( cfgGroup.readBoolEntry( "Keep Aspect Ratio", m_pCanvas->keepAspectRatio() ) );
 	m_pCanvas->setCentered( cfgGroup.readBoolEntry( "Center Image", m_pCanvas->centered() ) );
@@ -546,7 +546,7 @@ void KViewViewer::readSettings()
 	m_pCanvas->setMaximumImageSize( TQSize( cfgGroup.readNumEntry( "Maximum Width", m_pCanvas->maximumImageSize().width() ),
 				cfgGroup.readNumEntry( "Maximum Height", m_pCanvas->maximumImageSize().height() ) ) );
 
-	KConfigGroup blendConfig( instance()->config(), "Blend Effects" );
+	TDEConfigGroup blendConfig( instance()->config(), "Blend Effects" );
 	m_vEffects.clear();
 	for( unsigned int i = 1; i <= m_pCanvas->numOfBlendEffects(); ++i )
 	{
@@ -560,7 +560,7 @@ void KViewViewer::readSettings()
 
 void KViewViewer::writeSettings()
 {
-	KConfigGroup cfgGroup( instance()->config(), "Settings" );
+	TDEConfigGroup cfgGroup( instance()->config(), "Settings" );
 	cfgGroup.writeEntry( "hideScrollbars", ! m_paShowScrollbars->isChecked() );
 }
 
@@ -571,7 +571,7 @@ void KViewViewer::zoomChanged( double zoom )
 	updateZoomMenu( zoom );
 }
 
-void KViewViewer::slotJobFinished( KIO::Job * job )
+void KViewViewer::slotJobFinished( TDEIO::Job * job )
 {
 	assert( job == m_pJob );
 	m_pJob = 0;
@@ -584,7 +584,7 @@ void KViewViewer::slotJobFinished( KIO::Job * job )
 	}
 }
 
-void KViewViewer::slotData( KIO::Job *, const TQByteArray & data )
+void KViewViewer::slotData( TDEIO::Job *, const TQByteArray & data )
 {
 	if( ! m_pBuffer )
 	{
@@ -735,7 +735,7 @@ void KViewViewer::slotDel()
 	if( closeURL() )
 	{
 		setModified( false );
-		KIO::file_delete( urltodel );
+		TDEIO::file_delete( urltodel );
 		m_pCanvas->clear();
 	}
 }
@@ -763,7 +763,7 @@ void KViewViewer::slotPopupMenu( const TQPoint &pos )
 	delete popupGUIClient;
 }
 
-void KViewViewer::slotResultSaveAs( KIO::Job *job )
+void KViewViewer::slotResultSaveAs( TDEIO::Job *job )
 {
 	if ( job->error() )
 	{
@@ -773,7 +773,7 @@ void KViewViewer::slotResultSaveAs( KIO::Job *job )
 	else
 	{
 		emit completed();
-		KIO::CopyJob * cjob = ::tqqt_cast<KIO::CopyJob*>( job );
+		TDEIO::CopyJob * cjob = ::tqqt_cast<TDEIO::CopyJob*>( job );
 		if( cjob )
 		{
 			m_url = cjob->destURL();

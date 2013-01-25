@@ -124,11 +124,11 @@ private:
     // (only called for restoring a previous session e.g. starting KDE with
     //  a previously saved session; it's not called on normal KolourPaint
     //  startup)
-    virtual void readProperties (KConfig *cfg);
+    virtual void readProperties (TDEConfig *cfg);
     // (only called for saving the current session e.g. logging out of KDE
     //  with the KolourPaint window open; it's not called on normal KolourPaint
     //  exit)
-    virtual void saveProperties (KConfig *cfg);
+    virtual void saveProperties (TDEConfig *cfg);
 
 public:
     ~kpMainWindow ();

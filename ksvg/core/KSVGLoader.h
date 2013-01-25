@@ -25,7 +25,7 @@
 
 class KURL;
 
-namespace KIO
+namespace TDEIO
 {
 	class Job;
 	class TransferJob;
@@ -44,7 +44,7 @@ struct ImageStreamMap;
 
 typedef struct
 {
-	KIO::Job *job;
+	TDEIO::Job *job;
 	KJS::ExecState *exec;
 	KJS::Object *callBackFunction, *status;
 } PostUrlData;
@@ -73,8 +73,8 @@ signals:
 	void imageReady(SVGImageElementImpl *);
 
 private slots:
-	void slotData(KIO::Job *, const TQByteArray &);
-	void slotResult(KIO::Job *);
+	void slotData(TDEIO::Job *, const TQByteArray &);
+	void slotResult(TDEIO::Job *);
 
 private:
 	static TQString loadXML(::KURL);
@@ -82,8 +82,8 @@ private:
 	PostUrlData m_postUrlData;
 
 	TQByteArray m_data;
-	KIO::TransferJob *m_job;
-	TQMap<KIO::TransferJob *, ImageStreamMap *> m_imageJobs;
+	TDEIO::TransferJob *m_job;
+	TQMap<TDEIO::TransferJob *, ImageStreamMap *> m_imageJobs;
 };
 
 }

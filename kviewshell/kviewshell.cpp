@@ -99,7 +99,7 @@ KViewShell::KViewShell(const TQString& defaultMimeType)
 
   // Setup session management
   connect( this, TQT_SIGNAL( restoreDocument(const KURL &, int) ), view, TQT_SLOT( restoreDocument(const KURL &, int)));
-  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(KConfig*) ), view, TQT_SLOT( saveDocumentRestoreInfo(KConfig*)));
+  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(TDEConfig*) ), view, TQT_SLOT( saveDocumentRestoreInfo(TDEConfig*)));
 
   setXMLFile( "kviewshell.rc" );
   createGUI(view);
@@ -168,7 +168,7 @@ void KViewShell::readSettings()
   resize(600, 300); // default size if the config file specifies no size
   setAutoSaveSettings( "General" ); // apply mainwindow settings (size, toolbars, etc.)
 
-  KConfig *config = kapp->config();
+  TDEConfig *config = kapp->config();
   config->setGroup("General");
 
   recent->loadEntries(config, "Recent Files");
@@ -191,7 +191,7 @@ void KViewShell::readSettings()
 
 void KViewShell::writeSettings()
 {
-  KConfig *config = kapp->config();
+  TDEConfig *config = kapp->config();
   config->setGroup( "General" );
   recent->saveEntries(config, "Recent Files");
 
@@ -199,7 +199,7 @@ void KViewShell::writeSettings()
 }
 
 
-void KViewShell::saveProperties(KConfig* config)
+void KViewShell::saveProperties(TDEConfig* config)
 {
   // the 'config' object points to the session managed
   // config file.  anything you write here will be available
@@ -208,7 +208,7 @@ void KViewShell::saveProperties(KConfig* config)
 }
 
 
-void KViewShell::readProperties(KConfig* config)
+void KViewShell::readProperties(TDEConfig* config)
 {
   // the 'config' object points to the session managed
   // config file.  this function is automatically called whenever

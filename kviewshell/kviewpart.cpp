@@ -370,7 +370,7 @@ void KViewPart::initializeMultiPage()
   connect( this, TQT_SIGNAL(scrollbarStatusChanged(bool)), multiPage, TQT_SLOT(slotShowScrollbars(bool)));
   connect( multiPage, TQT_SIGNAL(pageInfo(int, int)), this, TQT_SLOT(pageInfo(int, int)) );
   connect( multiPage, TQT_SIGNAL(askingToCheckActions()), this, TQT_SLOT(checkActions()) );
-  connect( multiPage, TQT_SIGNAL( started( KIO::Job * ) ), this, TQT_SIGNAL( started( KIO::Job * ) ) );
+  connect( multiPage, TQT_SIGNAL( started( TDEIO::Job * ) ), this, TQT_SIGNAL( started( TDEIO::Job * ) ) );
   connect( multiPage, TQT_SIGNAL( completed() ), this, TQT_SIGNAL( completed() ) );
   connect( multiPage, TQT_SIGNAL( canceled( const TQString & ) ), this, TQT_SIGNAL( canceled( const TQString & ) ) );
   connect( multiPage, TQT_SIGNAL( setStatusBarText( const TQString& ) ), this, TQT_SLOT( setStatusBarTextFromMultiPage( const TQString& ) ) );
@@ -441,7 +441,7 @@ void KViewPart::restoreDocument(const KURL &url, int page)
 }
 
 
-void KViewPart::saveDocumentRestoreInfo(KConfig* config)
+void KViewPart::saveDocumentRestoreInfo(TDEConfig* config)
 {
   config->writePathEntry("URL", url().url());
   if (multiPage->numberOfPages() > 0)
@@ -793,7 +793,7 @@ bool KViewPart::openFile()
     writeSettings();
 
     // Delete old config dialog
-    KConfigDialog* configDialog = KConfigDialog::exists("kviewshell_config");
+    TDEConfigDialog* configDialog = TDEConfigDialog::exists("kviewshell_config");
     delete configDialog;
 
     KMultiPage* oldMultiPage = multiPage;
@@ -1447,10 +1447,10 @@ void KViewPart::aboutKViewShell()
 
 void KViewPart::doSettings()
 {
-  if (KConfigDialog::showDialog("kviewshell_config"))
+  if (TDEConfigDialog::showDialog("kviewshell_config"))
     return;
 
-  KConfigDialog* configDialog = new KConfigDialog(mainWidget, "kviewshell_config", KVSPrefs::self());
+  TDEConfigDialog* configDialog = new TDEConfigDialog(mainWidget, "kviewshell_config", KVSPrefs::self());
 
   optionDialogGUIWidget_base* guiWidget = new optionDialogGUIWidget_base(mainWidget);
   configDialog->addPage(guiWidget, i18n("User Interface"), "view_choose");

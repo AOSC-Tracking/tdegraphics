@@ -48,7 +48,7 @@
 class KDockWidget;
 class TQPainter;
 class KSANEOCR;
-class KConfig;
+class TDEConfig;
 class KPrinter;
 class KComboBox;
 class KAction;
@@ -153,7 +153,7 @@ public slots:
     void startOCR( KookaImage* );
 
     void  slCloseScanDevice();
-    void saveProperties( KConfig* );
+    void saveProperties( TDEConfig* );
 
     /**
      * slot to select the scanner device. Does all the work with selection

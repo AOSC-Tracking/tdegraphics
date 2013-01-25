@@ -70,14 +70,14 @@ PMDocumentationMap::~PMDocumentationMap( )
    m_maps.clear( );
 }
 
-void PMDocumentationMap::saveConfig( KConfig* cfg )
+void PMDocumentationMap::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Povray" );
    cfg->writePathEntry( "DocumentationPath", m_documentationPath );
    cfg->writeEntry( "DocumentationVersion", m_currentVersion );
 }
 
-void PMDocumentationMap::restoreConfig( KConfig* cfg )
+void PMDocumentationMap::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Povray" );
    m_documentationPath = cfg->readPathEntry( "DocumentationPath" );

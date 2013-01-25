@@ -26,7 +26,7 @@
 
 #include <kdialog.h>
 class TQTextEdit;
-class KConfig;
+class TDEConfig;
 
 /**
  * Widget to display the povray text output
@@ -45,8 +45,8 @@ public:
     */
    ~PMPovrayOutputWidget( );
 
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 
 public slots:
    /**

@@ -73,20 +73,20 @@ void SVGScriptElementImpl::setAttributes()
 		KURL url(ownerDoc()->baseUrl(), href);
 
 		if(m_job == 0)
-			m_job = KIO::get(url, false, false);
+			m_job = TDEIO::get(url, false, false);
 
-		connect(m_job, TQT_SIGNAL(data(KIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(KIO::Job *, const TQByteArray &)));
-		connect(m_job, TQT_SIGNAL(result(KIO::Job *)), this, TQT_SLOT(slotResult(KIO::Job *)));
+		connect(m_job, TQT_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
+		connect(m_job, TQT_SIGNAL(result(TDEIO::Job *)), this, TQT_SLOT(slotResult(TDEIO::Job *)));
 	}
 }
 
-void SVGScriptElementImpl::slotData(KIO::Job *, const TQByteArray &data)
+void SVGScriptElementImpl::slotData(TDEIO::Job *, const TQByteArray &data)
 {
 	TQDataStream dataStream(m_data, IO_WriteOnly | IO_Append);
 	dataStream.writeRawBytes(data.data(), data.size());
 }
 
-void SVGScriptElementImpl::slotResult(KIO::Job *)
+void SVGScriptElementImpl::slotResult(TDEIO::Job *)
 {
 	m_job = 0;
 

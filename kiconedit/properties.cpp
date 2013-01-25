@@ -35,7 +35,7 @@ KIconEditProperties* KIconEditProperties::self()
 
 KIconEditProperties::KIconEditProperties() : TQObject()
 {
-    KConfig *config = kapp->config();
+    TDEConfig *config = kapp->config();
 
     config->setGroup( "Appearance" );
 
@@ -92,7 +92,7 @@ KIconEditProperties::~KIconEditProperties()
 
 void KIconEditProperties::save()
 {
-    KConfig *config = kapp->config();
+    TDEConfig *config = kapp->config();
 
     config->setGroup( "Appearance" );
 

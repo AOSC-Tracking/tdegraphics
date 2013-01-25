@@ -742,7 +742,7 @@ void PMPart::initView( TQWidget* parent, const char* name )
    }
 }
 
-void PMPart::saveConfig( KConfig* cfg )
+void PMPart::saveConfig( TDEConfig* cfg )
 {
    if( m_pView )
       m_pView->saveConfig( cfg );
@@ -788,7 +788,7 @@ void PMPart::saveConfig( KConfig* cfg )
    cfg->writeEntry( "DirectRendering", PMGLView::isDirectRenderingEnabled( ) );
 }
 
-void PMPart::restoreConfig( KConfig* cfg )
+void PMPart::restoreConfig( TDEConfig* cfg )
 {
    if( m_pView )
       m_pView->restoreConfig( cfg );
@@ -958,7 +958,7 @@ bool PMPart::exportPovray( const KURL& url )
       if( tempFile )
       {
          tempFile->close( );
-         ok = KIO::NetAccess::upload( tempFile->name( ), url, (TQWidget*) 0 );
+         ok = TDEIO::NetAccess::upload( tempFile->name( ), url, (TQWidget*) 0 );
          tempFile->unlink( );
          file = 0;
       }

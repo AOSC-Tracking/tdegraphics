@@ -45,8 +45,8 @@ public:
     */
    PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget *parent = NULL, const char* name = NULL );
 
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
    static TQSize s_size;
 
 private slots:

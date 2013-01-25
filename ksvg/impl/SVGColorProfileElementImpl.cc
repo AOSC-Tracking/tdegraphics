@@ -186,7 +186,7 @@ bool SVGColorProfileElementImpl::canLoad(bool remote, bool &tempFile, TQString &
 	{
 		if(remote)
 		{
-			if(KIO::NetAccess::download(file, open, 0))
+			if(TDEIO::NetAccess::download(file, open, 0))
 				tempFile = true;
 		}
 	}
@@ -218,7 +218,7 @@ bool SVGColorProfileElementImpl::loadColorProfile()
 	m_loaded = true;
 
 	if(tempFile)
-		KIO::NetAccess::removeTempFile(open);
+		TDEIO::NetAccess::removeTempFile(open);
 	
 	return true;
 }

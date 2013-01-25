@@ -49,7 +49,7 @@
 
 #define tocstr(x) ((x).local8Bit())
 
-using namespace KIO;
+using namespace TDEIO;
 
 extern "C"
 {
@@ -213,12 +213,12 @@ void KameraProtocol::get(const KURL &url)
 	CameraFileType fileType;
 	int gpr;
 	if (url.host().isEmpty()) {
-		error(KIO::ERR_DOES_NOT_EXIST, url.path());
+		error(TDEIO::ERR_DOES_NOT_EXIST, url.path());
 		return;
 	}
 
 	if(!openCamera()) {
-		error(KIO::ERR_DOES_NOT_EXIST, url.path());
+		error(TDEIO::ERR_DOES_NOT_EXIST, url.path());
 		return;
 	}
 
@@ -229,7 +229,7 @@ void KameraProtocol::get(const KURL &url)
 		CameraText xx;						\
 		gpr = gp_camera_get_##xx(m_camera,  &xx, m_context);	\
 		if (gpr != GP_OK) {					\
-			error(KIO::ERR_DOES_NOT_EXIST, url.path());	\
+			error(TDEIO::ERR_DOES_NOT_EXIST, url.path());	\
 			return;						\
 		}							\
 		TQByteArray chunkDataBuffer;				\
@@ -260,9 +260,9 @@ void KameraProtocol::get(const KURL &url)
 		// fprintf(stderr,"Folder %s / File %s not found, gpr is %d\n",folder.latin1(), url.fileName().latin1(), gpr);
 		gp_file_unref(m_file);
 		if ((gpr == GP_ERROR_FILE_NOT_FOUND) || (gpr == GP_ERROR_DIRECTORY_NOT_FOUND))
-			error(KIO::ERR_DOES_NOT_EXIST, url.path());
+			error(TDEIO::ERR_DOES_NOT_EXIST, url.path());
 		else
-			error(KIO::ERR_UNKNOWN, gp_result_as_string(gpr));
+			error(TDEIO::ERR_UNKNOWN, gp_result_as_string(gpr));
 		return;
 	}
 
@@ -301,12 +301,12 @@ void KameraProtocol::get(const KURL &url)
 		case GP_ERROR_DIRECTORY_NOT_FOUND:
 			gp_file_unref(m_file);
 			m_file = NULL;
-			error(KIO::ERR_DOES_NOT_EXIST, url.fileName());
+			error(TDEIO::ERR_DOES_NOT_EXIST, url.fileName());
 			return ;
 		default:
 			gp_file_unref(m_file);
 			m_file = NULL;
-			error(KIO::ERR_UNKNOWN, gp_result_as_string(gpr));
+			error(TDEIO::ERR_UNKNOWN, gp_result_as_string(gpr));
 			return;
 	}
 	// emit the mimetype
@@ -326,7 +326,7 @@ void KameraProtocol::get(const KURL &url)
 		kdDebug(7123) << "get():: get_data_and_size failed." << endl;
 		gp_file_free(m_file);
 		m_file = NULL;
-		error(KIO::ERR_UNKNOWN, gp_result_as_string(gpr));
+		error(TDEIO::ERR_UNKNOWN, gp_result_as_string(gpr));
 		return;
 	}
 	// make sure we're not sending zero-sized chunks (=EOF)
@@ -419,7 +419,7 @@ void KameraProtocol::statRegular(const KURL &url)
 
 	kdDebug(7123) << "statRegular(\"" << url.path() << "\")" << endl;
 	if (openCamera() == false) {
-		error(KIO::ERR_DOES_NOT_EXIST, url.path());
+		error(TDEIO::ERR_DOES_NOT_EXIST, url.path());
 		return;
 	}
 
@@ -433,9 +433,9 @@ void KameraProtocol::statRegular(const KURL &url)
 	gpr = gp_camera_folder_list_folders(m_camera, tocstr(fix_foldername(url.directory(false))), dirList, m_context);
 	if (gpr != GP_OK) {
 		if ((gpr == GP_ERROR_FILE_NOT_FOUND) || (gpr == GP_ERROR_DIRECTORY_NOT_FOUND))
-			error(KIO::ERR_DOES_NOT_EXIST, url.path());
+			error(TDEIO::ERR_DOES_NOT_EXIST, url.path());
 		else
-			error(KIO::ERR_UNKNOWN, gp_result_as_string(gpr));
+			error(TDEIO::ERR_UNKNOWN, gp_result_as_string(gpr));
 		gp_list_free(dirList);
 		return;
 	}
@@ -445,7 +445,7 @@ void KameraProtocol::statRegular(const KURL &url)
 		CameraText xx;						\
 		gpr = gp_camera_get_about(m_camera,  &xx, m_context);	\
 		if (gpr != GP_OK) {					\
-			error(KIO::ERR_DOES_NOT_EXIST, url.fileName());	\
+			error(TDEIO::ERR_DOES_NOT_EXIST, url.fileName());	\
 			return;						\
 		}							\
 		translateTextToUDS(entry,#xx".txt",xx.text);		\
@@ -477,9 +477,9 @@ void KameraProtocol::statRegular(const KURL &url)
 	gpr = gp_camera_file_get_info(m_camera, tocstr(fix_foldername(url.directory(false))), tocstr(url.fileName()), &info, m_context);
 	if (gpr != GP_OK) {
 		if ((gpr == GP_ERROR_FILE_NOT_FOUND) || (gpr == GP_ERROR_DIRECTORY_NOT_FOUND))
-			error(KIO::ERR_DOES_NOT_EXIST, url.path());
+			error(TDEIO::ERR_DOES_NOT_EXIST, url.path());
 		else
-			error(KIO::ERR_UNKNOWN, gp_result_as_string(gpr));
+			error(TDEIO::ERR_UNKNOWN, gp_result_as_string(gpr));
 		return;
 	}
 	translateFileToUDS(entry, info, url.fileName());
@@ -493,11 +493,11 @@ void KameraProtocol::del(const KURL &url, bool isFile)
 	kdDebug(7123) << "KameraProtocol::del(" << url.path() << ")" << endl;
 
 	if(!openCamera()) {
-		error(KIO::ERR_CANNOT_DELETE, url.fileName());
+		error(TDEIO::ERR_CANNOT_DELETE, url.fileName());
 		return;
 	}
 	if (!cameraSupportsDel()) {
-		error(KIO::ERR_CANNOT_DELETE, url.fileName());
+		error(TDEIO::ERR_CANNOT_DELETE, url.fileName());
 		return;
 	}
 	if(isFile){
@@ -508,7 +508,7 @@ void KameraProtocol::del(const KURL &url, bool isFile)
 		ret = gp_camera_file_delete(m_camera, tocstr(fix_foldername(url.directory(false))), tocstr(url.fileName()), m_context);
 
 		if(ret != GP_OK) {
-			error(KIO::ERR_CANNOT_DELETE, url.fileName());
+			error(TDEIO::ERR_CANNOT_DELETE, url.fileName());
 		} else {
 			finished();
 		}
@@ -665,7 +665,7 @@ void KameraProtocol::listDir(const KURL &url)
 	}
 
 	if (!openCamera()) {
-		error(KIO::ERR_COULD_NOT_READ,url.path());
+		error(TDEIO::ERR_COULD_NOT_READ,url.path());
 		return;
 	}
 
@@ -693,7 +693,7 @@ void KameraProtocol::listDir(const KURL &url)
 		gp_list_free(dirList);
 		gp_list_free(fileList);
 		gp_list_free(specialList);
-		error(KIO::ERR_COULD_NOT_READ, gp_result_as_string(gpr));
+		error(TDEIO::ERR_COULD_NOT_READ, gp_result_as_string(gpr));
 		return;
 	}
 
@@ -787,7 +787,7 @@ void KameraProtocol::setHost(const TQString& host, int port, const TQString& use
 		if (idx < 0) {
 			gp_port_info_list_free(port_info_list);
 			kdDebug(7123) << "Unable to get port info for path: " << host << endl;
-			error(KIO::ERR_UNKNOWN, gp_result_as_string(idx));
+			error(TDEIO::ERR_UNKNOWN, gp_result_as_string(idx));
 			return;
 		}
 		gp_port_info_list_get_info(port_info_list, idx, &port_info);
@@ -796,7 +796,7 @@ void KameraProtocol::setHost(const TQString& host, int port, const TQString& use
 		// create a new camera object
 		gpr = gp_camera_new(&m_camera);
 		if(gpr != GP_OK) {
-			error(KIO::ERR_UNKNOWN, gp_result_as_string(gpr));
+			error(TDEIO::ERR_UNKNOWN, gp_result_as_string(gpr));
 			return;
 		}
 
@@ -816,7 +816,7 @@ void KameraProtocol::setHost(const TQString& host, int port, const TQString& use
 		TQString errstr;
 		if (!openCamera(errstr)) {
 			kdDebug(7123) << "Unable to init camera: " << gp_result_as_string(gpr) << endl;
-			error(KIO::ERR_SERVICE_NOT_AVAILABLE, errstr);
+			error(TDEIO::ERR_SERVICE_NOT_AVAILABLE, errstr);
 			gp_camera_exit(m_camera, m_context);
 			return;
 		}

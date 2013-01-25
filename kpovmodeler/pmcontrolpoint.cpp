@@ -82,7 +82,7 @@ void PMControlPoint::setRotateGrid( double d )
       kdError( PMArea ) << "Grid has to be greater than 0\n";
 }
 
-void PMControlPoint::saveConfig( KConfig* cfg )
+void PMControlPoint::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Grid" );
    cfg->writeEntry( "MoveGrid", s_moveGrid );
@@ -90,7 +90,7 @@ void PMControlPoint::saveConfig( KConfig* cfg )
    cfg->writeEntry( "ScaleGrid", s_scaleGrid );
 }
 
-void PMControlPoint::restoreConfig( KConfig* cfg )
+void PMControlPoint::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Grid" );
    s_moveGrid = cfg->readDoubleNumEntry( "MoveGrid", c_defaultMoveGrid );

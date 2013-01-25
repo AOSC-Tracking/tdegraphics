@@ -18,8 +18,8 @@
 // reimplementing this
 #include "preferencesdialog.h"
 
-PreferencesDialog::PreferencesDialog( TQWidget * parent, KConfigSkeleton * skeleton )
-    : KConfigDialog( parent, "preferences", skeleton )
+PreferencesDialog::PreferencesDialog( TQWidget * parent, TDEConfigSkeleton * skeleton )
+    : TDEConfigDialog( parent, "preferences", skeleton )
 {
     m_general = new DlgGeneral(0);
     m_performance = new DlgPerformance(0);

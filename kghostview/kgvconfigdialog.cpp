@@ -133,11 +133,11 @@ namespace {
 
 void  ConfigDialog::showSettings( KGVPart* main ) {
     const char* name = "kghostview-settings";
-    if ( KConfigDialog::showDialog( name ) ) return;
+    if ( TDEConfigDialog::showDialog( name ) ) return;
 
     if ( Configuration::redetectionCounter() < currentRedetection ) redoGSDetection();
 
-    KConfigDialog* dialog = new KConfigDialog( 0, name,
+    TDEConfigDialog* dialog = new TDEConfigDialog( 0, name,
 	    Configuration::self(), KDialogBase::IconList );
     dialog->addPage( new GeneralSettingsWidget( 0, "general-settings" ),
 	    i18n( "General" ), TQString::fromLatin1( "kghostview" ) );

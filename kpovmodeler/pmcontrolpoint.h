@@ -28,7 +28,7 @@
 #include <tqptrlist.h>
 #include <tqstring.h>
 
-class KConfig;
+class TDEConfig;
 
 /**
  * Interface between the graphical views and the PMObject.
@@ -153,8 +153,8 @@ public:
     */
    static void setScaleGrid( double d );
    
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
    
 protected:
    /**

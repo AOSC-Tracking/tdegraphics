@@ -81,8 +81,8 @@ KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
     kdDebug(28000) << "OCR Base Dialog!" << endl;
     // Layout-Boxes
 
-    KConfig *konf = TDEGlobal::config ();
-    KConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
+    TDEConfig *konf = TDEGlobal::config ();
+    TDEConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
     m_userWantsSpellCheck = konf->readBoolEntry(CFG_WANT_KSPELL, true);
 
     /* Connect signals which disable the fields and store the configuration */
@@ -237,16 +237,16 @@ void KOCRBase::introduceImage( KookaImage* img)
 
     /* Start to create a preview job for the thumb */
     KURL::List li(img->url());
-    KIO::Job *m_job = KIO::filePreview(li, m_previewSize.width(),
+    TDEIO::Job *m_job = TDEIO::filePreview(li, m_previewSize.width(),
                                        m_previewSize.height());
 
     if( m_job )
     {
-        connect( m_job, TQT_SIGNAL( result( KIO::Job * )),
-                 this, TQT_SLOT( slPreviewResult( KIO::Job * )));
+        connect( m_job, TQT_SIGNAL( result( TDEIO::Job * )),
+                 this, TQT_SLOT( slPreviewResult( TDEIO::Job * )));
         connect( m_job, TQT_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
                  TQT_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
-         /* KIO::Jo result is called in any way: Success, Failed, Error,
+         /* TDEIO::Jo result is called in any way: Success, Failed, Error,
           * thus connecting the failed is not really necessary.
           */
     }
@@ -289,7 +289,7 @@ void KOCRBase::introduceImage( KookaImage* img)
     m_metaBox->show();
 }
 
-void KOCRBase::slPreviewResult(KIO::Job *job )
+void KOCRBase::slPreviewResult(TDEIO::Job *job )
 {
     // nothing
     if( job && job->error() > 0 )
@@ -359,8 +359,8 @@ void KOCRBase::slWantSpellcheck( bool wantIt )
     }
     m_userWantsSpellCheck = wantIt;
 
-    KConfig *konf = TDEGlobal::config ();
-    KConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
+    TDEConfig *konf = TDEGlobal::config ();
+    TDEConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
     konf->writeEntry( CFG_WANT_KSPELL, wantIt );
 }
 

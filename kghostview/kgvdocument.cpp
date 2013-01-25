@@ -565,7 +565,7 @@ void KGVDocument::saveAs()
                           TQString(), 
                           _part->widget(), 
                           TQString() );
-    if( !KIO::NetAccess::upload( _fileName,
+    if( !TDEIO::NetAccess::upload( _fileName,
 				 saveURL,
 				 static_cast<TQWidget*>( 0 ) ) ) {
 	// TODO: Proper error dialog

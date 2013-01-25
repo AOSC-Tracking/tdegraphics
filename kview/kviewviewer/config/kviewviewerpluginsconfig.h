@@ -21,7 +21,7 @@
 
 #include <ksettings/pluginpage.h>
 
-class KConfig;
+class TDEConfig;
 
 class KViewViewerPluginsConfig : public KSettings::PluginPage
 {
@@ -31,7 +31,7 @@ class KViewViewerPluginsConfig : public KSettings::PluginPage
 		KViewViewerPluginsConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );
 		~KViewViewerPluginsConfig();
 	private:
-		KConfig * m_config;
+		TDEConfig * m_config;
 };
 
 // vim: sw=4 ts=4 noet

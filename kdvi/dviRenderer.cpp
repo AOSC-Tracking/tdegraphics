@@ -254,8 +254,8 @@ void dviRenderer::showThatSourceInformationIsPresent()
   // here. Most of the code is stolen from there.
   
   // Check if the 'Don't show again' feature was used
-  KConfig *config = kapp->config();
-  KConfigGroupSaver saver( config, "Notification Messages" );
+  TDEConfig *config = kapp->config();
+  TDEConfigGroupSaver saver( config, "Notification Messages" );
   bool showMsg = config->readBoolEntry( "KDVI-info_on_source_specials", true);
   
   if (showMsg) {
@@ -294,7 +294,7 @@ void dviRenderer::showThatSourceInformationIsPresent()
     
     showMsg = !checkbox->isChecked();
     if (!showMsg) {
-      KConfigGroupSaver saver( config, "Notification Messages" );
+      TDEConfigGroupSaver saver( config, "Notification Messages" );
       config->writeEntry( "KDVI-info_on_source_specials", showMsg);
     }
     config->sync();

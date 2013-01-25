@@ -49,14 +49,14 @@ KSVGLoader::~KSVGLoader()
 TQString KSVGLoader::loadXML(::KURL url)
 {
 	TQString tmpFile;
-	if(KIO::NetAccess::download(url, tmpFile, 0))
+	if(TDEIO::NetAccess::download(url, tmpFile, 0))
 	{
 		TQIODevice *dev = KFilterDev::deviceForFile(tmpFile, "application/x-gzip", true);
 		TQByteArray contents;
 		if(dev->open(IO_ReadOnly))
 			contents = dev->readAll();
 		delete dev;
-		KIO::NetAccess::removeTempFile(tmpFile);
+		TDEIO::NetAccess::removeTempFile(tmpFile);
 		return TQString(contents);
 	}
 
@@ -68,12 +68,12 @@ void KSVGLoader::getSVGContent(::KURL url)
 	if(!url.prettyURL().isEmpty())
 	{
 		if(m_job == 0)
-			m_job = KIO::get(url, false, false);
+			m_job = TDEIO::get(url, false, false);
 
 		m_job->setAutoErrorHandlingEnabled(true);
 
-		connect(m_job, TQT_SIGNAL(data(KIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(KIO::Job *, const TQByteArray &)));
-		connect(m_job, TQT_SIGNAL(result(KIO::Job *)), this, TQT_SLOT(slotResult(KIO::Job *)));
+		connect(m_job, TQT_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
+		connect(m_job, TQT_SIGNAL(result(TDEIO::Job *)), this, TQT_SLOT(slotResult(TDEIO::Job *)));
 	}
 }
 
@@ -89,14 +89,14 @@ void KSVGLoader::newImageJob(SVGImageElementImpl *image, ::KURL baseURL)
 	map->data = new TQByteArray();
 	map->imageElement = image;
 
-	KIO::TransferJob *imageJob = KIO::get(::KURL(baseURL, map->imageElement->fileName()), false, false);
-	connect(imageJob, TQT_SIGNAL(data(KIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(KIO::Job *, const TQByteArray &)));
-	connect(imageJob, TQT_SIGNAL(result(KIO::Job *)), this, TQT_SLOT(slotResult(KIO::Job *)));
+	TDEIO::TransferJob *imageJob = TDEIO::get(::KURL(baseURL, map->imageElement->fileName()), false, false);
+	connect(imageJob, TQT_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
+	connect(imageJob, TQT_SIGNAL(result(TDEIO::Job *)), this, TQT_SLOT(slotResult(TDEIO::Job *)));
 
 	m_imageJobs.insert(imageJob, map);
 }
 
-void KSVGLoader::slotData(KIO::Job *job, const TQByteArray &data)
+void KSVGLoader::slotData(TDEIO::Job *job, const TQByteArray &data)
 {
 	if(job == m_job)
 	{
@@ -105,7 +105,7 @@ void KSVGLoader::slotData(KIO::Job *job, const TQByteArray &data)
 	}
 	else
 	{
-		TQMap<KIO::TransferJob *, ImageStreamMap *>::Iterator it;
+		TQMap<TDEIO::TransferJob *, ImageStreamMap *>::Iterator it;
 		for(it = m_imageJobs.begin(); it != m_imageJobs.end(); ++it)
 		{
 			if(it.key() == job)
@@ -118,13 +118,13 @@ void KSVGLoader::slotData(KIO::Job *job, const TQByteArray &data)
 	}
 }
 
-void KSVGLoader::slotResult(KIO::Job *job)
+void KSVGLoader::slotResult(TDEIO::Job *job)
 {
 	if(job == m_job)
 	{
 		if(m_job->error() == 0)
 		{
-			TQString check = static_cast<KIO::TransferJob *>(job)->url().prettyURL();
+			TQString check = static_cast<TDEIO::TransferJob *>(job)->url().prettyURL();
 			if(check.contains(".svgz") || check.contains(".svg.gz"))
 			{
 				// decode the gzipped svg and emit it
@@ -151,7 +151,7 @@ void KSVGLoader::slotResult(KIO::Job *job)
 	}
 	else
 	{
-		TQMap<KIO::TransferJob *, ImageStreamMap *>::Iterator it;
+		TQMap<TDEIO::TransferJob *, ImageStreamMap *>::Iterator it;
 		for(it = m_imageJobs.begin(); it != m_imageJobs.end(); ++it)
 		{
 			if(it.key() == job)
@@ -184,7 +184,7 @@ void KSVGLoader::slotResult(KIO::Job *job)
 
 				(streamMap->data)->resize(0);
 
-				m_imageJobs.remove(static_cast<KIO::TransferJob *>(job));
+				m_imageJobs.remove(static_cast<TDEIO::TransferJob *>(job));
 
 				emit imageReady(streamMap->imageElement);
 				break;
@@ -204,7 +204,7 @@ TQString KSVGLoader::getUrl(::KURL url, bool local)
 
 void KSVGLoader::postUrl(::KURL url, const TQByteArray &data, const TQString &mimeType,  KJS::ExecState *exec, KJS::Object &callBackFunction, KJS::Object &status)
 {
-	KIO::TransferJob *job = KIO::http_post(url, data, false);
+	TDEIO::TransferJob *job = TDEIO::http_post(url, data, false);
 	job->addMetaData("content-type", mimeType);
 
 	m_postUrlData.job = job;
@@ -212,7 +212,7 @@ void KSVGLoader::postUrl(::KURL url, const TQByteArray &data, const TQString &mi
 	m_postUrlData.status = &status;
 	m_postUrlData.callBackFunction = &callBackFunction;
 
-	connect(job, TQT_SIGNAL(result(KIO::Job *)), TQT_SLOT(slotResult(KIO::Job *)));
+	connect(job, TQT_SIGNAL(result(TDEIO::Job *)), TQT_SLOT(slotResult(TDEIO::Job *)));
 }
 
 class CharacterDataSearcher : public TQXmlDefaultHandler

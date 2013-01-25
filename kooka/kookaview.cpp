@@ -438,7 +438,7 @@ void KookaView::loadStartupImage( void )
    kdDebug( 28000) << "Starting to load startup image" << endl;
 
    /* Now set the configured stuff */
-   KConfig *konf = TDEGlobal::config ();
+   TDEConfig *konf = TDEGlobal::config ();
    if( konf )
    {
       konf->setGroup(GROUP_STARTUP);
@@ -939,7 +939,7 @@ void KookaView::updateCurrImage( TQImage& img )
 }
 
 
-void KookaView::saveProperties(KConfig *config)
+void KookaView::saveProperties(TDEConfig *config)
 {
    kdDebug(28000) << "Saving Properties for KookaView !" << endl;
    config->setGroup( GROUP_STARTUP );

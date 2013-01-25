@@ -87,8 +87,8 @@ void Shell::init()
     m_part = 0;
     return;
   }
-  connect( this, TQT_SIGNAL( restoreDocument(KConfig*) ),m_part, TQT_SLOT( restoreDocument(KConfig*)));
-  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(KConfig*) ), m_part, TQT_SLOT( saveDocumentRestoreInfo(KConfig*)));
+  connect( this, TQT_SIGNAL( restoreDocument(TDEConfig*) ),m_part, TQT_SLOT( restoreDocument(TDEConfig*)));
+  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(TDEConfig*) ), m_part, TQT_SLOT( saveDocumentRestoreInfo(TDEConfig*)));
   connect( m_part, TQT_SIGNAL( enablePrintAction(bool) ), m_printAction, TQT_SLOT( setEnabled(bool)));
   
   readSettings();
@@ -161,7 +161,7 @@ void Shell::setupActions()
   m_fullScreenAction = KStdAction::fullScreen( TQT_TQOBJECT(this), TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 }
 
-void Shell::saveProperties(KConfig* config)
+void Shell::saveProperties(TDEConfig* config)
 {
   // the 'config' object points to the session managed
   // config file.  anything you write here will be available
@@ -169,7 +169,7 @@ void Shell::saveProperties(KConfig* config)
     emit saveDocumentRestoreInfo(config);
 }
 
-void Shell::readProperties(KConfig* config)
+void Shell::readProperties(TDEConfig* config)
 {
   // the 'config' object points to the session managed
   // config file.  this function is automatically called whenever

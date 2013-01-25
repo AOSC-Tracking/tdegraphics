@@ -172,8 +172,8 @@ TQPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
 
     if (name ())
     {
-        KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         TQString nameString = TQString::fromLatin1 (name ());
 
@@ -215,8 +215,8 @@ void kpToolWidgetBase::saveSelectedAsDefault () const
     if (!name ())
         return;
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupTools);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     TQString nameString = TQString::fromLatin1 (name ());
     cfg->writeEntry (nameString + TQString::fromLatin1 (" Row"), m_selectedRow);

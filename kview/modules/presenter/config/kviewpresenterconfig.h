@@ -23,7 +23,7 @@
 
 class TQCheckBox;
 
-class KViewPresenterConfig : public KCModule
+class KViewPresenterConfig : public TDECModule
 {
 	Q_OBJECT
   

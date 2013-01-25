@@ -729,8 +729,8 @@ void kpMainWindow::slotShowGridToggled ()
     updateMainViewGrid ();
 
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingShowGrid, m_configShowGrid = m_actionShowGrid->isChecked ());
     cfg->sync ();
@@ -853,8 +853,8 @@ void kpMainWindow::slotSaveThumbnailGeometry ()
                 << endl;
 #endif
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingThumbnailGeometry, m_configThumbnailGeometry);
     cfg->sync ();
@@ -869,8 +869,8 @@ void kpMainWindow::slotShowThumbnailToggled ()
 
     m_configThumbnailShown = m_actionShowThumbnail->isChecked ();
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingThumbnailShown, m_configThumbnailShown);
     cfg->sync ();
@@ -904,8 +904,8 @@ void kpMainWindow::slotZoomedThumbnailToggled ()
 
     m_configZoomedThumbnail = m_actionZoomedThumbnail->isChecked ();
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingThumbnailZoomed, m_configZoomedThumbnail);
     cfg->sync ();
@@ -923,8 +923,8 @@ void kpMainWindow::slotThumbnailShowRectangleToggled ()
 
     d->m_configThumbnailShowRectangle = d->m_actionShowThumbnailRectangle->isChecked ();
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingThumbnailShowRectangle, d->m_configThumbnailShowRectangle);
     cfg->sync ();

@@ -492,9 +492,9 @@ TQPixmap kpPixmapFX::convertToPixmapAsLosslessAsPossible (const TQImage &image,
 
         int configDitherIfNumColorsGreaterThan = 323;
 
-        KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
+        TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
                                          kpSettingsGroupGeneral);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         if (cfg->hasKey (kpSettingDitherOnOpen))
         {

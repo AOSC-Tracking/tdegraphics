@@ -115,13 +115,13 @@ void PMErrorDialog::displayMessages( )
    m_pTextView->setText( text );
 }
 
-void PMErrorDialog::saveConfig( KConfig* cfg )
+void PMErrorDialog::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
    cfg->writeEntry( "ErrorDialogSize", s_size );
 }
 
-void PMErrorDialog::restoreConfig( KConfig* cfg )
+void PMErrorDialog::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 

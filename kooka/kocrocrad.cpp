@@ -104,7 +104,7 @@ EngineError ocradDialog::setupGui()
     TQVBox *page = ocrPage();
     TQ_CHECK_PTR( page );
 
-    KConfig *conf = TDEGlobal::config ();
+    TDEConfig *conf = TDEGlobal::config ();
     conf->setGroup( CFG_GROUP_OCR_DIA );
 
     //Qt::Horizontal line
@@ -177,7 +177,7 @@ ocradDialog::~ocradDialog()
 
 void ocradDialog::writeConfig( void )
 {
-   KConfig *conf = TDEGlobal::config ();
+   TDEConfig *conf = TDEGlobal::config ();
    conf->setGroup( CFG_GROUP_OCR_DIA );
 
    conf->writeEntry( CFG_OCRAD_BINARY, TQString(getOCRCmd()));

@@ -26,7 +26,7 @@
 #include <kmrml_config.h>
 #include "mrml_shared.h"
 
-class Mrml : public KIO::TCPSlaveBase
+class Mrml : public TDEIO::TCPSlaveBase
 {
 public:
     Mrml( const TQCString&, const TQCString& );

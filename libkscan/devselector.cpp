@@ -69,7 +69,7 @@ DeviceSelector::DeviceSelector( TQWidget *parent, TQStrList& devList,
    cbSkipDialog = new TQCheckBox( i18n("&Do not ask on startup again, always use this device"),
 				 page, "CBOX_SKIP_ON_START" );
 
-   KConfig *gcfg = TDEGlobal::config();
+   TDEConfig *gcfg = TDEGlobal::config();
    gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    cbSkipDialog->setChecked( skipDialog );
@@ -80,7 +80,7 @@ DeviceSelector::DeviceSelector( TQWidget *parent, TQStrList& devList,
 
 TQCString DeviceSelector::getDeviceFromConfig( void ) const
 {
-   KConfig *gcfg = TDEGlobal::config();
+   TDEConfig *gcfg = TDEGlobal::config();
    gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    
@@ -125,7 +125,7 @@ TQCString DeviceSelector::getSelectedDevice( void ) const
    kdDebug(29000) << "The selected device: <" << dev << ">" << endl;
 
    /* Store scanner selection settings */
-   KConfig *c = TDEGlobal::config();
+   TDEConfig *c = TDEGlobal::config();
    c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    /* Write both the scan device and the skip-start-dialog flag global. */
    c->writeEntry( STARTUP_SCANDEV, dev, true, true );
@@ -140,7 +140,7 @@ void DeviceSelector::setScanSources( const TQStrList& sources,
 				     const TQStringList& hrSources )
 {
    bool default_ok = false;
-   KConfig *gcfg = TDEGlobal::config();
+   TDEConfig *gcfg = TDEGlobal::config();
    gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    TQCString defstr = gcfg->readEntry( STARTUP_SCANDEV, "" ).local8Bit();
 

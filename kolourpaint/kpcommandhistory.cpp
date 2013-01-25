@@ -413,8 +413,8 @@ void kpCommandHistoryBase::readConfig ()
 #if DEBUG_KP_COMMAND_HISTORY
     kdDebug () << "kpCommandHistoryBase::readConfig()" << endl;
 #endif
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupUndoRedo);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupUndoRedo);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     setUndoMinLimit (cfg->readNumEntry (kpSettingUndoMinLimit, undoMinLimit ()));
     setUndoMaxLimit (cfg->readNumEntry (kpSettingUndoMaxLimit, undoMaxLimit ()));
@@ -430,8 +430,8 @@ void kpCommandHistoryBase::writeConfig ()
 #if DEBUG_KP_COMMAND_HISTORY
     kdDebug () << "kpCommandHistoryBase::writeConfig()" << endl;
 #endif
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupUndoRedo);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupUndoRedo);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingUndoMinLimit, undoMinLimit ());
     cfg->writeEntry (kpSettingUndoMaxLimit, undoMaxLimit ());

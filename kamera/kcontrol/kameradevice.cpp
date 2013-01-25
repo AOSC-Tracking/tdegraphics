@@ -190,7 +190,7 @@ bool KCamera::test()
 	return camera() != 0;
 }
 
-void KCamera::load(KConfig *config)
+void KCamera::load(TDEConfig *config)
 {
 	config->setGroup(m_name);
 	if (m_model.isNull())
@@ -200,7 +200,7 @@ void KCamera::load(KConfig *config)
 	invalidateCamera();
 }
 
-void KCamera::save(KConfig *config)
+void KCamera::save(TDEConfig *config)
 {
 	config->setGroup(m_name);
 	config->writeEntry("Model", m_model);

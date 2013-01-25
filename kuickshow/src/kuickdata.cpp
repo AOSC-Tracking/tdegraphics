@@ -70,7 +70,7 @@ KuickData::~KuickData()
 
 void KuickData::load()
 {
-  KConfig *kc = TDEGlobal::config();
+  TDEConfig *kc = TDEGlobal::config();
 
   KuickData def;
 
@@ -134,7 +134,7 @@ void KuickData::load()
 
 void KuickData::save()
 {
-  KConfig *kc = TDEGlobal::config();
+  TDEConfig *kc = TDEGlobal::config();
   kc->setGroup( "GeneralConfiguration" );
 
   kc->writeEntry( "FileFilter", fileFilter );

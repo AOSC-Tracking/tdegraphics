@@ -823,7 +823,7 @@ void KImageCanvas::slotImageChanged()
 
 void KImageCanvas::loadSettings()
 {
-	KConfigGroup cfgGroup( KImageCanvasFactory::instance()->config(),
+	TDEConfigGroup cfgGroup( KImageCanvasFactory::instance()->config(),
 			"Settings" );
 	setFastScale( ! cfgGroup.readBoolEntry( "Smooth Scaling", ! fastScale() ) );
 	setKeepAspectRatio( cfgGroup.readBoolEntry( "Keep Aspect Ratio",
@@ -839,7 +839,7 @@ void KImageCanvas::loadSettings()
 					maximumImageSize().width() ), cfgGroup.readNumEntry(
 					"Maximum Height", maximumImageSize().height() ) ) );
 
-	KConfigGroup blendConfig( KImageCanvasFactory::instance()->config(),
+	TDEConfigGroup blendConfig( KImageCanvasFactory::instance()->config(),
 			"Blend Effects" );
 	/* TODO
 	m_vEffects.clear();

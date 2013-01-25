@@ -236,8 +236,8 @@ EngineError KadmosDialog::findClassifierPath()
     KStandardDirs stdDir;
     EngineError err = ENG_OK;
 
-    KConfig *conf = TDEGlobal::config ();
-    KConfigGroupSaver gs( conf, CFG_GROUP_KADMOS );
+    TDEConfig *conf = TDEGlobal::config ();
+    TDEConfigGroupSaver gs( conf, CFG_GROUP_KADMOS );
 
     m_customClassifierPath = conf->readPathEntry( CFG_KADMOS_CLASSIFIER_PATH );
 #if 0
@@ -341,8 +341,8 @@ void KadmosDialog::slFontChanged( int id )
 {
     m_cbLang->clear();
 
-    KConfig *conf = TDEGlobal::config ();
-    KConfigGroupSaver gs( conf, CFG_GROUP_KADMOS );
+    TDEConfig *conf = TDEGlobal::config ();
+    TDEConfigGroupSaver gs( conf, CFG_GROUP_KADMOS );
 
 
 

@@ -22,7 +22,7 @@ KuickFile::KuickFile(const KURL& url)
     if ( m_url.isLocalFile())
         m_localFile = m_url.path();
     else {
-    	const KURL& mostLocal = KIO::NetAccess::mostLocalURL( m_url, 0L );
+    	const KURL& mostLocal = TDEIO::NetAccess::mostLocalURL( m_url, 0L );
     	if ( mostLocal.isValid() && mostLocal.isLocalFile() )
     		m_localFile = mostLocal.path();
     }
@@ -84,10 +84,10 @@ bool KuickFile::download()
     KURL destURL;
     destURL.setPath( tempFile.name() );
 
-    m_job = KIO::file_copy( m_url, destURL, -1, true, false, false ); // handling progress ourselves
+    m_job = TDEIO::file_copy( m_url, destURL, -1, true, false, false ); // handling progress ourselves
     m_job->setAutoErrorHandlingEnabled( true );
-    connect( m_job, TQT_SIGNAL( result( KIO::Job * )), TQT_SLOT( slotResult( KIO::Job * ) ));
-    connect( m_job, TQT_SIGNAL( percent( KIO::Job *, unsigned long )), TQT_SLOT( slotProgress( KIO::Job *, unsigned long ) ));
+    connect( m_job, TQT_SIGNAL( result( TDEIO::Job * )), TQT_SLOT( slotResult( TDEIO::Job * ) ));
+    connect( m_job, TQT_SIGNAL( percent( TDEIO::Job *, unsigned long )), TQT_SLOT( slotProgress( TDEIO::Job *, unsigned long ) ));
 
     // TODO: generify background/foreground downloading?
 
@@ -136,7 +136,7 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( TQWidget *parent )
      return OK;
 }
 
-void KuickFile::slotResult( KIO::Job *job )
+void KuickFile::slotResult( TDEIO::Job *job )
 {
     if (job != m_job) { // huh?
         return;
@@ -147,15 +147,15 @@ void KuickFile::slotResult( KIO::Job *job )
     if ( job->error() != 0 ) {
     	m_currentProgress = 0;
 
-        if ( job->error() != KIO::ERR_USER_CANCELED )
+        if ( job->error() != TDEIO::ERR_USER_CANCELED )
             kdWarning() << "ERROR: KuickFile::slotResult: " << job->errorString() << endl;
 
-        TQString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
+        TQString canceledFile = static_cast<TDEIO::FileCopyJob*>(job)->destURL().path();
         TQFile::remove( canceledFile );
         m_progress->topLevelWidget()->hide();
     }
     else {
-	    m_localFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
+	    m_localFile = static_cast<TDEIO::FileCopyJob*>(job)->destURL().path();
 	    emit downloaded( this ); // before closing the progress dialog
 
 	    if ( m_progress ) {
@@ -168,7 +168,7 @@ void KuickFile::slotResult( KIO::Job *job )
     }
 }
 
-void KuickFile::slotProgress( KIO::Job *job, unsigned long percent )
+void KuickFile::slotProgress( TDEIO::Job *job, unsigned long percent )
 {
     if (job != m_job) { // huh?
         return;

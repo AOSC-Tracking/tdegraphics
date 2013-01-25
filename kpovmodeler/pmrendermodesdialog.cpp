@@ -124,13 +124,13 @@ void PMRenderModesDialog::checkButtons( )
    }
 }
 
-void PMRenderModesDialog::saveConfig( KConfig* cfg )
+void PMRenderModesDialog::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
    cfg->writeEntry( "RenderModesDialogSize", s_size );
 }
 
-void PMRenderModesDialog::restoreConfig( KConfig* cfg )
+void PMRenderModesDialog::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
@@ -390,13 +390,13 @@ PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent, co
    connect( m_pAlphaBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotToggled( bool ) ) );
 }
 
-void PMRenderModeDialog::saveConfig( KConfig* cfg )
+void PMRenderModeDialog::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
    cfg->writeEntry( "RenderModeDialogSize", s_size );
 }
 
-void PMRenderModeDialog::restoreConfig( KConfig* cfg )
+void PMRenderModeDialog::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 

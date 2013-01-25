@@ -43,7 +43,7 @@ ImData::ImData()
 }
 
 
-void ImData::load( KConfig *kc )
+void ImData::load( TDEConfig *kc )
 {
   ImData def;
 
@@ -68,7 +68,7 @@ void ImData::load( KConfig *kc )
 }
 
 
-void ImData::save( KConfig *kc )
+void ImData::save( TDEConfig *kc )
 {
   kc->setGroup( "ImlibConfiguration" );
 

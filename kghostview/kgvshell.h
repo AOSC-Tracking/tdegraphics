@@ -29,7 +29,7 @@ class KRecentFilesAction;
 class ScrollBox;
 class KGVPart;
 class KAction;
-class KConfig;
+class TDEConfig;
 class KTempFile;
 class KPopupMenu;
 class DisplayOptions;
@@ -64,8 +64,8 @@ protected slots:
 
 protected:
     // session management
-    virtual void saveProperties( KConfig *config );
-    virtual void readProperties( KConfig *config );
+    virtual void saveProperties( TDEConfig *config );
+    virtual void readProperties( TDEConfig *config );
     
     void readSettings();
     void writeSettings();

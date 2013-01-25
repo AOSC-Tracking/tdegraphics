@@ -175,9 +175,9 @@ int kpToolToolBar::defaultIconSize ()
 #endif
 
 
-    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
+    TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
                                      kpSettingsGroupTools);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     if (cfg->hasKey (kpSettingToolBoxIconSize))
     {

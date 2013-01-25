@@ -59,14 +59,14 @@ namespace KPDF
      * This method is called when it is time for the app to save its
      * properties for session management purposes.
      */
-    void saveProperties(KConfig*);
+    void saveProperties(TDEConfig*);
 
     /**
-     * This method is called when this app is restored.  The KConfig
+     * This method is called when this app is restored.  The TDEConfig
      * object points to the session management config file that was saved
      * with @ref saveProperties
      */
-    void readProperties(KConfig*);
+    void readProperties(TDEConfig*);
     void readSettings();
     void writeSettings();
     void setFullScreen( bool );
@@ -86,8 +86,8 @@ namespace KPDF
     void delayedOpen();
 
   signals:
-      void restoreDocument(KConfig* config);
-      void saveDocumentRestoreInfo(KConfig* config);
+      void restoreDocument(TDEConfig* config);
+      void saveDocumentRestoreInfo(TDEConfig* config);
      
      
   private:

@@ -317,8 +317,8 @@ void kpMainWindow::slotResizeScale ()
     {
         d->m_resizeScaleDialogLastKeepAspect = dialog.keepAspectRatio ();
 
-        KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         cfg->writeEntry (kpSettingResizeScaleLastKeepAspect,
                          d->m_resizeScaleDialogLastKeepAspect);
@@ -464,8 +464,8 @@ void kpMainWindow::slotMoreEffects ()
     {
         d->m_moreEffectsDialogLastEffect = dialog.selectedEffect ();
 
-        KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         cfg->writeEntry (kpSettingMoreEffectsLastEffect,
                          d->m_moreEffectsDialogLastEffect);

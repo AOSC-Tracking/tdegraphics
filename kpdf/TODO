@@ -139,7 +139,7 @@ Done (newest features come first):
 -> ADD: gfx capturing tool
 -> ADD: composited renderer framework (in addition to a fast light one)
 -> FIX: pageview repaint done internally (speed boost and reduced memory consumption)
--> ADD: KConfigXT settings framework and Accessibility config (acc. code mostly not done)
+-> ADD: TDEConfigXT settings framework and Accessibility config (acc. code mostly not done)
 -> FIX: workaround for scrollview bug 1/2 (painting hidden widgets under certain circumstances)
 -> ADD: zoom into a rect defined by mouse (aka zoom to window)
 -> FIX: sheet rotation in landscape case

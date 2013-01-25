@@ -38,7 +38,7 @@ class ImData;
 class KuickConfigDialog;
 
 class KAccel;
-class KConfig;
+class TDEConfig;
 class KToggleAction;
 class AboutWidget;
 
@@ -97,7 +97,7 @@ public:
 
 
 protected:
-    virtual void	readProperties( KConfig * );
+    virtual void	readProperties( TDEConfig * );
     void 		initImlibParams( ImData *, ImlibInitParams * );
     void                tryShowNextImage();
 
@@ -145,7 +145,7 @@ private:
     void 		initGUI( const KURL& startDir );
     bool	       	eventFilter( TQObject *, TQEvent * );
     void 		initImlib();
-    void 		saveProperties( KConfig * );
+    void 		saveProperties( TDEConfig * );
     void 		saveSettings();
     bool 		haveBrowser() const;
     void 		delayedRepeatEvent( ImageWindow *, TQKeyEvent * );

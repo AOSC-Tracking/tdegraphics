@@ -25,7 +25,7 @@ class TQComboBox;
 class XVidExtWrap;
 class TDEProcess;
 
-class KGamma: public KCModule
+class KGamma: public TDECModule
 {
    Q_OBJECT
   

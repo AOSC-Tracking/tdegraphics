@@ -19,7 +19,7 @@
 #ifndef KMRML_CONFIG_H
 #define KMRML_CONFIG_H
 
-class KConfig;
+class TDEConfig;
 
 #include <tqstringlist.h>
 #include <kurl.h>
@@ -57,7 +57,7 @@ namespace KMrml
     {
     public:
         Config();
-        Config( KConfig *config ); // does not take ownership of KConfig
+        Config( TDEConfig *config ); // does not take ownership of TDEConfig
         ~Config();
 
         bool sync();
@@ -115,8 +115,8 @@ namespace KMrml
         TQString m_defaultHost;
         TQStringList m_hostList;
 
-        KConfig *m_config;
-        KConfig *m_ownConfig;
+        TDEConfig *m_config;
+        TDEConfig *m_ownConfig;
     };
 }
 

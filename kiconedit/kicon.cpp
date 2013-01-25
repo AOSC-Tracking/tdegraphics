@@ -84,7 +84,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
     }
     else
     {
-        if(!KIO::NetAccess::download( url, filename, (TQWidget*)parent() ))
+        if(!TDEIO::NetAccess::download( url, filename, (TQWidget*)parent() ))
         {
             TQString msg = i18n("There was an error loading:\n%1\n").arg(url.prettyURL());
             KMessageBox::error((TQWidget*)parent(), msg);
@@ -96,7 +96,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
 
     if(!url.isLocalFile())
     {
-        KIO::NetAccess::removeTempFile( filename );
+        TDEIO::NetAccess::removeTempFile( filename );
     }
 
     if(!loadedOk) 

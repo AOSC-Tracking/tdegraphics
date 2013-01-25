@@ -255,7 +255,7 @@ void ScanPackager::slotDecorate( KFileTreeViewItem* item )
 	 item->setPixmap( 0, m_floppyPixmap );
 	 if ( kfi )
 	 {
-	    item->setText(1, KIO::convertSize( kfi->size() ));
+	    item->setText(1, TDEIO::convertSize( kfi->size() ));
 	 }
       }
 
@@ -1050,13 +1050,13 @@ void ScanPackager::slotUrlsDropped( TQWidget*, TQDropEvent* ev, KURL::List& urls
        }
 
       if ( ev->action() == TQDropEvent::Move )
-        copyjob = KIO::move( urls, copyTo, true );
+        copyjob = TDEIO::move( urls, copyTo, true );
       else
-        copyjob = KIO::copy( urls, copyTo, true );
+        copyjob = TDEIO::copy( urls, copyTo, true );
    }
 }
 
-void ScanPackager::slotCanceled( KIO::Job* )
+void ScanPackager::slotCanceled( TDEIO::Job* )
 {
   kdDebug(28000) << i18n("Canceled by user") << endl;
 }
@@ -1145,7 +1145,7 @@ void ScanPackager::slotDeleteItems( )
    /* Since we are currently talking about local files here, NetAccess is OK */
    if( result == KMessageBox::Continue )
    {
-      if( KIO::NetAccess::del( urlToDel, 0 ))
+      if( TDEIO::NetAccess::del( urlToDel, 0 ))
       {
 	 if( nextToSelect )
 	    setSelected( nextToSelect, true );
@@ -1193,7 +1193,7 @@ void ScanPackager::slotCreateFolder( )
 	     */
 	    slotSetNextUrlToSelect( url );
 
-	    if( ! KIO::NetAccess::mkdir( url, 0, -1 ))
+	    if( ! TDEIO::NetAccess::mkdir( url, 0, -1 ))
 	    {
 	       kdDebug(28000) << "ERR: creation of " << url.prettyURL() << " failed !" << endl;
 	    }

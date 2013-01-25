@@ -29,7 +29,7 @@ class TQToolBox;
 
 class KURL;
 class KAction;
-class KConfig;
+class TDEConfig;
 class KDirWatch;
 class KToggleAction;
 class KSelectAction;
@@ -121,15 +121,15 @@ protected slots:
 	void psTransformEnded();
 	void cannotQuit();
 	void saveSplitterSize();
-	void setMimeTypes(KIO::Job *job);
-	void readMimeType(KIO::Job *job, const TQString &mime);
+	void setMimeTypes(TDEIO::Job *job);
+	void readMimeType(TDEIO::Job *job, const TQString &mime);
 	void emitWindowCaption();
 
 public slots:
 	// connected to Shell action (and browserExtension), not local one
 	void slotPrint();
-	void restoreDocument(KConfig* config);
-	void saveDocumentRestoreInfo(KConfig* config);
+	void restoreDocument(TDEConfig* config);
+	void saveDocumentRestoreInfo(TDEConfig* config);
 	void slotFileDirty( const TQString& );
 	void slotDoFileDirty();
 

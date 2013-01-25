@@ -198,7 +198,7 @@ TQStringList KDVIMultiPage::fileFormats() const
 }
 
 
-void KDVIMultiPage::addConfigDialogs(KConfigDialog* configDialog)
+void KDVIMultiPage::addConfigDialogs(TDEConfigDialog* configDialog)
 {
   static optionDialogFontsWidget* fontConfigWidget = 0;
   

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Icon=kview
 Type=Service
-ServiceTypes=KCModule
+ServiceTypes=TDECModule
 
 X-TDE-ModuleType=Library
 X-TDE-Library=kviewgeneralconfig

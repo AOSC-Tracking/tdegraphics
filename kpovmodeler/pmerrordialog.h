@@ -29,7 +29,7 @@
 #include <tqptrdict.h>
 #include <tqptrlist.h>
 
-class KConfig;
+class TDEConfig;
 class TQTextEdit;
 class PMObject;
 
@@ -56,8 +56,8 @@ public:
    PMErrorDialog( const PMMessageList& messages, int errorFlags,
                   TQWidget* parent = 0, const char* name = 0 );
 
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 
 protected:
    virtual void resizeEvent( TQResizeEvent* ev );

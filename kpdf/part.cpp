@@ -120,7 +120,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_actionsSearched(false), m_searchStarted(false)
 {
 	// connect the started signal to tell the job the mimetypes we like
-	connect(this, TQT_SIGNAL(started(KIO::Job *)), this, TQT_SLOT(setMimeTypes(KIO::Job *)));
+	connect(this, TQT_SIGNAL(started(TDEIO::Job *)), this, TQT_SLOT(setMimeTypes(TDEIO::Job *)));
 	
 	// connect the completed signal so we can put the window caption when loading remote files
 	connect(this, TQT_SIGNAL(completed()), this, TQT_SLOT(emitWindowCaption()));
@@ -522,16 +522,16 @@ bool Part::openURL(const KURL &url)
     return b;
 }
 
-void Part::setMimeTypes(KIO::Job *job)
+void Part::setMimeTypes(TDEIO::Job *job)
 {
     if (job)
     {
         job->addMetaData("accept", "application/pdf, */*;q=0.5");
-        connect(job, TQT_SIGNAL(mimetype(KIO::Job*,const TQString&)), this, TQT_SLOT(readMimeType(KIO::Job*,const TQString&)));
+        connect(job, TQT_SIGNAL(mimetype(TDEIO::Job*,const TQString&)), this, TQT_SLOT(readMimeType(TDEIO::Job*,const TQString&)));
     }
 }
 
-void Part::readMimeType(KIO::Job *, const TQString &mime)
+void Part::readMimeType(TDEIO::Job *, const TQString &mime)
 {
 	m_jobMime = mime;
 }
@@ -809,13 +809,13 @@ void Part::slotSaveFileAs()
             KMessageBox::information( widget(), i18n("You are trying to overwrite \"%1\" with itself. This is not allowed. Please save it in another location.").arg(saveURL.filename()) );
             return;
         }
-        if ( KIO::NetAccess::exists( saveURL, false, widget() ) )
+        if ( TDEIO::NetAccess::exists( saveURL, false, widget() ) )
         {
             if (KMessageBox::warningContinueCancel( widget(), i18n("A file named \"%1\" already exists. Are you sure you want to overwrite it?").arg(saveURL.filename()), TQString(), i18n("Overwrite")) != KMessageBox::Continue)
                 return;
         }
 
-        if ( !KIO::NetAccess::file_copy( m_file, saveURL, -1, true ) )
+        if ( !TDEIO::NetAccess::file_copy( m_file, saveURL, -1, true ) )
             KMessageBox::information( 0, i18n("File could not be saved in '%1'. Try to save it to another location.").arg( saveURL.prettyURL() ) );
     }
 }
@@ -1065,7 +1065,7 @@ void Part::doPrint(KPrinter &printer)
     }
 }
 
-void Part::restoreDocument(KConfig* config)
+void Part::restoreDocument(TDEConfig* config)
 {
   KURL url ( config->readPathEntry( "URL" ) );
   if ( url.isValid() )
@@ -1076,7 +1076,7 @@ void Part::restoreDocument(KConfig* config)
   }
 }
 
-void Part::saveDocumentRestoreInfo(KConfig* config)
+void Part::saveDocumentRestoreInfo(TDEConfig* config)
 {
   config->writePathEntry( "URL", url().url() );
   config->writeEntry( "Viewport", m_document->viewport().toString() );

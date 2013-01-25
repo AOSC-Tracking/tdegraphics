@@ -48,7 +48,7 @@ ImageListItem::ImageListItem( KListView * parent, const KURL & url )
 		m_pTempFile = new KTempFile( TQString(), extension );
 		m_filename = m_pTempFile->name();
 
-		m_pJob = KIO::get( m_url, m_pExtension->urlArgs().reload, false );
+		m_pJob = TDEIO::get( m_url, m_pExtension->urlArgs().reload, false );
 		*/
 	}
 }
@@ -58,7 +58,7 @@ ImageListItem::~ImageListItem()
 	if( ! m_url.isLocalFile() )
 	{
 		// remove downloaded tempfile
-		//KIO::NetAccess::removeTempFile( m_filename );
+		//TDEIO::NetAccess::removeTempFile( m_filename );
 	}
 }
 

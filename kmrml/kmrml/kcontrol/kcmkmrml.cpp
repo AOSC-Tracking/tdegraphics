@@ -44,7 +44,7 @@ typedef KGenericFactory<KCMKMrml, TQWidget> MrmlFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kmrml, MrmlFactory("kmrml") )
 
 KCMKMrml::KCMKMrml(TQWidget *parent, const char *name, const TQStringList & ):
-    KCModule(MrmlFactory::instance(), parent, name)
+    TDECModule(MrmlFactory::instance(), parent, name)
 {
     TDEAboutData* ab = new TDEAboutData(
         "kcmkmrml",

@@ -269,11 +269,11 @@ void ImgSaver::createDir( const TQString& dir )
 {
    KURL url( dir );
 
-   if( ! KIO::NetAccess::exists(url, false, 0) )
+   if( ! TDEIO::NetAccess::exists(url, false, 0) )
    {
       kdDebug(28000) << "Wrn: Directory <" << dir << "> does not exist -> try to create  !" << endl;
       // if( mkdir( TQFile::encodeName( dir ), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH ) != 0 )
-      if( KIO::mkdir( KURL(dir)))
+      if( TDEIO::mkdir( KURL(dir)))
       {
         KMessageBox::sorry(0, i18n("The folder\n%1\n does not exist and could not be created;\n"
                         "please check the permissions.").arg(dir));
@@ -335,7 +335,7 @@ ImgSaveStat ImgSaver::saveImage( TQImage *image )
    kdDebug(28000) << "saveImage: Directory is " << directory << endl;
    TQString filename = createFilename( format );
 
-   KConfig *konf = TDEGlobal::config ();
+   TDEConfig *konf = TDEGlobal::config ();
    konf->setGroup( OP_FILE_GROUP );
 
    if( konf->readBoolEntry( OP_ASK_FILENAME, false ) )
@@ -425,7 +425,7 @@ ImgSaveStat ImgSaver::saveImage( TQImage *image, const KURL& filename, const TQS
 TQString ImgSaver::findFormat( picType type )
 {
    TQString format;
-   KConfig *konf = TDEGlobal::config ();
+   TDEConfig *konf = TDEGlobal::config ();
    konf->setGroup( OP_FILE_GROUP );
 
    if( type == PT_THUMBNAIL )
@@ -552,7 +552,7 @@ bool ImgSaver::isRememberedFormat( picType type, TQString format ) const
 
 TQString ImgSaver::getFormatForType( picType type ) const
 {
-   KConfig *konf = TDEGlobal::config ();
+   TDEConfig *konf = TDEGlobal::config ();
    TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
 
@@ -582,7 +582,7 @@ TQString ImgSaver::getFormatForType( picType type ) const
 
 void ImgSaver::storeFormatForType( picType type, TQString format, bool ask )
 {
-   KConfig *konf = TDEGlobal::config ();
+   TDEConfig *konf = TDEGlobal::config ();
    TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
 
@@ -691,7 +691,7 @@ ImgSaveStat ImgSaver::save( TQImage *image, const TQString &filename,
 void ImgSaver::readConfig( void )
 {
 
-   KConfig *konf = TDEGlobal::config ();
+   TDEConfig *konf = TDEGlobal::config ();
    TQ_CHECK_PTR( konf );
    konf->setGroup( OP_FILE_GROUP );
    ask_for_format = konf->readBoolEntry( OP_FILE_ASK_FORMAT, true );
@@ -794,13 +794,13 @@ bool ImgSaver::renameImage( const KURL& fromUrl, KURL& toUrl, bool askExt,  TQWi
 
    bool success = false;
 
-   if( KIO::NetAccess::exists( targetUrl, false,0 ) )
+   if( TDEIO::NetAccess::exists( targetUrl, false,0 ) )
    {
       kdDebug(28000)<< "Target already exists - can not copy" << endl;
    }
    else
    {
-      if( KIO::file_move(fromUrl, targetUrl) )
+      if( TDEIO::file_move(fromUrl, targetUrl) )
       {
 	 success = true;
       }
@@ -886,7 +886,7 @@ bool ImgSaver::copyImage( const KURL& fromUrl, const KURL& toUrl, TQWidget *over
        }
    }
 
-   KIO::Job *copyjob = KIO::copy( fromUrl, targetUrl, false );
+   TDEIO::Job *copyjob = TDEIO::copy( fromUrl, targetUrl, false );
 
    return( copyjob ? true : false );
 }

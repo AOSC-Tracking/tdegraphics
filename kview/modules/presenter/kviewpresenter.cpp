@@ -410,7 +410,7 @@ void KViewPresenter::loadList()
 		return;
 
 	TQString tempfile;
-	if( ! KIO::NetAccess::download( url, tempfile, m_pViewer->widget() ) )
+	if( ! TDEIO::NetAccess::download( url, tempfile, m_pViewer->widget() ) )
 	{
 		KMessageBox::error( m_pImageList, i18n( "Could not load\n%1" ).arg( url.prettyURL() ) );
 		return;
@@ -446,7 +446,7 @@ void KViewPresenter::loadList()
 		}
 		file.close();
 	}
-	KIO::NetAccess::removeTempFile( tempfile );
+	TDEIO::NetAccess::removeTempFile( tempfile );
 }
 
 void KViewPresenter::saveList()
@@ -482,8 +482,8 @@ void KViewPresenter::saveList()
 
 		if( ! url.isLocalFile() )
 		{
-			KIO::NetAccess::upload( tempfile, url, m_pViewer->widget() );
-			KIO::NetAccess::removeTempFile( tempfile );
+			TDEIO::NetAccess::upload( tempfile, url, m_pViewer->widget() );
+			TDEIO::NetAccess::removeTempFile( tempfile );
 		}
 	}
 }

@@ -32,7 +32,7 @@ public:
   /// method and return true here.
   virtual bool isReadWrite() {return true;}
 
-  virtual void addConfigDialogs(KConfigDialog* configDialog);
+  virtual void addConfigDialogs(TDEConfigDialog* configDialog);
 
   static TDEAboutData* createAboutData();
 

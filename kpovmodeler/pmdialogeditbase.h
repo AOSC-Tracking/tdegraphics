@@ -34,7 +34,7 @@ class TQCheckBox;
 class TQLayout;
 class TQPushButton;
 class TQVBox;
-class KConfig;
+class TDEConfig;
 class PMPart;
 class PMPovrayRenderWidget;
 class PMPovrayOutputWidget;
@@ -262,8 +262,8 @@ public:
     */
    static void setPreviewGamma( double g ) { s_previewGamma = g; }
 
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 protected:
    /**
     * Sets the help topic

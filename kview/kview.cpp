@@ -92,8 +92,8 @@ KView::KView()
 		connect( TQApplication::clipboard(), TQT_SIGNAL( dataChanged() ),
 				TQT_SLOT( clipboardDataChanged() ) );
 
-		connect( m_pViewer, TQT_SIGNAL( started( KIO::Job * ) ),
-				this, TQT_SLOT( jobStarted( KIO::Job * ) ) );
+		connect( m_pViewer, TQT_SIGNAL( started( TDEIO::Job * ) ),
+				this, TQT_SLOT( jobStarted( TDEIO::Job * ) ) );
 		connect( m_pViewer, TQT_SIGNAL( completed() ),
 				this, TQT_SLOT( jobCompleted() ) );
 		connect( m_pViewer, TQT_SIGNAL( completed( bool ) ),
@@ -120,7 +120,7 @@ KView::KView()
 		// create status bar (hidden by default)
 		statusBar()->insertItem( "", STATUSBAR_SPEED_ID, 0, true );
 		statusBar()->setItemFixed( STATUSBAR_SPEED_ID,
-				8 + fontMetrics().width( i18n( "%1/s" ).arg( KIO::convertSize( 999000 ) ) ) );
+				8 + fontMetrics().width( i18n( "%1/s" ).arg( TDEIO::convertSize( 999000 ) ) ) );
 		statusBar()->insertItem( "", STATUSBAR_CURSOR_ID, 0, true );
 		statusBar()->setItemFixed( STATUSBAR_CURSOR_ID, 8 + fontMetrics().width( "8888, 8888" ) );
 		statusBar()->insertItem( "", STATUSBAR_SIZE_ID, 0, true );
@@ -167,7 +167,7 @@ void KView::load( const KURL & url )
 			// would do:
 			TQString directory = url.directory();
 			TQString key = TQString::fromLatin1( "load_image" );
-			KConfig * config = TDEGlobal::config();
+			TDEConfig * config = TDEGlobal::config();
 
 			config->setGroup( TQString::fromLatin1( "Recent Dirs" ) );
 			TQStringList result = config->readPathListEntry( key );
@@ -220,30 +220,30 @@ bool KView::queryClose()
 	return m_pViewer->closeURL();
 }
 
-void KView::saveProperties( KConfig * /*config*/ )
+void KView::saveProperties( TDEConfig * /*config*/ )
 {
 	// save session data:
 	// What URL is currently open
 	// somehow the plugins have to get a chance to store their data
 }
 
-void KView::readProperties( KConfig * /*config*/ )
+void KView::readProperties( TDEConfig * /*config*/ )
 {
 	// read session data
 }
 
-void KView::saveSettings( KConfig * config )
+void KView::saveSettings( TDEConfig * config )
 {
 	// write settings to config/kviewrc
 	kdDebug( 4600 ) << k_funcinfo << endl;
 	m_paRecent->saveEntries( config );
 }
 
-void KView::readSettings() // KConfig * config )
+void KView::readSettings() // TDEConfig * config )
 {
 	// read settings from config/kviewrc
 	kdDebug( 4600 ) << k_funcinfo << endl;
-	KConfigGroup cfgGroup( TDEGlobal::config(), "KView General" );
+	TDEConfigGroup cfgGroup( TDEGlobal::config(), "KView General" );
 	m_nResizeMode = cfgGroup.readNumEntry( "Resize Mode", 2 );
 	kdDebug( 4600 ) << "m_nResizeMode = " << m_nResizeMode << endl;
 	loadPlugins();
@@ -377,7 +377,7 @@ void KView::slotPreferences()
 	if( ! dlg )
 	{
 		dlg = new KSettings::Dialog( this );
-		//dlg = new KConfigureDialog( KConfigureDialog::Configurable, this );
+		//dlg = new TDEConfigureDialog( TDEConfigureDialog::Configurable, this );
 		//dlg->addPluginInfos( KPluginInfo::fromKPartsInstanceName( instance()->instanceName(), TDEGlobal::config(), "KParts Plugins" ) );
 	}
 	dlg->show();
@@ -418,13 +418,13 @@ void KView::clipboardDataChanged()
 	m_paPaste->setEnabled( hasImage );
 }
 
-void KView::jobStarted( KIO::Job * job )
+void KView::jobStarted( TDEIO::Job * job )
 {
 	if( job )
 	{
-		connect( job, TQT_SIGNAL( percent( KIO::Job *, unsigned long ) ), this, TQT_SLOT( loadingProgress( KIO::Job *, unsigned long ) ) );
-		connect( job, TQT_SIGNAL( speed(   KIO::Job *, unsigned long ) ), this, TQT_SLOT( speedProgress(   KIO::Job *, unsigned long ) ) );
-		//connect( job, TQT_SIGNAL( infoMessage( KIO::Job *, const TQString & ) ), this, TQT_SLOT() );
+		connect( job, TQT_SIGNAL( percent( TDEIO::Job *, unsigned long ) ), this, TQT_SLOT( loadingProgress( TDEIO::Job *, unsigned long ) ) );
+		connect( job, TQT_SIGNAL( speed(   TDEIO::Job *, unsigned long ) ), this, TQT_SLOT( speedProgress(   TDEIO::Job *, unsigned long ) ) );
+		//connect( job, TQT_SIGNAL( infoMessage( TDEIO::Job *, const TQString & ) ), this, TQT_SLOT() );
 		loadingProgress( job, 0 );
 		speedProgress( job, 0 );
 	}
@@ -447,7 +447,7 @@ void KView::jobCanceled( const TQString & errorMsg )
 	jobCompleted();
 }
 
-void KView::loadingProgress( KIO::Job *, unsigned long percent )
+void KView::loadingProgress( TDEIO::Job *, unsigned long percent )
 {
 	if( percent > 100 )
 	{
@@ -461,12 +461,12 @@ void KView::loadingProgress( KIO::Job *, unsigned long percent )
 	m_pProgressBar->setValue( percent );
 }
 
-void KView::speedProgress( KIO::Job *, unsigned long bytesPerSecond )
+void KView::speedProgress( TDEIO::Job *, unsigned long bytesPerSecond )
 {
 	TQString sizeStr;
 
 	if( bytesPerSecond > 0 )
-		sizeStr = i18n( "%1/s" ).arg( KIO::convertSize( bytesPerSecond ) );
+		sizeStr = i18n( "%1/s" ).arg( TDEIO::convertSize( bytesPerSecond ) );
 	else
 		sizeStr = i18n( "Stalled" );
 

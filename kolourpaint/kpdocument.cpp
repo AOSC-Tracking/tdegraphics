@@ -247,7 +247,7 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
 
 
     TQString tempFile;
-    if (url.isEmpty () || !KIO::NetAccess::download (url, tempFile, parent))
+    if (url.isEmpty () || !TDEIO::NetAccess::download (url, tempFile, parent))
     {
         if (!suppressDoesntExistDialog)
         {
@@ -262,7 +262,7 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
 
     TQImage image;
 
-    // sync: remember to "KIO::NetAccess::removeTempFile (tempFile)" in all exit paths
+    // sync: remember to "TDEIO::NetAccess::removeTempFile (tempFile)" in all exit paths
     {
         TQString detectedMimeType = KImageIO::mimeType (tempFile);
         if (saveOptions)
@@ -280,13 +280,13 @@ TQPixmap kpDocument::getPixmapFromFile (const KURL &url, bool suppressDoesntExis
             KMessageBox::sorry (parent,
                                 i18n ("Could not open \"%1\" - unknown mimetype.")
                                     .arg (kpDocument::prettyFilenameForURL (url)));
-            KIO::NetAccess::removeTempFile (tempFile);
+            TDEIO::NetAccess::removeTempFile (tempFile);
             return TQPixmap ();
         }
 
 
         image = TQImage (tempFile);
-        KIO::NetAccess::removeTempFile (tempFile);
+        TDEIO::NetAccess::removeTempFile (tempFile);
     }
 
 
@@ -394,7 +394,7 @@ bool kpDocument::open (const KURL &url, bool newDocSameNameIfNotExist)
     {
         if (!url.isEmpty () &&
             // not just a permission error?
-            !KIO::NetAccess::exists (url, true/*open*/, m_mainWindow))
+            !TDEIO::NetAccess::exists (url, true/*open*/, m_mainWindow))
         {
             openNew (url);
         }
@@ -619,7 +619,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                                    bool lossyPrompt,
                                    TQWidget *parent)
 {
-    // TODO: Use KIO::NetAccess:mostLocalURL() for accessing home:/ (and other
+    // TODO: Use TDEIO::NetAccess:mostLocalURL() for accessing home:/ (and other
     //       such local URLs) for efficiency and because only local writes
     //       are atomic.
 #if DEBUG_KP_DOCUMENT
@@ -632,7 +632,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
     metaInfo.printDebug (TQString::fromLatin1 ("\tmetaInfo"));
 #endif
 
-    if (overwritePrompt && KIO::NetAccess::exists (url, false/*write*/, parent))
+    if (overwritePrompt && TDEIO::NetAccess::exists (url, false/*write*/, parent))
     {
         int result = KMessageBox::warningContinueCancel (parent,
             i18n ("A document called \"%1\" already exists.\n"
@@ -773,7 +773,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
         // TODO: No one seems to know how to do this atomically
         //       [http://lists.kde.org/?l=kde-core-devel&m=117845162728484&w=2].
         //       At least, fish:// (ssh) is definitely not atomic.
-        if (!KIO::NetAccess::upload (filename, url, parent))
+        if (!TDEIO::NetAccess::upload (filename, url, parent))
         {
         #if DEBUG_KP_DOCUMENT
             kdDebug () << "\treturning false because could not upload" << endl;
@@ -849,7 +849,7 @@ bool kpDocument::isFromURL (bool checkURLStillExists) const
         return true;
 
     return (!m_url.isEmpty () &&
-            KIO::NetAccess::exists (m_url, true/*open*/, m_mainWindow));
+            TDEIO::NetAccess::exists (m_url, true/*open*/, m_mainWindow));
 }
 
 

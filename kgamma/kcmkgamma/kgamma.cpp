@@ -56,7 +56,7 @@ extern "C"
 }
 
 KGamma::KGamma(TQWidget *parent, const char *name, const TQStringList&)
-    :KCModule(parent,name)
+    :TDECModule(parent,name)
 {
   bool ok;
   GammaCorrection = true;
@@ -291,7 +291,7 @@ void KGamma::load() {
 /** Restore latest saved gamma values */
 void KGamma::load(bool useDefaults) {
   if (GammaCorrection) {
-    KConfig *config = new KConfig("kgammarc");
+    TDEConfig *config = new TDEConfig("kgammarc");
 
 	 config->setReadDefaults( useDefaults );
 
@@ -344,7 +344,7 @@ void KGamma::save() {
     }
     xv->setScreen(currentScreen);
 
-    KConfig *config = new KConfig("kgammarc");
+    TDEConfig *config = new TDEConfig("kgammarc");
     config->setGroup("SyncBox");
     if ( syncbox->isChecked() ) config->writeEntry("sync", "yes");
     else config->writeEntry("sync", "no");
@@ -385,7 +385,7 @@ void KGamma::defaults() {
 }
 
 bool KGamma::loadSettings() {
-  KConfig *config = new KConfig("kgammarc");
+  TDEConfig *config = new TDEConfig("kgammarc");
   config->setGroup("ConfigFile");
   TQString ConfigFile( config->readEntry("use") );
   config->setGroup("SyncBox");
@@ -402,7 +402,7 @@ bool KGamma::loadSettings() {
 }
 
 bool KGamma::loadUserSettings() {
-  KConfig *config = new KConfig("kgammarc");
+  TDEConfig *config = new TDEConfig("kgammarc");
 
   for (int i = 0; i < ScreenCount; i++) {
     config->setGroup(TQString( "Screen %1" ).arg(i) );
@@ -606,7 +606,7 @@ extern "C"
     if (ok) {
       xv.setGammaLimits(0.4, 3.5);
       float rgamma, ggamma, bgamma;
-      KConfig *config = new KConfig("kgammarc");
+      TDEConfig *config = new TDEConfig("kgammarc");
 
       for (int i = 0; i < xv._ScreenCount(); i++) {
         xv.setScreen(i);

@@ -71,7 +71,7 @@ void createStandardTemplates(KIconTemplateContainer *list)
 
 void KIconTemplateContainer::save()
 {
-  KConfig *k = kapp->config();
+  TDEConfig *k = kapp->config();
   k->setGroup("Templates");
   
   TQStringList names;
@@ -91,7 +91,7 @@ void KIconTemplateContainer::save()
 KIconTemplateContainer::KIconTemplateContainer() : TQValueList<KIconTemplate>()
 {  
   TQStrList names;
-  KConfig *k = kapp->config();
+  TDEConfig *k = kapp->config();
   k->setGroup("Templates");
   k->readListEntry("Names", names);
   for(int i = 0; i < (int)names.count(); i++)

@@ -56,8 +56,8 @@ protected:
   void setupBackground();
 
   // session management
-  virtual void saveProperties( KConfig *config );
-  virtual void readProperties( KConfig *config );
+  virtual void saveProperties( TDEConfig *config );
+  virtual void readProperties( TDEConfig *config );
 
 private:
   void drawScale(TQPainter &painter);

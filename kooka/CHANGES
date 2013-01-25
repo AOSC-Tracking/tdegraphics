@@ -17,7 +17,7 @@ scanned with about 150 dpi.
 
 * Reworked the ocr integration: Nice start- and finish-dialog,
   animated status image, opening a text editor with the result text
-  via mime mechanism of KDE (KRun). OCR-Parameter get stored via KConfig.
+  via mime mechanism of KDE (KRun). OCR-Parameter get stored via TDEConfig.
   OCR may be performed on the entire image or the selection.
 
 * Reworked the save assistant: New layout and fully KDE2-Compliant.

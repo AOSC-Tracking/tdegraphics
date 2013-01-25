@@ -29,7 +29,7 @@
 #include <tqvaluelist.h>
 #include <kstaticdeleter.h>
 
-class KConfig;
+class TDEConfig;
 class TQDomElement;
 
 /**
@@ -113,8 +113,8 @@ public:
     */
    TQString documentation( const TQString& objectName );
    
-   void saveConfig( KConfig* cfg );
-   void restoreConfig( KConfig* cfg );
+   void saveConfig( TDEConfig* cfg );
+   void restoreConfig( TDEConfig* cfg );
 
 private:
    

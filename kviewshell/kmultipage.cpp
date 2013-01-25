@@ -172,8 +172,8 @@ void KMultiPage::slotSave()
       return;
   }
 
-  KIO::Job *job = KIO::file_copy( KURL( m_file ), KURL( fileName ), 0600, true, false, true );
-  connect( job, TQT_SIGNAL( result( KIO::Job * ) ), this, TQT_SLOT( slotIOJobFinished ( KIO::Job * ) ) );
+  TDEIO::Job *job = TDEIO::file_copy( KURL( m_file ), KURL( fileName ), 0600, true, false, true );
+  connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ), this, TQT_SLOT( slotIOJobFinished ( TDEIO::Job * ) ) );
 
   return;
 }
@@ -222,7 +222,7 @@ bool KMultiPage::closeURL()
   return true;
 }
 
-void KMultiPage::slotIOJobFinished ( KIO::Job *job )
+void KMultiPage::slotIOJobFinished ( TDEIO::Job *job )
 {
   if ( job->error() )
     job->showErrorDialog( 0L );
@@ -629,7 +629,7 @@ void KMultiPage::handleLocalLink(const TQString &linkText)
     gotoPage(anch);
   else {
     if (linkText[0] != '#' ) {
-      // We could in principle use KIO::Netaccess::run() here, but
+      // We could in principle use TDEIO::Netaccess::run() here, but
       // it is perhaps not a very good idea to allow a DVI-file to
       // specify arbitrary commands, such as "rm -rvf /". Using
       // the kfmclient seems to be MUCH safer.

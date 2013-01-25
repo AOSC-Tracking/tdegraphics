@@ -93,13 +93,13 @@ void PMPovrayOutputWidget::slotClose( )
 }
 
 
-void PMPovrayOutputWidget::saveConfig( KConfig* cfg )
+void PMPovrayOutputWidget::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
    cfg->writeEntry( "PovrayOutputWidgetSize", s_size );
 }
 
-void PMPovrayOutputWidget::restoreConfig( KConfig* cfg )
+void PMPovrayOutputWidget::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 

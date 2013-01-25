@@ -24,9 +24,9 @@
 
 class GeneralConfigWidget;
 class TQCheckListItem;
-class KConfig;
+class TDEConfig;
 
-class KViewCanvasConfig : public KCModule
+class KViewCanvasConfig : public TDECModule
 {
 	Q_OBJECT
   
@@ -42,7 +42,7 @@ class KViewCanvasConfig : public KCModule
 		void configChanged();
 
 	private:
-		KConfig * m_config;
+		TDEConfig * m_config;
 		GeneralConfigWidget * m_pWidget;
 		TQPtrList<TQCheckListItem> m_items;
 };

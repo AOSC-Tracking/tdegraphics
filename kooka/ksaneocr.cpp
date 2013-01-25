@@ -68,7 +68,7 @@
  * thread save unfortunately. See slotKadmosResult-comments for more information
  */
 
-KSANEOCR::KSANEOCR( TQWidget*, KConfig *cfg ):
+KSANEOCR::KSANEOCR( TQWidget*, TDEConfig *cfg ):
     m_ocrProcessDia(0L),
     daemon(0L),
     visibleOCRRunning(false),
@@ -85,7 +85,7 @@ KSANEOCR::KSANEOCR( TQWidget*, KConfig *cfg ):
     m_applyFilter(false),
     m_unlinkORF(true)
 {
-    KConfig *konf = TDEGlobal::config ();
+    TDEConfig *konf = TDEGlobal::config ();
     m_ocrEngine = OCRAD;
     m_img = 0L;
     m_tmpFile = 0L;
@@ -403,8 +403,8 @@ void KSANEOCR::startOCRAD( )
     *daemon << TQString("-l");
     *daemon << TQString::number( ocrDia->layoutDetectionMode());
 
-    KConfig *konf = TDEGlobal::config ();
-    KConfigGroupSaver( konf, CFG_GROUP_OCRAD );
+    TDEConfig *konf = TDEGlobal::config ();
+    TDEConfigGroupSaver( konf, CFG_GROUP_OCRAD );
 
     TQString format = konf->readEntry( CFG_OCRAD_FORMAT, "utf8");
     *daemon << TQString("-F");

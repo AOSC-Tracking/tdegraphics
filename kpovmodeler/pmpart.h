@@ -120,11 +120,11 @@ public:
    /**
     * saves settings
     */
-   void saveConfig( KConfig* cfg );
+   void saveConfig( TDEConfig* cfg );
    /**
     * loads settings
     */
-   void restoreConfig( KConfig* cfg );
+   void restoreConfig( TDEConfig* cfg );
 
    /**
     * Updates the sorted list of selected objects if necessary and

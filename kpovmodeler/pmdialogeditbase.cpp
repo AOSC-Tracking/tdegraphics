@@ -274,7 +274,7 @@ void PMDialogEditBase::setPreviewAADepth( int d )
       s_previewAADepth = d;
 }
 
-void PMDialogEditBase::saveConfig( KConfig* cfg )
+void PMDialogEditBase::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "TexturePreview" );
    cfg->writeEntry( "Size", s_previewSize );
@@ -293,7 +293,7 @@ void PMDialogEditBase::saveConfig( KConfig* cfg )
    cfg->writeEntry( "Gamma", s_previewGamma );
 }
 
-void PMDialogEditBase::restoreConfig( KConfig* cfg )
+void PMDialogEditBase::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "TexturePreview" );
    setPreviewSize( cfg->readNumEntry( "Size", s_previewSize ) );

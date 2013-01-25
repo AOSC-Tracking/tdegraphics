@@ -51,8 +51,8 @@ FileFinder::FileFinder( TQWidget *parent, const char *name )
     setAutoDeleteCompletionObject( true );
     setFocusPolicy( TQ_ClickFocus );
 
-    KConfig *config = TDEGlobal::config();
-    KConfigGroupSaver cs( config, "GeneralConfiguration" );
+    TDEConfig *config = TDEGlobal::config();
+    TDEConfigGroupSaver cs( config, "GeneralConfiguration" );
     setCompletionMode( (TDEGlobalSettings::Completion)
                config->readNumEntry( "FileFinderCompletionMode",
                                      TDEGlobalSettings::completionMode()));
@@ -60,8 +60,8 @@ FileFinder::FileFinder( TQWidget *parent, const char *name )
 
 FileFinder::~FileFinder()
 {
-    KConfig *config = TDEGlobal::config();
-    KConfigGroupSaver cs( config, "GeneralConfiguration" );
+    TDEConfig *config = TDEGlobal::config();
+    TDEConfigGroupSaver cs( config, "GeneralConfiguration" );
     config->writeEntry( "FileFinderCompletionMode", completionMode() );
 }
 

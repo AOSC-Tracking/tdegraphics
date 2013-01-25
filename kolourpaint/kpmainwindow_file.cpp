@@ -146,9 +146,9 @@ void kpMainWindow::addRecentURL (const KURL &url)
         return;
 
 
-    KConfig *cfg = kapp->config ();
+    TDEConfig *cfg = kapp->config ();
 
-    // KConfig::readEntry() does not actually reread from disk, hence doesn't
+    // TDEConfig::readEntry() does not actually reread from disk, hence doesn't
     // realise what other processes have done e.g. Settings / Show Path
     cfg->reparseConfiguration ();
 
@@ -230,12 +230,12 @@ void kpMainWindow::slotNew ()
 // private
 TQSize kpMainWindow::defaultDocSize () const
 {
-    // KConfig::readEntry() does not actually reread from disk, hence doesn't
+    // TDEConfig::readEntry() does not actually reread from disk, hence doesn't
     // realise what other processes have done e.g. Settings / Show Path
     kapp->config ()->reparseConfiguration ();
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     TQSize docSize = cfg->readSizeEntry (kpSettingLastDocSize);
 
@@ -261,8 +261,8 @@ void kpMainWindow::saveDefaultDocSize (const TQSize &size)
     kdDebug () << "\tCONFIG: saving Last Doc Size = " << size << endl;
 #endif
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingLastDocSize, size);
     cfg->sync ();
@@ -599,7 +599,7 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
 
     bool reparsedConfiguration = false;
 
-    // KConfig::readEntry() does not actually reread from disk, hence doesn't
+    // TDEConfig::readEntry() does not actually reread from disk, hence doesn't
     // realise what other processes have done e.g. Settings / Show Path
     // so reparseConfiguration() must be called
 #define SETUP_READ_CFG()                                                          \
@@ -609,8 +609,8 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
         reparsedConfiguration = true;                                             \
     }                                                                             \
                                                                                   \
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), forcedSaveOptionsGroup);    \
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), forcedSaveOptionsGroup);    \
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
 
     if (chosenSaveOptions)
@@ -715,8 +715,8 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
         newSaveOptions.printDebug ("\tnewSaveOptions");
     #endif
 
-        KConfigGroupSaver cfgGroupSaver (kapp->config (), forcedSaveOptionsGroup);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigGroupSaver cfgGroupSaver (kapp->config (), forcedSaveOptionsGroup);
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         // Save options user forced - probably want to use them in future
         kpDocumentSaveOptions::saveDefaultDifferences (cfg,
@@ -921,7 +921,7 @@ bool kpMainWindow::slotReload ()
 
     // If it's _supposed to_ come from a URL or it exists
     if (m_document->isFromURL (false/*don't bother checking exists*/) ||
-        (!oldURL.isEmpty () && KIO::NetAccess::exists (oldURL, true/*open*/, this)))
+        (!oldURL.isEmpty () && TDEIO::NetAccess::exists (oldURL, true/*open*/, this)))
     {
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "kpMainWindow::slotReload() reloading from disk!" << endl;
@@ -997,9 +997,9 @@ static bool shouldPrintImageCenteredOnPage ()
 #endif
     bool ret;
 
-    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
+    TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
                                      kpSettingsGroupGeneral);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     if (cfg->hasKey (kpSettingPrintImageCenteredOnPage))
     {

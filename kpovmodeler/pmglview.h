@@ -42,7 +42,7 @@ const int controlPointSize = 7;
 class PMObject;
 class PMPart;
 class PMCamera;
-class KConfig;
+class TDEConfig;
 class TQComboBox;
 
 /**
@@ -152,11 +152,11 @@ public:
    /**
     * Saves the configuration
     */
-   static void saveConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
    /**
     * Restores the configuration
     */
-   static void restoreConfig( KConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 
    /**
     * Returns true if the glx stuff was initialized successfully

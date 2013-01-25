@@ -68,7 +68,7 @@ void infoDialog::setDVIData(dvifile *dviFile)
 
     TQFile file(dviFile->filename);
     if (file.exists())
-      text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("File Size")).arg(KIO::convertSize(file.size())));
+      text.append(TQString("<tr><td><b>%1</b></td> <td>%2</td></tr>").arg(i18n("File Size")).arg(TDEIO::convertSize(file.size())));
     else
       text.append(TQString("<tr><td><b> </b></td> <td>%1</td></tr>").arg(i18n("The file does no longer exist.")));
 

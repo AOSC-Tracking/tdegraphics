@@ -59,7 +59,7 @@ class TQStringList;
 class KSpell;
 class KSpellConfig;
 class ImageCanvas;
-class KConfig;
+class TDEConfig;
 // class ocrWord;
 // class ocrPage;
 
@@ -79,7 +79,7 @@ class KSANEOCR : public TQObject
 public:
     enum OCREngines{ GOCR, OCRAD, KADMOS };
 
-    KSANEOCR( TQWidget*, KConfig *);
+    KSANEOCR( TQWidget*, TDEConfig *);
     ~KSANEOCR();
 
     bool startOCRVisible( TQWidget* parent=0);

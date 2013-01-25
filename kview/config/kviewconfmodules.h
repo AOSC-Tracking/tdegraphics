@@ -23,7 +23,7 @@
 
 class TQVButtonGroup;
 
-class KViewGeneralConfig : public KCModule
+class KViewGeneralConfig : public TDECModule
 {
 	Q_OBJECT
   

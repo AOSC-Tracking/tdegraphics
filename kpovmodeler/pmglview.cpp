@@ -1526,11 +1526,11 @@ TQString PMGLView::viewTypeAsString( PMViewType t )
    return str;
 }
 
-void PMGLView::saveConfig( KConfig* /*cfg*/ )
+void PMGLView::saveConfig( TDEConfig* /*cfg*/ )
 {
 }
 
-void PMGLView::restoreConfig( KConfig* /*cfg*/ )
+void PMGLView::restoreConfig( TDEConfig* /*cfg*/ )
 {
 }
 

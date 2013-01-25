@@ -404,7 +404,7 @@ TQSize PMPovrayRenderWidget::sizeHint( ) const
    return s.expandedTo( minimumSize( ) );
 }
 
-void PMPovrayRenderWidget::saveConfig( KConfig* cfg )
+void PMPovrayRenderWidget::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Povray" );
 #if ( ( TDE_VERSION_MAJOR == 3 ) && ( TDE_VERSION_MINOR <= 1 ) )
@@ -416,7 +416,7 @@ void PMPovrayRenderWidget::saveConfig( KConfig* cfg )
 #endif
 }
 
-void PMPovrayRenderWidget::restoreConfig( KConfig* cfg )
+void PMPovrayRenderWidget::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Povray" );
 #if ( ( TDE_VERSION_MAJOR == 3 ) && ( TDE_VERSION_MINOR <= 1 ) )

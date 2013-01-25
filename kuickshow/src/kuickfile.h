@@ -16,7 +16,7 @@
 #include <kurl.h>
 #include <kprogress.h>
 
-namespace KIO {
+namespace TDEIO {
     class Job;
     class FileCopyJob;
 }
@@ -83,13 +83,13 @@ signals:
     void downloaded( KuickFile * );
 
 private slots:
-    void slotResult( KIO::Job *job );
-    void slotProgress( KIO::Job *job, unsigned long percent );
+    void slotResult( TDEIO::Job *job );
+    void slotProgress( TDEIO::Job *job, unsigned long percent );
 
 private:
     KURL m_url;
     TQString m_localFile;
-    KIO::FileCopyJob *m_job;
+    TDEIO::FileCopyJob *m_job;
     KProgress *m_progress;
     int m_currentProgress;
 

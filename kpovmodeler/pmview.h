@@ -31,7 +31,7 @@ class PMTreeView;
 class PMDialogView;
 class PMPart;
 class TQSplitter;
-class KConfig;
+class TDEConfig;
 
 /**
  * The PMView class provides the view widget for the PMPart document class.
@@ -61,11 +61,11 @@ public:
    /**
     * saves settings
     */
-   void saveConfig( KConfig* cfg );
+   void saveConfig( TDEConfig* cfg );
    /**
     * loads settings
     */
-   void restoreConfig( KConfig* cfg );
+   void restoreConfig( TDEConfig* cfg );
 private:
    PMTreeView* m_pTreeView;
    PMPart* m_pPart;

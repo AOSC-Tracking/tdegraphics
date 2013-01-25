@@ -192,7 +192,7 @@ bool KIconEdit::queryClose()
 }
 
 // this is for exit by request of the session manager
-void KIconEdit::saveProperties(KConfig *config )
+void KIconEdit::saveProperties(TDEConfig *config )
 {
     kdDebug(4640) << "KIconEdit::saveProperties" << endl;
 
@@ -200,7 +200,7 @@ void KIconEdit::saveProperties(KConfig *config )
 }
 
 // this is for instances opened by the session manager
-void KIconEdit::readProperties(KConfig *config)
+void KIconEdit::readProperties(TDEConfig *config)
 {
     kdDebug(4640) << "KIconEdit::readProperties" << endl;
 
@@ -214,7 +214,7 @@ void KIconEdit::readProperties(KConfig *config)
 */
 void KIconEdit::writeConfig()
 {
-    KConfig *config = kapp->config();
+    TDEConfig *config = kapp->config();
     m_actRecent->saveEntries( kapp->config() );
 
     KIconEditProperties::self()->save();

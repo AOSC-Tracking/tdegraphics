@@ -14,7 +14,7 @@
 
 class Anchor;
 class DocumentWidget;
-class KConfigDialog;
+class TDEConfigDialog;
 class KPrintDialogPage_PageOptions;
 class KPrinter;
 class PageView;
@@ -271,14 +271,14 @@ public:
 
       This method can be re-implemented to add documenttype specific
       configuration pages to the central preferences dialog. The
-      documentation to KConfigDialog explains how to do that.
+      documentation to TDEConfigDialog explains how to do that.
 
       The default implementation does nothing.
 
-      @param configDialog a pointer to the KConfigDialog the dialog to
+      @param configDialog a pointer to the TDEConfigDialog the dialog to
       add pages to
   */
-  virtual void addConfigDialogs(KConfigDialog* configDialog) { Q_UNUSED(configDialog); }
+  virtual void addConfigDialogs(TDEConfigDialog* configDialog) { Q_UNUSED(configDialog); }
 
 
   /* These methods calculate the Zoomfactor needed to fit the pages
@@ -440,7 +440,7 @@ public slots:
   virtual void slotShowThumbnails(bool);
 
   /* Used internally. */
-  void slotIOJobFinished ( KIO::Job *job );
+  void slotIOJobFinished ( TDEIO::Job *job );
 
   /* Switches to fullscreen mode and back. */
   virtual void slotSetFullPage(bool fullpage);

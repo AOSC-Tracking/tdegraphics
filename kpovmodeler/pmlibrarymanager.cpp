@@ -51,11 +51,11 @@ PMLibraryManager::~PMLibraryManager( )
    m_libraries.clear( );
 }
 
-void PMLibraryManager::saveConfig( KConfig* /*cfg*/ )
+void PMLibraryManager::saveConfig( TDEConfig* /*cfg*/ )
 {
 }
 
-void PMLibraryManager::restoreConfig( KConfig* /*cfg*/ )
+void PMLibraryManager::restoreConfig( TDEConfig* /*cfg*/ )
 {
 }
 

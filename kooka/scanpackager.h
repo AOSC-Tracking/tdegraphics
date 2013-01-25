@@ -59,15 +59,15 @@ class JobDescription
 public:
    enum JobType { NoJob, ImportJob, RenameJob, ExportJob };
    JobDescription():jobType( NoJob ), kioJob(0L), pitem(0L) {}
-   JobDescription( KIO::Job* kiojob, KFileTreeViewItem *new_item, JobType type ) :
+   JobDescription( TDEIO::Job* kiojob, KFileTreeViewItem *new_item, JobType type ) :
       jobType(type), kioJob(kiojob), pitem(new_item) {}
 
    JobType type( void ) { return( jobType ); }
    KFileTreeViewItem *item( void ) { return( pitem ); }
-   KIO::Job* job( void ){ return( kioJob ); }
+   TDEIO::Job* job( void ){ return( kioJob ); }
 private:
    JobType       jobType;
-   KIO::Job*     kioJob;
+   TDEIO::Job*     kioJob;
    KFileTreeViewItem* pitem;
 };
 
@@ -95,7 +95,7 @@ public slots:
 
    void         slotExportFile( );
     void        slotImportFile();
-   void         slotCanceled(KIO::Job*);
+   void         slotCanceled(TDEIO::Job*);
    void         slotCurrentImageChanged( TQImage* );
 
    void         slotDecorate( KFileTreeViewItem* );
@@ -149,7 +149,7 @@ private:
     TQString      m_currImportDir;
     TQString      m_currCopyDir;
     TQString      currSelectedDir;
-    KIO::Job     *copyjob;
+    TDEIO::Job     *copyjob;
     int          img_counter;
     TQPopupMenu    *m_contextMenu;
 

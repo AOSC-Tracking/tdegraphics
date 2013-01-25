@@ -58,21 +58,21 @@ void Loader::requestDownload( const KURL& url )
             return;
     }
 
-    KIO::TransferJob *job = KIO::get( url, false, false );
-    KIO::Scheduler::scheduleJob(job);
+    TDEIO::TransferJob *job = TDEIO::get( url, false, false );
+    TDEIO::Scheduler::scheduleJob(job);
 
-    connect( job , TQT_SIGNAL( data( KIO::Job *, const TQByteArray& )),
-             TQT_SLOT( slotData( KIO::Job *, const TQByteArray& )));
-    connect( job , TQT_SIGNAL( result( KIO::Job * )),
-             TQT_SLOT( slotResult( KIO::Job * )));
+    connect( job , TQT_SIGNAL( data( TDEIO::Job *, const TQByteArray& )),
+             TQT_SLOT( slotData( TDEIO::Job *, const TQByteArray& )));
+    connect( job , TQT_SIGNAL( result( TDEIO::Job * )),
+             TQT_SLOT( slotResult( TDEIO::Job * )));
 
     Download *d = new Download();
     m_downloads.insert( job, d );
 }
 
-void Loader::slotData( KIO::Job *job, const TQByteArray& data )
+void Loader::slotData( TDEIO::Job *job, const TQByteArray& data )
 {
-    DownloadIterator it = m_downloads.find( static_cast<KIO::TransferJob*>(job) );
+    DownloadIterator it = m_downloads.find( static_cast<TDEIO::TransferJob*>(job) );
     if ( it != m_downloads.end() ) {
         TQBuffer& buffer = it.data()->m_buffer;
         if ( !buffer.isOpen() )
@@ -86,9 +86,9 @@ void Loader::slotData( KIO::Job *job, const TQByteArray& data )
     }
 }
 
-void Loader::slotResult( KIO::Job *job )
+void Loader::slotResult( TDEIO::Job *job )
 {
-    KIO::TransferJob *tjob = static_cast<KIO::TransferJob*>( job );
+    TDEIO::TransferJob *tjob = static_cast<TDEIO::TransferJob*>( job );
 
     DownloadIterator it = m_downloads.find( tjob );
     if ( it != m_downloads.end() ) {

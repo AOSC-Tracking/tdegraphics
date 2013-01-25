@@ -129,7 +129,7 @@ void ScanDialog::createOptionsTab( void )
 
 
    /* Read settings for startup behavior */
-   KConfig *gcfg = TDEGlobal::config();
+   TDEConfig *gcfg = TDEGlobal::config();
    gcfg->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    bool skipDialog  = gcfg->readBoolEntry( STARTUP_SKIP_ASK, false );
    bool onlyLocal   = gcfg->readBoolEntry( STARTUP_ONLY_LOCAL, false );
@@ -153,7 +153,7 @@ void ScanDialog::slotNetworkToggle( bool state)
    bool writestate = !state;
 
    kdDebug(29000) << "slotNetworkToggle: Writing state " << writestate << endl;
-   KConfig *c = TDEGlobal::config();
+   TDEConfig *c = TDEGlobal::config();
    c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    c->writeEntry( STARTUP_ONLY_LOCAL, writestate, true, true );
 }
@@ -163,7 +163,7 @@ void ScanDialog::slotAskOnStartToggle(bool state)
    bool writestate = !state;
 
    kdDebug(29000) << "slotAskOnStartToggle: Writing state " << writestate << endl;
-   KConfig *c = TDEGlobal::config();
+   TDEConfig *c = TDEGlobal::config();
    c->setGroup(TQString::fromLatin1(GROUP_STARTUP));
    c->writeEntry( STARTUP_SKIP_ASK, writestate, true, true );
 }
@@ -307,7 +307,7 @@ bool ScanDialog::setup()
     /* set initial sizes */
     setInitialSize( configDialogSize( GROUP_STARTUP ));
 
-    KConfig *kfg = TDEGlobal::config();
+    TDEConfig *kfg = TDEGlobal::config();
     if( kfg )
     {
        TQRect r = TDEGlobalSettings::desktopGeometry(this);
@@ -329,7 +329,7 @@ void ScanDialog::slotClose()
 
    if( splitter )
    {
-      KConfig *kfg = TDEGlobal::config();
+      TDEConfig *kfg = TDEGlobal::config();
       if( kfg )
       {
          TQRect r = TDEGlobalSettings::desktopGeometry(this);

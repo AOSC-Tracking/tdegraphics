@@ -31,7 +31,7 @@
 
 #include "pmlibraryhandle.h"
 
-class KConfig;
+class TDEConfig;
 class TQDomElement;
 
 /**
@@ -76,8 +76,8 @@ public:
     */
    void refresh( );
    
-   void saveConfig( KConfig* cfg );
-   void restoreConfig( KConfig* cfg );
+   void saveConfig( TDEConfig* cfg );
+   void restoreConfig( TDEConfig* cfg );
 
 private:
    

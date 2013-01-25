@@ -103,8 +103,8 @@ double kpMainWindow::configColorSimilarity () const
 // public
 void kpMainWindow::configSetColorSimilarity (double val)
 {
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     cfg->writeEntry (kpSettingColorSimilarity, m_configColorSimilarity = val);
     cfg->sync ();
@@ -118,8 +118,8 @@ void kpMainWindow::readGeneralSettings ()
     kdDebug () << "\tkpMainWindow(" << name () << ")::readGeneralSettings()" << endl;
 #endif
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     m_configFirstTime = cfg->readBoolEntry (kpSettingFirstTime, true);
     m_configShowGrid = cfg->readBoolEntry (kpSettingShowGrid, false);
@@ -147,8 +147,8 @@ void kpMainWindow::readThumbnailSettings ()
     kdDebug () << "\tkpMainWindow(" << name () << ")::readThumbnailSettings()" << endl;
 #endif
 
-    KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupThumbnail);
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     m_configThumbnailShown = cfg->readBoolEntry (kpSettingThumbnailShown, false);
     m_configThumbnailGeometry = cfg->readRectEntry (kpSettingThumbnailGeometry);
@@ -206,7 +206,7 @@ void kpMainWindow::init ()
     // read config
     //
 
-    // KConfig::readEntry() does not actually reread from disk, hence doesn't
+    // TDEConfig::readEntry() does not actually reread from disk, hence doesn't
     // realise what other processes have done e.g. Settings / Show Path
     kapp->config ()->reparseConfiguration ();
 #if DEBUG_KP_MAIN_WINDOW
@@ -298,8 +298,8 @@ void kpMainWindow::init ()
         m_toolToolBar->setBarPos (KToolBar::Left);
         m_colorToolBar->setBarPos (KToolBar::Bottom);
 
-        KConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
-        KConfigBase *cfg = cfgGroupSaver.config ();
+        TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
+        TDEConfigBase *cfg = cfgGroupSaver.config ();
 
         cfg->writeEntry (kpSettingFirstTime, m_configFirstTime = false);
         cfg->sync ();
@@ -312,7 +312,7 @@ void kpMainWindow::init ()
 
 
 // private virtual [base KMainWindow]
-void kpMainWindow::readProperties (KConfig *cfg)
+void kpMainWindow::readProperties (TDEConfig *cfg)
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow<" << this << ">::readProperties()" << endl;
@@ -366,7 +366,7 @@ void kpMainWindow::readProperties (KConfig *cfg)
 // private virtual [base KMainWindow]
 // WARNING: KMainWindow API Doc says "No user interaction is allowed
 //          in this function!"
-void kpMainWindow::saveProperties (KConfig *cfg)
+void kpMainWindow::saveProperties (TDEConfig *cfg)
 {
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow<" << this << ">::saveProperties()" << endl;

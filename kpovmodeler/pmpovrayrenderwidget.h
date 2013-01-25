@@ -32,7 +32,7 @@
 #include "pmdragwidget.h"
 
 class TDEProcess;
-class KConfig;
+class TDEConfig;
 class KURL;
 class KTempFile;
 
@@ -71,8 +71,8 @@ public:
     */
    TQImage image( ) const { return m_image; }
    
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 
    /**
     * Returns the povray command

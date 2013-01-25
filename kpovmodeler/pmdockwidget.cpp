@@ -299,12 +299,12 @@ void PMDockMainWindow::readDockConfig(TQDomElement &base)
 }
 
 #ifndef NO_KDE2
-void PMDockMainWindow::writeDockConfig( KConfig* c, TQString group )
+void PMDockMainWindow::writeDockConfig( TDEConfig* c, TQString group )
 {
   dockManager->writeConfig( c, group );
 }
 
-void PMDockMainWindow::readDockConfig( KConfig* c, TQString group )
+void PMDockMainWindow::readDockConfig( TDEConfig* c, TQString group )
 {
   dockManager->readConfig( c, group );
 }
@@ -457,12 +457,12 @@ void PMDockWidgetHeader::setDragEnabled(bool b)
 }
 
 #ifndef NO_KDE2
-void PMDockWidgetHeader::saveConfig( KConfig* c )
+void PMDockWidgetHeader::saveConfig( TDEConfig* c )
 {
   c->writeEntry( TQString("%1%2").arg(parent()->name()).arg(":stayButton"), stayButton->isOn() );
 }
 
-void PMDockWidgetHeader::loadConfig( KConfig* c )
+void PMDockWidgetHeader::loadConfig( TDEConfig* c )
 {
   setDragEnabled( !c->readBoolEntry( TQString("%1%2").arg(parent()->name()).arg(":stayButton"), false ) );
 }
@@ -2000,7 +2000,7 @@ void PMDockManager::readConfig(TQDomElement &base)
 
 
 #ifndef NO_KDE2
-void PMDockManager::writeConfig( KConfig* c, TQString group )
+void PMDockManager::writeConfig( TDEConfig* c, TQString group )
 {
   //debug("BEGIN Write Config");
   if ( !c ) c = TDEGlobal::config();
@@ -2119,7 +2119,7 @@ void PMDockManager::writeConfig( KConfig* c, TQString group )
   //debug("END Write Config");
 }
 #include <tqmessagebox.h>
-void PMDockManager::readConfig( KConfig* c, TQString group )
+void PMDockManager::readConfig( TDEConfig* c, TQString group )
 {
   if ( !c ) c = TDEGlobal::config();
   if ( group.isEmpty() ) group = "dock_setting_default";
@@ -2497,12 +2497,12 @@ void PMDockArea::resizeEvent(TQResizeEvent *rsize)
 }
 
 #ifndef NO_KDE2
-void PMDockArea::writeDockConfig( KConfig* c, TQString group )
+void PMDockArea::writeDockConfig( TDEConfig* c, TQString group )
 {
   dockManager->writeConfig( c, group );
 }
 
-void PMDockArea::readDockConfig( KConfig* c, TQString group )
+void PMDockArea::readDockConfig( TDEConfig* c, TQString group )
 {
   dockManager->readConfig( c, group );
 }

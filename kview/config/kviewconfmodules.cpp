@@ -33,7 +33,7 @@ typedef KGenericFactory<KViewGeneralConfig, TQWidget> KViewGeneralConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewgeneralconfig, KViewGeneralConfigFactory( "kcm_kviewgeneralconfig" ) )
 
 KViewGeneralConfig::KViewGeneralConfig( TQWidget * parent, const char * /*name*/, const TQStringList & args )
-	: KCModule( KViewGeneralConfigFactory::instance(), parent, args )
+	: TDECModule( KViewGeneralConfigFactory::instance(), parent, args )
 {
 	TQBoxLayout * layout = new TQVBoxLayout( this, KDialog::marginHint(), KDialog::spacingHint() );
 
@@ -57,7 +57,7 @@ KViewGeneralConfig::~KViewGeneralConfig()
 
 void KViewGeneralConfig::save()
 {
-	KConfigGroup cfgGroup( TDEGlobal::config(), "KView General" );
+	TDEConfigGroup cfgGroup( TDEGlobal::config(), "KView General" );
 	m_savedPosition = m_pResizeGroup->id( m_pResizeGroup->selected() );
 	cfgGroup.writeEntry( "Resize Mode", m_savedPosition );
 	emit changed( false );
@@ -66,7 +66,7 @@ void KViewGeneralConfig::save()
 
 void KViewGeneralConfig::load()
 {
-	KConfigGroup cfgGroup( TDEGlobal::config(), "KView General" );
+	TDEConfigGroup cfgGroup( TDEGlobal::config(), "KView General" );
 	int m_savedPosition = cfgGroup.readNumEntry( "Resize Mode", 2 );
 	if( m_savedPosition < 0 || m_savedPosition > 3 )
 		m_savedPosition = 2;

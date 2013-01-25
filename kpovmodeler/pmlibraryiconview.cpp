@@ -244,7 +244,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
                   if( newParentLib.addSubLibrary( newpath, lib.name() ) == PMLibraryHandle::Ok )
                   {
                      lib.changeParentLibrary( m_path );
-                     KIO::move( path, newpath );
+                     TDEIO::move( path, newpath );
                   }
                   else
                   {
@@ -263,7 +263,7 @@ void PMLibraryIconViewItem::dropped( TQDropEvent *e, const TQValueList<TQIconDra
                   PMLibraryObject obj = PMLibraryObject( path );
                   if( newParentLib.addObject( newpath, obj.name() ) == PMLibraryHandle::Ok )
                   {
-                     KIO::move( path, newpath );
+                     TDEIO::move( path, newpath );
                   }
                   else
                   {

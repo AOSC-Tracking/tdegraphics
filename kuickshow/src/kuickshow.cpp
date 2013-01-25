@@ -114,7 +114,7 @@ KuickShow::KuickShow( const char *name )
     connect( m_slideTimer, TQT_SIGNAL( timeout() ), TQT_SLOT( nextSlide() ));
 
 
-    KConfig *kc = TDEGlobal::config();
+    TDEConfig *kc = TDEGlobal::config();
 
     bool isDir = false; // true if we get a directory on the commandline
 
@@ -166,7 +166,7 @@ KuickShow::KuickShow( const char *name )
             KMimeType::Ptr mime = KMimeType::findByURL( url );
             TQString name = mime->name();
             if ( name == "application/octet-stream" ) // unknown -> stat()
-                name = KIO::NetAccess::mimetype( url, this );
+                name = TDEIO::NetAccess::mimetype( url, this );
 
 	    // text/* is a hack for bugs.kde.org-attached-images urls.
 	    // The real problem here is that NetAccess::mimetype does a HTTP HEAD, which doesn't
@@ -374,7 +374,7 @@ void KuickShow::initGUI( const KURL& startDir )
 
     fileWidget->setFocus();
 
-    KConfig *kc = TDEGlobal::config();
+    TDEConfig *kc = TDEGlobal::config();
     kc->setGroup("SessionSettings");
     bool oneWindow = kc->readBoolEntry("OpenImagesInActiveWindow", true );
     oneWindowAction->setChecked( oneWindow );
@@ -569,7 +569,7 @@ bool KuickShow::showImage( const KFileItem *fi,
 
 //        file->waitForDownload( this );
 //        TQString filename;
-//        KIO::NetAccess::download(fi->url(), filename, this);
+//        TDEIO::NetAccess::download(fi->url(), filename, this);
 
         if ( !safeViewer->showNextImage( fi->url() ) ) {
             m_viewer = safeViewer;
@@ -856,7 +856,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 
     if ( FileWidget::isImage( item ) ) {
 //        TQString filename;
-//        KIO::NetAccess::download(item->url(), filename, this);
+//        TDEIO::NetAccess::download(item->url(), filename, this);
         view->showNextImage( item->url() );
         if (m_slideTimer->isActive() && kdata->slideDelay)
             m_slideTimer->start( kdata->slideDelay );
@@ -1019,7 +1019,7 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
 
             if ( FileWidget::isImage( item ) ) {
 //                TQString filename;
-//                KIO::NetAccess::download(item->url(), filename, this);
+//                TDEIO::NetAccess::download(item->url(), filename, this);
                 m_viewer->showNextImage( item->url() );
 
                 if ( kdata->preloadImage && item_next ) { // preload next image
@@ -1143,7 +1143,7 @@ void KuickShow::about()
 }
 
 // ------ sessionmanagement - load / save current directory -----
-void KuickShow::readProperties( KConfig *kc )
+void KuickShow::readProperties( TDEConfig *kc )
 {
     assert( fileWidget ); // from SM, we should always have initGUI on startup
     TQString dir = kc->readPathEntry( "CurrentDirectory" );
@@ -1173,7 +1173,7 @@ void KuickShow::readProperties( KConfig *kc )
         show();
 }
 
-void KuickShow::saveProperties( KConfig *kc )
+void KuickShow::saveProperties( TDEConfig *kc )
 {
     kc->writeEntry( "Browser visible", fileWidget && fileWidget->isVisible() );
     if (fileWidget)
@@ -1197,7 +1197,7 @@ void KuickShow::saveProperties( KConfig *kc )
 
 void KuickShow::saveSettings()
 {
-    KConfig *kc = TDEGlobal::config();
+    TDEConfig *kc = TDEGlobal::config();
 
     kc->setGroup("SessionSettings");
     if ( oneWindowAction )

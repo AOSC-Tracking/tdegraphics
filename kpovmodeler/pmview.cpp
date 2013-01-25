@@ -88,7 +88,7 @@ void PMView::print( TQPrinter* pPrinter )
    printpainter.end( );
 }
 
-void PMView::saveConfig( KConfig* cfg )
+void PMView::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 
@@ -96,7 +96,7 @@ void PMView::saveConfig( KConfig* cfg )
    cfg->writeEntry( "TreeEditSplitter", m_pTreeEditSplitter->sizes( ) );
 }
 
-void PMView::restoreConfig( KConfig* cfg )
+void PMView::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 

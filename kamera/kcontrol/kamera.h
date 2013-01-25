@@ -44,7 +44,7 @@ class KActionCollection;
 class KToolBar;
 class KPopupMenu;
 
-class KKameraConfig : public KCModule
+class KKameraConfig : public TDECModule
 {
 	Q_OBJECT
   
@@ -54,7 +54,7 @@ public:
 	KKameraConfig(TQWidget *parent, const char *name, const TQStringList &);
 	virtual ~KKameraConfig();
 
-	// KCModule interface methods
+	// TDECModule interface methods
 	void load();
 	void load(bool useDefaults);
 	void save();

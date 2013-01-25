@@ -39,7 +39,7 @@
 class PMGLView;
 class PMCamera;
 class PMPoint;
-class KConfig;
+class TDEConfig;
 class TQString;
 
 /**
@@ -215,11 +215,11 @@ public:
    /**
     * Saves the configuration
     */
-   void saveConfig( KConfig* cfg );
+   void saveConfig( TDEConfig* cfg );
    /**
     * Restores the configuration
     */
-   void restoreConfig( KConfig* cfg );
+   void restoreConfig( TDEConfig* cfg );
 
    /**
     * Returns true if the glx extension is available

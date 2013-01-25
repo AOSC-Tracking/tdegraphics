@@ -99,13 +99,13 @@ void PMLibraryHandleEdit::slotDescriptionChanged( )
    enableButtonOK( true );
 }
 
-void PMLibraryHandleEdit::saveConfig( KConfig* cfg )
+void PMLibraryHandleEdit::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
    cfg->writeEntry( "LibraryHandleEditSize", s_size );
 }
 
-void PMLibraryHandleEdit::restoreConfig( KConfig* cfg )
+void PMLibraryHandleEdit::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Appearance" );
 

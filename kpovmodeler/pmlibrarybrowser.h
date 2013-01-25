@@ -32,13 +32,13 @@
 class TQComboBox;
 class TQIconViewItem;
 class TQPushButton;
-class KConfig;
+class TDEConfig;
 class KDirOperator;
 class PMLibraryIconView;
 class PMLibraryEntryPreview;
 class PMLibraryHandle;
 class PMPart;
-namespace KIO{ class Job; }
+namespace TDEIO{ class Job; }
 
 typedef TQDict<TQString> TQStringDict;
 
@@ -81,7 +81,7 @@ private slots:
    void slotNewObjectClicked( );
    void slotNewSubLibraryClicked( );
 
-   void slotJobResult( KIO::Job * );
+   void slotJobResult( TDEIO::Job * );
 
    // These slots provide delayed activity on the IconView
    void slotIconViewRefresh( );

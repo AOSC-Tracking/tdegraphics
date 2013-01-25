@@ -294,7 +294,7 @@ void PMPovrayWidget::slotSave( )
          if( tempFile )
          {
             tempFile->close( );
-            ok = KIO::NetAccess::upload( tempFile->name( ), url );
+            ok = TDEIO::NetAccess::upload( tempFile->name( ), url );
             tempFile->unlink( );
             file = 0;
          }

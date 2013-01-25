@@ -36,7 +36,7 @@
 #define Pimage(p)	((XImage *)(p)->extra)
 
 class TQPopupMenu;
-class KConfig;
+class TDEConfig;
 class KStatusBar;
 class KAction;
 class KRecentFilesAction;
@@ -112,7 +112,7 @@ private:
 
     int open_mode;
 
-    KConfig *config;
+    TDEConfig *config;
 
     TQScrollBar *hsb;
     TQScrollBar *vsb;

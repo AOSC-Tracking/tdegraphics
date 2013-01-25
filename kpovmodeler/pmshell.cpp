@@ -73,7 +73,7 @@ PMShell::PMShell( const KURL& url )
    m_pStatusBar->insertItem( " ", c_statusBarInfo, 1 );
    m_pStatusBar->insertItem( "" , c_statusBarControlPoints );
 
-   KConfig* config = instance( )->config( );
+   TDEConfig* config = instance( )->config( );
    config->setGroup( "Appearance" );
    applyMainWindowSettings( config );
 
@@ -558,7 +558,7 @@ void PMShell::updateGUI( )
 void PMShell::saveOptions( )
 {
    kdDebug( PMArea ) << "Saving configuration" << endl;
-   KConfig* config = TDEGlobal::config( );
+   TDEConfig* config = TDEGlobal::config( );
 
    // set group
    config->setGroup( "Appearance" );
@@ -574,7 +574,7 @@ void PMShell::saveOptions( )
 
 void PMShell::restoreOptions( )
 {
-   KConfig* config = instance( )->config( );
+   TDEConfig* config = instance( )->config( );
 
    // set group
    config->setGroup( "Appearance" );

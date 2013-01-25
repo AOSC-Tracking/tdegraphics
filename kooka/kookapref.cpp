@@ -200,7 +200,7 @@ TQString KookaPreferences::tryFindBinary( const TQString& bin, const TQString& c
 {
 
     /* First check the config files for an entry */
-    KConfig *cfg = TDEGlobal::config();
+    TDEConfig *cfg = TDEGlobal::config();
     cfg->setGroup(CFG_GROUP_OCR_DIA);
     TQString res = cfg->readPathEntry( configKey /* CFG_GOCR_BINARY */, "notFound" );
 

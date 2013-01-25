@@ -58,11 +58,11 @@ public:
 	static bool executeScript(DOM::Node node, SVGDocumentImpl *document, const TQString &text);
 
 private slots:
-	void slotData(KIO::Job *, const TQByteArray &);
-	void slotResult(KIO::Job *);
+	void slotData(TDEIO::Job *, const TQByteArray &);
+	void slotResult(TDEIO::Job *);
 
 private:
-	KIO::TransferJob *m_job;
+	TDEIO::TransferJob *m_job;
 	TQByteArray m_data;
 	TQString m_text;
 	bool m_added;

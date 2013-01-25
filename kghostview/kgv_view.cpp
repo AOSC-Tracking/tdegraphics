@@ -434,7 +434,7 @@ bool KGVPart::closeURL()
 
 void KGVPart::writeSettings()
 {
-    KConfigGroup general( KGVFactory::instance()->config(), "General" );
+    TDEConfigGroup general( KGVFactory::instance()->config(), "General" );
     if ( !_embeddedInKGhostView )
         general.writeEntry( "Display Options", DisplayOptions::toString( miniWidget()->displayOptions() ) );
     general.sync();
@@ -442,7 +442,7 @@ void KGVPart::writeSettings()
 
 void KGVPart::readSettings()
 {
-    KConfigGroup general( KGVFactory::instance()->config(), "General" );
+    TDEConfigGroup general( KGVFactory::instance()->config(), "General" );
     
     _showScrollBars->setChecked( Configuration::showScrollBars() );
     showScrollBars( _showScrollBars->isChecked() );
@@ -691,17 +691,17 @@ void KGVPart::openURLContinue()
 	_tmpFile.open( IO_ReadWrite );
 
 	/*
-	d->m_job = KIO::file_copy( m_url, m_file, 0600, true, false, d->m_showProgressInfo );
+	d->m_job = TDEIO::file_copy( m_url, m_file, 0600, true, false, d->m_showProgressInfo );
 	emit started( d->m_job );
-	connect( d->m_job, TQT_SIGNAL( result( KIO::Job * ) ), this, TQT_SLOT( slotJobFinished ( KIO::Job * ) ) );
+	connect( d->m_job, TQT_SIGNAL( result( TDEIO::Job * ) ), this, TQT_SLOT( slotJobFinished ( TDEIO::Job * ) ) );
 	*/
 
-	_job = KIO::get( m_url, false, isProgressInfoEnabled() );
+	_job = TDEIO::get( m_url, false, isProgressInfoEnabled() );
 
-	connect( _job, TQT_SIGNAL( data( KIO::Job*, const TQByteArray& ) ),
-		 TQT_SLOT( slotData( KIO::Job*, const TQByteArray& ) ) );
-	connect( _job, TQT_SIGNAL( result( KIO::Job* ) ),
-		 TQT_SLOT( slotJobFinished( KIO::Job* ) ) );
+	connect( _job, TQT_SIGNAL( data( TDEIO::Job*, const TQByteArray& ) ),
+		 TQT_SLOT( slotData( TDEIO::Job*, const TQByteArray& ) ) );
+	connect( _job, TQT_SIGNAL( result( TDEIO::Job* ) ),
+		 TQT_SLOT( slotJobFinished( TDEIO::Job* ) ) );
 
 	emit started( _job );
     }
@@ -770,7 +770,7 @@ void KGVPart::guiActivateEvent( KParts::GUIActivateEvent* event )
     KParts::ReadOnlyPart::guiActivateEvent( event );
 }
 
-void KGVPart::slotData( KIO::Job* job, const TQByteArray& data )
+void KGVPart::slotData( TDEIO::Job* job, const TQByteArray& data )
 {
     Q_ASSERT( _job == job );
 
@@ -799,7 +799,7 @@ void KGVPart::slotMimetypeError()
     emit canceled( TQString() );
 }
 
-void KGVPart::slotJobFinished( KIO::Job* job )
+void KGVPart::slotJobFinished( TDEIO::Job* job )
 {
     Q_ASSERT( _job == job );
 
@@ -1006,9 +1006,9 @@ void KGVRun::foundMimeType( const TQString& mimetype )
 {
     kdDebug(4500) << "KGVRun::foundMimeType( " << mimetype << " )" << endl;
 
-    if( m_job && m_job->inherits( "KIO::TransferJob" ) )
+    if( m_job && m_job->inherits( "TDEIO::TransferJob" ) )
     {
-	KIO::TransferJob *job = static_cast< KIO::TransferJob* >( m_job );
+	TDEIO::TransferJob *job = static_cast< TDEIO::TransferJob* >( m_job );
 	job->putOnHold();
 	m_job = 0;
     }

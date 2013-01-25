@@ -28,7 +28,7 @@ class TQLineEdit;
 class TQListBox;
 class TQPushButton;
 class TQTabWidget;
-class KConfig;
+class TDEConfig;
 class PMIntEdit;
 class PMFloatEdit;
 
@@ -46,8 +46,8 @@ public:
     */
    PMRenderModesDialog( PMRenderModeList* modes, TQWidget* parent = 0, const char* name = 0 );
 
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 
 protected slots:
    /**
@@ -115,8 +115,8 @@ public:
     */
    PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent = 0, const char* name = 0 );
 
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 
 protected:
    virtual void resizeEvent( TQResizeEvent* ev );

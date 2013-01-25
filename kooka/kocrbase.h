@@ -134,7 +134,7 @@ protected slots:
     virtual void slWantSpellcheck( bool wantIt );
 
 private slots:
-    virtual void slPreviewResult( KIO::Job* );
+    virtual void slPreviewResult( TDEIO::Job* );
     virtual void slGotPreview( const KFileItem*, const TQPixmap& );
 
 private:

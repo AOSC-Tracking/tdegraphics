@@ -176,7 +176,7 @@ void MainPage::save()
                                   "kcmkmrml_no_directories_specified" );
 
     if ( m_config->sync() )
-        KIO::SlaveConfig::self()->reset();
+        TDEIO::SlaveConfig::self()->reset();
 
     processIndexDirs( removedDirs );
 }

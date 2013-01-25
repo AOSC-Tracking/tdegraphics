@@ -38,7 +38,7 @@ class TDEAboutData;
 class KComboBox;
 class KIntNumInput;
 
-namespace KIO {
+namespace TDEIO {
     class FileCopyJob;
     class TransferJob;
 }
@@ -94,10 +94,10 @@ private slots:
     void slotSetStatusBar( const KURL& url ) { slotSetStatusBar( url.prettyURL() ); }
     void slotHostComboActivated( const TQString& );
 
-    void slotResult( KIO::Job * );
-    void slotData( KIO::Job *, const TQByteArray& );
+    void slotResult( TDEIO::Job * );
+    void slotData( TDEIO::Job *, const TQByteArray& );
 
-    void slotDownloadResult( KIO::Job * );
+    void slotDownloadResult( TDEIO::Job * );
 
     void slotConfigureAlgorithm();
     void slotApplyAlgoConfig();
@@ -111,7 +111,7 @@ private:
     void parseMrml( TQDomDocument& doc );
     void parseQueryResult( TQDomElement& );
     void enableExtensionActions( const KURL& url, bool enable );
-    KIO::TransferJob * transferJob( const KURL& url );
+    TDEIO::TransferJob * transferJob( const KURL& url );
 
     void initHostCombo();
     void enableServerDependentWidgets( bool enable );
@@ -121,7 +121,7 @@ private:
     void contactServer( const KURL& url );
     void downloadReferenceFiles( const KURL::List& downloadList );
 
-    KIO::TransferJob *m_job;
+    TDEIO::TransferJob *m_job;
     MrmlView *m_view;
     Config m_config;
     KIntNumInput * m_resultSizeInput;
@@ -134,7 +134,7 @@ private:
     AlgorithmDialog *m_algoConfig;
     KComboBox *m_hostCombo;
 
-    TQPtrList<KIO::FileCopyJob> m_downloadJobs;
+    TQPtrList<TDEIO::FileCopyJob> m_downloadJobs;
     TQStringList m_tempFiles;
 
     TQString m_sessionId;

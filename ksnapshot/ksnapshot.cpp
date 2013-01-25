@@ -94,7 +94,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     grabber->releaseMouse();
     grabber->hide();
 
-    KConfig *conf=TDEGlobal::config();
+    TDEConfig *conf=TDEGlobal::config();
     conf->setGroup("GENERAL");
     mainWidget->setDelay(conf->readNumEntry("delay",0));
     mainWidget->setMode( conf->readNumEntry( "mode", 0 ) );
@@ -102,7 +102,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     filename = KURL::fromPathOrURL( conf->readPathEntry( "filename", TQDir::currentDirPath()+"/"+i18n("snapshot")+"1.png" ));
 
     // Make sure the name is not already being used
-    while(KIO::NetAccess::exists( filename, false, this )) {
+    while(TDEIO::NetAccess::exists( filename, false, this )) {
 	autoincFilename();
     }
 
@@ -160,7 +160,7 @@ bool KSnapshot::save( const TQString &filename )
 
 bool KSnapshot::save( const KURL& url )
 {
-    if ( KIO::NetAccess::exists( url, false, this ) ) {
+    if ( TDEIO::NetAccess::exists( url, false, this ) ) {
         const TQString title = i18n( "File Exists" );
         const TQString text = i18n( "<qt>Do you really want to overwrite <b>%1</b>?</qt>" ).arg(url.prettyURL());
         if (KMessageBox::Continue != KMessageBox::warningContinueCancel( this, text, title, i18n("Overwrite") ) ) 
@@ -188,7 +188,7 @@ bool KSnapshot::save( const KURL& url )
 	if ( tmpFile.status() == 0 ) {
 	    if ( snapshot.save( tmpFile.file(), type.latin1() ) ) {
 		if ( tmpFile.close() )
-		    ok = KIO::NetAccess::upload( tmpFile.name(), url, this );
+		    ok = TDEIO::NetAccess::upload( tmpFile.name(), url, this );
 	    }
 	}
     }
@@ -361,7 +361,7 @@ void KSnapshot::slotWindowGrabbed( const TQPixmap &pix )
 
 void KSnapshot::closeEvent( TQCloseEvent * e )
 {
-    KConfig *conf=TDEGlobal::config();
+    TDEConfig *conf=TDEGlobal::config();
     conf->setGroup("GENERAL");
     conf->writeEntry("delay",mainWidget->delay());
     conf->writeEntry("mode",mainWidget->mode());

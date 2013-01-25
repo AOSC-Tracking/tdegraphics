@@ -92,7 +92,7 @@ void Mrml::get( const KURL& url )
 
     if ( !checkLocalServer( url ) )
     {
-        error( KIO::ERR_SLAVE_DEFINED, i18n("Unable to start the Indexing Server. "
+        error( TDEIO::ERR_SLAVE_DEFINED, i18n("Unable to start the Indexing Server. "
                                             "Aborting the query.") );
         return;
     }
@@ -117,7 +117,7 @@ tryConnect:
             TQString meta = metaData( MrmlShared::mrml_data() );
             if ( meta.isEmpty() ) {
                 closeDescriptor();
-                error( KIO::ERR_SLAVE_DEFINED, i18n("No MRML data is available.") );
+                error( TDEIO::ERR_SLAVE_DEFINED, i18n("No MRML data is available.") );
                 return;
             }
 
@@ -148,7 +148,7 @@ tryConnect:
             return;
         }
 
-        error( KIO::ERR_COULD_NOT_CONNECT,
+        error( TDEIO::ERR_COULD_NOT_CONNECT,
                i18n("Could not connect to GIFT server.") );
         return;
     }
@@ -263,5 +263,5 @@ void Mrml::mimetype( const KURL& url )
         finished();
     }
     else
-        KIO::TCPSlaveBase::mimetype( url );
+        TDEIO::TCPSlaveBase::mimetype( url );
 }

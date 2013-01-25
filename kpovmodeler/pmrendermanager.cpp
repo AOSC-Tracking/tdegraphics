@@ -1592,7 +1592,7 @@ void PMRenderManager::slotRenderingSettingsChanged( )
    emit renderingSettingsChanged( );
 }
 
-void PMRenderManager::saveConfig( KConfig* cfg )
+void PMRenderManager::saveConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Rendering" );
    cfg->writeEntry( "BackgroundColor", m_backgroundColor );
@@ -1609,7 +1609,7 @@ void PMRenderManager::saveConfig( KConfig* cfg )
    cfg->writeEntry( "HighDetailCameraViews", m_highDetailCameraView );
 }
 
-void PMRenderManager::restoreConfig( KConfig* cfg )
+void PMRenderManager::restoreConfig( TDEConfig* cfg )
 {
    cfg->setGroup( "Rendering" );
 

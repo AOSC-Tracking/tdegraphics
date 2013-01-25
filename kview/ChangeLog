@@ -7,7 +7,7 @@
 2003-09-27  Matthias Kretz <kretz@kde.org>
 
 	* config/kviewconfmodules.cpp:
-		Call sync() in save() on the KConfig object.
+		Call sync() in save() on the TDEConfig object.
 
 2003-08-19  Matthias Kretz <kretz@kde.org>
 

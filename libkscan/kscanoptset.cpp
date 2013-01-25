@@ -146,7 +146,7 @@ void KScanOptSet::saveConfig( const TQString& scannerName, const TQString& confi
    TQString confFile = SCANNER_DB_FILE;
    kdDebug( 29000) << "Creating scan configuration file <" << confFile << ">" << endl;
 
-   KConfig *scanConfig = new KConfig( confFile );
+   TDEConfig *scanConfig = new TDEConfig( confFile );
    TQString cfgName = configName;
 
    if( configName.isNull() || configName.isEmpty() )
@@ -180,7 +180,7 @@ bool KScanOptSet::load( const TQString& /*scannerName*/ )
    kdDebug( 29000) << "** Reading from scan configuration file <" << confFile << ">" << endl;
    bool ret = true;
 
-   KConfig *scanConfig = new KConfig( confFile, true );
+   TDEConfig *scanConfig = new TDEConfig( confFile, true );
    TQString cfgName = name; /* of the KScanOptSet, given in constructor */
 
    if( cfgName.isNull() || cfgName.isEmpty() )

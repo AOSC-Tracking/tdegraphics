@@ -28,7 +28,7 @@
 #include <kdemacros.h>
 
 namespace KImageViewer { class Canvas; }
-namespace KIO { class Job; }
+namespace TDEIO { class Job; }
 
 class KTempFile;
 class KAction;
@@ -81,8 +81,8 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 	protected slots:
 		void readSettings();
 		void zoomChanged( double );
-		void slotJobFinished( KIO::Job * );
-		void slotData( KIO::Job *, const TQByteArray & );
+		void slotJobFinished( TDEIO::Job * );
+		void slotData( TDEIO::Job *, const TQByteArray & );
 
 		void slotSave();
 		void slotSaveAs();
@@ -98,7 +98,7 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		void slotDel();
 
 		void slotPopupMenu( const TQPoint & );
-		void slotResultSaveAs( KIO::Job * );
+		void slotResultSaveAs( TDEIO::Job * );
 
 		void slotFileDirty( const TQString & );
 		void slotReloadUnmodified();
@@ -112,7 +112,7 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 
 	private:
 		TQWidget * m_pParentWidget;
-		KIO::Job * m_pJob;
+		TDEIO::Job * m_pJob;
 		KViewKonqExtension * m_pExtension;
 		KImageViewer::Canvas * m_pCanvas;
 		KTempFile * m_pTempFile;

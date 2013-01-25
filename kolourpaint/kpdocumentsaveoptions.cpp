@@ -243,14 +243,14 @@ bool kpDocumentSaveOptions::qualityIsInvalid () const
 
 
 // public static
-TQString kpDocumentSaveOptions::defaultMimeType (KConfigBase *config)
+TQString kpDocumentSaveOptions::defaultMimeType (TDEConfigBase *config)
 {
     return config->readEntry (kpSettingForcedMimeType,
                               TQString::fromLatin1 ("image/png"));
 }
 
 // public static
-void kpDocumentSaveOptions::saveDefaultMimeType (KConfigBase *config,
+void kpDocumentSaveOptions::saveDefaultMimeType (TDEConfigBase *config,
                                                  const TQString &mimeType)
 {
     config->writeEntry (kpSettingForcedMimeType, mimeType);
@@ -258,7 +258,7 @@ void kpDocumentSaveOptions::saveDefaultMimeType (KConfigBase *config,
 
 
 // public static
-int kpDocumentSaveOptions::defaultColorDepth (KConfigBase *config)
+int kpDocumentSaveOptions::defaultColorDepth (TDEConfigBase *config)
 {
     int colorDepth =
         config->readNumEntry (kpSettingForcedColorDepth, -1);
@@ -273,27 +273,27 @@ int kpDocumentSaveOptions::defaultColorDepth (KConfigBase *config)
 }
 
 // public static
-void kpDocumentSaveOptions::saveDefaultColorDepth (KConfigBase *config, int colorDepth)
+void kpDocumentSaveOptions::saveDefaultColorDepth (TDEConfigBase *config, int colorDepth)
 {
     config->writeEntry (kpSettingForcedColorDepth, colorDepth);
 }
 
 
 // public static
-int kpDocumentSaveOptions::defaultDither (KConfigBase *config)
+int kpDocumentSaveOptions::defaultDither (TDEConfigBase *config)
 {
     return config->readBoolEntry (kpSettingForcedDither, initialDither ());
 }
 
 // public static
-void kpDocumentSaveOptions::saveDefaultDither (KConfigBase *config, bool dither)
+void kpDocumentSaveOptions::saveDefaultDither (TDEConfigBase *config, bool dither)
 {
     config->writeEntry (kpSettingForcedDither, dither);
 }
 
 
 // public static
-int kpDocumentSaveOptions::defaultQuality (KConfigBase *config)
+int kpDocumentSaveOptions::defaultQuality (TDEConfigBase *config)
 {
     int val = config->readNumEntry (kpSettingForcedQuality, -1);
     if (qualityIsInvalid (val))
@@ -303,14 +303,14 @@ int kpDocumentSaveOptions::defaultQuality (KConfigBase *config)
 }
 
 // public static
-void kpDocumentSaveOptions::saveDefaultQuality (KConfigBase *config, int quality)
+void kpDocumentSaveOptions::saveDefaultQuality (TDEConfigBase *config, int quality)
 {
     config->writeEntry (kpSettingForcedQuality, quality);
 }
 
 
 // public static
-kpDocumentSaveOptions kpDocumentSaveOptions::defaultDocumentSaveOptions (KConfigBase *config)
+kpDocumentSaveOptions kpDocumentSaveOptions::defaultDocumentSaveOptions (TDEConfigBase *config)
 {
     kpDocumentSaveOptions saveOptions;
     saveOptions.setMimeType (defaultMimeType (config));
@@ -326,7 +326,7 @@ kpDocumentSaveOptions kpDocumentSaveOptions::defaultDocumentSaveOptions (KConfig
 }
 
 // public static
-bool kpDocumentSaveOptions::saveDefaultDifferences (KConfigBase *config,
+bool kpDocumentSaveOptions::saveDefaultDifferences (TDEConfigBase *config,
                                                     const kpDocumentSaveOptions &oldDocInfo,
                                                     const kpDocumentSaveOptions &newDocInfo)
 {
@@ -371,9 +371,9 @@ static TQStringList mimeTypesSupportingProperty (const TQString &property,
 {
     TQStringList mimeTypeList;
 
-    KConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
+    TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (),
                                      kpSettingsGroupMimeTypeProperties);
-    KConfigBase *cfg = cfgGroupSaver.config ();
+    TDEConfigBase *cfg = cfgGroupSaver.config ();
 
     if (cfg->hasKey (property))
     {

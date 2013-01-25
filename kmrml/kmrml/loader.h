@@ -57,14 +57,14 @@ signals:
     void finished( const KURL& url, const TQByteArray& );
 
 private slots:
-    void slotData( KIO::Job *, const TQByteArray& );
-    void slotResult( KIO::Job * );
+    void slotData( TDEIO::Job *, const TQByteArray& );
+    void slotResult( TDEIO::Job * );
 
 private:
     Loader();
 
-    TQMap<KIO::TransferJob*,Download*> m_downloads;
-    typedef TQMapIterator<KIO::TransferJob*,Download*> DownloadIterator;
+    TQMap<TDEIO::TransferJob*,Download*> m_downloads;
+    typedef TQMapIterator<TDEIO::TransferJob*,Download*> DownloadIterator;
 
     static Loader *s_self;
 

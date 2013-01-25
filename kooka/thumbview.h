@@ -41,7 +41,7 @@
 #include <kfileitem.h>
 #include <kfileiconview.h>
 
-/* KConfig group definitions */
+/* TDEConfig group definitions */
 #define MARGIN_COLOR1 "MarginColor1"
 #define MARGIN_COLOR2 "MarginColor2"
 #define PIXMAP_WIDTH  "pixmapWidth"
@@ -54,7 +54,7 @@
 class TQPixmap;
 class TQListViewItem;
 class KProgress;
-class KIO::PreviewJob;
+class TDEIO::PreviewJob;
 
 class ThumbView: public TQVBox /* KIconView */
 {
@@ -99,7 +99,7 @@ public slots:
 
    void slNewFileItems( const KFileItemList& );
    void slGotPreview( const KFileItem*, const TQPixmap& );
-   void slPreviewResult( KIO::Job* );
+   void slPreviewResult( TDEIO::Job* );
 
    /**
     *  This connects to the IconView's executed signal and tells the packager
@@ -146,7 +146,7 @@ private:
    TQColor  m_marginColor2;
    TQString m_bgImg;
    int     m_cntJobsStarted;
-   KIO::PreviewJob *m_job;
+   TDEIO::PreviewJob *m_job;
 
     KFileItemList m_pendingJobs;
 };

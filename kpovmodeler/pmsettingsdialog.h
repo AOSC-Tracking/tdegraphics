@@ -35,7 +35,7 @@ class TQListView;
 class TQButtonGroup;
 class TQComboBox;
 class KColorButton;
-class KConfig;
+class TDEConfig;
 class PMIntEdit;
 class PMFloatEdit;
 class PMPart;
@@ -141,8 +141,8 @@ public:
     */
    void registerPage( TQWidget* topPage, PMSettingsDialogPage* page );
 
-   static void saveConfig( KConfig* cfg );
-   static void restoreConfig( KConfig* cfg );
+   static void saveConfig( TDEConfig* cfg );
+   static void restoreConfig( TDEConfig* cfg );
 
 protected:
    virtual void resizeEvent( TQResizeEvent* ev );

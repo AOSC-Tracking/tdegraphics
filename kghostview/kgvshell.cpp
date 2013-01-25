@@ -173,7 +173,7 @@ void KGVShell::slotReset()
 }
 
 void
-KGVShell::readProperties( KConfig *config )
+KGVShell::readProperties( TDEConfig *config )
 {
     KURL url = KURL::fromPathOrURL( config->readPathEntry( "URL" ) );
     if ( url.isValid() ) {
@@ -184,7 +184,7 @@ KGVShell::readProperties( KConfig *config )
 }
 
 void
-KGVShell::saveProperties( KConfig* config )
+KGVShell::saveProperties( TDEConfig* config )
 {
     config->writePathEntry( "URL", m_gvpart->url().prettyURL() );
     config->writeEntry( "Display Options", DisplayOptions::toString( m_gvpart->miniWidget()->displayOptions() ) );

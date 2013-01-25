@@ -35,8 +35,8 @@ typedef KGenericFactory<KViewCanvasConfig, TQWidget> KViewCanvasConfigFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kviewcanvasconfig, KViewCanvasConfigFactory( "kcm_kviewcanvasconfig" ) )
 
 KViewCanvasConfig::KViewCanvasConfig( TQWidget * parent, const char *, const TQStringList & args )
-	: KCModule( KViewCanvasConfigFactory::instance(), parent, args )
-	, m_config( new KConfig( "kviewcanvasrc" ) )
+	: TDECModule( KViewCanvasConfigFactory::instance(), parent, args )
+	, m_config( new TDEConfig( "kviewcanvasrc" ) )
 {
 	TQBoxLayout * layout = new TQVBoxLayout( this );
 	layout->setAutoAdd( true );
@@ -77,7 +77,7 @@ KViewCanvasConfig::~KViewCanvasConfig()
 
 void KViewCanvasConfig::save()
 {
-	KConfigGroup cfgGroup( m_config, "Settings" );
+	TDEConfigGroup cfgGroup( m_config, "Settings" );
 	cfgGroup.writeEntry( "Smooth Scaling", m_pWidget->m_pSmoothScaling->isChecked() );
 	cfgGroup.writeEntry( "Keep Aspect Ratio", m_pWidget->m_pKeepRatio->isChecked() );
 	cfgGroup.writeEntry( "Center Image", m_pWidget->m_pCenterImage->isChecked() );
@@ -89,7 +89,7 @@ void KViewCanvasConfig::save()
 	cfgGroup.writeEntry( "Maximum Width" , m_pWidget->m_pMaxWidth->value() );
 	cfgGroup.writeEntry( "Maximum Height", m_pWidget->m_pMaxHeight->value() );
 
-	KConfigGroup cfgGroup2( m_config, "Blend Effects" );
+	TDEConfigGroup cfgGroup2( m_config, "Blend Effects" );
 	TQCheckListItem *item = m_items.first();
 	for( int i = 1; item; item = m_items.next(), ++i )
 		cfgGroup2.writeEntry( TQString::number( i ), item->isOn() );
@@ -98,7 +98,7 @@ void KViewCanvasConfig::save()
 
 void KViewCanvasConfig::load()
 {
-	KConfigGroup cfgGroup( m_config, "Settings" );
+	TDEConfigGroup cfgGroup( m_config, "Settings" );
 	m_pWidget->m_pSmoothScaling->setChecked( cfgGroup.readBoolEntry( "Smooth Scaling", Defaults::smoothScaling ) );
 	m_pWidget->m_pKeepRatio->setChecked( cfgGroup.readBoolEntry( "Keep Aspect Ratio", Defaults::keepAspectRatio ) );
 	m_pWidget->m_pCenterImage->setChecked( cfgGroup.readBoolEntry( "Center Image", Defaults::centerImage ) );
@@ -110,7 +110,7 @@ void KViewCanvasConfig::load()
 	m_pWidget->m_pMaxWidth ->setValue( cfgGroup.readNumEntry( "Maximum Width" , Defaults::maxSize.width() ) );
 	m_pWidget->m_pMaxHeight->setValue( cfgGroup.readNumEntry( "Maximum Height", Defaults::maxSize.height() ) );
 
-	KConfigGroup cfgGroup2( m_config, "Blend Effects" );
+	TDEConfigGroup cfgGroup2( m_config, "Blend Effects" );
 	TQCheckListItem * item = m_items.first();
 	for( int i = 1; item; item = m_items.next(), ++i )
 		item->setOn( cfgGroup2.readBoolEntry( TQString::number( i ), false ) );

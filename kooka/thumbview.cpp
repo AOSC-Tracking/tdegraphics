@@ -86,7 +86,7 @@ ThumbView::~ThumbView()
 
 bool ThumbView::readSettings()
 {
-   KConfig *cfg = TDEGlobal::config();
+   TDEConfig *cfg = TDEGlobal::config();
    cfg->setGroup( THUMB_GROUP );
    bool dirty = false;
 
@@ -385,18 +385,18 @@ void ThumbView::slNewFileItems( const KFileItemList& items )
       m_cntJobsStarted = 0;
 
       /* start a preview-job */
-      m_job = KIO::filePreview(m_pendingJobs, m_pixWidth, m_pixHeight );
+      m_job = TDEIO::filePreview(m_pendingJobs, m_pixWidth, m_pixHeight );
 
       if( m_job )
       {
-	 connect( m_job, TQT_SIGNAL( result( KIO::Job * )),
-		  this, TQT_SLOT( slPreviewResult( KIO::Job * )));
+	 connect( m_job, TQT_SIGNAL( result( TDEIO::Job * )),
+		  this, TQT_SLOT( slPreviewResult( TDEIO::Job * )));
 	 connect( m_job, TQT_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
 		  TQT_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
 
          m_pendingJobs.clear();
 
-         /* KIO::Jo result is called in any way: Success, Failed, Error,
+         /* TDEIO::Jo result is called in any way: Success, Failed, Error,
 	  * thus connecting the failed is not really necessary.
 	  */
         // connect( job, TQT_SIGNAL( failed( const KFileItem* )),
@@ -424,7 +424,7 @@ void ThumbView::slGotPreview( const KFileItem* newFileItem, const TQPixmap& newP
 
 }
 
-void ThumbView::slPreviewResult( KIO::Job *job )
+void ThumbView::slPreviewResult( TDEIO::Job *job )
 {
    if( job && job->error() > 0 )
    {
@@ -481,7 +481,7 @@ void ThumbView::clear()
 
 void ThumbView::saveConfig()
 {
-   KConfig *cfg = TDEGlobal::config();
+   TDEConfig *cfg = TDEGlobal::config();
    cfg->setGroup( THUMB_GROUP );
 
    cfg->writeEntry( MARGIN_COLOR1, m_marginColor1 );

@@ -22,7 +22,7 @@
 #include "dscparse_adapter.h"
 #include <kdemacros.h>
 class TDECmdLineArgs;
-class KConfig;
+class TDEConfig;
 
 class KDE_EXPORT DisplayOptions 
 {

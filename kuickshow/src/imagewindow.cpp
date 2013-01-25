@@ -839,10 +839,10 @@ void ImageWindow::dropEvent( TQDropEvent *e )
     if ( KURLDrag::decode( e, list ) && !list.isEmpty()) {
         TQString tmpFile;
         const KURL &url = list.first();
-        if (KIO::NetAccess::download( url, tmpFile, this ) )
+        if (TDEIO::NetAccess::download( url, tmpFile, this ) )
         {
 	    loadImage( tmpFile );
-	    KIO::NetAccess::removeTempFile( tmpFile );
+	    TDEIO::NetAccess::removeTempFile( tmpFile );
 	}
 	updateWidget();
 	e->accept();
@@ -1006,7 +1006,7 @@ bool ImageWindow::saveImage( const KURL& dest, bool keepOriginalSize )
         {
         	if ( isFullscreen() )
         		toggleFullscreen(); // otherwise upload window would block us invisibly
-        	success = KIO::NetAccess::upload( saveFile, dest, const_cast<ImageWindow*>( this ) );
+        	success = TDEIO::NetAccess::upload( saveFile, dest, const_cast<ImageWindow*>( this ) );
         }
                                     
         Imlib_kill_image( id, saveIm );

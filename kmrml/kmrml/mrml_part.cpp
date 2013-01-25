@@ -123,7 +123,7 @@ MrmlPart::MrmlPart( TQWidget *parentWidget, const char * /* widgetName */,
     setName( "MRML Part" );
     m_browser = new Browser( this, "mrml browserextension");
     setInstance( PartFactory::instance(), true ); // do load plugins :)
-    KConfig *config = PartFactory::instance()->config();
+    TDEConfig *config = PartFactory::instance()->config();
     config->setGroup("MRML Settings");
 
     TQVBox *box = new TQVBox( parentWidget, "main mrml box" );
@@ -341,10 +341,10 @@ void MrmlPart::downloadReferenceFiles( const KURL::List& downloadList )
         KURL destURL;
         destURL.setPath( tmpFile.name() );
 
-        KIO::FileCopyJob *job = KIO::file_copy( *it, destURL, -1,
+        TDEIO::FileCopyJob *job = TDEIO::file_copy( *it, destURL, -1,
                                                 true /* overwrite tmpfile */ );
-        connect( job, TQT_SIGNAL( result( KIO::Job * ) ),
-                 TQT_SLOT( slotDownloadResult( KIO::Job * ) ));
+        connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ),
+                 TQT_SLOT( slotDownloadResult( TDEIO::Job * ) ));
         m_downloadJobs.append( job );
         // ### should this be only called for one job?
         emit started( job );
@@ -361,7 +361,7 @@ bool MrmlPart::closeURL()
     m_view->stopDownloads();
     m_view->clear();
 
-    TQPtrListIterator<KIO::FileCopyJob> it( m_downloadJobs );
+    TQPtrListIterator<TDEIO::FileCopyJob> it( m_downloadJobs );
     for ( ; it.current(); ++it )
         it.current()->kill();
     m_downloadJobs.clear();
@@ -381,18 +381,18 @@ bool MrmlPart::closeURL()
     return true;
 }
 
-KIO::TransferJob * MrmlPart::transferJob( const KURL& url )
+TDEIO::TransferJob * MrmlPart::transferJob( const KURL& url )
 {
-    KIO::TransferJob *job = KIO::get( url, true, false ); // reload, no gui
+    TDEIO::TransferJob *job = TDEIO::get( url, true, false ); // reload, no gui
     job->setAutoErrorHandlingEnabled( true, m_view );
-    connect( job, TQT_SIGNAL( result( KIO::Job * )),
-             TQT_SLOT( slotResult( KIO::Job * )));
-    connect( job, TQT_SIGNAL( data( KIO::Job *, const TQByteArray& )),
-             TQT_SLOT( slotData( KIO::Job *, const TQByteArray& )));
+    connect( job, TQT_SIGNAL( result( TDEIO::Job * )),
+             TQT_SLOT( slotResult( TDEIO::Job * )));
+    connect( job, TQT_SIGNAL( data( TDEIO::Job *, const TQByteArray& )),
+             TQT_SLOT( slotData( TDEIO::Job *, const TQByteArray& )));
 
 // ###
-//     connect( job, TQT_SIGNAL( infoMessage( KIO::Job *, const TQString& )),
-//              TQT_SLOT( slotResult( KIO::Job *, const TQString& )));
+//     connect( job, TQT_SIGNAL( infoMessage( TDEIO::Job *, const TQString& )),
+//              TQT_SLOT( slotResult( TDEIO::Job *, const TQString& )));
 
     job->setWindow( widget() );
     if ( !m_sessionId.isEmpty() )
@@ -405,7 +405,7 @@ KIO::TransferJob * MrmlPart::transferJob( const KURL& url )
     return job;
 }
 
-void MrmlPart::slotResult( KIO::Job *job )
+void MrmlPart::slotResult( TDEIO::Job *job )
 {
     if ( job == m_job )
         m_job = 0L;
@@ -435,10 +435,10 @@ void MrmlPart::slotResult( KIO::Job *job )
 }
 
 // ### when user cancels download, we crash :(
-void MrmlPart::slotDownloadResult( KIO::Job *job )
+void MrmlPart::slotDownloadResult( TDEIO::Job *job )
 {
-    assert( job->inherits( "KIO::FileCopyJob" ) );
-    KIO::FileCopyJob *copyJob = static_cast<KIO::FileCopyJob*>( job );
+    assert( job->inherits( "TDEIO::FileCopyJob" ) );
+    TDEIO::FileCopyJob *copyJob = static_cast<TDEIO::FileCopyJob*>( job );
 
     if ( !copyJob->error() )
         m_queryList.append( copyJob->destURL() );
@@ -457,7 +457,7 @@ void MrmlPart::slotDownloadResult( KIO::Job *job )
 }
 
 // mrml-document in the bytearray
-void MrmlPart::slotData( KIO::Job *, const TQByteArray& data )
+void MrmlPart::slotData( TDEIO::Job *, const TQByteArray& data )
 {
     if ( data.isEmpty() )
         return;

@@ -41,7 +41,7 @@
 class KScanCombo;
 class TQWidget;
 class TQButtonGroup;
-class KConfig;
+class TDEConfig;
 class TQCheckBox;
 class KSpellConfig;
 class TQRadioButton;
