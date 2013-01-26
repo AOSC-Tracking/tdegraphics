@@ -21,7 +21,7 @@
 #ifndef __kviewpresenter_h
 #define __kviewpresenter_h
 
-#include <kparts/plugin.h>
+#include <tdeparts/plugin.h>
 #include <kurl.h>
 
 #include <tqsortedlist.h>

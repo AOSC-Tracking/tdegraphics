@@ -260,14 +260,14 @@ private:
 
     KSpell          *m_spell;
     bool             m_wantKSpell;
-    bool             m_kspellVisible;
+    bool             m_tdespellVisible;
     bool             m_hideDiaWhileSpellcheck;
     KSpellConfig    *m_spellInitialConfig;
 
     /* ValueVector of wordLists for every line of ocr results */
     ocrBlock         m_ocrPage; /* one block contains all lines of the page */
     TQWidget          *m_parent;
-    /* current processed line to speed kspell correction */
+    /* current processed line to speed tdespell correction */
     unsigned         m_ocrCurrLine;
     TQStringList      m_checkStrings;
 

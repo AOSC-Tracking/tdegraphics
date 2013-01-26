@@ -31,6 +31,6 @@ install( FILES
 
 tde_add_kpart( kcm_kviewpresenterconfig AUTOMOC
   SOURCES kviewpresenterconfig.cpp
-  LINK kutils-shared
+  LINK tdeutils-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

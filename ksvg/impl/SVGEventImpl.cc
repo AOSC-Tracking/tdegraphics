@@ -346,7 +346,7 @@ SVGKeyEventImpl::SVGKeyEventImpl(TQKeyEvent *key, DOM::AbstractView &view, SVGEv
 	qKeyEvent = new TQKeyEvent(key->type(), key->key(), key->ascii(), key->state(), key->text(), key->isAutoRepeat(), key->count());
 
 	// Events are supposed to be accepted by default in TQt!
-	// This line made TQLineEdit's keyevents be ignored, so they were sent to the khtmlview
+	// This line made TQLineEdit's keyevents be ignored, so they were sent to the tdehtmlview
 	// (and e.g. space would make it scroll down)
 	//qKeyEvent->ignore();
 

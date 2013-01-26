@@ -42,7 +42,7 @@
 #include <tdeprint/kprintdialogpage.h>
 #include <kstdaction.h>
 #include <tdeversion.h>
-#include <kparts/genericfactory.h>
+#include <tdeparts/genericfactory.h>
 #include <kurldrag.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>

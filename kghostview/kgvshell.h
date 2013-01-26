@@ -21,7 +21,7 @@
 
 #include <tqstring.h>
 
-#include <kparts/mainwindow.h>
+#include <tdeparts/mainwindow.h>
 
 class TQTimer;
 

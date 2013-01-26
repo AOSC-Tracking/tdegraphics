@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <ksimpleconfig.h>
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 
 #include "KSVGCanvas.h"
 #include "CanvasFactory.h"

@@ -2,7 +2,7 @@
 #ifndef KVIEWPART_IFACE_H
 #define KVIEWPART_IFACE_H
 
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 
 class TQStringList;
 

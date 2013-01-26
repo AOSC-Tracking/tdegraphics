@@ -26,7 +26,7 @@
 
 #include <tqstringlist.h>
 
-#include "kmultipage.h"
+#include "tdemultipage.h"
 #include "djvurenderer.h"
 
 #include "DjVuToPS.h"
@@ -53,7 +53,7 @@ Only the two classes that are absolutely necessary for a working
 plugin are implemented. The only other file that is installed is a
 desktop file, which tells kviewhshell to use the plugin.
 
-- kvsdemo_multipage, an implementation of a kmultipage. In a real
+- kvsdemo_multipage, an implementation of a tdemultipage. In a real
 application, this class would create and manage the GUI elements that
 the plugin adds to the GUI of the kviewshell. This implementation adds
 nothing, and does only the minimal initialization required..
@@ -93,7 +93,7 @@ public:
   /** Constructor
       
   The constructor needs to initialize several members of the
-  kmultipage. Please have a look at the constructor's source code to
+  tdemultipage. Please have a look at the constructor's source code to
   see how to adjust this for your implementation.
   */
   DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,

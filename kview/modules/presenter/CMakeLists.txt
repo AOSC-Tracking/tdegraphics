@@ -36,6 +36,6 @@ install( FILES
 tde_add_kpart( kview_presenterplugin AUTOMOC
   SOURCES
     imagelistitem.cpp imagelistdialog.ui kviewpresenter.cpp
-  LINK kio-shared kparts-shared
+  LINK kio-shared tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

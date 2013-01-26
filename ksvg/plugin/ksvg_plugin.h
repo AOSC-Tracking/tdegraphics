@@ -22,7 +22,7 @@
 #define KSVGPlugin_H
 
 #include <tqobject.h>
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 
 namespace KSVG
 {

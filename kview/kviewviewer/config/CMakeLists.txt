@@ -31,6 +31,6 @@ install( FILES
 
 tde_add_kpart( kcm_kviewviewerpluginsconfig AUTOMOC
   SOURCES kviewviewerpluginsconfig.cpp
-  LINK kutils-shared
+  LINK tdeutils-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

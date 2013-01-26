@@ -33,8 +33,8 @@
 #include <ktempfile.h>
 #include <kprocess.h>
 #include <stdlib.h>
-#include <kspell.h>
-#include <kspelldlg.h>
+#include <tdespell.h>
+#include <tdespelldlg.h>
 #include <tqfile.h>
 #include <tqcolor.h>
 #include <stdio.h>
@@ -76,7 +76,7 @@ KSANEOCR::KSANEOCR( TQWidget*, TDEConfig *cfg ):
     m_imgCanvas(0L),
     m_spell(0L),
     m_wantKSpell(true),
-    m_kspellVisible(true),
+    m_tdespellVisible(true),
     m_hideDiaWhileSpellcheck(true),
     m_spellInitialConfig(0L),
     m_parent(0L),
@@ -275,7 +275,7 @@ void KSANEOCR::finishedOCRVisible( bool success )
        {
            m_ocrCurrLine = 0;
            /*
-            * create a new kspell object, based on the config of the base dialog
+            * create a new tdespell object, based on the config of the base dialog
             */
 
            connect( new KSpell( m_parent, i18n("Kooka OCR Dictionary Check"),
@@ -317,7 +317,7 @@ void KSANEOCR::startLineSpellCheck()
 
         // if( list.count() > 0 )
 
-        m_spell->checkList( &m_checkStrings, m_kspellVisible );
+        m_spell->checkList( &m_checkStrings, m_tdespellVisible );
 	kdDebug(28000)<< "Started!" << endl;
         /**
          * This call ends in three slots:

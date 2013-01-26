@@ -24,7 +24,7 @@
 #include <tqmap.h>
 #include <tqapplication.h>
 
-#include <kparts/plugin.h>
+#include <tdeparts/plugin.h>
 #include <kxmlguifactory.h>
 #include <kconfig.h>
 

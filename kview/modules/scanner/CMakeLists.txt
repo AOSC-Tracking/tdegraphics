@@ -32,6 +32,6 @@ install( FILES
 
 tde_add_kpart( kview_scannerplugin AUTOMOC
   SOURCES kviewscanner.cpp
-  LINK kparts-shared
+  LINK tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

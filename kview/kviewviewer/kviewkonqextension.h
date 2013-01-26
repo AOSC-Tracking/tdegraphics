@@ -20,7 +20,7 @@
 #ifndef __kviewkonqextension_h__
 #define __kviewkonqextension_h__
 
-#include <kparts/browserextension.h>
+#include <tdeparts/browserextension.h>
 
 namespace KImageViewer { class Canvas; }
 class KViewViewer;

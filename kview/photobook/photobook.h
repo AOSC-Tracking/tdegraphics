@@ -43,9 +43,9 @@ Copyright (c) 2004 Charles Samuels <charles@kde.org>
 #include <kfileiconview.h>
 #include <kdirlister.h>
 
-#include <kparts/part.h>
-#include <kparts/browserextension.h>
-#include <kparts/genericfactory.h>
+#include <tdeparts/part.h>
+#include <tdeparts/browserextension.h>
+#include <tdeparts/genericfactory.h>
 
 class Previews;
 class PhotoBookPart;

@@ -114,7 +114,7 @@ int main(int argc, char **argv)
           TQDataStream arg(data, IO_WriteOnly);
           bool result;
           arg << qualPath.stripWhiteSpace();
-          if (!app.dcopClient()->call( *it, "kmultipage", "is_file_loaded(TQString)", data, replyType, replyData))
+          if (!app.dcopClient()->call( *it, "tdemultipage", "is_file_loaded(TQString)", data, replyType, replyData))
             kdError(1223) << "There was an error using DCOP." << endl;
           else
           {
@@ -124,7 +124,7 @@ int main(int argc, char **argv)
               reply >> result;
               if (result == true)
               {
-                if (app.dcopClient()->send(*it, "kmultipage", "jumpToReference(TQString)", args->url(0).ref()) == true)
+                if (app.dcopClient()->send(*it, "tdemultipage", "jumpToReference(TQString)", args->url(0).ref()) == true)
                 {
                   app.dcopClient()->detach();
                   return 0;

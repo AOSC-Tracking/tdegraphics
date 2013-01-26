@@ -38,7 +38,7 @@
 #include <kicontheme.h>
 #include <kglobal.h>
 #include <kpopupmenu.h>
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 
 #include <twin.h>
 

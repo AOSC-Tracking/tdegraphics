@@ -34,7 +34,7 @@
 #include <kapplication.h>
 #include <kmainwindow.h>
 #include <kdockwidget.h>
-#include <kparts/dockmainwindow.h>
+#include <tdeparts/dockmainwindow.h>
 
 #define KOOKA_STATE_GROUP "State"
 #define PREFERENCE_DIA_TAB "PreferencesTab"

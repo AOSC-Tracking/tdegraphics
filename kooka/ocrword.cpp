@@ -121,7 +121,7 @@ TQRect ocrWordList::wordListRect()
 
 
 /*
- * since kspell removes , - | / etc. from words while they remain in the words
+ * since tdespell removes , - | / etc. from words while they remain in the words
  * in the ocr wordlist.
  * This search goes through the wordlist and tries to find the words without caring
  * for special chars. It simply removes all chars from the words that are not alphanumeric.

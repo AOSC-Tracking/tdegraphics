@@ -38,6 +38,6 @@ tde_add_kpart( kcm_kgamma AUTOMOC
   SOURCES
     xf86configpath.cpp xvidextwrap.cpp
     displaynumber.cpp gammactrl.cpp kgamma.cpp
-  LINK kparts-shared ${XXF86VM_LIBRARIES}
+  LINK tdeparts-shared ${XXF86VM_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

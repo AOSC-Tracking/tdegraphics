@@ -32,7 +32,7 @@ tde_add_library( kfaximage STATIC_PIC AUTOMOC
 tde_add_library( kfaximage SHARED AUTOMOC
   SOURCES kfaximage.cpp faxexpand.cpp faxinit.cpp
   VERSION 1.0.0
-  LINK kparts-shared ${TQT_LIBRARIES}
+  LINK tdeparts-shared ${TQT_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
 

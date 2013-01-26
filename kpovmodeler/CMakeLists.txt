@@ -114,7 +114,7 @@ tde_add_library( kpovmodeler SHARED AUTOMOC
     pmlibraryiconview.cpp pmlibraryobjectsearch.cpp pmpluginmanager.cpp
     pmpartiface.skel
   VERSION 0.0.0
-  LINK kparts-shared ${GLU_LIBRARIES} ${XMU_LIBRARIES}
+  LINK tdeparts-shared ${GLU_LIBRARIES} ${XMU_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
 

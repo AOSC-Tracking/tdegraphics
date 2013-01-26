@@ -23,7 +23,7 @@
 #include <tqfile.h>
 
 #include <kio/job.h>
-#include <kparts/browserextension.h>
+#include <tdeparts/browserextension.h>
 #include <krun.h>
 
 #include "displayoptions.h"

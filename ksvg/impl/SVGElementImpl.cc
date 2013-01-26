@@ -325,7 +325,7 @@ TQDict<DOM::DOMString> &SVGElementImpl::attributes()
 	return m_attributes;
 }
 
-// khtml overrides
+// tdehtml overrides
 void SVGElementImpl::setAttribute(const DOM::DOMString &name, const DOM::DOMString &value)
 {
 	m_attributes.replace(name.string(), new DOM::DOMString(value));

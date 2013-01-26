@@ -23,7 +23,7 @@
 
 #include <tqstringlist.h>
 
-#include "kmultipage.h"
+#include "tdemultipage.h"
 #include "faxrenderer.h"
 
 
@@ -87,7 +87,7 @@ public:
   /** Constructor
       
   The constructor needs to initialize several members of the
-  kmultipage. Please have a look at the constructor's source code to
+  tdemultipage. Please have a look at the constructor's source code to
   see how to adjust this for your implementation.
   */
   FaxMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent,

@@ -23,8 +23,8 @@
 #include <tqstringlist.h>
 
 #include <kurl.h>
-#include <kparts/factory.h>
-#include <kparts/part.h>
+#include <tdeparts/factory.h>
+#include <tdeparts/part.h>
 
 #include <kmrml_config.h>
 

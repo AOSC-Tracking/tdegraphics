@@ -21,7 +21,7 @@
 #include <config.h>
 
 #include <kfiledialog.h>
-#include <kparts/genericfactory.h>
+#include <tdeparts/genericfactory.h>
 
 #include "faxmultipage.h"
 
@@ -35,7 +35,7 @@ FaxMultiPage::FaxMultiPage(TQWidget *parentWidget, const char *widgetName, TQObj
                              const char *name, const TQStringList&)
   : KMultiPage(parentWidget, widgetName, parent, name), faxRenderer(parentWidget)
 {
-  /* This is kparts wizardry that cannot be understood by man. Simply
+  /* This is tdeparts wizardry that cannot be understood by man. Simply
      change the names to match your implementation.  */
   setInstance(FaxMultiPageFactory::instance());
   faxRenderer.setName("Fax renderer");
@@ -43,7 +43,7 @@ FaxMultiPage::FaxMultiPage(TQWidget *parentWidget, const char *widgetName, TQObj
   setXMLFile("kfaxview.rc");
 
   /* It is very important that this method is called in the
-     constructor. Otherwise kmultipage does not know how to render
+     constructor. Otherwise tdemultipage does not know how to render
      files, and crashes may result. */
   setRenderer(&faxRenderer);
 }

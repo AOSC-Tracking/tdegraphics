@@ -62,7 +62,7 @@ public:
 	virtual ~SVGElementImpl();
 
 	// Attribute setting
-	// "Override" khtml's functions with ours
+	// "Override" tdehtml's functions with ours
 	void setAttribute(const DOM::DOMString &name, const DOM::DOMString &value);
 	void setAttributeInternal(const DOM::DOMString &name, const DOM::DOMString &value);
 	DOM::DOMString getAttribute(const DOM::DOMString &name) const;

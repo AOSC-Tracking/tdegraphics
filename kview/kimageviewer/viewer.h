@@ -21,7 +21,7 @@
 #ifndef KIMAGEVIEWER_VIEWER_H
 #define KIMAGEVIEWER_VIEWER_H
 
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 #include <kdemacros.h>
 namespace KParts
 {

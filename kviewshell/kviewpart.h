@@ -6,7 +6,7 @@
 #include "pageSize.h"
 #include "zoom.h"
 
-#include <kparts/browserextension.h>
+#include <tdeparts/browserextension.h>
 #include <tqtimer.h>
 
 class TDEAboutData;
@@ -71,7 +71,7 @@ public slots:
   virtual TQStringList fileFormats() const;
   void setStatusBarTextFromMultiPage(const TQString &);
 
-  /** Calling this slot will cause the kmultipage to reload the file */
+  /** Calling this slot will cause the tdemultipage to reload the file */
   void reload();
 
   void restoreDocument(const KURL &url, int page);

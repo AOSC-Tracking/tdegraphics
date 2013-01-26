@@ -39,5 +39,5 @@ install( FILES kviewui.rc DESTINATION ${DATA_INSTALL_DIR}/kview )
 
 tde_add_tdeinit_executable( kview AUTOMOC
   SOURCES kview.cpp main.cpp
-  LINK kparts-shared kutils-shared
+  LINK tdeparts-shared tdeutils-shared
 )

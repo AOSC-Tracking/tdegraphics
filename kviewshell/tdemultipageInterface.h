@@ -1,10 +1,10 @@
 // -*- C++ -*-
-#ifndef kmultipageINTERFACE_H
-#define kmultipageINTERFACE_H
+#ifndef tdemultipageINTERFACE_H
+#define tdemultipageINTERFACE_H
  
 #include <dcopobject.h>
  
-class kmultipageInterface : virtual public DCOPObject
+class tdemultipageInterface : virtual public DCOPObject
 {
   K_DCOP
        

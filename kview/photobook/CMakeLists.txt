@@ -31,6 +31,6 @@ install( FILES photobookui.rc DESTINATION ${DATA_INSTALL_DIR}/photobook )
 
 tde_add_kpart( libphotobook AUTOMOC
   SOURCES photobook.cpp
-  LINK kparts-shared
+  LINK tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

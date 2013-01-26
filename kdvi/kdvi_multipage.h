@@ -2,7 +2,7 @@
 #ifndef KDVIMULTIPAGE_H
 #define KDVIMULTIPAGE_H
 
-#include "kmultipage.h"
+#include "tdemultipage.h"
 #include "dviRenderer.h"
 
 #include <tqstringlist.h>

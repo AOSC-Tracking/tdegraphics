@@ -32,6 +32,6 @@ install( FILES
 
 tde_add_kpart( kview_effectsplugin AUTOMOC
   SOURCES kvieweffects.cpp
-  LINK kparts-shared
+  LINK tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

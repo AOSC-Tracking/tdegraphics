@@ -6,7 +6,7 @@
 #endif 
 
 #include <kapplication.h>
-#include <kparts/mainwindow.h>
+#include <tdeparts/mainwindow.h>
 
 namespace KParts { class ReadWritePart; }
  

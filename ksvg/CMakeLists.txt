@@ -38,6 +38,6 @@ tde_add_library( ksvg SHARED
     ksvgdom-static ksvgdomimpl-static ksvgcore-static ksvgecma-static
     ksvgxrgbrender-static text2path-static ksvgart-static
   LINK
-    khtml-shared ${LCMS_LIBRARY} ${ART_LIBRARIES} ${FRIBIDI_LIBRARIES}
+    tdehtml-shared ${LCMS_LIBRARY} ${ART_LIBRARIES} ${FRIBIDI_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )

@@ -39,7 +39,7 @@ install( FILES kfaxmultipage.desktop kfaxmultipage_tiff.desktop DESTINATION ${SE
 
 tde_add_kpart( kfaxviewpart AUTOMOC
   SOURCES faxmultipage.cpp faxrenderer.cpp
-  LINK kmultipage-shared kfaximage-static kparts-shared
+  LINK tdemultipage-shared kfaximage-static tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 
@@ -48,6 +48,6 @@ tde_add_kpart( kfaxviewpart AUTOMOC
 
 tde_add_executable( kfaxview AUTOMOC
   SOURCES main.cpp
-  LINK kviewshell-static kio-shared kparts-shared
+  LINK kviewshell-static kio-shared tdeparts-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

@@ -102,7 +102,7 @@ void KPrintDialogPage_PageOptions::getOptions( TQMap<TQString,TQString>& opts, b
   // Save options, taking default values into consideration: by
   // default "center" is checked, "expand" and "shrink" are
   // not. Warning: The default values are also coded into setOptions()
-  // and kmultipage::print(..).
+  // and tdemultipage::print(..).
   
   if (checkBox_center != 0)
     if ( incldef || !checkBox_center->isChecked() )
@@ -138,7 +138,7 @@ void KPrintDialogPage_PageOptions::setOptions( const TQMap<TQString,TQString>& o
 {
   // Sets the centering option. By default, this option is
   // checked. Warning: All default values are also coded into
-  // getOptions() and kmultipage::print(..).
+  // getOptions() and tdemultipage::print(..).
   TQString op = opts[ "kde-kviewshell-centerpage" ];
   if (checkBox_center != 0)
     checkBox_center->setChecked( op != "false" );

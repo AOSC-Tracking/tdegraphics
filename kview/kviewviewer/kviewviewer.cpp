@@ -40,9 +40,9 @@
 #include <kio/job.h>
 #include <kxmlguifactory.h>
 #include <kfiledialog.h>
-#include <kparts/genericfactory.h>
-#include <kparts/componentfactory.h>
-#include <kparts/plugin.h>
+#include <tdeparts/genericfactory.h>
+#include <tdeparts/componentfactory.h>
+#include <tdeparts/plugin.h>
 #include <kmessagebox.h>
 #include <ktempfile.h>
 #include <kapplication.h>
@@ -595,7 +595,7 @@ void KViewViewer::slotData( TDEIO::Job *, const TQByteArray & data )
 
 	//show partial image XXX: is this really the way to do it?
 	//No. :) It takes forever like this.
-	//OK. So I really have to look at khtml...
+	//OK. So I really have to look at tdehtml...
 	//later...
 	//m_pCanvas->setImage( TQImage( m_pBuffer->buffer() ) );
 }

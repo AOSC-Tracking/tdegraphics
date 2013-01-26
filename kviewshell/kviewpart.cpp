@@ -26,9 +26,9 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kmimetype.h>
-#include <kparts/componentfactory.h>
-#include <kparts/genericfactory.h>
-#include <kparts/partmanager.h>
+#include <tdeparts/componentfactory.h>
+#include <tdeparts/genericfactory.h>
+#include <tdeparts/partmanager.h>
 #include <kprogress.h>
 #include <kstandarddirs.h>
 #include <kstdaction.h>
@@ -41,7 +41,7 @@
 #include <math.h>
 
 #include "kviewpart.h"
-#include "kmultipage.h"
+#include "tdemultipage.h"
 #include "pageSize.h"
 #include "pageSizeDialog.h"
 #include "zoomlimits.h"

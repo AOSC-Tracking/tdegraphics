@@ -80,7 +80,7 @@ void KPrintDialogPage_DJVUPageOptions::getOptions( TQMap<TQString,TQString>& opt
 {
   // Save options, taking default values into consideration. Warning:
   // The default values are also coded into setOptions() and
-  // kmultipage::print(..).
+  // tdemultipage::print(..).
 
   if (checkBox_rotate != 0)
     if (checkBox_rotate->isChecked())
@@ -99,7 +99,7 @@ void KPrintDialogPage_DJVUPageOptions::getOptions( TQMap<TQString,TQString>& opt
 void KPrintDialogPage_DJVUPageOptions::setOptions( const TQMap<TQString,TQString>& opts )
 {
   // Warning: All default values are also coded into getOptions() and
-  // kmultipage::print(..).
+  // tdemultipage::print(..).
 
   // same for rotation
   TQString op = opts[ "kde-kviewshell-rotatepage" ];

@@ -29,6 +29,6 @@ install( FILES kviewpluginsconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kc
 
 tde_add_kpart( kcm_kviewpluginsconfig AUTOMOC
   SOURCES kviewpluginsconfig.cpp
-  LINK kutils-shared
+  LINK tdeutils-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

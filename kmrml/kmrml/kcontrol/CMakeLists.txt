@@ -33,6 +33,6 @@ tde_add_kpart( kcm_kmrml AUTOMOC
     kcmkmrml.cpp mainpage.cpp indexer.cpp
     serverconfigwidget.ui indexcleaner.cpp
   LINK
-    kmrmlstuff-static kparts-shared kio-shared
+    kmrmlstuff-static tdeparts-shared kio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

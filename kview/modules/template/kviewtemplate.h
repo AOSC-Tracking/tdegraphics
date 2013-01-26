@@ -5,7 +5,7 @@
 #ifndef __kviewtemplate_h
 #define __kviewtemplate_h
 
-#include <kparts/plugin.h>
+#include <tdeparts/plugin.h>
 
 namespace KImageViewer { class Viewer; }
 

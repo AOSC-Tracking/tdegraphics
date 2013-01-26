@@ -31,6 +31,6 @@ install( FILES shell.rc DESTINATION ${DATA_INSTALL_DIR}/kpdf )
 
 tde_add_executable( kpdf AUTOMOC
   SOURCES main.cpp shell.cpp
-  LINK kparts-shared
+  LINK tdeparts-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

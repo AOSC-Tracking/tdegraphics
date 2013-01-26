@@ -42,7 +42,7 @@
 #include <kmessagebox.h>
 #include <knuminput.h>
 #include <kprotocolinfo.h>
-#include <kparts/genericfactory.h>
+#include <tdeparts/genericfactory.h>
 #include <ktempfile.h>
 
 #include <mrml_utils.h>

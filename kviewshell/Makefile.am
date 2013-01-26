@@ -1,12 +1,12 @@
 SUBDIRS = . pics plugins
 
 INCLUDES= $(all_includes)
-include_HEADERS = kmultipageInterface.h
+include_HEADERS = tdemultipageInterface.h
 
 ####### Files
 
 bin_PROGRAMS = 	kviewshell
-lib_LTLIBRARIES = libkmultipage.la
+lib_LTLIBRARIES = libtdemultipage.la
 kde_module_LTLIBRARIES = kviewerpart.la emptymultipagepart.la
 noinst_LTLIBRARIES = libifaces.la libkviewshell.la
 
@@ -18,9 +18,9 @@ kviewerpart_la_SOURCES = kviewpart.cpp pageSizeWidget_base.ui \
 		optionDialogGUIWidget_base.ui optionDialogAccessibilityWidget.ui simplePageSize.cpp
 
 kviewerpart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
-kviewerpart_la_LIBADD = ./libifaces.la $(LIB_KFILE) -lkparts
+kviewerpart_la_LIBADD = ./libifaces.la $(LIB_KFILE) -ltdeparts
 
-libkmultipage_la_SOURCES = kmultipage.cpp pageView.cpp marklist.cpp kmultipageInterface.skel \
+libtdemultipage_la_SOURCES = tdemultipage.cpp pageView.cpp marklist.cpp tdemultipageInterface.skel \
 		units.cpp pageSize.cpp simplePageSize.cpp renderedDocumentPage.cpp renderedDocumentPagePixmap.cpp \
 		renderedDocumentPagePrinter.cpp documentPageCache.cpp documentWidget.cpp searchWidget.cpp \
 		selection.cpp documentRenderer.cpp history.cpp kvsprefs.kcfgc tableOfContents.cpp \
@@ -29,21 +29,21 @@ libkmultipage_la_SOURCES = kmultipage.cpp pageView.cpp marklist.cpp kmultipageIn
 
 kde_kcfg_DATA = kviewshell.kcfg
 
-libkmultipage_la_LDFLAGS = $(all_libraries)
-libkmultipage_la_LIBADD = $(LIB_KFILE) -ltdeprint -lkparts
+libtdemultipage_la_LDFLAGS = $(all_libraries)
+libtdemultipage_la_LIBADD = $(LIB_KFILE) -ltdeprint -ltdeparts
 
 emptymultipagepart_la_SOURCES = empty_multipage.cpp emptyRenderer.cpp
 emptymultipagepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
-emptymultipagepart_la_LIBADD = -lkparts libkmultipage.la
+emptymultipagepart_la_LIBADD = -ltdeparts libtdemultipage.la
 
 libkviewshell_la_SOURCES = kviewshell.cpp
 
 kviewshell_SOURCES = main.cpp
-kviewshell_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
-kviewshell_LDADD = libkviewshell.la ./libifaces.la -lkparts
+kviewshell_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
+kviewshell_LDADD = libkviewshell.la ./libifaces.la -ltdeparts
 
 kviewshellinclude_HEADERS = anchor.h bookmark.h pageView.h documentPageCache.h documentRenderer.h documentWidget.h \
-	history.h hyperlink.h kmultipage.h length.h pageNumber.h pageSize.h renderedDocumentPage.h renderedDocumentPagePixmap.h \
+	history.h hyperlink.h tdemultipage.h length.h pageNumber.h pageSize.h renderedDocumentPage.h renderedDocumentPagePixmap.h \
 	renderedDocumentPagePrinter.h selection.h simplePageSize.h textBox.h zoom.h zoomlimits.h
 kviewshellincludedir = $(includedir)/kviewshell
 
@@ -55,7 +55,7 @@ rcdir = $(kde_datadir)/kviewshell
 partrc_DATA = kviewerpart.rc
 partrcdir = $(kde_datadir)/kviewerpart
 
-servicetype_DATA = kmultipage.desktop
+servicetype_DATA = tdemultipage.desktop
 servicetypedir = $(kde_servicetypesdir)
 
 kde_services_DATA = emptymultipage.desktop

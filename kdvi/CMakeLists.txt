@@ -75,7 +75,7 @@ tde_add_kpart( kdvipart AUTOMOC
     TeXFont_PFB.cpp TeXFont_TFM.cpp TeXFontDefinition.cpp
     dviWidget.cpp dvisourcesplitter.cpp prefs.kcfgc
   LINK
-    kmultipage-shared tdeprint-shared kparts-shared ${FREETYPE_LIBRARIES}
+    tdemultipage-shared tdeprint-shared tdeparts-shared ${FREETYPE_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 
@@ -84,7 +84,7 @@ tde_add_kpart( kdvipart AUTOMOC
 
 tde_add_executable( kdvi AUTOMOC
   SOURCES main.cpp
-  LINK kviewshell-static kparts-shared
+  LINK kviewshell-static tdeparts-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 

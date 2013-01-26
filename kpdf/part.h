@@ -16,8 +16,8 @@
 #ifndef _KPDF_PART_H_
 #define _KPDF_PART_H_
 
-#include <kparts/browserextension.h>
-#include <kparts/part.h>
+#include <tdeparts/browserextension.h>
+#include <tdeparts/part.h>
 #include <tqguardedptr.h>
 #include "core/document.h"
 #include "core/observer.h"

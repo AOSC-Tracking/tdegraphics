@@ -33,6 +33,6 @@ install( FILES
 tde_add_kpart( kview_browserplugin AUTOMOC
   SOURCES
     kmyfileitemlist.cpp kviewbrowser.cpp
-  LINK kparts-shared
+  LINK tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

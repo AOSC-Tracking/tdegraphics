@@ -650,7 +650,7 @@ void PageView::keyPressEvent( TQKeyEvent * e )
     if ( ( !d->mouseSelectionRect.isNull() && e->key() != TQt::Key_Escape ) || d->mouseMidStartY != -1 )
         return;
 
-    // handle 'find as you type' (based on khtml/khtmlview.cpp)
+    // handle 'find as you type' (based on tdehtml/tdehtmlview.cpp)
     if( d->typeAheadActive )
     {
         // backspace: remove a char and search or terminates search

@@ -6,10 +6,10 @@
 #include "documentPageCache.h"
 #include "documentRenderer.h"
 #include "history.h"
-#include "kmultipageInterface.h"
+#include "tdemultipageInterface.h"
 #include "marklist.h"
 
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 #include <tqtimer.h>
 
 class Anchor;
@@ -34,7 +34,7 @@ class SearchWidget;
  */
 
 // TODO remove virtual inheritance for KDE 4. It's the reason for the strange DCOPObject construction
-class KMultiPage : public KParts::ReadOnlyPart, virtual public kmultipageInterface
+class KMultiPage : public KParts::ReadOnlyPart, virtual public tdemultipageInterface
 {
   Q_OBJECT
   
@@ -47,23 +47,23 @@ public:
   virtual TQWidget* mainWidget() {return _scrollView;}
 
   /* Methods which are associated with the DCOP functionality of the
-     kmultipage. This method returns the file name (not the URL) of
+     tdemultipage. This method returns the file name (not the URL) of
      the currently loaded file. */
   TQString name_of_current_file();
 
   /* Methods which are associated with the DCOP functionality of the
-     kmultipage. This method can be implemented by the multipage,
+     tdemultipage. This method can be implemented by the multipage,
      e.g. to jump to a certain location. */
   virtual ASYNC  jumpToReference(const TQString& /*reference*/);
 
   /* Methods which are associated with the DCOP functionality of the
-     kmultipage. This method checks if a given file is loaded. */
+     tdemultipage. This method checks if a given file is loaded. */
   bool   is_file_loaded(const TQString& filename);
 
   /* Opens file and sets URL
 
      This method does the same as openFile, but sets the m_url of the
-     kmultipage. This can be important, for the following reason:
+     tdemultipage. This can be important, for the following reason:
      assume that a DVI is or DJVU-file is located on a web server at
      baseURL=http://www.x.x/x.dvi The file may refer to external
      graphic files using relative links.
@@ -179,7 +179,7 @@ public:
   @endcode 
 
   For more information, see the default implementation in the source
-  file kmultipage.cpp. You might also look at the documentation to
+  file tdemultipage.cpp. You might also look at the documentation to
   getPrinter().
   */
   virtual void print();
@@ -319,7 +319,7 @@ protected:
   /** Update GUI after loading or closing of a file
 
       This method is called by openFile() when a new file was loaded,
-      and by closeURL() when a file is closed so that the kmultipage
+      and by closeURL() when a file is closed so that the tdemultipage
       implementation can update its own GUI, enable/disable actions,
       prepare info texts, etc. At the time the method is executed, the
       file has already been loaded into the renderer using
@@ -593,7 +593,7 @@ private slots:
 
 private:
   /* For internal use by the reload()-method. See the comments in
-     kmultipage.cpp, right before the timerEvent function. */
+     tdemultipage.cpp, right before the timerEvent function. */
   int  timer_id;
 
   /* For internal use the reload()-method. This is a dreadful
@@ -618,7 +618,7 @@ private:
   void timerEvent( TQTimerEvent *e );
 
   /* This method opens a file and sets up the GUI when the file is
-     loaded. It calls setFile() so that implementations of kmultipage
+     loaded. It calls setFile() so that implementations of tdemultipage
      can  update their own GUI. DO NOT REIMPLEMENT THIS METHOD. */
   bool openFile();
 

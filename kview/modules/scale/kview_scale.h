@@ -21,7 +21,7 @@
 #ifndef __kview_scale_h
 #define __kview_scale_h
 
-#include <kparts/plugin.h>
+#include <tdeparts/plugin.h>
 
 namespace KImageViewer {
 	class Viewer;

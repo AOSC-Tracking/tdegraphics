@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2003, Luís Pedro Coelho,
- * based on tdelibs/kparts/genericfactory.h
+ * based on tdelibs/tdeparts/genericfactory.h
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <kparts/factory.h>
-#include <kparts/part.h>
+#include <tdeparts/factory.h>
+#include <tdeparts/part.h>
 #include <kgenericfactory.h>
 #include <kaboutdata.h>
 #include <kdebug.h>

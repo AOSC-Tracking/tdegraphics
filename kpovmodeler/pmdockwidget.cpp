@@ -48,10 +48,10 @@
 
 #include "pmdebug.h"
 
-#include <kparts/event.h>
-#include <kparts/part.h>
+#include <tdeparts/event.h>
+#include <tdeparts/part.h>
 #include <kaccel.h>
-#include <kparts/plugin.h>
+#include <tdeparts/plugin.h>
 #include <kstatusbar.h>
 #include <kinstance.h>
 #include <khelpmenu.h>
@@ -151,7 +151,7 @@ PMDockMainWindow::~PMDockMainWindow()
    delete d;
 }
 
-// kparts/dockmainwindow stuff
+// tdeparts/dockmainwindow stuff
 void PMDockMainWindow::createGUI( Part * part )
 {
   kdDebug(1000) << TQString("DockMainWindow::createGUI for %1").arg(part?part->name():"0L") << endl;
@@ -245,7 +245,7 @@ void PMDockMainWindow::createShellGUI( bool create )
     }
     accel()->setAutoUpdate( bAccelAutoUpdate );
 }
-// end kparts/dockmainwindow
+// end tdeparts/dockmainwindow
 
 void PMDockMainWindow::setMainDockWidget( PMDockWidget* mdw )
 {

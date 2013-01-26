@@ -21,7 +21,7 @@
 #ifndef __kviewscanner_h
 #define __kviewscanner_h
 
-#include <kparts/plugin.h>
+#include <tdeparts/plugin.h>
 #include <klibloader.h>
 
 class KURL;

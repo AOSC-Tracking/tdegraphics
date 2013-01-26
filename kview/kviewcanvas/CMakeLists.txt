@@ -32,6 +32,6 @@ install( FILES kviewcanvas.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
 tde_add_kpart( libkviewcanvas AUTOMOC
   SOURCES kimageholder.cpp kimagecanvas.cpp
-  LINK kimageviewer-shared kutils-shared
+  LINK kimageviewer-shared tdeutils-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

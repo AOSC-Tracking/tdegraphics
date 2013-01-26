@@ -18,7 +18,7 @@ shellrcdir = $(kde_datadir)/kviewshell/plugins/djvu
 
 kde_module_LTLIBRARIES = djvuviewpart.la
 djvuviewpart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
-djvuviewpart_la_LIBADD = -ltdeprint -lkparts $(top_builddir)/kviewshell/libkmultipage.la libdjvu/libdjvu.la
+djvuviewpart_la_LIBADD = -ltdeprint -ltdeparts $(top_builddir)/kviewshell/libtdemultipage.la libdjvu/libdjvu.la
 djvuviewpart_la_SOURCES = djvumultipage.cpp djvurenderer.cpp kprintDialogPage_DJVUpageoptions.cpp \
 	kprintDialogPage_DJVUconversionoptions.cpp kprintDialogPage_DJVUconversionoptions_basewidget.ui \
 	pageRangeWidget_base.ui pageRangeWidget.cpp \

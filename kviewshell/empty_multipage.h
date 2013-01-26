@@ -21,10 +21,10 @@
 #ifndef EMPTY_MULTIPAGE_H
 #define EMPTY_MULTIPAGE_H
 
-#include "kmultipage.h"
+#include "tdemultipage.h"
 #include "emptyRenderer.h"
 
-#include <kparts/genericfactory.h>
+#include <tdeparts/genericfactory.h>
 
 
 class EmptyMultiPage : public KMultiPage

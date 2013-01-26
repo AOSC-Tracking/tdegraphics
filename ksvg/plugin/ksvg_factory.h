@@ -21,8 +21,8 @@
 #ifndef KSVGFactory_H
 #define KSVGFactory_H
 
-#include <kparts/factory.h>
-#include <kparts/browserextension.h>
+#include <tdeparts/factory.h>
+#include <tdeparts/browserextension.h>
 
 class TDEAboutData;
 class TDEInstance;

@@ -28,8 +28,8 @@
 #include <kapplication.h>
 #include <kaccel.h>
 #include <kurl.h>
-#include <kparts/part.h>
-#include <kparts/browserextension.h>
+#include <tdeparts/part.h>
+#include <tdeparts/browserextension.h>
 #include <tqstringlist.h>
 #include <tqptrlist.h>
 #include <tqvaluelist.h>

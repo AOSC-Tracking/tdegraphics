@@ -227,7 +227,7 @@ libkpovmodelerpart_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 bin_PROGRAMS = kpovmodeler
 
 kpovmodeler_SOURCES = main.cpp
-kpovmodeler_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kpovmodeler_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
 kpovmodeler_LDADD = libkpovmodeler.la
 
 dummy.cpp:

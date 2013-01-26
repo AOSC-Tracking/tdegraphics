@@ -20,7 +20,7 @@
 #include <config.h>
 #endif
 
-#include <kparts/mainwindow.h>
+#include <tdeparts/mainwindow.h>
 
 namespace KPDF
 {

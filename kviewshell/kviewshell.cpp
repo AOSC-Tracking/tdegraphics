@@ -25,7 +25,7 @@
 #include <kstdaction.h>
 #include <kedittoolbar.h>
 #include <kurldrag.h>
-#include <kparts/partmanager.h>
+#include <tdeparts/partmanager.h>
 #include <kmimetype.h>
 
 #include <kprogress.h>

@@ -19,7 +19,7 @@
 #ifndef BROWSER_H
 #define BROWSER_H
 
-#include <kparts/browserextension.h>
+#include <tdeparts/browserextension.h>
 
 namespace KMrml
 {

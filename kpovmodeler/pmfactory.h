@@ -20,7 +20,7 @@
 #ifndef PMFACTORY_H
 #define PMFACTORY_H
 
-#include <kparts/factory.h>
+#include <tdeparts/factory.h>
 
 class TDEAboutData;
 class TDEInstance;

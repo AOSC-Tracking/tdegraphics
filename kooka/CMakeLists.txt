@@ -43,6 +43,6 @@ tde_add_executable( kooka AUTOMOC
     dwmenuaction.cpp kocrbase.cpp kocrgocr.cpp kocrkadmos.cpp
     kadmosocr.cpp ocrword.cpp ocrresedit.cpp kookaprint.cpp
     imgprintdialog.cpp kocrocrad.cpp
-  LINK kscan-shared kparts-shared tdeprint-shared
+  LINK kscan-shared tdeparts-shared tdeprint-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

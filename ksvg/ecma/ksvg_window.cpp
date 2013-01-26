@@ -39,7 +39,7 @@
 #include <SVGPaintImpl.h>
 #include <SVGZoomAndPanImpl.h>
 
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 #include <assert.h>
 #include <kdebug.h>
 #include <tqstylesheet.h>
@@ -70,7 +70,7 @@ using namespace KSVG;
   navigator	KSVG::Window::_Navigator	DontDelete|ReadOnly
   printNode		KSVG::Window::_PrintNode		DontDelete|Function 1
 
-# todo navigator, status/defaultstatus, like in KJS::Window (khtml)
+# todo navigator, status/defaultstatus, like in KJS::Window (tdehtml)
 # todo close
 # todo instancename
 # todo setsrc, getsrc, reload, focus, blur, browsereval, findinstancebyname
@@ -381,7 +381,7 @@ Value WindowFunc::call(ExecState *exec, Object &thisObj, const List &args)
 		}
 		case KSVG::Window::_Prompt:
 		{
-		    // mop: from khtml. do we need that?
+		    // mop: from tdehtml. do we need that?
 		    // part->xmlDocImpl()->updateRendering();
 		    bool ok;
 		    TQString str2;

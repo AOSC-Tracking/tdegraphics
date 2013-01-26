@@ -25,9 +25,9 @@
 #include <kurl.h>
 #include <klibloader.h>
 #include <kmessagebox.h>
-#include <kparts/componentfactory.h>
-#include <kparts/plugin.h>
-#include <kparts/part.h>
+#include <tdeparts/componentfactory.h>
+#include <tdeparts/plugin.h>
+#include <tdeparts/part.h>
 #include <kapplication.h>
 #include <kaction.h>
 #include <kstdaction.h>

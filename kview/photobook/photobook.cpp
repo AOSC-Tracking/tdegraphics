@@ -39,7 +39,7 @@ Copyright (c) 2004,2005 Charles Samuels <charles@kde.org>
 
 #include "photobook.h"
 
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 #include <kaction.h>
 #include <kstdaccel.h>
 #include <kstandarddirs.h>

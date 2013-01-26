@@ -44,7 +44,7 @@ uses that to implement inverse and forward search functionality. We
 must somehow make sure that even these unusual features fit well into
 our framework without too much of an effort.
 
-* kmultipage
+* tdemultipage
 
 - kviewshell should provide a print dialog (with the extra option that
 certain document formats can insert their own configuration pages). I
@@ -70,7 +70,7 @@ applications that demonstrate how everything works. In particular, we
 should have
 
 * lots of documentation, including API documentation and a tutorial on
-"How to implement a kmultipage"
+"How to implement a tdemultipage"
 
 * an exteremely well-defined reference implementation for a trivial
 file format, either one that is actually useful (kfax, perhaps), or
@@ -87,7 +87,7 @@ KVIEWSHELL APPLICATION
 * improve command line interface. The somewhat antique method of
 giving the library name in the command line should be replaced by a
 more modern method where kviewshell uses some kde wizardy
-(e.g. 'services') so that installed kmultipage implementations can
+(e.g. 'services') so that installed tdemultipage implementations can
 announce what mime type they are supposed to handle, and kvieshell
 then loads them automatically
 

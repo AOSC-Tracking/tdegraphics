@@ -46,7 +46,7 @@
 
 /*
   MODIFICATIONS (zehender)
-  Added kparts ability from kparts/dockmainwindow
+  Added tdeparts ability from tdeparts/dockmainwindow
 */
 
 #define _JOWENN_EXPERIMENTAL_
@@ -74,7 +74,7 @@
 #include "dummykmainwindow.h"
 #endif
 
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 using namespace KParts;
 
 class PMDockSplitter;
@@ -1369,7 +1369,7 @@ protected slots:
     */
    void slotDockWidgetUndocked();
 
-   // kparts/dockmainwindow stuff
+   // tdeparts/dockmainwindow stuff
 protected slots:
 
   /**
@@ -1391,7 +1391,7 @@ protected slots:
 
 protected:
    virtual void createShellGUI( bool create = true );
-   // end kparts/dockmainwindow stuff
+   // end tdeparts/dockmainwindow stuff
 
 protected:
   virtual void virtual_hook( int id, void* data );

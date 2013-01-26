@@ -15,8 +15,8 @@
 #include <ktip.h>
 #include <tqtimer.h>
 
-#include <kparts/part.h>
-#include <kparts/genericfactory.h>
+#include <tdeparts/part.h>
+#include <tdeparts/genericfactory.h>
 
 #include "kdvi_multipage.h"
 #include "documentWidget.h"

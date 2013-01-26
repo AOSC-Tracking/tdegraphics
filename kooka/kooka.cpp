@@ -53,7 +53,7 @@
 #include <kedittoolbar.h>
 #include <kmessagebox.h>
 #include <kdockwidget.h>
-#include <kparts/partmanager.h>
+#include <tdeparts/partmanager.h>
 #include <kstdaccel.h>
 #include <kaction.h>
 #include <kstdaction.h>

@@ -35,8 +35,8 @@
 #include <tqimage.h>
 #include <tqsplitter.h>
 
-#include <kparts/dockmainwindow.h>
-#include <kparts/part.h>
+#include <tdeparts/dockmainwindow.h>
+#include <tdeparts/part.h>
 
 // application specific includes
 #include "kscandevice.h"

@@ -30,13 +30,13 @@ link_directories(
 ##### headers ###################################
 
 install( FILES
-    kmultipageInterface.h
+    tdemultipageInterface.h
   DESTINATION ${INCLUDE_INSTALL_DIR} )
 
 install( FILES
     anchor.h bookmark.h pageView.h documentPageCache.h
     documentRenderer.h documentWidget.h history.h hyperlink.h
-    kmultipage.h length.h pageNumber.h pageSize.h renderedDocumentPage.h
+    tdemultipage.h length.h pageNumber.h pageSize.h renderedDocumentPage.h
     renderedDocumentPagePixmap.h renderedDocumentPagePrinter.h
     selection.h simplePageSize.h textBox.h zoom.h zoomlimits.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kviewshell )
@@ -46,7 +46,7 @@ install( FILES
 
 install( FILES kviewshell.rc DESTINATION ${DATA_INSTALL_DIR}/kviewshell )
 install( FILES kviewerpart.rc DESTINATION ${DATA_INSTALL_DIR}/kviewerpart )
-install( FILES kmultipage.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR} )
+install( FILES tdemultipage.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR} )
 install( FILES emptymultipage.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 install( FILES kviewshell.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 
@@ -67,18 +67,18 @@ tde_add_library( kviewshell STATIC_PIC AUTOMOC
 )
 
 
-##### kmultipage (shared) #######################
+##### tdemultipage (shared) #######################
 
-tde_add_library( kmultipage SHARED AUTOMOC
+tde_add_library( tdemultipage SHARED AUTOMOC
   SOURCES
-    kmultipage.cpp pageView.cpp marklist.cpp kmultipageInterface.skel
+    tdemultipage.cpp pageView.cpp marklist.cpp tdemultipageInterface.skel
     units.cpp pageSize.cpp simplePageSize.cpp renderedDocumentPage.cpp
     renderedDocumentPagePixmap.cpp renderedDocumentPagePrinter.cpp
     documentPageCache.cpp documentWidget.cpp searchWidget.cpp
     selection.cpp documentRenderer.cpp history.cpp kvsprefs.kcfgc
     tableOfContents.cpp kprintDialogPage_pageoptions.cpp
   VERSION 0.0.0
-  LINK kparts-shared tdeprint-shared
+  LINK tdeparts-shared tdeprint-shared
   DESTINATION ${LIB_INSTALL_DIR}
 )
 
@@ -91,7 +91,7 @@ tde_add_kpart( kviewerpart AUTOMOC
     pageSizeDialog.cpp pageSize.cpp sizePreview.cpp zoom.cpp
     units.cpp kvsprefs.kcfgc optionDialogGUIWidget_base.ui
     optionDialogAccessibilityWidget.ui simplePageSize.cpp
-  LINK ifaces-static kparts-shared
+  LINK ifaces-static tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 
@@ -101,7 +101,7 @@ tde_add_kpart( kviewerpart AUTOMOC
 tde_add_executable( kviewshell AUTOMOC
   SOURCES
     main.cpp
-  LINK kviewshell-static kparts-shared
+  LINK kviewshell-static tdeparts-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 
@@ -111,7 +111,7 @@ tde_add_executable( kviewshell AUTOMOC
 tde_add_kpart( emptymultipagepart AUTOMOC
   SOURCES
     empty_multipage.cpp emptyRenderer.cpp
-  LINK kmultipage-shared
+  LINK tdemultipage-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

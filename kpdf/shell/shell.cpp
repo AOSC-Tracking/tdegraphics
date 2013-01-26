@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmenubar.h>
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 #include <kio/netaccess.h>
 #include <kmainwindowiface.h>
 

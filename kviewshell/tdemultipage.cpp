@@ -24,7 +24,7 @@
 #include "tableOfContents.h"
 #include "kprintDialogPage_pageoptions.h"
 #include "kvsprefs.h"
-#include "kmultipage.h"
+#include "tdemultipage.h"
 #include "pageNumber.h"
 #include "renderedDocumentPagePrinter.h"
 #include "searchWidget.h"
@@ -35,13 +35,13 @@
 //#define DEBUG_KMULTIPAGE
 
 KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject *parent, const char *name)
-  : DCOPObject("kmultipage"), KParts::ReadOnlyPart(parent, name)
+  : DCOPObject("tdemultipage"), KParts::ReadOnlyPart(parent, name)
 {
   // For reasons which I don't understand, the initialization of the
   // DCOPObject above does not work properly, the name is ignored. It
   // works fine if we repeat the name here. -- Stefan Kebekus
   // This is because of the virtual inheritance. Get rid of it (but it's BC, and this is a lib...) -- DF
-  setObjId("kmultipage");
+  setObjId("tdemultipage");
 
   parentWdg = parentWidget;
   lastCurrentPage = 0;
@@ -256,7 +256,7 @@ void KMultiPage::slotSetFullPage(bool fullpage)
 void KMultiPage::preferencesChanged()
 {
   // We need to read the config options otherwise the KVSPrefs-object would
-  // not be syncronized between the kviewpart and the kmultipage.
+  // not be syncronized between the kviewpart and the tdemultipage.
   KVSPrefs::self()->readConfig();
 
   slotShowThumbnails(KVSPrefs::showThumbnails());
@@ -1837,7 +1837,7 @@ KPrinter *KMultiPage::getPrinter(bool enablePageSizeFeatures)
   }
   
   // Allocate a new KPrintDialogPage structure and add it to the
-  // printer, if the kmultipage implementation requests that
+  // printer, if the tdemultipage implementation requests that
   if (enablePageSizeFeatures == true) {
     KPrintDialogPage_PageOptions *pageOptions = new KPrintDialogPage_PageOptions();
     if (pageOptions == 0) {
@@ -1973,4 +1973,4 @@ void KMultiPage::slotEnableMoveTool(bool enable)
   emit enableMoveTool(enable);
 }
 
-#include "kmultipage.moc"
+#include "tdemultipage.moc"

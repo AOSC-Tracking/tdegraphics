@@ -49,7 +49,7 @@ tde_add_kpart( libkmrmlpart AUTOMOC
     mrml_part.cpp mrml_view.cpp loader.cpp mrml_elements.cpp
     mrml_creator.cpp browser.cpp algorithmdialog.cpp collectioncombo.cpp
     algorithmcombo.cpp propertysheet.cpp
-  LINK kmrmlstuff-static kparts-shared
+  LINK kmrmlstuff-static tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

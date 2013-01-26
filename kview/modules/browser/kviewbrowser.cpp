@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <kimageviewer/viewer.h>
 #include <kimageviewer/canvas.h>
-#include <kparts/browserextension.h>
+#include <tdeparts/browserextension.h>
 #include <kapplication.h>
 #include <kimageio.h>
 

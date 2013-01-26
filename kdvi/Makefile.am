@@ -30,8 +30,8 @@ kdvipart_la_SOURCES = renderedDviPagePixmap.cpp dviPageCache.cpp \
 kde_kcfg_DATA = kdvi.kcfg
 
 kdvipart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
-kdvipart_la_LIBADD = $(LIBFREETYPE_LIBS) -lkparts \
-			$(top_builddir)/kviewshell/libkmultipage.la
+kdvipart_la_LIBADD = $(LIBFREETYPE_LIBS) -ltdeparts \
+			$(top_builddir)/kviewshell/libtdemultipage.la
 
 # Which sources should be compiled for squeeze.
 squeeze_SOURCES	= squeeze.c
@@ -39,8 +39,8 @@ squeeze_SOURCES	= squeeze.c
 KDE_OPTIONS = nofinal
 
 kdvi_SOURCES = main.cpp 
-kdvi_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
-kdvi_LDADD = ../kviewshell/libifaces.la ../kviewshell/libkviewshell.la -lkparts
+kdvi_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
+kdvi_LDADD = ../kviewshell/libifaces.la ../kviewshell/libkviewshell.la -ltdeparts
 
 ## this option you can leave out. Just, if you use "make dist", you need it
 noinst_HEADERS = dvi.h dviRenderer.h xdvi.h

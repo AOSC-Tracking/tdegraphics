@@ -32,6 +32,6 @@ install( FILES
 tde_add_library( kimageviewer SHARED AUTOMOC
   SOURCES canvas.cpp viewer.cpp
   VERSION 0.0.0
-  LINK kparts-shared
+  LINK tdeparts-shared
   DESTINATION ${LIB_INSTALL_DIR}
 )

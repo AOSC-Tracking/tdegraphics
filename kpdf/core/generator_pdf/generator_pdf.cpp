@@ -20,7 +20,7 @@
 #include <klistview.h>
 #include <klocale.h>
 #include <kpassdlg.h>
-#include <kwallet.h>
+#include <tdewallet.h>
 #include <kprinter.h>
 #include <ktempfile.h>
 #include <kmessagebox.h>

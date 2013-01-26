@@ -47,7 +47,7 @@ tde_add_library( kghostviewlib SHARED AUTOMOC
     displayoptions.cpp kpswidget.cpp fullscreenfilter.cpp
     kgvfactory.cpp  generalsettingswidget.ui gssettingswidget.ui
     thumbnailservice.cpp  configuration.kcfgc
-  LINK dscparse-static tdeprint-shared kparts-shared
+  LINK dscparse-static tdeprint-shared tdeparts-shared
   VERSION 0.0.0
   DESTINATION ${LIB_INSTALL_DIR}
 )

@@ -74,7 +74,7 @@
 #include <kdockwidget.h>
 #include <tqobject.h>
 
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 #include <tqimage.h>
 #include <kpopupmenu.h>
 

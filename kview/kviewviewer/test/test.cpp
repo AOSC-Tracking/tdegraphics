@@ -8,7 +8,7 @@
 #include <kurl.h>
 #include <klibloader.h>
 #include <kmessagebox.h>
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 #include <kapplication.h>
 
 #include <tqimage.h>

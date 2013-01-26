@@ -24,7 +24,7 @@
 #include <kaction.h>
 #include <kdialogbase.h>
 #include <kfiledialog.h>
-#include <kparts/genericfactory.h>
+#include <tdeparts/genericfactory.h>
 #include <kprinter.h>
 #include <ktempfile.h>
 #include "kvsprefs.h"
@@ -51,7 +51,7 @@ DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQO
                              const char *name, const TQStringList&)
   : KMultiPage(parentWidget, widgetName, parent, name), djvuRenderer(parentWidget)
 {
-  /* This is kparts wizardry that cannot be understood by man. Simply
+  /* This is tdeparts wizardry that cannot be understood by man. Simply
      change the names to match your implementation.  */
   setInstance(DjVuMultiPageFactory::instance());
   djvuRenderer.setName("DjVu renderer");
@@ -73,7 +73,7 @@ DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQO
   connect(renderModeAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(setRenderMode(int)));
 
   /* It is very important that this method is called in the
-     constructor. Otherwise kmultipage does not know how to render
+     constructor. Otherwise tdemultipage does not know how to render
      files, and crashes may result. */
   setRenderer(&djvuRenderer);
 

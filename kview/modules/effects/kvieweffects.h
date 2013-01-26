@@ -5,7 +5,7 @@
 #ifndef KVIEWEFFECTS_H
 #define KVIEWEFFECTS_H
 
-#include <kparts/plugin.h>
+#include <tdeparts/plugin.h>
 #include <tqcolor.h>
 
 namespace KImageViewer { class Viewer; }

@@ -27,7 +27,7 @@ namespace KSVG {
 class SVGDocumentImpl;
 class WindowQObject;
 
-// This is currently a fork of khtml's Window object, simplified.
+// This is currently a fork of tdehtml's Window object, simplified.
 // However in the long run it could become a base class for it.
 // Author: David Faure <faure@kde.org>
 class Window : public KJS::ObjectImp {
