@@ -17,7 +17,7 @@
 */
 
 #include <kstaticdeleter.h>
-#include <kio/scheduler.h>
+#include <tdeio/scheduler.h>
 
 #include "loader.h"
 

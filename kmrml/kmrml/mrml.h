@@ -20,7 +20,7 @@
 #define MRML_H
 
 
-#include <kio/tcpslavebase.h>
+#include <tdeio/tcpslavebase.h>
 #include <kurl.h>
 
 #include <kmrml_config.h>

@@ -19,7 +19,7 @@
 #include "pmdefaults.h"
 #include "pmdebug.h"
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 double PMControlPoint::s_moveGrid = c_defaultMoveGrid;
 double PMControlPoint::s_scaleGrid = c_defaultScaleGrid;

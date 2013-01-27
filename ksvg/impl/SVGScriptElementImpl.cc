@@ -20,7 +20,7 @@
 
 #include <kdebug.h>
 
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kfilterdev.h>
 #include <tqbuffer.h>
 

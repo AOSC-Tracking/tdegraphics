@@ -26,9 +26,9 @@
 #include <tqlabel.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 #include "pmlineedits.h"
 #include "pmdialogeditbase.h"

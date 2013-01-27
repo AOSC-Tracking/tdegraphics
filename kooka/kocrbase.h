@@ -28,7 +28,7 @@
 #define KOCRBASE_H
 
 #include <kdialogbase.h>
-#include <kio/previewjob.h>
+#include <tdeio/previewjob.h>
 #include <tqimage.h>
 #include <tqstring.h>
 

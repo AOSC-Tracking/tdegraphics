@@ -35,7 +35,7 @@
 #include <tqvbox.h>
 #include <tqlistview.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kiconloader.h>
 
 //#define KPM_WITH_OBJECT_LIBRARY

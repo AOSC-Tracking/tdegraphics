@@ -21,7 +21,7 @@
 
 #include <kaction.h>
 #include <kapplication.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconloader.h>
 #include <klibloader.h>
 #include <klocale.h>

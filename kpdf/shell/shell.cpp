@@ -23,7 +23,7 @@
 #include <kaction.h>
 #include <kapplication.h>
 #include <kedittoolbar.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <klibloader.h>
 #include <kmessagebox.h>
 #include <kstdaction.h>
@@ -32,7 +32,7 @@
 #include <klocale.h>
 #include <kmenubar.h>
 #include <tdeparts/componentfactory.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kmainwindowiface.h>
 
 // local includes

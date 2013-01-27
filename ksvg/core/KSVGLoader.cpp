@@ -25,9 +25,9 @@
 
 #include <kurl.h>
 #include <kdebug.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kfilterdev.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 
 #include "SVGDocumentImpl.h"
 #include "SVGSVGElementImpl.h"

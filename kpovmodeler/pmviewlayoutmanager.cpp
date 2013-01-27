@@ -20,7 +20,7 @@
 #include "pmviewlayoutmanager.h"
 #include "pmdockwidget_private.h"
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kfilterdev.h>

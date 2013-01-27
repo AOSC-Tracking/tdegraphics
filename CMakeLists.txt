@@ -44,9 +44,9 @@ tde_setup_paths( )
 
 option( WITH_T1LIB "Enable t1lib support" OFF )
 option( WITH_PAPER "Enable libpaper support" OFF )
-OPTION( WITH_TIFF "Enable tiff support (kfile-plugins)" OFF )
-OPTION( WITH_OPENEXR "Enable openexr support (kfile-plugins)" OFF )
-OPTION( WITH_PDF "Enable pdf support (kfile-plugins)" OFF )
+OPTION( WITH_TIFF "Enable tiff support (tdefile-plugins)" OFF )
+OPTION( WITH_OPENEXR "Enable openexr support (tdefile-plugins)" OFF )
+OPTION( WITH_PDF "Enable pdf support (tdefile-plugins)" OFF )
 
 
 ##### options comments ##########################
@@ -60,9 +60,9 @@ OPTION( WITH_PDF "Enable pdf support (kfile-plugins)" OFF )
 # WITH_PAPER   affects kpdf
 # WITH_PAPER   description this library is only used to set some default
 #                          parameters of paper according to system settings.
-# WITH_TIFF    affects kfile-plugins(tiff)
-# WITH_OPENEXR affects kfile-plugins(exr)
-# WITH_PDF     affects kfile-plugins(pdf dependencies/poppler-tqt)
+# WITH_TIFF    affects tdefile-plugins(tiff)
+# WITH_OPENEXR affects tdefile-plugins(exr)
+# WITH_PDF     affects tdefile-plugins(pdf dependencies/poppler-tqt)
 
 # NOTE: It seems that libtiff was planned to be used in
 #       kviewshell(plugins/djvu) but isn't yet implemented
@@ -77,7 +77,7 @@ option( BUILD_KCOLOREDIT "Build kcoloredit" ${BUILD_ALL} )
 option( BUILD_KDVI "Build kdvi" ${BUILD_ALL} )
 option( BUILD_KFAX "Build kfax" ${BUILD_ALL} )
 option( BUILD_KFAXVIEW "Build kfaxview" ${BUILD_ALL} )
-option( BUILD_KFILE_PLUGINS "Build kfile-plugins" ${BUILD_ALL} )
+option( BUILD_KFILE_PLUGINS "Build tdefile-plugins" ${BUILD_ALL} )
 option( BUILD_KGAMMA "Build kgamma" ${BUILD_ALL} )
 option( BUILD_KGHOSTVIEW "Build kghostview" ${BUILD_ALL} )
 option( BUILD_KICONEDIT "Build kiconedit" ${BUILD_ALL} )
@@ -113,7 +113,7 @@ set( CMAKE_MODULE_LINKER_FLAGS "-Wl,--no-undefined" )
 
 ##### tdegraphics directories ###################
 
-# kfile-plugins/ps requires dscparse-static library
+# tdefile-plugins/ps requires dscparse-static library
 if( BUILD_KFILE_PLUGINS AND NOT BUILD_KGHOSTVIEW )
   add_subdirectory( kghostview/dscparse )
 endif( )
@@ -124,7 +124,7 @@ tde_conditional_add_subdirectory( BUILD_KCOLOREDIT kcoloredit )
 tde_conditional_add_subdirectory( BUILD_KDVI kdvi )
 tde_conditional_add_subdirectory( BUILD_KFAX kfax )
 tde_conditional_add_subdirectory( BUILD_KFAXVIEW kfaxview )
-tde_conditional_add_subdirectory( BUILD_KFILE_PLUGINS kfile-plugins )
+tde_conditional_add_subdirectory( BUILD_KFILE_PLUGINS tdefile-plugins )
 tde_conditional_add_subdirectory( BUILD_KGAMMA kgamma )
 tde_conditional_add_subdirectory( BUILD_KGHOSTVIEW kghostview )
 tde_conditional_add_subdirectory( BUILD_KICONEDIT kiconedit )

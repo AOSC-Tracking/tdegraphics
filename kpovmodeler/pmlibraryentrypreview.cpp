@@ -37,7 +37,7 @@
 #include <klocale.h>
 #include <kdialog.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :
    TQWidget( parent )

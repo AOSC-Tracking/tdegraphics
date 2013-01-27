@@ -28,7 +28,7 @@
 #include "ocrresedit.h"
 #include "ocrword.h"
 #include <kdebug.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <klocale.h>
 
 #include <tqfile.h>

@@ -22,7 +22,7 @@
 #include <tqmap.h>
 #include <tqdict.h>
 #include <kdebug.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "kscandevice.h"
 #include "kscanoption.h"

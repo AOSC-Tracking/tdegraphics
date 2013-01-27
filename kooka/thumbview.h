@@ -37,9 +37,9 @@
 
 #include <kiconview.h>
 #include <kurl.h>
-#include <kio/previewjob.h>
-#include <kfileitem.h>
-#include <kfileiconview.h>
+#include <tdeio/previewjob.h>
+#include <tdefileitem.h>
+#include <tdefileiconview.h>
 
 /* TDEConfig group definitions */
 #define MARGIN_COLOR1 "MarginColor1"

@@ -22,7 +22,7 @@
 #include <tqcstring.h> // TQByteArray
 #include <tqfile.h>
 
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <tdeparts/browserextension.h>
 #include <krun.h>
 

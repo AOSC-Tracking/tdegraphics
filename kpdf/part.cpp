@@ -44,13 +44,13 @@
 #include <tdeversion.h>
 #include <tdeparts/genericfactory.h>
 #include <kurldrag.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
 #include <kfinddialog.h>
 #include <knuminput.h>
 #include <kiconloader.h>
-#include <kio/netaccess.h>
-#include <kio/job.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/job.h>
 #include <kpopupmenu.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>

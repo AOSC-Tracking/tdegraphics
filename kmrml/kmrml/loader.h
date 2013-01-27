@@ -24,7 +24,7 @@
 #include <tqmap.h>
 #include <tqobject.h>
 
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kurl.h>
 
 class Download

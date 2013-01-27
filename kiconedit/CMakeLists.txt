@@ -37,6 +37,6 @@ tde_add_executable( kiconedit AUTOMOC
     kiconcolors.cpp kcolorgrid.cpp palettetoolbar.cpp
     kicon.cpp kresize.cpp knew.cpp properties.cpp
     kiconeditslots.cpp kiconconfig.cpp
-  LINK kio-shared tdeprint-shared
+  LINK tdeio-shared tdeprint-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

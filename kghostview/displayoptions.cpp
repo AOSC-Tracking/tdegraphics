@@ -19,7 +19,7 @@
 #include <kdebug.h>
 #include <tqregexp.h>
 #include <kcmdlineargs.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 namespace {
 	const double allowedMagnifications[] = {

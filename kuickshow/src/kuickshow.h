@@ -24,7 +24,7 @@
 #include <tqstring.h>
 #include <tqvaluelist.h>
 
-#include <kfileitem.h>
+#include <tdefileitem.h>
 #include <kmainwindow.h>
 #include <kurl.h>
 

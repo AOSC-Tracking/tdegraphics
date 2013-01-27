@@ -36,7 +36,7 @@
 #include <tqbuttongroup.h>
 
 
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kbuttonbox.h>

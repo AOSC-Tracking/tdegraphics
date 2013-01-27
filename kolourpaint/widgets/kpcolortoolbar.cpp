@@ -43,7 +43,7 @@
 #include <kapplication.h>
 #include <kcolordialog.h>
 #include <kcolordrag.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <klocale.h>

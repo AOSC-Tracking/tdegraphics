@@ -34,7 +34,7 @@
 #include <tqvaluevector.h>
 #include <tqrect.h>
 
-#include <kfilemetainfo.h>
+#include <tdefilemetainfo.h>
 
 class KFileItem;
 

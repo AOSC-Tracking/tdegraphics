@@ -28,7 +28,7 @@
 
 #include <kdebug.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <ktempfile.h>
 #include <kprocess.h>

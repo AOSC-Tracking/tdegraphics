@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kpalette.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 #include "main.h"
 #include "palette.h"

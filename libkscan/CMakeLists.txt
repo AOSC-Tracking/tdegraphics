@@ -43,7 +43,7 @@ tde_add_library( kscan SHARED AUTOMOC
     img_canvas.cpp previewer.cpp imgscaledialog.cpp sizeindicator.cpp
     imgscaninfo.cpp
   VERSION 1.0.0
-  LINK kio-shared ${SANE_LIBRARIES}
+  LINK tdeio-shared ${SANE_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
 

@@ -20,7 +20,7 @@
 #include <kstdaction.h>
 #include <kaction.h>
 #include <kstatusbar.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <kedittoolbar.h>

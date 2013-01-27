@@ -20,7 +20,7 @@
 #include <tqfile.h>
 #include <tqtextcodec.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kprocess.h>

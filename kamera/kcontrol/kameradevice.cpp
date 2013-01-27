@@ -32,7 +32,7 @@
 #include <tqgrid.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klistview.h>
 #include <kmessagebox.h>
 #include <kdebug.h>

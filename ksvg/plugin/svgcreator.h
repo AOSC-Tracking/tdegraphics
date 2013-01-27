@@ -22,7 +22,7 @@
 #ifndef __svgcreator_h__
 #define __svgcreator_h__
 
-#include <kio/thumbcreator.h>
+#include <tdeio/thumbcreator.h>
 
 class SVGCreator : public TQObject, public ThumbCreator
 {

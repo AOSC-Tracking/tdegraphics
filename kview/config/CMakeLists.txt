@@ -24,7 +24,7 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES kviewgeneralconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kconfiguredialog )
+install( FILES kviewgeneralconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog )
 install( FILES kview.setdlg DESTINATION ${DATA_INSTALL_DIR}/kview )
 
 

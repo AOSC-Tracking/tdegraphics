@@ -26,8 +26,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kfileitem.h>
-#include <kfileiconview.h>
+#include <tdefileitem.h>
+#include <tdefileiconview.h>
 
 #include "thumbview.h"
 #include "thumbviewitem.h"

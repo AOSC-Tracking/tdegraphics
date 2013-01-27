@@ -21,7 +21,7 @@
 #include <krun.h>
 #include <kdebug.h>
 #include <kaction.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <klocale.h>
 #include <ktempfile.h>
 #include <ksimpleconfig.h>

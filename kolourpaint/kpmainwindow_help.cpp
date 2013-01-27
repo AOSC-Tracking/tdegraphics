@@ -32,7 +32,7 @@
 #include <kaction.h>
 #include <kactivelabel.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kdialogbase.h>
 #include <krun.h>
@@ -205,7 +205,7 @@ void kpMainWindow::slotHelpTakingScreenshotsFollowLink (const TQString &link)
 
     if (link == "configure kde shortcuts")
     {
-        KRun::runCommand ("kcmshell keys");
+        KRun::runCommand ("tdecmshell keys");
     }
     else if (link == "run ksnapshot")
     {

@@ -23,7 +23,7 @@
 #include <tqlabel.h>
 #include <tqtextedit.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 
 TQSize PMErrorDialog::s_size = TQSize( 150, 200 );

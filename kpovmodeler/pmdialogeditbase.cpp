@@ -26,7 +26,7 @@
 #include <tqbuffer.h>
 #include <tqptrdict.h>
 #include <kdialog.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 

@@ -33,7 +33,7 @@
 
 #include <kcursor.h>
 #include <kdebug.h>
-#include <kfilemetainfo.h>
+#include <tdefilemetainfo.h>
 #include <kimageio.h>
 
 #include "filecache.h"

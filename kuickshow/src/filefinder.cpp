@@ -19,7 +19,7 @@
 #include <tqkeycode.h>
 
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobal.h>
 #include <kcompletionbox.h>
 #include <kurlcompletion.h>

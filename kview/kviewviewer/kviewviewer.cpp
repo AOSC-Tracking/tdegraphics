@@ -37,9 +37,9 @@
 #include <kpushbutton.h>
 #include <kpassivepopup.h>
 #include <kdebug.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kxmlguifactory.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <tdeparts/genericfactory.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/plugin.h>

@@ -34,10 +34,10 @@
 #include <tqdragobject.h>
 #include <tqmap.h>
 #include <klistview.h>
-#include <kio/job.h>
-#include <kio/global.h>
-#include <kio/file.h>
-#include <kfiletreeview.h>
+#include <tdeio/job.h>
+#include <tdeio/global.h>
+#include <tdeio/file.h>
+#include <tdefiletreeview.h>
 
 
 /**

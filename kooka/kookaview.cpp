@@ -59,7 +59,7 @@
 #include <krun.h>
 #include <kapplication.h>
 #include <kstatusbar.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <ktrader.h>
 #include <klibloader.h>

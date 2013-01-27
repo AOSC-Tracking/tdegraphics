@@ -22,7 +22,7 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES kviewpluginsconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR}/kconfiguredialog )
+install( FILES kviewpluginsconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog )
 
 
 ##### kcm_kviewpluginsconfig (module) ###########

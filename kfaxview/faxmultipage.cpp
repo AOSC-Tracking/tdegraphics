@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <tdeparts/genericfactory.h>
 
 #include "faxmultipage.h"

@@ -37,7 +37,7 @@
 #include <tqvbox.h>
 
 #include <kcolorbutton.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdialog.h>
 #include <kdebug.h>
 #include <kglobal.h>

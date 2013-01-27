@@ -45,26 +45,26 @@
 #include <tqstringlist.h>
 #include <tqheader.h>
 
-#include <kfiletreeview.h>
-#include <kfiletreeviewitem.h>
-#include <kfiletreebranch.h>
+#include <tdefiletreeview.h>
+#include <tdefiletreeviewitem.h>
+#include <tdefiletreebranch.h>
 
 #include <kurldrag.h>
 #include <kpopupmenu.h>
 #include <kaction.h>
 #include <kinputdialog.h>
 #include <kiconloader.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kurl.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <kio/global.h>
-#include <kio/progressbase.h>
-#include <kio/netaccess.h>
-#include <kio/jobclasses.h>
-#include <kio/file.h>
-#include <kio/job.h>
+#include <tdeio/global.h>
+#include <tdeio/progressbase.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/jobclasses.h>
+#include <tdeio/file.h>
+#include <tdeio/job.h>
 
 #define STARTUP_FIRST_START "firstStart"
 
@@ -630,7 +630,7 @@ void ScanPackager::loadImageForItem( KFileTreeViewItem *item )
    }
 }
 
-/* Hit this slot with a file for a kfiletreeviewitem. */
+/* Hit this slot with a file for a tdefiletreeviewitem. */
 void ScanPackager::slImageArrived( KFileTreeViewItem *item, KookaImage* image )
 {
    if( item && image )
@@ -892,7 +892,7 @@ KFileTreeViewItem *ScanPackager::spFindItem( SearchType type, const TQString nam
 {
    /* Prepare a list of branches to go through. If the parameter branch is set, search
     * only in the parameter branch. If it is zero, search all branches returned by
-    * kfiletreeview.branches()
+    * tdefiletreeview.branches()
     */
    KFileTreeBranchList branchList;
 

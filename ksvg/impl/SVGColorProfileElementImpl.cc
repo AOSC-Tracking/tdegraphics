@@ -20,7 +20,7 @@
 
 #include <kurl.h>
 #include <kdebug.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 
 #include <tqimage.h>
 

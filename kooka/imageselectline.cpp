@@ -35,7 +35,7 @@
 #include <klocale.h>
 #include <kurl.h>
 #include <kurlcombobox.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconloader.h>
 
 #include "imageselectline.h"

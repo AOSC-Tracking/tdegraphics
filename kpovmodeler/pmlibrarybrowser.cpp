@@ -25,10 +25,10 @@
 #include <tqtimer.h>
 #include <tqpushbutton.h>
 
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kurl.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
 #include <kdiroperator.h>

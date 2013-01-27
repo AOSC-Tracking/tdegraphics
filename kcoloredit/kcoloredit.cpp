@@ -23,11 +23,11 @@
 // include files for KDE
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmenubar.h>
 #include <klocale.h>
 #include <kcolordialog.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 
 // application specific includes

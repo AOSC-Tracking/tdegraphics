@@ -4,9 +4,9 @@
 #include <kaboutdialog.h>
 #include <kapplication.h>
 #include <kbugreport.h>
-#include <kconfigdialog.h>
+#include <tdeconfigdialog.h>
 #include <kdebug.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kmessagebox.h>

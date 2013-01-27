@@ -21,8 +21,8 @@
 
 #include <tqfileinfo.h>
 
-#include <kconfig.h>
-#include <kfiledialog.h>
+#include <tdeconfig.h>
+#include <tdefiledialog.h>
 #include <kfilterdev.h>
 #include <kinstance.h>
 #include <kmessagebox.h>
@@ -30,7 +30,7 @@
 #include <kprinter.h>
 #include <kprocess.h>
 #include <ktempfile.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <klocale.h>
 #include <kdebug.h>
 

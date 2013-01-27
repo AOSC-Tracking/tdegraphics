@@ -35,7 +35,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconloader.h>
 
 PMImageMapEdit::PMImageMapEdit( TQWidget* parent, const char* name )

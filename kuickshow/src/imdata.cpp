@@ -18,7 +18,7 @@
 
 #include <stdlib.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "imdata.h"
 

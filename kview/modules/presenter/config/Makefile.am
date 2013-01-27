@@ -9,7 +9,7 @@ kcm_kviewpresenterconfig_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 kcm_kviewpresenterconfig_la_LIBADD = $(LIB_KUTILS)
 
 kcm_kviewpresenterconfig_DATA = kviewpresenterconfig.desktop
-kcm_kviewpresenterconfigdir = $(kde_servicesdir)/kconfiguredialog
+kcm_kviewpresenterconfigdir = $(kde_servicesdir)/tdeconfiguredialog
 
 METASOURCES = AUTO
 

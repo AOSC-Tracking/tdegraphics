@@ -37,7 +37,7 @@ install( FILES mrml-servicemenu.desktop DESTINATION ${DATA_INSTALL_DIR}/konquero
 
 tde_add_kpart( kio_mrml AUTOMOC
   SOURCES mrml.cpp
-  LINK kmrmlstuff-static kio-shared
+  LINK kmrmlstuff-static tdeio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

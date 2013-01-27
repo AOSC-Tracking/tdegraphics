@@ -23,7 +23,7 @@
 #include <kprocess.h>
 #include <kmessagebox.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kurl.h>
 #include <ktempfile.h>
 #include <tqcolor.h>

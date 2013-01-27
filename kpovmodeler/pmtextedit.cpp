@@ -27,7 +27,7 @@
 #include <tqpushbutton.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 PMTextEdit::PMTextEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

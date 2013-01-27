@@ -40,7 +40,7 @@ Copyright (c) 2004 Charles Samuels <charles@kde.org>
 #define PHOTOBOOK_H
 
 #include <tqsplitter.h>
-#include <kfileiconview.h>
+#include <tdefileiconview.h>
 #include <kdirlister.h>
 
 #include <tdeparts/part.h>

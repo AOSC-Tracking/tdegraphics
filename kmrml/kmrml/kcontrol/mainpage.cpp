@@ -36,8 +36,8 @@
 
 #include <tdeversion.h>
 #include <kdebug.h>
-#include <kio/slaveconfig.h>
-#include <kio/ioslave_defaults.h> // MAX_PORT_VALUE
+#include <tdeio/slaveconfig.h>
+#include <tdeio/ioslave_defaults.h> // MAX_PORT_VALUE
 
 #include "serverconfigwidget.h"
 #include "mainpage.h"

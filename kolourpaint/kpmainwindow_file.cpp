@@ -37,13 +37,13 @@
 #include <dcopclient.h>
 #include <kapplication.h>
 #include <kaction.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconloader.h>
 #include <kimagefilepreview.h>
 #include <kimageio.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprinter.h>

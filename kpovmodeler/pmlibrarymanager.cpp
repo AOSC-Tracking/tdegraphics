@@ -17,7 +17,7 @@
 
 #include "pmlibrarymanager.h"
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <kglobal.h>
 

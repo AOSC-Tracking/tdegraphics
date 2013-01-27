@@ -32,7 +32,7 @@ tdegraphics is a collection of graphic oriented applications:
 * kfaxview
     An embeddable KPart to display tiffed fax images.
 
-* kfile-plugins
+* tdefile-plugins
     Provide meta information for graphic files.
 
 * kghostview

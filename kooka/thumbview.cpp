@@ -30,11 +30,11 @@
 #include <tqpixmap.h>
 #include <tqpainter.h>
 
-#include <kio/previewjob.h>
+#include <tdeio/previewjob.h>
 #include <kdebug.h>
-#include <kfileitem.h>
-#include <kfileiconview.h>
-#include <kfiletreeviewitem.h>
+#include <tdefileitem.h>
+#include <tdefileiconview.h>
+#include <tdefiletreeviewitem.h>
 #include <kimageeffect.h>
 #include <kglobal.h>
 #include <kstandarddirs.h>

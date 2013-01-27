@@ -22,7 +22,7 @@
 
 #include <klocale.h>
 #include <kglobalsettings.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 

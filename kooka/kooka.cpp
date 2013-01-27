@@ -42,9 +42,9 @@
 #include <kiconloader.h>
 #include <kmenubar.h>
 #include <kaccel.h>
-#include <kio/netaccess.h>
-#include <kfiledialog.h>
-#include <kconfig.h>
+#include <tdeio/netaccess.h>
+#include <tdefiledialog.h>
+#include <tdeconfig.h>
 #include <kprinter.h>
 #include <kstatusbar.h>
 #include <kurl.h>

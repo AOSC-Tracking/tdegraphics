@@ -32,15 +32,15 @@
 
 // include files for KDE
 #include <kiconloader.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstdaction.h>
 #include <kaction.h>
 #include <kmessagebox.h>
 #include <ktempfile.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kstandarddirs.h>
 #include <kfilterdev.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 // application specific includes
 #include "pmpart.h"

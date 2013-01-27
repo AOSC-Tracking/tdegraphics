@@ -17,7 +17,7 @@
 
 #include "pmdocumentationmap.h"
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 
 #include <tqfile.h>

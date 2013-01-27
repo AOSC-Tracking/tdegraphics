@@ -30,9 +30,9 @@
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
-#include <kfiledialog.h>
-#include <kio/job.h>
-#include <kio/netaccess.h>
+#include <tdefiledialog.h>
+#include <tdeio/job.h>
+#include <tdeio/netaccess.h>
 #include <klocale.h>
 #include <kprinter.h>
 #include <kprocess.h>

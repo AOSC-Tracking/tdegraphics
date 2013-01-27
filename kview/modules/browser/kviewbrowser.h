@@ -21,7 +21,7 @@
 #define __kviewbrowser_h
 
 #include <tdeparts/plugin.h>
-#include <kfileitem.h>
+#include <tdefileitem.h>
 
 namespace KImageViewer { class Viewer; }
 

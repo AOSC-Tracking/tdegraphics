@@ -24,7 +24,7 @@
 #include <tqdir.h>
 
 #include <kurl.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 

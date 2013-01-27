@@ -31,6 +31,6 @@ install( FILES kamera.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 
 tde_add_kpart( kcm_kamera SHARED AUTOMOC
   SOURCES kamera.cpp kameradevice.cpp kameraconfigdialog.cpp
-  LINK kio-shared ${GPHOTO2_LIBRARIES}
+  LINK tdeio-shared ${GPHOTO2_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

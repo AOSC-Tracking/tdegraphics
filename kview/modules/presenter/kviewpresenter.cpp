@@ -39,11 +39,11 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <knuminput.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kimageio.h>
 #include <kimageviewer/viewer.h>
 #include <kimageviewer/canvas.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kmessagebox.h>
 #include <ktempfile.h>
 #include <kurldrag.h>

@@ -59,7 +59,7 @@ messages: rc.cpp
 	$(XGETTEXT) *.cpp *.h -o $(podir)/kghostview.pot
 
 
-updatedir = $(kde_datadir)/kconf_update
+updatedir = $(kde_datadir)/tdeconf_update
 update_DATA = kghostview.upd
 update_SCRIPTS = update-to-xt-names.pl
 

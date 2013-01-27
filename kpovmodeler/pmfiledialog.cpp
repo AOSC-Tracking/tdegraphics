@@ -19,7 +19,7 @@
 #include "pmfiledialog.h"
 #include "pmpart.h"
 
-#include <kfilefiltercombo.h>
+#include <tdefilefiltercombo.h>
 
 
 PMFileDialog::PMFileDialog( const TQString& startDir, const TQString& filter, TQWidget* parent, const char* name, bool modal )

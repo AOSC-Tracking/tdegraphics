@@ -24,7 +24,7 @@ link_directories(
 
 install( FILES
     kviewcanvasconfig.desktop
-  DESTINATION ${SERVICES_INSTALL_DIR}/kconfiguredialog )
+  DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog )
 
 
 ##### kcm_kviewcanvasconfig (module) ############

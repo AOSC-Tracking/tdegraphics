@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <kgenericfactory.h>
 #include <ksettings/dispatcher.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #define KIMAGECANVAS_WIPESIZE 5
 

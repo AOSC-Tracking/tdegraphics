@@ -48,6 +48,6 @@ tde_add_kpart( kfaxviewpart AUTOMOC
 
 tde_add_executable( kfaxview AUTOMOC
   SOURCES main.cpp
-  LINK kviewshell-static kio-shared tdeparts-shared
+  LINK kviewshell-static tdeio-shared tdeparts-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

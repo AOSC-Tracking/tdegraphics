@@ -256,9 +256,9 @@
     <include location="global" impldecl="in declaration">kdialog.h</include>
     <include location="global" impldecl="in implementation">kdebug.h</include>
     <include location="global" impldecl="in implementation">kimageviewer/viewer.h</include>
-    <include location="global" impldecl="in implementation">kio/netaccess.h</include>
+    <include location="global" impldecl="in implementation">tdeio/netaccess.h</include>
     <include location="global" impldecl="in implementation">kurl.h</include>
-    <include location="global" impldecl="in implementation">kfiledialog.h</include>
+    <include location="global" impldecl="in implementation">tdefiledialog.h</include>
     <include location="global" impldecl="in implementation">tqstring.h</include>
     <include location="global" impldecl="in implementation">kmessagebox.h</include>
     <include location="local" impldecl="in implementation">imagelistitem.h</include>

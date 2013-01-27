@@ -43,7 +43,7 @@
 #include <tqpointarray.h>
 #include <tqrect.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>

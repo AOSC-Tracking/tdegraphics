@@ -26,7 +26,7 @@
 
 #include <kdebug.h>
 #include <kurl.h>
-#include <kfileitem.h>
+#include <tdefileitem.h>
 
 #include "kookaimage.h"
 #include "config.h"

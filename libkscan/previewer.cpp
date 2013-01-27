@@ -43,7 +43,7 @@
 #include "kscandevice.h"
 #include <tqslider.h>
 #include <tqcheckbox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <tqbuttongroup.h>
 #include <tqvbuttongroup.h>
 #include <kmessagebox.h>

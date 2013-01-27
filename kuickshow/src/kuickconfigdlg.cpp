@@ -26,7 +26,7 @@
 #include <tqvbox.h>
 
 #include <kaccel.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobal.h>
 #include <klocale.h>
 

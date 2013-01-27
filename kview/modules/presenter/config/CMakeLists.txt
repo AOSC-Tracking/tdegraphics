@@ -24,7 +24,7 @@ link_directories(
 
 install( FILES
     kviewpresenterconfig.desktop
-  DESTINATION ${SERVICES_INSTALL_DIR}/kconfiguredialog )
+  DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog )
 
 
 ##### kcm_kviewpresenterconfig (module) #########

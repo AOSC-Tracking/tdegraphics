@@ -29,7 +29,7 @@
 #include <kaction.h>
 #include <kdebug.h>
 #include <keditcl.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <tqapplication.h>

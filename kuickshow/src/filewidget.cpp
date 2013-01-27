@@ -93,7 +93,7 @@ void FileWidget::initActions()
     if ( coll->action("kuick_delete") )
         menu->insert( coll->action("kuick_delete"), 9 );
 
-    // properties dialog is now in kfile, but not at the right position,
+    // properties dialog is now in tdefile, but not at the right position,
     // so we move it to the real bottom
     menu->remove( coll->action( "properties" ) );
 

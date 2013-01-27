@@ -33,7 +33,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdialog.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 PMPaletteValueEdit::PMPaletteValueEdit( TQWidget* parent, const char* name ) 
       : TQWidget( parent, name )

@@ -6,7 +6,7 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <klocale.h>
 #include <tqfile.h>
 #include <tqlabel.h>

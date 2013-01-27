@@ -28,7 +28,7 @@
 #include <tqwidgetstack.h>
 
 #include <kstandarddirs.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kprocess.h>

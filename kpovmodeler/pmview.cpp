@@ -21,7 +21,7 @@
 #include <tqsplitter.h>
 #include <tqlayout.h>
 #include <tqlabel.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdialog.h>
 #include <klocale.h>
 

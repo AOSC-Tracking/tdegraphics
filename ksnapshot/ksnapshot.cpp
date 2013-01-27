@@ -13,13 +13,13 @@
 
 #include <klocale.h>
 #include <kimageio.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kimagefilepreview.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kprinter.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <ksavefile.h>
 #include <ktempfile.h>
 

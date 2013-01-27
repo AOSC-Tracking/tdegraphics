@@ -43,14 +43,14 @@
 #include <kaboutdata.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
-#include <kfiledialog.h>
-#include <kfilemetainfo.h>
+#include <tdefiledialog.h>
+#include <tdefilemetainfo.h>
 #include <kstdaccel.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <kcmdlineargs.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <knotifyclient.h>
 #include <ktempfile.h>
 #include <kstdaction.h>
@@ -60,7 +60,7 @@
 #include <kaction.h>
 #include <kprocess.h>
 #include <kprinter.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kdebug.h>
 
 #include "faxexpand.h"

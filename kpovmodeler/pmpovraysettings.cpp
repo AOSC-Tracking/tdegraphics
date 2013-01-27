@@ -33,7 +33,7 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )

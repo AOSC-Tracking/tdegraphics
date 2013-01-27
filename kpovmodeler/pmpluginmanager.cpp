@@ -26,7 +26,7 @@
 
 #include <tdeparts/plugin.h>
 #include <kxmlguifactory.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 PMPluginManager* PMPluginManager::s_pInstance = 0;
 KStaticDeleter<PMPluginManager> PMPluginManager::s_staticDeleter;

@@ -10,7 +10,7 @@
 #ifndef _PREFERENCESDIALOG_H
 #define _PREFERENCESDIALOG_H
 
-#include <kconfigdialog.h>
+#include <tdeconfigdialog.h>
 #include "conf/settings.h"
 
 class TQWidget;

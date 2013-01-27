@@ -28,11 +28,11 @@
 #include <tqlabel.h>
 #include <tqfileinfo.h>
 #include <tqtooltip.h>
-#include <kio/job.h>
-#include <kio/previewjob.h>
+#include <tdeio/job.h>
+#include <tdeio/previewjob.h>
 
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobal.h>
 #include <kdebug.h>
 #include <klocale.h>
@@ -50,7 +50,7 @@
 
 #include <kscanslider.h>
 #include <kstandarddirs.h>
-#include <kfilemetainfo.h>
+#include <tdefilemetainfo.h>
 #include <ksconfig.h>
 #include <tqstringlist.h>
 #include <tqcolor.h>

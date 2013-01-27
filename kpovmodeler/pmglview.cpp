@@ -38,7 +38,7 @@
 
 #include <kxmlguifactory.h>
 #include <kaction.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstaticdeleter.h>
 #include <klocale.h>
 #include <kiconloader.h>

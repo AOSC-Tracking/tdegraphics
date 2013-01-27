@@ -23,7 +23,7 @@
 
 #include <kpopupmenu.h>
 #include <kstdaction.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdebug.h>

@@ -25,7 +25,7 @@
 
 #include <kaction.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kdirwatch.h>
 #include <kglobalsettings.h>
@@ -36,7 +36,7 @@
 #include <kstdaction.h>
 #include <kstdaccel.h>
 #include <ktempfile.h>
-#include <kio/scheduler.h>
+#include <tdeio/scheduler.h>
 #include <kaboutdata.h>
 
 

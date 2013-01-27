@@ -37,14 +37,14 @@
 #include <tqtimer.h>
 
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kcursor.h>
 #include <kdebug.h>
 #include <tdeversion.h>
 #ifdef KDE_USE_FINAL
 #undef Unsorted
 #endif
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconloader.h>
 #include <kimageeffect.h>
 #include <klocale.h>
@@ -59,7 +59,7 @@
 #include <twin.h>
 #include <netwm.h>
 #include <kurldrag.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 
 #include "filecache.h"
 #include "imagewindow.h"

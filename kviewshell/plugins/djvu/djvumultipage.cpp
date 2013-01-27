@@ -23,7 +23,7 @@
 
 #include <kaction.h>
 #include <kdialogbase.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <tdeparts/genericfactory.h>
 #include <kprinter.h>
 #include <ktempfile.h>

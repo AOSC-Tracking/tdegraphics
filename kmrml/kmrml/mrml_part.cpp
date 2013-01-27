@@ -30,15 +30,15 @@
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <kcombobox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdatastream.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kinstance.h>
-#include <kio/job.h>
-#include <kio/jobclasses.h>
+#include <tdeio/job.h>
+#include <tdeio/jobclasses.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
 #include <kprotocolinfo.h>
@@ -284,7 +284,7 @@ bool MrmlPart::openURL( const KURL& url )
                                             "kmrml_ask_configure_gift" )
                  == KMessageBox::Yes )
             {
-                TDEApplication::tdeinitExec( "kcmshell",
+                TDEApplication::tdeinitExec( "tdecmshell",
                                            TQString::fromLatin1("kcmkmrml"));
                 setStatus( NeedCollection );
                 return false;

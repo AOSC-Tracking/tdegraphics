@@ -23,7 +23,7 @@
 
 #include <dom/dom_string.h>
 
-#include <kio/jobclasses.h>
+#include <tdeio/jobclasses.h>
 
 #include <tqobject.h>
 

@@ -18,7 +18,7 @@
 // $Id$
 
 #include "kmyfileitemlist.h"
-#include <kfileitem.h>
+#include <tdefileitem.h>
 
 KMyFileItemList::KMyFileItemList() {}
 KMyFileItemList::KMyFileItemList( const TQPtrList<KFileItem> & l ) : TQPtrList<KFileItem>( l ) {}

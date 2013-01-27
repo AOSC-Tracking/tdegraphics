@@ -33,7 +33,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kfiletreebranch.h>
+#include <tdefiletreebranch.h>
 
 #include "imgnamecombo.h"
 #include "img_saver.h"

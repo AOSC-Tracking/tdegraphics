@@ -34,7 +34,7 @@
 #include <kactioncollection.h>
 #include <kpopupmenu.h>
 #include <klocale.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kimageeffect.h>
 #include <kimageio.h>
 #include <kapplication.h>

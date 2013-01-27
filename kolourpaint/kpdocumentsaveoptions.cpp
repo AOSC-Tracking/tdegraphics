@@ -33,7 +33,7 @@
 #include <tqpixmap.h>
 #include <tqstring.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kglobal.h>
 

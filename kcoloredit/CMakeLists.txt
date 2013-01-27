@@ -43,7 +43,7 @@ tde_add_executable( kcoloredit AUTOMOC
     kxycolorselector.cpp paletteview.cpp paletteviewscrolledarea.cpp
     editablestreamhistory.cpp color.cpp palette.cpp loadpalettedlg.cpp
     kcoloreditview.cpp kcoloreditdoc.cpp kcoloredit.cpp main.cpp
-  LINK kio-shared
+  LINK tdeio-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 

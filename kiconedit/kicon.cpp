@@ -23,8 +23,8 @@
 #include <tqimage.h>
 
 #include <kmessagebox.h>
-#include <kfiledialog.h>
-#include <kio/netaccess.h>
+#include <tdefiledialog.h>
+#include <tdeio/netaccess.h>
 #include <kimageio.h>
 #include <kdebug.h>
 #include <klocale.h>

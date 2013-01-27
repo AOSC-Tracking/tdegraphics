@@ -29,9 +29,9 @@
 #include <tqcombobox.h>
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmessagebox.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 #include "pmlineedits.h"
 

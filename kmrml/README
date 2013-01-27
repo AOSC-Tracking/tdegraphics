@@ -2,7 +2,7 @@ kio_mrml and mrml_part
 
 Carsten Pfeiffer <pfeiffer@kde.org>                     2001/05/03
 ----------------------------------------------------------------------
-These are the sources for an mrml kioslave and an accompanying KPart.
+These are the sources for an mrml tdeioslave and an accompanying KPart.
 
 
 How does it work in Konqueror?

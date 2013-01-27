@@ -3,9 +3,9 @@
 #include <kaction.h>
 #include <kapplication.h>
 #include <kdebug.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconloader.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprinter.h>

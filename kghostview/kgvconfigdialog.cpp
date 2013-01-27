@@ -21,7 +21,7 @@
 
 #include <tqlayout.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kiconloader.h>
@@ -30,7 +30,7 @@
 #include <kmessagebox.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
-#include <kconfigdialog.h>
+#include <tdeconfigdialog.h>
 
 #include "configuration.h"
 #include "kgv_view.h"
@@ -75,7 +75,7 @@ namespace {
     /* On a related note:
      * We don't detect upgrades (or downgrades, for that matter) of gs.
      * I am seeing if I can get the version out of gs as a side effect to displaying a file.
-     * This way, using kconfig:/Ghostscript/GS Version we will see whether the version has changed
+     * This way, using tdeconfig:/Ghostscript/GS Version we will see whether the version has changed
      * and trigger a redetection without the trouble of running "gs --version" on each launch.
      *
      * LPC (9 April 2003)

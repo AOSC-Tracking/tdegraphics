@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <kdialog.h>
 #include <kglobal.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kgenericfactory.h>
 #include <tqwhatsthis.h>
 

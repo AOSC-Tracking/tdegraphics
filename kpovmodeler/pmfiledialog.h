@@ -24,7 +24,7 @@
 #endif
 
 #include "pmiomanager.h"
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 class PMPart;
 

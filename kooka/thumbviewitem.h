@@ -31,9 +31,9 @@
 
 #include <kiconview.h>
 #include <kurl.h>
-#include <kio/previewjob.h>
-#include <kfileitem.h>
-#include <kfileiconview.h>
+#include <tdeio/previewjob.h>
+#include <tdefileitem.h>
+#include <tdefileiconview.h>
 
 class KFileTreeViewItem;
 

@@ -24,7 +24,7 @@
 #include <tqradiobutton.h>
 #include <tqpushbutton.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kiconloader.h>

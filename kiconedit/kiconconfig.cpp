@@ -32,7 +32,7 @@
 #include <kapplication.h>
 #include <klocale.h>
 #include <kcolorbutton.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <kurlrequester.h>

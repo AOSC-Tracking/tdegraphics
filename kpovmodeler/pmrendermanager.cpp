@@ -35,7 +35,7 @@
 #include <tqbitmap.h>
 #include <tqimage.h>
 #include <tqpainter.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 
 #include <time.h>

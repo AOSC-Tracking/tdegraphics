@@ -23,9 +23,9 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kimageio.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <ktempfile.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kglobalsettings.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>

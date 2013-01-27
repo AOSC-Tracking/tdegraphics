@@ -29,7 +29,7 @@
 #include <tqlabel.h>
 #include <tqpushbutton.h>
 #include <klocale.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 

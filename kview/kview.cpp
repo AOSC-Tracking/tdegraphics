@@ -32,7 +32,7 @@
 #include <kaction.h>
 #include <kstdaction.h>
 #include <kimageio.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <klocale.h>
 #include <twinmodule.h>
 #include <kmenubar.h>

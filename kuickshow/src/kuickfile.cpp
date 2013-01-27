@@ -5,8 +5,8 @@
 #include <kinstance.h>
 #include <klocale.h>
 #include <kprogress.h>
-#include <kio/job.h>
-#include <kio/netaccess.h>
+#include <tdeio/job.h>
+#include <tdeio/netaccess.h>
 #include <ktempfile.h>
 
 #include "filecache.h"

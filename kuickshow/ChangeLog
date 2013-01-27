@@ -148,7 +148,7 @@ Tue May 29 15:20:34 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 	changed accels:
 	shift-accel is now for removing brightness/contrast/gamma
 
-	removed delete action, now provided by kfile
+	removed delete action, now provided by tdefile
 
 Thu Apr 19 23:16:12 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 
@@ -413,9 +413,9 @@ Fri Nov  3 01:49:57 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 Thu Aug 31 01:48:55 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/*: started reworking/rewriting the whole stuff to make it KDE2
-	ready. Now I have to pay for rewriting so much of tdelibs/kfile... 
+	ready. Now I have to pay for rewriting so much of tdelibs/tdefile... 
 	The good thing is: it's mostly about removing stuff from KuickShow
-	because the functionality is already in libkfile, now :)
+	because the functionality is already in libtdefile, now :)
 
 Tue Sep 28 10:35:39 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 
@@ -473,7 +473,7 @@ Thu Jul 22 21:26:11 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 Fri Jul 16 13:09:07 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 
-	* src/kfileview.cpp (refresh): 
+	* src/tdefileview.cpp (refresh): 
 	Oh well, thanks to Robert Hamberger <Robert.Hamberger@AUDI.DE>, I
 	fixed another (hopefully last, for the next time) segfault. SIGSEGV
 	happened, when opening the about-dialog, NOT giving the focus back
@@ -533,7 +533,7 @@ Fri Jul  2 14:27:08 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 	in the filebrowser??? In certain cases, I got an almost completely
 	black Messagebox...
 
-	* src/kfileview.cpp (removeItem): 
+	* src/tdefileview.cpp (removeItem): 
 	oups... segfault fixed: removing the very first item in the 
 	filebrowser caused crash
 
@@ -586,15 +586,15 @@ Fri May 28 11:48:46 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 Tue May 18 21:19:32 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 
-	* src/kfileview.cpp (refresh): 
+	* src/tdefileview.cpp (refresh): 
 	sorting does somehow work. Some code seems to be duplicated in
 	KFileInfoContents and KDir - both offer sorting. However, both
 	don't work 100% :-/ Anyway, if you have KDE 1.1.1, sorting should
 	work, it is disabled for earlier releases, as there was a segfault
-	problem in kfile (nobody ever seemed to use KFileInfoContent's sorting,
+	problem in tdefile (nobody ever seemed to use KFileInfoContent's sorting,
 	so that was never realized).
 
-	* src/kfileview.cpp, src/fileview.cpp:
+	* src/tdefileview.cpp, src/fileview.cpp:
 	some minor fixlets:  always try to highlight the last active file,
 	whenever the directory contents are updated
 
@@ -630,7 +630,7 @@ Sat Apr 17 18:43:03 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 	* src/kuickdata.cpp:
 	updated file filters (Photoshop psd and bmp)
 
-	* src/kfileview.cpp:
+	* src/tdefileview.cpp:
 	changed the kdir behavior, so that the browser displays files 
 	altogether at once, not incrementally. This also let me (finally, 
 	yippeee :-P) highlight the last direcory, where you came from.
@@ -670,7 +670,7 @@ Wed Feb  3 22:43:32 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
 	
 Tue Dec 29 16:55:11 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
 
-	* src/kuickshow.cpp, imlibwidget.cpp, kfileview.*: 
+	* src/kuickshow.cpp, imlibwidget.cpp, tdefileview.*: 
 	fixed updating of directory in statusbar and filename in caption of
  	imlibwidget
 
@@ -773,8 +773,8 @@ Mon Sep 21 16:29:56 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 Sun Sep 20 19:04:23 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
 
-	* src/kfileview.cpp (prev): 
-	whoops, fixed a segfault, when trying to get a kfileinfo of index -1.
+	* src/tdefileview.cpp (prev): 
+	whoops, fixed a segfault, when trying to get a tdefileinfo of index -1.
 	I shouldn't check, whether an unsigned int is smaller than 0, which it
 	actually was. Now uses int.
 
@@ -853,7 +853,7 @@ Tue Sep 15 14:06:27 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
 Mon Sep 14 16:20:30 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/fileview.cpp/.h
-	* src/kfileview.cpp/.h
+	* src/tdefileview.cpp/.h
 	* src/kuickshow.cpp
 	added "change directory" possibility. A dialog asks for a directory
 	and the fileview is being updated. Either accessible via the

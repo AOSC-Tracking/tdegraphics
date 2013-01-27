@@ -19,7 +19,7 @@
 #include <stdlib.h>
 
 #include <tqcolor.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobal.h>
 
 #include "kuickdata.h"

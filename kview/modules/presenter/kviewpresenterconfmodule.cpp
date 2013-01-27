@@ -27,7 +27,7 @@
 #include <klocale.h>
 #include <kdialog.h>
 #include <kglobal.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 KViewPresenterConfModule::KViewPresenterConfModule( TQObject * parent )
 	: KPreferencesModule( "kviewpresenter", parent, "KView Presenter Config Module" )
