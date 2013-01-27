@@ -14,7 +14,7 @@ toolbar in imageviewer
 - rename/delete into popupmenu of imagewindow
 
 - if image not readable -> no nagscreen, jump to next image
-- network transparency with kio
+- network transparency with tdeio
 
 - small preview in browser window
 - bookmarks?

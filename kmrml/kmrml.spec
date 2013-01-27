@@ -22,7 +22,7 @@ which defines a protocol for querying a server for images
 based on their content. See http://www.mrml.net about MRML
 and the GNU Image Finding Tool (GIFT), an MRML server.
  
-This package consists of an mrml kio-slave that handles
+This package consists of an mrml tdeio-slave that handles
 the communication with the MRML server and a KPart to
 be embedded e.g. into Konqueror.
 

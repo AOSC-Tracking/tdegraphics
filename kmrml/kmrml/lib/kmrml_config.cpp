@@ -54,7 +54,7 @@ const int DEFAULT_PORT = 12789;
 
 Config::Config()
 {
-    m_ownConfig = new TDEConfig( "kio_mrmlrc", false, false );
+    m_ownConfig = new TDEConfig( "tdeio_mrmlrc", false, false );
     m_config = m_ownConfig;
 
     init();

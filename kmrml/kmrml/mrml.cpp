@@ -39,14 +39,14 @@ extern "C" {
     KDE_EXPORT int kdemain( int argc, char **argv )
     {
         KLocale::setMainCatalogue("tdelibs");
-        TDEInstance instance( "kio_mrml" );
+        TDEInstance instance( "tdeio_mrml" );
         TDEGlobal::locale()->insertCatalogue( "kmrml" );
 
         kdDebug() << "Starting MRML " << getpid() << endl;
 
         if (argc != 4)
         {
-            fprintf(stderr, "Usage: kio_mrml protocol domain-socket1 domain-socket2\n");
+            fprintf(stderr, "Usage: tdeio_mrml protocol domain-socket1 domain-socket2\n");
             exit(-1);
         }
 
@@ -107,13 +107,13 @@ tryConnect:
     {
 //         tqDebug(" connected!");
 
-        TQString task = metaData( MrmlShared::kio_task() );
+        TQString task = metaData( MrmlShared::tdeio_task() );
 
-        if ( task == MrmlShared::kio_initialize() ) {
+        if ( task == MrmlShared::tdeio_initialize() ) {
             startSession( url );
         }
 
-        else if ( task == MrmlShared::kio_startQuery() ) {
+        else if ( task == MrmlShared::tdeio_startQuery() ) {
             TQString meta = metaData( MrmlShared::mrml_data() );
             if ( meta.isEmpty() ) {
                 closeDescriptor();
@@ -217,7 +217,7 @@ bool Mrml::startSession( const KURL& url )
     // apparently makes problems in exception handling somehow. So we simply
     // accept the server's session-id.
     TQString msg = mrmlString( TQString() ).arg(
-        "<open-session user-name=\"%1\" session-name=\"kio_mrml session\" /> \
+        "<open-session user-name=\"%1\" session-name=\"tdeio_mrml session\" /> \
          <get-algorithms />                                                  \
          <get-collections />                                                 \
          </mrml>" ).arg( user( url ));

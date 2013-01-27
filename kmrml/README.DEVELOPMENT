@@ -2,7 +2,7 @@ This file gives an overview of the structure of the kmrml package.
 
 kmrml consists of the following:
 
-- kio_mrml: an ioslave that is able to contact an mrml daemon (i.e. the GIFT)
+- tdeio_mrml: an ioslave that is able to contact an mrml daemon (i.e. the GIFT)
             and transports the data from the daemon to its master (i.e. the 
             MrmlPart) as XML (MRML, Multimedia Retrieval Markup Language)
 
@@ -19,7 +19,7 @@ kmrml consists of the following:
            stop services. It is completely independent of GIFT/kmrml.
            It is used to have one centralized place where the gift server
            is started (ensuring this happens only once, restarting it upon
-           failure and stopping the gift after all kio_mrml instances 
+           failure and stopping the gift after all tdeio_mrml instances 
            have been killed.
 
 lib/: common stuff used by more than one module

@@ -305,7 +305,7 @@ void MrmlPart::contactServer( const KURL& url )
 {
     m_job = transferJob( url );
 
-    m_job->addMetaData( MrmlShared::kio_task(), MrmlShared::kio_initialize() );
+    m_job->addMetaData( MrmlShared::tdeio_task(), MrmlShared::tdeio_initialize() );
 
     TQString host = url.host().isEmpty() ?
                    TQString::fromLatin1("localhost") : url.host();
@@ -690,7 +690,7 @@ void MrmlPart::performQuery( TQDomDocument& doc )
     m_job = transferJob( url() );
     slotSetStatusBar( randomSearch ? i18n("Random search...") :
                                      i18n("Searching...") );
-    m_job->addMetaData( MrmlShared::kio_task(), MrmlShared::kio_startQuery() );
+    m_job->addMetaData( MrmlShared::tdeio_task(), MrmlShared::tdeio_startQuery() );
     tqDebug("\n\nSending XML:\n%s", doc.toString().latin1());
     m_job->addMetaData( MrmlShared::mrml_data(), doc.toString() );
 }

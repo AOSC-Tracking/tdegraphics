@@ -75,10 +75,10 @@ const TQString * MrmlShared::m_popup = 0L;
 // meta-data
 const TQString * MrmlShared::m_mrml_data = 0L;
 
-// kio_mrml tasks
-const TQString * MrmlShared::m_kio_task = 0L;
-const TQString * MrmlShared::m_kio_initialize = 0L;
-const TQString * MrmlShared::m_kio_startQuery = 0L;
+// tdeio_mrml tasks
+const TQString * MrmlShared::m_tdeio_task = 0L;
+const TQString * MrmlShared::m_tdeio_initialize = 0L;
+const TQString * MrmlShared::m_tdeio_startQuery = 0L;
 
 
 int MrmlShared::s_references = 0;
@@ -163,10 +163,10 @@ void MrmlShared::init()
 // meta-data
     m_mrml_data = new TQString ( "mrml_data" ) ;
 
-// kio_mrml tasks
-    m_kio_task = new TQString ( "kio_task" ) ;
-    m_kio_initialize = new TQString ( "kio_initialize" ) ;
-    m_kio_startQuery = new TQString ( "kio_startQuery" ) ;
+// tdeio_mrml tasks
+    m_tdeio_task = new TQString ( "tdeio_task" ) ;
+    m_tdeio_initialize = new TQString ( "tdeio_initialize" ) ;
+    m_tdeio_startQuery = new TQString ( "tdeio_startQuery" ) ;
 }
 
 void MrmlShared::cleanup()
@@ -227,9 +227,9 @@ void MrmlShared::cleanup()
     // meta-data
     delete m_mrml_data;
 
-    // kio_mrml tasks
-    delete m_kio_task;
-    delete m_kio_initialize;
-    delete m_kio_startQuery;
+    // tdeio_mrml tasks
+    delete m_tdeio_task;
+    delete m_tdeio_initialize;
+    delete m_tdeio_startQuery;
 
 }

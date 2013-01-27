@@ -30,7 +30,7 @@ install( FILES camera.protocol DESTINATION ${SERVICES_INSTALL_DIR} )
 
 #### kamera (module) ############################
 
-tde_add_kpart( kio_kamera AUTOMOC
+tde_add_kpart( tdeio_kamera AUTOMOC
   SOURCES kamera.cpp
   LINK tdeio-shared ${GPHOTO2_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}

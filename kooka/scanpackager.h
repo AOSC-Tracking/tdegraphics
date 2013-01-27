@@ -58,16 +58,16 @@ class JobDescription
 {
 public:
    enum JobType { NoJob, ImportJob, RenameJob, ExportJob };
-   JobDescription():jobType( NoJob ), kioJob(0L), pitem(0L) {}
-   JobDescription( TDEIO::Job* kiojob, KFileTreeViewItem *new_item, JobType type ) :
-      jobType(type), kioJob(kiojob), pitem(new_item) {}
+   JobDescription():jobType( NoJob ), tdeioJob(0L), pitem(0L) {}
+   JobDescription( TDEIO::Job* tdeiojob, KFileTreeViewItem *new_item, JobType type ) :
+      jobType(type), tdeioJob(tdeiojob), pitem(new_item) {}
 
    JobType type( void ) { return( jobType ); }
    KFileTreeViewItem *item( void ) { return( pitem ); }
-   TDEIO::Job* job( void ){ return( kioJob ); }
+   TDEIO::Job* job( void ){ return( tdeioJob ); }
 private:
    JobType       jobType;
-   TDEIO::Job*     kioJob;
+   TDEIO::Job*     tdeioJob;
    KFileTreeViewItem* pitem;
 };
 

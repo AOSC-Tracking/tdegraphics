@@ -35,7 +35,7 @@ namespace KMrml
                        TQString& user, const TQString& pass);
 
         // does NOT set the port in the KURL object, if autoPort is selected
-        // kio_mrml is going to determine itself (via ServerSettings::port()).
+        // tdeio_mrml is going to determine itself (via ServerSettings::port()).
         // This deuglifies the mrml:/ url a bit (no port is shown)
         KURL getUrl() const;
 

@@ -6,11 +6,11 @@ LIB_KMRMLSTUFF = $(top_builddir)/kmrml/kmrml/lib/libkmrmlstuff.la
 
 ####### Files
 
-kde_module_LTLIBRARIES = kio_mrml.la libkmrmlpart.la
+kde_module_LTLIBRARIES = tdeio_mrml.la libkmrmlpart.la
 
-kio_mrml_la_SOURCES = mrml.cpp
-kio_mrml_la_LIBADD  = $(LIB_KMRMLSTUFF) $(LIB_KIO)
-kio_mrml_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
+tdeio_mrml_la_SOURCES = mrml.cpp
+tdeio_mrml_la_LIBADD  = $(LIB_KMRMLSTUFF) $(LIB_KIO)
+tdeio_mrml_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
 
 libkmrmlpart_la_SOURCES = mrml_part.cpp mrml_view.cpp loader.cpp \
 	mrml_elements.cpp mrml_creator.cpp browser.cpp algorithmdialog.cpp \

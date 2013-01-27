@@ -67,10 +67,10 @@ extern "C"
 
 int kdemain(int argc, char **argv)
 {
-	TDEInstance	instance("kio_kamera");
+	TDEInstance	instance("tdeio_kamera");
 
 	if(argc != 4) {
-		kdDebug(7123) << "Usage: kio_kamera protocol "
+		kdDebug(7123) << "Usage: tdeio_kamera protocol "
 			     "domain-socket1 domain-socket2" << endl;
 		exit(-1);
 	}

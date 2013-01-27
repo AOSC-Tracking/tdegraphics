@@ -1,5 +1,5 @@
 [Protocol]
-exec=kio_kamera
+exec=tdeio_kamera
 protocol=camera
 input=none
 output=filesystem

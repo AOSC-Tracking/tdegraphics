@@ -33,9 +33,9 @@ install( FILES mrml.desktop DESTINATION ${MIME_INSTALL_DIR}/text )
 install( FILES mrml-servicemenu.desktop DESTINATION ${DATA_INSTALL_DIR}/konqueror/servicemenus )
 
 
-#### kio_mrml (module) ##########################
+#### tdeio_mrml (module) ##########################
 
-tde_add_kpart( kio_mrml AUTOMOC
+tde_add_kpart( tdeio_mrml AUTOMOC
   SOURCES mrml.cpp
   LINK kmrmlstuff-static tdeio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}

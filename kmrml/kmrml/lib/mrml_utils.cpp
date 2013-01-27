@@ -38,12 +38,12 @@ Util *Util::s_self = 0L;
 
 Util::Util()
 {
-    // we need our own dcopclient, when used in kio_mrml
+    // we need our own dcopclient, when used in tdeio_mrml
     if ( !DCOPClient::mainClient() )
     {
         DCOPClient::setMainClient( new DCOPClient() );
         if ( !DCOPClient::mainClient()->attach() )
-            tqWarning( "kio_mrml: Can't attach to DCOP Server.");
+            tqWarning( "tdeio_mrml: Can't attach to DCOP Server.");
     }
 }
 

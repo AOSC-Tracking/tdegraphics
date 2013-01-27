@@ -2,7 +2,7 @@ Begin4
 Title:          MRML
 Version:        R14.0.0
 Entered-date:   2010-05-10
-Description:    MRML (Multimedia Retrieval Markup Language) kio-slave for the Trinity Desktop Environment
+Description:    MRML (Multimedia Retrieval Markup Language) tdeio-slave for the Trinity Desktop Environment
 Keywords:       Image retrieval, GIFT, MRML, Konqueror, TDE, Qt
 Author:         Carsten Pfeiffer <pfeiffer@kde.org>
 Maintained-by:  The Trinity Desktop Environment (TDE) http://www.trinitydesktop.org/

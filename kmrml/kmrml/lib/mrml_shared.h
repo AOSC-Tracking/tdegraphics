@@ -88,10 +88,10 @@ public:
     // meta-data
     static const TQString& mrml_data()           { return *m_mrml_data; }
 
-    // kio_mrml tasks
-    static const TQString& kio_task()            { return *m_kio_task; }
-    static const TQString& kio_initialize()      { return *m_kio_initialize; }
-    static const TQString& kio_startQuery()      { return *m_kio_startQuery; }
+    // tdeio_mrml tasks
+    static const TQString& tdeio_task()            { return *m_tdeio_task; }
+    static const TQString& tdeio_initialize()      { return *m_tdeio_initialize; }
+    static const TQString& tdeio_startQuery()      { return *m_tdeio_startQuery; }
 
 
 private:
@@ -151,10 +151,10 @@ private:
     // meta-data
     static const TQString * m_mrml_data;
 
-    // kio_mrml tasks
-    static const TQString * m_kio_task;
-    static const TQString * m_kio_initialize;
-    static const TQString * m_kio_startQuery;
+    // tdeio_mrml tasks
+    static const TQString * m_tdeio_task;
+    static const TQString * m_tdeio_initialize;
+    static const TQString * m_tdeio_startQuery;
 
 private:
     static void cleanup();

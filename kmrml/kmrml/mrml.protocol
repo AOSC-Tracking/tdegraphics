@@ -1,5 +1,5 @@
 [Protocol]
-exec=kio_mrml
+exec=tdeio_mrml
 protocol=mrml
 input=none
 output=filesystem
