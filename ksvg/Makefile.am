@@ -6,7 +6,7 @@ libksvg_la_METASOURCES = AUTO
 libksvg_la_LDFLAGS = -version-info 0:1:0 -no-undefined $(all_libraries)
 libksvg_la_LIBADD  = dom/libksvgdom.la impl/libksvgdomimpl.la core/libksvgcore.la ecma/libksvgecma.la \
 		     $(LCMS_LIBS) impl/libs/xrgbrender/libksvgxrgbrender.la impl/libs/libtext2path/src/libtext2path.la \
-			 impl/libs/art_support/libksvgart.la -lkjs $(LIB_KHTML) $(LIBART_LIBS) $(FREETYPE_LIBS) $(FONTCONFIG_LIBS)
+			 impl/libs/art_support/libksvgart.la -lkjs $(LIB_TDEHTML) $(LIBART_LIBS) $(FREETYPE_LIBS) $(FONTCONFIG_LIBS)
 
 INCLUDES = -I$(top_srcdir)/ksvg/dom -I$(top_srcdir)/ksvg/impl $(all_includes)
 
