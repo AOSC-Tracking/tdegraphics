@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_PCX_H_
-#define __KFILE_PCX_H_
+#ifndef __TDEFILE_PCX_H_
+#define __TDEFILE_PCX_H_
 
 #include <tdefilemetainfo.h>
 

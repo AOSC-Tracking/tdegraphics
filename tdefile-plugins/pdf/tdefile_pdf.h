@@ -18,8 +18,8 @@
  *  $Id$
  */
 
-#ifndef __KFILE_PDF_H__
-#define __KFILE_PDF_H__
+#ifndef __TDEFILE_PDF_H__
+#define __TDEFILE_PDF_H__
 
 #include <tdefilemetainfo.h>
 #include <poppler-qt.h>

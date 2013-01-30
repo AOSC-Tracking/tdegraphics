@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_TIFF_H_
-#define __KFILE_TIFF_H_
+#ifndef __TDEFILE_TIFF_H_
+#define __TDEFILE_TIFF_H_
 
 #include <tdefilemetainfo.h>
 

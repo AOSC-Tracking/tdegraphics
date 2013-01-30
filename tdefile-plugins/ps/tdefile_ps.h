@@ -18,8 +18,8 @@
  *  $Id$
  */
 
-#ifndef __KFILE_PS_H__
-#define __KFILE_PS_H__
+#ifndef __TDEFILE_PS_H__
+#define __TDEFILE_PS_H__
 
 #include <tdefilemetainfo.h>
 

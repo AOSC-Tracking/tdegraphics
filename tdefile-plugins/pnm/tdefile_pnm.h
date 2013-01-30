@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_PNM_H__
-#define __KFILE_PNM_H__
+#ifndef __TDEFILE_PNM_H__
+#define __TDEFILE_PNM_H__
 
 #include <tdefilemetainfo.h>
 

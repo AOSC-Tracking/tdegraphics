@@ -12,7 +12,7 @@ kiconedit_METASOURCES = AUTO
 
 # the library search path. 
 kiconedit_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
-kiconedit_LDADD = $(LIB_KFILE) -ltdeprint
+kiconedit_LDADD = $(LIB_TDEFILE) -ltdeprint
 
 DISTCLEANFILES = *~ .deps/* .libs/*
 

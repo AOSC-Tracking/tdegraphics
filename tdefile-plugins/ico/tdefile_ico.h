@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_ICO_H__
-#define __KFILE_ICO_H__
+#ifndef __TDEFILE_ICO_H__
+#define __TDEFILE_ICO_H__
 
 #include <tdefilemetainfo.h>
 

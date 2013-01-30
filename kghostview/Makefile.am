@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = libkghostviewpart.la
 noinst_LTLIBRARIES = libdscparse.la
 
 libkghostviewlib_la_LDFLAGS = $(all_libraries)
-libkghostviewlib_la_LIBADD = $(LIB_KFILE) $(LIB_KPARTS) -ltdeprint libdscparse.la
+libkghostviewlib_la_LIBADD = $(LIB_TDEFILE) $(LIB_KPARTS) -ltdeprint libdscparse.la
 
 libkghostviewpart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
 libkghostviewpart_la_LIBADD = libkghostviewlib.la

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_XBM_H__
-#define __KFILE_XBM_H__
+#ifndef __TDEFILE_XBM_H__
+#define __TDEFILE_XBM_H__
 
 #include <tdefilemetainfo.h>
 

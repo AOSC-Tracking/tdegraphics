@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_TGA_H__
-#define __KFILE_TGA_H__
+#ifndef __TDEFILE_TGA_H__
+#define __TDEFILE_TGA_H__
 
 #include <tdefilemetainfo.h>
 

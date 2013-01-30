@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_RGB_H__
-#define __KFILE_RGB_H__
+#ifndef __TDEFILE_RGB_H__
+#define __TDEFILE_RGB_H__
 
 #include <tdefilemetainfo.h>
 

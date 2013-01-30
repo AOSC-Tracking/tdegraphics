@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_DDS_H__
-#define __KFILE_DDS_H__
+#ifndef __TDEFILE_DDS_H__
+#define __TDEFILE_DDS_H__
 
 #include <tdefilemetainfo.h>
 

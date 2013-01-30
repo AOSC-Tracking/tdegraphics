@@ -18,7 +18,7 @@ kviewerpart_la_SOURCES = kviewpart.cpp pageSizeWidget_base.ui \
 		optionDialogGUIWidget_base.ui optionDialogAccessibilityWidget.ui simplePageSize.cpp
 
 kviewerpart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
-kviewerpart_la_LIBADD = ./libifaces.la $(LIB_KFILE) -ltdeparts
+kviewerpart_la_LIBADD = ./libifaces.la $(LIB_TDEFILE) -ltdeparts
 
 libtdemultipage_la_SOURCES = tdemultipage.cpp pageView.cpp marklist.cpp tdemultipageInterface.skel \
 		units.cpp pageSize.cpp simplePageSize.cpp renderedDocumentPage.cpp renderedDocumentPagePixmap.cpp \
@@ -30,7 +30,7 @@ libtdemultipage_la_SOURCES = tdemultipage.cpp pageView.cpp marklist.cpp tdemulti
 kde_kcfg_DATA = kviewshell.kcfg
 
 libtdemultipage_la_LDFLAGS = $(all_libraries)
-libtdemultipage_la_LIBADD = $(LIB_KFILE) -ltdeprint -ltdeparts
+libtdemultipage_la_LIBADD = $(LIB_TDEFILE) -ltdeprint -ltdeparts
 
 emptymultipagepart_la_SOURCES = empty_multipage.cpp emptyRenderer.cpp
 emptymultipagepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module

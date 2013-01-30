@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef __KFILE_GIF_H__
-#define __KFILE_GIF_H__
+#ifndef __TDEFILE_GIF_H__
+#define __TDEFILE_GIF_H__
 
 #include <tdefilemetainfo.h>
 #include <kurl.h>

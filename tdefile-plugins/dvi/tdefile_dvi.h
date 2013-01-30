@@ -18,8 +18,8 @@
  */
 
 
-#ifndef __KFILE_DVI_H__
-#define __KFILE_DVI_H__
+#ifndef __TDEFILE_DVI_H__
+#define __TDEFILE_DVI_H__
 
 #include <tdefilemetainfo.h>
 

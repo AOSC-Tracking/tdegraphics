@@ -21,8 +21,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.             *
  ***************************************************************************/
 
-#ifndef KFILE_XPM_H
-#define KFILE_XPM_H
+#ifndef TDEFILE_XPM_H
+#define TDEFILE_XPM_H
 
 /**
  * Note: For further information look into <$TDEDIR/include/tdefilemetainfo.h>

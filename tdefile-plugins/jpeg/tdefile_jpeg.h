@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_JPEG_H__
-#define __KFILE_JPEG_H__
+#ifndef __TDEFILE_JPEG_H__
+#define __TDEFILE_JPEG_H__
 
 #include <tqdatetime.h>
 #include <tdefilemetainfo.h>

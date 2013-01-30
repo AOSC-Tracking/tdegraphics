@@ -18,8 +18,8 @@
  *  $Id$
  */
 
-#ifndef __KFILE_EXR_H__
-#define __KFILE_EXR_H__
+#ifndef __TDEFILE_EXR_H__
+#define __TDEFILE_EXR_H__
 
 #include <tdefilemetainfo.h>
 #include <kurl.h>

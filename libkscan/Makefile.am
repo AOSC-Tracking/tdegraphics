@@ -19,7 +19,7 @@ libkscan_la_SOURCES = kscandevice.cpp kscanslider.cpp kgammatable.cpp\
 
 
 libkscan_la_LDFLAGS = $(all_libraries) $(LIBSANE_LDFLAGS) -no-undefined -version-info 1:0
-libkscan_la_LIBADD = $(LIBSANE_LIBS) $(LIB_KFILE)
+libkscan_la_LIBADD = $(LIBSANE_LIBS) $(LIB_TDEFILE)
 
 kde_services_DATA = scanservice.desktop
 
