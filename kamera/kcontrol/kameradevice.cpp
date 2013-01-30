@@ -37,6 +37,8 @@
 #include <kmessagebox.h>
 #include <kdebug.h>
 
+#include "config.h"
+
 extern "C" {
 	#include <gphoto2.h>
 }
@@ -118,9 +120,9 @@ bool KCamera::initCamera()
 		gp_port_info_list_new(&il);
 		gp_port_info_list_load(il);
 		gp_port_info_list_get_info(il, gp_port_info_list_lookup_path(il, m_path.local8Bit().data()), &info);
-		gp_port_info_list_free(il);
 		gp_camera_set_abilities(m_camera, m_abilities);
 		gp_camera_set_port_info(m_camera, info);
+		gp_port_info_list_free(il);
 
 		// this might take some time (esp. for non-existant camera) - better be done asynchronously
 		result = gp_camera_init(m_camera, glob_context);
@@ -346,8 +348,15 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	}
 	for (int i = 0; i < gphoto_ports; i++) {
 		if (gp_port_info_list_get_info(list, i, &info) >= 0) {
+#ifdef HAVE_GPHOTO2_5
+			char *xpath;
+			gp_port_info_get_path (info, &xpath);
+			if (strncmp(xpath, "serial:", 7) == 0)
+				m_serialPortCombo->insertItem(TQString::fromLatin1(xpath).mid(7));
+#else
 			if (strncmp(info.path, "serial:", 7) == 0)
 				m_serialPortCombo->insertItem(TQString::fromLatin1(info.path).mid(7));
+#endif
 		}
 	}
 	gp_port_info_list_free(list);

@@ -45,3 +45,6 @@
 
 // ksnapshop
 #cmakedefine HAVE_X11_EXTENSIONS_SHAPE_H 1
+
+// kamera
+#cmakedefine HAVE_GPHOTO2_5 1
