@@ -137,7 +137,7 @@ bool ThumbView::readSettings()
       kdDebug(28000) << "Setting Grid " << gX << " - " << gY << endl;
    }
 
-   KStandardDirs stdDir;
+   TDEStandardDirs stdDir;
    TQString newBgImg = cfg->readEntry( BG_WALLPAPER, stdDir.findResource( "data", STD_TILE_IMG ) );
 
    if( m_bgImg != newBgImg )

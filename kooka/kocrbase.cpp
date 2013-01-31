@@ -151,7 +151,7 @@ void KOCRBase::ocrIntro( )
     (void) new TQLabel( i18n("<b>Starting Optical Character Recognition with %1</b><p>").
                        arg( ocrEngineName() ), m_ocrPage );
     // Find the kadmos logo and display if available
-    KStandardDirs stdDir;
+    TDEStandardDirs stdDir;
     TQString logo = stdDir.findResource( "data", "kooka/pics/" + ocrEngineLogo() );
 
     kdDebug(28000)<< "Reading logo " << logo << endl;

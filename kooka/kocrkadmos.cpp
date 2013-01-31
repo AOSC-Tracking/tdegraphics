@@ -142,7 +142,7 @@ EngineError KadmosDialog::findClassifiers()
     else
     {
         /* standard location */
-        KStandardDirs stdDir;
+        TDEStandardDirs stdDir;
         kdDebug(28000) << "Starting to read resource" << endl;
 
         lst = stdDir.findAllResources( "data",
@@ -233,7 +233,7 @@ EngineError KadmosDialog::findClassifiers()
 
 EngineError KadmosDialog::findClassifierPath()
 {
-    KStandardDirs stdDir;
+    TDEStandardDirs stdDir;
     EngineError err = ENG_OK;
 
     TDEConfig *conf = TDEGlobal::config ();

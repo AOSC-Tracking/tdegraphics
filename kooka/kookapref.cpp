@@ -383,7 +383,7 @@ void KookaPreferences::setupThumbnailPage()
    top->addWidget( new TQLabel( i18n("Here you can configure the appearance of the thumbnail view of your scan picture gallery."),page ));
 
    /* Backgroundimage */
-   KStandardDirs stdDir;
+   TDEStandardDirs stdDir;
    TQString bgImg = konf->readPathEntry( BG_WALLPAPER );
    if( bgImg.isEmpty() )
       bgImg = stdDir.findResource( "data", STD_TILE_IMG );
@@ -527,7 +527,7 @@ void KookaPreferences::slotDefault( void )
     cbShowScannerSelection->setChecked( true);
     cbReadStartupImage->setChecked( true);
     cbSkipFormatAsk->setChecked( true  );
-    KStandardDirs stdDir;
+    TDEStandardDirs stdDir;
     TQString bgImg = stdDir.findResource( "data", STD_TILE_IMG );
     m_tileSelector->setURL( KURL(bgImg) );
     m_thumbWidth->setValue( 100 );

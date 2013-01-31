@@ -417,7 +417,7 @@ bool Part::openFile()
     }
     if ( (*mime).is( "application/postscript" ) )
     {
-        TQString app = KStandardDirs::findExe( "ps2pdf" );
+        TQString app = TDEStandardDirs::findExe( "ps2pdf" );
         if ( !app.isNull() )
         {
             if ( TQFile::exists(m_file) )
