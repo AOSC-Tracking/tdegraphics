@@ -210,7 +210,7 @@ TQString pageSize::preferredUnit() const
     return staticList[currentSize].preferredUnit;
 
   // User-defined size. Give a preferred unit depening on the locale.
-  if (TDEGlobal::locale()-> measureSystem() == KLocale::Metric)
+  if (TDEGlobal::locale()-> measureSystem() == TDELocale::Metric)
     return "mm";
   else
     return "in";
@@ -333,7 +333,7 @@ int pageSize::defaultPageSize()
   // FIXME: static_cast<TQPrinter::PageSize>(TDEGlobal::locale()->pageSize())
   //        is the proper solution here.  Then you can determine the values
   //        without using your hardcoded table too!
-  if (TDEGlobal::locale()-> measureSystem() == KLocale::Metric)
+  if (TDEGlobal::locale()-> measureSystem() == TDELocale::Metric)
     return defaultMetricPaperSize;
   else
     return defaultImperialPaperSize;

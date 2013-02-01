@@ -110,7 +110,7 @@ namespace {
 	    // FIXME: this ignores the timezone
 	    TQDate date( year, month, day );
 	    TQTime time( hour, min, sec );
-	    KLocale locale( "kghostview" );
+	    TDELocale locale( "kghostview" );
 	    return locale.formatDateTime( TQDateTime( date, time ) );
 	}
 	kdDebug( 4500 ) << "parseDate failed." << endl;

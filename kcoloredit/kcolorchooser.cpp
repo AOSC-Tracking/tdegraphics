@@ -43,7 +43,7 @@ static KCmdLineOptions options[] =
 	
 int main(int argc, char *argv[])
 {
-  KLocale::setMainCatalogue("tdelibs"); 
+  TDELocale::setMainCatalogue("tdelibs"); 
   TDEAboutData aboutData( "kcolorchooser", I18N_NOOP("KColorChooser"),
 		version, description, TDEAboutData::License_BSD,
 		"(c) 2000, Waldo Bastian");

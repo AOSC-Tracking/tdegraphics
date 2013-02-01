@@ -61,7 +61,7 @@ KGVMiniWidget::KGVMiniWidget( KGVPart* part, const char* name ) :
     _usePageLabels( true ),
     _visiblePage( -1 )
 {
-    KLocale locale( "kghostview" );
+    TDELocale locale( "kghostview" );
     _fallBackPageMedia = pageSizeToString( 
               static_cast< TQPrinter::PageSize >( locale.pageSize() ) );
     _thumbnailService = new ThumbnailService( this );

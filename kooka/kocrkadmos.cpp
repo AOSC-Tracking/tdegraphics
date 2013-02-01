@@ -100,7 +100,7 @@ EngineError KadmosDialog::findClassifiers()
 {
     findClassifierPath();
 
-    KLocale *locale = TDEGlobal::locale();
+    TDELocale *locale = TDEGlobal::locale();
     TQStringList allCountries = locale->allLanguagesTwoAlpha ();
     for ( TQStringList::Iterator it = allCountries.begin();
           it != allCountries.end(); ++it )
@@ -289,7 +289,7 @@ EngineError KadmosDialog::setupGui()
 
 
     m_cbLang = new TQComboBox( m_gbLang );
-    m_cbLang->setCurrentText( KLocale::defaultCountry() );
+    m_cbLang->setCurrentText( TDELocale::defaultCountry() );
 
     connect( m_bbFont, TQT_SIGNAL(clicked(int)), this, TQT_SLOT(slFontChanged(int) ));
     m_rbMachine->setChecked(true);

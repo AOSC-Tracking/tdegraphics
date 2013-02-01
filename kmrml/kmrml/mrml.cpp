@@ -38,7 +38,7 @@
 extern "C" {
     KDE_EXPORT int kdemain( int argc, char **argv )
     {
-        KLocale::setMainCatalogue("tdelibs");
+        TDELocale::setMainCatalogue("tdelibs");
         TDEInstance instance( "tdeio_mrml" );
         TDEGlobal::locale()->insertCatalogue( "kmrml" );
 
