@@ -57,8 +57,8 @@ void CanvasFactory::queryCanvas()
 {
 	m_canvasList.clear();
 
-	TQValueList<KService::Ptr> traderList = KTrader::self()->query("KSVG/Renderer", "(Type == 'Service')");
-	KTrader::OfferList::Iterator it(traderList.begin());
+	TQValueList<KService::Ptr> traderList = TDETrader::self()->query("KSVG/Renderer", "(Type == 'Service')");
+	TDETrader::OfferList::Iterator it(traderList.begin());
 	for( ; it != traderList.end(); ++it)
 	{
 		KService::Ptr ptr = (*it);

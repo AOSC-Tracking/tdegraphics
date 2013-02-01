@@ -322,7 +322,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	slotNewConfig();
 
 	// [SPEECH] check for KTTSD presence and usability
-	KTrader::OfferList offers = KTrader::self()->query("DCOP/Text-to-Speech", "Name == 'KTTSD'");
+	TDETrader::OfferList offers = TDETrader::self()->query("DCOP/Text-to-Speech", "Name == 'KTTSD'");
 	KpdfSettings::setUseKTTSD( (offers.count() > 0) );
 	KpdfSettings::writeConfig();
 

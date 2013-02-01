@@ -89,13 +89,13 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   // create the displaying part
 
   // Search for service
-  KTrader::OfferList offers;
+  TDETrader::OfferList offers;
 
   if (!args.isEmpty())
   {
     // If a default MimeType is specified try to load a MultiPage supporting it.
     TQString defaultMimeType = args.first();
-    offers = KTrader::self()->query(
+    offers = TDETrader::self()->query(
         TQString::fromLatin1("KViewShell/MultiPage" ),
         TQString("([X-TDE-MultiPageVersion] == %1) and "
                 "([X-TDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(defaultMimeType));
@@ -104,7 +104,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   // If no default MimeType is given or no MultiPage has been found, try to load the Empty MultiPage.
   if (offers.isEmpty())
   {
-    offers = KTrader::self()->query(
+    offers = TDETrader::self()->query(
         TQString::fromLatin1("KViewShell/MultiPage" ),
         TQString("([X-TDE-MultiPageVersion] == %1) and "
                 "([X-TDE-EmptyMultiPage] == 1)").arg(MULTIPAGE_VERSION));
@@ -470,15 +470,15 @@ TQStringList KViewPart::supportedMimeTypes()
   TQStringList supportedMimeTypes;
 
   // Search for service
-  KTrader::OfferList offers = KTrader::self()->query(
+  TDETrader::OfferList offers = TDETrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage"),
       TQString("([X-TDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
   {
-    KTrader::OfferList::ConstIterator iterator = offers.begin();
-    KTrader::OfferList::ConstIterator end = offers.end();
+    TDETrader::OfferList::ConstIterator iterator = offers.begin();
+    TDETrader::OfferList::ConstIterator end = offers.end();
 
     for (; iterator != end; ++iterator)
     {
@@ -515,15 +515,15 @@ TQStringList KViewPart::fileFormats() const
   TQStringList supportedPattern;
 
   // Search for service
-  KTrader::OfferList offers = KTrader::self()->query(
+  TDETrader::OfferList offers = TDETrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage"),
       TQString("([X-TDE-MultiPageVersion] == %1)").arg(MULTIPAGE_VERSION)
   );
 
   if (!offers.isEmpty())
   {
-    KTrader::OfferList::ConstIterator iterator = offers.begin();
-    KTrader::OfferList::ConstIterator end = offers.end();
+    TDETrader::OfferList::ConstIterator iterator = offers.begin();
+    TDETrader::OfferList::ConstIterator end = offers.end();
 
     for (; iterator != end; ++iterator)
     {
@@ -767,7 +767,7 @@ bool KViewPart::openFile()
   mimetype = KMimeType::findByURL(tmpFileURL);
 
   // Search for service
-  KTrader::OfferList offers = KTrader::self()->query(
+  TDETrader::OfferList offers = TDETrader::self()->query(
       TQString::fromLatin1("KViewShell/MultiPage" ),
   TQString("([X-TDE-MultiPageVersion] == %1) and "
           "([X-TDE-MimeTypes] == '%2')").arg(MULTIPAGE_VERSION).arg(mimetype->name()));

@@ -155,13 +155,13 @@ PhotoBook::PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name)
 	
 	TQStringList mimetypes;
 	
-	KTrader::OfferList offers = KTrader::self()->query(
+	TDETrader::OfferList offers = TDETrader::self()->query(
 			"KImageViewer/Viewer", "KParts/ReadOnlyPart",
 			"DesktopEntryName == 'kviewviewer'", TQString()
 		);
 
 	for (
-			KTrader::OfferList::Iterator i(offers.begin());
+			TDETrader::OfferList::Iterator i(offers.begin());
 			i != offers.end(); ++i
 		)
 	{
