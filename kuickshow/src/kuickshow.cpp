@@ -198,7 +198,7 @@ KuickShow::KuickShow( const char *name )
 
     else { // don't show browser, when image on commandline
         hide();
-        KStartupInfo::appStarted();
+        TDEStartupInfo::appStarted();
     }
 }
 

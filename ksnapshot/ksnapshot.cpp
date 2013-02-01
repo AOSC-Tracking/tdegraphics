@@ -67,7 +67,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     grabber->move( -1000, -1000 );
     grabber->installEventFilter( this );
 
-    KStartupInfo::appStarted();
+    TDEStartupInfo::appStarted();
 
     TQVBox *vbox = makeVBoxMainWidget();
     mainWidget = new KSnapshotWidget( vbox, "mainWidget" );
