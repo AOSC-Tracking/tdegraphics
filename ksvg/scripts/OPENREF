@@ -4,6 +4,6 @@ loc=`pwd`/$1
 sleep 1
 dcop $pid konqueror-mainwindow#1 openURL ${loc}svg
 sleep 1
-dcop $pid qt/KXMLGUILClient-KActionCollection/splitviewh activate
+dcop $pid qt/KXMLGUILClient-TDEActionCollection/splitviewh activate
 sleep 1
 dcop $pid konqueror-mainwindow#1 openURL ${loc}png

@@ -27,10 +27,10 @@
 
 class TQImage;
 
-class ImageListItem : public KListViewItem
+class ImageListItem : public TDEListViewItem
 {
 	public:
-		ImageListItem( KListView * parent, const KURL & url );
+		ImageListItem( TDEListView * parent, const KURL & url );
 		~ImageListItem();
 
 		const TQImage * image() const;

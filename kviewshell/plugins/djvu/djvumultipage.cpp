@@ -62,12 +62,12 @@ DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQO
   renderModes.append(i18n("Black and White"));
   renderModes.append(i18n("Show foreground only"));
   renderModes.append(i18n("Show background only"));
-  renderModeAction = new KSelectAction (i18n("Render Mode"), 0, 0, 0, actionCollection(), "render_mode");
+  renderModeAction = new TDESelectAction (i18n("Render Mode"), 0, 0, 0, actionCollection(), "render_mode");
   renderModeAction->setItems(renderModes);
 
   renderModeAction->setCurrentItem(Prefs::renderMode());
 
-  deletePagesAction = new KAction(i18n("Delete Pages..."), 0, this, TQT_SLOT(slotDeletePages()), actionCollection(), "delete_pages");
+  deletePagesAction = new TDEAction(i18n("Delete Pages..."), 0, this, TQT_SLOT(slotDeletePages()), actionCollection(), "delete_pages");
 
   // change the rendermode
   connect(renderModeAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(setRenderMode(int)));

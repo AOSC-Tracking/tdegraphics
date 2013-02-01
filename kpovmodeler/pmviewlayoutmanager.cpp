@@ -832,7 +832,7 @@ PMViewLayout* PMViewLayoutManager::findLayout( const TQString& name )
    return &( *it );
 }
 
-void PMViewLayoutManager::fillPopupMenu( KPopupMenu* pMenu )
+void PMViewLayoutManager::fillPopupMenu( TDEPopupMenu* pMenu )
 {
    TQStringList lst = availableLayouts( );
    TQStringList::ConstIterator it = lst.begin( );

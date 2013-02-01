@@ -87,10 +87,10 @@ private:
 
   /** Pointers to several actions which are disabled if no file is
       loaded. */
-  KAction      *docInfoAction;
-  KAction      *embedPSAction;
-  KAction      *exportPDFAction;
-  KAction      *exportPSAction;
+  TDEAction      *docInfoAction;
+  TDEAction      *embedPSAction;
+  TDEAction      *exportPDFAction;
+  TDEAction      *exportPSAction;
 };
 
 

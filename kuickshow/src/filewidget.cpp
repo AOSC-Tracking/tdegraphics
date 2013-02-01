@@ -80,9 +80,9 @@ FileWidget::~FileWidget()
 void FileWidget::initActions()
 {
     int index = 0;
-    KActionCollection *coll = actionCollection();
-    KActionSeparator *sep = new KActionSeparator( coll, "kuicksep" );
-    KActionMenu *menu = static_cast<KActionMenu*>( coll->action("popupMenu") );
+    TDEActionCollection *coll = actionCollection();
+    TDEActionSeparator *sep = new TDEActionSeparator( coll, "kuicksep" );
+    TDEActionMenu *menu = static_cast<TDEActionMenu*>( coll->action("popupMenu") );
 
     menu->insert( coll->action("kuick_showInOtherWindow"), index++ );
     menu->insert( coll->action("kuick_showInSameWindow"), index++ );

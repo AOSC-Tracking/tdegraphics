@@ -29,7 +29,7 @@
 #define FIND_ID     3
 
 SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
-    : KToolBar( parent, "iSearchBar" ), m_document( document ),
+    : TDEToolBar( parent, "iSearchBar" ), m_document( document ),
     m_searchType( 0 ), m_caseSensitive( false )
 {
     // change toolbar appearance
@@ -55,7 +55,7 @@ SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
                   i18n( "Clear filter" ), 0/*index*/ );
 
     // 3.1. create the popup menu for changing filtering features
-    m_menu = new KPopupMenu( this );
+    m_menu = new TDEPopupMenu( this );
     m_menu->insertItem( i18n("Case Sensitive"), 1 );
     m_menu->insertSeparator( 2 );
     m_menu->insertItem( i18n("Match Phrase"), 3 );

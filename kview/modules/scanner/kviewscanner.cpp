@@ -46,7 +46,7 @@ KViewScanner::KViewScanner( TQObject* parent, const char* name,
 	delete viewerList;
 	if( m_pViewer )
 	{
-		(void) new KAction( i18n( "&Scan Image..." ), "scanner", 0,
+		(void) new TDEAction( i18n( "&Scan Image..." ), "scanner", 0,
 							this, TQT_SLOT( slotScan() ),
 							actionCollection(), "plugin_scan" );
 	}

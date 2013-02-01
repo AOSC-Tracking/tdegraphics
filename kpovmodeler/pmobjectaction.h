@@ -30,7 +30,7 @@
 #include <tqptrlist.h>
 #include <tqstring.h>
 
-class KAction;
+class TDEAction;
 
 /**
  * Helper class for object action functions.

@@ -953,7 +953,7 @@ void kpColorSimilarityToolBarItem::mouseDoubleClickEvent (TQMouseEvent * /*e*/)
  */
 
 kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow, const char *name)
-    : KToolBar (mainWindow, name),
+    : TDEToolBar (mainWindow, name),
       m_mainWindow (mainWindow)
 {
     setText (label);
@@ -993,7 +993,7 @@ kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow,
     m_lastDockedOrientationSet = false;
     setOrientation (orientation ());
 
-    KToolBar::insertWidget (0, base->width (), base);
+    TDEToolBar::insertWidget (0, base->width (), base);
 }
 
 // virtual
@@ -1025,7 +1025,7 @@ void kpColorToolBar::setOrientation (Qt::Orientation o)
 
     m_colorPalette->setOrientation (o);
 
-    KToolBar::setOrientation (o);
+    TDEToolBar::setOrientation (o);
 }
 
 kpColorToolBar::~kpColorToolBar ()

@@ -75,7 +75,7 @@ KViewShell::KViewShell(const TQString& defaultMimeType)
   // file menu
   KStdAction::open(TQT_TQOBJECT(view), TQT_SLOT(slotFileOpen()), actionCollection());
   recent = KStdAction::openRecent (TQT_TQOBJECT(this), TQT_SLOT(openURL(const KURL &)), actionCollection());
-  reloadAction = new KAction(i18n("Reload"), "reload", CTRL + Key_R, view, TQT_SLOT(reload()), actionCollection(), "reload");
+  reloadAction = new TDEAction(i18n("Reload"), "reload", CTRL + Key_R, view, TQT_SLOT(reload()), actionCollection(), "reload");
   closeAction = KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(slotFileClose()), actionCollection());
   KStdAction::quit (TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), actionCollection());
 

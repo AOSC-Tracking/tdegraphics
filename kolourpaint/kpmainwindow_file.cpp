@@ -65,7 +65,7 @@ void kpMainWindow::setupFileMenuActions ()
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "kpMainWindow::setupFileMenuActions()" << endl;
 #endif
-    KActionCollection *ac = actionCollection ();
+    TDEActionCollection *ac = actionCollection ();
 
     m_actionNew = KStdAction::openNew (TQT_TQOBJECT(this), TQT_SLOT (slotNew ()), ac);
     m_actionOpen = KStdAction::open (TQT_TQOBJECT(this), TQT_SLOT (slotOpen ()), ac);
@@ -79,14 +79,14 @@ void kpMainWindow::setupFileMenuActions ()
     m_actionSave = KStdAction::save (TQT_TQOBJECT(this), TQT_SLOT (slotSave ()), ac);
     m_actionSaveAs = KStdAction::saveAs (TQT_TQOBJECT(this), TQT_SLOT (slotSaveAs ()), ac);
 
-    m_actionExport = new KAction (i18n ("E&xport..."), 0,
+    m_actionExport = new TDEAction (i18n ("E&xport..."), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotExport ()), ac, "file_export");
 
-    m_actionScan = new KAction (i18n ("Scan..."), SmallIcon ("scanner"), 0,
+    m_actionScan = new TDEAction (i18n ("Scan..."), SmallIcon ("scanner"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotScan ()), ac, "file_scan");
 
     //m_actionRevert = KStdAction::revert (this, TQT_SLOT (slotRevert ()), ac);
-    m_actionReload = new KAction (i18n ("Reloa&d"), KStdAccel::reload (),
+    m_actionReload = new TDEAction (i18n ("Reloa&d"), TDEStdAccel::reload (),
         TQT_TQOBJECT(this), TQT_SLOT (slotReload ()), ac, "file_revert");
     slotEnableReload ();
 
@@ -95,9 +95,9 @@ void kpMainWindow::setupFileMenuActions ()
 
     m_actionMail = KStdAction::mail (TQT_TQOBJECT(this), TQT_SLOT (slotMail ()), ac);
 
-    m_actionSetAsWallpaperCentered = new KAction (i18n ("Set as Wa&llpaper (Centered)"), 0,
+    m_actionSetAsWallpaperCentered = new TDEAction (i18n ("Set as Wa&llpaper (Centered)"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
-    m_actionSetAsWallpaperTiled = new KAction (i18n ("Set as Wallpaper (&Tiled)"), 0,
+    m_actionSetAsWallpaperTiled = new TDEAction (i18n ("Set as Wallpaper (&Tiled)"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
 
     m_actionClose = KStdAction::close (TQT_TQOBJECT(this), TQT_SLOT (slotClose ()), ac);
@@ -167,14 +167,14 @@ void kpMainWindow::addRecentURL (const KURL &url)
 
 
     // TODO: PROPAGATE: interprocess
-    if (KMainWindow::memberList)
+    if (TDEMainWindow::memberList)
     {
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\thave memberList" << endl;
     #endif
 
-        for (TQPtrList <KMainWindow>::const_iterator it = KMainWindow::memberList->begin ();
-             it != KMainWindow::memberList->end ();
+        for (TQPtrList <TDEMainWindow>::const_iterator it = TDEMainWindow::memberList->begin ();
+             it != TDEMainWindow::memberList->end ();
              it++)
         {
             kpMainWindow *mw = dynamic_cast <kpMainWindow *> (*it);
@@ -190,12 +190,12 @@ void kpMainWindow::addRecentURL (const KURL &url)
 
             if (mw != this)
             {
-                // WARNING: Do not use KRecentFilesAction::setItems()
+                // WARNING: Do not use TDERecentFilesAction::setItems()
                 //          - it does not work since only its superclass,
-                //          KSelectAction, implements setItems() and can't
-                //          update KRecentFilesAction's URL list.
+                //          TDESelectAction, implements setItems() and can't
+                //          update TDERecentFilesAction's URL list.
 
-                // Avoid URL memory leak in KRecentFilesAction::loadEntries().
+                // Avoid URL memory leak in TDERecentFilesAction::loadEntries().
                 mw->m_actionOpenRecent->clearURLList ();
 
                 mw->m_actionOpenRecent->loadEntries (cfg);

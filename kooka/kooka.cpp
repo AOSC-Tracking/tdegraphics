@@ -137,26 +137,26 @@ actionCollection());
     m_view->createDockMenu(actionCollection(), this, "settings_show_docks" );
 
     /* Image Viewer action Toolbar - OCR, Scaling etc. */
-    (void) new KAction(i18n("&OCR Image..."), "ocr", CTRL+Key_O,
+    (void) new TDEAction(i18n("&OCR Image..."), "ocr", CTRL+Key_O,
 		       m_view, TQT_SLOT(doOCR()),
 		       actionCollection(), "ocrImage" );
 
-    (void) new KAction(i18n("O&CR on Selection..."), "ocr-select", CTRL+Key_C,
+    (void) new TDEAction(i18n("O&CR on Selection..."), "ocr-select", CTRL+Key_C,
 		       m_view, TQT_SLOT(doOCRonSelection()),
 		       actionCollection(), "ocrImageSelect" );
 
-    KAction *act;
-    act =  new KAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
+    TDEAction *act;
+    act =  new TDEAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
 		       m_view, TQT_SLOT( slIVScaleToWidth()),
 		       actionCollection(), "scaleToWidth" );
     m_view->connectViewerAction( act );
 
-    act = new KAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
+    act = new TDEAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
 		       m_view, TQT_SLOT( slIVScaleToHeight()),
 		       actionCollection(), "scaleToHeight" );
     m_view->connectViewerAction( act );
 
-    act = new KAction(i18n("Original &Size"), "scaleorig", CTRL+Key_S,
+    act = new TDEAction(i18n("Original &Size"), "scaleorig", CTRL+Key_S,
                       m_view, TQT_SLOT( slIVScaleOriginal()),
                       actionCollection(), "scaleOriginal" );
     m_view->connectViewerAction( act );
@@ -166,10 +166,10 @@ actionCollection());
     TQIconSet lockSet;
     lockSet.setPixmap(BarIcon("lock")  , TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::On );
     lockSet.setPixmap(BarIcon("unlock"), TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::Off);
-    act = new KToggleAction ( i18n("Keep &Zoom Setting"), lockSet, CTRL+Key_Z,
+    act = new TDEToggleAction ( i18n("Keep &Zoom Setting"), lockSet, CTRL+Key_Z,
                               actionCollection(), "keepZoom" );
 #else
-    act = new KToggleAction( i18n("Keep &Zoom Setting"), BarIcon("lockzoom"), CTRL+Key_Z,
+    act = new TDEToggleAction( i18n("Keep &Zoom Setting"), BarIcon("lockzoom"), CTRL+Key_Z,
                              actionCollection(), "keepZoom" );
 #endif
 
@@ -179,93 +179,93 @@ actionCollection());
     m_view->connectViewerAction( act );
 
     /* thumbview and gallery actions */
-    act = new KAction(i18n("Set Zoom..."), "viewmag", 0,
+    act = new TDEAction(i18n("Set Zoom..."), "viewmag", 0,
 		       TQT_TQOBJECT(m_view), TQT_SLOT( slIVShowZoomDialog()),
 		       actionCollection(), "showZoomDialog" );
     m_view->connectViewerAction( act );
 
-    (void) new KAction(i18n("Create From Selectio&n"), "crop", CTRL+Key_N,
+    (void) new TDEAction(i18n("Create From Selectio&n"), "crop", CTRL+Key_N,
 		       TQT_TQOBJECT(m_view), TQT_SLOT( slCreateNewImgFromSelection() ),
 		       actionCollection(), "createFromSelection" );
 
-    (void) new KAction(i18n("Mirror Image &Vertically"), "mirror-vert", CTRL+Key_V,
+    (void) new TDEAction(i18n("Mirror Image &Vertically"), "mirror-vert", CTRL+Key_V,
 		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorVertical() ),
 		       actionCollection(), "mirrorVertical" );
 
-    (void) new KAction(i18n("&Mirror ImageQt::Horizontally"), "mirror-horiz", CTRL+Key_M,
+    (void) new TDEAction(i18n("&Mirror ImageQt::Horizontally"), "mirror-horiz", CTRL+Key_M,
 		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorHorizontal() ),
 		       actionCollection(), "mirrorHorizontal" );
 
-    (void) new KAction(i18n("Mirror Image &Both Directions"), "mirror-both", CTRL+Key_B,
+    (void) new TDEAction(i18n("Mirror Image &Both Directions"), "mirror-both", CTRL+Key_B,
 		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorBoth() ),
 		       actionCollection(), "mirrorBoth" );
 
-    (void) new KAction(i18n("Open Image in &Graphic Application..."), "fileopen", CTRL+Key_G,
+    (void) new TDEAction(i18n("Open Image in &Graphic Application..."), "fileopen", CTRL+Key_G,
 		       TQT_TQOBJECT(m_view), TQT_SLOT( slOpenCurrInGraphApp() ),
 		       actionCollection(), "openInGraphApp" );
 
-    act = new KAction(i18n("&Rotate Image Clockwise"), "rotate_cw", CTRL+Key_R,
+    act = new TDEAction(i18n("&Rotate Image Clockwise"), "rotate_cw", CTRL+Key_R,
 		      TQT_TQOBJECT(this), TQT_SLOT( slRotateClockWise() ),
 		       actionCollection(), "rotateClockwise" );
     m_view->connectViewerAction( act );
 
-    act = new KAction(i18n("Rotate Image Counter-Clock&wise"), "rotate_ccw", CTRL+Key_W,
+    act = new TDEAction(i18n("Rotate Image Counter-Clock&wise"), "rotate_ccw", CTRL+Key_W,
 		       TQT_TQOBJECT(this), TQT_SLOT( slRotateCounterClockWise() ),
 		       actionCollection(), "rotateCounterClockwise" );
     m_view->connectViewerAction( act );
 
-    act = new KAction(i18n("Rotate Image 180 &Degrees"), "rotate", CTRL+Key_D,
+    act = new TDEAction(i18n("Rotate Image 180 &Degrees"), "rotate", CTRL+Key_D,
 		       TQT_TQOBJECT(this), TQT_SLOT( slRotate180() ),
 		       actionCollection(), "upsitedown" );
     m_view->connectViewerAction( act );
 
     /* Gallery actions */
-    act = new KAction(i18n("&Create Folder..."), "folder_new", 0,
+    act = new TDEAction(i18n("&Create Folder..."), "folder_new", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotCreateFolder() ),
 		       actionCollection(), "foldernew" );
     m_view->connectGalleryAction( act );
 
-    act = new KAction(i18n("&Save Image..."), "filesave", 0,
+    act = new TDEAction(i18n("&Save Image..."), "filesave", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotExportFile() ),
 		       actionCollection(), "saveImage" );
     m_view->connectGalleryAction( act );
 
-    act = new KAction(i18n("&Import Image..."), "inline_image", 0,
+    act = new TDEAction(i18n("&Import Image..."), "inline_image", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotImportFile() ),
 		       actionCollection(), "importImage" );
     m_view->connectGalleryAction( act );
 
-    act = new KAction(i18n("&Delete Image"), "edittrash", 0,
+    act = new TDEAction(i18n("&Delete Image"), "edittrash", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotDeleteItems() ),
 		       actionCollection(), "deleteImage" );
     m_view->connectGalleryAction( act );
 
-    act = new KAction(i18n("&Unload Image"), "fileclose", 0,
+    act = new TDEAction(i18n("&Unload Image"), "fileclose", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotUnloadItems() ),
 		       actionCollection(), "unloadImage" );
     m_view->connectGalleryAction( act );
 
 #if 0
     /* not yet supported actions - coming post 3.1 */
-    (void) new KAction(i18n("&Load Scan Parameters"), "bookmark_add", CTRL+Key_L,
+    (void) new TDEAction(i18n("&Load Scan Parameters"), "bookmark_add", CTRL+Key_L,
                        m_view, TQT_SLOT(slLoadScanParams()),
                        actionCollection(), "loadscanparam" );
 
-    (void) new KAction(i18n("Save &Scan Parameters"), "bookmark_add", CTRL+Key_S,
+    (void) new TDEAction(i18n("Save &Scan Parameters"), "bookmark_add", CTRL+Key_S,
 		       m_view, TQT_SLOT(slSaveScanParams()),
 		       actionCollection(), "savescanparam" );
 #endif
 
-    (void) new KAction(i18n("Select Scan Device"), "scanner", 0,
+    (void) new TDEAction(i18n("Select Scan Device"), "scanner", 0,
 		       TQT_TQOBJECT(m_view), TQT_SLOT( slSelectDevice()),
 		       actionCollection(), "selectsource" );
 
-    (void) new KAction( i18n("Enable All Warnings && Messages"), 0,
+    (void) new TDEAction( i18n("Enable All Warnings && Messages"), 0,
 			TQT_TQOBJECT(this),  TQT_SLOT(slEnableWarnings()),
 			actionCollection(), "enable_msgs");
 
 
-    m_saveOCRTextAction = new KAction( i18n("Save OCR Res&ult Text"), "filesaveas", CTRL+Key_U,
+    m_saveOCRTextAction = new TDEAction( i18n("Save OCR Res&ult Text"), "filesaveas", CTRL+Key_U,
                                        m_view, TQT_SLOT(slSaveOCRResult()),
                                        actionCollection(), "saveOCRResult");
 }

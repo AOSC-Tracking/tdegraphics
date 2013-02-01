@@ -40,8 +40,8 @@
 #define PREFERENCE_DIA_TAB "PreferencesTab"
 
 class KPrinter;
-class KToggleAction;
-class KActionMenu;
+class TDEToggleAction;
+class TDEActionMenu;
 class KookaView;
 
 /**
@@ -131,11 +131,11 @@ private:
    KookaView *m_view;
 
    KPrinter   *m_printer;
-   KToggleAction *m_scanParamsAction;
-   KToggleAction *m_previewerAction;
-   KActionMenu   *m_settingsShowDocks;
+   TDEToggleAction *m_scanParamsAction;
+   TDEToggleAction *m_previewerAction;
+   TDEActionMenu   *m_settingsShowDocks;
 
-    KAction      *m_saveOCRTextAction;
+    TDEAction      *m_saveOCRTextAction;
    int m_prefDialogIndex;
 };
 

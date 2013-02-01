@@ -57,8 +57,8 @@ class PMInsertRuleSystem;
 class PMIOManager;
 
 class TQMimeSource;
-class KAction;
-class KSelectAction;
+class TDEAction;
+class TDESelectAction;
 class PMComboAction;
 class PMSpinBoxAction;
 class PMLabelAction;
@@ -903,120 +903,120 @@ private:
    bool m_onlyCopyPaste;
 
    // the actions
-   KAction* m_pImportAction;
-   KAction* m_pExportAction;
+   TDEAction* m_pImportAction;
+   TDEAction* m_pExportAction;
 
-   KAction* m_pCutAction;
-   KAction* m_pCopyAction;
-   KAction* m_pPasteAction;
-   KAction* m_pUndoAction;
-   KAction* m_pRedoAction;
-   KAction* m_pDeleteAction;
+   TDEAction* m_pCutAction;
+   TDEAction* m_pCopyAction;
+   TDEAction* m_pPasteAction;
+   TDEAction* m_pUndoAction;
+   TDEAction* m_pRedoAction;
+   TDEAction* m_pDeleteAction;
 
-   KAction* m_pNewGlobalSettingsAction;
-   KAction* m_pNewSkySphereAction;
-   KAction* m_pNewRainbowAction;
-   KAction* m_pNewFogAction;
-   KAction* m_pNewInteriorAction;
-   KAction* m_pNewMediaAction;
-   KAction* m_pNewDensityAction;
-   KAction* m_pNewMaterialAction;
-   KAction* m_pNewBoxAction;
-   KAction* m_pNewSphereAction;
-   KAction* m_pNewCylinderAction;
-   KAction* m_pNewConeAction;
-   KAction* m_pNewTorusAction;
-   KAction* m_pNewLatheAction;
-   KAction* m_pNewPrismAction;
-   KAction* m_pNewSurfaceOfRevolutionAction;
-   KAction* m_pNewSuperquadricEllipsoidAction;
-   KAction* m_pNewJuliaFractalAction;
-   KAction* m_pNewHeightFieldAction;
-   KAction* m_pNewTextAction;
+   TDEAction* m_pNewGlobalSettingsAction;
+   TDEAction* m_pNewSkySphereAction;
+   TDEAction* m_pNewRainbowAction;
+   TDEAction* m_pNewFogAction;
+   TDEAction* m_pNewInteriorAction;
+   TDEAction* m_pNewMediaAction;
+   TDEAction* m_pNewDensityAction;
+   TDEAction* m_pNewMaterialAction;
+   TDEAction* m_pNewBoxAction;
+   TDEAction* m_pNewSphereAction;
+   TDEAction* m_pNewCylinderAction;
+   TDEAction* m_pNewConeAction;
+   TDEAction* m_pNewTorusAction;
+   TDEAction* m_pNewLatheAction;
+   TDEAction* m_pNewPrismAction;
+   TDEAction* m_pNewSurfaceOfRevolutionAction;
+   TDEAction* m_pNewSuperquadricEllipsoidAction;
+   TDEAction* m_pNewJuliaFractalAction;
+   TDEAction* m_pNewHeightFieldAction;
+   TDEAction* m_pNewTextAction;
 
-   KAction* m_pNewBlobAction;
-   KAction* m_pNewBlobSphereAction;
-   KAction* m_pNewBlobCylinderAction;
+   TDEAction* m_pNewBlobAction;
+   TDEAction* m_pNewBlobSphereAction;
+   TDEAction* m_pNewBlobCylinderAction;
 
-   KAction* m_pNewPlaneAction;
-   KAction* m_pNewPolynomAction;
+   TDEAction* m_pNewPlaneAction;
+   TDEAction* m_pNewPolynomAction;
 
-   KAction* m_pNewDeclareAction;
-   KAction* m_pNewObjectLinkAction;
+   TDEAction* m_pNewDeclareAction;
+   TDEAction* m_pNewObjectLinkAction;
 
-   KAction* m_pNewUnionAction;
-   KAction* m_pNewDifferenceAction;
-   KAction* m_pNewIntersectionAction;
-   KAction* m_pNewMergeAction;
+   TDEAction* m_pNewUnionAction;
+   TDEAction* m_pNewDifferenceAction;
+   TDEAction* m_pNewIntersectionAction;
+   TDEAction* m_pNewMergeAction;
 
-   KAction* m_pNewBoundedByAction;
-   KAction* m_pNewClippedByAction;
+   TDEAction* m_pNewBoundedByAction;
+   TDEAction* m_pNewClippedByAction;
 
-   KAction* m_pNewBicubicPatchAction;
-   KAction* m_pNewDiscAction;
-   KAction* m_pNewTriangleAction;
+   TDEAction* m_pNewBicubicPatchAction;
+   TDEAction* m_pNewDiscAction;
+   TDEAction* m_pNewTriangleAction;
 
-   KAction* m_pNewLightAction;
-   KAction* m_pNewLooksLikeAction;
-   KAction* m_pNewProjectedThroughAction;
+   TDEAction* m_pNewLightAction;
+   TDEAction* m_pNewLooksLikeAction;
+   TDEAction* m_pNewProjectedThroughAction;
 
-   KAction* m_pNewCameraAction;
+   TDEAction* m_pNewCameraAction;
 
-   KAction* m_pNewTextureAction;
-   KAction* m_pNewPigmentAction;
-   KAction* m_pNewNormalAction;
-   KAction* m_pNewSolidColorAction;
-   KAction* m_pNewTextureListAction;
-   KAction* m_pNewColorListAction;
-   KAction* m_pNewPigmentListAction;
-   KAction* m_pNewNormalListAction;
-   KAction* m_pNewDensityListAction;
-   KAction* m_pNewFinishAction;
-   KAction* m_pNewPatternAction;
-   KAction* m_pNewBlendMapModifiersAction;
-   KAction* m_pNewTextureMapAction;
-   KAction* m_pNewMaterialMapAction;
-   KAction* m_pNewPigmentMapAction;
-   KAction* m_pNewColorMapAction;
-   KAction* m_pNewNormalMapAction;
-   KAction* m_pNewBumpMapAction;
-   KAction* m_pNewSlopeMapAction;
-   KAction* m_pNewDensityMapAction;
-   KAction* m_pNewSlopeAction;
-   KAction* m_pNewWarpAction;
-   KAction* m_pNewImageMapAction;
-   KAction* m_pNewQuickColorAction;
+   TDEAction* m_pNewTextureAction;
+   TDEAction* m_pNewPigmentAction;
+   TDEAction* m_pNewNormalAction;
+   TDEAction* m_pNewSolidColorAction;
+   TDEAction* m_pNewTextureListAction;
+   TDEAction* m_pNewColorListAction;
+   TDEAction* m_pNewPigmentListAction;
+   TDEAction* m_pNewNormalListAction;
+   TDEAction* m_pNewDensityListAction;
+   TDEAction* m_pNewFinishAction;
+   TDEAction* m_pNewPatternAction;
+   TDEAction* m_pNewBlendMapModifiersAction;
+   TDEAction* m_pNewTextureMapAction;
+   TDEAction* m_pNewMaterialMapAction;
+   TDEAction* m_pNewPigmentMapAction;
+   TDEAction* m_pNewColorMapAction;
+   TDEAction* m_pNewNormalMapAction;
+   TDEAction* m_pNewBumpMapAction;
+   TDEAction* m_pNewSlopeMapAction;
+   TDEAction* m_pNewDensityMapAction;
+   TDEAction* m_pNewSlopeAction;
+   TDEAction* m_pNewWarpAction;
+   TDEAction* m_pNewImageMapAction;
+   TDEAction* m_pNewQuickColorAction;
 
-   KAction* m_pNewTranslateAction;
-   KAction* m_pNewScaleAction;
-   KAction* m_pNewRotateAction;
-   KAction* m_pNewMatrixAction;
+   TDEAction* m_pNewTranslateAction;
+   TDEAction* m_pNewScaleAction;
+   TDEAction* m_pNewRotateAction;
+   TDEAction* m_pNewMatrixAction;
 
-   KAction* m_pNewCommentAction;
-   KAction* m_pNewRawAction;
+   TDEAction* m_pNewCommentAction;
+   TDEAction* m_pNewRawAction;
 
    // POV-Ray 3.5 objects
-   KAction* m_pNewIsoSurfaceAction;
-   KAction* m_pNewRadiosityAction;
-   KAction* m_pNewGlobalPhotonsAction;
-   KAction* m_pNewPhotonsAction;
-   KAction* m_pNewLightGroupAction;
-   KAction* m_pNewInteriorTextureAction;
-   KAction* m_pNewSphereSweepAction;
-   KAction* m_pNewMeshAction;
+   TDEAction* m_pNewIsoSurfaceAction;
+   TDEAction* m_pNewRadiosityAction;
+   TDEAction* m_pNewGlobalPhotonsAction;
+   TDEAction* m_pNewPhotonsAction;
+   TDEAction* m_pNewLightGroupAction;
+   TDEAction* m_pNewInteriorTextureAction;
+   TDEAction* m_pNewSphereSweepAction;
+   TDEAction* m_pNewMeshAction;
 
-   KAction* m_pSearchLibraryObjectAction;
+   TDEAction* m_pSearchLibraryObjectAction;
 
    PMComboAction* m_pRenderComboAction;
-   KAction* m_pRenderSettingsAction;
-   KAction* m_pViewRenderWindowAction;
-   KAction* m_pRenderAction;
+   TDEAction* m_pRenderSettingsAction;
+   TDEAction* m_pViewRenderWindowAction;
+   TDEAction* m_pRenderAction;
    PMSpinBoxAction* m_pVisibilityLevelAction;
    PMLabelAction* m_pVisibilityLabelAction;
-   KSelectAction* m_pGlobalDetailAction;
+   TDESelectAction* m_pGlobalDetailAction;
    PMLabelAction* m_pGlobalDetailLabelAction;
 
-   TQPtrList<KAction> m_readWriteActions;
+   TQPtrList<TDEAction> m_readWriteActions;
 
    PMPrototypeManager* m_pPrototypeManager;
    PMInsertRuleSystem* m_pInsertRuleSystem;

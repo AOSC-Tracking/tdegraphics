@@ -41,7 +41,7 @@ class TQIconSet;
 class TQPixmap;
 
 class KKeySequence;
-class KShortcut;
+class TDEShortcut;
 
 class kpColor;
 class kpColorToolBar;
@@ -89,7 +89,7 @@ public:
     void setText (const TQString &text);
 
     static TQString toolTipForTextAndShortcut (const TQString &text,
-        const KShortcut &shortcut);
+        const TDEShortcut &shortcut);
     TQString toolTip () const;
 
     TQString description () const;
@@ -101,13 +101,13 @@ public:
     // Given a single <key>, returns a shortcut with <key>
     // (disabled when the user is editing text) and as an alternate,
     // <some modifiers>+<key>.
-    static KShortcut shortcutForKey (int key);
-    KShortcut shortcut () const;
+    static TDEShortcut shortcutForKey (int key);
+    TDEShortcut shortcut () const;
 
     static bool keyIsText (int key);
     static bool containsSingleKeyTrigger (const KKeySequence &seq);
-    static bool containsSingleKeyTrigger (const KShortcut &shortcut,
-        KShortcut *shortcutWithoutSingleKeyTriggers);
+    static bool containsSingleKeyTrigger (const TDEShortcut &shortcut,
+        TDEShortcut *shortcutWithoutSingleKeyTriggers);
 
     bool singleKeyTriggersEnabled () const;
     void enableSingleKeyTriggers (bool enable = true);

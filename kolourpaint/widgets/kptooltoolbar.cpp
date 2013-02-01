@@ -81,7 +81,7 @@ protected:
 
 
 kpToolToolBar::kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, int colsOrRows, const char *name)
-    : KToolBar ((TQWidget *) mainWindow, name, false/*don't use global toolBar settings*/, true/*readConfig*/),
+    : TDEToolBar ((TQWidget *) mainWindow, name, false/*don't use global toolBar settings*/, true/*readConfig*/),
       m_vertCols (colsOrRows),
       m_buttonGroup (0),
       m_baseWidget (0),
@@ -507,7 +507,7 @@ void kpToolToolBar::slotToolActionActivated ()
 
     if (m_currentTool)
     {
-        // If the user clicks on the same KToggleAction, it unchecks it
+        // If the user clicks on the same TDEToggleAction, it unchecks it
         // - this is inconsistent with the Tool Box so always make sure it's
         // checked.
         kpToolAction *action = m_currentTool->action ();
@@ -620,7 +620,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
         }
     }
 
-    KToolBar::setOrientation (o);
+    TDEToolBar::setOrientation (o);
 }
 
 // private

@@ -57,7 +57,7 @@ public:
 
   void 		updateActions();
 
-  KActionCollection * actionCollection() const { return m_actions; }
+  TDEActionCollection * actionCollection() const { return m_actions; }
 
   /**
    * Resizes image to @p w, @p h, but takes into account the workarea, so
@@ -100,7 +100,7 @@ protected:
 
   void 		init();
   void 		centerImage();
-  void          addAlternativeShortcut( KAction *action, int key );
+  void          addAlternativeShortcut( TDEAction *action, int key );
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage * );
   virtual bool  canZoomTo( int newWidth, int newHeight );
@@ -168,7 +168,7 @@ private:
   int           m_numHeads;
   TQString   m_saveDirectory;
 
-  KActionCollection *m_actions;
+  TDEActionCollection *m_actions;
 
   static TQCursor * s_handCursor;
 };

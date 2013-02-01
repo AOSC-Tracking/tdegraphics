@@ -115,19 +115,19 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     TQPushButton *helpButton = actionButton( Help );
     helpButton->setPopup(helpMenu->menu());
 
-    KAccel* accel = new KAccel(this);
-    accel->insert(KStdAccel::Quit, TQT_TQOBJECT(kapp), TQT_SLOT(quit()));
+    TDEAccel* accel = new TDEAccel(this);
+    accel->insert(TDEStdAccel::Quit, TQT_TQOBJECT(kapp), TQT_SLOT(quit()));
     accel->insert( "QuickSave", i18n("Quick Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user without showing the file dialog."),
 		   CTRL+SHIFT+Key_S, TQT_TQOBJECT(this), TQT_SLOT(slotSave()));
-    accel->insert(KStdAccel::Save, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
-//    accel->insert(KShortcut(CTRL+Key_A), TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
+    accel->insert(TDEStdAccel::Save, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
+//    accel->insert(TDEShortcut(CTRL+Key_A), TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
     accel->insert( "SaveAs", i18n("Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user."),
 		   CTRL+Key_A, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
-    accel->insert(KStdAccel::Print, TQT_TQOBJECT(this), TQT_SLOT(slotPrint()));
-    accel->insert(KStdAccel::New, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
-    accel->insert(KStdAccel::Copy, TQT_TQOBJECT(this), TQT_SLOT(slotCopy()));
+    accel->insert(TDEStdAccel::Print, TQT_TQOBJECT(this), TQT_SLOT(slotPrint()));
+    accel->insert(TDEStdAccel::New, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
+    accel->insert(TDEStdAccel::Copy, TQT_TQOBJECT(this), TQT_SLOT(slotCopy()));
 
     accel->insert( "Quit2", Key_Q, TQT_TQOBJECT(this), TQT_SLOT(slotSave()));
     accel->insert( "Save2", Key_S, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));

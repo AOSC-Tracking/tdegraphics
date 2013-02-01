@@ -17,7 +17,7 @@
 
 class KPDFDocument;
 
-class TOC : public KListView, public DocumentObserver
+class TOC : public TDEListView, public DocumentObserver
 {
 Q_OBJECT
   
@@ -36,7 +36,7 @@ Q_OBJECT
         void slotExecuted(TQListViewItem *i);
 
     private:
-        void addChildren( const TQDomNode & parentNode, KListViewItem * parentItem = 0 );
+        void addChildren( const TQDomNode & parentNode, TDEListViewItem * parentItem = 0 );
         DocumentViewport getViewport( const TQDomElement &e ) const;
         KPDFDocument *m_document;
 };

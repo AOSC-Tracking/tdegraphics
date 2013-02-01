@@ -98,7 +98,7 @@ void kpMainWindow::setupToolActions ()
     m_tools.append (m_toolCurve = new kpToolCurve (this));
 
 
-    KActionCollection *ac = actionCollection ();
+    TDEActionCollection *ac = actionCollection ();
 
     m_actionPrevToolOptionGroup1 = new kpSingleKeyTriggersAction (
         i18n ("Previous Tool Option (Group #1)"),

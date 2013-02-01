@@ -67,7 +67,7 @@ static const uchar cursorBits[] = {
 * create the thingy with no borders and set up
 * its members
 */
-KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
+KLineal::KLineal(TQWidget*parent,const char* name):TDEMainWindow(parent,name){
 	if (!name) {
 		name = "klineal";
 	}
@@ -143,9 +143,9 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   _clicked = false;
   setOrientation(South);
   // setMediumLength();
-  mMenu = new KPopupMenu(this);
+  mMenu = new TDEPopupMenu(this);
   mMenu->insertTitle(i18n("KRuler"));
-  KPopupMenu *oriMenu = new KPopupMenu(this);
+  TDEPopupMenu *oriMenu = new TDEPopupMenu(this);
   oriMenu->insertItem(UserIconSet("kruler-north"), i18n("&North"), this, TQT_SLOT(setNorth()), Key_N);
   oriMenu->insertItem(UserIconSet("kruler-east"), i18n("&East"), this, TQT_SLOT(setEast()), Key_E);
   oriMenu->insertItem(UserIconSet("kruler-south"), i18n("&South"), this, TQT_SLOT(setSouth()), Key_S);
@@ -153,7 +153,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):KMainWindow(parent,name){
   oriMenu->insertItem(i18n("&Turn Right"), this, TQT_SLOT(turnRight()), Key_R);
   oriMenu->insertItem(i18n("Turn &Left"), this, TQT_SLOT(turnLeft()), Key_L);
   mMenu->insertItem(i18n("&Orientation"), oriMenu);
-  mLenMenu = new KPopupMenu(this);
+  mLenMenu = new TDEPopupMenu(this);
   mLenMenu->insertItem(i18n("&Short"), this, TQT_SLOT(setShortLength()), CTRL+Key_S);
   mLenMenu->insertItem(i18n("&Medium"), this, TQT_SLOT(setMediumLength()), CTRL+Key_M);
   mLenMenu->insertItem(i18n("&Tall"), this, TQT_SLOT(setTallLength()), CTRL+Key_T);
@@ -382,8 +382,8 @@ void KLineal::choseColor() {
 */
 void KLineal::choseFont() {
   TQFont font = mScaleFont;
-  int result = KFontDialog::getFont(font, false, this);
-  if (result == KFontDialog::Accepted) {
+  int result = TDEFontDialog::getFont(font, false, this);
+  if (result == TDEFontDialog::Accepted) {
     setFont(font);
   }
 }
@@ -515,7 +515,7 @@ void KLineal::keyPressEvent(TQKeyEvent *e) {
     	dist.setY(1);
  			break;
   	default:
-    	KMainWindow::keyPressEvent(e);
+    	TDEMainWindow::keyPressEvent(e);
       return;
  	}
 	if (e->state() & ShiftButton) {

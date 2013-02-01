@@ -40,9 +40,9 @@ class KCamera;
 class KameraDeviceSelectDialog;
 class KSimpleConfig;
 class KIconView;
-class KActionCollection;
-class KToolBar;
-class KPopupMenu;
+class TDEActionCollection;
+class TDEToolBar;
+class TDEPopupMenu;
 
 class KKameraConfig : public TDECModule
 {
@@ -101,10 +101,10 @@ private:
 
 	// widgets for the cameras listview
 	KIconView *m_deviceSel;
-	KActionCollection *m_actions;
+	TDEActionCollection *m_actions;
 	TQPushButton *m_addCamera, *m_removeCamera, *m_testCamera, *m_configureCamera;
-	KToolBar *m_toolbar;
-	KPopupMenu *m_devicePopup;
+	TDEToolBar *m_toolbar;
+	TDEPopupMenu *m_devicePopup;
 
 	// true if libgphoto2 was initialised successfully in
 	// the constructor

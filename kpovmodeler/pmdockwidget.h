@@ -38,7 +38,7 @@
    - PMDockTabGroup                 - minor helper class
    - PMDockWidget                   - IMPORTANT CLASS: the one and only dockwidget class
    - PMDockManager                  - helper class
-   - PMDockMainWindow               - IMPORTANT CLASS: a special KMainWindow that can have dockwidgets
+   - PMDockMainWindow               - IMPORTANT CLASS: a special TDEMainWindow that can have dockwidgets
    - PMDockArea                     - like PMDockMainWindow but inherits just TQWidget
 
    IMPORTANT Note: This file compiles also in TQt-only mode by using the NO_KDE2 precompiler definition!
@@ -93,7 +93,7 @@ class TQHBoxLayout;
 class TQPixmap;
 
 #ifndef NO_KDE2
-class KToolBar;
+class TDEToolBar;
 class TDEConfig;
 #else
 class TQToolBar;
@@ -1170,7 +1170,7 @@ private:
 };
 
 /**
- * A special kind of @ref KMainWindow that is able to have dockwidget child widgets (and member of the dockwidget class set).
+ * A special kind of @ref TDEMainWindow that is able to have dockwidget child widgets (and member of the dockwidget class set).
  *
  * The main widget should be a @ref PMDockWidget where other @ref PMDockWidget can be docked to
  * the left, right, top, bottom or to the middle.
@@ -1212,7 +1212,7 @@ private:
  *
  * @author Max Judin (documentation: Falk Brettschneider).
  */
-class EXPORT_DOCKCLASS PMDockMainWindow : public KMainWindow, virtual public PartBase
+class EXPORT_DOCKCLASS PMDockMainWindow : public TDEMainWindow, virtual public PartBase
 {
   Q_OBJECT
   
@@ -1414,7 +1414,7 @@ private:
 
 
 #ifdef _JOWENN_EXPERIMENTAL_
-/* Joseph Wenninger jowenn@kde.org Experimental (Just all KMainWindow references changed to TQWidget, otherwise nearly exactly the
+/* Joseph Wenninger jowenn@kde.org Experimental (Just all TDEMainWindow references changed to TQWidget, otherwise nearly exactly the
 same as PMDockMainWindow*/
 
 class EXPORT_DOCKCLASS PMDockArea : public TQWidget

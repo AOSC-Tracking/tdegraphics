@@ -29,7 +29,7 @@
 
 class TQCheckBox;
 class TQLabel;
-class KPopupMenu;
+class TDEPopupMenu;
 
 class DocumentPageCache;
 
@@ -183,7 +183,7 @@ private:
 
   bool showThumbnails;
 
-  KPopupMenu* contextMenu;
+  TDEPopupMenu* contextMenu;
 };
 
 #endif

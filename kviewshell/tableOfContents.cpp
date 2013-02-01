@@ -29,18 +29,18 @@
 
 
 TocItem::TocItem(TocItem* parent)
-  : KListViewItem(parent)
+  : TDEListViewItem(parent)
 {
 }
 
 TocItem::TocItem(TQListView* parent)
-  : KListViewItem(parent)
+  : TDEListViewItem(parent)
 {
 }
 
 
 TableOfContents::TableOfContents(TQWidget* parent)
-  : KListView(parent)
+  : TDEListView(parent)
 {
   addColumn(i18n("Topic"));
   addColumn(i18n("Page"));

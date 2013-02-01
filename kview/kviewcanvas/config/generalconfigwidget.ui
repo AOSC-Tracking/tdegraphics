@@ -152,7 +152,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
                         <string>Choose which blend effects should be used:</string>
                     </property>
                 </widget>
-                <widget class="KListView">
+                <widget class="TDEListView">
                     <column>
                         <property name="text">
                             <string>Effect</string>

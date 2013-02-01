@@ -37,9 +37,9 @@ class ImageWindow;
 class ImData;
 class KuickConfigDialog;
 
-class KAccel;
+class TDEAccel;
 class TDEConfig;
-class KToggleAction;
+class TDEToggleAction;
 class AboutWidget;
 
 class KURL;
@@ -79,7 +79,7 @@ public:
 };
 
 
-class KuickShow : public KMainWindow
+class KuickShow : public TDEMainWindow
 {
     Q_OBJECT
   
@@ -93,7 +93,7 @@ public:
 
     // overridden to make KDCOPActionProxy work -- all our actions are not
     // in the mainwindow's collection, but in the filewidget's.
-    virtual KActionCollection* actionCollection() const;
+    virtual TDEActionCollection* actionCollection() const;
 
 
 protected:
@@ -151,7 +151,7 @@ private:
     void 		delayedRepeatEvent( ImageWindow *, TQKeyEvent * );
     void		abortDelayedEvent();
     void                deleteAllViewers();
-    void                redirectDeleteAndTrashActions(KActionCollection *coll);
+    void                redirectDeleteAndTrashActions(TDEActionCollection *coll);
 
     void                delayAction(DelayedRepeatEvent *event);
     void                replayAdvance(DelayedRepeatEvent *event);
@@ -167,12 +167,12 @@ private:
     KuickConfigDialog 	*dialog;
     ImlibData           *id;
     ImageWindow 	*m_viewer;
-    KToggleAction 	*oneWindowAction;
-    KAccel 		*m_accel;
+    TDEToggleAction 	*oneWindowAction;
+    TDEAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
     TQTimer              *m_slideTimer;
     bool                m_slideShowStopped;
-    KToggleAction       *m_toggleBrowserAction;
+    TDEToggleAction       *m_toggleBrowserAction;
     TQGuardedPtr<AboutWidget> aboutWidget;
 };
 

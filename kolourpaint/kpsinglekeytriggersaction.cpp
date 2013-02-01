@@ -87,7 +87,7 @@ void kpSingleKeyTriggersActionInterface::enableSingleKeyTriggers (bool enable)
     {
         m_fullShortcut = /*pure virtual*/actionShortcut ();
 
-        KShortcut newShortcut;
+        TDEShortcut newShortcut;
         if (kpTool::containsSingleKeyTrigger (m_fullShortcut, &newShortcut))
         {
         #if DEBUG_KP_SINGLE_KEY_TRIGGERS_ACTION
@@ -117,10 +117,10 @@ void kpSingleKeyTriggersActionInterface::enableSingleKeyTriggers (bool enable)
 
 
 kpSingleKeyTriggersAction::kpSingleKeyTriggersAction (const TQString &text,
-                            const KShortcut &shortcut,
+                            const TDEShortcut &shortcut,
                             const TQObject *receiver, const char *slot,
-                            KActionCollection *parent, const char *name)
-    : KAction (text, shortcut, receiver, slot, parent, name)
+                            TDEActionCollection *parent, const char *name)
+    : TDEAction (text, shortcut, receiver, slot, parent, name)
 {
 }
 
@@ -140,13 +140,13 @@ const char *kpSingleKeyTriggersAction::actionName () const
 }
 
 // public virtual [base kpSingleKeyTriggersActionInterface]
-KShortcut kpSingleKeyTriggersAction::actionShortcut () const
+TDEShortcut kpSingleKeyTriggersAction::actionShortcut () const
 {
     return shortcut ();
 }
 
 // public virtual [base kpSingleKeyTriggersActionInterface]
-void kpSingleKeyTriggersAction::actionSetShortcut (const KShortcut &shortcut)
+void kpSingleKeyTriggersAction::actionSetShortcut (const TDEShortcut &shortcut)
 {
     setShortcut (shortcut);
 }

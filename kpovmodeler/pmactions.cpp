@@ -53,7 +53,7 @@ public:
 
 PMComboAction::PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
                               TQObject* parent, const char* name )
-      : KAction( text, accel, parent, name )
+      : TDEAction( text, accel, parent, name )
 {
    m_receiver = receiver;
    m_member = member;
@@ -67,12 +67,12 @@ PMComboAction::~PMComboAction( )
 
 int PMComboAction::plug( TQWidget* w, int index )
 {
-   if( !w->inherits( "KToolBar" ) )
+   if( !w->inherits( "TDEToolBar" ) )
       return -1;
 
-   KToolBar* toolBar = ( KToolBar* ) w;
+   TDEToolBar* toolBar = ( TDEToolBar* ) w;
 
-   int id = KAction::getToolButtonID( );
+   int id = TDEAction::getToolButtonID( );
 
    TQComboBox* comboBox = new PMComboBox( toolBar );
    if( m_minWidth > 0 )
@@ -101,10 +101,10 @@ int PMComboAction::plug( TQWidget* w, int index )
 
 void PMComboAction::unplug( TQWidget *w )
 {
-   if( !w->inherits( "KToolBar" ) )
+   if( !w->inherits( "TDEToolBar" ) )
       return;
 
-   KToolBar *toolBar = ( KToolBar* ) w;
+   TDEToolBar *toolBar = ( TDEToolBar* ) w;
 
    int idx = findContainer( w );
 
@@ -144,7 +144,7 @@ protected:
 };
 
 PMLabelAction::PMLabelAction( const TQString &text, TQObject *parent, const char *name )
-    : KAction( text, 0, parent, name )
+    : TDEAction( text, 0, parent, name )
 {
    m_button = 0;
 }
@@ -153,11 +153,11 @@ int PMLabelAction::plug( TQWidget *widget, int index )
 {
    //do not call the previous implementation here
 
-   if( widget->inherits( "KToolBar" ) )
+   if( widget->inherits( "TDEToolBar" ) )
    {
-      KToolBar* tb = ( KToolBar* ) widget;
+      TDEToolBar* tb = ( TDEToolBar* ) widget;
 
-      int id = KAction::getToolButtonID( );
+      int id = TDEAction::getToolButtonID( );
 
       m_button = new PMToolBarLabel( text( ), widget );
       tb->insertWidget( id, m_button->width( ), m_button, index );
@@ -174,9 +174,9 @@ int PMLabelAction::plug( TQWidget *widget, int index )
 
 void PMLabelAction::unplug( TQWidget *widget )
 {
-   if( widget->inherits( "KToolBar" ) )
+   if( widget->inherits( "TDEToolBar" ) )
    {
-      KToolBar* bar = ( KToolBar* ) widget;
+      TDEToolBar* bar = ( TDEToolBar* ) widget;
       
       int idx = findContainer( bar );
       
@@ -194,7 +194,7 @@ void PMLabelAction::unplug( TQWidget *widget )
 
 PMSpinBoxAction::PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member,
                                   TQObject* parent, const char* name )
-      : KAction( text, accel, parent, name )
+      : TDEAction( text, accel, parent, name )
 {
    m_receiver = receiver;
    m_member = member;
@@ -206,12 +206,12 @@ PMSpinBoxAction::~PMSpinBoxAction( )
 
 int PMSpinBoxAction::plug( TQWidget* w, int index )
 {
-   if( !w->inherits( "KToolBar" ) )
+   if( !w->inherits( "TDEToolBar" ) )
       return -1;
 
-   KToolBar* toolBar = ( KToolBar* ) w;
+   TDEToolBar* toolBar = ( TDEToolBar* ) w;
 
-   int id = KAction::getToolButtonID( );
+   int id = TDEAction::getToolButtonID( );
    
    TQSpinBox* spinBox = new TQSpinBox( -1000, 1000, 1, w );
    toolBar->insertWidget( id, 70, spinBox, index );
@@ -234,10 +234,10 @@ int PMSpinBoxAction::plug( TQWidget* w, int index )
 
 void PMSpinBoxAction::unplug( TQWidget *w )
 {
-   if( !w->inherits( "KToolBar" ) )
+   if( !w->inherits( "TDEToolBar" ) )
       return;
 
-   KToolBar *toolBar = (KToolBar *)w;
+   TDEToolBar *toolBar = (TDEToolBar *)w;
 
    int idx = findContainer( w );
 

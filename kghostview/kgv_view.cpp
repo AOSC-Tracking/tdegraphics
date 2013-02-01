@@ -187,34 +187,34 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     //-- File Menu ----------------------------------------------------------
     KStdAction::saveAs( document(), TQT_SLOT( saveAs() ),
                         actionCollection() );
-    new KAction( i18n( "Document &Info" ), 0,
+    new TDEAction( i18n( "Document &Info" ), 0,
                  miniWidget(), TQT_SLOT( info() ),
                  actionCollection(), "info" );
 
     //-- Edit Menu -----------------------------------------------------
-    _popup = new KPopupMenu( _markList, "marklist_menu" );
+    _popup = new TDEPopupMenu( _markList, "marklist_menu" );
 
-    KAction *act = new KAction( i18n( "Mark Current Page" ), "flag", CTRL+SHIFT+Key_M,
+    TDEAction *act = new TDEAction( i18n( "Mark Current Page" ), "flag", CTRL+SHIFT+Key_M,
                  TQT_TQOBJECT(_markList), TQT_SLOT( markCurrent() ),
                  actionCollection(), "mark_current" );
     act->plug( _popup );
-    act = new KAction( i18n( "Mark &All Pages" ), 0,
+    act = new TDEAction( i18n( "Mark &All Pages" ), 0,
                  TQT_TQOBJECT(_markList), TQT_SLOT( markAll() ),
                  actionCollection(), "mark_all" );
     act->plug( _popup );
-    act = new KAction( i18n( "Mark &Even Pages" ), 0,
+    act = new TDEAction( i18n( "Mark &Even Pages" ), 0,
                  TQT_TQOBJECT(_markList), TQT_SLOT( markEven() ),
                  actionCollection(), "mark_even" );
     act->plug( _popup );
-    act = new KAction( i18n( "Mark &Odd Pages" ), 0,
+    act = new TDEAction( i18n( "Mark &Odd Pages" ), 0,
                  TQT_TQOBJECT(_markList), TQT_SLOT( markOdd() ),
                  actionCollection(), "mark_odd" );
     act->plug( _popup );
-    act = new KAction( i18n( "&Toggle Page Marks" ), 0,
+    act = new TDEAction( i18n( "&Toggle Page Marks" ), 0,
                  TQT_TQOBJECT(_markList), TQT_SLOT( toggleMarks() ),
                  actionCollection(), "toggle" );
     act->plug( _popup );
-    act = new KAction( i18n("&Remove Page Marks"), 0,
+    act = new TDEAction( i18n("&Remove Page Marks"), 0,
                  TQT_TQOBJECT(_markList), TQT_SLOT( removeMarks() ),
                  actionCollection(), "remove" );
     act->plug( _popup );
@@ -222,12 +222,12 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     // TODO -- disable entry if there aren't any page names
 
     //-- View Menu ----------------------------------------------------------
-    _selectOrientation = new KSelectAction( i18n( "&Orientation" ), 0, 0, 0,
+    _selectOrientation = new TDESelectAction( i18n( "&Orientation" ), 0, 0, 0,
                                     actionCollection(), "orientation_menu" );
-    _selectMedia       = new KSelectAction( i18n( "Paper &Size" ), 0, 0, 0,
+    _selectMedia       = new TDESelectAction( i18n( "Paper &Size" ), 0, 0, 0,
                                     actionCollection(), "media_menu" );
 
-    _flick = new KToggleAction( i18n( "No &Flicker" ), 0,
+    _flick = new TDEToggleAction( i18n( "No &Flicker" ), 0,
                                 this, TQT_SLOT( slotFlicker() ),
                                 actionCollection(), "no_flicker" );
     
@@ -245,7 +245,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
              this, TQT_SLOT( slotMedia( int ) ) );
 
     {
-	KShortcut zoomInShort = KStdAccel::zoomIn();
+	TDEShortcut zoomInShort = TDEStdAccel::zoomIn();
 	zoomInShort.append( KKey( CTRL+Key_Equal ) );
 	_zoomIn = KStdAction::zoomIn( this, TQT_SLOT( slotZoomIn() ),
 				    actionCollection(), "zoomIn" );
@@ -253,7 +253,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     }
     _zoomOut = KStdAction::zoomOut( this,  TQT_SLOT( slotZoomOut() ),
                                     actionCollection(), "zoomOut" );
-    _zoomTo = new KSelectAction(  i18n( "Zoom" ), "viewmag", 0, actionCollection(), "zoomTo" );
+    _zoomTo = new TDESelectAction(  i18n( "Zoom" ), "viewmag", 0, actionCollection(), "zoomTo" );
     connect(  _zoomTo, TQT_SIGNAL(  activated(  const TQString & ) ), this, TQT_SLOT(  slotZoom( const TQString& ) ) );
     _zoomTo->setEditable(  true );
     _zoomTo->clear();
@@ -273,18 +273,18 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _zoomTo->setItems( zooms );
     _zoomTo->setCurrentItem( idx );
 
-    _fitWidth = new KAction( i18n( "&Fit to Page Width" ), 0, this,
+    _fitWidth = new TDEAction( i18n( "&Fit to Page Width" ), 0, this,
 	    TQT_SLOT( slotFitToPage() ), actionCollection(),
 	    "fit_to_page");
-    _fitScreen = new KAction( i18n( "&Fit to Screen" ), Key_S, this,
+    _fitScreen = new TDEAction( i18n( "&Fit to Screen" ), Key_S, this,
 	    TQT_SLOT( slotFitToScreen() ), actionCollection(),
 	    "fit_to_screen");
 
-    _prevPage  = new KAction( i18n( "Previous Page" ), CTRL+Key_PageUp, this, TQT_SLOT( slotPrevPage() ),
+    _prevPage  = new TDEAction( i18n( "Previous Page" ), CTRL+Key_PageUp, this, TQT_SLOT( slotPrevPage() ),
                                     actionCollection(), "prevPage" );
     _prevPage->setWhatsThis( i18n( "Moves to the previous page of the document" ) );
 
-    _nextPage  = new KAction( i18n( "Next Page" ), CTRL + Key_PageDown, this, TQT_SLOT( slotNextPage() ),
+    _nextPage  = new TDEAction( i18n( "Next Page" ), CTRL + Key_PageDown, this, TQT_SLOT( slotNextPage() ),
                                    actionCollection(), "nextPage" );
     _nextPage->setWhatsThis( i18n( "Moves to the next page of the document" ) );
 
@@ -296,15 +296,15 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
                                    actionCollection(), "goToEnd" );
     _lastPage->setWhatsThis( i18n( "Moves to the last page of the document" ) );
 
-    KShortcut readUpShort = KStdAccel::shortcut( KStdAccel::Prior );
+    TDEShortcut readUpShort = TDEStdAccel::shortcut( TDEStdAccel::Prior );
     readUpShort.append( KKey( SHIFT+Key_Space ) );
-    _readUp    = new KAction( i18n( "Read Up" ), "up",
+    _readUp    = new TDEAction( i18n( "Read Up" ), "up",
                               readUpShort, this, TQT_SLOT( slotReadUp() ),
                               actionCollection(), "readUp" );
 
-    KShortcut readDownShort = KStdAccel::shortcut( KStdAccel::Next );
+    TDEShortcut readDownShort = TDEStdAccel::shortcut( TDEStdAccel::Next );
     readDownShort.append( KKey( Key_Space ) );
-    _readDown  = new KAction( i18n( "Read Down" ), "down",
+    _readDown  = new TDEAction( i18n( "Read Down" ), "down",
                               readDownShort, this, TQT_SLOT( slotReadDown() ),
                               actionCollection(), "readDown" );
 
@@ -312,16 +312,16 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
                                       actionCollection(), "goToPage" );
 
     //-- Settings Menu ------------------------------------------------------
-    _showScrollBars = new KToggleAction( i18n( "Show &Scrollbars" ), 0,
+    _showScrollBars = new TDEToggleAction( i18n( "Show &Scrollbars" ), 0,
                                 actionCollection(), "show_scrollbars" );
     _showScrollBars->setCheckedState(i18n("Hide &Scrollbars"));
-    _watchFile	    = new KToggleAction( i18n( "&Watch File" ), 0,
+    _watchFile	    = new TDEToggleAction( i18n( "&Watch File" ), 0,
                                 this, TQT_SLOT( slotWatchFile() ),
                                 actionCollection(), "watch_file" );
-    _showPageList   = new KToggleAction( i18n( "Show &Page List" ), 0,
+    _showPageList   = new TDEToggleAction( i18n( "Show &Page List" ), 0,
                                 actionCollection(), "show_page_list" );
     _showPageList->setCheckedState(i18n("Hide &Page List"));
-    _showPageLabels = new KToggleAction( i18n("Show Page &Labels"), 0,
+    _showPageLabels = new TDEToggleAction( i18n("Show Page &Labels"), 0,
                                 actionCollection(), "show_page_labels" );
     _showPageLabels->setCheckedState(i18n("Hide Page &Labels"));
     KStdAction::preferences( this, TQT_SLOT( slotConfigure() ), actionCollection() );

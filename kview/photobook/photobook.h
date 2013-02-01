@@ -55,7 +55,7 @@ class PhotoBook : public TQSplitter
 Q_OBJECT
 
 	Previews *mList;
-	KAction *mFit;
+	TDEAction *mFit;
 	KParts::ReadOnlyPart *mViewer;
 
 public:
@@ -110,8 +110,8 @@ class PhotoBookPart : public KParts::ReadOnlyPart
 Q_OBJECT
   
 	PhotoBook *bv;
-	KAction *m_pPreviousAction;
-	KAction *m_pNextAction;
+	TDEAction *m_pPreviousAction;
+	TDEAction *m_pNextAction;
 
 public:
 	PhotoBookPart(

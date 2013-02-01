@@ -40,7 +40,7 @@
 #include <kstatusbar.h>
 
 
-KColorEditApp::KColorEditApp() : KMainWindow(0) {
+KColorEditApp::KColorEditApp() : TDEMainWindow(0) {
   config=kapp->config();
 
   ///////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ void KColorEditApp::initActions()
   m_actRecent = KStdAction::openRecent( TQT_TQOBJECT(this),
           TQT_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
 
-  ( void ) new KAction( i18n("New &Window"), kapp->miniIcon(), KShortcut(),
+  ( void ) new TDEAction( i18n("New &Window"), kapp->miniIcon(), TDEShortcut(),
           TQT_TQOBJECT(this), TQT_SLOT( slotFileNewWindow() ), actionCollection(),
           "file_new_window" );
 
@@ -89,14 +89,14 @@ void KColorEditApp::initActions()
   m_actPaste->setEnabled( false );
 
   // Color Menu
-  m_actNames = new KToggleAction( i18n("Show &Color Names"), KShortcut(), TQT_TQOBJECT(this),
+  m_actNames = new TDEToggleAction( i18n("Show &Color Names"), TDEShortcut(), TQT_TQOBJECT(this),
           TQT_SLOT( slotViewColorNames() ), actionCollection(),
           "color_view_names" );
   m_actNames->setCheckedState(i18n("Hide &Color Names"));
-  m_actPalette = new KAction( i18n("From &Palette"), KShortcut(), TQT_TQOBJECT(this),
+  m_actPalette = new TDEAction( i18n("From &Palette"), TDEShortcut(), TQT_TQOBJECT(this),
           TQT_SLOT( slotColorFromPalette() ), actionCollection(),
           "color_from_palette" );
-  ( void ) new KAction( i18n("From &Screen"), KShortcut(), TQT_TQOBJECT(this),
+  ( void ) new TDEAction( i18n("From &Screen"), TDEShortcut(), TQT_TQOBJECT(this),
           TQT_SLOT( slotColorFromScreen() ), actionCollection(),
           "color_from_screen" );
 }
@@ -125,7 +125,7 @@ void KColorEditApp::initDocument()
 void KColorEditApp::initView()
 {
   ////////////////////////////////////////////////////////////////////
-  // create the main widget here that is managed by KMainWindow's view-region
+  // create the main widget here that is managed by TDEMainWindow's view-region
   // and connect the widget to your document to display document contents.
 
   view = new KColorEditView(this);
@@ -303,7 +303,7 @@ void KColorEditApp::slotQuit()
   saveOptions();
   // close the first window, the list makes the next one the first again.
   // This ensures that queryClose() is called on each window to ask for closing
-  KMainWindow* w;
+  TDEMainWindow* w;
   if(memberList)
   {
     for(w=memberList->first(); w!=0; w=memberList->next())
@@ -357,7 +357,7 @@ void KColorEditApp::mouseReleaseEvent(TQMouseEvent* event) {
 		color.setComponents(rgbColor.red(), rgbColor.green(), rgbColor.blue());
 		view->chooseColor(&color);
 	} else
-		KMainWindow::mouseReleaseEvent(event);
+		TDEMainWindow::mouseReleaseEvent(event);
 }
 
 #include "kcoloredit.moc"

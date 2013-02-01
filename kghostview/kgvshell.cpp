@@ -75,11 +75,11 @@ KGVShell::KGVShell() :
 	    KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( slotQuit() ), actionCollection() );
 
     /*---- View -----------------------------------------------------------*/
-            new KAction( i18n(  "&Reload" ), "reload",
-		    KStdAccel::shortcut( KStdAccel::Reload ),
+            new TDEAction( i18n(  "&Reload" ), "reload",
+		    TDEStdAccel::shortcut( TDEStdAccel::Reload ),
 		    m_gvpart, TQT_SLOT(  reloadFile() ),
 		    actionCollection(), "reload" );
-	    new KAction( i18n( "&Maximize" ), Key_M, TQT_TQOBJECT(this),
+	    new TDEAction( i18n( "&Maximize" ), Key_M, TQT_TQOBJECT(this),
 			 TQT_SLOT( slotMaximize() ), actionCollection(),
 			 "maximize");
     _showMenuBarAction = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotShowMenubar() ), actionCollection() );
@@ -93,14 +93,14 @@ KGVShell::KGVShell() :
 #if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
     m_fullScreenAction = KStdAction::fullScreen( TQT_TQOBJECT(this), TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 #else
-    m_fullScreenAction = new KToggleAction( this, TQT_SLOT( slotUpdateFullScreen() ) );
+    m_fullScreenAction = new TDEToggleAction( this, TQT_SLOT( slotUpdateFullScreen() ) );
 #endif
     KStdAction::configureToolbars( TQT_TQOBJECT(this), TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
     KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
 
-    //_popup = new KPopupMenu( i18n( "Full Screen Options" ), this, "rmb popup" );
-    _popup = new KPopupMenu( this, "rmb popup" );
+    //_popup = new TDEPopupMenu( i18n( "Full Screen Options" ), this, "rmb popup" );
+    _popup = new TDEPopupMenu( this, "rmb popup" );
     _popup->insertTitle( i18n( "Full Screen Options" ) );
     m_fullScreenAction->plug( _popup );
     _showMenuBarAction->plug( _popup );
@@ -339,7 +339,7 @@ void KGVShell::slotUpdateFullScreen()
 	m_gvpart->updateFullScreen( false );
 	menuBar()->show();
 #if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
-	KToggleAction *statusbarAction = dynamic_cast<KToggleAction *>(actionCollection()->action(KStdAction::name(KStdAction::ShowStatusbar)));
+	TDEToggleAction *statusbarAction = dynamic_cast<TDEToggleAction *>(actionCollection()->action(KStdAction::name(KStdAction::ShowStatusbar)));
 	assert( statusbarAction );
 	if (statusbarAction->isChecked()) statusBar()->show();
 #endif

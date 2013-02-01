@@ -31,10 +31,10 @@ namespace KImageViewer { class Canvas; }
 namespace TDEIO { class Job; }
 
 class KTempFile;
-class KAction;
-class KActionMenu;
-class KToggleAction;
-class KSelectAction;
+class TDEAction;
+class TDEActionMenu;
+class TDEToggleAction;
+class TDESelectAction;
 class TDEAboutData;
 class TQBuffer;
 class TQSize;
@@ -120,18 +120,18 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		KDirWatch * m_pFileWatch;
 
 		// Actions:
-		KAction * m_paZoomIn;
-		KAction * m_paZoomOut;
-		KSelectAction * m_paZoom;
-		KActionMenu * m_paFlipMenu;
-		KAction * m_paFlipH;
-		KAction * m_paFlipV;
-		KAction * m_paRotateCCW;
-		KAction * m_paRotateCW;
-		KAction * m_paSave;
-		KAction * m_paSaveAs;
-		KAction * m_paFitToWin;
-		KToggleAction * m_paShowScrollbars;
+		TDEAction * m_paZoomIn;
+		TDEAction * m_paZoomOut;
+		TDESelectAction * m_paZoom;
+		TDEActionMenu * m_paFlipMenu;
+		TDEAction * m_paFlipH;
+		TDEAction * m_paFlipV;
+		TDEAction * m_paRotateCCW;
+		TDEAction * m_paRotateCW;
+		TDEAction * m_paSave;
+		TDEAction * m_paSaveAs;
+		TDEAction * m_paFitToWin;
+		TDEToggleAction * m_paShowScrollbars;
 
 		TQString m_popupDoc;
 		TQString m_mimeType;

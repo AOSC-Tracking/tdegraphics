@@ -67,14 +67,14 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 	delete viewerList;
 	if( m_pViewer )
 	{
-		( void ) new KAction( i18n( "&Image List..." ), 0, 0,
+		( void ) new TDEAction( i18n( "&Image List..." ), 0, 0,
 							this, TQT_SLOT( slotImageList() ),
 							actionCollection(), "plugin_presenter_imageList" );
-		m_paSlideshow = new KToggleAction( i18n( "Start &Slideshow" ), Key_S, actionCollection(), "plugin_presenter_slideshow" );
-		( void ) new KAction( i18n( "&Previous Image in List" ), "previous", ALT+Key_Left,
+		m_paSlideshow = new TDEToggleAction( i18n( "Start &Slideshow" ), Key_S, actionCollection(), "plugin_presenter_slideshow" );
+		( void ) new TDEAction( i18n( "&Previous Image in List" ), "previous", ALT+Key_Left,
 							  this, TQT_SLOT( prev() ),
 							  actionCollection(), "plugin_presenter_prev" );
-		( void ) new KAction( i18n( "&Next Image in List" ), "next", ALT+Key_Right,
+		( void ) new TDEAction( i18n( "&Next Image in List" ), "next", ALT+Key_Right,
 							  this, TQT_SLOT( next() ),
 							  actionCollection(), "plugin_presenter_next" );
 
@@ -97,7 +97,7 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 		}
 		else
 		{
-			(void) new KAction( i18n( "Open &Multiple Files..." ), "queue", CTRL+SHIFT+Key_O,
+			(void) new TDEAction( i18n( "Open &Multiple Files..." ), "queue", CTRL+SHIFT+Key_O,
 							this, TQT_SLOT( slotOpenFiles() ),
 							actionCollection(), "plugin_presenter_openFiles" );
 		}
@@ -383,7 +383,7 @@ void KViewPresenter::setSlideshowInterval( int msec )
 void KViewPresenter::shuffle()
 {
 	m_pImageList->noSort();
-	KListView * listview = m_pImageList->m_pListView;
+	TDEListView * listview = m_pImageList->m_pListView;
 	TQPtrList<TQListViewItem> items;
 	for( TQListViewItem * item = listview->firstChild(); item; item = listview->firstChild() )
 	{

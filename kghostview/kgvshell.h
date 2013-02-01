@@ -25,13 +25,13 @@
 
 class TQTimer;
 
-class KRecentFilesAction;
+class TDERecentFilesAction;
 class ScrollBox;
 class KGVPart;
-class KAction;
+class TDEAction;
 class TDEConfig;
 class KTempFile;
-class KPopupMenu;
+class TDEPopupMenu;
 class DisplayOptions;
 class FullScreenFilter;
 
@@ -79,12 +79,12 @@ private:
     KGVPart* m_gvpart;
     TQString cwd;
 
-    KAction* openact;
-    KToggleAction* _showMenuBarAction;
-    KToggleAction* m_fullScreenAction;
+    TDEAction* openact;
+    TDEToggleAction* _showMenuBarAction;
+    TDEToggleAction* m_fullScreenAction;
     FullScreenFilter* m_fsFilter;
-    KPopupMenu* _popup;
-    KRecentFilesAction* recent;
+    TDEPopupMenu* _popup;
+    TDERecentFilesAction* recent;
     KTempFile* _tmpFile; // Used for storing data received from stdin
 };
 

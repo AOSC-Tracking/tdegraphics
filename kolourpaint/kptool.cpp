@@ -130,7 +130,7 @@ void kpTool::createAction ()
         return;
     }
 
-    KActionCollection *ac = m_mainWindow->actionCollection ();
+    TDEActionCollection *ac = m_mainWindow->actionCollection ();
     if (!ac)
     {
         kdError () << "kpTool::createAction() without ac" << endl;
@@ -188,7 +188,7 @@ void kpTool::setText (const TQString &text)
 
 // public static
 TQString kpTool::toolTipForTextAndShortcut (const TQString &text,
-                                           const KShortcut &shortcut)
+                                           const TDEShortcut &shortcut)
 {
     for (int i = 0; i < (int) shortcut.count (); i++)
     {
@@ -230,9 +230,9 @@ void kpTool::setKey (int key)
 }
 
 // public static
-KShortcut kpTool::shortcutForKey (int key)
+TDEShortcut kpTool::shortcutForKey (int key)
 {
-    KShortcut shortcut;
+    TDEShortcut shortcut;
 
     if (key)
     {
@@ -246,9 +246,9 @@ KShortcut kpTool::shortcutForKey (int key)
 }
 
 // public
-KShortcut kpTool::shortcut () const
+TDEShortcut kpTool::shortcut () const
 {
-    return m_action ? m_action->shortcut () : KShortcut ();
+    return m_action ? m_action->shortcut () : TDEShortcut ();
 }
 
 
@@ -273,14 +273,14 @@ bool kpTool::containsSingleKeyTrigger (const KKeySequence &seq)
 }
 
 // public static
-bool kpTool::containsSingleKeyTrigger (const KShortcut &shortcut,
-    KShortcut *shortcutWithoutSingleKeyTriggers)
+bool kpTool::containsSingleKeyTrigger (const TDEShortcut &shortcut,
+    TDEShortcut *shortcutWithoutSingleKeyTriggers)
 {
     if (shortcutWithoutSingleKeyTriggers)
         *shortcutWithoutSingleKeyTriggers = shortcut;
 
 
-    KShortcut newShortcut;
+    TDEShortcut newShortcut;
     bool needNewShortcut = false;
 
     for (int i = 0; i < (int) shortcut.count (); i++)

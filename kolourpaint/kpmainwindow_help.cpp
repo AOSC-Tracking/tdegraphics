@@ -45,7 +45,7 @@
 // private
 void kpMainWindow::setupHelpMenuActions ()
 {
-    KActionCollection *ac = actionCollection ();
+    TDEActionCollection *ac = actionCollection ();
 
 
     // Explanation for action name:
@@ -55,7 +55,7 @@ void kpMainWindow::setupHelpMenuActions ()
     // from a digital camera in future versions of KolourPaint.  Hence
     // "Acquiring" is more appropriate.
     // -- Thurston
-    d->m_actionHelpTakingScreenshots = new KAction (
+    d->m_actionHelpTakingScreenshots = new TDEAction (
         i18n ("Acquiring &Screenshots"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotHelpTakingScreenshots ()),
         ac, "help_taking_screenshots");
@@ -83,7 +83,7 @@ static TQString printScreenShortcutString ()
 
     // (only use 1st key sequence, if it exists)
     const TQString humanReadableShortcut =
-        KShortcut (cfgEntryString).seq (0).toString ();
+        TDEShortcut (cfgEntryString).seq (0).toString ();
 
     if (!humanReadableShortcut.isEmpty ())
     {

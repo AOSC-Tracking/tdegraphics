@@ -271,7 +271,7 @@ public:
    /**
     * Fill the available layouts menu
     */
-   void fillPopupMenu( KPopupMenu* pMenu );
+   void fillPopupMenu( TDEPopupMenu* pMenu );
 private:
    /**
     * Constructor

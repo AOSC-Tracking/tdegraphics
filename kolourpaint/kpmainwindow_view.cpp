@@ -61,7 +61,7 @@ void kpMainWindow::setupViewMenuActions ()
     m_thumbnailSaveConfigTimer = 0;
 
 
-    KActionCollection *ac = actionCollection ();
+    TDEActionCollection *ac = actionCollection ();
 
     /*m_actionFullScreen = KStdAction::fullScreen (0, 0, ac);
     m_actionFullScreen->setEnabled (false);*/
@@ -77,7 +77,7 @@ void kpMainWindow::setupViewMenuActions ()
     m_actionZoomOut = KStdAction::zoomOut (TQT_TQOBJECT(this), TQT_SLOT (slotZoomOut ()), ac);
 
 
-    m_actionZoom = new KSelectAction (i18n ("&Zoom"), 0,
+    m_actionZoom = new TDESelectAction (i18n ("&Zoom"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotZoom ()), actionCollection (), "view_zoom_to");
     m_actionZoom->setEditable (true);
 
@@ -90,7 +90,7 @@ void kpMainWindow::setupViewMenuActions ()
     m_zoomList.append (1000); m_zoomList.append (1200); m_zoomList.append (1600);
 
 
-    m_actionShowGrid = new KToggleAction (i18n ("Show &Grid"), CTRL + Key_G,
+    m_actionShowGrid = new TDEToggleAction (i18n ("Show &Grid"), CTRL + Key_G,
         TQT_TQOBJECT(this), TQT_SLOT (slotShowGridToggled ()), actionCollection (), "view_show_grid");
     m_actionShowGrid->setCheckedState (i18n ("Hide &Grid"));
 
@@ -98,12 +98,12 @@ void kpMainWindow::setupViewMenuActions ()
     // TODO: This doesn't work when the thumbnail has focus.
     //       Testcase: Press CTRL+H twice on a fresh KolourPaint.
     //                 The second CTRL+H doesn't close the thumbnail.
-    m_actionShowThumbnail = new KToggleAction (i18n ("Show T&humbnail"), CTRL + Key_H,
+    m_actionShowThumbnail = new TDEToggleAction (i18n ("Show T&humbnail"), CTRL + Key_H,
         TQT_TQOBJECT(this), TQT_SLOT (slotShowThumbnailToggled ()), actionCollection (), "view_show_thumbnail");
     m_actionShowThumbnail->setCheckedState (i18n ("Hide T&humbnail"));
 
     // Please do not use setCheckedState() here - it wouldn't make sense
-    m_actionZoomedThumbnail = new KToggleAction (i18n ("Zoo&med Thumbnail Mode"), 0,
+    m_actionZoomedThumbnail = new TDEToggleAction (i18n ("Zoo&med Thumbnail Mode"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotZoomedThumbnailToggled ()), actionCollection (), "view_zoomed_thumbnail");
 
     // For consistency with the above action, don't use setCheckedState()
@@ -111,7 +111,7 @@ void kpMainWindow::setupViewMenuActions ()
     // Also, don't use "Show Thumbnail Rectangle" because if entire doc
     // can be seen in scrollView, checking option won't "Show" anything
     // since rect _surrounds_ entire doc (hence, won't be rendered).
-    d->m_actionShowThumbnailRectangle = new KToggleAction (
+    d->m_actionShowThumbnailRectangle = new TDEToggleAction (
         i18n ("Enable Thumbnail &Rectangle"),
         0,
         TQT_TQOBJECT(this), TQT_SLOT (slotThumbnailShowRectangleToggled ()),
@@ -186,9 +186,9 @@ void kpMainWindow::sendZoomListToActionZoom ()
         items << zoomLevelToString (*it);
     }
 
-    // Work around a KDE bug - KSelectAction::setItems() enables the action.
+    // Work around a KDE bug - TDESelectAction::setItems() enables the action.
     // David Faure said it won't be fixed because it's a feature used by
-    // KRecentFilesAction.
+    // TDERecentFilesAction.
     bool e = m_actionZoom->isEnabled ();
     m_actionZoom->setItems (items);
     if (e != m_actionZoom->isEnabled ())
@@ -477,7 +477,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     #endif
 
 
-        // Since Zoom Level KSelectAction on ToolBar grabs focus after changing
+        // Since Zoom Level TDESelectAction on ToolBar grabs focus after changing
         // Zoom, switch back to the Main View.
         // TODO: back to the last view
         m_mainView->setFocus ();

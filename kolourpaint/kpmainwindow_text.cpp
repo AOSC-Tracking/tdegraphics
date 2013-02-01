@@ -47,23 +47,23 @@
 // private
 void kpMainWindow::setupTextToolBarActions ()
 {
-    KActionCollection *ac = actionCollection ();
+    TDEActionCollection *ac = actionCollection ();
 
-    m_actionTextFontFamily = new KFontAction (i18n ("Font Family"), 0/*shortcut*/,
+    m_actionTextFontFamily = new TDEFontAction (i18n ("Font Family"), 0/*shortcut*/,
         TQT_TQOBJECT(this), TQT_SLOT (slotTextFontFamilyChanged ()), ac, "text_font_family");
-    m_actionTextFontSize = new KFontSizeAction (i18n ("Font Size"), 0/*shortcut*/,
+    m_actionTextFontSize = new TDEFontSizeAction (i18n ("Font Size"), 0/*shortcut*/,
         TQT_TQOBJECT(this), TQT_SLOT (slotTextFontSizeChanged ()), ac, "text_font_size");
 
-    m_actionTextBold = new KToggleAction (i18n ("Bold"),
+    m_actionTextBold = new TDEToggleAction (i18n ("Bold"),
         "text_bold"/*icon*/, 0/*shortcut*/,
         TQT_TQOBJECT(this), TQT_SLOT (slotTextBoldChanged ()), ac, "text_bold");
-    m_actionTextItalic = new KToggleAction (i18n ("Italic"),
+    m_actionTextItalic = new TDEToggleAction (i18n ("Italic"),
         "text_italic"/*icon*/, 0/*shortcut*/,
         TQT_TQOBJECT(this), TQT_SLOT (slotTextItalicChanged ()), ac, "text_italic");
-    m_actionTextUnderline = new KToggleAction (i18n ("Underline"),
+    m_actionTextUnderline = new TDEToggleAction (i18n ("Underline"),
         "text_under"/*icon*/, 0/*shortcut*/,
         TQT_TQOBJECT(this), TQT_SLOT (slotTextUnderlineChanged ()), ac, "text_underline");
-    m_actionTextStrikeThru = new KToggleAction (i18n ("Strike Through"),
+    m_actionTextStrikeThru = new TDEToggleAction (i18n ("Strike Through"),
         "text_strike"/*icon*/, 0/*shortcut*/,
         TQT_TQOBJECT(this), TQT_SLOT (slotTextStrikeThruChanged ()), ac, "text_strike_thru");
 
@@ -136,7 +136,7 @@ void kpMainWindow::slotTextFontFamilyChanged ()
                                            m_textOldFontFamily);
     }
 
-    // Since editable KSelectAction's steal focus from view, switch back to mainView
+    // Since editable TDESelectAction's steal focus from view, switch back to mainView
     // TODO: back to the last view
     if (m_mainView)
         m_mainView->setFocus ();
@@ -169,7 +169,7 @@ void kpMainWindow::slotTextFontSizeChanged ()
                                          m_textOldFontSize);
     }
 
-    // Since editable KSelectAction's steal focus from view, switch back to mainView
+    // Since editable TDESelectAction's steal focus from view, switch back to mainView
     // TODO: back to the last view
     if (m_mainView)
         m_mainView->setFocus ();
@@ -276,7 +276,7 @@ void kpMainWindow::slotTextStrikeThruChanged ()
 
 
 // public
-KToolBar *kpMainWindow::textToolBar ()
+TDEToolBar *kpMainWindow::textToolBar ()
 {
     return toolBar ("textToolBar");
 }

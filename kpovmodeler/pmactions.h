@@ -33,7 +33,7 @@ class TQToolButton;
  *
  * Copied from konq_actions.h, author: Simon Hausmann <hausmann@kde.org>
  */
-class PMComboAction : public KAction
+class PMComboAction : public TDEAction
 {
    Q_OBJECT
   
@@ -65,7 +65,7 @@ private:
  *
  * Copied from konq_actions.h, author: Simon Hausmann <hausmann@kde.org>
  */
-class PMLabelAction : public KAction
+class PMLabelAction : public TDEAction
 {
    Q_OBJECT
   
@@ -83,7 +83,7 @@ private:
 /**
  * Spinbox action for the toolbar.
  */
-class PMSpinBoxAction : public KAction
+class PMSpinBoxAction : public TDEAction
 {
    Q_OBJECT
   

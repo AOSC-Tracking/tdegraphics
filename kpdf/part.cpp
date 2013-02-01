@@ -157,7 +157,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 		connect( m_document, TQT_SIGNAL( quit() ), this, TQT_SLOT( cannotQuit() ) );
 
 	// widgets: ^searchbar (toolbar containing label and SearchWidget)
-//	m_searchToolBar = new KToolBar( parentWidget, "searchBar" );
+//	m_searchToolBar = new TDEToolBar( parentWidget, "searchBar" );
 //	m_searchToolBar->boxLayout()->setSpacing( KDialog::spacingHint() );
 //	TQLabel * sLabel = new TQLabel( i18n( "&Search:" ), m_searchToolBar, "kde toolbar widget" );
 //	m_searchWidget = new SearchWidget( m_searchToolBar, m_document );
@@ -169,7 +169,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_splitter->setOpaqueResize( true );
 	setWidget( m_splitter );
 	
-	m_showLeftPanel = new KToggleAction( i18n( "Show &Navigation Panel"), "show_side_panel", 0, this, TQT_SLOT( slotShowLeftPanel() ), actionCollection(), "show_leftpanel" );
+	m_showLeftPanel = new TDEToggleAction( i18n( "Show &Navigation Panel"), "show_side_panel", 0, this, TQT_SLOT( slotShowLeftPanel() ), actionCollection(), "show_leftpanel" );
 	m_showLeftPanel->setCheckedState( i18n( "Hide &Navigation Panel") );
 	m_showLeftPanel->setShortcut( "CTRL+L" );
 	m_showLeftPanel->setChecked( KpdfSettings::showLeftPanel() );
@@ -245,7 +245,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_document->addObserver( m_miniBar );
 
 	// ACTIONS
-	KActionCollection * ac = actionCollection();
+	TDEActionCollection * ac = actionCollection();
 
 	// Page Traversal actions
 	m_gotoPage = KStdAction::gotoPage( this, TQT_SLOT( slotGoToPage() ), ac, "goto_page" );
@@ -286,15 +286,15 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 
 	m_saveAs = KStdAction::saveAs( this, TQT_SLOT( slotSaveFileAs() ), ac, "save" );
 	m_saveAs->setEnabled( false );
-	KAction * prefs = KStdAction::preferences( this, TQT_SLOT( slotPreferences() ), ac, "preferences" );
+	TDEAction * prefs = KStdAction::preferences( this, TQT_SLOT( slotPreferences() ), ac, "preferences" );
 	prefs->setText( i18n( "Configure KPDF..." ) );
 	m_printPreview = KStdAction::printPreview( this, TQT_SLOT( slotPrintPreview() ), ac );
 	m_printPreview->setEnabled( false );
 
-	m_showProperties = new KAction(i18n("&Properties"), "info", 0, this, TQT_SLOT(slotShowProperties()), ac, "properties");
+	m_showProperties = new TDEAction(i18n("&Properties"), "info", 0, this, TQT_SLOT(slotShowProperties()), ac, "properties");
 	m_showProperties->setEnabled( false );
 
-	m_showPresentation = new KAction( i18n("P&resentation"), "kpresenter_kpr", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
+	m_showPresentation = new TDEAction( i18n("P&resentation"), "kpresenter_kpr", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
 	m_showPresentation->setEnabled( false );
 
 	// attach the actions of the children widgets too
@@ -910,9 +910,9 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 	{
 		// the quest for options_show_menubar
 		KXMLGUIClient *client;
-		KActionCollection *ac;
-		KActionPtrList::const_iterator it, end, begin;
-		KActionPtrList actions;
+		TDEActionCollection *ac;
+		TDEActionPtrList::const_iterator it, end, begin;
+		TDEActionPtrList actions;
 		
 		if (factory())
 		{
@@ -927,8 +927,8 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 				begin = actions.begin();
 				for ( it = begin; it != end; ++it )
 				{
-					if (TQString((*it)->name()) == "options_show_menubar") m_showMenuBarAction = (KToggleAction*)(*it);
-					if (TQString((*it)->name()) == "fullscreen") m_showFullScreenAction = (KToggleAction*)(*it);
+					if (TQString((*it)->name()) == "options_show_menubar") m_showMenuBarAction = (TDEToggleAction*)(*it);
+					if (TQString((*it)->name()) == "fullscreen") m_showFullScreenAction = (TDEToggleAction*)(*it);
 				}
 			}
 		}
@@ -936,7 +936,7 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 	}
 	
 	
-	KPopupMenu *popup = new KPopupMenu( widget(), "rmb popup" );
+	TDEPopupMenu *popup = new TDEPopupMenu( widget(), "rmb popup" );
 	if (page)
 	{
 		popup->insertTitle( i18n( "Page %1" ).arg( page->number() + 1 ) );

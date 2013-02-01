@@ -55,17 +55,17 @@ struct KSVGPlugin::Private
 	KSVGWidget *window;
 	KSVGPluginBrowserExtension *extension;
 
-	KAction *zoomInAction;
-	KAction *zoomOutAction;
-	KAction *zoomResetAction;
-	KAction *stopAnimationsAction;
-	KAction *viewSourceAction;
-	KAction *viewMemoryAction;
-	KAction *aboutApp;
-	KAction *saveToPNG;
-	KToggleAction *fontKerningAction;
-	KToggleAction *progressiveAction;
-	KSelectAction *renderingBackendAction;
+	TDEAction *zoomInAction;
+	TDEAction *zoomOutAction;
+	TDEAction *zoomResetAction;
+	TDEAction *stopAnimationsAction;
+	TDEAction *viewSourceAction;
+	TDEAction *viewMemoryAction;
+	TDEAction *aboutApp;
+	TDEAction *saveToPNG;
+	TDEToggleAction *fontKerningAction;
+	TDEToggleAction *progressiveAction;
+	TDESelectAction *renderingBackendAction;
 
 	TQString description;
 
@@ -114,22 +114,22 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 
 	ksvgd->zoomInAction = KStdAction::zoomIn(this, TQT_SLOT(slotZoomIn()), actionCollection());
 	ksvgd->zoomOutAction = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()), actionCollection());
-	ksvgd->zoomResetAction =  new KAction(i18n("Zoom &Reset"), "viewmag", this, TQT_SLOT(slotZoomReset()), actionCollection(), "zoom_reset");
-	ksvgd->stopAnimationsAction = new KAction(i18n("&Stop Animations"), "stop", Key_Escape, this, TQT_SLOT(slotStop()), actionCollection(), "stop_anims");
-	ksvgd->viewSourceAction = new KAction(i18n("View &Source"), "document2", Key_F6, this, TQT_SLOT(slotViewSource()), actionCollection(), "view_source");
-	ksvgd->viewMemoryAction = new KAction(i18n("View &Memory"), "document2", Key_F7, this, TQT_SLOT(slotViewMemory()), actionCollection(), "view_memory");
-	ksvgd->saveToPNG = new KAction(i18n("Save to PNG..."), "save", 0, this, TQT_SLOT(slotSaveToPNG()), actionCollection(), "save_to_png");
+	ksvgd->zoomResetAction =  new TDEAction(i18n("Zoom &Reset"), "viewmag", this, TQT_SLOT(slotZoomReset()), actionCollection(), "zoom_reset");
+	ksvgd->stopAnimationsAction = new TDEAction(i18n("&Stop Animations"), "stop", Key_Escape, this, TQT_SLOT(slotStop()), actionCollection(), "stop_anims");
+	ksvgd->viewSourceAction = new TDEAction(i18n("View &Source"), "document2", Key_F6, this, TQT_SLOT(slotViewSource()), actionCollection(), "view_source");
+	ksvgd->viewMemoryAction = new TDEAction(i18n("View &Memory"), "document2", Key_F7, this, TQT_SLOT(slotViewMemory()), actionCollection(), "view_memory");
+	ksvgd->saveToPNG = new TDEAction(i18n("Save to PNG..."), "save", 0, this, TQT_SLOT(slotSaveToPNG()), actionCollection(), "save_to_png");
 //	ksvgd->aboutApp = KStdAction::aboutApp(this, TQT_SLOT(slotAboutKSVG()), actionCollection());//, "KSVG");
-	ksvgd->aboutApp = new KAction(i18n("About KSVG"), "vectorgfx", 0, this, TQT_SLOT(slotAboutKSVG()), actionCollection(), "help_about_app");
-	ksvgd->fontKerningAction = new KToggleAction(i18n("Use Font &Kerning"), "viewmagfit", Key_F8, this, TQT_SLOT(slotFontKerning()), actionCollection(), "font_kerning");
-	ksvgd->progressiveAction = new KToggleAction(i18n("Use &Progressive Rendering"), "", Key_F9, this, TQT_SLOT(slotProgressiveRendering()), actionCollection(), "progressive");
+	ksvgd->aboutApp = new TDEAction(i18n("About KSVG"), "vectorgfx", 0, this, TQT_SLOT(slotAboutKSVG()), actionCollection(), "help_about_app");
+	ksvgd->fontKerningAction = new TDEToggleAction(i18n("Use Font &Kerning"), "viewmagfit", Key_F8, this, TQT_SLOT(slotFontKerning()), actionCollection(), "font_kerning");
+	ksvgd->progressiveAction = new TDEToggleAction(i18n("Use &Progressive Rendering"), "", Key_F9, this, TQT_SLOT(slotProgressiveRendering()), actionCollection(), "progressive");
 
 	KSimpleConfig config("ksvgpluginrc", true);
 	config.setGroup("Rendering");
 	ksvgd->fontKerningAction->setChecked(config.readBoolEntry("FontKerning", true));
 	ksvgd->progressiveAction->setChecked(config.readBoolEntry("ProgressiveRendering", true));
 
-	ksvgd->renderingBackendAction = new KSelectAction(i18n("Rendering &Backend"), 0, this, TQT_SLOT(slotRenderingBackend()), actionCollection(), "rendering_backend");
+	ksvgd->renderingBackendAction = new TDESelectAction(i18n("Rendering &Backend"), 0, this, TQT_SLOT(slotRenderingBackend()), actionCollection(), "rendering_backend");
 
 	TQStringList items;
 	TQPtrList<KSVG::CanvasInfo> canvasList = KSVG::CanvasFactory::self()->canvasList();

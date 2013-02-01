@@ -51,8 +51,8 @@ class KSANEOCR;
 class TDEConfig;
 class KPrinter;
 class KComboBox;
-class KAction;
-class KActionCollection;
+class TDEAction;
+class TDEActionCollection;
 class ThumbView;
 class KookaImage;
 class TQPixmap;
@@ -93,7 +93,7 @@ public:
     void loadStartupImage( void );
     KDockWidget *mainDockWidget( ) { return m_mainDock; }
 
-    void createDockMenu( KActionCollection*, KDockMainWindow *, const char *);
+    void createDockMenu( TDEActionCollection*, KDockMainWindow *, const char *);
 
     ScanPackager *gallery() { return packager; }
 
@@ -161,8 +161,8 @@ public slots:
      */
     bool slSelectDevice(const TQCString& useDevice=TQCString());
 
-    void connectViewerAction( KAction *action );
-    void connectGalleryAction( KAction *action );
+    void connectViewerAction( TDEAction *action );
+    void connectGalleryAction( TDEAction *action );
 
     void slScanStart();
     void slScanFinished( KScanStat stat );
@@ -234,7 +234,7 @@ private:
     KDockWidget *m_dockPreview;
     KDockWidget *m_dockOCRText;
 
-    KMainWindow *m_mainWindow;
+    TDEMainWindow *m_mainWindow;
 
     ocrResEdit  *m_ocrResEdit;
 };

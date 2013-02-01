@@ -92,7 +92,7 @@ static const int META_ITEM = 1;
 TQValueList<ImageWindow*> KuickShow::s_viewers;
 
 KuickShow::KuickShow( const char *name )
-    : KMainWindow( 0L, name ),
+    : TDEMainWindow( 0L, name ),
       m_slideshowCycle( 1 ),
       fileWidget( 0L ),
       dialog( 0L ),
@@ -227,7 +227,7 @@ void KuickShow::initGUI( const KURL& startDir )
     fileWidget = new FileWidget( startURL, this, "MainWidget" );
     setFocusProxy( fileWidget );
 
-    KActionCollection *coll = fileWidget->actionCollection();
+    TDEActionCollection *coll = fileWidget->actionCollection();
 
     redirectDeleteAndTrashActions(coll);
 
@@ -246,47 +246,47 @@ void KuickShow::initGUI( const KURL& startDir )
              this, TQT_SLOT( slotDropped( const KFileItem *, TQDropEvent *, const KURL::List &)) );
 
     // setup actions
-    KAction *open = KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotOpenURL() ),
+    TDEAction *open = KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotOpenURL() ),
                                       coll, "openURL" );
 
-    KAction *print = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( slotPrint() ),
+    TDEAction *print = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( slotPrint() ),
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configure %1...").arg( TDEGlobal::instance()->aboutData()->programName() ), "configure",
-                                      KShortcut(),
+    TDEAction *configure = new TDEAction( i18n("Configure %1...").arg( TDEGlobal::instance()->aboutData()->programName() ), "configure",
+                                      TDEShortcut(),
                                       TQT_TQOBJECT(this), TQT_SLOT( configuration() ),
                                       coll, "kuick_configure" );
-    KAction *slide = new KAction( i18n("Start Slideshow" ), "ksslide",
-                                  KShortcut( Key_F2 ),
+    TDEAction *slide = new TDEAction( i18n("Start Slideshow" ), "ksslide",
+                                  TDEShortcut( Key_F2 ),
                                   TQT_TQOBJECT(this), TQT_SLOT( startSlideShow() ),
                                   coll, "kuick_slideshow" );
-    KAction *about = new KAction( i18n( "About KuickShow" ), "about",
-                                  KShortcut(),
+    TDEAction *about = new TDEAction( i18n( "About KuickShow" ), "about",
+                                  TDEShortcut(),
                                   TQT_TQOBJECT(this), TQT_SLOT( about() ), coll, "about" );
 
-    oneWindowAction = new KToggleAction( i18n("Open Only One Image Window"),
+    oneWindowAction = new TDEToggleAction( i18n("Open Only One Image Window"),
                                          "window_new",
-                                         KShortcut( CTRL+Key_N ), coll,
+                                         TDEShortcut( CTRL+Key_N ), coll,
                                          "kuick_one window" );
 
-    m_toggleBrowserAction = new KToggleAction( i18n("Show File Browser"), KShortcut( Key_Space ), coll, "toggleBrowser" );
+    m_toggleBrowserAction = new TDEToggleAction( i18n("Show File Browser"), TDEShortcut( Key_Space ), coll, "toggleBrowser" );
     m_toggleBrowserAction->setCheckedState(i18n("Hide File Browser"));
     connect( m_toggleBrowserAction, TQT_SIGNAL( toggled( bool ) ),
              TQT_SLOT( toggleBrowser() ));
 
-    KAction *showInOther = new KAction( i18n("Show Image"), KShortcut(),
+    TDEAction *showInOther = new TDEAction( i18n("Show Image"), TDEShortcut(),
                                         TQT_TQOBJECT(this), TQT_SLOT( slotShowInOtherWindow() ),
                                         coll, "kuick_showInOtherWindow" );
-    KAction *showInSame = new KAction( i18n("Show Image in Active Window"),
-                                       KShortcut(),
+    TDEAction *showInSame = new TDEAction( i18n("Show Image in Active Window"),
+                                       TDEShortcut(),
                                        TQT_TQOBJECT(this), TQT_SLOT( slotShowInSameWindow() ),
                                        coll, "kuick_showInSameWindow" );
-    KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen Mode"),
-					   KShortcut(), TQT_TQOBJECT(this), TQT_SLOT( slotShowFullscreen() ),
+    TDEAction *showFullscreen = new TDEAction( i18n("Show Image in Fullscreen Mode"),
+					   TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT( slotShowFullscreen() ),
 					   coll, "kuick_showFullscreen" );
 
-    KAction *quit = KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), coll, "quit");
+    TDEAction *quit = KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), coll, "quit");
 
     // remove TQString() parameter -- ellis
     coll->readShortcutSettings( TQString() );
@@ -314,8 +314,8 @@ void KuickShow::initGUI( const KURL& startDir )
 
     // remove the Sorting submenu (and the separator below)
     // from the main contextmenu
-    KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
-    KActionMenu *mainActionMenu = static_cast<KActionMenu*>( coll->action("popupMenu"));
+    TDEActionMenu *sortingMenu = static_cast<TDEActionMenu*>( coll->action("sorting menu"));
+    TDEActionMenu *mainActionMenu = static_cast<TDEActionMenu*>( coll->action("popupMenu"));
     TQPopupMenu *mainPopup = mainActionMenu->popupMenu();
     int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
     int separatorId = mainPopup->idAt( sortingIndex + 1 );
@@ -325,7 +325,7 @@ void KuickShow::initGUI( const KURL& startDir )
     mainActionMenu->remove( sortingMenu );
 
     // add the sorting menu and a separator into the View menu
-    KActionMenu *viewActionMenu = static_cast<KActionMenu*>( coll->action("view menu"));
+    TDEActionMenu *viewActionMenu = static_cast<TDEActionMenu*>( coll->action("view menu"));
     viewActionMenu->popupMenu()->insertSeparator( 0 );
     sortingMenu->plug( viewActionMenu->popupMenu(), 0 ); // on top of the menu
 
@@ -339,7 +339,7 @@ void KuickShow::initGUI( const KURL& startDir )
     mBar->insertItem( i18n("&Settings"), settingsMenu );
 
     // toolbar
-    KToolBar *tBar = toolBar();
+    TDEToolBar *tBar = toolBar();
     tBar->setText( i18n( "Main Toolbar" ) );
 
     coll->action("up")->plug( tBar );
@@ -382,7 +382,7 @@ void KuickShow::initGUI( const KURL& startDir )
     tBar->show();
 
     // Address box in address tool bar
-    KToolBar *addressToolBar = toolBar( "address_bar" );
+    TDEToolBar *addressToolBar = toolBar( "address_bar" );
     const int ID_ADDRESSBAR = 1;
 
     cmbPath = new KURLComboBox( KURLComboBox::Directories,
@@ -405,9 +405,9 @@ void KuickShow::initGUI( const KURL& startDir )
     dirSelected( fileWidget->url() );
 
     setCentralWidget( fileWidget );
-    setupGUI( KMainWindow::Save );
+    setupGUI( TDEMainWindow::Save );
 
-    coll->action( "reload" )->setShortcut( KStdAccel::reload() );
+    coll->action( "reload" )->setShortcut( TDEStdAccel::reload() );
     coll->action( "short view" )->setShortcut(Key_F6);
     coll->action( "detailed view" )->setShortcut(Key_F7);
     coll->action( "show hidden" )->setShortcut(Key_F8);
@@ -416,9 +416,9 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action( "separate dirs" )->setShortcut(Key_F12);
 }
 
-void KuickShow::redirectDeleteAndTrashActions(KActionCollection *coll)
+void KuickShow::redirectDeleteAndTrashActions(TDEActionCollection *coll)
 {
-    KAction *action = coll->action("delete");
+    TDEAction *action = coll->action("delete");
     if (action)
     {
         action->disconnect(fileWidget);
@@ -821,7 +821,7 @@ void KuickShow::slotDropped( const KFileItem *, TQDropEvent *, const KURL::List 
 // try to init the WM border as it is 0,0 when the window is not shown yet.
 void KuickShow::show()
 {
-    KMainWindow::show();
+    TDEMainWindow::show();
     (void) Kuick::frameSize( winId() );
 }
 
@@ -883,13 +883,13 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
         k = TQT_TQKEYEVENT( e );
 
     if ( k ) {
-        if ( KStdAccel::quit().contains( KKey( k ) ) ) {
+        if ( TDEStdAccel::quit().contains( KKey( k ) ) ) {
             saveSettings();
             deleteAllViewers();
             FileCache::shutdown();
             ::exit(0);
         }
-        else if ( KStdAccel::help().contains( KKey( k ) ) ) {
+        else if ( TDEStdAccel::help().contains( KKey( k ) ) ) {
             appHelpActivated();
             return true;
         }
@@ -969,19 +969,19 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
                     return true;
                 }
 
-                return KMainWindow::eventFilter( o, e );
+                return TDEMainWindow::eventFilter( o, e );
             }
 
             // we definitely have a fileWidget here!
 
             KKey kkey( k );
-            if ( key == Key_Home || KStdAccel::home().contains( kkey ) )
+            if ( key == Key_Home || TDEStdAccel::home().contains( kkey ) )
             {
                 item = fileWidget->gotoFirstImage();
                 item_next = fileWidget->getNext( false );
             }
 
-            else if ( key == Key_End || KStdAccel::end().contains( kkey ) )
+            else if ( key == Key_End || TDEStdAccel::end().contains( kkey ) )
             {
                 item = fileWidget->gotoLastImage();
                 item_next = fileWidget->getPrevious( false );
@@ -1065,7 +1065,7 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
     if ( ret )
         return true;
 
-    return KMainWindow::eventFilter( o, e );
+    return TDEMainWindow::eventFilter( o, e );
 }
 
 void KuickShow::configuration()
@@ -1432,12 +1432,12 @@ void KuickShow::deleteAllViewers()
     m_viewer = 0L;
 }
 
-KActionCollection * KuickShow::actionCollection() const
+TDEActionCollection * KuickShow::actionCollection() const
 {
     if ( fileWidget )
         return fileWidget->actionCollection();
 
-    return KMainWindow::actionCollection();
+    return TDEMainWindow::actionCollection();
 }
 
 #include "kuickshow.moc"

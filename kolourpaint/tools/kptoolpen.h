@@ -145,7 +145,7 @@ public:
     virtual void execute ();
     virtual void unexecute ();
 
-    // interface for KToolPen
+    // interface for TDEToolPen
     void updateBoundingRect (const TQPoint &point);
     void updateBoundingRect (const TQRect &rect);
     void finalize ();

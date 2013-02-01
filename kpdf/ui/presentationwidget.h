@@ -17,9 +17,9 @@
 #include "core/observer.h"
 #include "core/pagetransition.h"
 
-class KAccel;
-class KActionCollection;
-class KToolBar;
+class TDEAccel;
+class TDEActionCollection;
+class TDEToolBar;
 class TQTimer;
 
 class KPDFDocument;
@@ -40,7 +40,7 @@ class PresentationWidget : public TQDialog, public DocumentObserver
         PresentationWidget( TQWidget * parent, KPDFDocument * doc );
         ~PresentationWidget();
 
-        void setupActions( KActionCollection * ac );
+        void setupActions( TDEActionCollection * ac );
 
         // inherited from DocumentObserver
         uint observerId() const { return PRESENTATION_ID; }
@@ -94,8 +94,8 @@ class PresentationWidget : public TQDialog, public DocumentObserver
         TQValueVector< PresentationFrame * > m_frames;
         int m_frameIndex;
         TQStringList m_metaStrings;
-        KToolBar * m_topBar;
-        KAccel * m_accel;
+        TDEToolBar * m_topBar;
+        TDEAccel * m_accel;
 
     private slots:
         void slotNextPage();

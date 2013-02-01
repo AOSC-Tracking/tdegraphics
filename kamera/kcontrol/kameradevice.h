@@ -29,7 +29,7 @@
 
 class TDEConfig;
 class TQString;
-class KListView;
+class TDEListView;
 class TQWidgetStack;
 class TQVButtonGroup;
 class TQVGroupBox;
@@ -105,7 +105,7 @@ protected:
 	void setPortType(int type);
 
 	// port settings widgets
-	KListView *m_modelSel;
+	TDEListView *m_modelSel;
 	TQLineEdit *m_nameEdit;
 	TQWidgetStack *m_settingsStack;
 	TQVButtonGroup *m_portSelectGroup;

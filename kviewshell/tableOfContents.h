@@ -29,7 +29,7 @@
 class Bookmark;
 
 
-class TocItem : public KListViewItem
+class TocItem : public TDEListViewItem
 {
 public:
   TocItem(TocItem* parent);
@@ -43,7 +43,7 @@ private:
 };
 
 
-class TableOfContents : public KListView
+class TableOfContents : public TDEListView
 {
 Q_OBJECT
   

@@ -64,7 +64,7 @@
 
 
 kpMainWindow::kpMainWindow ()
-    : KMainWindow (0/*parent*/, "mainWindow"),
+    : TDEMainWindow (0/*parent*/, "mainWindow"),
       m_isFullyConstructed (false)
 {
     init ();
@@ -74,7 +74,7 @@ kpMainWindow::kpMainWindow ()
 }
 
 kpMainWindow::kpMainWindow (const KURL &url)
-    : KMainWindow (0/*parent*/, "mainWindow"),
+    : TDEMainWindow (0/*parent*/, "mainWindow"),
       m_isFullyConstructed (false)
 {
     init ();
@@ -84,7 +84,7 @@ kpMainWindow::kpMainWindow (const KURL &url)
 }
 
 kpMainWindow::kpMainWindow (kpDocument *newDoc)
-    : KMainWindow (0/*parent*/, "mainWindow"),
+    : TDEMainWindow (0/*parent*/, "mainWindow"),
       m_isFullyConstructed (false)
 {
     init ();
@@ -295,8 +295,8 @@ void kpMainWindow::init ()
         kdDebug () << "\tfirstTime: positioning toolbars" << endl;
     #endif
 
-        m_toolToolBar->setBarPos (KToolBar::Left);
-        m_colorToolBar->setBarPos (KToolBar::Bottom);
+        m_toolToolBar->setBarPos (TDEToolBar::Left);
+        m_colorToolBar->setBarPos (TDEToolBar::Bottom);
 
         TDEConfigGroupSaver cfgGroupSaver (kapp->config (), kpSettingsGroupGeneral);
         TDEConfigBase *cfg = cfgGroupSaver.config ();
@@ -311,7 +311,7 @@ void kpMainWindow::init ()
 }
 
 
-// private virtual [base KMainWindow]
+// private virtual [base TDEMainWindow]
 void kpMainWindow::readProperties (TDEConfig *cfg)
 {
 #if DEBUG_KP_MAIN_WINDOW
@@ -363,8 +363,8 @@ void kpMainWindow::readProperties (TDEConfig *cfg)
 
 }
 
-// private virtual [base KMainWindow]
-// WARNING: KMainWindow API Doc says "No user interaction is allowed
+// private virtual [base TDEMainWindow]
+// WARNING: TDEMainWindow API Doc says "No user interaction is allowed
 //          in this function!"
 void kpMainWindow::saveProperties (TDEConfig *cfg)
 {
@@ -839,7 +839,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
 }
 
 
-// private virtual [base KMainWindow]
+// private virtual [base TDEMainWindow]
 bool kpMainWindow::queryClose ()
 {
 #if DEBUG_KP_MAIN_WINDOW

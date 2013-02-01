@@ -11,16 +11,16 @@
 
 class TDEAboutData;
 class KAboutDialog;
-class KAccel;
-class KAction;
+class TDEAccel;
+class TDEAction;
 class TDEConfig;
 class KDirWatch;
 class TDEInstance;
 class KMultiPage;
-class KRadioAction;
-class KSelectAction;
+class TDERadioAction;
+class TDESelectAction;
 class KTempFile;
-class KToggleAction;
+class TDEToggleAction;
 class KURL;
 class KViewPartExtension;
 class TQHBoxLayout;
@@ -106,8 +106,8 @@ protected slots:
 
 
 protected:
-  KToggleAction *showSidebar, *scrollbarHandling;
-  KSelectAction *orientation, *media, *zoom_action;
+  TDEToggleAction *showSidebar, *scrollbarHandling;
+  TDESelectAction *orientation, *media, *zoom_action;
 
   virtual bool openFile();
 
@@ -181,30 +181,30 @@ private:
   KTempFile *tmpUnzipped;
 
   KDirWatch *watch;
-  KAccel *accel;
-  KAction *zoomInAct, *zoomOutAct, *backAct, *forwardAct,
+  TDEAccel *accel;
+  TDEAction *zoomInAct, *zoomOutAct, *backAct, *forwardAct,
     *startAct, *endAct, *gotoAct,
     *saveAction, *saveAsAction, *printAction, *readUpAct, *readDownAct;
-  KAction *backAction;
-  KAction *forwardAction;
-  KAction *settingsAction;
-  KAction* aboutAction;
-  KToggleAction *watchAct,*useDocumentSpecifiedSize,
+  TDEAction *backAction;
+  TDEAction *forwardAction;
+  TDEAction *settingsAction;
+  TDEAction* aboutAction;
+  TDEToggleAction *watchAct,*useDocumentSpecifiedSize,
     *fitPageAct, *fitHeightAct, *fitWidthAct;
-  KSelectAction* viewModeAction;
+  TDESelectAction* viewModeAction;
 
-  KRadioAction* moveModeAction;
-  KRadioAction* selectionModeAction;
+  TDERadioAction* moveModeAction;
+  TDERadioAction* selectionModeAction;
 
-  KAction* exportTextAction;
+  TDEAction* exportTextAction;
 
-  KAction* copyTextAction;
-  KAction* selectAllAction;
-  KAction* deselectAction;
-  KAction* findTextAction;
-  KAction* findNextTextAction;
-  KAction* findPrevAction;
-  KAction* findNextAction;
+  TDEAction* copyTextAction;
+  TDEAction* selectAllAction;
+  TDEAction* deselectAction;
+  TDEAction* findTextAction;
+  TDEAction* findNextTextAction;
+  TDEAction* findPrevAction;
+  TDEAction* findNextAction;
 
   KParts::PartManager* partManager;
 

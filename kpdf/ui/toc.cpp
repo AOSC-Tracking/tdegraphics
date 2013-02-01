@@ -22,11 +22,11 @@
 // they're slow when converted to page number. drop the 2nd column idea.
 //#define TOC_ENABLE_PAGE_COLUMN
 
-class TOCItem : public KListViewItem
+class TOCItem : public TDEListViewItem
 {
     public:
-        TOCItem( KListView *parent, TOCItem *after, const TQDomElement & e )
-            : KListViewItem( parent, after, e.tagName() ), m_element( e )
+        TOCItem( TDEListView *parent, TOCItem *after, const TQDomElement & e )
+            : TDEListViewItem( parent, after, e.tagName() ), m_element( e )
         {
 #ifdef TOC_ENABLE_PAGE_COLUMN
             if ( e.hasAttribute( "Page" ) )
@@ -35,8 +35,8 @@ class TOCItem : public KListViewItem
             setMultiLinesEnabled(true);
         }
 
-        TOCItem( KListViewItem *parent, TOCItem *after, const TQDomElement & e )
-            : KListViewItem( parent, after, e.tagName() ), m_element( e )
+        TOCItem( TDEListViewItem *parent, TOCItem *after, const TQDomElement & e )
+            : TDEListViewItem( parent, after, e.tagName() ), m_element( e )
         {
 #ifdef TOC_ENABLE_PAGE_COLUMN
             if ( e.hasAttribute( "Page" ) )
@@ -54,7 +54,7 @@ class TOCItem : public KListViewItem
         TQDomElement m_element;
 };
 
-TOC::TOC(TQWidget *parent, KPDFDocument *document) : KListView(parent), m_document(document)
+TOC::TOC(TQWidget *parent, KPDFDocument *document) : TDEListView(parent), m_document(document)
 {
     addColumn( i18n("Topic") );
 #ifdef TOC_ENABLE_PAGE_COLUMN
@@ -104,7 +104,7 @@ void TOC::notifySetup( const TQValueVector< KPDFPage * > & /*pages*/, bool docum
     emit hasTOC( true );
 }
 
-void TOC::addChildren( const TQDomNode & parentNode, KListViewItem * parentItem )
+void TOC::addChildren( const TQDomNode & parentNode, TDEListViewItem * parentItem )
 {
     // keep track of the current listViewItem
     TOCItem * currentItem = 0;

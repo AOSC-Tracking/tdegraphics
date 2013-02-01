@@ -6,7 +6,7 @@
 
 #include <tdeparts/mainwindow.h>
 
-class KRecentFilesAction;
+class TDERecentFilesAction;
 class KURL;
 class KViewPart_Iface;
 
@@ -72,11 +72,11 @@ protected:
 private:
   KViewPart_Iface *view;
 
-  KRecentFilesAction *recent;
+  TDERecentFilesAction *recent;
   TQString cwd;
 
-  KAction *closeAction, *reloadAction;
-  KToggleAction *fullScreenAction;
+  TDEAction *closeAction, *reloadAction;
+  TDEToggleAction *fullScreenAction;
 
   // In the attribute, the status of the statusbar (shown of hidden)
   // is saved when the kviewshell switches to fullscreen mode. The

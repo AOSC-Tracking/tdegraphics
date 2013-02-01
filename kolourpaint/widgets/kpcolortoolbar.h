@@ -245,7 +245,7 @@ private:
 };
 
 
-class kpColorToolBar : public KToolBar
+class kpColorToolBar : public TDEToolBar
 {
 Q_OBJECT
   

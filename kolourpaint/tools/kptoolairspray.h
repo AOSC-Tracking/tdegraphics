@@ -94,7 +94,7 @@ public:
     virtual void execute ();
     virtual void unexecute ();
 
-    // interface for KToolAirSpray
+    // interface for TDEToolAirSpray
     void addPoints (const TQPointArray &points);
     void finalize ();
     void cancel ();

@@ -38,7 +38,7 @@
 #include "kuickdata.h"
 
 
-KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, TQWidget *parent,
+KuickConfigDialog::KuickConfigDialog( TDEActionCollection *_coll, TQWidget *parent,
 				      const char *name, bool modal )
     : KDialogBase( Tabbed, i18n("Configure"),
 		     Help | Default | Ok | Apply | Cancel, Ok,

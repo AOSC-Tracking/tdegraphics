@@ -32,7 +32,7 @@
 #include "config.h"
 #endif
 
-class KAccel;
+class TDEAccel;
 class KKeyChooser;
 class KColorButton;
 class KURLRequester;

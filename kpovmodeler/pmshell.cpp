@@ -108,7 +108,7 @@ void PMShell::setupActions( )
    KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( slotFileClose( ) ), actionCollection( ) );
    KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close( ) ), actionCollection( ) );
 
-   m_pPathAction = new KToggleAction( i18n( "Show &Path" ), 0, TQT_TQOBJECT(this),
+   m_pPathAction = new TDEToggleAction( i18n( "Show &Path" ), 0, TQT_TQOBJECT(this),
                                TQT_SLOT( slotShowPath( ) ), actionCollection( ),
                                "options_show_path" );
    m_pPathAction->setCheckedState(i18n("Hide &Path"));
@@ -124,50 +124,50 @@ void PMShell::setupActions( )
                                   actionCollection( ) );
    KStdAction::preferences( TQT_TQOBJECT(this), TQT_SLOT( slotSettings( ) ), actionCollection( ) );
 
-   m_pNewTopViewAction = new KAction( i18n( "New Top View" ), 0, TQT_TQOBJECT(this),
+   m_pNewTopViewAction = new TDEAction( i18n( "New Top View" ), 0, TQT_TQOBJECT(this),
                                       TQT_SLOT( slotNewTopView( ) ),
                                       actionCollection( ), "view_new_topview" );
-   m_pNewBottomViewAction = new KAction( i18n( "New Bottom View" ), 0, TQT_TQOBJECT(this),
+   m_pNewBottomViewAction = new TDEAction( i18n( "New Bottom View" ), 0, TQT_TQOBJECT(this),
                                          TQT_SLOT( slotNewBottomView( ) ),
                                          actionCollection( ), "view_new_bottomview" );
-   m_pNewLeftViewAction = new KAction( i18n( "New Left View" ), 0, TQT_TQOBJECT(this),
+   m_pNewLeftViewAction = new TDEAction( i18n( "New Left View" ), 0, TQT_TQOBJECT(this),
                                        TQT_SLOT( slotNewLeftView( ) ),
                                        actionCollection( ), "view_new_leftview" );
-   m_pNewRightViewAction = new KAction( i18n( "New Right View" ), 0, TQT_TQOBJECT(this),
+   m_pNewRightViewAction = new TDEAction( i18n( "New Right View" ), 0, TQT_TQOBJECT(this),
                                         TQT_SLOT( slotNewRightView( ) ),
                                         actionCollection( ), "view_new_rightview" );
-   m_pNewFrontViewAction = new KAction( i18n( "New Front View" ), 0, TQT_TQOBJECT(this),
+   m_pNewFrontViewAction = new TDEAction( i18n( "New Front View" ), 0, TQT_TQOBJECT(this),
                                         TQT_SLOT( slotNewFrontView( ) ),
                                         actionCollection( ), "view_new_frontview" );
-   m_pNewBackViewAction = new KAction( i18n( "New Back View" ), 0, TQT_TQOBJECT(this),
+   m_pNewBackViewAction = new TDEAction( i18n( "New Back View" ), 0, TQT_TQOBJECT(this),
                                        TQT_SLOT( slotNewBackView( ) ),
                                        actionCollection( ), "view_new_back_view" );
-   m_pNewCameraViewAction = new KAction( i18n( "New Camera View" ), 0, TQT_TQOBJECT(this),
+   m_pNewCameraViewAction = new TDEAction( i18n( "New Camera View" ), 0, TQT_TQOBJECT(this),
                                          TQT_SLOT( slotNewCameraView( ) ),
                                          actionCollection( ), "view_new_cameraview" );
 
-   m_pNewTreeViewAction = new KAction( i18n( "New Object Tree" ), 0, TQT_TQOBJECT(this),
+   m_pNewTreeViewAction = new TDEAction( i18n( "New Object Tree" ), 0, TQT_TQOBJECT(this),
                               TQT_SLOT( slotNewTreeView( ) ), actionCollection( ),
                               "view_new_treeview" );
-   m_pNewDialogViewAction = new KAction( i18n( "New Properties View" ), 0, TQT_TQOBJECT(this),
+   m_pNewDialogViewAction = new TDEAction( i18n( "New Properties View" ), 0, TQT_TQOBJECT(this),
                              TQT_SLOT( slotNewDialogView( ) ), actionCollection( ),
                              "view_new_dialogview" );
 
 #ifdef KPM_WITH_OBJECT_LIBRARY
-   m_pNewLibraryBrowserAction = new KAction( i18n( "New Library Browser" ), 0, TQT_TQOBJECT(this),
+   m_pNewLibraryBrowserAction = new TDEAction( i18n( "New Library Browser" ), 0, TQT_TQOBJECT(this),
                                     TQT_SLOT( slotNewLibraryBrowserView( ) ), actionCollection( ),
                                     "view_new_librarybrowser" );
 #endif
 
    // Creating the view layouts menu
-   m_pViewLayoutsAction = new KActionMenu( i18n( "View Layouts" ),
+   m_pViewLayoutsAction = new TDEActionMenu( i18n( "View Layouts" ),
                                            actionCollection( ), "view_layouts_menu" );
-   KPopupMenu* menu = m_pViewLayoutsAction->popupMenu( );
+   TDEPopupMenu* menu = m_pViewLayoutsAction->popupMenu( );
    connect( menu, TQT_SIGNAL( aboutToShow( ) ), TQT_SLOT( slotViewsMenuAboutToShow( ) ) );
    PMViewLayoutManager::theManager( )->fillPopupMenu( menu );
    connect( menu, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotSelectedLayout( int ) ) );
 
-   m_pSaveViewLayoutAction = new KAction( i18n( "Save View Layout..." ), 0, TQT_TQOBJECT(this),
+   m_pSaveViewLayoutAction = new TDEAction( i18n( "Save View Layout..." ), 0, TQT_TQOBJECT(this),
                                           TQT_SLOT( slotSaveViewLayout( ) ),
                                           actionCollection( ), "save_view_layout" );
 }
@@ -607,7 +607,7 @@ void PMShell::setCaption( const TQString& caption )
          tmp = caption;
    }
 
-   KMainWindow::setCaption( tmp, m_pPart->isModified( ) );
+   TDEMainWindow::setCaption( tmp, m_pPart->isModified( ) );
 }
 
 void PMShell::statusMsg( const TQString& text )
@@ -668,7 +668,7 @@ void PMShell::slotSaveViewLayout( )
 
 void PMShell::slotViewsMenuAboutToShow( )
 {
-   KPopupMenu* menu = m_pViewLayoutsAction->popupMenu( );
+   TDEPopupMenu* menu = m_pViewLayoutsAction->popupMenu( );
 
    PMViewLayoutManager::theManager( )->fillPopupMenu( menu );
 }

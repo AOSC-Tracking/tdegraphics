@@ -256,7 +256,7 @@ void KIconEdit::slotCut()
 
 void KIconEdit::slotPaste()
 {
-    static_cast<KRadioAction*>(actionCollection()
+    static_cast<TDERadioAction*>(actionCollection()
         ->action("tool_find_pixel"))->setChecked(true);
     grid->setTool(KIconEditGrid::Find);
     grid->editPaste();

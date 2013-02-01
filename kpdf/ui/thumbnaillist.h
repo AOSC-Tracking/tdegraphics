@@ -17,7 +17,7 @@
 #include "core/observer.h"
 
 class TQTimer;
-class KActionCollection;
+class TDEActionCollection;
 
 class KPDFDocument;
 class ThumbnailWidget;
@@ -113,7 +113,7 @@ class ThumbnailsBox : public TQVBox
  * emits signals whenever a button is pressed. A click action results
  * in invoking some method (or slot) in ThumbnailList.
  */
-class ThumbnailController : public KToolBar
+class ThumbnailController : public TDEToolBar
 {
     public:
         ThumbnailController( TQWidget * parent, ThumbnailList * thumbnailList );

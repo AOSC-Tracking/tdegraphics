@@ -36,7 +36,7 @@ class KuickConfigDialog : public KDialogBase
   
 
 public:
-    KuickConfigDialog( KActionCollection *coll, TQWidget *parent=0,
+    KuickConfigDialog( TDEActionCollection *coll, TQWidget *parent=0,
 		       const char *name=0, bool modal=true);
     ~KuickConfigDialog();
 
@@ -50,7 +50,7 @@ private:
     GeneralWidget    *generalWidget;
     SlideShowWidget  *slideshowWidget;
     KKeyChooser      *imageKeyChooser, *browserKeyChooser;
-    KActionCollection *coll;
+    TDEActionCollection *coll;
 
     ImageWindow      *imageWindow;
 

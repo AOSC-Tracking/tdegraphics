@@ -35,18 +35,18 @@
 
 /**
  * This class is just a helper class since the KDockWidget classes do not yet
- * export KActions but only a TQPopup-Pointer, which is quite useless in case
+ * export TDEActions but only a TQPopup-Pointer, which is quite useless in case
  * you have a xml-file driven gui.
  * This class provides Actions for show and hide parts of the GUI (dockwidgets)
  * Maybe that classes can be removed as soon the DockWidget know Actions
  */
-class dwMenuAction:public KToggleAction
+class dwMenuAction:public TDEToggleAction
 {
    Q_OBJECT
   
 public:
    dwMenuAction( const TQString& text,
-		 const KShortcut& cut = KShortcut(),
+		 const TDEShortcut& cut = TDEShortcut(),
 		 KDockWidget *dw=0, TQObject* parent = 0,
 		 KDockMainWindow * mw=0, const char* name = 0 );
    virtual ~dwMenuAction();

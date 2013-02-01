@@ -360,7 +360,7 @@ bool PDFGenerator::hasFonts() const
     return true;
 }
 
-void PDFGenerator::putFontInfo(KListView *list)
+void PDFGenerator::putFontInfo(TDEListView *list)
 {
     Page *page;
     Dict *resDict;
@@ -634,7 +634,7 @@ bool PDFGenerator::reparseConfig()
 }
 //END Generator inherited functions
 
-void PDFGenerator::scanFonts(Dict *resDict, KListView *list, Ref **fonts, int &fontsLen, int &fontsSize, TQValueVector<Ref> *visitedXObjects)
+void PDFGenerator::scanFonts(Dict *resDict, TDEListView *list, Ref **fonts, int &fontsLen, int &fontsSize, TQValueVector<Ref> *visitedXObjects)
 {
     Object obj1, obj2, xObjDict, xObj, xObj2, resObj;
     Ref r;
@@ -709,7 +709,7 @@ void PDFGenerator::scanFonts(Dict *resDict, KListView *list, Ref **fonts, int &f
     xObjDict.free();
 }
 
-void PDFGenerator::scanFont(GfxFont *font, KListView *list, Ref **fonts, int &fontsLen, int &fontsSize)
+void PDFGenerator::scanFont(GfxFont *font, TDEListView *list, Ref **fonts, int &fontsLen, int &fontsSize)
 {
     Ref fontRef, embRef;
     Object fontObj, toUnicodeObj;
@@ -772,7 +772,7 @@ void PDFGenerator::scanFont(GfxFont *font, KListView *list, Ref **fonts, int &fo
         sPath = i18n("-");
     }
     sEmb = emb ? i18n("Yes") : i18n("No");
-    new KListViewItem(list, sName, fontTypeNames[font->getType()], sEmb, sPath);
+    new TDEListViewItem(list, sName, fontTypeNames[font->getType()], sEmb, sPath);
 
     // add this font to the list
     if (fontsLen == fontsSize)

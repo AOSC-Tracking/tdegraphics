@@ -97,11 +97,11 @@ namespace KPDF
 
   private:
       KParts::ReadOnlyPart* m_part;
-      KRecentFilesAction* m_recent;
-      KAction* m_printAction;
-      KToggleAction* m_fullScreenAction;
-      KToggleAction* m_showMenuBarAction;
-      KToggleAction* m_showToolBarAction;
+      TDERecentFilesAction* m_recent;
+      TDEAction* m_printAction;
+      TDEToggleAction* m_fullScreenAction;
+      TDEToggleAction* m_showMenuBarAction;
+      TDEToggleAction* m_showToolBarAction;
       bool m_menuBarWasShown, m_toolBarWasShown;
       KURL m_openUrl;
   };

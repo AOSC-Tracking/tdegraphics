@@ -20,9 +20,9 @@ Presenter Plugin:
 
 - Implementation:
 	- Playlist:
-		- KListView
+		- TDEListView
 		- Items:
-			- derived from KListViewItem
+			- derived from TDEListViewItem
 			- load Info in the background
 			- keep local copy of downloaded files
 			- delete local copy on destruction

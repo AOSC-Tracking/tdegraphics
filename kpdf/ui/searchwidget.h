@@ -12,7 +12,7 @@
 
 #include <ktoolbar.h>
 
-class KPopupMenu;
+class TDEPopupMenu;
 class KPDFDocument;
 class m_inputDelayTimer;
 
@@ -27,7 +27,7 @@ class m_inputDelayTimer;
  * It supports case sensitive/unsensitive(default) and provieds a button
  * for switching between the 2 modes.
  */
-class SearchWidget : public KToolBar
+class SearchWidget : public TDEToolBar
 {
     Q_OBJECT
   
@@ -37,7 +37,7 @@ class SearchWidget : public KToolBar
 
     private:
         KPDFDocument * m_document;
-        KPopupMenu * m_menu;
+        TDEPopupMenu * m_menu;
         TQTimer * m_inputDelayTimer;
         int m_searchType;
         bool m_caseSensitive;

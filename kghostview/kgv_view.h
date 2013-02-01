@@ -32,13 +32,13 @@ class TQFrame;
 class TQWidget;
 
 class TDEAboutData;
-class KAction;
-class KActionCollection;
+class TDEAction;
+class TDEActionCollection;
 class KDirWatch;
 class TDEInstance;
-class KPopupMenu;
-class KSelectAction;
-class KToggleAction;
+class TDEPopupMenu;
+class TDESelectAction;
+class TDEToggleAction;
 
 class KGVBrowserExtension;
 class KGVConfigDialog;
@@ -187,26 +187,26 @@ private:
 
     TQTimer*		_fitTimer;
 
-    KSelectAction* _selectOrientation;
-    KSelectAction* _selectMedia;
-    KAction*       _zoomIn;
-    KAction*       _zoomOut;
-    KSelectAction* _zoomTo;
-    KAction *      _fitWidth;
-    KAction *      _fitScreen;
-    KAction*       _prevPage;
-    KAction*       _nextPage;
-    KAction*       _firstPage;
-    KAction*       _lastPage;
-    KAction*       _readUp;
-    KAction*       _readDown;
-    KAction*       _gotoPage;
-    KToggleAction* _showScrollBars;
-    KToggleAction* _watchFile;
-    KToggleAction* _flick;
-    KToggleAction* _showPageList;
-    KToggleAction* _showPageLabels;
-    KPopupMenu*    _popup;
+    TDESelectAction* _selectOrientation;
+    TDESelectAction* _selectMedia;
+    TDEAction*       _zoomIn;
+    TDEAction*       _zoomOut;
+    TDESelectAction* _zoomTo;
+    TDEAction *      _fitWidth;
+    TDEAction *      _fitScreen;
+    TDEAction*       _prevPage;
+    TDEAction*       _nextPage;
+    TDEAction*       _firstPage;
+    TDEAction*       _lastPage;
+    TDEAction*       _readUp;
+    TDEAction*       _readDown;
+    TDEAction*       _gotoPage;
+    TDEToggleAction* _showScrollBars;
+    TDEToggleAction* _watchFile;
+    TDEToggleAction* _flick;
+    TDEToggleAction* _showPageList;
+    TDEToggleAction* _showPageLabels;
+    TDEPopupMenu*    _popup;
 
     TQFile             _tmpFile;
     TDEIO::TransferJob* _job;

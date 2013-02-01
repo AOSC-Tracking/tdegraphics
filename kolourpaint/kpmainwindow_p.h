@@ -30,16 +30,16 @@
 #define KP_MAIN_WINDOW_P_H
 
 
-class KAction;
-class KToggleAction;
+class TDEAction;
+class TDEToggleAction;
 
 
 struct kpMainWindowPrivate
 {
     bool m_configThumbnailShowRectangle;
-    KToggleAction *m_actionShowThumbnailRectangle;
+    TDEToggleAction *m_actionShowThumbnailRectangle;
 
-    KAction *m_actionHelpTakingScreenshots;
+    TDEAction *m_actionHelpTakingScreenshots;
 
     int m_moreEffectsDialogLastEffect;
     bool m_resizeScaleDialogLastKeepAspect;

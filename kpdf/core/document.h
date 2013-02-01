@@ -26,7 +26,7 @@ class DocumentInfo;
 class DocumentSynopsis;
 class Generator;
 class PixmapRequest;
-class KListView;
+class TDEListView;
 class KPrinter;
 class KURL;
 
@@ -85,7 +85,7 @@ class KPDFDocument : public TQObject
         TQString getMetaData( const TQString & key, const TQString & option = TQString() ) const;
         bool supportsSearching() const;
         bool hasFonts() const;
-        void putFontInfo(KListView *list);
+        void putFontInfo(TDEListView *list);
 
         // perform actions on document / pages
         void setViewportPage( int page, int excludeId = -1, bool smoothMove = false );

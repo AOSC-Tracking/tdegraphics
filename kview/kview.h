@@ -33,9 +33,9 @@ namespace KImageViewer {
 }
 class TQSize;
 class TQRect;
-class KAction;
-class KToggleAction;
-class KRecentFilesAction;
+class TDEAction;
+class TDEToggleAction;
+class TDERecentFilesAction;
 class KWinModule;
 class TQStringList;
 class KProgress;
@@ -105,13 +105,13 @@ class KView : public KParts::MainWindow
 		KWinModule * m_pWinModule;
 
 		// Actions:
-		KAction * m_paOpenFile;
-		KAction * m_paPaste;
-		KRecentFilesAction * m_paRecent;
-		KAction * m_paQuit;
-		KToggleFullScreenAction * m_paShowFullScreen;
-		KToggleAction * m_paShowMenubar;
-		KToggleAction * m_paShowStatusBar;
+		TDEAction * m_paOpenFile;
+		TDEAction * m_paPaste;
+		TDERecentFilesAction * m_paRecent;
+		TDEAction * m_paQuit;
+		TDEToggleFullScreenAction * m_paShowFullScreen;
+		TDEToggleAction * m_paShowMenubar;
+		TDEToggleAction * m_paShowStatusBar;
 
 		int m_nResizeMode;
 		bool m_bImageSizeChangedBlocked;

@@ -34,7 +34,7 @@
 WindowList KIconEdit::windowList;
 
 KIconEdit::KIconEdit(const TQImage image, const char *name)
- : KMainWindow(0, name)
+ : TDEMainWindow(0, name)
 {
     init();
     img = image;
@@ -44,7 +44,7 @@ KIconEdit::KIconEdit(const TQImage image, const char *name)
 }
 
 KIconEdit::KIconEdit(KURL url, const char *name)
- : KMainWindow(0, name)
+ : TDEMainWindow(0, name)
 {
     init();
     icon->open(&img, url);
@@ -234,12 +234,12 @@ void KIconEdit::setupActions()
 {
   kdDebug(4640) << "setupActions" << endl;
 
-  KAction *action;
-  KRadioAction *toolAction;
-  KShortcut cut;
+  TDEAction *action;
+  TDERadioAction *toolAction;
+  TDEShortcut cut;
 
   // File Menu
-  action = new KAction(i18n("New &Window"), "window_new", cut,
+  action = new TDEAction(i18n("New &Window"), "window_new", cut,
       TQT_TQOBJECT(this),  TQT_SLOT(slotNewWin()), actionCollection(), "file_new_window");
   action->setWhatsThis(i18n("New window\n\nOpens a new icon editor window."));
 
@@ -284,18 +284,18 @@ void KIconEdit::setupActions()
        "(Tip: Select \"Paste transparent pixels\" in the configuration dialog"
        " if you also want to paste transparency.)"));
 
-  m_actPasteNew = new KAction( i18n( "Paste as &New" ), cut, TQT_TQOBJECT(grid),
+  m_actPasteNew = new TDEAction( i18n( "Paste as &New" ), cut, TQT_TQOBJECT(grid),
       TQT_SLOT( editPasteAsNew() ), actionCollection(), "edit_paste_as_new" );
 
   KStdAction::clear(TQT_TQOBJECT(this), TQT_SLOT(slotClear()), actionCollection());
   KStdAction::selectAll(TQT_TQOBJECT(this), TQT_SLOT(slotSelectAll()), actionCollection());
 
-  action = new KAction(i18n("Resi&ze..."), "transform", cut,
+  action = new TDEAction(i18n("Resi&ze..."), "transform", cut,
       TQT_TQOBJECT(grid),  TQT_SLOT(editResize()), actionCollection(), "edit_resize");
   action->setWhatsThis(i18n("Resize\n\nSmoothly resizes the icon while"
       " trying to preserve the contents"));
 
-  action = new KAction(i18n("&GrayScale"), "grayscale", cut,
+  action = new TDEAction(i18n("&GrayScale"), "grayscale", cut,
       TQT_TQOBJECT(grid),  TQT_SLOT(grayScale()), actionCollection(), "edit_grayscale");
   action->setWhatsThis(i18n("Gray scale\n\nGray scale the current icon.\n"
       "(Warning: The result is likely to contain colors not in the icon"
@@ -310,23 +310,23 @@ void KIconEdit::setupActions()
       actionCollection());
   m_actZoomOut->setWhatsThis(i18n("Zoom out\n\nZoom out by one."));
 
-  KActionMenu *actMenu = new KActionMenu( i18n( "&Zoom" ), "viewmag",
+  TDEActionMenu *actMenu = new TDEActionMenu( i18n( "&Zoom" ), "viewmag",
       actionCollection(), "view_zoom" );
 
   // xgettext:no-c-format
-  action = new KAction( i18n( "100%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom1() ),
+  action = new TDEAction( i18n( "100%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom1() ),
       actionCollection(), "view_zoom_1" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new KAction( i18n( "200%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom2() ),
+  action = new TDEAction( i18n( "200%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom2() ),
       actionCollection(), "view_zoom_2" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new KAction( i18n( "500%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom5() ),
+  action = new TDEAction( i18n( "500%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom5() ),
       actionCollection(), "view_zoom_5" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new KAction( i18n( "1000%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom10() ),
+  action = new TDEAction( i18n( "1000%" ), cut, TQT_TQOBJECT(this), TQT_SLOT( slotZoom10() ),
       actionCollection(), "view_zoom_10" );
   actMenu->insert( action );
 
@@ -338,9 +338,9 @@ void KIconEdit::setupActions()
 
   createStandardStatusBarAction();
 
-  KToggleAction *toggle;
+  TDEToggleAction *toggle;
 
-  toggle = new KToggleAction( i18n( "Show &Grid" ), "grid",
+  toggle = new TDEToggleAction( i18n( "Show &Grid" ), "grid",
       cut, TQT_TQOBJECT(this), TQT_SLOT( slotShowGrid() ), actionCollection(),
       "options_show_grid" );
   toggle->setCheckedState(i18n("Hide &Grid"));
@@ -349,14 +349,14 @@ void KIconEdit::setupActions()
   toggle->setChecked( KIconEditProperties::self()->showGrid() );
 
   // Tools Menu
-  toolAction = new KRadioAction(i18n("Color Picker"), "colorpicker",
+  toolAction = new TDERadioAction(i18n("Color Picker"), "colorpicker",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolPointer()), actionCollection(),
       "tool_find_pixel");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Color Picker\n\nThe color of the pixel clicked"
       " on will be the current draw color"));
 
-  toolAction = new KRadioAction(i18n("Freehand"), "paintbrush",
+  toolAction = new TDERadioAction(i18n("Freehand"), "paintbrush",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFreehand()), actionCollection(),
       "tool_freehand");
   toolAction->setExclusiveGroup("toolActions");
@@ -365,64 +365,64 @@ void KIconEdit::setupActions()
   toolAction->setChecked( true );
   grid->setTool(KIconEditGrid::Freehand);
 
-  toolAction = new KRadioAction(i18n("Rectangle"), "rectangle",
+  toolAction = new TDERadioAction(i18n("Rectangle"), "rectangle",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolRectangle()), actionCollection(),
       "tool_rectangle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Rectangle\n\nDraw a rectangle"));
 
-  toolAction = new KRadioAction(i18n("Filled Rectangle"), "filledrectangle",
+  toolAction = new TDERadioAction(i18n("Filled Rectangle"), "filledrectangle",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFilledRectangle()), actionCollection(),
       "tool_filled_rectangle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled rectangle\n\nDraw a filled rectangle"));
 
-  toolAction = new KRadioAction(i18n("Circle"), "circle",
+  toolAction = new TDERadioAction(i18n("Circle"), "circle",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolCircle()), actionCollection(),
       "tool_circle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Circle\n\nDraw a circle"));
 
-  toolAction = new KRadioAction(i18n("Filled Circle"), "filledcircle",
+  toolAction = new TDERadioAction(i18n("Filled Circle"), "filledcircle",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFilledCircle()), actionCollection(),
       "tool_filled_circle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled circle\n\nDraw a filled circle"));
 
-  toolAction = new KRadioAction(i18n("Ellipse"), "ellipse",
+  toolAction = new TDERadioAction(i18n("Ellipse"), "ellipse",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolEllipse()), actionCollection(),
       "tool_ellipse");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Ellipse\n\nDraw an ellipse"));
 
-  toolAction = new KRadioAction(i18n("Filled Ellipse"), "filledellipse",
+  toolAction = new TDERadioAction(i18n("Filled Ellipse"), "filledellipse",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFilledEllipse()), actionCollection(),
       "tool_filled_ellipse");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled ellipse\n\nDraw a filled ellipse"));
 
-  toolAction = new KRadioAction(i18n("Spray"), "airbrush",
+  toolAction = new TDERadioAction(i18n("Spray"), "airbrush",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolSpray()), actionCollection(),
       "tool_spray");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Spray\n\nDraw scattered pixels in the"
       " current color"));
 
-  toolAction = new KRadioAction(i18n("Flood Fill"), "fill",
+  toolAction = new TDERadioAction(i18n("Flood Fill"), "fill",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolFlood()), actionCollection(),
       "tool_flood_fill");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Flood fill\n\nFill adjoining pixels with"
       " the same color with the current color"));
 
-  toolAction = new KRadioAction(i18n("Line"), "line",
+  toolAction = new TDERadioAction(i18n("Line"), "line",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolLine()), actionCollection(),
       "tool_line");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Line\n\nDraw a straight line vertically,"
       " horizontally or at 45 deg. angles"));
 
-  toolAction = new KRadioAction(i18n("Eraser (Transparent)"), "eraser",
+  toolAction = new TDERadioAction(i18n("Eraser (Transparent)"), "eraser",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolEraser()), actionCollection(),
       "tool_eraser");
   toolAction->setExclusiveGroup("toolActions");
@@ -431,14 +431,14 @@ void KIconEdit::setupActions()
       " different tool, first click on \"Erase\" then on the tool you want"
       " to use)"));
 
-  toolAction = new KRadioAction(i18n("Rectangular Selection"),
+  toolAction = new TDERadioAction(i18n("Rectangular Selection"),
       "selectrect", cut, TQT_TQOBJECT(this),  TQT_SLOT(slotToolSelectRect()),
       actionCollection(), "edit_select_rectangle");
   toolAction->setExclusiveGroup( "toolActions" );
   toolAction->setWhatsThis(i18n("Select\n\nSelect a rectangular section"
       " of the icon using the mouse."));
 
-  toolAction = new KRadioAction(i18n("Circular Selection"),
+  toolAction = new TDERadioAction(i18n("Circular Selection"),
       "selectcircle", cut, TQT_TQOBJECT(this),  TQT_SLOT(slotToolSelectCircle()),
       actionCollection(), "edit_select_circle");
   toolAction->setExclusiveGroup( "toolActions" );

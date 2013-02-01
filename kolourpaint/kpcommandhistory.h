@@ -34,8 +34,8 @@
 #include <tqvaluelist.h>
 
 
-class KActionCollection;
-class KToolBarPopupAction;
+class TDEActionCollection;
+class TDEToolBarPopupAction;
 
 class kpDocument;
 class kpMainWindow;
@@ -136,7 +136,7 @@ Q_OBJECT
   
 
 public:
-    kpCommandHistoryBase (bool doReadConfig, KActionCollection *ac);
+    kpCommandHistoryBase (bool doReadConfig, TDEActionCollection *ac);
     virtual ~kpCommandHistoryBase ();
 
 public:
@@ -198,7 +198,7 @@ signals:
     void documentRestored ();
 
 protected:
-    KToolBarPopupAction *m_actionUndo, *m_actionRedo;
+    TDEToolBarPopupAction *m_actionUndo, *m_actionRedo;
 
     // (Front element is the next one)
     TQValueList <kpCommand *> m_undoCommandList;

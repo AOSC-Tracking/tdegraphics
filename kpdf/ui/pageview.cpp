@@ -105,16 +105,16 @@ public:
     TQTimer dragScrollTimer;
 
     // actions
-    KToggleAction * aMouseNormal;
-    KToggleAction * aMouseSelect;
-    KToggleAction * aMouseEdit;
-    KSelectAction * aZoom;
-    KToggleAction * aZoomFitWidth;
-    KToggleAction * aZoomFitPage;
-    KToggleAction * aZoomFitText;
-    KToggleAction * aViewTwoPages;
-    KToggleAction * aViewContinuous;
-    KAction * aPrevAction;
+    TDEToggleAction * aMouseNormal;
+    TDEToggleAction * aMouseSelect;
+    TDEToggleAction * aMouseEdit;
+    TDESelectAction * aZoom;
+    TDEToggleAction * aZoomFitWidth;
+    TDEToggleAction * aZoomFitPage;
+    TDEToggleAction * aZoomFitText;
+    TDEToggleAction * aViewTwoPages;
+    TDEToggleAction * aViewContinuous;
+    TDEAction * aPrevAction;
 };
 
 
@@ -242,10 +242,10 @@ PageView::~PageView()
     delete d;
 }
 
-void PageView::setupActions( KActionCollection * ac )
+void PageView::setupActions( TDEActionCollection * ac )
 {
     // Zoom actions ( higher scales takes lots of memory! )
-    d->aZoom = new KSelectAction( i18n( "Zoom" ), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotZoom() ), ac, "zoom_to" );
+    d->aZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotZoom() ), ac, "zoom_to" );
     d->aZoom->setEditable( true );
 #if KDE_IS_VERSION(3,4,89)
     d->aZoom->setMaxComboViewCount( 13 );
@@ -256,52 +256,52 @@ void PageView::setupActions( KActionCollection * ac )
 
     KStdAction::zoomOut( TQT_TQOBJECT(this), TQT_SLOT( slotZoomOut() ), ac, "zoom_out" );
 
-    d->aZoomFitWidth = new KToggleAction( i18n("Fit to Page &Width"), "view_fit_width", 0, ac, "zoom_fit_width" );
+    d->aZoomFitWidth = new TDEToggleAction( i18n("Fit to Page &Width"), "view_fit_width", 0, ac, "zoom_fit_width" );
     connect( d->aZoomFitWidth, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToWidthToggled( bool ) ) );
 
-    d->aZoomFitPage = new KToggleAction( i18n("Fit to &Page"), "view_fit_window", 0, ac, "zoom_fit_page" );
+    d->aZoomFitPage = new TDEToggleAction( i18n("Fit to &Page"), "view_fit_window", 0, ac, "zoom_fit_page" );
     connect( d->aZoomFitPage, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToPageToggled( bool ) ) );
 
-    d->aZoomFitText = new KToggleAction( i18n("Fit to &Text"), "viewmagfit", 0, ac, "zoom_fit_text" );
+    d->aZoomFitText = new TDEToggleAction( i18n("Fit to &Text"), "viewmagfit", 0, ac, "zoom_fit_text" );
     connect( d->aZoomFitText, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToTextToggled( bool ) ) );
 
     // rotate actions
-    KAction *action;
-    action = new KAction( i18n("Rotate Right"), "rotate_cw", KShortcut( "Ctrl+Shift++" ),
+    TDEAction *action;
+    action = new TDEAction( i18n("Rotate Right"), "rotate_cw", TDEShortcut( "Ctrl+Shift++" ),
                           TQT_TQOBJECT(this), TQT_SLOT( slotRotateRight() ), ac, "rotate_right" );
 
-    action = new KAction( i18n("Rotate Left"), "rotate_ccw", KShortcut( "Ctrl+Shift+-" ),
+    action = new TDEAction( i18n("Rotate Left"), "rotate_ccw", TDEShortcut( "Ctrl+Shift+-" ),
                           TQT_TQOBJECT(this), TQT_SLOT( slotRotateLeft() ), ac, "rotate_left" );
 
     // View-Layout actions
-    d->aViewTwoPages = new KToggleAction( i18n("&Two Pages"), "view_left_right", 0, ac, "view_twopages" );
+    d->aViewTwoPages = new TDEToggleAction( i18n("&Two Pages"), "view_left_right", 0, ac, "view_twopages" );
     connect( d->aViewTwoPages, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotTwoPagesToggled( bool ) ) );
     d->aViewTwoPages->setChecked( KpdfSettings::viewColumns() > 1 );
 
-    d->aViewContinuous = new KToggleAction( i18n("&Continuous"), "view_text", 0, ac, "view_continuous" );
+    d->aViewContinuous = new TDEToggleAction( i18n("&Continuous"), "view_text", 0, ac, "view_continuous" );
     connect( d->aViewContinuous, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotContinuousToggled( bool ) ) );
     d->aViewContinuous->setChecked( KpdfSettings::viewContinuous() );
 
     // Mouse-Mode actions
-    d->aMouseNormal = new KRadioAction( i18n("&Browse Tool"), "mouse", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
+    d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "mouse", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
     d->aMouseNormal->setExclusiveGroup( "MouseType" );
     d->aMouseNormal->setChecked( true );
 
-    KToggleAction * mz = new KRadioAction( i18n("&Zoom Tool"), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
+    TDEToggleAction * mz = new TDERadioAction( i18n("&Zoom Tool"), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
     mz->setExclusiveGroup( "MouseType" );
 
-    d->aMouseSelect = new KRadioAction( i18n("&Select Tool"), "frame_edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
+    d->aMouseSelect = new TDERadioAction( i18n("&Select Tool"), "frame_edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
     d->aMouseSelect->setExclusiveGroup( "MouseType" );
 
-/*    d->aMouseEdit = new KRadioAction( i18n("Draw"), "edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
+/*    d->aMouseEdit = new TDERadioAction( i18n("Draw"), "edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
     d->aMouseEdit->setExclusiveGroup("MouseType");
     d->aMouseEdit->setEnabled( false ); // implement feature before removing this line*/
 
     // Other actions
-    KAction * su = new KAction( i18n("Scroll Up"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
+    TDEAction * su = new TDEAction( i18n("Scroll Up"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
     su->setShortcut( "Shift+Up" );
 
-    KAction * sd = new KAction( i18n("Scroll Down"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
+    TDEAction * sd = new TDEAction( i18n("Scroll Down"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
     sd->setShortcut( "Shift+Down" );
 }
 
@@ -673,7 +673,7 @@ void PageView::keyPressEvent( TQKeyEvent * e )
             }
         }
         // F3: go to next occurrency
-        else if( e->key() == KStdAccel::findNext() )
+        else if( e->key() == TDEStdAccel::findNext() )
         {
             // part doesn't get this key event because of the keyboard grab
             d->findTimeoutTimer->stop(); // restore normal operation during possible messagebox is displayed
@@ -1121,7 +1121,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
             }
 
             // popup that ask to copy:text and copy/save:image
-            KPopupMenu menu( this );
+            TDEPopupMenu menu( this );
             if ( !selectedText.isEmpty() )
             {
                 menu.insertTitle( i18n( "Text (1 character)", "Text (%n characters)", selectedText.length() ) );
@@ -1508,7 +1508,7 @@ void PageView::updateZoom( ZoomMode newZoomMode )
     }
 
     float newFactor = d->zoomFactor;
-    KAction * checkedZoomAction = 0;
+    TDEAction * checkedZoomAction = 0;
     switch ( newZoomMode )
     {
         case ZoomFixed:{ //ZoomFixed case

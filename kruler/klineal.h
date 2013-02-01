@@ -30,7 +30,7 @@
 #include <tqwidget.h>
 #include <tqcursor.h>
 
-class KLineal : public KMainWindow {
+class KLineal : public TDEMainWindow {
   Q_OBJECT
   
 public:
@@ -72,8 +72,8 @@ private:
   int mOrientation;
   int mLongEdgeLen;
   int mShortEdgeLen;
-  KPopupMenu *mMenu;
-  KPopupMenu *mLenMenu;
+  TDEPopupMenu *mMenu;
+  TDEPopupMenu *mLenMenu;
   TQColor mColor;
   TQColor mStoredColor;
   TQCursor mCurrentCursor;

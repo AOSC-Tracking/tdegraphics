@@ -27,7 +27,7 @@
 /** A widget for selecting a color component
  * @author Artur Rataj
  */
-class KZColorSelector : public KSelector {
+class KZColorSelector : public TDESelector {
    Q_OBJECT
   
 	

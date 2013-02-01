@@ -25,7 +25,7 @@ PMInsertPopup::PMInsertPopup( TQWidget* parent, bool multipleObjects,
                               int items, bool canInsertAllAsFirstChildren,
                               bool canInsertAllAsLastChildren,
                               bool canInsertAllAsSiblings, const char* name )
-      : KPopupMenu( parent, name )
+      : TDEPopupMenu( parent, name )
 {
    TQString itemText;
    if( multipleObjects )

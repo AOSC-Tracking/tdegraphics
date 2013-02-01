@@ -29,7 +29,7 @@ class TQLabel;
 class KSysColors;
 class KCustomColors;
 
-class PaletteToolBar : public KToolBar
+class PaletteToolBar : public TDEToolBar
 {
   Q_OBJECT
   

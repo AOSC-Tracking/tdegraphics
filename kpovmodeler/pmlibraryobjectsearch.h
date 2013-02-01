@@ -29,7 +29,7 @@ class TQLineEdit;
 class TQListBox;
 class TQPushButton;
 class PMLibraryEntryPreview;
-class KListView;
+class TDEListView;
 
 /**
  * Search widget for Library Objects.
@@ -49,7 +49,7 @@ private slots:
 private:
    TQLineEdit*   m_pSearch;
    TQPushButton* m_pSearchButton;
-   KListView* m_pFileList;
+   TDEListView* m_pFileList;
    PMLibraryEntryPreview* m_pPreview;
 };
 

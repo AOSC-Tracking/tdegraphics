@@ -41,22 +41,22 @@ public:
     bool singleKeyTriggersEnabled () const;
     void enableSingleKeyTriggers (bool enable = true);
 
-    // Avoid inheritance diamond by not deriving from KAction
-    // so you'll have to implement these by talking to your base KAction.
+    // Avoid inheritance diamond by not deriving from TDEAction
+    // so you'll have to implement these by talking to your base TDEAction.
     virtual const char *actionName () const { return 0; }
-    virtual KShortcut actionShortcut () const = 0;
-    virtual void actionSetShortcut (const KShortcut &shortcut) = 0;
+    virtual TDEShortcut actionShortcut () const = 0;
+    virtual void actionSetShortcut (const TDEShortcut &shortcut) = 0;
 
 protected:
     bool m_singleKeyTriggersEnabled;
-    KShortcut m_fullShortcut;
+    TDEShortcut m_fullShortcut;
 };
 
 
 #include <kaction.h>
 
 
-class kpSingleKeyTriggersAction : public KAction,
+class kpSingleKeyTriggersAction : public TDEAction,
                                   public kpSingleKeyTriggersActionInterface
 {
 Q_OBJECT
@@ -64,9 +64,9 @@ Q_OBJECT
 
 public:
     kpSingleKeyTriggersAction (const TQString &text,
-                               const KShortcut &shortcut,
+                               const TDEShortcut &shortcut,
                                const TQObject *receiver, const char *slot,
-                               KActionCollection *parent, const char *name);
+                               TDEActionCollection *parent, const char *name);
     virtual ~kpSingleKeyTriggersAction ();
 
 
@@ -75,8 +75,8 @@ public:
     //
 
     virtual const char *actionName () const;
-    virtual KShortcut actionShortcut () const;
-    virtual void actionSetShortcut (const KShortcut &shortcut);
+    virtual TDEShortcut actionShortcut () const;
+    virtual void actionSetShortcut (const TDEShortcut &shortcut);
 };
 
 

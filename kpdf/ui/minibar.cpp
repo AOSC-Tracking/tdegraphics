@@ -403,7 +403,7 @@ HoverButton::HoverButton( TQWidget * parent )
 {
     setMouseTracking( true );
 #if KDE_IS_VERSION(3,3,90)
-    KAcceleratorManager::setNoAccel( this );
+    TDEAcceleratorManager::setNoAccel( this );
 #endif
 }
 

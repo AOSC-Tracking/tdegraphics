@@ -76,7 +76,7 @@ void Shell::init()
       // and integrate the part's GUI with the shell's
       setupGUI(Keys | Save);
       createGUI(m_part);
-      m_showToolBarAction = static_cast<KToggleAction*>(toolBarMenuAction());
+      m_showToolBarAction = static_cast<TDEToggleAction*>(toolBarMenuAction());
     }
   }
   else
@@ -94,7 +94,7 @@ void Shell::init()
   readSettings();
   if (!TDEGlobal::config()->hasGroup("MainWindow"))
   {
-    KMainWindowInterface kmwi(this);
+    TDEMainWindowInterface kmwi(this);
     kmwi.maximize();
   }
   setAutoSaveSettings();
@@ -146,7 +146,7 @@ void Shell::writeSettings()
 
 void Shell::setupActions()
 {
-  KAction * openAction = KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(fileOpen()), actionCollection());
+  TDEAction * openAction = KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(fileOpen()), actionCollection());
   m_recent = KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( openURL( const KURL& ) ), actionCollection() );
   connect( m_recent, TQT_SIGNAL( activated() ), openAction, TQT_SLOT( activate() ) );
   m_recent->setWhatsThis( i18n( "<b>Click</b> to open a file or <b>Click and hold</b> to select a recent file" ) );

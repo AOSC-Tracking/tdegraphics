@@ -26,7 +26,7 @@
 namespace KImageViewer { class Viewer; }
 
 namespace KParts { class BrowserExtension; }
-class KAction;
+class TDEAction;
 class KDirLister;
 class KMyFileItemList;
 
@@ -55,8 +55,8 @@ private:
 	KParts::BrowserExtension * m_pExtension;
 	bool m_bShowCurrent;
 
-	KAction * m_paBack;
-	KAction * m_paForward;
+	TDEAction * m_paBack;
+	TDEAction * m_paForward;
 };
 
 // vim:sw=4:ts=4:cindent

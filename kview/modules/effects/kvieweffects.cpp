@@ -37,13 +37,13 @@ KViewEffects::KViewEffects( TQObject* parent, const char* name, const TQStringLi
 	delete viewerList;
 	if( m_pViewer )
 	{
-		KAction * gammaaction = new KAction( i18n( "&Gamma Correction..." ), 0, 0,
+		TDEAction * gammaaction = new TDEAction( i18n( "&Gamma Correction..." ), 0, 0,
 				this, TQT_SLOT( gamma() ),
 				actionCollection(), "plugin_effects_gamma" );
-		KAction * blendaction = new KAction( i18n( "&Blend Color..." ), 0, 0,
+		TDEAction * blendaction = new TDEAction( i18n( "&Blend Color..." ), 0, 0,
 				this, TQT_SLOT( blend() ),
 				actionCollection(), "plugin_effects_blend" );
-		KAction * intensityaction = new KAction( i18n( "Change &Intensity (Brightness)..." ), 0, 0,
+		TDEAction * intensityaction = new TDEAction( i18n( "Change &Intensity (Brightness)..." ), 0, 0,
 				this, TQT_SLOT( intensity() ),
 				actionCollection(), "plugin_effects_intensity" );
 		gammaaction->setEnabled( m_pViewer->canvas()->image() != 0 );

@@ -61,7 +61,7 @@ PresentationWidget::PresentationWidget( TQWidget * parent, KPDFDocument * doc )
 
     m_width = -1;
 
-    m_accel = new KAccel( this, TQT_TQOBJECT(this), "presentationmode-accel" );
+    m_accel = new TDEAccel( this, TQT_TQOBJECT(this), "presentationmode-accel" );
 
     // show widget and take control
     showFullScreen();
@@ -98,7 +98,7 @@ PresentationWidget::~PresentationWidget()
         delete *fIt;
 }
 
-void PresentationWidget::setupActions( KActionCollection * ac )
+void PresentationWidget::setupActions( TDEActionCollection * ac )
 {
     m_accel->insert( "previous_page", ac->action( "previous_page" )->shortcut(), TQT_TQOBJECT(this), TQT_SLOT( slotPrevPage() ), false, true );
     m_accel->insert( "next_page", ac->action( "next_page" )->shortcut(), TQT_TQOBJECT(this), TQT_SLOT( slotNextPage() ), false, true );
@@ -304,7 +304,7 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
         m_height = d.height();
 
         // create top toolbar
-        m_topBar = new KToolBar( this, "presentationBar" );
+        m_topBar = new TDEToolBar( this, "presentationBar" );
         m_topBar->setIconSize( 32 );
         m_topBar->setMovingEnabled( false );
         m_topBar->insertButton( TQApplication::reverseLayout() ? "1rightarrow" : "1leftarrow", 2, TQT_SIGNAL( clicked() ), TQT_TQOBJECT(this), TQT_SLOT( slotPrevPage() ) );

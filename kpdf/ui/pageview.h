@@ -24,7 +24,7 @@
 #include "core/observer.h"
 
 class KURL;
-class KActionCollection;
+class TDEActionCollection;
 
 class KPDFDocument;
 class PageViewItem;
@@ -53,7 +53,7 @@ class PageView : public TQScrollView, public DocumentObserver
         enum MouseMode { MouseNormal, MouseZoom, MouseSelect, MouseEdit };
 
         // create actions that interact with this widget
-        void setupActions( KActionCollection * collection );
+        void setupActions( TDEActionCollection * collection );
 
         // used from RMB menu
         bool canFitPageWidth();

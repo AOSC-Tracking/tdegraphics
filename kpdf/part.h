@@ -28,11 +28,11 @@ class TQSplitter;
 class TQToolBox;
 
 class KURL;
-class KAction;
+class TDEAction;
 class TDEConfig;
 class KDirWatch;
-class KToggleAction;
-class KSelectAction;
+class TDEToggleAction;
+class TDESelectAction;
 class TDEAboutData;
 class KPrinter;
 
@@ -172,22 +172,22 @@ private:
 	TQString m_jobMime;
 
 	// actions
-	KAction *m_gotoPage;
-	KAction *m_prevPage;
-	KAction *m_nextPage;
-	KAction *m_firstPage;
-	KAction *m_lastPage;
-	KAction *m_historyBack;
-	KAction *m_historyNext;
-	KAction *m_find;
-	KAction *m_findNext;
-	KAction *m_saveAs;
-	KAction *m_printPreview;
-	KAction *m_showProperties;
-	KAction *m_showPresentation;
-	KToggleAction* m_showMenuBarAction;
-	KToggleAction* m_showLeftPanel;
-	KToggleAction* m_showFullScreenAction;
+	TDEAction *m_gotoPage;
+	TDEAction *m_prevPage;
+	TDEAction *m_nextPage;
+	TDEAction *m_firstPage;
+	TDEAction *m_lastPage;
+	TDEAction *m_historyBack;
+	TDEAction *m_historyNext;
+	TDEAction *m_find;
+	TDEAction *m_findNext;
+	TDEAction *m_saveAs;
+	TDEAction *m_printPreview;
+	TDEAction *m_showProperties;
+	TDEAction *m_showPresentation;
+	TDEToggleAction* m_showMenuBarAction;
+	TDEToggleAction* m_showLeftPanel;
+	TDEToggleAction* m_showFullScreenAction;
 	bool m_actionsSearched;
 	bool m_searchStarted;
 	BrowserExtension *m_bExtension;

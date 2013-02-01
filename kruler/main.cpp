@@ -11,7 +11,7 @@
 
 #define RESTORE_RULERS(type) {				\
 	int n = 1;					\
-	while (KMainWindow::canBeRestored(n)) {		\
+	while (TDEMainWindow::canBeRestored(n)) {		\
 		type* ruler = new type;			\
 		ruler->restore(n);			\
 		a.setMainWidget(ruler);			\

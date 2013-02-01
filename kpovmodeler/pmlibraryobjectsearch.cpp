@@ -60,7 +60,7 @@ PMLibraryObjectSearch::PMLibraryObjectSearch( TQWidget* parent ) :
    // Search results
    frame = new TQFrame( this );
    TQHBoxLayout* hl = new TQHBoxLayout( frame, KDialog::spacingHint( ) );
-   m_pFileList = new KListView( frame );
+   m_pFileList = new TDEListView( frame );
    m_pFileList->addColumn( i18n( "File" ) );
    m_pFileList->addColumn( i18n( "Path" ) );
    m_pFileList->setFullWidth( true );

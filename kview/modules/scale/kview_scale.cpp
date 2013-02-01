@@ -46,7 +46,7 @@ KViewScale::KViewScale( TQObject* parent, const char* name, const TQStringList &
 		kdDebug( 4630 ) << "m_pViewer->canvas() = " << m_pViewer->canvas() << endl;
 		m_pCanvas = m_pViewer->canvas();
 
-		(void) new KAction( i18n( "&Scale Image..." ), 0, 0,
+		(void) new TDEAction( i18n( "&Scale Image..." ), 0, 0,
 							this, TQT_SLOT( slotScaleDlg() ),
 							actionCollection(), "plugin_scale" );
 	}

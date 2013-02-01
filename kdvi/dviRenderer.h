@@ -27,7 +27,7 @@ class dviRenderer;
 class fontProgressDialog;
 class ghostscript_interface;
 class infoDialog;
-class KAction;
+class TDEAction;
 class KDVIMultiPage;
 class KPrinter;
 class TDEProcess;

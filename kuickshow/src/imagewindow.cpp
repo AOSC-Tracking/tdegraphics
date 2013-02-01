@@ -111,7 +111,7 @@ void ImageWindow::init()
     contrastMenu = 0L;
 
 
-    m_actions = new KActionCollection( this );
+    m_actions = new TDEActionCollection( this );
 
     if ( !s_handCursor ) {
         TQString file = locate( "appdata", "pics/handcursor.png" );
@@ -145,51 +145,51 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
-    new KAction( i18n("Show Next Image"), KStdAccel::next(),
+    new TDEAction( i18n("Show Next Image"), TDEStdAccel::next(),
                  TQT_TQOBJECT(this), TQT_SLOT( slotRequestNext() ),
                  m_actions, "next_image" );
-    new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
+    new TDEAction( i18n("Show Previous Image"), TDEStdAccel::prior(),
                  TQT_TQOBJECT(this), TQT_SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
 
-    new KAction( i18n("Delete Image"), SHIFT + Key_Delete,
+    new TDEAction( i18n("Delete Image"), SHIFT + Key_Delete,
                  TQT_TQOBJECT(this), TQT_SLOT( imageDelete() ),
                  m_actions, "delete_image" );
-    new KAction( i18n("Move Image to Trash"), Key_Delete,
+    new TDEAction( i18n("Move Image to Trash"), Key_Delete,
                  TQT_TQOBJECT(this), TQT_SLOT( imageTrash() ),
                  m_actions, "trash_image" );
 
-    new KAction( i18n("Zoom In"), Key_Plus,
+    new TDEAction( i18n("Zoom In"), Key_Plus,
                  TQT_TQOBJECT(this), TQT_SLOT( zoomIn() ),
                  m_actions, "zoom_in" );
-    new KAction( i18n("Zoom Out"), Key_Minus,
+    new TDEAction( i18n("Zoom Out"), Key_Minus,
                  TQT_TQOBJECT(this), TQT_SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
-    new KAction( i18n("Restore Original Size"), Key_O,
+    new TDEAction( i18n("Restore Original Size"), Key_O,
                  TQT_TQOBJECT(this), TQT_SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
-    new KAction( i18n("Maximize"), Key_M,
+    new TDEAction( i18n("Maximize"), Key_M,
                  TQT_TQOBJECT(this), TQT_SLOT( maximize() ),
                  m_actions, "maximize" );
 
-    new KAction( i18n("Rotate 90 Degrees"), Key_9,
+    new TDEAction( i18n("Rotate 90 Degrees"), Key_9,
                  TQT_TQOBJECT(this), TQT_SLOT( rotate90() ),
                  m_actions, "rotate90" );
-    new KAction( i18n("Rotate 180 Degrees"), Key_8,
+    new TDEAction( i18n("Rotate 180 Degrees"), Key_8,
                  TQT_TQOBJECT(this), TQT_SLOT( rotate180() ),
                  m_actions, "rotate180" );
-    new KAction( i18n("Rotate 270 Degrees"), Key_7,
+    new TDEAction( i18n("Rotate 270 Degrees"), Key_7,
                  TQT_TQOBJECT(this), TQT_SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
-    new KAction( i18n("Flip Horizontally"), Key_Asterisk,
+    new TDEAction( i18n("Flip Horizontally"), Key_Asterisk,
                  TQT_TQOBJECT(this), TQT_SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
-    new KAction( i18n("Flip Vertically"), Key_Slash,
+    new TDEAction( i18n("Flip Vertically"), Key_Slash,
                  TQT_TQOBJECT(this), TQT_SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
-    new KAction( i18n("Print Image..."), KStdAccel::print(),
+    new TDEAction( i18n("Print Image..."), TDEStdAccel::print(),
                  TQT_TQOBJECT(this), TQT_SLOT( printImage() ),
                  m_actions, "print_image" );
     KStdAction::saveAs( TQT_TQOBJECT(this), TQT_SLOT( saveImage() ),
@@ -198,64 +198,64 @@ void ImageWindow::setupActions()
     KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( close() ),
                  m_actions, "close_image" );
     // --------
-    new KAction( i18n("More Brightness"), Key_B,
+    new TDEAction( i18n("More Brightness"), Key_B,
                  TQT_TQOBJECT(this), TQT_SLOT( moreBrightness() ),
                  m_actions, "more_brightness" );
-    new KAction( i18n("Less Brightness"), SHIFT + Key_B,
+    new TDEAction( i18n("Less Brightness"), SHIFT + Key_B,
                  TQT_TQOBJECT(this), TQT_SLOT( lessBrightness() ),
                  m_actions, "less_brightness" );
-    new KAction( i18n("More Contrast"), Key_C,
+    new TDEAction( i18n("More Contrast"), Key_C,
                  TQT_TQOBJECT(this), TQT_SLOT( moreContrast() ),
                  m_actions, "more_contrast" );
-    new KAction( i18n("Less Contrast"), SHIFT + Key_C,
+    new TDEAction( i18n("Less Contrast"), SHIFT + Key_C,
                  TQT_TQOBJECT(this), TQT_SLOT( lessContrast() ),
                  m_actions, "less_contrast" );
-    new KAction( i18n("More Gamma"), Key_G,
+    new TDEAction( i18n("More Gamma"), Key_G,
                  TQT_TQOBJECT(this), TQT_SLOT( moreGamma() ),
                  m_actions, "more_gamma" );
-    new KAction( i18n("Less Gamma"), SHIFT + Key_G,
+    new TDEAction( i18n("Less Gamma"), SHIFT + Key_G,
                  TQT_TQOBJECT(this), TQT_SLOT( lessGamma() ),
                  m_actions, "less_gamma" );
 
     // --------
-    new KAction( i18n("Scroll Up"), Key_Up,
+    new TDEAction( i18n("Scroll Up"), Key_Up,
                  TQT_TQOBJECT(this), TQT_SLOT( scrollUp() ),
                  m_actions, "scroll_up" );
-    new KAction( i18n("Scroll Down"), Key_Down,
+    new TDEAction( i18n("Scroll Down"), Key_Down,
                  TQT_TQOBJECT(this), TQT_SLOT( scrollDown() ),
                  m_actions, "scroll_down" );
-    new KAction( i18n("Scroll Left"), Key_Left,
+    new TDEAction( i18n("Scroll Left"), Key_Left,
                  TQT_TQOBJECT(this), TQT_SLOT( scrollLeft() ),
                  m_actions, "scroll_left" );
-    new KAction( i18n("Scroll Right"), Key_Right,
+    new TDEAction( i18n("Scroll Right"), Key_Right,
                  TQT_TQOBJECT(this), TQT_SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
     // --------
-    new KAction( i18n("Pause Slideshow"), Key_P,
+    new TDEAction( i18n("Pause Slideshow"), Key_P,
                  TQT_TQOBJECT(this), TQT_SLOT( pauseSlideShow() ),
                  m_actions, "kuick_slideshow_pause" );
 
-    KAction *fullscreenAction = KStdAction::fullScreen(TQT_TQOBJECT(this), TQT_SLOT( toggleFullscreen() ), m_actions, 0 );
+    TDEAction *fullscreenAction = KStdAction::fullScreen(TQT_TQOBJECT(this), TQT_SLOT( toggleFullscreen() ), m_actions, 0 );
 
-    KAction *reloadAction = new KAction( i18n("Reload Image"), KStdAccel::shortcut(KStdAccel::Reload),
+    TDEAction *reloadAction = new TDEAction( i18n("Reload Image"), TDEStdAccel::shortcut(TDEStdAccel::Reload),
                                          TQT_TQOBJECT(this), TQT_SLOT( reload() ),
                                          m_actions, "reload_image" );
 
-    new KAction( i18n("Properties"), ALT + Key_Return,
+    new TDEAction( i18n("Properties"), ALT + Key_Return,
                  TQT_TQOBJECT(this), TQT_SLOT( slotProperties() ),
                  m_actions, "properties" );
 
     m_actions->readShortcutSettings();
 
-    // Unfortunately there is no KAction::setShortcutDefault() :-/
+    // Unfortunately there is no TDEAction::setShortcutDefault() :-/
     // so add Key_Return as fullscreen shortcut _after_ readShortcutSettings()
     addAlternativeShortcut(fullscreenAction, Key_Return);
     addAlternativeShortcut(reloadAction, Key_Enter);
 }
 
-void ImageWindow::addAlternativeShortcut(KAction *action, int key)
+void ImageWindow::addAlternativeShortcut(TDEAction *action, int key)
 {
-    KShortcut cut( action->shortcut() );
+    TDEShortcut cut( action->shortcut() );
     if (cut == action->shortcutDefault()) {
         cut.append(KKey(key));
         action->setShortcut(cut);
@@ -593,9 +593,9 @@ void ImageWindow::keyPressEvent( TQKeyEvent *e )
     if ( key == Key_Shift )
         updateCursor( ZoomCursor );
 	
-    if ( key == Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
+    if ( key == Key_Escape || TDEStdAccel::close().contains( KKey( e ) ) )
         close( true );
-    else if ( KStdAccel::save().contains( KKey( e ) ) )
+    else if ( TDEStdAccel::save().contains( KKey( e ) ) )
         saveImage();
 
     else {

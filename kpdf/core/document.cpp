@@ -430,7 +430,7 @@ bool KPDFDocument::hasFonts() const
     return generator ? generator->hasFonts() : false;
 }
 
-void KPDFDocument::putFontInfo(KListView *list)
+void KPDFDocument::putFontInfo(TDEListView *list)
 {
     if (generator) generator->putFontInfo(list);
 }

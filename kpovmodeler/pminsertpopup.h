@@ -29,7 +29,7 @@
 /**
  * Popup menu. Ask the user where to insert new objects
  */
-class PMInsertPopup : public KPopupMenu
+class PMInsertPopup : public TDEPopupMenu
 {
 public:
    /**

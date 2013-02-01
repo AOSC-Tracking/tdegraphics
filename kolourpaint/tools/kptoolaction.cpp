@@ -32,10 +32,10 @@
 
 
 kpToolAction::kpToolAction (const TQString &text,
-                            const TQString &pic, const KShortcut &shortcut,
+                            const TQString &pic, const TDEShortcut &shortcut,
                             const TQObject *receiver, const char *slot,
                             TQObject *parent, const char *name)
-    : KToggleAction (text,
+    : TDEToggleAction (text,
                      pic, shortcut,
                      receiver, slot,
                      parent, name)
@@ -62,27 +62,27 @@ void kpToolAction::updateToolTip ()
 
 
 //
-// KToggleAction interface
+// TDEToggleAction interface
 //
 
-// public slot virtual [base KAction]
+// public slot virtual [base TDEAction]
 void kpToolAction::setText (const TQString &text)
 {
-    KToggleAction::setText (text);
+    TDEToggleAction::setText (text);
     updateToolTip ();
 }
 
-// public slot virtual [base KAction]
-bool kpToolAction::setShortcut (const KShortcut &shortcut)
+// public slot virtual [base TDEAction]
+bool kpToolAction::setShortcut (const TDEShortcut &shortcut)
 {
-    bool ret = KToggleAction::setShortcut (shortcut);
+    bool ret = TDEToggleAction::setShortcut (shortcut);
     updateToolTip ();
     return ret;
 }
 
 
 //
-// KToggleAction implements kpSingleKeyTriggersActionInterface
+// TDEToggleAction implements kpSingleKeyTriggersActionInterface
 //
 
 // public virtual [base kpSingleKeyTriggersActionInterface]
@@ -92,13 +92,13 @@ const char *kpToolAction::actionName () const
 }
 
 // public virtual [base kpSingleKeyTriggersActionInterface]
-KShortcut kpToolAction::actionShortcut () const
+TDEShortcut kpToolAction::actionShortcut () const
 {
     return shortcut ();
 }
 
 // public virtual [base kpSingleKeyTriggersActionInterface]
-void kpToolAction::actionSetShortcut (const KShortcut &shortcut)
+void kpToolAction::actionSetShortcut (const TDEShortcut &shortcut)
 {
     setShortcut (shortcut);
 }

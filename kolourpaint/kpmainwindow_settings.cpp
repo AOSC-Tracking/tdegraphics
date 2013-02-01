@@ -47,7 +47,7 @@
 // private
 void kpMainWindow::setupSettingsMenuActions ()
 {
-    KActionCollection *ac = actionCollection ();
+    TDEActionCollection *ac = actionCollection ();
 
 
     // Settings/Toolbars |> %s
@@ -61,7 +61,7 @@ void kpMainWindow::setupSettingsMenuActions ()
                                                  this/*window*/);
 
 
-    m_actionShowPath = new KToggleAction (i18n ("Show &Path"), 0,
+    m_actionShowPath = new TDEToggleAction (i18n ("Show &Path"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotShowPathToggled ()), ac, "settings_show_path");
     m_actionShowPath->setCheckedState (i18n ("Hide &Path"));
     slotEnableSettingsShowPath ();
@@ -187,7 +187,7 @@ void kpMainWindow::slotNewToolBarConfig ()
     kdDebug () << "kpMainWindow::slotNewToolBarConfig()" << endl;
 #endif
 
-    // Wouldn't it be nice if createGUI () didn't nuke all the KToolBar's?
+    // Wouldn't it be nice if createGUI () didn't nuke all the TDEToolBar's?
     // (including my non-XMLGUI ones whose states take a _lot_ of effort to
     //  restore).
     // TODO: this message is probably unacceptable - so restore the state of

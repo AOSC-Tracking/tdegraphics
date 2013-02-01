@@ -33,8 +33,8 @@
 #include <kpsinglekeytriggersaction.h>
 
 
-// Same as KToggleAction but shows the first single key trigger in the tooltip.
-class kpToolAction : public KToggleAction,
+// Same as TDEToggleAction but shows the first single key trigger in the tooltip.
+class kpToolAction : public TDEToggleAction,
                      public kpSingleKeyTriggersActionInterface
 {
 Q_OBJECT
@@ -42,7 +42,7 @@ Q_OBJECT
 
 public:
     kpToolAction (const TQString &text,
-        const TQString &pic, const KShortcut &shortcut,
+        const TQString &pic, const TDEShortcut &shortcut,
         const TQObject *receiver, const char *slot,
         TQObject *parent, const char *name);
     virtual ~kpToolAction ();
@@ -57,12 +57,12 @@ protected:
 
 
     //
-    // KToggleAction interface
+    // TDEToggleAction interface
     //
 
 public slots:
     virtual void setText (const TQString &text);
-    virtual bool setShortcut (const KShortcut &shortcut);
+    virtual bool setShortcut (const TDEShortcut &shortcut);
 
 
     //
@@ -71,8 +71,8 @@ public slots:
 
 public:
     virtual const char *actionName () const;
-    virtual KShortcut actionShortcut () const;
-    virtual void actionSetShortcut (const KShortcut &shortcut);
+    virtual TDEShortcut actionShortcut () const;
+    virtual void actionSetShortcut (const TDEShortcut &shortcut);
 };
 
 

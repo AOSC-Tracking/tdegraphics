@@ -32,8 +32,8 @@ class ImageListDialog;
 class ImageListItem;
 class TQListViewItem;
 class TQTimer;
-class KToggleAction;
-class KAction;
+class TDEToggleAction;
+class TDEAction;
 
 class KViewPresenter : public KParts::Plugin
 {
@@ -90,9 +90,9 @@ private:
 
 	KImageViewer::Viewer * m_pViewer;
 	ImageListDialog * m_pImageList;
-	KToggleAction * m_paSlideshow;
-	KAction * m_paFileOpen;
-	KAction * m_paFileClose;
+	TDEToggleAction * m_paSlideshow;
+	TDEAction * m_paFileOpen;
+	TDEAction * m_paFileClose;
 
 	TQSortedList<ImageInfo> m_imagelist;
 	bool m_bDontAdd;

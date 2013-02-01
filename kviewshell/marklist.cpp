@@ -558,7 +558,7 @@ void MarkList::showPopupMenu(const PageNumber& pageNumber, const TQPoint& positi
   if (contextMenu == 0)
   {
     // Initialize Contextmenu
-    contextMenu = new KPopupMenu(this, "markListContext");
+    contextMenu = new TDEPopupMenu(this, "markListContext");
 
     contextMenu->insertItem(i18n("Select &Current Page"), 0);
     contextMenu->insertItem(i18n("Select &All Pages"), 1);

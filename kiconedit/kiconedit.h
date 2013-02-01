@@ -56,7 +56,7 @@ class PaletteToolBar;
 * @author Thomas Tanghus <tanghus@kde.org>
 * @version 0.4
 */
-class KIconEdit : public KMainWindow
+class KIconEdit : public TDEMainWindow
 {
     Q_OBJECT
   
@@ -150,9 +150,9 @@ protected:
   TQImage img;
   TQString m_name;
 
-  KAction *m_actCopy, *m_actPaste, *m_actCut, *m_actPasteNew;
-  KAction *m_actZoomIn, *m_actZoomOut;
-  KRecentFilesAction *m_actRecent;
+  TDEAction *m_actCopy, *m_actPaste, *m_actCut, *m_actPasteNew;
+  TDEAction *m_actZoomIn, *m_actZoomOut;
+  TDERecentFilesAction *m_actRecent;
 };
 
 #endif //__KICONEDIT_H__

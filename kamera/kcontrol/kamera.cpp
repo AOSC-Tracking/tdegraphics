@@ -51,8 +51,8 @@ KKameraConfig *KKameraConfig::m_instance = NULL;
 KKameraConfig::KKameraConfig(TQWidget *parent, const char *name, const TQStringList &)
 	: TDECModule(KKameraConfigFactory::instance(), parent, name)
 {
-	m_devicePopup = new KPopupMenu(this);
-	m_actions = new KActionCollection(this);
+	m_devicePopup = new TDEPopupMenu(this);
+	m_actions = new TDEActionCollection(this);
 	m_config = new KSimpleConfig(KProtocolInfo::config("camera"));
 	
 	m_context = gp_context_new();
@@ -100,7 +100,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	TQVBoxLayout *topLayout = new TQVBoxLayout(this, 0, 0);
 	topLayout->setAutoAdd(true);
 	
-	m_toolbar = new KToolBar(this, "ToolBar");
+	m_toolbar = new TDEToolBar(this, "ToolBar");
 	m_toolbar->setMovingEnabled(false);
 	
 	// create list of devices
@@ -116,26 +116,26 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	m_deviceSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
 	
 	// create actions
-	KAction *act;
+	TDEAction *act;
 	
-	act = new KAction(i18n("Add"), "camera", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
+	act = new TDEAction(i18n("Add"), "camera", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
 	act->setWhatsThis(i18n("Click this button to add a new camera."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new KAction(i18n("Test"), "camera_test", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
+	act = new TDEAction(i18n("Test"), "camera_test", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Remove"), "edittrash", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_removeCamera()), m_actions, "camera_remove");
+	act = new TDEAction(i18n("Remove"), "edittrash", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_removeCamera()), m_actions, "camera_remove");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Configure..."), "configure", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_configureCamera()), m_actions, "camera_configure");
+	act = new TDEAction(i18n("Configure..."), "configure", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_configureCamera()), m_actions, "camera_configure");
 	act->setWhatsThis(i18n("Click this button to change the configuration of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
-	act = new KAction(i18n("Information"), "hwinfo", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cameraSummary()), m_actions, "camera_summary");
+	act = new TDEAction(i18n("Information"), "hwinfo", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cameraSummary()), m_actions, "camera_summary");
 	act->setWhatsThis(i18n("Click this button to view a summary of the current status of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new KAction(i18n("Cancel"), "stop", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
+	act = new TDEAction(i18n("Cancel"), "stop", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
 	act->setWhatsThis(i18n("Click this button to cancel the current camera operation."));
 	act->setEnabled(false);
 	act->plug(m_toolbar);

@@ -170,7 +170,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   // Add the multipage to the GUI.
   partManager->addPart(multiPage);
 
-  exportTextAction = new KAction(i18n("Text..."), 0, this, TQT_SLOT(mp_exportText()), actionCollection(), "export_text");
+  exportTextAction = new TDEAction(i18n("Text..."), 0, this, TQT_SLOT(mp_exportText()), actionCollection(), "export_text");
 
   // edit menu
   findTextAction = KStdAction::find(this, TQT_SLOT(mp_showFindTextDialog()), actionCollection(), "find");
@@ -190,11 +190,11 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   saveAction = KStdAction::save(this, TQT_SLOT(mp_slotSave_defaultFilename()), actionCollection());
 
   // settings menu
-  showSidebar = new KToggleAction (i18n("Show &Sidebar"), "show_side_panel", 0, this,
+  showSidebar = new TDEToggleAction (i18n("Show &Sidebar"), "show_side_panel", 0, this,
                                    TQT_SLOT(slotShowSidebar()), actionCollection(), "show_sidebar");
   showSidebar->setCheckedState(i18n("Hide &Sidebar"));
-  watchAct = new KToggleAction(i18n("&Watch File"), 0, 0, 0, actionCollection(), "watch_file");
-  scrollbarHandling = new KToggleAction (i18n("Show Scrollbars"), 0, 0, 0, actionCollection(), "scrollbarHandling");
+  watchAct = new TDEToggleAction(i18n("&Watch File"), 0, 0, 0, actionCollection(), "watch_file");
+  scrollbarHandling = new TDEToggleAction (i18n("Show Scrollbars"), 0, 0, 0, actionCollection(), "scrollbarHandling");
   scrollbarHandling->setCheckedState(i18n("Hide Scrollbars"));
 
   // View modes
@@ -203,19 +203,19 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   viewModes.append(i18n("Continuous"));
   viewModes.append(i18n("Continuous - Facing"));
   viewModes.append(i18n("Overview"));
-  viewModeAction = new KSelectAction (i18n("View Mode"), 0, 0, 0, actionCollection(), "viewmode");
+  viewModeAction = new TDESelectAction (i18n("View Mode"), 0, 0, 0, actionCollection(), "viewmode");
   viewModeAction->setItems(viewModes);
 
   // Qt::Orientation menu
   TQStringList orientations;
   orientations.append(i18n("Portrait"));
   orientations.append(i18n("Landscape"));
-  orientation = new KSelectAction (i18n("Preferred &Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
+  orientation = new TDESelectAction (i18n("Preferred &Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
   orientation->setItems(orientations);
   connect(orientation, TQT_SIGNAL(activated (int)), &userRequestedPaperSize, TQT_SLOT(setOrientation(int)));
 
   // Zoom Menu
-  zoom_action = new KSelectAction (i18n("&Zoom"), 0, 0, 0, actionCollection(), "view_zoom");
+  zoom_action = new TDESelectAction (i18n("&Zoom"), 0, 0, 0, actionCollection(), "view_zoom");
   zoom_action->setEditable(true);
   zoom_action->setItems(_zoomVal.zoomNames());
 
@@ -227,24 +227,24 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   emit(zoomChanged("100%"));
 
   // Paper Size Menu
-  media = new KSelectAction (i18n("Preferred Paper &Size"), 0, 0, 0, actionCollection(), "view_media");
+  media = new TDESelectAction (i18n("Preferred Paper &Size"), 0, 0, 0, actionCollection(), "view_media");
   TQStringList items = userRequestedPaperSize.pageSizeNames();
   items.prepend(i18n("Custom Size..."));
   media->setItems(items);
   connect (media, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotMedia(int)));
 
-  useDocumentSpecifiedSize = new KToggleAction(i18n("&Use Document Specified Paper Size"), 0, this, TQT_SLOT(slotShowSidebar()),
+  useDocumentSpecifiedSize = new TDEToggleAction(i18n("&Use Document Specified Paper Size"), 0, this, TQT_SLOT(slotShowSidebar()),
 					       actionCollection(), "view_use_document_specified_size");
 
   // Zoom Actions
   zoomInAct = KStdAction::zoomIn (this, TQT_SLOT(zoomIn()), actionCollection());
   zoomOutAct = KStdAction::zoomOut(this, TQT_SLOT(zoomOut()), actionCollection());
 
-  fitPageAct = new KToggleAction(i18n("&Fit to Page"), "view_fit_window", Key_P,
+  fitPageAct = new TDEToggleAction(i18n("&Fit to Page"), "view_fit_window", Key_P,
                                  actionCollection(), "view_fit_to_page");
-  fitWidthAct = new KToggleAction(i18n("Fit to Page &Width"), "view_fit_width", Key_W,
+  fitWidthAct = new TDEToggleAction(i18n("Fit to Page &Width"), "view_fit_width", Key_W,
                                   actionCollection(), "view_fit_to_width");
-  fitHeightAct = new KToggleAction(i18n("Fit to Page &Height"), "view_fit_height", Key_H,
+  fitHeightAct = new TDEToggleAction(i18n("Fit to Page &Height"), "view_fit_height", Key_H,
                                    actionCollection(), "view_fit_to_height");
 
   fitPageAct -> setExclusiveGroup("view_fit");
@@ -263,16 +263,16 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   gotoAct = KStdAction::gotoPage(this, TQT_SLOT(goToPage()), actionCollection());
   gotoAct->setShortcut("CTRL+G");
 
-  readUpAct = new KAction(i18n("Read Up Document"), "up", SHIFT+Key_Space, this, TQT_SLOT(mp_readUp()), actionCollection(), "go_read_up");
-  readDownAct = new KAction(i18n("Read Down Document"), "down", Key_Space, this, TQT_SLOT(mp_readDown()), actionCollection(), "go_read_down");
+  readUpAct = new TDEAction(i18n("Read Up Document"), "up", SHIFT+Key_Space, this, TQT_SLOT(mp_readUp()), actionCollection(), "go_read_up");
+  readDownAct = new TDEAction(i18n("Read Down Document"), "down", Key_Space, this, TQT_SLOT(mp_readDown()), actionCollection(), "go_read_down");
 
   printAction = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
 
   saveAsAction = KStdAction::saveAs(this, TQT_SLOT(mp_slotSave()), actionCollection());
 
   // mode action
-  moveModeAction = new KRadioAction(i18n("&Move Tool"), "movetool", Key_F4, actionCollection(), "move_tool");
-  selectionModeAction = new KRadioAction(i18n("&Selection Tool"), "selectiontool", Key_F5, actionCollection(), "selection_tool");
+  moveModeAction = new TDERadioAction(i18n("&Move Tool"), "movetool", Key_F4, actionCollection(), "move_tool");
+  selectionModeAction = new TDERadioAction(i18n("&Selection Tool"), "selectiontool", Key_F5, actionCollection(), "selection_tool");
 
   moveModeAction->setExclusiveGroup("tools");
   selectionModeAction->setExclusiveGroup("tools");
@@ -283,9 +283,9 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   //connect(selectionModeAction, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotEnableSelectionTool(bool)));
 
   // history action
-  backAction = new KAction(i18n("&Back"), "1leftarrow", 0,
+  backAction = new TDEAction(i18n("&Back"), "1leftarrow", 0,
                    this, TQT_SLOT(mp_doGoBack()), actionCollection(), "go_back");
-  forwardAction = new KAction(i18n("&Forward"), "1rightarrow", 0,
+  forwardAction = new TDEAction(i18n("&Forward"), "1rightarrow", 0,
                       this, TQT_SLOT(mp_doGoForward()), actionCollection(), "go_forward");
 
   backAction->setEnabled(false);
@@ -299,12 +299,12 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   // additional about information.
   if (!args.isEmpty())
   {
-    aboutAction = new KAction(i18n("About KViewShell"), "kviewshell", 0, this,
+    aboutAction = new TDEAction(i18n("About KViewShell"), "kviewshell", 0, this,
                             TQT_SLOT(aboutKViewShell()), actionCollection(), "help_about_kviewshell");
   }
 
   // keyboard accelerators
-  accel = new KAccel(mainWidget);
+  accel = new TDEAccel(mainWidget);
   accel->insert(I18N_NOOP("Scroll Up"), Key_Up, this, TQT_SLOT(mp_scrollUp()));
   accel->insert(I18N_NOOP("Scroll Down"), Key_Down, this, TQT_SLOT(mp_scrollDown()));
   accel->insert(I18N_NOOP("Scroll Left"), Key_Left, this, TQT_SLOT(mp_scrollLeft()));

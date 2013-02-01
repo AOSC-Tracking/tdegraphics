@@ -288,7 +288,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	TQHBoxLayout *topLayout = new TQHBoxLayout(page, 0, KDialog::spacingHint());
 
 	// the models list
-	m_modelSel = new KListView(page);
+	m_modelSel = new TDEListView(page);
 	topLayout->addWidget( m_modelSel );
 	m_modelSel->addColumn(i18n("Supported Cameras"));
 	m_modelSel->setColumnWidthMode(0, TQListView::Maximum);

@@ -145,12 +145,12 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     layout->addWidget( img_canvas, 6 );
 
     /* Actions for the previewer zoom */
-    KAction *act;
-    act =  new KAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
+    TDEAction *act;
+    act =  new TDEAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
 		       TQT_TQOBJECT(this), TQT_SLOT( slScaleToWidth()), TQT_TQOBJECT(this), "preview_scaletowidth" );
     act->plug( img_canvas->contextMenu());
 
-    act = new KAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
+    act = new TDEAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
 		      TQT_TQOBJECT(this), TQT_SLOT( slScaleToHeight()), TQT_TQOBJECT(this), "preview_scaletoheight" );
     act->plug( img_canvas->contextMenu());
 

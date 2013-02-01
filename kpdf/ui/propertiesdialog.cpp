@@ -76,7 +76,7 @@ PropertiesDialog::PropertiesDialog(TQWidget *parent, KPDFDocument *doc)
   {
     TQFrame *page2 = addPage(i18n("Fonts"));
     page2Layout = new TQVBoxLayout(page2, 0, KDialog::spacingHint());
-    KListView *lv = new KListView(page2);
+    TDEListView *lv = new TDEListView(page2);
     page2Layout->add(lv);
     doc->putFontInfo(lv);
   }

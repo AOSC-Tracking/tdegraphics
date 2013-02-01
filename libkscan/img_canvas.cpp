@@ -242,7 +242,7 @@ void ImageCanvas::enableContextMenu( bool wantContextMenu )
    {
       if( ! m_contextMenu )
       {
-	 m_contextMenu = new KPopupMenu(this, "IMG_CANVAS");
+	 m_contextMenu = new TDEPopupMenu(this, "IMG_CANVAS");
 
 	 KContextMenuManager::insert( viewport(), m_contextMenu );
       }

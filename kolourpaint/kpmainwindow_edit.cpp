@@ -89,7 +89,7 @@ kpPixmapFX::WarnAboutLossInfo kpMainWindow::pasteWarnAboutLossInfo ()
 // private
 void kpMainWindow::setupEditMenuActions ()
 {
-    KActionCollection *ac = actionCollection ();
+    TDEActionCollection *ac = actionCollection ();
 
 
     // Undo/Redo
@@ -106,21 +106,21 @@ void kpMainWindow::setupEditMenuActions ()
     m_actionCut = KStdAction::cut (TQT_TQOBJECT(this), TQT_SLOT (slotCut ()), ac);
     m_actionCopy = KStdAction::copy (TQT_TQOBJECT(this), TQT_SLOT (slotCopy ()), ac);
     m_actionPaste = KStdAction::paste (TQT_TQOBJECT(this), TQT_SLOT (slotPaste ()), ac);
-    m_actionPasteInNewWindow = new KAction (i18n ("Paste in &New Window"),
+    m_actionPasteInNewWindow = new TDEAction (i18n ("Paste in &New Window"),
         TQt::CTRL + TQt::SHIFT + TQt::Key_V,
         TQT_TQOBJECT(this), TQT_SLOT (slotPasteInNewWindow ()), ac, "edit_paste_in_new_window");
 
     //m_actionDelete = KStdAction::clear (this, TQT_SLOT (slotDelete ()), ac);
-    m_actionDelete = new KAction (i18n ("&Delete Selection"), 0,
+    m_actionDelete = new TDEAction (i18n ("&Delete Selection"), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotDelete ()), ac, "edit_clear");
 
     m_actionSelectAll = KStdAction::selectAll (TQT_TQOBJECT(this), TQT_SLOT (slotSelectAll ()), ac);
     m_actionDeselect = KStdAction::deselect (TQT_TQOBJECT(this), TQT_SLOT (slotDeselect ()), ac);
 
 
-    m_actionCopyToFile = new KAction (i18n ("C&opy to File..."), 0,
+    m_actionCopyToFile = new TDEAction (i18n ("C&opy to File..."), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotCopyToFile ()), ac, "edit_copy_to_file");
-    m_actionPasteFromFile = new KAction (i18n ("Paste &From File..."), 0,
+    m_actionPasteFromFile = new TDEAction (i18n ("Paste &From File..."), 0,
         TQT_TQOBJECT(this), TQT_SLOT (slotPasteFromFile ()), ac, "edit_paste_from_file");
 
 
@@ -724,14 +724,14 @@ void kpMainWindow::slotPaste ()
             i18n ("Cannot Paste"));
 
         // TODO: PROPAGATE: interprocess
-        if (KMainWindow::memberList)
+        if (TDEMainWindow::memberList)
         {
         #if DEBUG_KP_MAIN_WINDOW
             kdDebug () << "\thave memberList" << endl;
         #endif
 
-            for (TQPtrList <KMainWindow>::const_iterator it = KMainWindow::memberList->begin ();
-                 it != KMainWindow::memberList->end ();
+            for (TQPtrList <TDEMainWindow>::const_iterator it = TDEMainWindow::memberList->begin ();
+                 it != TDEMainWindow::memberList->end ();
                  it++)
             {
                 kpMainWindow *mw = dynamic_cast <kpMainWindow *> (*it);

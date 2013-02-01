@@ -38,20 +38,20 @@
 class TQPopupMenu;
 class TDEConfig;
 class KStatusBar;
-class KAction;
-class KRecentFilesAction;
+class TDEAction;
+class TDERecentFilesAction;
 class KPrinter;
 class TQPainter;
 class TQScrollBar;
 
-typedef KToolBar::BarPosition BarPosition;
+typedef TDEToolBar::BarPosition BarPosition;
 
 class MyApp:public TDEApplication {
 public:
    virtual bool x11EventFilter( XEvent * );
 };
 
-class TopLevel : public KMainWindow
+class TopLevel : public TDEMainWindow
 {
     Q_OBJECT
   
@@ -105,10 +105,10 @@ private:
     KURL fileURL;
     KStatusBar *statusbar;
 
-    KRecentFilesAction *actRecent;
-    KAction *actAdd, *actSave, *actSaveAs, *actPrint;
-    KAction *actSize, *actZoomIn, *actZoomOut, *actRotate, *actMirror;
-    KAction *actFlip, *actNext, *actPrev, *actFirst, *actLast;
+    TDERecentFilesAction *actRecent;
+    TDEAction *actAdd, *actSave, *actSaveAs, *actPrint;
+    TDEAction *actSize, *actZoomIn, *actZoomOut, *actRotate, *actMirror;
+    TDEAction *actFlip, *actNext, *actPrev, *actFirst, *actLast;
 
     int open_mode;
 

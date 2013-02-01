@@ -31,7 +31,7 @@
 
 #include "DjVuToPS.h"
 
-class KSelectAction;
+class TDESelectAction;
 
 /*! \mainpage DjVuMultiPage
   
@@ -143,8 +143,8 @@ public:
       implementation */
   DjVuRenderer     djvuRenderer;
 
-  KSelectAction* renderModeAction;
-  KAction* deletePagesAction;
+  TDESelectAction* renderModeAction;
+  TDEAction* deletePagesAction;
 };
 
 #endif

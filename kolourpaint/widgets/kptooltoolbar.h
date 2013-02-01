@@ -51,7 +51,7 @@ class kpToolWidgetLineWidth;
 class kpToolWidgetOpaqueOrTransparent;
 class kpToolWidgetSpraycanSize;
 
-class kpToolToolBar : public KToolBar
+class kpToolToolBar : public TDEToolBar
 {
 Q_OBJECT
   

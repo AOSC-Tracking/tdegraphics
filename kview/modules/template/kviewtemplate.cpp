@@ -23,7 +23,7 @@ KViewTemplate::KViewTemplate( TQObject* parent, const char* name, const TQString
 	delete viewerList;
 	if( m_pViewer )
 	{
-		(void) new KAction( /*i18n(*/ "&Do Something" /*)*/, 0, 0,
+		(void) new TDEAction( /*i18n(*/ "&Do Something" /*)*/, 0, 0,
 							this, TQT_SLOT( yourSlot() ),
 							actionCollection(), "plugin_template" );
 	}

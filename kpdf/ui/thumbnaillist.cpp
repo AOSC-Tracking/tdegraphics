@@ -553,7 +553,7 @@ void ThumbnailWidget::paintEvent( TQPaintEvent * e )
 #define FILTERB_ID  1
 
 ThumbnailController::ThumbnailController( TQWidget * parent, ThumbnailList * list )
-    : KToolBar( parent, "ThumbsControlBar" )
+    : TDEToolBar( parent, "ThumbsControlBar" )
 {
     // change toolbar appearance
     setMargin( 3 );

@@ -126,8 +126,8 @@ ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
    m_startup = true;
 
    /* create a context menu and set the title */
-   m_contextMenu = new KPopupMenu();
-   static_cast<KPopupMenu*>(m_contextMenu)->insertTitle( i18n( "Gallery" ));
+   m_contextMenu = new TDEPopupMenu();
+   static_cast<TDEPopupMenu*>(m_contextMenu)->insertTitle( i18n( "Gallery" ));
 
 }
 

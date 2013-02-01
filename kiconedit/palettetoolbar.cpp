@@ -31,7 +31,7 @@
 #include "palettetoolbar.h"
 
 PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
-    : KToolBar( parent, name )
+    : TDEToolBar( parent, name )
 {
   TQWidget *base = new TQWidget( this );
 

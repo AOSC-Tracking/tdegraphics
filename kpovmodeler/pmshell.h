@@ -30,11 +30,11 @@
 
 //class KHelpMenu;
 class KStatusBar;
-class KListAction;
-class KToggleAction;
-class KSelectAction;
-class KRecentFilesAction;
-class KActionMenu;
+class TDEListAction;
+class TDEToggleAction;
+class TDESelectAction;
+class TDERecentFilesAction;
+class TDEActionMenu;
 class PMViewOptions;
 
 /**
@@ -143,24 +143,24 @@ public:
    //PMDockWidget* create3DView( PMGLView::PMViewType );
 
 private:
-   KRecentFilesAction* m_pRecent;
-   KToggleAction* m_pToolbarAction;
-   KToggleAction* m_pStatusbarAction;
-   KToggleAction* m_pPathAction;
+   TDERecentFilesAction* m_pRecent;
+   TDEToggleAction* m_pToolbarAction;
+   TDEToggleAction* m_pStatusbarAction;
+   TDEToggleAction* m_pPathAction;
 
-   KAction* m_pNewTreeViewAction;
-   KAction* m_pNewDialogViewAction;
-   KAction* m_pNewTopViewAction;
-   KAction* m_pNewBottomViewAction;
-   KAction* m_pNewLeftViewAction;
-   KAction* m_pNewRightViewAction;
-   KAction* m_pNewFrontViewAction;
-   KAction* m_pNewBackViewAction;
-   KAction* m_pNewCameraViewAction;
-   KAction* m_pNewLibraryBrowserAction;
+   TDEAction* m_pNewTreeViewAction;
+   TDEAction* m_pNewDialogViewAction;
+   TDEAction* m_pNewTopViewAction;
+   TDEAction* m_pNewBottomViewAction;
+   TDEAction* m_pNewLeftViewAction;
+   TDEAction* m_pNewRightViewAction;
+   TDEAction* m_pNewFrontViewAction;
+   TDEAction* m_pNewBackViewAction;
+   TDEAction* m_pNewCameraViewAction;
+   TDEAction* m_pNewLibraryBrowserAction;
 
-   KActionMenu* m_pViewLayoutsAction;
-   KAction* m_pSaveViewLayoutAction;
+   TDEActionMenu* m_pViewLayoutsAction;
+   TDEAction* m_pSaveViewLayoutAction;
 
    KStatusBar* m_pStatusBar;
    PMPart* m_pPart;

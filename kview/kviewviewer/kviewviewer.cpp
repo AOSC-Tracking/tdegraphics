@@ -465,33 +465,33 @@ bool KViewViewer::saveFile()
 
 void KViewViewer::setupActions()
 {
-	m_paZoomIn = new KAction( i18n( "Zoom In" ), "viewmag+", KStdAccel::shortcut( KStdAccel::ZoomIn ), this,
+	m_paZoomIn = new TDEAction( i18n( "Zoom In" ), "viewmag+", TDEStdAccel::shortcut( TDEStdAccel::ZoomIn ), this,
 			TQT_SLOT( slotZoomIn() ), actionCollection(), "zoomin" );
-	m_paZoomOut = new KAction( i18n( "Zoom Out" ), "viewmag-", KStdAccel::shortcut( KStdAccel::ZoomOut ), this,
+	m_paZoomOut = new TDEAction( i18n( "Zoom Out" ), "viewmag-", TDEStdAccel::shortcut( TDEStdAccel::ZoomOut ), this,
 			TQT_SLOT( slotZoomOut() ), actionCollection(), "zoomout" );
 
-	m_paZoom = new KSelectAction( i18n( "Zoom" ), "viewmag", 0, actionCollection(), "view_zoom" );
+	m_paZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, actionCollection(), "view_zoom" );
 	connect( m_paZoom, TQT_SIGNAL( activated( const TQString & ) ), this, TQT_SLOT( setZoom( const TQString & ) ) );
 	m_paZoom->setEditable( true );
 	m_paZoom->clear();
 	m_paZoom->setItems( TQStringList::split( '|', "20%|25%|33%|50%|75%|100%|125%|150%|200%|250%|300%|350%|400%|450%|500%" ) );
 	m_paZoom->setCurrentItem( 5 );
 
-	m_paFlipMenu = new KActionMenu( i18n( "&Flip" ), actionCollection(), "flip" );
-	m_paFlipV = new KAction( i18n( "&Vertical" ), Key_V, this, TQT_SLOT( slotFlipV() ), actionCollection(), "flip_vertical" );
-	m_paFlipH = new KAction( i18n( "&Horizontal" ), Key_H, this, TQT_SLOT( slotFlipH() ), actionCollection(), "flip_horizontal" );
+	m_paFlipMenu = new TDEActionMenu( i18n( "&Flip" ), actionCollection(), "flip" );
+	m_paFlipV = new TDEAction( i18n( "&Vertical" ), Key_V, this, TQT_SLOT( slotFlipV() ), actionCollection(), "flip_vertical" );
+	m_paFlipH = new TDEAction( i18n( "&Horizontal" ), Key_H, this, TQT_SLOT( slotFlipH() ), actionCollection(), "flip_horizontal" );
 	m_paFlipMenu->insert( m_paFlipV );
 	m_paFlipMenu->insert( m_paFlipH );
 
-	m_paRotateCCW = new KAction( i18n( "Ro&tate Counter-Clockwise" ), "rotate_ccw", 0, this,
+	m_paRotateCCW = new TDEAction( i18n( "Ro&tate Counter-Clockwise" ), "rotate_ccw", 0, this,
 			TQT_SLOT( slotRotateCCW() ), actionCollection(), "rotateCCW" );
-	m_paRotateCW = new KAction( i18n( "Rotate Clockwise" ), "rotate_cw", 0, this,
+	m_paRotateCW = new TDEAction( i18n( "Rotate Clockwise" ), "rotate_cw", 0, this,
 			TQT_SLOT( slotRotateCW() ), actionCollection(), "rotateCW" );
 	m_paSave = KStdAction::save( this, TQT_SLOT( slotSave() ), actionCollection() );
 	m_paSave->setEnabled( false );
 	m_paSaveAs = KStdAction::saveAs( this, TQT_SLOT( slotSaveAs() ), actionCollection() );
 
-	m_paFitToWin = new KAction( i18n( "Fit Image to Window" ), 0, 0, this,
+	m_paFitToWin = new TDEAction( i18n( "Fit Image to Window" ), 0, 0, this,
 			TQT_SLOT( slotFitToWin() ), actionCollection(), "fittowin" );
 	m_paZoomIn->setEnabled( false );
 	m_paZoomOut->setEnabled( false );
@@ -514,7 +514,7 @@ void KViewViewer::setupActions()
 	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipV, TQT_SLOT( setEnabled( bool ) ) );
 	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipH, TQT_SLOT( setEnabled( bool ) ) );
 
-	m_paShowScrollbars = new KToggleAction( i18n( "Show Scrollbars" ), 0, this, TQT_SLOT( slotToggleScrollbars() ),
+	m_paShowScrollbars = new TDEToggleAction( i18n( "Show Scrollbars" ), 0, this, TQT_SLOT( slotToggleScrollbars() ),
 	 actionCollection(), "show_scrollbars" );
 	m_paShowScrollbars->setCheckedState(i18n("Hide Scrollbars"));
 }
@@ -622,7 +622,7 @@ void KViewViewer::slotSaveAs()
 		m_newMimeType = KImageIO::mimeType( url.path() );
 	kdDebug( 4610 ) << k_funcinfo << "m_newMimeType = " << m_newMimeType << endl;
 	if( url.isValid() )
-		KRecentDocument::add( url );
+		TDERecentDocument::add( url );
 	saveAs( url );
 }
 
@@ -754,7 +754,7 @@ void KViewViewer::slotPopupMenu( const TQPoint &pos )
 {
 	KXMLGUIClient *popupGUIClient = new PopupGUIClient( instance(), m_popupDoc );
 
-	(void) new KAction( i18n( "Save Image As..." ), 0, this, TQT_SLOT( slotSaveAs() ),
+	(void) new TDEAction( i18n( "Save Image As..." ), 0, this, TQT_SLOT( slotSaveAs() ),
 						popupGUIClient->actionCollection(), "saveimageas" );
 
 	// ### HACK treat the image as dir to get the back/fwd/reload buttons (Simon)

@@ -343,7 +343,7 @@ protected:
      place to connect to signals emitted by DocumentWidget. */
   virtual DocumentWidget* createDocumentWidget();
 
-  /* Used to enable/disable KActions of multiPage implementations.
+  /* Used to enable/disable TDEActions of multiPage implementations.
      enableActions(true) should be called whenever a file is
      successfully loaded.  enableActions(false) is called when the
      file is closed. */

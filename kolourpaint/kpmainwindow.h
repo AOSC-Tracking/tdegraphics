@@ -52,16 +52,16 @@ class TQRect;
 class TQSize;
 class TQStringList;
 
-class KAction;
-class KFontAction;
-class KFontSizeAction;
-class KSelectAction;
-class KToggleAction;
-class KToolBar;
+class TDEAction;
+class TDEFontAction;
+class TDEFontSizeAction;
+class TDESelectAction;
+class TDEToggleAction;
+class TDEToolBar;
 class KPrinter;
-class KRecentFilesAction;
+class TDERecentFilesAction;
 class KScanDialog;
-class KToggleFullScreenAction;
+class TDEToggleFullScreenAction;
 
 class kpColor;
 class kpColorToolBar;
@@ -85,7 +85,7 @@ class kpToolToolBar;
 class kpZoomedView;
 
 
-class kpMainWindow : public KMainWindow
+class kpMainWindow : public TDEMainWindow
 {
 Q_OBJECT
   
@@ -313,9 +313,9 @@ private:
     void setupFileMenuActions ();
     void enableFileMenuDocumentActions (bool enable = true);
 
-    KAction *m_actionNew, *m_actionOpen;
-    KRecentFilesAction *m_actionOpenRecent;
-    KAction *m_actionScan, *m_actionSave, *m_actionSaveAs, *m_actionExport,
+    TDEAction *m_actionNew, *m_actionOpen;
+    TDERecentFilesAction *m_actionOpenRecent;
+    TDEAction *m_actionScan, *m_actionSave, *m_actionSaveAs, *m_actionExport,
             *m_actionReload,
             *m_actionPrint, *m_actionPrintPreview,
             *m_actionMail,
@@ -426,7 +426,7 @@ private:
 
     bool m_editMenuDocumentActionsEnabled;
 
-    KAction *m_actionUndo, *m_actionRedo,
+    TDEAction *m_actionUndo, *m_actionRedo,
             *m_actionCut, *m_actionCopy,
             *m_actionPaste, *m_actionPasteInNewWindow,
             *m_actionDelete,
@@ -491,12 +491,12 @@ private:
     void enableViewMenuDocumentActions (bool enable = true);
     void actionShowGridUpdate ();
 
-    KAction *m_actionFullScreenBIC,
+    TDEAction *m_actionFullScreenBIC,
             *m_actionActualSize,
             *m_actionFitToPage, *m_actionFitToWidth, *m_actionFitToHeight,
             *m_actionZoomIn, *m_actionZoomOut;
-    KSelectAction *m_actionZoom;
-    KToggleAction *m_actionShowGrid,
+    TDESelectAction *m_actionZoom;
+    TDEToggleAction *m_actionShowGrid,
                   *m_actionShowThumbnail, *m_actionZoomedThumbnail;
 
     TQValueVector <int> m_zoomList;
@@ -581,7 +581,7 @@ private:
 
     bool m_imageMenuDocumentActionsEnabled;
 
-    KAction *m_actionResizeScale,
+    TDEAction *m_actionResizeScale,
             *m_actionCrop, *m_actionAutoCrop,
             *m_actionFlip, *m_actionRotate, *m_actionSkew,
             *m_actionConvertToBlackAndWhite, *m_actionConvertToGrayscale,
@@ -621,9 +621,9 @@ private:
     void setupSettingsMenuActions ();
     void enableSettingsMenuDocumentActions (bool enable = true);
 
-    KToggleAction *m_actionShowPath;
-    KAction *m_actionKeyBindings, *m_actionConfigureToolbars, *m_actionConfigure;
-    KToggleFullScreenAction *m_actionFullScreen;
+    TDEToggleAction *m_actionShowPath;
+    TDEAction *m_actionKeyBindings, *m_actionConfigureToolbars, *m_actionConfigure;
+    TDEToggleFullScreenAction *m_actionFullScreen;
 
 private slots:
     void slotFullScreen ();
@@ -700,16 +700,16 @@ private slots:
     void slotTextStrikeThruChanged ();
 
 public:
-    KToolBar *textToolBar ();
+    TDEToolBar *textToolBar ();
     bool isTextStyleBackgroundOpaque () const;
     kpTextStyle textStyle () const;
     void setTextStyle (const kpTextStyle &textStyle_);
     int settingTextStyle () const;
 
 private:
-    KFontAction *m_actionTextFontFamily;
-    KFontSizeAction *m_actionTextFontSize;
-    KToggleAction *m_actionTextBold, *m_actionTextItalic,
+    TDEFontAction *m_actionTextFontFamily;
+    TDEFontSizeAction *m_actionTextFontSize;
+    TDEToggleAction *m_actionTextBold, *m_actionTextItalic,
                   *m_actionTextUnderline, *m_actionTextStrikeThru;
 
     int m_settingTextStyle;

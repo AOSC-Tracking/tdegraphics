@@ -115,7 +115,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    connect( img_canvas, TQT_SIGNAL( imageReadOnly(bool)),
 	    this, TQT_SLOT(slViewerReadOnly(bool)));
    
-   KPopupMenu *ctxtmenu = static_cast<KPopupMenu*>(img_canvas->contextMenu());
+   TDEPopupMenu *ctxtmenu = static_cast<TDEPopupMenu*>(img_canvas->contextMenu());
    if( ctxtmenu )
        ctxtmenu->insertTitle(i18n("Image View"));
    m_mainDock->setWidget( img_canvas );
@@ -1013,7 +1013,7 @@ TQImage KookaView::rotate180( TQImage *m_img )
 
 
 
-void KookaView::connectViewerAction( KAction *action )
+void KookaView::connectViewerAction( TDEAction *action )
 {
    TQPopupMenu *popup = img_canvas->contextMenu();
    kdDebug(29000) << "This is the popup: " << popup << endl;
@@ -1023,7 +1023,7 @@ void KookaView::connectViewerAction( KAction *action )
    }
 }
 
-void KookaView::connectGalleryAction( KAction *action )
+void KookaView::connectGalleryAction( TDEAction *action )
 {
    TQPopupMenu *popup = packager->contextMenu();
 
@@ -1047,35 +1047,35 @@ void KookaView::slFreshUpThumbView()
    }
 }
 
-void KookaView::createDockMenu( KActionCollection *col, KDockMainWindow *mainWin, const char * name )
+void KookaView::createDockMenu( TDEActionCollection *col, KDockMainWindow *mainWin, const char * name )
 {
-   KActionMenu *actionMenu = new KActionMenu( i18n("Tool Views"), "view_icon", col, name );
+   TDEActionMenu *actionMenu = new TDEActionMenu( i18n("Tool Views"), "view_icon", col, name );
 
    actionMenu->insert( new dwMenuAction( i18n("Show Image Viewer"),
-					 KShortcut(), m_mainDock, col,
+					 TDEShortcut(), m_mainDock, col,
 					 mainWin, "dock_viewer" ));
 
    actionMenu->insert( new dwMenuAction( i18n("Show Preview"),
-					 KShortcut(), m_dockPreview, col,
+					 TDEShortcut(), m_dockPreview, col,
 					 mainWin, "dock_preview" ));
 
    actionMenu->insert( new dwMenuAction( i18n("Show Recent Gallery Folders"),
-					 KShortcut(), m_dockRecent, col,
+					 TDEShortcut(), m_dockRecent, col,
 					 mainWin, "dock_recent" ));
    actionMenu->insert( new dwMenuAction( i18n("Show Gallery"),
-					 KShortcut(), m_dockPackager, col,
+					 TDEShortcut(), m_dockPackager, col,
 					 mainWin, "dock_gallery" ));
 
    actionMenu->insert( new dwMenuAction( i18n("Show Thumbnail Window"),
-					 KShortcut(), m_dockThumbs, col,
+					 TDEShortcut(), m_dockThumbs, col,
 					 mainWin, "dock_thumbs" ));
 
    actionMenu->insert( new dwMenuAction( i18n("Show Scan Parameters"),
-					 KShortcut(), m_dockScanParam, col,
+					 TDEShortcut(), m_dockScanParam, col,
 					 mainWin, "dock_scanparams" ));
 
    actionMenu->insert( new dwMenuAction( i18n("Show OCR Results"),
-					 KShortcut(), m_dockOCRText, col,
+					 TDEShortcut(), m_dockOCRText, col,
 					 mainWin, "dock_ocrResults" ));
 }
 

@@ -163,7 +163,7 @@ void KView::load( const KURL & url )
 		if( url.isLocalFile() )
 		{
 			// XXX: this code is what
-			//KRecentDirs::add( TQString::fromLatin1( ":load_image" ), url.directory() );
+			//TDERecentDirs::add( TQString::fromLatin1( ":load_image" ), url.directory() );
 			// would do:
 			TQString directory = url.directory();
 			TQString key = TQString::fromLatin1( "load_image" );
@@ -403,7 +403,7 @@ void KView::reloadConfig()
 
 void KView::enableAction( const char * name, bool b )
 {
-	KAction * a = actionCollection()->action( name );
+	TDEAction * a = actionCollection()->action( name );
 	if( a )
 		a->setEnabled( b );
 	else
@@ -491,7 +491,7 @@ void KView::setupActions( TQObject * partobject )
 	// File
 	KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotOpenFile() ), actionCollection() );
 	m_paRecent = KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( slotOpenRecent( const KURL & ) ), actionCollection() );
-	KAction * aClose = KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( slotClose() ), actionCollection() );
+	TDEAction * aClose = KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( slotClose() ), actionCollection() );
 	aClose->setEnabled( false );
 	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aClose, TQT_SLOT( setEnabled( bool ) ) );
 
@@ -502,22 +502,22 @@ void KView::setupActions( TQObject * partobject )
 		if( slotNames.contains( "print()" ) )
 			KStdAction::print( extension, TQT_SLOT( print() ), actionCollection(), "print" );
 		if( slotNames.contains( "del()" ) )
-			( void )new KAction( i18n( "&Delete" ), "editdelete", SHIFT+Key_Delete,
+			( void )new TDEAction( i18n( "&Delete" ), "editdelete", SHIFT+Key_Delete,
 								 extension, TQT_SLOT( del() ), actionCollection(), "del" );
 		connect( extension, TQT_SIGNAL( enableAction( const char *, bool ) ), TQT_SLOT( enableAction( const char *, bool ) ) );
 	}
 	KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close() ), actionCollection() );
 
 	// Edit
-	KAction * aCopy = KStdAction::copy( TQT_TQOBJECT(this), TQT_SLOT( slotCopy() ), actionCollection() );
+	TDEAction * aCopy = KStdAction::copy( TQT_TQOBJECT(this), TQT_SLOT( slotCopy() ), actionCollection() );
 	aCopy->setEnabled( false );
 	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aCopy, TQT_SLOT( setEnabled( bool ) ) );
 	m_paPaste = KStdAction::paste( TQT_TQOBJECT(this), TQT_SLOT( slotPaste() ), actionCollection() );
 	clipboardDataChanged(); //enable or disable paste
-	KAction * aCrop = new KAction( i18n( "Cr&op" ), Key_C, TQT_TQOBJECT(this), TQT_SLOT( slotCrop() ), actionCollection(), "crop" );
+	TDEAction * aCrop = new TDEAction( i18n( "Cr&op" ), Key_C, TQT_TQOBJECT(this), TQT_SLOT( slotCrop() ), actionCollection(), "crop" );
 	aCrop->setEnabled( false );
 
-	KAction * aReload = new KAction( i18n( "&Reload" ), "reload", KStdAccel::shortcut( KStdAccel::Reload ), partobject,
+	TDEAction * aReload = new TDEAction( i18n( "&Reload" ), "reload", TDEStdAccel::shortcut( TDEStdAccel::Reload ), partobject,
 			TQT_SLOT( reload() ), actionCollection(), "reload" );
 	aReload->setEnabled( false );
 	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aReload, TQT_SLOT( setEnabled( bool ) ) );
@@ -525,7 +525,7 @@ void KView::setupActions( TQObject * partobject )
 	// Settings
 	m_paShowMenubar = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotToggleMenubar() ), actionCollection() );
 	createStandardStatusBarAction();
-	m_paShowStatusBar = ::tqqt_cast<KToggleAction*>( action( "options_show_statusbar" ) );
+	m_paShowStatusBar = ::tqqt_cast<TDEToggleAction*>( action( "options_show_statusbar" ) );
 	if( m_paShowStatusBar )
 		connect( m_paShowStatusBar, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( statusbarToggled( bool ) ) );
 	m_paShowFullScreen = KStdAction::fullScreen( 0, 0, actionCollection(), this );
@@ -644,20 +644,20 @@ TQSize KView::barSize( int mainwinwidth, BarSizeFrom from )
 	{
 		switch( toolBar()->barPos() )
 		{
-			case KToolBar::Top:
-			case KToolBar::Bottom:
+			case TDEToolBar::Top:
+			case TDEToolBar::Bottom:
 				height += toolBar()->height();
 				break;
-			case KToolBar::Left:
-			case KToolBar::Right:
+			case TDEToolBar::Left:
+			case TDEToolBar::Right:
 				width += toolBar()->width();
 				break;
-			case KToolBar::Flat:
+			case TDEToolBar::Flat:
 				height += kapp->style().pixelMetric( TQStyle::PM_DockWindowHandleExtent );
 				break;
-			case KToolBar::Floating:
+			case TDEToolBar::Floating:
 				break;
-			case KToolBar::Unmanaged:
+			case TDEToolBar::Unmanaged:
 				break;
 		}
 	}

@@ -189,7 +189,7 @@ bool MyApp::x11EventFilter( XEvent * ev)
 }
 
 TopLevel::TopLevel (TQWidget *, const char *name)
-    : KMainWindow (0, name)
+    : TDEMainWindow (0, name)
 {
   setMinimumSize (100, 100);
 
@@ -244,7 +244,7 @@ void TopLevel::setupMenuBar()
           actionCollection() );
   actPrint = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( print() ), actionCollection() );
   KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close() ), actionCollection() );
-  actAdd = new KAction( i18n( "A&dd..." ), "filenew", KShortcut(), TQT_TQOBJECT(this),
+  actAdd = new TDEAction( i18n( "A&dd..." ), "filenew", TDEShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
 
   actRecent->setMaxItems( 5 );
@@ -256,11 +256,11 @@ void TopLevel::setupMenuBar()
   actZoomOut = KStdAction::zoomOut( TQT_TQOBJECT(this), TQT_SLOT( zoomout() ),
       actionCollection() );
 
-  actRotate = new KAction( i18n( "&Rotate Page" ), "rotate", KShortcut(), TQT_TQOBJECT(this),
+  actRotate = new TDEAction( i18n( "&Rotate Page" ), "rotate", TDEShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( rotatePage() ), actionCollection(), "view_rotate" );
-  actMirror = new KAction( i18n( "Mirror Page" ), KShortcut(), TQT_TQOBJECT(this),
+  actMirror = new TDEAction( i18n( "Mirror Page" ), TDEShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( mirrorPage() ), actionCollection(), "view_mirror" );
-  actFlip = new KAction( i18n( "&Flip Page" ), KShortcut(), TQT_TQOBJECT(this),
+  actFlip = new TDEAction( i18n( "&Flip Page" ), TDEShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( flipPage() ), actionCollection(), "view_flip" );
 
   // Go menu
@@ -560,7 +560,7 @@ void TopLevel::openadd(TQString filename)
 
 void TopLevel::resizeEvent(TQResizeEvent *e)
 {
-  KMainWindow::resizeEvent(e);
+  TDEMainWindow::resizeEvent(e);
 
   resizeView();
 }

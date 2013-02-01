@@ -253,18 +253,18 @@ struct kpCommandHistoryBasePrivate
 
 
 kpCommandHistoryBase::kpCommandHistoryBase (bool doReadConfig,
-                                            KActionCollection *ac)
+                                            TDEActionCollection *ac)
     : d (new kpCommandHistoryBasePrivate ())
 {
-    m_actionUndo = new KToolBarPopupAction (undoActionText (),
+    m_actionUndo = new TDEToolBarPopupAction (undoActionText (),
         TQString::fromLatin1 ("undo"),
-        KStdAccel::shortcut (KStdAccel::Undo),
+        TDEStdAccel::shortcut (TDEStdAccel::Undo),
         this, TQT_SLOT (undo ()),
         ac, KStdAction::name (KStdAction::Undo));
 
-    m_actionRedo = new KToolBarPopupAction (redoActionText (),
+    m_actionRedo = new TDEToolBarPopupAction (redoActionText (),
         TQString::fromLatin1 ("redo"),
-        KStdAccel::shortcut (KStdAccel::Redo),
+        TDEStdAccel::shortcut (TDEStdAccel::Redo),
         this, TQT_SLOT (redo ()),
         ac, KStdAction::name (KStdAction::Redo));
 
@@ -771,7 +771,7 @@ void kpCommandHistoryBase::trimCommandLists ()
 }
 
 
-static void populatePopupMenu (KPopupMenu *popupMenu,
+static void populatePopupMenu (TDEPopupMenu *popupMenu,
                                const TQString &undoOrRedo,
                                const TQValueList <kpCommand *> &commandList)
 {
@@ -791,7 +791,7 @@ static void populatePopupMenu (KPopupMenu *popupMenu,
     if (it != commandList.end ())
     {
         // TODO: maybe have a scrollview show all the items instead
-        KPopupTitle *title = new KPopupTitle (popupMenu);
+        TDEPopupTitle *title = new TDEPopupTitle (popupMenu);
         title->setTitle (i18n ("%n more item", "%n more items",
                                commandList.size () - i));
 
