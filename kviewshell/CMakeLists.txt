@@ -71,7 +71,7 @@ tde_add_library( kviewshell STATIC_PIC AUTOMOC
 
 tde_add_library( tdemultipage SHARED AUTOMOC
   SOURCES
-    tdemultipage.cpp pageView.cpp marklist.cpp tdemultipageInterface.skel
+    tdemultipage.cpp pageView.cpp martdelist.cpp tdemultipageInterface.skel
     units.cpp pageSize.cpp simplePageSize.cpp renderedDocumentPage.cpp
     renderedDocumentPagePixmap.cpp renderedDocumentPagePrinter.cpp
     documentPageCache.cpp documentWidget.cpp searchWidget.cpp

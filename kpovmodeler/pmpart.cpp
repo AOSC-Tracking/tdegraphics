@@ -34,7 +34,7 @@
 #include <kiconloader.h>
 #include <tdeconfig.h>
 #include <kstdaction.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kmessagebox.h>
 #include <ktempfile.h>
 #include <tdeio/netaccess.h>

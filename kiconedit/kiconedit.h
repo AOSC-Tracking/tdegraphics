@@ -25,14 +25,14 @@
 #include <tqpixmap.h>
 #include <tqptrlist.h>
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kiconloader.h>
 #include <kmenubar.h>
 #include <kstatusbar.h>
-#include <ktoolbar.h>
-#include <kaccel.h>
+#include <tdetoolbar.h>
+#include <tdeaccel.h>
 #include <kurl.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 #include "knew.h"
 #include "kicon.h"

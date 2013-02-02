@@ -25,14 +25,14 @@
 
 #include <kgenericfactory.h>
 #include <ksimpleconfig.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kiconview.h>
 #include <kdialog.h>
 #include <klocale.h>
-#include <ktoolbar.h>
-#include <kpopupmenu.h>
+#include <tdetoolbar.h>
+#include <tdepopupmenu.h>
 #include <kprotocolinfo.h>
 #include <kdebug.h>
 

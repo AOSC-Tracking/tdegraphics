@@ -19,7 +19,7 @@
 */
 
 #include <kcursor.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kxmlguifactory.h>
 #include "ksvg_widget.moc"
 

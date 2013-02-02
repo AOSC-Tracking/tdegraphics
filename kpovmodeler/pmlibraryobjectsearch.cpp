@@ -32,7 +32,7 @@
 #include <kurl.h>
 #include <klocale.h>
 #include <kdialog.h>
-#include <klistview.h>
+#include <tdelistview.h>
 
 PMLibraryObjectSearch::PMLibraryObjectSearch( TQWidget* parent ) :
    TQWidget( parent, "" )

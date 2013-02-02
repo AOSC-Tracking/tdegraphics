@@ -14,11 +14,11 @@
 #include <tqapplication.h>
 #include <tqdesktopwidget.h>
 #include <tqtooltip.h>
-#include <kaccel.h>
-#include <kactioncollection.h>
+#include <tdeaccel.h>
+#include <tdeactioncollection.h>
 #include <kapplication.h>
 #include <kcursor.h>
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kiconloader.h>

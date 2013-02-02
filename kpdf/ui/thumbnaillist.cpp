@@ -13,9 +13,9 @@
 #include <klocale.h>
 #include <kurl.h>
 #include <kurldrag.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kiconloader.h>
-#include <kactioncollection.h>
+#include <tdeactioncollection.h>
 
 // local includes
 #include "thumbnaillist.h"

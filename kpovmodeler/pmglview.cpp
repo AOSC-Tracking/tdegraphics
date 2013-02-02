@@ -37,7 +37,7 @@
 #include <tqdom.h>
 
 #include <kxmlguifactory.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tdeconfig.h>
 #include <kstaticdeleter.h>
 #include <klocale.h>

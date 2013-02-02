@@ -27,7 +27,7 @@
 #include <klocale.h>
 #include <ksimpleconfig.h>
 #include <kcolorbutton.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <knuminput.h>
 #include <kgenericfactory.h>
 

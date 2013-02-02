@@ -34,7 +34,7 @@
 #include <tqwidget.h>
 
 #include <kcolordialog.h>
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 
 #include <kpcolor.h>
 #include <kpcolorsimilaritycube.h>

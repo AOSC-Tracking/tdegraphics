@@ -26,7 +26,7 @@
 #endif
 
 #include <kapplication.h>
-#include <kaccel.h>
+#include <tdeaccel.h>
 #include <kurl.h>
 #include <tdeparts/part.h>
 #include <tdeparts/browserextension.h>

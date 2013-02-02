@@ -19,7 +19,7 @@
 #define KXYCOLORSELECTOR_H
 
 #include <tqwidget.h>
-#include <kselect.h>
+#include <tdeselect.h>
 
 #include "main.h"
 

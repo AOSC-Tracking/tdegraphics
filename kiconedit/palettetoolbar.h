@@ -22,7 +22,7 @@
 #ifndef PALLETTETOOLBAR_H
 #define PALLETTETOOLBAR_H
 
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 
 class TQBoxLayout;
 class TQLabel;

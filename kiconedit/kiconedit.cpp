@@ -21,7 +21,7 @@
 #include <tqwhatsthis.h>
 #include <tqtooltip.h>
 
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kstdaction.h>
 #include <tdeconfig.h>
 #include <klocale.h>

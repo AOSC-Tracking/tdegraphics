@@ -68,15 +68,15 @@
 #include <keditcl.h>
 #include <kled.h>
 #include <kcombobox.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kiconloader.h>
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 #include <kdockwidget.h>
 #include <tqobject.h>
 
 #include <tdeparts/componentfactory.h>
 #include <tqimage.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 
 #define STARTUP_IMG_SELECTION   "SelectedImageOnStartup"

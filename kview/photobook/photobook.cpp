@@ -40,8 +40,8 @@ Copyright (c) 2004,2005 Charles Samuels <charles@kde.org>
 #include "photobook.h"
 
 #include <tdeparts/componentfactory.h>
-#include <kaction.h>
-#include <kstdaccel.h>
+#include <tdeaction.h>
+#include <tdestdaccel.h>
 #include <kstandarddirs.h>
 
 Previews::Previews(PhotoBook *parent, const TQStringList &mimetypes)

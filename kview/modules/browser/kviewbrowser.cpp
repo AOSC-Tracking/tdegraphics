@@ -23,7 +23,7 @@
 #include <tqcursor.h>
 
 #include <kdirlister.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>

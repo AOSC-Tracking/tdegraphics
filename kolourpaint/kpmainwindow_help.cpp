@@ -29,7 +29,7 @@
 #include <kpmainwindow_p.h>
 
 #include <dcopclient.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kactivelabel.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
@@ -37,7 +37,7 @@
 #include <kdialogbase.h>
 #include <krun.h>
 #include <klocale.h>
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 
 #include <kptool.h>
 

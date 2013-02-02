@@ -22,7 +22,7 @@
 
 #include <tqimage.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 
 ImageListItem::ImageListItem( TDEListView * parent, const KURL & url )
 	: TDEListViewItem( parent, parent->lastItem(), url.prettyURL() )

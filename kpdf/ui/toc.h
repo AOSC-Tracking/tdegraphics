@@ -11,7 +11,7 @@
 #define _KPDF_TOC_H_
 
 #include <tqdom.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include "core/document.h"
 #include "core/observer.h"
 

@@ -23,7 +23,7 @@
 
 #include <tqwidget.h>
 
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 #include <SVGEventImpl.h>
 

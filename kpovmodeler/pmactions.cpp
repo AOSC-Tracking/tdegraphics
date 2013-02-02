@@ -23,8 +23,8 @@
 #include <tqlabel.h>
 #include <tqstyle.h>
 #include <tqpainter.h>
-#include <ktoolbar.h>
-#include <ktoolbarbutton.h>
+#include <tdetoolbar.h>
+#include <tdetoolbarbutton.h>
 
 #include "pmdebug.h"
 

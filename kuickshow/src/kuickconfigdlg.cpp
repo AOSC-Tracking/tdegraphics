@@ -25,7 +25,7 @@
 #include <tqkeycode.h>
 #include <tqvbox.h>
 
-#include <kaccel.h>
+#include <tdeaccel.h>
 #include <tdeconfig.h>
 #include <kglobal.h>
 #include <klocale.h>

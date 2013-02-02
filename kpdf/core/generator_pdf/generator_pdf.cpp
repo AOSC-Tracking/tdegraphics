@@ -17,7 +17,7 @@
 #include <tqregexp.h>
 #include <tqvariant.h>
 #include <kapplication.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <klocale.h>
 #include <kpassdlg.h>
 #include <tdewallet.h>

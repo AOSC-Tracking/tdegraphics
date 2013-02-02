@@ -37,7 +37,7 @@
 #include <tqsize.h>
 #include <tqvaluevector.h>
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kurl.h>
 
 #include <kpdefs.h>

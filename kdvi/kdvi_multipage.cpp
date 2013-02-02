@@ -1,5 +1,5 @@
 #include <config.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kaboutdata.h>
 #include <kaboutdialog.h>
 #include <kapplication.h>
@@ -26,7 +26,7 @@
 #include "fontpool.h"
 #include "kprinterwrapper.h"
 #include "kviewpart.h"
-#include "marklist.h"
+#include "martdelist.h"
 #include "optionDialogFontsWidget.h"
 #include "optionDialogSpecialWidget.h"
 #include "performanceMeasurement.h"

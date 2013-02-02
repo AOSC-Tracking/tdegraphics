@@ -35,13 +35,13 @@
 
 #include <tqdatetime.h>
 
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
-#include <kstdaccel.h>
+#include <tdepopupmenu.h>
+#include <tdestdaccel.h>
 #include <kstdaction.h>
 
 #include <kpdefs.h>

@@ -47,10 +47,10 @@
 #include <ktempfile.h>
 #include <kapplication.h>
 #include <kimageio.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <kdirwatch.h>
 #include <kurldrag.h>
-#include <krecentdocument.h>
+#include <tderecentdocument.h>
 
 typedef KParts::GenericFactory<KViewViewer> KViewViewerFactory;
 K_EXPORT_COMPONENT_FACTORY( libkviewviewer, KViewViewerFactory )

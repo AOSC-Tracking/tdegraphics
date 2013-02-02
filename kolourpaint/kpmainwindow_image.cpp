@@ -32,7 +32,7 @@
 #include <tqcolor.h>
 #include <tqsize.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>

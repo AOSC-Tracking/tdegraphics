@@ -41,7 +41,7 @@ install( PROGRAMS update-to-xt-names.pl DESTINATION ${KCONF_UPDATE_INSTALL_DIR} 
 tde_add_library( kghostviewlib SHARED AUTOMOC
   SOURCES
     kgvshell.cpp kgvdocument.cpp kgv_miniwidget.cpp
-    marklist.cpp logwindow.cpp infodialog.cpp kgvpageview.cpp ps.c
+    martdelist.cpp logwindow.cpp infodialog.cpp kgvpageview.cpp ps.c
     kgv_view.cpp scrollbox.cpp  kgvpagedecorator.cpp
     kgvconfigdialog.cpp kgvmainwidget.cpp  kdscerrordialog.cpp
     displayoptions.cpp kpswidget.cpp fullscreenfilter.cpp

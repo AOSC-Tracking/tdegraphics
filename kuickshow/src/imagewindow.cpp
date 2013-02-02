@@ -51,7 +51,7 @@
 #include <kmessagebox.h>
 #include <kprinter.h>
 #include <kpropertiesdialog.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <kstdguiitem.h>
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>

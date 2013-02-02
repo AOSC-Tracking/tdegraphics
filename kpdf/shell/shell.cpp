@@ -20,7 +20,7 @@
 // qt/kde includes
 #include <tqcursor.h>
 #include <tqtimer.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <kedittoolbar.h>
 #include <tdefiledialog.h>
@@ -33,7 +33,7 @@
 #include <kmenubar.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeio/netaccess.h>
-#include <kmainwindowiface.h>
+#include <tdemainwindowiface.h>
 
 // local includes
 #include "shell.h"

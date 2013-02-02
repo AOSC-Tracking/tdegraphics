@@ -36,7 +36,7 @@
 
 #include <dcopclient.h>
 #include <kapplication.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <tdefiledialog.h>
@@ -47,7 +47,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprinter.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <kstdaction.h>
 #include <kscan.h>
 

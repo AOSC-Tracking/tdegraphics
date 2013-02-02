@@ -45,7 +45,7 @@
 #include <kiconloader.h>
 #include <tdefiledialog.h>
 #include <tdefilemetainfo.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <tdeconfig.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
@@ -57,7 +57,7 @@
 #include <kdebug.h>
 #include <kurldrag.h>
 #include <kstatusbar.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kprocess.h>
 #include <kprinter.h>
 #include <tdeio/job.h>

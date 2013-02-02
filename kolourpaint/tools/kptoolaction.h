@@ -28,7 +28,7 @@
 #ifndef KP_TOOL_ACTION_H
 #define KP_TOOL_ACTION_H
 
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 
 #include <kpsinglekeytriggersaction.h>
 

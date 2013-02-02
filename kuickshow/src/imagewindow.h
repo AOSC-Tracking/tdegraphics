@@ -21,7 +21,7 @@
 
 #include <tqevent.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kurl.h>
 
 #include "imlibwidget.h"

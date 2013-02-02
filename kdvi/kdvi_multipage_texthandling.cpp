@@ -26,7 +26,7 @@
 
 #include <config.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kdebug.h>
 #include <keditcl.h>
 #include <tdefiledialog.h>

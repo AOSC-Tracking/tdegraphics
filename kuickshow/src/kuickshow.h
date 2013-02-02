@@ -25,7 +25,7 @@
 #include <tqvaluelist.h>
 
 #include <tdefileitem.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kurl.h>
 
 #include <Imlib.h>

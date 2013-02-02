@@ -10,7 +10,7 @@
 // qt/kde includes
 #include <tqlayout.h>
 #include <tqlabel.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <klocale.h>
 #include <ksqueezedtextlabel.h>
 #include <kglobalsettings.h>

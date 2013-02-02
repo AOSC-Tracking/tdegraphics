@@ -29,10 +29,10 @@
 #include <kcursor.h>
 #include <kiconloader.h>
 #include <kurldrag.h>
-#include <kaction.h>
-#include <kstdaccel.h>
-#include <kactioncollection.h>
-#include <kpopupmenu.h>
+#include <tdeaction.h>
+#include <tdestdaccel.h>
+#include <tdeactioncollection.h>
+#include <tdepopupmenu.h>
 #include <klocale.h>
 #include <tdefiledialog.h>
 #include <kimageeffect.h>

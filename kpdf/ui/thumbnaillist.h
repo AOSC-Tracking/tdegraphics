@@ -13,7 +13,7 @@
 #include <tqscrollview.h>
 #include <tqvaluevector.h>
 #include <tqvbox.h>
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 #include "core/observer.h"
 
 class TQTimer;

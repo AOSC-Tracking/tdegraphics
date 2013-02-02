@@ -20,7 +20,7 @@ kviewerpart_la_SOURCES = kviewpart.cpp pageSizeWidget_base.ui \
 kviewerpart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
 kviewerpart_la_LIBADD = ./libifaces.la $(LIB_TDEFILE) -ltdeparts
 
-libtdemultipage_la_SOURCES = tdemultipage.cpp pageView.cpp marklist.cpp tdemultipageInterface.skel \
+libtdemultipage_la_SOURCES = tdemultipage.cpp pageView.cpp martdelist.cpp tdemultipageInterface.skel \
 		units.cpp pageSize.cpp simplePageSize.cpp renderedDocumentPage.cpp renderedDocumentPagePixmap.cpp \
 		renderedDocumentPagePrinter.cpp documentPageCache.cpp documentWidget.cpp searchWidget.cpp \
 		selection.cpp documentRenderer.cpp history.cpp kvsprefs.kcfgc tableOfContents.cpp \

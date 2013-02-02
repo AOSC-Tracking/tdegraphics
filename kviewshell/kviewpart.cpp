@@ -9,8 +9,8 @@
 #include <tqprintdialog.h>
 
 #include <kaboutdialog.h>
-#include <kaccel.h>
-#include <kaction.h>
+#include <tdeaccel.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
 #include <tdeconfigdialog.h>

@@ -31,7 +31,7 @@
 #define __DW_MENU_ACTION
 #include <kdockwidget.h>
 #include <tqstring.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 /**
  * This class is just a helper class since the KDockWidget classes do not yet

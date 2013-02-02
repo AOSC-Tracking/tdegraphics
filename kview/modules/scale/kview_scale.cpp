@@ -24,7 +24,7 @@
 #include <tqimage.h>
 #include <tqvbox.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>

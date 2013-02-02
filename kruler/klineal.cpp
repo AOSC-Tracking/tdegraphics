@@ -25,9 +25,9 @@
 #include <kiconloader.h>
 #include <kimageeffect.h>
 #include <klocale.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <knotifyclient.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kstandarddirs.h>
 #include <twin.h>
 #include <kstdguiitem.h>

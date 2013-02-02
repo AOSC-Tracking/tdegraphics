@@ -17,7 +17,7 @@
 #include <tqvalidator.h>
 #include <tqpainter.h>
 #include <kiconloader.h>
-#include <kaccelmanager.h>
+#include <tdeaccelmanager.h>
 #include <tdeversion.h>
 
 // local includes

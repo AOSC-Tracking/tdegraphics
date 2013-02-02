@@ -29,7 +29,7 @@
 #define _KFAX_H_
 
 #include <kapplication.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <tqptrlist.h>
 #include <kurl.h>
 

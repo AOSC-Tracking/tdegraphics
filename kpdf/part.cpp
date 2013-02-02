@@ -35,7 +35,7 @@
 #include <dcopobject.h>
 #include <dcopclient.h>
 #include <kapplication.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kdirwatch.h>
 #include <kinstance.h>
 #include <kprinter.h>
@@ -51,7 +51,7 @@
 #include <kiconloader.h>
 #include <tdeio/netaccess.h>
 #include <tdeio/job.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>

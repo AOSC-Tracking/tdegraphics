@@ -35,7 +35,7 @@
 #include <tqpixmap.h>
 #include <tqvaluevector.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>

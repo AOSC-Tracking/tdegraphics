@@ -23,7 +23,7 @@
 #include <tqlayout.h>
 #include <tqregexp.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
@@ -32,9 +32,9 @@
 #include <kiconloader.h>
 #include <kinstance.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kstdaction.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <ktempfile.h>
 #include <tdeio/scheduler.h>
 #include <kaboutdata.h>
@@ -50,7 +50,7 @@
 #include "kpswidget.h"
 #include "kgvfactory.h"
 #include "logwindow.h"
-#include "marklist.h"
+#include "martdelist.h"
 #include "scrollbox.h"
 #include "version.h"
 #include "configuration.h"
@@ -162,7 +162,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _docManager->setPSWidget( _psWidget );
     _docManager->setDocument( document() );
 
-    _markList = new MarkList( _mainWidget, "marklist", _docManager );
+    _markList = new MarkList( _mainWidget, "martdelist", _docManager );
     _markList->setFixedWidth( PAGELIST_WIDTH );
     vlay->addWidget( _markList, 1 );
     connect( TQT_TQOBJECT(_markList), TQT_SIGNAL( contextMenuRequested ( int, int, const TQPoint& ) ),
@@ -192,7 +192,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
                  actionCollection(), "info" );
 
     //-- Edit Menu -----------------------------------------------------
-    _popup = new TDEPopupMenu( _markList, "marklist_menu" );
+    _popup = new TDEPopupMenu( _markList, "martdelist_menu" );
 
     TDEAction *act = new TDEAction( i18n( "Mark Current Page" ), "flag", CTRL+SHIFT+Key_M,
                  TQT_TQOBJECT(_markList), TQT_SLOT( markCurrent() ),

@@ -32,7 +32,7 @@
 #endif
 
 #include <kapplication.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kdockwidget.h>
 #include <tdeparts/dockmainwindow.h>
 

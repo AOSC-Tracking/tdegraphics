@@ -20,7 +20,7 @@
 
 #include <krun.h>
 #include <kdebug.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tdefiledialog.h>
 #include <klocale.h>
 #include <ktempfile.h>

@@ -15,7 +15,7 @@
 #include <kiconloader.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <klocale.h>

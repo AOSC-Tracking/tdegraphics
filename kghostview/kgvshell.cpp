@@ -19,7 +19,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <tdefiledialog.h>
 #include <kiconloader.h>
@@ -29,7 +29,7 @@
 #include <kstandarddirs.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <ktempfile.h>
 #include <kmenubar.h>
 #include <kedittoolbar.h>
@@ -37,7 +37,7 @@
 
 #include <kicontheme.h>
 #include <kglobal.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tdeparts/componentfactory.h>
 
 #include <twin.h>

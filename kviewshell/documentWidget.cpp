@@ -11,7 +11,7 @@
 
 #include <config.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kglobalsettings.h>

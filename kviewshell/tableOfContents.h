@@ -24,7 +24,7 @@
 
 #include "anchor.h"
 
-#include <klistview.h>
+#include <tdelistview.h>
 
 class Bookmark;
 

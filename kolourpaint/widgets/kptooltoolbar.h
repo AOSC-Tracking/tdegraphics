@@ -31,7 +31,7 @@
 
 #include <tqvaluevector.h>
 
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 
 
 class TQBoxLayout;

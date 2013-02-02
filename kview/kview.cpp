@@ -29,7 +29,7 @@
 #include <tdeparts/plugin.h>
 #include <tdeparts/part.h>
 #include <kapplication.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kstdaction.h>
 #include <kimageio.h>
 #include <tdefiledialog.h>
@@ -39,7 +39,7 @@
 #include <kstatusbar.h>
 #include <kdebug.h>
 #include <kedittoolbar.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <kprogress.h>
 
 #include <tqimage.h>

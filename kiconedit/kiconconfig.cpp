@@ -27,7 +27,7 @@
 #include <tqbuttongroup.h>
 #include <tqradiobutton.h>
 
-#include <kaccel.h>
+#include <tdeaccel.h>
 #include <kbuttonbox.h>
 #include <kapplication.h>
 #include <klocale.h>

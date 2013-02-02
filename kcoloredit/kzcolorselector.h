@@ -20,7 +20,7 @@
 
 #include "tqcolor.h"
 #include "tqpixmap.h"
-#include "kselect.h"
+#include "tdeselect.h"
 
 #include "color.h"
 

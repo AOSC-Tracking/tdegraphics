@@ -21,7 +21,7 @@
 #ifndef IMAGELISTITEM_H
 #define IMAGELISTITEM_H
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kurl.h>
 #include <tqstring.h>
 

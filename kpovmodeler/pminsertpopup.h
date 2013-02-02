@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 /**
  * Popup menu. Ask the user where to insert new objects

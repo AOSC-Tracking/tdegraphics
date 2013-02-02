@@ -33,7 +33,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <kcombobox.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kstandarddirs.h>
 
 #include "previewer.h"

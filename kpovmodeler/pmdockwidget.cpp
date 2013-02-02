@@ -32,8 +32,8 @@
 #ifndef NO_KDE2
 #include <tdeconfig.h>
 #include <kglobal.h>
-#include <ktoolbar.h>
-#include <kpopupmenu.h>
+#include <tdetoolbar.h>
+#include <tdepopupmenu.h>
 #include <twin.h>
 #include <kdebug.h>
 #ifdef TQ_WS_X11
@@ -50,7 +50,7 @@
 
 #include <tdeparts/event.h>
 #include <tdeparts/part.h>
-#include <kaccel.h>
+#include <tdeaccel.h>
 #include <tdeparts/plugin.h>
 #include <kstatusbar.h>
 #include <kinstance.h>

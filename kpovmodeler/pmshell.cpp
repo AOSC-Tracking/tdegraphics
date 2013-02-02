@@ -18,7 +18,7 @@
 #include <klocale.h>
 #include <khelpmenu.h>
 #include <kstdaction.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kstatusbar.h>
 #include <tdefiledialog.h>
 #include <kmessagebox.h>
@@ -26,7 +26,7 @@
 #include <kedittoolbar.h>
 #include <kkeydialog.h>
 #include <kaboutdialog.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tqtimer.h>
 
 #include "pmshell.h"

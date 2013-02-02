@@ -34,7 +34,7 @@
 #include <tqpainter.h>
 #include <tqtimer.h>
 
-#include <kactionclasses.h>
+#include <tdeactionclasses.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>

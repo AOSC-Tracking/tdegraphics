@@ -50,8 +50,8 @@
 #include <tdefiletreebranch.h>
 
 #include <kurldrag.h>
-#include <kpopupmenu.h>
-#include <kaction.h>
+#include <tdepopupmenu.h>
+#include <tdeaction.h>
 #include <kinputdialog.h>
 #include <kiconloader.h>
 #include <tdefiledialog.h>

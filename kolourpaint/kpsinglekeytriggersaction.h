@@ -29,7 +29,7 @@
 #define KP_SINGLE_KEY_TRIGGERS_ACTION_H
 
 
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 
 
 class kpSingleKeyTriggersActionInterface
@@ -53,7 +53,7 @@ protected:
 };
 
 
-#include <kaction.h>
+#include <tdeaction.h>
 
 
 class kpSingleKeyTriggersAction : public TDEAction,

@@ -24,7 +24,7 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kfilterdev.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kiconloader.h>
 
 #include <tqfile.h>

@@ -22,7 +22,7 @@
 #include <tqstring.h>
 #include <tqmessagebox.h>
 #include <tqscrollview.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tqlabel.h>
 #include <tqdict.h>
 #include <tqimage.h>

@@ -294,7 +294,7 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>
     <includehint>knuminput.h</includehint>
-    <includehint>klistview.h</includehint>
+    <includehint>tdelistview.h</includehint>
     <includehint>kcolorbutton.h</includehint>
 </includehints>
 </UI>

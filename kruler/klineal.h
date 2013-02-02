@@ -19,11 +19,11 @@
 #define KLINEAL_H
 
 #include <kapplication.h>
-#include <kpopupmenu.h>
-#include <kmainwindow.h>
+#include <tdepopupmenu.h>
+#include <tdemainwindow.h>
 
 #include <kcolordialog.h>
-#include <kfontdialog.h>
+#include <tdefontdialog.h>
 
 #include <tqlabel.h>
 #include <tqpainter.h>

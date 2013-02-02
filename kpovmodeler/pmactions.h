@@ -21,7 +21,7 @@
 #define PMACTIONS_H
 
 #include <tqguardedptr.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 class TQComboBox;
 class TQSpinBox;

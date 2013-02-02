@@ -29,10 +29,10 @@
 #include <tqclipboard.h>
 #include <tqvbox.h>
 
-#include <kaccel.h>
+#include <tdeaccel.h>
 #include <knotifyclient.h>
 #include <khelpmenu.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kpushbutton.h>
 #include <kstartupinfo.h>
 

@@ -33,7 +33,7 @@
 #include <tqpixmap.h>
 #include <tqdragobject.h>
 #include <tqmap.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <tdeio/job.h>
 #include <tdeio/global.h>
 #include <tdeio/file.h>

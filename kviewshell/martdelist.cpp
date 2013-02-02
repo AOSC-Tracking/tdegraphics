@@ -32,16 +32,16 @@
 #include <kapplication.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 
 #include "documentPageCache.h"
 #include "kvsprefs.h"
-#include "marklist.h"
+#include "martdelist.h"
 
 
-#include "marklist.moc"
+#include "martdelist.moc"
 
 
 namespace {

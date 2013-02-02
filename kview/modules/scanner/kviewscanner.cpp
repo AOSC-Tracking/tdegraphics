@@ -23,7 +23,7 @@
 #include <tqimage.h>
 #include <tqobjectlist.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kinstance.h>
 #include <klocale.h>
 #include <kgenericfactory.h>

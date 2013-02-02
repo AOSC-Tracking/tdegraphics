@@ -41,7 +41,7 @@
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kmenubar.h>
-#include <kaccel.h>
+#include <tdeaccel.h>
 #include <tdeio/netaccess.h>
 #include <tdefiledialog.h>
 #include <tdeconfig.h>
@@ -54,8 +54,8 @@
 #include <kmessagebox.h>
 #include <kdockwidget.h>
 #include <tdeparts/partmanager.h>
-#include <kstdaccel.h>
-#include <kaction.h>
+#include <tdestdaccel.h>
+#include <tdeaction.h>
 #include <kstdaction.h>
 #include <tqiconset.h>
 #include <kurldrag.h>

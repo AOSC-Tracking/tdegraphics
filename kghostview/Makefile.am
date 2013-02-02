@@ -17,7 +17,7 @@ libkghostviewpart_la_LIBADD = libkghostviewlib.la
 
 # Check "make final" after making changes to the following line!!
 libkghostviewlib_la_SOURCES = kgvshell.cpp kgvdocument.cpp kgv_miniwidget.cpp \
-	marklist.cpp logwindow.cpp infodialog.cpp \
+	martdelist.cpp logwindow.cpp infodialog.cpp \
 	kgvpageview.cpp ps.c kgv_view.cpp scrollbox.cpp  kgvpagedecorator.cpp \
 	kgvconfigdialog.cpp kgvmainwidget.cpp \
 	kdscerrordialog.cpp displayoptions.cpp kpswidget.cpp \
@@ -35,7 +35,7 @@ libdscparse_la_LDFLAGS = $(all_libraries) -no-undefined
 libdscparse_la_LIBADD = $(LIB_QT)
 libdscparse_la_SOURCES = $(top_srcdir)/kghostview/dscparse/dscparse.cpp $(top_srcdir)/kghostview/dscparse/dscparse_adapter.cpp
 
-noinst_HEADERS =  marklist.h logwindow.h infodialog.h kgvshell.h \
+noinst_HEADERS =  martdelist.h logwindow.h infodialog.h kgvshell.h \
 	kpswidget.h kgvpageview.h ps.h kgv_miniwidget.h kgv_view.h scrollbox.h \
 	kgvpagedecorator.h kgvconfigdialog.h kgvmainwidget.h $(top_srcdir)/kghostview/dscparse/dscparse.h \
 	$(top_srcdir)/kghostview/dscparse/dscparse_adapter.h kdscerrordialog.h kgvdocument.h displayoptions.h \

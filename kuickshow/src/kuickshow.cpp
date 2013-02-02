@@ -29,8 +29,8 @@
 #include <tqstring.h>
 
 #include <kaboutdata.h>
-#include <kaccel.h>
-#include <kaction.h>
+#include <tdeaccel.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <tdeconfig.h>
@@ -45,7 +45,7 @@
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kprotocolinfo.h>
 #include <kpropertiesdialog.h>
 #include <kprotocolinfo.h>
@@ -53,7 +53,7 @@
 #include <kstdaction.h>
 #include <kstandarddirs.h>
 #include <kstartupinfo.h>
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 #include <kurlcombobox.h>
 #include <kurlcompletion.h>
 #include <kurldrag.h>

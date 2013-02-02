@@ -11,13 +11,13 @@
 #include <tqtooltip.h>
 #include <tqapplication.h>
 #include <tqtimer.h>
-#include <kaction.h>
-#include <kactioncollection.h>
+#include <tdeaction.h>
+#include <tdeactioncollection.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <klineedit.h>
-#include <kpopupmenu.h>
-#include <ktoolbarbutton.h>
+#include <tdepopupmenu.h>
+#include <tdetoolbarbutton.h>
 
 // local includes
 #include "searchwidget.h"

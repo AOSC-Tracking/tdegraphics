@@ -27,8 +27,8 @@
 
 // include files for KDE
 #include <kapplication.h>
-#include <kmainwindow.h>
-#include <kaction.h>
+#include <tdemainwindow.h>
+#include <tdeaction.h>
 
 // application specific includes
 #include "color.h"

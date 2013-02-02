@@ -34,7 +34,7 @@
 Done:
 - Scrollbox should show a thumbnail (like kdvi).
 
-- New implementation for the marklist because QTableView won't be in Qt-3.0 
+- New implementation for the martdelist because QTableView won't be in Qt-3.0 
   anymore. (I'll keep using QTableView, simply because there's no suitable
   alternative in Qt3.)
 

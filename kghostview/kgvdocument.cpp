@@ -37,7 +37,7 @@
 #include "configuration.h"
 #include "kdscerrordialog.h"
 #include "kgv_miniwidget.h"
-#include "marklist.h"
+#include "martdelist.h"
 #include "kgvfactory.h"
 
 extern "C" {

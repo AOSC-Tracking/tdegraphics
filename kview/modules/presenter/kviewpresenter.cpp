@@ -32,7 +32,7 @@
 
 #include <kpushbutton.h>
 #include <kapplication.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>

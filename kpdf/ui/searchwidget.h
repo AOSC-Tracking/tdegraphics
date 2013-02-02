@@ -10,7 +10,7 @@
 #ifndef _KPDF_SEARCHWIDGET_H_
 #define _KPDF_SEARCHWIDGET_H_
 
-#include <ktoolbar.h>
+#include <tdetoolbar.h>
 
 class TDEPopupMenu;
 class KPDFDocument;
