@@ -30,26 +30,26 @@
 
 #include "kresize.h"
 
-class KIconListBox;
-class KIconTemplateContainer;
+class TDEIconListBox;
+class TDEIconTemplateContainer;
 class TQButtonGroup;
 class TQRadioButton;
 class TQGroupBox;
 
-struct KIconTemplate
+struct TDEIconTemplate
 {
   TQString path;
   TQString title;
 };
 
-class KIconListBoxItem : public TQListBoxItem    
+class TDEIconListBoxItem : public TQListBoxItem    
 {
 public:
-  KIconListBoxItem( KIconTemplate ); 
+  TDEIconListBoxItem( TDEIconTemplate ); 
 
 
   const TQString path() { return icontemplate.path; }
-  KIconTemplate& iconTemplate() { return icontemplate; }
+  TDEIconTemplate& iconTemplate() { return icontemplate; }
   void reloadIcon();
 
 protected:
@@ -58,40 +58,40 @@ protected:
   virtual int width( const TQListBox * ) const;      
 private:
   TQPixmap pm;
-  KIconTemplate icontemplate;
+  TDEIconTemplate icontemplate;
 };
 
-class KIconListBox : public TQListBox    
+class TDEIconListBox : public TQListBox    
 {
   Q_OBJECT
   
 public:
-  KIconListBox( TQWidget *parent ) : TQListBox(parent) {} ;
-  const TQString path(int idx) { return ((KIconListBoxItem*)item(idx))->path(); }
-  KIconTemplate& iconTemplate(int idx) { return ((KIconListBoxItem*)item(idx))->iconTemplate(); }
+  TDEIconListBox( TQWidget *parent ) : TQListBox(parent) {} ;
+  const TQString path(int idx) { return ((TDEIconListBoxItem*)item(idx))->path(); }
+  TDEIconTemplate& iconTemplate(int idx) { return ((TDEIconListBoxItem*)item(idx))->iconTemplate(); }
 
 };
 
-class KIconTemplateContainer : public TQValueList<KIconTemplate>
+class TDEIconTemplateContainer : public TQValueList<TDEIconTemplate>
 {
 public:
-   static KIconTemplateContainer* self()
+   static TDEIconTemplateContainer* self()
    {
       if (!instance)
-         instance = new KIconTemplateContainer;
+         instance = new TDEIconTemplateContainer;
       return instance;
    }
 
    void save();
 
 private:
-   static KIconTemplateContainer* instance;
+   static TDEIconTemplateContainer* instance;
 
-  const KIconTemplateContainer operator = (const KIconTemplateContainer&);
-  KIconTemplateContainer(const KIconTemplateContainer&);
+  const TDEIconTemplateContainer operator = (const TDEIconTemplateContainer&);
+  TDEIconTemplateContainer(const TDEIconTemplateContainer&);
 
-  KIconTemplateContainer();  
-  ~KIconTemplateContainer();
+  TDEIconTemplateContainer();  
+  ~TDEIconTemplateContainer();
 };
 
 class NewSelect : public TQWidget
@@ -128,7 +128,7 @@ public slots:
   void checkSelection(int);
  
 protected:
-  KIconListBox *templates;
+  TDEIconListBox *templates;
   KWizard *wiz;
   TQGroupBox *grp;
 };

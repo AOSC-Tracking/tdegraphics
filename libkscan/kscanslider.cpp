@@ -44,9 +44,9 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
 
     if( haveStdButt )
     {
-       KIconLoader *loader = TDEGlobal::iconLoader();
+       TDEIconLoader *loader = TDEGlobal::iconLoader();
        m_stdButt = new TQPushButton( this );
-       m_stdButt->setPixmap( loader->loadIcon( "undo",KIcon::Small ));
+       m_stdButt->setPixmap( loader->loadIcon( "undo",TDEIcon::Small ));
 
        /* connect the button click to setting the value */
        connect( m_stdButt, TQT_SIGNAL(clicked()),

@@ -87,7 +87,7 @@ int main( int argc, char *argv[] )
    TDEApplication app;
    TDEGlobal::locale()->insertCatalogue("libkscan");
    KImageIO::registerFormats();
-   KIconLoader *loader = TDEGlobal::iconLoader();
+   TDEIconLoader *loader = TDEGlobal::iconLoader();
 
    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
    TQCString  devToUse = args->getOption( "d" );
@@ -107,8 +107,8 @@ int main( int argc, char *argv[] )
    Kooka  *kooka = new Kooka(devToUse);
    app.setMainWidget( kooka );
 
-   KWin::setIcons(kooka->winId(), loader->loadIcon( "scanner", KIcon::Desktop ),
-		  loader->loadIcon("scanner", KIcon::Small) );
+   KWin::setIcons(kooka->winId(), loader->loadIcon( "scanner", TDEIcon::Desktop ),
+		  loader->loadIcon("scanner", TDEIcon::Small) );
 
    kooka->show();
    app.processEvents();

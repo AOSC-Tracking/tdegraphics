@@ -33,7 +33,7 @@
 
 class KCommandHistory;
 class KRuler;
-class KIconEditGrid;
+class TDEIconEditGrid;
 class TQScrollView;
 
 enum Direction {
@@ -44,7 +44,7 @@ enum Direction {
 
 class DrawCommand : public KCommand {
     public:
-        DrawCommand( int xx, int yy, uint newcol, TQImage* img, KIconEditGrid* g ) {
+        DrawCommand( int xx, int yy, uint newcol, TQImage* img, TDEIconEditGrid* g ) {
             x = xx;
 	    y = yy;
 	    newcolor = newcol;
@@ -64,12 +64,12 @@ class DrawCommand : public KCommand {
         uint newcolor;
         uint oldcolor;
 	TQImage* image;
-	KIconEditGrid* grid;
+	TDEIconEditGrid* grid;
 };
 
 class RepaintCommand : public KCommand {
     public:
-	RepaintCommand( TQRect a, KIconEditGrid* g ) {
+	RepaintCommand( TQRect a, TDEIconEditGrid* g ) {
 		area = a;
 		grid = g;
 	}
@@ -83,7 +83,7 @@ class RepaintCommand : public KCommand {
 		return "repainted";
 	}
     protected:
-	KIconEditGrid* grid;
+	TDEIconEditGrid* grid;
 	TQRect area;
 };
 
@@ -97,7 +97,7 @@ public:
   KRuler *hruler() { return _hruler;}
   KRuler *vruler() { return _vruler;}
   TQFrame *corner() { return _corner;}
-  KIconEditGrid *grid() { return _grid; }
+  TDEIconEditGrid *grid() { return _grid; }
   void setShowRulers(bool mode);
   void setAcceptDrop(bool a);
   const TQRect viewRect();
@@ -117,25 +117,25 @@ protected:
   void setSizes();
 
   TQFrame *_corner;
-  KIconEditGrid *_grid;
+  TDEIconEditGrid *_grid;
   KRuler *_hruler, *_vruler;
   TQScrollView *viewport;
   bool acceptdrop;
 };
 
 /**
-* KIconEditGrid
-* @short KIconEditGrid
+* TDEIconEditGrid
+* @short TDEIconEditGrid
 * @author Thomas Tanghus <tanghus@kde.org>
 * @version 0.3
 */
-class KIconEditGrid : public KColorGrid
+class TDEIconEditGrid : public KColorGrid
 {
     Q_OBJECT
   
 public:
-  KIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * parent = 0, const char *name = 0);
-  virtual ~KIconEditGrid();
+  TDEIconEditGrid( TQImage *image, KCommandHistory* h, TQWidget * parent = 0, const char *name = 0);
+  virtual ~TDEIconEditGrid();
 
   enum DrawTool { Line, Freehand, FloodFill, Spray, Rect, FilledRect, Circle,
         FilledCircle, Ellipse, FilledEllipse, Eraser, SelectRect, SelectCircle, Find };

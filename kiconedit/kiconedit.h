@@ -41,9 +41,9 @@
 #include "kresize.h"
 #include "properties.h"
 
-class KIconEdit;
+class TDEIconEdit;
 class KCommandHistory;
-typedef TQPtrList<KIconEdit> WindowList;
+typedef TQPtrList<TDEIconEdit> WindowList;
 
 class TQWhatsThis;
 class TQToolButton;
@@ -51,19 +51,19 @@ class TQLabel;
 class PaletteToolBar;
 
 /**
-* KIconEdit
-* @short KIconEdit
+* TDEIconEdit
+* @short TDEIconEdit
 * @author Thomas Tanghus <tanghus@kde.org>
 * @version 0.4
 */
-class KIconEdit : public TDEMainWindow
+class TDEIconEdit : public TDEMainWindow
 {
     Q_OBJECT
   
 public:
-  KIconEdit( KURL url = KURL(), const char *name = "kiconedit");
-  KIconEdit( const TQImage image, const char *name = "kiconedit");
-  ~KIconEdit();
+  TDEIconEdit( KURL url = KURL(), const char *name = "kiconedit");
+  TDEIconEdit( const TQImage image, const char *name = "kiconedit");
+  ~TDEIconEdit();
 
   virtual TQSize sizeHint() const;
   static WindowList windowList;
@@ -144,9 +144,9 @@ protected:
   KCommandHistory* history;
   PaletteToolBar *m_paletteToolBar;
   KStatusBar *statusbar;
-  KIconEditGrid *grid;
+  TDEIconEditGrid *grid;
   KGridView *gridview;
-  KIconEditIcon *icon;
+  TDEIconEditIcon *icon;
   TQImage img;
   TQString m_name;
 

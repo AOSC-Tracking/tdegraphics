@@ -56,7 +56,7 @@ class TQListViewItem;
 class KProgress;
 class TDEIO::PreviewJob;
 
-class ThumbView: public TQVBox /* KIconView */
+class ThumbView: public TQVBox /* TDEIconView */
 {
    Q_OBJECT
   
@@ -134,7 +134,7 @@ private:
    TQPixmap createPixmap( const TQPixmap& ) const;
 
    bool    deleteImage( KFileItem* );
-   KIconView *m_iconView;
+   TDEIconView *m_iconView;
    KProgress *m_progress;
 
    KURL    m_currentDir;

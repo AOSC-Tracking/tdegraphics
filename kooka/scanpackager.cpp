@@ -117,11 +117,11 @@ ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
    m_currImportDir = m_currCopyDir;
 
    /* Preload frequently used icons */
-   KIconLoader *loader = TDEGlobal::iconLoader();
-   m_floppyPixmap = loader->loadIcon( "3floppy_unmount", KIcon::Small );
-   m_grayPixmap   = loader->loadIcon( "palette_gray", KIcon::Small );
-   m_bwPixmap     = loader->loadIcon( "palette_lineart", KIcon::Small );
-   m_colorPixmap  = loader->loadIcon( "palette_color", KIcon::Small );
+   TDEIconLoader *loader = TDEGlobal::iconLoader();
+   m_floppyPixmap = loader->loadIcon( "3floppy_unmount", TDEIcon::Small );
+   m_grayPixmap   = loader->loadIcon( "palette_gray", TDEIcon::Small );
+   m_bwPixmap     = loader->loadIcon( "palette_lineart", TDEIcon::Small );
+   m_colorPixmap  = loader->loadIcon( "palette_color", TDEIcon::Small );
 
    m_startup = true;
 
@@ -145,15 +145,15 @@ void ScanPackager::openRoots()
 
 KFileTreeBranch* ScanPackager::openRoot( const KURL& root, bool  )
 {
-   KIconLoader *loader = TDEGlobal::iconLoader();
+   TDEIconLoader *loader = TDEGlobal::iconLoader();
 
    /* working on the global branch. FIXME */
    m_defaultBranch = addBranch( root, i18n("Kooka Gallery"),
-				loader->loadIcon( "folder_image", KIcon::Small ),
+				loader->loadIcon( "folder_image", TDEIcon::Small ),
 				false /* do not showHidden */ );
 
    // TQ_CHECK_PTR( m_defaultBranch );
-   m_defaultBranch->setOpenPixmap( loader->loadIcon( "folder_blue_open", KIcon::Small ));
+   m_defaultBranch->setOpenPixmap( loader->loadIcon( "folder_blue_open", TDEIcon::Small ));
 
    setDirOnlyMode( m_defaultBranch, false );
    m_defaultBranch->setShowExtensions( true ); // false );
@@ -581,7 +581,7 @@ void ScanPackager::loadImageForItem( KFileTreeViewItem *item )
           kdDebug(28000) << "subImage-count: " << img->subImagesCount() << endl;
           if( img->subImagesCount() > 1 )
           {
-              KIconLoader *loader = TDEGlobal::iconLoader();
+              TDEIconLoader *loader = TDEGlobal::iconLoader();
               kdDebug(28000) << "SubImages existing!" << endl;
 
               /* Start at the image with index 1, that makes  one less than are actually in the
@@ -599,7 +599,7 @@ void ScanPackager::loadImageForItem( KFileTreeViewItem *item )
                   }
                   prevItem = subImgItem;
 
-                  subImgItem->setPixmap( 0, loader->loadIcon( "editcopy", KIcon::Small ));
+                  subImgItem->setPixmap( 0, loader->loadIcon( "editcopy", TDEIcon::Small ));
                   subImgItem->setText( 0, i18n("Sub-image %1").arg( i ) );
                   KookaImage  *subImgImg = new KookaImage( i, img );
                   subImgImg->setFileItem( newKfi );

@@ -75,7 +75,7 @@ void KookaPreferences::setupOCRPage()
     konf->setGroup( CFG_GROUP_OCR_DIA );
 
     TQFrame *page = addPage( i18n("OCR"), i18n("Optical Character Recognition" ),
-			    BarIcon("ocrImage", KIcon::SizeMedium ) );
+			    BarIcon("ocrImage", TDEIcon::SizeMedium ) );
 
     TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
@@ -309,7 +309,7 @@ void KookaPreferences::setupStartupPage()
     konf->setGroup( GROUP_STARTUP );
 
     TQFrame *page = addPage( i18n("Startup"), i18n("Kooka Startup Preferences" ),
-			    BarIcon("gear", KIcon::SizeMedium ) );
+			    BarIcon("gear", TDEIcon::SizeMedium ) );
     TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
     /* Description-Label */
     top->addWidget( new TQLabel( i18n("Note that changing these options will affect Kooka's next start!"), page ));
@@ -351,7 +351,7 @@ void KookaPreferences::setupSaveFormatPage( )
 {
    konf->setGroup( OP_FILE_GROUP );
    TQFrame *page = addPage( i18n("Image Saving"), i18n("Configure Image Save Assistant" ),
-			    BarIcon("filesave", KIcon::SizeMedium ) );
+			    BarIcon("filesave", TDEIcon::SizeMedium ) );
    TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
    /* Skip the format asking if a format entry  exists */
@@ -377,7 +377,7 @@ void KookaPreferences::setupThumbnailPage()
    konf->setGroup( THUMB_GROUP );
 
    TQFrame *page = addPage( i18n("Thumbnail View"), i18n("Thumbnail Gallery View" ),
-			    BarIcon("thumbnail", KIcon::SizeMedium ) );
+			    BarIcon("thumbnail", TDEIcon::SizeMedium ) );
    TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
    top->addWidget( new TQLabel( i18n("Here you can configure the appearance of the thumbnail view of your scan picture gallery."),page ));

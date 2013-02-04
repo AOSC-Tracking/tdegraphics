@@ -76,12 +76,12 @@ KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *parent,
 
   acceptdrop = false;
 
-  KIconEditProperties *props = KIconEditProperties::self();
+  TDEIconEditProperties *props = TDEIconEditProperties::self();
 
   viewport = new TQScrollView(this);
   TQ_CHECK_PTR(viewport);
 
-  _grid = new KIconEditGrid(image, history, viewport->viewport());
+  _grid = new TDEIconEditGrid(image, history, viewport->viewport());
   TQ_CHECK_PTR(_grid);
   viewport->addChild(_grid);
   _grid->setGrid(props->showGrid());
@@ -146,7 +146,7 @@ void KGridView::paintGrid()
 
 void KGridView::setSizes()
 {
-  if(KIconEditProperties::self()->showRulers())
+  if(TDEIconEditProperties::self()->showRulers())
   {
     _hruler->setLittleMarkDistance(_grid->scaling());
     _vruler->setLittleMarkDistance(_grid->scaling());
@@ -208,7 +208,7 @@ void KGridView::scalingChange(int)
 
 void KGridView::setShowRulers(bool mode)
 {
-    KIconEditProperties::self()->setShowRulers( mode );
+    TDEIconEditProperties::self()->setShowRulers( mode );
     setSizes();
     TQResizeEvent e(size(), size());
     resizeEvent(&e);
@@ -276,7 +276,7 @@ void KGridView::resizeEvent(TQResizeEvent*)
 
   setSizes();
 
-  if(KIconEditProperties::self()->showRulers())
+  if(TDEIconEditProperties::self()->showRulers())
   {
     _hruler->setGeometry(_vruler->width(), 0, width(), _hruler->height());
     _vruler->setGeometry(0, _hruler->height(), _vruler->width(), height());
@@ -290,7 +290,7 @@ void KGridView::resizeEvent(TQResizeEvent*)
 }
 
 
-KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *parent, const char *name)
+TDEIconEditGrid::TDEIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *parent, const char *name)
  : KColorGrid(parent, name, 1)
 {
     img = image;
@@ -323,7 +323,7 @@ KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *paren
     connect( h, TQT_SIGNAL(commandExecuted()), this, TQT_SLOT(updatePreviewPixmap() ));    
     createCursors();
 
-    KIconEditProperties *props = KIconEditProperties::self();
+    TDEIconEditProperties *props = TDEIconEditProperties::self();
 
     setTransparencyDisplayType(props->transparencyDisplayType());
     setTransparencySolidColor(props->transparencySolidColor());
@@ -332,12 +332,12 @@ KIconEditGrid::KIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *paren
     setCheckerboardSize(props->checkerboardSize());
 }
 
-KIconEditGrid::~KIconEditGrid()
+TDEIconEditGrid::~TDEIconEditGrid()
 {
-    kdDebug(4640) << "KIconEditGrid - destructor: done" << endl;
+    kdDebug(4640) << "TDEIconEditGrid - destructor: done" << endl;
 }
 
-void KIconEditGrid::paintEvent(TQPaintEvent *e)
+void TDEIconEditGrid::paintEvent(TQPaintEvent *e)
 {
   const TQRect cellsRect(0, 0, numCols() * cellSize(), numRows() * cellSize());
   const TQRect paintCellsRect = cellsRect.intersect(e->rect());
@@ -625,7 +625,7 @@ void KIconEditGrid::paintEvent(TQPaintEvent *e)
   }
 }
 
-void KIconEditGrid::paintForeground(TQPainter* p, TQPaintEvent* e)
+void TDEIconEditGrid::paintForeground(TQPainter* p, TQPaintEvent* e)
 {
     TQWMatrix matrix;
 
@@ -708,7 +708,7 @@ void KIconEditGrid::paintForeground(TQPainter* p, TQPaintEvent* e)
     }
 }
 
-void KIconEditGrid::mousePressEvent( TQMouseEvent *e )
+void TDEIconEditGrid::mousePressEvent( TQMouseEvent *e )
 {
     if(!e || (e->button() != Qt::LeftButton))
         return;
@@ -749,7 +749,7 @@ void KIconEditGrid::mousePressEvent( TQMouseEvent *e )
     }
 }
 
-void KIconEditGrid::mouseMoveEvent( TQMouseEvent *e )
+void TDEIconEditGrid::mouseMoveEvent( TQMouseEvent *e )
 {
     if(!e) return;
 
@@ -884,7 +884,7 @@ void KIconEditGrid::mouseMoveEvent( TQMouseEvent *e )
     emit changed(TQPixmap(p));
 }
 
-void KIconEditGrid::mouseReleaseEvent( TQMouseEvent *e )
+void TDEIconEditGrid::mouseReleaseEvent( TQMouseEvent *e )
 {
   if(!e || (e->button() != Qt::LeftButton))
     return;
@@ -987,14 +987,14 @@ void KIconEditGrid::mouseReleaseEvent( TQMouseEvent *e )
   //emit colorschanged(numColors(), data());
 }
 
-//void KIconEditGrid::setColorSelection( const TQColor &color )
-void KIconEditGrid::setColorSelection( uint c )
+//void TDEIconEditGrid::setColorSelection( const TQColor &color )
+void TDEIconEditGrid::setColorSelection( uint c )
 {
   currentcolor = c;
   emit colorSelected(currentcolor);
 }
 
-void KIconEditGrid::loadBlank( int w, int h )
+void TDEIconEditGrid::loadBlank( int w, int h )
 {
   img->create(w, h, 32);
   img->setAlphaBuffer(true);
@@ -1009,9 +1009,9 @@ void KIconEditGrid::loadBlank( int w, int h )
 
 
 
-void KIconEditGrid::load( TQImage *image)
+void TDEIconEditGrid::load( TQImage *image)
 {
-    kdDebug(4640) << "KIconEditGrid::load" << endl;
+    kdDebug(4640) << "TDEIconEditGrid::load" << endl;
 
     setUpdatesEnabled(false);
 
@@ -1048,7 +1048,7 @@ void KIconEditGrid::load( TQImage *image)
     history->clear();
 }
 
-const TQPixmap &KIconEditGrid::pixmap()
+const TQPixmap &TDEIconEditGrid::pixmap()
 {
     if(!img->isNull())
         p = *img;
@@ -1056,13 +1056,13 @@ const TQPixmap &KIconEditGrid::pixmap()
     return(p);
 }
 
-void KIconEditGrid::getImage(TQImage *image)
+void TDEIconEditGrid::getImage(TQImage *image)
 {
-    kdDebug(4640) << "KIconEditGrid::getImage" << endl;
+    kdDebug(4640) << "TDEIconEditGrid::getImage" << endl;
     *image = *img;
 }
 
-bool KIconEditGrid::zoomTo(int scale)
+bool TDEIconEditGrid::zoomTo(int scale)
 {
     TQApplication::setOverrideCursor(waitCursor);
     setUpdatesEnabled(false);
@@ -1077,7 +1077,7 @@ bool KIconEditGrid::zoomTo(int scale)
     return true;
 }
 
-bool KIconEditGrid::zoom(Direction d)
+bool TDEIconEditGrid::zoom(Direction d)
 {
     int f = (d == DirIn) ? (cellSize()+1) : (cellSize()-1);
     TQApplication::setOverrideCursor(waitCursor);
@@ -1093,7 +1093,7 @@ bool KIconEditGrid::zoom(Direction d)
     return true;
 }
 
-void KIconEditGrid::checkClipboard()
+void TDEIconEditGrid::checkClipboard()
 {
   bool ok = false;
   TQImage tmp = clipboardImage(ok);
@@ -1105,7 +1105,7 @@ void KIconEditGrid::checkClipboard()
   }
 }
 
-TQImage KIconEditGrid::clipboardImage(bool &ok)
+TQImage TDEIconEditGrid::clipboardImage(bool &ok)
 {
   //###### Remove me later.
   //Workaround TQt bug -- check whether format provided first.
@@ -1141,7 +1141,7 @@ TQImage KIconEditGrid::clipboardImage(bool &ok)
 }
 
 
-void KIconEditGrid::editSelectAll()
+void TDEIconEditGrid::editSelectAll()
 {
     start.setX(0);
     start.setY(0);
@@ -1152,7 +1152,7 @@ void KIconEditGrid::editSelectAll()
     emit newmessage(i18n("All selected"));
 }
 
-void KIconEditGrid::editClear()
+void TDEIconEditGrid::editClear()
 {
     clearImage(img);
     fill(TRANSPARENT);
@@ -1163,7 +1163,7 @@ void KIconEditGrid::editClear()
     emit newmessage(i18n("Cleared"));
 }
 
-TQImage KIconEditGrid::getSelection(bool cut)
+TQImage TDEIconEditGrid::getSelection(bool cut)
 {
     const TQRect rect = pntarray.boundingRect();
     int nx = 0, ny = 0, nw = 0, nh = 0;
@@ -1211,19 +1211,19 @@ TQImage KIconEditGrid::getSelection(bool cut)
     return tmp;
 }
 
-void KIconEditGrid::editCopy(bool cut)
+void TDEIconEditGrid::editCopy(bool cut)
 {
     kapp->clipboard()->setImage(getSelection(cut));
     isselecting = false;
 }
 
 
-void KIconEditGrid::editPaste(bool paste)
+void TDEIconEditGrid::editPaste(bool paste)
 {
     bool ok = false;
     TQImage tmp = clipboardImage(ok);
 
-    KIconEditProperties *props = KIconEditProperties::self();
+    TDEIconEditProperties *props = TDEIconEditProperties::self();
 
     if(ok)
     {
@@ -1247,7 +1247,7 @@ void KIconEditGrid::editPaste(bool paste)
         }
         else
         {
-            //kdDebug(4640) << "KIconEditGrid: Pasting at: " << insrect.x() << " x " << insrect.y() << endl;
+            //kdDebug(4640) << "TDEIconEditGrid: Pasting at: " << insrect.x() << " x " << insrect.y() << endl;
             TQApplication::setOverrideCursor(waitCursor);
 
             for(int y = insrect.y(), ny = 0; y < numRows() && ny < insrect.height(); y++, ny++)
@@ -1362,7 +1362,7 @@ void KIconEditGrid::editPaste(bool paste)
 }
 
 
-void KIconEditGrid::editPasteAsNew()
+void TDEIconEditGrid::editPasteAsNew()
 {
     bool ok = false;
     TQImage tmp = clipboardImage(ok);
@@ -1371,7 +1371,7 @@ void KIconEditGrid::editPasteAsNew()
     {
         if(isModified())
         {
-            KIconEdit *w = new KIconEdit(tmp);
+            TDEIconEdit *w = new TDEIconEdit(tmp);
             TQ_CHECK_PTR(w);
         }
         else
@@ -1397,9 +1397,9 @@ void KIconEditGrid::editPasteAsNew()
 }
 
 
-void KIconEditGrid::editResize()
+void TDEIconEditGrid::editResize()
 {
-    kdDebug(4640) << "KIconGrid::editResize" << endl;
+    kdDebug(4640) << "TDEIconGrid::editResize" << endl;
     KResizeDialog *rs = new KResizeDialog(this, 0, TQSize(numCols(), numRows()));
     if(rs->exec())
     {
@@ -1413,7 +1413,7 @@ void KIconEditGrid::editResize()
 }
 
 
-void KIconEditGrid::setSize(const TQSize s)
+void TDEIconEditGrid::setSize(const TQSize s)
 {
     kdDebug(4640) << "::setSize: " << s.width() << " x " << s.height() << endl;
 
@@ -1424,7 +1424,7 @@ void KIconEditGrid::setSize(const TQSize s)
 }
 
 
-void KIconEditGrid::createCursors()
+void TDEIconEditGrid::createCursors()
 {
   TQBitmap mask(22, 22);
   TQPixmap pix;
@@ -1435,7 +1435,7 @@ void KIconEditGrid::createCursors()
   if(pix.isNull())
   {
     cursor_colorpicker = cursor_normal;
-    kdDebug(4640) << "KIconEditGrid: Error loading colorpicker-cursor.xpm" << endl;
+    kdDebug(4640) << "TDEIconEditGrid: Error loading colorpicker-cursor.xpm" << endl;
   }
   else
   {
@@ -1448,7 +1448,7 @@ void KIconEditGrid::createCursors()
   if(pix.isNull())
   {
     cursor_paint = cursor_normal;
-    kdDebug(4640) << "KIconEditGrid: Error loading paintbrush.xpm" << endl;
+    kdDebug(4640) << "TDEIconEditGrid: Error loading paintbrush.xpm" << endl;
   }
   else
   {
@@ -1461,7 +1461,7 @@ void KIconEditGrid::createCursors()
   if(pix.isNull())
   {
     cursor_flood = cursor_normal;
-    kdDebug(4640) << "KIconEditGrid: Error loading fill-cursor.xpm" << endl;
+    kdDebug(4640) << "TDEIconEditGrid: Error loading fill-cursor.xpm" << endl;
   }
   else
   {
@@ -1474,7 +1474,7 @@ void KIconEditGrid::createCursors()
   if(pix.isNull())
   {
     cursor_aim = cursor_normal;
-    kdDebug(4640) << "KIconEditGrid: Error loading aim-cursor.xpm" << endl;
+    kdDebug(4640) << "TDEIconEditGrid: Error loading aim-cursor.xpm" << endl;
   }
   else
   {
@@ -1487,7 +1487,7 @@ void KIconEditGrid::createCursors()
   if(pix.isNull())
   {
     cursor_spray = cursor_normal;
-    kdDebug(4640) << "KIconEditGrid: Error loading airbrush-cursor.xpm" << endl;
+    kdDebug(4640) << "TDEIconEditGrid: Error loading airbrush-cursor.xpm" << endl;
   }
   else
   {
@@ -1500,7 +1500,7 @@ void KIconEditGrid::createCursors()
   if(pix.isNull())
   {
     cursor_erase = cursor_normal;
-    kdDebug(4640) << "KIconEditGrid: Error loading eraser-cursor.xpm" << endl;
+    kdDebug(4640) << "TDEIconEditGrid: Error loading eraser-cursor.xpm" << endl;
   }
   else
   {
@@ -1512,7 +1512,7 @@ void KIconEditGrid::createCursors()
 
 
 
-void KIconEditGrid::setTool(DrawTool t)
+void TDEIconEditGrid::setTool(DrawTool t)
 {
     btndown = false;
     tool = t;
@@ -1560,7 +1560,7 @@ void KIconEditGrid::setTool(DrawTool t)
 }
 
 
-void KIconEditGrid::drawFlood(int x, int y, uint oldcolor)
+void TDEIconEditGrid::drawFlood(int x, int y, uint oldcolor)
 {
     if((!img->valid(x, y))
     || (colorAt((y * numCols())+x) != oldcolor)
@@ -1580,7 +1580,7 @@ void KIconEditGrid::drawFlood(int x, int y, uint oldcolor)
 }
 
 
-void KIconEditGrid::drawSpray(TQPoint point)
+void TDEIconEditGrid::drawSpray(TQPoint point)
 {
     int x = (point.x()-5);
     int y = (point.y()-5);
@@ -1601,7 +1601,7 @@ void KIconEditGrid::drawSpray(TQPoint point)
 
 
 //This routine is from TQt sources -- it's the branch of TQPointArray::makeEllipse( int x, int y, int w, int h ) that's not normally compiled
-//It seems like KIconEdit relied on the TQt1 semantics for makeEllipse, which broke
+//It seems like TDEIconEdit relied on the TQt1 semantics for makeEllipse, which broke
 //the tool with reasonably recent TQt versions.
 //Thankfully, TQt includes the old code #ifdef'd, which is hence included here
 static void TQPA_makeEllipse(TQPointArray& ar, int x, int y, int w, int h )
@@ -1677,7 +1677,7 @@ static void TQPA_makeEllipse(TQPointArray& ar, int x, int y, int w, int h )
 
 
 
-void KIconEditGrid::drawEllipse(bool drawit)
+void TDEIconEditGrid::drawEllipse(bool drawit)
 {
     if(drawit)
     {
@@ -1744,7 +1744,7 @@ void KIconEditGrid::drawEllipse(bool drawit)
 }
 
 
-void KIconEditGrid::drawRect(bool drawit)
+void TDEIconEditGrid::drawRect(bool drawit)
 {
     if(drawit)
     {
@@ -1806,7 +1806,7 @@ void KIconEditGrid::drawRect(bool drawit)
 }
 
 
-void KIconEditGrid::drawLine(bool drawit, bool drawStraight)
+void TDEIconEditGrid::drawLine(bool drawit, bool drawStraight)
 {
     if(drawit)
     {
@@ -1886,7 +1886,7 @@ void KIconEditGrid::drawLine(bool drawit, bool drawStraight)
 }
 
 
-void KIconEditGrid::drawPointArray(TQPointArray a, DrawAction action)
+void TDEIconEditGrid::drawPointArray(TQPointArray a, DrawAction action)
 {
     TQRect area( a.boundingRect().x()*cellSize()-1, a.boundingRect().y()*cellSize()-1,
                 a.boundingRect().width()*cellSize()+1, a.boundingRect().height()*cellSize()+1 );
@@ -1952,20 +1952,20 @@ void KIconEditGrid::drawPointArray(TQPointArray a, DrawAction action)
 	history->addCommand( macro, false );    }
 }
 
-void KIconEditGrid::updatePreviewPixmap()
+void TDEIconEditGrid::updatePreviewPixmap()
 {
     p = *img;
     emit changed(TQPixmap(p));
 }
 
 
-bool KIconEditGrid::isMarked(TQPoint point)
+bool TDEIconEditGrid::isMarked(TQPoint point)
 {
     return isMarked(point.x(), point.y());
 }
 
 
-bool KIconEditGrid::isMarked(int x, int y)
+bool TDEIconEditGrid::isMarked(int x, int y)
 {
     if(((y * numCols()) + x) == selected)
         return true;
@@ -2157,7 +2157,7 @@ static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
 }
 
 // this doesn't work the way it should but the way KPixmap does.
-void KIconEditGrid::mapToKDEPalette()
+void TDEIconEditGrid::mapToKDEPalette()
 {
     TQImage dest;
 
@@ -2207,7 +2207,7 @@ void KIconEditGrid::mapToKDEPalette()
 }
 
 
-void KIconEditGrid::grayScale()
+void TDEIconEditGrid::grayScale()
 {
     for(int y = 0; y < numRows(); y++)
     {
@@ -2227,7 +2227,7 @@ void KIconEditGrid::grayScale()
 }
 
 
-void KIconEditGrid::clearImage(TQImage *image)
+void TDEIconEditGrid::clearImage(TQImage *image)
 {
     if(image->depth() != 32)
     {
@@ -2249,7 +2249,7 @@ void KIconEditGrid::clearImage(TQImage *image)
 }
 
 
-void KIconEditGrid::setModified(bool m)
+void TDEIconEditGrid::setModified(bool m)
 {
     if(m != modified)
     {

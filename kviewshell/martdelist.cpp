@@ -63,7 +63,7 @@ ThumbnailWidget::ThumbnailWidget(MarkListWidget* _parent, const PageNumber& _pag
 
   if (!waitIcon)
   {
-    waitIcon = new TQPixmap(TDEGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
+    waitIcon = new TQPixmap(TDEGlobal::iconLoader()->loadIcon("gear", TDEIcon::NoGroup, TDEIcon::SizeMedium));
   }
 }
 

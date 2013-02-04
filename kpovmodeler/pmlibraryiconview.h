@@ -60,7 +60,7 @@ private:
 /**
  * This class provides a view to browse objects, showing their previews.
  */
-class PMLibraryIconView: public KIconView
+class PMLibraryIconView: public TDEIconView
 {
    Q_OBJECT
   
@@ -98,7 +98,7 @@ private:
  * This class holds a library object's icon. It also remembers the path
  * where the file is.
  */
-class PMLibraryIconViewItem: public KIconViewItem
+class PMLibraryIconViewItem: public TDEIconViewItem
 {
 public:
    PMLibraryIconViewItem( TQIconView *parent, const TQString& text, const TQString& path, bool isSubLibrary );

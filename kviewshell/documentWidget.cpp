@@ -90,7 +90,7 @@ DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache
 
   if (!busyIcon)
   {
-    busyIcon = new TQPixmap(TDEGlobal::iconLoader()->loadIcon("gear", KIcon::NoGroup, KIcon::SizeMedium));
+    busyIcon = new TQPixmap(TDEGlobal::iconLoader()->loadIcon("gear", TDEIcon::NoGroup, TDEIcon::SizeMedium));
 
     URShadow = new TQPixmap();
     BRShadow = new TQPixmap();

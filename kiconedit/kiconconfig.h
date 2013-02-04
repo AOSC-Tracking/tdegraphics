@@ -76,7 +76,7 @@ protected slots:
   void checkSelection(int);
 
 protected:
-  KIconListBox *templates;
+  TDEIconListBox *templates;
   TQPushButton *btadd, *btedit, *btremove;
 };
 
@@ -134,15 +134,15 @@ protected:
   TQComboBox *m_checkerboardSizeCombo;
 };
 
-class KIconConfig : public KDialogBase
+class TDEIconConfig : public KDialogBase
 {
   Q_OBJECT
   
 
 public:
   
-  KIconConfig(TQWidget *parent);
-  ~KIconConfig();
+  TDEIconConfig(TQWidget *parent);
+  ~TDEIconConfig();
 
 protected slots:
   void slotApply();

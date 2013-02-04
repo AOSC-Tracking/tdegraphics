@@ -39,7 +39,7 @@ class TQIconViewItem;
 class KCamera;
 class KameraDeviceSelectDialog;
 class KSimpleConfig;
-class KIconView;
+class TDEIconView;
 class TDEActionCollection;
 class TDEToolBar;
 class TDEPopupMenu;
@@ -100,7 +100,7 @@ private:
 	GPContext *m_context;
 
 	// widgets for the cameras listview
-	KIconView *m_deviceSel;
+	TDEIconView *m_deviceSel;
 	TDEActionCollection *m_actions;
 	TQPushButton *m_addCamera, *m_removeCamera, *m_testCamera, *m_configureCamera;
 	TDEToolBar *m_toolbar;

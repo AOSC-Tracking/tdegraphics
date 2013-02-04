@@ -42,7 +42,7 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char **argv)
 {
-  TDEAboutData aboutData( "kiconedit", I18N_NOOP("KIconEdit"),
+  TDEAboutData aboutData( "kiconedit", I18N_NOOP("TDEIconEdit"),
     VERSION, description, TDEAboutData::License_GPL,
     "(c) 1998, Thomas Tanghus");
 
@@ -63,27 +63,27 @@ int main(int argc, char **argv)
 
   if (a.isRestored())
   {
-    RESTORE(KIconEdit);
+    RESTORE(TDEIconEdit);
   }
   else
   {
     TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
     for(int i = 0; i < args->count(); i++)
     {
-        KIconEdit *ki = new KIconEdit(args->url(i), "kiconedit");
+        TDEIconEdit *ki = new TDEIconEdit(args->url(i), "kiconedit");
         TQ_CHECK_PTR(ki);
     }
 
     if (args->count() == 0)
     {
-        KIconEdit *ki = new KIconEdit;
+        TDEIconEdit *ki = new TDEIconEdit;
         TQ_CHECK_PTR(ki);
     }
     args->clear();
   }
 
   int rc = a.exec();
-  delete KIconEditProperties::self();
+  delete TDEIconEditProperties::self();
   return rc;
 }
 

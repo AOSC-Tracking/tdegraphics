@@ -49,7 +49,7 @@
 static inline TQPixmap loadIcon( const char * name )
 {
   return TDEGlobal::instance()->iconLoader()
-    ->loadIcon( TQString::fromLatin1(name), KIcon::NoGroup, KIcon::SizeMedium );
+    ->loadIcon( TQString::fromLatin1(name), TDEIcon::NoGroup, TDEIcon::SizeMedium );
 }
 
 KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent) 
@@ -121,7 +121,7 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
   TQGroupBox* grp = new TQGroupBox( i18n( "Templates" ), this );
   grp->setColumnLayout( 0, Qt::Horizontal );
 
-  templates = new KIconListBox( grp );
+  templates = new TDEIconListBox( grp );
   connect( templates, TQT_SIGNAL( highlighted( int ) ), 
       TQT_SLOT( checkSelection( int ) ) );
   connect( templates, TQT_SIGNAL(doubleClicked( TQListBoxItem * ) ), 
@@ -133,8 +133,8 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
   TQVBoxLayout* l = new  TQVBoxLayout( grp->layout(), KDialog::spacingHint() );
   l->addWidget( templates );
 
-  for( unsigned int i = 0; i <  KIconTemplateContainer::self()->count(); i++ )
-    templates->insertItem( new KIconListBoxItem( *KIconTemplateContainer::self()->at( i ) ) ) ;
+  for( unsigned int i = 0; i <  TDEIconTemplateContainer::self()->count(); i++ )
+    templates->insertItem( new TDEIconListBoxItem( *TDEIconTemplateContainer::self()->at( i ) ) ) ;
 
   KButtonBox *bbox = new KButtonBox( grp );
 
@@ -163,13 +163,13 @@ void KTemplateConfig::saveSettings()
 {
   kdDebug(4640) << "KTemplateConfig::saveSettings" << endl;
   
-  KIconTemplateContainer::self()->clear();
+  TDEIconTemplateContainer::self()->clear();
 
   for(int i = 0; i < (int)templates->count(); i++)
   {
-      KIconTemplateContainer::self()->append(templates->iconTemplate(i));
+      TDEIconTemplateContainer::self()->append(templates->iconTemplate(i));
   }
-  KIconTemplateContainer::self()->save();
+  TDEIconTemplateContainer::self()->save();
   kdDebug(4640) << "KTemplateConfig::saveSettings - done" << endl;
 
 }
@@ -200,10 +200,10 @@ void KTemplateConfig::add()
   KTemplateEditDlg dlg(this);
   if(dlg.exec())
   {
-    KIconTemplate it;
+    TDEIconTemplate it;
     it.path = dlg.path();
     it.title = dlg.name();
-    templates->insertItem(new KIconListBoxItem(it));
+    templates->insertItem(new TDEIconListBoxItem(it));
   }
 }
 
@@ -216,10 +216,10 @@ void KTemplateConfig::edit()
   if(dlg.exec())
   {
     //Edit the entry
-    KIconTemplate &it=templates->iconTemplate(templates->currentItem());
+    TDEIconTemplate &it=templates->iconTemplate(templates->currentItem());
     it.path = dlg.path();
     it.title = dlg.name();
-    static_cast<KIconListBoxItem*>(templates->item(templates->currentItem()))->reloadIcon();
+    static_cast<TDEIconListBoxItem*>(templates->item(templates->currentItem()))->reloadIcon();
     templates->update();
   }
 }
@@ -231,7 +231,7 @@ KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
 
   lb_ex = 0L;
 
-  KIconEditProperties *props = KIconEditProperties::self();
+  TDEIconEditProperties *props = TDEIconEditProperties::self();
 
   pixpath = props->bgPixmap();
   pix.load(pixpath);
@@ -338,7 +338,7 @@ void KBackgroundConfig::slotBackgroundMode(int id)
 void KBackgroundConfig::saveSettings()
 {
   kdDebug(4640) << "KBackgroundConfig::saveSettings" << endl;
-  KIconEditProperties *props = KIconEditProperties::self();
+  TDEIconEditProperties *props = TDEIconEditProperties::self();
   props->setBgMode( bgmode );
   props->setBgPixmap( pixpath );
   props->setBgColor( btcolor->color() );
@@ -377,7 +377,7 @@ KMiscConfig::KMiscConfig(TQWidget *parent) : TQWidget(parent)
 {
   kdDebug(4640) << "KMiscConfig - constructor" << endl;
 
-  KIconEditProperties* props = KIconEditProperties::self();
+  TDEIconEditProperties* props = TDEIconEditProperties::self();
 
   TQBoxLayout *ml = new TQVBoxLayout( this, 0, 5 );
 
@@ -441,7 +441,7 @@ KMiscConfig::KMiscConfig(TQWidget *parent) : TQWidget(parent)
   grid->addWidget(label, 2, 1);
   grid->addWidget(m_checkerboardColor2Button, 2, 2);
 
-  if(props->transparencyDisplayType() == KIconEditGrid::TRD_CHECKERBOARD)
+  if(props->transparencyDisplayType() == TDEIconEditGrid::TRD_CHECKERBOARD)
   {
     checkerboardRButton->setChecked(true);
     m_checkerboardColor1Button->setEnabled(true);
@@ -476,20 +476,20 @@ KMiscConfig::~KMiscConfig()
 void KMiscConfig::saveSettings()
 {
   kdDebug(4640) << "KMiscConfig::saveSettings" << endl;
-  KIconEditProperties* props =  KIconEditProperties::self();
+  TDEIconEditProperties* props =  TDEIconEditProperties::self();
   props->setPasteTransparent( pastemode );
   props->setShowRulers( showrulers );
   if(m_solidColorButton->isEnabled())
   {
-    props->setTransparencyDisplayType(KIconEditGrid::TRD_SOLIDCOLOR);
+    props->setTransparencyDisplayType(TDEIconEditGrid::TRD_SOLIDCOLOR);
     props->setTransparencySolidColor(m_solidColorButton->color());
   }
   else
   {
-    props->setTransparencyDisplayType(KIconEditGrid::TRD_CHECKERBOARD);
+    props->setTransparencyDisplayType(TDEIconEditGrid::TRD_CHECKERBOARD);
     props->setCheckerboardColor1(m_checkerboardColor1Button->color());
     props->setCheckerboardColor2(m_checkerboardColor2Button->color());
-    props->setCheckerboardSize((KIconEditGrid::CheckerboardSize)m_checkerboardSizeCombo->currentItem());
+    props->setCheckerboardSize((TDEIconEditGrid::CheckerboardSize)m_checkerboardSizeCombo->currentItem());
   }
 }
 
@@ -524,7 +524,7 @@ void KMiscConfig::slotTransparencyDisplayType(int id)
   }
 }
 
-KIconConfig::KIconConfig(TQWidget *parent)
+TDEIconConfig::TDEIconConfig(TQWidget *parent)
   : KDialogBase(KDialogBase::IconList, i18n("Configure"),
                          KDialogBase::Help |
                          KDialogBase::Ok |
@@ -554,34 +554,34 @@ KIconConfig::KIconConfig(TQWidget *parent)
   resize(min);
 }
 
-KIconConfig::~KIconConfig()
+TDEIconConfig::~TDEIconConfig()
 {
   //delete dict;
 }
 
-void KIconConfig::slotApply()
+void TDEIconConfig::slotApply()
 {
-  kdDebug(4640) << "KIconEditConfig::saveSettings" << endl;
+  kdDebug(4640) << "TDEIconEditConfig::saveSettings" << endl;
 
   temps->saveSettings();
   backs->saveSettings();
   misc->saveSettings();
 
-  for (KIconEdit* window = KIconEdit::windowList.first();
+  for (TDEIconEdit* window = TDEIconEdit::windowList.first();
          window;
-         window = KIconEdit::windowList.next())
+         window = TDEIconEdit::windowList.next())
   {
     window->updateProperties();
   }
 }
 
-void KIconConfig::slotOk()
+void TDEIconConfig::slotOk()
 {
     slotApply();
     KDialogBase::slotOk();
 }
 
-void KIconConfig::finis()
+void TDEIconConfig::finis()
 {
     delayedDestruct();
 }

@@ -96,12 +96,12 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
      m_mainWindow(parent),
      m_ocrResEdit(0)
 {
-   KIconLoader *loader = TDEGlobal::iconLoader();
+   TDEIconLoader *loader = TDEGlobal::iconLoader();
    scan_params = 0L;
    preview_canvas = 0L;
 
    m_mainDock = parent->createDockWidget( "Kookas MainDock",
-                                          loader->loadIcon( "folder_image", KIcon::Small ),
+                                          loader->loadIcon( "folder_image", TDEIcon::Small ),
                                           0L, i18n("Image Viewer"));
    m_mainDock->setEnableDocking(KDockWidget::DockNone );
    m_mainDock->setDockSite( KDockWidget::DockFullSite );
@@ -122,7 +122,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    /** Thumbview **/
    m_dockThumbs = parent->createDockWidget( "Thumbs",
-					    loader->loadIcon( "thumbnail", KIcon::Small ),
+					    loader->loadIcon( "thumbnail", TDEIcon::Small ),
 					    0L,  i18n("Thumbnails"));
    m_dockThumbs->setDockSite(KDockWidget::DockFullSite );
 
@@ -137,7 +137,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    /** Packager Dock **/
    /* A new packager to contain the already scanned images */
    m_dockPackager = parent->createDockWidget( "Scanpackager",
-					    loader->loadIcon( "palette_color", KIcon::Small ),
+					    loader->loadIcon( "palette_color", TDEIcon::Small ),
 					    0L, i18n("Gallery"));
    m_dockPackager->setDockSite(KDockWidget::DockFullSite);
    packager = new ScanPackager( m_dockPackager );
@@ -156,7 +156,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
     * Create a Kombobox that holds the last folders visible even on the preview page
     */
    m_dockRecent  = parent->createDockWidget( "Recent",
-					     loader->loadIcon( "image", KIcon::Small ),
+					     loader->loadIcon( "image", TDEIcon::Small ),
 					     0L, i18n("Gallery Folders"));
 
    m_dockRecent->setDockSite(KDockWidget::DockFullSite);
@@ -185,7 +185,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
 
    /* the object from the kscan lib to handle low level scanning */
    m_dockScanParam = parent->createDockWidget( "Scan Parameter",
- 					     loader->loadIcon( "folder", KIcon::Small ),
+ 					     loader->loadIcon( "folder", TDEIcon::Small ),
  					     0L, i18n("Scan Parameter"));
    //
    m_dockScanParam->setDockSite(KDockWidget::DockFullSite);
@@ -204,7 +204,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
     * scan_params must be zero for that */
 
    m_dockPreview = parent->createDockWidget( "Preview ",
-					   loader->loadIcon( "viewmag", KIcon::Small ),
+					   loader->loadIcon( "viewmag", TDEIcon::Small ),
 					   0L, i18n("Scan Preview"));
 
    preview_canvas = new Previewer( m_dockPreview );
@@ -223,7 +223,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    /* Create a text editor part for ocr results */
 
    m_dockOCRText = parent->createDockWidget( "OCRResults",
-                                             loader->loadIcon("edit", KIcon::Small ),
+                                             loader->loadIcon("edit", TDEIcon::Small ),
                                              0L, i18n("OCR Result Text"));
    // m_textEdit
    m_ocrResEdit  = new ocrResEdit( m_dockOCRText );

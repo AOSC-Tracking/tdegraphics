@@ -43,13 +43,13 @@
 
 class TQImage;
 
-class KIconEditIcon : public TQObject
+class TDEIconEditIcon : public TQObject
 {
   Q_OBJECT
   
 public:
-  KIconEditIcon(TQObject*, const TQImage*, KURL url = KURL() );
-  ~KIconEditIcon();
+  TDEIconEditIcon(TQObject*, const TQImage*, KURL url = KURL() );
+  ~TDEIconEditIcon();
 
   bool isLocal() { return local; }
   TQString url() { return _url; }

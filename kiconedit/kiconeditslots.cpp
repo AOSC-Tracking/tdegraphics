@@ -37,9 +37,9 @@
 #include "pics/logo.xpm"
 #endif
 
-void KIconEdit::updateProperties()
+void TDEIconEdit::updateProperties()
 {
-    KIconEditProperties *props = KIconEditProperties::self();
+    TDEIconEditProperties *props = TDEIconEditProperties::self();
     gridview->setShowRulers(props->showRulers());
     if(props->bgMode() == TQWidget::FixedPixmap)
     {
@@ -66,16 +66,16 @@ void KIconEdit::updateProperties()
     grid->update();
 }
 
-void KIconEdit::slotNewWin(const TQString & url)
+void TDEIconEdit::slotNewWin(const TQString & url)
 {
-    //kdDebug(4640) << "KIconEdit::openNewWin() - " << url << endl;
+    //kdDebug(4640) << "TDEIconEdit::openNewWin() - " << url << endl;
 
-    KIconEdit *w = new KIconEdit(KURL(url), "kiconedit");
+    TDEIconEdit *w = new TDEIconEdit(KURL(url), "kiconedit");
     TQ_CHECK_PTR(w);
 }
 
 
-void KIconEdit::slotNew()
+void TDEIconEdit::slotNew()
 {
     bool cancel = false;
     if (grid->isModified())
@@ -129,7 +129,7 @@ void KIconEdit::slotNew()
 }
 
 
-void KIconEdit::slotOpen()
+void TDEIconEdit::slotOpen()
 {
     bool cancel = false;
 
@@ -171,27 +171,27 @@ void KIconEdit::slotOpen()
 /*
     close only the current window
 */
-void KIconEdit::slotClose()
+void TDEIconEdit::slotClose()
 {
-    //kdDebug(4640) << "KIconEdit: Closing " <<  endl;
+    //kdDebug(4640) << "TDEIconEdit: Closing " <<  endl;
     close();
 }
 
-void KIconEdit::slotSave()
+void TDEIconEdit::slotSave()
 {
-    //kdDebug(4640) << "KIconEdit: slotSave() " << endl;
+    //kdDebug(4640) << "TDEIconEdit: slotSave() " << endl;
     icon->save(&grid->image());
 }
 
 
-void KIconEdit::slotSaveAs()
+void TDEIconEdit::slotSaveAs()
 {
-    //kdDebug(4640) << "KIconEdit: slotSaveAs() " << endl;
+    //kdDebug(4640) << "TDEIconEdit: slotSaveAs() " << endl;
     icon->saveAs(&grid->image());
 }
 
 
-void KIconEdit::slotPrint()
+void TDEIconEdit::slotPrint()
 {
     KPrinter printer;
 
@@ -214,66 +214,66 @@ void KIconEdit::slotPrint()
   }
 }
 
-void KIconEdit::slotZoomIn()
+void TDEIconEdit::slotZoomIn()
 {
     grid->zoom(DirIn);
 }
 
-void KIconEdit::slotZoomOut()
+void TDEIconEdit::slotZoomOut()
 {
     grid->zoom(DirOut);
 }
 
-void KIconEdit::slotZoom1()
+void TDEIconEdit::slotZoom1()
 {
     grid->zoomTo(1);
 }
 
-void KIconEdit::slotZoom2()
+void TDEIconEdit::slotZoom2()
 {
     grid->zoomTo(2);
 }
 
-void KIconEdit::slotZoom5()
+void TDEIconEdit::slotZoom5()
 {
     grid->zoomTo(5);
 }
 
-void KIconEdit::slotZoom10()
+void TDEIconEdit::slotZoom10()
 {
     grid->zoomTo(10);
 }
 
-void KIconEdit::slotCopy()
+void TDEIconEdit::slotCopy()
 {
     grid->editCopy();
 }
 
-void KIconEdit::slotCut()
+void TDEIconEdit::slotCut()
 {
     grid->editCopy(true);
 }
 
-void KIconEdit::slotPaste()
+void TDEIconEdit::slotPaste()
 {
     static_cast<TDERadioAction*>(actionCollection()
         ->action("tool_find_pixel"))->setChecked(true);
-    grid->setTool(KIconEditGrid::Find);
+    grid->setTool(TDEIconEditGrid::Find);
     grid->editPaste();
 }
 
-void KIconEdit::slotClear()
+void TDEIconEdit::slotClear()
 {
     grid->editClear();
 }
 
-void KIconEdit::slotSelectAll()
+void TDEIconEdit::slotSelectAll()
 {
-    grid->setTool(KIconEditGrid::SelectRect);
+    grid->setTool(TDEIconEditGrid::SelectRect);
     grid->editSelectAll();
 }
 
-void KIconEdit::slotOpenRecent(const KURL& iconFile)
+void TDEIconEdit::slotOpenRecent(const KURL& iconFile)
 {
     bool cancel = false;
 
@@ -312,18 +312,18 @@ void KIconEdit::slotOpenRecent(const KURL& iconFile)
     }
 }
 
-void KIconEdit::slotConfigureSettings()
+void TDEIconEdit::slotConfigureSettings()
 {
-    KIconConfig* c = new KIconConfig(this);
+    TDEIconConfig* c = new TDEIconConfig(this);
     c->exec();
     delete c;
 }
 
-void KIconEdit::slotConfigureKeys()
+void TDEIconEdit::slotConfigureKeys()
 {
     KKeyDialog::configure(actionCollection());
 
-    KIconEdit *ki = 0L;
+    TDEIconEdit *ki = 0L;
     for (ki = windowList.first(); ki; ki = windowList.next())
     {
         if (ki != this)
@@ -333,134 +333,134 @@ void KIconEdit::slotConfigureKeys()
     }
 }
 
-void KIconEdit::slotShowGrid()
+void TDEIconEdit::slotShowGrid()
 {
-  bool b = KIconEditProperties::self()->showGrid();
+  bool b = TDEIconEditProperties::self()->showGrid();
   grid->setGrid( !b );
-  KIconEditProperties::self()->setShowGrid( !b );
+  TDEIconEditProperties::self()->setShowGrid( !b );
 }
 
-void KIconEdit::slotToolPointer()
+void TDEIconEdit::slotToolPointer()
 {
-    grid->setTool(KIconEditGrid::Find);
+    grid->setTool(TDEIconEditGrid::Find);
 }
 
-void KIconEdit::slotToolFreehand()
+void TDEIconEdit::slotToolFreehand()
 {
-    grid->setTool(KIconEditGrid::Freehand);
+    grid->setTool(TDEIconEditGrid::Freehand);
 }
 
-void KIconEdit::slotToolRectangle()
+void TDEIconEdit::slotToolRectangle()
 {
-    grid->setTool(KIconEditGrid::Rect);
+    grid->setTool(TDEIconEditGrid::Rect);
 }
 
-void KIconEdit::slotToolFilledRectangle()
+void TDEIconEdit::slotToolFilledRectangle()
 {
-    grid->setTool(KIconEditGrid::FilledRect);
+    grid->setTool(TDEIconEditGrid::FilledRect);
 }
 
-void KIconEdit::slotToolCircle()
+void TDEIconEdit::slotToolCircle()
 {
-    grid->setTool(KIconEditGrid::Circle);
+    grid->setTool(TDEIconEditGrid::Circle);
 }
 
-void KIconEdit::slotToolFilledCircle()
+void TDEIconEdit::slotToolFilledCircle()
 {
-    grid->setTool(KIconEditGrid::FilledCircle);
+    grid->setTool(TDEIconEditGrid::FilledCircle);
 }
 
-void KIconEdit::slotToolEllipse()
+void TDEIconEdit::slotToolEllipse()
 {
-    grid->setTool(KIconEditGrid::Ellipse);
+    grid->setTool(TDEIconEditGrid::Ellipse);
 }
 
-void KIconEdit::slotToolFilledEllipse()
+void TDEIconEdit::slotToolFilledEllipse()
 {
-    grid->setTool(KIconEditGrid::FilledEllipse);
+    grid->setTool(TDEIconEditGrid::FilledEllipse);
 }
 
-void KIconEdit::slotToolSpray()
+void TDEIconEdit::slotToolSpray()
 {
-    grid->setTool(KIconEditGrid::Spray);
+    grid->setTool(TDEIconEditGrid::Spray);
 }
 
-void KIconEdit::slotToolFlood()
+void TDEIconEdit::slotToolFlood()
 {
-    grid->setTool(KIconEditGrid::FloodFill);
+    grid->setTool(TDEIconEditGrid::FloodFill);
 }
 
-void KIconEdit::slotToolLine()
+void TDEIconEdit::slotToolLine()
 {
-    grid->setTool(KIconEditGrid::Line);
+    grid->setTool(TDEIconEditGrid::Line);
 }
 
-void KIconEdit::slotToolEraser()
+void TDEIconEdit::slotToolEraser()
 {
-    grid->setTool(KIconEditGrid::Eraser);
+    grid->setTool(TDEIconEditGrid::Eraser);
 }
 
-void KIconEdit::slotToolSelectRect()
+void TDEIconEdit::slotToolSelectRect()
 {
-    grid->setTool(KIconEditGrid::SelectRect);
+    grid->setTool(TDEIconEditGrid::SelectRect);
 }
 
-void KIconEdit::slotToolSelectCircle()
+void TDEIconEdit::slotToolSelectCircle()
 {
-    grid->setTool(KIconEditGrid::SelectCircle);
+    grid->setTool(TDEIconEditGrid::SelectCircle);
 }
 
-void KIconEdit::slotSaved()
+void TDEIconEdit::slotSaved()
 {
     grid->setModified(false);
 }
 
-void KIconEdit::slotUpdateZoom( int s )
+void TDEIconEdit::slotUpdateZoom( int s )
 {
     m_actZoomOut->setEnabled( s>1 );
 }
 
-void KIconEdit::slotUpdateStatusPos(int x, int y)
+void TDEIconEdit::slotUpdateStatusPos(int x, int y)
 {
     TQString str = i18n("Status Position", "%1, %2").arg(x).arg(y);
     statusbar->changeItem( str, 0);
 }
 
-void KIconEdit::slotUpdateStatusSize(int x, int y)
+void TDEIconEdit::slotUpdateStatusSize(int x, int y)
 {
     TQString str = i18n("Status Size", "%1 x %2").arg(x).arg(y);
     statusbar->changeItem( str, 1);
 }
 
-void KIconEdit::slotUpdateStatusScaling(int s)
+void TDEIconEdit::slotUpdateStatusScaling(int s)
 {
-    KIconEditProperties::self()->setGridScale( s );
+    TDEIconEditProperties::self()->setGridScale( s );
     TQString str;
 
     str.sprintf("1:%d", s);
     statusbar->changeItem( str, 2);
 }
 
-void KIconEdit::slotUpdateStatusColors(uint)
+void TDEIconEdit::slotUpdateStatusColors(uint)
 {
     TQString str = i18n("Colors: %1").arg(grid->numColors());
     statusbar->changeItem( str, 3);
 }
 
-void KIconEdit::slotUpdateStatusColors(uint n, uint *)
+void TDEIconEdit::slotUpdateStatusColors(uint n, uint *)
 {
     TQString str = i18n("Colors: %1").arg(n);
     statusbar->changeItem( str, 3);
 }
 
 
-void KIconEdit::slotUpdateStatusMessage(const TQString & msg)
+void TDEIconEdit::slotUpdateStatusMessage(const TQString & msg)
 {
     statusbar->changeItem( msg, 4);
 }
 
 
-void KIconEdit::slotUpdateStatusName(const TQString & name)
+void TDEIconEdit::slotUpdateStatusName(const TQString & name)
 {
     m_name = name;
 
@@ -475,32 +475,32 @@ void KIconEdit::slotUpdateStatusName(const TQString & name)
 }
 
 
-void KIconEdit::slotUpdateStatusModified(bool)
+void TDEIconEdit::slotUpdateStatusModified(bool)
 {
     slotUpdateStatusName(m_name);
 }
 
-void KIconEdit::slotUpdatePaste(bool state)
+void TDEIconEdit::slotUpdatePaste(bool state)
 {
     m_actPaste->setEnabled(state);
     m_actPasteNew->setEnabled(state);
 }
 
 
-void KIconEdit::slotUpdateCopy(bool state)
+void TDEIconEdit::slotUpdateCopy(bool state)
 {
     m_actCopy->setEnabled(state);
     m_actCut->setEnabled(state);
 }
 
 
-void KIconEdit::slotOpenBlank(const TQSize s)
+void TDEIconEdit::slotOpenBlank(const TQSize s)
 {
     grid->loadBlank( s.width(), s.height());
 }
 
 
-void KIconEdit::dragEnterEvent(TQDragEnterEvent* e)
+void TDEIconEdit::dragEnterEvent(TQDragEnterEvent* e)
 {
   e->accept(KURLDrag::canDecode(e));
 }
@@ -510,7 +510,7 @@ void KIconEdit::dragEnterEvent(TQDragEnterEvent* e)
     accept drop of a file - opens file in current window
     old code to drop image, as image, should be removed
 */
-void KIconEdit::dropEvent( TQDropEvent *e )
+void TDEIconEdit::dropEvent( TQDropEvent *e )
 {
     //kdDebug(4640) << "Got TQDropEvent!" << endl;
 

@@ -606,13 +606,13 @@ static TQIconSet toolButtonIconSet (const TQString &iconName)
 
     TQPixmap disabledIcon = TDEGlobal::iconLoader ()->iconEffect ()->apply (
         UserIcon (iconName),
-        KIcon::Toolbar, KIcon::DisabledState);
+        TDEIcon::Toolbar, TDEIcon::DisabledState);
 
     const TQPixmap iconSetNormalIcon = iconSet.pixmap (TQIconSet::Small,
                                                       TQIconSet::Normal);
 
-    // I bet past or future versions of KIconEffect::apply() resize the
-    // disabled icon if we claim it's in group KIcon::Toolbar.  So resize
+    // I bet past or future versions of TDEIconEffect::apply() resize the
+    // disabled icon if we claim it's in group TDEIcon::Toolbar.  So resize
     // it to match the TQIconSet::Normal icon, just in case.
     disabledIcon = kpPixmapFX::scale (disabledIcon,
                                       iconSetNormalIcon.width (),

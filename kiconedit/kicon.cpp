@@ -32,7 +32,7 @@
 #include "kicon.h"
 #include "utils.h"
 
-KIconEditIcon::KIconEditIcon(TQObject *parent, const TQImage *img, KURL url) 
+TDEIconEditIcon::TDEIconEditIcon(TQObject *parent, const TQImage *img, KURL url) 
    : TQObject(parent)
 {
     f = 0;
@@ -46,23 +46,23 @@ KIconEditIcon::KIconEditIcon(TQObject *parent, const TQImage *img, KURL url)
 }
 
 
-KIconEditIcon::~KIconEditIcon()
+TDEIconEditIcon::~TDEIconEditIcon()
 {
 }
 
 
-bool KIconEditIcon::open(const TQImage *image, KURL url)
+bool TDEIconEditIcon::open(const TQImage *image, KURL url)
 {
     TQImage *img = (TQImage*)image;
 
     if(url.isEmpty())
         return false;
 
-    kdDebug(4640) << "KIconEditIcon::open " << url.prettyURL() << endl;
+    kdDebug(4640) << "TDEIconEditIcon::open " << url.prettyURL() << endl;
     
     if(!url.isValid()) // try to see if it is a relative filename
     {
-        kdDebug(4640) << "KIconEditIcon::open (malformed) " << url.prettyURL() << endl;
+        kdDebug(4640) << "TDEIconEditIcon::open (malformed) " << url.prettyURL() << endl;
 
         TQFileInfo fi(url.url());
         if(fi.isRelative())
@@ -106,7 +106,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
     }
     else
     {
-        kdDebug(4640) << "KIconEditIcon::open - Image loaded" << endl;
+        kdDebug(4640) << "TDEIconEditIcon::open - Image loaded" << endl;
         
         // _url is saved off for use in saving the image to the same 
         // file later - should include full path
@@ -119,7 +119,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
             _url = "";
         }
         
-        kdDebug(4640) << "KIcon: _url: " << _url << endl;
+        kdDebug(4640) << "TDEIcon: _url: " << _url << endl;
         
         // this causes updates of preview, color palettes, etc.    
         emit loaded(img);
@@ -132,7 +132,7 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
         
         emit addrecent(url.prettyURL());
         
-        kdDebug(4640) << "KIconEditIcon::open - done" << endl;
+        kdDebug(4640) << "TDEIconEditIcon::open - done" << endl;
     }
 
     return loadedOk;
@@ -140,9 +140,9 @@ bool KIconEditIcon::open(const TQImage *image, KURL url)
 
 
 
-bool KIconEditIcon::promptForFile(const TQImage *img)
+bool TDEIconEditIcon::promptForFile(const TQImage *img)
 {
-    kdDebug(4640) << "KIconEditIcon::promptForFile(const TQImage *img)" << endl;
+    kdDebug(4640) << "TDEIconEditIcon::promptForFile(const TQImage *img)" << endl;
     /*
     TQString filter = i18n("*|All Files (*)\n"
                         "*.xpm|XPM (*.xpm)\n"
@@ -167,9 +167,9 @@ bool KIconEditIcon::promptForFile(const TQImage *img)
 
 
 
-bool KIconEditIcon::saveAs(const TQImage *image)
+bool TDEIconEditIcon::saveAs(const TQImage *image)
 {
-    kdDebug(4640) << "KIconEditIcon::saveAs" << endl;
+    kdDebug(4640) << "TDEIconEditIcon::saveAs" << endl;
 
     TQString file;
 
@@ -223,9 +223,9 @@ bool KIconEditIcon::saveAs(const TQImage *image)
 
 
 
-bool KIconEditIcon::save(const TQImage *image, const TQString &_filename)
+bool TDEIconEditIcon::save(const TQImage *image, const TQString &_filename)
 {
-    kdDebug(4640) << "KIconEditIcon::save" << endl;
+    kdDebug(4640) << "TDEIconEditIcon::save" << endl;
     TQString filename = _filename;
 
     if(filename.isEmpty())
@@ -267,10 +267,10 @@ bool KIconEditIcon::save(const TQImage *image, const TQString &_filename)
     {
         TQString msg = i18n("There was an error saving:\n%1\n").arg(str);
         KMessageBox::error((TQWidget*)parent(), msg);
-        kdDebug(4640) << "KIconEditIcon::save - " << msg << endl;
+        kdDebug(4640) << "TDEIconEditIcon::save - " << msg << endl;
     }
 
-    kdDebug(4640) << "KIconEditIcon::save - done" << endl;    
+    kdDebug(4640) << "TDEIconEditIcon::save - done" << endl;    
 
     return savedOk;
 }

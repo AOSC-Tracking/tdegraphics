@@ -46,7 +46,7 @@ SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
   layout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
 
   stopButton = new TQPushButton(this, "stopButton");
-  stopButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("stop", KIcon::Small, KIcon::SizeSmall));
+  stopButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("stop", TDEIcon::Small, TDEIcon::SizeSmall));
   layout->addWidget(stopButton);
 
   searchLabel = new TQLabel(this, "searchLabel");
@@ -59,12 +59,12 @@ SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
   searchLabel->setBuddy(searchText);
 
   findPrevButton = new TQPushButton(this, "findPrevButton");
-  findPrevButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("back", KIcon::NoGroup, KIcon::SizeSmall));
+  findPrevButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("back", TDEIcon::NoGroup, TDEIcon::SizeSmall));
   TQToolTip::add(findPrevButton, i18n("Find previous"));
   layout->addWidget(findPrevButton);
 
   findNextButton = new TQPushButton(this, "findNextButton");
-  findNextButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("forward", KIcon::NoGroup, KIcon::SizeSmall));
+  findNextButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("forward", TDEIcon::NoGroup, TDEIcon::SizeSmall));
   TQToolTip::add(findNextButton, i18n("Find next"));
   layout->addWidget(findNextButton);
 

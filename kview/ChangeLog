@@ -83,7 +83,7 @@
 
 	* modules/effects/*:
 		New module: KViewEffects. I implemented a simple gamma
-                correction filter using KIconEffect::toGamma().
+                correction filter using TDEIconEffect::toGamma().
 	* kview.desktop:
 		Changed MimeType field to support pbm, pnm, ppm and pgm.
 		Is the image/x-png still needed?

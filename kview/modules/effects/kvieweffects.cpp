@@ -216,7 +216,7 @@ void KViewEffects::applyGammaCorrection()
 	TQImage * corrected = workImage();
 	if( corrected )
 	{
-		KIconEffect::toGamma( *corrected, m_gamma );
+		TDEIconEffect::toGamma( *corrected, m_gamma );
 		m_pViewer->canvas()->setImage( *corrected );
 		delete corrected;
 		m_lastgamma = m_gamma;

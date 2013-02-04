@@ -24,16 +24,16 @@
 
 #include "properties.h"
 
-KIconEditProperties* KIconEditProperties::m_self = 0;
+TDEIconEditProperties* TDEIconEditProperties::m_self = 0;
 
-KIconEditProperties* KIconEditProperties::self()
+TDEIconEditProperties* TDEIconEditProperties::self()
 {
     if (!m_self)
-        m_self = new KIconEditProperties();
+        m_self = new TDEIconEditProperties();
     return m_self;
 }
 
-KIconEditProperties::KIconEditProperties() : TQObject()
+TDEIconEditProperties::TDEIconEditProperties() : TQObject()
 {
     TDEConfig *config = kapp->config();
 
@@ -51,11 +51,11 @@ KIconEditProperties::KIconEditProperties() : TQObject()
 
     if(config->readEntry( "TransparencyDisplayType", "Checkerboard" ) == "Checkerboard")
     {
-      m_transparencyDisplayType = KIconEditGrid::TRD_CHECKERBOARD;
+      m_transparencyDisplayType = TDEIconEditGrid::TRD_CHECKERBOARD;
     }
     else
     {
-      m_transparencyDisplayType = KIconEditGrid::TRD_SOLIDCOLOR;
+      m_transparencyDisplayType = TDEIconEditGrid::TRD_SOLIDCOLOR;
     }
 
     TQColor checkColor1(255, 255, 255);
@@ -68,29 +68,29 @@ KIconEditProperties::KIconEditProperties() : TQObject()
 
     if(checkerboardSize == "Small")
     {
-      m_checkerboardSize = KIconEditGrid::CHK_SMALL;
+      m_checkerboardSize = TDEIconEditGrid::CHK_SMALL;
     }
     else
     if(checkerboardSize == "Medium")
     {
-      m_checkerboardSize = KIconEditGrid::CHK_MEDIUM;
+      m_checkerboardSize = TDEIconEditGrid::CHK_MEDIUM;
     }
     else
     {
-      m_checkerboardSize = KIconEditGrid::CHK_LARGE;
+      m_checkerboardSize = TDEIconEditGrid::CHK_LARGE;
     }
 
     TQColor solidColor(255, 255, 255);
     m_transparencySolidColor = config->readColorEntry( "TransparencySolidColor", &solidColor);
 }
 
-KIconEditProperties::~KIconEditProperties()
+TDEIconEditProperties::~TDEIconEditProperties()
 {
-  kdDebug(4640) << "KIconEditProperties: Deleting properties" << endl;
+  kdDebug(4640) << "TDEIconEditProperties: Deleting properties" << endl;
   m_self = 0;
 }
 
-void KIconEditProperties::save()
+void TDEIconEditProperties::save()
 {
     TDEConfig *config = kapp->config();
 
@@ -110,10 +110,10 @@ void KIconEditProperties::save()
 
     switch(m_transparencyDisplayType)
     {
-      case KIconEditGrid::TRD_SOLIDCOLOR:
+      case TDEIconEditGrid::TRD_SOLIDCOLOR:
         transparencyDisplayType = "SolidColor";
         break;
-      case KIconEditGrid::TRD_CHECKERBOARD:
+      case TDEIconEditGrid::TRD_CHECKERBOARD:
       default:
         transparencyDisplayType = "Checkerboard";
         break;
@@ -127,13 +127,13 @@ void KIconEditProperties::save()
 
     switch(m_checkerboardSize)
     {
-      case KIconEditGrid::CHK_SMALL:
+      case TDEIconEditGrid::CHK_SMALL:
         checkerboardSize = "Small";
         break;
-      case KIconEditGrid::CHK_MEDIUM:
+      case TDEIconEditGrid::CHK_MEDIUM:
         checkerboardSize = "Medium";
         break;
-      case KIconEditGrid::CHK_LARGE:
+      case TDEIconEditGrid::CHK_LARGE:
       default:
         checkerboardSize = "Large";
         break;

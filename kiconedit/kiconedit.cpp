@@ -31,9 +31,9 @@
 #include "kiconedit.h"
 #include "palettetoolbar.h"
 
-WindowList KIconEdit::windowList;
+WindowList TDEIconEdit::windowList;
 
-KIconEdit::KIconEdit(const TQImage image, const char *name)
+TDEIconEdit::TDEIconEdit(const TQImage image, const char *name)
  : TDEMainWindow(0, name)
 {
     init();
@@ -43,14 +43,14 @@ KIconEdit::KIconEdit(const TQImage image, const char *name)
     grid->setModified(true);
 }
 
-KIconEdit::KIconEdit(KURL url, const char *name)
+TDEIconEdit::TDEIconEdit(KURL url, const char *name)
  : TDEMainWindow(0, name)
 {
     init();
     icon->open(&img, url);
 }
 
-void KIconEdit::init()
+void TDEIconEdit::init()
 {
   setMinimumSize( 600, 540 );
 
@@ -64,7 +64,7 @@ void KIconEdit::init()
 
   gridview = new KGridView(&img, history, this);
   grid = gridview->grid();
-  icon = new KIconEditIcon(TQT_TQOBJECT(this), &grid->image());
+  icon = new TDEIconEditIcon(TQT_TQOBJECT(this), &grid->image());
 
   setAcceptDrops(true);
 
@@ -149,7 +149,7 @@ void KIconEdit::init()
   moveDockWindow( m_paletteToolBar, TQt::DockRight, true, 0 );
 }
 
-KIconEdit::~KIconEdit()
+TDEIconEdit::~TDEIconEdit()
 {
     windowList.remove(this);
 
@@ -159,7 +159,7 @@ KIconEdit::~KIconEdit()
     }
 }
 
-bool KIconEdit::queryClose()
+bool TDEIconEdit::queryClose()
 {
     bool cancel = false;
     if (grid->isModified())
@@ -192,17 +192,17 @@ bool KIconEdit::queryClose()
 }
 
 // this is for exit by request of the session manager
-void KIconEdit::saveProperties(TDEConfig *config )
+void TDEIconEdit::saveProperties(TDEConfig *config )
 {
-    kdDebug(4640) << "KIconEdit::saveProperties" << endl;
+    kdDebug(4640) << "TDEIconEdit::saveProperties" << endl;
 
     config->writePathEntry("Name", icon->url());
 }
 
 // this is for instances opened by the session manager
-void KIconEdit::readProperties(TDEConfig *config)
+void TDEIconEdit::readProperties(TDEConfig *config)
 {
-    kdDebug(4640) << "KIconEdit::readProperties" << endl;
+    kdDebug(4640) << "TDEIconEdit::readProperties" << endl;
 
     TQString entry = config->readPathEntry("Name"); // no default
     if (entry.isEmpty())  return;
@@ -212,17 +212,17 @@ void KIconEdit::readProperties(TDEConfig *config)
 /*
     this is for normal exits or request from "Options->Save options".
 */
-void KIconEdit::writeConfig()
+void TDEIconEdit::writeConfig()
 {
     TDEConfig *config = kapp->config();
     m_actRecent->saveEntries( kapp->config() );
 
-    KIconEditProperties::self()->save();
+    TDEIconEditProperties::self()->save();
 
     saveMainWindowSettings( config, "MainWindowSettings" );
 }
 
-TQSize KIconEdit::sizeHint() const
+TQSize TDEIconEdit::sizeHint() const
 {
     if(gridview)
         return gridview->sizeHint();
@@ -230,7 +230,7 @@ TQSize KIconEdit::sizeHint() const
         return TQSize(-1, -1);
 }
 
-void KIconEdit::setupActions()
+void TDEIconEdit::setupActions()
 {
   kdDebug(4640) << "setupActions" << endl;
 
@@ -346,7 +346,7 @@ void KIconEdit::setupActions()
   toggle->setCheckedState(i18n("Hide &Grid"));
   toggle->setWhatsThis( i18n( "Show grid\n\nToggles the grid in the icon"
       " edit grid on/off" ) );
-  toggle->setChecked( KIconEditProperties::self()->showGrid() );
+  toggle->setChecked( TDEIconEditProperties::self()->showGrid() );
 
   // Tools Menu
   toolAction = new TDERadioAction(i18n("Color Picker"), "colorpicker",
@@ -363,7 +363,7 @@ void KIconEdit::setupActions()
   toolAction->setWhatsThis(i18n("Free hand\n\nDraw non-linear lines"));
 
   toolAction->setChecked( true );
-  grid->setTool(KIconEditGrid::Freehand);
+  grid->setTool(TDEIconEditGrid::Freehand);
 
   toolAction = new TDERadioAction(i18n("Rectangle"), "rectangle",
       cut, TQT_TQOBJECT(this), TQT_SLOT(slotToolRectangle()), actionCollection(),
@@ -446,12 +446,12 @@ void KIconEdit::setupActions()
       " icon using the mouse."));
 }
 
-void KIconEdit::updateAccels()
+void TDEIconEdit::updateAccels()
 {
     actionCollection()->readShortcutSettings();
 }
 
-TQWidget *KIconEdit::createContainer( TQWidget *parent, int index,
+TQWidget *TDEIconEdit::createContainer( TQWidget *parent, int index,
         const TQDomElement &element, int &id )
 {
     if ( element.attribute( "name" ) == "paletteToolBar" )
@@ -464,7 +464,7 @@ TQWidget *KIconEdit::createContainer( TQWidget *parent, int index,
     return KXMLGUIBuilder::createContainer( parent, index, element, id );
 }
 
-bool KIconEdit::setupStatusBar()
+bool TDEIconEdit::setupStatusBar()
 {
     statusbar = statusBar();
 
@@ -489,7 +489,7 @@ bool KIconEdit::setupStatusBar()
     return true;
 }
 
-void KIconEdit::addRecent(const TQString & path)
+void TDEIconEdit::addRecent(const TQString & path)
 {
   m_actRecent->addURL(KURL( path ));
 }

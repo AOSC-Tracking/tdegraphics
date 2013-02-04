@@ -104,7 +104,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	m_toolbar->setMovingEnabled(false);
 	
 	// create list of devices
-	m_deviceSel = new KIconView(this);
+	m_deviceSel = new TDEIconView(this);
 
 	connect(m_deviceSel, TQT_SIGNAL(rightButtonClicked(TQIconViewItem *, const TQPoint &)),
 		TQT_SLOT(slot_deviceMenu(TQIconViewItem *, const TQPoint &)));

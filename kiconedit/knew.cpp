@@ -33,49 +33,49 @@
 
 #include "knew.h"
 
-KIconTemplateContainer* KIconTemplateContainer::instance = 0;
+TDEIconTemplateContainer* TDEIconTemplateContainer::instance = 0;
 
-void createStandardTemplates(KIconTemplateContainer *list)
+void createStandardTemplates(TDEIconTemplateContainer *list)
 {
-    KIconLoader *kil = TDEGlobal::iconLoader();
+    TDEIconLoader *kil = TDEGlobal::iconLoader();
 
-    KIconTemplate it;
-    it.path = kil->iconPath("standard", KIcon::User);
+    TDEIconTemplate it;
+    it.path = kil->iconPath("standard", TDEIcon::User);
     it.title = i18n("Standard File");
     list->append(it);
     
-    it.path = kil->iconPath("source", KIcon::User);
+    it.path = kil->iconPath("source", TDEIcon::User);
     it.title = i18n("Source File");
     list->append(it);
 
-    it.path = kil->iconPath("compressed", KIcon::User);
+    it.path = kil->iconPath("compressed", TDEIcon::User);
     it.title = i18n("Compressed File");
     list->append(it);
 
-    it.path = kil->iconPath("folder", KIcon::User);
+    it.path = kil->iconPath("folder", TDEIcon::User);
     it.title = i18n("Standard Folder");
     list->append(it);
 
-    it.path = kil->iconPath("package", KIcon::User);
+    it.path = kil->iconPath("package", TDEIcon::User);
     it.title = i18n("Standard Package");
     list->append(it);
 
-    it.path = kil->iconPath("mini-folder", KIcon::User);
+    it.path = kil->iconPath("mini-folder", TDEIcon::User);
     it.title = i18n("Mini Folder");
     list->append(it);
 
-    it.path = kil->iconPath("mini-package", KIcon::User);
+    it.path = kil->iconPath("mini-package", TDEIcon::User);
     it.title = i18n("Mini Package");
     list->append(it);
 }
 
-void KIconTemplateContainer::save()
+void TDEIconTemplateContainer::save()
 {
   TDEConfig *k = kapp->config();
   k->setGroup("Templates");
   
   TQStringList names;
-  for (TQValueListIterator<KIconTemplate> iter = begin(); iter != end(); iter++)
+  for (TQValueListIterator<TDEIconTemplate> iter = begin(); iter != end(); iter++)
   {
       names.append((*iter).title);
   }
@@ -88,7 +88,7 @@ void KIconTemplateContainer::save()
   }
 }
 
-KIconTemplateContainer::KIconTemplateContainer() : TQValueList<KIconTemplate>()
+TDEIconTemplateContainer::TDEIconTemplateContainer() : TQValueList<TDEIconTemplate>()
 {  
   TQStrList names;
   TDEConfig *k = kapp->config();
@@ -96,7 +96,7 @@ KIconTemplateContainer::KIconTemplateContainer() : TQValueList<KIconTemplate>()
   k->readListEntry("Names", names);
   for(int i = 0; i < (int)names.count(); i++)
   {
-    KIconTemplate it;
+    TDEIconTemplate it;
     it.path = k->readPathEntry(names.at(i));
     it.title = names.at(i);
     //kdDebug(4640) << "Template: " << names.at(i) << "\n" << path.data() << endl;
@@ -109,21 +109,21 @@ KIconTemplateContainer::KIconTemplateContainer() : TQValueList<KIconTemplate>()
   }
 }
 
-KIconTemplateContainer::~KIconTemplateContainer()
+TDEIconTemplateContainer::~TDEIconTemplateContainer()
 {
   clear();
 }
 
-KIconListBoxItem::KIconListBoxItem( KIconTemplate t )
+TDEIconListBoxItem::TDEIconListBoxItem( TDEIconTemplate t )
    : TQListBoxItem(), icontemplate(t)
 {
-  //kdDebug(4640) << "KIconListBoxItem - " << t->path.data() << ", " << t->title.data() << endl;
+  //kdDebug(4640) << "TDEIconListBoxItem - " << t->path.data() << ", " << t->title.data() << endl;
  
   pm.load(t.path);
   setText( t.title );
 }
 
-void KIconListBoxItem::reloadIcon()
+void TDEIconListBoxItem::reloadIcon()
 {
   pm.load(icontemplate.path);
   setText( icontemplate.title );
@@ -131,7 +131,7 @@ void KIconListBoxItem::reloadIcon()
  
 
 
-void KIconListBoxItem::paint( TQPainter *p )
+void TDEIconListBoxItem::paint( TQPainter *p )
 {
   p->drawPixmap( 3, 0, pm );
   TQFontMetrics fm = p->fontMetrics();
@@ -143,12 +143,12 @@ void KIconListBoxItem::paint( TQPainter *p )
   p->drawText( pm.width() + 5, yPos, text() );
 }
 
-int KIconListBoxItem::height(const TQListBox *lb ) const
+int TDEIconListBoxItem::height(const TQListBox *lb ) const
 {
   return TQMAX( pm.height(), lb->fontMetrics().lineSpacing() + 1 );
 }
     
-int KIconListBoxItem::width(const TQListBox *lb ) const
+int TDEIconListBoxItem::width(const TQListBox *lb ) const
 {
   return pm.width() + lb->fontMetrics().width( text() ) + 6;
 }
@@ -202,12 +202,12 @@ NewFromTemplate::NewFromTemplate( TQWidget* parent )
   
   TQHBoxLayout* l = new TQHBoxLayout( grp, 15 );
   
-  templates = new KIconListBox( grp );
+  templates = new TDEIconListBox( grp );
   connect( templates, TQT_SIGNAL( highlighted( int ) ), TQT_SLOT( checkSelection( int ) ) );
   l->addWidget( templates );
     
-  for( int i = 0; i < (int) KIconTemplateContainer::self()->count(); i++ )
-    templates->insertItem( new KIconListBoxItem( *KIconTemplateContainer::self()->at( i ) ) );
+  for( int i = 0; i < (int) TDEIconTemplateContainer::self()->count(); i++ )
+    templates->insertItem( new TDEIconListBoxItem( *TDEIconTemplateContainer::self()->at( i ) ) );
 }
 
 NewFromTemplate::~NewFromTemplate()
