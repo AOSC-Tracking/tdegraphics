@@ -48,10 +48,10 @@
 #include <kolourpaintversion.h>
 
 
-static const KCmdLineOptions cmdLineOptions [] =
+static const TDECmdLineOptions cmdLineOptions [] =
 {
     {"+[file]", I18N_NOOP ("Image file to open"), 0},
-    KCmdLineLastOption
+    TDECmdLineLastOption
 };
 
 

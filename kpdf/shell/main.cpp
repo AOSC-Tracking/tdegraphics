@@ -23,10 +23,10 @@ I18N_NOOP("kpdf, a kde pdf viewer based on xpdf");
 
 static const char version[] = "0.5.10";
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
     { "+[URL]", I18N_NOOP("Document to open"), 0 },
-    KCmdLineLastOption
+    TDECmdLineLastOption
 };
 
 int main(int argc, char** argv)

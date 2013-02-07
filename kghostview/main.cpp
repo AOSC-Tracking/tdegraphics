@@ -28,7 +28,7 @@
 #include "kgv_view.h"
 #include "displayoptions.h"
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
     { "page <page-no>",   I18N_NOOP( "Page to open. Use --page=3 to show the third page, for example. Note that if the page does not exist, any other page may be displayed" ),     "1" },
     { "scale <factor>",   I18N_NOOP( "Magnification of the display" ),    "1.0" },
@@ -40,7 +40,7 @@ static KCmdLineOptions options[] =
     // { "watch",   I18N_NOOP( "Turns on watching of a file. This means that whenever the file changes while you are viewing it, kghostview automatically reloads it. This option (which can also be turned on in the menu) is especially useful if you are generating your files from latex or a similar tool." ), 0 },
     // { "page-size", I18N_NOOP( "The page size.\nUse either something like \"A4\" or you can display exact pixel size width-height" ), "auto" }
     { "+[URL]", I18N_NOOP( "Location to open" ), 0 },
-    KCmdLineLastOption
+    TDECmdLineLastOption
 };
 
 int main( int argc, char** argv )

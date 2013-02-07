@@ -34,10 +34,10 @@
 static const char description[] =
 	I18N_NOOP("TDE Icon Editor");
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
   { "+[file(s)]" , I18N_NOOP("Icon file(s) to open"), 0 },
-  KCmdLineLastOption
+  TDECmdLineLastOption
 };
 
 int main(int argc, char **argv)

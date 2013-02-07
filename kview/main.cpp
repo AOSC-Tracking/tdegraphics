@@ -25,10 +25,10 @@
 
 static const char description[] = I18N_NOOP( "TDE Image Viewer" );
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
 	{ "+[URL]", I18N_NOOP( "Image to open" ), 0 },
-	KCmdLineLastOption
+	TDECmdLineLastOption
 };
 
 extern "C" KDE_EXPORT int kdemain( int argc, char ** argv )

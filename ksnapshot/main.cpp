@@ -33,7 +33,7 @@
 static const char description[] =
 	I18N_NOOP("TDE Screenshot Utility");
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
     { "c", 0, 0 },
     { "current", I18N_NOOP("Captures the window under the mouse on startup (instead of the desktop)"), 0 },

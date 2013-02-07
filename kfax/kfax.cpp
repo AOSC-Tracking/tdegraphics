@@ -1622,7 +1622,7 @@ void setFaxDefaults(){
 static const char description[] =
         I18N_NOOP("TDE G3/G4 Fax Viewer");
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
    {"f", 0, 0 },
    {"fine",         I18N_NOOP( "Fine resolution" ), 0 },
@@ -1644,7 +1644,7 @@ static KCmdLineOptions options[] =
    {"2" ,           I18N_NOOP( "Raw files are g3-2d" ), 0 },
    {"4",            I18N_NOOP( "Raw files are g4" ), 0 },
    {"+file(s)",     I18N_NOOP( "Fax file(s) to show" ), 0 },
-   KCmdLineLastOption
+   TDECmdLineLastOption
 };
 
 int main (int argc, char **argv)

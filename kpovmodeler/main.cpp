@@ -27,12 +27,12 @@
 #include "version.h"
 
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
   { "+[file]", I18N_NOOP( "File to open" ), 0 },
   { "no-opengl", I18N_NOOP( "Disables OpenGL rendering" ), 0 },
   { "no-dri", I18N_NOOP( "Disables direct rendering" ), 0 },
-  KCmdLineLastOption
+  TDECmdLineLastOption
 };
 
 int main( int argc, char* argv[] )

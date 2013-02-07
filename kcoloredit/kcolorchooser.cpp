@@ -35,10 +35,10 @@ static const char description[] =
 
 static const char version[] = "v1.0.1";
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
    { "print", I18N_NOOP("Print the selected color to stdout"), 0 },
-   KCmdLineLastOption
+   TDECmdLineLastOption
 };
 	
 int main(int argc, char *argv[])

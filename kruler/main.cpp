@@ -27,9 +27,9 @@ static const char freeFormText[] =
 
 
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
-  KCmdLineLastOption
+  TDECmdLineLastOption
   // INSERT YOUR COMMANDLINE OPTIONS HERE
 };
 

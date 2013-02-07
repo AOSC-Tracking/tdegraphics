@@ -16,7 +16,7 @@
 #include "kviewshell.h"
 
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
   { "u", 0, 0},
   { "unique", I18N_NOOP("Check if the file is loaded in another kviewshell.\nIf it is, bring up the other kviewshell. Otherwise, load the file."), 0 },
@@ -25,7 +25,7 @@ static KCmdLineOptions options[] =
   { "g", 0, 0},
   { "goto <pagenumber>", I18N_NOOP("Navigate to this page"), 0 },
   { "+file(s)", I18N_NOOP("Files to load"), 0 },
-  KCmdLineLastOption
+  TDECmdLineLastOption
 };
 
 

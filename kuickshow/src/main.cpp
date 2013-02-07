@@ -27,13 +27,13 @@
 #include "kuickshow.h"
 #include "version.h"
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
     { "lastfolder", I18N_NOOP("Start in the last visited folder, not the "
 			      "current working folder."), 0 },
     { "d", 0, 0 }, // short option for --lastdir
     { "+[files]", I18N_NOOP("Optional image filenames/urls to show"), 0 },
-    KCmdLineLastOption
+    TDECmdLineLastOption
 };
 
 extern "C" KDE_EXPORT int kdemain(int argc, char **argv)

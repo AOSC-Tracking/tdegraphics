@@ -15,7 +15,7 @@
 #include "kviewshell.h"
 
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
   { "unique", I18N_NOOP("Check if the file is loaded in another KFaxView instance.\nIf it is, bring up the other KFaxView. Otherwise, load the file."), 0 },
   { "g", 0, 0 },
@@ -41,7 +41,7 @@ static KCmdLineOptions options[] =
   { "2" ,           I18N_NOOP("(obsolete)"), 0 },
   { "4",            I18N_NOOP("(obsolete)"), 0 },
   { "+file(s)", I18N_NOOP("Files to load"), 0 },
-  KCmdLineLastOption
+  TDECmdLineLastOption
 };
 
 

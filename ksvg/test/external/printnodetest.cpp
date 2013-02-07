@@ -13,10 +13,10 @@
 
 using namespace KSVG;
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
 	{ "+URL",   I18N_NOOP("SVG file to open"), 0 },
-	KCmdLineLastOption
+	TDECmdLineLastOption
 };
 
 Worker::Worker(const KURL &url)

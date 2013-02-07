@@ -9,10 +9,10 @@ static const char description[] =
 
 static const char version[] = "v0.1";
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
     { "+[URL]", I18N_NOOP( "Image to open" ), 0 },
-    KCmdLineLastOption
+    TDECmdLineLastOption
 };
 
 int main(int argc, char **argv)

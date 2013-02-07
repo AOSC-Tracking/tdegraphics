@@ -62,11 +62,11 @@ static const char license[] =
 "without including the source code for TQt in the source distribution.\n";
 
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
   { "d ", I18N_NOOP("The SANE compatible device specification (e.g. umax:/dev/sg0)"), "" },
   { "g", I18N_NOOP("Gallery mode - do not connect to scanner"), "" },
-  KCmdLineLastOption
+  TDECmdLineLastOption
 };
 
 

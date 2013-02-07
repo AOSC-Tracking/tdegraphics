@@ -4,10 +4,10 @@
 #include <kaboutdata.h>
 #include "SVGTestWidget.h"
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
 	{ "+URL",   I18N_NOOP("SVG file to open"), 0 },
-	KCmdLineLastOption
+	TDECmdLineLastOption
 };
 
 int main(int argc, char **argv)
