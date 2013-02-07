@@ -10,7 +10,7 @@
 #include <tqtimer.h>
 
 class TDEAboutData;
-class KAboutDialog;
+class TDEAboutDialog;
 class TDEAccel;
 class TDEAction;
 class TDEConfig;
@@ -233,7 +233,7 @@ private:
 
   TQTimer fitTimer;
 
-  KAboutDialog* aboutDialog;
+  TDEAboutDialog* aboutDialog;
 };
 
 

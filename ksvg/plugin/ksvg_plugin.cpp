@@ -75,7 +75,7 @@ struct KSVGPlugin::Private
 	SVGDocumentImpl *doc;
 	KSVGCanvas *canvas;
 	TQPixmap *backgroundPixmap;
-	KAboutApplication *aboutKSVG;
+	TDEAboutApplication *aboutKSVG;
 
 	unsigned int width;
 	unsigned int height;
@@ -144,7 +144,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 	ksvgd->renderingBackendAction->setItems(items);
 	ksvgd->renderingBackendAction->setCurrentItem(KSVG::CanvasFactory::self()->itemInList(ksvgd->canvas));
 
-	ksvgd->aboutKSVG = new KAboutApplication(KSVGPluginFactory::instance()->aboutData(), wparent);
+	ksvgd->aboutKSVG = new TDEAboutApplication(KSVGPluginFactory::instance()->aboutData(), wparent);
 
 	setXMLFile("ksvgplugin.rc");
 }

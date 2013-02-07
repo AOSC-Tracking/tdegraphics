@@ -167,7 +167,7 @@ Thu Apr 19 23:16:12 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 Tue Mar 13 03:16:24 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* added lots of translations from the translation team.
-	I need to add a KAboutDialog somewhere to give them credit
+	I need to add a TDEAboutDialog somewhere to give them credit
 	for their excellent work!
 
 Fri Mar  9 21:50:12 2001  Carsten Pfeiffer  <pfeiffer@kde.org>

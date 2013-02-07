@@ -1417,7 +1417,7 @@ void KViewPart::aboutKViewShell()
   if (aboutDialog == 0)
   {
     // Create Dialog
-    aboutDialog = new KAboutDialog(mainWidget, "about_kviewshell");
+    aboutDialog = new TDEAboutDialog(mainWidget, "about_kviewshell");
     aboutDialog->setTitle(I18N_NOOP("KViewShell"));
     aboutDialog->setVersion("0.6");
     aboutDialog->setAuthor("Matthias Hoelzer-Kluepfel", TQString(), TQString(),
