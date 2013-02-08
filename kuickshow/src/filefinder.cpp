@@ -21,7 +21,7 @@
 #include <kapplication.h>
 #include <tdeconfig.h>
 #include <kglobal.h>
-#include <kcompletionbox.h>
+#include <tdecompletionbox.h>
 #include <kurlcompletion.h>
 
 #include "filefinder.h"
