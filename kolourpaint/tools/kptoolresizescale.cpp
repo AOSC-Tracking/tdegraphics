@@ -50,7 +50,7 @@
 #include <tqwhatsthis.h>
 #include <tqwmatrix.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcombobox.h>
 #include <tdeconfig.h>
 #include <kdebug.h>

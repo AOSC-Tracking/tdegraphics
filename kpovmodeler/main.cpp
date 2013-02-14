@@ -17,9 +17,9 @@
 
 
 #include <klocale.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
-#include <kapplication.h>
+#include <tdecmdlineargs.h>
+#include <tdeaboutdata.h>
+#include <tdeapplication.h>
 
 #include "pmshell.h"
 #include "pmfactory.h"

@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <ktempfile.h>
 #include <kprocess.h>
 #include <stdlib.h>

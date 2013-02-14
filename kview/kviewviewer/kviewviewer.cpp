@@ -45,7 +45,7 @@
 #include <tdeparts/plugin.h>
 #include <kmessagebox.h>
 #include <ktempfile.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kimageio.h>
 #include <tdestdaccel.h>
 #include <kdirwatch.h>

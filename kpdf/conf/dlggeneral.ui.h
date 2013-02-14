@@ -10,7 +10,7 @@
 ** destructor.
 *****************************************************************************/
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include <config.h>
 

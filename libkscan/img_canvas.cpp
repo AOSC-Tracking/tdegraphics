@@ -29,8 +29,8 @@
 #include <tqpainter.h>
 
 #include <klocale.h>
-#include <kstyle.h>
-#include <kapplication.h>
+#include <tdestyle.h>
+#include <tdeapplication.h>
 
 #include <kpixmapio.h>
 #include <kdebug.h>

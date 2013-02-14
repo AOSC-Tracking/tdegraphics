@@ -16,7 +16,7 @@
 #include <tqpaintdevicemetrics.h>
 #include <tqregexp.h>
 #include <tqvariant.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdelistview.h>
 #include <klocale.h>
 #include <kpassdlg.h>

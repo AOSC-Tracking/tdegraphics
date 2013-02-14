@@ -1,7 +1,7 @@
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+#include <tdeapplication.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include "SVGTestWidget.h"
 
 static TDECmdLineOptions options[] =

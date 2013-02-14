@@ -8,10 +8,10 @@
 #include <tqprinter.h>
 #include <tqprintdialog.h>
 
-#include <kaboutdialog.h>
+#include <tdeaboutdialog.h>
 #include <tdeaccel.h>
 #include <tdeaction.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <tdeconfigdialog.h>
 #include <kdebug.h>

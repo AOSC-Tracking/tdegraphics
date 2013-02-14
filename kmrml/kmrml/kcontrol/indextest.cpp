@@ -2,7 +2,7 @@
 #include <kmrml_config.h>
 #include "indextest.moc"
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kglobal.h>
 

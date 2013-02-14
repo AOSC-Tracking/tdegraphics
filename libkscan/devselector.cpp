@@ -30,7 +30,7 @@
 #include <tqstrlist.h>
 #include <tqstringlist.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <kglobal.h>

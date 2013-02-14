@@ -17,7 +17,7 @@
 #include <kimagefilepreview.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kprinter.h>
 #include <tdeio/netaccess.h>
 #include <ksavefile.h>

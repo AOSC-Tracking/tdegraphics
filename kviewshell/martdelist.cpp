@@ -29,7 +29,7 @@
 #include <tqpainter.h>
 #include <tqtimer.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <tdepopupmenu.h>

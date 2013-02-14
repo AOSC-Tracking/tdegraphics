@@ -27,8 +27,8 @@
 #include <tqtooltip.h>
 #include <tqvbox.h>
 
-#include <kaboutdata.h>
-#include <kapplication.h>
+#include <tdeaboutdata.h>
+#include <tdeapplication.h>
 #include <kcombobox.h>
 #include <tdeconfig.h>
 #include <kdatastream.h>

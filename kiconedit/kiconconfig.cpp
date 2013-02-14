@@ -29,7 +29,7 @@
 
 #include <tdeaccel.h>
 #include <kbuttonbox.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 #include <kcolorbutton.h>
 #include <tdefiledialog.h>

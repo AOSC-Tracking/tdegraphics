@@ -2,13 +2,13 @@
 
 #include <dcopclient.h>
 #include <dcopref.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+#include <tdeapplication.h>
+#include <tdecmdlineargs.h>
 #include <kdebug.h>
 #include <kmimetype.h>
 #include <kurl.h>
 #include <klocale.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <tqdir.h>
 
 #include <stdlib.h>

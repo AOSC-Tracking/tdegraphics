@@ -3,8 +3,8 @@
 #include "config.h"
 #endif
 
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
+#include <tdecmdlineargs.h>
+#include <tdeaboutdata.h>
 #include <klocale.h>
 
 #include "klineal.h"

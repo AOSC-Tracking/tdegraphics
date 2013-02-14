@@ -1,8 +1,8 @@
 #include <config.h>
 #include <tdeaction.h>
-#include <kaboutdata.h>
-#include <kaboutdialog.h>
-#include <kapplication.h>
+#include <tdeaboutdata.h>
+#include <tdeaboutdialog.h>
+#include <tdeapplication.h>
 #include <kbugreport.h>
 #include <tdeconfigdialog.h>
 #include <kdebug.h>

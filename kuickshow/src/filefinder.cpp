@@ -18,7 +18,7 @@
 
 #include <tqkeycode.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kglobal.h>
 #include <tdecompletionbox.h>

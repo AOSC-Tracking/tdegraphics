@@ -40,7 +40,7 @@
 #include <tqtooltip.h>
 #include <tqwidget.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcolordialog.h>
 #include <kcolordrag.h>
 #include <tdeconfig.h>

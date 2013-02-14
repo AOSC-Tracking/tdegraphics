@@ -37,7 +37,7 @@
 #include <tdefiledialog.h>
 #include <kimageeffect.h>
 #include <kimageio.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kdebug.h>
 
 // system includes

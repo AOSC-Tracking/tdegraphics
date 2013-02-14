@@ -24,7 +24,7 @@
 #include <tqregexp.h>
 
 #include <tdeaction.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <kdirwatch.h>
@@ -37,7 +37,7 @@
 #include <tdestdaccel.h>
 #include <ktempfile.h>
 #include <tdeio/scheduler.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 
 
 #include "kgv_view.h"

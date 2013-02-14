@@ -16,7 +16,7 @@
 #include <tqtooltip.h>
 #include <tdeaccel.h>
 #include <tdeactioncollection.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcursor.h>
 #include <tdetoolbar.h>
 #include <kdebug.h>

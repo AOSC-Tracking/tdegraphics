@@ -40,7 +40,7 @@
 #include <tqbitmap.h>
 
 #include <klocale.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
 #include <tdefiledialog.h>
@@ -49,7 +49,7 @@
 #include <tdeconfig.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include <tdeio/netaccess.h>
 #include <knotifyclient.h>
 #include <ktempfile.h>

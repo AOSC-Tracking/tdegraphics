@@ -31,7 +31,7 @@
 #include <tqdir.h>
 #include <tqfile.h>
 #include <tqfileinfo.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #define OPAQUE_MASK 0xff000000
 

@@ -27,7 +27,7 @@
 #include "KSVGCanvas.h"
 #include "CanvasFactory.h"
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include "SVGSVGElementImpl.h"
 #include "SVGDocumentImpl.h"

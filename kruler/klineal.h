@@ -18,7 +18,7 @@
 #ifndef KLINEAL_H
 #define KLINEAL_H
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdepopupmenu.h>
 #include <tdemainwindow.h>
 

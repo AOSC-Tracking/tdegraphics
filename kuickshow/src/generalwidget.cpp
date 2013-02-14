@@ -22,7 +22,7 @@
 #include <tqtooltip.h>
 #include <tqvgroupbox.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcolorbutton.h>
 #include <kdialog.h>
 #include <kiconloader.h>

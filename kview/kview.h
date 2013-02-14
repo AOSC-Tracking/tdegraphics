@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeparts/mainwindow.h>
 
 namespace KParts {

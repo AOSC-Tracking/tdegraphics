@@ -57,7 +57,7 @@
 
 #include <kurl.h>
 #include <krun.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kstatusbar.h>
 #include <tdeconfig.h>
 #include <kdebug.h>

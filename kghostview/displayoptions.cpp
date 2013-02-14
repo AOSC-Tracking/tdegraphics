@@ -18,7 +18,7 @@
 #include "displayoptions.h"
 #include <kdebug.h>
 #include <tqregexp.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include <tdeconfig.h>
 
 namespace {

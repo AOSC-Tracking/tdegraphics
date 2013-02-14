@@ -34,7 +34,7 @@
 #include <tqwhatsthis.h>
 #include <dcopobject.h>
 #include <dcopclient.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeaction.h>
 #include <kdirwatch.h>
 #include <kinstance.h>

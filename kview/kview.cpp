@@ -28,7 +28,7 @@
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/plugin.h>
 #include <tdeparts/part.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeaction.h>
 #include <kstdaction.h>
 #include <kimageio.h>

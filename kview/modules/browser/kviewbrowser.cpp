@@ -30,7 +30,7 @@
 #include <kimageviewer/viewer.h>
 #include <kimageviewer/canvas.h>
 #include <tdeparts/browserextension.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kimageio.h>
 
 typedef KGenericFactory<KViewBrowser> KViewBrowserFactory;

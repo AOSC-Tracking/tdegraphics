@@ -31,7 +31,7 @@
 #include <tqstringlist.h>
 
 #include <kpushbutton.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeaction.h>
 #include <klocale.h>
 #include <kgenericfactory.h>

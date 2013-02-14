@@ -25,7 +25,7 @@
 #include <config.h>
 #endif
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeaccel.h>
 #include <kurl.h>
 #include <tdeparts/part.h>

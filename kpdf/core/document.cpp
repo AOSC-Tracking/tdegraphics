@@ -22,7 +22,7 @@
 #include <klocale.h>
 #include <kfinddialog.h>
 #include <kmessagebox.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kuserprofile.h>
 #include <krun.h>
 #include <kstandarddirs.h>

@@ -18,9 +18,9 @@
 
 #include "kview.h"
 #include "version.h"
-#include <kapplication.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
+#include <tdeapplication.h>
+#include <tdeaboutdata.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
 
 static const char description[] = I18N_NOOP( "TDE Image Viewer" );

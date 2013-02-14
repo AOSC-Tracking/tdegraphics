@@ -18,7 +18,7 @@
 
 #include <klocale.h>
 #include <kinstance.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 
 #include "pmfactory.h"
 #include "pmpart.h"

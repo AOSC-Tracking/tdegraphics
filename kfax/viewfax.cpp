@@ -43,7 +43,7 @@
 #include <tqprinter.h>
 #include <tqstring.h>
 
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
 
 #include "kfax.h"

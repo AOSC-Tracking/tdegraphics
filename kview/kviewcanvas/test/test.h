@@ -5,7 +5,7 @@
 #include <config.h>
 #endif 
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeparts/mainwindow.h>
  
 namespace KImageViewer { class Canvas; };

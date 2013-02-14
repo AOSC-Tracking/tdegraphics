@@ -21,7 +21,7 @@
 #include "viewcontrol.moc"
 
 #include <klocale.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kbuttonbox.h>
 #include <kseparator.h>
 

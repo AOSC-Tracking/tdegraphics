@@ -37,7 +37,7 @@
 #include <tqpainter.h>
 #include <tqtooltip.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
 

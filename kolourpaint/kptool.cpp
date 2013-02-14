@@ -41,7 +41,7 @@
 #include <tqpainter.h>
 #include <tqpixmap.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <klocale.h>

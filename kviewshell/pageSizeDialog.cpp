@@ -9,7 +9,7 @@
 
 #include <config.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcombobox.h>
 #include <klocale.h>
 #include <kmessagebox.h>

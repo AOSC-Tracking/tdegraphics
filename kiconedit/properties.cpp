@@ -20,7 +20,7 @@
 
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include "properties.h"
 

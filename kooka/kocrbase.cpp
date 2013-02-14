@@ -31,7 +31,7 @@
 #include <tdeio/job.h>
 #include <tdeio/previewjob.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kglobal.h>
 #include <kdebug.h>

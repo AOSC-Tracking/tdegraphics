@@ -25,7 +25,7 @@
 #include <kiconloader.h>
 #include <kedittoolbar.h>
 #include <kkeydialog.h>
-#include <kaboutdialog.h>
+#include <tdeaboutdialog.h>
 #include <tdepopupmenu.h>
 #include <tqtimer.h>
 

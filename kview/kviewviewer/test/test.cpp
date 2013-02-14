@@ -9,7 +9,7 @@
 #include <klibloader.h>
 #include <kmessagebox.h>
 #include <tdeparts/componentfactory.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include <tqimage.h>
 

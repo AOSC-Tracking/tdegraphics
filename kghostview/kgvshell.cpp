@@ -20,7 +20,7 @@
 #include <stdlib.h>
 
 #include <tdeaction.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdefiledialog.h>
 #include <kiconloader.h>
 #include <klibloader.h>

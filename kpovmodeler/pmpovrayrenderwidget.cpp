@@ -35,7 +35,7 @@
 #undef KDE_NO_COMPAT
 #endif
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 TQString PMPovrayRenderWidget::s_povrayCommand = c_defaultPovrayCommand;
 TQStringList PMPovrayRenderWidget::s_libraryPaths;

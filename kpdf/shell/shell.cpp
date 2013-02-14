@@ -21,7 +21,7 @@
 #include <tqcursor.h>
 #include <tqtimer.h>
 #include <tdeaction.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kedittoolbar.h>
 #include <tdefiledialog.h>
 #include <klibloader.h>

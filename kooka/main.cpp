@@ -29,10 +29,10 @@
 #include <tqdict.h>
 #include <tqpixmap.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <dcopclient.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
+#include <tdeaboutdata.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <kimageio.h>

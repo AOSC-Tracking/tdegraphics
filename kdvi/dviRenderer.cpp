@@ -28,7 +28,7 @@
 #include <tqurl.h>
 #include <tqvbox.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <kmimemagic.h>
 #include <kglobal.h>

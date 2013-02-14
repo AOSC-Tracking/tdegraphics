@@ -1,7 +1,7 @@
 #include <config.h>
 
 #include <tdeaction.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kdebug.h>
 #include <tdefiledialog.h>
 #include <kiconloader.h>

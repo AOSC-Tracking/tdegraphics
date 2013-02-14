@@ -27,7 +27,7 @@
 #include <config.h>
 
 #include <stdlib.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <tdefiledialog.h>

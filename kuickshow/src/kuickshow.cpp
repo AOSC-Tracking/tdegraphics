@@ -28,11 +28,11 @@
 #include <tqsize.h>
 #include <tqstring.h>
 
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <tdeaccel.h>
 #include <tdeaction.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+#include <tdeapplication.h>
+#include <tdecmdlineargs.h>
 #include <tdeconfig.h>
 #include <kcursor.h>
 #include <tdeversion.h>

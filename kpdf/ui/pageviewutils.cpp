@@ -12,7 +12,7 @@
 #include <tqpainter.h>
 #include <tqimage.h>
 #include <tqtimer.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kimageeffect.h>
 #include <kiconloader.h>
 

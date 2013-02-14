@@ -28,7 +28,7 @@
 #ifndef _KFAX_H_
 #define _KFAX_H_
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdemainwindow.h>
 #include <tqptrlist.h>
 #include <kurl.h>

@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <ktempfile.h>
 #include <ksimpleconfig.h>
-#include <kaboutapplication.h>
+#include <tdeaboutapplication.h>
 
 #include "ksvg_widget.h"
 #include "ksvg_factory.h"
