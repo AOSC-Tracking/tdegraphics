@@ -22,8 +22,8 @@
 #include <kdebug.h>
 #include <tdeaction.h>
 #include <tdefiledialog.h>
-#include <klocale.h>
-#include <ktempfile.h>
+#include <tdelocale.h>
+#include <tdetempfile.h>
 #include <ksimpleconfig.h>
 #include <tdeaboutapplication.h>
 

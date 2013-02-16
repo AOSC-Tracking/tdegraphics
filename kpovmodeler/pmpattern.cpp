@@ -25,7 +25,7 @@
 #include "pmmemento.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMPattern::PMPatternType patternTypeDefault = PMPattern::PatternAgate;
 const double agateTurbulenceDefault = 0.5;

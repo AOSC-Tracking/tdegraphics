@@ -23,7 +23,7 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqspinbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 const int c_minValue = -1000;
 const int c_maxValue = 1000;

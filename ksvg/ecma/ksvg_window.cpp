@@ -43,8 +43,8 @@
 #include <assert.h>
 #include <kdebug.h>
 #include <tqstylesheet.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <kinputdialog.h>
 
 using namespace KSVG;

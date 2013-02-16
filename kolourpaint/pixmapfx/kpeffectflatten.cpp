@@ -40,9 +40,9 @@
 #include <tdeconfig.h>
 #include <kdialog.h>
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kimageeffect.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpdefs.h>
 #include <kppixmapfx.h>

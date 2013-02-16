@@ -23,7 +23,7 @@
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMVector scaleDefault = PMVector( 0, 0, 0 );
 

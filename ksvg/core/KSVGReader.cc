@@ -20,7 +20,7 @@
 
 #include <dom/dom_exception.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqmap.h>
 #include <ksimpleconfig.h>
 #include <KSVGCanvas.h>

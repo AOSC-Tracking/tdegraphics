@@ -31,7 +31,7 @@
 
 #ifndef NO_KDE2
 #include <tdeconfig.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <tdetoolbar.h>
 #include <tdepopupmenu.h>
 #include <twin.h>

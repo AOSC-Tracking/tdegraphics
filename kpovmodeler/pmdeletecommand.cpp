@@ -22,8 +22,8 @@
 #include "pmrecursiveobjectiterator.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tqptrdict.h>
 
 PMDeleteCommand::PMDeleteCommand( PMObject* obj )

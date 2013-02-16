@@ -36,7 +36,7 @@
 #include <tqimage.h>
 #include <tqpainter.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <time.h>
 #include <stdio.h>

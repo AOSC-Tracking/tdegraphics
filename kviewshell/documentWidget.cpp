@@ -14,9 +14,9 @@
 #include <tdeaction.h>
 #include <tdeapplication.h>
 #include <kdebug.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqclipboard.h>
 #include <tqcursor.h>
 #include <tqimage.h>

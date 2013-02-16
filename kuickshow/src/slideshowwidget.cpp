@@ -20,7 +20,7 @@
 #include <tqlayout.h>
 
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 
 #include "slideshowwidget.h"

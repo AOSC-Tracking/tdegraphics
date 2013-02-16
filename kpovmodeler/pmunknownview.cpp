@@ -16,7 +16,7 @@
 **************************************************************************/
 
 #include "pmunknownview.h"
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqlayout.h>
 
 PMUnknownView::PMUnknownView( const TQString& viewType,

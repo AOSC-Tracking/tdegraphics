@@ -13,7 +13,7 @@
 #include <tqtimer.h>
 
 #include <dcopclient.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kdialogbase.h>
 #include <kurl.h>
 

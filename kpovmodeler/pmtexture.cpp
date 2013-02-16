@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmtextureedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMTexture, PMTextureProperty );
 

@@ -22,7 +22,7 @@
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double c_defaultCoefficients[10] =
 {  // Hyperboloid_Y

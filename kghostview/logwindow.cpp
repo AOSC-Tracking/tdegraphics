@@ -20,9 +20,9 @@
 #include <tqlabel.h>
 #include <tqvbox.h>
 
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kurllabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "logwindow.h"
 

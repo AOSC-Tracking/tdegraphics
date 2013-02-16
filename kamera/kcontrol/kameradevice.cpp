@@ -31,10 +31,10 @@
 #include <tqlabel.h>
 #include <tqgrid.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdelistview.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 
 #include "config.h"

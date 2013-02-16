@@ -27,8 +27,8 @@
 #include <tqimage.h>
 #include <tqfile.h>
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 #include "faxexpand.h"

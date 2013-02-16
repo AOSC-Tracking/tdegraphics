@@ -30,19 +30,19 @@
 #include <unistd.h>
 
 
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <tdeconfig.h>
 #include <kdialog.h>
 #include <kimageio.h>
 #include <kseparator.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <tdeio/jobclasses.h>
 #include <tdeio/file.h>
 #include <tdeio/job.h>
 #include <tdeio/netaccess.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kinputdialog.h>
 
 #include <tqdir.h>

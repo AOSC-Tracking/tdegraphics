@@ -1,6 +1,6 @@
 #include <tdeapplication.h>
 #include <tdecmdlineargs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaboutdata.h>
 #include "SVGTestWidget.h"
 

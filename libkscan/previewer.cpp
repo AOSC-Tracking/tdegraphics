@@ -31,7 +31,7 @@
 #include <tqlayout.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kcombobox.h>
 #include <tdeaction.h>
 #include <kstandarddirs.h>
@@ -46,7 +46,7 @@
 #include <tdeconfig.h>
 #include <tqbuttongroup.h>
 #include <tqvbuttongroup.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tqvaluevector.h>
 
 #define ID_CUSTOM 0

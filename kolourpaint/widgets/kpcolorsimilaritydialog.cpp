@@ -33,7 +33,7 @@
 #include <tqlayout.h>
 #include <tqpushbutton.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 
 #include <kpcolorsimilaritycube.h>

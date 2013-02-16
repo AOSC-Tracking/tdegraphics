@@ -40,7 +40,7 @@
 #include <tqpopupmenu.h>
 #include <tqdict.h>
 #include <tqpixmap.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tqfiledialog.h>
 #include <tqstringlist.h>
 #include <tqheader.h>
@@ -57,8 +57,8 @@
 #include <tdefiledialog.h>
 #include <kurl.h>
 #include <kdebug.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <tdeio/global.h>
 #include <tdeio/progressbase.h>
 #include <tdeio/netaccess.h>

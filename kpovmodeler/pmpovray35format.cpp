@@ -21,7 +21,7 @@
 #include "pmpovrayparser.h"
 #include "pmoutputdevice.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMPovray35Format::PMPovray35Format( )
       : PMPovray31Format( )

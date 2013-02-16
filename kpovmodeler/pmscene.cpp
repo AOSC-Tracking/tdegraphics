@@ -17,7 +17,7 @@
 
 
 #include "pmscene.h"
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqdom.h>
 #include "pmxmlhelper.h"
 #include "pmdocumentformat.h"

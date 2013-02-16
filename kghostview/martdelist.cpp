@@ -26,8 +26,8 @@
 #include <tqlabel.h>
 #include <tqwhatsthis.h>
 
-#include <kglobalsettings.h>
-#include <klocale.h>
+#include <tdeglobalsettings.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 #include "kgv_miniwidget.h"

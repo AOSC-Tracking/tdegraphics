@@ -31,7 +31,7 @@
 #include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpcolortoolbar.h>
 #include <kpcommandhistory.h>

@@ -25,7 +25,7 @@
 #include <tqpen.h>
 #include <tqfontmetrics.h>
 #include <tqtimer.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kcolordrag.h>
 #include <tqscrollbar.h>
 

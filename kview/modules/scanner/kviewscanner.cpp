@@ -25,10 +25,10 @@
 
 #include <tdeaction.h>
 #include <kinstance.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kgenericfactory.h>
 #include <kscan.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <kimageviewer/viewer.h>
 

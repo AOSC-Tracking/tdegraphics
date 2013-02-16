@@ -30,8 +30,8 @@
 #include <kdebug.h>
 #include <keditcl.h>
 #include <tdefiledialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tqapplication.h>
 #include <tqprogressdialog.h>
 

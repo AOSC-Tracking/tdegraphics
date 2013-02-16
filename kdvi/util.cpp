@@ -54,8 +54,8 @@
 #include <stdlib.h>
 
 #include <kdebug.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 
 #include "dviRenderer.h"
 #include "xdvi.h"

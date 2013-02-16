@@ -19,7 +19,7 @@
 #include <tqframe.h>
 #include <tqradiobutton.h>
 #include <tqcolor.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "main.h"
 #include "gradientselection.h"

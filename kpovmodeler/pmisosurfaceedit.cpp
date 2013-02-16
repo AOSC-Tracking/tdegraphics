@@ -26,7 +26,7 @@
 #include <tqlineedit.h>
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMIsoSurfaceEdit::PMIsoSurfaceEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

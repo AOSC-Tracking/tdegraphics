@@ -28,7 +28,7 @@
 #include "kookapref.h"
 #include "img_saver.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
@@ -50,7 +50,7 @@
 #include "kscanslider.h"
 #include "ksaneocr.h"
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tqbuttongroup.h>
 #include <tqradiobutton.h>
 #include <kurlrequester.h>

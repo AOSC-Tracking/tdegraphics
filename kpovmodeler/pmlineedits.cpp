@@ -16,8 +16,8 @@
 **************************************************************************/
 
 #include "pmlineedits.h"
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 
 PMFloatEdit::PMFloatEdit( TQWidget* parent, const char* name /*= 0*/ )
       : TQLineEdit( parent, name )

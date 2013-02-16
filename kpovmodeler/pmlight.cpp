@@ -27,7 +27,7 @@
 #include "pmmatrix.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMVector locationDefault = PMVector( 0, 0, 0 );
 const PMColor colorDefault = PMColor( 1.0, 1.0, 1.0 );

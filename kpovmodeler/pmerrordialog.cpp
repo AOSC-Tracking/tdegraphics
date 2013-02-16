@@ -19,7 +19,7 @@
 #include "pmerrordialog.h"
 #include "pmerrorflags.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqlabel.h>
 #include <tqtextedit.h>
 

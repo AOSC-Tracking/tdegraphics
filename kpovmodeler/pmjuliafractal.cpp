@@ -25,7 +25,7 @@
 #include "pm3dcontrolpoint.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMVector c_defaultJuliaParameter = PMVector( -0.083, 0.0, -0.83, -0.025 );
 const PMVector c_defaultSliceNormal = PMVector( 0.0, 0.0, 0.0, 1.0 );

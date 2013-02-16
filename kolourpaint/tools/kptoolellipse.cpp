@@ -26,7 +26,7 @@
 */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kptoolellipse.h>
 
 kpToolEllipse::kpToolEllipse (kpMainWindow *mainWindow)

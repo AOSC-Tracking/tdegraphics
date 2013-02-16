@@ -25,7 +25,7 @@
 #include "pm3dcontrolpoint.h"
 #include "pmmath.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double c_defaultPatchSize = 6.0;
 const int c_defaultPatchType = 0;

@@ -18,7 +18,7 @@
 
 #include "pmlightgroup.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include "pmxmlhelper.h"
 #include "pmlightgroupedit.h"
 #include "pmmemento.h"

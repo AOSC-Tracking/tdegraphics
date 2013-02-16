@@ -28,7 +28,7 @@
 
 #include <kptoolcurve.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpToolCurve::kpToolCurve (kpMainWindow *mainWindow)

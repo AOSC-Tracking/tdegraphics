@@ -22,7 +22,7 @@
 
 #include <tdeconfig.h>
 #include <kstandarddirs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kfilterdev.h>
 #include <tdepopupmenu.h>
 #include <kiconloader.h>

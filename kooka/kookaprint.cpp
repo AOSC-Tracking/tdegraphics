@@ -32,7 +32,7 @@
 #include <tqfontmetrics.h>
 #include "imgprintdialog.h"
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 KookaPrint::KookaPrint( KPrinter *printer )
     :TQObject(),

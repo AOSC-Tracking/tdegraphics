@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmnamedobjectedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMetaObject* PMProjectedThrough::s_pMetaObject = 0;
 PMObject* createNewProjectedThrough( PMPart* part )

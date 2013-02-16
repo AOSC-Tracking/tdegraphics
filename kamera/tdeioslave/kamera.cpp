@@ -37,7 +37,7 @@
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
 #include <ksimpleconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprotocolinfo.h>
 #include <tdeio/slaveconfig.h>
 

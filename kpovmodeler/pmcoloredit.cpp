@@ -18,7 +18,7 @@
 #include "pmcoloredit.h"
 #include "pmlineedits.h"
 #include <kcolorbutton.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqlabel.h>
 #include <tqlayout.h>
 #include <tqcolor.h>

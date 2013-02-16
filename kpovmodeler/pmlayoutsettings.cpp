@@ -28,8 +28,8 @@
 #include <tqpushbutton.h>
 #include <tqlabel.h>
 #include <tqgroupbox.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )

@@ -26,7 +26,7 @@
 #include "pmdistancecontrolpoint.h"
 #include "pmdefaults.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 /** default param for the sphere */
 const double c_defaultRadius = 0.5;

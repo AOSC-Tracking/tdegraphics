@@ -27,7 +27,7 @@
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMLightEdit::PMLightEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

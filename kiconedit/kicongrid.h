@@ -27,7 +27,7 @@
 #include <tqpointarray.h>
 #include <tqframe.h>
 #include <kcommand.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "kcolorgrid.h"
 

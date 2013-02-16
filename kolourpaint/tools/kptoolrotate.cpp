@@ -42,7 +42,7 @@
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <knuminput.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpdefs.h>
 #include <kpdocument.h>

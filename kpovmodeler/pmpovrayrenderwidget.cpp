@@ -21,11 +21,11 @@
 #include "pmdragwidget.h"
 
 #include <kprocess.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kurl.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tqcolor.h>
 #include <tqpainter.h>
 #include <tqtextstream.h>

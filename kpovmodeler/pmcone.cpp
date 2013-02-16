@@ -28,7 +28,7 @@
 #include "pmdistancecontrolpoint.h"
 #include "pmconeedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 const double defaultConeRadius1 = 0.0;

@@ -26,7 +26,7 @@
 #include "pmtruetypecache.h"
 #include "pmdefaults.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const TQString c_defaultFont = TQString( "" );
 const TQString c_defaultText = TQString( "" );

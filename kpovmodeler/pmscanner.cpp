@@ -18,7 +18,7 @@
 
 #include <ctype.h>
 #include <stdlib.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "pmdebug.h"
 #include "pmscanner.h"

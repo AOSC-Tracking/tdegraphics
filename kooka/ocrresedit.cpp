@@ -29,7 +29,7 @@
 #include "ocrword.h"
 #include <kdebug.h>
 #include <tdefiledialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqfile.h>
 #include <tqtextstream.h>

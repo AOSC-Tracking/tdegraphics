@@ -25,8 +25,8 @@
 #include <kdebug.h>
 #include <kinstance.h>
 #include <tdeversion.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 // KLineEditDlg is depricated as of 3.2. use KInputDialog instead
 #if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)

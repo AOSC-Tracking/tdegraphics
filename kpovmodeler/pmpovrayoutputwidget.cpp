@@ -20,8 +20,8 @@
 #include <tqtextedit.h>
 #include <tqlayout.h>
 
-#include <klocale.h>
-#include <kglobalsettings.h>
+#include <tdelocale.h>
+#include <tdeglobalsettings.h>
 #include <tdeconfig.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>

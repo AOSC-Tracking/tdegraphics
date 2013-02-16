@@ -26,10 +26,10 @@
 #include <kcombobox.h>
 #include <kdialog.h>
 #include <keditlistbox.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <klineedit.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <knuminput.h>
 #include <kprogress.h>
 #include <kurlrequester.h>

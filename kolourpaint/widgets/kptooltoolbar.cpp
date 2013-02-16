@@ -41,7 +41,7 @@
 
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kicontheme.h>
 
 #include <kpdefs.h>

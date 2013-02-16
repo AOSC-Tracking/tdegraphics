@@ -28,7 +28,7 @@
 
 #include <kptoolellipticalselection.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpToolEllipticalSelection::kpToolEllipticalSelection (kpMainWindow *mainWindow)

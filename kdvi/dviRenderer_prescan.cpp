@@ -19,7 +19,7 @@
 #include "xdvi.h"
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kmimetype.h>
 #include <kprocess.h>
 #include <kprocio.h>

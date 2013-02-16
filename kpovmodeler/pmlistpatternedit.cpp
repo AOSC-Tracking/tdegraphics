@@ -27,8 +27,8 @@
 #include <tqlabel.h>
 #include "pmlineedits.h"
 #include <ktabctl.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 
 PMListPatternEdit::PMListPatternEdit( TQWidget* parent, const char* name )

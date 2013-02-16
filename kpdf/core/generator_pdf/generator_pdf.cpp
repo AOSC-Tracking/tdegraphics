@@ -18,12 +18,12 @@
 #include <tqvariant.h>
 #include <tdeapplication.h>
 #include <tdelistview.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kpassdlg.h>
 #include <tdewallet.h>
 #include <kprinter.h>
-#include <ktempfile.h>
-#include <kmessagebox.h>
+#include <tdetempfile.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 
 // xpdf includes

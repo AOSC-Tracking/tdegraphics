@@ -28,15 +28,15 @@
 
 #include <stdlib.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <tdefiledialog.h>
 #include <tdeio/job.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprinter.h>
 #include <kprocess.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tqlabel.h>
 #include <tqpainter.h>
 

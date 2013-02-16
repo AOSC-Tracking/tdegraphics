@@ -28,7 +28,7 @@
 
 #include <kptoolfreeformselection.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpToolFreeFormSelection::kpToolFreeFormSelection (kpMainWindow *mainWindow)

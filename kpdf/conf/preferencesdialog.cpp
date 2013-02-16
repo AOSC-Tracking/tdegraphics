@@ -7,7 +7,7 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 // single config pages
 #include "dlggeneral.h"

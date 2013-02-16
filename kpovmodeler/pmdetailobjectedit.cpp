@@ -21,7 +21,7 @@
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDetailObjectEdit::PMDetailObjectEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

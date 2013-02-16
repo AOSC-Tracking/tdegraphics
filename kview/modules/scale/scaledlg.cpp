@@ -30,10 +30,10 @@
 
 #include <kdebug.h>
 #include <kcombobox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 #include "kfloatspinbox.h"
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #define ONEINCHINMM 2.54
 

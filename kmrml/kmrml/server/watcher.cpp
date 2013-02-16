@@ -21,8 +21,8 @@
 #include <tdeapplication.h>
 #include <kdebug.h>
 #include <tdeversion.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 #include "watcher.h"
 

@@ -10,7 +10,7 @@
 
 #include "exif.h"
 #include <tqwmatrix.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 
 static unsigned char * LastExifRefd;

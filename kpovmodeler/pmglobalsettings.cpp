@@ -22,7 +22,7 @@
 #include "pmglobalsettingsedit.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double adcBailoutDefault = 1.0 / 255.0;
 const PMColor ambientLightDefault = PMColor( 1.0, 1.0, 1.0, 0.0, 0.0 );

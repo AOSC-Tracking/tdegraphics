@@ -34,7 +34,7 @@
 
 #include <tqvbox.h>
 #include <tqlistview.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <kiconloader.h>
 

@@ -23,7 +23,7 @@
 #include <tqgroupbox.h>
 #include <tqframe.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>

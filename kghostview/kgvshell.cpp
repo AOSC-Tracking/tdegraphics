@@ -24,19 +24,19 @@
 #include <tdefiledialog.h>
 #include <kiconloader.h>
 #include <klibloader.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
 #include <tdestdaccel.h>
-#include <ktempfile.h>
-#include <kmenubar.h>
+#include <tdetempfile.h>
+#include <tdemenubar.h>
 #include <kedittoolbar.h>
 #include <kdebug.h>
 
 #include <kicontheme.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <tdepopupmenu.h>
 #include <tdeparts/componentfactory.h>
 

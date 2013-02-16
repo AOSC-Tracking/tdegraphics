@@ -20,7 +20,7 @@
 
 #include <tqstring.h>
 #include <tqbuffer.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "pmpart.h"
 #include "pmdeclare.h"

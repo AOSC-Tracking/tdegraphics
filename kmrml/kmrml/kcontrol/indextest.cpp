@@ -4,7 +4,7 @@
 
 #include <tdeapplication.h>
 #include <tdeconfig.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 using namespace KMrmlConfig;
 

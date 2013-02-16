@@ -28,7 +28,7 @@
 #include <stdio.h>
 
 #include <tqlayout.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 #include <tqdir.h>
 #include <tqprinter.h>

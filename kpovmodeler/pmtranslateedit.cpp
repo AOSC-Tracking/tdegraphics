@@ -21,7 +21,7 @@
 #include "pmvectoredit.h"
 
 #include <tqlayout.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 PMTranslateEdit::PMTranslateEdit( TQWidget* parent, const char* name )

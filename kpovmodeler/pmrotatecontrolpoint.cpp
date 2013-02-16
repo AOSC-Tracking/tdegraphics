@@ -19,7 +19,7 @@
 #include "pmmath.h"
 #include "pmdebug.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <math.h>
 
 const double precision = 0.1;

@@ -27,7 +27,7 @@
 #include <kdialog.h>
 #include <kiconloader.h>
 #include <klineedit.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 #include <kurllabel.h>
 

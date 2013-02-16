@@ -27,7 +27,7 @@
 #include <tqvbox.h>
 #include <tqvgroupbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 using namespace KMrml;
 

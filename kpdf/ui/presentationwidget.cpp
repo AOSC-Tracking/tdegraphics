@@ -20,10 +20,10 @@
 #include <kcursor.h>
 #include <tdetoolbar.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kimageeffect.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <twin.h>
 
 // system includes

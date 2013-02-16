@@ -28,7 +28,7 @@
 
 #include <kptoolrectselection.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpToolRectSelection::kpToolRectSelection (kpMainWindow *mainWindow)

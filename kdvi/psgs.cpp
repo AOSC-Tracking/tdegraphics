@@ -9,10 +9,10 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kprocio.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kurl.h>
 #include <tqdir.h>
 #include <tqpainter.h>

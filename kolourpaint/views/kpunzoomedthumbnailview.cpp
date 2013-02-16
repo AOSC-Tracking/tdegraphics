@@ -32,7 +32,7 @@
 #include <kpunzoomedthumbnailview.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpdocument.h>
 #include <kpviewmanager.h>

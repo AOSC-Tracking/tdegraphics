@@ -25,7 +25,7 @@
 #include <tqlabel.h>
 #include <tqlineedit.h>
 #include <tqpushbutton.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdefiledialog.h>
 

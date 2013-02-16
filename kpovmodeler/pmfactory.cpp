@@ -16,7 +16,7 @@
 **************************************************************************/
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kinstance.h>
 #include <tdeaboutdata.h>
 

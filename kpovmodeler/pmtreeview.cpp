@@ -24,9 +24,9 @@
 #include <tqpopupmenu.h>
 #include <tqcursor.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kglobalsettings.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
+#include <tdeglobalsettings.h>
 #include <kiconloader.h>
 #include <kxmlguifactory.h>
 

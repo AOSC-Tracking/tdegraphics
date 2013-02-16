@@ -24,8 +24,8 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 PMDiscEdit::PMDiscEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

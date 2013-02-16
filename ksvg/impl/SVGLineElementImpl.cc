@@ -19,7 +19,7 @@
 */
 
 #include <math.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include <kdebug.h>
 

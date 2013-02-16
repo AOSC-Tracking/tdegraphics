@@ -34,8 +34,8 @@
 #include <kdebug.h>
 #include <kedittoolbar.h>
 #include <kkeydialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kstdaction.h>
 
 #include <kpdefs.h>

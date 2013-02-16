@@ -6,8 +6,8 @@
 #include <tdefiledialog.h>
 #include <kiconloader.h>
 #include <tdeio/job.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kprinter.h>
 #include <kstdaction.h>
 #include <tqobject.h>

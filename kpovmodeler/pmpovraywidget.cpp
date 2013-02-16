@@ -20,13 +20,13 @@
 #include "pmpovrayoutputwidget.h"
 #include "pmshell.h"
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kimageio.h>
 #include <tdefiledialog.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tdeio/netaccess.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 

@@ -26,7 +26,7 @@
 #include "pmmemento.h"
 #include "pmxmlhelper.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMObjectLink, PMObjectLinkProperty );
 

@@ -37,7 +37,7 @@
 
 
 #include <tdefiledialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <kbuttonbox.h>
 #include <kiconloader.h>

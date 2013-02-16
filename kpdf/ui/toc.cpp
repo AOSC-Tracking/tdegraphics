@@ -10,7 +10,7 @@
 // qt/kde includes
 #include <tqheader.h>
 #include <tqvariant.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 // local includes
 #include "toc.h"

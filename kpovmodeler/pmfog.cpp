@@ -21,7 +21,7 @@
 #include "pmfogedit.h"
 #include "pmvector.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const int fogTypeDefault = 1;
 const double distanceDefault = 0.0;

@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 
 #include "SVGTestsImpl.h"
 #include "SVGStringListImpl.h"

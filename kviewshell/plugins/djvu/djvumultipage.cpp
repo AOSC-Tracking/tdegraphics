@@ -26,7 +26,7 @@
 #include <tdefiledialog.h>
 #include <tdeparts/genericfactory.h>
 #include <kprinter.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include "kvsprefs.h"
 #include <tqapplication.h>
 #include <tqpaintdevicemetrics.h>
@@ -41,7 +41,7 @@
 #include "pageRangeWidget.h"
 #include "prefs.h"
 
-#include "kmessagebox.h"
+#include "tdemessagebox.h"
 
 typedef KParts::GenericFactory<DjVuMultiPage> DjVuMultiPageFactory;
 K_EXPORT_COMPONENT_FACTORY(djvuviewpart, DjVuMultiPageFactory)

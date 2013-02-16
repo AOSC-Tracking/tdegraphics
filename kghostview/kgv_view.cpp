@@ -28,14 +28,14 @@
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <kdirwatch.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kiconloader.h>
 #include <kinstance.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdepopupmenu.h>
 #include <kstdaction.h>
 #include <tdestdaccel.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tdeio/scheduler.h>
 #include <tdeaboutdata.h>
 

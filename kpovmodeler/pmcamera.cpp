@@ -26,7 +26,7 @@
 #include "pmvectorcontrolpoint.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMCamera, PMCameraProperty );
 PMDefineEnumPropertyClass( PMCamera, PMCamera::CameraType,

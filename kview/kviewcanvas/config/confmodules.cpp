@@ -24,7 +24,7 @@
 #include <tqcheckbox.h>
 #include <tqframe.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <ksimpleconfig.h>
 #include <kcolorbutton.h>
 #include <tdelistview.h>

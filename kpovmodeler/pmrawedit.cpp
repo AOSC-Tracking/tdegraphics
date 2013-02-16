@@ -22,8 +22,8 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqmultilineedit.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
+#include <tdeglobalsettings.h>
+#include <tdelocale.h>
 
 PMRawEdit::PMRawEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

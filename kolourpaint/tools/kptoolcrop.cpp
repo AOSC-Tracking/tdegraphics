@@ -33,7 +33,7 @@
 #include <tqpixmap.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpcolor.h>
 #include <kpcommandhistory.h>

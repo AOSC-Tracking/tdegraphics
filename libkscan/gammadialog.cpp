@@ -24,7 +24,7 @@
 #include <tqcombobox.h>
 
 #include <kscanslider.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 #include "gammadialog.h"

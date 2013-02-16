@@ -22,7 +22,7 @@
 
 #include <tqlayout.h>
 #include <tqcheckbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 PMPigmentEdit::PMPigmentEdit( TQWidget* parent, const char* name )

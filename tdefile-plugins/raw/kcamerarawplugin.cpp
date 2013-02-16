@@ -23,10 +23,10 @@
 #include <config.h>
 #endif
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kimageio.h>
 #include <tqfile.h>
 #include <tqimage.h>

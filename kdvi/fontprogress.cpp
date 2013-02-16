@@ -8,7 +8,7 @@
 #include "fontprogress.h"
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocio.h>
 #include <kprogress.h>
 #include <tqapplication.h>

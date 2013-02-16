@@ -20,8 +20,8 @@
 
 #include <tdeaboutdata.h>
 #include <kinstance.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kstandarddirs.h>
 
 #include "ksvg_plugin.h"

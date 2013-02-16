@@ -24,7 +24,7 @@
 #include "pmdistancecontrolpoint.h"
 #include "pmdefaults.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMBlobSphere, PMBlobSphereProperty );
 

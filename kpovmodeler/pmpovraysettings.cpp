@@ -30,9 +30,9 @@
 #include <tqcombobox.h>
 #include <tqgroupbox.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdefiledialog.h>
 
 PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )

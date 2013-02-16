@@ -26,7 +26,7 @@
 */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kptoolbrush.h>
 
 kpToolBrush::kpToolBrush (kpMainWindow *mainWindow)

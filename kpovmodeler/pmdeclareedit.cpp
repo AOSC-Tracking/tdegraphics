@@ -30,8 +30,8 @@
 #include <tqpushbutton.h>
 #include <tqlistbox.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 PMDeclareEdit::PMDeclareEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

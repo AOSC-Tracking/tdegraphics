@@ -37,12 +37,12 @@
 
 #include <tdeapplication.h>
 #include <tdeconfig.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kanimwidget.h>
 #include <kseparator.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include "resource.h"
 #include "ksaneocr.h"  // TODO: Really needed?

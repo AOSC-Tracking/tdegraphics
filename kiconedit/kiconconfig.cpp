@@ -30,10 +30,10 @@
 #include <tdeaccel.h>
 #include <kbuttonbox.h>
 #include <tdeapplication.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kcolorbutton.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <kurlrequester.h>
 

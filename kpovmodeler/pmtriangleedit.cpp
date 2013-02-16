@@ -24,8 +24,8 @@
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqpushbutton.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 PMTriangleEdit::PMTriangleEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

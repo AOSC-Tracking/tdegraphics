@@ -46,14 +46,14 @@
 #include <tqwmatrix.h>
 
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kimageio.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kmimetype.h>
 #include <ksavefile.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <kpcolor.h>
 #include <kpcolortoolbar.h>

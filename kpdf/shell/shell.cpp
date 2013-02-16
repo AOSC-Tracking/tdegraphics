@@ -25,12 +25,12 @@
 #include <kedittoolbar.h>
 #include <tdefiledialog.h>
 #include <klibloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kstdaction.h>
 #include <kurl.h>
 #include <kdebug.h>
-#include <klocale.h>
-#include <kmenubar.h>
+#include <tdelocale.h>
+#include <tdemenubar.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeio/netaccess.h>
 #include <tdemainwindowiface.h>

@@ -19,7 +19,7 @@
 */
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "CanvasItem.h"
 #include "KSVGCanvas.h"

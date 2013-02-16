@@ -36,7 +36,7 @@
 #include <kdebug.h>
 #include <kdialogbase.h>
 #include <krun.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeshortcut.h>
 
 #include <kptool.h>

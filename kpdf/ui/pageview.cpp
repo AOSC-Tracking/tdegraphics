@@ -33,7 +33,7 @@
 #include <tdestdaccel.h>
 #include <tdeactioncollection.h>
 #include <tdepopupmenu.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdefiledialog.h>
 #include <kimageeffect.h>
 #include <kimageio.h>

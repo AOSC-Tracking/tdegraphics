@@ -23,7 +23,7 @@
 #include <tqgroupbox.h>
 #include <tqlistview.h>
 #include <tqpushbutton.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 class PMPluginListViewItem : public TQListViewItem
 {

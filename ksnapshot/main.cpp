@@ -23,7 +23,7 @@
 
 #include <tdeapplication.h>
 #include <kimageio.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdecmdlineargs.h>
 #include <tdeaboutdata.h>
 #include <kiconloader.h>

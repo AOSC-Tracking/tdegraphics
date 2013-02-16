@@ -25,8 +25,8 @@
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqcombobox.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kdialog.h>
 
 PMMediaEdit::PMMediaEdit( TQWidget* parent, const char* name )

@@ -25,7 +25,7 @@
 #include "pm3dcontrolpoint.h"
 #include "pmvectorcontrolpoint.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMVector point0Default = PMVector( -1.0, 0.0, 0.0 );
 const PMVector point1Default = PMVector( 1.0, 0.0, 0.0 );

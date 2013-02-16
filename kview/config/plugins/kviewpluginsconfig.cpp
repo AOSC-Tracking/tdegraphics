@@ -20,8 +20,8 @@
 
 #include <kpluginselector.h>
 #include <kgenericfactory.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <ksimpleconfig.h>
 #include <kplugininfo.h>
 

@@ -19,7 +19,7 @@
 #include "pmoutputdevice.h"
 #include "pmpovrayformat.h"
 #include <tqtextstream.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 unsigned int PMOutputDevice::s_indentOffset = 3;
 bool PMOutputDevice::s_bracketBehindType = true;

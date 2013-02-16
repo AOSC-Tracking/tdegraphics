@@ -24,7 +24,7 @@
 #include "pmviewstructure.h"
 #include "pm3dcontrolpoint.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double defaultBoxSize = 0.5;
 const PMVector corner1Default = PMVector( -defaultBoxSize, -defaultBoxSize, -defaultBoxSize );

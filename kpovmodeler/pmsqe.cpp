@@ -25,7 +25,7 @@
 #include "pmdefaults.h"
 #include "pmmath.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double c_defaultEastWestExponent = 1.0;
 const double c_defaultNorthSouthExponent = 1.0;

@@ -19,7 +19,7 @@
 #include <tqvalidator.h>
 #include <tqcolor.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "main.h"
 #include "texteditselection.h"

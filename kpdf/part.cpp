@@ -45,7 +45,7 @@
 #include <tdeparts/genericfactory.h>
 #include <kurldrag.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kfinddialog.h>
 #include <knuminput.h>
 #include <kiconloader.h>
@@ -54,7 +54,7 @@
 #include <tdepopupmenu.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <ktrader.h>
 #include <kxmlguiclient.h>
 #include <kxmlguifactory.h>

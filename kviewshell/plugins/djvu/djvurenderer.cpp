@@ -21,9 +21,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqfileinfo.h>
 #include <tqimage.h>
 #include <tqpainter.h>

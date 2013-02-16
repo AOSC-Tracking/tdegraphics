@@ -27,8 +27,8 @@
 #include <tqptrdict.h>
 #include <kdialog.h>
 #include <tdeconfig.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 #include "pmpart.h"
 #include "pmdefaults.h"

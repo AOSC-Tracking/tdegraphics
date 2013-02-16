@@ -33,17 +33,17 @@
 #include <tdeconfig.h>
 #include <kdatastream.h>
 #include <kdebug.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kinstance.h>
 #include <tdeio/job.h>
 #include <tdeio/jobclasses.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <knuminput.h>
 #include <kprotocolinfo.h>
 #include <tdeparts/genericfactory.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <mrml_utils.h>
 

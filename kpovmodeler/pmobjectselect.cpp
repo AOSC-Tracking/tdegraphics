@@ -17,7 +17,7 @@
 
 #include "pmobjectselect.h"
 #include "pmfactory.h"
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 
 PMListBoxObject::PMListBoxObject( TQListBox* listbox, PMObject* obj,

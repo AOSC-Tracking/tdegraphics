@@ -28,10 +28,10 @@
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
 #include <tqpushbutton.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 PMLatheEdit::PMLatheEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

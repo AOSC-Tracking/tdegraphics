@@ -11,9 +11,9 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tdelistview.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <ksqueezedtextlabel.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 // local includes
 #include "propertiesdialog.h"

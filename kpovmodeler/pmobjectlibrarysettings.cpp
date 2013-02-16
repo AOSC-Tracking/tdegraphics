@@ -28,9 +28,9 @@
 #include <tqgroupbox.h>
 #include <tqlabel.h>
 #include <tqpushbutton.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
 
 PMObjectLibrarySettings::PMObjectLibrarySettings( TQWidget* parent, const char* name )

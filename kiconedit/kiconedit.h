@@ -27,7 +27,7 @@
 
 #include <tdemainwindow.h>
 #include <kiconloader.h>
-#include <kmenubar.h>
+#include <tdemenubar.h>
 #include <kstatusbar.h>
 #include <tdetoolbar.h>
 #include <tdeaccel.h>

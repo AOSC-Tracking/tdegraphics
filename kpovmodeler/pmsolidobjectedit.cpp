@@ -21,7 +21,7 @@
 
 #include <tqcheckbox.h>
 #include <tqlayout.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMSolidObjectEdit::PMSolidObjectEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

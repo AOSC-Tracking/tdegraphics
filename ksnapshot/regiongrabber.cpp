@@ -26,7 +26,7 @@
 #include <tqtimer.h>
 #include <tqtooltip.h>
 
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 SizeTip::SizeTip( TQWidget *parent, const char *name )
     : TQLabel( parent, name, WStyle_Customize | WX11BypassWM |

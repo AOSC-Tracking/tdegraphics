@@ -31,7 +31,7 @@
 #include "pmpoint.h"
 #include "pmmatrix.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const int defaultNumberOfPoints = 2;
 const PMVector defaultPoint[defaultNumberOfPoints] =

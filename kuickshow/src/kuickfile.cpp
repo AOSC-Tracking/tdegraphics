@@ -3,11 +3,11 @@
 #include <kdebug.h>
 #include <tdeversion.h>
 #include <kinstance.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprogress.h>
 #include <tdeio/job.h>
 #include <tdeio/netaccess.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include "filecache.h"
 #include "kuickfile.h"

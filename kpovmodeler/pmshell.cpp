@@ -15,13 +15,13 @@
 *                                                                        *
 **************************************************************************/
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <khelpmenu.h>
 #include <kstdaction.h>
 #include <tdeaction.h>
 #include <kstatusbar.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kiconloader.h>
 #include <kedittoolbar.h>
 #include <kkeydialog.h>

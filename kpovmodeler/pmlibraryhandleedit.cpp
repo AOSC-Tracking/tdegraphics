@@ -25,9 +25,9 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdefiledialog.h>
 
 #include "pmlineedits.h"

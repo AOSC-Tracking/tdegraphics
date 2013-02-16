@@ -17,7 +17,7 @@
 
 
 #include "pminsertpopup.h"
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tqcursor.h>
 

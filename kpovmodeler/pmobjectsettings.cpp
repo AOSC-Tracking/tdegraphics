@@ -41,7 +41,7 @@
 #include <tqcheckbox.h>
 #include <tqgroupbox.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 PMObjectSettings::PMObjectSettings( TQWidget* parent, const char* name )

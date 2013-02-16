@@ -36,7 +36,7 @@
 #include <tqpoint.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpcolortoolbar.h>
 #include <kpcommandhistory.h>

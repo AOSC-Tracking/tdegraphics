@@ -7,7 +7,7 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 // The purpose of this file is only to display a sort of descriptive text
 // when the user clicks on each memory profile.

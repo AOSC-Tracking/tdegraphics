@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pminterioredit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double iorDefault = 1.0;
 const double causticsDefault = 0.0;

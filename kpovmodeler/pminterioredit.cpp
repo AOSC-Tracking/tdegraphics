@@ -24,7 +24,7 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 PMInteriorEdit::PMInteriorEdit( TQWidget* parent, const char* name )

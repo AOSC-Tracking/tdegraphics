@@ -23,7 +23,7 @@
 #include "pmmemento.h"
 #include "pmtranslatecontrolpoint.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMVector moveDefault = PMVector( 0.0, 0.0, 0.0 );
 

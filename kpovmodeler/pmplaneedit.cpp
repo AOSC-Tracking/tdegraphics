@@ -25,8 +25,8 @@
 #include <tqlabel.h>
 #include <tqpushbutton.h>
 #include <tqcheckbox.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 PMPlaneEdit::PMPlaneEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

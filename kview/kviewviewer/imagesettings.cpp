@@ -21,7 +21,7 @@
 #include <tqcheckbox.h>
 #include <tqlayout.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 
 ImageSettings::ImageSettings( TQWidget * parent, const char * name )

@@ -44,7 +44,7 @@
 #include <tqstring.h>
 
 #include <tdecmdlineargs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "kfax.h"
 #include "faxexpand.h"

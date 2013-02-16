@@ -22,12 +22,12 @@
 
 #include <tqimage.h>
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdefiledialog.h>
 #include <tdeio/netaccess.h>
 #include <kimageio.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "kicon.h"
 #include "utils.h"

@@ -19,7 +19,7 @@
 #include <tqlineedit.h>
 #include <tqlabel.h>
 #include <tqlayout.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>

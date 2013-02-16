@@ -23,7 +23,7 @@
 #include <tqlayout.h>
 #include <tqgroupbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 
 #include "kresize.h"

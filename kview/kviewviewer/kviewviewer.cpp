@@ -43,8 +43,8 @@
 #include <tdeparts/genericfactory.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/plugin.h>
-#include <kmessagebox.h>
-#include <ktempfile.h>
+#include <tdemessagebox.h>
+#include <tdetempfile.h>
 #include <tdeapplication.h>
 #include <kimageio.h>
 #include <tdestdaccel.h>

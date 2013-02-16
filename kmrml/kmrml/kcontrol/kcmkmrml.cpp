@@ -23,9 +23,9 @@
 #include <tdeapplication.h>
 #include <kdebug.h>
 #include <kdialog.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kgenericfactory.h>
 #include <kstandarddirs.h>
 #include <kurllabel.h>

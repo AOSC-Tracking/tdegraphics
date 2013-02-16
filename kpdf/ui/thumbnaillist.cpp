@@ -10,7 +10,7 @@
 // qt/kde includes
 #include <tqtimer.h>
 #include <tqpainter.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kurl.h>
 #include <kurldrag.h>
 #include <tdeaction.h>

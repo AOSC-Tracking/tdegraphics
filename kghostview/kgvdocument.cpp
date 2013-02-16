@@ -25,13 +25,13 @@
 #include <tdefiledialog.h>
 #include <kfilterdev.h>
 #include <kinstance.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kmimetype.h>
 #include <kprinter.h>
 #include <kprocess.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 #include "configuration.h"

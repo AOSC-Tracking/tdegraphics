@@ -42,7 +42,7 @@
 #include <kcombobox.h>
 #include <kdebug.h>
 #include <kimageeffect.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 
 #include <kppixmapfx.h>

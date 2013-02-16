@@ -26,7 +26,7 @@
 #include "pmdistancecontrolpoint.h"
 #include "pmblobcylinderedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMBlobCylinder, PMBlobCylinderProperty );
 

@@ -26,7 +26,7 @@
 #include <tqcheckbox.h>
 #include <tqspinbox.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 
 PMPolynomEdit::PMPolynomEdit( TQWidget* parent, const char* name )

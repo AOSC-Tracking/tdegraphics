@@ -52,8 +52,8 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <klocale.h>
-#include <ktempfile.h>
+#include <tdelocale.h>
+#include <tdetempfile.h>
 #include <tqdir.h>
 #include <tqfileinfo.h>
 #include <stdlib.h>

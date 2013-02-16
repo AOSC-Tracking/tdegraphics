@@ -29,8 +29,8 @@
 
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kprocess.h>
 #include <kdialog.h>
 #include <kgenericfactory.h>

@@ -13,7 +13,7 @@
 #include <tqtimer.h>
 #include <tdeaction.h>
 #include <tdeactioncollection.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <klineedit.h>
 #include <tdepopupmenu.h>

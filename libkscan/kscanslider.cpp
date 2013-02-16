@@ -27,7 +27,7 @@
 #include <tqlineedit.h>
 
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include "kscanslider.h"
 

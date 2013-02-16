@@ -21,7 +21,7 @@
 #include "pmvectoredit.h"
 
 #include <tqlayout.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 PMScaleEdit::PMScaleEdit( TQWidget* parent, const char* name )

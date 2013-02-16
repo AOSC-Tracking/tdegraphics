@@ -23,7 +23,7 @@
 #include "pmmemento.h"
 #include "pmrotatecontrolpoint.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqdom.h>
 
 const PMVector rotateDefault = PMVector( 0, 0, 0 );

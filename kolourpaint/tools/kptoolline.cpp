@@ -28,7 +28,7 @@
 
 #include <kptoolline.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpToolLine::kpToolLine (kpMainWindow *mainWindow)

@@ -25,7 +25,7 @@
 #include <tqvbox.h>
 
 #include <tdeaction.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
 #include <kimageviewer/viewer.h>

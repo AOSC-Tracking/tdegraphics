@@ -24,7 +24,7 @@
 #include "pmquickcoloredit.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMColor colorDefault = PMColor( 1.0, 1.0, 1.0, 0.0, 0.0 );
 

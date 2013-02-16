@@ -52,7 +52,7 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <math.h>
 #include <tqbitmap.h>
 #include <tqfile.h>

@@ -22,8 +22,8 @@
 
 #include <tqlayout.h>
 #include <tqlabel.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 
 PMTextureMapEdit::PMTextureMapEdit( TQWidget* parent, const char* name )

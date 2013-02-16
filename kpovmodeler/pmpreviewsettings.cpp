@@ -26,8 +26,8 @@
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <kcolorbutton.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 PMPreviewSettings::PMPreviewSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )

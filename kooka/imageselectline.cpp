@@ -32,7 +32,7 @@
 #include <tqlabel.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kurl.h>
 #include <kurlcombobox.h>
 #include <tdefiledialog.h>

@@ -26,7 +26,7 @@
 #include <tqgroupbox.h>
 #include <tqlabel.h>
 #include <kcolorbutton.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMGridSettings::PMGridSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )

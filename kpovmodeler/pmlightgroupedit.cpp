@@ -22,7 +22,7 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMLightGroupEdit::PMLightGroupEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

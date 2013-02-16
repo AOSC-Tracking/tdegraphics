@@ -21,7 +21,7 @@
 #include <tqtextedit.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kseparator.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>

@@ -22,7 +22,7 @@
 #include "pmmediaedit.h"
 #include "pmcolor.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const int methodDefault = 1;
 const int intervalsDefault = 10;

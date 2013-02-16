@@ -21,7 +21,7 @@
 
 #include <tqevent.h>
 
-#include <kdiroperator.h>
+#include <tdediroperator.h>
 
 class FileFinder;
 class KFileItem;

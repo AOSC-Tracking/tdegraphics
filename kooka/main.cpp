@@ -33,8 +33,8 @@
 #include <dcopclient.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kimageio.h>
 #include <kiconloader.h>
 #include <kdebug.h>

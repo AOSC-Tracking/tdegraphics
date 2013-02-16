@@ -24,7 +24,7 @@
 #include "pmmemento.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMListPattern, PMListPatternProperty );
 PMDefineEnumPropertyClass( PMListPattern, PMListPattern::PMListType,

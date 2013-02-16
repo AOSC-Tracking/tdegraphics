@@ -22,7 +22,7 @@
 #include "pmblobedit.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double c_defaultThreshold = 0.5;
 bool c_defaultSturm = false;

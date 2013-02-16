@@ -30,8 +30,8 @@
 #include <tqtimer.h>
 
 #include <tdeapplication.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
+#include <tdeglobalsettings.h>
+#include <tdelocale.h>
 #include <tdepopupmenu.h>
 #include <kiconloader.h>
 #include <kdebug.h>

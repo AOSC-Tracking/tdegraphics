@@ -23,7 +23,7 @@
 #include "pmlistpattern.h"
 #include "pmpattern.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double bumpSizeDefault = 0.0;
 const double accuracyDefault = 0.02;

@@ -30,7 +30,7 @@
 #include "SVGDocumentImpl.h"
 
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include <tqstring.h>
 #include <tqdatetime.h>

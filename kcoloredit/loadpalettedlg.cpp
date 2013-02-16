@@ -22,7 +22,7 @@
 #include <tqstring.h>
 #include <tqstringlist.h>
 #include <tqpushbutton.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstandarddirs.h>
 #include <kpalette.h>
 #include <tdefiledialog.h>

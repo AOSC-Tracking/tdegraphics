@@ -19,7 +19,7 @@
 
 #include <tdeconfig.h>
 #include <kstandarddirs.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include <tqfile.h>
 #include <tqdir.h>

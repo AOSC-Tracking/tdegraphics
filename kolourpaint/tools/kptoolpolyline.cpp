@@ -28,7 +28,7 @@
 
 #include <kptoolpolyline.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpToolPolyline::kpToolPolyline (kpMainWindow *mainWindow)

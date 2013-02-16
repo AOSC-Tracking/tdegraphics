@@ -21,7 +21,7 @@
 
 #include <stdlib.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>

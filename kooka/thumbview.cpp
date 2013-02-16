@@ -36,7 +36,7 @@
 #include <tdefileiconview.h>
 #include <tdefiletreeviewitem.h>
 #include <kimageeffect.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kstandarddirs.h>
 #include <kprogress.h>
 

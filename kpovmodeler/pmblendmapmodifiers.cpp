@@ -22,7 +22,7 @@
 #include "pmvector.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMBlendMapModifiers, PMBlendMapModifiersProperty );
 PMDefineEnumPropertyClass( PMBlendMapModifiers,

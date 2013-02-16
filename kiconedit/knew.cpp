@@ -25,8 +25,8 @@
 #include <tqpushbutton.h>
 
 #include <tdeconfig.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <tdeapplication.h>

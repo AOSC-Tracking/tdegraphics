@@ -7,11 +7,11 @@
 #include <tdeconfigdialog.h>
 #include <kdebug.h>
 #include <tdefiledialog.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kstdaction.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <ktip.h>
 #include <tqtimer.h>
 

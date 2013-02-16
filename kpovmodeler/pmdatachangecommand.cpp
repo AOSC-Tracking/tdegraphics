@@ -20,7 +20,7 @@
 #include "pmcommandmanager.h"
 #include "pmmemento.h"
 #include "pmobject.h"
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDataChangeCommand::PMDataChangeCommand( PMMemento* memento )
       : PMCommand( )

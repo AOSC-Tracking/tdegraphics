@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmmaterialedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMetaObject* PMMaterial::s_pMetaObject = 0;
 PMObject* createNewMaterial( PMPart* part )

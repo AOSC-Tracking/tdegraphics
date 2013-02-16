@@ -22,8 +22,8 @@
 #include <tqpainter.h>
 
 #include <kkeydialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <kprinter.h>
 #include <kurldrag.h>

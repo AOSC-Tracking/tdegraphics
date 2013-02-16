@@ -28,7 +28,7 @@
 #include <tqimage.h>
 #include <tqpainter.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdestyle.h>
 #include <tdeapplication.h>
 

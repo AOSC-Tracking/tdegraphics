@@ -26,7 +26,7 @@
 */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kptoolcolorwasher.h>
 
 kpToolColorWasher::kpToolColorWasher (kpMainWindow *mainWindow)

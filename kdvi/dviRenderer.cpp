@@ -29,15 +29,15 @@
 #include <tqvbox.h>
 
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kmimemagic.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kdebug.h>
 #include <keditcl.h>
 #include <tdefiledialog.h>
 #include <tdeio/job.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprinter.h>
 #include <kprocess.h>
 #include <kprogress.h>

@@ -29,8 +29,8 @@
 
 #include <kprinter.h>
 #include <kdebug.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 
 KViewKonqExtension::KViewKonqExtension( KImageViewer::Canvas * canvas,
 		KViewViewer *parent, const char *name )

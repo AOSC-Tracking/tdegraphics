@@ -27,8 +27,8 @@
 
 #include <tdeaccel.h>
 #include <tdeconfig.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 
 #include "imagewindow.h"
 #include "defaultswidget.h"

@@ -35,8 +35,8 @@
 #include <tdeconfig.h>
 #include <kstdaction.h>
 #include <tdeaction.h>
-#include <kmessagebox.h>
-#include <ktempfile.h>
+#include <tdemessagebox.h>
+#include <tdetempfile.h>
 #include <tdeio/netaccess.h>
 #include <kstandarddirs.h>
 #include <kfilterdev.h>

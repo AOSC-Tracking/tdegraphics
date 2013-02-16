@@ -33,7 +33,7 @@
 #include <tqfile.h>
 #include <tqstring.h>
 #include <tdeconfig.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kinstance.h>
 #include <kurl.h>
 

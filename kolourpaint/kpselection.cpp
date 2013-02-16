@@ -37,7 +37,7 @@
 #include <tqwmatrix.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpcolorsimilaritydialog.h>
 #include <kpdefs.h>

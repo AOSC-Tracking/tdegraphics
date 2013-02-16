@@ -24,7 +24,7 @@
 #include "pmrecursiveobjectiterator.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMAddCommand::PMAddCommand( PMObject* obj, PMObject* parent, PMObject* after )
       : PMCommand( i18n( "Add New %1" ).arg( obj->description( ) ) )

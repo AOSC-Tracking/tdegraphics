@@ -37,7 +37,7 @@
 #include <tqwhatsthis.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpcolor.h>
 #include <kpcolorsimilaritydialog.h>

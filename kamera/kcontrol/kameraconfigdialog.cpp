@@ -35,7 +35,7 @@
 #include <tqtabwidget.h>
 #include <tqwhatsthis.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "kameraconfigdialog.h"
 #include "kameraconfigdialog.moc"

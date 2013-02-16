@@ -39,7 +39,7 @@
 #include <tqpaintdevicemetrics.h>
 #include <tqbitmap.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaboutdata.h>
 #include <kstandarddirs.h>
 #include <kiconloader.h>
@@ -47,12 +47,12 @@
 #include <tdefilemetainfo.h>
 #include <tdestdaccel.h>
 #include <tdeconfig.h>
-#include <kmenubar.h>
-#include <kmessagebox.h>
+#include <tdemenubar.h>
+#include <tdemessagebox.h>
 #include <tdecmdlineargs.h>
 #include <tdeio/netaccess.h>
 #include <knotifyclient.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kstdaction.h>
 #include <kdebug.h>
 #include <kurldrag.h>

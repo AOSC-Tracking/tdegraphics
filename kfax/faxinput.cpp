@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA. *
 #include <tqstring.h>
 #include <tqfile.h>
 #include <tdeapplication.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 
 void statusbarupdate(char* name,int width,int height,char* res);

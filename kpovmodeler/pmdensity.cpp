@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmdensityedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMetaObject* PMDensity::s_pMetaObject = 0;
 PMObject* createNewDensity( PMPart* part )

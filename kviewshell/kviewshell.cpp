@@ -18,9 +18,9 @@
 #include <tdeaction.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kmenubar.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
+#include <tdemenubar.h>
 #include <klibloader.h>
 #include <kstdaction.h>
 #include <kedittoolbar.h>

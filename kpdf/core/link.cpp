@@ -10,7 +10,7 @@
 // local includes
 #include "link.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 KPDFLink::~KPDFLink()
 {

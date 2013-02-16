@@ -26,7 +26,7 @@
 #include "pmdistancecontrolpoint.h"
 #include "pmdefaults.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 /** default param for the Torus */
 const double c_defaultminorRadius = 0.25;

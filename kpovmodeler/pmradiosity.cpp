@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmradiosityedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double adcBailoutDefault = 0.01;
 const double brightnessDefault = 1.0;

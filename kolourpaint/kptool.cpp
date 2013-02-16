@@ -44,8 +44,8 @@
 #include <tdeapplication.h>
 #include <kdebug.h>
 #include <kiconloader.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 #include <kpcolor.h>
 #include <kpcolortoolbar.h>

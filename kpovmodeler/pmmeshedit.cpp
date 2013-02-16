@@ -23,7 +23,7 @@
 #include <tqlayout.h>
 #include <tqcheckbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMeshEdit::PMMeshEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

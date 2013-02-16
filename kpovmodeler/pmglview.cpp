@@ -40,7 +40,7 @@
 #include <tdeaction.h>
 #include <tdeconfig.h>
 #include <kstaticdeleter.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kdialog.h>
 

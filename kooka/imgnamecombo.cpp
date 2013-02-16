@@ -32,7 +32,7 @@
 #include <kcombobox.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdefiletreebranch.h>
 
 #include "imgnamecombo.h"

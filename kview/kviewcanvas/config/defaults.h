@@ -19,7 +19,7 @@
 #ifndef DEFAULTS_H
 #define DEFAULTS_H
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqsize.h>
 #include <tqcolor.h>
 

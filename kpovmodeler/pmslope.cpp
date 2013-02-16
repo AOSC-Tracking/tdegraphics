@@ -21,7 +21,7 @@
 #include "pmslopeedit.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double heightDefault = 0;
 const double slopeDefault = 0;

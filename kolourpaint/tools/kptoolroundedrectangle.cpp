@@ -26,7 +26,7 @@
 */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kptoolroundedrectangle.h>
 
 kpToolRoundedRectangle::kpToolRoundedRectangle (kpMainWindow *mainWindow)

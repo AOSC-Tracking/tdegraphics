@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmpigmentedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMPigment, PMPigmentProperty );
 

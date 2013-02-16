@@ -25,8 +25,8 @@
 
 #include <kurl.h>
 #include <tdeio/job.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 
 #include <stdlib.h>
 

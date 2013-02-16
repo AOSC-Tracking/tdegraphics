@@ -19,7 +19,7 @@
 #include "pmerrorflags.h"
 #include "pmdebug.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 unsigned int PMSerializer::s_maxErrors = 30;
 unsigned int PMSerializer::s_maxWarnings = 50;

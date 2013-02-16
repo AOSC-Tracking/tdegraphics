@@ -23,9 +23,9 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 
 PMPhotonsEdit::PMPhotonsEdit( TQWidget* parent, const char* name )

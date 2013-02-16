@@ -22,7 +22,7 @@
 #include "pmskysphereedit.h"
 #include "pmdebug.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMetaObject* PMSkySphere::s_pMetaObject = 0;
 PMObject* createNewSkySphere( PMPart* part )

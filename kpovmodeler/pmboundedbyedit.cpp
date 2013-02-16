@@ -21,7 +21,7 @@
 
 #include <tqlayout.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMBoundedByEdit::PMBoundedByEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

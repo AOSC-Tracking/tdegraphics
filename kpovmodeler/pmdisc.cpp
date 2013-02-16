@@ -28,7 +28,7 @@
 #include "pm3dcontrolpoint.h"
 #include "pmdefaults.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "pmdiscedit.h"
 

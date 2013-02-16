@@ -33,8 +33,8 @@
 #include <tqstringlist.h>
 #include <tqptrlist.h>
 #include <tqvaluelist.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 
 #include "pmobject.h"
 #include "pmcommandmanager.h"

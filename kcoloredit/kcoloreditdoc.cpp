@@ -22,8 +22,8 @@
 #include <tqclipboard.h>
 
 // include files for KDE
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 // application specific includes
 #include "kcoloreditdoc.h"

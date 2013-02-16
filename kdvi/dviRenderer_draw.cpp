@@ -68,8 +68,8 @@
 
 #include <stdlib.h>
 #include <kdebug.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kprocess.h>
 #include <tqpainter.h>
 #include <tqbitmap.h> 

@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmnamedobjectedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMetaObject* PMLooksLike::s_pMetaObject = 0;
 PMObject* createNewLooksLike( PMPart* part )

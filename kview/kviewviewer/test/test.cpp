@@ -7,7 +7,7 @@
 
 #include <kurl.h>
 #include <klibloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeapplication.h>
 

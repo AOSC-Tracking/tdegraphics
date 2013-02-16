@@ -30,7 +30,7 @@
 #include <tqframe.h>
 
 #include <kurl.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 #include <tdelistview.h>
 

@@ -28,7 +28,7 @@
 #include "pmdefaults.h"
 #include "pmobjectaction.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const int defaultNumberOfPoints = 4;
 const PMVector defaultPoint[defaultNumberOfPoints] =

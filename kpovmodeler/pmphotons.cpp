@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmphotonsedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const double spacingMultiDefault = 1.0;
 

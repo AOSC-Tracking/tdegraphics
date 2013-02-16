@@ -25,7 +25,7 @@
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
 
 

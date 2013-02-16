@@ -26,7 +26,7 @@
 
 // include files for KDE
 #include <kseparator.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 // application specific includes
 #include "main.h"

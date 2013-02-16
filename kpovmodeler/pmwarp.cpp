@@ -22,7 +22,7 @@
 #include "pmmemento.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMVector directionDefault = PMVector( 1.0, 0.0, 0.0 );
 const PMVector offsetDefault = PMVector( 0.0, 0.0, 0.0 );

@@ -21,7 +21,7 @@
 
 #include <tqlayout.h>
 #include <tqmultilineedit.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 PMCommentEdit::PMCommentEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

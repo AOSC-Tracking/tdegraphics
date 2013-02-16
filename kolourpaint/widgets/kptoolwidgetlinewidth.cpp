@@ -31,7 +31,7 @@
 #include <tqbitmap.h>
 #include <tqpainter.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 static int lineWidths [] = {1, 2, 3, 5, 8};

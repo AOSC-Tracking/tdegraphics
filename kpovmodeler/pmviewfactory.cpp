@@ -26,7 +26,7 @@
 #include "pmdialogview.h"
 #include "pmlibrarybrowser.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMViewFactory* PMViewFactory::s_pInstance = 0;
 KStaticDeleter<PMViewFactory> PMViewFactory::s_staticDeleter;

@@ -26,7 +26,7 @@
 #include "pmenumproperty.h"
 #include "pmdefaults.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMHeightField::HeightFieldType c_defaultType = PMHeightField::HFgif;
 const TQString c_defaultTypeText = TQString( "gif" );

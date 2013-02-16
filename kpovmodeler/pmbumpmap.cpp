@@ -26,7 +26,7 @@
 #include "pmmemento.h"
 #include "pmenumproperty.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMBumpMap::PMBitmapType bitmapTypeDefault = PMBumpMap::BitmapSys;
 const char *const bitmapFileDefault = 0;

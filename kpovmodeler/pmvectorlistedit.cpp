@@ -22,8 +22,8 @@
 #include <tqapplication.h>
 #include <tqpalette.h>
 #include <tqpainter.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 
 const int c_columnWidth = 65;
 

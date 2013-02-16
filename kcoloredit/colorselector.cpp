@@ -23,7 +23,7 @@
 #include <tqlabel.h>
 #include <tqslider.h>
 #include <kseparator.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "main.h"
 #include "imageselection.h"

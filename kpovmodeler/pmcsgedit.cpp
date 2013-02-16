@@ -22,7 +22,7 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcombobox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMCSGEdit::PMCSGEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

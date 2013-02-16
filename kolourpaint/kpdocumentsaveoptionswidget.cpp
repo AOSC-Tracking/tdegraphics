@@ -42,9 +42,9 @@
 #include <kdebug.h>
 #include <kdialog.h>
 #include <kdialogbase.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kimageio.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 #include <kpushbutton.h>
 

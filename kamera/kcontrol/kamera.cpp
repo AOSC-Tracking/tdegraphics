@@ -27,10 +27,10 @@
 #include <ksimpleconfig.h>
 #include <tdeaction.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kiconview.h>
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdetoolbar.h>
 #include <tdepopupmenu.h>
 #include <kprotocolinfo.h>

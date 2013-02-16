@@ -34,7 +34,7 @@ diff -u -p -r1.9 kptoolpen.cpp
 +#include <qregion.h>
  
  #include <kdebug.h>
- #include <klocale.h>
+ #include <tdelocale.h>
 @@ -416,31 +417,28 @@ void kpToolPen::draw (const QPoint &this
              rect = neededRect (rect, m_brushPixmap [m_mouseButton].width ());
  

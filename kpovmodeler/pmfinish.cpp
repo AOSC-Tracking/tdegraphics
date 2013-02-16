@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pmfinishedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 const PMColor ambientColorDefault = PMColor( 0.0, 0.0, 0.0, 0.0, 0.0 );
 const double diffuseDefault = 0.6;

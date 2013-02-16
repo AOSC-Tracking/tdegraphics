@@ -25,7 +25,7 @@
 
 #include <kcursor.h>
 #include <kdatastream.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kcombobox.h>
 #include <kmimetype.h>
 #include <kurl.h>

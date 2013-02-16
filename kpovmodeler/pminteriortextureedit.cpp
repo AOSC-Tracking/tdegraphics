@@ -22,7 +22,7 @@
 
 #include <tqlayout.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 PMInteriorTextureEdit::PMInteriorTextureEdit( TQWidget* parent, const char* name )

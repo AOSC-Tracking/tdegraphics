@@ -32,7 +32,7 @@
 
 #include <kdebug.h>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpToolWidgetOpaqueOrTransparent::kpToolWidgetOpaqueOrTransparent (TQWidget *parent, const char *name)

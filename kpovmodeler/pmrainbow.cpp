@@ -22,7 +22,7 @@
 #include "pmrainbowedit.h"
 #include "pmvector.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMetaObject* PMRainbow::s_pMetaObject = 0;
 PMObject* createNewRainbow( PMPart* part )

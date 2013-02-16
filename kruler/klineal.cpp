@@ -20,11 +20,11 @@
 #include <tdeconfig.h>
 #include <kcursor.h>
 #include <kdebug.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
+#include <tdeglobal.h>
+#include <tdeglobalsettings.h>
 #include <kiconloader.h>
 #include <kimageeffect.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdemainwindow.h>
 #include <knotifyclient.h>
 #include <tdepopupmenu.h>

@@ -26,7 +26,7 @@
 #include "pmmemento.h"
 #include "pmdebug.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqptrdict.h>
 
 PMMoveCommand::PMMoveCommand( PMObject* obj, PMObject* parent, PMObject* after )

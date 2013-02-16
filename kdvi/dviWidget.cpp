@@ -11,7 +11,7 @@
 #include <config.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "dviWidget.h"
 

@@ -26,8 +26,8 @@
 #include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 
 PMRainbowEdit::PMRainbowEdit( TQWidget* parent, const char* name )

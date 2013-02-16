@@ -21,7 +21,7 @@
 #include "pmmemento.h"
 #include "pminteriortextureedit.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMMetaObject* PMInteriorTexture::s_pMetaObject = 0;
 PMObject* createNewInteriorTexture( PMPart* part )

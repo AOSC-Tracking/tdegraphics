@@ -36,8 +36,8 @@
 #include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <klocale.h>
-#include <kmenubar.h>
+#include <tdelocale.h>
+#include <tdemenubar.h>
 
 #include <kpcolor.h>
 #include <kpdefs.h>

@@ -44,7 +44,7 @@
 #include <tqvbuttongroup.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpcommandhistory.h>
 #include <kpdocument.h>

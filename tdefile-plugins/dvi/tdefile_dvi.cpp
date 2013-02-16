@@ -24,7 +24,7 @@
 
 #include <kgenericfactory.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdefilemetainfo.h>
 
 #include <tqstring.h>

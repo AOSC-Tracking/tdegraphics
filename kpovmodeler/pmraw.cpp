@@ -22,7 +22,7 @@
 #include "pmrawedit.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqtextstream.h>
 
 PMDefinePropertyClass( PMRaw, PMRawProperty );

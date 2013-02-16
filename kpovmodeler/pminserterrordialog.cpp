@@ -17,7 +17,7 @@
 
 
 #include "pminserterrordialog.h"
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqlabel.h>
 #include <tqlistbox.h>
 #include <tqvbox.h>

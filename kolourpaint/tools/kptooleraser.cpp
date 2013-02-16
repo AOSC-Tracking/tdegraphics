@@ -26,7 +26,7 @@
 */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kptooleraser.h>
 
 kpToolEraser::kpToolEraser (kpMainWindow *mainWindow)

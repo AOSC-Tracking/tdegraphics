@@ -22,7 +22,7 @@
 
 #include <tqlayout.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 PMPovrayMatrixEdit::PMPovrayMatrixEdit( TQWidget* parent, const char* name )

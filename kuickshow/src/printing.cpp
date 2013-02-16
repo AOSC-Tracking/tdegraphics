@@ -32,12 +32,12 @@
 
 #include <kcombobox.h>
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <knuminput.h>
 #include <kprinter.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include "imagewindow.h"
 #include "printing.h"

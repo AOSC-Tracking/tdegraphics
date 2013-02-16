@@ -7,7 +7,7 @@
 #include <kdebug.h>
 #include <kmimetype.h>
 #include <kurl.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaboutdata.h>
 #include <tqdir.h>
 

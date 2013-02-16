@@ -35,7 +35,7 @@
 #include <tqstring.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 kpSqueezedTextLabel::kpSqueezedTextLabel (TQWidget *parent, const char *name)

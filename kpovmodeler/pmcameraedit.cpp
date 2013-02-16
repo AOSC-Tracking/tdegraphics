@@ -26,8 +26,8 @@
 #include <tqcombobox.h>
 #include <tqcheckbox.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 
 PMCameraEdit::PMCameraEdit( TQWidget* parent, const char* name )

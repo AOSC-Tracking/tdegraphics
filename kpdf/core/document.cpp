@@ -19,9 +19,9 @@
 #include <tqmap.h>
 #include <kdebug.h>
 #include <kimageio.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kfinddialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeapplication.h>
 #include <kuserprofile.h>
 #include <krun.h>

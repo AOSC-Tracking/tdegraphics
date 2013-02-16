@@ -33,10 +33,10 @@
 #include <kpushbutton.h>
 #include <tdeapplication.h>
 #include <tdeaction.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kiconloader.h>
 #include <knuminput.h>
 #include <tdefiledialog.h>
@@ -44,8 +44,8 @@
 #include <kimageviewer/viewer.h>
 #include <kimageviewer/canvas.h>
 #include <tdeio/netaccess.h>
-#include <kmessagebox.h>
-#include <ktempfile.h>
+#include <tdemessagebox.h>
+#include <tdetempfile.h>
 #include <kurldrag.h>
 
 typedef KGenericFactory<KViewPresenter> KViewPresenterFactory;

@@ -23,7 +23,7 @@
 #include "pmpart.h"
 
 #include <tqvaluelist.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMDeclare, PMDeclareProperty );
 

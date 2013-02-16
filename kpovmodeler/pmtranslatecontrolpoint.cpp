@@ -18,7 +18,7 @@
 #include "pmtranslatecontrolpoint.h"
 #include "pmmath.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <math.h>
 
 PMTranslateControlPoint::PMTranslateControlPoint( const PMVector& trans, int id )

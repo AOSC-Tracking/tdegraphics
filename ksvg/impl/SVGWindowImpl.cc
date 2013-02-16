@@ -29,9 +29,9 @@
 #include <tqstylesheet.h>
 
 #include <kurl.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kinputdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 using namespace KSVG;
 

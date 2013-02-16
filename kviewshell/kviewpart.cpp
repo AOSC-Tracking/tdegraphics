@@ -19,12 +19,12 @@
 #include <tdefiledialog.h>
 #include <kfilterbase.h>
 #include <kfilterdev.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kinstance.h>
 #include <tdeio/job.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kmimetype.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/genericfactory.h>
@@ -32,7 +32,7 @@
 #include <kprogress.h>
 #include <kstandarddirs.h>
 #include <kstdaction.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <ktrader.h>
 #include <kinputdialog.h>
 

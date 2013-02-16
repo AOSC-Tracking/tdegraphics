@@ -27,10 +27,10 @@
 /* $Id$ */
 
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kprocess.h>
 #include <stdlib.h>
 #include <tdespell.h>
@@ -56,7 +56,7 @@
 
 #include <tqtimer.h>
 #include <tqregexp.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqpaintdevice.h>
 #include <tqpainter.h>
 #include <tqpen.h>

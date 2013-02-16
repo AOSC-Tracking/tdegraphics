@@ -38,13 +38,13 @@
 #include <tdeversion.h>
 #include <tdefiledialog.h>
 #include <tdefilemetainfo.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <khelpmenu.h>
 #include <kiconloader.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
-#include <kmenubar.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemenubar.h>
+#include <tdemessagebox.h>
 #include <tdepopupmenu.h>
 #include <kprotocolinfo.h>
 #include <kpropertiesdialog.h>
@@ -52,7 +52,7 @@
 #include <kstatusbar.h>
 #include <kstdaction.h>
 #include <kstandarddirs.h>
-#include <kstartupinfo.h>
+#include <tdestartupinfo.h>
 #include <tdetoolbar.h>
 #include <kurlcombobox.h>
 #include <kurlcompletion.h>

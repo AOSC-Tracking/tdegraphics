@@ -63,8 +63,8 @@
 #include <kdebug.h>
 #include <ktrader.h>
 #include <klibloader.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <keditcl.h>
 #include <kled.h>
 #include <kcombobox.h>

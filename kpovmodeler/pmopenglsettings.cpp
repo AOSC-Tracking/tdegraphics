@@ -23,7 +23,7 @@
 #include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMOpenGLSettings::PMOpenGLSettings( TQWidget* parent, const char* name )
       : PMSettingsDialogPage( parent, name )

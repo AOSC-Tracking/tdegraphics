@@ -24,7 +24,7 @@
 #include <ksettings/dispatcher.h>
 #include <kurl.h>
 #include <klibloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/plugin.h>
 #include <tdeparts/part.h>
@@ -33,9 +33,9 @@
 #include <kstdaction.h>
 #include <kimageio.h>
 #include <tdefiledialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <twinmodule.h>
-#include <kmenubar.h>
+#include <tdemenubar.h>
 #include <kstatusbar.h>
 #include <kdebug.h>
 #include <kedittoolbar.h>

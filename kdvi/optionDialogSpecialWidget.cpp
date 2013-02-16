@@ -14,7 +14,7 @@
 #include <tdeapplication.h>
 #include <kcombobox.h>
 #include <klineedit.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kurllabel.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>

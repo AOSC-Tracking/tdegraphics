@@ -11,8 +11,8 @@
 
 #include <tdeapplication.h>
 #include <kcombobox.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tqlabel.h>
 #include <tqlayout.h>
 #include <tqlineedit.h>

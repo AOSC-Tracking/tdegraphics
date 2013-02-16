@@ -31,7 +31,7 @@
 #include <tqpixmap.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpdefs.h>
 #include <kpdocument.h>

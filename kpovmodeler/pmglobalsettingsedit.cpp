@@ -25,9 +25,9 @@
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqcombobox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 PMGlobalSettingsEdit::PMGlobalSettingsEdit( TQWidget* parent, const char* name )
       : Base( parent, name )

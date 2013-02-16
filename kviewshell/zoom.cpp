@@ -12,7 +12,7 @@
 #include <math.h>
 #include <tqstringlist.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "zoom.h"
 #include "zoomlimits.h"

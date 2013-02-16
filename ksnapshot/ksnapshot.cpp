@@ -11,17 +11,17 @@
  */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kimageio.h>
 #include <tdefiledialog.h>
 #include <kimagefilepreview.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <tdeapplication.h>
 #include <kprinter.h>
 #include <tdeio/netaccess.h>
 #include <ksavefile.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <tqbitmap.h>
 #include <tqdragobject.h>
@@ -34,7 +34,7 @@
 #include <khelpmenu.h>
 #include <tdepopupmenu.h>
 #include <kpushbutton.h>
-#include <kstartupinfo.h>
+#include <tdestartupinfo.h>
 
 #include <tqcursor.h>
 #include <tqregexp.h>
@@ -54,7 +54,7 @@
 
 #include <config.h>
 
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #define kApp TDEApplication::kApplication()
 

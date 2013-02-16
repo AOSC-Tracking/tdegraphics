@@ -21,7 +21,7 @@
 #include "pmxmlhelper.h"
 #include "pmmemento.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMClippedBy, PMClippedByProperty );
 

@@ -25,7 +25,7 @@
  ***************************************************************************/
 #include "imgprintdialog.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <knuminput.h>
 #include <kdialog.h>
 

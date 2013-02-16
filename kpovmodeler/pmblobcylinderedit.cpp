@@ -23,7 +23,7 @@
 
 #include <tqlayout.h>
 #include <tqlabel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqcheckbox.h>
 
 PMBlobCylinderEdit::PMBlobCylinderEdit( TQWidget* parent, const char* name )

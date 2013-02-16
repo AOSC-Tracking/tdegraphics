@@ -18,7 +18,7 @@
 
 #include "pmmesh.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include "pmxmlhelper.h"
 #include "pmmeshedit.h"
 #include "pmmemento.h"

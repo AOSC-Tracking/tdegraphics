@@ -23,7 +23,7 @@
 #include "pmmemento.h"
 
 #include <tqtextstream.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMDefinePropertyClass( PMComment, PMCommentProperty );
 

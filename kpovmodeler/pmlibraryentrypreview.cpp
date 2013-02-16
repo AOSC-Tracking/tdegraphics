@@ -34,9 +34,9 @@
 #include <tqdragobject.h>
 
 #include <kurl.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdefiledialog.h>
 
 PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :

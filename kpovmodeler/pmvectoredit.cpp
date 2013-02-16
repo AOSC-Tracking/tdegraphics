@@ -22,8 +22,8 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <kdialog.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 
 
 PMVectorEdit::PMVectorEdit( const TQString& descriptionX,

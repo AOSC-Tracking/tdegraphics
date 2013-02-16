@@ -23,7 +23,7 @@
 #include "pmmapmemento.h"
 
 #include <tqtextstream.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 class PMValueProperty : public PMPropertyBase
 {

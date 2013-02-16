@@ -18,7 +18,7 @@
 
 #include "pmpovrayparser.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqvaluelist.h>
 
 #include "pmpart.h"

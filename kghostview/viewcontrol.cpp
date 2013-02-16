@@ -20,7 +20,7 @@
 #include "viewcontrol.h"
 #include "viewcontrol.moc"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <kbuttonbox.h>
 #include <kseparator.h>

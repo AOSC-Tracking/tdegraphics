@@ -18,7 +18,7 @@
 
 #include "pmprototypemanager.h"
 #include "pmallobjects.h"
-#include <klocale.h>
+#include <tdelocale.h>
 
 PMPrototypeManager::PMPrototypeManager( PMPart* part )
       : m_metaDict( 43 )

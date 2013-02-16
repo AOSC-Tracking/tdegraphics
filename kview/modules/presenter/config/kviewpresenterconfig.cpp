@@ -22,9 +22,9 @@
 #include <tqcheckbox.h>
 #include <tqframe.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdialog.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <tdeconfig.h>
 #include <kgenericfactory.h>
 

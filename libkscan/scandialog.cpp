@@ -27,13 +27,13 @@
 #include <tqapplication.h>
 #include <tqcheckbox.h>
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <tdeconfig.h>
 #include <ksimpleconfig.h>
 #include <kled.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kscandevice.h>
 
 // libkscan stuff

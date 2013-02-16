@@ -16,7 +16,7 @@
 #include <tdeapplication.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 static const char description[] =
 I18N_NOOP("kpdf, a kde pdf viewer based on xpdf");

@@ -34,7 +34,7 @@
 #include <tdecmdlineargs.h>
 #include <kdebug.h>
 #include <kimageio.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 // for srand
 #include <stdlib.h>

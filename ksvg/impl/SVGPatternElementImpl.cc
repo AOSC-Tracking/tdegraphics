@@ -19,7 +19,7 @@
 */
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "SVGPatternElement.h"
 #include "SVGPatternElementImpl.h"

@@ -32,7 +32,7 @@
 #include <tqpixmap.h>
 
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <kpdefs.h>
 #include <kpdocument.h>

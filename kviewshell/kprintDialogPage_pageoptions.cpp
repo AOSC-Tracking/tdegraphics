@@ -9,7 +9,7 @@
 
 #include <config.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqbuttongroup.h>
 #include <tqcheckbox.h>
 #include <tqlayout.h>
