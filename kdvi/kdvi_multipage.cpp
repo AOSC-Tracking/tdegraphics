@@ -26,7 +26,7 @@
 #include "fontpool.h"
 #include "kprinterwrapper.h"
 #include "kviewpart.h"
-#include "martdelist.h"
+#include "marklist.h"
 #include "optionDialogFontsWidget.h"
 #include "optionDialogSpecialWidget.h"
 #include "performanceMeasurement.h"

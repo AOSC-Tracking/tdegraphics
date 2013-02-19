@@ -41,7 +41,7 @@
 #include <stdlib.h>
 
 #include "infodialog.h"
-#include "martdelist.h"
+#include "marklist.h"
 #include "kgvdocument.h"
 #include "kgv_view.h"
 #include "version.h"
@@ -508,7 +508,7 @@ void KGVMiniWidget::buildTOC()
 
     int last_page = 0;
 
-    MarkList*  martdelist = _part->markList();
+    MarkList*  marklist = _part->markList();
 
     if( dsc()->isStructured() ) {
 	if( _usePageLabels )
@@ -530,11 +530,11 @@ void KGVMiniWidget::buildTOC()
 	    else
 		s = tip;
 
-	    martdelist->insertItem( s, i, tip );
+	    marklist->insertItem( s, i, tip );
 	}
     }
     else {
-	martdelist->insertItem( TQString::fromLatin1( "1" ), 0 );
+	marklist->insertItem( TQString::fromLatin1( "1" ), 0 );
     }
 }
 

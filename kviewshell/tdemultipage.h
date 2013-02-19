@@ -7,7 +7,7 @@
 #include "documentRenderer.h"
 #include "history.h"
 #include "tdemultipageInterface.h"
-#include "martdelist.h"
+#include "marklist.h"
 
 #include <tdeparts/part.h>
 #include <tqtimer.h>

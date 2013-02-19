@@ -38,10 +38,10 @@
 
 #include "documentPageCache.h"
 #include "kvsprefs.h"
-#include "martdelist.h"
+#include "marklist.h"
 
 
-#include "martdelist.moc"
+#include "marklist.moc"
 
 
 namespace {

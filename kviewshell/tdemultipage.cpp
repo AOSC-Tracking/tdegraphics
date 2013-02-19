@@ -20,7 +20,7 @@
 #include <tqvbox.h>
 
 #include "documentWidget.h"
-#include "martdelist.h"
+#include "marklist.h"
 #include "tableOfContents.h"
 #include "kprintDialogPage_pageoptions.h"
 #include "kvsprefs.h"
@@ -66,7 +66,7 @@ KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject 
   connect(tableOfContents, TQT_SIGNAL(gotoPage(const Anchor&)), this, TQT_SLOT(gotoPage(const Anchor&)));
   
   // Create MarkList
-  _markList = new MarkList(sideBar, "martdelist");
+  _markList = new MarkList(sideBar, "marklist");
   sideBar->addItem(_markList, TQIconSet(SmallIcon("thumbnail")), i18n("Thumbnails"));
 
   // Restore state of the sidebar
@@ -898,7 +898,7 @@ void KMultiPage::updateWidgetSize(const PageNumber& pageNumber)
     }
   }
 
-  // Update martdelist
+  // Update marklist
   markList()->updateWidgetSize(pageNumber);
 }
 
