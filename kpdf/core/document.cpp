@@ -1404,65 +1404,68 @@ void KPDFDocument::saveDocumentInfo() const
     if ( d->docFileName.isNull() )
         return;
 
-    TQFile infoFile( d->xmlFileName );
-    if (infoFile.open( IO_WriteOnly | IO_Truncate) )
+    if ( KpdfSettings::retainDocumentData() )
     {
-        // Create DOM
-        TQDomDocument doc( "documentInfo" );
-        TQDomElement root = doc.createElement( "documentInfo" );
-        doc.appendChild( root );
-
-        // Add bookmark list to DOM
-        TQDomElement bookmarkList = doc.createElement( "bookmarkList" );
-        root.appendChild( bookmarkList );
-
-        for ( uint i = 0; i < pages_vector.count() ; i++ )
-        {
-            if ( pages_vector[i]->hasBookmark() )
-            {
-                TQDomElement page = doc.createElement( "page" );
-                page.appendChild( doc.createTextNode( TQString::number(i) ) );
-
-                bookmarkList.appendChild( page );
-            }
-        }
-
-        // Add general info to DOM
-        TQDomElement generalInfo = doc.createElement( "generalInfo" );
-        root.appendChild( generalInfo );
-
-        // <general info><history> ... </history> saves history up to 10 viewports
-        TQValueList< DocumentViewport >::iterator backIterator = d->viewportIterator;
-        if ( backIterator != d->viewportHistory.end() )
-        {
-            // go back up to 10 steps from the current viewportIterator
-            int backSteps = 10;
-            while ( backSteps-- && backIterator != d->viewportHistory.begin() )
-                --backIterator;
-
-            // create history root node
-            TQDomElement historyNode = doc.createElement( "history" );
-            generalInfo.appendChild( historyNode );
-
-            // add old[backIterator] and present[viewportIterator] items
-            TQValueList< DocumentViewport >::iterator endIt = d->viewportIterator;
-            ++endIt;
-            while ( backIterator != endIt )
-            {
-                TQString name = (backIterator == d->viewportIterator) ? "current" : "oldPage";
-                TQDomElement historyEntry = doc.createElement( name );
-                historyEntry.setAttribute( "viewport", (*backIterator).toString() );
-                historyNode.appendChild( historyEntry );
-                ++backIterator;
-            }
-        }
-
-        // Save DOM to XML file
-        TQString xml = doc.toString();
-        TQTextStream os( &infoFile );
-        os << xml;
+      TQFile infoFile( d->xmlFileName );
+      if (infoFile.open( IO_WriteOnly | IO_Truncate) )
+      {
+          // Create DOM
+          TQDomDocument doc( "documentInfo" );
+          TQDomElement root = doc.createElement( "documentInfo" );
+          doc.appendChild( root );
+  
+          // Add bookmark list to DOM
+          TQDomElement bookmarkList = doc.createElement( "bookmarkList" );
+          root.appendChild( bookmarkList );
+  
+          for ( uint i = 0; i < pages_vector.count() ; i++ )
+          {
+              if ( pages_vector[i]->hasBookmark() )
+              {
+                  TQDomElement page = doc.createElement( "page" );
+                  page.appendChild( doc.createTextNode( TQString::number(i) ) );
+  
+                  bookmarkList.appendChild( page );
+              }
+          }
+  
+          // Add general info to DOM
+          TQDomElement generalInfo = doc.createElement( "generalInfo" );
+          root.appendChild( generalInfo );
+  
+          // <general info><history> ... </history> saves history up to 10 viewports
+          TQValueList< DocumentViewport >::iterator backIterator = d->viewportIterator;
+          if ( backIterator != d->viewportHistory.end() )
+          {
+              // go back up to 10 steps from the current viewportIterator
+              int backSteps = 10;
+              while ( backSteps-- && backIterator != d->viewportHistory.begin() )
+                  --backIterator;
+  
+              // create history root node
+              TQDomElement historyNode = doc.createElement( "history" );
+              generalInfo.appendChild( historyNode );
+  
+              // add old[backIterator] and present[viewportIterator] items
+              TQValueList< DocumentViewport >::iterator endIt = d->viewportIterator;
+              ++endIt;
+              while ( backIterator != endIt )
+              {
+                  TQString name = (backIterator == d->viewportIterator) ? "current" : "oldPage";
+                  TQDomElement historyEntry = doc.createElement( name );
+                  historyEntry.setAttribute( "viewport", (*backIterator).toString() );
+                  historyNode.appendChild( historyEntry );
+                  ++backIterator;
+              }
+          }
+  
+          // Save DOM to XML file
+          TQString xml = doc.toString();
+          TQTextStream os( &infoFile );
+          os << xml;
+      }
+      infoFile.close();
     }
-    infoFile.close();
 }
 
 void KPDFDocument::slotTimedMemoryCheck()

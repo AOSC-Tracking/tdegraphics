@@ -85,12 +85,20 @@
                             </property>
                         </widget>
                         <widget class="TQCheckBox">
-                            <property name="name">
-                                <cstring>kcfg_WatchFile</cstring>
-                            </property>
-                            <property name="text">
-                                <string>&amp;Watch file</string>
-                            </property>
+                          <property name="name">
+                            <cstring>kcfg_WatchFile</cstring>
+                          </property>
+                          <property name="text">
+                            <string>&amp;Watch file</string>
+                          </property>
+                        </widget>
+                        <widget class="TQCheckBox">
+                          <property name="name">
+                            <cstring>kcfg_RetainDocumentData</cstring>
+                          </property>
+                          <property name="text">
+                            <string>&amp;Retain document viewing data</string>
+                          </property>
                         </widget>
                     </vbox>
                 </widget>

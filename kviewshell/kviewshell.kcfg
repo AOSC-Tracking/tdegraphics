@@ -11,6 +11,9 @@
   <entry key="WatchFile" type="Bool">
     <default>true</default>
   </entry>
+  <entry key="RetainDocumentData" type="Bool">
+    <default>true</default>
+  </entry>
   <entry key="Zoom" type="Double">
     <default>1.0</default>
   </entry>

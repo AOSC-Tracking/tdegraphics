@@ -54,7 +54,10 @@
    <default>true</default>
   </entry>
   <entry key="ObeyDRM" type="Bool" >
-   <default>true</default>
+    <default>true</default>
+  </entry>
+  <entry key="RetainDocumentData" type="Bool" >
+    <default>true</default>
   </entry>
  </group>
  <group name="MainView" >

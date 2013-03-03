@@ -41,11 +41,16 @@
 			<whatsthis></whatsthis>
 			<default>true</default>
 		</entry>
-		<entry name="WatchFile" type="Bool">
-			<label>Watch File</label>
-			<whatsthis>If this is on, then the file will be reloaded whenever it changes on disk</whatsthis>
-			<default>false</default>
-		</entry>
+    <entry name="WatchFile" type="Bool">
+      <label>Watch File</label>
+      <whatsthis>If this is on, then the file will be reloaded whenever it changes on disk</whatsthis>
+      <default>false</default>
+    </entry>
+    <entry name="RetainDocumentData" type="Bool">
+      <label>Retain document viewing data</label>
+      <whatsthis>If this is on, then document viewing options are retained</whatsthis>
+      <default>true</default>
+    </entry>
 	</group>
 	<group name="Ghostscript">
 		<entry name="Interpreter" type="String">
