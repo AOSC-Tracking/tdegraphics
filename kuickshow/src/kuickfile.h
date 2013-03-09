@@ -7,8 +7,8 @@
 **
 ****************************************************************************/
 
-#ifndef KUICTDEFILE_H
-#define KUICTDEFILE_H
+#ifndef KUICKFILE_H
+#define KUICKFILE_H
 
 #include <tqobject.h>
 #include <tqstring.h>
@@ -97,4 +97,4 @@ private:
 
 bool operator==( const KuickFile& first, const KuickFile& second );
 
-#endif // KUICTDEFILE_H
+#endif // KUICKFILE_H
