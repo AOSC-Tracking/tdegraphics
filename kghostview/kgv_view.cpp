@@ -375,7 +375,7 @@ TDEAboutData* KGVPart::createAboutData()
             I18N_NOOP( "KGhostView displays, prints, and saves "
                        "PostScript and PDF files.\n"
                        "Based on original work by Tim Theisen." ) );
-    about->addAuthor( "Luís Pedro Coelho",
+    about->addAuthor( "Luis Pedro Coelho",
                       I18N_NOOP( "Current maintainer" ),
                       "luis@luispedro.org",
                       "http://luispedro.org" );
