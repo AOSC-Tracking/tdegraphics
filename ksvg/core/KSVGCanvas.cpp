@@ -575,7 +575,9 @@ void KSVGCanvas::update(float zoomFactor)
 		setRenderBufferSize(newWidth, newHeight);
 	}
 	else
+	{
 		fill();
+	}
 
 	// reset clip paths
 	TQDictIterator<CanvasClipPath> itr(m_clipPaths);

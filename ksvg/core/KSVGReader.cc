@@ -231,34 +231,40 @@ bool InputHandler::startElement(const TQString &namespaceURI, const TQString &, 
 
 		// Need this before we can find our ownerSVGElement (AP)
 		if(m_currentNode != 0)
+		{
 			m_currentNode->appendChild(*svg);
+		}
 		else
-		// TODO: Those set/get attribute callls have NO effect anymore
-		// Convert to the new system, Rob? (Niko)
 		{
 			if(Helper::self()->fit())
 			{	// handle fitting of svg into small drawing area(thumb)
 				// TODO : aspectratio? and what about svgs that dont provide width and height?
-				if(svg->getAttribute("viewBox").string().isEmpty())
+				if(attrs.value("viewBox").isEmpty())
 				{
 					SVGLengthImpl *width = SVGSVGElementImpl::createSVGLength();
 					SVGLengthImpl *height = SVGSVGElementImpl::createSVGLength();
-					width->setValueAsString(svg->getAttribute("width").string());
-					height->setValueAsString(svg->getAttribute("height").string());
+					width->setValueAsString(attrs.value("width"));
+					height->setValueAsString(attrs.value("height"));
 					TQString viewbox = TQString("0 0 %1 %2").arg(width->value()).arg(height->value());
 					//kdDebug(26001) << "VIEWBOX : " << viewbox.latin1() << endl;
-					svg->setAttribute("viewBox", viewbox);
+					// HACK
+					// Does the existing attribute need to be deleted before appending the new attribute?
+					const_cast<TQXmlAttributes&>(attrs).append("viewBox", TQString::null, "viewBox", viewbox);
 					width->deref();
 					height->deref();
 				}
-				svg->setAttribute("width", TQString::number(Helper::self()->canvas()->width()));
-				svg->setAttribute("height", TQString::number(Helper::self()->canvas()->height()));
+				// HACK
+				// Does the existing attribute need to be deleted before appending the new attribute?
+				const_cast<TQXmlAttributes&>(attrs).append("width", TQString::null, "width", TQString::number(Helper::self()->canvas()->width()));
+				const_cast<TQXmlAttributes&>(attrs).append("height", TQString::null, "height", TQString::number(Helper::self()->canvas()->height()));
 			}
 
 			if(!Helper::self()->SVGFragmentId().isEmpty())
 			{
 				if(svg->currentView()->parseViewSpec(Helper::self()->SVGFragmentId()))
+				{
 					svg->setUseCurrentView(true);
+				}
 			}
 		}
 
@@ -397,7 +403,7 @@ bool InputHandler::endElement(const TQString &, const TQString &, const TQString
 		m_noRendering = false;
 		bool ok = tests ? tests->ok() : true;
 
-		if(haveCanvas && element && style && ok && style->getDisplay() && style->getVisible() && qName == "pattern" || (shape && shape->directRender()))
+		if((haveCanvas && element && style && ok && style->getDisplay() && style->getVisible() && (qName == "pattern")) || (shape && shape->directRender()))
 			element->createItem();
 	}
 

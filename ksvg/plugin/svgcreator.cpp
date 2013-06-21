@@ -54,7 +54,7 @@ bool SVGCreator::create(const TQString &path, int width, int height, TQImage &im
 {
 	KSVG::SVGDocumentImpl *doc = new KSVG::SVGDocumentImpl(false, true);
 	doc->ref();
-       
+
 	TQPixmap pix(width, height);
 	pix.fill(TQt::white);
 
@@ -67,8 +67,9 @@ bool SVGCreator::create(const TQString &path, int width, int height, TQImage &im
 
 	m_finished = false;
 
-	while(!m_finished)
+	while(!m_finished) {
 		kapp->processOneEvent();
+	}
 
 	doc->deref();
 
