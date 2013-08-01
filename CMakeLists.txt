@@ -118,6 +118,12 @@ if( BUILD_TDEFILE_PLUGINS AND NOT BUILD_KGHOSTVIEW )
   add_subdirectory( kghostview/dscparse )
 endif( )
 
+# kdvi and kfax require a static library from kviewshell
+# see BUG 1593 for details
+if( BUILD_KVIEWSHELL OR BUILD_KDVI OR BUILD_KFAX )
+  add_subdirectory( kviewshell )
+endif( )
+
 tde_conditional_add_subdirectory( BUILD_DOC doc )
 tde_conditional_add_subdirectory( BUILD_KAMERA kamera )
 tde_conditional_add_subdirectory( BUILD_KCOLOREDIT kcoloredit )
@@ -138,7 +144,6 @@ tde_conditional_add_subdirectory( BUILD_KSNAPSHOT ksnapshot )
 tde_conditional_add_subdirectory( BUILD_KSVG ksvg )
 tde_conditional_add_subdirectory( BUILD_KUICKSHOW kuickshow )
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
-tde_conditional_add_subdirectory( BUILD_KVIEWSHELL kviewshell )
 tde_conditional_add_subdirectory( BUILD_LIBKSCAN libkscan )
 
 
