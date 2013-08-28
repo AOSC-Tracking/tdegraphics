@@ -110,7 +110,7 @@ bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPa
     // if the file didn't open correctly it might be encrypted, so ask for a pass
     bool firstInput = true;
     bool triedWallet = false;
-    KWallet::Wallet * wallet = 0;
+    TDEWallet::Wallet * wallet = 0;
     int keep = 1;
     while ( !pdfdoc->isOk() && pdfdoc->getErrorCode() == errEncrypted )
     {
@@ -119,8 +119,8 @@ bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPa
         // 1.A. try to retrieve the first password from the kde wallet system
         if ( !triedWallet )
         {
-            TQString walletName = KWallet::Wallet::NetworkWallet();
-            wallet = KWallet::Wallet::openWallet( walletName );
+            TQString walletName = TDEWallet::Wallet::NetworkWallet();
+            wallet = TDEWallet::Wallet::openWallet( walletName );
             if ( wallet )
             {
                 // use the KPdf folder (and create if missing)
