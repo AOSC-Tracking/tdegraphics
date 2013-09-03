@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_pdf.la
 
 tdefile_pdf_la_SOURCES = tdefile_pdf.cpp
 tdefile_pdf_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_pdf_la_LIBADD = $(LIB_KIO) -L$(top_builddir)/tdefile-plugins/dependencies/poppler-tqt/ -lpoppler-tqt
+tdefile_pdf_la_LIBADD = $(LIB_TDEIO) -L$(top_builddir)/tdefile-plugins/dependencies/poppler-tqt/ -lpoppler-tqt
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

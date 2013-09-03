@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_dds.la
 
 tdefile_dds_la_SOURCES = tdefile_dds.cpp 
 tdefile_dds_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_dds_la_LIBADD = $(LIB_KSYCOCA)
+tdefile_dds_la_LIBADD = $(LIB_TDESYCOCA)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

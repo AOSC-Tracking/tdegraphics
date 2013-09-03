@@ -7,7 +7,7 @@ noinst_HEADERS = kimageholder.h kimagecanvas.h
 
 libkviewcanvas_la_SOURCES = kimageholder.cpp kimagecanvas.cpp
 libkviewcanvas_la_LDFLAGS = $(all_libraries) -module -no-undefined -avoid-version
-libkviewcanvas_la_LIBADD = $(LIB_KPARTS) $(LIB_TDEPRINT) $(LIB_KUTILS) \
+libkviewcanvas_la_LIBADD = $(LIB_TDEPARTS) $(LIB_TDEPRINT) $(LIB_TDEUTILS) \
                            $(top_builddir)/kview/kimageviewer/libkimageviewer.la
 
 METASOURCES = AUTO

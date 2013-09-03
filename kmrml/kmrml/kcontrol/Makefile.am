@@ -4,7 +4,7 @@ kde_module_LTLIBRARIES = kcm_kmrml.la
 
 kcm_kmrml_la_SOURCES = kcmkmrml.cpp mainpage.cpp indexer.cpp serverconfigwidget.ui indexcleaner.cpp
 kcm_kmrml_la_LDFLAGS = $(all_libraries) -module -avoid-version -no-undefined
-kcm_kmrml_la_LIBADD = $(LIB_KMRMLSTUFF) $(LIB_KIO)
+kcm_kmrml_la_LIBADD = $(LIB_KMRMLSTUFF) $(LIB_TDEIO)
 INCLUDES= -I$(top_srcdir)/kmrml/kmrml/lib $(all_includes)
  
 kcm_kmrml_la_METASOURCES = AUTO

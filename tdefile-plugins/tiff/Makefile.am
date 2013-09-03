@@ -9,7 +9,7 @@ kde_module_LTLIBRARIES = tdefile_tiff.la
 
 tdefile_tiff_la_SOURCES = tdefile_tiff.cpp
 tdefile_tiff_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_tiff_la_LIBADD = $(LIB_KIO) $(LIBTIFF)
+tdefile_tiff_la_LIBADD = $(LIB_TDEIO) $(LIBTIFF)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

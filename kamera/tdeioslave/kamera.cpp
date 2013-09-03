@@ -212,7 +212,7 @@ static TQString fix_foldername(TQString ofolder) {
 	return folder;
 }
 
-// The KIO slave "get" function (starts a download from the camera)
+// The TDEIO slave "get" function (starts a download from the camera)
 // The actual returning of the data is done in the frontend callback functions.
 void KameraProtocol::get(const KURL &url)
 {
@@ -368,7 +368,7 @@ void KameraProtocol::get(const KURL &url)
 	m_file = NULL;
 }
 
-// The KIO slave "stat" function.
+// The TDEIO slave "stat" function.
 void KameraProtocol::stat(const KURL &url)
 {
 	kdDebug(7123) << "stat(\"" << url.path() << "\")" << endl;
@@ -495,7 +495,7 @@ void KameraProtocol::statRegular(const KURL &url)
 	finished();
 }
 
-// The KIO slave "del" function.
+// The TDEIO slave "del" function.
 void KameraProtocol::del(const KURL &url, bool isFile)
 {
 	kdDebug(7123) << "KameraProtocol::del(" << url.path() << ")" << endl;
@@ -523,7 +523,7 @@ void KameraProtocol::del(const KURL &url, bool isFile)
 	}
 }
 
-// The KIO slave "listDir" function.
+// The TDEIO slave "listDir" function.
 void KameraProtocol::listDir(const KURL &url)
 {
 	kdDebug(7123) << "KameraProtocol::listDir(" << url.path() << ")" << endl;
@@ -975,7 +975,7 @@ void frontendProgressUpdate(
 	KameraProtocol *object = (KameraProtocol*)data;
 
 	// This code will get the last chunk of data retrieved from the
-	// camera and pass it to KIO, to allow progressive display
+	// camera and pass it to TDEIO, to allow progressive display
 	// of the downloaded photo.
 
 	const char *fileData = NULL;

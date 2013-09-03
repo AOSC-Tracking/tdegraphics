@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_bmp.la
 
 tdefile_bmp_la_SOURCES = tdefile_bmp.cpp 
 tdefile_bmp_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_bmp_la_LIBADD = $(LIB_KSYCOCA)
+tdefile_bmp_la_LIBADD = $(LIB_TDESYCOCA)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

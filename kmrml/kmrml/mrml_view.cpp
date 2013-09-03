@@ -132,7 +132,7 @@ TQPixmap * MrmlView::getPixmap( const KURL& url )
         m_pixmapCache.insert( u, p );
         return m_pixmapCache.find( u );
     }
-    else { // remote url, download with KIO
+    else { // remote url, download with TDEIO
         Loader::self()->requestDownload( url );
     }
 

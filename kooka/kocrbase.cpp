@@ -82,8 +82,8 @@ KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
     // Layout-Boxes
 
     TDEConfig *konf = TDEGlobal::config ();
-    TDEConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
-    m_userWantsSpellCheck = konf->readBoolEntry(CFG_WANT_KSPELL, true);
+    TDEConfigGroupSaver gs( konf, CFG_OCR_TDESPELL );
+    m_userWantsSpellCheck = konf->readBoolEntry(CFG_WANT_TDESPELL, true);
 
     /* Connect signals which disable the fields and store the configuration */
     connect( this, TQT_SIGNAL( user1Clicked()), this, TQT_SLOT( writeConfig()));
@@ -360,8 +360,8 @@ void KOCRBase::slWantSpellcheck( bool wantIt )
     m_userWantsSpellCheck = wantIt;
 
     TDEConfig *konf = TDEGlobal::config ();
-    TDEConfigGroupSaver gs( konf, CFG_OCR_KSPELL );
-    konf->writeEntry( CFG_WANT_KSPELL, wantIt );
+    TDEConfigGroupSaver gs( konf, CFG_OCR_TDESPELL );
+    konf->writeEntry( CFG_WANT_TDESPELL, wantIt );
 }
 
 /* The End ;) */

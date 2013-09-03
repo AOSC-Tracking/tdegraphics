@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_ps.la gsthumbnail.la
 
 tdefile_ps_la_SOURCES = tdefile_ps.cpp
 tdefile_ps_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_ps_la_LIBADD = $(LIB_KIO) ../../kghostview/libdscparse.la
+tdefile_ps_la_LIBADD = $(LIB_TDEIO) ../../kghostview/libdscparse.la
 
 gsthumbnail_la_SOURCES = gscreator.cpp
 gsthumbnail_la_LIBADD = $(LIB_TDECORE) ../../kghostview/libdscparse.la

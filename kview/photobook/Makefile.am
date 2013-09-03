@@ -6,7 +6,7 @@ kde_module_LTLIBRARIES = libphotobook.la
 libphotobook_la_SOURCES = photobook.cpp
 
 libphotobook_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-libphotobook_la_LIBADD = $(LIB_TDEFILE) $(LIB_KPARTS)
+libphotobook_la_LIBADD = $(LIB_TDEFILE) $(LIB_TDEPARTS)
 
 partrcdir = $(kde_servicesdir)
 partrc_DATA = photobook.desktop

@@ -1173,7 +1173,7 @@ void ScanPackager::slotCreateFolder( )
 
    if( ok )
    {
-	 /* KIO create folder goes here */
+	 /* TDEIO create folder goes here */
 
 	 KFileTreeViewItem *it = currentKFileTreeViewItem();
 	 if( it )

@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_xbm.la
 
 tdefile_xbm_la_SOURCES = tdefile_xbm.cpp 
 tdefile_xbm_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_xbm_la_LIBADD = $(LIB_KSYCOCA)
+tdefile_xbm_la_LIBADD = $(LIB_TDESYCOCA)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

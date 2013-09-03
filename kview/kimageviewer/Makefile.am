@@ -6,7 +6,7 @@ noinst_HEADERS = canvas.h viewer.h
 
 libkimageviewer_la_SOURCES = canvas.cpp viewer.cpp
 libkimageviewer_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 0:0
-libkimageviewer_la_LIBADD  = $(LIB_KPARTS)
+libkimageviewer_la_LIBADD  = $(LIB_TDEPARTS)
 
 INCLUDES = $(all_includes)
 

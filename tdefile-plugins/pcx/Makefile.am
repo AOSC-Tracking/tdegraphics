@@ -9,7 +9,7 @@ kde_module_LTLIBRARIES = tdefile_pcx.la
 
 tdefile_pcx_la_SOURCES = tdefile_pcx.cpp
 tdefile_pcx_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_pcx_la_LIBADD = $(LIB_KIO) $(LIBTIFF)
+tdefile_pcx_la_LIBADD = $(LIB_TDEIO) $(LIBTIFF)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

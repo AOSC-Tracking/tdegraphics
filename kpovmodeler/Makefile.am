@@ -110,7 +110,7 @@ libkpovmodeler_la_SOURCES = pmpart.cpp pmfactory.cpp \
 	pmpartiface.skel
 
 libkpovmodeler_la_LDFLAGS = $(all_libraries) -version-info 0:0:0 -no-undefined $(LIBFREETYPE_RPATH)
-libkpovmodeler_la_LIBADD = $(LIBFREETYPE_LIBS) $(LIB_KPARTS) $(GLLIB) -lXmu -lXi
+libkpovmodeler_la_LIBADD = $(LIBFREETYPE_LIBS) $(LIB_TDEPARTS) $(GLLIB) -lXmu -lXi
 METASOURCES = AUTO
 
 noinst_HEADERS = pmpart.h pmfactory.h pmview.h pmshell.h pmobjectdrag.h \
@@ -227,7 +227,7 @@ libkpovmodelerpart_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 bin_PROGRAMS = kpovmodeler
 
 kpovmodeler_SOURCES = main.cpp
-kpovmodeler_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
+kpovmodeler_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
 kpovmodeler_LDADD = libkpovmodeler.la
 
 dummy.cpp:

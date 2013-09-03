@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_pnm.la
 
 tdefile_pnm_la_SOURCES = tdefile_pnm.cpp
 tdefile_pnm_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_pnm_la_LIBADD = $(LIB_KIO)
+tdefile_pnm_la_LIBADD = $(LIB_TDEIO)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

@@ -12,7 +12,7 @@ kde_module_LTLIBRARIES = tdefile_gif.la
 
 tdefile_gif_la_SOURCES = tdefile_gif.cpp
 tdefile_gif_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_gif_la_LIBADD = $(LIB_KIO)
+tdefile_gif_la_LIBADD = $(LIB_TDEIO)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

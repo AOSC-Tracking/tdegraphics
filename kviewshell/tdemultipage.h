@@ -1,6 +1,6 @@
 // -*- C++ -*-
-#ifndef _KMULTIPAGE_H
-#define _KMULTIPAGE_H
+#ifndef _TDEMULTIPAGE_H
+#define _TDEMULTIPAGE_H
 
 #include "pageView.h"
 #include "documentPageCache.h"
@@ -405,7 +405,7 @@ public slots:
      currently selected text, if there is any. */
   virtual void findPrevText();
 
-  /** Opens a file requestor and starts a basic copy KIO-Job. A
+  /** Opens a file requestor and starts a basic copy TDEIO-Job. A
       multipage implementation that wishes to offer saving in various
       formats must re-implement this slot. */
   virtual void slotSave();

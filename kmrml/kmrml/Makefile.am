@@ -9,13 +9,13 @@ LIB_KMRMLSTUFF = $(top_builddir)/kmrml/kmrml/lib/libkmrmlstuff.la
 kde_module_LTLIBRARIES = tdeio_mrml.la libkmrmlpart.la
 
 tdeio_mrml_la_SOURCES = mrml.cpp
-tdeio_mrml_la_LIBADD  = $(LIB_KMRMLSTUFF) $(LIB_KIO)
+tdeio_mrml_la_LIBADD  = $(LIB_KMRMLSTUFF) $(LIB_TDEIO)
 tdeio_mrml_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
 
 libkmrmlpart_la_SOURCES = mrml_part.cpp mrml_view.cpp loader.cpp \
 	mrml_elements.cpp mrml_creator.cpp browser.cpp algorithmdialog.cpp \
 	collectioncombo.cpp algorithmcombo.cpp propertysheet.cpp
-libkmrmlpart_la_LIBADD = $(LIB_KMRMLSTUFF) $(LIB_KPARTS)
+libkmrmlpart_la_LIBADD = $(LIB_KMRMLSTUFF) $(LIB_TDEPARTS)
 libkmrmlpart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
 
 services_DATA = mrml.protocol mrml_part.desktop

@@ -3,7 +3,7 @@ INCLUDES = -I$(top_srcdir)/kview $(all_includes)
 kde_module_LTLIBRARIES = kview_templateplugin.la
 
 kview_templateplugin_la_SOURCES = kviewtemplate.cpp
-kview_templateplugin_la_LIBADD = $(LIB_TDEFILE) $(LIB_KPARTS) -ltdeprint
+kview_templateplugin_la_LIBADD = $(LIB_TDEFILE) $(LIB_TDEPARTS) -ltdeprint
 kview_templateplugin_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 
 plugdir   = $(kde_datadir)/kview/kpartplugins

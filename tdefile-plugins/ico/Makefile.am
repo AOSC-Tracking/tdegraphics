@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_ico.la
 
 tdefile_ico_la_SOURCES = tdefile_ico.cpp 
 tdefile_ico_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_ico_la_LIBADD = $(LIB_KSYCOCA)
+tdefile_ico_la_LIBADD = $(LIB_TDESYCOCA)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

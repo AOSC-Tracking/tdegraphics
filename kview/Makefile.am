@@ -12,7 +12,7 @@ noinst_HEADERS = kview.h
 
 kview_la_SOURCES = kview.cpp main.cpp
 kview_la_LDFLAGS = $(KDE_RPATH) $(all_libraries) -module -avoid-version
-kview_la_LIBADD = $(LIB_KPARTS) $(LIB_KUTILS)
+kview_la_LIBADD = $(LIB_TDEPARTS) $(LIB_TDEUTILS)
 
 xdg_apps_DATA = kview.desktop
 

@@ -12,7 +12,7 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = kfaxview
 kfaxview_SOURCES = main.cpp
-kfaxview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
+kfaxview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
 kfaxview_LDADD = ../kviewshell/libifaces.la ../kviewshell/libkviewshell.la -ltdeparts
 
 # this is where the desktop file will go

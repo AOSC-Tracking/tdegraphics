@@ -187,7 +187,7 @@ bool KCamera::configure()
 
 bool KCamera::test()
 {
-	// TODO: Make testing non-blocking (maybe via KIO?)
+	// TODO: Make testing non-blocking (maybe via TDEIO?)
 	// Currently, a failed serial test times out at about 30 sec.
 	return camera() != 0;
 }

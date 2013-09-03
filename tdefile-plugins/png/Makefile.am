@@ -10,7 +10,7 @@ kde_module_LTLIBRARIES = tdefile_png.la
 
 tdefile_png_la_SOURCES = tdefile_png.cpp
 tdefile_png_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-tdefile_png_la_LIBADD = $(LIB_KIO)
+tdefile_png_la_LIBADD = $(LIB_TDEIO)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

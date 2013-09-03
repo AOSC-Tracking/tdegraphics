@@ -34,8 +34,8 @@
 #define CFG_OCR_ENGINE    "ocrEngine"
 #define CFG_OCR_CLEANUP   "unlinkORF"  /* delete orf file? */
 
-#define CFG_OCR_KSPELL    "ocrSpellSettings"
-#define CFG_WANT_KSPELL   "ocrKSpellEnabled"
+#define CFG_OCR_TDESPELL    "ocrSpellSettings"
+#define CFG_WANT_TDESPELL   "ocrKSpellEnabled"
 #define CFG_KS_NOROOTAFFIX  "KSpell_NoRootAffix"
 #define CFG_KS_RUNTOGETHER  "KSpell_RunTogether"
 #define CFG_KS_DICTIONARY   "KSpell_Dictionary"

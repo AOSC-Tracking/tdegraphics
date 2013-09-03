@@ -6,7 +6,7 @@ noinst_HEADERS = kviewpresenterconfig.h
 
 kcm_kviewpresenterconfig_la_SOURCES = kviewpresenterconfig.cpp
 kcm_kviewpresenterconfig_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-kcm_kviewpresenterconfig_la_LIBADD = $(LIB_KUTILS)
+kcm_kviewpresenterconfig_la_LIBADD = $(LIB_TDEUTILS)
 
 kcm_kviewpresenterconfig_DATA = kviewpresenterconfig.desktop
 kcm_kviewpresenterconfigdir = $(kde_servicesdir)/tdeconfiguredialog
