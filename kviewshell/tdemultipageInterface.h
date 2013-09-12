@@ -1,6 +1,6 @@
 // -*- C++ -*-
-#ifndef tdemultipageINTERFACE_H
-#define tdemultipageINTERFACE_H
+#ifndef TDEMULTIPAGEINTERFACE_H
+#define TDEMULTIPAGEINTERFACE_H
  
 #include <dcopobject.h>
  
