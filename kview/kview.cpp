@@ -251,7 +251,7 @@ void KView::readSettings() // TDEConfig * config )
 
 bool KView::eventFilter( TQObject * obj, TQEvent * ev )
 {
-	if( TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pViewer->widget()) && ev->type() == TQEvent::Resize )
+	if( ev->type() == TQEvent::Resize && TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pViewer->widget()) )
 	{
 		if( m_nResizeMode == ResizeImage )
 			handleResize();
