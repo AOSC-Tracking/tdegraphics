@@ -1078,8 +1078,11 @@ void Part::restoreDocument(TDEConfig* config)
 
 void Part::saveDocumentRestoreInfo(TDEConfig* config)
 {
-  config->writePathEntry( "URL", url().url() );
-  config->writeEntry( "Viewport", m_document->viewport().toString() );
+  if ( url().isValid() )
+  {
+    config->writePathEntry( "URL", url().url() );
+    config->writeEntry( "Viewport", m_document->viewport().toString() );
+  }
 }
 
 /*
