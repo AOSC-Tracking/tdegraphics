@@ -353,8 +353,8 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 +    }
 +#endif
 +
-     updateResizeLines (QMAX (1, QMAX (m_view->width () + viewDX, m_view->zoomDocToViewX (1))),
-                        QMAX (1, QMAX (m_view->height () + viewDY, m_view->zoomDocToViewY (1))),
+     updateResizeLines (QMAX (1, TQMAX (m_view->width () + viewDX, m_view->zoomDocToViewX (1))),
+                        QMAX (1, TQMAX (m_view->height () + viewDY, m_view->zoomDocToViewY (1))),
                         viewDX, viewDY);
  
      emit continuedDocResize (newDocSize ());
