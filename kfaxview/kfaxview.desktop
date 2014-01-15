@@ -77,6 +77,12 @@ Terminal=false
 ServiceTypes=Browser/View
 X-TDE-Library=kviewerpart
 X-TDE-BrowserView-Args=fax
-DocPath=kfaxview/index.html
+# Restore the following key and remove this comment when a help handbook
+# is written. Disabling this key prevents populating the main handbook
+# table of contents with a non-existent document, which results in a
+# main handbook error message of
+# 'There is no documentation available for /xyz/index.html.'
+# Also disable this key when there exists only a useless template handbook.
+# DocPath=kfaxview/index.html
 X-TDE-StartupNotify=true
 Categories=Qt;TDE;Graphics;
