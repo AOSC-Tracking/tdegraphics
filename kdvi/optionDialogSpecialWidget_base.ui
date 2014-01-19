@@ -116,7 +116,7 @@
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>&lt;p&gt;Not all editors are well suited for inverse search. For instance, many editors have no command like 'If the file is not yet loaded, load it. Otherwise, bring the window with the file to the front'. If you are using an editor like this, clicking into the DVI file will always open a new editor, even if the TeX file is already open. Likewise, many editors have no command line argument that would allow KDVI to specify the exact line which you wish to edit.&lt;/p&gt;
-&lt;p&gt;If you feel that KDVI's support for a certain editor is inadequate, please write to kebekus@kde.org.&lt;/p&gt;</string>
+&lt;p&gt;If you feel that KDVI's support for a certain editor is inadequate, please contact the Trinity developers at www.trinitydesktop.org.&lt;/p&gt;</string>
                     </property>
                 </widget>
                 <widget class="KLineEdit" row="3" column="1" rowspan="1" colspan="2">
