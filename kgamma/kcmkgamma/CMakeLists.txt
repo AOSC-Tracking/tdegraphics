@@ -25,7 +25,7 @@ link_directories(
 
 #### other data #################################
 
-install( FILES kgamma.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES kgamma.desktop DESTINATION ${APPS_INSTALL_DIR}/.hidden )
 
 
 #### kcmkgamma (module) #########################
