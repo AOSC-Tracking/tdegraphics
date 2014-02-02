@@ -255,7 +255,7 @@ void KGamma::setupUI() {
     //Options
     TQHBox *options = new TQHBox(this);
 
-    xf86cfgbox = new TQCheckBox( i18n("Save settings to XF86Config"), options );
+    xf86cfgbox = new TQCheckBox( i18n("Save settings to X-Server Config"), options );
     connect(xf86cfgbox, TQT_SIGNAL(clicked()), TQT_SLOT(changeConfig()));
 
     syncbox = new TQCheckBox( i18n("Sync screens"), options );
