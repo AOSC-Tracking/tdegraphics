@@ -38,7 +38,7 @@ tdegraphics is a collection of graphic oriented applications:
 * kghostview
     Program (and embeddable KPart) to display *.pdf and *.ps
 
-* kiconedit
+* tdeiconedit
     An icon editor.
 
 * kmrml
