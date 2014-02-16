@@ -184,10 +184,10 @@ things are set multiple times. But it works :-)
   ;; offset customizations not in my-c-style
   (c-set-offset 'member-init-intro '++)
   ;; other customizations
-  (setq tab-width 8
+  (set tab-width 8
         ;; this will make sure spaces are used instead of tabs
         indent-tabs-mode nil)
-  (setq c-basic-offset 3)
+  (set c-basic-offset 3)
   ;; we like auto-newline and hungry-delete
   (c-toggle-hungry-state 1)
   ;; keybindings for C, C++, and Objective-C.  We can put these in
@@ -201,14 +201,14 @@ things are set multiple times. But it works :-)
   (load-library "vc")
   
   ;;for QT
-  (setq c-C++-access-key "\\<\\(Q_SIGNALS\\|public\\|protected\\|private
+  (set c-C++-access-key "\\<\\(Q_SIGNALS\\|public\\|protected\\|private
   \\|public Q_SLOTS\\|protected Q_SLOTS\\|private Q_SLOTS\\)\\>[ \t]*:")
   ;; modify the colour of Q_SLOTS to match public, private, etc ...
   (font-lock-add-keywords 'c++-mode
   '(("\\<\\(Q_SLOTS\\|Q_SIGNALS\\)\\>" . font-lock-type-face)))
   ;; make new font for rest of qt keywords
   (make-face 'qt-keywords-face)
-  (set-face-foreground 'qt-keywords-face "green")
+  (set -face-foreground 'qt-keywords-face "green")
   ;; qt keywords
   (font-lock-add-keywords 'c++-mode
   '(("\\<Q_OBJECT\\>" . 'qt-keywords-face)))
@@ -218,7 +218,7 @@ things are set multiple times. But it works :-)
   '(("\\<Q[A-Z][A-Za-z]*" . 'qt-keywords-face)))
   )
    
-(setq auto-mode-alist
+(set auto-mode-alist
          (append '(("\\.h$"    . c++-mode)) auto-mode-alist))
 
 </.emacs>
