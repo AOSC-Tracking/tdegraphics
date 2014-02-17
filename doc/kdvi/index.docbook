@@ -508,7 +508,7 @@ Works only for visiting one buffer at a time."
          (this-buf-modified-p nil))
     ;;; the following is copied from server-visit-files, with
     ;;; a modification for the `verify-visited-file-modtime' test
-    (if (and buf (set -buffer buf))
+    (if (and buf (set-buffer buf))
         (if (file-exists-p filen)
             ;;; if the file has changed on disk, reload it
             ;;; using `find-file-noselect'
@@ -524,10 +524,10 @@ Works only for visiting one buffer at a time."
           t)
       (set buf (find-file-noselect filen)))
     (set this-buf-modified-p (buffer-modified-p buf))
-    (set -buffer buf)
-    (set -buffer-modified-p nil)
+    (set-buffer buf)
+    (set-buffer-modified-p nil)
     ad-do-it
-    (set -buffer-modified-p this-buf-modified-p)))
+    (set-buffer-modified-p this-buf-modified-p)))
 </programlisting>
         </listitem>
       </itemizedlist>

@@ -208,7 +208,7 @@ things are set multiple times. But it works :-)
   '(("\\<\\(Q_SLOTS\\|Q_SIGNALS\\)\\>" . font-lock-type-face)))
   ;; make new font for rest of qt keywords
   (make-face 'qt-keywords-face)
-  (set -face-foreground 'qt-keywords-face "green")
+  (set-face-foreground 'qt-keywords-face "green")
   ;; qt keywords
   (font-lock-add-keywords 'c++-mode
   '(("\\<Q_OBJECT\\>" . 'qt-keywords-face)))
