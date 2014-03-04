@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE" > <!-- change language only here -->
+]>
+
+<article lang="&language;" id="about">
+<title>camera</title>
+
+<articleinfo>
+
+<authorgroup>
+<author>&tde-authors;</author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
+
+<releaseinfo>&tde-release-version;</releaseinfo>
+<date>Reviewed: &tde-release-date;</date>
+
+<copyright>
+<year>&tde-copyright-date;</year>
+<holder>&tde-team;</holder>
+</copyright>
+
+<abstract>
+<para>
+This handbook describes the camera protocol.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>TDE</keyword>
+<keyword>camera</keyword>
+<keyword>protocol</keyword>
+</keywordset>
+
+</articleinfo>
+
+<para>The camera protocol provides support for directly accessing the memory card
+in a digtal camera, thereby treating the memory card as just another storage device,
+like a hard drive.</para>
+
+</article>
