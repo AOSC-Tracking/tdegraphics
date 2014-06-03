@@ -1471,15 +1471,19 @@ void KViewPart::preferencesChanged()
 
 void KViewPart::partActivateEvent( KParts::PartActivateEvent *ev )
 {
-  TQApplication::sendEvent( multiPage, ev );
+  if (!multiPage.isNull())
+  {
+    TQApplication::sendEvent( multiPage, ev );
+  }
 }
-
 
 void KViewPart::guiActivateEvent( KParts::GUIActivateEvent *ev )
 {
-  TQApplication::sendEvent( multiPage, ev );
+  if (!multiPage.isNull())
+  {
+    TQApplication::sendEvent( multiPage, ev );
+  }
 }
-
 
 void KViewPart::slotEnableMoveTool(bool enable)
 {
