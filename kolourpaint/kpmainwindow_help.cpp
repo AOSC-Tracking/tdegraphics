@@ -138,7 +138,7 @@ void kpMainWindow::slotHelpTakingScreenshots ()
 
             "<p>"
             "You may configure the <b>Desktop Screenshot</b> shortcut"
-            " in the TDE Control Center"
+            " in the Trinity Control Center"
             " module <a href=\"configure kde shortcuts\">Keyboard Shortcuts</a>."
             "</p>"
 

@@ -11,7 +11,7 @@ kmrml consists of the following:
 - mrmlsearch: a small tool that is e.g. called from Konqueror's ContextMenu
               "Search for similar images" to start an image query.
 
-- kcontrol/: a TDE Control Center module for configuring parts of the GIFT,
+- kcontrol/: a Trinity Control Center module for configuring parts of the GIFT,
              i.e. indexing directories, specifying GIFT hosts, etc.
 
 - server/: a kded module, i.e. a tiny little daemon, that can be told via
