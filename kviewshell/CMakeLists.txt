@@ -93,7 +93,7 @@ if ( BUILD_KVIEWSHELL )
       pageSizeDialog.cpp pageSize.cpp sizePreview.cpp zoom.cpp
       units.cpp kvsprefs.kcfgc optionDialogGUIWidget_base.ui
       optionDialogAccessibilityWidget.ui simplePageSize.cpp
-    LINK ifaces-static tdeparts-shared
+    LINK ifaces-static tdemultipage-shared tdeparts-shared
     DESTINATION ${PLUGIN_INSTALL_DIR}
   )
 
