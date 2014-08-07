@@ -159,7 +159,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	// widgets: ^searchbar (toolbar containing label and SearchWidget)
 //	m_searchToolBar = new TDEToolBar( parentWidget, "searchBar" );
 //	m_searchToolBar->boxLayout()->setSpacing( KDialog::spacingHint() );
-//	TQLabel * sLabel = new TQLabel( i18n( "&Search:" ), m_searchToolBar, "kde toolbar widget" );
+//	TQLabel * sLabel = new TQLabel( i18n( "&Search:" ), m_searchToolBar, "tde toolbar widget" );
 //	m_searchWidget = new SearchWidget( m_searchToolBar, m_document );
 //	sLabel->setBuddy( m_searchWidget );
 //	m_searchToolBar->setStretchableWidget( m_searchWidget );
