@@ -28,6 +28,15 @@
 #undef QT_VERSION // Needed for 1.08 *grml*
 #include LCMS_HEADER
 
+#if LCMS_VERSION < 2000
+#define cmsColorSpaceSignature icColorSpaceSignature
+#define cmsChannelsOf _cmsChannelsOf
+#define cmsFLAGS_NOOPTIMIZE cmsFLAGS_NOTPRECALC
+#define cmsGetHeaderRenderingIntent cmsTakeRenderingIntent
+#define cmsMAXCHANNELS MAXCHANNELS
+#define cmsSigRgbData icSigRgbData
+#endif
+
 #include "SVGElementImpl.h"
 #include "SVGURIReferenceImpl.h"
 
@@ -74,7 +83,7 @@ private:
 	cmsHTRANSFORM m_hTrans;
 	int m_intent;
 
-	icColorSpaceSignature m_inputColorSpace, m_outputColorSpace;
+	cmsColorSpaceSignature m_inputColorSpace, m_outputColorSpace;
 	
 public:
 	KSVG_GET

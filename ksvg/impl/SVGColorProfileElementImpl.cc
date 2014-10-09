@@ -205,13 +205,13 @@ bool SVGColorProfileElementImpl::loadColorProfile()
 	m_hInput = cmsOpenProfileFromFile(open.latin1(), "r");
 	m_hOutput = cmsCreate_sRGBProfile();
 
-	unsigned int dwIn = BYTES_SH(2) | CHANNELS_SH(_cmsChannelsOf(m_inputColorSpace));
-	unsigned int dwOut = BYTES_SH(2) | CHANNELS_SH(_cmsChannelsOf(m_outputColorSpace));
+	unsigned int dwIn = BYTES_SH(2) | CHANNELS_SH(cmsChannelsOf(m_inputColorSpace));
+	unsigned int dwOut = BYTES_SH(2) | CHANNELS_SH(cmsChannelsOf(m_outputColorSpace));
 	
 	if(m_renderingIntent != RENDERING_INTENT_AUTO)
-		m_hTrans = cmsCreateTransform(m_hInput, dwIn, m_hOutput, dwOut, m_renderingIntent - 2, cmsFLAGS_NOTPRECALC);
+		m_hTrans = cmsCreateTransform(m_hInput, dwIn, m_hOutput, dwOut, m_renderingIntent - 2, cmsFLAGS_NOOPTIMIZE);
 	else
-		m_hTrans = cmsCreateTransform(m_hInput, dwIn, m_hOutput, dwOut, cmsTakeRenderingIntent(m_hInput), cmsFLAGS_NOTPRECALC);
+		m_hTrans = cmsCreateTransform(m_hInput, dwIn, m_hOutput, dwOut, cmsGetHeaderRenderingIntent(m_hInput), cmsFLAGS_NOOPTIMIZE);
 	
 	m_inputColorSpace = cmsGetColorSpace(m_hInput);
 	m_outputColorSpace = cmsGetColorSpace(m_hOutput);
@@ -237,7 +237,7 @@ TQRgb SVGColorProfileElementImpl::correctPixel(float r, float g, float b)
 			return tqRgb(0, 0, 0);
 	}
 
-	unsigned short input[MAXCHANNELS], output[MAXCHANNELS];
+	unsigned short input[cmsMAXCHANNELS], output[cmsMAXCHANNELS];
 
 	input[0] = ((unsigned int) r) * 257;
 	input[1] = ((unsigned int) g) * 257;
@@ -245,7 +245,7 @@ TQRgb SVGColorProfileElementImpl::correctPixel(float r, float g, float b)
 
 	cmsDoTransform(m_hTrans, input, output, 1);
 
-	if(m_outputColorSpace == icSigRgbData)
+	if(m_outputColorSpace == cmsSigRgbData)
 		return tqRgb(output[0] / 257, output[1] / 257, output[2] / 257);
 
 	return tqRgb(0, 0, 0);
