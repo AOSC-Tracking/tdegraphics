@@ -54,7 +54,7 @@ KKameraConfig::KKameraConfig(TQWidget *parent, const char *name, const TQStringL
 	m_devicePopup = new TDEPopupMenu(this);
 	m_actions = new TDEActionCollection(this);
 	m_config = new KSimpleConfig(KProtocolInfo::config("camera"));
-	
+
 	m_context = gp_context_new();
 	if (m_context) {
 
@@ -118,7 +118,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	// create actions
 	TDEAction *act;
 	
-	act = new TDEAction(i18n("Add"), "camera", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
+	act = new TDEAction(i18n("Add"), "camera-photo", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
 	act->setWhatsThis(i18n("Click this button to add a new camera."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
@@ -147,7 +147,7 @@ void KKameraConfig::populateDeviceListView(void)
 	CameraDevicesMap::Iterator it;
 	for (it = m_devices.begin(); it != m_devices.end(); it++) {
 		if (it.data()) {
-			new TQIconViewItem(m_deviceSel, it.key(), DesktopIcon("camera"));
+			new TQIconViewItem(m_deviceSel, it.key(), DesktopIcon("camera-photo"));
 		}
 	}
 	slot_deviceSelected(m_deviceSel->currentItem());
