@@ -1,7 +1,7 @@
 [Desktop Entry]
 Icon=mypluginicon
 Type=Service
-ServiceTypes=KPluginInfo
+X-TDE-ServiceTypes=KPluginInfo
 
 X-TDE-PluginInfo-Author=Your Name
 X-TDE-PluginInfo-Email=Your@address

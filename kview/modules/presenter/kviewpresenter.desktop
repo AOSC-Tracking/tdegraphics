@@ -1,7 +1,7 @@
 [Desktop Entry]
 Icon=presenter
 Type=Service
-ServiceTypes=KPluginInfo
+X-TDE-ServiceTypes=KPluginInfo
 
 X-TDE-PluginInfo-Author=Matthias Kretz
 X-TDE-PluginInfo-Email=kretz@kde.org

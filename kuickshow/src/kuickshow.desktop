@@ -18,9 +18,9 @@ Exec=kuickshow %i %m -caption "%c" %U
 Icon=kuickshow
 Type=Application
 MimeType=image/gif;image/x-xpm;image/x-xbm;image/jpeg;image/png;image/tiff;image/x-bmp;image/x-psd;image/x-eim;image/x-portable-bitmap;image/x-portable-pixmap;image/x-portable-greymap;
-DocPath=kuickshow/index.html
+X-DocPath=kuickshow/index.html
 Terminal=false
-InitialPreference=6
+X-TDE-InitialPreference=6
 
 GenericName=Image Viewer
 GenericName[af]=Beeld Aansig

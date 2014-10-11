@@ -189,6 +189,6 @@ X-TDE-Library=kamera
 X-TDE-ModuleType=Library
 Icon=camera
 Exec=tdecmshell kamera
-DocPath=kamera/index.html
+X-DocPath=kamera/index.html
 Categories=Qt;TDE;Settings;X-TDE-settings-hardware;
 OnlyShowIn=TDE;

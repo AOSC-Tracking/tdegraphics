@@ -1,5 +1,5 @@
 [Desktop Entry]
-ServiceTypes=image/png,image/jpeg,image/gif,image/tiff,image/bmp,image/x-xpm,image/x-xbm,image/x-png
+X-TDE-ServiceTypes=image/png,image/jpeg,image/gif,image/tiff,image/bmp,image/x-xpm,image/x-xbm,image/x-png
 Actions=search;
 
 [Desktop Action search]

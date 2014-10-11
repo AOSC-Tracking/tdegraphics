@@ -1,5 +1,5 @@
 [Desktop Entry]
-DocPath=kpovmodeler/index.html
+X-DocPath=kpovmodeler/index.html
 Exec=kpovmodeler -caption "%c" %i %m %f
 Icon=kpovmodeler
 MimeType=application/x-kpovmodeler;
@@ -52,7 +52,7 @@ GenericName[tr]=Povray Modelleyici
 GenericName[zh_CN]=Povray 建模器
 GenericName[zh_HK]=Povray 建模器
 Path=
-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart,Browser/View,KPovModeler/Document
+X-TDE-ServiceTypes=KParts/ReadOnlyPart,KParts/ReadWritePart,Browser/View,KPovModeler/Document
 Terminal=false
 Type=Application
 X-TDE-Library=libkpovmodelerpart

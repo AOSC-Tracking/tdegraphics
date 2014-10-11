@@ -1,7 +1,7 @@
 [Desktop Entry]
 Exec=tdecmshell kgamma
 Icon=kgamma
-DocPath=kgamma/index.html
+X-DocPath=kgamma/index.html
 Type=Application
 X-TDE-Library=kgamma
 X-TDE-Init=kgamma

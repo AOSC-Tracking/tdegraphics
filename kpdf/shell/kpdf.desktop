@@ -76,7 +76,7 @@ GenericName[zu]=Umboniseli we PDF
 Exec=kpdf %U %i -caption "%c"
 Icon=kpdf
 Type=Application
-DocPath=kpdf/index.html
-InitialPreference=7
+X-DocPath=kpdf/index.html
+X-TDE-InitialPreference=7
 Categories=Qt;TDE;Office;Viewer;
 
