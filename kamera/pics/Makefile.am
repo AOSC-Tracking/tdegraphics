@@ -1,1 +1,1 @@
-KDE_ICON = camera camera_test
+KDE_ICON = camera-photo camera_test
