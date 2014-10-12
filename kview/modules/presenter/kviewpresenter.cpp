@@ -71,10 +71,10 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 							this, TQT_SLOT( slotImageList() ),
 							actionCollection(), "plugin_presenter_imageList" );
 		m_paSlideshow = new TDEToggleAction( i18n( "Start &Slideshow" ), Key_S, actionCollection(), "plugin_presenter_slideshow" );
-		( void ) new TDEAction( i18n( "&Previous Image in List" ), "previous", ALT+Key_Left,
+		( void ) new TDEAction( i18n( "&Previous Image in List" ), "go-previous", ALT+Key_Left,
 							  this, TQT_SLOT( prev() ),
 							  actionCollection(), "plugin_presenter_prev" );
-		( void ) new TDEAction( i18n( "&Next Image in List" ), "next", ALT+Key_Right,
+		( void ) new TDEAction( i18n( "&Next Image in List" ), "go-next", ALT+Key_Right,
 							  this, TQT_SLOT( next() ),
 							  actionCollection(), "plugin_presenter_next" );
 
