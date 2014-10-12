@@ -9,5 +9,5 @@
 #
 #################################################
 
-tde_install_icons( camera )
+tde_install_icons( camera-photo )
 tde_install_icons( camera_test )
