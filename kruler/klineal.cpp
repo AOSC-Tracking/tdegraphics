@@ -164,7 +164,7 @@ KLineal::KLineal(TQWidget*parent,const char* name):TDEMainWindow(parent,name){
   mMenu->insertSeparator();
   mMenu->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), helpMenu());
   mMenu->insertSeparator();
-  mMenu->insertItem(SmallIcon( "exit" ), KStdGuiItem::quit().text(), kapp, TQT_SLOT(quit()), CTRL+Key_Q);
+  mMenu->insertItem(SmallIcon( "system-log-out" ), KStdGuiItem::quit().text(), kapp, TQT_SLOT(quit()), CTRL+Key_Q);
   mLastClickPos = geometry().topLeft()+TQPoint(width()/2, height()/2);
 }
 

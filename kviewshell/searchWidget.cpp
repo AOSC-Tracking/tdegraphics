@@ -46,7 +46,7 @@ SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
   layout = new TQHBoxLayout(this, 4, 6, "SearchWidgetLayout");
 
   stopButton = new TQPushButton(this, "stopButton");
-  stopButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("stop", TDEIcon::Small, TDEIcon::SizeSmall));
+  stopButton->setPixmap(TDEGlobal::iconLoader()->loadIcon("process-stop", TDEIcon::Small, TDEIcon::SizeSmall));
   layout->addWidget(stopButton);
 
   searchLabel = new TQLabel(this, "searchLabel");

@@ -30,7 +30,7 @@ fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString
 {
   setCursor( TQCursor( 3 ) );
 
-  setButtonCancel(KGuiItem(i18n("Abort"), "stop", abortTip));
+  setButtonCancel(KGuiItem(i18n("Abort"), "process-stop", abortTip));
 
   if (helpIndex.isEmpty() == false) {
     setHelp(helpIndex, "kdvi");

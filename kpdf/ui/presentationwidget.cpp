@@ -309,7 +309,7 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
         m_topBar->setMovingEnabled( false );
         m_topBar->insertButton( TQApplication::reverseLayout() ? "1rightarrow" : "1leftarrow", 2, TQT_SIGNAL( clicked() ), TQT_TQOBJECT(this), TQT_SLOT( slotPrevPage() ) );
         m_topBar->insertButton( TQApplication::reverseLayout() ? "1leftarrow" : "1rightarrow", 3, TQT_SIGNAL( clicked() ), TQT_TQOBJECT(this), TQT_SLOT( slotNextPage() ) );
-        m_topBar->insertButton( "exit", 1, TQT_SIGNAL( clicked() ), TQT_TQOBJECT(this), TQT_SLOT( close() ) );
+        m_topBar->insertButton( "system-log-out", 1, TQT_SIGNAL( clicked() ), TQT_TQOBJECT(this), TQT_SLOT( close() ) );
         m_topBar->setGeometry( 0, 0, m_width, 32 + 10 );
         m_topBar->alignItemRight( 1 );
         m_topBar->hide();

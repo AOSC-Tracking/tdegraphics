@@ -135,7 +135,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	act->setWhatsThis(i18n("Click this button to view a summary of the current status of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new TDEAction(i18n("Cancel"), "stop", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
+	act = new TDEAction(i18n("Cancel"), "process-stop", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
 	act->setWhatsThis(i18n("Click this button to cancel the current camera operation."));
 	act->setEnabled(false);
 	act->plug(m_toolbar);

@@ -164,7 +164,7 @@ actionCollection());
 #ifdef TQICONSET_HONOUR_ON_OFF
     /* The Toggleaction does not seem to handle the on/off icon from TQIconSet */
     TQIconSet lockSet;
-    lockSet.setPixmap(BarIcon("lock")  , TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::On );
+    lockSet.setPixmap(BarIcon("system-lock-screen")  , TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::On );
     lockSet.setPixmap(BarIcon("unlock"), TQIconSet::Automatic, TQIconSet::Normal, TQIconSet::Off);
     act = new TDEToggleAction ( i18n("Keep &Zoom Setting"), lockSet, CTRL+Key_Z,
                               actionCollection(), "keepZoom" );

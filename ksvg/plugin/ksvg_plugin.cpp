@@ -115,7 +115,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 	ksvgd->zoomInAction = KStdAction::zoomIn(this, TQT_SLOT(slotZoomIn()), actionCollection());
 	ksvgd->zoomOutAction = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()), actionCollection());
 	ksvgd->zoomResetAction =  new TDEAction(i18n("Zoom &Reset"), "viewmag", this, TQT_SLOT(slotZoomReset()), actionCollection(), "zoom_reset");
-	ksvgd->stopAnimationsAction = new TDEAction(i18n("&Stop Animations"), "stop", Key_Escape, this, TQT_SLOT(slotStop()), actionCollection(), "stop_anims");
+	ksvgd->stopAnimationsAction = new TDEAction(i18n("&Stop Animations"), "process-stop", Key_Escape, this, TQT_SLOT(slotStop()), actionCollection(), "stop_anims");
 	ksvgd->viewSourceAction = new TDEAction(i18n("View &Source"), "document2", Key_F6, this, TQT_SLOT(slotViewSource()), actionCollection(), "view_source");
 	ksvgd->viewMemoryAction = new TDEAction(i18n("View &Memory"), "document2", Key_F7, this, TQT_SLOT(slotViewMemory()), actionCollection(), "view_memory");
 	ksvgd->saveToPNG = new TDEAction(i18n("Save to PNG..."), "save", 0, this, TQT_SLOT(slotSaveToPNG()), actionCollection(), "save_to_png");
