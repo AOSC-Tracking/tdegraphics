@@ -298,13 +298,13 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
 
     TDEShortcut readUpShort = TDEStdAccel::shortcut( TDEStdAccel::Prior );
     readUpShort.append( KKey( SHIFT+Key_Space ) );
-    _readUp    = new TDEAction( i18n( "Read Up" ), "up",
+    _readUp    = new TDEAction( i18n( "Read Up" ), "go-up",
                               readUpShort, this, TQT_SLOT( slotReadUp() ),
                               actionCollection(), "readUp" );
 
     TDEShortcut readDownShort = TDEStdAccel::shortcut( TDEStdAccel::Next );
     readDownShort.append( KKey( Key_Space ) );
-    _readDown  = new TDEAction( i18n( "Read Down" ), "down",
+    _readDown  = new TDEAction( i18n( "Read Down" ), "go-down",
                               readDownShort, this, TQT_SLOT( slotReadDown() ),
                               actionCollection(), "readDown" );
 

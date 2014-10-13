@@ -263,8 +263,8 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   gotoAct = KStdAction::gotoPage(this, TQT_SLOT(goToPage()), actionCollection());
   gotoAct->setShortcut("CTRL+G");
 
-  readUpAct = new TDEAction(i18n("Read Up Document"), "up", SHIFT+Key_Space, this, TQT_SLOT(mp_readUp()), actionCollection(), "go_read_up");
-  readDownAct = new TDEAction(i18n("Read Down Document"), "down", Key_Space, this, TQT_SLOT(mp_readDown()), actionCollection(), "go_read_down");
+  readUpAct = new TDEAction(i18n("Read Up Document"), "go-up", SHIFT+Key_Space, this, TQT_SLOT(mp_readUp()), actionCollection(), "go_read_up");
+  readDownAct = new TDEAction(i18n("Read Down Document"), "go-down", Key_Space, this, TQT_SLOT(mp_readDown()), actionCollection(), "go_read_down");
 
   printAction = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
 

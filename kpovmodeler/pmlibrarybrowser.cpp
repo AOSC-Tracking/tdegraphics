@@ -71,7 +71,7 @@ PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( TQWidget* parent, const 
    TQHBoxLayout* hl = new TQHBoxLayout( vl );
 
    m_pUpButton = new TQPushButton( this );
-   m_pUpButton->setPixmap( SmallIcon( "up" ) );
+   m_pUpButton->setPixmap( SmallIcon( "go-up" ) );
    m_pNewSubLibraryButton = new TQPushButton( this );
    m_pNewSubLibraryButton->setPixmap( SmallIcon( "folder_new" ) );
    m_pNewObjectButton = new TQPushButton( this );
