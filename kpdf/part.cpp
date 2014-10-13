@@ -954,7 +954,7 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 	//Albert says: I have not ported this as i don't see it does anything
     if ( d->mouseOnRect ) // and rect->objectType() == ObjectRect::Image ...
 	{
-		m_popup->insertItem( SmallIcon("filesave"), i18n("Save Image..."), 4 );
+		m_popup->insertItem( SmallIcon("document-save"), i18n("Save Image..."), 4 );
 		m_popup->setItemEnabled( 4, false );
 }*/
 	

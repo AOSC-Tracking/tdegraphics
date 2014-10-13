@@ -55,7 +55,7 @@ PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
    m_pPovrayCommand = new TQLineEdit( gb );
    hlayout->addWidget( m_pPovrayCommand );
    m_pBrowsePovrayCommand = new TQPushButton( gb );
-   m_pBrowsePovrayCommand->setPixmap( SmallIcon( "fileopen" ) );
+   m_pBrowsePovrayCommand->setPixmap( SmallIcon( "document-open" ) );
    connect( m_pBrowsePovrayCommand, TQT_SIGNAL( clicked( ) ),
             TQT_SLOT( slotBrowsePovrayCommand( ) ) );
    hlayout->addWidget( m_pBrowsePovrayCommand );
@@ -69,7 +69,7 @@ PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
    m_pDocumentationPath = new TQLineEdit( gb );
    hlayout->addWidget( m_pDocumentationPath );
    m_pBrowseDocumentationPath = new TQPushButton( gb );
-   m_pBrowseDocumentationPath->setPixmap( SmallIcon( "fileopen" ) );
+   m_pBrowseDocumentationPath->setPixmap( SmallIcon( "document-open" ) );
    connect( m_pBrowseDocumentationPath, TQT_SIGNAL( clicked( ) ),
             TQT_SLOT( slotBrowsePovrayDocumentation( ) ) );
    hlayout->addWidget( m_pBrowseDocumentationPath );

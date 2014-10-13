@@ -123,7 +123,7 @@ void PMPatternEdit::createTopWidgets( )
    m_pDensityFile = new TQLineEdit( m_pDensityWidget );
    hl->addWidget( m_pDensityFile, 1 );
    m_pDensityFileBrowse = new TQPushButton( m_pDensityWidget );
-   m_pDensityFileBrowse->setPixmap( SmallIcon( "fileopen" ) );
+   m_pDensityFileBrowse->setPixmap( SmallIcon( "document-open" ) );
    hl->addWidget( m_pDensityFileBrowse );
    hl = new TQHBoxLayout( vl );
    hl->addWidget( new TQLabel( i18n( "Interpolation:" ), m_pDensityWidget ) );

@@ -1125,7 +1125,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
             if ( !selectedText.isEmpty() )
             {
                 menu.insertTitle( i18n( "Text (1 character)", "Text (%n characters)", selectedText.length() ) );
-                menu.insertItem( SmallIcon("editcopy"), i18n( "Copy to Clipboard" ), 1 );
+                menu.insertItem( SmallIcon("edit-copy"), i18n( "Copy to Clipboard" ), 1 );
                 if ( !d->document->isAllowed( KPDFDocument::AllowCopy ) )
                     menu.setItemEnabled( 1, false );
                 if ( KpdfSettings::useKTTSD() )
@@ -1133,7 +1133,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
             }
             menu.insertTitle( i18n( "Image (%1 by %2 pixels)" ).arg( selectionRect.width() ).arg( selectionRect.height() ) );
             menu.insertItem( SmallIcon("image"), i18n( "Copy to Clipboard" ), 3 );
-            menu.insertItem( SmallIcon("filesave"), i18n( "Save to File..." ), 4 );
+            menu.insertItem( SmallIcon("document-save"), i18n( "Save to File..." ), 4 );
             int choice = menu.exec( e->globalPos() );
             // IMAGE operation choosen
             if ( choice > 2 )

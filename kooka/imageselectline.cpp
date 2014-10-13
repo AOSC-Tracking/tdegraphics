@@ -54,7 +54,7 @@ ImageSelectLine::ImageSelectLine( TQWidget *parent, const TQString& text )
    (void) new TQLabel( text, this );
    m_urlCombo       = new KURLComboBox( KURLComboBox::Files, this );
    m_buttFileSelect = new TQPushButton( this );
-   m_buttFileSelect->setPixmap( SmallIcon( "fileopen" ) );
+   m_buttFileSelect->setPixmap( SmallIcon( "document-open" ) );
 
    m_urlCombo->setMaxItems(5);
 

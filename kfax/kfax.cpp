@@ -244,7 +244,7 @@ void TopLevel::setupMenuBar()
           actionCollection() );
   actPrint = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( print() ), actionCollection() );
   KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close() ), actionCollection() );
-  actAdd = new TDEAction( i18n( "A&dd..." ), "filenew", TDEShortcut(), TQT_TQOBJECT(this),
+  actAdd = new TDEAction( i18n( "A&dd..." ), "document-new", TDEShortcut(), TQT_TQOBJECT(this),
       TQT_SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
 
   actRecent->setMaxItems( 5 );

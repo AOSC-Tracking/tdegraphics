@@ -502,7 +502,7 @@ void KView::setupActions( TQObject * partobject )
 		if( slotNames.contains( "print()" ) )
 			KStdAction::print( extension, TQT_SLOT( print() ), actionCollection(), "print" );
 		if( slotNames.contains( "del()" ) )
-			( void )new TDEAction( i18n( "&Delete" ), "editdelete", SHIFT+Key_Delete,
+			( void )new TDEAction( i18n( "&Delete" ), "edit-delete", SHIFT+Key_Delete,
 								 extension, TQT_SLOT( del() ), actionCollection(), "del" );
 		connect( extension, TQT_SIGNAL( enableAction( const char *, bool ) ), TQT_SLOT( enableAction( const char *, bool ) ) );
 	}

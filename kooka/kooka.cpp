@@ -200,7 +200,7 @@ actionCollection());
 		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorBoth() ),
 		       actionCollection(), "mirrorBoth" );
 
-    (void) new TDEAction(i18n("Open Image in &Graphic Application..."), "fileopen", CTRL+Key_G,
+    (void) new TDEAction(i18n("Open Image in &Graphic Application..."), "document-open", CTRL+Key_G,
 		       TQT_TQOBJECT(m_view), TQT_SLOT( slOpenCurrInGraphApp() ),
 		       actionCollection(), "openInGraphApp" );
 
@@ -220,12 +220,12 @@ actionCollection());
     m_view->connectViewerAction( act );
 
     /* Gallery actions */
-    act = new TDEAction(i18n("&Create Folder..."), "folder_new", 0,
+    act = new TDEAction(i18n("&Create Folder..."), "folder-new", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotCreateFolder() ),
 		       actionCollection(), "foldernew" );
     m_view->connectGalleryAction( act );
 
-    act = new TDEAction(i18n("&Save Image..."), "filesave", 0,
+    act = new TDEAction(i18n("&Save Image..."), "document-save", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotExportFile() ),
 		       actionCollection(), "saveImage" );
     m_view->connectGalleryAction( act );
@@ -240,7 +240,7 @@ actionCollection());
 		       actionCollection(), "deleteImage" );
     m_view->connectGalleryAction( act );
 
-    act = new TDEAction(i18n("&Unload Image"), "fileclose", 0,
+    act = new TDEAction(i18n("&Unload Image"), "window-close", 0,
 		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotUnloadItems() ),
 		       actionCollection(), "unloadImage" );
     m_view->connectGalleryAction( act );
@@ -265,7 +265,7 @@ actionCollection());
 			actionCollection(), "enable_msgs");
 
 
-    m_saveOCRTextAction = new TDEAction( i18n("Save OCR Res&ult Text"), "filesaveas", CTRL+Key_U,
+    m_saveOCRTextAction = new TDEAction( i18n("Save OCR Res&ult Text"), "document-save-as", CTRL+Key_U,
                                        m_view, TQT_SLOT(slSaveOCRResult()),
                                        actionCollection(), "saveOCRResult");
 }

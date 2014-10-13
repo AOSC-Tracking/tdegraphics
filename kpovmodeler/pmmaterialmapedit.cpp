@@ -70,7 +70,7 @@ void PMMaterialMapEdit::createTopWidgets( )
    lbl = new TQLabel( i18n( "File name:" ), this );
    m_pImageFileNameEdit = new TQLineEdit( this );
    m_pImageFileNameBrowse = new TQPushButton( this );
-   m_pImageFileNameBrowse->setPixmap( SmallIcon( "fileopen" ) );
+   m_pImageFileNameBrowse->setPixmap( SmallIcon( "document-open" ) );
    hl->addWidget( lbl );
    hl->addWidget( m_pImageFileNameEdit );
    hl->addWidget( m_pImageFileNameBrowse );

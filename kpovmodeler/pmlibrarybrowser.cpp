@@ -73,11 +73,11 @@ PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( TQWidget* parent, const 
    m_pUpButton = new TQPushButton( this );
    m_pUpButton->setPixmap( SmallIcon( "go-up" ) );
    m_pNewSubLibraryButton = new TQPushButton( this );
-   m_pNewSubLibraryButton->setPixmap( SmallIcon( "folder_new" ) );
+   m_pNewSubLibraryButton->setPixmap( SmallIcon( "folder-new" ) );
    m_pNewObjectButton = new TQPushButton( this );
-   m_pNewObjectButton->setPixmap( SmallIcon( "filenew" ) );
+   m_pNewObjectButton->setPixmap( SmallIcon( "document-new" ) );
    m_pDeleteObjectButton = new TQPushButton( this );
-   m_pDeleteObjectButton->setPixmap( SmallIcon( "editdelete" ) );
+   m_pDeleteObjectButton->setPixmap( SmallIcon( "edit-delete" ) );
    TQLabel* lbl = new TQLabel( i18n( "Library: " ), this );
    m_pLibraryComboBox = new TQComboBox( this );
    m_pLibraryComboBox->insertStringList( PMLibraryManager::theManager( )->availableLibraries( ) );

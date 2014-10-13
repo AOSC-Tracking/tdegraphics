@@ -351,7 +351,7 @@ void KookaPreferences::setupSaveFormatPage( )
 {
    konf->setGroup( OP_FILE_GROUP );
    TQFrame *page = addPage( i18n("Image Saving"), i18n("Configure Image Save Assistant" ),
-			    BarIcon("filesave", TDEIcon::SizeMedium ) );
+			    BarIcon("document-save", TDEIcon::SizeMedium ) );
    TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
    /* Skip the format asking if a format entry  exists */

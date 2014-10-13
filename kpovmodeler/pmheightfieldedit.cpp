@@ -59,7 +59,7 @@ void PMHeightFieldEdit::createTopWidgets( )
    m_pFileName = new TQLineEdit( this );
    hl->addWidget( m_pFileName );
    m_pChooseFileName = new TQPushButton( this );
-   m_pChooseFileName->setPixmap( SmallIcon( "fileopen" ) );
+   m_pChooseFileName->setPixmap( SmallIcon( "document-open" ) );
    hl->addWidget( m_pChooseFileName );
 
    hl = new TQHBoxLayout( topLayout( ) );

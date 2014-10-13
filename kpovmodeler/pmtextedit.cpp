@@ -44,7 +44,7 @@ void PMTextEdit::createTopWidgets( )
    m_pFont = new TQLineEdit( this );
    hl->addWidget( m_pFont );
    m_pChooseFont = new TQPushButton( this );
-   m_pChooseFont->setPixmap( SmallIcon( "fileopen" ) );
+   m_pChooseFont->setPixmap( SmallIcon( "document-open" ) );
    hl->addWidget( m_pChooseFont );
 
    hl = new TQHBoxLayout( topLayout( ) );
