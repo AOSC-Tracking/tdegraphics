@@ -192,7 +192,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_tocFrame = new TOC( tocWrapper, m_document );
 	tocWrapperLayout->add(m_tocFrame);
 	connect(m_tocFrame, TQT_SIGNAL(hasTOC(bool)), this, TQT_SLOT(enableTOC(bool)));
-	index = m_toolBox->addItem( tocWrapper, TQIconSet(SmallIcon("text_left")), i18n("Contents") );
+	index = m_toolBox->addItem( tocWrapper, TQIconSet(SmallIcon("format-text-direction-ltr")), i18n("Contents") );
 	m_toolBox->setItemToolTip(index, i18n("Contents"));
 	enableTOC( false );
 
