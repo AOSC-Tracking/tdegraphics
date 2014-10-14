@@ -465,9 +465,9 @@ bool KViewViewer::saveFile()
 
 void KViewViewer::setupActions()
 {
-	m_paZoomIn = new TDEAction( i18n( "Zoom In" ), "viewmag+", TDEStdAccel::shortcut( TDEStdAccel::ZoomIn ), this,
+	m_paZoomIn = new TDEAction( i18n( "Zoom In" ), "zoom-in", TDEStdAccel::shortcut( TDEStdAccel::ZoomIn ), this,
 			TQT_SLOT( slotZoomIn() ), actionCollection(), "zoomin" );
-	m_paZoomOut = new TDEAction( i18n( "Zoom Out" ), "viewmag-", TDEStdAccel::shortcut( TDEStdAccel::ZoomOut ), this,
+	m_paZoomOut = new TDEAction( i18n( "Zoom Out" ), "zoom-out", TDEStdAccel::shortcut( TDEStdAccel::ZoomOut ), this,
 			TQT_SLOT( slotZoomOut() ), actionCollection(), "zoomout" );
 
 	m_paZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, actionCollection(), "view_zoom" );
@@ -483,9 +483,9 @@ void KViewViewer::setupActions()
 	m_paFlipMenu->insert( m_paFlipV );
 	m_paFlipMenu->insert( m_paFlipH );
 
-	m_paRotateCCW = new TDEAction( i18n( "Ro&tate Counter-Clockwise" ), "rotate_ccw", 0, this,
+	m_paRotateCCW = new TDEAction( i18n( "Ro&tate Counter-Clockwise" ), "object-rotate-left", 0, this,
 			TQT_SLOT( slotRotateCCW() ), actionCollection(), "rotateCCW" );
-	m_paRotateCW = new TDEAction( i18n( "Rotate Clockwise" ), "rotate_cw", 0, this,
+	m_paRotateCW = new TDEAction( i18n( "Rotate Clockwise" ), "object-rotate-right", 0, this,
 			TQT_SLOT( slotRotateCW() ), actionCollection(), "rotateCW" );
 	m_paSave = KStdAction::save( this, TQT_SLOT( slotSave() ), actionCollection() );
 	m_paSave->setEnabled( false );

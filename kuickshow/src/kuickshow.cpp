@@ -266,7 +266,7 @@ void KuickShow::initGUI( const KURL& startDir )
                                   TQT_TQOBJECT(this), TQT_SLOT( about() ), coll, "about" );
 
     oneWindowAction = new TDEToggleAction( i18n("Open Only One Image Window"),
-                                         "window_new",
+                                         "window-new",
                                          TDEShortcut( CTRL+Key_N ), coll,
                                          "kuick_one window" );
 

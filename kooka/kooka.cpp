@@ -204,12 +204,12 @@ actionCollection());
 		       TQT_TQOBJECT(m_view), TQT_SLOT( slOpenCurrInGraphApp() ),
 		       actionCollection(), "openInGraphApp" );
 
-    act = new TDEAction(i18n("&Rotate Image Clockwise"), "rotate_cw", CTRL+Key_R,
+    act = new TDEAction(i18n("&Rotate Image Clockwise"), "object-rotate-right", CTRL+Key_R,
 		      TQT_TQOBJECT(this), TQT_SLOT( slRotateClockWise() ),
 		       actionCollection(), "rotateClockwise" );
     m_view->connectViewerAction( act );
 
-    act = new TDEAction(i18n("Rotate Image Counter-Clock&wise"), "rotate_ccw", CTRL+Key_W,
+    act = new TDEAction(i18n("Rotate Image Counter-Clock&wise"), "object-rotate-left", CTRL+Key_W,
 		       TQT_TQOBJECT(this), TQT_SLOT( slRotateCounterClockWise() ),
 		       actionCollection(), "rotateCounterClockwise" );
     m_view->connectViewerAction( act );

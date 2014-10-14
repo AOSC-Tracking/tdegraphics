@@ -121,7 +121,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 	ksvgd->saveToPNG = new TDEAction(i18n("Save to PNG..."), "save", 0, this, TQT_SLOT(slotSaveToPNG()), actionCollection(), "save_to_png");
 //	ksvgd->aboutApp = KStdAction::aboutApp(this, TQT_SLOT(slotAboutKSVG()), actionCollection());//, "KSVG");
 	ksvgd->aboutApp = new TDEAction(i18n("About KSVG"), "vectorgfx", 0, this, TQT_SLOT(slotAboutKSVG()), actionCollection(), "help_about_app");
-	ksvgd->fontKerningAction = new TDEToggleAction(i18n("Use Font &Kerning"), "viewmagfit", Key_F8, this, TQT_SLOT(slotFontKerning()), actionCollection(), "font_kerning");
+	ksvgd->fontKerningAction = new TDEToggleAction(i18n("Use Font &Kerning"), "zoom-fit-best", Key_F8, this, TQT_SLOT(slotFontKerning()), actionCollection(), "font_kerning");
 	ksvgd->progressiveAction = new TDEToggleAction(i18n("Use &Progressive Rendering"), "", Key_F9, this, TQT_SLOT(slotProgressiveRendering()), actionCollection(), "progressive");
 
 	KSimpleConfig config("ksvgpluginrc", true);

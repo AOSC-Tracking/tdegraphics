@@ -239,7 +239,7 @@ void TDEIconEdit::setupActions()
   TDEShortcut cut;
 
   // File Menu
-  action = new TDEAction(i18n("New &Window"), "window_new", cut,
+  action = new TDEAction(i18n("New &Window"), "window-new", cut,
       TQT_TQOBJECT(this),  TQT_SLOT(slotNewWin()), actionCollection(), "file_new_window");
   action->setWhatsThis(i18n("New window\n\nOpens a new icon editor window."));
 

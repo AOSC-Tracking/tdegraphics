@@ -262,15 +262,15 @@ void PageView::setupActions( TDEActionCollection * ac )
     d->aZoomFitPage = new TDEToggleAction( i18n("Fit to &Page"), "view_fit_window", 0, ac, "zoom_fit_page" );
     connect( d->aZoomFitPage, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToPageToggled( bool ) ) );
 
-    d->aZoomFitText = new TDEToggleAction( i18n("Fit to &Text"), "viewmagfit", 0, ac, "zoom_fit_text" );
+    d->aZoomFitText = new TDEToggleAction( i18n("Fit to &Text"), "zoom-fit-best", 0, ac, "zoom_fit_text" );
     connect( d->aZoomFitText, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToTextToggled( bool ) ) );
 
     // rotate actions
     TDEAction *action;
-    action = new TDEAction( i18n("Rotate Right"), "rotate_cw", TDEShortcut( "Ctrl+Shift++" ),
+    action = new TDEAction( i18n("Rotate Right"), "object-rotate-right", TDEShortcut( "Ctrl+Shift++" ),
                           TQT_TQOBJECT(this), TQT_SLOT( slotRotateRight() ), ac, "rotate_right" );
 
-    action = new TDEAction( i18n("Rotate Left"), "rotate_ccw", TDEShortcut( "Ctrl+Shift+-" ),
+    action = new TDEAction( i18n("Rotate Left"), "object-rotate-left", TDEShortcut( "Ctrl+Shift+-" ),
                           TQT_TQOBJECT(this), TQT_SLOT( slotRotateLeft() ), ac, "rotate_left" );
 
     // View-Layout actions
