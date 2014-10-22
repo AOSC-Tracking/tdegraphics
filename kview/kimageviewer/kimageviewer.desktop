@@ -2,7 +2,7 @@
 Type=ServiceType
 X-TDE-ServiceType=KImageViewer/Viewer
 X-TDE-Derived=KParts/ReadWritePart
-Icon=image
+Icon=image-x-generic
 Comment=Embeddable Image Viewer Component
 Comment[af]=Inlegbare Beeld Aansig Komponent
 Comment[ar]=مكون عارض الصور القابل للدمج

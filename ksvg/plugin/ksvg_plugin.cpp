@@ -116,11 +116,11 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 	ksvgd->zoomOutAction = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()), actionCollection());
 	ksvgd->zoomResetAction =  new TDEAction(i18n("Zoom &Reset"), "viewmag", this, TQT_SLOT(slotZoomReset()), actionCollection(), "zoom_reset");
 	ksvgd->stopAnimationsAction = new TDEAction(i18n("&Stop Animations"), "process-stop", Key_Escape, this, TQT_SLOT(slotStop()), actionCollection(), "stop_anims");
-	ksvgd->viewSourceAction = new TDEAction(i18n("View &Source"), "document2", Key_F6, this, TQT_SLOT(slotViewSource()), actionCollection(), "view_source");
-	ksvgd->viewMemoryAction = new TDEAction(i18n("View &Memory"), "document2", Key_F7, this, TQT_SLOT(slotViewMemory()), actionCollection(), "view_memory");
+	ksvgd->viewSourceAction = new TDEAction(i18n("View &Source"), "text-x-generic-template", Key_F6, this, TQT_SLOT(slotViewSource()), actionCollection(), "view_source");
+	ksvgd->viewMemoryAction = new TDEAction(i18n("View &Memory"), "text-x-generic-template", Key_F7, this, TQT_SLOT(slotViewMemory()), actionCollection(), "view_memory");
 	ksvgd->saveToPNG = new TDEAction(i18n("Save to PNG..."), "save", 0, this, TQT_SLOT(slotSaveToPNG()), actionCollection(), "save_to_png");
 //	ksvgd->aboutApp = KStdAction::aboutApp(this, TQT_SLOT(slotAboutKSVG()), actionCollection());//, "KSVG");
-	ksvgd->aboutApp = new TDEAction(i18n("About KSVG"), "vectorgfx", 0, this, TQT_SLOT(slotAboutKSVG()), actionCollection(), "help_about_app");
+	ksvgd->aboutApp = new TDEAction(i18n("About KSVG"), "image-svg+xml", 0, this, TQT_SLOT(slotAboutKSVG()), actionCollection(), "help_about_app");
 	ksvgd->fontKerningAction = new TDEToggleAction(i18n("Use Font &Kerning"), "zoom-fit-best", Key_F8, this, TQT_SLOT(slotFontKerning()), actionCollection(), "font_kerning");
 	ksvgd->progressiveAction = new TDEToggleAction(i18n("Use &Progressive Rendering"), "", Key_F9, this, TQT_SLOT(slotProgressiveRendering()), actionCollection(), "progressive");
 

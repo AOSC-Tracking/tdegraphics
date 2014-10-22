@@ -206,7 +206,7 @@ void KDVIMultiPage::addConfigDialogs(TDEConfigDialog* configDialog)
   optionDialogSpecialWidget* specialConfigWidget = new optionDialogSpecialWidget(scrollView());
   
   configDialog->addPage(fontConfigWidget, Prefs::self(), i18n("TeX Fonts"), "fonts");
-  configDialog->addPage(specialConfigWidget, Prefs::self(), i18n("DVI Specials"), "dvi");
+  configDialog->addPage(specialConfigWidget, Prefs::self(), i18n("DVI Specials"), "application-x-lyx");
   configDialog->setHelp("preferences", "kdvi");
 }
 

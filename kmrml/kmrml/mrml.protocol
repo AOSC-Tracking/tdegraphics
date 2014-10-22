@@ -6,5 +6,5 @@ output=filesystem
 reading=true
 defaultMimetype=text/mrml
 determineMimetypeFromExtension=false
-Icon=image
+Icon=image-x-generic
 DocPath=tdeioslave/mrml/index.html

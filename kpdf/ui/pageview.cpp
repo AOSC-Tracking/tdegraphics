@@ -1132,7 +1132,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                     menu.insertItem( SmallIcon("kttsd"), i18n( "Speak Text" ), 2 );
             }
             menu.insertTitle( i18n( "Image (%1 by %2 pixels)" ).arg( selectionRect.width() ).arg( selectionRect.height() ) );
-            menu.insertItem( SmallIcon("image"), i18n( "Copy to Clipboard" ), 3 );
+            menu.insertItem( SmallIcon("image-x-generic"), i18n( "Copy to Clipboard" ), 3 );
             menu.insertItem( SmallIcon("document-save"), i18n( "Save to File..." ), 4 );
             int choice = menu.exec( e->globalPos() );
             // IMAGE operation choosen

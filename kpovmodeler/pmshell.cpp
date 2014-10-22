@@ -208,7 +208,7 @@ PMDockWidget* PMShell::createView( const TQString& t, PMViewOptions* o,
    else
    {
       // unknown view type
-      dock = createDockWidget( name, SmallIcon( "unknown" ), 0L,
+      dock = createDockWidget( name, SmallIcon( "text-x-katefilelist" ), 0L,
                                i18n( "Unknown" ), i18n( "Unknown" ) );
       contents = new PMUnknownView( t, dock );
    }

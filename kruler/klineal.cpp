@@ -159,8 +159,8 @@ KLineal::KLineal(TQWidget*parent,const char* name):TDEMainWindow(parent,name){
   mLenMenu->insertItem(i18n("&Tall"), this, TQT_SLOT(setTallLength()), CTRL+Key_T);
   mLenMenu->insertItem(i18n("&Full Screen Width"), this, TQT_SLOT(setFullLength()), CTRL+Key_F, FULLSCREENID);
   mMenu->insertItem(i18n("&Length"), mLenMenu);
-  mMenu->insertItem(SmallIcon("colorscm"), i18n("&Choose Color..."), this, TQT_SLOT(choseColor()), CTRL+Key_C);
-  mMenu->insertItem(SmallIcon("font"), i18n("Choose &Font..."), this, TQT_SLOT(choseFont()), Key_F);
+  mMenu->insertItem(SmallIcon("application-x-kcsrc"), i18n("&Choose Color..."), this, TQT_SLOT(choseColor()), CTRL+Key_C);
+  mMenu->insertItem(SmallIcon("font-x-generic"), i18n("Choose &Font..."), this, TQT_SLOT(choseFont()), Key_F);
   mMenu->insertSeparator();
   mMenu->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), helpMenu());
   mMenu->insertSeparator();

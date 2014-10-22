@@ -142,7 +142,7 @@ void  ConfigDialog::showSettings( KGVPart* main ) {
     dialog->addPage( new GeneralSettingsWidget( 0, "general-settings" ),
 	    i18n( "General" ), TQString::fromLatin1( "kghostview" ) );
     GSSettingsWidget *gssw = new GSSettingsWidget( 0, "gs-settings" );
-    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), TQString::fromLatin1( "pdf" ) );
+    dialog->addPage( gssw, i18n( "Ghostscript\nConfiguration" ), TQString::fromLatin1( "application-pdf" ) );
 
     gssw->setDetectedVersion(Configuration::version());
 

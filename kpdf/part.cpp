@@ -294,7 +294,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_showProperties = new TDEAction(i18n("&Properties"), "info", 0, this, TQT_SLOT(slotShowProperties()), ac, "properties");
 	m_showProperties->setEnabled( false );
 
-	m_showPresentation = new TDEAction( i18n("P&resentation"), "kpresenter_kpr", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
+	m_showPresentation = new TDEAction( i18n("P&resentation"), "application-x-kpresenter", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
 	m_showPresentation->setEnabled( false );
 
 	// attach the actions of the children widgets too

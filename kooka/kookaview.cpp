@@ -156,7 +156,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
     * Create a Kombobox that holds the last folders visible even on the preview page
     */
    m_dockRecent  = parent->createDockWidget( "Recent",
-					     loader->loadIcon( "image", TDEIcon::Small ),
+					     loader->loadIcon( ""image-x-generic", TDEIcon::Small ),
 					     0L, i18n("Gallery Folders"));
 
    m_dockRecent->setDockSite(KDockWidget::DockFullSite);
