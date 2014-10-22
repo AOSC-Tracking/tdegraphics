@@ -67,7 +67,7 @@ KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQO
   DVIRenderer.setName("DVI renderer");
   setRenderer(&DVIRenderer);
 
-  docInfoAction    = new TDEAction(i18n("Document &Info"), "info", 0, &DVIRenderer, TQT_SLOT(showInfo()), actionCollection(), "info_dvi");
+  docInfoAction    = new TDEAction(i18n("Document &Info"), "application-vnd.tde.info", 0, &DVIRenderer, TQT_SLOT(showInfo()), actionCollection(), "info_dvi");
   embedPSAction    = new TDEAction(i18n("Embed External PostScript Files..."), 0, this, TQT_SLOT(slotEmbedPostScript()), actionCollection(), "embed_postscript");
   new TDEAction(i18n("Enable All Warnings && Messages"), 0, this, TQT_SLOT(doEnableWarnings()), actionCollection(), "enable_msgs");
   exportPSAction   = new TDEAction(i18n("PostScript..."), 0, &DVIRenderer, TQT_SLOT(exportPS()), actionCollection(), "export_postscript");

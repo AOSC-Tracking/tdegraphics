@@ -291,7 +291,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_printPreview = KStdAction::printPreview( this, TQT_SLOT( slotPrintPreview() ), ac );
 	m_printPreview->setEnabled( false );
 
-	m_showProperties = new TDEAction(i18n("&Properties"), "info", 0, this, TQT_SLOT(slotShowProperties()), ac, "properties");
+	m_showProperties = new TDEAction(i18n("&Properties"), "application-vnd.tde.info", 0, this, TQT_SLOT(slotShowProperties()), ac, "properties");
 	m_showProperties->setEnabled( false );
 
 	m_showPresentation = new TDEAction( i18n("P&resentation"), "application-x-kpresenter", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
