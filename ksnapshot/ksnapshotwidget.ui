@@ -208,7 +208,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
                         <string>&amp;Save As...</string>
                     </property>
                     <property name="iconSet">
-                        <iconset>"filesave"</iconset>
+                        <iconset>"document-save"</iconset>
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>Click this button to save the current snapshot. To quickly save the snapshot without showing the file dialog, press Ctrl+Shift+S. The filename is automatically incremented after each save.</string>
@@ -222,7 +222,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
                         <string>&amp;Copy to Clipboard</string>
                     </property>
                     <property name="iconSet">
-                        <iconset>"editcopy"</iconset>
+                        <iconset>"edit-copy"</iconset>
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>Click this button to copy the current snapshot to the clipboard.</string>
@@ -236,7 +236,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
                         <string>&amp;Print...</string>
                     </property>
                     <property name="iconSet">
-                        <iconset>"fileprint"</iconset>
+                        <iconset>"document-print"</iconset>
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>Click this button to print the current screenshot.</string>
