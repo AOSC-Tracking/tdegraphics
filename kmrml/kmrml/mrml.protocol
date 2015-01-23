@@ -7,4 +7,4 @@ reading=true
 defaultMimetype=text/mrml
 determineMimetypeFromExtension=false
 Icon=image-x-generic
-DocPath=tdeioslave/mrml/index.html
+X-DocPath=tdeioslave/mrml/index.html

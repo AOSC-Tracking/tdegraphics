@@ -14,4 +14,4 @@ moving=false
 Icon=camera-photo
 maxInstances=1
 Class=:local
-DocPath=tdeioslave/camera/index.html
+X-DocPath=tdeioslave/camera/index.html
