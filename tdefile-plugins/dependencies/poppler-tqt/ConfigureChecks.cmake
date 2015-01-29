@@ -17,5 +17,10 @@ check_cxx_source_compiles("
   #include <poppler/PSOutputDev.h>
   int main(int, char**) { int a; int b; PSOutputDev *psOut = new PSOutputDev(\"test\", (PDFDoc*)0, NULL, 0, 0, psModePS, a, b); } "
   HAVE_POPPLER_020 )
+check_cxx_source_compiles("
+  #include <vector>
+  #include <poppler/PSOutputDev.h>
+  int main(int, char**) { int a; int b; std::vector<int> p; PSOutputDev *psOut = new PSOutputDev(\"test\", (PDFDoc*)0, NULL, p, psModePS, a, b); } "
+  HAVE_POPPLER_030 )
 tde_restore( CMAKE_REQUIRED_INCLUDES CMAKE_REQUIRED_LIBRARIES )
 

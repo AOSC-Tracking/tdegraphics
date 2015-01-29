@@ -129,7 +129,7 @@ TQString Page::getText(const Rectangle &r) const
   TQString result;
   ::Page *p;
 
-#if defined(HAVE_POPPLER_020)
+#if defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
   output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
 #else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
@@ -164,7 +164,7 @@ TQValueList<TextBox*> Page::textList() const
 
   TQValueList<TextBox*> output_list;
 
-#if defined(HAVE_POPPLER_020)
+#if defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
   output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
 #else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
