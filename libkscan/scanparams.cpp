@@ -67,7 +67,7 @@ ScanParams::ScanParams( TQWidget *parent, const char *name )
     progressDialog = 0;
 
     /* Preload icons */
-    pixMiniFloppy = SmallIcon( "3floppy_unmount" );
+    pixMiniFloppy = SmallIcon( "media-floppy-3_5" );
 
     pixColor = SmallIcon( "palette_color" );
     pixGray  = SmallIcon( "palette_gray" );
