@@ -209,13 +209,13 @@ TopLevel::TopLevel (TQWidget *, const char *name)
   qtwin = faxqtwin->winId();
   faxqtwin->setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
 
-  // Create aQt::Vertical scroll bar
+  // Create a Vertical scroll bar
 
   vsb = new TQScrollBar( Qt::Vertical,faxqtwin,"scrollBar" );
   vsb->hide();
   connect( vsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollVert(int)) );
 
-  // Create aQt::Horizontal scroll bar
+  // Create a Horizontal scroll bar
 
   hsb = new TQScrollBar( Qt::Horizontal,faxqtwin,"scrollBar" );
   connect( hsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollHorz(int)) );
@@ -530,7 +530,7 @@ void loadfile(TQString filename)
   (void) notetiff(TQFile::encodeName(filename));
 
   struct pagenode *pn;
-  for(pn = firstpage; pn; pn = pn->next) 
+  for(pn = firstpage; pn; pn = pn->next)
    if (!pn->dpiX) {
 	pn->dpiX = dpi.width();
 	pn->dpiY = dpi.height();
@@ -705,7 +705,7 @@ void TopLevel::print(){
   printer.setDocName( TQString("%1 - %2").arg(firstpage->name).arg(i18n("KFax")));
   printer.setDocFileName( firstpage->name );
   printer.setPageSelection( KPrinter::ApplicationSide );
-  printer.setMinMax( 1, pages ); 
+  printer.setMinMax( 1, pages );
   printer.setCurrentPage( currentpage );
   printer.addDialogPage(new KFAXPrintSettings());
   if ( !printer.setup( this ) )
@@ -777,9 +777,9 @@ void TopLevel::printIt( KPrinter &printer, TQPainter &painter )
 			Image->height * dm.logicalDpiY() / pn->dpiY
 		);
 
-    kdDebug()	<< "Org image size = " << Image->width << "x" << Image->height 
+    kdDebug()	<< "Org image size = " << Image->width << "x" << Image->height
 		<< " logical picture res = " << pn->dpiX << "x" << pn->dpiY << endl;
-    kdDebug()	<< "New image size = " << size 
+    kdDebug()	<< "New image size = " << size
 		<< " logical printer res = " << dm.logicalDpiX() << "x" << dm.logicalDpiY() << endl;
 
     uint top, left, bottom, right;
@@ -826,7 +826,7 @@ void TopLevel::saveNetFile( const KURL& dest)
     }
 
     statusbar->message( i18n( "Saving..." ) );
-   
+
     KURL source = KURL::fromPathOrURL(thispage->pathname);
     bool ok = TDEIO::NetAccess::file_copy( source, dest, -1, true, false, this);
 
@@ -1359,7 +1359,7 @@ void TopLevel::newPage(){
   setCaption(TQFile::decodeName(thispage->name));
 
   Image = generateZoomImages(oz);
-  
+
   PaneWidth = Image->width;
   PaneHeight = Image->height;
   Refresh = 1;

@@ -59,7 +59,7 @@ class kpViewScrollableContainer;
 class kpView : public TQWidget
 {
 Q_OBJECT
-  
+
 
 public:
     /**
@@ -148,8 +148,8 @@ public:
     /**
      * Sets the horizontal and vertical zoom levels.
      *
-     * @param hzoomQt::Horizontal zoom level.
-     * @param vzoomQt::Vertical zoom level.
+     * @param hzoom Horizontal zoom level.
+     * @param vzoom Vertical zoom level.
      *
      * If reimplementing, you must call this base implementation.
      */
@@ -228,7 +228,7 @@ protected slots:
 public:
 
     /**
-     * @param viewXQt::Horizontal position in view coordinates.
+     * @param viewX Horizontal position in view coordinates.
      *
      * @returns viewX transformed to document coordinates, based on the
      *                origin() and zoomLevelX().
@@ -236,7 +236,7 @@ public:
     double transformViewToDocX (double viewX) const;
 
     /**
-     * @param viewYQt::Vertical position in view coordinates.
+     * @param viewY Vertical position in view coordinates.
      *
      * @returns viewY transformed to document coordinates, based on the
      *                origin() and zoomLevelY().
@@ -265,7 +265,7 @@ public:
 
 
     /**
-     * @param docXQt::Horizontal position in document coordinates.
+     * @param docX Horizontal position in document coordinates.
      *
      * @returns docX transformed to view coordinates, based on the origin()
      *               and zoomLevelX().
@@ -273,7 +273,7 @@ public:
     double transformDocToViewX (double docX) const;
 
     /**
-     * @param docYQt::Vertical position in document coordinates.
+     * @param docY Vertical position in document coordinates.
      *
      * @returns docY transformed to view coordinates, based on the origin()
      *               and zoomLevelY().
@@ -313,8 +313,8 @@ public:
      */
     TQPoint transformViewToOtherView (const TQPoint &viewPoint,
                                      const kpView *otherView);
-    
-                                        
+
+
     /**
      * @returns the approximate view width required to display the entire
      *          document(), based on the zoom level only.
@@ -374,7 +374,7 @@ public:
      * is set to queue updates.
      */
     void updateQueuedArea ();
-    
+
     void updateMicroFocusHint (const TQRect &microFocusHint);
 
 
@@ -484,7 +484,7 @@ protected:
 
     virtual void dragEnterEvent (TQDragEnterEvent *);
     virtual void dragLeaveEvent (TQDragLeaveEvent *);
-    
+
     virtual void imStartEvent (TQIMEvent *e);
     virtual void imComposeEvent (TQIMEvent *e);
     virtual void imEndEvent (TQIMEvent *e);

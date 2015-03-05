@@ -62,9 +62,9 @@ struct PCXHEADER
                             // calculate from Xmax-Xmin.·
   TQ_UINT16 PaletteInfo;     // How to interpret palette- 1 = Color/BW,
                             // 2 = Grayscale ( ignored in PB IV/ IV + )·
-  TQ_UINT16 HScreenSize;     //Qt::Horizontal screen size in pixels. New field
+  TQ_UINT16 HScreenSize;     // Horizontal screen size in pixels. New field
                             // found only in PB IV/IV Plus
-  TQ_UINT16 VScreenSize;     //Qt::Vertical screen size in pixels. New field
+  TQ_UINT16 VScreenSize;     // Vertical screen size in pixels. New field
                             // found only in PB IV/IV Plus
   TQ_UINT8  Filler[ 54 ];    // Blank to fill out 128 byte header.  Set all
                             // bytes to 0
@@ -73,7 +73,7 @@ struct PCXHEADER
 class KPcxPlugin: public KFilePlugin
 {
   Q_OBJECT
-  
+
 
 public:
   KPcxPlugin(TQObject *parent, const char *name, const TQStringList& args);

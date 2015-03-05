@@ -128,7 +128,7 @@ void Kooka::setupActions()
     KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(filePrint()), actionCollection());
     KStdAction::quit(TQT_TQOBJECT(this) , TQT_SLOT(close()), actionCollection());
 
-    KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
+    KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
     KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(optionsConfigureToolbars()),
 				  actionCollection());
@@ -192,7 +192,7 @@ actionCollection());
 		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorVertical() ),
 		       actionCollection(), "mirrorVertical" );
 
-    (void) new TDEAction(i18n("&Mirror ImageQt::Horizontally"), "mirror-horiz", CTRL+Key_M,
+    (void) new TDEAction(i18n("&Mirror Image Horizontally"), "mirror-horiz", CTRL+Key_M,
 		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorHorizontal() ),
 		       actionCollection(), "mirrorHorizontal" );
 

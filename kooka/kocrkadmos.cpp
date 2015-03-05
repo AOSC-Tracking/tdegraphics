@@ -271,7 +271,7 @@ EngineError KadmosDialog::setupGui()
     /* continue page setup on the first page */
     TQVBox *page = ocrPage();
 
-    //Qt::Horizontal line
+    // Horizontal line
     (void) new KSeparator( KSeparator::HLine, page);
 
     // FIXME: dynamic classifier reading.

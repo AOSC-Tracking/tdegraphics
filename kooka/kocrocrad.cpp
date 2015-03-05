@@ -107,7 +107,7 @@ EngineError ocradDialog::setupGui()
     TDEConfig *conf = TDEGlobal::config ();
     conf->setGroup( CFG_GROUP_OCR_DIA );
 
-    //Qt::Horizontal line
+    // Horizontal line
     // (void) new  KSeparator( KSeparator::HLine, page);
 
     // Entry-Field.
