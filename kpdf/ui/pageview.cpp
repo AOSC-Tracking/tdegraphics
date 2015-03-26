@@ -283,7 +283,7 @@ void PageView::setupActions( TDEActionCollection * ac )
     d->aViewContinuous->setChecked( KpdfSettings::viewContinuous() );
 
     // Mouse-Mode actions
-    d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "mouse", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
+    d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "input-mouse", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
     d->aMouseNormal->setExclusiveGroup( "MouseType" );
     d->aMouseNormal->setChecked( true );
 
