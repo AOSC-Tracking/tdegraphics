@@ -20,7 +20,7 @@ include_directories(
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
   ${GLU_INCLUDE_DIRS}
-  /usr/include/freetype2
+  ${FREETYPE_INCLUDE_DIRS}
 )
 
 link_directories(
