@@ -54,7 +54,9 @@
 class TQPixmap;
 class TQListViewItem;
 class KProgress;
-class TDEIO::PreviewJob;
+namespace TDEIO {
+    class PreviewJob;
+}
 
 class ThumbView: public TQVBox /* TDEIconView */
 {
