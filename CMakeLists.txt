@@ -15,7 +15,7 @@ cmake_minimum_required( VERSION 2.8 )
 ##### general package setup #####################
 
 project( tdegraphics )
-set( VERSION R14.0.0 )
+set( VERSION R14.1.0 )
 
 
 ##### include essential cmake modules ###########
