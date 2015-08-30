@@ -26,6 +26,7 @@ include_directories(
 
 link_directories(
   ${TQT_LIBRARY_DIRS}
+  ${POPPLER_LIBRARY_DIRS}
 )
 
 ##### pc files ##################################
@@ -49,6 +50,6 @@ tde_add_library( poppler-tqt SHARED AUTOMOC
     poppler-page-transition.cc poppler-page-transition-private.h
     poppler-private.cc poppler-private.h
   VERSION 0.0.0
-  LINK poppler ${TQT_LIBRARIES}
+  LINK ${POPPLER_LIBRARIES} ${TQT_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
