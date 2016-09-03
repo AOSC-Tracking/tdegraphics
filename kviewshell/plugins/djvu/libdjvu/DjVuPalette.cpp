@@ -66,7 +66,7 @@
 #include "BSByteStream.h"
 #include "DjVuPalette.h"
 #include <stdlib.h>
-#include <math.h>
+#include <cmath>
 
 
 #ifdef HAVE_NAMESPACES
