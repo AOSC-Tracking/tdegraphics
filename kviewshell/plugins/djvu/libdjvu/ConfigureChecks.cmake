@@ -10,6 +10,7 @@
 #################################################
 
 include( CheckFunctionExists )
+include( CheckCXXSourceCompiles )
 
 check_type_size( wchar_t WCHAR_T )
 
@@ -23,3 +24,14 @@ if( HAVE_WCHAR_T )
     check_function_exists( wcrtomb HAVE_WCRTOMB )
   endif( )
 endif( )
+
+check_cxx_source_compiles(
+  "
+   #include <cmath>
+   int main(int, char*[]) {
+     float res = fmin(0, 1);
+     return 0;
+   }
+  "
+  HAVE_FMIN
+)
