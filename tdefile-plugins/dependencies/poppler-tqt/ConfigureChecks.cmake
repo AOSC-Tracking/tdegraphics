@@ -24,3 +24,13 @@ check_cxx_source_compiles("
   HAVE_POPPLER_030 )
 tde_restore( CMAKE_REQUIRED_INCLUDES CMAKE_REQUIRED_LIBRARIES )
 
+if( NOT DEFINED HAVE_POPPLER_060 )
+  message( STATUS "Performing Test HAVE_POPPLER_060" )
+  if( POPPLER_VERSION VERSION_GREATER_EQUAL "0.60" )
+    set( HAVE_POPPLER_060 1 CACHE INTERNAL "" FORCE )
+    message( STATUS "Performing Test HAVE_POPPLER_060 - Success" )
+  else( )
+    set( HAVE_POPPLER_060 "" CACHE INTERNAL "" FORCE )
+    message( STATUS "Performing Test HAVE_POPPLER_060 - Failed" )
+  endif( )
+endif( )

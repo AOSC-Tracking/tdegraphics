@@ -129,7 +129,7 @@ TQString Page::getText(const Rectangle &r) const
   TQString result;
   ::Page *p;
 
-#if defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
+#if defined(HAVE_POPPLER_060) || defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
   output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
 #else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
@@ -164,7 +164,7 @@ TQValueList<TextBox*> Page::textList() const
 
   TQValueList<TextBox*> output_list;
 
-#if defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
+#if defined(HAVE_POPPLER_060) || defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
   output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
 #else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
@@ -205,9 +205,16 @@ PageTransition *Page::getTransition() const
   {
     Object o;
     PageTransitionParams params;
-    params.dictObj = data->doc->data->doc.getCatalog()->getPage(data->index + 1)->getTrans(&o);
+#   if defined(HAVE_POPPLER_060)
+    o = data->doc->data->doc.getCatalog()->getPage(data->index + 1)->getTrans();
+#   else
+    data->doc->data->doc.getCatalog()->getPage(data->index + 1)->getTrans(&o);
+#   endif
+    params.dictObj = &o;
     data->transition = new PageTransition(params);
+#   if !defined(HAVE_POPPLER_060)
     o.free();
+#   endif
   }
   return data->transition;
 }
