@@ -20,7 +20,7 @@ you hear unexpected noises or if something strange happens.
 If you find errors, please dont ask the SANE-people without having
 made sure that your error is _really_ a SANE error. Most probably, you
 found an KScan or Kooka-Error, which should be reported at 
-http://bugs.kde.org
+http://bugs.trinitydesktop.org
 
 
 - Klaas Freitag <freitag@suse.de>

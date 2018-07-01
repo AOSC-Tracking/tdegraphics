@@ -1061,7 +1061,7 @@ void Part::doPrint(KPrinter &printer)
 
     if (!m_document->print(printer))
     {
-        KMessageBox::error(widget(), i18n("Could not print the document. Please report to bugs.kde.org"));	
+        KMessageBox::error(widget(), i18n("Could not print the document. Please report to bugs.trinitydesktop.org"));	
     }
 }
 
