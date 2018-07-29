@@ -31,6 +31,6 @@ install( FILES tdefile_pdf.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
 tde_add_kpart( tdefile_pdf AUTOMOC
   SOURCES tdefile_pdf.cpp
-  LINK tdeio-shared -L${CMAKE_BINARY_DIR}/tdefile-plugins/dependencies/poppler-tqt -lpoppler-tqt
+  LINK tdeio-shared poppler-tqt-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
