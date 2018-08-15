@@ -17,10 +17,6 @@ include_directories(
 
 #### xf86gammacfg (executable) ##################
 
-if( HAVE_SSTREAM )
-  set_source_files_properties( xf86gammacfg.cpp PROPERTIES COMPILE_FLAGS "-DHAVE_SSTREAM" )
-endif( )
-
 tde_add_executable( xf86gammacfg
   SOURCES xf86gammacfg.cpp
   DESTINATION ${BIN_INSTALL_DIR}

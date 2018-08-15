@@ -24,12 +24,7 @@
 #include <list>
 #include <string>
 #include <config.h>
-#ifdef HAVE_SSTREAM
-#  include <sstream>
-#else
-#  include <strstream>
-#  define ostringstream ostrstream
-#endif
+#include <sstream>
 
 #define T2PMAX(a, b) ((b) < (a) ? (a) : (b))
 #define T2PMIN(a, b) ((a) < (b) ? (a) : (b))

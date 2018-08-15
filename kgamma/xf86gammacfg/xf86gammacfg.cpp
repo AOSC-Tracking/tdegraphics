@@ -23,15 +23,10 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <sstream>
 
 #include <config.h>
 
-#ifdef HAVE_SSTREAM
-#include <sstream>
-#else
-#include <strstream.h>
-#define istringstream istrstream
-#endif
 
 using namespace std;
 

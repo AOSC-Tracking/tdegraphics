@@ -58,8 +58,3 @@ fi
 if eval "test \"`echo $ac_cv_lib_vm`\" = no"; then
     DO_NOT_COMPILE="$DO_NOT_COMPILE kgamma"
 fi
-
-AC_LANG_SAVE
-AC_LANG_CPLUSPLUS
-KDE_CHECK_HEADERS(sstream)
-AC_LANG_RESTORE
