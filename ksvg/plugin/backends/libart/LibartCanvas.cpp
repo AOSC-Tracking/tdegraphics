@@ -75,11 +75,11 @@ ArtSVP *art_svp_from_rect(int x0, int y0, int x1, int y1)
 {
 	ArtVpath vpath[] =
 	{
-		{ ART_MOVETO, x0, y0 },
-		{ ART_LINETO, x0, y1 },
-		{ ART_LINETO, x1, y1 },
-		{ ART_LINETO, x1, y0 },
-		{ ART_LINETO, x0, y0 },
+		{ ART_MOVETO, (double)x0, (double)y0 },
+		{ ART_LINETO, (double)x0, (double)y1 },
+		{ ART_LINETO, (double)x1, (double)y1 },
+		{ ART_LINETO, (double)x1, (double)y0 },
+		{ ART_LINETO, (double)x0, (double)y0 },
 		{ ART_END, 0, 0}
 	};
 
