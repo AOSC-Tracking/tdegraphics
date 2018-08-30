@@ -81,7 +81,6 @@ option( BUILD_TDEFILE_PLUGINS "Build tdefile-plugins" ${BUILD_ALL} )
 option( BUILD_KGAMMA "Build kgamma" ${BUILD_ALL} )
 option( BUILD_KGHOSTVIEW "Build kghostview" ${BUILD_ALL} )
 option( BUILD_TDEICONEDIT "Build tdeiconedit" ${BUILD_ALL} )
-option( BUILD_KMRML "Build kmrml" ${BUILD_ALL} )
 option( BUILD_KOLOURPAINT "Build kolourpaint" ${BUILD_ALL} )
 option( BUILD_KOOKA "Build kooka" ${BUILD_ALL} )
 option( BUILD_KPDF "Build kpdf" ${BUILD_ALL} )
@@ -93,6 +92,9 @@ option( BUILD_KUICKSHOW "Build kuickshow" ${BUILD_ALL} )
 option( BUILD_KVIEW "Build kview" ${BUILD_ALL} )
 option( BUILD_KVIEWSHELL "Build kviewshell" ${BUILD_ALL} )
 option( BUILD_LIBKSCAN "Build libkscan" ${BUILD_ALL} )
+
+# deprecated
+option( BUILD_KMRML "Build kmrml" OFF )
 
 
 ##### configure checks ##########################
@@ -134,7 +136,6 @@ tde_conditional_add_subdirectory( BUILD_TDEFILE_PLUGINS tdefile-plugins )
 tde_conditional_add_subdirectory( BUILD_KGAMMA kgamma )
 tde_conditional_add_subdirectory( BUILD_KGHOSTVIEW kghostview )
 tde_conditional_add_subdirectory( BUILD_TDEICONEDIT tdeiconedit )
-tde_conditional_add_subdirectory( BUILD_KMRML kmrml )
 tde_conditional_add_subdirectory( BUILD_KOLOURPAINT kolourpaint )
 tde_conditional_add_subdirectory( BUILD_KOOKA kooka )
 tde_conditional_add_subdirectory( BUILD_KPDF kpdf )
@@ -146,6 +147,8 @@ tde_conditional_add_subdirectory( BUILD_KUICKSHOW kuickshow )
 tde_conditional_add_subdirectory( BUILD_KVIEW kview )
 tde_conditional_add_subdirectory( BUILD_LIBKSCAN libkscan )
 
+# deprecated
+tde_conditional_add_subdirectory( BUILD_KMRML kmrml )
 
 ##### write configure files #####################
 
