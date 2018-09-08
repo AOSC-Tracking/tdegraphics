@@ -31,7 +31,7 @@
 namespace Poppler {
 
 /* borrowed from kpdf */
-TQString unicodeToTQString(Unicode* u, int len)
+TQString unicodeToTQString(CONST_064 Unicode* u, int len)
 {
     TQString ret;
     ret.setLength(len);
@@ -41,7 +41,7 @@ TQString unicodeToTQString(Unicode* u, int len)
     return ret;
 }
 
-TQString UnicodeParsedString(GooString *s1)
+TQString UnicodeParsedString(CONST_064 GooString *s1)
 {
     GBool isUnicode;
     int i;
@@ -86,7 +86,7 @@ GooString *TQStringToGooString(const TQString &s)
 }
 
 
-void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, GooList * items )
+void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, CONST_064 GooList * items )
 {
     int numItems = items->getLength();
     for ( int i = 0; i < numItems; ++i )
@@ -96,7 +96,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, G
 
         // 1. create element using outlineItem's title as tagName
         TQString name;
-        Unicode * uniChar = outlineItem->getTitle();
+        CONST_064 Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
         name = unicodeToTQString(uniChar, titleLength);
         if ( name.isEmpty() )
@@ -106,18 +106,18 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, G
         parent->appendChild( item );
 
         // 2. find the page the link refers to
-        ::LinkAction * a = outlineItem->getAction();
+        CONST_064 ::LinkAction * a = outlineItem->getAction();
         if ( a && ( a->getKind() == actionGoTo || a->getKind() == actionGoToR ) )
         {
             // page number is contained/referenced in a LinkGoTo
-            LinkGoTo * g = static_cast< LinkGoTo * >( a );
-            LinkDest * destination = g->getDest();
+            CONST_064 LinkGoTo * g = static_cast< CONST_064 LinkGoTo * >( a );
+            CONST_064 LinkDest * destination = g->getDest();
             if ( !destination && g->getNamedDest() )
             {
                 // no 'destination' but an internal 'named reference'. we could
                 // get the destination for the page now, but it's VERY time consuming,
                 // so better storing the reference and provide the viewport on demand
-                GooString *s = g->getNamedDest();
+                CONST_064 GooString *s = g->getNamedDest();
                 TQChar *charArray = new TQChar[s->getLength()];
                 for (int i = 0; i < s->getLength(); ++i) charArray[i] = TQChar(s->getCString()[i]);
                     TQString aux(charArray, s->getLength());
@@ -131,14 +131,14 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, G
                 }
                 if ( a->getKind() == actionGoToR )
                 {
-                    LinkGoToR * g2 = static_cast< LinkGoToR * >( a );
+                    CONST_064 LinkGoToR * g2 = static_cast< CONST_064 LinkGoToR * >( a );
                     item.setAttribute( "ExternalFileName", g2->getFileName()->getCString() );
                 }
             }
 
         // 3. recursively descend over children
         outlineItem->open();
-        GooList * children = outlineItem->getKids();
+        CONST_064 GooList * children = outlineItem->getKids();
         if ( children )
             addTocChildren( docSyn, &item, children );
     }

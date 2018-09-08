@@ -34,24 +34,29 @@
 #else
 class SplashOutputDev;
 #endif
+#if defined(HAVE_POPPLER_064)
+#define CONST_064 const
+#else
+#define CONST_064
+#endif
 
 namespace Poppler {
     
 class DocumentData;
 
-TQString unicodeToTQString(Unicode* u, int len);
+TQString unicodeToTQString(CONST_064 Unicode* u, int len);
 
-TQString UnicodeParsedString(GooString *s1);
+TQString UnicodeParsedString(CONST_064 GooString *s1);
 
 GooString *TQStringToGooString(const TQString &s);
 
 class LinkDestinationData {
   public:
-     LinkDestinationData( LinkDest *l, GooString *nd, Poppler::DocumentData *pdfdoc ) : ld(l), namedDest(nd), doc(pdfdoc)
+     LinkDestinationData( CONST_064 LinkDest *l, GooString *nd, Poppler::DocumentData *pdfdoc ) : ld(l), namedDest(nd), doc(pdfdoc)
      {
      }
-	
-     LinkDest *ld;
+
+     CONST_064 LinkDest *ld;
      GooString *namedDest;
      Poppler::DocumentData *doc;
 };
@@ -84,7 +89,7 @@ class DocumentData {
         return m_outputDev;
     }
 
-    void addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, GooList * items );
+    void addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, CONST_064 GooList * items );
 
   class PDFDoc doc;
   bool locked;

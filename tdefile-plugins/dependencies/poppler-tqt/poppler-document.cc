@@ -163,7 +163,7 @@ TQString Document::getInfo( const TQString & type ) const
 
   TQString result;
   Object obj;
-  GooString *s1;
+  CONST_064 GooString *s1;
   GBool isUnicode;
   Unicode u;
   int i;
@@ -320,7 +320,7 @@ TQDomDocument *Document::toc() const
   if ( !outline )
     return NULL;
 
-  GooList * items = outline->getItems();
+  CONST_064 GooList * items = outline->getItems();
   if ( !items || items->getLength() < 1 )
     return NULL;
 

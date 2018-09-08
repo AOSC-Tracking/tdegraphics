@@ -30,8 +30,8 @@ namespace Poppler {
 	LinkDestination::LinkDestination(const LinkDestinationData &data)
 	{
 		bool deleteDest = false;
-		LinkDest *ld = data.ld;
-		
+		CONST_064 LinkDest *ld = data.ld;
+
 		if ( data.namedDest && !ld )
 		{
 			deleteDest = true;
