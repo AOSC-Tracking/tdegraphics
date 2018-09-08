@@ -153,7 +153,7 @@ TQString Document::getInfo( const TQString & type ) const
   if ( data->locked )
     return NULL;
 
-# if defined(HAVE_POPPLER_060)
+# if defined(HAVE_POPPLER_058)
   info = data->doc.getDocInfo();
 # else
   data->doc.getDocInfo( &info );
@@ -170,7 +170,7 @@ TQString Document::getInfo( const TQString & type ) const
   Dict *infoDict = info.getDict();
 
   if (
-#   if defined(HAVE_POPPLER_060)
+#   if defined(HAVE_POPPLER_058)
     infoDict->lookup( (char*)type.latin1() ).isString()
 #   else
     infoDict->lookup( (char*)type.latin1(), &obj )->isString()
@@ -202,13 +202,13 @@ TQString Document::getInfo( const TQString & type ) const
       }
       result += unicodeToTQString( &u, 1 );
     }
-#   if !defined(HAVE_POPPLER_060)
+#   if !defined(HAVE_POPPLER_058)
     obj.free();
     info.free();
 #   endif
     return result;
   }
-# if !defined(HAVE_POPPLER_060)
+# if !defined(HAVE_POPPLER_058)
   obj.free();
   info.free();
 # endif
@@ -223,13 +223,13 @@ TQDateTime Document::getDate( const TQString & type ) const
     return TQDateTime();
 
   Object info;
-# if defined(HAVE_POPPLER_060)
+# if defined(HAVE_POPPLER_058)
   info = data->doc.getDocInfo();
 # else
   data->doc.getDocInfo( &info );
 # endif
   if ( !info.isDict() ) {
-#   if !defined(HAVE_POPPLER_060)
+#   if !defined(HAVE_POPPLER_058)
     info.free();
 #   endif
     return TQDateTime();
@@ -242,7 +242,7 @@ TQDateTime Document::getDate( const TQString & type ) const
   TQString result;
 
   if (
-#   if defined(HAVE_POPPLER_060)
+#   if defined(HAVE_POPPLER_058)
     infoDict->lookup( (char*)type.latin1() ).isString()
 #   else
     infoDict->lookup( (char*)type.latin1(), &obj )->isString()
@@ -256,7 +256,7 @@ TQDateTime Document::getDate( const TQString & type ) const
       TQDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
       TQTime t( hour, min, sec );
       if ( d.isValid() && t.isValid() ) {
-#	if !defined(HAVE_POPPLER_060)
+#	if !defined(HAVE_POPPLER_058)
 	obj.free();
 	info.free();
 #	endif
@@ -264,7 +264,7 @@ TQDateTime Document::getDate( const TQString & type ) const
       }
     }
   }
-# if !defined(HAVE_POPPLER_060)
+# if !defined(HAVE_POPPLER_058)
   obj.free();
   info.free();
 # endif
@@ -347,7 +347,7 @@ bool Document::print(const TQString &fileName, TQValueList<int> pageList, double
 
 bool Document::print(const TQString &file, TQValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight)
 {
-#if defined(HAVE_POPPLER_060) || defined(HAVE_POPPLER_030)
+#if defined(HAVE_POPPLER_058) || defined(HAVE_POPPLER_030)
   std::vector<int> pages;
   TQValueList<int>::iterator it;
   for (it = pageList.begin();  it != pageList.end();  ++it ) {
