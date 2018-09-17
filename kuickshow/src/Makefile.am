@@ -10,7 +10,7 @@ KDE_CXXFLAGS = $(IMLIB_CFLAGS)
 METASOURCES = AUTO
 
 kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
-kuickshow_la_LIBADD  = $(LIB_TDEPRINT) $(LIB_IMLIB) $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_TDEIO)
+kuickshow_la_LIBADD  = $(LIB_TDEPRINT) $(LIB_IMLIB) $(LIB_TQT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_TDEIO)
 kuickshow_la_SOURCES =	kuickshow.cpp \
 	aboutwidget.cpp     generalwidget.cpp  kuickconfigdlg.cpp  main.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \

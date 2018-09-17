@@ -39,7 +39,7 @@ squeeze_SOURCES	= squeeze.c
 KDE_OPTIONS = nofinal
 
 kdvi_SOURCES = main.cpp 
-kdvi_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
+kdvi_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_TQT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
 kdvi_LDADD = ../kviewshell/libifaces.la ../kviewshell/libkviewshell.la -ltdeparts
 
 ## this option you can leave out. Just, if you use "make dist", you need it

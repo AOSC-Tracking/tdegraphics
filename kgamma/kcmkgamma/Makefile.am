@@ -5,7 +5,7 @@ kde_module_LTLIBRARIES = kcm_kgamma.la
 kcm_kgamma_la_METASOURCES=AUTO
 kcm_kgamma_la_SOURCES = xf86configpath.cpp xvidextwrap.cpp displaynumber.cpp \
                         gammactrl.cpp kgamma.cpp 
-kcm_kgamma_la_LIBADD = $(LIBVM) $(LIB_TDEUI) $(LIB_TDECORE) $(LIB_QT)
+kcm_kgamma_la_LIBADD = $(LIBVM) $(LIB_TDEUI) $(LIB_TDECORE) $(LIB_TQT)
 kcm_kgamma_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 
 SUBDIRS = pics 

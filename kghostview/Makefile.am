@@ -28,11 +28,11 @@ libkghostviewlib_la_SOURCES = kgvshell.cpp kgvdocument.cpp kgv_miniwidget.cpp \
 libkghostviewpart_la_SOURCES = part_init.cpp
 
 kghostview_SOURCES = main.cpp
-kghostview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
+kghostview_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_TQT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
 kghostview_LDADD = libkghostviewlib.la
 
 libdscparse_la_LDFLAGS = $(all_libraries) -no-undefined
-libdscparse_la_LIBADD = $(LIB_QT)
+libdscparse_la_LIBADD = $(LIB_TQT)
 libdscparse_la_SOURCES = $(top_srcdir)/kghostview/dscparse/dscparse.cpp $(top_srcdir)/kghostview/dscparse/dscparse_adapter.cpp
 
 noinst_HEADERS =  marklist.h logwindow.h infodialog.h kgvshell.h \

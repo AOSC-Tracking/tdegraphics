@@ -6,8 +6,8 @@ bin_PROGRAMS = svgdisplay printnodetest
 
 svgdisplay_SOURCES = SVGTestWidget.cc svgdisplay.cc
 svgdisplay_LDADD =  $(LIB_TDECORE) ../../libksvg.la
-svgdisplay_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
+svgdisplay_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_TQT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
 
 printnodetest_SOURCES = printnodetest.cpp
 printnodetest_LDADD =  $(LIB_TDECORE) ../../libksvg.la
-printnodetest_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
+printnodetest_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_TQT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
