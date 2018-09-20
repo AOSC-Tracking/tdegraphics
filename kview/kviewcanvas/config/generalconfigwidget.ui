@@ -281,20 +281,11 @@ A value of 100 would cause a 1000x1000 image to be compressed horizontally by a 
     <tabstop>m_pListView</tabstop>
 </tabstops>
 <includes>
+    <include location="global" impldecl="in implementation">kcolorbutton.h</include>
     <include location="global" impldecl="in implementation">kdialog.h</include>
+    <include location="global" impldecl="in implementation">knuminput.h</include>
+    <include location="global" impldecl="in implementation">tdelistview.h</include>
 </includes>
 <layoutdefaults spacing="6" margin="11"/>
 <layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
-<includehints>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>knuminput.h</includehint>
-    <includehint>tdelistview.h</includehint>
-    <includehint>kcolorbutton.h</includehint>
-</includehints>
 </UI>
