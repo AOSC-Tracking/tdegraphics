@@ -15,11 +15,6 @@
 *                                                                        *
 **************************************************************************/
 
-// conflicting types for INT32 in qt and glx
-#ifndef TQT_CLEAN_NAMESPACE
-#define TQT_CLEAN_NAMESPACE
-#endif
-
 #include "pmrendermanager.h"
 #include "pmviewstructure.h"
 #include "pmobject.h"
