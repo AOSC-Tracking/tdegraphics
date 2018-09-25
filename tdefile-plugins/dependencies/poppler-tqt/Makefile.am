@@ -2,7 +2,7 @@ INCLUDES =					\
 	-I$(top_srcdir)				\
 	-I/usr/include/poppler			\
 	$(cairo_includes)			\
-	$(QT_INCLUDES)				\
+	$(TQT_INCLUDES)				\
 	$(FREETYPE_CFLAGS)			\
 	$(FONTCONFIG_CFLAGS)
 
