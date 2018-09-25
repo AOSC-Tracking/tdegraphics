@@ -379,7 +379,7 @@ if test x$acx_cothread != xno ; then
   AC_MSG_CHECKING([whether libgcc contains the cothread patch])
   AC_LANG_PUSH([C++])
   kde_save_CXXFLAGS="$CXXFLAGS"
-  CXXFLAGS="$CXXFLAGS $qt_includes"
+  CXXFLAGS="$CXXFLAGS $tqt_includes"
   AC_TRY_LINK([extern "C" { void *(*__get_eh_context_ptr)();
                             void *__new_eh_context(void); }],
               [ __get_eh_context_ptr = &__new_eh_context;],

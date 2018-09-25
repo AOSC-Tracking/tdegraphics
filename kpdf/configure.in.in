@@ -118,7 +118,7 @@ AC_ARG_ENABLE(force-kpdf-drm,
 )
 
 kde_save_CXXFLAGS="$CXXFLAGS"
-CXXFLAGS="$CXXFLAGS $qt_includes"
+CXXFLAGS="$CXXFLAGS $tqt_includes"
 KDE_CHECK_COMPILER_FLAG([fno-regmove], SUPPORTS_NOREGMOVE=true, SUPPORTS_NOREGMOVE=false)
 if test "x$SUPPORTS_NOREGMOVE" = xtrue; then
 	NOREGMOVE="-fno-regmove"
