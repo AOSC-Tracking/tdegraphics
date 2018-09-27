@@ -329,7 +329,7 @@ Version 1.2 "ByFiat Everytime" (2004-08-18)
      QPaintDevice and X error)
    * [also in 1.0 branch] Check for QImageDrag::canDecode() before calling
      QImageDrag::decode() (prevents X and valgrind errors)
-   * [also in 1.0 branch] Fix compilation problem with QT_NO_ASCII_CAST
+   * [also in 1.0 branch] Fix compilation problem with TQT_NO_ASCII_CAST
      (Waldo Bastian)
    * [also in 1.0 branch] Decrease application preference to below that of
      a viewer (Stephan Kulow)
