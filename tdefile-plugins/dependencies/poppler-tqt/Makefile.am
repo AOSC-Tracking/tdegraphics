@@ -26,7 +26,7 @@ libpoppler_tqt_la_SOURCES =			\
 
 libpoppler_tqt_la_LIBADD = 			\
 	-lpoppler				\
-	$(QT_LIBS)				\
+	$(TQT_LIBS)				\
 	$(FREETYPE_LIBS)			\
 	$(FONTCONFIG_LIBS)
 
@@ -36,5 +36,5 @@ test_poppler_tqt_SOURCES =			\
 test_poppler_tqt_LDADD =			\
 	$(top_builddir)/poppler/libpoppler.la	\
 	libpoppler-tqt.la			\
-	$(QT_LIBS)				\
+	$(TQT_LIBS)				\
 	$(FREETYPE_LIBS)
