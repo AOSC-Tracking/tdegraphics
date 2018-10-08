@@ -164,7 +164,6 @@ private:
    PMFloatEdit* m_pEndColumnEdit;
    // quality
    TQComboBox* m_pQualityCombo;
-   TQCheckBox* m_pRadiosityBox;
    TQCheckBox* m_pAntialiasingBox;
    TQComboBox* m_pSamplingCombo;
    PMFloatEdit* m_pThresholdEdit;

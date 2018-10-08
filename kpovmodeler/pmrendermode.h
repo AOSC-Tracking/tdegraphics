@@ -71,9 +71,6 @@ public:
 
    void setQuality( int quality );
    int quality( ) const { return m_quality; }
-   
-   void setRadiosity( bool on ) { m_radiosity = on; }
-   bool radiosity( ) const { return m_radiosity; }
 
    void setAntialiasing( bool on ) { m_antialiasing = on; }
    bool antialiasing( ) const { return m_antialiasing; }
@@ -110,7 +107,6 @@ private:
    double m_startRow, m_endRow, m_startColumn, m_endColumn;
    
    int m_quality;
-   bool m_radiosity;
    bool m_antialiasing;
    int m_samplingMethod;
    double m_antialiasThreshold;

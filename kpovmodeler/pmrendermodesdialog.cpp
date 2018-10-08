@@ -222,22 +222,21 @@ void PMRenderModesDialog::slotOk( )
 
 TQSize PMRenderModeDialog::s_size = TQSize( 300, 200 );
 
-const int numQuality = 9;
+const int numQuality = 7;
 const char* qualityString[numQuality] =
 {
    I18N_NOOP( "0, 1: Quick colors, full ambient lighting only" ),
    I18N_NOOP( "2, 3: Show specified diffuse and ambient light" ),
    I18N_NOOP( "4: Render shadows, but no extended lights" ),
    I18N_NOOP( "5: Render shadows, including extended lights" ),
-   I18N_NOOP( "6, 7: Compute texture patterns" ),
+   I18N_NOOP( "6, 7: Compute texture patterns, compute photons" ),
    I18N_NOOP( "8: Compute reflected, refracted, and transmitted rays" ),
-   I18N_NOOP( "9: Compute media" ),
-   I18N_NOOP( "10: Compute radiosity but no media" ),
-   I18N_NOOP( "11: Compute radiosity and media" )
+   I18N_NOOP( "9, 10, 11: Compute media, radiosity and subsurface light transport" )
+
 };
 
-const int c_qualityToIndex[12] = { 0, 0, 1, 1, 2, 3, 4, 4, 5, 6, 7, 8 };
-const int c_indexToQuality[numQuality] = { 0, 2, 4, 5, 6, 8, 9, 10, 11 };
+const int c_qualityToIndex[12] = { 0, 0, 1, 1, 2, 3, 4, 4, 5, 6, 6, 6 };
+const int c_indexToQuality[numQuality] = { 0, 2, 4, 5, 6, 8, 9};
 
 PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent, const char* name )
       : KDialogBase( parent, name, true, i18n( "Render Modes" ),
@@ -347,9 +346,6 @@ PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent, co
 
    aaHelpLayout->addStretch( 1 );
 
-   m_pRadiosityBox = new TQCheckBox( i18n( "Radiosity" ), tab );
-   tabLayout->addWidget( m_pRadiosityBox );
-
    tabLayout->addStretch( 1 );
 
    // output options tab
@@ -380,7 +376,6 @@ PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent, co
    connect( m_pStartColumnEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
    connect( m_pEndColumnEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
    connect( m_pQualityCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotActivated( int ) ) );
-   connect( m_pRadiosityBox, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotChanged( ) ) );
    connect( m_pAntialiasingBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotAntialiasingToggled( bool ) ) );
    connect( m_pSamplingCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotActivated( int ) ) );
    connect( m_pThresholdEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
@@ -425,7 +420,6 @@ bool PMRenderModeDialog::saveChanges( )
          m_pMode->setEndColumn( m_pEndColumnEdit->value( ) );
       }
       m_pMode->setQuality( indexToQuality( m_pQualityCombo->currentItem( ) ) );
-      m_pMode->setRadiosity( m_pRadiosityBox->isChecked( ) );
       m_pMode->setAntialiasing( m_pAntialiasingBox->isChecked( ) );
       if( m_pAntialiasingBox->isChecked( ) )
       {
@@ -509,7 +503,6 @@ void PMRenderModeDialog::displayMode( )
    m_pStartColumnEdit->setValue( m_pMode->startColumn( ) );
    m_pEndColumnEdit->setValue( m_pMode->endColumn( ) );
    m_pQualityCombo->setCurrentItem( qualityToIndex( m_pMode->quality( ) ) );
-   m_pRadiosityBox->setChecked( m_pMode->radiosity( ) );
    m_pAntialiasingBox->setChecked( m_pMode->antialiasing( ) );
    enableAntialiasing( m_pMode->antialiasing( ) );
    m_pSamplingCombo->setCurrentItem( m_pMode->samplingMethod( ) );

@@ -39,8 +39,6 @@ void PMRenderMode::init( )
 
    m_quality = 9;
    
-   m_radiosity = false;
-   
    m_antialiasing = false;
    m_samplingMethod = AntialiasingNonRecursive;
    m_antialiasThreshold = 0.3;
@@ -67,7 +65,6 @@ PMRenderMode::PMRenderMode( const TQDomElement& e )
    m_startRow = hlp.doubleAttribute( "start_row", m_startRow );
    m_endRow = hlp.doubleAttribute( "end_row", m_endRow );
    m_quality = hlp.intAttribute( "quality", m_quality );
-   m_radiosity = hlp.boolAttribute( "radiosity", m_radiosity );
    m_antialiasing = hlp.boolAttribute( "antialiasing", m_antialiasing );
    m_samplingMethod = hlp.intAttribute( "sampling_method", m_samplingMethod );
    m_antialiasThreshold = hlp.doubleAttribute( "aa_threshold", m_antialiasThreshold );
@@ -88,7 +85,6 @@ void PMRenderMode::serialize( TQDomElement& e ) const
    e.setAttribute( "start_column", m_startColumn );
    e.setAttribute( "end_column", m_endColumn );
    e.setAttribute( "quality", m_quality );
-   e.setAttribute( "radiosity", m_radiosity );
    e.setAttribute( "antialiasing", m_antialiasing );
    e.setAttribute( "sampling_method", m_samplingMethod );
    e.setAttribute( "aa_threshold", m_antialiasThreshold );
@@ -187,10 +183,6 @@ TQStringList PMRenderMode::commandLineSwitches( ) const
       cl.append( tmp );
    }
    cl.append( TQString( "+Q%1" ).arg( m_quality ) );
-   if( m_radiosity )
-      cl.append( TQString( "+QR" ) );
-   else
-      cl.append( TQString( "-QR" ) );
 
    if( m_antialiasing )
    {
