@@ -144,7 +144,7 @@ extern char *xmalloc(unsigned int size);
 #define _HAVE_USLEEP
 #endif
 
-#if defined(BSD) || defined(__FreeBSD__) || defined(_BSD_SOURCE)
+#if defined(BSD) || defined(__FreeBSD__) || defined(_DEFAULT_SOURCE)
 #define _HAVE_USLEEP
 #ifndef rindex
 #define rindex strrchr
