@@ -169,13 +169,12 @@ TQString Document::getInfo( const TQString & type ) const
   int i;
   Dict *infoDict = info.getDict();
 
-  if (
-#   if defined(HAVE_POPPLER_058)
-    infoDict->lookup( (char*)type.latin1() ).isString()
-#   else
-    infoDict->lookup( (char*)type.latin1(), &obj )->isString()
-#   endif
-  )
+#if defined(HAVE_POPPLER_058)
+  obj = infoDict->lookup( (char*)type.latin1() );
+#else
+  infoDict->lookup( (char*)type.latin1(), &obj );
+#endif
+  if (!obj.isNull() && obj.isString())
   {
     s1 = obj.getString();
     if ( ( s1->getChar(0) & 0xff ) == 0xfe && ( s1->getChar(1) & 0xff ) == 0xff )
@@ -241,13 +240,12 @@ TQDateTime Document::getDate( const TQString & type ) const
   Dict *infoDict = info.getDict();
   TQString result;
 
-  if (
-#   if defined(HAVE_POPPLER_058)
-    infoDict->lookup( (char*)type.latin1() ).isString()
-#   else
-    infoDict->lookup( (char*)type.latin1(), &obj )->isString()
-#   endif
-  )
+#if defined(HAVE_POPPLER_058)
+  obj = infoDict->lookup( (char*)type.latin1() );
+#else
+  infoDict->lookup( (char*)type.latin1(), &obj );
+#endif
+  if (!obj.isNull() && obj.isString())
   {
     TQString s = UnicodeParsedString(obj.getString());
     // TODO do something with the timezone information
