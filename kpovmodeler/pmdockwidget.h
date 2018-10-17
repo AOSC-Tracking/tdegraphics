@@ -1115,7 +1115,7 @@ private:
   PMDockWidget::DockPosition curPos;
 
   /**
-   * A TQList of all objects that are important for docking.
+   * A TQPtrList of all objects that are important for docking.
    * Some serve as group widgets of dockwidgets, others encapsulate normal widgets.
    */
   TQObjectList* childDock;

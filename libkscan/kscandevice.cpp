@@ -97,7 +97,7 @@ KScanOption *KScanDevice::getExistingGuiElement( const TQCString& name )
 
     TQCString alias = aliasName( name );
 
-    /* gui_elements is a TQList<KScanOption> */
+    /* gui_elements is a TQPtrList<KScanOption> */
     for( ret = gui_elements.first(); ret != 0; ret = gui_elements.next())
     {
        if( ret->getName() == alias ) break;
