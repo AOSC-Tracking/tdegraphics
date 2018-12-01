@@ -524,14 +524,6 @@ bool PDFGenerator::print( KPrinter& printer )
     }
 }
 
-static GString *TQStringToGString(const TQString &s) {
-    int len = s.length();
-    char *cstring = (char *)gmallocn(s.length(), sizeof(char));
-    for (int i = 0; i < len; ++i)
-      cstring[i] = s.at(i).unicode();
-    return new GString(cstring, len);
-}
-
 static TQString unicodeToTQString(Unicode* u, int len) {
     TQString ret;
     ret.setLength(len);
@@ -586,7 +578,7 @@ TQString PDFGenerator::getMetaData( const TQString & key, const TQString & optio
         // asking for the page related to a 'named link destination'. the
         // option is the link name. @see addSynopsisChildren.
         DocumentViewport viewport;
-        GString * namedDest = TQStringToGString(option);
+        GString * namedDest = new GString( option.utf8() );
         docLock.lock();
         LinkDest * destination = pdfdoc->findDest( namedDest );
         if ( destination )
