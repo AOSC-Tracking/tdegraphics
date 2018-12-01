@@ -114,7 +114,7 @@ bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPa
     int keep = 1;
     while ( !pdfdoc->isOk() && pdfdoc->getErrorCode() == errEncrypted )
     {
-        TQCString password;
+        TQString password;
 
         // 1.A. try to retrieve the first password from the kde wallet system
         if ( !triedWallet )
@@ -131,7 +131,7 @@ bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPa
                 // look for the pass in that folder
                 TQString retrievedPass;
                 if ( !wallet->readPassword( filePath.section('/', -1, -1), retrievedPass ) )
-                    password = retrievedPass.local8Bit();
+                    password = retrievedPass;
             }
             triedWallet = true;
         }
@@ -152,7 +152,7 @@ bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPa
         }
 
         // 2. reopen the document using the password
-        GString * pwd2 = new GString( TQString(TQString::fromLocal8Bit(password.data())).latin1() );
+        GString * pwd2 = new GString( password.utf8() );
             delete pdfdoc;
         pdfdoc = new PDFDoc( new GString( TQFile::encodeName( filePath ) ), pwd2, pwd2 );
             delete pwd2;
@@ -160,7 +160,7 @@ bool PDFGenerator::loadDocument( const TQString & filePath, TQValueVector<KPDFPa
         // 3. if the password is correct and the user chose to remember it, store it to the wallet
         if ( pdfdoc->isOk() && wallet && /*safety check*/ wallet->isOpen() && keep > 0 )
         {
-            TQString goodPass = TQString::fromLocal8Bit( password.data() );
+            TQString goodPass = password;
             wallet->writePassword( filePath.section('/', -1, -1), goodPass );
         }
     }
