@@ -206,7 +206,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   viewModeAction = new TDESelectAction (i18n("View Mode"), 0, 0, 0, actionCollection(), "viewmode");
   viewModeAction->setItems(viewModes);
 
-  // Qt::Orientation menu
+  // Orientation menu
   TQStringList orientations;
   orientations.append(i18n("Portrait"));
   orientations.append(i18n("Landscape"));
