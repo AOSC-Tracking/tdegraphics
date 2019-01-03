@@ -125,7 +125,7 @@ TQString Page::getText(const Rectangle &r) const
 {
   TextOutputDev *output_dev;
   GooString *s;
-  PDFRectangle *rect;
+  const PDFRectangle *rect;
   TQString result;
   ::Page *p;
 

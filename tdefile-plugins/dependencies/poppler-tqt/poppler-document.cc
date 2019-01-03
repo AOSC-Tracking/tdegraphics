@@ -33,7 +33,9 @@
 #include <DateInfo.h>
 #include "poppler-private.h"
 
+#if !defined(HAVE_POPPLER_071)
 #undef bool
+#endif
 
 namespace Poppler {
 
@@ -141,7 +143,11 @@ bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) con
                   (Poppler::FontInfo::Type)((::FontInfo*)items->get(i))->getType());
     fontList->append(font);
   }
+# if defined(HAVE_POPPLER_070)
+  deleteGooList<::FontInfo>(items);
+# else
   deleteGooList(items, ::FontInfo);
+# endif
   return true;
 }
 

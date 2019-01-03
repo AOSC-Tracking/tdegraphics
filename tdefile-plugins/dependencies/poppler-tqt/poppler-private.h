@@ -39,6 +39,11 @@ class SplashOutputDev;
 #else
 #define CONST_064
 #endif
+#if defined(HAVE_POPPLER_071)
+#define GBool  bool
+#define gTrue  true
+#define gFalse false
+#endif
 
 namespace Poppler {
     
