@@ -1407,7 +1407,7 @@ void KViewPart::setStatusBarTextFromMultiPage( const TQString &msg )
 TDEAboutData* KViewPart::createAboutData()
 {
   return new TDEAboutData("kviewerpart", I18N_NOOP("Document Viewer Part"),
-                        "0.6", I18N_NOOP(""),
+                        "0.6", "",
                         TDEAboutData::License_GPL,
                         I18N_NOOP("Copyright (c) 2005 Wilfried Huss"));
 }

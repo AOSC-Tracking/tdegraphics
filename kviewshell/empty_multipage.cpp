@@ -40,7 +40,7 @@ EmptyMultiPage::EmptyMultiPage(TQWidget* parentWidget, const char* widgetName, T
 TDEAboutData* EmptyMultiPage::createAboutData()
 {
   return new TDEAboutData("emptymultipage", I18N_NOOP("Empty Multipage"),
-  "1.0", I18N_NOOP(""),
+  "1.0", "",
   TDEAboutData::License_GPL,
   I18N_NOOP("Copyright (c) 2005 Wilfried Huss"));
 }
