@@ -135,7 +135,7 @@ bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) con
   for ( int i = 0; i < items->getLength(); ++i ) {
     TQString fontName;
     if (((::FontInfo*)items->get(i))->getName())
-      fontName = ((::FontInfo*)items->get(i))->getName()->getCString();
+      fontName = ((::FontInfo*)items->get(i))->getName()->GOO_GET_CSTR();
 
     FontInfo font(fontName,
                   ((::FontInfo*)items->get(i))->getEmbedded(),

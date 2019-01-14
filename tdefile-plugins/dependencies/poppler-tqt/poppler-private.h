@@ -44,6 +44,11 @@ class SplashOutputDev;
 #define gTrue  true
 #define gFalse false
 #endif
+#if defined(HAVE_POPPLER_072)
+#define GOO_GET_CSTR c_str
+#else
+#define GOO_GET_CSTR getCString
+#endif
 
 namespace Poppler {
     

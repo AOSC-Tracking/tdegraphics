@@ -119,7 +119,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, C
                 // so better storing the reference and provide the viewport on demand
                 CONST_064 GooString *s = g->getNamedDest();
                 TQChar *charArray = new TQChar[s->getLength()];
-                for (int i = 0; i < s->getLength(); ++i) charArray[i] = TQChar(s->getCString()[i]);
+                for (int i = 0; i < s->getLength(); ++i) charArray[i] = TQChar(s->GOO_GET_CSTR()[i]);
                     TQString aux(charArray, s->getLength());
                     item.setAttribute( "DestinationName", aux );
                     delete[] charArray;
@@ -132,7 +132,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, C
                 if ( a->getKind() == actionGoToR )
                 {
                     CONST_064 LinkGoToR * g2 = static_cast< CONST_064 LinkGoToR * >( a );
-                    item.setAttribute( "ExternalFileName", g2->getFileName()->getCString() );
+                    item.setAttribute( "ExternalFileName", g2->getFileName()->GOO_GET_CSTR() );
                 }
             }
 

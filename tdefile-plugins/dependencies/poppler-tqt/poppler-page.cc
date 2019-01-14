@@ -151,7 +151,7 @@ TQString Page::getText(const Rectangle &r) const
     s = output_dev->getText(r.m_x1, y1, r.m_x2, y2);
   }
 
-  result = TQString::fromUtf8(s->getCString());
+  result = TQString::fromUtf8(s->GOO_GET_CSTR());
 
   delete output_dev;
   delete s;
@@ -183,7 +183,7 @@ TQValueList<TextBox*> Page::textList() const
   for (int i = 0; i < word_list->getLength(); i++) {
     TextWord *word = word_list->get(i);
     GooString *word_str = word->getText();
-    TQString string = TQString::fromUtf8(word_str->getCString());
+    TQString string = TQString::fromUtf8(word_str->GOO_GET_CSTR());
     delete word_str;
     double xMin, yMin, xMax, yMax;
     word->getBBox(&xMin, &yMin, &xMax, &yMax);
@@ -303,13 +303,13 @@ TQValueList<Link*> Page::links() const
 	{
           LinkLaunch * e = (LinkLaunch *)a;
           GooString * p = e->getParams();
-          popplerLink = new LinkExecute( linkArea, e->getFileName()->getCString(), p ? p->getCString() : 0 );
+          popplerLink = new LinkExecute( linkArea, e->getFileName()->GOO_GET_CSTR(), p ? p->GOO_GET_CSTR() : 0 );
 	}
         break;
 
         case actionNamed:
 	{
-          const char * name = ((LinkNamed *)a)->getName()->getCString();
+          const char * name = ((LinkNamed *)a)->getName()->GOO_GET_CSTR();
           if ( !strcmp( name, "NextPage" ) )
               popplerLink = new LinkAction( linkArea, LinkAction::PageNext );
           else if ( !strcmp( name, "PrevPage" ) )
@@ -346,7 +346,7 @@ TQValueList<Link*> Page::links() const
 
         case actionURI:
 	{
-          popplerLink = new LinkBrowse( linkArea, ((LinkURI *)a)->getURI()->getCString() );
+          popplerLink = new LinkBrowse( linkArea, ((LinkURI *)a)->getURI()->GOO_GET_CSTR() );
 	}
         break;
 
