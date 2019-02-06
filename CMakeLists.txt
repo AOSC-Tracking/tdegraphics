@@ -26,6 +26,7 @@ include( CheckTypeSize )
 include( CheckCSourceCompiles )
 include( CheckCXXSourceCompiles )
 include( CheckLibraryExists )
+include( CheckSymbolExists )
 
 
 ##### include our cmake modules #################
