@@ -86,13 +86,18 @@ GooString *TQStringToGooString(const TQString &s)
 }
 
 
-void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, CONST_064 GooList * items )
+void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, OUTLINE_ITEMS_TYPE * items )
 {
-    int numItems = items->getLength();
+    int numItems = OUTLINE_ITEMS_LENGTH(items);
     for ( int i = 0; i < numItems; ++i )
     {
         // iterate over every object in 'items'
-        OutlineItem * outlineItem = (OutlineItem *)items->get( i );
+        OutlineItem * outlineItem =
+#ifdef HAVE_POPPLER_076
+		(*items)[i];
+#else
+		(OutlineItem *)items->get( i );
+#endif
 
         // 1. create element using outlineItem's title as tagName
         TQString name;
@@ -138,7 +143,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, C
 
         // 3. recursively descend over children
         outlineItem->open();
-        CONST_064 GooList * children = outlineItem->getKids();
+        OUTLINE_ITEMS_TYPE * children = outlineItem->getKids();
         if ( children )
             addTocChildren( docSyn, &item, children );
     }

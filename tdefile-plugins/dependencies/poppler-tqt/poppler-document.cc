@@ -127,23 +127,34 @@ TQValueList<FontInfo> Document::fonts() const
 
 bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) const
 {
-  GooList *items = data->m_fontInfoScanner->scan( numPages );
+  FONTS_LIST_TYPE *items = data->m_fontInfoScanner->scan( numPages );
 
   if ( NULL == items )
     return false;
 
-  for ( int i = 0; i < items->getLength(); ++i ) {
+  for ( int i = 0; i < FONTS_LIST_LENGTH(items); ++i ) {
     TQString fontName;
-    if (((::FontInfo*)items->get(i))->getName())
-      fontName = ((::FontInfo*)items->get(i))->getName()->GOO_GET_CSTR();
+    ::FontInfo *fontInfo =
+#if defined(HAVE_POPPLER_076)
+      (*items)[i];
+#else
+      (::FontInfo*)items->get(i);
+#endif
+    if (fontInfo->getName())
+      fontName = fontInfo->getName()->GOO_GET_CSTR();
 
     FontInfo font(fontName,
-                  ((::FontInfo*)items->get(i))->getEmbedded(),
-                  ((::FontInfo*)items->get(i))->getSubset(),
-                  (Poppler::FontInfo::Type)((::FontInfo*)items->get(i))->getType());
+                  fontInfo->getEmbedded(),
+                  fontInfo->getSubset(),
+                  (Poppler::FontInfo::Type)(fontInfo->getType()));
     fontList->append(font);
   }
-# if defined(HAVE_POPPLER_070)
+# if defined(HAVE_POPPLER_076)
+  for (auto entry : *items) {
+    delete entry;
+  }
+  delete items;
+# elif defined(HAVE_POPPLER_070)
   deleteGooList<::FontInfo>(items);
 # else
   deleteGooList(items, ::FontInfo);
@@ -324,12 +335,12 @@ TQDomDocument *Document::toc() const
   if ( !outline )
     return NULL;
 
-  CONST_064 GooList * items = outline->getItems();
-  if ( !items || items->getLength() < 1 )
+  OUTLINE_ITEMS_TYPE * items = outline->getItems();
+  if ( !items || OUTLINE_ITEMS_LENGTH(items) < 1 )
     return NULL;
 
   TQDomDocument *toc = new TQDomDocument();
-  if ( items->getLength() > 0 )
+  if ( OUTLINE_ITEMS_LENGTH(items) > 0 )
     data->addTocChildren( toc, toc, items );
 
   return toc;

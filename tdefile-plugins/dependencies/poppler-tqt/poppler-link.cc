@@ -53,7 +53,7 @@ namespace Poppler {
 		else
 		{
 			Ref ref = ld->getPageRef();
-			m_pageNum = data.doc->doc.findPage( ref.num, ref.gen );
+			m_pageNum = data.doc->doc.findPage(FIND_PAGE_ARGS(ref));
 		}
 		double left = ld->getLeft();
 		double bottom = ld->getBottom();

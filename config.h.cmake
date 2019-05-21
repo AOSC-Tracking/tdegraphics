@@ -1,6 +1,7 @@
 #cmakedefine VERSION "@VERSION@"
 
 // poppler-tqt
+#cmakedefine HAVE_POPPLER_076
 #cmakedefine HAVE_POPPLER_072
 #cmakedefine HAVE_POPPLER_071
 #cmakedefine HAVE_POPPLER_070

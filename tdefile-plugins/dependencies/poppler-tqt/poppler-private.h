@@ -49,6 +49,21 @@ class SplashOutputDev;
 #else
 #define GOO_GET_CSTR getCString
 #endif
+#if defined(HAVE_POPPLER_076)
+#include <vector>
+class OutlineItem;
+#define OUTLINE_ITEMS_TYPE const std::vector<OutlineItem*>
+#define OUTLINE_ITEMS_LENGTH(goo) goo->size()
+#define FONTS_LIST_TYPE std::vector<::FontInfo*>
+#define FONTS_LIST_LENGTH(goo) goo->size()
+#define FIND_PAGE_ARGS(ref)	ref
+#else
+#define OUTLINE_ITEMS_TYPE CONST_064 GooList
+#define OUTLINE_ITEMS_LENGTH(goo) goo->getLength()
+#define FONTS_LIST_TYPE GooList
+#define FONTS_LIST_LENGTH(goo) goo->getLength()
+#define FIND_PAGE_ARGS(ref)	ref.num, ref.gen
+#endif
 
 namespace Poppler {
     
@@ -99,7 +114,7 @@ class DocumentData {
         return m_outputDev;
     }
 
-    void addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, CONST_064 GooList * items );
+    void addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, OUTLINE_ITEMS_TYPE * items );
 
   class PDFDoc doc;
   bool locked;
