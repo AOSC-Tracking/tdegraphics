@@ -317,7 +317,7 @@ TQVariant KSVG::valueToVariant(ExecState *exec, const Value &val)
 	switch(val.type())
 	{
 		case BooleanType:
-			res = TQVariant(val.toBoolean(exec), 0);
+			res = TQVariant(val.toBoolean(exec));
 			break;
 		case NumberType:
 			res = TQVariant(val.toNumber(exec));
