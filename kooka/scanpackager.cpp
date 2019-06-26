@@ -118,7 +118,7 @@ ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
 
    /* Preload frequently used icons */
    TDEIconLoader *loader = TDEGlobal::iconLoader();
-   m_floppyPixmap = loader->loadIcon( "media-floppy-3_5", TDEIcon::Small );
+   m_floppyPixmap = loader->loadIcon( "media-floppy-3_5-unmounted", TDEIcon::Small );
    m_grayPixmap   = loader->loadIcon( "palette_gray", TDEIcon::Small );
    m_bwPixmap     = loader->loadIcon( "palette_lineart", TDEIcon::Small );
    m_colorPixmap  = loader->loadIcon( "palette_color", TDEIcon::Small );
