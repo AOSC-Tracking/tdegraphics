@@ -94,7 +94,7 @@ Kooka::Kooka( const TQCString& deviceToUse)
     connect(m_view, TQT_SIGNAL(signalChangeCaption(const TQString&)),
             this,   TQT_SLOT(changeCaption(const TQString&)));
 
-    changeCaption( i18n( "KDE Scanning" ));
+    changeCaption( i18n( "TDE Scanning" ));
 
     setAutoSaveSettings(  TQString::fromLatin1("General Options"),
                           true );
