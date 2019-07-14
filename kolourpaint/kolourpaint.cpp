@@ -65,8 +65,7 @@ int main (int argc, char *argv [])
         I18N_NOOP ("Paint Program for TDE"),
         TDEAboutData::License_Custom,
         0/*copyright statement - see licence instead*/,
-        0/*no free text*/,
-        "http://www.kolourpaint.org/"
+        0/*no free text*/
     );
 
 
