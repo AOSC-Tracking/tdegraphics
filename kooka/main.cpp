@@ -44,8 +44,8 @@
 #include "version.h"
 
 static const char description[] =
-          "Kooka is a KDE application which provides access to scanner hardware\n"
-	      "using the SANE library.\n"
+          "Kooka is a TDE application which provides access to scanner hardware\n"
+	      "using the SANE library.\n\n"
 	      "Kooka helps you scan, save your image in the correct image format\n"
 	      "and perform Optical Character Recognition on it, using gocr, Joerg\n"
 	      "Schulenburg's and friends' Open Source ocr program.";
@@ -74,8 +74,7 @@ static TDECmdLineOptions options[] =
 int main( int argc, char *argv[] )
 {
    TDEAboutData about("kooka", I18N_NOOP("Kooka"), KOOKA_VERSION, I18N_NOOP(description),
-		    TDEAboutData::License_GPL_V2, "(C) 2000 Klaas Freitag", 0,
-		    I18N_NOOP("http://kooka.kde.org"));
+		    TDEAboutData::License_GPL_V2, "(C) 2000 Klaas Freitag", 0);
 
    about.addAuthor( "Klaas Freitag", I18N_NOOP("developer"), "freitag@suse.de" );
    about.addAuthor( "Mat Colton", I18N_NOOP("graphics, web"), "mat@colton.de" );
