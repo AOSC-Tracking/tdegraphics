@@ -19,7 +19,7 @@
 #include <tdelocale.h>
 
 static const char description[] =
-I18N_NOOP("kpdf, a kde pdf viewer based on xpdf");
+I18N_NOOP("KPDF, a TDE PDF viewer based on XPDF");
 
 static const char version[] = "0.5.10";
 

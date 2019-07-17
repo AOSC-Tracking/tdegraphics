@@ -152,13 +152,13 @@ void kpMainWindow::slotHelpTakingScreenshots ()
         message = i18n
         (
             "<p>"
-            "You do not appear to be running KDE."
+            "You do not appear to be running TDE."
             "</p>"
 
             // We tell them this much even though they aren't running KDE
             // to entice them to use KDE since it's so easy.
             "<p>"
-            "Once you have loaded KDE:<br>"
+            "Once you have loaded TDE:<br>"
             "<blockquote>"
             "To acquire a screenshot, press <b>%1</b>."
             "  The screenshot will be placed into the clipboard"
