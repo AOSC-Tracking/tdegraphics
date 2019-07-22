@@ -53,10 +53,10 @@ void PMCameraEdit::createTopWidgets( )
    m_pCameraType->insertItem( i18n( "Cylinder" ) );
 
    m_pCylinderType = new TQComboBox( false, this );
-   m_pCylinderType->insertItem( i18n( "1:Qt::Vertical, Fixed Viewpoint" ) );
-   m_pCylinderType->insertItem( i18n( "2:Qt::Horizontal, Fixed Viewpoint" ) );
-   m_pCylinderType->insertItem( i18n( "3:Qt::Vertical, Variable Viewpoint" ) );
-   m_pCylinderType->insertItem( i18n( "4:Qt::Horizontal, Variable Viewpoint" ) );
+   m_pCylinderType->insertItem( i18n( "1: Vertical, Fixed Viewpoint" ) );
+   m_pCylinderType->insertItem( i18n( "2: Horizontal, Fixed Viewpoint" ) );
+   m_pCylinderType->insertItem( i18n( "3: Vertical, Variable Viewpoint" ) );
+   m_pCylinderType->insertItem( i18n( "4: Horizontal, Variable Viewpoint" ) );
 
    m_pLocation = new PMVectorEdit( "x", "y", "z", this );
    m_pSky = new PMVectorEdit( "x", "y", "z", this );
