@@ -118,7 +118,7 @@ void nikon_decrypt (uchar ci, uchar cj, int tag, int i, int size, uchar *buf)
 
 int parse_tiff_ifd (int base, int level);
 
-void nef_parse_makernote (base)
+void nef_parse_makernote (int base)
 {
   int offset=0, entries, tag, type, count, val, save;
   unsigned serial=0, key=0;
