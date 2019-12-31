@@ -44,14 +44,14 @@
 #include "version.h"
 
 static const char description[] =
-          "Kooka is a TDE application which provides access to scanner hardware\n"
+          I18N_NOOP("Kooka is a TDE application which provides access to scanner hardware\n"
 	      "using the SANE library.\n\n"
 	      "Kooka helps you scan, save your image in the correct image format\n"
 	      "and perform Optical Character Recognition on it, using gocr, Joerg\n"
-	      "Schulenburg's and friends' Open Source ocr program.";
+	      "Schulenburg's and friends' Open Source ocr program.");
 
 static const char license[] =
-"This program is distributed under the terms of the GPL v2 as publishec by\n"
+I18N_NOOP("This program is distributed under the terms of the GPL v2 as publishec by\n"
 "the Free Software Foundation\n\n"
 "As a special exception, permission is given to link this program\n"
 "with any version of the KADMOS ocr/icr engine of reRecognition GmbH,\n"
@@ -59,7 +59,7 @@ static const char license[] =
 "including the source code for KADMOS in the source distribution.\n\n"
 "As a special exception, permission is given to link this program\n"
 "with any edition of TQt, and distribute the resulting executable,\n"
-"without including the source code for TQt in the source distribution.\n";
+"without including the source code for TQt in the source distribution.\n");
 
 
 static TDECmdLineOptions options[] =
@@ -73,7 +73,7 @@ static TDECmdLineOptions options[] =
 
 int main( int argc, char *argv[] )
 {
-   TDEAboutData about("kooka", I18N_NOOP("Kooka"), KOOKA_VERSION, I18N_NOOP(description),
+   TDEAboutData about("kooka", I18N_NOOP("Kooka"), KOOKA_VERSION, description,
 		    TDEAboutData::License_GPL_V2, "(C) 2000 Klaas Freitag", 0);
 
    about.addAuthor( "Klaas Freitag", I18N_NOOP("developer"), "freitag@suse.de" );
