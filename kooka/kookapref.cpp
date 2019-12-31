@@ -75,7 +75,7 @@ void KookaPreferences::setupOCRPage()
     konf->setGroup( CFG_GROUP_OCR_DIA );
 
     TQFrame *page = addPage( i18n("OCR"), i18n("Optical Character Recognition" ),
-			    BarIcon("ocrImage", TDEIcon::SizeMedium ) );
+			    BarIcon("ocr", TDEIcon::SizeMedium ) );
 
     TQVBoxLayout *top = new TQVBoxLayout( page, 0, spacingHint() );
 
