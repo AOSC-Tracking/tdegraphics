@@ -139,7 +139,7 @@ void PMWarpEdit::createTopWidgets( )
    /* Mapping Warp Objects */
    m_pMappingWidget = new TQWidget( this );
    vl = new TQVBoxLayout( m_pMappingWidget, 0, KDialog::spacingHint( ) );
-   label = new TQLabel( i18n( "Qt::Orientation:" ), m_pMappingWidget );
+   label = new TQLabel( i18n( "Orientation:" ), m_pMappingWidget );
    m_pOrientationEdit = new PMVectorEdit( "x", "y", "z", m_pMappingWidget );
    hl = new TQHBoxLayout( vl );
    hl->addWidget( label );
