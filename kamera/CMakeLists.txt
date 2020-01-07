@@ -13,4 +13,3 @@ include( ConfigureChecks.cmake )
 
 add_subdirectory( tdeioslave )
 add_subdirectory( kcontrol )
-add_subdirectory( pics )
