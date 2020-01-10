@@ -122,7 +122,7 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	act->setWhatsThis(i18n("Click this button to add a new camera."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new TDEAction(i18n("Test"), "camera_test", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
+	act = new TDEAction(i18n("Test"), "button_ok", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
 	act = new TDEAction(i18n("Remove"), "edittrash", 0, TQT_TQOBJECT(this), TQT_SLOT(slot_removeCamera()), m_actions, "camera_remove");
