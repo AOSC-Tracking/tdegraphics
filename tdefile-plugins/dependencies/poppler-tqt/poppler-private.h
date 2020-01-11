@@ -54,14 +54,25 @@ class SplashOutputDev;
 class OutlineItem;
 #define OUTLINE_ITEMS_TYPE const std::vector<OutlineItem*>
 #define OUTLINE_ITEMS_LENGTH(goo) goo->size()
+#  if defined(HAVE_POPPLER_082)
 #define FONTS_LIST_TYPE std::vector<::FontInfo*>
+#define FONTS_LIST_LENGTH(goo) goo.size()
+#define FONTS_LIST_IS_EMPTY(goo) goo.empty()
+#define FONTS_LIST_GET(goo, i) goo[i]
+#  else
+#define FONTS_LIST_TYPE std::vector<::FontInfo*>*
 #define FONTS_LIST_LENGTH(goo) goo->size()
+#define FONTS_LIST_IS_EMPTY(goo) goo->empty()
+#define FONTS_LIST_GET(goo, i) (*goo)[i]
+#  endif
 #define FIND_PAGE_ARGS(ref)	ref
 #else
 #define OUTLINE_ITEMS_TYPE CONST_064 GooList
 #define OUTLINE_ITEMS_LENGTH(goo) goo->getLength()
-#define FONTS_LIST_TYPE GooList
+#define FONTS_LIST_TYPE GooList*
 #define FONTS_LIST_LENGTH(goo) goo->getLength()
+#define FONTS_LIST_IS_EMPTY(goo) (goo == NULL || goo->getLength() == 0)
+#define FONTS_LIST_GET(goo, i) (::FontInfo*)goo->get(i)
 #define FIND_PAGE_ARGS(ref)	ref.num, ref.gen
 #endif
 

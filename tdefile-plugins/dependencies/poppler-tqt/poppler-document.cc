@@ -127,19 +127,24 @@ TQValueList<FontInfo> Document::fonts() const
 
 bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) const
 {
-  FONTS_LIST_TYPE *items = data->m_fontInfoScanner->scan( numPages );
+  FONTS_LIST_TYPE items = data->m_fontInfoScanner->scan( numPages );
 
+#if !defined(HAVE_POPPLER_082)
   if ( NULL == items )
     return false;
+#endif
+#if !defined(HAVE_POPPLER_076)
+  if ( FONTS_LIST_IS_EMPTY(items) ) {
+#  if !defined(HAVE_POPPLER_082)
+    delete items;
+#  endif
+    return false;
+  }
+#endif
 
   for ( int i = 0; i < FONTS_LIST_LENGTH(items); ++i ) {
     TQString fontName;
-    ::FontInfo *fontInfo =
-#if defined(HAVE_POPPLER_076)
-      (*items)[i];
-#else
-      (::FontInfo*)items->get(i);
-#endif
+    ::FontInfo *fontInfo = FONTS_LIST_GET(items, i);
     if (fontInfo->getName())
       fontName = fontInfo->getName()->GOO_GET_CSTR();
 
@@ -149,7 +154,11 @@ bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) con
                   (Poppler::FontInfo::Type)(fontInfo->getType()));
     fontList->append(font);
   }
-# if defined(HAVE_POPPLER_076)
+# if defined(HAVE_POPPLER_082)
+  for (auto entry : items) {
+    delete entry;
+  }
+# elif defined(HAVE_POPPLER_076)
   for (auto entry : *items) {
     delete entry;
   }
