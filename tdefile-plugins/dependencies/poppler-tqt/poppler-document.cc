@@ -42,7 +42,12 @@ namespace Poppler {
 Document *Document::load(const TQString &filePath)
 {
   if (!globalParams) {
-    globalParams = new GlobalParams();
+    globalParams =
+#if defined(HAVE_POPPLER_083)
+      std::make_unique<GlobalParams>();
+#else
+      new GlobalParams();
+#endif
   }
 
   DocumentData *doc = new DocumentData(new GooString(TQFile::encodeName(filePath)), NULL);
