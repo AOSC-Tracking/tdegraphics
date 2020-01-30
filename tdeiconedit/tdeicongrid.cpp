@@ -1985,7 +1985,7 @@ bool TDEIconEditGrid::isMarked(int x, int y)
 // Based on TQt's image conversion functions
 static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
 {
-    register TQRgb *p;
+    TQRgb *p;
     uchar  *b;
     int	    y;
 

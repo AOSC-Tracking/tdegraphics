@@ -125,7 +125,7 @@ rgb1 (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *colorm
 	int width, height;
 	int bpl;
 	unsigned char *s;
-	register unsigned char data;
+	unsigned char data;
 	unsigned char *o;
 	unsigned char *srow = image->data, *orow = pixels;
 
@@ -164,7 +164,7 @@ rgb1a (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *color
 	int width, height;
 	int bpl;
 	unsigned char *s;
-	register unsigned char data;
+	unsigned char data;
 	unsigned char *o;
 	unsigned char *srow = image->data, *orow = pixels;
 	unsigned int remap[2];
@@ -216,10 +216,10 @@ rgb8 (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *colorm
 	int width, height;
 	int bpl;
 	unsigned int mask;
-	register unsigned int data;
+	unsigned int data;
 	unsigned char *srow = image->data, *orow = pixels;
-	register unsigned char *s;
-	register unsigned char *o;
+	unsigned char *s;
+	unsigned char *o;
 
 	width = image->width;
 	height = image->height;
@@ -254,10 +254,10 @@ rgb8a (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *color
 	int width, height;
 	int bpl;
 	unsigned int mask;
-	register unsigned int data;
+	unsigned int data;
 	unsigned int remap[256];
-	register unsigned char *s;	/* read 2 pixels at once */
-	register unsigned int *o;
+	unsigned char *s;	/* read 2 pixels at once */
+	unsigned int *o;
 	unsigned char *srow = image->data, *orow = pixels;
 
 	width = image->width;
@@ -307,11 +307,11 @@ rgb565lsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned int *s;	/* read 2 pixels at once */
+	unsigned int *s;	/* read 2 pixels at once */
 #else
-	register unsigned char *s;	/* read 2 pixels at once */
+	unsigned char *s;	/* read 2 pixels at once */
 #endif
-	register unsigned short *o;
+	unsigned short *o;
 	unsigned char *srow = image->data, *orow = pixels;
 
 	width = image->width;
@@ -326,7 +326,7 @@ rgb565lsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 #endif
 		o = (unsigned short *) orow;
 		for (xx = 1; xx < width; xx += 2) {
-			register unsigned int data;
+			unsigned int data;
 #ifdef LITTLE
 			data = *s++;
 			*o++ = (data & 0xf800) >> 8 | (data & 0xe000) >> 13
@@ -349,7 +349,7 @@ rgb565lsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 		}
 		/* check for last remaining pixel */
 		if (width & 1) {
-			register unsigned short data;
+			unsigned short data;
 #ifdef LITTLE
 			data = *((short *) s);
 #else
@@ -378,11 +378,11 @@ rgb565msb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned char *s;	/* need to swap data order */
+	unsigned char *s;	/* need to swap data order */
 #else
-	register unsigned int *s;	/* read 2 pixels at once */
+	unsigned int *s;	/* read 2 pixels at once */
 #endif
-	register unsigned short *o;
+	unsigned short *o;
 	unsigned char *srow = image->data, *orow = pixels;
 
 	width = image->width;
@@ -397,7 +397,7 @@ rgb565msb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 #endif
 		o = (unsigned short *) orow;
 		for (xx = 1; xx < width; xx += 2) {
-			register unsigned int data;
+			unsigned int data;
 #ifdef LITTLE
 			/* swap endianness first */
 			data = s[0] | s[1] << 8 | s[2] << 16 | s[3] << 24;
@@ -420,7 +420,7 @@ rgb565msb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 		}
 		/* check for last remaining pixel */
 		if (width & 1) {
-			register unsigned short data;
+			unsigned short data;
 #ifdef LITTLE
 			data = *((short *) s);
 			data = ((data >> 8) & 0xff) | ((data & 0xff) << 8);
@@ -449,11 +449,11 @@ rgb565alsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned short *s;	/* read 1 pixels at once */
+	unsigned short *s;	/* read 1 pixels at once */
 #else
-	register unsigned char *s;
+	unsigned char *s;
 #endif
-	register unsigned int *o;
+	unsigned int *o;
 
 	unsigned char *srow = image->data, *orow = pixels;
 
@@ -469,7 +469,7 @@ rgb565alsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 #endif
 		o = (unsigned int *) orow;
 		for (xx = 0; xx < width; xx ++) {
-			register unsigned int data;
+			unsigned int data;
 			/*  rrrrrggg gggbbbbb -> rrrrrRRR ggggggGG bbbbbBBB aaaaaaaa */
 			/*  little endian: aaaaaaaa bbbbbBBB ggggggGG rrrrrRRR */
 #ifdef LITTLE
@@ -506,11 +506,11 @@ rgb565amsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned char *s;
+	unsigned char *s;
 #else
-	register unsigned short *s;	/* read 1 pixels at once */
+	unsigned short *s;	/* read 1 pixels at once */
 #endif
-	register unsigned int *o;
+	unsigned int *o;
 
 	unsigned char *srow = image->data, *orow = pixels;
 
@@ -522,7 +522,7 @@ rgb565amsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 		s = srow;
 		o = (unsigned int *) orow;
 		for (xx = 0; xx < width; xx ++) {
-			register unsigned int data;
+			unsigned int data;
 			/*  rrrrrggg gggbbbbb -> rrrrrRRR gggggg00 bbbbbBBB aaaaaaaa */
 			/*  little endian: aaaaaaaa bbbbbBBB gggggg00 rrrrrRRR */
 #ifdef LITTLE
@@ -559,11 +559,11 @@ rgb555lsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned int *s;	/* read 2 pixels at once */
+	unsigned int *s;	/* read 2 pixels at once */
 #else
-	register unsigned char *s;	/* read 2 pixels at once */
+	unsigned char *s;	/* read 2 pixels at once */
 #endif
-	register unsigned short *o;
+	unsigned short *o;
 	unsigned char *srow = image->data, *orow = pixels;
 
 	width = image->width;
@@ -578,7 +578,7 @@ rgb555lsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 #endif
 		o = (unsigned short *) orow;
 		for (xx = 1; xx < width; xx += 2) {
-			register unsigned int data;
+			unsigned int data;
 #ifdef LITTLE
 			data = *s++;
 			*o++ = (data & 0x7c00) >> 7 | (data & 0x7000) >> 12
@@ -601,7 +601,7 @@ rgb555lsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 		}
 		/* check for last remaining pixel */
 		if (width & 1) {
-			register unsigned short data;
+			unsigned short data;
 #ifdef LITTLE
 			data = *((short *) s);
 #else
@@ -630,11 +630,11 @@ rgb555msb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned char *s;	/* read 2 pixels at once */
+	unsigned char *s;	/* read 2 pixels at once */
 #else
-	register unsigned int *s;	/* read 2 pixels at once */
+	unsigned int *s;	/* read 2 pixels at once */
 #endif
-	register unsigned short *o;
+	unsigned short *o;
 	unsigned char *srow = image->data, *orow = pixels;
 
 	width = image->width;
@@ -645,7 +645,7 @@ rgb555msb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 		s = srow;
 		o = (unsigned short *) orow;
 		for (xx = 1; xx < width; xx += 2) {
-			register unsigned int data;
+			unsigned int data;
 #ifdef LITTLE
 			/* swap endianness first */
 			data = s[0] | s[1] << 8 | s[2] << 16 | s[3] << 24;
@@ -668,7 +668,7 @@ rgb555msb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *c
 		}
 		/* check for last remaining pixel */
 		if (width & 1) {
-			register unsigned short data;
+			unsigned short data;
 #ifdef LITTLE
 			data = *((short *) s);
 			data = ((data >> 8) & 0xff) | ((data & 0xff) << 8);
@@ -697,11 +697,11 @@ rgb555alsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned short *s;	/* read 1 pixels at once */
+	unsigned short *s;	/* read 1 pixels at once */
 #else
-	register unsigned char *s;
+	unsigned char *s;
 #endif
-	register unsigned int *o;
+	unsigned int *o;
 
 	unsigned char *srow = image->data, *orow = pixels;
 
@@ -717,7 +717,7 @@ rgb555alsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 #endif
 		o = (unsigned int *) orow;
 		for (xx = 0; xx < width; xx++) {
-			register unsigned int data;
+			unsigned int data;
 			/*  rrrrrggg gggbbbbb -> rrrrrRRR gggggGGG bbbbbBBB aaaaaaaa */
 			/*  little endian: aaaaaaaa bbbbbBBB gggggGGG rrrrrRRR */
 #ifdef LITTLE
@@ -754,11 +754,11 @@ rgb555amsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 	int bpl;
 
 #ifdef LITTLE
-	register unsigned short *s;	/* read 1 pixels at once */
+	unsigned short *s;	/* read 1 pixels at once */
 #else
-	register unsigned char *s;
+	unsigned char *s;
 #endif
-	register unsigned int *o;
+	unsigned int *o;
 
 	unsigned char *srow = image->data, *orow = pixels;
 
@@ -774,7 +774,7 @@ rgb555amsb (XImage *image, unsigned char *pixels, int rowstride, xlib_colormap *
 #endif
 		o = (unsigned int *) orow;
 		for (xx = 0; xx < width; xx++) {
-			register unsigned int data;
+			unsigned int data;
 			/*  rrrrrggg gggbbbbb -> rrrrrRRR gggggGGG bbbbbBBB aaaaaaaa */
 			/*  little endian: aaaaaaaa bbbbbBBB gggggGGG rrrrrRRR */
 #ifdef LITTLE

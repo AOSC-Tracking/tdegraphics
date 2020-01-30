@@ -174,9 +174,9 @@ class MMXControl
 #define MMXir(op,imm,dst) \
   __asm { op dst,imm }
 #define MMXar(op,addr,dst) \
-  { register __int64 var=*(__int64*)(addr); __asm { op dst,var } }
+  { __int64 var=*(__int64*)(addr); __asm { op dst,var } }
 #define MMXra(op,src,addr) \
-  { register __int64 var; __asm { op [var],src };  *(__int64*)addr = var; } 
+  { __int64 var; __asm { op [var],src };  *(__int64*)addr = var; }
 // Probably not as efficient as GCC macros
 #define MMX 1
 #endif
