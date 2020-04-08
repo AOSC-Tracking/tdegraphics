@@ -35,7 +35,11 @@ namespace Poppler {
 		if ( data.namedDest && !ld )
 		{
 			deleteDest = true;
+#			if defined(HAVE_POPPLER_086)
+			ld = data.doc->doc.findDest( data.namedDest ).get();
+#			else
 			ld = data.doc->doc.findDest( data.namedDest );
+#			endif
 		}
 		
 		if (!ld) return;
@@ -77,7 +81,9 @@ namespace Poppler {
 		m_right = rightAux;
 		m_bottom = bottomAux;
 		
+#		if !defined(HAVE_POPPLER_086)
 		if (deleteDest) delete ld;
+#		endif
 	}
 	
 	LinkDestination::LinkDestination(const TQString &description)
