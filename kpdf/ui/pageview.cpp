@@ -1056,8 +1056,8 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
                 double nX = (double)(selRect.left() + selRect.right()) / (2.0 * (double)contentsWidth());
                 double nY = (double)(selRect.top() + selRect.bottom()) / (2.0 * (double)contentsHeight());
 
-                // zoom up to 400%
-                if ( d->zoomFactor <= 4.0 || zoom <= 1.0 )
+                // zoom up to 800%
+                if ( d->zoomFactor <= 8.0 || zoom <= 1.0 )
                 {
                     d->zoomFactor *= zoom;
                     viewport()->setUpdatesEnabled( false );
@@ -1537,8 +1537,8 @@ void PageView::updateZoom( ZoomMode newZoomMode )
             d->zoomFactor = -1;
             break;
     }
-    if ( newFactor > 4.0 )
-        newFactor = 4.0;
+    if ( newFactor > 8.0 )
+        newFactor = 8.0;
     if ( newFactor < 0.1 )
         newFactor = 0.1;
 
@@ -1582,13 +1582,13 @@ void PageView::updateZoomText()
 
     // add percent items
     TQString double_oh( "00" );
-    const float zoomValue[10] = { 0.125, 0.25, 0.333, 0.5, 0.667, 0.75, 1, 1.25, 1.50, 2 };
+    const float zoomValue[11] = { 0.125, 0.25, 0.333, 0.5, 0.667, 0.75, 1, 1.25, 1.50, 2, 4 };
     int idx = 0,
         selIdx = 2; // use 3 if "fit text" present
     bool inserted = false; //use: "d->zoomMode != ZoomFixed" to hide Fit/* zoom ratio
-    while ( idx < 10 || !inserted )
+    while ( idx < 11 || !inserted )
     {
-        float value = idx < 10 ? zoomValue[ idx ] : newFactor;
+        float value = idx < 11 ? zoomValue[ idx ] : newFactor;
         if ( !inserted && newFactor < (value - 0.0001) )
             value = newFactor;
         else
