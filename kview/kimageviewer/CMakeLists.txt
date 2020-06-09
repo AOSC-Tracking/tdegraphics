@@ -22,9 +22,13 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES
-    kimageviewercanvas.desktop kimageviewer.desktop
-  DESTINATION ${SERVICETYPES_INSTALL_DIR} )
+foreach( _service kimageviewercanvas.desktop kimageviewer.desktop )
+  tde_create_translated_desktop(
+    SOURCE ${_service}
+    DESTINATION ${SERVICETYPES_INSTALL_DIR}
+    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+  )
+endforeach()
 
 
 ##### kimageviewer (shared) #####################

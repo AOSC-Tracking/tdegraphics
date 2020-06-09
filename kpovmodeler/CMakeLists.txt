@@ -32,9 +32,7 @@ link_directories(
 
 tde_install_icons( kpovmodeler_doc kpovmodeler )
 
-install( FILES
-    kpovmodeler.desktop
-  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop( kpovmodeler.desktop )
 
 install( FILES
     kpovmodelershell.rc kpovmodelerui.rc kpovmodelerbrowser.rc

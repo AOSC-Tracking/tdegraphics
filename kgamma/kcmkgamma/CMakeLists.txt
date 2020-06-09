@@ -25,7 +25,10 @@ link_directories(
 
 #### other data #################################
 
-install( FILES kgamma.desktop DESTINATION ${APPS_INSTALL_DIR}/.hidden )
+tde_create_translated_desktop(
+  SOURCE kgamma.desktop
+  DESTINATION ${APPS_INSTALL_DIR}/.hidden
+)
 
 
 #### kcmkgamma (module) #########################

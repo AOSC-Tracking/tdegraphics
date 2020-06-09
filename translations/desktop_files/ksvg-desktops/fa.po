@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:58+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Comment
+#: core/ksvgrenderer.desktop:5
+msgid "KSVG Rendering Backend"
+msgstr "پایانۀ پشتیبانی پرداخت KSVG"
+
+#. Name
+#: plugin/backends/agg/ksvgaggcanvas.desktop:6
+msgid "KSVG Rendering Backend - Anti Grain Geometry"
+msgstr "پایانۀ پشتیبانی پرداخت KSVG - هندسۀ ضد ذره"
+
+#. Comment
+#: plugin/backends/agg/ksvgaggcanvas.desktop:7
+msgid "New, unstable ksvg rendering backend"
+msgstr "جدید، پایانۀ پشتیبانی ناپایدار پرداخت ksvg"
+
+#. Name
+#: plugin/backends/libart/ksvglibartcanvas.desktop:6
+msgid "KSVG Rendering Backend - Libart"
+msgstr "پایانۀ پشتیبانی پرداخت KSVG - Libart"
+
+#. Comment
+#: plugin/backends/libart/ksvglibartcanvas.desktop:7
+msgid "Mature ksvg rendering backend"
+msgstr "پایانۀ پشتیبانی کامل پرداخت ksvg"
+
+#. Name
+#: plugin/ksvgplugin.desktop:2
+msgid "KSVGPlugin"
+msgstr ""
+
+#. Comment
+#: plugin/ksvgplugin.desktop:3
+msgid "Scalable Vector Graphics Viewer"
+msgstr "مشاهده‌گر نگاره‌‌‌‌‌سازی مقیاس‌پذیر برداری"
+
+#. Name
+#: plugin/svgthumbnail.desktop:3
+msgid "Scalable Vector Graphics"
+msgstr "نگاره‌سازی مقیاس‌پذیر برداری"

@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-09 16:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: wa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: bmp/tdefile_bmp.desktop:3
+msgid "BMP Info"
+msgstr "Informåcion sol imådje BMP"
+
+#. Name
+#: dds/tdefile_dds.desktop:3
+msgid "DirectDraw Surface Info"
+msgstr ""
+
+#. Name
+#: dvi/tdefile_dvi.desktop:4
+msgid "DVI Info"
+msgstr "Informåcion sol documint DVI"
+
+#. Name
+#: exr/tdefile_exr.desktop:3
+#, fuzzy
+msgid "EXR Info"
+msgstr "Informåcion sol imådje XBM"
+
+#. Name
+#: gif/tdefile_gif.desktop:3
+msgid "GIF Info"
+msgstr "Informåcion sol imådje GIF"
+
+#. Name
+#: ico/tdefile_ico.desktop:3
+msgid "ICO Info"
+msgstr "Informåcion sol imådjete ICO"
+
+#. Name
+#: jpeg/tdefile_jpeg.desktop:3
+msgid "JPEG EXIF Info"
+msgstr "Informåcion sol imådje JPEG EXIF"
+
+#. Name
+#: pcx/tdefile_pcx.desktop:3
+msgid "PCX File Meta Info"
+msgstr "Informåcion sol imådje PCX"
+
+#. Name
+#: pdf/tdefile_pdf.desktop:3
+msgid "PDF Info"
+msgstr "Informåcion sol documint PDF"
+
+#. Name
+#: png/tdefile_png.desktop:3
+msgid "PNG Info"
+msgstr "Informåcion sol imådje PNG"
+
+#. Name
+#: pnm/tdefile_pnm.desktop:3
+msgid "PNM Info"
+msgstr "Informåcion sol imådje PNM"
+
+#. Name
+#: ps/gsthumbnail.desktop:3
+msgid "PostScript, PDF and DVI Files"
+msgstr ""
+
+#. Name
+#: ps/tdefile_ps.desktop:3
+msgid "PostScript Info"
+msgstr "Informåcion sol documint PostScript"
+
+#. Name
+#: raw/tdefile_raw.desktop:3
+msgid "RAW Camera Files"
+msgstr ""
+
+#. Name
+#: rgb/tdefile_rgb.desktop:3
+msgid "SGI Image (RGB)"
+msgstr ""
+
+#. Name
+#: tga/tdefile_tga.desktop:3
+msgid "Truevision Targa Info"
+msgstr "Informåcion sol imådje Truevision Targa"
+
+#. Name
+#: tiff/tdefile_tiff.desktop:3
+msgid "TIFF File Meta Info"
+msgstr "Informåcion sol imådje TIFF"
+
+#. Name
+#: xbm/tdefile_xbm.desktop:3
+msgid "XBM Info"
+msgstr "Informåcion sol imådje XBM"
+
+#. Name
+#: xpm/tdefile_xpm.desktop:3
+#, fuzzy
+msgid "XPM Info"
+msgstr "Informåcion sol imådje PNM"

@@ -23,7 +23,11 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES kpdf.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop(
+  SOURCE kpdf.desktop
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kpdf-desktops
+)
+
 install( FILES shell.rc DESTINATION ${DATA_INSTALL_DIR}/kpdf )
 
 

@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_HK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: kcontrol/kcmkmrml.desktop:9
+msgid "Image Index"
+msgstr "圖像索引"
+
+#. Comment
+#: kcontrol/kcmkmrml.desktop:11
+msgid "Configuration for using the GNU Image Finding Tool"
+msgstr "GNU 圖像搜尋工具的設定"
+
+#. Keywords
+#: kcontrol/kcmkmrml.desktop:13
+msgid "Images;Search;Query;Find;Gift;kmrml;mrml;CBIR;"
+msgstr "Images;Search;Query;Find;Gift;kmrml;mrml;CBIR;圖像;搜尋;查詢;尋找;"
+
+#. Name
+#: mrml-servicemenu.desktop:6
+msgid "Search for Similar Images..."
+msgstr "尋找類似的圖像..."
+
+#. Comment
+#: mrml.desktop:2
+msgid "Multimedia Retrieval Markup Language Document"
+msgstr "多媒體取得標記語言文件"
+
+#. Name
+#: mrml_part.desktop:4
+msgid "MRML View"
+msgstr "MRML 檢視"
+
+#. Name
+#: server/daemonwatcher.desktop:3
+msgid "KDED KMRML Daemon Watcher"
+msgstr "KDED KMRML 系統程式監察器"
+
+#. Comment
+#: server/daemonwatcher.desktop:4
+msgid "Starts daemons on demand and restarts them on failure"
+msgstr "依要求啟動系統程式並在失敗時重新啟動它們。"

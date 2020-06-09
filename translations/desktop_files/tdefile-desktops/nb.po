@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-09 16:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: bmp/tdefile_bmp.desktop:3
+#, fuzzy
+msgid "BMP Info"
+msgstr "PNM-info"
+
+#. Name
+#: dds/tdefile_dds.desktop:3
+msgid "DirectDraw Surface Info"
+msgstr "DirectDraw Overflate info"
+
+#. Name
+#: dvi/tdefile_dvi.desktop:4
+#, fuzzy
+msgid "DVI Info"
+msgstr "PNM-info"
+
+#. Name
+#: exr/tdefile_exr.desktop:3
+#, fuzzy
+msgid "EXR Info"
+msgstr "XPM-info"
+
+#. Name
+#: gif/tdefile_gif.desktop:3
+#, fuzzy
+msgid "GIF Info"
+msgstr "PNM-info"
+
+#. Name
+#: ico/tdefile_ico.desktop:3
+#, fuzzy
+msgid "ICO Info"
+msgstr "PNM-info"
+
+#. Name
+#: jpeg/tdefile_jpeg.desktop:3
+msgid "JPEG EXIF Info"
+msgstr ""
+
+#. Name
+#: pcx/tdefile_pcx.desktop:3
+msgid "PCX File Meta Info"
+msgstr "PCX-filmetainfo"
+
+#. Name
+#: pdf/tdefile_pdf.desktop:3
+#, fuzzy
+msgid "PDF Info"
+msgstr "PNM-info"
+
+#. Name
+#: png/tdefile_png.desktop:3
+#, fuzzy
+msgid "PNG Info"
+msgstr "PNM-info"
+
+#. Name
+#: pnm/tdefile_pnm.desktop:3
+msgid "PNM Info"
+msgstr "PNM-info"
+
+#. Name
+#: ps/gsthumbnail.desktop:3
+msgid "PostScript, PDF and DVI Files"
+msgstr "PostScript, PDF og DVI filer"
+
+#. Name
+#: ps/tdefile_ps.desktop:3
+msgid "PostScript Info"
+msgstr "PostScript-info"
+
+#. Name
+#: raw/tdefile_raw.desktop:3
+msgid "RAW Camera Files"
+msgstr "RAW-kamerafiler"
+
+#. Name
+#: rgb/tdefile_rgb.desktop:3
+msgid "SGI Image (RGB)"
+msgstr "Bildeindeks"
+
+#. Name
+#: tga/tdefile_tga.desktop:3
+msgid "Truevision Targa Info"
+msgstr "Truevision Targa-info"
+
+#. Name
+#: tiff/tdefile_tiff.desktop:3
+msgid "TIFF File Meta Info"
+msgstr "TIFF-filmetainfo"
+
+#. Name
+#: xbm/tdefile_xbm.desktop:3
+#, fuzzy
+msgid "XBM Info"
+msgstr "XPM-info"
+
+#. Name
+#: xpm/tdefile_xpm.desktop:3
+msgid "XPM Info"
+msgstr "XPM-info"

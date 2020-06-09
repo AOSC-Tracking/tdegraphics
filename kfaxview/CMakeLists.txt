@@ -30,9 +30,21 @@ link_directories(
 #### other data #################################
 
 tde_install_icons( kfaxview )
-install( FILES kfaxview.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+
+tde_create_translated_desktop(
+  SOURCE kfaxview.desktop
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kfaxview-desktops
+)
+
 install( FILES ${CMAKE_SOURCE_DIR}/kviewshell/kviewshell.rc DESTINATION ${DATA_INSTALL_DIR}/kfaxview/kviewshell.rc )
-install( FILES kfaxmultipage.desktop kfaxmultipage_tiff.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+
+foreach( _desktop kfaxmultipage.desktop kfaxmultipage_tiff.desktop )
+  tde_create_translated_desktop(
+    SOURCE ${_desktop}
+    DESTINATION ${SERVICES_INSTALL_DIR}
+    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kfaxview-desktops
+  )
+endforeach()
 
 
 #### kfaxviewpart (module) ######################

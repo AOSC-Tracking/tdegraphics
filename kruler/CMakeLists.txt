@@ -25,9 +25,16 @@ link_directories(
 
 #### other data #################################
 
-install( FILES kruler.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES eventsrc DESTINATION ${DATA_INSTALL_DIR}/kruler )
+tde_create_translated_desktop( kruler.desktop )
+
+tde_create_translated_desktop(
+  SOURCE eventsrc
+  DESTINATION ${DATA_INSTALL_DIR}/kruler
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kruler-eventsrc
+)
+
 install( FILES move.wav DESTINATION ${DATA_INSTALL_DIR}/kruler/sounds )
+
 install( FILES uninstall.desktop DESTINATION ${APPS_INSTALL_DIR}/Graphics RENAME kruler.desktop )
 
 

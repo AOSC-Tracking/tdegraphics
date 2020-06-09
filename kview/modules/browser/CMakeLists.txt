@@ -23,9 +23,17 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES
-    kviewbrowser.desktop kviewbrowser.rc
-  DESTINATION ${DATA_INSTALL_DIR}/kviewviewer/kpartplugins )
+tde_create_translated_desktop(
+  SOURCE kviewbrowser.desktop
+  DESTINATION ${DATA_INSTALL_DIR}/kviewviewer/kpartplugins
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+)
+
+install(
+  FILES
+    kviewbrowser.rc
+  DESTINATION ${DATA_INSTALL_DIR}/kviewviewer/kpartplugins
+)
 
 
 ##### kview_browserplugin (module) ##############

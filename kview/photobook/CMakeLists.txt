@@ -23,7 +23,13 @@ link_directories(
 ##### other data ################################
 
 tde_install_icons( photobook )
-install( FILES photobook.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+
+tde_create_translated_desktop(
+  SOURCE photobook.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+)
+
 install( FILES photobookui.rc DESTINATION ${DATA_INSTALL_DIR}/photobook )
 
 

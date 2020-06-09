@@ -1,0 +1,166 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-09 17:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: config/kviewgeneralconfig.desktop:14
+msgid "Application"
+msgstr ""
+
+#. Comment
+#: config/kviewgeneralconfig.desktop:15
+msgid "Configuration for the standalone Version of KView"
+msgstr "Configuration de la version isolée de KView"
+
+#. Name
+#: config/plugins/kviewpluginsconfig.desktop:14
+#: kviewviewer/config/kviewviewerpluginsconfig.desktop:14
+msgid "Plugins"
+msgstr "Modules externes"
+
+#. Comment
+#: config/plugins/kviewpluginsconfig.desktop:15
+#: kviewviewer/config/kviewviewerpluginsconfig.desktop:15
+msgid "Choose and Configure Your Plugins"
+msgstr "Choisissez et configurez vos modules externes"
+
+#. Comment
+#: kimageviewer/kimageviewer.desktop:6
+msgid "Embeddable Image Viewer Component"
+msgstr "Composant afficheur d'images incorporable"
+
+#. Comment
+#: kimageviewer/kimageviewercanvas.desktop:4
+msgid "Embeddable Image Viewer Canvas (widget that shows an image)"
+msgstr ""
+"Composant afficheur d'images incorporable (widget qui affiche une image)"
+
+#. GenericName
+#: kview.desktop:8
+msgid "Image Viewer"
+msgstr "Afficheur d'images"
+
+#. Name
+#: kview.desktop:10
+#, fuzzy
+msgid "KView"
+msgstr "Afficheur"
+
+#. Name
+#: kviewcanvas/config/kviewcanvasconfig.desktop:14
+msgid "Viewer"
+msgstr "Afficheur"
+
+#. Comment
+#: kviewcanvas/config/kviewcanvasconfig.desktop:15
+msgid "General KViewCanvas Configuration"
+msgstr "Configuration générale de KViewCanvas"
+
+#. Name
+#: kviewcanvas/kviewcanvas.desktop:3
+msgid "KView Image Viewer Widget"
+msgstr "Widget visualisateur d'images KView"
+
+#. Name
+#: kviewviewer/kviewviewer.desktop:6
+msgid "KView Image Viewer"
+msgstr "Visualisateur d'images KView"
+
+#. Name
+#: modules/browser/kviewbrowser.desktop:14
+msgid "Browser"
+msgstr "Navigateur"
+
+#. Comment
+#: modules/browser/kviewbrowser.desktop:15
+msgid ""
+"Enables you to browse through all of the images in the current directory."
+msgstr "Permet de naviguer parmi les images dans le dossier courant."
+
+#. Name
+#: modules/effects/kvieweffects.desktop:13
+msgid "Effects"
+msgstr "Effets"
+
+#. Comment
+#: modules/effects/kvieweffects.desktop:14
+msgid "Provides some image effects"
+msgstr "Fournit des effets sur les images"
+
+#. Name
+#: modules/presenter/config/kviewpresenterconfig.desktop:11
+msgid "Name"
+msgstr "Nom"
+
+#. Comment
+#: modules/presenter/config/kviewpresenterconfig.desktop:12
+msgid "Comment"
+msgstr "Commentaire"
+
+#. Name
+#: modules/presenter/kviewpresenter.desktop:13
+msgid "Presenter"
+msgstr "Présentateur"
+
+#. Comment
+#: modules/presenter/kviewpresenter.desktop:14
+msgid "Creates an imagelist and enables you to create a slideshow"
+msgstr "Crée une liste d'images et vous permet de créer un diaporama"
+
+#. Name
+#: modules/scale/kview_scale.desktop:2
+msgid "Scale"
+msgstr "Échelle"
+
+#. Comment
+#: modules/scale/kview_scale.desktop:3
+msgid "Filter to scale the image"
+msgstr "Filtre pour zoomer une image"
+
+#. Name
+#: modules/scanner/kviewscanner.desktop:13
+msgid "Scanner"
+msgstr ""
+
+#. Comment
+#: modules/scanner/kviewscanner.desktop:14
+msgid "Open images from your scanner into KView"
+msgstr "Ouvre des images de votre scanner dans KView"
+
+#. Name
+#: modules/template/kviewtemplate.desktop:13
+msgid "Template"
+msgstr "Modèle"
+
+#. Comment
+#: modules/template/kviewtemplate.desktop:14
+msgid "A longer description of what the plugin does"
+msgstr "Une plus longue description de ce que fait le module"
+
+#. GenericName
+#. Name
+#: photobook/photobook.desktop:2 photobook/photobook.desktop:6
+msgid "Photobook"
+msgstr "Album photo"
+
+#. Comment
+#: photobook/photobook.desktop:7
+msgid "Easily browse a folder of photographs"
+msgstr "Naviguer facilement dans un dossier contenant des photos"
+
+#~ msgid "TDE Image Viewer Part"
+#~ msgstr "Composant d'affichage d'images de TDE"

@@ -64,8 +64,19 @@ if ( BUILD_KVIEWSHELL )
 
   install( FILES kviewshell.rc DESTINATION ${DATA_INSTALL_DIR}/kviewshell )
   install( FILES kviewerpart.rc DESTINATION ${DATA_INSTALL_DIR}/kviewerpart )
-  install( FILES tdemultipage.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR} )
-  install( FILES emptymultipage.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+
+  tde_create_translated_desktop(
+    SOURCE tdemultipage.desktop
+    DESTINATION ${SERVICETYPES_INSTALL_DIR}
+    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kviewshell-desktops
+  )
+
+  tde_create_translated_desktop(
+    SOURCE emptymultipage.desktop
+    DESTINATION ${SERVICES_INSTALL_DIR}
+    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kviewshell-desktops
+  )
+
   install( FILES kviewshell.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 
 

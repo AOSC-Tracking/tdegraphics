@@ -35,9 +35,11 @@ install( FILES
 
 ##### other data ################################
 
-install( FILES
-    ksvgrenderer.desktop
-  DESTINATION ${SERVICETYPES_INSTALL_DIR} )
+tde_create_translated_desktop(
+  SOURCE ksvgrenderer.desktop
+  DESTINATION ${SERVICETYPES_INSTALL_DIR}
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/ksvg-desktops
+)
 
 
 ##### ksvgcore (static) #########################

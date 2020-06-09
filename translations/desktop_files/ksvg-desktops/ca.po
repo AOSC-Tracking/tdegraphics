@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:58+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Comment
+#: core/ksvgrenderer.desktop:5
+msgid "KSVG Rendering Backend"
+msgstr "Representació en segon pla de KSVG"
+
+#. Name
+#: plugin/backends/agg/ksvgaggcanvas.desktop:6
+msgid "KSVG Rendering Backend - Anti Grain Geometry"
+msgstr "Representació en segon pla de KSVG - Geometria anti gra"
+
+#. Comment
+#: plugin/backends/agg/ksvgaggcanvas.desktop:7
+msgid "New, unstable ksvg rendering backend"
+msgstr "Nou, inestable representador en segon pla de ksvg"
+
+#. Name
+#: plugin/backends/libart/ksvglibartcanvas.desktop:6
+msgid "KSVG Rendering Backend - Libart"
+msgstr "Representació en segon pla de KSVG - Biblioteca d'imatges"
+
+#. Comment
+#: plugin/backends/libart/ksvglibartcanvas.desktop:7
+msgid "Mature ksvg rendering backend"
+msgstr "Representador madur en segon pla de ksvg"
+
+#. Name
+#: plugin/ksvgplugin.desktop:2
+msgid "KSVGPlugin"
+msgstr "Connector KSVG"
+
+#. Comment
+#: plugin/ksvgplugin.desktop:3
+msgid "Scalable Vector Graphics Viewer"
+msgstr "Visualitzador de gràfics vectorials escalables (SVG)"
+
+#. Name
+#: plugin/svgthumbnail.desktop:3
+msgid "Scalable Vector Graphics"
+msgstr "Gràfics vectorials escalables (SVG)"

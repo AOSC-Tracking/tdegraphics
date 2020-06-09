@@ -4,3 +4,9 @@ tde_l10n_create_template(
     CATALOG "kdvi"
     SOURCES "." "tips"
 )
+
+tde_l10n_create_template(
+    CATALOG "desktop_files/kdvi-desktops/"
+    SOURCES *.desktop
+    DESTINATION "${CMAKE_SOURCE_DIR}/translations"
+)

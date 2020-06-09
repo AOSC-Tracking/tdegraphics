@@ -23,7 +23,7 @@ link_directories(
 
 #### other data #################################
 
-install( FILES kfax.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop( kfax.desktop )
 install( FILES kfax.tif kfaxlogo.xpm DESTINATION ${DATA_INSTALL_DIR}/kfax/pics )
 install( FILES kfaxui.rc DESTINATION ${DATA_INSTALL_DIR}/kfax )
 

@@ -28,13 +28,16 @@ link_directories(
 
 #### other data #################################
 
-install( FILES
-    kdvi.desktop
-  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop(
+  SOURCE kdvi.desktop
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kdvi-desktops
+)
 
-install( FILES
-    kdvimultipage.desktop
-  DESTINATION ${SERVICES_INSTALL_DIR} )
+tde_create_translated_desktop(
+  SOURCE kdvimultipage.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kdvi-desktops
+)
 
 install( FILES
     kdvi.kcfg

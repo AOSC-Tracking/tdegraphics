@@ -1,9 +1,6 @@
 [Desktop Entry]
 Icon=kpdf
 Name=KPDF
-Name[ar]=برنامج KPDF
-Name[hi]=के-पीडीएफ
-Name[zh_TW]=KPDF 檢視器
 MimeType=application/pdf
 X-TDE-InitialPreference=7
 X-TDE-ServiceTypes=KParts/ReadOnlyPart

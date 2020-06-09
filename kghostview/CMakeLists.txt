@@ -28,8 +28,18 @@ link_directories(
 #### other data #################################
 
 tde_install_icons( kghostview )
-install( FILES kghostview.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES kghostview_part.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+
+tde_create_translated_desktop(
+  SOURCE kghostview.desktop
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kghostview-desktops
+)
+
+tde_create_translated_desktop(
+  SOURCE kghostview_part.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kghostview-desktops
+)
+
 install( FILES kgv_part.rc kghostviewui.rc DESTINATION ${DATA_INSTALL_DIR}/kghostview )
 install( FILES kghostview.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES kghostview.upd DESTINATION ${KCONF_UPDATE_INSTALL_DIR} )

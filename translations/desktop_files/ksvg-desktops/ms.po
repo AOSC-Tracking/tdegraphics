@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:58+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Comment
+#: core/ksvgrenderer.desktop:5
+msgid "KSVG Rendering Backend"
+msgstr "Tepi Belakang Menrealisasi KSVG"
+
+#. Name
+#: plugin/backends/agg/ksvgaggcanvas.desktop:6
+msgid "KSVG Rendering Backend - Anti Grain Geometry"
+msgstr "Tepi Belakang KSVG - Geometri Anti Bijian"
+
+#. Comment
+#: plugin/backends/agg/ksvgaggcanvas.desktop:7
+msgid "New, unstable ksvg rendering backend"
+msgstr "Tepi Belakang Menrealisasi ksvg yang baru dan tidak stabil"
+
+#. Name
+#: plugin/backends/libart/ksvglibartcanvas.desktop:6
+msgid "KSVG Rendering Backend - Libart"
+msgstr "Tepi Belakang Menrealisasi KSVG - Libart"
+
+#. Comment
+#: plugin/backends/libart/ksvglibartcanvas.desktop:7
+msgid "Mature ksvg rendering backend"
+msgstr "Tepi belakang menrealisasi ksvg matang"
+
+#. Name
+#: plugin/ksvgplugin.desktop:2
+msgid "KSVGPlugin"
+msgstr ""
+
+#. Comment
+#: plugin/ksvgplugin.desktop:3
+msgid "Scalable Vector Graphics Viewer"
+msgstr "Pemapar Grafik Vektor Boleh Skala"
+
+#. Name
+#: plugin/svgthumbnail.desktop:3
+msgid "Scalable Vector Graphics"
+msgstr "Grafik Vektor Boleh Skala"

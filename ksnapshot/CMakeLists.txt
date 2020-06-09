@@ -31,7 +31,7 @@ link_directories(
 ##### other data ################################
 
 tde_install_icons( ksnapshot )
-install( FILES ksnapshot.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop( ksnapshot.desktop )
 
 
 ##### ksnapshot (executable) ####################

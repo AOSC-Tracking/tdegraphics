@@ -24,7 +24,12 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES kviewgeneralconfig.desktop DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog )
+tde_create_translated_desktop(
+  SOURCE kviewgeneralconfig.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+)
+
 install( FILES kview.setdlg DESTINATION ${DATA_INSTALL_DIR}/kview )
 
 

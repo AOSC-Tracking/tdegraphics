@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: kfaxmultipage.desktop:2
+msgid "kfaxview"
+msgstr "केडीई फ्याक्स दृश्य"
+
+#. Comment
+#: kfaxmultipage.desktop:5 kfaxmultipage_tiff.desktop:5
+msgid "KViewShell plugin for fax files"
+msgstr "फ्याक्स फाइलका लागि केडीई दृश्य शेल प्लगइन"
+
+#. Name
+#: kfaxmultipage_tiff.desktop:2
+msgid "kfaxview_tiff"
+msgstr "केडीई फ्याक्स दृश्य टिफ"
+
+#. GenericName
+#: kfaxview.desktop:2
+msgid "Fax Viewer"
+msgstr "फ्याक्स द्रष्टा"
+
+#. Name
+#: kfaxview.desktop:3
+msgid "KFaxView"
+msgstr "केडीई फ्याक्स दृश्य"

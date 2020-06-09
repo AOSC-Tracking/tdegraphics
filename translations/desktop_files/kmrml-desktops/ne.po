@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: kcontrol/kcmkmrml.desktop:9
+msgid "Image Index"
+msgstr "छवि अनुक्रमणिका"
+
+#. Comment
+#: kcontrol/kcmkmrml.desktop:11
+msgid "Configuration for using the GNU Image Finding Tool"
+msgstr "GNU छवि फेला पार्ने उपकरण प्रयोगका लागि कन्फिगरेसन"
+
+#. Keywords
+#: kcontrol/kcmkmrml.desktop:13
+msgid "Images;Search;Query;Find;Gift;kmrml;mrml;CBIR;"
+msgstr ""
+
+#. Name
+#: mrml-servicemenu.desktop:6
+msgid "Search for Similar Images..."
+msgstr "उस्तै छविका लागि खोजी गर्नुहोस्..."
+
+#. Comment
+#: mrml.desktop:2
+msgid "Multimedia Retrieval Markup Language Document"
+msgstr "मल्टिमिडिया पुन: प्राप्ति मार्कअप भाषा कागजात"
+
+#. Name
+#: mrml_part.desktop:4
+msgid "MRML View"
+msgstr "MRML दृश्य"
+
+#. Name
+#: server/daemonwatcher.desktop:3
+msgid "KDED KMRML Daemon Watcher"
+msgstr "KDED KMRML डेइमन दर्शक"
+
+#. Comment
+#: server/daemonwatcher.desktop:4
+msgid "Starts daemons on demand and restarts them on failure"
+msgstr "माग गरेको बेलामा डेइमन सुरु गर्दछ र अफफल भएमा फेरि सुरु गर्दछ"

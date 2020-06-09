@@ -23,9 +23,17 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES
-    kviewscanner.desktop kviewscanner.rc
-  DESTINATION ${DATA_INSTALL_DIR}/kview/kpartplugins )
+tde_create_translated_desktop(
+  SOURCE kviewscanner.desktop
+  DESTINATION ${DATA_INSTALL_DIR}/kview/kpartplugins
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+)
+
+install(
+  FILES
+    kviewscanner.rc
+  DESTINATION ${DATA_INSTALL_DIR}/kview/kpartplugins
+)
 
 
 ##### kview_scannerplugin (module) ##############

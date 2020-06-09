@@ -22,9 +22,11 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES
-    kviewpresenterconfig.desktop
-  DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog )
+tde_create_translated_desktop(
+  SOURCE kviewpresenterconfig.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}/tdeconfiguredialog
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+)
 
 
 ##### kcm_kviewpresenterconfig (module) #########

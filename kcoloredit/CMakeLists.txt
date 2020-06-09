@@ -25,9 +25,12 @@ link_directories(
 
 tde_install_icons( kcoloredit kcolorchooser )
 
-install( FILES
-    kcoloredit.desktop kcolorchooser.desktop
-  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+foreach( _desktop kcoloredit.desktop kcolorchooser.desktop )
+  tde_create_translated_desktop(
+    SOURCE ${_desktop}
+    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kcoloredit-desktops
+)
+endforeach()
 
 install( FILES
     kcoloreditui.rc

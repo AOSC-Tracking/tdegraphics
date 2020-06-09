@@ -24,7 +24,7 @@ link_directories(
 ##### other data ################################
 
 tde_install_icons( kuickshow )
-install( FILES kuickshow.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop( kuickshow.desktop )
 
 
 ##### kuickshow (tdeinit) #######################

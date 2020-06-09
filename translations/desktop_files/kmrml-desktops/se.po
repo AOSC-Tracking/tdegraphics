@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: se\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: kcontrol/kcmkmrml.desktop:9
+msgid "Image Index"
+msgstr "Govvaindeaksa"
+
+#. Comment
+#: kcontrol/kcmkmrml.desktop:11
+msgid "Configuration for using the GNU Image Finding Tool"
+msgstr "Heivet GNU Image Finding Tool"
+
+#. Keywords
+#: kcontrol/kcmkmrml.desktop:13
+msgid "Images;Search;Query;Find;Gift;kmrml;mrml;CBIR;"
+msgstr ""
+
+#. Name
+#: mrml-servicemenu.desktop:6
+msgid "Search for Similar Images..."
+msgstr "Oza seammalágana govaid …"
+
+#. Comment
+#: mrml.desktop:2
+msgid "Multimedia Retrieval Markup Language Document"
+msgstr "«Multimedia Retrieval Markup Language»-dokumeanta"
+
+#. Name
+#: mrml_part.desktop:4
+msgid "MRML View"
+msgstr "MRML-čájeheapmi"
+
+#. Name
+#: server/daemonwatcher.desktop:3
+msgid "KDED KMRML Daemon Watcher"
+msgstr "KDED KMRML-duogášprográmmagoziheaddji"
+
+#. Comment
+#: server/daemonwatcher.desktop:4
+msgid "Starts daemons on demand and restarts them on failure"
+msgstr ""

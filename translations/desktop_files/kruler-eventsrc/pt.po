@@ -1,0 +1,32 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:41+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Comment
+#: eventsrc:3
+msgid "Screen Ruler"
+msgstr "Régua do ecrã do"
+
+#. Name
+#: eventsrc:6
+msgid "Moved by Cursor Keys"
+msgstr "Movimentado com as Teclas de Cursor"
+
+#. Comment
+#: eventsrc:7
+msgid "The ruler has moved pixelwise using the cursor keys"
+msgstr "A régua foi movida com as teclas de cursor"

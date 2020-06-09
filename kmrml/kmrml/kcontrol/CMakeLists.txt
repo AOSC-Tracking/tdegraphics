@@ -23,7 +23,10 @@ link_directories(
 
 #### other data #################################
 
-INSTALL( FILES kcmkmrml.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop(
+  SOURCE kcmkmrml.desktop
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kmrml-desktops
+)
 
 
 #### kcm_kmrml (module) ###########################

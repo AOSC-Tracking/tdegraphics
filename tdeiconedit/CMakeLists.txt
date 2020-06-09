@@ -25,7 +25,7 @@ link_directories(
 
 #### other data #################################
 
-install( FILES tdeiconedit.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop( tdeiconedit.desktop )
 install( FILES tdeiconeditui.rc DESTINATION ${DATA_INSTALL_DIR}/tdeiconedit )
 
 

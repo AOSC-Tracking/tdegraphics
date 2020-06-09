@@ -39,9 +39,13 @@ install( FILES
 
 ##### other data ################################
 
-install( FILES
-    ksvgplugin.desktop svgthumbnail.desktop
-  DESTINATION ${SERVICES_INSTALL_DIR} )
+foreach( _service ksvgplugin.desktop svgthumbnail.desktop )
+  tde_create_translated_desktop(
+    SOURCE ${_service}
+    DESTINATION ${SERVICES_INSTALL_DIR}
+    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/ksvg-desktops
+  )
+endforeach()
 
 install( FILES
     ksvgplugin.rc

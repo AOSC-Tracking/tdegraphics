@@ -28,7 +28,7 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES kooka.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop( kooka.desktop )
 install( FILES kookarc DESTINATION ${CONFIG_INSTALL_DIR} )
 install( FILES kookaui.rc DESTINATION ${DATA_INSTALL_DIR}/kooka )
 

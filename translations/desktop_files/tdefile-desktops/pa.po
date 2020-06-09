@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-09 16:47+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: bmp/tdefile_bmp.desktop:3
+msgid "BMP Info"
+msgstr "BMP ਜਾਣਕਾਰੀ"
+
+#. Name
+#: dds/tdefile_dds.desktop:3
+msgid "DirectDraw Surface Info"
+msgstr ""
+
+#. Name
+#: dvi/tdefile_dvi.desktop:4
+msgid "DVI Info"
+msgstr "DVI ਜਾਣਕਾਰੀ"
+
+#. Name
+#: exr/tdefile_exr.desktop:3
+msgid "EXR Info"
+msgstr "EXR ਜਾਣਕਾਰੀ"
+
+#. Name
+#: gif/tdefile_gif.desktop:3
+msgid "GIF Info"
+msgstr "GIF ਜਾਣਕਾਰੀ"
+
+#. Name
+#: ico/tdefile_ico.desktop:3
+msgid "ICO Info"
+msgstr "ICO ਜਾਣਕਾਰੀ"
+
+#. Name
+#: jpeg/tdefile_jpeg.desktop:3
+msgid "JPEG EXIF Info"
+msgstr "JPEG EXIF ਜਾਣਕਾਰੀ"
+
+#. Name
+#: pcx/tdefile_pcx.desktop:3
+msgid "PCX File Meta Info"
+msgstr ""
+
+#. Name
+#: pdf/tdefile_pdf.desktop:3
+msgid "PDF Info"
+msgstr "PDF ਜਾਣਕਾਰੀ"
+
+#. Name
+#: png/tdefile_png.desktop:3
+msgid "PNG Info"
+msgstr "PNG ਜਾਣਕਾਰੀ"
+
+#. Name
+#: pnm/tdefile_pnm.desktop:3
+msgid "PNM Info"
+msgstr "PNM ਜਾਣਕਾਰੀ"
+
+#. Name
+#: ps/gsthumbnail.desktop:3
+msgid "PostScript, PDF and DVI Files"
+msgstr ""
+
+#. Name
+#: ps/tdefile_ps.desktop:3
+msgid "PostScript Info"
+msgstr "PostScript ਜਾਣਕਾਰੀ"
+
+#. Name
+#: raw/tdefile_raw.desktop:3
+msgid "RAW Camera Files"
+msgstr "RAW ਕੈਮਰਾ ਫਾਇਲਾਂ"
+
+#. Name
+#: rgb/tdefile_rgb.desktop:3
+msgid "SGI Image (RGB)"
+msgstr ""
+
+#. Name
+#: tga/tdefile_tga.desktop:3
+msgid "Truevision Targa Info"
+msgstr ""
+
+#. Name
+#: tiff/tdefile_tiff.desktop:3
+msgid "TIFF File Meta Info"
+msgstr ""
+
+#. Name
+#: xbm/tdefile_xbm.desktop:3
+msgid "XBM Info"
+msgstr "XBM ਜਾਣਕਾਰੀ"
+
+#. Name
+#: xpm/tdefile_xpm.desktop:3
+msgid "XPM Info"
+msgstr "XPM ਜਾਣਕਾਰੀ"

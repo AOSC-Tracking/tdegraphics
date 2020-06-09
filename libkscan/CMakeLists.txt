@@ -30,7 +30,10 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES scanservice.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+tde_create_translated_desktop(
+  SOURCE scanservice.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+)
 
 
 ##### kscan (shared) ############################

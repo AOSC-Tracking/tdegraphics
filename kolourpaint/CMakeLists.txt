@@ -35,7 +35,7 @@ link_directories(
 
 ##### other data ################################
 
-install( FILES kolourpaint.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+tde_create_translated_desktop( kolourpaint.desktop )
 install( FILES kolourpaintui.rc DESTINATION ${DATA_INSTALL_DIR}/kolourpaint )
 
 

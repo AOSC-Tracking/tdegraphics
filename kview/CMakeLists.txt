@@ -31,7 +31,12 @@ link_directories(
 ##### other data ################################
 
 tde_install_icons( kview )
-install( FILES kview.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+
+tde_create_translated_desktop(
+  SOURCE kview.desktop
+  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+)
+
 install( FILES kviewui.rc DESTINATION ${DATA_INSTALL_DIR}/kview )
 
 

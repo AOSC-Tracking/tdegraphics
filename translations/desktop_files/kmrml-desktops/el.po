@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-08 23:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Name
+#: kcontrol/kcmkmrml.desktop:9
+msgid "Image Index"
+msgstr "Ευρετήριο εικόνων"
+
+#. Comment
+#: kcontrol/kcmkmrml.desktop:11
+msgid "Configuration for using the GNU Image Finding Tool"
+msgstr "Ρύθμιση για τη χρήση του εργαλείου αναζήτησης εικόνων GIFT"
+
+#. Keywords
+#: kcontrol/kcmkmrml.desktop:13
+msgid "Images;Search;Query;Find;Gift;kmrml;mrml;CBIR;"
+msgstr "Εικόνες;Αναζήτηση;Ερώτηση;Αναζήτηση;Gift;kmrml;mrml;CBIR;"
+
+#. Name
+#: mrml-servicemenu.desktop:6
+msgid "Search for Similar Images..."
+msgstr "Αναζήτηση για παρόμοιες εικόνες..."
+
+#. Comment
+#: mrml.desktop:2
+msgid "Multimedia Retrieval Markup Language Document"
+msgstr "Έγγραφο Multimedia Retrieval Markup Language"
+
+#. Name
+#: mrml_part.desktop:4
+msgid "MRML View"
+msgstr "Προβολή MRML"
+
+#. Name
+#: server/daemonwatcher.desktop:3
+msgid "KDED KMRML Daemon Watcher"
+msgstr "Επόπτης δαίμονα KMRML KDED"
+
+#. Comment
+#: server/daemonwatcher.desktop:4
+msgid "Starts daemons on demand and restarts them on failure"
+msgstr "Εκκινεί δαίμονες όταν ζητηθεί και τους επανεκκινεί κατά την αποτυχία"
