@@ -119,7 +119,7 @@ tde_add_library( kpovmodeler SHARED AUTOMOC
 
 ##### libkpovmodelerpart (module) ###############
 
-configure_file( ${CMAKE_SOURCE_DIR}/cmake/modules/template_dummy_cpp.cmake dummy.cpp COPYONLY )
+configure_file( ${TDE_CMAKE_TEMPLATES}/tde_dummy_cpp.cmake dummy.cpp COPYONLY )
 
 tde_add_kpart( libkpovmodelerpart AUTOMOC
   SOURCES dummy.cpp
