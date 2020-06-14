@@ -29,14 +29,13 @@ if( WITH_GCC_VISIBILITY )
 endif( )
 
 
-# freetype2
-##### check for fontconfig ######################
+##### check for freetype #####################
 if( BUILD_KDVI OR BUILD_KPDF OR BUILD_KSVG )
   pkg_search_module( FREETYPE freetype2 )
   if( FREETYPE_FOUND )
     set( HAVE_FREETYPE 1 )
   else( )
-    tde_message_fatal( "freetype2 is required, but was not found on your system" )
+    tde_message_fatal( "freetype is required, but was not found on your system" )
   endif( )
 endif( )
 
