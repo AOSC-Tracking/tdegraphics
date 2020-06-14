@@ -53,12 +53,3 @@ else( )
   tde_message_fatal( "fribidi is required, but was not found on your system" )
 endif( )
 
-
-##### check for fontconfig ######################
-
-pkg_search_module( FONTCONFIG fontconfig )
-if( NOT FONTCONFIG_FOUND )
-    message(FATAL_ERROR "\nfontconfig are required, but not found on your system" )
-endif( NOT FONTCONFIG_FOUND )
-set( HAVE_FONTCONFIG 1 CACHE INTERNAL "" FORCE )
-

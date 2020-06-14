@@ -29,4 +29,5 @@ tde_add_library( splash STATIC_PIC
     SplashPath.cc SplashPattern.cc SplashScreen.cc SplashState.cc
     SplashT1Font.cc SplashT1FontEngine.cc SplashT1FontFile.cc
     SplashXPath.cc SplashXPathScanner.cc
+  LINK ${FREETYPE_LIBRARIES} ${FONTCONFIG_LIBRARIES}
 )

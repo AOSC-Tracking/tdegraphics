@@ -39,5 +39,6 @@ tde_add_library( ksvg SHARED
     ksvgxrgbrender-static text2path-static ksvgart-static
   LINK
     tdehtml-shared ${LCMS_LIBRARY} ${ART_LIBRARIES} ${FRIBIDI_LIBRARIES}
+    ${FREETYPE_LIBRARIES} ${FONTCONFIG_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )

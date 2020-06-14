@@ -89,4 +89,5 @@ tde_add_library( ksvgdomimpl STATIC_PIC AUTOMOC
     SVGFontFaceUriElementImpl.cc SVGDefinitionSrcElementImpl.cc
     SVGHKernElementImpl.cc SVGVKernElementImpl.cc SVGMetadataElementImpl.cc
     SVGForeignObjectElementImpl.cc svgpathparser.cc
+  LINK kjs-shared
 )

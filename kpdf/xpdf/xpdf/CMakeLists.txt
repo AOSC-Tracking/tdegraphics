@@ -33,4 +33,5 @@ tde_add_library( xpdf STATIC_PIC
     Parser.cc PSOutputDev.cc SecurityHandler.cc SplashOutputDev.cc
     Stream.cc JPXStream.cc TextOutputDev.cc UnicodeMap.cc
     UnicodeTypeTable.cc XRef.cc
+  LINK ${FONTCONFIG_LIBRARIES}
 )
