@@ -28,6 +28,7 @@ include_directories(
 
 link_directories(
   ${TQT_LIBRARY_DIRS}
+  ${ART_LIBRARY_DIRS}
 )
 
 

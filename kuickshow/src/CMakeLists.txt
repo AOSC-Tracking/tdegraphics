@@ -18,6 +18,7 @@ include_directories(
 
 link_directories(
   ${TQT_LIBRARY_DIRS}
+  ${IMLIB_LIBRARY_DIRS}
 )
 
 
