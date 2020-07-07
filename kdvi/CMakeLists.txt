@@ -30,13 +30,13 @@ link_directories(
 
 tde_create_translated_desktop(
   SOURCE kdvi.desktop
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kdvi-desktops
+  PO_DIR kdvi-desktops
 )
 
 tde_create_translated_desktop(
   SOURCE kdvimultipage.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kdvi-desktops
+  PO_DIR kdvi-desktops
 )
 
 install( FILES

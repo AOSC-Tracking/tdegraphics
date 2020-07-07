@@ -37,7 +37,7 @@ link_directories(
 tde_create_translated_desktop(
   SOURCE ksvglibartcanvas.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/ksvg-desktops
+  PO_DIR ksvg-desktops
 )
 
 

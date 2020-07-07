@@ -68,13 +68,13 @@ if ( BUILD_KVIEWSHELL )
   tde_create_translated_desktop(
     SOURCE tdemultipage.desktop
     DESTINATION ${SERVICETYPES_INSTALL_DIR}
-    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kviewshell-desktops
+    PO_DIR kviewshell-desktops
   )
 
   tde_create_translated_desktop(
     SOURCE emptymultipage.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}
-    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kviewshell-desktops
+    PO_DIR kviewshell-desktops
   )
 
   install( FILES kviewshell.kcfg DESTINATION ${KCFG_INSTALL_DIR} )

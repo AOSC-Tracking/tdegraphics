@@ -34,7 +34,7 @@ tde_install_icons( kview )
 
 tde_create_translated_desktop(
   SOURCE kview.desktop
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+  PO_DIR kview-desktops
 )
 
 install( FILES kviewui.rc DESTINATION ${DATA_INSTALL_DIR}/kview )

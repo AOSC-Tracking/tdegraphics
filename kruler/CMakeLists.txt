@@ -30,7 +30,7 @@ tde_create_translated_desktop( kruler.desktop )
 tde_create_translated_desktop(
   SOURCE eventsrc
   DESTINATION ${DATA_INSTALL_DIR}/kruler
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kruler-eventsrc
+  PO_DIR kruler-eventsrc
 )
 
 install( FILES move.wav DESTINATION ${DATA_INSTALL_DIR}/kruler/sounds )

@@ -25,7 +25,7 @@ link_directories(
 
 tde_create_translated_desktop(
   SOURCE kpdf.desktop
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kpdf-desktops
+  PO_DIR kpdf-desktops
 )
 
 install( FILES shell.rc DESTINATION ${DATA_INSTALL_DIR}/kpdf )

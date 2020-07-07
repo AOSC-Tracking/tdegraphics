@@ -31,7 +31,7 @@ link_directories(
 tde_create_translated_desktop(
   SOURCE djvumultipage.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kviewshell-desktops
+  PO_DIR kviewshell-desktops
 )
 
 install( FILES djvumultipage.kcfg DESTINATION ${KCFG_INSTALL_DIR} )

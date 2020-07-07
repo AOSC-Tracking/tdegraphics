@@ -25,13 +25,11 @@ link_directories(
 
 #### other data #################################
 
-foreach( _desktop tdefile_ps.desktop gsthumbnail.desktop )
-  tde_create_translated_desktop(
-    SOURCE ${_desktop}
-    DESTINATION ${SERVICES_INSTALL_DIR}
-    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/tdefile-desktops
-  )
-endforeach()
+tde_create_translated_desktop(
+  SOURCE tdefile_ps.desktop gsthumbnail.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+  PO_DIR tdefile-desktops
+)
 
 
 #### tdefile_ps (module) ########################

@@ -25,7 +25,7 @@ link_directories(
 
 tde_create_translated_desktop(
   SOURCE kcmkmrml.desktop
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kmrml-desktops
+  PO_DIR kmrml-desktops
 )
 
 

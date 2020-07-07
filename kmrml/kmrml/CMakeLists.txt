@@ -33,19 +33,19 @@ install( FILES mrml.protocol DESTINATION ${SERVICES_INSTALL_DIR} )
 tde_create_translated_desktop(
   SOURCE mrml_part.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kmrml-desktops
+  PO_DIR kmrml-desktops
 )
 
 tde_create_translated_desktop(
   SOURCE mrml.desktop
   DESTINATION ${MIME_INSTALL_DIR}/text
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kmrml-desktops
+  PO_DIR kmrml-desktops
 )
 
 tde_create_translated_desktop(
   SOURCE mrml-servicemenu.desktop
   DESTINATION ${DATA_INSTALL_DIR}/konqueror/servicemenus
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kmrml-desktops
+  PO_DIR kmrml-desktops
 )
 
 

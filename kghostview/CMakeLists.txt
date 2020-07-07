@@ -31,13 +31,13 @@ tde_install_icons( kghostview )
 
 tde_create_translated_desktop(
   SOURCE kghostview.desktop
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kghostview-desktops
+  PO_DIR kghostview-desktops
 )
 
 tde_create_translated_desktop(
   SOURCE kghostview_part.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kghostview-desktops
+  PO_DIR kghostview-desktops
 )
 
 install( FILES kgv_part.rc kghostviewui.rc DESTINATION ${DATA_INSTALL_DIR}/kghostview )

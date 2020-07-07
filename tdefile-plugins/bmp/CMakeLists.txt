@@ -25,7 +25,7 @@ link_directories(
 tde_create_translated_desktop(
   SOURCE tdefile_bmp.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/tdefile-desktops
+  PO_DIR tdefile-desktops
 )
 
 

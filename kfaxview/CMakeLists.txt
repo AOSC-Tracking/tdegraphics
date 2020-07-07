@@ -33,18 +33,16 @@ tde_install_icons( kfaxview )
 
 tde_create_translated_desktop(
   SOURCE kfaxview.desktop
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kfaxview-desktops
+  PO_DIR kfaxview-desktops
 )
 
 install( FILES ${CMAKE_SOURCE_DIR}/kviewshell/kviewshell.rc DESTINATION ${DATA_INSTALL_DIR}/kfaxview/kviewshell.rc )
 
-foreach( _desktop kfaxmultipage.desktop kfaxmultipage_tiff.desktop )
-  tde_create_translated_desktop(
-    SOURCE ${_desktop}
-    DESTINATION ${SERVICES_INSTALL_DIR}
-    PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kfaxview-desktops
-  )
-endforeach()
+tde_create_translated_desktop(
+  SOURCE kfaxmultipage.desktop kfaxmultipage_tiff.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+  PO_DIR kfaxview-desktops
+)
 
 
 #### kfaxviewpart (module) ######################

@@ -28,7 +28,7 @@ link_directories(
 tde_create_translated_desktop(
   SOURCE kviewcanvas.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kview-desktops
+  PO_DIR kview-desktops
 )
 
 

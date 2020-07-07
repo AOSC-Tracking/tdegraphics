@@ -37,7 +37,7 @@ tde_install_icons( kpdf )
 tde_create_translated_desktop(
   SOURCE kpdf_part.desktop
   DESTINATION ${SERVICES_INSTALL_DIR}
-  PO_DIR ${CMAKE_SOURCE_DIR}/translations/desktop_files/kpdf-desktops
+  PO_DIR kpdf-desktops
 )
 
 install( FILES part.rc DESTINATION ${DATA_INSTALL_DIR}/kpdfpart )
