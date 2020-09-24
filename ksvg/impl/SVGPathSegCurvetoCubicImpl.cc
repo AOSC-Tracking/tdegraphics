@@ -321,5 +321,3 @@ void SVGPathSegCurvetoCubicRelImpl::putValueProperty(ExecState *exec, int token,
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

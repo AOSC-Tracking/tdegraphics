@@ -29,5 +29,3 @@ SVGVKernElementImpl::SVGVKernElementImpl(DOM::ElementImpl *impl) : SVGElementImp
 SVGVKernElementImpl::~SVGVKernElementImpl()
 {
 }
-
-// vim:ts=4:noet

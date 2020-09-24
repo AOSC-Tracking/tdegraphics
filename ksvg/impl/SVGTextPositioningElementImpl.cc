@@ -194,5 +194,3 @@ void SVGTextPositioningElementImpl::setAttributes()
 	if(KSVG_TOKEN_NOT_PARSED(Y))
 		KSVG_SET_ALT_ATTRIBUTE(Y, "0")
 }
-
-// vim:ts=4:noet

@@ -127,5 +127,3 @@ void InfoDialog::setup( const TQString &fileName, const TQString &documentTitle,
 }
 
 #include "infodialog.moc"
-
-// vim:sw=4:sts=4:ts=8:noet

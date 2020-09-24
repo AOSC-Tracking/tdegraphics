@@ -461,5 +461,3 @@ double SVGAnimationElementImpl::getSimpleDuration() const
 {
 	return m_duration;
 }
-
-// vim:ts=4:noet

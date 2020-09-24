@@ -140,7 +140,4 @@ class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIf
 		
 		TQValueVector<unsigned int> m_vEffects;
 };
-
-// vim:sw=4:ts=4
-
 #endif

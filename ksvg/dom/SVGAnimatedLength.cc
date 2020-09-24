@@ -75,5 +75,3 @@ SVGLength SVGAnimatedLength::animVal() const
 	if(!impl) return SVGLength(0);
 		return SVGLength(impl->animVal());
 }
-
-// vim:ts=4:noet

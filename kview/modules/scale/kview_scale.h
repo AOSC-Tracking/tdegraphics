@@ -44,6 +44,4 @@ private:
 	KImageViewer::Viewer * m_pViewer;
 	KImageViewer::Canvas * m_pCanvas;
 };
-
-// vim:sw=4:ts=4:cindent
 #endif

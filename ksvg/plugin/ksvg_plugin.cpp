@@ -413,5 +413,3 @@ void KSVGPlugin::slotGotURL(const TQString &text)
 	else
 		emit setStatusBarText(text);
 }
-
-// vim:ts=4:noet

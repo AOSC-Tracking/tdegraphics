@@ -94,5 +94,3 @@ SVGAnimatedLength SVGEllipseElement::ry()
 	if(!impl) return SVGAnimatedLength(0);
 	return SVGAnimatedLength(impl->ry());
 }
-
-// vim:ts=4:noet

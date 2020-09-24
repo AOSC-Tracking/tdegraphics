@@ -60,5 +60,3 @@ void SVGTSpanElementImpl::setAttributes()
 {
 	SVGTextPositioningElementImpl::setAttributes();
 }
-
-// vim:ts=4:noet

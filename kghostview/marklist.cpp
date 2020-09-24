@@ -243,5 +243,3 @@ void MarkList::viewportResizeEvent ( TQResizeEvent * )
 	}
     }
 }
-
-// vim:sw=4:sts=4:ts=8:noet

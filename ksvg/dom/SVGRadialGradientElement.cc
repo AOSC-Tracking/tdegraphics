@@ -94,5 +94,3 @@ SVGAnimatedLength SVGRadialGradientElement::fy() const
 	if(!impl) return SVGAnimatedLength(0);
 	return SVGAnimatedLength(impl->fy());
 }
-
-// vim:ts=4:noet

@@ -125,5 +125,3 @@ SVGTransform *SVGTransformList::consolidate()
 	if(!impl || impl->numberOfItems()==0) return 0;
 	return new SVGTransform(impl->consolidate());
 }
-
-// vim:ts=4:noet

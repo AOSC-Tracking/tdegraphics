@@ -29,5 +29,3 @@ SVGMissingGlyphElementImpl::SVGMissingGlyphElementImpl(DOM::ElementImpl *impl) :
 SVGMissingGlyphElementImpl::~SVGMissingGlyphElementImpl()
 {
 }
-
-// vim:ts=4:noet

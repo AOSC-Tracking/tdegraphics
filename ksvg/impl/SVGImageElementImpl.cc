@@ -518,5 +518,3 @@ void SVGImageElementImpl::applyColorProfile(SVGColorProfileElementImpl *profile,
 		}
 	}
 }
-
-// vim:ts=4:noet

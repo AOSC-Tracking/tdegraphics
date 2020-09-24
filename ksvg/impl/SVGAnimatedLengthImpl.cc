@@ -92,5 +92,3 @@ Value SVGAnimatedLengthImpl::getValueProperty(ExecState *exec, int token) const
 			return Undefined();
 	}
 }
-
-// vim:ts=4:noet

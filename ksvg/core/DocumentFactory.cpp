@@ -106,5 +106,3 @@ SVGDocumentImpl *DocumentFactory::requestDocumentImpl(bool bFit) const
 		
 	return impl;
 }
-
-// vim:ts=4:noet

@@ -66,5 +66,3 @@ KSVG_REGISTER_ELEMENT(SVGViewElementImpl, "view")
 }
 
 #endif
-
-// vim:ts=4:noet

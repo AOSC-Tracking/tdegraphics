@@ -361,7 +361,4 @@ class KDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
 
 		TQRect m_selection; //unzoomed selection rect
 };
-
-// vim:sw=4:ts=4
-
 #endif // _KIMAGECANVAS_H

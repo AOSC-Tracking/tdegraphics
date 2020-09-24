@@ -66,5 +66,3 @@ KSVG_REGISTER_ELEMENT(SVGStopElementImpl, "stop")
 }
 
 #endif
-
-// vim:ts=4:noet

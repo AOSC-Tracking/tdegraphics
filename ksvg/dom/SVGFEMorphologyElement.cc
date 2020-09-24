@@ -91,5 +91,3 @@ SVGAnimatedLength SVGFEMorphologyElement::radiusY() const
 	if(!impl) return SVGAnimatedLength(0);
 	return SVGAnimatedLength(impl->radiusY());
 }
-
-// vim:ts=4:noet

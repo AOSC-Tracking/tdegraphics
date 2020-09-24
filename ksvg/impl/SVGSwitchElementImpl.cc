@@ -54,5 +54,3 @@ void SVGSwitchElementImpl::createItem(KSVGCanvas *c)
 		}
 	}
 }
-
-// vim:ts=4:noet

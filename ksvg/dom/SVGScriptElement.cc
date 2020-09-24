@@ -77,5 +77,3 @@ DOM::DOMString SVGScriptElement::type() const
 	if(!impl) return DOM::DOMString();
 	return impl->type();
 }
-
-// vim:ts=4:noet

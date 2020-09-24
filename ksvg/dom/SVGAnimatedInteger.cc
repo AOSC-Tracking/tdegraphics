@@ -80,5 +80,3 @@ long SVGAnimatedInteger::animVal() const
 	if(!impl) return -1;
 	return impl->animVal();
 }
-
-// vim:ts=4:noet

@@ -79,5 +79,3 @@ bool SVGTests::hasExtension(const DOM::DOMString &extension)
 	if(!impl) return false;
 	return impl->hasExtension(extension);
 }
-
-// vim:ts=4:noet

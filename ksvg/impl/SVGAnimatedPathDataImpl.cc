@@ -104,5 +104,3 @@ Value SVGAnimatedPathDataImpl::getValueProperty(ExecState *exec, int token) cons
 			return Undefined();
 }
 }
-
-// vim:ts=4:noet

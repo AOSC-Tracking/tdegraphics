@@ -105,5 +105,3 @@ SVGAnimatedLength SVGMaskElement::height() const
 	if(!impl) return SVGAnimatedLength(0);
 	return SVGAnimatedLength(impl->height());
 }
-
-// vim:ts=4:noet

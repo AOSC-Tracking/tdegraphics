@@ -47,7 +47,4 @@ class KViewKonqExtension: public KParts::BrowserExtension
 		KViewViewer * m_pViewer;
 		KImageViewer::Canvas * m_pCanvas;
 };
-
-// vim:sw=4:ts=4
-
 #endif

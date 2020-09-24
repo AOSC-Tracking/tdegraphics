@@ -2260,4 +2260,3 @@ void TDEIconEditGrid::setModified(bool m)
 
 
 #include "tdeicongrid.moc"
-// vim: set ts=4:

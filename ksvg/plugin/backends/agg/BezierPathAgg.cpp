@@ -122,5 +122,3 @@ void BezierPathAgg::boundingBox(Point *topLeft, Point *bottomRight)
 	*topLeft = Point(x1, y1);
 	*bottomRight = Point(x2, y2);
 }
-
-// vim:ts=4:noet

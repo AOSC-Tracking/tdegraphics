@@ -76,5 +76,3 @@ SVGAnimatedNumber SVGFEDistantLightElement::elevation() const
 	if(!impl) return SVGAnimatedNumber(0);
 	return SVGAnimatedNumber(impl->elevation());
 }
-
-// vim:ts=4:noet

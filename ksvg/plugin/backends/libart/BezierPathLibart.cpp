@@ -156,5 +156,3 @@ void BezierPathLibart::boundingBox(Point *topLeft, Point *bottomRight)
 		*bottomRight = Point(0, 0);
 	}
 }
-
-// vim:ts=4:noet

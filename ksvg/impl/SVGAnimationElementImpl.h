@@ -145,5 +145,3 @@ KSVG_DEFINE_PROTOTYPE(SVGAnimationElementImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGAnimationElementImplProtoFunc, SVGAnimationElementImpl)
 
 #endif
-
-// vim:ts=4:noet

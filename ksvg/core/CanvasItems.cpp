@@ -505,5 +505,3 @@ void MarkerHelper::doEndMarker(SVGShapeImpl *shape, SVGStylableImpl *style, doub
 {
 	doMarker(shape, style, x, y, angle, style->getEndMarker());
 }
-
-// vim:ts=4:noet

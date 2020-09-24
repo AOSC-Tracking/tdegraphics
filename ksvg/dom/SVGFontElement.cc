@@ -65,5 +65,3 @@ SVGFontElement::~SVGFontElement()
 	if(impl)
 		impl->deref();
 }
-
-// vim:ts=4:noet

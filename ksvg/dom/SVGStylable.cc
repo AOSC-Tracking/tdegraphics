@@ -72,5 +72,3 @@ css::CSSValue SVGStylable::getPresentationAttribute(const DOMString &name)
 	return impl->getPresentationAttribute(name);
 }
 */
-
-// vim:ts=4:noet

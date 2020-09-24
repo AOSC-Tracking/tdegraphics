@@ -61,5 +61,3 @@ SVGAnimatedNumberListImpl *SVGFEColorMatrixElementImpl::values() const
 {
 	return m_values;
 }
-
-// vim:ts=4:noet

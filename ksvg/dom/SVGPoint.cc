@@ -93,5 +93,3 @@ SVGPoint SVGPoint::matrixTransform(SVGMatrix &matrix)
 	if(!impl) return SVGPoint(0);
 	return SVGPoint(impl->matrixTransform(*matrix.handle()));
 }
-
-// vim:ts=4:noet

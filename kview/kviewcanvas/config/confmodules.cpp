@@ -139,7 +139,4 @@ void KViewCanvasConfig::configChanged()
 {
 	emit changed( true );
 }
-
-// vim:sw=4:ts=4
-
 #include "confmodules.moc"

@@ -206,5 +206,3 @@ SVGMatrix SVGMatrix::skewY(const double &angle)
 	if(!impl) return SVGMatrix(0);
 	return SVGMatrix(impl->skewY(angle));
 }
-
-// vim:ts=4:noet

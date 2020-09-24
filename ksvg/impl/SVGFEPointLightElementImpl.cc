@@ -59,5 +59,3 @@ SVGAnimatedNumberImpl *SVGFEPointLightElementImpl::z() const
 {
 	return m_z;
 }
-
-// vim:ts=4:noet

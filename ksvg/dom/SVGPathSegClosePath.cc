@@ -42,5 +42,3 @@ SVGPathSegClosePath::~SVGPathSegClosePath()
 {
 	delete impl;
 }
-
-// vim:ts=4:noet

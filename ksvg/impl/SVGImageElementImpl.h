@@ -137,5 +137,3 @@ KSVG_REGISTER_ELEMENT(SVGImageElementImpl, "image")
 }
 
 #endif
-
-// vim:ts=4:noet

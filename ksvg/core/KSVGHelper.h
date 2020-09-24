@@ -140,5 +140,3 @@ int sRGBFromLinearRGB(int linearRGB8bit);
 #endif // __cplusplus
 
 #endif
-
-// vim:ts=4:noet

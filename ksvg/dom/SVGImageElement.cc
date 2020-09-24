@@ -102,5 +102,3 @@ SVGAnimatedPreserveAspectRatio SVGImageElement::preserveAspectRatio() const
 	if(!impl) return SVGAnimatedPreserveAspectRatio(0);
 	return SVGAnimatedPreserveAspectRatio(impl->preserveAspectRatio());
 }
-
-// vim:ts=4:noet

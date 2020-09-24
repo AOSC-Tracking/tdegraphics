@@ -33,7 +33,4 @@ class KMyFileItemList : public TQPtrList<KFileItem>
 	protected:
 		virtual int compareItems( TQPtrCollection::Item item1, TQPtrCollection::Item item2 );
 };
-
-// vim:sw=4:ts=4
-
 #endif

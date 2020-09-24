@@ -949,5 +949,3 @@ KImageHolder * KImageCanvas::createNewClient()
 }
 
 #include "kimagecanvas.moc"
-
-// vim:sw=4:ts=4

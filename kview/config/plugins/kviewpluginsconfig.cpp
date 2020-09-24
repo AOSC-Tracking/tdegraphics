@@ -40,7 +40,4 @@ KViewPluginsConfig::~KViewPluginsConfig()
 {
 	delete m_config;
 }
-
-// vim: sw=4 ts=4 noet
-
 #include "kviewpluginsconfig.moc"

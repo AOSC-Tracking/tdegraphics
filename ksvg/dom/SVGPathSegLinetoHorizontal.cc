@@ -90,5 +90,3 @@ float SVGPathSegLinetoHorizontalRel::x() const
 	if(!impl) return -1;
 	return impl->x();
 }
-
-// vim:ts=4:noet

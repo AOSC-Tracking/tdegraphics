@@ -89,5 +89,3 @@ ThumbCreator::Flags SVGCreator::flags() const
 {
 	return DrawFrame;
 }
-
-// vim: ts=4 sw=4 noet

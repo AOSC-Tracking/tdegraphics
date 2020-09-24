@@ -231,5 +231,3 @@ void SVGPathSegCurvetoQuadraticSmoothRelImpl::putValueProperty(ExecState *exec, 
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

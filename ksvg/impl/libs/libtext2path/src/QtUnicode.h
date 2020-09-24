@@ -145,5 +145,3 @@ else \
 	script = (T2P::Script) QtUnicode::scriptForChar(c); 
 
 #endif
-
-// vim:ts=4:noet

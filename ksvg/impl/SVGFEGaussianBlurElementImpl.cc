@@ -64,5 +64,3 @@ SVGAnimatedNumberImpl *SVGFEGaussianBlurElementImpl::stdDeviationY() const
 void SVGFEGaussianBlurElementImpl::setStdDeviation(float /*stdDeviationX*/, float /*stdDeviationY*/)
 {
 }
-
-// vim:ts=4:noet

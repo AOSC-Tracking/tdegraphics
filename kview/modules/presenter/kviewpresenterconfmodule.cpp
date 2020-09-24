@@ -54,7 +54,4 @@ void KViewPresenterConfModule::createPage( TQFrame * page )
 
 	m_pCheckBox = new TQCheckBox( "This is only for testing...", page );
 }
-
-// vim:sw=4:ts=4
-
 #include "kviewpresenterconfmodule.moc"

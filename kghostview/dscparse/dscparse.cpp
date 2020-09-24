@@ -3427,6 +3427,3 @@ dsc_error(CDSC *dsc, unsigned int explanation,
     /* treat DSC as being correct */
     return CDSC_RESPONSE_CANCEL;
 }
-
-
-// vim:sw=4:sts=4:ts=8:noet

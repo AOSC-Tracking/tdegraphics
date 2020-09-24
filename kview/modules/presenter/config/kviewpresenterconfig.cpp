@@ -66,7 +66,4 @@ void KViewPresenterConfig::save()
 void KViewPresenterConfig::defaults()
 {
 }
-
-// vim:sw=4:ts=4
-
 #include "kviewpresenterconfig.moc"

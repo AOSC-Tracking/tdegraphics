@@ -196,5 +196,3 @@ SVGPathSegCurvetoQuadraticSmoothRel SVGPathElement::createSVGPathSegCurvetoQuadr
 {
 	return impl->createSVGPathSegCurvetoQuadraticSmoothRel(x, y);
 }
-
-// vim:ts=4:noet

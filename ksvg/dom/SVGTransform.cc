@@ -115,5 +115,3 @@ void SVGTransform::setSkewY(double angle)
 	if(impl)
 		impl->setSkewY(angle);
 }
-
-// vim:ts=4:noet

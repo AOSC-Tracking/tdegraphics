@@ -93,5 +93,3 @@ SVGMatrix SVGLocatable::getTransformToElement(const SVGElement &element)
 	if(!impl) return SVGMatrix(0);
 	return SVGMatrix(impl->getTransformToElement(element.handle()));
 }
-
-// vim:ts=4:noet

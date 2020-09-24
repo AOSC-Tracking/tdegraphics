@@ -65,5 +65,3 @@ void KSVGTextChunk::addText(const TQString &text, SVGTextContentElementImpl *tex
 	m_text.append(text);
 	m_textElements.append(textElement);
 }
-
-// vim:ts=4:noet

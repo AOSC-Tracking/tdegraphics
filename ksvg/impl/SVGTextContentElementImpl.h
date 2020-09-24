@@ -111,5 +111,3 @@ KSVG_DEFINE_PROTOTYPE(SVGTextContentElementImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGTextContentElementImplProtoFunc, SVGTextContentElementImpl)
 
 #endif
-
-// vim:ts=4:noet

@@ -104,5 +104,3 @@ void SVGPointImpl::putValueProperty(ExecState *exec, int token, const Value &val
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

@@ -89,5 +89,3 @@ TQString SVGStringListImpl::join(const TQString &seperator) const
 
 	return result;
 }
-
-// vim:ts=4:noet

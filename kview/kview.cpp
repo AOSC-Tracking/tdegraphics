@@ -691,8 +691,5 @@ void KView::statusbarToggled( bool sbvisible )
 	kdDebug( 4600 ) << k_funcinfo << sbvisible << endl;
 	m_pViewer->setProgressInfoEnabled( !sbvisible );
 }
-
-// vim:sw=4:ts=4
-
 #include "kview.moc"
 

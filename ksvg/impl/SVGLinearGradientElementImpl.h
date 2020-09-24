@@ -70,5 +70,3 @@ KSVG_REGISTER_ELEMENT(SVGLinearGradientElementImpl, "linearGradient")
 }
 
 #endif
-
-// vim:ts=4:noet

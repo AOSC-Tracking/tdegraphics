@@ -51,5 +51,3 @@ void SVGBBoxTarget::setBBoxTarget(SVGShapeImpl *target)
 	if(m_target)
 		dynamic_cast<DOM::DomShared *>(m_target)->ref();
 }
-
-// vim:ts=4:noet

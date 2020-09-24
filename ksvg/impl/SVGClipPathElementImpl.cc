@@ -100,5 +100,3 @@ void SVGClipPathElementImpl::setAttributes()
 	if(!m_item)
 		m_item = ownerDoc()->canvas()->createClipPath(this);
 }
-
-// vim:ts=4:noet

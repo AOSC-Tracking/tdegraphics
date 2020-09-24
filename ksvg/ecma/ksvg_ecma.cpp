@@ -332,5 +332,3 @@ TQVariant KSVG::valueToVariant(ExecState *exec, const Value &val)
 
 	return res;
 }
-
-// vim:ts=4:noet

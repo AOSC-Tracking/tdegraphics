@@ -124,5 +124,3 @@ void SVGFilterElement::setFilterRes(unsigned long filterResX, unsigned long filt
 	if(impl)
 		impl->setFilterRes(filterResX, filterResY);
 }
-
-// vim:ts=4:noet

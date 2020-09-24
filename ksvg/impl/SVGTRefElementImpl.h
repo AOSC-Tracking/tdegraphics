@@ -48,5 +48,3 @@ KSVG_REGISTER_ELEMENT(SVGTRefElementImpl, "tref")
 }
 
 #endif
-
-// vim:ts=4:noet

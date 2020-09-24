@@ -38,7 +38,3 @@ char *pscopyuntil(FILE *from, FILE *to, long begin, long end,
 		  const char *comment);
 
 #endif 
-
-/* 
- * vim:sw=4:sts=4:ts=8:noet 
- */

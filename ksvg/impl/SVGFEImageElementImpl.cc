@@ -29,5 +29,3 @@ SVGFEImageElementImpl::SVGFEImageElementImpl(DOM::ElementImpl *impl) : SVGElemen
 SVGFEImageElementImpl::~SVGFEImageElementImpl()
 {
 }
-
-// vim:ts=4:noet

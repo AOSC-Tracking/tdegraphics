@@ -87,5 +87,3 @@ SVGPathSegList SVGAnimatedPathData::animatedNormalizedPathSegList() const
 	if(!impl) return SVGPathSegList(0);
 	return SVGPathSegList(impl->animatedNormalizedPathSegList());
 }
-
-// vim:ts=4:noet

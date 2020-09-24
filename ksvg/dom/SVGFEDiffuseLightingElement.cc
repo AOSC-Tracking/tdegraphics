@@ -84,5 +84,3 @@ SVGAnimatedNumber SVGFEDiffuseLightingElement::diffuseConstant() const
 	if(!impl) return SVGAnimatedNumber();
 	return SVGAnimatedNumber(impl->diffuseConstant());
 }
-
-// vim:ts=4:noet

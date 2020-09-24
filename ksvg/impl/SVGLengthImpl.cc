@@ -506,5 +506,3 @@ Value KSVG::getSVGLengthImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGLengthImplConstructor>(exec, "[[svglength.constructor]]");
 }
-
-// vim:ts=4:noet

@@ -90,5 +90,3 @@ SVGAnimatedNumber SVGFESpecularLightingElement::specularExponent() const
 	if(!impl) return SVGAnimatedNumber(0);
 	return SVGAnimatedNumber(impl->specularExponent());
 }
-
-// vim:ts=4:noet

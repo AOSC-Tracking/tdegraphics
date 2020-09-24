@@ -162,5 +162,3 @@ float SVGPathSegCurvetoQuadraticRel::y1() const
 	if(!impl) return -1;
 	return impl->y1();
 }
-
-// vim:ts=4:noet

@@ -90,5 +90,3 @@ void SVGFEGaussianBlurElement::setStdDeviation(float stdDeviationX, float stdDev
 	if(impl)
 		impl->setStdDeviation(stdDeviationX, stdDeviationY);
 }
-
-// vim:ts=4:noet

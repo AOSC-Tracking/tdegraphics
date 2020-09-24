@@ -44,6 +44,4 @@ class ImageListItem : public TDEListViewItem
 		TQString m_filename;
 		KURL m_url;
 };
-
-// vim:sw=4:ts=4
 #endif // IMAGELISTITEM_H

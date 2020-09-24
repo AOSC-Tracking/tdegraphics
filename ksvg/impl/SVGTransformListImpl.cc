@@ -99,5 +99,3 @@ SVGMatrixImpl *SVGTransformListImpl::concatenate() const
 
 	return matrix;
 }
-
-// vim:ts=4:noet

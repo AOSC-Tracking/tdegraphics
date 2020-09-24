@@ -79,5 +79,3 @@ namespace T2P
 };
 
 #endif
-
-// vim:ts=4:noet

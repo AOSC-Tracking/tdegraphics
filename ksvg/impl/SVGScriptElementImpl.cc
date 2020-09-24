@@ -181,5 +181,3 @@ void SVGScriptElementImpl::putValueProperty(KJS::ExecState *exec, int token, con
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

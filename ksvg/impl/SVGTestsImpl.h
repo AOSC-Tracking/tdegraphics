@@ -73,5 +73,3 @@ KSVG_DEFINE_PROTOTYPE(SVGTestsImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGTestsImplProtoFunc, SVGTestsImpl)
 
 #endif
-
-// vim:ts=4:noet

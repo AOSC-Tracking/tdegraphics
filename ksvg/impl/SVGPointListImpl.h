@@ -44,5 +44,3 @@ KSVG_DEFINE_PROTOTYPE(SVGPointListImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGPointListImplProtoFunc, SVGPointListImpl)
 
 #endif
-
-// vim:ts=4:noet

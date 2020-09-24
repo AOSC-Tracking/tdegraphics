@@ -96,5 +96,3 @@ SVGAnimatedEnumerationImpl *SVGFETurbulenceElementImpl::type() const
 {
 	return m_type;
 }
-
-// vim:ts=4:noet

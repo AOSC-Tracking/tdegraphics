@@ -70,5 +70,3 @@ SVGAnimatedNumberImpl *SVGFESpecularLightingElementImpl::specularExponent() cons
 {
 	return m_specularExponent;
 }
-
-// vim:ts=4:noet

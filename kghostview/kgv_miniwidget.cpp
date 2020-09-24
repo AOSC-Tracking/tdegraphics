@@ -568,6 +568,3 @@ void KGVMiniWidget::setDisplayOptions( const DisplayOptions& newOptions )
 }
 
 #include "kgv_miniwidget.moc"
-
-
-// vim:sw=4:sts=4:ts=8:sta:tw=78:noet

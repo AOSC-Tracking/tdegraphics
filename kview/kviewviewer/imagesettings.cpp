@@ -69,5 +69,3 @@ bool ImageSettings::isValid( TQString & /*msg*/ )
 }
 
 #include "imagesettings.moc"
-
-// vim:sw=4:ts=4

@@ -76,5 +76,3 @@ KSVG_REGISTER_ELEMENT(SVGClipPathElementImpl, "clipPath")
 }
 
 #endif
-
-// vim:ts=4:noet

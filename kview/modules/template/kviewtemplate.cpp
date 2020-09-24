@@ -38,6 +38,4 @@ KViewTemplate::~KViewTemplate()
 void KViewTemplate::yourSlot()
 {
 }
-
-// vim:sw=4:ts=4:cindent
 #include "kviewtemplate.moc"

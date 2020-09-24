@@ -29,5 +29,3 @@ SVGAltGlyphDefElementImpl::SVGAltGlyphDefElementImpl(DOM::ElementImpl *impl) : S
 SVGAltGlyphDefElementImpl::~SVGAltGlyphDefElementImpl()
 {
 }
-
-// vim:ts=4:noet

@@ -416,5 +416,3 @@ bool KDSCScanHandlerByLine::scanData( char* buf, unsigned int count )
     else
 	return true;
 }
-
-// vim:sw=4:sts=4:ts=8:noet

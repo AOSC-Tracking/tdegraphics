@@ -260,5 +260,3 @@ Value KSVG::getSVGGradientElementImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGGradientElementImplConstructor>(exec, "[[svggradientelement.constructor]]");
 }
-
-// vim:ts=4:noet

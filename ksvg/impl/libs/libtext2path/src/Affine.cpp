@@ -170,5 +170,3 @@ double *Affine::data()
 {
 	return m_affine;
 }
-
-// vim:ts=4:noet

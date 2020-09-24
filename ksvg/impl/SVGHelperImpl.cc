@@ -226,5 +226,3 @@ TQRect SVGHelperImpl::fromUserspace(SVGElementImpl *obj, const TQRect &r)
 
 	return sr;
 }
-
-// vim:ts=4:noet

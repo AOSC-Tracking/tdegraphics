@@ -538,5 +538,3 @@ TQByteArray SVGMaskElementImpl::Mask::rectangle(const TQRect& rect)
 {
 	return rectangle(rect.x(), rect.y(), rect.width(), rect.height());
 }
-
-// vim:ts=4:noet

@@ -509,4 +509,3 @@ std::string Converter::cacheGlyphKey(const GlyphRenderParams *params) const
 	// std::cout << "Glyph cache key: " << key << std::endl;
 	return key;
 }
-// vim:ts=4:noet

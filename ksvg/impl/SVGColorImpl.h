@@ -90,5 +90,3 @@ KSVG_DEFINE_PROTOTYPE(SVGColorImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGColorImplProtoFunc, SVGColorImpl)
 
 #endif
-
-// vim:ts=4:noet

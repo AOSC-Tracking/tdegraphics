@@ -116,5 +116,3 @@ void SVGAngle::convertToSpecifiedUnits(unsigned short unitType)
 	if(impl)
 		impl->convertToSpecifiedUnits(unitType);
 }
-
-// vim:ts=4:noet

@@ -253,5 +253,3 @@ void SVGAnimateTransformElementImpl::handleTimerEvent(bool)
 	}
 	*/
 }
-
-// vim:ts=4:noet

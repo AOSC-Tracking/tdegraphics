@@ -46,7 +46,4 @@ class KViewCanvasConfig : public TDECModule
 		GeneralConfigWidget * m_pWidget;
 		TQPtrList<TQCheckListItem> m_items;
 };
-
-// vim:sw=4:ts=4
-
 #endif // CONFMODULES_H

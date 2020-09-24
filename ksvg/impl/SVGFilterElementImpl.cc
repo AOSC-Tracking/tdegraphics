@@ -115,5 +115,3 @@ SVGAnimatedIntegerImpl *SVGFilterElementImpl::filterResY() const
 void SVGFilterElementImpl::setFilterRes(unsigned long /*filterResX*/, unsigned long /*filterResY*/)
 {
 }
-
-// vim:ts=4:noet

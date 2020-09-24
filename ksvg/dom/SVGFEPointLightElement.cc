@@ -82,5 +82,3 @@ SVGAnimatedNumber SVGFEPointLightElement::z() const
 	if(!impl) return SVGAnimatedNumber(0);
 	return SVGAnimatedNumber(impl->z());
 }
-
-// vim:ts=4:noet

@@ -131,5 +131,3 @@ SVGLength::operator float()
 	if(!impl) return -1;
 	return impl->valueInSpecifiedUnits();
 }
-
-// vim:ts=4:noet

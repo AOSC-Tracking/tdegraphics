@@ -230,5 +230,3 @@ float SVGTimeScheduler::elapsed() const
 {
 	return float(m_creationTime.elapsed()) / 1000.0;
 }
-
-// vim:ts=4:noet

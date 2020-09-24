@@ -502,5 +502,3 @@ KSVG::KSVGCanvas *KSVGReader::canvas()
 {
 	return d->canvas;
 }
-
-// vim:ts=4:noet

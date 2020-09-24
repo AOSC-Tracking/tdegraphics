@@ -74,5 +74,3 @@ float SVGNumber::value() const
 	if(!impl) return -1;
 	return impl->value();
 }
-
-// vim:ts=4:noet

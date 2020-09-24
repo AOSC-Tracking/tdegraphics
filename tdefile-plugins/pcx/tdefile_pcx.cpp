@@ -116,7 +116,3 @@ bool KPcxPlugin::readInfo( KFileMetaInfo& info, uint )
 }
 
 #include "tdefile_pcx.moc"
-
-/* vim: et sw=2 ts=2
-*/
-

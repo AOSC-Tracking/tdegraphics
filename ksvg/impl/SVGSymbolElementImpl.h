@@ -72,5 +72,3 @@ KSVG_REGISTER_ELEMENT(SVGSymbolElementImpl, "symbol")
 }
 
 #endif
-
-// vim:ts=4:noet

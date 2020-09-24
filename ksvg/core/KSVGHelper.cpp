@@ -88,5 +88,3 @@ int sRGBFromLinearRGB(int linearRGB8bit)
 {
 	return KSVGHelper::sRGBFromLinearRGB(linearRGB8bit);
 }
-
-// vim:ts=4:noet

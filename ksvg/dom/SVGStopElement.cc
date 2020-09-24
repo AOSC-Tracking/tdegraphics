@@ -71,5 +71,3 @@ SVGAnimatedNumber SVGStopElement::offset() const
 	if(!impl) return SVGAnimatedNumber(0);
 	return SVGAnimatedNumber(impl->offset());
 }
-
-// vim:ts=4:noet

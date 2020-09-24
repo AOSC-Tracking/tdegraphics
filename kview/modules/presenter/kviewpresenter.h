@@ -99,6 +99,4 @@ private:
 	ImageListItem * m_pCurrentItem;
 	TQTimer * m_pSlideshowTimer;
 };
-
-// vim:sw=4:ts=4:cindent
 #endif

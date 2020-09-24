@@ -44,7 +44,4 @@ class KViewPresenterConfModule : public KPreferencesModule
 	private:
 		TQCheckBox * m_pCheckBox;
 };
-
-// vim:sw=4:ts=4
-
 #endif // KVIEWPRESENTERCONFMODULE_H

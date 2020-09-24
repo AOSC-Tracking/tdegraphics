@@ -75,5 +75,3 @@ SVGElementInstance SVGElementInstanceList::item(unsigned long index)
 	if(!impl) return SVGElementInstance(0);
 	return SVGElementInstance(impl->item(index));
 }
-
-// vim:ts=4:noet

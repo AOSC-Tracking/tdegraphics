@@ -52,5 +52,3 @@ KSVG_REGISTER_ELEMENT(SVGAnimateMotionElementImpl, "animateMotion")
 }
 
 #endif
-
-// vim:ts=4:noet

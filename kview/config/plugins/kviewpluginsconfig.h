@@ -33,7 +33,4 @@ class KViewPluginsConfig : public KSettings::PluginPage
 	private:
 		TDEConfig * m_config;
 };
-
-// vim: sw=4 ts=4 noet
-
 #endif // KVIEWPLUGINSCONFIG_H

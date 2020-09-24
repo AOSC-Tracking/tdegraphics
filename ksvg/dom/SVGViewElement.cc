@@ -73,5 +73,3 @@ SVGStringList SVGViewElement::viewTarget() const
 	if(!impl) return SVGStringList(0);
 	return SVGStringList(impl->viewTarget());
 }
-
-// vim:ts=4:noet

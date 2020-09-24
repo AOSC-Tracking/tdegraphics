@@ -58,6 +58,4 @@ private:
 	TDEAction * m_paBack;
 	TDEAction * m_paForward;
 };
-
-// vim:sw=4:ts=4:cindent
 #endif

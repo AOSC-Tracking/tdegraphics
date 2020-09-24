@@ -35,5 +35,3 @@ void SVGDescElementImpl::createItem(KSVGCanvas *)
 {
 	emit ownerDoc()->gotDescription(collectText());
 }
-
-// vim:ts=4:noet

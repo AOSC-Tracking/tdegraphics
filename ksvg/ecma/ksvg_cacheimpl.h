@@ -61,5 +61,3 @@ inline KJS::Object cacheGlobalBridge(KJS::ExecState *exec, const KJS::Identifier
 }
 
 #endif
-
-// vim:ts=4:noet

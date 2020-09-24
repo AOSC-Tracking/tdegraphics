@@ -173,5 +173,3 @@ void GlyphTracerLibart::closePath(Glyph *glyph)
 	path->m_array.resize(index + 1);
 	path->m_array[index].code = ART_END;
 }
-
-// vim:ts=4:noet

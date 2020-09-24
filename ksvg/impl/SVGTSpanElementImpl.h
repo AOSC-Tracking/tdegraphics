@@ -51,5 +51,3 @@ KSVG_REGISTER_ELEMENT(SVGTSpanElementImpl, "tspan")
 }
 
 #endif
-
-// vim:ts=4:noet

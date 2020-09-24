@@ -78,5 +78,3 @@ Value SVGAnimatedNumberListImpl::getValueProperty(ExecState *exec, int token) co
 			return Undefined();
 	}
 }
-
-// vim:ts=4:noet

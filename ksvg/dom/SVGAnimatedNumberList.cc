@@ -74,5 +74,3 @@ SVGNumberList SVGAnimatedNumberList::animVal() const
 	if(!impl) return 0;
 	    return impl->baseVal();
 }
-
-// vim:ts=4:noet

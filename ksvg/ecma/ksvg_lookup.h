@@ -314,5 +314,3 @@ namespace KSVG
 #define KSVG_CHECK_THIS(ClassName) KSVG_CHECK(ClassName, thisObj)
 
 #endif
-
-// vim:ts=4:noet

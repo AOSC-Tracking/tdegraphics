@@ -59,5 +59,3 @@ SVGAnimatedString SVGURIReference::href() const
 	if(!impl) return SVGAnimatedString(0);
 	return SVGAnimatedString(impl->href());
 }
-
-// vim:ts=4:noet

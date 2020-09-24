@@ -80,5 +80,3 @@ KSVG_REGISTER_ELEMENT(SVGCircleElementImpl, "circle")
 }
 
 #endif
-
-// vim:ts=4:noet

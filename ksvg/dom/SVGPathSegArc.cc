@@ -234,5 +234,3 @@ bool SVGPathSegArcRel::sweepFlag() const
 	if(!impl) return false;
 	return impl->sweepFlag();
 }
-
-// vim:ts=4:noet

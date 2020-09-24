@@ -98,5 +98,3 @@ void SVGAnimateMotionElementImpl::handleTimerEvent(bool /*needCombine*/)
 		}
 	}*/
 }
-
-// vim:ts=4:noet

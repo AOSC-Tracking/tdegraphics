@@ -117,5 +117,3 @@ Value SVGForeignObjectElementImpl::getValueProperty(ExecState *exec, int token) 
 			return Undefined();
 	}
 }
-
-// vim:ts=4:noet

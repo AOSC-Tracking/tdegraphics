@@ -64,5 +64,3 @@
 	* kviewviewer.{cpp,h,rc}, kviewviewer_ro.rc:
 		added "rotate clockwise" and changed icon of CCW (patch by
 		Adriaan de Groot)
-
-# vim: sw=4 ts=4 tw=80 noet

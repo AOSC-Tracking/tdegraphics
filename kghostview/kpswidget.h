@@ -383,6 +383,3 @@ inline CDSC_ORIENTATION_ENUM KPSWidget::orientation() const
  */
 
 #endif // __KPSWIDGET_H__
-
-
-// vim:sw=4:sts=4:ts=8:noet

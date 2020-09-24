@@ -41,7 +41,4 @@ class KViewPresenterConfig : public TDECModule
 	private:
 		TQCheckBox * m_pCheckBox;
 };
-
-// vim:sw=4:ts=4
-
 #endif // KVIEWPRESENTERCONFIG_H

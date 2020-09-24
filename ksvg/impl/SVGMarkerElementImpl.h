@@ -117,5 +117,3 @@ KSVG_DEFINE_PROTOTYPE(SVGMarkerElementImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGMarkerElementImplProtoFunc, SVGMarkerElementImpl)
 
 #endif
-
-// vim:ts=4:noet

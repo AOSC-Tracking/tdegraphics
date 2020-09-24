@@ -103,5 +103,3 @@ DOM::DOMString SVGViewSpec::viewTargetString() const
 	if(!impl) return DOM::DOMString();
 	return impl->viewTargetString();
 }
-
-// vim:ts=4:noet

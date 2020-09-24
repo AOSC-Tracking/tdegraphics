@@ -175,6 +175,4 @@ void KViewScale::slotScale()
 	else
 		kdDebug( 4630 ) << "no image to scale" << endl;
 }
-
-// vim:sw=4:ts=4:cindent
 #include "kview_scale.moc"

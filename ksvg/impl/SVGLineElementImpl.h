@@ -82,5 +82,3 @@ KSVG_REGISTER_ELEMENT(SVGLineElementImpl, "line")
 }
 
 #endif
-
-// vim:ts=4:noet

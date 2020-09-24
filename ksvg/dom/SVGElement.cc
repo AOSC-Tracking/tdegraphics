@@ -120,5 +120,3 @@ bool SVGElement::hasAttribute(const DOM::DOMString &name)
 	if(!impl) return false;
 	return impl->hasAttribute(name);
 }
-		  
-// vim:ts=4:noet

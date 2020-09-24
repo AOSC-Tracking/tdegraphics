@@ -197,5 +197,3 @@ TQMap<TQString, DOM::DOMString> SVGLinearGradientElementImpl::gradientAttributes
 	
 	return gradAttributes;
 }
-
-// vim:ts=4:noet

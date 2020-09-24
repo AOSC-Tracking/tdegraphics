@@ -445,5 +445,3 @@ SVGElementImpl *KSVGLoader::getSVGFragment(::KURL url, SVGDocumentImpl *doc, con
 
 	return searcher.result();
 }
-
-// vim:ts=4:noet

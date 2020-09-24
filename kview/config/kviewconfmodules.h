@@ -42,7 +42,4 @@ class KViewGeneralConfig : public TDECModule
 		TQVButtonGroup * m_pResizeGroup;
 		int m_savedPosition;
 };
-
-// vim:sw=4:ts=4
-
 #endif // KVIEWCONFMODULES_H

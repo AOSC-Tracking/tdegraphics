@@ -87,5 +87,3 @@ void SVGAnimatedIntegerImpl::putValueProperty(ExecState *exec, int token, const 
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

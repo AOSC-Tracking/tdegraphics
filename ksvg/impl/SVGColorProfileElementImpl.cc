@@ -267,5 +267,3 @@ TQImage *SVGColorProfileElementImpl::correctImage(TQImage *input)
 
 	return input;
 }
-
-// vim:ts=4:noet

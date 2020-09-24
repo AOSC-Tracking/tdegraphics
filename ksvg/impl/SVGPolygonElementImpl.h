@@ -50,5 +50,3 @@ KSVG_REGISTER_ELEMENT(SVGPolygonElementImpl, "polygon")
 }
 
 #endif
-
-// vim:ts=4:noet

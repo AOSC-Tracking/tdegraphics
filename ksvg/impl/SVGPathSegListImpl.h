@@ -44,5 +44,3 @@ KSVG_DEFINE_PROTOTYPE(SVGPathSegListImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGPathSegListImplProtoFunc, SVGPathSegListImpl)
 
 #endif
-
-// vim:ts=4:noet

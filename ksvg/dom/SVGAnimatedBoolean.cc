@@ -80,5 +80,3 @@ bool SVGAnimatedBoolean::animVal() const
 	if(!impl) return false;
 	return impl->animVal();
 }
-
-// vim:ts=4:noet

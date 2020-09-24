@@ -86,5 +86,3 @@ KSVG_REGISTER_ELEMENT(SVGRectElementImpl, "rect")
 }
 
 #endif
-
-// vim:ts=4:noet

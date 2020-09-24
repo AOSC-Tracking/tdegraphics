@@ -111,5 +111,3 @@ SVGLength *SVGLengthList::appendItem(SVGLength *newItem)
 	if(!impl) return new SVGLength(0);
 	return new SVGLength(impl->appendItem(newItem->handle()));
 }
-
-// vim:ts=4:noet

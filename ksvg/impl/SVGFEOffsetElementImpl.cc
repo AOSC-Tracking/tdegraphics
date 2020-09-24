@@ -60,5 +60,3 @@ SVGAnimatedNumberImpl *SVGFEOffsetElementImpl::dy() const
 {
 	return m_dy;
 }
-
-// vim:ts=4:noet

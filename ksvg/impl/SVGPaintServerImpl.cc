@@ -50,6 +50,3 @@ CanvasPaintServer *SVGPaintServerImpl::paintServer(SVGDocumentImpl *doc, const T
 
 	return pserver;
 }
-
-// vim:ts=4:noet
-

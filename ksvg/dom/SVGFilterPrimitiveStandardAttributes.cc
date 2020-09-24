@@ -84,5 +84,3 @@ SVGAnimatedString SVGFilterPrimitiveStandardAttributes::result() const
 	if(!impl) return SVGAnimatedString(0);
 	return SVGAnimatedString(impl->result());
 }
-
-// vim:ts=4:noet

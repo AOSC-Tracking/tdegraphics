@@ -75,5 +75,3 @@ SVGTransformList SVGAnimatedTransformList::animVal() const
 	if(!impl) return SVGTransformList(0);
 	return SVGTransformList(impl->animVal());
 }
-
-// vim:ts=4:noet

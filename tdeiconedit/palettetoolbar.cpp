@@ -172,7 +172,3 @@ void PaletteToolBar::currentColorChanged(uint color)
 }
 
 #include "palettetoolbar.moc"
-
-/* vim: et sw=2 ts=2
-*/
-

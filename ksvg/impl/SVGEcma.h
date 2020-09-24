@@ -246,5 +246,3 @@ KSVG_DEFINE_PROTOTYPE(SVGDOMDOMImplementationBridgeProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGDOMDOMImplementationBridgeProtoFunc, SVGDOMDOMImplementationBridge)
 
 #endif
-
-// vim:ts=4:noet

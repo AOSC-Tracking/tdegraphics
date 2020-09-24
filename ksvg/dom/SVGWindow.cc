@@ -171,5 +171,3 @@ DOM::DOMString SVGWindow::prompt(const DOM::DOMString &message, const DOM::DOMSt
 	if(!impl) return DOM::DOMString(); // FIXME
 	return impl->prompt(message, _default);
 }
-
-// vim:ts=4:noet

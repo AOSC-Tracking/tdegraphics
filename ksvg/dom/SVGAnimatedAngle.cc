@@ -75,5 +75,3 @@ SVGAngle SVGAnimatedAngle::animVal() const
 	if(!impl) return SVGAngle(0);
 	return SVGAngle(impl->animVal());
 }
-
-// vim:ts=4:noet

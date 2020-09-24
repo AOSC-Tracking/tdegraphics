@@ -1305,5 +1305,3 @@ Value SVGStylableImplProtoFunc::call(ExecState *exec, Object &thisObj, const Lis
 
 	return Undefined();
 }
-
-// vim:ts=4:noet

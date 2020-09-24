@@ -134,5 +134,3 @@ KJS::ExecState *SVGDocument::globalJSExec()
 	if(!impl) return 0;
 	return impl->ecmaEngine()->globalExec();
 }
-		
-// vim:ts=4:noet

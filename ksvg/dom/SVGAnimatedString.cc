@@ -80,5 +80,3 @@ DOM::DOMString SVGAnimatedString::animVal() const
 	if(!impl) return DOM::DOMString();
 	return impl->animVal();
 }
-
-// vim:ts=4:noet

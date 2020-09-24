@@ -107,5 +107,3 @@ Value SVGZoomEventImpl::getValueProperty(ExecState *, int token) const
 			return Undefined();
 	}
 }
-
-// vim:ts=4:noet

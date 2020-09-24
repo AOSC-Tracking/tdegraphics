@@ -75,5 +75,3 @@ SVGAnimatedEnumeration SVGClipPathElement::clipPathUnits() const
 	if(!impl) return SVGAnimatedEnumeration(0);
 	return SVGAnimatedEnumeration(impl->clipPathUnits());
 }
-
-// vim:ts=4:noet

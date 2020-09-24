@@ -464,5 +464,3 @@ KSVG_DEFINE_PROTOTYPE(SVGKeyEventImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGKeyEventImplProtoFunc, SVGKeyEventImpl)
 
 #endif
-
-// vim:ts=4:noet

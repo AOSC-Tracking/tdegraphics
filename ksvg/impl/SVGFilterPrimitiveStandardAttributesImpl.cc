@@ -80,5 +80,3 @@ SVGAnimatedStringImpl *SVGFilterPrimitiveStandardAttributesImpl::result() const
 {
 	return m_result;
 }
-
-// vim:ts=4:noet

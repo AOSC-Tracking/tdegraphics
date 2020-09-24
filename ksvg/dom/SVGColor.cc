@@ -101,5 +101,3 @@ void SVGColor::setColor(unsigned short colorType, const DOM::DOMString &rgbColor
 	if(impl)
 		impl->setColor(colorType, rgbColor, iccColor);
 }
-
-// vim:ts=4:noet

@@ -421,5 +421,3 @@ ArtSVP *LibartCanvas::svpFromPolygon(const KSVGPolygon& polygon)
 	else
 		return 0;
 } 
-
-// vim:ts=4:noet

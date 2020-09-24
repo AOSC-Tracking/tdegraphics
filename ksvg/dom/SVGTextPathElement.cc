@@ -85,5 +85,3 @@ SVGAnimatedEnumeration SVGTextPathElement::spacing() const
 	if(!impl) return SVGAnimatedEnumeration(0);
 	return SVGAnimatedEnumeration(impl->spacing());
 }
-
-// vim:ts=4:noet

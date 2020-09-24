@@ -709,5 +709,3 @@ TQString SVGElementImpl::collectText()
 
 	return text;
 }
-
-// vim:ts=4:noet

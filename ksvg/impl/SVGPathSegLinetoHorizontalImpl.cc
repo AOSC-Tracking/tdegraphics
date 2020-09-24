@@ -163,5 +163,3 @@ void SVGPathSegLinetoHorizontalRelImpl::putValueProperty(ExecState *exec, int to
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

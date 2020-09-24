@@ -526,5 +526,3 @@ bool KPSWidget::x11Event( XEvent* e )
 }
 
 #include "kpswidget.moc"
-
-// vim:sw=4:sts=4:ts=8:noet

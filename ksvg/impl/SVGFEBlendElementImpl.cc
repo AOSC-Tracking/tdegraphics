@@ -60,5 +60,3 @@ SVGAnimatedEnumerationImpl *SVGFEBlendElementImpl::mode() const
 {
 	return m_mode;
 }
-
-// vim:ts=4:noet

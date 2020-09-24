@@ -39,8 +39,4 @@ class ImageSettings : public KPrintDialogPage
 		TQCheckBox * m_pFitImage;
 		TQCheckBox * m_pCenter;
 };
-
-// vim:sw=4:ts=4
-
 #endif // IMAGESETTINGS_H
-

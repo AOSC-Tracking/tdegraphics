@@ -71,5 +71,3 @@ SVGAnimatedLengthImpl *SVGFEMorphologyElementImpl::radiusY() const
 {
 	return m_radiusY;
 }
-
-// vim:ts=4:noet

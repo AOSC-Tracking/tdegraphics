@@ -95,5 +95,3 @@ DOM::DOMString KSVGEcmaEventListener::eventListenerType()
 {
 	return "KSVGEcmaEventListener - " + m_type;
 }
-
-// vim:ts=4:noet

@@ -171,5 +171,3 @@ Value KSVG::getSVGPaintImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGPaintImplConstructor>(exec, "[[svgpaint.constructor]]");
 }
-
-// vim:ts=4:noet

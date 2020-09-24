@@ -85,5 +85,3 @@ SVGAnimatedNumberList SVGFEColorMatrixElement::values() const
 	if(!impl) return SVGAnimatedNumberList(0);
 	return SVGAnimatedNumberList(impl->values());
 }
-
-// vim:ts=4:noet

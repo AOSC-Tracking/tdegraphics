@@ -536,5 +536,3 @@ Value KSVG::getSVGColorImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGColorImplConstructor>(exec, "[[svgcolor.constructor]]");
 }
-
-// vim:ts=4:noet

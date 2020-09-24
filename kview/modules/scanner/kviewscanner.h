@@ -46,6 +46,4 @@ private:
 	KScanDialog * m_pScandlg;
 	KImageViewer::Viewer * m_pViewer;
 };
-
-// vim:sw=4:ts=4:cindent
 #endif

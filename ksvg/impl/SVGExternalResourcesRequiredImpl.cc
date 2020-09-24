@@ -84,5 +84,3 @@ void SVGExternalResourcesRequiredImpl::putValueProperty(ExecState *exec, int tok
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

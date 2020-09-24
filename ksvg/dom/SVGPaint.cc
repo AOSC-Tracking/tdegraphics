@@ -89,5 +89,3 @@ void SVGPaint::setPaint(unsigned short paintType, const DOM::DOMString &uri, con
 	if(impl)
 		impl->setPaint(paintType, uri, rgbColor, iccColor);
 }
-
-// vim:ts=4:noet

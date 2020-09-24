@@ -1743,5 +1743,3 @@ void AggPattern::render(AggCanvas *c)
 		c->m_ras.render(sl, rp);
 	}
 }
-
-// vim:ts=4:noet

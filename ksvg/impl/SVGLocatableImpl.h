@@ -90,5 +90,3 @@ KSVG_DEFINE_PROTOTYPE(SVGLocatableImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGLocatableImplProtoFunc, SVGLocatableImpl)
 
 #endif
-
-// vim:ts=4:noet

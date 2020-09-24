@@ -37,5 +37,3 @@ struct SVGUnitTypes
 }
 
 #endif
-
-// vim:ts=4:noet

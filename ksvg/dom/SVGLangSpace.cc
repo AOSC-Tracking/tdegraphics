@@ -78,5 +78,3 @@ DOM::DOMString SVGLangSpace::xmlspace() const
 	if(!impl) return DOM::DOMString();
 	return impl->xmlspace();
 }
-
-// vim:ts=4:noet

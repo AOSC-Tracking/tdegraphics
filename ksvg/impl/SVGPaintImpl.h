@@ -81,5 +81,3 @@ KJS::Value getSVGPaintImplConstructor(KJS::ExecState *exec);
 }
 
 #endif
-
-// vim:ts=4:noet

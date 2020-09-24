@@ -95,5 +95,3 @@ SVGPoint SVGZoomEvent::newTranslate() const
 	if(!impl) return SVGPoint(0);
 	return SVGPoint(impl->newTranslate());
 }
-
-// vim:ts=4:noet

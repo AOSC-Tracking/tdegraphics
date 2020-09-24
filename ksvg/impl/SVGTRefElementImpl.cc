@@ -72,5 +72,3 @@ void SVGTRefElementImpl::setAttributes()
 		appendChild(impl);
 	}
 }
-
-// vim:ts=4:noet

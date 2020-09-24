@@ -31,5 +31,3 @@ namespace KImageViewer
 	{
 	}
 } //namespace
-
-// vim: sw=4 ts=4

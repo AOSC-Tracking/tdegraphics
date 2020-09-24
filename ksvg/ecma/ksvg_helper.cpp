@@ -64,5 +64,3 @@ TQString KJS::Identifier::qstring() const
 {
 	return TQString((TQChar*) data(), size());
 }
-
-// vim:ts=4:noet

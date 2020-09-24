@@ -864,5 +864,3 @@ bool SVGPathElementImpl::MarkerData::getEndSlope(TQValueVector<SegmentData> segm
 		}
 	}
 }
-
-// vim:ts=4:noet

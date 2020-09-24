@@ -174,5 +174,3 @@ Value SVGTestsImplProtoFunc::call(ExecState *exec, Object &thisObj, const List &
 
 	return Undefined();
 }
-
-// vim:ts=4:noet

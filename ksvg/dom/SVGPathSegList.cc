@@ -110,5 +110,3 @@ SVGPathSeg *SVGPathSegList::appendItem(SVGPathSeg *newItem)
 	if(!impl) return new SVGPathSeg(0);
 	return new SVGPathSeg(impl->appendItem(newItem->handle()));
 }
-
-// vim:ts=4:noet

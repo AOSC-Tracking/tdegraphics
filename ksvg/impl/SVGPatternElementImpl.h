@@ -132,5 +132,3 @@ KSVG_REGISTER_ELEMENT(SVGPatternElementImpl, "pattern")
 }
 
 #endif
-
-// vim:ts=4:noet

@@ -40,5 +40,3 @@ SVGElementInstanceImpl *SVGElementInstanceListImpl::item(unsigned long /*index*/
 {
 	return 0;
 }
-
-// vim:ts=4:noet

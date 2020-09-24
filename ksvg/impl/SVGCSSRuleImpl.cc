@@ -29,5 +29,3 @@ SVGCSSRuleImpl::SVGCSSRuleImpl() : DOM::DomShared()//, css::CSSRule()
 SVGCSSRuleImpl::~SVGCSSRuleImpl()
 {
 }
-
-// vim:ts=4:noet

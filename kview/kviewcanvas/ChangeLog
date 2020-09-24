@@ -14,5 +14,3 @@
 	* kimagecanvas.{h,cpp}:
 		New method boundImageTo( QSize ). Fits the image into the
 		requested width and height.
-
-# vim: sw=4 ts=4 tw=80 noet

@@ -29,5 +29,3 @@ SVGMPathElementImpl::SVGMPathElementImpl(DOM::ElementImpl *impl) : SVGElementImp
 SVGMPathElementImpl::~SVGMPathElementImpl()
 {
 }
-
-// vim:ts=4:noet

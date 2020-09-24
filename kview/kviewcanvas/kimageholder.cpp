@@ -367,5 +367,3 @@ const KPixmap & KImageHolder::checkboardPixmap()
 }
 
 #include "kimageholder.moc"
-
-// vim:sw=4:ts=4

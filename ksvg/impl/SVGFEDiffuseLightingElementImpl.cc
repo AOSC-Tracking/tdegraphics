@@ -60,5 +60,3 @@ SVGAnimatedNumberImpl *SVGFEDiffuseLightingElementImpl::diffuseConstant() const
 {
 	return m_diffuseConstant;
 }
-
-// vim:ts=4:noet

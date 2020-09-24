@@ -210,5 +210,3 @@ float SVGPathSegCurvetoCubicRel::y2() const
 	if(!impl) return -1;
 	return impl->y2();
 }
-
-// vim:ts=4:noet

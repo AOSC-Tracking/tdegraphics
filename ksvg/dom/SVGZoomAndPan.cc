@@ -66,5 +66,3 @@ unsigned short SVGZoomAndPan::zoomAndPan() const
 	if(!impl) return SVG_ZOOMANDPAN_UNKNOWN;
 	return impl->zoomAndPan();
 }
-
-// vim:ts=4:noet

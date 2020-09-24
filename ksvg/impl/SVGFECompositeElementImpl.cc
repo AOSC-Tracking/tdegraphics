@@ -101,5 +101,3 @@ SVGAnimatedNumberImpl *SVGFECompositeElementImpl::k4() const
 {
 	return m_k4;
 }
-
-// vim:ts=4:noet

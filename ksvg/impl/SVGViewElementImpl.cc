@@ -90,5 +90,3 @@ void SVGViewElementImpl::putValueProperty(ExecState *, int token, const Value &,
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

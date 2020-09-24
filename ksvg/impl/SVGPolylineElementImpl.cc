@@ -96,5 +96,3 @@ void SVGPolylineElementImpl::drawMarkers()
 		}
 	}
 }
-
-// vim:ts=4:noet

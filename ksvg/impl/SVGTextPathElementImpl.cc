@@ -236,5 +236,3 @@ Value KSVG::getSVGTextPathElementImplConstructor(ExecState *exec)
 {
     return cacheGlobalBridge<SVGTextPathElementImplConstructor>(exec, "[[svgtextpathelement.constructor]]");
 }
-
-// vim:ts=4:noet

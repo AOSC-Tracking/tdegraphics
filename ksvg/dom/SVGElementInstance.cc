@@ -113,5 +113,3 @@ SVGElementInstance SVGElementInstance::nextSibling() const
 	if(!impl) return SVGElementInstance(0);
 	return SVGElementInstance(impl->nextSibling());
 }
-
-// vim:ts=4:noet

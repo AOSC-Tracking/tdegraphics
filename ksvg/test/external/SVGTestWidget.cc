@@ -202,5 +202,3 @@ void SVGTestWidget::keyReleaseEvent(TQKeyEvent *event)
 	}
 }
 */
-
-// vim:ts=4:noet

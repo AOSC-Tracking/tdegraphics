@@ -111,5 +111,3 @@ DOM::DOMString *SVGStringList::appendItem(DOM::DOMString *newItem)
 	if(!impl) return new DOM::DOMString();
 	return impl->appendItem(new SharedString(newItem));
 }
-
-// vim:ts=4:noet

@@ -348,5 +348,3 @@ void GlyphRenderParams::setCharacter(unsigned short character)
 {
 	m_character = character;
 }
-
-// vim:ts=4:noet

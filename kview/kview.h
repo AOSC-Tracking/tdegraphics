@@ -119,7 +119,4 @@ class KView : public KParts::MainWindow
 
 		KProgress * m_pProgressBar;
 };
-
-// vim:sw=4:ts=4
-
 #endif // KVIEW_H

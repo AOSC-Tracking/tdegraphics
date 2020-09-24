@@ -98,5 +98,3 @@ void Rectangle::bboxUnion(const Rectangle &src1, const Rectangle &src2)
 		setB(Point(T2PMAX(src1x1, src2x1), T2PMAX(src1y1, src2y1)));
 	}
 }
-
-// vim:ts=4:noet

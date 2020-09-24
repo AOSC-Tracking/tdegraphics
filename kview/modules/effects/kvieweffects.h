@@ -42,6 +42,4 @@ private:
 	TQColor m_color;
 	TQImage * m_image;
 };
-
-// vim:sw=4:ts=4:cindent
 #endif // KVIEWEFFECTS_H

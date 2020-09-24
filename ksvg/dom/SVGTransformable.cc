@@ -63,5 +63,3 @@ SVGAnimatedTransformList SVGTransformable::transform()
 	if(!impl) return SVGAnimatedTransformList(0);
 	return SVGAnimatedTransformList(impl->transform());
 }
-
-// vim:ts=4:noet

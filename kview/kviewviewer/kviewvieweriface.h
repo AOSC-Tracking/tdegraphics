@@ -26,5 +26,3 @@ class KViewViewerIface
 };
 
 #endif // KVIEWVIEWERIFACE_H
-
-// vim: sw=4 ts=4

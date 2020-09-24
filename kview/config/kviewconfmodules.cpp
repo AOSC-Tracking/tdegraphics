@@ -84,7 +84,4 @@ void KViewGeneralConfig::resizeChanged( int pos )
 {
 	emit changed( ( pos != m_savedPosition ) );
 }
-
-// vim:sw=4:ts=4
-
 #include "kviewconfmodules.moc"

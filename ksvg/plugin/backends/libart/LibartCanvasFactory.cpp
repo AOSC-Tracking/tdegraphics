@@ -41,5 +41,3 @@ TQObject *LibartCanvasFactory::createObject(TQObject *, const char *, const char
 	int height = (*args.at(0)).toInt();
 	return new LibartCanvas(width, height);
 }
-
-// vim:ts=4:noet

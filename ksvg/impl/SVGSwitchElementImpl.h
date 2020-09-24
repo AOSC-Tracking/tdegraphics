@@ -58,5 +58,3 @@ KSVG_REGISTER_ELEMENT(SVGSwitchElementImpl, "switch")
 }
 
 #endif
-
-// vim:ts=4:noet

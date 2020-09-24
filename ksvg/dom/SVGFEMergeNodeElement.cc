@@ -70,5 +70,3 @@ SVGAnimatedString SVGFEMergeNodeElement::in1() const
 	if(!impl) return SVGAnimatedString(0);
 	return SVGAnimatedString(impl->in1());
 }
-
-// vim:ts=4:noet

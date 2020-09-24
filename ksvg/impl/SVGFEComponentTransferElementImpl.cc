@@ -39,5 +39,3 @@ SVGAnimatedStringImpl *SVGFEComponentTransferElementImpl::in1() const
 {
 	return m_in1;
 }
-
-// vim:ts=4:noet

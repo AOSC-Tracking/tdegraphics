@@ -78,5 +78,3 @@ KSVG_DEFINE_PROTOTYPE(SVGStringListImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGStringListImplProtoFunc, SVGStringListImpl)	
 
 #endif
-
-// vim:ts=4:noet

@@ -121,5 +121,3 @@ void SVGStopElementImpl::setAttributes()
 	if(KSVG_TOKEN_NOT_PARSED(Offset))
 		KSVG_SET_ALT_ATTRIBUTE(Offset, "0")
 }
-
-// vim:ts=4:noet

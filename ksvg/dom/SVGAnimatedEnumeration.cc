@@ -80,5 +80,3 @@ unsigned short SVGAnimatedEnumeration::animVal() const
 	if(!impl) return 0;
 	return impl->animVal();
 }
-
-// vim:ts=4:noet

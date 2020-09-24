@@ -183,5 +183,3 @@ DOM::DOMString SVGWindowImpl::prompt(const DOM::DOMString &message, const DOM::D
 	else
 		return "";
 }
-
-// vim:ts=4:noet

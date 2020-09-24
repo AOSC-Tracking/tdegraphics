@@ -75,5 +75,3 @@ SVGRect SVGAnimatedRect::animVal() const
 	if(!impl) return SVGRect(0);
 	return SVGRect(impl->animVal());
 }
-
-// vim:ts=4:noet

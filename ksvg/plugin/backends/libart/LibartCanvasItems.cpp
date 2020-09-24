@@ -2205,5 +2205,3 @@ void LibartPattern::render(KSVGCanvas *c, ArtSVP *svp, float opacity, TQByteArra
 		ksvg_art_rgb_texture(svp, c->renderingBuffer() + screenBBox.x() * c->nrChannels() + screenBBox.y() * c->rowStride(), screenBBox.left(), screenBBox.top(), screenBBox.right() + 1, screenBBox.bottom() + 1, c->rowStride(), c->nrChannels(), tile.image().bits(), tile.image().width(), tile.image().height(), tile.image().width() * 4, affine, ART_FILTER_NEAREST, 0L, alpha, (art_u8 *)mask.data());
 	}
 }
-
-// vim:ts=4:noet

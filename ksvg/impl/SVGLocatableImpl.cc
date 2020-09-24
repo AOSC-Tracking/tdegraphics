@@ -204,5 +204,3 @@ Value SVGLocatableImplProtoFunc::call(ExecState *exec, Object &thisObj, const Li
 
 	return Undefined();
 }
-
-// vim:ts=4:noet

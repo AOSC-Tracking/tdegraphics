@@ -49,5 +49,3 @@ SVGAnimatedNumberImpl *SVGFEDistantLightElementImpl::elevation() const
 {
 	return m_elevation;
 }
-
-// vim:ts=4:noet

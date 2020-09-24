@@ -72,5 +72,3 @@ FT_Outline_Funcs *GlyphTracer::outlineFuncs()
 	m_outlineMethods = ret;
 	return m_outlineMethods;
 }
-
-// vim:ts=4:noet

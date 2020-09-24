@@ -97,5 +97,3 @@ SVGAnimatedEnumeration SVGFEDisplacementMapElement::yChannelSelector() const
 	if(!impl) return SVGAnimatedEnumeration(0);
 	return SVGAnimatedEnumeration(impl->yChannelSelector());
 }
-
-// vim:ts=4:noet

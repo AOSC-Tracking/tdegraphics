@@ -1061,11 +1061,3 @@ Works only for visiting one buffer at a time."
 &documentation.index;
 
 </book>
-<!--
-Local Variables:
-mode: sgml
-sgml-omittag: nil
-sgml-shorttag: t
-End:
--->
-

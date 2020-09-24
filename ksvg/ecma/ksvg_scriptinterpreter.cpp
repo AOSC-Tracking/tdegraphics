@@ -88,5 +88,3 @@ void KSVGScriptInterpreter::setAttributeSetMode(bool temp)
 {
 	m_attributeSetMode = temp;
 }
-
-// vim:ts=4:noet

@@ -59,5 +59,3 @@ unsigned short SVGColorProfileRuleImpl::renderingIntent() const
 {
 	return m_renderingIntent;
 }
-
-// vim:ts=4:noet

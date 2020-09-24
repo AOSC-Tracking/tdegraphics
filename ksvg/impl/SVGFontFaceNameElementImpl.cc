@@ -29,5 +29,3 @@ SVGFontFaceNameElementImpl::SVGFontFaceNameElementImpl(DOM::ElementImpl *impl) :
 SVGFontFaceNameElementImpl::~SVGFontFaceNameElementImpl()
 {
 }
-
-// vim:ts=4:noet

@@ -45,6 +45,3 @@ DOM::DOMString SVGAltGlyphElementImpl::glyphRef()
 {
 	return "";
 }
-
-
-// vim:ts=4:noet

@@ -87,7 +87,5 @@ class ThumbnailService : public TQObject {
 	bool _busy;
 	bool _enabled;
 };
-
-// vim:sw=4:sts=4:ts=8:sta:tw=78:noet
 #endif // THUMBNAILSERVICE_H
 

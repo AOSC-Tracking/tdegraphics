@@ -281,5 +281,3 @@ Value KSVG::getSVGTextContentElementImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGTextContentElementImplConstructor>(exec, "[[svgtextcontentelement.constructor]]");
 }
-
-// vim:ts=4:noet

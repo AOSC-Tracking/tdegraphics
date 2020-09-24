@@ -56,5 +56,3 @@ KSVG_REGISTER_ELEMENT(SVGAnimateColorElementImpl, "animateColor")
 }
 
 #endif
-
-// vim:ts=4:noet

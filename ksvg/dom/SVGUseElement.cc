@@ -107,5 +107,3 @@ SVGElementInstance SVGUseElement::animatedInstanceRoot() const
 	if(!impl) return SVGElementInstance(0);
 	return impl->animatedInstanceRoot();
 }
-
-// vim:ts=4:noet

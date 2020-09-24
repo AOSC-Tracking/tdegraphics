@@ -60,5 +60,3 @@ Value SVGPathSegListImplProtoFunc::call(ExecState *exec, Object &thisObj, const 
 
 	return obj->call(exec, static_cast<SVGList<SVGPathSegImpl> *>(obj), args, id);
 }
-
-// vim:ts=4:noet

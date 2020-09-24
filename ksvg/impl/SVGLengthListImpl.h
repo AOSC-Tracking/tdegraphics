@@ -44,5 +44,3 @@ KSVG_DEFINE_PROTOTYPE(SVGLengthListImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGLengthListImplProtoFunc, SVGLengthListImpl)	
 
 #endif
-
-// vim:ts=4:noet

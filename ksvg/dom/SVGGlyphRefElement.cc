@@ -77,5 +77,3 @@ DOM::DOMString SVGGlyphRefElement::glyphRef()
 	if(!impl) return DOM::DOMString();
 	return impl->glyphRef();
 }
-
-// vim:ts=4:noet

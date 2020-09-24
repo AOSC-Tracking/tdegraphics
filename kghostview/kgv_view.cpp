@@ -1032,6 +1032,3 @@ void KGVPart::showPopup( int, int, const TQPoint& pos )
 }
 
 #include "kgv_view.moc"
-
-
-// vim:sw=4:sts=4:ts=8:sta:tw=78:noet

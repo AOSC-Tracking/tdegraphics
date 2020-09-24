@@ -111,5 +111,3 @@ SVGNumber *SVGNumberList::appendItem(SVGNumber *newItem)
 	if(!impl) return new SVGNumber(0);
 	return new SVGNumber(impl->appendItem(newItem->handle()));
 }
-
-// vim:ts=4:noet

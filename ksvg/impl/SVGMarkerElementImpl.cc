@@ -420,5 +420,3 @@ Value KSVG::getSVGMarkerElementImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGMarkerElementImplConstructor>(exec, "[[svgmarkerelement.constructor]]");
 }
-
-// vim:ts=4:noet

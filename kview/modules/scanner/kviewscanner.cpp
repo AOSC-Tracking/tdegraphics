@@ -91,6 +91,4 @@ void KViewScanner::slotImgScanned( const TQImage & img )
 	kdDebug( 4630 ) << "received an image from the scanner" << endl;
 	m_pViewer->newImage( img );
 }
-
-// vim:sw=4:ts=4:cindent
 #include "kviewscanner.moc"

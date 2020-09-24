@@ -333,5 +333,3 @@ SVGElement SVGSVGElement::getElementById(const DOM::DOMString &elementId)
 	if(!impl) return SVGElement(0);
 	return SVGSafeCreator<SVGElement, SVGElementImpl>::create(impl->getElementById(elementId));
 }
- 
-// vim:ts=4:noet

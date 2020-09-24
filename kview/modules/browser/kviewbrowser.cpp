@@ -174,6 +174,4 @@ void KViewBrowser::setupDirLister()
 		TQApplication::restoreOverrideCursor();
 	}
 }
-
-// vim:sw=4:ts=4:cindent
 #include "kviewbrowser.moc"

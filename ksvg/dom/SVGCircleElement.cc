@@ -88,5 +88,3 @@ SVGAnimatedLength SVGCircleElement::r()
 	if(!impl) return SVGAnimatedLength(0);
 	return SVGAnimatedLength(impl->r());
 }
-
-// vim:ts=4:noet

@@ -51,5 +51,3 @@ KSVG_REGISTER_ELEMENT(SVGTitleElementImpl, "title")
 }
 
 #endif
-
-// vim:ts=4:noet

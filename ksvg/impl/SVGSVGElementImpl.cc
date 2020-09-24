@@ -978,5 +978,3 @@ Value SVGSVGElementImplProtoFunc::call(ExecState *exec, Object &thisObj, const L
 	
 	return Undefined();
 }
-
-// vim:ts=4:noet

@@ -76,4 +76,3 @@ KSVG_REGISTER_ELEMENT(SVGAElementImpl, "a")
 }
 
 #endif
-// vim:ts=4:noet

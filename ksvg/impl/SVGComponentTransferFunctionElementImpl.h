@@ -62,5 +62,3 @@ public:
 }
 
 #endif
-
-// vim:ts=4:noet

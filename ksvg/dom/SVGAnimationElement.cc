@@ -89,5 +89,3 @@ float SVGAnimationElement::getSimpleDuration()
 	if(!impl) return -1;
 	return impl->getSimpleDuration();
 }
-
-// vim:ts=4:noet

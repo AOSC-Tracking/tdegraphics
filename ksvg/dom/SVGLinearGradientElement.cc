@@ -88,5 +88,3 @@ SVGAnimatedLength SVGLinearGradientElement::y2() const
 	if(!impl) return SVGAnimatedLength(0);
 	return SVGAnimatedLength(impl->y2());
 }
-
-// vim:ts=4:noet

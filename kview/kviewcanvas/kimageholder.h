@@ -100,7 +100,4 @@ class KImageHolder : public TQWidget
 		KPixmap * m_pDoubleBuffer;
 		KPixmap * m_pCheckboardPixmap;
 };
-
-// vim:sw=4:ts=4
-
 #endif // _KIMAGEHOLDER_H

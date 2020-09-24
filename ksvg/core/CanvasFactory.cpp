@@ -172,5 +172,3 @@ TQPtrList<CanvasInfo> CanvasFactory::canvasList()
 {
 	return m_canvasList;
 }
-
-// vim:ts=4:noet

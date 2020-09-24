@@ -80,5 +80,3 @@ KSVG_REGISTER_ELEMENT(SVGTextPathElementImpl, "textPath")
 }
 
 #endif
-
-// vim:ts=4:noet

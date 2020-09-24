@@ -29,5 +29,3 @@ SVGDefinitionSrcElementImpl::SVGDefinitionSrcElementImpl(DOM::ElementImpl *impl)
 SVGDefinitionSrcElementImpl::~SVGDefinitionSrcElementImpl()
 {
 }
-
-// vim:ts=4:noet

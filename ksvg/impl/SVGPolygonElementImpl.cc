@@ -84,5 +84,3 @@ void SVGPolygonElementImpl::drawMarkers()
 		}
 	}
 }
-
-// vim:ts=4:noet

@@ -190,5 +190,3 @@ KSVG_DEFINE_PROTOTYPE(SVGPathElementImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGPathElementImplProtoFunc, SVGPathElementImpl)
 
 #endif
-
-// vim:ts=4:noet

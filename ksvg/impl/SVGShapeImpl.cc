@@ -158,5 +158,3 @@ void SVGShapeImpl::removeItem(KSVGCanvas *c)
 		m_item = 0;
 	}
 }
-
-// vim:ts=4:noet

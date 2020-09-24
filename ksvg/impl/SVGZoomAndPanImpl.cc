@@ -108,5 +108,3 @@ Value KSVG::getSVGZoomAndPanImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGZoomAndPanImplConstructor>(exec, "[[svgzoomandpan.constructor]]");
 }
-
-// vim:ts=4:noet

@@ -469,5 +469,3 @@ int dsc_set_page_bbox(P6(CDSC *dsc, unsigned int page_number,
     int llx, int lly, int urx, int ury));
 
 #endif
-
-// vim:sw=4:sts=4:ts=8:noet

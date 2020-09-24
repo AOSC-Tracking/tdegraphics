@@ -196,5 +196,3 @@ void SVGEllipseElementImpl::createItem(KSVGCanvas *c)
 		c->insert(m_item);
 	}
 }
-
-// vim:ts=4:noet

@@ -75,5 +75,3 @@ KSVG_REGISTER_ELEMENT(SVGGlyphRefElementImpl, "glyphRef")
 }
 
 #endif
-
-// vim:ts=4:noet

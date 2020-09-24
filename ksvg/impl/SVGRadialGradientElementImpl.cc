@@ -212,5 +212,3 @@ TQMap<TQString, DOM::DOMString> SVGRadialGradientElementImpl::gradientAttributes
 	
 	return gradAttributes;
 }
-
-// vim:ts=4:noet

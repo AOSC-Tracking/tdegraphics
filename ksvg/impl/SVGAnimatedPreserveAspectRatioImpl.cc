@@ -79,5 +79,3 @@ Value SVGAnimatedPreserveAspectRatioImpl::getValueProperty(ExecState *exec, int 
 			return Undefined();
 	}
 }
-
-// vim:ts=4:noet

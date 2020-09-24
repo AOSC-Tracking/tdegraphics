@@ -99,5 +99,3 @@ unsigned short SVGColorProfileRule::renderingIntent() const
 	if(!impl) return RENDERING_INTENT_UNKNOWN;
 	return impl->renderingIntent();
 }
-
-// vim:ts=4:noet

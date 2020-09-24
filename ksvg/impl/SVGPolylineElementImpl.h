@@ -50,5 +50,3 @@ KSVG_REGISTER_ELEMENT(SVGPolylineElementImpl, "polyline")
 }
 
 #endif
-
-// vim:ts=4:noet

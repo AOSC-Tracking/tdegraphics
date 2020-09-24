@@ -41,5 +41,3 @@ TQObject *AggCanvasFactory::createObject(TQObject *, const char *, const char *,
 	unsigned int height = (*args.at(0)).toUInt();
 	return new AggCanvas(width, height);
 }
-
-// vim:ts=4:noet

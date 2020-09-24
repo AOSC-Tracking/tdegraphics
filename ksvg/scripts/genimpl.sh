@@ -42,8 +42,3 @@ $cmd_awk -f ../makeimpl $1
 echo "};" >> $1Impl.h
 echo "" >> $1Impl.h
 echo "#endif" >> $1Impl.h
-echo "" >> $1Impl.h
-echo "// vim:ts=4:noet" >> $1Impl.h
-
-echo "// vim:ts=4:noet" >> $1Impl.cc
-#done I hope

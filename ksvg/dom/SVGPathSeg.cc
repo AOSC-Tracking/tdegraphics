@@ -65,5 +65,3 @@ DOM::DOMString SVGPathSeg::pathSegTypeAsLetter() const
 	if(!impl) return DOM::DOMString("");
 	return impl->pathSegTypeAsLetter();
 }
-
-// vim:ts=4:noet

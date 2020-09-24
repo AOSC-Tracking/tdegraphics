@@ -109,5 +109,3 @@ void GlyphTracerAgg::closePath(Glyph *glyph)
 	BezierPathAgg *bpath = static_cast<BezierPathAgg *>(glyph->modifiableBezierPath());
 	bpath->m_storage.close_polygon();
 }
-
-// vim:ts=4:noet

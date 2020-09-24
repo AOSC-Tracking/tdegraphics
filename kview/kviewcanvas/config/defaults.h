@@ -42,5 +42,3 @@ namespace Defaults {
 }
 
 #endif // DEFAULTS_H
-
-// vim: sw=4 ts=4

@@ -94,5 +94,3 @@ void SVGAnimateColorElementImpl::handleTimerEvent()
 		m_connected = false;
 	}
 }
-
-// vim:ts=4:noet

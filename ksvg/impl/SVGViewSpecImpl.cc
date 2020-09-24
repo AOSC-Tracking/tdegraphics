@@ -94,5 +94,3 @@ bool SVGViewSpecImpl::parseViewSpec(const TQString &s)
 	}
 	return true;
 }
-
-// vim:ts=4:noet

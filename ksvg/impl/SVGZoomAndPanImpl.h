@@ -72,5 +72,3 @@ KJS::Value getSVGZoomAndPanImplConstructor(KJS::ExecState *exec);
 }
 
 #endif
-
-// vim:ts=4:noet

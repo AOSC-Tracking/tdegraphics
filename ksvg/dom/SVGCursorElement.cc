@@ -79,5 +79,3 @@ SVGAnimatedLength SVGCursorElement::y() const
 	if(!impl) return SVGAnimatedLength(0);
 	return SVGAnimatedLength(impl->y());
 }
-
-// vim:ts=4:noet

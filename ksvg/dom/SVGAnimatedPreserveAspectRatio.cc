@@ -75,5 +75,3 @@ SVGPreserveAspectRatio SVGAnimatedPreserveAspectRatio::animVal() const
 	if(!impl) return SVGPreserveAspectRatio(0);
 	return SVGPreserveAspectRatio(impl->animVal());
 }
-
-// vim:ts=4:noet

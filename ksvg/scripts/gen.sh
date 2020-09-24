@@ -43,9 +43,3 @@ $cmd_awk -f ../makecc $1
 echo "};" >> $1.h
 echo "" >> $1.h
 echo "#endif" >> $1.h
-echo "" >> $1.h
-
-echo "// vim:ts=4:noet" >> $1.h
-echo "// vim:ts=4:noet" >> $1.cc
-
-#done I hope

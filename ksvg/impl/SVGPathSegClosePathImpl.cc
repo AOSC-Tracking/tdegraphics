@@ -42,5 +42,3 @@ void SVGPathSegClosePathImpl::getDeltasAndSlopes(double curx, double cury, doubl
 	*pstartSlope = startSlope;
 	*pendSlope = endSlope;
 }
-
-// vim:ts=4:noet

@@ -840,5 +840,3 @@ Value SVGDOMDocumentFragmentBridge::getValueProperty(ExecState *, int token) con
 			return Undefined();
 	}
 }
-
-// vim:ts=4:noet

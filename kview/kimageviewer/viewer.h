@@ -94,7 +94,4 @@ class KDE_EXPORT Viewer : public KParts::ReadWritePart
 
 }; //class Viewer
 } //namespace KImageViewer
-
-// vim:sw=4:ts=4
-
 #endif // KIMAGEVIEWER_VIEWER_H

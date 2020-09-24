@@ -236,5 +236,3 @@ Value KSVG::getSVGTransformImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGTransformImplConstructor>(exec, "[[svgtransform.constructor]]");
 }
-
-// vim:ts=4:noet

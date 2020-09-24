@@ -97,5 +97,3 @@ KSVG_REGISTER_ELEMENT(SVGUseElementImpl, "use")
 }
 
 #endif
-
-// vim:ts=4:noet

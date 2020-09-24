@@ -109,5 +109,3 @@ SVGAnimatedNumberImpl *SVGFESpotLightElementImpl::limitingConeAngle() const
 {
 	return m_limitingConeAngle;
 }
-
-// vim:ts=4:noet

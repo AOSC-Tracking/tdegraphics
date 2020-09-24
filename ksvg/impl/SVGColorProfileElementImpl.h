@@ -105,5 +105,3 @@ KSVG_REGISTER_ELEMENT(SVGColorProfileElementImpl, "color-profile")
 }
 
 #endif
-
-// vim:ts=4:noet

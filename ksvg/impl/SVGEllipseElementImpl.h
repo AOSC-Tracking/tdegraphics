@@ -82,5 +82,3 @@ KSVG_REGISTER_ELEMENT(SVGEllipseElementImpl, "ellipse")
 }
 
 #endif
-
-// vim:ts=4:noet

@@ -114,5 +114,3 @@ float SVGPathSegMovetoRel::y() const
 	if(!impl) return -1;
 	return impl->y();
 }
-
-// vim:ts=4:noet

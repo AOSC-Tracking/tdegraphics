@@ -81,5 +81,3 @@ SVGNumberList SVGICCColor::colors() const
 	if(!impl) return SVGNumberList(0);
 	return SVGNumberList(impl->colors());
 }
-
-// vim:ts=4:noet

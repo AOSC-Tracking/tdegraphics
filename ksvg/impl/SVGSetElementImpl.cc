@@ -44,5 +44,3 @@ void SVGSetElementImpl::handleTimerEvent()
 {
 	applyAttribute(getAttributeName(), getTo());
 }
-
-// vim:ts=4:noet

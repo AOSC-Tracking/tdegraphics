@@ -75,5 +75,3 @@ SVGPointList SVGAnimatedPoints::animatedPoints() const
 	if(!impl) return SVGPointList(0);
 	return SVGPointList(impl->animatedPoints());
 }
-
-// vim:ts=4:noet

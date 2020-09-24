@@ -29,5 +29,3 @@ SVGMetadataElementImpl::SVGMetadataElementImpl(DOM::ElementImpl *impl) : SVGElem
 SVGMetadataElementImpl::~SVGMetadataElementImpl()
 {
 }
-
-// vim:ts=4:noet

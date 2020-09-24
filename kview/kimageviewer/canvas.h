@@ -342,7 +342,4 @@ class KDE_EXPORT Canvas
 
 }; //class Canvas
 } //namespace KImageViewer
-
-// vim:sw=4:ts=4
-
 #endif // KIMAGEVIEWER_CANVAS_H

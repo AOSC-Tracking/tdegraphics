@@ -784,5 +784,3 @@ void KSVGCanvas::ChunkManager::clear()
 {
 	m_chunks.clear();
 }
-
-// vim:ts=4:noet

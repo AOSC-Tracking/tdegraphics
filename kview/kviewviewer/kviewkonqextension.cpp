@@ -98,8 +98,4 @@ void KViewKonqExtension::del()
 {
 	m_pViewer->slotDel();
 }
-
-// vim:sw=4:ts=4
-
 #include "kviewkonqextension.moc"
-

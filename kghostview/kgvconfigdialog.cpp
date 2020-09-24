@@ -149,6 +149,3 @@ void  ConfigDialog::showSettings( KGVPart* main ) {
     TQObject::connect( dialog, TQT_SIGNAL( settingsChanged() ), main, TQT_SLOT( slotConfigurationChanged() ) );
     dialog->show();
 }
-
-
-// vim:sw=4:sts=4:ts=8:noet

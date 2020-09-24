@@ -273,5 +273,3 @@ Value KSVG::getSVGAngleImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGAngleImplConstructor>(exec, "[[svgangle.constructor]]");
 }
-
-// vim:ts=4:noet

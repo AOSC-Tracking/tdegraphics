@@ -84,5 +84,3 @@ SVGAnimatedNumber SVGFEOffsetElement::dy() const
 	if(!impl) return SVGAnimatedNumber(0);
 	return SVGAnimatedNumber(impl->dy());
 }
-
-// vim:ts=4:noet

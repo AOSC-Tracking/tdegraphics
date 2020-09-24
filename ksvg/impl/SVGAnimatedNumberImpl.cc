@@ -90,5 +90,3 @@ void SVGAnimatedNumberImpl::putValueProperty(ExecState *exec, int token, const K
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

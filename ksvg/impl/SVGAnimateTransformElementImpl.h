@@ -70,5 +70,3 @@ KSVG_REGISTER_ELEMENT(SVGAnimateTransformElementImpl, "animateTransform")
 }
 
 #endif
-
-// vim:ts=4:noet

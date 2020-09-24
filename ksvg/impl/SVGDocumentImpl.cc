@@ -701,5 +701,3 @@ SVGElementImpl *SVGDocumentImpl::getElementByIdRecursive(SVGSVGElementImpl *star
 
 	return element;
 }
-
-// vim:ts=4:noet

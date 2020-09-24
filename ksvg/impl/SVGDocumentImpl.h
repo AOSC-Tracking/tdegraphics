@@ -242,5 +242,3 @@ KSVG_DEFINE_PROTOTYPE(SVGDocumentImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGDocumentImplProtoFunc, SVGDocumentImpl)
 
 #endif
-
-// vim:ts=4:noet

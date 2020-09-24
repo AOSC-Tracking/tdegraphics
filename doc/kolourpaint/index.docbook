@@ -1487,15 +1487,3 @@ installed on this system and you do not need to follow these generic instruction
 
 &documentation.index;
 </book>
-
-<!--
-Local Variables:
-mode: xml
-sgml-minimize-attributes:nil
-sgml-general-insert-case:lower
-sgml-indent-step:0
-sgml-indent-data:nil
-End:
-
-vim:tabstop=2:shiftwidth=2:expandtab
--->

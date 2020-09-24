@@ -405,5 +405,3 @@ void SVGUseElementImpl::draw()
 			shape->draw();
 	}
 }
-
-// vim:ts=4:noet

@@ -78,5 +78,3 @@ const KURL & ImageListItem::url() const
 {
 	return m_url;
 }
-
-// vim:sw=4:ts=4

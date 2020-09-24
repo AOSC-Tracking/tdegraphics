@@ -111,5 +111,3 @@ DOM::DOMString SVGStyleElement::title() const
 	if(!impl) return DOM::DOMString();
 	return impl->title();
 }
-
-// vim:ts=4:noet

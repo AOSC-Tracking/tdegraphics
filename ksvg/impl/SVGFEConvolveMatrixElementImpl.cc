@@ -145,5 +145,3 @@ SVGAnimatedBooleanImpl *SVGFEConvolveMatrixElementImpl::preserveAlpha() const
 {
 	return m_preserveAlpha;
 }
-
-// vim:ts=4:noet

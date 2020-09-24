@@ -263,5 +263,3 @@ void KSVGWidget::resizeEvent(TQResizeEvent *e)
 
 	emit redraw(TQRect(0, 0, e->size().width(), e->size().height()));
 }
-
-// vim:ts=4:noet

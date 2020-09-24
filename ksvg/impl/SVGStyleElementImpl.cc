@@ -131,5 +131,3 @@ void SVGStyleElementImpl::putValueProperty(KJS::ExecState *exec, int token, cons
 			break;
 	}
 }
-
-// vim:ts=4:noet

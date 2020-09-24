@@ -187,5 +187,3 @@ void SVGAnimateElementImpl::handleTimerEvent()
 	}
 #endif // 0
 }
-
-// vim:ts=4:noet

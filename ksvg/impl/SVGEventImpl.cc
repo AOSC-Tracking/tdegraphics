@@ -988,5 +988,3 @@ bool SVGRegisteredEventListener::operator==(const SVGRegisteredEventListener &ot
 			listener == other.listener &&
 			useCapture == other.useCapture);
 }
-
-// vim:ts=4:noet

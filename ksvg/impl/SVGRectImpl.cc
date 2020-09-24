@@ -153,5 +153,3 @@ void SVGRectImpl::putValueProperty(KJS::ExecState *exec, int token, const KJS::V
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

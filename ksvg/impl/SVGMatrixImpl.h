@@ -126,5 +126,3 @@ KSVG_DEFINE_PROTOTYPE(SVGMatrixImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGMatrixImplProtoFunc, SVGMatrixImpl)
 
 #endif
-
-// vim:ts=4:noet

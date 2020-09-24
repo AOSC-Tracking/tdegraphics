@@ -225,5 +225,3 @@ KSVG_DEFINE_PROTOTYPE(SVGElementImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGElementImplProtoFunc, SVGElementImpl)
 
 #endif
-
-// vim:ts=4:noet

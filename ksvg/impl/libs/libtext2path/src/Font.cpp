@@ -248,5 +248,3 @@ const FontVisualParams *Font::fontParams() const
 {
 	return m_fontParams;
 }
-
-// vim:ts=4:noet

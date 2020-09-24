@@ -60,5 +60,3 @@ Value SVGPointListImplProtoFunc::call(ExecState *exec, Object &thisObj, const Li
 
 	return obj->call(exec, static_cast<SVGList<SVGPointImpl> *>(obj), args, id);
 }
-
-// vim:ts=4:noet

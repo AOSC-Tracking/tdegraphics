@@ -60,5 +60,3 @@ Value SVGNumberListImplProtoFunc::call(ExecState *exec, Object &thisObj, const L
 
 	return obj->call(exec, static_cast<SVGList<SVGNumberImpl> *>(obj), args, id);
 }
-
-// vim:ts=4:noet

@@ -130,5 +130,3 @@ void ScrollBox::clear()
 }
 
 #include "scrollbox.moc"
-
-// vim:sw=4:sts=4:ts=8:noet

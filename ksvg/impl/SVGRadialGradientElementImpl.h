@@ -72,5 +72,3 @@ KSVG_REGISTER_ELEMENT(SVGRadialGradientElementImpl, "radialGradient")
 }
 
 #endif
-
-// vim:ts=4:noet

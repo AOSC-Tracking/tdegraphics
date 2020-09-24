@@ -213,5 +213,3 @@ Value KSVG::getSVGPreserveAspectRatioImplConstructor(ExecState *exec)
 {
     return cacheGlobalBridge<SVGPreserveAspectRatioImplConstructor>(exec, "[[svgpreserveaspectratio.constructor]]");
 }
-
-// vim:ts=4:noet

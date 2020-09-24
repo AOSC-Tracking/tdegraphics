@@ -154,5 +154,3 @@ inline unsigned char SVGMaskElementImpl::Mask::value(int screenX, int screenY) c
 }
 
 #endif
-
-// vim:ts=4:noet

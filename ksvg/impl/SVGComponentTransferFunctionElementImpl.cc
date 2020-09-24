@@ -101,5 +101,3 @@ SVGAnimatedNumberImpl *SVGComponentTransferFunctionElementImpl::offset() const
 {
 	return m_offset;
 }
-
-// vim:ts=4:noet

@@ -30,5 +30,3 @@ SVGDefsElementImpl::SVGDefsElementImpl(DOM::ElementImpl *impl) : SVGContainerImp
 SVGDefsElementImpl::~SVGDefsElementImpl()
 {
 }
-
-// vim:ts=4:noet

@@ -102,5 +102,3 @@ void SVGSymbolElementImpl::putValueProperty(ExecState *exec, int token, const Va
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
     }
 }
-
-// vim:ts=4:noet

@@ -323,5 +323,3 @@ KSVG_DEFINE_PROTOTYPE(SVGStylableImplProto)
 KSVG_IMPLEMENT_PROTOFUNC(SVGStylableImplProtoFunc, SVGStylableImpl)
 
 #endif
-
-// vim:ts=4:noet

@@ -120,5 +120,3 @@ bool SVGTextElementImpl::prepareMouseEvent(const TQPoint &p, const TQPoint &, SV
 
 	return false;
 }
-
-// vim:ts=4:noet

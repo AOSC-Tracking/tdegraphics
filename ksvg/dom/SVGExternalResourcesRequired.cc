@@ -61,5 +61,3 @@ SVGAnimatedBoolean SVGExternalResourcesRequired::externalResourcesRequired() con
 	if(!impl) return SVGAnimatedBoolean(0);
 	return SVGAnimatedBoolean(impl->externalResourcesRequired());
 }
-
-// vim:ts=4:noet

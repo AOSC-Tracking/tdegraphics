@@ -876,8 +876,4 @@ void KViewViewer::hasImage( bool b )
 		emit setWindowCaption( m_sCaption );
 	}
 }
-
-// vim:sw=4:ts=4
-
 #include "kviewviewer.moc"
-

@@ -29,5 +29,3 @@ SVGFEMergeElementImpl::SVGFEMergeElementImpl(DOM::ElementImpl *impl) : SVGElemen
 SVGFEMergeElementImpl::~SVGFEMergeElementImpl()
 {
 }
-
-// vim:ts=4:noet

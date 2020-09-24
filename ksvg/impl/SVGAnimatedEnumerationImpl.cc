@@ -89,5 +89,3 @@ void SVGAnimatedEnumerationImpl::putValueProperty(KJS::ExecState *exec, int toke
 			kdWarning() << "Unhandled token in " << k_funcinfo << " : " << token << endl;
 	}
 }
-
-// vim:ts=4:noet

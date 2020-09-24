@@ -103,5 +103,3 @@ Value KSVG::getSVGPathSegImplConstructor(ExecState *exec)
 {
 	return cacheGlobalBridge<SVGPathSegImplConstructor>(exec, "[[svgpathseg.constructor]]");
 }
-
-// vim:ts=4:noet

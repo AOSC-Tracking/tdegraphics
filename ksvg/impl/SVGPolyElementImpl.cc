@@ -137,5 +137,3 @@ bool SVGPolyElementImpl::findInSlope(unsigned int point, double *inSlope) const
 		return true;
 	}
 }
-
-// vim:ts=4:noet

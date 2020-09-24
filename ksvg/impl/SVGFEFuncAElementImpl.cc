@@ -29,5 +29,3 @@ SVGFEFuncAElementImpl::SVGFEFuncAElementImpl(DOM::ElementImpl *impl) : SVGCompon
 SVGFEFuncAElementImpl::~SVGFEFuncAElementImpl()
 {
 }
-
-// vim:ts=4:noet

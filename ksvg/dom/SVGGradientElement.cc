@@ -76,5 +76,3 @@ SVGAnimatedEnumeration SVGGradientElement::spreadMethod() const
 	if(!impl) return SVGAnimatedEnumeration(0);
 	return SVGAnimatedEnumeration(impl->spreadMethod());
 }
-
-// vim:ts=4:noet

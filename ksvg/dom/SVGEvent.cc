@@ -183,5 +183,3 @@ DOM::DOMString SVGEvent::idToType(EventId id)
 			break;
 	}
 }
-
-// vim:ts=4:noet

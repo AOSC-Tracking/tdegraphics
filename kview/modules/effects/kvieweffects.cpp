@@ -239,6 +239,4 @@ inline TQImage * KViewEffects::workImage()
 	}
 	return 0;
 }
-
-// vim:sw=4:ts=4:cindent
 #include "kvieweffects.moc"

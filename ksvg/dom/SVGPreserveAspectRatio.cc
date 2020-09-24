@@ -77,5 +77,3 @@ unsigned short SVGPreserveAspectRatio::meetOrSlice() const
 	if(!impl) return SVG_MEETORSLICE_UNKNOWN;
 	return impl->meetOrSlice();
 }
-
-// vim:ts=4:noet

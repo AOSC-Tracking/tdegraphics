@@ -76,5 +76,3 @@ SVGAnimatedString SVGAElement::target() const
 	if(!impl) return SVGAnimatedString(0);
 	return SVGAnimatedString(impl->target());
 }
-
-// vim:ts=4:noet

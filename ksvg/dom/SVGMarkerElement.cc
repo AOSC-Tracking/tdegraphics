@@ -125,5 +125,3 @@ void SVGMarkerElement::setOrientToAngle(const SVGAngle &angle)
 	if(impl)
 		impl->setOrientToAngle(angle.handle());
 }
-
-// vim:ts=4:noet

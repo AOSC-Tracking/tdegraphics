@@ -106,5 +106,3 @@ KJS::Value getSVGGradientElementImplConstructor(KJS::ExecState *exec);
 }
 
 #endif
-
-// vim:ts=4:noet
