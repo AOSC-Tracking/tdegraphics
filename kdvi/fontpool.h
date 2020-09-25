@@ -1,4 +1,3 @@
-// -*- C++ -*-
 // fontpool.h
 //
 // (C) 2001-2004 Stefan Kebekus

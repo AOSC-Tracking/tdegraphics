@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /*
  *	Mnemonics for bytes in dvi file.
  */

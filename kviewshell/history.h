@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef history_h
 #define history_h
 

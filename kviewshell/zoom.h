@@ -1,4 +1,3 @@
-// -*- C++ -*-
 // zoom.h
 //
 // Part of KVIEWSHELL - A framework for multipage text/gfx viewers

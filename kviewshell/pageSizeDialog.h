@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /*
  *   pageSizeDialog, for kviewshell
  *   This file: Copyright (C) 2002-2003 Stefan Kebekus, kebekus@kde.org

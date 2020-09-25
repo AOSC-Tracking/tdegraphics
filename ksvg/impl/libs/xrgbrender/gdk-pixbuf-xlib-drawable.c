@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* GdkPixbuf library - convert X drawable information to RGB
  *
  * Copyright (C) 1999 Michael Zucchi

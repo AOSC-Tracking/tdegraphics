@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef TDEMULTIPAGEINTERFACE_H
 #define TDEMULTIPAGEINTERFACE_H
  

@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef KVIEWSHELL_H
 #define KVIEWSHELL_H
 

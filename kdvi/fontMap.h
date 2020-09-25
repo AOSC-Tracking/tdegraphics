@@ -1,4 +1,3 @@
-// -*- C++ -*-
 // fontMap.h
 //
 // Part of KDVI - A DVI previewer for the KDE desktop environemt 

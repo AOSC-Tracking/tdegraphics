@@ -1,5 +1,3 @@
-// -*- C++ -*-
-
 #ifndef _TEXFONT_PK_H
 #define _TEXFONT_PK_H
 

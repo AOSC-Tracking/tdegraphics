@@ -1,5 +1,3 @@
-// -*- c++ -*-
-
 #ifndef KSNAPSHOT_H
 #define KSNAPSHOT_H
 #include "ksnapshotiface.h"

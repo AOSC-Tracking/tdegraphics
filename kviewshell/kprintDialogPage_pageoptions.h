@@ -1,4 +1,3 @@
-// -*- C++ -*-
 // KPrintDialogPage_PageOptions.h
 //
 // Part of KVIEWSHELL - A framework for multipage text/gfx viewers

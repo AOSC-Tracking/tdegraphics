@@ -1,4 +1,3 @@
-// -*- C++ -*-
 //
 // ghostscript_interface
 //

@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef KDVIMULTIPAGE_H
 #define KDVIMULTIPAGE_H
 

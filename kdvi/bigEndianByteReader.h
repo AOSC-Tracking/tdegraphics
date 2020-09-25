@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /* This file is part of KDVI (C) 2001 by Stefan Kebekus (kebekus@kde.org)
 
    This library is free software; you can redistribute it and/or

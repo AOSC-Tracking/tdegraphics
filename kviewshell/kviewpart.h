@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef KVIEWPART_H
 #define KVIEWPART_H
 

@@ -1,5 +1,3 @@
-// -*- C++ -*-
-
 //#define PERFORMANCE_MEASUREMENT
 
 #ifdef PERFORMANCE_MEASUREMENT

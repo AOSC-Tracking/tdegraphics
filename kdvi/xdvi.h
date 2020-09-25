@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef _xdvi_h
 #define _xdvi_h
 

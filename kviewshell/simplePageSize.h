@@ -1,4 +1,3 @@
-// -*- C++ -*-
 //
 // simplePageSize.h
 //

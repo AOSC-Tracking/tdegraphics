@@ -1,4 +1,3 @@
-// -*- C++ -*-
 // kdvi.h 
 //
 // global variables and definitions for kdvi.

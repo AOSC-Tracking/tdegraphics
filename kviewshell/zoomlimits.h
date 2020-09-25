@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef ZOOMLIMITS_H
 #define ZOOMLIMITS_H
 
