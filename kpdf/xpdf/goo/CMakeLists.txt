@@ -22,5 +22,5 @@ include_directories(
 
 tde_add_library( goo STATIC_PIC
   SOURCES
-    GHash.cc GList.cc GString.cc gfile.cc gmem.cc gmempp.cc
+    GHash.cpp GList.cpp GString.cpp gfile.cpp gmem.cpp gmempp.cpp
 )

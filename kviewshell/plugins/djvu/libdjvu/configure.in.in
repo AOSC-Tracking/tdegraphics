@@ -28,8 +28,8 @@ dnl -------------------------------------------------------
 AC_DEFUN([AC_CHECK_CXX_OPT],[
  opt="$1"
  AC_MSG_CHECKING([if $CXX accepts $opt])
- echo 'void f(){}' > conftest.cc
- if test -z "`${CXX} ${CXXFLAGS} ${OPTS} $opt -c conftest.cc 2>&1`"; then
+ echo 'void f(){}' > conftest.cpp
+ if test -z "`${CXX} ${CXXFLAGS} ${OPTS} $opt -c conftest.cpp 2>&1`"; then
     AC_MSG_RESULT(yes)
     rm conftest.* 
     $2
@@ -389,8 +389,8 @@ if test x$acx_cothread != xno ; then
   AC_MSG_RESULT($acx_cothread_patch)
   if test x$acx_cothread_patch = xno ; then
     AC_MSG_CHECKING([if the cothread patch is critical]) 
-    echo 'void foo() { throw "Hello"; }' > conftest.cc
-    compile="$CXX $CXXFLAGS -c conftest.cc"
+    echo 'void foo() { throw "Hello"; }' > conftest.cpp
+    compile="$CXX $CXXFLAGS -c conftest.cpp"
     check="nm conftest.o | grep sjthrow | cat > conftest.out"
     acx_cothread_patch=yes
     if AC_TRY_EVAL(compile) && AC_TRY_EVAL(check) ; then

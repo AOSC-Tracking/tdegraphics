@@ -114,7 +114,7 @@ struct GfxCMYK {
 //------------------------------------------------------------------------
 
 // NB: The nGfxColorSpaceModes constant and the gfxColorSpaceModeNames
-// array defined in GfxState.cc must match this enum.
+// array defined in GfxState.cpp must match this enum.
 enum GfxColorSpaceMode {
   csDeviceGray,
   csCalGray,

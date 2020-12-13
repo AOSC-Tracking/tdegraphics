@@ -1,4 +1,4 @@
-/* Automatically generated from impl/SVGMarkerElementImpl.cc using ../../tdelibs/kjs/create_hash_table. DO NOT EDIT ! */
+/* Automatically generated from impl/SVGMarkerElementImpl.cpp using ../../tdelibs/kjs/create_hash_table. DO NOT EDIT ! */
 
 using namespace KJS;
 

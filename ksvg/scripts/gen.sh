@@ -12,11 +12,11 @@ fi
 
 # make them
 touch $1.h
-touch $1.cc
+touch $1.cpp
 
 #start with copyright notices
 cat ../COPYRIGHTS > $1.h
-cat ../COPYRIGHTS > $1.cc
+cat ../COPYRIGHTS > $1.cpp
 
 # add define for multiple include problem
 echo "" >> $1.h
@@ -27,13 +27,13 @@ echo "namespace KSVG" >> $1.h
 echo "{" >> $1.h
 echo "" >> $1.h
 
-#include in .cc + namespace
-echo "" >> $1.cc
-echo "#include \"$1.h\"" >> $1.cc
-echo "#include \"$1Impl.h\"" >> $1.cc
-echo "" >> $1.cc
-echo "using namespace KSVG;" >> $1.cc
-echo "" >> $1.cc
+#include in .cpp + namespace
+echo "" >> $1.cpp
+echo "#include \"$1.h\"" >> $1.cpp
+echo "#include \"$1Impl.h\"" >> $1.cpp
+echo "" >> $1.cpp
+echo "using namespace KSVG;" >> $1.cpp
+echo "" >> $1.cpp
 
 #go go go
 $cmd_awk -f ../makeheader $1

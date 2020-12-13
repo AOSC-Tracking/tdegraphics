@@ -1,4 +1,4 @@
-/* Automatically generated from impl/SVGAnimatedIntegerImpl.cc using ../../tdelibs/kjs/create_hash_table. DO NOT EDIT ! */
+/* Automatically generated from impl/SVGAnimatedIntegerImpl.cpp using ../../tdelibs/kjs/create_hash_table. DO NOT EDIT ! */
 
 using namespace KJS;
 

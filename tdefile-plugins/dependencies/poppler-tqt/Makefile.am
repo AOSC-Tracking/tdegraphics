@@ -15,13 +15,13 @@ poppler_include_HEADERS =			\
 
 lib_LTLIBRARIES = libpoppler-tqt.la
 libpoppler_tqt_la_SOURCES =			\
-	poppler-document.cc			\
-	poppler-fontinfo.cc			\
-	poppler-link.cc                         \
-	poppler-page.cc				\
-	poppler-page-transition.cc		\
+	poppler-document.cpp			\
+	poppler-fontinfo.cpp			\
+	poppler-link.cpp                         \
+	poppler-page.cpp				\
+	poppler-page-transition.cpp		\
 	poppler-page-transition-private.h	\
-	poppler-private.cc			\
+	poppler-private.cpp			\
 	poppler-private.h
 
 libpoppler_tqt_la_LIBADD = 			\

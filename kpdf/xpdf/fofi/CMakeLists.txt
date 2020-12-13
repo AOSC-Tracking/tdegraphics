@@ -21,6 +21,6 @@ include_directories(
 
 tde_add_library( fofi STATIC_PIC
   SOURCES
-    FoFiBase.cc FoFiEncodings.cc FoFiTrueType.cc FoFiType1.cc
-    FoFiType1C.cc
+    FoFiBase.cpp FoFiEncodings.cpp FoFiTrueType.cpp FoFiType1.cpp
+    FoFiType1C.cpp
 )

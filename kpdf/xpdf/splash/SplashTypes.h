@@ -48,7 +48,7 @@ enum SplashColorMode {
 };
 
 // number of components in each color mode
-// (defined in SplashState.cc)
+// (defined in SplashState.cpp)
 extern int splashColorModeNComps[];
 
 // max number of components in any SplashColor

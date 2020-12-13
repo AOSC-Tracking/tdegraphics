@@ -26,7 +26,7 @@
 #include <vector>
 #include <iostream>
 
-#include "myboost/shared_ptr.hpp"
+#include "myboost/shared_ptr.h"
 
 namespace T2P
 {

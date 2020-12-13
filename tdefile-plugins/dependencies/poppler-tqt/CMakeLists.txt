@@ -45,10 +45,10 @@ install( FILES
 
 tde_add_library( poppler-tqt SHARED AUTOMOC
   SOURCES
-    poppler-document.cc poppler-fontinfo.cc
-    poppler-link.cc poppler-page.cc
-    poppler-page-transition.cc poppler-page-transition-private.h
-    poppler-private.cc poppler-private.h
+    poppler-document.cpp poppler-fontinfo.cpp
+    poppler-link.cpp poppler-page.cpp
+    poppler-page-transition.cpp poppler-page-transition-private.h
+    poppler-private.cpp poppler-private.h
   VERSION 0.0.0
   LINK ${POPPLER_LIBRARIES} ${TQT_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}

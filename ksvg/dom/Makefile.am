@@ -31,27 +31,27 @@ myinclude_HEADERS = SVGAElement.h SVGAltGlyphElement.h SVGAltGlyphDefElement.h S
 					SVGTitleElement.h SVGTransform.h SVGTransformList.h SVGTransformable.h SVGURIReference.h SVGUnitTypes.h \
 					SVGUseElement.h SVGVKernElement.h SVGViewElement.h SVGViewSpec.h SVGWindow.h SVGZoomAndPan.h SVGZoomEvent.h
 
-libksvgdom_la_SOURCES = SVGLength.cc SVGAnimatedLength.cc SVGNumber.cc SVGAnimatedNumber.cc SVGPoint.cc SVGTSpanElement.cc SVGTRefElement.cc \
-						SVGAnimatedLengthList.cc SVGAnimatedNumberList.cc SVGTransformList.cc SVGAElement.cc SVGAnimatedTransformList.cc \
-						SVGRectElement.cc SVGCircleElement.cc SVGEllipseElement.cc SVGLineElement.cc SVGPolylineElement.cc SVGPolygonElement.cc \
-						SVGTextPositioningElement.cc SVGTextContentElement.cc SVGTextElement.cc SVGImageElement.cc SVGUseElement.cc \
-						SVGMatrix.cc SVGTransform.cc SVGPointList.cc SVGDocument.cc SVGAnimatedEnumeration.cc SVGDefsElement.cc \
-						SVGLocatable.cc SVGTransformable.cc SVGStylable.cc SVGGElement.cc SVGAngle.cc SVGAnimatedAngle.cc \
-						SVGColor.cc SVGPathElement.cc SVGPathSegList.cc SVGTests.cc SVGLangSpace.cc SVGStringList.cc \
-						SVGPathSeg.cc SVGPathSegClosePath.cc SVGPathSegMoveto.cc SVGPathSegLinetoHorizontal.cc SVGPathSegLinetoVertical.cc SVGPathSegLineto.cc \
-						SVGPathSegCurvetoCubic.cc SVGDescElement.cc SVGTitleElement.cc SVGExternalResourcesRequired.cc SVGAnimatedBoolean.cc SVGNumberList.cc \
-						SVGPathSegCurvetoCubicSmooth.cc SVGPathSegCurvetoQuadratic.cc SVGAnimatedRect.cc SVGAnimatedString.cc \
-						SVGPathSegCurvetoQuadraticSmooth.cc SVGPathSegArc.cc SVGURIReference.cc SVGAnimatedInteger.cc SVGLengthList.cc \
-						SVGSVGElement.cc SVGRect.cc SVGFitToViewBox.cc SVGAnimatedPreserveAspectRatio.cc SVGPreserveAspectRatio.cc SVGElement.cc \
-						SVGStyleElement.cc SVGClipPathElement.cc SVGMaskElement.cc SVGColorProfileElement.cc SVGColorProfileRule.cc SVGZoomAndPan.cc SVGScriptElement.cc \
-						SVGSwitchElement.cc SVGSymbolElement.cc \
-						SVGDefinitionSrcElement.cc SVGFontFaceElement.cc SVGFontFaceFormatElement.cc SVGFontFaceNameElement.cc SVGFontFaceSrcElement.cc SVGHKernElement.cc SVGMetadataElement.cc SVGVKernElement.cc SVGCursorElement.cc SVGForeignObjectElement.cc SVGFontFaceUriElement.cc \
-						SVGElementInstance.cc SVGElementInstanceList.cc SVGAnimatedPoints.cc SVGAnimatedPathData.cc SVGMarkerElement.cc SVGViewSpec.cc SVGViewElement.cc \
-						SVGFilterElement.cc SVGFilterPrimitiveStandardAttributes.cc SVGFEBlendElement.cc SVGFEColorMatrixElement.cc SVGFEComponentTransferElement.cc SVGComponentTransferFunctionElement.cc SVGFEFuncAElement.cc SVGFEFuncBElement.cc SVGFEFuncGElement.cc SVGFEFuncRElement.cc SVGFECompositeElement.cc SVGFEConvolveMatrixElement.cc SVGFEFloodElement.cc SVGFEGaussianBlurElement.cc SVGFEDiffuseLightingElement.cc SVGFEDistantLightElement.cc SVGFEPointLightElement.cc SVGFESpotLightElement.cc SVGFEDisplacementMapElement.cc SVGFEMergeElement.cc SVGFEMergeNodeElement.cc SVGFEImageElement.cc SVGFEMorphologyElement.cc SVGFEOffsetElement.cc SVGFESpecularLightingElement.cc SVGFETileElement.cc SVGFETurbulenceElement.cc  \
-						SVGAnimationElement.cc SVGAnimateElement.cc SVGSetElement.cc SVGAnimateMotionElement.cc SVGAnimateColorElement.cc SVGAnimateTransformElement.cc \
-						SVGEvent.cc SVGZoomEvent.cc SVGICCColor.cc SVGCSSRule.cc \
-						SVGGradientElement.cc SVGRadialGradientElement.cc SVGLinearGradientElement.cc SVGStopElement.cc SVGPatternElement.cc SVGMPathElement.cc \
-						SVGFontElement.cc SVGAltGlyphElement.cc SVGGlyphRefElement.cc SVGAltGlyphDefElement.cc SVGGlyphElement.cc SVGMissingGlyphElement.cc SVGPaint.cc SVGTextPathElement.cc SVGWindow.cc
+libksvgdom_la_SOURCES = SVGLength.cpp SVGAnimatedLength.cpp SVGNumber.cpp SVGAnimatedNumber.cpp SVGPoint.cpp SVGTSpanElement.cpp SVGTRefElement.cpp \
+						SVGAnimatedLengthList.cpp SVGAnimatedNumberList.cpp SVGTransformList.cpp SVGAElement.cpp SVGAnimatedTransformList.cpp \
+						SVGRectElement.cpp SVGCircleElement.cpp SVGEllipseElement.cpp SVGLineElement.cpp SVGPolylineElement.cpp SVGPolygonElement.cpp \
+						SVGTextPositioningElement.cpp SVGTextContentElement.cpp SVGTextElement.cpp SVGImageElement.cpp SVGUseElement.cpp \
+						SVGMatrix.cpp SVGTransform.cpp SVGPointList.cpp SVGDocument.cpp SVGAnimatedEnumeration.cpp SVGDefsElement.cpp \
+						SVGLocatable.cpp SVGTransformable.cpp SVGStylable.cpp SVGGElement.cpp SVGAngle.cpp SVGAnimatedAngle.cpp \
+						SVGColor.cpp SVGPathElement.cpp SVGPathSegList.cpp SVGTests.cpp SVGLangSpace.cpp SVGStringList.cpp \
+						SVGPathSeg.cpp SVGPathSegClosePath.cpp SVGPathSegMoveto.cpp SVGPathSegLinetoHorizontal.cpp SVGPathSegLinetoVertical.cpp SVGPathSegLineto.cpp \
+						SVGPathSegCurvetoCubic.cpp SVGDescElement.cpp SVGTitleElement.cpp SVGExternalResourcesRequired.cpp SVGAnimatedBoolean.cpp SVGNumberList.cpp \
+						SVGPathSegCurvetoCubicSmooth.cpp SVGPathSegCurvetoQuadratic.cpp SVGAnimatedRect.cpp SVGAnimatedString.cpp \
+						SVGPathSegCurvetoQuadraticSmooth.cpp SVGPathSegArc.cpp SVGURIReference.cpp SVGAnimatedInteger.cpp SVGLengthList.cpp \
+						SVGSVGElement.cpp SVGRect.cpp SVGFitToViewBox.cpp SVGAnimatedPreserveAspectRatio.cpp SVGPreserveAspectRatio.cpp SVGElement.cpp \
+						SVGStyleElement.cpp SVGClipPathElement.cpp SVGMaskElement.cpp SVGColorProfileElement.cpp SVGColorProfileRule.cpp SVGZoomAndPan.cpp SVGScriptElement.cpp \
+						SVGSwitchElement.cpp SVGSymbolElement.cpp \
+						SVGDefinitionSrcElement.cpp SVGFontFaceElement.cpp SVGFontFaceFormatElement.cpp SVGFontFaceNameElement.cpp SVGFontFaceSrcElement.cpp SVGHKernElement.cpp SVGMetadataElement.cpp SVGVKernElement.cpp SVGCursorElement.cpp SVGForeignObjectElement.cpp SVGFontFaceUriElement.cpp \
+						SVGElementInstance.cpp SVGElementInstanceList.cpp SVGAnimatedPoints.cpp SVGAnimatedPathData.cpp SVGMarkerElement.cpp SVGViewSpec.cpp SVGViewElement.cpp \
+						SVGFilterElement.cpp SVGFilterPrimitiveStandardAttributes.cpp SVGFEBlendElement.cpp SVGFEColorMatrixElement.cpp SVGFEComponentTransferElement.cpp SVGComponentTransferFunctionElement.cpp SVGFEFuncAElement.cpp SVGFEFuncBElement.cpp SVGFEFuncGElement.cpp SVGFEFuncRElement.cpp SVGFECompositeElement.cpp SVGFEConvolveMatrixElement.cpp SVGFEFloodElement.cpp SVGFEGaussianBlurElement.cpp SVGFEDiffuseLightingElement.cpp SVGFEDistantLightElement.cpp SVGFEPointLightElement.cpp SVGFESpotLightElement.cpp SVGFEDisplacementMapElement.cpp SVGFEMergeElement.cpp SVGFEMergeNodeElement.cpp SVGFEImageElement.cpp SVGFEMorphologyElement.cpp SVGFEOffsetElement.cpp SVGFESpecularLightingElement.cpp SVGFETileElement.cpp SVGFETurbulenceElement.cpp  \
+						SVGAnimationElement.cpp SVGAnimateElement.cpp SVGSetElement.cpp SVGAnimateMotionElement.cpp SVGAnimateColorElement.cpp SVGAnimateTransformElement.cpp \
+						SVGEvent.cpp SVGZoomEvent.cpp SVGICCColor.cpp SVGCSSRule.cpp \
+						SVGGradientElement.cpp SVGRadialGradientElement.cpp SVGLinearGradientElement.cpp SVGStopElement.cpp SVGPatternElement.cpp SVGMPathElement.cpp \
+						SVGFontElement.cpp SVGAltGlyphElement.cpp SVGGlyphRefElement.cpp SVGAltGlyphDefElement.cpp SVGGlyphElement.cpp SVGMissingGlyphElement.cpp SVGPaint.cpp SVGTextPathElement.cpp SVGWindow.cpp
 
 libksvgdom_la_METASOURCES = AUTO
 

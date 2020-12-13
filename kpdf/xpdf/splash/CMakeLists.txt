@@ -23,11 +23,11 @@ include_directories(
 
 tde_add_library( splash STATIC_PIC
   SOURCES
-    Splash.cc SplashBitmap.cc SplashClip.cc SplashFTFont.cc
-    SplashFTFontEngine.cc SplashFTFontFile.cc SplashFont.cc
-    SplashFontEngine.cc SplashFontFile.cc SplashFontFileID.cc
-    SplashPath.cc SplashPattern.cc SplashScreen.cc SplashState.cc
-    SplashT1Font.cc SplashT1FontEngine.cc SplashT1FontFile.cc
-    SplashXPath.cc SplashXPathScanner.cc
+    Splash.cpp SplashBitmap.cpp SplashClip.cpp SplashFTFont.cpp
+    SplashFTFontEngine.cpp SplashFTFontFile.cpp SplashFont.cpp
+    SplashFontEngine.cpp SplashFontFile.cpp SplashFontFileID.cpp
+    SplashPath.cpp SplashPattern.cpp SplashScreen.cpp SplashState.cpp
+    SplashT1Font.cpp SplashT1FontEngine.cpp SplashT1FontFile.cpp
+    SplashXPath.cpp SplashXPathScanner.cpp
   LINK ${FREETYPE_LIBRARIES} ${FONTCONFIG_LIBRARIES}
 )

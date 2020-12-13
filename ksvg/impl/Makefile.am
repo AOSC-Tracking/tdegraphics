@@ -29,87 +29,87 @@ KDE_OPTIONS = nofinal
 
 KDE_CXXFLAGS = $(USE_EXCEPTIONS)
 libksvgdomimpl_la_SOURCES = \
-SVGLengthImpl.cc SVGNumberImpl.cc SVGPointImpl.cc SVGTransformImpl.cc \
-SVGMatrixImpl.cc SVGRectImpl.cc SVGAngleImpl.cc \
+SVGLengthImpl.cpp SVGNumberImpl.cpp SVGPointImpl.cpp SVGTransformImpl.cpp \
+SVGMatrixImpl.cpp SVGRectImpl.cpp SVGAngleImpl.cpp \
 \
-SVGAnimatedLengthImpl.cc SVGAnimatedNumberImpl.cc SVGAnimatedIntegerImpl.cc \
-SVGAnimatedBooleanImpl.cc SVGAnimatedEnumerationImpl.cc SVGAnimatedPreserveAspectRatioImpl.cc \
-SVGAnimatedRectImpl.cc SVGAnimatedAngleImpl.cc SVGAnimatedPathDataImpl.cc SVGAnimatedStringImpl.cc \
+SVGAnimatedLengthImpl.cpp SVGAnimatedNumberImpl.cpp SVGAnimatedIntegerImpl.cpp \
+SVGAnimatedBooleanImpl.cpp SVGAnimatedEnumerationImpl.cpp SVGAnimatedPreserveAspectRatioImpl.cpp \
+SVGAnimatedRectImpl.cpp SVGAnimatedAngleImpl.cpp SVGAnimatedPathDataImpl.cpp SVGAnimatedStringImpl.cpp \
 \
-SVGLengthListImpl.cc SVGNumberListImpl.cc SVGPointListImpl.cc SVGTransformListImpl.cc \
-SVGStringListImpl.cc SVGPathSegListImpl.cc SVGElementInstanceListImpl.cc \
+SVGLengthListImpl.cpp SVGNumberListImpl.cpp SVGPointListImpl.cpp SVGTransformListImpl.cpp \
+SVGStringListImpl.cpp SVGPathSegListImpl.cpp SVGElementInstanceListImpl.cpp \
 \
-SVGAnimatedLengthListImpl.cc SVGAnimatedNumberListImpl.cc \
-SVGAnimatedPointsImpl.cc SVGAnimatedTransformListImpl.cc \
+SVGAnimatedLengthListImpl.cpp SVGAnimatedNumberListImpl.cpp \
+SVGAnimatedPointsImpl.cpp SVGAnimatedTransformListImpl.cpp \
 \
-SVGShapeImpl.cc SVGContainerImpl.cc SVGBBoxTarget.cc SVGHelperImpl.cc \
-SVGStylableImpl.cc SVGTransformableImpl.cc SVGTestsImpl.cc SVGLangSpaceImpl.cc \
-SVGExternalResourcesRequiredImpl.cc SVGLocatableImpl.cc SVGFitToViewBoxImpl.cc \
-SVGPreserveAspectRatioImpl.cc SVGZoomAndPanImpl.cc SVGViewSpecImpl.cc \
+SVGShapeImpl.cpp SVGContainerImpl.cpp SVGBBoxTarget.cpp SVGHelperImpl.cpp \
+SVGStylableImpl.cpp SVGTransformableImpl.cpp SVGTestsImpl.cpp SVGLangSpaceImpl.cpp \
+SVGExternalResourcesRequiredImpl.cpp SVGLocatableImpl.cpp SVGFitToViewBoxImpl.cpp \
+SVGPreserveAspectRatioImpl.cpp SVGZoomAndPanImpl.cpp SVGViewSpecImpl.cpp \
 \
-SVGElementImpl.cc SVGElementInstanceImpl.cc \
-SVGDocumentImpl.cc SVGSVGElementImpl.cc SVGWindowImpl.cc \
-SVGDefsElementImpl.cc SVGUseElementImpl.cc \
-SVGDescElementImpl.cc SVGTitleElementImpl.cc \
-SVGGElementImpl.cc SVGSwitchElementImpl.cc \
-SVGSymbolElementImpl.cc SVGImageElementImpl.cc \
-SVGURIReferenceImpl.cc \
+SVGElementImpl.cpp SVGElementInstanceImpl.cpp \
+SVGDocumentImpl.cpp SVGSVGElementImpl.cpp SVGWindowImpl.cpp \
+SVGDefsElementImpl.cpp SVGUseElementImpl.cpp \
+SVGDescElementImpl.cpp SVGTitleElementImpl.cpp \
+SVGGElementImpl.cpp SVGSwitchElementImpl.cpp \
+SVGSymbolElementImpl.cpp SVGImageElementImpl.cpp \
+SVGURIReferenceImpl.cpp \
 \
-SVGStyleElementImpl.cc SVGCSSRuleImpl.cc \
+SVGStyleElementImpl.cpp SVGCSSRuleImpl.cpp \
 \
-SVGPathElementImpl.cc SVGPathSegImpl.cc SVGPathSegClosePathImpl.cc SVGPathSegArcImpl.cc \
-SVGPathSegMovetoImpl.cc SVGPathSegCurvetoQuadraticImpl.cc SVGPathSegCurvetoQuadraticSmoothImpl.cc \
-SVGPathSegCurvetoCubicImpl.cc SVGPathSegCurvetoCubicSmoothImpl.cc SVGPathSegLinetoImpl.cc \
-SVGPathSegLinetoHorizontalImpl.cc SVGPathSegLinetoVerticalImpl.cc \
+SVGPathElementImpl.cpp SVGPathSegImpl.cpp SVGPathSegClosePathImpl.cpp SVGPathSegArcImpl.cpp \
+SVGPathSegMovetoImpl.cpp SVGPathSegCurvetoQuadraticImpl.cpp SVGPathSegCurvetoQuadraticSmoothImpl.cpp \
+SVGPathSegCurvetoCubicImpl.cpp SVGPathSegCurvetoCubicSmoothImpl.cpp SVGPathSegLinetoImpl.cpp \
+SVGPathSegLinetoHorizontalImpl.cpp SVGPathSegLinetoVerticalImpl.cpp \
 \
-SVGRectElementImpl.cc SVGCircleElementImpl.cc SVGEllipseElementImpl.cc SVGLineElementImpl.cc \
-SVGPolyElementImpl.cc SVGPolylineElementImpl.cc SVGPolygonElementImpl.cc \
+SVGRectElementImpl.cpp SVGCircleElementImpl.cpp SVGEllipseElementImpl.cpp SVGLineElementImpl.cpp \
+SVGPolyElementImpl.cpp SVGPolylineElementImpl.cpp SVGPolygonElementImpl.cpp \
 \
-SVGTextElementImpl.cc SVGTSpanElementImpl.cc SVGTRefElementImpl.cc \
-SVGTextPositioningElementImpl.cc SVGTextContentElementImpl.cc SVGTextPathElementImpl.cc \
+SVGTextElementImpl.cpp SVGTSpanElementImpl.cpp SVGTRefElementImpl.cpp \
+SVGTextPositioningElementImpl.cpp SVGTextContentElementImpl.cpp SVGTextPathElementImpl.cpp \
 \
-SVGPaintImpl.cc SVGMarkerElementImpl.cc \
+SVGPaintImpl.cpp SVGMarkerElementImpl.cpp \
 \
-SVGColorImpl.cc SVGICCColorImpl.cc SVGColorProfileElementImpl.cc SVGColorProfileRuleImpl.cc \
+SVGColorImpl.cpp SVGICCColorImpl.cpp SVGColorProfileElementImpl.cpp SVGColorProfileRuleImpl.cpp \
 \
-SVGPaintServerImpl.cc SVGGradientElementImpl.cc SVGStopElementImpl.cc \
-SVGLinearGradientElementImpl.cc SVGRadialGradientElementImpl.cc SVGPatternElementImpl.cc \
+SVGPaintServerImpl.cpp SVGGradientElementImpl.cpp SVGStopElementImpl.cpp \
+SVGLinearGradientElementImpl.cpp SVGRadialGradientElementImpl.cpp SVGPatternElementImpl.cpp \
 \
-SVGClipPathElementImpl.cc SVGMaskElementImpl.cc \
+SVGClipPathElementImpl.cpp SVGMaskElementImpl.cpp \
 \
-SVGFilterElementImpl.cc SVGFilterPrimitiveStandardAttributesImpl.cc \
-SVGFEBlendElementImpl.cc SVGFEColorMatrixElementImpl.cc \
-SVGFEComponentTransferElementImpl.cc SVGComponentTransferFunctionElementImpl.cc \
-SVGFEFuncAElementImpl.cc SVGFEFuncBElementImpl.cc SVGFEFuncGElementImpl.cc \
-SVGFEFuncRElementImpl.cc SVGFECompositeElementImpl.cc SVGFEConvolveMatrixElementImpl.cc \
-SVGFEFloodElementImpl.cc SVGFEGaussianBlurElementImpl.cc SVGFEDiffuseLightingElementImpl.cc \
-SVGFEDistantLightElementImpl.cc SVGFEPointLightElementImpl.cc SVGFESpotLightElementImpl.cc \
-SVGFEDisplacementMapElementImpl.cc SVGFEMergeElementImpl.cc SVGFEMergeNodeElementImpl.cc \
-SVGFEImageElementImpl.cc SVGFEMorphologyElementImpl.cc SVGFEOffsetElementImpl.cc \
-SVGFESpecularLightingElementImpl.cc SVGFETileElementImpl.cc SVGFETurbulenceElementImpl.cc \
+SVGFilterElementImpl.cpp SVGFilterPrimitiveStandardAttributesImpl.cpp \
+SVGFEBlendElementImpl.cpp SVGFEColorMatrixElementImpl.cpp \
+SVGFEComponentTransferElementImpl.cpp SVGComponentTransferFunctionElementImpl.cpp \
+SVGFEFuncAElementImpl.cpp SVGFEFuncBElementImpl.cpp SVGFEFuncGElementImpl.cpp \
+SVGFEFuncRElementImpl.cpp SVGFECompositeElementImpl.cpp SVGFEConvolveMatrixElementImpl.cpp \
+SVGFEFloodElementImpl.cpp SVGFEGaussianBlurElementImpl.cpp SVGFEDiffuseLightingElementImpl.cpp \
+SVGFEDistantLightElementImpl.cpp SVGFEPointLightElementImpl.cpp SVGFESpotLightElementImpl.cpp \
+SVGFEDisplacementMapElementImpl.cpp SVGFEMergeElementImpl.cpp SVGFEMergeNodeElementImpl.cpp \
+SVGFEImageElementImpl.cpp SVGFEMorphologyElementImpl.cpp SVGFEOffsetElementImpl.cpp \
+SVGFESpecularLightingElementImpl.cpp SVGFETileElementImpl.cpp SVGFETurbulenceElementImpl.cpp \
 \
-SVGCursorElementImpl.cc \
+SVGCursorElementImpl.cpp \
 \
-SVGAElementImpl.cc SVGViewElementImpl.cc \
+SVGAElementImpl.cpp SVGViewElementImpl.cpp \
 \
-SVGScriptElementImpl.cc SVGEventImpl.cc SVGZoomEventImpl.cc \
-SVGEcma.cc generateddata.cpp \
+SVGScriptElementImpl.cpp SVGEventImpl.cpp SVGZoomEventImpl.cpp \
+SVGEcma.cpp generateddata.cpp \
 \
-SVGAnimationElementImpl.cc SVGAnimateElementImpl.cc SVGSetElementImpl.cc \
-SVGAnimateMotionElementImpl.cc SVGAnimateColorElementImpl.cc \
-SVGAnimateTransformElementImpl.cc SVGMPathElementImpl.cc SVGTimeScheduler.cc \
+SVGAnimationElementImpl.cpp SVGAnimateElementImpl.cpp SVGSetElementImpl.cpp \
+SVGAnimateMotionElementImpl.cpp SVGAnimateColorElementImpl.cpp \
+SVGAnimateTransformElementImpl.cpp SVGMPathElementImpl.cpp SVGTimeScheduler.cpp \
 \
-SVGFontElementImpl.cc SVGAltGlyphElementImpl.cc SVGAltGlyphDefElementImpl.cc \
-SVGGlyphRefElementImpl.cc SVGGlyphElementImpl.cc SVGMissingGlyphElementImpl.cc \
-SVGFontFaceElementImpl.cc SVGFontFaceFormatElementImpl.cc SVGFontFaceNameElementImpl.cc \
-SVGFontFaceSrcElementImpl.cc SVGFontFaceUriElementImpl.cc SVGDefinitionSrcElementImpl.cc \
-SVGHKernElementImpl.cc SVGVKernElementImpl.cc \
+SVGFontElementImpl.cpp SVGAltGlyphElementImpl.cpp SVGAltGlyphDefElementImpl.cpp \
+SVGGlyphRefElementImpl.cpp SVGGlyphElementImpl.cpp SVGMissingGlyphElementImpl.cpp \
+SVGFontFaceElementImpl.cpp SVGFontFaceFormatElementImpl.cpp SVGFontFaceNameElementImpl.cpp \
+SVGFontFaceSrcElementImpl.cpp SVGFontFaceUriElementImpl.cpp SVGDefinitionSrcElementImpl.cpp \
+SVGHKernElementImpl.cpp SVGVKernElementImpl.cpp \
 \
-SVGMetadataElementImpl.cc \
+SVGMetadataElementImpl.cpp \
 \
-SVGForeignObjectElementImpl.cc \
+SVGForeignObjectElementImpl.cpp \
 \
-svgpathparser.cc
+svgpathparser.cpp
 
 libksvgdomimpl_la_METASOURCES = AUTO
 

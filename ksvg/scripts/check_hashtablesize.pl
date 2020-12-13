@@ -138,10 +138,10 @@ foreach(@useresult) {
 			my $temp = $middle[0];
 
 			if($calcMode != 2) {
-				$temp =~ s/.cc://;
+				$temp =~ s/.cpp://;
 				$class = $temp;
 			} else {
-				$temp =~ s/.cc//;
+				$temp =~ s/.cpp//;
 				$class = substr($temp, 0, index($temp, ":"));
 			}
 		}

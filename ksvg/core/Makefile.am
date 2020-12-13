@@ -1,6 +1,6 @@
 noinst_LTLIBRARIES = libksvgcore.la
 
-libksvgcore_la_SOURCES = KSVGLoader.cpp KSVGCanvas.cpp KSVGReader.cc KSVGTextChunk.cpp CanvasFactory.cpp CanvasItems.cpp KSVGHelper.cpp DocumentFactory.cpp
+libksvgcore_la_SOURCES = KSVGLoader.cpp KSVGCanvas.cpp KSVGReader.cpp KSVGTextChunk.cpp CanvasFactory.cpp CanvasItems.cpp KSVGHelper.cpp DocumentFactory.cpp
 libksvgcore_la_METASOURCES = AUTO
 
 servicetypedir = $(kde_servicetypesdir)

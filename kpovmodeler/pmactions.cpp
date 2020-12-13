@@ -116,7 +116,7 @@ void PMComboAction::unplug( TQWidget *w )
 
 
 // Use a toolbutton instead of a label so it is styled correctly.
-// copied from konq_actions.cc
+// copied from konq_actions.cpp
 class PMToolBarLabel : public TQToolButton
 {
 public:

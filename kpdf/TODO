@@ -46,7 +46,7 @@ More items (first items will enter 'In progress list' first):
 -> take care of TODOs in code
 -> ADD: click over image allows "save image" [60% done (activerect of type image)]
 -> export all text in plain_text/html
--> extract(export?) images (have a look at ImageOutputDev.cc and pdfimages.cc from xpdf (not in our xpdf sources))
+-> extract(export?) images (have a look at ImageOutputDev.cpp and pdfimages.cpp from xpdf (not in our xpdf sources))
 -> text selection in wordprocessor style (very hard)
 -> zoom: fit text (with configurable margin)
 -> bookview: 3d opengl widget for viewing the document as a real book (turning pages, etc..)

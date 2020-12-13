@@ -2,14 +2,14 @@ INCLUDES = -I$(srcdir)/.. -I$(srcdir)/../fofi -I$(srcdir)/../splash -I$(srcdir)/
 
 libxpdf_la_LDFLAGS = $(all_libraries)
 libxpdf_la_LIBADD = $(LIB_X11) $(LIBFREETYPE_LIBS) $(LIBPAPER_LIBS) $(XFT_LIBS) $(LIBJPEG) ../goo/libgoo.la ../fofi/libfofi.la ../splash/libsplash.la 
-libxpdf_la_SOURCES = Annot.cc Array.cc BuiltinFont.cc BuiltinFontTables.cc \
-     Catalog.cc CharCodeToUnicode.cc CMap.cc Decrypt.cc Dict.cc \
-     FontEncodingTables.cc Function.cc Gfx.cc \
-     GfxFont.cc GfxState.cc GlobalParams.cc JArithmeticDecoder.cc \
-     JBIG2Stream.cc Lexer.cc Link.cc NameToCharCode.cc Object.cc Outline.cc \
-     OutputDev.cc PDFDoc.cc PDFDocEncoding.cc PreScanOutputDev.cc PSTokenizer.cc \
-     Page.cc Parser.cc PSOutputDev.cc SecurityHandler.cc SplashOutputDev.cc Stream.cc JPXStream.cc \
-     TextOutputDev.cc UnicodeMap.cc UnicodeTypeTable.cc XRef.cc
+libxpdf_la_SOURCES = Annot.cpp Array.cpp BuiltinFont.cpp BuiltinFontTables.cpp \
+     Catalog.cpp CharCodeToUnicode.cpp CMap.cpp Decrypt.cpp Dict.cpp \
+     FontEncodingTables.cpp Function.cpp Gfx.cpp \
+     GfxFont.cpp GfxState.cpp GlobalParams.cpp JArithmeticDecoder.cpp \
+     JBIG2Stream.cpp Lexer.cpp Link.cpp NameToCharCode.cpp Object.cpp Outline.cpp \
+     OutputDev.cpp PDFDoc.cpp PDFDocEncoding.cpp PreScanOutputDev.cpp PSTokenizer.cpp \
+     Page.cpp Parser.cpp PSOutputDev.cpp SecurityHandler.cpp SplashOutputDev.cpp Stream.cpp JPXStream.cpp \
+     TextOutputDev.cpp UnicodeMap.cpp UnicodeTypeTable.cpp XRef.cpp
 
 noinst_LTLIBRARIES = libxpdf.la
 

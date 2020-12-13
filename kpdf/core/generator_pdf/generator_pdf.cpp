@@ -778,7 +778,7 @@ void PDFGenerator::scanFont(GfxFont *font, TDEListView *list, Ref **fonts, int &
 TQString PDFGenerator::getDocumentInfo( const TQString & data, bool canReturnNull ) const
 // note: MUTEX is LOCKED while calling this
 {
-    // [Albert] Code adapted from pdfinfo.cc on xpdf
+    // [Albert] Code adapted from pdfinfo.cpp on xpdf
     Object info;
     if ( !pdfdoc )
         return canReturnNull ? TQString() : i18n( "Unknown" );
@@ -805,7 +805,7 @@ TQString PDFGenerator::getDocumentInfo( const TQString & data, bool canReturnNul
 TQString PDFGenerator::getDocumentDate( const TQString & data ) const
 // note: MUTEX is LOCKED while calling this
 {
-    // [Albert] Code adapted from pdfinfo.cc on xpdf
+    // [Albert] Code adapted from pdfinfo.cpp on xpdf
     if ( !pdfdoc )
         return i18n( "Unknown Date" );
 

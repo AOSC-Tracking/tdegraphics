@@ -359,7 +359,7 @@ function crawlFiles($path)
 	  crawlFiles($path."/".$file);
 	  fputs($fp,"Leaving directory ".$file."\n");
 	}
-	elseif (is_file($path."/".$file) && preg_match("/^[A-Za-z0-9_]+(\.cc|\.cpp|\.h|\.hpp)$/",$file))
+	elseif (is_file($path."/".$file) && preg_match("/^[A-Za-z0-9_]+(\.cpp|\.h)$/",$file))
 	{
 	  fputs($fp,"\tchecking $file\n");
 	  searchKalyptusCode($path."/".$file,$fp);

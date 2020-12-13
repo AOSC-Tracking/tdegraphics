@@ -21,7 +21,7 @@ function printg( a )
 }
 function printh( a )
 {
-    printf a >> FILENAME "Impl.cc"
+    printf a >> FILENAME "Impl.cpp"
 }
 function doFuncCC( a, class )
 {
@@ -166,7 +166,7 @@ function doAttr( a, class )
         printg( " " )n
     printg( b[nr] ");\n" )
 
-    # do put method .cc
+    # do put method .cpp
     printtofunc( "void " clas "::set" )
     printtofunc( toupper( substr( b[nr], 1, 1) ) )
     printtofunc( substr( b[nr], 2) "(" )
@@ -212,7 +212,7 @@ function doAttr( a, class )
     $temp = b[nr]
     printg( $temp "() const;\n" )
 
-    # do get method .cc
+    # do get method .cpp
     i = 1
     while ( i  < nr  )
     {
@@ -277,7 +277,7 @@ function doReadonlyAttr( a, class )
     $temp = b[nr]
     printg( $temp "() const;\n" )
 
-    # do get method .cc
+    # do get method .cpp
     i = 1
     while ( i  < nr  )
     {

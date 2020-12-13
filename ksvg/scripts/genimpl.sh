@@ -12,11 +12,11 @@ fi
 
 # you cant touch this
 touch $1Impl.h
-touch $1Impl.cc
+touch $1Impl.cpp
 
 #start with copyright notices
 cat ../COPYRIGHTS > $1Impl.h
-cat ../COPYRIGHTS > $1Impl.cc
+cat ../COPYRIGHTS > $1Impl.cpp
 
 # add define for multiple include problem
 echo "" >> $1Impl.h
@@ -28,12 +28,12 @@ echo "" >> $1Impl.h
 echo "namespace KSVG" >> $1Impl.h
 echo "{" >> $1Impl.h
 
-#include in .cc + namespace
-echo "" >> $1Impl.cc
-echo "#include \"$1Impl.h\"" >> $1Impl.cc
-echo "" >> $1Impl.cc
-echo "using namespace KSVG;" >> $1Impl.cc
-echo "" >> $1Impl.cc
+#include in .cpp + namespace
+echo "" >> $1Impl.cpp
+echo "#include \"$1Impl.h\"" >> $1Impl.cpp
+echo "" >> $1Impl.cpp
+echo "using namespace KSVG;" >> $1Impl.cpp
+echo "" >> $1Impl.cpp
 
 #go go go
 $cmd_awk -f ../makeimpl $1

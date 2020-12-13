@@ -32,7 +32,7 @@ link_directories(
 ##### svgdisplay (executable) ###################
 
 tde_add_executable( svgdisplay AUTOMOC
-  SOURCES SVGTestWidget.cc svgdisplay.cc
+  SOURCES SVGTestWidget.cpp svgdisplay.cpp
   LINK ksvg-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )

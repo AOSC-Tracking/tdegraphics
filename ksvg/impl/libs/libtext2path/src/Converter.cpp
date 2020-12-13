@@ -22,7 +22,7 @@
 
 #include <math.h>
 
-#include "myboost/shared_ptr.hpp"
+#include "myboost/shared_ptr.h"
 #include <fontconfig/fontconfig.h>
 #include <fribidi/fribidi.h>
 

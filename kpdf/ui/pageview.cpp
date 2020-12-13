@@ -2,7 +2,7 @@
  *   Copyright (C) 2004 by Enrico Ros <eros.kde@email.it>                  *
  *   Copyright (C) 2004-2006 by Albert Astals Cid <tsdgeos@terra.es>       *
  *                                                                         *
- *   With portions of code from kpdf/kpdf_pagewidget.cc by:                *
+ *   With portions of code from kpdf/kpdf_pagewidget.cpp by:                *
  *     Copyright (C) 2002 by Wilco Greven <greven@kde.org>                 *
  *     Copyright (C) 2003 by Christophe Devriese                           *
  *                           <Christophe.Devriese@student.kuleuven.ac.be>  *

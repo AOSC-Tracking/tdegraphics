@@ -24,14 +24,14 @@ include_directories(
 
 tde_add_library( xpdf STATIC_PIC
   SOURCES
-    Annot.cc Array.cc BuiltinFont.cc BuiltinFontTables.cc
-    Catalog.cc CharCodeToUnicode.cc CMap.cc Decrypt.cc Dict.cc
-    FontEncodingTables.cc Function.cc Gfx.cc GfxFont.cc GfxState.cc
-    GlobalParams.cc JArithmeticDecoder.cc JBIG2Stream.cc Lexer.cc Link.cc
-    NameToCharCode.cc Object.cc Outline.cc OutputDev.cc PDFDoc.cc
-    PDFDocEncoding.cc PreScanOutputDev.cc PSTokenizer.cc Page.cc
-    Parser.cc PSOutputDev.cc SecurityHandler.cc SplashOutputDev.cc
-    Stream.cc JPXStream.cc TextOutputDev.cc UnicodeMap.cc
-    UnicodeTypeTable.cc XRef.cc
+    Annot.cpp Array.cpp BuiltinFont.cpp BuiltinFontTables.cpp
+    Catalog.cpp CharCodeToUnicode.cpp CMap.cpp Decrypt.cpp Dict.cpp
+    FontEncodingTables.cpp Function.cpp Gfx.cpp GfxFont.cpp GfxState.cpp
+    GlobalParams.cpp JArithmeticDecoder.cpp JBIG2Stream.cpp Lexer.cpp Link.cpp
+    NameToCharCode.cpp Object.cpp Outline.cpp OutputDev.cpp PDFDoc.cpp
+    PDFDocEncoding.cpp PreScanOutputDev.cpp PSTokenizer.cpp Page.cpp
+    Parser.cpp PSOutputDev.cpp SecurityHandler.cpp SplashOutputDev.cpp
+    Stream.cpp JPXStream.cpp TextOutputDev.cpp UnicodeMap.cpp
+    UnicodeTypeTable.cpp XRef.cpp
   LINK ${FONTCONFIG_LIBRARIES}
 )

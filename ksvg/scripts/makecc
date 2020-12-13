@@ -1,6 +1,6 @@
 function printg( a )
 {
-    printf a >> FILENAME ".cc"
+    printf a >> FILENAME ".cpp"
 }
 function doFunc( a )
 {
