@@ -24,6 +24,7 @@
     <Separator/>
     <Action name="view_continuous"/>
     <Action name="view_twopages"/>
+    <Action name="view_coverpage"/>
   </Menu>
   <Menu name="go"><text>&amp;Go</text>
     <Action name="previous_page"/>

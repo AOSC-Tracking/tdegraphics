@@ -140,6 +140,7 @@ class PageView : public TQScrollView, public DocumentObserver
         void slotRotateLeft();
         void slotTwoPagesToggled( bool );
         void slotContinuousToggled( bool );
+	void slotCoverPageToggled( bool );
         void slotSetMouseNormal();
         void slotSetMouseZoom();
         void slotSetMouseSelect();

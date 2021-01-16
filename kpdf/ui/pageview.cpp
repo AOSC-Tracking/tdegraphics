@@ -114,6 +114,7 @@ public:
     TDEToggleAction * aZoomFitText;
     TDEToggleAction * aViewTwoPages;
     TDEToggleAction * aViewContinuous;
+    TDEToggleAction * aViewCoverPage;
     TDEAction * aPrevAction;
 };
 
@@ -281,6 +282,11 @@ void PageView::setupActions( TDEActionCollection * ac )
     d->aViewContinuous = new TDEToggleAction( i18n("&Continuous"), "view_text", 0, ac, "view_continuous" );
     connect( d->aViewContinuous, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotContinuousToggled( bool ) ) );
     d->aViewContinuous->setChecked( KpdfSettings::viewContinuous() );
+
+    d->aViewCoverPage = new TDEToggleAction( i18n("Co&ver Page"), "contents2", 0, ac, "view_coverpage" );
+    connect( d->aViewCoverPage, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotCoverPageToggled( bool ) ) );
+    d->aViewCoverPage->setChecked( KpdfSettings::viewCoverPage() );
+    d->aViewCoverPage->setEnabled( KpdfSettings::viewColumns() > 1 );
 
     // Mouse-Mode actions
     d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "input-mouse", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
@@ -1718,11 +1724,19 @@ void PageView::slotRelayoutPages()
             insertY = 4; // 2 + 4*d->zoomFactor ?
         cIdx = 0;
         rIdx = 0;
+
+	if( KpdfSettings::viewColumns() == 2 && KpdfSettings::viewCoverPage() )
+		++cIdx;
+
         for ( iIt = d->items.begin(); iIt != iEnd; ++iIt )
         {
             PageViewItem * item = *iIt;
             int cWidth = colWidth[ cIdx ],
                 rHeight = rowHeight[ rIdx ];
+
+            if( KpdfSettings::viewColumns() == 2 && KpdfSettings::viewCoverPage() && item->pageNumber() == 0 ) // align widget right inside viewport
+                insertX+=cWidth;
+
             // center widget inside 'cells'
             item->moveTo( insertX + (cWidth - item->width()) / 2,
                           insertY + (rHeight - item->height()) / 2 );
@@ -1776,14 +1790,24 @@ void PageView::slotRelayoutPages()
         // 2) hide all widgets except the displayable ones and dispose those
         int insertX = 0;
         cIdx = 0;
+
+        if( KpdfSettings::viewColumns() == 2 && KpdfSettings::viewCoverPage() && (int)d->document->currentPage() == 0 )
+            ++cIdx;
+
         for ( iIt = d->items.begin(); iIt != iEnd; ++iIt )
         {
             PageViewItem * item = *iIt;
             if ( item == currentItem || (cIdx > 0 && cIdx < nCols) )
             {
-                // center widget inside 'cells'
-                item->moveTo( insertX + (colWidth[ cIdx ] - item->width()) / 2,
-                              (fullHeight - item->height()) / 2 );
+                if( KpdfSettings::viewCoverPage() && (int)d->document->currentPage() == 0 ) {
+                    // center widget inside viewport
+                    item->moveTo( insertX + (viewportWidth - item->width()) / 2,
+                                  (viewportHeight - item->height()) / 2 );
+                } else {
+                    // center widget inside 'cells'
+                    item->moveTo( insertX + (colWidth[ cIdx ] - item->width()) / 2,
+                                  (fullHeight - item->height()) / 2 );
+                }
                 // advance col index
                 insertX += colWidth[ cIdx ];
                 cIdx++;
@@ -2110,6 +2134,8 @@ void PageView::slotTwoPagesToggled( bool on )
         if ( d->document->pages() > 0 )
             slotRelayoutPages();
     }
+
+    d->aViewCoverPage->setEnabled( on );
 }
 
 void PageView::slotContinuousToggled( bool on )
@@ -2117,6 +2143,17 @@ void PageView::slotContinuousToggled( bool on )
     if ( KpdfSettings::viewContinuous() != on )
     {
         KpdfSettings::setViewContinuous( on );
+        KpdfSettings::writeConfig();
+        if ( d->document->pages() > 0 )
+            slotRelayoutPages();
+    }
+}
+
+void PageView::slotCoverPageToggled( bool on )
+{
+    if ( KpdfSettings::viewCoverPage() != on )
+    {
+        KpdfSettings::setViewCoverPage( on );
         KpdfSettings::writeConfig();
         if ( d->document->pages() > 0 )
             slotRelayoutPages();
