@@ -1658,6 +1658,7 @@ void PageView::doTypeAheadSearch()
 void PageView::slotRelayoutPages()
 // called by: notifySetup, viewportResizeEvent, slotTwoPagesToggled, slotContinuousToggled, updateZoom
 {
+    bool coverPageMode = ( KpdfSettings::viewColumns() == 2 && KpdfSettings::viewCoverPage() );
     // set an empty container if we have no pages
     int pageCount = d->items.count();
     if ( pageCount < 1 )
@@ -1688,11 +1689,12 @@ void PageView::slotRelayoutPages()
     {
         // Here we find out column's width and row's height to compute a table
         // so we can place widgets 'centered in virtual cells'.
-        int nCols = KpdfSettings::viewColumns(),
-            nRows = (int)ceil( (float)pageCount / (float)nCols ),
+        int pageShift = coverPageMode ? 1 : 0,
+            nCols = KpdfSettings::viewColumns(),
+            nRows = (int)ceil( (float)(pageCount + pageShift) / (float)nCols ),
             * colWidth = new int[ nCols ],
             * rowHeight = new int[ nRows ],
-            cIdx = 0,
+            cIdx = pageShift,
             rIdx = 0;
         for ( int i = 0; i < nCols; i++ )
             colWidth[ i ] = viewportWidth / nCols;
@@ -1722,11 +1724,8 @@ void PageView::slotRelayoutPages()
         // 2) arrange widgets inside cells
         int insertX = 0,
             insertY = 4; // 2 + 4*d->zoomFactor ?
-        cIdx = 0;
+        cIdx = pageShift;
         rIdx = 0;
-
-	if( KpdfSettings::viewColumns() == 2 && KpdfSettings::viewCoverPage() )
-		++cIdx;
 
         for ( iIt = d->items.begin(); iIt != iEnd; ++iIt )
         {
@@ -1734,7 +1733,7 @@ void PageView::slotRelayoutPages()
             int cWidth = colWidth[ cIdx ],
                 rHeight = rowHeight[ rIdx ];
 
-            if( KpdfSettings::viewColumns() == 2 && KpdfSettings::viewCoverPage() && item->pageNumber() == 0 ) // align widget right inside viewport
+            if( coverPageMode && item->pageNumber() == 0 ) // align widget right inside viewport
                 insertX+=cWidth;
 
             // center widget inside 'cells'
@@ -1791,7 +1790,7 @@ void PageView::slotRelayoutPages()
         int insertX = 0;
         cIdx = 0;
 
-        if( KpdfSettings::viewColumns() == 2 && KpdfSettings::viewCoverPage() && (int)d->document->currentPage() == 0 )
+        if( coverPageMode && (int)d->document->currentPage() == 0 )
             ++cIdx;
 
         for ( iIt = d->items.begin(); iIt != iEnd; ++iIt )
