@@ -29,6 +29,11 @@
 #include <Object.h>
 #include <PDFDoc.h>
 #include <FontInfo.h>
+
+#if defined(HAVE_SPLASH)
+# undef HAVE_SPLASH
+#endif
+
 #if defined(HAVE_SPLASH)
 #include <SplashOutputDev.h>
 #else
