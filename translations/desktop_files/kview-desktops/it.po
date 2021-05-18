@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Michele Calgaro <michele.calgaro@yahoo.it>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-09 17:37+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2021-05-19 03:07+0000\n"
+"Last-Translator: Michele Calgaro <michele.calgaro@yahoo.it>\n"
+"Language-Team: Italian <https://mirror.git.trinitydesktop.org/weblate/"
+"projects/tdegraphics/kview-desktop-files/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #. Name
 #: config/kviewgeneralconfig.desktop:14
@@ -57,9 +58,8 @@ msgstr "Visore di immagini"
 
 #. Name
 #: kview.desktop:10
-#, fuzzy
 msgid "KView"
-msgstr "Visore"
+msgstr "KView"
 
 #. Name
 #: kviewcanvas/config/kviewcanvasconfig.desktop:14
@@ -84,7 +84,7 @@ msgstr "Visore di immagini KView"
 #. Name
 #: modules/browser/kviewbrowser.desktop:14
 msgid "Browser"
-msgstr ""
+msgstr "Browser"
 
 #. Comment
 #: modules/browser/kviewbrowser.desktop:15
@@ -135,7 +135,7 @@ msgstr "Filtro per ridimensionare l'immagine"
 #. Name
 #: modules/scanner/kviewscanner.desktop:13
 msgid "Scanner"
-msgstr ""
+msgstr "Scanner"
 
 #. Comment
 #: modules/scanner/kviewscanner.desktop:14
