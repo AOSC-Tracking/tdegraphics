@@ -19,7 +19,7 @@ include_directories(
   ${CMAKE_BINARY_DIR}
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
-  ${GLU_INCLUDE_DIRS}
+  ${OPENGL_INCLUDE_DIRS}
   ${FREETYPE_INCLUDE_DIRS}
 )
 
@@ -112,7 +112,7 @@ tde_add_library( kpovmodeler SHARED AUTOMOC
     pmlibraryiconview.cpp pmlibraryobjectsearch.cpp pmpluginmanager.cpp
     pmpartiface.skel
   VERSION 0.0.0
-  LINK tdeparts-shared ${GLU_LIBRARIES} ${XMU_LIBRARIES} ${FREETYPE_LIBRARIES}
+  LINK tdeparts-shared ${OPENGL_LIBRARIES} ${XMU_LIBRARIES} ${FREETYPE_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
 
