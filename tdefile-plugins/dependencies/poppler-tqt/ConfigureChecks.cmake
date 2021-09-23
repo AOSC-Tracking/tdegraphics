@@ -24,7 +24,7 @@ check_cxx_source_compiles("
   HAVE_POPPLER_030 )
 tde_restore( CMAKE_REQUIRED_INCLUDES CMAKE_REQUIRED_LIBRARIES )
 
-foreach( _poppler_ver 0.58 0.64 0.70 0.71 0.72 0.76 0.82 0.83 0.86 )
+foreach( _poppler_ver 0.58 0.64 0.70 0.71 0.72 0.76 0.82 0.83 0.86 21.08 )
   string( REPLACE "." "" _poppler_str "${_poppler_ver}" )
   if( NOT DEFINED HAVE_POPPLER_${_poppler_str} )
     message( STATUS "Performing Test HAVE_POPPLER_${_poppler_str}" )

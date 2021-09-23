@@ -278,9 +278,14 @@ TQDateTime Document::getDate( const TQString & type ) const
 #endif
   if (!obj.isNull() && obj.isString())
   {
-    TQString s = UnicodeParsedString(obj.getString());
+#   if defined(HAVE_POPPLER_2108)
+    const GooString *s = obj.getString();
+#   else
+    TQString tqs = UnicodeParsedString(obj.getString());
+    const char *s = tqs.latin1();
+#   endif
     // TODO do something with the timezone information
-    if ( parseDateString( s.latin1(), &year, &mon, &day, &hour, &min, &sec, &tz, &tz_hour, &tz_minute ) )
+    if (parseDateString(s, &year, &mon, &day, &hour, &min, &sec, &tz, &tz_hour, &tz_minute))
     {
       TQDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
       TQTime t( hour, min, sec );
