@@ -173,7 +173,11 @@ TQValueList<TextBox*> Page::textList() const
   data->doc->data->doc.displayPageSlice(output_dev, data->index + 1, 72, 72,
       0, false, false, false, -1, -1, -1, -1);
 
+# if defined(HAVE_POPPLER_2111)
+  std::unique_ptr<TextWordList> word_list = output_dev->makeWordList();
+# else
   TextWordList *word_list = output_dev->makeWordList();
+# endif
 
   if (!word_list) {
     delete output_dev;
@@ -193,7 +197,9 @@ TQValueList<TextBox*> Page::textList() const
     output_list.append(text_box);
   }
 
+# if !defined(HAVE_POPPLER_2111)
   delete word_list;
+# endif
   delete output_dev;
 
   return output_list;
