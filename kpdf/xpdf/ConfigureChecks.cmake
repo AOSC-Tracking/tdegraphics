@@ -21,20 +21,6 @@ if( NOT JPEG_FOUND )
 endif( )
 
 
-# check for t1lib
-if( WITH_T1LIB )
-  check_include_file( t1lib.h HAVE_T1LIB_H )
-  if( HAVE_T1LIB_H )
-    check_library_exists( t1 T1_InitLib "" HAVE_T1LIB )
-  endif( )
-  if( HAVE_T1LIB_H AND HAVE_T1LIB )
-    set( T1_LIBRARY t1 CACHE INTERNAL "" FORCE )
-  else( )
-    tde_message_fatal( "t1lib is required, but was not found on your system" )
-  endif( )
-endif( )
-
-
 # check for libpaper
 if( WITH_PAPER )
   check_include_file( paper.h HAVE_PAPER_H )

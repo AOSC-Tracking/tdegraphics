@@ -713,7 +713,6 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   fontDirs = new GList();
   initialZoom = new GString("125");
   continuousView = gFalse;
-  enableT1lib = gTrue;
   enableFreeType = gTrue;
   antialias = gTrue;
   vectorAntialias = gTrue;
@@ -1073,8 +1072,6 @@ void GlobalParams::parseLine(char *buf, GString *fileName, int line) {
       parseInitialZoom(tokens, fileName, line);
     } else if (!cmd->cmp("continuousView")) {
       parseYesNo("continuousView", &continuousView, tokens, fileName, line);
-    } else if (!cmd->cmp("enableT1lib")) {
-      parseYesNo("enableT1lib", &enableT1lib, tokens, fileName, line);
     } else if (!cmd->cmp("enableFreeType")) {
       parseYesNo("enableFreeType", &enableFreeType, tokens, fileName, line);
     } else if (!cmd->cmp("antialias")) {
@@ -1125,9 +1122,9 @@ void GlobalParams::parseLine(char *buf, GString *fileName, int line) {
 	  !cmd->cmp("displayNamedCIDFontX") ||
 	  !cmd->cmp("displayCIDFontX")) {
 	error(-1, "-- Xpdf no longer supports X fonts");
-      } else if (!cmd->cmp("t1libControl") || !cmd->cmp("freetypeControl")) {
-	error(-1, "-- The t1libControl and freetypeControl options have been replaced");
-	error(-1, "   by the enableT1lib, enableFreeType, and antialias options");
+      } else if (!cmd->cmp("freetypeControl")) {
+	error(-1, "-- The freetypeControl option has been replaced");
+	error(-1, "   by the enableFreeType, and antialias options");
       } else if (!cmd->cmp("fontpath") || !cmd->cmp("fontmap")) {
 	error(-1, "-- the config file format has changed since Xpdf 0.9x");
       }
@@ -2395,15 +2392,6 @@ GBool GlobalParams::getContinuousView() {
   return f;
 }
 
-GBool GlobalParams::getEnableT1lib() {
-  GBool f;
-
-  lockGlobalParams;
-  f = enableT1lib;
-  unlockGlobalParams;
-  return f;
-}
-
 GBool GlobalParams::getEnableFreeType() {
   GBool f;
 
@@ -2825,15 +2813,6 @@ void GlobalParams::setContinuousView(GBool cont) {
   lockGlobalParams;
   continuousView = cont;
   unlockGlobalParams;
-}
-
-GBool GlobalParams::setEnableT1lib(char *s) {
-  GBool ok;
-
-  lockGlobalParams;
-  ok = parseYesNo2(s, &enableT1lib);
-  unlockGlobalParams;
-  return ok;
 }
 
 GBool GlobalParams::setEnableFreeType(char *s) {

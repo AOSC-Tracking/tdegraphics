@@ -10,10 +10,6 @@
 #pragma implementation
 #endif
 
-#if HAVE_T1LIB_H
-#include <t1lib.h>
-#endif
-
 #include <stdlib.h>
 #include <stdio.h>
 #ifndef WIN32
@@ -22,7 +18,6 @@
 #include "gmem.h"
 #include "GString.h"
 #include "SplashMath.h"
-#include "SplashT1FontEngine.h"
 #include "SplashFTFontEngine.h"
 #include "SplashFontFile.h"
 #include "SplashFontFileID.h"
@@ -40,9 +35,6 @@ extern "C" int unlink(char *filename);
 //------------------------------------------------------------------------
 
 SplashFontEngine::SplashFontEngine(
-#if HAVE_T1LIB_H
-				   GBool enableT1lib,
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
 				   GBool enableFreeType,
 #endif
@@ -53,13 +45,6 @@ SplashFontEngine::SplashFontEngine(
     fontCache[i] = NULL;
   }
 
-#if HAVE_T1LIB_H
-  if (enableT1lib) {
-    t1Engine = SplashT1FontEngine::init(aa);
-  } else {
-    t1Engine = NULL;
-  }
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
   if (enableFreeType) {
     ftEngine = SplashFTFontEngine::init(aa);
@@ -78,11 +63,6 @@ SplashFontEngine::~SplashFontEngine() {
     }
   }
 
-#if HAVE_T1LIB_H
-  if (t1Engine) {
-    delete t1Engine;
-  }
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
   if (ftEngine) {
     delete ftEngine;
@@ -111,11 +91,6 @@ SplashFontFile *SplashFontEngine::loadType1Font(SplashFontFileID *idA,
   SplashFontFile *fontFile;
 
   fontFile = NULL;
-#if HAVE_T1LIB_H
-  if (!fontFile && t1Engine) {
-    fontFile = t1Engine->loadType1Font(idA, src, enc);
-  }
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
   if (!fontFile && ftEngine) {
     fontFile = ftEngine->loadType1Font(idA, src, enc);
@@ -138,11 +113,6 @@ SplashFontFile *SplashFontEngine::loadType1CFont(SplashFontFileID *idA,
   SplashFontFile *fontFile;
 
   fontFile = NULL;
-#if HAVE_T1LIB_H
-  if (!fontFile && t1Engine) {
-    fontFile = t1Engine->loadType1CFont(idA, sec, enc);
-  }
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
   if (!fontFile && ftEngine) {
     fontFile = ftEngine->loadType1CFont(idA, src, enc);

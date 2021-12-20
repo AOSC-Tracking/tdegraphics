@@ -74,7 +74,7 @@
 // default maximum size of color cube to allocate
 #define defaultRGBCube 5
 
-// number of fonts (combined t1lib, FreeType, X server) to cache
+// number of fonts (combined FreeType, X server) to cache
 #define xOutFontCacheSize 64
 
 // number of Type 3 fonts to cache

@@ -694,9 +694,6 @@ void SplashOutputDev::startDoc(XRef *xrefA) {
     delete fontEngine;
   }
   fontEngine = new SplashFontEngine(
-#if HAVE_T1LIB_H
-				    globalParams->getEnableT1lib(),
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
 				    globalParams->getEnableFreeType(),
 #endif

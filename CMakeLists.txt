@@ -45,7 +45,6 @@ tde_setup_paths( )
 
 OPTION( WITH_ALL_OPTIONS "Enable all optional support" OFF )
 
-option( WITH_T1LIB "Enable t1lib support" OFF )
 option( WITH_PAPER "Enable libpaper support" ${WITH_ALL_OPTIONS} )
 OPTION( WITH_TIFF "Enable tiff support (tdefile-plugins)" ${WITH_ALL_OPTIONS} )
 OPTION( WITH_OPENEXR "Enable openexr support (tdefile-plugins)" ${WITH_ALL_OPTIONS} )
@@ -54,12 +53,6 @@ OPTION( WITH_PDF "Enable pdf support (tdefile-plugins)" ${WITH_ALL_OPTIONS} )
 
 ##### options comments ##########################
 
-# WITH_T1LIB   affects kpdf
-# WITH_T1LIB   description adds support for t1lb, a library for decoding
-#                          t1 fonts. If it is disabled or missing the freetype
-#                          library is used as a fallback implementation.
-#                          It is safe to disable this option. You shouldn't
-#                          lose any end-user functionality.
 # WITH_PAPER   affects kpdf
 # WITH_PAPER   description this library is only used to set some default
 #                          parameters of paper according to system settings.

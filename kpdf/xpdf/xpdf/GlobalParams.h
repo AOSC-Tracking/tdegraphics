@@ -242,7 +242,6 @@ public:
   GString *findFontFile(GString *fontName, char **exts);
   GString *getInitialZoom();
   GBool getContinuousView();
-  GBool getEnableT1lib();
   GBool getEnableFreeType();
   GBool getAntialias();
   GBool getVectorAntialias();
@@ -294,7 +293,6 @@ public:
   void setTextKeepTinyChars(GBool keep);
   void setInitialZoom(char *s);
   void setContinuousView(GBool cont);
-  GBool setEnableT1lib(char *s);
   GBool setEnableFreeType(char *s);
   GBool setAntialias(char *s);
   GBool setVectorAntialias(char *s);
@@ -424,7 +422,6 @@ private:
   GList *fontDirs;		// list of font dirs [GString]
   GString *initialZoom;		// initial zoom level
   GBool continuousView;		// continuous view mode
-  GBool enableT1lib;		// t1lib enable flag
   GBool enableFreeType;		// FreeType enable flag
   GBool antialias;		// font anti-aliasing enable flag
   GBool vectorAntialias;	// vector anti-aliasing enable flag

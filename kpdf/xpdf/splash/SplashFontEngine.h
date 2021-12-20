@@ -15,7 +15,6 @@
 
 #include "gtypes.h"
 
-class SplashT1FontEngine;
 class SplashFTFontEngine;
 class SplashDTFontEngine;
 class SplashDT4FontEngine;
@@ -37,9 +36,6 @@ public:
 
   // Create a font engine.
   SplashFontEngine(
-#if HAVE_T1LIB_H
-		   GBool enableT1lib,
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
 		   GBool enableFreeType,
 #endif
@@ -75,9 +71,6 @@ private:
 
   SplashFont *fontCache[splashFontCacheSize];
 
-#if HAVE_T1LIB_H
-  SplashT1FontEngine *t1Engine;
-#endif
 #if HAVE_FREETYPE_FREETYPE_H || HAVE_FREETYPE_H
   SplashFTFontEngine *ftEngine;
 #endif
