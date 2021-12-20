@@ -43,11 +43,13 @@ tde_setup_paths( )
 
 ##### optional stuff ############################
 
-option( WITH_T1LIB "Enable t1lib support" OFF )
-option( WITH_PAPER "Enable libpaper support" OFF )
-OPTION( WITH_TIFF "Enable tiff support (tdefile-plugins)" OFF )
-OPTION( WITH_OPENEXR "Enable openexr support (tdefile-plugins)" OFF )
-OPTION( WITH_PDF "Enable pdf support (tdefile-plugins)" OFF )
+OPTION( WITH_ALL_OPTIONS "Enable all optional support" OFF )
+
+option( WITH_T1LIB "Enable t1lib support" ${WITH_ALL_OPTIONS} )
+option( WITH_PAPER "Enable libpaper support" ${WITH_ALL_OPTIONS} )
+OPTION( WITH_TIFF "Enable tiff support (tdefile-plugins)" ${WITH_ALL_OPTIONS} )
+OPTION( WITH_OPENEXR "Enable openexr support (tdefile-plugins)" ${WITH_ALL_OPTIONS} )
+OPTION( WITH_PDF "Enable pdf support (tdefile-plugins)" ${WITH_ALL_OPTIONS} )
 
 
 ##### options comments ##########################
