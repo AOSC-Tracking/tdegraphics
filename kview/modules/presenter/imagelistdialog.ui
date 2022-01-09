@@ -254,15 +254,18 @@
 </connections>
 <includes>
     <include location="global" impldecl="in declaration">kdialog.h</include>
+    <include location="local"  impldecl="in implementation">imagelistdialog.ui.h</include>
+    <include location="local"  impldecl="in implementation">imagelistitem.h</include>
     <include location="global" impldecl="in implementation">kdebug.h</include>
     <include location="global" impldecl="in implementation">kimageviewer/viewer.h</include>
-    <include location="global" impldecl="in implementation">tdeio/netaccess.h</include>
+    <include location="global" impldecl="in implementation">knuminput.h</include>
+    <include location="global" impldecl="in implementation">kpushbutton.h</include>
     <include location="global" impldecl="in implementation">kurl.h</include>
     <include location="global" impldecl="in implementation">tdefiledialog.h</include>
-    <include location="global" impldecl="in implementation">tqstring.h</include>
+    <include location="global" impldecl="in implementation">tdeio/netaccess.h</include>
+    <include location="global" impldecl="in implementation">tdelistview.h</include>
     <include location="global" impldecl="in implementation">tdemessagebox.h</include>
-    <include location="local" impldecl="in implementation">imagelistitem.h</include>
-    <include location="local" impldecl="in implementation">imagelistdialog.ui.h</include>
+    <include location="global" impldecl="in implementation">tqstring.h</include>
 </includes>
 <forwards>
     <forward>class KURL</forward>
@@ -273,12 +276,4 @@
 </Q_SLOTS>
 <layoutdefaults spacing="6" margin="11"/>
 <layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
-<includes>
-    <include location="global" impldecl="in implementation">knuminput.h</include>
-    <include location="global" impldecl="in implementation">kpushbutton.h</include>
-</includes>
-<includehints>
-    <includehint>kdialog.h</includehint>
-    <includehint>tdelistview.h</includehint>
-</includehints>
 </UI>
