@@ -22,6 +22,7 @@
 #include <X11/Xlib.h>
 /*#include <gdk-pixbuf/gdk-pixbuf-private.h>*/
 #include "gdk-pixbuf-xlib-private.h"
+#include "gdk-pixbuf-xlibrgb.h"
 
 Display *gdk_pixbuf_dpy = NULL;
 int gdk_pixbuf_screen = -1;
