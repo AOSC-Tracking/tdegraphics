@@ -30,6 +30,8 @@
 
 #include <Converter.h>
 
+#include <CanvasItem.h>
+
 namespace KSVG
 {
 
@@ -49,8 +51,6 @@ class SVGPolygonElementImpl;
 class SVGPolylineElementImpl;
 class SVGClipPathElementImpl;
 
-class CanvasItem;
-class CanvasChunk;
 class CanvasItemList;
 class CanvasClipPath;
 class CanvasPaintServer;
