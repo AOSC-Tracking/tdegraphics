@@ -44,8 +44,8 @@ namespace T2P
 	class GlyphLayoutParams;
 	class GlyphRenderParams;
 
-	typedef myboost::shared_ptr<Font> SharedFont;
-	typedef myboost::shared_ptr<Glyph> SharedGlyph;
+	typedef std::shared_ptr<Font> SharedFont;
+	typedef std::shared_ptr<Glyph> SharedGlyph;
 
 	class Converter
 	{

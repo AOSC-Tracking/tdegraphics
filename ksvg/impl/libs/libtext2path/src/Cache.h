@@ -25,8 +25,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
-#include "myboost/shared_ptr.h"
+#include <memory>
 
 namespace T2P
 {
@@ -50,7 +49,7 @@ namespace T2P
 	class Cache
 	{
 	public:
-		typedef myboost::shared_ptr<T> SharedT;
+		typedef std::shared_ptr<T> SharedT;
 
 		Cache(int maxSize = 10) : m_size(0), m_maxSize(maxSize) { }
 		~Cache() { clear(); }
