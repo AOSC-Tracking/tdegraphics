@@ -25,4 +25,5 @@ include_directories(
 
 tde_add_library( dscparse STATIC_PIC
   SOURCES dscparse.cpp dscparse_adapter.cpp
+	CXX_FEATURES cxx_nullptr
 )

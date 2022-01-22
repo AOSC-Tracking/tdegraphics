@@ -35,6 +35,7 @@ tde_add_library( text2path STATIC_PIC
   SOURCES
     Affine.cpp Rectangle.cpp Font.cpp Glyph.cpp
     GlyphTracer.cpp Converter.cpp QtUnicode.cpp
+	CXX_FEATURES cxx_nullptr
 )
 
 ##### text2path (shared) ########################
@@ -44,6 +45,7 @@ tde_add_library( text2path SHARED
     Affine.cpp Rectangle.cpp Font.cpp Glyph.cpp
     GlyphTracer.cpp Converter.cpp QtUnicode.cpp
   VERSION 0.0.0
+	CXX_FEATURES cxx_nullptr
   LINK ${FREETYPE_LIBRARIES} ${FRIBIDI_LIBRARIES} ${FONTCONFIG_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )

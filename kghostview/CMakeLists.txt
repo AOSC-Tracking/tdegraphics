@@ -58,6 +58,7 @@ tde_add_library( kghostviewlib SHARED AUTOMOC
     kgvfactory.cpp  generalsettingswidget.ui gssettingswidget.ui
     thumbnailservice.cpp  configuration.kcfgc
   LINK dscparse-static tdeprint-shared tdeparts-shared
+	CXX_FEATURES cxx_nullptr
   VERSION 0.0.0
   DESTINATION ${LIB_INSTALL_DIR}
 )
