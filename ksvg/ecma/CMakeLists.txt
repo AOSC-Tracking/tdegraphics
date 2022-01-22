@@ -31,4 +31,5 @@ tde_add_library( ksvgecma STATIC_PIC AUTOMOC
   SOURCES
     ksvg_scriptinterpreter.cpp ksvg_ecma.cpp ksvg_helper.cpp
     ksvg_ecmaeventlistener.cpp ksvg_window.cpp
+  CXX_FEATURES cxx_nullptr
 )
