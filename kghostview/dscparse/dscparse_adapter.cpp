@@ -282,20 +282,20 @@ const CDSCMEDIA* KDSC::page_media() const
     return _cdsc->page_media;
 }
 
-auto_ptr<KDSCBBOX> KDSC::bbox() const
+unique_ptr<KDSCBBOX> KDSC::bbox() const
 {
-    if( _cdsc->bbox == 0 )
-	return auto_ptr<KDSCBBOX>( 0 );
+    if( _cdsc->bbox == nullptr )
+	return unique_ptr<KDSCBBOX>( nullptr );
     else
-	return auto_ptr<KDSCBBOX>( new KDSCBBOX( *_cdsc->bbox ) );
+	return unique_ptr<KDSCBBOX>( new KDSCBBOX( *_cdsc->bbox ) );
 }
 
-auto_ptr<KDSCBBOX> KDSC::page_bbox() const
+unique_ptr<KDSCBBOX> KDSC::page_bbox() const
 {
-    if( _cdsc->page_bbox == 0 )
-	return auto_ptr<KDSCBBOX>( 0 );
+    if( _cdsc->page_bbox == nullptr )
+	return unique_ptr<KDSCBBOX>( nullptr );
     else
-	return auto_ptr<KDSCBBOX>( new KDSCBBOX( *_cdsc->page_bbox ) );
+	return unique_ptr<KDSCBBOX>( new KDSCBBOX( *_cdsc->page_bbox ) );
 }
 
 TQString KDSC::dsc_title() const

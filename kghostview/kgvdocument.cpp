@@ -171,7 +171,7 @@ bool KGVDocument::uncompressFile()
     // If the file is gzipped, gunzip it to the temporary file _tmpUnzipped.
     kdDebug(4500) << "KGVDocument::uncompressFile()" << endl;
 
-    auto_ptr<TQIODevice> filterDev( KFilterDev::deviceForFile( _fileName, _mimetype, true ) );
+    unique_ptr<TQIODevice> filterDev( KFilterDev::deviceForFile( _fileName, _mimetype, true ) );
     if ( !filterDev.get() ) {
         KMimeType::Ptr mt = KMimeType::mimeType(_mimetype);
 	if ( (_fileName.right( 3 ) == ".gz") || mt->is("application/x-gzip") ) {

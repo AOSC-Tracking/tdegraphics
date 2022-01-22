@@ -241,7 +241,7 @@ bool GSCreator::create(const TQString &path, int width, int height, TQImage &img
   char translation[64] = "";
   char pagesize[32] = "";
   char resopt[32] = "";
-  std::auto_ptr<KDSCBBOX> bbox = dsc.bbox();
+  std::unique_ptr<KDSCBBOX> bbox = dsc.bbox();
   if (is_encapsulated) {
     // GhostScript's rendering at the extremely low resolutions
     // required for thumbnails leaves something to be desired. To
