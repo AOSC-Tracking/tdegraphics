@@ -48,5 +48,4 @@ tde_add_library( ksvgcore STATIC_PIC AUTOMOC
   SOURCES
     KSVGLoader.cpp KSVGCanvas.cpp KSVGReader.cpp KSVGTextChunk.cpp
     CanvasFactory.cpp CanvasItems.cpp KSVGHelper.cpp DocumentFactory.cpp
-  CXX_FEATURES cxx_nullptr
 )

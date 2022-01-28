@@ -46,6 +46,5 @@ tde_add_kpart( tdefile_ps AUTOMOC
 tde_add_kpart( gsthumbnail AUTOMOC
   SOURCES gscreator.cpp
   LINK dscparse-static ${TQT_LIBRARIES}
-	CXX_FEATURES cxx_nullptr
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

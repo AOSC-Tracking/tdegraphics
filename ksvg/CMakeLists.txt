@@ -34,7 +34,6 @@ configure_file( ${TDE_CMAKE_TEMPLATES}/tde_dummy_cpp.cmake dummy.cpp COPYONLY )
 
 tde_add_library( ksvg SHARED
   SOURCES dummy.cpp
-  CXX_FEATURES cxx_nullptr
   VERSION 0.0.1
   EMBED
     ksvgdom-static ksvgdomimpl-static ksvgcore-static ksvgecma-static
