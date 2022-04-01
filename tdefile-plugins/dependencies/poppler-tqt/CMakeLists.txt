@@ -41,6 +41,7 @@ install( FILES
     poppler-qt.h poppler-page-transition.h poppler-link-qt3.h
   DESTINATION ${INCLUDE_INSTALL_DIR} )
 
+
 ##### poppler-tqt (shared) ############################
 
 tde_add_library( poppler-tqt SHARED AUTOMOC
@@ -50,6 +51,12 @@ tde_add_library( poppler-tqt SHARED AUTOMOC
     poppler-page-transition.cpp poppler-page-transition-private.h
     poppler-private.cpp poppler-private.h
   VERSION 0.0.0
+  CXX_FEATURES ${POPPLER_CXX_FEATURES}
   LINK ${POPPLER_LIBRARIES} ${TQT_LIBRARIES}
   DESTINATION ${LIB_INSTALL_DIR}
 )
+
+
+##### install cmake export file #################
+
+tde_install_export( )
