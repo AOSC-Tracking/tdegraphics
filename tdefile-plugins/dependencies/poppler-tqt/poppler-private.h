@@ -104,7 +104,11 @@ class LinkDestinationData {
 
 class DocumentData {
   public:
+#   if defined(HAVE_POPPLER_2203)
+    DocumentData(std::unique_ptr<GooString> &&filePath, const std::optional<GooString> &password) : doc(std::move(filePath), password), m_fontInfoScanner(0), m_outputDev(0) {}
+#   else
     DocumentData(GooString *filePath, GooString *password) : doc(filePath,password), m_fontInfoScanner(0), m_outputDev(0) {}
+#   endif
 
     ~DocumentData()
     {

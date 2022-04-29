@@ -50,7 +50,11 @@ Document *Document::load(const TQString &filePath)
 #endif
   }
 
+# if defined(HAVE_POPPLER_2203)
+  DocumentData *doc = new DocumentData(std::make_unique<GooString>(TQFile::encodeName(filePath)), {});
+# else
   DocumentData *doc = new DocumentData(new GooString(TQFile::encodeName(filePath)), NULL);
+# endif
   Document *pdoc;
   if (doc->doc.isOk() || doc->doc.getErrorCode() == errEncrypted) {
     pdoc = new Document(doc);
@@ -84,10 +88,15 @@ bool Document::unlock(const TQCString &password)
 {
   if (data->locked) {
     /* racier then it needs to be */
+#   if defined(HAVE_POPPLER_2203)
+    DocumentData *doc2 = new DocumentData(std::make_unique<GooString>(data->doc.getFileName()),
+                                          GooString(password.data()));
+#   else
     GooString *filename = new GooString(data->doc.getFileName());
     GooString *pwd = new GooString(password.data());
     DocumentData *doc2 = new DocumentData(filename, pwd);
     delete pwd;
+#   endif
     if (!doc2->doc.isOk()) {
       delete doc2;
     } else {
