@@ -15,7 +15,6 @@ cmake_minimum_required( VERSION 3.1 )
 ##### general package setup #####################
 
 project( tdegraphics )
-set( VERSION R14.1.0 )
 
 
 ##### include essential cmake modules ###########
@@ -32,6 +31,11 @@ include( CheckSymbolExists )
 ##### include our cmake modules #################
 
 include( TDEMacros )
+
+
+##### set version number ########################
+
+tde_set_project_version( )
 
 
 ##### setup install paths #######################
