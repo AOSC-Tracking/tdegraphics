@@ -136,3 +136,8 @@ void KSnapshotWidget::slotCopyClicked()
 {
     emit copyClicked();
 }
+
+void KSnapshotWidget::slotOpenWithKPClicked()
+{
+    emit openWithKPClicked();
+}

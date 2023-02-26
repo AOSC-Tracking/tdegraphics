@@ -6,6 +6,7 @@
  * (c) Aaron J. Seigo 2002
  * (c) Nadeem Hasan 2003
  * (c) Bernd Brandstetter 2004
+ * (c) Emanoil Kotsev 2023
  *
  * Released under the LGPL see file LICENSE for details.
  */
@@ -35,6 +36,9 @@
 #include <tdepopupmenu.h>
 #include <kpushbutton.h>
 #include <tdestartupinfo.h>
+#include <kiconloader.h>
+#include <kprocess.h>
+#include <krun.h>
 
 #include <tqcursor.h>
 #include <tqregexp.h>
@@ -78,6 +82,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     connect( mainWidget, TQT_SIGNAL( saveClicked() ), TQT_SLOT( slotSaveAs() ) );
     connect( mainWidget, TQT_SIGNAL( printClicked() ), TQT_SLOT( slotPrint() ) );
     connect( mainWidget, TQT_SIGNAL( copyClicked() ), TQT_SLOT( slotCopy() ) );
+    connect( mainWidget, TQT_SIGNAL( openWithKPClicked() ), TQT_SLOT( slotOpenWithKP() ) );
 
     grabber->show();
     grabber->grabMouse( waitCursor );
@@ -114,6 +119,24 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
 
     TQPushButton *helpButton = actionButton( Help );
     helpButton->setPopup(helpMenu->menu());
+
+    // Populate Open With... menu
+    TDEPopupMenu *popupOpenWith = new TDEPopupMenu(this);
+    openWithOffers = TDETrader::self()->query("image/png", "Type == 'Application'");
+    int i = 0;
+    for (TDETrader::OfferList::Iterator it = openWithOffers.begin(); it != openWithOffers.end(); ++it)
+    {
+        popupOpenWith->insertItem(SmallIcon((*it)->icon()), (*it)->name(), i);
+        ++i; // we need menu ids to match with OfferList indexes
+    }
+    mainWidget->btnOpenWith->setPopup(popupOpenWith);
+    connect(popupOpenWith, SIGNAL(activated(int)), this, SLOT(slotOpenWith(int)));
+
+    // Check for KolourPaint availability
+    KService::Ptr kpaint = KService::serviceByDesktopName("kolourpaint");
+    if (!kpaint) {
+        mainWidget->btnOpenWithKP->hide();
+    }
 
     TDEAccel* accel = new TDEAccel(this);
     accel->insert(TDEStdAccel::Quit, TQT_TQOBJECT(kapp), TQT_SLOT(quit()));
@@ -357,6 +380,63 @@ void KSnapshot::slotWindowGrabbed( const TQPixmap &pix )
 
     TQApplication::restoreOverrideCursor();
     show();
+}
+
+void KSnapshot::slotOpenWith(int id)
+{
+    openWithExternalApp(*openWithOffers[id]);
+}
+
+void KSnapshot::slotOpenWithKP() {
+    KService::Ptr kpaint = KService::serviceByDesktopName("kolourpaint");
+    if (kpaint) {
+        openWithExternalApp(*kpaint);
+    }
+}
+
+static KTempFile *tmpFile = nullptr;
+
+void KSnapshot::openWithExternalApp(const KService &service) {
+    // Write snapshot to temporary file
+    bool ok = false;
+    tmpFile = new KTempFile;
+    if (tmpFile->status() == 0) {
+        if (snapshot.save(tmpFile->file(), "PNG")) {
+            if (tmpFile->close()) {
+                ok = true;
+            }
+        }
+    }
+
+    if (!ok) {
+        KMessageBox::error(this, i18n("KSnapshot was unable to create "
+                                      "temporary file."),
+                                 i18n("Unable to save image"));
+        return;
+    }
+
+    // Launch application
+    KURL::List list;
+    list.append(tmpFile->name());
+    TQStringList args = KRun::processDesktopExec(service, list, false, false);
+
+    TDEProcess *externalApp = new TDEProcess;
+    *externalApp << args;
+    connect(externalApp, SIGNAL(processExited(TDEProcess*)),
+            this, SLOT(slotExternalAppClosed()));
+
+    if (!externalApp->start(TDEProcess::OwnGroup)) {
+        KMessageBox::error(this, i18n("Cannot start %1!").arg(service.name()));
+        return;
+    }
+}
+
+void KSnapshot::slotExternalAppClosed() {
+    snapshot.load(tmpFile->name());
+    updatePreview();
+    tmpFile->unlink();
+    delete tmpFile;
+    tmpFile = nullptr;
 }
 
 void KSnapshot::closeEvent( TQCloseEvent * e )

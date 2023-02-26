@@ -242,6 +242,34 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
                         <string>Click this button to print the current screenshot.</string>
                     </property>
                 </widget>
+                <widget class="KPushButton">
+                    <property name="name">
+                        <cstring>btnOpenWithKP</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Open in &amp;KolourPaint</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Click this button to edit the snapshot in KolourPaint.</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>"kolourpaint"</iconset>
+                    </property>
+                </widget>
+                <widget class="KPushButton">
+                    <property name="name">
+                        <cstring>btnOpenWith</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Open &amp;with...</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>"document-open"</iconset>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Click this button to open the snapshot in another application.</string>
+                    </property>
+                </widget>
             </vbox>
         </widget>
     </grid>
@@ -290,6 +318,18 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
         <slot>slotPrintClicked()</slot>
     </connection>
     <connection>
+        <sender>btnOpenWithKP</sender>
+        <signal>clicked()</signal>
+        <receiver>KSnapshotWidget</receiver>
+        <slot>slotOpenWithKPClicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnOpenWith</sender>
+        <signal>clicked()</signal>
+        <receiver>KSnapshotWidget</receiver>
+        <slot>slotOpenWithClicked()</slot>
+    </connection>
+    <connection>
         <sender>btnSave</sender>
         <signal>clicked()</signal>
         <receiver>KSnapshotWidget</receiver>
@@ -328,6 +368,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
     <signal>saveClicked()</signal>
     <signal>copyClicked()</signal>
     <signal>printClicked()</signal>
+    <signal>openWithKPClicked()</signal>
     <signal>startImageDrag()</signal>
 </Q_SIGNALS>
 <Q_SLOTS>
@@ -337,6 +378,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
     <slot access="protected" specifier="non virtual">slotCopyClicked()</slot>
     <slot access="protected" specifier="non virtual">slotPrintClicked()</slot>
     <slot access="protected" specifier="non virtual">slotStartDrag()</slot>
+    <slot access="protected" specifier="non virtual">slotOpenWithKPClicked()</slot>
     <slot specifier="non virtual" returnType="int">previewWidth()</slot>
     <slot specifier="non virtual" returnType="int">previewHeight()</slot>
 </Q_SLOTS>

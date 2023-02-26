@@ -14,6 +14,7 @@
 #include <tdeglobalsettings.h>
 #include <kdialogbase.h>
 #include <kurl.h>
+#include <ktrader.h>
 
 class RegionGrabber;
 class KSnapshotWidget;
@@ -21,7 +22,6 @@ class KSnapshotWidget;
 class KSnapshotPreview : public TQLabel
 {
     Q_OBJECT
-  
 
     public:
         KSnapshotPreview(TQWidget *parent, const char *name = 0)
@@ -90,7 +90,6 @@ class KSnapshotPreview : public TQLabel
 class KSnapshot : public KDialogBase, virtual public KSnapshotIface
 {
   Q_OBJECT
-  
 
 public:
   KSnapshot(TQWidget *parent= 0, const char *name= 0, bool grabCurrent=false);
@@ -107,6 +106,9 @@ protected slots:
   void slotSaveAs();
   void slotCopy();
   void slotPrint();
+  void slotOpenWith(int id);
+  void slotOpenWithKP();
+  void slotExternalAppClosed();
   void slotMovePointer( int x, int y );
 
   void setTime(int newTime);
@@ -120,7 +122,7 @@ protected:
     virtual void closeEvent( TQCloseEvent * e );
     void resizeEvent(TQResizeEvent*);
     bool eventFilter( TQObject*, TQEvent* );
-    
+
 private slots:
     void grabTimerDone();
     void slotDragSnapshot();
@@ -131,6 +133,7 @@ private slots:
 
 private:
     bool save( const KURL& url );
+    void openWithExternalApp(const KService &service);
     void performGrab();
     void autoincFilename();
     int grabMode();
@@ -144,6 +147,7 @@ private:
     KSnapshotWidget *mainWidget;
     RegionGrabber *rgnGrab;
     bool modified;
+    TDETrader::OfferList openWithOffers;
 };
 
 #endif // KSNAPSHOT_H
