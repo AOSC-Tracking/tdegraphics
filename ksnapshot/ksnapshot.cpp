@@ -77,12 +77,12 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     mainWidget = new KSnapshotWidget( vbox, "mainWidget" );
 
     connect(mainWidget, TQT_SIGNAL(startImageDrag()), TQT_SLOT(slotDragSnapshot()));
-
-    connect( mainWidget, TQT_SIGNAL( newClicked() ), TQT_SLOT( slotGrab() ) );
-    connect( mainWidget, TQT_SIGNAL( saveClicked() ), TQT_SLOT( slotSaveAs() ) );
-    connect( mainWidget, TQT_SIGNAL( printClicked() ), TQT_SLOT( slotPrint() ) );
-    connect( mainWidget, TQT_SIGNAL( copyClicked() ), TQT_SLOT( slotCopy() ) );
-    connect( mainWidget, TQT_SIGNAL( openWithKPClicked() ), TQT_SLOT( slotOpenWithKP() ) );
+    connect(mainWidget, TQT_SIGNAL(newClicked()), TQT_SLOT(slotGrab()));
+    connect(mainWidget, TQT_SIGNAL(saveClicked()), TQT_SLOT(slotSaveAs()));
+    connect(mainWidget, TQT_SIGNAL(printClicked()), TQT_SLOT(slotPrint()));
+    connect(mainWidget, TQT_SIGNAL(copyClicked()), TQT_SLOT(slotCopy()));
+    connect(mainWidget, TQT_SIGNAL(openWithKPClicked()), TQT_SLOT(slotOpenWithKP()));
+    connect(tqApp,      TQT_SIGNAL(aboutToQuit()), TQT_SLOT(slotAboutToQuit()));
 
     grabber->show();
     grabber->grabMouse( waitCursor );
@@ -394,12 +394,10 @@ void KSnapshot::slotOpenWithKP() {
     }
 }
 
-static KTempFile *tmpFile = nullptr;
-
 void KSnapshot::openWithExternalApp(const KService &service) {
     // Write snapshot to temporary file
     bool ok = false;
-    tmpFile = new KTempFile;
+    KTempFile *tmpFile = new KTempFile;
     if (tmpFile->status() == 0) {
         if (snapshot.save(tmpFile->file(), "PNG")) {
             if (tmpFile->close()) {
@@ -409,9 +407,9 @@ void KSnapshot::openWithExternalApp(const KService &service) {
     }
 
     if (!ok) {
-        KMessageBox::error(this, i18n("KSnapshot was unable to create "
-                                      "temporary file."),
+        KMessageBox::error(this, i18n("KSnapshot was unable to create temporary file."),
                                  i18n("Unable to save image"));
+        delete tmpFile;
         return;
     }
 
@@ -423,33 +421,55 @@ void KSnapshot::openWithExternalApp(const KService &service) {
     TDEProcess *externalApp = new TDEProcess;
     *externalApp << args;
     connect(externalApp, SIGNAL(processExited(TDEProcess*)),
-            this, SLOT(slotExternalAppClosed()));
+            this, SLOT(slotExternalAppClosed(TDEProcess*)));
 
     if (!externalApp->start(TDEProcess::OwnGroup)) {
         KMessageBox::error(this, i18n("Cannot start %1!").arg(service.name()));
+        delete tmpFile;
         return;
     }
+
+    m_tmpFiles[externalApp] = tmpFile;
 }
 
-void KSnapshot::slotExternalAppClosed() {
-    snapshot.load(tmpFile->name());
-    updatePreview();
-    tmpFile->unlink();
-    delete tmpFile;
-    tmpFile = nullptr;
+void KSnapshot::slotExternalAppClosed(TDEProcess *process)
+{
+	if (process && m_tmpFiles.contains(process))
+	{
+		KTempFile *tmpFile = m_tmpFiles[process];
+		if (tmpFile)
+		{
+			snapshot.load(tmpFile->name());
+			updatePreview();
+			tmpFile->unlink();
+			delete tmpFile;
+		}
+		m_tmpFiles.remove(process);
+	}
+}
+
+void KSnapshot::slotAboutToQuit()
+{
+	for (KTempFile *tmpFile : m_tmpFiles)
+	{
+		tmpFile->unlink();
+		delete tmpFile;
+	}
+	m_tmpFiles.clear();
+
+	TDEConfig *conf=TDEGlobal::config();
+	conf->setGroup("GENERAL");
+	conf->writeEntry("delay",mainWidget->delay());
+	conf->writeEntry("mode",mainWidget->mode());
+	conf->writeEntry("includeDecorations",mainWidget->includeDecorations());
+	KURL url = filename;
+	url.setPass( TQString() );
+	conf->writePathEntry("filename",url.url());
 }
 
 void KSnapshot::closeEvent( TQCloseEvent * e )
 {
-    TDEConfig *conf=TDEGlobal::config();
-    conf->setGroup("GENERAL");
-    conf->writeEntry("delay",mainWidget->delay());
-    conf->writeEntry("mode",mainWidget->mode());
-    conf->writeEntry("includeDecorations",mainWidget->includeDecorations());
-    KURL url = filename;
-    url.setPass( TQString() );
-    conf->writePathEntry("filename",url.url());
-    e->accept();
+	e->accept();
 }
 
 bool KSnapshot::eventFilter( TQObject* o, TQEvent* e)

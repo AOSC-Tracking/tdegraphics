@@ -5,6 +5,7 @@
 #include <tqbitmap.h>
 #include <tqcursor.h>
 #include <tqlabel.h>
+#include <tqmap.h>
 #include <tqpainter.h>
 #include <tqpixmap.h>
 #include <tqstyle.h>
@@ -18,6 +19,8 @@
 
 class RegionGrabber;
 class KSnapshotWidget;
+class KTempFile;
+class TDEProcess;
 
 class KSnapshotPreview : public TQLabel
 {
@@ -101,6 +104,7 @@ public:
   TQString url() const { return filename.url(); }
 
 protected slots:
+  void slotAboutToQuit();
   void slotGrab();
   void slotSave();
   void slotSaveAs();
@@ -108,7 +112,7 @@ protected slots:
   void slotPrint();
   void slotOpenWith(int id);
   void slotOpenWithKP();
-  void slotExternalAppClosed();
+  void slotExternalAppClosed(TDEProcess *process);
   void slotMovePointer( int x, int y );
 
   void setTime(int newTime);
@@ -148,6 +152,7 @@ private:
     RegionGrabber *rgnGrab;
     bool modified;
     TDETrader::OfferList openWithOffers;
+    TQMap<TDEProcess*, KTempFile*> m_tmpFiles;
 };
 
 #endif // KSNAPSHOT_H

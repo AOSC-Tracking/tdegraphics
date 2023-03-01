@@ -324,12 +324,6 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
         <slot>slotOpenWithKPClicked()</slot>
     </connection>
     <connection>
-        <sender>btnOpenWith</sender>
-        <signal>clicked()</signal>
-        <receiver>KSnapshotWidget</receiver>
-        <slot>slotOpenWithClicked()</slot>
-    </connection>
-    <connection>
         <sender>btnSave</sender>
         <signal>clicked()</signal>
         <receiver>KSnapshotWidget</receiver>
