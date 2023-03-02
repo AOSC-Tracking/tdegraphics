@@ -297,12 +297,6 @@ void KSnapshot::slotGrab()
 void KSnapshot::slotPrint()
 {
     KPrinter printer;
-    if (snapshot.width() > snapshot.height())
-        printer.setOrientation(KPrinter::Landscape);
-    else
-        printer.setOrientation(KPrinter::Portrait);
-
-    tqApp->processEvents();
 
     if (printer.setup(this, i18n("Print Screenshot")))
     {
