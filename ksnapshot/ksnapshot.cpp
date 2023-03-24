@@ -162,6 +162,8 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( reject() ) );
 
     mainWidget->btnNew->setFocus();
+
+    oldWinPos = pos();
 }
 
 KSnapshot::~KSnapshot()
@@ -277,6 +279,7 @@ void KSnapshot::slotDragSnapshot()
 
 void KSnapshot::slotGrab()
 {
+    oldWinPos = pos();
     hide();
 
     if ( mainWidget->delay() && mainWidget->mode() != Region )
@@ -365,6 +368,7 @@ void KSnapshot::slotRegionGrabbed( const TQPixmap &pix )
 
   delete rgnGrab;
   TQApplication::restoreOverrideCursor();
+  move(oldWinPos);
   show();
 }
 
@@ -379,6 +383,7 @@ void KSnapshot::slotWindowGrabbed( const TQPixmap &pix )
     }
 
     TQApplication::restoreOverrideCursor();
+    move(oldWinPos);
     show();
 }
 
@@ -560,6 +565,7 @@ void KSnapshot::performGrab()
     TQApplication::restoreOverrideCursor();
     modified = true;
     updateCaption();
+    move(oldWinPos);
     show();
 }
 

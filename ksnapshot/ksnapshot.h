@@ -153,6 +153,7 @@ private:
     bool modified;
     TDETrader::OfferList openWithOffers;
     TQMap<TDEProcess*, KTempFile*> m_tmpFiles;
+    TQPoint oldWinPos;
 };
 
 #endif // KSNAPSHOT_H
