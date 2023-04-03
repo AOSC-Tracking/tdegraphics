@@ -2091,7 +2091,7 @@ DisplayFontParam *GlobalParams::getDisplayFont(GString *fontName) {
 	if (res != FcResultMatch || !s)  goto fin; 
 	ext = rindex((char*)s,'.');
 	if (!ext) goto fin;
-	if (!strncasecmp(ext,".ttf",4) || !strncasecmp(ext,".ttc",4)) {
+	if (!strncasecmp(ext,".ttf",4) || !strncasecmp(ext,".ttc",4) || !strncasecmp(ext,".otf",4)) {
 	  dfp = new DisplayFontParam(fontName->copy(), displayFontTT);
 	  dfp->tt.fileName = new GString((char*)s);
 	  FcPatternGetInteger(m, FC_INDEX, 0, &(dfp->tt.faceIndex));
