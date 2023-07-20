@@ -58,7 +58,7 @@ class BrowserExtension;
  */
 class Part : public KParts::ReadOnlyPart, public DocumentObserver, virtual public kpdf_dcop
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -196,7 +196,7 @@ private:
 
 class BrowserExtension : public KParts::BrowserExtension
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

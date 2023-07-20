@@ -32,7 +32,7 @@ bool operator!=(const HistoryItem& lhs, const HistoryItem& rhs)
 
 class History : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

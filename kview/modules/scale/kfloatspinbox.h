@@ -25,7 +25,7 @@
 
 class KFloatSpinBox : public TQSpinBox
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		KFloatSpinBox( float minValue, float maxValue, float step, unsigned int precision, TQWidget * parent = 0, const char * name = 0 );

@@ -31,7 +31,7 @@
 #include <tqcursor.h>
 
 class KLineal : public TDEMainWindow {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   enum { North=0, West=1, South=2, East=3 };

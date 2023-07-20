@@ -33,7 +33,7 @@ class TQCheckBox;
  */
 class PMObjectSettings : public PMSettingsDialogPage
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

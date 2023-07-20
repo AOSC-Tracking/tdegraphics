@@ -34,7 +34,7 @@
 
 class kpToolWidgetOpaqueOrTransparent : public kpToolWidgetBase
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

@@ -53,7 +53,7 @@ class TQCheckBox;
 
 class DeviceSelector: public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

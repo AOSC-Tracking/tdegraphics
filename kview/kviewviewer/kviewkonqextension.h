@@ -28,7 +28,7 @@ class KViewViewer;
 class KViewKonqExtension: public KParts::BrowserExtension
 {
 	friend class KViewViewer; // it can emit our signals
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		KViewKonqExtension( KImageViewer::Canvas *, KViewViewer *parent, const char *name = 0 );

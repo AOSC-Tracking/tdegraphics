@@ -43,7 +43,7 @@ class kpResizeSignallingLabel;
 
 class kpDocumentSaveOptionsPreviewDialog : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -95,7 +95,7 @@ class KPushButton;
 
 class kpDocumentSaveOptionsWidget : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

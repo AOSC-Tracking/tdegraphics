@@ -132,7 +132,7 @@ private:
 // KCommandHistory, this is only "almost source compatible".
 class kpCommandHistoryBase : public TQObject
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -238,7 +238,7 @@ private:
 //       The solution is to add this functionality to kpCommandHistoryBase.
 class kpCommandHistory : public kpCommandHistoryBase
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

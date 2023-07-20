@@ -65,7 +65,7 @@ protected:
 
 class kpEffectEmbossWidget : public kpColorEffectWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

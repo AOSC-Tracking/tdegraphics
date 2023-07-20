@@ -26,7 +26,7 @@
 
 class SVGCreator : public TQObject, public ThumbCreator
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     SVGCreator();

@@ -13,7 +13,7 @@
 
 class optionDialogFontsWidget : public optionDialogFontsWidget_base
 { 
-  Q_OBJECT
+  TQ_OBJECT
   
     
  public:

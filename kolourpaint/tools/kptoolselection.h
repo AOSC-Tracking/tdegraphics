@@ -58,7 +58,7 @@ class kpToolWidgetOpaqueOrTransparent;
 
 class kpToolSelection : public kpTool
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -242,7 +242,7 @@ private:
 class kpToolSelectionResizeScaleCommand : public TQObject,
                                           public kpNamedCommand
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

@@ -65,7 +65,7 @@ class TextSelection;
 
 class RenderedDocumentPage : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

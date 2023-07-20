@@ -31,7 +31,7 @@
   * @author Artur Rataj
   */
 class GradientSelection : public TQWidget  {
-   Q_OBJECT
+   TQ_OBJECT
   
 
 public:

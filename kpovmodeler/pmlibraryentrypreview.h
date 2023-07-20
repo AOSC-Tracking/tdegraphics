@@ -40,7 +40,7 @@ class PMTreeView;
  */
 class PMLibraryEntryPreview: public TQWidget
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /** Constructor */

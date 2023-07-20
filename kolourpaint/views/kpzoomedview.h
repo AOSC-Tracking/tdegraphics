@@ -50,7 +50,7 @@
  */
 /*sealed*/ class kpZoomedView : public kpView
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

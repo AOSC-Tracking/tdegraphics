@@ -28,7 +28,7 @@
  * @author Artur Rataj
  */
 class KZColorSelector : public TDESelector {
-   Q_OBJECT
+   TQ_OBJECT
   
 	
 public:

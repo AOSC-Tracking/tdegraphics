@@ -31,7 +31,7 @@ class PMBlobCylinder;
 
 class PMBlobCylinderEdit : public PMDetailObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMDetailObjectEdit Base;
 public:

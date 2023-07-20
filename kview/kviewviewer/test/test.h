@@ -12,7 +12,7 @@ namespace KParts { class ReadWritePart; }
  
 class Test : public KParts::MainWindow
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     Test();

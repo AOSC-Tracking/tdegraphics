@@ -75,7 +75,7 @@ private:
 
 class kpToolSkewDialog : public kpToolPreviewDialog
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

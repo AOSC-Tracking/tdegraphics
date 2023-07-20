@@ -108,7 +108,7 @@ class TQToolBar;
  */
 class PMDockWidgetAbstractHeader : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
 
@@ -158,7 +158,7 @@ private:
  */
 class PMDockWidgetAbstractHeaderDrag : public TQFrame
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
 
@@ -204,7 +204,7 @@ private:
  */
 class PMDockWidgetHeaderDrag : public PMDockWidgetAbstractHeaderDrag
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
 
@@ -246,7 +246,7 @@ private:
  */
 class PMDockWidgetHeader : public PMDockWidgetAbstractHeader
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
 
@@ -352,7 +352,7 @@ private:
  */
 class EXPORT_DOCKCLASS PMDockTabGroup : public TQTabWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   /**
@@ -411,7 +411,7 @@ private:
  */
 class EXPORT_DOCKCLASS PMDockWidget: public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 friend class PMDockManager;
 friend class PMDockSplitter;
@@ -829,7 +829,7 @@ private:
  */
 class EXPORT_DOCKCLASS PMDockManager: public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 friend class PMDockWidget;
 friend class PMDockMainWindow;
@@ -1214,7 +1214,7 @@ private:
  */
 class EXPORT_DOCKCLASS PMDockMainWindow : public TDEMainWindow, virtual public PartBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 friend class PMDockManager;
@@ -1419,7 +1419,7 @@ same as PMDockMainWindow*/
 
 class EXPORT_DOCKCLASS PMDockArea : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 friend class PMDockManager;

@@ -34,7 +34,7 @@
 
 class kpResizeSignallingLabel : public TQLabel
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

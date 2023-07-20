@@ -32,7 +32,7 @@ class PMDensity;
  */
 class PMDensityEdit : public PMTextureBaseEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMTextureBaseEdit Base;
 public:

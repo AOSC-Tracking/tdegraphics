@@ -42,7 +42,7 @@ class KColorEditDoc;
  * @version KDevelop version 0.4 code generation
  */
 class KColorEditView : public TQSplitter {
-  Q_OBJECT
+  TQ_OBJECT
   
 
   public:

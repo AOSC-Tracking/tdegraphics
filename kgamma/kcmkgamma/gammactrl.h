@@ -30,7 +30,7 @@ class XVidExtWrap;
 
 class GammaCtrl : public TQHBox  {
 
-  Q_OBJECT
+  TQ_OBJECT
   
   public:
     /** construktor */

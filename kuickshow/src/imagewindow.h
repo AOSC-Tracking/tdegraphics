@@ -37,7 +37,7 @@ class KuickFile;
 
 class ImageWindow : public ImlibWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

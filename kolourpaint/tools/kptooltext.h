@@ -43,7 +43,7 @@ class kpViewManager;
 
 class kpToolText : public kpToolSelection
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

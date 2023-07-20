@@ -29,7 +29,7 @@ class TDEInstance;
 
 class KSVGPluginFactory : public KParts::Factory
 {
-Q_OBJECT
+TQ_OBJECT
   
 public:
 	KSVGPluginFactory(TQObject *parent = 0, const char *name = 0);
@@ -46,7 +46,7 @@ private:
 
 class KSVGPluginBrowserExtension : public KParts::BrowserExtension
 {
-Q_OBJECT
+TQ_OBJECT
   
 friend class KSVGPlugin;
 

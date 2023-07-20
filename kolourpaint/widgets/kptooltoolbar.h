@@ -53,7 +53,7 @@ class kpToolWidgetSpraycanSize;
 
 class kpToolToolBar : public TDEToolBar
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

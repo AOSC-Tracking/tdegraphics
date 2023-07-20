@@ -52,7 +52,7 @@ class PMPovrayOutputWidget;
  */
 class PMDialogEditBase : public TQWidget
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

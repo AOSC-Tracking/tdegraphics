@@ -52,7 +52,7 @@ class TQCheckBox;
 
 class ImgPrintDialog: public KPrintDialogPage
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     ImgPrintDialog( KookaImage *img, TQWidget *parent=0L, const char* name=0L );

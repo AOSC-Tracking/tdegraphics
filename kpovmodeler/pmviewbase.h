@@ -64,7 +64,7 @@ public:
  */
 class PMViewOptionsWidget : public TQWidget
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**
@@ -90,7 +90,7 @@ signals:
  */
 class PMViewBase : public TQWidget
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 public:
    /**

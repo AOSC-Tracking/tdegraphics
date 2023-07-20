@@ -32,7 +32,7 @@ class KIntNumInput;
 
 class DefaultsWidget : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

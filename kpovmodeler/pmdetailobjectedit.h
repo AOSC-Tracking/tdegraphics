@@ -33,7 +33,7 @@ class TQComboBox;
  */
 class PMDetailObjectEdit : public PMNamedObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMNamedObjectEdit Base;
 public:

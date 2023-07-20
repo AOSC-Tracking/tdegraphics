@@ -40,7 +40,7 @@ class KGammaTable;
 
 class GammaDialog : public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 // FIXME: Doesn't compile with TQt 3 (malte)
 //   TQ_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )

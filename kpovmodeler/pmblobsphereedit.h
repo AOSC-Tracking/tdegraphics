@@ -33,7 +33,7 @@ class PMFloatEdit ;
  */
 class PMBlobSphereEdit : public PMDetailObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMDetailObjectEdit Base;
 public:

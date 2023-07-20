@@ -46,7 +46,7 @@ typedef enum { ID_SANE_DEBUG, ID_TQT_IMGIO, ID_SCAN } ScanMode;
 
 class ScanParams : public TQVBox
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    ScanParams( TQWidget *parent, const char *name = 0);

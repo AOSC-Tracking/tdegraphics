@@ -33,7 +33,7 @@ class TQPushButton;
  */
 class PMPluginSettings : public PMSettingsDialogPage
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

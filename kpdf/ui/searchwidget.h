@@ -29,7 +29,7 @@ class m_inputDelayTimer;
  */
 class SearchWidget : public TDEToolBar
 {
-    Q_OBJECT
+    TQ_OBJECT
   
     public:
         SearchWidget( TQWidget *parent, KPDFDocument *document );

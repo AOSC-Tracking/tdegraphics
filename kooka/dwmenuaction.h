@@ -42,7 +42,7 @@
  */
 class dwMenuAction:public TDEToggleAction
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    dwMenuAction( const TQString& text,

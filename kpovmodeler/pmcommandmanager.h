@@ -37,7 +37,7 @@ class PMPart;
  */
 class PMCommandManager : public TQObject
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

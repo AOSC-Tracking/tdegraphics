@@ -30,7 +30,7 @@ namespace KImageViewer {
 
 class KViewScale : public KParts::Plugin
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 public:
 	KViewScale( TQObject* parent, const char* name, const TQStringList & );

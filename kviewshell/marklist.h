@@ -41,7 +41,7 @@ class MarkListWidget;
 
 class ThumbnailWidget : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:
@@ -72,7 +72,7 @@ private:
 
 class MarkListWidget : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:
@@ -124,7 +124,7 @@ private:
 
 class MarkList: public TQScrollView
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

@@ -33,7 +33,7 @@
 
 class kpToolWidgetSpraycanSize : public kpToolWidgetBase
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

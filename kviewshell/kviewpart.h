@@ -29,7 +29,7 @@ class TQSize;
 
 class KViewPart : public KViewPart_Iface
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:
@@ -238,7 +238,7 @@ private:
 
 class KViewPartExtension : public KParts::BrowserExtension
 {
-  Q_OBJECT
+  TQ_OBJECT
   
   friend class KViewPart;
 

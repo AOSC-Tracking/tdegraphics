@@ -27,7 +27,7 @@ class TDEProcess;
 
 class KGamma: public TDECModule
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    public:
       KGamma(TQWidget *parent, const char *name, const TQStringList&);

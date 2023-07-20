@@ -35,7 +35,7 @@ class kpMainWindow;
 
 class kpToolRoundedRectangle : public kpToolRectangle
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

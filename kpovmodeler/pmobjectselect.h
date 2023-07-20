@@ -82,7 +82,7 @@ private:
  */
 class PMObjectSelect : public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

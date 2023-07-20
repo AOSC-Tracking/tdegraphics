@@ -59,7 +59,7 @@ protected:
 class kpSingleKeyTriggersAction : public TDEAction,
                                   public kpSingleKeyTriggersActionInterface
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

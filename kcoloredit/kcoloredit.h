@@ -53,7 +53,7 @@ class KColorEditView;
   */
 class KColorEditApp : public TDEMainWindow
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
   friend class KColorEditView;

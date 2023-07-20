@@ -32,7 +32,7 @@ class TQLabel;
 
 class MassScanDialog : public TQDialog
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public: 
    MassScanDialog( TQWidget *parent);

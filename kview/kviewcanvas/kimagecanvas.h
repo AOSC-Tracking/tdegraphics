@@ -41,7 +41,7 @@ class KPixmap;
  */
 class KDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		/**

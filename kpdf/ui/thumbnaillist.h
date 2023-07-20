@@ -29,7 +29,7 @@ class ThumbnailWidget;
  */
 class ThumbnailList : public TQScrollView, public DocumentObserver
 {
-Q_OBJECT
+TQ_OBJECT
   
 	public:
 		ThumbnailList(TQWidget *parent, KPDFDocument *document);

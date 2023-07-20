@@ -39,7 +39,7 @@ class TQLabel;
  */
 class PMLayoutSettings : public PMSettingsDialogPage
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

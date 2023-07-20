@@ -34,7 +34,7 @@ class TQCheckBox;
  */
 class PMTorusEdit : public PMSolidObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMSolidObjectEdit Base;
 public:

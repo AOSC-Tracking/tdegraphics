@@ -81,7 +81,7 @@ public:
 
 class KuickShow : public TDEMainWindow
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

@@ -53,7 +53,7 @@ public:
 
 class TopLevel : public TDEMainWindow
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 

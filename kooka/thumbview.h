@@ -60,7 +60,7 @@ namespace TDEIO {
 
 class ThumbView: public TQVBox /* TDEIconView */
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 
 public:

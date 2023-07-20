@@ -51,7 +51,7 @@ class SVGImageElementImpl : public TQObject,
 							public SVGStylableImpl,
 							public SVGTransformableImpl
 {
-Q_OBJECT
+TQ_OBJECT
   
 public:
 	SVGImageElementImpl(DOM::ElementImpl *);

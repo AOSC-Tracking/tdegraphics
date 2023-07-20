@@ -35,7 +35,7 @@ class PMLibraryHandle;
  */
 class PMLibraryHandleEdit: public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

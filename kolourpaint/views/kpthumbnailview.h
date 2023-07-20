@@ -40,7 +40,7 @@
  */
 class kpThumbnailView : public kpView
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

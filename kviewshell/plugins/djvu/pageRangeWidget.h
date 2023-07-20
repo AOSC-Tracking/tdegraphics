@@ -28,7 +28,7 @@
 
 class PageRangeWidget : public PageRangeWidget_base
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

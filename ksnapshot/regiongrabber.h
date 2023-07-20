@@ -37,7 +37,7 @@ class SizeTip : public TQLabel
 
 class RegionGrabber : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
   public:

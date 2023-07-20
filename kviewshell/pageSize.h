@@ -39,7 +39,7 @@ The main difference to the SimplePageSize class are the following.
 
 class pageSize : public TQObject, public SimplePageSize
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

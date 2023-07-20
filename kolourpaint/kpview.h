@@ -58,7 +58,7 @@ class kpViewScrollableContainer;
  */
 class kpView : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
 
 
 public:

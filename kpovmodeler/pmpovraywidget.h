@@ -41,7 +41,7 @@ class KURL;
  */
 class PMPovrayWidget : public KDialog
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

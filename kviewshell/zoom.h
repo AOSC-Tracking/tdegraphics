@@ -16,7 +16,7 @@
 
 class Zoom : public TQObject
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

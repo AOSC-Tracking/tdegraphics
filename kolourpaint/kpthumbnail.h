@@ -37,7 +37,7 @@ class kpThumbnailView;
 
 class kpThumbnail : public TQDockWindow
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

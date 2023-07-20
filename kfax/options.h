@@ -57,7 +57,7 @@ class KIntNumInput;
 
 class OptionsDialog : public KDialogBase {
 
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

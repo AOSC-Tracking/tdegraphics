@@ -34,7 +34,7 @@ class TQPoint;
  */
 class KImageHolder : public TQWidget
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		KImageHolder( TQWidget *parent = 0, const char * name = 0 );

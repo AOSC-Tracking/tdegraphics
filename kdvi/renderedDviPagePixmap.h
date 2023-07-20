@@ -28,7 +28,7 @@
 
 class RenderedDviPagePixmap : public RenderedDocumentPagePixmap
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
  public:

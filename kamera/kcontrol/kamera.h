@@ -46,7 +46,7 @@ class TDEPopupMenu;
 
 class KKameraConfig : public TDECModule
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 	friend class KameraDeviceSelectDialog;
 

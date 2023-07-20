@@ -37,7 +37,7 @@ class kpColor;
 
 class kpToolWidgetEraserSize : public kpToolWidgetBase
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

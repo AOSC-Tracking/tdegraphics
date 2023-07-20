@@ -40,7 +40,7 @@ class PMObject;
  */
 class PMErrorDialog : public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

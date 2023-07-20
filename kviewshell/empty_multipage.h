@@ -28,7 +28,7 @@
 
 class EmptyMultiPage : public KMultiPage
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

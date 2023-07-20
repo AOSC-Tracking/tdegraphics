@@ -27,7 +27,7 @@ class KGVShell;
  * key/mouse handling related to full-screen mode without bloating further KGVPart
  */
 class FullScreenFilter : public TQObject {
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		FullScreenFilter( KGVShell& parent );

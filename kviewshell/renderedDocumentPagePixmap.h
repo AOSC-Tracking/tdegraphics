@@ -20,7 +20,7 @@
 // about a certain page.
 class RenderedDocumentPagePixmap: public RenderedDocumentPage, public TQPixmap
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

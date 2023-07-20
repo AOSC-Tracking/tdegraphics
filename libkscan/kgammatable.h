@@ -29,7 +29,7 @@ extern "C" {
 
 class KGammaTable: public TQObject
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 
    TQ_PROPERTY( int g READ getGamma WRITE setGamma )

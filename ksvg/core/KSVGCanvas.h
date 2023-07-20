@@ -58,7 +58,7 @@ class CanvasPaintServer;
 // Must be a TQObject to be able to be loaded by KLibLoader...
 class KSVGCanvas : public TQObject
 {
-Q_OBJECT
+TQ_OBJECT
   
 public:
 	KSVGCanvas(unsigned int width, unsigned int height);

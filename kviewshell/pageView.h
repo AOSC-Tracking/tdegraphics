@@ -35,7 +35,7 @@ class PageNumber;
  */
 class PageView : public TQScrollView
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

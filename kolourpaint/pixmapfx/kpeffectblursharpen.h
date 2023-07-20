@@ -73,7 +73,7 @@ protected:
 
 class kpEffectBlurSharpenWidget : public kpColorEffectWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

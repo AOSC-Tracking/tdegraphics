@@ -41,7 +41,7 @@ private:
 
 class KDSCErrorDialog : public KDialog, public KDSCErrorHandler
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 	
 public:

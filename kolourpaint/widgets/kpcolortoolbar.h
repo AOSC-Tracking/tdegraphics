@@ -58,7 +58,7 @@ class kpMainWindow;
 //
 class kpDualColorButton : public TQFrame
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -118,7 +118,7 @@ protected:
 
 class kpColorCells : public KColorCells
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -156,7 +156,7 @@ protected slots:
 
 class kpTransparentColorCell : public TQFrame
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -184,7 +184,7 @@ protected:
 
 class kpColorPalette : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -211,7 +211,7 @@ protected:
 
 class kpColorSimilarityToolBarItem : public kpColorSimilarityCube
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -247,7 +247,7 @@ private:
 
 class kpColorToolBar : public TDEToolBar
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

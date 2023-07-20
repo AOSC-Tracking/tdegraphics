@@ -37,7 +37,7 @@
 
 class kpSelectionDrag : public TQImageDrag
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

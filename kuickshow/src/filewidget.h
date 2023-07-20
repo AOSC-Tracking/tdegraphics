@@ -28,7 +28,7 @@ class KFileItem;
 
 class FileWidget : public KDirOperator
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

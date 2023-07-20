@@ -33,7 +33,7 @@ class PMFloatEdit;
  */
 class PMPovrayMatrixEdit : public PMDialogEditBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMDialogEditBase Base;
 public:

@@ -28,7 +28,7 @@ class TQStringList;
 
 class KExrPlugin: public KFilePlugin
 {
-    Q_OBJECT
+    TQ_OBJECT
   
     
 public:

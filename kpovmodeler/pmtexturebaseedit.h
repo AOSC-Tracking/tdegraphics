@@ -33,7 +33,7 @@ class PMLinkEdit;
  */
 class PMTextureBaseEdit : public PMNamedObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMNamedObjectEdit Base;
 public:

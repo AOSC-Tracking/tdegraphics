@@ -30,7 +30,7 @@ class KColorEditView;
   * @author Artur Rataj
   */
 class PaletteView : public TQFrame {
-	Q_OBJECT
+	TQ_OBJECT
   
 
 public:

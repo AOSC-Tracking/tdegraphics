@@ -13,7 +13,7 @@
 
 class optionDialogSpecialWidget : public optionDialogSpecialWidget_base
 { 
-  Q_OBJECT
+  TQ_OBJECT
   
     
  public:

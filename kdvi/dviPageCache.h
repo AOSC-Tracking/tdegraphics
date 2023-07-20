@@ -25,7 +25,7 @@
 
 class DVIPageCache : public DocumentPageCache
 {
- Q_OBJECT
+ TQ_OBJECT
   
 
  public:

@@ -39,7 +39,7 @@ class TQLineEdit;
  */
 class PMIsoSurfaceEdit : public PMSolidObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMSolidObjectEdit Base;
 public:

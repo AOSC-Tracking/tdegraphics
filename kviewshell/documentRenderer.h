@@ -49,7 +49,7 @@ thread-safe.
 
 class DocumentRenderer : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

@@ -55,7 +55,7 @@ private:
  */
 class PMVectorListEdit : public TQTable
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

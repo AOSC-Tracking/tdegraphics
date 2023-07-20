@@ -32,7 +32,7 @@ class TDEConfig;
  */
 class PMPovrayOutputWidget : public KDialog
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

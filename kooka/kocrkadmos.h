@@ -65,7 +65,7 @@ private:
 
 class KadmosDialog: public KOCRBase
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     KadmosDialog( TQWidget *, KSpellConfig *spellConfig );

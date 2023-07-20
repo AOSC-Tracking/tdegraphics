@@ -38,7 +38,7 @@ class PageViewTip;
  */
 class PageView : public TQScrollView, public DocumentObserver
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
         friend class PageViewTip;

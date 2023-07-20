@@ -46,7 +46,7 @@ class TQCheckBox;
 
 class KookaPreferences : public KDialogBase
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     KookaPreferences();

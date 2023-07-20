@@ -31,7 +31,7 @@ class PMDisc;
 
 class PMDiscEdit : public PMGraphicalObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMGraphicalObjectEdit Base;
 public:

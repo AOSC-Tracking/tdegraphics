@@ -37,7 +37,7 @@
 class kpToolAction : public TDEToggleAction,
                      public kpSingleKeyTriggersActionInterface
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

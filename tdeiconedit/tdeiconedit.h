@@ -58,7 +58,7 @@ class PaletteToolBar;
 */
 class TDEIconEdit : public TDEMainWindow
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
   TDEIconEdit( KURL url = KURL(), const char *name = "tdeiconedit");

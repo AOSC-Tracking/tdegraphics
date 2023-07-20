@@ -73,7 +73,7 @@ extern int max_dpi;
 
 class ImageCanvas: public TQScrollView
 {
-    Q_OBJECT
+    TQ_OBJECT
   
     TQ_ENUMS( PopupIDs )
     TQ_PROPERTY( int brightness READ getBrightness WRITE setBrightness )

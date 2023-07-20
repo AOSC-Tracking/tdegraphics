@@ -36,7 +36,7 @@
 // not the middle.
 class kpSqueezedTextLabel : public TQLabel
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

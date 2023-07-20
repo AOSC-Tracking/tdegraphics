@@ -46,7 +46,7 @@ class KColorEditView;
   */
 class KColorEditDoc : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
   public:

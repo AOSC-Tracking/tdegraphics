@@ -34,7 +34,7 @@ class TQToolButton;
  */
 class PMComboAction : public TDEAction
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    PMComboAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* parent, const char* name );
@@ -66,7 +66,7 @@ private:
  */
 class PMLabelAction : public TDEAction
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    PMLabelAction( const TQString &text, TQObject *parent = 0, const char *name = 0 );
@@ -84,7 +84,7 @@ private:
  */
 class PMSpinBoxAction : public TDEAction
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    PMSpinBoxAction( const TQString& text, int accel, const TQObject* receiver, const char* member, TQObject* parent, const char* name );

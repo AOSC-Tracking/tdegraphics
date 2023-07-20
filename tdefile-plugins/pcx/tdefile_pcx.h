@@ -72,7 +72,7 @@ struct PCXHEADER
 
 class KPcxPlugin: public KFilePlugin
 {
-  Q_OBJECT
+  TQ_OBJECT
 
 
 public:

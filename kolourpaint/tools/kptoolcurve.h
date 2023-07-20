@@ -35,7 +35,7 @@ class kpMainWindow;
 
 class kpToolCurve : public kpToolPolygon
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

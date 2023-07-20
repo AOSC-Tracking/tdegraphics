@@ -33,7 +33,7 @@ class Pdf2dsc;
 
 class KGVDocument : public TQObject
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:
@@ -159,7 +159,7 @@ private:
 
 class Pdf2dsc : public TQObject
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 	
 public:

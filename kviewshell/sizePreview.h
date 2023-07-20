@@ -17,7 +17,7 @@ class SimplePageSize;
 
 class SizePreview : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

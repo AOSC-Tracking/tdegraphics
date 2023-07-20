@@ -46,7 +46,7 @@ class kpViewManager;
 
 class kpToolAirSpray : public kpTool
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

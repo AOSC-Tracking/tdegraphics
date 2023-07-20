@@ -26,7 +26,7 @@ class KURLWidget;
 
 class AboutWidget : public TQVBox
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

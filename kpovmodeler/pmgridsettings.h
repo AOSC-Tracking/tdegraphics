@@ -33,7 +33,7 @@ class PMFloatEdit;
  */
 class PMGridSettings : public PMSettingsDialogPage
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

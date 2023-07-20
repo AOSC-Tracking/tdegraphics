@@ -47,7 +47,7 @@ class kpViewManager;
 
 class kpToolPen : public kpTool
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

@@ -33,7 +33,7 @@
  */
 class PMVectorEdit : public TQWidget
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

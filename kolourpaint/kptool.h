@@ -57,7 +57,7 @@ class kpToolToolBar;
 // Base class for all tools
 class kpTool : public TQObject
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

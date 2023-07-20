@@ -47,7 +47,7 @@ class kpMainWindow;
 // TODO: refactor by sharing iface's with kpTool
 class kpGrip : public TQWidget
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:
@@ -115,7 +115,7 @@ protected:
 
 class kpViewScrollableContainer : public TQScrollView
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

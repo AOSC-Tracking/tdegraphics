@@ -63,7 +63,7 @@ private:
 
 class TDEIconListBox : public TQListBox    
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   TDEIconListBox( TQWidget *parent ) : TQListBox(parent) {} ;
@@ -96,7 +96,7 @@ private:
 
 class NewSelect : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   NewSelect(TQWidget *parent);
@@ -116,7 +116,7 @@ protected:
 
 class NewFromTemplate : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   NewFromTemplate(TQWidget *parent);
@@ -135,7 +135,7 @@ protected:
 
 class KNewIcon : public KWizard
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   KNewIcon(TQWidget *parent);

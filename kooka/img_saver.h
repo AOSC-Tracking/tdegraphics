@@ -100,7 +100,7 @@ class KookaImage;
 
 class FormatDialog:public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    FormatDialog( TQWidget *parent, const TQString&, const char * );
@@ -144,7 +144,7 @@ private:
  **/
 
 class ImgSaver:public TQObject {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
 	/**

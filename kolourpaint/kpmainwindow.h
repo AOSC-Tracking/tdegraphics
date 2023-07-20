@@ -87,7 +87,7 @@ class kpZoomedView;
 
 class kpMainWindow : public TDEMainWindow
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

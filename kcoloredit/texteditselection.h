@@ -29,7 +29,7 @@
   * @author Artur Rataj
   */
 class TextEditSelection : public TQWidget  {
-   Q_OBJECT
+   TQ_OBJECT
   
 
 public:

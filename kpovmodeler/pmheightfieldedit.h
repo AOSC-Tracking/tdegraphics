@@ -37,7 +37,7 @@ class TQPushButton;
  */
 class PMHeightFieldEdit : public PMSolidObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMSolidObjectEdit Base;
 public:

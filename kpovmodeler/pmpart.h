@@ -68,7 +68,7 @@ class TDEProcess;
  */
 class PMPart : public KParts::ReadWritePart, virtual public PMPartIface
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**
@@ -1024,7 +1024,7 @@ private:
 
 class PMBrowserExtension : public KParts::BrowserExtension
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    friend class PMPart;
 public:

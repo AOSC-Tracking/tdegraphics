@@ -39,7 +39,7 @@ class TQPainter;
 
 class SizeIndicator: public TQLabel
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    // TQ_PROPERTY( KGammaTable *gt READ getGt WRITE setGt )
 

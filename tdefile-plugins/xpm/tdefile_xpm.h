@@ -33,7 +33,7 @@ class TQStringList;
 
 class xpmPlugin: public KFilePlugin
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
   public:

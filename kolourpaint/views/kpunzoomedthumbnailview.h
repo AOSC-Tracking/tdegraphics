@@ -54,7 +54,7 @@ class kpViewScrollableContainer;
  */
 /*sealed*/ class kpUnzoomedThumbnailView : public kpThumbnailView
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

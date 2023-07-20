@@ -43,7 +43,7 @@ class TQPainter;
 // TODO: frame becomes a combobox when its parent kpToolToolBar becomes too small
 class kpToolWidgetBase : public TQFrame
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

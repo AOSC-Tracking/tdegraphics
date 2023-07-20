@@ -29,7 +29,7 @@
  */
 class KGVPageView : public TQScrollView
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

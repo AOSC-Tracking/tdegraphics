@@ -33,7 +33,7 @@ class TQMultiLineEdit;
  */
 class PMCommentEdit : public PMDialogEditBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMDialogEditBase Base;
 public:

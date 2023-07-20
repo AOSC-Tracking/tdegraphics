@@ -35,7 +35,7 @@ class TQLabel;
  */
 class PMGraphicalObjectEdit : public PMDetailObjectEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMDetailObjectEdit Base;
 public:

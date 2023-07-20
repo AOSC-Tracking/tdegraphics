@@ -21,7 +21,7 @@ class textSelection;
 
 class DVIWidget : public DocumentWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public: 

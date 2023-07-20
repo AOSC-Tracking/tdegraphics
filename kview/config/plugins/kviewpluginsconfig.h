@@ -25,7 +25,7 @@ class TDEConfig;
 
 class KViewPluginsConfig : public KSettings::PluginPage
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		KViewPluginsConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );

@@ -71,7 +71,7 @@ class SVGDocumentImpl : public TQObject,
 						public DOM::Document,
 						public SVGDOMNodeBridge
 {
-Q_OBJECT
+TQ_OBJECT
   
 public:
 	SVGDocumentImpl(bool anim = true, bool bFit = false, SVGImageElementImpl *parentImage = 0);

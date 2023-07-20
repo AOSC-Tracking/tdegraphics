@@ -34,7 +34,7 @@ class PresentationFrame;
  */
 class PresentationWidget : public TQDialog, public DocumentObserver
 {
-    Q_OBJECT
+    TQ_OBJECT
   
     public:
         PresentationWidget( TQWidget * parent, KPDFDocument * doc );

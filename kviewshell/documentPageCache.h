@@ -25,7 +25,7 @@ class RenderedDocumentPage;
 
 class DocumentPageCache: public TQObject
 {
- Q_OBJECT
+ TQ_OBJECT
   
 
  public:

@@ -36,7 +36,7 @@ class TQLabel;
  */
 class PMRainbowEdit : public PMTextureBaseEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMTextureBaseEdit Base;
 public:

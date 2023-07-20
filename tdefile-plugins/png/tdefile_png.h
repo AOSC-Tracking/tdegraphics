@@ -28,7 +28,7 @@ class TQStringList;
 
 class KPngPlugin: public KFilePlugin
 {
-    Q_OBJECT
+    TQ_OBJECT
   
     
 public:

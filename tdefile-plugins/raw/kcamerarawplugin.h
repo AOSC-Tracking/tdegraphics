@@ -25,7 +25,7 @@
 class TQImage;
 
 class KCameraRawPlugin: public KFilePlugin {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

@@ -25,7 +25,7 @@ class TQCheckBox;
 
 class KViewPresenterConfig : public TDECModule
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		KViewPresenterConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );

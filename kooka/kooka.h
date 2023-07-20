@@ -54,7 +54,7 @@ class KookaView;
  */
 class Kooka : public KParts::DockMainWindow
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     /**

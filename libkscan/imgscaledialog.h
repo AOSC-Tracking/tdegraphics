@@ -31,7 +31,7 @@
  */
 class ImgScaleDialog : public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    TQ_PROPERTY( int selected READ getSelected WRITE setSelValue )
       

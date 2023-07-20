@@ -34,7 +34,7 @@ extern "C"{
   */
 
 class DispGamma : public TQWidget  {
-    Q_OBJECT
+    TQ_OBJECT
   
 public: 
     DispGamma( TQWidget *parent );

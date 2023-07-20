@@ -25,7 +25,7 @@
 
 class KJpegPlugin: public KFilePlugin
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

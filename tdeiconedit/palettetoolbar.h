@@ -31,7 +31,7 @@ class KCustomColors;
 
 class PaletteToolBar : public TDEToolBar
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
   public:

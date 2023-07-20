@@ -35,7 +35,7 @@ class ocrWord;
 
 class ocrResEdit : public TQTextEdit
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     ocrResEdit( TQWidget  *parent );

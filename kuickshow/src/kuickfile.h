@@ -23,7 +23,7 @@ namespace TDEIO {
 
 class KuickFile : public TQObject
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

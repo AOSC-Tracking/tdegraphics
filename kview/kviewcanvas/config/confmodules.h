@@ -28,7 +28,7 @@ class TDEConfig;
 
 class KViewCanvasConfig : public TDECModule
 {
-	Q_OBJECT
+	TQ_OBJECT
   
 	public:
 		KViewCanvasConfig( TQWidget * parent, const char * name = 0, const TQStringList & args = TQStringList() );

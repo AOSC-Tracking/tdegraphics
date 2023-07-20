@@ -26,7 +26,7 @@ class TQStringList;
 
 class KBmpPlugin: public KFilePlugin
 {
-    Q_OBJECT
+    TQ_OBJECT
   
     
 public:

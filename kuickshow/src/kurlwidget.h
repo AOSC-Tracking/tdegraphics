@@ -23,7 +23,7 @@
 
 class KURLWidget : public KURLLabel
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

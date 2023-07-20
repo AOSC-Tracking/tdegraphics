@@ -31,7 +31,7 @@ class TQSplitter;
 
 class ScanDialog : public KScanDialog
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 
 public:

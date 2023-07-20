@@ -45,7 +45,7 @@ class TQImage;
 
 class TDEIconEditIcon : public TQObject
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   TDEIconEditIcon(TQObject*, const TQImage*, KURL url = KURL() );

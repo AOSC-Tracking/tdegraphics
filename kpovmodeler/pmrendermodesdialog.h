@@ -37,7 +37,7 @@ class PMFloatEdit;
  */
 class PMRenderModesDialog : public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**
@@ -106,7 +106,7 @@ private:
  */
 class PMRenderModeDialog : public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

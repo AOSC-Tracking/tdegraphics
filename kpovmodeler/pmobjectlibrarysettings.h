@@ -34,7 +34,7 @@ class TQListBox;
  */
 class PMObjectLibrarySettings : public PMSettingsDialogPage
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

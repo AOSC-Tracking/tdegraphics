@@ -49,7 +49,7 @@ private:
 
 class KuickPrintDialogPage : public KPrintDialogPage
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

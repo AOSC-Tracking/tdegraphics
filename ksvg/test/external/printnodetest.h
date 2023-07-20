@@ -10,7 +10,7 @@ namespace KSVG
 class SVGDocument;
 class Worker : public TQObject
 {
-Q_OBJECT
+TQ_OBJECT
   
 public:
 	Worker(const KURL &url);

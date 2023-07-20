@@ -68,7 +68,7 @@ namespace Kadmos {
     /* ==== CRep ========================================= */
     class CRep : public TQObject
     {
-        Q_OBJECT
+        TQ_OBJECT
   
     public:
         CRep();

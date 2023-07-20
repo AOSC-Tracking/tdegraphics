@@ -40,7 +40,7 @@ class TQComboBox;
 
 class KTemplateEditDlg : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   KTemplateEditDlg(TQWidget *);
@@ -61,7 +61,7 @@ protected:
 
 class KTemplateConfig : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   KTemplateConfig(TQWidget*);
@@ -82,7 +82,7 @@ protected:
 
 class KBackgroundConfig : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   KBackgroundConfig(TQWidget *parent);
@@ -109,7 +109,7 @@ protected:
 
 class KMiscConfig : public TQWidget
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 public:
   KMiscConfig(TQWidget *parent);
@@ -136,7 +136,7 @@ protected:
 
 class TDEIconConfig : public KDialogBase
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

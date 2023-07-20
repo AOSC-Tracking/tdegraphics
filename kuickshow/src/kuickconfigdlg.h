@@ -32,7 +32,7 @@ class ImageWindow;
 
 class KuickConfigDialog : public KDialogBase
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

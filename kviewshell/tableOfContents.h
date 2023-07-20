@@ -44,7 +44,7 @@ private:
 
 class TableOfContents : public TDEListView
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

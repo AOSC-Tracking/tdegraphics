@@ -31,7 +31,7 @@ class KColorButton;
  */
 class PMColorSettings : public PMSettingsDialogPage
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

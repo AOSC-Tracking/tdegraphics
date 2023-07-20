@@ -35,7 +35,7 @@
 
 class kpToolWidgetBrush : public kpToolWidgetBase
 {
-Q_OBJECT
+TQ_OBJECT
   
 
 public:

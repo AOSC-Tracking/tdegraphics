@@ -54,7 +54,7 @@ class TQComboBox;
 
 class ocradDialog: public KOCRBase
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 public:
     ocradDialog( TQWidget*, KSpellConfig* );

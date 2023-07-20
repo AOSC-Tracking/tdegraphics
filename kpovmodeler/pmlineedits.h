@@ -30,7 +30,7 @@
 
 class PMFloatEdit : public TQLineEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    enum ValidationOp { OpGreater, OpGreaterEqual,
@@ -89,7 +89,7 @@ private:
 
 class PMIntEdit : public TQLineEdit
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

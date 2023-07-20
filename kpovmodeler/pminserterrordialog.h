@@ -34,7 +34,7 @@ class TQLabel;
     during the execution of a command */
 class PMInsertErrorDialog : public KDialogBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

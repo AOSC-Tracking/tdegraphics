@@ -25,7 +25,7 @@ class KURL;
 
 class KGVMainWidget : public TQWidget
 {
-    Q_OBJECT
+    TQ_OBJECT
   
     
 public:

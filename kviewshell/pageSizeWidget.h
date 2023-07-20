@@ -17,7 +17,7 @@ class TQDoubleValidator;
 
 class pageSizeWidget : public pageSizeWidget_base
 {
-  Q_OBJECT
+  TQ_OBJECT
   
 
 public:

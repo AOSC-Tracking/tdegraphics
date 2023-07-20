@@ -42,7 +42,7 @@ class KTempFile;
  */
 class PMPovrayRenderWidget : public PMDragWidget
 {
-   Q_OBJECT
+   TQ_OBJECT
   
 public:
    /**

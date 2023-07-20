@@ -43,7 +43,7 @@ class TQPushButton;
  */
 class PMPatternEdit : public PMDialogEditBase
 {
-   Q_OBJECT
+   TQ_OBJECT
   
    typedef PMDialogEditBase Base;
 public:

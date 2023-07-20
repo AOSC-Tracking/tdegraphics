@@ -19,7 +19,7 @@ class KPDFDocument;
 
 class TOC : public TDEListView, public DocumentObserver
 {
-Q_OBJECT
+TQ_OBJECT
   
     public:
         TOC(TQWidget *parent, KPDFDocument *document);

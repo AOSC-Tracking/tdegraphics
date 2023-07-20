@@ -27,7 +27,7 @@ class KURLCompletion;
 
 class FileFinder : public KLineEdit
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

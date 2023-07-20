@@ -27,7 +27,7 @@
   * @author Artur Rataj
   */
 class KXYColorSelector : public KXYSelector  {
-   Q_OBJECT
+   TQ_OBJECT
   
 
 public:

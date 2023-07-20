@@ -30,7 +30,7 @@
  *  @author Artur Rataj
  */
 class ColorSelector : public TQWidget  {
-	Q_OBJECT
+	TQ_OBJECT
   
 
 public:

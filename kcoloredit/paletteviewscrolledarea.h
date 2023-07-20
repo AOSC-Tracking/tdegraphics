@@ -32,7 +32,7 @@ class TQScrollBar;
  *  @author Artur Rataj
  */
 class PaletteViewScrolledArea : public TQFrame {
-	Q_OBJECT
+	TQ_OBJECT
   
 
 public:
