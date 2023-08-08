@@ -783,7 +783,7 @@ void ImageCanvas::drawHAreaBorder(TQPainter &p,int x1,int x2,int y,int r)
   } else if(!acquired) p.setPen(TQPen(TQColor(150,150,150)));
 
   for(;;) {
-    if(TQT_TQRECT_OBJECT(rect()).contains(TQPoint(x1,y))) {
+    if(rect().contains(TQPoint(x1,y))) {
       if( r && acquired ) {
 	int re_x1, re_y;
 	inv_scale_matrix.map( x1+cx, y+cy, &re_x1, &re_y );
@@ -826,7 +826,7 @@ void ImageCanvas::drawVAreaBorder(TQPainter &p, int x, int y1, int y2, int r )
     if( !acquired ) p.setPen( TQPen( TQColor(150,150,150) ) );
 
   for(;;) {
-    if(TQT_TQRECT_OBJECT(rect()).contains( TQPoint(x,y1) )) {
+    if(rect().contains( TQPoint(x,y1) )) {
       if( r && acquired ) {
 	int re_y1, re_x;
 	inv_scale_matrix.map( x+cx, y1+cy, &re_x, &re_y1 );

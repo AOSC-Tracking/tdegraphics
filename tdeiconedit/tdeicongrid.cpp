@@ -1909,7 +1909,7 @@ void TDEIconEditGrid::drawPointArray(TQPointArray a, DrawAction action)
         int x = a[i].x();
         int y = a[i].y();
 
-        if(img->valid(x, y) && TQT_TQRECT_OBJECT(a.boundingRect()).contains(a[ i ]))
+        if(img->valid(x, y) && a.boundingRect().contains(a[ i ]))
         {
             //kdDebug(4640) << "x: " << x << " - y: " << y << endl;
             switch( action )

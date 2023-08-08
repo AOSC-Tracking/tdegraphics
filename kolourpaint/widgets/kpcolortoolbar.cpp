@@ -783,7 +783,7 @@ void kpTransparentColorCell::mousePressEvent (TQMouseEvent * /*e*/)
 // protected virtual [base TQWidget]
 void kpTransparentColorCell::mouseReleaseEvent (TQMouseEvent *e)
 {
-    if (TQT_TQRECT_OBJECT(rect ()).contains (e->pos ()))
+    if (rect ().contains (e->pos ()))
     {
         if (e->button () == Qt::LeftButton)
         {

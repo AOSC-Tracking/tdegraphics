@@ -83,7 +83,7 @@ void KImageHolder::mousePressEvent( TQMouseEvent *ev )
 void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 {
 	//FIXME: when scrolling the cursorpos shouldn't change
-	if( TQT_TQRECT_OBJECT(this->rect()).contains( ev->pos(), false ) )
+	if( this->rect().contains( ev->pos(), false ) )
 		emit cursorPos( ev->pos() );
 	//kdDebug( 4620 ) << k_funcinfo << " ev->state() = " << ev->state() << endl;
 	if( ev->state() & Qt::LeftButton || ev->state() & Qt::MidButton )

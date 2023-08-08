@@ -969,7 +969,7 @@ void kpView::mouseMoveEvent (TQMouseEvent *e)
     // TODO: This is wrong if you leaveEvent the mainView by mouseMoving on the
     //       mainView, landing on top of the thumbnailView cleverly put on top
     //       of the mainView.
-    setHasMouse (TQT_TQRECT_OBJECT(rect ()).contains (e->pos ()));
+    setHasMouse (rect ().contains (e->pos ()));
 
     if (tool ())
         tool ()->mouseMoveEvent (e);
@@ -1003,7 +1003,7 @@ void kpView::mouseReleaseEvent (TQMouseEvent *e)
                << endl;
 #endif
 
-    setHasMouse (TQT_TQRECT_OBJECT(rect ()).contains (e->pos ()));
+    setHasMouse (rect ().contains (e->pos ()));
 
     if (tool ())
         tool ()->mouseReleaseEvent (e);
