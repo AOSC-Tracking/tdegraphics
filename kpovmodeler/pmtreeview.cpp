@@ -101,7 +101,7 @@ void PMTreeView::slotObjectChanged( PMObject* obj, const int mode,
    bool as = m_acceptSelect;
    m_acceptSelect = true;
 
-   if( TQT_BASE_OBJECT(sender) != TQT_BASE_OBJECT(this) )
+   if( sender != this )
    {
       if( ( mode & PMCAdd ) && !( mode & PMCInsertError ) )
       {

@@ -161,7 +161,7 @@ KViewPresenter::~KViewPresenter()
 
 bool KViewPresenter::eventFilter( TQObject *obj, TQEvent *ev )
 {
-	if( TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pImageList) || TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pImageList->m_pListView) || TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pImageList->m_pListView->viewport()) || TQT_BASE_OBJECT(obj) == TQT_BASE_OBJECT(m_pViewer->widget()) )
+	if( obj == m_pImageList || obj == m_pImageList->m_pListView || obj == m_pImageList->m_pListView->viewport() || obj == m_pViewer->widget() )
 	{
 		switch( ev->type() )
 		{

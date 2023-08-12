@@ -174,7 +174,7 @@ PMDialogView::~PMDialogView( )
 
 void PMDialogView::slotObjectChanged( PMObject* obj, const int mode, TQObject* sender )
 {
-   if( TQT_BASE_OBJECT(sender) == TQT_BASE_OBJECT(this) )
+   if( sender == this )
       return;
    if( mode & PMCNewSelection )
    {

@@ -571,7 +571,7 @@ bool Part::closeURL()
 bool Part::eventFilter( TQObject * watched, TQEvent * e )
 {
     // if pageView has been resized, save splitter sizes
-    if ( TQT_BASE_OBJECT(watched) == TQT_BASE_OBJECT(m_pageView) && e->type() == TQEvent::Resize )
+    if ( watched == m_pageView && e->type() == TQEvent::Resize )
         m_saveSplitterSizeTimer->start(500, true);
 
     // only intercept events, don't block them

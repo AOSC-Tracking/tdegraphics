@@ -256,7 +256,7 @@ void PMDockMainWindow::setMainDockWidget( PMDockWidget* mdw )
 void PMDockMainWindow::setView( TQWidget *view )
 {
   if ( view->isA("PMDockWidget") ){
-    if ( TQT_BASE_OBJECT(view->parent()) != TQT_BASE_OBJECT(this) ) ((PMDockWidget*)view)->applyToWidget( this );
+    if ( view->parent() != this ) ((PMDockWidget*)view)->applyToWidget( this );
   }
 
 #ifndef NO_KDE2
@@ -559,7 +559,7 @@ void PMDockWidget::setEnableDocking( int pos )
 void PMDockWidget::updateHeader()
 {
   if ( parent() ){
-    if ( (TQT_BASE_OBJECT(parent()) == TQT_BASE_OBJECT(manager->main)) || isGroup || (eDocking == PMDockWidget::DockNone) ){
+    if ( (parent() == manager->main) || isGroup || (eDocking == PMDockWidget::DockNone) ){
       header->hide();
     } else {
       header->setTopLevel( false );
@@ -573,7 +573,7 @@ void PMDockWidget::updateHeader()
 
 void PMDockWidget::applyToWidget( TQWidget* s, const TQPoint& p )
 {
-  if ( TQT_BASE_OBJECT(parent()) != TQT_BASE_OBJECT(s) )
+  if ( parent() != s )
   {
     hide();
     reparent(s, 0, TQPoint(0,0), false);
@@ -1081,7 +1081,7 @@ void PMDockWidget::setWidget( TQWidget* mw )
 {
   if ( !mw ) return;
 
-  if ( TQT_BASE_OBJECT(mw->parent()) != TQT_BASE_OBJECT(this) ){
+  if ( mw->parent() != this ){
     mw->reparent(this, 0, TQPoint(0,0), false);
   }
 
@@ -1118,13 +1118,13 @@ void PMDockWidget::setDockTabName( PMDockTabGroup* tab )
 
 bool PMDockWidget::mayBeHide() const
 {
-  bool f = (TQT_BASE_OBJECT(parent()) != TQT_BASE_OBJECT(manager->main));
+  bool f = (parent() != manager->main);
   return ( !isGroup && !isTabGroup && f && isVisible() && ( eDocking != (int)PMDockWidget::DockNone ) );
 }
 
 bool PMDockWidget::mayBeShow() const
 {
-  bool f = (TQT_BASE_OBJECT(parent()) != TQT_BASE_OBJECT(manager->main));
+  bool f = (parent() != manager->main);
   return ( !isGroup && !isTabGroup && f && !isVisible() );
 }
 
@@ -1800,7 +1800,7 @@ void PMDockManager::writeConfig(TQDomElement &base)
     TQObjectListIt it(*childDock);
     PMDockWidget *obj1;
     while ( (obj1=(PMDockWidget*)it.current()) ) {
-        if ( TQT_BASE_OBJECT(obj1->parent()) == TQT_BASE_OBJECT(main) )
+        if ( obj1->parent() == main )
             mainWidgetStr = TQString::fromLatin1(obj1->name());
         nList.append(obj1->name());
         ++it;
@@ -2020,7 +2020,7 @@ void PMDockManager::writeConfig( TDEConfig* c, TQString group )
     ++it;
     //debug("  +Add subdock %s", obj->name());
     nList.append( obj->name() );
-    if ( TQT_BASE_OBJECT(obj->parent()) == TQT_BASE_OBJECT(main) )
+    if ( obj->parent() == main )
       c->writeEntry( "Main:view", obj->name() );
   }
 

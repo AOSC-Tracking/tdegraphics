@@ -1238,7 +1238,7 @@ void PMGLView::slotObjectChanged( PMObject* obj, const int mode,
       redraw = true;
 
    if( redraw )
-      repaint( TQT_BASE_OBJECT(sender) == TQT_BASE_OBJECT(this) );
+      repaint( sender == this );
 }
 
 void PMGLView::repaint( bool graphicalChange )

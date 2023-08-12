@@ -241,7 +241,7 @@ void PMSettingsDialog::slotRepaint( )
 
 void PMSettingsDialog::slotShowPage( )
 {
-   const TQObject* w = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender( )));
+   const TQObject* w = sender( );
    if( w )
    {
       int index = findPage( ( const PMSettingsDialogPage* ) w );

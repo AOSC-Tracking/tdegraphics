@@ -479,7 +479,7 @@ void KSnapshot::closeEvent( TQCloseEvent * e )
 
 bool KSnapshot::eventFilter( TQObject* o, TQEvent* e)
 {
-    if ( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(grabber) && e->type() == TQEvent::MouseButtonPress ) {
+    if ( o == grabber && e->type() == TQEvent::MouseButtonPress ) {
 	TQMouseEvent* me = (TQMouseEvent*) e;
 	if ( TQWidget::mouseGrabber() != grabber )
 	    return false;

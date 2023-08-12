@@ -52,7 +52,7 @@ bool KGVPageView::atBottom() const
 
 bool KGVPageView::eventFilter( TQObject* o, TQEvent* e )
 {
-    if ( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(_page) &&  e->type() == TQEvent::Resize ) {
+    if ( o == _page &&  e->type() == TQEvent::Resize ) {
 	// We need to call TQScrollView::eventFilter before centerContents,
 	// otherwise a loop will be introduced.
 	bool result = TQScrollView::eventFilter( o, e );

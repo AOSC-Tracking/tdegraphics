@@ -341,7 +341,7 @@ void PMShell::slotNewLibraryBrowserView( )
 
 void PMShell::slotDockWidgetClosed( )
 {
-   const TQObject* o = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender( )));
+   const TQObject* o = sender( );
    if( o && o->inherits( "PMDockWidget" ) )
    {
       if( m_objectsToDelete.containsRef( o ) == 0 )
