@@ -24,7 +24,7 @@
 PageViewMessage::PageViewMessage( TQWidget * parent )
     : TQWidget( parent, "pageViewMessage" ), m_timer( 0 )
 {
-    setFocusPolicy( TQ_NoFocus );
+    setFocusPolicy( TQWidget::NoFocus );
     setBackgroundMode( NoBackground );
     setPaletteBackgroundColor(kapp->palette().color(TQPalette::Active, TQColorGroup::Background));
     // if the layout is LtR, we can safely place it in the right position

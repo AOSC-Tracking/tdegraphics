@@ -18,7 +18,7 @@ SVGTestWidget::SVGTestWidget(const KURL &url)
 {
 	setBackgroundColor(TQt::white);
 	setMouseTracking(true);	
-	setFocusPolicy(TQ_WheelFocus);
+	setFocusPolicy(TQWidget::WheelFocus);
 
 	m_doc = DocumentFactory::self()->requestDocument(TQT_TQOBJECT(this), TQT_SLOT(slotRenderingFinished()));
 	if(!m_doc)

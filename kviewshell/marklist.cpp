@@ -181,7 +181,7 @@ MarkListWidget::MarkListWidget(TQWidget* _parent, MarkList* _markList, const Pag
   TQBoxLayout* bottomLayout = new TQHBoxLayout(layout);
 
   checkBox = new TQCheckBox(TQString(), this );
-  checkBox->setFocusPolicy(TQ_NoFocus);
+  checkBox->setFocusPolicy(TQWidget::NoFocus);
   TQToolTip::add(checkBox, i18n("Select for printing"));
   bottomLayout->addWidget(checkBox, 0, TQt::AlignAuto);
 
@@ -277,8 +277,8 @@ MarkList::MarkList(TQWidget* parent, const char* name)
 {
   currentPage = PageNumber::invalidPage;
   widgetList.setAutoDelete(true);
-  setFocusPolicy( TQ_StrongFocus );
-  //viewport()->setFocusPolicy( TQ_WheelFocus );
+  setFocusPolicy( TQWidget::StrongFocus );
+  //viewport()->setFocusPolicy( TQWidget::WheelFocus );
   setResizePolicy(TQScrollView::Manual);
 
   setVScrollBarMode(TQScrollView::AlwaysOn);

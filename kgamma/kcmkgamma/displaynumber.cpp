@@ -29,7 +29,7 @@ DisplayNumber::DisplayNumber(TQWidget *parent, int digits, \
   setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
   setBackgroundMode(TQt::PaletteBase);
   setAlignment(TQt::AlignCenter);
-  setFocusPolicy(TQ_NoFocus);
+  setFocusPolicy(TQWidget::NoFocus);
 }
 
 DisplayNumber::~DisplayNumber(){

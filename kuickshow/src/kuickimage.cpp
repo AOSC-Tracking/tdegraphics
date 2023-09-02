@@ -213,8 +213,8 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 //	tqDebug("-- smoothResize: %i x %i", newWidth, newHeight);
 	
 	TQImage *image = newTQImage();
-	// Note: TQ_ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
-	TQImage scaledImage = image->smoothScale(newWidth, newHeight, TQ_ScaleFree);
+	// Note: TQImage::ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
+	TQImage scaledImage = image->smoothScale(newWidth, newHeight, TQImage::ScaleFree);
 		
 	delete image;
 	

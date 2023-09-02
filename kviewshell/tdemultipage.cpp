@@ -49,7 +49,7 @@ KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject 
   searchInProgress = false;
   
   TQVBox* verticalBox = new TQVBox(parentWidget);
-  verticalBox->setFocusPolicy(TQ_StrongFocus);
+  verticalBox->setFocusPolicy(TQWidget::StrongFocus);
   setWidget(verticalBox);
   
   splitterWidget = new TQSplitter(verticalBox, widgetName);

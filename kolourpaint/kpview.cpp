@@ -122,7 +122,7 @@ kpView::kpView (kpDocument *document,
 
 
     setBackgroundMode (TQt::NoBackground);  // no flicker
-    setFocusPolicy (TQ_WheelFocus);
+    setFocusPolicy (TQWidget::WheelFocus);
     setMouseTracking (true);  // mouseMoveEvent's even when no mousebtn down
     setKeyCompression (true);
     setInputMethodEnabled (true);  // ensure using InputMethod

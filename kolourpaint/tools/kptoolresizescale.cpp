@@ -634,7 +634,7 @@ static void toolButtonSetLook (TQToolButton *button,
     button->setUsesTextLabel (true);
     button->setTextLabel (name, false/*no tooltip*/);
     button->setAccel (TQAccel::shortcutKey (name));
-    button->setFocusPolicy (TQ_StrongFocus);
+    button->setFocusPolicy (TQWidget::StrongFocus);
     button->setToggleButton (true);
 }
 

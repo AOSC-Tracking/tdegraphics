@@ -49,7 +49,7 @@ FileFinder::FileFinder( TQWidget *parent, const char *name )
     comp->setReplaceEnv( true );
     setCompletionObject( comp, false );
     setAutoDeleteCompletionObject( true );
-    setFocusPolicy( TQ_ClickFocus );
+    setFocusPolicy( TQWidget::ClickFocus );
 
     TDEConfig *config = TDEGlobal::config();
     TDEConfigGroupSaver cs( config, "GeneralConfiguration" );

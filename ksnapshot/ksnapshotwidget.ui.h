@@ -39,10 +39,10 @@ void KSnapshotWidget::setPreview( const TQPixmap &pm )
     if ( r1 * previewWidth()  < previewHeight() )
         img = img.smoothScale(  previewWidth(),
 				int( previewWidth() * r1 ),
-				TQ_ScaleMin );
+				TQImage::ScaleMin );
     else
         img = img.smoothScale( ( int ) ( ( ( double )previewHeight() ) / r1 ),
-			       previewHeight(), TQ_ScaleMin );
+			       previewHeight(), TQImage::ScaleMin );
 
     TQToolTip::remove( lblImage );
     TQToolTip::add( lblImage,

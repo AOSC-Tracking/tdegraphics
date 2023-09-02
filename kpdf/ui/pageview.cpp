@@ -207,7 +207,7 @@ PageView::PageView( TQWidget *parent, KPDFDocument *document )
 
     // widget setup: setup focus, accept drops and track mouse
     viewport()->setFocusProxy( this );
-    viewport()->setFocusPolicy( TQ_StrongFocus );
+    viewport()->setFocusPolicy( TQWidget::StrongFocus );
     //viewport()->setPaletteBackgroundColor( TQt::white );
     viewport()->setBackgroundMode( TQt::NoBackground );
     setResizePolicy( Manual );

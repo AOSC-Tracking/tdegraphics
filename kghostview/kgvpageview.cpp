@@ -27,8 +27,8 @@ KGVPageView::KGVPageView( TQWidget* parent, const char* name )
 {
     _page = 0;
 
-    setFocusPolicy( TQ_StrongFocus );
-    viewport()->setFocusPolicy( TQ_WheelFocus );
+    setFocusPolicy( TQWidget::StrongFocus );
+    viewport()->setFocusPolicy( TQWidget::WheelFocus );
 }
 
 void KGVPageView::setPage( TQWidget* page )

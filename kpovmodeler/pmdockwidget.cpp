@@ -880,7 +880,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
 
     panner->setOpaqueResize(manager->splitterOpaqueResize());
     panner->setKeepSize(manager->splitterKeepSize());
-    panner->setFocusPolicy( TQ_NoFocus );
+    panner->setFocusPolicy( TQWidget::NoFocus );
     target->applyToWidget( panner );
     applyToWidget( panner );
     target->formerDockPos = target->currentDockPos;

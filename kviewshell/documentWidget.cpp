@@ -83,7 +83,7 @@ DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache
   scrollGuide = -1;
 
   setMouseTracking(true);
-  setFocusPolicy(TQ_ClickFocus);
+  setFocusPolicy(TQWidget::ClickFocus);
 
   connect(&clearStatusBarTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(clearStatusBar()));
   setBackgroundMode(TQt::NoBackground);

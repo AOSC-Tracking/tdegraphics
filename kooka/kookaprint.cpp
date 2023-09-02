@@ -112,7 +112,7 @@ bool KookaPrint::printImage( KookaImage *img )
 
 	kdDebug(28000) << "Scaling to printer size " << newWidth << " x " << newHeight << endl;
 
-	tmpImg = img->smoothScale(newWidth, newHeight, TQ_ScaleFree);
+	tmpImg = img->smoothScale(newWidth, newHeight, TQImage::ScaleFree);
 
         TQSize   sz = tmpImg.size();        // the current image size
         TQSize   maxOnPage = maxPageSize(); // the maximum space on one side
@@ -177,7 +177,7 @@ void KookaPrint::printFittingToPage(KookaImage *img)
 	newHeight = int( double( img->height() ) * hAspect );
     }
     
-    tmpImg = img->smoothScale(newWidth, newHeight, TQ_ScaleFree);
+    tmpImg = img->smoothScale(newWidth, newHeight, TQImage::ScaleFree);
 
     m_painter->drawImage( 0,0, tmpImg );
     

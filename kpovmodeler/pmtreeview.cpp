@@ -75,8 +75,8 @@ PMTreeView::PMTreeView( PMPart* part, TQWidget* parent /*= 0*/,
 
    viewport( )->setAcceptDrops( true );
    viewport( )->setMouseTracking( true );
-   viewport( )->setFocusPolicy( TQ_WheelFocus );
-   setFocusPolicy( TQ_WheelFocus );
+   viewport( )->setFocusPolicy( TQWidget::WheelFocus );
+   setFocusPolicy( TQWidget::WheelFocus );
    setAcceptDrops( true );
 
    connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );

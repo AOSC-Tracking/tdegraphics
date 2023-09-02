@@ -94,7 +94,7 @@ ImageWindow::~ImageWindow()
 
 void ImageWindow::init()
 {
-    setFocusPolicy( TQ_StrongFocus );
+    setFocusPolicy( TQWidget::StrongFocus );
     
     KCursor::setAutoHideCursor( this, true, true );
     KCursor::setHideCursorDelay( 1500 );

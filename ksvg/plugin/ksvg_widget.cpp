@@ -31,7 +31,7 @@ KSVGWidget::KSVGWidget(KSVGPlugin *part, TQWidget *parent, const char *name)
 : TQWidget(parent, name), m_part(part)
 {
 	setMouseTracking(true);	
-	setFocusPolicy(TQ_WheelFocus);
+	setFocusPolicy(TQWidget::WheelFocus);
 
 	setBackgroundMode(NoBackground);
 

@@ -36,7 +36,7 @@ PageView::PageView( TQWidget* parent, const char* name )
   moveTool = true;
 
   widgetList = 0;
-  viewport()->setFocusPolicy(TQ_StrongFocus);
+  viewport()->setFocusPolicy(TQWidget::StrongFocus);
 
   setResizePolicy(TQScrollView::Manual);
 

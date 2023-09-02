@@ -72,7 +72,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   watch->startScan();
 
   mainWidget = new TQHBox(parentWidget, widgetName);
-  mainWidget->setFocusPolicy(TQ_StrongFocus);
+  mainWidget->setFocusPolicy(TQWidget::StrongFocus);
   setWidget(mainWidget);
 
   // Setup part manager

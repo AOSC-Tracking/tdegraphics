@@ -338,7 +338,7 @@ void KSnapshot::slotPrint()
 		neww = newh/h*w;
 	    }
 
-	    img = img.smoothScale( int(neww), int(newh), TQ_ScaleMin );
+	    img = img.smoothScale( int(neww), int(newh), TQImage::ScaleMin );
 	    tqApp->processEvents();
 
 	    int x = (metrics.width()-img.width())/2;

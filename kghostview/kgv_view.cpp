@@ -109,7 +109,7 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
 
     // Setup main widget
     _mainWidget = new KGVMainWidget( parentWidget );
-    _mainWidget->setFocusPolicy( TQ_StrongFocus );
+    _mainWidget->setFocusPolicy( TQWidget::StrongFocus );
     _mainWidget->installEventFilter( this );
     _mainWidget->setAcceptDrops( true );
     connect( _mainWidget, TQT_SIGNAL( spacePressed() ),

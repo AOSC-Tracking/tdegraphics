@@ -935,7 +935,7 @@ KImageHolder * KImageCanvas::createNewClient()
 	client->setMouseTracking( true );
 	client->installEventFilter( this );
 	setFocusProxy( client );
-	client->setFocusPolicy( TQ_StrongFocus );
+	client->setFocusPolicy( TQWidget::StrongFocus );
 	client->setFocus();
 
 	addChild( client, 0, 0 );

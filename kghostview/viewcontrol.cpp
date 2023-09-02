@@ -28,7 +28,7 @@
 ViewControl::ViewControl( TQWidget *parent, const char *name )
 	: TQDialog( parent, name )
 {
-	setFocusPolicy(TQ_StrongFocus);
+	setFocusPolicy(TQWidget::StrongFocus);
 
 	TQBoxLayout *topLayout = new TQVBoxLayout( this, 10 );
 

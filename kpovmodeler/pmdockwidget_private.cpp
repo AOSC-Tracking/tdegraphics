@@ -292,7 +292,7 @@ PMDockButton_Private::PMDockButton_Private( TQWidget *parent, const char * name 
 :TQPushButton( parent, name )
 {
   moveMouse = false;
-  setFocusPolicy( TQ_NoFocus );
+  setFocusPolicy( TQWidget::NoFocus );
 }
 
 PMDockButton_Private::~PMDockButton_Private()
@@ -361,7 +361,7 @@ void PMDockWidgetPrivate::slotFocusEmbeddedWidget(TQWidget* w)
 {
    if (w) {
       TQWidget* embeddedWdg = ((PMDockWidget*)w)->getWidget();
-      if (embeddedWdg && ((embeddedWdg->focusPolicy() == TQ_ClickFocus) || (embeddedWdg->focusPolicy() == TQ_StrongFocus))) {
+      if (embeddedWdg && ((embeddedWdg->focusPolicy() == TQWidget::ClickFocus) || (embeddedWdg->focusPolicy() == TQWidget::StrongFocus))) {
          embeddedWdg->setFocus();
       }
    }

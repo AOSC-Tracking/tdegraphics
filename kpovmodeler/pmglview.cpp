@@ -143,7 +143,7 @@ PMGLView::PMGLView( PMPart* part, PMViewType t,
    initializeGL( );
 
    setMouseTracking( true );
-   setFocusPolicy( TQ_WheelFocus );
+   setFocusPolicy( TQWidget::WheelFocus );
 
    PMRenderManager* rm = PMRenderManager::theManager( );
    rm->viewCreated( );

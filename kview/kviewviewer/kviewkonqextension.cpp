@@ -80,7 +80,7 @@ void KViewKonqExtension::print()
 
 	TQImage imagetoprint;
 	if( printer.option( "app-kviewviewer-fitimage" ) == "1" )
-		imagetoprint = m_pCanvas->image()->smoothScale( metrics.width(), metrics.height(), TQ_ScaleMin );
+		imagetoprint = m_pCanvas->image()->smoothScale( metrics.width(), metrics.height(), TQImage::ScaleMin );
 	else
 		imagetoprint = *m_pCanvas->image();
 

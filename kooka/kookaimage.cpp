@@ -300,7 +300,7 @@ bool KookaImage::loadTiffDir( const TQString& filename, int no )
 	   float yScalefactor = xReso / yReso;
 	   kdDebug(28000) << "Different resolution x/y, rescaling with factor " << yScalefactor << endl;
 	   /* rescale the image */
-	   *this = smoothScale( imgWidth, int(imgHeight*yScalefactor), TQ_ScaleFree );
+	   *this = smoothScale( imgWidth, int(imgHeight*yScalefactor), TQImage::ScaleFree );
        }
        else
        {
@@ -308,7 +308,7 @@ bool KookaImage::loadTiffDir( const TQString& filename, int no )
 	   float scalefactor = yReso / xReso;
 	   kdDebug(28000) << "Different resolution x/y, rescaling x with factor " << scalefactor << endl;
 	   /* rescale the image */
-	   *this = smoothScale( int(imgWidth*scalefactor), imgHeight, TQ_ScaleFree );
+	   *this = smoothScale( int(imgWidth*scalefactor), imgHeight, TQImage::ScaleFree );
 	   
        }
    }
