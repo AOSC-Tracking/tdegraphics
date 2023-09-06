@@ -636,7 +636,7 @@ KFaxImage::GetImage(pagenode *pn)
     }
 
     // byte-swapping the image on little endian machines
-#if defined(Q_BYTE_ORDER) && (Q_BYTE_ORDER == TQ_LITTLE_ENDIAN)
+#if defined(TQ_BYTE_ORDER) && (TQ_BYTE_ORDER == TQ_LITTLE_ENDIAN)
     for (int y=pn->image.height()-1; y>=0; --y) {
       TQ_UINT32 *source = (TQ_UINT32 *) pn->image.scanLine(y);
       TQ_UINT32 *dest   = source;
