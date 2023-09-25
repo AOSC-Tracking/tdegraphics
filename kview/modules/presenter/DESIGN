@@ -27,15 +27,15 @@ Presenter Plugin:
 			- keep local copy of downloaded files
 			- delete local copy on destruction
 			- API:
-				QImage * image();
+				TQImage * image();
 				KURL url();
-				QString file(); //returns local filename or QString::null
+				TQString file(); //returns local filename or TQString::null
 		- when loading an item from the playlist first ask for a
-		  QImage, if that's not available ask for a local file, if
+		  TQImage, if that's not available ask for a local file, if
 		  that's also not available take the url.
 		- API:
-			QImage * image();
-			QString file();
+			TQImage * image();
+			TQString file();
 			KURL url();
 			void setRandom(bool);
 			void randomizeList();

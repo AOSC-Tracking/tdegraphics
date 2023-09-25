@@ -118,9 +118,9 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
  
  // protected
 -void kpViewScrollableContainer::repaintWidgetAtResizeLineViewRect (
--    QWidget *widget, const QRect &resizeLineViewRect)
+-    TQWidget *widget, const QRect &resizeLineViewRect)
 +void kpViewScrollableContainer::repaintWidgetRegion (
-+    QWidget *widget,
++    TQWidget *widget,
 +    const QRegion &viewRegion)
  {
 -    const QRect resizeLineGlobalRect = mapViewToGlobal (resizeLineViewRect);
@@ -153,7 +153,7 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
  }
  
  // protected
--void kpViewScrollableContainer::repaintWidgetAtResizeLines (QWidget *widget)
+-void kpViewScrollableContainer::repaintWidgetAtResizeLines (TQWidget *widget)
 +void kpViewScrollableContainer::eraseResizeLines (const QRegion &viewRegion)
  {
 -    repaintWidgetAtResizeLineViewRect (widget, rightResizeLineRect ());
@@ -455,7 +455,7 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 +    }
 +}
 +
-+// protected virtual [base QWidget]
++// protected virtual [base TQWidget]
 +void kpViewScrollableContainer::windowActivationChange (bool wasActive)
 +{
 +#if DEBUG_KP_VIEW_SCROLLABLE_CONTAINER && 1
@@ -502,11 +502,11 @@ diff -u -p -r1.3 kpviewscrollablecontainer.h
      QRect mapViewToGlobal (const QRect &viewRect);
 +    QRegion mapViewToGlobal (const QRegion &viewRegion);
  
--    void repaintWidgetAtResizeLineViewRect (QWidget *widget,
+-    void repaintWidgetAtResizeLineViewRect (TQWidget *widget,
 -                                            const QRect &resizeLineViewRect);
--    void repaintWidgetAtResizeLines (QWidget *widget);
+-    void repaintWidgetAtResizeLines (TQWidget *widget);
 -    void eraseResizeLines ();
-+    void repaintWidgetRegion (QWidget *widget,
++    void repaintWidgetRegion (TQWidget *widget,
 +        const QRegion &viewRegion);
 +    void eraseResizeLines (const QRegion &viewRegion);
  
@@ -534,7 +534,7 @@ diff -u -p -r1.3 kpviewscrollablecontainer.h
      int m_resizeRoundedLastViewDX, m_resizeRoundedLastViewDY;
 +    int m_resizeLinesDontPaintClever;
      bool m_haveMovedFromOriginalDocSize;
-     QString m_gripStatusMessage;
+     TQString m_gripStatusMessage;
  };
 Index: kpwidgetmapper.cpp
 ===================================================================
@@ -551,11 +551,11 @@ diff -u -p -r1.1 kpwidgetmapper.cpp
  #include <qwidget.h>
  
  
-@@ -54,6 +55,17 @@ QRect fromGlobal (const QWidget *widget,
+@@ -54,6 +55,17 @@ QRect fromGlobal (const TQWidget *widget,
      return QRect (topLeft.x (), topLeft.y (), rect.width (), rect.height ());
  }
  
-+QRegion fromGlobal (const QWidget *widget, const QRegion &region)
++QRegion fromGlobal (const TQWidget *widget, const QRegion &region)
 +{
 +    if (!widget || region.isEmpty ())
 +        return region;
@@ -567,13 +567,13 @@ diff -u -p -r1.1 kpwidgetmapper.cpp
 +}
 +
  
- QPoint toGlobal (const QWidget *widget, const QPoint &point)
+ QPoint toGlobal (const TQWidget *widget, const QPoint &point)
  {
-@@ -72,5 +84,16 @@ QRect toGlobal (const QWidget *widget, c
+@@ -72,5 +84,16 @@ QRect toGlobal (const TQWidget *widget, c
      return QRect (topLeft.x (), topLeft.y (), rect.width (), rect.height ());
  }
  
-+QRegion toGlobal (const QWidget *widget, const QRegion &region)
++QRegion toGlobal (const TQWidget *widget, const QRegion &region)
 +{
 +    if (!widget || region.isEmpty ())
 +        return region;
@@ -594,7 +594,7 @@ diff -u -p -r1.1 kpwidgetmapper.h
 --- kpwidgetmapper.h	10 Jul 2004 11:38:09 -0000	1.1
 +++ kpwidgetmapper.h	30 Jul 2004 11:37:21 -0000
 @@ -32,15 +32,18 @@
- class QWidget;
+ class TQWidget;
  class QPoint;
  class QRect;
 +class QRegion;
@@ -602,13 +602,13 @@ diff -u -p -r1.1 kpwidgetmapper.h
  
  namespace kpWidgetMapper
  {
-     QPoint fromGlobal (const QWidget *widget, const QPoint &point);
-     QRect fromGlobal (const QWidget *widget, const QRect &rect);
-+    QRegion fromGlobal (const QWidget *widget, const QRegion &region);
+     QPoint fromGlobal (const TQWidget *widget, const QPoint &point);
+     QRect fromGlobal (const TQWidget *widget, const QRect &rect);
++    QRegion fromGlobal (const TQWidget *widget, const QRegion &region);
  
-     QPoint toGlobal (const QWidget *widget, const QPoint &point);
-     QRect toGlobal (const QWidget *widget, const QRect &rect);
-+    QRegion toGlobal (const QWidget *widget, const QRegion &region);
+     QPoint toGlobal (const TQWidget *widget, const QPoint &point);
+     QRect toGlobal (const TQWidget *widget, const QRect &rect);
++    QRegion toGlobal (const TQWidget *widget, const QRegion &region);
  }
  
  

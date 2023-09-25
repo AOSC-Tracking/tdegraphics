@@ -12,7 +12,7 @@ Our TODO List:
     - the gui functionality KDE 2.x - features.
     - KDE-features at all ! The whole stuff does not use any KDE-funcitonality, only Qt.
       What about having a Version which compiles without KDE ? .o0( Good idea to think about ? )
-    - attention to drop QString where possible, and I think, its possible where SANE-stuff is
+    - attention to drop TQString where possible, and I think, its possible where SANE-stuff is
       used.
     - I18N-functions. In resource.h, I defined a macro I18N which does not much by now. I tried
       to place it around strings to prepare for real I18N treatment. How is that done ?

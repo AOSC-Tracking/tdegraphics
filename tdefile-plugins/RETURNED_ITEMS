@@ -115,7 +115,7 @@ String	JPG quality 	1 - "basic"
 			default: unknown
 String	User comment
 String	Comment
-QImage	Thumbnail
+TQImage	Thumbnail
 
 
 gif plugin:

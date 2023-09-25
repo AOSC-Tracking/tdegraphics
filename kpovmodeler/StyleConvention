@@ -69,7 +69,7 @@ Put type modifiers behind the type, not before the variable name.
 
 Example:
 
-const QString& type;
+const TQString& type;
 PMObject* obj;
 
 

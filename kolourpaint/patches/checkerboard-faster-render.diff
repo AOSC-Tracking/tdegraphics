@@ -34,14 +34,14 @@ QPainter::fillRect().  QPainter::drawPixmap() seems much faster.  For
 +    {
 +        for (int x = 0; x < rep; x++)
 +        {
-+            QColor col;
++            TQColor col;
 +
 +            if ((parityAsInt + x + y) % 2)
 +            {
 +                if (!isPreview)
-+                    col = QColor (213, 213, 213);
++                    col = TQColor (213, 213, 213);
 +                else
-+                    col = QColor (224, 224, 224);
++                    col = TQColor (224, 224, 224);
 +            }
 +            else
 +                col = Qt::white;

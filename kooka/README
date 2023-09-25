@@ -55,7 +55,7 @@ support all, even not very common options, some scanners offer. Lets
 see what is necessary and makes sense for the purpose of Kooka.
 
 * Kooka does not yet have a strategy for very large images :(. It uses
-the Qt QImage/QPixmap as is. On some displays, that causes problems.
+the Qt TQImage/QPixmap as is. On some displays, that causes problems.
 
 * Automatic document feeder (ADF) support is not yet working correctly.
 

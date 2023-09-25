@@ -64,7 +64,7 @@ diff -u -p -r1.9 kptoolpen.cpp
 +        painter.begin (&pixmap);
          painter.setPen (color (m_mouseButton));
  
--        QImage image;
+-        TQImage image;
 -        if (m_mode & WashesPixmaps)
 -        {
          #if DEBUG_KP_TOOL_PEN
@@ -83,8 +83,8 @@ diff -u -p -r1.9 kptoolpen.cpp
 @@ -453,10 +451,21 @@ void kpToolPen::draw (const QPoint &this
          else if (m_mode & (DrawsPixmaps | WashesPixmaps))
          {
-             QRgb colorToReplace;
-+            QImage image;
+             TQRgb colorToReplace;
++            TQImage image;
 +            QRegion region;
              
              if (m_mode & WashesPixmaps)

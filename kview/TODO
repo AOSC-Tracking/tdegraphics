@@ -22,7 +22,7 @@
 	  around with internals like the presenter plugin does.
 	  - This would make preloading (and caching) the images possible.
 	- Caching: currently the canvas doesn't do anything with files while the
-	  viewer only calls QImage( QByteArray ) or QImage( filename ). Therefor the
+	  viewer only calls TQImage( QByteArray ) or TQImage( filename ). Therefor the
 	  Viewer has to cache the loading of images while the canvas would have to
 	  cache the zoomed images and pixmaps.
 	  It would be no problem to make the canvas work on files and bytearrays
@@ -36,12 +36,12 @@
 	  Something like:
 	  class Effect
 	  {
-		QString dialogTitle() const = 0;
-		QWidget * dialogWidget() = 0;
+		TQString dialogTitle() const = 0;
+		TQWidget * dialogWidget() = 0;
 		/* @returns whether @ref applyEffect() would create the same image as
 		 * last time or a changed one */
 		bool changed() const = 0;
-		void applyEffect( QImage & ) = 0;
+		void applyEffect( TQImage & ) = 0;
 	  };
 	-  Brightness Adjustment 
 	-  Greyscale conversion 
