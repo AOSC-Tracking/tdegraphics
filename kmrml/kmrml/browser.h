@@ -27,7 +27,7 @@ namespace KMrml
 
     class Browser : public KParts::BrowserExtension
     {
-        Q_OBJECT
+        TQ_OBJECT
   
 
     public:

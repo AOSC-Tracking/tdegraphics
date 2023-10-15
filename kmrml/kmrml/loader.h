@@ -42,7 +42,7 @@ public:
 class Loader : public TQObject
 {
     friend class gcc_sucks;
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

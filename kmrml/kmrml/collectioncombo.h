@@ -28,7 +28,7 @@ namespace KMrml
 
     class CollectionCombo : public KComboBox
     {
-        Q_OBJECT
+        TQ_OBJECT
   
 
     public:

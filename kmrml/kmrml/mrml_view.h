@@ -51,7 +51,7 @@ class MrmlView : public TQScrollView
 {
     friend class MrmlViewItem;
 
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:
@@ -103,7 +103,7 @@ private:
 
 class MrmlViewItem : public TQFrame
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

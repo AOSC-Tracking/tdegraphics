@@ -188,7 +188,7 @@ bool Watcher::startDaemon( DaemonData *daemon )
 
 void Watcher::slotTimeout()
 {
-    TQTimer *timer = static_cast<TQTimer*>( TQT_TQOBJECT( const_cast<TQT_BASE_OBJECT_NAME*>(sender()) ) );
+    TQTimer *timer = const_cast<TQTimer *>(static_cast<const TQTimer *>(sender()));
     DaemonData *daemon = findDaemonFromTimer( timer );
     if ( daemon )
     {

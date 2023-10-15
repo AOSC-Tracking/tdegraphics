@@ -22,7 +22,7 @@ namespace KMrmlConfig
 {
     class IndexCleaner : public TQObject
     {
-        Q_OBJECT
+        TQ_OBJECT
   
 
     public:

@@ -30,7 +30,7 @@ namespace KMrmlConfig
 
     class KCMKMrml : public TDECModule
     {
-        Q_OBJECT
+        TQ_OBJECT
   
     
     public:

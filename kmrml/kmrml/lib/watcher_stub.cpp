@@ -78,7 +78,7 @@ TQStringList Watcher_stub::runningDaemons()
     TQByteArray data, replyData;
     TQCString replyType;
     if ( dcopClient()->call( app(), obj(), "runningDaemons()", data, replyType, replyData ) ) {
-	if ( replyType == TQSTRINGLIST_OBJECT_NAME_STRING ) {
+	if ( replyType == "TQStringList" ) {
 	    TQDataStream _reply_stream( replyData, IO_ReadOnly );
 	    _reply_stream >> result;
 	    setStatus( CallSucceeded );

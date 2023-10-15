@@ -53,7 +53,7 @@ class MrmlView;
 
 class MrmlPart : public KParts::ReadOnlyPart
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:
@@ -150,7 +150,7 @@ private:
 
 class PartFactory : public KParts::Factory
 {
-    Q_OBJECT
+    TQ_OBJECT
   
 
 public:

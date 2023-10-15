@@ -27,7 +27,7 @@ namespace KMrml
 {
     class IntegerWidget : public TQHBox
     {
-        Q_OBJECT
+        TQ_OBJECT
   
         
     public:
@@ -43,7 +43,7 @@ namespace KMrml
     
     class ComboWidget : public TQHBox
     {
-        Q_OBJECT
+        TQ_OBJECT
   
         
     public:
@@ -59,7 +59,7 @@ namespace KMrml
     
     class CheckBoxWidget : public TQHBox
     {
-        Q_OBJECT
+        TQ_OBJECT
   
         
     public:
@@ -77,7 +77,7 @@ namespace KMrml
     
     class LineEditWidget : public TQHBox
     {
-        Q_OBJECT
+        TQ_OBJECT
   
         
     public:
@@ -93,7 +93,7 @@ namespace KMrml
     
     class ListBoxWidget : public TQHBox
     {
-        Q_OBJECT
+        TQ_OBJECT
   
         
     public:
