@@ -27,8 +27,6 @@ void KSnapshotWidget::slotModeChanged( int mode )
     default:
 	break;
     }
-
-    spinDelay->setEnabled(mode != 2);
 }
 
 

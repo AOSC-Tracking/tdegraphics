@@ -282,7 +282,7 @@ void KSnapshot::slotGrab()
     oldWinPos = pos();
     hide();
 
-    if ( mainWidget->delay() && mainWidget->mode() != Region )
+    if ( mainWidget->delay() )
 	grabTimer.start( mainWidget->delay() * 1000, true );
     else {
 	if ( mainWidget->mode() == Region ) {
