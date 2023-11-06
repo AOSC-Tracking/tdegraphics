@@ -131,7 +131,7 @@ namespace DJVU {
 class GRect 
 {
 public:
-  /** #Qt::OrientationBits# defines 3 mutually exclusive
+  /** #OrientationBits# defines 3 mutually exclusive
      bits to indicate the image orientation.
 
      There are four possible rotation values for an image
@@ -149,7 +149,7 @@ public:
   };
 
   /**  #Orientations# defines all 8 possible orientations, using
-   the three \Ref{Qt::OrientationBits}.
+   the three \Ref{OrientationBits}.
    \begin{itemize}
    \item {\em TDLRNR} for Top Down, Left to Right, No Rotation.
    \item {\em BULRNR} for Bottom Up, Left to Right, No Rotation.

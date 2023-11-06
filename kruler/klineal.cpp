@@ -575,15 +575,15 @@ void KLineal::mousePressEvent(TQMouseEvent *inEvent) {
 
   TQRect gr = geometry();
   mDragOffset = mLastClickPos - TQPoint(gr.left(), gr.top());
-  if (inEvent->button() == Qt::LeftButton) {
+  if (inEvent->button() == TQt::LeftButton) {
     if (!mDragging) {
       grabMouse(KCursor::sizeAllCursor());
       mDragging = TRUE;
     }
-  } else if (inEvent->button() == Qt::MidButton) {
+  } else if (inEvent->button() == TQt::MidButton) {
 		_clicked = true;
     turnLeft();
-  } else if (inEvent->button() == Qt::RightButton) {
+  } else if (inEvent->button() == TQt::RightButton) {
     showMenu();
   }
 }

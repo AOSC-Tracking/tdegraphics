@@ -541,7 +541,7 @@ void kpToolWidgetBase::mousePressEvent (TQMouseEvent *e)
 {
     e->ignore ();
 
-    if (e->button () != Qt::LeftButton)
+    if (e->button () != TQt::LeftButton)
         return;
 
 

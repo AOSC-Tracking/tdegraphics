@@ -279,13 +279,13 @@ EngineError KadmosDialog::setupGui()
     (void) new TQLabel( i18n("Please classify the font type and language of the text on the image:"),
 		       page );
     TQHBox *locBox = new TQHBox( page );
-    m_bbFont = new TQButtonGroup(1, Qt::Horizontal, i18n("Font Type Selection"), locBox);
+    m_bbFont = new TQButtonGroup(1, TQt::Horizontal, i18n("Font Type Selection"), locBox);
 
     m_rbMachine = new TQRadioButton( i18n("Machine print"), m_bbFont );
     m_rbHand    = new TQRadioButton( i18n("Hand writing"),  m_bbFont );
     m_rbNorm    = new TQRadioButton( i18n("Norm font"),     m_bbFont );
 
-    m_gbLang = new TQGroupBox(1, Qt::Horizontal, i18n("Country"), locBox);
+    m_gbLang = new TQGroupBox(1, TQt::Horizontal, i18n("Country"), locBox);
 
 
     m_cbLang = new TQComboBox( m_gbLang );
@@ -298,7 +298,7 @@ EngineError KadmosDialog::setupGui()
     TQHBox *innerBox = new TQHBox( page );
     innerBox->setSpacing( KDialog::spacingHint());
 
-    TQButtonGroup *cbGroup = new TQButtonGroup( 1, Qt::Horizontal, i18n("OCR Modifier"), innerBox );
+    TQButtonGroup *cbGroup = new TQButtonGroup( 1, TQt::Horizontal, i18n("OCR Modifier"), innerBox );
     TQ_CHECK_PTR(cbGroup);
 
     m_cbNoise = new TQCheckBox( i18n( "Enable automatic noise reduction" ), cbGroup );

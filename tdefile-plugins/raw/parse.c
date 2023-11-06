@@ -284,7 +284,7 @@ int parse_tiff_ifd (int base, int level)
       case 0x111:			/* StripOffset */
 	if (!offset || is_dng) offset = val;
 	break;
-      case 0x112:           /* Qt::Orientation */
+      case 0x112:           /* Orientation */
 	flip = flip_map[(val-1) & 7];
 	break;
       case 0x117:			/* StripByteCounts */

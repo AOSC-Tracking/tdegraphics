@@ -196,9 +196,9 @@ class ByteStream;
 
 class JB2Blit {
 public:
-  /**Qt::Horizontal coordinate of the blit. */
+  /** Horizontal coordinate of the blit. */
   unsigned short left;
-  /**Qt::Vertical coordinate of the blit. */
+  /** Vertical coordinate of the blit. */
   unsigned short bottom;
   /** Index of the shape to blit. */
   unsigned int shapeno;

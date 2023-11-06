@@ -311,7 +311,7 @@ void ThumbnailList::keyPressEvent( TQKeyEvent * keyEvent )
 
 void ThumbnailList::contentsMousePressEvent( TQMouseEvent * e )
 {
-	if ( e->button() != Qt::LeftButton )
+	if ( e->button() != TQt::LeftButton )
 		return;
 	int clickY = e->y();
 	TQValueList<ThumbnailWidget *>::iterator vIt = m_visibleThumbnails.begin(), vEnd = m_visibleThumbnails.end();
@@ -479,7 +479,7 @@ void ThumbnailWidget::setSelected( bool selected )
 
 void ThumbnailWidget::mouseReleaseEvent( TQMouseEvent * e )
 {
-    if ( e->button() != Qt::RightButton )
+    if ( e->button() != TQt::RightButton )
         return;
 
     m_tl->forwardRightClick( m_page, e->globalPos() );

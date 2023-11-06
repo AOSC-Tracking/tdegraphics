@@ -472,7 +472,7 @@ void PMTreeView::viewportMousePressEvent( TQMouseEvent* e )
 
    TQPoint p = e->pos( );
 
-   if( e->button( ) & Qt::RightButton )
+   if( e->button( ) & TQt::RightButton )
    {
       if( m_pPart->factory( ) ) 
       {
@@ -497,7 +497,7 @@ void PMTreeView::viewportMousePressEvent( TQMouseEvent* e )
 
    if( item )
    {
-      if( e->button( ) == Qt::LeftButton || e->button( ) == Qt::MidButton )
+      if( e->button( ) == TQt::LeftButton || e->button( ) == TQt::MidButton )
       {
          m_pressed = true;
          m_pressedPos = e->pos( );

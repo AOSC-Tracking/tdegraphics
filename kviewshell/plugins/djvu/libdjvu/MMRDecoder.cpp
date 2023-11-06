@@ -602,7 +602,7 @@ MMRDecoder::scanruns(const unsigned short **endptr)
             b1 += *pr++;
             break;
           }
-          /*Qt::Horizontal Mode */
+          /* Horizontal Mode */
         case H: 
           { 
             // First run
@@ -616,7 +616,7 @@ MMRDecoder::scanruns(const unsigned short **endptr)
             *xr = rle; xr++; rle = 0;
             break;
           }
-          /*Qt::Vertical Modes */
+          /* Vertical Modes */
         case V0:
         case VR3:
         case VR2:

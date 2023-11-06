@@ -87,7 +87,7 @@ static inline TYPE min(TYPE a,TYPE b) { return (a<b)?a:b; }
 //******************************** DjVuTXT **********************************
 //***************************************************************************
 
-const char DjVuTXT::end_of_column    = 013;      // VT:Qt::Vertical Tab
+const char DjVuTXT::end_of_column    = 013;      // VT: Vertical Tab
 const char DjVuTXT::end_of_region    = 035;      // GS: Group Separator
 const char DjVuTXT::end_of_paragraph = 037;      // US: Unit Separator
 const char DjVuTXT::end_of_line      = 012;      // LF: Line Feed

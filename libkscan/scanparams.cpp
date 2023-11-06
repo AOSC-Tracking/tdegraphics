@@ -662,7 +662,7 @@ void ScanParams::virtualScannerParams( void )
    TQWidget     *w = 0;
 
    /* Selection if virt. Scanner or SANE Debug */
-   bg_virt_scan_mode = new TQButtonGroup( 2, Qt::Horizontal,
+   bg_virt_scan_mode = new TQButtonGroup( 2, TQt::Horizontal,
 					 this, "GroupBoxVirtScanner" );
    connect( bg_virt_scan_mode, TQT_SIGNAL(clicked(int)),
 	    this, TQT_SLOT( slVirtScanModeSelect(int)));

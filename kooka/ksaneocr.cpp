@@ -1313,7 +1313,7 @@ void KSANEOCR::slMisspelling( const TQString& originalword, const TQStringList& 
     {
         TQBrush brush;
         brush.setColor( TQColor(red)); // , "Dense4Pattern" );
-        brush.setStyle( Qt::Dense4Pattern );
+        brush.setStyle( TQt::Dense4Pattern );
         TQPen pen( red, 2 );
         TQRect r = resWord.rect();
 

@@ -42,7 +42,7 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   // create all the widgets
 
   gbScale = new TQGroupBox( i18n("Scaling"), this );
-  gbScale->setColumnLayout( 0, Qt::Horizontal );
+  gbScale->setColumnLayout( 0, TQt::Horizontal );
 
   cbDownScale = new TQCheckBox( i18n("Shrink image to screen size, if larger"),
 			       gbScale, "shrinktoscreen" );
@@ -58,7 +58,7 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   // --
 
   gbGeometry = new TQGroupBox( i18n("Geometry"), this );
-  gbGeometry->setColumnLayout( 0, Qt::Horizontal );
+  gbGeometry->setColumnLayout( 0, TQt::Horizontal );
 
   cbFlipVertically = new TQCheckBox( i18n("Flip vertically"), gbGeometry );
 

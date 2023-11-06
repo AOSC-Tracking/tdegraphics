@@ -44,7 +44,7 @@ class PMDockSplitter : public TQWidget
   TQ_OBJECT
   
 public:
-  PMDockSplitter(TQWidget *parent= 0, const char *name= 0, Qt::Orientation orient=Qt::Vertical, int pos= 50, bool highResolution=false);  
+  PMDockSplitter(TQWidget *parent= 0, const char *name= 0, TQt::Orientation orient=TQt::Vertical, int pos= 50, bool highResolution=false);  
   virtual ~PMDockSplitter(){};
 
   void activate(TQWidget *c0, TQWidget *c1 = 0L);
@@ -71,7 +71,7 @@ public:
   bool highResolution() const;
 
    // MODIFICATION (Zehender)
-   Qt::Orientation splitterOrientation( ) const { return orientation; }
+   TQt::Orientation splitterOrientation( ) const { return orientation; }
 
 protected:
   int checkValue( int ) const;
@@ -81,7 +81,7 @@ private:
   void setupMinMaxSize();
 
   TQWidget *child0, *child1;
-  Qt::Orientation orientation;
+  TQt::Orientation orientation;
   bool initialised;
   TQFrame* divider;
   int xpos;

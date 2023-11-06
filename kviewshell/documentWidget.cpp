@@ -450,7 +450,7 @@ void DocumentWidget::mousePressEvent ( TQMouseEvent * e )
   }
 
   // Check if the mouse is pressed on a regular hyperlink
-  if (e->button() == Qt::LeftButton) {
+  if (e->button() == TQt::LeftButton) {
     if (pageData->hyperLinkList.size() > 0)
       for(unsigned int i = 0; i < pageData->hyperLinkList.size(); i++) {
         if (pageData->hyperLinkList[i].box.contains(e->pos())) {
@@ -464,7 +464,7 @@ void DocumentWidget::mousePressEvent ( TQMouseEvent * e )
       setCursor(TQt::IbeamCursor);
   }
 
-  if (e->button() == Qt::RightButton || (!moveTool && e->button() == Qt::LeftButton))
+  if (e->button() == TQt::RightButton || (!moveTool && e->button() == TQt::LeftButton))
   {
     setCursor(TQt::IbeamCursor);
     // If Shift is not pressed clear the current selection,
@@ -486,7 +486,7 @@ void DocumentWidget::mouseReleaseEvent ( TQMouseEvent *e )
   // otherwise the mouse cursor in the centeringScrollview is wrong
   e->ignore();
 
-  if (e->button() == Qt::RightButton || (!moveTool && e->button() == Qt::LeftButton))
+  if (e->button() == TQt::RightButton || (!moveTool && e->button() == TQt::LeftButton))
   {
     // If the selectedRectangle is empty then there was only a single right click.
     if (firstSelectedPoint == e->pos())
@@ -589,7 +589,7 @@ void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
     clearStatusBarTimer.start(200, true); // clear the statusbar after 200 msec.
 
   // Left mouse button pressed -> Text scroll function
-  if ((e->state() & Qt::LeftButton) != 0 && moveTool)
+  if ((e->state() & TQt::LeftButton) != 0 && moveTool)
   {
     // Pass the mouse event on to the owner of this widget ---under
     // normal circumstances that is the centeringScrollView which will
@@ -598,7 +598,7 @@ void DocumentWidget::mouseMoveEvent ( TQMouseEvent * e )
   }
 
   // Right mouse button pressed -> Text copy function
-  if ((e->state() & Qt::RightButton) != 0 || (!moveTool && (e->state() & Qt::LeftButton != 0)))
+  if ((e->state() & TQt::RightButton) != 0 || (!moveTool && (e->state() & TQt::LeftButton != 0)))
   {
     if (selectedRectangle.isEmpty()) {
       firstSelectedPoint = e->pos();

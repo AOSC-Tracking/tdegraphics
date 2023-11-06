@@ -234,7 +234,7 @@ void kpGrip::keyReleaseEvent (TQKeyEvent *e)
 void kpGrip::mousePressEvent (TQMouseEvent *e)
 {
     if (m_startPoint == KP_INVALID_POINT &&
-        (e->stateAfter () & Qt::MouseButtonMask) == Qt::LeftButton)
+        (e->stateAfter () & TQt::MouseButtonMask) == TQt::LeftButton)
     {
         m_startPoint = e->pos ();
         m_currentPoint = e->pos ();
@@ -290,7 +290,7 @@ void kpGrip::mouseMoveEvent (TQMouseEvent *e)
 
     if (m_startPoint == KP_INVALID_POINT)
     {
-        if ((e->stateAfter () & Qt::MouseButtonMask) == 0)
+        if ((e->stateAfter () & TQt::MouseButtonMask) == 0)
             setUserMessage (haventBegunDrawUserMessage ());
         return;
     }
@@ -320,7 +320,7 @@ void kpGrip::mouseReleaseEvent (TQMouseEvent *e)
                         (m_type & Bottom) ? dy : 0);
     }
 
-    if ((e->stateAfter () & Qt::MouseButtonMask) == 0)
+    if ((e->stateAfter () & TQt::MouseButtonMask) == 0)
     {
         m_shouldReleaseMouseButtons = false;
         setUserMessage (TQString());

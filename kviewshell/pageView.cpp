@@ -195,7 +195,7 @@ void PageView::keyPressEvent( TQKeyEvent* e )
 
 void PageView::contentsMousePressEvent( TQMouseEvent* e )
 {
-  if (e->button() == Qt::LeftButton)
+  if (e->button() == TQt::LeftButton)
   {
     if (moveTool)
     {
@@ -222,7 +222,7 @@ void PageView::contentsMouseMoveEvent( TQMouseEvent* e )
 {
   TQPoint newPos = e->globalPos();
 
-  if (e->state() == Qt::LeftButton && moveTool)
+  if (e->state() == TQt::LeftButton && moveTool)
   {
     TQPoint delta = dragGrabPos - newPos;
     scrollBy(delta.x(), delta.y());

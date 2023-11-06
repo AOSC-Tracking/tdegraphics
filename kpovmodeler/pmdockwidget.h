@@ -805,7 +805,7 @@ private:
   // GROUP data
   TQString firstName;
   TQString lastName;
-  Qt::Orientation splitterOrientation;
+  TQt::Orientation splitterOrientation;
   bool isGroup;
   bool isTabGroup;
 

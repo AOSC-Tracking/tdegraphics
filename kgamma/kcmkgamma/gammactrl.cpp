@@ -47,7 +47,7 @@ GammaCtrl::GammaCtrl(TQWidget *parent, XVidExtWrap *xvid, int channel, \
 
   setSpacing(KDialog::spacingHint());
 
-  slider = new TQSlider(Qt::Horizontal, this);
+  slider = new TQSlider(TQt::Horizontal, this);
   slider->setFixedHeight(24);
   slider->setTickmarks(TQSlider::Below);
   slider->setRange(0, maxslider);

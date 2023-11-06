@@ -457,7 +457,7 @@ void ImageCanvas::viewportMousePressEvent(TQMouseEvent *ev)
 {
    if( ! acquired || ! image ) return;
 
-   if(ev->button()==Qt::LeftButton )
+   if(ev->button()==TQt::LeftButton )
    {
 
         int cx = contentsX(), cy = contentsY();
@@ -486,7 +486,7 @@ void ImageCanvas::viewportMousePressEvent(TQMouseEvent *ev)
 
 void ImageCanvas::viewportMouseReleaseEvent(TQMouseEvent *ev)
 {
-  if(ev->button()!=Qt::LeftButton || !acquired ) return;
+  if(ev->button()!=TQt::LeftButton || !acquired ) return;
 
   //// debug( "Mouse Release at %d/%d", ev->x(), ev->y());
   if(moving!=MOVE_NONE) {

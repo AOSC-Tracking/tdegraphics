@@ -178,11 +178,11 @@ void KOCRBase::spellCheckIntro()
     m_spellchkPage = addVBoxPage( i18n("Spell-checking") );
 
     /* Want the spell checking at all? Checkbox here */
-    TQGroupBox *gb1 = new TQGroupBox( 1, Qt::Horizontal, i18n("OCR Post Processing"), m_spellchkPage );
+    TQGroupBox *gb1 = new TQGroupBox( 1, TQt::Horizontal, i18n("OCR Post Processing"), m_spellchkPage );
     m_cbWantCheck = new TQCheckBox( i18n("Enable spell-checking for validation of the OCR result"),
                                    gb1 );
     /* Spellcheck options */
-    m_gbSpellOpts = new TQGroupBox( 1, Qt::Horizontal, i18n("Spell-Check Options"),
+    m_gbSpellOpts = new TQGroupBox( 1, TQt::Horizontal, i18n("Spell-Check Options"),
                                    m_spellchkPage );
 
     KSpellConfig *sCfg = new KSpellConfig( m_gbSpellOpts, "SPELLCHK", m_spellConfig, false );

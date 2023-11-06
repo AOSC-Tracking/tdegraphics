@@ -211,13 +211,13 @@ TopLevel::TopLevel (TQWidget *, const char *name)
 
   // Create a Vertical scroll bar
 
-  vsb = new TQScrollBar( Qt::Vertical,faxqtwin,"scrollBar" );
+  vsb = new TQScrollBar( TQt::Vertical,faxqtwin,"scrollBar" );
   vsb->hide();
   connect( vsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollVert(int)) );
 
   // Create a Horizontal scroll bar
 
-  hsb = new TQScrollBar( Qt::Horizontal,faxqtwin,"scrollBar" );
+  hsb = new TQScrollBar( TQt::Horizontal,faxqtwin,"scrollBar" );
   connect( hsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollHorz(int)) );
   hsb->hide();
 

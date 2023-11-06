@@ -238,7 +238,7 @@ void kpToolRectangle::updatePen (int mouseButton)
         if (color (mouseButton).isOpaque ())
             m_pen [mouseButton] = TQPen (color (mouseButton).toTQColor ());
         else
-            m_pen [mouseButton] = TQPen(Qt::NoPen);
+            m_pen [mouseButton] = TQPen(TQt::NoPen);
         m_maskPen [mouseButton] = TQPen (maskPenColor);
     }
     else
@@ -250,7 +250,7 @@ void kpToolRectangle::updatePen (int mouseButton)
                                         TQt::SolidLine);
         }
         else
-            m_pen [mouseButton] = TQPen(Qt::NoPen);
+            m_pen [mouseButton] = TQPen(TQt::NoPen);
         m_maskPen [mouseButton] = TQPen (maskPenColor,
                                         m_toolWidgetLineWidth->lineWidth (),
                                         TQt::SolidLine);
@@ -276,8 +276,8 @@ void kpToolRectangle::updateBrush (int mouseButton)
     }
     else
     {
-        m_brush [mouseButton] = TQBrush(Qt::NoBrush);
-        m_maskBrush [mouseButton] = TQBrush(Qt::NoBrush);
+        m_brush [mouseButton] = TQBrush(TQt::NoBrush);
+        m_maskBrush [mouseButton] = TQBrush(TQt::NoBrush);
     }
 }
 

@@ -104,7 +104,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 		{
 			gp_widget_get_value(widget, &widget_value_string);
 
-			TQGrid *grid = new TQGrid(2,Qt::Horizontal, parent);
+			TQGrid *grid = new TQGrid(2,TQt::Horizontal, parent);
 			grid->setSpacing(spacingHint());
 			new TQLabel(TQString::fromLocal8Bit( widget_label )+":", grid);
 			TQLineEdit *lineEdit = new TQLineEdit(widget_value_string, grid);
@@ -129,7 +129,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 				( int )widget_high,
 				( int )widget_increment,
 				( int )widget_value_float,
-				Qt::Horizontal,
+				TQt::Horizontal,
 				groupBox );
 			m_wmap.insert(widget, slider);
 		

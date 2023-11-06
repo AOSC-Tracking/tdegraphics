@@ -483,7 +483,7 @@ bool KSnapshot::eventFilter( TQObject* o, TQEvent* e)
 	TQMouseEvent* me = (TQMouseEvent*) e;
 	if ( TQWidget::mouseGrabber() != grabber )
 	    return false;
-	if ( me->button() == Qt::LeftButton )
+	if ( me->button() == TQt::LeftButton )
 	    performGrab();
     }
     return false;

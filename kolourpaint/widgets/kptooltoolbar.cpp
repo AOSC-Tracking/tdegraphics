@@ -72,7 +72,7 @@ protected:
     // virtual [base TQWidget]
     void mouseDoubleClickEvent (TQMouseEvent *e)
     {
-        if (e->button () == Qt::LeftButton && m_tool)
+        if (e->button () == TQt::LeftButton && m_tool)
             m_tool->globalDraw ();
     }
 
@@ -548,11 +548,11 @@ void kpToolToolBar::slotToolActionToolTipChanged ()
 
 
 // public slot virtual [base TQDockWindow]
-void kpToolToolBar::setOrientation (Qt::Orientation o)
+void kpToolToolBar::setOrientation (TQt::Orientation o)
 {
 #if DEBUG_KP_TOOL_TOOL_BAR
     kdDebug () << "kpToolToolBar::setOrientation("
-               << (o == Qt::Vertical ? "vertical" : "horizontal")
+               << (o == TQt::Vertical ? "vertical" : "horizontal")
                << ") called!" << endl;
 #endif
 
@@ -575,7 +575,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
 
     delete m_toolLayout;
     delete m_baseLayout;
-    if (o == Qt::Vertical)
+    if (o == TQt::Vertical)
     {
         m_baseLayout = new TQBoxLayout (m_baseWidget, TQBoxLayout::TopToBottom,
                                        5/*margin*/,
@@ -586,7 +586,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
                                         0/*margin*/,
                                         0/*spacing*/);
     }
-    else // if (o == Qt::Horizontal)
+    else // if (o == TQt::Horizontal)
     {
         m_baseLayout = new TQBoxLayout (m_baseWidget, TQBoxLayout::LeftToRight,
                                        5/*margin*/,
@@ -616,7 +616,7 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
         {
             m_baseLayout->addWidget (*it,
                 0/*stretch*/,
-                o == Qt::Vertical ? TQt::AlignHCenter : TQt::AlignVCenter);
+                o == TQt::Vertical ? TQt::AlignHCenter : TQt::AlignVCenter);
         }
     }
 
@@ -624,9 +624,9 @@ void kpToolToolBar::setOrientation (Qt::Orientation o)
 }
 
 // private
-void kpToolToolBar::addButton (TQButton *button, Qt::Orientation o, int num)
+void kpToolToolBar::addButton (TQButton *button, TQt::Orientation o, int num)
 {
-    if (o == Qt::Vertical)
+    if (o == TQt::Vertical)
         m_toolLayout->addWidget (button, num / m_vertCols, num % m_vertCols);
     else
     {

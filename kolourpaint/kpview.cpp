@@ -1343,7 +1343,7 @@ void kpView::paintEventDrawSelection (TQPixmap *destPixmap, const TQRect &docRec
         destPixmapPainter.setRasterOp (TQt::XorROP);
         destPixmapPainter.setPen (TQPen (TQt::white, 1, TQt::DotLine));
 
-        destPixmapPainter.setBackgroundMode (Qt::OpaqueMode);
+        destPixmapPainter.setBackgroundMode (TQt::OpaqueMode);
         destPixmapPainter.setBackgroundColor (TQt::blue);
 
         TQBitmap maskBitmap;

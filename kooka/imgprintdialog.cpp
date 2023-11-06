@@ -57,7 +57,7 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* n
     // layout->setMargin( KDialog::marginHint() );
     // layout->setSpacing( KDialog::spacingHint() );
 
-    m_scaleRadios = new TQButtonGroup( 2, Qt::Vertical, i18n("Image Print Size"), this );
+    m_scaleRadios = new TQButtonGroup( 2, TQt::Vertical, i18n("Image Print Size"), this );
     m_scaleRadios->setRadioButtonExclusive(true);
     connect( m_scaleRadios, TQT_SIGNAL(clicked(int)), TQT_SLOT(slScaleChanged(int)));
 

@@ -112,12 +112,12 @@ KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *parent,
   _corner = new TQFrame(this);
   _corner->setFrameStyle(TQFrame::WinPanel | TQFrame::Raised);
 
-  _hruler = new KRuler(Qt::Horizontal, this);
+  _hruler = new KRuler(TQt::Horizontal, this);
   _hruler->setEndLabel(i18n("width"));
   _hruler->setOffset( -2 );
   _hruler->setRange(0, 1000);
 
-  _vruler = new KRuler(Qt::Vertical, this);
+  _vruler = new KRuler(TQt::Vertical, this);
   _vruler->setEndLabel(i18n("height"));
   _vruler->setOffset( -2 );
   _vruler->setRange(0, 1000);
@@ -710,7 +710,7 @@ void TDEIconEditGrid::paintForeground(TQPainter* p, TQPaintEvent* e)
 
 void TDEIconEditGrid::mousePressEvent( TQMouseEvent *e )
 {
-    if(!e || (e->button() != Qt::LeftButton))
+    if(!e || (e->button() != TQt::LeftButton))
         return;
 
     int row = findRow( e->pos().y() );
@@ -886,7 +886,7 @@ void TDEIconEditGrid::mouseMoveEvent( TQMouseEvent *e )
 
 void TDEIconEditGrid::mouseReleaseEvent( TQMouseEvent *e )
 {
-  if(!e || (e->button() != Qt::LeftButton))
+  if(!e || (e->button() != TQt::LeftButton))
     return;
 
   int row = findRow( e->pos().y() );

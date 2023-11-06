@@ -293,7 +293,7 @@ KFaxImage::notetiff()
 			get2(buf, endian) : get4(buf, endian);
 		}
 		break;
-	    case 274:		/* Qt::Orientation */
+	    case 274:		/* Orientation */
 		switch(value) {
 		default:	/* row0 at top,    col0 at left   */
 		    orient = 0;

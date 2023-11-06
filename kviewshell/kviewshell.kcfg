@@ -81,7 +81,7 @@
  </group>
  <group name="Accessibility" >
    <entry key="PaperColor" type="Color" >
-     <default code="true" >Qt::white</default>
+     <default code="true" >TQt::white</default>
    </entry>
    <entry key="ChangeColors" type="Bool" >
      <default>false</default>

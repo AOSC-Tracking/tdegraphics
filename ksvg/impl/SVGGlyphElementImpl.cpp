@@ -46,7 +46,7 @@ TQString SVGGlyphElementImpl::d() const
  unicode		SVGGlyphElementImpl::Unicode		DontDelete|ReadOnly
  glyph-name		SVGGlyphElementImpl::GlyphName		DontDelete|ReadOnly
  d				SVGGlyphElementImpl::D				DontDelete|ReadOnly
- orientation	SVGGlyphElementImpl::Qt::Orientation	DontDelete|ReadOnly
+ orientation	SVGGlyphElementImpl::Orientation	DontDelete|ReadOnly
  arabic-form	SVGGlyphElementImpl::ArabicForm		DontDelete|ReadOnly
  lang			SVGGlyphElementImpl::Lang			DontDelete|ReadOnly
  horiz-adv-x	SVGGlyphElementImpl::HorizAdvX		DontDelete|ReadOnly

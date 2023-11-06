@@ -64,7 +64,7 @@ void KImageHolder::mousePressEvent( TQMouseEvent *ev )
 {
 	//kdDebug( 4620 ) << k_funcinfo << " ev->state() = " << ev->state() << endl;
 	// if the right mouse button is pressed emit the contextPress signal
-	if ( ev->button() == Qt::RightButton )
+	if ( ev->button() == TQt::RightButton )
 	{
 		emit contextPress( mapToGlobal( ev->pos() ) );
 		return;
@@ -73,7 +73,7 @@ void KImageHolder::mousePressEvent( TQMouseEvent *ev )
 	if( m_pPixmap == 0 )
 		return;
 
-	if( ev->button() == Qt::LeftButton || ev->button() == Qt::MidButton )
+	if( ev->button() == TQt::LeftButton || ev->button() == TQt::MidButton )
 	{
 		m_scrollpos = ev->globalPos();
 		m_selectionStartPoint = ev->pos();
@@ -86,10 +86,10 @@ void KImageHolder::mouseMoveEvent( TQMouseEvent *ev )
 	if( this->rect().contains( ev->pos(), false ) )
 		emit cursorPos( ev->pos() );
 	//kdDebug( 4620 ) << k_funcinfo << " ev->state() = " << ev->state() << endl;
-	if( ev->state() & Qt::LeftButton || ev->state() & Qt::MidButton )
+	if( ev->state() & TQt::LeftButton || ev->state() & TQt::MidButton )
 	{
 		// scroll when a modifier and left button or the middle button is pressed
-		if( ev->state() & AltButton || ev->state() & ControlButton || ev->state() & ShiftButton || ev->state() & Qt::MidButton )
+		if( ev->state() & AltButton || ev->state() & ControlButton || ev->state() & ShiftButton || ev->state() & TQt::MidButton )
 		{
 			TQPoint difference = m_scrollpos - ev->globalPos();
 			emit wannaScroll( difference.x(), difference.y() );
@@ -181,7 +181,7 @@ void KImageHolder::mouseReleaseEvent( TQMouseEvent * ev )
 			m_scrollTimerId = 0;
 		}
 	}
-	if( ev->state() & Qt::LeftButton || ev->state() & Qt::MidButton )
+	if( ev->state() & TQt::LeftButton || ev->state() & TQt::MidButton )
 		if( m_bSelecting )
 			m_bSelecting = false;
 		else

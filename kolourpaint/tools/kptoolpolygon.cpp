@@ -79,23 +79,23 @@ static const char *pointArrayToString (const TQPointArray &pointArray)
 #endif
 
 
-static TQPen makeMaskPen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle)
+static TQPen makeMaskPen (const kpColor &color, int lineWidth, TQt::PenStyle lineStyle)
 {
     return TQPen (color.maskColor (),
                  lineWidth == 1 ? 0/*closer to looking width 1*/ : lineWidth, lineStyle,
-                 Qt::RoundCap, Qt::RoundJoin);
+                 TQt::RoundCap, TQt::RoundJoin);
 }
 
-static TQPen makePen (const kpColor &color, int lineWidth, Qt::PenStyle lineStyle)
+static TQPen makePen (const kpColor &color, int lineWidth, TQt::PenStyle lineStyle)
 {
     if (color.isOpaque ())
     {
         return TQPen (color.toTQColor (),
                      lineWidth == 1 ? 0/*closer to looking width 1*/ : lineWidth, lineStyle,
-                     Qt::RoundCap, Qt::RoundJoin);
+                     TQt::RoundCap, TQt::RoundJoin);
     }
     else
-        return Qt::NoPen;
+        return TQt::NoPen;
 }
 
 static TQBrush makeMaskBrush (const kpColor &foregroundColor,
@@ -105,7 +105,7 @@ static TQBrush makeMaskBrush (const kpColor &foregroundColor,
     if (toolWidgetFillStyle)
         return toolWidgetFillStyle->maskBrush (foregroundColor, backgroundColor);
     else
-        return Qt::NoBrush;
+        return TQt::NoBrush;
 }
 
 static TQBrush makeBrush (const kpColor &foregroundColor,
@@ -115,7 +115,7 @@ static TQBrush makeBrush (const kpColor &foregroundColor,
     if (toolWidgetFillStyle)
         return toolWidgetFillStyle->brush (foregroundColor, backgroundColor);
     else
-        return Qt::NoBrush;
+        return TQt::NoBrush;
 }
 
 static bool only1PixelInPointArray (const TQPointArray &points)
@@ -135,7 +135,7 @@ static bool only1PixelInPointArray (const TQPointArray &points)
 static TQPixmap pixmap (const TQPixmap &oldPixmap,
                        const TQPointArray &points, const TQRect &rect,
                        const kpColor &foregroundColor, kpColor backgroundColor,
-                       int lineWidth, Qt::PenStyle lineStyle,
+                       int lineWidth, TQt::PenStyle lineStyle,
                        kpToolWidgetFillStyle *toolWidgetFillStyle,
                        enum kpToolPolygon::Mode mode, bool final = true)
 {
@@ -652,7 +652,7 @@ void kpToolPolygon::updateShape ()
     TQPixmap newPixmap = pixmap (oldPixmap,
                                 m_points, boundingRect,
                                 color (m_mouseButton), color (1 - m_mouseButton),
-                                m_lineWidth, Qt::SolidLine,
+                                m_lineWidth, TQt::SolidLine,
                                 m_toolWidgetFillStyle,
                                 m_mode, false/*not final*/);
 
@@ -790,7 +790,7 @@ void kpToolPolygon::endShape (const TQPoint &, const TQRect &)
             (text (),
              m_points, boundingRect,
              color (m_mouseButton), color (1 - m_mouseButton),
-             m_lineWidth, Qt::SolidLine,
+             m_lineWidth, TQt::SolidLine,
              m_toolWidgetFillStyle,
              document ()->getPixmapAt (boundingRect),
              m_mode,
@@ -844,7 +844,7 @@ kpToolPolygonCommand::kpToolPolygonCommand (const TQString &name,
                                             const TQPointArray &points,
                                             const TQRect &normalizedRect,
                                             const kpColor &foregroundColor, const kpColor &backgroundColor,
-                                            int lineWidth, Qt::PenStyle lineStyle,
+                                            int lineWidth, TQt::PenStyle lineStyle,
                                             kpToolWidgetFillStyle *toolWidgetFillStyle,
                                             const TQPixmap &originalArea,
                                             enum kpToolPolygon::Mode mode,

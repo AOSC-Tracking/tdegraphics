@@ -6,7 +6,7 @@
  <kcfgfile name="kpdfpartrc" />
  <group name="Accessibility" >
   <entry key="PaperColor" type="Color" >
-   <default code="true" >Qt::white</default>
+   <default code="true" >TQt::white</default>
   </entry>
   <entry key="HighlightImages" type="Bool" >
    <default>false</default>
@@ -129,7 +129,7 @@
    <default>false</default>
   </entry>
   <entry key="SlidesBackgroundColor" type="Color" >
-   <default code="true" >Qt::black</default>
+   <default code="true" >TQt::black</default>
   </entry>
   <entry key="SlidesTransition" type="Enum" >
    <default>Replace</default>

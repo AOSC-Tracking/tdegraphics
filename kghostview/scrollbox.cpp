@@ -31,15 +31,15 @@ ScrollBox::ScrollBox( TQWidget* parent, const char* name )
 void ScrollBox::mousePressEvent( TQMouseEvent* e )
 {
     mouse = e->pos();
-    if( e->button() == Qt::RightButton )
+    if( e->button() == TQt::RightButton )
 	emit button3Pressed();
-    if( e->button() == Qt::MidButton )
+    if( e->button() == TQt::MidButton )
 	emit button2Pressed();
 }
 
 void ScrollBox::mouseMoveEvent( TQMouseEvent* e )
 {
-    if( e->state() != Qt::LeftButton )
+    if( e->state() != TQt::LeftButton )
 	return;
 
     int dx = ( e->pos().x() - mouse.x() ) * pagesize.width()  / width();

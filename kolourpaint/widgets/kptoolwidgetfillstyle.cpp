@@ -149,7 +149,7 @@ TQBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
     switch (fs)
     {
     case NoFill:
-        return Qt::NoBrush;
+        return TQt::NoBrush;
         break;
     case FillWithBackground:
         return TQBrush (backgroundColor.maskColor ());
@@ -158,7 +158,7 @@ TQBrush kpToolWidgetFillStyle::maskBrushForFillStyle (FillStyle fs,
         return TQBrush (foregroundColor.maskColor ());
         break;
     default:
-        return Qt::NoBrush;
+        return TQt::NoBrush;
         break;
     }
 }
@@ -182,22 +182,22 @@ TQBrush kpToolWidgetFillStyle::brushForFillStyle (FillStyle fs,
     switch (fs)
     {
     case NoFill:
-        return Qt::NoBrush;
+        return TQt::NoBrush;
         break;
     case FillWithBackground:
         if (backgroundColor.isOpaque ())
             return TQBrush (backgroundColor.toTQColor ());
         else
-            return Qt::NoBrush;
+            return TQt::NoBrush;
         break;
     case FillWithForeground:
         if (foregroundColor.isOpaque ())
             return TQBrush (foregroundColor.toTQColor ());
         else
-            return Qt::NoBrush;
+            return TQt::NoBrush;
         break;
     default:
-        return Qt::NoBrush;
+        return TQt::NoBrush;
         break;
     }
 }

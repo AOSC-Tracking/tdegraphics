@@ -45,7 +45,7 @@ void DVIWidget::mousePressEvent(TQMouseEvent* e)
   // Check if the mouse is pressed on a source-hyperlink
   // source hyperlinks can be invoked with the Middle Mousebutton or alternatively
   // with Control+Left Mousebutton
-  if ((e->button() == Qt::MidButton || (e->button() == Qt::LeftButton && (e->state() & ControlButton)))
+  if ((e->button() == TQt::MidButton || (e->button() == TQt::LeftButton && (e->state() & ControlButton)))
       && (pageData->sourceHyperLinkList.size() > 0))
   {
     int minIndex = 0;

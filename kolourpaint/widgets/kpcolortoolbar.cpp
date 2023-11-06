@@ -462,7 +462,7 @@ static bool ownColorsInitialised = false;
 #define rows 2
 #define cols 11
 kpColorCells::kpColorCells (TQWidget *parent,
-                            Qt::Orientation o,
+                            TQt::Orientation o,
                             const char *name)
     : KColorCells (parent, rows, cols),
       m_mouseButton (-1)
@@ -514,16 +514,16 @@ kpColorCells::~kpColorCells ()
 {
 }
 
-Qt::Orientation kpColorCells::orientation () const
+TQt::Orientation kpColorCells::orientation () const
 {
     return m_orientation;
 }
 
-void kpColorCells::setOrientation (Qt::Orientation o)
+void kpColorCells::setOrientation (TQt::Orientation o)
 {
     int c, r;
 
-    if (o == Qt::Horizontal)
+    if (o == TQt::Horizontal)
     {
         c = cols;
         r = rows;
@@ -588,7 +588,7 @@ void kpColorCells::setOrientation (Qt::Orientation o)
         int y, x;
         int pos;
 
-        if (o == Qt::Horizontal)
+        if (o == TQt::Horizontal)
         {
             y = i / cols;
             x = i % cols;
@@ -660,17 +660,17 @@ void kpColorCells::mouseReleaseEvent (TQMouseEvent *e)
     TQt::ButtonState button = e->button ();
 #if DEBUG_KP_COLOR_TOOL_BAR
     kdDebug () << "kpColorCells::mouseReleaseEvent(left="
-               << (button & Qt::LeftButton)
+               << (button & TQt::LeftButton)
                << ",right="
-               << (button & Qt::RightButton)
+               << (button & TQt::RightButton)
                << ")"
                << endl;
 #endif
-    if (!((button & Qt::LeftButton) && (button & Qt::RightButton)))
+    if (!((button & TQt::LeftButton) && (button & TQt::RightButton)))
     {
-        if (button & Qt::LeftButton)
+        if (button & TQt::LeftButton)
             m_mouseButton = 0;
-        else if (button & Qt::RightButton)
+        else if (button & TQt::RightButton)
             m_mouseButton = 1;
     }
 
@@ -785,12 +785,12 @@ void kpTransparentColorCell::mouseReleaseEvent (TQMouseEvent *e)
 {
     if (rect ().contains (e->pos ()))
     {
-        if (e->button () == Qt::LeftButton)
+        if (e->button () == TQt::LeftButton)
         {
             emit transparentColorSelected (0);
             emit foregroundColorChanged (kpColor::transparent);
         }
-        else if (e->button () == Qt::RightButton)
+        else if (e->button () == TQt::RightButton)
         {
             emit transparentColorSelected (1);
             emit backgroundColorChanged (kpColor::transparent);
@@ -819,7 +819,7 @@ void kpTransparentColorCell::drawContents (TQPainter *p)
  */
 
 kpColorPalette::kpColorPalette (TQWidget *parent,
-                                Qt::Orientation o,
+                                TQt::Orientation o,
                                 const char *name)
     : TQWidget (parent, name),
       m_boxLayout (0)
@@ -849,18 +849,18 @@ kpColorPalette::~kpColorPalette ()
 }
 
 // public
-Qt::Orientation kpColorPalette::orientation () const
+TQt::Orientation kpColorPalette::orientation () const
 {
     return m_orientation;
 }
 
-void kpColorPalette::setOrientation (Qt::Orientation o)
+void kpColorPalette::setOrientation (TQt::Orientation o)
 {
     m_colorCells->setOrientation (o);
 
     delete m_boxLayout;
 
-    if (o == Qt::Horizontal)
+    if (o == TQt::Horizontal)
     {
         m_boxLayout = new TQBoxLayout (this, TQBoxLayout::LeftToRight, 0/*margin*/, 5/*spacing*/);
         m_boxLayout->addWidget (m_transparentColorCell, 0/*stretch*/, TQt::AlignVCenter);
@@ -997,7 +997,7 @@ kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow,
 }
 
 // virtual
-void kpColorToolBar::setOrientation (Qt::Orientation o)
+void kpColorToolBar::setOrientation (TQt::Orientation o)
 {
     // (TQDockWindow::undock() calls us)
     bool isOutsideDock = (place () == TQDockWindow::OutsideDock);
@@ -1014,7 +1014,7 @@ void kpColorToolBar::setOrientation (Qt::Orientation o)
         o = m_lastDockedOrientation;
     }
 
-    if (o == Qt::Horizontal)
+    if (o == TQt::Horizontal)
     {
         m_boxLayout->setDirection (TQBoxLayout::LeftToRight);
     }

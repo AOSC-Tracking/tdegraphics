@@ -798,7 +798,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
               if( pw->inherits( "PMDockSplitter" ) )
               {
                  PMDockSplitter* ds = ( PMDockSplitter* ) pw;
-                 if( ds->splitterOrientation( ) ==Qt::Vertical )
+                 if( ds->splitterOrientation( ) ==TQt::Vertical )
                     found = true;
               }
            }
@@ -874,8 +874,8 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
     // if to dock not to the center of the target dockwidget,
     // dock to newDock
     PMDockSplitter* panner = 0L;
-    if ( dockPos == PMDockWidget::DockTop  || dockPos == PMDockWidget::DockBottom ) panner = new PMDockSplitter( newDock, "_dock_split_",Qt::Horizontal, spliPos, manager->splitterHighResolution() );
-    if ( dockPos == PMDockWidget::DockLeft || dockPos == PMDockWidget::DockRight  ) panner = new PMDockSplitter( newDock, "_dock_split_",Qt::Vertical , spliPos, manager->splitterHighResolution() );
+    if ( dockPos == PMDockWidget::DockTop  || dockPos == PMDockWidget::DockBottom ) panner = new PMDockSplitter( newDock, "_dock_split_",TQt::Horizontal, spliPos, manager->splitterHighResolution() );
+    if ( dockPos == PMDockWidget::DockLeft || dockPos == PMDockWidget::DockRight  ) panner = new PMDockSplitter( newDock, "_dock_split_",TQt::Vertical , spliPos, manager->splitterHighResolution() );
     newDock->setWidget( panner );
 
     panner->setOpaqueResize(manager->splitterOpaqueResize());
@@ -994,13 +994,13 @@ void PMDockWidget::undock()
           split->deactivate();
           if ( split->getFirst() == parentOfTab ){
             split->activate( lastTab );
-            if ( ((PMDockWidget*)split->parent())->splitterOrientation ==Qt::Vertical )
+            if ( ((PMDockWidget*)split->parent())->splitterOrientation ==TQt::Vertical )
               emit ((PMDockWidget*)split->getAnother(parentOfTab))->docking( parentOfTab, PMDockWidget::DockLeft );
             else
               emit ((PMDockWidget*)split->getAnother(parentOfTab))->docking( parentOfTab, PMDockWidget::DockTop );
           } else {
             split->activate( 0L, lastTab );
-            if ( ((PMDockWidget*)split->parent())->splitterOrientation ==Qt::Vertical )
+            if ( ((PMDockWidget*)split->parent())->splitterOrientation ==TQt::Vertical )
               emit ((PMDockWidget*)split->getAnother(parentOfTab))->docking( parentOfTab, PMDockWidget::DockRight );
             else
               emit ((PMDockWidget*)split->getAnother(parentOfTab))->docking( parentOfTab, PMDockWidget::DockBottom );
@@ -1343,7 +1343,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
         else curdw->toDesktop( );
         break;
       case TQEvent::MouseButtonPress:
-        if ( ((TQMouseEvent*)event)->button() == Qt::LeftButton ){
+        if ( ((TQMouseEvent*)event)->button() == TQt::LeftButton ){
           if ( curdw->eDocking != (int)PMDockWidget::DockNone ){
             dropCancel = true;
             curdw->setFocus();
@@ -1367,7 +1367,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
         }
         break;
       case TQEvent::MouseButtonRelease:
-        if ( ((TQMouseEvent*)event)->button() == Qt::LeftButton ){
+        if ( ((TQMouseEvent*)event)->button() == TQt::LeftButton ){
           if ( draging ){
             if ( !dropCancel )
               drop();
@@ -1426,7 +1426,7 @@ bool PMDockManager::eventFilter( TQObject *obj, TQEvent *event )
           if (d->readyToDrag) {
             d->readyToDrag = false;
           }
-          if ( (((TQMouseEvent*)event)->state() == Qt::LeftButton) &&
+          if ( (((TQMouseEvent*)event)->state() == TQt::LeftButton) &&
                (curdw->eDocking != (int)PMDockWidget::DockNone) ) {
             startDrag( curdw);
           }
@@ -1915,7 +1915,7 @@ void PMDockManager::readConfig(TQDomElement &base)
             PMDockWidget *second = getDockWidgetFromName(secondName);
             if (first && second) {
                 obj = first->manualDock(second,
-                                        (orientation == (int)Qt::Vertical)? PMDockWidget::DockLeft : PMDockWidget::DockTop,
+                                        (orientation == (int)TQt::Vertical)? PMDockWidget::DockLeft : PMDockWidget::DockTop,
                                         separatorPos);
                 if (obj)
                     obj->setName(name.latin1());
@@ -2165,9 +2165,9 @@ void PMDockManager::readConfig( TDEConfig* c, TQString group )
       PMDockWidget* last  = getDockWidgetFromName( c->readEntry( oname + ":last_name"  ) );
       int sepPos = c->readNumEntry( oname + ":sepPos" );
 
-      Qt::Orientation p = (Qt::Orientation)c->readNumEntry( oname + ":orientation" );
+      TQt::Orientation p = (TQt::Orientation)c->readNumEntry( oname + ":orientation" );
       if ( first  && last ){
-        obj = first->manualDock( last, ( p ==Qt::Vertical ) ? PMDockWidget::DockLeft : PMDockWidget::DockTop, sepPos );
+        obj = first->manualDock( last, ( p ==TQt::Vertical ) ? PMDockWidget::DockLeft : PMDockWidget::DockTop, sepPos );
         if (obj){
           obj->setName( oname.latin1() );
         }

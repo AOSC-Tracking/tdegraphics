@@ -88,16 +88,16 @@ void KGVPageView::wheelEvent( TQWheelEvent *e )
 }
 void KGVPageView::mousePressEvent( TQMouseEvent * e )
 {
-    if ( e->button() & Qt::LeftButton )
+    if ( e->button() & TQt::LeftButton )
     {
 	_dragGrabPos = e -> globalPos();
 	setCursor( sizeAllCursor );
     }
-    else if ( e->button() & Qt::MidButton )
+    else if ( e->button() & TQt::MidButton )
     {
 	emit ReadDown();
     }
-    else if ( e -> button() & Qt::RightButton )
+    else if ( e -> button() & TQt::RightButton )
     {
 	emit rightClick();
     }
@@ -105,7 +105,7 @@ void KGVPageView::mousePressEvent( TQMouseEvent * e )
 
 void KGVPageView::mouseReleaseEvent( TQMouseEvent *e )
 {
-    if ( e -> button() & Qt::LeftButton )
+    if ( e -> button() & TQt::LeftButton )
     {
 	setCursor( arrowCursor );
     }
@@ -113,7 +113,7 @@ void KGVPageView::mouseReleaseEvent( TQMouseEvent *e )
 
 void KGVPageView::mouseMoveEvent( TQMouseEvent * e )
 {
-    if ( e->state() & Qt::LeftButton )
+    if ( e->state() & TQt::LeftButton )
     {
 	TQPoint delta = _dragGrabPos - e->globalPos();
 	scrollBy( delta.x(), delta.y() );

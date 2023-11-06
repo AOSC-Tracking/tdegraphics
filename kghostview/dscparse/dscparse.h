@@ -98,7 +98,7 @@ typedef enum {
   CDSC_FOR		= 207,	/* %%For: */
   CDSC_LANGUAGELEVEL	= 208,	/* %%LanguageLevel: */
   CDSC_BOUNDINGBOX	= 209,	/* %%BoundingBox: */
-  CDSC_ORIENTATION	= 210,	/* %%Qt::Orientation: */
+  CDSC_ORIENTATION	= 210,	/* %%Orientation: */
   CDSC_PAGEORDER	= 211,	/* %%PageOrder: */
   CDSC_DOCUMENTMEDIA	= 212,	/* %%DocumentMedia: */
   CDSC_DOCUMENTPAPERSIZES    = 213,	/* %%DocumentPaperSizes: */
@@ -159,7 +159,7 @@ typedef enum {
 
 /* Trailer section */
   CDSC_TRAILER		= 800,	/* %%Trailer */
-/* also %%Pages, %%BoundingBox, %%Qt::Orientation, %%PageOrder, %%DocumentMedia */ 
+/* also %%Pages, %%BoundingBox, %%Orientation, %%PageOrder, %%DocumentMedia */
 /* %%Page is recognised as an error */
 /* also %%DocumentNeededFonts, %%DocumentSuppliedFonts */
 

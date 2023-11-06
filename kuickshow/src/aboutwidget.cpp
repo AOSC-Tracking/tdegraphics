@@ -39,7 +39,7 @@ AboutWidget::AboutWidget( TQWidget *parent, const char *name )
 
     setFrameStyle( WinPanel | Raised );
 
-    TQGroupBox *gBox = new TQGroupBox( 1,Qt::Horizontal, this);
+    TQGroupBox *gBox = new TQGroupBox( 1,TQt::Horizontal, this);
     gBox->setGeometry( 10, 10, width()-20, height()-20 );
     gBox->setAlignment( AlignHCenter );
     gBox->installEventFilter( this );

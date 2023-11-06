@@ -275,13 +275,13 @@ void ProgressWidget::setProgress( float percentage )
 
 void ProgressWidget::mouseMoveEvent( TQMouseEvent * e )
 {
-    if ( e->state() == Qt::LeftButton && width() > 0 )
+    if ( e->state() == TQt::LeftButton && width() > 0 )
         m_miniBar->slotGotoNormalizedPage( (float)( TQApplication::reverseLayout() ? width() - e->x() : e->x() ) / (float)width() );
 }
 
 void ProgressWidget::mousePressEvent( TQMouseEvent * e )
 {
-    if ( e->button() == Qt::LeftButton && width() > 0 )
+    if ( e->button() == TQt::LeftButton && width() > 0 )
         m_miniBar->slotGotoNormalizedPage( (float)( TQApplication::reverseLayout() ? width() - e->x() : e->x() ) / (float)width() );
 }
 

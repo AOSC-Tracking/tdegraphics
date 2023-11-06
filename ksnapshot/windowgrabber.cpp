@@ -240,7 +240,7 @@ TQPixmap WindowGrabber::grabCurrent( bool includeDecorations )
 
 void WindowGrabber::mousePressEvent( TQMouseEvent *e )
 {
-    if ( e->button() == Qt::RightButton )
+    if ( e->button() == TQt::RightButton )
 	yPos = e->globalY();
     else {
 	TQPixmap pm;
@@ -258,7 +258,7 @@ void WindowGrabber::mousePressEvent( TQMouseEvent *e )
 
 void WindowGrabber::mouseReleaseEvent( TQMouseEvent *e )
 {
-    if ( e->button() == Qt::RightButton )
+    if ( e->button() == TQt::RightButton )
 	yPos = -1;
 }
 

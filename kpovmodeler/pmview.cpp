@@ -40,8 +40,8 @@ PMView::PMView( PMPart* part, TQWidget* parent, const char* name )
    setBackgroundMode( PaletteBase );
 
    TQVBoxLayout* layout = new TQVBoxLayout( this );
-   m_pMainSplitter = new TQSplitter( Qt::Horizontal, this, "MainSplitter" );
-   m_pTreeEditSplitter = new TQSplitter( Qt::Vertical, m_pMainSplitter,
+   m_pMainSplitter = new TQSplitter( TQt::Horizontal, this, "MainSplitter" );
+   m_pTreeEditSplitter = new TQSplitter( TQt::Vertical, m_pMainSplitter,
                                         "TreeEditSplitter" );
 
    

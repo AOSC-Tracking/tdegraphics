@@ -507,7 +507,7 @@ void PMGLView::mousePressEvent( TQMouseEvent* e )
 {
    if( m_bScaleMode || m_bTranslateMode )
    {
-      if( ( e->button( ) & Qt::LeftButton ) && ( e->state( ) == 0 ) )
+      if( ( e->button( ) & TQt::LeftButton ) && ( e->state( ) == 0 ) )
       {
          m_bMousePressed = true;
          m_mousePos = e->pos( );
@@ -517,7 +517,7 @@ void PMGLView::mousePressEvent( TQMouseEvent* e )
    }
    else if( m_type != PMViewCamera )
    {
-      if( ( e->button( ) & Qt::LeftButton ) && m_bInverseValid
+      if( ( e->button( ) & TQt::LeftButton ) && m_bInverseValid
           && m_pActiveObject )
       {
          if( m_pUnderMouse )
@@ -578,7 +578,7 @@ void PMGLView::mousePressEvent( TQMouseEvent* e )
 
    if( !( m_bGraphicalChangeMode || m_bMousePressed ) )
    {
-      if( ( e->button( ) == Qt::RightButton ) && ( e->state( ) == 0 ) )
+      if( ( e->button( ) == TQt::RightButton ) && ( e->state( ) == 0 ) )
       {
          m_contextClickPosition = PMVector( screenToInternalX( e->x( ) ),
                                             screenToInternalY( e->y( ) ) );
@@ -599,7 +599,7 @@ void PMGLView::mousePressEvent( TQMouseEvent* e )
       }
    }
 
-   if( e->button( ) == Qt::MidButton )
+   if( e->button( ) == TQt::MidButton )
    {
       m_bMidMousePressed = true;
       m_mousePos = e->pos( );
@@ -677,7 +677,7 @@ void PMGLView::mouseReleaseEvent( TQMouseEvent* e )
       m_autoScrollTimer.stop( );
    }
 
-   if( e->button( ) & Qt::MidButton )
+   if( e->button( ) & TQt::MidButton )
       m_bMidMousePressed = false;
 
    m_bSelectUnderMouse = false;

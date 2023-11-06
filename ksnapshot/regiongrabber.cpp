@@ -104,7 +104,7 @@ void RegionGrabber::initGrabber()
 
 void RegionGrabber::mousePressEvent( TQMouseEvent *e )
 {
-  if ( e->button() == Qt::LeftButton )
+  if ( e->button() == TQt::LeftButton )
   {
     mouseDown = true;
     grabRect = TQRect( e->pos(), e->pos() );

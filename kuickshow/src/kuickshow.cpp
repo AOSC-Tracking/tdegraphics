@@ -1037,7 +1037,7 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
         else if ( eventType == TQEvent::MouseButtonDblClick )
         {
             TQMouseEvent *ev = TQT_TQMOUSEEVENT( e );
-            if ( ev->button() == Qt::LeftButton )
+            if ( ev->button() == TQt::LeftButton )
             {
                 if ( s_viewers.count() == 1 )
                 {

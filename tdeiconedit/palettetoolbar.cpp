@@ -35,7 +35,7 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
 {
   TQWidget *base = new TQWidget( this );
 
-  TQBoxLayout::Direction d = orientation() == Qt::Horizontal? 
+  TQBoxLayout::Direction d = orientation() == TQt::Horizontal? 
       TQBoxLayout::LeftToRight : TQBoxLayout::TopToBottom;
   m_layout = new TQBoxLayout( base, d, 2, 6 );
 
@@ -86,12 +86,12 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
   setMovingEnabled( false );
 }
 
-void PaletteToolBar::setOrientation( Qt::Orientation o )
+void PaletteToolBar::setOrientation( TQt::Orientation o )
 {
    if(  barPos() == Floating )
-     o = o == Qt::Vertical ? Qt::Horizontal : Qt::Vertical;
+     o = o == TQt::Vertical ? TQt::Horizontal : TQt::Vertical;
 
-  TQBoxLayout::Direction d = o == Qt::Horizontal? TQBoxLayout::LeftToRight
+  TQBoxLayout::Direction d = o == TQt::Horizontal? TQBoxLayout::LeftToRight
         : TQBoxLayout::TopToBottom;
   m_layout->setDirection( d );
 

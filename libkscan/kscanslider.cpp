@@ -58,7 +58,7 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
        hb->addSpacing( 4 );
     }
 
-    slider = new TQSlider( (int) min, (int)max, 1, (int)min, Qt::Horizontal, this, "AUTO_SLIDER_" );
+    slider = new TQSlider( (int) min, (int)max, 1, (int)min, TQt::Horizontal, this, "AUTO_SLIDER_" );
     slider->setTickmarks( TQSlider::Below );
     slider->setTickInterval( int(TQMAX( (max-min)/10, 1 )) );
     slider->setSteps( int(TQMAX( (max-min)/20, 1) ), int(TQMAX( (max-min)/10, 1) ) );

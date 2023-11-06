@@ -151,10 +151,10 @@ public:
                    special cases.
           \end{description} */
    int		mode;
-      /**Qt::Horizontal page alignment. Possible values are #ALIGN_LEFT#,
+      /** Horizontal page alignment. Possible values are #ALIGN_LEFT#,
 	  #ALIGN_CENTER#, #ALIGN_RIGHT# and #ALIGN_UNSPEC#. */
    alignment hor_align;
-      /**Qt::Vertical page alignment. Possible values are #ALIGN_TOP#,
+      /** Vertical page alignment. Possible values are #ALIGN_TOP#,
 	  #ALIGN_CENTER#, #ALIGN_BOTTOM# and #ALIGN_UNSPEC#. */
    alignment ver_align;
       /** List of defined map areas. They may be just areas of highlighting

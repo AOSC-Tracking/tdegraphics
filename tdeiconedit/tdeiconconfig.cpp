@@ -59,7 +59,7 @@ KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent)
   TQFrame *frame = makeMainWidget();
   TQVBoxLayout *ml = new TQVBoxLayout(frame);
   TQGroupBox *grp = new TQGroupBox(i18n("Template"), frame);
-  grp->setColumnLayout(0, Qt::Vertical);
+  grp->setColumnLayout(0, TQt::Vertical);
   grp->layout()->setSpacing(spacingHint());
   grp->layout()->setMargin(marginHint());
   TQGridLayout *l = new TQGridLayout(grp->layout());
@@ -119,7 +119,7 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
   btadd = btremove = btedit = 0L;
 
   TQGroupBox* grp = new TQGroupBox( i18n( "Templates" ), this );
-  grp->setColumnLayout( 0, Qt::Horizontal );
+  grp->setColumnLayout( 0, TQt::Horizontal );
 
   templates = new TDEIconListBox( grp );
   connect( templates, TQT_SIGNAL( highlighted( int ) ), 
@@ -245,7 +245,7 @@ KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
   TQVBoxLayout *mainLayout = new TQVBoxLayout( this );
 
   TQGroupBox *grp1 = new TQGroupBox( i18n( "Select Background" ), this );
-  grp1->setColumnLayout(0, Qt::Vertical );
+  grp1->setColumnLayout(0, TQt::Vertical );
   grp1->layout()->setSpacing( KDialog::spacingHint() );
   grp1->layout()->setMargin( KDialog::marginHint() );
   mainLayout->addWidget( grp1 );

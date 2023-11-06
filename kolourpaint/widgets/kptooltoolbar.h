@@ -100,12 +100,12 @@ private slots:
     void slotToolActionToolTipChanged ();
 
 public slots:
-    virtual void setOrientation (Qt::Orientation o);
+    virtual void setOrientation (TQt::Orientation o);
 
 private:
-    void addButton (TQButton *button, Qt::Orientation o, int num);
+    void addButton (TQButton *button, TQt::Orientation o, int num);
 
-    Qt::Orientation m_lastDockedOrientation;
+    TQt::Orientation m_lastDockedOrientation;
     bool m_lastDockedOrientationSet;
     int m_vertCols;
 

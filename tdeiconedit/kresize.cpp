@@ -34,7 +34,7 @@ KResizeWidget::KResizeWidget( TQWidget* parent, const char* name,
   TQHBoxLayout* genLayout = new TQHBoxLayout( this );
 
   TQGroupBox* group = new TQGroupBox( i18n( "Size" ), this );
-  group->setColumnLayout( 0, Qt::Horizontal );
+  group->setColumnLayout( 0, TQt::Horizontal );
   genLayout->addWidget( group );
 
   TQHBoxLayout* layout = new TQHBoxLayout( group->layout(), 6 );

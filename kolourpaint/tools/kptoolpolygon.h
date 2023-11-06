@@ -130,7 +130,7 @@ public:
                           const TQPointArray &points,
                           const TQRect &normalizedRect,
                           const kpColor &foregroundColor, const kpColor &backgroundColor,
-                          int lineWidth, Qt::PenStyle lineStyle,
+                          int lineWidth, TQt::PenStyle lineStyle,
                           kpToolWidgetFillStyle *toolWidgetFillStyle,
                           const TQPixmap &originalArea,
                           kpToolPolygon::Mode mode,
@@ -148,7 +148,7 @@ private:
 
     kpColor m_foregroundColor, m_backgroundColor;
     int m_lineWidth;
-    Qt::PenStyle m_lineStyle;
+    TQt::PenStyle m_lineStyle;
     kpToolWidgetFillStyle *m_toolWidgetFillStyle;
 
     TQPixmap m_originalArea;

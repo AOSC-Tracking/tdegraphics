@@ -2026,7 +2026,7 @@ dsc_scan_comments(CDSC *dsc)
 	    continued ? 3 : 10))
 	    return CDSC_ERROR;
     }
-    else if (IS_DSC(line, "%%Qt::Orientation:")) {
+    else if (IS_DSC(line, "%%Orientation:")) {
 	dsc->id = CDSC_ORIENTATION;
 	if (dsc_parse_orientation(dsc, &(dsc->page_orientation), 
 		continued ? 3 : 14))
@@ -2330,7 +2330,7 @@ dsc_scan_defaults(CDSC *dsc)
     }
     else if (IS_DSC(line, "%%PageQt::Orientation:")) {
 	dsc->id = CDSC_PAGEORIENTATION;
-	/* This can override %%Qt::Orientation:  */
+	/* This can override %%Orientation:  */
 	if (dsc_parse_orientation(dsc, &(dsc->page_orientation), 18))
 	    return CDSC_ERROR;
     }
@@ -2936,30 +2936,30 @@ dsc_scan_page(CDSC *dsc)
  * %%DocumentProcessColors:
  * %%DocumentSuppliedFiles:
  * %%DocumentSuppliedFonts:
- * %%DocumentSuppliedProcSets: 
- * %%DocumentSuppliedResources: 
- * %%Qt::Orientation: 
- * %%Pages: 
- * %%PageOrder: 
+ * %%DocumentSuppliedProcSets:
+ * %%DocumentSuppliedResources:
+ * %%Orientation:
+ * %%Pages:
+ * %%PageOrder:
  *
  * Our supported subset is
  * %%Trailer
  * %%EOF
  * %%BoundingBox:
- * %%Qt::Orientation: 
- * %%Pages: 
- * %%PageOrder: 
+ * %%Orientation:
+ * %%Pages:
+ * %%PageOrder:
  * In addition to these, we support
  * %%DocumentMedia:
  * 
  * A %%PageTrailer can have the following:
- * %%PageBoundingBox: 
- * %%PageCustomColors: 
- * %%PageFiles: 
- * %%PageFonts: 
- * %%PageQt::Orientation: 
- * %%PageProcessColors: 
- * %%PageResources: 
+ * %%PageBoundingBox:
+ * %%PageCustomColors:
+ * %%PageFiles:
+ * %%PageFonts:
+ * %%PageQt::Orientation:
+ * %%PageProcessColors:
+ * %%PageResources:
  */
 
 dsc_private int
@@ -3052,7 +3052,7 @@ dsc_scan_trailer(CDSC *dsc)
 	    continued ? 3 : 10))
 	    return CDSC_ERROR;
     }
-    else if (IS_DSC(line, "%%Qt::Orientation:")) {
+    else if (IS_DSC(line, "%%Orientation:")) {
 	dsc->id = CDSC_ORIENTATION;
 	if (dsc_parse_orientation(dsc, &(dsc->page_orientation), continued ? 3 : 14))
 	    return CDSC_ERROR;

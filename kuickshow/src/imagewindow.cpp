@@ -630,7 +630,7 @@ void ImageWindow::mousePressEvent( TQMouseEvent *e )
     xposPress = xmove;
     yposPress = ymove;
 
-    if ( e->button() == Qt::LeftButton ) {
+    if ( e->button() == TQt::LeftButton ) {
         if ( e->state() & ShiftButton )
             updateCursor( ZoomCursor );
         else
@@ -675,7 +675,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
 
 void ImageWindow::mouseMoveEvent( TQMouseEvent *e )
 {
-    if ( !(e->state() & Qt::LeftButton) ) { // only handle LeftButton actions
+    if ( !(e->state() & TQt::LeftButton) ) { // only handle LeftButton actions
 	return;
     }
 
@@ -736,7 +736,7 @@ void ImageWindow::mouseReleaseEvent( TQMouseEvent *e )
     }
 
     // only proceed if shift-Key is still pressed
-    if ( !(e->button() == Qt::LeftButton && e->state() & ShiftButton) )
+    if ( !(e->button() == TQt::LeftButton && e->state() & ShiftButton) )
 	return;
 
     int neww, newh, topX, topY, botX, botY;

@@ -345,7 +345,7 @@ bool PMVectorListEdit::eventFilter( TQObject* o, TQEvent* e )
    if( e->type( ) == TQEvent::Wheel && parent( ) )
       return TQApplication::sendEvent( parent( ), e );
    if( e->type( ) == TQEvent::MouseButtonPress
-       && ( ( TQMouseEvent* ) e )->button( ) == Qt::RightButton )
+       && ( ( TQMouseEvent* ) e )->button( ) == TQt::RightButton )
    {
       bool b = TQTable::eventFilter( o, e );
       emit showContextMenu( );

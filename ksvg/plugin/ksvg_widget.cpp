@@ -74,11 +74,11 @@ KSVG::SVGMouseEventImpl *KSVGWidget::newMouseEvent(KSVG::SVGEvent::EventId id, T
 	}
 
 	int button = 0;
-	if(event->stateAfter() & Qt::LeftButton)
+	if(event->stateAfter() & TQt::LeftButton)
 		button = 1;
-	else if(event->stateAfter() & Qt::MidButton)
+	else if(event->stateAfter() & TQt::MidButton)
 		button = 2;
-	else if(event->stateAfter() & Qt::RightButton)
+	else if(event->stateAfter() & TQt::RightButton)
 		button = 3;
 
 	KSVG::SVGMouseEventImpl *mev = new KSVG::SVGMouseEventImpl(id, // type
@@ -104,7 +104,7 @@ KSVG::SVGMouseEventImpl *KSVGWidget::newMouseEvent(KSVG::SVGEvent::EventId id, T
 
 void KSVGWidget::mouseMoveEvent(TQMouseEvent *event)
 {
-	if(event->state() & TQt::ControlButton && event->state() & Qt::LeftButton)
+	if(event->state() & TQt::ControlButton && event->state() & TQt::LeftButton)
 	{
 		if(m_panningPos.isNull())
 			m_panningPos = event->pos();
@@ -186,7 +186,7 @@ void KSVGWidget::mousePressEvent(TQMouseEvent *event)
 	if(event->state() & TQt::ControlButton)
 		return;
 
-	if(event->button() == Qt::RightButton)
+	if(event->button() == TQt::RightButton)
 	{
 		if(part() && part()->factory())
 		{

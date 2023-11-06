@@ -235,7 +235,7 @@ void PresentationWidget::wheelEvent( TQWheelEvent * e )
 void PresentationWidget::mousePressEvent( TQMouseEvent * e )
 {
     // pressing left button
-    if ( e->button() == Qt::LeftButton )
+    if ( e->button() == TQt::LeftButton )
     {
         // if pressing on a link, skip other checks
         if ( ( m_pressedLink = getLink( e->x(), e->y() ) ) )
@@ -252,14 +252,14 @@ void PresentationWidget::mousePressEvent( TQMouseEvent * e )
         slotNextPage();
     }
     // pressing right button
-    else if ( e->button() == Qt::RightButton )
+    else if ( e->button() == TQt::RightButton )
         slotPrevPage();
 }
 
 void PresentationWidget::mouseReleaseEvent( TQMouseEvent * e )
 {
     // if releasing on the same link we pressed over, execute it
-    if ( m_pressedLink && e->button() == Qt::LeftButton )
+    if ( m_pressedLink && e->button() == TQt::LeftButton )
     {
         const KPDFLink * link = getLink( e->x(), e->y() );
         if ( link == m_pressedLink )
@@ -290,7 +290,7 @@ void PresentationWidget::mouseMoveEvent( TQMouseEvent * e )
         if ( e->y() <= (geometry().top() + 1) )
             m_topBar->show();
         // handle "dragging the wheel" if clicking on its geometry
-        else if ( e->state() == Qt::LeftButton && m_overlayGeometry.contains( e->pos() ) )
+        else if ( e->state() == TQt::LeftButton && m_overlayGeometry.contains( e->pos() ) )
             overlayClick( e->pos() );
     }
 }

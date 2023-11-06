@@ -93,7 +93,7 @@ bool Printing::printImageWithTQt( const TQString& filename, KPrinter& printer,
 
     // Black & white print?
     if ( printer.option( "app-kuickshow-blackwhite" ) != f) {
-        image = image.convertDepth( 1, Qt::MonoOnly | Qt::ThresholdDither | Qt::AvoidDither );
+        image = image.convertDepth( 1, TQt::MonoOnly | TQt::ThresholdDither | TQt::AvoidDither );
     }
 
     int filenameOffset = 0;

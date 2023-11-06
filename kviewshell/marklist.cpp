@@ -258,11 +258,11 @@ bool MarkListWidget::isVisible()
 void MarkListWidget::mousePressEvent(TQMouseEvent* e)
 {
   // Select Page
-  if (e->button() == Qt::LeftButton)
+  if (e->button() == TQt::LeftButton)
   {
     emit selected(pageNumber);
   }
-  else if (e->button() == Qt::RightButton)
+  else if (e->button() == TQt::RightButton)
   {
     emit showPopupMenu(pageNumber, e->globalPos());
   }
@@ -502,7 +502,7 @@ void MarkList::updateWidgetSize(const PageNumber& pageNumber)
 
 void MarkList::mousePressEvent(TQMouseEvent* e)
 {
-  if (e->button() == Qt::RightButton)
+  if (e->button() == TQt::RightButton)
   {
     // We call showPopupMenu with an invalid pageNumber to indicate that
     // the mouse does not point at a thumbnailWidget.

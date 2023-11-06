@@ -57,7 +57,7 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   TQVBoxLayout *mainLayout = new TQVBoxLayout(mainWidget, 0, spacingHint());
 
   bg = new TQGroupBox(mainWidget,"bg");
-  bg->setColumnLayout( 0, Qt::Horizontal );
+  bg->setColumnLayout( 0, TQt::Horizontal );
   mainLayout->addWidget( bg );
 
   TQVBoxLayout *vbl = new TQVBoxLayout(bg->layout());

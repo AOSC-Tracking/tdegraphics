@@ -123,12 +123,12 @@ TQ_OBJECT
 
 public:
     kpColorCells (TQWidget *parent,
-                  Qt::Orientation o = Qt::Horizontal,
+                  TQt::Orientation o = TQt::Horizontal,
                   const char *name = 0);
     virtual ~kpColorCells ();
 
-    Qt::Orientation orientation () const;
-    void setOrientation (Qt::Orientation o);
+    TQt::Orientation orientation () const;
+    void setOrientation (TQt::Orientation o);
 
 signals:
     void foregroundColorChanged (const TQColor &color);
@@ -139,7 +139,7 @@ signals:
     void backgroundColorChanged (const kpColor &color);
 
 protected:
-    Qt::Orientation m_orientation;
+    TQt::Orientation m_orientation;
 
     virtual void dropEvent (TQDropEvent *e);
     virtual void paintCell (TQPainter *painter, int row, int col);
@@ -189,19 +189,19 @@ TQ_OBJECT
 
 public:
     kpColorPalette (TQWidget *parent,
-                    Qt::Orientation o = Qt::Horizontal,
+                    TQt::Orientation o = TQt::Horizontal,
                     const char *name = 0);
     virtual ~kpColorPalette ();
 
-    Qt::Orientation orientation () const;
-    void setOrientation (Qt::Orientation o);
+    TQt::Orientation orientation () const;
+    void setOrientation (TQt::Orientation o);
 
 signals:
     void foregroundColorChanged (const kpColor &color);
     void backgroundColorChanged (const kpColor &color);
 
 protected:
-    Qt::Orientation m_orientation;
+    TQt::Orientation m_orientation;
 
     TQBoxLayout *m_boxLayout;
     kpTransparentColorCell *m_transparentColorCell;
@@ -290,9 +290,9 @@ public slots:
 private:
     kpMainWindow *m_mainWindow;
 
-    Qt::Orientation m_lastDockedOrientation;
+    TQt::Orientation m_lastDockedOrientation;
     bool m_lastDockedOrientationSet;
-    virtual void setOrientation (Qt::Orientation o);
+    virtual void setOrientation (TQt::Orientation o);
 
     TQBoxLayout *m_boxLayout;
     kpDualColorButton *m_dualColorButton;

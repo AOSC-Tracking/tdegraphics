@@ -88,11 +88,11 @@ KSVG::SVGMouseEventImpl *newMouseEvent(SVGDocument *doc, KSVG::SVGEventImpl::Eve
 	}
 
 	int button = 0;
-	if(event->stateAfter() & Qt::LeftButton)
+	if(event->stateAfter() & TQt::LeftButton)
 		button = 1;
-	else if(event->stateAfter() & Qt::MidButton)
+	else if(event->stateAfter() & TQt::MidButton)
 		button = 2;
-	else if(event->stateAfter() & Qt::RightButton)
+	else if(event->stateAfter() & TQt::RightButton)
 		button = 3;
 
 	KSVG::SVGMouseEventImpl *mev = new KSVG::SVGMouseEventImpl(id, // type

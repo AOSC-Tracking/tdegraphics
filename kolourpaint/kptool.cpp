@@ -942,7 +942,7 @@ void kpTool::mousePressEvent (TQMouseEvent *e)
     // state of all the buttons - not just the one that triggered the event (button())
     TQt::ButtonState buttonState = e->stateAfter ();
 
-    if (m_mainWindow && e->button () == Qt::MidButton)
+    if (m_mainWindow && e->button () == TQt::MidButton)
     {
         const TQString text = TQApplication::clipboard ()->text (TQClipboard::Selection);
     #if DEBUG_KP_TOOL && 1
@@ -1133,7 +1133,7 @@ void kpTool::mouseReleaseEvent (TQMouseEvent *e)
         endDrawInternal (m_currentPoint, TQRect (m_startPoint, m_currentPoint).normalize ());
     }
 
-    if ((e->stateAfter () & Qt::MouseButtonMask) == 0)
+    if ((e->stateAfter () & TQt::MouseButtonMask) == 0)
     {
         releasedAllButtons ();
     }
@@ -1239,7 +1239,7 @@ void kpTool::keyPressEvent (TQKeyEvent *e)
             // TODO: what about the modifiers
             TQMouseEvent me (TQEvent::MouseButtonPress,
                             view->mapFromGlobal (TQCursor::pos ()),
-                            Qt::LeftButton,
+                            TQt::LeftButton,
                             0);
             mousePressEvent (&me);
             e->accept ();
@@ -1336,8 +1336,8 @@ void kpTool::keyReleaseEvent (TQKeyEvent *e)
         {
             TQMouseEvent me (TQEvent::MouseButtonRelease,
                             view->mapFromGlobal (TQCursor::pos ()),
-                            Qt::LeftButton,
-                            Qt::LeftButton);
+                            TQt::LeftButton,
+                            TQt::LeftButton);
             mouseReleaseEvent (&me);
             e->accept ();
         }
@@ -1469,17 +1469,17 @@ void kpTool::leaveEvent (TQEvent *)
 int kpTool::mouseButton (const TQt::ButtonState &buttonState)
 {
     // we have nothing to do with mid-buttons
-    if (buttonState & Qt::MidButton)
+    if (buttonState & TQt::MidButton)
         return -1;
 
     // both left & right together is quite meaningless...
-    TQt::ButtonState bothButtons = (TQt::ButtonState) (Qt::LeftButton | Qt::RightButton);
+    TQt::ButtonState bothButtons = (TQt::ButtonState) (TQt::LeftButton | TQt::RightButton);
     if ((buttonState & bothButtons) == bothButtons)
         return -1;
 
-    if (buttonState & Qt::LeftButton)
+    if (buttonState & TQt::LeftButton)
         return 0;
-    else if (buttonState & Qt::RightButton)
+    else if (buttonState & TQt::RightButton)
         return 1;
     else
         return -1;

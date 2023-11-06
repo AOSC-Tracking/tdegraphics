@@ -365,7 +365,7 @@ void KDVIMultiPage::print()
   default:
     break;
   }
-  // Qt::Orientation
+  // Orientation
   if ( printer->orientation() == KPrinter::Landscape )
     dvips_options += "-t landscape ";
 

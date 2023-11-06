@@ -38,7 +38,7 @@ public:
 	       TYPE_V = 2 };
 
 	/** Constructs the widget */
-	KZColorSelector(Qt::Orientation o, TQWidget *parent=0, const char *name=0);
+	KZColorSelector(TQt::Orientation o, TQWidget *parent=0, const char *name=0);
 	~KZColorSelector();
 	/** Sets the selector type */
 	void setType(const int type);

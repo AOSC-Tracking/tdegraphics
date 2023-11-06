@@ -37,7 +37,7 @@ bool FullScreenFilter::eventFilter( TQObject* /*object*/, TQEvent* ev) {
 		}
 	}
 	if ( TQMouseEvent* mouseevent = dynamic_cast<TQMouseEvent*>( ev ) ) {
-		if ( mouseevent->stateAfter() & mouseevent->button() & Qt::LeftButton ) {
+		if ( mouseevent->stateAfter() & mouseevent->button() & TQt::LeftButton ) {
 			// if ( The whole image is visible at once )
 			if ( parent.m_gvpart->pageView()->contentsHeight() <= parent.m_gvpart->widget()->height() &&
 			     parent.m_gvpart->pageView()->contentsWidth() <= parent.m_gvpart->widget()->width() ) {

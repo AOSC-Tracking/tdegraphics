@@ -595,7 +595,7 @@ void KView::fitWindowToImage()
 	TQSize winsize = sizeForCentralWidgetSize( imagesize );
 	TQRect workarea = m_pWinModule->workArea();
 
-	TQScrollBar * sb = new TQScrollBar( Qt::Horizontal, this );
+	TQScrollBar * sb = new TQScrollBar( TQt::Horizontal, this );
 	int scrollbarwidth = sb->height();
 	delete sb;
 

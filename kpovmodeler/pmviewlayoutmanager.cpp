@@ -520,7 +520,7 @@ void PMViewLayout::recursiveExtractColumns(
          if( w->inherits( "PMDockSplitter" ) )
          {
             PMDockSplitter* sp = ( PMDockSplitter* ) w;
-            if( sp->splitterOrientation( ) == Qt::Vertical )
+            if( sp->splitterOrientation( ) == TQt::Vertical )
             {
                colStart = false;
                // vertical splitter, split up the current column

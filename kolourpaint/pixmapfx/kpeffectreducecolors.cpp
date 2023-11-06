@@ -154,10 +154,10 @@ TQImage convertImageDepth (const TQImage &image, int depth, bool dither)
 
 
     TQImage retImage = image.convertDepth (depth,
-        Qt::AutoColor |
-        (dither ? Qt::DiffuseDither : Qt::ThresholdDither) |
-        Qt::ThresholdAlphaDither |
-        (dither ? Qt::PreferDither : Qt::AvoidDither));
+        TQt::AutoColor |
+        (dither ? TQt::DiffuseDither : TQt::ThresholdDither) |
+        TQt::ThresholdAlphaDither |
+        (dither ? TQt::PreferDither : TQt::AvoidDither));
 
 #if DEBUG_KP_EFFECT_REDUCE_COLORS && 0
     kdDebug () << "After colour reduction:" << endl;

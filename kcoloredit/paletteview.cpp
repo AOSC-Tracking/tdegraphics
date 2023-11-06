@@ -32,7 +32,7 @@ PaletteView::PaletteView(const int defaultCellWidth, const int defaultCellHeight
 	topLayout->setColStretch(0, 10);
 	topLayout->setColStretch(1, 0);
 	scrollBar = new TQScrollBar(this);
-	hScrollBar = new TQScrollBar(0, 1, 1, 1, 0, Qt::Horizontal, this);
+	hScrollBar = new TQScrollBar(0, 1, 1, 1, 0, TQt::Horizontal, this);
 	scrolledArea = new PaletteViewScrolledArea(defaultCellWidth,
 		defaultCellHeight, cellSpacing, scrollBar, hScrollBar, view, this);
 	connect(scrollBar, TQT_SIGNAL( valueChanged(int) ),

@@ -83,7 +83,7 @@ KImageCanvas::KImageCanvas( TQWidget * parent, const char * name, const TQString
 
 	TQWidget::setMouseTracking( true );
 	viewport()->setMouseTracking( true );
-	m_cursor.setShape( Qt::CrossCursor );
+	m_cursor.setShape( TQt::CrossCursor );
 	viewport()->setCursor( m_cursor );
 	m_pTimer->start( MOUSECURSORHIDETIME, true );
 
@@ -589,7 +589,7 @@ void KImageCanvas::mouseMoveEvent( TQMouseEvent * )
 {
 	if( m_cursor.shape() == TQt::BlankCursor )
 	{
-		m_cursor.setShape( Qt::CrossCursor );
+		m_cursor.setShape( TQt::CrossCursor );
 		viewport()->setCursor( m_cursor );
 		if( m_client )
 			m_client->setCursor( m_cursor );
@@ -607,7 +607,7 @@ void KImageCanvas::resizeEvent( TQResizeEvent * ev )
 
 void KImageCanvas::contentsMousePressEvent( TQMouseEvent * ev )
 {
-	if ( ev->button() == Qt::RightButton )
+	if ( ev->button() == TQt::RightButton )
 		emit contextPress( ev->globalPos() );
 	TQScrollView::contentsMousePressEvent( ev );
 }
@@ -772,7 +772,7 @@ void KImageCanvas::timerEvent( TQTimerEvent * ev )
 void KImageCanvas::hideCursor()
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
-	m_cursor.setShape( Qt::BlankCursor );
+	m_cursor.setShape( TQt::BlankCursor );
 	viewport()->setCursor( m_cursor );
 	if( m_client )
 		m_client->setCursor( m_cursor );

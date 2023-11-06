@@ -41,7 +41,7 @@ class PaletteToolBar : public TDEToolBar
     void newColor( uint c );
 
   public slots:
-    virtual void setOrientation( Qt::Orientation o );
+    virtual void setOrientation( TQt::Orientation o );
     void previewChanged( const TQPixmap &p );
     void addColors( uint n, uint *c );
     void addColor( uint color );

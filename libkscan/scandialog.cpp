@@ -74,7 +74,7 @@ ScanDialog::ScanDialog( TQWidget *parent, const char *name, bool modal )
 {
     TQVBox *page = addVBoxPage( i18n("&Scanning") );
 
-    splitter = new TQSplitter(Qt::Horizontal, page, "splitter" );
+    splitter = new TQSplitter(TQt::Horizontal, page, "splitter" );
     TQ_CHECK_PTR( splitter );
 
     m_scanParams = 0;
@@ -110,7 +110,7 @@ void ScanDialog::createOptionsTab( void )
    TQVBox *page = addVBoxPage( i18n("&Options"));
    setMainWidget(page);
 
-   TQGroupBox *gb = new TQGroupBox( 1, Qt::Horizontal, i18n("Startup Options"), page, "GB_STARTUP" );
+   TQGroupBox *gb = new TQGroupBox( 1, TQt::Horizontal, i18n("Startup Options"), page, "GB_STARTUP" );
    TQLabel *label = new TQLabel( i18n( "Note: changing these options will affect the scan plugin on next start." ),
 			       gb );
    label->setSizePolicy( TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed ) );

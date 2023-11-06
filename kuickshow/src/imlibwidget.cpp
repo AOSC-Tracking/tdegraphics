@@ -320,7 +320,7 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
 
     switch ( metaitem.value().toInt() )
     {
-        //  Qt::Orientation:
+        //  Orientation:
         //  1:      normal
         //  2:      flipped horizontally
         //  3:      ROT 180

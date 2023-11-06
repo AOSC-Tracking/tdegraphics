@@ -846,7 +846,7 @@ void PageView::contentsMouseMoveEvent( TQMouseEvent * e )
         return;
 
     // if holding mouse mid button, perform zoom
-    if ( (e->state() & Qt::MidButton) && d->mouseMidStartY >= 0 )
+    if ( (e->state() & TQt::MidButton) && d->mouseMidStartY >= 0 )
     {
         int deltaY = d->mouseMidStartY - e->globalPos().y();
         d->mouseMidStartY = e->globalPos().y();
@@ -857,8 +857,8 @@ void PageView::contentsMouseMoveEvent( TQMouseEvent * e )
         return;
     }
 
-    bool leftButton = e->state() & Qt::LeftButton,
-         rightButton = e->state() & Qt::RightButton;
+    bool leftButton = e->state() & TQt::LeftButton,
+         rightButton = e->state() & TQt::RightButton;
     switch ( d->mouseMode )
     {
         case MouseNormal:
@@ -926,7 +926,7 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
     }
 
     // if pressing mid mouse button while not doing other things, begin 'comtinous zoom' mode
-    if ( e->button() & Qt::MidButton )
+    if ( e->button() & TQt::MidButton )
     {
         d->mouseMidStartY = e->globalPos().y();
         setCursor( KCursor::sizeVerCursor() );
@@ -937,8 +937,8 @@ void PageView::contentsMousePressEvent( TQMouseEvent * e )
     d->mousePressPos = e->globalPos();
 
     // handle mode dependant mouse press actions
-    bool leftButton = e->button() & Qt::LeftButton,
-         rightButton = e->button() & Qt::RightButton;
+    bool leftButton = e->button() & TQt::LeftButton,
+         rightButton = e->button() & TQt::RightButton;
     switch ( d->mouseMode )
     {
         case MouseNormal:   // drag start / click / link following
@@ -979,7 +979,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
     if ( d->items.isEmpty() )
     {
         // ..except for right Clicks (emitted even it viewport is empty)
-        if ( e->button() == Qt::RightButton )
+        if ( e->button() == TQt::RightButton )
             emit rightClick( 0, e->globalPos() );
         return;
     }
@@ -989,7 +989,7 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
         return;
 
     // handle mode indepent mid buttom zoom
-    bool midButton = e->button() & Qt::MidButton;
+    bool midButton = e->button() & TQt::MidButton;
     if ( midButton && d->mouseMidStartY > 0 )
     {
         d->mouseMidStartY = -1;
@@ -998,8 +998,8 @@ void PageView::contentsMouseReleaseEvent( TQMouseEvent * e )
         return;
     }
 
-    bool leftButton = e->button() & Qt::LeftButton,
-         rightButton = e->button() & Qt::RightButton;
+    bool leftButton = e->button() & TQt::LeftButton,
+         rightButton = e->button() & TQt::RightButton;
     switch ( d->mouseMode )
     {
         case MouseNormal:{

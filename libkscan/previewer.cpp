@@ -200,7 +200,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
 
 
     /** Autoselection Box **/
-    d->m_autoSelGroup = new TQGroupBox( 1,Qt::Horizontal, i18n("Auto-Selection"), frame);
+    d->m_autoSelGroup = new TQGroupBox( 1,TQt::Horizontal, i18n("Auto-Selection"), frame);
 
     TQHBox *hbox       = new TQHBox(d->m_autoSelGroup);
     d->m_cbAutoSel    = new TQCheckBox( i18n("Active on"), hbox );
@@ -224,7 +224,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     (void) new TQLabel( i18n("scanner background"), d->m_autoSelGroup );
 
     TQLabel *l1= new TQLabel( i18n("Thresh&old:"), d->m_autoSelGroup );
-    d->m_sliderThresh = new TQSlider( 0, 254, 10, d->m_autoSelThresh,  Qt::Horizontal,
+    d->m_sliderThresh = new TQSlider( 0, 254, 10, d->m_autoSelThresh,  TQt::Horizontal,
                                      d->m_autoSelGroup );
     connect( d->m_sliderThresh, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slSetAutoSelThresh(int)));
     TQToolTip::add( d->m_sliderThresh,
@@ -236,7 +236,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
 
 #if 0  /** Dustsize-Slider: No deep impact on result **/
     (void) new TQLabel( i18n("Dust size:"), grBox );
-    d->m_sliderDust = new TQSlider( 0, 50, 5, d->m_dustsize,  Qt::Horizontal, grBox );
+    d->m_sliderDust = new TQSlider( 0, 50, 5, d->m_dustsize,  TQt::Horizontal, grBox );
     connect( d->m_sliderDust, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slSetAutoSelDustsize(int)));
 #endif
 
@@ -246,7 +246,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     left->addWidget(d->m_autoSelGroup);
 
     /* Labels for the dimension */
-    TQGroupBox *gbox = new TQGroupBox( 1,Qt::Horizontal, i18n("Selection"), frame, "GROUPBOX" );
+    TQGroupBox *gbox = new TQGroupBox( 1,TQt::Horizontal, i18n("Selection"), frame, "GROUPBOX" );
 
     TQLabel *l2 = new TQLabel( i18n("width - mm" ), gbox );
     TQLabel *l3 = new TQLabel( i18n("height - mm" ), gbox );

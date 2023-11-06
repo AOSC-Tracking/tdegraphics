@@ -144,7 +144,7 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 +
 +    if (!redrawWidgetRegion.isEmpty ())
      {
-         // TODO: should be "!widget->testWFlags (Qt::WRepaintNoErase)"
+         // TODO: should be "!widget->testWFlags (TQt::WRepaintNoErase)"
          //       but for some reason, doesn't work for viewport().
          const bool erase = !dynamic_cast <kpView *> (widget);
 -        widget->repaint (redrawWidgetRect, erase);
@@ -202,25 +202,25 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 +
  
      QPainter p (viewport (), true/*unclipped*/);
-     p.setRasterOp (Qt::NotROP);
+     p.setRasterOp (TQt::NotROP);
  
 -    const QRect rightRect = rightResizeLineRect ();
 -    if (rightRect.isValid ())
--        p.fillRect (mapViewToViewport (rightRect), Qt::white);
+-        p.fillRect (mapViewToViewport (rightRect), TQt::white);
 -
 -    const QRect bottomRect = bottomResizeLineRect ();
 -    if (bottomRect.isValid ())
--        p.fillRect (mapViewToViewport (bottomRect), Qt::white);
+-        p.fillRect (mapViewToViewport (bottomRect), TQt::white);
 -
 -    const QRect bottomRightRect = bottomRightResizeLineRect ();
 -    if (bottomRightRect.isValid ())
--        p.fillRect (mapViewToViewport (bottomRightRect), Qt::white);
+-        p.fillRect (mapViewToViewport (bottomRightRect), TQt::white);
 +    const QMemArray <QRect> rects = mapViewToViewport (viewRegion).rects ();
 +    for (QMemArray <QRect>::ConstIterator it = rects.begin ();
 +         it != rects.end ();
 +         it++)
 +    {
-+        p.fillRect (*it, Qt::white);
++        p.fillRect (*it, TQt::white);
 +    }
  
      p.end ();

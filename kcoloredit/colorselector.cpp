@@ -73,7 +73,7 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	TQVBoxLayout* colorChangeSliderLayout = new TQVBoxLayout(colorChangeSliderWidget, 1);
 	colorChangeSliderLayout->setMargin(0);
 	TQSlider* colorChangeSlider = new TQSlider(0, MAX_COLOR_CHANGE_VALUE,
-		MAX_COLOR_CHANGE_VALUE/4, colorChangeValue, Qt::Horizontal, colorChangeSliderWidget);
+		MAX_COLOR_CHANGE_VALUE/4, colorChangeValue, TQt::Horizontal, colorChangeSliderWidget);
 	colorChangeSlider->setTickInterval(colorChangeSlider->pageStep());
 	colorChangeSlider->setTickmarks(TQSlider::Above);
 	connect(colorChangeSlider, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( slotColorChangeValueChanged(int) ));

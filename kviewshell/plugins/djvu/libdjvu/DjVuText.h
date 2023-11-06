@@ -171,13 +171,13 @@ public:
       control character:
       \begin{tabular}{lll}
         {\bf Name} & {\bf Octal} & {\bf Ascii name} \\\hline\\
-        {\tt DjVuText::end_of_column}    & 013 & VT,Qt::Vertical Tab \\
+        {\tt DjVuText::end_of_column}    & 013 & VT, Vertical Tab \\
         {\tt DjVuText::end_of_region}    & 035 & GS, Group Separator \\
         {\tt DjVuText::end_of_paragraph} & 037 & US, Unit Separator \\
         {\tt DjVuText::end_of_line}      & 012 & LF: Line Feed
       \end{tabular} */
   GUTF8String textUTF8;
-  static const char end_of_column    ;      // VT:Qt::Vertical Tab
+  static const char end_of_column    ;      // VT: Vertical Tab
   static const char end_of_region    ;      // GS: Group Separator
   static const char end_of_paragraph ;      // US: Unit Separator
   static const char end_of_line      ;      // LF: Line Feed

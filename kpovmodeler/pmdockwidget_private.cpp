@@ -22,7 +22,7 @@
 #include <tqpainter.h>
 #include <tqcursor.h>
 
-PMDockSplitter::PMDockSplitter(TQWidget *parent, const char *name, Qt::Orientation orient, int pos, bool highResolution)
+PMDockSplitter::PMDockSplitter(TQWidget *parent, const char *name, TQt::Orientation orient, int pos, bool highResolution)
 : TQWidget(parent, name)
 {
   divider = 0L;
@@ -49,7 +49,7 @@ void PMDockSplitter::activate(TQWidget *c0, TQWidget *c1)
   divider->setLineWidth(1);
   divider->raise();
 
-  if (orientation ==Qt::Horizontal)
+  if (orientation ==TQt::Horizontal)
     divider->setCursor(TQCursor(sizeVerCursor));
   else
     divider->setCursor(TQCursor(sizeHorCursor));
@@ -68,7 +68,7 @@ void PMDockSplitter::setupMinMaxSize()
 {
   // Set the minimum and maximum sizes
   int minx, maxx, miny, maxy;
-  if (orientation ==Qt::Horizontal) {
+  if (orientation ==TQt::Horizontal) {
     miny = child0->minimumSize().height() + child1->minimumSize().height()+4;
     maxy = child0->maximumSize().height() + child1->maximumSize().height()+4;
     minx = (child0->minimumSize().width() > child1->minimumSize().width()) ? child0->minimumSize().width() : child1->minimumSize().width();
@@ -118,7 +118,7 @@ void PMDockSplitter::resizeEvent(TQResizeEvent *ev)
     int factor = (mHighResolution)? 10000:100;
     // real resize event, recalculate xpos
     if (ev && mKeepSize && isVisible()) {
-      if (orientation ==Qt::Horizontal) {
+      if (orientation ==TQt::Horizontal) {
         if (ev->oldSize().height() != ev->size().height())
           xpos = factor * checkValue( child0->height()+1 ) / height();
       } else {
@@ -126,8 +126,8 @@ void PMDockSplitter::resizeEvent(TQResizeEvent *ev)
           xpos = factor * checkValue( child0->width()+1 ) / width();
       }
     }
-    int position = checkValue( (orientation ==Qt::Vertical ? width() : height()) * xpos/factor );
-    if (orientation ==Qt::Horizontal){
+    int position = checkValue( (orientation ==TQt::Vertical ? width() : height()) * xpos/factor );
+    if (orientation ==TQt::Horizontal){
       child0->setGeometry(0, 0, width(), position);
       child1->setGeometry(0, position+4, width(), height()-position-4);
       divider->setGeometry(0, position, width(), 4);
@@ -142,7 +142,7 @@ void PMDockSplitter::resizeEvent(TQResizeEvent *ev)
 int PMDockSplitter::checkValue( int position ) const
 {
   if (initialised){
-    if (orientation ==Qt::Vertical){
+    if (orientation ==TQt::Vertical){
       if (position < (child0->minimumSize().width()))
         position = child0->minimumSize().width();
       if ((width()-4-position) < (child1->minimumSize().width()))
@@ -157,9 +157,9 @@ int PMDockSplitter::checkValue( int position ) const
 
   if (position < 0) position = 0;
 
-  if ((orientation ==Qt::Vertical) && (position > width()))
+  if ((orientation ==TQt::Vertical) && (position > width()))
     position = width();
-  if ((orientation ==Qt::Horizontal) && (position > height()))
+  if ((orientation ==TQt::Horizontal) && (position > height()))
     position = height();
 
   return position;
@@ -176,7 +176,7 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
       mev= (TQMouseEvent*)e;
       child0->setUpdatesEnabled(mOpaqueResize);
       child1->setUpdatesEnabled(mOpaqueResize);
-      if (orientation ==Qt::Horizontal) {
+      if (orientation ==TQt::Horizontal) {
         if (!mOpaqueResize) {
           int position = checkValue( mapFromGlobal(mev->globalPos()).y() );
           divider->move( 0, position );
@@ -201,7 +201,7 @@ bool PMDockSplitter::eventFilter(TQObject *o, TQEvent *e)
       child0->setUpdatesEnabled(true);
       child1->setUpdatesEnabled(true);
       mev= (TQMouseEvent*)e;
-      if (orientation ==Qt::Horizontal){
+      if (orientation ==TQt::Horizontal){
         xpos = factor* checkValue( mapFromGlobal(mev->globalPos()).y() ) / height();
         resizeEvent(0);
         divider->repaint(true);

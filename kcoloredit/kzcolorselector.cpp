@@ -23,7 +23,7 @@
 #include "main.h"
 #include "kzcolorselector.h"
 
-KZColorSelector::KZColorSelector(Qt::Orientation o, TQWidget *parent, const char *name) :
+KZColorSelector::KZColorSelector(TQt::Orientation o, TQWidget *parent, const char *name) :
 	TDESelector(o, parent, name) {
 	baseColorH = -1;
 	baseColorS = 0;
