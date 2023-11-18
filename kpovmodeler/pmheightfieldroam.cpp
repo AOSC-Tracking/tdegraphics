@@ -180,7 +180,7 @@ bool PMHeightFieldROAM::imageToData(const TQString &fileName)
       colourIndex = false;
    else
    {
-      scaledMap = scaledMap.convertDepthWithPalette( 8, mapFile.tqcolorTable( ), 256 );
+      scaledMap = scaledMap.convertDepthWithPalette( 8, mapFile.colorTable( ), 256 );
       colourIndex = true;
    }
 
