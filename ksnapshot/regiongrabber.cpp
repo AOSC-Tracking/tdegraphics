@@ -168,7 +168,7 @@ void RegionGrabber::drawRubber()
   p.setPen( TQPen( color0, 1 ) );
   p.setBrush( NoBrush );
 
-  style().tqdrawPrimitive( TQStyle::PE_FocusRect, &p, grabRect, colorGroup(),
+  style().drawPrimitive( TQStyle::PE_FocusRect, &p, grabRect, colorGroup(),
       TQStyle::Style_Default, TQStyleOption( colorGroup().base() ) );
 
   p.end();

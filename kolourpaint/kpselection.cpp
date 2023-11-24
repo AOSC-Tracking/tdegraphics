@@ -784,7 +784,7 @@ TQPixmap kpSelection::transparentForegroundTextPixmap () const
     // we can identify the transparent pixels for manually creating
     // the mask.
     pixmapPainter.setPen (
-        TQColor (mostContrastingRGB (m_textStyle.effectiveBackgroundColor ().toTQRgb () & TQRGB_MASK)));
+        TQColor (mostContrastingRGB (m_textStyle.effectiveBackgroundColor ().toTQRgb () & TQT_RGB_MASK)));
     pixmapPainter.setFont (font);
 
 

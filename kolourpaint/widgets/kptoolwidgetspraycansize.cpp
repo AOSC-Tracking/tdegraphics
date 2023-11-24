@@ -79,7 +79,7 @@ kpToolWidgetSpraycanSize::kpToolWidgetSpraycanSize (TQWidget *parent, const char
         {
             for (int x = 0; x < image.width (); x++)
             {
-                if ((image.pixel (x, y) & TQRGB_MASK) == 0/*black*/)
+                if ((image.pixel (x, y) & TQT_RGB_MASK) == 0/*black*/)
                     painter.drawPoint (x, y);  // mark as opaque
             }
         }

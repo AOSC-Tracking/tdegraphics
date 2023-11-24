@@ -256,8 +256,8 @@ void kpColorSimilarityCube::drawFace (TQPainter *p,
                << " colorCubeDiagDist=" << kpColorSimilarityCube::colorCubeDiagonalDistance
                << endl
                << "\tbaseBrightness=" << baseBrightness
-               << " color[0]=" << ((colors [0].rgb () & TQRGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
-               << " color[1]=" << ((colors [1].rgb () & TQRGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
+               << " color[0]=" << ((colors [0].rgb () & TQT_RGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
+               << " color[1]=" << ((colors [1].rgb () & TQT_RGB_MASK) >> ((2 - redOrGreenOrBlue) * 8))
                << endl;
 #endif
 

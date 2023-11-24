@@ -188,7 +188,7 @@ TQPair <int, int> kpToolWidgetBase::defaultSelectedRowAndCol () const
                << endl;
 #endif
 
-    return tqMakePair (row, col);
+    return qMakePair (row, col);
 }
 
 // public
