@@ -12,6 +12,7 @@
 #define __KS_IFACE_H
 
 #include <dcopobject.h>
+#include <tqpixmap.h>
 
 class KSnapshotIface : virtual public DCOPObject
 {
@@ -60,6 +61,10 @@ class KSnapshotIface : virtual public DCOPObject
 
         /** Exit KSnapshot **/
 	virtual void exit() = 0;
+
+	/** Set image, for applications which want to make use of KSnapshot's UI
+	    and interface with their own images */
+	virtual void setPixmap(const TQPixmap &newImage) = 0;
 };
 
 #endif

@@ -589,6 +589,11 @@ void KSnapshot::setURL( const TQString &url )
     updateCaption();
 }
 
+void KSnapshot::setPixmap(const TQPixmap &newImage) {
+    snapshot = newImage;
+    updatePreview();
+}
+
 void KSnapshot::setGrabMode( int m )
 {
     mainWidget->setMode( m );

@@ -118,6 +118,7 @@ protected slots:
   void setTime(int newTime);
   void setURL(const TQString &newURL);
   void setGrabMode( int m );
+  void setPixmap(const TQPixmap &newImage);
   void exit();
 
 protected:
