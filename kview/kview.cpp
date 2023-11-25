@@ -525,7 +525,7 @@ void KView::setupActions( TQObject * partobject )
 	// Settings
 	m_paShowMenubar = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotToggleMenubar() ), actionCollection() );
 	createStandardStatusBarAction();
-	m_paShowStatusBar = ::tqqt_cast<TDEToggleAction*>( action( "options_show_statusbar" ) );
+	m_paShowStatusBar = ::tqt_cast<TDEToggleAction*>( action( "options_show_statusbar" ) );
 	if( m_paShowStatusBar )
 		connect( m_paShowStatusBar, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( statusbarToggled( bool ) ) );
 	m_paShowFullScreen = KStdAction::fullScreen( 0, 0, actionCollection(), this );

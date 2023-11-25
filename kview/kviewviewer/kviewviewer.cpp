@@ -773,7 +773,7 @@ void KViewViewer::slotResultSaveAs( TDEIO::Job *job )
 	else
 	{
 		emit completed();
-		TDEIO::CopyJob * cjob = ::tqqt_cast<TDEIO::CopyJob*>( job );
+		TDEIO::CopyJob * cjob = ::tqt_cast<TDEIO::CopyJob*>( job );
 		if( cjob )
 		{
 			m_url = cjob->destURL();
