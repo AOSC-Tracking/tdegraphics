@@ -327,7 +327,7 @@ TQString KImageCanvas::blendEffectDescription( unsigned int idx ) const
 bool KImageCanvas::eventFilter( TQObject * obj, TQEvent * ev )
 {
 	if( ( obj == m_client || obj == m_oldClient ) && ev->type() == TQEvent::MouseMove )
-		mouseMoveEvent( TQT_TQMOUSEEVENT( ev ) );
+		mouseMoveEvent( static_cast<TQMouseEvent*>( ev ) );
 	return TQScrollView::eventFilter( obj, ev );
 }
 

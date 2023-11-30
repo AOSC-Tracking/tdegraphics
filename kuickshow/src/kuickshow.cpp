@@ -880,7 +880,7 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
     int eventType = e->type();
     TQKeyEvent *k = 0L;
     if ( eventType == TQEvent::KeyPress )
-        k = TQT_TQKEYEVENT( e );
+        k = static_cast<TQKeyEvent*>( e );
 
     if ( k ) {
         if ( TDEStdAccel::quit().contains( KKey( k ) ) ) {
@@ -1036,7 +1036,7 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
         // and shows browser when last window closed via doubleclick
         else if ( eventType == TQEvent::MouseButtonDblClick )
         {
-            TQMouseEvent *ev = TQT_TQMOUSEEVENT( e );
+            TQMouseEvent *ev = static_cast<TQMouseEvent*>( e );
             if ( ev->button() == TQt::LeftButton )
             {
                 if ( s_viewers.count() == 1 )
@@ -1300,7 +1300,7 @@ void KuickShow::slotReplayEvent()
     DelayedRepeatEvent *e = m_delayedRepeatItem;
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
 
-    eventFilter( TQT_TQOBJECT(e->viewer), TQT_TQEVENT(e->event) );
+    eventFilter( TQT_TQOBJECT(e->viewer), static_cast<TQEvent*>(e->event) );
     delete e;
 
     // ### WORKAROUND for TQIconView bug in TQt <= 3.0.3 at least

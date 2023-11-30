@@ -179,7 +179,7 @@ void FileWidget::findCompletion( const TQString& text )
 bool FileWidget::eventFilter( TQObject *o, TQEvent *e )
 {
     if ( e->type() == TQEvent::KeyPress ) {
-	TQKeyEvent *k = TQT_TQKEYEVENT( e );
+	TQKeyEvent *k = static_cast<TQKeyEvent*>( e );
 	
 	if ( (k->state() & (ControlButton | AltButton)) == 0 ) {
 	    int key = k->key();

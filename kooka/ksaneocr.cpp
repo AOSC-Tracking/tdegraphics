@@ -1127,7 +1127,7 @@ bool KSANEOCR::eventFilter( TQObject *object, TQEvent *event )
     {
         if( event->type() == TQEvent::MouseButtonDblClick )
         {
-            TQMouseEvent *mev = TQT_TQMOUSEEVENT(event);
+            TQMouseEvent *mev = static_cast<TQMouseEvent*>(event);
 
             int x = mev->x();
             int y = mev->y();
