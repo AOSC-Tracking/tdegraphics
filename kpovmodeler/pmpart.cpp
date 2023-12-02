@@ -951,7 +951,7 @@ bool PMPart::exportPovray( const KURL& url )
    if( ok )
    {
       PMPovray35Format format;
-      PMSerializer* dev = format.newSerializer( TQT_TQIODEVICE(file) );
+      PMSerializer* dev = format.newSerializer( file );
       dev->serialize( m_pScene );
       delete dev;
 
@@ -1369,7 +1369,7 @@ void PMPart::slotFileImport( )
       TQFile file( fileName );
       if( file.open( IO_ReadOnly ) )
       {
-         PMParser* newParser = selectedFormat->newParser( this, TQT_TQIODEVICE(&file) );
+         PMParser* newParser = selectedFormat->newParser( this, &file );
          if( newParser )
          {
             if( m_pActiveObject )
@@ -1404,7 +1404,7 @@ void PMPart::slotFileExport( )
       TQBuffer buffer( baData );
       buffer.open( IO_WriteOnly );
 
-      PMSerializer* newSer = selectedFormat->newSerializer( TQT_TQIODEVICE(&buffer) );
+      PMSerializer* newSer = selectedFormat->newSerializer( &buffer );
       if( newSer )
       {
          newSer->serialize( m_pScene );
@@ -2713,7 +2713,7 @@ void PMPart::slotRender( )
       TQBuffer buffer( a );
       buffer.open( IO_WriteOnly );
       PMPovray35Format format;
-      PMSerializer* dev = format.newSerializer( TQT_TQIODEVICE(&buffer) );
+      PMSerializer* dev = format.newSerializer( &buffer );
       dev->serialize( m_pScene );
       delete dev;
 

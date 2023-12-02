@@ -110,7 +110,7 @@ KSVGPlugin::KSVGPlugin(TQWidget *wparent, const char *, TQObject *parent, const 
 	if(!ksvgd->canvas)
 		return;
 
-	ksvgd->canvas->setup(TQT_TQPAINTDEVICE(ksvgd->backgroundPixmap), TQT_TQPAINTDEVICE(ksvgd->window));
+	ksvgd->canvas->setup(ksvgd->backgroundPixmap, ksvgd->window);
 
 	ksvgd->zoomInAction = KStdAction::zoomIn(this, TQT_SLOT(slotZoomIn()), actionCollection());
 	ksvgd->zoomOutAction = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()), actionCollection());
@@ -299,7 +299,7 @@ void KSVGPlugin::slotRenderingBackend()
 	if(!ksvgd->canvas)
 		return;
 
-	ksvgd->canvas->setup(TQT_TQPAINTDEVICE(ksvgd->backgroundPixmap), TQT_TQPAINTDEVICE(ksvgd->window));
+	ksvgd->canvas->setup(ksvgd->backgroundPixmap, ksvgd->window);
 	openURL(m_url);
 }
 

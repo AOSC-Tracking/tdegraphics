@@ -73,7 +73,7 @@ PMObjectDrag::PMObjectDrag( PMPart* part, PMObject* object, TQWidget* dragSource
          TQBuffer buffer( data );
          buffer.open( IO_WriteOnly );
 
-         PMSerializer* ser = it.current( )->newSerializer( TQT_TQIODEVICE(&buffer) );
+         PMSerializer* ser = it.current( )->newSerializer( &buffer );
 
          if( ser )
          {
@@ -143,7 +143,7 @@ PMObjectDrag::PMObjectDrag( PMPart* part, const PMObjectList& objList, TQWidget*
          TQBuffer buffer( data );
          buffer.open( IO_WriteOnly );
 
-         PMSerializer* ser = fit.current( )->newSerializer( TQT_TQIODEVICE(&buffer) );
+         PMSerializer* ser = fit.current( )->newSerializer( &buffer );
 
          if( ser )
          {

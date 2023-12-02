@@ -390,7 +390,7 @@ void PMDialogEditBase::slotTexturePreview( )
       buffer.open( IO_WriteOnly );
       TQTextStream str( &buffer );
       PMPovray31Format format;
-      PMSerializer* dev = format.newSerializer( TQT_TQIODEVICE(&buffer) );
+      PMSerializer* dev = format.newSerializer( &buffer );
       PMRenderMode mode;
       PMObjectList neededDeclares, objectsToCheck;
       TQPtrDict<PMObject> objectsToSerialize( 101 );

@@ -29,7 +29,7 @@ SVGTestWidget::SVGTestWidget(const KURL &url)
 	if(!m_canvas)
 		return;
 
-	m_canvas->setup(TQT_TQPAINTDEVICE(this), TQT_TQPAINTDEVICE(this));
+	m_canvas->setup(this, this);
 
 	if(!DocumentFactory::self()->attachCanvas(m_canvas, m_doc))
 		return;

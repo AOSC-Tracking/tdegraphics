@@ -1435,7 +1435,7 @@ void kpSelection::flip (bool horiz, bool vert)
     #if DEBUG_KP_SELECTION && 1
         kdDebug () << "\thave transparency mask - flipping that" << endl;
     #endif
-        kpPixmapFX::flip (TQT_TQPIXMAP(&m_transparencyMask), horiz, vert);
+        kpPixmapFX::flip (&m_transparencyMask, horiz, vert);
     }
 
 

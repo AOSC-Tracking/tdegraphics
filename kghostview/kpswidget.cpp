@@ -279,8 +279,8 @@ void KPSWidget::setupWidget()
 
     Q_ASSERT( orientation() != CDSC_ORIENT_UNKNOWN );
 
-    const float dpiX = _magnification * TQT_TQPAINTDEVICE(this)->x11AppDpiX();
-    const float dpiY = _magnification * TQT_TQPAINTDEVICE(this)->x11AppDpiY();
+    const float dpiX = _magnification * this->x11AppDpiX();
+    const float dpiY = _magnification * this->x11AppDpiY();
 
     int newWidth = 0, newHeight = 0;
     if( orientation() == CDSC_PORTRAIT || orientation() == CDSC_UPSIDEDOWN )

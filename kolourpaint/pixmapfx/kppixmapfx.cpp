@@ -694,9 +694,9 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
              0, 0,
              destRect.width (), destRect.height ());
 #else
-    bitBlt (TQT_TQPAINTDEVICE(destPixmapPtr),
+    bitBlt (destPixmapPtr,
             destRect.x (), destRect.y (),
-            TQT_TQPAINTDEVICE(const_cast<TQPixmap*>(&srcPixmap)),
+            const_cast<TQPixmap*>(&srcPixmap),
             0, 0,
             destRect.width (), destRect.height (),
             TQt::CopyROP,
@@ -705,9 +705,9 @@ void kpPixmapFX::setPixmapAt (TQPixmap *destPixmapPtr, const TQRect &destRect,
     if (srcPixmap.mask ())
     {
         TQBitmap mask = getNonNullMask (*destPixmapPtr);
-        bitBlt (TQT_TQPAINTDEVICE(&mask),
+        bitBlt (&mask,
                 destRect.x (), destRect.y (),
-                TQT_TQPAINTDEVICE(const_cast<TQBitmap*>(srcPixmap.mask ())),
+                const_cast<TQBitmap*>(srcPixmap.mask ()),
                 0, 0,
                 destRect.width (), destRect.height (),
                 TQt::CopyROP,

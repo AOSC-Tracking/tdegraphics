@@ -48,7 +48,7 @@ PMParser::PMParser( PMPart* part, const TQByteArray& array )
    m_pPart = part;
    TQBuffer* buffer = new TQBuffer( array );
    buffer->open( IO_ReadOnly );
-   m_pDevice = TQT_TQIODEVICE(buffer);
+   m_pDevice = buffer;
    m_bDeviceCreated = true;
    
    init( );

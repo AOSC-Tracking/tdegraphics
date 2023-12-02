@@ -898,7 +898,7 @@ void kpDocumentSaveOptionsWidget::updatePreview ()
     TQBuffer buffer (data);
     buffer.open (IO_WriteOnly);
     kpDocument::savePixmapToDevice (*m_documentPixmap,
-                                    TQT_TQIODEVICE(&buffer),
+                                    &buffer,
                                     documentSaveOptions (),
                                     m_documentMetaInfo,
                                     false/*no lossy prompt*/,

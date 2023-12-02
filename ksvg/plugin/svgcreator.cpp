@@ -59,7 +59,7 @@ bool SVGCreator::create(const TQString &path, int width, int height, TQImage &im
 	pix.fill(TQt::white);
 
 	KSVG::KSVGCanvas *c = KSVG::CanvasFactory::self()->loadCanvas(width, height);
-	c->setup(TQT_TQPAINTDEVICE(&pix), TQT_TQPAINTDEVICE(&pix));
+	c->setup(&pix, &pix);
 
 	doc->attach(c);
 	connect(doc, TQT_SIGNAL(finishedRendering()), TQT_SLOT(slotFinished()));

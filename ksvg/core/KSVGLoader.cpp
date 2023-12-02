@@ -128,14 +128,14 @@ void KSVGLoader::slotResult(TDEIO::Job *job)
 			if(check.contains(".svgz") || check.contains(".svg.gz"))
 			{
 				// decode the gzipped svg and emit it
-				TQIODevice *dev = KFilterDev::device(TQT_TQIODEVICE(new TQBuffer(m_data)), "application/x-gzip");
+				TQIODevice *dev = KFilterDev::device(new TQBuffer(m_data), "application/x-gzip");
 				dev->open(IO_ReadOnly);
 				emit gotResult(dev);
 			}
 			else
 			{
 				m_job = 0;
-				emit gotResult(TQT_TQIODEVICE(new TQBuffer(m_data)));
+				emit gotResult(new TQBuffer(m_data));
 				m_data.resize(0);
 			}
 		}
@@ -162,7 +162,7 @@ void KSVGLoader::slotResult(TDEIO::Job *job)
 
 				if(buffer.open(IO_ReadOnly))
 				{
-					const char *imageFormat = TQImageIO::imageFormat(TQT_TQIODEVICE(&buffer));
+					const char *imageFormat = TQImageIO::imageFormat(&buffer);
 
 					if(imageFormat != 0)
 					{

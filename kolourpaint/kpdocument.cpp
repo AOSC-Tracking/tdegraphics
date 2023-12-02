@@ -686,7 +686,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
             }
 
             // Write to local temporary file.
-            if (!savePixmapToDevice (pixmap, TQT_TQIODEVICE(atomicFileWriter.file ()),
+            if (!savePixmapToDevice (pixmap, atomicFileWriter.file (),
                                      saveOptions, metaInfo,
                                      false/*no lossy prompt*/,
                                      parent))
@@ -746,7 +746,7 @@ bool kpDocument::savePixmapToFile (const TQPixmap &pixmap,
                 return false;
             }
 
-            if (!savePixmapToDevice (pixmap, TQT_TQIODEVICE(&file),
+            if (!savePixmapToDevice (pixmap, &file,
                                      saveOptions, metaInfo,
                                      false/*no lossy prompt*/,
                                      parent))

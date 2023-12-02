@@ -95,7 +95,7 @@ void SVGScriptElementImpl::slotResult(TDEIO::Job *)
 	m_data[m_data.size() - 1] = '\0';
 
 	TQBuffer buf(m_data);
-	TQIODevice *dev = KFilterDev::device(TQT_TQIODEVICE(&buf), "application/x-gzip", false);
+	TQIODevice *dev = KFilterDev::device(&buf, "application/x-gzip", false);
 	TQByteArray contents;
 	if(dev->open(IO_ReadOnly))
 		contents = dev->readAll();

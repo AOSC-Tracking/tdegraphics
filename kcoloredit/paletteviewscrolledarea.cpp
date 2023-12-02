@@ -220,7 +220,7 @@ void PaletteViewScrolledArea::paintEvent(TQPaintEvent* /*event*/) {
 	setCellsSizes();
 	TQPixmap pixmap(size());
 	TQPainter painter;
-	painter.begin(TQT_TQPAINTDEVICE(&pixmap), this);
+	painter.begin(&pixmap, this);
 	TQFontMetrics fontMetrics = painter.fontMetrics();
 	int maxLineWidth;
 	if(viewColorNames) {
