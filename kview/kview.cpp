@@ -59,12 +59,12 @@ KView::KView()
     : KParts::MainWindow( 0, "KView" )
 	, m_pViewer( 0 )
 	, m_pCanvas( 0 )
-	, m_pWinModule( new KWinModule( TQT_TQOBJECT(this), KWinModule::INFO_DESKTOP ) )
+	, m_pWinModule( new KWinModule( this, KWinModule::INFO_DESKTOP ) )
 	, m_bImageSizeChangedBlocked( false )
 	, m_bFullscreen( false )
 {
 	KParts::ReadWritePart * part = KParts::ComponentFactory::createPartInstanceFromLibrary<KParts::ReadWritePart>(
-			"libkviewviewer", this, "KViewViewer Widget", TQT_TQOBJECT(this), "KImageViewer Part" );
+			"libkviewviewer", this, "KViewViewer Widget", this, "KImageViewer Part" );
 	if( part )
 	{
 		m_pViewer = static_cast<KImageViewer::Viewer *>( part );
@@ -112,7 +112,7 @@ KView::KView()
 		m_pViewer->widget()->installEventFilter( this );
 
 		// reload configuration when it's changed by the conf dlg
-		KSettings::Dispatcher::self()->registerInstance( instance(), TQT_TQOBJECT(this), TQT_SLOT( readSettings() ) );
+		KSettings::Dispatcher::self()->registerInstance( instance(), this, TQT_SLOT( readSettings() ) );
 
 		setPluginLoadingMode( LoadPluginsIfEnabled );
 		createGUI( part );
@@ -489,9 +489,9 @@ void KView::cursorPos( const TQPoint & pos )
 void KView::setupActions( TQObject * partobject )
 {
 	// File
-	KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotOpenFile() ), actionCollection() );
-	m_paRecent = KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( slotOpenRecent( const KURL & ) ), actionCollection() );
-	TDEAction * aClose = KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( slotClose() ), actionCollection() );
+	KStdAction::open( this, TQT_SLOT( slotOpenFile() ), actionCollection() );
+	m_paRecent = KStdAction::openRecent( this, TQT_SLOT( slotOpenRecent( const KURL & ) ), actionCollection() );
+	TDEAction * aClose = KStdAction::close( this, TQT_SLOT( slotClose() ), actionCollection() );
 	aClose->setEnabled( false );
 	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aClose, TQT_SLOT( setEnabled( bool ) ) );
 
@@ -506,15 +506,15 @@ void KView::setupActions( TQObject * partobject )
 								 extension, TQT_SLOT( del() ), actionCollection(), "del" );
 		connect( extension, TQT_SIGNAL( enableAction( const char *, bool ) ), TQT_SLOT( enableAction( const char *, bool ) ) );
 	}
-	KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close() ), actionCollection() );
+	KStdAction::quit( this, TQT_SLOT( close() ), actionCollection() );
 
 	// Edit
-	TDEAction * aCopy = KStdAction::copy( TQT_TQOBJECT(this), TQT_SLOT( slotCopy() ), actionCollection() );
+	TDEAction * aCopy = KStdAction::copy( this, TQT_SLOT( slotCopy() ), actionCollection() );
 	aCopy->setEnabled( false );
 	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aCopy, TQT_SLOT( setEnabled( bool ) ) );
-	m_paPaste = KStdAction::paste( TQT_TQOBJECT(this), TQT_SLOT( slotPaste() ), actionCollection() );
+	m_paPaste = KStdAction::paste( this, TQT_SLOT( slotPaste() ), actionCollection() );
 	clipboardDataChanged(); //enable or disable paste
-	TDEAction * aCrop = new TDEAction( i18n( "Cr&op" ), Key_C, TQT_TQOBJECT(this), TQT_SLOT( slotCrop() ), actionCollection(), "crop" );
+	TDEAction * aCrop = new TDEAction( i18n( "Cr&op" ), Key_C, this, TQT_SLOT( slotCrop() ), actionCollection(), "crop" );
 	aCrop->setEnabled( false );
 
 	TDEAction * aReload = new TDEAction( i18n( "&Reload" ), "reload", TDEStdAccel::shortcut( TDEStdAccel::Reload ), partobject,
@@ -523,17 +523,17 @@ void KView::setupActions( TQObject * partobject )
 	connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), aReload, TQT_SLOT( setEnabled( bool ) ) );
 
 	// Settings
-	m_paShowMenubar = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotToggleMenubar() ), actionCollection() );
+	m_paShowMenubar = KStdAction::showMenubar( this, TQT_SLOT( slotToggleMenubar() ), actionCollection() );
 	createStandardStatusBarAction();
 	m_paShowStatusBar = ::tqt_cast<TDEToggleAction*>( action( "options_show_statusbar" ) );
 	if( m_paShowStatusBar )
 		connect( m_paShowStatusBar, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( statusbarToggled( bool ) ) );
 	m_paShowFullScreen = KStdAction::fullScreen( 0, 0, actionCollection(), this );
 	connect( m_paShowFullScreen, TQT_SIGNAL( toggled( bool )), this, TQT_SLOT( slotUpdateFullScreen( bool )));
-	KStdAction::preferences( TQT_TQOBJECT(this), TQT_SLOT( slotPreferences() ), actionCollection() );
+	KStdAction::preferences( this, TQT_SLOT( slotPreferences() ), actionCollection() );
 	KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
-	KStdAction::configureToolbars( TQT_TQOBJECT(this), TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
+	KStdAction::configureToolbars( this, TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
 }
 
 void KView::handleResize()

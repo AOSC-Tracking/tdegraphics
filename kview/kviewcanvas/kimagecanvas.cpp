@@ -75,7 +75,7 @@ KImageCanvas::KImageCanvas( TQWidget * parent, const char * name, const TQString
 	connect( m_pTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( hideCursor() ) );
 
 	KSettings::Dispatcher::self()->registerInstance(
-			KImageCanvasFactory::instance(), TQT_TQOBJECT(this),
+			KImageCanvasFactory::instance(), this,
 			TQT_SLOT( loadSettings() ) );
 
 	viewport()->setFocusProxy( this );

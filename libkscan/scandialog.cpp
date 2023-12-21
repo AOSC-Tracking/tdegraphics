@@ -78,7 +78,7 @@ ScanDialog::ScanDialog( TQWidget *parent, const char *name, bool modal )
     TQ_CHECK_PTR( splitter );
 
     m_scanParams = 0;
-    m_device = new KScanDevice( TQT_TQOBJECT(this) );
+    m_device = new KScanDevice( this );
     connect(m_device, TQT_SIGNAL(sigNewImage(TQImage *, ImgScanInfo*)),
             this, TQT_SLOT(slotFinalImage(TQImage *, ImgScanInfo *)));
 

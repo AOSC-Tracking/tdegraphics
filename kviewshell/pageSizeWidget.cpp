@@ -57,8 +57,8 @@ pageSizeWidget::pageSizeWidget( TQWidget* parent,  const char* name, WFlags fl )
   // Allow entries between 0 and 1200. More filtering is done by the
   // pageSize class, which silently ignores values which are out of
   // range.
-  widthInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, TQT_TQOBJECT(this), "widthValidator"));
-  heightInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, TQT_TQOBJECT(this), "heightValidator"));
+  widthInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, this, "widthValidator"));
+  heightInput->setValidator(new TQDoubleValidator(0.0, 1200.0, 1, this, "heightValidator"));
 }
 
 

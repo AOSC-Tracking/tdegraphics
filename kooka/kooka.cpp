@@ -125,14 +125,14 @@ void Kooka::startup( void )
 void Kooka::setupActions()
 {
 
-    KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(filePrint()), actionCollection());
-    KStdAction::quit(TQT_TQOBJECT(this) , TQT_SLOT(close()), actionCollection());
+    KStdAction::print(this, TQT_SLOT(filePrint()), actionCollection());
+    KStdAction::quit(this , TQT_SLOT(close()), actionCollection());
 
     KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
-    KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(optionsConfigureToolbars()),
+    KStdAction::configureToolbars(this, TQT_SLOT(optionsConfigureToolbars()),
 				  actionCollection());
-    KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(optionsPreferences()), actionCollection());
+    KStdAction::preferences(this, TQT_SLOT(optionsPreferences()), actionCollection());
 
     m_view->createDockMenu(actionCollection(), this, "settings_show_docks" );
 
@@ -180,68 +180,68 @@ actionCollection());
 
     /* thumbview and gallery actions */
     act = new TDEAction(i18n("Set Zoom..."), "viewmag", 0,
-		       TQT_TQOBJECT(m_view), TQT_SLOT( slIVShowZoomDialog()),
+		       m_view, TQT_SLOT( slIVShowZoomDialog()),
 		       actionCollection(), "showZoomDialog" );
     m_view->connectViewerAction( act );
 
     (void) new TDEAction(i18n("Create From Selectio&n"), "crop", CTRL+Key_N,
-		       TQT_TQOBJECT(m_view), TQT_SLOT( slCreateNewImgFromSelection() ),
+		       m_view, TQT_SLOT( slCreateNewImgFromSelection() ),
 		       actionCollection(), "createFromSelection" );
 
     (void) new TDEAction(i18n("Mirror Image &Vertically"), "mirror-vert", CTRL+Key_V,
-		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorVertical() ),
+		       this, TQT_SLOT( slMirrorVertical() ),
 		       actionCollection(), "mirrorVertical" );
 
     (void) new TDEAction(i18n("&Mirror Image Horizontally"), "mirror-horiz", CTRL+Key_M,
-		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorHorizontal() ),
+		       this, TQT_SLOT( slMirrorHorizontal() ),
 		       actionCollection(), "mirrorHorizontal" );
 
     (void) new TDEAction(i18n("Mirror Image &Both Directions"), "mirror-both", CTRL+Key_B,
-		       TQT_TQOBJECT(this), TQT_SLOT( slMirrorBoth() ),
+		       this, TQT_SLOT( slMirrorBoth() ),
 		       actionCollection(), "mirrorBoth" );
 
     (void) new TDEAction(i18n("Open Image in &Graphic Application..."), "document-open", CTRL+Key_G,
-		       TQT_TQOBJECT(m_view), TQT_SLOT( slOpenCurrInGraphApp() ),
+		       m_view, TQT_SLOT( slOpenCurrInGraphApp() ),
 		       actionCollection(), "openInGraphApp" );
 
     act = new TDEAction(i18n("&Rotate Image Clockwise"), "object-rotate-right", CTRL+Key_R,
-		      TQT_TQOBJECT(this), TQT_SLOT( slRotateClockWise() ),
+		      this, TQT_SLOT( slRotateClockWise() ),
 		       actionCollection(), "rotateClockwise" );
     m_view->connectViewerAction( act );
 
     act = new TDEAction(i18n("Rotate Image Counter-Clock&wise"), "object-rotate-left", CTRL+Key_W,
-		       TQT_TQOBJECT(this), TQT_SLOT( slRotateCounterClockWise() ),
+		       this, TQT_SLOT( slRotateCounterClockWise() ),
 		       actionCollection(), "rotateCounterClockwise" );
     m_view->connectViewerAction( act );
 
     act = new TDEAction(i18n("Rotate Image 180 &Degrees"), "rotate", CTRL+Key_D,
-		       TQT_TQOBJECT(this), TQT_SLOT( slRotate180() ),
+		       this, TQT_SLOT( slRotate180() ),
 		       actionCollection(), "upsitedown" );
     m_view->connectViewerAction( act );
 
     /* Gallery actions */
     act = new TDEAction(i18n("&Create Folder..."), "folder-new", 0,
-		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotCreateFolder() ),
+		      m_view->gallery(),TQT_SLOT( slotCreateFolder() ),
 		       actionCollection(), "foldernew" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Save Image..."), "document-save", 0,
-		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotExportFile() ),
+		      m_view->gallery(),TQT_SLOT( slotExportFile() ),
 		       actionCollection(), "saveImage" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Import Image..."), "inline_image", 0,
-		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotImportFile() ),
+		      m_view->gallery(),TQT_SLOT( slotImportFile() ),
 		       actionCollection(), "importImage" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Delete Image"), "edittrash", 0,
-		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotDeleteItems() ),
+		      m_view->gallery(),TQT_SLOT( slotDeleteItems() ),
 		       actionCollection(), "deleteImage" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Unload Image"), "window-close", 0,
-		      TQT_TQOBJECT(m_view->gallery()),TQT_SLOT( slotUnloadItems() ),
+		      m_view->gallery(),TQT_SLOT( slotUnloadItems() ),
 		       actionCollection(), "unloadImage" );
     m_view->connectGalleryAction( act );
 
@@ -257,11 +257,11 @@ actionCollection());
 #endif
 
     (void) new TDEAction(i18n("Select Scan Device"), "scanner", 0,
-		       TQT_TQOBJECT(m_view), TQT_SLOT( slSelectDevice()),
+		       m_view, TQT_SLOT( slSelectDevice()),
 		       actionCollection(), "selectsource" );
 
     (void) new TDEAction( i18n("Enable All Warnings && Messages"), 0,
-			TQT_TQOBJECT(this),  TQT_SLOT(slEnableWarnings()),
+			this,  TQT_SLOT(slEnableWarnings()),
 			actionCollection(), "enable_msgs");
 
 

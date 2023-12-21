@@ -67,18 +67,18 @@ void kpMainWindow::setupViewMenuActions ()
     m_actionFullScreen->setEnabled (false);*/
 
 
-    m_actionActualSize = KStdAction::actualSize (TQT_TQOBJECT(this), TQT_SLOT (slotActualSize ()), ac);
-    /*m_actionFitToPage = KStdAction::fitToPage (TQT_TQOBJECT(this), TQT_SLOT (slotFitToPage ()), ac);
-    m_actionFitToWidth = KStdAction::fitToWidth (TQT_TQOBJECT(this), TQT_SLOT (slotFitToWidth ()), ac);
-    m_actionFitToHeight = KStdAction::fitToHeight (TQT_TQOBJECT(this), TQT_SLOT (slotFitToHeight ()), ac);*/
+    m_actionActualSize = KStdAction::actualSize (this, TQT_SLOT (slotActualSize ()), ac);
+    /*m_actionFitToPage = KStdAction::fitToPage (this, TQT_SLOT (slotFitToPage ()), ac);
+    m_actionFitToWidth = KStdAction::fitToWidth (this, TQT_SLOT (slotFitToWidth ()), ac);
+    m_actionFitToHeight = KStdAction::fitToHeight (this, TQT_SLOT (slotFitToHeight ()), ac);*/
 
 
-    m_actionZoomIn = KStdAction::zoomIn (TQT_TQOBJECT(this), TQT_SLOT (slotZoomIn ()), ac);
-    m_actionZoomOut = KStdAction::zoomOut (TQT_TQOBJECT(this), TQT_SLOT (slotZoomOut ()), ac);
+    m_actionZoomIn = KStdAction::zoomIn (this, TQT_SLOT (slotZoomIn ()), ac);
+    m_actionZoomOut = KStdAction::zoomOut (this, TQT_SLOT (slotZoomOut ()), ac);
 
 
     m_actionZoom = new TDESelectAction (i18n ("&Zoom"), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotZoom ()), actionCollection (), "view_zoom_to");
+        this, TQT_SLOT (slotZoom ()), actionCollection (), "view_zoom_to");
     m_actionZoom->setEditable (true);
 
     // create the zoom list for the 1st call to zoomTo() below
@@ -91,7 +91,7 @@ void kpMainWindow::setupViewMenuActions ()
 
 
     m_actionShowGrid = new TDEToggleAction (i18n ("Show &Grid"), CTRL + Key_G,
-        TQT_TQOBJECT(this), TQT_SLOT (slotShowGridToggled ()), actionCollection (), "view_show_grid");
+        this, TQT_SLOT (slotShowGridToggled ()), actionCollection (), "view_show_grid");
     m_actionShowGrid->setCheckedState (i18n ("Hide &Grid"));
 
 
@@ -99,12 +99,12 @@ void kpMainWindow::setupViewMenuActions ()
     //       Testcase: Press CTRL+H twice on a fresh KolourPaint.
     //                 The second CTRL+H doesn't close the thumbnail.
     m_actionShowThumbnail = new TDEToggleAction (i18n ("Show T&humbnail"), CTRL + Key_H,
-        TQT_TQOBJECT(this), TQT_SLOT (slotShowThumbnailToggled ()), actionCollection (), "view_show_thumbnail");
+        this, TQT_SLOT (slotShowThumbnailToggled ()), actionCollection (), "view_show_thumbnail");
     m_actionShowThumbnail->setCheckedState (i18n ("Hide T&humbnail"));
 
     // Please do not use setCheckedState() here - it wouldn't make sense
     m_actionZoomedThumbnail = new TDEToggleAction (i18n ("Zoo&med Thumbnail Mode"), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotZoomedThumbnailToggled ()), actionCollection (), "view_zoomed_thumbnail");
+        this, TQT_SLOT (slotZoomedThumbnailToggled ()), actionCollection (), "view_zoomed_thumbnail");
 
     // For consistency with the above action, don't use setCheckedState()
     //
@@ -114,7 +114,7 @@ void kpMainWindow::setupViewMenuActions ()
     d->m_actionShowThumbnailRectangle = new TDEToggleAction (
         i18n ("Enable Thumbnail &Rectangle"),
         0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotThumbnailShowRectangleToggled ()),
+        this, TQT_SLOT (slotThumbnailShowRectangleToggled ()),
         actionCollection (), "view_show_thumbnail_rectangle");
 
 
@@ -511,7 +511,7 @@ void kpMainWindow::zoomTo (int zoomLevel, bool centerUnderCursor)
     //       caused mainly by m_scrollView->center()
     //
     // TODO: remove flicker completely
-    //TQTimer::singleShot (0, TQT_TQOBJECT(this), TQT_SLOT (finishZoomTo ()));
+    //TQTimer::singleShot (0, this, TQT_SLOT (finishZoomTo ()));
 
     // Later: I don't think there is an update() that needs to be queued
     //        - let's reduce latency instead.
@@ -823,7 +823,7 @@ void kpMainWindow::notifyThumbnailGeometryChanged ()
     {
         m_thumbnailSaveConfigTimer = new TQTimer (this);
         connect (m_thumbnailSaveConfigTimer, TQT_SIGNAL (timeout ()),
-                 TQT_TQOBJECT(this), TQT_SLOT (slotSaveThumbnailGeometry ()));
+                 this, TQT_SLOT (slotSaveThumbnailGeometry ()));
     }
 
     m_thumbnailSaveConfigTimer->start (500/*msec*/, true/*single shot*/);
@@ -1122,7 +1122,7 @@ void kpMainWindow::updateThumbnail ()
         kdDebug () << "\t\tconnecting thumbnail::visibilityChange to destroy slot" << endl;
     #endif
         connect (m_thumbnail, TQT_SIGNAL (visibilityChanged (bool)),
-                 TQT_TQOBJECT(this), TQT_SLOT (slotDestroyThumbnailIfNotVisible (bool)));
+                 this, TQT_SLOT (slotDestroyThumbnailIfNotVisible (bool)));
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\t\tDONE" << endl;
     #endif
@@ -1144,7 +1144,7 @@ void kpMainWindow::updateThumbnail ()
 
 
         disconnect (m_thumbnail, TQT_SIGNAL (visibilityChanged (bool)),
-                    TQT_TQOBJECT(this), TQT_SLOT (slotDestroyThumbnailIfNotVisible (bool)));
+                    this, TQT_SLOT (slotDestroyThumbnailIfNotVisible (bool)));
 
         m_thumbnail->deleteLater (); m_thumbnail = 0;
     }

@@ -55,13 +55,13 @@ KViewShell::KViewShell(const TQString& defaultMimeType)
   if (factory) {
     if (defaultMimeType == TQString())
     {
-      view = (KViewPart_Iface*) factory->create(TQT_TQOBJECT(this), "kviewerpart", "KViewPart");
+      view = (KViewPart_Iface*) factory->create(this, "kviewerpart", "KViewPart");
     }
     else
     {
       TQStringList args;
       args << defaultMimeType;
-      view = (KViewPart_Iface*) factory->create(TQT_TQOBJECT(this), "kviewerpart", "KViewPart", args);
+      view = (KViewPart_Iface*) factory->create(this, "kviewerpart", "KViewPart", args);
     }
     if (!view)
       ::exit(-1);
@@ -73,24 +73,24 @@ KViewShell::KViewShell(const TQString& defaultMimeType)
   setCentralWidget(view->widget());
 
   // file menu
-  KStdAction::open(TQT_TQOBJECT(view), TQT_SLOT(slotFileOpen()), actionCollection());
-  recent = KStdAction::openRecent (TQT_TQOBJECT(this), TQT_SLOT(openURL(const KURL &)), actionCollection());
+  KStdAction::open(view, TQT_SLOT(slotFileOpen()), actionCollection());
+  recent = KStdAction::openRecent (this, TQT_SLOT(openURL(const KURL &)), actionCollection());
   reloadAction = new TDEAction(i18n("Reload"), "reload", CTRL + Key_R, view, TQT_SLOT(reload()), actionCollection(), "reload");
-  closeAction = KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(slotFileClose()), actionCollection());
-  KStdAction::quit (TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), actionCollection());
+  closeAction = KStdAction::close(this, TQT_SLOT(slotFileClose()), actionCollection());
+  KStdAction::quit (this, TQT_SLOT(slotQuit()), actionCollection());
 
   connect(view, TQT_SIGNAL(fileOpened()), this, TQT_SLOT(addRecentFile()));
 
   // view menu
-  fullScreenAction = KStdAction::fullScreen(TQT_TQOBJECT(this), TQT_SLOT(slotFullScreen()), actionCollection(), this, "fullscreen" );
+  fullScreenAction = KStdAction::fullScreen(this, TQT_SLOT(slotFullScreen()), actionCollection(), this, "fullscreen" );
 
   // settings menu
   createStandardStatusBarAction();
 
   setStandardToolBarMenuEnabled(true);
 
-  KStdAction::keyBindings(TQT_TQOBJECT(this), TQT_SLOT(slotConfigureKeys()), actionCollection());
-  KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(slotEditToolbar()), actionCollection());
+  KStdAction::keyBindings(this, TQT_SLOT(slotConfigureKeys()), actionCollection());
+  KStdAction::configureToolbars(this, TQT_SLOT(slotEditToolbar()), actionCollection());
 
   // statusbar connects
   connect( view, TQT_SIGNAL( zoomChanged(const TQString &) ), this,TQT_SLOT( slotChangeZoomText(const TQString &) ) );

@@ -50,22 +50,22 @@ void kpMainWindow::setupTextToolBarActions ()
     TDEActionCollection *ac = actionCollection ();
 
     m_actionTextFontFamily = new TDEFontAction (i18n ("Font Family"), 0/*shortcut*/,
-        TQT_TQOBJECT(this), TQT_SLOT (slotTextFontFamilyChanged ()), ac, "text_font_family");
+        this, TQT_SLOT (slotTextFontFamilyChanged ()), ac, "text_font_family");
     m_actionTextFontSize = new TDEFontSizeAction (i18n ("Font Size"), 0/*shortcut*/,
-        TQT_TQOBJECT(this), TQT_SLOT (slotTextFontSizeChanged ()), ac, "text_font_size");
+        this, TQT_SLOT (slotTextFontSizeChanged ()), ac, "text_font_size");
 
     m_actionTextBold = new TDEToggleAction (i18n ("Bold"),
         "format-text-bold"/*icon*/, 0/*shortcut*/,
-        TQT_TQOBJECT(this), TQT_SLOT (slotTextBoldChanged ()), ac, "format-text-bold");
+        this, TQT_SLOT (slotTextBoldChanged ()), ac, "format-text-bold");
     m_actionTextItalic = new TDEToggleAction (i18n ("Italic"),
         "format-text-italic"/*icon*/, 0/*shortcut*/,
-        TQT_TQOBJECT(this), TQT_SLOT (slotTextItalicChanged ()), ac, "format-text-italic");
+        this, TQT_SLOT (slotTextItalicChanged ()), ac, "format-text-italic");
     m_actionTextUnderline = new TDEToggleAction (i18n ("Underline"),
         "format-text-underline"/*icon*/, 0/*shortcut*/,
-        TQT_TQOBJECT(this), TQT_SLOT (slotTextUnderlineChanged ()), ac, "text_underline");
+        this, TQT_SLOT (slotTextUnderlineChanged ()), ac, "text_underline");
     m_actionTextStrikeThru = new TDEToggleAction (i18n ("Strike Through"),
         "format-text-strikethrough"/*icon*/, 0/*shortcut*/,
-        TQT_TQOBJECT(this), TQT_SLOT (slotTextStrikeThruChanged ()), ac, "text_strike_thru");
+        this, TQT_SLOT (slotTextStrikeThruChanged ()), ac, "text_strike_thru");
 
 
     readAndApplyTextSettings ();

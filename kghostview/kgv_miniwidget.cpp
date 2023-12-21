@@ -384,7 +384,7 @@ void KGVMiniWidget::showPage( int pagenumber )
 
     kdDebug(4500) << "KGVMiniWidget::showPage( " << pagenumber << " )" << endl;
 
-    TQT_TQWIDGET( _psWidget->parent() )->show();
+    static_cast<TQWidget*>( _psWidget->parent() )->show();
 
     _psWidget->setFileName(_document->fileName(), dsc()->isStructured() );
     _psWidget->clear();
@@ -452,8 +452,8 @@ void KGVMiniWidget::showPage( int pagenumber )
 	}
     }
     // Do this after ajusting pagenumber above
-    _thumbnailService->cancelRequests( -1 , TQT_TQOBJECT(_part->scrollBox()), TQT_SLOT( setThumbnail( TQPixmap ) ) );
-    _thumbnailService->delayedGetThumbnail( pagenumber, TQT_TQOBJECT(_part->scrollBox()), TQT_SLOT( setThumbnail( TQPixmap ) ), true );
+    _thumbnailService->cancelRequests( -1 , _part->scrollBox(), TQT_SLOT( setThumbnail( TQPixmap ) ) );
+    _thumbnailService->delayedGetThumbnail( pagenumber, _part->scrollBox(), TQT_SLOT( setThumbnail( TQPixmap ) ), true );
 
     emit newPageShown( pagenumber );
 }

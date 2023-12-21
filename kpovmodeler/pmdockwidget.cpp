@@ -142,7 +142,7 @@ PMDockMainWindow::PMDockMainWindow( TQWidget* parent, const char *name, WFlags f
   mainDockWidget = 0L;
 
   d = new PMDockMainWindowPrivate( );
-  PartBase::setPartObject( TQT_TQOBJECT(this) );
+  PartBase::setPartObject( this );
 }
 
 PMDockMainWindow::~PMDockMainWindow()
@@ -179,7 +179,7 @@ void PMDockMainWindow::createGUI( Part * part )
 
   if( !d->m_bShellGUIActivated )
   {
-    loadPlugins( TQT_TQOBJECT(this), this, TDEGlobal::instance() );
+    loadPlugins( this, this, TDEGlobal::instance() );
     createShellGUI();
     d->m_bShellGUIActivated = true;
   }
@@ -485,7 +485,7 @@ PMDockWidget::PMDockWidget( PMDockManager* dockManager, const char* name, const 
   layout->setResizeMode( TQLayout::Minimum );
 
   manager = dockManager;
-  manager->childDock->append( TQT_TQOBJECT(this) );
+  manager->childDock->append( this );
   installEventFilter( manager );
 
   header = 0L;
@@ -527,7 +527,7 @@ PMDockWidget::~PMDockWidget()
     d->blockHasUndockedSignal = false;
   }
   emit iMBeingClosed();
-  manager->childDock->remove( TQT_TQOBJECT(this) );
+  manager->childDock->remove( this );
   delete pix;
   delete d; // destroy private data
 }
@@ -1464,8 +1464,8 @@ PMDockWidget* PMDockManager::findDockWidgetAt( const TQPoint& pos )
     }
     w = p;
   }
-  if ( tqt_find_obj_child( TQT_TQOBJECT(w), "PMDockSplitter", "_dock_split_" ) ) return 0L;
-  if ( tqt_find_obj_child( TQT_TQOBJECT(w), "PMDockTabGroup", "_dock_tab" ) ) return 0L;
+  if ( tqt_find_obj_child( w, "PMDockSplitter", "_dock_split_" ) ) return 0L;
+  if ( tqt_find_obj_child( w, "PMDockTabGroup", "_dock_tab" ) ) return 0L;
   if (!childDockWidgetList) return 0L;
   if ( childDockWidgetList->find(w) != -1 ) return 0L;
   if ( currentDragWidget->isGroup && ((PMDockWidget*)w)->parentDockTabGroup() ) return 0L;
@@ -2271,7 +2271,7 @@ PMDockWidget* PMDockManager::getDockWidgetFromName( const TQString& dockName )
   PMDockWidget* autoCreate = 0L;
   if ( autoCreateDock ){
     autoCreate = new PMDockWidget( this, dockName.latin1(), TQPixmap(TQString("")) );
-    autoCreateDock->append( TQT_TQOBJECT(autoCreate) );
+    autoCreateDock->append( autoCreate );
   }
   return autoCreate;
 }

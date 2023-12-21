@@ -60,29 +60,29 @@ KGVShell::KGVShell() :
     _tmpFile( 0 )
 {
     m_gvpart = KParts::ComponentFactory::createPartInstanceFromLibrary< KGVPart >( "libkghostviewpart", this, "kgvpart",
-                                                                                   TQT_TQOBJECT(this), "kgvpart" );
+                                                                                   this, "kgvpart" );
 
     /*---- File -----------------------------------------------------------*/
     openact =
-	    KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotFileOpen() ),
+	    KStdAction::open( this, TQT_SLOT( slotFileOpen() ),
 			      actionCollection() );
     recent =
-	    KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( openURL( const KURL& ) ),
+	    KStdAction::openRecent( this, TQT_SLOT( openURL( const KURL& ) ),
 				    actionCollection() );
 	    KStdAction::print( m_gvpart->document(), TQT_SLOT( print() ),
 			       actionCollection() );
     (void)
-	    KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( slotQuit() ), actionCollection() );
+	    KStdAction::quit( this, TQT_SLOT( slotQuit() ), actionCollection() );
 
     /*---- View -----------------------------------------------------------*/
             new TDEAction( i18n(  "&Reload" ), "reload",
 		    TDEStdAccel::shortcut( TDEStdAccel::Reload ),
 		    m_gvpart, TQT_SLOT(  reloadFile() ),
 		    actionCollection(), "reload" );
-	    new TDEAction( i18n( "&Maximize" ), Key_M, TQT_TQOBJECT(this),
+	    new TDEAction( i18n( "&Maximize" ), Key_M, this,
 			 TQT_SLOT( slotMaximize() ), actionCollection(),
 			 "maximize");
-    _showMenuBarAction = KStdAction::showMenubar( TQT_TQOBJECT(this), TQT_SLOT( slotShowMenubar() ), actionCollection() );
+    _showMenuBarAction = KStdAction::showMenubar( this, TQT_SLOT( slotShowMenubar() ), actionCollection() );
 
     /*---- Settings -------------------------------------------------------*/
 #if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
@@ -91,11 +91,11 @@ KGVShell::KGVShell() :
     setAutoSaveSettings();
     setStandardToolBarMenuEnabled(true);
 #if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
-    m_fullScreenAction = KStdAction::fullScreen( TQT_TQOBJECT(this), TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
+    m_fullScreenAction = KStdAction::fullScreen( this, TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 #else
     m_fullScreenAction = new TDEToggleAction( this, TQT_SLOT( slotUpdateFullScreen() ) );
 #endif
-    KStdAction::configureToolbars( TQT_TQOBJECT(this), TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
+    KStdAction::configureToolbars( this, TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
     KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
 

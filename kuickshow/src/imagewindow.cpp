@@ -146,103 +146,103 @@ void ImageWindow::updateActions()
 void ImageWindow::setupActions()
 {
     new TDEAction( i18n("Show Next Image"), TDEStdAccel::next(),
-                 TQT_TQOBJECT(this), TQT_SLOT( slotRequestNext() ),
+                 this, TQT_SLOT( slotRequestNext() ),
                  m_actions, "next_image" );
     new TDEAction( i18n("Show Previous Image"), TDEStdAccel::prior(),
-                 TQT_TQOBJECT(this), TQT_SLOT( slotRequestPrevious() ),
+                 this, TQT_SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
 
     new TDEAction( i18n("Delete Image"), SHIFT + Key_Delete,
-                 TQT_TQOBJECT(this), TQT_SLOT( imageDelete() ),
+                 this, TQT_SLOT( imageDelete() ),
                  m_actions, "delete_image" );
     new TDEAction( i18n("Move Image to Trash"), Key_Delete,
-                 TQT_TQOBJECT(this), TQT_SLOT( imageTrash() ),
+                 this, TQT_SLOT( imageTrash() ),
                  m_actions, "trash_image" );
 
     new TDEAction( i18n("Zoom In"), Key_Plus,
-                 TQT_TQOBJECT(this), TQT_SLOT( zoomIn() ),
+                 this, TQT_SLOT( zoomIn() ),
                  m_actions, "zoom_in" );
     new TDEAction( i18n("Zoom Out"), Key_Minus,
-                 TQT_TQOBJECT(this), TQT_SLOT( zoomOut() ),
+                 this, TQT_SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
     new TDEAction( i18n("Restore Original Size"), Key_O,
-                 TQT_TQOBJECT(this), TQT_SLOT( showImageOriginalSize() ),
+                 this, TQT_SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
     new TDEAction( i18n("Maximize"), Key_M,
-                 TQT_TQOBJECT(this), TQT_SLOT( maximize() ),
+                 this, TQT_SLOT( maximize() ),
                  m_actions, "maximize" );
 
     new TDEAction( i18n("Rotate 90 Degrees"), Key_9,
-                 TQT_TQOBJECT(this), TQT_SLOT( rotate90() ),
+                 this, TQT_SLOT( rotate90() ),
                  m_actions, "rotate90" );
     new TDEAction( i18n("Rotate 180 Degrees"), Key_8,
-                 TQT_TQOBJECT(this), TQT_SLOT( rotate180() ),
+                 this, TQT_SLOT( rotate180() ),
                  m_actions, "rotate180" );
     new TDEAction( i18n("Rotate 270 Degrees"), Key_7,
-                 TQT_TQOBJECT(this), TQT_SLOT( rotate270() ),
+                 this, TQT_SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
     new TDEAction( i18n("Flip Horizontally"), Key_Asterisk,
-                 TQT_TQOBJECT(this), TQT_SLOT( flipHoriz() ),
+                 this, TQT_SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
     new TDEAction( i18n("Flip Vertically"), Key_Slash,
-                 TQT_TQOBJECT(this), TQT_SLOT( flipVert() ),
+                 this, TQT_SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
     new TDEAction( i18n("Print Image..."), TDEStdAccel::print(),
-                 TQT_TQOBJECT(this), TQT_SLOT( printImage() ),
+                 this, TQT_SLOT( printImage() ),
                  m_actions, "print_image" );
-    KStdAction::saveAs( TQT_TQOBJECT(this), TQT_SLOT( saveImage() ),
+    KStdAction::saveAs( this, TQT_SLOT( saveImage() ),
                  m_actions, "save_image_as" );
 
-    KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( close() ),
+    KStdAction::close( this, TQT_SLOT( close() ),
                  m_actions, "close_image" );
     // --------
     new TDEAction( i18n("More Brightness"), Key_B,
-                 TQT_TQOBJECT(this), TQT_SLOT( moreBrightness() ),
+                 this, TQT_SLOT( moreBrightness() ),
                  m_actions, "more_brightness" );
     new TDEAction( i18n("Less Brightness"), SHIFT + Key_B,
-                 TQT_TQOBJECT(this), TQT_SLOT( lessBrightness() ),
+                 this, TQT_SLOT( lessBrightness() ),
                  m_actions, "less_brightness" );
     new TDEAction( i18n("More Contrast"), Key_C,
-                 TQT_TQOBJECT(this), TQT_SLOT( moreContrast() ),
+                 this, TQT_SLOT( moreContrast() ),
                  m_actions, "more_contrast" );
     new TDEAction( i18n("Less Contrast"), SHIFT + Key_C,
-                 TQT_TQOBJECT(this), TQT_SLOT( lessContrast() ),
+                 this, TQT_SLOT( lessContrast() ),
                  m_actions, "less_contrast" );
     new TDEAction( i18n("More Gamma"), Key_G,
-                 TQT_TQOBJECT(this), TQT_SLOT( moreGamma() ),
+                 this, TQT_SLOT( moreGamma() ),
                  m_actions, "more_gamma" );
     new TDEAction( i18n("Less Gamma"), SHIFT + Key_G,
-                 TQT_TQOBJECT(this), TQT_SLOT( lessGamma() ),
+                 this, TQT_SLOT( lessGamma() ),
                  m_actions, "less_gamma" );
 
     // --------
     new TDEAction( i18n("Scroll Up"), Key_Up,
-                 TQT_TQOBJECT(this), TQT_SLOT( scrollUp() ),
+                 this, TQT_SLOT( scrollUp() ),
                  m_actions, "scroll_up" );
     new TDEAction( i18n("Scroll Down"), Key_Down,
-                 TQT_TQOBJECT(this), TQT_SLOT( scrollDown() ),
+                 this, TQT_SLOT( scrollDown() ),
                  m_actions, "scroll_down" );
     new TDEAction( i18n("Scroll Left"), Key_Left,
-                 TQT_TQOBJECT(this), TQT_SLOT( scrollLeft() ),
+                 this, TQT_SLOT( scrollLeft() ),
                  m_actions, "scroll_left" );
     new TDEAction( i18n("Scroll Right"), Key_Right,
-                 TQT_TQOBJECT(this), TQT_SLOT( scrollRight() ),
+                 this, TQT_SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
     // --------
     new TDEAction( i18n("Pause Slideshow"), Key_P,
-                 TQT_TQOBJECT(this), TQT_SLOT( pauseSlideShow() ),
+                 this, TQT_SLOT( pauseSlideShow() ),
                  m_actions, "kuick_slideshow_pause" );
 
-    TDEAction *fullscreenAction = KStdAction::fullScreen(TQT_TQOBJECT(this), TQT_SLOT( toggleFullscreen() ), m_actions, 0 );
+    TDEAction *fullscreenAction = KStdAction::fullScreen(this, TQT_SLOT( toggleFullscreen() ), m_actions, 0 );
 
     TDEAction *reloadAction = new TDEAction( i18n("Reload Image"), TDEStdAccel::shortcut(TDEStdAccel::Reload),
-                                         TQT_TQOBJECT(this), TQT_SLOT( reload() ),
+                                         this, TQT_SLOT( reload() ),
                                          m_actions, "reload_image" );
 
     new TDEAction( i18n("Properties"), ALT + Key_Return,
-                 TQT_TQOBJECT(this), TQT_SLOT( slotProperties() ),
+                 this, TQT_SLOT( slotProperties() ),
                  m_actions, "properties" );
 
     m_actions->readShortcutSettings();

@@ -201,6 +201,6 @@ void PMDeclareEdit::slotItemSelected( TQListBoxItem* item )
 void PMDeclareEdit::slotSelect( )
 {
    if( m_pSelectedObject )
-      part( )->slotObjectChanged( m_pSelectedObject, PMCNewSelection, TQT_TQOBJECT(this) );
+      part( )->slotObjectChanged( m_pSelectedObject, PMCNewSelection, this );
 }
 #include "pmdeclareedit.moc"

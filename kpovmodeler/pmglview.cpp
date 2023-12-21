@@ -955,12 +955,12 @@ void PMGLView::graphicalChange( const TQPoint& mousePos )
    m_pActiveObject->controlPointsChangedList( m_controlPoints, changedObjects );
 
    if( changedObjects.isEmpty( ) )
-      emit objectChanged( m_pActiveObject, PMCGraphicalChange, TQT_TQOBJECT(this) );
+      emit objectChanged( m_pActiveObject, PMCGraphicalChange, this );
    else
    {
       PMObjectListIterator it( changedObjects );
       for( ; it.current( ); ++it )
-         emit objectChanged( it.current( ), PMCGraphicalChange, TQT_TQOBJECT(this) );
+         emit objectChanged( it.current( ), PMCGraphicalChange, this );
    }
 }
 
@@ -1353,7 +1353,7 @@ void PMGLView::selectControlPoint( PMControlPoint* cp, bool select, bool deselec
    }
 
    if( selectionChanged )
-      emit objectChanged( m_pActiveObject, PMCControlPointSelection, TQT_TQOBJECT(this) );
+      emit objectChanged( m_pActiveObject, PMCControlPointSelection, this );
 }
 
 void PMGLView::startSelection( )
@@ -1652,7 +1652,7 @@ void PMGLView::slotControlPoint( int id )
       PMControlPointListIterator cit( m_controlPoints );
       for( ; cit.current( ); ++cit )
          cit.current( )->setSelected( p == cit.current( ) );
-      emit objectChanged( m_pActiveObject, PMCControlPointSelection, TQT_TQOBJECT(this) );
+      emit objectChanged( m_pActiveObject, PMCControlPointSelection, this );
    }
 }
 

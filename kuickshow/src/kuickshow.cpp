@@ -246,24 +246,24 @@ void KuickShow::initGUI( const KURL& startDir )
              this, TQT_SLOT( slotDropped( const KFileItem *, TQDropEvent *, const KURL::List &)) );
 
     // setup actions
-    TDEAction *open = KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotOpenURL() ),
+    TDEAction *open = KStdAction::open( this, TQT_SLOT( slotOpenURL() ),
                                       coll, "openURL" );
 
-    TDEAction *print = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( slotPrint() ),
+    TDEAction *print = KStdAction::print( this, TQT_SLOT( slotPrint() ),
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
     TDEAction *configure = new TDEAction( i18n("Configure %1...").arg( TDEGlobal::instance()->aboutData()->programName() ), "configure",
                                       TDEShortcut(),
-                                      TQT_TQOBJECT(this), TQT_SLOT( configuration() ),
+                                      this, TQT_SLOT( configuration() ),
                                       coll, "kuick_configure" );
     TDEAction *slide = new TDEAction( i18n("Start Slideshow" ), "ksslide",
                                   TDEShortcut( Key_F2 ),
-                                  TQT_TQOBJECT(this), TQT_SLOT( startSlideShow() ),
+                                  this, TQT_SLOT( startSlideShow() ),
                                   coll, "kuick_slideshow" );
     TDEAction *about = new TDEAction( i18n( "About KuickShow" ), "about",
                                   TDEShortcut(),
-                                  TQT_TQOBJECT(this), TQT_SLOT( about() ), coll, "about" );
+                                  this, TQT_SLOT( about() ), coll, "about" );
 
     oneWindowAction = new TDEToggleAction( i18n("Open Only One Image Window"),
                                          "window-new",
@@ -276,17 +276,17 @@ void KuickShow::initGUI( const KURL& startDir )
              TQT_SLOT( toggleBrowser() ));
 
     TDEAction *showInOther = new TDEAction( i18n("Show Image"), TDEShortcut(),
-                                        TQT_TQOBJECT(this), TQT_SLOT( slotShowInOtherWindow() ),
+                                        this, TQT_SLOT( slotShowInOtherWindow() ),
                                         coll, "kuick_showInOtherWindow" );
     TDEAction *showInSame = new TDEAction( i18n("Show Image in Active Window"),
                                        TDEShortcut(),
-                                       TQT_TQOBJECT(this), TQT_SLOT( slotShowInSameWindow() ),
+                                       this, TQT_SLOT( slotShowInSameWindow() ),
                                        coll, "kuick_showInSameWindow" );
     TDEAction *showFullscreen = new TDEAction( i18n("Show Image in Fullscreen Mode"),
-					   TDEShortcut(), TQT_TQOBJECT(this), TQT_SLOT( slotShowFullscreen() ),
+					   TDEShortcut(), this, TQT_SLOT( slotShowFullscreen() ),
 					   coll, "kuick_showFullscreen" );
 
-    TDEAction *quit = KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), coll, "quit");
+    TDEAction *quit = KStdAction::quit( this, TQT_SLOT(slotQuit()), coll, "quit");
 
     // remove TQString() parameter -- ellis
     coll->readShortcutSettings( TQString() );
@@ -1300,7 +1300,7 @@ void KuickShow::slotReplayEvent()
     DelayedRepeatEvent *e = m_delayedRepeatItem;
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
 
-    eventFilter( TQT_TQOBJECT(e->viewer), static_cast<TQEvent*>(e->event) );
+    eventFilter( e->viewer, static_cast<TQEvent*>(e->event) );
     delete e;
 
     // ### WORKAROUND for TQIconView bug in TQt <= 3.0.3 at least

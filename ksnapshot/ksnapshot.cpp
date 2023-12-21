@@ -111,9 +111,9 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
 	autoincFilename();
     }
 
-    connect( &grabTimer, TQT_SIGNAL( timeout() ), TQT_TQOBJECT(this), TQT_SLOT(  grabTimerDone() ) );
-    connect( &updateTimer, TQT_SIGNAL( timeout() ), TQT_TQOBJECT(this), TQT_SLOT(  updatePreview() ) );
-    TQTimer::singleShot( 0, TQT_TQOBJECT(this), TQT_SLOT( updateCaption() ) );
+    connect( &grabTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  grabTimerDone() ) );
+    connect( &updateTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  updatePreview() ) );
+    TQTimer::singleShot( 0, this, TQT_SLOT( updateCaption() ) );
 
     KHelpMenu *helpMenu = new KHelpMenu(this, TDEGlobal::instance()->aboutData(), false);
 
@@ -139,24 +139,24 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     }
 
     TDEAccel* accel = new TDEAccel(this);
-    accel->insert(TDEStdAccel::Quit, TQT_TQOBJECT(kapp), TQT_SLOT(quit()));
+    accel->insert(TDEStdAccel::Quit, kapp, TQT_SLOT(quit()));
     accel->insert( "QuickSave", i18n("Quick Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user without showing the file dialog."),
-		   CTRL+SHIFT+Key_S, TQT_TQOBJECT(this), TQT_SLOT(slotSave()));
-    accel->insert(TDEStdAccel::Save, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
-//    accel->insert(TDEShortcut(CTRL+Key_A), TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
+		   CTRL+SHIFT+Key_S, this, TQT_SLOT(slotSave()));
+    accel->insert(TDEStdAccel::Save, this, TQT_SLOT(slotSaveAs()));
+//    accel->insert(TDEShortcut(CTRL+Key_A), this, TQT_SLOT(slotSaveAs()));
     accel->insert( "SaveAs", i18n("Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user."),
-		   CTRL+Key_A, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
-    accel->insert(TDEStdAccel::Print, TQT_TQOBJECT(this), TQT_SLOT(slotPrint()));
-    accel->insert(TDEStdAccel::New, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
-    accel->insert(TDEStdAccel::Copy, TQT_TQOBJECT(this), TQT_SLOT(slotCopy()));
+		   CTRL+Key_A, this, TQT_SLOT(slotSaveAs()));
+    accel->insert(TDEStdAccel::Print, this, TQT_SLOT(slotPrint()));
+    accel->insert(TDEStdAccel::New, this, TQT_SLOT(slotGrab()));
+    accel->insert(TDEStdAccel::Copy, this, TQT_SLOT(slotCopy()));
 
-    accel->insert( "Quit2", Key_Q, TQT_TQOBJECT(this), TQT_SLOT(slotSave()));
-    accel->insert( "Save2", Key_S, TQT_TQOBJECT(this), TQT_SLOT(slotSaveAs()));
-    accel->insert( "Print2", Key_P, TQT_TQOBJECT(this), TQT_SLOT(slotPrint()));
-    accel->insert( "New2", Key_N, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
-    accel->insert( "New3", Key_Space, TQT_TQOBJECT(this), TQT_SLOT(slotGrab()));
+    accel->insert( "Quit2", Key_Q, this, TQT_SLOT(slotSave()));
+    accel->insert( "Save2", Key_S, this, TQT_SLOT(slotSaveAs()));
+    accel->insert( "Print2", Key_P, this, TQT_SLOT(slotPrint()));
+    accel->insert( "New2", Key_N, this, TQT_SLOT(slotGrab()));
+    accel->insert( "New3", Key_Space, this, TQT_SLOT(slotGrab()));
 
     setEscapeButton( User1 );
     connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( reject() ) );

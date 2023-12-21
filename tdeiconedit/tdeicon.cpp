@@ -155,7 +155,7 @@ bool TDEIconEditIcon::promptForFile(const TQImage *img)
     KURL url = KFileDialog::getOpenURL( TQString(), filter );
     */
     bool loaded = false;
-    KURL url = KFileDialog::getImageOpenURL( TQString(), TQT_TQWIDGET(parent()) );
+    KURL url = KFileDialog::getImageOpenURL( TQString(), static_cast<TQWidget*>(parent()) );
 
     if( !url.isEmpty() )
     {
@@ -174,7 +174,7 @@ bool TDEIconEditIcon::saveAs(const TQImage *image)
     TQString file;
 
     //Get list of file types..
-    KFileDialog *dialog=new KFileDialog(TQString(), TQString(), TQT_TQWIDGET(parent()), "file dialog", true);
+    KFileDialog *dialog=new KFileDialog(TQString(), TQString(), static_cast<TQWidget*>(parent()), "file dialog", true);
     dialog->setCaption( i18n("Save Icon As") );
     dialog->setKeepLocation( true );
     dialog->setMimeFilter( KImageIO::mimeTypes(KImageIO::Writing), "image/png" );
@@ -206,7 +206,7 @@ bool TDEIconEditIcon::saveAs(const TQImage *image)
 
     if(TQFile::exists(file))
     {
-        int r=KMessageBox::warningContinueCancel(TQT_TQWIDGET(parent()),
+        int r=KMessageBox::warningContinueCancel(static_cast<TQWidget*>(parent()),
             i18n( "A file named \"%1\" already exists. "
                   "Overwrite it?" ).arg(file),
             i18n( "Overwrite File?" ),

@@ -105,7 +105,7 @@ void MarkListItem::paintEvent( TQPaintEvent* )
      */
     if ( _requested ) return;
     if ( !_thumbnailW->paletteBackgroundPixmap() ||  _thumbnailW->paletteBackgroundPixmap()->isNull() ) {
-	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, TQT_TQOBJECT(this), TQT_SLOT( setPixmap( TQPixmap ) ) );
+	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, this, TQT_SLOT( setPixmap( TQPixmap ) ) );
 	_requested = true;
     }
 }

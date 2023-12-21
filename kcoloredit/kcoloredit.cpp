@@ -64,39 +64,39 @@ KColorEditApp::~KColorEditApp() {
 void KColorEditApp::initActions()
 {
   // File actiojns
-  KStdAction::openNew( TQT_TQOBJECT(this), TQT_SLOT( slotFileNew() ), actionCollection() );
-  KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( slotFileOpen() ), actionCollection() );
-  KStdAction::saveAs( TQT_TQOBJECT(this), TQT_SLOT( slotFileSaveAs() ), actionCollection() );
-  KStdAction::close( TQT_TQOBJECT(this), TQT_SLOT( slotClose() ), actionCollection() );
-  KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( slotQuit() ), actionCollection() );
-  m_actSave = KStdAction::save( TQT_TQOBJECT(this), TQT_SLOT( slotFileSave() ),
+  KStdAction::openNew( this, TQT_SLOT( slotFileNew() ), actionCollection() );
+  KStdAction::open( this, TQT_SLOT( slotFileOpen() ), actionCollection() );
+  KStdAction::saveAs( this, TQT_SLOT( slotFileSaveAs() ), actionCollection() );
+  KStdAction::close( this, TQT_SLOT( slotClose() ), actionCollection() );
+  KStdAction::quit( this, TQT_SLOT( slotQuit() ), actionCollection() );
+  m_actSave = KStdAction::save( this, TQT_SLOT( slotFileSave() ),
           actionCollection() );
-  m_actRecent = KStdAction::openRecent( TQT_TQOBJECT(this),
+  m_actRecent = KStdAction::openRecent( this,
           TQT_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
 
   ( void ) new TDEAction( i18n("New &Window"), kapp->miniIcon(), TDEShortcut(),
-          TQT_TQOBJECT(this), TQT_SLOT( slotFileNewWindow() ), actionCollection(),
+          this, TQT_SLOT( slotFileNewWindow() ), actionCollection(),
           "file_new_window" );
 
   // Edit actions
-  m_actCut = KStdAction::cut( TQT_TQOBJECT(this), TQT_SLOT( slotEditCut() ),
+  m_actCut = KStdAction::cut( this, TQT_SLOT( slotEditCut() ),
           actionCollection() );
-  m_actCopy = KStdAction::copy( TQT_TQOBJECT(this), TQT_SLOT( slotEditCopy() ),
+  m_actCopy = KStdAction::copy( this, TQT_SLOT( slotEditCopy() ),
           actionCollection() );
-  m_actPaste = KStdAction::paste( TQT_TQOBJECT(this), TQT_SLOT( slotEditPaste() ),
+  m_actPaste = KStdAction::paste( this, TQT_SLOT( slotEditPaste() ),
           actionCollection() );
 
   m_actPaste->setEnabled( false );
 
   // Color Menu
-  m_actNames = new TDEToggleAction( i18n("Show &Color Names"), TDEShortcut(), TQT_TQOBJECT(this),
+  m_actNames = new TDEToggleAction( i18n("Show &Color Names"), TDEShortcut(), this,
           TQT_SLOT( slotViewColorNames() ), actionCollection(),
           "color_view_names" );
   m_actNames->setCheckedState(i18n("Hide &Color Names"));
-  m_actPalette = new TDEAction( i18n("From &Palette"), TDEShortcut(), TQT_TQOBJECT(this),
+  m_actPalette = new TDEAction( i18n("From &Palette"), TDEShortcut(), this,
           TQT_SLOT( slotColorFromPalette() ), actionCollection(),
           "color_from_palette" );
-  ( void ) new TDEAction( i18n("From &Screen"), TDEShortcut(), TQT_TQOBJECT(this),
+  ( void ) new TDEAction( i18n("From &Screen"), TDEShortcut(), this,
           TQT_SLOT( slotColorFromScreen() ), actionCollection(),
           "color_from_screen" );
 }

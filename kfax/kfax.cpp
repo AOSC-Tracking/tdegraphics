@@ -236,43 +236,43 @@ TopLevel::~TopLevel()
 void TopLevel::setupMenuBar()
 {
   // File menu
-  KStdAction::open( TQT_TQOBJECT(this), TQT_SLOT( faxOpen() ), actionCollection() );
-  actRecent =  KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( faxOpen( const KURL & ) ),
+  KStdAction::open( this, TQT_SLOT( faxOpen() ), actionCollection() );
+  actRecent =  KStdAction::openRecent( this, TQT_SLOT( faxOpen( const KURL & ) ),
           actionCollection() );
-  actSave = KStdAction::save( TQT_TQOBJECT(this), TQT_SLOT( faxSave() ), actionCollection() );
-  actSaveAs = KStdAction::saveAs( TQT_TQOBJECT(this), TQT_SLOT( faxSaveAs() ),
+  actSave = KStdAction::save( this, TQT_SLOT( faxSave() ), actionCollection() );
+  actSaveAs = KStdAction::saveAs( this, TQT_SLOT( faxSaveAs() ),
           actionCollection() );
-  actPrint = KStdAction::print( TQT_TQOBJECT(this), TQT_SLOT( print() ), actionCollection() );
-  KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT( close() ), actionCollection() );
-  actAdd = new TDEAction( i18n( "A&dd..." ), "document-new", TDEShortcut(), TQT_TQOBJECT(this),
+  actPrint = KStdAction::print( this, TQT_SLOT( print() ), actionCollection() );
+  KStdAction::quit( this, TQT_SLOT( close() ), actionCollection() );
+  actAdd = new TDEAction( i18n( "A&dd..." ), "document-new", TDEShortcut(), this,
       TQT_SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
 
   actRecent->setMaxItems( 5 );
 
   // View Menu
-  actSize = KStdAction::actualSize( TQT_TQOBJECT(this), TQT_SLOT( actualSize() ),
+  actSize = KStdAction::actualSize( this, TQT_SLOT( actualSize() ),
       actionCollection() );
-  actZoomIn = KStdAction::zoomIn( TQT_TQOBJECT(this), TQT_SLOT( zoomin() ), actionCollection() );
-  actZoomOut = KStdAction::zoomOut( TQT_TQOBJECT(this), TQT_SLOT( zoomout() ),
+  actZoomIn = KStdAction::zoomIn( this, TQT_SLOT( zoomin() ), actionCollection() );
+  actZoomOut = KStdAction::zoomOut( this, TQT_SLOT( zoomout() ),
       actionCollection() );
 
-  actRotate = new TDEAction( i18n( "&Rotate Page" ), "rotate", TDEShortcut(), TQT_TQOBJECT(this),
+  actRotate = new TDEAction( i18n( "&Rotate Page" ), "rotate", TDEShortcut(), this,
       TQT_SLOT( rotatePage() ), actionCollection(), "view_rotate" );
-  actMirror = new TDEAction( i18n( "Mirror Page" ), TDEShortcut(), TQT_TQOBJECT(this),
+  actMirror = new TDEAction( i18n( "Mirror Page" ), TDEShortcut(), this,
       TQT_SLOT( mirrorPage() ), actionCollection(), "view_mirror" );
-  actFlip = new TDEAction( i18n( "&Flip Page" ), TDEShortcut(), TQT_TQOBJECT(this),
+  actFlip = new TDEAction( i18n( "&Flip Page" ), TDEShortcut(), this,
       TQT_SLOT( flipPage() ), actionCollection(), "view_flip" );
 
   // Go menu
-  actNext = KStdAction::next( TQT_TQOBJECT(this), TQT_SLOT( nextPage() ), actionCollection() );
-  actPrev = KStdAction::prior( TQT_TQOBJECT(this), TQT_SLOT( prevPage() ), actionCollection() );
-  actFirst = KStdAction::firstPage( TQT_TQOBJECT(this), TQT_SLOT( firstPage() ),
+  actNext = KStdAction::next( this, TQT_SLOT( nextPage() ), actionCollection() );
+  actPrev = KStdAction::prior( this, TQT_SLOT( prevPage() ), actionCollection() );
+  actFirst = KStdAction::firstPage( this, TQT_SLOT( firstPage() ),
       actionCollection() );
-  actLast = KStdAction::lastPage( TQT_TQOBJECT(this), TQT_SLOT( lastPage() ),
+  actLast = KStdAction::lastPage( this, TQT_SLOT( lastPage() ),
       actionCollection() );
 
   // Settings menu
-  KStdAction::preferences( TQT_TQOBJECT(this), TQT_SLOT( faxoptions() ), actionCollection() );
+  KStdAction::preferences( this, TQT_SLOT( faxoptions() ), actionCollection() );
 }
 
 void TopLevel::setupStatusBar()

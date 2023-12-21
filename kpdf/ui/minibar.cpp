@@ -146,7 +146,7 @@ void MiniBar::notifySetup( const TQValueVector< KPDFPage * > & pageVector, bool 
     if ( pages < 1 )
     {
         m_currentPage = -1;
-        TQT_TQWIDGET( parent() )->hide();
+        static_cast<TQWidget*>( parent() )->hide();
         return;
     }
 
@@ -171,7 +171,7 @@ void MiniBar::notifySetup( const TQValueVector< KPDFPage * > & pageVector, bool 
     m_pagesButton->setText( TQString::number( pages ) );
     m_prevButton->setEnabled( false );
     m_nextButton->setEnabled( false );
-    TQT_TQWIDGET( parent() )->show();
+    static_cast<TQWidget*>( parent() )->show();
 }
 
 void MiniBar::notifyViewportChanged( bool /*smoothMove*/ )
@@ -333,7 +333,7 @@ PagesEdit::PagesEdit( MiniBar * parent )
     focusOutEvent( 0 );
 
     // use an integer validator
-    m_validator = new TQIntValidator( 1, 1, TQT_TQOBJECT(this) );
+    m_validator = new TQIntValidator( 1, 1, this );
     setValidator( m_validator );
 
     // customize text properties

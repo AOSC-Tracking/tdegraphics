@@ -67,41 +67,41 @@ void kpMainWindow::setupFileMenuActions ()
 #endif
     TDEActionCollection *ac = actionCollection ();
 
-    m_actionNew = KStdAction::openNew (TQT_TQOBJECT(this), TQT_SLOT (slotNew ()), ac);
-    m_actionOpen = KStdAction::open (TQT_TQOBJECT(this), TQT_SLOT (slotOpen ()), ac);
+    m_actionNew = KStdAction::openNew (this, TQT_SLOT (slotNew ()), ac);
+    m_actionOpen = KStdAction::open (this, TQT_SLOT (slotOpen ()), ac);
 
-    m_actionOpenRecent = KStdAction::openRecent (TQT_TQOBJECT(this), TQT_SLOT (slotOpenRecent (const KURL &)), ac);
+    m_actionOpenRecent = KStdAction::openRecent (this, TQT_SLOT (slotOpenRecent (const KURL &)), ac);
     m_actionOpenRecent->loadEntries (kapp->config ());
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\trecent URLs=" << m_actionOpenRecent->items () << endl;
 #endif
 
-    m_actionSave = KStdAction::save (TQT_TQOBJECT(this), TQT_SLOT (slotSave ()), ac);
-    m_actionSaveAs = KStdAction::saveAs (TQT_TQOBJECT(this), TQT_SLOT (slotSaveAs ()), ac);
+    m_actionSave = KStdAction::save (this, TQT_SLOT (slotSave ()), ac);
+    m_actionSaveAs = KStdAction::saveAs (this, TQT_SLOT (slotSaveAs ()), ac);
 
     m_actionExport = new TDEAction (i18n ("E&xport..."), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotExport ()), ac, "file_export");
+        this, TQT_SLOT (slotExport ()), ac, "file_export");
 
     m_actionScan = new TDEAction (i18n ("Scan..."), SmallIcon ("scanner"), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotScan ()), ac, "file_scan");
+        this, TQT_SLOT (slotScan ()), ac, "file_scan");
 
     //m_actionRevert = KStdAction::revert (this, TQT_SLOT (slotRevert ()), ac);
     m_actionReload = new TDEAction (i18n ("Reloa&d"), TDEStdAccel::reload (),
-        TQT_TQOBJECT(this), TQT_SLOT (slotReload ()), ac, "file_revert");
+        this, TQT_SLOT (slotReload ()), ac, "file_revert");
     slotEnableReload ();
 
-    m_actionPrint = KStdAction::print (TQT_TQOBJECT(this), TQT_SLOT (slotPrint ()), ac);
-    m_actionPrintPreview = KStdAction::printPreview (TQT_TQOBJECT(this), TQT_SLOT (slotPrintPreview ()), ac);
+    m_actionPrint = KStdAction::print (this, TQT_SLOT (slotPrint ()), ac);
+    m_actionPrintPreview = KStdAction::printPreview (this, TQT_SLOT (slotPrintPreview ()), ac);
 
-    m_actionMail = KStdAction::mail (TQT_TQOBJECT(this), TQT_SLOT (slotMail ()), ac);
+    m_actionMail = KStdAction::mail (this, TQT_SLOT (slotMail ()), ac);
 
     m_actionSetAsWallpaperCentered = new TDEAction (i18n ("Set as Wa&llpaper (Centered)"), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
+        this, TQT_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
     m_actionSetAsWallpaperTiled = new TDEAction (i18n ("Set as Wallpaper (&Tiled)"), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
+        this, TQT_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
 
-    m_actionClose = KStdAction::close (TQT_TQOBJECT(this), TQT_SLOT (slotClose ()), ac);
-    m_actionQuit = KStdAction::quit (TQT_TQOBJECT(this), TQT_SLOT (slotQuit ()), ac);
+    m_actionClose = KStdAction::close (this, TQT_SLOT (slotClose ()), ac);
+    m_actionQuit = KStdAction::quit (this, TQT_SLOT (slotQuit ()), ac);
 
     m_scanDialog = 0;
 

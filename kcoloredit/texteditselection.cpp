@@ -61,7 +61,7 @@ TextEditSelection::~TextEditSelection(){
 void TextEditSelection::addComponent(const int index, TQLineEdit* lineEdit, const int maxValue,
 	const TQString& labelString, const int row, const int column, TQGridLayout* layout) {
 	TQLabel* label = new TQLabel(labelString, this);
-	lineEdit->setValidator(new TQIntValidator( 0, maxValue, TQT_TQOBJECT(lineEdit) ));
+	lineEdit->setValidator(new TQIntValidator( 0, maxValue, lineEdit ));
 	lineEditTable[index] = lineEdit;
 	lineEdit->setMinimumWidth(lineEdit->fontMetrics().width( TQString("8888") ));
 	lineEdit->setMaximumWidth(lineEdit->fontMetrics().width( TQString("8888888") ));

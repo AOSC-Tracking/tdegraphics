@@ -564,7 +564,7 @@ ThumbnailController::ThumbnailController( TQWidget * parent, ThumbnailList * lis
     // insert a togglebutton [show only bookmarked pages]
     //insertSeparator();
     insertButton( "bookmark", FILTERB_ID, TQT_SIGNAL( toggled( bool ) ),
-                  TQT_TQOBJECT(list), TQT_SLOT( slotFilterBookmarks( bool ) ),
+                  list, TQT_SLOT( slotFilterBookmarks( bool ) ),
                   true, i18n( "Show bookmarked pages only" ) );
     setToggle( FILTERB_ID );
     setButton( FILTERB_ID, KpdfSettings::filterBookmarks() );

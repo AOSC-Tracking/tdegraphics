@@ -57,19 +57,19 @@ void kpMainWindow::setupSettingsMenuActions ()
     createStandardStatusBarAction ();
 
 
-    m_actionFullScreen = KStdAction::fullScreen (TQT_TQOBJECT(this), TQT_SLOT (slotFullScreen ()), ac,
+    m_actionFullScreen = KStdAction::fullScreen (this, TQT_SLOT (slotFullScreen ()), ac,
                                                  this/*window*/);
 
 
     m_actionShowPath = new TDEToggleAction (i18n ("Show &Path"), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotShowPathToggled ()), ac, "settings_show_path");
+        this, TQT_SLOT (slotShowPathToggled ()), ac, "settings_show_path");
     m_actionShowPath->setCheckedState (i18n ("Hide &Path"));
     slotEnableSettingsShowPath ();
 
 
-    m_actionKeyBindings = KStdAction::keyBindings (TQT_TQOBJECT(this), TQT_SLOT (slotKeyBindings ()), ac);
-    m_actionConfigureToolbars = KStdAction::configureToolbars (TQT_TQOBJECT(this), TQT_SLOT (slotConfigureToolBars ()), ac);
-    // m_actionConfigure = KStdAction::preferences (TQT_TQOBJECT(this), TQT_SLOT (slotConfigure ()), ac);
+    m_actionKeyBindings = KStdAction::keyBindings (this, TQT_SLOT (slotKeyBindings ()), ac);
+    m_actionConfigureToolbars = KStdAction::configureToolbars (this, TQT_SLOT (slotConfigureToolBars ()), ac);
+    // m_actionConfigure = KStdAction::preferences (this, TQT_SLOT (slotConfigure ()), ac);
 
 
     enableSettingsMenuDocumentActions (false);

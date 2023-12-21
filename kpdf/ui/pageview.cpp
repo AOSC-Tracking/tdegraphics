@@ -246,16 +246,16 @@ PageView::~PageView()
 void PageView::setupActions( TDEActionCollection * ac )
 {
     // Zoom actions ( higher scales takes lots of memory! )
-    d->aZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotZoom() ), ac, "zoom_to" );
+    d->aZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, this, TQT_SLOT( slotZoom() ), ac, "zoom_to" );
     d->aZoom->setEditable( true );
 #if KDE_IS_VERSION(3,4,89)
     d->aZoom->setMaxComboViewCount( 13 );
 #endif
     updateZoomText();
 
-    KStdAction::zoomIn( TQT_TQOBJECT(this), TQT_SLOT( slotZoomIn() ), ac, "zoom_in" );
+    KStdAction::zoomIn( this, TQT_SLOT( slotZoomIn() ), ac, "zoom_in" );
 
-    KStdAction::zoomOut( TQT_TQOBJECT(this), TQT_SLOT( slotZoomOut() ), ac, "zoom_out" );
+    KStdAction::zoomOut( this, TQT_SLOT( slotZoomOut() ), ac, "zoom_out" );
 
     d->aZoomFitWidth = new TDEToggleAction( i18n("Fit to Page &Width"), "view_fit_width", 0, ac, "zoom_fit_width" );
     connect( d->aZoomFitWidth, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToWidthToggled( bool ) ) );
@@ -269,10 +269,10 @@ void PageView::setupActions( TDEActionCollection * ac )
     // rotate actions
     TDEAction *action;
     action = new TDEAction( i18n("Rotate Right"), "object-rotate-right", TDEShortcut( "Ctrl+Shift++" ),
-                          TQT_TQOBJECT(this), TQT_SLOT( slotRotateRight() ), ac, "rotate_right" );
+                          this, TQT_SLOT( slotRotateRight() ), ac, "rotate_right" );
 
     action = new TDEAction( i18n("Rotate Left"), "object-rotate-left", TDEShortcut( "Ctrl+Shift+-" ),
-                          TQT_TQOBJECT(this), TQT_SLOT( slotRotateLeft() ), ac, "rotate_left" );
+                          this, TQT_SLOT( slotRotateLeft() ), ac, "rotate_left" );
 
     // View-Layout actions
     d->aViewTwoPages = new TDEToggleAction( i18n("&Two Pages"), "view_left_right", 0, ac, "view_twopages" );
@@ -289,25 +289,25 @@ void PageView::setupActions( TDEActionCollection * ac )
     d->aViewCoverPage->setEnabled( KpdfSettings::viewColumns() > 1 );
 
     // Mouse-Mode actions
-    d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "input-mouse", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
+    d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "input-mouse", 0, this, TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
     d->aMouseNormal->setExclusiveGroup( "MouseType" );
     d->aMouseNormal->setChecked( true );
 
-    TDEToggleAction * mz = new TDERadioAction( i18n("&Zoom Tool"), "viewmag", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
+    TDEToggleAction * mz = new TDERadioAction( i18n("&Zoom Tool"), "viewmag", 0, this, TQT_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
     mz->setExclusiveGroup( "MouseType" );
 
-    d->aMouseSelect = new TDERadioAction( i18n("&Select Tool"), "frame_edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
+    d->aMouseSelect = new TDERadioAction( i18n("&Select Tool"), "frame_edit", 0, this, TQT_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
     d->aMouseSelect->setExclusiveGroup( "MouseType" );
 
-/*    d->aMouseEdit = new TDERadioAction( i18n("Draw"), "edit", 0, TQT_TQOBJECT(this), TQT_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
+/*    d->aMouseEdit = new TDERadioAction( i18n("Draw"), "edit", 0, this, TQT_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
     d->aMouseEdit->setExclusiveGroup("MouseType");
     d->aMouseEdit->setEnabled( false ); // implement feature before removing this line*/
 
     // Other actions
-    TDEAction * su = new TDEAction( i18n("Scroll Up"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
+    TDEAction * su = new TDEAction( i18n("Scroll Up"), 0, this, TQT_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
     su->setShortcut( "Shift+Up" );
 
-    TDEAction * sd = new TDEAction( i18n("Scroll Down"), 0, TQT_TQOBJECT(this), TQT_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
+    TDEAction * sd = new TDEAction( i18n("Scroll Down"), 0, this, TQT_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
     sd->setShortcut( "Shift+Down" );
 }
 

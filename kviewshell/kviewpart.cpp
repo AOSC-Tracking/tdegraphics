@@ -122,7 +122,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
 
   // Try to load the multiPage
   int error;
-  multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, TQT_TQOBJECT(mainWidget),
+  multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, mainWidget,
 														 service->name().utf8(), TQStringList(), &error ));
 
   // If the loading of the MultiPage failed report and error and abort.
@@ -800,7 +800,7 @@ bool KViewPart::openFile()
 
     // Try to load the multiPage
     int error;
-    multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, TQT_TQOBJECT(mainWidget),
+    multiPage = static_cast<KMultiPage*>(KParts::ComponentFactory::createInstanceFromService<KParts::ReadOnlyPart>(service, mainWidget,
 														   service->name().utf8(), TQStringList(), &error ));
 
     if (multiPage.isNull()) {

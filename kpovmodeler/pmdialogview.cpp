@@ -325,7 +325,7 @@ void PMDialogView::slotControlPointSelectionChanged( )
 {
    if( m_pDisplayedWidget && m_pDisplayedWidget->displayedObject( ) )
       emit objectChanged( m_pDisplayedWidget->displayedObject( ),
-                          PMCControlPointSelection, TQT_TQOBJECT(this) );
+                          PMCControlPointSelection, this );
 }
 
 void PMDialogView::displayObject( PMObject* obj, bool updateDescription )

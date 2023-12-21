@@ -167,7 +167,7 @@ PhotoBook::PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name)
 	{
 		KService::Ptr service = *i;
 		mViewer = KParts::ComponentFactory::
-			createPartInstanceFromService<KParts::ReadOnlyPart>( service, this, 0, TQT_TQOBJECT(this) );
+			createPartInstanceFromService<KParts::ReadOnlyPart>( service, this, 0, this );
 		
 		// is this the correct way to get the supported mimetypes?
 		if (mViewer)
@@ -236,8 +236,8 @@ PhotoBookPart::PhotoBookPart(
 			bv, TQT_SIGNAL(emitUpdateButton(bool, bool)),
 			this, TQT_SLOT(slotUpdateButton(bool, bool))
 		);
-	m_pNextAction = KStdAction::next(TQT_TQOBJECT(bv), TQT_SLOT(next()), actionCollection(), "next");
-	m_pPreviousAction = KStdAction::prior(TQT_TQOBJECT(bv), TQT_SLOT(previous()), actionCollection(), "previous");
+	m_pNextAction = KStdAction::next(bv, TQT_SLOT(next()), actionCollection(), "next");
+	m_pPreviousAction = KStdAction::prior(bv, TQT_SLOT(previous()), actionCollection(), "previous");
 
 	setXMLFile( "photobookui.rc" );
 

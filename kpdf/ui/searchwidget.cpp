@@ -45,13 +45,13 @@ SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
 
     // 1. text line
     insertLined( TQString(), LEDIT_ID, TQT_SIGNAL( textChanged(const TQString &) ),
-                 TQT_TQOBJECT(this), TQT_SLOT( slotTextChanged(const TQString &) ), true,
+                 this, TQT_SLOT( slotTextChanged(const TQString &) ), true,
                  i18n( "Enter at least 3 letters to filter pages" ), 0/*size*/, 1 );
 
     // 2. clear button (uses a lineEdit slot, so it must be created after)
     insertButton( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase",
                   CLEAR_ID, TQT_SIGNAL( clicked() ),
-                  TQT_TQOBJECT(getLined( LEDIT_ID )), TQT_SLOT( clear() ), true,
+                  getLined( LEDIT_ID ), TQT_SLOT( clear() ), true,
                   i18n( "Clear filter" ), 0/*index*/ );
 
     // 3.1. create the popup menu for changing filtering features

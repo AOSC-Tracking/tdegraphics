@@ -361,7 +361,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
 
    if( m_selectionCleared )
    {
-      emit objectChanged( 0, PMCNewSelection, TQT_TQOBJECT(this) );
+      emit objectChanged( 0, PMCNewSelection, this );
       specialAction = true;
    }
    else if( m_itemSelected || m_itemDeselected )
@@ -378,7 +378,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
             m_pLastSelected->setSelected( true );
 
             emit objectChanged( m_pLastSelected->object( ), PMCNewSelection,
-                                TQT_TQOBJECT(this) );
+                                this );
          }
          else
          {
@@ -407,7 +407,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
                   {
                      tmp->setSelected( true );
                      emit objectChanged( (( PMTreeViewItem* ) tmp)->object( ),
-                                         PMCSelected, TQT_TQOBJECT(this) );
+                                         PMCSelected, this );
                      if( tmp == m_pLastSelected )
                         break;
                   }
@@ -418,7 +418,7 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
                   {
                      tmp->setSelected( true );
                      emit objectChanged( (( PMTreeViewItem* ) tmp)->object( ),
-                                         PMCSelected, TQT_TQOBJECT(this) );
+                                         PMCSelected, this );
                      if( tmp == oldCurrent )
                         break;
                   }
@@ -436,12 +436,12 @@ void PMTreeView::contentsMousePressEvent( TQMouseEvent * e )
       if( m_itemSelected )
       {
          if( m_pLastSelected->object( )->isSelectable( ) )
-            emit objectChanged( m_pLastSelected->object( ), PMCSelected, TQT_TQOBJECT(this) );
+            emit objectChanged( m_pLastSelected->object( ), PMCSelected, this );
          else
             m_pLastSelected->setSelected( false );
       }
       else if( m_itemDeselected )
-         emit objectChanged( m_pLastSelected->object( ), PMCDeselected, TQT_TQOBJECT(this) );
+         emit objectChanged( m_pLastSelected->object( ), PMCDeselected, this );
    }
    m_acceptSelect = false;
 }
@@ -526,7 +526,7 @@ void PMTreeView::viewportMouseReleaseEvent( TQMouseEvent* e )
          m_pLastSelected->setSelected( true );
          m_acceptSelect = false;
 
-         emit objectChanged( m_pLastSelected->object( ), PMCNewSelection, TQT_TQOBJECT(this) );
+         emit objectChanged( m_pLastSelected->object( ), PMCNewSelection, this );
       }
    }
 }
@@ -769,7 +769,7 @@ void PMTreeView::keyPressEvent( TQKeyEvent* e )
       m_acceptSelect = false;
 
       emit objectChanged( ( ( PMTreeViewItem* ) newSelection )->object( ),
-                          PMCNewSelection, TQT_TQOBJECT(this) );
+                          PMCNewSelection, this );
    }
 
    if( deleteItem && m_pPart->isReadWrite( ) )

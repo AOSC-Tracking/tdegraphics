@@ -103,25 +103,25 @@ void kpMainWindow::setupEditMenuActions ()
     }
 
 
-    m_actionCut = KStdAction::cut (TQT_TQOBJECT(this), TQT_SLOT (slotCut ()), ac);
-    m_actionCopy = KStdAction::copy (TQT_TQOBJECT(this), TQT_SLOT (slotCopy ()), ac);
-    m_actionPaste = KStdAction::paste (TQT_TQOBJECT(this), TQT_SLOT (slotPaste ()), ac);
+    m_actionCut = KStdAction::cut (this, TQT_SLOT (slotCut ()), ac);
+    m_actionCopy = KStdAction::copy (this, TQT_SLOT (slotCopy ()), ac);
+    m_actionPaste = KStdAction::paste (this, TQT_SLOT (slotPaste ()), ac);
     m_actionPasteInNewWindow = new TDEAction (i18n ("Paste in &New Window"),
         TQt::CTRL + TQt::SHIFT + TQt::Key_V,
-        TQT_TQOBJECT(this), TQT_SLOT (slotPasteInNewWindow ()), ac, "edit_paste_in_new_window");
+        this, TQT_SLOT (slotPasteInNewWindow ()), ac, "edit_paste_in_new_window");
 
     //m_actionDelete = KStdAction::clear (this, TQT_SLOT (slotDelete ()), ac);
     m_actionDelete = new TDEAction (i18n ("&Delete Selection"), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotDelete ()), ac, "edit_clear");
+        this, TQT_SLOT (slotDelete ()), ac, "edit_clear");
 
-    m_actionSelectAll = KStdAction::selectAll (TQT_TQOBJECT(this), TQT_SLOT (slotSelectAll ()), ac);
-    m_actionDeselect = KStdAction::deselect (TQT_TQOBJECT(this), TQT_SLOT (slotDeselect ()), ac);
+    m_actionSelectAll = KStdAction::selectAll (this, TQT_SLOT (slotSelectAll ()), ac);
+    m_actionDeselect = KStdAction::deselect (this, TQT_SLOT (slotDeselect ()), ac);
 
 
     m_actionCopyToFile = new TDEAction (i18n ("C&opy to File..."), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotCopyToFile ()), ac, "edit_copy_to_file");
+        this, TQT_SLOT (slotCopyToFile ()), ac, "edit_copy_to_file");
     m_actionPasteFromFile = new TDEAction (i18n ("Paste &From File..."), 0,
-        TQT_TQOBJECT(this), TQT_SLOT (slotPasteFromFile ()), ac, "edit_paste_from_file");
+        this, TQT_SLOT (slotPasteFromFile ()), ac, "edit_paste_from_file");
 
 
     m_editMenuDocumentActionsEnabled = false;
@@ -130,7 +130,7 @@ void kpMainWindow::setupEditMenuActions ()
     // Paste should always be enabled, as long as there is something paste
     // (independent of whether we have a document or not)
     connect (TQApplication::clipboard (), TQT_SIGNAL (dataChanged ()),
-             TQT_TQOBJECT(this), TQT_SLOT (slotEnablePaste ()));
+             this, TQT_SLOT (slotEnablePaste ()));
     slotEnablePaste ();
 }
 

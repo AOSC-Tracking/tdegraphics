@@ -191,7 +191,7 @@ KookaView::KookaView( KParts::DockMainWindow *parent, const TQCString& deviceToU
    m_dockScanParam->setDockSite(KDockWidget::DockFullSite);
 
    m_dockScanParam->setWidget( 0 ); // later
-   sane = new KScanDevice( TQT_TQOBJECT(m_dockScanParam) );
+   sane = new KScanDevice( m_dockScanParam );
    TQ_CHECK_PTR(sane);
 
    m_dockScanParam->manualDock( m_dockRecent,              // dock target

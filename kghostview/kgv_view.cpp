@@ -165,14 +165,14 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _markList = new MarkList( _mainWidget, "marklist", _docManager );
     _markList->setFixedWidth( PAGELIST_WIDTH );
     vlay->addWidget( _markList, 1 );
-    connect( TQT_TQOBJECT(_markList), TQT_SIGNAL( contextMenuRequested ( int, int, const TQPoint& ) ),
+    connect( _markList, TQT_SIGNAL( contextMenuRequested ( int, int, const TQPoint& ) ),
              this, TQT_SLOT( showPopup( int, int, const TQPoint& ) ) );
 
 
-    connect( TQT_TQOBJECT(_markList), TQT_SIGNAL( selected( int ) ),
+    connect( _markList, TQT_SIGNAL( selected( int ) ),
 	     _docManager, TQT_SLOT( goToPage( int ) ) );
     connect( _docManager, TQT_SIGNAL( newPageShown( int ) ),
-	     TQT_TQOBJECT(_markList), TQT_SLOT( select( int ) ) );
+	     _markList, TQT_SLOT( select( int ) ) );
     connect( _docManager, TQT_SIGNAL( setStatusBarText( const TQString& ) ),
 	     this, TQT_SIGNAL( setStatusBarText( const TQString& ) ) );
     connect( _scrollBox, TQT_SIGNAL( valueChangedRelative( int, int ) ),
@@ -195,27 +195,27 @@ KGVPart::KGVPart( TQWidget* parentWidget, const char*,
     _popup = new TDEPopupMenu( _markList, "marklist_menu" );
 
     TDEAction *act = new TDEAction( i18n( "Mark Current Page" ), "flag", CTRL+SHIFT+Key_M,
-                 TQT_TQOBJECT(_markList), TQT_SLOT( markCurrent() ),
+                 _markList, TQT_SLOT( markCurrent() ),
                  actionCollection(), "mark_current" );
     act->plug( _popup );
     act = new TDEAction( i18n( "Mark &All Pages" ), 0,
-                 TQT_TQOBJECT(_markList), TQT_SLOT( markAll() ),
+                 _markList, TQT_SLOT( markAll() ),
                  actionCollection(), "mark_all" );
     act->plug( _popup );
     act = new TDEAction( i18n( "Mark &Even Pages" ), 0,
-                 TQT_TQOBJECT(_markList), TQT_SLOT( markEven() ),
+                 _markList, TQT_SLOT( markEven() ),
                  actionCollection(), "mark_even" );
     act->plug( _popup );
     act = new TDEAction( i18n( "Mark &Odd Pages" ), 0,
-                 TQT_TQOBJECT(_markList), TQT_SLOT( markOdd() ),
+                 _markList, TQT_SLOT( markOdd() ),
                  actionCollection(), "mark_odd" );
     act->plug( _popup );
     act = new TDEAction( i18n( "&Toggle Page Marks" ), 0,
-                 TQT_TQOBJECT(_markList), TQT_SLOT( toggleMarks() ),
+                 _markList, TQT_SLOT( toggleMarks() ),
                  actionCollection(), "toggle" );
     act->plug( _popup );
     act = new TDEAction( i18n("&Remove Page Marks"), 0,
-                 TQT_TQOBJECT(_markList), TQT_SLOT( removeMarks() ),
+                 _markList, TQT_SLOT( removeMarks() ),
                  actionCollection(), "remove" );
     act->plug( _popup );
 

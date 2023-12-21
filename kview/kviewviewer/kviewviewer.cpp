@@ -69,7 +69,7 @@ KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
 	KImageIO::registerFormats();
 
 	TQWidget * widget =  KParts::ComponentFactory::createInstanceFromQuery<TQWidget>(
-			"KImageViewer/Canvas", TQString(), TQT_TQOBJECT(m_pParentWidget) );
+			"KImageViewer/Canvas", TQString(), m_pParentWidget );
 	m_pCanvas = static_cast<KImageViewer::Canvas *>( widget->tqt_cast( "KImageViewer::Canvas" ) );
 	kdDebug( 4610 ) << "KImageViewer::Canvas at " << m_pCanvas << endl;
 	if( ! ( widget && m_pCanvas ) )

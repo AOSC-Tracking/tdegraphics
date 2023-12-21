@@ -147,7 +147,7 @@ class KDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
 		/**
 		 * @return a pointer to the TQWidget interface of this object
 		 */
-		TQWidget * widget() { return static_cast<TQWidget *>( this ); }
+		TQWidget * widget() { return this; }
 
 		bool eventFilter( TQObject *, TQEvent * );
 

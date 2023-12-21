@@ -147,11 +147,11 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     /* Actions for the previewer zoom */
     TDEAction *act;
     act =  new TDEAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
-		       TQT_TQOBJECT(this), TQT_SLOT( slScaleToWidth()), TQT_TQOBJECT(this), "preview_scaletowidth" );
+		       this, TQT_SLOT( slScaleToWidth()), this, "preview_scaletowidth" );
     act->plug( img_canvas->contextMenu());
 
     act = new TDEAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
-		      TQT_TQOBJECT(this), TQT_SLOT( slScaleToHeight()), TQT_TQOBJECT(this), "preview_scaletoheight" );
+		      this, TQT_SLOT( slScaleToHeight()), this, "preview_scaletoheight" );
     act->plug( img_canvas->contextMenu());
 
     /*Signals: Control the custom-field and show size of selection */
